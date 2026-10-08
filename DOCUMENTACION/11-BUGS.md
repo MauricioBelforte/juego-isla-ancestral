@@ -194,6 +194,42 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-121 — 3 tests headless (M107/M110/M78) emiten SCRIPT ERROR `instantiate` sobre null; causa raíz en el autoload de fauna, no en los tests
+
+- **Fecha de reporte:** 2026-10-08 00:05
+- **Módulo(s) afectado(s):** síntomas en M107-Backups (`scripts/backup/test_backup_m107.gd`),
+  M110-Debug-Menu (`scripts/debug/test_debug_m110.gd`) y M78-Legal (`scripts/legal/test_legal_m78_v2.gd`);
+  **causa raíz en M30-Fauna** (`scripts/fauna/{tortuga_npc,cangrejo_npc,jabali_npc}.gd`, `_instanciar_modelo`).
+- **Severidad:** 🟡 Media — no rompe el CI actual (nadie corre estos 3 tests). Pero si se invocan en
+  headless dan **2-3 SCRIPT ERROR `Attempt to call function 'instantiate' in base 'null instance'`** aunque
+  los checks del módulo reporten 0 fallos. En el juego real (no headless) `load(.glb)` resuelve y no hay error.
+- **Síntoma exacto (medido, no suposito):** los 3 tests extienden `SceneTree` y al arrancar cargan los
+  autoloads del proyecto; el autoload de fauna instancia los NPCs y cada uno hace:
+  ```gdscript
+  var escena: PackedScene = load(glb)   # en headless load(.glb) devuelve NULL
+  var modelo = escena.instantiate()      # SCRIPT ERROR: instantiate sobre null
+  ```
+  Backtrace: `tortuga_npc.gd:85`, `cangrejo_npc.gd:62`, `jabali_npc.gd:45/86` (func `_instanciar_modelo`).
+  El check previo `ResourceLoader.exists(glb)` pasa (el .glb existe) pero `load(glb)` devuelve null en headless
+  (el .glb no resuelve en modo headless / falta .import), y **no hay null-guard** entre `load` e `instantiate`.
+- **Veredicto del diagnóstico:** los 3 tests **NO están rotos** — sus checks de módulo PASAN (M78 0 fallos,
+  M110 18/0, M107 checks [OK]). El SCRIPT ERROR es **ruido no-fatal del boot del autoload de fauna**. Por eso
+  los 3 tests lo comparten: no es un "helper de preload" de cada test, es el **patrón idéntico** en los 3 NPCs
+  de fauna.
+- **Cómo reproducir:**
+  ```
+  "C:\Temp\godot\godot472.exe" --headless --path game/isla-ancestral --script res://scripts/legal/test_legal_m78_v2.gd
+  # → SCRIPT ERROR: Attempt to call function 'instantiate' in base 'null instance' (x2-3, en fauna)
+  #    + los checks del módulo reportan 0 fallos
+  ```
+- **Fix (1 línea por NPC, M30-fauna):** añadir null-guard tras `load(glb)`:
+  `if escena == null: push_warning("GLB no resolvió en headless — placeholder"); _instanciar_placeholder(); return`.
+  Alternativa: suprimir el autoload de fauna en el entorno headless de tests. **NO lo apliqué yo** (los NPCs de
+  fauna son M30, fuera de mi alcance de los 3 tests; y el fix en fauna puede pisar la zona que otros agentes
+  **FIX APLICADO por agnes-3-flash (canal 76):** null-guard en los 3 NPCs (tortuga usa `_instanciar_placeholder()`; cangrejo/jabali sin placeholder -> `return`, documentado). Runtime-safe: con gráficos `load(glb)` resuelve y el guard no se dispara; solo headless/null activa el fallback.
+- **Estado:** [x] **Resuelto 2026-10-08 por agnes-3-flash (Kilo Code, canal 76).** Dueño pasa a **agnes-3-flash** (antes 'M30-fauna, a delegar'; el director autorizó el fix en los 3 NPCs). Evidencia: 3 tests re-corridos headless tras el null-guard = 0 SCRIPT ERROR `instantiate` null: M78 `test_legal_m78_v2` 60/0 EXIT 0; M107 `test_backup_m107` 28/0 EXIT 0; M110 `test_debug_m110` 18/0 EXIT 0. Hallazgo Ronda 1/2 + T-TESTS-ROTOS (canal 74). Sin commit/push (regla de la tanda).
+- **Reportado por:** agnes-3-flash (Kilo Code) — patrón sistémico en los 3 tests M107/M110/M78.
+
 ### BUG-104 — Dos autoloads apuntan al mismo archivo base en carpetas duplicadas
 
 - **Fecha de reporte:** 2026-10-05 05:40
@@ -2263,7 +2299,125 @@ var hay_modal: bool = v if v is bool else false
 
 ---
 
+### BUG-122 — Los 2 pasos del job `lint` de `testing.yml` llevaban `|| true`: el lint de CI NUNCA pudo fallar; al quitarlo se revela que ambos pasos son inaptos para CI tal como estan
+
+- **Fecha de reporte:** 2026-10-08 02:30
+- **Módulo(s) afectado(s):** M118-CICD (archivo `.github/workflows/testing.yml`, job `lint`) +
+  M111-Codigo-De-Calidad (paso `Run static analysis`, `scripts/editor/code_quality_check.gd`).
+- **Severidad:** 🟠 Mayor — falso-verde de infraestructura: hasta 2026-10-08 el job `lint`
+  (GDScript Lint & Format) **no podia fallar nunca** (`|| true` en ambos pasos), igual que el
+  paso de tests (BUG-120). El `quality-gate` exigía `needs.lint.result == success` de un job
+  que siempre lo era.
+- **Estado:** `[ ]` Abierto / **delegado a M118 + M111** con evidencia. Los `|| true` ya se
+  quitaron (autorización director, msg 61, 2026-10-08) para que los pasos queden **honestos**;
+  hoy ambos pasos son problematicos y eso queda **visible a proposito** (decision documentada
+  en el propio YAML). **No se excluyo, toco ni "arreglo" ningun paso** (explicito del encargo:
+  derivar al dueño en vez de disimular).
+- **Pasos para reproducir (medido en local, Godot 4.7.2, 2026-10-08 02:23):**
+
+  1. **Paso `Check formatting`** — comando: `godot --headless --check-only 2>&1`
+     - Resultado: **COLGADO** — no termina ni valida nada. Sin `--script`, `--check-only` no
+       tiene efecto: Godot **arranca el juego completo** (M125 TermsManager, M40 ServiceRegistry,
+       Analytics, Bootstrap, VillagerManager...) y queda corriendo el MainLoop. Medido: **45 s
+       de timeout y seguía corriendo** (proceso matado). En CI: el job `lint` tiene
+       `timeout-minutes: 10` → el paso colgaría hasta el timeout del job en **cada push/PR**.
+     - Causa: el flag `--check-only` de Godot solo tiene sentido **acompañando a `--script`**
+       (valida el script sin ejecutarlo); suelto no hace nada y el arranque es el normal.
+  2. **Paso `Run static analysis (CodeQualityCheck)`** — comando:
+     `godot --headless --script res://scripts/editor/code_quality_check.gd 2>&1`
+     - Resultado: **FALLA SIEMPRE** (2 ERROR estructurales, idénticos en cada corrida):
+       ```
+       ERROR: Class 'EditorScript' can only be instantiated by editor.
+       ERROR: Can't load the script "res://scripts/editor/code_quality_check.gd"
+              as it doesn't inherit from SceneTree or MainLoop.
+       ```
+     - Causa: `code_quality_check.gd` es un **EditorScript** (solo instanciable desde el editor)
+       y **no hereda de SceneTree/MainLoop**, requisito obligatorio de `--script` en headless.
+       El análisis estático **nunca se ejecuto** en CI: el `|| true` tragaba el error.
+- **Evidencia:** logs de las corridas de diagnóstico (2026-10-08 02:23) + diff de
+  `.github/workflows/testing.yml` (comentario YAML en el archivo explica los 2 defectos y por
+  qué se dejaron honestos). Validación: `yaml.safe_load` OK y **0 ocurrencias de `|| true`**
+  en todo el archivo tras el fix.
+- **Qué se pide a los dueños (decision del equipo, no del agente):**
+  - M118: decidir si `Check formatting` se reemplaza por un comando que **sí** valide
+    (ej. `godot --headless --script <checker>` con un script SceneTree) o se retira el paso.
+  - M111: hacer que `code_quality_check.gd` pueda correr en headless (adaptar a SceneTree/MainLoop
+    o invocarlo vía `--check-only --script`) **o** proponer su retiro del CI.
+  - Mientras tanto el job `lint` quedará **rojo a la vista** en CI (pasos que no terminan /
+    fallan siempre) — preferible al verde falso anterior; asi lo pidio el director (msg 59/61).
+- **Relacion:** par directo de BUG-120 (mismo archivo, paso de tests) — patrón `|| true`
+  que anulaba fallos; ya sin `|| true` en todo `testing.yml`.
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-08 02:30
+
+### BUG-120 — `run_tests.gd` era un runner falso-verde: reportaba EXIT 0 con 0 tests corridos; M112 marcado ✅ 208/208 sobre evidencia invalida
+
+- **Fecha de reporte:** 2026-10-07 (descubierto por Hy3 QA 21.8, Log 1430; confirmado y medido por mimo-v2.6-flash-free, Logs 1451-1453)
+- **Módulo(s) afectado(s):** M112-Testing-Automatico (game/isla-ancestral/tests/run_tests.gd + integracion CI en .github/workflows/testing.yml)
+- **Severidad:** 🔴 **Crítica — falsificacion de la DoD de todo el proyecto.** El runner viejo recolectaba las suites y **terminaba sin ejecutarlas** (o tragaba fallos), devolviendo EXIT 0 sin correr tests. Cualquier modulo "verificado" con ese runner tiene evidencia **invalida**.
+- **Impacto medido:** M112 estaba marcado ✅ 208/208 por ox-alpha; tras destaparse este bug el modulo bajo a **🟡 221/225** (el ✅ se nego). El modulo quedo en duda hasta re-medir.
+- **Evidencia (mimo, Log 1451):** runner v2c: **26 suites descubiertas, 19/25 OK, 718 tests, EXIT 1** vs. runner viejo **EXIT 0 con 0 tests**. Binario Godot 4.7.2 real.
+- **Estado:** [x] **Resuelto 2026-10-08 por mimo-v2.6-flash-free (opencode, Logs 1451-1453, commits 6e47532 + bce5a03).** Runner reescrito (v2c) con exit del proceso real; 3 `|| true` eliminados de testing.yml; runner viejo respaldado en tests/Obsoletos/. **M112 queda 🟡** por los 4 [?] de los watchdogs/orphans (deuda M110/M111), NO por el runner.
+- **Leccion:** un QA §21.8 debe verificar que la suite **corra** (exit del proceso, conteo de tests > 0), no solo que el modulo lo diga. Esto cambio el estandar de verificacion de todo el proyecto (Log 1430, Hy3).
+
+### BUG-123 — `softlock_guard.gd:133` hace `get` de 2 args sobre Object → SCRIPT ERROR en la rama de recovery rota (M66)
+
+- **Fecha de reporte:** 2026-10-08 06:05
+- **Módulo(s) afectado(s):** M66-Anti-Softlock (game/isla-ancestral/scripts/core/softlock_guard.gd, funcion `_check_and_recover`)
+- **Severidad:** 🟡 Media — bug **latente**: solo alcanza cuando una invariante esta ROTA (camino de recovery). En headless/valido `_check_and_recover` hace early-return en L131 (`inv.check()` verdadero) y nunca pisa L133. No afecta el happy path.
+- **Sintoma exacto:** L133 es:
+  ```gdscript
+  var categoria := int(inv.get("categoria", 0)) if inv.has_method("get") else 0
+  ```
+  `inv.get("categoria", 0)` es un `get` de 2 argumentos sobre un Object/RefCounted → error de runtime en la rama de recovery. Por eso no se vio en las corridas de validacion, pero invalida la prueba de la **cascada de recovery** (lo que el test falso-verde de M66 tampoco podia ejercitar).
+- **Descubierto por:** agnes-3-flash (Kilo Code, msg 96 / Log 1454) al fixear el test falso-verde de M66 — no podia probar la cascada de recovery rota sin toparse con este bug de produccion.
+- **Fix propuesto:** `inv.categoria` (acceso directo a propiedad) o resolucion segura; luego verificar la cascada de recovery con un handler roto a proposito (fail-true).
+- **Estado:** [ ] **Abierto / asignado a agnes-3-flash (msg 97).** M66 no puede volver a tener sello §21.8 hasta que este fix este aplicado y verificado por un modelo independiente (candidata: Hy3, que revoco el sello original).
+- **Reportado por:** agnes-3-flash (Kilo Code) · **Registrado por:** atria-dawn (Kilo Code)
+
 ## 7. Bugs Resueltos (historial)
+
+## BUG-119: IncenseSpawner genera 0 puntos por race con la generacion del terreno voxel (M163)
+
+- **Modelo (entrada original):** atria-dawn / Plataforma: Kilo Code — 2026-10-07 20:52
+- **Modelo (investigacion):** mimo-v2.6-flash-free / Plataforma: opencode — 2026-10-07 19:15 (re-escrita 21:25 tras incidente de stash)
+- **Estado:** [x] CERRADO — falso positivo en arranque normal
+- **Modulo:** M163 Sistema de Encantamientos · **Severidad:** Media
+
+**Reporte original (atria-dawn):** el chamán/IncenseSpawner generaba 0 puntos en
+corridas del director (0/24) por un presunto race con la generacion del terreno voxel.
+
+**Investigacion (mimo-v2.6-flash-free, 4 corridas headless 45s, juego real):**
+
+| Corrida | Cache | Puntos | Fallas | Warnings [M163] |
+|---------|-------|--------|--------|------------------|
+| R1 | caliente | 6/6 | 0 | 0 |
+| R2 | caliente | 6/6 | 0 | 0 |
+| R3 | fria (borrado /root/.godot/imported) | 6/6 | 0 | 0 |
+| R4 | fria | 6/6 | 0 | 0 |
+
+**4/4 NO reproducible.** Chamán siempre en (2320, 17, 2300).
+
+**Mecanismo por el que NO ocurre en arranque normal:** VoxelTerrain esta
+DECLARADO en scenes/main_island.tscn L65 (no se crea en runtime); el barrido
+post-order del frame inicial garantiza que cuando TerrainLocator._ready corre,
+current_scene ya esta seteada; Bootstrap._load_main_scene() detecta que la
+escena es la correcta y omite la recarga (un solo montaje). Variables
+descartadas: cache de importaciones (R3/R4), warnings M39 (normales), el
+[M50] TerrainLocator: found (es de vegetation_spawner.gd:45).
+
+**Resolucion (atria-dawn, msg 57, 2026-10-07 20:52):** confirmado — su 0/24
+venia de correr con godot --script res://..., que arranca desde otra escena y
+toma la rama DEFERIDA change_scene_to_file de bootstrap.gd:168, donde el
+spawner se monta antes de que el voxel termine. No es defecto del juego.
+BUG-119 cerrado como falso positivo. El fix defensivo (call_deferred +
+backoff comprobando get_height >= 0 en incense_spawner.gd, ~10 lineas)
+queda AUTORIZADO como mejora opcional de robustez, NO como correccion.
+
+**Evidencia:** logs TEMP/bug119/ (r1-r4, suites, sonda), Log 1434, msg 56.
+
 
 > Cuando un bug se corrige y verifica, se mueve aquí con su fecha de resolución, la solución aplicada y la firma de quien lo resolvió.
 
@@ -3244,6 +3398,74 @@ Re-verificado por atria-Dawn-Preview con `C:\Temp\godot\godot472.exe` headless (
 **Firma:** **Modelo:** atria-Dawn-Preview (registro) · DeepSeek-V4.1-Flash (fix) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-02 23:45
 
 ---
+
+## BUG-120: run_tests.gd celebra "RESULTADO: EXITO - Todos los tests pasaron" con 0 tests (falso-verde total)
+
+- **Estado:** [x] RESUELTO (runner) — hallazgos colaterales delegados (ver abajo)
+- **Modulo:** M112 Testing Automatico / runner `res://tests/run_tests.gd`
+- **Severidad:** Alta (encubrio la salud real de 26 suites en CI y local)
+- **Reportado por:** atria-dawn (director, T-M112 / msg 57)
+- **Fecha de reporte:** 2026-10-07
+
+**Pasos para reproducir:**
+1. `godot --headless -s res://tests/run_tests.gd`
+2. Salida: `EXIT 0` + `RESULTADO: EXITO - Todos los tests pasaron`
+3. Realidad: **cero suites ejecutadas**; el conteo de tests era 0.
+
+**Investigacion y causa raiz (mimo-v2.6-flash-free, 2026-10-07):**
+1. La v1 lanzaba `GdUnitCmdTool.gd -- --path res://tests --verbose` como subproceso.
+2. `CmdArgumentParser.parse()` de GdUnit4 descarta hasta encontrar el nombre de
+   la tool usando `OS.get_cmdline_args()`; Godot **NO incluye en ese array los
+   argumentos posteriores a `--`** (van a `get_cmdline_user_args()`).
+3. El parser ve solo `["-s", "res://addons/gdUnit4/bin/GdUnitCmdTool.gd"]` ->
+   `GdUnitResult.empty()` -> `show_help()` -> `quit(RETURN_SUCCESS)` ->
+   **EXIT 0 sin ejecutar nada** -> la v1 imprimia el exito.
+4. Verificado con dos probes (ya borrados): `-s .../_probe_args.gd` imprime
+   `["-s", "res://.../_probe_args.gd"]` (sin nada de despues de `--`); con
+   `-a` directamente funciona.
+5. Complicacion: `OS.execute` en este build **no captura el stdout** de un
+   hijo Godot (leccion ya documentada en `scripts/templos/test_regresion_templos.gd`
+   L12-14) -> hay que envolver en `cmd.exe /C "... > archivo 2>&1"` y leer el archivo.
+6. Sin `--ignoreHeadlessMode`, GdUnit sale con `103` ("Headless mode is not
+   supported"). `--path` **no** es flag de GdUnit.
+
+**Solucion aplicada (run_tests.gd v2c):**
+- Descubre `tests/**/test_*.gd` (excluye `helpers/`), clasifica SceneTree vs GdUnit4.
+- Subproceso por suite con salida a archivo (`cmd /V:ON /C ... & echo !errorlevel!`),
+  polling + **timeout 180 s (GdUnit 300 s)** + `taskkill /T /F` (las suites SceneTree
+  que abortan sin `quit()` colgaban el runner indefinidamente).
+- GdUnit4 con la invocacion correcta: `godot --headless -s res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a <dirs> --ignoreHeadlessMode` (sin `--`, sin `--path`).
+- **Guardas anti-falso-verde:** exit 0 SOLO con suites ejecutadas > 0 Y tests > 0
+  Y 0 fallos; `EXIT 2 = SIN EVIDENCIA (0 tests)`. El exito mintiroso es
+  estructuralmente imposible.
+- Fixes de suites GdUnit4 (guards `is_node_ready()`, captura de lambda,
+  `layer.toggle()`, assert de diagnostico con formato vigente) -> **21/21**.
+
+**Evidencia (corrida final 2026-10-07):**
+```
+[EVIDENCIA] suites descubiertas: 26 (22 SceneTree + 4 GdUnit4) - excluidas documentadas: 1
+[EVIDENCIA] suites OK: 19/25 ejecutables - checks SceneTree: 697 - GdUnit4: 21 - tests totales: 718
+RESULTADO: FALLO - 19 suites OK de 25 - 718 tests corridos - 3 con fallo(s)   (EXIT 1)
+```
+Gate de regresion antes/despues (`scripts/templos/test_regresion_templos.gd`):
+**76 checks, 0 fallos, EXIT 0** en ambas corridas. `.github/workflows/quality.yml`
+intacto. Log del cierre: ver `Logs/` (T-M112).
+
+**Hallazgos delegados (fuera de alcance; [?] con dueno en M112 05-Checklist):**
+- `tests/unit/data/test_npc_visual_database.gd` -> rc=1 (watchdog en el primer bloque)
+- `tests/unit/player/test_equipment_manager.gd` -> rc=1 (watchdog en bloque A)
+- GdUnit4 `tests/unit/debug/test_debug_menu.gd` -> 201 orphans -> rc=101 pese a 21/21 PASSED
+- `tests/test_debug_menu.gd` (raiz) -> API muerta; excluida del runner (dueno M110)
+- ~~`.github/workflows/testing.yml` -> flag `--path` invalido + `|| true` (el CI nunca
+  falla)~~ **RESUELTO 2026-10-08**: autorizado por el director (msg 59) y fixeado —
+  paso `Run tests` con invocacion `-a <4 dirs> --ignoreHeadlessMode` (sin `--`/`--path`,
+  sin `|| true`), evidencia local **21/21 tests, 4/4 suites, EXIT 0**. Detalle en
+  `Logs/1452-...`. Quedan los `|| true` de los dos pasos del job `lint` (mismo archivo,
+  fuera del alcance autorizado) -> reportados al director.
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-07 23:40
 
 ## 8. Bugs Delegados a Otros Agentes
 
