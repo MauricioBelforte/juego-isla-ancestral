@@ -24,25 +24,41 @@
 
 ## Tareas en curso (Ling bajo mi supervisión)
 
-### L-05 — Ling: auditoría de inflación de `[x]` en 5 módulos — `[→]` EN CURRIDO
+### L-05 — Auditoría de inflación de `[x]` en 5 módulos — `[x]` CERRADO
 
-- **Qué es:** verificar si los `[x]` de los 5 módulos no-iniciados con más marcas declaradas son
+- **Qué era:** verificar si los `[x]` de los 5 módulos no-iniciados con más marcas declaradas son
   reales o inflados (patrón BUG-070: "verbo de implementación sin entrega").
 - **Módulos:** M156 (234/307), M97 (129/195), M108 (124/205), M121 (123/211), M110 (121/225).
-- **Método:** muestra aleatoria de 15 `[x]` por módulo, verificada contra disco con cita
-  `archivo:línea`; clasificación ✅/⚠️/❌; veredicto LIMPIO/SOSPECHOSO/INFLADO.
-- **Mi parte:** re-verificar los claims crudos de Ling y aplicar la decisión de gobernanza.
-- **Nota:** lancé por error un sub-agente con mi propio modelo haciendo el mismo trabajo (no era
-  Ling). El fundador pidió no cancelarlo para no perder tokens; cuando entregue lo descarto o
-  uso como contraste. **La fuente de verdad es Ling.**
+- **Nota:** el sub-agente Atria se canceló a mitad; yo re-verifiqué todo contra disco.
+- **VEREDICTO FINAL (5/5):**
+  - **M156 INFLADO — 31 claims falsos**, todos flipeados por el director y verificados por mí:
+    **234 → 203 `[x]`** (0 huellas `.tscn`, 0 `.wav`, 0 `ParticleProcessMaterial`,
+    0 `terrain_block_*`). Núcleo real + suite **10/0 EXIT 0**.
+  - **M110 DEUDA HONESTA** — núcleo real (`debug_menu.gd` + 3 suites); 104 `[?]` son capa UI con
+    `dueño: M110-UI`.
+  - **M121 LIMPIO** — suite **15 checks / 0 fallos / EXIT 0**; `faq.json` válido; los 4 managers
+    faltantes dicen "Diseñar" (Familia B, no inflación).
+  - **M97 LIMPIO** (11✅/2⚠️/2❌), **M108 LIMPIO** (12✅/1⚠️/2❌).
+- **Conclusión:** solo 1 de 5 inflado → **la tasa de inflación del catálogo es baja**.
+- **Bonus:** la suite M156 que corrí confirma mi fix del M167 en runtime —
+  `[M163] Chaman del Monte spawneado en (2320.0, 35.0, 2300.0)` (coordenadas reales).
+- **Evidencia:** informes `Mensajes entre modelos/atria-dawn-s3/34, 35, 37, 39`.
 
-### L-06 — Ling: timestamps stale del GLOBAL — `[→]` EN CURSO
+### L-06 — Ling no entregó; lo hice yo — `[x]` COMPLETADO
 
-- **Qué es:** detectar todas las filas del CHECKLIST-GLOBAL.md cuya columna "Última actividad"
-  está desactualizada vs. el log más reciente que menciona el módulo.
-- **Origen:** el patrón lo hallé en M39 (GLOBAL decía 2026-09-17; hy3 re-verificó 2026-10-04,
-  Log 1269). Si pasó una vez, puede pasar en más.
-- **Mi parte:** re-verificar los stale que Ling reporte contra `Logs/`.
+- **Qué era:** detectar filas del CHECKLIST-GLOBAL.md con "Última actividad" desactualizada vs.
+  el log más reciente que menciona el módulo.
+- **Ling L-06 se cerró sin entregar** (idle → desapareció de Agent Manager tras 2 prompts).
+  Lo completé yo misma.
+- **Resultado: 86 módulos stale / 22 sin log / 60 consistentes.** Peores: M77 (+50d), M03 (+49d),
+  M85 (+47d), M112 (+40d), M04/M08 (+39d).
+- **Caveat:** el método extrae MIDs del **nombre** del log, no del contenido → conservador.
+- **Entregable:** `L-06-timestamps-stale.md` (esta carpeta).
+
+- **Cierre de jornada (2026-10-08):** Ling no entregó L-06 (la sesión desapareció de Agent
+  Manager tras 2 prompts sin respuesta); el sub-agente Atria del L-05 se canceló a mitad con
+  M156 subestimado. **Toda la verificación real la hice yo.** Para la próxima: encargos a Ling
+  más chicos y acotados (un módulo por vez). El trial de Ling 3.1 Flash vence 2026-10-13.
 
 ## Tareas completadas
 

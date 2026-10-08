@@ -3998,6 +3998,9 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 - **2026-10-08 02:44 - mimo-v2.6-flash-free - RESERVA M17 (17-Construccion) - volumen DoD**
   - Reservado tras oferta del director (msg 63: Qwen3.8 Max colgado >72h, 21.4.7). Fila: 59/175, complejidad 5, deps 08/14. Alcance honesto declarado (msg 64): verificacion [x]/[?] contra disco, sin inflar, sin sellar 21.8; si una sub-area me supera -> [?] + liberar amarillo (21.4.8). Entrada: plan-actual de DOCUMENTACION/17-Construccion/.
   - **DECLINADO 02:45:** al abrir el 05-Checklist de M17 encontre el bloque Reserva actual de **atria-dawn-s2 (02:39, 7 min antes)**: auditoria DoD de los 59 [x]. 21.4.2 -> no trabajo modulo 🔵 ajeno. M17 queda para s2; el director reasigna (msg 64).
+- **2026-10-08 04:10 - mimo-v2.6-flash-free - FRENTE A M110 CERRADO - (Log 1461, msgs 66/67/68)**
+  - Suite tests/test_debug_menu.gd (raiz) diagnosticada STALE (API v1 muerta por refactor data-driven de debug_menu.gd; 1 solo commit 9450f6a, nunca actualizada) y movida a tests/Obsoletos/2026-09-01_00-00-00_test_debug_menu_v1_api_muerta.gd con cabecera de obsolescencia (mapeo v1->v2, cobertura viva en 3 suites: unit/debug GdUnit4 21/21 + test_debug_m110 + headless). run_tests.gd: EXCLUIR vaciado -> 25 descubiertas / 0 excluidas / 718 tests (antes 26/1), mismos 3 fallos preexistentes, gate 76/0 antes y despues. M112 05-Checklist 14 [x]/3 [?]. 05-Checklist de M110 NO tocado (limmite con s3/Ling L-05). Produccion (scripts/debug/) NO tocada.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push (commits locales autorizados).
 
 - **2026-10-08 02:39 - Atria-Dawn-Preview (atria-dawn-s2) / Kilo Code - M17 RECLAMADO 🔵 (msg 130 del director)**
   - **M17-Construccion** liberado por el director (DeepSeek-V4.1-Flash sin actividad desde 2026-10-04 02:26, >72h, regla §21.4.7). Reclamo para **volumen DoD** sobre los 59 [x] (no es iter. de implementacion).
@@ -4005,3 +4008,14 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - Plan: ejecutar las 3 suites headless + spot-check por verbo de los 59 [x] + reportar veredicto (el director aplica flips/bajas).
   - CHECKLIST-GLOBAL: agente actual actualizado a s2; sin flip (rollo del director). Push de mis 9 commits sigue pendiente de autorizacion del fundador.
 
+
+- **2026-10-08 05:30 - mimo-v2.6-flash-free - FRENTE B BUG-122 CERRADO - (Log 1469, msgs 70/71)**
+  - Job lint de testing.yml hecho honesto (criterio director msg 70: o funciona o no existe): Check formatting COLGADO reemplazado por gate de parseo con colector (receta BUG-051/091; medido 971 preloads / 0 SCRIPT ERROR / EXIT 0; sin || true operativos) y Run static analysis RETIRADO con evidencia (sonda: EditorScript no instanciable en headless -> adaptar exige tocar code_quality_check.gd de M111, pendiente de coordinacion director).
+  - Solo testing.yml tocado (sin restriccion); quality.yml y code_quality_check.gd INTACTOS (msg 70 §4). Regresion: runner 25/0/718/3 preexistentes + gate 76/0 = baseline. BUG-122 [x] en 11-BUGS (sin stagear, saneo director) + 04-Codigo M112.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push (commits locales autorizados). 3 pendientes derivados en msg 71: adaptacion M111, quality.yml code-quality-script con || true, branch protection del nombre del job.
+
+- **2026-10-08 05:40 - nota carrera de indice N4 (mimo):** mis 6 archivos stageados para el commit del frente B
+  fueron baridos por el commit 2e668bc de agnes-3-flash (add+commit de ella entre mi git add y mi git commit).
+  SIN PERDIDA: los 6 archivos quedaron integros en HEAD (testing.yml, Log 1469, msg 71, 04-Codigo, backlog, pool del canal);
+  verificado byte a byte con git show. El item de 05-Checklist de M112 se commiteo aparte en 3a89d1f (add+commit encadenados
+  para cerrar la ventana de carrera). 11-BUGS y ESTADO siguen sin stagear (saneo del director).
