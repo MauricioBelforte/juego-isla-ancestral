@@ -17,8 +17,11 @@ func _initialize() -> void:
 
 func _run() -> void:
 	await process_frame  # dejar que el árbol esté activo y los autoloads listos
-	_test_toggle()
-	_test_overlay()
+	# Fix BUG-120 (familia falso-verde): _test_toggle/_test_overlay usan `await`
+	# internamente; si no se las espera, quit() mata el proceso antes de que se
+	# reanuden y 6 de 8 checks nunca se ejecutan (la suite reportaba "0 fallos").
+	await _test_toggle()
+	await _test_overlay()
 	_test_legacy()
 	# Formato reconocido por run_tests.gd (fix BUG-120, msg 141 del director):
 	# antes esta suite se contaba como OK con 0 checks al no declarar el conteo.
