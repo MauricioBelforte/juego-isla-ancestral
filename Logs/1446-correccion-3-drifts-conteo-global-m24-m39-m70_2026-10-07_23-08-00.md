@@ -49,4 +49,9 @@ Corregidos los 3 drifts de conteo detectados por `scripts/verificar_checklist.py
 
 ## Huella de push
 
-Este log se creo ANTES del commit. Si el push se autoriza, el rango y la hora se documentan aqui mismo (regla §4.3).
+- Commit local `00ef41a` (3 files changed, 78 insertions, 9 deletions) — 2026-10-07 23:11 hora local.
+- Commit local `a4e49a5` (4 files changed, msgs 125/126 del canal + backlog + pool) — 2026-10-07 23:33 hora local.
+- Estado contra origin/main: **0 behind / 2 ahead** (sin necesidad de rebase al momento de escribir esto).
+- **Push PENDIENTE de autorizacion del director** (pedido en msg 125 del canal atria-dawn-s2). Cuando se autorice, documentar aqui el rango y la hora.
+
+
