@@ -181,12 +181,12 @@
 
 - [x] Crear sistema de huellas por terreno [M]
 - [ ] Crear escena huella_ceped.tscn [S]
-- [x] Crear escena huella_barro.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear escena huella_pavimento.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear escena huella_arena.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear escena huella_agua.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear escena huella_nieve.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear escena huella_rocas.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear escena huella_barro.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear escena huella_pavimento.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear escena huella_arena.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear escena huella_agua.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear escena huella_nieve.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear escena huella_rocas.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [x] Crear sistema de particulas por terreno [M]
 - [ ] Crear particulas_ceped.gd [S]
 - [?] Crear particulas_barro.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
@@ -194,12 +194,12 @@
 - [?] Crear particulas_agua.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
 - [?] Crear particulas_nieve.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
 - [?] Crear particulas_rocas.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
-- [x] Configurar ParticleProcessMaterial para ceped [M]
-- [x] Configurar ParticleProcessMaterial para barro [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Configurar ParticleProcessMaterial para arena [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Configurar ParticleProcessMaterial para agua [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Configurar ParticleProcessMaterial para nieve [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Configurar ParticleProcessMaterial para rocas [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Configurar ParticleProcessMaterial para ceped [M]
+- [ ] Configurar ParticleProcessMaterial para barro [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Configurar ParticleProcessMaterial para arena [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Configurar ParticleProcessMaterial para agua [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Configurar ParticleProcessMaterial para nieve [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Configurar ParticleProcessMaterial para rocas [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [x] Implementar activacion solo en movimiento [S]
 - [x] Implementar desactivacion al detenerse [S]
 - [x] Configurar frecuencia de efectos por terreno [M]
@@ -221,18 +221,18 @@
 - [x] Configurar bus de audio a SFX [S]
 - [ ] Crear samples audio_ceped_step_1.wav [S]
 - [ ] Crear samples audio_ceped_step_2.wav [S]
-- [x] Crear samples audio_barro_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_barro_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_pavimento_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_pavimento_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_arena_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_arena_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_agua_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_agua_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_nieve_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_nieve_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_rocas_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear samples audio_rocas_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_barro_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_barro_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_pavimento_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_pavimento_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_arena_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_arena_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_agua_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_agua_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_nieve_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_nieve_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_rocas_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear samples audio_rocas_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [ ] Sincronizar con evento de animacion [M]
 - [ ] Evitar reproduccion doble [S]
 - [x] Implementar fade al cambiar terreno [M]
