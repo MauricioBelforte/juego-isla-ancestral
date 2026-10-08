@@ -83,7 +83,11 @@ func _instanciar_modelo() -> void:
 	if not ResourceLoader.exists(glb):
 		push_warning("[Jabali] GLB no encontrado: %s" % glb)
 		return
-	var modelo: Node3D = load(glb).instantiate()
+	var escena: PackedScene = load(glb)
+	if escena == null:
+		push_warning("[Jabali] load() -> null para %s - sin modelo (BUG-121, no hay placeholder)" % glb)
+		return
+	var modelo: Node3D = escena.instantiate()
 	modelo.name = "Modelo"
 	modelo.position.y = -0.045
 	modelo.scale = Vector3(escala_modelo, escala_modelo, escala_modelo)

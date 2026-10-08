@@ -59,7 +59,11 @@ func _instanciar_modelo() -> void:
 	if not ResourceLoader.exists(glb):
 		push_warning("[Cangrejo] GLB no encontrado: %s" % glb)
 		return
-	var modelo: Node3D = load(glb).instantiate()
+	var escena: PackedScene = load(glb)
+	if escena == null:
+		push_warning("[Cangrejo] load() -> null para %s - sin modelo (BUG-121, no hay placeholder)" % glb)
+		return
+	var modelo: Node3D = escena.instantiate()
 	modelo.name = "Modelo"
 	modelo.position.y = -0.045  # E-50: compensa el asentado de Blender
 	add_child(modelo)

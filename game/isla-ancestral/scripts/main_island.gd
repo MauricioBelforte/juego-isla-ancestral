@@ -53,8 +53,8 @@ func _crear_estaciones_crafting() -> void:
 	add_child(mesa)
 	# M09 iter.: centro real de la isla (mundo 5120², antes esquina 320,320)
 	var mundo = get_node_or_null("/root/MundoRaiz")
-	var sx: float = mundo.SPAWN_CONTENIDO.x + 6.0 if mundo else 326.0
-	var sz: float = mundo.SPAWN_CONTENIDO.z + 2.0 if mundo else 322.0
+	var sx: float = mundo.SPAWN_CONTENIDO.x + 6.0 if mundo else (MUNDO_RAIZ.SPAWN_CONTENIDO.x + 6.0)
+	var sz: float = mundo.SPAWN_CONTENIDO.z + 2.0 if mundo else (MUNDO_RAIZ.SPAWN_CONTENIDO.z + 2.0)
 	# Posicionar sobre el terreno real (anti-flotamiento, M167)
 	var locator = get_node_or_null("/root/TerrainLocator")
 	if locator and locator.has_method("posicionar_sobre_terreno"):
@@ -69,7 +69,7 @@ func _poblar_recursos() -> void:
 	if rm and rm.has_method("poblar_isla"):
 		# M09 iter.: centro real (mundo 5120²) — antes esquina (320,320)
 		var mundo = get_node_or_null("/root/MundoRaiz")
-		var centro: Vector3 = mundo.SPAWN_CONTENIDO if mundo != null else Vector3(320, 0, 320)
+		var centro: Vector3 = mundo.SPAWN_CONTENIDO if mundo != null else MUNDO_RAIZ.SPAWN_CONTENIDO
 		rm.poblar_isla.call_deferred(centro)
 		print("[M15] Recursos alrededor de (%.0f, %.0f)" % [centro.x, centro.z])
 
@@ -308,8 +308,8 @@ func _ajustar_spawn_superficie() -> void:
 	# M09 iter.: spawn en el centro real de la isla (mundo 5120², interior
 	# con bosque/montañas) — antes (256,256) era la esquina playa.
 	var mundo = get_node_or_null("/root/MundoRaiz")
-	var spawn_x: float = mundo.SPAWN_JUGADOR.x if mundo else 256.0
-	var spawn_z: float = mundo.SPAWN_JUGADOR.z if mundo else 256.0
+	var spawn_x: float = mundo.SPAWN_JUGADOR.x if mundo else MUNDO_RAIZ.SPAWN_JUGADOR.x
+	var spawn_z: float = mundo.SPAWN_JUGADOR.z if mundo else MUNDO_RAIZ.SPAWN_JUGADOR.z
 	if locator:
 		var altura_spawn: int = locator.get_height(spawn_x, spawn_z)
 		var player = get_node_or_null("Player")
@@ -407,8 +407,8 @@ func _crear_shaman() -> void:
 	add_child(shaman)
 	# M09 iter.: el chamán vive en las montañas del interior real
 	var mundo = get_node_or_null("/root/MundoRaiz")
-	var sh_x: float = mundo.CENTRO.x - 240.0 if mundo else 320.0
-	var sh_z: float = mundo.CENTRO.y - 260.0 if mundo else 300.0
+	var sh_x: float = mundo.CENTRO.x - 240.0 if mundo else (MUNDO_RAIZ.CENTRO.x - 240.0)
+	var sh_z: float = mundo.CENTRO.y - 260.0 if mundo else (MUNDO_RAIZ.CENTRO.y - 260.0)
 	var locator = get_node_or_null("/root/TerrainLocator")
 	if locator and locator.has_method("get_height"):
 		var h: int = locator.get_height(sh_x, sh_z)
@@ -417,7 +417,7 @@ func _crear_shaman() -> void:
 		else:
 			shaman.global_position = Vector3(sh_x, 35, sh_z)
 	else:
-		shaman.global_position = Vector3(320, 35, 300)
+		shaman.global_position = Vector3(sh_x, 35, sh_z)
 	print("[M163] Chaman del Monte spawneado en ", shaman.global_position)
 
 ## M163 (iter. 2): spawner de puntos de incienso en la montaña del chaman.

@@ -82,6 +82,10 @@ func _instanciar_modelo() -> void:
 		_instanciar_placeholder()
 		return
 	var escena: PackedScene = load(glb)
+	if escena == null:
+		push_warning("[Tortuga] load() -> null para %s - placeholder (BUG-121)" % glb)
+		_instanciar_placeholder()
+		return
 	var modelo: Node3D = escena.instantiate()
 	modelo.name = "Modelo"
 	# El GLB nace asentado con la base en z=0.045 (5 mm enterrada en la
