@@ -3,7 +3,12 @@ extends InteractableBase
 @export var dialogue_id: String = "shaman_intro"
 @export var spawn_position: Vector3 = Vector3(320, 35, 300)
 
+const TIMEOUT_REINTENTOS_MS: int = 8000
+
 var _ui: Control = null
+var _reintentando: bool = false
+var _t_inicio_reintentos: int = -1
+var _locator = null  # inyectable en tests (patron IncenseSpawner)
 
 func _ready() -> void:
 	super._ready()
@@ -11,6 +16,48 @@ func _ready() -> void:
 	prioridad = 10
 	radio = 2.5
 	global_position = spawn_position
+	# Reintento de altura (BUG-119 chaman, autorizado msg 74): mismo patron
+	# _process del incienso (1 probe/frame, timeout 8s). Corrige el fallback
+	# hardcodeado y=35 de main_island._crear_shaman cuando el locator existe
+	# pero el terreno aun no responde (arranque --script). Sin locator o sin
+	# MundoRaiz se queda en spawn_position (historico). NUNCA call_deferred
+	# recursivo (SIGSEGV, ver Log 1475 / 11-BUGS).
+	set_process(false)
+	var locator = _locator if _locator != null else get_node_or_null("/root/TerrainLocator")
+	var mundo := get_node_or_null("/root/MundoRaiz")
+	if locator and locator.has_method("get_height") and mundo:
+		var tx := float(mundo.CENTRO.x) - 240.0
+		var tz := float(mundo.CENTRO.y) - 260.0
+		if int(locator.get_height(tx, tz)) < 0:
+			_t_inicio_reintentos = Time.get_ticks_msec()
+			_reintentando = true
+			set_process(true)
+
+func _process(_delta: float) -> void:
+	if not _reintentando:
+		return
+	if not is_inside_tree():
+		_reintentando = false
+		set_process(false)
+		return
+	if Time.get_ticks_msec() - _t_inicio_reintentos > TIMEOUT_REINTENTOS_MS:
+		_reintentando = false
+		set_process(false)
+		push_warning("[M163] ShamanNPC: altura sin resolver tras %d ms; se queda en el fallback"
+				% TIMEOUT_REINTENTOS_MS)
+		return
+	var locator = _locator if _locator != null else get_node_or_null("/root/TerrainLocator")
+	var mundo := get_node_or_null("/root/MundoRaiz")
+	if locator == null or not locator.has_method("get_height") or mundo == null:
+		return
+	var tx := float(mundo.CENTRO.x) - 240.0
+	var tz := float(mundo.CENTRO.y) - 260.0
+	var h := int(locator.get_height(tx, tz))
+	if h >= 0:
+		_reintentando = false
+		set_process(false)
+		global_position = Vector3(tx, h + 1.0, tz)
+		print("[M163] ShamanNPC reposicionado sobre el terreno: ", global_position)
 
 func interactuar(_datos: Dictionary) -> void:
 	# M163 B: dialogo contextual local segun progresion (L47/L56/L57/L58).

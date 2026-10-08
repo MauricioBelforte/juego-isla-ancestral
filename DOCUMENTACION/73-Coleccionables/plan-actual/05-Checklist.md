@@ -2,9 +2,9 @@
 **Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 73: Coleccionables
-**Estado:** 27/135 completados (8%). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 26/135 completados (19%). [S]=Simple [M]=Medio [C]=Complejo.
 
-**Estado:** 130/130 completados. [S]=Simple [M]=Medio [C]=Complejo.
+**Corrección atria-dawn (2026-10-08, BUG-070):** la línea anterior decía "130/130 completados" (obsoleta). Conteo real tras revertir los 2 `[x]` de validate_collectibles.gd (artefacto inexistente, Familia A, Ling 3.1 Flash msg 50): 26 `[x]` / 107 `[ ]` / 2 `[?]` = 135 ítems.
 
 ## A. Catálogo Central
 
@@ -12,7 +12,7 @@
 - [x] Definir collectible_category.gd (id, nombre i18n, total, recompensa) [S]
 - [x] Crear collectibles_catalog.tres como única fuente de verdad [M]
 - [x] Ids univocos con prefijo de categoria (CATEGORIA_001) [M]
-- [x] Validar ids unicos con validate_collectibles.gd [M]
+- [ ] Validar ids unicos con validate_collectibles.gd [M] (revertido: artefacto inexistente, BUG-070 Familia A, Ling 3.1 Flash msg 50, atria-dawn 2026-10-08)
 
 ## B. Categoría Reliquias
 
@@ -200,7 +200,7 @@
 
 ## Y. Validación y QA
 
-- [x] Crear validate_collectibles.gd (ids únicos, totales, recompensas, i18n) [C]
+- [ ] Crear validate_collectibles.gd (ids únicos, totales, recompensas, i18n) [C] (revertido: artefacto inexistente, BUG-070 Familia A, Ling 3.1 Flash msg 50, atria-dawn 2026-10-08)
 - [ ] Probar ciclo completo: recolectar → registrar → ver en diario → completar → recompensa [C]
 - [ ] Probar ciclo de guardado: recolectar → guardar → cargar → conservar [C]
 - [x] Probar la donación al museo (M37) [C]

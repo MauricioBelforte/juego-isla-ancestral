@@ -119,6 +119,32 @@
 
 ## Tareas en curso
 
+### L-08 — Ling: M73 Coleccionables — `[x]` CERRADO (Ling entregó; verificado por mí)
+
+- **Asignado por el director** (msg 49, 2026-10-08 21:03) tras mi análisis: **M88 es Familia B**
+  (sus 4 ítems ❌ dicen "Diseñar", no "Crear" — regla H2; Ling no tendría nada que revertir).
+  M80 y M121 descartados por el mismo motivo.
+- **Mi clasificación del barrido Hy3 (Log 1472):** **13 Familia A** (auditables) / 37 Familia B.
+  El barrido real de over-marks es de 13 ítems, no 50. El director lo asentó así.
+- **M73 elegido:** 1 ítem Familia A puro — L203 `Crear validate_collectibles.gd` marcado `[x]`,
+  archivo **inexistente**.
+- **Ling ENTREGÓ** (msg 50, 18:24): veredicto **INFLADO**, reporte estructurado, evidencia
+  reproducible, respetó read-only. **Tercera falla evitada** — tras L-05/L-06/L-07.
+- **Mi re-verificación independiente (todo correcto):**
+  - `validate_collectibles.gd` inexistente (git ls-files, glob, grep = 0) ✓
+  - L15/L203 en `[x]` citándolo; plan-inicial L14/L202 en `[ ]` (nunca implementados) ✓
+  - `04-Codigo.md` L17 cita ruta Unity inexistente; L84 admite "prototipos de diseño" ✓
+  - **Conteo: mi recuento = 28/105/2 = 135, idéntico al de Ling** ✓
+  - Sistema real: 7 `.gd` en `game/isla-ancestral/scripts/coleccionables/` ✓
+- **Matiz que precisé:** Ling dijo que el dedupe "se hace en el manager" — en realidad es
+  distribuido: `catalog.gd:39` descarta con `es_valido()` + `push_warning` (L43);
+  `item.gd:35` valida campos; `manager.gd:63/104` evita duplicados. No afecta al veredicto.
+- **Flips para el director (msg 51):** L15 y L203 `[x]`→`[ ]`; conteo 28→26, 105→107 `[ ]`.
+- **Lección operativa:** el patrón que funcionó con Ling = **alcance mínimo y bien acotado**
+  (1 ítem, 1 búsqueda, verbo inequívoco). Fórmula para sus próximos encargos.
+- **Siguiente propuesto:** M108 Pipeline-De-Assets (1 Familia A: `asset_preview.tscn`, 🟡 sin
+  agente). Pendiente de confirmación del director.
+
 ### Candidato 2 — Módulos 🟡 de modelos inactivos — `[x]` COMPLETADA (espera aprobación director)
 
 - **Qué era:** auditar los módulos 🟡 de modelos inactivos para determinar si están colgados o
