@@ -85,8 +85,13 @@
 
 > Verificacion (iter. 3, 2026-10-07): suite `test_enchant_tiers.gd` 45/0
 > EXIT=0 (+ sonda roja EXIT=1), regresiones 67/0 y 58/0. **BUG-119** (spawneo
-> del chamán) investigado en esta iteracion: NO reproducible 4/4, ver
-> `DOCUMENTACION/11-BUGS.md`.
+> del chamán) investigado en esta iteracion: NO reproducible 4/4 en arranque
+> normal (race SOLO en arranque `--script`). **Fix defensivo APLICADO
+> 2026-10-08** (encargo msg 72): reintento via `_process` con timeout 8s en
+> `incense_spawner.gd` — SOLO M163; la version con call_deferred recursivo
+> causaba SIGSEGV (descartada). Post-fix: Run B 6 puntos sin crash, Run A 6/0,
+> test_incienso 67/0, runner 19/25/718 baseline, gate 76/0. Ver
+> `DOCUMENTACION/11-BUGS.md` (Log 1475, msg 73).
 
 - [?] Cobre Ancestral: intercambio especial + bonus adicional [M] — ability `special_trade x1` definida y expuesta (A18/B9); sin hook de intercambio/trueque → **dueño: sistema de intercambio (no existe)**
 - [ ] Cobre Ancestral: brillo naranja suave en filo [S] — `visual_color` en .tres (A24); efecto pendiente seccion F

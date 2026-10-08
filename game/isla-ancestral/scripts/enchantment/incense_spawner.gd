@@ -32,19 +32,62 @@ var _fallas_altura: int = 0
 ## Locator inyectable (tests). Solo se resuelve de /root si sigue en null.
 var _locator = null
 
+## BUG-119 (fix defensivo autorizado, msg 57): en arranque diferido
+## (bootstrap.change_scene_to_file) el spawner nace ANTES de que
+## TerrainLocator resuelva el VoxelTerrain -> get_height devuelve -1 y el
+## spawn sincronico queda en 0 puntos. Se reintenta (patron M50:
+## vegetation_spawner espera a que el locator tenga terreno) hasta el
+## timeout, sin tocar el flujo del terreno ni el comportamiento cuando el
+## locator ya responde al primer intento (tests/arranque normal intactos).
+const TIMEOUT_REINTENTOS_MS: int = 8000
+var _t_inicio_reintentos: int = -1
+var _reintentando: bool = false
+
 func _ready() -> void:
+	set_process(false)  # solo procesa mientras reintenta el spawn inicial
 	_rng.seed = SEMILLA_PUNTOS
 	if centro_montana == Vector2.ZERO:
 		centro_montana = _centro_de_mundo()
 	if _locator == null:
 		_locator = get_node_or_null("/root/TerrainLocator")
 	_spawneear(CANT_PUNTOS, false)
+	if _puntos.is_empty():
+		_t_inicio_reintentos = Time.get_ticks_msec()
+		_reintentando = true
+		set_process(true)
 	var gt := _game_time()
 	if gt != null:
 		if not gt.dia_cambio.is_connected(_on_dia_cambio):
 			gt.dia_cambio.connect(_on_dia_cambio)
 		if not gt.estacion_cambio.is_connected(_on_estacion_cambio):
 			gt.estacion_cambio.connect(_on_estacion_cambio)
+
+## Reintento del spawn inicial (BUG-119): 1 intento por frame (patron M50,
+## vegetation_spawner) - NO usar call_deferred recursivo: en Godot 4 puede
+## re-procesarse en el mismo flush del MessageQueue y la recursion infinita
+## revienta el proceso con SIGSEGV (medido). Solo se llama _spawneear cuando
+## el locator ya responde en el centro de la montaña, para no acumular
+## warnings por frame. Si se agota el timeout se conserva el estado honesto
+## de 0 puntos (el warning del intento sincronico inicial ya quedo impreso).
+func _process(_delta: float) -> void:
+	if not _reintentando:
+		return
+	if not is_inside_tree():
+		_reintentando = false
+		set_process(false)
+		return
+	if Time.get_ticks_msec() - _t_inicio_reintentos > TIMEOUT_REINTENTOS_MS:
+		_reintentando = false
+		set_process(false)
+		push_warning("[M163] IncenseSpawner: spawn inicial agotado tras %d ms sin respuesta del terreno"
+				% TIMEOUT_REINTENTOS_MS)
+		return
+	if _locator == null:
+		_locator = get_node_or_null("/root/TerrainLocator")
+	if _locator != null and _altura(centro_montana.x, centro_montana.y) >= 0:
+		_reintentando = false
+		set_process(false)
+		_spawneear(CANT_PUNTOS, false)
 
 ## ── Handlers de tiempo (C8/C12) ─────────────────────────────
 
