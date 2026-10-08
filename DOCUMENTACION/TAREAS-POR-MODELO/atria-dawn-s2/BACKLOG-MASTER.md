@@ -527,3 +527,17 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 
 **REGLA (infringida 2 veces esta jornada): `git diff --cached --name-only` es OBLIGATORIO y debe ir en una LLAMADA SEPARADA, ANTES de `git commit`. Nunca encadenar `git add` + diff + commit en un mismo bloque de comandos: el commit se ejecuta igual aunque el diff muestre archivos ajenos. Nunca asumir que el index solo tiene lo que uno acaba de hacer `git add`.** Incidentes: `e97ec9e` (6 archivos ajenos M163), `97ca63b` (12 ajenos mimo) y `749228a` (15 ajenos mimo + testing.yml). Los tres deshechos con `git reset --soft HEAD~1` + `git restore --staged -- <ajenos>` sin perder trabajo ajeno.
 
+## M17-Construccion — volumen DoD (reclamado 2026-10-08 02:39, msg 130 del director)
+
+- [x] **Reclamo registrado** en los 3 registros (plan-actual Reserva actual, ESTADO-PARALELO, CHECKLIST-GLOBAL fila M17). NOTA: mis 3 ediciones sin commitear fueron **absorbidas por commits de otras sesiones** (`b7bcaa4`, `394a3a5`, `0f252e6`) por el index compartido; verificadas con `git show`, sin perdida.
+- [x] **3 suites ejecutadas, Godot 4.7.2 headless**: base 131/0, iter2 99/0, iter3 138/0 = **368 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR**.
+- [x] **Sustancia verificada**: 13 scripts reales (~2.700 lineas) + 33 recetas `.tres` en `data/construccion/piezas/`. NO es patron M25.
+- [x] **Spot-check por verbo**: LOD 40m, pooling, `obra_activa`/`navmesh_delta` (M64), serializacion (M58/M60), stress 251 piezas, permisos narrativa/agua, limite suave, capa raycast, M154 — todos respaldados en codigo.
+- [x] **Hallazgo: 1 [x] FALSO** de 59 — "La demolicion de piezas funcionales (camas, almacenamiento) libera su contenido": `demolir_pieza` (build_manager.gd:355-398) solo devuelve materiales; no existe `build_interaction.gd` ni tests del claim. Reportado al director (msg 133); decision sobre el [x] es suya.
+- [x] **Veredicto (msg 133)**: modulo sano, 58/59 respaldados, 116 [ ] legitimos. Sin flips (no autorizados).
+
+## Push pendiente de confirmacion (msgs 131-132)
+
+- [ ] **Fundador autorizo push (msg 131)** pero la situacion local cambio: **23 commits ahead / 0 behind**, de los cuales 14 son de otras sesiones (mimo, director, agnes, flota) encima de mis 9. Mi trabajo no commiteado fue absorbido por commits ajenos. Pedi confirmacion sobre si empujar los 23 tal cual (incluye scripts temporales del director en la raiz, `cdfba18`) — msg 132. Esperando respuesta.
+
+
