@@ -1,0 +1,20 @@
+{
+	"id": "pistas_01",
+	"familia": "presion",
+	"schema_version": 1,
+	"descripcion": "Puzzle de presion con sistema de 3 capas de pistas ancladas al grafo.",
+	"emisores": [
+		{"id": 0, "tipo": "placa", "etiqueta": "placa_estatica"},
+		{"id": 1, "tipo": "placa", "etiqueta": "placa_dinamica"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "puerta_pistas"}
+	],
+	"objetivo": [0, 1],
+	"pistas": {
+		"capas": ["ambiental", "diario", "total"],
+		"demora_segundos": 90,
+		"pistas_para_solucion": 3,
+		"categoria_diario": "templos"
+	}
+}

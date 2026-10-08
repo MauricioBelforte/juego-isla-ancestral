@@ -1,0 +1,23 @@
+{
+	"id": "hielo_01",
+	"familia": "hielo",
+	"schema_version": 1,
+	"descripcion": "Un bloque sobre hielo se desliza hasta el borde de la pista y activa la ranura al moverse.",
+	"emisores": [
+		{"id": 0, "tipo": "ranura", "etiqueta": "ranura_hielo"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "puente_hielo"}
+	],
+	"objetivo": [0],
+	"hielo": {
+		"grilla": {"ancho": 5, "alto": 1},
+		"simetria": "x",
+		"paredes": [],
+		"huecos": [],
+		"bloques": [
+			{"id": "bloque_a", "pos": [0, 0], "emisor": 0}
+		],
+		"pedazos": []
+	}
+}

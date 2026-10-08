@@ -1,0 +1,25 @@
+{
+	"id": "sonido_02",
+	"familia": "sonido",
+	"schema_version": 1,
+	"descripcion": "Cinco campanas en dos grupos: la secuencia de 5 simbolos activa ambas runas a la vez.",
+	"emisores": [
+		{"id": 0, "tipo": "runa", "etiqueta": "runa_sonora_1"},
+		{"id": 1, "tipo": "runa", "etiqueta": "runa_sonora_2"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "puerta_sonido_2"}
+	],
+	"objetivo": [0, 1],
+	"sonido": {
+		"grilla": {"ancho": 5, "alto": 1},
+		"campanas": [
+			{"id": "c1", "pos": [0, 0], "tono": 1, "emisor": 0},
+			{"id": "c2", "pos": [1, 0], "tono": 2, "emisor": 0},
+			{"id": "c3", "pos": [2, 0], "tono": 3, "emisor": 0},
+			{"id": "c4", "pos": [3, 0], "tono": 4, "emisor": 1},
+			{"id": "c5", "pos": [4, 0], "tono": 5, "emisor": 1}
+		],
+		"secuencia": ["c3", "c1", "c5", "c2", "c4"]
+	}
+}

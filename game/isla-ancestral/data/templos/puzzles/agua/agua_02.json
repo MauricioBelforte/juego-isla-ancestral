@@ -1,0 +1,24 @@
+{
+	"id": "agua_02",
+	"familia": "agua",
+	"schema_version": 1,
+	"descripcion": "Dos fuentes con caudales distintos alimentan la camara; el relleno y el drenaje son graduales.",
+	"emisores": [
+		{"id": 0, "tipo": "compuerta", "etiqueta": "compuerta_sur"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "puerta_agua_2"}
+	],
+	"objetivo": [0],
+	"agua": {
+		"grilla": {"ancho": 6, "alto": 4},
+		"fuentes": [
+			{"id": "fuente_a", "pos": [2, 2], "caudal": 3, "max": 12},
+			{"id": "fuente_b", "pos": [3, 2], "caudal": 1, "max": 12}
+		],
+		"compuertas": [
+			{"id": "compuerta_a", "pos": [2, 2], "umbral": 9, "emisor": 0}
+		],
+		"barcas": []
+	}
+}

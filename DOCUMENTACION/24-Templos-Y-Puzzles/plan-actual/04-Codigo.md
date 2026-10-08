@@ -138,7 +138,7 @@ Las rutas C# de arriba son **diseno heredado de Unity** (no existen en el proyec
 | `data/templos/puzzles/espejos/espejos_02.json` | **NUEVO iter. 4.** 5x5, espejo_a (4,0) 45° MÓVIL (+90°) + espejo_b (4,4) 135° MÓVIL (+90°), cristal (0,4). |
 | `scripts/templos/test_puzzle_luz.gd` | **NUEVO iter. 4.** Suite headless: 60 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=60` **medido**; **sonda ROJA en vivo** (ángulo 30 en el JSON real → 11 fallos nombrados, EXIT 1; JSON restaurado byte-exacto, sha256 `4f0000af…`). |
 | `scripts/templos/test_puzzle_espejos.gd` | **NUEVO iter. 4.** Suite headless: 62 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=62` **medido**; **sonda ROJA en vivo** (espejo fijo a 90 en el JSON real → 9 fallos nombrados, EXIT 1; JSON restaurado byte-exacto, sha256 `e2b08324…`). |
-| `scripts/templos/test_regresion_templos.gd` | **NUEVO iter. 4.** Gate de regresión (Frente 0): corre las 8 suites como subprocesos y exige EXIT 0 + 0 `SCRIPT ERROR` + checks ≥ piso por suite; 51 checks, 0 fallos, EXIT 0 ×3; total MEDIDO 362 == piso 362; incluye sonda roja del clasificador. |
+| `scripts/templos/test_regresion_templos.gd` | **NUEVO iter. 4; extendido iter. 5.** Gate de regresión (Frente 0): corre las **13 suites** como subprocesos y exige EXIT 0 + 0 `SCRIPT ERROR` + checks ≥ piso por suite; 76 checks, 0 fallos, EXIT 0 ×3; total MEDIDO **649 == piso 649**; incluye sonda roja del clasificador (9 casos) y sonda roja EN VIVO (JSON de agua mutado → EXIT 1, restaurado byte-exacto). |
 
 | Concepto (familias luz/espejos) | Archivo | API clave |
 |---|---|---|
@@ -158,3 +158,43 @@ validan `PuzzleDef.validar_def` + `PuzzleLuz.validar_optica` + `PuzzleEspejos.va
 CI de las suites queda **pendiente del visto bueno de s2** (dueño de `quality.yml`).
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 4.
+
+## Familias agua, hielo, gravedad, sonido y pistas (iter. 5 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+| Archivo | Contenido |
+|---|---|
+| `scripts/templos/puzzle_agua.gd` | **NUEVO iter. 5.** `PuzzleAgua` (RefCounted): capa hidráulica discreta. `cargar` / `desde_def`, `tick()` (suma el `caudal`, tope `max`), `drenar()` (resta 1), `altura(celda)` / `alturas()`, `compuerta_abierta(id)` / `compuertas_abiertas()`, `barca_en_destino(id)`, `ticks()`, `receptor_activado()`, `validar_agua()`. Traduce niveles → emisores sobre un `PuzzleRoom`. |
+| `data/templos/puzzles/agua/agua_01.json` | **NUEVO iter. 5.** 5x3, 1 fuente (caudal 2, max 12), 1 compuerta (umbral 6) + 1 barca (umbral 6); 2 emisores AND. |
+| `data/templos/puzzles/agua/agua_02.json` | **NUEVO iter. 5.** 6x4, 2 fuentes (caudal 3 y 1), 1 compuerta (umbral 9); 1 emisor. |
+| `scripts/templos/test_puzzle_agua.gd` | **NUEVO iter. 5.** Suite headless: 57 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=57` **medido**; sonda roja sobre copias mutadas. |
+| `scripts/templos/puzzle_hielo.gd` | **NUEVO iter. 5.** `PuzzleHielo` (RefCounted): capa de deslizamiento. `cargar` / `desde_def`, `deslizar(id, dir)`, `pos_de`, `cayo_en_hueco`, `bloque_activo`, `usos_pedazo`, `es_hueco` / `es_pared`, `validar_simetria()`, `bloques_movidos()`, `receptor_activado()`, `validar_hielo()`. |
+| `data/templos/puzzles/hielo/hielo_01.json` | **NUEVO iter. 5.** 5x1 sin paredes, 1 bloque, simetría `x`. |
+| `data/templos/puzzles/hielo/hielo_02.json` | **NUEVO iter. 5.** 7x3 simétrico, paredes `[[2,1],[4,1]]`, huecos `[[1,0],[5,0]]`, 2 bloques, 2 pedazos (usos 2). |
+| `scripts/templos/test_puzzle_hielo.gd` | **NUEVO iter. 5.** Suite headless: 59 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=59` **medido**; sonda roja con 7 mutaciones. |
+| `scripts/templos/puzzle_gravedad.gd` | **NUEVO iter. 5.** `PuzzleGravedad` (RefCounted): capa de movimiento. `cargar` / `desde_def`, `direccion_gravedad(pos)`, `cambia_direccion(a,b)`, `plataforma_offset(id,fase)` / `plataforma_en_extremo`, `plataformas_de(grupo)`, `pulso_activo(id,fase)`, `cinta_dir(id)` / `cinta_en(pos)`, `fase_desde_reloj(reloj)`, `tick()`, `validar_gravedad()`. |
+| `data/templos/puzzles/gravedad/gravedad_01.json` | **NUEVO iter. 5.** 6x4, 1 burbuja NORTE, 2 plataformas sincronizadas (grupo g1), 1 pulso, 1 cinta; 2 emisores AND. |
+| `data/templos/puzzles/gravedad/gravedad_02.json` | **NUEVO iter. 5.** 6x4, 2 burbujas opuestas, 1 plataforma, 1 pulso, 1 cinta; 1 emisor. |
+| `scripts/templos/test_puzzle_gravedad.gd` | **NUEVO iter. 5.** Suite headless: 59 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=59` **medido**; sonda roja con 10 mutaciones + `RelojFalso` (contrato M29). |
+| `scripts/templos/puzzle_sonido.gd` | **NUEVO iter. 5.** `PuzzleSonido` (RefCounted): capa de secuencia. `cargar` / `desde_def`, `tocar(id)`, `tocar_secuencia()`, `intento_actual()`, `intentos_fallidos()`, `pista_disponible()` / `pista_patron()`, `resuelto()`, `receptor_activado()`, `validar_sonido()`. **Modelo puro: 0 refs a `AudioServer`.** |
+| `data/templos/puzzles/sonido/sonido_01.json` | **NUEVO iter. 5.** 3 campanas, secuencia de 3; 1 emisor. |
+| `data/templos/puzzles/sonido/sonido_02.json` | **NUEVO iter. 5.** 5 campanas en 2 grupos, secuencia de 5; 2 emisores AND. |
+| `scripts/templos/test_puzzle_sonido.gd` | **NUEVO iter. 5.** Suite headless: 54 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=54` **medido**; sonda roja + verificación del ítem 104 por lectura del fuente. |
+| `scripts/templos/puzzle_pistas.gd` | **NUEVO iter. 5.** `PuzzlePistas` (RefCounted): sistema de ayuda. `cargar` / `desde_def`, `capas()`, `registrar_en_diario(diary)`, `avanzar(dt)` / `reiniciar_espera()` / `pista_diferida_disponible()`, `pista_familia()`, `pista_emisor_exacto()`, `pista_anclada_a_grafo()`, `solucion_paso_a_paso()`, `usar_pista()` / `pistas_usadas()` / `penalizacion()`, `pista_actual()` / `ultima_pista()`, `validar_pistas()`. |
+| `data/templos/puzzles/pistas/pistas_01.json` | **NUEVO iter. 5.** Familia presión, 2 emisores AND, bloque `pistas` (3 capas, 90 s, 3 pistas). |
+| `data/templos/puzzles/pistas/pistas_02.json` | **NUEVO iter. 5.** Familia luz, 1 emisor, bloque `pistas`. |
+| `scripts/templos/test_puzzle_pistas.gd` | **NUEVO iter. 5.** Suite headless: 58 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=58` **medido**; sonda roja + `DiarioFalso` (contrato `diary_service`). |
+
+| Concepto (familias iter. 5) | Archivo | API clave |
+|---|---|---|
+| Fuente / nivel / compuerta / barca | `scripts/templos/puzzle_agua.gd` | `tick()`, `drenar()`, `altura(celda)`, `compuerta_abierta(id)`, `barca_en_destino(id)` |
+| Deslizamiento / pared / hueco / pedazo | `scripts/templos/puzzle_hielo.gd` | `deslizar(id,dir)`, `es_pared(c)`, `es_hueco(c)`, `cayo_en_hueco(id)`, `usos_pedazo(c)`, `validar_simetria()` |
+| Burbuja / plataforma / pulso / cinta | `scripts/templos/puzzle_gravedad.gd` | `direccion_gravedad(pos)`, `plataforma_offset(id,fase)`, `pulso_activo(id,fase)`, `cinta_dir(id)`, `fase_desde_reloj(reloj)` |
+| Campana / secuencia / pista del patrón | `scripts/templos/puzzle_sonido.gd` | `tocar(id)`, `tocar_secuencia()`, `pista_disponible()`, `pista_patron()` |
+| Capas / diferida / derivadas / sin castigo | `scripts/templos/puzzle_pistas.gd` | `capas()`, `pista_diferida_disponible()`, `pista_anclada_a_grafo()`, `solucion_paso_a_paso()`, `penalizacion()` |
+
+**Contrato:** los 5 intérpretes traducen su capa (hidráulica / deslizamiento / movimiento / secuencia /
+ayuda) → emisores sobre un `PuzzleRoom`; no modifican el framework. Los puzzles se definen en datos
+(`{emisores, reglas, objetivo}` + su bloque) y los validan `PuzzleDef.validar_def` + el `validar_*` de cada
+capa. El gate de CI de las suites sigue **pendiente del visto bueno de s2** (dueño de `quality.yml`).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 5.

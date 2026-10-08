@@ -26,13 +26,14 @@
 extends SceneTree
 
 const MODULO := "M24-Regresion"
-const CHECKS_MINIMOS := 51   # MEDIDO en verde (ajustar SOLO tras medir, nunca estimar)
+const CHECKS_MINIMOS := 76   # MEDIDO en verde (5 checks por suite x 13 + 2 del bloque B + 9 del bloque C)
 
 const BLOQUES := ["A", "B", "C"]
 
 ## Piso TOTAL de checks medidos en verde (suma de las suites con contador):
-## 42 datos + 38 multilateral + 64 bloques + 60 luz + 62 espejos + 92 m26 + 4 headless = 362.
-const TOTAL_MINIMO := 362
+## 42 datos + 38 multilateral + 64 bloques + 60 luz + 62 espejos + 92 m26 + 4 headless
+## + 57 agua + 59 hielo + 59 gravedad + 54 sonido + 58 pistas = 649.
+const TOTAL_MINIMO := 649
 
 ## Suites del catalogo de M24. "piso" es el CHECKS_MINIMOS real de cada suite (medido).
 ## "reporta_checks" = false para test_puzzles (suite original sin contador).
@@ -43,6 +44,11 @@ var SUITES := [
 	{"nombre": "test_puzzle_bloques", "ruta": "res://scripts/templos/test_puzzle_bloques.gd", "piso": 64, "reporta_checks": true},
 	{"nombre": "test_puzzle_luz", "ruta": "res://scripts/templos/test_puzzle_luz.gd", "piso": 60, "reporta_checks": true},
 	{"nombre": "test_puzzle_espejos", "ruta": "res://scripts/templos/test_puzzle_espejos.gd", "piso": 62, "reporta_checks": true},
+	{"nombre": "test_puzzle_agua", "ruta": "res://scripts/templos/test_puzzle_agua.gd", "piso": 57, "reporta_checks": true},
+	{"nombre": "test_puzzle_hielo", "ruta": "res://scripts/templos/test_puzzle_hielo.gd", "piso": 59, "reporta_checks": true},
+	{"nombre": "test_puzzle_gravedad", "ruta": "res://scripts/templos/test_puzzle_gravedad.gd", "piso": 59, "reporta_checks": true},
+	{"nombre": "test_puzzle_sonido", "ruta": "res://scripts/templos/test_puzzle_sonido.gd", "piso": 54, "reporta_checks": true},
+	{"nombre": "test_puzzle_pistas", "ruta": "res://scripts/templos/test_puzzle_pistas.gd", "piso": 58, "reporta_checks": true},
 	{"nombre": "test_templo_m26", "ruta": "res://scripts/templos/test_templo_m26.gd", "piso": 92, "reporta_checks": true},
 	{"nombre": "test_templo_headless", "ruta": "res://scripts/templos/test_templo_headless.gd", "piso": 4, "reporta_checks": true},
 ]
@@ -122,7 +128,7 @@ func _bloque_a_suites() -> void:
 func _bloque_b_total() -> void:
 	print("  [INFO] total de checks medidos en las suites: %d (piso total %d)" % [_acumulado, TOTAL_MINIMO])
 	_check("B: total de checks (%d) >= piso total (%d)" % [_acumulado, TOTAL_MINIMO], _acumulado >= TOTAL_MINIMO)
-	_check("B: se corrieron las 8 suites del catalogo", SUITES.size() == 8)
+	_check("B: se corrieron las 13 suites del catalogo", SUITES.size() == 13)
 
 # --- Bloque C: SONDA ROJA del clasificador -------------------------------
 

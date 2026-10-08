@@ -55,20 +55,20 @@
 
 ## Familia: puzzles de agua
 
-- [ ] Definir compuertas con niveles de agua [M]
-- [ ] Definir fuente que alimenta el nivel [S]
-- [ ] Definir barca flotante que cruza al subir el nivel [M]
-- [ ] Definir altura de agua verificable por datos [M]
-- [ ] Definir relleno/drenaje gradual (sin snaps) [S]
-- [ ] Documentar la familia de agua en el plan-actual [S]
+- [x] Definir compuertas con niveles de agua [M] — `PuzzleAgua`: `compuertas[id].umbral` + `compuerta_abierta(id)` (abre cuando `altura(pos) >= umbral`); suite `test_puzzle_agua.gd` 57/0
+- [x] Definir fuente que alimenta el nivel [S] — `PuzzleAgua.fuentes {pos, caudal, max}` + `tick()` (suma EXACTAMENTE el caudal, con tope `max`)
+- [x] Definir barca flotante que cruza al subir el nivel [M] — `PuzzleAgua.barcas {pos, umbral, destino, emisor}` + `barca_en_destino(id)` (cruza al alcanzar el umbral; el cruce es permanente)
+- [x] Definir altura de agua verificable por datos [M] — `PuzzleAgua.altura(celda)` / `alturas()` (enteros deterministas, sin fisica visual)
+- [x] Definir relleno/drenaje gradual (sin snaps) [S] — `tick()` suma el caudal; `drenar()` resta 1; probado sin salto al umbral (sonda roja)
+- [x] Documentar la familia de agua en el plan-actual [S] — 03-Diseno.md "Familia agua" + 04-Codigo.md (iter. 5)
 
 ## Familia: puzzles de hielo
 
-- [ ] Definir deslizamiento de bloques sobre hielo [M]
-- [ ] Definir patrones simétricos verificables (Editor) [M]
-- [ ] Definir colisiones típicas (paredes y huecos) [S]
-- [ ] Definir pedazos de hielo opcionales (variante) [S]
-- [ ] Documentar la familia de hielo en el plan-actual [S]
+- [x] Definir deslizamiento de bloques sobre hielo [M] — `PuzzleHielo.deslizar(id, dir)` (se desliza hasta chocar con borde/pared/bloque); suite `test_puzzle_hielo.gd` 59/0
+- [x] Definir patrones simétricos verificables (Editor) [M] — `PuzzleHielo.validar_simetria()` data-driven (ejes `x`/`y`/`ambos`); no hay EditorPlugin en el proyecto, alcance ajustado y aprobado
+- [x] Definir colisiones típicas (paredes y huecos) [S] — `paredes` detienen el bloque; `huecos` lo consumen (`cayo_en_hueco(id)`; el emisor vuelve a OFF)
+- [x] Definir pedazos de hielo opcionales (variante) [S] — `pedazos {pos, usos}`: se agrietan al ser pisados y se rompen dejando un hueco (`usos_pedazo`)
+- [x] Documentar la familia de hielo en el plan-actual [S] — 03-Diseno.md "Familia hielo" + 04-Codigo.md (iter. 5)
 
 ## Familia: puzzles de presión
 
@@ -89,22 +89,22 @@
 
 ## Familia: puzzles de gravedad y movimiento
 
-- [ ] Definir burbujas de gravedad en zonas seleccionadas [M]
-- [ ] Definir cambio de dirección del desplazamiento [S]
-- [ ] Definir plataformas móviles sincronizadas [M]
-- [ ] Definir pulsos de aire [S]
-- [ ] Definir cintas transportadoras [S]
-- [ ] Definir sincronización con reloj de datos (M29) [M]
-- [ ] Documentar las familias de gravedad y movimiento [S]
+- [x] Definir burbujas de gravedad en zonas seleccionadas [M] — `PuzzleGravedad.burbujas {zona, dir}` + `direccion_gravedad(pos)`; suite `test_puzzle_gravedad.gd` 59/0
+- [x] Definir cambio de dirección del desplazamiento [S] — `cambia_direccion(a, b)`: dos celdas en zonas con `dir` opuesta difieren
+- [x] Definir plataformas móviles sincronizadas [M] — `plataformas {grupo, amplitud, periodo}` + `plataforma_offset(id, fase)` / `plataforma_en_extremo` (onda triangular entera; mismo grupo + mismo periodo = sincronizadas)
+- [x] Definir pulsos de aire [S] — `pulsos {periodo, duracion}` + `pulso_activo(id, fase)` (activo dentro de la ventana `[0, duracion)`)
+- [x] Definir cintas transportadoras [S] — `cintas {pos, dir}` + `cinta_dir(id)` / `cinta_en(pos)`
+- [x] Definir sincronización con reloj de datos (M29) [M] — `fase_desde_reloj(reloj)` sobre `scripts/time/game_clock.gd` (`dia_absoluto`/`get_hora`/`get_minuto`), duck-typed (contrato verificado por archivo)
+- [x] Documentar las familias de gravedad y movimiento [S] — 03-Diseno.md "Familia gravedad y movimiento" + 04-Codigo.md (iter. 5)
 
 ## Familia: puzzles de sonido y secuencia
 
-- [ ] Definir campanas/gongs como emisores sonoros [S]
-- [ ] Definir línea de audición clara como condición (M43 hook) [M]
-- [ ] Definir sin dependencia del hardware de audio del jugador [M]
-- [ ] Definir secuencias de 3-5 símbolos visibles [S]
-- [ ] Definir pista del patrón completo tras 2 intentos [S]
-- [ ] Documentar las familias de sonido y secuencia [S]
+- [x] Definir campanas/gongs como emisores sonoros [S] — `PuzzleSonido.campanas {pos, tono, emisor}` + `tocar(id)`; suite `test_puzzle_sonido.gd` 54/0
+- [ ] Definir línea de audición clara como condición (M43 hook) [M] — **BLOQUEADO por M43**: `scripts/audio/` no expone "línea de audición" (0 hits medidos). No se fuerza (condición 2 del plan iter.5); queda para el dueño de M43.
+- [x] Definir sin dependencia del hardware de audio del jugador [M] — modelo PURO de datos: 0 referencias a `AudioServer` en código (verificado por lectura del fuente en la suite)
+- [x] Definir secuencias de 3-5 símbolos visibles [S] — `secuencia` validada entre `LARGO_MIN=3` y `LARGO_MAX=5` (`validar_sonido`)
+- [x] Definir pista del patrón completo tras 2 intentos [S] — `INTENTOS_PARA_PISTA=2` + `pista_disponible()` / `pista_patron()` (vacío antes de 2 fallos)
+- [x] Documentar las familias de sonido y secuencia [S] — 03-Diseno.md "Familia sonido y secuencia" + 04-Codigo.md (iter. 5)
 
 ## Familia: puzzles de símbolos y ambientales
 
@@ -129,14 +129,14 @@
 
 ## Pistas y sistema de ayuda
 
-- [ ] Crear 3 capas de pistas (ambiental → icono en diario → total) [M]
+- [x] Crear 3 capas de pistas (ambiental → icono en diario → total) [M] — `PuzzlePistas.capas()` (3 capas) + `registrar_en_diario(diary)` (capa 2, ancla real `scripts/diario/diary_service.gd`); suite `test_puzzle_pistas.gd` 58/0
 - [x] Crear menú "Guía del Templo" (puzzle actual + historial resuelto) [M]
-- [ ] Crear pista diferida (90 s sin progreso) [S]
-- [ ] Crear pista de familia textual [S]
-- [ ] Crear pista de emisor exacto [S]
-- [ ] Crear solución paso a paso tras 3 pistas [M]
-- [ ] Crear pistas ancladas a reglas del grafo (nunca texto suelto) [M]
-- [ ] Crear elección libre de consultar la guía (sin penalización) [S]
+- [x] Crear pista diferida (90 s sin progreso) [S] — `avanzar(dt)` + `pista_diferida_disponible()` (`DEMORA_PISTA_S=90.0`; se reinicia con progreso)
+- [x] Crear pista de familia textual [S] — `PuzzlePistas.pista_familia()` (derivada de la familia declarada)
+- [x] Crear pista de emisor exacto [S] — `PuzzlePistas.pista_emisor_exacto()` (deriva de `PuzzleDef.solucion_minima`)
+- [x] Crear solución paso a paso tras 3 pistas [M] — `solucion_paso_a_paso()` (exige `PISTAS_PARA_SOLUCION=3`; devuelve `[]` antes: no regala la solución)
+- [x] Crear pistas ancladas a reglas del grafo (nunca texto suelto) [M] — `pista_anclada_a_grafo()` (deriva de `PuzzleDef.reglas_def`; sonda roja: si cambia el receptor en los datos, cambia la pista)
+- [x] Crear elección libre de consultar la guía (sin penalización) [S] — `usar_pista()` solo cuenta; `penalizacion()` == 0 siempre (probado tras 5 pistas)
 - [x] Documentar pistas y sistema de ayuda [S]
 
 ## Anti-arbitrariedad, anti-ambigüedad y métricas
@@ -223,7 +223,7 @@
 - `puzzle_invariant.gd` (M66) delega la validación concreta a M24/M26 (`_check()` siempre true). El framework de M24 ahora expone `validar()` lista para ser usada por ese invariante.
 
 **Limitación:** no ejecutable headless en este entorno (Godot ausente); verificación estática de APIs + coherencia del test contra el código.
-**Totales:** 128 ítems · Completados: 57 · Pendientes: 70 · No resueltos: 1.
+**Totales:** 128 ítems · Completados: 100 · Pendientes: 27 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 31 [x] / 97 [ ] / 0 [?].
@@ -272,3 +272,17 @@ Los [31 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia:
 - **Guardián anti-falso-verde:** probado EN ROJO por inyección en AMBAS suites (saltar el bloque F + su `_fin` → el resumen NOMBRA el bloque faltante y el piso lo caza; EXIT 1); revertido a verde.
 - **Regresión:** las 8 suites de M24 en verde (luz 60, espejos 62, bloques 64, datos 42, multilateral 38, m26 92, headless 4, puzzles sin contador); gate 362/0 EXIT 0.
 - **Conteo MEDIDO:** 70 completados / 1 con dudas / 57 pendientes = 128.
+
+## Iteración 5 — familias agua, hielo, gravedad, sonido y pistas + gate extendido (2026-10-07)
+
+**Modelo:** DeepSeek-V4.1-Flash | **Plataforma:** WorkBuddy | **Log:** 1438 | **Plan:** aprobado por el director (canal DeepSeek/81).
+
+- **Frente A — familia agua (ítems 58-63):** NUEVOS `scripts/templos/puzzle_agua.gd` (`PuzzleAgua`: capa hidráulica discreta; `tick()` suma el `caudal`, `drenar()` resta 1, `altura()`/`compuerta_abierta()`/`barca_en_destino()`) + `data/templos/puzzles/agua/agua_01.json` (2 emisores, fuente caudal 2, compuerta/barca umbral 6) y `agua_02.json` (2 fuentes, compuerta umbral 9) + `scripts/templos/test_puzzle_agua.gd` (57 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=57` MEDIDO).
+- **Frente B — familia hielo (ítems 67-71):** NUEVOS `scripts/templos/puzzle_hielo.gd` (`PuzzleHielo`: deslizamiento hasta chocar, paredes/huecos, pedazos que se agrietan, `validar_simetria()` data-driven) + `hielo_01.json` / `hielo_02.json` + `test_puzzle_hielo.gd` (59 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=59` MEDIDO).
+- **Frente C — familia gravedad (ítems 92-98):** NUEVOS `scripts/templos/puzzle_gravedad.gd` (`PuzzleGravedad`: burbujas, plataformas sincronizadas por fase —onda triangular entera—, pulsos, cintas, `fase_desde_reloj()` sobre M29 `game_clock.gd`) + `gravedad_01.json` / `gravedad_02.json` + `test_puzzle_gravedad.gd` (59 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=59` MEDIDO).
+- **Frente D — familia sonido (ítems 102, 104-107; 103 BLOQUEADO por M43):** NUEVOS `scripts/templos/puzzle_sonido.gd` (`PuzzleSonido`: campanas, secuencia 3-5, pista tras 2 intentos; **modelo puro, 0 refs a `AudioServer`**) + `sonido_01.json` / `sonido_02.json` + `test_puzzle_sonido.gd` (54 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=54` MEDIDO).
+- **Frente E — familia pistas (ítems 132, 134-139):** NUEVOS `scripts/templos/puzzle_pistas.gd` (`PuzzlePistas`: 3 capas, capa 2 anclada a `diary_service.gd`, pista diferida 90 s, pistas derivadas del grafo, solución tras 3 pistas, penalización 0) + `pistas_01.json` / `pistas_02.json` + `test_puzzle_pistas.gd` (58 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=58` MEDIDO).
+- **Frente 0 — gate extendido (condición 1 del director):** `test_regresion_templos.gd` corre ahora **13 suites** (antes 8); las 5 nuevas suman su piso → `TOTAL_MINIMO` 362 → **649** (medido: 649 == piso). Gate **76/0 EXIT 0 ×3**. **Sonda roja EN VIVO:** `agua_01.json` (`caudal` 2→3) → el gate pasa a **EXIT 1** con `test_puzzle_agua` nombrado (57 checks, 5 fallos); JSON restaurado byte-exacto (sha256 `af655940…`).
+- **Anti-falso-verde:** las 5 suites tienen bloques A-F nombrados + `_fin()`, `_summary()` en `call_deferred`, piso MEDIDO y bloque D de sonda roja. Guardián probado en rojo en iteraciones previas.
+- **Regresión:** las 13 suites en verde (datos 42, multilateral 38, bloques 64, luz 60, espejos 62, agua 57, hielo 59, gravedad 59, sonido 54, pistas 58, m26 92, headless 4, puzzles sin contador); gate 649/0 EXIT 0.
+- **Conteo MEDIDO:** 100 completados / 1 con dudas / 27 pendientes = 128. (Se corrigió la línea `Totales` que estaba desactualizada en 57.)

@@ -1,0 +1,30 @@
+{
+	"id": "gravedad_01",
+	"familia": "gravedad",
+	"schema_version": 1,
+	"descripcion": "Dos plataformas sincronizadas suben por una burbuja de gravedad invertida y activan las runas al llegar al extremo.",
+	"emisores": [
+		{"id": 0, "tipo": "runa", "etiqueta": "runa_alta_1"},
+		{"id": 1, "tipo": "runa", "etiqueta": "runa_alta_2"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "puerta_gravedad"}
+	],
+	"objetivo": [0, 1],
+	"gravedad": {
+		"grilla": {"ancho": 6, "alto": 4},
+		"burbujas": [
+			{"id": "burbuja_a", "zona": [0, 0, 6, 4], "dir": [0, -1]}
+		],
+		"plataformas": [
+			{"id": "plat_a", "pos": [1, 3], "grupo": "g1", "amplitud": 2, "periodo": 8, "emisor": 0},
+			{"id": "plat_b", "pos": [4, 3], "grupo": "g1", "amplitud": 2, "periodo": 8, "emisor": 1}
+		],
+		"pulsos": [
+			{"id": "pulso_a", "periodo": 6, "duracion": 2}
+		],
+		"cintas": [
+			{"id": "cinta_a", "pos": [3, 3], "dir": [1, 0]}
+		]
+	}
+}

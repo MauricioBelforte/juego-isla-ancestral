@@ -256,3 +256,223 @@ capa de rotación EN VIVO sobre el JSON real (espejo fijo a 90 en vez de 135 →
 JSON restaurado byte-exacto, sha256 `e2b08324…`).
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1431.
+
+## Familia agua (iter. 5 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+La familia **agua** introduce un modelo **hidráulico discreto**: el nivel de agua es un entero por celda,
+las fuentes lo alimentan gradualmente y compuertas/barcas reaccionan al superar un umbral. No hay
+simulación de fluidos: el nivel es verificable por datos. Se resuelve con un intérprete propio
+(`PuzzleAgua`) que traduce niveles → emisores sin tocar el framework. Cierra los ítems 58-63.
+
+- **Compuertas con niveles (58):** cada compuerta declara `umbral`; `compuerta_abierta(id)` es
+  `altura(pos) >= umbral`. El emisor asociado pasa a ON al abrirse.
+- **Fuente que alimenta el nivel (59):** cada fuente declara `caudal` y `max`; `tick()` suma EXACTAMENTE
+  `caudal` a su celda, con tope `max` (nunca lo supera).
+- **Barca flotante (60):** cada barca declara `umbral` y `destino`; al alcanzar el umbral cruza
+  (`barca_en_destino`), y el cruce es **permanente** (no se pierde al drenar).
+- **Altura verificable por datos (61):** `altura(celda)` / `alturas()` devuelven enteros deterministas.
+- **Relleno/drenaje gradual (62):** `tick()` suma el caudal y `drenar()` resta 1 por llamada; probado que
+  NO hay salto al umbral (sonda roja con `caudal` alterado).
+- **Documentación (63):** esta sección + el mapa de código en `04-Codigo.md`.
+
+**Esquema de datos (ejemplo `agua_01.json`):**
+
+```json
+{
+  "emisores": [{"id": 0, "tipo": "compuerta", "etiqueta": "compuerta_norte"},
+               {"id": 1, "tipo": "barca", "etiqueta": "barca_este"}],
+  "reglas":   [{"emisores": [0, 1], "receptor": "puerta_agua"}],
+  "objetivo": [0, 1],
+  "agua": {
+    "grilla":     {"ancho": 5, "alto": 3},
+    "fuentes":    [{"id": "fuente_a", "pos": [1, 1], "caudal": 2, "max": 12}],
+    "compuertas": [{"id": "compuerta_a", "pos": [1, 1], "umbral": 6, "emisor": 0}],
+    "barcas":     [{"id": "barca_a", "pos": [1, 1], "umbral": 6, "destino": [3, 1], "emisor": 1}]
+  }
+}
+```
+
+**Justicia:** ambos puzzles tienen 1 solución mínima == objetivo. La **sonda roja** de la suite prueba la
+capa hidráulica EN VIVO sobre copias mutadas (umbral 0, emisor inexistente, caudal 0, destino == origen).
+Además se probó EN VIVO el gate con este JSON: `caudal` 2→3 → la suite de agua falla (5 fallos) y el gate
+pasa a EXIT 1; JSON restaurado byte-exacto (sha256 `af655940…`).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1438.
+
+## Familia hielo (iter. 5 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+La familia **hielo** introduce la capa de **deslizamiento**: un bloque empujado en una dirección se
+desliza hasta chocar con el borde, una pared, otro bloque, o caer en un hueco. Todo se decide por DATOS
+(grilla de enteros). Intérprete propio `PuzzleHielo`. Cierra los ítems 67-71.
+
+- **Deslizamiento (67):** `deslizar(id, dir)` desliza hasta chocar; `pos_de(id)` informa la celda.
+- **Patrones simétricos (68):** `validar_simetria()` data-driven (ejes `x`/`y`/`ambos`), espejo
+  `ancho-1-x` / `alto-1-y`. **No hay EditorPlugin** en el proyecto: el alcance se ajustó a un validador
+  de datos (aprobado en el plan) en vez de un plugin de Editor.
+- **Colisiones (69):** `paredes` detienen el bloque; `huecos` lo consumen (`cayo_en_hueco(id)`; el bloque
+  desaparece y su emisor vuelve a OFF).
+- **Pedazos de hielo (70):** `pedazos {pos, usos}`: se agrietan al ser pisados y al llegar a 0 se rompen
+  dejando un hueco (`usos_pedazo`). El hueco que crea un pedazo NO consume al bloque que lo creó (se
+  desgasta DESPUÉS de moverse), solo al siguiente.
+- **Documentación (71):** esta sección + el mapa de código en `04-Codigo.md`.
+
+**Esquema de datos (ejemplo `hielo_02.json`):**
+
+```json
+{
+  "emisores": [{"id": 0, "tipo": "ranura", "etiqueta": "ranura_oeste"},
+               {"id": 1, "tipo": "ranura", "etiqueta": "ranura_este"}],
+  "reglas":   [{"emisores": [0, 1], "receptor": "puente_hielo_2"}],
+  "objetivo": [0, 1],
+  "hielo": {
+    "grilla":   {"ancho": 7, "alto": 3},
+    "simetria": "x",
+    "paredes":  [[2, 1], [4, 1]],
+    "huecos":   [[1, 0], [5, 0]],
+    "bloques":  [{"id": "bloque_a", "pos": [0, 1], "emisor": 0},
+                 {"id": "bloque_b", "pos": [6, 1], "emisor": 1}],
+    "pedazos":  [{"pos": [1, 1], "usos": 2}, {"pos": [5, 1], "usos": 2}]
+  }
+}
+```
+
+**Justicia:** ambos puzzles tienen 1 solución mínima == objetivo. La **sonda roja** prueba la capa EN VIVO
+sobre copias mutadas (usos 0, pared+hueco en la misma celda, emisor inexistente, simetría rota, bloque
+sobre pared, y bloque detenido por otro bloque).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1438.
+
+## Familia gravedad y movimiento (iter. 5 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+La familia **gravedad y movimiento** añade la capa de MOVIMIENTO: zonas con gravedad propia, plataformas
+móviles sincronizadas por una FASE común, pulsos de aire y cintas. Todo es aritmética ENTERA sobre datos
+(determinista). Intérprete propio `PuzzleGravedad`. Cierra los ítems 92-98.
+
+- **Burbujas de gravedad (92):** `burbujas {zona:[x,y,w,h], dir}` + `direccion_gravedad(pos)` (la última
+  burbuja que contiene la celda gana; fuera de toda zona vale `GRAVEDAD_DEFECTO = (0,1)`).
+- **Cambio de dirección (93):** `cambia_direccion(a, b)` compara la dirección de dos celdas.
+- **Plataformas sincronizadas (94):** `plataformas {grupo, amplitud, periodo}` + `plataforma_offset(id,
+  fase)` (onda triangular entera) / `plataforma_en_extremo`. Mismo grupo + mismo periodo = sincronizadas;
+  `validar_gravedad` rechaza un grupo con periodos distintos.
+- **Pulsos de aire (95):** `pulsos {periodo, duracion}` + `pulso_activo(id, fase)` (activo dentro de
+  `[0, duracion)`).
+- **Cintas transportadoras (96):** `cintas {pos, dir}` + `cinta_dir(id)` / `cinta_en(pos)`.
+- **Sincronización con el reloj M29 (97):** `fase_desde_reloj(reloj)` = `dia*1440 + hora*60 + minuto`
+  sobre `scripts/time/game_clock.gd` (`dia_absoluto`/`get_hora`/`get_minuto`); duck-typed (devuelve -1 si
+  el objeto no expone el contrato). Contrato verificado por archivo, no por doc.
+- **Documentación (98):** esta sección + el mapa de código en `04-Codigo.md`.
+
+**Esquema de datos (ejemplo `gravedad_01.json`):**
+
+```json
+{
+  "emisores": [{"id": 0, "tipo": "runa", "etiqueta": "runa_alta_1"},
+               {"id": 1, "tipo": "runa", "etiqueta": "runa_alta_2"}],
+  "reglas":   [{"emisores": [0, 1], "receptor": "puerta_gravedad"}],
+  "objetivo": [0, 1],
+  "gravedad": {
+    "grilla":      {"ancho": 6, "alto": 4},
+    "burbujas":    [{"id": "burbuja_a", "zona": [0, 0, 6, 4], "dir": [0, -1]}],
+    "plataformas": [{"id": "plat_a", "pos": [1, 3], "grupo": "g1", "amplitud": 2, "periodo": 8, "emisor": 0},
+                    {"id": "plat_b", "pos": [4, 3], "grupo": "g1", "amplitud": 2, "periodo": 8, "emisor": 1}],
+    "pulsos":      [{"id": "pulso_a", "periodo": 6, "duracion": 2}],
+    "cintas":      [{"id": "cinta_a", "pos": [3, 3], "dir": [1, 0]}]
+  }
+}
+```
+
+**Justicia:** ambos puzzles tienen 1 solución mínima == objetivo. La **sonda roja** prueba la capa EN VIVO
+sobre copias mutadas (periodo 0, amplitud 0, dirección nula, emisor inexistente, grupo desincronizado,
+sin plataformas, pulso con duración > periodo, zona mal formada) y la semántica (sin burbujas → gravedad
+por defecto; sin plataformas el receptor nunca se activa).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1438.
+
+## Familia sonido y secuencia (iter. 5 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+La familia **sonido y secuencia** modela campanas/gongs como emisores: el jugador los toca en un orden y
+el receptor se activa cuando la secuencia coincide con la declarada. Intérprete propio `PuzzleSonido`.
+Cierra los ítems 102, 104-107 (el 103 queda BLOQUEADO por M43).
+
+- **Campanas/gongs como emisores (102):** `campanas {pos, tono, emisor}` + `tocar(id)`.
+- **Sin hardware de audio (104):** **modelo PURO de datos** — la clase NO toca `AudioServer` ni ningún nodo
+  de audio (0 referencias en código; la suite lo verifica leyendo el fuente y descartando comentarios). El
+  "sonido" es un identificador de tono, no una reproducción: el puzzle es verificable en headless.
+- **Secuencias de 3-5 símbolos (105):** `secuencia` validada entre `LARGO_MIN=3` y `LARGO_MAX=5`.
+- **Pista del patrón tras 2 intentos (106):** `INTENTOS_PARA_PISTA=2` + `pista_disponible()` /
+  `pista_patron()` (vacío antes de 2 fallos: no se regala).
+- **Documentación (107):** esta sección + el mapa de código en `04-Codigo.md`.
+- **Ítem 103 (M43) — BLOQUEADO:** `scripts/audio/` no expone "línea de audición" (0 hits medidos). No se
+  fuerza; queda para el dueño de M43.
+
+**Esquema de datos (ejemplo `sonido_02.json`):**
+
+```json
+{
+  "emisores": [{"id": 0, "tipo": "runa", "etiqueta": "runa_sonora_1"},
+               {"id": 1, "tipo": "runa", "etiqueta": "runa_sonora_2"}],
+  "reglas":   [{"emisores": [0, 1], "receptor": "puerta_sonido_2"}],
+  "objetivo": [0, 1],
+  "sonido": {
+    "grilla":    {"ancho": 5, "alto": 1},
+    "campanas":  [{"id": "c1", "pos": [0, 0], "tono": 1, "emisor": 0},
+                  {"id": "c2", "pos": [1, 0], "tono": 2, "emisor": 0},
+                  {"id": "c3", "pos": [2, 0], "tono": 3, "emisor": 0},
+                  {"id": "c4", "pos": [3, 0], "tono": 4, "emisor": 1},
+                  {"id": "c5", "pos": [4, 0], "tono": 5, "emisor": 1}],
+    "secuencia": ["c3", "c1", "c5", "c2", "c4"]
+  }
+}
+```
+
+**Justicia:** ambos puzzles tienen 1 solución mínima == objetivo. La **sonda roja** prueba la capa EN VIVO
+sobre copias mutadas (secuencia de 2 y de 6, emisor inexistente, campana inexistente en la secuencia, sin
+campanas) y la semántica (una secuencia equivocada nunca resuelve; tocar una campana inexistente no rompe
+el intento).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1438.
+
+## Pistas y sistema de ayuda (iter. 5 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+La familia **pistas** extiende el framework con el sistema de ayuda. TODA pista se **deriva** de los datos
+del grafo (`PuzzleDef.reglas_def` / `solucion_minima`): no hay texto suelto escrito a mano (ítem 138). Las
+pistas son información, nunca penalización (ítem 139). Intérprete propio `PuzzlePistas`. Cierra los ítems
+132, 134-139.
+
+- **3 capas (132):** `capas()` = `["ambiental", "diario", "total"]`; la capa 2 se materializa con
+  `registrar_en_diario(diary)` sobre el contrato real de `scripts/diario/diary_service.gd`
+  (`registrar(entrada_id, categoria) -> bool`), duck-typed.
+- **Pista diferida (134):** `avanzar(dt)` + `pista_diferida_disponible()` (`DEMORA_PISTA_S=90.0`);
+  `reiniciar_espera()` la vuelve a bloquear ante cualquier progreso real.
+- **Pista de familia textual (135):** `pista_familia()` (derivada de la familia declarada).
+- **Pista de emisor exacto (136):** `pista_emisor_exacto()` (deriva de `PuzzleDef.solucion_minima`).
+- **Solución paso a paso tras 3 pistas (137):** `solucion_paso_a_paso()` exige `PISTAS_PARA_SOLUCION=3` y
+  devuelve `[]` antes (no regala la solución).
+- **Pistas ancladas a las reglas del grafo (138):** `pista_anclada_a_grafo()` deriva de
+  `PuzzleDef.reglas_def` (receptor ← conjunto de emisores). Probado EN VIVO: si el receptor cambia en los
+  datos, la pista cambia.
+- **Elección libre sin penalización (139):** `usar_pista()` solo incrementa el contador; `penalizacion()`
+  devuelve siempre 0 (probado tras 5 pistas).
+
+**Esquema de datos (ejemplo `pistas_01.json`):**
+
+```json
+{
+  "emisores": [{"id": 0, "tipo": "placa", "etiqueta": "placa_estatica"},
+               {"id": 1, "tipo": "placa", "etiqueta": "placa_dinamica"}],
+  "reglas":   [{"emisores": [0, 1], "receptor": "puerta_pistas"}],
+  "objetivo": [0, 1],
+  "pistas": {"capas": ["ambiental", "diario", "total"], "demora_segundos": 90,
+             "pistas_para_solucion": 3, "categoria_diario": "templos"}
+}
+```
+
+**Anclas reales (verificadas por archivo):** `scripts/diario/diary_service.gd`
+(`registrar(entrada_id, categoria)`), `scripts/templos/templo_telemetria.gd`
+(`registrar_intento(puzzle_id, pistas_usadas)`).
+
+**Justicia:** ambos puzzles tienen 1 solución mínima == objetivo. La **sonda roja** prueba la capa EN VIVO
+(definición vacía, sin familia, sin reglas) y la DERIVACIÓN (receptor mutado → la pista lo cita; regla
+reducida a `[0]` → el emisor exacto deja de citar el 1).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1438.

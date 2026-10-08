@@ -2,14 +2,14 @@
 
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-10-07 18:41 (GMT-3) — iter. 4
+**Fecha:** 2026-10-07 21:20 (GMT-3) — iter. 5
 **Godot:** 4.7.2-stable (win64, `--headless`)
 **Cierra:** ítem 173 del `05-Checklist.md`.
 **Plan:** `06-Plan-Testings.md`.
 
 Todas las cifras de esta página son **MEDIDAS** en esta fecha (no estimadas ni heredadas).
 
-## 1. Suites (última corrida — 2026-10-07 18:41, iter. 4)
+## 1. Suites (última corrida — 2026-10-07 21:20, iter. 5)
 
 | Suite | Checks | Fallos | EXIT | SCRIPT ERROR | Piso |
 |---|---|---|---|---|---|
@@ -18,13 +18,21 @@ Todas las cifras de esta página son **MEDIDAS** en esta fecha (no estimadas ni 
 | `test_puzzle_espejos.gd` | 62 | 0 | 0 | 0 | `CHECKS_MINIMOS=62` (medido) |
 | `test_puzzle_datos.gd` | 42 | 0 | 0 | 0 | `CHECKS_MINIMOS=42` (medido) |
 | `test_puzzle_multilateral.gd` | 38 | 0 | 0 | 0 | `CHECKS_MINIMOS=38` (medido) |
+| `test_puzzle_agua.gd` | 57 | 0 | 0 | 0 | `CHECKS_MINIMOS=57` (medido) |
+| `test_puzzle_hielo.gd` | 59 | 0 | 0 | 0 | `CHECKS_MINIMOS=59` (medido) |
+| `test_puzzle_gravedad.gd` | 59 | 0 | 0 | 0 | `CHECKS_MINIMOS=59` (medido) |
+| `test_puzzle_sonido.gd` | 54 | 0 | 0 | 0 | `CHECKS_MINIMOS=54` (medido) |
+| `test_puzzle_pistas.gd` | 58 | 0 | 0 | 0 | `CHECKS_MINIMOS=58` (medido) |
 | `test_puzzles.gd` | — | 0 | 0 | 0 | — (suite original Hy3) |
 | `test_templo_m26.gd` | 92 | 0 | 0 | 0 | — |
 | `test_templo_headless.gd` | 4 | 0 | 0 | 0 | — |
 
 `test_puzzle_bloques.gd`: **64/0 EXIT 0 ×3** (3 corridas consecutivas, 0 `SCRIPT ERROR`).
 `test_puzzle_luz.gd`: **60/0 EXIT 0 ×3** · `test_puzzle_espejos.gd`: **62/0 EXIT 0 ×3** (0 `SCRIPT ERROR`).
-`test_regresion_templos.gd` (gate): **51/0 EXIT 0 ×3**, total MEDIDO **362** == piso total **362**.
+`test_puzzle_agua.gd`: **57/0 EXIT 0 ×3** · `test_puzzle_hielo.gd`: **59/0 EXIT 0 ×3** ·
+`test_puzzle_gravedad.gd`: **59/0 EXIT 0 ×3** · `test_puzzle_sonido.gd`: **54/0 EXIT 0 ×3** ·
+`test_puzzle_pistas.gd`: **58/0 EXIT 0 ×3** (0 `SCRIPT ERROR` en las 5).
+`test_regresion_templos.gd` (gate): **76/0 EXIT 0 ×3**, corre las **13 suites**, total MEDIDO **649** == piso total **649**.
 
 ## 2. Sonda roja — familia bloques (condición del director, ítems 84-87)
 
@@ -78,6 +86,22 @@ Ambas inyecciones se revirtieron; la suite quedó en **64/0 EXIT 0**.
 
 Ambas inyecciones se revirtieron; las suites quedaron en 60/0 y 62/0 EXIT 0.
 
+## 2ter. Sondas rojas — familias iter. 5 y gate EN VIVO (2026-10-07 21:20)
+
+Las 5 suites nuevas traen su propio bloque D de sonda roja (mutaciones sobre COPIAS en memoria; los datos
+reales no se tocan). Ver detalle en §3.
+
+**Sonda roja EN VIVO del gate (condición 1 del director, msg 81).** Para probar que el gate se rompe
+cuando una familia deja de funcionar (no solo si baja el conteo global) se mutó el JSON REAL
+`data/templos/puzzles/agua/agua_01.json` (`"caudal": 2` → `3`) y se corrió el gate:
+
+- Corrida con el JSON mutado: `[INFO] test_puzzle_agua: EXIT=1 checks=57 fallos=5 SCRIPT_ERROR=0` ·
+  `=== Resumen M24-Regresion: 76 checks, 2 fallos ===` · **GATE EXIT=1**, con los checks
+  `A: test_puzzle_agua — EXIT 0` y `A: test_puzzle_agua — 0 fallos` marcados como `[FALLO]`.
+- **Restauración byte-exacta:** sha256 antes == después ==
+  `af65594038546fce8757e243e97e71cd0c38ce3db517019e59e78a6dcd48fd8b`.
+- Re-corrida tras restaurar: **76/0 EXIT 0** (gate verde; ver §1).
+
 ## 3. Sondas in-memory permanentes (bloque D de cada suite)
 
 - `test_puzzle_bloques.gd` bloque D: eje inválido → `validar_espacial` falla con "eje 'z' no
@@ -90,6 +114,23 @@ Ambas inyecciones se revirtieron; las suites quedaron en 60/0 y 62/0 EXIT 0.
   rayo NO llega; ambigüedad (2 caminos OR) → 2 mínimas.
 - `test_puzzle_espejos.gd` bloque D: rotación de espejo fijo rechazada; rotación no múltiplo de 45
   rechazada; rotación de espejo inexistente rechazada; ambigüedad → 2 mínimas.
+- `test_puzzle_agua.gd` bloque D: umbral 0 → "umbral 0 invalido"; emisor 9 → "emisor 9 inexistente";
+  caudal 0 → "caudal 0 invalido"; destino == origen → "destino == posicion inicial"; sin fuentes el nivel
+  nunca sube y el receptor no se activa; con caudal 1 hacen falta 6 ticks (sin snap).
+- `test_puzzle_hielo.gd` bloque D: usos 0 → "usos 0 invalido"; pared+hueco en la misma celda → "pared y
+  hueco a la vez"; emisor 9 → "emisor 9 inexistente"; simetría rota → "sin reflejo"; eje `z` → "invalida";
+  bloque sobre pared → "ya ocupada por pared"; bloque detenido por otro bloque (sonda sintética).
+- `test_puzzle_gravedad.gd` bloque D: periodo 0 · amplitud 0 · dir (0,0) · emisor 9 · grupo con periodos
+  distintos → "no estan sincronizadas" · sin plataformas → "sin plataformas" · pulso duración 99 →
+  "fuera de" · zona [0,0] → "zona invalida"; y semánticas: sin burbujas → gravedad por defecto; sin
+  plataformas el receptor nunca se activa.
+- `test_puzzle_sonido.gd` bloque D: secuencia de 2 y de 6 → "se exige entre 3 y 5"; emisor 9 → "emisor 9
+  inexistente"; secuencia con campana inexistente → "campana inexistente"; sin campanas → "sin campanas";
+  semánticas: secuencia equivocada nunca resuelve; campana inexistente no rompe el intento.
+- `test_puzzle_pistas.gd` bloque D: definición vacía → "definicion vacia"; sin familia → "sin familia
+  declarada"; sin reglas → "sin reglas"; y derivación EN VIVO: receptor mutado → la pista lo cita (y deja
+  de citar el original); regla reducida a `[0]` → el emisor exacto deja de citar el 1; 0 pistas → la
+  solución paso a paso es `[]`.
 
 ## 4. Rendimiento MEDIDO (ítem 171)
 
@@ -106,6 +147,16 @@ Ambas inyecciones se revirtieron; las suites quedaron en 60/0 y 62/0 EXIT 0.
 | rotar + re-trazado (espejos_01) | 22.2500 µs/tick (0.022250 ms) | ≤ 1 ms | OK |
 | rotar + re-trazado (espejos_02) | 12.5980 µs/tick (0.012598 ms) | ≤ 1 ms | OK |
 | `validar_espejos(espejos_01)` (autoría) | 51.03 µs (0.0510 ms) | < 10 ms | OK |
+| `tick()` (agua_01) | 7.4944 µs/tick (0.007494 ms) | ≤ 1 ms | OK |
+| `validar_agua(agua_01)` (autoría) | 32.92 µs (0.0329 ms) | < 10 ms | OK |
+| `cargar + deslizar` (hielo_02) | 51.13 µs (0.0511 ms) | ≤ 5 ms | OK |
+| `validar_hielo(hielo_02)` (autoría) | 45.84 µs (0.0458 ms) | < 10 ms | OK |
+| `tick()` (gravedad_01) | 7.8618 µs/tick (0.007862 ms) | ≤ 1 ms | OK |
+| `validar_gravedad(gravedad_01)` (autoría) | 64.90 µs (0.0649 ms) | < 10 ms | OK |
+| `cargar + tocar_secuencia` (sonido_02) | 89.39 µs (0.0894 ms) | ≤ 5 ms | OK |
+| `validar_sonido(sonido_02)` (autoría) | 33.79 µs (0.0338 ms) | < 10 ms | OK |
+| `cargar + derivar 2 pistas` (pistas_01) | 17.89 µs (0.0179 ms) | ≤ 5 ms | OK |
+| `validar_pistas(pistas_01)` (autoría) | 11.00 µs (0.0110 ms) | < 10 ms | OK |
 
 Los valores en µs varían entre corridas (dependen de la máquina); lo que sostiene el veredicto es el
 **orden de magnitud**: el tick queda ~2 órdenes por debajo del umbral de 1 ms.
@@ -117,8 +168,9 @@ declaran resultados. El plan por familia está en `06-Plan-Testings.md` §2.
 
 ## 6. Regresión
 
-Las 8 suites de M24 corren en verde (tabla §1). El gate `test_regresion_templos.gd` las corre como
-subprocesos y exige, por suite, `EXIT 0` + 0 `SCRIPT ERROR` + checks ≥ su piso; total MEDIDO **362**
-== piso total **362** (51 checks, 0 fallos, EXIT 0 ×3). No se modificó ningún archivo de otro módulo.
+Las **13 suites** de M24 corren en verde (tabla §1). El gate `test_regresion_templos.gd` las corre como
+subprocesos y exige, por suite, `EXIT 0` + 0 `SCRIPT ERROR` + checks ≥ su piso; total MEDIDO **649**
+== piso total **649** (76 checks, 0 fallos, EXIT 0 ×3). Se probó EN VIVO que el gate se rompe si una
+familia falla (§2ter). No se modificó ningún archivo de otro módulo.
 
-**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1431 (iter. 4).
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1438 (iter. 5).

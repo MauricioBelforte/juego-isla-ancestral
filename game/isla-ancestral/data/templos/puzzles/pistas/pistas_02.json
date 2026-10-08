@@ -1,0 +1,19 @@
+{
+	"id": "pistas_02",
+	"familia": "luz",
+	"schema_version": 1,
+	"descripcion": "Puzzle de luz con un unico emisor y pistas derivadas del grafo.",
+	"emisores": [
+		{"id": 0, "tipo": "cristal", "etiqueta": "cristal_pistas"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "runa_pistas"}
+	],
+	"objetivo": [0],
+	"pistas": {
+		"capas": ["ambiental", "diario", "total"],
+		"demora_segundos": 90,
+		"pistas_para_solucion": 3,
+		"categoria_diario": "templos"
+	}
+}

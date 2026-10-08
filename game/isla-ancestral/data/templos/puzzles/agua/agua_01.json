@@ -1,0 +1,26 @@
+{
+	"id": "agua_01",
+	"familia": "agua",
+	"schema_version": 1,
+	"descripcion": "Una fuente llena la camara; al superar el umbral la compuerta se abre y la barca cruza.",
+	"emisores": [
+		{"id": 0, "tipo": "compuerta", "etiqueta": "compuerta_norte"},
+		{"id": 1, "tipo": "barca", "etiqueta": "barca_este"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "puerta_agua"}
+	],
+	"objetivo": [0, 1],
+	"agua": {
+		"grilla": {"ancho": 5, "alto": 3},
+		"fuentes": [
+			{"id": "fuente_a", "pos": [1, 1], "caudal": 2, "max": 12}
+		],
+		"compuertas": [
+			{"id": "compuerta_a", "pos": [1, 1], "umbral": 6, "emisor": 0}
+		],
+		"barcas": [
+			{"id": "barca_a", "pos": [1, 1], "umbral": 6, "destino": [3, 1], "emisor": 1}
+		]
+	}
+}

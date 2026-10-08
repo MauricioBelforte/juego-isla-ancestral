@@ -1,0 +1,28 @@
+{
+	"id": "hielo_02",
+	"familia": "hielo",
+	"schema_version": 1,
+	"descripcion": "Dos bloques simetricos entre paredes centrales: el hielo agrietado se rompe al segundo paso y el hueco consume al bloque que lo pisa.",
+	"emisores": [
+		{"id": 0, "tipo": "ranura", "etiqueta": "ranura_oeste"},
+		{"id": 1, "tipo": "ranura", "etiqueta": "ranura_este"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "puente_hielo_2"}
+	],
+	"objetivo": [0, 1],
+	"hielo": {
+		"grilla": {"ancho": 7, "alto": 3},
+		"simetria": "x",
+		"paredes": [[2, 1], [4, 1]],
+		"huecos": [[1, 0], [5, 0]],
+		"bloques": [
+			{"id": "bloque_a", "pos": [0, 1], "emisor": 0},
+			{"id": "bloque_b", "pos": [6, 1], "emisor": 1}
+		],
+		"pedazos": [
+			{"pos": [1, 1], "usos": 2},
+			{"pos": [5, 1], "usos": 2}
+		]
+	}
+}

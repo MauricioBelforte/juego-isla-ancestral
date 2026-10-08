@@ -1,0 +1,22 @@
+{
+	"id": "sonido_01",
+	"familia": "sonido",
+	"schema_version": 1,
+	"descripcion": "Tres campanas: tocar la secuencia correcta (3 simbolos) activa la runa sonora.",
+	"emisores": [
+		{"id": 0, "tipo": "runa", "etiqueta": "runa_sonora"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "puerta_sonido"}
+	],
+	"objetivo": [0],
+	"sonido": {
+		"grilla": {"ancho": 4, "alto": 1},
+		"campanas": [
+			{"id": "c1", "pos": [0, 0], "tono": 1, "emisor": 0},
+			{"id": "c2", "pos": [1, 0], "tono": 2, "emisor": 0},
+			{"id": "c3", "pos": [2, 0], "tono": 3, "emisor": 0}
+		],
+		"secuencia": ["c1", "c2", "c3"]
+	}
+}

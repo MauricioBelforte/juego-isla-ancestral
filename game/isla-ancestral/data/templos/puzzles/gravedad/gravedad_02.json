@@ -1,0 +1,29 @@
+{
+	"id": "gravedad_02",
+	"familia": "gravedad",
+	"schema_version": 1,
+	"descripcion": "Dos burbujas de gravedad opuestas cambian la direccion del desplazamiento; un pulso de aire y una cinta completan la sala.",
+	"emisores": [
+		{"id": 0, "tipo": "runa", "etiqueta": "runa_movil"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "puerta_gravedad_2"}
+	],
+	"objetivo": [0],
+	"gravedad": {
+		"grilla": {"ancho": 6, "alto": 4},
+		"burbujas": [
+			{"id": "burbuja_oeste", "zona": [0, 0, 3, 4], "dir": [-1, 0]},
+			{"id": "burbuja_este", "zona": [3, 0, 3, 4], "dir": [1, 0]}
+		],
+		"plataformas": [
+			{"id": "plat_a", "pos": [1, 3], "grupo": "g1", "amplitud": 1, "periodo": 4, "emisor": 0}
+		],
+		"pulsos": [
+			{"id": "pulso_a", "periodo": 4, "duracion": 1}
+		],
+		"cintas": [
+			{"id": "cinta_a", "pos": [2, 1], "dir": [0, -1]}
+		]
+	}
+}
