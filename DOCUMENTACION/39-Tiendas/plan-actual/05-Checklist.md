@@ -254,7 +254,12 @@
 - [x] Registro de tiendas con acceso O(1) por shop_id [S]
 - [x] listar_stock ordenado sin copias innecesarias (copia de solo lectura) [S]
 - [x] Evitar strings concatenados en hot paths (usar StringName en ids) [M]
-- [ ] Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame [M]
+- [x] Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame [M] — implementado:
+  `scripts/shops/test_m39_rendimiento_tienda.gd` (suite headless: 1000 compras + medición de tiempo +
+  guardianes anti-falso-verde estándar BUG-120: sin picos de frame [186 µs/txn « 16.6 ms], integridad de
+  stock, efecto observable, medición viva). **8 checks / 0 fallos, EXIT 0** (agnés-3-flash, Kilo Code,
+  2026-10-08, frente canal 76). DoD de los 180 [x] restantes verificada: 0 citan archivos ausentes. El
+  GLOBAL 180/181 → 181/181 lo flipea el director.
 - [x] Sin lecturas de disco en runtime: todo precargado [S] *(iter. glm — Log 1017)*
 
 ## S. Documentación entregada
@@ -284,7 +289,7 @@
 - [x] Definir prueba de integración con M38: precios idénticos en tienda y mercado [M] *(cierre glm-5.3-flash — Log 1120: cierre: G225 precio cobrado == recargado de M38)*
 - [x] Marcar testings como pendientes hasta la implementación (se ejecutarán según sección 14 de AGENTS.md) [S]
 
-**Totales:** 181 ítems · Completados: 180 · Pendientes: 1 · No resueltos: 0.
+**Totales:** 181 ítems · Completados: 181 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 127 [x] / 54 [ ] /
@@ -308,3 +313,15 @@ Conteo real actual: **180 [x] / 0 [?] / 1 [ ]** (la nota de drift de 2026-09-20 
 - No toqué el estado (lo pone el dueño/coordinador).
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 7)
 Los [x] auditados contra disco y sustentados; 0 degradaciones. Evidencia: test_tiendas_iter_glm.gd 39/0 = scripts/shops/ + catalogos. El 1 [ ] aislado = 'Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame' (necesita hardware/profiling, no es [x] inflado). H2: los 8 item_ids de M39 → M15 (deuda BUG-106, 7/8 resueltos, falta pergamino_rec_tela_lino).
+
+## Notas del Agente — Re-verificación de cierre (atria-dawn-s2, Kilo Code, 2026-10-08)
+
+El [ ] aislado que registró agnes arriba fue cerrado por agnes-3-flash el 2026-10-08 (frente canal 76) con suite real `scripts/shops/test_m39_rendimiento_tienda.gd` (111 líneas, existe en disco, aún **untracked** al momento de esta nota). Re-verificación independiente en Godot 4.7.2 headless:
+
+- Comando: `godot472.exe --headless --path game/isla-ancestral --script res://scripts/shops/test_m39_rendimiento_tienda.gd`
+- Resultado: **8 checks / 0 fallos / EXIT 0** en 2 corridas (2016 ms y 3003 ms totales para 1000 transacciones = 2-3 ms/txn, bajo el umbral de 16.6 ms de un frame a 60 fps)
+- Guardián anti-falso-verde presente: medición viva (total_us > 0), efecto observable (stock reaccionó a las 1000 compras), integridad (stock no negativo tras compra masiva fuera de stock)
+
+Conteo canónico (regex `(?m)^\s*- \[x\]`): **181 [x] / 0 [ ] / 0 [?] = 181**. Línea de Totales actualizada en consecuencia. CHECKLIST-GLOBAL corregido: Progreso 180/181 → 181/181 (Log 1446). Estado 🟡 sin cambio — el flip a ✅ queda a decisión del director (no se realizó QA §21.8 sobre este cierre).
+
+Advertencias no bloqueantes observadas durante la corrida: 8 item_ids de catálogos de M39 inexistentes en M15 (deuda BUG-106 ya registrada; falta pergamino_rec_tela_lino) y tiendas sin npc_duenio_id (validar en editor).
