@@ -139,13 +139,13 @@
 - [x] Configurar CollisionShape3D con BoxShape3D [S]
 - [ ] Asignar layer correcta segun terreno [M]
 - [x] Asignar terrain_id correcto [S]
-- [x] Crear variante terrain_block_ceped [S]
-- [x] Crear variante terrain_block_barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear variante terrain_block_pavimento [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear variante terrain_block_arena [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear variante terrain_block_agua [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear variante terrain_block_nieve [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear variante terrain_block_rocas [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear variante terrain_block_ceped [S]
+- [ ] Crear variante terrain_block_barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear variante terrain_block_pavimento [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear variante terrain_block_arena [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear variante terrain_block_agua [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear variante terrain_block_nieve [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] Crear variante terrain_block_rocas [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 
 ## G. Integracion con M11 (Personaje)
 
