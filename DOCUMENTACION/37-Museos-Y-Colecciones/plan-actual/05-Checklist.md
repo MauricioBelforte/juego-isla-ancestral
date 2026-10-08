@@ -118,7 +118,7 @@
 - [ ] Iteracion ordenada de piezas para la UI [S]
 - [ ] Serializacion to_save_data compatible con el guardado del juego [M]
 - [ ] restore_from_save reconstruye registro y recompensas otorgadas [M]
-- [ ] Reconstruccion de vitrinas visibles al cargar partida [M]
+- [x] Reconstruccion de vitrinas visibles al cargar partida [M] (RF2c: reconstruir_desde_guardado + test RF3, agnes)
 - [ ] Garantia de cero duplicados por clave unica (exposicion, item) [S]
 
 ## H. Exposiciones, recompensas y logros (10)
@@ -152,7 +152,7 @@
 - [ ] Items donables registrados antes de restaurar el museo (cola pendiente) [M]
 - [ ] Inventario vacio al abrir el panel de donacion (UI vacia elegante) [S]
 - [ ] Fallo de senal de modulo origen (M36/M34/M25) sin crasheo [M]
-- [ ] Carga de partida con vitrinas parcialmente pobladas [M]
+- [x] Carga de partida con vitrinas parcialmente pobladas [M] (RF2c: solo lo guardado, test RF3 b2, agnes)
 - [ ] Cierre del juego entre consumo y escritura de guardado (rollback) [M]
 - [ ] Doble interaccion simultanea sobre la misma vitrina [M]
 - [ ] Museo visitado durante fast travel sin corrupcion de estado (M69) [S]
@@ -165,7 +165,7 @@
 - [x] Estado del registro guardado con la partida [M] — iter. 1: ISaveProvider "collections" {piezas, recompensas}; round-trip testeado
 - [x] Estado de recompensas otorgadas guardado [S] — iter. 1: _recompensas persistidas; round-trip restaura is_reward_claimed
 - [ ] Escritura atomica del bloque de museo [M]
-- [ ] Reconstruccion posicional de objetos en vitrinas al cargar [M]
+- [x] Reconstruccion posicional de objetos en vitrinas al cargar [M] (RF2c: place_item por pieza guardada, test RF3, agnes)
 - [ ] Migracion de guardados viejos a nuevas exposiciones [C]
 - [ ] Compatibilidad con el autosave general del juego [S]
 - [ ] Restauracion de curaduria (nombres y descripciones) al cargar [S]
@@ -202,7 +202,7 @@
 - [ ] Test: vitrina ocupada nunca sobrescrita [M]
 - [ ] Test: recompensa otorgada una sola vez en multiples cargas [M]
 - [ ] Test: museo 100% desbloquea el trofeo final [M]
-- [ ] Test: guardar y cargar conserva piezas y vitrinas [M]
+- [x] Test: guardar y cargar conserva piezas y vitrinas [M] (RF2c: test_museo_rf3.gd 0/0 + idempotencia + casos limite, agnes)
 - [ ] Test: integracion de senales con M36/M34/M25/M55 [C]
 - [ ] Test: edge cases (inventario vacio, sala incorrecta, item inexistente) [M]
 - [ ] Recorrido manual: visitar el museo completo tres veces seguidas [C]
@@ -275,3 +275,9 @@ logica verificada, no el 3D/UI.
 - Escena exhibit_slot.tscn creada (vitrina generica reutilizable).
 - test_museo_rf2.gd 0/0 EXIT 0 (estructura voxel: CasoVitrina BoxMesh + PiezaVitrina + place/clear).
 - PENDING: coherencia visual exacta del voxel (verificar con vision/M154 en-editor); registro persistente + reconstruccion posicional (siguiente slice).
+
+## NOTA-AGNES RF2c (persistencia + reconstruccion posicional, 2026-10-08, agnes-3-flash)
+- Museum.reconstruir_desde_guardado(): al cargar (tras restore_save_data del CollectionRegistry), re-puebla las vitrinas con las piezas guardadas (place_item valida slot libre + pertenece, NUNCA sobrescribe). Casos limite: expo huorfana (ignora), pieza sin vitrina (salta), poblacion parcial (solo lo guardado), idempotencia.
+- Persistencia: CollectionRegistry (ISaveProvider 'collections') ya tenia get_save_data/restore_save_data + register_provider; el Museo se sincroniza via refresh_from_registry (ahora delega a reconstruir_desde_guardado). No invente un save nuevo.
+- test_museo_rf3.gd 0/0 EXIT 0 (save->load->reconstruir + idempotencia + expo huorfana + pieza inexistente + parcial). RF1/RF2 siguen 0/0.
+- L111 (Registro persistente) queda cubierto por el ISaveProvider del registry; lo dejo para que el director lo confirme en su flip.

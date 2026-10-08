@@ -49,16 +49,31 @@ func _construir_vitrinas() -> void:
 	# Sincroniza con lo ya registrado (carga de partida / iteraciones previas).
 	refresh_from_registry()
 
+## RF2c: reconstruye las vitrinas pobladas a partir del estado guardado en CollectionRegistry
+## (despues de restore_save_data). Maneja los casos limite sin crash ni sobrescritura:
+##  - exposición desconocida (el restore la ignora ya como "huérfana") → no hay vitrinas, se salta.
+##  - pieza sin vitrina (cambió el catálogo) → se salta.
+##  - vitrina ya ocupada → place_item NO sobrescribe (03-Diseno §4.4).
+##  - población parcial → solo se pueblan las piezas guardadas.
+## Devuelve cuántas vitrinas quedaron pobladas.
+func reconstruir_desde_guardado() -> int:
+	var reg = _collection_registry()
+	var pobladas := 0
+	if reg == null or not reg.has_method("get_registered"):
+		return 0
+	for exid in _vitrinas:
+		var registradas: Array = reg.get_registered(exid)
+		for piece in registradas:
+			var vit = _vitrinas[exid].get(String(piece))
+			if vit == null:
+				continue  # pieza cuya vitrina ya no existe (cambio de catálogo) → ignorar
+			if not vit.is_occupied() and vit.place_item(String(piece)):
+				pobladas += 1
+	return pobladas
+
 ## RF5 / §4.5: sincroniza vitrinas con el registro (piezas donadas ya visibles).
 func refresh_from_registry() -> void:
-	var reg = _collection_registry()
-	if reg == null:
-		return
-	for exid in _vitrinas:
-		for item_id in reg.get_registered(exid):
-			var vit = _vitrinas[exid].get(String(item_id))
-			if vit != null and not vit.is_occupied():
-				vit.place_item(String(item_id))
+	reconstruir_desde_guardado()
 
 ## §5: llena una vitrina (RF5: donación de la pieza a esta exposición). Valida vía
 ## CollectionRegistry.pertenece + no sobrescribe. Devuelve true si quedó.
