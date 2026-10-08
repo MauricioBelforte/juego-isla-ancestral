@@ -18,6 +18,7 @@ extends SceneTree
 
 # Helpers de test (M66, agnes-3-flash): se preanudan para evitar la race de class_name.
 const _M66HandlerRegistro := preload("res://scripts/core/test_m66_handler.gd")
+const _M66InvRuta := preload("res://scripts/core/test_m66_inv_ruta.gd")
 
 var _fallos: int = 0
 
@@ -28,6 +29,7 @@ func _run() -> void:
 	_test_autoload_presente()
 	_test_disparo_guardado()
 	_test_disparo_transicion()
+	_test_cascada_recovery()
 	_test_coherencia_m23()
 	print("=== TEST M66 ANTI-SOFTLOCK ITER2: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
@@ -74,6 +76,29 @@ func _test_disparo_transicion() -> void:
 	_check(sg.activo, "guard sigue activo tras disparo por transición")
 	_check(sg.has_method("forzar_chequeo"), "forzar_chequeo disponible tras transición")
 	_check(sg._invariantes.size() >= 1, "invariantes por defecto registradas (%d)" % sg._invariantes.size())
+
+func _test_cascada_recovery() -> void:
+	# BUG-123 (fix en softlock_guard.gd:133): con el get de 1 arg, la cascada de
+	# recovery rota ahora corre sin SCRIPT ERROR. Una invariante rota emite
+	# estado_invalido_detectado + consulta al handler IRecoverable.
+	var sg := root.get_node_or_null("SoftlockGuard")
+	_check(sg != null, "SoftlockGuard presente para la cascada de recovery")
+	if sg == null:
+		return
+	var rec := _M66HandlerRegistro.new()
+	sg.registrar_handler(rec)
+	var rota := _M66InvRuta.new()
+	sg._invariantes.append(rota)
+	var detectados := [0]
+	sg.estado_invalido_detectado.connect(func(_c: int, _r: String): detectados[0] += 1)
+	# Disparo directo (lo que hacen los conectores de guardado/transición):
+	sg.forzar_chequeo("cascada_test")
+	# CHECK REAL (no tautología): la invariante rota fue detectada + el handler consultado.
+	_check(detectados[0] >= 1, "cascada: invariante rota emite estado_invalido_detectado (%d)" % detectados[0])
+	_check(rec.recuperar_llamadas >= 1, "cascada: handler IRecoverable consultado en recovery (%d)" % rec.recuperar_llamadas)
+	# Limpieza: no ensuciar el guard con los objetos inyectados.
+	sg._invariantes.erase(rota)
+	sg._handlers.erase(rec)
 
 func _test_coherencia_m23() -> void:
 	# M23 (glm-5.3-flash): las cadenas pasan el validador anti-softlock

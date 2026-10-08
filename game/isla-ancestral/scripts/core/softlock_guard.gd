@@ -130,7 +130,12 @@ func registrar_fallback(objetivo_id: String, alternativo_id: String) -> void:
 func _check_and_recover(inv) -> void:
 	if not inv.has_method("check") or inv.check():
 		return
-	var categoria := int(inv.get("categoria", 0)) if inv.has_method("get") else 0
+	# BUG-123 fix (agnes-3-flash, 2026-10-08): inv.get("categoria", 0) era un get de
+	# 2 args sobre un Object/RefCounted → ERROR de runtime cuando la invariante está
+	# rota (L133 era el único camino que lo pisaba, por el early-return de L131).
+	# get de 1 arg (válido en Object, devuelve null si no existe) + null-safe.
+	var _cat_raw: Variant = inv.get("categoria") if inv.has_method("get") else null
+	var categoria := int(_cat_raw) if _cat_raw != null else 0
 	var razon := ""
 	if inv.has_method("_razon_fallo"):
 		razon = inv._razon_fallo()
