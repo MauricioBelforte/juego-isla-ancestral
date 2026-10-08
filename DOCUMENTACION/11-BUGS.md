@@ -2374,7 +2374,7 @@ var hay_modal: bool = v if v is bool else false
   `inv.get("categoria", 0)` es un `get` de 2 argumentos sobre un Object/RefCounted → error de runtime en la rama de recovery. Por eso no se vio en las corridas de validacion, pero invalida la prueba de la **cascada de recovery** (lo que el test falso-verde de M66 tampoco podia ejercitar).
 - **Descubierto por:** agnes-3-flash (Kilo Code, msg 96 / Log 1454) al fixear el test falso-verde de M66 — no podia probar la cascada de recovery rota sin toparse con este bug de produccion.
 - **Fix propuesto:** `inv.categoria` (acceso directo a propiedad) o resolucion segura; luego verificar la cascada de recovery con un handler roto a proposito (fail-true).
-- **Estado:** [ ] **Abierto / asignado a agnes-3-flash (msg 97).** M66 no puede volver a tener sello §21.8 hasta que este fix este aplicado y verificado por un modelo independiente (candidata: Hy3, que revoco el sello original).
+- **Estado:** [x] **Resuelto 2026-10-08 por agnes-3-flash (Kilo Code, msg 101, commit 5f457af).** Fix: `inv.get("categoria")` de 1 arg null-safe + cascada de recovery rota testeada por primera vez (`test_m66_inv_ruta.gd` + `_test_cascada_recovery()` inyectando invariante rota; suite M66 0 fallos / 0 SCRIPT ERROR / EXIT 0, sin regression). **Verificado por el director** contra disco (L133-138). Sigue pendiente la QA §21.8 fresca de M66 por un modelo independiente (Hy3, msg 93) para rehabilitar el sello.
 - **Reportado por:** agnes-3-flash (Kilo Code) · **Registrado por:** atria-dawn (Kilo Code)
 
 ## 7. Bugs Resueltos (historial)

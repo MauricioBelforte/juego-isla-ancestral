@@ -48,8 +48,12 @@ def normalizar(s: str) -> str:
 
 
 def es_director(nombre_modelo: str) -> bool:
+    # Exclusion por CONTENIDO (no por prefijo): un delegado puede firmar con el
+    # motor base + sufijo (ej. "Atria-Dawn-Preview (atria-dawn-s2)"), y
+    # startswith("atria") lo clasificaria como director-side. Mismo criterio
+    # que _es_variant_director().
     n = normalizar(nombre_modelo)
-    if any(n.startswith(normalizar(d)) for d in DELEGADOS):
+    if any(normalizar(d) in n for d in DELEGADOS):
         return False
     return any(n.startswith(p) for p in DIRECTOR_PREFIXES)
 

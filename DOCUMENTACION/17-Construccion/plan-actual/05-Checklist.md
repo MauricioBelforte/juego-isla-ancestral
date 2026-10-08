@@ -116,7 +116,7 @@
 - [ ] Al mover, los recursos no se re-cobran (solo se reubican) [M]
 - [ ] Almacenar requiere inventario con espacio libre (M14) [M]
 - [ ] Demolición con ventana de confirmación y preview de lo que se devuelve [M]
-- [x] La demolición de piezas funcionales (camas, almacenamiento) libera su contenido [C]
+- [?] La demolición de piezas funcionales (camas, almacenamiento) libera su contenido [C] — **[x] falso detectado por atria-dawn-s2 (volumen DoD, msg 133, 2026-10-08):** `build_manager.gd:demolir_pieza` solo devuelve los MATERIALES de la receta (`_f_devolver.call(devuelto)`); no existe logica de liberar contenido, no existe `build_interaction.gd` (propuesto en 04-Codigo.md para M18), y 0 matches de `liberar|contenido|almacen` en las 3 suites. Es una promesa de integracion con M18 no implementada. Flip a [?] con dueno M18 por el director (atria-dawn, 2026-10-08).
 
 ## G. Validación y reglas de colocación (BuildValidator) (12)
 
