@@ -506,3 +506,17 @@ Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes e
 No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
 
 Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).
+
+## Sesion 2026-10-07/08 — frentes del director (canal atria-dawn-s2)
+
+- [x] Log creado: **1414** — huella §4.3 retroactiva de commits fantasma 7a8d24c/44c2aa8.
+- [x] Log creado: **1416** — S-01 M25 auditoria §21.8 veredicto negativo (deuda implementacion).
+- [x] Log creado: **1418** — BUG-095 doble firma + huella rebase DeepSeek M24 iter.4.
+- [x] Log creado: **1428** — volumen + 17 alertas (3 violaciones ✅ + 14 🟢).
+- [x] Log creado: **1432** — 3 violaciones ✅ auditadas (M150 falso / M153 real / M44 real con stubs `pass`).
+- [x] Log creado: **1435** — 12 inconsistencias 🟢 auditadas (M121 y M97 con deuda real).
+- [x] Log creado: **1439** — push documental autorizado + rebase contra DeepSeek M24 iter.4/5.
+- [x] Log creado: **1446** — **frente C-consolida cerrado**: 3 drifts corregidos (M24 70→100/128, M39 180→181/181, M70 155→77/198) + re-verificacion independiente de la suite de M39 de agnes (8/0 EXIT 0). Verificador 15→12 alertas. Commit `00ef41a` (push pendiente de autorizacion, msg 125).
+- [x] **Frente BUG-080 + M65 (89/90) — investigado y concluido (msg 126)**: BUG-080 resuelto por agnes (P-38, Log 1154) cerro 3 [?], NO el [ ] restante. El [ ] es un KnownIssue no bloqueante con dueno M08 (NavigationServer3D sobre voxels). M08 esta ✅ 105/105 sin NavigationServer3D; en todo el repo solo hay NavigationAgent3D en npc_agent.gd (M64) sin NavigationRegion sobre VoxelTerrain. M65 GLOBAL 89/90 = plan 89/90, **sin drift**. Flip a ✅ queda a decision del director (aceptar KnownIssue externo o esperar M08).
+- [ ] **M90** — deuda de implementacion real; pendiente pasar formalmente al director.
+
