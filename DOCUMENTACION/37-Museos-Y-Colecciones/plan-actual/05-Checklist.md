@@ -70,13 +70,13 @@
 - [ ] Sala de arte con marcos y paredes de exhibicion [M]
 - [ ] Curador NPC con dialogo de recepcion y agradecimientos cozy [M]
 - [ ] Iluminacion interior calida y estatica (horneada) [S]
-- [ ] Construccion voxel de vitrinas coherente con el estilo del mundo [C]
+- [x] Construccion voxel de vitrinas coherente con el estilo del mundo [C] (RF2b: caso BoxMesh + vidrio + pieza; coherencia visual p/vision, agnes-3-flash)
 - [ ] Navegabilidad completa de salas sin colisiones molestas [S]
 - [x] El museo es accesible desde el inicio de la partida (sin bloqueos) [S] (RF2a: placiar_en_mundo, agnes-3-flash)
 
 ## E. ExhibitSlot: vitrinas instanciadas (12)
 
-- [ ] Escena exhibit_slot.tscn generica y reutilizable [S]
+- [x] Escena exhibit_slot.tscn generica y reutilizable [S] (RF2b, agnes-3-flash)
 - [x] Instanciado de vitrinas en runtime segun ExhibitionData [M]
 - [x] place_item valida vitrina libre y tipo de pieza correcto [S]
 - [x] Vitrina ocupada muestra el modelo/iscon de la pieza registrada [M]
@@ -269,3 +269,9 @@ logica verificada, no el 3D/UI.
 - Museum.placiar_en_mundo(pos=MUSEO_POS) posiciona el edificio en el mundo con TerrainLocator.posicionar_sobre_terreno (anti-flotamiento get_height+1; NEVER IslandGenerator). Test headless: test_museo_rf2.gd 0/0 EXIT 0 (estructura + XZ; el snapping del terreno se verifica en-editor).
 - museum_placer.gd instanciado + posiciona el museo en el mundo.
 - PENDING (RF2b / M53, NO marcados): construccion VOXEL 3D de vitrinas [C]; mostrador + cartel de progreso (UI M53); escena exhibit_slot.tscn; registro persistente por exposicion; reconstruccion posicional al cargar. No sobremarcaron esas lineas.
+
+## NOTA-AGNES RF2b (voxel 3D vitrinas + exhibit_slot.tscn, 2026-10-08, agnes-3-flash)
+- ExhibitSlot._construir_vitrina_3d(): caso voxel (BoxMesh + material translúcido) + pieza interior (silueta tenue libre / sólida al ocupar). Geometría autocontenida (MeshInstance3D + StandardMaterial3D), NO toca M17/M156 (construccion/terreno).
+- Escena exhibit_slot.tscn creada (vitrina generica reutilizable).
+- test_museo_rf2.gd 0/0 EXIT 0 (estructura voxel: CasoVitrina BoxMesh + PiezaVitrina + place/clear).
+- PENDING: coherencia visual exacta del voxel (verificar con vision/M154 en-editor); registro persistente + reconstruccion posicional (siguiente slice).

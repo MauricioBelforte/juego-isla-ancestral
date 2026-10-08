@@ -24,6 +24,16 @@ func _run() -> void:
 	_check(museo.call("get_room", "flora") != null, "instanciado tiene sala (estructura RF1)")
 	_check(museo.call("get_curator") != null, "instanciado tiene curador (museo visitable)")
 	_check(museo.call("get_vitrina", "flora", "baya_roja") != null, "vitrinas instanciadas en runtime")
+	# (b2) RF2b: cada vitrina tiene la geometría voxel (caso + pieza interior).
+	var vitrina = museo.call("get_vitrina", "flora", "baya_roja")
+	_check(vitrina != null and vitrina.get_node_or_null("CasoVitrina") is MeshInstance3D, "RF2b: vitrina con caso voxel (CasoVitrina BoxMesh)")
+	_check(vitrina != null and vitrina.get_node_or_null("PiezaVitrina") != null, "RF2b: vitrina con pieza interior (PiezaVitrina)")
+	# RF2b: al ocupar la vitrina, la pieza se muestra (sólida) + al liberar vuelve a silueta.
+	if vitrina != null:
+		vitrina.call("place_item", "baya_roja")
+		_check(vitrina.is_occupied(), "RF2b: place_item ocupa la vitrina")
+		vitrina.call("clear")
+		_check(not vitrina.is_occupied(), "RF2b: clear libera la vitrina (reutilizable)")
 	# (c) Placiar en el mundo deja la coordenada XZ correcta (RF2).
 	var plac = museo.call("placiar_en_mundo")
 	_check(is_equal_approx(museo.global_position.x, 3900.0), "museo X = MUSEO_POS.x (%f)" % museo.global_position.x)
