@@ -385,3 +385,52 @@ que este proyecto rechaza con warnings-as-errores.
 - \or i, x in enumerate(arr)\ (destructuring no soportado aqui) -> \or i in range(arr.size())\.
 - Slice de String (\s[6:]\) -> \s.substr(6)\. Y \String.is_upper()\ inexistente -> comparacion to_upper/to_lower.
 El script ahora compila sin errores. Verificado con godot --headless --check-only.
+## Rutas — estado real (reconciliación plan↔disco)
+
+**Agregado por:** atria-dawn-s3 (Atria-Dawn-Preview) / Kilo Code
+**Fecha:** 2026-10-08
+**Motivo:** auditoría O3/M111-drift de DeepSeek — las rutas citadas en el árbol §1 y la tabla
+§11 no coinciden con el disco. **No se elimina ni modifica contenido existente**; esta sección es
+aclaratoria.
+
+### Archivos del árbol §1 que SÍ existen donde se cita
+
+Verificado una por una el 2026-10-08:
+
+- `scripts/interfaces/i_interactable.gd` ✅
+- `scripts/interfaces/i_damageable.gd` ✅
+- `scripts/interfaces/i_saveable.gd` ✅
+- `scripts/utils/math_utils.gd` ✅
+- `scripts/utils/validation_utils.gd` ✅
+- `scripts/utils/format_utils.gd` ✅
+
+### Archivos citados que NO existen en esa ruta — y su ubicación real
+
+| Ruta citada | Estado | Ruta real (2026-10-08) |
+|---|---|---|
+| `scripts/patterns/state_machine.gd` | **No existe ahí** | `scripts/utils/state_machine.gd` y `scripts/ia_npc/state_machine.gd` (dos implementaciones) |
+| `scripts/patterns/observer.gd` | **No existe en absoluto** | — (referencial/histórico) |
+| `scripts/patterns/factory.gd` | **No existe ahí** | `scripts/utils/factory.gd` |
+| `scripts/patterns/command.gd` | **No existe ahí** | `scripts/utils/command.gd` |
+| `scripts/tools/code_quality_check.gd` | **No existe ahí** | `scripts/editor/code_quality_check.gd` (citado correctamente en §12 L370) |
+| `scripts/tools/lint_runner.gd` | **No existe en absoluto** | — (referencial/histórico; "Runner de linters (opcional)") |
+| `scripts/constants/game_constants.gd` | **No existe ahí** | `scripts/utils/game_constants.gd` |
+| `scripts/enums/game_enums.gd` | **No existe ahí** | `scripts/utils/game_enums.gd` |
+| `scripts/data/structs.gd` | **No existe en absoluto** | — (marcado "IMPLEMENTACIÓN INMEDIATA" en la tabla §11 L321) |
+
+### Síntesis
+
+- **El árbol §1 es prospectivo** (estructura planificada), no descriptivo: de sus 16 archivos,
+  6 existen donde se cita, 6 existen en otra ruta (todas bajo `scripts/utils/`, más
+  `code_quality_check` en `scripts/editor/`), y **3 no existen en absoluto**
+  (`observer.gd`, `lint_runner.gd`, `structs.gd`).
+- **La carpeta `scripts/patterns/` no existe** en disco — los patrones implementados viven en
+  `scripts/utils/`. Mismo con `scripts/tools/`, `scripts/constants/`, `scripts/enums/` y
+  `scripts/data/`.
+- **Ningún `[x]`** del checklist afirma la existencia de los archivos faltantes: la tabla §11
+  (L315-321) los marca todos como "IMPLEMENTACIÓN INMEDIATA" (verbos de creación, no claims de
+  existencia). No hay claims falsos — hay **drift entre el árbol planificado y la estructura
+  real**.
+- **`code_quality_check.gd`** está correctamente documentado en §12 (L370) como
+  `scripts/editor/code_quality_check.gd` — es la única ruta real que el documento acertó fuera
+  del árbol §1.

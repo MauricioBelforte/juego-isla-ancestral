@@ -1112,3 +1112,11 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - [ ] **Pendiente (director):** flip de la fila 24 del GLOBAL a 43/128; autorizacion de push (al cierre de la iteracion).
 - [ ] **Pendiente (s2):** visto bueno para cablear los 2 tests en `quality.yml` (aditivo). Sin OK, corre manual.
 - [ ] **Sin push** (commit local selectivo, sin mezclar working tree ajeno).
+
+## QA cruzado 21.8 - M78 Legal (2026-10-07)
+
+- [x] Log reservado: **1444** - QA cruzado 21.8 de M78 (verificador independiente).
+- [x] Veredicto: **SUSTENTADO** (157/0/0 real; 11/11 artefactos reales; `test_legal_m78_v2` 60/0 EXIT 0 x3, 0 SCRIPT ERROR; BUG-121 no reproduce).
+- [x] 4 hallazgos MENORES no bloqueantes: (H1) `test_legal_m78.gd` ROJO por fixture defectuoso (payload `marcas: {}` + assert de "busquedas"); (H2) banner REVERTIDO sigue en el checklist, no hay nota SANEADO; (H3) la correccion de lineas del director es erronea (real 176/99/72/178); (H4) 03-Diseno cita `POLITICA-PROPERTIES.md` vs real `POLITICA-PROPIEDADES.md`.
+- [x] Reporte: canal **83** (`83-...-deepseek-a-atria-m78-qa218-veredicto-sustentado-con-observaciones.md`). Tracker -> 82.
+- [ ] Pendiente (director): flip a OK con su sello; decidir H1 (delegar a mimo o autorizar fix); corregir H2/H3/H4.

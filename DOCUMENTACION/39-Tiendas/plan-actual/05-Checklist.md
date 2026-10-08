@@ -3,7 +3,7 @@
 
 # 05-Checklist.md — Módulo 39: Tiendas
 
-- Estado: 🔵 En curso — **cierre glm-5.3-flash** (reserva 1123, Log reservado 1123)
+- Estado: ✅ Completado (QA §21.8 DeepSeek Log 1450)
 
 - Agente: glm-5.3-flash (Cline)
 - Agente: glm-5.3-flash (Cline) — núcleo ox-alpha (carpeta `scripts/shops/`, 81 ítems marcados) respetado

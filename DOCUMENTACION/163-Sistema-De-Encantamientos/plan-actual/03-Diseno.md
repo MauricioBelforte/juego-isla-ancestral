@@ -15,12 +15,28 @@ EnchantmentSystem (autoload)
 
 ## 2. Definicion de Encantamientos
 
-| ID | Nombre | Tier | Habilidad | Efecto Visual |
-|----|--------|------|-----------|---------------|
-| ancestral_cobre | Cobre Ancestral | T1 | Intercambio especial + bonus | Brillo naranja suave |
-| prospero_hierro | Hierro Prospero | T2 | x2 monedas al romper minerales | Brillo gris brillante |
-| brillante_oro | Oro Brillante | T3 | +50% precio venta tiendas | Brillo dorado intenso |
-| caverna_cristal | Cristal de Caverna | T4 | Bonus extraccion cuevas | Brillo azul cristalino |
+Tabla completa (verificada por `test_enchant_tiers.gd` 45/0, iter. 3 — costos
+Y duraciones contrastados contra los `.tres` de `data/enchantments/`):
+
+| ID | Nombre | Tier | Habilidad (ability_type x value) | Efecto Visual | Incienso | Monedas | Anim. |
+|----|--------|------|----------------------------------|---------------|----------|---------|-------|
+| ancestral_cobre | Cobre Ancestral | T1 | special_trade x1 — intercambio especial + bonus | Brillo naranja suave | 3 | 200 | 2s |
+| prospero_hierro | Hierro Prospero | T2 | double_coins x2 — x2 monedas al romper minerales | Brillo gris brillante | 5 | 500 | 3s |
+| brillante_oro | Oro Brillante | T3 | sell_bonus +0.5 — +50% precio venta tiendas | Brillo dorado intenso | 8 | 800 | 4s |
+| caverna_cristal | Cristal de Caverna | T4 | cave_bonus x1.5 — bonus extraccion cuevas | Brillo azul cristalino | 12 | 1000 | 5s |
+
+Estado de implementación (2026-10-07, iter. 3):
+
+- **Definido y probado**: datos de los 4 tiers (costos, duraciones, habilidades,
+  colores de brillo, nombres/descripciones unicos) y reglas de equipamiento
+  (1 por herramienta, no re-encantar, no desactivable, cobro de incienso).
+- **Cobro de monedas**: en `shaman_ui.gd` (valida y descuenta ambas monedas).
+- **Persistencia**: EnchantmentSystem es ISaveProvider (seccion
+  `enchantments`, registro en SaveManager en `_ready`).
+- **Pendiente de otros modulos** (ver 05-Checklist `[?]`): hooks de los
+  efectos en tiendas/mineria/cuevas/intercambio, iconos, mejoras M13.
+- **Pendiente seccion F**: efectos visuales de brillo/animacion (el dato
+  `animation_duration` y `visual_color` ya estan en los `.tres`).
 
 ## 3. Flujo del Chamán
 
@@ -47,6 +63,10 @@ Jugador habla con chaman del monte
 | T2 Hierro | 5 | 500 | 3s |
 | T3 Oro | 8 | 800 | 4s |
 | T4 Cristal | 12 | 1000 | 5s |
+
+Verificado contra los `.tres` y cobrado en `shaman_ui.gd` (incienso via
+`EnchantmentSystem`, monedas via `_retirar`/EconomyManager) — checks A6-A9
+y B5 de `test_enchant_tiers.gd`.
 
 ## 5. Visual de Encantamientos
 

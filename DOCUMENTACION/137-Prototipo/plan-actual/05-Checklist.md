@@ -3,7 +3,7 @@
 
 # 05-Checklist.md — Módulo 137: Prototipo (130 ítems)
 
-**Estado:** 130/130 completados. [S]=Simple [M]=Medio [C]=Complejo. Fuentes: plan maestro sección 136 (19 ítems) + Plan-de-produccion.md sección 1 + M152/M153/M114/M61.
+**Estado:** 10/131 completados. [S]=Simple [M]=Medio [C]=Complejo. Fuentes: plan maestro sección 136 (19 ítems) + Plan-de-produccion.md sección 1 + M152/M153/M114/M61.
 
 ## A. Setup del Proyecto
 
@@ -221,3 +221,5 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 121 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+> **Saneo de cabecera (Hy3 / WorkBuddy, 2026-10-08):** L6 `Estado: 130/130` corregido a `10/131 completados.` (drift S-02, canal 89 de atria). Solo la cabecera; el cuerpo de marcas no se tocó. M137 queda 🟢 (documental, sin claims falsos ni entregables ausentes).

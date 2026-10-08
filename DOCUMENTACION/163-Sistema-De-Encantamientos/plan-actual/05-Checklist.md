@@ -83,36 +83,41 @@
 
 ## D. Encantamientos por Tier (30)
 
-- [ ] Cobre Ancestral: intercambio especial + bonus adicional [M]
-- [ ] Cobre Ancestral: brillo naranja suave en filo [S]
-- [ ] Cobre Ancestral: costo 3 incienso + 200 monedas [S]
-- [ ] Cobre Ancestral: animacion de encantamiento 2s [S]
-- [ ] Hierro Prospero: x2 monedas al romper minerales [M]
-- [ ] Hierro Prospero: brillo gris con particulas [S]
-- [ ] Hierro Prospero: costo 5 incienso + 500 monedas [S]
-- [ ] Hierro Prospero: animacion de encantamiento 3s [S]
-- [ ] Oro Brillante: +50% precio venta en tiendas [M]
-- [ ] Oro Brillante: brillo dorado intenso [S]
-- [ ] Oro Brillante: costo 8 incienso + 800 monedas [S]
-- [ ] Oro Brillante: animacion de encantamiento 4s [S]
-- [ ] Cristal de Caverna: bonus extraccion cuevas [M]
-- [ ] Cristal de Caverna: brillo azul cristalino [S]
-- [ ] Cristal de Caverna: costo 12 incienso + 1000 monedas [S]
-- [ ] Cristal de Caverna: animacion de encantamiento 5s [S]
-- [ ] Cada encantamiento tiene icono unico [S]
-- [ ] Cada encantamiento tiene descripcion unica [S]
-- [ ] Cada encantamiento tiene nombre localizable [S]
-- [ ] Las habilidades se activan automaticamente al equipar [M]
-- [ ] Las habilidades no se pueden desactivar [S]
-- [ ] Una herramienta solo puede tener 1 encantamiento [S]
-- [ ] No se puede encantar una herramienta ya encantada [S]
-- [ ] El encantamiento se hereda al mejorar la herramienta [M]
-- [ ] El encantamiento se conserva al reparar [S]
-- [ ] El encantamiento se pierde al descartar la herramienta [S]
-- [ ] El encantamiento se conserva al guardar/cargar [M]
-- [ ] Integrar con M13 (mejoras Afilar/Templar/Potenciar) [M]
-- [ ] Las mejoras y encantamientos son compatibles [S]
-- [ ] Documentar tabla completa de encantamientos [S]
+> Verificacion (iter. 3, 2026-10-07): suite `test_enchant_tiers.gd` 45/0
+> EXIT=0 (+ sonda roja EXIT=1), regresiones 67/0 y 58/0. **BUG-119** (spawneo
+> del chamán) investigado en esta iteracion: NO reproducible 4/4, ver
+> `DOCUMENTACION/11-BUGS.md`.
+
+- [?] Cobre Ancestral: intercambio especial + bonus adicional [M] — ability `special_trade x1` definida y expuesta (A18/B9); sin hook de intercambio/trueque → **dueño: sistema de intercambio (no existe)**
+- [ ] Cobre Ancestral: brillo naranja suave en filo [S] — `visual_color` en .tres (A24); efecto pendiente seccion F
+- [x] Cobre Ancestral: costo 3 incienso + 200 monedas [S] — A6 + shaman_ui.gd:185-234
+- [ ] Cobre Ancestral: animacion de encantamiento 2s [S] — `animation_duration=2.0` (A14); animacion pendiente seccion F
+- [?] Hierro Prospero: x2 monedas al romper minerales [M] — `double_coins x2` definida (A19); sin hook en mineria → **dueño M24** (DeepSeek en curso)
+- [ ] Hierro Prospero: brillo gris con particulas [S] — `visual_color` (A24); pendiente seccion F
+- [x] Hierro Prospero: costo 5 incienso + 500 monedas [S] — A7 + shaman_ui
+- [ ] Hierro Prospero: animacion de encantamiento 3s [S] — `animation_duration=3.0` (A15); pendiente seccion F
+- [?] Oro Brillante: +50% precio venta en tiendas [M] — `sell_bonus x0.5` definida (A20); sin hook en shop_manager.gd (L276 `precio_venta_vigente`) → **dueño M38/M39**
+- [ ] Oro Brillante: brillo dorado intenso [S] — `visual_color` (A24); pendiente seccion F
+- [x] Oro Brillante: costo 8 incienso + 800 monedas [S] — A8 + shaman_ui
+- [ ] Oro Brillante: animacion de encantamiento 4s [S] — `animation_duration=4.0` (A16); pendiente seccion F
+- [?] Cristal de Caverna: bonus extraccion cuevas [M] — `cave_bonus x1.5` definida (A21); sin hook de cuevas → **dueño M17** (zonas/cuevas)
+- [ ] Cristal de Caverna: brillo azul cristalino [S] — `visual_color` (A24); pendiente seccion F
+- [x] Cristal de Caverna: costo 12 incienso + 1000 monedas [S] — A9 + shaman_ui
+- [ ] Cristal de Caverna: animacion de encantamiento 5s [S] — `animation_duration=5.0` (A17); pendiente seccion F
+- [?] Cada encantamiento tiene icono unico [S] — `icon = null` en los 4 .tres → **dueño arte/iconos (M50/M45)**
+- [x] Cada encantamiento tiene descripcion unica [S] — A23/A25 (4 no vacias y unicas)
+- [x] Cada encantamiento tiene nombre localizable [S] — A22 (4 display_name unicos y no vacios, data-driven)
+- [x] Las habilidades se activan automaticamente al equipar [M] — B9/B10: `get_active_ability` expone la habilidad del equipado sin accion extra; hooks consumidores pendientes por efecto
+- [x] Las habilidades no se pueden desactivar [S] — B11 (sin API de desactivacion)
+- [x] Una herramienta solo puede tener 1 encantamiento [S] — B4
+- [x] No se puede encantar una herramienta ya encantada [S] — B3 + guard enchant_system.gd:78 (sonda roja EXIT=1)
+- [?] El encantamiento se hereda al mejorar la herramienta [M] — mejoras Afilar/Templar/Potenciar inexistentes → **dueño M13/M16**
+- [?] El encantamiento se conserva al reparar [S] — sin sistema de reparacion integrado → **dueño reparacion de herramientas (M?)**
+- [?] El encantamiento se pierde al descartar la herramienta [S] — sin API de descarte en inventario_service.gd → **dueño M14**
+- [x] El encantamiento se conserva al guardar/cargar [M] — C1-C7: ISaveProvider (`enchantments`) registrado en SaveManager + round-trip + snapshot.restore E2E
+- [?] Integrar con M13 (mejoras Afilar/Templar/Potenciar) [M] — mejoras no implementadas → **dueño M13/M16**
+- [?] Las mejoras y encantamientos son compatibles [S] — depende del item anterior → **dueño M13/M16**
+- [x] Documentar tabla completa de encantamientos [S] — 03-Diseno §2 ampliada (costos/duraciones/abilities/estado) + §4 verificado
 
 ## E. Venta de Encantamientos (15)
 
@@ -272,7 +277,34 @@
 - Si se necesita persistir puntos de incienso, agregar get_save_data/restore al spawner registrandolo como ISaveProvider (patron GameTime/resource_spawner).
 - Repetir las 2 sondas rojas al tocar los guards de `IncenseCultivation`.
 
-**Totales:** 124 ítems · Completados: 49 · Pendientes: 70 · No resueltos: 5.
+**Notas del Agente (iter. 3 — BUG-119 + Seccion D)**
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-07 19:45
+**Estado:** Parcial — Seccion D cerrada (12 [x] / 10 [?] / 8 [ ] pendientes F); BUG-119 refutado en reproducibilidad
+
+### Lo que hice
+- **BUG-119** (msg 55, obligatorio): 4 corridas headless 45s (R1/R2 cache caliente, R3/R4 con `game/isla-ancestral/.godot/imported` borrado = cache fria) → **4/4 con 6 puntos / 0 fallas / 0 warnings [M163]**. Mecanismo descartado: `VoxelTerrain` DECLARADO en `scenes/main_island.tscn` L65, barrido post-order del frame inicial → `TerrainLocator._ready` encuentra `current_scene` seteada; `Bootstrap._load_main_scene()` omite recarga. Causa probable del 0/24 del director: corrida desde escena distinta (rama `change_scene_to_file` DEFERIDA bootstrap.gd:168). Evidencia y veredicto en `DOCUMENTACION/11-BUGS.md` (estado `[→]`), logs en TEMP/bug119.
+- **Seccion D (12 [x]):** suite `test_enchant_tiers.gd` **45/0 EXIT=0** (datos T1-T4, reglas, persistencia) + regresiones 67/0 y 58/0 + sonda roja EXIT=1 (guard `is_enchanted` en enchant_system.gd:78 mutado → 3 FAIL → restaurado).
+- **Persistencia M59:** EnchantmentSystem ahora es ISaveProvider (`get_section_name/get_save_data/restore_save_data`) + registro en `_ready` (patron WeatherService); checks C1-C7 incluyen E2E via `snapshot.restore`.
+- **03-Diseno §2** ampliada con la tabla completa (costos/durabilities/abilities/estado) → D30 documentada.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- 10 [?] con dueno: 4 efectos sin hook (intercambio/trueque, M24 mineria, M38/M39 tiendas, M17 cuevas), iconos (arte), heredar/reparar/descartar (M13/M16, reparacion, M14) y compatibilidad con mejoras (M13/M16).
+- 8 [ ] pendientes seccion F: brillo y animacion de los 4 tiers (datos en .tres, efectos no implementados).
+
+### Intentos fallidos / decisiones
+- `var ab := sys.get_active_ability(...)` → Parse Error "Cannot infer the type" (retorno sin tipar, §28) → tipado explicito `var ab: Dictionary`.
+- Sonda B8 fallo por estado sucio del test (pickaxe_1 seguia encantado → enchant_tool devolvio false sin cobrar) → limpieza explicita `remove_enchantment` entre bloques.
+- Start-Process sin `-Wait` no daba ExitCode fiable (matado por timeout) → `-Wait` para capturar EXIT 0/1.
+
+### Recomendaciones para el próximo agente
+- Iter F (visual): efectos de brillo/animacion — los `.tres` ya traen `visual_color` y `animation_duration`; faltan shader/particulas/anim en shaman.
+- Hooks economicos (D90/D94/D98) solo con coordinacion de los duenos (M24/M38/M17).
+- BUG-119: si el director autoriza el fix defensivo, son ~10 lineas en incense_spawner.gd (reintentos de altura con backoff, conservando push_warning).
+
+**Totales:** 120 ítems · Completados: 57 · Pendientes: 48 · No resueltos: 15.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 101 [ ] / 0 [?].

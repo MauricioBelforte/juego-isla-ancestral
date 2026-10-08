@@ -206,8 +206,37 @@
 **Totales:** 114 ítems · Completados: 113 · Pendientes: 1 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 114 [x] / 0 [ ] / 0 [?].
-> Las marcas no se tocaron.
+> este archivo no tenía línea de Totales. **Conteo real de marcas (corregido por atria-dawn-s3,
+> 2026-10-08): 113 [x] / 1 [ ] / 0 [?] = 114.** El 1 `[ ]` (línea 180, shore-fade) es
+> **KnownIssue no bloqueante DoD** con dueño de calibración M49/M51. Las marcas no se tocaron
+> más que para corregir este conteo.
+
+## Cierre P-39 — atria-dawn-s3 (2026-10-08, frente 19 doc)
+
+> **Estado:** P-39 **cerrado**. Fix de código de agnes-3-flash (Log 1442) + re-verificación y
+> fix adicional de atria-dawn-s3 (esta sesión). Sin commit/push, sin flip, sin tocar `mundo_raiz.gd`.
+
+- **Fix agnes (Log 1442, verificado en disco por s3):** los 4 fallbacks de `main_island.gd`
+  (L311/312 spawn jugador, L410/411 chamán) pasaron de `256.0`/`320.0`/`300.0` a
+  `MUNDO_RAIZ.SPAWN_JUGADOR` / `MUNDO_RAIZ.CENTRO`. Re-verifiqué: grep `else 256|320|300` = 0.
+- **3 fallbacks adicionales que el Log 1442 no cubrió (hallazgo de s3, fixeado y verificado):**
+  - L56/57 (mesa M16): `else 326.0` / `else 322.0` → `MUNDO_RAIZ.SPAWN_CONTENIDO.{x,z} ± offsets`.
+  - L72 (recursos M15): `else Vector3(320, 0, 320)` → `MUNDO_RAIZ.SPAWN_CONTENIDO`.
+  - L420 (chamán M163): `else Vector3(320, 35, 300)` → `Vector3(sh_x, 35, sh_z)` — **bug real**:
+    el fallback ignoraba las `sh_x`/`sh_z` que la propia función acaba de calcular y mandaba el
+    chamán a la esquina vieja.
+  - Grep final: **0 fallbacks con centro viejo (320/326/322/256/300) en código**; solo quedan en
+    comentarios históricos. `godot --headless --check-only` → EXIT 0.
+- **Afirmación de caminos primarios (corregida):** el QA §21.8 de hy3 (Log 1212, línea 217 de
+  este archivo) afirma "0 usos de `256` obsoleto en radio/spawn de producción". Eso es **cierto
+  para los caminos primarios**, pero era **incompleto**: los caminos de *fallback* aún contenían
+  el centro viejo (7 líneas en total entre las de agnes y las de s3). La afirmación ahora es
+  completa: **0 hardcodes de centro viejo en código, primario o fallback**. Los fallbacks solo
+  disparan en modo headless sin autoload `MundoRaiz` (p. ej. tests `--script`); en runtime normal
+  son no-op.
+- **Latente menor (abierto, fuera de DoD M167):** `vegetation_spawner.gd:36` fallback
+  `Vector2(256, 256)` si `mundo` es null (dominio M50/M36). Anotado por hy3 en L218 — sigue
+  abierto, no bloquea M167. **No lo toqué** (escopo frente 19 = `main_island.gd` + doc).
 
 ## QA cruzado §21.8 — Hy3 (Log 1212, 2026-10-03)
 

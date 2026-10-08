@@ -397,3 +397,61 @@ Ejecuté las 2 pruebas que la iter 5 dejó definidas-no-corridas (honestidad de 
 
 - Los 2 tests nuevos corren en < 10s cada uno: `test_t7_amistad.gd` y `test_t9_rendimiento.gd`.
 - Puntos clave reproducibles: (a) conexión de señal M20 con `EventBus.progresion.nivel_amistad_cambio.get_connections()`; (b) señal `precio_rebajado` cruzando el límite con 4 ventas de madera; (c) índice O(1) del catálogo; (d) hashes de M.8.
+## Rutas — estado real (reconciliación plan↔disco)
+
+**Agregado por:** atria-dawn-s3 (Atria-Dawn-Preview) / Kilo Code
+**Fecha:** 2026-10-08
+**Motivo:** auditoría O3/M111-drift de DeepSeek — las rutas citadas arriba no coinciden con el
+disco. **No se elimina ni modifica contenido existente**; esta sección es aclaratoria.
+
+> La nota de la cabecera (ox-alpha/Cline, 2026-08-29) ya advertía que la implementación real vive
+> en `scripts/economia/` y `scripts/shops/` (no `res://economia/`), pero las tablas §1.1/§1.2
+> siguen citando las rutas previstas originales. Esta sección las reconcilia con el disco real,
+> verificadas una por una el 2026-10-08.
+
+### Scripts — citados como `res://economia/*` (previsto) vs. disco real
+
+| Ruta citada en la tabla | Estado en disco | Ruta real (2026-10-08) |
+|---|---|---|
+| `res://economia/shop_manager.gd` | **Existe, en otra ruta** | `scripts/shops/shop_manager.gd` |
+| `res://economia/barter_system.gd` | **Existe, en otra ruta** | `scripts/economia/barter_system.gd` |
+| `res://economia/barter_offer.gd` | **Existe, en otra ruta** | `scripts/economia/barter_offer.gd` |
+| `res://economia/shop_definition.gd` | **No existe** | — (referencial/histórico) |
+| `res://economia/economy_validation.gd` | **No existe** | — (referencial/histórico; sigue pendiente) |
+
+Los scripts con ruta `scripts/economia/*` de la tabla §1.1 (**economy_manager**,
+**economy_price_catalog**, **price_manager**, **price_definition**,
+**test_edge_cases_precio**) **sí existen exactamente donde se cita**.
+
+### Recursos `.tres` — citados vs. disco real
+
+| Ruta citada | Estado | Ruta real (2026-10-08) |
+|---|---|---|
+| `res://economia/data/economy_prices.tres` | **No existe en esa ruta** | `data/economy/econ_prices.tres` (catálogo real, distinto nombre y carpeta) |
+| `res://economia/data/shops/tienda_pescaderia.tres` | **No existe** | — (referencial/histórico) |
+| `res://economia/data/shops/tienda_agricola.tres` | **No existe** | — (referencial/histórico) |
+| `res://economia/data/shops/tienda_artesanias.tres` | **No existe** | — (referencial/histórico) |
+| `res://economia/data/barter/trueque_cacao_lana.tres` | **No existe** | — (referencial/histórico) |
+| `res://economia/data/barter/trueque_pesca_herramienta.tres` | **No existe en esa ruta** | `data/economia/barter/` (ver abajo) |
+
+### Ofertas de trueque reales en disco (2026-10-08)
+
+Las 3 ofertas de producción viven en `data/economia/barter/` (no `res://economia/data/barter/`):
+
+- `data/economia/barter/trueque_salvavidas.tres`
+- `data/economia/barter/trueque_catalina_fibra.tres`
+- `data/economia/barter/trueque_finneas_herramienta.tres`
+
+Los nombres **no coinciden** con los ejemplos previstos en la tabla §1.2
+(`trueque_cacao_lana`, `trueque_pesca_herramienta`). La sección §2 del documento
+(L255: "3 ofertas .tres en `data/economia/barter/`") ya cita la ruta real correctamente —
+la tabla §1.2 es la que quedó desactualizada.
+
+### Síntesis
+
+- **3 scripts** existen en otra ruta (`scripts/shops/` en vez de `res://economia/`).
+- **2 scripts** no existen en absoluto (`shop_definition`, `economy_validation`) — ambos marcados
+  como "Pendiente de implementación" en la tabla original, por lo que **no hay claims falsos**.
+- **1 recurso** existe en otra ruta con otro nombre (`econ_prices.tres`).
+- **5 recursos** no existen (tiendas y ofertas de ejemplo) — todos "Pendiente de implementación".
+- **Ningún `[x]`** de la tabla afirma la existencia de los archivos faltantes.

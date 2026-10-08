@@ -5,15 +5,15 @@
 
 | Campo | Valor |
 |---|---|
-| Módulo | M17 Construcción (iter. 3) |
-| Estado | 🔵 En curso (iter. 3) |
-| Agente | DeepSeek-V4.1-Flash (WorkBuddy) |
+| Módulo | M17 Construcción (volumen DoD) |
+| Estado | 🔵 En curso (auditoría DoD de los 59 [x]) |
+| Agente | Atria-Dawn-Preview (atria-dawn-s2) / Kilo Code |
 | Fase | F5 (base de producción) |
 | Visión | V0 |
 | Entrada | M08✅ M14🟢 — sistema de construcción voxel complejo |
-| Salida | BuildingService autoload + catálogos data-driven + integración terreno M08 + inventario M14 + economía M38 + persistencia M59 + tests headless |
-| Archivos afectados | `game/isla-ancestral/scripts/construccion/` (a crear), `tests/test_construccion.gd` (a crear) |
-| Fecha reserva | 2026-10-03 00:05 (relevo: reserva previa 2026-09-01 de deepseek-v4-flash/Kilo Code) |
+| Salida | Veredicto DoD sobre los 59 [x]: código real + suites ejecutadas + spot-check por verbo |
+| Archivos afectados | `game/isla-ancestral/scripts/construccion/` (read-only), `game/isla-ancestral/tests/*construccion*` (ejecución) |
+| Fecha reserva | 2026-10-08 02:39 (relevo §21.4.7: DeepSeek-V4.1-Flash sin actividad desde 2026-10-04 02:26, >72h; liberado por el director, msg 130) |
 
 # 05-Checklist.md — Módulo 17: Construcción
 
