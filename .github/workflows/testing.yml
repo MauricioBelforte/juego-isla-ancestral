@@ -83,27 +83,62 @@ jobs:
         with:
           version: "4.7-stable"
 
-      # T-M112 extra (autorizacion director, msg 61, 2026-10-08): se quitaron
-      # los `|| true` de los 2 pasos de este job. Hasta ahora el lint NUNCA
-      # podia fallar (mismo falso-verde que el paso de tests). Los pasos quedan
-      # HONESTOS tal como estan; hoy ambos son problematicos en local y eso se
-      # dejo visible a proposito (documentado en 11-BUGS -> BUG-122, dueños
-      # M111/M118) en vez de disimularlo:
-      #   - `--check-only` sin `--script` NO valida nada: arranca el juego
-      #     completo (boot de servicios) y queda corriendo -> timeout.
-      #   - `code_quality_check.gd` es un EditorScript que no hereda de
-      #     SceneTree/MainLoop -> Godot lo rechaza con 2 ERROR siempre.
-      # No se excluyo ni toco ningun paso (si M118/M111 lo arreglan, el paso
-      # empezara a fallar/success de verdad).
-      - name: Check formatting
-        run: |
-          cd game/isla-ancestral
-          godot --headless --check-only 2>&1
+      # BUG-122 RESUELTO (frente B, 2026-10-08, mimo-v2.6-flash-free; decision
+      # y autorizacion del director, msg 70 del canal): "el job lint debe ser
+      # honesto: o funciona o no existe".
+      #
+      # Historico (mismo dia 02:30, Log 1453): al quitar los `|| true` (msg 61)
+      # ambos pasos quedaron honestos pero INAPTOS y ese estado intermedio se
+      # retiro ahora:
+      #   - `Check formatting`: `godot --headless --check-only` SIN `--script`
+      #     NO valida nada (arranca el juego completo) -> COLGABA hasta el
+      #     timeout de 10 min en cada push/PR.
+      #   - `Run static analysis (CodeQualityCheck)`: `code_quality_check.gd`
+      #     es un EditorScript -> 2 ERROR estructurales SIEMPRE; nunca corrio
+      #     en CI.
+      #
+      # Estado actual (medido en local, Godot 4.7.2, 2026-10-08):
+      #   1. Paso de parseo (reemplaza a "Check formatting"): la receta ya
+      #      probada en quality.yml (BUG-051/BUG-091) - generador del colector
+      #      (un preload por cada .gd del proyecto), `--import` para la cache
+      #      de class_names y conteo de SCRIPT ERROR como gate duro. Medido:
+      #      colector 971 preloads, 0 SCRIPT ERROR, EXIT 0, termina en
+      #      segundos. NOTA honesta: esto valida PARSEO, no estilo - un check
+      #      de formato real exigiria un formatter (gdtoolkit/gdformat) que el
+      #      proyecto no tiene instalado; esa decision le corresponde a M118.
+      #      El nombre del paso dice exactamente lo que hace.
+      #   2. Paso de analisis estatico: RETIRADO con evidencia en vez de
+      #      dejarlo fallando siempre. Adaptarlo exige modificar
+      #      scripts/editor/code_quality_check.gd (archivo de M111): sonda
+      #      medida, ni siquiera un wrapper SceneTree puede instanciarlo en
+      #      headless ("Class 'EditorScript' can only be instantiated by
+      #      editor" + "Can't inherit from a virtual class"). La
+      #      reintegracion queda pendiente de coordinacion director <-> M111
+      #      (ver 11-BUGS -> BUG-122).
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: Run static analysis (CodeQualityCheck)
+      - name: Generate syntax collector
+        run: python tools/quality/gen_colector_sintaxis.py --proyecto game/isla-ancestral
+
+      - name: Import project resources
+        run: godot --headless --path game/isla-ancestral --import
+
+      - name: Check GDScript parse (gate duro)
         run: |
           cd game/isla-ancestral
-          godot --headless --script res://scripts/editor/code_quality_check.gd 2>&1
+          LINT_LOG=$(mktemp)
+          godot --headless --check-only --script res://scripts/editor/_colector_sintaxis.gd > "$LINT_LOG" 2>&1
+          cat "$LINT_LOG"
+          PARSE_ERRORS=$(grep -c "SCRIPT ERROR" "$LINT_LOG" || :)
+          echo "SCRIPT ERROR detectados: $PARSE_ERRORS"
+          if [ "$PARSE_ERRORS" -gt 0 ]; then
+            echo "::error::Parse gate (BUG-122): $PARSE_ERRORS SCRIPT ERROR en scripts del proyecto"
+            exit 1
+          fi
+          echo "Parse OK (0 SCRIPT ERROR)"
 
   quality-gate:
     name: Quality Gate
