@@ -3975,3 +3975,23 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - `GUIA-GODOT/01` §34 (class_name cache + --script con error carga el juego).
   - **M163 queda 🟡 49/124** (sección D intacta, 32 [ ]). CHECKLIST-GLOBAL no tocada (flip del director).
 
+- **2026-10-07 19:10 — mimo-v2.6-flash-free — M163 iter. 3 CERRADA ✅ ACEPTADA (msg 57, 20:52)**
+  - Asignada en msg 55: BUG-119 obligatorio primero + sección D. **Aceptada** por el director en msg 57: BUG-119 **CERRADO como falso positivo** (su 0/24 = `godot --script` → rama deferida `bootstrap.gd:168`; mi refutación 4/4 con 6/6 y caché fría); sección D cerrada.
+  - Sección D: **12 [x] / 10 [?] dueño / 8 [ ] pendiente F** — suite `test_enchant_tiers.gd` **45/0 EXIT=0** + regresiones 67/0 + 58/0 + sonda roja EXIT=1. EnchantmentSystem ahora **ISaveProvider M59**. `03-Diseno` §2 ampliada. Totales (conteo del director): 61 [x] / 15 [?] / 48 [ ].
+  - **Log 1434**, **msg 56**. Staging quirúrgico SIN commit ni push.
+  - ⚠️ Incidente 21:09: `pull --rebase` ajeno + `git stash` de s2 borraron mi staging de 11 archivos y la edición de `11-BUGS.md`; restaurados 4 archivos puros desde su stash sin tocarlo. `11-BUGS` requiere re-escribir el bloque BUG-119.
+- **2026-10-07 21:20 — mimo-v2.6-flash-free — T-M112 / BUG-120 (runner falso-verde) RECLAMADO 🔵 (msg 57)**
+  - Frente nuevo en M112 `112-Testing-Y-QA` (🟡 sin autor): (1) reetiquetar framework honestamente (22 suites SceneTree + 4 GdUnit4, no "GdUnit4 puro"), (2) arreglar `tests/run_tests.gd` con evidencia de ejecución medida (banner solo con conteo > 0) o declararlo no-verde, (3) gate de regresión antes/después, sin tocar `quality.yml` (BUG-091/s2), (4) respetar bloqueo 112-M25. CHECKLIST-GLOBAL solo director; sin commit/push.
+- **2026-10-07 23:45 - mimo-v2.6-flash-free - T-M112 / BUG-120 CERRADO - (msg 58, Log 1451)**
+  - `run_tests.gd` v2c: suite por subproceso + timeout 180 s + guardas (EXIT 2 = 0 tests). Evidencia: 26 suites, 19/25 OK, **718 tests, EXIT 1** (antes: EXIT 0 con 0). GdUnit4 21/21 con invocacion correcta (`-a` + `--ignoreHeadlessMode`, sin `--`/`--path`). Excluida `tests/test_debug_menu.gd` raiz (API muerta).
+  - Gate antes/despues: `test_regresion_templos.gd` 76 checks / 0 fallos / EXIT 0; `quality.yml` intacto.
+  - Docs: `112/plan-actual/04-Codigo.md` seccion 0 (etiquetado honesto) + `05-Checklist.md` seccion T-M112 (12 [x] / 5 [?]). `11-BUGS.md`: BUG-119 restaurado + BUG-120 en seccion 7.
+  - 5 [?] con dueno: npcviz y equip (watchdog), GdUnit debug 201 orphans (rc 101, M110), `tests/test_debug_menu.gd` raiz (M110), `testing.yml` con `|| true` y `--path` invalido (M118, **no tocado** - pide instruccion).
+  - Staging quirurgico sin commit ni push (archivos M de s2/agnes: 11-BUGS, ESTADO, pools - no se pusieron en el indice).
+- **2026-10-08 01:58 - mimo-v2.6-flash-free - testing.yml FIXEADO (autorizado msg 59) - (msg 60, Log 1452)**
+  - Paso Run tests de .github/workflows/testing.yml: reescrito con -a <4 dirs GdUnit4> + --ignoreHeadlessMode (antes: --path invalido sin -a = 0 tests) y **sin || true** (antes: exit 0 forzado siempre). Evidencia local: **21/21 tests, 4/4 suites, EXIT 0**; YAML valido. quality.yml intacto; sin commit/push.
+  - PENDIENTE del director: los 2 || true del job lint (mismo archivo, fuera de la autorizacion) - reportados en msg 60.
+- **2026-10-08 02:31 - mimo-v2.6-flash-free - testing.yml COMPLETO sin `|| true` (job lint, autorizado msg 61) - (msg 62, Log 1453)**
+  - Los 2 `|| true` del job `lint` quitados; **0 en todo el archivo**. Medido: `--check-only` suelto ARRANCA EL JUEGO y colgaria hasta timeout de 10 min en CI; `code_quality_check.gd` FALLA SIEMPRE (EditorScript, no hereda SceneTree/MainLoop - nunca corrio en CI, el `|| true` tragaba el error). Pasos SIN TOCAR (clausula 3 del encargo): **BUG-122 [ ] delegado M118/M111** en 11-BUGS. CI lint queda rojo-honesto. quality.yml intacto; sin commit/push.
+  - Estado: LISTO para volumen DoD o modulo colgado (esperando asignacion del director).
+
