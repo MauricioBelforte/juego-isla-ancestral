@@ -558,15 +558,26 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 ## BUG-120 — falso-verde de run_tests.gd (M112) (msg 137 §4, asignado a s2)
 
 - [x] **run_tests.gd localizado y leído**: `game/isla-ancestral/tests/run_tests.gd` (309 líneas, v2c de mimo, Log 1451). El BUG-120 original (v1) ya resuelto por mimo.
-- [ ] **Auditar la v2c actual**: verificar que las guardas anti-falso-verde funcionan (probar en rojo) y diagnosticar las 6/25 suites que fallan (¿fallos reales o falsos negativos del runner?).
-- [ ] **Veredicto honesto**: arreglar (si es acotado) o documentar como no-funcional con evidencia. **Avisar al director antes de tocar archivos de M111/M112.**
+- [x] **Auditar la v2c actual**: guardas intactas (tests_total>0, suites_ok, rc, timeout). Causa real = (iv) formatos no reconocidos. Sonda 12/12.
+- [x] **Veredicto honesto**: arreglado con 3 patrones nuevos. Fix autorizado (msg 139) y aplicado.
 - [x] **Fix AUTORIZADO (msg 139 del director)**: patrón 4 `passed=N failed=M` + detección `FALLO:` sin corchetes + patrón `N fallo(s)` en `_analizar_salida()`.
 - [x] **Sonda unitaria en rojo y verde: 12/12 OK, 0 fallos, EXIT 0** (M111 verde/rojo, inventory_unificado verde/rojo, rc != 0, regresiones `[FIN]` y `OK/fallos`).
-- [x] **Runner real con fix: M111 checks=0 → 62; tests totales 718 → 780**; residual inventory_unificado checks=0 (no declara conteo, sus fallos sí se detectan); los 3 fallos del runner son los `[?]` conocidos de M112.
+- [x] **Runner real con fix: M111 checks=0 → 62; tests totales 718 → 780**; los 3 fallos del runner son los `[?]` conocidos de M112.
 - [x] **Fix ya en HEAD** (merge `41765e6` del director, absorbido con mis comentarios exactos).
-- [ ] **Log del fix pendiente**: pool de logs prohibido por restricción del director — preguntado en msg 140.
-- [ ] **"familia B"**: significado preguntado en msg 140 (¿Familia B de BUG-070? ¿suites no reconocidas?).
-- Restricciones: nada de `quality.yml` (BUG-091), `interaction_manager.gd` (kimi), `service_registry.gd`/`bootstrap.gd` (BUG-097), pool de logs.
+- [x] **Log 1491 creado** — restricción del pool LEVANTADA por el director (msg 143); número 1491 consumido por mí, cabeza 1492. Commit `0deb44f`.
+- [x] **Segundo falso-verde encontrado y fixeado (commit `dc057fa`)**: `test_inventory_unificado.gd` — `_run()` no esperaba a `_test_toggle()`/`_test_overlay()` (tienen `await`), `quit()` mataba las coroutines → **6 de 8 checks nunca se ejecutaban**. Verificado por el director en runtime (msg 143): 8 checks, 0 fallos.
+- [x] **"familia B" aclarada (msg 143)**: los 37 ítems Familia B del barrido BUG-070 (Hy3 Log 1472) — verbo Diseñar/Definir + artefacto documental. Verificación completada: ver sección siguiente.
+- Restricciones: nada de `quality.yml` (BUG-091), `interaction_manager.gd` (kimi), `service_registry.gd`/`bootstrap.gd` (BUG-097). **Pool de logs: restricción levantada (msg 143).**
+
+## Cola Familia B — barrido BUG-070 (msg 143 orden 3, completado)
+
+- [x] **52 ítems con `citado-inexistente`** en `scripts-prueba-temp/fama_full.txt` verificados uno a uno contra planes-actuales + repo (git ls-files + disco).
+- [x] **43 artefactos citados: ninguno existe** (tracked ni en disco) — pero 41 ítems sostienen por artefacto documental.
+- [x] **8 Familia A pendientes para el flip del director** (msg 144): M112 L74/76/77/78/154, M156 L258, M42 L120, M41 L123.
+- [x] **3 ya revertidos por el director** (2026-10-08): M73 L15/L203, M108 L115.
+- [x] **1 falso negativo del script de Hy3**: M163 L113 cita `enchant_system.gd:78` → el real es `enchantment_system.gd:78` con el guard `if is_enchanted(tool_id): return false`. `[x]` verdadero.
+- [x] **Discrepancia de conteo reportada**: director dijo 37 B, obtuve 41 sostienen (52 − 8 A − 3 revertidos).
+- [x] **Runner completo: flake documentado** — 2 abortos del entorno en fase SceneTree (no GdUnit), 675 checks parciales en 16 suites OK. 767/788 sin confirmar.
 
 ## Push pendiente de confirmacion (msgs 131-132)
 
