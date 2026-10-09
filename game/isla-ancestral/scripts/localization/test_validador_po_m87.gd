@@ -28,7 +28,9 @@ extends SceneTree
 #     + _summary() diferido. Instrumentacion LOTE 2 (mis suites propias), 2026-10-08,
 #     DeepSeek-V4.1-Flash (msg 100). Piso = checks reales MEDIDOS (Log 1490).
 #     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
-const CHECKS_MINIMOS := 82
+#     iter. 8 (2026-10-09, Log 1504): +2 checks de regresion de RE_DINAMICA (bloque
+#     auditor) -> piso re-MEDIDO 82 -> 84.
+const CHECKS_MINIMOS := 84
 var _checks: int = 0
 var _wb_cerrado: bool = false
 
@@ -249,6 +251,14 @@ func _test_auditor_claves() -> void:
 	_check(not (inf["usadas_sin_clave"] as Array).has("SETTINGS.PAUSA"), "auditor no marca claves presentes")
 	_check(not (inf["usadas_sin_clave"] as Array).has("NOPE.NOPE.X"), "auditor ignora claves de test")
 	_check(not (inf["usadas_sin_clave"] as Array).has("DIARY.CAT_"), "auditor no marca el prefijo dinámico")
+	# Regresión permanente (iter. 8, Log 1504): el prefijo dinámico construido por
+	# concatenación en `traducir_clave` (M14, inventario_iter4.gd) también se registra
+	# como PREFIJO y NO como clave literal ausente. Si alguien revierte el patrón a la
+	# forma que sólo cubría la llamada de `_t`, estos 2 checks caen.
+	var pref_dyn := "func f() -> void:\n\ttraducir_clave(\"items.\" + id + \".name\")\n"
+	var inf_pref: Dictionary = AuditorClaves.auditar_texto(pref_dyn, "fixture_pref.gd", "res://locales/es.po")
+	_check((inf_pref["dinamicas"] as Array).has("items."), "auditor detecta el prefijo dinámico de traducir_clave")
+	_check(not (inf_pref["usadas_sin_clave"] as Array).has("items."), "el prefijo de traducir_clave NO se marca como clave ausente")
 	_check(not (inf["usadas_sin_clave"] as Array).has("MAIN_MENU.PLAY"), "tr_key compuesta resuelta")
 	var real: Dictionary = AuditorClaves.auditar("res://scripts", "res://locales/es.po")
 	_check(int(real["archivos"]) > 100, "auditor real escanea >100 archivos (%d)" % real["archivos"])

@@ -214,6 +214,7 @@ msgstr[1] "Se ofrecen {n} objetos"
 | Usar `LocaleUtils.format_date/format_hora` en reloj y calendario | **M29/M30** | Pendiente — la API está lista y probada |
 | Migrar 26 módulos de contenido a claves M87 | **M14-M39** | Pendiente — el catálogo y el auditor lo permiten módulo a módulo |
 | Eliminar el autoload duplicado `LocalizationManager` | **decisión del usuario** | Pendiente (hallazgo H-1) |
+| Auto-escaneo del auditor (`auditor_claves.gd` aplica los patrones al TEXTO crudo, comentarios incluidos) | M87 | **Deuda conocida, no bloqueante** (hallazgo H1 de la iter. 8, Log 1504). Un COMENTARIO que contenga el patrón literal de llamada dinámica registra un prefijo **fantasma**, y toda clave real que empiece con ese prefijo queda excluida del veredicto. Medido con sonda aislada: `# _t("ZZFANTASMA." + x)` -> `dinamicas = ["ZZFANTASMA."]`. Hoy es inofensivo: los únicos comentarios así en `scripts/` son `validate_diary.gd:186/190`, y nombran `DIARY.CAT_`, que ya es un prefijo dinámico real. No se corrige ahora (efecto cosmético); el fix futuro sería descartar las líneas de comentario antes de aplicar los patrones. |
 | `06-Plan-Testings.md` / `07-Resultados-Testings.md` | M87 | **Ejecutados** (6 suites, 0 fallos) |
 
 ## 9. Notas del Agente
