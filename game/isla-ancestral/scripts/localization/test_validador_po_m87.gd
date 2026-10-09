@@ -24,6 +24,30 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 2 (mis suites propias), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 100). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 82
+var _checks: int = 0
+var _wb_cerrado: bool = false
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in BLOQUES:
+		if not _hechos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M87: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
+
+
 const CAB := "msgid \"\"\nmsgstr \"\"\n\"Content-Type: text/plain; charset=UTF-8\\n\"\n\"Language: es\\n\"\n\"Plural-Forms: nplurals=2; plural=(n != 1);\\n\"\n\n"
 const F_BOM := "user://m87_val_bom.po"
 const F_CRLF := "user://m87_val_crlf.po"
@@ -51,6 +75,7 @@ var _hechos: Dictionary = {}
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 
 func _run() -> void:
@@ -66,11 +91,11 @@ func _run() -> void:
 	for b in BLOQUES:
 		_check(_hechos.has(b), "el bloque '%s' se ejecutó completo (sin aborto por error de script)" % b)
 	_limpiar()
-	print("=== TEST M87 ITER5 (validador .po): %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_summary()
 
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

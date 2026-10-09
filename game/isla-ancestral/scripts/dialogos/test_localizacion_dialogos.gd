@@ -9,12 +9,43 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 2 (mis suites propias), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 100). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 4
+const _WB_BLOQUES: Array[String] = ["_test_resolve_clave_es", "_test_resolve_clave_en", "_test_resolve_placeholder"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M21: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
+
+
 var _fallos: int = 0
 var _dm: Node = null
 var _loc: Node = null
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	_dm = load("res://scripts/dialogos/dialogue_manager.gd").new()
@@ -22,12 +53,15 @@ func _run() -> void:
 	_loc = root.get_node_or_null("Localization")
 	_check(_loc != null, "Localization autoload presente")
 	_test_resolve_clave_es()
+	_fin("_test_resolve_clave_es")
 	_test_resolve_clave_en()
+	_fin("_test_resolve_clave_en")
 	_test_resolve_placeholder()
-	print("=== TEST M87→M21 LOCALIZACION DIALOGOS: %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_fin("_test_resolve_placeholder")
+	_summary()
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

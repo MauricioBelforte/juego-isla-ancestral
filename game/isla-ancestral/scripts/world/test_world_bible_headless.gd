@@ -5,12 +5,53 @@
 # M147: Verificación del WorldBible (canon data-driven).
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 2 (mis suites propias), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 100). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 7
+const _WB_BLOQUES: Array[String] = ["world_bible"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+var _wb_terminado: bool = false
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M147: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
+
+
 var _fallos := 0
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_wb_armar_red")
+
+## Red de seguridad (NO gira en bucle): si un SCRIPT ERROR aborta _run() antes
+## de llegar a _summary(), el temporizador lo dispara. El camino feliz llama a
+## _summary() al final de _run(); este timer solo actua en el caso de aborto.
+func _wb_armar_red() -> void:
+	if _wb_cerrado or _wb_terminado:
+		return
+	create_timer(180.0).timeout.connect(_summary)
 
 func _check(nombre: String, cond: bool) -> void:
+	_checks += 1
 	if cond:
 		print("  [OK] %s" % nombre)
 	else:
@@ -39,6 +80,7 @@ func _run() -> void:
 	_check("4 capas por sello", capas.size() == 4)
 	var linea: Array = datos.get("linea_tiempo", [])
 	_check("5 eventos de línea de tiempo", linea.size() == 5)
-	print("=== Resumen M147: %d fallo(s) ===" % _fallos)
+	_fin("world_bible")
+	_wb_terminado = true
 	bible.free()
-	quit(1 if _fallos > 0 else 0)
+	_summary()

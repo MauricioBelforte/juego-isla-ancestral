@@ -8,6 +8,36 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 2 (mis suites propias), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 100). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 20
+const _WB_BLOQUES: Array[String] = ["_test_riego_por_lluvia", "_test_sin_exceso", "_test_climas_secos_no_riegan"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M33: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
+
+
 var _fallos: int = 0
 var _farm: Node = null
 var _bus: Node = null
@@ -15,6 +45,7 @@ var _inv: Node = null
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	_farm = root.get_node_or_null("Farm")
@@ -24,15 +55,18 @@ func _run() -> void:
 	_check(_bus != null and _bus.weather != null, "EventBus.weather presente")
 	if _farm == null or _bus == null or _inv == null:
 		print("=== TEST M33 CLIMA: 1+ fallo(s) ===")
-		quit(1)
+		_summary()
 		return
 	_test_riego_por_lluvia()
+	_fin("_test_riego_por_lluvia")
 	_test_sin_exceso()
+	_fin("_test_sin_exceso")
 	_test_climas_secos_no_riegan()
-	print("=== TEST M33 CLIMA: %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_fin("_test_climas_secos_no_riegan")
+	_summary()
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

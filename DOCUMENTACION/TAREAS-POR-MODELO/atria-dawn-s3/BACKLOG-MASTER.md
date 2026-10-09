@@ -345,6 +345,31 @@
 - **Clasificación pedida:** Familia B legítima (guardián/diagnóstico real) vs Familia A (afirma
   ser suite con checks y no lo es).
 - **Cierra la última puerta del barrido BUG-070** (Hy3 Log 1472).
+- **Ling ENTREGÓ (msg 68, 22:45):** ambos archivos **Familia B legítima, 0 flips**.
+  - `test_bug106_verify.gd` (M15): existe en `scripts/shops/`; `extends SceneTree`, sin `_check()`
+    ni asserts — verificador puntual de BUG-106 (8 ids originales + 8 mapeados), `quit(0)`.
+    **Ningún ítem `[x]` lo cita** (solo Nota del Agente L378 de agnes).
+  - `test_diag_m38_atria.gd` (M38): existe en `scripts/economia/`; `extends SceneTree`,
+    diagnóstico headless de BUG-047 (Log 982), sin `_check()`. **Ningún ítem `[x]` lo cita**
+    (solo sección BUG-047 de Notas del Agente L317).
+  - **Sin claim de checklist → sin inflación posible.** La etiqueta "NO-APLICA: sin _check
+    (diag/guardian)" de DeepSeek (Log 1490) es correcta.
+- **Director ACEPTÓ (msg 69):** verificó ambos archivos él mismo (`_check=False, assert=False,
+  quit=True`). **🏁 BUG-070 CERRADO TOTAL.**
+- **Mi verificación:** ambos archivos existen en git ls-files ✓.
+- **5º→6º encargo correcto consecutivo de Ling.**
+
+### L-15 — Ling: auditoría BUG-070 post-sello, 30 módulos ✅ — `[→]` EN CURSO (Ling trabajando)
+
+- **Asignado por el director** (msg 69): M154 demostró que un módulo ✅ sellado puede tener `[x]`
+  inflados (Hy3 dio el sello Log 1216 y L109 era falso). Los otros 30 ✅ tienen sellos
+  **anteriores al criterio H2-estricta** → posible inflación no detectada.
+- **Alcance:** todos los ✅ del GLOBAL **excepto M154 (auditado) y M07 (Step 5)**.
+- **Método:** por cada `[x]` con verbo de implementación, verificar artefacto (glob + git ls-files)
+  + H2-estricta (cruzar con `04-Codigo.md`/notas, como Step 5 hizo en M154).
+- **Orden:** de mayor a menor cantidad de `[x]` (mayor superficie de inflación).
+- **Entrega:** por **lotes** (no uno por uno). Módulo limpio = una línea; hallazgos = valor.
+- **READ-ONLY; flips del director; sin log hasta encontrar algo.**
 
 ### E-02 — Step 5: QA §21.8 M07 Arquitectura-General — `[→]` EN CURSO (Step 5 trabajando)
 

@@ -19,22 +19,68 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 2 (mis suites propias), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 100). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 35
+const _WB_BLOQUES: Array[String] = ["_test_cargar_grafos", "_test_ramas_por_clase", "_test_ramas_por_nivel", "_test_autodisparo_desde_eventbus", "_test_ui_consume_reaccion", "_test_ui_portrait_expresion"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+var _wb_terminado: bool = false
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M21: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
+
+
 var _fallos: int = 0
 
 func _initialize() -> void:
 	call_deferred("_ejecutar")
+	call_deferred("_wb_armar_red")
+
+## Red de seguridad (NO gira en bucle): si un SCRIPT ERROR aborta _ejecutar()
+## antes de llegar a _summary(), el temporizador lo dispara. El camino feliz
+## llama a _summary() al final de _ejecutar(); este timer solo actua al abortar.
+func _wb_armar_red() -> void:
+	if _wb_cerrado or _wb_terminado:
+		return
+	create_timer(180.0).timeout.connect(_summary)
 
 func _ejecutar() -> void:
 	_test_cargar_grafos()
+	_fin("_test_cargar_grafos")
 	_test_ramas_por_clase()
+	_fin("_test_ramas_por_clase")
 	_test_ramas_por_nivel()
+	_fin("_test_ramas_por_nivel")
 	_test_autodisparo_desde_eventbus()
+	_fin("_test_autodisparo_desde_eventbus")
 	await _test_ui_consume_reaccion()
+	_fin("_test_ui_consume_reaccion")
 	await _test_ui_portrait_expresion()
-	print("=== TEST EVENTOS DIALOGO M21 (L82 + M53 consume): %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_fin("_test_ui_portrait_expresion")
+	_summary()
 
 func _check(cond: bool, mensaje: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + mensaje)
