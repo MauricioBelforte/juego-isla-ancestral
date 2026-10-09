@@ -1131,3 +1131,15 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - [x] **HALLAZGO:** `call_deferred("_summary")` recursivo como espera en suites headless que arrancan el mundo = **SEGFAULT (rc=139, Godot 4.7.2)**. Fix: cero auto-re-diferido + red de seguridad `create_timer(180.0)`. Regla de flota: usar `SceneTree.create_timer`, no `call_deferred` recursivo.
 - [ ] **Pendiente (director):** centralizar el commit de las 23 suites (yo NO commitee ni pushee). Decidir la NO-APLICA y la deriva de contenido M87 (`items.`).
 
+
+## M87 iter. 8 - fix del falso positivo del auditor (prefijos dinamicos) - 2026-10-09 00:22, automatizacion
+
+- [x] **Log reservado: 1504** - M87 iter. 8: reparado el falso positivo del auditor que rompia `test_validador_po_m87.gd` (2 fallos). Cabeza medida justo antes: **1504** (colisiones AJENAS 1290/1468 reportadas, no tocadas); cabeza tras la reserva **1505**.
+- [x] **Encargo:** mensaje del director **103** (LOTE 2 aceptado + pedido de diagnosticar/reparar los 2 fallos de `test_validador_po_m87.gd`).
+- [x] **Causa raiz (medida):** `items.` NO faltaba del catalogo - es un PREFIJO de runtime (`inventario_iter4.gd:283`, M14: `traducir_clave("items." + item_id + ".name")` con fallback explicito). `RE_DINAMICA` solo cubria la forma de `_t`, asi que `items.` entraba como clave LITERAL ausente -> `ok=false`.
+- [x] **Fix (1 archivo, mio):** `auditor_claves.gd` -> `RE_DINAMICA = "(?:traducir_clave|_t)\s*\(\s*\"([^\"]*)\"\s*\+"` (+ comentarios). NO toque la suite (instrumentacion de 3 capas intacta), ni M14, ni el catalogo.
+- [x] **Verificacion:** suite M87 **82/82, 0 fallos, EXIT 0** (x3), 0 SCRIPT ERROR; informe `RESULTADO: OK` con `Prefijos dinamicos detectados (2): DIARY.CAT_, items.`; regresiones localizacion 23/21/12/25/82 todas EXIT 0; `--check-only` EXIT 0; LF puro / sin BOM.
+- [x] **Anti-falso-verde:** sonda dirigida (scratch gitignored, borrada) comparo el auditor arreglado vs una copia PRE-FIX de HEAD -> **8/0**: el prefijo se reportaba ausente ANTES y no AHORA, y una clave literal ausente sigue reportandose en ambos (el fix no apaga el detector).
+- [x] **Hallazgos reportados (no arreglados):** H1 el auditor se auto-escanea (comentarios con el patron literal inventan prefijos fantasma); H2 `UiI18n.traducir*` (14 claves) no es visto por el auditor (falso negativo latente, familia BUG-1015); H3 `nombre_localizado()` de M14 nunca se llama y su esquema no existe en el catalogo.
+- [x] **Reporte:** canal **104** (`104-...-deepseek-a-atria-m87-iter8-auditor-prefijo-dinamico-traducir-clave.md`). Tracker -> **103**.
+- [ ] **Pendiente (director):** autorizar el commit del fix (sin push); decidir H2/H3; si quiere asercion de regresion permanente en la suite (subiria 82 -> 83+).

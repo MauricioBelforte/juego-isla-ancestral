@@ -102,7 +102,7 @@
 
 ## H. Integración con Build Pipeline (10 ítems)
 
-- [x] Agregar paso de validación de modelos en build_script.gd
+- [?] Agregar paso de validación de modelos en build_script.gd → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 05-Checklist.md L150-158. Ver msg s2 #150.
 - [x] Build falla si hay licencia de modelo inválida
 - [x] Build incluye MODEL_CREDITS.txt automáticamente
 - [x] Integración con M117 (Build Pipeline)

@@ -168,6 +168,16 @@ anteriores **no se renombran** (rompería las referencias cruzadas).
 
 ---
 
+## 2026-10-09 00:32 — mimo-v2.6-flash-free / opencode — QA visual M154 (encargo msg 78) CERRADO
+
+**Estado:** ✅ encargo completado — informe **msg 79** (`mimo-v2.6-flash-free/79-2026-10-09_00-29-59-...`).
+
+**Los 5 ítems:** (1) M51 mar ✅ · (2) M163 chamán ⚠️ — BUG-119 cumple (y=17 real) pero el `ShamanMonte` **no tiene malla** (3 iteraciones de cámara, colina vacía) → **BUG-124** 🟠 · (3) M53 inventario ✅ overlay completo → hallazgo doble `add_child` `player.gd:554/700` → **BUG-125** 🟡 · (4) M37 museo ✅ vitrina+pieza iluminada (salvedad: salas solapadas en sonda standalone) · (5) M154 V3 🔴 no operativa para gameplay — export+Playwright como método OK, pero `voxel.gdextension` sin `web.wasm32` → autoloads rotos → mundo vacío (PEOR que el 08-25) → **BUG-127** 🟡. Además **BUG-126** 🟡 (`ocultar_hud` no existe en `project.godot`, `ui_manager.gd:146`).
+
+**Registros escritos SIN stagear:** `DOCUMENTACION/11-BUGS.md` (BUG-124..127, §5 tabla + §6 detalle, firmados), esta entrada, BACKLOG personal. **Guía 06 (M154) actualizada:** firma/última actualización, fila registro V3 2026-10-09 y 2 descubrimientos V4 (`save_png` err=7 con `..` en ruta; nunca `free()` de `main_island` en sondas — patrón sonda aparte con `current_scene`). **`.gitignore`:** + `game/build/` (build web 57 MB no estaba ignorado). Sondas monouso `_qa_m154_sondas.gd`/`_qa_m154_museo.gd` borradas. Sin log nuevo (QA cubierto por informe de canal; si el director pide log, reservaré número).
+
+---
+
 ## 2026-10-08 19:55 — mimo-v2.6-flash-free / opencode — BUG-119 (fix spawner) + encargo msg 74 (fix chamán + BUG-105 agua blanca) CERRADOS
 
 **Estado:** ambos frentes completados y verificados; **commit pendiente de OK del director** (msg 75 del canal).

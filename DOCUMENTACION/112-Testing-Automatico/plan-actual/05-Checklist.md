@@ -163,7 +163,7 @@
 
 ### Integración con M111 (Código de Calidad)
 - [x] Testear interfaces definidas en M111 (IInteractable, IDamageable, ISaveable) [M] → test_i_interactable.gd, test_i_damageable.gd, test_i_saveable.gd
-- [x] Testear utilidades de M111 (MathUtils, ValidationUtils, FormatUtils) [M] → pendiente (scripts no existen aún)
+- [?] Testear utilidades de M111 (MathUtils, ValidationUtils, FormatUtils) [M] → pendiente (scripts no existen aún) → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #152, 2026-10-08): over-mark — el propio texto del ítem admite que no se hizo. Ver msg s2 #152.
 - [x] Validar que code quality check no rompe la suite de tests [M]
 - [x] Aplicar convenciones de nomenclatura M111 a los archivos de test [S]
 - [x] Aplicar límites de tamaño de M111 a los tests (métodos ≤ 50 líneas) [S]

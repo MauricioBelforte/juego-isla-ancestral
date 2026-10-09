@@ -1,9 +1,9 @@
 # 06 — Guía de Conexión de Visión del Agente (M154)
 
-**Modelo:** Hy3
-**Plataforma:** Kilo
+**Modelo:** mimo-v2.6-flash-free (último modificador; creación: Hy3)
+**Plataforma:** opencode (creación: Kilo)
 **Fecha de creación:** 2026-08-24
-**Última actualización:** 2026-09-02 (reconciliado estado V3: marcada 🟡 Operativa limitada — ver sección V3; el resto de vías sin cambios)
+**Última actualización:** 2026-10-09 (QA M154: registro de verificación V3 re-verificado — estado PEOR que 08-25, BUG-127; descubrimientos V4 nuevos: save_png err=7 con `..`, free() de main_island cuelga sondas — ver §Descubrimientos sobre capturas)
 **Estado:** Viva — se actualiza cada vez que una vía nueva se instala o verifica
 
 > 📍 **Ubicación:** este archivo vive en la **raíz de `DOCUMENTACION/`** (archivo 06, después de `5-FUTURAS-MEJORAS.md`) para que todos los agentes lo encuentren de inmediato. El módulo dueño es `154-Vision-Del-Agente/`; referencias oficiales en `AGENTS.md` (sección 25) y en el `plan-actual/` del M154.
@@ -313,6 +313,7 @@ python tools/mcp/godot-mcp/scripts-reutilizables/qa_web.py --modulo 52 --nota "p
 | 2026-08-25 | `qa_web.py` end-to-end | ✅ Juego bootea en Chromium headless: escena principal con UI de controles visible, cielo y terreno renderizados, **0 errores JS** |
 | 2026-08-25 | Limitación conocida | ⚠️ Label `FPS: 0` en headless (render por software SwiftShader); los FPS reales se validan con V4/V2, V3 es para UI/lógica/regresión visual |
 | 2026-08-25 | Interacción con Playwright (`scripts-prueba/prueba_qa_interactivo.py`) | ⚠️ **Hallazgo crítico**: la cámara NO responde a WASD en el build web. Causa raíz: `zylann.voxel` GDExtension no soporta `web.wasm32` → `VoxelTerrain`/`VoxelMesherBlocky` no existen → `main_island.gd` falla al parsear y toda su lógica (movimiento incluido) muere. El juego renderiza (cielo/terreno/UI) porque son nodos independientes, pero el gameplay está roto en web |
+| 2026-10-09 | Re-verificación completa QA M154 (mimo-v2.6-flash-free/opencode) | ⚠️ **Estado PEOR que el 08-25**: el export SI genera artefactos (wasm 39 MB + pck 17 MB; requiere crear `game/build/web/` antes, si no falla "carpeta destino no existe"), pero ahora `terrain_locator.gd` y `villager_manager.gd` **fallan al parsear** (`Could not find type "VoxelTerrain"`) y **sus autoloads no se instancian** → captura: UI carga, **mundo totalmente vacío (sin cielo ni terreno)**, NPC flotando, FPS 0. Pipeline método (export + `http.server` + Playwright skill) **SÍ funciona**; V3 queda 🟡 limitada a UI/boot/escenas sin voxel. Registrado como **BUG-127**. Nota: `game/build/` agregado a `.gitignore` (el `build/` del texto de arriba no cubría `game/build/`) |
 
 ### ⚠️ Limitación estructural del build web (2026-08-25)
 
@@ -609,6 +610,8 @@ Root (Node3D)
 - ⚠️ **Ventana SO ≠ viewport lógico (DPI 125%):** `--resolution 1152x648` por CLI NO redimensionó la ventana; `SetWindowPos` sí, pero el render interno queda a la resolución del proyecto. Para capturas fiel al render, usar el método #1.
 - ⚠️ **Previews por CLI:** los autoloads con `change_scene_to_file` pueden pisar la escena pedida (ver GUIA-GODOT/07-camera-input.md). Bootstrap corregido para respetar la escena CLI.
 - ⚠️ **Confirmado 2026-08-28 (Hy3, Kilo — caso M13):** `cap_printwindow.py` (método #2) puede devolver el frame del mundo 3D **sin las capas de UI creadas por código** (hotbar HUD invisible en 4 capturas del SO mientras la captura in-engine lo mostraba completo). Regla práctica: para validar **UI** usar SIEMPRE el método #1 (in-engine); reservar #2 para el mundo 3D.
+- ⚠️ **`save_png()` falla con err=7 (ERR_FILE_NOT_FOUND) si la ruta globalizada contiene `..`** (2026-10-09, mimo-v2.6-flash-free/opencode — caso M154): `DirAccess.open("res://..")` devuelve null y la creación de carpetas falla en silencio. **Ruta válida:** `ProjectSettings.globalize_path("res://").get_base_dir().get_base_dir()` (sube `res://` → carpeta del proyecto → **raíz del repo**, limpia) + `DirAccess.make_dir_recursive_absolute()` para `tools/mcp/godot-mcp/capturas/{ID-Modulo}/` antes de guardar. El glob de busqueda NO ve archivos bajo `capturas/` (path con espacios); listar con `Get-ChildItem -LiteralPath` de PowerShell sí funciona.
+- ⚠️ **NUNCA `free()`/`queue_free()` de `main_island` dentro de una sonda SceneTree** (2026-10-09, mimo-v2.6-flash-free/opencode — caso M154): cuelga en `ThreadedTaskRunner::wait_for_all_tasks` (threads voxel del terreno) y la sonda muere con "Waiting for all tasks to be picked is taking a long time". **Patrón correcto para escenas alternativas (ej. museo):** sonda SEPARADA que setea `current_scene` en `_initialize` ANTES de que Bootstrap corra — `bootstrap.gd:148-152` detecta `scene_file_path != ""` y != main_island, imprime "Escena personalizada por CLI detectada: no se redirige" y deja tu escena (los autoloads igual se montan). Un `look_at()` en un node fuera del árbol falla: usar `look_at_from_position()`.
 
 ## Conexión desde WorkBuddy AI (2026-08-28)
 

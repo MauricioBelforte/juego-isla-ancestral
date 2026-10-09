@@ -45,7 +45,7 @@
 ## 4. RF — Sesiones guiadas
 
 - [x] Definir el rol del moderador en sesiones guiadas [S]
-- [x] Escribir el discurso de briefing estándar en español (5 minutos) → KnownIssue no bloqueante DoD: estructura disenada en 03-Diseno.md §2.2 (briefing script outline); redaccion final requiere facilitador humano. Spec documented.
+- [?] Escribir el discurso de briefing estándar en español (5 minutos) → REVERTIDO por auditoría BUG-070 (atria-dawn, msg s3 #73, 2026-10-08): verbo `Escribir` + artefacto final inexistente (solo existe el outline en 03-Diseno.md L31 `briefing script outline`). El propio ítem admite `redaccion final requiere facilitador humano`. Conocido y visible (no inflación oculta), pero no cumple DoD estricta.
 - [x] Definir la técnica think-aloud y su instrucción al tester [S]
 - [x] Establecer regla de no ayuda: el moderador no da la solución salvo bloqueo absoluto [S]
 - [x] Definir la regla de los 10 segundos de silencio antes de intervenir [S]

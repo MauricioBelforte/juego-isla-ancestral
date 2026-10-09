@@ -147,6 +147,10 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-069 | Grafo de servicios (autoloads): **A1 = 0 ciclos** (cerrados 2026-10-06) y **A2 = 10 referencias** a un autoload declarado DESPUES, alcanzables desde `_ready()` — violacion de la regla de capas de `service_registry.gd`. ⚠️ **Medido: NO es un fallo de runtime** (en `_ready()` Godot 4.7.2 ya instancio todos los autoloads; solo `_init()` falla, y falla para cualquier destino, no por el orden) | M62 (arquitectura) — involucra M41-M44, M59, M63, M69, M91 | 🟡 Menor (deuda arquitectonica, sin fallo medido) | [→] **Parcial** — **ciclos CERRADOS**: A1 2→1 (T-D9 2, Log 1370: arista `SaveManager->Fishing` invertida por EventBus) y A1 1→0 (**Log 1391**: la arista `ThemeService->UIManager` era CODIGO MUERTO — `viewport_resized` no existe en el proyecto, mismo patron que BUG-116 — y sostenia el ultimo SCC). **A2 = 10 sigue ABIERTA**: las 10 son dependencias VIVAS (verifique cada guard contra su destino: las senales/metodos existen) → cerrarlas es inversion de dependencias en >=8 modulos ajenos, no una arista suelta. Gate `architecture-guard` EXIT 0, 0 hallazgos nuevos; allowlist con 1 entrada obsoleta (`A1\|ThemeService,UIManager`) que borra s2 (dueno del Guard) | DeepSeek-V4.1-Flash | 2026-10-06 |
 | BUG-081 | **4 errores de inferencia de tipos en scripts legales** (familia `:=` sobre Variant, GUIA-GODOT/01 §28): `credits_manager.gd:229` retorna `Array` donde declara `Array[Dictionary]`; `audio_credit.gd:50`, `audio_credits_generator.gd:33` y `:98` usan `:=` sobre `.keys()[i]` (Variant) → "Cannot infer the type" | M131 (Creditos) / M84 (Musica-Y-Audio-Legal) | 🟠 Mayor | [x] **Resuelto (2026-09-30, mimo-v2.6-flash-free)** — 4/4 sitios corregidos: `obtener_assets_terceros()` pasó a `Array[String]` (las entradas del JSON son strings, no dicts) y `rol_texto`/`rol_key`/`tipo_key` anotados `: String`. `test_credits_m131.gd` `== 3` → `>= 3` (mismo patrón T-104). Suites **M131 3 OK/0 FAIL** y **M84 1 OK/0 FAIL** (baseline M131: 2 OK/1 FAIL). Commits `6b7fdf1` + `d0c9603`, Log 1178 | mimo-v2.6-flash-free (registro: atria-dawn; hallazgo original: mimo-v2.5) | 2026-09-30 |
 | BUG-071 | **El fix de BUG-051 no está en el repositorio**: `HEAD` conserva el no-op (`godot --headless --script` sin script + `\|\| true`) porque el hunk que lo reescribe vive **solo en el worktree**. Su generador `tools/quality/gen_colector_sintaxis.py` (3 278 B) **no está versionado**: no está en el árbol de `HEAD` y lo matchea `.gitignore:129` `gen_*.py` (la negación `!tools/quality/gen_colector_sintaxis.py` existe solo en el worktree). **Doble consecuencia:** (a) BUG-051 figura `[x] Resuelto (Log 1039)` sin artefacto versionado que lo respalde; (b) al commitear el worktree, el paso `Generate syntax collector` falla en checkout limpio (`Errno 2`) -> job `godot-lint` en ROJO y el gate «duro verificado por inyección» **nunca llega a ejecutarse en CI** | M111 Código de Calidad / M83 (CI) — `quality.yml`, `tools/quality/`, `.gitignore` | 🟠 Mayor | [x] **Resuelto (2026-09-20, commit `11ac4d9`, atria-dawn)** — el `.py` está versionado (+95), la negación está en `.gitignore:130`, el no-op **desapareció** de `quality.yml` (0 ocurrencias de `--script 2>&1 \|\| true`) y el gate real corre; generador verificado (**855 preloads**, salida **byte-idéntica** `91d6f337…`) | DeepSeek-V4.1-Flash (reportado a Atria-Dawn-Preview) | 2026-09-20 |
+| BUG-124 | Chaman del Monte (M163) **sin representacion visual**: `ShamanMonte` es un `Node3D` invisible (sin malla) — el jugador no puede ver ni localizar al NPC de encantamientos | M163-Encantamientos (`shaman_npc.gd`) / M161 visuales | 🟠 Mayor | [ ] Abierto (QA visual M154: 3 capturas con la colina vacia; posicion Y=17 CORRECTA) | mimo-v2.6-flash-free | 2026-10-09 00:20 |
+| BUG-125 | `InventoryPanel` con doble `add_child` (`player.gd:554` a `bg` + `:700` a `canvas`): ERROR de engine en **cada primera apertura** del inventario | M11-Jugador / M53 Inventario (`player.gd`) | 🟡 Menor | [ ] Abierto (inventario FUNCIONA — captura M53 OK —; solo ERROR de consola + arbol de nodos en estado no diseñado) | mimo-v2.6-flash-free | 2026-10-09 00:20 |
+| BUG-126 | InputMap `ocultar_hud` **no existe** en `project.godot`: ERROR del motor en `_unhandled_input` de `ui_manager.gd:146` — toggle de HUD con tecla H roto (comentario del codigo cita M56/T-053-067) | UI core (`scripts/ui/core/ui_manager.gd`) | 🟡 Menor | [ ] Abierto | mimo-v2.6-flash-free | 2026-10-09 00:20 |
+| BUG-127 | Export Web **sin libreria wasm32 de Voxel Tools** (`voxel.gdextension`): el juego NO arranca en navegador (mundo vacio, `TerrainLocator`/`VillagerManager` fallan al parsear) — via **M154 V3 queda no operativa** para QA de gameplay | Export Web (`export_presets.cfg`) / M154-V3 / addons zylann.voxel | 🟡 Menor (web no es plataforma de venta — plan Steam/PC) | [ ] Abierto (pipeline export+Playwright SI funciona como metodo; fix = compilar ext. wasm32 o retirar V3 del alcance) | mimo-v2.6-flash-free | 2026-10-09 00:20 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
@@ -194,6 +198,230 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-124 — Chaman del Monte (M163) sin representacion visual: `ShamanMonte` es un Node3D invisible (sin malla)
+
+- **Fecha de reporte:** 2026-10-09 00:20
+- **Módulo(s) afectado(s):** M163-Sistema-De-Encantamientos — `scripts/enchantment/shaman_npc.gd` (spawneado por `scripts/main_island.gd:400 _crear_shaman()`); relacion con M161 (diseño visual de NPCs).
+- **Severidad:** 🟠 Mayor — el jugador no puede VER ni localizar al Chaman del Monte; al ser interaccion solo por proximidad (radio 2.5 m) y no tener ninguna figura, la mecanica de encantamiento es invisible para quien no sepa las coordenadas.
+- **Estado:** [ ] Abierto
+
+**Descripción del problema:**
+`ShamanMonte` se instancia como `shaman_npc.new()` y hereda de `InteractableBase` (`extends Node3D`, `interactable_base.gd:12`), que **no crea ningun visual**. `shaman_npc.gd` (107 lineas) termina en `_abrir_ui_encantamiento()` y tampoco crea MeshInstance3D/sprite/modelo. Contraste: `scripts/npc/villager.gd` SI tiene `_crear_visuales()` (lineas 37/74). `NPCVisualDatabase` (`scripts/data/npc_visual_database.gd`) **no tiene ningun consumidor runtime** que le adjunte modelo (solo lo referencian el mismo y `scripts/editor/_colector_sintaxis.gd`). Grep en `scripts/` por `ShamanMonte|shaman.*visual` devuelve 1 unico match: su creacion en `main_island.gd:406`.
+
+**Pasos para reproducir:**
+1. Arrancar el juego (arranque normal; o sonda V4 `--script res://tests/_qa_m154_sondas.gd`, fase 2).
+2. Ir a la montaña del chaman: (2320, 17, 2300).
+3. Observar: no hay ninguna figura; solo terreno.
+
+**Comportamiento esperado:**
+Un NPC visible (malla/estilizado al estilo de los villager) parado sobre el terreno en (2320, 17, 2300).
+
+**Comportamiento actual:**
+Posicion CORRECTA pero completamente invisible: 3 iteraciones de camara QA (lejana +45/+30/+45, media, close-up +8/+4/+8) muestran la colina turquesa vacia. El nodo existe y se auto-registra en InteractionManager (la UI se abria si el jugador estuviera a 2.5 m), pero no hay nada que ver.
+
+**Entorno / Contexto:**
+- Versión del juego / build: trabajo 2026-10-08/09, Godot 4.7.2 stable
+- Plataforma: PC (Windows), sonda V4 via `--script`
+- Frecuencia: Siempre (no existe codigo que cree el visual)
+- Nota: la POSICION es correcta — la verificacion de BUG-119 (`ShamanMonte global_position = (2320.0, 17.0, 2300.0)`, Y esperada ~17) se cumplio; este bug es SOLO la ausencia de malla.
+
+**Evidencia:**
+- Runtime: `[QA-M154][EVIDENCIA] ShamanMonte global_position = (2320.0, 17.0, 2300.0) (Y esperada ~17, fallback 35)`
+- Capturas (3 iteraciones, `tools/mcp/godot-mcp/capturas/163-Encantamientos/`):
+  - `cap_163_2026-10-08_23-37-27_post_bug119_chaman_terreno.png` (lejana, clipped/clima)
+  - `cap_163_2026-10-08_23-56-42_post_bug119_chaman_terreno.png` (niebla, sin figura)
+  - `cap_163_2026-10-09_00-08-11_post_bug119_chaman_terreno.png` (close-up: colina vacia)
+- Codigo: `shaman_npc.gd:1-107` (0 creaciones de malla), `interactable_base.gd:12` (`extends Node3D`), `villager.gd:74 _crear_visuales()` como contraste positivo.
+
+**Intentos de solución ya probados (si aplica):**
+- 3 posiciones de camara distintas → descarta error de encuadre: no hay figura que encuadrar.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no aplica
+- Módulo/documentación relacionada: `DOCUMENTACION/163-Sistema-De-Encantamientos/plan-actual/` — el checklist NO lista "malla del chaman" como pendiente explicito; `05-Checklist.md:244/271` dice "verificado en headless, NO visualmente (M154 V0)".
+
+**Firma:**
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-09 00:20
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió: (pendiente — dueño M163/M161: crear visual tipo villager o reutilizar NPCVisualDatabase; NO lo hice yo, mi encargo era QA visual)
+- [ ] Archivos/commits modificados:
+- [ ] Log del proyecto:
+- [ ] Verificado por:
+
+---
+
+### BUG-125 — `InventoryPanel` con doble `add_child` (`:554` a bg + `:700` a canvas): ERROR de engine en cada primera apertura del inventario
+
+- **Fecha de reporte:** 2026-10-09 00:20
+- **Módulo(s) afectado(s):** M11-Personaje-Del-Jugador / M53 UI Inventario — `scripts/player/player.gd`
+- **Severidad:** 🟡 Menor — el inventario ABRE y se ve correctamente (captura M53 OK); el segundo `add_child` falla y el panel queda como hijo de `Backdrop` en vez de `InventoryCanvas` (sigue funcionando porque bg es full-rect). 1 ERROR de engine por sesión en la primera apertura + arbol de nodos en estado distinto al disenado (riesgo latente si cambia el layout de bg).
+- **Estado:** [ ] Abierto
+
+**Descripción del problema:**
+`_create_inventory_panel()` agrega `panel` a `bg` (Backdrop) en `player.gd:554` (`bg.add_child(panel)`) mientras construye su arbol, y luego en `player.gd:700` vuelve a hacer `canvas.add_child(panel)`. Como el panel ya tiene padre, Godot rechaza el segundo add con ERROR. `_inventory_panel = panel` (`:701`) se setea igual, asi que el flujo continua y el inventario funciona.
+
+**Pasos para reproducir:**
+1. Arrancar el juego (o sonda V4: `--script res://tests/_qa_m154_sondas.gd`, fase inventario).
+2. Presionar la tecla de inventario (o llamar `_toggle_inventory()`).
+3. Leer la consola en la **primera** apertura de la sesion.
+
+**Comportamiento esperado:**
+0 errores de engine; el panel con UN solo padre (coherente: o `InventoryCanvas`, o `Backdrop`).
+
+**Comportamiento actual:**
+```
+ERROR: Can't add child 'InventoryPanel' to 'InventoryCanvas', already has a parent 'Backdrop'.
+   at: add_child (scene/main/node.cpp:1717)
+   GDScript backtrace (most recent call first):
+       [0] _create_inventory_panel (res://scripts/player/player.gd:700)
+       [1] _open_inventory (res://scripts/player/player.gd:515)
+       [2] _toggle_inventory (res://scripts/player/player.gd:509)
+```
+
+**Entorno / Contexto:**
+- Versión: Godot 4.7.2 stable, PC Windows
+- Frecuencia: Siempre en la primera apertura por sesion (posteriores no re-crean: `_inventory_panel != null`)
+
+**Evidencia:**
+- Captura del inventario funcionando: `tools/mcp/godot-mcp/capturas/53-UI-UX/cap_53_2026-10-09_00-08-13_inventario_unificado_overlay.png`
+- Codigo: `player.gd:554` (`bg.add_child(panel)`) vs `player.gd:700` (`canvas.add_child(panel)`); ambos apuntan al mismo nodo `panel`.
+
+**Intentos de solución ya probados (si aplica):**
+- Solo diagnostico (mi encargo era QA visual, no fix).
+
+**Referencias cruzadas:**
+- BUG-001 (overlay de inventario pegado al cerrar, historico) — distinto problema.
+
+**Firma:**
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-09 00:20
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió: fix sugerido = eliminar `:700` (el panel ya quedo en el subarbol bg→canvas) o eliminar `:554` y dejarlo hijo directo de canvas — decidir segun layout; verificar captura antes/despues.
+- [ ] Archivos/commits modificados:
+- [ ] Log del proyecto:
+- [ ] Verificado por:
+
+---
+
+### BUG-126 — InputMap `ocultar_hud` no existe: ERROR del motor en `_unhandled_input` de `ui_manager.gd:146` (toggle de HUD con H roto)
+
+- **Fecha de reporte:** 2026-10-09 00:20
+- **Módulo(s) afectado(s):** UI core — `scripts/ui/core/ui_manager.gd:145-146` (el comentario del codigo cita "T-053-067 M56: toggle de visibilidad del HUD con accion `ocultar_hud` (H)")
+- **Severidad:** 🟡 Menor — ERROR del motor al evaluar input + la funcion de ocultar HUD (tecla H) **nunca dispara** (accion inexistente).
+- **Estado:** [ ] Abierto
+
+**Descripción del problema:**
+`ui_manager.gd:146` hace `if event.is_action_pressed("ocultar_hud"):` pero la accion `ocultar_hud` **no esta declarada** en `project.godot` seccion `[input]` (grep: 0 ocurrencias). Godot emite ERROR cada vez que `_unhandled_input` evalua la accion.
+
+**Pasos para reproducir:**
+1. Arrancar el juego.
+2. Mover el mouse o pulsar cualquier tecla (cualquier evento de input).
+3. Leer consola.
+
+**Comportamiento esperado:**
+Accion `ocultar_hud` registrada en `project.godot` (tecla H) → toggle del HUD sin errores; o bien, si la accion fue descontinuada, eliminar la referencia en `ui_manager.gd:146`.
+
+**Comportamiento actual:**
+```
+ERROR: The InputMap action "ocultar_hud" doesn't exist. Did you mean "saltar"?
+   at: event_get_action_status (core/input/input_map.cpp:292)
+   GDScript backtrace (most recent call first):
+       [0] _unhandled_input (res://scripts/ui/core/ui_manager.gd:146)
+```
+
+**Entorno / Contexto:**
+- Versión: Godot 4.7.2 stable, PC Windows
+- Frecuencia: Siempre (en cada evento de input no consumido)
+
+**Evidencia:**
+- Error runtime completo arriba (corrida de QA visual M154, 2026-10-09).
+- Grep: `ocultar_hud` NO aparece en `project.godot`; SI en `ui_manager.gd:145` (comentario) y `:146` (uso).
+
+**Referencias cruzadas:**
+- Guía 07 §8 / GUIA-GODOT/01 (errores comunes de InputMap): aplicable como referencia.
+
+**Firma:**
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-09 00:20
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió: dueño UI/M56 decide: declarar la accion `ocultar_hud` (H) en `[input]` o quitar la rama muerta.
+- [ ] Archivos/commits modificados:
+- [ ] Log del proyecto:
+- [ ] Verificado por:
+
+---
+
+### BUG-127 — Export Web sin libreria wasm32 de Voxel Tools: el juego NO arranca en navegador (mundo vacio); via M154 V3 queda no operativa para QA de gameplay
+
+- **Fecha de reporte:** 2026-10-09 00:20
+- **Módulo(s) afectado(s):** Exportacion Web (`game/isla-ancestral/export_presets.cfg`, preset `Web`) + `addons/zylann.voxel/voxel.gdextension`; impacta la via **M154 V3** (Export web + Playwright) y los autoloads `TerrainLocator` / `VillagerManager`.
+- **Severidad:** 🟡 Menor — web NO es plataforma de venta (el plan apunta Steam/PC), pero V3 queda inservible para QA de gameplay y util solo para UI/boot.
+- **Estado:** [ ] Abierto
+
+**Descripción del problema:**
+El export web **genera artefactos** (index.html/js + wasm 39 MB + pck 17 MB) pero con WARNING del GDExtension y el build resultante **no es funcional**: sin `voxel.gdextension` no existe el tipo `VoxelTerrain`, asi que `terrain_locator.gd` y `villager_manager.gd` no compilan, sus autoloads fallan al instanciarse y el mundo queda vacio.
+
+**Pasos para reproducir:**
+1. Crear carpeta destino: `New-Item -ItemType Directory game\build\web` (si no existe, el export falla con "carpeta de destino no existe").
+2. `Godot_v4.7.2-stable_win64_console.exe --headless --path game/isla-ancestral --export-release Web`
+   → WARNING: `GDExtensión: No se encontró la librería "wasm32" para GDExtension: "res://addons/zylann.voxel/voxel.gdextension"`
+3. Servir: `python -m http.server 8931 --directory game/build/web` y abrir en Chromium (Playwright).
+4. Capturar pantalla a los 20 s.
+
+**Comportamiento esperado:**
+Juego jugable en navegador (al menos terreno + personaje), o en su defecto un export fallido explicito — no un build que "arranca" roto.
+
+**Comportamiento actual:**
+Consola Chromium (via Playwright):
+```
+[error] ERROR: No GDExtension library found for current OS and architecture (web.wasm32) in configuration file: res://addons/zylann.voxel/voxel.gdextension
+[error] ERROR: GDExtension dynamic library not found: 'res://addons/zylann.voxel/voxel.gdextension'.
+[log] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support.
+[error] SCRIPT ERROR: Parse Error: Could not find type "VoxelTerrain" in the current scope.  (terrain_locator.gd:14/28/34/36/37; villager_manager.gd:740/744/749/756)
+[error] ERROR: Failed to instantiate an autoload, script 'res://scripts/core/terrain_locator.gd' does not inherit from 'Node'.
+[error] ERROR: Failed to instantiate an autoload, script 'res://scripts/npc/villager_manager.gd' does not inherit from 'Node'.
+```
+Captura: la UI del juego SI carga (reloj, barras, minimapa, controles) pero **FPS: 0, fondo vacio blanco/gris, sin terreno, un NPC flotando arriba-centro**.
+
+**Entorno / Contexto:**
+- Versión: Godot 4.7.2 stable (template oficial ed1daf0bf), export con plantillas 4.7.2.stable instaladas
+- Plataforma: Web (Chromium headless/Playwright), servidor python http.server
+- Frecuencia: Siempre (la libreria wasm32 no existe en el addon)
+
+**Evidencia:**
+- Captura: `tools/mcp/godot-mcp/capturas/154-Vision-Del-Agente/cap_154_2026-10-09_00-17-08_v3_web_preview.png`
+- Log de export: WARNING de `voxel.gdextension` + `Project export for preset "Web" completed with warnings`.
+- Artefactos: `game/build/web/` (index.wasm 39 514 754 B, index.pck 17 662 132 B).
+- Nota: `.gitignore` actualizado (entrada `game/build/`) para no versionar el build.
+
+**Intentos de solución ya probados (si aplica):**
+- Re-export tras crear la carpeta destino (resuelve el fallo "carpeta no existe") — el warning de wasm32 persiste (es del addon, no del export).
+- NO intente compilar voxel-tools para web (toolchain Emscripten fuera del alcance de mi encargo de QA).
+
+**Referencias cruzadas:**
+- `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` seccion V3 — **limitacion ya documentada el 2026-08-25** (fila "Interaccion con Playwright": camara no responde porque `zylann.voxel` no tiene build `web.wasm32`). **Lo NUEVO (2026-10-09): el estado actual es PEOR que el del 08-25** — ese dia se reportaba "cielo y terreno renderizados, 0 errores JS"; hoy `terrain_locator.gd` y `villager_manager.gd` **fallan al parsear** (`Could not find type "VoxelTerrain"`), sus autoloads **no se instancian** y la captura muestra el mundo **totalmente vacio** (sin cielo ni terreno, solo UI + NPC flotante). Es decir: entre el 08-25 y hoy el build web **regreso** (mas scripts voxel-dependientes quedaron en el arranque). Detalle en la propia guia 06 (registro de verificacion V3, fila 2026-10-09).
+- GUIA-BLENDER/GUIA-GODOT: no aplica.
+
+**Firma:**
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-09 00:20
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió: dueño de builds/export decide: (a) compilar `voxel.gdextension` para `web.wasm32` (Emscripten) o (b) declarar web fuera de alcance y ajustar la via V3 en la guia 06.
+- [ ] Archivos/commits modificados:
+- [ ] Log del proyecto:
+- [ ] Verificado por:
+
+---
+
 ### BUG-121 — 3 tests headless (M107/M110/M78) emiten SCRIPT ERROR `instantiate` sobre null; causa raíz en el autoload de fauna, no en los tests
 
 - **Fecha de reporte:** 2026-10-08 00:05

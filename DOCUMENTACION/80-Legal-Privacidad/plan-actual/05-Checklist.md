@@ -120,8 +120,8 @@
 - [x] M78: responsable del tratamiento coherente con el titular de M78 [S] -- agnes-2.5-flash 2026-09-13: coherencia documentada en 03-Diseno.md §integración; M78 ✅ cerrado. Responsible party aligned.
 - [x] M78: usar la razón social/marca comercial de M78 en la sección de contacto [M]
 - [x] M104: el estado del opt-out pertenece a M104 como única fuente de verdad [M] -- agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §M104; M104 ✅ autloader existente. Fuente de verdad definida.
-- [x] M104: privacy_menu.gd consulta el estado sin modificarlo [S]
-- [x] M104: privacy_consent.gd solo actúa si AnalyticsDirector existe [C]
+- [?] M104: privacy_menu.gd consulta el estado sin modificarlo [S] → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 04-Codigo.md. Ver msg s2 #150.
+- [?] M104: privacy_consent.gd solo actúa si AnalyticsDirector existe [C] → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 04-Codigo.md. Ver msg s2 #150.
 - [x] M104: rechazo de consentimiento invoca establecer_opt_out(true) [M] -- agnes-2.5-flash 2026-09-13: contrato documentado en 03-Diseno.md §M104 API; M104 ✅ existen métodos opt-out. Integration documented.
 - [x] M104: desactivación borra el buffer local (responsabilidad de M104) [M]
 - [x] M104: la política documenta los datos que M104 recogería [M]

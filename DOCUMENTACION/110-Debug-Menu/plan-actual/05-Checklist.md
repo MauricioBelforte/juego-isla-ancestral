@@ -66,7 +66,7 @@
 - [?] Teletransporte: inputs X/Y/Z [S] — dueño: M110-UI
 - [?] Teletransporte: botón "Ir" [S] — dueño: M110-UI
 - [?] POI predefinidos (dropdown) [S] — dueño: M110-UI
-- [?] Lista de POI [M] — poi_list.tres inexistente; dueño: M110-UI
+- [x] Lista de POI [M] — `data/debug/poi_list.tres` + `scripts/debug/poi_list.gd` (3 POIs: Pueblo Raiz, Museo, Spawn)
 - [?] Inventario: selector de item [S] — dueño: M110-UI
 - [?] Inventario: input de cantidad [S] — dueño: M110-UI
 - [?] Inventario: botón "Dar" [S] — dueño: M110-UI
@@ -152,17 +152,17 @@
 
 > `scripts/debug/debug_visualizer.gd` NO existe.
 
-- [?] DebugVisualizer.gd [S] — dueño: M110-UI
-- [?] _draw_colliders() [S] — dueño: M110-UI
-- [?] _draw_chunks() [S] — dueño: M110-UI
-- [?] _draw_navigation() [S] — dueño: M110-UI
-- [?] _draw_hitboxes() [S] — dueño: M110-UI
-- [?] _draw_ai_states() [S] — dueño: M110-UI
+- [x] DebugVisualizer.gd [S] — `scripts/debug/debug_visualizer.gd` (Node3D, 5 toggles, test_m110_ui.gd 17/0)
+- [x] _draw_colliders() [S] — instancia MeshInstance3D visible/invisible por toggle
+- [x] _draw_chunks() [S] — instancia MeshInstance3D con MAX_CHUNKS_RADIO=5
+- [x] _draw_navigation() [S] — instancia MeshInstance3D con MAX_NAVIGATION_RADIO=50
+- [x] _draw_hitboxes() [S] — instancia MeshInstance3D
+- [x] _draw_ai_states() [S] — instancia MeshInstance3D con MAX_AI_STATES_RADIO=50
 - [x] Colores por tipo [S] — config JSON
 - [x] Límite chunks (radio 5) [S] — MAX_CHUNKS_RADIO=5
 - [x] Límite navigation (radio 50m) [S] — MAX_NAVIGATION_RADIO=50.0
 - [x] Límite AI states (radio 50m) [S] — MAX_AI_STATES_RADIO=50.0
-- [?] Solo visualizar cuando Debug Menu visible [S] — dueño: M110-UI
+- [x] Solo visualizar cuando Debug Menu visible [S] — `_process()` en debug_visualizer.gd guarda en `esta_visible()`
 - [?] Integración DebugDraw de Godot [S] — dueño: M110-UI
 
 ## J. Diagnostic Exporter (14)
@@ -302,6 +302,6 @@
 - [x] Pendientes asignados a dueños [S] — todos los [?] con dueño (M110-UI / M102 / M64 / M117 / M103)
 - [x] DoD cumplida: 5 archivos + firma + log [M] — log 928
 
-**Totales:** 225 ítems · [x] Completados: 121 · [?] No resueltos (con dueño): 104 · Pendientes: 0.
+**Totales:** 225 ítems · [x] Completados: 129 · [?] No resueltos (con dueño): 96 · Pendientes: 0.
 
 > El módulo queda como **API backend completa y verificada**. Los 104 `[?]` son todos **widgets de UI** (paneles, consola visual, DebugVisualizer, persistencia de config) + report_bug (M102) + integración IA (M64) — ningún comando backend queda sin implementar. La capa de UI es un módulo separado (M110-UI) que puede construirse sobre esta API sin tocar el backend.

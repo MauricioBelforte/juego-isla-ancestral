@@ -6,7 +6,8 @@
 # Inventario determinista de claves entre el CÓDIGO y el CATÁLOGO:
 #   · usadas en código pero AUSENTES del catálogo → la UI muestra la clave cruda
 #   · presentes en el catálogo pero sin uso literal → huérfanas (o dinámicas)
-#   · construcciones dinámicas (`_t("DIARY.CAT_" + cat)`) → prefijos, no falsos positivos
+#   · construcciones dinámicas (prefijo literal + variable, p. ej. DIARY.CAT_ en
+#     _t y items. en traducir_clave) → prefijos, no falsos positivos
 #   · claves con contexto gettext (`tr_ctx`) → clave compuesta "MOD.SEC.CTX|CLAVE"
 #   · claves que NO pasan por `_t()`: APIs que reciben la clave como argumento y
 #     traducen adentro (`open_confirm` → `ConfirmPopup.configurar` hace `_t(clave)`)
@@ -18,7 +19,20 @@ class_name AuditorClaves
 extends RefCounted
 
 const RE_T := "_t\\s*\\(\\s*\"([^\"]+)\""
-const RE_DINAMICA := "_t\\s*\\(\\s*\"([^\"]*)\"\\s*\\+"
+## Prefijos dinámicos: clave construida en runtime (`PREFIX + var`). No es una
+## clave verificable estáticamente, así que se registra como PREFIJO y se excluye
+## del veredicto (no se puede afirmar que falte del catálogo).
+##
+## iter. 8 (2026-10-09, Log 1504): el patrón sólo cubría la forma de _t con
+## concatenación de prefijo, así que la misma forma en traducir_clave (M14,
+## inventario_iter4.gd:283) registraba el prefijo como clave LITERAL usada y el
+## auditor lo reportaba como ausente del catálogo -> falso positivo que rompía
+## test_validador_po_m87.gd (2 fallos). Misma familia que el punto ciego de
+## Log 1015 (open_confirm): el auditor veía la llamada pero no su forma
+## dinámica. Ahora cubre los DOS puntos de entrada de clave completa.
+## (⚠️ Este archivo se auto-escanea: los comentarios NO deben contener el patrón
+## literal de llamada, o inventan un prefijo fantasma en el informe.)
+const RE_DINAMICA := "(?:traducir_clave|_t)\\s*\\(\\s*\"([^\"]*)\"\\s*\\+"
 const RE_TRAD := "traducir_clave\\s*\\(\\s*\"([^\"]+)\""
 const RE_TR_KEY := "tr_key\\s*\\(\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]*)\""
 const RE_TR_CTX := "tr_ctx\\s*\\(\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\""

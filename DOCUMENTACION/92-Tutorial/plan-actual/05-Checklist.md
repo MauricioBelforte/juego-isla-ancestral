@@ -47,7 +47,7 @@
 - [x] RF2: condiciones de contexto permitidas: día, hora, zona, sistema disponible [M]
 - [x] RF3: revalidación de "ya lo sabe": señal de maestría antes del trigger completa el capítulo en silencio [C]
 - [x] RF3: la revalidación no muestra ningún paso ni feedback al jugador que ya domina [M]
-- [x] RF19: mapeo de revalidación por dominio+señal en `revalidacion.gd` (M70, M33, M34, M35, M16, M19) [M]
+- [?] RF19: mapeo de revalidación por dominio+señal en `revalidacion.gd` (M70, M33, M34, M35, M16, M19) [M] → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 04-Codigo.md. Ver msg s2 #150.
 - [x] RF19: la revalidación registra log de M103 para trazabilidad [S] → `_log_m103()` (duck-typing GameLogger.info + fallback print) en la rama de revalidación silenciosa (2026-09-15, Log 911)
 - [x] RF2: nunca disparar lecciones sobre NPCs dormidos u ocupados (estado M19 `set_ocupado`) [M] → gate Log 336 verificado en código (`_vecino_libre()` en despliegue y en trigger de mundo) + test (Log 911)
 - [x] RF2: no disparar capítulos de sistemas no implementados (omisión con log de degradación) [M]

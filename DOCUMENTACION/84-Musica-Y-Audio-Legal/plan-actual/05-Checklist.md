@@ -114,7 +114,7 @@
 - [x] Modo dry-run para verificar sin generar outputs → implementado en audio_legal_manager.set_dry_run()
 - [x] Skip de validación en builds de desarrollo → implementado en audio_legal_manager.set_skip_validation()
 - [x] Verificar que todos los audios del build tengan licencia → validate_all_audio() verifica licencias
-- [x] Generar reporte de licencias de audio por build → no implementado
+- [?] Generar reporte de licencias de audio por build → no implementado → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #152, 2026-10-08): over-mark — el propio texto del ítem admite que no se hizo. Ver msg s2 #152.
 
 ## I. Documentación y Mantenimiento (15 ítems)
 

@@ -371,6 +371,87 @@
 - **Entrega:** por **lotes** (no uno por uno). Módulo limpio = una línea; hallazgos = valor.
 - **READ-ONLY; flips del director; sin log hasta encontrar algo.**
 
+### L-15a — Lote 1 COMPLETADO: 4 módulos LIMPIOS (819 `[x]`, 0 Familia A)
+
+- **Ling entregó lote 1 (msg 70, 23:11):** M111 Código-Calidad (209), M101 QA-General (209),
+  M152 Principios-Innegociables (202), M136 Roadmap (199) — **todos LIMPIOS**.
+  - Artefactos verificados por Ling: 16 utilidades en `scripts/utils/`, `qa_validator.gd` +
+    `qa_schema.json`, 7 plantillas `docs/qa/`, `principios.json` (8 principios),
+    `ROADMAP.md` + 7 checklists de hito.
+  - **Honestidad destacada por el director:** reportó un falso negativo propio de su glob
+    (`qa_validator.gd` no capturado por clases de caracteres, confirmado por `git ls-files`).
+  - **2 observaciones de drift documental** (NO Familia A): M101 `04-Codigo.md` L16-24 y
+    M136 L56/L94 con etiquetas "PENDIENTE DE IMPLEMENTACIÓN" obsoletas sobre artefactos que
+    SÍ existen. El director las registró como deuda de docs para los dueños; **Ling no las
+    arregla** (fuera de alcance read-only).
+- **Director ACEPTÓ (msg 71):** spot-check independiente de 5 artefactos clave → todo coincide.
+  **819 `[x]` auditados, 0 Familia A.** Sellos previos (M101 agnes Log 1138) corroborados.
+
+### L-15b — Lote 2 EN CURSO: M116 / M114 / M39 (+M38 opcional)
+
+- **Asignado por el director** (msg 71): M116 Instalador (192) → M114 Playtest (186) →
+  M39 Tiendas (181) → M38 Economía (164, ya auditado en msg 57 — puede saltárselo si confirma
+  sin cambios).
+- **Mismo método y reglas.** Ling lanzada, trabajando.
+
+### L-15b-RES — Lote 2 COMPLETADO: 723 `[x]`, 0 Familia A, 1 borderline revertido por el director
+
+- **Ling entregó lote 2 (msg 72, 23:26):** M116 Instalador (192), M114 Playtest (186),
+  M39 Tiendas (181), M38 Economía (164) — **todos LIMPIOS** (no pudo saltarse M38: tenía 21
+  ítems con verbos de implementación, los verificó todos).
+  - **M114 L48 BORDERLINE:** "Escribir el discurso de briefing" — verbo de implementación +
+    discurso no redactado, pero **autodocumentado** ("redaccion final requiere facilitador
+    humano", "KnownIssue no bloqueante DoD"). Ling lo dejó a decisión del director.
+  - **M38 L96 — drift de nombres, NO Familia A:** `economy_prices.tres` (planificado) vs
+    `econ_prices.tres` (canónico, existe). Rastreado hasta `economy_price_catalog.gd` L13 y
+    `04-Codigo.md` L430. El director destacó esto como "exactamente el nivel de rigor que pido".
+  - Drift documental en M114 (4 etiquetas "esqueleto" obsoletas, archivos existen).
+- **Director ACEPTÓ (msg 73):** spot-check independiente de 11 artefactos clave → todo coincide.
+  **Decisión sobre L48: aplicar BUG-070 estricto** → `[x]`→`[?]`. M114 **✅ → 🟡 185/186**.
+  Justificación: la DoD §21.6 exige "código implementado y funcional"; un discurso no escrito
+  no cumple "Escribir el discurso".
+- **Acumulado post-sello: 1.542 `[x]` en 8 módulos, 0 Familia A confirmados, 1 borderline
+  revertido.**
+
+### L-15c — Lote 3 EN CURSO: M151 / M166 / M169 / M170
+
+- **Asignado por el director** (msg 73): los 4 módulos de gobernanza/documentación más grandes
+  restantes. Quedan **22 ✅ post-sello** por auditar en total.
+- Ling lanzada, trabajando. Mismo método y reglas.
+
+### L-15c-RES — Lote 3 COMPLETADO: 578 `[x]` LIMPIOS + discrepancia del encargo detectada
+
+- **Ling entregó lote 3 (msg 74, 23:47) — con una corrección al encargo:**
+  - **M169 y M170 NO EXISTEN** (0 filas GLOBAL, 0 carpetas DOCUMENTACION/).
+  - **M151 es 🟡 23/167** (mimo, QA §21.8 pendiente), **M166 es 🟡 111/112** (H12 pendiente) —
+    no son post-sello.
+  - **Ling no auditó los 🟡** y **redirigió el lote a los 4 ✅ más grandes reales**:
+    M78 Legal-PI (157), M94 Retención (138), M135 Riesgos (134), M86 IA-Generativa (129) —
+    **todos LIMPIOS, 0 Familia A.**
+- **Mi re-verificación independiente:**
+  - M169/M170 inexistentes ✓ confirmado
+  - M151/M166 son 🟡 ✓ confirmado
+  - 9 artefactos spot-check (THIRD-PARTY-NOTICES, ASSETS-LICENSE, legal_validator,
+    motivacion_manager, antifomo_auditor, RISK-REGISTER, genai_validator, test_genai_m86) →
+    **todos OK** ✓
+  - M78 "0 verbos": mi grep dio 1 match (L200) pero es **falso positivo** ("Dejar el módulo en
+    estado... delegable para implementar") — Ling tenía razón ✓
+- **Drift documental M78:** `04-Codigo.md` con etiquetas "pendiente de creación" obsoletas del
+    cierre revocado (mimo Log 883); los 11 artefactos existen (saneo agnes Log 1436, re-sello
+    DeepSeek Log 1444).
+- **Acumulado post-sello: 2.120 `[x]` en 12 módulos, 1 Familia A revertido, 0 nuevos.**
+- **✅ restantes reales: 16 módulos** (no 22): M80, M102, M81, M32, M123, M145, M125, M132, M08,
+  M168, M79, M146, M134, M82, M84, M165.
+- **9 encargos correctos consecutivos de Ling.**
+
+### E-02 — Step 5: QA M07 — `⚠️` SIN ENTREGAR (ignoró recordatorio)
+
+- Asignado en msg 67 (hace ~40 min). Sesión **idle**, sin reporte en el canal.
+- **Le envié un recordatorio** (msg mío directo, con nota de comandos secuenciales anti-429).
+- **Sigue sin entregar.** Patrón: E-01 también necesitó apuro; esta vez ignoró el recordatorio.
+- **1 entrega impecable (M154) + 2 episodios de no-entrega.** Reportado al director (msg 75) —
+  su decisión: apurar de nuevo, lo hago yo, o reasignar.
+
 ### E-02 — Step 5: QA §21.8 M07 Arquitectura-General — `[→]` EN CURSO (Step 5 trabajando)
 
 - **Asignado por el director** (msg 67): M07 es el **único módulo ✅ sin sello §21.8** de 167

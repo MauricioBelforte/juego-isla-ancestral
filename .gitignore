@@ -245,3 +245,7 @@ Obsoletos/raiz-temporales-*/
 *.key
 *.pem
 .secrets
+
+# Builds de exportacion (Godot): salidas de export_presets.cfg (web/windows).
+# No versionar binarios/PCK/WASM pesados (agregado 2026-10-09, mimo-v2.6-flash-free).
+game/build/
