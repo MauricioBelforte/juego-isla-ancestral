@@ -1,3 +1,11 @@
+# ⛔ OBSOLETO desde BUG-104 (2026-10-08, mimo-v2.6-flash-free / opencode, Log pendiente):
+# el autoload "LocalizationManager" (scripts/localizacion/localization_manager.gd)
+# fue ELIMINADO de project.godot por duplicado arquitectónico con "Localization"
+# (scripts/localization/localization_manager.gd, el correcto y usado por 19+ scripts).
+# Este test validaba el autoload eliminado → queda sin sujeto. Movido aquí como
+# histórico (el "duplicado arquitectónico H-1" quedó resuelto, no como hallazgo vivo).
+# El test VIGENTE de M87 es scripts/localization/test_localizacion_iter6.gd.
+#
 # Modelo: deepseek-v4-flash (iter. 1) · DeepSeek-V4.1-Flash / WorkBuddy (fix BUG-032)
 # Plataforma: Kilo Code (iter. 1) · WorkBuddy (fix BUG-032)
 # Fecha: 2026-09-02 (iter. 1) · 2026-09-14 (fix BUG-032)

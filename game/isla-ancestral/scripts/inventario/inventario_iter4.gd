@@ -274,12 +274,14 @@ func validar_pausa_mundo() -> bool:
 
 ## Devuelve el nombre localizado de un item, o fallback si no hay M87.
 func nombre_localizado(item_id: String, fallback: String) -> String:
-	var l_mgr := _get_node_or_null("/root/LocalizationManager")
+	# BUG-104: apuntaba al autoload duplicado "LocalizationManager" (eliminado);
+	# el correcto es "Localization" (scripts/localization/) con API traducir_clave.
+	var l_mgr := _get_node_or_null("/root/Localization")
 	if l_mgr == null:
 		return fallback
-	if l_mgr.has_method("get_string"):
-		var s: String = String(l_mgr.get_string("items." + item_id + ".name"))
-		if s.is_empty():
+	if l_mgr.has_method("traducir_clave"):
+		var s: String = String(l_mgr.traducir_clave("items." + item_id + ".name"))
+		if s.is_empty() or s == "items." + item_id + ".name":
 			return fallback
 		return s
 	return fallback

@@ -10,37 +10,74 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 40
+const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_enter_exit", "_test_fisica_acotada", "_test_reversa", "_test_giro_riel", "_test_dock_zarpar", "_test_eventos", "_test_persistencia"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M67: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
 var _fallos: int = 0
 var _vm: Node = null
 
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 
 func _run() -> void:
 	_vm = root.get_node_or_null("Vehiculos")
 	_check(_vm != null, "VehicleManager autoload presente")
 	if _vm == null:
-		print("=== TEST M67 VEHICULOS: 1 fallo(s) ===")
-		quit(1)
+		_summary()
 		return
 	var bus := root.get_node_or_null("EventBus")
 	_check(bus != null, "EventBus autoload presente")
 	_check(bus != null and bus.vehicle != null and bus.vehicle.has_signal("vehicle_entered"), "EventBus.vehicle dominio presente (aditivo)")
 	_test_catalogo()
+	_fin("_test_catalogo")
 	_test_enter_exit()
+	_fin("_test_enter_exit")
 	_test_fisica_acotada()
+	_fin("_test_fisica_acotada")
 	_test_reversa()
+	_fin("_test_reversa")
 	_test_giro_riel()
+	_fin("_test_giro_riel")
 	_test_dock_zarpar()
+	_fin("_test_dock_zarpar")
 	_test_eventos()
+	_fin("_test_eventos")
 	_test_persistencia()
-	print("=== TEST M67 VEHICULOS: %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_fin("_test_persistencia")
+	_summary()
 
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

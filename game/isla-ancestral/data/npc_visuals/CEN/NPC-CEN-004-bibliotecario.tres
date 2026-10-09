@@ -8,7 +8,7 @@
 script = ExtResource("2")
 nombre = "Sin sombrero"
 estilo = "Lentes redondos"
-color_principal = ""
+color_principal = "#2C2C2C"
 material = ""
 notas = "Lentes"
 

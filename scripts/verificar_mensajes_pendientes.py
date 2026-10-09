@@ -91,14 +91,36 @@ def emisor_desde_header(path: Path) -> str | None:
 
 
 def es_plantilla_vacia(path: Path) -> bool:
-    """Plantilla del helper reservar_mensaje.py que nunca se completo."""
+    """Plantilla del helper reservar_mensaje.py que nunca se completo.
+
+    ROBUSTA CONTRA CITAS (bug encontrado 2026-10-08 en el canal de s2): los
+    agentes CITAN los markers al reportar que recibieron un mensaje vacio, y la
+    deteccion ingenua por marker producia falsos positivos que borraban
+    mensajes reales del radar del director (s2 #88/#120/#140, agnes #92,
+    DeepSeek #46/#47, s3 #18/#20 quedaban excluidos -> el director "nunca veia"
+    a esos agentes). El helper escribe '<completar titulo aca>' en la PRIMERA
+    linea (titulo); las citas van en el cuerpo. Regla: el marker de titulo
+    cuenta solo si esta en las primeras 3 lineas; el de cuerpo solo si el
+    archivo es chico (<600 bytes, la plantilla real son ~8 lineas).
+    """
     try:
         with path.open("r", encoding="utf-8") as f:
-            contenido = f.read(2000)
+            primeras = [f.readline() for _ in range(3)]
+            f.seek(0)
+            contenido = f.read(2048)
     except (UnicodeDecodeError, OSError):
         return False
-    return "<completar titulo aca>" in contenido or \
-           "<cuerpo del mensaje aca>" in contenido
+    # Marker primario: titulo de la plantilla (el helper lo pone en la linea 1).
+    if "<completar titulo aca>" in "".join(primeras):
+        return True
+    # Marker secundario: cuerpo vacio + archivo chico. Un mensaje real que
+    # cita el marker es sustancial (>= 600 bytes); la plantilla es diminuta.
+    if "<cuerpo del mensaje aca>" in contenido:
+        try:
+            return path.stat().st_size < 600
+        except OSError:
+            return False
+    return False
 
 
 def listar_mensajes(canal: Path) -> list[tuple[int, Path]]:

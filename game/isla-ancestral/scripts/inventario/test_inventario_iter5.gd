@@ -12,6 +12,35 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 70
+const _WB_BLOQUES: Array[String] = ["_test_almacenamiento_crear_cofre", "_test_almacenamiento_expandir_casa", "_test_almacenamiento_overlay_transferencia", "_test_almacenamiento_almacen_pueblo", "_test_accesibilidad_color_contraste", "_test_accesibilidad_fuente_accesible", "_test_accesibilidad_atajos", "_test_accesibilidad_sonido_no_op_sin_m43", "_test_accesibilidad_tutoriales", "_test_accesibilidad_presentacion", "_test_persistencia_iter5", "_test_invariante_no_regresion_iter4"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M14: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
 const Iter5Script = preload("res://scripts/inventario/inventario_iter5.gd")
 
 var _fallos: int = 0
@@ -20,6 +49,7 @@ var _inv: Node = null
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	_mgr = root.get_node_or_null("inventario_iter5")
@@ -27,25 +57,36 @@ func _run() -> void:
 	_check(_mgr != null, "inventario_iter5 autoload presente (iter 5)")
 	_check(_inv != null, "Inventario autoload presente (existente)")
 	if _mgr == null or _inv == null:
-		print("=== TEST M14 INVENTARIO ITER 5: %d fallo(s) ===" % _fallos)
-		quit(1 if _fallos > 0 else 0)
+		_summary()
 		return
 	_test_almacenamiento_crear_cofre()
+	_fin("_test_almacenamiento_crear_cofre")
 	_test_almacenamiento_expandir_casa()
+	_fin("_test_almacenamiento_expandir_casa")
 	_test_almacenamiento_overlay_transferencia()
+	_fin("_test_almacenamiento_overlay_transferencia")
 	_test_almacenamiento_almacen_pueblo()
+	_fin("_test_almacenamiento_almacen_pueblo")
 	_test_accesibilidad_color_contraste()
+	_fin("_test_accesibilidad_color_contraste")
 	_test_accesibilidad_fuente_accesible()
+	_fin("_test_accesibilidad_fuente_accesible")
 	_test_accesibilidad_atajos()
+	_fin("_test_accesibilidad_atajos")
 	_test_accesibilidad_sonido_no_op_sin_m43()
+	_fin("_test_accesibilidad_sonido_no_op_sin_m43")
 	_test_accesibilidad_tutoriales()
+	_fin("_test_accesibilidad_tutoriales")
 	_test_accesibilidad_presentacion()
+	_fin("_test_accesibilidad_presentacion")
 	_test_persistencia_iter5()
+	_fin("_test_persistencia_iter5")
 	_test_invariante_no_regresion_iter4()
-	print("=== TEST M14 INVENTARIO ITER 5: %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_fin("_test_invariante_no_regresion_iter4")
+	_summary()
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

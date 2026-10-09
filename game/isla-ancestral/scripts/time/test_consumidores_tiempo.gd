@@ -8,13 +8,44 @@
 # descuento por amistad en precios.
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 12
+const _WB_BLOQUES: Array[String] = ["run"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M29: %d checks, %d fallos ===" % [_checks, fallos])
+	quit(1 if fallos > 0 else 0)
+
 var fallos := 0
 var ok := 0
 
 func _init() -> void:
 	call_deferred("_correr")
+	call_deferred("_summary")
 
 func _check(nombre: String, cond: bool) -> void:
+	_checks += 1
 	if cond:
 		ok += 1
 		print("[OK] ", nombre)
@@ -26,7 +57,7 @@ func _correr() -> void:
 	var gt = root.get_node_or_null("/root/GameTime")
 	_check("GameTime presente", gt != null)
 	if gt == null:
-		_fin()
+		_summary()
 		return
 
 	# 1) Día absoluto inicial (año 1, mes 1, día 1 → 1)
@@ -83,10 +114,5 @@ func _correr() -> void:
 		else:
 			print("[SKIP] descuento amistad: ningún ítem candidato con precio_compra > 0")
 
-	_fin()
-
-func _fin() -> void:
-	print("---CONSUMIDORES-TIEMPO---")
-	print("%d checks, %d fallos" % [ok + fallos, fallos])
-	print("RESULTADO: %s" % ("OK" if fallos == 0 else "FALLOS"))
-	quit(1 if fallos > 0 else 0)
+	_fin("run")
+	_summary()

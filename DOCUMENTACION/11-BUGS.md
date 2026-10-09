@@ -173,7 +173,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-101 | **BUG REAL DE PRODUCTO (dormido, API muerta)**: `item_database.gd` (M159) poblaba `_by_category`/`_by_rarity`/`_by_fuente` con `Array` **sin tipar**, pero los getters declaran `-> Array[ItemData]` -> en Godot 4.7 la conversion implicita FALLA en runtime (`Trying to assign an array of type "Array" to a variable of type "Array[ItemData]"`) y `get_items_by_category()`/`get_items_by_rarity()`/`get_items_by_source()` devolvian **SIEMPRE vacio** desde el commit inicial `4234bca`. **0 consumidores en produccion** (unico llamador: `test_item_data.gd`). Medido: `_by_category[5]`=10 items pero `get_items_by_category(COCINA)`=0 pre-fix / 10 post-fix; `get_items_by_rarity(COMUN)`=0 / 78. Descubierto por DeepSeek-V4.1-Flash en T-D3 (Log 1288) | M159 (`scripts/data/item_database.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1288) | DeepSeek-V4.1-Flash | 2026-10-04 |
 | BUG-102 | **BUG REAL DE PRODUCTO (dormido)**: `dlc_manager.gd` (M120) `es_compatible()` comparaba versiones como STRINGS -> `"1.10.0" >= "1.9.0"` = **false** (lexicografico). Un DLC que exige version >= 1.9.0 se reportaba INCOMPATIBLE con la base 1.10.0 (y al reves). Ademas `_activos` (DLCs activados) **NO se persistia**: activar un DLC, guardar y cargar lo perdia (el item de checklist "Activar/desactivar DLC con persistencia [M]" estaba marcado [x] sin respaldo). Descubierto y resuelto por DeepSeek-V4.1-Flash en T-D5 (Log 1291) | M120 (`scripts/dlc/dlc_manager.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1291) | DeepSeek-V4.1-Flash | 2026-10-04 |
 | BUG-103 | 3 logs de agosto escritos en cp1252 (no UTF-8): ilegibles para cualquier gate | Transversal / AGENTS.md §28 | 🟡 Menor | [ ] Abierto | space-bunny-alpha (Log 1296) | 2026-10-05 |
-| BUG-104 | Dos autoloads con el MISMO archivo base en dos carpetas `localization/` y `localizacion/` (sistema duplicado) | M87 / boot | 🟡 Menor | [ ] Abierto | space-bunny-alpha (Log 1310) | 2026-10-05 |
+| BUG-104 | Dos autoloads con el MISMO archivo base en dos carpetas `localization/` y `localizacion/` (sistema duplicado) | M87 / boot | 🟡 Menor | [x] **Resuelto** (mimo-v2.6-flash-free, opencode, Log 1492: autoload `LocalizationManager` eliminado, referencias corregidas) | space-bunny-alpha (Log 1310) | 2026-10-08 |
 | BUG-105 | El agua se renderiza **blanca**, no azul (captura de pantalla real) | M08 / M167 (render) | 🟠 Mayor | [x] **Resuelto** (mimo-v2.6-flash-free, opencode, Log 1487: causa = SPECULAR 0.5 rasante del shader) | space-bunny-alpha (Log 1310) | 2026-10-08 |
 | BUG-106 | **8 item_ids de los catálogos de M39 no existen en M15 (ItemDatabase)**: `madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino` → 8 warnings en runtime. Deuda de M15 (registrar los ítems), no de M39 | M15 (ItemDatabase) / M39 (Tiendas) | 🟡 Menor | [ ] Abierto — detectado por auditoría A de agnes-3-flash (Log 1350/`2fd452b`), documentado en `05-Checklist` M39 §Notas | agnes-3-flash (Kilo Code) | 2026-10-06 |
 | BUG-107 | `BaseArenaBlancaIsla` con **r=242** (radio viejo, sin escalar ×10 en el rework "Isla 10x" — el mundo es 5120×5120 con centro (2560,2560) desde el commit `c107419`). Deuda detectada en el frente C3/BUG-105 (agua blanca) | M167 / M08 (terreno y render de la isla) | 🟡 Menor | [ ] Abierto — detectado por space-bunny-alpha (canal 27, Log 1326) en su último informe antes de la baja | space-bunny-alpha | 2026-10-06 |
@@ -262,9 +262,66 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 - **Pregunta que NO respondo (no me corresponde):** ¿son dos capas legitimas (p.ej. una fachada y
   una implementacion) o un duplicado? **No lo toco porque no lo sé**, y adivinar seria crear el
   bug. Los dos archivos son distintos (distinto directorio) — hay que compararlos.
-- **Estado:** [ ] **Abierto.** No Registrado por un agente, sin tocar codigo.
+- **Estado:** [x] **Resuelto** 2026-10-08 por mimo-v2.6-flash-free (opencode, Log 1492) — ver
+  CIERRE debajo. (Originalmente abierto sin tocar código; derivado al autor por el director
+  en el msg 76 del canal mimo.)
 - **Reportado por:** space-bunny-alpha (Kilo Code) — SB-08/SB-11. El director pidio registrarlo y
   derivarlo al dueno (probablemente M87) en el canal 18.
+
+#### CIERRE (2026-10-08, mimo-v2.6-flash-free / opencode, Log 1492)
+
+> **Resolución: autoload duplicado `LocalizationManager` eliminado de `project.godot`.
+> Solo queda `Localization` (el correcto).** Referencias runtime al duplicado corregidas.
+> `LocalizationManager.gd` (el script viejo) NO se tocó (restricción del director) — quedó
+> como archivo huérfano inofensivo (ya no es autoload).
+
+**La pregunta que SB-08 no respondió, respondida aquí con medición:** NO eran dos capas
+legítimas — eran **dos implementaciones distintas del mismo sistema M87**, un merge
+descuidado:
+
+| | `Localization` (correcto) | `LocalizationManager` (duplicado) |
+|---|---|---|
+| Ruta | `scripts/localization/localization_manager.gd` | `scripts/localizacion/localization_manager.gd` |
+| Tamaño | 15.192 B (M87 completo) | 2.729 B (versión semilla vieja) |
+| Catálogos | `.po` (locales/) | `data/localizacion/strings_*.json` |
+| API | `traducir_clave`, `get_locale`, señal `locale_changed` | `get_texto`, `set_idioma`, sin señal |
+| Referencias en código | **19** (`/root/Localization`) | **2** (y ambas ROTAS, ver abajo) |
+| Última edición | 15/9/2026 | 2/9/2026 (congelado) |
+
+**Hallazgo durante el fix — las 2 referencias al duplicado estaban muertas desde su origen:**
+
+1. `scripts/inventario/inventario_iter4.gd:277` (`nombre_localizado`): llamaba
+   `has_method("get_string")` — **ninguno** de los dos scripts expone `get_string`, así que
+   SIEMPRE cayó al fallback. Corregido a `/root/Localization` + `traducir_clave` (con
+   detección de clave-devuelta-literal para el fallback).
+2. `scripts/legal/credits_manager.gd:61`: conectaba la señal `idioma_cambiado` — el
+   duplicado **ni siquiera tiene esa señal** (la conexión era un no-op silencioso).
+   Corregido a `"Localization"` + `locale_changed` + `get_locale()` (firma del handler
+   `_on_m87_idioma(nuevo: String)` compatible).
+
+**Test del duplicado movido a Obsoletos:** `scripts/localizacion/test_localizacion_m87.gd` →
+`scripts/localizacion/Obsoletos/2026-10-08_00-00-00_test_localizacion_m87_autoload_eliminado_bug104.gd`
+(con cabecera que explica el porqué; el test vigente de M87 es
+`scripts/localization/test_localizacion_iter6.gd`).
+
+**Verificación (runtime + suites):**
+
+| Check | Resultado |
+|---|---|
+| Autoloads en `project.godot` | solo `Localization` (L59); `LocalizationManager` eliminado |
+| Runtime juego (`--quit-after 90`) | `[M87] LocalizationManager listo` viejo: **0** apariciones; **0 SCRIPT ERROR** |
+| Presencia positiva (`test_ui_i18n_m53.gd`) | `OK: Localization autoload presente (M87)` + claves es resueltas; **36 OK / 3 fallos = idéntico al baseline** (3 fallos preexistentes de tooltips/InteractPrompt) |
+| Suite M87 vigente (`test_localizacion_iter6.gd`) | **82 checks / 1 fallo** — fallo I9 preexistente, **probado contra baseline** (project.godot viejo via `git stash`: mismo I9) |
+| Runner regresión | **21/25 / 1188 tests / 1 fallo** (quirk GdUnit4 rc=101 con 0 failures internos — preexistente; el baseline subió de 780→1188 por los sweeps de otros agentes) |
+| Gate templos | **76 checks / 0 fallos** |
+| Nota | El duplicado imprimía `[M87] LocalizationManager listo (3 idiomas)` que el director vio en runtime; ese mensaje ya no aparece (era del sistema viejo). El correcto es silencioso en carga normal (solo imprime en primer arranque o con claves faltantes) — su presencia se verifica con `test_ui_i18n_m53`. |
+
+**Restricción del director cumplida:** `LocalizationManager.gd` (localizacion/) NO fue
+modificado ni borrado; solo se quitó su línea de autoload. El archivo queda como huérfano
+parseable (lo preloads aún `_colector_sintaxis.gd`) — si se quiere limpiar el directorio
+`scripts/localizacion/` por completo, es tarea aparte con aviso.
+
+**Firma del cierre:** mimo-v2.6-flash-free · opencode · 2026-10-08 21:22 · Log 1492.
 
 ---
 
@@ -4028,6 +4085,8 @@ silenciosa de todos los guardados futuros).
 
 
 ## 9. Historial de Modificaciones de Este Archivo
+
+- **2026-10-08 21:22** — **BUG-104 [x] Resuelto (mimo-v2.6-flash-free, opencode, encargo msg 76, Log 1492):** los dos autoloads NO eran capas legítimas — eran dos implementaciones distintas del mismo M87 (merge descuidado). `Localization` (correcto, 15 192 B, API `traducir_clave`/`get_locale`/señal `locale_changed`, 19 referencias) vs `LocalizationManager` (duplicado viejo, 2 729 B, API `get_texto`, 2 referencias **ambas rotas desde su origen**: `inventario_iter4.gd` llamaba `get_string` que ningún script expone → siempre fallback; `credits_manager.gd` conectaba la señal `idioma_cambiado` que el duplicado ni tiene → no-op). Fix: línea de autoload duplicada eliminada de `project.godot` (solo queda `Localization` L59); las 2 referencias corregidas al correcto; test viejo del duplicado movido a `scripts/localizacion/Obsoletos/`; `LocalizationManager.gd` NO tocado (restricción del director — queda huérfano inofensivo). Verificación: runtime 0 apariciones del mensaje viejo + 0 SCRIPT ERROR + presencia positiva vía `test_ui_i18n_m53` (36/3 idéntico al baseline); `test_localizacion_iter6` 82/1 (I9 preexistente probado contra baseline con `git stash`); runner 21/25/1188/1 (quirk GdUnit rc=101, baseline evolucionó 780→1188 por sweeps de otros agentes); gate 76/0.
 
 - **2026-10-08 19:51** — **BUG-105 [x] Resuelto (mimo-v2.6-flash-free, opencode, encargo msg 74, Log 1487):** causa dominante = `SPECULAR = 0.5` + `ROUGHNESS = 0.15` de `shaders/agua_olas.gdshader` a ángulos rasantes (banda blanca lechosa sobre todo el mar). Fix: `SPECULAR = 0.0` + atenuación por distancia (`espuma_distancia = 300`) de la espuma de crestas (causa secundaria). Evidencia A/B con shader de diagnóstico (prof≥5 válido en la banda → descarta hipótesis SB-14 de prof≈0) y test una-variable sin specular (leche eliminada por completo); capturas `cap_105_*` en `tools/mcp/godot-mcp/capturas/105-Agua-Blanca/`. Regresión: runner 19/25/780/3 preexistentes + gate 76/0. **Nota:** fix autorizado del chamán en el mismo encargo (msg 74): retry `_process` con timeout 8 s en `shaman_npc.gd` (patrón M50, `_locator` inyectable); `main_island.gd` NO tocado; verificado 3/3 + Run A incienso 6/0 + `test_enchantment` 58/0.
 

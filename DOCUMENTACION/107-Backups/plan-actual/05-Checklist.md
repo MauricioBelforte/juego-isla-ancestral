@@ -46,7 +46,7 @@
 - [x] Definir 3 copias de todo dato importante [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §1 3-2-1 Strategy + §11 Regla 1 -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir 2 medios diferentes (cloud + físico) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 Cloud + §3 Disco Externo -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir 1 copia offsite (cloud) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 Google Drive via rclone -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Copia 1: GitHub (repositorio principal) [S]
+- [x] Copia 1: GitHub (repositorio principal) [S] — .git existe; GitHub = copia primaria (03-Diseno.md §1)
 - [x] Copia 2: Cloud Storage (Google Drive/Dropbox) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 structure and §5 GitHub Actions workflow -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [ ] Copia 3: Disco Externo (backup local físico) [S]
 - [x] Medio 1: Almacenamiento en la nube [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 Google Drive/Dropbox -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
@@ -63,11 +63,11 @@
 - [x] Saves de prueba: Semanal (carpeta local + cloud) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §9 restoration procedure includes saves -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Música original: Semanal (Git LFS + externo) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §4 musica/ directory -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Proyectos DAW: Semanal (cloud + externo) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §4 proyectos_daw/ directory -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Definir retención por tipo de dato [S]
-- [ ] Documentar ubicación 1 por tipo [S]
-- [ ] Documentar ubicación 2 por tipo [S]
-- [ ] Documentar ubicación 3 por tipo [S]
-- [ ] Crear tabla de frecuencias y retenciones [M]
+- [x] Definir retención por tipo de dato [S] — backup_categories.json: retencion_dias por categoría
+- [x] Documentar ubicación 1 por tipo [S] — 03-Diseno.md §4 "Estructura de almacenamiento" (Google Drive + Disco Externo)
+- [x] Documentar ubicación 2 por tipo [S] — 03-Diseno.md §4
+- [x] Documentar ubicación 3 por tipo [S] — 03-Diseno.md §4
+- [x] Crear tabla de frecuencias y retenciones [M] — backup_categories.json: frecuencia + retencion_dias por tipo
 
 ## D. Automatización GitHub Actions (12)
 
@@ -101,15 +101,15 @@
 
 ## F. Configuración Task Scheduler (10)
 
-- [ ] Definir nombre de tarea (Isla Ancestral Backup Local) [S]
+- [x] Definir nombre de tarea (Isla Ancestral Backup Local) [S] — register_task.ps1 $taskName
 - [x] Definir trigger diario (3:00 AM) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §7 Task Scheduler trigger -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Definir acción (powershell.exe) [S]
-- [ ] Definir argumentos (ExecutionPolicy Bypass + ruta script) [S]
+- [x] Definir acción (powershell.exe) [S] — register_task.ps1 ejecuta powershell -File
+- [x] Definir argumentos (ExecutionPolicy Bypass + ruta script) [S] — register_task.ps1 -Argument "-NoProfile -ExecutionPolicy Bypass -File ..."
 - [ ] Configurar condición: red de CA [S]
-- [ ] Configurar condición: alimentación de CA [S]
-- [ ] Configurar condición: despertar equipo [S]
+- [x] Configurar condición: alimentación de CA [S] — register_task.ps1 "Solo con alimentación de CA"
+- [x] Configurar condición: despertar equipo [S] — register_task.ps1 "WakeToRun desactivado"
 - [ ] Configurar cuenta de usuario [S]
-- [ ] Documentar pasos de configuración [S]
+- [x] Documentar pasos de configuración [S] — register_task.ps1 .SYNOPSIS/.DESCRIPTION/.EXAMPLE
 - [ ] Documentar solución de problemas comunes [S]
 
 ## G. Script de verificación de integridad (12)
@@ -142,11 +142,11 @@
 
 ## I. Política de retención (10)
 
-- [ ] Definir retención diarios (últimos 30 días) [S]
+- [x] Definir retención diarios (últimos 30 días) [S] — backup_policy.json dias_maximos=30
 - [ ] Definir retención semanales (últimos 12 meses) [S]
 - [ ] Definir retención mensuales (últimos 5 años) [S]
 - [ ] Definir retención permanente (repositorio, documentación) [S]
-- [ ] Documentar retención por tipo de dato [S]
+- [x] Documentar retención por tipo de dato [S] — backup_categories.json retencion_dias + 03-Diseno.md §4
 - [x] Documentar procedimiento de limpieza automática [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §5 cleanup >30d + §3 last 10 daily -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [ ] Documentar excepciones a la política [S]
 - [ ] Crear docs/politica_retencion.md [S]
@@ -155,15 +155,15 @@
 
 ## J. Pruebas de restauración (12)
 
-- [ ] Definir frecuencia de pruebas (mensual) [S]
-- [ ] Definir procedimiento de selección de backup aleatorio [S]
-- [ ] Definir preparación de entorno de prueba [S]
-- [ ] Definir pasos de restauración desde backup [S]
-- [ ] Definir verificación de repositorio Git [S]
-- [ ] Definir verificación de assets en Godot [S]
-- [ ] Definir verificación de documentación [S]
-- [ ] Definir verificación de builds [S]
-- [ ] Definir documentación de resultado [S]
+- [x] Definir frecuencia de pruebas (mensual) [S] — 03-Diseno.md §9 "Frecuencia"
+- [x] Definir procedimiento de selección de backup aleatorio [S] — 03-Diseno.md §9 "Pasos"
+- [x] Definir preparación de entorno de prueba [S] — 03-Diseno.md §9 "Pasos"
+- [x] Definir pasos de restauración desde backup [S] — 03-Diseno.md §9 "Pasos"
+- [x] Definir verificación de repositorio Git [S] — 03-Diseno.md §9 "Pasos"
+- [x] Definir verificación de assets en Godot [S] — 03-Diseno.md §9 "Pasos"
+- [x] Definir verificación de documentación [S] — 03-Diseno.md §9 "Pasos"
+- [x] Definir verificación de builds [S] — 03-Diseno.md §9 "Pasos"
+- [x] Definir documentación de resultado [S] — 03-Diseno.md §9 "Criterio de Éxito"
 - [x] Definir criterios de éxito (100% exitoso) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §9 success criteria checklist -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [ ] Crear docs/procedimiento_restauracion.md [S]
 - [ ] Crear plantilla de log de restauración [S]
@@ -173,19 +173,19 @@
 - [x] Definir Escenario 1: Pérdida de máquina local [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 1 Media severity 2-4h -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir severidad y tiempo estimado Escenario 1 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Severity: Media, Time: 2-4 hours -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir pasos detallados Escenario 1 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 7 recovery steps -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Definir criterios de verificación Escenario 1 [S]
-- [ ] Definir Escenario 2: Corrupción de repositorio Git [S]
+- [x] Definir criterios de verificación Escenario 1 [S] — 03-Diseno.md §10 Esc1 "Verificación:"
+- [x] Definir Escenario 2: Corrupción de repositorio Git [S] — 03-Diseno.md §10 Esc2
 - [x] Definir severidad y tiempo estimado Escenario 2 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 2 Alta severity, 4-8h -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir pasos detallados Escenario 2 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 8 recovery steps -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Definir criterios de verificación Escenario 2 [S]
+- [x] Definir criterios de verificación Escenario 2 [S] — 03-Diseno.md §10 Esc2 "Verificación:"
 - [x] Definir Escenario 3: Pérdida de GitHub (catastrófico) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 3 Critical severity -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir severidad y tiempo estimado Escenario 3 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 3: Severidad CRÍTICA, Tiempo estimado 8-24 horas -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir pasos detallados Escenario 3 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 3: 8 recovery steps + verification checklist -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Definir criterios de verificación Escenario 3 [S]
+- [x] Definir criterios de verificación Escenario 3 [S] — 03-Diseno.md §10 Esc3 "Verificación:"
 - [x] Definir Escenario 4: Pérdida de assets originales [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 4 Alta severity, 4-12h -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir severidad y tiempo estimado Escenario 4 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 4: Severidad ALTA, Tiempo estimado 4-12 horas -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir pasos detallados Escenario 4 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 4: 8 recovery steps + verification checklist -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Definir criterios de verificación Escenario 4 [S]
+- [x] Definir criterios de verificación Escenario 4 [S] — 03-Diseno.md §10 Esc4 "Verificación:"
 - [ ] Crear docs/plan_recuperacion_desastres.md [S]
 
 ## L. Integración con otros módulos (8)
@@ -206,7 +206,7 @@
 - [?] Definir creación de credenciales OAuth [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
 - [?] Definir configuración de pantalla de consentimiento [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
 - [?] Definir obtención de token de acceso OAuth [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [ ] Documentar configuración de secrets en GitHub [S]
+- [x] Documentar configuración de secrets en GitHub [S] — 03-Diseno.md §5 "Configuración de GitHub Actions"
 - [x] Documentar GDRIVE_CLIENT_ID [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §5 GitHub Actions secrets section -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Documentar GDRIVE_CLIENT_SECRET [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §5 GitHub Actions secrets section -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Documentar GDRIVE_TOKEN [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §5 GitHub Actions secrets section -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
@@ -214,15 +214,15 @@
 ## N. Reglas de calidad (10)
 
 - [x] Regla 1: 3-2-1 Rule obligatoria [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §11 Regla 1: min 3 copias, 2 medios, 1 offsite -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Regla 2: Automatización de backups [S]
-- [ ] Regla 3: Verificación periódica [S]
-- [ ] Regla 4: Seguridad de backups [S]
-- [ ] Regla 5: Documentación accesible [S]
-- [ ] Definir notificaciones de éxito/fracaso [S]
-- [ ] Definir logs de ejecución para auditoría [S]
-- [ ] Definir control de acceso a backups [S]
-- [ ] Definir encriptación si contiene datos sensibles [S]
-- [ ] Documentar buenas prácticas de backups [S]
+- [x] Regla 2: Automatización de backups [S] — 03-Diseno.md §11 Regla 2
+- [x] Regla 3: Verificación periódica [S] — 03-Diseno.md §11 Regla 3
+- [x] Regla 4: Seguridad de backups [S] — 03-Diseno.md §11 Regla 4
+- [x] Regla 5: Documentación accesible [S] — 03-Diseno.md §11 Regla 5
+- [x] Definir notificaciones de éxito/fracaso [S] — 03-Diseno.md §11 Regla 2 "Notificaciones de éxito/fracaso"
+- [x] Definir logs de ejecución para auditoría [S] — 03-Diseno.md §11 Regla 2 "Logs de ejecución para auditoría"
+- [x] Definir control de acceso a backups [S] — 03-Diseno.md §11 Regla 4 "Control de acceso a backups"
+- [x] Definir encriptación si contiene datos sensibles [S] — 03-Diseno.md §11 Regla 4
+- [x] Documentar buenas prácticas de backups [S] — 03-Diseno.md §11 Regla 5
 
 ## O. Cierre y verificación (10)
 
@@ -233,14 +233,14 @@
 - [x] 05-Checklist.md creado y firmado (este archivo) [S] -- agnes-2.5-flash 2026-09-12: this file, updated -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [ ] Los 15 puntos de la sección 106 resueltos [M]
 - [ ] Criterios de aceptación cumplidos [M]
-- [ ] Estrategia 3-2-1 definida completamente [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 full architecture + §11 Regla 1 mandatory
-- [ ] Automatización especificada (GitHub Actions + Task Scheduler) [M]
-- [ ] Plan de recuperación documentado [M]
-- [ ] Reglas de calidad definidas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §11 five quality rules: 3-2-1, automation, periodic verification, security, documentation
-- [ ] Pendientes asignados a dueños [S] -- agnes-2.5-flash 2026-09-12: all items assigned; remaining [?] none; M97 owns Steam reconciliation
+- [x] Estrategia 3-2-1 definida completamente [M] — 03-Diseno.md §1 + §11 Regla 1
+- [x] Automatización especificada (GitHub Actions + Task Scheduler) [M] — 03-Diseno.md §5 + §7
+- [x] Plan de recuperación documentado [M] — 03-Diseno.md §10 (4 escenarios)
+- [x] Reglas de calidad definidas [M] — 03-Diseno.md §11 (5 reglas)
+- [x] Pendientes asignados a dueños [S] — todos los [?] tienen dueño (L/M/H secciones)
 - [ ] DoD cumplida: 5 archivos + firma + log [M] -- agnes-2.5-flash 2026-09-12: all 5 docs exist with signatures; logs 778-780 created; backup_manager.gd + test_backup.gd implemented
 
-**Totales:** 176 ítems · Completados: 99 · Pendientes: 59 · No resueltos: 18.
+**Totales:** 176 ítems · Completados: 142 · Pendientes: 16 · No resueltos: 18.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 5):** la línea decía *"176 items — Completados: 93 — No resueltos: 17 —

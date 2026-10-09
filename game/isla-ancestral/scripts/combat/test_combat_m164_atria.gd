@@ -12,22 +12,44 @@
 #   --script res://scripts/combat/test_combat_m164_atria.gd
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 81
+const _WB_BLOQUES: Array[String] = ["gemas", "catalogo", "zonas", "recompensas"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	_verificar_guardian()
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M164: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
 var _fallos: int = 0
 var _fin: Dictionary = {}   # bloque -> bool (guardian: cada bloque debe llegar al final)
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	_test_gem_currency()
 	_test_catalogo_enemigos()
 	_test_zonas_desbloqueo()
 	_test_recompensas_persistencia()
-	_verificar_guardian()
-	print("=== TEST M164 COMBAT: %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_summary()
 
 func _check(cond: bool, mensaje: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: %s" % mensaje)

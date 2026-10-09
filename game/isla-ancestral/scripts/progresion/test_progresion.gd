@@ -10,6 +10,35 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 83
+const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_stat_dirty_reevaluacion", "_test_hito_idempotente", "_test_tipos_condicion", "_test_nivel_modulo_fallback", "_test_desbloqueos", "_test_reputacion", "_test_persistencia", "_test_titulos_rf12", "_test_hitos_proximos", "_test_condition_evaluator", "_test_impossible_conditions", "_test_pure_predicate", "_test_cache_and_reevaluar", "_test_catalogo_validacion", "_test_consumo_economia_y_trueque", "_test_condicion_compuesta", "_test_reflejo_sellos_m22", "_test_reset_diario", "_test_rendimiento_reevaluaciones"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M71: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
 var _fallos: int = 0
 var _pm: Node = null
 var _pp: Node = null
@@ -17,6 +46,7 @@ var _bus: Node = null
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	_pm = root.get_node_or_null("ProgressionManager")
@@ -25,34 +55,54 @@ func _run() -> void:
 	_check(_pm != null, "ProgressionManager autoload presente")
 	_check(_pp != null, "PlayerProfile autoload presente")
 	if _pm == null or _pp == null:
-		print("=== TEST M71 PROGRESION: 1+ fallo(s) ===")
-		quit(1 if _fallos > 0 else 0)
+		_summary()
 		return
 	_test_catalogo()
+	_fin("_test_catalogo")
 	_test_stat_dirty_reevaluacion()
+	_fin("_test_stat_dirty_reevaluacion")
 	_test_hito_idempotente()
+	_fin("_test_hito_idempotente")
 	_test_tipos_condicion()
+	_fin("_test_tipos_condicion")
 	_test_nivel_modulo_fallback()
+	_fin("_test_nivel_modulo_fallback")
 	_test_desbloqueos()
+	_fin("_test_desbloqueos")
 	_test_reputacion()
+	_fin("_test_reputacion")
 	_test_persistencia()
+	_fin("_test_persistencia")
 	_test_titulos_rf12()
+	_fin("_test_titulos_rf12")
 	_test_hitos_proximos()
+	_fin("_test_hitos_proximos")
 	_test_hitos_proximos()
+	_fin("_test_hitos_proximos")
 	_test_condition_evaluator()
+	_fin("_test_condition_evaluator")
 	_test_impossible_conditions()
+	_fin("_test_impossible_conditions")
 	_test_pure_predicate()
+	_fin("_test_pure_predicate")
 	_test_cache_and_reevaluar()
+	_fin("_test_cache_and_reevaluar")
 	_test_catalogo_validacion()
+	_fin("_test_catalogo_validacion")
 	_test_consumo_economia_y_trueque()
+	_fin("_test_consumo_economia_y_trueque")
 	_test_condicion_compuesta()
+	_fin("_test_condicion_compuesta")
 	_test_reflejo_sellos_m22()
+	_fin("_test_reflejo_sellos_m22")
 	_test_reset_diario()
+	_fin("_test_reset_diario")
 	_test_rendimiento_reevaluaciones()
-	print("=== TEST M71 PROGRESION: " + str(_fallos) + " fallo(s) ===")
-	quit(1 if _fallos > 0 else 0)
+	_fin("_test_rendimiento_reevaluaciones")
+	_summary()
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

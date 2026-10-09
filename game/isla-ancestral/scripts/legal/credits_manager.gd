@@ -58,11 +58,13 @@ func _ready() -> void:
 	# Si M87 Localization existe, sincronizar idioma
 	# (fix parser 2026-09-02: get_node_or_null devuelve Node — el := no
 	# puede inferir, hay que declarar el tipo explicito)
-	var loc: Node = Engine.get_main_loop().root.get_node_or_null("LocalizationManager")
-	if loc != null and loc.has_signal("idioma_cambiado"):
-		loc.idioma_cambiado.connect(_on_m87_idioma)
-		if loc.has_method("get_idioma_actual"):
-			_idioma = String(loc.get_idioma_actual())
+	# BUG-104: apuntaba al autoload duplicado "LocalizationManager" (eliminado);
+	# el correcto es "Localization" (señal locale_changed, API get_locale).
+	var loc: Node = Engine.get_main_loop().root.get_node_or_null("Localization")
+	if loc != null and loc.has_signal("locale_changed"):
+		loc.locale_changed.connect(_on_m87_idioma)
+		if loc.has_method("get_locale"):
+			_idioma = String(loc.get_locale())
 
 func cargar_catalogo() -> bool:
 	"""Carga el catalogo desde el JSON. Devuelve true si OK."""

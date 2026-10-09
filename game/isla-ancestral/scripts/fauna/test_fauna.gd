@@ -11,6 +11,35 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 58
+const _WB_BLOQUES: Array[String] = ["_test_catalogo_basico", "_test_catalogo_json", "_test_especie_validacion", "_test_ventana_horaria", "_test_bioma_y_candidatas", "_test_pesos_por_rareza", "_test_registry_avistamiento", "_test_registry_dedupe_y_tolerancia", "_test_registry_persistencia", "_test_behavior_inicializacion", "_test_behavior_transiciones", "_test_behavior_factor_miedo", "_test_manager_aleatoria_y_descubierto"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M36: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
 const SpeciesRef = preload("res://scripts/fauna/fauna_species.gd")
 const CatalogRef = preload("res://scripts/fauna/fauna_catalog.gd")
 const BehaviorRef = preload("res://scripts/fauna/fauna_behavior.gd")
@@ -21,6 +50,7 @@ var _registry: Node = null
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	_mgr = root.get_node_or_null("fauna")
@@ -28,26 +58,38 @@ func _run() -> void:
 	_check(_mgr != null, "fauna autoload presente (M36)")
 	_check(_registry != null, "fauna_registry autoload presente (M36)")
 	if _mgr == null or _registry == null:
-		print("=== TEST M36 FAUNA: %d fallo(s) ===" % _fallos)
-		quit(1 if _fallos > 0 else 0)
+		_summary()
 		return
 	_test_catalogo_basico()
+	_fin("_test_catalogo_basico")
 	_test_catalogo_json()
+	_fin("_test_catalogo_json")
 	_test_especie_validacion()
+	_fin("_test_especie_validacion")
 	_test_ventana_horaria()
+	_fin("_test_ventana_horaria")
 	_test_bioma_y_candidatas()
+	_fin("_test_bioma_y_candidatas")
 	_test_pesos_por_rareza()
+	_fin("_test_pesos_por_rareza")
 	_test_registry_avistamiento()
+	_fin("_test_registry_avistamiento")
 	_test_registry_dedupe_y_tolerancia()
+	_fin("_test_registry_dedupe_y_tolerancia")
 	_test_registry_persistencia()
+	_fin("_test_registry_persistencia")
 	_test_behavior_inicializacion()
+	_fin("_test_behavior_inicializacion")
 	_test_behavior_transiciones()
+	_fin("_test_behavior_transiciones")
 	_test_behavior_factor_miedo()
+	_fin("_test_behavior_factor_miedo")
 	_test_manager_aleatoria_y_descubierto()
-	print("=== TEST M36 FAUNA: %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_fin("_test_manager_aleatoria_y_descubierto")
+	_summary()
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

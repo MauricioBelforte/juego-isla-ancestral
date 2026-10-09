@@ -278,11 +278,11 @@
 
 ## Evidencia M108 — Log 540
 - Log 540: núcleo V0 creado; 12 scripts en `tools/asset_pipeline/`; runner headless y escena de prueba creados; bloqueo headless documentado.
-- [x] Test headless M108 ejecutado y verde 0 fallos — `[?]` (Log 529 previsto; escena de prueba se cerró sin output en intentos automáticos) [C]
+- [ ] Test headless M108 ejecutado y verde 0 fallos — `[?]` (Log 529 previsto; escena de prueba se cerró sin output en intentos automáticos) [C] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
 - [x] Validator/presets/promote_asset/atlas_builder/retire_asset/memory_reporter operativos — `[?]` (dueño M108 núcleo) [M]
 - [x] Flujo staging → final con CI headless y exit code — `[?]` (dueño M108/M118) [C]
 
-**Totales:** 205 ítems · Completados: 124 · Pendientes: 78 · No resueltos: 3.
+**Totales:** 205 ítems · Completados: 122 · Pendientes: 80 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 124 [x] / 78 [ ] /

@@ -12,6 +12,35 @@
 
 extends SceneTree
 
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
+#     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 68
+const _WB_BLOQUES: Array[String] = ["_test_hotbar_basico", "_test_hotbar_seleccion_ciclo", "_test_hotbar_esporas", "_test_hotbar_persistencia", "_test_helper_sugerencia_amable", "_test_helper_faltantes_receta", "_test_helper_agregar_con_fallback", "_test_helper_validar_item", "_test_helper_validar_invariante_post_viaje", "_test_helper_tamano_fuente", "_test_helper_persistencia_autosave", "_test_inventario_service_existente"]
+var _checks: int = 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado: bool = false
+
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M14: %d checks, %d fallos ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
+
 const ContainerTypeRef = preload("res://scripts/inventario/container_type.gd")
 
 var _fallos: int = 0
@@ -21,6 +50,7 @@ var _helper: Node = null
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	_inv = root.get_node_or_null("Inventario")
@@ -30,25 +60,36 @@ func _run() -> void:
 	_check(_hotbar != null, "hotbar autoload presente (iter 4)")
 	_check(_helper != null, "inventario_helper autoload presente (iter 4)")
 	if _inv == null or _hotbar == null or _helper == null:
-		print("=== TEST M14 INVENTARIO: %d fallo(s) ===" % _fallos)
-		quit(1 if _fallos > 0 else 0)
+		_summary()
 		return
 	_test_hotbar_basico()
+	_fin("_test_hotbar_basico")
 	_test_hotbar_seleccion_ciclo()
+	_fin("_test_hotbar_seleccion_ciclo")
 	_test_hotbar_esporas()
+	_fin("_test_hotbar_esporas")
 	_test_hotbar_persistencia()
+	_fin("_test_hotbar_persistencia")
 	_test_helper_sugerencia_amable()
+	_fin("_test_helper_sugerencia_amable")
 	_test_helper_faltantes_receta()
+	_fin("_test_helper_faltantes_receta")
 	_test_helper_agregar_con_fallback()
+	_fin("_test_helper_agregar_con_fallback")
 	_test_helper_validar_item()
+	_fin("_test_helper_validar_item")
 	_test_helper_validar_invariante_post_viaje()
+	_fin("_test_helper_validar_invariante_post_viaje")
 	_test_helper_tamano_fuente()
+	_fin("_test_helper_tamano_fuente")
 	_test_helper_persistencia_autosave()
+	_fin("_test_helper_persistencia_autosave")
 	_test_inventario_service_existente()
-	print("=== TEST M14 INVENTARIO: %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_fin("_test_inventario_service_existente")
+	_summary()
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

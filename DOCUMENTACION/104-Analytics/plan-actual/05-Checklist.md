@@ -53,8 +53,8 @@
 
 ## D. Interfaz y configuración (8)
 
-- [x] Toggle reporte analytics en menú M91 [S]
-- [x] Visualización de estado "Analytics: Activo/Desactivado" [S]
+- [ ] Toggle reporte analytics en menú M91 [S] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
+- [ ] Visualización de estado "Analytics: Activo/Desactivado" [S] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
 - [ ] Opción para borrar datos locales acumulados [S]
 - [ ] Información de qué datos se recogen y por qué [S]
 - [ ] Acceso rápido a política de privacidad [S]
@@ -135,22 +135,22 @@
 - [ ] Distribución de horarios de uso [S]
 - [ ] Distribución por plataforma (Steam Deck) [S]
 - [ ] Alertas de anomalías [S]
-- [x] Exportación CSV para análisis externo [S]
+- [ ] Exportación CSV para análisis externo [S] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
 
 ## K. Configuración y control (10)
 
-- [x] Configuración primera ejecución: opt-out por defecto [S]
+- [ ] Configuración primera ejecución: opt-out por defecto [S] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
 - [ ] Pantalla de consentimiento (GDPR) [S]
-- [x] Toggle accesible desde M90 [S]
+- [ ] Toggle accesible desde M90 [S] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
 - [ ] Confirmación del usuario al opt-in [S]
-- [x] Botón "borrar mis datos" en configuración [S]
+- [ ] Botón "borrar mis datos" en configuración [S] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
 - [ ] Sin re-pedir consentimiento en cada arranque [S]
 - [ ] Reset de IDs al opt-out [S]
-- [x] Solo envío en Wi-Fi (configurable) [S]
-- [x] Indicador visual de envio en curso [S]
+- [ ] Solo envío en Wi-Fi (configurable) [S] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
+- [ ] Indicador visual de envio en curso [S] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
 - [ ] Histórico de consentimientos del usuario [S]
 
-**Totales:** 117 ítems · Completados: 49 · Pendientes: 68 · No resueltos: 0.
+**Totales:** 117 ítems · Completados: 41 · Pendientes: 68 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, privacidad y reglas cierran aquí.
 ## N. Implementacion (ox-alpha/Cline 2026-08-29, V0, verificado headless)
 

@@ -409,6 +409,22 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 
 ### Reglas de Asignación
 
+> ⚠️ **REGLA GLOBAL DEL PROYECTO (directiva del usuario, aclarada 2026-10-08): EL PRECIO ES
+> SOLO INFORMATIVO — NUNCA es criterio para decidir qué modelo ejecuta una tarea.**
+>
+> **Todos los modelos de este catálogo se usan por su tier gratuito** — en eso se basa el
+> proyecto. Comparar modelos por precio/coste para asignar trabajo es **misleading** y está
+> prohibido como criterio de decisión. Las tablas de precios de esta guía existen solo como
+> referencia; lo que decide la asignación es **capacidad, calidad, velocidad, contexto y
+> evidencia empírica** en este repo.
+>
+> La única excepción práctica: si un tier gratuito **impone límites de cuota** (rate limits,
+> tokens/día) que bloqueen la tarea — ahí la limitación es operativa (cuota), no de precio.
+>
+> **Aplica a TODOS los modelos** (§5.A–§5.S) y a todas las secciones comparativas de esta
+> guía, incluidas las que mencionan "más barato"/"más caro" como ventaja (ej. §5.C "9x más
+> barato", §5.L, §12.2, §17) — leer esos pasajes como dato informativo, no como criterio.
+
 - **Módulos core (complejidad 4-5):** **Kimi K3** 🆕 (TB 2.1 88.3, MCPMark 94.5 — líder disponible) o MiMo V2.5 o GLM 5.3 o Hy4
 - **Módulos de sistemas (complejidad 3):** **Kimi K3** 🆕 o DeepSeek V4.1 Flash o GLM 5.3 Flash o Hy4
 - **Módulos de infraestructura (complejidad 1-3):** DeepSeek V4.1 Flash o GLM 5.3 Flash
@@ -815,6 +831,130 @@ muestra que pidió. Backlog:
 - **MCP para agentes atados a su propio modelo** (Claude Code, etc.): `spacebunny-mcp`
   (`npx -y github:codaaiteam/spacebunny-mcp`) añade la tool `ask_space_bunny` — útil para delegar
   trabajo de contexto grande.
+
+### S. StepFun Step 5 Preview (StepFun / 阶跃星辰) — Flagship Agentic + Coding · 🆕 NUEVO EN EL CATÁLOGO (investigado 2026-10-08, Atria-Dawn s3 / Kilo Code)
+
+> 🆕 **Por qué se investiga ahora:** el usuario pidió el 2026-10-08 probar e investigar **StepFun
+> Step 5 Preview**. Su antecesor **Step 3.7 Flash fue descartado en §5.O** (2026-09-18) por "sin
+> evidencia de liderazgo en benchmarks" — Step 5 **sí la tiene** (ver AA más abajo), así que
+> entra a evaluación.
+
+* **Especificaciones (verificadas en OpenRouter API `/api/v1/models` + página de endpoint
+  `stepfun/step-5-preview-20261008`, models.dev, y Artificial Analysis `/models/step-5` +
+  `/leaderboards/models`):**
+  - **Arquitectura:** MoE disperso — **600B parámetros totales / 27B activos** por token (OpenRouter
+    description + AA FAQ "600 billion parameters"). Sparse Mixture-of-Experts.
+  - **Contexto:** **1.000.000 tokens** (1M) — verificado en OpenRouter, models.dev y AA.
+  - **Output máximo:** **64K tokens** vía OpenRouter (top_provider.max_completion_tokens);
+    models.dev lista 1M en el provider directo. Considerar el límite de OpenRouter para tareas
+    largas.
+  - **Multimodal nativo de ENTRADA:** **texto + imagen + video** → salida **texto únicamente**
+    (no genera imagen/video).
+  - **Razonamiento SIEMPRE ACTIVO** (`reasoning.mandatory: true` en OpenRouter) con efforts
+    `high` / `medium` / `low`, **default `medium`**. No se puede apagar — todos los calls
+    "piensan".
+  - **Tool calling:** soportado (`tools`, `structured_outputs`, `response_format`) — **pero
+    OpenRouter reporta `supports_tool_choice` todo en `false`** (none/auto/required/function): no
+    se puede forzar selección de tool. Limitación a vigilar en flujos agénticos.
+  - **Precios (API de StepFun, verificado en OpenRouter + AA):**
+
+    | | Precio por 1M tokens |
+    |:---|---:|
+    | Input | **$1.00** |
+    | Output | **$2.70** |
+    | Cache read | **$0.05** (90% de descuento sobre input) |
+    | Blended (7:2:1 cache/input/output) | $0.54 |
+
+    ⚠️ **Dato de referencia — NO es criterio de asignación en este proyecto:** todos los modelos
+    activos se usan vía **acceso gratuito** (Kilo Code / OpenRouter free tier). En Agent Manager
+    está disponible como `StepFun: Step 5 Preview (free)` vía provider `kilo`.
+
+  - **Liberación:** **septiembre 2026** (AA: "September 18, 2026"; models.dev: 2026-09-16;
+    OpenRouter `created`: 2026-10-08 para el slug `step-5-preview-20261008`).
+  - **Pesos:** **propietario / cerrado** (no open source). 13 providers en models.dev, 1 provider
+    en AA.
+
+* **Benchmarks independientes (Artificial Analysis — medidos por AA, no por el vendor):**
+
+  | Métrica | Step 5 Preview | Referencia (mediana de su tier) |
+  |:---|---:|---:|
+  | **AA Intelligence Index v4.3.2** | **44** (#40/226) | 26 |
+  | Output speed | **86.8 t/s** (#66/226) | 74.6 t/s |
+  | TTFT (time to first token) | **2.85s** | 3.87s |
+  | Cost por Intelligence Index task | **$1.03** (#52/226) | — |
+  | Verbosity (output tokens en el Índice) | **160M** (#89/226) | 81M |
+
+  El Intelligence Index v4.3.2 agrega 10 evaluaciones: AA-Briefcase v1.1, GDPval-AA v2.1,
+  AutomationBench-AA, **Terminal-Bench 4.0** (agentic coding & terminal), SciCode, Humanity's
+  Last Exam, GDP.pdf, CritPt, AA-Omniscience, AA-LCR v1.1.
+
+  > **Veredicto textual de AA:** *"Step 5 Preview is amongst the leading models in intelligence
+  > and well priced when comparing to other models of similar price. It's also faster than
+  > average, however very verbose."*
+
+* **Comparación con nuestra flota (AA Intelligence Index — todos razonamiento max/default):**
+
+  | Modelo | AA Index | Cost/task | Output t/s | Rol actual en el proyecto |
+  |:---|---:|---:|---:|:---|
+  | MiMo-V2.6-Pro | **46** | $0.13 | 40 | TOP open weights (§21.14) |
+  | GLM-5.3 (max) | **45** | $2.01 | 82 | Flagship texto (§5.C) |
+  | **Step 5 Preview** | **44** | **$1.03** | **87** | 🆕 en evaluación |
+  | Kimi K3 (max) | **44** | $2.00 | 41 | Vigente (§5.P) |
+  | Ling 3.1 Flash | 41 | $0.99 | 212 | En pruebas con s3 |
+  | DeepSeek V4.1 Flash (max) | 39 | $0.27 | 217 | Vigente (§5.B3) |
+  | MiMo-V2.6-Flash | 38 | $0.06 | 57 | Vigente (§5.A3) |
+  | GLM-5.3-Flash | 42 | $0.25 | 52 | Vigente (§5.C2) |
+  | Hy3 | 25 | $0.07 | 82 | QA/crítico (§5.D) |
+
+  **Lectura:** Step 5 Preview entraría en el **top 4 de la flota por inteligencia**, empatado con
+  Kimi K3 (max) y por encima de Ling 3.1 Flash, DeepSeek V4.1 Flash y MiMo V2.6 Flash. Más
+  **veloz** que Kimi K3 (87 vs 41 t/s).
+
+  > ⚠️ **El precio NO es criterio de asignación en este proyecto** (directiva del usuario
+  > 2026-10-08): **todos los modelos del catálogo se usan por su tier gratuito** — en eso se
+  > basa el proyecto. La columna "Cost/task" de la tabla de arriba es **informativa** y solo
+  > importaría si algún tier gratuito impusiera límites de cuota; comparar modelos por precio es
+  > misleading aquí. Lo que diferencia a Step 5 es **inteligencia + velocidad + contexto**, no
+  > el coste.
+
+* **⚠️ Advertencias honestas para su uso en este proyecto:**
+
+  1. **Muy verboso:** 160M tokens de output en el Índice (casi **2× la mediana** de 81M). En
+     tareas agénticas de muchas iteraciones, el consumo de tokens puede duplicar al de modelos
+     comparables — vigilar **latencia y cuota del tier free** en sesiones largas.
+  2. **`tool_choice` no soportado** vía OpenRouter: no se puede forzar `required`/`function`.
+     Los flujos que dependan de forzar una tool fallarán.
+  3. **Razonamiento obligatorio:** no se puede apagar; hasta los queries simples "piensan". Bien
+     para auditoría/análisis, mal para tareas triviales masivas.
+  4. **`Preview` en el nombre:** modelo en fase preview — la API puede cambiar o degradarse sin
+     aviso (OpenRouter usa slug fechado `step-5-preview-20261008`).
+  5. **Sin evidencia de visión en Godot/Blender todavía:** aunque acepta imagen/video como input,
+     no hay evidencia empírica en este proyecto de su rendimiento con capturas del juego.
+
+* **Disponibilidad operativa (2026-10-08):**
+
+  | Vía | Estado | Notas |
+  |:---|:---:|:---|
+  | Agent Manager (Kilo Code) | 🟢 **Disponible** | `StepFun: Step 5 Preview (free)`, provider `kilo`, variantes `low`/`medium`/`high`. También versión de pago. |
+  | OpenRouter | 🟢 Disponible | `stepfun/step-5-preview` (slug fechado `step-5-preview-20261008`) |
+  | Provider StepFun directo | 🟢 Disponible | API first-party (la que mide AA) |
+
+* **Próximos pasos (evaluación empírica pendiente):**
+  - Asignarle un **encargo mínimo acotado** con el mismo patrón que Ling (un ítem Familia A del
+    barrido BUG-070) para comparación cabeza a cabeza.
+  - Candidato propuesto: **M154 L109 "Crear `preview_personaje.tscn`"** (1 ítem, 1 búsqueda de
+    archivo, verbo inequívoco).
+  - **La evaluación empírica no se ha realizado todavía** — esta sección documenta solo la
+    investigación web. Cuando se ejecute, agregar §21.X con la evidencia.
+
+**Firma de la investigación:**
+
+> **Modelo:** Atria-Dawn-Preview (sesión s3)
+> **Plataforma:** Kilo Code
+> **Fecha:** 2026-10-08
+> **Fuentes:** OpenRouter API `/api/v1/models` + endpoint
+> `stepfun/step-5-preview-20261008`; models.dev; Artificial Analysis `/models/step-5` y
+> `/leaderboards/models` (recomendada por el usuario)
 
 ---
 

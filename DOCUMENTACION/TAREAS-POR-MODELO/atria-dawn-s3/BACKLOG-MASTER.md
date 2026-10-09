@@ -186,6 +186,159 @@
 - **Siguiente propuesto:** M154 Vision-Del-Agente — L109 "Crear `preview_personaje.tscn`"
   (1 ítem Familia A puro, mismo patrón .tscn). Pendiente de confirmación del director.
 
+### L-10 — Ling: M28 Viajes — `[→]` EN CURSO (Ling trabajando)
+
+- **Asignado por el director** (msg 55, 2026-10-08 22:47): M108 flip aplicado por él (123/205),
+  L167 Familia B **confirmado** (se mantiene `[x]`), msg 54 mío llegó vacío a su lectura
+  (archivo OK en disco, 3776 bytes — bug de mensajes en sentido inverso).
+- **Encargo M28:** más amplio que M73/M108 — escaneo del módulo **entero** buscando `[x]` con
+  verbos de implementación que citen artefactos (`.gd`/`.tscn`/`.tres`), verificar existencia en
+  disco + `git ls-files`, clasificar Familia A/B con regla H2.
+- **Origen del candidato:** inventario de suites muertas de DeepSeek (msg 94, Log 1483).
+- **Mi pre-revisión (calibración del encargo):** M28 está **mayoritariamente limpio** — 50/130
+  `[x]`; solo 5 citan artefactos, y 4 de ellos **existen** (`harbor.gd`, `harbor_dock.gd`,
+  `embark_trigger.gd`, `test_harbor_viajes.gd` en `game/isla-ancestral/scripts/viajes/`).
+  **Punto caliente: L162** — "Resources .tres versionables en `res://_Project/data/routes/`"
+  (ruta Unity, no Godot; 0 `.tres` en `data/routes/`). Ítem sin verbo de implementación
+  explícito — clasificación A/B es el debate.
+- **Veredicto LIMPIO es válido:** si Ling no halla Familia A, reporta LIMPIO con evidencia.
+- **Lanzamiento:** prompt enviado a Ling en `ses_ee2ecce82ffe1vVnKY9tBf9y6s`.
+
+### L-10 — Ling: M28 Viajes — `[x]` CERRADO (Ling entregó LIMPIO; verificado por mí)
+
+- **Asignado por el director** (msg 55): escaneo de módulo entero (no 1 ítem aislado).
+- **Ling ENTREGÓ** (msg 57): veredicto **LIMPIO — 0 Familia A, 0 flips**. **3er encargo
+  correcto consecutivo** (M73 INFLADO, M108 INFLADO, M28 LIMPIO). Supo reportar un veredicto
+  negativo sin inflar hallazgos.
+- **Mi re-verificación independiente (todo correcto):**
+  - **Conteo: mi recuento = 50/80/0 = 130, idéntico al de Ling** ✓
+  - 8 artefactos `.gd` existen en `scripts/viajes/` (`boat_route`, `harbor`, `harbor_dock`,
+    `embark_trigger`, `travel_service`, `travel_ui`, `test_harbor_viajes`, `test_viajes`) ✓
+  - `rutas.json` con **exactamente las 4 rutas** que citó Ling (`raiz_sur`, `raiz_norte`,
+    `raiz_brisa_nocturna`, `raiz_espejo_diurna`) ✓
+  - `travel_service.gd` L56 carga `rutas.json`; L29 `enum TravelState` ✓
+- **L162 = Familia B (ambos de acuerdo):** "Resources .tres versionables en
+  `res://_Project/data/routes/`" — sin verbo de implementación + entregable funcional existe
+  como `data/viajes/rutas.json` (data-driven). Es drift de docs (ruta Unity), no inflación.
+  Recomendación al director: corregir la cita, no revertir el `[x]`.
+- **Observación fuera de alcance que pasó Ling:** L128 "Clase Boat (Node3D)" — no existe
+  `boat.gd`; los estados viven en `travel_service.gd` L29; la clase Boat es V2 no resuelto
+  (Notas del Agente L398). Sin artefacto citado ni verbo de implementación → fuera de BUG-070,
+  pero es claim de clase sin entrega. Informado al director.
+- **Detalle menor:** Ling usó `--emisor ling-3-1-flash` (no mi sugerencia `atria-dawn-s3`) con
+  razón — el reporte es de ella. Firma honesta.
+- **Informe al director (msg 58):** M28 LIMPIO + research StepFun Step 5 Preview.
+
+### L-11 — Ling: M154 Vision-Del-Agente L109 — `[→]` EN CURSO (Ling trabajando)
+
+- **Asignado por el director** (msg 59, 2026-10-08 23:35): M154 L109 CONFIRMADO. El director creía
+  que ya estaba pasado a Ling — **no lo estaba**; lo lancé yo en este ciclo.
+- **Ítem:** L109 `- [x] Crear preview_personaje.tscn en el proyecto Godot [M]` (agnes-2.5-flash
+  2026-09-12 cita `03-Diseno.md §G.1`).
+- **Mi pre-verificación:**
+  - `preview_personaje.tscn` **NO existe** (git ls-files → 0).
+  - **0 escenas de personaje** en git (busqué `personaje`/`character` en `.tscn`).
+  - Existen 8 escenas `preview_*.tscn` (assets, equipment, antorcha, particles, vfx, reloj,
+    herramientas, ruina) — **ninguna de personaje**.
+  - `03-Diseno.md` L235 documenta la estructura y L249 cita `preview_personaje.gd` — también
+    inexistente.
+  - Conteo M154: 155 `[x]` / 0 `[ ]` / 0 `[?]` = 155.
+- **Criterio del director (msg 59):** si hay equivalente funcional, aplicar criterio L162
+  (Familia B); no descartar como inflación sin verificar. Mi pre-verificación: **no lo hay**.
+- **Ling ENTREGÓ (msg 60, 20:45):** veredicto **INFLADO (Familia A)** — corroborado por mí.
+  - `preview_personaje.tscn` inexistente (glob, git ls-files, grep = 0) ✓ coincide con mi
+    pre-verificación
+  - **0 equivalentes funcionales:** listó las 7 `preview_*.tscn` existentes, ninguna de
+    personaje; `**/*{personaje,character}*.tscn` → 0 ✓
+  - `03-Diseno.md` §G.1 documenta (L235/L249) pero `scripts/preview/preview_personaje.gd` y la
+    carpeta `scripts/preview/` **no existen** — verificado por mí ✓
+  - **Conteo 155/0/0 = 155 idéntico** al mío ✓; 1 flip L109 → 154/1/0
+  - **Hallazgo extra valioso:** el propio ítem admite "implementacion requiere creacion fisica
+    del .tscn" — el agente (agnes-2.5-flash) marcó `[x]` sabiendo que no existía.
+  - **Candidatos Familia A adicionales que detectó (para futuro):** L170/L171 "Crear
+    scripts/blender/*.py" (carpeta inexistente — verificado por mí), L173 "Exportar a .glb",
+    y dependientes L113/L114 del preview inexistente.
+- **4º encargo correcto consecutivo de Ling** (M73, M108, M28, M154).
+
+### E-01 — Step 5 Preview: evaluación empírica M154 L109 — `[x]` CERRADO — APROBADO
+
+- **Step 5 ENTREGÓ (msg 61, 21:16)** tras tropezar con un **429 rate limit** (concurrencia
+  141/140 del tier free de StepFun) → `retry` → entregó en el 2º intento tras mi instrucción
+  de **ejecutar comandos de a uno (sin paralelizar)**.
+- **Veredicto: INFLADO Familia A — coincide con Ling y con mi pre-verificación (0 desacuerdo).**
+- **Step 5 SUPERÓ a Ling en profundidad:**
+  - Encontró que `plan-actual/04-Codigo.md` **L150** tiene `⬜ Crear escena de preview de
+    personaje` y **L178** dice *"No creé la escena... depende de M04 pendiente"* — **el
+    módulo se contradice a sí mismo**. Ni Ling ni yo lo detectamos en pre-verificación.
+  - Más preciso con la referencia: notó que "§G.1" no existe como sección literal (el archivo
+    usa numeración; es la sección "6").
+  - Clasificó los 30 matches de grep como "todos documentación, ninguno código".
+- **Mi re-verificación independiente: todos sus claims correctos** (incluido 04-Codigo.md
+  L150/L178 verificados textuales por mí).
+- **⚠️ Matiz operativo:** concurrencia limitada a 140 en tier free — puede bloquear tareas.
+  **Mitigación probada:** instruirle que ejecute comandos de a uno. No es problema de precio
+  (regla nueva del proyecto) — es limitación de cuota.
+- **Recomendación al director (msg 62):** sumar a Step 5 a la rotación como **segundo/tercer
+  verificador §21.8** — su inteligencia (AA 44) se confirmó empíricamente. Rol: QA cruzado de
+  módulos ✅ sin sello runtime.
+
+### Resumen del ciclo M154 (ambos modelos)
+
+| Dimensión | Ling 3.1 Flash | Step 5 Preview |
+|---|---|---|
+| Veredicto | INFLADO ✓ | INFLADO ✓ |
+| Conteo | 155/0/0 ✓ | 155/0/0 ✓ |
+| Read-only | ✓ | ✓ |
+| Profundidad | Buena | **Superior** |
+| Estabilidad | Entregó directo | 429 → retry → 2º intento |
+| Tiempo | ~13 min | ~40 min |
+
+- **Flips para el director:** M154 L109 `[x]`→`[ ]` (155→154, 0→1 `[ ]`). Adicional: Step 5
+  y Ling marcan L113/L114 como dependientes a revisar; L170/L171/L173 candidatos Familia A
+  futuros (`scripts/blender/` inexistente).
+
+- **Autorizado por el director** (msg 59): "OK, LANZA LA EVALUACIÓN" — con §5.S ya escrita por mí
+  (ver R-01).
+- **Diseño:** misma tarea que L-11 (M154 L109) para **comparación cabeza a cabeza** — ¿Step 5
+  entrega el mismo veredicto que Ling en el mismo ítem?
+- **Lanzamiento:** sesión local nueva, model `StepFun: Step 5 Preview (free)`, provider `kilo`,
+  variant `medium` (default del modelo).
+- **Métricas a reportar al director:** veredicto, **tokens consumidos**, **tiempo**, y
+  comparación directa con la entrega de Ling.
+- **Advertencia del director:** vigilá la verbosidad (160M tokens en AA, 2x mediana) — cortar si
+  se dispara el consumo.
+- **Si rinde:** el director lo suma a la rotación BUG-070 como **segundo verificador** (§21.8
+  necesita modelos distintos; un 3er verificador para módulos ✅ sin sello).
+- **Mi cola tras cerrar L-11 + E-01:** cola de módulos ✅ sin sello runtime para QA cruzada
+  (tengo binario Godot — trabajo de runtime).
+
+### R-01 — Research StepFun Step 5 Preview — `[x]` RESEARCH COMPLETA (pedido del usuario)
+
+- **Pedido del usuario (2026-10-08 23:07):** investigar en la web las capacidades de StepFun
+  Step 5 Preview, agregarlas a la guía y luego evaluar empíricamente (como con Ling).
+- **Fuentes verificadas:**
+  - OpenRouter API `/api/v1/models` (parseo del JSON de 469 modelos) + página de endpoint
+  - models.dev (listado de modelos)
+  - **Artificial Analysis** (`/models/step-5` + `/leaderboards/models`) — recomendada por el
+    usuario
+- **Specs clave:** MoE **600B totales / 27B activos**; contexto **1M**; output máx 64K (OR) / 1M
+  (provider); multimodal entrada **texto+imagen+video** → texto; **razonamiento obligatorio**
+  (high/medium/low, default medium); tool calling sí (pero `tool_choice` no soportado en OR);
+  precios **$1.00/1M input · $2.70/1M output**; liberación **2026-09-16/18**; propietario.
+- **Artificial Analysis:** Intelligence Index **44** (#40/226, mediana tier 26); output speed
+  **86.8 t/s**; TTFT **2.85s**; cost/task **$1.03**; **muy verboso** (160M tokens vs mediana
+  81M); "entre los modelos líderes en inteligencia".
+- **Comparativa flota (AA Index):** MiMo-V2.6-Pro 46 > GLM-5.3-max 45 > **Step 5 Preview 44**
+  = Kimi-K3-max 44 > Ling-3.1-Flash 41 > DeepSeek-V4.1-Flash-max 39 > MiMo-V2.6-Flash 38 > Hy3 25.
+  Step 5 sería **top 4 de la flota**, empatando con Kimi K3 max.
+- **Contexto:** Step 3.7 Flash fue **descartado en §5.O** por "sin evidencia de liderazgo";
+  Step 5 **sí la tiene** (AA 44).
+- **Disponibilidad Agent Manager:** `StepFun: Step 5 Preview (free)` vía kilo, variantes
+  low/medium/high. También versión de pago.
+- **Informe al director (msg 58):** resumen completo + pedido de ok para escribir **§5.S** en
+  `10-GUIA-COMPARATIVA-MODELOS.md` y lanzar evaluación empírica con el mismo patrón de encargo
+  mínimo (ideal M154 L109, mismo ítem que se daría a Ling → comparación cabeza a cabeza).
+
 ### Candidato 2 — Módulos 🟡 de modelos inactivos — `[x]` COMPLETADA (espera aprobación director)
 
 - **Qué era:** auditar los módulos 🟡 de modelos inactivos para determinar si están colgados o

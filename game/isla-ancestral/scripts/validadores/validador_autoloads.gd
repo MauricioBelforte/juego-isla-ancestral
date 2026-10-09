@@ -159,7 +159,8 @@ static func verificar_proyecto(ruta_project: String) -> Dictionary:
 		resultados.append(verificar_autoload(String(n), String(mapa[n])))
 
 	# Dos autoloads apuntando al MISMO archivo casi siempre es un sistema
-	# duplicado (el proyecto tiene un par Localization/LocalizationManager).
+	# duplicado (histórico: el proyecto tuvo un par Localization/LocalizationManager,
+	# resuelto en BUG-104 2026-10-08 — solo queda "Localization").
 	# No es un fallo del boot, asi que se reporta aparte, no como FALLA.
 	var por_ruta := {}
 	for n in nombres:
