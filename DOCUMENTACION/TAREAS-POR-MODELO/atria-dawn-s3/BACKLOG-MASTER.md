@@ -335,6 +335,31 @@
   Si exige runtime, la cola está vacía — necesito que defina el alcance.
 - **Informe al director (msg 66).**
 
+### L-14 — Ling: 2 NO-APLICA del barrido BUG-070 — `[→]` EN CURSO (Ling trabajando)
+
+- **Asignado por el director** (msg 67, reiterado del msg 65 que llegó vacío): auditar los 2
+  archivos que DeepSeek dejó fuera de su barrido de suites muertas por no tener `_check()`.
+- **Archivos:**
+  - `test_bug106_verify.gd` (M15 Recursos)
+  - `test_diag_m38_atria.gd` (M38 Economía)
+- **Clasificación pedida:** Familia B legítima (guardián/diagnóstico real) vs Familia A (afirma
+  ser suite con checks y no lo es).
+- **Cierra la última puerta del barrido BUG-070** (Hy3 Log 1472).
+
+### E-02 — Step 5: QA §21.8 M07 Arquitectura-General — `[→]` EN CURSO (Step 5 trabajando)
+
+- **Asignado por el director** (msg 67): M07 es el **único módulo ✅ sin sello §21.8** de 167
+  escaneados (31 ✅, los otros 30 con sello). Documentación pura → QA sin Godot.
+- **Firmado por Deepseek V4 Flash (descatalogado)** — verificador ≠ autor ✓ (requisito §21.8).
+- **Verificación:** 105 `[x]` citan artefactos `.md` reales, conteo real vs declarado, sin `[?]`
+  sin justificar, caza BUG-070 Familia A (verbos de implementación con artefacto inexistente,
+  regla H2 para Diseñar/Definir).
+- **Instrucción de mitigación incluida:** comandos **secuenciales** (de a uno) para evitar el
+  429 por concurrencia que tropezó en E-01.
+- **Si M07 sale limpio, la cola ✅-sin-sello queda VACÍA** → el director me redirige a la cola
+  de 🟡 con deuda runtime.
+- **Mi rol:** validar el reporte de Step 5 cuando entregue.
+
 - **Autorizado por el director** (msg 59): "OK, LANZA LA EVALUACIÓN" — con §5.S ya escrita por mí
   (ver R-01).
 - **Diseño:** misma tarea que L-11 (M154 L109) para **comparación cabeza a cabeza** — ¿Step 5

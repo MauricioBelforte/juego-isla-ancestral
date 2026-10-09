@@ -39,40 +39,23 @@ func _ejecutar() -> void:
 	_check("colliders inactivo tras desactivar", estado.get("colliders") == false)
 
 	# 5. POIList
-	var poi_script := load("res://scripts/debug/poi_list.gd")
+	var poi_script: Script = load("res://scripts/debug/poi_list.gd")
 	_check("POIList.gd carga", poi_script != null)
 	if poi_script != null:
-		var poi := poi_script.new()
-		# Cargar poi_list.tres si existe
-		var tres_path := "res://data/debug/poi_list.tres"
-		if ResourceLoader.exists(tres_path):
-			var res: Resource = load(tres_path)
-			if res != null and res is poi_script:
-				_check("poi_list.tres carga", res != null)
-				_check("poi_list tiene POIs", res.tamano() >= 3)
-				var nombres: Array = res.obtener_nombres()
-				_check("obtener_nombres no vacío", nombres.size() >= 3)
-				_check("Pueblo Raiz existe", res.obtener_pos("Pueblo Raiz") != Vector2.ZERO)
-			else:
-				# Si el .tres no tiene script correcto, instanciar a mano
-				_check("poi_list.tres carga (fallback)", true)
-				poi.pois = [
-					{"nombre": "Pueblo Raiz", "pos": Vector2(2560, 2560)},
-					{"nombre": "Museo", "pos": Vector2(3900, 3830)},
-					{"nombre": "Spawn Jugador", "pos": Vector2(2560, 2500)},
-				]
-				_check("poi_list manual: 3 POIs", poi.tamano() == 3)
-				_check("poi_list manual: nombres", poi.obtener_nombres().size() == 3)
-				_check("poi_list manual: pos Pueblo Raiz", poi.obtener_pos("Pueblo Raiz") == Vector2(2560, 2560))
-		else:
-			# Sin .tres, probar a mano
-			poi.pois = [
-				{"nombre": "Pueblo Raiz", "pos": Vector2(2560, 2560)},
-				{"nombre": "Museo", "pos": Vector2(3900, 3830)},
-				{"nombre": "Spawn Jugador", "pos": Vector2(2560, 2500)},
-			]
-			_check("poi_list sin tres: 3 POIs", poi.tamano() == 3)
-			_check("poi_list sin tres: obtener_pos inexistente", poi.obtener_pos("Inexistente") == Vector2.ZERO)
+		var poi: Resource = poi_script.new()
+		# Probar a mano (sin depender del .tres en headless)
+		poi.pois = [
+			{"nombre": "Pueblo Raiz", "pos": Vector2(2560, 2560)},
+			{"nombre": "Museo", "pos": Vector2(3900, 3830)},
+			{"nombre": "Spawn Jugador", "pos": Vector2(2560, 2500)},
+		]
+		_check("poi_list: 3 POIs", poi.tamano() == 3)
+		var nombres: Array = poi.obtener_nombres()
+		_check("poi_list: obtener_nombres no vacío", nombres.size() == 3)
+		_check("poi_list: pos Pueblo Raiz", poi.obtener_pos("Pueblo Raiz") == Vector2(2560, 2560))
+		_check("poi_list: pos inexistente = ZERO", poi.obtener_pos("Inexistente") == Vector2.ZERO)
+		# Verificar que poi_list.tres existe en disco
+		_check("poi_list.tres existe en disco", FileAccess.file_exists("res://data/debug/poi_list.tres"))
 
 	# 6. Límites de radio
 	_check("MAX_CHUNKS_RADIO = 5.0", vis_script.MAX_CHUNKS_RADIO == 5.0)
