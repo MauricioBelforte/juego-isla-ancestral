@@ -18,7 +18,7 @@
 | `game/isla-ancestral/scripts/telemetry/test_telemetry.gd` | Test base (extends SceneTree, 16 checks) — autor original ox-alpha |
 | `game/isla-ancestral/scripts/telemetry/test_telemetria_iter5.gd` | iter. 5: dedup de `zone_ignored`/`puzzle_abandoned`, metrica unica, opt-in persistente (10 checks) |
 | `game/isla-ancestral/scripts/telemetry/test_telemetria_iter6.gd` | iter. 6: emision de `zone_ignored` por el camino REAL (al salir de la zona, sin `_on_zone_check()` manual) (11 checks) |
-| `game/isla-ancestral/scripts/telemetry/test_telemetria_iter7.gd` | iter. 7: las 3 metricas `time_to_first_*` nuevas, ruta `complete_puzzle` y `session_duration` al apagar opt-in (22 checks) |
+| `game/isla-ancestral/scripts/telemetry/test_telemetria_iter7.gd` | iter. 7: las 3 metricas `time_to_first_*` nuevas, ruta `complete_puzzle` y `session_duration` al apagar opt-in (27 checks) |
 | `game/isla-ancestral/scripts/telemetry/stub_analytics_director.gd` | Stub de Analytics con `class_name`. **HUERFANO: 0 referencias en el repo** — los 4 suites usan su propia inner class `_AnalyticsStub`. Candidato a eliminar por su autor (ox-alpha). |
 | `game/isla-ancestral/project.godot` | Autoload `TelemetryDirector="*res://scripts/telemetry/telemetry_director.gd"` (linea 29) |
 | `.github/workflows/quality.yml` | Job `test-suite`: cablea los 4 suites de telemetria (agregado en iter. 7) |
