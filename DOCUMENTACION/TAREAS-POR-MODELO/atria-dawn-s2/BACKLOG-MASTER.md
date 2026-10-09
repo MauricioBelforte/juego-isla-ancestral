@@ -584,3 +584,20 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 - [ ] **Fundador autorizo push (msg 131)** pero la situacion local cambio: **23 commits ahead / 0 behind**, de los cuales 14 son de otras sesiones (mimo, director, agnes, flota) encima de mis 9. Mi trabajo no commiteado fue absorbido por commits ajenos. Pedi confirmacion sobre si empujar los 23 tal cual (incluye scripts temporales del director en la raiz, `cdfba18`) — msg 132. Esperando respuesta.
 
 
+
+## QA sec21.8 de M105 (msg 147 orden 1, completada) — SELLO REGISTRADO
+
+- [x] **Runtime medido**: 4 suites, **64 checks, 0 fallos, 4x EXIT 0** (16/10/11/27). Coincide con DeepSeek iter 7-bis.
+- [x] **Conteo triple coincidencia**: 120 [x] / 0 [ ] / 45 [?] = 165 (real = GLOBAL = verificar_checklist.py).
+- [x] **Artefactos verificados**: telemetry_director.gd (autoload L29), 4 suites, stub huerfano declarado, quality.yml L403-406.
+- [x] **SELLO REGISTRADO por el director** en CHECKLIST-GLOBAL fila M105 (Log 1502). M105 queda 🟡 deliberado (45 [?] con deps reales).
+- [x] **H-1/H-2 fijados** (autorizado msg 149, commit 7aad24c): 04-Codigo 59->64 checks / iter7 22->27; autoload linea 65->29.
+- [x] **H-3 (23 [?] sin justificacion inline)**: opcional segun el director, no hecho.
+
+## Re-auditoria H2-estricta de los 52 (msg 147 orden 2, completada)
+
+- [x] **Criterio H2-estricta** (formalizado por el director msg 147): un [x] Familia B sostiene solo si el doc citado existe Y no se autocontradice.
+- [x] **52 items auditados uno a uno** contra planes-actuales + repo (msgs 150/151/152).
+- [x] **Balance final**: 22 sostienen / 12 no-sostienen (para flip del director) / 6 dudosos / 12 ya revertidos.
+- [x] **Correccion de mi conteo del msg 144**: "41 sostienen" era incorrecto (conte M154 L109 ya revertido) → 22 reales.
+- [x] **2 over-marks nuevos colaterales**: M112 L166 y M84 L117 ([x] que admiten no-hecho en su propio texto).
