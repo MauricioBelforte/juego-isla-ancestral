@@ -199,7 +199,7 @@
 - [x] Confirmar captura visual desde `screen.capture_screen` en Copilot [M]
 - [x] Verificar conexión V5 Blender desde Copilot con socket 9876 activo [M]
 
-**Totales:** 155 ítems · Completados: 152 · Pendientes: 3 · No resueltos: 1.
+**Totales:** 155 ítems · Completados: 151 · Pendientes: 3 · No resueltos: 1.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"153 ítems · Completados: 73 · Pendientes: 80"*
