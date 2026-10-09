@@ -75,10 +75,10 @@
 - [x] Diseñar DataSanitizer.cs como servicio central de sanitización _(diseno heredado: `DataSanitizer.cs` es una ruta Unity/C#; no existe ni puede existir en este proyecto Godot/GDScript — verificado 2026-10-02, Log 1189)_
 - [x] Implementar stripping de PII (Personal Identifiable Information) para menores
 - [x] Implementar hashing de identificadores (SHA-256 truncado) para menores
-- [x] Implementar reducción de granularidad de timestamps para menores
+- [?] Implementar reducción de granularidad de timestamps para menores → REVERTIDO por auditoría BUG-070 (Ling 3.1 Flash lote 4, s3 #79, 2026-10-09): verbo Implementar + artefacto inexistente (grep granularidad/timestamp en scripts/ solo encuentra logger.gd:26, exportación de logs de M103, no datos de menores).
 - [x] Definir caps de eventos por sesión para menores (ej: max 50 events)
 - [x] Definir política de retención: 30 días para <13, 365 días para 13-17
-- [x] Implementar eliminación automática después del período de retención
+- [?] Implementar eliminación automática después del período de retención → REVERTIDO por auditoría BUG-070 (Ling 3.1 Flash lote 4, s3 #79, 2026-10-09): verbo Implementar + artefacto inexistente (grep eliminar_datos/borrar_datos/olvido/forgotten en scripts/ = 0 matches relevantes). El diseño de revocación SÍ existe (L69/L71, Familia B).
 - [x] Diseñar sanitización para Analytics (M104): datos anónimos, sin behavioral targeting
 - [x] Diseñar sanitización para Telemetría de Gameplay (M105): eventos genéricos sin playerId
 - [x] Diseñar sanitización para Crash Reporting (M121): sin datos de cuenta en crashes de menores

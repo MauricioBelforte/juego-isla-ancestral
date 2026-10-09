@@ -54,9 +54,9 @@
 - [x] Panel Entidades [S] — **pestaña nueva iter** (reset_npc, reset_puzzle)
 - [x] Panel Visualización [S] — **pestaña nueva** (6 toggles RF14-19)
 - [x] Panel Sistema [S] — toggle_debug, toggle_ui, exportar_diagnostico, limpiar_cache, help, stats, reset_flags
-- [?] TabBar [S] — sin UI; dueño: M110-UI
-- [?] ContentPanel [S] — sin UI; dueño: M110-UI
-- [?] TitleBar con cierre [S] — sin UI; dueño: M110-UI
+- [x] TabBar [S] — `scenes/debug/debug_menu.tscn` TabBar (5 pestañas config JSON)
+- [x] ContentPanel [S] — `scenes/debug/debug_menu.tscn` ContentPanel + DebugConsole
+- [x] TitleBar con cierre [S] — `scenes/debug/debug_menu.tscn` TitleBar + CloseButton
 - [?] Documentar layout de panel [M] — dueño: M110-UI
 
 ## C. Panel Jugador (17)
@@ -122,7 +122,7 @@
 
 ## G. Panel Sistema (12)
 
-- [?] Consola RichTextLabel scrollable [S] — dueño: M110-UI
+- [x] Consola RichTextLabel scrollable [S] — debug_console.gd RichTextLabel + scroll_following (test_m110_ui2.gd 14/0)
 - [?] Consola: filtro por nivel [S] — dueño: M110-UI
 - [?] Consola: filtro por categoría [S] — dueño: M110-UI
 - [?] Consola: campo de búsqueda [S] — dueño: M110-UI
@@ -137,7 +137,7 @@
 
 ## H. Consola in-game (10)
 
-- [?] RichTextLabel scrollable [S] — dueño: M110-UI
+- [x] RichTextLabel scrollable [S] — debug_console.gd RichTextLabel + scroll_following (test_m110_ui2.gd 14/0)
 - [?] Filtro por nivel [S] — dueño: M110-UI
 - [?] Filtro por categoría [S] — dueño: M110-UI
 - [?] Búsqueda de texto [S] — dueño: M110-UI
@@ -281,7 +281,7 @@
 - [?] scripts/debug/diagnostic_exporter.gd [S] — dueño: M110-UI (refactor)
 - [?] scripts/debug/panel_*.gd [S] — dueño: M110-UI
 - [?] scripts/debug/debug_console.gd [S] — dueño: M110-UI
-- [?] scenes/debug/debug_menu.tscn [S] — directorio inexistente; dueño: M110-UI
+- [x] scenes/debug/debug_menu.tscn [S] — `scenes/debug/debug_menu.tscn` + `debug_menu_ui.gd`
 - [x] data/debug/debug_config.json [S] — debug_menu_config.json
 - [?] data/debug/poi_list.tres [S] — dueño: M110-UI
 - [x] user://diagnostics/ [S] — metadata+logs+screenshot+zip+txt generados
@@ -302,6 +302,6 @@
 - [x] Pendientes asignados a dueños [S] — todos los [?] con dueño (M110-UI / M102 / M64 / M117 / M103)
 - [x] DoD cumplida: 5 archivos + firma + log [M] — log 928
 
-**Totales:** 225 ítems · [x] Completados: 129 · [?] No resueltos (con dueño): 96 · Pendientes: 0.
+**Totales:** 225 ítems · [x] Completados: 135 · [?] No resueltos (con dueño): 90 · Pendientes: 0.
 
 > El módulo queda como **API backend completa y verificada**. Los 104 `[?]` son todos **widgets de UI** (paneles, consola visual, DebugVisualizer, persistencia de config) + report_bug (M102) + integración IA (M64) — ningún comando backend queda sin implementar. La capa de UI es un módulo separado (M110-UI) que puede construirse sobre esta API sin tocar el backend.

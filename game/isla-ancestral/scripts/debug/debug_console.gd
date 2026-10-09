@@ -92,3 +92,12 @@ func tamano() -> int:
 ## Devuelve si el debug menu backend está conectado.
 func backend_conectado() -> bool:
 	return _debug_menu != null
+
+## Agrega una línea pública (para el UI, no requiere backend).
+func agregar_linea_publica(texto: String) -> void:
+	_agregar_linea(texto)
+
+## Setea el texto directamente (para el UI, cambia la vista completa).
+func set_text(html: String) -> void:
+	if _rich_label != null:
+		_rich_label.text = html

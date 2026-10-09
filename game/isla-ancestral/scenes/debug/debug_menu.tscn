@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/debug/debug_menu_ui.gd" id="1"]
+
+[node name="DebugMenuUI" type="CanvasLayer"]
+layer = 100
+
+[node name="RootPanel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="TitleBar" type="HBoxContainer" parent="RootPanel"]
+anchors_preset = 10
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="RootPanel/TitleBar"]
+layout_mode = 2
+text = "Debug Menu — Isla Ancestral"
+size_flags_horizontal = 3
+
+[node name="CloseButton" type="Button" parent="RootPanel/TitleBar"]
+layout_mode = 2
+text = "X"
+custom_minimum_size = Vector2(40, 0)
+
+[node name="TabBar" type="TabBar" parent="RootPanel"]
+anchors_preset = 10
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = -8.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContentPanel" type="Control" parent="RootPanel"]
+anchors_preset = 10
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 68.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
