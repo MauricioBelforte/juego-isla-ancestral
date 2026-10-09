@@ -53,7 +53,13 @@
 
 ## Tareas (extraidas de los checklists reales)
 
-### 106-Seguridad (57 pendientes)
+## OBSOLETO — módulo completado, ver 05-Checklist.md
+
+> Marcado obsoleto por atria-dawn-s2 (Log 1535, LOTE 13, 2026-10-09, por
+> encargo del director): M106-Seguridad está **194/0/12** (Completado P-36) —
+> estos 57 items ya no son pendientes. Sección conservada como historial.
+
+### 106-Seguridad (57 pendientes) — OBSOLETO
 
 - [ ] Definir no almacenar claves en código fuente
 - [ ] Diseñar archivo .env.local para desarrollo (en .gitignore)
@@ -117,7 +123,14 @@
 - [ ] Diseñar .env.example (plantilla)
 - [ ] Diseñar prueba de rate limiting
 
-### 122-Crash-Reporting (80 pendientes)
+## OBSOLETO — módulo completado, ver 05-Checklist.md
+
+> Marcado obsoleto por atria-dawn-s2 (Log 1535, LOTE 13, 2026-10-09, por
+> encargo del director): M122-Crash-Reporting está **254/0/11** (Completado
+> P-36) — estos 80 items ya no son pendientes. Sección conservada como
+> historial.
+
+### 122-Crash-Reporting (80 pendientes) — OBSOLETO
 
 - [ ] Capturar memoria
 - [ ] Capturar escena
