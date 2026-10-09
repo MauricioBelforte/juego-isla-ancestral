@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/debug/poi_list.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pois = [
+	{ "nombre": "Pueblo Raiz", "pos": Vector2(2560, 2560) },
+	{ "nombre": "Museo", "pos": Vector2(3900, 3830) },
+	{ "nombre": "Spawn Jugador", "pos": Vector2(2560, 2500) },
+]
