@@ -1120,3 +1120,14 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - [x] 4 hallazgos MENORES no bloqueantes: (H1) `test_legal_m78.gd` ROJO por fixture defectuoso (payload `marcas: {}` + assert de "busquedas"); (H2) banner REVERTIDO sigue en el checklist, no hay nota SANEADO; (H3) la correccion de lineas del director es erronea (real 176/99/72/178); (H4) 03-Diseno cita `POLITICA-PROPERTIES.md` vs real `POLITICA-PROPIEDADES.md`.
 - [x] Reporte: canal **83** (`83-...-deepseek-a-atria-m78-qa218-veredicto-sustentado-con-observaciones.md`). Tracker -> 82.
 - [ ] Pendiente (director): flip a OK con su sello; decidir H1 (delegar a mimo o autorizar fix); corregir H2/H3/H4.
+
+## LOTE 2 - 24 suites propias instrumentadas (3 capas) - 2026-10-08 23:14, automatizacion
+
+- [x] **Log reservado: 1501** - LOTE 2: 23 suites propias instrumentadas con la receta de 3 capas (anti-falso-verde). Medido con `reservar_log.py --reservar`: cabeza justo antes **1500** (traia BOM y el tool la salto) -> asigno **1501**; cabeza tras mi reserva **1502**.
+- [x] **Canal 101 (deepseek-a-atria):** LOTE 2 entregado al director (msg 100). Pool del canal consumio **101** (cabeza justo antes medida = 101; head tras = 102).
+- [x] **Alcance:** 23 instrumentadas (**443 checks** == total EXACTO del msg 100) + 1 NO-APLICA (`scripts/vegetacion/test_distribucion.gd`, sin `_check`) no instrumentada.
+- [x] **Runtime:** 22/23 rc=0 / 0 fallos; 1/23 (`test_validador_po_m87.gd`) con los **MISMOS 2 fallos previos** (baseline byte-exacto da igual rc=1 -> deriva de contenido M87, ajena al lote). 0 SCRIPT ERROR / 0 Parse.
+- [x] **Guardian EN ROJO:** P1 piso+1 (sync) rc=1; P2 aborto real de RUNTIME (sync) rc=1 nombrando bloque+piso; P2-ASYNC -> el timer disparo solo rc=1. Restaurado byte-exacto (sha256).
+- [x] **HALLAZGO:** `call_deferred("_summary")` recursivo como espera en suites headless que arrancan el mundo = **SEGFAULT (rc=139, Godot 4.7.2)**. Fix: cero auto-re-diferido + red de seguridad `create_timer(180.0)`. Regla de flota: usar `SceneTree.create_timer`, no `call_deferred` recursivo.
+- [ ] **Pendiente (director):** centralizar el commit de las 23 suites (yo NO commitee ni pushee). Decidir la NO-APLICA y la deriva de contenido M87 (`items.`).
+

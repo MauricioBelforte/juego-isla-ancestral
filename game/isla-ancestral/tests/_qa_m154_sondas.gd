@@ -87,7 +87,7 @@ func _preparar_camara_chaman() -> void:
 	if shaman == null or _cam == null:
 		push_warning("[QA-M154] ShamanMonte no encontrado; la cámara se queda en la playa")
 		return
-	var pos := shaman.global_position
+	var pos: Vector3 = shaman.global_position
 	_cam.position = pos + Vector3(18.0, 10.0, 18.0)
 	_cam.look_at(pos + Vector3(0.0, 1.5, 0.0), Vector3.UP)
 	_cam.current = true
@@ -130,10 +130,19 @@ func _capturar(modulo_id: int, nota: String) -> void:
 	if img == null:
 		push_warning("[QA-M154] viewport texture null; captura módulo %d saltada" % modulo_id)
 		return
-	var carpeta := "%s/%d" % [CAPTURAS_ROOT, modulo_id]
-	var da := DirAccess.open("res://..")
-	if da and not da.dir_exists(carpeta.trim_prefix("res://../")):
-		da.make_dir_recursive(carpeta.trim_prefix("res://../"))
+	# res://.. no es una ruta válida para save_png (err=7). globalize_path
+	# convierte res:// al path real del proyecto en disco.
+	var base := ProjectSettings.globalize_path("res://../tools/mcp/godot-mcp/capturas")
+	var carpeta := "%s/%d" % [base, modulo_id]
+	var da := DirAccess.open(base)
+	if da == null:
+		da = DirAccess.open("res://..")
+		if da:
+			base = ProjectSettings.globalize_path("res://..") + "/tools/mcp/godot-mcp/capturas"
+			carpeta = "%s/%d" % [base, modulo_id]
+			da = DirAccess.open(base)
+	if da and not da.dir_exists(str(modulo_id)):
+		da.make_dir_recursive(str(modulo_id))
 	var stamp := Time.get_date_string_from_system() + "_" + Time.get_time_string_from_system().replace(":", "-")
 	var ruta := "%s/cap_%d_%s_%s.png" % [carpeta, modulo_id, stamp, nota]
 	var err := img.save_png(ruta)
