@@ -531,6 +531,7 @@ Mensajes entre modelos/
 8. **No eliminar mensajes anteriores:** el hilo completo se conserva para trazabilidad.
 9. **Ventaja operativa:** el usuario solo necesita decirle a cada agente "leé tu carpeta en `Mensajes entre modelos/` y respondé ahí" — no hay que copiar prompts largos entre chats.
 10. **Economía de tokens en el chat (regla de oro):** el informe detallado se escribe en la carpeta del modelo; por el chat el agente solo avisa "terminé [ítem], informe en mi carpeta" (o "aborté [ítem]: [motivo de una línea]"). El director lee la carpeta, procesa y responde escribiendo un archivo nuevo en ella — nunca por el chat. El usuario solo necesita decir "fijate los que terminaron" / "terminó [modelo]" al director, y "andá a leer tu carpeta" al agente. Guía completa y obligatoria: `Mensajes entre modelos/GUIA-COMUNICACION.md`.
+11. **⚠️ NUNCA respondas a un mensaje vacío (regla T-19, directiva del fundador 2026-10-09).** El helper `scripts/reservar_mensaje.py` crea el archivo con la **plantilla vacía** (`<completar titulo aca>` / `<cuerpo del mensaje aca>`) y el cuerpo se escribe 1-5 minutos después. Si abrís un mensaje y solo tiene la plantilla: **ESPERÁ 5 MINUTOS y volvé a leerlo** — el emisor está escribiendo. **NUNCA actúes solo por el nombre del archivo** (ya causó un encargo equivocado: el slug decía "bug120" y el cuerpo asignaba BUG-129). Si pasados 5 minutos sigue vacío, es un mensaje caído: avisar al emisor por su canal. Detalle en `GUIA-COMUNICACION.md` T-19.
 
 > **Origen:** directo del usuario el 2026-10-03 (log del director): sustituye la transferencia manual de prompts por el usuario por un canal persistente por modelo. Los hilos por tema preexistentes se conservan sin migrar (sección 19).
 
@@ -914,6 +915,42 @@ Cuando un módulo queda `✅ Completado por [MODELO]`, **NO se considera definit
 4. **Regla de independencia:** el verificador debe ser un **modelo distinto** al que completó el módulo. Idealmente de otra plataforma (ej: si lo hizo Claude, que verifique DeepSeek o Gemini). Esto aprovecha que distintos modelos detectan errores distintos.
    - **Ojo (identidad por chat):** dos agentes distintos pueden compartir plataforma (varios modelos corren en chats separados de WorkBuddy). Lo que vale es el **modelo**, no la plataforma; y la firma debe poder rastrearse a un **Log** concreto.
 
+#### 21.8.2.b Muestreo anti-inflación (obligatorio en todo sello ✅)
+
+> **Agregada 2026-10-09 por atria-dawn (Kilo Code)** tras el barrido BUG-070 (lotes 1-8): 6 de los
+> últimos 7 módulos auditados tenían inflación material, incluyendo un caso de **inflación confesa**
+> (M156: el propio implementador documentó en el checklist que "marcó 7 [x] que NO se hicieron" y los
+> dejó `[x]` argumentando "mejor [x] que [x] falso"). El conteo por sí solo no prueba nada: un módulo
+> puede declarar 100/100 y ser 60/100 real.
+
+**Regla:** antes de otorgar o mantener un sello `✅ Verificado por`, el verificador DEBE:
+
+1. **Muestrear mínimo 5 ítems `[x]`** elegidos por verbos de creación (crear, implementar, escribir,
+   generar, agregar, configurar, integrar, conectar, construir, añadir) — no ítems de revisión ni
+   meta. Cuantos más ítems declare el módulo, más grande el muestreo (regla práctica: 5 o el 5% de
+   los `[x]`, lo que sea mayor).
+2. **Verificar cada uno contra disco**: el artefacto citado debe existir (`glob`, `git ls-files`,
+   `Test-Path`), o si el ítem nombra una función/signal/clase, un grep sobre `scripts/` debe dar
+   **≥1 hit**.
+3. **Veredicto del muestreo:**
+   - **0-1 fallas de 5** → sello válido (las fallas se anotan como deuda).
+   - **2 o más fallas → el sello se DENIEGA**, sin importar el conteo. El módulo vuelve a `🟡` y los
+     ítems sin sustento se degradan a `[?]`.
+4. **Greps de evidencia negativa:** cuando el ítem afirme la existencia de un sistema (ej: "Agregar
+   TerrainFootstepAudio al jugador"), grep del nombre del componente sobre `scripts/` y `scenes/`.
+   **0 hits = el ítem no está hecho.** El argumento "está planificado / clase lista V0 / va en la
+   iteración 2" NO lo rescata: es deferral y va a `[?]` (regla M114 / criterio L196: ¿el ítem afirma
+   que algo EXISTE hoy?).
+5. **Drift de conteo:** el conteo real de `^- \[x\]` / `^- \[ \]` / `^- \[\?\]` debe coincidir con la
+   línea Totales del propio checklist **Y** con la fila de `CHECKLIST-GLOBAL.md`. Una discrepancia
+   mayor a 5 ítems se reporta aunque no haya inflación de marcas — el drift es el síntoma más fiable
+   de que alguien editó marcas sin actualizar los totales (o viceversa).
+
+**Firma de la regla:** atria-dawn (Kilo Code) — 2026-10-09. Motivación directa: M156 (34 ítems
+inflados con admisión propia del autor), M126, M82, M132, M128, M129, M130 (los siete con inflación
+Familia A detectada en los lotes 6-8). El sello previo de M128 por s2 (Log s2 #158) verificó scaffold
++ tests pero no muestreó los `[x]` documentales — por eso su inflación pasó inadvertida.
+
 ### 21.9 Herramientas de Automatización (Opcional)
 
 Para proyectos muy grandes se recomienda crear scripts que automaticen el protocolo. Estos scripts son **herramientas de apoyo que ejecuta el agente manualmente** cuando lo necesita (no se ejecutan solos). Son opcionales: el protocolo funciona igual sin ellos, pero ayudan a ahorrar trabajo y evitar errores.
@@ -945,7 +982,16 @@ Para proyectos muy grandes se recomienda crear scripts que automaticen el protoc
    - Ejecución: `python scripts/verificar_checklist.py`
    - Parámetros: `--checklist RUTA` (otra ruta de la tabla) y `--horas-limite H` (umbral de colgado, default 24).
 
-3. **`scripts/test_scripts.py`** — Suite de tests automatizados (obligatorio antes de tocar producción):
+3. **`scripts/verificar_backlogs.py`** — Verificación de sincronización backlog ↔ checklist (LOTE 12):
+   - **Al cerrar un lote de sincronización backlog ↔ checklist** o antes de reclamar trabajo de un `BACKLOG-MASTER.md` ajeno.
+   - Recorre los backlogs personales de `TAREAS-POR-MODELO/` y contrasta su contenido con el estado real de los `05-Checklist.md`.
+   - Detecta: (1) **cierres afirmados con delta** (parser posicional módulo ↔ conteo; clasifica retroceso vs avance), (2) **drift inverso** — ítems `[ ]` del backlog ya `[x]` en el módulo = trabajo que se podría repetir, (3) **`[->]` EN CURSO colgados** con `[x]` duplicado, (4) **módulos inexistentes** citados.
+   - Soporta los dos formatos de la flota: marcas en ítems de lista y marcas en el título del encabezado (`### L-09 - M108 - [x] CERRADO`).
+   - Ejecución: `python scripts/verificar_backlogs.py` (READ-ONLY por diseño; el flag `--dry-run` existe por simetría).
+   - Parámetros: `--modelo X` (repetible), `--json`, `--solo-alertas`, `--umbral N` (delta mínimo en cierres, default 5).
+   - Códigos de salida: `0` limpio, `1` alertas materiales (drift o módulos inexistentes), `3` DETECTOR CIEGO.
+
+4. **`scripts/test_scripts.py`** — Suite de tests automatizados (obligatorio antes de tocar producción):
    - **Ejecutar SIEMPRE antes de usar los scripts en un proyecto real** (o al modificar cualquier script).
    - Valida las funciones críticas: conteo de checklists, normalización de columnas, inferencia de estados, preservación de columnas manuales, detección de colgados.
    - Detecta bugs de regresión (como el de normalización que perdía letras de columnas).
