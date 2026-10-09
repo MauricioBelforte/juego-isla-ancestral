@@ -601,3 +601,88 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 - [x] **Balance final**: 22 sostienen / 12 no-sostienen (para flip del director) / 6 dudosos / 12 ya revertidos.
 - [x] **Correccion de mi conteo del msg 144**: "41 sostienen" era incorrecto (conte M154 L109 ya revertido) → 22 reales.
 - [x] **2 over-marks nuevos colaterales**: M112 L166 y M84 L117 ([x] que admiten no-hecho en su propio texto).
+
+## BUG-119 diagnostico race terreno M163 (msg 155, completado)
+
+- [x] **Race reproducido 3/3, deterministico** (timing de arranque, no de semilla).
+- [x] **Cadena aislada**: bootstrap.gd:168 (change_scene diferido) -> main_island.gd:24 _crear_shaman -> L414 get_height sincronico -> terrain_locator.gd:46-47 return -1 (_terrain null) -> main_island.gd:417-418 fallback y=35.
+- [x] **Mitigacion ACTIVA ya aplicada**: shaman_npc.gd L19-60 (retry _process, timeout 8000ms, autorizado msg 74). Spawn y=35 -> reposicionado y=17; get_height(2320,2300)=16 -> h+1=17.
+- [x] **ACEPTADO por el director (msg 157)**: "12 encargos correctos consecutivos". Veredicto MITIGADO; flash y=35 delegado a M09/M167 (no tocarlo, restriccion).
+
+## QA sec21.8 de M87 Localizacion (msg 157, completada) — SELLO VALIDO
+
+- [x] **Runtime medido**: test_validador_po_m87.gd **84 checks, 0 fallos, exit 0** (independiente; DeepSeek reporto 82/0 — los 2 extra son la asercion de regresion del fix iter8).
+- [x] **Conteo**: 131 [x] / 0 [ ] / 5 [?] = 136 (coincide GLOBAL). Los 5 [?] son deudas de integracion con dueno nombrado y justificacion inline (M53/M58, usuario, M14-M39, M29/M30).
+- [x] **Artefactos verificados**: auditor_claves.gd, test_validador_po_m87.gd, localization_manager.gd, validador_po.gd, retraductor_ui.gd + 7 suites localizacion + 2 integracion.
+- [x] **Barrido H2-estricta**: 0 autocontradicciones activas (menciones "pendiente" son notas de iter.1 historicamente corregidas en 04-Codigo L383).
+- [x] **Hallazgo menor**: 04-Codigo L380 documenta 82 checks; medicion real 84 (post-fix-iter8 no reflejado).
+- [x] **Informe entregado (msg 158)**: director debe registrar el sello en fila M87 de GLOBAL.
+
+## QA sec21.8 de M102 Bug-Tracking (msg 157 frente opcional, completada) — RECONFIRMA
+
+- [x] **Hallazgo clave**: M102 YA tiene QA sec21.8 valida (Log 767, Hy3/Kilo Code, 2026-09-07): "M102 aprobado en QA cruzado. Mantiene estado Completado." Hy3 != ox-alpha (dueno) -> independencia cumplida.
+- [x] **Conteo**: 140 [x] / 0 [ ] / 0 [?] = 140 (coincide GLOBAL).
+- [x] **Artefactos verificados**: los 5 citados existen (.github/ISSUE_TEMPLATE/bug_report.md, create_labels.sh, workflows/bug_metrics.yml, docs/bug_tracking_guide.md, docs/bug_metrics.md).
+- [x] **Barrido H2-estricta**: 0 autocontradicciones (5 hits "futuro" son extensiones opcionales explicitas; modulo complejidad 1, sin runtime GDScript).
+- [x] **Observacion menor**: GLOBAL atribuye a ox-alpha (Cline) pero plan-actual firmado SWE-1.6/Devin — inconsistencia documental solo.
+- [x] **Informe entregado (msg 159)**: no se necesita nuevo sello; reconfirmacion sin accion.
+
+## Auditoria de volumen M46 Arte-2D y M77 Online-Y-Red (msg 160, completada)
+
+- [x] **M46 (0/110)**: NO es Familia A (0 [x]). Diseño+tooling reales y operativos: inventario_2d.json (48 assets definidos, versionado), validar_arte_2d.gd (validador headless), ART_STYLE_2D.md. **0 de 48 assets en disco** (0 PNG/SVG/WebP; los 9 archivos son .gitkeep). Bloqueado por M45 (20/171), M108 (122/205), M161 (94/138), M154 + artes. Veredicto: DEUDA ESTRUCTURAL BLOQUEADA.
+- [x] **M46 discrepancia doc<->archivo**: notas iter.1 declaran 103-104 [x] pero casillas 0/110 por reversion 2026-09-14 (agnes-2.5-flash marco completo sin verificacion). Flaggeado por Log 954 + auditoria drift 2026-09-20. Decision del dueno: no re-marcar (lo respeto, READ-ONLY).
+- [x] **M46 planificacion**: ALTA. 24 dependencias citadas, TODAS existen en GLOBAL. Item "imposible" (OCR texto embebido) honestamente marcado fuera de alcance V0.
+- [x] **M77 (0/130, 4 [?])**: NO es Familia A. Contrato documental post-v1. Los 4 [?] = mp_contract.json/net_contract.json ausentes (verificado). Pregunta del director: **roadmap futuro, NO deuda real de v1** — el modulo lo declara (W4 hit >10k descargas, Y3 v1 no abre puertos, Y4 reconciliacion futura, bloque X M76).
+- [x] **M77 planificacion**: ALTA pero redundante (~90 de 130 son "Definir X" del mismo net_contract.json). 12 dependencias citadas, TODAS existen. M76 (1/130) es la unica puerta real.
+- [x] **Informe entregado (msg 161)**: sin cambios de estado recomendados (ambos correctamente en amarillo, 0% honesto).
+
+## BUG-120 verificacion runner M112 (msg 162 encargo, completada)
+
+- [x] **Runner v2c corrido de forma independiente y COMPLETO**: 28 suites descubiertas (24 SceneTree + 4 GdUnit4), **1241 tests** (1220 checks SceneTree + 21 GdUnit4), 24/28 OK.
+- [x] **BUG-120 RESUELTO confirmado**: v1 daba EXIT 0 con 0 tests; v2c da quit(1) honesto con rc real del proceso. 3 guardas anti-falso-verde en _resumen() (quit(2) si 0 tests, quit(1) si mismatch). Patron v1 estructuralmente imposible.
+- [x] **Un fallo real detectado**: GdUnit4 rc=101 por 201 orphans de test_debug_menu.gd (21/21 PASSED, 0 failures) — [?] L292, dueno M110. El runner NO felicita: reporta FALLO.
+- [x] **Suites watchdog pasaron**: test_npc_visual_database [OK] rc=0 checks=356; test_equipment_manager [OK] rc=0 checks=44. [?] L290/L291 eran FLAKY — revertibles a [x] por el dueno (no yo, READ-ONLY).
+- [x] **Drift GLOBAL encontrado**: M112 dice 202/208 pero el conteo real es 216 [x] / 5 [ ] / 4 [?] = 225. Causa: GLOBAL no sumo la seccion T-M112 (14 [x] + 3 [?]; 202+14=216, 208+17=225).
+- [x] **5 [ ]**: mis reversiones Familia A del msg 144 (artefactos inexistentes), correctas. **[?] L166**: over-mark mio H2 #152.
+- [x] **Veredicto**: M112 correctamente en amarillo. Informe entregado (msg 163) con 2 acciones para el director (actualizar GLOBAL, delegar L292 a M110).
+- [x] **Nota**: el msg 162 del director llego VACIO (plantilla sin completar); actué por el nombre del archivo.
+
+## Confirmacion del director (msg 164): M112 QA aceptada, drift corregido
+
+- [x] **GLOBAL M112 actualizado por el director**: 202/208 -> **218/225** (drift T-M112 sumado + L290/L291 revertidos a [x] con mi evidencia de corrida).
+- [x] **[?] L292 (orphan test_debug_menu.gd) delegado a M110** — fila M110 con actividad 2026-10-09 03:50.
+- [x] **M112 sigue amarillo** con 2 [?] reales (L166 over-mark + L292 en M110). Veredicto sostenido.
+- [x] **Nota**: msg 164 tambien llego VACIO (2º consecutivo); el nombre del archivo confirmaba las 3 acciones. Sin nuevo encargo.
+
+## QA sec21.8 de M163 Sistema de Encantamientos (msg 164 encargo, completada)
+
+- [x] **4 suites corridas headless**: test_bug124_shaman_visual (12), test_enchantment (58), test_enchant_tiers (45), test_incienso (67) = **182 checks, 0 fallos, 0 SCRIPT ERROR**.
+- [x] **Muestreo anti-inflaccion 21.8.2.b**: 5 [x] con verbos de creacion (L45 shaman_npc.gd, L48 shaman_ui.gd, L68 incense_cultivation.gd, L73 incense_spawner.gd, L74 spawner TerrainLocator) — todos con artefacto real en disco. **0 inflacion.**
+- [x] **Regla 26 (chaman sobre terreno) CONFIRMADA en runtime**: shaman_npc.gd L27-32/L50-61 usa TerrainLocator.get_height() con MundoRaiz.CENTRO (sin Y hardcodeada). Log de la suite: spawn (2320.0, 35.0, 2300.0) -> reposicionado (2320.0, 17.0, 2300.0). Mismo mecanismo BUG-119 que diagnostique.
+- [x] **Estado**: 61 [x] / 48 [ ] / 15 [?] = 124 (coincide GLOBAL). Modulo EN CURSO real al 49% — no sellable como verde, pero 0 inflacion.
+- [x] **Informe entregado (msg 165)**: sin acciones requeridas; M163 correctamente en amarillo.
+
+## LOTE 9 reclasificacion de amarillos estancados (msg 166 encargo, completado)
+
+- [x] **6 modulos diagnosticados** (verdad de estado, no inflacion): M72, M76, M05, M48, M21, M04.
+- [x] **M48 Animacion -> BLANCO-reclasificar**: el plan cita validate_animation.gd (5 veces) + jugador_lib.tres + npc_humanoide_lib.tres — NINGUNO existe. animation_service.gd real NO citado. Sin log propio. Nunca arranco de verdad.
+- [x] **M72 Logros -> recuperable**: 6/6 artefactos existen; runtime carga 11 logros + 25 hitos con catalog OK (RF14). Nucleo funcional real bajo un 1/185 engañoso.
+- [x] **M05 Lenguaje -> recuperable**: logger/registro/event_bus/game_clock existen y son el core (con drift de rutas: logging/ y time/ no core/); error_handler.gd citado NO existe. Log 494 hace 5 semanas, dueno MiMo inactivo.
+- [x] **M21 Dialogos -> recuperable**: 11/11 artefactos existen (dialogue_ui, world_state_service, validadores), integrado en runtime. Log 1364 (2026-10-06).
+- [x] **M04 Game-Engine -> recuperable**: bootstrap.gd + main_island.tscn = el corazon del juego. Log 1403.
+- [x] **M76 Multijugador -> deuda-real (roadmap)**: 0 artefactos citados, documental puro como M77. Planteada decision al director: mantener amarillo (consistencia M77) o bajar a blanco (literalismo criterio 3).
+- [x] **Informe entregado (msg 167)**: tabla con veredicto + evidencia por modulo. Esperando decision del director sobre M76 y aplicacion de la reclasificacion de M48.
+
+## LOTE 12 sync backlog<->checklist (msg 168 encargo, completado)
+
+- [x] **4 backlogs auditados**: agnes-3-flash (33[x]/5[ ]), mimo-v2.6-flash-free (61[x]), DeepSeek-V4.1-Flash (132[x]/79[ ]), atria-dawn-s3 (27[x] en encabezados).
+- [x] **mimo = PERFECTAMENTE SINCRONIZADO**: M44/M88/M89/M43/M153/M151/M55/M91 todos coinciden con disco. 0 acciones.
+- [x] **agnes drift inverso**: M152 completado (202/0/0) pero listado pendiente; M129 68->101; M06 0->99. M100 "CERRADO" ambiguo (modulo sigue amarillo 146/222, 76 [ ] abiertos).
+- [x] **DeepSeek drift inverso M62**: seccion "62-Memoria (52 pendientes)" de 2026-09-20 — **15 de 52 ya estan [x]** (trabajo agnes Log 1387). M62 real 113/37. Riesgo de trabajo duplicado.
+- [x] **DeepSeek cierres exactos**: M68 75/42/14, M59 60/69/1, M29 190/195 sin drift. Trabajo ACTIVO hoy (M104 lote 11 + M156).
+- [x] **s3 desorden de marcas**: 12 [→] EN CURSO acumulados, algunos con [x] duplicado mas abajo (L-09 M108, L-10 M28). Sin drift de modulo (sus tareas son auditorias de Ling).
+- [x] **Informe entregado (msg 169)**: creado manualmente (reservar_mensaje.py consumio el 169 del pool sin aterrizar el archivo). Unica accion recomendada al director: avisar a DeepSeek que refresque su seccion M62.
+
+## Script verificar_backlogs.py (LOTE 12 estandarizado) — 2026-10-09
+- [x] Script creado: 4 detectores (cierres posicionales, drift inverso con tracking de seccion, [->] colgados, modulos inexistentes), flags --dry-run/--modelo/--json/--solo-alertas/--umbral. Log 1529, msg 171 al director.
+- [x] Validacion cruzada vs msg 169: mimo limpio, DeepSeek drift M62 ya resuelto por su propia actualizacion, agnes 3 obsoletos, s3 [->]. Hallazgos nuevos: 5 retrocesos (Hy3 M146/M63/M62/M57, kimi M70).
