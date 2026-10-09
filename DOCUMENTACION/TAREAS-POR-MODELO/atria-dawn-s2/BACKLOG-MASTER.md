@@ -686,3 +686,8 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 ## Script verificar_backlogs.py (LOTE 12 estandarizado) — 2026-10-09
 - [x] Script creado: 4 detectores (cierres posicionales, drift inverso con tracking de seccion, [->] colgados, modulos inexistentes), flags --dry-run/--modelo/--json/--solo-alertas/--umbral. Log 1529, msg 171 al director.
 - [x] Validacion cruzada vs msg 169: mimo limpio, DeepSeek drift M62 ya resuelto por su propia actualizacion, agnes 3 obsoletos, s3 [->]. Hallazgos nuevos: 5 retrocesos (Hy3 M146/M63/M62/M57, kimi M70).
+
+## Parser multimodulo + verificacion Hy3 + LOTE 13 — 2026-10-09 18:59
+- [x] Parser arreglado (4 bugs: tripleta vs par, filtro x>=1, nombres de archivo, lookbehind de version). Log 1535.
+- [x] Informe Hy3 verificado: M146/M57 exonerados, M62/M63 confesados confirmados por el script. M70 +37 hallazgo adicional reportado.
+- [x] LOTE 13: Hy3 9 drift (25-Ruinas 122/0/0, recomiendo avisar); kimi-k3 97 drift (M106/M122 completados, recomiendo archivar sin notificar). Resto 0. Msg 174.

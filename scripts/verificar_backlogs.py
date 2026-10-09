@@ -64,10 +64,15 @@ RE_HEADING = re.compile(r"(?m)^#{1,4}[ \t]+(.*)$")
 RE_MARCA_HEADING = re.compile(r"\[( |x|\?|->|→)\]")
 
 # Referencias a modulos: "62-Memoria", "100-Community-Management", "M88".
-# El lookbehind (?<!-) evita匹配 falsos positivos en IDs de TAREA del protocolo
-# ("T-M0", "T-M1", ...), que no son modulos.
-RE_MODULO_NOMBRE = re.compile(r"(?<![\w-])(\d{1,3})-([A-Za-z][\w\-]*)")
+# El lookbehind (?<![.\w-]) evita matchear IDs de TAREA del protocolo
+# ("T-M0", "T-M1", ...) y numeros de VERSION de nombres de modelo
+# ("agnes-2.5-flash", "v2.6"): no son modulos. Los nombres de archivo
+# ("05-Checklist.md", "test_qa_m101.gd") se filtran a posteriori en
+# _citas_modulo (un lookahead en el patron no sirve: el grupo goloso del
+# nombre hace backtracking y lo vacia).
+RE_MODULO_NOMBRE = re.compile(r"(?<![.\w-])(\d{1,3})-([A-Za-z][\w\-]*)")
 RE_MODULO_M = re.compile(r"(?<![\w-])M(\d{1,3})\b")
+RE_COLA_ARCHIVO = re.compile(r"[A-Za-z0-9_]*\.(?:md|gd|py|tres|json|tscn|cfg|txt|csv|log)\b")
 
 # Conteos afirmados en una linea: "174/185", "75/42/14=131", "113/37/0".
 RE_CONTEO = re.compile(r"(\d+)\s*/\s*(\d+)(?:\s*/\s*(\d+))?(?:\s*=\s*(\d+))?")
@@ -96,6 +101,15 @@ def normalizar(texto: str) -> str:
     t = t.lower()
     t = re.sub(r"[^a-z0-9 ]+", " ", t)
     return re.sub(r"\s+", " ", t).strip()
+
+
+# Nombres de los 7 archivos canonicos del protocolo (plan-inicial/plan-actual).
+# Una cita "05-Checklist" se refiere al archivo plantilla, no a la carpeta del
+# modulo 05 (aunque esta exista).
+NOMBRES_ARCHIVO_PROTOCOLO = {normalizar(n) for n in (
+    "Checklist", "Requerimientos", "Analisis", "Diseno", "Codigo",
+    "Plan-Testings", "Resultados-Testings",
+)}
 
 
 def leer(ruta: Path) -> str:
@@ -203,14 +217,29 @@ class Tarea:
         return SIMBOLOS[self.marca]
 
 
+def _citas_modulo(texto: str) -> list[tuple[int, str]]:
+    """Todas las citas a modulos de una linea con su posicion.
+
+    Excluye referencias a archivos (ver la nota de RE_COLA_ARCHIVO).
+    """
+    out: list[tuple[int, str]] = []
+    for m in RE_MODULO_NOMBRE.finditer(texto):
+        if RE_COLA_ARCHIVO.match(texto, m.end()):
+            continue
+        if normalizar(m.group(2)) in NOMBRES_ARCHIVO_PROTOCOLO:
+            continue
+        out.append((m.start(), _canon_id(m.group(1))))
+    for m in RE_MODULO_M.finditer(texto):
+        if RE_COLA_ARCHIVO.match(texto, m.end()):
+            continue
+        out.append((m.start(), _canon_id(m.group(1))))
+    out.sort(key=lambda p: p[0])
+    return out
+
+
 def _modulos_de_linea(texto: str) -> set[str]:
     """IDs canonicos de modulos citados en una linea."""
-    ids: set[str] = set()
-    for m in RE_MODULO_NOMBRE.finditer(texto):
-        ids.add(_canon_id(m.group(1)))
-    for m in RE_MODULO_M.finditer(texto):
-        ids.add(_canon_id(m.group(1)))
-    return ids
+    return {idm for _pos, idm in _citas_modulo(texto)}
 
 
 def extraer_tareas(texto: str) -> list[Tarea]:
@@ -257,35 +286,56 @@ def modulos_citados(tarea: Tarea) -> set[str]:
 # Verificacion de un modelo
 # ---------------------------------------------------------------------------
 
-def _citas_modulo(texto: str) -> list[tuple[int, str]]:
-    """Todas las citas a modulos de una linea con su posicion."""
-    out: list[tuple[int, str]] = []
-    for m in RE_MODULO_NOMBRE.finditer(texto):
-        out.append((m.start(), _canon_id(m.group(1))))
-    for m in RE_MODULO_M.finditer(texto):
-        out.append((m.start(), _canon_id(m.group(1))))
-    out.sort(key=lambda p: p[0])
-    return out
+def cierres_linea(texto: str, disponibles: dict[str, str]) -> list[tuple[str, int]]:
+    """Asocia cada conteo de una linea con el modulo al que pertenece.
 
+    Las lineas de backlog citan varios modulos (sujeto + dependencias), y los
+    conteos pueden venir en bloque (tripleta "M101/M145/M146 ...
+    209/105/100") o ser afirmaciones multiples de un mismo sujeto
+    ("M30 ... Restaurados 107/120 ... resumen 98/104"). Regla (BUG-121):
 
-def cierres_linea(texto: str) -> list[tuple[str, int]]:
-    """Asocia cada conteo de una linea con el modulo citado mas cercano a su
-    izquierda.
+    - **N conteos y N citas antes del primer conteo** -> pareo secuencial 1:1
+      (cada conteo con la cita de su mismo orden).
+    - **N > 1 conteos sin pareo 1:1** -> todos los conteos son del SUJETO de la
+      linea (primera cita antes del primer conteo); no se imputan a modulos
+      vecinos citados como dependencias.
+    - **1 solo conteo** -> la cita mas cercana a su izquierda.
 
-    Las lineas de backlog resumen varios modulos ("M44 ... 76/0/37, M114 ...
-    76/185"); cruzar el modulo con el conteo por posicion evita asociar a M44
-    el conteo de M114. Devuelve [(id_canonico, x_afirmado)].
+    Sin esta regla, el verificador genera deltas ficticios imputando a un
+    modulo el numero de un vecino (Log 1530, Hy3 exonerado M146/M57).
     """
-    citas = _citas_modulo(texto)
+    citas = [c for c in _citas_modulo(texto) if c[1] in disponibles]
+    conteos = list(RE_CONTEO.finditer(texto))
+    if not conteos or not citas:
+        return []
+    # Un cierre afirmado siempre es >= 1 [x]. Filtra ruido lexico de las
+    # lineas de backlog (resultados de tests y exits: "EXIT 0 / 0 SCRIPT
+    # ERROR", "12 checks / 0 fallos").
+    conteos = [cm for cm in conteos if int(cm.group(1)) >= 1]
+    if not conteos:
+        return []
+    sujeto = citas[0][1]  # modulo del titulo del item
     out: list[tuple[str, int]] = []
-    for cm in RE_CONTEO.finditer(texto):
-        mod = None
-        for pos, idm in reversed(citas):
-            if pos < cm.start():
-                mod = idm
-                break
-        if mod is not None:
-            out.append((mod, int(cm.group(1))))
+
+    for cm in conteos:
+        comps = [int(cm.group(1))]
+        if cm.group(2):
+            comps.append(int(cm.group(2)))
+        if cm.group(3):
+            comps.append(int(cm.group(3)))
+        antes = [c for c in citas if c[0] < cm.start()]
+
+        if len(comps) == 3 and len(antes) >= 3:
+            # Tripleta "209/105/100" tras "M101/M145/M146": pareo por orden.
+            for (_pos, idm), val in zip(antes, comps):
+                out.append((idm, val))
+        elif len(comps) == 3:
+            # Tripleta sin 3 modulos antes: el modulo citado mas cercano.
+            if antes:
+                out.append((antes[-1][1], comps[0]))
+        else:
+            # Formato "x/total" (o "x/0"): afirmacion del SUJETO de la linea.
+            out.append((sujeto, comps[0]))
     return out
 
 
@@ -349,7 +399,7 @@ def verificar_modelo(nombre: str, disponibles: dict[str, str],
         #    reportan los deltas MATERIALES (>= umbral): las variaciones de
         #    pocos items son ruido normal.
         if t.marca == "x" and t.origen == "item":
-            for id_mod, afirmados in cierres_linea(t.texto):
+            for id_mod, afirmados in cierres_linea(t.texto, disponibles):
                 real = _conteo_real(id_mod)
                 if real is None:
                     continue
