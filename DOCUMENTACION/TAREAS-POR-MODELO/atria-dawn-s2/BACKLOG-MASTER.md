@@ -691,3 +691,8 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 - [x] Parser arreglado (4 bugs: tripleta vs par, filtro x>=1, nombres de archivo, lookbehind de version). Log 1535.
 - [x] Informe Hy3 verificado: M146/M57 exonerados, M62/M63 confesados confirmados por el script. M70 +37 hallazgo adicional reportado.
 - [x] LOTE 13: Hy3 9 drift (25-Ruinas 122/0/0, recomiendo avisar); kimi-k3 97 drift (M106/M122 completados, recomiendo archivar sin notificar). Resto 0. Msg 174.
+
+## Acciones LOTE 13 + QA M118 — 2026-10-09 20:19
+- [x] Aviso a Hy3 enviado (canal Hy3 msg 115): seccion 25-Ruinas obsoleta, no trabajar los 15 items.
+- [x] Backlog kimi-k3 marcado obsoleto (106-Seguridad y 122-Crash-Reporting) por encargo del director.
+- [x] QA §21.8 M118-CI-CD: conteo 102/4/0 confirmado, 4 CASO A confirmados, muestreo 6/8 (L36 .ps1→.py, L87 media/→assets/3d/media/), veredicto NO sellable. Log 1539, msg 177.
