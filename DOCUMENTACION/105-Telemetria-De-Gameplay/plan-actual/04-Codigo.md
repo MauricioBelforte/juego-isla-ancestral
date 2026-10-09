@@ -20,7 +20,7 @@
 | `game/isla-ancestral/scripts/telemetry/test_telemetria_iter6.gd` | iter. 6: emision de `zone_ignored` por el camino REAL (al salir de la zona, sin `_on_zone_check()` manual) (11 checks) |
 | `game/isla-ancestral/scripts/telemetry/test_telemetria_iter7.gd` | iter. 7: las 3 metricas `time_to_first_*` nuevas, ruta `complete_puzzle` y `session_duration` al apagar opt-in (22 checks) |
 | `game/isla-ancestral/scripts/telemetry/stub_analytics_director.gd` | Stub de Analytics con `class_name`. **HUERFANO: 0 referencias en el repo** — los 4 suites usan su propia inner class `_AnalyticsStub`. Candidato a eliminar por su autor (ox-alpha). |
-| `game/isla-ancestral/project.godot` | Autoload `TelemetryDirector="*res://scripts/telemetry/telemetry_director.gd"` (linea 65) |
+| `game/isla-ancestral/project.godot` | Autoload `TelemetryDirector="*res://scripts/telemetry/telemetry_director.gd"` (linea 29) |
 | `.github/workflows/quality.yml` | Job `test-suite`: cablea los 4 suites de telemetria (agregado en iter. 7) |
 
 ## 2. Funciones clave de telemetry_director.gd
@@ -52,7 +52,7 @@
 - `evento_rastreado(evento, datos)` — para debug/dashboard (M110).
 - `solicitar_encuesta(puzzle_id)` — para encuesta de dificultad (M53).
 
-## 5. Tests (4 suites, 59 checks)
+## 5. Tests (4 suites, 64 checks)
 
 Comunes a los 4:
 - Ejecucion: `godot --headless --path game/isla-ancestral --script res://scripts/telemetry/<suite>.gd`
@@ -64,7 +64,7 @@ Comunes a los 4:
 | `test_telemetry.gd` | 16 | Núcleo ox-alpha: opt-in GDPR, 11 eventos "first", abandono de puzzle, zonas, `difficulty_perceived`, opt-out propagado |
 | `test_telemetria_iter5.gd` | 10 | Dedup de `zone_ignored` y `puzzle_abandoned`, metrica unica por sesion, opt-in persistente |
 | `test_telemetria_iter6.gd` | 11 | `zone_ignored` por el camino REAL (al salir de la zona, sin llamar `_on_zone_check()` a mano), timer detenido, zona >= umbral no reportada |
-| `test_telemetria_iter7.gd` | 22 | 5 metricas `time_to_first_*` y su unicidad, ruta `complete_puzzle`, `session_ended`/`session_duration` al apagar opt-in |
+| `test_telemetria_iter7.gd` | 27 | 5 metricas `time_to_first_*` y su unicidad, ruta `complete_puzzle`, `session_ended`/`session_duration` al apagar opt-in |
 
 ### Guardian anti-falso-verde (obligatorio en `extends SceneTree`)
 
