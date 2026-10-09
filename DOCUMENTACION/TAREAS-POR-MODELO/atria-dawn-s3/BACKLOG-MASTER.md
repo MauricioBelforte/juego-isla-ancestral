@@ -297,6 +297,28 @@
   y Ling marcan L113/L114 como dependientes a revisar; L170/L171/L173 candidatos Familia A
   futuros (`scripts/blender/` inexistente).
 
+### L-12 — M154 continuación: clasificación L113/L114/L170/L171/L173 — `[x]` CERRADO
+
+- **Asignado por el director** (msg 63, plantilla vacía pero nombre explícito): continuar la
+  auditoría de M154 con los 5 candidatos que marcaron Ling y Step 5.
+- **L109 flip CONFIRMADO en disco:** `[x]`→`[ ]`, conteo 154/1/0 = 155 ✓ (director lo aplicó).
+- **Mi auditoría independiente (verificada contra disco):**
+  - **L170 Familia A** — "Crear `scripts/blender/setup_estudio.py`": carpeta inexistente, archivo
+    inexistente, **sin anotación KnownIssue** → revertir.
+  - **L171 Familia A** — "Crear `scripts/blender/personaje_voxel.py`": ídem, **sin
+    KnownIssue** → revertir.
+  - **L113 Familia B** — "Slot para modelo voxel": verbo no de implementación + "slot disenado,
+    Spec documented" (H2). Admite dependencia de preview_personaje.tscn. Mantener `[x]` (o `[?]`).
+  - **L114 Familia B → `[?]`** — "Botón/tecla de captura": SIN anotación, depende de
+    `captura_preview.gd` inexistente. Recomendé `[?]` con dueño M154.
+  - **L173 Familia B** — "Exportar a .glb": anotación "workflow disenado" + **260 `.glb` reales
+    de personaje/NPC** en `assets/3d/alta|baja/` → mantener `[x]`.
+  - **L110-L112 Familia B confirmada** — fondo/luz/cámara con spec documentada (H2 limpia).
+- **Flips propuestos al director (msg 64):** L170 + L171 `[x]`→`[ ]` (154→152, 1→3 `[ ]`);
+  L114 `[x]`→`[?]` con dueño. L113/L173 se mantienen.
+- **Nota:** L170/L171 ya eran KnownIssue por QA de hy3 (L216, Log 1216) pero el `[x]` seguía
+  puesto — el KnownIssue documenta el problema sin resolver la marca falsa.
+
 - **Autorizado por el director** (msg 59): "OK, LANZA LA EVALUACIÓN" — con §5.S ya escrita por mí
   (ver R-01).
 - **Diseño:** misma tarea que L-11 (M154 L109) para **comparación cabeza a cabeza** — ¿Step 5
