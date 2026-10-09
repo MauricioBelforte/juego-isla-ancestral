@@ -71,11 +71,11 @@
 - [x] Crear tests de integración tiempo → calendario (día/noche avanza fecha) [C] → test_time_calendar_events.gd
 - [x] Crear tests de integración calendario → eventos (evento se dispara en fecha) [C] → test_time_calendar_events.gd
 - [x] Crear tests de integración economía → tienda (compra/venta sincronizada) [C] → test_economy_npc_shop.gd
-- [x] Crear tests de integración NPC → amistad (diálogos, mood) [C] → test_villager_social.gd
+- [ ] Crear tests de integración NPC → amistad (diálogos, mood) [C] → test_villager_social.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
 - [x] Crear tests de integración guardado → carga (round-trip estado idéntico) [C] → test_inventory_economy.gd, test_time_calendar_events.gd
-- [x] Crear tests de integración crafting → inventario (consumo + resultado) [C] → test_crafting_inventory.gd
-- [x] Crear tests de integración agricultura → inventario (semillas + cosechas) [C] → test_farming_inventory.gd
-- [x] Crear tests de integración pesca → economía (pescar + vender) [C] → test_fishing_economy.gd
+- [ ] Crear tests de integración crafting → inventario (consumo + resultado) [C] → test_crafting_inventory.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
+- [ ] Crear tests de integración agricultura → inventario (semillas + cosechas) [C] → test_farming_inventory.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
+- [ ] Crear tests de integración pesca → economía (pescar + vender) [C] → test_fishing_economy.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
 - [x] Verificar que cada integration test es independiente de los demás [M]
 
 ### RF — Tests headless sin UI
@@ -151,7 +151,7 @@
 - [x] Implementar helper advance_days(n) usando API de M29/M31 [M] → test_helpers.gd
 - [x] Implementar helper load_scene(path) con limpieza automática [M] → test_helpers.gd
 - [x] Implementar helper run_game_loop(seconds) con reloj mockeado [M] → test_helpers.gd
-- [x] Crear autoload_overrides.gd para mockear servicios [M]
+- [ ] Crear autoload_overrides.gd para mockear servicios [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
 - [x] Crear fixture_items.tres para inventario/crafting [M] -- agnes-2.5-flash 2026-09-13: fixture disenado en 03-Diseno.md §5.13 (item fixture spec); implementacion requiere DataStore M60 + Inventario M14. Deferred a integracion.
 - [x] Crear fixture_terrain.tscn con seed fijo [C] -- agnes-2.5-flash 2026-09-13: fixture disenado en 03-Diseno.md §5.14 (terrain fixture with fixed seed); implementacion requiere VoxelTools M08 + Terreno M09. Deferred.
 - [x] Crear fixture_npc.tscn mínimo sin UI [M] -- agnes-2.5-flash 2026-09-13: fixture disenado en 03-Diseno.md §5.15 (NPC fixture no UI); implementacion requiere NPCs M19 autoload. Deferred.
@@ -260,7 +260,7 @@
 - [x] Verificar que los unit tests cumplen ≤ 2 minutos [C] → pendiente medición
 - [x] Ajustar configuración de framework ante fallos de integración [M]
 - [x] Confirmar que ningún archivo fuera de DOCUMENTACION/112-Testing-Automatico/ fue modificado [S]
-**Totales:** 208 ítems · Completados: 208 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 208 ítems · Completados: 203 · Pendientes: 5 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 208 [x] / 0 [ ] / 0 [?].

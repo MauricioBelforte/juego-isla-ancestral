@@ -111,7 +111,7 @@
 - [x] Luz de 3 puntos key/fill/rim estandarizada [M] -- agnes-2.5-flash 2026-09-12: setup documentado en 03-Diseno.md §G.3 (3-point lighting angles/intensities); parte del preview scene. Spec documented.
 - [x] Camara fija con encuadre documentado [S] -- agnes-2.5-flash 2026-09-12: posicion documentada en 03-Diseno.md §G.4 (fixed camera specs: distance, angle, FOV). Spec complete.
 - [x] Slot para modelo voxel intercambiable [M] -- agnes-2.5-flash 2026-09-12: slot disenado en 03-Diseno.md §G.5 (model swap slot via Node path); requiere preview_personaje.tscn. Spec documented.
-- [x] Botón/tecla de captura directa a Logs/screenshots/ [M]
+- [?] Botón/tecla de captura directa a Logs/screenshots/ [M] (a [?]: depende de preview_personaje.tscn + captura_preview.gd inexistentes, sin spec propia, atria-dawn 2026-10-08)
 - [x] Integrar escena con Debug Menu (M110) si aplica [S] -- agnes-2.5-flash 2026-09-12: integracion documentada en 03-Diseno.md §G.6 (Debug Menu access to preview); M110 ✅ cerrado. Integration documented.
 - [x] Documentar uso de la escena en este modulo [S] -- agnes-2.5-flash 2026-09-12: documentacion de uso en 03-Diseno.md §G.7 (scene usage guide); sección G completa. Doc present.
 
@@ -167,8 +167,8 @@
 - [x] Test get_scene_info: devuelve estructura real de escena (success, 3 objetos, 2 materiales — 2026-08-24) [S]
 - [x] Crear guía maestra de conexión de visión: `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` (archivo 06 global, referenciada desde AGENTS.md sección 25) [S]
 - [x] Test get_viewport_screenshot: imagen legible con colores reales (verificada 2026-08-24 — requiere parámetro `filepath`; esfera naranja vista y validada por el agente) [M]
-- [x] Crear scripts/blender/setup_estudio.py (luz 3 puntos + cámara + fondo) [M]
-- [x] Crear scripts/blender/personaje_voxel.py (generador paramétrico) [M]
+- [ ] Crear scripts/blender/setup_estudio.py (luz 3 puntos + cámara + fondo) [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn 2026-10-08)
+- [ ] Crear scripts/blender/personaje_voxel.py (generador paramétrico) [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn 2026-10-08)
 - [x] Iterar primer NPC completo end-to-end con screenshots hasta aprobación del usuario [C]
 - [x] Exportar personaje aprobado a .glb e importarlo en Godot [M] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §H.2 (GLB export+import); requiere Blender + export. KnownIssue no bloqueante DoD.
 - [x] Documentar versiones exactas instaladas (Blender, blender-mcp, commit) [S]
@@ -199,7 +199,7 @@
 - [x] Confirmar captura visual desde `screen.capture_screen` en Copilot [M]
 - [x] Verificar conexión V5 Blender desde Copilot con socket 9876 activo [M]
 
-**Totales:** 155 ítems · Completados: 154 · Pendientes: 1 · No resueltos: 0.
+**Totales:** 155 ítems · Completados: 152 · Pendientes: 3 · No resueltos: 1.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"153 ítems · Completados: 73 · Pendientes: 80"*

@@ -149,7 +149,7 @@
 - [x] Documentar retención por tipo de dato [S] — backup_categories.json retencion_dias + 03-Diseno.md §4
 - [x] Documentar procedimiento de limpieza automática [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §5 cleanup >30d + §3 last 10 daily -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [ ] Documentar excepciones a la política [S]
-- [ ] Crear docs/politica_retencion.md [S]
+- [x] Crear docs/politica_retencion.md [S] — creado como `08-Politica-Retencion.md` en plan-actual/ (desviación §3: docs/ es legacy)
 - [x] Definir revisión trimestral de política [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §11 Regla 3 periodic verification -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Documentar ajustes según necesidades [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §11 flexible policy rules -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 
@@ -165,8 +165,8 @@
 - [x] Definir verificación de builds [S] — 03-Diseno.md §9 "Pasos"
 - [x] Definir documentación de resultado [S] — 03-Diseno.md §9 "Criterio de Éxito"
 - [x] Definir criterios de éxito (100% exitoso) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §9 success criteria checklist -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [ ] Crear docs/procedimiento_restauracion.md [S]
-- [ ] Crear plantilla de log de restauración [S]
+- [x] Crear docs/procedimiento_restauracion.md [S] — creado como `09-Procedimiento-Restauracion.md` en plan-actual/
+- [x] Crear plantilla de log de restauración [S] — creado como `10-Plantilla-Log-Restauracion.md` en plan-actual/
 
 ## K. Plan de recuperación de desastres (12)
 
@@ -186,7 +186,7 @@
 - [x] Definir severidad y tiempo estimado Escenario 4 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 4: Severidad ALTA, Tiempo estimado 4-12 horas -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir pasos detallados Escenario 4 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §10 Escenario 4: 8 recovery steps + verification checklist -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Definir criterios de verificación Escenario 4 [S] — 03-Diseno.md §10 Esc4 "Verificación:"
-- [ ] Crear docs/plan_recuperacion_desastres.md [S]
+- [x] Crear docs/plan_recuperacion_desastres.md [S] — creado como `11-Plan-Recuperacion-Desastres.md` en plan-actual/
 
 ## L. Integración con otros módulos (8)
 
@@ -240,7 +240,7 @@
 - [x] Pendientes asignados a dueños [S] — todos los [?] tienen dueño (L/M/H secciones)
 - [ ] DoD cumplida: 5 archivos + firma + log [M] -- agnes-2.5-flash 2026-09-12: all 5 docs exist with signatures; logs 778-780 created; backup_manager.gd + test_backup.gd implemented
 
-**Totales:** 176 ítems · Completados: 142 · Pendientes: 16 · No resueltos: 18.
+**Totales:** 176 ítems · Completados: 146 · Pendientes: 12 · No resueltos: 18.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 5):** la línea decía *"176 items — Completados: 93 — No resueltos: 17 —

@@ -255,7 +255,7 @@
 
 ## L. Indicador de UI
 
-- [x] Crear escena terrain_indicator.tscn [M]
+- [ ] Crear escena terrain_indicator.tscn [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
 - [ ] Agregar TextureRect para icono de terreno [S]
 - [ ] Agregar Label para nombre de terreno [S]
 - [x] Agregar ProgressBar para velocidad efectiva [S] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado)
@@ -388,7 +388,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 307 ítems · Completados: 234 · Pendientes: 59 · No resueltos: 14. (Auditoría A agnes 2026-10-06: 3 `[x]` degradados a `[?]` — terrain_block.gd/.tscn/collision_layer no existen, implementación real es data-driven vía terrenos.json + terrain_data/provider/detector/modifiers.)
+**Totales:** 307 ítems · Completados: 233 · Pendientes: 60 · No resueltos: 14. (Auditoría A agnes 2026-10-06: 3 `[x]` degradados a `[?]` — terrain_block.gd/.tscn/collision_layer no existen, implementación real es data-driven vía terrenos.json + terrain_data/provider/detector/modifiers.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"299 items - Completados: 299 - Pendientes: 0"* — un

@@ -319,6 +319,22 @@
 - **Nota:** L170/L171 ya eran KnownIssue por QA de hy3 (L216, Log 1216) pero el `[x]` seguía
   puesto — el KnownIssue documenta el problema sin resolver la marca falsa.
 
+### L-13 — Verificación de flips M154 + escaneo cola QA ✅ sin sello — `[x]` CERRADO
+
+- **Asignado por el director** (msg 65, vacío, nombre explícito): confirmar flips y arrancar cola
+  QA de módulos ✅ sin sello runtime.
+- **Flips CONFIRMADOS en disco:** L109/L170/L171 `[x]`→`[ ]`, L114 `[x]`→`[?]` (con razón
+  anotada por el director), L113/L173 mantenidos `[x]` (Familia B).
+- **⚠️ Discrepancia reportada:** el GLOBAL dice 152/155 pero el conteo real es **151/3/1 = 155**
+  (mi error de proyección del msg 64, arrastrado al GLOBAL). Sugerida corrección a 151/155.
+- **Escaneo de 167 módulos:** **31 ✅ Completados**, **solo M07 Arquitectura-General SIN SELLO**
+  (los otros 30 tienen verificación §21.8 o banner SANEADO).
+  - M07: 105/105 `[x]`, documentación pura (principios de arquitectura), firmado por
+    **Deepseek V4 Flash / OpenCode** (descatalogado). No requiere binario Godot.
+- **Pregunta al director:** ¿QA de M07 (doc pura), o la cola "sin sello runtime" es otra?
+  Si exige runtime, la cola está vacía — necesito que defina el alcance.
+- **Informe al director (msg 66).**
+
 - **Autorizado por el director** (msg 59): "OK, LANZA LA EVALUACIÓN" — con §5.S ya escrita por mí
   (ver R-01).
 - **Diseño:** misma tarea que L-11 (M154 L109) para **comparación cabeza a cabeza** — ¿Step 5
