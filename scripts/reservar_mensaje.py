@@ -58,19 +58,43 @@ def resolver(argumento):
     return argumento
 
 
-def sanear_tema(tema):
+def sanear_tema(tema, limite=50):
     t = tema.strip().lower()
     t = re.sub(r"[^a-z0-9]+", "-", t)
     t = t.strip("-")
-    # Tope anti ruta-larga: Windows falla con open() si la ruta supera ~260 chars
-    # (detectado 2026-09 por atria-dawn-s3: un slug largo dejo el numero 139
-    # huerfano porque el archivo no se pudo crear). 50 chars es seguro: el overhead
-    # fijo (ruta base + fecha + emisor + receptor) ya mide ~205 en canales de nombre
-    # largo como StepFun-Step-5-Preview; 205+60 = 265 > 260.
-    t = t[:50].strip("-")
     if not t:
         t = "mensaje"
-    return t
+    # FIX anti-duplicacion (2026-10-10, atria-dawn-s2, encargo del fundador): antes el
+    # tema se truncaba a 50 chars SIN respetar fronteras de palabra, lo que dejaba
+    # nombres mutilados ("tu-estimac"). El emisor recibia una plantilla con un nombre
+    # que no describia el contenido y escribia el cuerpo en OTRO archivo con el nombre
+    # completo; la plantilla quedaba huerfana y el numero se duplicaba (6 canales
+    # afectados: s2 203, agnes 201, deepseek 139, hy3 114/121, stepfun 15).
+    # Solucion de dos partes:
+    #   1) cortar en la frontera de palabra anterior (nunca parte una palabra).
+    #   2) el limite lo calcula main() segun la longitud real de la ruta del canal
+    #      (ver _limite_tema), no un 50 fijo.
+    if len(t) <= limite:
+        return t
+    corte = t[:limite]
+    k = corte.rfind("-")
+    if k >= limite // 2:
+        corte = corte[:k]
+    return corte.strip("-") or "mensaje"
+
+
+def _limite_tema(carpeta, fecha_archivo, emisor_slug, receptor_slug):
+    """Maxima longitud segura para el slug del tema segun la ruta del canal.
+
+    Windows falla con open() si la ruta completa supera ~260 chars. En vez de
+    asumir un overhead fijo de 205 (poco para canales de nombre corto, demasiado
+    para StepFun-Step-5-Preview), se mide el real. Margen de 10 bajo 260 por si
+    la fecha o los alias cambian de longitud. Piso de 30: menos no es legible.
+    """
+    base = os.path.abspath(carpeta) + os.sep
+    fijo = (len(base) + len(fecha_archivo) + 1 + len(emisor_slug)
+            + len("-a-") + len(receptor_slug) + 1 + len(".md"))
+    return max(30, 250 - fijo)
 
 
 def main():
@@ -146,7 +170,7 @@ def main():
     fecha_archivo = ahora.strftime("%Y-%m-%d_%H-%M-%S")
     fecha_interna = ahora.strftime("%Y-%m-%d %H:%M:%S")
 
-    tema = sanear_tema(args.tema)
+    tema = sanear_tema(args.tema, _limite_tema(carpeta, fecha_archivo, alias_de(emisor), alias_de(receptor)))
     receptor_slug = alias_de(receptor)
     emisor_slug = alias_de(emisor)
 
