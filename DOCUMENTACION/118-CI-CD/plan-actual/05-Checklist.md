@@ -25,7 +25,7 @@
 - [x] P2: tests edit-mode y play-mode se ejecutan automáticamente [S]
 - [x] P3: build de desarrollo generado en < 10 minutos [S]
 - [x] P4: build release optimizado sin símbolos de debug [S]
-- [ ] P5: despliegue a itch.io al crear tag semver [S] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §2.5 (itch.io deploy); requiere BUTLER_API_KEY secreto. KnownIssue no bloqueante DoD.
+- [ ] P5: despliegue a itch.io al crear tag semver [S] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §2.5 (itch.io deploy); requiere BUTLER_API_KEY secreto. KnownIssue no bloqueante DoD. **[QA s2 2026-10-09, Log 1539]** CASO A — infra externa (BUTLER_API_KEY en el runner) no disponible; KnownIssue legítimo, se mantiene `[ ]` (no es `[?]`).
 - [x] P6: notificaciones de fallo al equipo de desarrollo [S]
 - [x] P7: calidad de código (M111) verificada antes de éxito [S] -- agnes-2.5-flash 2026-09-12: gate disenado en 03-Diseno.md §2.7 (quality gate before success); M111 ✅. Integration documented.
 
@@ -33,7 +33,7 @@
 
 - [x] Godot Editor script BuildScript.cs configurado [S] _(diseno heredado: `BuildScript.cs` es una ruta Unity/C#; en este proyecto Godot/GDScript el equivalente vivo es `scripts/core/build_info.gd` — verificado 2026-10-02, Log 1189)_
 - [x] Workflow GitHub Actions con steps completos [S] -- agnes-2.5-flash 2026-09-12: estructura disenada en 03-Diseno.md §3.1 (CI pipeline stages); implementacion requiere github.com setup. Policy documented.
-- [x] Scripts PowerShell build_dev.ps1 y build_release.ps1 [S]
+- [x] Scripts de build `tools/ci/build_dev.py` y `tools/ci/build_release.py` [S] _(reformulado por QA s2 2026-10-09, Log 1539: la forma "PowerShell build_dev.ps1/build_release.ps1" era herencia Unity/C# — ver L34; los artefactos vivos son Python en `tools/ci/`)_
 - [x] Tests run_tests.gd con cobertura mínima 80% [S]
 - [x] Integración con M111 (Code Quality) automática [S]
 - [x] Fallback manual despues de 3 fallos seguidos [S] -- agnes-2.5-flash 2026-09-12: politica disenada en 03-Diseno.md §3.2 (manual fallback after 3 consecutive failures); error handling documented.
@@ -84,7 +84,7 @@
 - [x] Autoload CiCdManager registrado en project.godot [S]
 - [x] Datos data-driven: ci_gates.json con 3 gates [S]
 - [x] Gate data_valid: validación automática de todos los .json en data/ [S] — Log 684: validar_data_json() con scan plano de 6 subdirectorios, 20 archivos 0 errores
-- [x] Gate assets_existen: verificación de GLBs no vacíos en media/ [S] — Log 684: 99 GLBs verificados, 0 vacíos
+- [x] Gate assets_existen: verificación de GLBs no vacíos en `res://assets/3d/media/` [S] — Log 684: 99 GLBs verificados, 0 vacíos _(reformulado por QA s2 2026-10-09, Log 1539: `media/` no existe; la ruta real del gate es `res://assets/3d/media/` con **130 GLBs** hoy — `gate_assets_existen()` en `scripts/ci/cicd_manager.gd:113`)_
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 
 ## I. Artifacts y releases (12)
@@ -97,7 +97,7 @@
 - [x] CHANGELOG.md generado automáticamente [S]
 - [x] Notas de release editables via PR [S]
 - [x] Subida a GitHub Releases [S]
-- [ ] Subida a Itch.io (manual trigger) [S] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §3.10 (itch.io manual deploy); requiere BUTLER_API_KEY secreto en el runner GitHub Actions. KnownIssue no bloqueante DoD.
+- [ ] Subida a Itch.io (manual trigger) [S] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §3.10 (itch.io manual deploy); requiere BUTLER_API_KEY secreto en el runner GitHub Actions. KnownIssue no bloqueante DoD. **[QA s2 2026-10-09, Log 1539]** CASO A — infra externa (BUTLER_API_KEY en el runner) no disponible; KnownIssue legítimo, se mantiene `[ ]` (no es `[?]`).
 - [x] Firmado GPG de binarios [S] — Log 724: firmar_artefacto()/verificar_firma() con HMAC-SHA256 (sustituto portable en runtime; GPG real en el runner de CI)
 - [x] Upload a Steamworks (futuro, M206) [S]
 - [x] Retención de últimos 5 releases en GitHub [S]
@@ -106,7 +106,7 @@
 
 - [x] Notificaciones Slack en fallos [S]
 - [x] Discord webhook en releases [S]
-- [ ] Email a stakeholders en tags [S] -- agnes-2.5-flash 2026-09-12: politica disenada en 03-Diseno.md §3.9 (stakeholder notifications); requiere configuracion de email service. KnownIssue no bloqueante DoD.
+- [ ] Email a stakeholders en tags [S] -- agnes-2.5-flash 2026-09-12: politica disenada en 03-Diseno.md §3.9 (stakeholder notifications); requiere configuracion de email service. KnownIssue no bloqueante DoD. **[QA s2 2026-10-09, Log 1539]** CASO A — infra externa (email service) no disponible; KnownIssue legítimo, se mantiene `[ ]` (no es `[?]`).
 - [x] Badge de build en README [S]
 - [x] Status page interno [S] -- agnes-2.5-flash 2026-09-12: disenado en 03-Diseno.md §3.11 (internal status page); requiere hosting/web server. Deferred.
 - [x] Logs centralizados en 7 días [S]
@@ -188,4 +188,4 @@
 - [x] Auditoría de workflows (4): backup.yml (Google Drive), bug_metrics.yml (Python), quality.yml (GDScript Linter headless), testing.yml (GdUnit4 via firebelley/godot-export)
 - [x] **Fix: testing.yml usaba godot_version 4.3 con el proyecto 4.7.2** (el CI de tests estaba roto de facto) → actualizado a 4.7.2
 - [x] El gate de tests del CI usa GdUnit4 (run tests del proyecto) — pipeline coherente con la metodología de tests del repo
-- [ ] Validación en GitHub Actions real (requiere push; la action firebelley v5.2.1 puede necesitar actualización) [S] -- agnes-2.5-flash 2026-09-12: validacion documentada en 03-Diseno.md §4.1 (GitHub Actions validation); requiere push real para fire test. KnownIssue no bloqueante DoD.
+- [ ] Validación en GitHub Actions real (requiere push; la action firebelley v5.2.1 puede necesitar actualización) [S] -- agnes-2.5-flash 2026-09-12: validacion documentada en 03-Diseno.md §4.1 (GitHub Actions validation); requiere push real para fire test. KnownIssue no bloqueante DoD. **[QA s2 2026-10-09, Log 1539]** CASO A — infra externa (push real al remote para fire test de la action) no disponible; KnownIssue legítimo, se mantiene `[ ]` (no es `[?]`).

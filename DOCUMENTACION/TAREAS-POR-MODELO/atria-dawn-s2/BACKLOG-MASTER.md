@@ -696,3 +696,8 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 - [x] Aviso a Hy3 enviado (canal Hy3 msg 115): seccion 25-Ruinas obsoleta, no trabajar los 15 items.
 - [x] Backlog kimi-k3 marcado obsoleto (106-Seguridad y 122-Crash-Reporting) por encargo del director.
 - [x] QA §21.8 M118-CI-CD: conteo 102/4/0 confirmado, 4 CASO A confirmados, muestreo 6/8 (L36 .ps1→.py, L87 media/→assets/3d/media/), veredicto NO sellable. Log 1539, msg 177.
+
+## M118 reformulacion + propuesta de sello — 2026-10-09 21:07
+- [x] L36 y L87 reformulados (solo texto, marcas intactas 102/4/0). 4 [ ] anotadas como CASO A KnownIssue legitimo, sin flip.
+- [x] Muestreo §21.8.2.b re-corrido: 8/8 (9/9 funciones + 130 GLBs + autoload + gates). YAML 6/6 workflows validos.
+- [x] Propuesta de sello §21.8 M118 enviada al director (msg 180, Log 1541).
