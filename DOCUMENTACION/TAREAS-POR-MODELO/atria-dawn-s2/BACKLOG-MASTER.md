@@ -101,7 +101,7 @@
 - [x] **T-DA055:** M148 Lore-Ambiental (23/117, prio=Media) — verificar Totales vs marcas
 - [x] **T-DA056:** M151 Control-Final (10/151, prio=Media) — verificar Totales vs marcas
 - [x] **T-DA057:** M155 Vestimenta-Y-Accesorios (84/108, prio=Alta) — verificar Totales vs marcas
-- [x] **T-DA058:** M156 Terrenos-Y-Movimiento (206/307, prio=glm-5.3-flash) — verificar Totales vs marcas
+- [x] **T-DA058:** M156 Terrenos-Y-Movimiento (206/307 afirmado en su momento; conteo real 169/82/56 — retrocedio por auditoria BUG-070, Log 1546 LOTE 14) — verificar Totales vs marcas
 - [x] **T-DA059:** M159 Catalogo-De-Objetos (69/146, prio=Alta) — verificar Totales vs marcas
 - [x] **T-DA060:** M161 Diseno-Visual-De-NPCs (94/138, prio=Alta) — verificar Totales vs marcas
 - [x] **T-DA061:** M162 Dialogos-Contextuales-De-NPCs (80/120, prio=glm-5.3-flash) — verificar Totales vs marcas
@@ -119,9 +119,9 @@
 - [x] **T-DC008:** M78 Legal-Propiedad-Intelectual (157/157) — 0 `[?]` + codigo real + logs
 - [x] **T-DC009:** M80 Legal-Privacidad (144/144) — 0 `[?]` + codigo real + logs
 - [x] **T-DC010:** M81 Legal-Menores (137/137) — 0 `[?]` + codigo real + logs
-- [x] **T-DC011:** M82 Clasificacion-Por-Edades (100/100) — 0 `[?]` + codigo real + logs
+- [x] **T-DC011:** M82 Clasificacion-Por-Edades (afirmado 100/100; conteo real 95/0/5 — drift posterior BUG-070, Log 1546) — 0 `[?]` + codigo real + logs
 - [x] **T-DC012:** M84 Musica-Y-Audio-Legal (99/99) — 0 `[?]` + codigo real + logs
-- [x] **T-DC013:** M85 Modelos-3D-Legal (100/100) — 0 `[?]` + codigo real + logs
+- [x] **T-DC013:** M85 Modelos-3D-Legal (afirmado 100/100; conteo real 73/25/2 — bajado de OK por atria-dawn 2026-10-04 y re-auditado como INFLADO por agnes-3-flash Log 1424; Log 1546) — ver historial en GLOBAL
 - [x] **T-DC014:** M86 IA-Generativa (129/129) — 0 `[?]` + codigo real + logs
 - [x] **T-DC015:** M93 Balance (134/134) — ❗ **3 over-marks Familia A (simulate_economy.gd NO existe) → REVERTIDO ✅→🟡 131/134** (Log 1116)
 - [x] **T-DC016:** M94 Retencion-Sin-FOMO (135/135) — 0 `[?]` + codigo real + logs
@@ -149,7 +149,7 @@
 - [x] **T-DC021:** M114 Playtest (186/186) — 0 `[?]` + codigo real + logs
 - [x] **T-DC022:** M116 Instalador (192/192) — 0 `[?]` + codigo real + logs
 - [x] **T-DC023:** M118 CI-CD (106/106) — 0 `[?]` + codigo real + logs
-- [x] **T-DC024:** M119 Actualizaciones (118/118) — 0 `[?]` + codigo real + logs
+- [x] **T-DC024:** M119 Actualizaciones (afirmado 118/118; conteo real 109/9/0 — 9 pendientes QA-drift-doc, Log 1546) — ver encargo del director msg 185
 - [x] **T-DC025:** M123 Modding (108/108) — 0 `[?]` + codigo real + logs
 - [x] **T-DC026:** M133 Gestion-Del-Proyecto (127/127) — 0 `[?]` + codigo real + logs
 - [x] **T-DC027:** M134 Presupuesto (100/100) — 0 `[?]` + codigo real + logs
@@ -207,7 +207,7 @@
 - [x] **T-DG040:** M98 Trailer (4/102) — Totales vs marcas
 - [x] **T-DG041:** M99 Marketing (7/169) — Totales vs marcas
 - [x] **T-DG042:** M100 Community-Management (146/222) — Totales vs marcas
-- [x] **T-DG043:** M104 Analytics (49/117) — Totales vs marcas
+- [x] **T-DG043:** M104 Analytics (afirmado 49/117; conteo real 36/73/8 — retrocedio por auditoria posterior, Log 1546) — Totales vs marcas
 - [x] **T-DG044:** M120 DLC-Y-Expansiones (163/222) — Totales vs marcas
 - [x] **T-DG045:** M121 Soporte-Post-Lanzamiento (123/211) — Totales vs marcas
 - [x] **T-DG046:** M125 Terminos-De-Servicio (75/105) — Totales vs marcas
