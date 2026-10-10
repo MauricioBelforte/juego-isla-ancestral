@@ -108,7 +108,11 @@ func _instanciar_modelo() -> void:
 	if not ResourceLoader.exists(glb):
 		push_warning("[Gaviota] GLB no encontrado: %s" % glb)
 		return
-	var modelo: Node3D = load(glb).instantiate()
+	var res_glb: Resource = load(glb)
+	if res_glb == null:
+		push_warning("[Gaviota] load() devolvió null: %s" % glb)
+		return
+	var modelo: Node3D = res_glb.instantiate()
 	modelo.name = "Modelo"
 	modelo.scale = Vector3.ONE * escala_modelo
 	add_child(modelo)

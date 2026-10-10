@@ -6,17 +6,39 @@
 # determinista (VegetationPlan) sobre el mundo real (snap con TerrainLocator).
 # Autoload autocontenido: espera 2 frames (terreno listo), genera el plan y
 # crea las instancias (variante media) en las posiciones del plan.
+#
+# BUG-129 fix raíz (2026-10-09, stepfun-step-5-preview): antes las instancias se
+# colgaban con `get_tree().current_scene.add_child(inst)` (L80 original). En
+# headless (tests) `current_scene` no es el árbol medido por GdUnit, así que las
+# ~109 instancias GLB quedaban HUÉRFANAS y contaminaban la medición
+# (201 orphan nodes → GdUnit4 rc=101). Ahora cuelgan de un nodo propio del
+# spawner: en runtime el resultado visual es idéntico (mismo padre de escena,
+# mismas posiciones), y en headless dejan de existir huérfanos.
 
 extends Node
 
 const PLAN = preload("res://scripts/vegetacion/vegetation_plan.gd")
+
+## Nodo propio donde se cuelgan las instancias de vegetación (BUG-129).
+## En vez de `current_scene` (que en headless no existe): así las instancias
+## tienen padre real dentro del spawner y nunca quedan huérfanas.
+var _contenedor: Node3D = null
 
 var _frames_espera: int = 0
 
 var _poblado := false
 
 func _ready() -> void:
+	_contenedor = Node3D.new()
+	_contenedor.name = "VegetacionInstancias"
+	add_child(_contenedor)
 	set_process(true)
+
+func _exit_tree() -> void:
+	# Liberar las instancias junto con el spawner (evita leaks al salir).
+	if _contenedor != null and is_instance_valid(_contenedor):
+		_contenedor.queue_free()
+		_contenedor = null
 
 func _process(_delta: float) -> void:
 	if _poblado:
@@ -63,6 +85,7 @@ func _poblar() -> void:
 		# BUG-022 (2026-09-02): no plantar sobre agua — solo tierra firme
 		# (h>=3 = arena/playa real; h<3 = banda de agua clara o profunda).
 		if h < 3:
+			inst.free()  # BUG-129: descarte post-instantiate → si no, huérfano
 			en_agua += 1
 			omitidas += 1
 			continue
@@ -77,7 +100,18 @@ func _poblar() -> void:
 		if inst is Node3D:
 			var esc: float = _escala_de(String(item["tipo"]))
 			(inst as Node3D).scale = Vector3(esc, esc, esc)
-		get_tree().current_scene.add_child(inst)
+		# BUG-129 (fix raíz): colgar de un nodo PROPIO del spawner en vez de
+		# `get_tree().current_scene` — en headless current_scene no existe y las
+		# instancias quedaban huérfanas. En runtime el resultado es idéntico
+		# (mismo árbol de escena, mismas posiciones).
+		if _contenedor != null and is_instance_valid(_contenedor):
+			_contenedor.add_child(inst)
+		else:
+			# Fallback defensivo: si el contenedor se perdió, recrearlo.
+			_contenedor = Node3D.new()
+			_contenedor.name = "VegetacionInstancias"
+			add_child(_contenedor)
+			_contenedor.add_child(inst)
 		instanciadas += 1
 	print("[M50] VegetationSpawner: %d instanciadas, %d omitidas (%d sin archivo, %d en agua)" % [instanciadas, omitidas, sin_archivo, en_agua])
 

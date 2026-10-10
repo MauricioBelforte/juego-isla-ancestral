@@ -8,9 +8,14 @@
     Requiere ejecutarse con permisos de administrador (Register-ScheduledTask).
 
     Condiciones configuradas (checklist F):
-      - Solo con alimentación de CA (StartWhenAvailable como fallback si se perdió el trigger)
+      - Solo con alimentación de CA: NO se pasa -AllowStartIfOnBatteries (en PS 5.1
+        su omision deja StartIfOnBatteries=false => la tarea no arranca con bateria,
+        como exige 03-Diseno.md §7). BUG-131 (Hy3, msg 126): antes se seteaba
+        -AllowStartIfOnBatteries explicitamente y contradecia el diseño.
+      - Si el equipo se pasa a bateria a mitad de un respaldo, NO se detiene
+        (-DontStopIfGoingOnBatteries): mejor terminar el backup que dejarlo a medias.
+      - StartWhenAvailable como fallback si se perdio el trigger.
       - WakeToRun desactivado (no despertar el equipo)
-      - Si la tarea se pierde, ejecutar apenas sea posible (StartWhenAvailable)
 
 .PARAMETER Time
     Hora diaria de ejecución. Predeterminado '03:00'.
@@ -62,7 +67,7 @@ try {
         -Argument ("-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`" -DestinationPath `"$DestinationPath`"" )
     $trigger = New-ScheduledTaskTrigger -Daily -At $Time
     $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -DontStopIfGoingOnBatteries `
-        -AllowStartIfOnBatteries -ExecutionTimeLimit (New-TimeSpan -Hours 2) -MultipleInstances IgnoreNew
+        -ExecutionTimeLimit (New-TimeSpan -Hours 2) -MultipleInstances IgnoreNew
     $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Limited
 
     Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger `
