@@ -41,8 +41,11 @@ var _q_prev_mano: bool = false
 var _inventario: Node = null
 var _item_database: Node = null
 
-## M155: Multiplicador de velocidad por bonos de equipo equipados
-var _equip_speed_mult: float = 1.0
+## M156 (iter. 3): terreno detectado + velocidad efectiva = base × terreno × (1+equipo).
+var _terrain_detector: RayCast3D = null
+var _terrain_provider: Node = null
+var _equipment_manager: Node = null
+var _current_effective_speed: float = 0.0
 
 # M57 iter. 2 (glm-5.3-flash): helper de migración — accion_justa por
 # ControlInput (capa única de acciones RF2) con fallback a Input directo
@@ -61,13 +64,27 @@ func _ready() -> void:
 	_item_database = get_node_or_null("/root/ItemDatabase")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-	# M155: conectar bonos de equipo al movimiento (item 140)
+	# M155/M156: conectar bonos de equipo + detector de terreno al movimiento (item 140).
 	var em := get_node_or_null("/root/EquipmentManager")
+	_equipment_manager = em
 	if em != null and em.has_signal("terrain_bonus_updated"):
 		em.terrain_bonus_updated.connect(_on_terrain_bonus_changed)
 		print("[Player] Conectado a EquipmentManager.terrain_bonus_updated")
 	else:
 		print("[Player] WARNING: EquipmentManager no encontrado para bonos de terreno")
+
+	# M156 (B1.1): montar el detector de terreno (hijo RayCast3D de Player.tscn) y
+	# el provider data-driven (autoload). Sin detector → tid=-1 → modificador 1.0.
+	_terrain_provider = get_node_or_null("/root/TerrainProvider")
+	_terrain_detector = get_node_or_null("TerrainDetector") as RayCast3D
+	if _terrain_detector != null:
+		if _terrain_detector.has_signal("terrain_changed"):
+			_terrain_detector.terrain_changed.connect(_on_terrain_changed)
+		print("[Player] TerrainDetector montado (interval %.2fs, ray %.1fm)" % [
+			_terrain_detector.detection_interval, _terrain_detector.ray_length])
+	else:
+		print("[Player] WARNING: TerrainDetector ausente; velocidad por terreno desactivada")
+	_update_effective_speed()
 	
 	# Setup VoxelBoxMover
 	_box_mover = VoxelBoxMover.new()
@@ -108,12 +125,22 @@ func _find_terrain() -> VoxelTerrain:
 		return root.get_node_or_null("VoxelTerrain")
 	return null
 
-## M155: Callback cuando cambian los bonos de equipo equipados.
-## Aplica el multiplicador a move_speed para movimiento con bonos de terreno.
-func _on_terrain_bonus_changed(bonus: float) -> void:
-	# bonus is in [-0.15, +0.40]; convert to multiplier [0.85, 1.40]
-	_equip_speed_mult = 1.0 + bonus
-	print("[Player] Bonus de equipo: %.2f → multiplier %.2f" % [bonus, _equip_speed_mult])
+## M156 (iter. 3): velocidad efectiva del terreno actual (base × terreno × (1+equipo)).
+## Se recalcula por frame en _physics_process y ante cambios de terreno/equipo.
+func _update_effective_speed() -> void:
+	var tid: int = -1
+	if _terrain_detector != null and _terrain_detector.has_method("get_current_terrain_id"):
+		tid = int(_terrain_detector.get_current_terrain_id())
+	_current_effective_speed = TerrainModifiers.calculate_full(
+		move_speed, _terrain_provider, tid, _equipment_manager)
+
+## M156 (B2): cambió el terreno bajo los pies → refrescar la velocidad efectiva.
+func _on_terrain_changed(_new_terrain_id: int) -> void:
+	_update_effective_speed()
+
+## M155: cambiaron los bonos de equipo equipados → refrescar la velocidad efectiva.
+func _on_terrain_bonus_changed(_bonus: float) -> void:
+	_update_effective_speed()
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Teclas de UI/inventario (no requieren voxel_tool)
@@ -320,9 +347,12 @@ func _physics_process(delta: float) -> void:
 	
 	_update_move_direction()
 	
-	# Movimiento horizontal
-	velocity.x = _move_direction.x * move_speed * _equip_speed_mult
-	velocity.z = _move_direction.z * move_speed * _equip_speed_mult
+	# Movimiento horizontal (M156 B2: velocidad efectiva = base × terreno × (1+equipo))
+	# Punto de integración: se recalcula cada frame y se aplica a velocity antes
+	# de move_and_slide()/box_mover. No altera la física, solo el multiplicador.
+	_update_effective_speed()
+	velocity.x = _move_direction.x * _current_effective_speed
+	velocity.z = _move_direction.z * _current_effective_speed
 	
 	if _box_mover and _terrain:
 		var motion: Vector3 = velocity * delta

@@ -210,7 +210,11 @@ func _bloque_c_movement() -> void:
 		_check(abs(instance.velocity.x - 0.0) < 0.001, "C2 velocity.x inicial = 0")
 		_check(instance.gravity > 0.0, "C3 gravity positiva (%.1f)" % instance.gravity)
 		_check(instance.move_speed > 0.0, "C4 move_speed positiva (%.1f)" % instance.move_speed)
-		_check(instance._equip_speed_mult == 1.0, "C5 equip_speed_mult inicial = 1.0")
+		# C5 (M156 iter. 3): _equip_speed_mult fue reemplazado por la velocidad
+		# efectiva data-driven (_current_effective_speed = base x terreno x
+		# (1+equipo)). Sin detector/provider/equipo cargados debe ser == move_speed.
+		_check(absf(instance._current_effective_speed - instance.move_speed) < 0.01,
+			"C5 velocidad efectiva inicial = move_speed=%.1f (sin terreno/equipo)" % instance.move_speed)
 
 		instance.queue_free()
 	else:
