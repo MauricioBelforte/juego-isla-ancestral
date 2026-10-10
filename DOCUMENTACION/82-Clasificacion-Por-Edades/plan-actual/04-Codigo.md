@@ -97,3 +97,35 @@ if not result.is_valid:
 **Evidencia headless (Godot 4.7.2):** `res://scripts/legal/test_rating_m82.gd` re-corrido -> 9 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR.
 **Checklist:** 05-Checklist M82 0 [ ] real, 0 [?] -> cumple §24/DoD (sin sobre-cerre, sin [?] ocultos).
 **Sello:** registrado en CHECKLIST-QA-SEALS.md (Log 1111). Sin push (instruccion).
+
+## Notas del Agente — Triaje de los 5 [?] (atria-dawn-s2 / Kilo Code, 2026-10-10)
+
+**Modelo:** Atria-Dawn-Preview (atria-dawn-s2)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-10 00:30
+**Estado:** Parcial (deuda de proceso, sin inflacion)
+
+### Lo que hice
+Triaje de los 5 `[?]` degradados por BUG-070 lote 6 (encargo del director msg
+185), verificados contra disco (Log 1551): **5/5 son deuda real legitima**.
+`RatingValidator` SI existe y funciona (`game/isla-ancestral/scripts/legal/
+rating_validator.gd`: `static func validar()` + `reporte()`); lo que falta es
+la **capa de proceso**, no codigo de rating.
+
+### Reasignacion de deuda (aceptada por el director, msg 193)
+
+| Item | Deuda | Destino propuesto |
+|---|---|---|
+| L92 gate en build pipeline | cablear `RatingValidator.validar()` a `quality.yml` + crear `test_rating_m82.gd` (0 hits hoy en `.github/workflows/`) | M96/M118 (CI/CD sellado) |
+| L64 timeline de submissions | documento | cualquier modelo |
+| L71 checklist de pre-submission | documento | cualquier modelo |
+| L119 resumen ejecutivo para stakeholders | documento (citacion `03-Diseno.md §5.4` fantasma) | cualquier modelo |
+| L132 recordatorio de recertificacion anual | timer/calendario | M30 (Tiempo-Y-Calendario) o M59 |
+
+### Recomendaciones para el proximo agente
+- **M82 se mantiene 95/0/5** — 0 drift con GLOBAL (95/100). No puede pasar a
+  ✅ mientras queden `[?]` (DoD §21.6).
+- **No buscar codigo de rating:** el nucleo esta entregado. El trabajo es
+  documentacion + un gate de pipeline.
+- **L92 es lo mas barato:** una linea en el workflow + un test de un par de
+  checks.
