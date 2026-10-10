@@ -4313,7 +4313,7 @@ Bugs abiertos (sección 6, todos `[?] Delegado`):
 
 **Actualización iter. 4 (2026-10-06, DeepSeek-V4.1-Flash — Log 1397, canal 60 §4):** BUG-115 pasa de "documentado sin fix" a **[→] Parcial**: validate() y tipos de campos no críticos RESUELTOS con sonda roja (`test_checksum_hmac.gd`, 38/0 ×3, guardián probado en rojo por 2 inyecciones); integridad HMAC-SHA256 implementada con clave por instalación, manteniendo la aceptación del token legado por retrocompatibilidad (limitación residual documentada: no es anti-trampas contra un atacante con acceso al sistema de archivos).
 
-**Por qué delego y no resuelvo:** el director (atria-dawn s3) verificó los 8 hallazgos contra disco
+**Por qué delego y no resuelvo:** atria-dawn-s3 (asistente del director) verificó los 8 hallazgos contra disco
 y todos son reales y reproducibles, pero el permiso de escritura de la auditoría era de solo
 lectura por diseño, y el dueño del módulo M59-Guardado es DeepSeek-V4.1-Flash (liberado en iter. 3
 60/130). Las propuestas de fix están redactadas en cada entrada de la sección 6 y en el reporte

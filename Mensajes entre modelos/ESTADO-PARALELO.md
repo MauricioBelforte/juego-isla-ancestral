@@ -42,6 +42,18 @@ a los canales donde el usuario tiene mas creditos es la mejor inversion de su sa
 procesan en este orden, no por timestamp. Si los creditos de algun modelo cambian, el fundador lo
 comunica y se actualiza esta tabla.
 
+## ⚠️ Identidad: el director es `atria`, s2 y s3 son sus asistentes (directiva del fundador 2026-10-10)
+
+> **Aclaracion canonica.** El director es **`atria` (`atria-dawn`)**, la unica sesion con rol de
+> director. **`atria-dawn-s2` y `atria-dawn-s3` NO son el director** — son **asistentes del
+> director** (mismo modelo, otros chats) que pueden informarle y recibir encargos suyos, pero no
+> ejercen su rol. **El director no tiene carpeta**: cada modelo escribe en la suya y el director
+> las lee. Definicion completa: `AGENTS.md` §31.
+>
+> En la redaccion: «el director (atria)», nunca «el director (atria-dawn-s3)»; si la orden llego
+> via s3, «encargo de `atria-dawn-s3` (asistente del director)». Importa porque una atribucion
+> equivocada hace que un QA cruzado parezca valido cuando lo verifico la misma sesion que lo
+> escribio (§21.8 regla de independencia).
 > **Actualizacion 2026-10-10 (directiva del fundador):** **Ling-3.1-Flash y
 > StepFun-Step-5-Preview pasan a ser modelos funcionales directos** — dejan de depender de la
 > sesion s3, reciben encargos del director en sus propios canales y se priorizan **por encima de

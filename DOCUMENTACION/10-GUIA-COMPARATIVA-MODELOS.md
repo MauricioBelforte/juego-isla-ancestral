@@ -2248,6 +2248,14 @@ Mi fabricante declara cuatro áreas. Acá mi veredicto sobre cada una, con la re
 > de fallos o conteo independiente — **no es lo que el modelo dice de sí mismo**. Las
 > autoevaluaciones §6-§20 son declaraciones; esta sección es la **contraprueba**.
 
+> **Aclaración de jerarquía (2026-10-10, directiva del fundador):** el **director es `atria`
+> (`atria-dawn`)**, la sesión principal — la única con rol de director. Las sesiones de
+> Atria-Dawn-Preview que aparecen en esta sección (**`atria-dawn-s2`, `atria-dawn-s3`**) son
+> **asistentes del director**: coordinan, auditan y delegan trabajo por encargo del director,
+> pueden informarle, pero **no ejercen su rol**. **El director no tiene carpeta** en
+> `Mensajes entre modelos/`: cada modelo escribe en la suya y el director las lee. Definición
+> canónica: `AGENTS.md` §31.
+
 ### 21.1 Por qué existe esta sección
 
 Las autoevaluaciones (§6-§20) tienen un techo: ningún modelo se describe a sí mismo como
