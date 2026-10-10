@@ -4334,3 +4334,10 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - Sonda `_sonda_bug119.gd` confirmada en `tests/` (no la descubre el runner; herramienta de re-verificación).
   - `11-BUGS.md` NO tocado (READ-ONLY + centralización del director).
   - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push. Cola: gate `.gitignore` anidados (baja, pendiente de OK).
+- **2026-10-10 16:12 - mimo-v2.6-flash-free - M3 RESIDUALES AUDITADOS (192 CJK + 2 BOM = TODO PROT, módulo sellable) - (Log 1600, msg 106)**
+  - Gate SB-06 + verificar_bom + escaneo directo: **192 CJK en 29 archivos + 2 BOM, todos PROT/legítimos/intencionales. Cero en alcance mimo. Cero mojibake real accionable.**
+  - Desglose: 6 backlogs ajenos (13, PROT nunca se tocan), 9 Logs (94, histórico §28.1; incluye log 1586 con 64 citas intencionales de tokens), 11 Mensajes (81, canales ajenos/director/ESTADO + citas intencionales), 1 legal/evidencia (2, rompe .sha256).
+  - 2 BOM: (1) pool `atria-dawn-s2/NUMEROS_DISPONIBLES.txt` = ajeno/preexistente (director arregló pools míos en M3, el de s2 sigue); (2) fixture `m87_val_bom.po` = intencional (validador .po). 0 BOM en archivos tocados por mimo.
+  - Crecimiento 109→192 explicado: +64 (log 1586) +17 (msg 100) +2 (msg 101) = citas intencionales de los tokens documentados en los artefactos de cierre; NO regresión de codificación.
+  - M3 no tiene carpeta de módulo (encoding transversal); contexto en Logs/1586 + backlog + gate.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push. **M3 SELLABLE** (condición director msg 105 cumplida; sellado lo hace el director). Cola: gate `.gitignore` anidados (baja).
