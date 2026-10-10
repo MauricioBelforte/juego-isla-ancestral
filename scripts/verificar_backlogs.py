@@ -75,7 +75,13 @@ RE_MODULO_M = re.compile(r"(?<![\w-])M(\d{1,3})\b")
 RE_COLA_ARCHIVO = re.compile(r"[A-Za-z0-9_]*\.(?:md|gd|py|tres|json|tscn|cfg|txt|csv|log)\b")
 
 # Conteos afirmados en una linea: "174/185", "75/42/14=131", "113/37/0".
-RE_CONTEO = re.compile(r"(\d+)\s*/\s*(\d+)(?:\s*/\s*(\d+))?(?:\s*=\s*(\d+))?")
+# Los lookbehind niegan ruido lexico que SE PARECE a un conteo:
+#   - "(?<!:)"       referencias a lineas de codigo ("player.gd:554/700")
+#   - "(?<![Ll]og )" citas de numeros de log ("sellos Log 867/857")
+#   - "(?<!M)"       citas duales de modulos ("M76/77", "M22/23")
+# (Longitud fija cada uno: Python no permite lookbehind de ancho variable.)
+RE_CONTEO = re.compile(r"(?<!:)(?<![Ll]og )(?<!M)(\d+)\s*/\s*(\d+)"
+                       r"(?:\s*/\s*(\d+))?(?:\s*=\s*(\d+))?")
 
 # Sufijo de esfuerzo del checklist ("[S]", "[M]", "[C]") y cola de evidencia
 # ("-- **iter. 6 (Log 1196):** ...") que hay que pelar para comparar textos.
@@ -256,17 +262,23 @@ def extraer_tareas(texto: str) -> list[Tarea]:
     """
     tareas: list[Tarea] = []
     seccion_mod: str | None = None
+    seccion_obsoleta = False
     for i, linea in enumerate(texto.splitlines(), start=1):
         if linea.lstrip().startswith("#"):
             titulo = linea.lstrip("#").strip()
             mods = _modulos_de_linea(titulo)
             # Solo heredan seccion los encabezados que citan UN solo modulo.
             seccion_mod = next(iter(mods)) if len(mods) == 1 else seccion_mod
+            # Una seccion marcada OBSOLETO (archivo historico) no genera
+            # alertas: sus items [ ] no son trabajo pendiente real.
+            seccion_obsoleta = "OBSOLETO" in titulo
             m = RE_MARCA_HEADING.search(titulo)
-            if m:
+            if m and not seccion_obsoleta:
                 texto_tarea = RE_MARCA_HEADING.sub("", titulo).strip(" -—")
                 tareas.append(Tarea(_norm_marca(m.group(1)), texto_tarea, i,
                                     "heading", seccion_mod))
+            continue
+        if seccion_obsoleta:
             continue
         m = RE_ITEM.match(linea)
         if m:
@@ -334,8 +346,13 @@ def cierres_linea(texto: str, disponibles: dict[str, str]) -> list[tuple[str, in
             if antes:
                 out.append((antes[-1][1], comps[0]))
         else:
-            # Formato "x/total" (o "x/0"): afirmacion del SUJETO de la linea.
-            out.append((sujeto, comps[0]))
+            # Formato "x/total" (o "x/0"): la cita mas cercana al conteo (en
+            # los 30 chars anteriores) o, si no hay ninguna, el SUJETO de la
+            # linea. La ventana distingue "M68 75/42/14, M59 60/69/1" (cada
+            # par es de su modulo) de "M30 ... era 98/104" (sujeto lejano).
+            cercana = [c for c in citas if cm.start() - 30 < c[0] < cm.start()]
+            mod = cercana[-1][1] if cercana else sujeto
+            out.append((mod, comps[0]))
     return out
 
 

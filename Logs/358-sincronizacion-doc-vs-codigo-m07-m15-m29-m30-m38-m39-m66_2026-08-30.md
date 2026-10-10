@@ -1,4 +1,4 @@
-# Log 358: SincronizaciÛn documentaciÛn vs cÛdigo (M07, M15, M29, M30, M38, M39, M66)
+# Log 358: Sincronizaci√≥n documentaci√≥n vs c√≥digo (M07, M15, M29, M30, M38, M39, M66)
 
 **Fecha:** 2026-08-30
 **Hora:** 20:46
@@ -7,57 +7,57 @@
 
 ## Resumen
 
-AuditorÌa de cÛdigo vs documentaciÛn: 22 scripts de cÛdigo real existÌan pero no estaban documentados en ning˙n `04-Codigo.md`. Se corrigieron los 7 mÛdulos no bloqueados (M16/M53/M19 excluidos por tener agentes activos).
+Auditor√≠a de c√≥digo vs documentaci√≥n: 22 scripts de c√≥digo real exist√≠an pero no estaban documentados en ning√∫n `04-Codigo.md`. Se corrigieron los 7 m√≥dulos no bloqueados (M16/M53/M19 excluidos por tener agentes activos).
 
 ## Cambios Realizados
 
 ### M07 Arquitectura General (`plan-actual/04-Codigo.md`)
-- Se reemplazÛ la tabla "Archivos de referencia para M1" por tabla "Archivos involucrados" con estado real
+- Se reemplaz√≥ la tabla "Archivos de referencia para M1" por tabla "Archivos involucrados" con estado real
 - Se agregaron: `game_settings.gd` (M46 config), `terrain_locator.gd` (M167/M168 posicionamiento), `registro.gd` (M05 logging)
-- Se marcÛ `thread_pool.gd` como pendiente
+- Se marc√≥ `thread_pool.gd` como pendiente
 
 ### M15 Recursos (`plan-actual/04-Codigo.md`)
 - Se corrigieron paths de `res://_Project/Scripts/Gameplay/Resources/` a `res://scripts/resources/`
-- Se agregÛ `resource_drop_entry.gd` (faltaba documentar)
-- Se actualizÛ estado de todos los scripts a "Implementado"
+- Se agreg√≥ `resource_drop_entry.gd` (faltaba documentar)
+- Se actualiz√≥ estado de todos los scripts a "Implementado"
 
 ### M29 Tiempo y Calendario (`plan-actual/04-Codigo.md`)
-- Se reemplazÛ la tabla genÈrica por tabla detallada con scripts reales
+- Se reemplaz√≥ la tabla gen√©rica por tabla detallada con scripts reales
 - Se documentaron `time_calendar.gd` (fachada unificada, ISaveProvider) y `festival_data.gd` (datos eventos)
-- Se eliminaron referencias a `date_model.gd` y `event_catalog.gd` (no existen en el cÛdigo real)
+- Se eliminaron referencias a `date_model.gd` y `event_catalog.gd` (no existen en el c√≥digo real)
 
 ### M30 Reloj en Tiempo Real (`plan-actual/04-Codigo.md`)
-- Se agregÛ `reloj_hud.gd` (capa de DISPLAY + POLÕTICA, consumo de GameClock)
+- Se agreg√≥ `reloj_hud.gd` (capa de DISPLAY + POL√çTICA, consumo de GameClock)
 - Se eliminaron referencias a archivos de test no existentes
 
-### M38 EconomÌa (`plan-actual/04-Codigo.md`)
-- Se agregÛ `economy_price_catalog.gd` (cat·logo central de precios, class_name, cache est·tico)
+### M38 Econom√≠a (`plan-actual/04-Codigo.md`)
+- Se agreg√≥ `economy_price_catalog.gd` (cat√°logo central de precios, class_name, cache est√°tico)
 
 ### M39 Tiendas (`plan-actual/04-Codigo.md`)
-- Se reemplazÛ la tabla de "Pendiente de implementaciÛn" por scripts reales implementados
+- Se reemplaz√≥ la tabla de "Pendiente de implementaci√≥n" por scripts reales implementados
 - Se documentaron `shop_data.gd` (Resource data-driven, inner class StockEntry) y `reputacion_tienda.gd` (niveles 0-5, cozy)
 - Se actualizaron paths de `res://tiendas/` a `scripts/shops/`
 
 ### M66 Anti-Softlock (`plan-actual/04-Codigo.md`)
-- Se reemplazÛ la tabla de C# futuro por scripts GDScript implementados
+- Se reemplaz√≥ la tabla de C# futuro por scripts GDScript implementados
 - Se documentaron los 8 invariant scripts: `invariant_base.gd`, `irecoverable.gd`, `jugador_invariant.gd`, `npc_invariant.gd`, `mision_invariant.gd`, `objeto_clave_invariant.gd`, `puzzle_invariant.gd`, `vehiculo_invariant.gd`
 - Se eliminaron referencias a paths C# (`Assets/_Project/Scripts/Core/*.cs`)
 
 ## Archivos Modificados/Creados
 
-- `DOCUMENTACION/07-Arquitectura-General/plan-actual/04-Codigo.md` ó editado
-- `DOCUMENTACION/15-Recursos/plan-actual/04-Codigo.md` ó editado
-- `DOCUMENTACION/29-Tiempo-Y-Calendario/plan-actual/04-Codigo.md` ó editado
-- `DOCUMENTACION/30-Reloj-En-Tiempo-Real/plan-actual/04-Codigo.md` ó editado
-- `DOCUMENTACION/38-Economia/plan-actual/04-Codigo.md` ó editado
-- `DOCUMENTACION/39-Tiendas/plan-actual/04-Codigo.md` ó editado
-- `DOCUMENTACION/66-Anti-Softlock/plan-actual/04-Codigo.md` ó editado
-- `Logs/296-sincronizacion-doc-vs-codigo-m07-m15-m29-m30-m38-m39-m66_2026-08-30.md` ó creado
-- `Logs/ULTIMO_NUMERO.txt` ó actualizado a 296
+- `DOCUMENTACION/07-Arquitectura-General/plan-actual/04-Codigo.md` ‚Äî editado
+- `DOCUMENTACION/15-Recursos/plan-actual/04-Codigo.md` ‚Äî editado
+- `DOCUMENTACION/29-Tiempo-Y-Calendario/plan-actual/04-Codigo.md` ‚Äî editado
+- `DOCUMENTACION/30-Reloj-En-Tiempo-Real/plan-actual/04-Codigo.md` ‚Äî editado
+- `DOCUMENTACION/38-Economia/plan-actual/04-Codigo.md` ‚Äî editado
+- `DOCUMENTACION/39-Tiendas/plan-actual/04-Codigo.md` ‚Äî editado
+- `DOCUMENTACION/66-Anti-Softlock/plan-actual/04-Codigo.md` ‚Äî editado
+- `Logs/296-sincronizacion-doc-vs-codigo-m07-m15-m29-m30-m38-m39-m66_2026-08-30.md` ‚Äî creado
+- `Logs/ULTIMO_NUMERO.txt` ‚Äî actualizado a 296
 
-## Pendiente (mÛdulos bloqueados)
+## Pendiente (m√≥dulos bloqueados)
 
 Cuando los agentes liberen M16, M53 y M19:
-- **M16 Crafting**: verificar si `crafting.json` (M93) est· documentado
+- **M16 Crafting**: verificar si `crafting.json` (M93) est√° documentado
 - **M53 UI-UX**: documentar `ui_root.gd` y `theme_service.gd`
-- **M19 NPC**: verificar paths de `villager_*.gd` en documentaciÛn
+- **M19 NPC**: verificar paths de `villager_*.gd` en documentaci√≥n

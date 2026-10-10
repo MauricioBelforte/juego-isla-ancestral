@@ -123,6 +123,40 @@ agente lee la respuesta del director y sigue
 
 ---
 
+## Prioridad de respuesta del director (créditos diarios del usuario)
+
+> Agregado 2026-10-09 por directiva del fundador (atria-dawn-preview / Kilo Code).
+
+Cuando el director (Atria) tiene **varios canales pendientes en simultáneo**, los responde en este
+orden — **no** por timestamp. El criterio son los **créditos diarios que el usuario tiene** en cada
+modelo: responder primero a los canales donde el saldo es mayor es la mejor inversión de su
+presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
+
+| Orden | Canal | Motivo (créditos del usuario) |
+|---|---|---|
+| **1** | `agnes-3-flash` | muchos créditos diarios |
+| **2** | `mimo-v2.6-flash-free` | muchos créditos diarios |
+| **3** | `atria-dawn-s2` | trabajo delegado del que necesito la respuesta |
+| **4** | `atria-dawn-s3` | supervisa a Ling 3 y Step 5 (ambos con muchos créditos diarios) |
+| **5** | `DeepSeek-V4.1-Flash` | créditos limitados diarios |
+| **6** | `Hy3` | créditos limitados diarios |
+| 7+ | resto de modelos activos | si hay alguno más trabajando |
+
+**Reglas operativas:**
+
+1. **El orden es de atención, no de corrección:** responder en este orden no significa que los
+   últimos sean menos importantes. Significa que si el tiempo/tokens de un ciclo alcanzan para
+   pocos, se empieza por arriba.
+2. **Si un canal tiene una entrega bloqueando a otro**, sube de prioridad aunque esté más abajo
+   (ej.: una respuesta de s2 que desbloquea trabajo de agnes). El desbloqueo siempre gana.
+3. **Si los créditos cambian**, el fundador lo comunica y se actualiza esta tabla + la copia en
+   `ESTADO-PARALELO.md` (ambas deben quedar consistentes).
+4. **No acumular pendientes de los puestos 1-2:** agnes y mimo son la mayor capacidad de
+   producción del día; un mensaje suyo sin responder es producción perdida.
+
+**Copias canónicas:** esta tabla existe también en `Mensajes entre modelos/ESTADO-PARALELO.md`
+(cabecera). Si se edita una, editarse la otra.
+
 ## Colaboración horizontal (todos leen todos los canales)
 
 > Agregado 2026-10-04 por directiva del usuario (atria-dawn-preview / Kilo Code).
@@ -826,10 +860,77 @@ saltaban de **1350 a 1501**, dejando un hueco de **150 numeros** (1351-1500) sin
 jornada.
 
 ---
+
+### T-19 -- Trampa del mensaje vacio: la plantilla reservada se lee "vacia" mientras el emisor escribe
+
+**Caso:** atria-dawn (2026-10-09, 6 ocurrencias en el dia: canales s2 #88/#90/#101, s3 #109/#111 y
+Step 5 #05). `scripts/reservar_mensaje.py` crea el archivo con la **plantilla vacia** (numero +
+encabezado + `<cuerpo del mensaje aca>`) y el emisor completa el cuerpo **uno a varios minutos
+despues**. Si el receptor (o el detector de pendientes) sondea la carpeta en esa ventana, lee un
+mensaje **vacio** y:
+
+1. Lo procesa como si no tuviera contenido, actuando **solo por el nombre del archivo**.
+2. **Causa real de un encargo equivocado (hoy):** mi msg 05 a Step 5 tenia el slug
+   `...bug120-investigacion` por un typo mio, pero el cuerpo asignaba **BUG-129**. s3 leyo el
+   archivo vacio, acto sobre el slug y le lanzo a Step 5 la investigacion de **BUG-120** (bug
+   distinto). Dos voces del director dieron encargos distintos al mismo agente.
+
+**Regla OBLIGATORIA (directiva del fundador 2026-10-09) — para TODOS los modelos:**
+
+> **Si abris un mensaje y solo contiene la plantilla reservada (titulo `<completar titulo aca>` o
+> cuerpo `<cuerpo del mensaje aca>`): ESPERA 5 MINUTOS y vuelve a leerlo. El emisor esta escribiendo
+> el cuerpo.**
+>
+> **NUNCA respondas a un mensaje vacio.** No tomes decisiones, no lances encargos, no reportes
+> "mensaje vacio" como un problema del emisor.
+>
+> **NUNCA actues solo por el nombre del archivo.** El slug es un resumen escrito en 2 segundos
+> por un humano/agente apurado; puede tener typos o quedar desactualizado. **La fuente autoritativa
+> es el cuerpo del mensaje.**
+>
+> Si pasados **5 minutos** el archivo sigue siendo la plantilla: es un mensaje **caido**. Avisar al
+> emisor por su canal ("tu msg NN sigue en plantilla, cayo?") y recien ahi procesar lo que se pueda
+> inferir del nombre.
+
+**Por que 5 minutos:** el helper crea el archivo en el instante de la reserva; el cuerpo se escribe
+en los siguientes 1-5 minutos (tool calls intermedios: leer archivos, verificar claims en disco).
+Los sondeos cada 5 minutos del director hacen colisionar con esa ventana con frecuencia. 5 minutos
+cubre el caso normal; lo que dure mas ya es una anomalia que se quiere detectar, no un vacio a
+interpretar.
+
+**Fixes aplicados (2026-10-09, atria-dawn / Kilo Code):**
+
+1. **La plantilla se explica a si misma.** `scripts/reservar_mensaje.py` ahora escribe un banner en
+   la cabecera de toda plantilla nueva: avisa que esta reservada, que el emisor esta escribiendo, y
+   cita la regla de los 5 minutos + la prohibicion de actuar por el nombre del archivo. **Quien abre
+   el archivo vacio lee la regla inline.** (Marcadores `<completar titulo aca>` / `<cuerpo del
+   mensaje aca>` se mantienen para que la deteccion siga funcionando.)
+2. **Detector `scripts/verificar_mensajes_pendientes.py`:** las plantillas vacias se siguen
+   ignorando para el computo de pendientes, pero ahora se listan en una seccion **"En escritura"**
+   con su edad en segundos, para que el director sepa que existen y no actue sobre el slug.
+   Umbral de tamano de plantilla subido 600 -> 1200 bytes (el banner engrandecio la plantilla).
+3. **`AGENTS.md` §10.2** (reglas del Modo Canal): regla agregada como punto obligatorio.
+4. **`ESTADO-PARALELO.md`:** aviso en cabecera (todos los modelos lo leen al arrancar).
+
+**Lecciones:**
+- **Un archivo en disco es un objeto en movimiento, no un hecho congelado.** Cualquier protocolo que
+  asuma "si el archivo existe, su contenido es final" es fragil frente a escrituras en dos tiempos
+  (reserva + llenado). Lo mismo aplica a logs, checklists y GLOBAL editados por script.
+- **El slug no es el mensaje.** Cuando dos directoriales (director + delegado) actuan sobre el mismo
+  canal, una sola voz debe quedar como autoridad: si el receptor recibe dos encargos distintos, el
+  **cuerpo del mensaje del director** gana, y el delegado debe alinearse (como paso hoy: BUG-120
+  quedo como E-07 por estar ya lanzado; BUG-129 paso a E-08).
+- **Deteccion barata de la ventana:** la edad del archivo (`mtime`) es la señal gratuita de "sigue
+  en escritura". Si `< 5 min` + es plantilla -> esperar.
+
+**Familia:** T-9 (redireccion de PowerShell lee archivos en movimiento) y M-08 (BOM por Set-Content,
+escrituras parciales). Todas son variantes de "lo que lees no es lo que el emisor quiso escribir".
+
+---
 ---
 
 **Firma de actualización:** **Modelo:** atria-dawn-preview · **Plataforma:** Kilo Code ·
 **Fecha:** 2026-10-06 07:20 · **Actualización:** (1) numeración de mensajes pasa al **pool por canal** (un `NUMEROS_DISPONIBLES.txt` por carpeta; el global quedó SOLO para logs — el fundador revirtió el pool global la misma noche, T-15); (2) nombre de archivo con **emisor → receptor**
 (`NN-...-<emisor>-a-<receptor>-tema.md`) para ver de un vistazo quién le escribe a quién
 (directiva del fundador); (3) **`Responde a` nombra al MODELO además del archivo** (directiva del fundador 2026-10-06: `**Responde a:** <MODELO> — <archivo>`, helper incluido — T-17); (4) T-11 (byte NUL) y T-12 (numeración por carpeta) agregadas. Historial: sección "Trampas operacionales de la jornada
-2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales. T-16 anadido 2026-10-06 01:40 (cabeza del pool de logs por debajo del ultimo log: el pool global arranca en max(logs)+1, huecos no se reutilizan). T-17 anadido 2026-10-06 05:20 ("Responde a" debe nombrar al MODELO, no solo el archivo). T-18 anadido 2026-10-06 07:20 (hueco 1351-1500 por doble asignador del experimento del pool global: logs 1501-1513 renumerados a 1351-1363 por fecha real; el numero de un log no es su fecha).
+2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales. T-16 anadido 2026-10-06 01:40 (cabeza del pool de logs por debajo del ultimo log: el pool global arranca en max(logs)+1, huecos no se reutilizan). T-17 anadido 2026-10-06 05:20 ("Responde a" debe nombrar al MODELO, no solo el archivo). T-18 anadido 2026-10-06 07:20 (hueco 1351-1500 por doble asignador del experimento del pool global: logs 1501-1513 renumerados a 1351-1363 por fecha real; el numero de un log no es su fecha). **T-19 anadido 2026-10-09 19:40** (directiva del fundador: plantilla reservada se lee "vacia" mientras el emisor escribe — **esperar 5 minutos, nunca responder a un mensaje vacio, nunca actuar solo por el nombre del archivo**; banner autoexplicativo en `reservar_mensaje.py`, seccion "En escritura" en el detector, regla en `AGENTS.md` §10.2 y aviso en `ESTADO-PARALELO.md`).

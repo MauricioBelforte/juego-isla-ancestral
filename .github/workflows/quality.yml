@@ -195,17 +195,17 @@ jobs:
           # siempre true -> 3 fallos; validadores de rango anulados -> 4 fallos).
           godot --headless --script scripts/saving/test_checksum_hmac.gd 2>&1 || FAIL=1
           # Run time calendar tests (M29)
-          godot --headless --script scripts/time/test_calendario.gd 2>&1 || true
+          godot --headless --script scripts/time/test_calendario.gd 2>&1 || FAIL=1
           # Run time consumers tests
-          godot --headless --script scripts/time/test_consumidores_tiempo.gd 2>&1 || true
+          godot --headless --script scripts/time/test_consumidores_tiempo.gd 2>&1 || FAIL=1
           # Run friendship tests (M20)
-          godot --headless --script scripts/friendship/test_amistad.gd 2>&1 || true
+          godot --headless --script scripts/friendship/test_amistad.gd 2>&1 || FAIL=1
           # Run economy tests (M38)
-          godot --headless --script scripts/economia/test_m38_economia_smoke.gd 2>&1 || true
+          godot --headless --script scripts/economia/test_m38_economia_smoke.gd 2>&1 || FAIL=1
           # Run economy minorista/mayorista tests
-          godot --headless --script scripts/economia/test_minorista_mayorista.gd 2>&1 || true
+          godot --headless --script scripts/economia/test_minorista_mayorista.gd 2>&1 || FAIL=1
           # Run band caps tests
-          godot --headless --script scripts/economia/test_topos_banda.gd 2>&1 || true
+          godot --headless --script scripts/economia/test_topos_banda.gd 2>&1 || FAIL=1
           # Run lore environmental gate (M148): falla (exit 1) si hay IDs
           # duplicados, canon_ref vacío, cobertura < 12 por isla o grafo de
           # pistas roto (consumidor inexistente).
@@ -233,7 +233,7 @@ jobs:
           # `LocalizationManager` + fallback + interpolación. Las aserciones de
           # conteo comparan contra el JSON fuente (fix BUG-032: estaban fijadas a
           # 11 claves con el catálogo en 25 -> false-red).
-          godot --headless --script scripts/localizacion/test_localizacion_m87.gd 2>&1 || FAIL=1
+          # ELIMINADO por atria-dawn 2026-10-09: referencia muerta (BUG-104 movio test_localizacion_m87.gd a Obsoletos/). Las suites M87 reales son test_localizacion_iter6 + test_validador_po_m87 (cableadas mas abajo).
           # M87 núcleo (iter. 1): carga de catalogos, traduccion es/en,
           # placeholders, plurales, formatos, fallback y validar_catalogos.
           godot --headless --script scripts/localization/test_localization.gd 2>&1 || FAIL=1
@@ -265,7 +265,7 @@ jobs:
           godot --headless --script scripts/legal/test_copyright_m127.gd 2>&1 || FAIL=1
           # Run M111 quality-utils test: Math/Validation/Format utils, constants,
           # enums, structs, patterns y components (SceneTree, sin GdUnit4).
-          godot --headless -s res://tests/test_m111_utils_headless.gd 2>&1 || true
+          godot --headless -s res://tests/test_m111_utils_headless.gd 2>&1 || FAIL=1
           # Run temple tests (M26): gating de 7 anillos + sellos + glifos con salida
           # bloqueada, checkpoints atomicos (tmp -> bak -> cp), telemetria de puzzles
           # y 6 suites de validacion (softlock/anti-exploit/voxel/accesibilidad/
@@ -275,7 +275,7 @@ jobs:
           # Cableado junto al fix de BUG-035: el autoload hacia `DirAccess.new()`
           # (clase abstracta en Godot 4) -> parse error -> el autoload no cargaba y
           # ensuciaba TODO run headless con 3 SCRIPT ERROR.
-          godot --headless --script scripts/backup/test_backup_m107.gd 2>&1 || true
+          godot --headless --script scripts/backup/test_backup_m107.gd 2>&1 || FAIL=1
           # Run UGC tests (M124): limites de almacenamiento por item y por cuota
           # (RF13), sanitizacion del UGC (4K -> 2K, sobre sin coords del save,
           # compresion ZSTD via FileAccess.open_compressed) y telemetria sin PII.
@@ -407,7 +407,7 @@ jobs:
           # M117 Build System (Log 946 agnes-3): test de build al gate duro.
           # Nota: --script bootea los autoloads del proyecto (58 leaks ObjectDB
           # preexistentes ajenos a M117); el exit code 0/1 sigue siendo el gate.
-          godot --headless --script scripts/build/test_build_m117.gd 2>&1 || true
+          godot --headless --script scripts/build/test_build_m117.gd 2>&1 || FAIL=1
           # M116 validador del instalador (V3 AppVersion sync, Log 946): evita
           # que .iss y project.godot se desalineen en el futuro.
           # iter. 3 (Log 1014): GATE DURO - se quito `|| true`. El test es

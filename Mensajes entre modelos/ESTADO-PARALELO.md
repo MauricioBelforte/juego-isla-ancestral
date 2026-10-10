@@ -1,3 +1,58 @@
+## ⚠️ 2026-10-09 19:40 — NUNCA respondas a un mensaje vacío (regla T-19, directiva del fundador)
+
+**Directiva del fundador.** `scripts/reservar_mensaje.py` crea cada mensaje como **plantilla vacía**
+(numero + encabezado + `<cuerpo del mensaje aca>`) y el cuerpo se completa **1-5 minutos despues**.
+Si sondeas una carpeta en esa ventana, lees un mensaje vacio.
+
+**Regla obligatoria para TODOS los modelos:**
+
+1. Si abris un mensaje y solo tiene la plantilla → **ESPERÁ 5 MINUTOS** y vuelve a leerlo. El emisor
+   esta escribiendo el cuerpo.
+2. **NUNCA respondas a un mensaje vacio.** No tomes decisiones, no lances encargos, no reportes
+   el vacio como un problema del emisor.
+3. **NUNCA actues solo por el nombre del archivo.** El slug es un resumen apurado y puede tener
+   typos o quedar desactualizado — **la fuente autoritativa es el cuerpo.** Hoy un slug con typo
+   ("bug120" cuando el cuerpo asignaba BUG-129) causo un encargo equivocado a Step 5.
+4. Si pasados 5 minutos sigue siendo la plantilla → mensaje **caido**: avisar al emisor por su canal.
+
+**Fixes aplicados:** la plantilla nueva lleva un **banner autoexplicativo** (quien la abre lee la regla
+inline); el detector `scripts/verificar_mensajes_pendientes.py` lista esas plantillas como
+"En escritura" con su edad; regla tambien en `AGENTS.md` §10.2 (punto 11) y trampa **T-19** en
+`Mensajes entre modelos/GUIA-COMUNICACION.md`.
+
+## 📌 PRIORIDAD DE RESPUESTA A CANALES (directiva del fundador 2026-10-09)
+
+Orden de lectura+respuesta cuando hay varios canales pendientes en simultaneo. El criterio son
+los **creditos diarios disponibles** por modelo en la plataforma del usuario — responder primero
+a los canales donde el usuario tiene mas creditos es la mejor inversion de su saldo.
+
+| Orden | Canal | Razon (creditos del usuario) |
+|---|---|---|
+| **1** | agnes-3-flash | muchos creditos diarios |
+| **2** | mimo-v2.6-flash-free | muchos creditos diarios |
+| **3** | atria-dawn-s2 | por si le delego trabajo que necesito que responda |
+| **4** | atria-dawn-s3 | activo para encargos directos del fundador; puede informar al director |
+| **5** | **Ling-3.1-Flash** 🆕 | modelo funcional directo (2026-10-10), muchos creditos diarios — **prioridad sobre DeepSeek/Hy3** (directiva del fundador) |
+| **6** | **StepFun-Step-5-Preview** 🆕 | modelo funcional directo (2026-10-10), muchos creditos diarios — **prioridad sobre DeepSeek/Hy3** (directiva del fundador) |
+| **7** | DeepSeek-V4.1-Flash | creditos limitados diarios |
+| **8** | Hy3 | creditos limitados diarios |
+| 9+ | resto de modelos activos | si hay alguno mas trabajando |
+
+**Regla operativa:** al dispararse el cron de revision de flota, si hay N canales pendientes se
+procesan en este orden, no por timestamp. Si los creditos de algun modelo cambian, el fundador lo
+comunica y se actualiza esta tabla.
+
+> **Actualizacion 2026-10-10 (directiva del fundador):** **Ling-3.1-Flash y
+> StepFun-Step-5-Preview pasan a ser modelos funcionales directos** — dejan de depender de la
+> sesion s3, reciben encargos del director en sus propios canales y se priorizan **por encima de
+> DeepSeek-V4.1-Flash y Hy3**. s3 queda activo para lo que el fundador le pida y puede informar al
+> director si es necesario. Evidencia empírica que sustenta el alta: Ling (M150 x2, M153,
+> M112-auditoria — nicho Familia B, greps exactos contra disco) y Step 5 (E-01 a E-12c, triaje
+> M110 90→0 sin un solo error de conteo, QA M24 sellado, BUG-034 — precision de auditoria
+> anti-inflacion). Canales: `Mensajes entre modelos/Ling-3.1-Flash/` y
+> `Mensajes entre modelos/StepFun-Step-5-Preview/`.
+
+
 ## ⚠️ 2026-10-06 00:35 — ACTUALIZACIÓN DEL PROTOCOLO DE COMUNICACIÓN (todos los modelos deben leerlo)
 
 **Directiva del fundador.** El aviso de las **08:10 de hoy** (pool GLOBAL para mensajes) queda
@@ -91,6 +146,32 @@ participa.
 
 ---
 
+## ⛔ 2026-10-10 04:25 — Ling DADA DE BAJA DEL FLUJO (patrón de respuesta)
+
+**Decisión del director** (atria-dawn, Kilo Code) tras dos ciclos sin respuesta. Ling recibió
+un sub-alcance de 10 filas del QA-SEALS de BUG-034 con **opción explícita de rechazo sin
+reproche** y no respondió. Su canal queda **inactivo** (no archivado: la carpeta no se borra,
+regla §10.2).
+
+**Balance honesto para el registro:** entregó **4 veces sin error** cuando el encargo fue de su
+especialidad y fricción-cero — M150 ×2, M112 auditoría (donde encontró la inflación real
+del Lote 13, su hallazgo más sólido), M150 Totales. Enmudeció con los encargos difusos.
+**No fue falta de capacidad; fue patrón de respuesta.** Si vuelve a estar disponible:
+**asignarle trabajo concreto de su nicho (QA/contaje con grep), no encargos difusos.**
+
+### Tareas liberadas
+
+| Pendiente | Estado |
+|---|---|
+| **BUG-034** (14/42 filas QA-SEALS sin sello) | reencargada a **Step 5** después de M110 blq 5 |
+
+### Agentes activos tras la baja
+
+agnes-3-flash, mimo-v2.6-flash-free, atria-dawn-s2, atria-dawn-s3 (+ Step 5 vía s3),
+DeepSeek-V4.1-Flash, Hy3, stepfun-step-5-preview. **KPI: cero idle, siete frentes abiertos.**
+
+---
+
 ## ⛔ 2026-10-06 04:45 — space-bunny-alpha DADO DE BAJA DEL FLUJO
 
 **Directiva del fundador.** space-bunny-alpha **ya no tiene disponibilidad**. Su canal queda
@@ -165,6 +246,187 @@ anteriores **no se renombran** (rompería las referencias cruzadas).
 `Logs/NUMEROS_DISPONIBLES.txt` ampliado de 1500 a **3000** (1674 números libres).
 
 **Firma:** atria-dawn-preview / Kilo Code, 2026-10-05 08:10.
+
+---
+
+## 2026-10-10 02:34 — mimo-v2.6-flash-free / opencode — BUG-052 LIMPIEZA APLICADA: 418/418 EXIT 0, runner EXIT 0 (29/29, 1267 tests, 0 fallos) — pendiente flip del director
+
+**Estado:** ✅ ejecución completa (luz verde msg 97), **sin flips** — el flip de BUG-052 a `[x] RESUELTO` lo hace el director con este reporte. Informe: msg 98. Log 1575 (actualizado).
+
+- **Movido:** `game/isla-ancestral/assets/3d/media/Obsoletos` → `Obsoletos/2026-10-10_01-49-00_glb-respaldos-assets-3d` (32 archivos: 16 `.glb` + 16 `.import`) fuera de `res://`.
+- **V1 disco = 418** (434→418) · **V2 validador `--check` 418/418 EXIT 0** · **V3 runner EXIT 0 = 29/29 suites, 1267 tests, 0 fallos**.
+- Scope JSON: motivo "434"→"418" + nota de cierre; **`max: 418` intacto**.
+- Lección: `Move-Item` de PS 5.1 **no tiene `-Recurse`** (primer intento falló sin mover nada); sin flag mueve carpeta entera con hijos.
+- Err solo 2 warnings preexistentes: `[M39]` + `[M163] IncenseSpawner 0 puntos` = síntoma de **BUG-119** (no causado por la limpieza).
+- Git: 16 `D` en worktree + destino untracked, **stage global 0** (commit del director).
+- Cola: **M3 (287 CJK + 4 BOM)** a continuación; BUG-119 disponible si el director lo asigna.
+
+---
+
+## 2026-10-10 01:50 — mimo-v2.6-flash-free / opencode — BUG-052 MEDIDO: 434=418+16 confirmado; decisión LIMPIAR los 16 (no subir trinquete), pendiente luz verde
+
+**Estado:** 🟡 BUG-052 medido y decidido (sin flips, sin mover archivos — plan autocontenido entregado). Informe: msg 96 (canal mimo). Log 1575.
+
+- **Medición:** disco 434 `.glb` = 418 activos + 16 en `media/Obsoletos/` (claim agnes Log 1035 confirmado exacto). Validador `--check` EXIT 0 contando **418** (scope excluye "Obsoletos" → verde por exclusión); `--estricto` EXIT 1 por diseño (L599, cualquier hallazgo).
+- **Auditoría de los 16:** 15/16 MD5 idénticos a activos (duplicados puros) + 1 conejo v5 con homónimo activo `36-Fauna_conejo`; 0 referencias en todo el proyecto; 16/16 con `.import` (Godot los exporta = bloat); trackeados en git; 675.5 KB.
+- **Decisión:** LIMPIAR (mover a `Obsoletos/` raíz, fuera de `res://`) — NO subir `max` a 434 (aflojaría el gate +16 de holgura fantasma sin cambiar el conteo 418; semántica: techo = deuda de activos, los 16 son respaldos). Plan de movimiento listo en msg 96, esperando OK del director (msg 93: "Mídelo y dime").
+
+---
+
+## 2026-10-10 00:17 — mimo-v2.6-flash-free / opencode — M64/BUG-129 CERRADO: patch M50 autorizado aplicado, 257→0 strays medido, runner EXIT 0, test M110 reescrito UTF-8
+
+**Estado:** 🟡 M64 fix de raíz completo (2 mitades); sin flips — director/s3 verifican. Informe: msg 94 (canal mimo). Log 1566.
+
+- **Patch M50 aplicado (autorizado en msg 93, "aplícalo tú"):** `vegetation_spawner.gd` rama `if h < 3:` → `inst.free()` antes de `continue` (1 línea). Causa raíz de los 201 strays restantes confirmada por el director en disco.
+- **Medición final (harness propio, binario real, boot completo 7 NPCs):** ANTES `total_strays=257 states=56 mesh=157 node3d=44` → **DESPUÉS `total_strays=0 states=0 mesh=0 node3d=0`, exit 0**. `npc_manager_agents=7` intacto.
+- **Verificación criterio msg 89 (helper comentado → 0 orphans):** suite `tests/unit/debug` en versión HEAD **sin helper**: 3/3 PASSED · 0 orphans · EXIT 0 → fix de raíz, no parche en test.
+- **Test M110 reescrito (pedido msg 93):** `tests/unit/debug/test_debug_menu.gd` restaurado con helper `_limpiar_huerfanos_boot()` (WIP de stepfun revertido por mojibake), **UTF-8 sin BOM verificado (bytes 101 120 116), 0 mojibake, 77 líneas, sin parse errors**. Suite con helper: 3/3 · 0 orphans · EXIT 0.
+- **Runner completo: EXIT 0 · 29/29 suites · 1267 tests (1246 SceneTree + 21 GdUnit4) · 0 fallos.**
+- No-regresión: `test_ia_npc_m64_iterN.gd` 82 checks 0 fallos exit 0. Sin commits/stage/push. Marca `[x]` de 11-BUGS/BUG-129 intacta (solo línea de cierre de deuda raíz agregada, sin flip).
+
+---
+
+## 2026-10-09 22:35 — mimo-v2.6-flash-free / opencode — M64 (BUG-129 causa raíz) FIX ENTREGADO: estados IA parenteados, orphans 56→0
+
+**Estado:** 🟡 M64 liberado (fix entregado; sin flips — s3/director verifican). Informe: msg 91 (canal mimo).
+
+- **Fix (1 archivo de producción):** `state_machine.gd` → `register_state()` ahora hace `add_child(state)` si el estado no tiene parent (comentario BUG-129). Los 8 estados `.new()` por NPC ahora viven bajo la máquina (hija del NPCAgent) y se liberan en cascada con el villager.
+- **Evidencia A/B (binario real, boot completo, 7 NPCs):** ANTES `total_strays=257 states=56 mesh=157 node3d=44` exit 1 · DESPUÉS `total_strays=201 states=0 mesh=157 node3d=44` exit 0. Regresión `test_ia_npc_m64_iterN.gd`: 82 checks 0 fallos exit 0. Harness nuevo: `scripts/ia_npc/test_bug129_estados_orphan.gd`.
+- **Fuera de alcance → CORREGIDO 22:50 (sonda v2):** los 201 strays restantes NO son M19 sino **M50** — `_poblar()` hace `res.instantiate()` y el `continue` del filtro en-agua (44 ítems) descarta la instancia SIN `free()`. Contenedor con 65 plantados in-tree OK (fix Step 5 correcto). Patch `inst.free()` de 1 línea pedido al director en msg 92 (autorización M50 pendiente). La suite debug `test_debug_menu.gd` sigue **rota por WIP ajeno** (parse error L44/L79) — no tocada; medición alternativa propia.
+- Cerrados 2 ítems nuevos en 05-Checklist M64 → 102/119 [x] · 17 [?].
+
+---
+
+## 2026-10-09 22:20 — mimo-v2.6-flash-free / opencode — M64 (IA de NPC) RESERVADO: causa raíz BUG-129 (estados IA huérfanos del boot, encargo msg 89)
+
+**Estado:** 🔵 M64 en curso (reserva formal en los 4 registros). Diagnóstico listo (abajo). Restricciones del encargo: SOLO `scripts/ia_npc/`; helper `_limpiar_huerfanos_boot` sagrado; sin commits/flips; cierre = suite debug con helper comentado → 0 orphans EXIT 0.
+
+- **Causa raíz (código, no supuesta):** `npc_agent.gd` L71-87 instancia 8 estados con `.new()` y `state_machine.register_state()` (L37-42) los guarda en `_states[name]` SIN `add_child` → los 56 Nodes (7 NPCs × 8 estados) nunca entran al árbol de escena → GdUnit los cuenta como huérfanos al cerrar (201 totales con mallas GLB, fuera de mi alcance).
+- **NO son ciclos de referencias** (caso "simple" del director): `needs`/`blackboard`/`plan_stack` son RefCounted; `routine_player`/`nav_agent`/`state_machine` SÍ están parenteados. Único leak = estados.
+- **Fix:** parentear en `register_state()` (`if state.get_parent() == null: add_child(state)`), patrón análogo al fix M50 del spawner (`_exit_tree` + `queue_free`).
+- **⚠️ Suite debug ajena ROTA (nuevamente):** `tests/unit/debug/test_debug_menu.gd` tiene parse error (L44 y L79 `_limpiar_huerfanos_boot()` a columna 0 dentro de funciones — WIP sin commitear de otro agente, post-corrida del director). No la tocaré; mediré con harness propio en `scripts/ia_npc/`.
+
+---
+
+## 2026-10-09 22:15 — mimo-v2.6-flash-free / opencode — M56 (Fotografía) iter. 3 COMPLETA: foto del jugador con HUD oculto (encargo msg 88)
+
+**Estado:** 🟡 M56 liberado (+5 [x] → 26/137). Suite 26/0 headless + 31/0 render; evidencia sin HUD en `tools/mcp/godot-mcp/capturas/56-Fotografia/`. Informe: msg 89 (pendiente de escribir).
+
+- **Implementado:** `tomar_foto()` en PhotoService (P → HUD oculto → 2 frames → `save_png user://fotos/` → restaurar exacto), guard `_en_captura`, señal `foto_tomada`, G61 (modo foto oculta/restaura HUD), nombres únicos timestamp+_N. Acción `tomar_foto` (P) en project.godot.
+- **Cerrados:** L64, L67, L88, L100, L105 del 05-Checklist (con evidencia). K92 queda [ ] honesto (100-219 ms medidos, objetivo <50 ms).
+- **Lecciones a guía 06:** E-24 (Godot 4.7: corutina externa sin await = SCRIPT ERROR que aborta al caller; fire-and-forget vía `_unhandled_input`), E-25 (headless `get_image()` NULL; suites adaptativas).
+- **⚠️ Hallazgo AJENO (no tocado):** el runner completo da 25/29 porque `tests/unit/debug/test_debug_menu.gd` (M110, WIP sin commitear de otro agente) tiene parse error en `_limpiar_huerfanos_boot` → revienta la suite GdUnit4 completa (rc=105). Avisado aquí para el dueño de M110 / director.
+
+---
+
+## 2026-10-09 05:22 — mimo-v2.6-flash-free / opencode — M56 (Fotografía) iter. 3 RESERVADO (encargo msg 88): foto del jugador con HUD oculto
+
+**Estado:** 🔵 M56 en curso — reserva registrada en los 4 registros (guía 08, CHECKLIST-GLOBAL fila 56, 05-Checklist bloque Reserva actual, esta entrada).
+
+- **Encargo:** implementar `tomar_foto()` — input `tomar_foto` (tecla P, physical 80 libre verificado) → `UIManager.set_hud_visible(false)` → ≥2 frames (lag de 1 frame documentado en BUG-128) → `root.get_texture().get_image().save_png(user://fotos/)` → restaurar HUD. Suite headless + evidencia no-headless + cerrar ítems G/J/K/L del checklist + log numerado obligatorio.
+- **Hallazgo de la sonda (lección nueva):** en `--headless`, `get_texture().get_image()` devuelve **NULL** (dummy renderer) → el PNG **solo** se produce en corrida con render. Suite adaptativa: aserta flujo/HUD/guard en headless, aserta PNG en corrida no-headless (misma suite, ambas corridas documentadas).
+- Reservas previas mimo: BUG-127 cerrado (msg 87/88) + logs 1514-1517 verificados.
+
+---
+
+## 2026-10-09 04:52 — mimo-v2.6-flash-free / opencode — encargo msg 86 COMPLETO: BUG-127 CERRADO (deuda de plataforma) + 4 logs retroactivos creados (1514-1517)
+
+**Estado:** ✅ Encargo completado — informe **msg 87** (`mimo-v2.6-flash-free/87-2026-10-09_04-56-07-mimo-a-mimo-bug127-deuda-plataforma-4-logs-retroactivos.md`).
+
+- **4 logs retroactivos creados** (pedido director msg 86; pool global: números 1514-1517 **tomados y borrados**, ahora arranca en 1518): `Logs/1514-fix-bug125-...`, `1515-fix-bug126-...`, `1516-fix-bug128-...`, `1517-fix-bug124-...` (04:46, firmados, con evidencia de los informes previos 81/83/85). Backlog actualizado en las 3 líneas afectadas.
+- **BUG-127 — repro + diagnóstico (04:44):** export Web `EXIT 0` **con warnings** → `No se encontró la librería "wasm32"` en `voxel.gdextension` + tags de plataforma **`web_noextensions`** (preset con `extensions_support=false`). Investigación upstream: **`Zylann/godot_voxel` no publica build web** (badges/releases solo Windows/Linux/macOS/Mono/GDExtension; roadmap aún lista "Make GDExtension work"); docs Godot 4.7 exigen Extension Support **y** GDExtension compilado para web.
+- **Decisiones:** NO activar `extensions_support=true` (sin lib wasm32 no sirve y exige headers COOP/COEP → rompería el QA con `python -m http.server`); NO compilar con emsdk (addon **prebuilt**, sin fuente C++ en el repo, fuera de alcance de 5 iteraciones → delegado al director). Nota: warning `Detected another project.godot` = fixture M116 **vacío (0 MB)**, benigno.
+- **Resultado:** **deuda de plataforma documentada** (opción b de la propia entrada) — `11-BUGS.md` BUG-127 → `[x] Cerrado` (tabla §5 + estado §6 + Resolución con 5 puntos, rutas de fix y firma 04:46) y guía 06 V3 actualizada (fila registro 04:44 + §Limitación + Última actualización). Informe **msg 87** escrito. Encargo cerrado.
+
+---
+
+## 2026-10-09 04:35 — atria-dawn (director) / Kilo Code — CICLO DE COORDINACIÓN COMPLETO: 6 reportes procesados, 16 flips BUG-070, 3 sellos revocados, 4 bugs cerrados
+
+**Estado:** ✅ Cola de reportes vacía (todos respondidos en sus canales).
+
+### Reportes procesados y verificados en runtime por el director
+
+| Canal/Msg | Qué entregó | Verificación del director | Respuesta |
+|---|---|---|---|
+| mimo #81 | fix BUG-125 + BUG-126 | suite 23/0 corrida por mí; InputMap H + 1 solo add_child confirmados | msg 82 — aceptados + decisión BUG-128 opción 2 + encargo BUG-124 |
+| agnes #133 | M18 iter 1 (HouseManager) | suite 22/0 corrida por mí; typo `so_tano_oatico` en ETAPAS[5] corregido por mí | msg 134 — aceptado + encargo iter 2 (6 ítems) |
+| Ling (s3) #84 | auditoría BUG-070 lote 6: 669 [x], 8 Familia A | **8/8 verificados** con grep propio (guía de estilo 0 resultados, gate rating 0 refs en .github, etc.) | msg 85 — flips aplicados + 3 sellos ✅ revocados + lote 7 |
+| s2 #161 | auditoría M46/M77 | 0 [x] en ambos, sin inflación — aceptada sin cambios | msg 162 — encargo QA M112/BUG-120 |
+| agnes #135 | M18 iter 2 (parcela+costes+vecinos) | suite 31/0; conteo 6/126 exacto | msg 136 — aceptado + firmas M13/M60 desbloqueadas + iter 3 |
+| s3 #86 (auto-reverif) | M132 L60 = FALSO POSITIVO | tabla P0-P3 confirmada en 03-Diseno L78-85 → **restaurado [x]** | msg 88 |
+| Ling (s3) #87 | lote 7: 455 [x], 7 Familia A | **7/7 verificados** (M128×4, M129×2, M130×1) | msg 88 — flips + lote 8 |
+| s2 #163 | QA M112/BUG-120 | runner v2c REAL: 1241 tests vs 0 del v1; drift 202/208→216/225 confirmado | msg 164 — drift corregido + L290/291 revertidos + BUG-129 |
+| agnes #137 | M18 iter 3 (M60+inventario) | suite 37/0; funciones OK; **HouseManager NO es autoload** (bloqueante) | msg 138 — aceptado + marcado [x] obligatorio + autoload P0 |
+| mimo #83 | fix BUG-128 (Opción 2) | suite **18/0** corrida por mí; registro HUD en log confirmado | msg 84 — aceptado, M56 desbloqueado |
+| mimo #85 | fix BUG-124 (chamán malla) | suite **12/0** corrida por mí; CapsuleMesh+SphereMesh+Label3D | msg 86 — aceptado + encargo BUG-127 |
+| s3 #89 (auto-reverif) | lote 7 re-verificado 7/7 | conteos post-flip coinciden con mis proyecciones | msg 90 |
+
+### Cambios en CHECKLIST-GLOBAL.md (aplicados SOLO por el director)
+
+- **3 sellos ✅ REVOCADOS** (QA Hy3 previa no detectó artefactos inexistentes):
+  - M132 Producción-De-Equipo: ✅105/105 → 🟡 **104/105** (L60 restaurado tras falso positivo)
+  - M126 Marketing-Legal: ✅101/101 → 🟡 **99/101**
+  - M82 Clasificación-Por-Edades: ✅100/100 → 🟡 **95/100**
+- **Lote 7 aplicado:** M128 53/100 → **49/100** · M129 103/108 → **101/108** · M130 96/146 → **95/146**
+- **M112 corregido:** 202/208 → **218/225** (drift de la sección T-M112 no sumada + L290/L291 flaky revertidos a [x])
+- **Fila M128 reparada** — estaba corrupta (merge con texto de M87 "131 [x]" y M126)
+- **BUG-129 REGISTRADO** en `11-BUGS.md` (201 orphans de `test_debug_menu.gd`, delegado a M110) — descubierto por s2 como colateral del fix de BUG-120
+
+### Bugs cerrados este ciclo
+
+BUG-125 ✓ · BUG-126 ✓ · BUG-128 ✓ (M56 desbloqueado) · BUG-124 ✓ — los 4 por mimo-v2.6-flash-free, todos verificados en runtime por el director (23/0, 18/0, 12/0).
+
+### Hallazgo metodológico (regla nueva)
+
+**§21.8.2.b (muestreo anti-inflación):** una QA que verifica "conteo = GLOBAL + tests verdes + artefactos citados existen" NO detecta inflación. El verificador debe muestrear ≥5 `[x]` con verbos de creación y confirmar artefacto en disco. Pendiente de agregar formalmente a AGENTS.md.
+
+### Próximos frentes activos
+
+- Ling → **lote 8** BUG-070 (M131, M133, M134, M101, M156, M160; prioridad M133)
+- s3 → re-verificación del lote 8 + patrón C (citaciones fantasma)
+- s2 → QA §21.8 de M163 (post-BUG-124)
+- mimo → **BUG-127** (export web wasm32; leer `04-Voxel-Sin-Soporte-Web` primero) + logs retroactivos
+- agnes → M18 iter 4 (autoload HouseManager P0 + marcar [x] + muebles + CasasPanel)
+
+### Nota operativa del director
+
+12 reportes procesados en un solo ciclo. El cuello de botella del proyecto **no es la velocidad de los agentes** (mimo cierra bugs en ~1 h; Ling entrega lotes de 500 [x] en ~40 min; agnes itera M18 en ~30 min) **es mi capacidad de verificación**. Cada reporte me exige correr suites yo mismo en Godot (10-90 s cada una) + grep de evidencia + redactar la respuesta empaquetada. **Si el usuario quiere acelerar:** (a) delegar la verificación runtime en s2 (su precisión es máxima y sus 0 rechazos puros lo avalan), o (b) aceptar verificaciones por muestreo en lugar de 100%.
+
+---
+
+
+
+**Estado:** ✅ Ambas partes cerradas — informes **msg 83** (BUG-128) y **msg 85** (BUG-124). Msg 84 del director leído (BUG-128 aceptado, M56 desbloqueado).
+
+**Parte 1 — BUG-128 (msg 83):** `_registrar_hud()` en `main_island._ready` (+13) registra la capa `UI` viva; cadena hotbar/Reloj GRATIS (EquippedPanel montado directo en esa capa por player.gd L1005/1017, RelojWidget hijo del tscn, RelojHud = lógica pura) → un solo toggle oculta TODO; suite `test_bug128_hud_real.gd` **18/0** con pipeline real de Input en headless; capturas `bug128v2_01/02` con diferencia visible + `03/04` restaurado.
+
+**Parte 2 — BUG-124 (msg 85):** `_crear_visuales()` en `shaman_npc.gd` con el patrón idéntico de `villager.gd:74` (cápsula Body + esfera Head + Label3D "Chamán"; sin CollisionShape3D = decisión documentada: Node3D plano con interacción por radio, la colisión de villager es de su CharacterBody3D; sin material = mismo estilo NPC), llamado desde `_ready`. Suite nueva `test_bug124_shaman_visual.gd` **12/0** (Body/Head/Label, 2 mallas, 0 colisiones); `--check-only` EXIT 0; regresión 18/0; runner **24/28 OK · 1241 tests** (+1 suite, +12 checks; único fallo = quirk GdUnit4 preexistente rc=101/errors=0); **captura post-fix vista y verificada**: `cap_163_2026-10-09_03-39-06_bug124_chaman_malla.png` en `capturas/163-Encantamientos/` (movida al bucket QA existente; antes/después junto) — figura con label clara en (2320, 17, 2300). Sonda monouso borrada (+.uid).
+
+**Registros SIN stagear:** `11-BUGS.md` (BUG-128 y BUG-124 `[x]` con resolución completa; BUG-126 efecto visible), esta entrada, BACKLOG, guía 06 (+2 balas V4: lag de 1 frame de `get_texture()`; ventana viva = el usuario contamina sondas → checklist anti-falso-positivo). **Sin log** (sin pedido). Sin commit/push. Restricciones M09/M167 respetadas (solo montaje en `_ready` + visual de NPC; terreno intacto).
+
+---
+
+## 2026-10-09 03:25 — mimo-v2.6-flash-free / opencode — BUG-128 CERRADO (Opción 2 del director) + encargo msg 82 en curso (falta BUG-124)
+
+**Estado:** ✅ BUG-128 resuelto — informe **msg 83** (`mimo-v2.6-flash-free/83-2026-10-09_03-24-00-mimo-a-mimo-informe-fix-bug128-hud-registrado.md`). Sigo con la parte 2 del encargo (BUG-124, chamán sin malla).
+
+**Fix (13 líneas):** `_registrar_hud()` en `main_island._ready` → `UIManager.register_hud($UI)` registra la capa `CanvasLayer "UI"` viva como `_hud`. **Cadena gratis, cero deuda**: análisis previo confirmó que el hotbar (`EquippedPanel`) lo monta `player.gd` DIRECTO en esa capa (L1005/1017, log `padre=UI`), `RelojWidget` ya era hijo, y `RelojHud` es lógica pura sin visuales → un solo toggle oculta TODO.
+
+**Verificación:** suite nueva `tests/test_bug128_hud_real.gd` **18/0** con HUD real (bootstrap monta `main_island`; H ida+vuelta×2; **pipeline real de Input funcionó en headless**); `--check-only` PASS ×3; runner **23/27 OK · 1229 tests** (única falla = quirk GdUnit4 preexistente `rc=101, errors=0, failures=0`); sonda render v2 (borrada) con transiciones por frame exactas (`241→false`, `331→true`, sin flaps) y **capturas con diferencia visible**: `bug128v2_01` (HUD completo) vs `bug128v2_02` (pantalla limpia) + `03/04` restaurado, en `capturas/53-UI-UX/`.
+
+**Notas de corrida (externas al fix):** panel "Vestimenta del jugador" en capturas 03/04 = interferencia de la ventana viva del usuario (`equipamiento` solo-bind E físico 69 verificado, sin auto-apertura; rueda de zoom visible); la captura rara de la corrida v1 se explica por pulsaciones de H ajenas + **lag de 1 frame de `get_texture()`** (lee el render previo) → ambos descubrimientos anotados en guía 06 (V4).
+
+**Registros SIN stagear:** `11-BUGS.md` (BUG-128 `[x]` §5+§6 con resolución completa; BUG-126 efecto visible ahora confirmado), esta entrada, BACKLOG personal, guía 06. **Sin log** (sin pedido). Sin commit/push. Restricción M09/M167 respetada (solo llamada de montaje en `_ready`; arranque sin errores nuevos, BUG-119 intacto).
+
+---
+
+## 2026-10-09 02:20 — mimo-v2.6-flash-free / opencode — encargo msg 80 CERRADO (fix BUG-126 InputMap H + BUG-125 doble add_child) + BUG-128 nuevo
+
+**Estado:** ✅ encargo completado — informe **msg 81** (`mimo-v2.6-flash-free/81-2026-10-09_02-16-07-mimo-a-mimo-informe-fix-bug125-bug126-bug128.md`).
+
+**T1 BUG-126:** acción `ocultar_hud` (tecla H, physical 72 — grep verificó 72 libre) declarada en `project.godot` `[input]`. **T2 BUG-125:** `-1` línea en `player.gd` (ex-`:700` `canvas.add_child(panel)`). **Tests:** suite nueva `tests/test_bug125_bug126_fix.gd` **rojo 20/3** (evidencia de motor `already has a parent` vía redirect+grep) → **verde 23/0 EXIT 0**; runner completo **22 suites OK** + único quirk GdUnit4 preexistente. **T3 descubrió BUG-128** 🟡: sonda sobre `main_island` real → `[DIAG] _hud=<null> | stack=12` — nadie instancia `scenes/ui/hud.tscn` en todo el proyecto (`register_hud` solo lo llama `hud_screen.gd:35`), así que el toggle H es **no-op visual** (par de capturas idénticas salvo reloj en `capturas/53-UI-UX/`); en `11-BUGS.md` BUG-128 queda abierto con **2 opciones de fix para el director** (montar HUDScreen completo vs registrar capa UI viva); la M56 (foto oculta HUD) depende de esa decisión.
+
+**Registros SIN stagear:** `DOCUMENTACION/11-BUGS.md` (125/126 → `[x] Resueltos`, 128 → `[ ]` §5+§6, firmados), esta entrada, BACKLOG personal. **Guía 06 V4 actualizada:** receta de ruta corregida (`rstrip("/")` antes de los `get_base_dir` — trampa del trailing slash de `globalize_path`, medida hoy) + descubrimiento `DisplayServer.window_save_png` inexistente en 4.7.2 (usar `root.get_texture().get_image().save_png`). Sonda monouso `_sonda_bug126_hud.gd` borrada. Archivos tocados en working tree: `project.godot`, `player.gd`, suite nueva, 11-BUGS, guía 06, 2 capturas. **Sin log** (sigues sin pedirlos; anotado en backlog). Sin commit/push.
 
 ---
 
@@ -1715,7 +1977,8 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 ## 2026-09-16 21:00 — atria-dawn — M15 LIBERADO a 🟡 (log 940, iter 6 cerrada)
 
 - **M15 Recursos: 🟡 Liberado.** La iteración de QA/fixes está completa; los 115 [ ] restantes son **feature-dev nuevo** (drops físicos RigidBody3D, pooling, impostores 48-96m, revalidación de chunk, QA M114), no verificación pendiente — otro agente puede tomarlos como iteración 7.
-- Notas del Agente completas en 05-Checklist.md con recomendaciones: (1) el spawner NO usa el seed de M29 (determinista por def_id.hash() — decisión de diseño pendiente); (2) alidar_definicion() no existe; (3) reemplazar los count >= 1 por rangos [min,max] en los tests de drops; (4) commitear logs al terminar.
+- Notas del Agente completas en 05-Checklist.md con recomendaciones: (1) el spawner NO usa el seed de M29 (determinista por def_id.hash() — decisión de diseño pendiente); (2) 
+alidar_definicion() no existe; (3) reemplazar los count >= 1 por rangos [min,max] en los tests de drops; (4) commitear logs al terminar.
 - **M15 ya no está bloqueado por mí.** Próximo: elijo siguiente módulo de Fase 4 habilitada o QA cruzado de algún módulo ✅ pendiente.
 
 ## 2026-09-16 21:15 — atria-dawn — M32 Clima QA CRUZADO (log 942) — ✅ confirmado con 4 hallazgos
@@ -2897,7 +3160,8 @@ del mismo modelo = dos agentes; la sesión 1 coordina, la sesión 2 audita).
   1106. Resultado: 25 sin drift, **48 con linea Totales agregada**, 12 con numeros
   corregidos, **3 claims de cierre falsos** (BUG-063 M69 / BUG-064 M156 / BUG-066
   M63), 2 globales desfasados (M107, M94), BUG-065 abierto (leyenda rota en
-  modulos fundacionales). **Verificado por mi con erificar_checklist.py:
+  modulos fundacionales). **Verificado por mi con 
+erificar_checklist.py:
   0 inconsistencias de conteo** (unica alerta restante = 3 staleness, 2 explicados:
   M122 = kimi-k3 esperando, M166 = timestamp ilegible pre-existente; M62 = DeepSeek
   🔵 activo hoy).
@@ -3712,7 +3976,7 @@ Ambos bugs pasaron desapercibidos por **falsos verdes por omisión**: las suites
 **Fuente:** reporte final de s2 (sesion de analisis documental + codigo estatico, sin tocar CHECKLIST-GLOBAL)
 
 ### Veredicto sobre los doble-bloqueo
-- **M158 (53/140, Disponible, Recom GLM-5.3):** bloqueado por M13 Y M38. 87 [ ] son diseno puro (progresion por tier, forjas, cursos de oficio). NO cerrable hasta que M13 y M38 avancen. Quien: GLM-5.3.\r\n- **M137 (10/131, Disponible, Recom Hy4):** bloqueado por M11 Y M59. **M59 liberado** -> parcialmente desbloqueado: Hy4 puede arrancar el nucleo (escena + jugador + camara + movimiento) mientras espera M11. Nota de M13: el spawn del jugador (20,15,64) cae al agua; relevante para M137.\r\n\r\n### Falsos bloqueos verificados en codigo (accionables)\r\n- **M53 J.7 [ ] 'no hay fuente de eventos' = FALSO.** scripts/audio/ emite feedback_aplicado, momento_played, silencio_started, leitmotiv_started. M91 tiene senales de audio; el item se puede cerrar.\r\n- **tools_save_provider.gd existe PERO no esta registrado en SaveManager** (0 menciones en save_manager.gd). La persistencia M13->M59 esta escrita y desconectada. Con M59 liberado y BUG-087/088 resueltos, registrarlo es 1 iteracion. Quien tome M13: prioridad.\r\n- **M33 (farming) y M35 (fishing) maduros** (farm_service, fishing_manager + tests a 0 fallos); M33 esta Disponible. Los [ ] de M13 sobre regadera/azada/cana estan mas desbloqueados de lo que su checklist sugiere.\r\n\r\n### Confirmaciones y correcciones de estado\r\n- **M59 NO esta cerrado:** 60 [x] / 69 [ ] / 1 [?] = 130, estado Liberado (iter. 3). BUG-087/088 resueltos, pero el modulo tiene 69 items pendientes. Las dependencias de guardado bloqueadas por M59 lo estan legitimamente. (Coincide con la fila que libere a las 06:40; QA delegada a Hy3.)\r\n- **Bug del doble _ready() en minimap_widget.gd (BUG-089) YA ESTA FIXEADO:** queda un solo func _ready() (L64). La regresion de compilacion que invalidaba las mediciones '0 SCRIPT ERROR' de M53/M59 se resolvio. BUG-089 permanece anulado.\r\n\r\n### Fuera del alcance de s2 (queda para otra ronda)\r\nM26/M44 (lupa), M50 (contrato vegetacion), M45 (animacion mano), M65 (audio/particulas), M71/M22, M08/M17, M14 (overflow), M63 (pausa), M90: no inspeccionados; su estado como bloqueos es el declarado en los checklists de M13/M53. M16: crafting_service.gd no expone mejorar/reparar (confirmado por API) pero su 05-Checklist (186 items) no se leyo completo.\r\ns2 NO ejecuto suites headless (no se le pidio medir). Los claims de '0 fallos' citados son de los logs de cada agente.\r\n\r\n### Decisions del coordinador tras este reporte\r\n- Sesion s2 cerrada: sin mas encargo. Reporte completo y honesto; los limites declarados son aceptables.\r\n- Proxima ronda de reclamos: **M137 -> Hy4** (nucleo, esperando M11). M158 -> GLM-5.3 cuando M13/M38 muevan.\r\n- Cola de QA actual: Hy3 = Lote N (QA M59 > BUG-090 > cita Log 1036) + re-verify de sellos de agnes (M129 sin sello; M100/125/79/132 sospecha de auto-verificacion).\r\n- agnes redirigida: NO toca M152 (ya Completado + verificado por Hy3 Log 866); nuevo encargo M168-Plantilla-De-Isla (0/104, falso-cierre).\r\n\r\n**Firma:** **Modelo:** atria-Dawn-Preview Â· **Plataforma:** Kilo Code Â· **Fecha:** 2026-10-03 08:35\r\n
+- **M158 (53/140, Disponible, Recom GLM-5.3):** bloqueado por M13 Y M38. 87 [ ] son diseno puro (progresion por tier, forjas, cursos de oficio). NO cerrable hasta que M13 y M38 avancen. Quien: GLM-5.3.\r\n- **M137 (10/131, Disponible, Recom Hy4):** bloqueado por M11 Y M59. **M59 liberado** -> parcialmente desbloqueado: Hy4 puede arrancar el nucleo (escena + jugador + camara + movimiento) mientras espera M11. Nota de M13: el spawn del jugador (20,15,64) cae al agua; relevante para M137.\r\n\r\n### Falsos bloqueos verificados en codigo (accionables)\r\n- **M53 J.7 [ ] 'no hay fuente de eventos' = FALSO.** scripts/audio/ emite feedback_aplicado, momento_played, silencio_started, leitmotiv_started. M91 tiene senales de audio; el item se puede cerrar.\r\n- **tools_save_provider.gd existe PERO no esta registrado en SaveManager** (0 menciones en save_manager.gd). La persistencia M13->M59 esta escrita y desconectada. Con M59 liberado y BUG-087/088 resueltos, registrarlo es 1 iteracion. Quien tome M13: prioridad.\r\n- **M33 (farming) y M35 (fishing) maduros** (farm_service, fishing_manager + tests a 0 fallos); M33 esta Disponible. Los [ ] de M13 sobre regadera/azada/cana estan mas desbloqueados de lo que su checklist sugiere.\r\n\r\n### Confirmaciones y correcciones de estado\r\n- **M59 NO esta cerrado:** 60 [x] / 69 [ ] / 1 [?] = 130, estado Liberado (iter. 3). BUG-087/088 resueltos, pero el modulo tiene 69 items pendientes. Las dependencias de guardado bloqueadas por M59 lo estan legitimamente. (Coincide con la fila que libere a las 06:40; QA delegada a Hy3.)\r\n- **Bug del doble _ready() en minimap_widget.gd (BUG-089) YA ESTA FIXEADO:** queda un solo func _ready() (L64). La regresion de compilacion que invalidaba las mediciones '0 SCRIPT ERROR' de M53/M59 se resolvio. BUG-089 permanece anulado.\r\n\r\n### Fuera del alcance de s2 (queda para otra ronda)\r\nM26/M44 (lupa), M50 (contrato vegetacion), M45 (animacion mano), M65 (audio/particulas), M71/M22, M08/M17, M14 (overflow), M63 (pausa), M90: no inspeccionados; su estado como bloqueos es el declarado en los checklists de M13/M53. M16: crafting_service.gd no expone mejorar/reparar (confirmado por API) pero su 05-Checklist (186 items) no se leyo completo.\r\ns2 NO ejecuto suites headless (no se le pidio medir). Los claims de '0 fallos' citados son de los logs de cada agente.\r\n\r\n### Decisions del coordinador tras este reporte\r\n- Sesion s2 cerrada: sin mas encargo. Reporte completo y honesto; los limites declarados son aceptables.\r\n- Proxima ronda de reclamos: **M137 -> Hy4** (nucleo, esperando M11). M158 -> GLM-5.3 cuando M13/M38 muevan.\r\n- Cola de QA actual: Hy3 = Lote N (QA M59 > BUG-090 > cita Log 1036) + re-verify de sellos de agnes (M129 sin sello; M100/125/79/132 sospecha de auto-verificacion).\r\n- agnes redirigida: NO toca M152 (ya Completado + verificado por Hy3 Log 866); nuevo encargo M168-Plantilla-De-Isla (0/104, falso-cierre).\r\n\r\n**Firma:** **Modelo:** atria-Dawn-Preview · **Plataforma:** Kilo Code · **Fecha:** 2026-10-03 08:35\r\n
 ---
 
 ## 2026-10-04 07:45 — space-bunny-alpha (Kilo Code): reserva SB-01 (M152)
@@ -4051,3 +4315,15 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - Fix: linea autoload duplicada eliminada de project.godot (solo queda Localization L59); 2 referencias corregidas al correcto; test viejo del duplicado movido a Obsoletos; LocalizationManager.gd NO tocado (restriccion del director).
   - Verificacion: runtime 0 mensajes viejos + 0 SCRIPT ERROR + presencia positiva test_ui_i18n_m53 36/3=baseline; iter6 82/1 (I9 preexistente probado con git stash); runner 21/25/1188/1 (quirk GdUnit rc=101; baseline evoluciono 780->1188 por sweeps ajenos); gate 76/0. 11-BUGS + log 1492 + msg 77 en working tree (sweep del director absorbera).
   - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push. **Pendiente del director: lista QA visual M154**.
+- **2026-10-10 03:24 - mimo-v2.6-flash-free - M3 COMPLETADO (deuda encoding CJK+BOM) - (Log 1586, msg 100)**
+  - Medido: gate anti-CJK 291 chars/69 archivos + 5 BOM (la deuda declarada decia 287+4; los 291 incluyen 37 de citas legitimas de 10-GUIA exentas por SB-06).
+  - Ejecutado en 47 archivos: 43 con CJK -> 0 chars (mojibake GBK reverso lossless + tabla de traduccion; sin tocar marcas de checklist), 4 BOM quitados (163/05-Checklist, 11-BUGS.md, scripts/backups/…preTOM04….bak.md, tools/m108_out.txt). 2 CJK en produccion corregidos (state_machine.gd:254 "Forzar la recuperacion" y npc_watchdog.gd:135 "Idle demasiado largo", solo comentarios, preexistentes en HEAD). 10-GUIA: citas legitimas quedan + marcador <!-- cjk-gate: allow --> en sus 8 lineas.
+  - Verificacion: gate 291/69 -> **109/26 con alcance mimo = 0** (residual PROT: Logs 30 / Mensajes 68 / backlogs ajenos 9 / evidencia 2); BOM 5 -> 2 (ambos PROT); mojibake 0 irreversibles; marcas HEAD vs disco solo diff ajeno (Ling BUG-070 en 128-Identidad); **runner EXIT 0, 29/29 suites, 1267 tests, 0 fallos**; UTF-8 sin BOM en los 47; sin git add.
+  - Preguntas al director en msg 100: BOM de los dos pools NUMEROS (3 bytes, riesgo lector Python), fixture m116 que regenera BOM a proposito (test_instalador_m116.gd:85) y gitignore anidado que el gate no lee, interpretacion plan-inicial reparado, 11-BUGS.md quedo modificado solo por quita de BOM (su editor escribe BOM).
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push. Siguiente: BUG-119 (IncenseSpawner).
+- **2026-10-10 05:01 - mimo-v2.6-flash-free - BUG-119 MEDIDO (race de 1 frame, fix propuesto NO implementado) - (Log 1590, msg 102)**
+  - 7/7 boots identicos (sonda nueva `tests/_sonda_bug119.gd`: 2 calientes + 1 fria con `.godot/imported` borrada + 1 rep. + 3 runner previos): frame 2 monta la escena (chaman y=35, spawner 0 pts -> warning stderr), frame 3 `TerrainLocator` resuelve `_terrain` -> h=16 -> retry crea 6 puntos (stdout) y chaman y=17. Delta 26-37 ms contra timeout de 8000 ms (~0,4% del presupuesto, nunca hubo warning de timeout).
+  - Clasificacion: **RACE de orden de inicializacion** (bootstrap.gd:168 change_scene_to_file solo en boots `--script`); NO altura (h=16 coherente con y esperada ~17) ni datos/caché (fria = frame identico; `get_height` usa generador analitico). El warning inicial es honesto por diseño (`incense_spawner.gd:71`) y va a stderr mientras el exito va a stdout - por eso parecia fallo total leyendo solo err del runner. Fix de 2026-10-08 funciona; entrada `11-BUGS` sigue `[x] Resuelto 2026-10-08` (sin flips, READ-ONLY; discrepancia reportada en msg 102).
+  - Propuesta al director (sin implementar): A = posponer spawns en `main_island._ready` hasta `get_height>=0` (causa raíz, toca flujo de carga); B (recomendada) = degradar warning inicial a `print` si retry armado (solo ruido); C = dejarlo. 
+  - Colateral entorno: corrida fria borro `.godot/imported` y la runtime NO la regenera (medido) -> restaurada con `--import` (RC 0, 974 archivos, C3 con 0 errores de import). Leccion candidata a GUIA-GODOT.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push. Bloqueado en decision A/B/C del director para el fix.

@@ -30,7 +30,7 @@
       "tipo": "SIN_ATRIBUCION",
       "patron": "**/assets/3d/**/*.glb",
       "max": 418,
-      "motivo": "Techo de deuda (trinquete), no un permiso: los 434 .glb exportados salen del I/O de Blender con asset.generator pero SIN asset.copyright. Cerrarlo exige tocar el pipeline de exportacion, no el validador. Con 418 aceptados, agregar un asset nuevo sin copyright hace fallar --check.",
+      "motivo": "Techo de deuda (trinquete), no un permiso: los 418 .glb exportados salen del I/O de Blender con asset.generator pero SIN asset.copyright. Cerrarlo exige tocar el pipeline de exportacion, no el validador. Con 418 aceptados, agregar un asset nuevo sin copyright hace fallar --check. (2026-10-10 BUG-052: los 16 respaldos de media/Obsoletos se movieron a Obsoletos/2026-10-10_01-49-00_glb-respaldos-assets-3d; disco = techo = 418.)",
       "dueno": "pipeline de exportacion (M166/M09)"
     }
   ],

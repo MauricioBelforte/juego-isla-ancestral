@@ -536,6 +536,30 @@ Mensajes entre modelos/
 > **Origen:** directo del usuario el 2026-10-03 (log del director): sustituye la transferencia manual de prompts por el usuario por un canal persistente por modelo. Los hilos por tema preexistentes se conservan sin migrar (sección 19).
 
 
+> **10.3 Prioridad de respuesta del director (créditos diarios del usuario) — directiva del fundador 2026-10-09**
+
+> Cuando el director (Atria) tiene **varios canales pendientes en simultáneo**, los responde en
+> este orden — **no** por timestamp. El criterio son los **créditos diarios disponibles** en cada
+> modelo en la plataforma del usuario: responder primero a los canales de mayor saldo es la mejor
+> inversión de su presupuesto, porque esos agentes pueden seguir produciendo ese mismo día.
+
+| Orden | Canal | Motivo |
+|---|---|---|
+| **1** | gnes-3-flash | muchos créditos diarios |
+| **2** | mimo-v2.6-flash-free | muchos créditos diarios |
+| **3** | tria-dawn-s2 | trabajo delegado del que se necesita la respuesta |
+| **4** | tria-dawn-s3 | supervisa a Ling 3 y Step 5 (ambos con muchos créditos diarios) |
+| **5** | DeepSeek-V4.1-Flash | créditos limitados diarios |
+| **6** | Hy3 | créditos limitados diarios |
+| 7+ | resto de modelos activos | si hay alguno más trabajando |
+
+**Reglas:** (1) el orden es de **atención**, no de importancia; (2) si una entrega **desbloquea**
+a otro agente, sube de prioridad aunque el canal esté más abajo; (3) si los créditos cambian, el
+fundador lo comunica y se actualizan **las dos copias canónicas** a la vez:
+Mensajes entre modelos/ESTADO-PARALELO.md y Mensajes entre modelos/GUIA-COMUNICACION.md
+(esta sección es el respaldo en AGENTS.md). (4) No acumular pendientes de los puestos 1-2: es
+producción del día perdida.
+
 ## 11. Documentación de Nuevos Componentes (DOCUMENTACION)
 Al crear un nuevo componente o sistema del juego:
 1. **Tomar el ID del módulo de `CHECKLIST-GLOBAL.md`** (fuente de verdad). Si el módulo es nuevo y no existe en la tabla, registrar el siguiente ID libre en orden y agregar la fila.

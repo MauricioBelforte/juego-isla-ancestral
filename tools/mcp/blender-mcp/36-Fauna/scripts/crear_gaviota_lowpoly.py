@@ -9,7 +9,7 @@
 #   contraido a la cola), CABEZA BLANCA redonda con PICO AMARILLO corto
 #   (la senal #1 de gaviota), ALAS GRIS PERLA larguisimas (1.6x el cuerpo)
 #   con PUNTAS NEGRAS (la senal #2, "wingtip" de gaviota adulta), cola
-#   corta con少许 feather, patas amarillas plegadas bajo el cuerpo
+#   corta con un poco de feather, patas amarillas plegadas bajo el cuerpo
 #   (pegadas al vientre, como planean las aves), ojos negros laterales.
 #
 # ANIMABLE EN GODOT (09 §8 / 07 §11 — pensado para VUELO):

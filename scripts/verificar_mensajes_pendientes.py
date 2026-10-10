@@ -115,9 +115,11 @@ def es_plantilla_vacia(path: Path) -> bool:
         return True
     # Marker secundario: cuerpo vacio + archivo chico. Un mensaje real que
     # cita el marker es sustancial (>= 600 bytes); la plantilla es diminuta.
+    # (2026-10-09: la plantilla ahora incluye un banner de ~600 bytes con la
+    # regla de los 5 minutos, por lo que el umbral sube a 1200.)
     if "<cuerpo del mensaje aca>" in contenido:
         try:
-            return path.stat().st_size < 600
+            return path.stat().st_size < 1200
         except OSError:
             return False
     return False
@@ -268,6 +270,31 @@ def main() -> int:
         else:
             print(f"  [ok] {d['canal']:<24} total={total:>3} ultimo=#{ultimo} "
                   f"-> {d['detalle']}")
+
+    # Mensajes "en escritura": plantillas reservadas hace menos de 5 minutos
+    # (regla T-19 de GUIA-COMUNICACION.md). No son pendientes: el emisor sigue
+    # escribiendo el cuerpo. Se listan para que el director sepa que existen y
+    # NO actue sobre el nombre del archivo.
+    en_escritura = []
+    import time
+    ahora = time.time()
+    for c in canales:
+        if c.name in temas or c.name in EXCLUDE_DIRS:
+            continue
+        for p in c.iterdir():
+            if not p.is_file() or p.suffix.lower() != ".md":
+                continue
+            if es_plantilla_vacia(p):
+                try:
+                    edad = ahora - p.stat().st_mtime
+                except OSError:
+                    continue
+                if edad < 300:
+                    en_escritura.append((c.name, p.name, int(edad)))
+    if en_escritura:
+        print(f"\n=== En escritura (regla T-19: esperar 5 min, no responder) ===")
+        for canal, nombre, edad in sorted(en_escritura):
+            print(f"  [..] {canal:<24} {nombre}  ({edad}s)")
 
     print(f"\n=== Resumen ===")
     print(f"Canales de agente: {len(canales) - len(temas)} | "
