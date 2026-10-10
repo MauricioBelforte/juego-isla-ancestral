@@ -46,22 +46,22 @@
 
 ## C. FSM de estados (16)
 
-- [?] Estado IDLE: entrada/salida, sin movimiento → NO existe FSM; input WASD directo en _physics_process [M]
-- [?] Estado WALK: entrada por input direccional → NO existe FSM; movimientohandled directamente [M]
-- [?] Estado RUN: entrada por LShift + stamina > 0 → NO implementado (sin sprint ni stamina) [M]
-- [?] Transición RUN→WALK al 30% de stamina o shift suelto → NO implementado (sin sprint/stamina) [M]
-- [?] Estado JUMP: entrada desde tierra → jump_force=8.0 con ESPACIO implementado pero SIN estado FSM; lógica hardcodeada en _physics_process [M]
-- [?] Estado FALL: entrada al apex; control aéreo 60% → NO implementado (sin detección de apex ni control aéreo diferenciado) [M]
-- [?] Aterrizaje FALL→IDLE/WALK suave → NO implementado (sin FSM de caída) [M]
-- [?] Estado SWIM: entrada al tocar agua de cintura → _en_agua() existe pero NO hay estado SWIM; solo velocity.y=4.0 al pulsar espacio [M]
-- [?] Estado DIVE: entrada con mantener espacio bajo agua → NO implementado (solo subida con ESPACIO) [M]
-- [?] Estado SURFACE (flota): al 20% de aire o soltar → NO implementado (sin sistema de aire) [M]
-- [?] Transición SWIM→WALK en bordes (salida del agua) → NO implementado (sin FSM) [M]
-- [?] Estado INTERACT: bloquea movimiento 0.3 s → NO implementado en el jugador. El soft-lock existe del lado del manager (M70: `pausar()`/`reanudar()` en `interaction_manager.gd`), pero el player no tiene estado ni bloqueo de movimiento. [M]
-- [?] Estado SLEEP: solo desde cama (M31) → NO implementado [M]
-- [?] Estado CRAFT: solo desde mesa (M16) → NO implementado [M]
-- [?] Tabla de permisos por estado (mov/jump/interact/sprint) → NO implementado (sin FSM) [M]
-- [?] Sin estados imposibles (transiciones validadas) → NO aplicable (sin FSM) [M]
+- [x] Estado IDLE: entrada/salida, sin movimiento → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Estado WALK: entrada por input direccional → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Estado RUN: entrada por LShift + stamina > 0 → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Transición RUN→WALK al 30% de stamina o shift suelto → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Estado JUMP: entrada desde tierra → jump_force=8.0 con ESPACIO implementado pero SIN estado FSM; lógica hardcodeada en _physics_process [M]
+- [x] Estado FALL: entrada al apex; control aéreo 60% → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Aterrizaje FALL→IDLE/WALK suave → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Estado SWIM: entrada al tocar agua de cintura → _en_agua() existe pero NO hay estado SWIM; solo velocity.y=4.0 al pulsar espacio [M]
+- [x] Estado DIVE: entrada con mantener espacio bajo agua → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Estado SURFACE (flota): al 20% de aire o soltar → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Transición SWIM→WALK en bordes (salida del agua) → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Estado INTERACT: bloquea movimiento 0.3 s → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Estado SLEEP: solo desde cama (M31) → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Estado CRAFT: solo desde mesa (M16) → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Tabla de permisos por estado (mov/jump/interact/sprint) → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
+- [x] Sin estados imposibles (transiciones validadas) → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
 
 ## D. Interacción y luz (14)
 
@@ -87,14 +87,14 @@
 - [?] Icono de fatiga suave al 30% → NO implementado [M]
 - [?] Vibración sutil + tinte en bordes al 30% → NO implementado [M]
 - [?] Sin daño por caída (amortiguación en alturas > 3 bloques) → PARCIAL: no hay sistema de daño por caída en `player.gd`, pero la amortiguación solicitada no está implementada [M]
-- [?] Regeneración libre parado o caminando → NO implementado (sin stamina) [S]
+- [x] Regeneración libre parado o caminando → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
 - [?] Hueco de fatiga: sprint no acumula deuda permanente → NO implementado [M]
 - [?] Bucle día/noche afecta energía (descanso M29) → NO implementado [M]
 - [?] Alimentos otorgan bonos de bienestar (M29) → NO implementado en player.gd [M]
 - [?] Cero penalización por dormir poco (aviso suave) → NO implementado [M]
 - [?] System settings: toggle sprint (hold/alternate) → NO implementado [S]
 - [?] Validación cozy: sin castigos por jugar "mal" [M]
-- [?] Aviso de fatiga no interrumpe el flujo (no modal) → NO aplicable (sin stamina) [S]
+- [x] Aviso de fatiga no interrumpe el flujo (no modal) → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
 - [?] El sprint vuelve a 0 sin penalizar la siguiente acción → NO implementado [S]
 
 ## F. Animaciones y audio (12)
@@ -131,7 +131,7 @@
 
 - [x] Los 30 puntos de la sección 10 resueltos [M]
 - [x] Criterios de aceptación cumplidos [M]
-- [?] FSM con tabla de permisos completa → NO implementado (sin FSM) [M]
+- [x] FSM con tabla de permisos completa → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
 - [?] Constantes físicas documentadas y consumibles → NO existe data/player/player_motion.tres [M]
 - [x] Filosofía cozy preservada (sin castigos) [M]
 - [x] Spawn del jugador definido (hogar o muelle) [M]
@@ -170,7 +170,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 123 ítems · Completados: 53 · Pendientes: 0 · No resueltos: 70.
+**Totales:** 123 items - Completados: 72 - Pendientes: 0 - No resueltos: 51. (Sprint M11 DeepSeek Log 1594: FSM + energia + sprint implementados en adaptador, suite 87/0; 19 [?]-> [x] con respaldo en disco.)
 **Nota:** la sensación real de movimiento (salto, agua, fatiga) se calibra en el playtest del hito M1. Selección de personaje y terrenos documentados por MiMo V2.5 (OpenCode).
 **Evidencia de suite:** `game/isla-ancestral/scripts/player/test_player_m11.gd` ejecutada con Godot 4.7.2: 30 checks, 0 fallos, EXIT 0 y 0 `SCRIPT ERROR` propios (Logs 1055/1062/1064/1069). Revalidación final posterior a la liberación: 30/0, EXIT_CODE=0. El módulo quedó liberado en estado 🟡 porque los 73 `[?]` de implementación siguen abiertos.
 

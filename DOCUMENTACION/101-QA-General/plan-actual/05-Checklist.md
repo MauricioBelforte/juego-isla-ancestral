@@ -251,7 +251,7 @@
 - [x] Validar que las reglas EA.1/EA.2 no contradicen el diseño de M114 [S]
 - [x] Validar que la firma y el formato del módulo cumplen AGENTS.md (sección 3 y 6) [S]
 - [x] Verificar que el checklist del módulo tiene 125+ ítems sin leyendas ni totales [S]
-- [x] Verificar codificación UTF-8 y saltos LF de los 10 archivos del módulo [S]
+- [x] Verificar codificación UTF-8 y saltos LF de los 19 archivos del módulo (5 docs + 7 plantillas + 5 sesiones de hito + sesión ficticia + sesión línea base) [S]
 - [x] Validar que el módulo no toca archivos fuera de su carpeta [S]
 - [x] Validar que la documentación no menciona Unity ni C# como stack del juego [S]
 - [x] Preparar recomendaciones y Notas del Agente para el implementador [S]
@@ -268,7 +268,7 @@
 **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-01
 ## Sesión QA #01 — Línea base (2026-09-01 23:05, deepseek-v4-flash-vision-exp)
 
-- [x] Sesión real de línea base ejecutada con la plantilla (sesiones/00-LINEA-BASE/sesion-01-2026-09-01.md): 12 ítems (5 [x] + 7 [?] con razón), smoke parcial, evidencia en 4 capturas + logs [M]
+- [x] Sesión real de línea base ejecutada con la plantilla (sesiones/00-LINEA-BASE/sesion-01-2026-09-01.md): 12 ítems (7 [x] + 5 [?] con razón; 8 [x] + 4 [?] con el addendum), smoke parcial, evidencia en 4 capturas + logs [M]
 - [x] Planta validada end-to-end (formato, IDs, bugs, conversión M112) [M]
 - [x] Bug real encontrado en la sesión: B-001 — NPC “atascado” en bucle infinito (state_machine watchdog, abierto, dueño M64/M19) — documentado para M102 [M]
 - [x] Hallazgo metodológico V4: input teclado por PostMessage (W funciona; mouse/F1 no) documentado en guia-para-agentes [S]

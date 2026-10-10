@@ -2849,6 +2849,17 @@ queda AUTORIZADO como mejora opcional de robustez, NO como correccion.
   NINGUN archivo de terreno M163/M167 ni `main_island.gd` tocado.
 - **Registro:** Log 1475, msg 73.
 
+**Opción B aplicada (mimo-v2.6-flash-free, opencode — 2026-10-10, msg 104):**
+- **Qué cambió:** flag `_aviso_inicial_diferido` en `incense_spawner.gd`; la señal falsa "0 puntos
+  creados" del intento sincrónico inicial pasa a `print()` (stdout); el warning de timeout de 8 s en
+  `_process()` sigue siendo `push_warning` (es el fracaso verdadero). `shaman_npc.gd` intacto.
+- **Condición cumplida:** sonda `_sonda_bug119.gd` RC 0, 0 SCRIPT ERROR, 0 "0 puntos creados" en
+  err; runner completo `run_tests.gd` **29/29 suites, 1267 tests, 0 fallos**; stderr con 0 líneas
+  M163 (solo el warning M39 preexistente y ajeno). Race medido igual: frame 2→3, chaman 35→17.
+- **Lección E-26 registrada** en `GUIA-GODOT/06-registro-errores.md`: borrar `.godot/imported/` sin
+  reimportar rompe las corridas posteriores; solución `godot --headless --import` antes de medir.
+- **Registro:** Log 1596, msg 104.
+
 **Evidencia:** logs TEMP/bug119/ (r1-r4, suites, sonda), Log 1434, msg 56.
 Logs TEMP/bug119/ post-fix: runB_postfix2.txt, runA_postfix.txt,
 test_incienso_postfix.txt, runner_bug119_fix2.txt, gate_bug119_fix.txt.

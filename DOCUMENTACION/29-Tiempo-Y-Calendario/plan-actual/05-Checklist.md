@@ -140,7 +140,7 @@
 - [x] Log de creación generado [S] *(auditoría iter 1 — Log 824: Logs 174/175 de ox-alpha registran la creación; Log 824 esta iteración)*
 - [x] Checked en README de DOCUMENTACION [S] *(auditoría iter 1 — Log 824: módulo listado en README de DOCUMENTACION como componente {ID}-Nombre)*
 
-**Totales:** 195 items - Completados: 190 - Pendientes: 3 - No resueltos: 2 (QA atria-dawn 2026-09-18, Log 984). El conteo anterior (104/104) era de antes de la reversion del 2026-09-14 y no se habia actualizado.
+**Totales:** 195 items - Completados: 189 - Pendientes: 3 - No resueltos: 3. (QA Claude-Haiku-5.5 2026-10-10: H123 degradado a [?] por 0 evidencia de tests M112.)
 
 > **⚠ DoD §21.6 INCUMPLIDA — MÓDULO REVERTIDO ✅→🟡 (atria-dawn-preview / Kilo Code,**
 > **2026-09-19, Log 1109):** el módulo figuraba ✅ Verificado en CHECKLIST-GLOBAL pero
@@ -251,7 +251,7 @@
 - [x] H120 Semilla de tiempo por partida [M] → usar_semilla_tiempo en config
 - [x] H121 Compatibilidad con guardado M59 (versionado) [M] → ISaveProvider en ambos
 - [x] H122 Sin estado global disperso (solo vía servicio) [M] → autoload TimeCalendar
-- [x] H123 Tests de ciclos (día→año) en M112 [M] → pendiente tests formales M112
+- [?] H123 Tests de ciclos (día→año) en M112 [M] → pendiente tests formales M112
 
 ### I. Delegación y cierre
 - [x] I127 Módulo marcado como delegable en CHECKLIST-GLOBAL [S]
