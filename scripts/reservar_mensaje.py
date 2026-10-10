@@ -62,6 +62,10 @@ def sanear_tema(tema):
     t = tema.strip().lower()
     t = re.sub(r"[^a-z0-9]+", "-", t)
     t = t.strip("-")
+    # Tope anti ruta-larga: Windows falla con open() si la ruta supera ~260 chars
+    # (detectado 2026-10-09 por atria-dawn-s3: un slug largo dejo el numero 139
+    # huerfano porque el archivo no se pudo crear). 60 chars es seguro.
+    t = t[:60].strip("-")
     if not t:
         t = "mensaje"
     return t
@@ -158,14 +162,15 @@ def main():
         print("ERROR: todos los numeros libres ya existen en la carpeta destino. Raro.")
         return 4
 
-    restantes = [l for l in libres if l != num and l not in consumidos]
-    open(POOL_CANAL, "w", encoding="utf-8", newline="\n").write("\n".join(restantes) + "\n")
-
-    nombre = "%s-%s-%s-a-%s-%s.md" % (num, fecha_archivo, emisor_slug, receptor_slug, tema)
-    ruta = os.path.join(carpeta, nombre)
-
     plantilla = (
         "# %s - <completar titulo aca>\n"
+        "\n"
+        "> **PLANTILLA RESERVADA - NO RESPONDER A ESTE ARCHIVO VACIO.**\n"
+        "> El emisor reservo el numero y **esta escribiendo el cuerpo** (tarda 1-5 minutos).\n"
+        "> Si al abrir este archivo solo ves esta plantilla: **ESPERA 5 MINUTOS** y vuelve a\n"
+        "> leerlo. **NUNCA actues solo por el nombre del archivo** (ya causo un encargo\n"
+        "> equivocado: el slug decia \"bug120\" y el contenido asignaba BUG-129).\n"
+        "> Si pasados 5 minutos sigue vacio, es un mensaje caido: avisar al emisor por su canal.\n"
         "\n"
         "**Modelo:** %s\n"
         "**Plataforma:** <completar>\n"
@@ -175,7 +180,24 @@ def main():
         "<cuerpo del mensaje aca>\n"
     ) % (num, emisor, fecha_interna, responde_modelo, ultimo)
 
-    open(ruta, "w", encoding="utf-8", newline="").write(plantilla)
+    nombre = "%s-%s-%s-a-%s-%s.md" % (num, fecha_archivo, emisor_slug, receptor_slug, tema)
+    ruta = os.path.join(carpeta, nombre)
+
+    # FIX anti-numero-huerfano (2026-10-09, atria-dawn-s3): crear el archivo ANTES de
+    # consumir el numero del pool. Si open(ruta) falla (ruta >260 chars, permisos, etc.),
+    # el numero NO se consume y el pool queda intacto. Antes el orden era inverso y un
+    # slug largo dejo el 139 huerfano (numero tomado, archivo nunca creado).
+    try:
+        with open(ruta, "w", encoding="utf-8", newline="") as fh:
+            fh.write(plantilla)
+    except OSError as exc:
+        print("ERROR: no se pudo crear el archivo: %s" % exc)
+        print("       el numero %s NO fue consumido del pool (rollback automatico)." % num)
+        return 5
+
+    # El archivo existe: recien ahora se consume el numero del pool.
+    restantes = [l for l in libres if l != num and l not in consumidos]
+    open(POOL_CANAL, "w", encoding="utf-8", newline="\n").write("\n".join(restantes) + "\n")
 
     print("OK reservado: %s" % num)
     print("archivo: %s" % os.path.relpath(ruta, RAIZ))
