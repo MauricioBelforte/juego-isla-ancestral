@@ -70,8 +70,8 @@
 - [x] Definir C:\Program Files\Isla Ancestral (requiere permisos) — iter. 2 (Log 877): disponible via PrivilegesRequiredOverridesAllowed=dialog (eleva el usuario)
 - [x] Definir C:\Users\Usuario\AppData\Local\Isla Ancestral (sin permisos) — iter. 2 (Log 877): es el DefaultDirName implementado
 - [x] Diseñar Inno Setup permite elegir directorio de instalación
-- [x] Diseñar validación de espacio en disco
-- [x] Diseñar validación de requisitos de sistema
+- [?] Diseñar validación de espacio en disco — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 66.**
+- [?] Diseñar validación de requisitos de sistema — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 67.**
 
 ### [S] Desinstalador
 - [x] Definir Inno Setup genera automáticamente desinstalador
@@ -136,7 +136,7 @@
 - [x] Diseñar conservación de datos del usuario
 
 ### [S] Validación de desinstalación
-- [x] Definir desinstalador elimina todos los archivos del juego
+- [?] Definir desinstalador elimina todos los archivos del juego — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 78.**
 - [x] Definir desinstalador elimina shortcuts
 - [x] Definir desinstalador elimina asociación de archivos
 - [x] Definir desinstalador elimina entradas de registro
@@ -161,9 +161,9 @@
 - [x] Definir actualización conserva savegames y configuración
 - [x] Definir actualización actualiza shortcuts y asociación de archivos
 - [x] Definir actualización actualiza entradas de registro
-- [x] Diseñar detección de versión instalada (registro de Windows)
-- [x] Diseñar actualización incremental (solo archivos modificados)
-- [x] Diseñar conservación de datos del usuario
+- [?] Diseñar detección de versión instalada (registro de Windows) — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 124.**
+- [?] Diseñar actualización incremental (solo archivos modificados) — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 125.**
+- [?] Diseñar conservación de datos del usuario — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 136.**
 - [x] Diseñar actualización de shortcuts y asociación de archivos
 
 ### [S] Validación de rollback
@@ -174,7 +174,7 @@
 - [x] Diseñar backup de versión anterior antes de actualizar
 - [x] Diseñar rollback automático si actualización falla
 - [x] Diseñar restauración de versión anterior
-- [x] Diseñar conservación de datos del usuario
+- [?] Diseñar conservación de datos del usuario — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 136.**
 
 ### [S] Script de Inno Setup
 - [x] Diseñar [Setup] con AppName, AppVersion, DefaultDirName, etc.
@@ -193,37 +193,37 @@
 - [x] Diseñar función InitializeSetup()
 - [x] Diseñar validación de Windows 10/11
 - [x] Diseñar validación de DirectX 11 compatible
-- [x] Diseñar validación de RAM (mínimo 8GB)
-- [x] Diseñar validación de espacio en disco (mínimo 5GB)
+- [?] Diseñar validación de RAM (mínimo 8GB) — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 156.**
+- [?] Diseñar validación de espacio en disco (mínimo 5GB) — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 157.**
 
 ### [S] Actualización incremental
 - [x] Diseñar función GetInstalledVersion()
 - [x] Diseñar función IsUpdate()
 - [x] Diseñar procedimiento CurStepChanged() — iter. 2 (Log 877): ssInstall (backup) y ssPostInstall (mensaje)
-- [x] Diseñar detección de versión instalada (registro de Windows)
-- [x] Diseñar actualización incremental (solo archivos modificados)
-- [x] Diseñar conservación de datos del usuario
-- [x] Diseñar actualización de shortcuts y asociación de archivos
+- [?] Diseñar detección de versión instalada (registro de Windows) — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 124.**
+- [?] Diseñar actualización incremental (solo archivos modificados) — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 125.**
+- [?] Diseñar conservación de datos del usuario — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 136.**
+- [?] Diseñar actualización de shortcuts y asociación de archivos — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 167.**
 
 ### [S] Reparación de instalación corrupta
 - [x] Diseñar función ValidateFileIntegrity()
 - [x] Diseñar procedimiento RepairInstallation()
-- [x] Diseñar validación de integridad de archivos
-- [x] Diseñar reinstalación de archivos corruptos
-- [x] Diseñar conservación de datos del usuario
+- [?] Diseñar validación de integridad de archivos — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 134.**
+- [?] Diseñar reinstalación de archivos corruptos — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 135.**
+- [?] Diseñar conservación de datos del usuario — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 136.**
 
 ### [S] Rollback a versión anterior
 - [x] Diseñar procedimiento BackupPreviousVersion()
 - [x] Diseñar procedimiento RollbackToPreviousVersion() — iter. 2 (Log 877): en rollback.iss
-- [x] Diseñar backup de versión anterior antes de actualizar
-- [x] Diseñar rollback automático si actualización falla
-- [x] Diseñar restauración de versión anterior
-- [x] Diseñar conservación de datos del usuario
+- [?] Diseñar backup de versión anterior antes de actualizar — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 174.**
+- [?] Diseñar rollback automático si actualización falla — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 175.**
+- [?] Diseñar restauración de versión anterior — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 176.**
+- [?] Diseñar conservación de datos del usuario — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 136.**
 
 ### [S] Code signing
 - [x] Diseñar script code_signing.bat
-- [x] Diseñar code signing del ejecutable de Godot export
-- [x] Diseñar code signing del instalador de Inno Setup
+- [?] Diseñar code signing del ejecutable de Godot export — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 114.**
+- [?] Diseñar code signing del instalador de Inno Setup — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 115.**
 - [x] Diseñar uso de signtool.exe (Windows SDK) — iter. 2 (Log 877): code_signing.bat con /fd SHA256 y /tr
 - [x] Diseñar timestamp del code signing
 
@@ -249,7 +249,7 @@
 - [x] Diseñar installer/rollback.iss
 - [x] Diseñar installer/code_signing.bat
 - [x] Diseñar scripts/build_installer.bat
-- [x] Diseñar icon.ico (segunda referencia) → agnes-2.5-flash 2026-09-14: duplicado de §S.1; misma spec documentada. Redundancia corregida en docs.
+- [?] Diseñar icon.ico (segunda referencia) → agnes-2.5-flash 2026-09-14: duplicado de §S.1; misma spec documentada. Redundancia corregida en docs. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 200): Patrón D — duplicado de la línea 238.**
 - [x] Diseñar license.txt — iter. 2 (Log 877): installer/license.txt (EULA)
 
 ### [S] Pruebas de instalación

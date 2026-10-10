@@ -86,7 +86,7 @@
 - [x] Definir exportador "Exportar a Mod" en editores de M109 [C]
 - [x] Definir CLI modchecker (validate) en CI [M]
 - [x] Definir reutilización de DataValidator con reglas de mod [M]
-- [x] Definir vista de previsualización del paquete → agnes-2.5-flash 2026-09-14: politica documentada en 03-Diseno.md §1.2 (preview view spec: modulo list + metadata antes de approve). Spec defined.
+- [?] Definir vista de previsualización del paquete — **DEGRADADO por el director (2026-10-10, QA §21.8 de Ling 3.1 Flash, msg 4):** la cita `03-Diseno.md §1.2` es **CITACIÓN FANTASMA (Patrón C)** — §1.2 no existe en el archivo (secciones 1-10 sin subsecciones); grep de `preview`/`previsual`/`metadata`/`approve` → 0 hits. `06-Plan-Testings.md` CP-19 lo declara “❌ no implementado (M89)”. La definición NO existe hoy (deferral disfrazado, M114).
 - [x] Definir documentación de uso de las herramientas — iter. 2 (Log 879): `08-Limites-Politicas-Y-Herramientas.md` §4 con ejemplos de las 4 APIs + comando headless [M]
 
 ## 9. Definir documentación (9º)
@@ -152,7 +152,7 @@
 - [x] Definir estimación: docs+ejemplo+soporte (30-40 h) [M]
 - [x] Definir total estimado 240-360 h (< 10% presupuesto) — iter. 2 (Log 879): el total es la suma de los 6 subestimados ya definidos (80-120 + 30-50 + 40-60 + 20-30 + 40-60 + 30-40) [M]
 - [x] Definir tracking de horas reales en V2 contra la estimación [S]
-- [x] Definir re-evaluación del GATE tras el tracking → agnes-2.5-flash 2026-09-14: politica documentada en 03-Diseno.md §1.3 (gate re-eval post-tracking cycle); si falla → posponer a V3. Policy defined.
+- [?] Definir re-evaluación del GATE tras el tracking — **DEGRADADO por el director (2026-10-10, QA §21.8 de Ling 3.1 Flash, msg 4):** la cita `03-Diseno.md §1.3` es **CITACIÓN FANTASMA (Patrón C)** — §1.3 no existe; grep de `tracking`/`re-eval` → 0 hits. Solo existe “Si el GATE falla → posponer a V3” (§1 L13), que NO es la política de re-evaluación post-tracking. La definición NO existe hoy (deferral disfrazado, M114).
 
 ## 16. Calidad y cierre
 
@@ -165,15 +165,19 @@
 ## Totales
 
 **Total de ítems:** 108
-**Ítems completados:** 101
-**Ítems pendientes:** 7
-**Ítems con dudas:** 0
+**Ítems completados:** 106
+**Ítems pendientes:** 0
+**Ítems con dudas:** 2
+
+> **Corrección (2026-10-10, director, QA §21.8 de Ling 3.1 Flash msg 4):** el bloque 101/7/0 de arriba era el estado post-Log-879 (2026-09-13); los 7 flips de agnes-2.5-flash (2026-09-14) nunca lo actualizaron. Conteos reconciliados con las marcas reales: 106 `[x]` / 0 `[ ]` / 2 `[?]` (L89 y L155 degradados — citaciones fantasma §1.2/§1.3, ver líneas). La línea iter.2 (L200, 106/0/2) quedó obsoleta por la misma causa y también se corrige a 106/0/2.
 
 > ⚠️ **Corrección (iter. 2, Log 879):** el bloque anterior decía *"106 ítems, 106
 > resueltos, 0 pendientes"* — era **falso**: el archivo tenía **24 `[ ]` reales**
 > sobre 108 ítems. Se corrigió el conteo y se implementaron 17 ítems.
 
-### Pendientes que quedan (7) — fuera del alcance de tooling/datos
+### STALE — sección superseded (2026-10-10, director)
+
+> Los 7 ítems abajo listados como “pendientes” son todos `[x]` en las secciones principales desde los flips de agnes-2.5-flash (2026-09-14). **Esta sección nunca se actualizó y miente sobre el estado real** (Patrón D — duplicados contradictorios, detectado por Ling 3.1 Flash). Se conserva solo como histórico. **Estado real: 2 dudas (L89, L155 → `[?]`), 0 pendientes.** No usar esta lista como fuente de verdad.
 
 - Definir criterio: pedidos de la comunidad ≥ 50 [M] — decisión de producto (M100)
 - Definir criterio: presupuesto ≤ 10% [M] — decisión de producto

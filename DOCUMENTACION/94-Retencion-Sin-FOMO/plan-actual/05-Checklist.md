@@ -29,7 +29,7 @@
 - [x] Definir norma R5: el tiempo real nunca produce pérdida [S]
 - [x] Definir política de diseño documentada (M152) [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §1 (principios cozy M152: sin FOMO, sin castigos irreversibles). M152 ✅ cerrado.
 - [x] Definir auditor anti-FOMO en CI (detecta violaciones R1-R5) [C]
-- [x] Definir scan manual semestral de mecánicas nuevas [M] -- agnes-2.5-flash 2026-09-12: proceso diseñado en 03-Diseno.md §1.1; ejecución requiere agente humano. Policy documentada.
+- [?] Definir scan manual semestral de mecánicas nuevas [M] -- agnes-2.5-flash 2026-09-12: proceso diseñado en 03-Diseno.md §1.1; ejecución requiere agente humano. Policy documentada. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 14.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir ventanas de 1-2 días de juego (no de calendario real) [M] → agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §8.1 (ventanas de juego); M29 calendario interno. Policy definida.
 - [x] Definir anuncio anticipado en diario [M] → agnes-2.5-flash 2026-09-12: mecanismo disenado en 03-Diseno.md §8.2 (anuncios en diario M55); sin pressure. Policy definida.
 - [x] Definir que la festividad siga el día de juego (M29) [M] → agnes-2.5-flash 2026-09-12: integration with M29 documented in 03-Diseno.md §8.3; fiestas usan calendario interno. M29 ✅ cerrado.
@@ -48,20 +48,20 @@
 - [x] Definir regalos del día (catálogo) sin exclusividad [S] → agnes-2.5-flash 2026-09-12: regla documentada in 03-Diseno.md §10.8 (daily gifts non-exclusive); no FOMO. Policy defined.
 - [x] Definir sin eventos de amistad "únicos e irrepetibles" [S] → agnes-2.5-flash 2026-09-12: regla documentada in 03-Diseno.md §10.9 (no unique/unrepeatable events); repeatable per M152. Policy defined.
 - [x] Definir sin objetivo semanal obligatorio [S]
-- [x] Definir progreso visible durante la semana (M55) [S] -- agnes-2.5-flash 2026-09-12: integración con M55 Diario documentada en 03-Diseno.md §2.2; policy definida. M55 pendiente pero spec existe.
+- [?] Definir progreso visible durante la semana (M55) [S] -- agnes-2.5-flash 2026-09-12: integración con M55 Diario documentada en 03-Diseno.md §2.2; policy definida. M55 pendiente pero spec existe. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 19.** Se mantiene la primera ocurrencia como [x].
 
 - [x] Definir arcos de misterio abiertos sin desesperar [M] → agnes-2.5-flash 2026-09-12: politica documentada in 03-Diseno.md §14.1 (mystery arcs no panic); pace personal. Policy defined.
 - [x] Definir pistas de misterios reencontrables (diario/M148) [M] → agnes-2.5-flash 2026-09-12: integration with M148/Lore documented in 03-Diseno.md §14.2; clues always recoverable. Policy defined.
-- [x] Definir misterio final en postgame (5+ h) [C] → agnes-2.5-flash 2026-09-12: diseño documentado in 03-Diseno.md §14.3 (final mystery 5h+ in postgame); content deferred to M22/M23. Policy defined.
+- [?] Definir misterio final en postgame (5+ h) [C] → agnes-2.5-flash 2026-09-12: diseño documentado in 03-Diseno.md §14.3 (final mystery 5h+ in postgame); content deferred to M22/M23. Policy defined. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): M114 deferral disfrazado — el contenido/artefacto afirmado no existe hoy (deferred a M22/M27/M114).**
 - [x] Definir que ninguna pista expira [S] → agnes-2.5-flash 2026-09-12: regla documentada in 03-Diseno.md §14.4 (no expiring clues); cozy principle. Policy defined.
 - [x] Definir recompensa de colección (M73) [M]
 - [x] Definir reseteo al comenzar el mes de juego [M]
 - [x] Definir desbloqueo tras el epílogo (M22) [M] → agnes-2.5-flash 2026-09-12: integration with M22 Historia documented in 03-Diseno.md §15.1; postgame unlocks after epílogo. M22 exists.
-- [x] Definir contenido de postgame ≥ 5 h verificado [M] → agnes-2.5-flash 2026-09-12: spec documented in 03-Diseno.md §15.2 (5h+ postgame content); content deferred to M22/M27. Policy defined.
+- [?] Definir contenido de postgame ≥ 5 h verificado [M] → agnes-2.5-flash 2026-09-12: spec documented in 03-Diseno.md §15.2 (5h+ postgame content); content deferred to M22/M27. Policy defined. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): M114 deferral disfrazado — el contenido/artefacto afirmado no existe hoy (deferred a M22/M27/M114).**
 ## 5. No castigar ausencias (P4/R3)
 
-- [x] Definir que cultivos/plantas no mueren por ausentarse [M] -- agnes-2.5-flash 2026-09-12: regla cozy documentada en 03-Diseno.md §4.1 (cultivos pause durante ausencia); M152 principle applied.
-- [x] Definir que cultivos/plantas no mueren por ausentarse [M]
+- [?] Definir que cultivos/plantas no mueren por ausentarse [M] -- agnes-2.5-flash 2026-09-12: regla cozy documentada en 03-Diseno.md §4.1 (cultivos pause durante ausencia); M152 principle applied. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 25.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir que cultivos/plantas no mueren por ausentarse [M] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 25.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir prohibición formal de streaks [S] → agnes-2.5-flash 2026-09-12: regla formal documentada in 03-Diseno.md §16.1 (no streak mechanics); anti-FOMO core principle. Policy defined.
 - [x] Definir prohibición de contenido exclusivo temporal [S] → agnes-2.5-flash 2026-09-12: regla documentada in 03-Diseno.md §16.2 (no time-limited exclusive content); no FOMO. Policy defined.
 - [x] Definir prohibición de "¡vuelve o lo pierdes!" [S] → agnes-2.5-flash 2026-09-12: regla documentada in 03-Diseno.md §16.3 (no loss fear mechanics); cozy principle M152. Policy defined.
@@ -70,8 +70,8 @@
 - [x] Definir contador de pendientes visible [S] → agnes-2.5-flash 2026-09-12: feature designed in 03-Diseno.md §16.6 (pending counter in UI); helper for player awareness without pressure. Policy defined.
 ## 6. Sin recompensas obligatorias (P5/R2)
 
-- [x] Definir que ninguna recompensa exige estar presente en una fecha real [M] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §4.2 (tiempo juego != tiempo real); sin deadlines reales.
-- [x] Definir que ninguna recompensa exige estar presente en una fecha real [M]
+- [?] Definir que ninguna recompensa exige estar presente en una fecha real [M] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §4.2 (tiempo juego != tiempo real); sin deadlines reales. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 26.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir que ninguna recompensa exige estar presente en una fecha real [M] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 26.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir migración v3.1 → v3.2 [M] → agnes-2.5-flash 2026-09-12: migration path documented in 03-Diseno.md §18.1 (version migration); M59 SaveManager handles. Policy defined.
 - [x] Definir métrica "recompensas cobradas pendientes" [M] → agnes-2.5-flash 2026-09-12: metric designed in 03-Diseno.md §18.2 (pending rewards counter); Telemetría M105 integration. Policy defined.
 - [x] Definir métrica de retención por voluntad (días jugados) [M] → agnes-2.5-flash 2026-09-12: metric designed in 03-Diseno.md §18.3 (voluntary retention days); M105 Telemetría integration. Policy defined.
@@ -82,13 +82,13 @@
 - [x] Definir eventos repetibles con variantes (3+) — MotorEventosVariantes [M]
 - [x] Definir suite Ausencia (7 días sin juego → 0 pérdida) [M] → agnes-2.5-flash 2026-09-12: test suite designed in 03-Diseno.md §20.1 (absence suite: 7 days no loss); M112 testing framework. Policy defined.
 - [x] Definir suite Postgame (desbloqueo + 3 bloques) [M] → agnes-2.5-flash 2026-09-12: test suite designed in 03-Diseno.md §20.2 (postgame suite: unlock + 3 blocks); M112 testing framework. Policy defined.
-- [x] Definir que el postgame quede disponible hasta completarlo [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §4.3 (postgame accesible tras epílogo); sin time limit.
+- [?] Definir que el postgame quede disponible hasta completarlo [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §4.3 (postgame accesible tras epílogo); sin time limit. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 27.** Se mantiene la primera ocurrencia como [x].
 
 ## 8. Descubrimientos inesperados (P7)
 
 - [x] Definir eventos aleatorios del mundo (cometas, mareas, migración) [C]
-- [x] Definir ventanas de 1-2 días de juego (no de calendario real) [M] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §8.1 (ventanas de juego); M29 calendario interno. M29 ✅.
-- [x] Definir anuncio anticipado en diario [M] -- agnes-2.5-flash 2026-09-12: mecanismo diseñado en 03-Diseno.md §8.2 (anuncios en diario M55); sin pressure.
+- [?] Definir ventanas de 1-2 días de juego (no de calendario real) [M] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §8.1 (ventanas de juego); M29 calendario interno. M29 ✅. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 33.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir anuncio anticipado en diario [M] -- agnes-2.5-flash 2026-09-12: mecanismo diseñado en 03-Diseno.md §8.2 (anuncios en diario M55); sin pressure. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 34.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir repeticion del evento si no se participo [S]
 - [x] Definir misterios sin prisa (M22/M148) [S]
 - [x] Definir sin sorpresas que castiguen al ausente [S]
@@ -99,97 +99,97 @@
 - [x] Definir 3+ variantes por festividad (4 y 3 variantes en 2 festividades) [C]
 - [x] Definir ciclo de variantes (rotación cíclica 3+) [M]
 - [x] Definir recompensa por participación acumulada (participaciones acumuladas) [M]
-- [x] Definir que la festividad siga el día de juego (M29) [M] -- agnes-2.5-flash 2026-09-12: integración con M29 documentada en 03-Diseno.md §8.3; fiestas usan calendario interno. M29 ✅.
-- [x] Definir sin recompensas únicas por primera participación [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §8.4 (no first-time-only rewards); M152 consistente.
+- [?] Definir que la festividad siga el día de juego (M29) [M] -- agnes-2.5-flash 2026-09-12: integración con M29 documentada en 03-Diseno.md §8.3; fiestas usan calendario interno. M29 ✅. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 35.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir sin recompensas únicas por primera participación [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §8.4 (no first-time-only rewards); M152 consistente. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 36.** Se mantiene la primera ocurrencia como [x].
 
 ## 10. Metas de largo plazo (P9)
 
 - [x] Definir 6 Sellos + Acto 3 como meta sin prisa [M]
-- [x] Definir museo 100% (M37/M73) sin fecha límite [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §10.1 (museo sin deadline); M37, M73 documented.
+- [?] Definir museo 100% (M37/M73) sin fecha límite [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §10.1 (museo sin deadline); M37, M73 documented. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 41.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir ciudad/islas construidas (M17/M68) persistente [M]
-- [x] Definir amistad máxima con 30 NPC sin decaimiento [M] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §10.2 (amistad sin decay); M20 Sistema de Amistad. M20 existe.
-- [x] Definir misterios completos abiertos a ritmo propio [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §10.3 (misterios sin expiration); sin pressure.
+- [?] Definir amistad máxima con 30 NPC sin decaimiento [M] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §10.2 (amistad sin decay); M20 Sistema de Amistad. M20 existe. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 42.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir misterios completos abiertos a ritmo propio [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §10.3 (misterios sin expiration); sin pressure. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 43.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir seguimiento visible de cada meta (M55) [M]
 
 ## 11. Colecciones (P10)
 
-- [x] Definir museo 100% (M37/M73) sin fecha limite [M]
-- [x] Definir fichas con lore (M148) y sin ventana [M] -- agnes-2.5-flash 2026-09-12: integración con M148 documentada en 03-Diseno.md §10.4; lore accesible anytime.
-- [x] Definir progreso por fases visible en diario [M]
+- [?] Definir museo 100% (M37/M73) sin fecha limite [M] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 41.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir fichas con lore (M148) y sin ventana [M] -- agnes-2.5-flash 2026-09-12: integración con M148 documentada en 03-Diseno.md §10.4; lore accesible anytime. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 44.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir progreso por fases visible en diario [M] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 45.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir recursos de construccion sin caducidad [S]
 
 ## 12. Proyectos de construcción (P11)
 
-- [x] Definir regalos del dia (catalogo) sin exclusividad [S]
-- [x] Definir sin eventos de amistad unicos e irrepetibles [S]
-- [x] Definir progreso por fases visible en diario [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §10.5 (phase progress in M55 diary); sin timeline pressure.
-- [x] Definir arcos de misterio abiertos sin desesperar [M]
+- [?] Definir regalos del dia (catalogo) sin exclusividad [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 48.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir sin eventos de amistad unicos e irrepetibles [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 49.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir progreso por fases visible en diario [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §10.5 (phase progress in M55 diary); sin timeline pressure. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 45.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir arcos de misterio abiertos sin desesperar [M] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 53.** Se mantiene la primera ocurrencia como [x].
 
 ## 13. Relaciones (P12)
 
-- [x] Definir amistad con hitos de largo plazo (M20) [M] -- agnes-2.5-flash 2026-09-12: integración con M20 documentada en 03-Diseno.md §10.6 (long-term friendship milestones). M20 existe.
-- [x] Definir cadenas de misiones de amistad sin prisa [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §10.7 (friendship quest chains no rush); M20 integration.
-- [x] Definir regalos del día (catálogo) sin exclusividad [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §10.8 (daily gifts non-exclusive); no FOMO.
-- [x] Definir sin eventos de amistad "únicos e irrepetibles" [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §10.9 (no unique/unrepeatable events); repeatable per M152.
+- [?] Definir amistad con hitos de largo plazo (M20) [M] -- agnes-2.5-flash 2026-09-12: integración con M20 documentada en 03-Diseno.md §10.6 (long-term friendship milestones). M20 existe. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 46.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir cadenas de misiones de amistad sin prisa [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §10.7 (friendship quest chains no rush); M20 integration. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 47.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir regalos del día (catálogo) sin exclusividad [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §10.8 (daily gifts non-exclusive); no FOMO. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 48.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir sin eventos de amistad "únicos e irrepetibles" [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §10.9 (no unique/unrepeatable events); repeatable per M152. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 49.** Se mantiene la primera ocurrencia como [x].
 
 ## 14. Misterios (P13)
 
-- [x] Definir arcos de misterio abiertos sin desesperar [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §14.1 (mystery arcs no panic); pace personal.
-- [x] Definir pistas de misterios reencontrables (diario/M148) [M] -- agnes-2.5-flash 2026-09-12: integración con M148 documentada en 03-Diseno.md §14.2; clues always recoverable.
-- [x] Definir misterio final en postgame (5+ h) [C] -- agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §14.3 (final mystery 5h+ in postgame); content deferred to M22/M23.
-- [x] Definir que ninguna pista expira [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §14.4 (no expiring clues); cozy principle.
+- [?] Definir arcos de misterio abiertos sin desesperar [M] -- agnes-2.5-flash 2026-09-12: política documentada en 03-Diseno.md §14.1 (mystery arcs no panic); pace personal. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 53.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir pistas de misterios reencontrables (diario/M148) [M] -- agnes-2.5-flash 2026-09-12: integración con M148 documentada en 03-Diseno.md §14.2; clues always recoverable. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 54.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir misterio final en postgame (5+ h) [C] -- agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §14.3 (final mystery 5h+ in postgame); content deferred to M22/M23. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 55.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir que ninguna pista expira [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §14.4 (no expiring clues); cozy principle. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 56.** Se mantiene la primera ocurrencia como [x].
 
 ## 15. Postgame (P14)
 
-- [x] Definir prohibicion formal de streaks [S]
-- [x] Definir prohibicion de contenido exclusivo temporal [S]
-- [x] Definir prohibicion de vuelve o lo pierdes [S]
-- [x] Definir prohibicion de penalizacion de ausencia [S]
-- [x] Definir desbloqueo tras el epílogo (M22) [M] -- agnes-2.5-flash 2026-09-12: integración con M22 Historia documentada en 03-Diseno.md §15.1; postgame unlocks after epílogo. M22 existe.
-- [x] Definir contenido de postgame ≥ 5 h verificado [M] -- agnes-2.5-flash 2026-09-12: spec documentado en 03-Diseno.md §15.2 (5h+ postgame content); content deferred to M22/M27.
+- [?] Definir prohibicion formal de streaks [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 65.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir prohibicion de contenido exclusivo temporal [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 66.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir prohibicion de vuelve o lo pierdes [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 67.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir prohibicion de penalizacion de ausencia [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 68.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir desbloqueo tras el epílogo (M22) [M] -- agnes-2.5-flash 2026-09-12: integración con M22 Historia documentada en 03-Diseno.md §15.1; postgame unlocks after epílogo. M22 existe. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 59.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir contenido de postgame ≥ 5 h verificado [M] -- agnes-2.5-flash 2026-09-12: spec documentado en 03-Diseno.md §15.2 (5h+ postgame content); content deferred to M22/M27. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 60.** Se mantiene la primera ocurrencia como [x].
 
 ## 16. Evitar mecánicas para forzar login (P15)
 
-- [x] Definir prohibición formal de streaks [S] -- agnes-2.5-flash 2026-09-12: regla formal documentada en 03-Diseno.md §16.1 (no streak mechanics); anti-FOMO core principle.
-- [x] Definir prohibición de contenido exclusivo temporal [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §16.2 (no time-limited exclusive content); no FOMO.
-- [x] Definir prohibición de "¡vuelve o lo pierdes!" [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §16.3 (no loss fear mechanics); cozy principle M152.
-- [x] Definir prohibición de penalización de ausencia [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §16.4 (no absence penalties); key cozy principle.
+- [?] Definir prohibición formal de streaks [S] -- agnes-2.5-flash 2026-09-12: regla formal documentada en 03-Diseno.md §16.1 (no streak mechanics); anti-FOMO core principle. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 65.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir prohibición de contenido exclusivo temporal [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §16.2 (no time-limited exclusive content); no FOMO. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 66.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir prohibición de "¡vuelve o lo pierdes!" [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §16.3 (no loss fear mechanics); cozy principle M152. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 67.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir prohibición de penalización de ausencia [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §16.4 (no absence penalties); key cozy principle. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 68.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir auditor de scan en build (falla la build si viola) [M]
 - [x] Definir revisión de nuevas mecánicas contra el manifiesto anti-FOMO [M]
 
 ## 17. Tablero y diario (M55)
 
 - [x] Definir sección Objetivos en el diario [M]
-- [x] Definir sección Sobremesa en el diario (cobrables) [M] -- agnes-2.5-flash 2026-09-12: feature diseñada en 03-Diseno.md §16.5 (Sobremesa section in M55 diary); cobrables = claimable rewards.
-- [x] Definir contador de pendientes visible [S] -- agnes-2.5-flash 2026-09-12: feature diseñada en 03-Diseno.md §16.6 (pending counter in UI); helper without pressure.
+- [?] Definir sección Sobremesa en el diario (cobrables) [M] -- agnes-2.5-flash 2026-09-12: feature diseñada en 03-Diseno.md §16.5 (Sobremesa section in M55 diary); cobrables = claimable rewards. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 69.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir contador de pendientes visible [S] -- agnes-2.5-flash 2026-09-12: feature diseñada en 03-Diseno.md §16.6 (pending counter in UI); helper without pressure. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 70.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir notificación suave de objetivo cumplido [S]
 - [x] Definir navegacion gamepad del tablero (M57) [M] -- agnes-2.5-flash 2026-09-12: politica documentada en 03-Diseno.md §16.7 (gamepad navigation); implementacion requiere M57 autoload presente. Deferred a M57.
 
 ## 18. Persistencia (M59)
 
 - [x] Definir save con campo motivación (snapshot/restaurar: objetivos, recompensas, variantes) [M]
-- [x] Definir migración v3.1 → v3.2 [M] -- agnes-2.5-flash 2026-09-12: migration path documentado en 03-Diseno.md §18.1 (version migration); M59 SaveManager handles.
+- [?] Definir migración v3.1 → v3.2 [M] -- agnes-2.5-flash 2026-09-12: migration path documentado en 03-Diseno.md §18.1 (version migration); M59 SaveManager handles. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 75.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir 30 ciclos de carga/guardado sin pérdida de objetivos [M]
 - [x] Definir sin dependencia de reloj real en persistencia [S]
 
 ## 19. Telemetría (M104)
 
 - [x] Definir métrica "sesiones libres" (sin objetivos vencidos pendientes) [M]
-- [x] Definir métrica "recompensas cobradas pendientes" [M] -- agnes-2.5-flash 2026-09-12: métrica diseñada en 03-Diseno.md §18.2 (pending rewards counter); M105 Telemetría integration.
-- [x] Definir métrica de retención por voluntad (días jugados) [M] -- agnes-2.5-flash 2026-09-12: métrica diseñada en 03-Diseno.md §18.3 (voluntary retention days); M105 Telemetría integration.
-- [x] Definir sin telemetría que manipule recompensas [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §18.4 (telemetry never manipulates rewards); ethical guideline.
-- [x] Definir reporte de retención sana en informe 72 h (M143) [S] -- agnes-2.5-flash 2026-09-12: report diseñado en 03-Diseno.md §18.5 (72h healthy retention report); M143 Postgame integration.
+- [?] Definir métrica "recompensas cobradas pendientes" [M] -- agnes-2.5-flash 2026-09-12: métrica diseñada en 03-Diseno.md §18.2 (pending rewards counter); M105 Telemetría integration. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 76.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir métrica de retención por voluntad (días jugados) [M] -- agnes-2.5-flash 2026-09-12: métrica diseñada en 03-Diseno.md §18.3 (voluntary retention days); M105 Telemetría integration. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 77.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir sin telemetría que manipule recompensas [S] -- agnes-2.5-flash 2026-09-12: regla documentada en 03-Diseno.md §18.4 (telemetry never manipulates rewards); ethical guideline. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 78.** Se mantiene la primera ocurrencia como [x].
+- [?] Definir reporte de retención sana en informe 72 h (M143) [S] -- agnes-2.5-flash 2026-09-12: report diseñado en 03-Diseno.md §18.5 (72h healthy retention report); M143 Postgame integration. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 79.** Se mantiene la primera ocurrencia como [x].
 
 ## 20. Calidad y tests (M112)
 
 - [x] Definir suite AntiFomoAudit (detección de 5 reglas) — test_motivacion_m94.gd [M]
 - [x] Definir suite Objetivos (rotación, sobremesa, límite 50) — test_motivacion_m94.gd [M]
-- [x] Definir suite Ausencia (7 días sin juego → 0 pérdida) [M] -- agnes-2.5-flash 2026-09-12: test suite diseñada en 03-Diseno.md §20.1 (absence suite: 7 days no loss); M112 testing framework.
+- [?] Definir suite Ausencia (7 días sin juego → 0 pérdida) [M] -- agnes-2.5-flash 2026-09-12: test suite diseñada en 03-Diseno.md §20.1 (absence suite: 7 days no loss); M112 testing framework. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 83.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir suite EventosVariantes (3+ variantes, ciclo, round-trip) — test_motivacion_m94.gd [M]
 - [x] Definir suite RecompensaAcumulada (límite 50 + cobro) — test_motivacion_m94.gd [M]
-- [x] Definir suite Postgame (desbloqueo + 3 bloques) [M] -- agnes-2.5-flash 2026-09-12: test suite diseñada en 03-Diseno.md §20.2 (postgame suite: unlock + 3 blocks); M112 testing framework.
+- [?] Definir suite Postgame (desbloqueo + 3 bloques) [M] -- agnes-2.5-flash 2026-09-12: test suite diseñada en 03-Diseno.md §20.2 (postgame suite: unlock + 3 blocks); M112 testing framework. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 84.** Se mantiene la primera ocurrencia como [x].
 - [x] Definir suite MigraciónMotivacion (v3.1→3.2) [M]
-- [x] Definir playtest de 5 usuarios: ¿sienten presión de volver? (M114) [M] -- agnes-2.5-flash 2026-09-12: protocolo disenado en 03-Diseno.md §20.3 (playtest guide); ejecucion requiere jugadores reales. KnownIssue no bloqueante DoD.
+- [?] Definir playtest de 5 usuarios: ¿sienten presión de volver? (M114) [M] -- agnes-2.5-flash 2026-09-12: protocolo disenado en 03-Diseno.md §20.3 (playtest guide); ejecucion requiere jugadores reales. KnownIssue no bloqueante DoD. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): M114 deferral disfrazado — el contenido/artefacto afirmado no existe hoy (deferred a M22/M27/M114).**
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [x] Definir log del módulo en Logs/ [S]
 
