@@ -24,7 +24,7 @@
 
 ## C. RF2 — Kit de animación del jugador
 
-- [ ] Cubrir los 10 estados de la FSM de M11 con animaciones [M]
+- [ ] Cubrir los 11 estados de la FSM de M11 con animaciones (idle, caminar, correr, saltar, caer, nadar, bucear, salir a superficie, interactuar, dormir, fabricar — verificado contra `scripts/player/player_fsm.gd` L26-L36; el texto previo decía "10 estados" y listaba estados inexistentes) [M]
 - [ ] Idle, caminar, correr del jugador [S]
 - [ ] Saltar, nadar, escalar del jugador [M]
 - [ ] Extraer, colocar, minar, pescar del jugador [M]
@@ -103,13 +103,13 @@
 
 ## M. RF12 — Validación automática
 
-- [x] Definir script validate_animation.gd [M]
+- [?] Definir script validate_animation.gd [M]
 - [ ] Verificar naming anim_[actor]_[estado] [S]
 - [ ] Verificar fps 30 base / UI 60 [S]
 - [ ] Verificar duración dentro de máximos por categoría [S]
 - [ ] Verificar T-pose única y bones subset [M]
 - [ ] Verificar keyframes de evento requeridos [M]
-- [x] Verificar coste por actor en animation_budget.json [M]
+- [?] Verificar coste por actor en animation_budget.json [M]
 
 ## N. RF13 — Naming y organización
 
@@ -118,7 +118,7 @@
 
 ## O. RF14 — Registro de presupuesto
 
-- [x] Definir animation_budget.json por actor/animación [C]
+- [?] Definir animation_budget.json por actor/animación [C]
 - [ ] Definir suma por escena pivote contra presupuesto M61 [M]
 - [ ] Definir alerta de excedente en editor [S]
 
@@ -197,7 +197,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 123 ítems · Completados: 9 · Pendientes: 114 · No resueltos: 0.
+**Totales:** 123 items - Completados: 6 - Pendientes: 114 - No resueltos: 3. (QA agnes-3-flash E-12d 2026-10-10: L106/L112/L121 degradados, artefactos inexistentes.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 9 [x] / 114 [ ] / 0 [?].
