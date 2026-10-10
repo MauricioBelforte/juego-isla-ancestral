@@ -63,9 +63,11 @@ def sanear_tema(tema):
     t = re.sub(r"[^a-z0-9]+", "-", t)
     t = t.strip("-")
     # Tope anti ruta-larga: Windows falla con open() si la ruta supera ~260 chars
-    # (detectado 2026-10-09 por atria-dawn-s3: un slug largo dejo el numero 139
-    # huerfano porque el archivo no se pudo crear). 60 chars es seguro.
-    t = t[:60].strip("-")
+    # (detectado 2026-09 por atria-dawn-s3: un slug largo dejo el numero 139
+    # huerfano porque el archivo no se pudo crear). 50 chars es seguro: el overhead
+    # fijo (ruta base + fecha + emisor + receptor) ya mide ~205 en canales de nombre
+    # largo como StepFun-Step-5-Preview; 205+60 = 265 > 260.
+    t = t[:50].strip("-")
     if not t:
         t = "mensaje"
     return t

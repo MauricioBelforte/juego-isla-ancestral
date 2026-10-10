@@ -4327,3 +4327,10 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - Propuesta al director (sin implementar): A = posponer spawns en `main_island._ready` hasta `get_height>=0` (causa raíz, toca flujo de carga); B (recomendada) = degradar warning inicial a `print` si retry armado (solo ruido); C = dejarlo. 
   - Colateral entorno: corrida fria borro `.godot/imported` y la runtime NO la regenera (medido) -> restaurada con `--import` (RC 0, 974 archivos, C3 con 0 errores de import). Leccion candidata a GUIA-GODOT.
   - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push. Bloqueado en decision A/B/C del director para el fix.
+- **2026-10-10 14:14 - mimo-v2.6-flash-free - BUG-119 OPCIÓN B APLICADA Y VERIFICADA (stderr limpio) + E-26 registrada - (Log 1596, msg 104)**
+  - Fix Opción B (autorizada msg 103): flag `_aviso_inicial_diferido` en `incense_spawner.gd`; intento sincrónico inicial con `creados==0` ahora emite `print` (stdout) en vez de `push_warning` (stderr) cuando el retry queda armado; timeout de 8s y demás fallos siguen con `push_warning` intacto. `shaman_npc.gd` no se tocó (su intento inicial ya era silencioso).
+  - Verificación (condición "sin runner, no hay flip"): sonda B1 = 0 SCRIPT ERROR, 0 "0 puntos creados" en err, 1× print "reintento armado", 1× "6 puntos en montaña"; **runner completo RC 0 · ÉXITO MEDIDO 29/29 suites · 1267 tests · 0 fallos** (baseline M3 intacto); stderr del runner **0 líneas M163** (solo M39 ajeno preexistente).
+  - E-26 registrada en `GUIA-GODOT/06-registro-errores.md`: borrar `.godot/imported/` sin `--import` deja la runtime rota (errores `.scn` masivos); título actualizado a E-11 a E-26, fila 06 del INDICE actualizada.
+  - Sonda `_sonda_bug119.gd` confirmada en `tests/` (no la descubre el runner; herramienta de re-verificación).
+  - `11-BUGS.md` NO tocado (READ-ONLY + centralización del director).
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push. Cola: gate `.gitignore` anidados (baja, pendiente de OK).
