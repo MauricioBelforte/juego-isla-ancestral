@@ -156,10 +156,24 @@ def main():
     # proceso puede haber creado el archivo entre el listado del directorio y
     # la escritura. os.path.exists(ruta) es la defensa final.
     usados = set()
+    # FIX anti-fantasma (2026-10-10, atria-dawn-s3, pedido del director msg 151):
+    # ademas de saber que numeros estan "usados", detectamos cuales son
+    # PLANTILLAS huerfanas (reserva previa cuyo cuerpo nunca se escribio). Esas
+    # son reutilizables: si un fantasma ocupa un numero, el proximo reservar
+    # debe sobrescribir ese archivo en vez de consumir otro numero del pool.
+    # Sin esto, un fantasma + un mensaje real con el mismo numero se duplican.
+    fantasmas = {}
     for f in os.listdir(carpeta):
         m = re.match(r"^(\d+)-", f)
-        if m:
-            usados.add(m.group(1))
+        if not m or not os.path.isfile(os.path.join(carpeta, f)):
+            continue
+        usados.add(m.group(1))
+        try:
+            contenido = open(os.path.join(carpeta, f), encoding="utf-8").read()
+        except OSError:
+            continue
+        if "<cuerpo del mensaje aca>" in contenido or "<completar titulo aca>" in contenido:
+            fantasmas[m.group(1)] = f
 
     def _ruta_para(num_cand):
         return os.path.join(carpeta, "%s-%s-%s-a-%s-%s.md"
@@ -169,6 +183,9 @@ def main():
     consumidos = []
     for cand in libres:
         if cand in usados:
+            if cand in fantasmas:
+                num = cand  # se reutiliza la plantilla huerfana
+                break
             consumidos.append(cand)
             continue
         # Doble verificacion: el archivo concreto no debe existir en disco
@@ -182,6 +199,9 @@ def main():
         print("ERROR: todos los numeros libres ya existen en la carpeta destino. Raro.")
         return 4
     ruta = _ruta_para(num)
+    if num in fantasmas:
+        ruta = os.path.join(carpeta, fantasmas[num])
+        print("(reutilizado fantasma de plantilla previo: %s)" % fantasmas[num])
 
     plantilla = (
         "# %s - <completar titulo aca>\n"
