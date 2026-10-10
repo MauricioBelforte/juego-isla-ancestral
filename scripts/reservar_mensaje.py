@@ -148,12 +148,32 @@ def main():
     receptor_slug = alias_de(receptor)
     emisor_slug = alias_de(emisor)
 
-    # Reserva con reintento: si el numero ya esta usado en la carpeta, toma el siguiente.
-    usados = set(e.split("-", 1)[0] for e in existentes)
+    # FIX anti-colision (2026-10-10, atria-dawn-s2, encargo del director msg 190):
+    # antes de consumir el numero del pool, verificar que el archivo DESTINO no
+    # exista ya en disco. §6.1.d asintia que la lectura simultanea del pool era
+    # imposible; ocurrio (colision del 1550 en Logs/ con mimo-v2.6-flash-free,
+    # 4 s de ventana exacta). El check por prefijo (usados) NO basta: otro
+    # proceso puede haber creado el archivo entre el listado del directorio y
+    # la escritura. os.path.exists(ruta) es la defensa final.
+    usados = set()
+    for f in os.listdir(carpeta):
+        m = re.match(r"^(\d+)-", f)
+        if m:
+            usados.add(m.group(1))
+
+    def _ruta_para(num_cand):
+        return os.path.join(carpeta, "%s-%s-%s-a-%s-%s.md"
+                            % (num_cand, fecha_archivo, emisor_slug, receptor_slug, tema))
+
     num = None
     consumidos = []
     for cand in libres:
         if cand in usados:
+            consumidos.append(cand)
+            continue
+        # Doble verificacion: el archivo concreto no debe existir en disco
+        # (defensa contra la carrera de dos reservas simultaneas).
+        if os.path.exists(_ruta_para(cand)):
             consumidos.append(cand)
             continue
         num = cand
@@ -161,6 +181,7 @@ def main():
     if num is None:
         print("ERROR: todos los numeros libres ya existen en la carpeta destino. Raro.")
         return 4
+    ruta = _ruta_para(num)
 
     plantilla = (
         "# %s - <completar titulo aca>\n"
@@ -179,9 +200,6 @@ def main():
         "\n"
         "<cuerpo del mensaje aca>\n"
     ) % (num, emisor, fecha_interna, responde_modelo, ultimo)
-
-    nombre = "%s-%s-%s-a-%s-%s.md" % (num, fecha_archivo, emisor_slug, receptor_slug, tema)
-    ruta = os.path.join(carpeta, nombre)
 
     # FIX anti-numero-huerfano (2026-10-09, atria-dawn-s3): crear el archivo ANTES de
     # consumir el numero del pool. Si open(ruta) falla (ruta >260 chars, permisos, etc.),
