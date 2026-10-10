@@ -25,7 +25,7 @@
 ## C. RF2 — Kit de animación del jugador
 
 - [ ] Cubrir los 11 estados de la FSM de M11 con animaciones (idle, caminar, correr, saltar, caer, nadar, bucear, salir a superficie, interactuar, dormir, fabricar — verificado contra `scripts/player/player_fsm.gd` L26-L36; el texto previo decía "10 estados" y listaba estados inexistentes) [M]
-- [ ] Idle, caminar, correr del jugador [S]
+- [x] Idle, caminar, correr del jugador  [S] -> IMPLEMENTADO Fase 1 Step 5 (Log 1603): jugador_lib.tres 3 clips placeholder; test 12/0
 - [ ] Saltar, nadar, escalar del jugador [M]
 - [ ] Extraer, colocar, minar, pescar del jugador [M]
 - [ ] Cosecha, regado, diálogo, dormir del jugador [M]
@@ -125,8 +125,8 @@
 ## P. RF15 — API de reproducción
 
 - [x] Definir AnimationService con play(actor, estado, blend_time) [C]
-- [ ] La gameplay llama por ESTADO, no por clip [M]
-- [ ] Definir fallback idle ante estado sin clip (log WARN) [M]
+- [x] La gameplay llama por ESTADO, no por clip  [M] -> IMPLEMENTADO: animation_service.play(actor, estado, blend_time); animacion_jugador_m48.gd hace polling de la FSM por estado
+- [x] Definir fallback idle ante estado sin clip (log WARN)  [M] -> IMPLEMENTADO: signal animation_missing + fallback a idle documentado; probado en test_animacion_play_m48 bloque 2
 - [ ] Definir señales animation_started/finished/missing [M]
 - [ ] Prohibir que la capa de animación decida comportamiento [M]
 
@@ -197,7 +197,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 123 items - Completados: 6 - Pendientes: 114 - No resueltos: 3. (QA agnes-3-flash E-12d 2026-10-10: L106/L112/L121 degradados, artefactos inexistentes.)
+**Totales:** 123 items - Completados: 9 - Pendientes: 111 - No resueltos: 3. (Fase 1 Step 5 Log 1603: 3 flips [x] por MVP jugador implementado.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 9 [x] / 114 [ ] / 0 [?].
