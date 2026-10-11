@@ -114,7 +114,7 @@
 - [x] Modo dry-run para verificar sin generar outputs → implementado en audio_legal_manager.set_dry_run()
 - [x] Skip de validación en builds de desarrollo → implementado en audio_legal_manager.set_skip_validation()
 - [x] Verificar que todos los audios del build tengan licencia → validate_all_audio() verifica licencias
-- [?] Generar reporte de licencias de audio por build → no implementado → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #152, 2026-10-08): over-mark — el propio texto del ítem admite que no se hizo. Ver msg s2 #152.
+- [x] Generar reporte de licencias de audio por build → implementado en audio_license_report_tool.gd + audio_license_report_editor.gd; test 13/0 (Log 1629, Ling 3.1 Flash 2026-10-11; flip aplicado por director mimo-v2.6).
 
 ## I. Documentación y Mantenimiento (15 ítems)
 
@@ -193,7 +193,7 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - **Prioridad 2:** Crear test_headless para audio_legal_manager (patrón: test_audio_licenses_m84.gd)
 - **Prioridad 3:** Integrar con M117 Build Pipeline cuando exista
 - **Pendiente humano:** Contratos de compositores/artistas, clearances, licencias de stock — esos requieren acción legal externa
-**Totales:** 99 ítems · Completados: 98 · Pendientes: 0 · No resueltos: 1.
+**Totales:** 99 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 99 [x] / 0 [ ] / 0 [?].

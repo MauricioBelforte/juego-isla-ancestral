@@ -55,7 +55,7 @@
 - [x] Crear estructura `UnlockCondition` con campos: tipoCondición, valorRequerido [S]
 - [x] Asociar `UnlockCondition` a cada `ClothingItemData` [S]
 - [x] Crear pool de datos estático del catálogo completo (16 prendas) [M]
-- [ ] Documentar esquema de serialización en 04-Codigo.md [S]
+- [x] Documentar esquema de serialización en 04-Codigo.md [S] — §4 doc (payload + reglas); DeepSeek Iter6, flip director mimo 2026-10-11
 
 ---
 
@@ -111,7 +111,7 @@
 - [x] Verificar que bonos negativos se aplican correctamente (desventajas) [M] — feet_skates tiene mud:-0.60, sand:-0.70
 - [x] Verificar que bonos de accesorios se suman correctamente a los de ropa [M] — get_total_terrain_bonus()
 - [x] Testear combinaciones de 3+ prendas en mismo terreno [M] — test verifica multi-slot
-- [ ] Documentar tabla completa en 03-Diseno.md [S]
+- [x] Documentar tabla completa en 03-Diseno.md [S] — §7 doc (tabla 7 terrenos + matriz 7×6); DeepSeek Iter6, flip director mimo 2026-10-11
 
 ---
 
@@ -124,7 +124,7 @@
 - [x] Mostrar tooltip con nombre, descripción y bonos al pasar el cursor sobre la prenda [M] — tooltip_lines PackedStringArray
 - [x] Implementar botón "Desequipar" para cada slot [S]
 - [x] Mostrar bonos acumulados por terreno en panel lateral [C] — _bonus_label con terrain_bonus_updated signal
-- [ ] Implementar highlight visual en slots con bonos activos para terreno actual [M]
+- [x] Implementar highlight visual en slots con bonos activos para terreno actual [M] — equipment_layer.gd (forzar_terreno/slots_resaltados) + suite 21/0; DeepSeek Iter6, flip director mimo 2026-10-11
 - [x] Integrar con sistema de inventario existente (M14) [C] — _get_inventory() accede a /root/Inventario
 - [x] Asegurar que la UI se oculta al entrar en combate o interacción [S] — EquipmentLayer.layer_type=MODAL_SIMPLE
 
@@ -161,22 +161,22 @@
 - [x] Test: prendas bloqueadas no se pueden equipar [S] — _test_bloqueadas_no_equipan()
 - [x] Test: guardado y carga de equipamiento preserva estado [M]
 - [x] Test: UI muestra correctamente slots ocupados y vacíos [M] — test_equipment_layer.gd
-- [ ] Test: integración con sistema de combate aplica bonos de defensa [M]
+- [?] Test: integración con sistema de combate aplica bonos de defensa [M] — dueño M164: M164 no lee M155 (grep defensa|equipment en scripts/combat/ = 0); DeepSeek Iter6, director mimo 2026-10-11
 
 ---
 
 ## J. Documentación y cierre
 
-- [ ] Actualizar 04-Codigo.md con archivos y funciones implementadas [M]
+- [x] Actualizar 04-Codigo.md con archivos y funciones implementadas [M] — doc actualizado (Iter6 confirma); DeepSeek, flip director mimo 2026-10-11
 - [x] Generar log de cierre en Logs/ [S] — Log 703 + Log 449
 
 ---
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar M154 operativo antes de trabajo visual [S]
+- [?] Verificar M154 operativo antes de trabajo visual [S] — dueño M154: M154 en 🟡 Con dudas; sin vía de visión en headless; DeepSeek Iter6, director mimo 2026-10-11
 
-**Totales:** 108 ítems · Completados: 101 · Pendientes: 6 · No resueltos: 1.
+**Totales:** 108 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 3.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"123 items · Completados: 100 · Pendientes: 23"*.
