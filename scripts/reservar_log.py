@@ -46,9 +46,12 @@ Mitigacion recomendada: usar `--reservar` (una sola operacion) en vez de editar
 el pool a mano, y no dejar el numero "tomado" sin escribir el log.
 """
 import argparse
+import errno
 import os
 import re
 import sys
+import time
+from contextlib import contextmanager
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 LOGS = os.path.join(RAIZ, 'Logs')
@@ -57,6 +60,35 @@ LOGS = os.path.join(RAIZ, 'Logs')
 RESERVAS = os.path.join(LOGS, 'reservas')
 # Protocolo v3 (AGENTS.md 6.1): pool de numeros libres. Asignador CANONICO.
 DISPONIBLES = os.path.join(LOGS, 'NUMEROS_DISPONIBLES.txt')
+
+# ---------------------------------------------------------------------------
+# RESERVA ATOMICA (opcion B, aprobada por el director 2026-10-11, msg 95)
+# ---------------------------------------------------------------------------
+# `consumir_primero_del_pool()` era un read-modify-write sobre un archivo
+# compartido: dos procesos podian leer la misma primera linea y reescribir los
+# dos el archivo entero -> el mismo numero entregado dos veces (colision
+# residual que AGENTS.md 6.1.d daba por imposible; medida el 2026-09-18 con
+# 1001/1002 y confirmada el 2026-10-11: 5 colisiones sobre 1563 logs).
+#
+# El lock cierra la ventana lectura->borrado: quien toma el lock es el unico que
+# lee y escribe el pool. Los demas esperan (o fallan tras el timeout).
+#
+# Como funciona:
+#   - Se crea `Logs/NUMEROS_DISPONIBLES.lock` con O_CREAT|O_EXCL (atomico a
+#     nivel de sistema de archivos: solo un proceso puede crearlo).
+#   - Si el lock ya existe y es mas viejo que LOCK_TIMEOUT, se considera
+#     abandonado (un proceso que murio sin soltarlo) y se toma de todos modos.
+#   - El lock se suelta en un bloque finally: si el proceso muere, el timeout
+#     lo libera para el siguiente.
+#
+# Portabilidad: O_EXCL funciona en Windows y POSIX. En Windows el lock se
+# puede quedar "pegado" si el proceso muere entre la creacion y el finally;
+# para eso existe el timeout.
+#
+# Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+# ---------------------------------------------------------------------------
+LOCK_FILE = DISPONIBLES + '.lock'
+LOCK_TIMEOUT_SEG = 30
 
 # Cuantos numeros fugados toleramos saltar antes de caer a max+1. Una fuga
 # (numero del pool que ya tiene log) se consume igualmente para no volver a
@@ -133,6 +165,61 @@ def numeros_disponibles():
         return [], b'\n', False
     nums = [int(l.strip()) for l in raw.split(b'\n') if l.strip().isdigit()]
     return nums, _eol_de(raw), True
+
+
+@contextmanager
+def lock_pool():
+    """Lock exclusivo sobre el pool (reserva atomica, opcion B).
+
+    Garantiza que solo un proceso a la vez lea-y-reescriba
+    `NUMEROS_DISPONIBLES.txt`, cerrando la ventana lectura->borrado que
+    provocaba las colisiones. Uso:
+
+        with lock_pool():
+            num = consumir_primero_del_pool()
+
+    Si otro proceso tiene el lock, espera hasta LOCK_TIMEOUT_SEG. Si el lock
+    esta abandonado (mas viejo que el timeout, proceso que murio), lo toma.
+    """
+    plazo = time.time() + LOCK_TIMEOUT_SEG
+    adquirido = False
+    while True:
+        try:
+            # O_CREAT|O_EXCL es atomico: si el archivo ya existe, falla.
+            fd = os.open(LOCK_FILE, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            try:
+                os.write(fd, ('%d\n' % os.getpid()).encode('utf-8'))
+            finally:
+                os.close(fd)
+            adquirido = True
+            break
+        except OSError as ex:
+            if ex.errno != errno.EEXIST:
+                raise
+            # El lock existe: verificar si esta abandonado.
+            try:
+                edad = time.time() - os.path.getmtime(LOCK_FILE)
+            except OSError:
+                edad = 0  # se borro entre medias: reintentar
+            if edad > LOCK_TIMEOUT_SEG:
+                try:
+                    os.remove(LOCK_FILE)  # abandonado -> tomar
+                    continue
+                except OSError:
+                    pass
+            if time.time() > plazo:
+                raise RuntimeError(
+                    'No se pudo obtener el lock del pool en %ds. Otro proceso '
+                    'lo tiene (%s). Reintenta.' % (LOCK_TIMEOUT_SEG, LOCK_FILE))
+            time.sleep(0.2)
+    try:
+        yield
+    finally:
+        if adquirido:
+            try:
+                os.remove(LOCK_FILE)
+            except OSError:
+                pass
 
 
 def hay_bom_en_pool():
@@ -231,21 +318,27 @@ def cmd_check(num):
 
 
 def cmd_reservar(agente, modulo):
-    """Consume el primer numero libre del pool. NO escribe ningun archivo."""
+    """Consume el primer numero libre del pool. NO escribe ningun archivo.
+
+    La lectura-y-borro del pool va bajo lock exclusivo (reserva atomica,
+    opcion B): sin el, dos procesos concurrentes podian llevarse el mismo
+    numero. Ver `lock_pool()`.
+    """
     logs = logs_por_numero()
     saltados = []
     num = None
-    for _ in range(MAX_SALTOS + 1):
-        cand = consumir_primero_del_pool()
-        if cand is None:
+    with lock_pool():
+        for _ in range(MAX_SALTOS + 1):
+            cand = consumir_primero_del_pool()
+            if cand is None:
+                break
+            if cand in logs:
+                # Fuga: el pool ofrecia un numero ya escrito. Se consume (no debe
+                # volver a ofrecerse) y se reporta.
+                saltados.append(cand)
+                continue
+            num = cand
             break
-        if cand in logs:
-            # Fuga: el pool ofrecia un numero ya escrito. Se consume (no debe
-            # volver a ofrecerse) y se reporta.
-            saltados.append(cand)
-            continue
-        num = cand
-        break
 
     if num is None:
         num = siguiente_libre(logs, reservas_por_numero())

@@ -61,13 +61,16 @@ def auditar(path: str) -> dict:
             continue
         celdas = [c.strip() for c in s.strip("|").split("|")]
 
-        # Â¿Es un header? Primera celda NO numerica y no vacia.
+        # Es un header? Primera celda NO numerica y no vacia.
         es_dato = bool(celdas) and celdas[0].isdigit()
         if not es_dato:
-            # Si no estamos en tabla, esta linea es el header de la seccion.
-            if not en_tabla:
-                header_actual = (s, pipes_sin_escapar(s))
-                en_tabla = True
+            # Puede ser (a) el header de la primera tabla de la seccion, o
+            # (b) el header de una SUB-TABLA posterior dentro de la misma
+            # seccion (ej. QA-SEALS: '## Notas QA' tiene una subtabla de 6
+            # columnas y otra de 4). En ambos casos pasa a ser el header
+            # vigente: las filas que siguen se miden contra el.
+            header_actual = (s, pipes_sin_escapar(s))
+            en_tabla = True
             continue
 
         if not en_tabla or header_actual is None:

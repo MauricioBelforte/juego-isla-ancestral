@@ -22,9 +22,12 @@
 # Los LOGS usan el pool global Logs/NUMEROS_DISPONIBLES.txt.
 
 import argparse
+import errno
 import os
 import re
 import sys
+import time
+from contextlib import contextmanager
 from datetime import datetime
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -96,6 +99,75 @@ def _limite_tema(carpeta, fecha_archivo, emisor_slug, receptor_slug):
     fijo = (len(base) + len(fecha_archivo) + 1 + len(emisor_slug)
             + len("-a-") + len(receptor_slug) + 1 + len(".md"))
     return max(30, 250 - fijo)
+
+
+# ---------------------------------------------------------------------------
+# LOCK ATOMICO POR CANAL (TAREA 26, autorizada por el director 2026-10-11)
+# ---------------------------------------------------------------------------
+# Sin esto, elegir el numero y borrarlo del pool son dos operaciones separadas
+# sobre un archivo compartido: dos agentes que lean el pool en la misma ventana
+# se llevan el MISMO numero (colision). Medido el 2026-10-11 por el barrido de
+# pools: 4 colisiones reales (2 en el canal StepFun-Step-5-Preview: 95 y 96).
+#
+# El lock es POR CANAL, no global. Si fuera global, los 22 canales se
+# serializarian entre si y un lock abandonado frenaria a toda la flota. El
+# archivo `.lock` se crea junto al pool del canal objetivo y se suelta en
+# `finally`; si un proceso muere con el lock puesto, el timeout lo libera.
+#
+# Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+# ---------------------------------------------------------------------------
+LOCK_TIMEOUT_SEG = 15
+
+
+@contextmanager
+def lock_pool_canal(pool_canal):
+    """Lock exclusivo sobre el pool de UN canal (read-modify-write atomico).
+
+    Uso:
+        with lock_pool_canal(POOL_CANAL):
+            num = ...   # elegir numero
+            ...         # borrar del pool
+
+    Si otro proceso tiene el lock, espera hasta LOCK_TIMEOUT_SEG. Si el lock
+    esta abandonado (mas viejo que el timeout, proceso que murio), lo toma.
+    El lock se suelta siempre en el finally.
+    """
+    lock_file = pool_canal + ".lock"
+    plazo = time.time() + LOCK_TIMEOUT_SEG
+    while True:
+        try:
+            # O_CREAT|O_EXCL es atomico a nivel de SO: solo un proceso lo crea.
+            fd = os.open(lock_file, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            try:
+                os.write(fd, ("%d\n" % os.getpid()).encode("utf-8"))
+            finally:
+                os.close(fd)
+            break
+        except OSError as ex:
+            if ex.errno != errno.EEXIST:
+                raise
+            try:
+                edad = time.time() - os.path.getmtime(lock_file)
+            except OSError:
+                edad = 0  # se borro entre medias: reintentar
+            if edad > LOCK_TIMEOUT_SEG:
+                try:
+                    os.remove(lock_file)  # abandonado -> tomar
+                    continue
+                except OSError:
+                    pass
+            if time.time() > plazo:
+                raise RuntimeError(
+                    "No se pudo obtener el lock del pool en %ds. Otro proceso lo "
+                    "tiene (%s). Reintenta." % (LOCK_TIMEOUT_SEG, lock_file))
+            time.sleep(0.2)
+    try:
+        yield
+    finally:
+        try:
+            os.remove(lock_file)
+        except OSError:
+            pass
 
 
 def main():
@@ -217,59 +289,63 @@ def main():
     # salte al tope del pool. Regla correcta: SIGUIENTE NUMERO SECUENCIAL tras
     # el ultimo mensaje existente del canal (ultimo + 1). Los huecos del medio
     # se ignoran (nunca se reciclan) y el hilo queda legible de un vistazo.
-    exist_nums = [int(m.group(1)) for f in os.listdir(carpeta)
-                  if (m := re.match(r"^(\d+)-", f))
-                  and os.path.isfile(os.path.join(carpeta, f))]
-    ultimo_num = max(exist_nums) if exist_nums else 0
-    cand = ultimo_num + 1
-    while str(cand) in usados and str(cand) not in fantasmas:
-        cand += 1
-    num = str(cand)
-    if num in fantasmas:
-        ruta = os.path.join(carpeta, fantasmas[num])
-        print("(reutilizado fantasma de plantilla previo: %s)" % fantasmas[num])
-    else:
-        ruta = _ruta_para(num)
+    # TODO el bloque (elegir numero + crear archivo + borrar del pool) va
+    # bajo lock exclusivo del canal: sin el, dos agentes concurrentes
+    # elegian el mismo numero (TAREA 26, 4 colisiones medidas 2026-10-11).
+    with lock_pool_canal(POOL_CANAL):
+        exist_nums = [int(m.group(1)) for f in os.listdir(carpeta)
+                      if (m := re.match(r"^(\d+)-", f))
+                      and os.path.isfile(os.path.join(carpeta, f))]
+        ultimo_num = max(exist_nums) if exist_nums else 0
+        cand = ultimo_num + 1
+        while str(cand) in usados and str(cand) not in fantasmas:
+            cand += 1
+        num = str(cand)
+        if num in fantasmas:
+            ruta = os.path.join(carpeta, fantasmas[num])
+            print("(reutilizado fantasma de plantilla previo: %s)" % fantasmas[num])
+        else:
+            ruta = _ruta_para(num)
 
-    plantilla = (
-        "# %s - <completar titulo aca>\n"
-        "\n"
-        "> **PLANTILLA RESERVADA - NO RESPONDER A ESTE ARCHIVO VACIO.**\n"
-        "> El emisor reservo el numero y **esta escribiendo el cuerpo** (tarda 1-5 minutos).\n"
-        "> Si al abrir este archivo solo ves esta plantilla: **ESPERA 5 MINUTOS** y vuelve a\n"
-        "> leerlo. **NUNCA actues solo por el nombre del archivo** (ya causo un encargo\n"
-        "> equivocado: el slug decia \"bug120\" y el contenido asignaba BUG-129).\n"
-        "> Si pasados 5 minutos sigue vacio, es un mensaje caido: avisar al emisor por su canal.\n"
-        "\n"
-        "**Modelo:** %s\n"
-        "**Plataforma:** <completar>\n"
-        "**Fecha:** %s\n"
-        "**Responde a:** %s - %s\n"
-        "\n"
-        "<cuerpo del mensaje aca>\n"
-    ) % (num, emisor, fecha_interna, responde_modelo, ultimo)
+        plantilla = (
+            "# %s - <completar titulo aca>\n"
+            "\n"
+            "> **PLANTILLA RESERVADA - NO RESPONDER A ESTE ARCHIVO VACIO.**\n"
+            "> El emisor reservo el numero y **esta escribiendo el cuerpo** (tarda 1-5 minutos).\n"
+            "> Si al abrir este archivo solo ves esta plantilla: **ESPERA 5 MINUTOS** y vuelve a\n"
+            "> leerlo. **NUNCA actues solo por el nombre del archivo** (ya causo un encargo\n"
+            "> equivocado: el slug decia \"bug120\" y el contenido asignaba BUG-129).\n"
+            "> Si pasados 5 minutos sigue vacio, es un mensaje caido: avisar al emisor por su canal.\n"
+            "\n"
+            "**Modelo:** %s\n"
+            "**Plataforma:** <completar>\n"
+            "**Fecha:** %s\n"
+            "**Responde a:** %s - %s\n"
+            "\n"
+            "<cuerpo del mensaje aca>\n"
+        ) % (num, emisor, fecha_interna, responde_modelo, ultimo)
 
-    # FIX anti-numero-huerfano (2026-10-09, atria-dawn-s3): crear el archivo ANTES de
-    # consumir el numero del pool. Si open(ruta) falla (ruta >260 chars, permisos, etc.),
-    # el numero NO se consume y el pool queda intacto. Antes el orden era inverso y un
-    # slug largo dejo el 139 huerfano (numero tomado, archivo nunca creado).
-    try:
-        with open(ruta, "w", encoding="utf-8", newline="") as fh:
-            fh.write(plantilla)
-    except OSError as exc:
-        print("ERROR: no se pudo crear el archivo: %s" % exc)
-        print("       el numero %s NO fue consumido del pool (rollback automatico)." % num)
-        return 5
+        # FIX anti-numero-huerfano (2026-10-09, atria-dawn-s3): crear el archivo ANTES de
+        # consumir el numero del pool. Si open(ruta) falla (ruta >260 chars, permisos, etc.),
+        # el numero NO se consume y el pool queda intacto. Antes el orden era inverso y un
+        # slug largo dejo el 139 huerfano (numero tomado, archivo nunca creado).
+        try:
+            with open(ruta, "w", encoding="utf-8", newline="") as fh:
+                fh.write(plantilla)
+        except OSError as exc:
+            print("ERROR: no se pudo crear el archivo: %s" % exc)
+            print("       el numero %s NO fue consumido del pool (rollback automatico)." % num)
+            return 5
 
-    # El archivo existe: recien ahora se consume el numero del pool.
-    restantes = [l for l in libres if l != num and l not in consumidos]
-    open(POOL_CANAL, "w", encoding="utf-8", newline="\n").write("\n".join(restantes) + "\n")
+        # El archivo existe: recien ahora se consume el numero del pool.
+        restantes = [l for l in libres if l != num and l not in consumidos]
+        open(POOL_CANAL, "w", encoding="utf-8", newline="\n").write("\n".join(restantes) + "\n")
 
-    print("OK reservado: %s" % num)
-    print("archivo: %s" % os.path.relpath(ruta, RAIZ))
-    print("responde a: %s - %s" % (responde_modelo, ultimo))
-    print("pool restante: %d (cabeza %s)" % (len(restantes), restantes[0] if restantes else "VACIO"))
-    return 0
+        print("OK reservado: %s" % num)
+        print("archivo: %s" % os.path.relpath(ruta, RAIZ))
+        print("responde a: %s - %s" % (responde_modelo, ultimo))
+        print("pool restante: %d (cabeza %s)" % (len(restantes), restantes[0] if restantes else "VACIO"))
+        return 0
 
 
 if __name__ == "__main__":
