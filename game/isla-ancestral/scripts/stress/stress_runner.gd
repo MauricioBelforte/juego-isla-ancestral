@@ -19,6 +19,7 @@ const _SC_SAVE := preload("res://scripts/stress/escenarios/save_load_stress.gd")
 const _SC_BLOCK := preload("res://scripts/stress/escenarios/block_edit_stress.gd")
 const _SC_INVENTORY := preload("res://scripts/stress/escenarios/inventory_stress.gd")
 const _SC_EQUIPMENT := preload("res://scripts/stress/escenarios/equipment_stress.gd")
+const _SC_FLYCAM := preload("res://scripts/stress/escenarios/flycam_stress.gd")
 const _SC_BASE := preload("res://scripts/stress/stress_scenario.gd")
 const _COMPARADOR := preload("res://scripts/stress/stress_comparator.gd")
 
@@ -54,6 +55,7 @@ func _registrar_escenarios() -> Array:
 		_SC_BLOCK.new(),
 		_SC_INVENTORY.new(),
 		_SC_EQUIPMENT.new(),
+		_SC_FLYCAM.new(),
 	]
 
 func _ejecutar_todos() -> Dictionary:
