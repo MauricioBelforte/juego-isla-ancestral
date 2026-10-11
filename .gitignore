@@ -9,6 +9,11 @@
 *.import
 *.translation
 
+# GdUnit — reportes HTML/XML regenerables en cada corrida de tests
+# (commiteados por error 2026-10-08, commits 5f63fde/41765e6 et al.; retirados
+# del control de versiones y borrados del arbol 2026-10-11)
+reports/
+
 # Godot — metadatos de import sueltos
 *.uid
 
@@ -85,7 +90,12 @@ node_modules/
 .kilo/
 .gdskills/
 .workbuddy-ai/
-.claude/
+# .claude/ — AGENTS.md §27: "skills de desarrollo se VERSIONAN".
+# El patron anterior (.claude/) ignoraba TODO el arbol, incluidas las skills, y eso
+# violaba §27. Con /.claude/* + !/.claude/skills/ solo se ignora lo que no sea skills.
+# Verificado con git check-ignore --no-index (patron de mimo, msg 110, git 2.53.0).
+/.claude/*
+!/.claude/skills/
 .pre-commit-config.yaml
 
 # =============================================
@@ -183,24 +193,24 @@ postlaunch_checklist.json
 # el borrado en el canal 14). Todos eran UNTRACKED y regenerables: son stdout de
 # `godot --headless`, no fuentes.
 # Si alguna vez un `_*.txt` llegara a ser fuente, hay que versionarlo con `!`.
-_*.txt
-_moji.txt
+/_*.txt
+/_moji.txt
 
 # Duplicados de raíz (ya en PAPELERA/ o scripts/)
-_qa_note.py
-broken_log_refs.txt
-count_lists.ps1
-data.drift.json
-duplicates_scan.txt
-duplicates_summary.txt
-duplicates_with_dates.txt
-log_references_scan.txt
-logs_global_order.txt
-renumber_map.json
-renumber_map_v2.json
-renumber_map_v3.json
-sync_actuals.ps1
-POSTLAUNCH_CHECKLIST.md
+/_qa_note.py
+/broken_log_refs.txt
+/count_lists.ps1
+/data.drift.json
+/duplicates_scan.txt
+/duplicates_summary.txt
+/duplicates_with_dates.txt
+/log_references_scan.txt
+/logs_global_order.txt
+/renumber_map.json
+/renumber_map_v2.json
+/renumber_map_v3.json
+/sync_actuals.ps1
+/POSTLAUNCH_CHECKLIST.md
 
 # Temporales de game/
 game/isla-ancestral/_probe_col.gd
@@ -249,3 +259,10 @@ Obsoletos/raiz-temporales-*/
 # Builds de exportacion (Godot): salidas de export_presets.cfg (web/windows).
 # No versionar binarios/PCK/WASM pesados (agregado 2026-10-09, mimo-v2.6-flash-free).
 game/build/
+
+# ---------------------------------------------------------------------------
+# Nota de estado mixto (agregada 2026-10-10, stepfun-step-5-preview, gate de mimo):
+# *.uid (L13, 144 rastreados) y *.blend (L218, 232 rastreados) estan en estado
+# mixto CONOCIDO: la regla los ignora, pero archivos previos quedaron rastreados
+# antes de que existiera. No se tocan las reglas (decision del director); queda
+# documentado como deuda. Referencia: msg 108 de mimo-v2.6-flash-free (Log 1607).

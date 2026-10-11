@@ -68,40 +68,46 @@ def pool_restante(carpeta):
 
 
 def test_reserva_normal():
-    """Caso base: pool sano, sin archivos previos -> reserva el 1."""
+    """Caso base: pool sano, sin archivos previos -> reserva el mas alto.
+
+    FIX anti-hueco-del-medio (2026-10-11, directiva del fundador): la reserva
+    siempre toma el numero MAS ALTO disponible, no el primero. El director lee
+    los numeros altos de cada canal; un numero bajo queda sepultado.
+    """
     carpeta = reset_canal([1, 2, 3])
     rc, out = reservar("tema-normal")
     ok("reserva normal retorna 0", rc == 0, out)
     creados = archivos(carpeta)
     ok("reserva normal crea 1 archivo", len(creados) == 1, str(creados))
-    ok("reserva normal usa el numero 1",
-       any(f.startswith("1-") for f in creados), str(creados))
+    ok("reserva normal usa el numero MAS ALTO (3)",
+       any(f.startswith("3-") for f in creados), str(creados))
     pool = pool_restante(carpeta)
-    ok("reserva normal consume el 1 del pool", "1" not in pool, str(pool))
+    ok("reserva normal consume el 3 del pool", "3" not in pool, str(pool))
 
 
 def test_colision_archivo_preexistente():
-    """LA carrera real: el archivo con el numero 1 YA existe en disco
-    (creado por otra sesion) pero el pool aun lo ofrece. Debe saltar al 2."""
+    """LA carrera real: el archivo con el numero MAS ALTO YA existe en disco
+    (creado por otra sesion) pero el pool aun lo ofrece. Debe saltar al siguiente
+    mas alto hacia abajo."""
     carpeta = reset_canal([1, 2, 3])
-    # Simula la otra sesion: crea el archivo 1 con el mismo nombre que
+    # Simula la otra sesion: crea el archivo 3 con el mismo nombre que
     # generaria este script (mismo tema, emisor, segundo de ventana).
-    nombre = "1-2026-10-10_01-00-00-s2-a-_test-colision-tema-carrera.md"
+    nombre = "3-2026-10-10_01-00-00-s2-a-_test-colision-tema-carrera.md"
     with open(os.path.join(carpeta, nombre), "w", encoding="utf-8") as fh:
-        fh.write("# 1 - mensaje ajeno\n")
+        fh.write("# 3 - mensaje ajeno\n")
     rc, out = reservar("tema-carrera")
     ok("colision retorna 0 (encontro otro numero)", rc == 0, out)
-    ok("colision NO pisa el archivo del numero 1",
+    ok("colision NO pisa el archivo del numero 3",
        os.path.exists(os.path.join(carpeta, nombre)))
     creados = [f for f in archivos(carpeta) if f != nombre]
     ok("colision reserva exactamente 1 archivo nuevo",
        len(creados) == 1, str(creados))
-    ok("colision salta al numero 2",
+    ok("colision salta al siguiente numero mas alto (2)",
        any(f.startswith("2-") for f in creados), str(creados))
     pool = pool_restante(carpeta)
     ok("colision consume el 2 del pool", "2" not in pool, str(pool))
-    ok("colision NO deja el 1 en el pool (esta en disco)",
-       "1" not in pool, str(pool))
+    ok("colision NO deja el 3 en el pool (esta en disco)",
+       "3" not in pool, str(pool))
 
 
 def test_colision_prefijo_sin_fecha():
@@ -110,14 +116,14 @@ def test_colision_prefijo_sin_fecha():
     no lo detectaba; el fix nuevo cuenta cualquier prefijo NN-."""
     carpeta = reset_canal([1, 2])
     # Archivo ajeno sin formato de fecha: el regex MENSAJE_RE no lo matchea.
-    with open(os.path.join(carpeta, "1-m64-fix-bug129-notas.md"),
+    with open(os.path.join(carpeta, "2-m64-fix-bug129-notas.md"),
               "w", encoding="utf-8") as fh:
         fh.write("# notas sueltas\n")
     rc, out = reservar("tema-notas")
     ok("prefijo sin fecha retorna 0", rc == 0, out)
-    creados = [f for f in archivos(carpeta) if not f.startswith("1-")]
-    ok("prefijo sin fecha reserva el numero 2",
-       any(f.startswith("2-") for f in creados), str(creados))
+    creados = [f for f in archivos(carpeta) if not f.startswith("2-")]
+    ok("prefijo sin fecha reserva el numero 1 (el 2 esta ocupado)",
+       any(f.startswith("1-") for f in creados), str(creados))
 
 
 def test_pool_vacio():
@@ -126,12 +132,38 @@ def test_pool_vacio():
     ok("pool vacio retorna 3", rc == 3, out)
 
 
+def test_hueco_del_medio():
+    """EL caso real (2026-10-11, directiva del fundador): el pool ofrece un
+    numero del medio (mensaje perdido por mala comunicacion) mientras existen
+    mensajes mas altos en disco. La respuesta DEBE salir con el numero mas alto,
+    no con el hueco — si no, el director nunca la encuentra."""
+    carpeta = reset_canal([113, 148, 149])
+    # El canal ya tiene mensajes hasta el 147 en disco; el 113 es el hueco.
+    for n in (146, 147):
+        with open(os.path.join(carpeta, "%d-2026-10-10_01-00-00-s2-a-_test-colision-x.md" % n),
+                  "w", encoding="utf-8") as fh:
+            fh.write("# %d - mensaje previo\n" % n)
+    rc, out = reservar("respuesta-al-director")
+    ok("hueco del medio retorna 0", rc == 0, out)
+    creados = [f for f in archivos(carpeta)
+               if not (f.startswith("146-") or f.startswith("147-"))]
+    ok("hueco del medio NO usa el numero 113 (sepultado)",
+       not any(f.startswith("113-") for f in creados), str(creados))
+    ok("hueco del medio usa el numero mas alto (149)",
+       any(f.startswith("149-") for f in creados), str(creados))
+    pool = pool_restante(carpeta)
+    ok("hueco del medio consume el 149 del pool", "149" not in pool, str(pool))
+    ok("hueco del medio deja el 113 en el pool (se ignora)",
+       "113" in pool, str(pool))
+
+
 def main():
     print("=== test_reservar_mensaje_colision.py ===")
     try:
         test_reserva_normal()
         test_colision_archivo_preexistente()
         test_colision_prefijo_sin_fecha()
+        test_hueco_del_medio()
         test_pool_vacio()
     finally:
         carpeta = os.path.join(MENSAJES, CANAL_TEST)

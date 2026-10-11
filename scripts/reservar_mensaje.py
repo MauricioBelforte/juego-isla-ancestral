@@ -42,6 +42,7 @@ ALIASES = {
     "space-bunny-alpha": "bunny",
     "kimi-k3": "kimi",
     "atria-dawn": "atria",
+    "muse-spark-1.3-contributor": "muse",
 }
 # Inverso: alias -> carpeta (para que se pueda pasar el alias como argumento).
 ALIAS_A_CARPETA = {v: k for k, v in ALIASES.items()}
@@ -102,7 +103,7 @@ def main():
     ap.add_argument("receptor", help="Carpeta del receptor dentro de 'Mensajes entre modelos'.")
     ap.add_argument("tema", help="Tema breve (solo ASCII, se normaliza a minusculas y guiones).")
     ap.add_argument("--emisor", default="atria-dawn",
-                    help="Emisor: alias (atria, s2, deepseek, hy3, agnes, mimo, bunny, kimi) o carpeta.")
+                    help="Emisor: alias (atria, s2, deepseek, hy3, agnes, mimo, bunny, kimi, muse) o carpeta.")
     args = ap.parse_args()
 
     receptor = resolver(args.receptor.strip().strip("/\\"))
@@ -207,27 +208,28 @@ def main():
 
     num = None
     consumidos = []
-    for cand in libres:
-        if cand in usados:
-            if cand in fantasmas:
-                num = cand  # se reutiliza la plantilla huerfana
-                break
-            consumidos.append(cand)
-            continue
-        # Doble verificacion: el archivo concreto no debe existir en disco
-        # (defensa contra la carrera de dos reservas simultaneas).
-        if os.path.exists(_ruta_para(cand)):
-            consumidos.append(cand)
-            continue
-        num = cand
-        break
-    if num is None:
-        print("ERROR: todos los numeros libres ya existen en la carpeta destino. Raro.")
-        return 4
-    ruta = _ruta_para(num)
+    # FIX numeracion secuencial (2026-10-11, corregido por el director tras
+    # reporte del fundador): el fix previo (atria-dawn-s3, "anti-hueco-del-medio")
+    # tomaba el numero MAS ALTO disponible del pool (hasta el TOPE 500), lo que
+    # produjo saltos enormes: el canal mimo paso de 119 a 500. Malinterpretado.
+    # La directiva real del fundador: el numero nuevo NO debe quedar mucho mas
+    # bajo que los ultimos mensajes (un mensaje sepultado no se lee); NO que
+    # salte al tope del pool. Regla correcta: SIGUIENTE NUMERO SECUENCIAL tras
+    # el ultimo mensaje existente del canal (ultimo + 1). Los huecos del medio
+    # se ignoran (nunca se reciclan) y el hilo queda legible de un vistazo.
+    exist_nums = [int(m.group(1)) for f in os.listdir(carpeta)
+                  if (m := re.match(r"^(\d+)-", f))
+                  and os.path.isfile(os.path.join(carpeta, f))]
+    ultimo_num = max(exist_nums) if exist_nums else 0
+    cand = ultimo_num + 1
+    while str(cand) in usados and str(cand) not in fantasmas:
+        cand += 1
+    num = str(cand)
     if num in fantasmas:
         ruta = os.path.join(carpeta, fantasmas[num])
         print("(reutilizado fantasma de plantilla previo: %s)" % fantasmas[num])
+    else:
+        ruta = _ruta_para(num)
 
     plantilla = (
         "# %s - <completar titulo aca>\n"
