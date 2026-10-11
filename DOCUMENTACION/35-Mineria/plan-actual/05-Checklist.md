@@ -50,20 +50,20 @@
 - [x] Exportar id unico StringName por mineral [S]
 - [x] display_name en espanol para UI [S]
 - [x] Rango de profundidad min/max por mineral [S] *(bandas en JSON: superficie / subterraneo_medio / profundo / ancestral)*
-- [x] Dureza (golpes por bloque 2-4) por mineral [S]
+- [x] Dureza (golpes por bloque 2-6) por mineral [S] *(ores.json: 2/3/4/4/6/6; el rango real es 2-6, no 2-4. Cita corregida 2026-10-11, BUG-132)*
 - [x] Cantidad minima y maxima de drop por bloque [S]
 - [x] Chance base de doble drop escalada por poder del pico [S] *(vía requiere_mejorada + RF6)*
 - [?] Color/emisivo de brillo por mineral [S] *(placeholder; assets de M45 pendientes)*
 - [?] Escena de particulas de extraccion por mineral [S] *(placeholder; M52)*
 - [?] Sonidos de golpe y extraccion por material [S] *(placeholder; M43)*
 - [x] Validacion de ids duplicados al registrar [S] *(no pisa M15; checa obtener_def)*
-- [x] Cobre y hierro en banda de superficie [S]
+- [x] Cobre en superficie; hierro en subterraneo_medio [S] *(ores.json: veta_cobre=superficie, veta_hierro=subterraneo_medio. Cita corregida 2026-10-11, BUG-132)*
 - [x] Cristal, mineral ancestral y polvo de estrellas en profundidad y M26 [S]
 
 ## D. OreVein (12)
 
 - [x] Nodo con referencia a OreDefinition [S] *(delegado en ResourceNode de M15)*
-- [x] Estado INTACTA / AGOTADA / REGENERANDO [S] *(M15)*
+- [x] Estado del nodo (M15: INTACTO / DANIADO / AGOTADO) [S] *(M15 - enum real en resource_node.gd:14; "REGENERANDO" no es un estado: el respawn es respawn_dia_absoluto. Cita corregida 2026-10-11, BUG-132)*
 - [x] blocks_remaining por veta [S] *(M15: golpes_restantes)*
 - [x] Golpes del bloque actual descontados por poder del pico [M] *(M15)*
 - [x] hit() devuelve exito y emite vein_depleted al agotar [M] *(M15: agotado signal)*
@@ -77,8 +77,8 @@
 
 ## E. MiningTool (pico) (10)
 
-- [x] tool_power exportado de 1 a 3 [S] *(M13 ToolData.Nivel 1-4)*
-- [x] Cooldown base de 0.6 s entre golpes [S] *(M13 velocidad_segolpe)*
+- [x] Poder del pico por nivel (ToolData.nivel 1-4) [S] *(M13: "tool_power" no existe (grep=0); el campo real es ToolData.nivel, 1-4. Cita corregida 2026-10-11, BUG-132)*
+- [x] Cooldown del pico por nivel 1.2/0.9/0.7/0.5 s [S] *(M13 tool_data.gd:67 STATS PICO; no hay "0.6 s base" - 0.6 es hacha/azada T3. Cita corregida 2026-10-11, BUG-132)*
 - [x] Durabilidad maxima y actual [S] *(M13 ToolData)*
 - [x] Descuento de durabilidad solo con acierto sobre veta [S] *(M13)*
 - [x] can_use() valida cooldown y durabilidad [S] *(M13 + M35: inutilizada)*
@@ -118,7 +118,7 @@
 
 - [x] MiningTool montado en el pico equipable de M13 [S] *(M35 recibe ToolData de M13)*
 - [x] Durabilidad compartida con el sistema de herramientas [S] *(M13)*
-- [x] Drops entregados a M15 via agregar_recursos [M] *(delegado en ResourceManager.entregar_drops)*
+- [x] Drops entregados a M15 via entregar_drops [M] *(ResourceManager.entregar_drops, resource_manager.gd:193; "agregar_recursos" no existe (grep=0). Cita corregida 2026-10-11, BUG-132)*
 - [x] Minerales visibles y usables en inventario M15 [S] *(M15)*
 - [x] Ids de M15 y OreDefinition coincidentes (sin duplicados) [S] *(MiningVeinCatalog respeta M15: no pisa _mineral_cobre ni _fragmento_ancestral)*
 - [?] Fundicion de lingotes con minerales (M16) [S] *(fuera de iter 1 — dueno M16)*

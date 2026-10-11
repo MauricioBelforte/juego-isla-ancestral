@@ -5,6 +5,15 @@
 **Fecha:** 2026-08-31
 
 > Rutas propuestas dentro de `res://_Project/` (estructura adaptada a Godot 4.x según AGENTS.md sección 24). Se ajustarán a la estructura final del proyecto Godot.
+>
+> ⚠️ **Corrección 2026-10-11 (re-QA §21.8, DeepSeek-V4.1-Flash):** las rutas de la sección 1 son el
+> diseño ORIGINAL previo a la opción B. El código realmente implementado y versionado es
+> `res://scripts/mineria/mining_manager.gd` (9011 B, autoload `mineria` en `project.godot` L48),
+> `res://scripts/mineria/mining_vein_catalog.gd` (4244 B) y el catálogo de datos
+> `res://data/mining/ores.json` (NO `res://_Project/ScriptableObjects/Mining/ore_catalog.tres`).
+> `OreDefinition.gd` / `OreVein.gd` / `MiningTool.gd` / `OreVein.tscn` / `MiningTool.tscn` de la tabla
+> **no existen**: la opción B delega en `ResourceDefinition`/`ResourceNode`/`ToolData` de M15/M13.
+> Suite headless medida (Godot 4.7.2, 2026-10-11): `test_mineria.gd` 41 checks / 0 fallos (EXIT 0).
 
 ## 1. Archivos involucrados
 

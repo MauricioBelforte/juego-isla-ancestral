@@ -106,12 +106,12 @@
 
 ## G. Escena de preview de personaje (8)
 
-- [ ] Crear preview_personaje.tscn en el proyecto Godot [M] -- agnes-2.5-flash 2026-09-12: escena disenada en 03-Diseno.md §G.1 (preview scene spec); implementacion requiere creacion fisica del .tscn. KnownIssue no bloqueante DoD. (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
+- [?] Crear preview_personaje.tscn en el proyecto Godot [M] (s2 Log 1637: escena existe con Node3D+Light+Camera pero NO instancia al jugador — solo BoxMesh placeholder. Deuda: instanciar Player.tscn o documentar que BoxMesh es lo entregado.)se OK; flip director mimo 2026-10-11
 - [x] Fondo neutro uniforme (gris medio) para comparaciones [S] -- agnes-2.5-flash 2026-09-12: especificacion documentada en 03-Diseno.md §G.2 (background #808080); parte del preview scene spec. Spec documented.
 - [x] Luz de 3 puntos key/fill/rim estandarizada [M] -- agnes-2.5-flash 2026-09-12: setup documentado en 03-Diseno.md §G.3 (3-point lighting angles/intensities); parte del preview scene. Spec documented.
 - [x] Camara fija con encuadre documentado [S] -- agnes-2.5-flash 2026-09-12: posicion documentada en 03-Diseno.md §G.4 (fixed camera specs: distance, angle, FOV). Spec complete.
 - [x] Slot para modelo voxel intercambiable [M] -- agnes-2.5-flash 2026-09-12: slot disenado en 03-Diseno.md §G.5 (model swap slot via Node path); requiere preview_personaje.tscn. Spec documented.
-- [?] Botón/tecla de captura directa a Logs/screenshots/ [M] (a [?]: depende de preview_personaje.tscn + captura_preview.gd inexistentes, sin spec propia, atria-dawn 2026-10-08)
+- [?] Botón/tecla de captura directa a Logs/screenshots/ [M] (s2 Log 1637: bug colisión nombres — ángulos 0.0 y -PI/2 generan mismo nombre, 6/12 capturas se sobreescriben. Nunca ejecutado en runtime. Deuda: fix `int(rad_to_deg(ang)) % 360` + ejecutar.)ck-only EXIT 0; flip director mimo 2026-10-11-dawn 2026-10-08)
 - [x] Integrar escena con Debug Menu (M110) si aplica [S] -- agnes-2.5-flash 2026-09-12: integracion documentada en 03-Diseno.md §G.6 (Debug Menu access to preview); M110 ✅ cerrado. Integration documented.
 - [x] Documentar uso de la escena en este modulo [S] -- agnes-2.5-flash 2026-09-12: documentacion de uso en 03-Diseno.md §G.7 (scene usage guide); sección G completa. Doc present.
 
@@ -169,8 +169,8 @@
 - [x] Test get_viewport_screenshot: imagen legible con colores reales (verificada 2026-08-24 — requiere parámetro `filepath`; esfera naranja vista y validada por el agente) [M]
 - [ ] Crear scripts/blender/setup_estudio.py (luz 3 puntos + cámara + fondo) [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn 2026-10-08)
 - [ ] Crear scripts/blender/personaje_voxel.py (generador paramétrico) [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn 2026-10-08)
-- [x] Iterar primer NPC completo end-to-end con screenshots hasta aprobación del usuario [C]
-- [x] Exportar personaje aprobado a .glb e importarlo en Godot [M] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §H.2 (GLB export+import); requiere Blender + export. KnownIssue no bloqueante DoD.
+- [?] Iterar primer NPC completo end-to-end con screenshots hasta aprobación del usuario [C] (agnes msg 232: escena+script funcionales, capturas requieren GUI — headless no renderiza. Pendiente abrir Godot en modo GUI para generar los 12 PNGs y verificar encuadre/iluminación.)
+- [ ] Exportar personaje aprobado a .glb e importarlo en Godot [M] (revertido: Familia A, .glb de assets/3d/ son arte del juego no personaje preview, Ling auditoría msg 25, flip director mimo 2026-10-11)
 - [x] Documentar versiones exactas instaladas (Blender, blender-mcp, commit) [S]
 
 ## J. Documentación y cierre (10)
@@ -199,7 +199,7 @@
 - [x] Confirmar captura visual desde `screen.capture_screen` en Copilot [M]
 - [x] Verificar conexión V5 Blender desde Copilot con socket 9876 activo [M]
 
-**Totales:** 155 ítems · Completados: 151 · Pendientes: 3 · No resueltos: 1.
+**Totales:** 155 ítems · Completados: 149 · Pendientes: 3 · No resueltos: 3.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"153 ítems · Completados: 73 · Pendientes: 80"*

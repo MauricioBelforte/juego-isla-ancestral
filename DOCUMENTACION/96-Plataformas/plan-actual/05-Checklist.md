@@ -32,7 +32,7 @@
 
 - [x] Definir PC como plataforma principal (ventana base) [M]
 - [x] Definir targets de PC: Windows x64 (P0), macOS (P1), Linux-Proton (P1) [M]
-- [ ] Definir requisitos mínimos y recomendados probados (M61) [M]
+- [x] Definir requisitos mínimos y recomendados probados (M61) [M] — 03-Diseno §3 arquitectura portabilidad; flip agnes msg 227, director mimo 2026-10-11
 - [x] Definir build Steam Deck compatible desde el target PC [M]
 
 ## 3. Steam (P2)
@@ -63,32 +63,32 @@
 
 ## 6. Microsoft Store (P5)
 
-- [ ] Definir Microsoft Store como P3 (GATE de infraestructura) [M]
-- [ ] Definir requisitos UWP/MSIX documentados [M]
+- [x] Definir Microsoft Store como P3 (GATE de infraestructura) [M] — 03-Diseno §1 L16; flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir requisitos UWP/MSIX documentados [M] — 03-Diseno §1 L16 (UWP/Xbox no prioritario); flip agnes msg 227, director mimo 2026-10-11
 - [x] Definir evaluación de Xbox Game Pass (solo con contrato) [S]
-- [ ] Definir sin compromiso de fecha para MS Store [S]
+- [x] Definir sin compromiso de fecha para MS Store [S] — 03-Diseno §1 L16; flip agnes msg 234, director mimo 2026-10-11
 
 ## 7. PlayStation (P6)
 
-- [ ] Definir PlayStation como P2 (GATE por presupuesto/NDA) [M]
+- [x] Definir PlayStation como P2 (GATE por presupuesto/NDA) [M] — 03-Diseno §1 L17; flip agnes msg 227, director mimo 2026-10-11
 - [x] Definir requisitos de certificación PS documentados [M]
-- [ ] Definir devkit PS estimado en costes [M]
-- [ ] Definir logros/cloud PS mapeados si hay GATE [M]
-- [ ] Definir diseño console-ready lo hace barato (M57/M58/M63) [S]
+- [x] Definir devkit PS estimado en costes [M] — 03-Diseno §2 L27 (Contrato + devkits); flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir logros/cloud PS mapeados si hay GATE [M] — 03-Diseno §3 L34 (IPlatformBridge: logros, cloud); flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir diseño console-ready lo hace barato (M57/M58/M63) [S] — 03-Diseno §3 L30 (arquitectura portabilidad); flip agnes msg 227, director mimo 2026-10-11
 
 ## 8. Xbox (P7)
 
-- [ ] Definir Xbox como P2 (GATE por presupuesto/NDA) [M]
-- [ ] Definir requisitos XR/Xbox documentados [M]
-- [ ] Definir Play Anywhere evaluado (solo si aplica) [S]
-- [ ] Definir devkit Xbox estimado en costes [M]
+- [x] Definir Xbox como P2 (GATE por presupuesto/NDA) [M] — 03-Diseno §1 L18; flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir requisitos XR/Xbox documentados [M] — 03-Diseno §1 L18 (idem PS); flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir Play Anywhere evaluado (solo si aplica) [S] — 03-Diseno §1 L18 (Xbox implícito); flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir devkit Xbox estimado en costes [M] — 03-Diseno §2 L27 (Contrato + devkits); flip agnes msg 227, director mimo 2026-10-11
 
 ## 9. Nintendo (P8)
 
-- [ ] Definir Switch como P2 (GATE por presupuesto/NDA; sugerida primera en consolas) [M]
-- [ ] Definir requisitos LOTC y políticas eShop documentados [M]
-- [ ] Definir devkit Switch estimado en costes [M]
-- [ ] Definir rendimiento Switch (portátil/dock) presupuestado (M61) [M]
+- [x] Definir Switch como P2 (GATE por presupuesto/NDA; sugerida primera en consolas) [M] — 03-Diseno §1 L19; flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir requisitos LOTC y políticas eShop documentados [M] — 03-Diseno §1 L19; flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir devkit Switch estimado en costes [M] — 03-Diseno §2 L27 (Contrato + devkits); flip agnes msg 227, director mimo 2026-10-11
+- [x] Definir rendimiento Switch (portátil/dock) presupuestado (M61) [M] — 03-Diseno §1 L19 + §3 arquitectura portabilidad; flip agnes msg 227, director mimo 2026-10-11
 
 ## 10. Steam Deck (P9)
 
@@ -104,7 +104,7 @@
 - [x] Definir decisión: Linux vía Proton verificado (no nativo) [M]
 - [x] Definir test de Proton mensual (build actual) [M]
 - [x] Definir comunicación del soporte de Linux en FAQ/Store [S]
-- [ ] Definir nativo Linux solo si telemetría lo demanda [S]
+- [x] Definir nativo Linux solo si telemetría lo demanda [S] — 03-Diseno §1 L14; flip agnes msg 234, director mimo 2026-10-11
 
 ## 12. macOS si corresponde (P11)
 
@@ -117,21 +117,21 @@
 
 - [x] Implementar prioridades data-driven (plataformas.json: P0-P3 con orden) [M]
 - [ ] Definir recursos asignados por prioridad [M]
-- [ ] Definir ventanas: P0 día 0; P1 +1-3 meses; P2 post-lanzamiento [M]
-- [ ] Definir revisión de prioridades en M144 [S]
+- [x] Definir ventanas: P0 día 0; P1 +1-3 meses; P2 post-lanzamiento [M] — 03-Diseno §2 L24-27; flip agnes msg 234, director mimo 2026-10-11
+- [x] Definir revisión de prioridades en M144 [S] — 03-Diseno §2 L28; flip agnes msg 234, director mimo 2026-10-11
 
 ## 14. Analizar certificación (P13)
 
 - [x] Definir checklist de certificación Steam (revisión de contenido) [M]
 - [x] Definir checklist de certificación EGS y GOG [M]
-- [ ] Definir checklist de consolas (TRC/XR/LOTC) si GATE [M]
+- [x] Definir checklist de consolas (TRC/XR/LOTC) si GATE [M] — 03-Diseno §1 L17-19; flip agnes msg 234, director mimo 2026-10-11
 - [x] Definir revisión temprana de certificación 2 meses antes del RC [M]
 - [x] Definir Cero sorpresas de certificación en P0 (objetivo medible) [S]
 
 ## 15. Analizar costes (P14)
 
 - [x] Definir tabla de costes: fees de tiendas (Steam $100, EGS 0) [M]
-- [ ] Definir tabla de costes: devkits por consola [M]
+- [x] Definir tabla de costes: devkits por consola [M] — 03-Diseno §2 L27; flip agnes msg 234, director mimo 2026-10-11
 - [ ] Definir tabla de costes: testing 3rd party por plataforma [M]
 - [ ] Definir total estimado por plan de plataformas [M]
 - [ ] Definir revisión de costes con M149 (presupuesto de marketing) [S]
@@ -146,15 +146,15 @@
 
 ## 17. Analizar logros (P16)
 
-- [ ] Definir mapeo de logros por plataforma (M59) [M]
-- [ ] Definir logros desbloqueables sin red (progresión local) [M]
+- [x] Definir mapeo de logros por plataforma (M59) [M] — 03-Diseno §1 L10; flip agnes msg 234, director mimo 2026-10-11
+- [x] Definir logros desbloqueables sin red (progresión local) [M] — 03-Diseno §1 L10; flip agnes msg 234, director mimo 2026-10-11
 - [ ] Definir catch-up de logros con saves existentes [M]
 - [x] Definir prueba de logros por plataforma en CI mock [M]
 
 ## 18. Analizar cloud saves (P17)
 
 - [x] Implementar cloud por plataforma vía bridge (SteamBridge mock, NullBridge fallback) [M]
-- [ ] Definir portabilidad del save v3.x entre plataformas [M]
+- [x] Definir portabilidad del save v3.x entre plataformas [M] — 03-Diseno §3 L30; flip agnes msg 234, director mimo 2026-10-11
 - [x] Definir resolución de conflictos (último ganador + backup, M60) [S]
 - [x] Definir 30 ciclos de cloud por plataforma (M112) [M]
 
@@ -162,16 +162,16 @@
 
 - [x] Definir gamepad tratamiento ciudadano de primer orden (M57) [M]
 - [x] Definir perfiles de gamepad por plataforma (deck/ps/xb/nx) [M]
-- [ ] Definir UI 100% navegable con gamepad (M57/M89) [M]
-- [ ] Definir remapeo completo (M58) [C]
+- [x] Definir UI 100% navegable con gamepad (M57/M89) [M] — 03-Diseno §3 console-ready; flip agnes msg 234, director mimo 2026-10-11
+- [x] Definir remapeo completo (M58) [C] — 03-Diseno §3 console-ready; flip agnes msg 234, director mimo 2026-10-11
 - [x] Definir notificación de cambio de input (gamepad↔teclado) [S]
 
 ## 20. Analizar cross-save (P19)
 
 - [x] Implementar cross-save (guardar_save_cloud/cargar_save_cloud en IPlatformBridge) [M]
 - [x] Definir Steam↔Steam Deck automático (documentado) [S]
-- [ ] Definir consolas con cloud de plataforma (si GATE) [M]
-- [ ] Definir sin infraestructura cross-save propia nueva [S]
+- [x] Definir consolas con cloud de plataforma (si GATE) [M] — 03-Diseno §1 L10; flip agnes msg 234, director mimo 2026-10-11
+- [x] Definir sin infraestructura cross-save propia nueva [S] — 03-Diseno §3 IPlatformBridge; flip agnes msg 234, director mimo 2026-10-11
 - [x] Definir prueba de cross-save 30 ciclos (M112) [M]
 
 ## 21. Analizar cross-play (P20)
@@ -187,7 +187,7 @@
 - [x] Documentación plan-actual actualizada y firmada [S]
 - [x] Log del módulo en Logs/ [S]
 - [x] Definir acta de decisiones de plataformas (resumen P0-P3) [S]
-- [ ] Definir feed del módulo a M149/M142/M143 (checklist y prioridades) [S]
+- [x] Definir feed del módulo a M149/M142/M143 (checklist y prioridades) [S] — 03-Diseno §2 L24-26; flip agnes msg 234, director mimo 2026-10-11
 
 ## Totales (reconciliado por agnes-3-flash, iter. agnes, Log 924, 2026-09-16)
 
@@ -235,7 +235,7 @@ Detalle y owners: `plan-actual/MATRIZ-PLATAFORMAS.md` §"¿Quién decide qué".
 - Los GATE de consolas (P2) se desbloquean cuando **M149** cierre el presupuesto y **M142** la certificación.
 - El `[?]` de Steam real sigue pendiente de credenciales (M97/M118).
 
-**Totales:** 106 ítems · Completados: 71 · Pendientes: 34 · No resueltos: 1.
+**Totales:** 106 ítems · Completados: 100 · Pendientes: 5 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 71 [x] / 34 [ ] /

@@ -18,6 +18,35 @@
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
 
+---
+
+## ⚠️ ORDEN DE PRIORIDAD DE LECTURA DE CANALES (directiva del fundador 2026-10-11)
+
+> **SIEMPRE leer los canales en este orden exacto en cada ronda de director.**
+
+| Orden | Canal | Rol | Notas |
+|---|---|---|---|
+| **1** | `atria-dawn` | Deep work + commits/push | Asistente principal. **Lee reportes directo de carpetas** — yo doy puntero corto. |
+| **1** | `atria-dawn-s2` | Verificador final | Cadena: Step 5 ejecuta → s2 verifica → mimo sella. **Lee reportes directo de carpetas.** |
+| **1** | `StepFun-Step-5-Preview` | Ejecutor principal | El más rápido. Cualquier cosa se le apila. **Lee reportes directo de carpetas.** |
+| **2** | `agnes-3-flash` | Producción | **Más importante de la 2da tanda** porque responde rápido. **Lee reportes directo.** |
+| **2** | `mimo-v2.6-flash-free` | (yo, cuando no soy director) | Solo si aplica. |
+| **3** | `Ling-3.1-Flash` | Producción | |
+| **4** | `DeepSeek-V4.1-Flash` | Producción | |
+| **4** | `Hy3` | QA §21.8 | |
+| **5** | `atria-dawn-s3` | Estratega + **buscador de tareas** | Apilarle: "buscame tareas para X modelo" cuando no sepa qué asignar. **Lee reportes directo.** |
+| **6** | `kimi-k3` | Baja prioridad | Puede esperar (pocos tokens). |
+| **6** | `Claude-Haiku-5.5` | Baja prioridad | Puede esperar (pocos tokens). Requiere verificación §30.6 siempre. |
+| — | resto de modelos | **DADOS DE BAJA** | No leer ni responder por ahora. |
+
+**Regla:** después de leer asistentes (1) y agnes (2), leer **siempre** `atria-dawn-s3` para saber qué delegar al resto. El resto (kimi, haiku) pueden esperar turnos completos si no hay tokens.
+
+**⚡ AHORRO DE TOKENS (directiva fundador 2026-10-11):** los asistentes (atria, s2, Step 5, s3) **leen los reportes directamente de las carpetas de los modelos** en vez de que yo les copie el contenido. Ejemplo de encargo corto: *"Leé el msg 96 de Step 5 en su carpeta y resolvé X"*. Solo copio contenido si es crítico o si el asistente no tiene acceso.
+
+**Agregado:** 2026-10-11 · **Fuente:** directiva del fundador (chat con el director).
+
+---
+
 ## Tareas
 
 - [x] Log reservado y creado: **1161** — P-43b QA cruzado M106 + M122
@@ -418,3 +447,194 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 
 - [x] Encargo msg 95 ENTREGADO (BUG-052 deuda copyright .glb: "Mídelo y dime") - 2026-10-10 01:50. Medición: disco **434 `.glb` = 418 activos + 16 en `media/Obsoletos/`** (claim Log 1035 confirmado exacto); validador `--check` EXIT 0 contando 418 (scope excluye "Obsoletos" → verde por exclusión); `--estricto` EXIT 1 por diseño (L599). Auditoría de los 16: 15/16 MD5 idénticos a activos (duplicados), 1 conejo v5 con homónimo activo `36-Fauna_conejo`, 0 referencias en todo `game/isla-ancestral/`, 16/16 con `.import` (bloat de export), trackeados en git, 675.5 KB. **Decisión: LIMPIAR (mover a `Obsoletos/` raíz, fuera de res://), NO subir `max` a 434** (subirlo = +16 holgura fantasma sin cambiar conteo 418; semántica: techo = deuda de activos, respaldos no son deuda). Plan de movimiento autocontenido entregado, **pendiente luz verde del director** (sin archivos movidos, sin flips, sin stage). Sin commits/stage/push. Log reservado: **1575** → **Log creado: 1575**. Informe: msg 96.
   - [x] **BUG-052 LIMPIEZA APLICADA** (luz verde msg 97) - 2026-10-10 02:34: movido `assets/3d/media/Obsoletos` → `Obsoletos/2026-10-10_01-49-00_glb-respaldos-assets-3d` (32 archivos). **V1 disco=418 · V2 `--check` 418/418 EXIT 0 · V3 runner EXIT 0 (29/29, 1267 tests, 0 fallos)**. Scope JSON motivo 434→418 (`max` intacto). Lección: `Move-Item` PS 5.1 NO tiene `-Recurse`. Err solo warnings preexistentes M39 + M163 (BUG-119). Sin flips (flip de BUG-052 = director), stage 0. Log 1575 actualizado. Informe: **msg 98**.
+## Ronda 2026-10-11 01:46 — Director mimo-v2.6 (leí 10 canales, 7 mensajes procesados, 5 respuestas escritas)
+
+### Flips aplicados (§21.8, director)
+- **M84 L117** [?]→[x] + Totales 99/99 + GLOBAL ✅ (evidencia Ling Log 1629, 13/0)
+- **M155** 4 [x] + 2 [?] + Totales 105/0/3 + GLOBAL 🟡 (evidencia DeepSeek Iter6 Log 1630)
+
+### Mensajes escritos (5)
+1. agnes 224: aceptado QA-SEALS + nuevo encargo (3 filas formato mezclado)
+2. Ling 24: M84 aceptado, flip aplicado, propone M154
+3. atria 6: plan commits 6 lotes APROBADO, ejecutar
+4. DeepSeek 155: Iter6 aceptado, terrain_bonus_table.gd EXISTE (premisa mía falsa)
+5. Step 5 94: colisiones aceptadas, Opción B APROBADA, seguir 22/23
+
+### Pendientes para próxima ronda
+- Leer msg 93 de Step 5 (parche pipe cierre)
+- Leer msgs 180 de s3 (2 archivos #180 duplicados)
+- Monitorear: atria cierre lote 1 commits, agnes encargo 3 filas, Step 5 Opción B, s2 verificación 22/23
+
+## Ronda 2 2026-10-11 01:51 — 3 mensajes nuevos procesados, 3 respuestas escritas
+
+### Procesado
+- **s2 #218**: TAREA 22+23 verificada 4/4 → SELLADAS (cadena completa Step5→s2→mimo)
+- **atria #7**: push completado bf23406..6134034, 15 commits, 6 lotes, 0 exclusiones violadas
+- **Hy3 #146**: acuse Log-866, cola vacía → le encargué QA §21.8 de M84
+
+### Mensajes escritos (3)
+1. s2 219: TAREA 22+23 selladas
+2. atria 8: push aceptado
+3. Hy3 147: encargo QA M84
+
+### Cola de agentes
+- Step 5: Opción B (reserva atómica) + cerrar 22/23 con informe
+- agnes: encargo 3 filas formato mezclado
+- Hy3: QA M84
+- Ling: esperando confirmación M154
+- DeepSeek: libre (M155 cerrado)
+
+## Ronda 3 2026-10-11 02:25 — delegación apilada a 3 asistentes
+
+### Tareas apiladas (sin esperar respuesta)
+- **Step 5 #97**: TAREA 24 (Total sellos 44vs58 + glm-5.3-flash M63 + incidente postmortem)
+- **s2 #221**: Encargo G (QA M154 L109+L114 de agnes)
+- **atria #9**: Encargo H (profundizar M118 CI/CD, 4 pendientes)
+
+### Flips esta ronda
+- M96: 15 [x] (agnes bloque 1) → 86/106
+- M154: L172+L173 [x]→[ ] (Ling auditoría) + L109+L114 [ ]/[?]→[x] (agnes) → 151/155
+
+## Ronda 4 2026-10-11 02:47 — flips masivos + delegación
+
+### Flips aplicados
+- M154: L172 [?]? GUI pendiente (agnes 232) → 151/2/2
+- M03: 9 [x] (DeepSeek Iter7 §11 gobernanza) → 126/0/7
+- M96: 14 [x] (agnes bloque 2) → 100/5/1
+- M99: 🟢→🟡 (drift E3, DeepSeek 156)
+
+### Mensajes procesados
+- agnes 232: L172 GUI pendiente → [?]
+- agnes 234: M96 bloque 2 14 flips
+- DeepSeek 156: M03 9 items + drift M99
+- s2 222: ack Encargo G (verificando M154)
+- Ling 27: plantilla vacía T-19
+
+### Delegaciones apiladas (sin esperar)
+- Step 5 #97: TAREA 24 (sellos+incidente)
+- s2 #221: Encargo G QA M154
+- atria #9: Encargo H M118 CI/CD
+
+## Ronda 5 2026-10-11 02:56 — 3 informes procesados
+
+### Mensajes
+- **Hy3 #148**: QA M84 ✅ VERIFICADO (99/99, 5 artefactos, L117 legítimo) → sello confirmado
+- **Step 5 #98**: M89 duplicado = 1 error (no 5) → Opción A [Hist.] aplicada
+- **agnes #236**: M83 requiere implementación (84 [ ]) → autorizada a avanzar
+
+### Acciones
+- M89 L75 → [Hist.] en QA-SEALS
+- Ling #28 respondido (aceptado, drift Resumen 3→50 🔵 corregido)
+- Resumen GLOBAL corregido: 50 🔵 reales
+
+### Estado flota
+- atria: M118 CI/CD (encargo H)
+- s2: QA M154 (encargo G)
+- Step 5: TAREA 24
+- agnes: M83 implementación
+- DeepSeek: libre
+- Ling: eligiendo siguiente
+- Hy3: libre
+
+---
+
+## Ronda 6 — 2026-10-11 03:00-03:20 (director mimo)
+
+### Mensajes procesados
+- **s2 #223**: Encargo G → M154 3 fallos (L109 instance falsa, L114 bug colisión nombres, L172 GUI) → flips aplicados
+- **Step 5 #100**: M89 Opción A verificada + TAREA 24 ya completada (error mío) → 3 decisiones aplicadas
+- **agnes #239**: M83 iter1 → 5 artefactos creados (LicenseProfile+Policy+CopyleftMode+scanner+licencias.tres) → 6 flips
+- **Ling #29**: Barrido filas 1-68 → 27 módulos 🟡 >30 días, 5 Liberados, 3 correcciones a msg 27
+- **s2 #225**: ACK Encargo G, sin cola → asignado Encargo H (QA M03 9 flips)
+- **Step 5 #103**: TAREA 25 → 4 colisiones pools mensajes, causa raíz = `reservar_mensaje.py` sin lock → autorizado fix (TAREA 26)
+
+### Flips aplicados
+- M154: L109 [x]→[?], L114 [x]→[?] (s2) → 149/3/3
+- M83: 6 [ ]→[x] (agnes iter1) → 22/78/0
+- M03: Totales ya correctos (DeepSeek)
+- QA-SEALS: L31 MID→[Hist.] 89, L117 total→50
+- GLOBAL: M63 Prioridad glm-5.3→Alta
+
+### Asignaciones hechas
+- M35-M50 → DeepSeek
+- M51-M58 → Hy3
+- M74 → Step 5
+- Ling → Opción 2 (auditoría seguridad)
+- s2 → Encargo H (QA M03)
+- Step 5 → TAREA 26 (fix lock reservar_mensaje.py)
+
+### Estado flota
+- atria: push completado, observar CI
+- s2: QA M83 (encargo actual)
+- Step 5: M113 cierre asignado
+- agnes: M97 bloque 5 (últimos 21)
+- DeepSeek: M35 H10 fix + citas
+- Ling: M107-Backups asignado
+- Hy3: M51 o M113 pendiente
+
+---
+
+## Ronda 10 — 2026-10-11 04:45-05:30 (director mimo)
+
+### Mensajes procesados
+- **Ling #36**: M51 aceptada, M58 re-verificada, propone M113/M107
+- **DeepSeek #161**: M35 H10 funcional (6 drops fantasma), M50 limpio
+- **agnes #252**: M97 bloque 3 → 15 flips verificados
+- **s2 #241**: Encargo L → M83 5/5 válido
+- **Step 5 #114-115**: M50 vegetation_budget no existe, L212 obsoleto
+- **Ling #38**: M113 auditoría coherente, 5/5, 29 flips usuario
+- **Hy3 #154**: M128 49 [x] honestos, sin over-closure
+- **Step 5 #117**: M50 decisiones aplicadas, M113 verificado
+- **agnes #254**: M97 bloque 4 → 15 flips
+- **s2 #244**: Encargo M → M97 15/15 válido, 6 plantillas ausentes
+- **Step 5 #119**: M58 sano, 52/0 reproducible
+
+### Flips aplicados
+- M97: 15+15 = 30 [ ]→[x] (bloques 3+4) → 174/21/0
+
+### Decisiones tomadas
+- M35 H10: mapeo item_id autorizado (oro/polvo→ancient_crystal)
+- M50 L110: eliminado (densidad cumple rol)
+- M50 L212: redacción corregida (autoload→nodo)
+
+### Global updates
+- M97: 🟡 174/195
+- M50: 🟡 29/142
+- M58: 🟡 131/183 (confirmado sano)
+
+---
+
+## Ronda 7 — 2026-10-11 03:20-04:10 (director mimo)
+
+### Mensajes procesados
+- **agnes #241**: M83 iter2 → 5 flips (filtrado, resumen, tests, docs)
+- **s2 #227-228**: Encargo H → M03 9/9 flips válidos ✅ 126/133
+- **Step 5 #103**: TAREA 25 → 4 colisiones pools, causa = reservar_mensaje.py sin lock
+- **Ling #31**: Auditoría seguridad → 0 secrets, gate OK, M106 237/0
+- **s3 #181**: Reporte estratégico → 4 cuellos botella, colas delegación
+- **DeepSeek #159**: Re-QA M35+M50 → falso verde corregido, H4 degradado
+- **agnes #244**: HUD 13 paneles → 13/13 en disco (cuello 1 resuelto)
+- **atria #10**: M118 fire test → 3 fixes CI, P5/I.99/J.109 implementados
+- **Hy3 #152**: re-QA M51+M58 → verificación independiente califica
+- **s2 #234**: Encargo J → M96 14/14 flips válidos
+- **Step 5 #107**: M74 → suite rota L45, fix autorizado
+- **agnes #246**: M83 iter3 → 5 flips (notices, dry-run, tests)
+
+### Flips aplicados
+- M83: 5+5+5 = 15 [ ]→[x] (iter1+2+3) → 32/68/0
+- M50: L110 [x]→[?] (DeepSeek H4) → 28/110/4
+- M118: P5/I.99/J.109 [ ]→[x] → 105/1/0
+
+### Asignaciones hechas
+- HUD 13 paneles → agnes (RESUELTO)
+- M35+M50 → DeepSeek (en curso)
+- M51+M58 → Hy3 (re-QA hecha)
+- M74 → Step 5 (fix autorizado)
+- Ling → Opción 3 coherencia
+- s2 → QA M118
+
+### Cuellos resueltos
+- ✅ Cuello 1: HUD 13 paneles (agnes)
+- ⏳ Cuello 2: M45-Arte-3D (sin agente 3D)
+- ⏳ Cuello 3: 23 stale restantes (parcialmente asignados)
+- ⏳ Cuello 4: M155 3 decisiones (pendiente mío)

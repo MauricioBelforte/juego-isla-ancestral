@@ -54,7 +54,7 @@
 - [x] Fijar español como idioma único de nombres de módulos y archivos [S]
 - [x] Verificar consistencia de nombres entre repo y carpetas (Isla Ancestral) [S]
 - [?] Documentar la regla de números secuenciales (README + Logs/NUMEROS_DISPONIBLES) [S]
-- [ ] Documentar la excepción: `00-PLAN-INICIAL` y `01-Fundamentos` son raíz histórica [S]
+- [x] Documentar la excepción: `00-PLAN-INICIAL` y `01-Fundamentos` son raíz histórica [S] — §11.8 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
 
 ## C. Estructura de carpetas (10)
 
@@ -170,18 +170,18 @@
 
 ## K. Edge cases (8)
 
-- [ ] Documentar qué pasa si un módulo dueño no completa su documento (seguimiento en global) [S]
-- [ ] Documentar qué pasa si un ítem del catálogo cambia de dueño (actualizar tabla) [S]
-- [ ] Documentar el manejo de cambios masivos (respaldo en Obsoletos/ antes de refactor) [S]
-- [ ] Documentar el manejo de módulos que no aplican testing (06/07 omitidos) [S]
-- [ ] Documentar el manejo de directivas del usuario sin implementar (5-FUTURAS-MEJORAS) [S]
-- [ ] Documentar el manejo de nueva documentación externa (INVESTIGACION) [S]
-- [ ] Verificar que la eliminación de plantillas 06/07 (02 y 03) queda justificada [S]
-- [ ] Documentar el flujo si se incorpora un agente nuevo al proyecto (leer AGENTS + global + ESTADO-PARALELO) [S]
+- [x] Documentar qué pasa si un módulo dueño no completa su documento (seguimiento en global) [S] — §11.1 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
+- [x] Documentar qué pasa si un ítem del catálogo cambia de dueño (actualizar tabla) [S] — §11.2 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
+- [x] Documentar el manejo de cambios masivos (respaldo en Obsoletos/ antes de refactor) [S] — §11.3 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
+- [x] Documentar el manejo de módulos que no aplican testing (06/07 omitidos) [S] — §11.4 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
+- [x] Documentar el manejo de directivas del usuario sin implementar (5-FUTURAS-MEJORAS) [S] — §11.5 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
+- [x] Documentar el manejo de nueva documentación externa (INVESTIGACION) [S] — §11.6 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
+- [x] Verificar que la eliminación de plantillas 06/07 (02 y 03) queda justificada [S] — §11.4 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
+- [x] Documentar el flujo si se incorpora un agente nuevo al proyecto (leer AGENTS + global + ESTADO-PARALELO) [S] — §11.7 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
 
 ---
 
-**Totales:** 133 ítems · Completados: 117 · Pendientes: 9 · No resueltos: 7.
+**Totales:** 133 ítems · Completados: 126 · Pendientes: 0 · No resueltos: 7.
 **Nota:** los ítems con dueño externo (documentos especializados) quedaron `[x]` porque la tarea de ESTE módulo era el registro/asignación, ya realizada; el contenido del documento pertenece al módulo dueño.
 **Nota (auditoría T-D4, Log 1283):** los `[?]` son por **obsolescencia** (el módulo se escribió para Unity; el proyecto migró a Godot 4.x en `9027ded`) o por verificación fallida (C-8), no por falta de trabajo. Los `[ ]` de la sección K (edge cases) y B-12 son trabajo genuinamente no realizado.
 

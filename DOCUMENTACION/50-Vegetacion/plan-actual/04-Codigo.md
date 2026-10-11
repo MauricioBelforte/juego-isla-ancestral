@@ -4,7 +4,16 @@
 # 04-Codigo.md — Módulo 50: Vegetación
 
 > Rutas previstas dentro de `Assets/_Project/` (estructura del proyecto Godot 4.x, ver AGENTS.md §24).
-> ⚠️ **Estado: Pendiente de implementación.** Los archivos listados son diseño/documentación; no existe código runtime todavía.
+> ⚠️ **Estado REAL — corregido 2026-10-11 (re-QA §21.8, DeepSeek-V4.1-Flash):** este documento
+> listaba rutas previstas (`Assets/_Project/…`, estilo Unity) y afirmaba *"no existe código runtime
+> todavía"*. **Eso es FALSO desde la iter. 2 (2026-09-02).** El código real vive en `res://scripts/vegetacion/`
+> y está versionado: `vegetation_manager.gd` (1605 B), `vegetation_plan.gd` (2999 B),
+> `vegetation_spawner.gd` (5203 B) + `data/vegetacion/vegetacion_config.json` (924 B).
+> El spawner se instancia como **nodo en `scenes/main_island.tscn`** (L60), NO como autoload: el autoload
+> `VegetationSpawner` fue retirado en `10b7461` (2026-09-17) y el checklist lo sigue citando como autoload.
+> Las rutas `Assets/_Project/…` de las secciones 1.x son diseño heredado NO implementado.
+> Suites headless medidas (Godot 4.7.2, 2026-10-11): `test_vegetation_headless.gd` 7/0 ·
+> `test_vegetation_plan_headless.gd` 5/0 · `test_vegetation_spawner_headless.gd` 4/0 (EXIT 0, 0 SCRIPT ERROR).
 
 ## 1. Archivos Previstos
 

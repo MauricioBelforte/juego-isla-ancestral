@@ -35,6 +35,7 @@ Definir y formalizar el **sistema documental** del proyecto: catálogo, convenci
 | Prioridades | ✅ este documento §7 | M02 |
 | Milestones | ✅ este documento §8 | M02 |
 | Roadmap | ✅ este documento §8 | M02 |
+| Casos límite y gobernanza | ✅ este documento §11 | M02 |
 | Backlog inicial | ✅ Plan-inicial-minimo.md (152) | M02 |
 
 ## 3. Convenciones de Nombres
@@ -129,3 +130,58 @@ raiz/
 | `5-FUTURAS-MEJORAS.md` | Directivas e ideas del usuario (nada propuesto por agentes) |
 
 Todos: firma del último agente que los modifica; los módulos dueños los completan a medida que avanzan.
+
+## 11. Casos límite y flujos de gobernanza documental
+
+Reglas operativas para las situaciones que el flujo normal (documentación primero → implementación → verificación → cierre, §5.1) no cubre. Todas describen la práctica vigente del repositorio y son verificables contra disco.
+
+### 11.1 Un módulo dueño no completa su documento
+
+- **Seguimiento:** el ítem queda `[ ]` en el `05-Checklist.md` del componente que lo consume, con el dueño anotado al final (`— **M##**`); la fila del módulo dueño en `CHECKLIST-GLOBAL.md` refleja su progreso real.
+- **Bloqueo colgado:** `scripts/verificar_checklist.py` marca los módulos en curso sin actividad (regla §21.4.7 de `AGENTS.md`); pasadas 24 h de inactividad el módulo es reclamable por otro agente.
+- **No se escribe el contenido ajeno:** el consumidor registra la dependencia y mide lo que sí puede medir (por ejemplo, el validador que ya existe), pero no redacta el documento del dueño.
+
+### 11.2 Un ítem del catálogo cambia de dueño
+
+- Se actualiza la tabla de este documento (§2) y la anotación del dueño **en el propio ítem**, no en una nota suelta.
+- El cambio queda en el log de la tarea que lo motivó; si vino de un reclamo por §21.4.7, además se anota en `Mensajes entre modelos/ESTADO-PARALELO.md`.
+- **Regla dura:** un cambio de dueño nunca revierte marcas ya verificadas; sólo cambia quién responde por lo pendiente.
+
+### 11.3 Cambios masivos (refactor de documentación)
+
+- Antes de un cambio masivo se respalda el estado previo en `Obsoletos/` con la nomenclatura `YYYY-MM-DD_HH-MM-SS_nombre.ext` (§3).
+- El cambio se hace **por lotes verificables** y cada lote se valida con `scripts/verificar_checklist.py` antes de seguir.
+- Los archivos compartidos (`CHECKLIST-GLOBAL.md`, `ESTADO-PARALELO.md`, el pool de números) se editan **a nivel de bytes**, para no perder el encoding/EOL que otros agentes esperan (§28 de `AGENTS.md`).
+
+### 11.4 Módulos que no aplican testing (06/07 omitidos)
+
+- `06-Plan-Testings.md` y `07-Resultados-Testings.md` son **opcionales** (§5.2): se exigen cuando el módulo tiene artefactos verificables por un test ejecutable.
+- **Verificación medida (2026-10-11):** ni `02-Vision-Y-Concepto/plan-actual/` ni `03-Documentacion-Del-Proyecto/plan-actual/` contienen `06-Plan-Testings.md` ni `07-Resultados-Testings.md` (5 archivos cada uno, en `plan-inicial/` y en `plan-actual/`). La omisión queda justificada porque el entregable de ambos es **documentación**: la verificación de M03 corre por `scripts/proyecto/test_documentation_m03.gd` (**8 checks / 0 fallos / EXIT 0**, medido el 2026-10-11) y por `scripts/verificar_checklist.py`, y un plan de testings dedicado sería redundante.
+- Si un módulo documental incorpora más adelante artefactos ejecutables, los 06/07 se crean entonces (el estándar no los prohíbe).
+
+### 11.5 Directivas del usuario sin implementar
+
+- Las ideas y pedidos del usuario que todavía no se implementan van a `5-FUTURAS-MEJORAS.md`, **nunca** a un `05-Checklist.md` (ese checklist mide trabajo del proyecto, no deseos pendientes de decisión).
+- El documento es de **directivas propias del usuario**: los agentes no agregan propuestas propias ahí (§3 de la tabla del archivo).
+- Cuando una directiva se implementa, se retira de `5-FUTURAS-MEJORAS.md` y su evidencia queda en el log del módulo que la ejecutó.
+
+### 11.6 Documentación externa nueva (INVESTIGACION)
+
+- El material de referencia externo vive en `DOCUMENTACION/INVESTIGACION SOBRE OTROS JUEGOS/` y **no** reemplaza a los 5 documentos generales (§10).
+- Un hallazgo externo que cambie una decisión del proyecto se **cita con fuente** desde el `03-Diseno.md` del módulo afectado; no se copia en bloque.
+
+### 11.7 Incorporación de un agente nuevo
+
+Flujo mínimo, en este orden:
+
+1. Leer `AGENTS.md` completo (reglas duras, §6.1 numeración, §21 protocolo multiagente, §28 codificación).
+2. Leer `CHECKLIST-GLOBAL.md` (estado real de los 152 módulos) y `Mensajes entre modelos/ESTADO-PARALELO.md` (quién trabaja en qué).
+3. Leer `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md` y el `BACKLOG-MASTER.md` propio.
+4. Leer el `05-Checklist.md` del módulo que va a tomar **antes** de codificar, y revisar los canales vecinos para descartar doble asignación.
+5. Firmar (`**Modelo:**` / `**Plataforma:**`) todo documento que modifique y escribir su log con el número tomado de `Logs/NUMEROS_DISPONIBLES.txt` (§5.6).
+
+### 11.8 Excepción de raíz histórica: `00-PLAN-INICIAL/` y `01-Fundamentos/`
+
+- `DOCUMENTACION/00-PLAN-INICIAL/` es el **origen inmutable** del proyecto (`Plan-inicial-minimo.md`, `Plan-de-produccion.md`, `IDEA-BASE-DEL-JUEGO.md`, `HISTORIA-DEL-JUEGO.md`): no se modifica, sólo se cita.
+- `01-Fundamentos-Del-Proyecto` es **raíz histórica** de la numeración: su `05-Checklist.md` se titula literalmente "CHECKLIST DEL PLAN INICIAL GENERICO (152 MÓDULOS)" — es un índice del plan maestro, no tareas de M01 (anomalía registrada en los `BACKLOG-MASTER.md` de los agentes).
+- Ninguno de los dos entra en el flujo `plan-inicial/ ↔ plan-actual/` de §5.4: son la **fuente**, no un componente con plan vigente.

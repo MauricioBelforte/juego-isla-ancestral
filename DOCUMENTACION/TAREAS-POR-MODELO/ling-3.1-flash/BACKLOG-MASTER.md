@@ -193,13 +193,121 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 - **Criterio de éxito:** los 36 `[x]` tabulados con evidencia `archivo:línea` + veredicto
   numérico: ¿kimi-k3 trabaja con evidencia real o con claims?
 
-### Candidatos de nicho (sujeto a L-01)
+#### L-05 — Encargo M84 L117 (reporte de licencias de audio por build) + auditoría M154 — `[x]` M84 CERRADO / M154 ENTREGADO (a la espera de decisión del director)
+
+- **M84 L117 (encargo mimo-v2.6, msg 22 del canal):** implementado el único `[?]`
+  de M84. 3 scripts nuevos en `game/isla-ancestral/scripts/legal/`
+  (`audio_license_report_tool.gd` @tool API estática, `audio_license_report_editor.gd`
+  EditorScript, `test_audio_license_report_m84.gd` SceneTree con simulación
+  determinista 4 fixtures). Test headless Godot 4.7.2: **13 checks / 0 fallos /
+  EXIT 0**; WARNING `SIN LICENCIA REGISTRADA: 'sfx_no_registrado.wav'` verificado;
+  sin regresión (`test_audio_licenses_m84.gd` 15/0). **Log 1629.**
+- **Cierre:** director mimo-v2.6 aceptó y aplicó el flip (msg 24 del canal,
+  2026-10-11 01:43): L117 `[?]`→`[x]`, Totales 98/99→**99/99**, CHECKLIST-GLOBAL
+  M84 🟡→**✅ 99/99**. M84 cerrado.
+- **M154 (respuesta a msg 24, msg 25 del canal):** auditoría checklist↔disco
+  (mi nicho). Evidencia: `preview_personaje.tscn` (L109), `scripts/preview/`
+  (L114) y `scripts/blender/` (L170/L171) = **0 hits** en disco. **Hallazgo
+  nuevo:** L172/L173 marcados `[x]` son candidatos Familia A — contradicen
+  `04-Codigo.md` (pendientes 12-13 ⬜) y `Logs/screenshots/` no existe.
+  Propuesta al director: implementación visual → agnes-3-flash (visión) + Hy4
+  (Blender); degradación L172/L173 con evidencia (flip es del director).
+  **Límite de perfil declarado:** texto puro sin visión — `.tscn`/Blender→Godot
+  son territorio excluido por mi backlog (§ "Lo que NO debés hacer").
+- **Entregables:** msg 23 (informe M84) + msg 25 (auditoría M154) del canal
+  Ling-3.1-Flash; ESTADO-PARALELO.md 03:41 UTC.
+
+### L-06 — Análisis de `Logs/`: métricas, productividad y candados colgados — `[x]` COMPLETADA (encargo mimo msg 26)
+
+- **Qué era:** encargo del director mimo-v2.6 (msg 26, 2026-10-11 02:11): "Revisá tu BACKLOG-MASTER.md y elegí un módulo de tu nicho (documentación, análisis de Logs/métricas, auditoría de seguridad)".
+- **Elección:** candidato de nicho "Análisis de `Logs/`" (mi nicho DRACO 85.5 + SQL tuning; read-only; atómico; utilidad inmediata para el director nuevo).
+- **Qué hizo:** medición completa de `Logs/` (1.567 logs, 2026-08-15 22:46 → 2026-10-11 04:55; 30 en 24h / 209 en 7d / 385 en 30d); productividad por firma exacta (top: glm-5.3-flash 152, agnes-2.5-flash 145, agnes-3-flash 134) y por familia normalizada (DeepSeek ~320, agnes ~311, glm ~191, atria ~166, mimo ~139, Hy3 ~122); actividad últimas 24h (activos: agnes-3-flash, atria-dawn-s2, DeepSeek-V4.1-Flash, atria-dawn-s3, atria, Ling); candados 🔵 (M154 ACTIVO hoy por agnes; M37 columna Última actividad STALE ~29h pero Notas citan trabajo reciente de DeepSeek K.167/K.170 + Log 1543); **drift del Resumen del Proyecto** (declara 3 🔵, la tabla tiene 2: M154 y M37); 10 módulos 🟡 sin actividad >30 días (M86 55d, M81 48d, M80/M97/M99 39d, M69/M90 37d, M75 36d, M95 35d, M74 34d, M71 25d) — candidatos §21.4.7.
+- **Entregable:** msg 27 del canal Ling-3.1-Flash (2026-10-11 02:25:41).
+- **Límites respetados:** read-only sobre GLOBAL y Logs; 0 ediciones de marcas, 0 commits, 0 push. Limitación declarada: barrido cubrió filas 69-99; filas 1-68 pendientes (ofrecidas para próximo ciclo).
+- **Evidencia:** comandos de medición en esta sesión (Get-ChildItem Logs + Select-String **Modelo:** + grep columna Estado del GLOBAL).
+
+### L-07 — Barrido filas 1-68: módulos 🟡 >30 días — `[x]` COMPLETADA (encargo mimo msg 28, Opción 1)
+
+- **Qué era:** respuesta a msg 28 del director mimo-v2.6 (2026-10-11 02:49): informe msg 27 ACEPTADO + 3 opciones. Elegí **Opción 1** (barrido filas 1-68, continuación directa de mi nicho de análisis).
+- **Resultado filas 1-68:** **19 módulos 🟡 >30 días** (M05 43d, M16 39d, M19 39d, M20 42d, M21 37d, M22 41d, M23 39d, M28 39d, M31 41d, M33 37d, M34 41d, M35 41d, M40 38d, M42 39d, M50 34d, M51 35d, M57 32d, M58 35d, M67 39d) + **M47 sin fecha** (fila fantasma, sin dueño). Todos con Agente actual "—" (sin candado 🔵).
+- **Correcciones a msg 27 (3 errores propios, medidos esta sesión):** (1) M71 = 25d, NO >30d → sale; (2) M86 = ✅ Completado 129/129, NO 🟡 → sale (su issue es sello Log 866 inválido); (3) M99 = actualizado HOY por DeepSeek msg 156 → activo, sale. Lista 69-99 corregida: 8 módulos (M69/M74/M75/M80/M81/M90/M95/M97).
+- **Total global:** 27 módulos 🟡 >30 días + M47 sin fecha.
+- **Clusters:** GLM-5.3 family 8 (M19/M22/M28/M31/M34/M35/M67+M95) · Deepseek V4 Flash 4 (M21/M33/M40/M42) · dueños descatalogados (agnes-2.5-flash: M42/M33/M40; ox-alpha retirado: M20) · sin dueño: M47/M51/M58.
+- **Retakables inmediatos (Liberado):** M35, M50, M51, M58 + M74 = 5 sin riesgo de pisado.
+- **Entregable:** msg 29 del canal Ling-3.1-Flash (2026-10-11 03:06:05).
+- **Límites respetados:** read-only sobre CHECKLIST-GLOBAL.md; 0 ediciones de marcas, 0 commits, 0 push. Flips son del director.
+
+### L-08 — Auditoría de seguridad (Opción 2, encargo mimo msg 30) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 30 del director mimo-v2.6 (2026-10-11 03:10): barrido ACEPTADO + Opción 2 (auditoría de seguridad READ-ONLY): (1) re-verificación de `scripts/auditar_secrets.py`, (2) revisión de `scripts/security/` (M106) como segundo par de ojos de DeepSeek.
+- **Parte 1 — gate de secrets:** corrida = **707 archivos escaneados, 339 excluidos, 0 secrets, exit 0**; `--selftest` 6/6 OK; job `security-scan` en `quality.yml` verificado como **hard gate** (sin `|| true`). Drift menor: comentario "634 archivos" vs real 707.
+- **Parte 2 — M106:** re-ejecución independiente de las 8 suites (Godot 4.7.2 headless) = **237 checks / 0 fallos / 0 SCRIPT ERROR / 8× EXIT 0** (m106=43, services=78, secrets=20, middleware=19, input=25, environments=24, env=13, database=15) — coincide con re-QA §21.8 de atria-dawn (Log 1480). Revisión línea por línea de `security_secret_scanner.gd`, `security_key_manager.gd`, `security_tamper_protection.gd` (HMAC-SHA256 manual verificado contra Python `hmac`).
+- **`.env.local`:** existe en disco pero **gitignored** (`.gitignore:251`, `git check-ignore -v` OK, `git ls-files --error-unmatch` = no trackeada). Sin riesgo.
+- **12 `[?]` M106:** defers legítimos a M77/M104/M105/M107/M111 (server-side/CI, no aplica a v1 single-player), cada uno justificado. No es inflación.
+- **Hallazgos drift documental (low-priority):** `04-Codigo.md` cita `res://security/*.gd` (real: `scripts/security/`) y `scripts/security_check.sh` (no existe); comentario "634 archivos" en `quality.yml`.
+- **Veredicto:** sin secrets expuestos; gate funcional; núcleo M106 validado independientemente.
+- **Entregable:** msg 31 del canal Ling-3.1-Flash (2026-10-11 03:23:30).
+- **Límites respetados:** READ-ONLY sobre código y documentación; 0 ediciones de marcas, 0 commits, 0 push. Flips son del director.
+
+### L-09 — Auditoría coherencia checklist vs disco: M51-Agua (Opción 3, encargo mimo msg 32) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 32 del director mimo-v2.6 (2026-10-11 03:28): auditoría seguridad ACEPTADA + Opción 3 (coherencia checklist vs disco, READ-ONLY, 1 módulo; sugerencia M51-Agua o M58-Accesibilidad). Elegí **M51-Agua** (drift interno visible en GLOBAL: nota "31/146" vs Progreso "35/166").
+- **1. Conteo:** 35 `[x]` / 130 `[ ]` / 1 `[?]` = **166** — coincide EXACTAMENTE con la línea Totales del archivo y con la columna Progreso de GLOBAL (35/166) y ESTADO-PARALELO L2766.
+- **2. Muestreo §21.8.2.b (5 ítems [x] contra disco): 5/5 sustentados, 0 fallos:** (1) `shaders/agua_olas.gdshader` ✅ (2) `main_island.tscn:162` nodo AguaAnimada ✅ (3) `scripts/world/medir_costa_m51.gd` ✅ (4) `island_generator.gd:20 var water_level: int = 2` ✅ (5) `scripts/world/agua_animada.gd` ✅. Bonus: 3/3 capturas citadas existen en `tools/mcp/godot-mcp/capturas/51/` (21 capturas totales).
+- **3. Drift checklist↔GLOBAL:** Progreso 35/166 ✅ consistente; Última actividad 2026-09-06 18:23 = iter. 5 ✅.
+- **Hallazgos (drifts documentales, sin inflación):** (1) nota interna de fila 51 stale ("31/146" vs 35/166 real); (2) `[?]` L233 duplicado/obsoleto — animación ya implementada en iter. 2-5, solo reflejo SSR pendiente y ya tiene `[ ]` propio en L246 → **flip propuesto al director**; (3) asignación Hy3 (msg 32) no reflejada en fila 51 (Agente "—"); (4) claim de regresión L245 no re-verificado (claim de tests, fuera de muestreo de disco).
+- **Veredicto:** M51 COHERENTE, sin inflación de marcas.
+- **Entregable:** msg 33 del canal Ling-3.1-Flash (2026-10-11 03:33:40).
+- **Límites respetados:** READ-ONLY; 0 ediciones de marcas, 0 commits, 0 push. Flips son del director.
+
+### L-11 — Reporte de cierre al director (msg 36, regla §7) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** el director respondió msg 35 (M51 ACEPTADA, "tu auditoría es oro") pero solo a msg 33 — msg 34 (M58) quedaba sin lectura confirmada. Regla §7: todo cierre requiere reporte en el canal para disparar la próxima delegación.
+- **Msg 36 entregado (04:47:10):** (1) acuse de M51; (2) resumen ejecutivo M58 para lectura del director (coherente 131/50/2=183, 5/5 sustentados, suites 39/0+13/0, citación fantasma Log 709=M87 en 7 ítems, L196 stale, drift diseño↔implementación, sin CI); (3) nota de re-verificación propia de los claims cargados de msg 34 (conteo, 4/4 artefactos, autoload project.godot:82, identidad Log 709 — todo se sostiene); (4) propuesta de próximo módulo Opción 3: M113-Pruebas-De-Stress (131/132, liberado 2026-10-10) o M107-Backups (151/176) — espera elección del director.
+- **Límites respetados:** READ-ONLY; 0 ediciones de marcas, 0 commits, 0 push.
+
+### L-12 — Auditoría coherencia checklist vs disco: M113-Pruebas-De-Stress (Opción 3, 3er módulo, encargo mimo msg 37) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 37 del director mimo-v2.6 (M58 ACEPTADA + M113 asignado, 2026-10-11 04:54): auditoría con estándar (conteo vs Totales, muestreo §21.8.2.b 5/5, drift checklist↔GLOBAL).
+- **1. Conteo:** 131 `[x]` / 1 `[ ]` / 0 `[?]` = **132** — coincide EXACTAMENTE con línea Totales (L259) y GLOBAL (fila 113: 131/132).
+- **2. Muestreo 5/5 sustentados, 0 fallos:** (1) `scripts/stress/stress_comparator.gd` ✅ (2) `stress_runner.gd` ✅ (3) `stress_scenario.gd` ✅ (4) `test_stress_m113_comparador.gd` ✅ + **re-corrido headless esta sesión: EXIT 0** (5) `test_stress_m113.gd` ✅. Bonus: 4 escenarios en `scripts/stress/escenarios/` (block_edit/equipment/inventory/save_load); métricas definidas en `03-Diseno.md` L42-57.
+- **3. Hallazgo principal — 29 flips `[ ]`→`[x]` por el USUARIO:** commit `531f597` (Mauricio Belforte, 2026-10-11 00:48:33 -0300), ítems "Definir métrica/prueba". Sustentados documentalmente en 03-Diseno.md (NO inflación Familia A), pero contradicen la política de agnes "no marcar [x] sin implementación" (métricas definidas pero no validadas contra baseline) y dejaron stale las Notas del Agente (agnes 2026-10-07: "102/30/0") y la nota de GLOBAL (cita "101/30/1", "102/132", "30 [ ] pendientes"). Última actividad GLOBAL (2026-10-10 05:35) no refleja los flips.
+- **4. Deuda real documentada (no inflación):** (1) `perf_base.json` NO existe en el repo (glob vacío) — 04-Codigo.md lo cita (RUTA_BASELINE); agnes no lo sembró por 5 regresiones falsas en HW variable (Log 919/1423), valor del baseline = M61/CI sobre HW fijo; (2) 07-Resultados-Testings.md ausente; (3) gates stress NO cableados en CI (quality.yml L370 solo comentario).
+- **Veredicto:** M113 COHERENTE en lo medible (conteo triple exacto, 5/5 sustentados, test vivo), sin inflación de artefactos; deuda real abierta sin dueño explícito. NO candidato a ✅.
+- **Entregable:** msg 38 del canal Ling-3.1-Flash (2026-10-11 05:05:26).
+- **Límites respetados:** READ-ONLY; 0 ediciones de marcas, 0 commits, 0 push. Flips son del director/usuario.
+
+### L-10 — Auditoría coherencia checklist vs disco: M58-Accesibilidad (Opción 3, 2º módulo) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** msg 32 del director mimo-v2.6 (Opción 3, 1 módulo; sugerencia M51 o M58). El turno previo entregó M51 (msg 33/L-09); este ciclo auditó **M58-Accesibilidad** en paralelo read-only (relevante: Hy3 recién asignado a M58 en msg 30).
+- **1. Conteo:** 131 `[x]` / 50 `[ ]` / 2 `[?]` = **183** — regex-verified; coincide EXACTAMENTE con Totales del archivo y con GLOBAL (131/183). plan-inicial congelado: 0/173/0=173 (iteraciones agregaron 10 ítems legítimos).
+- **2. Muestreo §21.8.2.b: 5/5 sustentados:** (1) `data/accesibilidad/config.json` ✅ (2) `accesibilidad_schema.gd` ✅ (3) `aplicador_accesibilidad.gd` ✅ (4) autoload `accesibilidad_manager.gd` + `project.godot:82` ✅ (5) docs 01-04 en plan-actual ✅. **Bonus — suites re-corridas por mí (Godot 4.7.2 headless): test_accesibilidad_manager 39 checks/0 fallos/EXIT 0 (Start-Process) + test_accesibilidad_headless 13/0/EXIT 0** — suites VIVAS (la nota de agnes "0/0" era typo).
+- **3. Drift checklist↔GLOBAL:** Progreso/Estado/Actividad coherentes (2026-09-06 04:15 = Log 727, existe).
+- **Hallazgos (trazabilidad documental, SIN inflación de marcas):** (1) **PATRÓN C — citación fantasma en 7 ítems [x] (L23/42/59/66/78/135/201):** citan "Log 709 (glm-5.3-flash)" pero Log 709 es M87-Localización de deepseek-v4-flash (2026-09-04, header interno dice "Log 639"); logs reales de M58 = 456 (marcado, agnes-2.5-flash), 727 (iter. 2, glm — bien citado) y 1398 (sustentado, agnes-3-flash); la iter. 1 (deepseek-v4-flash-vision-exp, 2026-09-02) queda sin log citado correctamente — artefactos SÍ existen y tests pasan; (2) ítem L196 "plan-actual byte a byte idéntico a plan-inicial" [x] FALSO hoy (173 vs 183 ítems, SHA256 distintos); (3) drift diseño↔implementación: 03-Diseno.md describe SettingsManager/AccessibilityProfile/Applier/MenuUI + user:// pero la implementación pivoteó a AccesibilityManager único + data/accesibilidad/config.json; (4) M58 NO cableado en CI (quality.yml no corre test_accesibilidad*).
+- **Veredicto:** M58 COHERENTE en lo medible, sin inflación; 🟡 Liberado honesto, NO candidato a ✅ (50 [ ] + sin CI). Para Hy3: corregir cita Log 709→456 en los 7 ítems y leer la implementación real, no el 03-Diseno.md obsoleto.
+- **Entregable:** msg 34 del canal Ling-3.1-Flash (2026-10-11 03:36:06).
+- **Límites respetados:** READ-ONLY; 0 ediciones de marcas, 0 commits, 0 push. Flips son del director.
+
+### L-13 — Auditoría coherencia checklist vs disco: M107-Backups (Opción 3, 4º módulo, encargo mimo msg 39) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 39 del director mimo-v2.6 (M113 ACEPTADA — "Los 29 flips del usuario son legítimos (métricas en 03-Diseno.md)" — + M107-Backups asignado, 151/176).
+- **1. Conteo:** 151 `[x]` / 0 `[ ]` / 25 `[?]` = **176** — exacto triple (Totales L243 + GLOBAL fila 107). Nota de GLOBAL STALE ("146/12/18", "12 [ ] restantes user-dependent").
+- **2. Git (2 commits relevantes):** `6fc53eb` (2026-10-10, "flips de QA §21.8") flipó 12 `[ ]` (5→`[x]`, 7→`[?]`) + 3 `[x]`→`[?]` (L25-27 degradado Hy3 blq1), cada uno con justificación in-line con cita — aritmética 146/12/18→151/0/25 verificada exacta; QA §21.8 legítima. `531f597` (2026-10-11) NO flippeó marcas — reconcilió Totales, corrigió headers (A 15→19, K 12→17, M 8→9, O 10→13), atribución de autor (deepseek-v4-flash→SWE-1.6/Devin), dueño Hy3 L113, precisó logs (1068 +779; 778/780 no son de M107).
+- **3. Muestreo §21.8.2.b: 5/5 sustentados:** backup.yml (110 líneas), backup_local.ps1 (222), verify_backups.ps1 (104), 08-Politica-Retencion.md, test_backup_m107 **re-corrido headless esta sesión: 28 checks / 0 fallos / EXIT 0**. Bonus: backup_categories.json + backup_policy.json (game/isla-ancestral/data/backup/), backup_manager.gd + test_backup_m107.gd (scripts/backup/), restore_backup.ps1 + register_task.ps1, docs 09/10/11.
+- **4. Familia B:** 03-Diseno.md 504 líneas / 11 secciones, todas las citas válidas, 0 secciones fantasma. **Patrón C: 0** (logs 934/927/1068/779 existen). **Patrón M114: 0** — los 25 `[?]` honestos con dueño (usuario / módulo de integración / Hy3).
+- **5. Drifts menores:** leyenda L8 typo "[ ] cumplido · [ ] pendiente"; bloque Reserva stale (🔵 En curso vs GLOBAL 🟡); L240 dice L113/L25-27/L234 "pendientes de dueño" pero sí nombran Hy3; sin Notas del Agente de iteraciones recientes.
+- **6. Deuda:** 06-Plan-Testings.md y 07-Resultados-Testings.md ausentes; desviación WakeToRun documentada por el director (L110).
+- **Veredicto:** M107 COHERENTE, NO candidato a ✅ (25 `[?]` + 06/07 ausentes) — 🟡 Con dudas honesto.
+- **Entregable:** msg 40 del canal Ling-3.1-Flash (2026-10-11 05:11:27).
+- **Límites respetados:** READ-ONLY; 0 ediciones de marcas, 0 commits, 0 push. Flips son del director/usuario.
+
+## Candidatos de nicho (sujeto a L-01)
 
 #### Auditoría de seguridad (respaldo de Atria)
 
-- [ ] Re-verificación de `scripts/auditar_secrets.py` sobre el árbol (Atria midió 0 secrets en 634 archivos — comprobar con un escáner paralelo)
+- [x] Re-verificación de `scripts/auditar_secrets.py` sobre el árbol (Atria midió 0 secrets en 634 archivos — comprobar con un escáner paralelo) — **L-08: 707 archivos, 0 secrets, exit 0** (el "634" de Atria era de 2026-10-08; hoy son 707)
 - [ ] Parseo y auditoría de save files (`scripts/saving/`, M59) — validación de inputs externos
-- [ ] Revisión de `scripts/security/` (M106) como segundo par de ojos sobre el trabajo de DeepSeek V4.1 Flash
+- [x] Revisión de `scripts/security/` (M106) como segundo par de ojos sobre el trabajo de DeepSeek V4.1 Flash — **L-08: 237 checks / 0 fallos / 8× EXIT 0, coincide con Log 1480**
 - [ ] Auditoría de los flujos de input externo de M106 (validación de vulnerabilidades)
 
 #### Skills y automatización
@@ -209,8 +317,8 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 
 #### Análisis técnico de datos
 
-- [ ] Análisis de `Logs/`: métricas de productividad por modelo, módulos sin actividad, candados colgados
-- [ ] Coherencia `05-Checklist.md` vs código real en disco (método A de T-D7, muestreo dirigido)
+- [x] Análisis de `Logs/`: métricas de productividad por modelo, módulos sin actividad, candados colgados — **L-06 COMPLETADA 2026-10-11** (msg 27 del canal; 1567 logs, 30/24h, familias DeepSeek ~320 / agnes ~311 / glm ~191; candados M154 activo + M37 columna stale; drift Resumen 3🔵 vs 2 en tabla; 10 módulos 🟡 >30 días)
+- [x] Coherencia `05-Checklist.md` vs código real en disco (método A de T-D7, muestreo dirigido) — **L-09/L-10/L-12/L-13 COMPLETADAS 2026-10-11** (msg 33: M51-Agua 5/5; msg 34: M58-Accesibilidad 5/5 + suites 39/0 y 13/0 EXIT 0; msg 38: M113-Stress 5/5 + test EXIT 0; msg 40: M107-Backups 5/5 + test 28/0 EXIT 0)
 - [ ] Análisis de resultados de suites headless: tasas de fallo, patrones, módulos frágiles
 
 ## Orden de trabajo sugerido

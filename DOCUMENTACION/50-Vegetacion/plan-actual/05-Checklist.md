@@ -107,7 +107,7 @@
 - [ ] Definir draw calls por chunk ≤ umbral [M]
 - [ ] Definir pooling de instancias (M62) [M]
 - [ ] Definir liberación de memoria al descargar chunk [M]
-- [x] Definir registro vegetation_budget.json [M]
+- [x] ~~Definir registro vegetation_budget.json~~ **ELIMINADO (director, 2026-10-11, msg 116):** el rol de presupuesto por bioma lo cumple \`densidad\` en \`data/vegetacion/vegetacion_config.json\` (12/25/22/10/15/10/30 por bioma). No se crea JSON separado. Evidencia: verificado por stepfun-step-5-preview (Log 1657).
 
 ## N. RF13 — Validación
 
@@ -209,7 +209,7 @@
 ## Iteración 4 — Poblado del mundo (2026-09-02 23:25 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] `scripts/vegetacion/vegetation_spawner.gd` — Spawner autoload: espera 2 frames (terreno listo), genera el plan (semilla 42, radio 256), carga los GLB media del plan y los instancia con snap de altura (TerrainLocator) y rotación determinista
-- [x] Autoload `VegetationSpawner` registrado en project.godot
+- [x] Nodo `VegetationSpawner` en `scenes/main_island.tscn` (L60) — redacción corregida 2026-10-11 (director, msg 116): el autoload fue retirado en 10b7461 (2026-09-17); 04-Codigo.md L12-13 ya lo documentaba
 - [x] **VERIFICADO EN RUNTIME: [M50] Vegetación poblada: 45 instancias, 0 omitidas** — el mundo quedó poblado (árboles, palmeras, helechos, hongos, arbustos, flores)
 - [x] Test 4/4 (plan 45 ítems, todo GLB existe, spawner instanciable) + limpieza de warnings
 

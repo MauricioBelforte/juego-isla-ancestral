@@ -1142,35 +1142,115 @@ los 2 scripts temporales que colgaban fueron eliminados para que nadie los ejecu
 2026-10-10 y el 2026-10-11: M104, M118, M18, M100, M112, M88, M151, M156, M125, M107, M110,
 M150, M153, M37, M61.
 
-**Causa:** el defecto tiene **3 variantes** y conviene distinguirlas antes de reparar:
+**Causa raíz (hallazda 2026-10-11, stepfun-step-5-preview, msgs 61 y 93):** el defecto tiene
+**3 variantes** y conviene distinguirlas antes de reparar:
 
-1. **Falta solo el pipe de cierre** (la más común) — las 11 celdas están alineadas, solo hay que
-   agregar ` |` al final. Detección: `pipes sin escapar = 11` y `celdas = 11`.
-2. **Celda de MÁS** — un pipe literal dentro de la columna Notas parte la fila en 12-14 celdas.
-   Reparación: escapar ese pipe como `\|`. Detección: `celdas > 11` con `pipes sin escapar ≤ 12`.
+1. **Falta solo el pipe de cierre** (la más común) — las 11 celdas están alineadas, solo hay
+   que agregar ` |` al final. Detección: `pipes sin escapar = 11` y `celdas = 11`.
+2. **Celda de MÁS** — un pipe literal dentro de la columna Notas parte la fila en 12-14
+   celdas. Reparación: escapar ese pipe como `\|`. Detección: `celdas > 11` con
+   `pipes sin escapar ≤ 12`.
 3. **Celda de MENOS** — falta una columna (p.ej. `Agente actual`) y el contenido se desplaza
    (una fecha cae en "Agente actual", las notas en "Última actividad"). **Requiere decisión de
    contenido**: no se puede reparar sin saber qué valor va en la celda faltante.
 
-**⚠️ El defecto es RECURRENTE:** M107 y M110 se rompieron *después* de haber sido reparados —
-cada edición de la fila puede reintroducirlo. **Verificar con un script, no a ojo.**
+> **Distinción clave:** *error de estructura* (variantes 1 y 2, pipe que falta o sobra) vs
+> *error de dato* (un valor incorrecto en la celda correcta — ej. M63 con `glm-5.3-flash` en la
+> columna `Prioridad`). El segundo **no** se arregla insertando `—`: desplazaría las celdas
+> siguientes y rompería la fila. Se documenta como deuda.
 
-**Solución — detector confiable:**
+**⚠️ ORIGEN REAL (no era edición manual):** `scripts/generar_checklist_global.py`
+**generaba** el defecto. `parsear_filas()` (L282-314) lee correctamente un `|` literal en Notas
+usando `maxsplit = ncols - 1`, pero `generar_tabla()` (L465-467 y L480-482) reconstruía la fila
+con `" | ".join(...)` **sin escapar**: el pipe literal partía la celda y la fila perdía su
+cierre. **Evidencia de que nunca se atacó la causa:** existen 5+ scripts de reparación *ad hoc*
+del mismo síntoma en `scripts/` (`fix_global_rows.py` arregló 58 filas, `fix_global_rows_v2.py`
+otras 41, `fix_global_rows_v3.py` 5 más, `p57_fix_rows.py` 6, `t_a3_fix.py`, `t_a4_realign.py`).
+
+**Solución — dos partes, ambas implementadas el 2026-10-11:**
+
+1. **Parche en el origen** (`scripts/generar_checklist_global.py`, función `esc()`), aplicado en
+   los dos `join` que construyen filas:
+
+   ```python
+   def esc(s: str) -> str:
+       s = s.replace("\\\\", "\x00")   # proteger backslashes literales
+       s = s.replace("\\|", "|")           # desescapar pipes ya escapados
+       s = s.replace("\x00", "\\\\")   # restaurar backslashes literales
+       return s.replace("|", "\\|")        # escapar todos los pipes
+   ```
+
+   **Debe ser idempotente.** La primera versión (`replace("\\","\\\\")`) doble-escapaba:
+   hay **52 filas de GLOBAL que ya tienen `\|`** en Notas, y se degradaban
+   (`a \| b` → `a \\\\| b`). La versión final normaliza antes de escapar.
+
+2. **Auditor por sección** (`scripts/auditar_tabla_secciones.py`): detecta filas midiendo contra
+   el **header de su propia sección**, no contra uno fijo — ese era el fallo del detector
+   original, que tomaba filas de datos como headers y por eso no veía las filas huérfanas ni
+   las de formato mezclado de QA-SEALS.
+
+**Detector de referencia (contar pipes SIN escapar):**
 ```python
-def pipes(s):  # pipes SIN escapar
-    return len([i for i, c in enumerate(s) if c == "|" and (i == 0 or s[i - 1] != "\\")])
+def pipes_sin_escapar(s):
+    return len([i for i, c in enumerate(s) if c == "|" and (i == 0 or s[i-1] != "\\")])
 # Criterio: fila sana = pipes(linea) == 12  y  linea.strip().endswith("|")
 ```
 
 **Trampa de verificación:** usar `linea.split("|")` es **incorrecto** — divide también los `\|`
-escapados y reporta 13-14 "celdas" en filas que están sanas. En markdown, `\|` dentro de una celda
-es un pipe literal, no un separador. Contar siempre **pipes sin escapar**.
+escapados y reporta 13-14 "celdas" en filas que están sanas. En markdown, `\|` dentro de una
+celda es un pipe literal, no un separador.
 
 **Regla de oro:** si la reparación requiere *mover contenido entre columnas* (variante 3),
 **reportar antes de editar** — insertar un valor inventado en `Prioridad`/`Recom`/`Agente actual`
 es peor que la fila rota.
 
-**Fechar:** 2026-10-11 03:00 | **Modelo:** stepfun-step-5-preview | **Plataforma:** Kilo Code
+**Fechar:** 2026-10-11 04:40 | **Modelo:** stepfun-step-5-preview | **Plataforma:** Kilo Code
+
+---
+
+## E-29: `Resource.get("clave", default)` con 2 argumentos — inválido en Godot 4
+
+**Síntoma:**
+```
+SCRIPT ERROR: Invalid call to function 'get' in base 'Resource (EventDefinition)'. Expected 1 argument(s).
+   at: _run (res://scripts/eventos/test_event_manager_headless.gd:45)
+```
+
+**Ubicación:** cualquier llamada `recurso.get("clave", valor_por_defecto)`. Caso real:
+`test_event_manager_headless.gd:45` (M74-Eventos, 2026-10-11, detectado por stepfun-step-5-preview).
+
+**Causa:** en Godot 4, `Resource.get()` acepta **un solo** argumento (el nombre de la propiedad).
+No existe la variante con valor por defecto que sí tiene `Dictionary.get()` o `Object.get()`.
+El error **mata la ejecución del script**: si está dentro de una suite `--script`, esta nunca llega
+al `Resumen`, así que el `0 fallos` que declara no es reproducible.
+
+**Trampa relacionada:** si el archivo está en `Logs/` o se corre con `--script` y el proceso
+también arranca el boot (autoload `Bootstrap`), el `SCRIPT ERROR` queda enterrado entre miles de
+líneas de log. **Hay que buscar el patrón explícitamente**, no leer "el final del log" — y usar
+`--quit-after N` para que el proceso termine.
+
+**Solución:**
+```gdscript
+# ANTES — inválido (2 argumentos sobre Resource)
+var mes: int = int(primer_ev.get("mes", primer_ev.mes))
+var dia: int = int(primer_ev.get("dia", primer_ev.dia))
+
+# AHORA — acceso directo a la propiedad @export
+var mes: int = int(primer_ev.mes)
+var dia: int = int(primer_ev.dia)
+```
+
+Si se necesita default, usar el patrón explícito:
+```gdscript
+var mes: int = int(primer_ev.get("mes")) if primer_ev.get("mes") != null else -1
+```
+
+**Lección adicional (aserción obsoleta, mismo archivo):** el check siguiente comparaba
+`catalogo.size() == 15` cuando el catálogo real tenía **44** eventos (los 7 capítulos de la historia
+se agregaron después sobre la base original). Una aserción exacta sobre contenido se vuelve obsoleta
+con cada iteración: usar umbral (`>= 15`) salvo que el contenido sea fijo por diseño.
+
+**Fechar:** 2026-10-11 09:10 | **Modelo:** stepfun-step-5-preview | **Plataforma:** Kilo Code
 
 ---
 
