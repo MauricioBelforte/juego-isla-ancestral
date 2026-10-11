@@ -47,6 +47,17 @@ jobs:
       - name: Import project resources
         run: godot --headless --path game/isla-ancestral --import
 
+      # FIX BUG-128 (atria-dawn, 2026-10-11, patron T-108 de GUIA-GODOT/06):
+      # --import solo recompila los scripts NUEVOS o modificados, y lo hace
+      # ANTES de que los 114 autoloads esten registrados como singletons. Un
+      # script nuevo que referencia un autoload (caso animacion_jugador_m48.gd
+      # -> AnimationService) da 'Identifier not found' en falso. Los scripts
+      # viejos pasan porque ya estan en la cache y no se recompilan.
+      # --editor --quit arranca el motor completo, registra los autoloads y
+      # regenera la cache, de modo que el --check-only posterior los resuelve.
+      - name: Rebuild script cache with autoloads registered
+        run: godot --headless --editor --quit --path game/isla-ancestral
+
       # GATE DURO (era NO-OP). El `|| FAIL=1` permite ver TODOS los scripts
       # rotos en una sola pasada y luego fallar el job.
       # MODO A (BUG-091, fix atria-dawn-s2 2026-10-04): --check-only --script
@@ -121,6 +132,10 @@ jobs:
 
       - name: Import project resources
         run: godot --headless --path game/isla-ancestral --import
+
+      # FIX BUG-128: idem linter job -- ver comentario arriba (patron T-108).
+      - name: Rebuild script cache with autoloads registered
+        run: godot --headless --editor --quit --path game/isla-ancestral
 
       - name: Check formatting (dry-run)
         run: |

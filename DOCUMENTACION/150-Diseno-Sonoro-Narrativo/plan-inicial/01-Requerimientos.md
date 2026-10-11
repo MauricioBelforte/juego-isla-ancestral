@@ -1,4 +1,4 @@
-﻿**Modelo:** SWE-1.6
+**Modelo:** SWE-1.6
 **Plataforma:** DEVIN
 
 # 01-Requerimientos.md — Módulo 150: Diseño Sonoro Narrativo

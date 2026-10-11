@@ -43,6 +43,12 @@ Thumbs.db
 # compilan en CI (cascada voxel, diagnosticado en el frente de CI).
 addons/*/bin/
 !addons/zylann.voxel/bin/
+# Excepcion gdUnit4: su bin/ contiene herramientas GDScript puras
+# (GdUnitCmdTool.gd, GdUnitCopyLog.gd), NO binarios compilados. Sin
+# GdUnitCmdTool.gd en el checkout, el job "Godot Tests (GdUnit4)" de
+# testing.yml falla con 'File not found' (BUG-128, diagnosticado
+# 2026-10-11 tras el push bf23406..6134034).
+!addons/gdUnit4/bin/
 
 # Godot executable (instalar localmente, no versionar)
 /Godot/

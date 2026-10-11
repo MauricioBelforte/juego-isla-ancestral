@@ -199,3 +199,117 @@ jobs:
           body_path: RELEASE_NOTES.md
           draft: true
           generate_release_notes: false
+
+  # M118 P5 + I.99 — Deploy a itch.io.
+  # P5: deploy AUTOMATICO al crear tag semver (push: v*.*.*).
+  # I.99: deploy MANUAL via workflow_dispatch (mismo job, mismo canal).
+  # Requiere el secreto BUTLER_API_KEY en Settings > Secrets and variables >
+  # Actions del repo. Sin el secreto el job se saltea con un ::warning:: claro
+  # en vez de romper el release (KnownIssue no bloqueante, CASO A infra externa).
+  # Canal destino configurable via vars.ITCH_USER / vars.ITCH_GAME (defaults
+  # mauriciobelforte / isla-ancestral).
+  deploy-itch:
+    name: Deploy to itch.io
+    runs-on: ubuntu-latest
+    needs: [build, checksum]
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Check BUTLER_API_KEY
+        id: key
+        run: |
+          if [ -z "${{ secrets.BUTLER_API_KEY }}" ]; then
+            echo "::warning::BUTLER_API_KEY no configurado. Deploy a itch.io saltedo (KnownIssue M118 P5/I.99). Configurar el secreto en Settings > Secrets and variables > Actions."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install butler
+        if: steps.key.outputs.skip != 'true'
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip -o butler.zip
+          chmod +x butler
+          ./butler --version
+
+      - name: Push to itch.io
+        if: steps.key.outputs.skip != 'true'
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          ITCH_USER: ${{ vars.ITCH_USER || 'mauriciobelforte' }}
+          ITCH_GAME: ${{ vars.ITCH_GAME || 'isla-ancestral' }}
+        run: |
+          VERSION="${{ github.event.inputs.version || github.ref_name || '0.0.0-dev' }}"
+          # El canal lleva el nombre del tag en deployes por tag; en manuales
+          # usa la version ingresada. Cada plataforma es un canal separado.
+          CHANNEL_PREFIX="${GITHUB_REF_NAME:-$VERSION}"
+          fail=0
+          for par in "Linux/X11:x86_64:linux" "Windows Desktop:exe:windows" "macOS:app:macos"; do
+            label="${par%%:*}"
+            resto="${par#*:}"
+            ext="${resto%%:*}"
+            os="${resto##*:}"
+            dir="artifacts/release-${label}"
+            if [ ! -d "$dir" ]; then
+              echo "::warning::No se encontro el artefacto $dir; se saltea el canal $os."
+              continue
+            fi
+            bin=$(find "$dir" -name "*.${ext}" | head -1)
+            if [ -z "$bin" ]; then
+              echo "::warning::Sin binario .${ext} en $dir; se saltea el canal $os."
+              continue
+            fi
+            echo "butler push '$bin' $ITCH_USER/$ITCH_GAME:${CHANNEL_PREFIX}-${os}"
+            ./butler push "$bin" "$ITCH_USER/$ITCH_GAME:${CHANNEL_PREFIX}-${os}" --userversion "$VERSION" || fail=1
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo "::error::butler push fallo para al menos un canal."
+            exit 1
+          fi
+          echo "Deploy a itch.io completado (version $VERSION)."
+
+  # M118 J — Notificacion por email a stakeholders en tags.
+  # Requiere SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS y STAKEHOLDER_EMAILS
+  # como secretos del repo. Sin ellos se saltea con ::warning:: (KnownIssue no
+  # bloqueante, CASO A infra externa). Usa dawidd6/action-send-mail@v4.
+  notify-stakeholders:
+    name: Email stakeholders
+    runs-on: ubuntu-latest
+    needs: [deploy-itch]
+    if: always() && github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Check SMTP secrets
+        id: mail
+        run: |
+          if [ -z "${{ secrets.SMTP_HOST }}" ] || [ -z "${{ secrets.SMTP_USER }}" ] || [ -z "${{ secrets.SMTP_PASS }}" ] || [ -z "${{ secrets.STAKEHOLDER_EMAILS }}" ]; then
+            echo "::warning::Secretos SMTP/STAKEHOLDER_EMAILS no configurados. Notificacion por email salteda (KnownIssue M118 J). Configurarlos en Settings > Secrets and variables > Actions."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Send stakeholder email
+        if: steps.mail.outputs.skip != 'true'
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: ${{ secrets.SMTP_HOST }}
+          server_port: ${{ secrets.SMTP_PORT || '587' }}
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          subject: "[Isla Ancestral] Release ${{ github.ref_name }} publicado"
+          to: ${{ secrets.STAKEHOLDER_EMAILS }}
+          from: ${{ secrets.SMTP_USER }}
+          body: |
+            Se publico el release ${{ github.ref_name }} de Isla Ancestral.
+
+            - GitHub Release (draft): ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}
+            - Deploy itch.io: ver job "Deploy to itch.io" del workflow run ${{ github.run_id }}
+            - Checksums: artefacto release-checksums del run
+
+            Saludos,
+            CI/CD de Isla Ancestral (M118)
