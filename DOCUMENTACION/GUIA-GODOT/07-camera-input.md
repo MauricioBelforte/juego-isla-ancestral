@@ -37,7 +37,7 @@ func _orient_camera_up(delta: float) -> void:
 
 **Error:** El jugador se mueve en dirección fija independiente de la cámara.
 
-**Causa:** Se usa `Vector3.FORWARD` o una dirección世界 fixa en vez de la dirección de la cámara.
+**Causa:** Se usa `Vector3.FORWARD` o una dirección de mundo fija en vez de la dirección de la cámara.
 
 **Solución:** Obtener la dirección de la cámara y calcular movimiento relativo:
 
@@ -57,7 +57,7 @@ func _get_camera_forward_flat() -> Vector3:
 
 **Error:** El jugador se mueve en dirección incorrecta al presionar teclas laterales.
 
-**Causa:** Se usa `Vector3.RIGHT`世界 fixa en vez del vector right de la cámara.
+**Causa:** Se usa `Vector3.RIGHT` fija en coordenadas de mundo en vez del vector right de la cámara.
 
 **Solución:**
 ```gdscript

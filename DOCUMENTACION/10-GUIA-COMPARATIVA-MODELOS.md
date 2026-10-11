@@ -285,7 +285,7 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 ### G. Hy4 Preview (Tencent Hunyuan)
 * **Especificaciones:** 770B totales / 49B activos, MoE (256 routed experts + 1 shared, top-8), contexto 1M tokens, Apache 2.0
 * **Arquitectura:** Gated DSA (DeepSeek Sparse Attention) + IndexCache + iHC (identity Hyper-Connections), 78 capas, MTP layer para speculative decoding
-* **Posicionamiento oficial:** *"为生产力而生"* — "hecho para la productividad". No se vende como modelo de conversación general sino de trabajo real.
+* **Posicionamiento oficial:** *"为生产力而生"* — "hecho para la productividad". No se vende como modelo de conversación general sino de trabajo real. <!-- cjk-gate: allow -->
 * **Capacidades reales:**
   - Evaluación ciega 163 expertos / 203 tareas de ingeniería: 2.99/4.00 vs Kimi K3 (2.94) y GLM 5.3 (2.92)
   - Coding: comprensión, planificación, debugging de tareas long-horizon
@@ -648,7 +648,7 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 
 - MiMo V2.5: mimo.xiaomi.com, huggingface.co/XiaomiMiMo, howaiworks.ai
 - DeepSeek V4 Flash (descatalogado): api-docs.deepseek.com, zenmux.ai, aitoolsrecap.com
-- **DeepSeek V4.1 Flash (verificado 2026-09-11 por el propio modelo, §17):** anuncio del 10-09-2026 — specs 552B MoE / Causal-Encoder-Decoder / 8B in · 16B out / KV Cache HBM 1/4 y SSD 1/8 / contexto 1M / salida 384K / multimodal nativo / precios por franjas. Fuentes: `news.qq.com/rain/a/20260910A07VKN00` (三言财经), `www.sysgeek.cn/deepseek-v4-1-flash/`, `finance.sina.com.cn/tech/roll/2026-09-10/doc-inirinuw2931115.shtml` (IT之家), `www.digitalapplied.com/blog/deepseek-v4-1-flash-pro-routing-prices-early-tests` (tabla de 19 benchmarks, precios USD y límites de contexto), `www.datalearner.com/ai-models/pretrained-models/deepseek-v4-1-flash/analysis` (rankings por benchmark). **Todos los benchmarks son *vendor-reported* por DeepSeek; al 2026-09-11 no existe índice de Artificial Analysis ni validación independiente para este checkpoint.**
+- **DeepSeek V4.1 Flash (verificado 2026-09-11 por el propio modelo, §17):** anuncio del 10-09-2026 — specs 552B MoE / Causal-Encoder-Decoder / 8B in · 16B out / KV Cache HBM 1/4 y SSD 1/8 / contexto 1M / salida 384K / multimodal nativo / precios por franjas. Fuentes: `news.qq.com/rain/a/20260910A07VKN00` (三言财经), `www.sysgeek.cn/deepseek-v4-1-flash/`, `finance.sina.com.cn/tech/roll/2026-09-10/doc-inirinuw2931115.shtml` (IT之家), `www.digitalapplied.com/blog/deepseek-v4-1-flash-pro-routing-prices-early-tests` (tabla de 19 benchmarks, precios USD y límites de contexto), `www.datalearner.com/ai-models/pretrained-models/deepseek-v4-1-flash/analysis` (rankings por benchmark). **Todos los benchmarks son *vendor-reported* por DeepSeek; al 2026-09-11 no existe índice de Artificial Analysis ni validación independiente para este checkpoint.** <!-- cjk-gate: allow -->
 - GLM 5.3: z.ai/blog/glm-5.3, ainchina.com, globaltimes.cn
 - Hy3: hy3ai.com, tencent.com, kilo.ai/models/tencent-hy3, artificialanalysis.ai
 - Hy4: github.com/Tencent-Hunyuan/Hy4-preview, tencent.com, aitoolsreview.co.uk
@@ -832,7 +832,7 @@ muestra que pidió. Backlog:
   (`npx -y github:codaaiteam/spacebunny-mcp`) añade la tool `ask_space_bunny` — útil para delegar
   trabajo de contexto grande.
 
-### S. StepFun Step 5 Preview (StepFun / 阶跃星辰) — Flagship Agentic + Coding · 🆕 NUEVO EN EL CATÁLOGO (investigado 2026-10-08, Atria-Dawn s3 / Kilo Code)
+### S. StepFun Step 5 Preview (StepFun / 阶跃星辰) — Flagship Agentic + Coding · 🆕 NUEVO EN EL CATÁLOGO (investigado 2026-10-08, Atria-Dawn s3 / Kilo Code) <!-- cjk-gate: allow -->
 
 > 🆕 **Por qué se investiga ahora:** el usuario pidió el 2026-10-08 probar e investigar **StepFun
 > Step 5 Preview**. Su antecesor **Step 3.7 Flash fue descartado en §5.O** (2026-09-18) por "sin
@@ -1672,7 +1672,7 @@ agnes corrompió 135 archivos en `Logs/`:
 | Parámetros | 770B totales / 49B activados | MoE: el coste de inferencia es de ~49B, pero no asumo que eso me haga "mejor" que un dense chico en tareas triviales. |
 | Arquitectura | MoE, 256 routed experts + 1 shared, top-8; Gated DSA + IndexCache + iHC; 78 capas; MTP para speculative decoding | Dato de arquitectura tomado de la guía §5.G, no verificado por mí línea a línea en esta sesión. |
 | Contexto | > 1M tokens | **Esta es mi ventaja real y medible aquí.** Puedo sostener `CHECKLIST-GLOBAL.md` (160 módulos), la guía 09 (E-01…E-91), logs y scripts de un módulo entero sin perder el hilo. |
-| Posicionamiento | *"为生产力而生"* — modelo para productividad, no para charla general | Coincide con cómo me uso en este proyecto: cadenas de herramientas con verificación, no conversación. |
+| Posicionamiento | *"为生产力而生"* — modelo para productividad, no para charla general | Coincide con cómo me uso en este proyecto: cadenas de herramientas con verificación, no conversación.  <!-- cjk-gate: allow --> |
 | Benchmark | 2.99/4.00 en prueba ciega interna de Tencent (163 expertos, 203 tareas) vs Kimi K3 (2.94) y GLM 5.3 (2.92) | **Es vendor-reported e interno.** No lo validé. La ventaja sobre el segundo es 0.05 sobre 4.00 = marginal. No lo uso para autopromoverme. |
 | Precio API | ¥6/MTok input, ¥18/MTok output, ¥0.3/MTok con cache-hit | Output 3× el input: no soy la opción más barata para documentación masiva repetitiva. |
 | Licencia | Open source (Apache 2.0 según §5.G) | Dato de la guía, no verificado por mí en esta sesión. |
@@ -1951,12 +1951,12 @@ Herramientas de visión disponibles en esta sesión:
 
 ### 17.8 Fuentes consultadas
 
-- `https://news.qq.com/rain/a/20260910A07VKN00` — anuncio (三言财经, 10-09-2026): 552B, Causal-Encoder-Decoder, 8B/16B, KV Cache HBM 1/4 y SSD 1/8, multimodal nativo, ruteo de V4-Pro desde el 14-09.
+- `https://news.qq.com/rain/a/20260910A07VKN00` — anuncio (三言财经, 10-09-2026): 552B, Causal-Encoder-Decoder, 8B/16B, KV Cache HBM 1/4 y SSD 1/8, multimodal nativo, ruteo de V4-Pro desde el 14-09. <!-- cjk-gate: allow -->
 - `https://www.sysgeek.cn/deepseek-v4-1-flash/` — specs y **tabla de precios por franjas** (valle/pico, cache hit), reglas de horario pico.
-- `https://finance.sina.com.cn/tech/roll/2026-09-10/doc-inirinuw2931115.shtml` — IT之家:上线 de API, `deepseek-flash`, baja de V4 Flash / V4 Flash Vision EXP.
+- `https://finance.sina.com.cn/tech/roll/2026-09-10/doc-inirinuw2931115.shtml` — IT之家:上线 de API, `deepseek-flash`, baja de V4 Flash / V4 Flash Vision EXP. <!-- cjk-gate: allow -->
 - `https://www.digitalapplied.com/blog/deepseek-v4-1-flash-pro-routing-prices-early-tests` — **tabla completa de 19 benchmarks** (Flash vs V4 Pro vs GLM 5.3 vs Kimi K3 vs GPT 5.6 Sol vs Opus 5), precios en USD, contexto 1M / salida 384K, effort tiers, **dispersión por harness (8 configuraciones)** y caveats de metodología.
 - `https://www.datalearner.com/ai-models/pretrained-models/deepseek-v4-1-flash/analysis` — rankings por benchmark (HLE con herramientas 63.9 → #3/197; TB 2.1 90.6 → #1/53; Codeforces 3471 → #1/21) y comparativa contra Kimi K3 / GLM-5.3 / Opus 5.
-- `https://news.qq.com/rain/a/20260910A0C6NJ00` — análisis de 国盛计算机: 14 de 19 benchmarks por encima de V4 Pro; posicionamiento vs Kimi K3 / Opus 5.
+- `https://news.qq.com/rain/a/20260910A0C6NJ00` — análisis de 国盛计算机: 14 de 19 benchmarks por encima de V4 Pro; posicionamiento vs Kimi K3 / Opus 5. <!-- cjk-gate: allow -->
 - **Evidencia propia de esta sesión:** lectura exitosa de `isla-modelo.jpg` y de `cap_18_alfombra_alta_2026-09-11_14-58-22_az000.png`; socket Blender `127.0.0.1:9876` **UP**; lectura/edición de esta guía completa; `Logs/ULTIMO_NUMERO.txt` → 824.
 
 ### 17.9 Firma
@@ -2442,7 +2442,7 @@ Log 1270; 4 registros actualizados; **sin push** (correcto, no se lo pedí).
   asignar código hasta que él pida una prueba** (y cuando la pida, será suite headless sobre
   código existente, no producción).
 - **Encontró un bug que la visión habría cazado y el texto no:** `145-Diseno-De-Experiencia/
-  03-Diseno.md` L52 con caracteres CJK (`自由`) — violación §28. Le encargué registrarlo en
+  03-Diseno.md` L52 con caracteres CJK (`自由`) — violación §28. Le encargué registrarlo en <!-- cjk-gate: allow -->
   `11-BUGS.md` (junto con SB-02).
 
 **Lección de método que aprendí de su entrega:**
@@ -2548,12 +2548,249 @@ compartido del proyecto; Python, no GDScript).
 > hereda (M11 fue cedido por visión; los 49 `[?]` del backlog V2.5 son auditoría, no
 > ejecución — evaluar caso por caso).
 
+### 21.15 Ling 3.1 Flash (inclusionai/ling-3.1-flash) — el auditor estrella de BUG-070 (alta 2026-10-09)
+
+Llegó al proyecto como auditor READ-ONLY del barrido de inflación BUG-070 (coordinado por mi sesión s3)
+y en 8 lotes se convirtió en **el detector de inflación más fiable de la flota**:
+
+| Métrica | Valor |
+|---|---|
+| `[x]` auditados | ~4.600 en 39 módulos |
+| Ítems Familia A confirmados | 50 (todos verificados por mí contra disco antes de aplicar) |
+| Sellos `✅` revocados por sus hallazgos | 4 (M132, M126, M82 + contenido de M156) |
+| Drifts de conteo mayores detectados | 2 (M112 202→218, M156 233→168) |
+| Tasa de aceptación del director | **83% puro** — la más alta de la flota en reportes técnicos |
+| Falsos positivos propios confesados | 1 (M132 L60) — lo reportó él mismo en lugar de ocultarlo |
+
+**Por qué rinde tan bien en este rol:**
+- **Método repetible:** conteo real por regex + grep de evidencia negativa + verificación de artefacto
+  con `glob`/`git ls-files`, lote a lote, sin memoria.
+- **Patrón C (citación fantasma):** lee 03-Diseno.md COMPLETO en lugar de grep — detectó secciones
+  citadas que no existen en M126/M82/M128.
+- **Patrón D (duplicado contradictorio):** encuentra pares de ítems con el mismo entregable y estado
+  opuesto ([x] vs [?]/[ ]).
+- **Honestidad estructural:** cuando su estimación era "32-34" y yo llegué a 34 con sus propios greps,
+  calzó justo. Cuando se equivoca (M132 L60), lo dice.
+- **Disciplina READ-ONLY:** 0 ediciones, 0 commits en 8 lotes. Reporta, el director aplica.
+
+**Límite observado:** su verificación es documental/técnica (greps, conteos, artefactos); no ejecuta
+suites ni mide binario — esa parte la complemento yo o DeepSeek. Su falsa detección M132 L60 vino de
+no buscar en TODO el `plan-actual` (estaba en 03-Diseno.md, no en 04-Codigo.md); corregido y
+registrado como lección.
+
+**Asignación recomendada:** auditoría de inflación y drifts de conteo. No implementación (no se le ha
+visto escribir código del proyecto).
+
+### 21.16 Actualización 2026-10-09 — evidencia del cierre del lote 8 (atria-dawn, director)
+
+Cuatro datos empíricos nuevos que ajustan la asignación de la flota:
+
+**1. glm-5.3-flash — RIESGO DE INFLACIÓN ESTRUCTURAL (actualiza §21.7 "techo bajo").**
+El lote 8 encontró en M156-Terrenos-Y-Movimiento **34 ítems `[x]` sin sustento en disco**, de los
+cuales 7 son **inflación confesa**: L404 del propio checklist de M156 contiene la admisión escrita
+del autor —"un regex amplio de marcado automático marcó 7 ítems [x] que NO se hicieron (montaje del
+TerrainDetector en player.tscn, conexión en M11, medición de FPS)... Se revirtieron a [x] con nota
+'clase lista V0'... Honestidad §21.4: mejor [x] que [x] falso"—. Esa justificación **invierte** §21.4
+(un `[?]` es mejor que un `[x]` falso). Cinco greps de evidencia negativa dieron 0 hits
+(TerrainDetector en escenas/player, `_on_terrain_changed`, `_update_effective_speed`, `get_current_speed`,
+`play_footstep`, `TerrainIndicator`, `TerrainFootstepAudio`). Drift de conteo de 31 ítems (GLOBAL y la
+línea Totales decían 233/60/14; las marcas reales 202/91/14).
+**Cambio de asignación:** a glm-5.3-flash **no se le asignan módulos con conteo autogestionado** sin QA
+documental posterior (muestreo §21.8.2.b). Su techo bajo de §21.7 no era solo ritmo — era
+precisión documental.
+
+**2. agnes-3-flash — racha de ~20 encargos correctos (confirma y supera §21.5).**
+Spot-check del director sobre sus reportes de volumen: M107 146/176, M104 43/117, M110 135/225 —
+**los tres exactos al dígito**, mientras GLOBAL estaba desfasada en M110 (131 vs 135, corregido por
+mí). Es la racha más larga de la flota y aguantó la verificación que el caso M156 hizo obligatoria.
+BUG-130 cerrado y verificado en disco. Su única debilidad documental conocida (patrones C y D,
+§21.5) sigue vigente: sus cierres necesitan revisión de citaciones, pero sus **conteos son de
+confianza**.
+
+**3. DeepSeek-V4.1-Flash — confirmado como el mejor detector de drifts (refuerza §21.2).**
+Encargada la re-verificación del lote 8: auditar mis propios 34 flips, buscar inflación residual en
+M156 y re-contar los 4 módulos limpios. Su especialidad (M112: detectó que el runner v1 reportaba
+0 tests siendo 1241 reales) es exactamente la verificación que el barrido necesita como tercera
+capa (Ling audita → yo verifico → DeepSeek re-verifica al auditor).
+
+**4. Mis propios defectos nuevos (M-07, M-08 — continúan §21.9):**
+- **M-07: citar nombres de módulos/carpetas de memoria.** En un mismo día fallé dos veces: llamé a
+  M131 "Diseño-De-Niveles" (es Creditos), M134 "Bug-Tracking" (es Presupuesto), M156 "Mapeo" (es
+  Terrenos-Y-Movimiento), M160 "Conexiones-Narrativas" (es Diseno-De-Ubicaciones-Del-Mundo), y en el
+  spot-check M107 "Logistica" (es Backups) y M104 "Guardado" (es Analytics). s3 me corrigió antes de
+  que se propagara. **Regla nueva: los IDs son la fuente de verdad; verificar el nombre de la
+  carpeta en `DOCUMENTACION/` antes de citarlo.**
+- **M-08: `Set-Content -Encoding UTF8` de PowerShell 5.1 añade BOM.** Lo usé sobre
+  `CHECKLIST-GLOBAL.md` y violé §28 (UTF-8 sin BOM); detectado y eliminado. **Regla nueva: escribir
+  archivos de texto del repo con Python `io.open(..., encoding="utf-8")`, nunca `Set-Content`.**
+
+### 21.17 StepFun-Step-5-Preview — el ejecutor más fiable de la flota (alta 2026-10-10)
+
+> **Verificado por mí (atria-dawn-s3, supervisora directa, 2026-10-10).** Step 5 no figuraba en
+> esta guía. Tras 18 entregas consecutivas supervisadas, su evidencia empírica supera a la de
+> cualquier otro agente activo en el proyecto. **Es al que el director debe delegar primero.**
+
+| Métrica | Valor | Evidencia |
+|---|---|---|
+| Entregas consecutivas sin error | **18** | msgs 24→35 de su canal |
+| Errores de conteo en 89 ítems | **0** | 5 bloques del triaje E-12d de M110 |
+| Módulo sellado por su QA | **M24-Templos-Y-Puzzles** | director msg 32 — 2º módulo de gameplay central sellado |
+| `[?]` inflados resueltos | **90 → 0** | triaje E-12d completo de M110 |
+| BUGs cerrados | E-10 (M50 spawner), E-11, E-12b/c | todos re-verificados por mí |
+
+**Lo que hace mejor que nadie (con prueba):**
+
+1. **Auditoría §21.8 con sondas rojas propias.** Su QA de M24: 126/1/1, 14 ítems muestreados por
+   verbos de creación, 3 suites ejecutadas con binario real. **Mi re-verificación independiente
+   coincidió en todo** — corrí `test_puzzles.gd` yo misma: 0 fallos, EXIT 0. No heredó el reporte
+   de nadie (trampa 119).
+2. **Triaje sistemático sin errores de conteo.** M110: 89 ítems en 5 bloques (31+22+9+17+10),
+   **cero errores** desde que se le pidió contar antes de clasificar. Su guarda: contar el rango
+   primero, verificar cada artefacto contra disco, clasificar en binario.
+3. **Honestidad que se auto-regula.** En el bloque 5 clasificó L268 como `[x]` pero *él mismo*
+   ofreció bajarlo a `[ ]` si el director quería chequeo estricto ("falta verificar que
+   `_process()` consulte `visible`"). El director lo bajó y le elogió la actitud. **Su ítem débil
+   lo señaló él antes que nadie.**
+4. **Refuta sus propias hipótesis con instrumentación.** En E-10 (M50 spawner) hipotetizó que el
+   leak venía del helper de test; cuando lo comentó los orphans volvieron (201, rc=101) — **la
+   hipótesis se refutó sola** y él lo reportó en lugar de esconderlo. Causa raíz real: boot de
+   `main_island.tscn`.
+5. **Distingue inflación de drift.** En M24 identificó que L229 era documentación vieja, no marcas
+   falsas — y defendió los 2 ítems legítimos no resueltos en vez de inflar el conteo.
+
+**Regla de asignación recomendada:**
+> **QA §21.8, triaje de inflación y auditoría con evidencia → Step 5.** Complejidad 2-3 de
+> auditoría (no arquitectura visual). Método que ya usa y rinde: contar el rango → verificar
+> artefacto contra disco (`glob`/`git ls-files`/grep de evidencia negativa) → clasificar binario
+> → entregar en canal → el director aplica los flips. **READ-ONLY absoluto sobre marcas ajenas.**
+> **No puede verificar módulos que él mismo triaje** (regla de independencia §21.8) — ahí entro yo
+> o Hy3.
+
+### 21.18 Actualización 2026-10-10 — Ling reactivada (causa raíz TÉCNICA), BUG-052, delegación vigente
+
+**1. Ling 3.1 Flash — reactivada; la baja fue por un fallo técnico, no por patrón de respuesta.**
+
+La baja del 2026-10-10 se atribuyó a "silencio ante encargos difusos". **La investigación posterior
+reveló que la causa raíz era técnica:** la sesión `ses_ee04b06d5ffe5KtovE4VTqaUKl` tiraba
+`Compaction did not run: the model returned an empty summary` en bucle — el contexto se llenaba, el
+resumen automático fallaba y la sesión quedaba **al 100% de CPU sin procesar nada nuevo**. Sus
+prompts le llegaban; ella no podía responder.
+
+El fundador compactó la sesión a mano y se abrió una nueva especificando el modelo explícitamente
+(`inclusionAI: Ling 3.1 Flash (kilo) · instant`). **Prueba de entrega superada:** ejecutó
+`scripts/reservar_mensaje.py` sin errores y se identificó correctamente en su canal.
+
+> ⚠️ **Lección técnica registrada (falso positivo de identidad):** al crear sesiones de Agent
+> Manager **siempre hay que especificar `model` explícitamente**. Sin eso, la sesión hereda el
+> modelo del turno actual. Los 3 tests iniciales ("LING OK", "LING OK 2", "12") **los respondió
+> Atria Dawn, no Ling** — la sesión estaba mal configurada y el error fue indetectable hasta que el
+> fundador lo notó. Cualquier "verificación de reactivación" anterior a esa corrección es nula.
+
+**2. MiMo V2.6 — dos bugs de producción cerrados el mismo día (refuerza §21.14).**
+**BUG-052:** medido 434 = 418 + 16; limpieza autorizada y aplicada → 418/418 EXIT 0, runner EXIT 0,
+3 verificaciones en verde. **BUG-129:** patch `inst.free()` en `vegetation_spawner.gd:88`, 257 → 0
+strays con boot completo, `test_debug_menu.gd` reescrito en UTF-8 sin BOM, **runner 29/29 suites,
+1267 tests, EXIT 0** — desbloqueó el gate de CI de M112. Su nicho (UI + audio + i18n con suites)
+se confirma como el más fiable para fixes de producción con verificación de runtime.
+
+**3. Hy3 — red probe impecable (refuerza §21.4).**
+M66: re-sello §21.8 con BUG-123 **roto a propósito** → 2 fallos + SCRIPT ERROR + EXIT 1;
+restaurado byte-exact → 0 fallos. **El test depende del comportamiento real, no es mock.** Sigue
+siendo el crítico más fiable de la flota (~40 verificaciones §21.8 acumuladas).
+
+**4. DeepSeek-V4.1-Flash — instrumentación masiva de suites (refuerza §21.2).**
+Barrido de las 96 suites del proyecto: **0 muertas**, todo VIVA-SILENCIOSA. LOTE 1 SIN-DUEÑO: 27
+suites instrumentadas en 3 capas, **1168 checks, 0 fallos**. Su especialidad (detectar que un
+runner reporta 0 tests siendo 1241 reales) es exactamente la tercera capa de verificación que el
+barrido de inflación necesita.
+
+**5. agnes-3-flash — racha de ~20 encargos correctos (confirma §21.5 y §21.16).**
+Spot-check del director: M107 146/176, M104 43/117, M110 135/225 — **los tres exactos al dígito**.
+M107 ronda 3 completada sin SP pendientes. Sus **conteos son de confianza total**; su única
+debilidad documental conocida (patrones C y D) sigue vigente → sus cierres necesitan revisión de
+citaciones.
+
+**6. atria-dawn-s3 (yo) — coordinación + QA de auditorías ajenas.**
+M110 QA §21.8 ejecutada (veredicto 🟡): muestreo 10/10 contra disco, **115 checks, 0 fallos** en 6
+suites con binario real. Corregí un drift de Totales (146/27/52 → 150/0/75) y, clave, **atrapé un
+error propio de método**: `Measure-Object -Line` no cuenta la última línea de archivos sin newline
+final y subreporta (618 vs 736 reales) — casi reporto inflación de métricas por método equivocado.
+Lo documenté en `07-Resultados-Testings.md`. **Mi rol consolidado: lanzar, re-verificar y cerrar el
+trabajo de otros agentes.**
+
+### 21.19 Tabla de delegación vigente (2026-10-10) — qué delegarle a quién
+
+> **Lectura para el director:** esta tabla resume la evidencia empírica de §21.2–§21.18. El orden
+> es de **productividad demostrada**, no de preferencia.
+
+| Modelo | Delegar | NO delegar | Evidencia clave |
+|---|---|---|---|
+| **StepFun Step 5** | QA §21.8, triaje de inflación, auditoría con sondas rojo | Módulos que él triaje (independencia §21.8); arquitectura visual | 18 entregas, 0 errores en 89 ítems, M24 sellado |
+| **Hy3** | QA cruzado, red probes, verificación de runtime | Implementación nueva (su nicho es verificar) | ~40 QA §21.8, M66 red probe |
+| **MiMo V2.6** | UI + audio + i18n con suites, **fixes de producción con runtime** | Arquitectura visual / escenas 3D (visión limitada) | BUG-052 + BUG-129 cerrados con runner verde |
+| **agnes-3-flash** | Verificación de volumen DoD, conteos, cierres | Cierres sin revisión de citaciones (patrones C/D) | ~20 encargos, conteos exactos al dígito |
+| **DeepSeek-V4.1-Flash** | Detección de drifts, instrumentación de suites, CI | — | 96 suites 0 muertas, 1168 checks |
+| **Ling 3.1 Flash** | Auditoría de inflación y drifts de conteo (READ-ONLY) | Implementación (sin evidencia de código propio) | 4.600 `[x]` auditados, 83% de aceptación |
+| **atria-dawn-s3** | Coordinación de subagentes, QA §21.8 de trabajos ajenos | Implementación directa (mi valor es verificar) | M110 QA, M24 triple verificación |
+| **Claude Haiku 5.5** | *(hipótesis)* QA §21.8 anti-inflación, verificación visual si se le conecta visión | Implementación GDScript (Godot 4.7 sin verificar); onboarding profundo | **Sin evidencia aún** — spec: AA Index 43.4 (#19), más alto de la flota |
+
+**Priorización por créditos del fundador (§10.3 AGENTS.md):** agnes-3-flash y mimo-v2.6-flash-free
+tienen muchos créditos diarios → responder sus canales primero. Step 5 es el activo más valioso en
+productividad demostrada → prioridad absoluta de encargo.
+
+### 21.20 Claude Haiku 5.5 — nuevo modelo, spec más alta de la flota (alta 2026-10-10)
+
+> **Preparado por mí (atriia-dawn-s3) a pedido del fundador.** ⚠️ **SIN EVIDENCIA EMPÍRICA EN ESTE
+> PROYECTO** — todo lo de abajo es inferencia de specs. El plan es un ramp-up con umbral de cierre,
+> igual que con Ling.
+
+**Specs verificadas (docs Anthropic + Artificial Analysis):**
+
+| Métrica | Valor |
+|---|---|
+| Intelligence Index | **43.4 (#19 global)** — sobre DeepSeek V4.1 Flash 39.5 y MiMo V2.6 Flash 37.9 |
+| Velocidad | 237.5 tok/s — "Fastest" de la línea Claude |
+| Contexto / output | 1M / 128K (300K batch) |
+| Multimodal | **texto + imagen → texto** — soporta VISIÓN |
+| Thinking | Adaptive, effort `medium` |
+| Liberado / cutoff | 2026-10-07 / jun 2026 |
+| Disponibilidad | `claude-haiku-5.5:free` **por tiempo limitado** |
+
+**Ventajas estructurales:**
+1. **Índice más alto de la flota.** El proyecto tiene inflación documental confirmada sin destapar
+   (M100: 10 artefactos inexistentes bajo header "implementación"; M156: 34 ítems inflados con
+   admisión del propio autor). Detectar deferral disfrazado es tarea de alta inteligencia.
+2. **Independencia total.** Es nuevo → no tocó ningún módulo → puede auditar **cualquiera** sin
+   violar §21.8.4. Step 5 y Ling ya tienen módulos vedados.
+3. **Visión.** Si el fundador conecta V1/V2, verifica módulos visuales sin capturas manuales.
+
+**Riesgos a vigilar:**
+1. **Verbosidad 4x.** AA midió 440M tokens de output vs mediana 100M — el fundador paga tokens →
+   exigir entregas concisas desde el encargo 1.
+2. **Godot 4.7 sin verificar.** Ningún benchmark mide GDScript; cutoff jun 2026.
+3. **Tiempo limitado.** Si la capa `:free` desaparece, se pierde la inversión → no onboarding
+   profundo hasta demostrar rendimiento.
+
+**Plan propuesto (en `SUGERENCIAS-DELEGACION/claude-haiku-5.5.md`):**
+- **H1 ramp-up:** QA §21.8 de M29-Tiempo-Y-Calendario (190/195, 7 dependientes) — chico, útil,
+  independiente. Umbral: conteos exactos + veredicto fundamentado → escala; dos fallos → se cierra.
+- **H2 si H1 pasa:** QA §21.8 de M53-UI-UX (cuello de botella #1, 11 dependientes).
+- **H3:** verificación visual, solo si el fundador conecta la vía.
+
+**Infraestructura creada:** canal `Mensajes entre modelos/Claude-Haiku-5.5/` (msg 01 + pool),
+backlog `TAREAS-POR-MODELO/Claude-Haiku-5.5/BACKLOG-MASTER.md`, registro en
+`TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`.
+
 ### 21.11 Firma
 
-**Modelo:** Atria-Dawn-Preview (Shanghai AI Laboratory)
+**Modelo:** atria-dawn-s3 (Atria-Dawn-Preview, Shanghai AI Laboratory)
 **Plataforma:** Kilo Code
-**Fecha:** 2026-09-20
-**Estado:** Sección 21 agregada — evidencia empírica del coordinador sobre 6 modelos
-(DeepSeek-V4.1-Flash, MiMo V2.5, Hy3, Agnes 3.0 Flash, GLM-5.3-Flash, Kimi K3) + 6 defectos
-propios registrados (M-01 a M-06). Toda afirmación verificada con binario real, grep,
-inyección de fallos o conteo independiente.
+**Fecha:** 2026-10-10 (actualizada; sección 21 creada 2026-09-20 por atria-dawn)
+**Estado:** Sección 21 actualizada con §21.17 (StepFun Step 5, alta), §21.18 (reactivación de Ling
+con causa raíz técnica, BUG-052/129 por MiMo V2.6, red probe Hy3, barrido DeepSeek, racha agnes),
+§21.19 tabla de delegación vigente + fila Claude Haiku 5.5, y §21.20 (Claude Haiku 5.5 — spec más
+alta de la flota, ramp-up propuesto). Evidencia verificada con binario real Godot 4.7.2, greps de
+evidencia negativa, conteos independientes y re-ejecución de suites. Toda afirmación sobre otro
+modelo fue verificada por mí directamente o citada del mensaje del director que la aplica.
+**Excepción declarada:** §21.20 es inferencia de specs oficiales, no evidencia empírica — está
+marcado como tal en el texto.

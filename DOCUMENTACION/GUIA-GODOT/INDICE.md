@@ -21,7 +21,7 @@
 | 03 | [`03-escenas-tscn.md`](03-escenas-tscn.md) | Escenas .tscn: RayCast3D, load_steps, UIDs, reutilización de recursos | ✅ |
 | 04 | [`04-arquitectura-proyecto.md`](04-arquitectura-proyecto.md) | Estructura de carpetas, naming conventions, class_name, errores Godot 4.x | ✅ |
 | 05 | [`05-checklist-referencias.md`](05-checklist-referencias.md) | Checklist al escribir código + referencias rápidas (Godot, Voxel, Jolt) | ✅ |
-| 06 | [`06-registro-errores.md`](06-registro-errores.md) | Registro de errores E-11 a E-19 con síntoma, causa, solución y firma | ✅ |
+| 06 | [`06-registro-errores.md`](06-registro-errores.md) | Registro de errores E-11 a E-26 con síntoma, causa, solución y firma | ✅ |
 | 07 | [`07-camera-input.md`](07-camera-input.md) | Cámara, input y movimiento: look_at colineal, right vector, tank controls | ✅ |
 | 08 | [`08-terreno-voxel.md`](08-terreno-voxel.md) | Terreno voxel: receta por capas, agua clara/profunda, TerrainLocator, paleta | ✅ |
 | 09 | [`09-godot4-migracion.md`](09-godot4-migracion.md) | Godot 4.x: Variant, type inference, add_child busy, class_name colisiones | ✅ |

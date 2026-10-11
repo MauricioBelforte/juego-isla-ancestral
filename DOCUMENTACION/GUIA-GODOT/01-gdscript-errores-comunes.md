@@ -609,6 +609,23 @@ Prevención en suites nuevas:
 
 **Fuente:** M53 Sección Audio (test round-trip) — mimo-v2.6-flash-free / opencode, 2026-10-04.
 
+### 30.2 Estado del bug original (BUG-096): CERRADO por refactor (2026-10-10)
+
+El error que originó la §30 (`bool(ui.get("hay_modal"))` en
+`interaction_manager.gd`, BUG-096) fue **cerrado el 2026-10-10 por
+mimo-v2.6-flash-free / opencode** sin aplicar fix: el refactor de
+`interaction_manager.gd` (669+ → 308 líneas, commit `b763066`) **eliminó
+`_on_ui_layers_changed` completo** — grep de `hay_modal|_on_ui_layers_changed`
+en `scripts/**/*.gd` = 0 matches del handler; `hay_modal` solo existe como var
+local de `ui_manager.gd:83`. Verificado en runtime con `godot472.exe` headless:
+suite M53 audio (51 checks, 0 fallos, con push+pop de capa) y suite M70
+interacciones (0 fallos, con las 12 capas DOM-UI registradas/des-registradas)
+= 0 ocurrencias de `Nonexistent 'bool'`. Detalle completo:
+`11-BUGS.md` → BUG-096 → Resolución. **La receta `== true` de la §30 sigue
+siendo válida** para cualquier reaparición del patrón `bool(null)`.
+
+**Firma (resolución):** mimo-v2.6-flash-free / opencode — 2026-10-10.
+
 ---
 
 

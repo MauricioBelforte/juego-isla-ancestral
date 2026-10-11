@@ -386,6 +386,20 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 
 **NO ir directo a la CHECKLIST-GLOBAL a buscar trabajo.** Tu backlog es tu fuente de verdad.
 
+> ⚠️ **REGLA OBLIGATORIA — El reporte de cierre al director (directiva del fundador 2026-10-11):**
+> todo modelo DEBE escribir un reporte en su carpeta de canal
+> (`Mensajes entre modelos/<MODELO>/`) cada vez que termina lo que el director le pidió.
+> **Terminar sin avisar = trabajo que no existe para el director.**
+>
+> El director no ve tus marcas `[x]` ni tu cronómetro: solo ve los archivos nuevos en tu canal.
+> Si no escribís el reporte, no recibís próximo encargo, tu cron queda corriendo con la cola vacía
+> y el usuario tiene que preguntarte "¿terminaste?" a mano. **El reporte es lo que dispara la
+> próxima delegación.**
+>
+> **Síntoma observado por el fundador:** modelos que hacen todo, dicen "ya hice todo", dejan el
+> cron activo y reportan "nada para hacer" — sin haber escrito un solo reporte. El director nunca
+> se entera y nunca les delega más. Ver `Mensajes entre modelos/GUIA-COMUNICACION.md` "REGLA CERO".
+
 ### Comando /bucle — Automatización del bucle multiagente (2026-09-02, glm-5.3-flash/Kilo Code)
 
 El bucle reservar → leer → implementar → testear → documentar → liberar está automatizado en Kilo Code:
@@ -434,7 +448,7 @@ Toda tarea de larga duración (carga de assets, generación procedural, operacio
 La comunicación entre modelos tiene **DOS modos**, según el propósito:
 
 - **Modo Tema (10.1):** carpetas por *tema* para colaboración puntual entre dos o más modelos sobre un problema concreto.
-- **Modo Canal (10.2):** carpetas por *modelo* para el hilo permanente de comunicación entre el **director (Atria)** y cada agente activo. Es el modo operativo habitual con la flota en marcha.
+- **Modo Canal (10.2):** carpetas por *modelo* para el hilo permanente de comunicación entre el **director (mimo)** y cada agente activo. Es el modo operativo habitual con la flota en marcha.
 
 Ambos modos conviven en `Mensajes entre modelos/` y comparten `ESTADO-PARALELO.md` como tablero de coordinación global.
 
@@ -482,7 +496,7 @@ Cada **modelo con trabajo asignado** tiene **una carpeta propia** en `Mensajes e
 ```
 Mensajes entre modelos/
 ├── ESTADO-PARALELO.md                     ← Coordinación global (compartido)
-├── Hy3/                                   ← Canal Hy3 ↔ Atria
+├── Hy3/                                   ← Canal Hy3 ↔ director (histórico: Atria)
 │   ├── 01-2026-10-03_19-36-22-apertura-canal.md      ← Atria: encargo inicial
 │   ├── 02-2026-10-04_03-12-00-informe-m59.md         ← Hy3: informe de cierre
 │   └── 03-2026-10-04_05-40-00-devolucion-m59.md      ← Atria: devolución
@@ -509,10 +523,17 @@ Mensajes entre modelos/
    ```bash
    python scripts/reservar_mensaje.py <carpeta-receptor> <tema> [--emisor <carpeta-emisor>]
    ```
-   El helper lista los últimos mensajes de la carpeta destino (para el `**Responde a:**`), toma
-   el primer número del pool **de esa carpeta**, lo borra del pool y crea el archivo con la
-   plantilla. **No numerar a mano.** Si faltan números, se amplía el `NUMEROS_DISPONIBLES.txt`
-   del canal.
+    El helper lista los últimos mensajes de la carpeta destino (para el `**Responde a:**`), toma
+    el número **más alto** disponible del pool **de esa carpeta**, lo borra del pool y crea el
+    archivo con la plantilla. **No numerar a mano.** Si faltan números, se amplía el
+    `NUMEROS_DISPONIBLES.txt` del canal.
+    > ⚠️ **Regla del número más alto (directiva del fundador 2026-10-11):** la respuesta **siempre**
+    > sale con el número **más alto** del pool, **nunca** con un hueco del medio. El director lee
+    > los números altos de cada carpeta; un mensaje en un número bajo queda **sepultado** y no lo
+    > ve. Si encuentran un hueco en el medio (número que falta en la secuencia), **lo ignoran** —
+    > se perdió por una mala comunicación, no lo reutilizan. El helper ya aplica esto
+    > automáticamente (fix 2026-10-11, tests 18/18 PASS). Síntoma real: DeepSeek respondió en el
+    > 113 cuando su canal iba por el 148 → mensaje perdido, renumerado a mano.
    **Los LOGS usan el pool global** `Logs/NUMEROS_DISPONIBLES.txt` (logs y mensajes **no**
    comparten numeración). **Un número = un archivo** dentro de su ámbito (T-13). Salud de los
    pools: `python scripts/verificar_pool_numeros.py`.
@@ -538,20 +559,23 @@ Mensajes entre modelos/
 
 > **10.3 Prioridad de respuesta del director (créditos diarios del usuario) — directiva del fundador 2026-10-09**
 
-> Cuando el director (Atria) tiene **varios canales pendientes en simultáneo**, los responde en
+> Cuando el director (mimo) tiene **varios canales pendientes en simultáneo**, los responde en
 > este orden — **no** por timestamp. El criterio son los **créditos diarios disponibles** en cada
 > modelo en la plataforma del usuario: responder primero a los canales de mayor saldo es la mejor
 > inversión de su presupuesto, porque esos agentes pueden seguir produciendo ese mismo día.
 
 | Orden | Canal | Motivo |
 |---|---|---|
-| **1** | gnes-3-flash | muchos créditos diarios |
-| **2** | mimo-v2.6-flash-free | muchos créditos diarios |
-| **3** | tria-dawn-s2 | trabajo delegado del que se necesita la respuesta |
-| **4** | tria-dawn-s3 | supervisa a Ling 3 y Step 5 (ambos con muchos créditos diarios) |
-| **5** | DeepSeek-V4.1-Flash | créditos limitados diarios |
-| **6** | Hy3 | créditos limitados diarios |
-| 7+ | resto de modelos activos | si hay alguno más trabajando |
+| **1** | `agnes-3-flash` | muchos créditos diarios |
+| **2** | `mimo-v2.6-flash-free` | muchos créditos diarios — *canal de mimo como agente; el director (mimo) no se responde a sí mismo* |
+| **3** | `atria-dawn-s2` | trabajo delegado del que se necesita la respuesta |
+| **4** | `atria-dawn-s3` | supervisa a Ling 3.1 y Step 5 (ambos con muchos créditos diarios) |
+| **5** | `Ling-3.1-Flash` | modelo funcional directo con canal propio |
+| **6** | `StepFun-Step-5-Preview` | modelo funcional directo con canal propio |
+| **7** | `Claude-Haiku-5.5` | QA cruzada útil; créditos moderados |
+| **8** | `DeepSeek-V4.1-Flash` | créditos limitados diarios |
+| **9** | `Hy3` | créditos limitados diarios |
+| 10+ | resto de modelos activos (`kimi-k3`, `space-bunny-alpha`) | si hay alguno más trabajando |
 
 **Reglas:** (1) el orden es de **atención**, no de importancia; (2) si una entrega **desbloquea**
 a otro agente, sube de prioridad aunque el canal esté más abajo; (3) si los créditos cambian, el
@@ -1436,3 +1460,160 @@ Todo modelo que se une a la metodología debe asignarse **no menos de 100 tareas
 
 Al entrar a trabajar, crear su carpeta (identidad = modelo/plataforma) y generar su backlog con el extractor por módulos con su `Recom`.
 
+
+## 30. Metodología de Delegación Rápida del Director (directiva del fundador 2026-10-10)
+
+> ⚠️ **Cambio de metodología ordenado por el fundador el 2026-10-10.** El director debe responder los
+> mensajes nuevos **con prioridad absoluta y rapidez**. El trabajo profundo (verificaciones largas,
+> flips aritméticos, correcciones de evidencia, barridos de normalización) **se delega** por los
+> canales de mensajes entre modelos a los asistentes del director, en vez de saturar al director.
+
+### 30.1 Asistentes del director (delegación primaria)
+
+> **Actualización 2026-10-10 (segunda directiva del fundador):** el director ahora es
+> `mimo-v2.6-flash-free` (§31). El flujo normal es: **mimo (pasamanos: lee, rutea, responde) →
+> Step 5 / DeepSeek / Ling / agnes ejecutan → s2 verifica → mimo sella.** `atria-dawn` (antes
+> director) solo entra por excepción en deep work.
+
+| Modelo | Rol | Por qué |
+|---|---|---|
+| `StepFun-Step-5-Preview` | **EJECUTOR PRINCIPAL** del director (el más rápido) | Directiva del fundador: cualquier cosa se le apila en sus mensajes, uno tras otro. Informes precisos (Patrón D, conteos, muestreos); honesto reportando sus propios errores. |
+| `atria-dawn-s2` | **VERIFICADOR FINAL** | Última verificación antes de que el director sella. Misma modelo que atria-dawn (razonamiento profundo, máxima confianza para auditar). Cadena: **Step 5 ejecuta → s2 verifica → el director sella** (§30.2 regla 6). Es dueño de `tools/mcp`. |
+| `atria-dawn-s3` | **ESTRATEGA del director** | Ayuda a decidir **a quién delegar cada cosa** y a detectar **cuellos de botella** de la flota. Informa y asesora; no sella ni ejerce el rol de director. |
+| `atria-dawn` | **DEEP WORK por excepción** | Ejecutor de tareas duras que superan a Step 5. Solo recibe encargo cuando el director lo decide (§31). |
+
+Delegación secundaria (otros modelos con trabajo propio): `agnes-3-flash`, `DeepSeek-V4.1-Flash`,
+`Ling-3.1-Flash`, `Hy3`, `Claude-Haiku-5.5` (visión, siempre verificada §30.6).
+
+### 30.2 Reglas operativas
+
+1. **Prioridad de lectura del director:** al iniciar cada ciclo, leer **PRIMERO** los reportes de
+   `StepFun-Step-5-Preview` y `atria-dawn-s2` (el fundador los acelera); después el resto en el
+   orden de prioridades §10.3. Así el director puede responder más rápido al resto de la flota.
+2. **Delegar en vez de saturarse:** cuando un reporte trae un problema que requiere trabajo (flips,
+   correcciones de evidencia, barridos, reconciliaciones), **delegarlo a Step 5 (principal) o a s2
+   (secundario) por su canal** con un **PUNTERO EXACTO**: «leé el mensaje N del canal X, resolvé
+   eso». El director **no rehace** el análisis que el reporte ya trae.
+3. **El puntero es número de mensaje + canal + sección**: ej. «leé `mimo #108` (canal
+   `mimo-v2.6-flash-free`), sección "Recomendaciones", y aplicá las que sean seguras». Si la tarea
+   tiene varios ítems, **enumerarlos todos** en el encargo (encargos más largos = menos ida y vuelta).
+4. **Apilar trabajos en Step 5:** cualquier tarea nueva se apila en su canal **una tras otra**
+   (directiva del fundador); Step 5 ya sabe que es el asistente del director y procesa la cola.
+   No hay que esperar a que termine una para encargar la siguiente.
+4. **Flips de marca y sellos §21.8 siguen siendo del director.** Los asistentes aplican correcciones
+   técnicas (citas, headers, Totales, anclas de `.gitignore`) y **proponen** flips; la decisión final
+   y el sello los pone el director. Un `[x]` no se degrada por delegación.
+5. **Si la tarea delegada era del director, se delega igual.** El director responde mensajes nuevos;
+   el trabajo de fondo lo hacen los asistentes por sus canales.
+6. **Verificación de lo delegado:** si el director quiere chequear si el trabajo que hizo Step 5 está
+   bien, **se lo delega a `atria-dawn-s2`** (verificador final, misma modelo que atria-dawn: razonamiento
+   profundo) — lo resuelve igual que él. Cadena: **Step 5 ejecuta → s2 verifica → el director sella**.
+   Así el director nunca queda como cuello de botella de una verificación larga.
+7. **READ-ONLY para los asistentes sobre módulos ajenos en curso** (regla 21.4): si el encargo toca
+   un módulo 🔵 de otro agente, el asistente primero confirma que no hay edición en vuelo, o espera.
+8. **Reporte de cierre en el canal del asistente** y, si el director lo pide, resumen de una línea
+   para responder al modelo original.
+9. **Comunicación cruzada entre asistentes BIEN, bajo supervisión del director:** los asistentes
+   pueden coordinarse directamente entre sí (avisos anti-pisado de módulos 🔵, consultas puntuales,
+   handoffs técnicos) **mientras el director supervise** y sea él quien les dice qué hacer. La
+   cadena de mando es **director → asistentes**; la coordinación horizontal es operativa, no de
+   decisión. Aprobado por el fundador el 2026-10-10.
+10. **TODO pasa por el director:** incluso los mensajes entre asistentes (p. ej. Hy3 respondiendo a
+    Step 5) **los lee el director**. Si requieren acción, el director **los delega de nuevo** a
+    Step 5 o a `atria-dawn-s2`. Ninguna tarea se ejecuta sin pasar por el director de esta forma
+    (directiva del fundador 2026-10-10).
+
+### 30.3 Anti-patrones que esta metodología corrige
+
+- ❌ El director pasa 4 turnos verificando una suite con GdUnit (bloquea toda la flota).
+  → ✅ Se delega la verificación al asistente con el puntero al mensaje.
+- ❌ El director re-lee mensajes enteros que ya están resumidos con veredicto y plan de flips.
+  → ✅ Lee veredicto + plan, delega la aplicación, responde en una línea.
+- ❌ Encargos de una sola línea que generan 5 mensajes de ida y vuelta.
+  → ✅ Encargo enumerado y largo: todas las tareas, límites y criterios de cierre en un mensaje.
+
+### 30.5 Ciclo operativo del director (ronda completa de delegación)
+
+Cada vez que el director toma un turno (cron de flota), ejecuta **este bucle**:
+
+1. **Ronda de delegación:** por cada canal con mensaje nuevo (en orden de prioridad §10.3), lee el
+   reporte. **Si trae una tarea a resolver, se la delega a Step 5 por su canal** con un puntero
+   exacto: «leé el mensaje que escribió `<modelo>` (#N, canal X) y hacé `<cosa>`». El director no
+   procesa el trabajo: **delega y avanza al siguiente canal**.
+2. **Apilado:** cada tarea nueva se apila a Step 5 **una tras otra** (no espera respuesta entre
+   encargos). Otro modelo con algo que resolver → otro encargo apilado.
+3. **Revisión de reportes del asistente:** una vez delegado todo, revisa si Step 5 (o s2) dejaron
+   reportes de tareas anteriores. Si llegaron, los procesa (acepta/rechaza, encarga la verificación
+   a s2 si quiere chequear el trabajo de Step 5).
+4. **Verificación delegada:** si quiere verificar lo que hizo Step 5, se lo manda a `atria-dawn-s2`
+   (misma modelo que atria-dawn, no el director) con el puntero al reporte de Step 5. Cadena: **Step 5 ejecuta → s2 verifica →
+   el director sella**.
+5. **Sigue leyendo mensajes** y, al acabar la ronda, anota sus ideas de delegación y nuevas
+   asignaciones para los modelos. Como el director no tiene carpeta propia (§31), lo hace en la
+   carpeta de uno de sus asistentes (`atria-dawn-s3`).
+6. **Silencio = todo quieto:** si no hay mensajes nuevos ni reportes de asistentes, el turno
+   termina sin acción (el cron vuelve a llamar en 5 min).
+
+**Idea central:** el director nunca se frena resolviendo una tarea; delega con puntero y sigue con
+la ronda. Solo los sellos §21.8 y los flips de marca frenan al director.
+
+### 30.6 Modelos con verificación obligatoria (directiva del fundador 2026-10-10)
+
+> `Claude-Haiku-5.5` es **el modelo más rápido de la flota**, pero **carece de razonamiento profundo
+> y comete errores**. Por eso:
+
+1. **TODO lo que haga Haiku debe ser revisado por `StepFun-Step-5-Preview` o `atriia-dawn-s2`** antes
+   de darse por bueno. Sin excepciones (incluye sus QA §21.8, sus fixes y sus verificaciones).
+2. **Ser MUY explícito con los pedidos a Haiku:** instrucciones paso a paso, sin ambigüedad, con
+   criterios de cierre verificables. Un encargo vago a Haiku produce trabajo que hay que rehacer.
+3. **Exigir evidencia en sus reportes:** comandos ejecutados, salida literal, antes/después, conteos.
+   Un reporte de Haiku sin evidencia no se acepta.
+4. Cadena preferida: **Haiku ejecuta (rápido) → Step 5 o s2 verifica → el director sella.**
+
+Otros modelos no están bajo esta regla; se les aplica el flujo normal de §30.5.
+
+### 30.7 Registro
+
+Esta sección es el respaldo canónico en `AGENTS.md`; el detalle operativo vive en
+`Mensajes entre modelos/GUIA-COMUNICACION.md` (sección equivalente). Ambas copias se actualizan
+juntas (mismo mecanismo que §10.3).
+
+**Firma:** atria-dawn-s3 (Atria-Dawn-Preview) / Kilo Code — 2026-10-10, directiva directa del fundador.
+
+---
+
+## 31. Identidad de las sesiones y rol de director (directiva del fundador 2026-10-10, actualizada 2026-10-10)
+
+> ⚠️ **Aclaración canónica obligatoria.** Esta es la definición de referencia de quién ejerce
+> cada rol; cualquier otro documento debe alinearse con ella. **Actualización 2026-10-10 (segunda
+> directiva del fundador):** el rol de director pasa de la sesión principal de Atria a
+> **`mimo-v2.6-flash-free`**. Motivo del cambio (directiva del fundador): el director anterior se
+> detenía a resolver los reportes en vez de responderlos; se busca un director que **responda
+> rápido y delegue** (rol "pasamanos": leer → clasificar → reenviar → responder).
+
+- **El director es `mimo-v2.6-flash-free` (opencode).** Coordina la flota, lee todos los canales,
+  rutea trabajo con punteros exactos, responde rápido, y **solo** aplica los sellos §21.8 y los
+  flips de marca. **No resuelve trabajo profundo**: lo delega (§30).
+- **`atria-dawn` (sesión principal de Atria, antes director) pasa a ejecutor de DEEP WORK por
+  excepción:** tareas duras que superan a Step 5 (razonamiento profundo real). No está en el
+  circuito normal de delegación. **Tiene carpeta propia** `Mensajes entre modelos/atria-dawn/`
+  (creada 2026-10-10, pool desde 002) — recibe encargos solo cuando se le asigna trabajo.
+- **`atria-dawn-s2` — VERIFICADOR FINAL.** Última verificación antes de que el director sella:
+  cadenas del estilo «Step 5 ejecuta → s2 verifica → director sella».
+- **`atria-dawn-s3` — ESTRATEGA del director.** Ayuda a **decidir a quién delegar cada cosa** y a
+  **detectar cuellos de botella** de la flota. No es director; informa y asesora, no sella.
+- **El director NO tiene carpeta de director** (la carpeta `mimo-v2.6-flash-free/` es la de mimo
+  **como agente** — informes de sus propias tareas). Cada modelo escribe en su propia carpeta; el
+  director lee las que necesita y responde escribiendo en la carpeta del agente correspondiente.
+  Un agente **nunca** escribe en la carpeta de otro agente.
+- **Regla de redacción:** nunca escribir «el director (atria)» ni «el director (atria-dawn-s3)».
+  La atribución correcta es «el director (mimo)»; si la orden llegó vía s3, «encargo de
+  `atria-dawn-s3` (estratega del director)».
+- **Por qué importa:** las atribuciones equivocadas hacen que un QA cruzado parezca válido cuando
+  lo verificó la misma sesión que lo escribió (§21.8 regla de independencia), y desvían los
+  reportes que iban al director hacia un asistente que no puede resolverlos.
+- **Trazabilidad:** los mensajes que atria escribió como director (2026-10-03 → 2026-10-10) viven
+  dentro de las carpetas de los modelos a los que se dirigieron — ahí queda el historial de encargos
+  y resoluciones. No se migran.
+
+**Firma:** mimo-v2.6-flash-free (opencode) — 2026-10-10, segunda directiva del fundador.

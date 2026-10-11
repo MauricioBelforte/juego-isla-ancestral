@@ -1,6 +1,9 @@
-# Registro de Errores — E-11 a E-22
+# Registro de Errores — E-11 a E-27
 
-> **Modelo:** mimo-v2.6-flash-free (último modificador)
+> **Modelo:** stepfun-step-5-preview (último modificador)
+> **Plataforma:** Kilo Code
+> **Fecha:** 2026-10-10 (Sección E-27 agregada: `ResourceSaver.save()` cuelga en `--headless`)
+> **Anterior:** mimo-v2.6-flash-free (último modificador)
 > **Plataforma:** opencode
 > **Fecha:** 2026-10-06 (Sección E-23 agregada: `OS.execute` + `read_stderr=true` en Windows)
 > **Anterior:** mimo-v2.6-flash-free / opencode — 2026-10-02 (T-105 a T-109)
@@ -976,9 +979,201 @@ re-confirmado en M88)
 
 ---
 
+## E-24: `Trying to call an async function without "await"` — Godot 4.7 rechaza corutinas externas sin await
+
+**Síntoma:**
+```
+SCRIPT ERROR: Trying to call an async function without "await".
+   at: _doble_captura (res://tests/test_m56_tomar_foto.gd:218)
+```
+
+**Ubicación:** cualquier call-site GDScript que llame una función `async` (que contiene
+`await`) de OTRO nodo sin usar la palabra `await` — incluso si el resultado se asigna
+(`var estado: Variant = nodo.coro()` aborta igual).
+
+**Causa:** desde Godot 4.x (reforzado en 4.7), el VM de GDScript rechaza la llamada a una
+corutina cuyo estado se descarta/desacopla desde otro script; el SCRIPT ERROR aborta la
+función CALLER en esa línea (el resto del test/flujo no se ejecuta). Matices empíricos
+probados el 2026-10-09 (sonda monouso, M56 iter. 3):
+
+- **Falla:** `_ps.tomar_foto()` externo sin await (con o sin asignación) → aborta al caller.
+- **NO falla:** auto-call interno descartado dentro del propio script del servicio
+  (`tomar_foto()` dentro de `PhotoService._unhandled_input`) → el flujo corre completo.
+- **NO falla:** `await nodo.coro()` (patrón normal) — obviamente.
+- **Patrón de test para fire-and-forget:** despachar por el MISMO camino que el jugador:
+  `nodo._unhandled_input(ev)` (o `Input.parse_input_event`), nunca llamada directa a la
+  corutina. El guard interno (flag `_en_captura`) hace el resto.
+
+**Solución:** en tests, usar dispatch de input (patrón de `test_m56_tomar_foto.gd` T2/T3).
+En producción, si se necesita fire-and-forget de una corutina propia, llamarla desde un
+método NO-async del propio script (como `_unhandled_input`) o `call_deferred`.
+
+**Fecha:** 2026-10-09 22:15 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+(M56 iter. 3 — encargo msg 88; descubierto al implementar el test T3 de doble captura)
+
+---
+
+## E-25: `get_texture().get_image()` devuelve NULL en `--headless` (dummy renderer)
+
+**Síntoma:**
+```
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:110)
+   GDScript backtrace: [0] tomar_foto (res://scripts/foto/photo_service.gd:169)
+```
+y `img` queda `null` → cualquier `save_png` posterior es imposible.
+
+**Ubicación:** cualquier captura de viewport vía
+`get_viewport().get_texture().get_image()` ejecutada con `--headless`.
+
+**Causa:** en headless el backend de render es el dummy (`RendererDummy`); el ViewportTexture
+no tiene contenido real y `get_image()` devuelve null (el `ERROR: Parameter "t" is null` es
+ruido inofensivo del dummy storage — sale 1-2 veces por corrida, no rompe el proceso).
+
+**Solución:** los tests deben ser ADAPTATIVOS al renderer:
+```gdscript
+var es_headless := DisplayServer.get_name() == "headless"
+if es_headless:
+    # asertar solo el flujo: HUD oculto durante, restaurado, guard, sin archivo falso
+else:
+    # asertar además el PNG: ok, ruta, bytes>0, decodifica
+```
+El código de captura debe devolver un resultado tipado con `motivo` (p. ej.
+`"sin_textura_render"`) en vez de fallar en crudo — y NUNCA crear un archivo fake en headless.
+La evidencia de "la foto existe" solo es válida con corrida SIN `--headless`.
+
+**Fecha:** 2026-10-09 22:15 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+(M56 iter. 3 — sonda monouso confirmó el NULL antes de escribir la suite)
+
+---
+
+## E-26: `.godot/imported` borrado — la runtime NO regenera el import (errores `.scn` masivos)
+
+**Síntoma:**
+```
+ERROR: Cannot open file 'res://.godot/imported/....scn'.
+ERROR: Cannot open file 'res://.godot/imported/....scn'. (repetido cientos de veces)
+```
+
+**Ubicación:** no es un bug de script — es el **import cache** del proyecto (`game/isla-ancestral/.godot/imported/`).
+
+**Causa:** borrar `.godot/imported/` "para simular una corrida fría" **no** hace que el juego lo
+regenere: la runtime solo **lee** ese caché, la reimportación es **exclusiva del editor**
+(`EditorFileSystem`/plugin de import). Sin editor abierto, cada recurso que dependa de un `.scn`
+importado falla silenciosamente (errores masivos) y la medición queda contaminada.
+
+**Solución:** después de borrar `.godot/imported/`, regenerar **antes** de medir:
+```bash
+godot --headless --path game\isla-ancestral --import
+# RC 0, ~974 archivos / ~10 MB; luego correr la suite/sonda normal
+```
+Si ya se midió contra el caché vacío: reimportar igual y re-verificar (comparar con una corrida
+caliente post-reimport). NOTA: el reimport descarta huérfanos (1056 → 974 = 82 archivos viejos).
+
+**Regla:** un "caché frío" legítimo en este proyecto = borrar `.godot/imported/` **+ `--import`**;
+sin ese segundo paso la runtime miente (errores de apertura, no el comportamiento real bajo frío).
+
+**Fecha:** 2026-10-10 14:13 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+(M3/BUG-119 — medición fría F1 contaminada; restaurada con `--import`, verificada en C3 con 0 errores)
+
+---
+
+## E-27: `ResourceSaver.save()` **cuelga** el proceso en `--headless` con `extends SceneTree`
+
+**Síntoma:**
+```
+$ godot --headless --path game/isla-ancestral --script res://scripts/.../generar_lib.gd
+# El proceso NO termina: tras el boot completo (Bootstrap, carga de main_island.tscn) se cuelga.
+# El log llega hasta "[Bootstrap] Cargando escena principal" y el .tres NUNCA se escribe.
+# No hay SCRIPT ERROR: simplemente no retorna.
+```
+
+**Ubicación:** cualquier script ejecutado con `--script` que haga
+`extends SceneTree` y llame a `ResourceSaver.save()` dentro de `_initialize()`.
+Caso real: `scripts/animacion/generar_jugador_lib.gd` (M48 Fase 1, 2026-10-10).
+
+**Causa:** bajo `--script` con `SceneTree`, `ResourceSaver.save()` (y el
+`ResourceLoader.load()` inmediato posterior) no retorna: el loop nunca llega a
+procesar la escritura porque el `quit()` propio queda detrás de una operación
+que necesita el ciclo. `quit(exit_code)` **sí funciona** con argumento — los tests
+del repo (`test_animacion_service.gd`) lo usan y terminan bien — así que el
+problema es específicamente `ResourceSaver.save` en este contexto.
+
+**Solución:** **no regenerar recursos con `ResourceSaver.save()` desde un script
+headless.** Dos alternativas verificadas:
+
+1. **Escribir el `.tres` a mano** con el formato de texto de Godot (lo que terminé
+   haciendo para `scripts/animacion/libraries/jugador_lib.tres`). Verificado
+   recargándolo con un script mínimo que solo hace `load()`:
+   ```
+   VERIFY: clips=3 -> [&"anim_jugador_idle", &"anim_jugador_run", &"anim_jugador_walk"]
+   VERIFY: anim_jugador_idle len=2.00 tracks=1
+   VERIFY: OK        # exit code 0
+   ```
+2. **Guardar desde el editor**, o desde un test que sí termina (los tests del repo
+   llaman `quit(0/1)` al final y funcionan).
+
+**Regla:** si un script `--script` necesita *producir* un recurso, generarlo a mano
+o desde el editor; usarlos solo para *verificar*. Y ojo con la doble trampa: si la
+salida se inspecciona con `Select-String` sobre la tubería de PowerShell, la salida
+se pierde y parece que el test no corrió — **capturar siempre a archivo**
+(`> log 2>&1`).
+
+**Fecha:** 2026-10-10 16:45 | **Modelo:** stepfun-step-5-preview | **Plataforma:** Kilo Code
+(M48 Fase 1 — la biblioteca placeholder se escribió a mano y se verificó recargándola;
+los 2 scripts temporales que colgaban fueron eliminados para que nadie los ejecute)
+
+---
+
 ## Plantilla para nuevos errores
 
 ```markdown
+## E-28: Tabla markdown con fila que **no cierra con `|`** — defecto recurrente en `CHECKLIST-GLOBAL.md`
+
+**Síntoma:**
+```
+| 156 | 156-Terrenos-Y-Movimiento | 🟡 Liberado (…) | 169/307 | Alta | 3 | 11, 155 | — | 2026-10-10 03:10 | **B3 ACEPTADO…
+# La fila empieza con | pero NO termina con |. Cualquier parser/regenerador que exija
+# filas bien formadas se la salta: el módulo queda invisible para las herramientas.
+```
+
+**Ubicación:** tabla de módulos de `CHECKLIST-GLOBAL.md` (header L55, **12 pipes sin escapar /
+11 celdas**). También se observó en `CHECKLIST-QA-SEALS.md`. Casos reales reparados entre el
+2026-10-10 y el 2026-10-11: M104, M118, M18, M100, M112, M88, M151, M156, M125, M107, M110,
+M150, M153, M37, M61.
+
+**Causa:** el defecto tiene **3 variantes** y conviene distinguirlas antes de reparar:
+
+1. **Falta solo el pipe de cierre** (la más común) — las 11 celdas están alineadas, solo hay que
+   agregar ` |` al final. Detección: `pipes sin escapar = 11` y `celdas = 11`.
+2. **Celda de MÁS** — un pipe literal dentro de la columna Notas parte la fila en 12-14 celdas.
+   Reparación: escapar ese pipe como `\|`. Detección: `celdas > 11` con `pipes sin escapar ≤ 12`.
+3. **Celda de MENOS** — falta una columna (p.ej. `Agente actual`) y el contenido se desplaza
+   (una fecha cae en "Agente actual", las notas en "Última actividad"). **Requiere decisión de
+   contenido**: no se puede reparar sin saber qué valor va en la celda faltante.
+
+**⚠️ El defecto es RECURRENTE:** M107 y M110 se rompieron *después* de haber sido reparados —
+cada edición de la fila puede reintroducirlo. **Verificar con un script, no a ojo.**
+
+**Solución — detector confiable:**
+```python
+def pipes(s):  # pipes SIN escapar
+    return len([i for i, c in enumerate(s) if c == "|" and (i == 0 or s[i - 1] != "\\")])
+# Criterio: fila sana = pipes(linea) == 12  y  linea.strip().endswith("|")
+```
+
+**Trampa de verificación:** usar `linea.split("|")` es **incorrecto** — divide también los `\|`
+escapados y reporta 13-14 "celdas" en filas que están sanas. En markdown, `\|` dentro de una celda
+es un pipe literal, no un separador. Contar siempre **pipes sin escapar**.
+
+**Regla de oro:** si la reparación requiere *mover contenido entre columnas* (variante 3),
+**reportar antes de editar** — insertar un valor inventado en `Prioridad`/`Recom`/`Agente actual`
+es peor que la fila rota.
+
+**Fechar:** 2026-10-11 03:00 | **Modelo:** stepfun-step-5-preview | **Plataforma:** Kilo Code
+
+---
+
 ## E-XX: Nombre del error
 
 **Síntoma:**
