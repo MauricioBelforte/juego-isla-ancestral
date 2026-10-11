@@ -75,7 +75,8 @@ static func _registrar_veta(rm: Node, data: Dictionary) -> bool:
     var drop_min := maxi(1, int(data.get("drop_min", 1)))
     var drop_max := maxi(drop_min, int(data.get("drop_max", 2)))
     var drop_entry := ResourceDropEntry.new()
-    drop_entry.item_id = String(def_id)
+    # H10/BUG-132: el drop debe apuntar a un item REAL del catalogo M15/M159, no al id de la veta.
+    drop_entry.item_id = String(data.get("item_id", def_id))
     drop_entry.cantidad_min = drop_min
     drop_entry.cantidad_max = drop_max
     drop_entry.probabilidad = clampf(float(data.get("drop_probabilidad", 1.0)), 0.0, 1.0)

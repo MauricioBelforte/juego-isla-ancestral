@@ -6,15 +6,30 @@
 # Cubre: carga del catalogo, integración con M15, RF6 (doble drop por T3+),
 # RF10 (limite suave por zona), persistencia de cuotas M59.
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/mineria/test_mineria.gd
+#
+# Endurecido 2026-10-11 (re-QA §21.8, DeepSeek-V4.1-Flash): la version previa imprimia
+# "0 fallo(s)" SIN contador de checks y llamaba a quit() desde _run(). Un SCRIPT ERROR
+# dentro de un bloque _test_* abortaba esa funcion en silencio, perdia sus checks y la
+# suite igual daba verde + EXIT 0 (falso verde, trampa 85/122). Se agregan las 3 capas:
+# contador de checks, piso CHECKS_MINIMOS medido en verde, y marcadores de bloque _fin()
+# + resumen diferido. Probe en rojo (aborto inyectado): 41 -> 35 checks, EXIT 1.
 
 extends SceneTree
 
 var _fallos: int = 0
+var _checks: int = 0
 var _rm: Node = null
 var _min: Node = null
 
+## Bloques esperados: si uno no cierra su _fin(), se reporta como fallo.
+const BLOQUES := ["catalogo", "definiciones", "integridad_m15", "drops_resuelven", "limite_zona", "rf6", "persistencia"]
+## Piso de checks MEDIDO en verde (corrida real: 60, tras el bloque drops_resuelven de BUG-132). No estimar.
+const CHECKS_MINIMOS := 60
+var _vistos: Dictionary = {}
+
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")   # si _run() aborta, el resumen igual corre (trampa 61)
 
 func _run() -> void:
 	_rm = root.get_node_or_null("ResourceManager")
@@ -22,19 +37,36 @@ func _run() -> void:
 	_check(_rm != null, "ResourceManager autoload presente")
 	_check(_min != null, "mineria autoload presente (M35)")
 	if _rm == null or _min == null:
-		print("=== TEST M35 MINERIA: %d fallo(s) ===" % _fallos)
-		quit(1 if _fallos > 0 else 0)
-		return
+		return   # _summary() reportara los bloques faltantes
 	_test_catalogo_minas()
+	_fin("catalogo")
 	_test_definiciones_mineras()
+	_fin("definiciones")
 	_test_integridad_con_m15()
+	_fin("integridad_m15")
+	_test_drops_resuelven()
+	_fin("drops_resuelven")
 	_test_limite_zona()
+	_fin("limite_zona")
 	_test_rf6_doble_drop_mejorada()
+	_fin("rf6")
 	_test_persistencia()
-	print("=== TEST M35 MINERIA: %d fallo(s) ===" % _fallos)
+	_fin("persistencia")
+
+func _fin(nombre: String) -> void:
+	_vistos[nombre] = true
+
+func _summary() -> void:
+	for n in BLOQUES:
+		if not _vistos.has(n):
+			_check(false, "bloque %s NO se ejecuto (posible SCRIPT ERROR)" % n)
+	if _checks < CHECKS_MINIMOS:
+		_check(false, "solo %d checks ejecutados (minimo %d) — posible aborto silencioso" % [_checks, CHECKS_MINIMOS])
+	print("=== TEST M35 MINERIA: %d checks, %d fallo(s) ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)
@@ -90,6 +122,28 @@ func _test_integridad_con_m15() -> void:
 	var frag_m15: ResourceDefinition = _rm.obtener_def(&"fragmento_ancestral")
 	_check(frag_m15 != null, "M15 fragmento_ancestral preservado")
 	_check(frag_m15.display_name == "Fragmento Ancestral", "M15 fragmento_ancestral display_name original")
+
+## H10/BUG-132: cada drop de veta debe resolver a un item REAL del catalogo (M15/M159).
+## Antes del fix el drop usaba el id de la VETA (p.ej. "veta_cobre"), que NO existe como
+## item -> recompensa fantasma (sin nombre/icono/valor), inutil para crafting (M16) o venta
+## (M36/M38). Esta es la asercion del camino FELIZ que la suite no tenia (falso verde por
+## OMISION, familia trampa O/1197): probaba categoria/region/golpes pero NUNCA cruzaba el drop.
+func _test_drops_resuelven() -> void:
+	var idb: Node = root.get_node_or_null("ItemDatabase")
+	_check(idb != null, "ItemDatabase autoload presente (M159)")
+	if idb == null:
+		return
+	var vetas := ["veta_cobre", "veta_hierro", "veta_oro", "veta_cristal", "veta_ancestral", "veta_polvo_estrellas"]
+	for vid in vetas:
+		var def: ResourceDefinition = _rm.obtener_def(StringName(vid))
+		_check(def != null, "%s existe para cruzar su drop" % vid)
+		if def == null:
+			continue
+		_check(def.drops.size() > 0, "%s declara al menos un drop" % vid)
+		for d in def.drops:
+			var iid: String = String(d.item_id)
+			var item = idb.get_item(iid)
+			_check(item != null, "drop de %s -> item '%s' resuelve en ItemDatabase" % [vid, iid])
 
 func _test_limite_zona() -> void:
 	# Verificar que la zona arranca con DEFAULT_ZONE_QUOTA disponible
