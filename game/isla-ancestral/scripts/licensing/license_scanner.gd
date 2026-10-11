@@ -144,3 +144,120 @@ static func reporte(inventario: Array) -> String:
 			(" (%s)" % p.get("license_file", "")) if not String(p.get("license_file", "")).is_empty() else "",
 		])
 	return "\n".join(lineas)
+
+
+## M83 L2 — Escanea un directorio recursivamente buscando archivos de licencia.
+static func scan_directory(dir_path: String, profundidad_max: int = 5) -> Array:
+	var resultados: Array = []
+	_escanear_rec(dir_path, 0, profundidad_max, resultados)
+	return resultados
+
+static func _escanear_rec(dir_path: String, prof: int, prof_max: int, out: Array) -> void:
+	if prof > prof_max:
+		return
+	var ruta: String = dir_path
+	var base: DirAccess = DirAccess.open(ruta)
+	if base == null:
+		return
+	var lic: String = detectar_archivo_licencia(ruta)
+	if not lic.is_empty():
+		out.append({
+			"path": ruta,
+			"license_file": lic,
+			"license": classificar(FileAccess.get_file_as_string(lic)),
+		})
+	var subdirs: PackedStringArray = base.get_directories()
+	for d in subdirs:
+		if not d.begins_with(".") and d != "loss" and d != "temp":
+			_escanear_rec(ruta.path_join(d), prof + 1, prof_max, out)
+
+## M83 iter2 — Reporte ejecutivo: exporta el inventario a JSON.
+static func reporte_ejecutivo(ruta: String = "") -> String:
+	var inv: Array = scan_project()
+	var out: Dictionary = {
+		"timestamp": Time.get_datetime_string_from_system(),
+		"total": inv.size(),
+		"licencias": inv,
+		"prohibidas": _filtrar_por_tipo(inv, "prohibited"),
+	}
+	if ruta.is_empty():
+		ruta = "user://m83_reporte_ejecutivo.json"
+	var f := FileAccess.open(ruta, FileAccess.WRITE)
+	if f != null:
+		f.store_string(JSON.stringify(out, "\t"))
+		f.close()
+	return ruta
+
+## M83 iter2 — Filtra el inventario por tipo de licencia.
+## tipo: "commercial" (permitidas), "copyleft" (GPL/LGPL/AGPL), "prohibited"
+const COPIED_LIST: Array = ["GPL_2", "GPL_3", "LGPL", "AGPL"]
+
+static func _filtrar_por_tipo(inv: Array, tipo: String) -> Array:
+	var out: Array = []
+	for item in inv:
+		var lic: String = String(item.get("license", ""))
+		match tipo:
+			"commercial":
+				if not COPIED_LIST.has(lic):
+					out.append(item)
+			"copyleft":
+				if COPIED_LIST.has(lic):
+					out.append(item)
+			"prohibited":
+				var pol: Resource = load("res://data/licensing/licencias.tres")
+				if pol != null and pol.has_method("licencia_permitida") and not pol.licencia_permitida(lic):
+					out.append(item)
+	return out
+
+
+static func scan_project() -> Array:
+	var inventario: Array = []
+	# Addons.
+	inventario.append_array(scan_addons())
+	# Directorios de licencia en el proyecto.
+	_escanear_rec("res://", 0, 3, inventario)
+	return inventario
+
+
+## M83 iter3 — Genera THIRD_PARTY_LICENSES.txt (noticia de licencias).
+static func generate_notice(inventario: Array) -> String:
+	var lineas: Array[String] = []
+	lineas.append("THIRD_PARTY LICENSES — Isla Ancestral")
+	lineas.append("Generado: %s" % Time.get_datetime_string_from_system())
+	lineas.append("=".repeat(60))
+	for i in inventario.size():
+		var p: Dictionary = inventario[i]
+		lineas.append("")
+		lineas.append("%d. %s v%s" % [i + 1, String(p.get("name", "?")), String(p.get("version", "?"))])
+		lineas.append("   Licencia: %s" % String(p.get("license", "UNKNOWN")))
+		var url: String = String(p.get("license_url", ""))
+		if not url.is_empty():
+			lineas.append("   URL: %s" % url)
+	return "\n".join(lineas)
+
+## M83 iter3 — Guarda notices: archivo principal + copias individuales por addon.
+static func save_notices(inventario: Array, output_dir: String = "") -> String:
+	if output_dir.is_empty():
+		output_dir = "res://data/licensing/notices/"
+	DirAccess.make_dir_recursive_absolute(output_dir)
+	var principal: String = generate_notice(inventario)
+	var ruta: String = output_dir.path_join("THIRD_PARTY_LICENSES.txt")
+	var f := FileAccess.open(ruta, FileAccess.WRITE)
+	if f != null:
+		f.store_string(principal)
+		f.close()
+	for p in inventario:
+		var nombre: String = String(p.get("name", "unknown")).replace(" ", "_")
+		var copia: String = output_dir.path_join("%s_LICENSE.txt" % nombre)
+		var cf := FileAccess.open(copia, FileAccess.WRITE)
+		if cf != null:
+			cf.store_string(String(p.get("license", "UNKNOWN")))
+			cf.close()
+	return ruta
+
+## M83 iter3 — Modo dry-run: reporta lo que se escribiría sin escribir.
+static func dry_run(inventario: Array) -> String:
+	var out: String = "[DRY-RUN] %d dependencias a escribir\n" % inventario.size()
+	for p in inventario:
+		out += "  - %s v%s [%s]\n" % [String(p.get("name","?")), String(p.get("version","?")), String(p.get("license","?"))]
+	return out
