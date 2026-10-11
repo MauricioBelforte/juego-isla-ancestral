@@ -43,6 +43,16 @@ jobs:
       # las cubre res://tests/run_tests.gd en local (ver 11-BUGS -> BUG-120).
       # Sin `|| true`: si una suite GdUnit4 falla, este paso y el quality-gate
       # fallan a la vista (CI rojo-visible > CI verde-falso).
+      # FIX BUG-129 (atria-dawn, 2026-10-11, patron T-108 de GUIA-GODOT/06):
+      # el script mode `-s` de Godot compila GdUnitCmdTool.gd fresco y no
+      # resuelve class_name globales del addon (GdUnitTestCIRunner) sin el
+      # global_script_class_cache.cfg. --import no regenera ese cache; si lo
+      # hace --editor --quit, que arranca el motor completo y escanea
+      # class_names. Debe correr DESPUES del cache del addon y ANTES de los
+      # tests. Sin este paso: 'Could not find type GdUnitTestCIRunner'.
+      - name: Rebuild script cache with autoloads registered
+        run: godot --headless --editor --quit --path game/isla-ancestral
+
       - name: Run tests
         run: |
           cd game/isla-ancestral
@@ -125,6 +135,14 @@ jobs:
 
       - name: Import project resources
         run: godot --headless --path game/isla-ancestral --import
+
+      # FIX BUG-129 (atria-dawn, 2026-10-11, patron T-108 de GUIA-GODOT/06):
+      # --import solo recompila scripts NUEVOS/modificados y lo hace ANTES de
+      # registrar los 114 autoloads; un script nuevo que referencia un autoload
+      # da 'Identifier not found' en falso con --check-only. --editor --quit
+      # arranca el motor completo, registra autoloads y regenera el class cache.
+      - name: Rebuild script cache with autoloads registered
+        run: godot --headless --editor --quit --path game/isla-ancestral
 
       - name: Check GDScript parse (gate duro)
         run: |
