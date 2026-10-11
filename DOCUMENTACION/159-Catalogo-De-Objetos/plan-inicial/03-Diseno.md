@@ -50,7 +50,7 @@
 | OBJ-CAM-006 | Cama ancestral | 2×2 | Dormir + regenerar | 800 | Raro |
 | OBJ-CAM-007 | Hamaca | 2×1 | Dormir | 120 | Común |
 | OBJ-CAM-008 | Sillón reclinable | 1×1 | Dormir (siesta) | 150 | Poco común |
-| OBJ-CAM-009 | Cama de花草 | 2×2 | Dormir + regen | 300 | Poco común |
+| OBJ-CAM-009 | Cama de flores | 2×2 | Dormir + regen | 300 | Poco común |
 | OBJ-CAM-010 | Cama legendaria | 2×2 | Dormir + regen total | 1500 | Legendario |
 
 #### Estanterías

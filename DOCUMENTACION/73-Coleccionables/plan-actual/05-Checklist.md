@@ -265,7 +265,7 @@ egistrar_por_fuente(fuente, id_local) para sistemas que solo saben donde lo obtu
 - [x] Re-verificado: el sistema carga desde el JSON (15 items, 4 categorías, 0 fallos) — data-driven activa
 - [?] Recompensas de gema_ancestral/moneda_ancestral vinculadas a M159/M93 (dueño: modulos de economia)
 
-**Totales:** 135 ítems · Completados: 28 · Pendientes: 105 · No resueltos: 2.
+**Totales:** 135 ítems · Completados: 26 · Pendientes: 107 · No resueltos: 2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 28 [x] / 105 [ ] /

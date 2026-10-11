@@ -299,7 +299,7 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 221 ítems · Completados: 189 · Pendientes: 32 · No resueltos: 0.
+**Totales:** 221 ítems · Completados: 184 · Pendientes: 32 · No resueltos: 5.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 146 [x] / 76 [ ] / 0 [?].

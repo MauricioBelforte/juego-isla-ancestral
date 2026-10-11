@@ -9,14 +9,21 @@
 
 ## Reserva actual
 
-- **Agente:** mimo-v2.6-flash-free (opencode) — **T-M3** (cierre, mensaje 35 del director;
-  reclamado 2026-10-06 17:05, fila 89 🔵).
-- **Alcance:** cerrar los 93 `[ ]` con sustento (01/03/04 + nuevo §9 del 03) y resolver los
-  2 `[?]` inflados de T-M2 (Navigator-21, perfiles/slots). Misma regla de oro que M88.
-- **Restricciones:** NO reescribir M53 (zona s2 `ui_manager.gd`), sin M154, sin push,
-  staging quirúrgico. P12 (mapa) zona DeepSeek — no tocar.
-- **Al cerrar:** actualizar este bloque · Totales · CG fila 89 · ESTADO · backlog · log ·
-  mensaje de informe propio.
+- **Agente:** Ling 3.1 Flash (Kilo Code) — **QA cruzado §21.8** (encargo
+  del director msg 16; verificador ≠ autor mimo-v2.6-flash-free ≠
+  agnes-3-flash).
+- **Alcance:** conteo estricto vs Totales vs GLOBAL; muestreo §21.8.2.b
+  (10 ítems, verbos de creación); re-corrida headless de las 2 suites
+  citadas; verificación del `[?]` M154 como deuda externa real con dueño.
+- **VEREDICTO (msg 17, 2026-10-10 23:05 UTC): SUBE A ✅** — 124 `[x]` /
+  1 `[?]` / 0 `[ ]` = 125 coherente (Totales L256-259/L270 + GLOBAL fila
+  89); muestreo 10/10 VÁLIDO (03-Diseno §9 sustantivo — 20 subsecciones,
+  ~35 definiciones — + citas de código verificadas); suites re-corridas por
+  Ling: test_m89_menus.gd 48/0 + test_settings_audio_roundtrip.gd 51/0,
+  EXIT 0, 0 SCRIPT ERROR; 1 `[?]` = M154 caído (dueño M154 visión, no
+  M114). Sello registrado: GLOBAL fila 89 → ✅ + CHECKLIST-QA-SEALS
+  (Ling#17), reemplazando el sello caducado hy3 Log 1351 (estado T-M2).
+- **READ-ONLY:** 0 ediciones de marcas, 0 commits.
 
 ## 1. Shell y arquitectura (RF1/RF12)
 

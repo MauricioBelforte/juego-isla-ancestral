@@ -49,7 +49,7 @@
 - [x] Definir reglas de comunicación asíncrona
 - [x] Definir reglas de respuesta a mensajes urgentes
 - [x] Documentar herramientas de comunicación (Discord, Notion, Linear)
-- [x] Crear guía de estilo para comunicación escrita
+- [?] Crear guía de estilo para comunicación escrita → REVERTIDO Familia A (auditoría BUG-070 lote 6, Ling 3.1 Flash, director confirma): `git grep "guía de estilo"` = 0 artefactos en todo el repo. No existe.
 - [x] Definir proceso de documentar decisiones
 - [x] Crear registro de decisiones tomadas
 
@@ -57,7 +57,7 @@
 
 - [x] Definir pipeline de tareas: Backlog ? To Do ? In Progress ? Review ? Done
 - [x] Definir estado Blocked con causa
-- [x] Crear sistema de priorización: P0 (Crítico, 24h), P1 (Alto, 3d), P2 (Medio, 1sem), P3 (Bajo, flexible)
+- [x] Crear sistema de priorización: P0 (Crítico, 24h), P1 (Alto, 3d), P2 (Medio, 1sem), P3 (Bajo, flexible) → RESTAURADO (director, re-verificación s3 #86): el artefacto SÍ existe — `03-Diseno.md` L78-85 tiene la tabla P0-P3 completa con los SLAs exactos (24h/3 días/1 semana/Flexible), coincidencia 1:1 con el ítem. Mi flip inicial y el grep de Ling no cubrieron 03-Diseno.md. Familia B legítima.
 - [x] Definir WIP limits por columna
 - [x] Crear template de tarea completa
 - [x] Definir Definition of Done (código revisado, tests pasan, documentada)
@@ -135,7 +135,7 @@
 - [x] Evaluar efectividad de procesos
 - [x] Ajustar según feedback del equipo
 - [x] Archivar procesos obsoletos
-**Totales:** 105 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 105 ítems · Completados: 104 · Pendientes: 0 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 63 [x] / 42 [ ] / 0 [?].

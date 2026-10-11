@@ -527,12 +527,18 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 > **extraidas de los `05-Checklist.md` reales** (no inventadas). Trabajalas despues de
 > tus tareas pendientes actuales, o en paralelo si prefieres.
 
-### 62-Memoria (52 pendientes) — iter. 3 (Log 1094) + **iter. 4 (Log 1112, 2026-09-20)**
+### 62-Memoria (37 pendientes) - refrescado 2026-10-09 (Log 1527; modulo 113 [x] / 0 [?] / 37 [ ] = 150)
 
 > **Sincronizacion in-place (2026-09-20):** 5 marcas de la iter. 4 estaban `[ ]` aca y `[x]`
 > en el `05-Checklist.md` del modulo (fuente de verdad). Corregidas con la nota de evidencia
 > del modulo. Auditoria por texto (exacto + difuso Jaccard >= 0,60): **0 desfases extra**.
 > Conteo medido: modulo **150 items / 98 `[x]` / 0 `[?]` / 52 `[ ]`**.
+>
+> **Refresco 2026-10-09 (Log 1527, encargo del director canal 117):** 15 items de esta seccion
+> seguian `[ ]` y ya estaban `[x]` en el `05-Checklist.md` del modulo (trabajo posterior de agnes,
+> Log 1387). Emparejados por TEXTO (normalizado exacto + difusa Jaccard >= 0,60): **15 flips, 0 sin
+> match, 0 desfases extra**. Conteo medido hoy: modulo **113 [x] / 0 [?] / 37 [ ] = 150** (cuadra con
+> `52 - 15 = 37`). Sin este refresco, trabajar desde esta seccion repetiria trabajo ya hecho.
 
 > **34 de los 91 items cerrados** en la iter. 3, cada uno respaldado por un test o por el generador
 > validante. Checklist del modulo: **59/150 -> 93/150**. Lo mas importante de este ciclo **no** fueron
@@ -556,9 +562,9 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 > Los 57 items que siguen son, en su mayoria, **Play Mode / baselines / integracion con M08-M63**:
 > requieren mundo real, hardware objetivo o que otros modulos reporten consumo.
 
-- [ ] Definir el problema: memoria creciente por chunks, señales, texturas y audio sin descarga en mundo voxel cozy
-- [ ] Registrar dependencias: M61 (rendimiento), M08 (voxel), M63 (streaming); relaciones M41-M44, M12, M90, M103, M110
-- [ ] Definir el objetivo: RAM predecible y estable, sin leaks y sin picos de frame en hardware medio/bajo
+- [x] Definir el problema: memoria creciente por chunks, señales, texturas y audio sin descarga en mundo voxel cozy
+- [x] Registrar dependencias: M61 (rendimiento), M08 (voxel), M63 (streaming); relaciones M41-M44, M12, M90, M103, M110
+- [x] Definir el objetivo: RAM predecible y estable, sin leaks y sin picos de frame en hardware medio/bajo
 - [x] Muestreo periódico: cada 5 s en calma y cada 1 s con movimiento de cámara
 - [x] Lectura de `Performance.PERFORMANCE_OBJECT_COUNT` para conteo de objetos vivos
 - [x] Lectura de `Performance.PERFORMANCE_ORPHAN_NODE_COUNT` para nodos huérfanos
@@ -583,18 +589,18 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [x] Prohibido crear Node sin padre que quede huérfano; chequeo con contador de orphans
 - [x] Policy de recursos compartidos: `duplicate(false)` y caché con un solo dueño (D6)
 - [ ] Texturas de región se liberan al salir de la misma (con M63 y M09)
-- [ ] Los datos de partida (M29) no retienen referencias a nodos del mundo
+- [x] Los datos de partida (M29) no retienen referencias a nodos del mundo
 - [x] Los callables con bound parameters se desconectan en `_exit_tree` (anti-leak de lambdas)
 - [ ] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares)
 - [ ] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base
-- [ ] Test de leaks con teleport ×10 y conteo de objetos antes/después (debe ser igual)
+- [x] Test de leaks con teleport ×10 y conteo de objetos antes/después (debe ser igual)
 - [ ] RN1: presupuesto de RAM objetivo ≤ 2.5 GB en PCs de gama media (preset Alta)
 - [ ] RN1: preset Baja ≤ 1.5 GB para gama baja con 4 GB de RAM
 - [x] RN2: sin picos de frame: deltas < 50 ms durante descargas o liberaciones — **iter. 4 (Log 1112): MEDIDO.** Lote completo 2,1–5,8 ms (8 MB) y 3,9–5,8 ms (64 MB) contra el limite de 50 ms. `test_m62_liberacion.gd`
 - [ ] RN2: cero hitching perceptible por refcount en liberaciones masivas
 - [ ] RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline
 - [x] RN6: ninguna operación de memoria bloquea el hilo principal — **iter. 4 (Log 1112): MEDIDO.** Pico de una operacion 0,279–0,492 ms, por debajo de un frame a 60 FPS (16,67 ms). Alcance: liberacion de `RefCounted`
-- [ ] RN9: la gestión de memoria es transparente para la partida (determinismo intacto)
+- [x] RN9: la gestión de memoria es transparente para la partida (determinismo intacto)
 - [x] Flujo muestreo → semáforo → política de acción (warning/crítico/emergencia)
 - [ ] Descarga dura al 95%: atlas fuera de pantalla y bancos de biomas viajeros
 - [x] Toda decisión de descarga queda registrada en log (M103) para análisis
@@ -604,7 +610,7 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [ ] Generación de mallas en hilos (M08): resultados por cola sin copias extra
 - [ ] Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM
 - [ ] Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos
-- [ ] Teleport extremo ×10 y vuelta al spawn deja la memoria en el mismo nivel (test)
+- [x] Teleport extremo ×10 y vuelta al spawn deja la memoria en el mismo nivel (test)
 - [ ] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región
 - [ ] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa
 - [ ] Streams `.ogg` liberados de caché cuando ningún reproductor los usa
@@ -612,17 +618,17 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [ ] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones)
 - [ ] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio
 - [ ] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62
-- [ ] LRU compartido: el 63 decide qué cargar, el 62 decide qué liberar (handshake)
+- [x] LRU compartido: el 63 decide qué cargar, el 62 decide qué liberar (handshake)
 - [ ] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño)
-- [ ] El 62 nunca descarga un recurso que esté en la cola de carga del 63 (evento cancel)
+- [x] El 62 nunca descarga un recurso que esté en la cola de carga del 63 (evento cancel)
 - [ ] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo
-- [ ] NO tocar la carpeta 61 (en curso por otro agente): solo consumir sus entregables
+- [x] NO tocar la carpeta 61 (en curso por otro agente): solo consumir sus entregables
 - [x] Textura gigante (4K simple sin mips): detector la identifica y degrada calidad automáticamente
-- [ ] Atlas lleno: política de evicción por orden de uso con log del evento
-- [ ] Chunk sin descargar tras cambio rápido de región: el monitor lo detecta y fuerza liberación
-- [ ] Banco de audio pedido mientras se descarga: reproducción diferida o silenciada graceful
-- [ ] Escena cambiada dos veces antes de terminar la transición: cola evita doble descarga
-- [ ] Cambio de escena con streaming activo: cancelación limpia sin recursos colgados
+- [x] Atlas lleno: política de evicción por orden de uso con log del evento
+- [x] Chunk sin descargar tras cambio rápido de región: el monitor lo detecta y fuerza liberación
+- [x] Banco de audio pedido mientras se descarga: reproducción diferida o silenciada graceful
+- [x] Escena cambiada dos veces antes de terminar la transición: cola evita doble descarga
+- [x] Cambio de escena con streaming activo: cancelación limpia sin recursos colgados
 - [ ] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros
 - [x] Tween sin fin en UI: auto-detención en `_exit_tree`
 - [x] Nieve/niebla (M32) que crea nodos por frame: detector de nodos por frame con alerta
@@ -874,7 +880,7 @@ verifiques vos, usa tu practica habitual de varios angulos.
 
 ---
 
-## 🔵 ENCARGO ACTUAL — M63-Cargas-Y-Streaming (asignado por el coordinador, 2026-10-02 17:40)
+## ENCARGO HISTÓRICO (cerrado) — M63-Cargas-Y-Streaming (asignado por el coordinador, 2026-10-02 17:40)
 
 **Modelo que asigna:** Atria-Dawn-Preview (Kilo Code) · **Log:** 1188 · **Origen:** directiva del
 usuario ("DeepSeek es de los más capaces, que tenga autonomía").
@@ -932,7 +938,7 @@ por el dueño anterior (Log 746): **precalentamiento P9**, **carga de océano/su
 
 ---
 
-## 🔵 ENCARGO ACTUAL — M59-Guardado (asignado por el coordinador, 2026-10-02)
+## ENCARGO HISTÓRICO (cerrado) — M59-Guardado (asignado por el coordinador, 2026-10-02)
 
 **Modelo que asigna:** Atria-Dawn-Preview (Kilo Code) · **Relevo §21.4.7** (el reclamo previo es de
 agnes-2.5-flash, agente descatalogado, sin actividad desde 2026-08-31).
@@ -1016,7 +1022,7 @@ validada con recuperación automática, migración solo-hacia-delante, `ISavePro
 
 ---
 
-## 🔵 ENCARGO ACTUAL — M17-Construccion (asignado por el coordinador atria-dawn, 2026-10-03)
+## ENCARGO HISTÓRICO (cerrado) — M17-Construccion (asignado por el coordinador atria-dawn, 2026-10-03)
 
 M59-Guardado quedó cerrado (iter. 3, Log 1209; BUG-089 autocorregido; verificar_funcs_duplicadas.py nuevo en el gate). El coordinador verificó tus 66 checks del gate: 0 fallos, 0 SCRIPT ERROR.
 
@@ -1143,3 +1149,79 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - [x] **Hallazgos reportados (no arreglados):** H1 el auditor se auto-escanea (comentarios con el patron literal inventan prefijos fantasma); H2 `UiI18n.traducir*` (14 claves) no es visto por el auditor (falso negativo latente, familia BUG-1015); H3 `nombre_localizado()` de M14 nunca se llama y su esquema no existe en el catalogo.
 - [x] **Reporte:** canal **104** (`104-...-deepseek-a-atria-m87-iter8-auditor-prefijo-dinamico-traducir-clave.md`). Tracker -> **103**.
 - [ ] **Pendiente (director):** autorizar el commit del fix (sin push); decidir H2/H3; si quiere asercion de regresion permanente en la suite (subiria 82 -> 83+).
+
+## Ciclo 2026-10-09 14:47 (GMT-3) — Lote 11: auditoria M104-Analytics (READ-ONLY, canal 114)
+
+- [x] Log reservado: **1524** — auditoria BUG-070 Lote 11 de M104-Analytics (Familia A + Patron C/D + drift).
+- [x] **Conteo:** WORKTREE 43 [x]/6 [?]/68 [ ] = 117 (== Totales == celda GLOBAL); HEAD 41/0/76. La celda del GLOBAL (43) y su nota (41) describen dos estados distintos.
+- [x] **Hallazgo clave:** los 2 [x] nuevos (L138 `exportar_csv`, L146 `clear_data`) + su codigo estan **SIN COMMITEAR** (agnes-3-flash, Log 1509). `git log -S'exportar_csv'` = 0 commits. Commitear la checklist sin el codigo infla el 43/117.
+- [x] **Familia A: 7 de 43 [x] inflados** — L67 `eventos.tres` (no existe), L114 `5 min/50 eventos` (codigo = 30 min), L121 `TaskManager` (0 hits), L132 crash (0 refs), L133 fast travel (0 refs), L40 toggle M91 (sin integracion), L146 boton (backend sin UI). Borderline L63.
+- [x] **Verificacion independiente:** `test_analytics.gd` 24/0 EXIT 0 x3; `clear_data()` 13 archivos -> retorno 13 -> 0 (contador == real).
+- [x] **Suite sin guardian:** CHECKS_MINIMOS=0 / _fin=0 / watchdog=0; inyeccion -> `SCRIPT ERROR` + EXIT 124 (cuelgue, trampa 28).
+- [x] **Patron C LIMPIO** (0 citas por seccion). **Patron D: 3 pares** (L40/L56, L61/L70, L146/L58).
+- [x] **Propuesta (NO aplicada):** 36 [x]/8 [?]/73 [ ] = 117.
+- [x] **Entregables:** Log 1524 + canal 115 (`deepseek-a-atria`). Pool: log 1524->1525; canal 114->116. Tracker -> **114**. SIN commit / SIN push.
+- [ ] **Pendiente (director):** aplicar/rechazar las 7 marcas; commitear el codigo de agnes junto con la checklist; corregir la nota del GLOBAL ("sin codigo .gd") y el 18/18 stale -> 24.
+
+## Ciclo 2026-10-09 14:51 (GMT-3) - Frente 2 opcional: diagnostico runtime M156 (READ-ONLY, canal 114)
+
+- [x] Log reservado: **1525** - diagnostico de implementacion runtime de M156 (faltantes para que funcione).
+- [x] **Estructural:** `scripts/terrenos/` = M156 REAL (autoload TerrainProvider); `scripts/terrain/` + `resources/terrain/` = LEGACY; `scenes/terrain/` VACIO. El header del checklist cita las rutas LEGACY.
+- [x] **Nucleo OK, 0 consumidores:** TerrainDetector/Modifiers/Provider no se usan en produccion (solo test_terrenos.gd, con guardian 3 capas).
+- [x] **Brechas:** G1 detector no montado; G3 mapa bloque->terreno solo 4/7 (barro/pavimento/agua inalcanzables); G5 integracion M11 ausente; G2 grupo voxel_terrain vacio; G4 collision_mask; G8/G9/G10 visual/audio/UI inexistentes.
+- [x] **Hallazgo nuevo:** puente M156->M155 roto por idioma (NOMBRES_TERRENO ES vs claves EN de M155) -> get_equipment_bonus() = 0.0 siempre; NOMBRES_TERRENO desincronizado con terrenos.json; el test consagra el bug.
+- [x] **Entregables:** Log 1525 + canal 116 (`deepseek-a-atria`). Pool: log 1525->1526; canal 116->117. SIN commit / SIN push.
+- [ ] **Pendiente (director):** asignar implementador para P0 (montar detector + arreglar mapa de nombres) y P1 (mapa 7/7 + integracion M11).
+
+## Ciclo 2026-10-09 15:55 (GMT-3) - canal 117: M62 backlog refrescado + M156 diagnostico consolidado
+
+- [x] Log reservado: **1527** - refresco de la seccion 62-Memoria del backlog + consolidacion del diagnostico M156.
+- [x] **M62 (encargo del director):** mi seccion "62-Memoria (52 pendientes)" tenia 15 items `[ ]` que ya estaban `[x]` en el `05-Checklist.md` (agnes, Log 1387). Emparejados por TEXTO (normalizado exacto + difusa Jaccard >= 0,60): **15 flips, 0 sin match, 0 desfases extra**. Conteo medido hoy: modulo **113 [x] / 0 [?] / 37 [ ] = 150** (52 - 15 = 37). Header de la seccion -> "(37 pendientes)" + nota de evidencia. LF puro, sin BOM.
+- [x] **M156 (cruce de mensajes):** mi canal **116** (14:51) YA era el diagnostico de implementacion que pide el 117 (que responde al 115 y salio a las 15:14). Consolide las 4 preguntas del 117 en el canal 118, con re-verificacion medida hoy: `Player.tscn` sin TerrainDetector + `player.gd` 0 refs; `_block_a_terrain` solo {0,3,5,6}; puente M156->M155 roto (NOMBRES_TERRENO espanol vs enum ingles de M155) -> get_terrain_bonus() = 0.0 siempre. READ-ONLY: 0 ediciones en M156.
+- [x] **Encabezados `ENCARGO ACTUAL`:** hay 3 en mi backlog (M63 L877, M59 L935, M17 L1019); los otros que menciona el 117 no estan con ese encabezado. Reportado, pendiente de confirmacion.
+- [x] **Entregables:** Log 1527 + canal 118 (`deepseek-a-atria`). Pool: log head 1527 -> 1528; canal 118 -> 119. SIN commit / SIN push.
+- [ ] **Pendiente (director):** marcar/cerrar los 3 encabezados ENCARGO ACTUAL; asignar implementador M156 (B1+B2); decidir si se commitea el canal 116.
+
+## Ciclo 2026-10-09 18:48 (GMT-3) - canal 121: M156 B3 (G2 + G4 + DoD) implementado
+
+- [x] Log reservado: **1533** - M156 B3: registro del terreno en el grupo `voxel_terrain` (G2) + `collision_mask` dedicado del RayCast3D (G4) + suite con DoD de bloque REAL. Cabeza medida justo antes = 1532, pero el tool aviso "1 numero del pool ya tenia log y se descarto: [1532]" (FUGA DE POOL: `Logs/1532-...` existe y el 1532 seguia en el pool) -> asigno **1533**; cabeza tras la reserva **1534**.
+- [x] **GAP detectado:** el ciclo B1+B2 (17:07) NO dejo entrada `Log reservado: 1530` en este backlog (solo cerro los 3 encabezados ENCARGO ACTUAL). Se anota aca para no perder la traza: **Log reservado: 1530** - M156 B1+B2 implementado + B4 citas corregidas.
+- [x] **G2 HECHO (medido):** el addon voxel **NO** puebla el grupo (un VoxelTerrain completo sin detector queda con `get_groups()==[]` y `layer=1`; el literal `voxel_terrain` en `libvoxel.*.dll` son rutas de fuente). Lo puebla `terrain_detector.gd::_resolver_terreno()` (grupo -> TerrainLocator duck-typed -> rama de escena -> current_scene -> arbol) con `add_to_group`. NO hubo dependencia de M08/TerrainLocator.
+- [x] **G4 HECHO:** `LAYER_TERRENO_BIT = 6` (32); `_asegurar_capa_dedicada()` AGREGA el bit al `collision_layer` del VoxelTerrain conservando la capa 1; `collision_mask = 32` + `collide_with_areas = false`. `Player.tscn` actualizado.
+- [x] **D1 + D1-bis:** `_block_id_en()` usaba `terrain.get("storage")` (inexistente -> -1 siempre); ahora `get_voxel_tool()`. Y convierte mundo -> local con `to_local()` (bug latente que expuso el test; en main_island el terreno esta en el origen y no se notaba).
+- [x] **TESTS (DoD):** suite NUEVA `scripts/terrenos/test_terrenos_b3.gd` (guardian 3 capas, `CHECKS_MINIMOS=28` MEDIDO) -> **28 checks, 0 fallos, EXIT 0 x3**. Monta un VoxelTerrain REAL y cambia un bloque REAL (GRASS -> CLAY via VoxelTool): `terrain_changed` se dispara con el terrain_id nuevo. **Guardian probado EN ROJO** (aborto inyectado -> EXIT 1 + nombra bloques C/D + piso "16 < 28"). Regresiones: integracion 39/0, test_terrenos 27/0, terrain_modifiers 10/0.
+- [x] **Doc:** `04-Codigo.md` sec.4.4 (divergencia modelo legacy per-bloque vs VoxelTerrain unico; capas reales 1=mundo/2=jugador/3=npc/4=interactuable/5=agua) + sec.4.5 (quien puebla el grupo, medido).
+- [x] **Entregables:** Log 1533 + canal **122** (`deepseek-a-atria`). Pool: log 1532(descartado)->1533; canal 122->123. Tracker -> **121**. SIN commit / SIN push.
+- [ ] **Pendiente (director):** flips de B3 en `05-Checklist.md` (L249 -> `[x]`; L140 re-frasear + `[x]`); **sacar el 1532 del pool de logs** (fuga); DRIFT DOCUMENTAL en `05-Checklist.md` seccion K L241-247 (7 `[x]` de capas 2-8 de terreno que NO existen); commit centralizado del working tree.
+
+
+## Ciclo 2026-10-09 19:56 — canal 123 -> M37 RF2d (versionado del bloque de guardado)
+
+- [x] Log reservado: **1536** — M37 Iter.4 slice RF2d: versionado + migracion del bloque de guardado del museo.
+- [x] Canal **124** (`deepseek-a-atria`) — reporte al director (premisa RF3 corregida + slice + evidencia + drift).
+- [x] **Premisa corregida (MEDIDA):** RF3 = "Donacion de peces" (01-Requerimientos L23; `[x]` en 05-Checklist L30), NO persistencia. La persistencia es RF2c, ya entregada por agnes (2026-10-08, `6e709b8`).
+- [x] **Implementado (aditivo):** `collection_registry.gd` -> `VERSION_GUARDADO=1`; `get_save_data()` emite `"version"`; `restore_save_data()` migra y **rechaza un bloque de version FUTURA sin degradar** (M59); `migrar_bloque()` v0->v1.
+- [x] **Test NUEVO:** `scripts/museum/test_museo_rf2d.gd` (guardian 3 capas; `CHECKS_MINIMOS=28` MEDIDO) -> **28/0 EXIT 0 x3**; guardian probado **EN ROJO** (piso+1 -> EXIT 1; aborto runtime -> nombra C..G + piso -> EXIT 1).
+- [x] **Regresiones verdes:** M37 rf3/rf2/rf1/test_museo 0 fallos; M59 validate_save 16/0 + rotate 43/0; `--check-only` EXIT 0; 0 SCRIPT ERROR.
+- [x] **Doc:** `04-Codigo.md` seccion "Slice RF2d".
+- [ ] **Pendiente (director):** flip C.60 (L60) / K.169 (L169) / K.172 (L172); reconciliar drift GLOBAL 51 <-> checklist 67; decidir endurecer `test_museo_rf3.gd`; commit centralizado (SIN push propio).
+- [ ] **Nota:** pool de logs con BOM (`﻿1536` invisible a isdigit) -> la herramienta lo consumio y se autocuro (head 1537). Colisiones ajenas 1290/1468 reportadas, no tocadas.
+
+## Ciclo 2026-10-10 00:04 (GMT-3) - canal 131 -> M105 H-3 (32 justificaciones inline, 0 flips)
+
+- [x] Log reservado: **1560** - M105 Telemetria: cierre H-3 (32 items `[?]` con justificacion inline llevada al propio item; 0 flips). Cabeza medida justo antes = 1560 (colisiones AJENAS 1290/1468/1547 reportadas, no tocadas); cabeza tras la reserva **1562** (1561 lo tomo otro agente).
+- M105 MEDIDO: 120 [x] / 45 [?] / 0 [ ] = 165. La premisa del director ("45 [ ]") era incorrecta: son `[?]` (bloqueados con dueno). El modulo YA tenia sello sec21.8 (Log 1502, s2); H-1/H-2 ya cerrados (Log 1508). Suites re-medidas: 64 checks, 0 fallos, 0 SCRIPT ERROR, 4x rc=0.
+- Hallazgo para el director: 5 de los 45 `[?]` NO son dep externa (L311/L316 Loader/Saver -> candidatos a [x] por equivalencia; L322/L323 archivos; L318 hook de cierre). Sin flips.
+- Sin commit / sin push. No toque quality.yml ni CHECKLIST-GLOBAL.md.
+
+## Ciclo 2026-10-10 11:00 (GMT-3) - canal 141 -> M11 sprint (adaptador + drenado real + L70 estructural)
+
+- [x] Log reservado: **1594** - M11 sprint en el adaptador: LShift ~6.5 m/s (FACTOR_SPRINT escalando `move_speed` del padre, sin tocar `player.gd`), drenado via `marcar_corriendo()` + `energia.actualizar()`, L70 estructural. Cabeza medida justo antes = 1594 (colisiones AJENAS 1290/1468/1547/1559 reportadas, no tocadas); cabeza tras la reserva **1595**.
+- Director (canal 141) ACEPTO el cableado M11 (49/0) y AUTORIZO el sprint: en el adaptador, NO en `player.gd`; `marcar_corriendo()` -> drenado; verificar L70 estructural; extender la suite. `player.gd` y multiplicadores M13: NO tocar. Flips de `05-Checklist`: del director.
+- Implementado en `scripts/player/player_core_m11.gd` (aditivo): constantes `VELOCIDAD_CAMINAR=4.2` / `VELOCIDAD_CORRER=6.5` / `FACTOR_SPRINT=6.5/4.2`; `leer_sprint()` (accion `correr` NO existe en el InputMap -> cae a `Input.is_key_pressed(KEY_SHIFT)`); gate = movimiento + `fsm.permite("correr")` + `energia.puede_correr()`; `_aplicar_velocidad_sprint()` ESCALA y RESTAURA `move_speed` (unico campo escrito).
+- L70 ESTRUCTURAL (no clamp): costo 1/min + regen 1/min = neto 0/min -> correr NO baja la energia; medido correr 100 min -> energia intacta (50.0), nunca agota.
+- Suite `test_player_cableado_m11.gd` extendida (bloques F sprint + G drenado): **71/0 EXIT 0 x3**, piso `CHECKS_MINIMOS=71` MEDIDO; guardian re-probado EN ROJO (P1 piso+1 -> 71/1 EXIT 1; P2 aborto tras bloque A -> nombra B..G + piso -> EXIT 1).
+- Regresiones EXIT 0: `test_player_core_m11` 87/0, `test_player_m11` 30/0, `test_terrenos_b3` 28/0, `test_terrenos` 27/0, `test_terrenos_integracion` 39/0. Pre-existente AJENA: `test_equipment_m155` 3 fallos (M155; identico con/sin mis cambios -> no mio).
+- Doc: `04-Codigo.md` §9.7 (nueva) + nota de actualizacion en §9.6. `05-Checklist`/GLOBAL/`quality.yml`/`player.gd`: NO tocados.
+- Sin commit / sin push. Reporte al director: canal **142**.
+

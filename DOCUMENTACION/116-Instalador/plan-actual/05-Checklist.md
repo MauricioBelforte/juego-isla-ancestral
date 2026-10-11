@@ -3,6 +3,14 @@
 
 ## Reserva actual
 
+- **ACTIVA: Reserva Ling 3.1 Flash / Kilo Code (2026-10-10 22:05)** — **QA
+  cruzado §21.8** (encargo del director, msg 14 del canal Ling-3.1-Flash).
+  Verificador independiente (≠ agnes ≠ Step 5). Alcance: conteo estricto vs
+  Totales vs GLOBAL; muestreo §21.8.2.b (10+ ítems); Patrón D con contexto
+  de sección (coordinado con Step 5 — aviso msg 59 en su canal; él completó
+  la re-medición en msg 57); runners re-corridos headless
+  (test_instalador_m116.gd + run_tests.gd). **READ-ONLY: 0 ediciones de
+  marcas, 0 commits.**
 - Estado: ✅ Completado — iteracion 3 (auditoria honesta: totales reales + gate CI duro) 2026-09-18
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
 - Log: 1014 (iter. 3) · 876 (iter. 2)
@@ -266,7 +274,7 @@
 ## Totales
 
 **Total de ítems:** 192
-**Resueltos:** 192 `[x]` · **Con dueño externo:** 0 `[?]` · **Pendientes:** 0 `[ ]`
+**Resueltos:** 169 `[x]` · **Con dueño externo:** 23 `[?]` · **Pendientes:** 0 `[ ]`
 > Recuento real tras la **iter. 3 (Log 1014, 2026-09-18)**. Dos correcciones:
 > (1) la linea anterior ("180 `[x]` · 6 `[?]` · 12 `[ ]`") era **obsoleta**: contradecia el cuerpo
 > del archivo, que ya estaba 100 % `[x]` — los 18 items que quedaban abiertos los marco
@@ -282,13 +290,22 @@
 - Smoke de ejecucion en consola real (ventana PowerShell nativa) → KnownIssue no bloqueante DoD; protocolo disenado en 03-Diseno.md §S.13. Manual test deferred.
 - RF6-RF13 (asociacion, permisos, antivirus, actualizaciones, reparacion, desinstalacion real, install custom UI) → agnes-2.5-flash 2026-09-14: specs completas en 03-Diseno.md §RF6-RF13; implementacion requiere build Windows real. Spec complete.
 
-**Totales:** 192 ítems · Completados: 192 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 192 ítems · Completados: 169 · Pendientes: 0 · No resueltos: 23 (Patrón D — duplicados de doble indexación, ver nota abajo).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la única mención previa era narrativa, en la Reserva actual (L9:
 > *"totales REALES (192/192; la linea '180/6/12' estaba obsoleta)"*). Conteo real
-> de marcas: 192 [x] / 0 [ ] / 0 [?]. Las marcas no se tocaron. Se agrega la línea
+> de marcas: 169 [x] / 0 [ ] / 23 [?]. Las marcas no se tocaron. Se agrega la línea
 > canónica al final del archivo para uniformidad con el resto del bloque.
+>
+> **Actualizado 2026-10-10 (director, tras QA §21.8 de Ling 3.1 Flash, msg 15):** los
+> 23 `[?]` son degradaciones Patrón D del director (2026-10-10, QA agnes msg 200) —
+> doble indexación estructural con canónica `[x]` superviviente; no son duplicados
+> reales ni deferrals M114. Los 3 bloques de totales (L276-277, L293, esta nota)
+> estaban stale en 192/0/0 y se actualizaron a 169/0/23. Verificación Ling: conteo
+> estricto = 169/23/0 = 192; muestreo §21.8.2.b 10/10 ítems con artefacto en disco;
+> runner `test_instalador_m116.gd` 15 checks / 0 fallos (piso 40, ejecutó 61) EXIT 0;
+> `run_tests.gd` (M112) 1270 tests / 0 fallos EXIT 0.
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, paquete opción 1, bloque M152+M116)
 M116 auditado. Sustentado (0 degradaciones). Suites re-corridas POR AGNES: test_installer_m116 18/0 + test_instalador_m116 (build) 15/0, EXIT 0. 192 [x] en disco: scripts/installer/ (instalador_config) + scripts/build/ (build_config_manager, build_validator, validador_instalador) + data/installer + setup_windows.ps1 (fixtures m116). 0 [?]/0 [ ]. No tocar GLOBAL (flip = director).

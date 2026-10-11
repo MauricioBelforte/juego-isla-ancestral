@@ -3,7 +3,7 @@
 
 # 05-Checklist.md — Módulo 41: Música
 
-> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
+> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame (tras sistema de audio base).
 
 ## A. Requisitos del módulo (10)

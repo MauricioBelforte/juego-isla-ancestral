@@ -3,7 +3,7 @@
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-10-07
-**Estado:** vigente (iter. 5)
+**Estado:** vigente (iter. 6)
 **Cierra:** ítems 168, 169, 170, 171 y 172 del `05-Checklist.md`.
 
 Este documento define **cómo se prueba** el framework emisor→receptor de M24. No reemplaza al
@@ -27,7 +27,13 @@ Suites headless (Godot 4.7.2, `--headless --path game/isla-ancestral --script <r
 | `scripts/templos/test_puzzle_gravedad.gd` | Familia gravedad (movimiento): burbujas, plataformas sincronizadas, pulsos, cintas, reloj M29. | Igual + **sonda roja** (10 mutaciones) + `RelojFalso` (contrato M29 duck-typed). |
 | `scripts/templos/test_puzzle_sonido.gd` | Familia sonido (secuencia): campanas, secuencia 3-5, pista tras 2 intentos, modelo puro (ítem 104). | Igual + **sonda roja** + verificación del ítem 104 por lectura del fuente (0 refs a `AudioServer` en código). |
 | `scripts/templos/test_puzzle_pistas.gd` | Familia pistas (ayuda): 3 capas, diferida 90 s, derivadas del grafo, solución tras 3 pistas, sin penalización. | Igual + **sonda roja** + `DiarioFalso` (contrato `diary_service`). |
-| `scripts/templos/test_regresion_templos.gd` | **Frente 0 — gate de regresión**: corre las **13 suites** como subprocesos y exige EXIT 0 + 0 `SCRIPT ERROR` + checks ≥ piso. | Piso total MEDIDO (**649**); sonda roja del clasificador (9 casos) + **sonda roja EN VIVO** (JSON de agua mutado → EXIT 1). |
+| `scripts/templos/test_puzzle_dificultad.gd` | Bandas, progresión por zona, ayuda progresiva por intentos. | Igual + **sonda roja** (banda sin pista, zona a banda inexistente, falta banda obligatoria, emisores_max<min). |
+| `scripts/templos/test_puzzle_tutorial.gd` | Guía por zona, iconografía, narrador suave (M33), visual-primero. | Igual + **sonda roja** + `NarradorFalso` (contrato `start_dialogue`). |
+| `scripts/templos/test_puzzle_presion.gd` | Presión avanzada: elevadores, puertas encadenadas, sin fallo punitivo (M66). | Igual + **sonda roja** (emisor 9, niveles 0, sin cadena, sin_fallo_punitivo false). |
+| `scripts/templos/test_puzzle_simbolos.gd` | Glifos emparejados, glosario M25, sello por pareja correcta. | Igual + **sonda roja** (glifo sin significado, pareja no declarada, emisor 9, glosario incompleto). |
+| `scripts/templos/test_puzzle_herramientas.gd` | Usos (pico/gancho/farol) y condición de inventario (item real). | Igual + **sonda roja** + `InventarioFalso` (contrato `count_item`) + verificación de ids reales contra el catálogo. |
+| `scripts/templos/test_puzzle_recompensas.gd` | Checkpoint atómico (tmp+bak+rename), recompensas únicas M66, lore. | Igual + **sonda roja** + cofre M66 real (`CofreRecuperacion`). |
+| `scripts/templos/test_regresion_templos.gd` | **Frente 0 — gate de regresión**: corre las **19 suites** como subprocesos y exige EXIT 0 + 0 `SCRIPT ERROR` + checks ≥ piso. | Piso total MEDIDO (**910**); sonda roja del clasificador (9 casos) + **sonda roja EN VIVO** (JSON de agua mutado → EXIT 1). |
 | `scripts/templos/test_puzzles.gd` | Framework base (transiciones, completado, no-arbitrariedad, integración emisor→puerta). | Suite original de Hy3 (0 fallos). |
 | `scripts/templos/test_templo_m26.gd` | Salas de M26 (7 anillos, fases). | 92 checks. |
 | `scripts/templos/test_templo_headless.gd` | Humo de arranque del templo. | 4 checks. |

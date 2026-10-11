@@ -194,5 +194,7 @@
 ## Totales
 
 **Total de items:** 150
-**Items completados:** 125 [x]
-**Items pendientes:** 25 [ ] (mayormente integracion con M41/M40/M22/M25/M148)
+**Items completados:** 146 [x]
+**Items pendientes:** 0 [ ] · **No resueltos:** 4 [?] (L52 requiere M22 memoria; L90 requiere M148 Lore; L123 y L127 requieren M41/M42/M43 audio engine)
+
+> Corregido por atria-dawn (2026-10-09, medicion de Ling msg 137 via s3): el bloque quedo stale en 125/25/0 de una iteracion anterior; 21 items pasaron a [x] y 4 a [?] sin actualizar el Totales. Drift de documentacion, no de inflacion (auditoria msg 126: Familia A/Patron C/M114 limpios).

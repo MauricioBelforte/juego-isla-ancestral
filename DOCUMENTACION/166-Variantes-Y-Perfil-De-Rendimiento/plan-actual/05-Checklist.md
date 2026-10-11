@@ -178,6 +178,9 @@ Regla del proyecto: este checklist debe tener **≥ 100 ítems** verificables. L
 
 ---
 
+
+**Totales:** 112 items - Completados: 111 - Pendientes: 0 - No resueltos: 1.
+
 ## Notas del Agente (mimo-v2.5 / OpenCode)
 
 **Modelo:** mimo-v2.5

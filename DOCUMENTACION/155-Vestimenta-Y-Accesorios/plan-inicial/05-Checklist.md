@@ -111,7 +111,7 @@
 - [ ] Implementar slots visuales para Head, Body, Boots (1 cada uno) [M]
 - [ ] Implementar slots visuales para 4 Accesorios [M]
 - [ ] Mostrar ícono de cada prenda equipada en su slot correspondiente [M]
-- [ ] Mostrar tooltip con nombre, descripción y bonos al pasar鼠标 sobre prenda [M]
+- [ ] Mostrar tooltip con nombre, descripción y bonos al pasar el cursor sobre la prenda [M]
 - [ ] Implementar botón "Desequipar" para cada slot [S]
 - [ ] Mostrar bonos acumulados por terreno en panel lateral [C]
 - [ ] Implementar highlight visual en slots con bonos activos para terreno actual [M]

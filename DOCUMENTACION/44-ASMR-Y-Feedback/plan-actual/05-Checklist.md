@@ -3,7 +3,7 @@
 
 # 05-Checklist.md — Módulo 44: ASMR y Feedback
 
-> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
+> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame.
 
 ## A. Requisitos del módulo (9)

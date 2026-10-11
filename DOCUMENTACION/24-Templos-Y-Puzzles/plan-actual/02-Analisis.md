@@ -64,3 +64,20 @@
   (eje inválido, límite abierto) **además** de la unicidad del framework (`validar_def`).
 - **Sin migración legacy:** el catálogo `templo_layout_diseno.json` no tiene ningún puzzle
   `tipo: "bloques"`, así que esta familia se **diseña** (los ítems 84-88 son "Definir", no "Migrar").
+
+## Iter. 6: por qué capas de datos puras y no más campos en `PuzzleRoom`
+
+- **Problema:** dificultad, tutorialización, símbolos, herramientas, presión avanzada y recompensas
+  describen **metadatos** (bandas, glifos, items, recompensas) que no son parte del vector booleano de
+  sala. Meterlos en `PuzzleRoom` habría acoplado el framework a seis familias a la vez.
+- **Decisión:** seis intérpretes `RefCounted` (una familia cada uno) que **traducen** sus datos →
+  emisores sobre un `PuzzleRoom` existente. El framework no cambia.
+- **Reutilización, no duplicación:** el checkpoint atómico **compone** `templo_checkpoint.gd` (M26) y
+  las recompensas únicas usan el cofre M66 real; el narrador usa el contrato real de M33; el inventario
+  usa `count_item` real. No se inventan contratos.
+- **IDs reales medidos:** el índice de `CatalogosEstaticos` indexa por NOMBRE DE ARCHIVO; se midió con
+  una sonda headless que `tiene_item("item_obj_her_002")` y `tiene_item("item_obj_luz_005")` son true y
+  los `OBJ-...` del `.tres` son false. Los datos usan los ids medidos.
+- **Residual honesto:** el catálogo no tiene item "gancho" ni existe aún el glosario M25
+  (`data/ruinas/glifos.json`); el USO y el CONTRATO quedan definidos y probados, y el residuo se
+  reporta (no se infla a `[x]`).

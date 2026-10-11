@@ -125,7 +125,7 @@ Inspirado en Tsuki's Odyssey, el juego avanza cuando el jugador no está:
 
 | Tiempo ausente | Progreso | Límite |
 |----------------|----------|--------|
-| 1 hora | 1 ciclo de生产cción | 10 items |
+| 1 hora | 1 ciclo de producción | 10 items |
 | 4 horas | 4 ciclos | 40 items |
 | 8 horas (dormir) | 8 ciclos | 80 items |
 | 24 horas | 12 ciclos (tope) | 120 items |
@@ -162,7 +162,7 @@ Basado en principios de diseño de juegos cosy (Tsuki, Animal Crossing, Stardew 
 
 | Principio | Implementación |
 |-----------|---------------|
-| Sin "game over" | Si la energía llega a 0, el personaje se sienta a descansar自动 |
+| Sin "game over" | Si la energía llega a 0, el personaje se sienta a descansar automáticamente |
 | Sin penalización por no jugar | El mundo no se degrada, los NPCs no se enojan |
 | Sin presión temporal | Los eventos se repiten, nada es "único una vez" |
 | Sin combate obligatorio | Todo el contenido accesible sin pelear |

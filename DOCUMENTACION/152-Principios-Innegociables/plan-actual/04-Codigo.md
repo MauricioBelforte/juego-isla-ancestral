@@ -540,7 +540,7 @@ Este documento define el proceso de knowledge sharing para evitar silos de conoc
 | H2 | **D-R2**: ampliacion del mapa x10 (radio 2560 / mundo 5120², commit c107419) contra el principio «no ampliar por hacerlo grande», **sin evaluar** la condicion del ejemplo 3 | fundador/director (registrar) |
 | H3 | **4 emparejamientos erroneos** en la §6 de  3-Diseno.md: M50 (es Vegetacion, no «Modelos 3D»), M64 (es IA; la variedad esta en M19/M161/M162), M07 (no lleva offline-first ni knowledge sharing), M107 (es backup del proyecto, no offline del juego) | dueño de M152 (aplicar §11.2) |
 | H4 | **Contrato roto M59 <-> M107**: M59 §4 promete «backups 3-2-1 externos» de saves; M107 no menciona saves | M59 / M107 |
-| H5 | 145-Diseno-De-Experiencia/03-Diseno.md **L52** contiene **自由** (CJK) en un doc en español → violacion de AGENTS.md §28 | dueño de M145 |
+| H5 | 145-Diseno-De-Experiencia/03-Diseno.md **L52** contenía CJK en un doc en español → violacion de AGENTS.md §28 (corregido en M3, 2026-10-10) | dueño de M145 |
 | H6 | 83-Licencias/03-Diseno.md §6 cita «Inventario de Dependencias (**M55**)», pero M55 es **Diario Del Jugador** | dueño de M83 |
 | H7 | Faltan en disco docs/codigo_de_calidad/proceso_code_review.md y guia_estilo_gdscript.md, que M111 §2/§6 especifica | M111 |
 | H8 | Falta un verificador de que exista un **archivo de licencia junto a cada asset** (alidate_asset_metadata.py comprueba copyright embebido, no presencia de LICENSE) | M83 / M127 |

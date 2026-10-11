@@ -56,7 +56,7 @@
 >
 > **Convención del checklist reparada:** decía `[ ] cumplido · [ ] pendiente` (¡el mismo símbolo para
 > ambos!) → imposible de contar. Ahora `[x] cumplido · [ ] pendiente · [?] no resuelto`. Mojibake
-> `IMPLEMENTACI脫N` eliminado. Los 4 ítems de **historial** llevaban checkbox → viñetas planas
+> `IMPLEMENTACIÓN` eliminado. Los 4 ítems de **historial** llevaban checkbox → viñetas planas
 > (si no, `verificar_checklist.py` los cuenta como ítems).
 
 ## 0-ter. Estado tras la auditoría iter. 2 (2026-09-19 — DeepSeek-V4.1-Flash / WorkBuddy, Log 1109)

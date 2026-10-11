@@ -216,3 +216,81 @@ iteracion recupera ese trabajo y cierra huecos medidos, no supuestos.
   que 8/8 apuntan a ese archivo y 0 a `scripts/telemetry/`. No lo toque: es una edicion
   en curso de otro agente.
 - `scripts/telemetry/stub_analytics_director.gd`: huerfano (0 referencias).
+
+## Verificador de hooks de integracion (2026-10-10)
+
+**Archivo:** `scripts/verificar_hooks_m105.py` (raiz `scripts/`, familia
+`verificar_*.py`). **Solo lectura.** Encargo del director (msg 109) tras la
+exploracion de atria-dawn-s2 (Log 1591): el modulo es un servicio sin
+consumidores reales y el estado "quien ya cableo su hook" dependia de ojo
+humano. El verificador lo hace medible.
+
+**8 hooks que mide** (CONECTADO/NO CONECTADO contra el arbol real):
+
+| Hook | Significado | Estado medido 2026-10-10 |
+|---|---|---|
+| H1 | M105 -> M104 (`registrar_evento` en telemetry_director.gd) | CONECTADO |
+| H2 | hook de cierre (`func _notification` en telemetry_director.gd) | NO CONECTADO |
+| H3 | gameplay -> M105 (llamadas `TelemetryDirector.*` fuera de telemetry/ y tests) | NO CONECTADO (0 de 960 .gd) |
+| H4 | M22 historia -> M105 | NO CONECTADO |
+| H5 | M71 progresion -> M105 | NO CONECTADO |
+| H6 | M53 consume la senal `solicitar_encuesta` | NO CONECTADO |
+| H7 | M91 opt-in UI llama `establecer_opt_in()` | NO CONECTADO |
+| H8 | autoload `TelemetryDirector` en project.godot | REGISTRADO |
+
+**Validacion (dos ramas probadas):**
+- Rama cableada: H1 y H8 salen CONECTADO/REGISTRADO en el baseline.
+- Rama sin cablear: H2-H7 NO CONECTADO; H3 = 0 consumidores = coincide con la
+  medicion independiente de s2 (Log 1591).
+- **Sonda de deteccion positiva** (creada, corrida, borrada, 0 restos):
+  `_sonda_hooks_m105.gd` en `scripts/player/` con
+  `TelemetryDirector.track_house_first_built()` -> H3 paso a
+  `consumidores=1` nombrando el archivo y la API usada; sin la sonda volvio a
+  baseline 0/960.
+- `--json` produce 8 claves (exit 0) para CI/cruces.
+
+**Uso:** `python scripts/verificar_hooks_m105.py` (o `--json`). Exit 0 siempre
+que el escaneo complete: es informativo, no gate. Los NO CONECTADO son deuda
+de integracion del modulo dueño (M22/M71/M53/M91 y el hook de cierre propio),
+no bug del script. Cuando un modulo dueño cablee su hook, este reporte lo
+mostrara sin necesidad de re-leer el checklist.
+
+## Notas del Agente
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-10 18:55:00
+**Estado:** Completado (verificador entregado; sin cambios en runtime ni marcas)
+
+### Lo que hice
+- Recupere el contexto del Log 1591 (s2) y el encargo del director (msg 109).
+- Escribi `scripts/verificar_hooks_m105.py` (8 hooks, solo lectura, modo texto
+  + `--json`) y lo valide en ambas ramas (baseline 0 consumidores + sonda
+  positiva temporal ya borrada).
+- Documente el verificador arriba.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **No cablee ningun hook de gameplay** (H2-H7 siguen NO CONECTADO): cablear
+  `track_*` en player/resources/historia etc. es **alcance nuevo** que exige
+  autorizacion del director (s2 lo propuso en Log 1591; no es trabajo de
+  checklist sino de integracion) y puede pisar ediciones en vuelo de otros
+  agentes sobre player_fsm/player_energy. El verificador esta listo para medir
+  ese cableado el dia que se autorice.
+- **No toque marcas del checklist** (directiva del director msg 109): vi los
+  duplicados textuales Patron D y los deje como estan (reporte en el informe).
+
+### Duplicados textuales detectados en 05-Checklist.md (Patron D, reportados)
+Sin tocar marcas ni lineas. 3 pares de `[?]` con el mismo texto de item:
+- L230/L231: "Disenar M105 identificar capitulos donde muchos jugadores se atascan"
+- L234/L235: "Disenar datos de telemetria identificar bugs emergentes"
+- L237/L238: "Disenar M105 generar issues en M102 basados en patrones de datos"
+Ademas el conteo por prefijo de linea da 122 [x] / 43 [?] mientras la seccion
+"Reserva actual" (L31) y el "Cierre H-3" (L102) documentan 120/45 — drift ya
+anotado por s2 (Log 1591) y por el propio CHECKLIST-GLOBAL (122/165). Ambos
+asuntos quedan para el director (los flips de marca son suyos).
+
+### Recomendaciones para el proximo agente
+- Cablear hooks de gameplay solo con OK del director; despues de cada cableado,
+  correr `verificar_hooks_m105.py` y adjuntar la salida al informe como evidencia.
+- No duplicar el verificador: si se necesita un gate en CI (exit 1 cuando H3
+  siga en 0 tras autorizarse el cableado), agregar un flag, no un script nuevo.

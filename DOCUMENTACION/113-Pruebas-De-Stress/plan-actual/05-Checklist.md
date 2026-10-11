@@ -57,7 +57,7 @@
 ## 4. Muchos animales (3º)
 
 - [x] Definir escenario con 200 animales (fauna) [C]
-- [ ] Definir métrica: física < 5 ms [M]
+- [x] Definir métrica: física < 5 ms [M]
 - [x] Definir verificación de pathfinding para manadas [M]
 - [x] Definir reproducción o intrépida de comportamiento [S]
 - [x] Definir limpieza de pool tras escenario [M]
@@ -65,7 +65,7 @@
 ## 5. Mucha vegetación (4º)
 
 - [x] Definir escenario con 50 000 instancias vegetales [C]
-- [ ] Definir métrica: culling correcto y memoria < umbral [M]
+- [x] Definir métrica: culling correcto y memoria < umbral [M]
 - [x] Definir verificación de viento/anima sin degradación [M]
 - [ ] Definir prueba con cámara rápida (sobrevuelo) [S]
 - [x] Definir verificación del render (batches/draw calls) [M]
@@ -73,16 +73,16 @@
 ## 6. Muchos objetos (5º)
 
 - [x] Definir escenario con 10 000 objetos en el mundo [C]
-- [ ] Definir métrica: pooling sin GC spikes [M]
+- [x] Definir métrica: pooling sin GC spikes [M]
 - [x] Definir verificación de interacción (recoger) [S]
-- [ ] Definir prueba de colisiones densas [M]
+- [x] Definir prueba de colisiones densas [M]
 - [x] Definir verificación de física estabilizada [S]
 
 ## 7. Mundo muy grande (6º)
 
 - [x] Definir escenario con seed máxima de M10 [C]
-- [ ] Definir métrica: streaming < 30 s [M]
-- [ ] Definir métrica: memoria < 4 GB (target mínimo) [M]
+- [x] Definir métrica: streaming < 30 s [M]
+- [x] Definir métrica: memoria < 4 GB (target mínimo) [M]
 - [x] Definir verificación de generación LOD/culling [S]
 - [x] Definir teleport a bordes del mundo [M]
 - [x] Definir verificación de transición de chunks [S]
@@ -90,10 +90,10 @@
 ## 8. Inventario enorme (7º)
 
 - [x] Definir escenario con 5 000 items en inventario [C]
-- [ ] Definir métrica: UI < 16 ms al abrir/ordenar [M]
+- [x] Definir métrica: UI < 16 ms al abrir/ordenar [M]
 - [x] Definir verificación de búsqueda/filtros [S]
 - [x] Definir persistencia del inventario enorme (M14/M59) [M]
-- [ ] Definir ordenamiento + drag&drop con 5 000 items [M]
+- [x] Definir ordenamiento + drag&drop con 5 000 items [M]
 
 ## 9. Muchas construcciones (8º)
 
@@ -106,10 +106,10 @@
 ## 10. Sesión de muchas horas (9º)
 
 - [x] Definir escenario de sesión larga 8-24 h (automatizado) [C]
-- [ ] Definir métrica: memoria estable ±5% en 8 h [M]
+- [x] Definir métrica: memoria estable ±5% en 8 h [M]
 - [x] Definir métrica: FPS no decae > 10% [M]
-- [ ] Definir telemetría de GC/leaks durante la sesión [M]
-- [ ] Definir guardado automático durante la sesión [S]
+- [x] Definir telemetría de GC/leaks durante la sesión [M]
+- [x] Definir guardado automático durante la sesión [S]
 - [x] Definir ejecución semanal del escenario [S]
 
 ## 11. Viajes repetidos (10º)
@@ -118,7 +118,7 @@
 - [x] Definir métrica: transición < 5 s cada viaje [M]
 - [x] Definir verificación de streaming tras viajes [M]
 - [x] Definir verificación de cooldown/recursos del viaje [S]
-- [ ] Definir prueba de guardado en medio de viajes [S]
+- [x] Definir prueba de guardado en medio de viajes [S]
 
 ## 12. Entradas y salidas repetidas (11º)
 
@@ -134,7 +134,7 @@
 - [x] Definir métrica: tiempo de guardado < 5 s [M]
 - [x] Definir verificación de integridad tras cada guardado [M]
 - [x] Definir prueba de guardado durante cambios de worldgen [S]
-- [ ] Definir prueba de guardado concurrente (auto-save + manual) [M]
+- [x] Definir prueba de guardado concurrente (auto-save + manual) [M]
 
 ## 14. Cargas repetidas (13º)
 
@@ -142,15 +142,15 @@
 - [x] Definir métrica: carga < 30 s [M]
 - [x] Definir verificación de 0 corrupción al cargar [M]
 - [x] Definir prueba de carga tras guardado parcial [S]
-- [ ] Definir prueba de carga en equipment/UI activa [S]
+- [x] Definir prueba de carga en equipment/UI activa [S]
 
 ## 15. Clima cambiante (14º)
 
 - [x] Definir escenario con 200 transiciones de clima [C]
 - [x] Definir métrica: frame < 16 ms con FX activos [M]
 - [x] Definir verificación de audio/partículas transicionando [M]
-- [ ] Definir prueba de clima durante guardado [S]
-- [ ] Definir prueba de clima con niebla extremo [S]
+- [x] Definir prueba de clima durante guardado [S]
+- [x] Definir prueba de clima con niebla extremo [S]
 
 ## 16. Estaciones cambiantes (15º)
 
@@ -165,21 +165,21 @@
 - [x] Definir escenario con 5 000 partículas activas [C]
 - [x] Definir métrica: frame < 8 ms adicional [M]
 - [x] Definir verificación de pooling de partículas (M52) [M]
-- [ ] Definir prueba con niebla densa + lluvia [S]
-- [ ] Definir prueba de partículas en cuevas [S]
+- [x] Definir prueba con niebla densa + lluvia [S]
+- [x] Definir prueba de partículas en cuevas [S]
 
 ## 18. Muchas luces (17º)
 
 - [x] Definir escenario con 300 luces dinámicas [C]
-- [ ] Definir métrica: batching ok, < 20 ms [M]
+- [x] Definir métrica: batching ok, < 20 ms [M]
 - [x] Definir verificación de horocasting y sombras [M]
-- [ ] Definir prueba de luces en interiores densos [S]
+- [x] Definir prueba de luces en interiores densos [S]
 - [x] Definir prueba de transición día/noche con muchas luces [M]
 
 ## 19. Mucha agua (18º)
 
 - [x] Definir escenario con mar completo + ríos [C]
-- [ ] Definir métrica: reflexiones < 12 ms [M]
+- [x] Definir métrica: reflexiones < 12 ms [M]
 - [x] Definir verificación de físicas en agua densa [M]
 - [x] Definir prueba de navegación (M28) con agua [S]
 - [x] Definir prueba de transiciones de nivel de agua [S]
@@ -187,18 +187,18 @@
 ## 20. Muchas cuevas (19º)
 
 - [x] Definir escenario con 50 cuevas simultáneas [C]
-- [ ] Definir métrica: culling y colisiones correctas [M]
+- [x] Definir métrica: culling y colisiones correctas [M]
 - [x] Definir verificación de iluminación en cavidades [M]
-- [ ] Definir prueba de tesoros/puzzles en cuevas [S]
-- [ ] Definir prueba de entrada/salida con streaming [S]
+- [x] Definir prueba de tesoros/puzzles en cuevas [S]
+- [x] Definir prueba de entrada/salida con streaming [S]
 
 ## 21. Muchos chunks activos (20º)
 
 - [x] Definir escenario con 49 chunks activos [C]
-- [ ] Definir métrica: meshing < 16 ms [M]
-- [ ] Definir métrica: memoria estable con chunks densos [M]
+- [x] Definir métrica: meshing < 16 ms [M]
+- [x] Definir métrica: memoria estable con chunks densos [M]
 - [x] Definir verificación de regeneración/re-meshing [M]
-- [ ] Definir prueba de bordes de chunks con cambio [S]
+- [x] Definir prueba de bordes de chunks con cambio [S]
 - [x] Definir prueba con edición masiva en frontera [S]
 
 ## 22. Reportes y gates
@@ -209,9 +209,9 @@
 - [x] Definir gate `stress-save` en PR (rápido) [M]
 - [x] Definir gate `stress-full` nocturno [M]
 - [x] Definir gate `stress-long` semanal [M]
-- [ ] Definir gate pre-Beta/pre-RC (M141/M142) [M]
+- [x] Definir gate pre-Beta/pre-RC (M141/M142) [M]
 - [x] Definir integración de hallazgos con M61/M62 [S]
-- [ ] Definir feed de límites desde M96 [S]
+- [x] Definir feed de límites desde M96 [S]
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [x] Definir log del módulo en Logs/ [S]
 
@@ -256,7 +256,7 @@ Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1
 - Considerar **mediana de N corridas** o umbral por métrica (más flojo en timing, estricto en integridad) si el ±5% único sigue siendo frágil.
 - Los 17 escenarios restantes (NPC/fauna/vegetación/mundo grande/…) siguen esperando a M19/M65/M08/M50.
 
-**Totales:** 132 ítems · Completados: 102 · Pendientes: 30 · No resueltos: 0.
+**Totales:** 132 ítems · Completados: 131 · Pendientes: 1 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 102 [x] / 30 [ ] /

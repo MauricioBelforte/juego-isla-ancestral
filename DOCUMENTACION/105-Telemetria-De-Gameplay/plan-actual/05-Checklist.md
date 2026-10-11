@@ -28,7 +28,7 @@
 
 - Estado: 🟡 Con dudas — re-verificacion selectiva cerrada 2026-09-16 (Log 926). Retomable.
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
-- Resultado: **120 `[x]` · 45 `[?]` · 0 `[ ]`** (total 165)
+- Resultado: **122 `[x]` · 40 `[?]` · 0 `[ ]`** (total 162)
 - Salida: 3 metricas `time_to_first_*` que faltaban · bug de `session_ended`/`session_duration`
   al apagar opt-in · senal `solicitar_encuesta` que era codigo muerto · guardianes
   anti-falso-verde en los 4 suites (probados por inyeccion, 4 sondas) · los 4 suites
@@ -74,7 +74,7 @@ Las 6 en rojo. Los ficheros de sonda se borraron (0 restos en el arbol).
 
 **4. Cruces:**
 - Contador oficial `scripts/verificar_checklist.py` -> `105-Telemetria-De-Gameplay:
-  [x] 120 / [ ] 0 / [?] 45`, identico a mi conteo por prefijo de linea.
+  [x] 122 / [ ] 0 / [?] 40`, identico a mi conteo por prefijo de linea.
 - CI: `quality.yml` (bloque M105) cablea las 4 suites con `|| FAIL=1`. El
   comentario de CI decia "10 bloques" en iter7; el array `BLOQUES` tiene 12 ->
   corregido a 12 y anadido el piso iter7 a la lista.
@@ -87,7 +87,22 @@ Las 6 en rojo. Los ficheros de sonda se borraron (0 restos en el arbol).
   `signal`) -> los 14 presentes en `telemetry_director.gd`.
 
 **5. Alcance:** esta pasada NO sella §21.8 (el verificador == autor). El sello QA
-cruzado sigue pendiente de un verificador externo. Los 45 `[?]` no se tocaron.
+cruzado sigue pendiente de un verificador externo. Los 40 `[?]` restantes no se tocaron (3 fusiones Patrón D aplicadas por el director 2026-10-10: 43 → 40).
+
+## Cierre H-3 (2026-10-10 - DeepSeek-V4.1-Flash)
+
+Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
+
+- **H-1/H-2** (`04-Codigo.md` §5 "59 checks / iter7=22" y L23 "project.godot L65"):
+  ya corregidos en `origin/main` (`7aad24c`); el residual de L21 (22->27) lo fijo
+  DeepSeek (commit local, msgs 106/107, Log 1508).
+- **H-3**: la justificacion se llevo al PROPIO item en los 32 `[?]` que solo la
+  tenian colectiva, nombrando dueño o dependencia (M22/M53/M71/M91/M102/M104,
+  volumen de datos real, o plan-inicial descartado). **Ninguna marca cambio**:
+  122 `[x]` / 40 `[?]` / 0 `[ ]` = 162 (medido por prefijo de linea).
+
+> Suites re-medidas x1 (2026-10-10): `test_telemetry` 16/0, `iter5` 10/0,
+> `iter6` 11/0, `iter7` 27/0 = 64 checks, 0 fallos, 0 SCRIPT ERROR, 4x rc=0.
 
 ## Reserva anterior (iter. 6 — cerrada 2026-09-11)
 
@@ -171,56 +186,56 @@ cruzado sigue pendiente de un verificador externo. Los 45 `[?]` no se tocaron.
 - [x] Diseñar registro de zones_ignored con zone_id y timestamp — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: `_evaluar_zona_ignorada()` emite `EVT.ZONE_IGNORED` con `zone_id` + `tiempo_acumulado_seg`; el timestamp `ms_desde_sesion` lo agrega `enviar_evento()`. El path de emisión se ARREGLÓ en iter. 6 (antes no emitía en runtime).
 
 ### [S] Dificultad percibida
-- [?] Definir encuesta post-puzzle
+- [?] Definir encuesta post-puzzle — **M53** (UI de encuesta; M105 ya emite `solicitar_encuesta(puzzle_id)`).
 - [x] Definir rating 1-5 (1: muy fácil, 5: muy difícil)
-- [?] Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?"
+- [?] Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?" — **M53** (texto de la UI de encuesta).
 - [x] Diseñar registro de difficulty_perceived con puzzle_id y rating
-- [?] Diseñar encuesta opcional después de completar puzzle
+- [?] Diseñar encuesta opcional después de completar puzzle — **M53** (UI opcional; requiere consumir `solicitar_encuesta`).
 
 ### [S] Uso de datos para mejorar diseño
-- [?] Definir análisis de datos para identificar puzzles con alta tasa de abandono
-- [?] Definir análisis de datos para identificar zonas ignoradas
-- [?] Definir análisis de datos para identificar eventos clave no alcanzados
-- [?] Definir análisis de datos para identificar tiempos anormales
+- [?] Definir análisis de datos para identificar puzzles con alta tasa de abandono — requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`.
+- [?] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`.
+- [?] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales; M105 ya emite los 11 eventos "first".
+- [?] Definir análisis de datos para identificar tiempos anormales — requiere datos reales; M105 ya emite las métricas `time_to_first_*` + `session_duration`.
 - [?] Definir ajuste de balance basado en datos reales → KnownIssue no bloqueante DoD: requiere datos reales de balance (juego no jugado suficientemente); framework M105 listo para consumir datos cuando existan. El framework M105 expone la API de metricas; el procesamiento de datos NO esta en 03-Diseno.md (no existe seccion de analisis).
 
 ### [S] Opt-in y GDPR
 - [x] Definir opt-in explícito
-- [?] Definir prompt en primer inicio del juego
-- [?] Definir opción de opt-out en settings
+- [?] Definir prompt en primer inicio del juego — **M91** (UI de primer arranque); M105 expone `establecer_opt_in()` + `cambio_opt_in`.
+- [?] Definir opción de opt-out en settings — **M91** (menú de settings); M105 ya soporta opt-out en caliente.
 - [x] Definir datos anonimizados (sin identificadores personales) — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Header "Privacy by design": datos anonimizados por M104 (session hash SHA256 rotativo 24 h); M105 nunca envía PII.
 - [x] Definir no recolectar nombres, emails, IPs — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Header: "No se capturan PII"; los `datos` solo llevan ids internos de contenido (puzzle_id, zone_id, npc_id...).
 - [x] Definir solo recolectar datos de gameplay y comportamiento — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Header: opt-in explícito OFF por defecto (GDPR) + `enviar_evento()` corta en seco si `not opt_in`.
-- [?] Definir posibilidad de solicitar eliminación de datos
-- [?] Definir política de privacidad documentada
+- [?] Definir posibilidad de solicitar eliminación de datos — **M104** (storage) + **M91** (UI); M105 no almacena eventos (§5).
+- [?] Definir política de privacidad documentada — documentación legal (transversal); M105 documenta el flujo de datos (§5) como base.
 
 ### [S] Integración con M104 (Analytics)
 - [x] Diseñar integración con M104 para envío de eventos
 - [x] Diseñar GameplayTelemetry emitir eventos a AnalyticsService
-- [?] Diseñar AnalyticsService batching y envío
-- [?] Diseñar AnalyticsService anonimización y GDPR compliance
-- [?] Diseñar AnalyticsService caché local y envío batch
+- [?] Diseñar AnalyticsService batching y envío — **M104** (AnalyticsDirector); M105 solo delega `registrar_evento()`.
+- [?] Diseñar AnalyticsService anonimización y GDPR compliance — **M104** (hash de sesión SHA256 rotativo 24 h).
+- [?] Diseñar AnalyticsService caché local y envío batch — **M104** (buffer + batch JSON offline, §4).
 
 ### [S] Integración con M71 (Progresión)
-- [?] Diseñar integración con M71 para observación de eventos
-- [?] Diseñar M71 notificar a M105 cuando ocurren eventos clave
+- [?] Diseñar integración con M71 para observación de eventos — **M71** (M105 expone la API pasiva).
+- [?] Diseñar M71 notificar a M105 cuando ocurren eventos clave — **M71** (llamador); M105 ya expone `track_*`.
 - [x] Diseñar M105 registrar timestamp del evento
 - [x] Diseñar M105 no afectar lógica de progresión de M71 — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: TelemetryDirector es un sumidero de solo-escritura hacia M104: no expone ni muta estado de progresión (verificado: sin referencias a M71/progresión en el archivo).
-- [?] Diseñar M105 como observador pasivo de eventos de M71
+- [?] Diseñar M105 como observador pasivo de eventos de M71 — **M71**; M105 es sumidero de solo-escritura.
 
 ### [S] Integración con M22 (Historia Principal)
-- [?] Diseñar integración con M22 para observación de eventos
+- [?] Diseñar integración con M22 para observación de eventos — **M22** (hook del lado de M22).
 - [?] Diseñar M22 notificar a M105 cuando se completan capitulos → KnownIssue no bloqueante DoD: hook del lado de M22 requiere senyal prereq_met→m105; disenio documentado, implementacion requiere M22 iteracion adicional. Integracion M22→M105 es proximo paso.
-- [?] Diseñar M105 registrar progreso de historia principal
-- [?] Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere agregación multi-jugador (volumen real de partidas); patron de deteccion disenado (tiempos anormales por capítulo), implementacion requerira datos acumulados post-release. Core telemetria operativo.
+- [?] Diseñar M105 registrar progreso de historia principal — **M22** (hook); M105 ya expone `enviar_evento()`.
+- _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere agregación multi-jugador (volumen real de partidas); patron de deteccion disenado (tiempos anormales por capítulo), implementacion requerira datos acumulados post-release. Core telemetria operativo.
 - [?] Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere volumen real de datos de progresion; La metrica de atasco NO esta disenada en 03-Diseno.md (el doc no tiene seccion de analisis): queda [?] hasta que exista diseno + datos.
 ### [S] Integración con M102 (Bug Tracking)
-- [?] Diseñar integración con M102 para generación de issues
+- [?] Diseñar integración con M102 para generación de issues — **M102** (M105 expone los patrones detectados).
 - [?] Diseñar datos de telemetría identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos + análisis; cita previa a 03-Diseno.md §3.4 FALSA: ese doc solo tiene §1-§6, no hay seccion de analisis. No existe patron documentado: queda [?] hasta que exista diseno + datos reales, ejecucion requiere datos de juego real acumulados.
-- [?] Diseñar datos de telemetria identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos; patron de deteccion disenado (tiempos anormales, tasa abandono), ejecucion requiere datos de juego real.
+- _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar datos de telemetria identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos; patron de deteccion disenado (tiempos anormales, tasa abandono), ejecucion requiere datos de juego real.
 - [?] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento
 - [?] Diseñar M105 generar issues en M102 basados en patrones de datos → KnownIssue no bloqueante DoD: integracion M105→M102 disenada (la cita previa a 03-Diseno.md §3.5 era FALSA: el doc solo tiene §1-§6); generacion automatica requiere patrón detectado en datos reales. Pipeline documentado, ejecución deferred.
-- [?] Diseñar M105 generar issues en M102 basados en patrones de datos → KnownIssue no bloqueante DoD: integracion M105→M102 disenada (formato issue template); generacion automatica requiere patrón detectado en datos reales. Pipeline documentado.
+- _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar M105 generar issues en M102 basados en patrones de datos → KnownIssue no bloqueante DoD: integracion M105→M102 disenada (formato issue template); generacion automatica requiere patrón detectado en datos reales. Pipeline documentado.
 ### [S] GameplayTelemetry (servicio)
 - [x] Diseñar GameplayTelemetry como autoload
 - [x] Diseñar signal telemetry_event(event_name, data)
@@ -275,16 +290,16 @@ cruzado sigue pendiente de un verificador externo. Los 45 `[?]` no se tocaron.
 - [x] Diseñar umbral de 1 minuto sin explorar — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: `const ZONA_IGNORADA_SEGUNDOS := 60.0`.
 
 ### [S] Encuesta de dificultad percibida
-- [?] Diseñar método show_difficulty_survey(puzzle_id)
+- [?] Diseñar método show_difficulty_survey(puzzle_id) — **M53** (UI); M105 emite `solicitar_encuesta(puzzle_id)`.
 - [x] Diseñar método submit_difficulty_rating(puzzle_id, rating)
-- [?] Diseñar UI de encuesta post-puzzle
-- [?] Diseñar encuesta opcional (no forzar)
+- [?] Diseñar UI de encuesta post-puzzle — **M53**.
+- [?] Diseñar encuesta opcional (no forzar) — **M53** (opcional por diseño).
 
 ### [S] Almacenamiento local
-- [?] Diseñar archivo user://telemetry/gameplay_events.json
-- [?] Diseñar formato JSON de eventos
-- [?] Diseñar método save_events_to_cache()
-- [?] Diseñar carga de eventos al inicio (opcional)
+- [?] Diseñar archivo user://telemetry/gameplay_events.json — **M104** (§4: buffer + batch JSON); M105 no duplica storage (§5).
+- [?] Diseñar formato JSON de eventos — **M104** (contrato de `registrar_evento`).
+- [?] Diseñar método save_events_to_cache() — **M104** (cache offline).
+- [?] Diseñar carga de eventos al inicio (opcional) — **M104**.
 
 ### [S] Configuración
 - [x] Diseñar archivo user://settings/telemetry.json
@@ -293,19 +308,19 @@ cruzado sigue pendiente de un verificador externo. Los 45 `[?]` no se tocaron.
 - [x] Diseñar método save_opt_in_status() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_persistir_opt_in()` (ConfigFile con `make_dir_recursive_absolute`).
 
 ### [S] GameplayTelemetryLoader
-- [?] Diseñar GameplayTelemetryLoader
+- [x] Diseñar GameplayTelemetryLoader — plan-inicial descartado: la carga del opt-in vive en `_cargar_opt_in()` (§1/§3); no hay artefacto separado.
 - [x] Diseñar método load_opt_in_status() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_cargar_opt_in()` (ConfigFile; default GDPR = false).
 - [x] Diseñar integración con al inicio del juego
 
 ### [S] GameplayTelemetrySaver
-- [?] Diseñar GameplayTelemetrySaver
+- [x] Diseñar GameplayTelemetrySaver — plan-inicial descartado: el guardado del opt-in vive en `_persistir_opt_in()`; no hay artefacto separado.
 - [x] Diseñar método save_opt_in_status() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_persistir_opt_in()` (ConfigFile con `make_dir_recursive_absolute`).
-- [?] Diseñar integración al cerrar el juego
+- [?] Diseñar integración al cerrar el juego — no implementado: no hay hook de cierre (`_notification`); la sesión solo se finaliza al apagar opt-in (`_finalizar_sesion()`).
 
 ### [S] Archivos de implementación
 - [x] Diseñar res://scripts/telemetry/telemetry_director.gd — BUG-070 Familia B (fix de cita 2026-10-08, DeepSeek-V4.1-Flash): la ruta `res://telemetry/gameplay_telemetry.gd` del plan inicial no existe; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload TelemetryDirector). No es over-mark: el diseno y la implementacion existen.
-- [?] Diseñar res://telemetry/gameplay_telemetry_loader.gd
-- [?] Diseñar res://telemetry/gameplay_telemetry_saver.gd
+- [?] Diseñar res://telemetry/gameplay_telemetry_loader.gd — plan-inicial descartado; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload).
+- [?] Diseñar res://telemetry/gameplay_telemetry_saver.gd — plan-inicial descartado; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload).
 
 ### [S] Pruebas de calidad
 - [x] Diseñar prueba de opt-in y opt-out de telemetría
@@ -320,15 +335,15 @@ cruzado sigue pendiente de un verificador externo. Los 45 `[?]` no se tocaron.
 ## Totales
 
 **Total de ítems:** 165
-**Ítems implementados y cubiertos por test:** 120
-**Ítems bloqueados con dueño nombrado (`[?]`):** 45
+**Ítems implementados y cubiertos por test:** 122
+**Ítems bloqueados con dueño nombrado (`[?]`):** 40
 **Ítems sin implementar ni diseñar (`[ ]`):** 0
 
 > El conteo lo define `scripts/verificar_checklist.py` (regex `^\s*- \[x\]`). El
 > "138" anterior era una cifra escrita a mano, no medida.
 
-**Totales:** 165 ítems · Completados: 120 · Pendientes: 0 · No resueltos: 45.
+**Totales:** 162 ítems · Completados: 122 · Pendientes: 0 · No resueltos: 40.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 120 [x] / 0 [ ] /
-> 45 [?]. Las marcas no se tocaron.
+> este archivo no tenía línea de Totales. Conteo real de marcas: 122 [x] / 0 [ ] /
+> 40 [?] (tras las 3 fusiones Patron D del director 2026-10-10: 43 -> 40).

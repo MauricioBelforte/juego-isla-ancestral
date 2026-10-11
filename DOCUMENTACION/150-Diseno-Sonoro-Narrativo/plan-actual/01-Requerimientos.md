@@ -1,11 +1,11 @@
-**Modelo:** SWE-1.6
+﻿**Modelo:** SWE-1.6
 **Plataforma:** DEVIN
 
 # 01-Requerimientos.md — Módulo 150: Diseño Sonoro Narrativo
 
 ## ID del Módulo
 - **Código:** M150 (plan maestro: sección 149 — DISEÑO SONORO NARRATIVO)
-- **Carpeta:** `DOCUMENTACION/150-Diseo-Sonoro-Narrativo/`
+- **Carpeta:** `DOCUMENTACION/150-Diseno-Sonoro-Narrativo/`
 - **Dependencias:** M41 (Música), M42 (Sonido Ambiental), M43 (Efectos de Sonido), M44 (ASMR y Feedback), M22 (Historia Principal), M24 (Templos y Puzzles), M25 (Ruinas), M26 (Templo Subterráneo)
 - **Carácter:** Módulo de diseño sonoro narrativo para el juego
 
@@ -54,3 +54,22 @@ El proyecto necesita un sistema de **diseño sonoro narrativo** para guiar al ju
 12. Leitmotifs sonoros diseñados (personajes, islas, temas).
 13. Variación de intensidad según contexto.
 14. Silencio usado narrativamente (pausas, énfasis).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M149** — Nombres y Nomenclatura | Sonido narrativo con nombres |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M149** — Nombres y Nomenclatura | Depende de este módulo |
+

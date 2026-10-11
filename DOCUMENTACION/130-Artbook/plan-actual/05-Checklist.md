@@ -19,7 +19,7 @@
 - [x] Definir audiencias objetivo y sus implicaciones editoriales [S]
 - [x] Definir decisión un tomo vs volúmenes (D2: un tomo + opción vol. 2) [S]
 - [ ] Definir orden temático vs cronológico (temático con cronología interna) [S]
-- [x] Crear página de título e introducción ≤80 palabras por capítulo [M]
+- [?] Crear página de título e introducción ≤80 palabras por capítulo [M] → REVERTIDO Familia A (auditoría BUG-070 lote 7, Ling 3.1 Flash, director confirma): la spec existe (03-Diseno.md L129) pero el ARTEFACTO no — `artbook/` no existe (ni en game/isla-ancestral/ ni en DOCUMENTACION/130-Artbook/); 04-Codigo L93: "su implementación pertenece a la fase de producción del artbook (post-RC)". Patrón M126: verbo "Crear" + solo spec.
 - [x] Redactar carta del director del prólogo [S]
 - [ ] Definir criterio de apertura de cada capítulo [S]
 - [ ] Validar que ningún punto del plan maestro quede huérfano [S]
@@ -248,7 +248,7 @@ El módulo fue liberado como "núcleo iter. 1" con JSON + Validator + Test. **No
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 146 ítems · Completados: 96 · Pendientes: 50 · No resueltos: 0.
+**Totales:** 146 ítems · Completados: 95 · Pendientes: 50 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 96 [x] / 50 [ ] / 0 [?].

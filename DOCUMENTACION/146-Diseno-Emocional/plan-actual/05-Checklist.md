@@ -49,7 +49,7 @@
 - [x] Identificar gaps emocionales (faltan emociones en alguna fase) → §6 (pertenencia tardía, con mitigación)
 - [x] Identificar over-emotional moments (demasiada emoción junta) → §6 (regla de separación festival/Sello)
 - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
 - [x] Documentar mapeo completo → documento completo + changelog en paleta
 
 ## C. Mecánicas Emocionales (15 ítems)
@@ -66,8 +66,8 @@
 - [x] Identificar momentos de emoción (pico) → wow-moments.md (8 momentos dosificados)
 - [x] Definir transiciones emocionales suaves → afterglow ≥2 min (wow-moments §1) + transiciones musicales
 - [x] Evitar choques emocionales bruscos → mapeo §6 (nunca pico tras pico) + feedback §3
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
 - [x] Documentar mecánicas emocionales → documentos completos
 
 ## D. Wow Moments (10 ítems)
@@ -94,7 +94,7 @@
 - [x] Definir transiciones musicales entre emociones → capas reactivas M41 + afterglow
 - [x] Colaborar con M41 (Música) en diseño emocional → frontera documentada: intención aquí, implementación M41
 - [x] Colaborar con M42 (Sonido Ambiental) en calma → idem (ambiente constante en calma)
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
 
 ## F. Visual Emocional (10 ítems)
 
@@ -106,7 +106,7 @@
 - [x] Definir composición visual por emoción → paleta §5 (encuadres por emoción)
 - [x] Colaborar con M45 (Arte 3D) en visual emocional → frontera documentada
 - [x] Colaborar con M49 (Iluminación) en iluminación emocional → frontera documentada
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
 - [x] Documentar guidelines visuales emocionales → paleta §5 (documento completo)
 
 ## G. Validación Emocional (10 ítems)
@@ -116,9 +116,9 @@
 - [x] Crear checklist de emociones a verificar → §2
 - [x] Definir proceso de recolección de feedback emocional → §3-4
 - [x] Crear template de reporte emocional → §3
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
 - [x] Documentar lecciones aprendidas → mecanismo definido (§4.4: reporte mensual M133 + cierre de hitos)
 - [x] Revisar diseño emocional trimestralmente → anclado a la ceremonia de revisión de M135/M133 (guía §4.5)
 
@@ -146,7 +146,7 @@
 - [x] Crear referencia rápida para el equipo → cozy-checklist (referencia de 7 preguntas) + paleta §4
 - [x] Archivar versiones anteriores → git (historial versionado; plan-inicial inmutable)
 - [x] Crear changelog de diseño emocional → sección Changelog en `emotional-palette.md` (primera entrada 2026-08-28)
-- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [?] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. — **DUPLICADO ESTRUCTURAL** de L51 (canónica de la sección B). Normalización Patrón D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 57): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado, no 10 pendientes separados.
 
 ---
 
@@ -171,8 +171,8 @@
 
 ### Veredicto
 Módulo 146 (Diseño Emocional): mantiene estado 🟡; 10 [?] justificados (playtesting/evaluación con datos M138+, M105). Reflejado en CHECKLIST-GLOBAL.md, ESTADO-PARALELO.md y DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md. Log 204.
-**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 100 ítems · Completados: 91 · Pendientes: 0 · No resueltos: 9 (normalización Patrón D 2026-10-10: 9 duplicados textuales del KnownIssue de playtesting degradados a [?]; L51 canónica).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?].
+> este archivo no tenía línea de Totales. Conteo real de marcas tras normalización Patrón D (2026-10-10): 91 [x] / 0 [ ] / 9 [?].
 > Las marcas no se tocaron.

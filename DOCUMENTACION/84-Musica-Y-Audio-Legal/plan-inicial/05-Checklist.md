@@ -54,7 +54,7 @@
 - [ ] Verificar uso comercial permitido
 - [ ] Verificar attribution requirements
 - [ ] Guardar copia de licencia en repositorio
-- [ ] Documentar限制 de uso (ej: no redistribuir el sample)
+- [ ] Documentar límites de uso (ej: no redistribuir el sample)
 - [ ] Verificar si requiere credito en credits del juego
 - [ ] Verificar si hay restriction de territorio
 - [ ] Verificar si hay restriction de plataforma

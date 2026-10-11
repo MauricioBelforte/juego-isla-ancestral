@@ -143,7 +143,7 @@ func try_place(pos: Vector3i, bloque_id: StringName) -> bool:
     # 1. Validar posición vacía y superficie válida
     # 2. Consumir 1 unidad del bloque del inventario (M14)
     # 3. Colocar el bloque en M08
-    # 4. Emitir反馈 visual
+    # 4. Emitir feedback visual
     pass
 ```
 

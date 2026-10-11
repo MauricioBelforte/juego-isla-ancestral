@@ -151,7 +151,7 @@ Dar profundidad emocional al juego cozy sin mecánicas punitivas: el jugador deb
 | Sin timers obligatorios | No hay recompensas diarias que perder |
 | Sin penalización por ausencia | La amistad no baja significativamente |
 | Sin bloqueo de contenido | Todo accesible sin amistad alta |
-| Sin presión de社交 | Puedes ignorar a los NPCs sin consecuencias |
+| Sin presión social | Puedes ignorar a los NPCs sin consecuencias |
 | Sin penalización por regalo malo | Solo -1/-2 puntos (recuperable en 1-2 semanas) |
 
 ### 5.8 Sistema de Cartas (Correspondencia)

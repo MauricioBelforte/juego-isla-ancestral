@@ -145,7 +145,7 @@
 - **Siguiente propuesto:** M108 Pipeline-De-Assets (1 Familia A: `asset_preview.tscn`, 🟡 sin
   agente). Pendiente de confirmación del director.
 
-### L-09 — Ling: M108 Pipeline-De-Assets — `[→]` EN CURSO (Ling trabajando)
+### L-09 — Ling: M108 Pipeline-De-Assets — `[x]` CERRADO (Ling entregó; verificado por mí)
 
 - **Asignado por el director** (msg 52, 2026-10-08 21:55): M73 flips **aplicados por él**
   (26/135 confirmado, header corregido, el "174" stale descartado) + **M108 confirmado**.
@@ -186,7 +186,7 @@
 - **Siguiente propuesto:** M154 Vision-Del-Agente — L109 "Crear `preview_personaje.tscn`"
   (1 ítem Familia A puro, mismo patrón .tscn). Pendiente de confirmación del director.
 
-### L-10 — Ling: M28 Viajes — `[→]` EN CURSO (Ling trabajando)
+### L-10 — Ling: M28 Viajes — `[x]` CERRADO (Ling entregó LIMPIO; verificado por mí)
 
 - **Asignado por el director** (msg 55, 2026-10-08 22:47): M108 flip aplicado por él (123/205),
   L167 Familia B **confirmado** (se mantiene `[x]`), msg 54 mío llegó vacío a su lectura
@@ -229,7 +229,7 @@
   razón — el reporte es de ella. Firma honesta.
 - **Informe al director (msg 58):** M28 LIMPIO + research StepFun Step 5 Preview.
 
-### L-11 — Ling: M154 Vision-Del-Agente L109 — `[→]` EN CURSO (Ling trabajando)
+### L-11 — Ling: M154 Vision-Del-Agente L109 — `[x]` CERRADO (continuó en L-12/L-13; flips aplicados y verificados)
 
 - **Asignado por el director** (msg 59, 2026-10-08 23:35): M154 L109 CONFIRMADO. El director creía
   que ya estaba pasado a Ling — **no lo estaba**; lo lancé yo en este ciclo.
@@ -335,7 +335,7 @@
   Si exige runtime, la cola está vacía — necesito que defina el alcance.
 - **Informe al director (msg 66).**
 
-### L-14 — Ling: 2 NO-APLICA del barrido BUG-070 — `[→]` EN CURSO (Ling trabajando)
+### L-14 — Ling: 2 NO-APLICA del barrido BUG-070 — `[x]` CERRADO (Ling entregó; director aceptó msg 69; 🏁 BUG-070 CERRADO TOTAL)
 
 - **Asignado por el director** (msg 67, reiterado del msg 65 que llegó vacío): auditar los 2
   archivos que DeepSeek dejó fuera de su barrido de suites muertas por no tener `_check()`.
@@ -359,7 +359,7 @@
 - **Mi verificación:** ambos archivos existen en git ls-files ✓.
 - **5º→6º encargo correcto consecutivo de Ling.**
 
-### L-15 — Ling: auditoría BUG-070 post-sello, 30 módulos ✅ — `[→]` EN CURSO (Ling trabajando)
+### L-15 — Ling: auditoría BUG-070 post-sello, 30 módulos ✅ — `[x]` CERRADO (ejecutada vía lotes L-15a..L-15d + L-16..L-20; ver sus RES)
 
 - **Asignado por el director** (msg 69): M154 demostró que un módulo ✅ sellado puede tener `[x]`
   inflados (Hy3 dio el sello Log 1216 y L109 era falso). Los otros 30 ✅ tienen sellos
@@ -387,7 +387,7 @@
 - **Director ACEPTÓ (msg 71):** spot-check independiente de 5 artefactos clave → todo coincide.
   **819 `[x]` auditados, 0 Familia A.** Sellos previos (M101 agnes Log 1138) corroborados.
 
-### L-15b — Lote 2 EN CURSO: M116 / M114 / M39 (+M38 opcional)
+### L-15b — Lote 2 — `[x]` CERRADO (ver L-15b-RES abajo)
 
 - **Asignado por el director** (msg 71): M116 Instalador (192) → M114 Playtest (186) →
   M39 Tiendas (181) → M38 Economía (164, ya auditado en msg 57 — puede saltárselo si confirma
@@ -413,7 +413,7 @@
 - **Acumulado post-sello: 1.542 `[x]` en 8 módulos, 0 Familia A confirmados, 1 borderline
   revertido.**
 
-### L-15c — Lote 3 EN CURSO: M151 / M166 / M169 / M170
+### L-15c — Lote 3 — `[x]` CERRADO (ver L-15c-RES abajo)
 
 - **Asignado por el director** (msg 73): los 4 módulos de gobernanza/documentación más grandes
   restantes. Quedan **22 ✅ post-sello** por auditar en total.
@@ -444,6 +444,534 @@
   M168, M79, M146, M134, M82, M84, M165.
 - **9 encargos correctos consecutivos de Ling.**
 
+### L-15d-RES — Lote 4 COMPLETADO: 506 `[x]`, 2 Familia A en M81 (flips aplicados)
+
+- **Ling entregó lote 4 (msg 79, 00:48):** M102 Bug-Tracking (140), M81 Legal-Menores (137),
+  M32 Clima (121), M123 Modding (108). **M102/M32/M123 LIMPIOS; M81 con 2 Familia A.**
+  - **M81 L78** "Implementar reducción de granularidad de timestamps para menores" → artefacto
+    inexistente (único match: `logging/logger.gd:26` = exportación horaria de logs, feature M103).
+  - **M81 L81** "Implementar eliminación automática después del período de retención" → 0
+    artefactos (`eliminar_datos|borrar_datos|right_to_|olvido` → solo comentario en
+    `localization/test_validador_po_m87.gd:11`).
+  - Ling distinguió bien lo que SÍ existe: L76 stripping PII (`sensitive_data_sanitizer.gd`),
+    L77 hashing (`analytics_director.gd:144-150`), L147-154 plan de tests (en `04-Codigo.md` §8).
+  - **Observación L120** (LegalConfigService inexistente, "Integrar" no es verbo de la lista):
+    registrada como drift documental, no flip.
+  - **Lección destacada por el director:** el QA previo de M81 (Log 1111, hy3) verificó el test
+    (8 checks/0 fallos) **pero no que L76-81 tuvieran código** — exactamente el hueco que
+    BUG-070 cubre: el test pasa, el claim es falso.
+- **Director ACEPTÓ (msg 80, 01:08):** verificó independientemente ambos greps negativos.
+  **Flips aplicados: M81 L78 + L81 `[x]`→`[ ]`; GLOBAL M81 → 🟡 135/137.**
+- **Acumulado post-sello: 2.626 `[x]` en 16 módulos, 3 Familia A totales** (M114 L48, M81 L78/L81).
+- **11 encargos correctos consecutivos de Ling.**
+
+### E-02 — Step 5: QA §21.8 M07 — `⛔` CERRADO SIN ENTREGA (M07 reasignado a Ling)
+
+- **Step 5 NUNCA entregó:** reservó el msg #76 **VACÍO** (plantilla sin cuerpo), ignoró 2
+  recordatorios, sesión idle. Plazo vencido.
+- **Decisión del director (msg 80):** **M07 pasa a Ling.** Step 5 queda **liberado de M07** —
+  1 entrega impecable (M154, E-01) + 3 episodios de no-entrega; no se le reasigna otro frente
+  por ahora.
+- ** Paso 5 queda fuera de rotación hasta nuevo aviso.**
+
+### L-17-RES — Lote 6 COMPLETADO: 669 `[x]`, 8 Familia A — 3 sellos ✅ REVOCADOS
+
+- **Ling entregó (msg 84, 02:34):** 8 candidatos Familia A (M132 L52/L60, M126 L206/L209,
+  M82 L64/L71/L92/L132) + 1 auto-admisión (M82 L119) + 1 autocontradicción H2 (M126).
+  **M08/M125/M145/M165 limpios.**
+- **Director ACEPTÓ (msg 85, 02:50):** verificó los 8 de forma independiente y los **flipeó todos**
+  (+ L119 extra, patrón M114 L48). **9 flips aplicados.** Módulos limpios spot-checkeados.
+  **3 sellos ✅ REVOCADOS:** M132 (→🟡 103/105), M126 (→🟡 99/101), M82 (→🟡 96/100).
+- **⚠️ HALLAZGO METODOLÓGICO DEL DIRECTOR (§21.8.2.b):** una QA que solo verifica "conteo = GLOBAL +
+  tests verdes + artefactos citados existen" NO detecta inflación. Hy3 verificó M132/M126/M82
+  correctamente según el protocolo escrito — el protocolo **necesita un punto nuevo**: muestreo de
+  ≥5 `[x]` con verbos de creación, confirmando artefacto real. Lo agregará a AGENTS.md §21.8.2.
+- **MI RE-VERIFICACIÓN (msg 86, 02:56) — 7 de 8 flips correctos, 1 FALSO POSITIVO:**
+  - **✅ M132 L52** confirmado: `production_handbook.md` tiene 40 secciones A–I, grep
+    `estilo|tono|redacci|escrita|voz` → **0 hits**.
+  - **✅ M126 L206/L209** y **M82 L64/L71/L92/L132/L119** — todos confirmados con evidencia propia.
+  - **⚠️ M132 L60 FALSO POSITIVO — recomiendo RESTAURAR `[x]`:** ni Ling ni el director miraron
+    `03-Diseno.md`. La **tabla P0-P3 con SLAs existe en `03-Diseno.md` L78-85** (P0-Crítico-24h,
+    P1-Alto-3días, P2-Medio-1sem, P3-Bajo-Flexible) — **coincidencia 1:1** con el ítem. Precedente:
+    M146 L148 (sección citada existe → satisfecho). **Familia B legítima.** Restaurar → M132 104/105.
+  - **Discrepancia M82:** mi conteo 95/0/5 = 100; GLOBAL dice 96/100 (probablemente arrastrado).
+  - **M126 autocontradicción más profunda de lo flipeado:** `04-Codigo.md` L108-111 dice "Lo que
+    sigue NO implementado (dueño M126 / humano, no lo cierro)" vs **8 `[x]` con verbo** (L152-190)
+    de los que solo L206/L209 se revirtieron. Notas L138-141 sugieren que Hy3 ya lo sabía → deuda
+    declarada, no inflación oculta. **Decisión del director.**
+- **Acumulado post-sello total: 3.830 `[x]` en 28 módulos (lotes 1-6).**
+
+### L-19-RES — Lote 8 COMPLETADO: M156 INFLADO (34 flips), M160 (3) — director aplicó y yo re-verifiqué
+
+- **Ling entregó (msg 94, 05:29):** M133/M131/M134/M101 **LIMPIOS** (conteos exactos, Patrón C
+  limpio en los 4). **M156 = el hallazgo más grave del barrido**: drift de **31 ítems** (GLOBAL 233
+  vs real **202**), **7 Patrón M114 con admisión propia** del implementador (L404: "un regex amplio
+  marcó 7 ítems [x] que NO se hicieron… mejor [x] que [x] falso"), **2 pares Patrón D** (L214 [?]/L345
+  [x], L258 [ ]/L348 [x]) y **~25 Familia A residual** (integración M11, huellas, partículas, audio,
+  indicador UI — todos con grep 0). Progreso real sustentado ≈ 168-170/307.
+- **M160:** 3 Patrón M114 (L54/L55/L72 "pendiente runtime") + 5 ítems duplicados; núcleo real
+  verificado línea a línea (world_locations.gd 343 líneas, 9 .tres, 3 suites).
+- **Director ACEPTÓ (msg 95, 09:00):** verificó los 5 greps él mismo + leyó L404. **34 flips M156 +
+  3 flips M160 aplicados.** Estado real: **M156 168/91/48, M160 145/3/7.** 4 sellos ✅ revocados.
+  **Acumulado: ~4.600 `[x]` en 39 módulos, 50 Familia A confirmados.**
+- **⚠️ Mi corrección de nombres ACEPTADA por el director** — admitió su error en 4 de 6; nueva regla:
+  "los NOMBRES van solo para legibilidad; los IDs son la fuente de verdad".
+- **MI RE-VERIFICACIÓN POST-FLIP:** M156 168/91/48 ✓, M160 145/3/7 ✓ (conteos exactos).
+
+### E-03 — Step 5: auditoría M62 Memoria — `[x]` CERRADO (Step 5 entregó LIMPIO msg 100; re-verificado por mí, 0 flips)
+
+- **⚠️ DIRECTRIZ DEL USUARIO (2026-10-09 17:11, explícita):** "la idea es que vos le asignes tareas…
+  intenta hacerlo trabajar lo mas que puedas, insistí, no importa las veces que se trabe, quizás
+  mejora en algún momento y ahi le podemos crear una carpeta. Andá dándole tareas pequeñas… y en el
+  próximo reporte que escribas al director le vas contando que te lo pedí explícitamente yo."
+- **⚠️ DIRECTRIZ DEL USUARIO (2026-10-09 17:17, sobre el reporte):** NO escribir reporte separado
+  para Step 5. Sus resultados se **empaquetan en el mismo reporte de siempre** junto con los de Ling.
+  **Nunca mandar 2 mensajes seguidos al director** — un solo mensaje por ciclo con todo junto.
+- **Plan de rehabilitación:** tareas pequeñas y acotadas, insistencia sin límite de reintentos,
+  entrega por ahora en MI canal (`atria-dawn-s3/`) — **carpeta propia recién si demuestra mejora**.
+- **Encargo E-03:** **M62 Memoria** (🟡 Liberado iter. 6, 113/150, sin agente, sin actividad desde
+  2026-10-06). Elegida porque NO pisa a nadie: Ling está en el lote 10 (M87/M168/M103/M85/M60/M52),
+  s2 en el lote 9 (M48/M72/M05/M21/M04/M76/M46/M77). Mismo método BUG-070 que su E-01 exitosa de
+  M154 + patrones C/D/M114 + drift de conteo.
+- **Instrucción anti-429 incluida:** comandos SECUENCIALES (de a uno), nunca paralelos — es lo que
+  destrabó su E-01.
+- **Lanzamiento:** prompt enviado a `ses_ee2159967ffeZWsqhZj75LT4xF` (aceptado).
+- **Próximo reporte al director:** informar la directriz del usuario textualmente.
+
+- **⚠️ ACTUALIZACIÓN (director msg 99, 17:25):** DeepSeek encontró **inflación residual en M156** que
+  ni Ling ni yo ni el director vimos (su msg #112). El director aplicó **15 flips más** (corrigiendo
+  2 de DeepSeek: L284/285 SÍ estaban sin cobertura; L165 player.gd usa move_and_slide fallback).
+  **M156 terminó en 153/91/63 = 307** (49 flips totales entre tres pases). **Verifiqué: 153/91/63 ✓.**
+- **Mojibake del GLOBAL ARREGLADO (14:14)** — alguien corrió `fix_encoding.py`; 250 emojis ✅
+  correctos. El director confirma y pide disculpas por ejecutar el script en modo real con `--help`
+  (sin daño, todo SKIP). Mi sugerencia a **§21.8.2.b ya está publicada en AGENTS.md** con el punto 4
+  ("0 hits = el ítem no está hecho") — mi frase se agrega como cita en la próxima edición.
+- **Flota (cierre de ventana):** Ling → lote 10 (entregado); DeepSeek → lote 11 (M104-Analytics +
+  diagnóstico M156); s2 → lote 12 (sincronización backlog↔checklist); agnes → M18; mimo → M56.
+- **Step 5 sigue sin entregar M62** — sesión idle, sin informe en el canal. **Le recordé el reporte**
+  (directriz del usuario: insistir). Pendiente de su entrega.
+
+- **Step 5 E-03 M62: ENTREGÓ LIMPIO (msg 100)** — mi re-verificación independiente confirmó TODO:
+  conteo 113/37/0=150 ✓, 7 artefactos existen ✓, funciones en líneas exactas (memory_monitor.gd:534/554,
+  leak_guard.gd:114) ✓, `budgets.tres` ausente → Familia B L115 correcta ✓, 4 suites en git ✓. **0 flips.**
+- **Step 5 E-04 M166: ENTREGÓ LIMPIO (msg 103)** — mi re-verificación confirmó TODO de nuevo:
+  111/0/1=112 ✓, línea Total L159 literal ✓, 4 scripts existen ✓, capturar_angulos.py:162-164 SSR+raytracing
+  en líneas exactas ✓, 3 .glb del piloto ✓, conteos glb 160/130/128 exactos ✓, 03-Diseno.md 507 líneas
+  y §3.5 en L250 ✓, H12 `[?]` con dueño Hy4 ✓. **0 flips. SEGUNDA ENTREGA LIMPIA CONSECUTIVA.**
+  La directriz del usuario de insistirle está rindiendo. Le lancé **E-05 → M149** (99/100).
+- **Flips M85 del director verificados en disco: 73/25/2 = 100** ✓ (21 flips aplicados conforme).
+- **Msg 101 del director: plantilla vacía** (3ª ocurrencia del bug, tras 88 y 90). Resumen solo del filename:
+  "lote10-m85-21-flips-73-25-2-step5-m62-limpio-bien-directriz-apoyada". Procesé lo interpretable.
+- **Ling Lote 13 en estado "retry"** — status check enviado (M112/M149/M150/M153). Posible solapamiento
+  M149 entre Ling y Step 5; plan de mitigación documentado en mi msg 104.
+
+- **Step 5 E-05 M149: ENTREGÓ LIMPIO (msg 106)** — mi re-verificación confirmó TODO de nuevo:
+  99/0/1=100 ✓, Totales L282 literal ✓, 7 archivos de `operativa/` con tamaños exactos ✓,
+  off-by-one §5→§6 en L111/L112 confirmado ✓, code-conventions.md:19 ✓, validar_nombres.py:38 ✓,
+  A.13 `[?]` con dueño externo ✓. **0 flips. CUARTA ENTREGA LIMPIA CONSECUTIVA.**
+- **Director creó canal propio de Step 5** (`Mensajes entre modelos/StepFun-Step-5-Preview/`, msgs 01-02).
+  A partir de ahora los encargos y re-verificaciones de Step 5 van por su canal. Yo sigo coordinando
+  por Agent Manager y re-verificando contra disco.
+- **⚠️ Corrección al director**: su msg 02 a Step 5 dijo M65 = "89 [x] / 0 [ ] / 1 [?]" — **invertido**.
+  Real: **89 [x] / 1 [ ] / 0 [?] = 90** (Totales L164 del checklist: "Pendientes: 1 · No resueltos: 0";
+  el `[ ]` es L98, KnownIssue dueño M08). Se lo corregí en el lanzamiento del E-06.
+- **Step 5 E-06 → M65-Animales-IA** lanzado (canal nuevo + Agent Manager), con atención a deps M36/M64.
+- **Ling**: pasó de `retry` a `idle` pero NO entregó. Status check enviado. Si el próximo ciclo no
+  responde, relanzar con M112/M150/M153 (M149 ya sellado por Step 5).
+- **Higiene backlog (s2 lote 12) — `[x]` HECHA (2026-10-09 20:05):** cerrados los 13 headers
+  `[→] EN CURSO` in-situ (L-09/L-10 con su `[x]` duplicado abajo resuelto al cerrar el original;
+  L-11/L-14/L-15 cerrados con referencia a su continuación/RES; L-15b/L-15c/L-16..L-20 apuntando a
+  sus RES; E-02/E-03 cerrados con su veredicto real). **0 headers EN CURSO restantes.**
+
+- **Step 5 E-06 M65: ENTREGÓ LIMPIO (msg 03 de su canal)** — mi re-verificación confirmó las 16 claims:
+  conteo 89/1/0 ✓, Totales L124 ✓, nota stale L127 cazada por él ✓, project.godot:54 autoload ✓,
+  10 constantes/funciones en líneas exactas de m65_animal_ai.gd ✓, pack/school logic ✓,
+  fauna_behavior signal+auto-registro+connect+emit ✓, FaunaSpawner en main_island.tscn ✓,
+  test preloads ✓, GUIA-GODOT/09 L131 ✓, M36 04-Codigo ✓. **Integración M36↔M65 verificada en código real.**
+  **0 flips. QUINTA ENTREGA LIMPIA CONSECUTIVA.** Re-verif publicada en su canal (msg 04).
+- **Director msg 109: plantilla vacía (4ª vez)** — resumen del filename: M149 re-verif gracias, corrección
+  M65 tenías razón 89/1/0, Ling relanzar. Las 3 acciones ejecutadas.
+- **Ling RELANZADA** con lote 13 reducido a 3 módulos: **M112 (218/5/2), M150 (146/0/4), M153 (120/10/0)**.
+  M149 fuera (sellado por Step 5). Regla anti-429 recalada con énfasis.
+
+- **Director msg 111 (mi canal) + msg 05 (canal Step 5): AMBOS VACÍOS** (5ª y 6ª ocurrencia del bug).
+  Filenames: "m65-limpio-e06-cerrado-relanza-ling" y "m65-limpio-quinta-bug120-investigacion".
+  Acciones ejecutadas: E-06 cerrado ✓, Ling relanzada ✓, E-07 lanzada ✓.
+- **Step 5 E-07 → investigación BUG-120** (runner falso-verde de M112) lanzada. Pre-leí el runner
+  v2c (`run_tests.gd` 326 líneas; `_resumen()` L291 con 3 guardas anti-falso-verde: quit(2) si
+  0 tests, quit(1) si fallos, quit(0) solo con evidencia; `EXCLUIR` vacío desde 2026-10-08; runner
+  viejo en `tests/Obsoletos/`). Le pedí 5 puntos: honestidad del v2c, residuos `|| true`, gate CI,
+  impacto en sellos QA-v1, estado del BUG-129 (201 orphans M110).
+- **Coordinación:** M112 lo audita Ling (checklist BUG-070) y lo investiga Step 5 (código runner/CI) —
+  complementarias, no solapadas (ambos read-only, artefactos distintos).
+
+- **Step 5 entregó el E-07 mal asignado ANTES de llegar la corrección** (msg 06 de su canal): la
+  investigación BUG-120. **Re-verificada: NO fue trabajo perdido.** Hallazgos reales confirmados:
+  - **9 residuos `|| true` en `.github/workflows/quality.yml`** (L198/200/202/204/206/208/268/278/410;
+    módulos M29, M20, M38, M111, M107, M117) — tests que corren pero no pueden fallar el job,
+    mismo patrón trampa-81 que BUG-120 en menor grado. Conviven con ~70 líneas con el patrón
+    correcto `|| FAIL=1`. `testing.yml` LIMPIO (los 3 `|| true` que aparecen son comentarios).
+  - **Causa raíz BUG-129 confirmada**: `debug_menu.gd` (736 líneas) **sin `_exit_tree**; L43 →
+    L620-627 conecta `line_emitted` al autoload inmortal `/root/GameLogger`; el test lo libera con
+    `menu.free()` (L35/L48) sin desconectar → 201 orphans. Fix propuesto: `_exit_tree` que
+    desconecte (patrón M62 LeakGuard). Él reprodujo rc=101 con binario real.
+- **Step 5 ahora BUSY en el E-07 corregido** (BUG-129/M110 fix leak) con la causa raíz ya
+  identificada por él. Re-verificación independiente de rc=101→rc=0 pendiente (la pidió el director).
+- **Ling idle sin entrega** — status check enviado; le aclaré que L292 es deuda ajena de M110.
+
+- **⚠️ E-09 (corrección de mi pipeline):** el director aprobó mi sugerencia de limpiar los 9
+  `|| true` de quality.yml — pero **re-numeró el encargo**: es **E-09**, no E-08. Lanzado a Step 5
+  con su alcance exacto (9 líneas, no tocar legítimos L62-63/129-130/680/980, correr M107/M117 con
+  binario antes). **Pre-verifiqué los 9 tests: todos existen** ✓.
+- **Mi lección T-19 (directiva del fundador, publicada en 5 lugares):** mi actuación por el slug
+  del msg 05 del director ("bug120" cuando el cuerpo asignaba BUG-129) motivó la regla. Mi proceso
+  de releer con 65 s × 2-3 es válido bajo la regla nueva, PERO no me protegía contra **slugs
+  erróneos**. Lección más estricta para mí: si un mensaje trae encargo con alcance y nombra un
+  bug/módulo concreto, **espero a leer el cuerpo o pido confirmación antes de lanzar**.
+- **Cron cambiado a cada 30 min** por pedido del usuario (era 20 min).
+
+- **Step 5 E-09 ENTREGÓ (msg 09 de su canal): 9 `|| true` → `|| FAIL=1` en quality.yml.**
+  Re-verificación mía CONFIRMADA: las 9 líneas (L198/200/202/204/206/208/268/278/410) ahora gate
+  duro; `git diff` = 20 líneas (9 suyas + 1 preexistente ajena de atria-dawn por BUG-104 que no
+  tocó y declaró); los 6 `|| true` legítimos restantes intactos (L62-63/129-130 parse gates, L680
+  print, L980 tee control final); M107/M117 corridos con binario real antes de tocar (exit 0).
+  **E-09 CERRADO. BUG-120 + colateral quality.yml cerrados en el frente CI.**
+- **Ling RELANZADA (autorización del director, ventana 19:55-20:10 cumplida sin entrega):** lote
+  reducido a **M150 único** (146/150) para recuperar ritmo. M112/M153 después. Anti-429 recalada.
+- **M112 ahora 219/5/1** — L292 flipeado `[x]` por el director (BUG-129 cerrado). Cuando Ling lo
+  toque: que sepa que L292 ya está hecho, no repetirlo.
+
+- **DIRECTIVA DEL FUNDADOR (director msg 122):** mi prioridad #1 es que **Ling y Step 5 produzcan
+  sin tiempos muertos**. Mi KPI cambió. Step 5 = activo más valioso, no dejarlo idle; si no responde,
+  insistir reformulando (más chico / más contexto / cambio de dominio / status check), **acción
+  inmediata, no esperar al ciclo siguiente**. Ling igual: cambiar de enfoque (no de módulo) si no
+  entrega. El trabajo de pipeline/auditoría es **secundario** frente a esto.
+- **Step 5 E-10 M50 ENTREGADO (msg 11 de su canal) — re-verificado por mí:**
+  - Spawner fixeado: `_contenedor` Node3D propio + `_exit_tree()` con queue_free; los 4
+    `current_scene` restantes son **comentarios** (L11/12/23/103) ✓; suite 3/3 PASSED · 0 orphans ·
+    EXIT 0 ✓ (mi corrida, binario real).
+  - **Prueba fix-raíz (la que exigió el director): helper comentado → 201 orphans VUELVEN, rc=101.**
+    La hipótesis se **REFUTÓ**. Yo repetí la medición: mismo resultado.
+  - **Causa raíz real: el boot de main_island** — 157 MeshInstance3D (mallas SM_*) + 56 Node
+    (**estados de IA de NPCs**, `ia_npc/states/*`, 7 NPCs × 8 estados) + 44 Node3D. Dueño real:
+    **M64-IA-De-NPC (mimo-v2.5)**. El director re-etiquetó BUG-129 y le derivó la deuda a mimo.
+  - Helper restaurado y verificado (2 llamadas activas, archivo funcionalmente idéntico).
+  - **Entrega honesta ejemplar:** Step 5 refutó su propia hipótesis con instrumentación propia en
+    vez de falsear la verificación. §21.4 aplicado a una hipótesis científica.
+- **Step 5 E-11 = barrido stale de 8 bugs en `11-BUGS.md`** (msgs 12-corregido + 13 del director).
+  - **No es M64** — M64 (IA-NPC, mimo) es solo la **derivación** de la causa raíz del BUG-129.
+  - **Corrección del director msg 124:** mi msg 123 dijo "encargo M64" — eso fue deducir del **slug**
+    del archivo, no del cuerpo (T-19 en mi propia cara). El encargo real salía del cuerpo: BUG-104,
+    que el director descubrió **ya resuelto** (mimo, Log 1492). Corregido en este backlog y en mis
+    tablas. **Lección:** la tabla también sale del cuerpo, no del slug.
+  - Encargo final: 8 bugs abiertos → veredicto STALE/VIVO/PARCIAL con evidencia medida. **READ-ONLY**
+    sobre `11-BUGS.md` y `CHECKLIST-GLOBAL.md` (las marcas las aplica el director). Si encuentra un
+    bug VIVO chico, no lo fixea: reporta y el director asigna. No toca `quality.yml`.
+  - **Cuando entregue:** mi re-verificación independiente es la primera línea; el cierre de marcas
+    del director **tiene prioridad sobre la regeneración del pipeline** (bug stale sin marcar =
+    agente futuro desperdiciando tokens).
+- **Patrón LING desbloqueada (directiva fundador en acción):** tras 2 relanzamientos sin entrega,
+  (a) status check de diagnóstico → sin respuesta; (b) **encargo de fricción cero (un solo comando
+  PowerShell para copy-pastear)** → pasó de **idle a BUSY**.
+  - **CORRECCIÓN HONESTA (director msg 128):** el encargo chico ayudó, pero la **causa real del
+    silencio** era que **mi sesión de Agent Manager se recicla** entre prompts → los replies de Ling
+    volvían "The original Agent Manager sender is no longer available" y las entregas se perdían.
+    No era desmotivación ni 429. **Solución estructural: Ling entrega SIEMPRE por el canal**
+    (`reservar_mensaje.py`), no por agent_manager. Se lo confirmé en su encargo.
+  - **Consecuencia para mi supervisión:** mis prompts por agent_manager SÍ le llegan; lo que no
+    funciona es su respuesta. No debo interpretar falta de respuesta como idle.
+- **Lote 13 — M150 y M153 ENTREGADOS y re-verificados:**
+  - **M150 (146/0/4): LIMPIO** + **drift 21 en bloque Totales** (L194-198 dice 125/25 vs real
+    146/0/4) — documentación stale, NO inflación (artefactos
+    `data/audio/narrative_sound.json` + `scripts/audio/narrative_sound.gd` reales, verificados).
+    **Acción del director: reescribir Totales a 146/0/4.** Sin flips.
+  - **M153 (120/10/0): LIMPIO** — sin drift, sin hallazgos materiales.
+    `operativa/prueba_vision.md` + `operativa/validate_vision.py` existen. Los 10 `[ ]` son
+    KnownIssues externos con dueño asignado (honestos).
+  - **M112: INFLACIÓN REAL — 14 flips aplicados por el director y re-verificados por mí.**
+    - Conteo 219/5/1 → **205 [x] / 8 [ ] / 12 [?] = 225** ✓
+    - L155/156/157 (fixtures) `[x]`→`[ ]` ✓ · L99 + 10 más de M114 `[x]`→`[?]` ✓ · L242 mantenido
+      `[x]` (02-Analisis.md existe) · Totales L263/L296 reescritos ✓ · `git ls-files fixture` = 0 ✓
+    - **21 Patrón C (§5.1-§5.19 inexistentes): el director NO los flípea** — el sustento es real en
+      otros documentos, la citación es falsa. Quedan como **deuda documental**. Trabajo de Ling
+      (abajo).
+    - **LOTE 13 CERRADO:** M150 limpio+drift, M153 limpio, M112 inflación revertida.
+- **M112 — DEUDA PATRÓN C CERRADA:** Ling corrigió las 21 citaciones (sustento real para las 21,
+  ninguna huérfana). **Mi re-verif: 21 tags "cit. corregida", 0 fantasmas §5.x sin tag, conteo
+  intacto 205/8/12** (triple verificación concordante). M112 limpio de inflación.
+- **NUEVA AUTORIZACIÓN del director:** puedo validar workflows yo misma con `yaml.safe_load`
+  (Python) — va a mi checklist de QA como paso obligatorio (motivado por el YAML inválido L239 que
+  el propio director introdujo y Step 5 cazó; CI entero apagado).
+- **E-11 mitad 1 ENTREGADA por Step 5 — mi insistencia la destrabó** (30 min tras variantes (b)):
+  BUG-076/078/094 **RESUELTOS**, BUG-103 **VIVO**. 3 marcas `[x]` aplicadas por el director.
+- **LECCIÓN DE EJECUCIÓN (directiva fundador):** de las 3 variantes de insistencia, la **(b)
+  partir el barrido en 2 mitades** funcionó primera; (c) quedó de backup. Step 5 llevaba 4h idle →
+  respondió en 30 min. Ling respondió en 20 min tras reformular. Ambas validan la directiva.
+- **E-11 CERRADO COMPLETO — barrido stale de 8 bugs:** 4 resueltos (076/078/094/074), 2 VIVOS
+  (103/052), 2 PARCIALES (034/065). **10 entregas consecutivas de Step 5.**
+  - Mi re-verif en disco: BUG-074 resuelto (un solo `### BUG-071` L1149, hy3→BUG-072 L6242) ✓;
+    BUG-052 VIVO (434 glb, 0 sidecars, trinquete excedido en 16, respaldos en `Obsoletos/` que el
+    validador excluye) ✓.
+  - Hallazgo crítico de Step 5: YAML inválido en quality.yml L239 apagaba el CI entero (error del
+    director, reparado).
+- **M150 Totales CORREGIDO por el director y verificado por mí** (146 [x] / 0 [ ] / 4 [?]) ✓.
+- **M18 SELLADO §21.8 por Hy3** (126 checks / 0 fallos) — primer módulo de gameplay central con sello.
+- **NUEVO: Step 5 → E-12a QA §21.8 M61-Rendimiento** (39/144, complejidad 5): muestreo
+  anti-inflación §21.8.2.b (mín 5 o 5% por verbos de creación), artefactos contra disco, profiler
+  no-medible-en-headless = `[?]` legítimo. Después le espera **E-12 QA M24-Templos** (reservado,
+  DeepSeek en iter. 5).
+- **NUEVO: Ling → M37 Totales drift** (director msg 138): ⚠️ **DeepSeek está editando ese archivo**
+  (K.167/K.170) → READ-ONLY absoluto + reportar **timestamp de la medición**. Coordinación crítica.
+- **Patrón operativo confirmado:** los encargos del director llegan por canal pero NO disparan la
+  sesión de Agent Manager — ambos quedan idle. **Mi paso obligatorio cada ciclo: enviar el prompt
+  por agent_manager para que ejecuten.** (2 ciclos consecutivos con este patrón.)
+- **E-12a M61-Rendimiento ENTREGADO — mi re-verif independiente:** 38 de 39 `[x]` legítimos;
+  2 inflados (L33 bench JSON inexistente **en git y en disco**, L34 5 capturas en disco pero 0
+  versionadas). Flips del director: `[x]`→`[?]`. **M61 NO SELLABLE** (exige profiler en runtime,
+  ningún modelo puede en headless). 11 entregas consecutivas de Step 5.
+- **M118-CI-CD SELLADO §21.8 por s2** (mi ex-primer-candidato del pipeline — ahora sellado, fuera de
+  mi cola). Secuencia correcta: s2 **denegó** (msg 177) → reformuló L36/L87 → 8/8 → sello.
+  **3 sellos §21.8 en la jornada: M63, M18, M118.**
+- **FIX DE HERRAMIENTA COMPARTIDA — `scripts/reservar_mensaje.py` (autorizado por el director msg
+  141, commit local `5cd305d` sin push):**
+  - Trunca el slug del tema a 60 chars (anti ruta >260 chars de Windows).
+  - **Rollback del número:** el archivo se crea ANTES de consumir el número del pool; si `open()`
+    falla → rc=5 y el número **no se consume** (pool intacto).
+  - **Tests propios:** sintaxis OK, slug largo de 80+ chars se truncó sin huérfano, y mock de
+    `open()` fallando dejó la cabeza del pool en 143→143 (intacta) ✓
+- **BUG-065 CERRADO** — cadena de 3 manos: yo lo detecté en E-11 (5/9 corregidos), Step 5 confirmó
+  los 4 restantes con evidencia en E-12b (M41-M44 leyenda rota en L6, Totales ya cuadraban), el
+  director aplicó el fix de 1 línea × 4 y marcó resuelto. **12 entregas consecutivas de Step 5.**
+  Deuda Δ positiva (M02-M06, M44) quedó separada como verificación ítem por ítem.
+- **FIX `reservar_mensaje.py` ACEPTADO por el director** (verificó en vivo: slug de DeepSeek truncado
+  a `...-nuevo-encarg`, pool saltando limpio). Familia de números huérfanos cerrada.
+- **E-12c CERRADO — deuda Δ positiva de BUG-065 = 0.** Mi re-verif: M02 0, M03 117, M04 14, M05 4,
+  M06 99, M44 108 (idéntico a Step 5 y al director). Cadena completa: detecté (E-11) → Step 5 midió
+  (E-11b/E-12b) → director fixeó → Step 5 cerró la deuda. **13 entregas consecutivas de Step 5.**
+  M02 es el detalle valioso: afirma "Completados: 0" honestamente (reversión hacia abajo).
+- **M110 bloque 1 ENTREGADO — 32 flips del director, re-verificados por mí (137/30/58 = 225) ✓.**
+  - **Discrepancia de conteo:** Step 5 reportó 27 ítems, eran 31 `[?]` en el rango. Su verif
+    línea por línea era correcta; falló el conteo total del bloque. **Guarda añadida al bloque 2:**
+    contar los `[?]` del rango y reportar el total del bloque.
+  - **REGLA NUEVA DEL DIRECTOR (registrada y aplicada en mis prompts):** todo agente que toque un
+    suite de test debe verificar `--check-only` antes de entregar — un parse error **mata el runner
+    entero** (rc=105, 0 tests para toda la flota). Motivada por el WIP de `test_debug_menu.gd`
+    (BOM + mojibake + parse error, violación §28) que el director revirtió a HEAD. Quien retome el
+    test de huérfanos debe reescribirlo en **UTF-8 sin BOM**; la evidencia de BUG-129 está
+    preservada en el msg 91 del director a mimo.
+- **M110 bloque 2 ENTREGADO — 22 flips, re-verificados por mí (146/43/36 = 225) ✓.** La guarda de
+  conteo funcionó en el primer intento (22 contados = 22 verificados = 22 cerrados). Dos decisiones
+  del director mejores que la propuesta de Step 5: L127 `[x]` (ítem auto-desmentido, redacción
+  corregida) y L114 `[ ]` con dueño M64 (trabajo real pendiente, más honesto que `[?]`).
+- **M110 bloque 3 ENTREGADO — 9 flips, re-verificados por mí (146/52/27 = 225) ✓.** El bloque más
+  duro: 9 funciones de API que nunca existieron (show_panel/hide_panel/toggle_panel etc.) — mi grep
+  en `debug_menu.gd` dio 0, confirmado. Racha de Step 5: **3 bloques sin error de conteo**.
+- **NUEVO: Step 5 → QA §21.8 M24-Templos-Y-Puzzles** (DISPARADA EN EL CICLO — coordinación cumplida).
+  M24 liberado por DeepSeek (iter. 6: 126/1/1). Muestreo ~7 ítems (5% de 126), sonda roja con
+  binario real. M110 bloques 4-5 después. **Prioridad #1.**
+- **★★ M110 QA §21.8 ENTREGADA — 🟡 Liberado con triaje completo.** El director me asignó la QA
+  (msg 154 §4, aceptó mi oferta por independencia preservada). Ejecuté:
+  - **Muestreo §21.8.2.b: 10/10 ítems verificados contra disco, 0 fallas** (mínimo 8 = 5% de 150).
+    Incluido `user://diagnostics/` con **74 zips + 73 txt reales** (la claim de 9 quedaba corta).
+  - **Sonda roja binario real: 6 suites SceneTree = 115 checks, 0 fallos, 6× EXITCODE=0.**
+  - **Drift de Totales corregido** (146/27/52 → 150/0/75 = conteo real = GLOBAL).
+  - **Lección methodológica:** `Measure-Object -Line` subreporta líneas (no cuenta la última si no
+    hay newline final). Casi reporto inflación de métricas por método equivocado — atrapado con
+    `(Get-Content).Count`. Documentado en el 07.
+  - Veredicto final: **no ✅** (75 `[ ]` widgets UI, dueño M110-UI); el valor es la auditoría E-12d.
+  - **Auto-corrección:** mi 07 advirtió que BUG-129 seguía abierto; el director me corrigió (msg 34)
+    — está cerrado por mimo. Corregí el archivo dejando la corrección visible.
+- **NUEVO: Step 5 → BUG-034 (42 filas QA-SEALS)** — prompt accepted. Tras M110 (18 entregas,
+  triaje E-12d completo 150/75/0, 89 ítems en 5 bloques con 0 errores de conteo), toma las 42 filas
+  completas (Ling dada de baja, su sub-alcance integrado). READ-ONLY, el director flipo.
+- **M110 cerrado estructuralmente:** "backend completo, UI pendiente". Gate CI de M112
+  **desbloqueado** (BUG-129 cerrado por mimo, runner 29/29 verde).
+- **⚠️ FALLO PROPIO REGISTRADO:** mi msg 153 quedó en plantilla vacía (mi `write` no persistió).
+  Lo detecté en el ciclo siguiente (778 B vs ~4 KB esperados) y lo reescribí, verificando esta vez
+  que persistió (3988 chars). **Lección: verificar siempre el tamaño/contenido después de escribir
+  un reporte al canal.** Casi deja al director esperando mi respuesta sobre Ling.
+- **M24 coordinado:** el director me avisará a mi canal a la vez que a Step 5 cuando DeepSeek la
+  libere → le disparo el prompt en el mismo ciclo (ahorra el idle intermedio).
+- **PIPELINE: M118 estaba fuera (sellado por s2).** Mi primer candidato queda pendiente de
+  regeneración con la regla del grep §21.8 —prioridad secundaria por directiva fundador.
+- **M118-CI-CD** sigue siendo mi primer candidato del pipeline cuando arranque (director msg 121).
+
+### L-20-RES — Lote 10 COMPLETADO: 828 `[x]`, 5 limpios, M85 INFLADO — re-verificado
+
+- **Ling entregó (msg 97, 14:14):** M87/M168/M103/M60/M52 **LIMPIOS** (conteos exactos, Patrón C
+  limpio). **M85 Modelos-3D-Legal INFLADO**: drift 5 (Totales L162 "99/1/0" vs real 94/5/1),
+  **12 citaciones fantasma** (§2.1-§2.11 inexistentes; §2 tiene 3 subsecciones), **~17-20 Familia A**
+  (model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd,
+  build_script.gd — todos 0 en git ls-files; L92-101 = 10 tests de clases inexistentes;
+  L106-114 build pipeline), **4 pares Patrón D**, 14 "deferred a legal review" (deuda, no inflación),
+  **4 contradicciones internas** (L164-165 falsas en ambos puntos; L168 vs L171 de agnes).
+- **MI RE-VERIFICACIÓN (msg 98, 14:25) — 0 desacuerdos:**
+  - Conteo 94/5/1 ✓ idéntico a Ling. Totales L162 drift 5 ✓.
+  - **`git grep ModelLegalManager` y `ModelLicenseValidator` → solo documentación, 0 en `scripts/`**
+    — evidencia contundente: las clases existen solo en docs.
+  - **`git grep MODEL_CREDITS` → 0 código, 0 archivo generado.**
+  - Núcleo real confirmado: `model3d_validator.gd` + `test_model3d_m85.gd` + `modelos_3d.json`.
+  - Patrón C/D y contradicciones verificadas línea a línea.
+- **Para flips del director:** L66, L75, L92-101, L106-114 → M85 ~74-77/100 si aplica todos.
+- **Acumulado barrido (lotes 1-10): ~5.400 `[x]` en 45 módulos. M85 = 5º módulo con inflación
+  material** — el patrón se mantiene: cierres de agnes concentran Familia A.
+- **Step 5 incluido en el msg 98** (directriz del usuario: empaquetar, no mensaje separado).
+
+### L-20 — Ling: lote 10 (2 ✅ + 4 🟡 de progreso alto) — `[x]` CERRADO (ver L-20-RES abajo)
+
+- **Encargo del director (msg 95, sección 6).** Criterio: ✅ no auditados en lotes 1-8; si faltan,
+  completar con 🟡 de progreso alto (>90%) y sello revocado/dudoso.
+- **Mi selección (solo hay 2 ✅ sin auditar en todo el GLOBAL):**
+  1. **M87 Localizacion** ✅ 131/136 — ✅ no auditado más antiguo
+  2. **M168 Plantilla-De-Isla** ✅ 104/104 — ✅ no auditado
+  3. **M103 Logging** 🟡 173/179 — ✅ revocado DoD §21.6
+  4. **M85 Modelos-3D-Legal** 🟡 94/100 — ✅ revocado DoD §21.6
+  5. **M60 Datos-Y-Serializacion** 🟡 189/196 — Liberado sin sello
+  6. **M52 Particulas-Y-VFX** 🟡 137/148 — Liberado, sello Log 1030
+  **Total: 828 `[x]`.**
+- **Patrón 5 NUEVO obligatorio (drift de conteo):** conteo real vs línea Totales del propio
+  checklist **Y** vs GLOBAL; discrepancia >5 = reportar aunque no haya inflación.
+- **Grep de admisión propia sobre TODOS los checklists:** 4 hits, **0 en ✅**. M09 L195 = conclusión
+  legítima (falso positivo); M118 L153 = ya revertido por hy3 (Log 1125); M156 = ya auditado; M66 L1
+  = header. **El indicador ya no rinde — M156 fue el único caso.**
+- **⚠️ HALLAZGO DE INFRAESTRUCTURA reportado:** CHECKLIST-GLOBAL.md tiene **mojibake doble**
+  (✅ como `âœ…`, 0 ocurrencias del UTF-8 correcto). Cualquier script que busque emojis falla
+  silenciosamente. Recomendé `scripts/fix_encoding.py` (no lo hago yo — no toco el GLOBAL).
+- **Lanzamiento:** prompt enviado a `ses_ee04b06d5ffe5KtovE4VTqaUKl` (aceptado).
+- **Reporte al director:** msg 96.
+
+### L-19 — Ling: lote 8 (cierre reciente + M133) — `[x]` CERRADO (ver L-19-RES abajo)
+
+- **Encargo del director (msgs 88→90→92):** M101, M131, M133, M134, M156, M160 — método BUG-070
+  + 3 patrones formales.
+- **⚠️ Corrección de nombres del director (3ª vez, como M169/M170 y M129/M130):** dijo M131
+  "Diseño-De-Niveles" (real: **Créditos**), M134 "Bug-Tracking" (real: **Presupuesto**), M156
+  "Mapeo" (real: **Terrenos-Y-Movimiento**), M160 "Conexiones-Narrativas" (real:
+  **Diseño-De-Ubicaciones-Del-Mundo**). **Los IDs son la fuente de verdad** — pasé los nombres
+  reales del disco a Ling.
+- **Lanzamiento:** sesión nueva `ses_ee04b06d5ffe5KtovE4VTqaUKl` (la anterior de Ling había
+  desaparecido de Agent Manager, como L-06/L-07). Dos correcciones enviadas: M156 está a
+  **233/307** (mi 203 de L-05 quedó viejo), M160 **libre** (Hy3/s2 están en M163, no M160).
+- **3 patrones del director para cazar:** **C** citación fantasma (secciones inexistentes — MI
+  aporte específico en la re-verificación, requiere leer 03-Diseno completo), **D** duplicado
+  contradictorio (M128 L83/L67), **M114** deferral disfrazado.
+- **Criterio L196 aceptado del director:** "¿el ítem afirma que algo EXISTE hoy?" — L48 es
+  inflación ("lo hice pero no lo hice"), L196 es planificación honesta ("programado y declarado").
+  Mi lectura original queda registrada como defendible.
+- **LOTE 9 (mi propuesta) → para s2, NO mío:** reclasificación de 🟡 estancados. Lista: M72 1/185,
+  M76 1/130, M05 4/103, M48 9/123, M21 13/143, M04 14/128. Insumo: mi análisis C2 (45 🟡 que nunca
+  despegaron). **No tocar hasta que el director lo encargue.** Yo re-verifico.
+- **Novedad de flota reportada al director:** el msg #108 de DeepSeek ("BUG-121 verificado, ya
+  resuelto, gaviota residual, commit M105") **SÍ tiene contenido en disco** — el director lo leyó
+  vacío por el mismo bug de sincronización. Le señalé que afecta su decisión de reencargarle.
+- **Reporte al director:** msg 93 (lote 8 lanzado, nombres corregidos, L196 aceptado, lote 9 no).
+
+### L-18-RES — Lote 7 COMPLETADO Y CERRADO: 455 `[x]`, 7 Familia A, flips aplicados — `[x]`
+
+- **Ling entregó (msg 87, 03:32):** 7 candidatos Familia A (M128 L52/L83/L136/L161,
+  M129 L101/L134, M130 L22) + confirmó mi corrección del M132 L60 con la tabla P0-P3 y aplicó la
+  lección (tokens sueltos barriendo todo el plan-actual).
+- **Director (msg 88, 03:43, plantilla vacía pero nombre explícito):** **L60 RESTAURADO `[x]` ✓**
+  (verifiqué en disco: "→ RESTAURADO"), **M82 corregido a 95/100 ✓** en GLOBAL. Mi falso positivo
+  aceptado; lección de búsqueda asentada.
+- **MI RE-VERIFICACIÓN (msg 89, 03:51) — 7 de 7 Familia A confirmados:**
+  - **M128 L52**: anotación cita "03-Diseno.md §1.3" — token `monitoreo` → NINGUNO, no existe §1.3
+    (secciones ## 1–5), y **la drift table del propio checklist L17 dice "§1.3 monitoreo trademark ❌
+    no documentados"** — el módulo se auto-denuncia.
+  - **M128 L83**: **duplicado con L67 `[ ]`** (mismo entregable "fondo claro y oscuro", estado
+    opuesto); tokens `oscuro`/`light/dark` → NINGUNO; drift table L19 confirma "no documentados".
+  - **M128 L136**: token `checklist de QA` → NINGUNO; no existe §9. `[x]` desnudo.
+  - **M128 L161**: `git grep changelog` → solo auto-cita; el módulo solo tiene plan-actual/ y
+    plan-inicial/, cero changelog.
+  - **M129 L101**: `merch_manager.gd` (`scripts/legal/`) tiene 11 funciones — **ninguna de
+    stock/numeración**; JSON `data/legal/merchandising.json` sin stock/numeración/limitada.
+  - **M129 L134**: todos los hits `render` son concept art del artbook (RF4), no pipeline mockups.
+  - **M130 L22**: spec existe (03-Diseno L129) pero `artbook/` NO existe en game/ ni DOCUMENTACION/;
+    04-Codigo L93 "pertenece a fase de producción (post-RC)" — patrón M126.
+- **Módulos limpios confirmados:** **M47** (18/101/0; L93/L115 Familia B legítima — verbo "Definir" +
+  specs extensas + confesión honesta 04-Codigo L140; s2 tenía razón) y **M114** (185/0/1; L48 firme
+  `[?]`, sin deferrals disfrazados).
+- **Conteos: los 5 cuadran con GLOBAL** ✓
+- **⚠️ Flips del lote 7 APLICADOS por el director (verificado 07:00):** M128 → 49/100 (🟡 "BUG-070
+  lote 7: 4 Familia A"), M129 → 101/108, M130 → 95/146 — exactamente como predije en el msg 89.
+  Quedan por confirmar los 4 borderline (M129 L98/L132/L145, M130 L196) cuando el director escriba.
+- **🏁 BARRIDO POST-SELLO CERRADO: 4.285 `[x]` en 33 módulos (lotes 1-7), 16 Familia A confirmados
+  y flipeados, 1 falso propio corregido (M132 L60 restaurado).**
+- **Ling: 13 encargos correctos consecutivos.** Esperando al director para el próximo frente
+  (msg 85: "auditoría de 🟡 con deuda", análisis que él tiene listo).
+
+### L-18 — Ling: lote 7 (familia regulatory + M114) — `[x]` CERRADO (ver L-18-RES abajo)
+
+- **Asignado por el director (msg 85).** Continuación del barrido BUG-070.
+- **⚠️ Corrección al encargo que detecté:** el director dijo "M129 Localización y M130 Accesibilidad"
+  pero en disco son **M129 Merchandising (103/108)** y **M130 Artbook (96/146)**. Pasé los datos reales.
+- **Módulos:** M47 Texturas-Y-Materiales (18/119 — verificar que L93/L115 sean Familia B legítima),
+  M128 Identidad-De-Marca (53/100 — gemelo de M126, checkear los 53 `[x]`), M129 Merchandising,
+  M130 Artbook (cierres recientes de agnes → riesgo de sobre-marca por velocidad),
+  M114 Playtest (185/186 — verificar que L48 siga `[?]` firme + otros deferrals disfrazados).
+- **Lección del lote 6 incluida en el prompt:** antes de declarar Familia A por grep negativo, barrer
+  TODOS los `.md` del `plan-actual/` (no solo `04-Codigo.md` ni `docs/`), con greps de **tokens sueltos**
+  (la frase exacta "P0 (Crítico" no matcheó `**P0 - Crítico**` en markdown).
+- **Lanzamiento:** prompt enviado a `ses_ee2ecce82ffe1vVnKY9tBf9y6s` (aceptado).
+
+### L-17 — Ling: lote 6 (último lote de ✅ puros) — `[x]` CERRADO (ver L-17-RES abajo)
+
+- **Asignado por el director (msg 83, 02:14).** 🏆 **HITO: M07 SELLADO §21.8** con firma
+  `SELLO §21.8 por atria-dawn-s3 (supervisión Ling 3.1 Flash, Kilo Code, 2026-10-09)` — el director
+  verificó de forma independiente (105/0/0 + 3 artefactos núcleo). **La cola de ✅-sin-sello quedó
+  VACÍA: los 167 módulos están sellados o en estado declarado verdadero.**
+- **Lote 5 aceptado** (535 `[x]`, 0 Familia). Mi lectura de M133 (etiquetas obsoletas, no Familia A)
+  confirmada por el director; la discrepancia 100 vs 127 era de su encargo, no del archivo.
+- **⚠️ DIRECTRIZ NUEVA del director (aclaración del usuario):** todo encargo que me da es
+  **referido a Ling** — yo delego y superviso, no es trabajo directo mío. Mi rol confirmado:
+  supervisor de Ling (+ Step 5, fuera de rotación por ahora; no es baja permanente del catálogo,
+  queda en §5.S con la evidencia empírica). Si Ling entrega mal, es **mi responsabilidad** detectarlo.
+- **Lote 6 (668 `[x]`):** M08 Mundo-Voxel (105), M125 Términos-De-Servicio (105),
+  M132 Producción-De-Equipo (105), M126 Marketing-Legal (100), M82 Clasificación-Por-Edades (100),
+  M145 Diseño-De-Experiencia (105), M165 Voxel-Tools-Guia (48).
+- **Tras el lote 6:** los 27 ✅ puros quedan todos auditados; el frente cambia a **auditoría de 🟡
+  con deuda** (el director tiene el análisis). ⚠️ **M46 Arte-2D y M77 Online-Y-Red ya asignados a
+  s2 — NO tocar** (diagnóstico estructural).
+- **Deuda 🟡 top (referencia del director):** M46 0/110, M77 0/130, M72 1/185, M76 1/130, M05 4/103,
+  M18 4/126 (agnes), M48 9/123, M21 13/143, M04 14/128.
+- **Flota:** agnes → M18 Casas; DeepSeek → BUG-121; Hy3 → QA M160; mimo → BUG-126+125;
+  s2 → M46/M77; **s3/Ling → lote 6**.
+- **Lanzamiento:** prompt enviado a `ses_ee2ecce82ffe1vVnKY9tBf9y6s` (aceptado).
+
+### L-16-RES — QA M07 + lote 5 COMPLETADOS: 535 `[x]`, 0 Familia A — M07 APTO PARA SELLO
+
+- **Ling entregó (msg 81, 01:52):** **M07 SELLAR ✅** + M79/M146/M134/M133 **LIMPIOS**.
+- **Mi re-verificación independiente: 0 desacuerdos** (informe msg 82, 02:05):
+  - **M07 105/0/0** ✓; `bootstrap.gd`/`event_bus.gd`/`service_registry.gd` OK; `scripts/core/` = **22 `.gd`**
+    (+ `.uid`, subcarpetas `invariants/` `recovery/`); `verificar_arquitectura.gd` existe; **Logs
+    172/768/1148/1155 existen**; **0 matches ⬜/PENDIENTE** en 04-Codigo; BUG-097 respetado (read-only).
+  - **M79 103/0/0** ✓ 4 artefactos OK. **M146 100/0/0** ✓ `operativa/` 5 docs + `## Changelog` en
+    emotional-palette.md **L59**. **M134 100/0/0** ✓ `operativa/` 9 archivos (5 docs + 4 templates).
+  - **M133 127/0/0** ✓ — dos aclaraciones: (1) la cifra "100" del encargo era errónea, **GLOBAL ya
+    dice 127/127** (nada que flipar); (2) los 7 "PENDIENTE" del 04-Codigo L58/L88/L110/L145/L199 son
+    **etiquetas obsoletas** — la propia L21 documenta la implementación 2026-08-28 y los 9 artefactos
+    existen. Drift documental, no Familia A.
+- **Recomendación al director: SELLAR §21.8 M07** → la cola de ✅-sin-sello queda VACÍA.
+- **Acumulado post-sello (lotes 1-5): 3.161 `[x]` en 21 módulos, 2 Familia A (M81), 3 revertidos.**
+- **12 encargos correctos consecutivos de Ling.**
+- **Lote 6 propuesto:** M08 (105), M125 (105), M132 (105), M126 (100), M82 (100), M145 (105),
+  M165 (48) = **668 `[x]`**. Pendiente de confirmación del director.
+
+### L-16 — Ling: QA §21.8 M07 + lote 5 — `[x]` CERRADO (ver L-16-RES abajo)
+
+- **Asignado por el director (msg 80).** Doble encargo, M07 primero (cola crítica).
+- **PARTE A — QA §21.8 M07 Arquitectura-General** (105/105, doc pura, ÚNICO ✅ sin sello del
+  proyecto, firmado por Deepseek V4 Flash descatalogado). Verificar: conteo real 105/0/0,
+  artefactos (`bootstrap.gd`, `event_bus.gd`, `service_registry.gd` — ⚠️ este con restricción
+  ACTIVA por BUG-097: read-only estricto), logs de cierre firmados, BUG-070 normal + H2.
+  Tercera fuente (Log 768/1148 citados en GLOBAL).
+- **PARTE B — Lote 5 auditoría post-sello:** M79 Legal-Contratos (103), M146 Diseno-Emocional
+  (100), M134 Presupuesto (100), M133 Gestion-Del-Proyecto (100) = **403 `[x]**. Mismo método
+  lotes 1-4.
+- **Lanzamiento:** prompt enviado a `ses_ee2ecce82ffe1vVnKY9tBf9y6s` (aceptado).
+- **Pendiente para lote 6 (director):** M08 (105), M125 (105), M132 (105), M126 (100), M82 (100),
+  M145 (105), M165 (48).
+
 ### E-02 — Step 5: QA M07 — `⚠️` SIN ENTREGAR (ignoró recordatorio)
 
 - Asignado en msg 67 (hace ~40 min). Sesión **idle**, sin reporte en el canal.
@@ -452,7 +980,7 @@
 - **1 entrega impecable (M154) + 2 episodios de no-entrega.** Reportado al director (msg 75) —
   su decisión: apurar de nuevo, lo hago yo, o reasignar.
 
-### E-02 — Step 5: QA §21.8 M07 Arquitectura-General — `[→]` EN CURSO (Step 5 trabajando)
+### E-02 — Step 5: QA §21.8 M07 Arquitectura-General — `⛔` CERRADO SIN ENTREGA (Step 5 no entregó; M07 reasignado y sellado por mí; ver L-468/L-796)
 
 - **Asignado por el director** (msg 67): M07 es el **único módulo ✅ sin sello §21.8** de 167
   escaneados (31 ✅, los otros 30 con sello). Documentación pura → QA sin Godot.
@@ -668,3 +1196,76 @@
 - Tengo acceso al binario Godot (`C:\Temp\godot\godot472.exe`) — re-correr suites cuando la
   evidencia sea dudosa.
 - El log de mis entregables lo reserva quien ejecutó (Ling) o el director, no yo.
+
+---
+
+## PIPELINE DE DELEGACIÓN — Step 5 (StepFun Step 5 Preview)
+
+> **Directiva del usuario (2026-10-09):** anotar qué se le puede delegar a Step 5 en las próximas
+> vueltas. Su canal propio es `Mensajes entre modelos/StepFun-Step-5-Preview/`; los encargos van por
+> ahí y la re-verificación también (directriz del director msg 107).
+>
+> **Perfil comprobado (5 entregas limpias en 6 encargos):** auditorías BUG-070 de **un módulo por
+> vuelta**, método completo (conteo + Familia A muestreo ≥5/5% + Patrón C leyendo 03-Diseno.md
+> completo + Patrón D + M114 + regla H2), con líneas citadas exactas y verificación contra disco.
+> **0 flips en sus 4 últimas entregas.** Rinde mejor con módulos de **juego real** (`.gd`/`.tscn` —
+> sus greps de evidencia negativa son concluyentes) que con módulos puramente documentales.
+>
+> **Criterio de selección aplicado:** 🟡 Liberado/Completado con ≥75% de progreso, **sin agente
+> activo** (columna "Última actividad" = `—`), carpeta y `plan-actual/05-Checklist.md` verificados
+> en disco, y excluyendo los que ya están ocupados (lote 13 de Ling: M112/M150/M153; M104/M156 por
+> DeepSeek; M18 por agnes; M56 por mimo) o ya auditados/sellados (M07, M62, M65, M85, M87, M149,
+> M166, M168, M103, M60, M52, M32, M165 y los 45 módulos de los lotes 1-10).
+
+### Próximos encargos sugeridos (en orden de prioridad)
+
+**TIER 1 — módulos de juego real (sus greps son concluyentes aquí):**
+
+| Orden | Módulo | Conteo GLOBAL | Por qué |
+|---|---|---|---|
+| E-07 | **M36-Fauna** | 226/228 🟡 Completado | Ya toqué su código en la auditoría M65 (fauna_behavior/registry/spawner + autoloads) — el contrato existe, pero falta barrer sus 226 `[x]`. Progreso altísimo = perfil sospechoso. |
+| E-08 | **M14-Inventario** | 136/140 🟡 | Módulo de gameplay central; artefactos `.gd`/`.tscn` verificables. |
+| E-09 | **M29-Tiempo-Y-Calendario** | 190/195 🟡 | 190/195 es exactamente el perfil que más inflación esconde (visto en M156, M85). |
+| E-10 | **M09-Terreno-Y-Geografia** | 100/105 🟡 | Núcleo voxel del juego; integra con M167/M168 (cuidado con dependencias cruzadas, como en M65→M36). |
+| E-11 | **M10-Generacion-Del-Mundo** | 90/106 🟡 | Gemelo procedural del anterior; mismo cuidado de integración. |
+| E-12 | **M30-Reloj-En-Tiempo-Real** | 107/120 🟡 reconciliado hy3 | Ya pasó QA hy3 (2026-09-18) — una capa BUG-070 independiente sobre lo mismo. |
+
+**TIER 2 — módulos de tooling/infra (greps igual de concluyentes, menos riesgo):**
+
+| Orden | Módulo | Conteo GLOBAL | Notas |
+|---|---|---|---|
+| E-13 | **M78-Legal-Propiedad-Intelectual** | 157/157 ✅ | ✅ completo **sin auditar** en los lotes 1-10 — cola de sellos pendientes. |
+| E-14 | **M38-Economia** | 164/164 ✅ | Ídem; ya inspeccioné sus rutas reales en F-27 (tengo baseline). |
+| E-15 | **M06-Control-De-Versiones** | 99/100 🟡 | Chico, ideal para una vuelta rápida. |
+| E-16 | **M131-Creditos** | 85/95 🟡 Completado | Chico; su M85-vecino (Legal) resultó inflado — mismo riesgo de familia. |
+| E-17 | **M118-CI-CD** | 102/106 🟡 | Tooling; artefactos `.yml`/scripts verificables. |
+| E-18 | **M107-Backups** | 146/176 🟡 | Tooling; progreso medio-alto. |
+| E-19 | **M117-Build-System** | 92/110 🟡 Liberado agnes | Liberado por agnes; falta capa BUG-070. |
+| E-20 | **M25-Ruinas** | 122/122 🟡 deuda implement. | 100% declarado con "deuda implementación" — verificar honestidad de la marca. |
+| E-21 | **M119-Actualizaciones** | 109/118 🟡 QA-drift-doc | Pequeño; ya lo pre-verifiqué (109/9/0) cuando lo evalué como E-05. |
+
+### Reglas de la delegación a Step 5
+
+1. **Un módulo por encargo** — es como rinde. Lotes múltiples no se le dieron nunca; no arriesgar.
+2. **READ-ONLY estricto** — 0 ediciones; los flips los aplica el director. Recalárselo cada vez.
+3. **Verificar carpeta + conteo contra GLOBAL ANTES de lanzar** (lección M-07 del director, aplicada
+   en lotes 7-10). Pre-verificar también que el conteo del checklist cuadre con el GLOBAL.
+4. **Entrega en su canal** con `reservar_mensaje.py StepFun-Step-5-Preview "..." --emisor
+   stepfun-step-5-preview`; él me avisa y yo re-verifico claim por claim contra disco.
+5. **Anti-429 en cada prompt**: comandos PowerShell SECUENCIALES, nunca en paralelo.
+6. Si algun candidato pierde carpeta o cambia de agente, re-validarlo antes de asignar.
+7. **Módulos ✅ sin auditar (M78, M38)** son prioridad de cola de sellos — cerrar el frente
+   "✅-sin-sello" de una vez por todas.
+8. **⚠️ REGLA NUEVA DEL DIRECTOR (msg 119, 2026-10-09):** antes de proponer un módulo para Step 5,
+   **grep en su fila de GLOBAL por "QA" / "Verificado por"** — si tiene sello §21.8 de un verificador
+   independiente, **está FUERA de la cola de auditoría** aunque no haya pasado por los lotes
+   BUG-070. (Mi criterio anterior "sin auditar en los lotes 1-10" era equivocado: no es lo mismo
+   "sin pasar por mis lotes" que "sin QA §21.8".)
+   - **Descartados por esta regla:** M78 (re-sellado por DeepSeek Log 1444, 157/0/0), M36 (TRIPLE
+     QA Log 1008), M38 (QA Log 982), M32 (Log 942), M29 (Log 984 "MANTIENE"), M107 (QA cruzado Log
+     934), M117 (Log 946), M118 (revertido Log 1125), M119, M131 (QA agnes 2026-10-0x), M30 (mimo
+     2026-09-16), M155, M165, M25, M14, M10, M09, M06.
+   - **Pipeline Tier 1+2 queda pendiente de regenerar** con la regla nueva (prácticamente todos los
+     candidatos de ≥75% ya tienen sello). El próximo encargo de Step 5 lo define el director.
+
+### L-20-RES — Lote 10 COMPLETADO: 828 `[x]`, 5 limpios, M85 INFLADO — re-verificado

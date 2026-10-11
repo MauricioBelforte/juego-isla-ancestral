@@ -77,7 +77,7 @@
 ## F. Gestión de Licencias de Assets (10 ítems)
 
 - [ ] Verificar licencias de assets de terceros (modelos, texturas, audio)
-- [ ] Asset con licencia NO许可 incompatible con rating del juego → error
+- [ ] Asset con licencia NO compatible con rating del juego → error
 - [ ] AssetCreativeCommons con cláusula NC + juego commercial = error
 - [ ] Generar attribución de assets en build output
 - [ ] Integración con M71 (Gestión de Assets): verificar licencias al importar

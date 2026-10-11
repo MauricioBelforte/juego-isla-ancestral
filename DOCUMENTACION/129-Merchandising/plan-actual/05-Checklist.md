@@ -84,7 +84,7 @@
 - [x] Diseñar prueba de calidad de peluches (material, costura)
 - [x] Diseñar prueba de calidad de figuras (material, pintura)
 
-**Totales:** 108 ítems · Completados: 103 · Pendientes: 0 · No resueltos: 5.
+**Totales:** 108 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 7.
 
 **Total de ítems:** 108
 **Ítems resueltos por documentación:** 103
@@ -98,7 +98,7 @@
 - [x] Crear manual técnico de especificaciones y resoluciones requeridas para productos Print on Demand (POD) [S]
 - [x] Establecer perfiles de color CMYK estandarizados para impresión de camisetas, tazas, láminas y artbook [S]
 - [x] Diseñar protocolo de validación y control de calidad de prototipos físicos (peluches y figuras) antes de producción [M]
-- [x] Implementar sistema de control de stock y numeración para tiradas limitadas físicas (artbooks de pasta dura, vinilos) [M]
+- [?] Implementar sistema de control de stock y numeración para tiradas limitadas físicas (artbooks de pasta dura, vinilos) [M] → REVERTIDO Familia A (auditoría BUG-070 lote 7, Ling 3.1 Flash, director confirma): `merch_manager.gd` (99 líneas) tiene **0 matches** de "stock|numer|limit"; sus 11 funciones (cargar/get_productos/get_product/get_product_ids/get_margen/get_precio_usd/get_politicas/validar/esta_cargado) no incluyen ninguna de stock; el JSON `politicas` no tiene claves de stock/numeración. Verbo "Implementar" + 0 código.
 - [x] Definir estándares de packaging ecológico, biodegradable y protección reforzada para envíos frágiles [S]
 - [x] Crear protocolo de pruebas de seguridad para peluches (costuras reforzadas, ojos de seguridad, telas hipoalergénicas) [M]
 - [x] Diseñar matriz automatizada de cálculo de costos, aranceles, margen objetivo (40-50%) y precio de venta al público [M]
@@ -131,7 +131,7 @@
 - [x] Estandarizar formatos y dimensiones de cajas para optimizar tarifas de envío por volumen en couriers [S]
 - [x] Implementar modelo de preventa (pre-orders) para financiar tiradas físicas sin asumir riesgos de sobrestock [M]
 - [x] Automatizar el cálculo de impuestos y gastos de aduana en el checkout de la tienda online [M]
-- [x] Crear pipeline de renderizado 3D de mockups realistas de merchandising para catálogo web [M]
+- [?] Crear pipeline de renderizado 3D de mockups realistas de merchandising para catálogo web [M] → REVERTIDO Familia A (auditoría BUG-070 lote 7): tokens "mockup|pipeline render|render 3D" en todo plan-actual → 0 artefacto (las únicas menciones de "renders" son de concept art del juego en 01/02/03, no de mockups de merch). Sin artefacto.
 - [x] Realizar auditorías de homologación de proveedores para certificar condiciones de trabajo ético (fair labor) [M]
 - [x] Diseñar sistema de consolidación de paquetes para pedidos combinados con múltiples artículos [S]
 

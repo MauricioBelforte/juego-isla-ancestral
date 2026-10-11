@@ -222,7 +222,7 @@
 - [x] Re-corrido con binario real: **EXIT 0 — 38 checks, 0 fallos** (antes 38/5). Ver
   `11-BUGS.md` §7 BUG-061.
 
-**Totales:** 138 ítems · Completados: 138 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 138 ítems · Completados: 87 · Pendientes: 0 · No resueltos: 51.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:

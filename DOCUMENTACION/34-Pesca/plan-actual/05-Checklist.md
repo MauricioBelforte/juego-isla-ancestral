@@ -199,5 +199,8 @@
 - [?] Registro de capturas para telemetria de balance (sin afectar determinismo) [M] — M72 achievement_service YA consume captura_exitosa (stats peces_capturados/pescar_<id>); telemetría formal M105 no tiene evento de pesca → dueño M105 (el PRNG diario M29 mantiene determinismo)
 - [x] Preparado el plan de testings (06) para implementacion del modulo [M] — 06-Plan-Testings.md presente + ejecutado (test_fishing 0 fallos, test_fishing_clima 0 fallos, 4 suites de regresión 0 fallos)
 
+
+**Totales:** 153 items - Completados: 84 - Pendientes: 0 - No resueltos: 69.
+
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 5)
 [x] auditados contra disco (bloq 5). Sustentado, 0 degradaciones.  Evidencia: `test_fishing.gd 0/0` = scripts/fishing/.

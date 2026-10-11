@@ -266,7 +266,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 185 ítems · Completados: 97 · Pendientes: 87 · No resueltos: 1.
+**Totales:** 185 ítems · Completados: 96 · Pendientes: 87 · No resueltos: 2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 97 [x] / 87 [ ] /

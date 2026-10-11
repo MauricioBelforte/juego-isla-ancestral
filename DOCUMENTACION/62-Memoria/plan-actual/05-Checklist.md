@@ -220,6 +220,9 @@
 - [x] Test de nodos huérfanos: conteo de orphans en reposo con valor estable [M] — **iter. 4 (Log 1112): MEDIDO.** Bloque D de `test_m62_liberacion.gd`: base=0, 5 muestras consecutivas sin deriva, crear 128 nodos sin padre los cuenta (0 → 128) y liberarlos devuelve el conteo a 0 (sin leak). Lee `Performance.OBJECT_ORPHAN_NODE_COUNT`
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
+
+**Totales:** 150 items - Completados: 113 - Pendientes: 37 - No resueltos: 0.
+
 ## Notas del Agente (iter. 2 GlobalPool — Log 604, glm-5.3-flash/Kilo Code)
 
 ### Lo que hice

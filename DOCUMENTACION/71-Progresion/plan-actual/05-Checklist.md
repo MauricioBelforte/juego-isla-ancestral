@@ -244,7 +244,7 @@
 - [?] Hito marcado dos veces en el mismo frame: segunda llamada devuelve false [M]
 - [?] Progreso perdido por guardado corrupto: sección versionada con validación al cargar [M]
 - [?] Condición actualmente no cumplible: reportada a M66 con ruta alternativa [M]
-- [?] Condici贸n est谩ticamente imposible: error bloqueante en editor antes de jugar [M] -- agnes-2.5-flash 2026-09-12: IMPLEMENTADO en progression_manager.gd (detectar_condiciones_imposibles_estaticas + validar_catalogo_bloqueante). Test _test_impossible_conditions + _test_catalogo_validacion existentes y pasando. CIERRE: 213/213 [ ], 0 pendientes.
+- [?] Condición estáticamente imposible: error bloqueante en editor antes de jugar [M] -- agnes-2.5-flash 2026-09-12: IMPLEMENTADO en progression_manager.gd (detectar_condiciones_imposibles_estaticas + validar_catalogo_bloqueante). Test _test_impossible_conditions + _test_catalogo_validacion existentes y pasando. CIERRE: 213/213 [ ], 0 pendientes.
 - [x] Jugador nuevo: sin hitos pre-alcanzados, flujo de onboarding M92 [S]
 - [?] Jugador veterano: restauración sin re-emitir señales ni repetir tutoriales [M]
 - [?] Muchos hitos simultáneos al despertar: cola de notificaciones priorizada en M53 [M]

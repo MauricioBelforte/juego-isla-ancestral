@@ -10,7 +10,7 @@
 - **Plataformas que lo aceptan**: Steam, Google Play, Microsoft Store, Nintendo eShop, Meta Quest
 - **Proceso**: Cuestionario online → generación automática de ratings regionales
 - **Costo**: Gratuito para desarrolladores indie
-- **网址**: https://www.globalratings.com/
+- **URL**: https://www.globalratings.com/
 - **Ventajas**: Un solo proceso, múltiples ratings generados automáticamente
 - **Limitaciones**: No aceptado por PlayStation (requiere clasificación propia)
 

@@ -1,6 +1,8 @@
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-09-11
+**Actualización:** 2026-10-10 por atria-dawn-s3 (Kilo Code) — tabla de modelos registrados ampliada
+con ling-3.1-flash, StepFun-Step-5-Preview y Claude-Haiku-5.5 (estaba desactualizada en kimi-k3).
 
 # GUÍA DE METODOLOGÍA — TAREAS POR MODELO
 
@@ -25,6 +27,18 @@
    - Tu checklist personal (`TAREAS-POR-MODELO/<MODELO>/...`)
    - El `05-Checklist.md` del módulo
    - La fila de CHECKLIST-GLOBAL (progreso)
+7. **Escribir el reporte al director** → archivo nuevo en `Mensajes entre modelos/<MODELO>/`
+   (ver GUIA-COMUNICACION.md "REGLA CERO")
+
+> ⚠️ **El paso 7 NO es opcional** (directiva del fundador 2026-10-11). Si marcás `[x]` en los 3
+> lugares pero **no escribís el reporte en tu canal**, el director no se entera de que terminaste.
+> Sin reporte: no recibís próximo encargo, tu cronómetro queda corriendo con la cola vacía y el
+> usuario tiene que preguntarte "¿terminaste?" a mano. **El reporte es lo que dispara la próxima
+> delegación.**
+>
+> **Síntoma observado por el fundador:** modelos que hacen todo, dicen "ya hice todo", dejan el
+> cron activo y reportan "nada para hacer" — sin haber escrito un solo reporte. El director nunca
+> los vuelve a delegar. Es un fallo de comunicación, no de capacidad.
 
 **NO ir directo a la CHECKLIST-GLOBAL a buscar trabajo.** Tu backlog es tu fuente de verdad.
 
@@ -67,7 +81,7 @@ DOCUMENTACION/TAREAS-POR-MODELO/
 | Modelo | Plataforma | Fecha registro | Módulos | Tareas |
 |--------|------------|----------------|---------|--------|
 | DeepSeek-V4.1-Flash | WorkBuddy | 2026-09-11 | 27 | 3.998 ítems · 2.192 pendientes (1.563 libres + 629 de otros agentes) — **BACKLOG v2 curado por encaje** |
-| muse-spark-1.3-contributor | Cline | 2026-09-14 | 6 | 88 tareas verificadas (M111: 35 + M117: 53), ampliable a 100+ con M122 — **BACKLOG v1 curado por encaje** |
+| muse-spark-1.3-contributor | Cline | 2026-09-14 | 6 | 88 tareas verificadas (M111: 35 + M117: 53), ampliable a 100+ con M122 — **BACKLOG v1 curado por encaje** · **Canal creado 2026-10-11** (`Mensajes entre modelos/muse-spark-1.3-contributor/`, pool 120 nums) |
 | deepseek-v4-flash-vision-exp | Kilo Code | 2026-09-02 | 37 | 3.474 |
 | MiMo V2.5 | OpenCode | 2026-09-02 | 8 | 312 |
 | glm-5.3-flash | Kilo Code | 2026-09-02 | 22+ | ~330 |
@@ -75,3 +89,6 @@ DOCUMENTACION/TAREAS-POR-MODELO/
 | agnes-3-flash (Sapiens AI) | Kilo Code | 2026-09-15 | 2 (M113, M115) | ~162 subítems (M113 30 + M115 132) — **BACKLOG v1 curado por encaje** (primera sesión; aún sin módulo completado; perfil = tooling/CI + data-driven + auditoría código↔checklist + test headless) |
 | nex-n2.5-pro (Nex-AGI) | Kilo Code | 2026-09-18 | 1 (M11) | 86 tareas T-XXX (76 `[?]` a verificar + suite headless + gate CI) — **BACKLOG v1 curado por encaje** (primera sesión, alta §5.N/§21 de la guía 10; perfil = agentic coding + verificación contra spec; DoD = suite headless verde, valida sus propios benchmarks vendor-reported) |
 | kimi-k3 (Moonshot AI) | Kilo Code | 2026-09-19 | 3 (M106, M122, M103) | **158 tareas** (M106 Seguridad: 66 · M122 Crash-Reporting: 80 · M103 Logging: 12 `[?]`) — **BACKLOG v1 curado por encaje** (primera sesión, alta §5.P de la guía 10; perfil = coding agentic #1 del catálogo TB 2.1 88.3 + CyberGym 86.5 → seguridad/crash-reporting es su zona natural; contexto 1M; el costo NO es criterio de asignación — acceso gratuito por tiempo limitado) |
+| ling-3.1-flash (inclusionAI / Ant Group) | Kilo Code | 2026-10-06 | por encargo | **auditoría anti-inflación READ-ONLY** (M150 ×2, M153, M112-auditoría, M123 QA, M101 QA en curso) — alta §21.15 de la guía 10; reactivada 2026-10-10 tras fallo técnico de compaction; contexto 256K, **solo texto** (sin visión); trial gratuito hasta 13/10/2026 |
+| StepFun-Step-5-Preview (StepFun AI) | Kilo Code | 2026-10-10 | por encargo | **auditoría anti-inflación + QA §21.8 con sondas rojas** — alta §21.17 de la guía 10; **18 entregas consecutivas sin error**, 0 errores en 89 ítems triados, M24 sellado por su QA; **el ejecutor más fiable de la flota** |
+| Claude-Haiku-5.5 (Anthropic) | Kilo Code | 2026-10-10 | **SIN ASIGNAR** | 0 tareas — **backlog preparado, a la espera del encargo de partida**; Intelligence Index 43.4 (#19 global, el más alto de la flota), contexto 1M, multimodal (texto+imagen), `claude-haiku-5.5:free` **por tiempo limitado**; propuesta s3: ramp-up con QA §21.8 (ver `atria-dawn-s3/SUGERENCIAS-DELEGACION/claude-haiku-5.5.md`) |

@@ -92,7 +92,7 @@
 ## F. Gestión de Licencias de Assets (10 ítems)
 
 - [ ] Verificar licencias de assets de terceros (modelos, texturas, audio)
-- [ ] Asset con licencia NO许可 incompatible con rating del juego → error
+- [ ] Asset con licencia NO compatible con rating del juego → error
 - [ ] AssetCreativeCommons con cláusula NC + juego commercial = error
 - [ ] Generar attribución de assets en build output
 - [ ] Integración con M71 (Gestión de Assets): verificar licencias al importar
@@ -139,7 +139,7 @@
 - [ ] Tabla de compatibilidad de licencias (referencia rápida)
 - [ ] Registro de cambios del módulo
 - [ ] Procedimiento para auditar licencias periódicamente
-- [ ] Acci贸n externa no ejecutable por agente (requiere contacto humano con abogado) [M] -- agnes-2.5-flash 2026-09-12: TODO documento de licencias completo; CONTACTO con abogado requiere acci贸n humana. KnownIssue no bloqueante DoD — documentaci贸n lista para revisi贸n legal.
+- [ ] Acción externa no ejecutable por agente (requiere contacto humano con abogado) [M] -- agnes-2.5-flash 2026-09-12: TODO documento de licencias completo; CONTACTO con abogado requiere acción humana. KnownIssue no bloqueante DoD — documentación lista para revisión legal.
 
 **Totales:** 100 ítems · Completados: 16 · Pendientes: 84 · No resueltos: 0.
 **Nota:** Verificación item por item por MiMo V2.5 (OpenCode) 2026-09-15. Solo items con código real verificado en license_validator.gd + licencias.json + test_licenses_m83.gd.

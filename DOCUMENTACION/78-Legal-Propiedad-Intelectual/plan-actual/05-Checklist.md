@@ -93,7 +93,7 @@
 - [x] Definir el procedimiento para nombres de templos, herramientas e islas secundarias [S] → KnownIssue no bloqueante DoD: procedimiento documentado en 03-Diseno.md §1.6 (nomenclatura secundaria); alineado con M149 naming conventions.
 - [x] Definir las fuentes de búsqueda gratuitas: web, Steam, itch.io, Google Play [S]
 - [x] Definir las bases de marcas gratuitas: USPTO, EUIPO, WIPO, INPI regional [M] → KnownIssue no bloqueante DoD: bases documentadas en 03-Diseno.md §1.7 (referencias a registros gratuitos); ejecucion requiere search manual. Referencias existentes.
-- [x] Definir el criterio de colisión relevante: mismo rubro (videojuegos) y nombre confusamente similar [C] → agnes-2.5-flash 2026-09-12: criterio documentado en 03-Diseno.md §1.8 (rubro videojuegos + confusión visual/fonética); basado en normativa商标 law.
+- [x] Definir el criterio de colisión relevante: mismo rubro (videojuegos) y nombre confusamente similar [C] → agnes-2.5-flash 2026-09-12: criterio documentado en 03-Diseno.md §1.8 (rubro videojuegos + confusión visual/fonética); basado en normativa de marcas.
 - [x] Definir el criterio de aceptación con registro: riesgo bajo documentado con fecha [S]
 - [x] Definir el registro de decisiones de marca con fecha y resultado de búsqueda [S]
 - [x] Definir la re-revisión de marcas antes del lanzamiento comercial [M]

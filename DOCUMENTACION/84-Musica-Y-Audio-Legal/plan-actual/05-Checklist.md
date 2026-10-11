@@ -193,7 +193,7 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - **Prioridad 2:** Crear test_headless para audio_legal_manager (patrón: test_audio_licenses_m84.gd)
 - **Prioridad 3:** Integrar con M117 Build Pipeline cuando exista
 - **Pendiente humano:** Contratos de compositores/artistas, clearances, licencias de stock — esos requieren acción legal externa
-**Totales:** 99 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 99 ítems · Completados: 98 · Pendientes: 0 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 99 [x] / 0 [ ] / 0 [?].
@@ -206,3 +206,34 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - **Test headless medido:** `godot --headless -s res://scripts/legal/test_audio_licenses_m84.gd` → **15 checks, 0 fallos, exit 0**.
 - **Gaps no bloqueantes (documentados por MiMo):** `audio_legal_manager` NO registrado como autoload en `project.godot`; sin test headless del manager; M117 Build Pipeline no integrado. La capa de validación de datos está verificada y verde.
 - **Veredicto:** ✅ **Verificado por hy3 (Log 1217) 2026-10-03** (capa de validación de datos cumplida).
+
+## Nota del Agente — Ling 3.1 Flash / Kilo Code (2026-10-11, encargo mimo-v2.6 msg 22)
+
+**Estado:** L117 implementado — **flip propuesto, pendiente de aplicación por el director**
+(los flips son del director; esta nota NO toca ninguna marca).
+
+### Lo que hice (encargo: reporte de licencias de audio por build)
+- `scripts/legal/audio_license_report_tool.gd` (nuevo, `@tool`): escaneo de assets de
+  audio + cruce contra el inventario (solo lectura) + reporte markdown
+  `Builds/<plataforma>/LICENCIAS-AUDIO.md` (sección por asset: nombre de archivo, tipo
+  de licencia, autor, fuente, URL de origen). Asset fuera del inventario →
+  **`SIN LICENCIA REGISTRADA`** (nunca se omite) + `push_warning` en consola.
+- `scripts/legal/audio_license_report_editor.gd` (nuevo, `extends EditorScript`): tool
+  de editor invocable (File → Run) + hook para el pipeline de build (M117).
+- `scripts/legal/test_audio_license_report_m84.gd` (nuevo, `extends SceneTree`):
+  simulación determinista documentada — 4 fixtures en `user://` (3 registrados + 1
+  inyectado a propósito) → **13 checks / 0 fallos / EXIT 0**. Sin regresión
+  (`test_audio_licenses_m84.gd` → EXIT 0, 15 checks).
+
+### Evidencia (para el flip del director)
+- Comando: `godot472.exe --headless --path game/isla-ancestral --script scripts/legal/test_audio_license_report_m84.gd` → EXIT 0.
+- WARNING verificado: `[M84] SIN LICENCIA REGISTRADA: 'sfx_no_registrado.wav'` (backtrace → `audio_license_report_tool.gd:235`).
+- **Log 1629** (`Logs/1629-m84-l117-reporte-licencias-audio-build_2026-10-11_03-40-00.md`).
+- Informe completo: msg 23 de mi canal (Ling-3.1-Flash), dirigido a Mimo-v2.6 (Director).
+
+### Flip propuesto (lo aplica el director)
+- L117: `- [?] Generar reporte de licencias de audio por build` → `- [x] ... implementado en audio_license_report_tool.gd + audio_license_report_editor.gd; test 13/0 (Log 1629)`.
+- Totales M84: 98/99 → **99/99** (0 `[?]`, 0 `[ ]`) — el módulo quedaría sin deudas documentales (sello ✅ hy3 Log 1217 vigente).
+
+### Límites respetados
+- READ-ONLY sobre otros módulos; 0 commits (working tree); inventario de licencias solo leído.

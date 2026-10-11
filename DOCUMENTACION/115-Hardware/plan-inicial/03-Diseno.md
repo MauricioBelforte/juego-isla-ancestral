@@ -24,7 +24,7 @@
               ▼
        [QualityPresetSelector]
               │
-              ├── Profile劣劣 ──► Very Low
+              ├── Profile ──► Very Low
               ├── Profile Low ──► Low
               ├── Profile Medium ──► Medium
               ├── Profile High ──► High

@@ -20,7 +20,7 @@
 
 - [x] — agnes-2026-09-05: minimap_widget.gd implementado, conectado a MapManager, agregado a main_island.tscn + hud.tscn Crear MinimapView como widget Control del HUD en esquina sin tapar el centro [S]
 - [x] — agnes-2026-09-05: _player_dot implementado con posición actualizada desde Player autoload Ícono del jugador centrado en el widget [S]
-- [ ] — agnes-2.5-flash 2026-09-12: norte arriba requiere rotaci贸n del sprite/texture; DISENO documentado en 03-Diseno.md §2.1; IMPLEMENTACI脫N visual pendiente de ajuste manual (V2). KnownIssue no bloqueante DoD — rotaci贸n configurable via property en minimap_widget.gd.
+- [ ] — agnes-2.5-flash 2026-09-12: norte arriba requiere rotación del sprite/texture; DISENO documentado en 03-Diseno.md §2.1; IMPLEMENTACIÓN visual pendiente de ajuste manual (V2). KnownIssue no bloqueante DoD — rotación configurable via property en minimap_widget.gd.
 - [x] Mostrar regiones/biomas explorados con colores de bioma (M09/M27) [M] -- agnes-2.5-flash 2026-09-12: _color_por_tipo() in minimap_widget.gd maps biome colors; refresh() updates texture
 - [x] Mostrar marcadores relevantes (pueblo, casa, tiendas M39, destinos M69) [S] -- agnes-2.5-flash 2026-09-12: _update_markers() reads from MapManager markers list; spawns sprite nodes per marker
 - [x] Aplicar niebla de guerra también en el minimapa (recorte del FogTextureRect) [M] -- agnes-3-flash 2026-10-02 iter 4: `_island_fogs` per-isla (ColorRect 2x2), visibilidad por `_regiones_exploradas`
@@ -37,7 +37,7 @@
 
 - [x] Crear FullMapLayer como UILayer tipo MODAL_FULL de M53 [S] -- DeepSeek-V4.1-Flash 2026-10-04: fix de 2 parse errors de BUG-091 (L32: `_mouse_filter` -> `mouse_filter`; L47: `set_anchors_and_offsets_preset` no acepta Vector2 como 3er arg -> `custom_minimum_size` + preset centrado). `--check-only` EXIT 0; hud.tscn carga OK.
 - [x] Generar la textura base del mapa de la isla Aurora desde el chunk data del mundo (M10) [C] -- agnes-3-flash 2026-10-02: `bake_map_texture()` samplea `TerrainLocator.get_height(x,z)` (VoxelTerrain real) y mapea a colores (agua/arena/verde/pardo); fallback blob en headless
-- [ ] — agnes-2.5-flash 2026-09-12: estilo ilustrado cozy documentado en 03-Diseno.md §2.1 (manchas bioma con paleta pastel, bordes suaves); IMPLEMENTACI脫N requiere M45/M46 assets artísticos; KnownIssue no bloqueante DoD.
+- [ ] — agnes-2.5-flash 2026-09-12: estilo ilustrado cozy documentado en 03-Diseno.md §2.1 (manchas bioma con paleta pastel, bordes suaves); IMPLEMENTACIÓN requiere M45/M46 assets artísticos; KnownIssue no bloqueante DoD.
 - [x] Nombres de región con fuentes M88 (Nunito/Fredoka One) y jerarquía M53 [M] -- agnes-2.5-flash 2026-09-12: — agnes-3-flash 2026-10-02: FullMapLayer legend + minimap markers usan ThemeUx (M88 fonts); jerarquia M53 aplicada
 - [x] Marcador jugador siempre visible [S] -- agnes-2026-09-06: minimap_widget.gd _player_dot implementado con color amarillo (1.0,0.85,0.2) y position update por frame
 - [x] Pausa del mundo coherente con M29/M30 al abrir el mapa [M] -- agnes-3-flash 2026-10-02: FullMapLayer open/close llama TimeCalendar.pausa()/resume() (delega a GameTime/GameClock). Arreglado: el código anterior usaba "TimeManager" (no existe) y "pause()" (no es el método, es "pausa()").
@@ -153,20 +153,20 @@
 
 ## K. Integración con módulos (14)
 
-- [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.1 (RegionData alimentado por M09/M27); IMPLEMENTACI脱N bloqueada por M09/M27 (regiones/biomas del terreno); KnownIssue no bloqueante DoD.
+- [ ] — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.1 (RegionData alimentado por M09/M27); IMPLEMENTACIÓN bloqueada por M09/M27 (regiones/biomas del terreno); KnownIssue no bloqueante DoD.
 - [x] M10: MapBaker genera la textura desde el chunk data (procesal estable por semilla) [C] -- agnes-3-flash 2026-10-02: bake_map_texture() es el MapBaker implícito: samplea VoxelTerrain heightmap y genera Image procedural
-- [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.1 (posici贸n jugador por evento baja frecuencia); IMPLEMENTACI脱N bloqueada por M11 (player autoload signals); KnownIssue no bloqueante DoD.
-- [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.2 (registro casas NPCs como marcadores din谩micos); IMPLEMENTACI脱N bloqueada por M19 (NPC profile system); KnownIssue no bloqueante DoD.
+- [ ] — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.1 (posición jugador por evento baja frecuencia); IMPLEMENTACIÓN bloqueada por M11 (player autoload signals); KnownIssue no bloqueante DoD.
+- [ ] — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.2 (registro casas NPCs como marcadores dinámicos); IMPLEMENTACIÓN bloqueada por M19 (NPC profile system); KnownIssue no bloqueante DoD.
 - [x] M24/M25: POIs de templos y ruinas como marcadores [M] -- agnes-3-flash 2026-10-02: map_config.json tiene 3 templos (raiz/coral/ceniza) tipo="templo"; M25 ruina spawn en runtime
-- [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.3 (ruta visual destino viaje); IMPLEMENTACI脱N bloqueada por M28 (viajes); KnownIssue no bloqueante DoD.
+- [ ] — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.3 (ruta visual destino viaje); IMPLEMENTACIÓN bloqueada por M28 (viajes); KnownIssue no bloqueante DoD.
 - [x] M29/M30: pausa coherente y fecha de pines [S] -- agnes-3-flash 2026-10-02: pausa coherente (iter 3 TimeCalendar.pausa); pines almacenan `fecha` unix timestamp
-- [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.2 (tiendas registradas autom谩ticamente); IMPLEMENTACI脱N bloqueada por M39 (ShopManager autoload); KnownIssue no bloqueante DoD.
+- [ ] — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.2 (tiendas registradas automáticamente); IMPLEMENTACIÓN bloqueada por M39 (ShopManager autoload); KnownIssue no bloqueante DoD.
 - [x] M53: capa modal, foco, TooltipService, NotificationService y ThemeUx [M] -- agnes-3-flash 2026-10-02: FullMapLayer = capa modal en UIRoot (hud.tscn); Tooltip/Notification deferred a M53
 - [x] M57: acciones map_toggle, zoom, pan, cierre, pin y centro [M] -- agnes-3-flash 2026-10-02: KEY_M (toggle), Esc (cierre), scroll+drag (zoom/pan), botón "Jugador" (centro). Input actions formales M57 pendientes.
-- [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §4 accesibilidad (reduce_motion, daltonismo, contraste AA); IMPLEMENTACI脱N bloqueada por M58 (accesibility manager); KnownIssue no bloqueante DoD.
+- [ ] — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §4 accesibilidad (reduce_motion, daltonismo, contraste AA); IMPLEMENTACIÓN bloqueada por M58 (accesibility manager); KnownIssue no bloqueante DoD.
 - [ ] M60: persistencia de exploración, pines, preferencias y caché de textura [C]
-- [ ] M63: bake en background con barra de progreso (AGENTS 8) [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.4; IMPLEMENTACI脫N bloqueada por M63 (cargas/streaming); KnownIssue no bloqueante DoD.
-- [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.3 (destinos, desbloqueo, viaje por interfaz Callable); IMPLEMENTACI脱N bloqueada por M69 (fast travel); KnownIssue no bloqueante DoD.
+- [ ] M63: bake en background con barra de progreso (AGENTS 8) [M] -- agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.4; IMPLEMENTACIÓN bloqueada por M63 (cargas/streaming); KnownIssue no bloqueante DoD.
+- [ ] — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.3 (destinos, desbloqueo, viaje por interfaz Callable); IMPLEMENTACIÓN bloqueada por M69 (fast travel); KnownIssue no bloqueante DoD.
 
 ## L. Edge cases (16)
 
@@ -190,7 +190,7 @@
 ## M. Optimización (10)
 
 - [x] No regenerar la textura del mapa en cada apertura (caché persistente) [C] -- agnes-3-flash 2026-10-03: `MapManager._cached_texture` + `_texture_dirty` flag; `bake_map_texture()` solo re-bake al invalidar
-- [ ] Bake incremental por secciones del mundo para no bloquear (M63) [C] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.4; IMPLEMENTACI脱N bloqueada por M63 (cargas/streaming); KnownIssue no bloqueante DoD.
+- [ ] Bake incremental por secciones del mundo para no bloquear (M63) [C] -- agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.4; IMPLEMENTACIÓN bloqueada por M63 (cargas/streaming); KnownIssue no bloqueante DoD.
 - [ ] Pool único de sprites de marcadores, clusters y pines en ambas vistas → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.36 (single sprite pool for markers/clusters/pins); performance M61. Spec defined.
 - [x] Etiquetas de región refrescadas solo en cambios de zoom/pan (thresholds) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: MapCanvas `_islands_container` escala como bloque; labels no se refrescan individualmente en zoom/pan
 - [x] Culling simple de marcadores por región visible (bounds check) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: minimap `_update_markers` `if not explored: continue`; FullMapLayer `set_type_visible` culls by type

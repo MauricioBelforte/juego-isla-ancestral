@@ -190,6 +190,9 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
+
+**Totales:** 131 items - Completados: 48 - Pendientes: 83 - No resueltos: 0.
+
 ## Notas del Agente
 
 **Modelo:** glm-5.3-flash

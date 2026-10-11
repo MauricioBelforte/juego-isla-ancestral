@@ -40,7 +40,7 @@ Juego de estilo **"Cozy Voxel"**: el terreno es de bloques cúbicos de 1 metro, 
 - Todos los nombres de objetos deben empezar con `SM_` (ej: `SM_Pared_Madera`)
 - Todos los nombres de materiales deben empezar con `MAT_` (ej: `MAT_MaderaClara`)
 - Geometria lowpoly: minimos poligonos pero con silueta clara
-- **z_min del grupo completo debe ser 0.045** (接触 el suelo ligeramente elevado, como si hubiera una base de cimiento)
+- **z_min del grupo completo debe ser 0.045** (en contacto con el suelo ligeramente elevado, como si hubiera una base de cimiento)
 - Las casas son **STANDALONE** (completas, no modulares) — se crean como una sola composicion
 - Orientacion: eje X = largo, eje Y = ancho, eje Z = alto
 - Las puertas miran hacia +Y (frente de la casa)
@@ -65,7 +65,7 @@ Juego de estilo **"Cozy Voxel"**: el terreno es de bloques cúbicos de 1 metro, 
 ### Dimensiones
 - **Huella exterior:** 5.00 m (largo X) × 4.00 m (ancho Y)
 - **Paredes:** grosor 0.12 m (tabla simple de 12 cm)
-- **Techo interior minimo:** 2.60 m (累计 desde el suelo)
+- **Techo interior minimo:** 2.60 m (medido desde el suelo)
 - **Cumbrera del techo:** ~3.20 m (inclinacion suave)
 - **Puerta:** frontal centro, 1.00 × 2.10 m
 - **Ventanas:** 2 ventanas laterales (0.60 × 0.60 m cada una)

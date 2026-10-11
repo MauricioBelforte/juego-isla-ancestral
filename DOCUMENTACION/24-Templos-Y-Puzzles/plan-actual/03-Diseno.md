@@ -476,3 +476,103 @@ pistas son información, nunca penalización (ítem 139). Intérprete propio `Pu
 reducida a `[0]` → el emisor exacto deja de citar el 1).
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1438.
+
+## Dificultad (iter. 6 — DeepSeek-V4.1-Flash, 2026-10-09)
+
+Ítems 10, 11, 13 y 14. Capa `PuzzleDificultad` (`scripts/templos/puzzle_dificultad.gd`), datos en
+`data/templos/dificultad.json`.
+
+- **3 bandas (ítem 10):** `exploracion` (1-2 emisores, 0 familias ocultas, pista a 90 s), `ritual`
+  (2-4, 1, 60 s), `antiguo` (4-16, 2, 45 s). Son las bandas obligatorias de la sección "Dificultad".
+- **Progresión por zona (ítem 11):** cada zona del templo apunta a una banda (`zonas[]`); la
+  progresión debe cubrir las 3 bandas (lo exige `validar()`).
+- **Ayuda progresiva (ítem 13):** cada `intentos_para_subir` (=3) fallos suben 1 nivel de ayuda, con
+  tope `max_subidas` (=1); cada nivel recorta `AYUDA_PASO_S` (=15 s) la demora de la pista, con suelo
+  `AYUDA_MINIMO_S` (=30 s). **La ayuda NUNCA sube la demora** (probado para 0..11 intentos).
+- **Justicia:** la dificultad es una **función de datos** (banda de la zona), no una tabla escondida.
+
+## Tutorialización (iter. 6 — DeepSeek-V4.1-Flash, 2026-10-09)
+
+Ítems 19, 20, 21, 22 y 23. Capa `PuzzleTutorial` (`scripts/templos/puzzle_tutorial.gd`), datos en
+`data/templos/tutorial.json`.
+
+- **Guía del templo por zona (ítem 19):** un `mural` por zona con `icono` y `glifos`.
+- **Narrador suave (ítem 20):** SOLO en la primera solución; se dispara por el contrato real de M33
+  (`start_dialogue(dialogue_id, context) -> bool`, duck-typed — no se acopla al autoload).
+- **Iconografía (ítem 21):** cada glifo declara `icono` + `familia`; un glifo es "reconocible" solo si
+  tiene ambos.
+- **Sin texto invasivo (ítem 22):** el orden de presentación es `[visual, icono, texto]` y
+  `texto_max_palabras == 0` (lo visual manda).
+
+## Familia presión avanzada (iter. 6 — DeepSeek-V4.1-Flash, 2026-10-09)
+
+Ítems 77, 78, 79 y 80. Capa `PuzzlePresion` (`scripts/templos/puzzle_presion.gd`), datos
+`presion_03.json` (elevador) y `presion_04.json` (puertas encadenadas).
+
+- **Elevadores por placas (ítem 77):** la altura = nº de placas del `grupo` encendidas, con tope
+  `niveles`.
+- **Puertas encadenadas (ítem 78):** una puerta abre SOLO si toda su cadena `requiere` está ON
+  (progresiva: `[0]`, `[0,1]`, `[0,1,2]`).
+- **Sin fallo punitivo (ítem 79):** el reinicio vuelve al estado inicial del slot y
+  `penalizacion_reinicio()` == 0 siempre (contrato M66, `puzzle_invariant.gd`).
+
+## Familia símbolos y ambientales (iter. 6 — DeepSeek-V4.1-Flash, 2026-10-09)
+
+Ítems 111, 112, 113 y 117. Capa `PuzzleSimbolos` (`scripts/templos/puzzle_simbolos.gd`), datos
+`simbolos_01.json` / `simbolos_02.json`.
+
+- **Glifos emparejados (ítem 111):** cada glifo respeta el CONTRATO de M25 documentado en
+  `DOCUMENTACION/25-Ruinas/plan-actual/03-Diseno.md` ("Inscripciones / Glifos"): `id`, `simbolos`
+  (Array[String]) y `significado` (String). El catálogo de 30-60 glifos (`data/ruinas/glifos.json`)
+  es de M25 y **aún no existe**; M24 no lo inventa.
+- **Glosario del templo (ítem 112):** enlaza cada glifo con su `inscripcion_m25`; `glosario_completo()`
+  exige que TODOS los glifos tengan entrada.
+- **Sello por pareja correcta (ítem 113):** colocar un glifo NO activa los emisores por sí solo; el
+  sello abre SOLO cuando los dos pedestales forman la pareja declarada (pareja incorrecta → cerrado).
+
+## Familia herramientas (iter. 6 — DeepSeek-V4.1-Flash, 2026-10-09)
+
+Ítems 121, 122, 123 y 124. Capa `PuzzleHerramientas` (`scripts/templos/puzzle_herramientas.gd`), datos
+`herramientas_01.json` (pico) / `herramientas_02.json` (gancho + farol).
+
+- **Usos (ítems 121-123):** cada `uso` declara `herramienta`, `objetivo` (del mundo), `pos` y `emisor`.
+- **Condición de inventario (ítem 124):** el uso solo se permite si el **item REAL** del catálogo está
+  presente (duck-typed `count_item(item_id, include_house)`). **MEDIDO:** el índice de
+  `CatalogosEstaticos` indexa por NOMBRE DE ARCHIVO, así que el id real de "Pico de hierro" es
+  `item_obj_her_002` y el de "Farol" es `item_obj_luz_005` (NO los `OBJ-...` del `.tres`).
+- **Residual honesto (ítem 122):** el catálogo NO tiene un item "gancho"; su USO y su condición están
+  definidos, pero sin item concreto el uso queda bloqueado. `residuales()` lo nombra.
+
+## Checkpoints y recompensas (iter. 6 — DeepSeek-V4.1-Flash, 2026-10-09)
+
+Ítems 157, 162, 163 y 164. Capa `PuzzleRecompensas` (`scripts/templos/puzzle_recompensas.gd`), datos
+`recompensas_01.json` / `recompensas_02.json`.
+
+- **Checkpoint atómico (ítem 157):** COMPONE el guardado atómico ya existente
+  (`scripts/templos/templo_checkpoint.gd`: tmp → .bak → rename; solo funciones `*_absolute()` por las
+  trampas headless). No se duplica el primitivo.
+- **Recompensas únicas (ítem 162):** usan el contrato real de M66
+  (`scripts/core/recovery/cofre_recuperacion.gd`): 1 copia inmutable por clave, jamás duplicable
+  (`depositar` + `entregar`; `fue_entregada`).
+- **Alineadas al lore (ítem 163):** cada recompensa declara un `lore` ∈ `lore_templo`.
+
+## Anti-arbitrariedad, anti-ambiguedad y metricas (iter. 6 — DeepSeek-V4.1-Flash, 2026-10-09)
+
+Item 151. Documenta COMO se garantiza que ningun puzzle sea arbitrario ni ambiguo, y que metricas se
+exportan. Todo es MEDIBLE, no una intencion.
+
+- **Anti-arbitrariedad (por datos):** `PuzzleDef.validar_def` RECHAZA: sin emisores, emisor duplicado,
+  sala sin reglas, regla con conjunto de emisores vacio, regla que usa un emisor inexistente, emisor
+  huerfano (regla desconectada), sin objetivo, receptores multiples y objetivo != solucion minima.
+- **Anti-ambiguedad (por fuerza bruta):** `PuzzleDef.soluciones_minimas` enumera los 2^n subconjuntos
+  (n <= `MAX_EMISORES` = 16) y exige EXACTAMENTE 1 solucion MINIMA igual al objetivo declarado. Si hay
+  0 o 2+, el puzzle falla. Probado EN ROJO por inyeccion (Log 1407).
+- **Casi solucion:** `PuzzleRoom.esta_a_casi_solucion()` (distancia de Hamming S->T == 1) para el
+  feedback sutil "estas cerca" (sin texto).
+- **Metricas (playtests externos):** `PuzzleTimer` (`scripts/templos/templo_telemetria.gd`) registra
+  tiempo, pistas usadas y abandonos por puzzle; la exportacion alimenta los playtests de
+  `06-Plan-Testings.md` seccion 2. `07-Resultados-Testings.md` seccion 5 declara que aun NO hay datos
+  de personas.
+- **Cobertura:** cada familia tiene su suite con piso MEDIDO y sonda roja; el gate
+  `test_regresion_templos.gd` corre las 19 suites como subprocesos (EXIT 0 + 0 SCRIPT ERROR + checks
+  >= piso por suite; total >= 910).

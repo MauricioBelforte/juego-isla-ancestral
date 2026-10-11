@@ -124,7 +124,7 @@ verificados como legítimos en QA cruzado.
 **Totales:** 90 ítems · Completados: 89 · Pendientes: 1 · No resueltos: 0. (P-38, Log 1154: 3 `[?]`→`[x]` — BUG-080 resuelto; el `[ ]` restante es el KnownIssue M08.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 89 [x] / 0 [ ] / 0 [?].
+> este archivo no tenía línea de Totales. Conteo real de marcas: 89 [x] / 1 [ ] / 0 [?].
 > Las marcas no se tocaron.
 
 ## Notas del Agente — QA agnes-3-flash (Kilo Code, Log 1145, P-31, 2026-09-25)

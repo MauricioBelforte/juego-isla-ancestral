@@ -27,15 +27,15 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: no existe registro unificado de logros del jugador en la isla Aurora [S] — glm-5.3-flash 2026-09-01: implementado como AchievementService autoload (único registro)
-- [ ] Definir el objetivo: catálogo data-driven, motor de desbloqueo, notificación UI, persistencia y Steam opcional [S] — implementado: catálogo JSON + motor delegado + persistencia M59; Steam/UI con dueño
+- [x] Definir el problema: no existe registro unificado de logros del jugador en la isla Aurora [S] — glm-5.3-flash 2026-09-01: implementado como AchievementService autoload (único registro)
+- [x] Definir el objetivo: catálogo data-driven, motor de desbloqueo, notificación UI, persistencia y Steam opcional [S] — implementado: catálogo JSON + motor delegado + persistencia M59; Steam/UI con dueño
 - [ ] Registrar dependencias del módulo: M71 (Progresión), M37 (Museos y Colecciones), M97 (Steam Store Page) según CHECKLIST-GLOBAL [S] — M71 ✅ (evaluador delegado), M37 ✅ (coleccion_completa vía M71), M59 ✅; M97 con dueño
 - [ ] Registrar integraciones adicionales: M20, M22, M33, M34, M38, M53, M58, M60, M66, M103, M104, M112 [S]
 - [ ] Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, página de Steam en M97 [S]
 - [ ] Definir criterios de aceptación verificables (10 criterios) [S] — agnes-2026-09-06: criterios definidos en 01-Requerimientos (RF1-RF14, RN1-RN12); verificación headless con test_logros.gd (72 checks, 0 fallos)
 - [ ] Definir criterios de aceptación verificables (10 criterios) [S] -- agnes-2026-09-06: criterios RF1-RF14 en 01-Requerimientos; verificación con test_logros.gd 72 checks
-- [ ] Asegurar alineación con M152 (Principios Innegociables) y M94 (Retención sin FOMO) [S] — agnes-2026-09-06: M152 toques_cortos implementado (toasts no bloqueantes RF6); M94 conectado via toasts sin frustración; sin contrarreloj RN11
-- [ ] Asegurar alineación con M66 (Anti-Softlock): ningún logro imposible de obtener [S] — validador M23 anti-repetición + catálogo cozy (sin contrarreloj) verificados
+- [x] Asegurar alineación con M152 (Principios Innegociables) y M94 (Retención sin FOMO) [S] — agnes-2026-09-06: M152 toques_cortos implementado (toasts no bloqueantes RF6); M94 conectado via toasts sin frustración; sin contrarreloj RN11
+- [x] Asegurar alineación con M66 (Anti-Softlock): ningún logro imposible de obtener [S] — validador M23 anti-repetición + catálogo cozy (sin contrarreloj) verificados
 
 ## B. RF — Definición de logros
 
@@ -60,8 +60,8 @@
 - [ ] RF2: implementar CondicionBase con contrato evaluar_progreso() y cumplida() [M] — DECISIÓN: no duplicar el evaluador de M71 (§diseño) — las condiciones usan el vocabulario M71 §3.6 y se evalúan vía evaluar_condicion()
 - [ ] RF2: implementar CondicionContador (stat_contador >= n) sobre estadísticas de M71 [M] — stat_min vía evaluador M71 (testeado con sellos_obtenidos/regalos)
 - [ ] RF2: implementar CondicionColeccion (coleccion_completa / coleccion_porcentaje) de M37 [M] — coleccion_completa vía evaluador M71 (testeado con flora M37)
-- [ ] RF2: implementar CondicionPesca (pescar_especie / pescar_todas_las_especies) de M34 [M] — iter. 6 (Log 582): captura_exitosa (M34) alimenta peces_capturados (total) + pescar_<pez_id> (por especie, monótona primera vez); logros de pesca en catálogo con stat_min (vocabulario M71); pescar_todas compuesta AND con dueño de contenido (2 especies reales en test)
-- [ ] RF2: implementar CondicionAmistad (amistad_maxima / amistad_total) de M20 [M] — iter. 4 (Log 556/557): friendship_level_up (M20, señal real NPCEvents) alimenta stat dinámica monótona amistad_max_<npc_id> en PlayerProfile; logros usan stat_min del vocabulario M71 §3.6 (sin duplicar evaluador); testeado nivel 3 desbloquea + nivel 1 no retrocede + nivel 4 segundo logro
+- [x] RF2: implementar CondicionPesca (pescar_especie / pescar_todas_las_especies) de M34 [M] — iter. 6 (Log 582): captura_exitosa (M34) alimenta peces_capturados (total) + pescar_<pez_id> (por especie, monótona primera vez); logros de pesca en catálogo con stat_min (vocabulario M71); pescar_todas compuesta AND con dueño de contenido (2 especies reales en test)
+- [x] RF2: implementar CondicionAmistad (amistad_maxima / amistad_total) de M20 [M] — iter. 4 (Log 556/557): friendship_level_up (M20, señal real NPCEvents) alimenta stat dinámica monótona amistad_max_<npc_id> en PlayerProfile; logros usan stat_min del vocabulario M71 §3.6 (sin duplicar evaluador); testeado nivel 3 desbloquea + nivel 1 no retrocede + nivel 4 segundo logro
 - [ ] RF2: implementar CondicionHito71 (hito_71 alcanzado) de M71 [M] — hito_previo vía evaluador M71 (testeado)
 - [ ] RF2: implementar CondicionHistoria (sello_historia) de M22 [M] — sello_historia vía evaluador M71 consultando M22.sello_marcado() directamente (FIX fuente de verdad §2.2, testeado)
 - [ ] RF2: implementar CondicionCompuesta con operadores AND, OR y NOT [M] — compuesta AND/OR/NOT vía evaluador M71 (testeado)
@@ -80,7 +80,7 @@
 
 ## D. RF — Notificación UI
 
-- [ ] RF6: implementar LogroToastUI como CanvasLayer sobre la escena activa [M] — iter. 5 (Log 563): NotificationService (M53, CanvasLayer con cola/pool propio) consume EventBus.ui.notify; el toast de logro es mostrado por el servicio existente (sin duplicar capa: M72 emite, M53 presenta)
+- [x] RF6: implementar LogroToastUI como CanvasLayer sobre la escena activa [M] — iter. 5 (Log 563): NotificationService (M53, CanvasLayer con cola/pool propio) consume EventBus.ui.notify; el toast de logro es mostrado por el servicio existente (sin duplicar capa: M72 emite, M53 presenta)
 - [ ] RF6: mostrar toast no bloqueante con ícono, nombre y descripción corta [M] — iter. 5: _on_event_notify mapea {tipo, titulo, texto} → push({text, type, icon}); testeado con logro y museo
 - [ ] RF6: implementar cola de notificaciones con máximo 3 toasts visibles [M] — NotificationService ya tenía max_active=3 + _dequeue_oldest (M53 MiMo); el puente lo hereda
 - [ ] RF6: resumir en un único toast "N nuevos logros desbloqueados" si la cola supera 5 [M]
@@ -109,7 +109,7 @@
 - [ ] RF11: no borrar logros de Steam automáticamente al borrar partida local [S]
 - [ ] RN2: verificar que el write-through no bloquee el frame principal (escritura diferida segura) [S] -- agnes-2026-09-06: achievement_service.gd usa SaveManager.mark_dirty() que es escritura diferida agrupada por frame; no bloquea el thread principal
 - [ ] RN12: mantener el estado de logros por debajo de 10 KB con 500 logros desbloqueados [M]
-- [ ] RF10: exponer cargar(estado) y guardar() como API pública del manager [S] — iter. 3: API consulta completa: is_unlocked/get_definicion/get_todos/get_estado/get_desbloqueados/get_en_progreso/get_porcentaje_completado/fecha_de (testeado)
+- [?] RF10: exponer cargar(estado) y guardar() como API pública del manager [S] — iter. 3: API consulta completa: is_unlocked/get_definicion/get_todos/get_estado/get_desbloqueados/get_en_progreso/get_porcentaje_completado/fecha_de (testeado) -- dueno externo M59 (persistencia/cargar/guardar) (verif. s2 Log 1619)
 - [ ] RF9: coexistir sin colisiones de claves con el estado de M71 en el guardado global [M]
 
 ## F. RF — Consulta y panel
@@ -124,7 +124,7 @@
 - [ ] RF10: implementar get_definicion(id) [S] — iter. 3 (testeado)
 - [ ] RF10: implementar get_todos() ordenado por orden y categoría [S] — iter. 3: por orden de catálogo (orden/categoría con dueño al llegar el campo al JSON)
 - [ ] RF10: implementar get_estado(id) con {desbloqueado, fecha, progreso, extra} [S] — iter. 3: {id,nombre,descripcion,desbloqueado,oculto,dia,hora,progreso}
-- [ ] RF10: implementar get_desbloqueados(), get_en_progreso() y get_porcentaje_completado() [S] — iter. 3 (testeado)
+- [x] RF10: implementar get_desbloqueados(), get_en_progreso() y get_porcentaje_completado() [S] — iter. 3 (testeado)
 - [ ] RF7: permitir abrir el panel desde el toast y desde la UI de progreso de M53/M71 [S]
 
 ## G. RN — Requisitos no funcionales
@@ -134,7 +134,7 @@
 - [ ] RN3: módulo compila y funciona 100% sin SDK de Steam [C] — sin capa Steam; test headless 0 fallos sin Steam
 - [ ] RN3: SteamSync se carga en runtime solo si la plataforma lo provee (M97) [M]
 - [ ] RN5: nombres y descripciones usan claves i18n con español base [S] — agnes-2026-09-06: M87 LocalizationManager conectado vía EventBus (signal dialog_requested), integración duck-typed en _emitir_toast()
-- [ ] RN5: nombres y descripciones usan claves i18n con español base [S] -- agnes-2026-09-06: M87 LocalizationManager autoload implementado (28 funciones); logros.json usa nombre/descripcion directos (español base); integración duck-typed via EventBus
+- [?] RN5: nombres y descripciones usan claves i18n con español base [S] -- agnes-2026-09-06: M87 LocalizationManager autoload implementado (28 funciones); logros.json usa nombre/descripcion directos (español base); integración duck-typed via EventBus -- dueno externo M87 (i18n) (verif. s2 Log 1619)
 - [ ] RN6: compatible con Godot 4.x >= 4.4.1 y GDScript tipado explícito [M]
 - [ ] RN7: notificaciones no modales, no bloqueantes y desactivables (M58) [S]
 - [ ] RN8: estado en guardado de partida (M60), coherente con PRNG (M29) y M71 [M]
@@ -152,14 +152,14 @@
 - [ ] Diseñar diagrama de arquitectura con emisores, manager, UI y SteamSync [M]
 - [ ] Diseñar flujo de desbloqueo: evento -> evaluación -> marca -> señal -> persistencia -> notificación -> Steam [M]
 - [ ] Diseñar flujo de carga con retroactividad y reconciliación Steam [M]
-- [ ] Diseñar flujo de consulta del panel con estados obtenido/en progreso/oculto [M] -- agnes-2.5-flash 2026-09-12: disenado 03-Diseno.md §3.3; implementado listado_para_ui() L371-388, get_estado() L329-349, get_en_progreso() L356-364 en achievement_service.gd; panel M53 consume API
+- [x] Diseñar flujo de consulta del panel con estados obtenido/en progreso/oculto [M] -- agnes-2.5-flash 2026-09-12: disenado 03-Diseno.md §3.3; implementado listado_para_ui() L371-388, get_estado() L329-349, get_en_progreso() L356-364 en achievement_service.gd; panel M53 consume API
 - [ ] Diseñar flujo de reset de partida con limpieza local y reconciliación posterior [M] -- agnes-2.5-flash 2026-09-12: disenado 03-Diseno.md §3.4; restore_save_data() L449-474 tolera v1(Array)/v2(Dictionary); Steam reconciliacion due;o M97
 - [ ] Diseñar contrato de señales públicas del autoload (5 señales) [M]
 - [ ] Diseñar API de consulta pública completa (13 funciones) [M]
 - [ ] Diseñar estructura de carpetas res://logros/ con subcarpetas condiciones, ui, steam, datos [S]
-- [ ] Diseñar memoización de condiciones compuestas para evitar re-evaluaciones recursivas duplicadas [M] -- agnes-2.5-flash 2026-09-12: _compuesta_cache: Dictionary={} L50 + COMPUESTA_CACHE_TTL:int=32 L51; evaluador M71 puro sin PRNG, eval event-driven nunca por frame, rendimiento <1ms verificado headless
+- [x] Diseñar memoización de condiciones compuestas para evitar re-evaluaciones recursivas duplicadas [M] -- agnes-2.5-flash 2026-09-12: _compuesta_cache: Dictionary={} L50 + COMPUESTA_CACHE_TTL:int=32 L51; evaluador M71 puro sin PRNG, eval event-driven nunca por frame, rendimiento <1ms verificado headless
 - [ ] Diseñar fechas tomadas una única vez por desbloqueo y persistidas [S]
-- [ ] Diseñar validación de catálogo en editor con errores accionables (tool) [M] -- agnes-2.5-flash 2026-09-12: validar_catalogo() IMPLEMENTADO L390-415, ejecutado en _cargar_catalogo() L82; validaciones: id vacio/duplicado, condicion vacia, tipo desconocido, stat_id vacio; tool script editor pendiente due;o K (M117/M118)
+- [?] Diseñar validación de catálogo en editor con errores accionables (tool) [M] -- agnes-2.5-flash 2026-09-12: validar_catalogo() IMPLEMENTADO L390-415, ejecutado en _cargar_catalogo() L82; validaciones: id vacio/duplicado, condicion vacia, tipo desconocido, stat_id vacio; tool script editor pendiente due;o K (M117/M118) -- dueno externo M117/M118 (tool editor) (verif. s2 Log 1619)
 - [ ] Diseñar extensión futura: nuevos tipos de condición sin tocar el manager (polimorfismo) [M]
 - [ ] Diseñar convivencia de notificaciones con pausas del juego y menús abiertos [M] -- agnes-2.5-flash 2026-09-12: RF6 hereda cola/pool de M53; EventBus.notify no bloqueante, no roba input; RN7 accesibilidad via _toasts_disabled + bus.accesibilidad_cambiada (L142-155); menús/pausas handled por M53 queue stacking
 
@@ -343,7 +343,7 @@
 - `test_logros_m72_statids.gd` → **9 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`**.
 - `test_logros.gd` → **0 fallos, exit 0** (1 `SCRIPT ERROR` ajeno de M39 al boot).
 
-**Totales:** 185 ítems · Completados: 1 · Pendientes: 184 · No resueltos: 0.
+**Totales:** 185 ítems · Completados: 11 · Pendientes: 171 · No resueltos: 3. (Flip narrativas Patrón D aplicado por el director atria, 2026-10-11, evidencia s2 Log 1619: 10 [x] sustentados + 3 [?] con dueno + 1 [ ] mantenido)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 1 [x] / 184 [ ] /

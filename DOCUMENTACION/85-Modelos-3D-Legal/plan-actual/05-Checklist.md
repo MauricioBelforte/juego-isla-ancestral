@@ -63,7 +63,7 @@
 
 ## E. Créditos de Modelos (10 ítems)
 
-- [x] Crear ModelLegalManager con validate_all_models()
+- [ ] Crear ModelLegalManager con validate_all_models() - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
 - [ ] Implementar add_license() y add_credit() - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco, model_license.gd/model_credit.gd ausentes
 - [ ] Implementar generate_credits_text() (formato compacto) - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
 - [ ] Implementar generate_credits_web() (formato detallado) - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
@@ -72,7 +72,7 @@
 - [x] Incluir modelos específicos por artista
 - [x] Referenciar contrato en cada crédito
 - [x] Incluir estado de pago en cada crédito → KnownIssue no bloqueante DoD: politica de créditos documentada en M131 + AGENTS.md; campo payment_status en credits screen deferred.
-- [x] Generar archivo MODEL_CREDITS.txt en cada build
+- [ ] Generar archivo MODEL_CREDITS.txt en cada build - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
 
 ## F. Modelos de IA Generativa (10 ítems)
 
@@ -89,29 +89,29 @@
 
 ## G. Validación y Testing (10 ítems)
 
-- [x] Test de ModelLicenseValidator con licencia completa
-- [x] Test de ModelLicenseValidator con licencia sin attribution
-- [x] Test de ModelLicenseValidator con licencia no-perpetual
-- [x] Test de ModelLegalManager con inventario vacío
-- [x] Test de ModelLegalManager con inventario completo
-- [x] Test de generación de créditos compactos
-- [x] Test de generación de créditos web
-- [x] Test de verificación de uso comercial
-- [x] Test de edge case: artista con múltiples roles
-- [x] Test de edge case: modelo con múltiples licencias
+- [ ] Test de ModelLicenseValidator con licencia completa - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de ModelLicenseValidator con licencia sin attribution - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de ModelLicenseValidator con licencia no-perpetual - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de ModelLegalManager con inventario vacío - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de ModelLegalManager con inventario completo - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de generación de créditos compactos - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de generación de créditos web - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de verificación de uso comercial - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de edge case: artista con múltiples roles - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Test de edge case: modelo con múltiples licencias - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
 
 ## H. Integración con Build Pipeline (10 ítems)
 
 - [?] Agregar paso de validación de modelos en build_script.gd → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 05-Checklist.md L150-158. Ver msg s2 #150.
-- [x] Build falla si hay licencia de modelo inválida
-- [x] Build incluye MODEL_CREDITS.txt automáticamente
-- [x] Integración con M117 (Build Pipeline)
-- [x] Integración con M72 (Validación de Builds)
-- [x] Integración con M71 (Gestión de Assets)
-- [x] Logging de validación de modelos en build log
-- [x] Modo dry-run para verificar sin generar outputs
-- [x] Skip de validación en builds de desarrollo
-- [x] Generar reporte de licencias de modelos por build
+- [?] Build falla si hay licencia de modelo inválida - BUG-070 lote 10 re-verif (atria-dawn, evidencia s3 #98): Patron D con L105 [?] - build_script.gd revertido por s2, no existe
+- [ ] Build incluye MODEL_CREDITS.txt automáticamente - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Integración con M117 (Build Pipeline) - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Integración con M72 (Validación de Builds) - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Integración con M71 (Gestión de Assets) - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Logging de validación de modelos en build log - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Modo dry-run para verificar sin generar outputs - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Skip de validación en builds de desarrollo - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [ ] Generar reporte de licencias de modelos por build - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
 
 ## I. Documentación y Mantenimiento (15 ítems)
 
@@ -158,7 +158,7 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs si aplica).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 100 ítems · Completados: 99 · Pendientes: 1 · No resueltos: 0.
+**Totales:** 100 items - Completados: 73 - Pendientes: 25 - No resueltos: 2. (BUG-070 lote 10 re-verif, atria-dawn 2026-10-09: 20 [x] -> [ ] Familia A + 1 [x] -> [?] Patron D - la capa de servicio de licenciamiento (model_legal_manager, model_license, model_credit, build_script, creditos) no existe. Conteo real: 73/25/2.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?].

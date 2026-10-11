@@ -68,7 +68,7 @@
 - Si se agrega hambre, debe ser:
   - No castigadora (no muerte por hambre)
   - Sin penalizaciones severas
-  - Con食物 fácilmente accesible
+  - Con comida fácilmente accesible
   - Sin FOMO (comida siempre disponible)
 - Alternativas: agricultura relajante, cocina creativa, compartir comida con NPCs
 
@@ -248,7 +248,7 @@
 
 **Implementación:**
 - Cosmetics opcionales (si hay monetización)
-- DLCs con contenido adicional, no必需
+- DLCs con contenido adicional, no obligatorios
 - No loot boxes
 - No gacha
 - No premium currency que afecte gameplay

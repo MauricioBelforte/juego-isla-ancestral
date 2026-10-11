@@ -11,7 +11,7 @@
 
 ## 1. Problema
 
-El jugador necesita una progresión clara de herramientas que desbloquee contenido en el mundo, pero sin copiar la fórmula de Zelda (llave开门). Cada isla del archipiélago tiene una profesión especializada (carpintero, herrero, herrero avanzado, cristalero) que ofrece herramientas de mayor tier a cambio de materiales + monedas. El jugador debe poder elegir su ritmo: explorar y resolver todo manualmente, o pagar dinero real para avanzar más rápido. La historia principal REQUIERE herramientas hasta tier 4 para completarse. Los encantamientos son una capa adicional lateral (cualquier tier se puede encantar).
+El jugador necesita una progresión clara de herramientas que desbloquee contenido en el mundo, pero sin copiar la fórmula de Zelda (llave que abre puertas). Cada isla del archipiélago tiene una profesión especializada (carpintero, herrero, herrero avanzado, cristalero) que ofrece herramientas de mayor tier a cambio de materiales + monedas. El jugador debe poder elegir su ritmo: explorar y resolver todo manualmente, o pagar dinero real para avanzar más rápido. La historia principal REQUIERE herramientas hasta tier 4 para completarse. Los encantamientos son una capa adicional lateral (cualquier tier se puede encantar).
 
 ## 2. Requisitos Funcionales
 
@@ -41,7 +41,7 @@ El jugador necesita una progresión clara de herramientas que desbloquee conteni
 ## 3. Requisitos No Funcionales
 
 - **Cozy:** sin estrés por no tener dinero; siempre hay algo que hacer en la isla principal
-- **No-copia de Zelda:** no hay llaves que开门; las herramientas desbloquean contenido, no puertas específicas
+- **No-copia de Zelda:** no hay llaves que abran puertas; las herramientas desbloquean contenido, no puertas específicas
 - **Persistencia:** tier alcanzado, monedas, materiales y cursos aprendidos se guardan en GameState
 - **Data-driven:** tablas de costos, materiales y desbloqueos en Resources (.tres)
 - **Desacoplamiento:** el sistema de gates no conoce la UI; comunica por señales

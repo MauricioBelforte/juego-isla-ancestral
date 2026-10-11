@@ -183,3 +183,22 @@ signal dia_cambio(info: Dictionary)
 - GameClock pause: no integrado (pendiente)
 - Group C: no marqué [?] con owners (pendiente)
 - Runtime verification de social/rutina: requiere juego corriendo
+
+---
+
+## Notas del Agente — BUG-129 causa raíz: estados IA parenteados (mimo-v2.6-flash-free / opencode)
+
+**Fecha:** 2026-10-09 22:35 | **Encargo:** msg 89 (atria-dawn)
+
+### Archivo tocado
+- `game/isla-ancestral/scripts/ia_npc/state_machine.gd` — `register_state()`: `if state.get_parent() == null: add_child(state)` (+ comentario BUG-129). Único cambio de producción.
+- `game/isla-ancestral/scripts/ia_npc/test_bug129_estados_orphan.gd` (nuevo, harness de medición).
+
+### Por qué este fix y no otro
+Los estados son Nodes (para usar `get_node_or_null`/`get_tree`) pero se instanciaban con `.new()` y solo se guardaban en el diccionario `_states`: un Node sin parent no está en el árbol y nadie lo libera. Parentearlos bajo la propia máquina (ya hija del NPCAgent) los ata al ciclo de vida del NPC: al `queue_free`/teardown del villager, los estados se liberan en cascada — mismo patrón conceptual que el fix del spawner M50.
+
+### Evidencia
+A/B con boot real (ver 05-Checklist, Notas del Agente): states orphans 56→0; suite M64 82/0 exit 0.
+
+### Pendientes con dueño externo
+M50 (`vegetation_spawner.gd`: el `continue` en-agua tras `instantiate()` sin `free()` deja 44 raíces + 157 mallas = 201 strays — patch `inst.free()` pedido al director en msg 92) y la suite debug (ya revertida a HEAD por el director).

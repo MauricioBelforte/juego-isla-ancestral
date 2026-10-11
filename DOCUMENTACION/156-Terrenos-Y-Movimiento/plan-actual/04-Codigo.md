@@ -10,13 +10,13 @@
 
 | Archivo | Tipo | Descripcion |
 |---------|------|-------------|
-| scripts/terrain/terrain_detector.gd | Node | Deteccion de terreno via raycast |
-| scripts/terrain/terrain_data_provider.gd | Node | Proveedor de datos de terrenos |
-| scripts/terrain/terrain_modifiers.gd | RefCounted | Calculo de modificadores |
-| scripts/terrain/terrain_data.gd | Resource | Datos de terreno (ScriptableObject) |
-| scripts/terrain/terrain_footstep_audio.gd | Node3D | Sistema de audio de pasos |
-| resources/terrain/ | Directorio | TerrainData resources (7 archivos .tres) |
-| scenes/terrain/ | Directorio | Escenas de huellas y particulas |
+| scripts/terrenos/terrain_detector.gd | RayCast3D | Deteccion de terreno via raycast (montado en Player.tscn) |
+| scripts/terrenos/terrain_provider.gd | Node (autoload TerrainProvider) | Proveedor data-driven (data/terrenos/terrenos.json) |
+| scripts/terrenos/terrain_modifiers.gd | RefCounted | Calculo de modificadores + puente M155 |
+| scripts/terrenos/terrain_data.gd | Resource | Datos de terreno (TerrainDataM156) |
+| ~~scripts/terrain/terrain_footstep_audio.gd~~ | -- | RECORTADO V0: audio de pasos no implementado (no existe en disco) |
+| data/terrenos/terrenos.json | Datos | 7 terrenos data-driven (reemplaza resources/terrain/*.tres) |
+| ~~scenes/terrain/~~ | -- | RECORTADO V0: huellas/particulas/indicador UI no implementados (dir vacio) |
 
 ### 1.2 Archivos Modificados (M11)
 
@@ -172,6 +172,48 @@ Node3D (ej: "MudBlock"):
     collision_layer: 4  # Terrain_Mud (bit 3)
   script: terrain_block.gd  # Implementa get_terrain_id()
 ```
+
+### 4.4 DIVERGENCIA MEDIDA: modelo legacy (§4.1-§4.3) vs M08 VoxelTerrain unico
+
+M156 iter. 4 (B3, 2026-10-09, DeepSeek-V4.1-Flash) — MEDIDO, no inventado:
+
+- §4.1-§4.3 describen el modelo LEGACY "un `StaticBody3D` por bloque" (capas 2-8, una
+  por tipo de terreno; `terrain_block.gd` con `get_terrain_id()`). **Ese modelo NO es
+  el vigente:** el terreno del proyecto es UN solo nodo `VoxelTerrain` (M08,
+  `scenes/main_island.tscn`), mallado por `VoxelMesherBlocky` a partir de
+  `world_generator.gd`. No existen capas 2-8 de terreno.
+- Capas reales (`project.godot` `[layer_names]`, medido): 1=`mundo`, 2=`jugador`,
+  3=`npc`, 4=`interactuable`, 5=`agua`. **Las capas 2-5 NO son tipos de terreno.**
+- El detector NO necesita "una capa por tipo de terreno": necesita aislar el terreno
+  del resto de cuerpos. Solucion implementada (`scripts/terrenos/terrain_detector.gd`):
+  - `LAYER_TERRENO_BIT = 6` (valor 32), libre en runtime;
+  - `_asegurar_capa_dedicada()` AGREGA ese bit al `collision_layer` del `VoxelTerrain`
+    (no le quita la capa 1, asi `camera_spring` y el movimiento fisico de los NPC
+    siguen viendolo);
+  - `collision_mask = 32` (solo ese bit) + `collide_with_areas = false` (el agua
+    decorativa es `Area3D` en la capa 5) => el rayo pega SOLO contra el terreno.
+- `terrain_block.gd` sigue SIN existir (L127/L133 del checklist): el contrato
+  `get_terrain_id()` se conserva SOLO como rama legacy opcional en `_detect_terrain()`
+  (por si reaparece un colisionador no-voxel). Hoy la rama viva es
+  `collider is VoxelTerrain` -> `_block_a_terrain(_block_id_en(...))`.
+- Criterio de cierre verificado: `scripts/terrenos/test_terrenos_b3.gd` (28 checks,
+  0 fallos, 3 corridas) monta un VoxelTerrain REAL y demuestra que `terrain_changed`
+  se dispara al cambiar un bloque REAL del mundo (GRASS -> CLAY via `VoxelTool`),
+  con el detector leyendo del mundo.
+
+### 4.5 Grupo `voxel_terrain` — quien lo puebla (MEDIDO)
+
+- El addon voxel NO registra el terreno en ningun grupo por si mismo. Medido: un
+  `VoxelTerrain` completo (generador + mesher Blocky + `VoxelViewer`) SIN detector
+  queda con `get_groups() == []` y `collision_layer == 1`. Las apariciones del literal
+  `voxel_terrain` en `addons/zylann.voxel/bin/libvoxel.*.dll` son RUTAS DE FUENTE
+  (`terrain/fixed_lod/voxel_terrain.cpp`), no un nombre de grupo.
+- **El productor del grupo es `terrain_detector.gd`**: `_resolver_terreno()` resuelve el
+  terreno (grupo -> `TerrainLocator` duck-typed -> rama de escena -> `current_scene` ->
+  arbol) y lo REGISTRA con `add_to_group("voxel_terrain")`. Con eso el grupo deja de
+  estar vacio y `debug_menu::_obtener_voxel_terrain()` (y el propio detector) tienen una
+  via rapida y estable. En el juego real esto ya ocurre: `main_island.tscn` instancia
+  `Player.tscn`, que monta el `TerrainDetector`.
 
 ## 5. Script Base: terrain_block.gd
 

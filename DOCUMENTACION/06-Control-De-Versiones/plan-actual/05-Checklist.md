@@ -60,7 +60,7 @@
 - [x] Documentar la revisión contra convenciones M05 [S]
 - [x] Documentar la revisión de binarios innecesarios [S]
 - [x] Documentar la revisión de migraciones en commits de save [S]
-- [x] Documentar la revisión de logs/ULTIMO_NUMERO en cada módulo [S]
+- [x] Documentar la revisión de logs/NUMEROS_DISPONIBLES en cada módulo [S]
 - [x] Documentar la revisión de CHECKLIST-GLOBAL en commits de módulos [S]
 - [x] Documentar la regla de tags por release [S]
 - [x] Documentar el etiquetado de builds con versión en el nombre [S]
@@ -116,12 +116,12 @@
 - [x] Documentar edge case: archivos con espacios/acentos en rutas (comillas en PowerShell) [S]
 - [x] Documentar edge case: paths largos Windows (git core.longpaths si aplica) [S]
 - [x] Documentar edge case: merge de plan-actual vs plan-inicial (nunca editar inicial) [S]
-- [x] Documentar edge case: conflicto de ULTIMO_NUMERO entre agentes [S]
+- [x] Documentar edge case: conflicto de NUMEROS_DISPONIBLES entre agentes [S]
 - [x] Documentar edge case: push rechazado por cambios remotos (pull --rebase con cuidado) [S]
 - [x] Verificar trazabilidad de los 21 puntos del plan maestro [S]
 - [x] Actualizar CHECKLIST-GLOBAL con el estado de M06 [S]
 - [x] Actualizar DOCUMENTACION/README.md con el componente 06 [S]
-- [x] Generar log de finalización y actualizar ULTIMO_NUMERO [S]
+- [x] Generar log de finalización y actualizar NUMEROS_DISPONIBLES [S]
 
 ## I. Mantenimiento y Evolución (8 ítems)
 

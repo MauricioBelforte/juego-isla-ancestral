@@ -13,7 +13,7 @@
 - Archivos: `scripts/localization/*.gd`, `locales/es.po`, `locales/en.po`, `project.godot`
 - Fecha cierre: 2026-09-15
 - Log: 920
-- Progreso: **129 [x] · 7 [?] · 0 [ ] de 136**
+- Progreso: **131 [x] · 5 [?] · 0 [ ] de 136** (cabecera corregida por atria-dawn 2026-10-09: drift detectado por DeepSeek msg 106 — los checkboxes reales ya eran 131/5, solo la cabecera estaba desactualizada)
 
 # 05-Checklist.md — Módulo 87: Localización
 

@@ -54,7 +54,7 @@ Definir el sistema de animación de la isla: flujo de producción de animación 
 | # | Requisito | Detalle |
 |---|---|---|
 | RF1 | Flujo de producción | Pipeline de animación: rig (M45) → blocking → polish → export 30fps; convenciones de exportación (FBX, T-posa, skeletons humanos/cuadrúpedos/aves/peces) |
-| RF2 | Kit de animación del jugador | Animaciones de la FSM de M11 (10 estados): idle, caminar, correr, saltar, nadar, escalar, extraer, colocar, minar, pescar, coleta de agricultura, diálogo, dormir, petit-déjener, festejos |
+| RF2 | Kit de animación del jugador | Animaciones de la FSM de M11 (**11 estados**, verificado contra `scripts/player/player_fsm.gd` L26-L36): idle, caminar, correr, saltar, caer, nadar, bucear, salir a superficie, interactuar, dormir, fabricar |
 | RF3 | Animaciones de NPC y vecinos | Animaciones de rutina y social de M19: idle, caminar, rutinas de trabajo, conversar, gestos de amistad (M20), festivos (M74) |
 | RF4 | Animaciones de fauna | Estados de M36/M65: idle, pastorear, huir, volar, nadar, dormir; manadas/bancos con variantes de fase |
 | RF5 | Animaciones de herramientas | Uso de 9 herramientas x 4 niveles (M13) con sockets de M45; swings, minado, plantación, regado, pesca, martilleo, lupa |

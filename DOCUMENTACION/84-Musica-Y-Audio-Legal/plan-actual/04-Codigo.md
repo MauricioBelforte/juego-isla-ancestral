@@ -4,6 +4,8 @@
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:25:00
 
+**Estado:** 🟡 Con dudas (98 [x] / 0 [ ] / 1 [?] = 99). El código está genuinamente respaldado: 5 scripts en `scripts/legal/` (audio_legal_manager.gd 259 L, audio_license.gd 130 L, audio_license_validator.gd 38 L, audio_credit.gd 85 L, audio_credits_generator.gd 116 L) + suite `test_audio_licenses_m84.gd` **15 checks / 0 fallos / rc=0 / 0 SCRIPT ERROR** (re-verificado 2026-10-10 por mimo-v2.6-flash-free). BUG-062 corregido (Log 1085). BUG-081 corregido (commit 6b7fdf1, 3 anotaciones de tipo). El único `[?]` (L117) es la generación de reporte de licencias por build — **no implementado**, flipado a `[?]` por atria-dawn-s2 #152 (2026-10-08). Sello §21.8: hy3 ≠ autor (Log 1085). Pendiente para ✅: cerrar L117 (implementar o delegar con dueño).
+
 ## Archivos a Crear
 
 ### 1. `scripts/legal/audio_legal_manager.gd` — Gestor legal de audio
@@ -343,3 +345,55 @@ funciones (`String`, `Dictionary`, retorno de texto) queda idéntico al de antes
 - `run_tests.py --module m131`: **3 OK, 0 FAIL** (baseline: 2 OK, 1 FAIL).
 
 **Commit:** `6b7fdf1` · **Log:** `Logs/1178-BUG-081_errores-inferencia-scripts-legales_2026-09-30_04-24-35.md`
+
+## Archivos Creados (2026-10-11, Ling 3.1 Flash / Kilo Code — encargo mimo-v2.6 msg 22, L117)
+
+> Implementación del `[?]` L117 "Generar reporte de licencias de audio por build".
+> Tool de editor/build (**NO runtime**). Log 1629. Test: 13 checks / 0 fallos / EXIT 0.
+
+### 7. `scripts/legal/audio_license_report_tool.gd` — Tool de reporte por build (nuevo)
+
+`@tool class_name AudioLicenseReportTool extends RefCounted`, API estática (invocable
+desde el editor, el pipeline de build de M112/M117 y headless):
+
+- `escanear_assets_audio(raices: Array[String]) -> Array[String]` — escaneo recursivo
+  de `.ogg/.wav/.mp3/.opus/.flac/.mid/.it/.xm`; raíces inexistentes se ignoran sin
+  error (el proyecto aún no tiene audio en disco).
+- `cargar_inventario(ruta_json) -> Dictionary` — **solo lectura** de
+  `data/legal/audio_licenses.json` (el inventario NO se modifica).
+- `construir_indice(inventario) -> Dictionary` — índice por `track_id` (minúsculas).
+- `buscar_track(archivo_ruta, indice) -> Dictionary` — matching: stem del archivo
+  (sin extensión, minúsculas) == `id` del track. `{}` si no hay registro.
+- `formatear_tipo_licencia(licencia_str) -> String` — taxonomía: CC0 / CC-BY /
+  CC-BY-SA / CC-BY-NC (rechazada para builds comerciales) / MIT / PROPIA / OTRO.
+- `generar_reporte(assets, indice, plataforma, ruta_inventario) -> String` — markdown
+  con **una sección por asset**: nombre de archivo, tipo de licencia, autor, fuente y
+  URL de origen. Fuente/URL se derivan de `autor`/`attribution` del inventario (el
+  JSON no tiene campos propios de fuente/URL; derivación documentada en el código).
+- `generar_reporte_build(plataforma, dir_salida, ruta_inventario, raices_audio) -> Dictionary`
+  — orquestador (hook de build): escanea → cruza → escribe `LICENCIAS-AUDIO.md` en
+  `dir_salida` → `push_warning` por asset sin licencia → resumen
+  `{"total", "con_licencia", "sin_licencia", "archivos_sin_licencia", "ruta_reporte", "error"}`.
+
+**Regla clave (encargo):** todo asset de audio del build aparece en el reporte; el que
+NO está en el inventario se marca **`SIN LICENCIA REGISTRADA`** (nunca se omite) y se
+loguea como warning en la consola del editor.
+
+### 8. `scripts/legal/audio_license_report_editor.gd` — Entry point de editor (nuevo)
+
+`extends EditorScript` — **tool de editor invocable** (File → Run) y hook para el
+pipeline de build (M117). Default: `Builds/<OS.get_name()>/LICENCIAS-AUDIO.md`
+(raíz del repo, gitignoreada); raíces de audio: `res://assets/audio/`,
+`assets/music/`, `assets/sfx/`, `audio/`. Si hay assets sin licencia → `push_error`
+(el build debe corregirse antes del release).
+
+### 9. `scripts/legal/test_audio_license_report_m84.gd` — Test headless (nuevo)
+
+`extends SceneTree`. **Simulación determinista documentada** (criterio de cierre del
+encargo — el proyecto aún no tiene archivos de audio en disco): crea 4 fixtures
+temporales en `user://m84_report_test/` — 3 registrados en el inventario
+(`aurora_main.ogg` PROPIA, `ost_piano_01.ogg` CC-BY, `sfx_ambiente_01.wav` CC0) +
+**1 inyectado a propósito** (`sfx_no_registrado.wav`) para demostrar el caso
+`SIN LICENCIA REGISTRADA`. **13 checks / 0 fallos / EXIT 0** (Godot 4.7.2 headless,
+2026-10-11). Limpieza de fixtures al final. Sin regresión: `test_audio_licenses_m84.gd`
+re-corrido → EXIT 0 (15 checks).

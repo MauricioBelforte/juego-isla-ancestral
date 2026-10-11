@@ -240,3 +240,55 @@ Sistema de logging del juego (formato `[M37]` para filtrar el modulo). No se cre
 - M53/M52: el panel de donación usa DonationService.get_donatable_items(exhibition_id) y donate(); feedback de rechazo con DonationResult.reason (ya traducible i18n).
 - M36: al implementar avistamientos, registrar directamente con CollectionRegistry.register_item("fauna", especie_id) + añadir la exposición fauna a exhibiciones.json.
 - La recompensa de cada exposición vive en exhibiciones.json (recompensa_item_id) — no hardcodear en scripts.
+
+
+---
+
+## Slice RF2d — Versionado del bloque de guardado (DeepSeek-V4.1-Flash, 2026-10-09, Log 1536)
+
+Cierra el pendiente del diseno seccion 8 ("Versionado del bloque para migraciones futuras").
+Aditivo: NO cambia el esquema de datos (`{piezas, recompensas}` sigue siendo valido).
+
+- `collection_registry.gd`:
+  - `const VERSION_GUARDADO := 1` (v0 = bloque legado sin campo "version"; v1 = con "version").
+  - `get_save_data()` ahora incluye `"version": VERSION_GUARDADO`.
+  - `restore_save_data(data)`: lee la version; si `version > VERSION_GUARDADO` **ignora el bloque
+    sin degradar el estado actual** (regla dura M59 "nunca degradar un save mas nuevo") y emite
+    `push_warning`. Si no, migra con `migrar_bloque()` y carga.
+  - `migrar_bloque(datos, desde)`: migra v0->v1 (no-op estructural + normaliza campos faltantes o
+    invalidos), devuelve una copia con la version actualizada; **no muta** la entrada.
+- Test `scripts/museum/test_museo_rf2d.gd` (28 checks / 0 fallos, EXIT 0 x3; piso `CHECKS_MINIMOS=28`
+  MEDIDO; guardian de 3 capas probado EN ROJO por 2 inyecciones: piso+1 y aborto de runtime que
+  nombra los bloques C..G). Bloques: A versionado presente; B round-trip al 50% de una exposicion;
+  C round-trip al 100% + recompensa reclamada; D migracion del bloque legado v0; E guardia de version
+  futura (no degrada); F purga de exposicion huerfana; G museo al 50% y 100% (K.172).
+
+**Archivos:** `scripts/museum/collection_registry.gd` (modificado), `scripts/museum/test_museo_rf2d.gd` (nuevo).
+**Pendiente del director:** flip de C.60 (L60), K.169 (L169) y K.172 (L172) en el 05-Checklist (el
+implementador no auto-marca). Nota: `test_museo_rf3.gd` (agnes) NO tiene contador ni piso y su
+`_check(true, ...)` (L48) es infalsable -> recomiendo endurecerlo con el mismo patron.
+
+---
+
+## Slice K.167/K.170 — Escritura atómica del bloque + compat autosave (DeepSeek-V4.1-Flash, 2026-10-09, Log 1542)
+
+Cierra dos ítems de la sección K (persistencia). Aditivo: **NO se tocó código de producción**.
+
+- **K.167 (escritura atómica del bloque).** Reúso del writer de M59: `save_writer.gd::write_atomic()`
+  ya escribe `.tmp`, lo re-parsea (verifica) y recién entonces `DirAccess.rename_absolute` a `.save`.
+  El bloque del museo es **UNA** sección ISaveProvider (`CollectionRegistry.get_section_name() == "collections"`,
+  con `version` + `piezas` + `recompensas`) → bloque único.
+- **K.170 (compat del autosave).** `save_manager.gd::request_save()` rota el backup **antes** de escribir
+  (orden correcto M59 iter.2) y recolecta la sección vía el proveedor registrado. Probado el motivo
+  `auto_dia` y el disparador por EventBus (`calendar.day_started`).
+- Test `scripts/museum/test_museo_persistencia.gd` (35 checks / 0 fallos, rc=0 x3; piso `CHECKS_MINIMOS=35`
+  MEDIDO; guardián de 3 capas probado EN ROJO 3/3). Bloques: A `request_save` deja `.save` sin `.tmp`/`.bak`
+  y carga OK; B bloque único; C fallo de escritura forzado (directorio en el `.tmp`) → `save_failed`, sin
+  `.save` parcial, bloque anterior recuperable por `.bak` (RECOVERED); D corte tras la rotación → RECOVERED;
+  E autosave por motivo + EventBus; F museo vacío → bloque válido, carga OK, 0%.
+
+**Archivos:** `scripts/museum/test_museo_persistencia.gd` (nuevo). Producción: sin cambios.
+**Pendiente del director:** sincronizar la fila GLOBAL de M37 (quedó en `73/148`; el checklist real es
+`85/147` tras el empuje de agnes) y decidir sobre el ítem borrado en la sección F
+(`Rollback del registro si falla la escritura posterior al consumo [M]`, presente en HEAD y ausente en el
+worktree: mi bloque C lo prueba).

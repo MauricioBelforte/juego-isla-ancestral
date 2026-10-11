@@ -8,18 +8,22 @@
 
 ## Reserva actual
 
-- **ACTIVA:** Reserva Log 1018 agnes-3-flash/Kilo Code (2026-09-18 18:35, V3 pool) — M66 en curso
-  (iter. acotada gate CI + auditoría V0): los 2 tests M66 (`test_anti_softlock_m66.gd` +
-  `test_fallbacks_m66.gd`) **no estaban** cableados en el gate duro `quality.yml` → los cableo;
-  confirmo que los 7 `[?]` son externos (M22/M26/M64/M27). M66 pasa de `🟡 Con dudas` a
-  **core verificado + gate CI, esperando externos**.
+- **ACTIVA:** Reserva **Ling 3.1 Flash / Kilo Code (2026-10-10 21:35)** — **QA cruzado
+  §21.8** (encargo del director, msg 12 del canal Ling-3.1-Flash). Verificador
+  independiente (≠ agnes ≠ hy3). Alcance: conteo estricto vs Totales vs GLOBAL;
+  muestreo §21.8.2.b (mín 5 `[x]` por verbos de creación); re-corrida headless
+  (`C:\Temp\godot\godot472.exe`) de la suite — cascada de recovery rota (BUG-123,
+  fix 5f457af, softlock_guard.gd:133 get 1-arg) — y verificación del guardián
+  anti-falso-verde (CHECKS_MINIMOS=19, 5 bloques). **READ-ONLY: flips al director.**
+  Previo: Reserva Log 1018 agnes-3-flash/Kilo Code (2026-09-18 18:35, V3 pool) —
+  iter. acotada gate CI (tests cableados en quality.yml), liberada.
 
 ## Detector central
 
 - [x] Definir la arquitectura del detector central (SoftlockGuard) [M]
 - [x] Implementar tick de 60 s reales del detector [S]
 - [x] Implementar disparo del detector en transiciones de escena [S] — glm-5.3-flash 2026-09-01: EventBus.infra.carga_iniciada (M40) → forzar_chequeo (testeado)
-- [?] Implementar disparo del detector al guardar [S] — SaveManager.save_completed (M59) → forzar_chequeo — **FLIP atria-dawn (Log 1029, 2026-09-18): el claim «testeado» es FALSO.** El código de producción SÍ está correcto (`softlock_guard.gd:75-76` conecta `save_completed` → `forzar_chequeo("guardado")` con guarda `has_signal`), pero `test_anti_softlock_m66.gd:48-49` instrumenta mal la prueba: crea `Node.new()` y le aplica `set_script(irecoverable.gd)`, pero `IRecoverable` es `extends RefCounted` (no Node) → **ERROR en runtime** «Script inherits from native type 'RefCounted', so it can't be assigned to an object of type 'Node'» en CADA ejecución del gate CI. El script no se aplica, `registrar_handler` recibe un Node desnudo y el check es `_check(true, ...)` — **literalmente siempre pasa**. Resultado: exit 0 y gate verde a pesar del error. Dos QAs previos (hy3 Log 744, Hy3 Log 953) reportaron «0 fallos, exit 0» leyendo solo el exit code (lección 20 confirmada de nuevo). **Fix sugerido:** `var handler := IRecoverable.new()` + sustituir `_check(true)` por un check real (verificar que el handler quedó registrado y/o que `forzar_chequeo` recorrió las invariantes).
+- [x] Implementar disparo del detector al guardar [S] — SaveManager.save_completed (M59) → forzar_chequeo — **RE-SELLO §21.8 (atria-dawn-s3, 2026-10-10, QA Ling-3.1-Flash msg 13):** el claim «testeado» VOLVIÓ a ser genuino. El test fue reparado por agnes-3-flash (2026-10-08, Log 1464: `M66HandlerRegistro` reemplaza el `set_script` roto sobre `Node.new()`), verificado triple: Hy3 Log 1464, red probe Log 1470 (bug reintroducido → 2 fallos + EXIT 1), y re-corrida Ling 2026-10-10 (`test_anti_softlock_m66.gd` 19/0, `test_fallbacks_m66.gd` 8/0, 0 SCRIPT ERROR, cascada de recovery rota ejercida con checks reales). Revierte el flip #169 (Log 1029).
 - [x] Implementar chequeo por invariantes con orden de prioridad [M]
 - [x] Implementar plan de recuperación en cascada [M]
 - [x] Implementar registro de eventos de recuperación [S]
@@ -188,7 +192,7 @@
   cuando esos módulos expongan la API.
 - **Estado:** M66 pasa de `🟡 Con dudas` a **core verificado + gate CI, esperando externos** (110/117).
 
-**Totales:** 117 ítems · Completados: 109 · Pendientes: 0 · No resueltos: 8.
+**Totales:** 117 ítems · Completados: 110 · Pendientes: 0 · No resueltos: 7.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 109 [x] / 0 [ ] /

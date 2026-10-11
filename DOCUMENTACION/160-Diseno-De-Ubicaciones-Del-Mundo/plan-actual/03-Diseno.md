@@ -328,7 +328,7 @@
 **Tipo:** Bosque
 **Isla:** Raíz
 **Requisitos de Acceso:** Ninguno
-**Descripción:** Bosque denso con árboles grandes, arbustos y flora多样性. Recursos de madera.
+**Descripción:** Bosque denso con árboles grandes, arbustos y flora variada. Recursos de madera.
 
 **Objetos Fijos:**
 | # | ID M159 | Objeto | Posición | Rotación | Notas |

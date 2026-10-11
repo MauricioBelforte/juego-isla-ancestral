@@ -388,7 +388,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 307 items - Completados: 153 - Pendientes: 91 - No resueltos: 63. (BUG-070 lote 8 + re-verificacion DeepSeek #112, atria-dawn 2026-10-09: 49 [x] degradados a [?] en total - inflacion confesa M114 L404 + Patron D + Familia A sin artefacto en disco. Conteo real en marcas: 153/91/63.)
+**Totales:** 307 items - Completados: 169 - Pendientes: 82 - No resueltos: 56. (BUG-070 lote 8 + re-verificacion DeepSeek #112, atria-dawn 2026-10-09: 49 [x] degradados a [?] en total - inflacion confesa M114 L404 + Patron D + Familia A sin artefacto en disco. Conteo real en marcas: 153/91/63.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"299 items - Completados: 299 - Pendientes: 0"* — un

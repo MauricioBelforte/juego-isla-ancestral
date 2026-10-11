@@ -116,7 +116,7 @@ Ejemplo 3: Jugador con Botas de nieve sobre Pavimento
 
 ### 4.2 Alternativa 2: Deteccion por Metadata de TileMap
 - **Descripcion:** Usar metadata de tiles para identificar tipo de terreno
-- **Ventajas:** Integrado con sistema de tiles, no requiere nodos额外
+- **Ventajas:** Integrado con sistema de tiles, no requiere nodos adicionales
 - **Desventajas:** Acoplado a TileMap, dificil de extender a objetos 3D
 - **Decision:** Rechazada por limitaciones de compatibilidad con terrenos 3D
 
@@ -143,7 +143,7 @@ Cada tipo de terreno se representa como un ScriptableObject (TerrainData) que co
 - Configuracion visual
 
 ### 5.2 Raycast Vertical Simple
-- Raycast向下 desde la posicion del jugador (pies)
+- Raycast hacia abajo desde la posicion del jugador (pies)
 - Detecta la layer del terreno golpeado
 - Consulta el TerrainDataProvider para obtener el TerrainData correspondiente
 - Retorna el modificador de velocidad

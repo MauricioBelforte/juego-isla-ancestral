@@ -190,16 +190,19 @@ M21/M20.
 
 | Sección | Completados | Total | % |
 |---------|-------------|-------|---|
-| FSM | 17 | 18 | 94% |
-| Rutinas | 12 | 15 | 80% |
-| Necesidades | 8 | 10 | 80% |
+| FSM | 19 | 20 | 95% |
+| Rutinas | 14 | 15 | 93% |
+| Necesidades | 9 | 10 | 90% |
 | Navegación | 12 | 15 | 80% |
 | Social | 7 | 10 | 70% |
 | Reacciones | 7 | 10 | 70% |
-| NPCManager | 10 | 10 | 100% |
-| Integración | 6 | 10 | 60% |
-| Testing | 18 | 18 | 100% |
-| **TOTAL** | **100** | **117** | **85%** |
+| NPCManager | 11 | 11 | 100% |
+| Integración | 5 | 10 | 50% |
+| Testing | 16 | 16 | 100% |
+| BUG-129 (causa raíz) | 2 | 2 | 100% |
+| **TOTAL** | **102** | **119** | **86%** |
+**Totales:** 119 items - Completados: 102 - Pendientes: 0 - No resueltos: 17.
+
 
 ## Notas del Agente
 
@@ -239,3 +242,28 @@ M21/M20.
 **Veredicto QA sec21.8:** ✅ Verificado por hy3 2026-09-19 - implementacion genuine, tests reales, fixes de boot integrados.
 
 **Firma:** Hy3 / WorkBuddy (Tencent Hunyuan) - 2026-09-19
+
+## Ítems agregados — BUG-129 (causa raíz, iter. 2026-10-09)
+
+- [x] Fix causa raíz BUG-129: `state_machine.register_state()` parentea los estados (`add_child` si `get_parent()==null`) — antes los 8 estados `.new()` por NPC nunca entraban al árbol (7×8=56 huérfanos). A/B con boot real: 56→0. [S]
+- [x] Harness de medición `scripts/ia_npc/test_bug129_estados_orphan.gd` (SceneTree; clasifica strays states/mesh/node3d; exit 0 = 0 states orphans). [S]
+
+Totales tras iter.: **102/119 [x] · 17 [?]** (los 2 ítems nuevos son del fix; los [?] previos intactos).
+
+## Notas del Agente — BUG-129 causa raíz (mimo-v2.6-flash-free / opencode)
+
+**Fecha:** 2026-10-09 22:35 | **Encargo:** msg 89 (atria-dawn)
+
+### Diagnóstico (verificado en disco, no supuesto)
+- `npc_agent.gd` L71-87: 8 estados `.new()` → `register_state()` (`state_machine.gd` L37) los guardaba en `_states` SIN `add_child` → 56 Nodes parentless = huérfanos de GdUnit (parte de los 201/257 del BUG-129).
+- NO son ciclos de referencias (caso "simple"): needs/blackboard/plan_stack = RefCounted; routine_player/nav_agent/state_machine = parenteados. Único leak de M64 = estados.
+
+### Evidencia A/B (binario real 4.7.2 headless, boot completo, 7 NPCs registrados)
+- ANTES: `total_strays=257 states=56 mesh=157 node3d=44` → exit 1 (calza 1:1 con la tabla del director).
+- DESPUÉS: `total_strays=201 states=0 mesh=157 node3d=44` → exit 0 — "states orphans = 0".
+- Regresión: `test_ia_npc_m64_iterN.gd` 82 checks, 0 fallos, exit 0, 0 SCRIPT ERROR.
+
+### Lo que queda fuera de mi alcance (honestidad)
+- 201 strays restantes (**CORREGIDO 22:50 tras sonda v2**, antes se atribuían mal a M19): son de **M50** — `_poblar()` instancia el GLB y el `continue` del filtro `h < 3` (en agua, 44 ítems) lo descarta SIN `free()` → 44 raíces + 157 mallas huérfanas. Los 65 plantados sí cuelgan del contenedor (fix Step 5 correcto, comprobado: 65 hijos in-tree). Patch de 1 línea (`inst.free()`) requiere autorización del director (M50 pudo quedar con dueño bloqueado).
+- Suite debug (`tests/unit/debug/test_debug_menu.gd`) **ROTA por WIP ajeno sin commitear** (L44/L79: `_limpiar_huerfanos_boot()` a columna 0 dentro de funciones = parse error). No tocada; medición alternativa con harness propio (binario real).
+- `11-BUGS.md` BUG-129: no editado (dueño/director; "sin flips propios — yo marco después de verificar").

@@ -13,7 +13,7 @@
 | 4 | Logs de carga | ✅ Registro de operaciones de carga: archivo, progreso, éxito/fracaso, tiempo |
 | 5 | Logs de generación | ✅ Registro de generación procedural: seed, duración, chunks generados, eventos anómalos |
 | 6 | Logs de chunks | ✅ Registro de loading/unloading: posición, estado, memoria, tiempo |
-| 7 | Logs de NPC | ✅ Registro de comportamiento: estado actual,目标位置, eventos, errores de pathfinding |
+| 7 | Logs de NPC | ✅ Registro de comportamiento: estado actual, posición objetivo, eventos, errores de pathfinding |
 | 8 | Logs de misiones | ✅ Registro de progreso: inicio, pasos completados, recompensas, fallos |
 | 9 | Logs de networking | ✅ Registro de operaciones: conexión, paquetes, latencia, desconexiones (si aplica M76/M77) |
 | 10 | Logs de analytics | ✅ Registro de eventos de telemetría: eventos enviados, fallos de envío (M104) |
@@ -30,7 +30,7 @@
 
 | Enfoque | Pros | Contras | Decisión |
 |---|---|---|---|---|
-| Godot内置print() | Simple, nativo | Sin niveles, sin rotación, sin estructuración | ❌ Descartado |
+| Godot print() | Simple, nativo | Sin niveles, sin rotación, sin estructuración | ❌ Descartado |
 | Sistema propio simple | Control total | Requiere implementación desde cero | ⚠️ Parcial |
 | Logger estructurado JSON | Parseable, herramientas | Más verboso en archivo | ✅ ELEGIDO (híbrido) |
 | Servicio remoto (Sentry) | Crash reporting pro | Costo, complejidad, sobrekill | ❌ Descartado (M122 lo maneja) |

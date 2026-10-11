@@ -53,7 +53,7 @@
 - [x] Fijar formato de firmas (Modelo + Plataforma) [S]
 - [x] Fijar español como idioma único de nombres de módulos y archivos [S]
 - [x] Verificar consistencia de nombres entre repo y carpetas (Isla Ancestral) [S]
-- [?] Documentar la regla de números secuenciales (README + Logs/ULTIMO_NUMERO) [S]
+- [?] Documentar la regla de números secuenciales (README + Logs/NUMEROS_DISPONIBLES) [S]
 - [ ] Documentar la excepción: `00-PLAN-INICIAL` y `01-Fundamentos` son raíz histórica [S]
 
 ## C. Estructura de carpetas (10)
@@ -61,7 +61,7 @@
 - [x] Documentar la jerarquía raíz (AGENTS, README, CHECKLIST-GLOBAL, .gitignore) [S]
 - [x] Documentar DOCUMENTACION/ (5 generales + README + 00 + NN-componentes + investigación) [S]
 - [x] Documentar plan-inicial/ (inmutable) y plan-actual/ (vigente) [S]
-- [?] Documentar Logs/ con rotated/ y ULTIMO_NUMERO.txt [S]
+- [?] Documentar Logs/ con rotated/ y NUMEROS_DISPONIBLES.txt [S]
 - [x] Documentar Obsoletos/ y su nomenclatura de respaldo [S]
 - [x] Documentar scripts/ (kit del protocolo; backups/ no versionado) [S]
 - [?] Documentar carpetas futuras de Unity (Assets/, Builds/, Obsoletos/, Epics/) fuera de DOCUMENTACION [S]
@@ -163,7 +163,7 @@
 - [x] Verificar que los pendientes tienen dueño explícito [S]
 - [x] Actualizar CHECKLIST-GLOBAL con el estado de M02 [S]
 - [x] Actualizar DOCUMENTACION/README.md con el componente 03 [S]
-- [x] Generar log de finalización (Logs/06) y actualizar ULTIMO_NUMERO [S]
+- [x] Generar log de finalización (Logs/06) y actualizar NUMEROS_DISPONIBLES [S]
 - [x] Copiar plan-inicial → plan-actual (espejo vigente) [S]
 - [x] Verificar que el checklist supera los 100 ítems (conteo final) [S]
 - [?] Registrar este módulo como plantilla de calidad para componentes futuros [S]
@@ -201,7 +201,7 @@
 - Corregí el bloque `Totales` (declaraba "Completados: 133" con 0 marcas reales).
 
 ### Lo que NO pude hacer (honestidad obligatoria)
-- **El módulo es de la era Unity** (2026-08-16). Varios ítems referencian Unity/C#/`Assets/`/`Logs/rotated/`/`ULTIMO_NUMERO.txt`, todos obsoletos tras la migración a Godot 4.x. Los marqué `[?]`, no `[x]`.
+- **El módulo es de la era Unity** (2026-08-16). Varios ítems referencian Unity/C#/`Assets/`/`Logs/rotated/`/`NUMEROS_DISPONIBLES.txt`, todos obsoletos tras la migración a Godot 4.x. Los marqué `[?]`, no `[x]`.
 - La sección K (edge cases) y B-12 no están documentadas en `plan-actual/` → quedaron `[ ]`.
 
 ### Recomendaciones para el próximo agente

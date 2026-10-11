@@ -62,3 +62,36 @@ Las sondas son archivos temporales `_probe_*.gd` que se **borran** al terminar l
   `move_speed = 25.0` en modo DEV, pisando el valor serializado 5.0). Si eso cambia a diferido, los
   bloques A y B hay que revisarlos.
 - **`--quit` enmascara los abortos.** Por eso el comando canónico es el del CI, sin `--quit`.
+
+## 5. Suite del núcleo aditivo (2026-10-10 — Log 1576, DeepSeek-V4.1-Flash)
+
+Se añade una **suite nueva e independiente** para el núcleo aditivo (§9 de `04-Codigo.md`), **sin tocar** la suite original `test_player_m11.gd`:
+
+- **Script:** `game/isla-ancestral/scripts/player/test_player_core_m11.gd`
+- **Comando canónico** (el mismo del CI, **sin** `--quit`):
+
+```bash
+godot --headless --path game/isla-ancestral --script res://scripts/player/test_player_core_m11.gd
+```
+
+### 5.1 Alcance
+
+| Qué | Cómo | Bloque |
+|---|---|---|
+| FSM: 11 estados, nombres, permisos, transiciones válidas/inválidas, derivación desde snapshot, umbral de aire 20% | instanciar `PlayerFSM` (vía `preload`) y ejercitar la API | A (33 checks) |
+| Energía: correr 1/min, regen 1/min (neto 0/min), fatiga al 30%, auto-descanso, dormir/descanso, sin deuda permanente | instanciar `PlayerEnergy` | B (28) |
+| Selección: 6 personajes, ids, stats iguales, seleccionar/existe, serializar/deserializar | instanciar `CharacterSelector` | C (20) |
+| Contrato: métodos publicados y callables | `preload` + invocación | D (6) |
+
+### 5.2 Qué NO cubre
+
+No verifica integración con `Player.tscn`, HUD, persistencia ni animación — igual que el núcleo, que es **modelo puro**. **No sustituye** a la suite original: cada una es evidencia de cosas distintas.
+
+### 5.3 Guardianes (mismas 3 capas, probadas en rojo)
+
+`BLOQUES_ESPERADOS = ["A","B","C","D"]`, piso **`CHECKS_MINIMOS = 87`** (medido en verde, no estimado) y `_summary()` diferido con `call_deferred` en `_init()`. Se usa `preload()` (no el `class_name` global) para no depender de la caché de clases en un checkout limpio (**trampa 123**).
+
+### 5.4 Riesgos conocidos
+
+- Los checks de energía afirman **1/min** (D1 **resuelta** por el director, msg 137: gana `01-Requerimientos`). Correr cuesta 1/min y la regen es 1/min siempre → **balance neto 0/min**: la energía no baja por caminar/correr (L70 **estructural**, no clamp). Los checks B14/B15 (correr 100 min → energía `> 0` y `== 100`) fijan el caso extremo.
+- El bloque A afirma **11** estados. Si se resuelve **D2** a 9/10, hay que ajustar `BLOQUES_ESPERADOS` y el conteo.

@@ -235,3 +235,141 @@ godot --headless --path game/isla-ancestral --script res://scripts/player/test_p
 python scripts/validar_workflows.py --selftest   # 6/6
 python scripts/validar_workflows.py              # 0 problemas + 7 avisos de deuda ajena (BUG-078)
 ```
+
+## 9. Núcleo aditivo de M11 — FSM, energía y selección (2026-10-10 — Log 1576, DeepSeek-V4.1-Flash)
+
+### 9.1 Corrección de premisa (medida antes de escribir)
+
+El mensaje 133 del director asigna «M11-Sistema-De-Combate». La medición dice otra cosa:
+
+| Premisa del mensaje 133 | Medición |
+|---|---|
+| «M11-Sistema-De-Combate» | `CHECKLIST-GLOBAL.md:89` → **`11-Personaje-Del-Jugador`** (Alta, complejidad 4). El combate de **M164** depende de M11, pero **M11 no es un módulo de combate**: su `05-Checklist.md` no tiene sección de combate (A–J son físicas / FSM / interacción-luz / energía-bienestar / animación-audio / documentación / verificación / selección / terrenos). |
+| «53/123 con 70 `[ ]`» | **`53 [x]` / `70 [?]` / `0 [ ]` = 123.** El conteo 53/123 es correcto; el glifo es **`[?]`**, no `[ ]`: **0 huecos reales**. |
+| Dueño | La fila ya dice `DeepSeek-V4.1-Flash` (reasignado P-14, Log 1130). |
+
+### 9.2 Decisión de alcance: núcleo ADITIVO, `player.gd` intacto
+
+`player.gd` está **sucio por un refactor ajeno no commiteado** (M156): `git diff HEAD --numstat` = `42/13`, y **borró `_equip_speed_mult`**. Por eso:
+
+- **NO** se reimplementa la FSM dentro de `player.gd`: mezclaría trabajo propio con ajeno y rompería la suite existente (su bloque C5 accede a `_equip_speed_mult` → `SCRIPT ERROR` contra el worktree).
+- El núcleo va en **3 scripts nuevos aditivos** (`RefCounted`, sin escena ni autoload):
+
+| Archivo | Qué modela | Sección del checklist |
+|---|---|---|
+| `scripts/player/player_fsm.gd` | FSM pura: 11 estados, permisos, grafo de transiciones validado, `derivar(snapshot)` | C (FSM) |
+| `scripts/player/player_energy.gd` | Energía cozy: correr 1/min, regen 1/min **siempre** → balance neto 0/min, fatiga al 30%, auto-descanso, sin deuda permanente | E (energía/bienestar) |
+| `scripts/player/character_selector.gd` | Catálogo de 6 personajes (todos con stats iguales), selección, serialización | I (selección) |
+
+### 9.3 Contratos publicados (modelo puro, aún NO cableados al runtime)
+
+- `PlayerFSM.derivar(snapshot: Dictionary) -> int` — estado derivado; prioridad sleep/craft/interact > agua(aire) > aire(salto/caída) > suelo.
+- `PlayerFSM.transicionar(destino) -> bool` — única vía validada de cambio explícito; **rechaza** transiciones no declaradas (no hay «estados imposibles»).
+- `PlayerFSM.permite(accion) -> bool` — fail-closed.
+- `PlayerEnergy.actualizar(delta, corriendo, en_movimiento) -> bool`; `puede_correr()`; `recargar_dormir()` (+100%); `recargar_descanso()` (+30%). Constantes: `COSTO_CORRER_POR_MINUTO = 1.0` y `REGEN_POR_MINUTO = 1.0` (regen **siempre**, incluso en movimiento) → **balance neto 0/min** (ver §9.4, D1 resuelta).
+- `CharacterSelector.serializar()/deserializar(data)`.
+
+### 9.4 Divergencias de diseño — D1 RESUELTA; D2/D3 reportadas
+
+El director advirtió: *«si el diseño y el código divergen, reporta la divergencia, no la resuelvas tú»*. Medidas:
+
+| # | Divergencia | Fuentes (medidas) | Qué hizo el núcleo |
+|---|---|---|---|
+| **D1** | **Ritmo de energía ×720.** `03-Diseno.md:18` → `DRAIN_RUN = 12/s` y `REGEN = 8/s`; `01-Requerimientos.md:63,66` → correr `1/minuto` y regen `1/minuto`. Además `01-Requerimientos.md:70` fija la regla cozy *«la energía NUNCA llega a cero por caminar o correr»*, que los valores de `03-Diseno` **contradicen** (100 / 12 = 8,3 s corriendo para agotar). | 03-Diseno §1 vs 01-Requerimientos §6.1 | **RESUELTA por el director (msg 137): gana `01-Requerimientos`.** El núcleo usa `COSTO_CORRER_POR_MINUTO = 1.0` y `REGEN_POR_MINUTO = 1.0` (regen **siempre**, L66) → **balance neto 0/min**: la energía **no baja** por caminar/correr (solo por herramientas, M13). La suite afirma 1/min y el neto 0 (ver nota debajo). |
+| **D2** | **Nº de estados.** `01-Requerimientos.md:23` (RF4) lista **9** (idle, run, sprint, jump, swim, dive, interact, sleep, craft — sin WALK/FALL/SURFACE); `03-Diseno.md:25-32` (§2) enumera **11**; `03-Diseno.md:101` dice «10 clips». El histórico del QA habla de «FSM de 10 estados». | 01-Req §2 vs 03-Diseno §2/§7 | Implementa los **11** de `03-Diseno §2` (el documento técnico del módulo). |
+| **D3** | **Rango de interacción.** `03-Diseno.md:20` → `RANGO_INTERAC = 4 m`; el `interaction_manager.gd` real (M70) usa `DEFAULT_RANGO := 2.5`. | 03-Diseno §1 vs 04-Codigo §2 | No se toca (es M70). Ya documentado; se repite aquí por completitud. |
+
+> **Nota de diseño (D1) — por qué L70 emerge estructuralmente.**
+> La regla cozy de `01-Requerimientos.md:70` («la energía NUNCA llega a cero por caminar o
+> correr») **no es un clamp cosmético**: emerge de las constantes. Correr cuesta `1/min` y la
+> regeneración es `1/min` **siempre** (incluso en movimiento, L66) → el balance de correr es
+> **neto 0/min**. El próximo agente que toque estas constantes debe entender que **no puede subir
+> `COSTO_CORRER_POR_MINUTO` sin bajar `REGEN_POR_MINUTO`** (o volver condicional la regen al
+> movimiento): hacerlo **violaría L70** — la energía empezaría a bajar por correr. Los checks
+> B14/B15 de la suite (correr 100 min desde el máximo → energía `> 0` **y `== 100`**) fijan ese
+> caso extremo y delatan cualquier clamp mágico que se introduzca.
+
+### 9.5 Qué NO cubre este núcleo
+
+No cablea nada a `Player.tscn`: no hay HUD de stamina, no hay consumo del snapshot desde el jugador real, no hay persistencia en `GameState`, no hay animación/audio. Es **modelo + contrato** — la parte verificable sin tocar el archivo sucio ajeno. La integración con el runtime sigue pendiente (dueño: M11, tras resolverse D2).
+
+
+> **Actualización (§9.6, 2026-10-10 — Log 1592):** el cableado aditivo al nodo del jugador ya está
+> implementado (FSM viva, energía corriendo por frame, selector con persistencia). Lo que sigue
+> pendiente del runtime es el **sprint** (input `correr`), el HUD de stamina (M53) y la persistencia
+> en M59. El texto de arriba se conserva como estado histórico de la iteración del núcleo.
+
+### 9.6 Cableado del núcleo al nodo del jugador (2026-10-10 — Log 1592, DeepSeek-V4.1-Flash)
+
+`player.gd` quedó limpio (commit `c5cdb37`, s2: integración M156 + inventario reparado). Con el
+bloqueo resuelto, el núcleo se cablea de forma **aditiva** — **sin editar `player.gd`**:
+
+| Archivo | Rol |
+|---|---|
+| `scripts/player/player_core_m11.gd` | Nodo (`extends Node`, **sin `class_name`**) **hijo de `Player`** en `Player.tscn` (nodo `NucleoM11`). Instancia la FSM, la energía y el selector, y los alimenta cada frame de física desde el `CharacterBody3D` padre por **duck-typing** (`velocity`, `_on_ground`, `_en_agua()`). Expone estado/energía para el HUD (M53) y la selección para la persistencia (M59). |
+| `scripts/player/test_player_cableado_m11.gd` | Suite headless: **49 checks / 0 fallos / EXIT 0 ×3**, piso `CHECKS_MINIMOS=49` MEDIDO; guardián probado **en rojo** (P1 piso+1 → EXIT 1; P2 aborto de runtime en el bloque C → nombra el bloque + EXIT 1). |
+
+**Qué está VIVO (medido) y qué es HOOK:**
+
+- **FSM: viva.** IDLE/WALK/JUMP/FALL/SWIM se derivan del runtime real (velocidad + `_on_ground` del
+  padre); bloque B de la suite.
+- **Energía: corre cada frame** (regen 1/min clampeada al máximo). El **drenado** (correr /
+  herramientas) NO se ejercita hoy porque `player.gd` **no tiene sprint**: el adaptador expone
+  `marcar_corriendo()` y `consumir_energia(costo)` como **hooks**, sin inventar un sprint (el
+  director pidió coordinar los hooks, no reconstruirlos). El estado RUN y el drenado se ejercitan en
+  la suite vía el hook.
+- **Selector: vivo** (selección + `serializar`/`deserializar`).
+
+**Por qué NO se editó `player.gd`:** su suite (`test_player_m11.gd`) tiene invariantes **invertibles**
+B6/B7 que afirman que el jugador NO expone métodos `stamina`/`fsm`; meter la FSM dentro de `player.gd`
+las rompería (señal de "invertir el check", no una regresión) y mezclaría trabajo propio con un
+archivo compartido recién limpiado. El nodo adaptador las deja intactas (verificado: 30/0).
+
+> **Actualización (§9.7, 2026-10-10 — Log 1594):** el **sprint** ya está implementado en el adaptador
+> (autorizado por el director en el canal 141, que aceptó el cableado 49/0). El texto de §9.6 se
+> conserva como estado de la iteración del cableado (Log 1592). Lo que sigue **pendiente** del
+> runtime es el HUD de stamina (M53), la persistencia en M59 y los hooks de telemetría (s2,
+> **encolados** por el director para no pisarse sobre `Player.tscn`).
+
+### 9.7 Sprint en el adaptador — drenado real y L70 estructural (2026-10-10 — Log 1594, DeepSeek-V4.1-Flash)
+
+Autorizado por el director (canal **141**): «Agregá sprint a `player_core_m11.gd` (LShift, ~6.5 m/s)
+— **en el adaptador, NO en `player.gd`**», «Cableá `marcar_corriendo()` al drenado de energía
+(`COSTO_CORRER_POR_MINUTO = 1.0`)», «Verificá que **L70 se mantiene estructural**», «Suite nueva o
+extender la existente con checks de sprint + drenado».
+
+**Implementación (todo dentro de `scripts/player/player_core_m11.gd`; `player.gd` intacto):**
+
+- **Constantes de diseño** (`03-Diseno.md` §1 / `05-Checklist` L35-L36): `VELOCIDAD_CAMINAR := 4.2`,
+  `VELOCIDAD_CORRER := 6.5`, `FACTOR_SPRINT := VELOCIDAD_CORRER / VELOCIDAD_CAMINAR` (≈ **1.548**).
+- **Entrada**: `leer_sprint()` usa la acción `correr` del InputMap **si existiera**; hoy **no existe**
+  (medido: `project.godot` no la declara), así que cae a `Input.is_key_pressed(KEY_SHIFT)` — **LShift**
+  directo, como `player.gd` sondea el resto de sus teclas. En headless se fuerza con el hook
+  `forzar_sprint_test(0|1|-1)` (no se inyectan `InputEventKey` en modo `--script`).
+- **Gate del sprint** (un tic en `actualizar()`): `quiere_correr = _corriendo (hook) OR leer_sprint()`;
+  el sprint **efectivo** exige además **movimiento** (`magnitud_direccion ≥ 0.1`), **permiso de la FSM**
+  (`fsm.permite("correr")` → no corre en JUMP/SWIM/…) y **energía disponible** (`energia.puede_correr()`).
+- **Velocidad**: `_aplicar_velocidad_sprint()` **escala** el `move_speed` del padre por `FACTOR_SPRINT`
+  (capturando la base la 1ª vez) y la **restaura** al soltar. Se escala — **no** se fija a 6.5 — para
+  **preservar** el multiplicador por terreno y por equipamiento (M156/M13) que `player.gd` ya aplica en
+  `_current_effective_speed`. Es el **único** campo que el adaptador escribe; la API pública de `Player`
+  no cambia.
+- **Drenado**: `marcar_corriendo()` se OR-ea con el input y entra al mismo gate; con el sprint efectivo,
+  `PlayerEnergy.actualizar()` ejerce el costo (`COSTO_CORRER_POR_MINUTO = 1.0`).
+- **L70 se mantiene ESTRUCTURAL** (no clamp): costo 1/min + regen 1/min (la regen corre **siempre**) =
+  **balance neto 0/min** → correr **no** baja la energía. Medido: correr **100 min** deja la energía
+  **exactamente** donde estaba (50.0) y **nunca** agota (bloque G3/G4). El gasto real solo entra por
+  `consumir_energia()` (herramientas, M13). No se forzó nada para que el neto diera 0: es consecuencia
+  de las constantes del modelo (D1, §9.4).
+
+**Suite** (`scripts/player/test_player_cableado_m11.gd`, extendida con los bloques **F** y **G**):
+**71 checks / 0 fallos / EXIT 0 ×3**, piso `CHECKS_MINIMOS = 71` **MEDIDO** (9 A + 9 B + 13 C + 10 D +
+8 E + 13 F + 9 G). Guardián re-probado **en rojo**: P1 (piso+1 → 71/1, EXIT 1) y P2 (aborto de runtime
+tras el bloque A → nombra B/C/D/E/F/G faltantes + fallo de piso, EXIT 1). El bloque F cubre input,
+constantes, estado RUN, `corriendo()`, `factor_velocidad()`, `base_move_speed()` y el escalado/restauro
+de `move_speed`; el bloque G cubre el **drenado aplicado** (correr 60 s da 50, no 51 → el costo se
+aplica) y **L70 estructural**.
+
+**Regresiones (todas EXIT 0):** `test_player_core_m11` 87/0 · `test_player_m11` 30/0 ·
+`test_terrenos_b3` 28/0 · `test_terrenos` 27/0 · `test_terrenos_integracion` 39/0.
+

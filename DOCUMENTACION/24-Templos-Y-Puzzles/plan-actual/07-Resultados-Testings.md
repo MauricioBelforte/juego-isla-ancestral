@@ -174,3 +174,35 @@ subprocesos y exige, por suite, `EXIT 0` + 0 `SCRIPT ERROR` + checks ≥ su piso
 familia falla (§2ter). No se modificó ningún archivo de otro módulo.
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1438 (iter. 5).
+
+## 7. Iter. 6 — dificultad, tutorial, presión avanzada, símbolos, herramientas y recompensas (2026-10-09)
+
+Seis suites nuevas, todas `SceneTree` con bloques nombrados, piso MEDIDO y sonda roja:
+
+| Suite | Checks | Fallos | EXIT | SCRIPT ERROR | Piso |
+|---|---|---|---|---|---|
+| `test_puzzle_dificultad.gd` | 43 | 0 | 0 | 0 | `CHECKS_MINIMOS=43` (medido) |
+| `test_puzzle_tutorial.gd` | 39 | 0 | 0 | 0 | `CHECKS_MINIMOS=39` (medido) |
+| `test_puzzle_presion.gd` | 43 | 0 | 0 | 0 | `CHECKS_MINIMOS=43` (medido) |
+| `test_puzzle_simbolos.gd` | 47 | 0 | 0 | 0 | `CHECKS_MINIMOS=47` (medido) |
+| `test_puzzle_herramientas.gd` | 45 | 0 | 0 | 0 | `CHECKS_MINIMOS=45` (medido) |
+| `test_puzzle_recompensas.gd` | 44 | 0 | 0 | 0 | `CHECKS_MINIMOS=44` (medido) |
+
+**Gate de regresión extendido:** `test_regresion_templos.gd` corre ahora **19 suites** (antes 13);
+`TOTAL_MINIMO` 649 → **910** (medido: 910 == piso). Gate **106/0 EXIT 0**.
+
+**Sonda roja EN VIVO (gate):** se inyectó `niveles: 2 → 0` en el JSON REAL
+`data/templos/puzzles/presion/presion_03.json`; el gate pasó a **EXIT 1** con `test_puzzle_presion`
+nombrado (EXIT=1, 5 fallos). JSON restaurado byte-exacto (sha256 `9f36f609…`).
+
+**Guardián probado EN ROJO:** se inyectó un bloque fantasma `"G"` en `BLOQUES` de
+`test_puzzle_presion.gd` → el resumen NOMBRÓ "el bloque G NO se ejecuto" y salió EXIT 1; revertido a
+verde (43/0).
+
+**IDs de item MEDIDOS:** sonda headless → `tiene_item("item_obj_her_002")=true`,
+`tiene_item("item_obj_luz_005")=true`, `tiene_item("OBJ-HER-002")=false`.
+
+**Rendimiento (µs, orientativo):** `validar()` dificultad 15.6, tutorial 44.7, presión 61.0, símbolos
+93.8, herramientas 59.2, recompensas 65.4 — todos ≪ 10 ms.
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 6.

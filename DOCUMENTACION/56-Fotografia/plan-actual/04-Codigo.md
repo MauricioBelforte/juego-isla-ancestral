@@ -101,3 +101,55 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[PHOTO]` e
 - Al implementar: revisar el contrato de eventos del EventBus (M07) y el render pipeline para capturas (M116).
 - Testear a fondo: entrada/salida con cámara en movimiento (que no haya "teleport" raro), poses de animales con IA activa (M36), DOF en plataformas de baja gama (M90).
 - Revisar el presupuesto del álbum (150 MB) con fotos 4K futuras (salida de fotos de pantalla completa).
+
+---
+
+## 6. Notas del Agente — iter. 3 (foto del jugador, encargo msg 88)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-09 22:15
+**Estado:** Completado
+
+### Lo que hice (código real, a diferencia de los prototipos §2.x)
+- **`scripts/foto/photo_service.gd`** (autoload PhotoService, ya existente desde iter. 1/2) —
+  se EXTENDIÓ, no se creó archivo nuevo:
+  - `signal foto_tomada(ruta: String, resultado: Dictionary)` — emisor real de PHOTO_TAKEN
+    (antes solo figuraba en la tabla §3; ahora existe). Suscriptores pendientes: M55/M72.
+  - `const CARPETA_FOTOS := "user://fotos/"` — el encargo del director pidió PNG en
+    `user://fotos/` (§2.3 proponía WebP en `user://photos/` — decisión del director, queda
+    pendiente de unificación con L104).
+  - `var _en_captura: bool` — guard anti-doble captura.
+  - `func _unhandled_input(event)` — consume la acción `tomar_foto` (P) sin pisar UI.
+  - `func tomar_foto() -> Dictionary` (async): oculta HUD vía `UIManager.set_hud_visible(false)`
+    → `await process_frame` ×2 (lag de 1 frame de `get_texture()`) → `get_viewport()
+    .get_texture().get_image().save_png(ruta_abs)` → restaura HUD exacto → emite
+    `foto_tomada`. En `--headless` `get_image()` devuelve null → `ok=false`,
+    `motivo="sin_textura_render"` (sin archivo falso).
+  - `func _ruta_foto_unica() -> String` — timestamp + sufijo `_N` + fallback ticks (1970/vacío).
+  - `_entrar_modo_foto()`/`_salir_modo_foto()` — ahora ocultan/restauran el HUD
+    (`_hud_visible_antes_modo`), cerrando "Restaurar HUD al salir del modo foto".
+- **`project.godot`**: acción `tomar_foto` (tecla P, `physical_keycode:80` verificada libre).
+- **`tests/test_m56_tomar_foto.gd`** (nuevo, SceneTree): T1 flujo directo, T2 input real P
+  (pipeline + fallback directo), T3 doble pulsación (guard). Adaptativa al renderer.
+
+### Hallazgos técnicos (lecciones nuevas para la guía 06)
+- Godot 4.7: llamar corutina externa sin `await` → `SCRIPT ERROR: Trying to call an async
+  function without await` que aborta al caller (incluso con asignación). El auto-call
+  interno descartado dentro de `_unhandled_input` NO falla. Tests: usar dispatch por
+  `_unhandled_input`, no llamada directa a `tomar_foto()`.
+- Headless: `get_texture().get_image()` → NULL (dummy renderer; `ERROR: Parameter "t" is
+  null` 2 veces, inofensivo). El PNG solo existe con render.
+
+### Lo que NO hice
+- `photo_capture.gd` del §2.3 NO se implementó: la captura real vive en `photo_service.gd`
+  (menos archivos, un solo administrador). Resolución fija 1920×1080 (L96), filtros en frame
+  (L98), pose 0.8 s (L99), WebP+XMP (L104) siguen pendientes con dueño M49/M57.
+- K92 (< 50 ms): medido 100-219 ms con render (captura+IO) — queda [ ] honesto.
+
+### Recomendaciones para el próximo agente
+- Suscribir `foto_tomada` desde M55 (diario) y M72 (logros de coleccionista).
+- Si se unifica a WebP/XMP o `user://photos/`, migrar `CARPETA_FOTOS` + renombrar los PNG
+  existentes de `user://fotos/`.
+- Optimizar K92: candidatos = guardar vía `save_png_to_buffer` + write async, o capturar a
+  escala menor y reescalar.

@@ -42,7 +42,7 @@
 - Mix: -14 LUFS (YouTube) / -14 LUFS (Steam); subtítulos con duración exacta.
 
 ## 5. Subtítulos (RF7 — M87/M58)
-- Idiomas: 6 (es, en, pt, fr, de, ja).
+- Idiomas: 6 (es, en, pt, fr, de, it).
 - Estilo de M58: fuente legible, contraste, 150% soportado.
 - Entrega: archivos SRT/VTT por idioma + versión recortada con subtítulos quemados (si se prefiere vertical).
 

@@ -191,3 +191,20 @@ Implementé el **núcleo funcional** del detector anti-softlock en Godot 4.7.2 (
   watchdog NPC → M64, integración/persistencia de misiones → M22, Templo Subterráneo → M26). No son
   cerrables headless por M66 → quedan `[?]` con dueño. M66 pasa de `🟡 Con dudas` a **core verificado +
   gate CI, esperando externos**.
+
+## Nota de alcance — `test_m66_inv_ruta.gd` es un HELPER, no una suite
+
+> Agregada 2026-10-10 por **stepfun-step-5-preview / Kilo Code** (pedido de Ling 3.1 Flash, QA M66
+> msg 13). Nota breve de alcance: **no modifica marcas ni código**.
+
+**`scripts/core/test_m66_inv_ruta.gd` NO es una suite ejecutable.** Es un **helper** de invariante
+rota de control (`class_name M66InvRuta extends InvariantBase`): no tiene `_initialize()`
+ni `CHECKS_MINIMOS` ni `_summary()`, por lo que **no corre con `--script` ni cuenta checks propios**.
+
+Se ejerce **dentro de** `test_anti_softlock_m66.gd`, en el bloque `_test_cascada_recovery()`
+(preload en L50, instanciación `_M66InvRuta.new()` en L125), donde se usa para verificar que el
+dispatcher en cascada detecta y recupera una invariante deliberadamente rota.
+
+**Implicancia para futuras QA:** los conteos de checks de M66 son los de
+`test_anti_softlock_m66.gd` + `test_fallbacks_m66.gd`. `test_m66_inv_ruta.gd` **no suma checks** y
+no debe contarse como una suite más del módulo.

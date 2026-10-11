@@ -1,9 +1,15 @@
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Módulo 56: Fotografía (130 ítems)
+# 05-Checklist.md — Módulo 56: Fotografía (137 ítems)
 
-**Estado:** 130/130 completados. [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 26/137 completados (iter. 3 cerró +5). [S]=Simple [M]=Medio [C]=Complejo.
+
+## Reserva actual
+
+| Módulo | Estado | Agente | Fase | Visión | Entrada | Salida | Archivos afectados |
+|--------|--------|--------|------|--------|---------|--------|--------------------|
+| M56 Fotografía iter. 3 (foto del jugador) | 🟢 Liberada 2026-10-09 (iter. 3 completa: +5 [x]) | mimo-v2.6-flash-free (opencode) | F7 | V4 | Encargo msg 88 (director): BUG-128 desbloqueó M56; HUD ocultable funcional; PhotoService+PhotoMode ya en runtime (iter. 1/2) | `tomar_foto()`: input P → HUD oculto → ≥2 frames → `save_png(user://fotos/)` → restaurar; suite 26/0 headless + 31/0 render; evidencia sin HUD en bucket; hallazgos: headless get_image NULL + Godot 4.7 exige await en corutinas externas | `scripts/foto/photo_service.gd`, `project.godot`, `tests/test_m56_tomar_foto.gd` |
 
 ## A. Modo Fotografía (Fotostate)
 
@@ -55,10 +61,10 @@
 
 ## G. Ocultar Interfaz
 
-- [ ] Ocultar HUD completo (M53) con una tecla [S]
+- [x] Ocultar HUD completo (M53) con una tecla [S] — tecla H (acción ocultar_hud, Log 1515/1516, BUG-126/128); en el flujo de foto vía UIManager.set_hud_visible (iter. 3, suite T2)
 - [ ] Ocultar jugador (cuerpo invisible) y prompts de interacción (M70) [M]
 - [ ] Mostrar indicador mínimo de "HUD oculto" [S]
-- [ ] Restaurar HUD al salir del modo foto [S]
+- [x] Restaurar HUD al salir del modo foto [S] — iter. 3: _entrar_modo_foto() oculta guardando el estado previo (_hud_visible_antes_modo); _salir_modo_foto() restaura el exacto
 - [ ] Testear ocultamiento con Reduce Motion activo (M58) [M]
 
 ## H. Poses de NPC (M19)
@@ -79,7 +85,7 @@
 
 ## J. Captura de Paisajes
 
-- [ ] Capturar escenas completas sin HUD [S]
+- [x] Capturar escenas completas sin HUD [S] — iter. 3: tomar_foto() oculta HUD → 2 frames (lag de 1 frame documentado) → save_png; evidencia cap_56_2026-10-09 sin HUD (suite 31 checks 0 fallos con render, 26/0 headless)
 - [ ] Capturar vegetación densa (M50) y agua (M51) sin popping [C]
 - [ ] Capturar ruinas (M25), templos (M26) e interiores (M49) [M]
 - [ ] Vincular la foto con el lugar del mapa (M54) [M]
@@ -91,12 +97,12 @@
 - [ ] Presupuesto de captura: < 50 ms (M61) [C]
 - [ ] Aplicar preset de filtros en el frame capturado [M]
 - [ ] Esperar 0.8 s tras la pose con indicador visual [M]
-- [ ] Evitar capturas simultáneas (doble click protegido) [M]
+- [x] Evitar capturas simultáneas (doble click protegido) [M] — iter. 3: guard _en_captura (doble P sincrono → 1 solo flujo; suite T3 con reinicio posterior)
 
 ## L. Álbum y Guardado
 
 - [ ] Guardar en `user://photos/` en WebP con metadatos XMP [M]
-- [ ] Nombrar archivos de forma única (timestamp) [S]
+- [x] Nombrar archivos de forma única (timestamp) [S] — iter. 3: _ruta_foto_unica() → foto_<AAAA-MM-DD_HH-MM-SS>[_N].png con fallback a ticks si el reloj está en 1970/vacío (evidencia: sufijo _1 por colisión de segundo)
 - [ ] Manejar disco lleno y permisos denegados (M59) con aviso amigable [M]
 - [ ] Manejar corrupción de fotos (archivo inválido) [M]
 - [ ] Exportar a carpeta visible del SO (M97) [M]
@@ -240,8 +246,63 @@
 - Fijar hora/clima para la foto — M31/M32.
 - UI del modo foto y captura a archivo — M53/M56 visual.
 
-**Totales:** 137 ítems · Completados: 21 · Pendientes: 114 · No resueltos: 2.
+**Totales:** 137 ítems · Completados: 26 · Pendientes: 109 · No resueltos: 2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 21 [x] / 114 [ ] /
 > 2 [?]. Las marcas no se tocaron.
+
+---
+
+## Notas del Agente — iter. 3 (foto del jugador)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-09 22:15
+**Estado:** Completado (encargo msg 88 del director)
+
+### Lo que hice
+- **`tomar_foto()` en `scripts/foto/photo_service.gd`:** flujo completo ocultar HUD → 2 frames
+  (lag de 1 frame de `get_texture()` documentado en BUG-128) → captura → `save_png` en
+  `user://fotos/` → restaurar HUD exacto al estado previo. Devuelve
+  `{ok, ruta, err, ms, bytes, hud_presente, hud_oculto_durante, motivo}`.
+- **Acción `tomar_foto`** (tecla P, physical 80 — verificada libre) en `project.godot`;
+  consumida por `_unhandled_input` propio de PhotoService (no pisar UI).
+- **Guard anti-doble captura** `_en_captura` (K94): segunda entrada descartada sincrónicamente.
+- **G61 real:** `_entrar_modo_foto()` ahora oculta el HUD guardando `_hud_visible_antes_modo`;
+  `_salir_modo_foto()` lo restaura exacto.
+- **Nombres únicos** `_ruta_foto_unica()` (L105): timestamp + sufijo `_N` anti-colisión +
+  fallback a ticks si el reloj está en 1970/vacío.
+- **Señal `foto_tomada(ruta, resultado)`** emitida al completar (emisor PHOTO_TAKEN que
+  faltaba, pendiente de suscriptores M55/M72).
+- **Suite `tests/test_m56_tomar_foto.gd`** adaptativa: 26 checks 0 fallos headless,
+  31 checks 0 fallos con render (corridas dobles documentadas). Runner completo: mi suite
+  `[OK] rc=0 checks=26`.
+- **Evidencia:** 3 fotos reales en `user://fotos/` (86-150 KB, PNG decodifica); 2 copiadas a
+  `tools/mcp/godot-mcp/capturas/56-Fotografia/` — la principal muestra el mundo SIN HUD
+  (sin hotbar, sin reloj, sin StatusBar).
+
+### Hallazgos nuevos (documentar en guías)
+- **Godot 4.7:** llamar una corutina externa sin `await` (`var x = nodo.coro()` o descartada)
+  lanza `SCRIPT ERROR: Trying to call an async function without await` y ABORTA el caller.
+  El auto-call interno descartado en `_unhandled_input` NO falla. Patrón de test:
+  dispatch por `_unhandled_input` (como el jugador), nunca llamada directa a la corutina.
+- **Headless:** `get_texture().get_image()` devuelve NULL (dummy renderer) → `save_png`
+  imposible; la suite aserta flujo/HUD/guard en headless y el PNG en corrida con render.
+- **`ERROR: Parameter "t" is null`** en `get_image()` headless es ruido esperado del dummy
+  renderer (no rompe; sale 2 veces por corrida).
+
+### Lo que NO hice (con dueño)
+- K92 presupuesto < 50 ms: medido 100-219 ms reales (captura+guardado+IO) — queda [ ] con
+  dato para optimización futura (M61).
+- L104 `user://photos/` WebP+XMP: el encargo del director pidió PNG en `user://fotos/`
+  (decisión de formato/ruta del director; unificación queda pendiente).
+- Filtros en el frame capturado (L98), resolución fija 1920×1080 (L96), pose 0.8 s (L99):
+  iteraciones posteriores / M49+M57.
+
+### Regresiones ejecutadas
+- `test_m56_tomar_foto.gd` headless 26/0 y render 31/0 (0 SCRIPT ERROR).
+- Runner completo: 25/29 suites OK · 1246 checks SceneTree · **el único fallo es preexistente
+  y ajeno**: parse error en `tests/unit/debug/test_debug_menu.gd` (`_limpiar_huerfanos_boot`,
+  M110, WIP sin commitear de otro agente) que revienta toda la suite GdUnit4 (rc=105).
+  No se tocó ese archivo (perteneciente a otro módulo en vuelo).

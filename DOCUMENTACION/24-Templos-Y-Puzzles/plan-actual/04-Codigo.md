@@ -198,3 +198,30 @@ ayuda) → emisores sobre un `PuzzleRoom`; no modifican el framework. Los puzzle
 capa. El gate de CI de las suites sigue **pendiente del visto bueno de s2** (dueño de `quality.yml`).
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 5.
+
+## Dificultad, tutorial, presión avanzada, símbolos, herramientas y recompensas (iter. 6 — DeepSeek-V4.1-Flash, 2026-10-09)
+
+Seis capas nuevas, cada una con su suite y su piso medido. Ninguna modifica el framework: todas
+traducen datos → emisores sobre un `PuzzleRoom`.
+
+| Concepto / datos | Archivo | API clave |
+|---|---|---|
+| Bandas / zonas / ayuda progresiva | `scripts/templos/puzzle_dificultad.gd` | `banda_de_zona(z)`, `demora_pista(z)`, `nivel_ayuda(n)`, `demora_pista_efectiva(z,n)`, `validar()` |
+| Guía / iconografía / narrador | `scripts/templos/puzzle_tutorial.gd` | `guia_de_zona(z)`, `icono_de(g)`, `es_glifo_reconocible(g)`, `disparar_narrador(primera, obj)`, `validar()` |
+| Elevadores / puertas encadenadas | `scripts/templos/puzzle_presion.gd` | `altura_elevador(id)`, `puerta_encadenada_abierta(id)`, `reiniciar()`, `penalizacion_reinicio()`, `validar()` |
+| Glifos / glosario M25 / sello | `scripts/templos/puzzle_simbolos.gd` | `es_glifo_valido_m25(g)`, `glosario_completo()`, `colocar(g,pid)`, `sello_abierto()`, `validar()` |
+| Usos de herramienta / inventario | `scripts/templos/puzzle_herramientas.gd` | `puede_usar(uso,inv)`, `usar(uso,inv)`, `item_de(tipo)`, `residuales()`, `validar()` |
+| Checkpoint atómico / recompensas M66 | `scripts/templos/puzzle_recompensas.gd` | `guardar_checkpoint(id,estado)`, `otorgar(id,cofre)`, `ya_otorgada(id,cofre)`, `alineada_al_lore(id)`, `validar()` |
+
+**Datos nuevos:** `data/templos/dificultad.json`, `data/templos/tutorial.json`,
+`data/templos/puzzles/presion/presion_03.json` + `presion_04.json`,
+`data/templos/puzzles/simbolos/simbolos_01.json` + `simbolos_02.json`,
+`data/templos/puzzles/herramientas/herramientas_01.json` + `herramientas_02.json`,
+`data/templos/puzzles/recompensas/recompensas_01.json` + `recompensas_02.json`.
+
+**Anclas reales (verificadas por archivo):** `scripts/templos/templo_checkpoint.gd` (guardado
+atómico), `scripts/core/recovery/cofre_recuperacion.gd` (M66), `scripts/dialogos/dialogue_manager.gd`
+(M33, `start_dialogue`), `scripts/inventario/inventario_service.gd` (`count_item`),
+`scripts/datos/catalogos_estaticos.gd` (`tiene_item`), contrato M25 documentado.
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 6.

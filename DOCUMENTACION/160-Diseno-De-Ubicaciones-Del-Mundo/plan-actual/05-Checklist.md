@@ -1,10 +1,10 @@
-> **RE-MARCADO POR MIMO (v2.5 → v2.6, 2026-09-24):** verificación contra código real (world_locations.gd 343 líneas + ubicaciones_loc.json + 3 test scripts). Conteo con `^\s*-\s+\[[ x?]\]`: **148 [x] · 4 [?] · 3 [ ] = 155**. Los 4 `[?]` están bloqueados por M28 (viajes) y M54 (mapa); los 3 `[ ]` por diseño (horarios NPCs), M158 (regeneración de objetos) y la integración de puzzles con M25.
+> **RE-MARCADO POR MIMO (v2.5 → v2.6, 2026-09-24):** verificación contra código real (world_locations.gd 343 líneas + ubicaciones_loc.json + 3 test scripts). Conteo con `^\s*-\s+\[[ x?]\]`: **145 [x] · 7 [?] · 3 [ ] = 155**. Los 7 `[?]` están bloqueados por M28 (viajes), M54 (mapa) y 3 integraciones runtime (M39/M18/M25); los 3 `[ ]` por diseño (horarios NPCs), M158 (regeneración de objetos) y la integración de puzzles con M25.
 
 # 05-Checklist.md — Módulo 160: Diseño de Ubicaciones del Mundo
 
 ## Reserva actual
 
-- Estado: 🟡 Con dudas (148/155; 4 bloqueados M28/M54 + 3 pendientes)
+- Estado: 🟡 Con dudas (145/155; 7 bloqueados (M28 viajes / M54 mapa / 3 integraciones runtime M39-M18-M25) + 3 pendientes)
 - Agente: — (reserva liberada; última iteración de mimo 2026-09-20, reconciliación 2026-09-24)
 - Fase: F4/F5
 - Dificultad: 3
@@ -51,8 +51,8 @@
 - [x] Definir objetos interactuables por ubicación — objetos en JSON con interactuable flag
 - [x] Definir objetos de recolección por ubicación — objetos en JSON con recolectable flag
 - [x] Definir objetos decorativos por ubicación — objetos en JSON sin recolectable ni interactuable
-- [x] Integrar con M39 (Tiendas) para catálogos → 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime)
-- [x] Integrar con M18 (Casas) para ampliaciones → 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime)
+- [?] Integrar con M39 (Tiendas) para catálogos → 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime) - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho
+- [?] Integrar con M18 (Casas) para ampliaciones → 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime) - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho
 
 ### Isla Raíz: Naturaleza (15 ítems)
 
@@ -69,7 +69,7 @@
 - [x] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON (ubicaciones_loc.json); los .tres tienen prioridad al cargar
 - [x] Validar que todos los objetos M159 existen — Log 725: 0 objetos fuera del catálogo (test iter. 5 con ItemDatabase)
 - [x] Integrar con M14 (Inventario) para drops — Log 725: drops por item_id M159; can_access ya valida items_requeridos
-- [x] Integrar con M25 (Ruinas) para puzzles — tags puzzle documentados; integración runtime pendiente
+- [?] Integrar con M25 (Ruinas) para puzzles — tags puzzle documentados; integración runtime pendiente - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho
 - [x] Documentar conexiones con pueblo — Log 725: PUB-001 conecta BOS/PLA/CUE/PUER/TAL (grafo bidireccional reflejado)
 
 
@@ -181,9 +181,9 @@
 - [x] Documentar integración con otros módulos → 08-Guia-Ubicaciones.md §4
 - [x] Crear guía para agregar nuevas ubicaciones → 08-Guia-Ubicaciones.md §5
 
-**Total: 155 ítems**
-**Completados: 148 [x]**
-**Bloqueados: 4 [?] (M28 viajes / M54 mapa)**
+**Totales:** 155 items - Completados: 145 - Pendientes: 3 - No resueltos: 7.
+**Completados: 145 [x]**  (BUG-070 lote 8, atria-dawn 2026-10-09: 3 [x] degradados a [?] - L54/L55/L72 'Integrar con M39/M18/M25' con 'pendiente runtime' = deferral M114)
+**Bloqueados: 7 [?] (M28 viajes / M54 mapa / 3 integraciones runtime M39-M18-M25)**
 **Pendientes: 3 [ ] (horarios NPCs en tiendas, regeneracion objetos M158, integracion puzzles M25)**
 ## Iteración 5 — Catálogo JSON completo + grafo de conexiones (2026-09-06 03:40, glm-5.3-flash / Kilo Code)
 

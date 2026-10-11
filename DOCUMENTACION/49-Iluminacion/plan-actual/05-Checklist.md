@@ -47,7 +47,7 @@
 
 - [x] Definir luz cálida de casas (M18) [S] -- agnes-2026-09-07: casas usan DirectionalLight existente; luz cálida implementada via sun_color_ramp.tres (tonos naranjas/amarillos)
 - [?] Definir luz de tiendas (M39) y talleres [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_tienda.gd definido; integracion con M39 shop placement; stub en DayNightCycle para luz ambiental tiendamic/; implementación requiere M39 shop placement event; deferred a M39 integration
-- [?] Definir ventanas con luz diurna (baked) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa profile documents baked window light; IMPLEMENTACI脫N bloqueada por M18 (lightmap bake en escenas con ventanas); KnownIssue no bloqueante DoD.
+- [?] Definir ventanas con luz diurna (baked) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa profile documents baked window light; IMPLEMENTACIÓN bloqueada por M18 (lightmap bake en escenas con ventanas); KnownIssue no bloqueante DoD.
 - [?] Definir perfil interior_casa.gd [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §1 profiles/interior_casa.gd; estructura definida en arquitectura; implementación pendiente de M18 escena tipo casa
 
 ## G. RF6 — Faroles
@@ -73,13 +73,13 @@
 
 - [?] Definir piso anti-oscuridad 0.15 en cuevas (M31) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 minimo ambiente 0.15; validate_lighting_m49.gd _test_ambient_minimum verifica este limite
 - [?] Definir esporas de luz (M11) como luz ambiental [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md menciona esporas M11 en cuevas; luz ambiental cálida 0.15-0.25; integrada con perfil subterraneo11 en cuevas; implementacion requiere M11 espora system; blocked por dependencia
-- [?] Definir transici贸n gradual d铆a→cueva (fade) [M] -- agnes-2.5-flash 2026-09-12: documentado en 03-Diseno.md §2.2 (perfil subterr谩neo.gd: direccional apagada, ambiente 0.15-0.25, niebla cueva); fade implementado via tween en DayNightCycle._activar_perfil_subterraneo()
+- [?] Definir transición gradual día→cueva (fade) [M] -- agnes-2.5-flash 2026-09-12: documentado en 03-Diseno.md §2.2 (perfil subterráneo.gd: direccional apagada, ambiente 0.15-0.25, niebla cueva); fade implementado via tween en DayNightCycle._activar_perfil_subterraneo()
 - [?] Definir perfil subterraneo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/subterraneo.gd estructurado; direccionional apagada, ambiente cálido 0.15-0.25, niebla cueva, luces puntuales fijas/pool
 
 ## K. RF10 — Templos y ruinas
 
 - [?] Definir rayo cenital en salas principales (M24/M25) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 menciona templos con rayo cenital; implementacion requiere M24/M25 portal system; diseño documentadomplos/ruinas con lightmap; rayo cenital requiere M24/M25 portal system; blocked por dependencia
-- [?] Definir iluminaci贸n de bajorrelieves [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md no cubre especificamente; IMPLEMENTACI脫N bloqueada por M47 (materiales/emisivos); KnownIssue no bloqueante DoD — deferred a integraci贸n M47.
+- [?] Definir iluminación de bajorrelieves [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md no cubre especificamente; IMPLEMENTACIÓN bloqueada por M47 (materiales/emisivos); KnownIssue no bloqueante DoD — deferred a integración M47.
 - [?] Definir ambience suave por sala [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 tabla perfiles con ambiente por tipo (interior_casa 0.30, templo 0.25, cueva 0.15-0.25)
 - [?] Definir perfil interior_templo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/interior_templo.gd + §3.3 tabla; ambiente 0.25, lights <= 6, baked SÍ
 

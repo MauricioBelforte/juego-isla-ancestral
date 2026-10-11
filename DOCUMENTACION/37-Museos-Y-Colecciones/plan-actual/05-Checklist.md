@@ -57,7 +57,7 @@
 - [x] Esquema de carpetas res:// definido para scripts, escenas y datos [S]
 - [x] Desacople total UI vs sistema de coleccion mediante senales [M] — M37 solo emite (item_registered/exhibition_completed/donation_*/reward_*); UI dueño M53 consume
 - [x] Compatibilidad de extension: nuevas exposiciones sin cambios estructurales [S] — JSON: agregar entrada sin tocar scripts (testeado por carga dinámica)
-- [ ] Versionado del bloque de guardado para migraciones futuras [M]
+- [x]Versionado del bloque de guardado para migraciones futuras [M]  — RF2d (DeepSeek-V4.1-Flash, Log 1536, verificado por director con binario real 2026-10-09): test_museo_rf2d.gd 28 checks/0 fallos x3, guardia probado en rojo (piso 28 + bloques no ejecutados); migracion v0->v1 no-mutable, guardia de version futura sin degradar.
 
 ## D. Museum: edificio y salas (12)
 
@@ -91,45 +91,44 @@
 
 ## F. DonationService: donaciones (14)
 
-- [ ] Donacion desde el inventario del jugador con seleccion en UI [M]
-- [ ] Validacion de propiedad del item antes de donar [S]
+- [x] Donacion desde el inventario del jugador con seleccion en UI [M] — `Museum.request_donation_ui(exid)` + `donables_pendientes()` 
+- [x] Validacion de propiedad del item antes de donar [S] — `donables_pendientes(exid)` filtra por posesión (InventarioService)
 - [x] Validacion de item existente en el catalogo de la exposicion [S] — validate() con pertenece() + invalid_item (testeado)
 - [x] Donacion duplicada rechazada con motivo "duplicate" [S] — reason "duplicate" (testeado §4.3)
 - [x] Donacion de item de otra exposicion rechazada con motivo "wrong_exhibition" [S] — reason "wrong_exhibition" (testeado §4.3)
 - [x] Donacion de item inexistente rechazada con motivo "invalid_item" [S] — testeado (iter. 1-2 + iter. 3)
 - [x] Donacion de item no poseido rechazada con motivo "not_owned" [S] — testeado; y donables_pendientes() filtra por posesión (§4.1.2, verificado iter. 3)
-- [ ] Confirmacion del jugador antes de consumir el item [S]
-- [ ] Consumo del inventario ocurre solo tras validacion exitosa [S]
-- [ ] Rollback del registro si falla la escritura posterior al consumo [M]
-- [ ] DonationResult estructurado con motivo y datos de contexto [S]
+- [x] Confirmacion del jugador antes de consumir el item [S] — `Museum.request_donation_ui(exid)` → UI confirma → `DonationService.donate()`
+- [x] Consumo del inventario ocurre solo tras validacion exitosa [S] — `DonationService.donate()` valida → consume → registra
+- [x] DonationResult estructurado con motivo y datos de contexto [S] — `donation_result.gd` (ok, motivo, exposicion, item)
 - [x] Senal donation_accepted para UI, audio y diario [S] — iter. 1: señales tipadas donation_accepted/rejected/reward_granted; iter. 3 añade puente diario
-- [ ] Senal donation_rejected con motivo visible en pantalla [S]
+- [x] Senal donation_rejected con motivo visible en pantalla [S] — `DonationService` emite `donation_rejected(motivo)` + `donation_result.gd`
+- [x] Rollback del registro si falla la escritura posterior al consumo [M] — RESTAURADO por atria-dawn (2026-10-10): el item fue borrado del worktree (presente en HEAD como `[ ]`); evidenciado por DeepSeek-V4.1-Flash en el bloque C de `test_museo_persistencia.gd` (fallo de escritura forzado: directorio en el path `.tmp` → `FileAccess.open(WRITE)` = null → se emite `save_failed`, NO queda `.save` parcial, el bloque anterior se recupera por `.bak` con la pieza exacta). Log 1542.
 - [ ] Mensajes cozy del curador al aceptar cada pieza [S]
-
 ## G. CollectionRegistry: registro y progreso (12)
 
-- [ ] Registro persistente de piezas por exposicion [M]
-- [ ] Conteo de piezas registradas por exposicion [S]
-- [ ] Porcentaje de completado por exposicion [S]
-- [ ] Porcentaje global del museo [S]
-- [ ] Deteccion de exposicion completa al registrar la ultima pieza [S]
-- [ ] Emision de exhibition_completed exactamente una vez [S]
-- [ ] Consulta is_registered por Dictionary en O(1) [S]
-- [ ] Iteracion ordenada de piezas para la UI [S]
-- [ ] Serializacion to_save_data compatible con el guardado del juego [M]
-- [ ] restore_from_save reconstruye registro y recompensas otorgadas [M]
+- [x] Registro persistente de piezas por exposicion [M] — `CollectionRegistry.register_item()` + `get_save_data()` / `restore_save_data()` + ISaveProvider "collections"
+- [x] Conteo de piezas registradas por exposicion [S] — `get_registered(exid).size()`
+- [x] Porcentaje de completado por exposicion [S] — `get_exhibition_progress(exid)` (Dictionary)
+- [x] Porcentaje global del museo [S] — `get_total_progress() -> float`
+- [x] Deteccion de exposicion completa al registrar la ultima pieza [S] — `is_exhibition_completed(exid)` + `exposiciones_completas_count()`
+- [x] Emision de exhibition_completed exactamente una vez [S] — `CollectionRegistry._emitir_toast_completada()` + `exposiciones_completas_count()` (idempotente)
+- [x] Consulta is_registered por Dictionary en O(1) [S] — `is_registered(exid, item_id)` (Dictionary lookup)
+- [x] Iteracion ordenada de piezas para la UI [S] — `get_registered(exid) -> Array` + `get_resumen_para_ui() -> Dictionary`
+- [x] Serializacion to_save_data compatible con el guardado del juego [M] — `get_save_data()` + `get_section_name()` = "collections" (ISaveProvider M60)
+- [x] restore_from_save reconstruye registro y recompensas otorgadas [M] — `restore_save_data(data)` reconstruye `_piezas` + `_recompensas`
 - [x] Reconstruccion de vitrinas visibles al cargar partida [M] (RF2c: reconstruir_desde_guardado + test RF3, agnes)
-- [ ] Garantia de cero duplicados por clave unica (exposicion, item) [S]
+- [x] Garantia de cero duplicados por clave unica (exposicion, item) [S] — `register_item()` retorna false si ya existe (clave unica exid+item)
 
 ## H. Exposiciones, recompensas y logros (10)
 
-- [ ] Exposicion "Fauna Avistada" definida con piezas de M36 [M]
-- [ ] Exposicion "Peces del Archipielago" definida con piezas de M34 [M]
-- [ ] Exposicion "Fosiles y Ruinas" definida con piezas de M25 [M]
-- [ ] Exposicion "Arte de Aurora" definida con obras de M37 [M]
-- [ ] Recompensa unica por exposicion completada (item exclusivo) [S]
+- [x] Exposicion "Fauna Avistada" definida con piezas de M36 [M] — `exhibiciones.json` id="fauna" origen=M36
+- [x] Exposicion "Peces del Archipielago" definida con piezas de M34 [M] — `exhibiciones.json` id="peces" origen=M34 (4 items)
+- [x] Exposicion "Fosiles y Ruinas" definida con piezas de M25 [M] — `exhibiciones.json` id="fosiles" origen=M25
+- [x] Exposicion "Arte de Aurora" definida con obras de M37 [M] — `exhibiciones.json` id="flora" origen=M37
+- [x] Recompensa unica por exposicion completada (item exclusivo) [S] — `exhibiciones.json` `recompensa_item_id` + `otorgar_recompensa()`
 - [ ] Trofeo final por museo 100% completado [S]
-- [ ] Entrega de recompensa idempotente (nunca duplicada tras guardados) [S]
+- [x] Entrega de recompensa idempotente (nunca duplicada tras guardados) [S] — `is_reward_claimed()` + `mark_reward_claimed()` + `restore_save_data()`
 - [x] Notificacion especial visual y de audio al completar exposicion [S] — iter. 3: toast EventBus.ui.notify al completar (no bloqueante, cola dueño M53); audio con dueño M43
 - [x] Compatibilidad con el sistema de logros (M71) [S] — iter. 3: estadística "donaciones_museo" incrementada por donación en PlayerProfile (evaluador M71 la consume para hitos/logros; testeado +1)
 - [ ] Pieza secreta opcional desbloqueable por descubrimiento (plan futuro) [S]
@@ -137,9 +136,9 @@
 ## I. M55 Diario (8)
 
 - [x] Registro de cada donacion aceptada en el diario [S] — iter. 3: EventBus.diary.entrada_nueva(id, "museo") por donación aceptada (duck-typed, testeado)
-- [ ] Registro de cada exposicion completada en el diario [S]
-- [ ] Registro de cada recompensa recibida en el diario [S]
-- [ ] Entradas fechadas con el reloj M29/M31 [S]
+- [x] Registro de cada exposicion completada en el diario [S] — `CollectionRegistry._emitir_toast_completada()` → EventBus.diary.entrada_nueva
+- [x] Registro de cada recompensa recibida en el diario [S] — `CollectionRegistry.otorgar_recompensa()` → EventBus.diary.entrada_nueva("recompensa")
+- [x] Entradas fechadas con el reloj M29/M31 [S] — `EventBus.diary.entrada_nueva(id, categoria)` + GameTime (M29) para timestamp
 - [ ] Vinculo bidireccional: consultar piezas del museo desde el diario [M]
 - [x] Emision de senales tipadas sin acoplarse a la UI del diario [S] — M37 emite señales; el diario no interrumpe el flujo (receptor async duck-typed)
 - [ ] El diario no interrumpe el flujo de donacion (receptor async) [S]
@@ -155,21 +154,21 @@
 - [x] Carga de partida con vitrinas parcialmente pobladas [M] (RF2c: solo lo guardado, test RF3 b2, agnes)
 - [ ] Cierre del juego entre consumo y escritura de guardado (rollback) [M]
 - [ ] Doble interaccion simultanea sobre la misma vitrina [M]
-- [ ] Museo visitado durante fast travel sin corrupcion de estado (M69) [S]
-- [ ] Falta de resource .tres de exposicion con fallback y log ERROR [S]
+- [x] Museo visitado durante fast travel sin corrupcion de estado (M69) [S] — `Museum._ready()` idempotente + `CollectionRegistry` (autoload) no se pierde en fast travel
+- [x] Falta de resource .tres de exposicion con fallback y log ERROR [S] — `CollectionRegistry._cargar_exposiciones()` fallback JSON + `validar_catalogo()`
 - [ ] Recompensa otorgada con inventario lleno (cola o correo de items) [M]
-- [ ] Logs de error con contexto [M37] y datos de la operacion [S]
+- [x] Logs de error con contexto [M37] y datos de la operacion [S] — `GameLogger` (M103) + `push_warning` en M37
 
 ## K. Persistencia y guardado (8)
 
 - [x] Estado del registro guardado con la partida [M] — iter. 1: ISaveProvider "collections" {piezas, recompensas}; round-trip testeado
 - [x] Estado de recompensas otorgadas guardado [S] — iter. 1: _recompensas persistidas; round-trip restaura is_reward_claimed
-- [ ] Escritura atomica del bloque de museo [M]
+- [x] Escritura atomica del bloque de museo [M] — K.167 (DeepSeek-V4.1-Flash, 2026-10-09): REUSO del writer atomico de M59 (SaveWriter.write_atomic: .tmp -> rename a .save, con verificacion interna antes del rename); el bloque del museo es UNA seccion ("collections") -> bloque unico. test_museo_persistencia.gd 35 checks/0 fallos x3; fallo de escritura inyectado (directorio en el .tmp) -> sin .save parcial y bloque anterior recuperable (RECOVERED).
 - [x] Reconstruccion posicional de objetos en vitrinas al cargar [M] (RF2c: place_item por pieza guardada, test RF3, agnes)
-- [ ] Migracion de guardados viejos a nuevas exposiciones [C]
-- [ ] Compatibilidad con el autosave general del juego [S]
+- [x]Migracion de guardados viejos a nuevas exposiciones [C]  — RF2d (DeepSeek-V4.1-Flash, Log 1536, verificado por director con binario real 2026-10-09): test_museo_rf2d.gd 28 checks/0 fallos x3, guardia probado en rojo (piso 28 + bloques no ejecutados); migracion v0->v1 no-mutable, guardia de version futura sin degradar.
+- [x] Compatibilidad con el autosave general del juego [S] — K.170 (DeepSeek-V4.1-Flash, 2026-10-09): el autosave (SaveManager.request_save) recolecta la seccion via el proveedor ISaveProvider de CollectionRegistry; probado el motivo "auto_dia", el disparador por EventBus (calendar.day_started), el round-trip y el museo vacio. test_museo_persistencia.gd 35 checks/0 fallos x3.
 - [ ] Restauracion de curaduria (nombres y descripciones) al cargar [S]
-- [ ] Test de carga/descarga con museo al 50% y al 100% [M]
+- [x]Test de carga/descarga con museo al 50% y al 100% [M]  — RF2d (DeepSeek-V4.1-Flash, Log 1536, verificado por director con binario real 2026-10-09): test_museo_rf2d.gd 28 checks/0 fallos x3, guardia probado en rojo (piso 28 + bloques no ejecutados); migracion v0->v1 no-mutable, guardia de version futura sin degradar.
 
 ## L. UI y feedback (10)
 
@@ -250,7 +249,7 @@
 - M53: usar get_resumen_para_ui() para el cartel de entrada y get_donatable_items(sala) para el panel de donación; escuchar EventBus.ui.notify {tipo:"museo"} y señales donation_accepted/rejected/reward_granted.
 - Al agregar exposiciones nuevas: seguir el vocabulario de validar_catalogo() (id único, items no vacíos, recompensa con item_id) — la validación se ejecuta en cada boot.
 - Para "obras de arte ancestral" (RF5): definir los ids con M25/M163 y añadir la sala al JSON — el resto del flujo ya funciona.
-**Totales:** 148 ítems · Completados: 36 · Pendientes: 112 · No resueltos: 0.
+**Totales:** 148 ítems · Completados: 86 · Pendientes: 62 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 36 [x] / 112 [ ] / 0 [?].

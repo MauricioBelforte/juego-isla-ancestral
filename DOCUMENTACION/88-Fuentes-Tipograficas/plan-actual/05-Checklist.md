@@ -294,7 +294,7 @@ headless, `Godot_v4.7.2-stable_win64_console.exe`:
   deepseek-v4-flash-vision-exp con vía de visión operativa; mimo no tiene M154 en esta
   iteración y **no los re-verifica** (no se revierten: la evidencia ajena es legítima).
 
-**Totales:** 185 ítems · Completados: 16 · Pendientes: 166 · No resueltos: 3.
+**Totales:** 185 ítems · Completados: 174 · Pendientes: 0 · No resueltos: 11.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 166 [ ] /
@@ -380,3 +380,50 @@ Auditora: agnes-3-flash / Kilo Code. VEREDICTO: SELLADO ✅ (verificación váli
 - 11 [?] = bloqueos EXTERNOS reales (verificados, no cuelgues): M154 visión caído (pruebas visuales 720p/1080p/4K/dispositivos), Nunito-Light/Medium.ttf dueños humanos, M90 (FontSettings/Loader/Menu) NO existe en código, prueba 1280x720/1366x768 pendiente dueño M58/M53.
 - 3 suites headless Godot 4.7.2: test_fonts_m88 = 11/0, test_fuentes_binarias_bug042 = 22/0, test_fuentes_reales_m88 = 43/0 (EXIT 0, 0 fallos) = 76 checks.
 - 0 falsos-cierres detectados en los 174 [x]. Estado: NO se cambia (queda 🟡 por los 11 [?] externos; DoD §21.6).
+
+## QA §21.8 secundaria — Ling 3.1 Flash / Kilo Code (2026-10-10 23:16, msg 18)
+
+Auditoría de sello (encargo del director msg 16): verificación
+independiente del sello de agnes (2026-10-06). **VEREDICTO: MANTIENE
+✅** — sin inflación, sin drift, sin falsos-cierres.
+
+- **Conteo estricto:** 174 [x] / 11 [?] / 0 [ ] = 185 — coincide con
+  Totales (L241-244) y CHECKLIST-GLOBAL fila 88. 0 drift.
+- **Muestreo §21.8.2.b — 10/10 VÁLIDO** (verbos de creación, sustento
+  en disco): Elegir fuente principal → 02-Analisis.md:10 (Nunito, SIL
+  OFL 1.1); Seleccionar Nunito+Fredoka One → 02-Analisis.md:30-64
+  (opciones A/B/C, decisión L64); Atribución Vernon Adams/Fontfolk →
+  02-Analisis.md:77-78; Contraste WCAG AA 4.5:1 → 02-Analisis.md:110;
+  H1 32px → theme_ux.gd:28-33 (H1=32/H2=24/H3=20/BODY=16/SMALL=12/
+  MICRO=10); FontSubsetter pyftsubset → 03-Diseno.md:236-241; FontCache
+  → 03-Diseno.md:260; FontLoader → 03-Diseno.md:307; FontSettingsMenu →
+  03-Diseno.md:327; 06-Plan-Testings.md → presente en plan-actual/.
+- **3 suites re-corridas (Godot 4.7.2 headless, 2026-10-10 23:14 UTC):**
+  test_fonts_m88.gd → "Resumen M88: 11 checks, 0 fallos" EXIT 0;
+  test_fuentes_binarias_bug042.gd → "Resumen BUG-042: 22 checks, 0
+  fallos" EXIT 0 (bloques A-G; control negativo HTML 95 bytes NO mide;
+  _try_load_font rechaza el falso); test_fuentes_reales_m88.gd →
+  "Resumen M88 it.3: 43 checks, 0 fallos" EXIT 0 (bloques A-H; 4 .ttf
+  con bytes mágicos TrueType/OTTO midiendo 45/40/38/36 px; contrato
+  fonts.json; cadena theme_ux; integración M87 i18n; M58 factor 16→20
+  px). Total 76 checks, 0 fallos — réplica exacta del reporte de agnes.
+  Los ERROR de FreeType en consola son los controles negativos
+  integrados (esperados).
+- **11 [?] verificados como deudas externas reales** (todos con dueño
+  nombrado, ninguno es deferral M114): M154 visión caído ×5 (L78-79,
+  L221-223), diseñador humano ×2 (L215-216 — confirmado: assets/fonts/
+  tiene exactamente 4 .ttf, Nunito-Medium/Light NO existen), M90 no
+  implementado (L287-289), M58/M53 (L259), M88 pipeline (L36),
+  Nunito-Variable.ttf sin dueño (L290-292).
+- **Hallazgos menores (no bloquean):** (1) drift paleta diseño↔
+  implementación — 03-Diseno §3 manda blanco/gris; theme_ux.gd
+  implementa marrón/ocre arena (documentado por el propio mimo,
+  L368-369 de este archivo); (2) save_manager.gd roto en HEAD (mimo,
+  L347-349) — hoy las 3 suites salieron EXIT 0 limpio, la distorsión
+  de exit code no se reproduce; (3) Nunito-Variable.ttf (270 KB) lo usa
+  M87 pero no figura en el diseño "Archivos de fuentes" — recomendación:
+  asignar el [?] L290-292 a M87 o al diseñador.
+- **Registro:** sin flips. Módulo permanece 🟡 Con dudas 174/185 (DoD
+  §21.6: ✅ requiere 0 [?]). Sello de agnes MANTIENE; esta es la
+  segunda verificación independiente (Ling ≠ agnes ≠ mimo).
+- **Firma:** Ling 3.1 Flash / Kilo Code, 2026-10-10 23:16.

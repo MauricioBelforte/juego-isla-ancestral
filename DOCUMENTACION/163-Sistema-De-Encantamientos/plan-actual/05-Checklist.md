@@ -1,4 +1,4 @@
-﻿**Modelo:** mimo-v2.6-flash-free (último modificador; base step-3.7-flash / GLM-5.3 Flash)
+**Modelo:** mimo-v2.6-flash-free (último modificador; base step-3.7-flash / GLM-5.3 Flash)
 **Plataforma:** opencode
 **Fecha:** 2026-10-07 05:08
 
@@ -309,7 +309,7 @@
 - Hooks economicos (D90/D94/D98) solo con coordinacion de los duenos (M24/M38/M17).
 - BUG-119: si el director autoriza el fix defensivo, son ~10 lineas en incense_spawner.gd (reintentos de altura con backoff, conservando push_warning).
 
-**Totales:** 120 ítems · Completados: 57 · Pendientes: 48 · No resueltos: 15.
+**Totales:** 124 ítems · Completados: 61 · Pendientes: 48 · No resueltos: 15.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 101 [ ] / 0 [?].

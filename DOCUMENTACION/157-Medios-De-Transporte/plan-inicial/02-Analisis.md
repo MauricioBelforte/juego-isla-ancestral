@@ -184,7 +184,7 @@
 
 ## Decisiones de Diseño
 
-1. **Decisión 1:** El viaje será en tiempo real con pausa opcional (no en tiempo de juego加速ado).
+1. **Decisión 1:** El viaje será en tiempo real con pausa opcional (no en tiempo de juego acelerado).
    - **Razón:** Permite que el jugador disfrute del paisaje y tome decisiones sin prisa.
 
 2. **Decisión 2:** Cada tipo de transporte tendrá su propio pool de eventos (no compartidos).

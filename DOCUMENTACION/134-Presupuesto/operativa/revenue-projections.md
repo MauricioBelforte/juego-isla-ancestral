@@ -51,7 +51,7 @@ Fórmula: `copias_necesarias = costo_total / neto_por_copia`
 | **Modo actual (vigente)** | USD 100 (Steam fee) | **≈ 6 copias** (7 con margen) |
 | Escenario financiado (paramétrico) | costo_total de `budget-template.csv` | costo_total / 17.49 |
 
-Interpretación: en modo costo cero, el proyecto recupera su único desembolso con ~7 ventas. El break-even relevante para decisiones es el del escenario financiado: si algún gasto nuevo (ej:外包 de arte o audio) entra al presupuesto, se recalcula aquí **antes** de aprobarlo (regla de `expense-tracking.md` §2).
+Interpretación: en modo costo cero, el proyecto recupera su único desembolso con ~7 ventas. El break-even relevante para decisiones es el del escenario financiado: si algún gasto nuevo (ej: subcontratación de arte o audio) entra al presupuesto, se recalcula aquí **antes** de aprobarlo (regla de `expense-tracking.md` §2).
 
 ## 5. Proyección de cash flow (ligada a M136)
 

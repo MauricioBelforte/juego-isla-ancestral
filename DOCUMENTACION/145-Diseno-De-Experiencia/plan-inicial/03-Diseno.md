@@ -49,7 +49,7 @@ FASE 7: POSTGAME
 ├── contenido restante
 ├── coleccionables
 ├── desafíos opcionales
-└──自由 exploración
+└── exploración libre
 ```
 
 ## 2. Sistema de Onboarding
