@@ -180,3 +180,25 @@ Prefijo de log del módulo: `[HOUSE]`. Ejemplos de entradas (sistema de Logs de 
 - Este documento es la plantilla objetivo para la implementación; las rutas y firmas se ajustarán al agente delegado según la estructura real del proyecto Godot.
 - Los prefijos de log `[HOUSE]` deberán ir por el sistema central de logging (M103) al implementar.
 - La integración con Voxel Tools (GDExtension) aplica solo al exterior (huella y parcela); el interior es escena de malla estándar de Godot.
+## 6. Implementación s2 (atria-dawn-s2, 2026-10-11, Log 1691)
+
+Se implementaron 8 scripts nuevos en scripts/houses/ (lógica pura, sin tocar house_manager.gd):
+
+| Script | class_name | Responsabilidad |
+|---|---|---|
+| house_data.gd | HouseData | Resource: huella voxel, etapa inicial, costo inicial; huella_valida(), costo_total() |
+| house_upgrade_data.gd | HouseUpgradeData | Resource: etapa, costo, requisito_mision, requisito_amistad, dias_obra, habitaciones |
+| house_storage.gd | HouseStorage | Contenedores: slots, transferencia bidireccional M14, extraer_contenido(), señal contenedor_lleno |
+| house_decor.gd | HouseDecor | Grid fino 0.25 m: alidar_celda(), colocar(), otar() (90°), levantar(), persistencia |
+| house_upgrade.gd | HouseUpgrade | Obra por etapas: erificar_requisitos(), iniciar_obra(), 	ick_diario() (M29), progreso_obra() |
+| house.gd | House | Nodo exterior: brir_interior()/cerrar_interior(), obtener_entrada(), cartel_bloquea_mapa() |
+| house_interior.gd | HouseInterior | Habitaciones por etapa (living→5), gregar_habitaciones(), desbloquear_etapa() |
+| house_visit.gd | HouseVisit | Visitas M19/M21: agenda por franja, eaccion_decoracion(), puntos_amistad_por_valor() |
+
+Test: scripts/houses/test_m18_sistemas_s2.gd — 79 checks, 0 fallos, EXIT 0 (sin regresión: 	est_m18_casas.gd 53/0).
+
+**Notas:**
+- HouseVisit lee house_manager por duck-typing (obtener_vecino, egistrar_entrada_vecino); no lo modifica (regla §15).
+- En headless no hay InventarioService ni AmistadManager/MisionManager: las transferencias y requisitos degradan sin crash.
+- HouseInterior._habitaciones_por_etapa(5) = 6 habitaciones (living + dormitorio + cocina + taller + sótano + ático).
+- Pendiente (35 [ ]): cocina/taller funcionales con M16, jardín M33, visuales M154 (cimientos, exterior por etapa), integración M17/M21 real, tests de flujo completo.
