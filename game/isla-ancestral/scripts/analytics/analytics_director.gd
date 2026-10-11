@@ -169,6 +169,38 @@ func _actualizar_agregado_historico(payload: Dictionary) -> void:
 		f.store_string(JSON.stringify(hist, "  "))
 		f.close()
 
+## Exporta los agregados actuales como CSV (para análisis externo).
+## Devuelve la ruta del archivo CSV o "" si no hay datos.
+func exportar_csv(ruta: String = "") -> String:
+	if _agregados.is_empty():
+		return ""
+	if ruta.is_empty():
+		var ts := Time.get_datetime_string_from_system().replace(":", "-").replace(" ", "_")
+		ruta = DIR_ANALYTICS + "/export_%s.csv" % ts
+	var f := FileAccess.open(ruta, FileAccess.WRITE)
+	if f == null:
+		return ""
+	f.store_line("tipo,eventos")
+	for tipo in _agregados:
+		f.store_line("%s,%d" % [tipo, int(_agregados[tipo])])
+	f.close()
+	return ruta
+
+## Borra todos los datos locales de analytics (lotes, agregados, opt-out).
+## Devuelve el número de archivos borrados.
+func clear_data() -> int:
+	var borrados := 0
+	if DirAccess.dir_exists_absolute(DIR_ANALYTICS):
+		var dir := DirAccess.open(DIR_ANALYTICS)
+		if dir != null:
+			for archivo in dir.get_files():
+				DirAccess.remove_absolute(DIR_ANALYTICS + "/" + archivo)
+				borrados += 1
+	_agregados.clear()
+	_buffer.clear()
+	info_propia("Datos de analytics borrados (%d archivos)" % borrados)
+	return borrados
+
 ## Log propio vía M103 (categoría ANALYTICS), sin datos del evento.
 func info_propia(msg: String) -> void:
 	var lg = get_node_or_null("/root/GameLogger")

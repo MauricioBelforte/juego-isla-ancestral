@@ -1,0 +1,21 @@
+{
+	"id": "presion_03",
+	"familia": "presion",
+	"schema_version": 1,
+	"descripcion": "Presion avanzada: elevador que sube un nivel por placa activa, sin fallo punitivo (M66).",
+	"emisores": [
+		{"id": 0, "tipo": "placa", "etiqueta": "placa_elevador_a", "umbral_peso": 1},
+		{"id": 1, "tipo": "placa", "etiqueta": "placa_elevador_b", "umbral_peso": 3}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "elevador_presion"}
+	],
+	"objetivo": [0, 1],
+	"presion": {
+		"sin_fallo_punitivo": true,
+		"elevadores": [
+			{"id": "elevador_a", "emisor": 0, "niveles": 2, "grupo": [0, 1]}
+		],
+		"puertas_encadenadas": []
+	}
+}

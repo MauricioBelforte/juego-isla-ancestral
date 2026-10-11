@@ -1,0 +1,20 @@
+{
+	"id": "herramientas_01",
+	"familia": "herramientas",
+	"schema_version": 1,
+	"descripcion": "Familia herramientas: uso de pico sobre grieta, con condicion de inventario presente.",
+	"emisores": [
+		{"id": 0, "tipo": "grieta", "etiqueta": "grieta_norte"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "paso_grieta"}
+	],
+	"objetivo": [0],
+	"herramientas": {
+		"inventario_requerido": true,
+		"inventario": {"pico": "item_obj_her_002"},
+		"usos": [
+			{"id": "uso_pico", "herramienta": "pico", "objetivo": "grieta", "pos": [2, 1], "emisor": 0}
+		]
+	}
+}

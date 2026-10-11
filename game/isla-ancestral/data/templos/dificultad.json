@@ -1,0 +1,17 @@
+{
+	"schema_version": 1,
+	"descripcion": "M24 iter. 6: bandas de dificultad, progresion por zona del templo y ayuda progresiva por intentos fallidos.",
+	"bandas": [
+		{"id": "exploracion", "emisores_min": 1, "emisores_max": 2, "familias_ocultas": 0, "pista_segundos": 90},
+		{"id": "ritual", "emisores_min": 2, "emisores_max": 4, "familias_ocultas": 1, "pista_segundos": 60},
+		{"id": "antiguo", "emisores_min": 4, "emisores_max": 16, "familias_ocultas": 2, "pista_segundos": 45}
+	],
+	"zonas": [
+		{"id": "exteriores", "banda": "exploracion"},
+		{"id": "ruinas_pequenas", "banda": "exploracion"},
+		{"id": "templos_medianos", "banda": "ritual"},
+		{"id": "templo_subterraneo", "banda": "antiguo"},
+		{"id": "finales", "banda": "antiguo"}
+	],
+	"ayuda_progresiva": {"intentos_para_subir": 3, "max_subidas": 1, "paso_segundos": 15, "minimo_segundos": 30}
+}

@@ -1,0 +1,23 @@
+{
+	"id": "recompensas_02",
+	"familia": "recompensas",
+	"schema_version": 1,
+	"descripcion": "Checkpoints y recompensas: variante con recompensa repetible (unica=false) y dos tipos alineados al lore.",
+	"emisores": [
+		{"id": 0, "tipo": "cofre", "etiqueta": "cofre_brisa"},
+		{"id": 1, "tipo": "altar", "etiqueta": "altar_brisa"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "sello_recompensas_2"}
+	],
+	"objetivo": [0, 1],
+	"recompensas": {
+		"checkpoint": {"patron": "atomico", "tmp": true, "bak": true, "rename": true},
+		"cofre_m66": {"id": "cofre_recompensas_02", "inmutable": true},
+		"lore_templo": ["LORE_BRISA", "LORE_TEMPLO_1"],
+		"lista": [
+			{"id": "rec_lore_brisa", "tipo": "narrativa", "lore": "LORE_BRISA", "unica": true, "emisor": 0},
+			{"id": "rec_suministro", "tipo": "material", "item": "planks", "cantidad": 5, "lore": "LORE_BRISA", "unica": false, "emisor": 1}
+		]
+	}
+}

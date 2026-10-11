@@ -38,6 +38,13 @@ func register_state(state: Node, name: StringName, priority: int = 0) -> void:
 	state.set("state_name", name)
 	state.set("priority", priority)
 	state.set("controller", get_parent())
+	# BUG-129 (M64, causa raíz): los estados se instancian con .new() en
+	# npc_agent.gd y SOLO se guardaban en _states; sin add_child nunca entran
+	# al árbol de escena → al cerrar son huérfanos (7 NPCs × 8 estados = 56).
+	# Parentearlos aquí (bajo la máquina, que ya es hija del NPCAgent) hace que
+	# se liberen con el NPCAgent, patrón análogo al fix del spawner M50.
+	if state.get_parent() == null:
+		add_child(state)
 	_states[name] = state
 	print("[StateMachine] Estado registrado: %s (prioridad=%d)" % [name, priority])
 
@@ -244,7 +251,7 @@ func get_plan_stack():
 	return plan_stack
 
 
-## Forzar恢复 del plan anterior (llamar desde watchdog o recovery)
+## Forzar la recuperación del plan anterior (llamar desde watchdog o recovery)
 func recover_previous_plan() -> bool:
 	if plan_stack == null or plan_stack.is_empty():
 		return false

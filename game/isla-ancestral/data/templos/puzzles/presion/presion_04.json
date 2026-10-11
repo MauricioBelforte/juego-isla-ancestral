@@ -1,0 +1,24 @@
+{
+	"id": "presion_04",
+	"familia": "presion",
+	"schema_version": 1,
+	"descripcion": "Presion avanzada: puertas por placas encadenadas (cada puerta exige una cadena progresiva de placas).",
+	"emisores": [
+		{"id": 0, "tipo": "placa", "etiqueta": "placa_1", "umbral_peso": 1},
+		{"id": 1, "tipo": "placa", "etiqueta": "placa_2", "umbral_peso": 1},
+		{"id": 2, "tipo": "placa", "etiqueta": "placa_3", "umbral_peso": 3}
+	],
+	"reglas": [
+		{"emisores": [0, 1, 2], "receptor": "puerta_encadenada"}
+	],
+	"objetivo": [0, 1, 2],
+	"presion": {
+		"sin_fallo_punitivo": true,
+		"elevadores": [],
+		"puertas_encadenadas": [
+			{"id": "puerta_1", "emisor": 0, "requiere": [0]},
+			{"id": "puerta_2", "emisor": 1, "requiere": [0, 1]},
+			{"id": "puerta_final", "emisor": 2, "requiere": [0, 1, 2]}
+		]
+	}
+}

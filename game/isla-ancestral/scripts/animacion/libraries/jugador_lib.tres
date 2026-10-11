@@ -1,0 +1,67 @@
+[gd_resource type="AnimationLibrary" load_steps=4 format=3]
+
+; M48 — Biblioteca placeholder del jugador (Fase 1).
+; 3 clips generados a mano: animan ModeloVoxel:position:y con un "bob" sutil.
+; Los clips reales (Fase 3) se producen sobre el rig GLB con Blender.
+; Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-10
+
+[sub_resource type="Animation" id="Animation_idle"]
+resource_name = "anim_jugador_idle"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ModeloVoxel:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0, 0.02, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_walk"]
+resource_name = "anim_jugador_walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ModeloVoxel:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0, 0.05, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_run"]
+resource_name = "anim_jugador_run"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ModeloVoxel:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0, 0.1, 0.0]
+}
+
+[resource]
+_data = {
+&"anim_jugador_idle": SubResource("Animation_idle"),
+&"anim_jugador_walk": SubResource("Animation_walk"),
+&"anim_jugador_run": SubResource("Animation_run")
+}

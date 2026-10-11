@@ -1,0 +1,22 @@
+{
+	"id": "herramientas_02",
+	"familia": "herramientas",
+	"schema_version": 1,
+	"descripcion": "Familia herramientas: gancho sobre pasarela y farol sobre runa (2 usos, 2 emisores).",
+	"emisores": [
+		{"id": 0, "tipo": "pasarela", "etiqueta": "pasarela_oeste"},
+		{"id": 1, "tipo": "runa", "etiqueta": "runa_farol"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "puerta_herramientas"}
+	],
+	"objetivo": [0, 1],
+	"herramientas": {
+		"inventario_requerido": true,
+		"inventario": {"farol": "item_obj_luz_005"},
+		"usos": [
+			{"id": "uso_gancho", "herramienta": "gancho", "objetivo": "pasarela", "pos": [1, 2], "emisor": 0},
+			{"id": "uso_farol", "herramienta": "farol", "objetivo": "runa", "pos": [4, 2], "emisor": 1}
+		]
+	}
+}

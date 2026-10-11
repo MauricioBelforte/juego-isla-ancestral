@@ -15,6 +15,7 @@ func _ready() -> void:
 	categoria = &"npc"
 	prioridad = 10
 	radio = 2.5
+	_crear_visuales()
 	global_position = spawn_position
 	# Reintento de altura (BUG-119 chaman, autorizado msg 74): mismo patron
 	# _process del incienso (1 probe/frame, timeout 8s). Corrige el fallback
@@ -58,6 +59,39 @@ func _process(_delta: float) -> void:
 		set_process(false)
 		global_position = Vector3(tx, h + 1.0, tz)
 		print("[M163] ShamanNPC reposicionado sobre el terreno: ", global_position)
+
+# BUG-124 (encargo msg 82): placeholder visual con el mismo patron que
+# villager.gd::_crear_visuales (capsula + cabeza + Label3D). Sin
+# CollisionShape3D: villager lo necesita por ser CharacterBody3D; aca el nodo
+# es Node3D plano (InteractableBase) y la interaccion es por radio, sin
+# fisicas. Sin material override: mismo estilo por defecto que los demas NPCs.
+func _crear_visuales() -> void:
+	var body_mesh: MeshInstance3D = MeshInstance3D.new()
+	var capsule: CapsuleMesh = CapsuleMesh.new()
+	capsule.radius = 0.25
+	capsule.height = 1.0
+	body_mesh.mesh = capsule
+	body_mesh.position.y = 0.5
+	body_mesh.name = "Body"
+	add_child(body_mesh)
+
+	var head_mesh: MeshInstance3D = MeshInstance3D.new()
+	var sphere: SphereMesh = SphereMesh.new()
+	sphere.radius = 0.2
+	head_mesh.mesh = sphere
+	head_mesh.position.y = 1.2
+	head_mesh.name = "Head"
+	add_child(head_mesh)
+
+	var label := Label3D.new()
+	label.text = "Chamán"
+	label.font_size = 42
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.position.y = 2.0
+	label.modulate = Color(1, 1, 1, 0.95)
+	label.outline_size = 6
+	label.name = "LabelNombre"
+	add_child(label)
 
 func interactuar(_datos: Dictionary) -> void:
 	# M163 B: dialogo contextual local segun progresion (L47/L56/L57/L58).

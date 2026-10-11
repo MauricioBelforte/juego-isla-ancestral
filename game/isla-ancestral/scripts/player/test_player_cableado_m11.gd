@@ -7,7 +7,7 @@
 # Exit: 0 = todo OK, 1 = algun fallo.
 #
 # ── Guardianes anti-falso-verde (3 capas, patron del repo) ──────────────
-#   1. Marcadores _fin("A".."E") + BLOQUES_ESPERADOS: si un bloque no cierra
+#   1. Marcadores _fin("A".."G") + BLOQUES_ESPERADOS: si un bloque no cierra
 #      (aborto por SCRIPT ERROR), se NOMBRA y falla.
 #   2. Piso CHECKS_MINIMOS = el total REAL medido en verde (no el teorico).
 #   3. _summary() registrado con call_deferred en _init(): si _run() aborta,
@@ -19,17 +19,19 @@
 extends SceneTree
 
 const MODULO := "M11 Cableado"
-const BLOQUES_ESPERADOS := ["A", "B", "C", "D", "E"]
-## Total REAL medido en verde (49 = 9 A + 9 B + 13 C + 10 D + 8 E). Si baja, algo dejo de correr.
-const CHECKS_MINIMOS := 49
+const BLOQUES_ESPERADOS := ["A", "B", "C", "D", "E", "F", "G"]
+## Total REAL medido en verde (71 = 9 A + 9 B + 13 C + 10 D + 8 E + 13 F + 9 G). Si baja, algo dejo de correr.
+const CHECKS_MINIMOS := 71
 
 const CORE := preload("res://scripts/player/player_core_m11.gd")
 
 ## Jugador falso: CharacterBody3D con la MISMA superficie que player.gd
-## (`_on_ground` var y `_en_agua()` metodo) para ejercitar el duck-typing.
+## (`_on_ground` var, `_en_agua()` metodo y `move_speed` @export) para ejercitar
+## el duck-typing del cableado y del sprint.
 class FakePlayer extends CharacterBody3D:
 	var _on_ground: bool = true
 	var _agua: bool = false
+	var move_speed: float = 5.0
 	func _en_agua() -> bool:
 		return _agua
 
@@ -273,6 +275,101 @@ func _bloque_e_contrato() -> void:
 		_check(false, "E7-E8 no se pudo instanciar Player.tscn")
 	_fin("E")
 
+## ── Bloque F: sprint (input + velocidad) ─────────────────────────────
+
+func _bloque_f_sprint() -> void:
+	# F1-F2: lectura del input. Headless no tiene teclado -> false; el hook lo fuerza.
+	var suelto: Node = CORE.new()
+	_check(not bool(suelto.call("leer_sprint")), "F1 leer_sprint() = false sin teclado ni forzado")
+	suelto.call("forzar_sprint_test", 1)
+	_check(bool(suelto.call("leer_sprint")), "F2 forzar_sprint_test(1) -> leer_sprint() = true")
+	suelto.free()
+
+	# F3-F5: constantes de diseno (03-Diseno sec.1 / 05-Checklist L35-L36).
+	_check(absf(float(CORE.VELOCIDAD_CORRER) - 6.5) < 0.001, "F3 VELOCIDAD_CORRER = 6.5 (diseno)")
+	_check(absf(float(CORE.VELOCIDAD_CAMINAR) - 4.2) < 0.001, "F4 VELOCIDAD_CAMINAR = 4.2 (diseno)")
+	_check(absf(float(CORE.FACTOR_SPRINT) - (6.5 / 4.2)) < 0.001, "F5 FACTOR_SPRINT = 6.5/4.2")
+
+	# F6-F10: sprint con movimiento en suelo -> RUN, corriendo() y velocidad aplicada.
+	_montar()
+	_player.velocity = Vector3(5.0, 0.0, 0.0)
+	_player.set("_on_ground", true)
+	_core.call("forzar_sprint_test", 1)
+	_tic(0.016)
+	_check(_estado() == 2, "F6 sprint + suelo en movimiento -> RUN (%d)" % _estado())
+	_check(bool(_core.call("corriendo")), "F7 corriendo() = true")
+	_check(absf(float(_core.call("factor_velocidad")) - (6.5 / 4.2)) < 0.001,
+		"F8 factor_velocidad() = FACTOR_SPRINT (%.3f)" % float(_core.call("factor_velocidad")))
+	_check(absf(float(_core.call("base_move_speed")) - 5.0) < 0.001,
+		"F9 base_move_speed capturada = 5.0 (%.3f)" % float(_core.call("base_move_speed")))
+	_check(absf(float(_player.move_speed) - 5.0 * (6.5 / 4.2)) < 0.001,
+		"F10 move_speed del padre escalado (%.3f)" % float(_player.move_speed))
+
+	# F11-F13: soltar el sprint restaura move_speed y vuelve a WALK.
+	_core.call("forzar_sprint_test", 0)
+	_tic(0.016)
+	_check(absf(float(_player.move_speed) - 5.0) < 0.001,
+		"F11 soltar sprint restaura move_speed = 5.0 (%.3f)" % float(_player.move_speed))
+	_check(not bool(_core.call("corriendo")), "F12 corriendo() = false al soltar")
+	_check(_estado() == 1, "F13 al soltar -> WALK (%d)" % _estado())
+	_desmontar()
+	_fin("F")
+
+## ── Bloque G: el drenado de correr se EJERCITA (costo aplicado, neto 0) ─
+
+func _bloque_g_drenado() -> void:
+	_montar()
+	# G1: sin correr 60 s -> solo regen 1/min: 50 -> 51.
+	_core.call("consumir_energia", 50.0)
+	_player.velocity = Vector3.ZERO
+	_player.set("_on_ground", true)
+	_tic(60.0)
+	_check(absf(float(_core.call("energia_actual")) - 51.0) < 0.001,
+		"G1 sin correr 60 s -> 51 (regen 1/min) (%.2f)" % float(_core.call("energia_actual")))
+
+	# G2: desde 50, correr 60 s -> costo 1/min + regen 1/min = 50 (NO 51). Prueba
+	# que el COSTO se aplica: si el sprint no estuviera cableado, daria 51.
+	_core.call("consumir_energia", 1.0)
+	_core.call("forzar_sprint_test", 1)
+	_player.velocity = Vector3(5.0, 0.0, 0.0)
+	_tic(60.0)
+	_check(absf(float(_core.call("energia_actual")) - 50.0) < 0.001,
+		"G2 correr 60 s -> 50 (costo aplicado, neto 0) (%.2f)" % float(_core.call("energia_actual")))
+
+	# G3-G4: L70 ESTRUCTURAL: correr 100 min NO agota y el neto es 0 exacto.
+	_tic(6000.0)
+	_check(float(_core.call("energia_actual")) > 0.0,
+		"G3 L70: correr 100 min NO agota (>0) (%.2f)" % float(_core.call("energia_actual")))
+	_check(absf(float(_core.call("energia_actual")) - 50.0) < 0.001,
+		"G4 L70 estructural: neto 0 exacto -> 50 (%.2f)" % float(_core.call("energia_actual")))
+
+	# G5: el costo existe en el modelo (contrato 1/min -> 1/60 por s).
+	var en: RefCounted = _core.get("energia")
+	_check(absf(float(en.call("costo_correr_por_segundo")) - (1.0 / 60.0)) < 0.0001,
+		"G5 costo_correr_por_segundo = 1/60")
+
+	# G6-G7: agotada -> no corre ni aplica velocidad (cozy: sin castigo).
+	_core.call("consumir_energia", 1000.0)
+	_player.velocity = Vector3(5.0, 0.0, 0.0)
+	_tic(0.016)
+	_check(not bool(_core.call("corriendo")), "G6 agotada -> no corre")
+	_check(absf(float(_player.move_speed) - 5.0) < 0.001,
+		"G7 agotada -> move_speed restaurado = 5.0 (%.3f)" % float(_player.move_speed))
+
+	# G8: sprint pedido estando parado no cuenta como correr (gate en_mov).
+	_core.call("recargar_dormir")
+	_player.velocity = Vector3.ZERO
+	_tic(0.016)
+	_check(not bool(_core.call("corriendo")), "G8 sprint parado -> corriendo() = false")
+
+	# G9: sprint pedido en el aire no cuenta (JUMP no permite correr).
+	_player.velocity = Vector3(0.0, 3.0, 0.0)
+	_player.set("_on_ground", false)
+	_tic(0.016)
+	_check(not bool(_core.call("corriendo")), "G9 sprint en el aire -> corriendo() = false")
+	_desmontar()
+	_fin("G")
+
 ## ── Suite principal ─────────────────────────────────────────────────
 
 func _run() -> void:
@@ -282,4 +379,6 @@ func _run() -> void:
 	_bloque_c_energia_viva()
 	_bloque_d_selector_vivo()
 	_bloque_e_contrato()
+	_bloque_f_sprint()
+	_bloque_g_drenado()
 	_summary()

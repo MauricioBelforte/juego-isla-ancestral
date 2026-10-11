@@ -1,0 +1,32 @@
+{
+	"id": "simbolos_01",
+	"familia": "simbolos",
+	"schema_version": 1,
+	"descripcion": "Familia simbolos: glifos ancestrales emparejados, glosario del templo (M25 inscripciones) y sello de puerta por pareja correcta.",
+	"emisores": [
+		{"id": 0, "tipo": "pedestal", "etiqueta": "pedestal_a"},
+		{"id": 1, "tipo": "pedestal", "etiqueta": "pedestal_b"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "sello_puerta"}
+	],
+	"objetivo": [0, 1],
+	"simbolos": {
+		"glifos": [
+			{"id": "glifo_sol", "forma": "circulo_rayos", "simbolos": ["circulo", "rayos"], "significado": "Sol"},
+			{"id": "glifo_agua", "forma": "ola", "simbolos": ["ola"], "significado": "Agua"},
+			{"id": "glifo_piedra", "forma": "rombo", "simbolos": ["rombo"], "significado": "Piedra"}
+		],
+		"parejas": [["glifo_sol", "glifo_agua"]],
+		"pedestales": [
+			{"id": "pedestal_a", "pos": [0, 0], "emisor": 0},
+			{"id": "pedestal_b", "pos": [1, 0], "emisor": 1}
+		],
+		"glosario": [
+			{"glifo": "glifo_sol", "inscripcion_m25": "INSCRIPCION_SOL", "significado": "Sol", "simbolos": ["circulo", "rayos"]},
+			{"glifo": "glifo_agua", "inscripcion_m25": "INSCRIPCION_AGUA", "significado": "Agua", "simbolos": ["ola"]},
+			{"glifo": "glifo_piedra", "inscripcion_m25": "INSCRIPCION_PIEDRA", "significado": "Piedra", "simbolos": ["rombo"]}
+		],
+		"sello": {"id": "sello_puerta", "pareja": ["glifo_sol", "glifo_agua"]}
+	}
+}

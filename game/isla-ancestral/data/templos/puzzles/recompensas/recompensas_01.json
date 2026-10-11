@@ -1,0 +1,22 @@
+{
+	"id": "recompensas_01",
+	"familia": "recompensas",
+	"schema_version": 1,
+	"descripcion": "Checkpoints y recompensas: recompensas unicas no duplicables (cofre inmutable M66) alineadas al lore del templo.",
+	"emisores": [
+		{"id": 0, "tipo": "cofre", "etiqueta": "cofre_templo"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "cofre_abierto"}
+	],
+	"objetivo": [0],
+	"recompensas": {
+		"checkpoint": {"patron": "atomico", "tmp": true, "bak": true, "rename": true},
+		"cofre_m66": {"id": "cofre_recompensas_01", "inmutable": true},
+		"lore_templo": ["LORE_TEMPLO_1"],
+		"lista": [
+			{"id": "rec_narrativa", "tipo": "narrativa", "lore": "LORE_TEMPLO_1", "unica": true, "emisor": 0},
+			{"id": "rec_material", "tipo": "material", "item": "gemstone", "cantidad": 3, "lore": "LORE_TEMPLO_1", "unica": true, "emisor": 0}
+		]
+	}
+}

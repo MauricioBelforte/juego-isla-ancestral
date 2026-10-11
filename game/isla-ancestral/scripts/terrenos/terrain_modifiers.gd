@@ -22,22 +22,29 @@ static func get_terrain_modifier(provider: Node, terrain_id: int) -> float:
 	return 1.0
 
 
-## Bonificación de equipación desde M155 (0.0 si no está, §3.1)
-## M155.get_terrain_bonus espera terrain_type: String (nombre del terreno);
-## el provider de M156 usa ids numéricos → mapeo id→nombre del §4.1.
-const NOMBRES_TERRENO := {
-	0: "caminado", 1: "barro", 2: "césped", 3: "arena",
-	4: "agua", 5: "nieve", 6: "rocas",
-}
+## Bonificación de equipación desde M155 (0.0 si no está, §3.1).
+## M155.get_terrain_bonus espera terrain_type: String (clave del enum
+## EquipmentSlot.TerrainType en minúsculas: "grass", "mud", "pavement", "sand",
+## "shallow_water", "snow", "rock"). M156 iter. 3 (B1.3): se ELIMINÓ el mapa
+## NOMBRES_TERRENO (en español: "barro"/"césped"… NO matcheaba las claves de M155)
+## y el enum de M155 queda como ÚNICA fuente. Sus valores 0..6 coinciden con los
+## terrain_id de M156 (§4.1), así que la clave se obtiene por lookup inverso.
+
+## Clave de bono (M155) para un terrain_id de M156; "" si el id no está en el enum.
+static func clave_terreno_m155(terrain_id: int) -> String:
+	var nombre: Variant = EquipmentSlot.TerrainType.find_key(terrain_id)
+	if nombre == null:
+		return ""
+	return String(nombre).to_lower()
+
 
 static func get_equipment_bonus(equipment_system: Node, terrain_id: int) -> float:
 	if equipment_system != null and equipment_system.has_method("get_terrain_bonus"):
-		# Puente tipado: M155 es String; si el manager rechaza int, convertir
-		var nombre: String = String(NOMBRES_TERRENO.get(terrain_id, "caminado"))
-		var bonus := 0.0
-		var r: Variant = equipment_system.get_terrain_bonus(nombre)
-		bonus = float(r)
-		return bonus
+		var clave: String = clave_terreno_m155(terrain_id)
+		if clave == "":
+			return 0.0
+		var r: Variant = equipment_system.get_terrain_bonus(clave)
+		return float(r)
 	return 0.0
 
 

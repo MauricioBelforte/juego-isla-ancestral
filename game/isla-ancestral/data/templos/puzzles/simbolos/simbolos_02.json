@@ -1,0 +1,32 @@
+{
+	"id": "simbolos_02",
+	"familia": "simbolos",
+	"schema_version": 1,
+	"descripcion": "Familia simbolos: variante con glifo intruso que no forma pareja (debe rechazarse).",
+	"emisores": [
+		{"id": 0, "tipo": "pedestal", "etiqueta": "pedestal_norte"},
+		{"id": 1, "tipo": "pedestal", "etiqueta": "pedestal_sur"}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "sello_simbolos_2"}
+	],
+	"objetivo": [0, 1],
+	"simbolos": {
+		"glifos": [
+			{"id": "glifo_luna", "forma": "media_luna", "simbolos": ["media_luna"], "significado": "Luna"},
+			{"id": "glifo_raiz", "forma": "raiz", "simbolos": ["raiz"], "significado": "Raiz"},
+			{"id": "glifo_viento", "forma": "espiral", "simbolos": ["espiral"], "significado": "Viento"}
+		],
+		"parejas": [["glifo_luna", "glifo_raiz"]],
+		"pedestales": [
+			{"id": "pedestal_norte", "pos": [0, 0], "emisor": 0},
+			{"id": "pedestal_sur", "pos": [0, 1], "emisor": 1}
+		],
+		"glosario": [
+			{"glifo": "glifo_luna", "inscripcion_m25": "INSCRIPCION_LUNA", "significado": "Luna", "simbolos": ["media_luna"]},
+			{"glifo": "glifo_raiz", "inscripcion_m25": "INSCRIPCION_RAIZ", "significado": "Raiz", "simbolos": ["raiz"]},
+			{"glifo": "glifo_viento", "inscripcion_m25": "INSCRIPCION_VIENTO", "significado": "Viento", "simbolos": ["espiral"]}
+		],
+		"sello": {"id": "sello_simbolos_2", "pareja": ["glifo_luna", "glifo_raiz"]}
+	}
+}

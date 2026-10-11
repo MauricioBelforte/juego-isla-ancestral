@@ -88,6 +88,21 @@ func _ejecutar() -> void:
 	_check("opt-out descarta el evento inmediatamente", _ad.eventos_pendientes() == antes)
 	_check("opt_out.cfg persistido", FileAccess.file_exists(_ad.ARCHIVO_OPT_OUT))
 
+	# ── CSV export (L138) ──
+	_ad.registrar_evento(_ad.EV_FEATURE_USADA, {"feature": "test_csv"})
+	var csv_path: String = _ad.exportar_csv()
+	_check("exportar_csv devuelve ruta", csv_path != "")
+	if csv_path != "":
+		_check("CSV existe", FileAccess.file_exists(csv_path))
+		var csv_txt := FileAccess.get_file_as_string(csv_path)
+		_check("CSV tiene header", csv_txt.contains("tipo,eventos"))
+		_check("CSV tiene feature_usada", csv_txt.contains("feature_usada"))
+
+	# ── clear_data (L146) ──
+	var borrados: int = _ad.clear_data()
+	_check("clear_data borra archivos", borrados > 0)
+	_check("clear_data vacia agregados", _ad.obtener_estadisticas_agregadas().is_empty())
+
 	# Restaurar estado (captura activa, sin archivos del test)
 	_ad.establecer_opt_out(false)
 	_limpiar_archivos()

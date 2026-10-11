@@ -132,7 +132,7 @@ func _force_recovery(npc_id: StringName, stuck_state: StringName) -> void:
 			# Dormido demasiado → despertar
 			recovery_forced.emit(npc_id, &"wake_up")
 		&"Idle":
-			# Idle太久 → algo falló en la rutina → intentar recuperar plan
+			# Idle demasiado largo → algo falló en la rutina → intentar recuperar plan
 			recovery_forced.emit(npc_id, &"recover_plan")
 		_:
 			# Cualquier otro → intentar recuperar plan anterior

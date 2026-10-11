@@ -42,6 +42,12 @@ var _locator = null
 const TIMEOUT_REINTENTOS_MS: int = 8000
 var _t_inicio_reintentos: int = -1
 var _reintentando: bool = false
+## BUG-119 Opcion B (autorizada msg 103, 2026-10-10): el intento sincronico de
+## _ready emite PRINT (no WARNING) cuando va a armarse el reintento, porque el
+## exito llega ~30 ms despues (frame 3) y el warning de stderr parecia un fallo
+## real en cada boot --script. El fracaso verdadero lo sigue emitiendo el
+## timeout de _process (push_warning) y cualquier otro _spawneear fallido.
+var _aviso_inicial_diferido := false
 
 func _ready() -> void:
 	set_process(false)  # solo procesa mientras reintenta el spawn inicial
@@ -50,7 +56,9 @@ func _ready() -> void:
 		centro_montana = _centro_de_mundo()
 	if _locator == null:
 		_locator = get_node_or_null("/root/TerrainLocator")
+	_aviso_inicial_diferido = true
 	_spawneear(CANT_PUNTOS, false)
+	_aviso_inicial_diferido = false
 	if _puntos.is_empty():
 		_t_inicio_reintentos = Time.get_ticks_msec()
 		_reintentando = true
@@ -135,8 +143,14 @@ func _spawneear(cant: int, raro: bool) -> void:
 		_creados += 1
 		creados += 1
 	if creados == 0:
-		push_warning("[M163] IncenseSpawner: 0 puntos creados (%d fallas de altura en centro %s)"
-				% [_fallas_altura, str(centro_montana)])
+		var msg := "[M163] IncenseSpawner: 0 puntos creados (%d fallas de altura en centro %s)" \
+				% [_fallas_altura, str(centro_montana)]
+		if _aviso_inicial_diferido:
+			# BUG-119 Opcion B: intento inicial con reintento por venir -> print
+			# (stderr limpio); si el reintento agota, el warning lo emite _process.
+			print(msg + " — reintento armado (esperando terreno)")
+		else:
+			push_warning(msg)
 	else:
 		print("[M163] IncenseSpawner: %d puntos en montaña (%d fallas de altura, centro %s)"
 				% [_puntos.size(), _fallas_altura, str(centro_montana)])

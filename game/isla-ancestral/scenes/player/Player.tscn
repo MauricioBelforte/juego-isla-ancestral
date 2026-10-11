@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://assets/3d/media/45-Arte3D_jugador_voxel.glb" id="2_voxel"]
 [ext_resource type="Script" path="res://scripts/terrenos/terrain_detector.gd" id="3_terrain"]
 [ext_resource type="Script" path="res://scripts/player/player_core_m11.gd" id="4_core_m11"]
+[ext_resource type="AnimationLibrary" path="res://scripts/animacion/libraries/jugador_lib.tres" id="5_jugador_lib"]
+[ext_resource type="Script" path="res://scripts/animacion/animacion_jugador_m48.gd" id="6_anim_m48"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
 radius = 0.4
@@ -31,3 +33,11 @@ script = ExtResource("3_terrain")
 
 [node name="NucleoM11" type="Node" parent="."]
 script = ExtResource("4_core_m11")
+
+[node name="AnimacionM48" type="Node" parent="."]
+script = ExtResource("6_anim_m48")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimacionM48"]
+libraries = {
+&"": ExtResource("5_jugador_lib")
+}

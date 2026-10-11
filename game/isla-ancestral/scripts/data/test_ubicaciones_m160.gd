@@ -104,7 +104,7 @@ func _test_recolectables() -> void:
 	if wl == null:
 		return
 	var rec = wl.get_recolectables("LOC-RIZ-BOS-001")
-	_check("BOS-001 tiene recolectables", rec.size() >= 0, "size=%d" % rec.size())
+	_check("BOS-001 tiene recolectables", rec.size() > 0, "size=%d" % rec.size())
 
 func _summary() -> void:
 	print("=== Resumen M160: %d checks, %d fallos ===" % [_checks, _fallos])

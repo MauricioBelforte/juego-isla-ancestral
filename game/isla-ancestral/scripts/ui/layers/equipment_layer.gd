@@ -18,6 +18,9 @@ var _grid: GridContainer
 var _bonus_label: Label
 var _info_label: Label
 var _manager: Node = null
+## M155 L123: terreno actual para resaltar slots con bonos ("", = sin datos).
+## En runtime se consulta al TerrainDetector del Player; los tests pueden forzarlo.
+var _terreno_forzado: String = ""
 
 func _ready() -> void:
 	layer_type = UILayerType.Type.MODAL_SIMPLE
@@ -133,18 +136,26 @@ func _on_locale_changed(_locale: String) -> void:
 func _refresh_equipo() -> void:
 	if _manager == null:
 		return
+	var clave_terreno: String = _clave_terreno_actual()
 	for tipo in _CATALOGO_SLOTS:
 		var st: int = _tipo_a_slot(tipo)
 		var btn: Button = _slots_btn.get(st)
 		if btn == null:
 			continue
-		var slot = _manager.get_equipped_item(st)
-		if slot and slot.is_equipped():
+		var slot: EquipmentSlot = _manager.get_equipped_item(st)
+		var bonos: Dictionary = {}
+		if slot != null and slot.is_equipped():
 			btn.text = UiI18n.traducir_param("EQUIP.EQUIPADO", {"tipo": tipo.capitalize(), "item": slot.item_name})
 			btn.tooltip_text = UiI18n.traducir_param("EQUIP.TOOLTIP_QUITAR", {"item": slot.item_id, "rareza": slot.rarity})
+			bonos = slot.terrain_bonuses
 		else:
 			btn.text = UiI18n.traducir_param("EQUIP.EQUIPADO", {"tipo": tipo.capitalize(), "item": UiI18n.traducir("EQUIP.VACIO")})
 			btn.tooltip_text = UiI18n.traducir("EQUIP.TOOLTIP_ELEGIR")
+		# L123: resaltar el slot si el item equipado tiene bono para el terreno actual.
+		var bono_terreno: float = 0.0
+		if clave_terreno != "":
+			bono_terreno = float(bonos.get(clave_terreno, 0.0))
+		_aplicar_resaltado(btn, bono_terreno)
 	var total_bonus := 0.0
 	if _manager.has_method("get_terrain_bonus_total"):
 		total_bonus = float(_manager.get_terrain_bonus_total())
@@ -219,6 +230,53 @@ func _on_equipment_changed(_slot_type: int, _new_item_id: String) -> void:
 func _on_terrain_bonus_updated(_total: float) -> void:
 	if visible:
 		_refresh_equipo()
+
+## ── L123: highlight por terreno actual ───────────────────
+
+## Fija el terreno actual sin necesitar un Player/terreno real (hook de test).
+func forzar_terreno(clave: String) -> void:
+	_terreno_forzado = clave
+	_refresh_equipo()
+
+## Clave de terreno actual ("" si no hay datos). Runtime: TerrainDetector del Player.
+func _clave_terreno_actual() -> String:
+	if _terreno_forzado != "":
+		return _terreno_forzado
+	var tid: int = _terreno_id_actual()
+	if tid < 0:
+		return ""
+	return TerrainModifiers.clave_terreno_m155(tid)
+
+## terrain_id actual del jugador (-1 si no hay detector).
+func _terreno_id_actual() -> int:
+	var jugadores := get_tree().get_nodes_in_group("player")
+	if jugadores.is_empty():
+		return -1
+	var jugador: Node = jugadores[0]
+	var det: Node = jugador.get_node_or_null("TerrainDetector")
+	if det != null and det.has_method("get_current_terrain_id"):
+		return int(det.call("get_current_terrain_id"))
+	return -1
+
+## Slots (slot_type) cuyo item tiene bono != 0 para el terreno dado.
+## Puro/estatico -> testeable headless sin UI. `equipos`: {slot_type: terrain_bonuses}.
+static func slots_resaltados(equipos: Dictionary, clave: String) -> Array:
+	var out: Array = []
+	if clave == "":
+		return out
+	for st in equipos.keys():
+		var b: Variant = equipos[st]
+		if b is Dictionary and absf(float((b as Dictionary).get(clave, 0.0))) > 0.0001:
+			out.append(st)
+	return out
+
+## Aplica/quita el color de resaltado segun el bono (0 = sin resaltado).
+func _aplicar_resaltado(btn: Button, bono: float) -> void:
+	if is_zero_approx(bono):
+		btn.remove_theme_color_override("font_color")
+		return
+	var color := Color(0.13, 0.52, 0.18) if bono > 0.0 else Color(0.62, 0.16, 0.16)
+	btn.add_theme_color_override("font_color", color)
 
 func _tipo_a_slot(tipo: String) -> int:
 	match tipo:

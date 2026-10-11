@@ -23,7 +23,19 @@ func _ready():
 	_crear_farm_controller()
 	_crear_shaman()
 	_crear_incense_spawner()
+	_registrar_hud()
 	print("Isla Ancestral — Isla Raíz")
+
+
+## BUG-128 (encargo msg 82): registra la capa UI viva en UIManager._hud.
+## Sin esto, ocultar_hud (H) era no-op: _hud nunca se asignaba porque nadie
+## instanciaba scenes/ui/hud.tscn. El hotbar (EquippedPanel) y el RelojWidget
+## cuelgan de esta capa, asi que se ocultan en cadena con un solo toggle.
+func _registrar_hud() -> void:
+	var ui_manager := get_node_or_null("/root/UIManager")
+	if ui_manager and ui_manager.has_method("register_hud"):
+		ui_manager.register_hud($UI)
+		print("[BUG-128] capa UI registrada en UIManager._hud")
 
 ## M33 (iter. 2): controller agrícola (arar/regar/cosechar con interactuar)
 func _crear_farm_controller() -> void:

@@ -52,6 +52,31 @@ class DetectorCiegoError(RuntimeError):
     """
 
 
+def esc(s: str) -> str:
+    """Escapa `|` dentro del contenido de una celda (idempotente).
+
+    CAUSA RAIZ del defecto de fila truncada (documentado como E-28):
+    `parsear_filas()` lee correctamente un `|` literal dentro de Notas usando
+    `maxsplit`, pero al reescribir se hacia `" | ".join(...)` SIN escapar, de
+    modo que el pipe literal partia la celda y la fila perdia su cierre.
+
+    Sin esta funcion, cada nota que contenga `a | b` genera una fila rota al
+    regenerar (defecto recurrente: se reparo a mano mas de 100 veces en
+    M107/M110/M150/M37/M61/M88/M151/M153/M18/M118/M125...).
+
+    IDEMPOTENCIA: hay 52 filas de GLOBAL que YA tienen `\\|` en Notas. Si se
+    escapara sin normalizar, `a \\| b` se volveria `a \\\\\\| b` (backslash
+    duplicado visible en la nota). Por eso primero se desescapa lo que ya lo
+    estaba y despues se escapa: el resultado es estable si se re-aplica.
+
+    Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+    """
+    s = s.replace("\\\\", "\x00")          # proteger backslashes literales
+    s = s.replace("\\|", "|")              # desescapar pipes ya escapados
+    s = s.replace("\x00", "\\\\")          # restaurar backslashes literales
+    return s.replace("|", "\\|")           # escapar todos los pipes
+
+
 # ---------------------------------------------------------------------------
 # Configuración
 # ---------------------------------------------------------------------------
@@ -463,7 +488,7 @@ def generar_tabla(salida: Path, dry_run: bool = False):
         fila["progreso"] = progreso
 
         filas_output.append(
-            "| " + " | ".join(fila.get(col, "—") for col in columnas) + " |"
+            "| " + " | ".join(esc(fila.get(col, "—")) for col in columnas) + " |"
         )
 
         # Registrar cambios de estado/progreso para el resumen
@@ -478,7 +503,7 @@ def generar_tabla(salida: Path, dry_run: bool = False):
     for mid in sorted(huerfanas, key=lambda s: int(s) if s.isdigit() else 10**9):
         datos = filas_existente[mid]
         filas_output.append(
-            "| " + " | ".join(datos.get(col, "—") for col in columnas) + " |"
+            "| " + " | ".join(esc(datos.get(col, "—")) for col in columnas) + " |"
         )
     if huerfanas:
         print(f"ℹ️  Filas conservadas sin checklist detectable: {len(huerfanas)} ({', '.join(huerfanas[:10])}…)")

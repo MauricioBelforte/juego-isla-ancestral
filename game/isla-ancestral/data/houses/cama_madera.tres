@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FurnitureData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/houses/furniture_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+nombre = "cama_madera"
+categoria = "funcional"
+capacidad_slots = 0
+ancho = 2.0
+profundo = 1.0
+alto = 0.5
+requiere_superficie = true
+requiere_pared = false

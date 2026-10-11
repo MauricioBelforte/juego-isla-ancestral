@@ -15,11 +15,20 @@
 #  - API panel M53: get_resumen_para_ui() (cartel de entrada §7) +
 #    exposiciones_completas_count().
 #  - RF2: exposición fauna con especies reales de M36 (data-driven).
+# Slice RF2d (DeepSeek-V4.1-Flash, 2026-10-09): versionado del bloque de guardado
+# (§8: "Versionado del bloque para migraciones futuras") + migración v0→v1 + guardia
+# contra degradar un bloque de versión FUTURA (regla dura M59). Aditivo, no cambia el
+# esquema de datos: el bloque legado {piezas, recompensas} sigue siendo válido.
 # ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 signal item_registered(exhibition_id: String, item_id: String)
 signal exhibition_completed(exhibition_id: String)
+
+## §8: versión del bloque de guardado (sección "collections"). v0 = bloque legado
+## (sin campo "version"); v1 = esquema con "version" (mismo payload). Agregar
+## exposiciones nuevas al catálogo NO requiere subir la versión (data-driven).
+const VERSION_GUARDADO := 1
 
 ## id_exposicion -> {nombre, categoria, items: Array[String], recompensa_item_id, recompensa_nombre}
 var _exposiciones: Dictionary = {}
@@ -271,14 +280,42 @@ func get_save_data() -> Dictionary:
 	for id in _registradas:
 		piezas[String(id)] = get_registered(String(id))
 	return {
+		"version": VERSION_GUARDADO,
 		"piezas": piezas,
 		"recompensas": _recompensas.keys(),
 	}
 
 
+## §8: migra un bloque de guardado desde su versión `desde` hasta VERSION_GUARDADO.
+## v0 → v1: el esquema legado {piezas, recompensas} ya es compatible (no-op estructural);
+## se normalizan los campos faltantes para que la carga no dependa de su presencia.
+## Devuelve una copia migrada (NO muta la entrada) con la versión ya actualizada.
+func migrar_bloque(datos: Dictionary, desde: int) -> Dictionary:
+	var d: Dictionary = datos.duplicate(true)
+	var v := desde
+	while v < VERSION_GUARDADO:
+		match v:
+			0:
+				if typeof(d.get("piezas")) != TYPE_DICTIONARY:
+					d["piezas"] = {}
+				if typeof(d.get("recompensas")) != TYPE_ARRAY:
+					d["recompensas"] = []
+			_:
+				pass  # sin pasos definidos para esta versión
+		v += 1
+	d["version"] = VERSION_GUARDADO
+	return d
+
+
 func restore_save_data(data: Dictionary) -> void:
+	var v := int(data.get("version", 0))  # 0 = bloque legado (sin campo "version")
+	if v > VERSION_GUARDADO:
+		# Regla dura (M59): NUNCA degradar un save más nuevo que el código actual.
+		push_warning("[M37] Bloque de guardado v%d > v%d: se ignora (no se degrada)" % [v, VERSION_GUARDADO])
+		return
+	var datos := migrar_bloque(data, v)
 	_registradas.clear()
-	var piezas: Dictionary = data.get("piezas", {})
+	var piezas: Dictionary = datos.get("piezas", {})
 	for id in piezas:
 		if _exposiciones.has(String(id)):
 			var lista: Array[String] = []
@@ -288,5 +325,5 @@ func restore_save_data(data: Dictionary) -> void:
 		else:
 			print("[M37] Huérfana ignorada al cargar: exposición %s" % String(id))
 	_recompensas.clear()
-	for r in data.get("recompensas", []):
+	for r in datos.get("recompensas", []):
 		_recompensas[String(r)] = true

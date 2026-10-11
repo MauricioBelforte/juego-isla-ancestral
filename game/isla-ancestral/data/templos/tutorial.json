@@ -1,0 +1,19 @@
+{
+	"schema_version": 1,
+	"descripcion": "M24 iter. 6: guia del templo (mural por zona), iconografia de glifos, narrador suave de primera solucion y presentacion visual-primero.",
+	"murales": [
+		{"zona": "exteriores", "icono": "mural_exteriores", "glifos": ["glifo_sol", "glifo_agua"]},
+		{"zona": "templos_medianos", "icono": "mural_medianos", "glifos": ["glifo_luna", "glifo_viento"]},
+		{"zona": "templo_subterraneo", "icono": "mural_subterraneo", "glifos": ["glifo_raiz", "glifo_piedra"]}
+	],
+	"iconografia": [
+		{"glifo": "glifo_sol", "icono": "icon_sol", "familia": "luz"},
+		{"glifo": "glifo_agua", "icono": "icon_agua", "familia": "agua"},
+		{"glifo": "glifo_luna", "icono": "icon_luna", "familia": "espejos"},
+		{"glifo": "glifo_viento", "icono": "icon_viento", "familia": "gravedad"},
+		{"glifo": "glifo_raiz", "icono": "icon_raiz", "familia": "simbolos"},
+		{"glifo": "glifo_piedra", "icono": "icon_piedra", "familia": "presion"}
+	],
+	"narrador": {"primera_solucion": true, "hook": "M33", "dialogue_id": "templo_primera_solucion", "suave": true},
+	"presentacion": {"orden": ["visual", "icono", "texto"], "texto_max_palabras": 0}
+}
