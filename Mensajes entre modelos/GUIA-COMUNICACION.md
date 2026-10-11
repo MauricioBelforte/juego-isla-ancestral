@@ -19,9 +19,51 @@ El protocolo existe exactamente para evitar eso.
 
 ---
 
+## ⛔ REGLA CERO — El reporte de cierre es OBLIGATORIO (directiva del fundador 2026-10-11)
+
+> **Terminar el trabajo sin avisar al director = trabajo que no existe.**
+
+**Todo modelo DEBE escribir un reporte en su carpeta de canal
+(`Mensajes entre modelos/<su-modelo>/`) cada vez que termina lo que el director le pidió** —
+sea un encargo completo, un sub-bloque, una QA o un fix. El reporte es el único mecanismo que
+tiene el director para enterarse de que el trabajo está hecho.
+
+### Por qué
+
+El director **no ve tu pantalla, no ve tu cronómetro y no ve tus marcas `[x]`**. Lo único que ve
+son los archivos nuevos en tu carpeta de canal. Si terminas y no escribes el reporte:
+
+1. El director sigue creyendo que estás trabajando → **no te delega nada nuevo**.
+2. Tu cronómetro sigue corriendo con la cola vacía → gastás tokens en "no hay nada que hacer".
+3. El usuario te tiene que preguntar "¿terminaste?" a mano → es exactamente lo que este
+   protocolo existe para evitar.
+
+### El síntoma que el fundador observó (2026-10-11)
+
+> Modelos que hacen las tareas, dicen "ya hice todo", dejan el cron activo y reportan "nada para
+> hacer" — **sin haber escrito un solo reporte**. El director nunca se entera y nunca les delega
+> más tareas. El modelo queda inactivo por un fallo de comunicación, no por falta de trabajo.
+
+### Qué hacer SIEMPRE al terminar
+
+```
+1. Terminás el encargo
+2. Escribís el reporte en tu canal  ← OBLIGATORIO, no opcional
+3. Avisás por el chat: "terminé [encargo], informe en mi carpeta"
+4. Si no tenés próximo encargo asignado, el reporte lo dice
+   explícitamente: "cola vacía — esperando asignación"
+```
+
+**El reporte es lo que dispara la próxima delegación.** Sin reporte no hay siguiente tarea.
+
+---
+
 ## Los tres roles
 
 ### 1. El agente, al terminar un ítem
+
+> ⚠️ **El reporte NO es opcional.** Si no escribís el archivo en tu canal, el director no se
+> entera de que terminaste (regla cero de arriba) y no te delega más trabajo.
 
 1. Escribe el informe completo en `Mensajes entre modelos/<su-modelo>/` (archivo nuevo
    numerado `NN-AAAA-MM-DD_HH-MM-SS-tema-breve.md`, con firma y `Responde a`), según las
@@ -37,6 +79,33 @@ El protocolo existe exactamente para evitar eso.
    > aborté `[item]`: `[motivo de una línea]`. informe en mi carpeta
 
 ### 2. El director (Atria)
+
+> **Regla explícita (2026-10-10, directiva del usuario):** el director **no tiene canal propio**.
+> Todo el tráfico director↔agente vive en **la carpeta del agente**:
+> - El agente escribe **solo** en su propia carpeta (informes, consultas, entregas), nunca en la del director.
+> - El director responde **escribiendo en la carpeta del agente** (encargos, devoluciones, decisiones),
+>   con `**Responde a:**` apuntando al archivo del agente que contesta.
+> - Un agente **no** escribe en la carpeta de otro agente ni en la del director: si lo hace, el mensaje
+>   queda fuera del hilo que le corresponde y el director no sabe a qué responder. (`atria-dawn/` es
+>   ahora la carpeta del modelo atria-dawn como **ejecutor de deep work**, no "del director" —
+>   ver aclaración de identidad abajo.)
+> - Un mensaje del director que aparece en la carpeta del agente se contesta en esa misma carpeta, con
+>   el número del pool **del agente** (`reservar_mensaje.py <su-carpeta> ... --emisor <su-carpeta>`).
+
+> **Aclaración de identidad (actualizada 2026-10-10, segunda directiva del fundador):** el director
+> es **`mimo-v2.6-flash-free` (opencode)** — el rol de director pasó de la sesión principal de Atria
+> a mimo. Motivo: el fundador necesitaba un director que **responda rápido y delegue** (rol
+> pasamanos), no uno que se detenga a resolver. **`atria-dawn`** (antes director) pasa a **ejecutor
+> de deep work por excepción** y tiene carpeta propia `Mensajes entre modelos/atria-dawn/` (creada
+> 2026-10-10). **`atria-dawn-s2` — verificador final**; **`atria-dawn-s3` — estratega** del director
+> (le ayuda a decidir a quién delegar y a detectar cuellos de botella). El director mimo **tampoco
+> tiene carpeta "de director"**: su carpeta `mimo-v2.6-flash-free/` es la de mimo como agente
+> (informes de sus propias tareas). Cada modelo escribe en la suya; el director lee todas las que
+> necesita y responde escribiendo en la carpeta del agente. Ver `AGENTS.md` §31 (definición canónica).
+> En la redacción: «el director (mimo)», nunca «el director (atria-dawn-s3)»; si la orden llegó vía
+> s3, «encargo de `atria-dawn-s3` (estratega del director)». Los mensajes que atria escribió como
+> director (2026-10-03 → 2026-10-10) quedan como historial en las carpetas donde están — no se
+> migran.
 
 Cuando el usuario le dice "fijate los que terminaron" o "terminó `<modelo>`":
 
@@ -127,7 +196,7 @@ agente lee la respuesta del director y sigue
 
 > Agregado 2026-10-09 por directiva del fundador (atria-dawn-preview / Kilo Code).
 
-Cuando el director (Atria) tiene **varios canales pendientes en simultáneo**, los responde en este
+Cuando el director (mimo) tiene **varios canales pendientes en simultáneo**, los responde en este
 orden — **no** por timestamp. El criterio son los **créditos diarios que el usuario tiene** en cada
 modelo: responder primero a los canales donde el saldo es mayor es la mejor inversión de su
 presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
@@ -135,7 +204,7 @@ presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
 | Orden | Canal | Motivo (créditos del usuario) |
 |---|---|---|
 | **1** | `agnes-3-flash` | muchos créditos diarios |
-| **2** | `mimo-v2.6-flash-free` | muchos créditos diarios |
+| **2** | `mimo-v2.6-flash-free` | muchos créditos diarios — *canal de mimo como agente; el director (mimo) no se responde a sí mismo* |
 | **3** | `atria-dawn-s2` | trabajo delegado del que necesito la respuesta |
 | **4** | `atria-dawn-s3` | supervisa a Ling 3 y Step 5 (ambos con muchos créditos diarios) |
 | **5** | `DeepSeek-V4.1-Flash` | créditos limitados diarios |
@@ -156,6 +225,50 @@ presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
 
 **Copias canónicas:** esta tabla existe también en `Mensajes entre modelos/ESTADO-PARALELO.md`
 (cabecera). Si se edita una, editarse la otra.
+
+## Delegación rápida del director (asistentes) — directiva del fundador 2026-10-10
+
+> El director responde **mensajes nuevos con prioridad absoluta**. El trabajo profundo se delega a
+> los asistentes por sus canales, **apilando encargos uno tras otro** — el director no espera a que
+> termine uno para encargar el siguiente.
+
+**Asistente principal:** `StepFun-Step-5-Preview` — el más rápido. **Cualquier cosa se le apila en
+sus mensajes, uno tras otro.** Ya sabe que es el asistente del director.
+**Verificador del asistente principal:** `atria-dawn-s2` — misma modelo que atria-dawn (deep work por excepción; **no** el director); **chequea que el trabajo de Step 5 esté bien** (cadena: Step 5 ejecuta → s2 verifica → el director (mimo) sella). Directiva del fundador 2026-10-10.
+
+Reglas:
+
+1. **Prioridad de lectura:** primero los reportes de Step 5 y s2; después el resto en orden §10.3.
+2. **Delegar con puntero exacto:** «leé el mensaje N del canal X, sección Y, resolvé eso». El
+   director **no rehace** el análisis que el reporte ya trae.
+3. **Enumerar todos los ítems** del encargo en un solo mensaje (encargo largo = menos ida y vuelta).
+4. **Apilar sin esperar:** los encargos a Step 5 se mandan uno detrás de otro; él procesa la cola.
+5. **Verificación de lo delegado:** si el director quiere chequear lo que hizo Step 5, **se lo
+   delega a `atria-dawn-s2`** (misma modelo que atria-dawn, no el director) — lo resuelve igual que él. Cadena:
+   **Step 5 ejecuta → s2 verifica → el director sella.**
+6. **Flips de marca y sellos §21.8 siguen siendo del director.** Los asistentes aplican correcciones
+   técnicas y proponen flips; el sello y la decisión final los pone el director.
+
+**Ciclo operativo del director (ronda completa):**
+
+1. **Delegar:** por cada canal con mensaje nuevo (orden §10.3), leer el reporte. Si trae una tarea
+   a resolver → delegarla a Step 5 con puntero exacto: «leé el mensaje que escribió `<modelo>`
+   (#N, canal X) y hacé `<cosa>`». Delegar y **avanzar al siguiente canal**.
+2. **Apilar:** cada tarea nueva se apila a Step 5 una tras otra, sin esperar respuesta.
+3. **Revisar reportes de los asistentes** (Step 5 y s2) una vez delegado todo. Si llegaron,
+   procesarlos; si se quiere verificar lo de Step 5, delegarlo a `atria-dawn-s2`.
+4. **Seguir leyendo mensajes** y, al cerrar la ronda, usar el canal del estratega (`atria-dawn-s3`) para
+   anotar ideas de delegación y nuevas asignaciones.
+5. **Silencio = todo quieto:** sin mensajes nuevos ni reportes, el turno termina sin acción.
+
+**Modelos con verificación obligatoria:** `Claude-Haiku-5.5` es el más rápido de la flota pero
+carece de razonamiento profundo y comete errores → **TODO lo que hace Haiku lo revisa Step 5 o
+`atria-dawn-s2`** antes de darse por bueno (sin excepciones: QA, fixes, verificaciones). Con Haiku,
+encargos paso a paso y sin ambigüedad; sus reportes deben llevar evidencia (comandos, salida
+literal, antes/después, conteos). Cadena: **Haiku ejecuta → Step 5/s2 verifica → director sella.**
+
+**Respaldo canónico completo:** `AGENTS.md §30` (esta sección es la copia operativa). Ambas se
+actualizan juntas.
 
 ## Colaboración horizontal (todos leen todos los canales)
 
@@ -214,6 +327,23 @@ y el hilo **sigue siendo consecutivo y legible** (01, 02, 03…).
 sigue por el número y, ante cualquier duda, por la **fecha/hora** del nombre y el campo
 `**Responde a:**`.
 
+> ⚠️ **REGLA DEL NÚMERO MÁS ALTO (directiva del fundador 2026-10-11):** la respuesta **siempre**
+> sale con el número **más alto** disponible del pool del canal — nunca con un hueco del medio.
+>
+> **Por qué:** el director lee los **números altos** de cada carpeta para encontrar lo nuevo. Si tu
+> respuesta aterriza en un número por debajo del último mensaje existente, queda **sepultada** y el
+> director **nunca la ve**.
+>
+> **Síntoma real (2026-10-11):** DeepSeek respondió al director con el número **113** cuando su
+> canal ya iba por el **148** — el pool le ofreció un hueco del medio y el helper lo tomó. El
+> mensaje quedó perdido; hubo que renumerarlo a mano al 148.
+>
+> **Regla:** si encuentran un hueco en el medio (un número que falta en la secuencia),
+> **lo ignoran**. Se perdió por una mala comunicación; **no lo reutilizan**. El helper
+> `scripts/reservar_mensaje.py` ya está fijado para tomar siempre el número más alto disponible
+> (fix verificado con `scripts/test_reservar_mensaje_colision.py`, 18/18 PASS). Si reservan a mano,
+> apliquen la misma regla.
+
 ### Nombre de archivo: emisor → receptor (directiva del fundador)
 
 > Agregado 2026-10-05 por directiva del usuario: poder ver de un vistazo **quién le escribe a
@@ -242,6 +372,7 @@ NN-AAAA-MM-DD_HH-MM-SS-<emisor>-a-<receptor>-tema.md
 | `mimo-v2.6-flash-free` | `mimo` |
 | `space-bunny-alpha` | `bunny` |
 | `kimi-k3` | `kimi` |
+| `muse-spark-1.3-contributor` | `muse` |
 
 **Ejemplos:**
 
