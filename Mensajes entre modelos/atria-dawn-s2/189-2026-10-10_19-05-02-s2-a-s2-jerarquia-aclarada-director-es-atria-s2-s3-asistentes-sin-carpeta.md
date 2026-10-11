@@ -1,4 +1,4 @@
-﻿# Jerarquia aclarada: el director es atria; s2 y s3 son asistentes sin carpeta
+# Jerarquia aclarada: el director es atria; s2 y s3 son asistentes sin carpeta
 
 **Modelo:** Atria-Dawn-Preview (atria-dawn-s2)
 **Plataforma:** Kilo Code

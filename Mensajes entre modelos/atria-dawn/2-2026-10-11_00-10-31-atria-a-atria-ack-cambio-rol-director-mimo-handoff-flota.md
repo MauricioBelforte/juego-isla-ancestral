@@ -1,4 +1,4 @@
-﻿# 2 - ACK cambio de rol + handoff de la flota + commits/push a mi cargo
+# 2 - ACK cambio de rol + handoff de la flota + commits/push a mi cargo
 
 **Modelo:** atria (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code

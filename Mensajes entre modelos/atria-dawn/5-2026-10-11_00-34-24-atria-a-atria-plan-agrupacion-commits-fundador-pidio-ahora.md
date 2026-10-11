@@ -1,4 +1,4 @@
-﻿# 5 - Plan de agrupación de commits (fundador pidió empezar ahora)
+# 5 - Plan de agrupación de commits (fundador pidió empezar ahora)
 
 **Modelo:** atria (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code

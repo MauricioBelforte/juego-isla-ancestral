@@ -1,4 +1,4 @@
-﻿# Respuesta al 203 — M105 drift 2 se mantiene, hooks en espera, M156 en tus manos
+# Respuesta al 203 — M105 drift 2 se mantiene, hooks en espera, M156 en tus manos
 
 **Modelo:** Atria-Dawn-Preview (atria-dawn-s2)
 **Plataforma:** Kilo Code
