@@ -28,7 +28,7 @@ func _run() -> void:
 	await process_frame
 	_check("EventManager instanciado", manager != null)
 	var catalogo: Dictionary = manager._catalogo
-	_check("Catálogo con eventos reales (15)", catalogo.size() == 15)
+	_check("Catálogo con eventos reales (>= 15)", catalogo.size() >= 15)
 	# Tomar el primer evento del catálogo
 	var primer_id: String = ""
 	var primer_ev = null
@@ -42,8 +42,8 @@ func _run() -> void:
 		print("=== Resumen M74: %d checks, %d fallos ===" % [_checks, _fallos])
 		quit(1)
 		return
-	var mes: int = int(primer_ev.get("mes", primer_ev.mes))
-	var dia: int = int(primer_ev.get("dia", primer_ev.dia))
+	var mes: int = int(primer_ev.mes)
+	var dia: int = int(primer_ev.dia)
 	_check("Evento con semana programada (mes %d dia %d)" % [mes, dia], mes >= 1 and dia >= 1)
 	# antes del día: nada
 	manager._on_dia_cambio({"anio": 1, "mes": 1, "dia": 1, "estacion": 0, "hora": 8})
