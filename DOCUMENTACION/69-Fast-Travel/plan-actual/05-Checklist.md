@@ -62,6 +62,8 @@
 
 ## E. Mapa de puntos de viaje (15)
 
+> **Estado verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 212/215):** la infraestructura de desbloqueo **sí existe** — `scripts/fasttravel/fast_travel_service.gd` tiene la señal `ancla_desbloqueada(id)`, `desbloquear()`, `esta_desbloqueada()` y `anclas_desbloqueadas()`, con 17 checks en `test_fast_travel_headless.gd`. Lo que **no existe** son los 14 ítems de esta sección: `data/fasttravel/anclas.json` declara solo **4 anclas** (Pueblo Raíz, Casa del Jugador, Tienda General, Playa del Norte), todas con `desbloquea: true` **estático** — no hay condiciones progresivas, faltan 8 de las 10 anclas temáticas (Santuario, Isla, Bosque, Montaña, Desierto, Cueva, Valle, Ciudadela) y no hay señales de descubrimiento por zona/bioma en `event_bus.gd` que puedan alimentarlas. Tampoco hay UI con orden alfabético, búsqueda, atajo de teclado ni prioridad por proximidad/costo. Por eso los 14 quedan `[ ]`.
+
 - [ ] Pueblo: desbloqueado tras área inicial [S]
 - [ ] Santuario: desbloqueado tras visitar a pie [S]
 - [ ] Isla: desbloqueado tras explorar [S]
