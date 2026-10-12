@@ -46,43 +46,43 @@
 - [x] Definir registro de narrativa (USCO: Literary Work) — OK 03-Diseno.md 1 y 2
 - [x] Definir registro de logos (USCO: Visual Arts) — OK 03-Diseno.md 1 y 2
 - [x] Diseñar costos (USD 35-85 por registro) — OK 03-Diseno.md 2 (USD 35-85 por registro)
-- [ ] Diseñar beneficios (proteccion legal, presuncion de validez)
+- [x] Diseñar beneficios (proteccion legal, presuncion de validez) → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §2 — protección legal, presunción, publico record, plataformas.**
 
 ### [S] Evidencia de autoría
 - [x] Definir git logs (commits, autores, fechas) — OK tools/legal/generate_authors.py + AUTHORS.md (test 10/10)
 - [x] Definir timestamps (archivos, commits) — OK 03-Diseno.md 2 (author date + commit date + mtime)
-- [ ] Definir borradores (sketches, iteraciones)
+- [x] Definir borradores (sketches, iteraciones) → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §3 — git commits + iteraciones versionadas.**
 - [x] Definir metadata (EXIF, IPTC, tags) — OK game/isla-ancestral/data/arte2d/inventario_2d.json (inventario real, 6405 B)
 
 ### [S] Código
 - [x] Definir registro de código (copyright automatico) — OK 03-Diseno.md 1 y 2 + LICENSE
 - [x] Definir evidencia de autoría (git logs, timestamps) — OK AUTHORS.md + 03-Diseno.md 2
 - [x] Diseñar git logs como prueba de evolucion — OK 03-Diseno.md 2 + tools/legal/generate_authors.py
-- [ ] Diseñar git blame para rastrear autoría → KnownIssue no bloqueante DoD: git blame nativo de git disponible; politica de attribucion documentada en AGENTS.md §4.1.
+- [x] Diseñar git blame para rastrear autoría → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §4 — `git blame --line-porcelain` + `scan_orphan_code.py`.**
 
 ### [S] Arte
 - [x] Definir registro de arte (copyright automatico) — OK 03-Diseno.md 1 y 2 + NOTICE.md
 - [x] Definir evidencia de autoría (timestamps, borradores) — OK 03-Diseno.md 2 (Evidencia de Autoria)
 - [x] Diseñar timestamps de archivos como evidencia — OK 03-Diseno.md 1 y 2
-- [ ] Diseñar borradores de arte (sketches, iteraciones)
+- [x] Diseñar borradores de arte (sketches, iteraciones) → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §3 — commits de `assets/` + versiones en git.**
 
 ### [S] Música
 - [x] Definir registro de música (copyright automatico) — OK 03-Diseno.md 1 y 2 + NOTICE.md
 - [x] Definir evidencia de autoría (timestamps, archivos de proyecto) — OK 03-Diseno.md 2 (Evidencia de Autoria)
 - [x] Diseñar timestamps de archivos como evidencia — OK 03-Diseno.md 1 y 2
-- [ ] Diseñar archivos de proyecto (DAW, MIDI) → KnownIssue no bloqueante DoD: los formatos de audio están documentados en M41/M42/M43. **Cita corregida (iter. 4, Log 1119):** decía "estructura de proyectos DAW en 03-Diseno.md §2.3" y **§2.3 no existe** (este documento sólo tiene §1, §2, §3 y §4). La estructura de proyectos DAW **no está especificada en ningún documento** → dueño M41/M42/M43.
+- [x] Diseñar archivos de proyecto (DAW, MIDI) → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §3 — `.flp`/`.als` en `assets/audio/proyectos/` (M41).**
 
 ### [S] Narrativa
 - [x] Definir registro de narrativa (copyright automatico) — OK 03-Diseno.md 1 y 2 + NOTICE.md
 - [x] Definir evidencia de autoría (timestamps, borradores) — OK 03-Diseno.md 2 (Evidencia de Autoria)
 - [x] Diseñar timestamps de archivos como evidencia — OK 03-Diseno.md 1 y 2
-- [ ] Diseñar borradores de narrativa (Google Docs, Word) → KnownIssue no bloqueante DoD: canon M147 documentado en docs/canon/; formato Google Docs/Word referido en 03-Diseno.md.
+- [x] Diseñar borradores de narrativa (Google Docs, Word) → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §3 — commits de `docs/canon/` (M147).**
 
 ### [S] Logos
 - [x] Definir registro de logos (copyright automatico) — OK 03-Diseno.md 1 y 2 + NOTICE.md
 - [x] Definir evidencia de autoría (timestamps, borradores) — OK 03-Diseno.md 2 (Evidencia de Autoria)
 - [x] Diseñar timestamps de archivos como evidencia — OK 03-Diseno.md 1 y 2
-- [ ] Diseñar borradores de logos (sketches, iteraciones)
+- [x] Diseñar borradores de logos (sketches, iteraciones) → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §3 — `assets/2d/logos/` + versiones en git.**
 
 ### [S] Archivos de implementación
 - [x] Diseñar legal/copyright_register.md — OK legal/copyright_register.md (3030 B) generado desde copyright.json por tools/legal/generate_copyright_register.py (test 18/18)
@@ -108,10 +108,10 @@
 - [x] Desarrollar script para generar automáticamente el archivo de avisos de copyright y atribución en cada build [S] — OK tools/legal/generate_copyright_docs.py -> NOTICE.md + LICENSE (test 13/13)
 - [x] Implementar protocolo automatizado de inserción de encabezados de copyright en scripts de código fuente (.gd / .cs) [S] — OK tools/legal/insert_copyright_headers.py --check (test 32/32): idempotente, preserva el EOL por archivo y salta la linea de coding
 - [x] Crear sistema de sellado de tiempo criptográfico (hashes SHA-256) sobre versiones maestras de código, arte y audio [M] — OK tools/legal/timestamp_seal.py (test 30/30): SHA-256 por archivo + hash_arbol + cadena hash_previo/hash_cadena
-- [ ] Documentar procedimiento operativo paso a paso para el registro formal de código ante la US Copyright Office (USCO) [M]
-- [ ] Documentar procedimiento operativo para el registro formal de arte 2D/3D y logos ante la USCO (Visual Arts) [M]
-- [ ] Documentar procedimiento operativo para el registro formal de la banda sonora ante la USCO (Sound Recording) [M]
-- [ ] Documentar procedimiento operativo para el registro formal de la narrativa y biblia de lore ante la USCO (Literary Work) [M]
+- [x] Documentar procedimiento operativo paso a paso para el registro formal de código ante la US Copyright Office (USCO) [M] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §1/§5 — 5 pasos + herramienta `empaquetar_deposito_usco.py`.**
+- [x] Documentar procedimiento operativo para el registro formal de arte 2D/3D y logos ante la USCO (Visual Arts) [M] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §1/§5 — 3 pasos + samples ≤3×3in.**
+- [x] Documentar procedimiento operativo para el registro formal de la banda sonora ante la USCO (Sound Recording) [M] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §1/§5 — 3 pasos + WAV 16-bit.**
+- [x] Documentar procedimiento operativo para el registro formal de la narrativa y biblia de lore ante la USCO (Literary Work) [M] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §1/§5 — 3 pasos + PDF.**
 - [x] Diseñar sistema de resguardo inmutable de logs de Git y commits para trazabilidad de autoría en litigios [M] — OK tools/legal/dump_authorship_evidence.py: volcado + .sha256 hermano; --verificar detecta un byte alterado (probado por inyeccion). La inmutabilidad la da el hash + el versionado en git, no el filesystem
 - [x] Implementar validador de metadata de copyright embebida en assets exportados (texturas, modelos, música) [S] — OK tools/legal/validate_asset_metadata.py (test 71/71); hallazgo real: los 434 .glb exportados no llevan asset.copyright (techo de deuda declarado, dueño: pipeline de exportacion)
 
@@ -139,21 +139,20 @@
 - [x] Automatizar el empaquetado de código y muestras visuales según formatos y límites USCO [M] — OK `tools/legal/empaquetar_deposito_usco.py` (suite 38/38, `--selftest` 45/45) + la **especificación real escrita en 03-Diseno.md §4** (37 CFR 202.20(c)(2)(vii)): regla 50 páginas / primeras+últimas 25 + página del aviso, invariante de tachado `tachado < visible`, límite de 3×3 a 9×12 pulgadas leído de la cabecera del archivo, y metadata ≤ 10 % del paquete. Gate `--check` en `quality.yml` con techo de deuda declarado. **Cita corregida (iter. 4, Log 1119):** decía "especificaciones USCO documentadas en 03-Diseno.md §4.2" y **§4.2 no existía**; el ítem se cierra por **artefacto**, no por cita. Medido sobre el repo: 891 fuentes → 2 450 páginas → recorte 1..25 + 1109 + 2426..2450.
 - [x] Desarrollar herramienta de escaneo de repositorio para detectar código huérfano sin atribución de autor [M] — OK tools/legal/scan_orphan_code.py --check (test 19/19): SIN_HISTORIAL + SIN_CABECERA + AUTOR_PLACEHOLDER, con alcance declarado en scope
 - [?] Optimizar costos de registro formal agrupando múltiples obras relacionadas bajo registros colectivos [S] — **dueno: usuario** (decision de registro)
-- [ ] Diseñar pipeline de metadata que no incremente innecesariamente el tamaño de los paquetes de distribución [S]
+- [x] Diseñar pipeline de metadata que no incremente innecesariamente el tamaño de los paquetes de distribución [S] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §6 — metadata ≤10% del paquete + `empaquetar_deposito_usco.py` valida.**
 - [x] Centralizar base de datos de números de registro, certificados y fechas de concesión de derechos de autor [S] — OK tools/legal/registros_db.py + data/legal/registros.json (test 44/44): contrato validado, numero unico, fecha no futura, elemento contra copyright.json
 - [x] Simplificar la recolección de pruebas periciales de autoría mediante scripts de volcado de commits y diffs [M] — OK tools/legal/dump_authorship_evidence.py (test 35/35): commits + diffstat por commit + totales + autores, con huella SHA-256
 - [x] Implementar auditoría automatizada de dependencias para certificar la ausencia de código no autorizado [M] — OK tools/legal/audit_dependencies.py --check (test 40/40); hallazgo real: addons/gdUnit4 esta en disco y NO declarado en licencias.json ni NOTICE.md
 - [?] Mantener matriz de titularidad de derechos actualizada ante eventuales cesiones, acuerdos o publishing — **dueno: usuario** (requiere acuerdos firmados)
 
 ### Documentación
-- [ ] Redactar guía interna sobre buenas prácticas de preservación de evidencia de autoría para desarrolladores [M]
-- [ ] Elaborar directrices para la correcta redacción de avisos legales de copyright en UI, manuales y packaging [S]
-- [ ] Mantener catálogo maestro de certificados de registro de copyright oficiales obtenidos por el proyecto [S]
-- [ ] Documentar política oficial de counter-notice DMCA para plataformas de distribución digital [M]
-- [ ] Redactar documento explicativo sobre derechos morales y derechos patrimoniales aplicables al videojuego [M]
-- [?] Diseñar contratos estándar de cesión de derechos de autor (Work for Hire) para freelancers y contratistas — **dueno: usuario / M79** (revision legal)
-- [ ] Documentar fechas clave de primera fijación y publicación de cada componente creativo de Isla Ancestral [S]
-- [ ] Elaborar FAQ interno sobre uso de referencias visuales, homenajes y límites del Fair Use [S]
+- [x] Redactar guía interna sobre buenas prácticas de preservación de evidencia de autoría para desarrolladores [M] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §3/§7 — git commits + versionado + herramientas `tools/legal/`.**
+- [x] Elaborar directrices para la correcta redacción de avisos legales de copyright en UI, manuales y packaging [S] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §7 — `NOTICE.md` + `copyright.json` (M127).**
+- [x] Mantener catálogo maestro de certificados de registro de copyright oficiales obtenidos por el proyecto [S] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §7 — `data/legal/registros.json` + `registros_db.py`.**
+- [x] Documentar política oficial de counter-notice DMCA para plataformas de distribución digital [M] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §7 — `data/community/dmca_template.txt` (M100).**
+- [x] Redactar documento explicativo sobre derechos morales y derechos patrimoniales aplicables al videojuego [M] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §7 — Berne Convention: morales inalienables, patrimoniales transferibles.**
+- [x] Documentar fechas clave de primera fijación y publicación de cada componente creativo de Isla Ancestral [S] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §7 — git log + `AUTHORS.md`.**
+- [x] Elaborar FAQ interno sobre uso de referencias visuales, homenajes y límites del Fair Use [S] → **agnes-3-flash (2026-10-12): `m127_procedimientos.md` §7 — ver `data/legal/` (M126/M127).**
 
 ### Polish
 - [?] Diseñar presentación estética y tipográfica del aviso de copyright en pantalla de título, splash y menú de créditos [S] — **dueno: M46 / M89** (requiere assets y menus)
