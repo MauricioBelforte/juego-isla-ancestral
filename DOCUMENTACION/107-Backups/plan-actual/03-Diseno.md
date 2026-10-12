@@ -24,6 +24,40 @@ Sistema de Backups (3-2-1 Strategy)
     └── Snapshots mensuales
 ```
 
+### Dependencias (contratos de integración — detalle en `04-Codigo.md` §3)
+
+- **Entrada:** M59 (Guardado) — los saves del juego se respaldan en carpeta separada (`scripts/saving/save_backup.gd` + `BackupManager` in-engine); M06 (Control de Versiones) — el repositorio Git es la fuente primaria de backup (Copia 1); M122 (Crash Reporting) — los saves de crash se incluyen en el backup semanal.
+- **Salida:** M133 (Gestión del Proyecto) — los logs de restauración (`10-Plantilla-Log-Restauracion.md`) y el plan de recuperación informan la gestión; M135 (Riesgos) — el plan de recuperación mitiga los riesgos de pérdida de datos.
+- **Consumidor:** M133 (Gestión del Proyecto).
+
+### Catálogo de los 15 puntos de la sección 106 del plan maestro (`DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md` L2913-2929)
+
+| # | Punto §106 | Cobertura en M107 |
+|---|---|---|
+| 1 | Backup del repositorio | Copia 1: GitHub (§1); `.github/workflows/backup.yml` |
+| 2 | Backup de assets | §4 `assets/` (modelos/texturas/audio originales); Git LFS (§1) |
+| 3 | Backup de documentación | §1 Repositorio Git (código + documentación) |
+| 4 | Backup de builds | §1 GitHub Releases (builds); §4 `builds/` + `builds_historicos/` |
+| 5 | Backup de bases de datos | §3 compresión del directorio del proyecto (incluye `data/`: `backup_categories.json`, `backup_policy.json`) |
+| 6 | Backup de saves | `BackupManager` in-engine (`user://backups/`); `save_backup.gd` (integración M59) |
+| 7 | Backup de música | §4 `musica/` (proyectos_daw, stems) |
+| 8 | Backup de archivos fuente | §1 Repositorio Git (código); §4 `assets_originales/` |
+| 9 | Backup externo | §1 Copia 3: Disco Externo; §4 estructura `E:\Backups\juego-isla-ancestral\`; `scripts/backup/backup_local.ps1` |
+| 10 | Backup automático | §2 GitHub Actions (diario 2 AM); §7 Task Scheduler (3 AM); `scripts/backup/register_task.ps1` |
+| 11 | Pruebas de restauración | §9 procedimiento mensual; `09-Procedimiento-Restauracion.md`; `scripts/backup/restore_backup.ps1` |
+| 12 | Política de retención | §2 (limpia > 30 días) + §3 (últimos 10); `08-Politica-Retencion.md`; `backup_policy.json` |
+| 13 | Versionado | §4 `backup_YYYYMMDD.tar.gz` / `backup_YYYYMMDD-030000.zip`; retención 30 días / 12 meses / 5 años |
+| 14 | Verificación de integridad | `BackupManager.verificar_integridad` (CRC32); `scripts/backup/verify_backups.ps1` (SHA-256 vs `checksums.txt`) |
+| 15 | Plan de recuperación | §10 (4 escenarios); `11-Plan-Recuperacion-Desastres.md` |
+
+### Criterios de aceptación verificables
+
+1. `test_backup_m107.gd` (headless): 28 checks, 0 fallos, exit 0.
+2. `test_backup_rotate_return.gd` (headless): 4 checks, 0 fallos, exit 0.
+3. `test_backup_rotations.gd` (headless): 7 checks, 0 fallos, exit 0.
+4. `verify_backups.ps1` verifica SHA-256 contra `checksums.txt` (§8).
+5. Restauración de prueba mensual con log en la plantilla `10-Plantilla-Log-Restauracion.md` (§9, Criterio de Éxito).
+
 ## 2. Flujo de backup automático
 
 ```

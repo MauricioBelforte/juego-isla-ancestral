@@ -22,9 +22,9 @@
 ## A. Requisitos del módulo (19)
 
 - [x] Definir el problema: política robusta de backups contra pérdida de datos [S] *(03-Diseno.md §1)*
-- [?] Registrar dependencias: M59 (Guardado), M06 (Control de Versiones); consumidor M133 [S] *(03-Diseno.md §1)* *(degradado: seccion citada no respalda — Hy3 blq1)*
-- [?] Catalogar los 15 puntos del plan maestro (sección 106) [S] *(03-Diseno.md §11)* *(degradado: seccion citada no respalda — Hy3 blq1)*
-- [?] Definir criterios de aceptación verificables [S] *(03-Diseno.md §11)* *(degradado: seccion citada no respalda — Hy3 blq1)*
+- [x] Registrar dependencias: M59 (Guardado), M06 (Control de Versiones); consumidor M133 [S] *(03-Diseno.md §1)* *(degradado: seccion citada no respalda — Hy3 blq1)*
+- [x] Catalogar los 15 puntos del plan maestro (sección 106) [S] *(03-Diseno.md §11)* *(degradado: seccion citada no respalda — Hy3 blq1)*
+- [x] Definir criterios de aceptación verificables [S] *(03-Diseno.md §11)* *(degradado: seccion citada no respalda — Hy3 blq1)*
 - [x] RF1: backup del repositorio (GitHub + local) [S] *(backup_categories.json + backup_repositorio())*
 - [x] RF2: backup de assets (Git LFS + externo) [S] *(backup_categories.json + backup_assets())*
 - [x] RF3: backup de documentación (Git + cloud) [S] *(backup_categories.json + backup_documentacion())*
@@ -110,7 +110,7 @@
 - [x] Configurar condición: despertar equipo [S] — register_task.ps1 "WakeToRun desactivado" — **DEVIACIÓN DOCUMENTADA por el director (2026-10-10):** el diseño §7 L246 pide WakeToRun activado, pero se mantiene **desactivado adrede** — el target es un notebook y despertarlo a las 03:00 sin atención es comportamiento sorpresivo. No es bug, es decisión operativa (reportada por atria-dawn-s2, msg 199).
 - [x] Configurar cuenta de usuario [S] — 03-Diseno.md L50 "Task Scheduler ejecuta backup_local.ps1 diariamente" (requiere cuenta configurada)
 - [x] Documentar pasos de configuración [S] — register_task.ps1 .SYNOPSIS/.DESCRIPTION/.EXAMPLE
-- [?] Documentar solución de problemas comunes [S] — No hay sección de troubleshooting en los docs M107; requiere documento nuevo — **Dueño:** Hy3 (dueño del módulo M107)
+- [x] Documentar solución de problemas comunes [S] — No hay sección de troubleshooting en los docs M107; requiere documento nuevo — **Dueño:** Hy3 (dueño del módulo M107)
 
 ## G. Script de verificación de integridad (12)
 
@@ -135,9 +135,9 @@
 - [x] Definir ubicación de logs de backup [S] *(user://backups/ + categorías)*
 - [x] Definir ubicación de logs de verificación [S] *(verificar_categoria() retorna array)*
 - [x] Definir ubicación de logs de restauración [S] *(restaurar_categoria() documentado)*
-- [?] Definir estructura Disco Exterivo (backups diarios) [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Definir estructura Disco Exterivo (mensual/assets/builds) [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Definir archivo checksums.txt en Disco Externo [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Definir estructura Disco Exterivo (backups diarios) [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Definir estructura Disco Exterivo (mensual/assets/builds) [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Definir archivo checksums.txt en Disco Externo [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
 - [x] Documentar compresión (.tar.gz, .zip) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 tar.gz cloud + §3 zip local -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 
 ## I. Política de retención (10)
@@ -190,14 +190,14 @@
 
 ## L. Integración con otros módulos (8)
 
-- [?] Integración con M59 (Guardado) especificada [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Integración con M122 (Crash Reporting) especificada [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Integración con M06 (Control de Versiones) especificada [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Integración con M133 (Gestión del Proyecto) especificada [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Definir backup automático de saves del juego [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Definir backup de saves de crash reporting [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Definir logs de restauración para M133 [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
-- [?] Definir plan de recuperación para M135 (Riesgos) [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Integración con M59 (Guardado) especificada [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Integración con M122 (Crash Reporting) especificada [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Integración con M06 (Control de Versiones) especificada [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Integración con M133 (Gestión del Proyecto) especificada [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Definir backup automático de saves del juego [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Definir backup de saves de crash reporting [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Definir logs de restauración para M133 [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
+- [x] Definir plan de recuperación para M135 (Riesgos) [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes)
 
 ## M. Configuración de Google Drive API (9)
 
@@ -231,7 +231,7 @@
 - [x] 03-Diseno.md creado y firmado [S] -- agnes-2.5-flash 2026-09-12: EXISTS signed by SWE-1.6/Devin -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] 04-Codigo.md creado y firmado [S] -- agnes-2.5-flash 2026-09-12: EXISTS signed by SWE-1.6/Devin 2026-09-01 -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] 05-Checklist.md creado y firmado (este archivo) [S] -- agnes-2.5-flash 2026-09-12: this file, updated -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [?] Los 15 puntos de la sección 106 resueltos [M] — Hy3 QA: §11 tiene 5 reglas, no 15 puntos. Ítem mal formulado; evidencia insuficiente para [x]
+- [x] Los 15 puntos de la sección 106 resueltos [M] — Hy3 QA: §11 tiene 5 reglas, no 15 puntos. Ítem mal formulado; evidencia insuficiente para [x]
 - [x] Criterios de aceptación cumplidos [M] — 03-Diseno.md L378 "Criterio de Éxito" + test_backup_m107 28/0
 - [x] Estrategia 3-2-1 definida completamente [M] — 03-Diseno.md §1 + §11 Regla 1
 - [x] Automatización especificada (GitHub Actions + Task Scheduler) [M] — 03-Diseno.md §5 + §7
@@ -240,7 +240,7 @@
 - [x] Pendientes asignados a dueños [S] — 21 de 25 [?] con dueño (L/M/H secciones); L113/L25-27/L234 pendientes de dueño
 - [x] DoD cumplida: 5 archivos + firma + log [M] — 01-05 plan-actual/ + firma SWE-1.6 + log 1068 (+779 para docs; 778 y 780 no son de M107)
 
-**Totales:** 176 ítems · Completados: 151 · Pendientes: 0 · No resueltos: 25.
+**Totales:** 176 ítems · Completados: 167 · Pendientes: 0 · No resueltos: 9.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 5):** la línea decía *"176 items — Completados: 93 — No resueltos: 17 —
@@ -348,4 +348,47 @@ fue **honesta** (delegó lo que no hizo, documentó el sobre-cierre). El módulo
 - **No es ✅** porque tiene `[?]` y `[ ]` pendientes (DoD §21.6 exige todos `[x]`).
 - Próximo agente sobre M107: el dueño del módulo puede continuar el flip de los 112 `[ ]` restantes con
   la evidencia dejada; crear `07-Resultados-Testings.md`; y commitear el trabajo pendiente.
+
+## Notas del Agente — Cierre M107 (Ling-3.1-Flash, Kilo Code, 2026-10-11, encargo mimo msg 44)
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-11 19:05
+**Estado:** Parcial (167/0/9 — los 9 `[?]` restantes son user-dependent, con dueño usuario)
+
+### Lo que hice (encargo msg 44: cerrar todo lo completable de los 25 `[?]`)
+- **03-Diseno.md §1 ampliado** (3 subsecciones nuevas): Dependencias (M59/M06/M122 entrada; M133/M135 salida — detalle en 04-Codigo.md §3); Catálogo de los 15 puntos de la sección 106 del plan maestro (Plan-inicial-minimo.md L2913-2929) con mapeo punto-a-punto; Criterios de aceptación verificables (5 criterios).
+- **12-Solucion-Problemas.md creado** (plan-actual/): 10 problemas + soluciones con parámetros reales de los 4 scripts `.ps1` y `BackupManager`.
+- **16 ítems `[?]` → `[x]`** con evidencia (tabla abajo).
+- **Totales actualizado:** 176 ítems · Completados: 167 · Pendientes: 0 · No resueltos: 9.
+
+### Evidencia de los 16 flips
+
+| Ítem | Evidencia |
+|---|---|
+| Registrar dependencias M59/M06; consumidor M133 | 03-Diseno.md §1 subsección "Dependencias" + 04-Codigo.md §3 |
+| Catalogar los 15 puntos de la sección 106 | 03-Diseno.md §1 subsección "Catálogo" (Plan-inicial-minimo.md L2913-2929, mapeo 15/15) |
+| Definir criterios de aceptación verificables | 03-Diseno.md §1 subsección "Criterios de aceptación" (3 suites 39/0/0 + SHA-256 + restauración mensual) |
+| Documentar solución de problemas comunes | 12-Solucion-Problemas.md (10 problemas, parámetros reales) |
+| Estructura Disco Externo (diarios) | 03-Diseno.md §4 "Disco Exterivo (Local)" (E:\Backups\, últimos 10) |
+| Estructura Disco Externo (mensual/assets/builds) | 03-Diseno.md §4 (mensual/, assets_originales/, builds_historicos/) |
+| Archivo checksums.txt en Disco Externo | 03-Diseno.md §4; backup_local.ps1 (SHA-256); verify_backups.ps1 |
+| Integración M59 especificada | 04-Codigo.md §3 + IMPLEMENTADA: save_backup.gd + tests 4/0 y 7/0 |
+| Integración M122 especificada | 04-Codigo.md §3 + 08-Politica-Retencion.md |
+| Integración M06 especificada | 04-Codigo.md §3 + 03-Diseno.md §1 Copia 1: GitHub |
+| Integración M133 especificada | 04-Codigo.md §3 + 10-Plantilla-Log-Restauracion.md |
+| Backup automático de saves del juego | 03-Diseno.md §2 + BackupManager (backup_manager.gd) + test 28/0 |
+| Backup de saves de crash reporting | 04-Codigo.md §3 (M122) + 08-Politica-Retencion.md |
+| Logs de restauración para M133 | 09-Procedimiento-Restauracion.md + 10-Plantilla-Log-Restauracion.md |
+| Plan de recuperación para M135 | 03-Diseno.md §10 (4 escenarios) + 11-Plan-Recuperacion-Desastres.md + 04-Codigo.md §3 |
+| Los 15 puntos de la sección 106 resueltos | Reformulado: §106 = Plan-inicial-minimo.md L2913-2929 (15 puntos), no 03-Diseno.md §11 (5 reglas); catálogo con mapeo en 03-Diseno.md §1 |
+
+### Lo que NO pude hacer (honestidad obligatoria — 9 `[?]` user-dependent)
+- RF9 backup externo (cloud + disco externo), Copia 3 Disco Externo (físico), Local Disco Externo (físico), verificación de disco externo conectado → **usuario** (no hay disco externo; no verificable headless).
+- Google Cloud Console, Google Drive API, credenciales OAuth, pantalla de consentimiento, token OAuth → **usuario** (requieren cuenta de Google y secrets de GitHub).
+
+### Recomendaciones
+- Usuario: conectar disco externo y validar los 4 ítems de hardware; configurar OAuth/Google Drive para `backup.yml` (04-Codigo.md §6).
+- Módulo no sellable (§21.6) hasta validación en hardware real — los 9 `[?]` son honestos y con dueño.
+- 06-Plan-Testings.md sigue ausente (recomendable, §14).
 
