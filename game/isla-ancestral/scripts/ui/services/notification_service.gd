@@ -3,7 +3,8 @@ class_name NotificationService_
 ## Servicio de notificaciones toast con cola y tipos
 ##
 ## Muestra notificaciones temporales (obtención, evento, misión)
-## con icono, texto y SFX. Cola de máximo 3 visibles.
+## con icono y texto (visual; el SFX lo reproduce el emisor).
+## Cola de máximo 3 visibles.
 ## Fade 0.3s, vida 4s, desplazamiento vertical automático.
 
 ## ── Configuración ───────────────────────────────────────
@@ -105,6 +106,7 @@ func _spawn_node(toast: Dictionary) -> void:
 	# Icono (placeholder)
 	var icon_label := Label.new()
 	icon_label.text = _get_type_icon(type)
+	icon_label.add_theme_color_override("font_color", Color(0.85, 0.72, 0.35))
 	hbox.add_child(icon_label)
 
 	# Texto
@@ -112,6 +114,7 @@ func _spawn_node(toast: Dictionary) -> void:
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.custom_minimum_size = Vector2(200, 0)
+	label.add_theme_color_override("font_color", Color(0.92, 0.88, 0.82))
 	hbox.add_child(label)
 
 	# Estilo

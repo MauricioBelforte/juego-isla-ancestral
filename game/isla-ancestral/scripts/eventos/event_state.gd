@@ -44,6 +44,16 @@ func marcar_recompensa_recibida(anio_actual: int) -> void:
 	anio_participacion = anio_actual
 
 
+## Marca la recompensa COMPENSATORIA (evento cancelado). Consume el token del
+## anio (anti-duplicado) pero CONSERVA el estado CANCELADO: el jugador no
+## participo, solo recibio el consuelo. Antes se usaba
+## marcar_recompensa_recibida() y el evento quedaba PARTICIPADO.
+func marcar_recompensa_compensatoria(anio_actual: int) -> void:
+	recompensa_token_anio = anio_actual
+	estado = Estado.CANCELADO
+	recompensas_recibidas.append("compensatoria_%d" % anio_actual)
+
+
 func to_dict() -> Dictionary:
 	return {
 		"estado": estado,

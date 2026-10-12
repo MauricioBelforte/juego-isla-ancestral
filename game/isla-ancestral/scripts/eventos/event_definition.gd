@@ -30,6 +30,14 @@ enum Tipo { FESTIVAL, FERIA, COMPETENCIA, RITUAL, CLIMATICO, SORPRESA }
 ## Estación (0=Primavera,1=Verano,2=Otoño,3=Invierno). -1 = cualquier.
 @export var estacion: int = -1
 
+## ── Regla relativa (RF4.10) ─────────────────────────────────────────────
+## Evento definido por posición dentro del mes en vez de por fecha fija:
+##   "primer_lunes", "segundo_sabado", "ultimo_viernes", "cuarto_domingo"...
+## El calendario Aurora tiene 12 meses de 28 días (4 semanas exactas), así que
+## "cuarto_X" existe siempre y "quinto_X" no existe (se resuelve a 0).
+## Vacío = evento de fecha fija.
+@export var regla_relativa: String = ""
+
 ## ── Franja horaria (minutos desde 0:00, usa M30 GameClock) ──
 @export var hora_inicio: int = 0      # 0-1439
 @export var hora_fin: int = 1440      # 1440 = fin del día
@@ -73,12 +81,71 @@ enum Tipo { FESTIVAL, FERIA, COMPETENCIA, RITUAL, CLIMATICO, SORPRESA }
 
 ## ── Métodos ──────────────────────────────────────────────
 
-## Retorna true si este evento corresponde a la fecha dada
+## Retorna true si este evento corresponde a la fecha dada.
+## Para eventos relativos (RF4.10) resuelve la regla a un día concreto del mes.
 func coincide_fecha(_p_dia: int, _p_mes: int, _p_estacion: int) -> bool:
-	var coin_dia := self.dia == 0 or self.dia == _p_dia
 	var coin_mes := self.mes == -1 or self.mes == _p_mes
 	var coin_est := self.estacion == -1 or self.estacion == _p_estacion
-	return coin_dia and coin_mes and coin_est
+	if not (coin_mes and coin_est):
+		return false
+	if es_relativa():
+		# RF4.10: la regla decide el día dentro del mes consultado.
+		return fechas_relativas(_p_mes).has(_p_dia)
+	var coin_dia := self.dia == 0 or self.dia == _p_dia
+	return coin_dia
+
+
+## ── Reglas relativas (RF4.10) ───────────────────────────────────────────
+## El calendario Aurora son 12 meses de 28 días = 4 semanas exactas, así que el
+## día de la semana de (mes, dia) es ((mes-1)*28 + (dia-1)) % 7 y NO depende del
+## año (igual que GameTime.get_semana_dia()).
+const ORDENES: Dictionary = {
+	"primer": 1, "segundo": 2, "tercer": 3, "cuarto": 4, "ultimo": -1,
+}
+const SEMANA: Dictionary = {
+	"lunes": 0, "martes": 1, "miercoles": 2, "jueves": 3,
+	"viernes": 4, "sabado": 5, "domingo": 6,
+}
+const DIAS_POR_MES_CAL: int = 28
+const DIAS_POR_SEMANA_CAL: int = 7
+
+## true si el evento se define por regla relativa y no por fecha fija.
+func es_relativa() -> bool:
+	return regla_relativa != ""
+
+## Días del mes `p_mes` que satisfacen la regla relativa.
+## Regla inválida o imposible (p. ej. "quinto_lunes") -> array vacío:
+## el evento simplemente no ocurre ese mes (no se inventa una fecha).
+func fechas_relativas(p_mes: int) -> Array:
+	var dias: Array = []
+	if not es_relativa() or p_mes < 1 or p_mes > 12:
+		return dias
+	var partes := regla_relativa.split("_")
+	if partes.size() != 2:
+		return dias
+	var orden: Variant = ORDENES.get(String(partes[0]), null)
+	var dia_semana: Variant = SEMANA.get(String(partes[1]), null)
+	if orden == null or dia_semana == null:
+		return dias
+	var dentro: Array = []
+	for d in range(1, DIAS_POR_MES_CAL + 1):
+		if ((p_mes - 1) * DIAS_POR_MES_CAL + (d - 1)) % DIAS_POR_SEMANA_CAL != int(dia_semana):
+			continue
+		dentro.append(d)
+	if dentro.is_empty():
+		return dias
+	if int(orden) == -1:
+		dias.append(int(dentro[dentro.size() - 1]))
+	elif int(orden) <= dentro.size():
+		dias.append(int(dentro[int(orden) - 1]))
+	return dias
+
+## Día concreto que resuelve la regla para `p_mes` (0 si no aplica).
+static func resolver(regla: String, p_mes: int) -> int:
+	var ev := EventDefinition.new()
+	ev.regla_relativa = regla
+	var dias: Array = ev.fechas_relativas(p_mes)
+	return 0 if dias.is_empty() else int(dias[0])
 
 
 ## Retorna true si la hora actual está dentro de la franja
@@ -113,6 +180,7 @@ func to_dict() -> Dictionary:
 		"dia": dia,
 		"mes": mes,
 		"estacion": estacion,
+		"regla_relativa": regla_relativa,
 		"hora_inicio": hora_inicio,
 		"hora_fin": hora_fin,
 		"dias_aviso": dias_aviso,
@@ -133,6 +201,7 @@ static func from_dict(d: Dictionary) -> EventDefinition:
 	ev.dia = d.get("dia", 0)
 	ev.mes = d.get("mes", -1)
 	ev.estacion = d.get("estacion", -1)
+	ev.regla_relativa = String(d.get("regla_relativa", ""))
 	ev.hora_inicio = d.get("hora_inicio", 0)
 	ev.hora_fin = d.get("hora_fin", 1440)
 	ev.dias_aviso = d.get("dias_aviso", 3)

@@ -282,3 +282,152 @@ var es_variante_cubierta: bool = false
 - Implementar primero las suites de test de límites (tabla sección 6) antes de los contenidos de festivales.
 - Al crear el catálogo `.tres`, completar el checklist por evento de anti-FOMO (RN10) y validar localización con M57.
 - Si `CHECKLIST-GLOBAL.md` será actualizado, usar el ID 74 y completar la fila según el protocolo (sección 21 de AGENTS.md).
+
+## Notas del Agente — verificación runtime de los ítems en [?] (2026-10-11)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1690
+
+Encargo del director (msg 144): tomar M74-Eventos y cerrar un lote grande de `[?]`
+con verificación real. La QA cruzada de Hy3 (Log 362) los había dejado en duda por
+no tener entorno Godot; acá se verificaron con ejecución headless contra el
+catálogo real y dobles de prueba.
+
+**Suite nueva:** `res://scripts/eventos/test_event_manager_verificacion.gd`
+(58 checks, 0 fallos, 9 bloques). Las 4 suites de M74 quedan en **120 checks, 0 fallos**.
+
+### Bugs REALES encontrados y corregidos
+
+| # | Bug | Síntoma | Fix |
+|---|---|---|---|
+| 1 | `_set_estado` no escribía si el año ya existía | El segundo `_set_estado` del mismo año (marcar recompensa, NO_PARTICIPADO, cancelación) se perdía en silencio | Se crea el diccionario del año si falta y **siempre** se escribe |
+| 2 | División ENTERA en `dias_hasta` | `mins_hasta / 1440` daba 0 para cualquier evento a menos de un día: el aviso del último día **nunca** se emitía (RF3.2) | `float(mins_hasta) / 1440.0` |
+| 3 | `restore_save_data` crasheaba con save corrupto | `"eventos": "string"` rompía la carga (RN6 incumplido) | Validación de tipos + `push_warning` + descarte de lo ilegible |
+| 4 | `RecompensaDef.entregar()` llamaba APIs inexistentes | `Inventario.agregar()` y `EconomyManager.suministrar_moneda()` **no existen** en M14/M38: toda entrega de recompensa fallaba en silencio y el anti-duplicado nunca marcaba nada | Duck-typing con las APIs reales: `add_item`/`agregar_items` (M14) y `depositar_monedas` (M38), con `push_warning` si no hay destino |
+| 5 | La compensatoria pisaba CANCELADO | `_entregar_una_recompensa` llamaba `marcar_recompensa_recibida()` y el evento cancelado quedaba PARTICIPADO | Nuevo `EventState.marcar_recompensa_compensatoria()`: consume el token del año y **conserva CANCELADO** |
+
+### Lo que quedó `[?]` a propósito (evidencia negativa)
+
+- **Buzón de entregas** (RF6.9/6.10, I9, J15, M8): no implementado; no hay buzón en
+  el save ni en el inventario.
+- **RN5 (esquema versionado)**: `get_save_data()` no tiene campo `version`.
+- **Integraciones reales**: M20 no expone método público de sumar puntos,
+  `/root/Museo` no existe como autoload y M71 no tiene `registrar_progreso_evento`
+  (se dejaron ganchos por duck-typing que fallan con warning, ya no fingen éxito).
+- **RF4.10 (eventos relativos tipo "segundo sábado")**: `dia_relativo` en
+  `get_eventos_proximos()` es un índice de posición, no una regla de calendario.
+- **RF4.12 (re-validar al cargar)**: `restore_save_data()` restaura estado pero no
+  re-valida si la franja sigue abierta.
+- **UI, i18n, efectos M31/M32, gatillos runtime de historia**: dependen de otros
+  módulos o de trabajo visual.
+
+
+## Notas del Agente — buzón de entregas (2026-10-11)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1694
+
+Pedido del director (msg 146): implementar el buzón de entregas (RF6.9/RF6.10).
+
+| Archivo | Qué aporta |
+|---|---|
+| `scripts/eventos/buzon_entregas.gd` (nuevo) | `class_name BuzonEntregas`: alta de sobrantes, `pendientes()`, `reclamar(id)`, `vencidas(dia)`, `purgar(dia)` con `RETENCION_DIAS = 30`, `to_dict()/from_dict()` versionado |
+| `scripts/eventos/recompensa_def.gd` | `entregar()` ahora lee el contrato REAL de M14 (`add_item` devuelve `restante`); si sobra, deriva al buzón vía `event_manager.buzon()`. Sin buzón, la entrega parcial **falla** (no finge éxito) |
+| `scripts/eventos/event_manager.gd` | `_buzon`, `buzon()`, `reclamar_buzon(id)` (reintenta M14), `limpiar_buzon()`, purge en `_on_dia_cambio`, `buzon` dentro de `get_save_data()`/`restore_save_data()`, `const VERSION_SAVE` (RN5) |
+
+Suite nueva `test_buzon_entregas.gd` (31 checks, 0 fallos, 4 bloques). Las 5 suites
+de M74: **151 checks, 0 fallos**.
+
+### Contrato que hay que respetar (lección)
+
+`Inventario.add_item()` devuelve **`restante`** (lo que NO entró), no la cantidad
+aceptada. Mi primer fake devolvía la cantidad aceptada y por eso las 4 suites de
+verificación se pusieron en rojo al cablear el buzón: cualquier entrega parecía
+"inventario lleno". Los fakes deben copiar el contrato real, no uno inventado.
+
+### Incidente de infraestructura (repo completo, reportado al director)
+
+`Godot --headless --import` **borró** `.godot/global_script_class_cache.cfg`, y con
+él la resolución de todos los `class_name` del proyecto (fallaban también clases
+ajenas como `DialogueGraph` de M21). Se reconstruyó con un segundo `--import`
+(593 clases, incluidas las 3 nuevas: `BuzonEntregas` y las 2 suites). Los scripts
+nuevos necesitan `.uid`; al no tenerlo, Godot no los registra en el cache.
+
+
+## Notas del Agente — eventos relativos + re-validación al cargar (2026-10-11)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1697
+
+Pedido del director (msg 148).
+
+### RF4.10 — eventos relativos por calendario
+
+`EventDefinition.regla_relativa` (String, vacío = fecha fija) con formato
+`{orden}_{dia_semana}`: `orden ∈ {primer, segundo, tercer, cuarto, ultimo}` y
+`dia_semana ∈ {lunes..domingo}`. Resuelto por:
+
+- `fechas_relativas(mes) -> Array[int]`: los días del mes que cumplen la regla.
+- `static resolver(regla, mes) -> int`: el primero (0 si no aplica).
+
+Base: el calendario Aurora son 12 meses de 28 días = 4 semanas exactas, así que el
+día de la semana de (mes, día) es `((mes-1)*28 + (día-1)) % 7`, **independiente del
+año** (mismo criterio que `GameTime.get_semana_dia()`). Consecuencias verificadas
+en tests: `primer_lunes` cae siempre el 1, `cuarto_lunes` el 22, `ultimo_lunes`
+también el 22 (solo hay 4 semanas) y `quinto_lunes` **no existe** (devuelve 0, el
+evento simplemente no ocurre: no se inventa una fecha).
+
+Integración: `coincide_fecha()` consulta la regla cuando el evento es relativo, así
+que `get_eventos_del_dia()` y la agenda funcionan sin cambios. El campo viaja en
+`to_dict()/from_dict()`.
+
+### RF4.12 — re-validar eventos al cargar
+
+`EventManager.revalidar_al_cargar()`, llamado al final de `restore_save_data()`:
+
+- evento `EN_CURSO` con fecha y franja todavía abiertas → se **reabre**
+  (`evento_actual` apunta a él);
+- evento `EN_CURSO` con la franja ya cerrada (terminó mientras el juego estaba
+  cerrado) → se cierra como `NO_PARTICIPADO` y se emite `evento_terminado`. No se
+  pierde el histórico ni se re-entrega recompensa (el token del año ya está
+  consumido).
+
+Suite nueva `test_eventos_relativos_m74.gd` (38 checks, 0 fallos). Las 6 suites de
+M74: **181 checks, 0 fallos**.
+
+
+## Notas del Agente — solapes por prioridad (2026-10-11)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1699
+
+Pedido del director (msg 150): J7/J8.
+
+- `static ordenar_por_prioridad(eventos)`: orden determinista por `prioridad`
+  descendente y, a igualdad, por id alfabético (el resultado no depende del orden
+  del diccionario).
+- `resolver_solapes(fecha)`: si hay más de un evento el mismo día, gana el de
+  mayor prioridad y **los perdedores se corren al día siguiente** con las señales
+  `evento_reprogramado(id, nueva_fecha)` y `solape_resuelto(ganador, perdedores)`.
+  Un día con un solo evento: ese evento es el ganador y no se corre nadie. Un día
+  sin eventos: no hay ganador.
+- La reprogramación queda en `_reprogramados` (evento_id -> {dia, mes, anio}),
+  **persiste en el save** y la agenda la consulta vía `fecha_efectiva()`.
+- Cruces de mes/año: `28 -> 1 del mes siguiente`, `28/12 -> 1/1 del año siguiente`,
+  así que un perdedor de fin de año no se pierde.
+- Integrado al ciclo `_on_dia_cambio` (se resuelve antes de los avisos).
+
+Nota de compatibilidad: `get_eventos_del_dia()` usa `_coincide_efectiva()`, que
+respeta la regla relativa (RF4.10) cuando el evento no fue reprogramado y la fecha
+concreta cuando sí lo fue.
+
+Suite nueva `test_solapes_m74.gd` (33 checks, 0 fallos). Las 7 suites de M74:
+**212 checks, 0 fallos**.
+
+**Autocorrección:** flipié J12 (tormenta) y J20 (cumpleaños M29) creyendo que el
+mecanismo genérico los cubría. No es así: mi suite no prueba tormentas ni la
+integración con M29. Ambos vuelven a `[?]` — quedan como deuda honesta.
