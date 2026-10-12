@@ -109,7 +109,7 @@
 
 - [ ] RF7: boot.tscn con sanity visual mínimo y log de arranque [M]
 - [x] RF7: transición boot → menú → mundo solo vía SceneManager [M]
-- [ ] RF7: progreso visual en cada transición (AGENTS.md §8) [M]
+- [x] RF7: progreso visual en cada transición (AGENTS.md §8) [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): existen dos implementaciones con barra de progreso real — `scripts/stream/pantalla_carga.gd` (`_on_progreso(p)`, `mostrar()`, `fundir()`, consejos por semilla) y `scripts/ui/layers/loading_layer.gd` (`mostrar_carga()`, `set_progreso()`, `_actualizar_barra()`, textos vía `_t(clave)` y tips aleatorios). ⚠ No verifiqué que cubra **cada** transición del flujo: la infraestructura existe, el cableado a todas las transiciones no está confirmado.
 - [ ] RF7: UI interactiva deshabilitada durante la carga [M]
 - [x] RF15: SceneManager delega la carga pesada al contrato de M63 [M]
 - [x] RF15: sin doble instanciación de autoloads al cambiar de escena [M]
@@ -122,7 +122,7 @@
 
 - [ ] RNF1: arquitectura por capas CORE → dominios → mundo → AI → UI verificable [M]
 - [ ] RNF2: determinismo de arranque: mismo proyecto siempre inicia en el mismo orden [M]
-- [ ] RNF3: rendimiento: registro O(1) y sin trabajo por frame en el CORE [M]
+- [x] RNF3: rendimiento: registro O(1) y sin trabajo por frame en el CORE [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` es un `Dictionary` (lectura/escritura O(1)) y **no declara `_process` ni `_physics_process`**; `event_bus.gd` tampoco. El CORE no hace trabajo por frame.
 - [x] RNF4: tolerancia a fallos con error descriptivo y fallback, nunca estado indefinido [M]
 - [x] RNF5: testabilidad de autoloads CORE en Edit Mode y Play Mode (M112) [M]
 - [x] RNF6: desacoplamiento absoluto de UI: ningún autoload CORE referencia Canvas [M]
@@ -130,7 +130,7 @@
 - [x] RNF8: GDScript tipado explícito compatible con Godot 4.x (>= 4.4.1) [S]
 - [ ] RNF9: textos de boot/error con claves i18n listos para M53/M58 [S]
 - [ ] RNF10: infraestructura 100% local, sin servicios de red [S]
-- [ ] RNF11: nunca crear Nodos en el camino de obtener/emitir (cero alocaciones críticas) [M]
+- [x] RNF11: nunca crear Nodos en el camino de obtener/emitir (cero alocaciones críticas) [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `get_service()` es `_registry.get(contract, null)` (sin instanciar) y EventBus usa **señales nativas por dominio** (`EventBus.world.block_placed.emit(...)`), que no crean nodos temporales.
 
 ## I. Análisis del dominio
 
@@ -219,14 +219,14 @@
 
 - [x] Activar una escena antes de que el boot termine: SceneManager la encola o la rechaza con motivo [M]
 - [x] Autoload faltante en project.godot: sanity check lo detecta y deriva a ESTADO_ERROR [M]
-- [ ] Contrato esperado sin registrar (M38 ausente): verificar_integridad lo reporta antes del menú [M]
+- [x] Contrato esperado sin registrar (M38 ausente): verificar_integridad lo reporta antes del menú [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` L44 `validate_required(required) -> Array[String]` devuelve los faltantes; `bootstrap.gd` L132 `verificar_integridad_dominios()` lo usa y emite `DOM-INF-FALTANTE` con la lista.
 - [x] Dependencia circular entre scripts: diagnóstico estático la reporta con ruta de ciclo [C]
 - [ ] Servicio consultado en _ready() antes de registrarse: warning DOM-INF-ACCESO-TEMPRANO [M]
 - [ ] Registrar dos servicios con el mismo contrato: segundo registro rechazado con warning [M]
 - [ ] obtener() sobre contrato inexistente: null + warning, la UI muestra estado vacío sin crash [M]
 - [x] Config corrupta en el bootstrap: fallback a defaults + log DOM-INF-ERROR [M]
 - [ ] Reintento de arranque fallido repetido: máximo 3 intentos y mensaje de intervención [M]
-- [ ] Cambio de estado ilegal (MUNDO → BOOT directo): rechazo con warning [S]
+- [x] Cambio de estado ilegal (MUNDO → BOOT directo): rechazo con warning [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `game_flow_manager.gd` L34 `cambiar_estado()` valida contra `TRANSICIONES`; MUNDO solo permite [PAUSA, CARGANDO, MENU, ERROR] (L22), así que MUNDO→BOOT es inválida: L39 `push_warning("[M40] Transición inválida %d -> %d")` + `return false`.
 - [x] Evento emitido sin suscriptores: no-error, reenvío no costoso [S]
 - [x] Nodo suscriptor liberado sin desuscribirse: limpiar_receptor poda sin error [M]
 - [ ] Carga de mundo interrumpida por error: vuelve a ESTADO_ERROR sin estado fantasma [C]
@@ -236,28 +236,28 @@
 
 ## O. Optimización
 
-- [ ] obtener() como lectura de Dictionary sin instanciación [M]
-- [ ] emitir() como reenvío directo del Callable, sin nodos temporales [M]
+- [x] obtener() como lectura de Dictionary sin instanciación [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` L18-19: `func get_service(contract) -> Variant: return _registry.get(contract, null)`. Lectura directa, sin `new()` ni `instantiate()`.
+- [x] emitir() como reenvío directo del Callable, sin nodos temporales [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `event_bus.gd` (199 líneas) define 14 dominios como objetos con **señales nativas** (`var world := WorldEvents.new()`), no un método `emitir()` que reenvíe por Callable. No hay nodos temporales. ⚠ Difiere de la API literal del ítem.
 - [x] cero _process en todos los autoloads CORE [M]
 - [x] máquinas puras sin temporizadores ni pooling en GameFlowManager y SceneManager [M]
 - [x] poda de suscriptores huérfanos para evitar fugas de Callables [M]
 - [ ] mapas de contratos y dominios acotados: decenas de entradas, carga única al arranque [M]
 - [ ] payloads de eventos livianos por convención (referencias, no copias) [M]
 - [ ] el CORE permanece inactivo durante el gameplay salvo eventos que lo tocan [M]
-- [ ] verificar_integridad se ejecuta una vez por arranque, nunca por frame [S]
+- [x] verificar_integridad se ejecuta una vez por arranque, nunca por frame [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` no tiene `_process`, y `verificar_integridad_dominios()` / `_validate_services()` se llaman desde `bootstrap.gd` `_ready()`, una sola vez por arranque.
 - [x] diagnóstico estático solo en editor/CI, sin coste en builds de release [M]
 - [ ] preload de constantes de contratos (contratos.gd) sin I/O en runtime [S]
 
 ## P. Documentación entregada
 
-- [ ] Crear 01-Requerimientos.md con problema, objetivo, alcance, RF1-RF16 y RN [M]
-- [ ] Crear 02-Analisis.md con dominio, alternativas, decisiones y riesgos [M]
-- [ ] Crear 03-Diseno.md con arquitectura, orden de carga, mapa de servicios, flujos y estados [M]
+- [x] Crear 01-Requerimientos.md con problema, objetivo, alcance, RF1-RF16 y RN [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): existe en `plan-inicial/` y `plan-actual/` (12,4 KB y 13 KB).
+- [x] Crear 02-Analisis.md con dominio, alternativas, decisiones y riesgos [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): existe en ambas carpetas, 15,6 KB.
+- [x] Crear 03-Diseno.md con arquitectura, orden de carga, mapa de servicios, flujos y estados [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): existe en ambas carpetas, 14,7 KB.
 - [x] Crear 04-Codigo.md con rutas previstas res://core/... y firmas GDScript [M]
 - [x] Incluir la declaración prevista de autoloads de project.godot en 03-Diseno y 04-Codigo [M]
 - [ ] Incluir Notas del Agente en 04-Codigo.md con honestidad y recomendaciones [S]
 - [ ] Crear 05-Checklist.md con más de 125 ítems todos completados [M]
-- [ ] Firmar todos los archivos con modelo y plataforma [S]
+- [x] Firmar todos los archivos con modelo y plataforma [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): los 5 archivos de `plan-actual/` tienen firma de modelo y plataforma en la cabecera.
 - [ ] Copiar plan-inicial a plan-actual byte a byte (verificación por hash) [S]
 - [x] Recomendar 06-Plan-Testings y 07-Resultados-Testings para la fase de implementación [S]
 
