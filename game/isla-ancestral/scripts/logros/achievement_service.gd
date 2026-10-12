@@ -72,6 +72,16 @@ func _cargar_catalogo() -> void:
 		_logros[id] = {
 			"nombre": String(logro.get("nombre", id)),
 			"descripcion": String(logro.get("descripcion", "")),
+			# RF1: claves de traducción (nombre_i18n / descripcion_i18n). Si no
+			# vienen, se derivan del id para que la UI nunca muestre un hueco.
+			"nombre_i18n": String(logro.get("nombre_i18n", "LOGROS." + id.to_upper())),
+			"descripcion_i18n": String(logro.get("descripcion_i18n", "LOGROS." + id.to_upper() + ".DESC")),
+			# RF1: icono obligatorio (se valida en validar_catalogo).
+			"icono": String(logro.get("icono", "")),
+			# RF1: categoría del vocabulario conocido (RF14 la valida).
+			"categoria": String(logro.get("categoria", "progresion")),
+			# RF1: mapeo opcional con Steam (M97).
+			"logro_steam_id": String(logro.get("logro_steam_id", "")),
 			"condicion": logro.get("condicion", {}),
 			"oculto": bool(logro.get("oculto", false)),
 			"progreso_parcial": bool(logro.get("progreso_parcial", false)),
@@ -331,22 +341,34 @@ func get_estado(logro_id: String) -> Dictionary:
 
 
 func _estado_de(logro_id: String) -> Dictionary:
+	var def: Dictionary = _logros.get(logro_id, {})
 	var desbloqueado := esta_desbloqueado(logro_id)
-	var oculto := bool(_logros.get(logro_id, {}).get("oculto", false))
-	if oculto and not desbloqueado:
-		return {"id": logro_id, "nombre": "???", "descripcion": "Logro oculto",
-			"desbloqueado": false, "oculto": true, "progreso": ""}
-	var fecha: Dictionary = _fechas.get(logro_id, {})
-	return {
+	var oculto := bool(def.get("oculto", false))
+	# Los campos RF1 se propagan SIEMPRE (la UI necesita icono/categoría/orden
+	# incluso para pintar el "???" de un oculto).
+	var comunes := {
 		"id": logro_id,
-		"nombre": String(_logros.get(logro_id, {}).get("nombre", "")),
-		"descripcion": String(_logros.get(logro_id, {}).get("descripcion", "")),
-		"desbloqueado": desbloqueado,
+		"nombre_i18n": String(def.get("nombre_i18n", "")),
+		"descripcion_i18n": String(def.get("descripcion_i18n", "")),
+		"icono": String(def.get("icono", "")),
+		"categoria": String(def.get("categoria", "")),
+		"logro_steam_id": String(def.get("logro_steam_id", "")),
+		"orden": int(def.get("orden", 999)),
 		"oculto": oculto,
-		"dia": int(fecha.get("dia", -1)),
-		"hora": int(fecha.get("hora", -1)),
-		"progreso": "" if desbloqueado else get_progreso_humano(logro_id),
+		"desbloqueado": desbloqueado,
 	}
+	if oculto and not desbloqueado:
+		comunes["nombre"] = "???"
+		comunes["descripcion"] = "Logro oculto"
+		comunes["progreso"] = ""
+		return comunes
+	var fecha: Dictionary = _fechas.get(logro_id, {})
+	comunes["nombre"] = String(def.get("nombre", ""))
+	comunes["descripcion"] = String(def.get("descripcion", ""))
+	comunes["dia"] = int(fecha.get("dia", -1))
+	comunes["hora"] = int(fecha.get("hora", -1))
+	comunes["progreso"] = "" if desbloqueado else get_progreso_humano(logro_id)
+	return comunes
 
 
 func get_desbloqueados() -> Array:
@@ -386,11 +408,18 @@ const TIPOS_CONDICION_VALIDOS := [
 	"nivel_modulo", "compuesta",
 ]
 
+## RF1: vocabulario cerrado de categorías (RF14 valida contra esta lista).
+const CATEGORIAS_VALIDAS := [
+	"agricultura", "pesca", "mineria", "amistad",
+	"colecciones", "progresion", "exploracion",
+]
+
 
 func validar_catalogo() -> int:
 	"""RF14: devuelve cantidad de problemas; imprime cada uno accionable."""
 	var problemas := 0
 	var vistos := {}
+	var steam_vistos := {}
 	var texto := FileAccess.get_file_as_string(RUTA_CATALOGO)
 	var parseado: Variant = JSON.parse_string(texto)
 	var entradas: Array = parseado.get("logros", []) if typeof(parseado) == TYPE_DICTIONARY else []
@@ -404,6 +433,24 @@ func validar_catalogo() -> int:
 			problemas += 1
 			print("[M72][RF14] Problema: id duplicado '%s' — renombrar una entrada" % id)
 		vistos[id] = true
+		# RF1/RF14: toda entrada necesita icono (la UI lo muestra siempre).
+		if String(logro.get("icono", "")).is_empty():
+			problemas += 1
+			print("[M72][RF14] Problema: '%s' sin 'icono' — asignar textura (RF1)" % id)
+		# RF1/RF14: la categoría debe ser del vocabulario conocido.
+		var categoria := String(logro.get("categoria", "progresion"))
+		if not CATEGORIAS_VALIDAS.has(categoria):
+			problemas += 1
+			print("[M72][RF14] Problema: '%s' categoría desconocida '%s' — usar %s" % [
+				id, categoria, str(CATEGORIAS_VALIDAS)])
+		# RF1/RF14: los ids de Steam (M97) no pueden duplicarse.
+		var steam_id := String(logro.get("logro_steam_id", ""))
+		if not steam_id.is_empty():
+			if steam_vistos.has(steam_id):
+				problemas += 1
+				print("[M72][RF14] Problema: logro_steam_id duplicado '%s' (%s) — cada logro necesita id Steam único" % [
+					steam_id, id])
+			steam_vistos[steam_id] = id
 		var cond: Dictionary = logro.get("condicion", {})
 		if cond.is_empty():
 			problemas += 1

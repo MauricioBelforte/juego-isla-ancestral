@@ -1,75 +1,264 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"logros": [
 		{
 			"id": "logro_primer_sello",
+			"nombre_i18n": "LOGROS.PRIMER_SELLO.NOMBRE",
+			"descripcion_i18n": "LOGROS.PRIMER_SELLO.DESC",
 			"nombre": "La Llave de Ceniza",
 			"descripcion": "Obtuviste el primer sello ancestral.",
-			"condicion": { "tipo": "sello_historia", "sello_id": "sello_ceniza_sala1" }
+			"icono": "res://assets/ui/logros/primer_sello.png",
+			"categoria": "progresion",
+			"orden": 10,
+			"condicion": {
+				"tipo": "sello_historia",
+				"sello_id": "sello_ceniza_sala1"
+			}
 		},
 		{
 			"id": "logro_siete_sellos",
+			"nombre_i18n": "LOGROS.SIETE_SELLOS.NOMBRE",
+			"descripcion_i18n": "LOGROS.SIETE_SELLOS.DESC",
 			"nombre": "Guardián Completo",
 			"descripcion": "Reuniste los siete sellos de Aurora.",
-			"condicion": { "tipo": "stat_min", "stat_id": "sellos_obtenidos", "umbral": 7 }
+			"icono": "res://assets/ui/logros/siete_sellos.png",
+			"categoria": "progresion",
+			"orden": 20,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "sellos_obtenidos",
+				"umbral": 7
+			}
 		},
 		{
 			"id": "logro_coleccionista",
+			"nombre_i18n": "LOGROS.COLECCIONISTA.NOMBRE",
+			"descripcion_i18n": "LOGROS.COLECCIONISTA.DESC",
 			"nombre": "Ojo de Curador",
 			"descripcion": "Completaste el herbario del museo.",
-			"condicion": { "tipo": "coleccion_completa", "coleccion_id": "flora" }
+			"icono": "res://assets/ui/logros/coleccionista.png",
+			"categoria": "colecciones",
+			"orden": 30,
+			"condicion": {
+				"tipo": "coleccion_completa",
+				"coleccion_id": "flora"
+			}
 		},
 		{
 			"id": "logro_viajero",
+			"nombre_i18n": "LOGROS.VIAJERO.NOMBRE",
+			"descripcion_i18n": "LOGROS.VIAJERO.DESC",
 			"nombre": "Mar Adentro",
 			"descripcion": "Realizaste 3 viajes en vapor.",
-			"condicion": { "tipo": "stat_min", "stat_id": "viajes_realizados", "umbral": 3 },
-			"progreso_parcial": true
+			"icono": "res://assets/ui/logros/viajero.png",
+			"categoria": "exploracion",
+			"orden": 40,
+			"progreso_parcial": true,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "viajes_realizados",
+				"umbral": 3
+			}
 		},
 		{
 			"id": "logro_vecino",
+			"nombre_i18n": "LOGROS.VECINO.NOMBRE",
+			"descripcion_i18n": "LOGROS.VECINO.DESC",
 			"nombre": "Cara Conocida",
 			"descripcion": "Un vecino se mudó a Aurora gracias a vos.",
-			"condicion": { "tipo": "stat_min", "stat_id": "regalos_dados", "umbral": 1 }
+			"icono": "res://assets/ui/logros/vecino.png",
+			"categoria": "amistad",
+			"orden": 50,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "regalos_dados",
+				"umbral": 1
+			}
 		},
 		{
 			"id": "logro_misionero",
+			"nombre_i18n": "LOGROS.MISIONERO.NOMBRE",
+			"descripcion_i18n": "LOGROS.MISIONERO.DESC",
 			"nombre": "Manos Ocupadas",
 			"descripcion": "Completaste tu primera misión secundaria.",
-			"condicion": { "tipo": "stat_min", "stat_id": "misiones_completadas", "umbral": 1 }
+			"icono": "res://assets/ui/logros/misionero.png",
+			"categoria": "progresion",
+			"orden": 60,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "misiones_completadas",
+				"umbral": 1
+			}
 		},
 		{
 			"id": "logro_secreto_guardian",
+			"nombre_i18n": "LOGROS.SECRETO_GUARDIAN.NOMBRE",
+			"descripcion_i18n": "LOGROS.SECRETO_GUARDIAN.DESC",
 			"nombre": "El Último Guardián",
 			"descripcion": "???",
-			"condicion": { "tipo": "hito_previo", "milestone_id": "hito_sello_ceniza_sala1" },
-			"oculto": true
+			"icono": "res://assets/ui/logros/secreto_guardian.png",
+			"categoria": "progresion",
+			"orden": 70,
+			"oculto": true,
+			"condicion": {
+				"tipo": "hito_previo",
+				"milestone_id": "hito_sello_ceniza_sala1"
+			}
 		},
 		{
 			"id": "logro_amigo_cercano",
+			"nombre_i18n": "LOGROS.AMIGO_CERCANO.NOMBRE",
+			"descripcion_i18n": "LOGROS.AMIGO_CERCANO.DESC",
 			"nombre": "Amigo Cercano",
 			"descripcion": "Alcanzaste nivel 3 de amistad con Catalina.",
-			"condicion": { "tipo": "stat_min", "stat_id": "amistad_max_catalina_oso", "umbral": 3 }
+			"icono": "res://assets/ui/logros/amigo_cercano.png",
+			"categoria": "amistad",
+			"orden": 80,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "amistad_max_catalina_oso",
+				"umbral": 3
+			}
 		},
 		{
 			"id": "logro_alma_de_la_isla",
+			"nombre_i18n": "LOGROS.ALMA_DE_LA_ISLA.NOMBRE",
+			"descripcion_i18n": "LOGROS.ALMA_DE_LA_ISLA.DESC",
 			"nombre": "Alma de la Isla",
 			"descripcion": "Alcanzaste nivel 4 (máximo) de amistad con cualquier vecino.",
-			"condicion": { "tipo": "stat_min", "stat_id": "amistad_max_catalina_oso", "umbral": 4 }
+			"icono": "res://assets/ui/logros/alma_de_la_isla.png",
+			"categoria": "amistad",
+			"orden": 90,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "amistad_max_catalina_oso",
+				"umbral": 4
+			}
 		},
 		{
 			"id": "logro_pescador_principiante",
+			"nombre_i18n": "LOGROS.PESCADOR_PRINCIPIANTE.NOMBRE",
+			"descripcion_i18n": "LOGROS.PESCADOR_PRINCIPIANTE.DESC",
 			"nombre": "Pescador Principiante",
 			"descripcion": "Capturaste tu primer pez en las aguas de Aurora.",
-			"condicion": { "tipo": "stat_min", "stat_id": "peces_capturados", "umbral": 1 },
-			"progreso_parcial": true
+			"icono": "res://assets/ui/logros/pescador_principiante.png",
+			"categoria": "pesca",
+			"orden": 100,
+			"progreso_parcial": true,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "peces_capturados",
+				"umbral": 1
+			}
 		},
 		{
 			"id": "logro_mar_adentro_10",
+			"nombre_i18n": "LOGROS.MAR_ADENTRO_10.NOMBRE",
+			"descripcion_i18n": "LOGROS.MAR_ADENTRO_10.DESC",
 			"nombre": "Diez en el Anzuelo",
 			"descripcion": "Capturaste 10 peces.",
-			"condicion": { "tipo": "stat_min", "stat_id": "peces_capturados", "umbral": 10 },
-			"progreso_parcial": true
+			"icono": "res://assets/ui/logros/mar_adentro_10.png",
+			"categoria": "pesca",
+			"orden": 110,
+			"progreso_parcial": true,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "peces_capturados",
+				"umbral": 10
+			}
+		},
+		{
+			"id": "logro_primer_cultivo",
+			"nombre_i18n": "LOGROS.PRIMER_CULTIVO.NOMBRE",
+			"descripcion_i18n": "LOGROS.PRIMER_CULTIVO.DESC",
+			"nombre": "Manos en la Tierra",
+			"descripcion": "Plantaste y cosechaste tu primera semilla.",
+			"icono": "res://assets/ui/logros/primer_cultivo.png",
+			"categoria": "agricultura",
+			"orden": 120,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "regalos_dados",
+				"umbral": 1
+			}
+		},
+		{
+			"id": "logro_cosecha_diez",
+			"nombre_i18n": "LOGROS.COSECHA_DIEZ.NOMBRE",
+			"descripcion_i18n": "LOGROS.COSECHA_DIEZ.DESC",
+			"nombre": "Temporada Generosa",
+			"descripcion": "Cosechaste 10 cultivos.",
+			"icono": "res://assets/ui/logros/cosecha_diez.png",
+			"categoria": "agricultura",
+			"orden": 130,
+			"progreso_parcial": true,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "regalos_dados",
+				"umbral": 10
+			}
+		},
+		{
+			"id": "logro_primer_mineral",
+			"nombre_i18n": "LOGROS.PRIMER_MINERAL.NOMBRE",
+			"descripcion_i18n": "LOGROS.PRIMER_MINERAL.DESC",
+			"nombre": "Primera Veta",
+			"descripcion": "Extrajiste tu primer mineral.",
+			"icono": "res://assets/ui/logros/primer_mineral.png",
+			"categoria": "mineria",
+			"orden": 140,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "regalos_dados",
+				"umbral": 1
+			}
+		},
+		{
+			"id": "logro_minero_veterano",
+			"nombre_i18n": "LOGROS.MINERO_VETERANO.NOMBRE",
+			"descripcion_i18n": "LOGROS.MINERO_VETERANO.DESC",
+			"nombre": "Minero Veterano",
+			"descripcion": "Extrajiste 25 minerales.",
+			"icono": "res://assets/ui/logros/minero_veterano.png",
+			"categoria": "mineria",
+			"orden": 150,
+			"progreso_parcial": true,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "regalos_dados",
+				"umbral": 25
+			}
+		},
+		{
+			"id": "logro_primera_isla",
+			"nombre_i18n": "LOGROS.PRIMERA_ISLA.NOMBRE",
+			"descripcion_i18n": "LOGROS.PRIMERA_ISLA.DESC",
+			"nombre": "Horizonte Nuevo",
+			"descripcion": "Viajaste por primera vez a otra isla.",
+			"icono": "res://assets/ui/logros/primera_isla.png",
+			"categoria": "exploracion",
+			"orden": 160,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "viajes_realizados",
+				"umbral": 2
+			}
+		},
+		{
+			"id": "logro_dias_en_aurora",
+			"nombre_i18n": "LOGROS.DIAS_EN_AURORA.NOMBRE",
+			"descripcion_i18n": "LOGROS.DIAS_EN_AURORA.DESC",
+			"nombre": "Raíces Profundas",
+			"descripcion": "Pasaste 30 días en Aurora.",
+			"icono": "res://assets/ui/logros/dias_en_aurora.png",
+			"categoria": "progresion",
+			"orden": 170,
+			"progreso_parcial": true,
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "viajes_realizados",
+				"umbral": 30
+			}
 		}
 	]
 }

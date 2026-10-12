@@ -301,3 +301,147 @@ func store_stats() -> void: ...
 - `catalogo_tiendas.gd:63` → `SCRIPT ERROR: Nonexistent function 'size' in base 'Callable'` + warning
   "item_id inexistente en M15: `piedra_caliza`". Bug de M39 (en curso por glm) que contamina el boot
   de autoloads. **Delegado** (11-BUGS + ESTADO-PARALELO), no lo corrijo.
+
+## Notas del Agente — lote B+E, RF1 + persistencia (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1730
+
+Encargo del director (msg 175): secciones B+E de M72, ampliando el núcleo existente.
+**M72: 11 -> 31 `[x]` / 185 (+20).**
+
+### Catálogo RF1 (`data/logros/logros.json`, 11 -> 17 logros)
+
+Campos que faltaban y ahora están en las 17 entradas:
+
+| Campo | Estado |
+|---|---|
+| `nombre_i18n` / `descripcion_i18n` | agregados (se derivan del id si el JSON no los trae) |
+| `icono` | agregado, obligatorio (RF14 lo valida) |
+| `categoria` | agregado con vocabulario cerrado de 7 valores |
+| `orden` | agregado y usado por `get_todos()` para ordenar |
+| `logro_steam_id` | agregado (opcional, para M97) |
+| `oculto`, `condicion`, `progreso_parcial` | ya existían |
+
+Cobertura de categorías: las 7 del diseño (progresion, colecciones, exploracion, amistad, pesca,
+agricultura, mineria). También se corrigió mojibake heredado (`Guardiá` -> `Guardián`).
+
+### Código (`scripts/logros/achievement_service.gd`)
+
+- `_cargar_catalogo()` lee los 6 campos nuevos.
+- `CATEGORIAS_VALIDAS` (7 valores) junto a `TIPOS_CONDICION_VALIDOS`.
+- **`_estado_de()` descartaba los campos nuevos**: construía el diccionario a mano con solo
+  id/nombre/descripcion/desbloqueado/oculto/dia/hora/progreso, así que la UI no recibía icono,
+  categoría ni orden. Ahora arma un `comunes` con todo y lo completa según el caso.
+- `validar_catalogo()` suma 3 validaciones: icono obligatorio, categoría del vocabulario y
+  `logro_steam_id` duplicado.
+
+### ⚠️ Dato real encontrado por la suite de integridad
+
+Mis primeros 4 logros nuevos usaban `stat_id` que **no existen en M71**
+(`cultivos_cosechados`, `minerales_extraidos`, `islas_visitadas`, `dias_jugados_total`).
+`test_logros_m72_statids.gd` los detectó como "sin resolver". Reemplazados por stats reales
+(`regalos_dados`, `viajes_realizados`, `misiones_completadas`, `sellos_obtenidos`,
+`peces_capturados`, `amistad_max_catalina_oso`).
+
+### Suite
+
+`scripts/logros/test_logros_rf1_e.gd` (nueva, **35 checks, 0 fallos**, 6 bloques: campos RF1,
+validación RF14, orden, persistencia, tolerancia/migración, coexistencia con M71).
+Las 3 suites de M72 en verde.
+
+## Notas del Agente — barrido de ítems con tests reales (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1735
+
+Encargo del director (msg 184): barrido de M72. **M72: 31 -> 68 `[x]` / 185 (+37).**
+
+### Método
+
+El checklist tenía 62 ítems `[ ]` **con notas de implementación** (de iteraciones anteriores) que
+nunca se reflejaron en las marcas. En lugar de confiar en las notas, verifiqué cada uno contra el
+código y las suites, y flipé solo lo que tiene respaldo real:
+
+- **C (condiciones):** la decisión de diseño fue **no duplicar el evaluador de M71** — las
+  condiciones usan el vocabulario M71 §3.6 y se evalúan vía `evaluar_condicion()`. Verifiqué que
+  `_conectar_eventos()` suscribe a señales de M71 y EventBus (inventory/economy/npc/quest) y que
+  **no hay `_process`** en el módulo.
+- **C (desbloqueo):** `desbloquear()` idempotente, `_fechas {dia, hora}` determinista,
+  `mark_dirty()` tras cada desbloqueo, `re_evaluar_todo()` al restaurar.
+- **I (integración M71):** `progreso_de()` lee el perfil de M71; las señales de hito/progreso
+  están conectadas.
+- **M (testings):** verifiqué enumerando los tests reales de las suites (27 en total), no solo
+  las notas.
+- **L (documentación):** verificado en disco que los 5 archivos existen y que 01/02/03/04 están
+  firmados con `**Modelo:**` + `**Plataforma:**`.
+
+### Suites verificadas
+
+```
+test_logros.gd             20 tests  (catálogo, desbloqueo, idempotencia, fechas,
+                            progreso humano, ocultos, persistencia, migración v1,
+                            retroactividad, doble desbloqueo atómico, compuesta,
+                            caché, guardado/carga, panel)
+test_logros_rf1_e.gd        6 tests  (campos RF1, validación RF14, orden, persistencia,
+                            tolerancia, coexistencia con M71)
+test_logros_m72_statids.gd  1 test   (detección de stat_ids desconocidos)
+                            ---
+                            27 tests, 0 fallos
+```
+
+### Lo que quedó `[ ]` a propósito
+
+- **D (notificación UI) y F (panel)**: dependen de M53 (UI real).
+- **I (integración M37/M97)** e **I (reconciliación Steam)**: no hay autoload de Steam ni museo
+  accesible desde el núcleo.
+- **K (optimización)**: el índice formal de condiciones está postergado por diseño hasta 200
+  logros (documentado en la nota del ítem L68 original).
+- **J**: edge cases que requieren UI o playtest (notificación durante cinemática, 20 logros a
+  la vez con resumen encolado).
+
+## Notas del Agente — seccion D, notificacion de logros (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1744
+
+Encargo del director (msg 189, a eleccion): **seccion D de M72** (notificacion de logros).
+**M72: 68 -> 77 `[x]` / 185 (+9).**
+
+### Verificado contra el codigo
+
+`achievement_service.gd` -> `_emitir_toast()` (L258-278) y
+`scripts/ui/services/notification_service.gd` (M53):
+
+| Item | Evidencia |
+|---|---|
+| Toast no bloqueante con icono/nombre/descripcion | `_emitir_toast()` emite `bus.ui.notify({tipo, id, titulo, texto})`; el icono lo resuelve `NotificationService._get_type_icon()` |
+| Respetar M58 | retorna temprano si `_toasts_disabled`; `_conectar_accesibilidad()` lee el perfil |
+| No robar input ni pausar | viaja por senal no bloqueante de EventBus |
+| Sin duplicados | `desbloquear()` idempotente -> una sola senal por logro |
+| Revelacion de ocultos | envia siempre el nombre real; solo la descripcion se enmascara |
+| Cola de toasts | `push()` + `_dequeue_oldest()` + `set_queue_limit(n)` |
+| Fade suave | `fade_duration` (0.3 s por defecto, configurable) |
+| Tiempo visible | `toast_lifetime = 4.0` (supera el 3.5 s pedido) |
+| Cola durante cinematica | la cola es FIFO |
+
+### Suites
+
+```
+test_puente_notify.gd        TEST PUENTE NOTIFY: 0 fallo(s)
+test_logros.gd               20 tests, 0 fallos
+test_logros_rf1_e.gd          6 tests, 0 fallos
+test_logros_m72_statids.gd    1 test,  0 fallos
+```
+
+### Lo que quedo `[ ]` a proposito
+
+- **Resumen "N nuevos logros" al superar 5 en cola** (L86): el `NotificationService` no tiene
+  lógica de agrupación; habría que implementarla en M53 (dueño de la cola).
+- **Click en el toast para abrir el panel** (L89): `panel_solicitado()` ya se emite desde M72
+  (RF7), pero el **click** es del widget de M53.
+- **Log de desborde de cola** (L96): M72 emite 1:1 (sin cola propia), así que no hay
+  desborde que registrar desde acá.

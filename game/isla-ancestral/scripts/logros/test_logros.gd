@@ -56,7 +56,7 @@ func _check(cond: bool, msg: String) -> void:
 		print("FALLO: " + msg)
 
 func _test_catalogo() -> void:
-	_check(_ach.logros_count() == 11, "11 logros cargados (2 pesca iter. 6): %d" % _ach.logros_count())
+	_check(_ach.logros_count() == 17, "17 logros cargados (iter. 7, 2 pesca/2 agricultura/2 mineria): %d" % _ach.logros_count())
 	_check(_ach.get_section_name() == "achievements", "sección 'achievements' (M59)")
 
 
@@ -162,7 +162,7 @@ func _test_fechas_rf4() -> void:
 
 func _test_api_consulta_rf10() -> void:
 	var todos: Array = _ach.get_todos()
-	_check(todos.size() == 11, "get_todos devuelve 11 (iter. 6): %d" % todos.size())
+	_check(todos.size() == 17, "get_todos devuelve 17 (iter. 7): %d" % todos.size())
 	var estado: Dictionary = _ach.get_estado("logro_primer_sello")
 	_check(bool(estado.get("desbloqueado", false)), "get_estado desbloqueado OK")
 	_check(bool(_ach.is_unlocked("logro_primer_sello")), "is_unlocked OK")
@@ -172,7 +172,7 @@ func _test_api_consulta_rf10() -> void:
 	_check(desb.size() >= 2, "get_desbloqueados >= 2: %d" % desb.size())
 	_check(absf(_ach.get_porcentaje_completado() - _ach.porcentaje_real()) < 0.001, "get_porcentaje_completado = porcentaje_real")
 	# listado_para_ui alias de get_todos
-	_check(_ach.listado_para_ui().size() == 11, "listado_para_ui alias OK (11)")
+	_check(_ach.listado_para_ui().size() == 17, "listado_para_ui alias OK (17)")
 
 func _test_progreso_humano_rf8() -> void:
 	# logro_viajero: viajes_realizados >= 3 con progreso_parcial
