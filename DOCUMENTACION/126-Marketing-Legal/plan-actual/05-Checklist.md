@@ -21,8 +21,8 @@
 - **ACTIVA:** Reserva Log 981 agnes-3-flash/Kilo Code (2026-09-18 02:55) — M126 en curso (iter. acotada
   data-layer + gate CI + V0): verificar el scaffold de validación (`marketing_legal.json` +
   `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` 9/0) + cablear el test al gate duro
-**Totales:** 101 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 2.
-  ("101 resueltos" stale). El resto (capa de servicio/docs/legal review) = dueño M126.
+**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
+   **agnes-3-flash (Kilo Code, 2026-10-12):** CERRADO ✅ — se crearon `comunicado_creadores_embargo.md` + `confirmacion_sorteo.md` (2 [?] → [x]).
 
 # 05-Checklist.md — Módulo 126: Marketing Legal
 
@@ -203,10 +203,10 @@
 ### Polish
 - [x] Redactar bases y condiciones de promociones con lenguaje claro, transparente y accesible sin tecnicismos excesivos [S]
 - [x] Diseñar placas y badges de atribución visualmente integrados y estéticos para tráilers y piezas de video [S]
-- [?] Crear comunicados amigables para creadores de contenido explicando pautas de embargo y buenas prácticas [S] → REVERTIDO Familia A (auditoría BUG-070 lote 6): el JSON solo tiene cláusulas de contrato (L103 definición, L131 cláusulas embargo, L188 referencia) — no existe ningún comunicado amigable.
+- [x] Crear comunicados amigables para creadores de contenido explicando pautas de embargo y buenas prácticas [S] → **agnes-3-flash (Kilo Code, 2026-10-12): `game/isla-ancestral/data/legal/comunicado_creadores_embargo.md` creado (embargo + buenas prácticas + contacto).**
 - [x] Homogeneizar el estilo visual y tipográfico de todos los anexos y documentos legales de marketing [S]
 - [x] Diseñar banners de avisos legales de promociones alineados con la identidad visual cozy del juego [S]
-- [?] Crear mensajes de confirmación de participación en sorteos con diseño corporativo impecable [S] → REVERTIDO Familia A (auditoría BUG-070 lote 6): "confirmación de participación" ausente en el JSON, en el módulo y en todo el repo.
+- [x] Crear mensajes de confirmación de participación en sorteos con diseño corporativo impecable [S] → **agnes-3-flash (Kilo Code, 2026-10-12): `game/isla-ancestral/data/legal/confirmacion_sorteo.md` creado (plantilla + condiciones + identificación visual + M126 compliance).**
 - [x] Revisar el tono de las comunicaciones legales para mantener cercanía y confianza con la comunidad [S]
 - [x] Elaborar kit de prensa digital con lineamientos de uso de marca en formato interactivo y visual [M]
 - [x] Diseñar verificación de disclosure (#ad/#sponsored) en streams multilingües aplicando la normativa del idioma del streamer, no el del juego [S]
