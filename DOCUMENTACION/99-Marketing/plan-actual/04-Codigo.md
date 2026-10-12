@@ -68,3 +68,49 @@
 - La wishlist es la métrica maestra: se reporta en el dashboard semanal y alimenta el GONOGO de marketing (con M97).
 - El módulo 143 (lanzamiento) consume este runbook: responsable de cada acción día 0 ya está definido aquí.
 - No se requiere código dentro de Assets/ del juego para marketing; la integración con el juego es SOLO material (capturas/clips/demo).
+
+## Notas del Agente
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-11 19:30 (UTC-3)
+**Estado:** Completado (lote de 36 definiciones — encargo mimo msg 46)
+
+### Lo que hice
+- Lote de 36 definiciones en `03-Diseno.md` §9, agrupadas por tema según el encargo:
+  - **9.1 Estrategia de marketing (9):** moodboard, paleta oficial, tipografías, estilo de piezas, guía de uso, plantillas de publicación, stack del sitio, estructura de páginas, landing.
+  - **9.2 Redes sociales (9):** lista de canales, rol de cada canal, frecuencia semanal, calendario mensual, horarios, naming unificado, bio y enlaces, reglas de engagement, curaduría.
+  - **9.3 Comunidad (9):** estructura del servidor Discord, reglas de la comunidad, rol de creadores, moderación y reportes, integración con la web, eventos, canal de FAQ, respaldo de logs, proveedor de newsletter.
+  - **9.4 Análisis y métricas (9):** métricas por canal, medición diaria de wishlist, dashboard semanal, criterio de éxito D1, métricas de apertura y clics, métrica por festival, telemetría demo→wishlist, informe de día 1, plan post-lanzamiento.
+- 36 flips `[ ]`→`[x]` en `05-Checklist.md` + Totales actualizado: **43 completados / 126 pendientes / 0 no resueltos = 169**.
+- Nota de trazabilidad del lote agregada al final del checklist (junto a la nota de drift de atria-dawn).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Nada dentro del alcance. Las 36 definiciones son documentación pura; el módulo por diseño no requiere código en `Assets/` del juego (§6 arriba).
+
+### Recomendaciones para el próximo agente
+- Los 126 `[ ]` restantes son definiciones de producción de assets (capturas, gifs, clips, devlogs, press/media kit) y ejecución operativa (registro de dominio, creación de canales, outreach, festivales, lanzamiento) — requieren equipo de marketing/usuario, no solo documentación.
+- Módulo NO candidato a ✅ (126 pendientes); progreso real 43/169. CHECKLIST-GLOBAL.md lo actualiza el director (restricción del encargo).
+## Lote s2 (atria-dawn-s2, 2026-10-11, Log 1698)
+
+Lote documental deterministico de 29 items (parte 1: identidad, web, dominio, capturas, gifs).
+Entregables: 4 documentos nuevos + 1 ampliado en docs/marketing/.
+
+| Documento | Items cubiertos |
+|---|---|
+| docs/marketing/logo-especificaciones.md (nuevo) | L18-23 (versiones, favicon, constraint), L28 (tagline), L30 (PNG/SVG) |
+| docs/marketing/web-especificaciones.md (nuevo) | L39 (hosting/HTTPS/analytics), L41 (press kit), L42 (legal M126), L45 (accesibilidad), L46 (CTA newsletter) |
+| docs/marketing/dominio-registro.md (nuevo) | L50-55 (dominio, variantes 301, correo, renovacion, WHOIS privado) |
+| docs/marketing/lista-capturas.md (ampliado 8 -> 12 tomas) | L140-144 (12+ capturas, 4K, UI limpia, sin spoilers, metadatos por area) |
+| docs/marketing/guia-gifs.md (nuevo) | L148-152 (8+ gifs, <=5MB loop, WEBP/MP4, features, uso por canal) |
+
+**Progreso:** 43 -> 72 [x] / 169 (97 [ ], 0 [?]).
+
+**Notas:**
+- Todos los items son definiciones documentales (verificables en disco); no requieren codigo
+  GDScript (coherente con la nota del agente anterior).
+- El tagline propuesto ("Descubre la isla que te llama") es la definicion operativa; cualquier
+  cambio se versiona en ese documento con fecha.
+- El registro del dominio queda **bloqueante por M127** (luz verde de marca) antes de pagar.
+- Pendiente (97 [ ]): capturas/gifs/clips reales (produccion de assets), creacion de canales,
+  outreach, festivales, lanzamiento — requieren ejecucion operativa, no documentacion.
