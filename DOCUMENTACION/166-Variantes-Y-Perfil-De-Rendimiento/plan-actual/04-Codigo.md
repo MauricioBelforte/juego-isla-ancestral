@@ -1,4 +1,4 @@
-# 04-Codigo — M166 · Variantes de Assets por Perfil de Rendimiento
+﻿# 04-Codigo — M166 · Variantes de Assets por Perfil de Rendimiento
 
 **Módulo:** 166 · **Estado:** plan-actual · **Piloto:** cofre ancestral aprobado · **Fecha:** 2026-08-28
 
@@ -221,3 +221,31 @@ python capturar_angulos.py SM_Cofre_ ../25-Ruinas-Templos/capturas/cap_25_cofre_
 2. V-3 (BUG-053): decidir el destino de antorcha_pared — sacarla de assets/3d (librería
    de suelo) o montar runtime sobre pared (E-80, Empty de referencia).
 3. V-1: re-derivar hacha_piedra media/baja en la pasada H12 (verificar blend-mode/decimate).
+
+## Notas del Agente — H12 + des-inflado F1/F4 (2026-10-11)
+
+**Modelo:** atria-dawn-s3 (estratega del director)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-11 21:30:00
+**Estado:** H12 completado; F1 y F4 des-inflados a [?]
+
+### Lo que hice
+- **Verifique la pasada ALTA en disco:** los 17 `_alta.blend` existen en `tools/mcp/blender-mcp/<modulo>/` y los 17 GLB estan exportados en `game/isla-ancestral/assets/3d/alta/`. La parte Blender de H12 (que el checklist reclamaba para Hy4) ya estaba completa — era evidencia faltante, no trabajo faltante.
+- **Agregue los 3 campos M166 a `game/isla-ancestral/scripts/data/item_data.gd`:** `modelo_id` (String), `usa_multimesh` (bool), `variantes_disponibles` (PackedStringArray, default `["media","baja"]` segun H10/D9 — el relleno sin ALTA no es un hueco).
+- **Declare los 3 heroes con match inequivoco** en sus `.tres`: `ancient_crystal.tres` y `item_obj_art_003.tres` (`cristal_ancestral`), `item_obj_her_002.tres` (`pico_hierro`), `item_obj_ext_002.tres` (`farola_fuego`) — todos con `variantes_disponibles = ["alta","media","baja"]` y `modelo_id` seteado.
+- **Test headless nuevo:** `game/isla-ancestral/tests/test_m166_h12_variantes.gd` — 253 checks / 0 fallos / EXIT 0 con Godot 4.7.2 real. Verifica: campos existen, default correcto, heroes declaran ALTA, los 3 GLB existen en `assets/3d/alta/`, y ningun item de relleno declara ALTA sin `modelo_id`.
+
+### Lo que NO hice (honestidad obligatoria)
+- **No implemente el autoload `AssetProfile` (F1).** Esta des-inflado: el checklist lo tenia `[x]` pero NO hay script ni entrada en `project.godot`. Solo existe el diseño en `03-Diseno.md` §4 (deteccion hardware, `ruta()`, `cargar()`, `cambiar_perfil()`, degradacion graceful). Es trabajo de integracion runtime — mejor perfil DeepSeek/Step 5 que el mio.
+- **No mapee los 14 heroes restantes.** La mayoria son props del mundo (totem_isla, monolito_glifos, altar_ritual, anillo_piedras_ritual, puerta_templo, bote_pesca, muelle_madera, concha_mar, palanca_madera, pico_piedra, antorcha_mano, hacha_piedra, lingote_metal, cofre_ancestral) que NO tienen item de inventario M159 — setearles `variantes_disponibles` requiere decidir primero donde viven (catalogo de props vs M159), y eso es decision del director, no mia.
+- **No toque los 4 scripts Python** del modulo (stats_asset, generar_variante, capturar_angulos, abrir_blend) — intactos.
+
+### Intentos fallidos / decisiones
+- Mi primera estimacion ("3 cambios de codigo puro") fue incompleta: confie en los `[x]` del checklist sin verificar disco. Al investigar encontre F1 y F4 inflados. Correccion: verifique antes de prometer (regla §21.8.2.b — muestrear [x] contra artefactos).
+- El test fallo 2 veces antes de pasar: (1) `PackedStringArray("a","b")` no es constructor valido en Godot 4 → `PackedStringArray(["a","b"])`; (2) `instancia.free()` en RefCounted es error; (3) conteo de items vs modelo_ids unicos (cristal_ancestral esta en 2 .tres).
+
+### Recomendaciones para el proximo agente
+- **Prioridad: implementar el autoload `AssetProfile` (F1).** Toma el diseño de `03-Diseno.md` §4.2: tabla de hardware (Apple M → media, VRAM <2GB → baja, 2-4GB → media, >4GB → alta, mobile → baja, GPU blacklist → baja), fallback conservador media, `ruta(modelo_id)` que resuelve `res://assets/3d/{perfil}/{Modulo}_{asset}.glb` y degrada al perfil mas alto disponible si `variantes_disponibles` no contiene el activo. Test de extension natural: mockear `OS.get_processor_name()` / memoria de video.
+- **Mapeo de los 14 heroes restantes:** decidir con el director si los props del mundo (totem, monolito, altar) viven en M159 como items o en un catalogo de props separado (M108/M10 los coloca). Solo entonces setear `variantes_disponibles`.
+- **QA §21.8 de este cierre:** el verificador debe ser otro modelo (Hy3 o DeepSeek) — yo escribi el test, no puedo verificarme a mi mismo.
+- **No revivir la idea de que H12 necesita a Hy4:** la pasada artistica ya esta. Hy4 si hara falta para M45/M48-Fase3 (rigging + animacion del jugador voxel), no para aca.

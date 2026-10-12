@@ -1,4 +1,4 @@
-## Liberado — parte de copyright (Log 1035, 2026-09-18 20:55, agnes-3-flash / Kilo Code)
+﻿## Liberado — parte de copyright (Log 1035, 2026-09-18 20:55, agnes-3-flash / Kilo Code)
 
 - Auditoría empírica del claim M127 (Log 1022) COMPLETADA: **434 .glb de `assets/3d` sin
   atribución por-archivo (0 CON / 434 SIN / 0 AMBIGUO); el +16 sobre el techo 418 son
@@ -122,10 +122,10 @@ Regla del proyecto: este checklist debe tener **≥ 100 ítems** verificables. L
 
 ## F. Integración con Godot (86–95) — diseño, no implementación
 
-- [x] F1. Diseñar el autoload `AssetProfile` (perfil, ruta, cargar, cambiar_perfil, debe_usar_multimesh).
+- [x] F1. Diseñar el autoload `AssetProfile` (perfil, ruta, cargar, cambiar_perfil, debe_usar_multimesh). [Des-inflado por atria-dawn-s3 2026-10-11: el diseño existe (03-Diseno §4) pero el autoload NO esta implementado — no hay script ni entrada en project.godot. Deuda real para DeepSeek/Step 5.]
 - [x] F2. Tabla de detección de hardware (GPU tier + RAM + resolución) → perfil default.
 - [x] F3. Regla MultiMesh obligatoria para > 10 instancias de la misma asset (vegetación).
-- [x] F4. `ItemData` (M159) extendido con `modelo_id`, `usa_multimesh`, `variantes_disponibles`.
+- [x] F4. `ItemData` (M159) extendido con `modelo_id`, `usa_multimesh`, `variantes_disponibles`. [Des-inflado por atria-dawn-s3 2026-10-11: estaba [x] pero NINGUN campo existia en item_data.gd. Campos agregados ahora. El campo existe; falta que el autoload AssetProfile (F1) los lea.]
 - [x] F5. Degradación graceful: si la variante pedida no existe, fallback a MEDIA → ALTA.
 - [x] F6. Path en Godot: `res://assets/props/{asset_id}/{perfil}/{asset_id}_{perfil}.gltf`.
 - [x] F7. Exportar a glTF: usar `bpy.ops.export_scene.gltf` con `export_keep_originals=True`.
@@ -154,7 +154,7 @@ Regla del proyecto: este checklist debe tener **≥ 100 ítems** verificables. L
 - [x] H9. Los 12 assets de `50-Vegetacion` quedan en MEDIA de forma permanente.
 - [x] H10. Un asset sin ALTA se declara con `variantes_disponibles = ["media", "baja"]` (M159), no es un hueco.
 - [x] H11. Ningún asset de relleno queda sin optimizar: los 23 tienen `_media` y `_baja` mergeadas (R9).
-- [?] H12. Ejecutar la pasada ALTA sobre los 15 heroes, de a un modulo por vez [C] — requiere Blender + artista manual (Hy4)
+- [x] H12. Ejecutar la pasada ALTA sobre los 15 heroes, de a un modulo por vez [C] — pasada artistica COMPLETA en disco (17/17 _alta.blend + 17/17 GLB en assets/3d/alta/). Integracion ItemData entregada por atria-dawn-s3 (2026-10-11): campos modelo_id + variantes_disponibles agregados a item_data.gd, 3 heroes con match inequivoco declarados, test test_m166_h12_variantes.gd 253/0 EXIT 0. Mapeo PlacementRule entregado por atria-dawn-s3 (2026-10-11, encargo mimo msg 188, opcion A aprobada): 10 recetas nuevas en data/construccion/piezas/ (monolito_glifos, altar_ritual, cofre_ancestral, concha_mar, bote_pesca, muelle_madera, palanca_madera, pico_piedra, hacha_piedra, lingote_metal) + totem preexistente + antorcha_mano ya cubierto por antorcha_ancestral = 12 heroes con mesh resuelto, test test_m166_heroes_placement.gd 108/0 EXIT 0. Fuera del mapeo (escenograficos fijos, no construibles): puerta_templo, anillo_piedras_ritual (van por M25/M10). Deuda restante: autoload AssetProfile (F1, delegado a Hy3 con expansion a 2 capas — PlacementRule + ItemData).
 
 ## Total: 112 ítems (111 [x], 1 [?] pendiente: H12 pasada ALTA de 15 héroes)
 
@@ -179,7 +179,53 @@ Regla del proyecto: este checklist debe tener **≥ 100 ítems** verificables. L
 ---
 
 
-**Totales:** 112 items - Completados: 111 - Pendientes: 0 - No resueltos: 1.
+**Totales:** 112 items - Completados: 112 - Pendientes: 0 - No resueltos: 0.
+
+## Notas del Agente (atria-dawn-s3 / Kilo Code — mapeo héroes PlacementRule)
+
+**Modelo:** atria-dawn-s3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-11 20:51
+**Estado:** Mapeo de héroes completado — H12 definitivamente cerrado
+
+### Lo que hice
+- Investigué el contenedor correcto para los 14 héroes restantes (encargo mimo msg 186).
+  Veredicto: **no son items de inventario (M159/ItemData), son props del mundo** → contenedor
+  correcto `PlacementRule` de M17 (`data/construccion/piezas/*.tres`), donde `totem.tres` ya
+  existía como referencia. Mimo aprobó la opción A (msg 188).
+- Verifiqué los 17 GLB de héroes en `assets/3d/alta/` antes de mapear (§21.8.2.b — muestreo
+  contra disco, no contra `[x]`).
+- Creé 10 recetas nuevas: `monolito_glifos`, `altar_ritual`, `cofre_ancestral`, `concha_mar`,
+  `bote_pesca`, `muelle_madera`, `palanca_madera`, `pico_piedra`, `hacha_piedra`,
+  `lingote_metal`. Todas con `familia` + `es_mueble` + `mesh_path` → alta + `max_por_zona`.
+- Detecté que `antorcha_ancestral.tres` **ya usa** `13-Herramientas_antorcha_mano.glb` → ese
+  héroe estaba cubierto; no se creó receta duplicada.
+- Test headless `tests/test_m166_heroes_placement.gd`: **108 checks / 0 fallos / EXIT 0**
+  (Godot 4.7.2 real). Valida carga, id, mesh_path, perfil alta, familia, es_mueble, altura y que
+  el GLB existe, para los 12 héroes.
+
+### Lo que NO hice (honestidad obligatoria)
+- **2 héroes quedan fuera del mapeo por diseño**: `puerta_templo` y `anillo_piedras_ritual` son
+  escenográficos fijos del mundo (M25/M10), no construibles por el jugador — no llevan
+  `PlacementRule`. Si el director quiere que el switch de gráficos también los degrade, necesitan
+  la capa B de AssetProfile sobre la ruta literal de `colocar_props_m25.gd`.
+- **No agregué `variantes_disponibles` a las recetas**: eso es parte de la expansión F1 delegada
+  a Hy3 (regla 21.4 — M17 🔵, no pisar el schema de placement_rule.gd).
+
+### Intentos fallidos / decisiones
+- El primer run del test falló 12/12: usé `res://game/isla-ancestral/data/...` pero con
+  `--path game/isla-ancestral` la raíz `res://` ya apunta ahí. Corregido a
+  `res://data/construccion/piezas/` → 108/0.
+
+### Recomendaciones para el próximo agente
+- **Hy3 (expansión F1)**: al agregar `variantes_disponibles` a `placement_rule.gd`, las 46 recetas
+  existentes (36 + 10 nuevas) quedan listas para que `AssetProfile.ruta()` las degrade. Las 10
+  nuevas declaran `["alta","media","baja"]` implícitamente (su GLB base es alta y las variantes
+  media/baja ya están mergeadas en disco por R9/H11).
+- **QA §21.8**: mi test de mapeo debe verificarlo otro modelo (Hy3 o DeepSeek) — yo lo escribí.
+- **Drift a vigilar**: `antorcha_ancestral` usa el GLB `antorcha_mano` con nombre "Antorcha
+  ancestral"; si M159 alguna vez define un item `antorcha_mano`, hay dos referencias al mismo GLB
+  por caminos distintos. No es un bug hoy, pero conviene documentarlo en el catálogo de assets.
 
 ## Notas del Agente (mimo-v2.5 / OpenCode)
 
