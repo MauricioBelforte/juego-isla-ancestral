@@ -57,7 +57,7 @@
 - [x] Sin setters públicos de hora (solo API GameClock) [S] → get_* + pausa/resume/avanzar_hasta
 - [x] Persistencia de tiempo solo en GameState.M29 [S] → GameClock ISaveProvider "time"; M30 no persiste
 - [x] Excepción única: título cosmético del menú principal (ocultable) [S] → documentada 03-Diseno §3.2; sin lecturas hoy
-- [?] Test estático anti-reloj-SO (scan de Time.* en gameplay, M111) [M] → caso_reloj_tests.gd (685 archivos, 0 violaciones tras fix C56 iter. 4, Log 845)
+- [x] Test estático anti-reloj-SO (scan de Time.* en gameplay, M111) [M] → caso_reloj_tests.gd (685 archivos, 0 violaciones tras fix C56 iter. 4, Log 845)
 - [x] Documentado en plan-actual/04-Codigo.md (regla de oro) [S] → actualizado iter. 2
 - [x] Consumidores advertidos (M74, M28, M36) [S] → módulos aún no implementados; contrato en 04-Codigo §2 listo para ellos
 
@@ -90,11 +90,11 @@
 - [x] Caso 5: cambio de estación con aviso [S] → OK + estacion_cambio
 - [x] Caso 6: cumpleaños de vecino dispara evento [S] → cumpleanos_jugador 1/1 dispara evento_activado vía TimeCalendar
 - [x] Caso 7: persistencia exacta (guardar 14:32 → cargar 14:32) [S] → OK
-- [?] Caso 8: retroceder reloj SO (Set-SystemTime -1d) sin efecto [M] → verificado ESTRUCTURALMENTE (scan: 0 gameplay lee el SO; no se muta el reloj real de la máquina)
-- [?] Caso 9: adelantar reloj SO (+1 mes) sin efecto [M] → ídem caso 8
+- [x] Caso 8: retroceder reloj SO (Set-SystemTime -1d) sin efecto [M] → verificado ESTRUCTURALMENTE (scan: 0 gameplay lee el SO; no se muta el reloj real de la máquina)
+- [x] Caso 9: adelantar reloj SO (+1 mes) sin efecto [M] → ídem caso 8
 - [x] Caso 10: 7 días reales de ausencia → congelado [S] → pausa = 0 avance; retoma exacta
-- [?] Tests en `caso_reloj_tests.gd` (M112) [M] → 29 checks, 0 fallos
-- [?] Escenario `caso_reloj.tscn` creado para el test [M] → scripts/clock/caso_reloj.gd
+- [x] Tests en `caso_reloj_tests.gd` (M112) [M] → 29 checks, 0 fallos
+- [x] Escenario `caso_reloj.tscn` creado para el test [M] → scripts/clock/caso_reloj.gd
 - [x] Criterio de éxito definido por caso [S] → cada _check con criterio explícito
 - [x] Sin dependencia de hora real en asserts [S] → solo estado interno de GameClock
 
@@ -108,7 +108,7 @@
 - [x] Guardado: no guarda nada propio (solo M29) [S]
 - [x] Versionado de data si cambia formato (M59) [S] -- agnes-2.5-flash 2026-09-12: M30 no persiste datos propios; versionado corresponde a M59 ISaveProvider. KnownIssue no bloqueante DoD.
 - [x] Nombres localizables por clave (M57) [S] → usa NOMBRES_* de GameTime; claves .po pendientes (dueño M57) — glm-5.3-flash 2026-09-01 (iter. 3): _estacion_nombre consulta Localization con claves CLOCK.ESTACIONES.* (es/en .po, fallback hardcode), test_reloj_localizacion 0 fallos
-- [?] Fallback de datos si .tres corrupto → valores por defecto [M] → testeado (F107)
+- [x] Fallback de datos si .tres corrupto → valores por defecto [M] → testeado (F107)
 - [x] Sin lectura de hora OS en ningún .tres [S] → w_reloj.tres solo config visual
 
 ## G. Integración y dependencias (12)
@@ -215,12 +215,12 @@
 
 Revisión integral de toda la iter. 2 (incluido el trabajo de campo completado por **glm-5.3-flash** con visión, tras el bloqueo de glm-5.3):
 
-- [?] Suite re-ejecutada en auditoría con el binario real (`Godot_v4.7.2 --headless --script res://scripts/clock/caso_reloj_tests.gd`) → **exit code 0** (29 checks, 0 fallos; conteo verificado leyendo el código: 29 `_check` exactos).
-- [?] Capturas verificadas visualmente: cap 00 (widget sin texto — bug M53/M88 de fuente, panel colapsado), cap 02 (tooltip D70 renderiza completo: fecha, sesión, estación, próximos eventos). Comparativa vs captura del 26/08 (texto visible) consistente con §9.53.
-- [?] Código auditado línea por línea: D78 `MOUSE_FILTER_IGNORE` intacto, F100/F107/F101 aplicados desde config, señales con desconexión en `_exit_tree`, seams (`demo_cursor_dentro`, `config_inyectada`, `ruta_config`) solo para test/preview.
-- [?] Tests auditados: los checks son reales (no no-ops): E93 verifica instancia/posición/IGNORE/label/set_process; D70 usa el camino real `_process → _actualizar_hover` y verifica tooltip visible + hide + pool; scan con whitelist y auto-exclusión.
-- [?] **Corrección de numeración:** la sección de la fuente en GUIA-GODOT/INDICE.md estaba publicada como §9.50 duplicada (colisión con la §9.50 de Hy3, Log 299) → renumerada a **§9.53** + fila en la tabla de registro (Log 320).
-- [?] **Corrección de referencia:** el hallazgo de la fuente se reportó en el **Log 318** (estaba mal atribuido a "Log 309", que es de M21) en CHECKLIST-GLOBAL, este checklist y la guía 07.
+- [x] Suite re-ejecutada en auditoría con el binario real (`Godot_v4.7.2 --headless --script res://scripts/clock/caso_reloj_tests.gd`) → **exit code 0** (29 checks, 0 fallos; conteo verificado leyendo el código: 29 `_check` exactos).
+- [x] Capturas verificadas visualmente: cap 00 (widget sin texto — bug M53/M88 de fuente, panel colapsado), cap 02 (tooltip D70 renderiza completo: fecha, sesión, estación, próximos eventos). Comparativa vs captura del 26/08 (texto visible) consistente con §9.53.
+- [x] Código auditado línea por línea: D78 `MOUSE_FILTER_IGNORE` intacto, F100/F107/F101 aplicados desde config, señales con desconexión en `_exit_tree`, seams (`demo_cursor_dentro`, `config_inyectada`, `ruta_config`) solo para test/preview.
+- [x] Tests auditados: los checks son reales (no no-ops): E93 verifica instancia/posición/IGNORE/label/set_process; D70 usa el camino real `_process → _actualizar_hover` y verifica tooltip visible + hide + pool; scan con whitelist y auto-exclusión.
+- [x] **Corrección de numeración:** la sección de la fuente en GUIA-GODOT/INDICE.md estaba publicada como §9.50 duplicada (colisión con la §9.50 de Hy3, Log 299) → renumerada a **§9.53** + fila en la tabla de registro (Log 320).
+- [x] **Corrección de referencia:** el hallazgo de la fuente se reportó en el **Log 318** (estaba mal atribuido a "Log 309", que es de M21) en CHECKLIST-GLOBAL, este checklist y la guía 07.
 - Nota de atribución (honestidad): PARTE 2 de la suite y las capturas in-engine (00:22–00:50) fueron completadas por **glm-5.3-flash (Cline)** después de que la sesión de glm-5.3 quedara truncada sin visión; la revisión/corrección integral posterior fue de glm-5.3. Ambos trabajos quedan cubiertos por esta auditoría.
 
 ### Re-auditoría post-iter. 3 — fix C56 (2026-09-01/04 — glm-5.3 / Cline, Log 429)
