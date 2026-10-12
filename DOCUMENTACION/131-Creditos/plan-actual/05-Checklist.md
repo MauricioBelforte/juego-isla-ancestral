@@ -55,7 +55,7 @@
 
 ## E. Data y configuracion (8)
 
-- [ ] catalogo creditos.tres (estructura por categorias) [S] - KnownIssue no bloqueante DoD: dueño M131; el catalogo por categorias se implemento como `data/legal/creditos.json` (7 secciones, data-driven) en vez de un `.tres`, que queda como alternativa no usada. Avanzar cuando se quiera un Resource tipado ademas del JSON.
+- [x] catalogo creditos.tres (estructura por categorias) [S] - RESUELTO 2026-10-11 (Ling 3.1 Flash): generado `data/legal/catalogo_creditos.tres` (Resource tipado `CreditsCatalog`, 1402 bytes) desde `data/legal/creditos.json` via `scripts/legal/generar_catalogo_tres_m131.gd` (headless EXIT=0, verificado: 7 secciones, 2 idiomas, version 2). Clase: `scripts/legal/credits_catalog.gd`. El JSON sigue siendo la fuente canonica que lee `credits_manager.gd`; el `.tres` es el Resource tipado adicional que este ítem pedía.
 - [x] API: cargar_creditos() [S]
 - [x] API: obtener_contribuyentes() [S]
 - [x] API: obtener_assets_terceros() [S]
@@ -135,8 +135,9 @@
 - [x] Tiempo de primera visualizacion < 200ms → carga sincrona < 10ms para JSON tipico
 - [x] Sin lag en input events → _input() processing trivial
 
-**Totales:** 95 items · Completados: 85 [x] · Pendientes: 10 [ ] (KnownIssue no bloqueantes: 9 audio por falta de contenido + 1 alternativa .tres) · No resueltos: 0.
+**Totales:** 95 items · Completados: 86 [x] · Pendientes: 9 [ ] (KnownIssue no bloqueantes: 9 audio por falta de contenido) · No resueltos: 0.
 **Nota (2026-10-02):** la afirmacion "modulos de audio que aun no existen" era FALSA. M41/M42/M43/M91 existen, tienen tests en verde y sus autoloads estan en `project.godot`. La causa real de los 9 items de audio es la ausencia de CONTENIDO de audio en el repo.
+**Nota (2026-10-11, Ling 3.1 Flash):** E.L58 resuelto con artefacto real (`catalogo_creditos.tres` generado y verificado headless). Los 9 ítems de audio (I.L90-97, I.L99) permanecen `[ ]` con dueño M41/M42/M43/M91: el bloqueo es la ausencia de contenido de audio en el repo (0 archivos .ogg/.wav/.opus/.mp3). Especificación de cableado punto por punto en `10-Especificacion-Integracion-Audio.md`.
 
 ## Verificacion QA Cruzado
 

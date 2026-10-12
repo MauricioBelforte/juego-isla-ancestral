@@ -107,7 +107,6 @@ func _crear_ui() -> void:
 	_lbl_copy.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_lbl_copy.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_lbl_copy.add_theme_font_size_override("font_size", ThemeUx.FONT_SIZE_SMALL)
-	_lbl_copy.add_theme_color_override("font_color", ThemeUx.COLOR_ACCENT_OCRE)
 	header.add_child(_lbl_copy)
 
 	vbox.add_child(HSeparator.new())
@@ -163,7 +162,6 @@ func _crear_ui() -> void:
 	_lbl_farewell.name = "Despedida"
 	_lbl_farewell.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_lbl_farewell.add_theme_font_size_override("font_size", ThemeUx.FONT_SIZE_H3)
-	_lbl_farewell.add_theme_color_override("font_color", ThemeUx.COLOR_ACCENT_OCRE)
 	_lbl_farewell.visible = false
 	estado.add_child(_lbl_farewell)
 
@@ -263,6 +261,16 @@ func _aplicar_estilo() -> void:
 	_rich.add_theme_color_override("default_color", texto)
 	_rich.add_theme_color_override("bold_color", ThemeUx.COLOR_ACCENT_OCRE if not _contraste else Color(1.0, 0.85, 0.4))
 	_rich.add_theme_color_override("italics_color", texto)
+	# I.8 (WCAG AA, auditoría Ling 3.1 Flash 2026-10-12): el ocre de la
+	# paleta sobre el fondo arena da 2.46:1 — bajo AA (4.5:1 texto pequeño,
+	# 3:1 texto grande). En modo normal estos labels usan el texto oscuro
+	# de la paleta (10.44:1 sobre arena); el acento dorado solo en alto
+	# contraste, donde sobre fondo negro da 9.9:1.
+	var acento_texto := ThemeUx.COLOR_TEXT_DARK if not _contraste else Color(1.0, 0.85, 0.4)
+	if _lbl_copy:
+		_lbl_copy.add_theme_color_override("font_color", acento_texto)
+	if _lbl_farewell:
+		_lbl_farewell.add_theme_color_override("font_color", acento_texto)
 	_aplicar_tamanio()
 
 

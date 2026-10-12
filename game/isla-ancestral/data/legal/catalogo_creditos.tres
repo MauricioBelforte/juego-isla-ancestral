@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="CreditsCatalog" format=3]
+
+[ext_resource type="Script" path="res://scripts/legal/credits_catalog.gd" id="1_klxko"]
+
+[resource]
+script = ExtResource("1_klxko")
+secciones = Array[Dictionary]([{
+"entradas": ["Diseñador", "Programador", "Artista", "Productor", "QA Lead"],
+"id": "desarrollo",
+"rol": "equipo",
+"titulo": "Desarrollo"
+}, {
+"entradas": ["Compositor", "Diseñador de sonido"],
+"id": "musica",
+"rol": "equipo",
+"titulo": "Música y Sonido"
+}, {
+"entradas": ["Artista 2D", "Artista 3D", "Animador"],
+"id": "arte",
+"rol": "equipo",
+"titulo": "Arte y Animación"
+}, {
+"entradas": ["QA Manual", "QA Automático", "Playtest Coordinator"],
+"id": "qa",
+"rol": "equipo",
+"titulo": "QA y Testing"
+}, {
+"entradas": ["Community Manager", "Traductores", "Soporte"],
+"id": "comunidad",
+"rol": "equipo",
+"titulo": "Comunidad"
+}, {
+"entradas": ["Testers Beta", "Discord Regulares", "Familias de los Desarrolladores"],
+"id": "agradecimientos",
+"rol": "comunidad",
+"titulo": "Agradecimientos"
+}, {
+"entradas": ["Font Awesome (CC BY 4.0)", "Kenney.nl Assets (CC0)", "OpenGameArt Contributors"],
+"id": "assets_terceros",
+"rol": "licencias",
+"titulo": "Assets de Terceros"
+}])
+politicas = {
+"credit_obligatorio_para_contribuidores": true,
+"orden_alfabetico_por_seccion": true,
+"verificacion_nombres": true,
+"year_display": "auto"
+}
+idiomas = Array[String](["es", "en"])

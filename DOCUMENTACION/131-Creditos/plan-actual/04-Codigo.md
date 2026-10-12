@@ -11,9 +11,12 @@
 | `res://scripts/legal/credits_validator.gd` | Validador del catálogo de créditos | Implementado |
 | `res://data/legal/creditos.json` | Catálogo: 7 secciones + políticas (`year_display: auto`) | Implementado |
 | `res://scripts/ui/layers/credits_layer.gd` | **CreditsLayer** (`UILayer`, `MODAL_FULL`): la pantalla de créditos | **Implementado 2026-10-02** |
-| `res://scripts/legal/test_credits_m131.gd` | Test headless del validador y del catálogo | Implementado — 8 checks / 0 fallos |
-| `res://scripts/legal/test_credits_layer_m131.gd` | Test headless de la pantalla (Sección D completa) | Implementado 2026-10-02 — **42 checks / 0 fallos** |
-| `res://credits/director.gd`, `catalog.tres`, `scene.tscn`, `credits-canvas.tscn`, `data.tres` | Diseño original (Nemotron/Cline) | **No usado**: se resolvió con JSON data-driven + capa runtime, siguiendo el patrón de `scripts/ui/layers/` (sin `.tscn`, §9.47) |
+| `res://scripts/legal/test_credits_m131.gd` | Test headless del validador + **anti-drift del `.tres`** | Implementado — **15 checks / 0 fallos** (re-corrido 2026-10-11; 7 checks anti-drift agregados 2026-10-11) |
+| `res://scripts/legal/test_credits_layer_m131.gd` | Test headless de la pantalla (Sección D completa) | Implementado 2026-10-02 — **43 checks / 0 fallos** (re-corrido 2026-10-11) |
+| `res://scripts/legal/credits_catalog.gd` | `CreditsCatalog` (`class_name`, `extends Resource`): Resource tipado del catálogo (ítem E.L58) | Implementado 2026-10-11 |
+| `res://scripts/legal/generar_catalogo_tres_m131.gd` | Generador headless: `catalogo_creditos.tres` desde el JSON + verificación integrada | Implementado 2026-10-11 |
+| `res://data/legal/catalogo_creditos.tres` | Catálogo tipado: 7 secciones, 2 idiomas, v2 (generado, anti-drift testeado) | Implementado 2026-10-11 |
+| `res://credits/director.gd`, `scene.tscn`, `credits-canvas.tscn`, `data.tres` | Diseño original (Nemotron/Cline) | **No usado**: se resolvió con JSON data-driven + capa runtime, siguiendo el patrón de `scripts/ui/layers/` (sin `.tscn`, §9.47). El `catalog.tres` del diseño original quedó suplantado por `data/legal/catalogo_creditos.tres` (E.L58, 2026-10-11) |
 
 **Montaje:** `ui_root.gd` instancia `credits_layer.gd` en `_build_layers()` y conecta
 `menus_layer.creditos_pedido → credits_layer.open()`. Se usa `open()` y **no** `push_layer()`
@@ -85,7 +88,7 @@ func obtener_idioma_actual() -> String:
   `AudioStreamPlayer` pero no les asigna streams, y `sfx_surfaces.json` solo define superficies de
   terreno. Los **motores sí existen** (M41 `MusicDirector` con tema `flow_creditos` ya en la
   matriz, M42 `SFXManager`, M43, M91 `AudioConfigService`) y pasan sus tests.
-- Catálogo `.tres` (alternativa al JSON, item E56) — decisión de diseño, no bloquea.
+- ~~Catálogo `.tres` (alternativa al JSON, item E56) — decisión de diseño, no bloquea.~~ **RESUELTO 2026-10-11 (E.L58):** `data/legal/catalogo_creditos.tres` generado desde el JSON canónico (ver tabla §1 y `07-Resultados-Testings.md`).
 - Búsqueda en tiempo real en la pantalla: la API `buscar(query)` de `credits_manager` existe y
   está probada, pero **la UI no expone el campo de búsqueda** (no era item de la Sección D).
 
@@ -194,3 +197,41 @@ a `[ ]` KnownIssue (dueño externo M41/M42/M43/M91) siguiendo el precedente M36/
   `data/audio/music_context_matrix.json`; solo faltan las pistas.
 - E57/E60/E62 del checklist citan APIs inexistentes: o se renombran en el checklist o se anaden
   alias en `credits_manager.gd`.
+
+### Notas del Agente — E.L58 y cierre (Ling-3.1-Flash, Kilo Code, 2026-10-11, encargo mimo msg 50)
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-11 20:55
+**Estado:** E.L58 implementado y testeado; gaps de documentación completados
+
+#### Lo que hice
+- Ejecuté el generador headless `generar_catalogo_tres_m131.gd` → `catalogo_creditos.tres`
+  (1402 bytes, 7 secciones / 2 idiomas / v2), **EXIT=0**.
+- Agregué 7 checks anti-drift a `test_credits_m131.gd` (el `.tres` debe existir, cargar
+  como `CreditsCatalog` y coincidir con el JSON en ids + politicas): suite completa
+  **15 checks / 0 fallos, EXIT=0** (re-corrido 2026-10-11).
+- Re-corrí `test_credits_layer_m131.gd`: **43 checks / 0 fallos, EXIT=0**.
+- Completé la documentación que el cierre (msg 51 / Log 1692) no cubrió: esta tabla (§1),
+  `07-Resultados-Testings.md` (gap DoD de agnes, Log 1425) y
+  `GUIA-GODOT/06-registro-errores.md` (E-30, E-31).
+
+#### Lo que NO pude hacer (honestidad obligatoria)
+- Los 9 ítems de audio (sección I) **no están implementados**: requieren contenido de
+  audio (0 archivos .ogg/.wav/.opus/.mp3 en el repo). Dueño M41/M42/M43/M91 — ver
+  `10-Especificacion-Integracion-Audio.md`.
+- No creé `credits/director.gd`, `scene.tscn`, `credits-canvas.tscn`, `data.tres`
+  (diseño original): decisión de diseño documentada (JSON data-driven + capas runtime, §9.47).
+
+#### Intentos fallidos / decisiones
+- Primera ejecución headless del generador: `Identifier "CreditsCatalog" not declared`
+  — los `class_name` globales no están registrados en corridas `--script` headless.
+  Solución: `preload` explícito (E-30).
+- Test anti-drift inicial falló en `politicas`: `str(Dictionary)` es orden-dependiente
+  (el `.tres` reordena claves al serializar); `==` compara contenido (E-31).
+
+#### Recomendaciones para el próximo agente
+- Si `creditos.json` cambia, regenerar: `godot472.exe --headless --path game\isla-ancestral
+  --script res://scripts/legal/generar_catalogo_tres_m131.gd` (el test anti-drift falla si no).
+- Los 9 ítems de audio se desbloquean con las pistas de M41/M42/M43 (`flow_creditos` ya
+  está en `music_context_matrix.json:19`).
