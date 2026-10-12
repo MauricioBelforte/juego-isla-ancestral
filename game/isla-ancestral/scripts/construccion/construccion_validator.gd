@@ -23,10 +23,12 @@
 #   "pagar"             Callable(Dictionary) -> bool    M14 puede pagar el costo
 #   "permiso"           Callable(Vector3i) -> int       permiso de zona (ZoneRegistry)
 #   "piezas_en_zona"    Callable(PlacementRule, Vector3i) -> int   tope por zona
+#   "limite_mundo"      AABB                                       limite jugable
 #
 # Una clave AUSENTE se trata con el default SEGURO (no ocupada / aire / sin NPC /
-# puede pagar / edificable / 0 piezas) Y queda anotada en `detalle`, para que QA
-# vea que la validacion corrio con datos incompletos en vez de creerla completa.
+# puede pagar / edificable / 0 piezas / AABB vacia = sin limite) Y queda anotada
+# en `detalle`, para que QA vea que la validacion corrio con datos incompletos en
+# vez de creerla completa.
 #
 # NUCLEO PURO: sin dependencias de nodos, VoxelTools ni autoloads.
 
@@ -35,7 +37,9 @@ extends RefCounted
 
 ## Orden de aplicacion de las reglas (03-Diseno §5). Documentado, no decorativo:
 ## la zona se consulta antes que la regla de pieza, y los recursos al final.
-const ORDEN: Array[String] = ["zona", "ocupacion", "soporte", "regla", "npc", "limite", "recursos"]
+## "mundo" (limite jugable) va antes del limite de zona: si la celda no existe,
+## no tiene sentido hablar de zonas.
+const ORDEN: Array[String] = ["zona", "ocupacion", "soporte", "regla", "npc", "mundo", "limite", "recursos"]
 
 ## Vecinos horizontales (para la regla "requiere pared").
 const VECINOS_H: Array[Vector3i] = [
@@ -94,14 +98,20 @@ static func validar(receta: PlacementRule, celda: Vector3i, rotacion: int, ctx: 
 				motivos.append(ConstruccionTipos.Motivo.NPC_EN_CELDA)
 				detalle.append("npc: vecino activo en %s" % str(c))
 
-	# 6) LIMITE por zona (tope suave configurable por receta).
+	# 6) MUNDO — toda la huella dentro del AABB jugable (edge case L).
+	var fuera: Array = fuera_del_mundo(celdas, ctx)
+	if not fuera.is_empty():
+		motivos.append(ConstruccionTipos.Motivo.FUERA_DEL_MUNDO)
+		detalle.append("mundo: %s fuera del AABB %s" % [str(fuera), str(_limite(ctx))])
+
+	# 7) LIMITE por zona (tope suave configurable por receta).
 	if receta.max_por_zona > 0:
 		var pz: int = _piezas_en_zona(ctx, receta, celda, detalle)
 		if pz >= receta.max_por_zona:
 			motivos.append(ConstruccionTipos.Motivo.LIMITE_DE_ZONA)
 			detalle.append("limite: %d/%d piezas de %s en la zona" % [pz, receta.max_por_zona, receta.id])
 
-	# 7) RECURSOS — ultimo; el descuento real ocurre solo al confirmar.
+	# 8) RECURSOS — ultimo; el descuento real ocurre solo al confirmar.
 	if not puede_pagar(receta, ctx):
 		motivos.append(ConstruccionTipos.Motivo.RECURSOS_INSUFICIENTES)
 		detalle.append("recursos: costo %s no pagable" % str(receta.costo))
@@ -164,6 +174,29 @@ static func hay_npc_en_celda(ctx: Dictionary, celdas: Array, sink: Array = []) -
 			return true
 	return false
 
+## Celdas de la huella que caen FUERA del AABB jugable (edge case L de M17).
+## Sin `ctx["limite_mundo"]` (o con AABB vacia) devuelve []: no hay limite.
+## Devuelve la LISTA de celdas fuera, no un bool, para que el HUD pueda decir
+## cuales y el log de diagnostico sea preciso.
+static func fuera_del_mundo(celdas: Array, ctx: Dictionary) -> Array:
+	var a: AABB = _limite(ctx)
+	if a.size == Vector3.ZERO:
+		return []
+	var fuera: Array = []
+	for c in celdas:
+		if not a.has_point(Vector3((c as Vector3i).x + 0.5, (c as Vector3i).y + 0.5, (c as Vector3i).z + 0.5)):
+			fuera.append(c)
+	return fuera
+
+## AABB jugable del contexto. Vacia (sin limite) si no esta definida.
+static func _limite(ctx: Dictionary) -> AABB:
+	if not ctx.has("limite_mundo"):
+		return AABB()
+	var v: Variant = ctx["limite_mundo"]
+	if v is AABB:
+		return v as AABB
+	return AABB()
+
 ## true si M14 puede pagar el costo de la receta (ctx ausente -> true, anotado).
 static func puede_pagar(receta: PlacementRule, ctx: Dictionary) -> bool:
 	if receta == null:
@@ -187,9 +220,11 @@ static func contexto_vacio() -> Dictionary:
 	return {}
 
 ## Contexto explicito con todos los callables (para tests y para el manager).
+## `limite_mundo` es el AABB jugable de la isla (edge case L); vacio = sin limite.
 static func contexto(ocupada: Callable = Callable(), superficie: Callable = Callable(),
 		npc: Callable = Callable(), pagar: Callable = Callable(),
-		permiso: Callable = Callable(), piezas_en_zona: Callable = Callable()) -> Dictionary:
+		permiso: Callable = Callable(), piezas_en_zona: Callable = Callable(),
+		limite_mundo: AABB = AABB()) -> Dictionary:
 	var ctx: Dictionary = {}
 	if ocupada.is_valid():
 		ctx["ocupada"] = ocupada
@@ -203,6 +238,8 @@ static func contexto(ocupada: Callable = Callable(), superficie: Callable = Call
 		ctx["permiso"] = permiso
 	if piezas_en_zona.is_valid():
 		ctx["piezas_en_zona"] = piezas_en_zona
+	if limite_mundo.size != Vector3.ZERO:
+		ctx["limite_mundo"] = limite_mundo
 	return ctx
 
 ## ── Internos ────────────────────────────────────────────────────────────

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_bamb1"]
+
+[resource]
+script = ExtResource("1_bamb1")
+id = &"cerca_bambu"
+mesh_path = "res://assets/3d/alta/50-Vegetacion_canas_bambu.glb"
+nombre = "Cerca de bambu"
+familia = &"cerca"
+altura = 0.7
+costo = {
+"wood": 2
+}
+bloque = 8
+superficie_ofrecida = &"aire"

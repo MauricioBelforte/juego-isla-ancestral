@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_pwxrx")
 id = &"alfombra"
-mesh_path = "res://assets/3d/alta/18-Casas_alfombra.glb"
+mesh_path = "18-Casas_alfombra.glb"
+variantes_disponibles = PackedStringArray("alta", "media", "baja")
 nombre = "Alfombra"
 familia = &"decoracion"
 altura = 0.1

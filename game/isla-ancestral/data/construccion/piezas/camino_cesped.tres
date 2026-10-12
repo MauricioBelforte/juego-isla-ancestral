@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_cspd1"]
+
+[resource]
+script = ExtResource("1_cspd1")
+id = &"camino_cesped"
+nombre = "Camino de cesped apisonado"
+familia = &"camino"
+altura = 0.1
+superficie_ok = Array[StringName]([&"terreno"])
+costo = {
+"grass": 2
+}
+bloque = 24

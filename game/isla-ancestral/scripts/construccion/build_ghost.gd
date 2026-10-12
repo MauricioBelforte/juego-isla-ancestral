@@ -82,7 +82,28 @@ func registrar_malla(ruta: String, mesh: Mesh) -> void:
 func resolver_malla(receta: PlacementRule) -> Mesh:
 	if receta == null:
 		return null
-	return malla_desde_ruta(receta.mesh_path)
+	return malla_desde_ruta(_ruta_malla_receta(receta))
+
+## Devuelve la ruta de malla resuelta de la receta (M166 F1, capa B).
+## Si `mesh_path` ya es una ruta res:// completa (recetas legacy), se usa tal
+## cual; si es una ruta base sin "://" (p.ej. "18-Casas_alfombra.glb"), se
+## perfina via AssetProfile segun el perfil de rendimiento activo y degrada al
+## perfil mas alto disponible si la variante declarada no existe.
+##
+## OJO: `AssetProfile` es un AUTOLOAD, y los autoloads NO son identificadores
+## globales en GDScript (rompe la compilacion con "Identifier not found", sobre
+## todo bajo `--script`). Se resuelve por ruta de nodo, igual que hace el resto
+## del proyecto (ver E-27/E-28/E-29 de GUIA-GODOT).
+func _ruta_malla_receta(receta: PlacementRule) -> String:
+	var mp: String = receta.mesh_path
+	if mp.begins_with("res://"):
+		return mp
+	var ap = get_node_or_null("/root/AssetProfile")
+	if ap != null and ap.has_method("ruta"):
+		return String(ap.ruta(mp, receta.variantes_disponibles))
+	# Sin AssetProfile (headless sin autoloads, o modulo apagado): la ruta base
+	# se usa tal cual. Las recetas legacy ya apuntan a res://assets/3d/alta/.
+	return mp
 
 ## Resuelve una malla desde una ruta res:// (cacheada). Devuelve null si la ruta
 ## esta vacia, no existe o no contiene una malla. NUNCA lanza: una ruta rota
@@ -183,6 +204,9 @@ func aplicar_resultado(res: Dictionary, receta: PlacementRule) -> void:
 func ocultar() -> void:
 	_visible_logico = false
 	_celdas.clear()
+	# Fantasma ocioso = sin pieza (edge case L192: un fantasma en pool no debe
+	# seguir reportando la receta anterior, o la UI mostraria datos obsoletos).
+	_receta_id = &""
 	if _mesh != null:
 		_mesh.visible = false
 

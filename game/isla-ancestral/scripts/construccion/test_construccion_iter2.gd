@@ -87,8 +87,8 @@ func _b1_catalogo_db() -> void:
 	_abrir("1", "BuildCatalogDB: carga las 12 familias y las indexa")
 	var db := BuildCatalogDB.new()
 	var n: int = db.cargar("res://data/construccion/piezas")
-	_ok(n == 33, "carga 33 recetas reales (dio %d)" % n)
-	_ok(db.cantidad() == 33, "cantidad() == 33")
+	_ok(n == 46, "carga 46 recetas reales (dio %d)" % n)
+	_ok(db.cantidad() == 46, "cantidad() == 46")
 	_ok(db.tiene(&"pared_madera") and db.tiene(&"puente_4") and db.tiene(&"totem"),
 		"tiene() encuentra piezas de familias distintas")
 	_ok(db.receta(&"no_existe") == null, "receta() de un id inexistente -> null")
@@ -105,23 +105,23 @@ func _b1_catalogo_db() -> void:
 	var paredes: Array = db.por_familia(&"pared")
 	_ok(paredes.size() == 4, "familia 'pared' tiene 4 recetas (dio %d)" % paredes.size())
 	var puentes: Array = db.por_familia(&"puente")
-	_ok(puentes.size() == 3, "familia 'puente' tiene 3 recetas (dio %d)" % puentes.size())
+	_ok(puentes.size() == 5, "familia 'puente' tiene 5 recetas (dio %d)" % puentes.size())
 
 	var decor: Array = db.por_modo(true)
 	var constr: Array = db.por_modo(false)
-	_ok(decor.size() + constr.size() == 33, "por_modo cubre las 33 (decor %d + constr %d)" % [decor.size(), constr.size()])
-	_ok(decor.size() == 11, "modo decoracion = 11 piezas (dio %d)" % decor.size())
+	_ok(decor.size() + constr.size() == 46, "por_modo cubre las 46 (decor %d + constr %d)" % [decor.size(), constr.size()])
+	_ok(decor.size() == 21, "modo decoracion = 21 piezas (dio %d)" % decor.size())
 
 	var audit: Dictionary = db.validar()
 	_ok(bool(audit["ok"]) == true, "validar() del catalogo real: OK (problemas: %s)" % str(audit["problemas"]))
-	_ok(int(audit["n"]) == 33, "validar() reporta n=33")
+	_ok(int(audit["n"]) == 46, "validar() reporta n=46")
 
 	var mapa: Dictionary = db.mapa_de_familias()
 	_ok(mapa.size() == 12, "mapa_de_familias() cubre las 12 (0 incluidas)")
 
 	# quitar / limpiar / registrar
 	_ok(db.quitar(&"totem") == true, "quitar() borra una receta")
-	_ok(db.tiene(&"totem") == false and db.cantidad() == 32, "tras quitar, cantidad 32")
+	_ok(db.tiene(&"totem") == false and db.cantidad() == 45, "tras quitar, cantidad 45")
 	_ok(db.quitar(&"totem") == false, "quitar() de algo ausente -> false")
 	db.limpiar()
 	_ok(db.cantidad() == 0, "limpiar() deja el catalogo vacio")
@@ -189,8 +189,8 @@ func _b3_integridad() -> void:
 	var mgr = root.get_node_or_null("/root/Construccion")
 	if mgr != null:
 		var db2 = mgr.catalogo_db()
-		_ok(db2 != null and db2.cantidad() == 33,
-			"el autoload expone un BuildCatalogDB con 33 recetas (dio %s)" % str(db2.cantidad() if db2 != null else -1))
+		_ok(db2 != null and db2.cantidad() == 46,
+			"el autoload expone un BuildCatalogDB con 46 recetas (dio %s)" % str(db2.cantidad() if db2 != null else -1))
 	_fin("3")
 
 ## 4. Carga RECURSIVA (subcarpetas de familia).
@@ -199,7 +199,7 @@ func _b4_carga_recursiva() -> void:
 	var db := BuildCatalogDB.new()
 	# apuntando al PADRE, debe bajar a piezas/ y encontrar lo mismo
 	var n: int = db.cargar("res://data/construccion")
-	_ok(n == 33, "cargar() desde el padre encuentra las 33 por recursion (dio %d)" % n)
+	_ok(n == 46, "cargar() desde el padre encuentra las 46 por recursion (dio %d)" % n)
 	_ok(db.tiene(&"techo_losa"), "la recursion alcanzo las piezas del subdirectorio")
 	var db2 := BuildCatalogDB.new()
 	var n2: int = db2.cargar("res://ruta/que/no/existe")
@@ -402,8 +402,8 @@ func _b9_m18_persistencia(mgr) -> void:
 	# (a) el modo decoracion (interiores de M18) ve SOLO muebles/decoracion.
 	var deco: Array = mgr.piezas_de_modo(ConstruccionTipos.Modo.DECORACION)
 	var constr: Array = mgr.piezas_de_modo(ConstruccionTipos.Modo.CONSTRUCCION)
-	_ok(deco.size() == 11, "modo DECORACION ve 11 muebles (dio %d)" % deco.size())
-	_ok(constr.size() == 22, "modo CONSTRUCCION ve 22 piezas (dio %d)" % constr.size())
+	_ok(deco.size() == 21, "modo DECORACION ve 21 muebles (dio %d)" % deco.size())
+	_ok(constr.size() == 25, "modo CONSTRUCCION ve 25 piezas (dio %d)" % constr.size())
 	var todos_mueble: bool = true
 	for r in deco:
 		if not (r as PlacementRule).es_mueble:

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_hachap"]
+
+[resource]
+script = ExtResource("1_hachap")
+id = &"hacha_piedra"
+mesh_path = "res://assets/3d/alta/16-Crafting_hacha_piedra.glb"
+nombre = "Hacha de piedra"
+familia = &"decoracion"
+altura = 0.8
+superficie_ofrecida = &"aire"
+es_mueble = true
+max_por_zona = 4

@@ -70,6 +70,27 @@ var _f_puede_pagar: Callable = Callable()
 var _f_descontar: Callable = Callable()
 var _f_devolver: Callable = Callable()
 
+# ── Fantasma (estado de UI, NUNCA persistido) ─────────────────────────────
+## El fantasma es estado de presentacion: vive fuera de `_estructuras` y fuera
+## del save. `salir_modo()` lo devuelve al pool (edge case L192/L193).
+var _fantasma: BuildGhost = null
+
+func conectar_fantasma(g: BuildGhost) -> void:
+	_fantasma = g if g != null else null
+
+func fantasma() -> BuildGhost:
+	return _fantasma
+
+# ── Edge cases de sesion (seccion L de M17) ───────────────────────────────
+## Limite jugable de la isla. Vacio = sin limite (default documentado: el mundo
+## puede no estar cargado en headless).
+var _limite_mundo: AABB = AABB()
+## Ventana anti doble-confirmacion (ms). Un segundo click en la MISMA celda
+## dentro de esta ventana se rechaza en vez de colocar dos veces.
+const COOLDOWN_MS: int = 250
+var _ultima_celda: Vector3i = Vector3i(-999999, -999999, -999999)
+var _ultima_confirmacion_ms: int = -999999
+
 # ── Ciclo de vida ───────────────────────────────────────────────────────
 
 func _ready() -> void:
@@ -209,9 +230,14 @@ func entrar_modo(modo: int = ConstruccionTipos.Modo.CONSTRUCCION) -> void:
 	_en_modo = true
 	obra_activa.emit(true)
 
+## Salir del modo: deselecciona la pieza y DEVUELVE EL FANTASMA AL POOL
+## (edge case L192). El fantasma es estado de UI: no queda seleccion ni a medias,
+## y `obtener_estructuras()` / el save no lo ven nunca (edge case L193).
 func salir_modo() -> void:
 	_en_modo = false
 	_receta = null
+	if _fantasma != null:
+		_fantasma.devolver_al_pool()
 	obra_activa.emit(false)
 
 func esta_en_modo() -> bool:
@@ -255,7 +281,26 @@ func _contexto() -> Dictionary:
 		Callable(self, "_ctx_npc"),
 		_f_puede_pagar,
 		Callable(self, "_ctx_permiso"),
-		Callable(self, "_ctx_piezas_en_zona"))
+		Callable(self, "_ctx_piezas_en_zona"),
+		_limite_mundo)
+
+## ── Limite del mundo (edge case L: "pieza en el limite del mundo") ──────
+
+## Define el AABB jugable de la isla (M08 lo conoce; aqui se inyecta).
+## AABB vacia = sin limite.
+func set_limite_mundo(a: AABB) -> void:
+	_limite_mundo = a
+
+func limite_mundo() -> AABB:
+	return _limite_mundo
+
+## true si la confirmacion de `celda` cae dentro de la ventana de cooldown
+## (doble confirmacion rapida en la misma celda).
+func _en_cooldown(celda: Vector3i) -> bool:
+	var ahora: int = Time.get_ticks_msec()
+	if celda == _ultima_celda and (ahora - _ultima_confirmacion_ms) < COOLDOWN_MS:
+		return true
+	return false
 
 ## Valida la receta seleccionada en `celda` con la rotacion actual.
 func validar(celda: Vector3i) -> Dictionary:
@@ -306,10 +351,24 @@ func _ctx_piezas_en_zona(r: PlacementRule, celda: Vector3i) -> int:
 # ── Acciones ────────────────────────────────────────────────────────────
 
 ## Confirma la colocacion de la receta seleccionada en `celda`.
-## Orden (03-Diseno §2): validar -> descontar (M14) -> escribir (M08) ->
-## registrar delta (undo) -> emitir senal.
+## Orden (03-Diseno §2): validar -> anti doble-confirmacion -> descontar (M14)
+## -> escribir (M08) -> registrar delta (undo) -> emitir senal.
+## El cooldown va DESPUES de validar a proposito: si la celda ya no es valida
+## (ocupada, sin soporte) el jugador debe ver ESE motivo, no el de cooldown.
 func confirmar_colocacion(celda: Vector3i) -> Dictionary:
 	var res: Dictionary = validar(celda)
+	if not bool(res.get("ok", false)):
+		zona_rechazada.emit(celda, String(res.get("texto", "invalido")))
+		return res
+
+	if _en_cooldown(celda):
+		var res_cd: Dictionary = ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.DOBLE_CONFIRMACION],
+			["cooldown: %s confirmada hace < %d ms" % [str(celda), COOLDOWN_MS]], [])
+		zona_rechazada.emit(celda, "confirmacion demasiado rapida")
+		return res_cd
+	_ultima_celda = celda
+	_ultima_confirmacion_ms = Time.get_ticks_msec()
 	if not bool(res.get("ok", false)):
 		zona_rechazada.emit(celda, String(res.get("texto", "invalido")))
 		return res
@@ -351,6 +410,78 @@ func confirmar_colocacion(celda: Vector3i) -> Dictionary:
 		"descontado": _f_descontar.is_valid(),
 	}
 
+## F110: copia una pieza existente a otra celda CONSERVANDO su rotacion.
+## A diferencia de mover_pieza, NO desocupa el origen: la pieza original
+## sigue en su sitio. Los recursos NO se re-cobran (F112: solo se reubican) ni
+## se cobran de nuevo — la copia se cobra como una colocacion nueva.
+func copiar_pieza(origen: Vector3i, destino: Vector3i) -> Dictionary:
+	var ancla: String = String(_ocupacion.get(ConstruccionTipos.clave(origen), ""))
+	if ancla == "":
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.NO_HAY_PIEZA], ["nada que copiar en %s" % str(origen)], [])
+	var e: Dictionary = _estructuras[ancla]
+	var r: PlacementRule = _receta_de_ancla(ancla)
+	if r == null:
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.RECETA_INVALIDA], ["la pieza no esta en el catalogo"], [])
+	# F110: se conserva la rotacion de la pieza original.
+	var paso: int = _rotacion_de_estructura(e)
+	# La celda destino NO debe tener nada (no se autobloquea ni pisa otra pieza).
+	if _ocupacion.has(ConstruccionTipos.clave(destino)):
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.CELDA_OCUPADA], ["la celda destino ya esta ocupada"], [])
+	var res: Dictionary = validar_receta(r, destino, paso)
+	if not bool(res.get("ok", false)):
+		zona_rechazada.emit(destino, String(res.get("texto", "invalido")))
+		return res
+	# Se cobra como una colocacion nueva (la copia gasta materiales).
+	if _f_descontar.is_valid() and not bool(_f_descontar.call(r.costo)):
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.RECURSOS_INSUFICIENTES], ["sin recursos para la copia"], [])
+	var celdas_nuevas: Array[Vector3i] = r.celdas(destino, paso)
+	_mundo.escribir_voxel(celdas_nuevas, r.bloque)
+	_alta_estructura(destino, r, paso, e, "", true)
+	_historial.registrar({
+		"tipo": BuildHistory.TIPO_COPIAR,
+		"receta_id": r.id,
+		"celda": destino,
+		"celda_origen": ConstruccionTipos.celda_de_clave(ancla),
+		"rotacion": paso,
+		"celdas": celdas_nuevas.duplicate(),
+		"costo": r.costo.duplicate(),
+		"bloque": r.bloque,
+	})
+	return {
+		"ok": true,
+		"motivos": [],
+		"detalle": ["copiada %s -> %s (rotacion %d)" % [str(origen), str(destino), paso]],
+		"celdas": celdas_nuevas.duplicate(),
+		"texto": "ok",
+		"temporal": false,
+	}
+
+
+## Anclas de estructuras apoyadas DIRECTAMENTE encima de `ancla` (edge case L197).
+## Una pieza esta "apoyada" si ocupa la celda (x, y+1, z) de alguna celda de la
+## pieza de abajo. Determinista y sin consultas al mundo: solo el indice de
+## ocupacion, asi funciona igual en headless.
+func piezas_apoyadas_en(ancla: String) -> Array:
+	var e: Dictionary = _estructuras.get(ancla, {})
+	if e.is_empty():
+		return []
+	var r: PlacementRule = _receta_de_ancla(ancla)
+	var celdas: Array = _celdas_de_estructura(e, r)
+	var ids: Array = []
+	for c in celdas:
+		var arriba: String = ConstruccionTipos.clave((c as Vector3i) + Vector3i(0, 1, 0))
+		var otra: String = String(_ocupacion.get(arriba, ""))
+		if otra == "" or otra == ancla:
+			continue
+		var tipo: String = String((_estructuras.get(otra, {}) as Dictionary).get("tipo", ""))
+		if not ids.has(tipo):
+			ids.append(tipo)
+	return ids
+
 ## Demuele la pieza que ocupa `celda` y devuelve parte de su costo.
 func demolir_pieza(celda: Vector3i) -> Dictionary:
 	var ancla: String = String(_ocupacion.get(ConstruccionTipos.clave(celda), ""))
@@ -364,7 +495,15 @@ func demolir_pieza(celda: Vector3i) -> Dictionary:
 			[ConstruccionTipos.Motivo.NO_DECONSTRUIBLE],
 			["%s no es deconstruible" % String(e.get("tipo", ""))], [])
 
+	# 3) ORDEN DE DEMOLICION (edge case L197): si algo esta apoyado encima, la
+	# pieza de abajo no se cae sola. Determinista: se rechaza nombrando la de
+	# arriba, para que el jugador demuela en orden (de arriba hacia abajo).
 	var celdas: Array = _celdas_de_estructura(e, r)
+	var apoyadas: Array = piezas_apoyadas_en(ancla)
+	if not apoyadas.is_empty():
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.SOSTIENE_OTRA_PIEZA],
+			["%s sostiene %s apoyada en %s" % [String(e.get("tipo", "")), str(apoyadas), str(celdas)]], [])
 	var borrados: int = _mundo.borrar_voxel(celdas)
 	var devuelto: Dictionary = r.devolucion_por_item() if r != null else {}
 	if _f_devolver.is_valid() and not devuelto.is_empty():
@@ -513,10 +652,15 @@ func restaurar_estructuras(lista: Array) -> void:
 	estructuras_restauradas.emit(n)
 
 ## Vacia el estado construido (no toca el mundo voxel: eso es del cargador).
+## Tambien reinicia la ventana anti doble-confirmacion: es estado de sesion y
+## un mundo nuevo arranca sin ella (si no, la primera pieza tras cargar podria
+## quedar bloqueada por un click viejo).
 func limpiar_estructuras() -> void:
 	_estructuras.clear()
 	_ocupacion.clear()
 	_historial.limpiar()
+	_ultima_celda = Vector3i(-999999, -999999, -999999)
+	_ultima_confirmacion_ms = -999999
 
 # ── Internos de estado ──────────────────────────────────────────────────
 

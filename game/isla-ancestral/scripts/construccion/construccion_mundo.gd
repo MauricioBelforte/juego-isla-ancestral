@@ -103,6 +103,28 @@ func hay_npc_en(celda: Vector3i) -> bool:
 		return false
 	return bool(_npc_provider.call(celda))
 
+## ── D86: conversion celda voxel <-> posicion mundial ───────────────────
+## UNICA utilidad compartida del modulo (evita que preview, fantasma y datos
+## usen cada uno su propia formula y se desincronicen tras guardar/cargar).
+## Convencion: la celda (x,y,z) ocupa el cubo [x, x+1) x [y, y+1) x [z, z+1),
+## asi que su CENTRO esta en (x+0.5, y+0.5, z+0.5) — el offset de medio voxel
+## (D83) aplicado de forma consistente.
+
+const OFFSET_MEDIO_VOXEL: float = 0.5
+
+## Posicion mundial del CENTRO de la celda.
+static func mundo_desde_celda(celda: Vector3i) -> Vector3:
+	return Vector3(celda) + Vector3(OFFSET_MEDIO_VOXEL, OFFSET_MEDIO_VOXEL, OFFSET_MEDIO_VOXEL)
+
+## Celda que contiene la posicion mundial (floor en los 3 ejes, D88).
+static func celda_desde_mundo(pos: Vector3) -> Vector3i:
+	return Vector3i(floori(int(floor(pos.x))), floori(int(floor(pos.y))), floori(int(floor(pos.z))))
+
+## Esquina minima de la celda (para bounds/AABB exactos).
+static func esquina_desde_celda(celda: Vector3i) -> Vector3:
+	return Vector3(celda)
+
+
 ## ── Escritura ───────────────────────────────────────────────────────────
 
 ## Escribe `bloque` en cada celda. Devuelve cuantas celdas se escribieron

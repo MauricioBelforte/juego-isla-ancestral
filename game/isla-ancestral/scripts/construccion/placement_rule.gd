@@ -67,6 +67,12 @@ extends Resource
 ## iter. 3 (mesh real de la receta).
 @export var mesh_path: String = ""
 
+## Variantes de perfil de rendimiento (M166 F1, capa B) disponibles para este
+## asset: subconjunto de ["baja", "media", "alta"]. Si esta vacio, AssetProfile
+## asume que todas existen y no degrada. Va al save junto con mesh_path y alimenta
+## la degradacion graceful de AssetProfile.ruta().
+@export var variantes_disponibles: PackedStringArray = PackedStringArray()
+
 ## Superficie que OFRECE la pieza ya colocada, para que otra pieza pueda apoyar
 ## encima: "piso" (piso/losa), "techo" (techo/cumbrera), "pared" (pared/pilar).
 @export var superficie_ofrecida: StringName = &"piso"
@@ -144,6 +150,12 @@ static func desde_dict(d: Dictionary) -> PlacementRule:
 		r.costo = (c as Dictionary).duplicate()
 	r.bloque = int(d.get("bloque", 0))
 	r.mesh_path = String(d.get("mesh_path", ""))
+	var vd: Variant = d.get("variantes_disponibles", null)
+	if vd is Array and not (vd as Array).is_empty():
+		var arr_vd: PackedStringArray = PackedStringArray()
+		for v in (vd as Array):
+			arr_vd.append(String(v))
+		r.variantes_disponibles = arr_vd
 	r.superficie_ofrecida = StringName(String(d.get("superficie_ofrecida", "piso")))
 	r.es_mueble = bool(d.get("es_mueble", false))
 	r.max_por_zona = int(d.get("max_por_zona", 0))
@@ -167,6 +179,7 @@ func a_dict() -> Dictionary:
 		"costo": costo.duplicate(),
 		"bloque": bloque,
 		"mesh_path": mesh_path,
+		"variantes_disponibles": variantes_disponibles,
 		"superficie_ofrecida": String(superficie_ofrecida),
 		"es_mueble": es_mueble,
 		"max_por_zona": max_por_zona,

@@ -318,15 +318,21 @@ func try_extract() -> Dictionary:
 		return {"ok": true, "block_id": block_id, "pos": pos, "drops": extraidos[0]["drops"], "extracciones": extraidos}
 	return {}
 
-## Cableado M13→M15 (iter 4, GLM-5.3 — cierra el [?] bloqueador de M15).
-## Busca un ResourceNode de M15 a ≤1.5 m del punto de mira del rayo y, si
-## existe, deriva el golpe al helper ResourceManager.recibir_golpe_en_nodo.
-## Devuelve true si el golpe se consumó contra un recurso M15.
-## Regla cozy: si el golpe contra el recurso falla por herramienta equivocada,
-## NO cae al voxel de debajo (evita romper el mundo por accidente).
+## Cableado M13→M35 (Minería, 2026-10-11 — DeepSeek-V4.1-Flash, encargo mimo msg 169).
+## Busca un ResourceNode de M15 a <=1.5 m del punto de mira del rayo y, si existe,
+## deriva el golpe al camino de PRODUCCION de M35: `mineria.intentar_extraccion()`,
+## que aplica RF6 (doble drop con pico T3+), RF10 (límite diario por zona) y J6
+## (cooldown por veta). Antes llamaba `ResourceManager.recibir_golpe_en_nodo()`
+## directo, con lo que esas 3 reglas de M35 quedaban MUERTAS en runtime.
+## Devuelve true si el golpe se consumó contra un recurso M15 (aplicado o fallido).
+## Regla cozy: si el golpe contra el recurso falla (herramienta equivocada, veta
+## agotada, etc.), NO cae al voxel de debajo (evita romper el mundo por accidente).
 func _intentar_golpe_recurso_m15() -> bool:
 	var rm = get_tree().root.get_node_or_null("ResourceManager")
-	if rm == null or not rm.has_method("recibir_golpe_en_nodo"):
+	if rm == null:
+		return false
+	var mineria = get_tree().root.get_node_or_null("mineria")
+	if mineria == null or not mineria.has_method("intentar_extraccion"):
 		return false
 	# Punto de referencia del rayo: cruce con el mundo voxel o punto a ALCANCE/2.
 	var punto: Vector3 = global_position + Vector3(0, 1, 0)
@@ -337,10 +343,12 @@ func _intentar_golpe_recurso_m15() -> bool:
 	var nodo := _recurso_m15_cercano_a(rm, punto, 1.5)
 	if nodo == null:
 		return false
-	var ok: bool = rm.recibir_golpe_en_nodo(nodo, herramienta.nombre_id())
-	if not ok:
+	# Camino de producción de M35: RF6 + RF10 + J6 + entrega real de drops.
+	var res: Dictionary = mineria.intentar_extraccion(nodo, herramienta)
+	if not bool(res.get("ok", false)):
+		var razon: String = String(res.get("razon", ""))
 		# Herramienta equivocada contra el recurso: feedback sin romper voxel.
-		_emitir_fallo_actual("herramienta_equivocada")
+		_emitir_fallo_actual("herramienta_equivocada" if razon == "herramienta_invalida" else razon)
 	return true  # el golpe se consumió contra el recurso (aplicado o fallido)
 
 ## Busca en los nodos activos de M15 el más cercano a `punto` dentro de `radio`.

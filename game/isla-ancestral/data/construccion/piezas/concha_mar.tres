@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_concha"]
+
+[resource]
+script = ExtResource("1_concha")
+id = &"concha_mar"
+mesh_path = "res://assets/3d/alta/45-Arte3D_concha_mar.glb"
+nombre = "Concha de mar"
+familia = &"decoracion"
+altura = 0.5
+superficie_ofrecida = &"aire"
+es_mueble = true
+max_por_zona = 8

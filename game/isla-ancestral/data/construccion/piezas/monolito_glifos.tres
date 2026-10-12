@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_monol"]
+
+[resource]
+script = ExtResource("1_monol")
+id = &"monolito_glifos"
+mesh_path = "res://assets/3d/alta/45-Arte3D_monolito_glifos.glb"
+nombre = "Monolito de glifos"
+familia = &"decoracion"
+altura = 3.0
+superficie_ofrecida = &"aire"
+es_mueble = true
+max_por_zona = 4

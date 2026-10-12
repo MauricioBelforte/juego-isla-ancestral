@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_muelle"]
+
+[resource]
+script = ExtResource("1_muelle")
+id = &"muelle_madera"
+mesh_path = "res://assets/3d/alta/40-Infraestructura_muelle_madera.glb"
+nombre = "Muelle de madera"
+familia = &"puente"
+altura = 0.6
+superficie_ok = Array[StringName]([&"agua"])
+sobre_agua = true
+soportes_minimos = 0
+superficie_ofrecida = &"aire"
+es_mueble = true
+max_por_zona = 1

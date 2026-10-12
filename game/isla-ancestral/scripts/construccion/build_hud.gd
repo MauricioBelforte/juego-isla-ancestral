@@ -117,17 +117,24 @@ static func nombre_pieza(receta: PlacementRule) -> String:
 
 ## Linea de estado para el HUD. Valido -> "OK — piedra x3"; invalido ->
 ## "RECHAZADO — sin soporte debajo". Nunca devuelve cadena vacia si hay receta.
+## Si el rechazo es TEMPORAL (NPC en el lugar, recursos, doble confirmacion)
+## lo dice: "RECHAZADO — ... (temporal: proba de nuevo)".
 static func linea_estado(res: Dictionary, receta: PlacementRule) -> String:
 	if puede_confirmar(res):
 		return "OK — %s" % texto_costo(receta)
 	var m: String = texto_motivos(res)
 	if m == "":
 		m = "invalido"
-	return "RECHAZADO — %s" % m
+	var extra: String = " (temporal: proba de nuevo)" if es_temporal(res) else ""
+	return "RECHAZADO — %s%s" % [m, extra]
+
+## true si el resultado viene marcado como rechazo temporal (edge case L).
+static func es_temporal(res: Dictionary) -> bool:
+	return bool(res.get("temporal", false))
 
 ## Resumen completo listo para pintar (una sola llamada desde la UI).
 ## { ok, nombre, costo[], costo_texto, costo_total, motivos[], motivos_texto,
-##   linea, celdas, color }.
+##   linea, temporal, celdas, color }.
 static func resumen(res: Dictionary, receta: PlacementRule) -> Dictionary:
 	return {
 		"ok": puede_confirmar(res),
@@ -138,6 +145,7 @@ static func resumen(res: Dictionary, receta: PlacementRule) -> Dictionary:
 		"motivos": filas_motivos(res),
 		"motivos_texto": texto_motivos(res),
 		"linea": linea_estado(res, receta),
+		"temporal": es_temporal(res),
 		"celdas": res.get("celdas", []),
 		"color": BuildPreview.color_del_resultado(res),
 	}

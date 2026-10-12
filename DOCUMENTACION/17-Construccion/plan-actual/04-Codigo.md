@@ -128,3 +128,211 @@ Cambios en archivos existentes:
 - `build_ghost.gd`: `resolver_malla()`/`malla_desde_ruta()`/`cargar_malla()` (MESH REAL de la receta, con caja de respaldo), `seguir()`/`seguir_celda()`/`destino_de()` (FOLLOW con lerp, sin sobrepasar) y `actualizar_visibilidad()`/`debe_ocultarse()` (AUTO-OCULTADO fuera de zona).
 - `data/construccion/piezas/*.tres`: 30 recetas declaran `mesh_path` hacia `assets/3d/alta/`.
 - Suite `res://scripts/construccion/test_construccion_iter3.gd` (138 checks, 9 bloques `_fin`).
+
+## Notas del Agente — iter. 4: edge cases de la sección L
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-11
+**Log:** 1684
+
+Pedido del director (msg 140). Tres edge cases del núcleo, todos con suite propia:
+
+| Requisito | Implementación | Archivo |
+|---|---|---|
+| L187 rechazo temporal por NPC | `MOTIVOS_TEMPORALES` + `es_temporal()`; `resultado_fallo()` expone `"temporal"`; `BuildHudModel.linea_estado()` añade "(temporal: probá de nuevo)" | `construccion_tipos.gd`, `build_hud.gd` |
+| L194 límite del mundo | `set_limite_mundo(AABB)` / `_limite_mundo`; `ConstruccionValidator.fuera_del_mundo(celdas, ctx)` + motivo `FUERA_DEL_MUNDO`; ORDEN gana "mundo" | `build_manager.gd`, `construccion_validator.gd` |
+| L196 doble confirmación | cooldown de 250 ms por celda en `confirmar_colocacion()`, motivo `DOBLE_CONFIRMACION`, evaluado DESPUÉS de validar y reseteado en `limpiar_estructuras()` | `build_manager.gd` |
+
+Suite nueva: `res://scripts/construccion/test_construccion_iter4.gd` (45 checks, 4 bloques).
+Las 4 suites de M17: **413 checks, 0 fallos**.
+
+**Regresión encontrada y corregida:** el estado del cooldown sobrevivía a
+`limpiar_estructuras()`, así que la primera pieza tras un reset podía quedar
+bloqueada por un click viejo (rompía 20 checks de `test_construccion.gd`). Ahora se
+reinicia junto con el estado de sesión.
+
+
+## Notas del Agente — iter. 5: edge cases restantes (sección L)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-11
+**Log:** 1687
+
+| Requisito | Implementación | Archivo |
+|---|---|---|
+| L197 demolición ordenada | `piezas_apoyadas_en(ancla)` + motivo `SOSTIENE_OTRA_PIEZA` (permanente); rechaza nombrar la pieza de arriba para que el jugador demuela de arriba hacia abajo | `build_manager.gd`, `construccion_tipos.gd` |
+| L192 fantasma al pool | `conectar_fantasma()` / `fantasma()`; `salir_modo()` llama `devolve_al_pool()` | `build_manager.gd` |
+| L193 guardado a mitad de colocación | el fantasma es estado de UI: `obtener_estructuras()` / save solo ven `_estructuras`; verificado por round-trip | `build_manager.gd`, suite iter5 bloque 3 |
+
+Suite nueva: `res://scripts/construccion/test_construccion_iter5.gd` (39 checks, 4 bloques).
+Las 5 suites de M17: **452 checks, 0 fallos**.
+
+**Bug latente corregido:** `BuildGhost.ocultar()` no limpiaba `_receta_id`, así que un
+fantasma devuelto al pool seguía reportando la receta anterior (la UI podía mostrar
+datos obsoletos al reutilizarlo). Ahora el fantasma ocioso queda sin pieza.
+
+**Error propio corregido durante la sesión:** el script de flips usaba el fragmento
+`"Demolici"` y marcó el ítem equivocado (L114, "ventana de confirmación", que sigue
+`[ ]`). Revertido y re-aplicado sobre el ítem correcto (L197). Sirve de recordatorio:
+los anclajes de flip deben ser únicos y específicos, no prefijos.
+
+
+## Notas del Agente — iter. 6: garantías de integración (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1703
+
+Encargo del director (msg 154): integraciones de M17 con hooks listos. De los ítems
+de la sección K y M, 4 se pudieron **verificar** (no implementar: ya estaban) con la
+suite nueva `test_construccion_iter6.gd` (23 checks, 0 fallos):
+
+| Item | Evidencia |
+|---|---|
+| K181 (M71) | `pieza_colocada(receta_id, celda)` y `pieza_demolida(receta_id, celda)` emiten con argumentos útiles; `navmesh_delta` trae las celdas tocadas al colocar y al demoler |
+| K180 (M32) | Cero suscripciones a clima en `scripts/construccion/` (ni `clima_cambio`, ni `weather`, ni `tormenta`) y el manager no expone ninguna API de clima: la lluvia agrega VFX desde M32 y **no** puede tocar las piezas |
+| M201 (dirty flags) | `escribir_voxel`/`borrar_voxel` escriben **por celdas puntuales**: colocar 2 piezas en celdas distintas escribe exactamente 2 celdas, ni una más |
+| M202 (sin regeneración global) | Ninguna llamada a `regenerate(`/`rebuild(`/`remesh(`/`regenerar(` en el módulo; el terrain espía no recibió ninguna regeneración |
+
+Falso positivo corregido en el propio test: mi primer chequeo de "regenerar" matcheaba
+el **parámetro** `regenerar_id` de `ConstruccionTipos.resultado_ok()`. Se endureció
+exigiendo la llamada con paréntesis.
+
+### ⚠️ Colisión con otro agente (reportada al director)
+
+`test_construccion_iter2.gd` y `test_construccion_iter3.gd` **no compilan** desde que
+otro agente (M166, "capa B" de assets) agregó `AssetProfile.ruta(...)` en
+`build_ghost.gd:96` sin definir la clase `AssetProfile` en el repo. Mis suites
+(`iter1` e `iter6`) compilan y pasan. La rotura es del trabajo en vuelo de M166.
+
+## Notas del Agente — F1 retractado + M17 reparado (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1712
+
+### Encargo F1 (msg 159) retractado por el estratega (msg 160)
+
+El estratega anuló el encargo F1: Hy3 lo había cerrado antes de quedarse sin tokens
+(Log 1681), s2 lo verificó y el director selló **M166 112/112**. **Nada que revertir de mi
+parte**: verifiqué que `asset_profile.gd` (tabla de hardware + `ruta()` + degradación) y el
+campo `variantes_disponibles` de `placement_rule.gd` ya existían, así que no escribí
+código de F1.
+
+### Lo que SÍ quedó (todo en M17, mi módulo)
+
+| Cambio | Por qué |
+|---|---|
+| `build_ghost.gd`: `AssetProfile.ruta(...)` por identificador → `get_node_or_null("/root/AssetProfile")` con fallback | El identificador de un autoload **no compila** bajo `--script` (lección E-27/E-28/E-29). Rompía `iter2`/`iter3` |
+| `muelle_madera.tres`: `sobre_agua`, `superficie_ok=[agua]`, `soportes_minimos=0` | La receta nueva (tanda de héroes) tenía familia `puente` sin cumplir el invariante del catálogo |
+| `test_construccion_iter2.gd`: esperados 36 → **46** recetas | El catálogo creció con 10 recetas de héroes |
+| `test_construccion_iter3.gd`: acepta `mesh_path` en forma base (`x.glb`) | `alfombra.tres` usa la forma base que resuelve `AssetProfile.ruta()` |
+
+### Estado de suites
+
+Las 6 suites de M17 quedan en verde, corridas una por una:
+
+```
+test_construccion.gd        131 checks, 0 fallos
+test_construccion_iter2.gd   99 checks, 0 fallos
+test_construccion_iter3.gd  138 checks, 0 fallos
+test_construccion_iter4.gd   45 checks, 0 fallos
+test_construccion_iter5.gd   39 checks, 0 fallos
+test_construccion_iter6.gd   22 checks, 0 fallos
+                             ---
+                             474 checks, 0 fallos
+```
+
+## Notas del Agente — iter. 7: utilidades de rejilla + copiar pieza (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1732
+
+Encargo del director (msg 179): barrido de M17. **M17: 76 -> 80 `[x]` / 175 (+4).**
+
+### Nuevo: utilidad compartida de conversión (D83/D86/D88)
+
+`ConstruccionMundo` (estáticas, usables desde preview, fantasma y datos sin instancia):
+
+```gdscript
+const OFFSET_MEDIO_VOXEL: float = 0.5
+static func mundo_desde_celda(celda: Vector3i) -> Vector3   # centro = celda + 0.5
+static func celda_desde_mundo(pos: Vector3) -> Vector3i     # floor en los 3 ejes
+static func esquina_desde_celda(celda: Vector3i) -> Vector3 # para AABB exactos
+```
+
+Convención documentada: la celda (x,y,z) ocupa el cubo [x,x+1)×[y,y+1)×[z,z+1), así que su
+centro está en (x+0.5, y+0.5, z+0.5) — el offset de medio voxel aplicado una sola vez y en un
+solo lugar (antes cada consumidor podía tener su propia fórmula).
+
+### Nuevo: `copiar_pieza()` (F110/F112)
+
+`BuildManager.copiar_pieza(origen, destino)`:
+
+- **Conserva la rotación** de la pieza original (F110).
+- **No desocupa el origen** (a diferencia de `mover_pieza`).
+- Se **cobrara como colocación nueva** (F112: la copia gasta materiales).
+- Rechaza con motivo claro: `NO_HAY_PIEZA` (origen vacío), `CELDA_OCUPADA` (destino tomado),
+  `RECURSOS_INSUFICIENTES`, y si el destino no valida, el motivo real del validador.
+- Registra `BuildHistory.TIPO_COPIAR` (nuevo) para que el undo/redo funcione.
+
+### Suite
+
+`scripts/construccion/test_construccion_iter7.gd` — **25 checks, 0 fallos** (2 bloques:
+utilidades + copiar). Regresión verificada sin cambios en `test_construccion.gd`,
+`test_construccion_iter2.gd` y `test_construccion_iter6.gd`.
+
+### Nota de depuración (3 errores propios)
+
+1. `ConstruccionMundo.new()` **vacío no reporta superficie**: sin terrain conectado toda celda
+   queda "en el aire" y la colocación se rechaza con `SIN_SOPORTE`. Hizo falta un `MundoPlano`
+   falso que sí reporte `superficie_voxel`.
+2. El inventario falso arrancaba con 0 stones, así que ni la pieza original se podía colocar.
+3. La expectativa de costo estaba mal por dos motivos: la copia se suma a la colocación original
+   (20 - 4 - 4 = 12, no 16).
+
+## Notas del Agente — auditoria de la seccion K (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1745
+
+Continuacion del barrido de M17. Esta vuelta audite la **seccion K** (Integracion)
+item por item contra el codigo. **M17: 80 -> 81 `[x]` / 175 (+1).**
+
+### Lo que SI tiene respaldo
+
+| Item | Evidencia |
+|---|---|
+| M14: descuento y devolucion | `conectar_inventario(inv)` + `_invertir()` con duck-typing; bloques 8-10 de `test_construccion.gd` prueban costo real, devolucion del 50 % al demoler y re-cobro al deshacer |
+
+El item se cerro aclarando que el **almacenamiento** de piezas como items es de M14
+(limite documentado), no de M17.
+
+### Lo que NO existe (los 6 restantes quedan `[ ]`)
+
+| Item | Estado real |
+|---|---|
+| M08: datos de pieza en capa voxel separada | `construccion_mundo.gd` escribe en `VoxelBuffer.CHANNEL_TYPE`, el **mismo canal** del terreno (no hay capa propia) |
+| M18: ampliaciones usan proyectos de piezas | no hay contrato ni API de proyectos |
+| M25: ruinas como solo visual | el campo `deconstruible` existe y se serializa, pero **ninguna de las 33 recetas** del catalogo lo usa |
+| M73: recetas de festival con `devolucion = 0` | no hay recetas de festival |
+| M31: faroles conectados al ciclo dia-noche | 0 referencias a `DayNightCycle`, `GameTime` o `franja` en `scripts/construccion/` |
+| M93: proyectos de meta larga | no hay contador de piezas por meta |
+
+### Consecuencia
+
+La seccion K esta practicamente cerrada en lo que M17 puede hacer solo: los 6 items
+restantes son trabajo de otros modulos (M08, M18, M25, M31, M73, M93).
+
+### Suites
+
+```
+test_construccion.gd         131 checks, 0 fallos
+test_construccion_iter2.gd    99 checks, 0 fallos
+test_construccion_iter6.gd    22 checks, 0 fallos
+test_construccion_iter7.gd    25 checks, 0 fallos
+```

@@ -183,14 +183,22 @@ func _b3_mesh_path() -> void:
 	db.cargar("res://data/construccion/piezas")
 	var con_malla: int = 0
 	var rutas_ok: bool = true
+	var base_formas: int = 0
 	for id in db.ids():
 		var rec: PlacementRule = db.receta(id)
 		if rec.mesh_path != "":
 			con_malla += 1
-			if not rec.mesh_path.begins_with("res://assets/3d/") or not rec.mesh_path.ends_with(".glb"):
+			# Dos formas válidas (M166 F1, capa B):
+			#   1) ruta completa: res://assets/3d/{perfil}/x.glb
+			#   2) ruta base sin perfil: "x.glb" -> la resuelve AssetProfile
+			if rec.mesh_path.begins_with("res://assets/3d/") and rec.mesh_path.ends_with(".glb"):
+				pass
+			elif not rec.mesh_path.contains("/") and rec.mesh_path.ends_with(".glb"):
+				base_formas += 1
+			else:
 				rutas_ok = false
 	_ok(con_malla >= 25, "el catalogo real declara malla en >= 25 recetas (dio %d)" % con_malla)
-	_ok(rutas_ok, "toda mesh_path declarada es res://assets/3d/...glb")
+	_ok(rutas_ok, "toda mesh_path es res://assets/3d/...glb o base sin perfil (dio %d base)" % base_formas)
 
 	var pared: PlacementRule = db.receta(&"pared_madera")
 	_ok(pared.mesh_path == "res://assets/3d/alta/18-Casas_pared_madera.glb",
