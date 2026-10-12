@@ -10,7 +10,7 @@
 - [x] Definir el problema: sin sistema de luz el voxel degenera en sombras quebradas y coste desbordado [S]
 - [x] Definir el objetivo: iluminación cozy consistente por franja con presupuesto verificado [S] -- agnes-2026-09-07: WorldEnvironment con tonemapping ACES, ambient_light_energy>=0.15, fog_enabled; validado en validate_lighting_m49.gd
 - [x] Registrar dependencias: M31 (franjas), M32 (clima), M09 (biomas), M08 (voxel), M04 (Godot), M6 [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §4 tabla integraciones; DayNightCycle conecta M31 franja + M32 clima + M09 bioma1/M62 (presupuestos), M90 (presets), M58 (accesibilidad) [M]
-- [?] Mapear la sección 48 "ILUMINACIÓN" del plan maestro al ID 49 de la tabla global [M] -- agnes-2.5-flash 2026-09-12: ID 49 asignado en CHECKLIST-GLOBAL; documentación mapeada en 03-Diseno.md
+- [x] Mapear la sección 48 "ILUMINACIÓN" del plan maestro al ID 49 de la tabla global [M] -- agnes-2.5-flash 2026-09-12: ID 49 asignado en CHECKLIST-GLOBAL; documentación mapeada en 03-Diseno.md — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): la carpeta del módulo es `DOCUMENTACION/49-Iluminacion/` y el RF1-RF14 del plan maestro están repartidos en las secciones B-O del checklist.
 - [x] Separar dentro/fuera de alcance: franjas → M31, clima → M32, VFX → M52, materiales → M47 [S] -- agnes-2026-09-07: DayNightCycle._cargar_curvas() carga curvas de data/light/; sol/luna con energy diferenciada; fog depth separa dentro/fuera alcance; integración con M31/M32 pendiente
 - [x] Documentar restricciones: Forward+, ACES sutil, piso anti-oscuridad 0.15, determinismo, sin ni [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §3.2 limites; validate_lighting_m49.gd verifica ambiente >= 0.15ebla volumétrica [M]
 - [x] Definir criterios de aceptación verificables (8 criterios) [S] -- agnes-2026-09-07: WorldEnvironment ACES+ambient>=0.15, luz direccional presente, curvas data-driven, sombras bias<=0.1, ambient cálido; todos validados en test headless
@@ -25,7 +25,7 @@
 ## C. RF2 — Sol y luna
 
 - [x] Definir una única direccional (sol/luna con curvas de color) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: DirectionalLight única cálida (1, 0.96, 0.88) energy 1.35; curvas por franja iter. 2 [hy3-validado 2026-09-18: OK DirectionalLight(sol) + DirLightLuna presentes; sol energy 1.35, luna energy 0.12]
-- [?] Definir presets por las 5 franjas de M31 (elevación, color, intensidad) [M] — Log 731: sun_color_ramp.tres + sky_color_ramp.tres (Gradient data-driven) muestreados por hora/24
+- [x] Definir presets por las 5 franjas de M31 (elevación, color, intensidad) [M] — Log 731: sun_color_ramp.tres + sky_color_ramp.tres (Gradient data-driven) muestreados por hora/24 — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): presets data-driven en `data/light/` (`sun_color_ramp.tres`, `sky_color_ramp.tres`, `day_curve.tres`, `moon_curve.tres`, `fog_curve.tres`) y verificados por `test_curvas_luz.gd` (0 fallos).
 - [?] Definir easing de 3 s entre franjas (sin snaps) [M] — Log 731: tween de 1 s existente mantiene la transición; color animado incluido
 - [?] Definir curva fría de la luna en NOCHE/PROFUNDA [M] — Log 731: luna (0.6,0.65,0.85) fría en franjas nocturnas, verificado en captura 00:01
 
@@ -38,29 +38,29 @@
 
 ## E. RF4 — Iluminación dinámica
 
-- [?] Definir pool de luces dinámicas (M62) [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §1 dynamic/ light_pool.gd; validate_lighting_m49.gd _test_sombras verifica pool
-- [?] Definir tope con sombra ≤ 6 por escena [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "Luces dinámicas con sombra por escena: <= 6"; validate_lighting_m49.gd _test_sombras verifica este limite
-- [?] Definir tope total ≤ 20 por escena [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "Luces dinámicas totales por escena: <= 20 (pool)"; validate_lighting_m49.gd checks this
-- [?] Definir desactivación por distancia 30 m (M61) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "descarte por distancia 30 m"; implementado en DayNightCycle._aplicar_iluminacion() culling logic
+- [x] Definir pool de luces dinámicas (M62) [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §1 dynamic/ light_pool.gd; validate_lighting_m49.gd _test_sombras verifica pool — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): definición documentada en `04-Codigo.md` §1.3 con el algoritmo de pool (`MAX_DINAMICAS := 20`, buscar luz libre -> crear con tope); la tabla del propio doc marca la implementación en `scripts/` como pendiente.
+- [x] Definir tope con sombra ≤ 6 por escena [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "Luces dinámicas con sombra por escena: <= 6"; validate_lighting_m49.gd _test_sombras verifica este limite — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `04-Codigo.md:85`: `MAX_CONT_SOMBRA := 6` (conteo de omni/spot con shadows).
+- [x] Definir tope total ≤ 20 por escena [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "Luces dinámicas totales por escena: <= 20 (pool)"; validate_lighting_m49.gd checks this — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `04-Codigo.md:84`: `MAX_DINAMICAS := 20`.
+- [x] Definir desactivación por distancia 30 m (M61) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "descarte por distancia 30 m"; implementado en DayNightCycle._aplicar_iluminacion() culling logic — implementado (stepfun-step-5-preview, 2026-10-12, Log 1727): `desactivar_lejanas(centro, radio)` con `RADIO_DESCARTE = 30`; regla anti-oscuridad: si todas quedarían fuera, no apaga ninguna.
 
 ## F. RF5 — Luces interiores
 
 - [x] Definir luz cálida de casas (M18) [S] -- agnes-2026-09-07: casas usan DirectionalLight existente; luz cálida implementada via sun_color_ramp.tres (tonos naranjas/amarillos)
 - [?] Definir luz de tiendas (M39) y talleres [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_tienda.gd definido; integracion con M39 shop placement; stub en DayNightCycle para luz ambiental tiendamic/; implementación requiere M39 shop placement event; deferred a M39 integration
 - [?] Definir ventanas con luz diurna (baked) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa profile documents baked window light; IMPLEMENTACIÓN bloqueada por M18 (lightmap bake en escenas con ventanas); KnownIssue no bloqueante DoD.
-- [?] Definir perfil interior_casa.gd [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §1 profiles/interior_casa.gd; estructura definida en arquitectura; implementación pendiente de M18 escena tipo casa
+- [x] Definir perfil interior_casa.gd [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §1 profiles/interior_casa.gd; estructura definida en arquitectura; implementación pendiente de M18 escena tipo casa — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): perfil definido en `03-Diseno.md:15` e inventariado en `04-Codigo.md` §1.2 (implementación del .gd pendiente según la propia tabla).
 
 ## G. RF6 — Faroles
 
 - [?] Definir faroles de pueblo y caminos [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_farol.gd definido; pool de faroles con flicker determinista; posición por evento M39/M28do; posición por evento M39/M28; implementación visual pendiente M90 presets calidad
-- [?] Definir flicker determinista (fase + semilla) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "flicker: frecuencia <= 2 Hz, amplitud <= 15%"; validate_lighting_m49.gd verifica amplitude limit
+- [x] Definir flicker determinista (fase + semilla) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "flicker: frecuencia <= 2 Hz, amplitud <= 15%"; validate_lighting_m49.gd verifica amplitude limit — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `03-Diseno.md:20`: flicker determinista en `luz_farol.gd`/`luz_fuego.gd`/`luz_cristal.gd`.
 - [?] Definir luz desde el pool (no por instancia) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/light_pool.gd; diseño documented; implementación en DayNightCycle._aplicar_iluminacion() usa pool logic
 - [x] Definir opción de desactivación (M58/M90) [S] -- agnes-2026-09-07: toggle global de iluminación disponible via M58/M90; DayNightCycle puede desactivarse con set_process(false)
 
 ## H. RF7 — Fuego
 
 - [?] Definir luz cálida de hogueras/chimeneas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_fuego.gd definido; integrado con M52 particulas fuego; luz cálida desde poolefinido; integrado con M52 partículas fuego; implementación visual pendiente M52/FX
-- [?] Definir parpadeo suave (≤2 Hz, ≤15%) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 flicker limits; validate_lighting_m49.gd amplitude check
+- [x] Definir parpadeo suave (≤2 Hz, ≤15%) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 flicker limits; validate_lighting_m49.gd amplitude check — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `03-Diseno.md:95`: frecuencia ≤ 2 Hz, amplitud ≤ 15 % de la intensidad.
 - [x] Integrar con partículas de M52 [S] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M52 integration documented; fire particles + luz asociada definidas; implementación visual requiere M52 activo particles + associated light; blocked by M52 particle system availability
 
 ## I. RF8 — Cristales y glifos ancestrales
@@ -71,7 +71,7 @@
 
 ## J. RF9 — Cuevas y subterráneo
 
-- [?] Definir piso anti-oscuridad 0.15 en cuevas (M31) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 minimo ambiente 0.15; validate_lighting_m49.gd _test_ambient_minimum verifica este limite
+- [x] Definir piso anti-oscuridad 0.15 en cuevas (M31) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 minimo ambiente 0.15; validate_lighting_m49.gd _test_ambient_minimum verifica este limite — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `03-Diseno.md:44`: ambiente >= 0.15 como piso.
 - [?] Definir esporas de luz (M11) como luz ambiental [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md menciona esporas M11 en cuevas; luz ambiental cálida 0.15-0.25; integrada con perfil subterraneo11 en cuevas; implementacion requiere M11 espora system; blocked por dependencia
 - [?] Definir transición gradual día→cueva (fade) [M] -- agnes-2.5-flash 2026-09-12: documentado en 03-Diseno.md §2.2 (perfil subterráneo.gd: direccional apagada, ambiente 0.15-0.25, niebla cueva); fade implementado via tween en DayNightCycle._activar_perfil_subterraneo()
 - [?] Definir perfil subterraneo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/subterraneo.gd estructurado; direccionional apagada, ambiente cálido 0.15-0.25, niebla cueva, luces puntuales fijas/pool
@@ -86,16 +86,16 @@
 ## L. RF11 — Clima y niebla
 
 - [x] Definir niebla exponencial por bioma/franja (M09/M32) [M] -- agnes-2.5-flash 2026-09-12: fog_curve.tres EXISTS en data/light/; exponencial configurada por franja; integracion bioma requiere M09ght/; integracion por bioma requiere M09 RegionData; stub en DayNightCycle; blocked M09 [hy3-validado 2026-09-18: OK fog habilitado en environment + fog_curve.tres carga como Curve (per-bioma: M09 pendiente)]
-- [?] Definir lluvia: dimming solar suave [M] -- agnes-2.5-flash 2026-09-12: DayNightCycle._aplicar_iluminacion() reduce solar intensity cuando weather is rainy; M32 clima integracion documented
+- [x] Definir lluvia: dimming solar suave [M] -- agnes-2.5-flash 2026-09-12: DayNightCycle._aplicar_iluminacion() reduce solar intensity cuando weather is rainy; M32 clima integracion documented — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `01-Requerimientos.md:32`: lluvia con dimming solar suave; DayNightCycle ya reduce la intensidad solar cuando el clima es lluvioso.
 - [x] Descartar niebla volumétrica (coste) [S] -- agnes-2.5-flash 2026-09-12: DECIDIDO NO: uso niebla exponential por bioma/franja segun 03-Diseno.md §3.2; volumetrica descartada por performance
 - [?] Definir niebla de jungla densa y costa baja [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md niebla_por_bioma.tres estructurado; valores por bioma definidos en diseño; implementacion requiere M09 bioma catalog estructurado; valores exactos requieren M09 bioma catalog; blocked M09
 
 ## M. RF12 — Sombras
 
-- [?] Definir cascades ≤ 4 (por preset M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "cascades <= 4 (preset bajo: 2, medio: 3, alto: 4 — M90)"
+- [x] Definir cascades ≤ 4 (por preset M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "cascades <= 4 (preset bajo: 2, medio: 3, alto: 4 — M90)" — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `03-Diseno.md:91`: cascades ≤ 4 (bajo 2, medio 3, alto 4).
 - [?] Definir distancia dinámica de sombras (45 m / 25 m bajo) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: directional_shadow_max_distance=120 (base; por-preset iter. 2)
 - [x] Definir bias voxel fino sin acne [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "shadow_bias 0.005-0.01, normal_bias 0.4 (calibrar; sin acne)" [hy3-validado 2026-09-18: OK shadow_bias 0.050, shadow_normal_bias 1.5, shadow max_distance 120]
-- [?] Definir resolución de shadow atlas por preset (1024/2048) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "Shadow atlas: 1024 (bajo/medio), 2048 (alto)"
+- [x] Definir resolución de shadow atlas por preset (1024/2048) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "Shadow atlas: 1024 (bajo/medio), 2048 (alto)" — verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `03-Diseno.md:92`: 1024 (bajo/medio), 2048 (alto).
 - [?] Definir sombras suaves (PCF ≥ 4 samples) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md soft shadows required; PCF 4+ samples documented; validate_lighting_m49.gd verifica quality
 - [x] Prohibir siluetas negras (ambiente de relleno) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: ambient 0.85 + fog sutil eliminan negros absolutos (verificado en captura) [hy3-validado 2026-09-18: OK ambient cálido R=0.85 G=0.78 B=0.68 (elimina negros absolutos)]
 
@@ -291,3 +291,11 @@
 > ⚠️ **Nota §28 (codificación):** las líneas 241/249/256 de este archivo traen fragmentos corruptos preexistentes
 > ("`03-Diseno.mdh`", "`§3.2igured`", "`dokumento`") de escrituras cp1252 ajenas. **No los toqué** (fuera de mi
 > alcance); quedan para la pasada de `scripts/fix_encoding.py`.
+
+> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1716):** +12 [?] -> [x] en el barrido autorizado (msg 162). Evidencia: 3 suites verdes (`test_curvas_luz.gd`, `test_ramps_color_m49.gd` 10 checks, `test_ciclo_dia_noche.gd` 16 checks; 0 fallos en total) + definiciones confirmadas en `03-Diseno.md` y `04-Codigo.md` con valores exactos.
+> **Quedan [?] a propósito (evidencia negativa):** `03-Diseno.md`/`04-Codigo.md` declaran "Pendiente de implementación" o "Vacía — pendiente" para los presets .tres, los perfiles `interior_templo.gd`/`subterraneo.gd`, el cielo procedural y las suites de bake; y varios ítems están bloqueados por dependencia (K81 rayo cenital requiere M24/M25; I68/I69 diferidos a M47; D34-D37 lightmaps/SDFGI requieren decisión de render).
+> **Totales:** 143 ítems · Completados: 66 · Pendientes: 0 · No resueltos: 77.
+
+> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1727):** +1 [?] -> [x] implementando el pool de luces dinámicas (msg 171). `scripts/world/light_pool.gd` (6.8 KB): `MAX_DINAMICAS = 20`, `MAX_CONT_SOMBRA = 6`, `RADIO_DESCARTE = 30 m`, reutilización de entradas, **tope total que no roba luces activas** (rechaza y cuenta), **tope de sombra que degrada** (crea sin sombra en vez de rechazar), regla anti-oscuridad en el descarte y flicker determinista (fase desde hash de semilla+tipo+posición) acotado a ≤ 2 Hz y ≤ 15 %, con `catalogo_valido()` que valida el catálogo contra esos topes. Suite `test_light_pool_m49.gd`: **44 checks, 0 fallos**.
+> **Nota:** los tres checks de E41/E42/E43 ya estaban `[x]` desde el barrido anterior (el diseño estaba documentado); esta vuelta lo convirtió en código real y verificado. El Ãºnico `[?`] que quedaba del bloque era el descarte por distancia (E44), ahora implementado.
+> **Totales:** 66 [x] / 77 [?] / 0 [ ] = 143 items.

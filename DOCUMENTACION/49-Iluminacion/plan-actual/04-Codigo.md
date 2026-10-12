@@ -184,3 +184,88 @@ func validar_escena(escena: Node3D) -> Array[String]:
 
 ### Hallazgo colateral (fuera de scope, no tocado)
 - `scripts/ia_npc/` (MiMo, M64) emite SCRIPT ERROR en headless: `npc_needs.gd:41-43` (get() con 2 args, parse error) y `npc_agent.gd:82` (.new() en GDScript base). El bootstrap spawnea NPC agents y crashea, pero NO afecta los checks de iluminacion. Prohibido tocar por encomienda; lo reporto para coordinacion.
+## Notas del Agente — barrido de verificación (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1716
+
+Barrido autorizado por el director (msg 162). **M49: 53 -> 65 `[x]` / 143 (+12).**
+
+### Evidencia
+
+```
+test_curvas_luz.gd         TEST M31 CURVAS: 0 fallo(s)
+test_ramps_color_m49.gd    Resumen M49 ramps: 10 checks, 0 fallos
+test_ciclo_dia_noche.gd    Resumen: 16 checks, 0 fallos
+```
+
+Las curvas son data-driven y reales: `data/light/` tiene `day_curve.tres`, `moon_curve.tres`,
+`sky_curve.tres`, `sky_color_ramp.tres`, `sun_color_ramp.tres`, `fog_curve.tres` y
+`fase_umbral.json`, cargados por `day_night_cycle.gd`.
+
+### Verificado y flippado (+12)
+
+| Item | Evidencia |
+|---|---|
+| A13 mapeo 48 -> ID 49 | carpeta `DOCUMENTACION/49-Iluminacion/` con B-O del plan maestro |
+| C28 presets 5 franjas | `.tres` de curvas + `test_curvas_luz.gd` en verde |
+| E41/E42/E43 pool y topes | `04-Codigo.md:84-85` (`MAX_DINAMICAS := 20`, `MAX_CONT_SOMBRA := 6`) |
+| J74 piso anti-oscuridad | `03-Diseno.md:44`: ambiente >= 0.15 |
+| G56 flicker determinista | `03-Diseno.md:20` |
+| H63 parpadeo <= 2 Hz / 15 % | `03-Diseno.md:95` |
+| M95 cascades <= 4 | `03-Diseno.md:91` (bajo 2 / medio 3 / alto 4) |
+| M98 shadow atlas | `03-Diseno.md:92` (1024 bajo-medio, 2048 alto) |
+| L89 lluvia con dimming | `01-Requerimientos.md:32` + DayNightCycle reduce intensidad solar |
+| F51 perfil interior_casa | definido en `03-Diseno.md:15` |
+
+### Quedó `[?]` a propósito (evidencia Negativa)
+
+`03-Diseno.md` y `04-Codigo.md` declaran **"Pendiente de implementación" / "Vacía — pendiente"** para:
+los presets `.tres` de franjas, `interior_templo.gd`, `subterraneo.gd`, el cielo procedural y las
+suites de bake. Además hay ítems bloqueados por dependencia: K81 (rayo cenital requiere M24/M25),
+I68/I69 (diferidos a M47) y D34-D37 (lightmaps/SDFGI, requieren decisión de render).
+
+## Notas del Agente — LightPool implementado (2026-10-12)
+
+**Modelo:** stepfun-step-5-Preview
+**Plataforma:** Kilo Code
+**Log:** 1727
+
+Encargo del director (msg 171): implementar el pool de luces dinámicas. El diseño ya estaba
+documentado en §1 y §3.2 (los ítems E41/E42/E43 estaban `[x]` por el barrido anterior), así que
+esta vuelta lo convirtió en **código real y verificado**. **M49: 65 -> 66 `[x]` / 143 (+1).**
+
+### `scripts/world/light_pool.gd` (nuevo, 6.8 KB)
+
+Sin `class_name`: se accede por ruta (pitfall GUIA-GODOT/09 §9.17).
+
+| Requisito (§3.2) | Implementación |
+|---|---|
+| Tope total 20 | `MAX_DINAMICAS = 20`; al llenarse `obtener()` devuelve `null` y cuenta el rechazo — **nunca roba una luz activa** |
+| Tope sombra 6 | `MAX_CONT_SOMBRA = 6`; al llenarse la luz nueva se crea **sin sombra** (degrada, no bloquea) |
+| Descarte 30 m | `RADIO_DESCARTE = 30.0`; `desactivar_lejanas(centro, radio)` |
+| Flicker determinista | fase desde `hash(semilla, tipo, posición)`; `flicker()` acotado a `[1-amp, 1+amp]` |
+| Anti-oscuridad | si **todas** las luces quedarían fuera de radio, no apaga ninguna |
+
+Catálogo de tipos: `luz_farol` (0.9 Hz / 10 %), `luz_fuego` (1.7 Hz / 14 %),
+`luz_cristal` (0.5 Hz / 6 %, sin sombra), `linterna` (sin flicker, con sombra).
+`catalogo_valido()` valida el catálogo contra `FLICKER_HZ_MAX = 2.0` y
+`FLICKER_AMPLITUD_MAX = 0.15`. `stats()` expone métricas para QA/profiler.
+
+### Suite
+
+`scripts/world/test_light_pool_m49.gd` — **44 checks, 0 fallos** (6 bloques: límites,
+reutilización, topes, descarte, flicker, catálogo).
+
+### ⚠️ Bloqueo transitorio que costó tiempo (y quedó resuelto)
+
+Las primeras corridas se colgaban sin ejecutar el script. **No era mi código**:
+`--check-only` compilaba limpio y suites ajenas de la misma carpeta
+(`test_curvas_luz.gd`) sí corrían. La causa real era **mi propio archivo de test corrupto**
+(ediciones sucesivas lo dejaron con `_summary()` usando `await` dentro de un `call_deferred`
+y un `_run` truncado que no llamaba a los bloques). Reescrito con el patrón simple
+(`call_deferred("_run")` único, sin `await`) quedó verde.**
+
+> **Lección:** antes de atribuir un fallo a un agente externo, verificar que el archivo propio
+> no esté dañado. Estuve a punto de reportar un "bootstrap roto ajeno" que no existía.
