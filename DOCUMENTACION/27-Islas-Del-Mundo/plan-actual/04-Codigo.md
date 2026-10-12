@@ -588,3 +588,139 @@ headless. La iter. 2 **no toca `IslandLoading`** (19 ítems `[?]`, dueño M63/M6
    prueba que la guardia es válida **con y sin** anclas.
 5. **M19/M23/M28 → M27**: los 4 puntos externos de la §26 siguen sin
    implementación; el catálogo los tiene atribuidos y listos para cerrar.
+
+
+## Notas del Agente — barrido de verificación (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1710
+
+Barrido autorizado por el director (msg 158). M27 tenía **93 `[?]`**, la mayoría con
+notas que atribuyen el trabajo a otros módulos (M10, M15, M19, M25, M26, M28, M36,
+M51, M62, M64) — esas quedan `[?]` a propósito.
+
+### Evidencia base: 3 suites verdes
+
+```
+test_islas_headless.gd        5 checks, 0 fallos
+test_islas_m27.gd           171 checks, 0 fallos   (A-K: ring, definición, registro,
+                                                   fallback, anclas, vecinas, descubrimiento,
+                                                   props, geometría, M59, islas.json)
+test_islas_m27_iter2.gd     238 checks, 0 fallos   (K1-K9 + catálogo de diseño)
+                            ---
+                            414 checks, 0 fallos
+```
+
+### Verificado y flippado (+10)
+
+| Item | Evidencia |
+|---|---|
+| C54 `init(anclas)` | sustituido por `island_registry.anclar(id, ancla, semilla_isla)` + `posicion_ancla()` |
+| E88 servicio separado | `island_ops.gd`: cola de operaciones independiente de M10 |
+| E89 carga con estados | `encolar()` + `progreso()`/`info()` con 5 estados (pendiente/en_curso/hecha/cancelada/fallida) |
+| **E91 pesos 60/25/10/5** | `ETAPAS = [losa, props, audio, navmesh]`, `PESOS = [0.60, 0.25, 0.10, 0.05]`; tests "pesos 60/25/10/5" y "suman 1.0" |
+| E101 precarga de vecinas | `island_travel_guard.debe_precargar(pos, isla_actual)` + `registry.vecinas(id)` (K1) |
+| E102 descarga por memoria | K9 descarga forzada por presión de memoria |
+| E103 asíncrona sin congelar | `MAX_OPS_POR_FRAME = 1` + K2 viaje con descarga en curso |
+| E105 fallo de carga | `island_ops.fallar(motivo)` con estado FALLIDA e historial |
+| E106 jugador nunca atrapado | K8 respawn cozy |
+| E95 no descargar Aurora | `debe_precargar()` excluye la isla actual; Aurora es `isla_principal()` |
+
+### Quedó `[?]` a propósito (evidencia negativa)
+
+- **E92/E93/E94**: las señales `isla_cargando`/`isla_cargada`/`isla_descargada` **no
+  existen** como signals: el progreso se consulta con `progreso()`/`info()`, no se
+  emite. Es una deuda real de API.
+- **E90**: `IslandPref { PRELOAD, DESCARGA }` no es un enum; son constantes
+  `StringName` (`TIPO_CARGA`/`TIPO_DESCARGA`/`TIPO_PRECARGA`).
+- El resto son ítems delegados a otros módulos en sus propias notas.
+
+## Notas del Agente — auditoria de la seccion E (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1743
+
+Continuacion del barrido de M27 (msg 186). Esta vuelta audite la **seccion E**
+(`IslandLoading`) ítem por ítem contra el codigo, y el resultado es negativo en su mayoria:
+los 10 `[?]` de la seccion **siguen siendo `[?]` merecidamente**.
+
+### Lo que NO existe (verificado leyendo `island_ops.gd`)
+
+| Item | Estado real |
+|---|---|
+| `Enum IslandPref { PRELOAD, DESCARGA }` (E90) | no hay enum: son `const TIPO_CARGA/TIPO_DESCARGA/TIPO_PRECARGA` (`StringName`) |
+| Señales `isla_cargando` / `isla_cargada` / `isla_descargada` (E92-E94) | `island_ops.gd` **no declara ninguna señal** (0 `signal` en el archivo) |
+| `cacheado(id) -> bool` (E97) | no existe |
+| `isla_actual() -> StringName` (E98) | no existe; `isla_actual` viaja como **parámetro** de `debe_precargar()` / `evaluar_viaje()` |
+| `punto_de_llegada(id)` / `punto_de_partida(id)` (E99-E100) | no existen; solo hay `semilla_de_isla()` en el registro |
+
+### Lo que SÍ existe (ya `[x]`)
+
+La cola de operaciones con 5 estados, 4 etapas con pesos, prioridades, `MAX_OPS_POR_FRAME`
+y la descarga forzada por memoria con `intocables` — todo eso estaba cubierto por los 9 flips
+del ciclo anterior y verificado por las suites.
+
+### Consecuencia
+
+La seccion E no se puede cerrar desde M27: describe la API de un servicio de carga/streaming
+que vive en **M63** (ya documentado en los ítems O274/O275 del propio checklist). Los `[?]`
+quedan como deuda honesta, con el límite escrito.
+
+## Notas del Agente — secciones F y J, contrato de props y mapa (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1746
+
+Encargo del director (msg 193, a eleccion): **secciones F y J de M27**.
+**M27: 118 -> 121 `[x]` / 192 (+3).**
+
+### F112 — contrato con M50 (flora endemica)
+
+`IslandProps.materializar()` arma el contexto que reciben los spawners
+(`_contexto()`, L115-133):
+
+```gdscript
+"items": isla.flora_endemica / fauna_endemica / recursos_exclusivos / puzzles
+"bounds": isla.bounds_locales()
+"centro": isla.centro_mundo()
+```
+
+con `semilla_props(isla)` derivada por isla (determinista). El filtro por bioma y la
+colocacion real son del spawner de **M50** — limite documentado en el item.
+
+### J169/J170 — mapa y secretos
+
+| Item | Evidencia |
+|---|---|
+| El mapa marca descubiertas y visitadas | `esta_descubierta()` / `esta_visitada()` + senal `isla_descubierta`; `descubrir()` devuelve true solo la primera vez |
+| Secretos ocultos hasta descubrirlos | `visible_en_mapa(id)` en false mientras sea secreta y no este descubierta |
+
+Ambas con test propio en `test_islas_m27.gd`:
+
+```
+visible_en_mapa(secreta) == false sin descubrir
+visible_en_mapa(secreta) == true tras descubrir
+visible_en_mapa(inexistente) == false
+```
+
+El **pintado** del mapa es de M54: M27 solo expone el estado y la senal.
+
+### Los 5 `[?]` restantes de F/J
+
+| Item | Limite |
+|---|---|
+| Spawn de fauna endemica | el contexto se pasa; la colocacion es de **M36** |
+| Spawn de recursos exclusivos | idem, **M15** |
+| Spawn de POI (muelle, plaza, faro...) | idem, **M64** |
+| Props no se generan en el mar | el recorte contra el agua es del spawner / **M51** |
+| Ningun contenido exclusivo se pierde | acceso por otras vias: de otros modulos |
+
+### Suites
+
+```
+test_islas_m27.gd           171 checks, 0 fallos
+test_islas_m27_iter2.gd     238 checks, 0 fallos
+```
