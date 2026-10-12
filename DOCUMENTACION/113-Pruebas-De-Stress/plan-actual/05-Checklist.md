@@ -67,7 +67,7 @@
 - [x] Definir escenario con 50 000 instancias vegetales [C]
 - [x] Definir métrica: culling correcto y memoria < umbral [M]
 - [x] Definir verificación de viento/anima sin degradación [M]
-- [ ] Definir prueba con cámara rápida (sobrevuelo) [S]
+- [x] Definir prueba con cámara rápida (sobrevuelo) [S] — **implementado (stepfun-step-5-preview, 2026-10-11):** `scripts/stress/escenarios/flycam_stress.gd` (class FlyCamStress), registrado en `stress_runner.gd` como 5º escenario. Recorrido de 480 muestras x 200 pasadas (96.000 muestras, seed 42) sobre el plan de M50, midiendo `recorrido_ms`, `frame_ms`/`frame_us` e `integridad_ok`. Verif. indep. Hy3 (2026-10-11) confirma headless: `StressRunner completado: 5 escenarios`, FlyCam `fuera de radio: 0` (integridad_ok=1.0), EXIT 0, 0 SCRIPT ERROR. Nota: la cita original "Log 1666" era de M35/M50 (DeepSeek), no de M113 — corregida para evitar falsa atribución.
 - [x] Definir verificación del render (batches/draw calls) [M]
 
 ## 6. Muchos objetos (5º)
@@ -256,7 +256,7 @@ Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1
 - Considerar **mediana de N corridas** o umbral por métrica (más flojo en timing, estricto en integridad) si el ±5% único sigue siendo frágil.
 - Los 17 escenarios restantes (NPC/fauna/vegetación/mundo grande/…) siguen esperando a M19/M65/M08/M50.
 
-**Totales:** 132 ítems · Completados: 131 · Pendientes: 1 · No resueltos: 0.
+**Totales:** 132 ítems · Completados: 132 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 102 [x] / 30 [ ] /
@@ -273,3 +273,15 @@ M113 re-auditado con DoD 21.6: **DEUDA REAL** (no flip, no inflado). Conteo 102 
 - 30 [ ] pendientes (metricas a definir: fisica < 5 ms, culling, prueba camara rapida/sobrevuelo, etc.).
 - Positivo: framework de stress EN DISCO (stress_runner.gd, stress_scenario.gd, stress_comparator.gd) + test_stress_m113 **19/0** (re-corrí yo). El framework base está bien construido; falta la validación de estrés (baselines/métricas/corridas) + 07.
 Clasificacion: **DEUDA REAL** (implementacion de la fase de validación de stress), no INFLADO. GLOBAL no tocado (flip = director).
+
+## QA Cruzado §21.8 (Ling-3.1-Flash, Kilo Code, 2026-10-11)
+
+**Veredicto: PROCEDE — sello ✅ válido con deuda documentada.**
+
+- **Conteo:** 132 `[x]` / 0 `[ ]` / 0 `[?]` — exacto contra Totales (132·132·0·0) y GLOBAL (132/132). 0 drift.
+- **Muestreo §21.8.2.b (8/8, verbos de creación):** `stress_comparator.gd`, `stress_runner.gd` (registro de `_SC_FLYCAM` verificado en diff del commit 0c5942f), `stress_scenario.gd`, `test_stress_m113_comparador.gd` (re-corrida headless EXIT 0), `test_stress_m113.gd` (re-corrida headless EXIT 0), `flycam_stress.gd` (L70: seed 42, 480×200=96.000 muestras, 5 métricas, plan sintético 45 pts), 5 escenarios en `escenarios/`, Log 1668 (firma stepfun) y msg 125 (canal stepfun) existen y coinciden.
+- **0 citaciones fantasma.**
+- **Deuda documentada (no inflación):** `perf_base.json` ausente por diseño (agnes, Log 919/L251: 5 regresiones falsas en hardware variable; dueño M61/CI — declarado en GLOBAL y en este checklist); `06-Plan-Testings.md` y `07-Resultados-Testings.md` ausentes (recomendable). Los 29 flips del usuario (commit 531f597) son ítems "Definir métrica/prueba" sustentados por `03-Diseno.md`/`04-Codigo.md`; los valores numéricos quedan con M61/M19/M50/M65 (declarado en L225/L236/L257).
+- **Aritmética consistente:** 102 (agnes 2026-10-07) + 29 (usuario 2026-10-11 00:48) + 1 (L70, stepfun 06:06/09:05) = 132.
+
+**Firma:** Ling-3.1-Flash / Kilo Code — 2026-10-11 18:15
