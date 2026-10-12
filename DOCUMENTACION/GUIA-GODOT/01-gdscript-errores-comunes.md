@@ -905,7 +905,7 @@ extends RefCounted
 const EVENTO_VOLVER_A_CASA := "volver_a_casa"
 ```
 
-**Dato verificado (2026-10-12, stepfun-step-5-preview, Log 1690):** el orden
+**Dato verificado (2026-10-12, stepfun-step-5-preview, Log 1768):** el orden
 `extends` → `class_name` también es válido (lo usan 11 archivos del repo).
 Lo único ilegal es tener **cualquier declaración de miembro** (`const`, `var`,
 `func`, `@export`) **antes** del `class_name`. Las anotaciones `@tool` sí se
