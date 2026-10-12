@@ -83,8 +83,8 @@
 - [x] Definir media (100 unidades, 200m) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["media"] = 600 m`.
 - [x] Definir lejana (200 unidades, 400m) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). alta 1200 m / ultra 2500 m.
 - [ ] Definir culling de objetos fuera de distancia
-- [ ] Definir LODs para objetos lejanos (M50)
-- [ ] Definir fog para ocultar transición
+- [ ] Definir LODs para objetos lejanos (M50) — **PARCIAL (stepfun-step-5-preview, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_island.gd` L143-154 configura `lod_split_count = 5` y `lod_distance = 160.0` (anillos 2×/4×/8×/16×/32×). No se encontró LOD ni culling por distancia para objetos individuales.
+- [x] Definir fog para ocultar transición — implementado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/main_island.gd` L198-202, "Niebla marina: el borde del océano se funde con el cielo", con `env_node.environment.fog_enabled = true`.
 
 ### [S] Calidad de efectos
 - [?] Definir baja (partículas básicas, sin post-processing) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["baja"] = 0.25`.
