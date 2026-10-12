@@ -113,10 +113,10 @@
 
 ## F. Emociones y Ritmo (10 ítems)
 
-- [?] Definir emociones objetivo por fase del juego → `player-journey.md` §1
+- [x] Definir emociones objetivo por fase del juego → `player-journey.md` §1 — **Hy3 (2026-10-12):** evidencia real en operativa/player-journey.md §1 (columna "Emoción objetivo" por fase); promovido de [?] por Patrón D (evidencia real).
 - [x] Crear mapa de ritmo (tensión → descanso → tensión) → journey §2 (bucle cozy) + §3 wow moments alternados con calma
 - [x] Definir momentos de calma (exploración libre) → journey §1 fase 5
-- [?] Definir momentos de emoción (descubrimientos, logros) → journey §3
+- [x] Definir momentos de emoción (descubrimientos, logros) → journey §3 — **Hy3 (2026-10-12):** evidencia real en operativa/player-journey.md §3 ("Momentos wow"); promovido de [?] por Patrón D (evidencia real).
 - [x] Definir momentos de satisfacción (completar objetivos) → journey §1 fase 6
 - [x] Evitar momentos de frustración (cozy = sin penalizaciones) → journey §4 + feedback §3 regla 1 + M152
 - [x] Crear curva de dificultad suave → journey §5 (gating por herramientas/Sellos, sin paredes)
@@ -126,7 +126,7 @@
 
 ## G. Métricas de Experiencia (10 ítems)
 
-- [?] Definir métricas de onboarding (tasa completado, tiempo) → `operativa/metrics.md` §1
+- [x] Definir métricas de onboarding (tasa completado, tiempo) → `operativa/metrics.md` §1 — **Hy3 (2026-10-12):** evidencia real en operativa/metrics.md §1 (tabla "Métricas de onboarding": tasa completado ≥90%, tiempo ≤10min); promovido de [?] por Patrón D (evidencia real).
 - [x] Definir métricas de retención (DAU, MAU, sesiones) → §2
 - [x] Definir métricas de satisfacción (reviews, encuestas) → §3
 - [x] Crear dashboard de métricas → §4 (pestaña Sheets, patrón M134)
@@ -175,7 +175,7 @@
 
 ### Veredicto
 Módulo 145 (Diseño de Experiencia): mantiene estado 🟡; 15 [?] justificados (fase jugable M114/M138+, telemetría M105). Reflejado en CHECKLIST-GLOBAL.md, ESTADO-PARALELO.md y DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md. Log 204.
-**Totales:** 105 items - Completados: 87 - Pendientes: 0 - No resueltos: 18.
+**Totales:** 105 items - Completados: 90 - Pendientes: 0 - No resueltos: 15. (Hy3 2026-10-12: 3 [?] promovidos a [x] por Patrón D — evidencia real en operativa/player-journey.md §1/§3 y metrics.md §1; 87→90, 18→15.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 105 [x] / 0 [ ] / 0 [?].
