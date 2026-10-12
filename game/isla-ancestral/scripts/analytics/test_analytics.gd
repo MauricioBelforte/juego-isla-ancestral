@@ -15,8 +15,16 @@
 # NOTA: el test usa el autoload real y limpia user://analytics al final.
 extends SceneTree
 
+## ── Guardián anti-falso-verde (regla del proyecto) ──────────────────
+## La suite no puede pasar "en verde" si corre menos checks que los que
+## realmente ejercita. Piso MEDIDO en corrida real (M104: 24 checks).
+const CHECKS_MINIMOS: int = 24
+## Además debe cerrar sus 24 verificaciones (cada _check es un bloque).
+const BLOQUES_MINIMOS: int = 24
+
 var _fallos := 0
 var _checks := 0
+var _bloques: int = 0
 var _ad = null
 
 func _initialize() -> void:
@@ -108,13 +116,22 @@ func _ejecutar() -> void:
 	_limpiar_archivos()
 
 	print("=== Resumen: %d checks, %d fallos ===" % [_checks, _fallos])
+	# ── Guardián anti-falso-verde ─────────────────────────────────────────
+	# Un abort a mitad de camino (autoload ausente, excepción) deja la suite
+	# con pocos checks: sin este piso pasaba por "OK" sin haber verificado nada.
+	print("=== RESUMEN: %d checks, %d fallos, %d bloques ===" % [_checks, _fallos, _bloques])
 	if _fallos > 0:
 		print("FALLOS DETECTADOS"); quit(1)
-	else:
-		print("ANALYTICS M104 OK"); quit(0)
+	if _checks < CHECKS_MINIMOS or _bloques < BLOQUES_MINIMOS:
+		print("RESULTADO: FALLO (suite incompleta: %d checks de %d, %d bloques de %d)" % [
+			_checks, CHECKS_MINIMOS, _bloques, BLOQUES_MINIMOS])
+		quit(1)
+	print("RESULTADO: PASS (%d checks, %d bloques)" % [_checks, _bloques])
+	quit(0)
 
 func _check(nombre: String, cond: bool) -> void:
 	_checks += 1
+	_bloques += 1
 	if cond:
 		print("  [OK] %s" % nombre)
 	else:

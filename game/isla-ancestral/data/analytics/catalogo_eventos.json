@@ -1,0 +1,24 @@
+{
+  "fuente": "M104 — Catálogo de eventos de analytics",
+  "version": "1.0",
+  "eventos": [
+    {"id": "sesion_inicio", "categoria": "sesion", "datos": ["timestamp", "duracion_previa"], "anotado": true},
+    {"id": "sesion_fin", "categoria": "sesion", "datos": ["timestamp", "duracion_total"], "anotado": true},
+    {"id": "pausa", "categoria": "sesion", "datos": ["timestamp", "motivo"], "anotado": true},
+    {"id": "reanudacion", "categoria": "sesion", "datos": ["timestamp"], "anotado": true},
+    {"id": "area_visitada", "categoria": "movimiento", "datos": ["zona_id", "duracion_s"], "anotado": true},
+    {"id": "fast_travel", "categoria": "movimiento", "datos": ["origen_id", "destino_id"], "anotado": true},
+    {"id": "feature_usada", "categoria": "feature", "datos": ["tipo", "contexto"], "anotado": true},
+    {"id": "crafting", "categoria": "feature", "datos": ["receta_id", "resultados"], "anotado": true},
+    {"id": "compra", "categoria": "feature", "datos": ["item_id", "precio"], "anotado": true},
+    {"id": "venta", "categoria": "feature", "datos": ["item_id", "precio"], "anotado": true},
+    {"id": "pescar", "categoria": "feature", "datos": ["zona", "resultado"], "anotado": true},
+    {"id": "error", "categoria": "critico", "datos": ["tipo", "mensaje_corto"], "anotado": true},
+    {"id": "crash", "categoria": "critico", "datos": ["stack_hash", "vers_build"], "anotado": true},
+    {"id": "config_cambio", "categoria": "config", "datos": ["clave", "anterior", "nuevo"], "anotado": true},
+    {"id": "tempo", "categoria": "sesion", "datos": ["segundos_acumulados"], "anotado": true}
+  ],
+  "politica_retencion_dias": 90,
+  "agregacion_dias": 30,
+  "overhead_budget_pct": 1.0
+}
