@@ -96,10 +96,10 @@
 - [x] Ícono del jugador centrado con rotación fija (menos cinetosis, M58) [S]
 - [x] Mostrar POIs relevantes (pueblo, templos, accesos a islas) [S]
 - [x] Ocultable con una acción y desde configuración [S]
-- [ ] Sin re-render por frame: solo al cambiar chunk, POI o ratio [M]
+- [ ] Sin re-render por frame: solo al cambiar chunk, POI o ratio [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): el redibujado es event-driven, no incondicional por frame — `minimap_widget.gd:12-21` (`set_jugador`/`set_rotacion` → `_tex_changed` → `queue_redraw` solo al cambiar posición/rotación). Pero el diseño actual dibuja el punto del jugador en `_draw` (`:26`), por lo que se redibuja al moverse el jugador (no "solo al cambiar chunk/POI/ratio" como pide el ítem literal). **Decisión de diseño pendiente** (dueño M53): ¿el punto del jugador sigue al jugador (redibujo por movimiento) o solo se actualiza con chunk/POI/ratio?
 - [x] Diferenciación por forma y color para daltonismo (M58) [S]
 - [ ] Test de rendimiento del minimapa con el mundo voxel cargado [M]
-- [ ] Integración con el mapa completo M54 (acceso desde el minimapa) [M]
+- [ ] Integración con el mapa completo M54 (acceso desde el minimapa) [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): M54-Mapa está en **133/177 (44 `[ ]`)** — el mapa completo (Explorer con niebla, viajes M69, marcadores dinámicos) está documentado en `03-Diseno.md` pero NO implementado (ver `DOCUMENTACION/54-Mapa/plan-actual/05-Checklist.md`). La textura del minimapa sí la genera M54 (F.L95 `[x]`). **Bloqueado por M54** (dueño M54): integrar cuando el mapa completo exista.
 
 ## G. Tooltips (8)
 
@@ -118,25 +118,27 @@
 - [x] Hover de botones con cambio suave de color y sonido leve [S]
 - [x] Click y confirm con sonido de confirmación corto [S]
 - [x] Acción inválida con sonido suave no alarmante y texto amable [S]
-- [x] Toasts con icono y SFX por tipo (obtención, evento, misión) [M]
+- [?] Toasts con icono y SFX por tipo (obtención, evento, misión) [M] — **FALSO VERDE confirmado 2026-10-12 (Ling 3.1 Flash, msg 60; aceptado por director msg 61):** NotificationService es **visual-only** (0 SFX en 203 líneas; el test H.9 `test_m53_no_redundancia.gd:45-53` asserta que `push()` NO crea AudioStreamPlayer) y los emisores (`achievement_service.gd:248-267` M72 logros, `collection_registry.gd:111-123` M37 museo) emiten `ui.notify` **sin SFX**. El icono sí existe (`_get_type_icon`); el SFX no. Re-escopear: "Toasts con icono por tipo; SFX por canal audio separado — dueño M91/FeedbackDirector". Correlato: **BUG-133 RESUELTO 2026-10-12** (Ling 3.1 Flash, encargo director msg 71, Log 1723): `crafting_feedback.gd:114-122` `_notificar()` ahora usa `notif.push({"text":…, "type": <ToastType>, "icon": tipo})` — los toasts de crafting SÍ se muestran (test `test_m16_crafting_toast.gd` 9/0 EXIT 0; regresión `test_crafting.gd` 0/0). El SFX del toast sigue sin existir (servicio visual-only por diseño) — el re-escopo de H.L121 (SFX por canal audio separado) sigue pendiente, dueño M91/FeedbackDirector.
 - [ ] Feedback visual de colocación, cosecha y compra (Tween 120 ms) [M]
 - [ ] Vibración háptica leve opcional en gamepad (M57, ajustable en M58) [M]
 - [x] Ajuste global del feedback (volumen UI en M91, háptica en M58) [S]
 - [x] Ningún flash ni parpadeo por defecto (modo sin flashes de M58) [S]
-- [ ] Test de no redundancia: nunca sonido + visual + toast para la misma acción [M]
+- [ ] Test de no redundancia: nunca sonido + visual + toast para la misma acción [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash, estática): los 3 servicios están separados por canal por diseño — UIFeedback (`ui_feedback.gd`) solo SFX; FeedbackDirector (`feedback_director.gd`) solo capas de audio (las recetas de `feedback_recetas.json` son stacks de SFX tipo ["crack","roca","eco"], sin capas visuales/toast); NotificationService (`notification_service.gd`) solo toast visual (`:92-138` `_spawn_node` NO reproduce SFX — docstring `:6` corregido por BUG-130 (msg 58: "el SFX lo reproduce el emisor"); drift con H.L121 — **degradado a `[?]` 2026-10-12** (falso verde: ni el servicio ni los emisores reproducen SFX — msg 60, aceptado msg 61)). No hay guard central que impida la triple canal (la decisión final depende de los emisores). **Pendiente** (dueño M53/M44): test en runtime o guard de no-triple-canal; corregir docstring/H.L121.
 
 ## I. ThemeUx y consistencia cozy (10)
 
-- [x] Crear theme_ux.tres con paleta pastel (fondo arena, acento ocre, texto marrón) [S]
-- [x] Crear style_factory con panel_rounded, button_cozy y focus_box [S]
+- [?] Crear theme_ux.tres con paleta pastel (fondo arena, acento ocre, texto marrón) [S]
+ — DEGRADADO 2026-10-12 (atria-dawn-s2 QA): archivo NO existe en disco.
+- [?] Crear style_factory con panel_rounded, button_cozy y focus_box [S]
+ — DEGRADADO 2026-10-12 (atria-dawn-s2 QA): archivo NO existe en disco.
 - [x] Usar Nunito para cuerpo y Fredoka One para títulos (M88) [S]
 - [x] Jerarquía tipográfica H1 32, H2 24, H3 20, BODY 16, SMALL 12, MICRO 10 [S]
 - [x] StyleBoxFlat redondeado (radius 12-16) en paneles y botones [S]
 - [x] Estados hover, pressed, disabled y focus diferenciados por forma y color [S]
 - [x] Aplicar ThemeUx como tema global en runtime [M]
-- [ ] Verificar legibilidad AA en todas las combinaciones de color [M]
-- [ ] Verificar coherencia visual entre todas las capas (un solo lenguaje) [M]
-- [ ] Revisar textos con locales largos (alemán) sin cortes (M87) [M]
+- [x] Verificar legibilidad AA en todas las combinaciones de color [M] — RESUELTO 2026-10-12 (Ling 3.1 Flash, takeover M53): test headless `test_m53_wcag.gd` **17 checks / 0 fallos / EXIT 0** calcula el ratio WCAG (luminancia relativa) de todas las combinaciones definidas en código: paleta base (TEXT_DARK/BG_ARENA **10.4:1** AAA, /HOVER **8.6:1** AAA, /PRESSED **6.6:1** AA, /DISABLED **4.65:1** AA, /HIGHLIGHT_GOLD **6.7:1** AAA), alto contraste (0.10,0.05,0.02)/arena **15.4:1**, créditos normal + alto contraste, y paneles oscuros de servicio: tooltip título **8.5:1** / cuerpo **12.5:1**, toast icono **8.5:1** / texto **12.5:1** (sobre 0.15,0.12,0.10). El diálogo usa panel claro (dialog_layer.gd:73 = 0.96,0.92,0.86 → TEXT_DARK **10.9:1**). Documentado: ACCENT_OCRE como texto sobre arena NO es AA (2.46:1) — por eso no se usa como color de texto en modo normal. **Bug corregido**: el toast heredaba TEXT_DARK del tema global sobre su panel oscuro = **1.26:1 (ilegible)**; fix en notification_service.gd con overrides claros.
+- [ ] Verificar coherencia visual entre todas las capas (un solo lenguaje) [M] — HALLAZGO DOCUMENTADO 2026-10-12 (Ling 3.1 Flash; origen: lote M128 msg 49): la paleta UI de `theme_ux.gd:13-20` (pastel: arena 0.95/0.90/0.82, ocre 0.72/0.55/0.30, dorado 0.85/0.72/0.35) **NO es la paleta de marca M128 §3** (Azul Bosque / Dorado Anciano / Blanco Perla) — desalineación UI↔marca. Las capas de servicio (tooltip `tooltip_service.gd:196-203`, toast `notification_service.gd:118-124`) usan su propia paleta cálida oscura (0.15,0.12,0.10) coherente entre sí pero no con el tema base. **Dueño M45/M46/M53**: alinear paleta UI con marca; verificación visual requiere M154 (vía de visión).
+- [ ] Revisar textos con locales largos (alemán) sin cortes (M87) [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): la infraestructura anti-cortes SÍ existe — autowrap en tooltips (`tooltip_service.gd:190` `AUTOWRAP_WORD_SMART`), toasts (`notification_service.gd:113`) y diálogos (D.L71 "caja con autowrap"). Pero el **locale alemán no existe**: `scripts/ui/i18n/` solo tiene `ui_es.po`/`ui_en.po` (04-Codigo.md L43). **Bloqueado por M87** (dueño M87: agregar locale de; luego test de longitud).
 
 ## J. Accesibilidad M58 (10)
 
@@ -145,16 +147,16 @@
 - [x] Integrar high_contrast con contraste AA y bordes reforzados [M]
 - [x] Integrar modo daltonismo con formas y texturas además del color [M]
 - [x] Integrar reduce_motion desactivando tweens y transiciones [M]
-- [ ] Integrar tamaño, opacidad y fondo de subtítulos [M] — Log 1118 (agnes-3-flash): **tamaño + fondo + activado integrados** vía M58 RF8 en `SubtituloOverlay` (tamano→px 14/18/24, fondo→alpha, activado→visibilidad; test 39/0). **Opacidad: M58 RF8 no expone campo `opacidad`** (`get_subtitulos()` solo devuelve {activado,tamano,fondo}) → no se integró lo que no existe (anti-falso-verde); queda **decisión M58** (agregar campo) o se fija el alpha por defecto (0.45, ya aplicado).
+- [ ] Integrar tamaño, opacidad y fondo de subtítulos [M] — Log 1118 (agnes-3-flash): **tamaño + fondo + activado integrados** vía M58 RF8 en `SubtituloOverlay` (tamano→px 14/18/24, fondo→alpha, activado→visibilidad; test 39/0). **Opacidad: M58 RF8 no expone campo `opacidad`** (`get_subtitulos()` solo devuelve {activado,tamano,fondo}) → no se integró lo que no existe (anti-falso-verde); queda **decisión M58** (agregar campo) o se fija el alpha por defecto (0.45, ya aplicado). **Verificado 2026-10-12 (Ling 3.1 Flash):** `accesibilidad_manager.gd:263-266` — `get_subtitulos()` devuelve exactamente `{activado, tamano, fondo}`, sin campo `opacidad` (confirmación en código del bloqueo).
 - [ ] Integrar indicadores visuales de sonido (toast visual de eventos auditivos) [M]
 - [x] Navegación completa por foco sin ratón (con gamepad y teclado) [S]
 - [x] Velocidad de texto y pausa de diálogo según M58 [S]
-- [ ] Test con combinaciones extremas: escala 1.5 + alto contraste + sin movimiento [C]
+- [x] Test con combinaciones extremas: escala 1.5 + alto contraste + sin movimiento [C] — RESUELTO 2026-10-12 (Ling 3.1 Flash): test headless `test_m53_extremos.gd` **8 checks / 0 fallos / EXIT 0** aplica las tres a la vez (set_ui_scale(1.5) + ensure_contrast + reduce_motion) y verifica que el tema global se aplica con escala 1.5 sin errores sobre árbol poblado. BUG-048 documentado: el kill de tweens de apply_reduce_motion es no-op en 4.7 (Tween es RefCounted, atria-dawn Log 983).
 
 ## K. Integración con módulos (12)
 
 - [x] UIManager suscrito al Action Layer de M57 (acciones transversales) [M]
-- [ ] Prompts dinámicos por dispositivo (keyboard, xbox, playstation, generic) [M]
+- [ ] Prompts dinámicos por dispositivo (keyboard, xbox, playstation, generic) [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): `action_prompt_overlay.gd` (26 líneas) es un renderer de strings genérico (`set_prompts` → Labels en posición fija) — **NO tiene mapeo por dispositivo** (sin `Input` get_joy/get_key, sin layouts keyboard/xbox/playstation/generic). Drift: B.L46 `[x]` afirma "prompts dinámicos por dispositivo" pero el código no lo implementa (el fix BUG-091 de 2026-10-04 citaba L106 que ya no existe — el archivo fue simplificado). **Dueño M57/M53**: implementar generación de prompts por dispositivo.
 - [ ] Remapeo de M57 re-lee las etiquetas de prompts automáticamente [M]
 - [x] M58 settings_changed re-aplica el tema sin reiniciar [M]
 - [x] M87 cambio de idioma recarga fuentes y textos en vivo [M]
@@ -168,29 +170,29 @@
 
 ## L. Edge cases (12)
 
-- [ ] Inventario abierto + evento de diálogo: la capa se encola y espera [M]
-- [ ] Diálogo abierto + request de inventario: modal simple no compite, se encola [M]
+- [x] Inventario abierto + evento de diálogo: la capa se encola y espera [M] — RESUELTO 2026-10-12 (Ling 3.1 Flash): test headless `test_m53_capas.gd` **14 checks / 0 fallos / EXIT 0** — L1: inventario (MODAL_SIMPLE) abierto + evento de diálogo (MODAL_FULL) se apila sobre él (inventario sigue visible, diálogo en tope, mundo pausado); al cerrar el diálogo el inventario queda operativo y el mundo se reanuda.
+- [x] Diálogo abierto + request de inventario: modal simple no compite, se encola [M] — RESUELTO 2026-10-12 (Ling 3.1 Flash): test headless `test_m53_capas.gd` **14 checks / 0 fallos / EXIT 0** — L2: diálogo (MODAL_FULL) abierto + request de inventario (MODAL_SIMPLE) se apila sin competir (top = inventario); close_top purga el simple (T-M1) y el diálogo sigue abierto.
 - [x] Cierre rápido de capas (doble pulsación) no rompe la pila [M]
 - [x] Foco perdido por control eliminado: focus_first de respaldo + log DOM-UI [M]
 - [x] Alt-tab y pérdida de foco de ventana: al volver, focus_first de la capa visible [M]
 - [ ] Cambio de resolución M90 con capas abiertas: sin cortes ni controles fuera de pantalla [C]
 - [ ] Ratios 16:9 y 16:10 verificados en todas las pantallas [M]
 - [x] Escala de UI extrema (1.5) sin solapamientos entre widgets [M]
-- [ ] Listas largas (500 items) con scroll por foco sin glitches [M]
+- [x] Listas largas (500 items) con scroll por foco sin glitches [M] — RESUELTO 2026-10-12 (Ling 3.1 Flash): test headless `test_m53_lista_larga.gd` **7 checks / 0 fallos / EXIT 0** monta 500 botones enfocables en ScrollContainer, recorre la lista completa por foco direccional (0 glitches) y verifica el wrap-around circular (500 avances → vuelve al Item_0000). **Bug corregido**: `menu_navigator.gd:72` usaba `wrapi(next_idx, 0, focusables.size() - 1)` — `wrapi` de Godot 4.7 tiene el parámetro max EXCLUSIVO (range = max−min), así que el wrap ciclaba por [0, size−2] y **el último control de cualquier lista era inalcanzable** por navegación direccional (con 2 items, el segundo jamás se enfocaba). Fix: `wrapi(next_idx, 0, focusables.size())`.
 - [x] Notificaciones encadenadas (10 seguidas) sin desbordes de cola [S]
 - [x] Abrir configuración desde pausa y volver sin perder el foco de pausa [M]
 - [ ] Pausa durante transición de escena (M63) sin capas colgadas [C]
 
 ## M. Optimización y rendimiento (8)
 
-- [ ] Canvas merge por capa para minimizar draw calls [M]
+- [ ] Canvas merge por capa para minimizar draw calls [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): la UI usa MÚLTIPLES CanvasLayer (UIRoot CanvasLayer 100 + HUDScreen + TooltipService + NotificationService + ActionPromptOverlay, todos `extends CanvasLayer`) — no hay merge de canvas. La optimización requiere medición con Profiler (M61) antes/después. **Dueño M53/M61**: consolidar capas bajo un CanvasLayer y medir draw calls.
 - [x] Labels con caché de texto en refresh de widgets [M]
-- [ ] Minimapa con textura caché sin regeneración por frame [M]
-- [ ] Tooltips con pool sin allocaciones en el flujo caliente [M]
+- [x] Minimapa con textura caché sin regeneración por frame [M] — RESUELTO 2026-10-12 (Ling 3.1 Flash, takeover M53): verificado en código — `minimap_widget.gd:4` (`var _tex: Texture2D` cache), `:8-10` (`set_textura` la setea una vez, generada por M54), `:23-26` (`_draw` solo dibuja la caché con `draw_texture_rect`, NUNCA regenera la textura). Los redibujos son event-driven (`set_jugador`/`set_rotacion` → `queue_redraw`), no por frame; la textura en sí no se regenera.
+- [x] Tooltips con pool sin allocaciones en el flujo caliente [M] — RESUELTO 2026-10-12 (Ling 3.1 Flash): verificado en código — `tooltip_service.gd:14` (`var _pool: Array[PanelContainer]`), `:78-81` (`hide_tooltip` devuelve el tooltip activo al pool), `:170-172` (`_get_from_pool` reutiliza del pool; solo alloca si el pool está vacío). Duplicado de G.L109 (ya `[x]`) — misma implementación; Patrón D resuelto con evidencia.
 - [x] Capas modales en pausa no repintan el HUD por frame [M]
 - [x] Presupuesto UI menor o igual a 8% del frame medido con Profiler (M61) [C]
 - [x] Verificación de draw calls en escena poblada (pueblo + HUD completo) [M]
-- [ ] Font subsetting por idioma (M88) para evitar desperdicio de memoria [M]
+- [ ] Font subsetting por idioma (M88) para evitar desperdicio de memoria [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): `theme_ux.gd:193-208` `_try_load_font` carga las TTF completas con `load_dynamic_font` **sin subsetting** (no se usa `FontFile` con subset por Unicode range) — las 3 fuentes (Nunito Regular/Bold, FredokaOne) cargan glifos completos. **No implementado** (dueño M88): subsetting por idioma requiere definir ranges Unicode por locale.
 
 ## N. Documentación, QA y cierre (10)
 
@@ -208,11 +210,17 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 165 ítems — Completados: 139 — Pendientes: 26 — No resueltos: 0.
+**Totales:** 165 ítems — Completados: 143 — Pendientes: 19 — No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 27 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+> **Lote de auditoría M53 (Ling 3.1 Flash / Kilo Code, 2026-10-12, takeover por stall):** 2 flips con evidencia en disco (L188 minimapa textura caché `minimap_widget.gd:4/8-10/23-26`; L189 tooltip pool `tooltip_service.gd:14/78-81/170-172` — duplicado de G.L109, Patrón D) + 10 auditorías documentadas con cita `archivo:línea` y dueño (L99, L102, L126, L137 parcial con cálculo WCAG, L138, L139, L148, L157, L186, L193). Conteo: 141 [x] / 24 [ ] / 0 [?].
+
+> **Lote de tests verdes M53 (Ling 3.1 Flash / Kilo Code, 2026-10-12):** 5 flips con tests headless verdes — L137 (I.8, `test_m53_wcag.gd` 17/0: paleta base + alto contraste + créditos + paneles oscuros tooltip/toast), L152 (J.10, `test_m53_extremos.gd` 8/0), L171+L172 (L.1/L.2, `test_m53_capas.gd` 14/0), L179 (L.9, `test_m53_lista_larga.gd` 7/0). **2 bugs corregidos**: (1) `menu_navigator.gd:72` off-by-one de `wrapi` (max exclusivo en Godot 4.7 — el último item de toda lista era inalcanzable por navegación direccional); (2) `notification_service.gd` toast ilegible con tema global (label sin `font_color` override heredaba TEXT_DARK sobre panel oscuro = 1.26:1; fix: overrides claros 0.92,0.88,0.82 texto / 0.85,0.72,0.35 icono). Conteo: 146 [x] / 19 [ ] / 0 [?].
+
+> **Degradación H.L121 (Ling 3.1 Flash / Kilo Code, 2026-10-12, msg 60 — aceptada por director msg 61):** H.L121 `[x]` "Toasts con icono y SFX por tipo" era **falso verde** — verificación de los 3 caminos de toast: `notification_service.gd` (203 líneas) = 0 SFX (visual-only por diseño; test H.9 asserta `push()` NO crea AudioStreamPlayer); emisores `achievement_service.gd:248-267` (M72) y `collection_registry.gd:111-123` (M37) emiten `ui.notify` sin SFX. El icono sí existe (`_get_type_icon`); el SFX no. H.L121 → `[?]` (re-escopear: "Toasts con icono por tipo; SFX por canal audio separado — dueño M91/FeedbackDirector"). Correlato: **BUG-133** (`crafting_feedback.gd:119` llama `show_notification()` inexistente → toasts de crafting nunca se muestran; fix sugerido `notif.push(...)`). Conteo: 145 [x] / 19 [ ] / 1 [?].
 
 > **Actualización agnes-3-flash / Kilo Code (Log 1118, 2026-09-20):** D.7 pasó `[ ]`→`[x]`
 > (SubtituloOverlay M58 RF8, test 39/0). Conteo real actual: 132 [x] / 26 [ ] / 0 [?].

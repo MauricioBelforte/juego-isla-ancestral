@@ -68,8 +68,8 @@ static func wrap_focus(layer: UILayer, direction: Vector2i) -> void:
 				next_idx = i
 				break
 
-	# Wrap-around
-	next_idx = wrapi(next_idx, 0, focusables.size() - 1)
+	# Wrap-around (wrapi usa max EXCLUSIVO en Godot 4.7: range = max - min)
+	next_idx = wrapi(next_idx, 0, focusables.size())
 
 	if next_idx >= 0 and next_idx < focusables.size():
 		focusables[next_idx].grab_focus()

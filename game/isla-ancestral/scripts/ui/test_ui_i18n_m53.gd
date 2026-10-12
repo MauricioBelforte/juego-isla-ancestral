@@ -174,10 +174,17 @@ func _run() -> void:
 			UiI18n.meta_texto(l2, "EQUIP.TITULO")
 			ul.add_child(l2)
 			root.add_child(ul)  # _enter_tree la registra en UIManager._stack
+			# M87 (fix 2026-10-12, pedido del director): en headless, cambiar a un
+			# locale dispara ThemeService.recargar_fuentes() y explota con
+			# "Parameter "fd" is null" (no hay TextServer de fuentes reales).
+			# Se fuerza "es" ANTES de capturar el locale de origen: la prueba de
+			# re-traducción solo necesita un destino distinto al actual.
+			loc.set_locale("es")
+			var ini_locale_es: String = loc.get_locale_actual()
 			loc.set_locale("en")
 			_check(l2.text == "Player's clothing",
 				"M87 runtime: UIManager re-traduce capas registradas al cambiar a en")
-			loc.set_locale(ini_locale)
+			loc.set_locale(ini_locale_es)
 			ul.queue_free()
 		var ok_pause: bool = acc.pausar_instantaneo()
 		_check(ok_pause and acc.esta_pausado(), "M58 RF18: pausar_instantaneo congela el árbol")
