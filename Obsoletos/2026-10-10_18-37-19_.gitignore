@@ -1,0 +1,251 @@
+# ─────────────────────────────────────────────
+# Isla Ancestral — .gitignore (Godot 4.x)
+# ─────────────────────────────────────────────
+
+# =============================================
+# Godot — Archivos generados
+# =============================================
+.godot/
+*.import
+*.translation
+
+# Godot — metadatos de import sueltos
+*.uid
+
+# Godot — addons (se instalan via AssetLib, no se versionan)
+# Excepcion: el addon voxel SI se versiona (decision del fundador, Log 1312):
+# CI necesita el .so de Linux o el linter y las suites voxel-dependientes no compilan.
+# El patron con barra final (addons/) impide re-incluir; por eso se excluye el
+# CONTENIDO (addons/*) y se negativiza solo este subdirectorio.
+game/isla-ancestral/addons/*
+!game/isla-ancestral/addons/zylann.voxel/
+# Excepcion: el framework de testing gdUnit4 SI se versiona (decision del
+# fundador, Log 1368): sin el, CI es irreproducible (los 4 tests que extienden
+# GdUnitTestSuite no resuelven el extends) y M83 cuenta mit=1 cuando hay 2
+# addons MIT. Licencia MIT verificada (Copyright (c) 2023 Mike Schulze).
+!game/isla-ancestral/addons/gdUnit4/
+
+# =============================================
+# Builds
+# =============================================
+# Anclado a la raiz (fix atria-dawn-s2 2026-10-04, Log 1276): el patron sin
+# ancla `build/` matcheaba cualquier carpeta build/ del arbol, incluyendo
+# game/isla-ancestral/scripts/build/ (tests M116/M117 + el autoload
+# BuildConfigManager) y game/isla-ancestral/data/build/ (build_targets.json,
+# leido por ese autoload). Esos archivos DEBEN versionarse; solo el directorio
+# de salida de builds de la raiz es lo que se quiere ignorar.
+/build/
+/Builds/
+
+# =============================================
+# IDE / Editor
+# =============================================
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+
+# =============================================
+# Sistema operativo
+# =============================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.tmp
+.DS_Store
+
+# =============================================
+# Python (scripts de automatización)
+# =============================================
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# =============================================
+# Node.js (MCP servers)
+# =============================================
+node_modules/
+
+# =============================================
+# Blender — backups del editor
+# =============================================
+*.blend1
+
+# =============================================
+# Agentes y configuraciones locales
+# =============================================
+.agents/
+.kilo/
+.gdskills/
+.workbuddy-ai/
+.claude/
+.pre-commit-config.yaml
+
+# =============================================
+# Capturas de pantalla (no versionar)
+# =============================================
+**/capturas/
+
+# =============================================
+# Herramientas MCP — repos embebidos
+# =============================================
+tools/mcp/godot-mcp/
+tools/mcp/.venv/
+
+# =============================================
+# Respaldos y temporales
+# =============================================
+*.bak-*
+Obsoletos/
+scripts/backups/
+validate_*.bat
+
+# =============================================
+# Archivos sueltos de raíz (temporales de agentes)
+# =============================================
+_capture_tier_c.py
+_fix_piramide2.py
+_fix_spawn_pradera.py
+fix_test_l71.py
+check_godot.bat
+run_m105.ps1
+_gen_aprobado.gd
+_gen_ideal.gd
+_main_aprobado.gd
+isla-modelo.jpg
+isla-modelo-2.jpg
+isla-modelo-3.jpg
+paleta-propuesta-isla.png
+# `docs/` (raíz) SÍ se versiona: material complementario de M98/M101/M102/M111/M114.
+# Ver política en AGENTS.md §3. Solo se ignora el docs/ interno del proyecto Godot.
+game/isla-ancestral/docs/
+# `.github/` (raíz) SÍ se versiona: plantillas de issues y workflows de CI (M102).
+tmp_*.py
+tmp_*.txt
+corregir_logs.py
+analizar_logs.py
+recover_estado*.py
+patch_m74*.py
+mark_m74_checklist.py
+revert_m74.py
+renombrar_logs.py
+renombrados_logs.json
+tmp_orig_guide.md
+tmp_orig_s6.txt
+fix_*.py
+!scripts/fix_encoding.py
+verify_*.py
+gen_*.py
+!tools/quality/gen_colector_sintaxis.py
+
+# Excepcion: scripts/fix_encoding.py NO es un script desechable. Es la
+# herramienta permanente de saneamiento de codificacion del proyecto
+# (documentada en AGENTS.md 28.1 y Logs 507 / 852). Debe versionarse.
+
+# Excepcion: el mismo caso, pero por movimiento de archivos. El Log 933
+# (MiMo, 2026-09-16) movio estas herramientas de la raiz a scripts/ por
+# considerarlas utiles. Los patrones de arriba NO tienen barra inicial, asi
+# que las siguen ignorando en su nueva ubicacion: git add las salta en
+# silencio y no se pueden versionar. Deben versionarse, como fix_encoding.py.
+!scripts/analizar_logs.py
+!scripts/check_godot.bat
+!scripts/validate_m13.bat
+!scripts/validate_m39.bat
+!scripts/validate_tscn.bat
+
+# Excepcion (M52 iter. 6, Log 1005): `tools/vfx/gen_vfx_catalog.py` NO es un
+# generador desechable. Es la FUENTE DE VERDAD del dataset
+# `game/isla-ancestral/data/vfx/vfx_catalog.json`: regenerarlo es determinista y
+# `--check` corre en CI para detectar ediciones a mano del JSON. Sin versionarlo,
+# el catalogo queda sin procedencia. El patron `gen_*.py` de la linea 129 lo
+# ignoraba en silencio (misma familia que el caso de arriba).
+!tools/vfx/gen_vfx_catalog.py
+
+# Temporales de agentes (raíz del proyecto)
+_tmp_*.txt
+_tmp_*.py
+bloquear_m23.py
+reservar_log.ps1
+postlaunch_checklist.json
+
+# Salidas de Godot headless que los agentes tiran en la raíz con prefijo `_`:
+# `_lint.txt`, `_m112*.txt`, `_m116_out.txt`, `_proto.txt`, `_col*.txt`,
+# `_inv_{out,err}.txt`, `_moji.txt`. Se acumularon 15 archivos / 51,5 MB porque
+# la regla de arriba solo cubría `_tmp_*`. Patrón general en vez de una entrada
+# por archivo, para que no vuelva a pasar (SB-07, Log 1296; el director autorizó
+# el borrado en el canal 14). Todos eran UNTRACKED y regenerables: son stdout de
+# `godot --headless`, no fuentes.
+# Si alguna vez un `_*.txt` llegara a ser fuente, hay que versionarlo con `!`.
+_*.txt
+_moji.txt
+
+# Duplicados de raíz (ya en PAPELERA/ o scripts/)
+_qa_note.py
+broken_log_refs.txt
+count_lists.ps1
+data.drift.json
+duplicates_scan.txt
+duplicates_summary.txt
+duplicates_with_dates.txt
+log_references_scan.txt
+logs_global_order.txt
+renumber_map.json
+renumber_map_v2.json
+renumber_map_v3.json
+sync_actuals.ps1
+POSTLAUNCH_CHECKLIST.md
+
+# Temporales de game/
+game/isla-ancestral/_probe_col.gd
+game/isla-ancestral/reservar_log.ps1
+
+# Build output
+out/
+
+# Imágenes de prueba
+tools/mcp/blender-mcp/scripts-prueba/test_vision.png
+
+# =============================================
+# Assets pesados de Blender (usar Git LFS si se necesitan)
+# =============================================
+*.blend
+
+# =============================================
+# EXCEPCIONES — carpetas que SÍ se versionan
+# =============================================
+!Logs/
+!Obsoletos/
+!DOCUMENTACION/
+
+# =============================================
+# Residuos de limpieza (Log 853) — NO versionar
+# =============================================
+# El DLL clonado de libvoxel: binario de ~7 MB, 23 copias identicas que
+# Godot dejo al recargar en caliente. Se guarda UNA copia local como respaldo
+# por si el proyecto no abre; al repo no va.
+Obsoletos/libvoxel-TMP-*/
+# Scratch temporal mudado desde la raiz (_tmp_*, patch_m74_*, _gen_*, ...).
+# Se conserva en disco por si alguien lo necesita, no en el historial.
+Obsoletos/raiz-temporales-*/
+
+# ── Secrets y variables de entorno (M106 T-007) ─────────────────────────────
+# NUNCA versionar archivos .env con secrets. Solo la plantilla .env.example sí.
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.key
+*.pem
+.secrets
+
+# Builds de exportacion (Godot): salidas de export_presets.cfg (web/windows).
+# No versionar binarios/PCK/WASM pesados (agregado 2026-10-09, mimo-v2.6-flash-free).
+game/build/

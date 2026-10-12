@@ -1,0 +1,246 @@
+**Modelo:** Deepseek V4 Flash
+**Plataforma:** OpenCode
+
+# 05-Checklist.md — Módulo 114: Playtest
+
+## 1. Problema y objetivos
+
+- [x] Documentar el problema del sesgo del equipo: el desarrollador no puede evaluar el tono cozy de su propio juego [S]
+- [x] Definir el objetivo primario del módulo: medir y mejorar la experiencia real de jugadores con sesiones de playtest [S]
+- [x] Establecer que el playtest complementa (no reemplaza) al QA técnico (M101) [S]
+- [x] Definir objetivos por etapa: prototipo (M137), pre-alpha (M139) y alpha (M140) [M]
+- [x] Establecer el principio de que el tono cozy es el criterio central de evaluación de todo hallazgo [S]
+- [x] Definir el alcance del módulo: qué incluye (sesiones, observación, encuestas, informes, iteración) y qué excluye (telemetría, bugs, balance) [M]
+- [x] Documentar las restricciones del proyecto indie: presupuesto reducido y herramientas gratuitas [S]
+- [x] Definir criterios de aceptación verificables del módulo: plantillas listas, métricas definidas, integraciones documentadas [M]
+
+## 2. RF — Planificación de rondas
+
+- [x] Definir el ciclo de ronda de playtest con 6 etapas: planificar, reclutar, ejecutar, analizar, priorizar, iterar [M]
+- [x] Establecer la frecuencia mínima: una ronda por hito de desarrollo cerrado [S]
+- [x] Definir ronda obligatoria al cierre del prototipo (M137) [S]
+- [x] Definir ronda por hito de la pre-alpha (M139) [S]
+- [x] Exigir una pregunta central accionable (una sola) por cada ronda [S]
+- [x] Definir plantilla de guía de sesión completada antes de empezar el reclutamiento [M]
+- [x] Definir tamaño de ronda: mínimo 3 jugadores, estándar 5-8 [M]
+- [x] Implementar la regla de saturación: 5 jugadores consecutivos con el mismo hallazgo confirman el problema [M]
+- [x] Definir composición de perfiles: cozy gamers, casuales y al menos un no jugador [M]
+- [x] Establecer timeline de sesión: briefing 5 min, juego libre 40 min, tareas 15 min, encuesta 10 min, entrevista 10 min [M]
+
+## 3. RF — Reclutamiento y preparación
+
+- [x] Definir canales de reclutamiento gratuitos: Discord, comunidades cozy, amigos del equipo [S]
+- [x] Redactar convocatoria de tester con criterios de exclusión (sin spoilers del roadmap, sin desarrollo de juegos) [M]
+- [x] Exigir firma de NDA antes de la primera sesion → KnownIssue no bloqueante DoD: politica documentada en 03-Diseno.md §2.1 (NDA required before session); ejecucion requiere accion humana (firma fisica/digital). Policy defined.
+- [x] Definir contenido mínimo del NDA: prohibición de divulgación de builds, mecánicas y grabaciones [M]
+- [x] Definir consentimiento informado de grabación (pantalla, audio, webcam opcional) [M]
+- [x] Documentar el derecho del tester a retirarse y solicitar borrado de datos [S]
+- [x] Establecer incentivo opcional y ético (gift card pequeña, créditos, early access) [S]
+- [x] Documentar que el incentivo no debe condicionar el feedback (se pide honestidad explícita) [S]
+- [x] Definir preparación de la build de testeo: guardados limpios pre-generados [M]
+- [x] Definir registro de la build testeada (hash/commit) en cada sesión [S]
+- [x] Verificar instalación de herramientas: OBS Studio, Google Forms, Discord, tablero de hallazgos [M]
+- [x] Definir manejo de datos personales según M80 (Legal/Privacidad): minimización y anonimización [M]
+
+## 4. RF — Sesiones guiadas
+
+- [x] Definir el rol del moderador en sesiones guiadas [S]
+- [?] Escribir el discurso de briefing estándar en español (5 minutos) → REVERTIDO por auditoría BUG-070 (atria-dawn, msg s3 #73, 2026-10-08): verbo `Escribir` + artefacto final inexistente (solo existe el outline en 03-Diseno.md L31 `briefing script outline`). El propio ítem admite `redaccion final requiere facilitador humano`. Conocido y visible (no inflación oculta), pero no cumple DoD estricta.
+- [x] Definir la técnica think-aloud y su instrucción al tester [S]
+- [x] Establecer regla de no ayuda: el moderador no da la solución salvo bloqueo absoluto [S]
+- [x] Definir la regla de los 10 segundos de silencio antes de intervenir [S]
+- [x] Registrar la reacción del jugador y no la opinión del moderador [S]
+- [x] Definir tareas guiadas opcionales por ronda (ej: plantar primer cultivo, vender 5 items) [M]
+- [x] Establecer puntos de control de preguntas en momentos clave (objetivo cumplido/fallido) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.9 (checkpoint questions policy); moments defined. Policy documented.
+- [x] Definir manejo del tester bloqueado: registrar el evento y ayudar solo al final [S]
+- [x] Definir duración máxima de sesión guiada: 80 minutos totales [S]
+- [x] Establecer que el moderador completa la hoja de observación en vivo con códigos [M]
+- [x] Definir cierre de sesión: agradecimiento, recordatorio de NDA y canal de contacto [S]
+
+## 5. RF — Sesiones libres
+
+- [x] Definir sesión libre: jugador solo con instrucciones mínimas escritas [S]
+- [x] Establecer distancia de observación: el equipo no interviene salvo emergencia técnica [S]
+- [x] Definir registro de pantalla continuo con OBS o stream privado de Discord [M]
+- [x] Definir instrucciones escritas estándar para el tester libre [S]
+- [x] Establecer que la sesión libre no incluye tareas guiadas salvo pedido explícito [S]
+- [x] Definir duración de sesión libre: 40-50 minutos de juego sin interrupciones [S]
+- [x] Medir si el tester sigue jugando al terminar el tiempo (indicador de disfrute) [M]
+- [x] Definir análisis de la grabación posterior con la misma hoja de observación [M]
+- [x] Establecer que la encuesta se aplica igual que en sesion guiada → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.10 (survey consistency); guided/free modes use same survey. Policy documented.
+- [x] Documentar la recomendación de usar sesiones libres como segunda ronda de cada hito [S]
+
+## 6. RF — Observación y registro
+
+- [x] Definir los códigos de observación: DUD, FRU, ABU, OVR, SAT, CAL, ERR, DLN, TRY, SKP [M]
+- [x] Documentar el significado de cada código con ejemplos en español → agnes-2.5-flash 2026-09-13: codigos documentados en 03-Diseno.md §2.11 (codebook with examples); ejemplo por codigo. Doc present.
+- [x] Definir columnas de la hoja de observación: tiempo, código, descripción, impacto en tono, nota [M]
+- [x] Definir escala de impacto en tono: de -5 (rompe la calma) a +1 (no afecta) [M]
+- [x] Establecer que cada evento se registra en menos de 5 segundos → agnes-2.5-flash 2026-09-13: SN documentado en 03-Diseno.md §2.12 (event logging <5s); RN3 alcanzable. SN satisfied.
+- [x] Definir registro de señales no verbales: suspiros, exclamaciones, postura, velocidad de mouse [M]
+- [x] Definir registro de pausas largas como indicador de parálisis de decisión [M]
+- [x] Establecer que el observador resume 3 momentos memorables por sesion → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.13 (observer summary 3 moments); rol del observador definido. Spec defined.
+- [x] Establecer que el observador anota al menos 1 cita textual del tester [S]
+- [x] Definir registro de datos de juego: objetivos completados, reinicios, items obtenidos [M]
+- [x] Definir registro de fallos técnicos con código ERR y su derivación a M102 [S]
+- [x] Establecer que las grabaciones se archivan como respaldo del análisis en vivo [M]
+- [x] Definir la re-observación de grabaciones para eventos perdidos en vivo [M]
+- [x] Establecer que el observador es distinto del moderador cuando el equipo lo permite [S]
+
+## 7. RF — Encuestas post-sesión
+
+- [x] Definir encuesta post-sesion aplicada dentro de las 2 horas posteriores a la sesion → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.14 (post-session survey window 2h); timing policy. Spec defined.
+- [x] Definir formulario en Google Forms con exportación automática a Google Sheets [M]
+- [x] Definir bloque de datos de sesión: alias, fecha, build, edad, experiencia cozy, horas semanales [S]
+- [x] Definir las 7 escalas Likert 1-5 de tono emocional (estrés, abrumamiento, aburrimiento, tranquilidad, disfrute, agencia, ganas de seguir) [M]
+- [x] Definir bloque de comprension con Likert 1-5 (supe qué hacer, entendí a dónde ir, la UI ayudó) → agnes-2.5-flash 2026-09-13: bloque disenado en 03-Diseno.md §2.15 (Likert comprehension block); 3 items estandarizados. Spec defined.
+- [x] Definir bloque cuantitativo de auto-reporte: objetivos, reinicios, items, tiempo total [M]
+- [x] Definir preguntas cualitativas de texto libre (lo que más gustó, lo que menos gustó, momentos destacados) → agnes-2.5-flash 2026-09-13: preguntas documentadas en 03-Diseno.md §2.16 (qualitative free-text questions); 3 preguntas abiertas. Spec defined.
+- [x] Definir pregunta de abandono emocional: "¿en qué momento quisiste dejar de jugar?" [S]
+- [x] Definir pregunta de retención: "¿jugarías 30 minutos más?" [S]
+- [x] Documentar la fórmula del índice de tono cozy en la plantilla de encuesta [M]
+- [x] Definir umbral de respuesta: mínimo 80% de testers completan la encuesta [S]
+- [x] Documentar que el lenguaje de las preguntas es accesible para no jugadores → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.3 (accessible language policy for surveys); nivel lectura 6° grado. Policy defined.
+
+## 8. RF — Informe de hallazgos
+
+- [x] Definir informe por ronda con resumen ejecutivo de 2 líneas [S]
+- [x] Definir sección de datos de ronda: fechas, jugadores, builds, materiales archivados [S]
+- [x] Definir tabla de hallazgos con ID único H-### → agnes-2.5-flash 2026-09-13: formato documentado en 03-Diseno.md §2.17 (findings table H-### ID); tracking system spec. Spec defined.
+- [x] Definir campos de hallazgo: título, evidencia, severidad (S1-S4), frecuencia, impacto en tono, módulo destino [M]
+- [x] Definir escala de severidad: S1 bloqueante, S2 mayor, S3 menor, S4 cosmético → agnes-2.5-flash 2026-09-13: escala documentada en 03-Diseno.md §2.18 (severity scale S1-S4); definiciones claras. Scale defined.
+- [x] Incluir el índice de tono cozy por jugador y el promedio de ronda [M]
+- [x] Incluir tendencia del índice entre rondas (historial acumulado) [M]
+- [x] Incluir citas textuales anonimizadas más reveladoras [S]
+- [x] Definir sección de derivaciones: issues de M102, comunicados a M93/M104 [M]
+- [x] Definir sección de seguimiento de fixes de rondas anteriores [M]
+- [x] Definir sección de lecciones de proceso para mejorar el propio método [S]
+- [x] Establecer que el informe se completa en menos de una semana tras la ronda [S]
+
+## 9. RF — Priorización e iteración de diseño
+
+- [x] Definir fórmula de prioridad: severidad x (frecuencia/total) x impacto en tono (valor absoluto) [M]
+- [x] Definir pesos de severidad: S1=10, S2=6, S3=3, S4=1 → agnes-2.5-flash 2026-09-13: pesos documentados en 03-Diseno.md §2.19 (severity weights); scoring algorithm spec. Weights defined.
+- [x] Establecer que los hallazgos S1 se priorizan por encima de todo [S]
+- [x] Establecer que un hallazgo que rompe el tono cozy supera a bugs funcionales menores [S]
+- [x] Definir protección de hallazgos positivos de alto impacto (criterio de regresión social) [M]
+- [x] Definir límite de 5 fixes comprometidos por ronda (realismo indie) [S]
+- [x] Definir que cada fix tiene responsable, módulo destino y ronda de verificación [M]
+- [x] Definir flujo de regresión social: retest del fix con jugadores nuevos en la ronda siguiente [M]
+- [x] Definir criterio de fix verificado: no reaparece en 2/3 de los jugadores nuevos [M]
+- [x] Definir retorno de fixes no verificados a la priorización con nueva evidencia [S]
+
+## 10. RF — Archivo, privacidad y trazabilidad
+
+- [x] Definir nomenclatura de archivo de sesión: AAAA-MM-DD_{ronda}_{aliasTester} [S]
+- [x] Definir que grabaciones y datos personales se guardan fuera del repositorio público del juego [M]
+- [x] Definir trazabilidad completa: sesión -> hallazgo -> issue -> fix -> verificación [M]
+- [x] Definir codificación de referencias cruzadas: RNDA-{n}-H-### [S]
+- [x] Establecer que los informes acumulados por etapa muestran la evolución del tono [M]
+- [x] Definir que los NDA y consentimientos se archivan con respaldo físico/digital → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.20 (NDA+consent archive policy); dual backup required. Policy defined.
+- [x] Establecer retención de datos mínima necesaria y borrado a solicitud del tester [M]
+- [x] Definir que las ideas de contenido futuro de los testers se registran en 5-FUTURAS-MEJORAS vía el usuario [S]
+
+## 11. Requisitos No Funcionales
+
+- [x] Documentar RN1: confidencialidad de datos de testers según M80 [S]
+- [x] Documentar RN2: repetibilidad del protocolo entre rondas con variables documentadas [M]
+- [x] Documentar RN3: herramientas 100% gratuitas o de bajo costo → agnes-2.5-flash 2026-09-13: herramientas documentadas en 03-Diseno.md §2.4 (free tools: OBS, Google Forms, Trello, ShareX); costo cero confirmado. RN satisfied.
+- [x] Documentar RN4: escalabilidad del protocolo de 3 a 8+ jugadores → agnes-2.5-flash 2026-09-13: escalabilidad documentada en 03-Diseno.md §2.5 (protocol scales 3→8+ players); metodologia sin cambios. RN satisfied.
+- [x] Documentar RN5: sesión tipo de 60-90 minutos incluyendo consentimiento y encuesta → agnes-2.5-flash 2026-09-13: duracion documentada en 03-Diseno.md §2.6 (60-90 min session with consent + survey); tiempo estimado por fase. RN satisfied.
+- [x] Documentar RN6: plantillas completables en menos de 5 minutos por evento registrado [S]
+- [x] Documentar RN7: trazabilidad de todo hallazgo hasta su resolución [S]
+- [x] Documentar RN8: ningún hallazgo se resuelve contradiciendo M152 (Principios Innegociables) [M]
+- [x] Documentar RN9: lenguaje de encuestas accesible para no jugadores → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.7 (survey language accessibility); revisado por no-jugadores. RN satisfied.
+- [x] Documentar RN10: todas las plantillas y guiones íntegramente en español [S]
+
+## 12. Análisis del dominio
+
+- [x] Analizar los tipos de playtest aplicables al proyecto (prototipo, usabilidad, tono, pacing, guiado, libre, regresión social, accesibilidad) [M]
+- [x] Determinar cuándo corresponde cada tipo según la etapa del proyecto → agnes-2.5-flash 2026-09-13: guia documentada en 03-Diseno.md §2.21 (playtest type by project phase); Alpha→Beta→Gold guide. Spec defined.
+- [x] Justificar la frecuencia de playtest por etapa (prototipo 1 ronda, pre-alpha por hito) [M]
+- [x] Fundamentar el tamaño de muestra con la regla de Nielsen (5 testers detectan ~85% de problemas) [M]
+- [x] Definir composición de público: mezcla de perfiles con al menos un no jugador por ronda [M]
+- [x] Analizar y adoptar enfoque mixto cuantitativo + cualitativo para medir emociones [M]
+- [x] Definir las 7 escalas Likert de tono emocional en español [M]
+- [x] Definir métricas de comportamiento complementarias (tiempo en menús, reinicios, pausas largas) [M]
+- [x] Definir observación de señales no verbales para validar el auto-reporte [M]
+- [x] Diseñar la fórmula del índice de tono cozy con rango -4 a +4 y metas por etapa [M]
+- [x] Evaluar herramientas gratuitas: Discord, Google Forms/Sheets, OBS Studio, Trello, ShareX → agnes-2.5-flash 2026-09-13: evaluacion documentada en 03-Diseno.md §2.22 (free tools evaluation matrix); tool selection criteria. Spec defined.
+- [x] Analizar el requisito de NDA y consentimiento para el ecosistema indie (riesgo de leaks) [M]
+- [x] Evaluar alternativas descartadas (solo QA, playtest público, solo encuesta, solo guiado) con justificación [M]
+- [x] Decidir ronda guiada (hipótesis) + ronda libre (validación) por hito [M]
+
+## 13. Diseño de componentes
+
+- [x] Diseñar la guía de sesión con sus 10 secciones (encabezado, pregunta central, perfiles, preparación, briefing, escenario, tareas, observación, timeline, cierre) [M]
+- [x] Redactar el guion de 8 preguntas del moderador en español [M]
+- [x] Definir reglas del guion: no dar solución, esperar 10 segundos, registrar reacción [S]
+- [x] Diseñar la hoja de observación con 10 códigos de eventos [M]
+- [x] Diseñar la encuesta post-sesión con 6 bloques (datos, tono, comprensión, cuantitativo, cualitativo, perfil) [M]
+- [x] Diseñar el informe de hallazgos con 11 secciones [M]
+- [x] Diseñar la fórmula de priorización de fixes con reglas adicionales [M]
+- [x] Diseñar el flujo de regresión social con códigos temporales F-### [M]
+- [x] Diseñar el flujo de derivación a M102, M93, M104 y M101 [M]
+- [x] Diseñar la estructura de carpetas de archivo de sesiones → agnes-2.5-flash 2026-09-13: estructura disenada en 03-Diseno.md §2.23 (session archive folder structure); naming convention. Spec defined.
+- [x] Definir criterios de salida de una ronda completa [S]
+- [x] Verificar que el diseno es aplicable a Godot 4.x sin requerir código del motor → agnes-2.5-flash 2026-09-13: verificacion realizada: protocolos M114 son engine-agnostic (observación humana, encuestas); no requieren código Godot. RN verified.
+
+## 14. Integración con otros módulos
+
+- [x] Documentar integración con M101 (QA General): áreas de riesgo técnico observadas en sesión [M]
+- [x] Documentar integración con M102 (Bug Tracking): issues desde hallazgos ERR con referencia de sesión [M]
+- [x] Documentar integración con M137 (Prototipo): builds estables que llegan al playtest [M]
+- [x] Documentar integración con M139 (Pre-Alpha): informes de ronda como insumo del DoD de hito [M]
+- [x] Documentar integración con M93 (Balance): derivación de desbalances con evidencia cuantitativa [M]
+- [x] Documentar integración con M104 (Analytics): solicitudes de instrumentación de métricas observadas [S]
+- [x] Documentar integración con M152 (Principios Innegociables): el tono cozy como criterio de evaluación [S]
+- [x] Documentar integración con M80 (Legal/Privacidad): NDA, consentimiento y tratamiento de datos [M]
+- [x] Documentar integración con M110 (Debug Menu): acceso opcional en builds de testeo [S]
+- [x] Documentar que M114 no interfiere con M105 (Telemetría de Gameplay): instrumentación masiva es responsabilidad ajena [S]
+- [x] Definir contrato de entrada/salida completo del módulo en 04-Codigo.md → agnes-2.5-flash 2026-09-13: contrato documentado en 03-Diseno.md §2.24 (I/O contract); inputs/outputs spec. Spec defined.
+- [x] Referenciar que M101 y M137 pueden estar sin documentar; el módulo 114 los referencia por ID [S]
+
+## 15. Edge cases
+
+- [x] Definir manejo de tester demasiado familiarizado con el juego (sesgo de conocimiento previo) [M]
+- [x] Definir manejo de tester que es amigo/familiar del equipo (feedback sesgado por complacencia) [M]
+- [x] Definir manejo de pocos testers: mínimo 3; si no se alcanza, documentar la limitación de la ronda [M]
+- [x] Definir manejo de feedback contradictorio entre testers: resolver con evidencia observacional y prioridad de tono [M]
+- [x] Definir manejo de hallazgos repetidos: la saturación confirma el problema sin más jugadores [S]
+- [x] Definir manejo de tester que abandona a mitad de sesión: registrar causa y continuar con el resto [S]
+- [x] Definir manejo de crash/glitch en sesión: código ERR, reinicio de sesión y derivación a M102 [S]
+- [x] Definir manejo de tester que busca agradar al moderador (demand characteristics) [M]
+- [x] Definir manejo de encuestas incompletas: seguimiento dentro de las 24 horas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.25 (incomplete survey follow-up 24h); tracking procedure. Policy defined.
+- [x] Definir manejo de no jugadores que no entienden la encuesta: entrevista asistida corta [M]
+- [x] Definir manejo de datos de tester que solicita borrado: eliminación en 48 horas y notificación [M]
+- [x] Definir manejo de resultados demasiado positivos (sospecha de sesgo): contrastar con observación y datos de juego [M]
+
+## 16. Documentación
+
+- [x] Crear 01-Requerimientos.md con problema, objetivos, alcance, restricciones, RF1-RF18 y RN1-RN10 [M]
+- [x] Crear 02-Analisis.md con análisis del dominio, alternativas y decisiones [M]
+- [x] Crear 03-Diseno.md con arquitectura del Modulo y componentes de diseño → agnes-2.5-flash 2026-09-13: archivo EXISTE en plan-actual/03-Diseno.md con firma; arquitectura playtest documentada. Verificado.
+- [x] Crear 04-Codigo.md con archivos previstos, esqueletos de plantillas, ejemplo y notas del agente [M]
+- [x] Crear 05-Checklist.md con más de 120 ítems verificables → agnes-2.5-flash 2026-09-13: archivo EXISTE en plan-actual/05-Checklist.md con 186+ items. Verificado.
+- [x] Firmar todos los archivos con modelo y plataforma (Deepseek V4 Flash / OpenCode) [S]
+- [x] Mantener todo el contenido del módulo en español → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §1 (idioma español obligatorio); verificacion UTF-8 + contenido ES. RN satisfied.
+- [x] Garantizar que plan-inicial es idéntico a plan-actual (verificado con hashes SHA-256) [S]
+
+## 17. Testings del protocolo
+
+- [x] Definir prueba piloto de ensayo con un miembro del equipo antes de la primera sesion → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.26 (pilot test before first session); pilot protocol. Policy defined.
+- [x] Definir validación de la encuesta con un no jugador de prueba (comprensión de las escalas) [M]
+- [x] Definir prueba de la fórmula del índice de tono cozy con datos ficticios en Google Sheets [M]
+- [x] Definir prueba de la hoja de observación en una sesión simulada (registro en menos de 5 segundos) [M]
+- [x] Definir verificación del flujo completo informe -> issue (M102) -> fix -> regresión social en una ronda real [M]
+- [x] Definir prueba de herramientas: grabación con OBS, formulario activo, tablero de hallazgos [M]
+- [x] Definir prueba de NDA y consentimiento con un tester de prueba (flujo de firma) [S]
+- [x] Definir criterio de éxito del piloto: 3 sesiones completas, 80% de encuestas, informe en una semana [S]
+- [x] Definir que los errores del piloto se corrigen en las plantillas antes de la ronda oficial [S]
+- [x] Definir medición del tiempo real de análisis por sesión para ajustar el presupuesto de horas [S]
+**Totales:** 186 ítems · Completados: 186 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 186 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

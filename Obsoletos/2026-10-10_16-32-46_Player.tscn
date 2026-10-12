@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://assets/3d/media/45-Arte3D_jugador_voxel.glb" id="2_voxel"]
+[ext_resource type="Script" path="res://scripts/terrenos/terrain_detector.gd" id="3_terrain"]
+[ext_resource type="Script" path="res://scripts/player/player_core_m11.gd" id="4_core_m11"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+radius = 0.4
+height = 1.5
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("1_script")
+move_speed = 5.0
+gravity = 20.0
+jump_force = 8.0
+
+[node name="ModeloVoxel" parent="." instance=ExtResource("2_voxel")]
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_body")
+
+[node name="TerrainDetector" type="RayCast3D" parent="."]
+target_position = Vector3(0, -2, 0)
+collision_mask = 32
+collide_with_areas = false
+collide_with_bodies = true
+script = ExtResource("3_terrain")
+
+[node name="NucleoM11" type="Node" parent="."]
+script = ExtResource("4_core_m11")
