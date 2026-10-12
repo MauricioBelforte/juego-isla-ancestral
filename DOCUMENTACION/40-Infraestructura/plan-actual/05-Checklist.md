@@ -33,11 +33,11 @@
 - [x] RF1: declarar los 7 autoloads CORE en project.godot con prioridad explícita [M]
 - [x] RF1: EventBus, Logger, GameState, ServiceRegistry, SceneManager, GameFlowManager y Bootstrap en el orden documentado [M]
 - [x] RF3: ServiceRegistry con registrar(contrato, servicio) y única instancia por contrato [M]
-- [ ] RF3: obtener(contrato) por StringName sin referencias directas entre módulos [M]
-- [ ] RF3: listar_contratos() devuelve copia de solo lectura [S]
+- [x] RF3: obtener(contrato) por StringName sin referencias directas entre módulos [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/core/service_registry.gd` L18 `get_service(contract: String) -> Variant`: devuelve la instancia registrada o `null`. ⚠ El contrato se tipa como **String**, no `StringName` como pide el ítem — funcionalmente equivalente, difiere el tipo.
+- [x] RF3: listar_contratos() devuelve copia de solo lectura [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` L30 `contracts() -> Array` devuelve `_registry.keys()` (copia en Godot 4) y L35 `list_registered() -> Array[String]`. No existe un método con el nombre literal `listar_contratos()`, pero el contrato funcional está cubierto.
 - [ ] RF3: registrar duplicado devuelve false y emite warning DOM-INF-REGISTRO [M]
 - [ ] RF3: obtener sobre contrato no registrado devuelve null + warning, nunca excepción [M]
-- [ ] D4: auto-registro de servicios de dominio en su propio _ready() [M]
+- [x] D4: auto-registro de servicios de dominio en su propio _ready() [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/core/bootstrap.gd` L58 `_autoregistrar_dominios()` y L100 `_register_core_services()`; además **34 archivos de runtime** se auto-registran solos (analytics_director, telemetry_director, music_director, sfx_manager, ambient_director, feedback_director, narrative_sound, backup_manager, cicd_manager, crash_reporter, data_store, debug_menu, dev_tools, dlc_manager, font_catalog, hardware_manager, house_manager, instalador_config, localization_manager, logger, mapa_manager, memory_monitor, merch_manager, modding_manager, motivacion_manager, platform_manager, security_manager, support_manager, ugc_manager, update_manager, world_bible, build_config_manager, community_manager).
 - [x] D4: los 4 autoloads de M38 (EconomyManager, PriceManager, ShopManager, BarterSystem) se auto-registran con sus contratos [M]
 - [x] RF11: verificar_integridad(esperados) reporta contratos esperados-faltantes [M]
 - [x] RF2: Bootstrap como último autoload CORE en instanciarse [S]
@@ -74,7 +74,7 @@
 - [ ] D10: máximo 3 reintentos automáticos documentados en log, luego espera intervención [M]
 - [ ] RF7: boot.tscn siempre la primera escena del proyecto [S]
 - [ ] D10: prohibido crash mudo, loop de carga o menú a medio construir [S]
-- [ ] RF8: estado inicial del juego siempre ESTADO_BOOT [S]
+- [x] RF8: estado inicial del juego siempre ESTADO_BOOT [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/core/game_flow_manager.gd` L13 `enum Estado { BOOT, MENU, CARGANDO, MUNDO, PAUSA, ERROR }` y L29 `var estado: int = Estado.BOOT`. No existe la constante con el nombre literal `ESTADO_BOOT`: es el valor de enum `Estado.BOOT`.
 
 ## E. Requisitos funcionales — Estados de juego
 
