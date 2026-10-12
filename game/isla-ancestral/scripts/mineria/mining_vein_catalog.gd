@@ -88,3 +88,18 @@ static func _registrar_veta(rm: Node, data: Dictionary) -> bool:
 ## Acceso seguro al autoload ResourceManager (sin class_name, ver GUIA-GODOT/09-godot4-migracion.md §9.17).
 static func _get_resource_manager() -> Node:
     return Engine.get_main_loop().root.get_node_or_null("ResourceManager")
+
+## Lote 2 (2026-10-11, DeepSeek-V4.1-Flash): devuelve las entradas CRUDAS del
+## catalogo (Array de Dictionary) sin registrar nada. Lo usa M35 para consultas
+## de banda/region (I1) y para auditar el catalogo desde los tests.
+## Devuelve [] si el archivo falta o el JSON no es un array.
+static func leer_catalogo() -> Array:
+    if not FileAccess.file_exists(CATALOGO_PATH):
+        return []
+    var contenido := FileAccess.get_file_as_string(CATALOGO_PATH)
+    if contenido.is_empty():
+        return []
+    var parsed: Variant = JSON.parse_string(contenido)
+    if typeof(parsed) != TYPE_ARRAY:
+        return []
+    return parsed

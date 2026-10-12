@@ -13,7 +13,7 @@
 > `res://data/mining/ores.json` (NO `res://_Project/ScriptableObjects/Mining/ore_catalog.tres`).
 > `OreDefinition.gd` / `OreVein.gd` / `MiningTool.gd` / `OreVein.tscn` / `MiningTool.tscn` de la tabla
 > **no existen**: la opción B delega en `ResourceDefinition`/`ResourceNode`/`ToolData` de M15/M13.
-> Suite headless medida (Godot 4.7.2, 2026-10-11): `test_mineria.gd` 41 checks / 0 fallos (EXIT 0).
+> Suite headless medida (Godot 4.7.2, 2026-10-11, tras el lote 1): `test_mineria.gd` 92 checks / 0 fallos (EXIT 0).
 
 ## 1. Archivos involucrados
 
@@ -322,3 +322,160 @@ Los logs se emiten con la convención del sistema `DOM-` (dominio) y rotación s
 - **Mine_extraccion_fallida → mina_extraccion_fallida (typo de señal)**: las señales NO se llaman como funciones; se emiten con `.emit(args)`. El linter de Godot 4.7 lo detecta correctamente. Documentado en GUIA-GODOT/01-gdscript-errores-comunes.md §1.1 (ya estaba).
 - **Sin `class_name` en autoloads**: respetado (`MiningManager` extiende `Node`, registrado por path en project.godot, no por class_name). Ver GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41.
 - **Variables inferidas con `:=` y Dictionary/Array heterogéneos**: forzar tipo explícito (`var zona: String = ...`, `var tool_id: StringName = ...`) para evitar `Cannot infer the type` en parse.
+
+## Lote 1 de implementación (2026-10-11, DeepSeek-V4.1-Flash)
+
+Encargo del director `mimo` (msg 167): implementar los `[ ]` de mayor impacto de M35.
+Todo el lote vive en `scripts/mineria/mining_manager.gd` (archivo propio del módulo);
+no se tocó ningún archivo de M13/M15/M08.
+
+### Estado real de la API (medido en disco, 2026-10-11)
+
+| Archivo | Rol | Bytes |
+|---|---|---|
+| `res://scripts/mineria/mining_manager.gd` | autoload `mineria` (project.godot L48): catálogo, límite por zona (RF10), drops (RF6), persistencia | 13619 |
+| `res://scripts/mineria/mining_vein_catalog.gd` | `class_name MiningVeinCatalog`: lee `ores.json` y registra 6 vetas en M15 | 4364 |
+| `res://data/mining/ores.json` | catálogo data-driven (6 vetas, con `item_id` real por veta) | — |
+| `res://scripts/mineria/test_mineria.gd` | suite headless (`extends SceneTree`, `--script`) | 16954 |
+
+API pública real: `intentar_extraccion(nodo, tool) -> Dictionary`,
+`is_zone_exhausted(zona)`, `quota_restante(zona)`, `get_save_data()` / `restore_save_data()`.
+Señales: `mina_extraccion_exitosa(def_id, cantidad, world_pos, zona)`,
+`mina_extraccion_fallida(def_id, razon)`, `zone_exhausted(zona)`.
+Guarda de estado de veta: `ResourceNode` de M15 (`INTACTO`/`DANIADO`/`AGOTADO`), no `OreVein`.
+
+### Defectos corregidos (medidos con sonda headless antes y después)
+
+1. **H-A — todo pico T2+ era rechazado.** `_tool_id()` mapeaba el nivel a
+   `"pico_hierro"` / `"pico_oro"` / `"pico_cristal"`, pero
+   `ResourceDefinition.es_accesible_con()` compara por **igualdad** contra
+   `herramienta_requerida` (`"pico"`) → `"pico_oro" == "pico"` es `false` y
+   `intentar_extraccion` devolvía `herramienta_invalida`. Medido: con `ToolData`
+   T3 el intento fallaba; con T1 funcionaba. Fix: `_tool_id()` devuelve
+   `ToolData.nombre_id()` (`"pico"`), el mismo contrato que ya usa M13
+   (`tool_controller.gd:340`).
+2. **H-B — el RF6 (doble drop) nunca se entregaba.** El drop se calculaba dos veces
+   (M15 con un sorteo PRNG y M35 con otro) y M35 solo *informaba* la cantidad en la
+   señal. Fix: M35 calcula los drops una sola vez, los entrega él mismo con
+   `ResourceManager.entregar_drops()` y reporta la cantidad realmente entregada.
+3. **H-C — drop fantasma.** El fallback anti-frustración de
+   `ResourceManager.generar_drops()` usa `def_id` como `item_id`; como las vetas
+   tienen `def_id != item_id`, entregaba un item inexistente. Medido: minar
+   `veta_oro` depositaba **1 × `veta_oro`** en el inventario y **0 × `ancient_crystal`**.
+   Fix (en M35): el fallback usa `_item_principal(def)` (el item real). *(El defecto
+   de M15 queda reportado; no se tocó su archivo.)*
+4. **Guards nuevos**: herramienta inutilizada (J8), veta ya agotada (idempotente),
+   cooldown por veta (J6), definición ausente con log `DOM-MIN` + fallback (J10).
+
+### Evidencia
+
+- Suite `test_mineria.gd`: **92 checks / 0 fallos / EXIT 0 ×3**, `0 SCRIPT ERROR`
+  (`CHECKS_MINIMOS := 92`, medido). Línea base previa: 60 checks.
+- Sonda roja (aborto en runtime dentro de un bloque): **81 < 92 → EXIT 1**.
+- Sonda roja del fix (revertido `_tool_id` al mapeo viejo): **8 fallos / EXIT 1**
+  (T2/T3/T4 rechazados + RF6 con `delta=0`); archivo restaurado byte-exacto
+  (`sha256 bb193379…`).
+- Regresiones M15: `test_recursos` 23/0, `test_recurso_nodo` 14/0,
+  `test_recursos_persistencia` 23/0 (todas EXIT 0, 0 SCRIPT ERROR).
+
+### Pendiente / fuera de alcance (reportado al director)
+
+- **M35 no está cableado a la producción**: `tool_controller.gd:340` (M13) llama
+  `ResourceManager.recibir_golpe_en_nodo()` directo y **nunca** pasa por
+  `intentar_extraccion`; por lo tanto RF6 y RF10 no corren en el juego. El cambio es
+  1 línea en un archivo de M13 (no se tocó sin coordinación con su dueño).
+- **Defecto de M15 (reportado, no corregido)**: `generar_drops()` puede devolver un
+  item fantasma (usa `def_id` como `item_id` en el fallback anti-frustración).
+
+---
+
+## Lote 2 de implementacion (2026-10-11, DeepSeek-V4.1-Flash)
+
+Alcance: **17 items `[ ]`** del checklist M35 implementados dentro del dominio de
+M35 (capa de dominio sobre M15). No se toco ningun archivo de M08/M13/M15/M26/
+M43/M45/M52. Base medida antes de empezar: 63 `[x]` / 66 `[ ]` / 13 `[?]`.
+
+### API nueva en `mining_manager.gd`
+
+| Item | Funcion / miembro | Contrato |
+| --- | --- | --- |
+| J1 | `clave_veta(rn)` / `golpes_parciales(rn)` / `_registrar_parcial(rn)` / `aplicar_estado_parcial(rn)` | persiste el dano parcial por veta (clave estable `region:pos`) |
+| J5 | `_golpes_totales(rn)` / `fraccion_restante(rn)` | golpes totales del tipo y fraccion de vida restante |
+| J9 | `snapshot_estado()` / `restaurar_estado(data)` | snapshot plano del manager (usado por el save) |
+| K3 | `intentar_extraccion_en(nodo, tool, out)` | variante **sin allocacion**: escribe en `out` y devuelve bool |
+| K5 | `barrido_regeneracion(vetas, dia, estacion)` | barrido batch de respawn de vetas |
+| K6 | `benchmark_golpe(nodo, tool, n)` | mide mediana/max por golpe (presupuesto 1 ms) |
+| K7 | `definiciones_compartidas()` | cache de `ResourceDefinition` por id (no re-resuelve) |
+| L5 | `intensidad_brillo(def_id, fraccion)` | brillo del tinte segun fraccion restante |
+| L6 | `texto_flotante(def_id, cantidad)` | texto "+N" del item flotante |
+| L7 | `configurar_vibracion(activo)` | habilita/deshabilita `mina_vibracion` |
+| L8 | `vetas_de_region(region)` | lista de vetas de una region |
+| L9 | `validar_anti_softlock(pos, zonas_protegidas)` | evita sellar la ultima veta accesible |
+| I1 | `_anuncio_dorado(def)` | criterio de anuncio de hallazgo raro (rareza <= 2) |
+| I5 | `_iniciar_derrumbe(rn)` / `derrumbe_activo(rn)` | derrumbe temporal de la veta agotada |
+| I8 | `coleccion_minerales()` / `registrar_en_coleccion(id, cant)` | coleccion persistente de minerales |
+| G5 | `veta_tiene_soporte(pos, lector_solido)` | soporte estructural (vecinos solidos) |
+| G10 | `marcar_chunk_editado(k)` / `debe_regenerar_vetas(k)` / `chunks_editados()` | registro de chunks editados (no regenerar lo minado) |
+
+### Senales nuevas
+
+- `mina_veta_recuperada(clave)` — J5/J9.
+- `mina_derrumbe(clave, duracion)` — I5.
+- `mina_vibracion(intensidad)` — L7 (solo si `vibracion_habilitada`).
+- `mina_coleccion_nueva(item_id)` — I8.
+
+### Constantes nuevas
+
+- `DERRUMBE_DURACION_S := 0.8` — I5.
+- `HIT_BUDGET_US := 1000` — K6 (presupuesto del hot path, 1 ms).
+- `RAREZA_ANUNCIO_DORADO := 2` — I1.
+- `VECINOS_SOPORTE := 4` — G5 (minimo de vecinos solidos para considerar soporte).
+- `VETAS_M35` — catalogo de vetas M35 (L8).
+
+### Persistencia v1 -> v2
+
+`get_save_data()` sube a `version: 2` y agrega `vetas_parciales` (J1) y
+`coleccion` (I8). `restore_save_data()` ahora **reemplaza** en vez de acumular
+(`_zone_quota.clear()` antes de repoblar) para que restaurar un save no sume
+estado sobre el estado vivo.
+
+### Catalogo crudo (`mining_vein_catalog.gd`)
+
+Nueva `static func leer_catalogo() -> Array`: devuelve las entradas **crudas**
+del catalogo (Array de Dictionary) sin registrar nada. Devuelve `[]` si el
+archivo no existe, esta vacio o el JSON no es un Array. Usada por L8/G10.
+
+### Cambio de comportamiento: log fuera del hot path
+
+Los `print("[DOM-MIN] ...")` por golpe quedaron detras de `_log_dom_min`
+(por defecto `false`). Motivo medido (**trampa 120**): bajo un pipe un `print()`
+cuesta ~15 ms frente a ~510 us a archivo, lo que volvia inalcanzable el
+presupuesto de 1 ms del item K6. Se verifico que **ninguna** suite ni
+`tool_controller.gd` dependian de esos prints (grep = 0 dependencias).
+
+### Evidencia medida
+
+- Suite nueva `test_mineria_lote2.gd`: **104 checks / 0 fallos / EXIT 0** (x3),
+  0 `SCRIPT ERROR`. `CHECKS_MINIMOS := 104` (piso medido en verde).
+- K6: mediana 12-13 us, max 72-97 us (presupuesto 1000 us).
+- Guardian probado **en rojo** con 5 sondas: las 5 dieron EXIT 1 con el texto de
+  fallo esperado; `mining_manager.gd` restaurado byte-exacto (sha256
+  `02e1ff7d2d45d1b298b31e65284ee7fac213f7b72ca4bd3c27f8aa1c6da26767`).
+- No regresion: `test_mineria.gd` 92/0, `test_recursos.gd` 23/0,
+  `test_recurso_nodo.gd` 14/0, `test_recursos_persistencia.gd` 23/0,
+  `test_herramientas.gd` EXIT 0 (todas 0 `SCRIPT ERROR`).
+
+### Hallazgo H17 (defecto de M15, corregido dentro de M35)
+
+`ResourceNode.evaluar_respawn()` (M15) fija `golpes_restantes = 2` al revivir.
+Una veta ancestral de 6 golpes revivia con 2. Se corrige **dentro** de
+`barrido_regeneracion()` (M35) reponiendo `maxi(1, def.golpes_requeridos)` tras
+el respawn, sin tocar M15. Reportado al director para que M15 lo asuma en origen.
+
+### Fuera de alcance (reportado, no implementado)
+
+Los 49 items `[ ]` restantes pertenecen a otros modulos y se reportan con dueno
+propuesto: G1-G4/G6/G7/G9 -> M08; I2/I3/I4/I6/I7 -> M26; J2/J3/J4 -> M15/M17;
+J7 -> M08/M15; K1/K2/K4/K8 -> M08/M52; L1-L4 -> M52/M43; y los 24 items de
+diseno P1-P24 -> M43/M45/M52. No se flipea estado: los `[x]` los aplica el
+director.
