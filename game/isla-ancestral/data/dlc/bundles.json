@@ -1,5 +1,8 @@
 {
   "bundles": [
-    {"id": "bundle_deluxe", "nombre": "Coleccionista Digital", "dlcs": ["isla_hielo", "pack_aurora"], "descuento": 0.15}
+    {"id": "bundle_deluxe", "nombre": "Coleccionista Digital", "dlcs": ["isla_hielo", "pack_aurora"], "precio": 16.99, "descuento": 0.15, "descripcion": "Edicion coleccionista: Isla de Hielo + pack de decoracion Aurora."},
+    {"id": "season_pass_2024", "nombre": "Season Pass 2024", "dlcs": ["isla_hielo", "isla_volcan", "isla_bosque"], "precio": 24.99, "descuento": 0.3, "descripcion": "Incluye los 3 DLC de islas lanzados en 2024 con ~30% de descuento."},
+    {"id": "bundle_completo", "nombre": "Bundle Completo", "dlcs": ["isla_hielo", "isla_volcan", "isla_bosque", "pack_aurora"], "precio": 59.99, "descuento": 0.4, "descripcion": "Todos los DLC lanzados con ~40% de descuento."},
+    {"id": "bundle_islas", "nombre": "Bundle de Islas", "dlcs": ["isla_hielo", "isla_volcan", "isla_bosque"], "precio": 24.99, "descuento": 0.3, "descripcion": "Todos los DLC de islas con ~30% de descuento."}
   ]
 }

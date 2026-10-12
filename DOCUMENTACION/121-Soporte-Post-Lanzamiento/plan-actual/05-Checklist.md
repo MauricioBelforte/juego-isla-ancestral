@@ -12,23 +12,23 @@
 - [x] Búsqueda de FAQ por categoría y texto [S]
 - [x] Test headless de soporte post-lanzamiento [M]
 - [x] Datos data-driven: faq.json con 4 FAQ, 3 canales, 6 categorías [S]
-- [ ] Seguimiento de reviews
-- [ ] Hotfixes
-- [ ] Parches
+- [x] Seguimiento de reviews
+- [x] Hotfixes
+- [x] Parches
 - [x] Actualizaciones
 - [x] Recuperación de saves
 - [x] Comunicación de incidencias
-- [ ] Roadmap
+- [x] Roadmap
 - [x] Community updates
-- [ ] Backups
+- [x] Backups
 - [x] Monitorización
 - [x] Plan de abandono del servicio si existe online
 
 ### [S] Canal de soporte
 - [x] Definir email (support@islaancestral.com)
-- [ ] Definir Discord (canal #soporte)
-- [ ] Definir Steam Community Hub (Discussions, Bugs y Problemas)
-- [ ] Definir Twitter/X (@IslaAncestral)
+- [x] Definir Discord (canal #soporte)
+- [x] Definir Steam Community Hub (Discussions, Bugs y Problemas)
+- [x] Definir Twitter/X (@IslaAncestral)
 - [x] Diseñar configuración de email con respuesta automática
 - [x] Diseñar configuración de Discord con canales estructurados
 - [x] Diseñar configuración de Steam Community Hub moderado
@@ -36,29 +36,29 @@
 
 ### [S] FAQ
 - [x] Definir preguntas técnicas (requisitos de sistema, controladores, errores comunes)
-- [ ] Definir preguntas de gameplay (cómo hacer X, dónde encontrar Y, mecánicas de Z)
+- [x] Definir preguntas de gameplay (cómo hacer X, dónde encontrar Y, mecánicas de Z)
 - [x] Definir preguntas de historia (historia principal, finales, sellos)
 - [x] Definir preguntas de DLC (cómo instalar DLC, compatibilidad, precios)
 - [x] Definir preguntas de soporte (cómo reportar bugs, cómo contactar soporte)
-- [ ] Diseñar FAQ en sitio web
-- [ ] Diseñar FAQ en Steam Community Hub
-- [ ] Diseñar FAQ en Discord (canal #faq, solo lectura)
-- [ ] Diseñar FAQ en PDF para descargar
-- [ ] Diseñar búsqueda de FAQ (sitio web, Discord)
+- [x] Diseñar FAQ en sitio web
+- [x] Diseñar FAQ en Steam Community Hub
+- [x] Diseñar FAQ en Discord (canal #faq, solo lectura)
+- [x] Diseñar FAQ en PDF para descargar
+- [x] Diseñar búsqueda de FAQ (sitio web, Discord)
 
 ### [S] Sistema de tickets
 - [x] Definir Steam Support (integrado)
 - [x] Definir sistema propio (opcional)
 - [x] Definir categorías (bugs, crashes, rendimiento, dudas, sugerencias)
-- [ ] Definir prioridades (crítica, alta, media, baja)
+- [x] Definir prioridades (crítica, alta, media, baja)
 - [x] Diseñar triage de tickets (categoría, prioridad, asignación)
-- [ ] Diseñar SLA de respuesta (24-48 horas prioritarios, 72 horas no prioritarios)
+- [x] Diseñar SLA de respuesta (24-48 horas prioritarios, 72 horas no prioritarios)
 
 ### [S] Seguimiento de errores
 - [x] Definir integración con M102 (Bug Tracking)
 - [x] Diseñar errores reportados por comunidad → triage → asignación → corrección → testing → deployment
-- [ ] Diseñar errores críticos → hotfix en 24-48 horas
-- [ ] Diseñar errores no críticos → parches regulares
+- [x] Diseñar errores críticos → hotfix en 24-48 horas
+- [x] Diseñar errores no críticos → parches regulares
 - [x] Diseñar errores reportados en Steam → creación de issue en M102
 - [x] Diseñar errores reportados en Discord → creación de issue en M102
 - [x] Diseñar errores reportados por email → creación de issue en M102
@@ -76,21 +76,21 @@
 ### [S] Seguimiento de rendimiento
 - [x] Definir integración con M61 (Rendimiento)
 - [x] Diseñar problemas de rendimiento reportados → análisis → optimización → testing → deployment
-- [ ] Diseñar problemas de rendimiento críticos → hotfix en 24-48 horas
-- [ ] Diseñar problemas de rendimiento no críticos → parches regulares
+- [x] Diseñar problemas de rendimiento críticos → hotfix en 24-48 horas
+- [x] Diseñar problemas de rendimiento no críticos → parches regulares
 - [x] Diseñar problemas de rendimiento reportados en Steam → creación de issue en M61
-- [ ] Diseñar análisis de rendimiento (profiling, benchmarks)
+- [x] Diseñar análisis de rendimiento (profiling, benchmarks)
 - [x] Diseñar optimización según presupuestos de M61
 
 ### [S] Seguimiento de reviews
-- [ ] Definir Steam reviews (positivas, negativas, mixtas)
-- [ ] Definir Reddit reviews (r/IndieGaming, r/Games)
-- [ ] Definir Twitter/X reviews
-- [ ] Definir Metacritic reviews (si se publica en consolas)
-- [ ] Diseñar monitoreo de reviews en Steam (notifications)
-- [ ] Diseñar respuesta a reviews negativas (constructivas)
+- [x] Definir Steam reviews (positivas, negativas, mixtas)
+- [x] Definir Reddit reviews (r/IndieGaming, r/Games)
+- [x] Definir Twitter/X reviews
+- [x] Definir Metacritic reviews (si se publica en consolas)
+- [x] Diseñar monitoreo de reviews en Steam (notifications)
+- [x] Diseñar respuesta a reviews negativas (constructivas)
 - [x] Diseñar documentación de feedback recurrente para mejora
-- [ ] Diseñar no responder a reviews constructivas (política de no alimentar trolls)
+- [x] Diseñar no responder a reviews constructivas (política de no alimentar trolls)
 
 ### [S] Hotfixes
 - [x] Definir bugs críticos (crash, savegame corrupto, performance severa, exploit)

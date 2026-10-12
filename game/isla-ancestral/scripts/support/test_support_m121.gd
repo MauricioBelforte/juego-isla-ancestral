@@ -43,9 +43,9 @@ func _test_manager() -> void:
 		quit(1)
 		return
 	_check("SupportManager autoload presente", true)
-	_check("4 FAQ", sm.config.get("faq", []).size() == 4, "size=%d" % sm.config.get("faq", []).size())
+	_check("15 FAQ", sm.config.get("faq", []).size() == 15, "size=%d" % sm.config.get("faq", []).size())
 	_check("3 canales", sm.canales().size() == 3, "size=%d" % sm.canales().size())
-	_check("6 categorías", sm.categorias().size() == 6, "size=%d" % sm.categorias().size())
+	_check("11 categorías", sm.categorias().size() == 11, "size=%d" % sm.categorias().size())
 
 func _test_faq() -> void:
 	print("--- FAQ: por categoría y búsqueda ---")

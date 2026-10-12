@@ -8,6 +8,7 @@
       "estado": "planificado",
       "hito_lanzamiento": "M145",
       "version_requerida": "1.0.0",
+      "precio": 14.99,
       "dependencias": [],
       "contenido": ["islas", "biomas", "npcs", "historias", "colecciones"]
     },
@@ -18,6 +19,7 @@
       "estado": "planificado",
       "hito_lanzamiento": "M146",
       "version_requerida": "1.0.0",
+      "precio": 4.99,
       "dependencias": [],
       "contenido": ["cosmeticos"]
     }

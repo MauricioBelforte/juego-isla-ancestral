@@ -5,11 +5,22 @@
     "resolucion_bugs_dias": 7,
     "idiomas": ["es", "en"]
   },
-  "categorias": ["bug", "crash", "rendimiento", "cuenta", "guardado", "pregunta_general"],
+  "categorias": ["bug", "crash", "rendimiento", "cuenta", "guardado", "pregunta_general", "tecnica", "gameplay", "historia", "dlc", "soporte"],
   "faq": [
     {"id": "save_perdido", "categoria": "guardado", "pregunta": "Perdí mi partida", "respuesta": "Verifica la carpeta de backups o contacta soporte con tu id de sesión."},
     {"id": "crash_inicio", "categoria": "crash", "pregunta": "El juego crashea al iniciar", "respuesta": "Revisa requisitos mínimos y actualiza drivers. Si persiste, envía el crash report."},
     {"id": "rendimiento_bajo", "categoria": "rendimiento", "pregunta": "El juego va lento", "respuesta": "Baja la calidad gráfica y revisa que la GPU cumpla los requisitos."},
-    {"id": "link_steam", "categoria": "cuenta", "pregunta": "¿Cómo vinculo mi cuenta de Steam?", "respuesta": "Inicia sesión desde la pantalla principal y acepta el vinculo."}
+    {"id": "link_steam", "categoria": "cuenta", "pregunta": "¿Cómo vinculo mi cuenta de Steam?", "respuesta": "Inicia sesión desde la pantalla principal y acepta el vinculo."},
+    {"id": "error_instalacion", "categoria": "tecnica", "pregunta": "La instalación falla o queda a medias", "respuesta": "Verifica el espacio libre en disco, cierra el antivirus y vuelve a ejecutar el instalador."},
+    {"id": "requisitos_minimos", "categoria": "tecnica", "pregunta": "¿Cuáles son los requisitos mínimos?", "respuesta": "CPU de 4 núcleos, 8 GB de RAM y una GPU con soporte Vulkan. El detalle está en la ficha de la tienda."},
+    {"id": "control_mando", "categoria": "gameplay", "pregunta": "¿Puedo jugar con mando?", "respuesta": "Sí. Conecta el mando antes de iniciar; se detecta automáticamente y puedes reasignar botones en Ajustes."},
+    {"id": "como_guardar", "categoria": "gameplay", "pregunta": "¿Cómo se guarda la partida?", "respuesta": "El guardado es automático al dormir y al cambiar de día. También puedes guardar manualmente desde el menú."},
+    {"id": "progreso_isla", "categoria": "gameplay", "pregunta": "¿Puedo perder progreso por no jugar?", "respuesta": "No. El juego es cozy: no hay castigos por ausencia ni eventos irrepetibles que bloqueen contenido."},
+    {"id": "historia_principal", "categoria": "historia", "pregunta": "¿Cuál es el objetivo de la historia principal?", "respuesta": "Restaurar el equilibrio de la isla reuniendo los fragmentos del faro ancestral a lo largo de las estaciones."},
+    {"id": "personajes_historia", "categoria": "historia", "pregunta": "¿Los personajes tienen historias propias?", "respuesta": "Sí. Cada vecino desbloquea su arco de amistad con escenas propias al subir el nivel de relación."},
+    {"id": "dlc_comprar", "categoria": "dlc", "pregunta": "¿Cómo compro los DLC?", "respuesta": "Desde la ficha del juego en la tienda; el contenido se descarga y se activa automáticamente al detectarse."},
+    {"id": "dlc_compatibilidad", "categoria": "dlc", "pregunta": "¿Los DLC son compatibles con mi partida?", "respuesta": "Sí. Los DLC respetan la versión base y los saves antiguos siguen cargando sin perder progreso."},
+    {"id": "reportar_bug", "categoria": "bug", "pregunta": "¿Cómo reporto un bug?", "respuesta": "Adjunta el crash report y una descripción con pasos para reproducirlo en el canal de soporte correspondiente."},
+    {"id": "contacto_soporte", "categoria": "soporte", "pregunta": "¿Cómo contacto a soporte?", "respuesta": "Escribe a support@islaancestral.com o publica en el foro de Steam; respondemos en menos de 24 horas."}
   ]
 }

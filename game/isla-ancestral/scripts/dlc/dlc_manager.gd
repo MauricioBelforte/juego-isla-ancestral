@@ -189,3 +189,75 @@ func save_de_version_superior() -> bool:
 	if _version_guardada.is_empty():
 		return false
 	return comparar_versiones(_version_guardada, version_base_actual()) > 0
+
+## ── Servicios M120 (D3) ─────────────────────────────────────────
+## Los 3 servicios del diseno (04-Codigo.md sec.5-7) se instancian de forma
+## perezosa y viven como objetos logicos de este autoload. NO se registran como
+## autoloads propios para no editar project.godot (archivo compartido por varios
+## agentes: trampa AM del skill). Se preloadean por RUTA (no por class_name)
+## para no depender de la cache global de clases (trampa 123).
+
+const _SC_COMPAT := preload("res://scripts/dlc/dlc_compatibility_checker.gd")
+const _SC_UNINST := preload("res://scripts/dlc/dlc_uninstaller.gd")
+const _SC_BUNDLES := preload("res://scripts/dlc/dlc_bundle_manager.gd")
+
+var _compat: Variant = null
+var _uninstaller: Variant = null
+var _bundle_mgr: Variant = null
+## Contenido de DLC cargado por tipo: {tipo: [ids]} (D3: load_island/...).
+var _contenido: Dictionary = {}
+
+func compatibility_checker() -> Variant:
+	if _compat == null:
+		_compat = _SC_COMPAT.new(self)
+	return _compat
+
+func uninstaller() -> Variant:
+	if _uninstaller == null:
+		_uninstaller = _SC_UNINST.new(self)
+	return _uninstaller
+
+func bundle_manager() -> Variant:
+	if _bundle_mgr == null:
+		_bundle_mgr = _SC_BUNDLES.new()
+	return _bundle_mgr
+
+## Registra contenido de un DLC por tipo. El cargado real de cada sistema
+## (islas M27, biomas M09, NPCs M19, historia M22, ruinas M25, musica M41) es
+## de esos modulos; aca se lleva el registro consultable del DLC.
+func cargar_contenido(tipo: String, id: String) -> bool:
+	if tipo.is_empty() or id.is_empty():
+		return false
+	if not _contenido.has(tipo):
+		_contenido[tipo] = []
+	var lista: Array = _contenido[tipo]
+	if id not in lista:
+		lista.append(id)
+	return true
+
+func contenido_cargado(tipo: String) -> Array:
+	var out: Array = []
+	if not _contenido.has(tipo):
+		return out
+	var v: Variant = _contenido[tipo]
+	if typeof(v) == TYPE_ARRAY:
+		out = v.duplicate()
+	return out
+
+func load_island(island_id: String) -> bool:
+	return cargar_contenido("islas", island_id)
+
+func load_biome(biome_id: String) -> bool:
+	return cargar_contenido("biomas", biome_id)
+
+func load_npc(npc_id: String) -> bool:
+	return cargar_contenido("npcs", npc_id)
+
+func load_historia(historia_id: String) -> bool:
+	return cargar_contenido("historias", historia_id)
+
+func load_ruin(ruin_id: String) -> bool:
+	return cargar_contenido("ruinas", ruin_id)
+
+func load_music(track_id: String) -> bool:
+	return cargar_contenido("musica", track_id)

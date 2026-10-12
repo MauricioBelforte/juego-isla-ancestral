@@ -6,8 +6,8 @@
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de DLC y expansiones
-- [ ] Definir estrategia
-- [ ] Definir qué queda en el juego base
+- [x] Definir estrategia — **Diseño: 02-Analisis.md 2 (Estrategia de DLC)**
+- [x] Definir qué queda en el juego base — **Diseño: 02-Analisis.md 3 (Contenido del juego base)**
 - [x] Crear DlcManager autoload con manifest data-driven [M]
 - [x] Verificar compatibilidad con version base [M]
 - [x] Activar/desactivar DLC con persistencia [M]
@@ -15,28 +15,28 @@
 - [x] Test headless de DLC manager [M]
 - [x] Datos data-driven: dlc_manifest.json + bundles.json [S]
 - [x] Diseñar nuevas colecciones
-- [ ] Diseñar nuevas ruinas
-- [ ] Diseñar compatibilidad
+- [x] Diseñar nuevas ruinas — **Diseño: 02-Analisis.md 11 (Nuevas ruinas DLC)**
+- [x] Diseñar compatibilidad — **Diseño: 02-Analisis.md 12 (Compatibilidad DLC)**
 - [x] Diseñar precio
-- [ ] Diseñar bundle
-- [ ] Diseñar marketing
+- [x] Diseñar bundle — **Diseño: 02-Analisis.md 14 (Bundles DLC)**
+- [x] Diseñar marketing — **Diseño: 02-Analisis.md 15 (Marketing DLC)**
 - [x] Evitar bloquear contenido esencial
 
 ### [S] Estrategia de DLC
 - [x] Definir frecuencia (trimestral/semestral/anual)
-- [ ] Definir tamaño (pequeño/mediano/grande)
-- [ ] Definir temática (coherente con visión cozy)
+- [x] Definir tamaño (pequeño/mediano/grande) — **Diseño: 02-Analisis.md 2 (Tamaño)**
+- [x] Definir temática (coherente con visión cozy) — **Diseño: 02-Analisis.md 2 (Temática)**
 - [x] Diseñar DLC pequeños: trimestrales, 1-2 islas, 5-10 NPCs, 1 sistema
 - [x] Diseñar DLC medianos: semestrales, 2-3 islas, 10-15 NPCs, 2 sistemas
 - [x] Diseñar DLC grandes: anuales, 3-5 islas, 15-20 NPCs, 3 sistemas
 
 ### [S] Contenido del juego base
 - [x] Definir historia principal completa
-- [ ] Definir 7 islas base
-- [ ] Definir 13 biomas base
+- [x] Definir 7 islas base — **Diseño: 02-Analisis.md 3 (Juego base)**
+- [x] Definir 13 biomas base — **Diseño: 02-Analisis.md 3 (Juego base)**
 - [x] Definir sistemas core (crafting, construcción, NPCs, agricultura, pesca, minería, museos, economía)
-- [ ] Definir música base (12 tracks base)
-- [ ] Definir 30 NPCs base con amistad y diálogos
+- [x] Definir música base (12 tracks base) — **Diseño: 02-Analisis.md 3 (Juego base)**
+- [x] Definir 30 NPCs base con amistad y diálogos — **Diseño: 02-Analisis.md 3 (Juego base)**
 - [x] Definir sistema de transporte y navegación
 - [x] Definir sistema de viajes entre islas
 - [x] Definir sistema de sellos (7 sellos base)
@@ -48,12 +48,12 @@
 - [x] Diseñar Isla de Hielo (DLC 1)
 - [x] Diseñar Isla de Volcán (DLC 2)
 - [x] Diseñar Isla de Bosque (DLC 3)
-- [ ] Diseñar bioma: Hielo y nieve para Isla de Hielo
-- [ ] Diseñar bioma: Volcánico y rocoso para Isla de Volcán
-- [ ] Diseñar bioma: Bosque denso y místico para Isla de Bosque
-- [ ] Diseñar 5-7 NPCs nuevos por isla
-- [ ] Diseñar historia secundaria por isla
-- [ ] Diseñar 1 templo nuevo por isla
+- [x] Diseñar bioma: Hielo y nieve para Isla de Hielo — **Diseño: 02-Analisis.md 4 (Isla de Hielo)**
+- [x] Diseñar bioma: Volcánico y rocoso para Isla de Volcán — **Diseño: 02-Analisis.md 4 (Isla de Volcán)**
+- [x] Diseñar bioma: Bosque denso y místico para Isla de Bosque — **Diseño: 02-Analisis.md 4 (Isla de Bosque)**
+- [x] Diseñar 5-7 NPCs nuevos por isla — **Diseño: 02-Analisis.md 4**
+- [x] Diseñar historia secundaria por isla — **Diseño: 02-Analisis.md 4**
+- [x] Diseñar 1 templo nuevo por isla — **Diseño: 02-Analisis.md 4**
 - [x] Diseñar sistema nuevo por isla
 - [x] Diseñar colecciones por isla
 
@@ -68,10 +68,10 @@
 
 ### [S] Nuevos NPCs DLC
 - [x] Diseñar 5-10 NPCs por DLC
-- [ ] Diseñar rutinas diarias y semanales
-- [ ] Diseñar diálogos y amistad
+- [x] Diseñar rutinas diarias y semanales — **Diseño: 02-Analisis.md 6 (Nuevos NPCs DLC)**
+- [x] Diseñar diálogos y amistad — **Diseño: 02-Analisis.md 6**
 - [x] Diseñar misiones opcionales
-- [ ] Diseñar no afectar NPCs del juego base
+- [x] Diseñar no afectar NPCs del juego base — **Diseño: 02-Analisis.md 6 (Sin afectar NPCs base)**
 - [x] Diseñar NPCs DLC pueden visitar islas del juego base (opcional)
 - [x] Diseñar NPCs DLC pueden tener relaciones con NPCs del juego base (opcional)
 - [x] Diseñar NPCs DLC no bloquean contenido esencial del juego base
@@ -88,17 +88,17 @@
 ### [S] Nuevos biomas DLC
 - [x] Diseñar 2-3 biomas nuevos por DLC
 - [x] Diseñar coherencia con islas nuevas
-- [ ] Diseñar flora y fauna específicas
-- [ ] Diseñar recursos específicos
+- [x] Diseñar flora y fauna específicas — **Diseño: 02-Analisis.md 8 (Nuevos biomas DLC)**
+- [x] Diseñar recursos específicos — **Diseño: 02-Analisis.md 8**
 - [x] Diseñar biomas DLC solo en islas DLC
 - [x] Diseñar biomas DLC no aparecen en islas del juego base
 - [x] Diseñar biomas DLC no bloquean contenido esencial del juego base
 
 ### [S] Nuevas músicas DLC
 - [x] Diseñar 10-15 tracks nuevos por DLC
-- [ ] Diseñar leitmotifs de NPCs nuevos
+- [x] Diseñar leitmotifs de NPCs nuevos — **Diseño: 02-Analisis.md 9 (Nuevas músicas DLC)**
 - [x] Diseñar coherencia con estilo base (cozy, relajante)
-- [ ] Diseñar leitmotifs de islas nuevas
+- [x] Diseñar leitmotifs de islas nuevas — **Diseño: 02-Analisis.md 9**
 - [x] Diseñar músicas DLC solo en islas DLC
 - [x] Diseñar músicas DLC pueden aparecer en islas del juego base (opcional)
 - [x] Diseñar músicas DLC no bloquean contenido esencial del juego base
@@ -107,7 +107,7 @@
 - [x] Diseñar colecciones opcionales (peces tropicales, flores raras, artefactos antiguos)
 - [x] Diseñar 10-20 items por colección
 - [x] Diseñar coherencia con temática del DLC
-- [ ] Diseñar recompensas cosméticas (trofeos, títulos)
+- [x] Diseñar recompensas cosméticas (trofeos, títulos) — **Diseño: 02-Analisis.md 10 (Nuevas colecciones DLC)**
 - [x] Diseñar colecciones DLC solo en islas DLC
 - [x] Diseñar colecciones DLC pueden aparecer en museos del juego base (opcional)
 - [x] Diseñar colecciones DLC no bloquean contenido esencial del juego base
@@ -122,7 +122,7 @@
 - [x] Diseñar ruinas DLC pueden integrarse con historia principal del juego base (opcional)
 
 ### [S] Compatibilidad DLC
-- [ ] Diseñar compatible con versión 1.0 del juego base
+- [x] Diseñar compatible con versión 1.0 del juego base — **Diseño: 02-Analisis.md 12 + dlc_compatibility_checker.gd**
 - [x] Diseñar DLC no requiere actualización del juego base
 - [x] Diseñar DLC funciona con savegames del juego base
 - [x] Diseñar DLC no rompe savegames del juego base
@@ -130,7 +130,7 @@
 - [x] Diseñar DLC no requiere otros DLC para funcionar
 - [x] Diseñar DLC puede integrarse con otros DLC (opcional)
 - [x] Diseñar DLC no rompe savegames con otros DLC
-- [ ] Diseñar backward compatible (compatible con versiones futuras)
+- [x] Diseñar backward compatible (compatible con versiones futuras) — **Diseño: 02-Analisis.md 12 + es_backward_compatible()**
 - [x] Diseñar compatible con futuros DLC
 - [x] Diseñar soporta desinstalación
 - [x] Diseñar desinstalación no rompe el juego base
@@ -147,11 +147,11 @@
 
 ### [S] Bundles DLC
 - [x] Diseñar Season Pass (3 DLC por USD 20-25)
-- [ ] Diseñar descuento ~30% para Season Pass
+- [x] Diseñar descuento ~30% para Season Pass — **Diseño: bundles.json season_pass_2024 descuento 0.30 (02-Analisis.md 14)**
 - [x] Diseñar DLC lanzados trimestralmente
 - [x] Diseñar Season Pass incluye todos los DLC del año
 - [x] Diseñar Bundle Completo (todos los DLC por USD 50-60)
-- [ ] Diseñar descuento ~40% para Bundle Completo
+- [x] Diseñar descuento ~40% para Bundle Completo — **Diseño: bundles.json bundle_completo descuento 0.40 (02-Analisis.md 14)**
 - [x] Diseñar Bundle actualizado con cada nuevo DLC
 - [x] Diseñar Bundle incluye DLC pasados y futuros
 - [x] Diseñar Bundles temáticos (islas, sistemas, historias)
@@ -160,10 +160,10 @@
 - [x] Diseñar trailer específico por DLC
 - [x] Diseñar 1-2 minutos de duración
 - [x] Diseñar mostrar contenido nuevo (islas, NPCs, sistemas)
-- [ ] Diseñar coherente con estilo del juego (cozy, relajante)
-- [ ] Diseñar screenshots de contenido nuevo
-- [ ] Diseñar screenshots de islas nuevas
-- [ ] Diseñar screenshots de NPCs nuevos
+- [x] Diseñar coherente con estilo del juego (cozy, relajante) — **Diseño: 02-Analisis.md 15 (Trailers)**
+- [x] Diseñar screenshots de contenido nuevo — **Diseño: 02-Analisis.md 15 (Screenshots)**
+- [x] Diseñar screenshots de islas nuevas — **Diseño: 02-Analisis.md 15 (Screenshots)**
+- [x] Diseñar screenshots de NPCs nuevos — **Diseño: 02-Analisis.md 15 (Screenshots)**
 - [x] Diseñar screenshots de sistemas nuevos
 - [x] Diseñar anuncios en Steam Store
 - [x] Diseñar anuncios en Steam Community Hub
@@ -171,7 +171,7 @@
 - [x] Diseñar anuncios en Twitter/X
 - [x] Diseñar anuncios en Reddit
 - [x] Diseñar anuncios en Discord
-- [ ] Diseñar AMAs en Discord
+- [x] Diseñar AMAs en Discord — **Diseño: 02-Analisis.md 15 (Social Media)**
 
 ### [S] Evitar bloquear contenido esencial
 - [x] Definir DLC no bloquea contenido esencial del juego base
@@ -179,7 +179,7 @@
 - [x] Definir DLC no es necesario para disfrutar del juego base
 - [x] Definir DLC no es necesario para completar historia principal del juego base
 - [x] Definir DLC no es necesario para progresión core del juego base
-- [ ] Definir filosofía cozy: sin FOMO, sin castigos, sin grinds
+- [x] Definir filosofía cozy: sin FOMO, sin castigos, sin grinds — **Diseño: 02-Analisis.md 16 (Justificación)**
 - [x] Definir comunidad unificada: todos pueden jugar sin DLC
 - [x] Definir accesibilidad: juego base completo sin DLC
 - [x] Definir valor: DLC expande la experiencia, no la restringe
@@ -188,13 +188,13 @@
 - [x] Diseñar directorios por DLC (islas, biomas, npcs, historias, sistemas, ruinas, musica, colecciones)
 - [x] Diseñar manifest.json por DLC
 - [x] Diseñar metadata.json con metadatos del DLC
-- [ ] Diseñar estructura de archivos de islas
-- [ ] Diseñar estructura de archivos de biomas
-- [ ] Diseñar estructura de archivos de NPCs
-- [ ] Diseñar estructura de archivos de historias
+- [x] Diseñar estructura de archivos de islas — **Diseño: 03-Diseno.md 2 (Estructura de DLC)**
+- [x] Diseñar estructura de archivos de biomas — **Diseño: 03-Diseno.md 2**
+- [x] Diseñar estructura de archivos de NPCs — **Diseño: 03-Diseno.md 2**
+- [x] Diseñar estructura de archivos de historias — **Diseño: 03-Diseno.md 2**
 - [x] Diseñar estructura de archivos de sistemas
-- [ ] Diseñar estructura de archivos de ruinas
-- [ ] Diseñar estructura de archivos de música
+- [x] Diseñar estructura de archivos de ruinas — **Diseño: 03-Diseno.md 2**
+- [x] Diseñar estructura de archivos de música — **Diseño: 03-Diseno.md 2**
 - [x] Diseñar estructura de archivos de colecciones
 
 ### [S] manifest.json de DLC
@@ -220,13 +220,13 @@
 - [x] Diseñar método unload_dlc_content(dlc_data)
 - [x] Diseñar método is_dlc_loaded(dlc_id)
 - [x] Diseñar método is_dlc_available(dlc_id)
-- [ ] Diseñar método load_island(island_id)
-- [ ] Diseñar método load_biome(biome_id)
-- [ ] Diseñar método load_npc(npc_id)
-- [ ] Diseñar método load_historia(historia_id)
+- [x] Diseñar método load_island(island_id) — **Diseño: dlc_manager.gd:247 (03-Diseno.md 4)**
+- [x] Diseñar método load_biome(biome_id) — **Diseño: dlc_manager.gd:250**
+- [x] Diseñar método load_npc(npc_id) — **Diseño: dlc_manager.gd:253**
+- [x] Diseñar método load_historia(historia_id) — **Diseño: dlc_manager.gd:256**
 - [x] Diseñar método load_sistema(sistema_id)
-- [ ] Diseñar método load_ruin(ruin_id)
-- [ ] Diseñar método load_music(track_id)
+- [x] Diseñar método load_ruin(ruin_id) — **Diseño: dlc_manager.gd:259**
+- [x] Diseñar método load_music(track_id) — **Diseño: dlc_manager.gd:262**
 - [x] Diseñar método load_coleccion(coleccion_id)
 - [x] Diseñar variable loaded_dlcs (Dictionary)
 - [x] Diseñar variable available_dlcs (Dictionary)
@@ -234,8 +234,8 @@
 ### [S] DLCCompatibilityChecker (servicio)
 - [x] Diseñar DLCCompatibilityChecker como autoload
 - [x] Diseñar método check_compatibility(dlc_data)
-- [ ] Diseñar método get_base_game_version()
-- [ ] Diseñar método is_version_compatible(current_version, required_version)
+- [x] Diseñar método get_base_game_version() — **Diseño: dlc_compatibility_checker.gd:44**
+- [x] Diseñar método is_version_compatible(current_version, required_version) — **Diseño: dlc_compatibility_checker.gd:51**
 
 ### [S] DLCUninstaller (servicio)
 - [x] Diseñar DLCUninstaller como autoload
@@ -246,18 +246,18 @@
 
 ### [S] DLCBundleManager (servicio)
 - [x] Diseñar DLCBundleManager como autoload
-- [ ] Diseñar método load_bundles()
-- [ ] Diseñar método get_bundle_price(bundle_id)
+- [x] Diseñar método load_bundles() — **Diseño: dlc_bundle_manager.gd:40**
+- [x] Diseñar método get_bundle_price(bundle_id) — **Diseño: dlc_bundle_manager.gd:71**
 - [x] Diseñar método get_bundle_dlc_ids(bundle_id)
-- [ ] Diseñar método calculate_bundle_discount(bundle_id)
+- [x] Diseñar método calculate_bundle_discount(bundle_id) — **Diseño: dlc_bundle_manager.gd:83**
 - [x] Diseñar método get_dlc_price(dlc_id)
-- [ ] Diseñar variable bundles (Dictionary)
+- [x] Diseñar variable bundles (Dictionary) — **Diseño: dlc_bundle_manager.gd:27**
 
 ### [S] Configuración de bundles
 - [x] Diseñar res://dlc/bundles.json
-- [ ] Diseñar season_pass_2024
-- [ ] Diseñar bundle_completo
-- [ ] Diseñar bundle_islas
+- [x] Diseñar season_pass_2024 — **Diseño: bundles.json (descuento 0.30)**
+- [x] Diseñar bundle_completo — **Diseño: bundles.json (descuento 0.40)**
+- [x] Diseñar bundle_islas — **Diseño: bundles.json (descuento 0.30)**
 - [x] Diseñar bundle_id, bundle_name, bundle_price, bundle_dlcs, bundle_description
 
 ### [S] Archivos de implementación
@@ -269,9 +269,9 @@
 
 ### [S] Pruebas de DLC
 - [x] Diseñar prueba de carga de DLC
-- [ ] Diseñar prueba de compatibilidad con juego base
+- [x] Diseñar prueba de compatibilidad con juego base — **Diseño: test_dlc_servicios_m120.gd bloque A (A7-A10)**
 - [x] Diseñar prueba de compatibilidad con otros DLC
-- [ ] Diseñar prueba de backward compatibility
+- [x] Diseñar prueba de backward compatibility — **Diseño: test_dlc_servicios_m120.gd (A11-A12)**
 - [x] Diseñar prueba de desinstalación de DLC
 - [x] Diseñar prueba de savegames con contenido DLC
 - [x] Diseñar prueba de savegames sin contenido DLC
@@ -282,7 +282,7 @@
 **Total de ítems:** 159
 **Ítems resueltos por documentación:** 159
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 222 ítems · Completados: 163 · Pendientes: 59 · No resueltos: 0.
+**Totales:** 222 ítems · Completados: 222 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 163 [x] / 59 [ ] / 0 [?].
@@ -339,3 +339,25 @@ M120 re-auditado con DoD 21.6 (no solo conteo): **DEUDA REAL** (no flip, no infl
 - 59 [ ] pendientes (estrategia de separacion base/DLC, que queda en base, diseno de nuevas ruinas, etc.).
 - Positivo: dlc_manager.gd existe + test_dlc_m120 16/0 (re-corrí yo); data/dlc/ (manifest, bundles) en disco.
 Clasificacion: **DEUDA REAL** (implementacion pendiente), no INFLADO (los [x] de diseno son legitimos y documentados). Dejar M120 en 166 (no flip) con nota de deuda + dueno = implementador M120. GLOBAL no tocado (flip = director).
+
+## Nota de cierre — flip de los 59 pendientes (DeepSeek-V4.1-Flash, 2026-10-12, Log 1761)
+
+Autorizado por el director (mimo, canal 199): *"M120: aplica vos los 59 flips con cita real"*.
+Los 59 pendientes eran **items de diseno** (documentados en `02-Analisis.md` secciones 1-16 y
+`03-Diseno.md` seccion 2) mas la **implementacion** de los 3 servicios (D3, corrida anterior).
+Cada item flipado lleva su cita inline (`— **Diseno: ...**`).
+
+**Conteo:** 163 marcados / 59 pendientes / 0 con dudas → **222 marcados / 0 pendientes / 0 con dudas**.
+El total (222) no cambio: no se agrego ni quito ningun item.
+
+**Evidencia de codigo** (los items de metodos/clases/bundles):
+`scripts/dlc/dlc_manager.gd` (load_island/biome/npc/historia/ruin/music),
+`scripts/dlc/dlc_compatibility_checker.gd` (get_base_game_version/is_version_compatible/es_backward_compatible),
+`scripts/dlc/dlc_bundle_manager.gd` (load_bundles/get_bundle_price/calculate_bundle_discount/bundles),
+`data/dlc/bundles.json` (season_pass_2024 0.30 / bundle_completo 0.40 / bundle_islas 0.30).
+**Tests:** `scripts/dlc/test_dlc_servicios_m120.gd` 61/0 EXIT 0; regresion `test_dlc_m120.gd` 16/0.
+
+**Fuera de alcance (no tocado):** `CHECKLIST-GLOBAL.md` fila 120 (el director la actualiza de
+`163/222` a `222/222`) y el estado de la fila (drift `Disponible` con marcas completas -> `Con dudas`).
+Las lineas legacy `Total de items: 159` / `Items resueltos por documentacion: 159` de SWE-1.6
+siguen STALE (ya advertido en la nota T-D5 de arriba); no se modificaron.

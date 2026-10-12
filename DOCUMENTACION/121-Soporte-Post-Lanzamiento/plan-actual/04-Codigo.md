@@ -342,3 +342,88 @@ func update_changelog(patch_version: String, bug_ids: Array):
 - Probar comunicación de incidencias.
 - Probar roadmap público.
 - Probar community updates.
+
+---
+
+## 12. Implementacion real (D2, DeepSeek-V4.1-Flash, 2026-10-12)
+
+> Seccion agregada al implementar el frente D2. Las secciones 2 y 4-8 son el
+> diseno original de SWE-1.6; aca se documenta lo que existe en disco.
+
+### 12.1 Divergencias respecto del diseno
+
+1. **Rutas:** el diseno proponia `res://support/`. La implementacion vive en
+   `res://scripts/support/` (convencion real del proyecto).
+2. **FAQ de datos:** el diseno proponia `res://support/faq.json`; el archivo real
+   es `res://data/support/faq.json`.
+3. **Autoloads:** el diseno pedia 5 autoloads. Solo `SupportManager` es autoload
+   (registrado en `project.godot`). Los otros 4 servicios se instancian de forma
+   perezosa desde `SupportManager` para NO editar `project.godot` (archivo
+   compartido por varios agentes).
+
+### 12.2 Archivos implementados
+
+| Archivo | Servicio | API publica |
+|---|---|---|
+| `scripts/support/support_manager.gd` | SupportManager (autoload) | `create_ticket()`, `generate_ticket_id()`, `resolve_ticket()`, `setup_email_autoresponder()`, `setup_discord_channels()`, `faq_manager()`, `ticket_manager()`, `hotfix_manager()`, `patch_manager()`, senales `ticket_created`/`ticket_resolved` |
+| `scripts/support/faq_manager.gd` | FAQManager | `load_faq()`, `search_faq()`, `por_categoria()`, `categorias()`, `total()`, `faq_data` |
+| `scripts/support/ticket_manager.gd` | TicketManager | `create_ticket()`, `update_ticket_status()`, `resolve_ticket()`, `get_ticket()`, `generate_ticket_id()`, `por_estado()`, `por_prioridad()`, `tickets` |
+| `scripts/support/hotfix_manager.gd` | HotfixManager | `trigger_hotfix()`, `avanzar_fase()`, `deploy_hotfix()`, `communicate_hotfix()`, `get_hotfix()`, `desplegados()` |
+| `scripts/support/patch_manager.gd` | PatchManager | `create_patch()`, `acumular_bug()`, `avanzar_fase()`, `deploy_patch()`, `update_changelog()`, `get_patch()` |
+
+### 12.3 Constantes de proceso
+
+- `HotfixManager.HORAS_SLA_MIN = 24` / `HORAS_SLA_MAX = 48`.
+- `HotfixManager.FASES` = identificado -> reproducido -> corregido -> testeado -> desplegado -> comunicado.
+- `PatchManager.DIAS_CADENCIA_MIN = 30` / `DIAS_CADENCIA_MAX = 90` (mensual/trimestral).
+- `TicketManager.ESTADOS` / `TicketManager.PRIORIDADES`.
+
+### 12.4 Lo que NO es codigo del juego (proceso/operaciones)
+
+El deployment en Steam, la configuracion real de email/Discord/Twitter, la
+monitorizacion externa (UptimeRobot/Pingdom) y la publicacion de roadmaps o
+respuestas a reviews son tareas **manuales de operaciones**, no codigo de gameplay.
+El modulo modela el proceso y expone los datos; la ejecucion externa queda fuera
+del repositorio.
+
+### 12.5 Test headless
+
+- `scripts/support/test_support_m121.gd` (15 checks): SupportManager + SupportValidator.
+- `scripts/support/test_support_servicios_m121.gd` (70 checks): los 4 servicios y su
+  integracion via SupportManager. Guardian de 3 capas (marcadores de bloque + piso
+  `CHECKS_MINIMOS` medido + resumen diferido), probado EN ROJO con 3 sondas de
+  inyeccion (EXIT 1 en las tres).
+- Resultado medido: **15/0** y **70/0**, EXIT 0 x3, 0 SCRIPT ERROR.
+
+### 12.6 Pendiente propuesto al director (NO aplicado por el ejecutor)
+
+- Los 88 `[ ]` quedaron adjudicados en el Log 1752:
+  28 IMPL-D2 / 27 EXTERNO-MANUAL / 20 PROCESO-DOC / 5 DATO-FAQ / 4 DEP-M107 /
+  1 DEP-M61 / 1 DEP-M98.
+- `data/support/faq.json` tiene 4 FAQ de 4 categorias; el diseno sec.9 define 15
+  preguntas en 5 categorias (tecnico, gameplay, historia, DLC, soporte). Ampliarlo
+  cerraria los 5 DATO-FAQ, pero exige actualizar la asercion "4 FAQ" del suite
+  original (el conteo cambia con el dato).
+- La linea `**Total de ítems:** 149` / `resueltos por documentacion: 149` del
+  `05-Checklist.md` esta en drift respecto del conteo real (123 `[x]` / 88 `[ ]`).
+
+## 13. DATO-FAQ ejecutado (DeepSeek-V4.1-Flash, 2026-10-12, Log 1757)
+
+Autorizado por el director (canales 196 y 197): "ampliar `faq.json` a 15 preguntas en
+la proxima corrida". Cierra los items DATO-FAQ del barrido del Log 1752.
+
+- `data/support/faq.json` paso de 4 a **15** preguntas. Categorias derivadas de los
+  items: **10** (guardado, crash, rendimiento, cuenta, tecnica, gameplay, historia,
+  dlc, bug, soporte). La lista declarada `categorias` paso de 6 a **11** (se agregaron
+  las 5 nuevas y se conservo `pregunta_general`), porque `SupportValidator.validar()`
+  exige que la categoria de cada item exista en la lista declarada; sin eso el item
+  "config valida (0 errores)" de la suite original se ponia ROJO.
+- El dato cambio -> se revisaron las aserciones que lo fijaban (regla: un test que
+  fija un dato se actualiza con el dato):
+  `test_support_m121.gd`: "4 FAQ" -> **15**, "6 categorias" -> **11**.
+  `test_support_servicios_m121.gd`: "A1 carga 4 FAQ" -> **15**, "A7 categorias
+  presentes" 4 -> **10**.
+- Resultado medido (Godot 4.7.2 headless): `test_support_m121.gd` **15/0** EXIT 0 x3;
+  `test_support_servicios_m121.gd` **70/0** EXIT 0 x3; 0 SCRIPT ERROR en ambos.
+- Higiene: `faq.json` 3520 B, sin BOM, LF, sin NUL/FFFD; 15 ids unicos, 0 categorias
+  fuera de la lista declarada.

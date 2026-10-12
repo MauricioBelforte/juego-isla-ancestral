@@ -472,3 +472,76 @@ func get_dlc_price(dlc_id: String) -> float:
 - Probar savegames con contenido DLC.
 - Probar savegames sin contenido DLC.
 - Probar bundles de DLC.
+
+## 11. Implementacion real de los 3 servicios (D3, DeepSeek-V4.1-Flash, 2026-10-12, Log 1757)
+
+Encargo del director (canal 197, item 2): implementar `dlc_compatibility_checker.gd`,
+`dlc_uninstaller.gd`, `dlc_bundle_manager.gd` y los pendientes de codigo del modulo.
+
+### 11.1 Divergencias respecto del diseno
+
+1. El diseno pedia 4 autoloads (`DlcManager`, `DLCCompatibilityChecker`, `DLCUninstaller`,
+   `DLCBundleManager`). Se implementa **un solo autoload** (`DlcManager`) con los otros 3
+   como `RefCounted` instanciados por el, para NO tocar `project.godot` (archivo
+   compartido por varios agentes: trampa AM del skill). Precedente aceptado: M121 (D2).
+2. Rutas reales: `scripts/dlc/*.gd` y `data/dlc/{bundles,dlc_manifest}.json`
+   (el diseno decia `res://dlc/`).
+3. `is_version_compatible()` compara SEMANTICAMENTE (a.b.c), no `==` como el esqueleto.
+   `dlc_compatibility_checker.gd` NO preloadea `dlc_manager.gd` (evita un preload
+   circular); la comparacion vive en ambos y la **suite las cruza** (5 pares) para que
+   no deriven.
+4. `DLCUninstaller` usa `user://saves` (el directorio real de M59), no `user://savegames/`,
+   y sus rutas son INYECTABLES (`dir_saves`/`dir_dlc`) para poder testear headless contra
+   un temporal sin tocar los saves reales.
+5. `DLCBundleManager` acepta el envoltorio real `{"bundles":[...]}` y las DOS grafias de
+   clave (`id`/`bundle_id`, `nombre`/`bundle_name`, `precio`/`bundle_price`,
+   `dlcs`/`bundle_dlcs`, `descripcion`/`bundle_description`).
+6. El precio final de cada DLC lo fija M95; aca se lee el campo `precio` de referencia del
+   manifest (se agrego `precio` a los 2 DLC) y se usa 0.0 si no existe.
+
+### 11.2 Archivos implementados
+
+| Archivo | Servicio | API publica |
+|---|---|---|
+| `scripts/dlc/dlc_compatibility_checker.gd` | DLCCompatibilityChecker | `check_compatibility()`, `get_base_game_version()`, `is_version_compatible()`, `requisitos()`, `es_backward_compatible()` |
+| `scripts/dlc/dlc_uninstaller.gd` | DLCUninstaller | `uninstall_dlc()`, `mark_savegames_as_incomplete()`, `delete_dlc_files()`, `update_savegames()` |
+| `scripts/dlc/dlc_bundle_manager.gd` | DLCBundleManager | `load_bundles()`, `get_bundle_price()`, `get_bundle_dlc_ids()`, `calculate_bundle_discount()`, `get_dlc_price()`, `bundles`, `total()`, `ids()` |
+| `scripts/dlc/dlc_manager.gd` (extendido) | DlcManager | accessors `compatibility_checker()`/`uninstaller()`/`bundle_manager()` + `load_island/load_biome/load_npc/load_historia/load_ruin/load_music` + `cargar_contenido()`/`contenido_cargado()` |
+| `data/dlc/bundles.json` (extendido) | config | +`season_pass_2024` (30%), `bundle_completo` (40%), `bundle_islas` (30%) |
+| `data/dlc/dlc_manifest.json` (extendido) | config | +`precio` de referencia por DLC |
+
+### 11.3 Decision de diseno: descuento CALCULADO vs DECLARADO
+
+`calculate_bundle_discount()` calcula `1 - precio_bundle/suma_individual` SOLO si TODOS
+los DLC del bundle tienen precio > 0; si falta alguno (`isla_volcan`/`isla_bosque` son DLC
+planificados sin precio) usa el `descuento` declarado en el JSON. Un calculo con precios
+parciales daria un descuento negativo (basura). Medido: `bundle_deluxe` (todos con precio)
+-> 0.1496 CALCULADO; `season_pass_2024` (2 de 3 sin precio) -> 0.30 DECLARADO.
+
+### 11.4 Test headless
+
+- `scripts/dlc/test_dlc_servicios_m120.gd` (61 checks, 6 bloques A-F): los 3 servicios +
+  los loaders + el cruce de versiones con `DlcManager.comparar_versiones` + la config de
+  bundles. Guardian de 3 capas (marcadores `_fin` + piso `CHECKS_MINIMOS=61` MEDIDO +
+  resumen diferido), probado EN ROJO con 4 sondas (asercion falsa, bloque que no cierra,
+  piso +1, aborto de runtime en un helper): las 4 -> EXIT 1.
+- Regresion `scripts/dlc/test_dlc_m120.gd` (16 checks): 16/0 EXIT 0 x3.
+- Resultado medido: **61/0** EXIT 0 x3, 0 SCRIPT ERROR; regresion **16/0** EXIT 0 x3.
+
+## 12. Cierre de pendientes y decision del director (DeepSeek-V4.1-Flash, 2026-10-12, Log 1761)
+
+### 12.1 Comparacion semantica de versiones: CONFIRMADA
+
+El director (mimo, canal 199) confirmo la divergencia 11.1.3: *"Comparacion semantica: queda
+asi. La doc estaba mal; `"1.0"` = `"1.0.0"` es el comportamiento correcto."*
+Queda como comportamiento DEFINITIVO de `is_version_compatible()` /
+`DlcManager.comparar_versiones()` (comparacion por segmentos a.b.c, no `==` de string).
+El esqueleto de las secciones 5 y 7 de este documento (que decia `current_version == required_version`)
+queda OBSOLETO en ese punto.
+
+### 12.2 Flip de los 59 pendientes del 05-Checklist.md
+
+Autorizado por el director en el mismo mensaje. Los 59 pendientes eran items de diseno
+(documentados en `02-Analisis.md` secciones 1-16 y `03-Diseno.md` seccion 2) mas la implementacion
+de los 3 servicios (seccion 11). Cada item flipado lleva cita inline. Conteo: 163 -> 222 marcados,
+59 -> 0 pendientes, total 222 sin cambios. NO se toco `CHECKLIST-GLOBAL.md`.
