@@ -545,3 +545,43 @@ Autorizado por el director en el mismo mensaje. Los 59 pendientes eran items de 
 (documentados en `02-Analisis.md` secciones 1-16 y `03-Diseno.md` seccion 2) mas la implementacion
 de los 3 servicios (seccion 11). Cada item flipado lleva cita inline. Conteo: 163 -> 222 marcados,
 59 -> 0 pendientes, total 222 sin cambios. NO se toco `CHECKLIST-GLOBAL.md`.
+
+## 13. Notas de la QA 21.8 (atria-dawn-s2 / Kilo Code, 2026-10-12, Log 1765)
+
+### 13.1 Divergencia de nombres API (design != implementation)
+
+El bloque "DLCManager (servicio)" del `05-Checklist.md` (L213-232) y la seccion 10 de
+este documento usan los nombres del **diseno**. La implementacion real los renombró por
+equivalentes funcionales:
+
+| Diseno (checklist / seccion 10) | Implementacion real (`dlc_manager.gd`) |
+|---|---|
+| `load_available_dlcs()` | `dlcs_ids()` (L142) |
+| `load_dlc(dlc_id)` | `activar(id)` (L117) |
+| `unload_dlc(dlc_id)` | `desactivar(id)` (L125) |
+| `is_dlc_loaded(dlc_id)` | `esta_activo(id)` (L128) |
+| `is_dlc_available(dlc_id)` | `dlc(id)` -> Dictionary no vacio (L70) |
+| `signal dlc_loaded(dlc_id)` | **sin equivalente** (no implementada) |
+| `signal dlc_unloaded(dlc_id)` | **sin equivalente** (no implementada) |
+| `var loaded_dlcs` | `_activos` (L25) |
+| `var available_dlcs` | `config` (L23, desde `dlc_manifest.json`) |
+
+La funcion de los 7 metodos y las 2 variables esta cubierta por los equivalentes. Las 2
+**signals no existen** (deuda menor: si un modulo necesita reaccionar a carga/descarga de
+DLC, habria que anadirlas). Los metodos publicos si estan cubiertos por las suites
+(`test_dlc_m120.gd` 16/0, `tests/unit/dlc/test_dlc_manager.gd` 39/0).
+
+### 13.2 Deuda M145/M146: manifest/bundles mismatch
+
+`data/dlc/dlc_manifest.json` define **2 DLC** (`isla_hielo`, `pack_aurora`), pero
+`data/dlc/bundles.json` referencia **`isla_volcan` e `isla_bosque`**, que NO existen en el
+manifest. Es coherente con el estado "planificado" (el manifest fija `hito_lanzamiento`
+M145 para `isla_hielo` y M146 para `pack_aurora`), pero conviene registrarlo:
+
+- **Deuda para M145/M146:** al implementar esos hitos, anadir `isla_volcan` e
+  `isla_bosque` a `dlc_manifest.json` con su `precio`. Hasta entonces,
+  `calculate_bundle_discount()` no puede calcular el descuento de
+  `season_pass_2024`/`bundle_islas` (2 de 3 DLC sin precio) y usa el `descuento`
+  declarado del JSON (ver seccion 11.3).
+- **Sin impacto en runtime:** las suites lo cubren (bloque F de
+  `test_dlc_servicios_m120.gd` verifica los 3 bundles por id + descuento declarado).
