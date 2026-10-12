@@ -16,6 +16,25 @@
     "metal": 4
   },
   "colocar": {
-    "variaciones": 4
+    "variaciones": 4,
+    "familia_material": "paso",
+    "nota": "Reutiliza la familia del material de origen (madera → tono madera, piedra → tono piedra)"
+  },
+  "herramientas": {
+    "variaciones_por_tipo": 4,
+    "tipos": ["hoja", "maza", "corta", "garra"],
+    "nota": "Cada tipo de herramienta tiene 4 variaciones distintas de tono"
+  },
+  "distancias_3d_m": {
+    "paso": 15,
+    "romper": 20,
+    "mundo": 30,
+    "ui_2d": 0,
+    "dialogo_2d": 0
+  },
+  "etapas": {
+    "pescar": ["cast", "splash", "bote", "reel"],
+    "crafting": ["golpe_1", "golpe_2", "golpe_3", "arpegio_exito"],
+    "comercio": ["mostrar", "confirmar", "monedas"]
   }
 }

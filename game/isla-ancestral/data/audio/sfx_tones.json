@@ -5,5 +5,19 @@
   "recoger": {"notas_semitonos": [12], "orden": "ascendente", "duracion_s": 0.2, "tono": "positivo"},
   "compra": {"notas_semitonos": [0, 4, 7], "monedas": 2, "orden": "ascendente", "duracion_s": 0.45, "tono": "ligero"},
   "venta": {"notas_semitonos": [0, 3, 7], "monedas": 2, "orden": "ascendente", "duracion_s": 0.5, "tono": "medio"},
-  "crafting_exito": {"notas_semitonos": [0, 5, 7], "orden": "ascendente", "duracion_s": 0.4, "tono": "productivo"}
+  "crafting_exito": {"notas_semitonos": [0, 5, 7], "orden": "ascendente", "duracion_s": 0.4, "tono": "productivo"},
+  "saltar": {"notas_semitonos": [-2, 0], "orden": "ascendente", "duracion_s": 0.15, "tono": "suave", "tipo": "despegue", "varias_por_superficie": true},
+  "caer": {"notas_semitonos": [0, -4, -7], "orden": "descendente", "duracion_s": 0.3, "tono": "suave", "rangos_altura": 3, "sin_violencia": true},
+  "nadar": {"notas_semitonos": [0, 2, 0], "orden": "ascendente", "duracion_s": 0.5, "tono": "agua", "tipos": ["entrada", "avance", "salida"]},
+  "abrir": {"notas_semitonos": [0, 5], "orden": "ascendente", "duracion_s": 0.25, "tono": "mecanico", "variaciones": 3, "materiales": ["madera", "cerrojo"]},
+  "cerrar": {"notas_semitonos": [0, -4], "orden": "descendente", "duracion_s": 0.15, "tono": "seco", "golpe": true},
+  "equipar": {"notas_semitonos": [0, 3, 7], "orden": "ascendente", "duracion_s": 0.2, "tono": "swish", "variaciones": 2, "tipo": "clic"},
+  "herramienta": {"notas_semitonos": [0, 4], "orden": "ascendente", "duracion_s": 0.2, "tono": "metálico", "variaciones": 4, "por_tipo": true},
+  "pescar": {"notas_semitonos": [0, 2, 5, 7], "orden": "ascendente", "duracion_s": 0.6, "tono": "agua", "etapas": ["cast", "splash", "bote", "reel"]},
+  "dialog": {"notas_semitonos": [0], "orden": "ascendente", "duracion_s": 0.1, "tono": "suave", "tipo": "click_ui"},
+  "menu": {"notas_semitonos": [0, 4, 7], "orden": "ascendente", "duracion_s": 0.4, "tono": "papel", "material": "pergamino"},
+  "seleccion": {"notas_semitonos": [0], "orden": "ascendente", "duracion_s": 0.08, "tono": "muy_suave", "tipo": "clic_corto"},
+  "plantar": {"notas_semitonos": [0, -2], "orden": "descendente", "duracion_s": 0.2, "tono": "tierra", "variaciones": 3, "grano": true},
+  "regar": {"notas_semitonos": [0, 2, 0], "orden": "ascendente", "duracion_s": 0.4, "tono": "agua", "chorrito": true, "goteo_corto": true},
+  "cosechar": {"notas_semitonos": [0, 4, 7], "orden": "ascendente", "duracion_s": 0.35, "tono": "follaje", "logro_ligero": true}
 }
