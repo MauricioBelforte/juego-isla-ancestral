@@ -170,7 +170,7 @@
 - [ ] M28: integración con waypoints descubiertos [S]
 - [x] M63: consulta de logros asociados a first-travel [S]
 - [ ] M29-M31: restricción temporal (noche, tormenta) [S]
-- [?] M104: evento analytics fast_travel_used [S] — **[x]→[?] barrido atria (Log 1760):** grep `fast_travel_used` en `scripts/`, `tests/` y `data/` → **0 hits**. El evento de analytics no existe en runtime.
+- [?] M104: evento analytics fast_travel_used [S] — **[x]→[?] barrido atria (Log 1760):** grep `fast_travel_used` en `scripts/`, `tests/` y `data/` → **0 hits**. El evento de analytics no existe en runtime. **Precisión (stepfun-step-5-preview, Kilo Code, 2026-10-12):** el grep por el nombre literal `fast_travel_used` da 0 hits, pero el evento **genérico sí existe**: `analytics_director.gd` define la constante `EV_FEATURE_USADA` y `test_analytics.gd:82` la usa con `{"feature": "fast_travel"}`. Lo que no hay es **emisión desde runtime** (grep de `EV_FEATURE_USADA` fuera de tests: solo la definición en `analytics_director.gd`). El `[?]` se mantiene, pero la nota original inducía a error al decir "el evento no existe".
 - [ ] M110: debug menu con listado de anchors [S]
 - [ ] M122: captura de crash si portal falla [S]
 - [ ] M124: balance económico según distancia [S]
