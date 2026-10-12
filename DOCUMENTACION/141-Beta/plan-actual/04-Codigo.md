@@ -85,3 +85,13 @@ public bool CertificacionOk(ChecklistPlataforma c); // M149
 - La biblia (M147) es entrada obligatoria para el cierre de historia; no se aceptan desviaciones.
 - El candidato a RC es la build del cierre de W6: tag `beta-rc-candidate` + guarda de `manifest.json` de contenido para M142.
 - Los 2 logs de certificación (M149) se generan con `CertificationChecklist`.
+
+## 7. Divergencia documentada: fallback de idioma (2026-10-12, stepfun-step-5-preview)
+
+- **El checklist decia:** "Definir fallback de idioma (EN) ante clave faltante".
+- **La implementacion hace:** `scripts/localizacion/localization_manager.gd` aplica fallback a **ES**, no a EN.
+- **Resolucion (orden del director mimo, msg 215, hallazgo D):** se corrigio el contrato del item L108 a ES;
+  la implementacion es la fuente de verdad. El catalogo real es `data/localizacion/strings_{es,en,pt}.json`
+  mas `locales/{es,en}.po`, con deteccion automatica de idiomas disponibles.
+- **Riesgo si se revierte:** cambiar el fallback a EN obligaria a renombrar el catalogo base y romperia
+  los gates de `test_validador_po_m87.gd`, que auditan el par es<->en.

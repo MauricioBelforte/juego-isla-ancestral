@@ -94,7 +94,7 @@
 
 ## 6. Localización completa (RF6/M87)
 
-- [ ] Definir los 6 idiomas objetivo de M87 [M]
+- [ ] Definir los 6 idiomas objetivo de M87 [M] — **DEUDA (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 215):** faltan 3 idiomas (PT + 2 por definir) — dueño **M87**. Evidencia en disco: `data/localizacion/strings_{es,en,pt}.json` (3) + `locales/{es,en}.po` (2).
 - [x] Definir glosario centralizado por término clave [M] — implementado (stepfun-step-5-preview, 2026-10-12): `data/localization/glosario.json` (2,4 KB) + `scripts/localization/glosario.gd` (class_name Glosario, 6,2 KB); el gate `test_localizacion_iter6.gd` valida términos canónicos (quality.yml:276).
 - [x] Definir archivo JSON por idioma [M]
 - [ ] Definir export/import CSV para traductores [M]
@@ -105,12 +105,12 @@
 - [ ] Definir nombres propios no traducidos (biblia) [S]
 - [ ] Definir localización de fechas/formatos por idioma [S]
 - [x] Definir verificación de tamaño de textos (desbordes UI) [S] — implementado (stepfun-step-5-preview, 2026-10-12): `scripts/localization/analizador_layout.gd` (class_name AnalizadorLayout.medir()) mide ancho/alto real con la fuente; el gate `test_localizacion_iter6.gd` (quality.yml:276, 82 checks) prueba expansión es->en y desborde del contenedor 220x40.
-- [ ] Definir fallback de idioma (EN) ante clave faltante [S]
+- [x] Definir fallback de idioma ante clave faltante [S] — **CORREGIDO el contrato de EN a ES** (stepfun-step-5-preview, Kilo Code, 2026-10-12, por orden del director mimo msg 215, hallazgo D): `scripts/localizacion/localization_manager.gd` documenta y aplica "fallback a ES", no a EN. La implementación es la fuente de verdad; divergencia anotada en `04-Codigo.md`.
 - [ ] Definir ronda de revisión final en W5-W6 [S]
 
 ## 7. Accesibilidad implementada (RF7/M58)
 
-- [ ] Definir remapeo completo de controles (teclado/gamepad) [M]
+- [ ] Definir remapeo completo de controles (teclado/gamepad) [M] — **ALCANCE REAL (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 215):** el remap implementado cubre **teclado y ratón solamente**. Evidencia: `PERFILES_CONTROL` en `accesibilidad_manager.gd` mapea acciones a teclas (`A/D/W/S`, `ESPACIO`, `F`, `ESC`, `Q`, `E`, `R`) y botones de ratón (`RATON_IZQ/DER`); `accesibilidad_manager.aplicar_perfil()` es el único consumidor. `scripts/controls/control_input.gd` sí detecta el dispositivo activo y etiqueta acciones de mando (`InputEventJoypadButton/Motion`, `_etiqueta_mando`), pero **no remea botones de mando**: grep de `joypad|mando|gamepad|JOY_` sobre `accesibilidad_manager.gd`, `accesibilidad_aplicador.gd` y `accesibilidad_schema.gd` da **0 hits**. Pendiente: remap de gamepad.
 - [x] Definir subtítulos configurables (tamaño/opacidad/fondo) [M]
 - [x] Definir modos de color alternativos (puzzles y UI) [M] — implementado (stepfun-step-5-preview, 2026-10-12): `accesibilidad_manager.gd` (const PERFILES) incluye protanopia, deuteranopia, tritanopia y alto_contraste; `accesibilidad_schema.gd` valida CONTRASTES [alto/medio/bajo] y contraste relativo WCAG. Tests: test_accesibilidad_manager.gd, test_accesibilidad_headless.gd, test_perfil_m58_iter4.gd.
 - [x] Definir reducción de efectos visuales y sacudidas [M] — implementado (stepfun-step-5-preview, 2026-10-12): perfil `prevenir_mareos` en `accesibilidad_manager.gd`: `reducir_movimiento: true` con `factor_movimiento: 0.2` (reduce cámara/movimiento al 20 %, RF21).
