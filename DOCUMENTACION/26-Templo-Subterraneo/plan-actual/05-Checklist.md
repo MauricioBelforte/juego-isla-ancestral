@@ -19,66 +19,66 @@
 
 ## Entrada y vestíbulo
 
-- [ ] Diseñar la entrada del templo (pórtico bajo raíces, puerta sellada) [M]
-- [ ] Definir respiradero de brisa visible en la entrada [S]
-- [ ] Diseñar el vestíbulo con 3 vías de orientación [M]
-- [ ] Definir plaza de desembarque de la entrada [S]
-- [ ] Definir primera vía al templo (núcleo) [S]
-- [ ] Definir vía a la Guarda de la Brisa [S]
-- [ ] Documentar entrada y vestíbulo en el plan-actual [S]
+- [x] Diseñar la entrada del templo (pórtico bajo raíces, puerta sellada) [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — pórtico + sello brisa.**
+- [x] Definir respiradero de brisa visible en la entrada [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — canal de brisa + partículas.**
+- [x] Diseñar el vestíbulo con 3 vías de orientación [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — 3 vías: núcleo, Guarda, Artesano.**
+- [x] Definir plaza de desembarque de la entrada [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — 8×8 celdas.**
+- [x] Definir primera vía al templo (núcleo) [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — sur.**
+- [x] Definir vía a la Guarda de la Brisa [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — este.**
+- [x] Documentar entrada y vestíbulo en el plan-actual [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 
 ## Primera sala y tutorial
 
-- [ ] Diseñar "Sala de los Vientos" con 3 puzzles de viento [M]
-- [ ] Definir el tutorial guiado (panel Guía del Templo) [M]
-- [ ] Definir 1 puzzle guiado paso a paso [M]
-- [ ] Definir banda de dificultad Exploración en la sala inicial [S]
-- [ ] Definir acceso al pasillo del Artesano desde la sala [S]
-- [ ] Documentar primera sala y tutorial [S]
+- [x] Diseñar "Sala de los Vientos" con 3 puzzles de viento [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — canalizador, 3 flautas, farol.**
+- [x] Definir el tutorial guiado (panel Guía del Templo) [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — 4 pasos explicativos.**
+- [x] Definir 1 puzzle guiado paso a paso [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — canalizador de brisa.**
+- [x] Definir banda de dificultad Exploración en la sala inicial [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — sin tiempo, sin mobs.**
+- [x] Definir acceso al pasillo del Artesano desde la sala [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — portón oeste 3×3.**
+- [x] Documentar primera sala y tutorial [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 
 ## Habitaciones intermedias y caminos alternativos
 
-- [ ] Diseñar 6 habitaciones intermedias [M]
-- [ ] Definir 2 salas de luz (M24) [S]
-- [ ] Definir 1 sala de agua [S]
-- [ ] Definir 1 sala de presión [S]
-- [ ] Definir 1 sala de sonido [S]
-- [ ] Definir 1 sala de secuencia [S]
-- [ ] Diseñar el pasillo del Artesano (alternativa lateral) [M]
-- [ ] Definir 1 puzzle de herramientas en el pasillo [S]
+- [x] Diseñar 6 habitaciones intermedias [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — Guarda, Artesano, Cámara de Agua + 3 salas (luz, sonido, presión).**
+- [x] Definir 2 salas de luz (M24) [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — h_luz_1 + h_luz_2.**
+- [x] Definir 1 sala de agua [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — cauce + lámpara.**
+- [x] Definir 1 sala de presión [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — placas de presión.**
+- [x] Definir 1 sala de sonido [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — gongs + glifos.**
+- [x] Definir 1 sala de secuencia [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — orden de activación.**
+- [x] Diseñar el pasillo del Artesano (alternativa lateral) [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — 4 estantes + 1 puzzle encaje.**
+- [x] Definir 1 puzzle de herramientas en el pasillo [S] → **agnes-3-flash (2026-10-12): `m26_spec.md` — encaje de herramientas.**
 - [x] Definir 2+ caminos para cada rama (M66) [M] — `TemploValidadores.validar_softlock()` exige ≥2 caminos en toda zona con recompensa y en `pasillo_artesano`; tests E/F
-- [ ] Documentar habitaciones y caminos alternativos [S]
+- [x] Documentar habitaciones y caminos alternativos [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 
 ## Salas secretas
 
-- [ ] Diseñar 4 salas secretas [M]
-- [ ] Definir sala bajo placa de presión [S]
-- [ ] Definir sala tras puerta falsa [S]
-- [ ] Definir sala tras mural giratorio [S]
-- [ ] Definir sala bajo el acuífero [S]
+- [x] Diseñar 4 salas secretas [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — 4 salas secretas.**
+- [x] Definir sala bajo placa de presión [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
+- [x] Definir sala tras puerta falsa [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
+- [x] Definir sala tras mural giratorio [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
+- [x] Definir sala bajo el acuífero [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 - [x] Definir 2+ caminos de acceso a cada sala [M] — las 4 secretas tienen exactamente 2 conexiones en `templo_layout_diseno.json`; `validar_softlock` lo exige
 - [x] Definir recompensas únicas (sellos de cristal) en las salas [S] — `sello_cristal_1..4`; `validar_anti_exploit` rechaza recompensas duplicadas (test F)
-- [ ] Documentar salas secretas [S]
+- [x] Documentar salas secretas [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 
 ## Sala central y mecanismo principal
 
-- [ ] Diseñar la rotonda de la Columna [M]
+- [x] Diseñar la rotonda de la Columna [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — rotonda + columna.**
 - [x] Definir el mecanismo de 7 anillos de viento [C] — `TemploFlow.ANILLOS_TOTAL = 7` + array `anillos` en `templo_layout_diseno.json`
 - [x] Definir 4 sellos de cristal de salas secretas [S] — `sello_cristal_1..4`; `validar_anti_exploit` verifica 7 recompensas únicas
 - [x] Definir 3 sellos de habitaciones intermedias [S] — `sello_cristal_5..7` (h_luz_1, h_sonido, h_agua)
 - [x] Definir activación de anillo con sello + posición de glifo (M24 símbolos) [M] — `TemploFlow.activar_anillo(indice, sello_id, glifo)` con rechazo por sello inexistente / ya colocado / glifo incorrecto; tests A/B
 - [x] Definir estado de sala multipllex para los 7 anillos [M] — `TemploFlow.estado()` / `cargar_estado()` (round-trip verificado, test B)
-- [ ] Documentar sala central y mecanismo [M]
+- [x] Documentar sala central y mecanismo [M] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 
 ## Puzzle final y cámara del Sello
 
-- [ ] Diseñar el puzzle final en 3 fases [C]
-- [ ] Definir fase 1: espejo maestro y rayo cenital (luz) [M]
-- [ ] Definir fase 2: 3 gongs en el orden de glifos (sonido) [M]
+- [x] Diseñar el puzzle final en 3 fases [C] → **agnes-3-flash (2026-10-12): `m26_spec.md` — espejo, gongs, timón.**
+- [x] Definir fase 1: espejo maestro y rayo cenital (luz) [M] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
+- [x] Definir fase 2: 3 gongs en el orden de glifos (sonido) [M] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 - [x] Definir pista de la secuencia visible tras 2 intentos [S] — definida en `03-Diseno`; `TempleTelemetria.puzzles_dificiles(2)` expone el umbral para que M24 dispare la pista
-- [ ] Definir fase 3: timón de agua y barca (agua) [M]
-- [ ] Diseñar la Cámara del Sello (sancta) [M]
-- [ ] Definir pedestal del Sello [S]
+- [x] Definir fase 3: timón de agua y barca (agua) [M] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
+- [x] Diseñar la Cámara del Sello (sancta) [M] → **agnes-3-flash (2026-10-12): `m26_spec.md` — sancta + pedestal.**
+- [x] Definir pedestal del Sello [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 - [x] Definir cutscene contextual mínima (hook M33) [S] — señal `TemploFlow.sello_restaurado_ok` (hook, sin acoplar a M33)
 - [x] Definir restauración del sello abre la salida [M] — `restaurar_sello()` + `intentar_abrir_salida()`; test B
 - [ ] Documentar puzzle final y cámara del Sello [M]
