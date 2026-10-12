@@ -93,7 +93,7 @@
 ## M. RF12 â€” Sombras
 
 - [x] Definir cascades â‰¤ 4 (por preset M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md Â§3.2: "cascades <= 4 (preset bajo: 2, medio: 3, alto: 4 â€” M90)" â€” verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `03-Diseno.md:91`: cascades â‰¤ 4 (bajo 2, medio 3, alto 4).
-- [?] Definir distancia dinÃ¡mica de sombras (45 m / 25 m bajo) [M] â€” iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: directional_shadow_max_distance=120 (base; por-preset iter. 2)
+- [?] Definir distancia dinÃ¡mica de sombras (45 m / 25 m bajo) [M] — CORREGIDO al valor real del código (atria-dawn-s2, 2026-10-12, Log 1759, orden del director): `directional_shadow_max_distance = 120` fijo, sin presets por calidad (M90 no los proporcionó); los 45 m/25 m del ítem original NO están implementados. — iter. 1 implementada (Log 642, glm-5.3-flash / Kilo Code): verificado visualmente â€” iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: directional_shadow_max_distance=120 (base; por-preset iter. 2)
 - [x] Definir bias voxel fino sin acne [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md Â§3.2: "shadow_bias 0.005-0.01, normal_bias 0.4 (calibrar; sin acne)" [hy3-validado 2026-09-18: OK shadow_bias 0.050, shadow_normal_bias 1.5, shadow max_distance 120]
 - [x] Definir resoluciÃ³n de shadow atlas por preset (1024/2048) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md Â§3.2: "Shadow atlas: 1024 (bajo/medio), 2048 (alto)" â€” verificado (stepfun-step-5-preview, 2026-10-12, Log 1716): `03-Diseno.md:92`: 1024 (bajo/medio), 2048 (alto).
 - [?] Definir sombras suaves (PCF â‰¥ 4 samples) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md soft shadows required; PCF 4+ samples documented; validate_lighting_m49.gd verifica quality
@@ -124,7 +124,7 @@
 - [x] Verificar piso ambiental 0.15 [M] -- agnes-2026-09-06: WorldEnvironment.ambient_light_energy=0.85 en main_island.tscn (>=0.15 requisito RF1) [hy3-validado 2026-09-18: OK ambient_light_energy >= 0.15 (0.85)]
 - [x] Verificar niebla en rango por bioma/franja [M] -- agnes-2.5-flash 2026-09-12: validate_lighting_m49.gd verifica fog density ranges; data/light/fog_curve.tres defines curves [hy3-validado 2026-09-18: OK fog habilitado + fog_curve.tres carga como Curve]
 - [x] Verificar flicker por accesibilidad [M] â€” verificado (atria-dawn-s2, 2026-10-12, Log 1759): test_light_pool_m49.gd comprueba flicker â‰¤2 Hz y â‰¤15 % de amplitud (44 checks, 0 fallos). -- agnes-2.5-flash 2026-09-12: 03-Diseno.md Â§3.2 flicker <=2Hz <=15% amplitude; M58 accessibility tested in validate_lighting_m49.gd
-- [?] Definir lighting_budget.json [M]
+- [?] Definir lighting_budget.json [M] — artefacto NO existe (atria-dawn-s2, 2026-10-12, Log 1759): 0 hits de `lighting_budget` en todo el repo; citado como registro de memoria (L127) y versión de bake en CI (L156). Requiere creación o eliminación de la referencia.
 
 ## R. RF17 â€” Naming y organizaciÃ³n
 
@@ -153,10 +153,10 @@
 
 - [x] Riesgo de overdraw en pueblo â†’ pool + topes + distancia [M] â€” mitigado e implementado (atria-dawn-s2, 2026-10-12, Log 1759): `light_pool.gd` max 20 dinÃ¡micas, â‰¤6 sombra, descarte 30 m; suite 44 checks. -- agnes-2.5-flash 2026-09-12: mitigated by pool design (max 20 dynamic lights), distance culling (30m), shadow limits (<=6)
 - [x] Riesgo de acne voxel â†’ bias fino + validaciÃ³n visual [M] â€” mitigado (atria-dawn-s2, 2026-10-12, Log 1759): shadow_bias 0.050 + shadow_normal_bias 1.5 (hy3-validado Log 1045); validate_lighting_m49.gd 0 fallos; capturas sin acne (Log 642). -- agnes-2.5-flash 2026-09-12: 03-Diseno.md Â§3.2 bias 0.005-0.01; validate_lighting_m49.gd checks shadow quality
-- [?] Riesgo de bake desactualizado â†’ CI con bake + versiÃ³n en registro [M] -- agnes-2.5-flash 2026-09-12: CI M118 triggers bake on changes; version tracked in lighting_budget.json
+- [?] Riesgo de bake desactualizado â†’ CI con bake + versiÃ³n en registro [M] -- agnes-2.5-flash 2026-09-12: CI M118 triggers bake on changes; version tracked in lighting_budget.json — **artefacto NO existe** (atria-dawn-s2, 2026-10-12, Log 1759): 0 hits en disco; la dependencia del registro es teórica.
 - [?] Riesgo de snaps entre franjas â†’ easing 3 s [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md Â§2.1: "easing de valores actuales â†’ nuevos (3 s; sin snaps)"
 - [x] Riesgo de cuevas ilegibles â†’ piso 0.15 + niebla diferenciada [M] â€” mitigado (atria-dawn-s2, 2026-10-12, Log 1759): ambiente â‰¥ 0.15 validado por `_test_ambient_minimum` (validate_lighting_m49.gd, 0 fallos); fog_curve.tres existe en data/light/. -- agnes-2.5-flash 2026-09-12: mitigated by piso 0.15 minimum + fog_curve.tres per biome
-- [?] Riesgo de sombras caras â†’ distancias por preset + pruebas M90 [M] -- agnes-2.5-flash 2026-09-12: shadow distance capped by preset (bajo:25m, medio/alto:45m); M90 validates
+- [?] Riesgo de sombras caras â†’ distancias por preset + pruebas M90 [M] -- agnes-2.5-flash 2026-09-12: shadow distance capped by preset (bajo:25m, medio/alto:45m); M90 validates — CORREGIDO al valor real (atria-dawn-s2, 2026-10-12, Log 1759, orden del director): `directional_shadow_max_distance = 120` fijo, sin presets por calidad; el "cap por preset (bajo:25m, medio/alto:45m)" NO está implementado (M90 pendiente).
 
 ## V. Integraciones
 
@@ -242,7 +242,7 @@
 ## IteraciÃ³n 5 â€” skyline retirado + horizonte real (2026-09-07 00:44, glm-5.3-flash / Kilo Code)
 
 - [x] AclaraciÃ³n del usuario: NO querÃ­a montaÃ±as falsas sino los relieves REALES a lo lejos â€” skyline eliminado (nodo fuera de la escena, script archivado en Obsoletos/) [S] â€” Log 753
-- [?] view_distance 512 â†’ 2048 + lod_split_count 6 + lod_distance 160: el horizonte cubre toda la isla (5120) con LODs progresivos â€” FPS 60 [M] â€” Log 753
+- [?] view_distance 512 → 2048 + lod_split_count 6 + lod_distance 160 [M] — CORREGIDO a los valores reales del código (atria-dawn-s2, 2026-10-12, Log 1759, orden del director): `main_island.gd:138` `view_distance = 1024.0`, `:147` `lod_split_count = 5`, `:149` `lod_distance = 160.0`; el ítem original declaraba 2048/6, que NO están en código.
 - [x] Herramienta escanear_montanas_m09.gd: escaneo de alturas del generador (7056 muestras) â€” montaÃ±as reales: 19 columnas h=26-36 alrededor de (2660,2580), la mÃ¡s alta (2460, h36, 2400) [M] â€” Log 753
 - [x] VerificaciÃ³n visual: montaÃ±a real h=36 con cima de piedra visible a 420m + llanura hasta el horizonte (capturas/9/montana_real_420m.png) [M] â€” Log 753
 - [x] Hallazgo: la isla es irregular (noise desplaza el radio) â€” el centro es valle/laguna; usar escanear_montanas_m09.gd antes de colocar contenido por radios [S] â€” Log 753
