@@ -82,6 +82,8 @@ const SNOW: int = 26
 const GRAVEL: int = 27
 const MOSS: int = 28
 const MUD: int = 29
+const TIERRA_ARADA: int = 31        # M33: tierra arada con pala (seca)
+const TIERRA_ARADA_HUMEDA: int = 32 # M33: tierra arada regada (variante húmeda)
 
 ## Crea un BlockType con valores por defecto para un ID dado
 static func create_default(block_id: int) -> BlockType:
@@ -180,8 +182,18 @@ static func create_default(block_id: int) -> BlockType:
 			bt.display_name = "Barro"
 			bt.tool_required = ToolRequirement.SHOVEL
 			bt.debug_color = Color(0.35, 0.25, 0.15)
+		TIERRA_ARADA:
+			bt.display_name = "Tierra Arada"
+			bt.tool_required = ToolRequirement.SHOVEL
+			bt.is_constructive = true  # el jugador la "coloca" al arar
+			bt.debug_color = Color(0.48, 0.32, 0.18)
+		TIERRA_ARADA_HUMEDA:
+			bt.display_name = "Tierra Arada Húmeda"
+			bt.tool_required = ToolRequirement.SHOVEL
+			bt.is_constructive = true
+			bt.debug_color = Color(0.32, 0.22, 0.12)  # más oscura = regada
 		_:
-			bt.display_name = "Desconocido"
-			bt.debug_color = Color.MAGENTA
+				bt.display_name = "Desconocido"
+				bt.debug_color = Color.MAGENTA
 	
 	return bt

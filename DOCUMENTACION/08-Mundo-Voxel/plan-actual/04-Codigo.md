@@ -156,3 +156,73 @@ A diferencia de M09 y M10 (revertidos a 🟡 en los Logs 944/945), el checklist 
 2. Decidir el destino de `BlockCatalog` muerto (borrarlo o cablearlo de verdad — ver Log 945).
 3. El flag `has_gravity` de arena/grava está definido en BlockType pero **no hay código que lo consuma** (gravedad de bloques sueltos) — queda como diseño pendiente de M1.
 4. `world.block_placed` está en EventBus; verificar que M19/M22/M38/M43 realmente consuman `block_removed`/`block_modified` también (no se vio en el boot).
+
+---
+
+## Notas del Agente — Unificacion VoxelBlockyLibrary (atria-dawn, Kilo Code)
+
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-12 05:00:00
+**Estado:** Cerrado (108/108); pendiente verificacion del director
+
+### Contexto (deuda tecnica detectada en el Log 1724)
+
+`BlockCatalog` (block_catalog.gd) construia SU propia VoxelBlockyLibrary en un
+orden que **no coincidia con los block ids**: sus modelos 14-19 eran
+ice/snow/gravel/moss/mud/water mientras los ids de esos bloques son
+16/26/27/28/29/17. Como `VoxelMesherBlocky` usa el valor del canal
+`CHANNEL_TYPE` como indice del modelo, si esa library se hubiera usado para
+renderizar, los bloques se habrian visto intercambiados. En la practica no
+pasaba (el mesher del juego usaba la library inline de main_island.gd, que
+estaba correcta), pero habia **dos libraries duplicadas y divergentes**.
+
+### Lo que hice (encargo mimo #27, Log 1728)
+
+- **BlockCatalog es ahora la fuente unica y canonica** de la library:
+  - `_build_catalog()` registra los 33 bloques (ids 0..32, contiguos).
+  - `_build_library()` construye los modelos **en orden de id**, de modo que
+    el indice del modelo == block id por construccion (invariante critico).
+  - **Guarda de integridad:** si los ids registrados no son contiguos desde
+    0, hace `push_error` y aborta el bake antes de servir una library
+    corrupta (un hueco desplazaria todos los indices y romperia el render
+    silenciosamente).
+  - Tabla de colores canonicos (`_color_canonico`) con los colores afinados
+    de la library vieja de main_island.gd.
+- **main_island.gd** ya no construye la library inline: usa
+  `BlockCatalog.new().get_library()`. Se elimino el helper `_add_block` (codigo
+  muerto tras la unificacion).
+- **island_generator.gd:** `get_debug_color()` dependia de un catalogo que en
+  produccion siempre es `null` (dead path que crasheaba si se llamaba); ahora
+  tiene fallback a `BlockType.create_default(id).debug_color`.
+
+### Verificacion (estatica; Godot no ejecutable en el sandbox)
+
+- **Invariante indice==id** verificado para los 33 modelos (parseo del orden
+  de `_add_block`/`_build_catalog` + cruce con los ids de BlockType).
+- **Sin regresion visual:** los 30 colores de la library vieja (HEAD de
+  main_island.gd) son **byte-identicos** a los de la tabla canonica nueva
+  (verificacion automatizada).
+- **ids contiguos 0..32**, sin faltantes; tabla de colores cubre los 32
+  bloques no-aire.
+- **Test nuevo** `scripts/world/test_block_catalog_m08.gd` (3 bloques, guardia
+  anti-falso-verde): invariante indice==id + 33 modelos, get_block resuelve
+  todos los ids + nombres, fallback de get_debug_color sin catalogo. **No
+  ejecutado** (sin Godot en el sandbox) — delegar a CI/headless.
+
+### Lo que NO hice (honestidad)
+
+- No ejecute los tests ni verifique visualmente (M08 es V2; requiere Godot).
+- `bench_recorder.gd` (M61) tiene su propia library para microbenchmarks:
+  se dejo intacta a proposito (es un harness de perf autocontenido, no
+  renderiza el mundo). Si se quiere unificar tambien, queda como deuda.
+- `preview_ruina.gd` y `captura_playa.gd` arman libraries descartables para
+  preview/captura: idem, fuera de alcance del encargo.
+
+### Recomendaciones para el proximo agente
+
+- Correr `test_block_catalog_m08.gd` en CI junto con `test_farm_voxel_m33.gd`
+  (ambos nuevos de esta sesion, ambos sin correr).
+- Si se anaden bloques nuevos: agregarlos al array de `_build_catalog()` — la
+  guarda de contiguidad protege contra un hueco accidental, y el color debe
+  ir en `_color_canonico` (sin color, cae al fallback de `debug_color`).

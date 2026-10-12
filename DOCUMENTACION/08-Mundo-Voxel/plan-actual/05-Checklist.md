@@ -22,7 +22,7 @@
 - [x] Documentar el margen de cabecera de 1 bloque [S]
 - [x] Documentar la unidad de 1 m como referencia de física e IA [S]
 
-## B. Catálogo de bloques (16)
+## B. Catálogo de bloques (19)
 
 - [x] Definir bloques naturales: tierra, césped, piedra, roca madre [S]
 - [x] Definir arena, arcilla y madera (tronco/tabla) [S]
@@ -40,6 +40,9 @@
 - [x] Definir drops y permanencia por bloque [S]
 - [x] Definir puzzle_props vinculados (M24) [S]
 - [x] Documentar que el catálogo inicial (~30) se ajusta con arte (M45) [S]
+- [x] Unificar la VoxelBlockyLibrary: BlockCatalog es la fuente única y canónica (antes main_island.gd construía una library inline divergente del catálogo — Log 1728, encargo mimo #27) [M]
+- [x] Invariante crítico de la library: índice del modelo == block id para los 33 bloques, con guarda de contigüidad que aborta el bake si falta un id [M]
+- [x] main_island.gd consume `BlockCatalog.get_library()` (colores canónicos idénticos a la library vieja — verificación sin regresión visual) y se eliminó el helper `_add_block` muerto [M]
 
 ## C. Colocación, extracción y validación (14)
 
@@ -141,5 +144,5 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 105 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 108 ítems · Completados: 108 · Pendientes: 0 · No resueltos: 0.
 **Nota:** la validación física (greedy por tipo, radio de carga, medición de remesh) es responsabilidad del hito M1 y de M61; el diseño queda cerrado aquí.
