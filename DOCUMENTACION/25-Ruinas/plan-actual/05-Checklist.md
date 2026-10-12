@@ -9,10 +9,10 @@
 - [x] Definir el kit base de ≤ 40 piezas reutilizables [M] (40 piezas definidas en 03-Diseno.md)
 - [x] Definir pivote en esquina inferior izquierda por pieza [S] (regla documentada en 03-Diseno.md)
 - [x] Definir snaps por cara en cada pieza [M] (6 snaps por pieza, documentados en 03-Diseno.md)
-- [x] Implementar validación de pivotes en Editor [M]
-- [x] Implementar validación de snaps en Editor [M]
-- [x] Implementar validación de traslapes en Editor [M]
-- [x] Implementar fallo de build si la validación falla [S]
+- [?] Implementar validación de pivotes en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar validación de snaps en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar validación de traslapes en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar fallo de build si la validación falla [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
 - [x] Definir grupo de suelos (losa, rota, intermedia, umbral, escalon) [S] (5 piezas en 03-Diseno.md)
 - [x] Definir grupo de muros (recto, esquina, roto, vano, alto, ventana) [S] (6 piezas en 03-Diseno.md)
 - [x] Definir grupo de aperturas (arco, puerta, ventana, pasaje) [S] (4 piezas en 03-Diseno.md)
@@ -110,21 +110,21 @@
 ## Progresión de descubrimiento
 
 - [x] Definir estados: NoDescubierta → Descubierta → Explorada → Completada [M] (definido con transiciones en 03-Diseno.md)
-- [x] Implementar detección de descubrimiento a 15 m [S]
-- [x] Implementar hint de horizonte al descubrir (M63) [S]
-- [x] Implementar transición a Explorada al 50% de puzzles [M]
-- [x] Implementar transición a Completada con relicto guardado [M]
-- [x] Implementar eventos de transición (diario, mapa M58, museo M36) [M]
-- [x] Implementar guardado atómico en cada transición [M]
-- [x] Implementar persistencia del estado por ruina [M]
+- [?] Implementar detección de descubrimiento a 15 m [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar hint de horizonte al descubrir (M63) [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar transición a Explorada al 50% de puzzles [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar transición a Completada con relicto guardado [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar eventos de transición (diario, mapa M58, museo M36) [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar guardado atómico en cada transición [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar persistencia del estado por ruina [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
 - [x] Documentar la progresión de descubrimiento [S] (03-Diseno.md: tabla de transiciones + código GDScript)
 
 ## Variantes y conexiones entre ruinas
 
 - [x] Definir 3 paletas visuales (época temprana/media/tardía) [S] (definidas en 03-Diseno.md: colores, desgaste)
-- [x] Implementar variantes de paleta sin geometría nueva [M]
+- [?] Implementar variantes de paleta sin geometría nueva [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
 - [x] Definir 2-3 configuraciones de puzzle por ruina grande (seed) [M]
-- [x] Implementar variante de puzzle por seed de partida [M]
+- [?] Implementar variante de puzzle por seed de partida [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
 - [x] Diseñar caminos de 2-4 tramos entre ruinas [M]
 - [x] Definir nodos de conexión con M28 (caminos) [M] (definido: tramos como nodos M28 en 03-Diseno.md)
 - [x] Definir validación de caminos con NavigationServer3D [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §NavigationServer3D)
@@ -140,9 +140,9 @@
 - [x] Integrar con M32 (viento/lluvia en pasajes y jardines) [S] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M32)
 - [x] Integrar con M36 (museo: vitrinas para objetos) [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M36)
 - [x] Integrar con M45/M47 (kit de referencia para assets) [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M45/M47)
-- [x] Implementar LOD 0-2 vía M63 (culling por región) [M]
-- [x] Implementar sin Update por ruina (estática) [S]
-- [x] Implementar sin costos de simulación en ruinas [S]
+- [?] Implementar LOD 0-2 vía M63 (culling por región) [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar sin Update por ruina (estática) [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [?] Implementar sin costos de simulación en ruinas [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
 - [x] Documentar integración y presupuestos [S] (03-Diseno.md: tabla de presupuestos con memory/draw calls)
 
 ## Testings y documentación
@@ -159,7 +159,7 @@
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] (hy3 2026-09-19: Log 1100-hy3-M25-DISENO_2026-09-19_22-50-00.md)
 - [x] Actualizar fila 25 en CHECKLIST-GLOBAL al implementar [S]
 
-**Totales:** 122 ítems · Completados: 122 · Pendientes: 0 · No resueltos: 0. (15 tareas T1–T15 cerradas por hy3 2026-09-19; las 107 [x] previas de MiMo carry bandera de auditoría Log 1065 — ver Notas del Agente)
+**Totales:** 122 items - Completados: 106 - Pendientes: 0 - No resueltos: 16. (15 tareas T1-T15 cerradas por hy3 2026-09-19; 16 'Implementar' degradados a [?] por QA s2 2026-10-12 Log 1763 - deuda de implementacion; ver Notas del Agente)
 
 > **Corregido por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 1):**
 > la línea decía 114/122 con 8 pendientes; el conteo real de marcas es 107 [x] / 15 [ ] /
