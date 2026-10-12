@@ -1254,6 +1254,76 @@ con cada iteración: usar umbral (`>= 15`) salvo que el contenido sea fijo por d
 
 ---
 
+## E-30: `class_name` global **no declarado** en corridas `--script` headless
+
+**Síntoma:**
+```
+SCRIPT ERROR: Parse Error: Identifier "CreditsCatalog" not declared in the current scope.
+   at: GDScript::reload (res://scripts/legal/generar_catalogo_tres_m131.gd:23)
+SCRIPT ERROR: Parse Error: Could not find type "CreditsCatalog" in the current scope.
+```
+
+**Ubicación:** cualquier script corrido con `godot --headless --script res://...`
+que use un `class_name` global. Caso real: `scripts/legal/generar_catalogo_tres_m131.gd`
+(M131, 2026-10-11, detectado por Ling-3.1-Flash).
+
+**Causa:** en corridas `--script` headless el script se parsea **antes** de que el
+registro de `class_name` globales del proyecto esté disponible. En el editor y en
+tests con autoloads funciona; en `--script` puro, no.
+
+**Solución:** `preload` explícito (patrón §9.52, el mismo que usan los tests del
+proyecto):
+```gdscript
+# ANTES — falla en --script headless
+var catalogo := CreditsCatalog.new()
+
+# AHORA — autocontenido
+const _SC_CATALOG := preload("res://scripts/legal/credits_catalog.gd")
+var catalogo = _SC_CATALOG.new()
+# y para el cast:
+var recargado = load("res://data/legal/catalogo_creditos.tres")
+if recargado == null or not (recargado is _SC_CATALOG):
+    ...
+```
+
+**Nota:** el `class_name` en el script del Resource puede quedarse (el editor lo usa
+para `script_class` en el `.tres`); lo que no se puede usar es el nombre global
+dentro del script corrido.
+
+**Fechar:** 2026-10-11 20:55 | **Modelo:** Ling-3.1-Flash | **Plataforma:** Kilo Code
+
+---
+
+## E-31: `str(Dictionary)` es **orden-dependiente** — comparar con `==`
+
+**Síntoma:** un test de igualdad de diccionarios falla aunque el contenido sea idéntico:
+```
+[FAIL] politicas == JSON (anti-drift)
+```
+
+**Ubicación:** cualquier comparación `str(dict_a) == str(dict_b)`. Caso real:
+`scripts/legal/test_credits_m131.gd` (M131, 2026-10-11, detectado por Ling-3.1-Flash).
+
+**Causa:** `str()` serializa el diccionario en el **orden de sus claves**, y ese
+orden difiere entre un JSON parseado (orden del archivo) y un `.tres` cargado
+(orden de serialización de `ResourceSaver`). El contenido es el mismo.
+
+**Solución:** `==` entre `Dictionary` compara **contenido** (sin importar orden):
+```gdscript
+# ANTES — falso negativo por orden de claves
+_check("politicas == JSON", str(tres.politicas) == str(json.get("politicas", {})))
+
+# AHORA — compara contenido
+_check("politicas == JSON", tres.politicas == json.get("politicas", {}))
+```
+
+**Cuándo sí usar `str()`:** para comparar **arrays** donde el orden importa
+(`str(ids_tres) == str(ids_json)`), o para mensajes de detalle.
+
+**Fechar:** 2026-10-11 20:55 | **Modelo:** Ling-3.1-Flash | **Plataforma:** Kilo Code
+
+---
+
 ## E-XX: Nombre del error
 
 **Síntoma:**
