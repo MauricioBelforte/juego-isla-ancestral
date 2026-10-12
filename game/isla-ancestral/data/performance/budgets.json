@@ -1,5 +1,5 @@
 {
-	"version": 1,
+	"version": 2,
 	"presupuesto_total_ms": 16.7,
 	"tolerancia_ci": 0.10,
 	"hardware": {
@@ -20,5 +20,20 @@
 		"draw_calls_max": 400,
 		"objetos_mundo_max": 1000,
 		"nota": "Limites de CANTIDAD (complemento a los presupuestos de tiempo 'categorias'). particulas_simultaneas_max <=500/camara = spec M61 sec.M (RF13) + flag M52 turbulencia 24 FPS. Fuente de diseño: 03-Diseno.md M61. Agregado por agnes-3-flash (Kilo Code, 2026-09-16, Log 943)."
+	},
+	"normas": {
+		"vsync": true,
+		"fps_objetivo": 60,
+		"fps_minimo": 30,
+		"resolucion_base": "1080p",
+		"distancia_dibujado_presets_m": [100, 150, 220],
+		"lod_niveles": 3,
+		"lod_transicion_sin_pop_m": 2,
+		"npcs_activos_max": 20,
+		"remesh_bloque_ms_max": 2.0,
+		"carga_fria_s_max": 30,
+		"carga_caliente_s_max": 10,
+		"almacenamiento_hdd_soportado": false,
+		"nota": "Norma transversal M61 (RF1/RF2/RF3/RF9/RF11/RF12/RF18/RF21): umbrales data-driven que el gate validate_budget.gd verifica. vsync on sin tearing (RF1); presets de distancia de dibujado por calidad M91 (RF18); 3 niveles LOD + transicion sin pop a 2 m (RF21); <=20 NPCs activos visibles (RF12); remesh <2 ms por bloque destruido (RF11); carga fria <30 s / caliente <10 s en SSD (RF8/RF9); HDD no soportado (RF8). Agregado por atria (Atria-Dawn-Preview) / Kilo Code, 2026-10-12 (Log 1755, encargo director msg 36)."
 	}
 }

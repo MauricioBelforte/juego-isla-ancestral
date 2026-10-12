@@ -1,5 +1,25 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** Kilo
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
+
+## Iteración atria — norma transversal data-driven + fix real de allocations (2026-10-12, atria (Atria-Dawn-Preview) / Kilo Code, Log 1755)
+
+> Encargo del director (mimo-v2.6, msg #36). Alcance acotado (data-driven + gate + fix V0,
+> mismo perfil que la iter. agnes Log 943): los ítems `Definir X` de la norma transversal que el
+> plan-inicial dejaba sueltos ahora viven como **umbrales data-driven en `budgets.json`** y el gate
+> los valida; más un fix real de RF25 (allocations en bucle caliente) descubierto en el Log 945 (QA M10).
+
+- [x] Bloque `normas` en `budgets.json` (vsync, fps 60/30, 1080p, presets 100/150/220 m, LOD 3 niveles
+  + sin pop 2 m, NPCs ≤20, remesh ≤2 ms, cargas frío ≤30 s / caliente ≤10 s, HDD no soportado) [M]
+- [x] `_validar_normas()` en `validate_budget.gd` (presente y bien formado; valores canónicos de la
+  spec; tolerante si el bloque falta para no romper el gate de ramas anteriores) [M]
+- [x] FIX RF25: `_has_ore` (island_generator.gd) preconstruye `_ore_noise` en `_setup_noises()` en vez
+  de `FastNoiseLite.new()` por cada bloque subterráneo — una asignación menos por bloque del camino
+  caliente; determinismo inalterado (mismo seed +3000 / SIMPLEX_SMOOTH / freq 0.1) [M]
+- [x] 12 flips `Definir X` `[ ]`→`[x]` con cita al bloque `normas` + gate (secciones A/B/C/H/K/L/R/U/Y) [S]
+
+**Verificación headless PENDIENTE** (sin Godot en el sandbox): `godot --headless --script
+res://scripts/performance/validate_budget.gd` → esperar `[M61] normas: 12 ...` + 0 fallos. Validación
+estática hecha: JSON parsea (python json), indentación a tabs y paréntesis balanceados en el gate.
 
 ## Reserva actual
 
@@ -46,7 +66,7 @@
 
 - [x] Definir 60 FPS como objetivo (hardware recomendado) [S]
 - [x] Definir 30 FPS mínimo sostenido (hardware mínimo) [S]
-- [ ] Definir vsync activado sin tearing [S]
+- [x] Definir vsync activado sin tearing [S] → **normas.vsync = true** (Log 1755, iter. atria): umbral data-driven en `data/performance/budgets.json` bloque `normas`, validado por `_validar_normas()` del gate `validate_budget.gd`
 - [ ] Documentar objetivo por preset de calidad (M91) [M]
 - [x] Registrar presupuesto total 16,7 ms en budgets.cfg [S]
 
@@ -56,14 +76,14 @@
 - [x] Definir 8 GB RAM como mínimo [S]
 - [x] Definir SSD (cargas en <30 s frío) [S]
 - [?] Alinear con M114 (hardware objetivo) [M]
-- [ ] Documentar resolución base (1080p) en mínimo [S]
+- [x] Documentar resolución base (1080p) en mínimo [S] → **normas.resolucion_base = "1080p"** (Log 1755, iter. atria): bloque `normas` en `budgets.json`, validado por el gate
 
 ## C. Hardware Recomendado (RF3)
 
 - [x] Definir GPU dedicada de referencia [M]
 - [x] Definir 16 GB RAM recomendado [S]
 - [x] Definir SSD NVMe (cargas <10 s caliente) [S]
-- [ ] Documentar 1080p 60 FPS estable en recomendado [S]
+- [x] Documentar 1080p 60 FPS estable en recomendado [S] → **normas.fps_objetivo = 60 + resolucion_base = "1080p"** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate verifica fps_objetivo == 60 y fps_minimo == 30 con fps_minimo < fps_objetivo
 - [?] Alinear con M114 y presets M91 [M]
 
 ## D. Medir CPU (RF4)
@@ -100,9 +120,9 @@
 
 ## H. Medir Disco (RF8)
 
-- [ ] Definir carga frío <30 s (SSD mínimo) [M]
-- [ ] Definir carga caliente <10 s (SSD recomendado) [M]
-- [ ] Definir HDD como no soportado (documentado) [S]
+- [x] Definir carga frío <30 s (SSD mínimo) [M] → **normas.carga_fria_s_max = 30** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate valida 0 < carga_fria_s_max <= 30
+- [x] Definir carga caliente <10 s (SSD recomendado) [M] → **normas.carga_caliente_s_max = 10** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate valida 0 < carga_caliente_s_max <= 10
+- [x] Definir HDD como no soportado (documentado) [S] → **normas.almacenamiento_hdd_soportado = false** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate exige explícitamente == false
 - [ ] Documentar tamaño máximo de paquete de datos [M]
 - [x] Validar tiempos con build de instalador (M115) [C]
 
@@ -124,7 +144,7 @@
 
 ## K. Destrucción de Bloques (RF11)
 
-- [ ] Definir remesh difuso <2 ms por bloque [M]
+- [x] Definir remesh difuso <2 ms por bloque [M] → **normas.remesh_bloque_ms_max = 2.0** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate valida 0 < remesh_bloque_ms_max <= 2.0
 - [ ] Definir sin GC en el bucle de interacción [M]
 - [ ] Definir pooling de buffers de mesh [M]
 - [ ] Documentar remesh en background (M07) [S]
@@ -132,7 +152,7 @@
 
 ## L. Medir NPC (RF12)
 
-- [ ] Definir ≤20 NPCs activos visibles [M]
+- [x] Definir ≤20 NPCs activos visibles [M] → **normas.npcs_activos_max = 20** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate exige == 20 (RF12)
 - [ ] Definir LOD de actualización por distancia (M19/M64) [M]
 - [x] Definir presupuesto IA 2,0 ms (total) [S]
 - [ ] Documentar pooling de instancias NPC [M]
@@ -184,7 +204,7 @@
 
 ## R. Distancia de Dibujado (RF18)
 
-- [ ] Definir presets 100/150/220 m (M91) [M]
+- [x] Definir presets 100/150/220 m (M91) [M] → **normas.distancia_dibujado_presets_m = [100, 150, 220]** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate valida 3 presets con los valores exactos (RF18). Nota: M91 resultó ser Configuracion-De-Audio (no presets gráficos) — la referencia del plan-inicial es incorrecta; la norma vive aquí
 - [ ] Definir LOD escalonado por distancia [M]
 - [ ] Definir que el mar siempre se ve (cozy) [S]
 - [ ] Documentar memoria de chunks por distancia (M62) [M]
@@ -208,10 +228,10 @@
 
 ## U. LOD (RF21)
 
-- [ ] Definir 3 niveles de LOD para mallas voxel [M]
+- [x] Definir 3 niveles de LOD para mallas voxel [M] → **normas.lod_niveles = 3** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate exige == 3 (RF21)
 - [ ] Definir impostor lejano (malla simpl. + textura) [M]
 - [ ] Definir LOD de NPC/fauna por distancia [M]
-- [ ] Definir transición sin pop (2 m) [M]
+- [x] Definir transición sin pop (2 m) [M] → **normas.lod_transicion_sin_pop_m = 2** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate valida > 0 (RF21)
 - [ ] Validar ausencia de pop en cámara principal [C]
 
 ## V. Batching (RF22)
@@ -240,7 +260,7 @@
 
 ## Y. Allocations, GC y Profiling (RF25-RF27)
 
-- [ ] Definir cero allocations en bucles calientes [M]
+- [x] Definir cero allocations en bucles calientes [M] → **FIX REAL aplicado (Log 1755, iter. atria):** `island_generator.gd::_has_ore` allocaba `FastNoiseLite.new()` **en cada bloque subterráneo** del camino caliente de `get_block_at`; ahora el ruido se preconstruye una sola vez en `_setup_noises()` (`_ore_noise`, mismo seed+3000 / SIMPLEX_SMOOTH / freq 0.1 → determinismo inalterado). Una asignación menos por bloque. La norma RF25 sigue declarada en 01-Requerimientos §5.
 - [ ] Definir reuso de Arrays/Variants [M]
 - [ ] Definir GC en pausas seguras (transiciones M63) [M]
 - [x] Definir gate CI con bench scene (M116) [M]
@@ -259,7 +279,7 @@
 - [x] Medición real del bench (Log 386) validada contra el presupuesto manualmente: frame 16.35 ms <= 16.7 ms total (dentro de tolerancia) — punto de partida del gate CI
 - [?] Cableado del gate a GitHub Actions (job que corra validate_budget + bench en CI) — pertenece al módulo M118 (CI-CD, 0/100, 🟢 disponible); el runner necesita GPU/Windows para el bench y el workflow actual usa Godot 4.3 (el proyecto es 4.7.2) — actualizarlo es tarea de M118
 
-**Totales:** 144 ítems · Completados: 37 · Pendientes: 101 · No resueltos: 6.
+**Totales:** 144 ítems · Completados: 49 · Pendientes: 89 · No resueltos: 6.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 39 [x] / 101 [ ] /

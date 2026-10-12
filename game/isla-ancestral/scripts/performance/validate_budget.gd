@@ -62,6 +62,8 @@ func _cargar_y_validar_tabla() -> void:
 	_check(not _validar_medicion(data, mala), "medicion excedida detectada")
 	# iter. agnes (Log 943): dimension de limites de CANTIDAD (spec M61 sec.M + flag M52)
 	_validar_limites(data)
+	# iter. atria (Log 1755): dimension de NORMAS transversales (RF1/RF2/RF3/RF8/RF9/RF11/RF12/RF18/RF21)
+	_validar_normas(data)
 
 func _validar_medicion(data: Dictionary, medicion: Dictionary) -> bool:
 	var cats: Dictionary = data.get("categorias", {})
@@ -125,3 +127,53 @@ func _medicion_dentro_limites(limites: Dictionary, medicion: Dictionary) -> bool
 			if float(medicion[clave_s]) > float(limites[clave_limite]):
 				return false
 	return true
+
+
+## iter. atria (Log 1755): valida el bloque "normas" (umbrales transversales de
+## RF1/RF2/RF3/RF8/RF9/RF11/RF12/RF18/RF21). Tolera su ausencia (no rompe el gate
+## de ramas anteriores); si esta, exige bien formado + los valores canonicos de la
+## spec M61 (01-Requerimientos y 03-Diseno).
+func _validar_normas(data: Dictionary) -> void:
+	if not data.has("normas"):
+		return
+	var normas: Variant = data.get("normas", {})
+	_check(normas is Dictionary, "bloque normas es un Dictionary")
+	if not (normas is Dictionary):
+		return
+	var n: Dictionary = normas
+	_check(bool(n.get("vsync", false)), "vsync activado (RF1: sin tearing)")
+	_check(int(n.get("fps_objetivo", 0)) == 60, "fps_objetivo == 60 (RF1)")
+	_check(int(n.get("fps_minimo", 0)) == 30, "fps_minimo == 30 (RF1)")
+	_check(int(n.get("fps_minimo", 0)) < int(n.get("fps_objetivo", 0)), "fps_minimo < fps_objetivo")
+	_check(String(n.get("resolucion_base", "")) == "1080p", "resolucion_base 1080p (RF2)")
+	# Distancia de dibujado: 3 presets ascendentes 100/150/220 m (RF18, presets M91)
+	var presets: Variant = n.get("distancia_dibujado_presets_m", [])
+	_check(presets is Array and (presets as Array).size() == 3,
+		"distancia_dibujado_presets_m: 3 presets (RF18)")
+	if presets is Array and (presets as Array).size() == 3:
+		var arr: Array = presets
+		var ok_valores: bool = int(arr[0]) == 100 and int(arr[1]) == 150 and int(arr[2]) == 220
+		_check(ok_valores, "presets == 100/150/220 m (RF18)")
+	# LOD: 3 niveles + transicion sin pop (RF21)
+	_check(int(n.get("lod_niveles", 0)) == 3, "lod_niveles == 3 (RF21)")
+	_check(float(n.get("lod_transicion_sin_pop_m", 0.0)) > 0.0, "lod_transicion_sin_pop_m > 0 (RF21)")
+	# NPCs activos visibles (RF12)
+	_check(int(n.get("npcs_activos_max", 0)) == 20, "npcs_activos_max == 20 (RF12)")
+	# Remesh por bloque destruido (RF11)
+	_check(float(n.get("remesh_bloque_ms_max", 0.0)) > 0.0 and float(n.get("remesh_bloque_ms_max", 99.0)) <= 2.0,
+		"remesh_bloque_ms_max <= 2.0 ms (RF11)")
+	# Cargas: fria <30 s, caliente <10 s, HDD no soportado (RF8/RF9)
+	_check(float(n.get("carga_fria_s_max", 0.0)) > 0.0 and float(n.get("carga_fria_s_max", 99.0)) <= 30.0,
+		"carga_fria_s_max <= 30 s (RF8)")
+	_check(float(n.get("carga_caliente_s_max", 0.0)) > 0.0 and float(n.get("carga_caliente_s_max", 99.0)) <= 10.0,
+		"carga_caliente_s_max <= 10 s (RF8)")
+	_check(not bool(n.get("almacenamiento_hdd_soportado", true)),
+		"almacenamiento_hdd_soportado == false (RF8: HDD no soportado)")
+	print("[M61] normas: %d umbral(es) transversales validados (fps %d/%d, presets %s, LOD %d, NPCs %d)" % [
+		n.size() - (1 if n.has("nota") else 0),
+		int(n.get("fps_objetivo", 0)),
+		int(n.get("fps_minimo", 0)),
+		str(n.get("distancia_dibujado_presets_m", [])),
+		int(n.get("lod_niveles", 0)),
+		int(n.get("npcs_activos_max", 0)),
+	])

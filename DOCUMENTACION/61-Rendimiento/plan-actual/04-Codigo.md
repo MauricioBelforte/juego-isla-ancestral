@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** Kilo
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 61: Rendimiento
 
@@ -260,4 +260,84 @@ Recorrido completo de 90 s (6 waypoints) con bench_scene_a + bench_recorder (bui
 - **Nota §28:** línea 240 de este archivo trae un typo preexistente ajeno ("ools/mcp" por "tools/mcp");
   verificado con lectura UTF-8 (no es mojibake), **no lo toco** (fuera de mi alcance, registrar en
   próxima pasada de saneamiento si se corre).
+
+---
+
+## Iteración atria — norma transversal data-driven + fix de allocations (2026-10-12, atria (Atria-Dawn-Preview) / Kilo Code, Log 1755)
+
+> Encargo del director (mimo-v2.6, msg #36). Mismo perfil que la iter. agnes (Log 943): la norma
+> transversal de M61 pasa a ser **data-driven + gate**, y se cierra un hallazgo de rendimiento real
+> del Log 945 (QA M10).
+
+### Archivos modificados
+
+```
+res://data/performance/budgets.json              # nuevo bloque "normas" (version 1 -> 2)
+res://scripts/performance/validate_budget.gd     # nuevo _validar_normas()
+res://scripts/world/island_generator.gd          # FIX RF25: _ore_noise preconstruido en _setup_noises()
+```
+
+### 1. Bloque `normas` (budgets.json)
+
+Doce umbrales transversales que antes solo existían como texto del plan-inicial:
+
+| Clave | Valor | RF | Ítem del checklist que cierra |
+|---|---|---|---|
+| `vsync` | true | RF1 | A "vsync activado sin tearing" |
+| `fps_objetivo` | 60 | RF1 | C "1080p 60 FPS estable en recomendado" |
+| `fps_minimo` | 30 | RF1 | (cotitular de C) |
+| `resolucion_base` | "1080p" | RF2/RF3 | B "resolución base 1080p" |
+| `distancia_dibujado_presets_m` | [100, 150, 220] | RF18 | R "presets 100/150/220 m" |
+| `lod_niveles` | 3 | RF21 | U "3 niveles de LOD" |
+| `lod_transicion_sin_pop_m` | 2 | RF21 | U "transición sin pop (2 m)" |
+| `npcs_activos_max` | 20 | RF12 | L "≤20 NPCs activos visibles" |
+| `remesh_bloque_ms_max` | 2.0 | RF11 | K "remesh <2 ms por bloque" |
+| `carga_fria_s_max` | 30 | RF8/RF9 | H "carga frío <30 s" |
+| `carga_caliente_s_max` | 10 | RF8/RF9 | H "carga caliente <10 s" |
+| `almacenamiento_hdd_soportado` | false | RF8 | H "HDD no soportado" |
+
+### 2. `_validar_normas()` (validate_budget.gd)
+
+Sigue el patrón de `_validar_limites()` (Log 943): **tolerante si el bloque falta** (no rompe el gate
+de ramas anteriores) y, si está, exige bien formado + los valores canónicos de la spec. Prints de
+evidencia `[M61] normas: 12 umbral(es) transversales validados (fps 60/30, presets [100, 150, 220],
+LOD 3, NPCs 20)`.
+
+### 3. FIX RF25 — allocations en el camino caliente (island_generator.gd)
+
+Hallazgo del Log 945 (mi QA de M10): `_has_ore` hacía `FastNoiseLite.new()` **en cada llamada**, y
+`get_block_at` la llama por cada bloque subterráneo (y < height-10) — una asignación por bloque del
+camino caliente del generador. Ahora el ruido se preconstruye una sola vez en `_setup_noises()`
+(`_ore_noise`, seed +3000, TYPE_SIMPLEX_SMOOTH, frequency 0.1 — valores idénticos, **determinismo
+inalterado**; el test de determinismo del M10 sigue válido).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **No ejecuté el gate** (sin Godot en el sandbox): `godot --headless --script
+  res://scripts/performance/validate_budget.gd` queda pendiente de CI/headless. Validación estática
+  hecha: JSON parsea con `python json`, indentación a tabs y 212/212 paréntesis balanceados en el gate.
+- **No toqué los 6 `[?]`**: los dos de la QA E-12a (JSON del bench inexistente, capturas sin
+  versionar) siguen sin artefacto; los dos de "alinear con M114/M91" están **fundados** — verificado:
+  `114-Playtest` es protocolos de playtest (no hardware objetivo) y `91-Configuracion-De-Audio` es
+  audio (no presets gráficos), así que las referencias del plan-inicial son incorrectas; el de
+  metodología de profiler requiere escritura adicional; el del cableado CI es de M118.
+- **bench_scene_a / mediciones reales / gate CI en M116**: sin Godot, sin visión y fuera de alcance.
+
+### Recomendaciones para el próximo agente
+
+1. Correr el gate en CI/headless → esperar 0 fallos y las dos líneas de evidencia (`[M61] limites`,
+   `[M61] normas`).
+2. Si se quiere cerrar la referencia incorrecta a M91/M114 en los `[?]` de hardware, redirigir la
+   alineación al hardware real (M114-Playtest documenta "hardware" solo como variable de sesión del
+   protocolo).
+   > **REDIRIGIDO 2026-10-12 (encargo director msg #38, Log 1755):** las referencias del plan-inicial
+   > a "M114 hardware objetivo" y "M91 Configuración Gráfica" son **incorrectas** — verificado contra
+   > disco: `DOCUMENTACION/114-Playtest` es protocolos de playtest (hardware aparece solo como
+   > variable de sesión del protocolo) y `DOCUMENTACION/91-Configuracion-De-Audio` es audio (no
+   > presets gráficos). Los presets de distancia de dibujado y el hardware de referencia quedan
+      > definidos en el bloque `normas` de `budgets.json` (esta iteración); si en el futuro existe
+   > un módulo real de hardware/presets gráficos, ahí se alinean.
+3. El fix de `_has_ore` deja de ser deuda: queda pendiente la revisión de otros allocs por llamada en
+   el camino caliente (grep de `FastNoiseLite.new()` / `.new()` dentro de funciones llamadas por
+   `get_block_at`).
 
