@@ -259,3 +259,33 @@ Suite nueva `test_perfil_m58_iter4.gd` (39 checks, 0 fallos). Las 4 suites de M5
 **Aserción obsoleta corregida:** `test_sonido_visual_m58.gd` esperaba que el máximo
 de `escala_ui` fuera 1.5; RF3 pide 200 %, así que se actualizó a 2.0 (cambio de
 requisito, no un parche para que el test pase).
+
+
+## Notas del Agente — fix del piso de checks de iter. 4 (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1683
+
+El director detecto (msg 200) que `test_perfil_m58_iter4.gd` tenia
+**33 llamadas `_ok()` contra `CHECKS_MINIMOS = 34`**, por lo que la suite terminaba en
+`quit(1)` con "PISO NO CUMPLIDO: 33 < 34". Fue un error mio al fijar el piso sin contar
+las aserciones reales.
+
+**Fix elegido:** en vez de solo bajar el piso (que habria debilitado la suite), se
+agrego **un check real** al bloque 4 — verificar que al modificar el perfil el cache se
+invalida y la lectura devuelve el valor nuevo. Así el piso de 34 ahora queda
+justificado por 34 aserciones reales.
+
+### Suites (verificadas una por una)
+
+```
+test_accesibilidad_manager.gd    39 checks, 0 fallos
+test_sonido_visual_m58.gd        25 checks, 0 fallos
+test_accesibilidad_headless.gd   13 checks, 0 fallos
+test_perfil_m58_iter4.gd          34 checks, 0 fallos, EXIT 0
+```
+
+**Leccion:** el piso de `CHECKS_MINIMOS` debe contarse de las aserciones reales antes
+de fijarlo, no estimarse. Un piso sobrestimado bloquea la suite; uno subestimado deja
+pasar una suite truncada.

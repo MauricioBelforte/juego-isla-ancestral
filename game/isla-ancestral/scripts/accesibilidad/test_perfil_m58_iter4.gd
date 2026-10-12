@@ -135,6 +135,12 @@ func _b4_cache(mgr) -> void:
 	_ok(delta_l == 50, "50 consultas contabilizadas (dio %d)" % delta_l)
 	_ok(delta_a == 49, "49 servidas desde el cache (dio %d)" % delta_a)
 
+	# K183: al modificar el perfil el cache se invalida (si no, una escritura
+	# nunca se veria reflejada en la siguiente lectura).
+	mgr.set_campo("daltonismo", "protanopia")
+	_ok(String(mgr.get_campo("daltonismo", "")) == "protanopia",
+		"tras modificar, la lectura devuelve el valor nuevo (cache invalidado)")
+
 	# Al modificar, el cache se invalida y vuelve a calcularse.
 	mgr.set_campo("daltonismo", "protanopia")
 	mgr.invalidar_cache()
