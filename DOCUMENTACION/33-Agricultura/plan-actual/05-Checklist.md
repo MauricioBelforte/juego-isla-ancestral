@@ -29,20 +29,28 @@
 - [x] P9: herramientas — pala y regadera integradas vía ToolService (M13) [S]
 - [x] P10: estaciones — ventana por cultivo; fuera de ventana DORMANTE [S]
 - [ ] P11: cultivos especiales — trigo invernal, higos, ancestrales de desbloqueo M22 [M]
+  · espera: modulo(s) dependiente(s): M22 (coordinar con su dueno)
 - [x] P12: árboles frutales — perennes con cooldown frutal, sin replantar [M]
 - [ ] P13: flores — decorativas y sujetas a cruce [M]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P14: plantas ancestrales — lumina_ancestral con requisito narrativo [M]
 - [ ] P15: híbridos — cruce de flores con reglas legibles (sin RNG oculto) [M]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P16: calidad — 3 niveles (COMUN/BUENA/EXCELENTE) [M] — crop_tile.gd quality 0/1/2 + calcular_rendimiento() aplica bonificación
 - [x] P17: rendimiento — yields por cultivo con bonificación de calidad [S] — crop_tile.gd calcular_rendimiento() (min/max + quality)
 - [x] P18: enfermedades — descartadas; el único estado reversible posible es el marchitado experimental [S] — 02-Analisis A2c
 - [x] P19: recuperación — siempre por riego o cambio de estación; cero pérdida de progreso [S]
 - [x] P20: almacenamiento — la cosecha entra directa a M14, sin inventario de plantas [S]
 - [ ] P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M]
+  · espera: modulo(s) dependiente(s): M16 (coordinar con su dueno)
 - [ ] P22: venta — integración M38/M39 con precios por calidad [M]
+  · espera: modulo(s) dependiente(s): M38, M39 (coordinar con su dueno)
 - [ ] P23: semillas raras — reproducibles y con desbloqueo de progresión [M]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] P24: cultivos de isla — palma de coco y flor de coral exclusivas [M]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] P25: agricultura decorativa — helecho ornamental sin rendimiento [S] — crop_definition.gd decorative_only; calcular_rendimiento() devuelve [] si decorative_only
+  · espera: feature de M33-Agricultura (definir contrato/dueno por asignar)
 
 ## C. CropDefinition y catálogo (10)
 
@@ -110,10 +118,13 @@
 
 - [x] Pala (M13) convierte TIERRA en TIERRA_ARADA [M] — till_tile() registra _arados + escribe voxel TIERRA_ARADA (BlockType 31) + emite tile_tilled (test V1)
 - [ ] Interacción F sobre tierra arada abre selector de semillas (M70/M53) [M]
+  · espera: modulo(s) dependiente(s): M70, M53 (coordinar con su dueno)
 - [x] Interacción sobre cultivo en LISTA cosecha [S] — farm_tool_controller.gd: if tile.is_ready() → farm.harvest(voxel)
 - [x] Interacción sobre cultivo en otros estados muestra hint contextual [S] — get_growth_hint() por etapa (LISTA/DORMANTE/SIN_AGUA/SEMILLA/creciendo); el controller riega si no está listo
 - [ ] Animación de la herramienta sincronizada con el evento (M44) [M]
+  · espera: modulo(s) dependiente(s): M44 (coordinar con su dueno)
 - [ ] Cancelación segura del selector sin consumir semillas [S] — el selector UI no existe aún (M53); plant() no consume semilla si la validación falla
+  · espera: modulo(s) dependiente(s): M53 (coordinar con su dueno)
 - [x] Rango de uso limitado al alcance del jugador (M11) [S] — farm_tool_controller.gd radio_interaccion=4.0 con PhysicsRayQueryParameters3D
 - [x] Debounce de interacción para evitar dobles plantas [M]
 
@@ -136,70 +147,106 @@
 - [x] Referencia de item_id del catálogo M15 en CropDefinition [S]
 - [x] Recetas M16 consumen cultivos ya cosechados (sin tocar CropTile) [S]
 - [ ] Notificación de objetos obtenidos al cosechar (M53) [S]
+  · espera: modulo(s) dependiente(s): M53 (coordinar con su dueno)
 - [ ] Iconos de cultivos y semillas definidos en M45/M46 [M]
+  · espera: modulo(s) dependiente(s): M45, M46 (coordinar con su dueno)
 - [ ] Venta de cosechas con precios por calidad (M38/M39) [M]
+  · espera: modulo(s) dependiente(s): M38, M39 (coordinar con su dueno)
 - [x] Sin acoplamiento inverso: M14/M15 nunca escriben estado de FarmService [S]
 
 ## K. Edge cases (12)
 
 - [x] Cultivo plantado el último día de la estación apta [S]
 - [ ] Cultivo en DORMANTE al pasar a estación apta: retoma sin pérdida [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Sequía prolongada: pausa indefinida sin muerte [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Pisoteo de NPC: agitación visual sin pérdida de progreso [M]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C]
+  · espera: modulo(s) dependiente(s): M64 (coordinar con su dueno)
 - [x] Dos jugadores (futuro M76) no pueden plantar el mismo voxel [C]
 - [ ] Cosecha con inventario lleno: sobrante devuelto con notificación [M]
+  · espera: feature de M14-Inventario (definir contrato/dueno por asignar)
 - [ ] Árbol frutal en invierno: entra en DORMANTE y conserva cooldown [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Carga de guardado con tile corrupto: FarmStateStore.validate lo aísla y loguea [M]
 - [ ] Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M]
+  · espera: modulo(s) dependiente(s): M17 (coordinar con su dueno)
 - [ ] Guardado a mitad del avance de día: el tick es idempotente [C]
+  · espera: feature de M41-Guardado (definir contrato/dueno por asignar)
 - [x] Lluvia sobre cultivo ya regado: no excede el máximo [S] — apply_rain idempotente (no excede 2 y no emite señal redundante), testeado
 
 ## L. Optimización M61 (8)
 
 - [ ] Evaluación diaria ≤ 2 ms con 400 cultivos [C]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Visual por MultiMesh agrupado por especie/etapa [C]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] LOD de 2 niveles para instancias [M]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Sway por shader de instancing sin nodos por planta [C]
 - [ ] Sin procesamiento por frame en estados pausados [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] CropTile como RefCounted (cero nodos por cultivo) [S]
 - [x] Estadísticas de farm en el profiler de M113 [M]
 - [ ] Prueba de stress: 400 cultivos + lluvia global en 1 tick [C]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## M. UI, audio y polish cozy (10)
 
 - [ ] HUD agrícola: indicador de estado por cultivo apuntado (M53) [M]
+  · espera: modulo(s) dependiente(s): M53 (coordinar con su dueno)
 - [ ] Notificación cozy al madurar cultivos [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Tooltip con hints legibles y cálidos [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Tutorial amable: "La comida es opcional aqui" (M92, M152) [S]
+  · espera: modulo(s) dependiente(s): M92, M152 (coordinar con su dueno)
 - [ ] Sonido de arar (M43/M44) con capa ASMR de tierra [M]
+  · espera: modulo(s) dependiente(s): M43, M44 (coordinar con su dueno)
 - [ ] Sonido de regar con goteo suave [S]
+  · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [ ] Sonido de cosecha satisfactoria [S]
+  · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [ ] VFX de polvo al arar y brillo al madurar (M52) [M]
+  · espera: modulo(s) dependiente(s): M52 (coordinar con su dueno)
 - [ ] Animación de sway según el viento del clima (M31/M32) [M]
+  · espera: modulo(s) dependiente(s): M31, M32 (coordinar con su dueno)
 - [x] Cambios estacionales visibles en el campo (tono de plantas) [M]
 
 ## N. Pruebas y QA (8)
 
 - [x] Test: ciclo completo arar/plantar/regar/cosechar en una sesión [M]
 - [ ] Test: determinismo entre guardado y recarga (mismo día, mismo estado) [M]
+  · espera: feature de M41-Guardado (definir contrato/dueno por asignar)
 - [ ] Test: 4 estaciones con cultivo de ventana parcial [M]
+  · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 - [ ] Test: 30 días sin agua: pausa, nunca muerte [M]
+  · espera: feature de M51-Agua (definir contrato/dueno por asignar)
 - [ ] Test: pisoteo de NPC sobre campo con ruta y sin ruta [C]
+  · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 - [ ] Test: invierno con nieve sobre tierra arada [C]
+  · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 - [ ] Test: inventario lleno al cosechar [S]
+  · espera: feature de M14-Inventario (definir contrato/dueno por asignar)
 - [x] Recorrido M114: 3 días de juego con granja funcional [C]
 
 ## O. Delegación y cierre (8)
 
 - [x] Módulo marcado delegable (requiere M08, M14, M29 implementados) [S]
 - [ ] 5 alternativas descartadas documentadas en 02-Analisis [S]
+  · espera: documentacion tecnica del item (redactor por asignar)
 - [x] API estable del FarmService definida en 03-Diseno [S]
 - [x] Implementación → AGENTE DELEGADO [S]
 - [ ] Prototipo sugerido: 3 cultivos + riego manual + avance diario [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] 01-Requerimientos creado y firmado [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] 02-Analisis, 03-Diseno y 04-Codigo creados y firmados [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 **Totales:** 153 ítems · Completados: 106 · Pendientes: 47 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**

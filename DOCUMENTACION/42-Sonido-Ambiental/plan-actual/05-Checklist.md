@@ -15,8 +15,10 @@
 - [x] RF2: capas por hora y clima [S]
 - [x] RF3: fuentes posicionales 3D [S]
 - [ ] RF4: fauna con horas de actividad [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] RF5: sonidos de acción (madera, piedra, minería...) [S]
 - [ ] RF6: interiores con reverb [S]
+  · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [x] RF7: crossfade suave de bancos [S]
 
 ## B. Resolución de los 25 puntos del plan (25)
@@ -24,55 +26,85 @@
 - [x] P1: viento — base 2D, 3 variaciones, modulado por clima y montaña [S]
 - [x] P2: hojas — susurro por bioma boscoso, pitch ±5% [S]
 - [ ] P3: hierba — rizoma suave en praderas [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] P4: agua — genérica en lagos/estanques [S]
+  · espera: feature de M51-Agua (definir contrato/dueno por asignar)
 - [x] P5: río — 3D posicional, 4 variaciones, 60 m [S]
 - [ ] P6: cascada — 3D en 2 POIs fijos, hasta 120 m [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] P7: océano — costa 3D + mar lejano 2D [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] P8: lluvia — capa 2D fina + goteras en cobertizos [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] P9: tormenta — lluvia densa + truenos random 30-90 s [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P10: nieve — casi silencio + crujidos en pasos [S]
 - [x] P11: fuego — 3D en fogatas/casas, 3 variaciones [S]
 - [x] P12: madera — impactos de construcción y puentes [S]
 - [x] P13: piedra — 5 variaciones con eco ligero [S]
 - [ ] P14: minería — golpe + gravilla, oclusión de túnel [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P15: construcción — 3 capas (madera/piedra/metal) [S]
 - [ ] P16: árboles — crujido al tala/impacto [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] P17: animales — 2D lejanos + 3D cercanos [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P18: aves — diurnas (05:30-19:00), poisson 6+ variaciones [S]
 - [ ] P19: insectos — nocturnos (20:00-05:00), contenidos [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P20: mar — lejano constante a baja ganancia [S]
 - [ ] P21: cuevas — reverb 1.5 s + goteras + eco [S]
+  · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [ ] P22: ruinas — ecos + viento silbante + metalófono lejano [S]
+  · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
 - [ ] P23: templo — coro distante/drones, reverb 1.2 s, 30% tiempo [S]
+  · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [x] P24: mecanismos — clics 3D con variaciones (puzzles) [S]
 - [x] P25: máquinas — Gran Vapor y molinos, 2 variaciones [S]
 
 ## C. Mapa banco → bioma (14)
 
 - [ ] Playa: océano + viento + aves costeras [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Pradera: hierba + viento + aves [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Bosque templado: hojas + pájaros + hojarasca [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Pinos: viento en ramas + cuervos [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Montaña: viento fuerte + piedra + eco [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Desierto (Cenizas): viento seco + dunas [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Selva (Verde): fauna densa [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Manglar: agua + ranas [S]
+  · espera: feature de M51-Agua (definir contrato/dueno por asignar)
 - [ ] Tundra: nieve + viento frío [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Coral: olas + gaviotas [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Volcán/Cenizas: viento + piedra caliente [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Islas del Cielo: viento etéreo + coro [S]
 - [ ] Cueva: reverb + goteras + eco (subterráneo) [S]
+  · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [x] Sin bioma sin banco (cobertura total M09) [S]
 
 ## D. Capas de estado (10)
 
 - [ ] Día: aves poisson + viento normal [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Alba: 15% densidad de aves [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Atardecer: transición aves→insectos [S]
 - [x] Noche: grillos + silencio de aves [S]
 - [ ] Profunda: densidad -20% (misterio suave) [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] LLUVIA: capa exterior + goteras [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] TORMENTA: lluvia densa + truenos [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] NIEVE: casi silencio + crujidos [S]
 - [x] VIENTO: modula base ±10 dB [S]
 - [x] Capas SUMAN, no reemplazan (coherente M32) [S]
@@ -82,13 +114,17 @@
 - [x] ≤ 6 fuentes ambientales 2D [S]
 - [x] ≤ 3 posicionales 3D [S]
 - [ ] ≤ 2 fauna 2D [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] 1 bus de reverb interior [S]
+  · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [ ] Total ≤ 11 buses activos [S]
+  · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [x] Pool de AudioStreamPlayers estático (sin allocs/frame) [S]
 - [x] Sin fuentes por chunk del voxel (1 por bioma/zona) [S]
 - [x] Latencia < 12 ms (pool M06) [S]
 - [x] Pausa sin residuos (M29) [S]
 - [ ] Oclusión RayCast solo en interiores críticos [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## F. Volumetría y QA (8)
 
@@ -118,6 +154,7 @@
 - [x] Test: capas hora/clima correctas [S]
 - [x] Test: ≤ 11 buses en profiler [S]
 - [ ] Suite en caso_ambiental_tests.gd (M112) [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
+  · espera: modulo(s) dependiente(s): M112 (coordinar con su dueno)
 
 ## H. Delegación y cierre (10)
 
@@ -126,6 +163,7 @@
 - [x] API estable [S]
 - [x] Implementación → AGENTE DELEGADO [S]
 - [ ] Samples → compositor (spec lista) [S]
+  · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] 01-Requerimientos creado y firmado [S]
 - [x] 02-Analisis creado y firmado [S]
 - [x] 03-Diseno creado y firmado [S]
