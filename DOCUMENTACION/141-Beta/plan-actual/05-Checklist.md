@@ -95,16 +95,16 @@
 ## 6. Localización completa (RF6/M87)
 
 - [ ] Definir los 6 idiomas objetivo de M87 [M]
-- [ ] Definir glosario centralizado por término clave [M]
+- [x] Definir glosario centralizado por término clave [M] — implementado (stepfun-step-5-preview, 2026-10-12): `data/localization/glosario.json` (2,4 KB) + `scripts/localization/glosario.gd` (class_name Glosario, 6,2 KB); el gate `test_localizacion_iter6.gd` valida términos canónicos (quality.yml:276).
 - [x] Definir archivo JSON por idioma [M]
 - [ ] Definir export/import CSV para traductores [M]
 - [ ] Definir revisión humana por idioma con checklist [M]
 - [ ] Definir subtítulos completos (UI, diálogos, eventos) [M]
 - [ ] Definir localización de logros y store (M149) [M]
-- [ ] Definir gate CI de claves por idioma (sin huecos) [M]
+- [x] Definir gate CI de claves por idioma (sin huecos) [M] — implementado (stepfun-step-5-preview, 2026-10-12): `scripts/localization/auditor_claves.gd` (class_name AuditorClaves) usado por `test_validador_po_m87.gd`, que corre en quality.yml:268 con `|| FAIL=1`: audita código<->catálogo con exención P5 auditable.
 - [ ] Definir nombres propios no traducidos (biblia) [S]
 - [ ] Definir localización de fechas/formatos por idioma [S]
-- [ ] Definir verificación de tamaño de textos (desbordes UI) [S]
+- [x] Definir verificación de tamaño de textos (desbordes UI) [S] — implementado (stepfun-step-5-preview, 2026-10-12): `scripts/localization/analizador_layout.gd` (class_name AnalizadorLayout.medir()) mide ancho/alto real con la fuente; el gate `test_localizacion_iter6.gd` (quality.yml:276, 82 checks) prueba expansión es->en y desborde del contenedor 220x40.
 - [ ] Definir fallback de idioma (EN) ante clave faltante [S]
 - [ ] Definir ronda de revisión final en W5-W6 [S]
 
@@ -128,7 +128,7 @@
 - [ ] Definir presupuestos por zona en hardware mínimo y recomendado [C]
 - [ ] Definir ruta fija de 20 min para medición semanal [M]
 - [ ] Definir informe semanal de tendencia (M61) [M]
-- [ ] Definir gate CI de rendimiento (mínimo y recomendado) [M]
+- [x] Definir gate CI de rendimiento (mínimo y recomendado) [M] — implementado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/verificar_presupuesto_gate.py`, ejecutado y verificado (PASS, exit 0). `scripts/verificar_presupuesto_gate.py` evalúa los presupuestos declarados contra el frame de 60 FPS (16,667 ms) y el recomendado (11,667 ms con 30 % de headroom); ejecutado hoy: **PASS, exit 0** (logging 0,083 ms, eventos 0,05 ms, iluminación 1 ms, streaming 2 ms). Cierra el ciclo con la medición de M61 (`scripts/performance/budget_profile.gd`).
 - [ ] Definir memoria dentro de M62 en las 6 islas [M]
 - [ ] Definir tiempos de carga/streaming dentro de M63 [M]
 - [x] Definir telemetría de sesión en la build Beta pública (M104) [M]
@@ -144,7 +144,7 @@
 - [ ] Definir triaje diario en W4-W6 [S]
 - [ ] Definir policy de duplicados en el tracker (M101) [S]
 - [ ] Definir fix con test de regresión adjunto (M112) [M]
-- [ ] Definir gate CI de bugs: falla si P0/P1 abiertos > 0 (W4+) [M]
+- [x] Definir gate CI de bugs: falla si P0/P1 abiertos > 0 (W4+) [M] — implementado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/verificar_bugs_gate.py`, ejecutado y verificado. `scripts/verificar_bugs_gate.py` lee `DOCUMENTACION/11-BUGS.md` y devuelve exit 1 si hay entradas P0/P1 (`🔴`/`🟠`) con estado `[ ]`, `[→]` o `[?]`; ejecutado hoy: **88 bugs registrados, 36 P0/P1, 7 abiertos -> exit 1** (BUG-091, BUG-053, BUG-054, BUG-067, BUG-117, BUG-124, BUG-071). Modo `--quiet` para CI.
 - [ ] Definir playtest público con encuesta de diversión (M152) [M]
 - [ ] Definir métricas semanales abiertos/cerrados/regresión [S]
 - [ ] Definir cierre con 0 P0/P1 y P2 con plan y dueño [S]
