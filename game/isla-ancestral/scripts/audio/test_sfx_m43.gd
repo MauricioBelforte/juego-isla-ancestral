@@ -347,10 +347,10 @@ func _test_tonos() -> void:
 	if sfx == null:
 		_check("SFXManager presente (tonos)", false)
 		return
-	_check("sfx_tones.json cargado con 7 entradas", sfx.tones.size() == 7, "size=%d" % sfx.tones.size())
+	_check("sfx_tones.json cargado con 21 entradas", sfx.tones.size() == 21, "size=%d" % sfx.tones.size())
 	_check("API tono() responde", not sfx.tono("confirmacion").is_empty())
 	_check("tono inexistente -> {}", sfx.tono("no_existe").is_empty())
-	_check("tonos_disponibles() == 7", sfx.tonos_disponibles().size() == 7, "n=%d" % sfx.tonos_disponibles().size())
+	_check("tonos_disponibles() == 21", sfx.tonos_disponibles().size() == 21, "n=%d" % sfx.tonos_disponibles().size())
 
 	# Confirmación: 2 notas ascendentes con 5ª justa (7 semitonos)
 	var conf: Dictionary = sfx.tono("confirmacion")
