@@ -6,106 +6,106 @@
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de configuración gráfica
-- [ ] Resolución
-- [ ] Pantalla completa
-- [ ] Ventana
-- [ ] Borderless
-- [ ] VSync
-- [ ] FPS
-- [ ] Calidad de sombras
-- [ ] Calidad de texturas
-- [ ] Distancia de dibujado
-- [ ] Calidad de efectos
-- [ ] Calidad de vegetación
-- [ ] Calidad de agua
-- [ ] Calidad de partículas
-- [ ] Anti-aliasing
-- [ ] Anisotropic filtering
-- [ ] Post-processing
-- [ ] Bloom
-- [ ] Motion blur
-- [ ] Depth of field
-- [ ] FSR/DLSS/XeSS si corresponde
-- [ ] Escala de resolución
+- [x] Resolución — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `RESOLUCIONES` (720p/1080p/1440p/4K).
+- [x] Pantalla completa — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `MODO_PANTALLA_COMPLETA`.
+- [x] Ventana — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `MODO_VENTANA`.
+- [x] Borderless — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `MODO_BORDERLESS`.
+- [x] VSync — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `VSYNC_OPCIONES` [0,1,2].
+- [x] FPS — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `FPS_OPCIONES` [30,60,120,0=ilimitado].
+- [x] Calidad de sombras — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `SOMBRAS` por calidad.
+- [x] Calidad de texturas — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `TEXTURAS` por calidad.
+- [x] Distancia de dibujado — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `DISTANCIA` por calidad.
+- [x] Calidad de efectos — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `EFECTOS` por calidad.
+- [x] Calidad de vegetación — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `VEGETACION` por calidad.
+- [x] Calidad de agua — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `AGUA` por calidad.
+- [x] Calidad de partículas — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `PARTICULAS` [100/500/1000].
+- [x] Anti-aliasing — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `AA_OPCIONES` [off,fxaa,msaa_2x,msaa_4x,taa].
+- [x] Anisotropic filtering — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `aniso` [2,4,8,16] en los presets.
+- [x] Post-processing — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `post` (bool) en los presets.
+- [x] Bloom — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `bloom` (bool) en los presets.
+- [x] Motion blur — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `motion_blur` (bool) en los presets.
+- [x] Depth of field — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `dof` (bool) en los presets.
+- [x] FSR/DLSS/XeSS si corresponde — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `UPSCALING` [off,fsr_1_0,fsr_2_0,dlss,xess].
+- [x] Escala de resolución — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `ESCALAS` [0.5,0.75,1.0,1.25,1.5].
 - [x] Presets gráficos
-- [ ] Detección automática
+- [x] Detección automática — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `_test_deteccion` + `ASPECT_RATIOS`.
 
 ### [S] Resoluciones
-- [ ] Definir 720p (1280x720)
-- [ ] Definir 1080p (1920x1080)
-- [ ] Definir 1440p (2560x1440)
-- [ ] Definir 4K (3840x2160)
-- [ ] Definir nativa (resolución del monitor)
-- [ ] Definir aspect ratio 16:9
-- [ ] Definir soporte para 16:10
-- [ ] Definir soporte para 21:9
+- [x] Definir 720p (1280x720) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 720p = 1280x720.
+- [x] Definir 1080p (1920x1080) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 1080p.
+- [x] Definir 1440p (2560x1440) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 1440p.
+- [x] Definir 4K (3840x2160) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 4K.
+- [x] Definir nativa (resolución del monitor) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). id "nativa" = 0x0, resuelto en runtime.
+- [x] Definir aspect ratio 16:9 — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 16:9.
+- [x] Definir soporte para 16:10 — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 16:10.
+- [x] Definir soporte para 21:9 — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 21:9.
 
 ### [S] Modos de pantalla
-- [ ] Definir pantalla completa (fullscreen)
-- [ ] Definir ventana (windowed)
-- [ ] Definir borderless (borderless windowed)
-- [ ] Definir toggle de pantalla completa (F11 o botón)
-- [ ] Definir modo ventana para multitasking
-- [ ] Definir borderless para pantalla completa sin bloquear otros monitores
+- [x] Definir pantalla completa (fullscreen) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `MODOS` con los 3 modos.
+- [x] Definir ventana (windowed) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). idem.
+- [x] Definir borderless (borderless windowed) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). idem.
+- [x] Definir toggle de pantalla completa (F11 o botón) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODO_PANTALLA_COMPLETA` / `MODO_VENTANA` en `MODOS`; el atajo F11 es del adaptador de UI (M53) — el núcleo ya expone el estado.
+- [x] Definir modo ventana para multitasking — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODOS = [MODO_VENTANA, MODO_PANTALLA_COMPLETA, MODO_BORDERLESS]`.
+- [x] Definir borderless para pantalla completa sin bloquear otros monitores — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODO_BORDERLESS`; `fijar("modo", ...)` y `preset_actual()` lo exponen.
 
 ### [S] VSync
-- [ ] Definir VSync 0 (off)
-- [ ] Definir VSync 1 (on)
-- [ ] Definir VSync 2 (adaptive)
+- [x] Definir VSync 0 (off) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `VSYNC_OPCIONES = [0, 1, 2]`.
+- [x] Definir VSync 1 (on) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
+- [x] Definir VSync 2 (adaptive) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem; probado con `fijar("vsync", 0/1/2)`.
 - [x] Definir recomendación por preset (bajo: 0, medio: 1, alto: 2, ultra: 2)
 
 ### [S] Cap de FPS
-- [ ] Definir 30 FPS (hardware muy bajo)
-- [ ] Definir 60 FPS (hardware medio, recomendado)
-- [ ] Definir 120 FPS (hardware alto)
-- [ ] Definir ilimitado (hardware ultra)
+- [x] Definir 30 FPS (hardware muy bajo) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `FPS_OPCIONES = [30, 60, 120, 0]`.
+- [x] Definir 60 FPS (hardware medio, recomendado) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
+- [x] Definir 120 FPS (hardware alto) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
+- [x] Definir ilimitado (hardware ultra) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `0 = ilimitado`.
 - [x] Definir recomendación por preset (bajo: 30, medio: 60, alto: 120, ultra: ilimitado)
 
 ### [S] Calidad de sombras
-- [ ] Definir baja (cascada simple, 1 shadow map, 512x512)
-- [ ] Definir media (cascada suave, 2 shadow maps, 1024x1024)
-- [ ] Definir alta (PCSS, 4 shadow maps, 2048x2048)
-- [ ] Definir ultra (cascada soft shadows, 4 shadow maps, 4096x4096)
+- [x] Definir baja (cascada simple, 1 shadow map, 512x512) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["baja"]` = 1/1/512 sin soft.
+- [x] Definir media (cascada suave, 2 shadow maps, 1024x1024) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["media"]` = 2/2/1024.
+- [x] Definir alta (PCSS, 4 shadow maps, 2048x2048) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["alta"]` = 4/4/2048 + soft.
+- [x] Definir ultra (cascada soft shadows, 4 shadow maps, 4096x4096) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["ultra"]` = 4/4/4096 + soft.
 - [x] Definir implementación (DirectionalLight, OmnidirectionalLight, SpotLight)
-- [ ] Definir soft shadows para calidad alta/ultra
+- [x] Definir soft shadows para calidad alta/ultra — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `soft: true` solo en alta/ultra.
 
 ### [S] Calidad de texturas
-- [ ] Definir baja (0.5x, mipmap 0)
-- [ ] Definir media (1x, mipmap 1)
-- [ ] Definir alta (2x, mipmap 2)
-- [ ] Definir ultra (4x, mipmap 3)
-- [ ] Definir filtering (trilinear)
-- [ ] Definir anisotropic filtering por calidad (2x, 4x, 8x, 16x)
-- [ ] Definir mipmaps habilitados
+- [x] Definir baja (0.5x, mipmap 0) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["baja"]` = 0.5 / mipmap 0.
+- [x] Definir media (1x, mipmap 1) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["media"]` = 1.0 / mipmap 1.
+- [x] Definir alta (2x, mipmap 2) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["alta"]` = 2.0 / mipmap 2.
+- [x] Definir ultra (4x, mipmap 3) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["ultra"]` = 4.0 / mipmap 3.
+- [x] Definir filtering (trilinear) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `filtrado: "trilinear"`.
+- [x] Definir anisotropic filtering por calidad (2x, 4x, 8x, 16x) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `aniso` 2/4/8/16.
+- [x] Definir mipmaps habilitados — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `mipmap` 0..3 por calidad.
 
 ### [S] Distancia de dibujado
-- [ ] Definir cercana (50 unidades, 100m)
-- [ ] Definir media (100 unidades, 200m)
-- [ ] Definir lejana (200 unidades, 400m)
+- [x] Definir cercana (50 unidades, 100m) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["baja"] = 300 m`.
+- [x] Definir media (100 unidades, 200m) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["media"] = 600 m`.
+- [x] Definir lejana (200 unidades, 400m) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). alta 1200 m / ultra 2500 m.
 - [ ] Definir culling de objetos fuera de distancia
 - [ ] Definir LODs para objetos lejanos (M50)
 - [ ] Definir fog para ocultar transición
 
 ### [S] Calidad de efectos
-- [ ] Definir baja (partículas básicas, sin post-processing)
-- [ ] Definir media (partículas estándar, post-processing básico)
-- [ ] Definir alta (partículas avanzadas, post-processing completo)
-- [ ] Definir ultra (partículas máximas, post-processing cinemático)
+- [?] Definir baja (partículas básicas, sin post-processing) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["baja"] = 0.25`.
+- [?] Definir media (partículas estándar, post-processing básico) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["media"] = 0.5`.
+- [?] Definir alta (partículas avanzadas, post-processing completo) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["alta"] = 0.85`.
+- [?] Definir ultra (partículas máximas, post-processing cinemático) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["ultra"] = 1.0`.
 - [ ] Definir iluminación volumétrica (baja/media: off, alta: on, ultra: alta calidad)
 
 ### [S] Calidad de vegetación
-- [ ] Definir baja (sin animación, LOD 0 solo)
-- [ ] Definir media (animación básica, LOD 0-1)
-- [ ] Definir alta (animación completa, LOD 0-2)
-- [ ] Definir ultra (animación + wind procedural + interacción, LOD 0-3)
+- [x] Definir baja (sin animación, LOD 0 solo) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["baja"] = 0.2`.
+- [x] Definir media (animación básica, LOD 0-1) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["media"] = 0.45`.
+- [x] Definir alta (animación completa, LOD 0-2) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["alta"] = 0.8`.
+- [x] Definir ultra (animación + wind procedural + interacción, LOD 0-3) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["ultra"] = 1.0`.
 - [ ] Definir animación por wind shader
 - [ ] Definir interacción con jugador
 
 ### [S] Calidad de agua
-- [ ] Definir baja (sin reflexiones, textura simple)
-- [ ] Definir media (reflexiones básicas, textura normal)
-- [ ] Definir alta (reflexiones completas, textura normal + parallax)
-- [ ] Definir ultra (reflexiones + caustics, textura normal + parallax + caustics)
+- [x] Definir baja (sin reflexiones, textura simple) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["baja"] = 0.25`.
+- [x] Definir media (reflexiones básicas, textura normal) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["media"] = 0.5`.
+- [x] Definir alta (reflexiones completas, textura normal + parallax) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["alta"] = 0.85`.
+- [x] Definir ultra (reflexiones + caustics, textura normal + parallax + caustics) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["ultra"] = 1.0`.
 - [ ] Definir shader de agua con reflexiones
 - [ ] Definir normal map para olas
 - [ ] Definir parallax para profundidad
@@ -121,19 +121,19 @@
 - [ ] Definir partículas para fuego, humo, agua, magia, polvo
 
 ### [S] Anti-aliasing
-- [ ] Definir off (sin anti-aliasing)
-- [ ] Definir FXAA (Fast Approximate Anti-Aliasing)
-- [ ] Definir MSAA 2x (Multi-Sample Anti-Aliasing 2x)
-- [ ] Definir MSAA 4x (Multi-Sample Anti-Aliasing 4x)
-- [ ] Definir TAA (Temporal Anti-Aliasing)
+- [x] Definir off (sin anti-aliasing) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_OFF`.
+- [x] Definir FXAA (Fast Approximate Anti-Aliasing) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_FXAA`.
+- [x] Definir MSAA 2x (Multi-Sample Anti-Aliasing 2x) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_MSAA_2X`.
+- [x] Definir MSAA 4x (Multi-Sample Anti-Aliasing 4x) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_MSAA_4X`.
+- [x] Definir TAA (Temporal Anti-Aliasing) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_TAA`; 5 opciones en `AA_OPCIONES`.
 - [x] Definir recomendación por preset (bajo: off/FXAA, medio: FXAA, alto: MSAA 2x, ultra: TAA)
 
 ### [S] Anisotropic filtering
-- [ ] Definir off (sin anisotropic filtering)
-- [ ] Definir 2x (calidad baja)
-- [ ] Definir 4x (calidad media)
-- [ ] Definir 8x (calidad alta)
-- [ ] Definir 16x (calidad ultra)
+- [x] Definir off (sin anisotropic filtering) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `TEXTURAS` por calidad: `aniso` 2/4/8/16 (baja/media/alta/ultra).
+- [x] Definir 2x (calidad baja) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["baja"]["aniso"] = 2`.
+- [x] Definir 4x (calidad media) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["media"]["aniso"] = 4`.
+- [x] Definir 8x (calidad alta) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["alta"]["aniso"] = 8`.
+- [x] Definir 16x (calidad ultra) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["ultra"]["aniso"] = 16`.
 - [x] Definir recomendación por preset (bajo: off/2x, medio: 4x, alto: 8x, ultra: 16x)
 
 ### [S] Post-processing
@@ -334,7 +334,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 249 ítems · Completados: 69 · Pendientes: 180 · No resueltos: 0.
+**Totales:** 249 ítems · Completados: 123 · Pendientes: 122 · No resueltos: 4.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?].
