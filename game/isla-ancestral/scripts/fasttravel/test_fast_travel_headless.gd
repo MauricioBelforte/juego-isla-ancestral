@@ -8,6 +8,9 @@ extends SceneTree
 var _fallos := 0
 var _checks := 0
 
+## Guardián anti-falso-verde: piso MEDIDO en la corrida real.
+const CHECKS_MINIMOS: int = 17
+
 func _init() -> void:
 	call_deferred("_run")
 
@@ -39,9 +42,50 @@ func _run() -> void:
 	_check("Service: señal viaje emitida", solicitud[0])
 	var ok_invalido = svc.solicitar_viaje("ancla_inexistente")
 	_check("Service: ancla inexistente -> false", not ok_invalido)
+	_b2_indice_costo(svc)
 	svc.free()
-	print("=== Resumen M69: %d checks, %d fallos ===" % [_checks, _fallos])
-	quit(1 if _fallos > 0 else 0)
+	_resumen()
+
+## D52 (O(1)) + RF4/P3 (costo de viaje).
+func _b2_indice_costo(svc) -> void:
+	_check("Índice O(1): ancla_de devuelve la ancla por id", svc.ancla_de("LOC-RIZ-PUB-001").get("nombre") == "Pueblo Raiz")
+	_check("Índice O(1): id inexistente -> {} vacío", svc.ancla_de("no_existe").is_empty())
+	# El índice deben cubrir todas las anclas cargadas.
+	var n_idx := 0
+	for a in svc.anclas():
+		if not svc.ancla_de(String(a.get("id", ""))).is_empty():
+			n_idx += 1
+	_check("Índice O(1): cubre las %d anclas" % svc.anclas().size(), n_idx == svc.anclas().size())
+
+	# Costo: por defecto gratuito.
+	_check("Costo: por defecto 0 (viaje gratuito)", svc.costo_total() == 0)
+	svc.set_costo_viaje({"moneda": 5})
+	_check("Costo: configurable en recursos", svc.costo_total() == 5)
+	svc.set_costo_viaje({"moneda": 3, "tiempo": 2})
+	_check("Costo: varios recursos se suman", svc.costo_total() == 5)
+
+	# Rechazo por costo con validador inyectable (M38/M59).
+	var puede := [true]
+	svc.set_puede_pagar_fn(func(_ancla_id: String) -> bool: return puede[0])
+	var rechazos := []
+	svc.viaje_rechazado.connect(func(id, motivo): rechazos.append([id, motivo]))
+	var ok_pago = svc.solicitar_viaje("LOC-RIZ-PUB-001")
+	_check("Costo: con saldo el viaje se concede", ok_pago and rechazos.is_empty())
+
+	puede[0] = false
+	var ok_sin_pago = svc.solicitar_viaje("LOC-RIZ-PUB-001")
+	_check("Costo: sin saldo el viaje se rechaza", not ok_sin_pago)
+	_check("Costo: el rechazo lleva motivo 'costo'", rechazos.size() == 1 and String(rechazos[0][1]) == "costo")
+	_check("Costo: el rechazo nombra el ancla", String(rechazos[0][0]) == "LOC-RIZ-PUB-001")
 
 func _on_viaje(ancla: Dictionary, contenedor: Array) -> void:
 	contenedor[0] = true
+
+func _resumen() -> void:
+	print("=== RESUMEN M69: %d checks, %d fallos ===" % [_checks, _fallos])
+	if _fallos > 0 or _checks < CHECKS_MINIMOS:
+		print("RESULTADO: FALLO (%d checks de %d, %d fallos)" % [_checks, CHECKS_MINIMOS, _fallos])
+		quit(1)
+		return
+	print("RESULTADO: PASS")
+	quit(0)
