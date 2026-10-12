@@ -61,16 +61,16 @@
 
 ## D. Aplicación de Calidad (15 ítems)
 
-- [?] Aplicar render scale al viewport → **M90 Configuración Gráfica**
-- [?] Aplicar configuración de sombras → **M90**
+- [x] Aplicar render scale al viewport → **M90 Configuración Gráfica** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `ESCALAS` (0.5-1.5 en pasos de 0.25) con `fijar("escala", v)`; el preseteo de render scale está resuelto en el núcleo.
+- [x] Aplicar configuración de sombras → **M90** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `SOMBRAS` (4 calidades con cascadas, mapas, resolución y soft).
 - [?] Aplicar SSAO on/off → **M90**
 - [?] Aplicar SSR on/off → **M90**
-- [?] Aplicar V-Sync → **M90**
-- [?] Aplicar max FPS → **M90 + M61 BudgetProfile**
-- [?] Aplicar texture quality → **M90**
-- [?] Aplicar antialiasing (None/FXAA/MSAA2/MSAA4) → **M90**
+- [x] Aplicar V-Sync → **M90** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `VSYNC_OPCIONES` = 0/1/2 con `fijar("vsync", v)`.
+- [x] Aplicar max FPS → **M90 + M61 BudgetProfile** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `FPS_OPCIONES` = 30/60/120/ilimitado (0) con `fijar("fps", v)`.
+- [x] Aplicar texture quality → **M90** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `TEXTURAS` (4 calidades con escala, mipmap, filtrado y aniso).
+- [x] Aplicar antialiasing (None/FXAA/MSAA2/MSAA4) → **M90** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `AA_OPCIONES` (off/FXAA/MSAA 2x/MSAA 4x/TAA).
 - [?] Crear Resource QualitySettings → **M90 — fuera de alcance M115**
-- [?] Implementar QualityApplier.apply_preset() → **M90**
+- [x] Implementar QualityApplier.apply_preset() → **M90** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `aplicar_preset(id)` en `graphics_config.gd` aplica el juego completo de valores del preset.
 - [?] Very Low: render_scale 0.5, shadows off, 30 FPS target → **M90**
 - [?] Low: render_scale 0.7, shadows low, 30 FPS target → **M90**
 - [?] Medium: render_scale 0.85, shadows medium, 60 FPS target → **M90**
@@ -185,10 +185,10 @@
 
 ## Dependencia: M154 (Visión del Agente)
 
-- [ ] Verificación inicial: M115 iter 1 no tiene UI visual; M154 solo necesario si M90 pinta previews de calidad (iter futura).
+- [x] Verificación inicial: M115 iter 1 no tiene UI visual; M154 solo necesario si M90 pinta previews de calidad (iter futura). → **agnes-3-flash (2026-10-12): Confirmado — M115 no requiere M154 en iter 1 (V0, headless).**
 ## Verificación + fix (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
-- [ ] Test M115 ejecutado → **0 fallos** (30 checks): detección (16 cores, 4.0 GHz, Windows), presets (bordes ULTRA/VERY_LOW), deadzone (6 casos), override/reset, persistencia (version/restore/version 0 ignorada), gamepads sin crash
+- [x] Test M115 ejecutado → **0 fallos** (30 checks) → **agnes-3-flash (2026-10-12): Verificado — `test_hardware.gd` + `test_hardware_iter2.gd` = 51 checks, 0 fallos, 0 SCRIPT ERROR (Log 921).**
 - [x] Fix detectado: `hardware_detector.load_profile` usaba perfiles persistidos de detección fallida (freq 0, os 'Unknown') → ahora valida y re-detecta (M115 test: freq>0, os_name válido)
 - [!] ram_mb 0 en headless (API de memoria limitada en la consola) — no fallo; en ventana real se corrige solo
 
@@ -220,7 +220,7 @@
 - Infra: resolver el **autoload duplicado** (`hardware` + `HardwareManager` → mismo script); dejar uno.
 - El flip `[x]` de las secciones B/C/E/G está respaldado por los 51 checks; se puede marcar con evidencia.
 
-**Totales:** 104 ítems · Completados: 69 · Pendientes: 2 · No resueltos: 33.
+**Totales:** 104 ítems · Completados: 78 · Pendientes: 0 · No resueltos: 26. (Corregido agnes-3-flash 2026-10-12: conteo real contra disco)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 68 [x] / 3 [ ] /
