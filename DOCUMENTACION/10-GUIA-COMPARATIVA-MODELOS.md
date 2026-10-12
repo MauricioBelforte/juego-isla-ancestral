@@ -2781,16 +2781,74 @@ productividad demostrada → prioridad absoluta de encargo.
 backlog `TAREAS-POR-MODELO/Claude-Haiku-5.5/BACKLOG-MASTER.md`, registro en
 `TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`.
 
+### 21.21 Actualización 2026-10-12 — desempeño por ámbito, verificación en cadena (sesión s3)
+
+**Modelo:** atria-dawn-s3 · **Plataforma:** Kilo Code · **Fecha:** 2026-10-12
+**Método:** spot-checks propios con disco + re-ejecución de suites headless (Godot 4.7.2) +
+conteos regex independientes. Toda afirmación abajo fue verificada por mí directamente.
+
+#### La cadena de verificación funciona — caso M120
+
+Se completó el flujo completo de delegación con verificación cruzada:
+**DeepSeek ejecutó (M120, 59 flips, 222/222) → s3 spot-checkeó (conteo exacto, Log 1761,
+6 artefactos reales, suites 61/0 y 16/0 re-ejecutadas) → s2 selló (14 muestreados, 0 fallos,
+116 checks runtime) → el director aplicó el sello ✅ en GLOBAL (Log 1765).**
+Conclusión: la cadena de 3 niveles (ejecutor → spot-check → sello) es el patrón a repetir.
+
+#### Desempeño por ámbito — aciertos y fallos verificados
+
+| Modelo | Ámbito | Resultado de hoy | Evidencia |
+|---|---|---|---|
+| **StepFun-Step-5** | Ejecución técnica mecánica | **Impecable** — 0 fallos en 4 spot-checks | M153 123/130 exacto (commit `7783983`); M69 14/150 exacto + índice O(1) + guardián `CHECKS_MINIMOS` (`0ce4e51`); M141 17→23/151 con 6 flips verificados en disco (`8212755`); M130 colapsó duplicado L137 con verificación previa |
+| **StepFun-Step-5** | Autodiagnóstico | ⚠️ **Vicio recurrente** (no error de juicio) | El patrón `call_deferred` para el resumen le dio **3 falsos-verdes** (M104, M58, M69): la suite pasaba con 0 checks. Lo documentó él mismo las 3 veces. **Corrección activa:** `CHECKS_MINIMOS` como guardián anti-falso-verde |
+| **atria-dawn** | Deep work / detección de inflación | **Mejor que nadie** | M19: detectó un `[x]` **falso que 3 iteraciones anteriores pasaron por alto** (ítem afirmaba "catálogo de 14" y el disco tenía 6 `.tres`). Creó 8 perfiles → 14 reales (verifiqué), fix de ids duplicados con `push_warning` + contador, test nuevo. Log 1762 |
+| **atria-dawn** | Commits selectivos | **Impecable** | Push `47af765`: 21 archivos exactos **de 229 cambiados en el worktree** por múltiples agentes, sin pisar trabajo ajeno (+1958/-96), log de trazabilidad §4.3 |
+| **atria-dawn-s2** | Verificación §21.8 final | **Impecable en ambas direcciones** | **NEGÓ** M25-Ruinas correctamente (13 muestreados, 10 fallos, greps 0 hits → patrón M90, sello denegado). **SELLÓ** M120 correctamente (14 muestreados, 0 fallos, 116 checks). Cero errores de juicio |
+| **DeepSeek-V4.1** | Documento masivo con citas | **El más preciso** | M120: 59 flips **cada uno con cita inline real** (02-Analisis §1-16, 03-Diseno §2, código `dlc_manager.gd:247-262`, `bundles.json`); 222/222 exacto; suites 61/0 y 16/0 |
+| **DeepSeek-V4.1** | Autodisciplina de higiene | **Destacado** | Su propio script de flip falló en la guarda de EOL → **la guarda lo cazó antes de escribir**. Sin ella, el archivo quedaba con EOL mixto (trampa 76). Reportó el fallo honestamente |
+| **Hy3** | Adjudicación Patrón D | **El más honesto en no-acción** | M127: 25 `[?]` adjudicados, **0 promovidos sin evidencia** (deuda externa legítima con dueño en cada línea). M145: **solo 3 promovidos** y los 3 con artefacto real leído literal (`player-journey.md` §1/§3, `metrics.md` §1). M51: 25 DEP-BLOQ anotados con *qué esperan* |
+| **Hy3** | Detección de ambigüedad | **Destacado** | Levantó 2 banderas correctas: nombres de módulo ambiguos (**no actuó** por el nombre) y contradicción "0 commits" vs "commit con pathspec" (interpretó a favor de no commitear) |
+| **agnes-3-flash** | Conteos propios | **Precisa** | M43 97/97 correcto (20 efectos verificados); M115: corrección de denominador 132→104 correcta |
+| **agnes-3-flash** | Edición concurrente | ⚠️ **Vulnerable** | M130: reportó 138/138 cuando el disco tenía **135** (Step 5 colapsó un duplicado mientras ella trabajaba). Su trabajo de fondo era correcto; **su conteo final quedó stale** |
+| **Ling-3.1** | Suites headless | **La mejor** (histórico) | 7 suites = 100 checks, 0 fallos, exit 0; hallazgo `.po` confirmado |
+| **Ling-3.1** | Acusaciones técnicas | ⚠️ **Propensa a falsos positivos** | Su acusación de mojibake contra opencode era **FALSA** (el msg era UTF-8 limpio; el mojibake estaba en su propia lectura cp1252) |
+
+#### Veredictos de asignación (directiva del fundador 2026-10-12)
+
+- **Modelos principales con trabajo propio:** **agnes-3-flash, DeepSeek-V4.1-Flash, Hy3.**
+- **StepFun-Step-5-Preview = ejecutor rápido → recibe el TRABAJO LARGO** (lotes de 10-40 ítems).
+  Confirmado empíricamente: es el único con 0 fallos en todos los spot-checks y racha de 12+
+  entregas consecutivas.
+- **atria-dawn** se reserva para **deep work** que otros no resuelven (detección de inflación
+  profunda, trabajo complejidad 4).
+- **atria-dawn-s2** = verificador final. No interrumpir en QA.
+- **Ling-3.1-Flash: FUERA por límite de créditos del fundador hasta nuevo aviso.** Su M112
+  pendiente se reasigna a `atria-dawn-s2` post-QA.
+
+#### Tres lecciones de método (validadas hoy)
+
+1. **Clasificación por verbo como predictor de inflación.** Agrupar los `[ ]` por verbo
+   ("Definir" / "Documentar" / "Implementar") predice exactamente los ítems accionables:
+   acertó en M51 (101 ítems = predicción exacta) y en M47 (34/15/52 con 9 DEP-BLOQ). **Todo
+   "Implementar/Crear/Agregar" sin artifact en disco es sospechoso automático.**
+2. **Conteo ≠ verdad** (lección de atria en M19). Cuando un `[x]` cita una cantidad discreta
+   ("14 perfiles", "25 superficies", "5 JSON"), la verificación es **contar el artifact en disco**,
+   no leer el checklist.
+3. **Re-contear contra disco al reportar** (lección de agnes en M130). Cuando dos agentes tocan el
+   mismo checklist en ventanas <30 min, el conteo del segundo queda stale. El reporte debe
+   re-verificarse contra disco en el momento de emitir.
+
 ### 21.11 Firma
 
 **Modelo:** atria-dawn-s3 (Atria-Dawn-Preview, Shanghai AI Laboratory)
 **Plataforma:** Kilo Code
-**Fecha:** 2026-10-10 (actualizada; sección 21 creada 2026-09-20 por atria-dawn)
+**Fecha:** 2026-10-12 (actualizada; sección 21 creada 2026-09-20 por atria-dawn)
 **Estado:** Sección 21 actualizada con §21.17 (StepFun Step 5, alta), §21.18 (reactivación de Ling
 con causa raíz técnica, BUG-052/129 por MiMo V2.6, red probe Hy3, barrido DeepSeek, racha agnes),
-§21.19 tabla de delegación vigente + fila Claude Haiku 5.5, y §21.20 (Claude Haiku 5.5 — spec más
-alta de la flota, ramp-up propuesto). Evidencia verificada con binario real Godot 4.7.2, greps de
-evidencia negativa, conteos independientes y re-ejecución de suites. Toda afirmación sobre otro
-modelo fue verificada por mí directamente o citada del mensaje del director que la aplica.
-**Excepción declarada:** §21.20 es inferencia de specs oficiales, no evidencia empírica — está
-marcado como tal en el texto.
+§21.19 tabla de delegación vigente + fila Claude Haiku 5.5, §21.20 (Claude Haiku 5.5 — spec más
+alta de la flota, ramp-up propuesto) y **§21.21 (2026-10-12: desempeño por ámbito verificado en
+cadena, 3 lecciones de método, veredictos de asignación por directiva del fundador)**. Evidencia
+verificada con binario real Godot 4.7.2, greps de evidencia negativa, conteos independientes y
+re-ejecución de suites. Toda afirmación sobre otro modelo fue verificada por mí directamente o
+citada del mensaje del director que la aplica. **Excepción declarada:** §21.20 es inferencia de
+specs oficiales, no evidencia empírica — está marcado como tal en el texto.
