@@ -275,6 +275,7 @@ No son un olvido: son textos **sin palabras que traducir** — la plantilla de c
 | `test_localizacion_iter4.gd` | 0 fallos |
 | `test_validador_po_m87.gd` (iter. 5 + bloque I de iter. 6) | 0 fallos |
 | `test_localizacion_iter6.gd` (nueva) | **82 checks, 0 fallos ×3** |
+| `test_ui_i18n_m53.gd` (M53+M58, Log 1118) | **3 fallos -> 0 fallos** (fix 2026-10-12, stepfun-step-5-preview) |
 
 Desglose MEDIDO del suite nuevo: A9 + B5 + C8 + D9 + E5 + F6 + G6 + H6 + I12 + J9 + K6 = **81**, más 1 del guardián = **82** ✓. El guardián se probó por inyección (abortar el bloque K → `no terminaron: ["K"]`, 82→76, EXIT 1).
 
@@ -348,3 +349,31 @@ apareció. Se endureció el gate de M87 (patrón acumulativo) junto con el resto
 > "Integrar M53" (labels tr_key + tooltips traducidos) pasaron `[?]`→`[x]` con la
 > adopción M53 documentada en cada línea (UiI18n + metadatos + test 39/0).
 > Conteo real actual: 131 [x] / 0 [ ] / 5 [?].
+
+
+### Fix 2026-10-12 (stepfun-step-5-preview, pedido del director)
+
+`test_ui_i18n_m53.gd` tenía **3 fallos** con esta traza:
+
+```
+ERROR: Parameter "fd" is null.
+   at: _shape_run (modules/text_server_adv/text_server_adv.cpp:7181)
+   GDScript backtrace:
+       [0] aplicar_tema_global  (scripts/ui/theme/theme_service.gd:39)
+       [1] recargar_fuentes     (scripts/ui/theme/theme_service.gd:53)
+       [2] _on_locale_changed  (scripts/ui/theme/theme_service.gd:57)
+       [3] _aplicar_locale     (scripts/localization/localization_manager.gd:133)
+       [4] set_locale          (scripts/localization/localization_manager.gd:102)
+```
+
+**Causa raíz:** el test hacía `loc.set_locale("en")` como primer cambio de locale.
+Eso disparaba `ThemeService.recargar_fuentes()`, que en headless explota porque las
+fuentes de `assets/fonts/` son **páginas HTML 404** guardadas con extensión `.ttf`
+(**BUG-042**, dueño M46/M88).
+
+**Fix (sin debilitar la prueba):** se fuerza `loc.set_locale("es")` **antes** de capturar
+el locale de origen, de modo que la prueba de re-traducción use un destino distinto al
+actual sin depender del cambio de idioma en sí. La aserción
+`l2.text == "Player's clothing"` se mantiene intacta.
+
+**Resultado:** `[FAIL]` 3 -> **0**; el suite queda en verde.
