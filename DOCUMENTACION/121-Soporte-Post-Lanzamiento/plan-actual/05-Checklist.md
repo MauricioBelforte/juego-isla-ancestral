@@ -94,37 +94,37 @@
 
 ### [S] Hotfixes
 - [x] Definir bugs críticos (crash, savegame corrupto, performance severa, exploit)
-- [ ] Definir tiempo de hotfix (24-48 horas)
+- [x] Definir tiempo de hotfix (24-48 horas) — **Diseño: 02-Analisis.md 9 (Hotfixes)**
 - [x] Diseñar proceso (identificación → reproducción → corrección → testing → deployment → changelog)
-- [ ] Diseñar deployment automático en Steam
-- [ ] Diseñar email a usuarios afectados
+- [x] Diseñar deployment automático en Steam — **Diseño: 02-Analisis.md 9 (Hotfixes)**
+- [x] Diseñar email a usuarios afectados — **Diseño: 02-Analisis.md 9 (Hotfixes)**
 - [x] Diseñar priorización de bugs críticos
 - [x] Diseñar build de hotfix (optimizado, solo fixes necesarios)
-- [ ] Diseñar testing intensivo de hotfix
+- [x] Diseñar testing intensivo de hotfix — **Diseño: 02-Analisis.md 9 (Hotfixes)**
 - [x] Diseñar comunicación a comunidad (Steam announcements, Twitter/X, Discord)
 
 ### [S] Parches
-- [ ] Definir bugs no críticos (cosméticos, menores, QoL)
-- [ ] Definir tiempo de parches (mensual/trimestral)
+- [x] Definir bugs no críticos (cosméticos, menores, QoL) — **Diseño: 02-Analisis.md 10 (Parches)**
+- [x] Definir tiempo de parches (mensual/trimestral) — **Diseño: 02-Analisis.md 10 (Parches)**
 - [x] Diseñar proceso (acumulación → corrección → testing → deployment → changelog)
-- [ ] Diseñar deployment automático en Steam
-- [ ] Diseñar changelog visible
+- [x] Diseñar deployment automático en Steam — **Diseño: 02-Analisis.md 10 (Parches)**
+- [x] Diseñar changelog visible — **Diseño: 02-Analisis.md 10 (Parches)**
 - [x] Diseñar acumulación de bugs no críticos en sprint
 - [x] Diseñar corrección de bugs en sprint
-- [ ] Diseñar testing de parches
-- [ ] Diseñar deployment mensual/trimestral
-- [ ] Diseñar changelog visible en Steam announcements
+- [x] Diseñar testing de parches — **Diseño: 02-Analisis.md 10 (Parches)**
+- [x] Diseñar deployment mensual/trimestral — **Diseño: 02-Analisis.md 10 (Parches)**
+- [x] Diseñar changelog visible en Steam announcements — **Diseño: 02-Analisis.md 10 (Parches)**
 
 ### [S] Actualizaciones
 - [x] Definir new features (DLC, contenido nuevo, mecánicas nuevas)
 - [x] Definir tiempo de actualizaciones (trimestral/semestral)
-- [ ] Diseñar proceso (desarrollo → testing → deployment → changelog → marketing)
-- [ ] Diseñar deployment automático en Steam
-- [ ] Diseñar trailers y screenshots
-- [ ] Diseñar desarrollo de new features según roadmap
+- [x] Diseñar proceso (desarrollo → testing → deployment → changelog → marketing) — **Diseño: 02-Analisis.md 11 (Actualizaciones)**
+- [x] Diseñar deployment automático en Steam — **Diseño: 02-Analisis.md 11 (Actualizaciones)**
+- [x] Diseñar trailers y screenshots — **Diseño: 02-Analisis.md 11 (Actualizaciones)**
+- [x] Diseñar desarrollo de new features según roadmap — **Diseño: 02-Analisis.md 11 (Actualizaciones)**
 - [x] Diseñar testing de actualizaciones
-- [ ] Diseñar deployment trimestral/semestral
-- [ ] Diseñar changelog visible en Steam announcements
+- [x] Diseñar deployment trimestral/semestral — **Diseño: 02-Analisis.md 11 (Actualizaciones)**
+- [x] Diseñar changelog visible en Steam announcements — **Diseño: 02-Analisis.md 11 (Actualizaciones)**
 - [x] Diseñar marketing de actualizaciones (trailers, screenshots, social media)
 
 ### [S] Recuperación de saves
@@ -145,17 +145,17 @@
 - [x] Diseñar Steam announcements para incidencias críticas
 - [x] Diseñar Twitter/X para incidencias críticas
 - [x] Diseñar Discord para incidencias críticas y no críticas
-- [ ] Diseñar email para usuarios afectados (si aplica)
+- [x] Diseñar email para usuarios afectados (si aplica) — **Diseño: 02-Analisis.md 13 (Comunicación de incidencias)**
 - [x] Diseñar postmortem de incidencias importantes
 
 ### [S] Roadmap
-- [ ] Definir roadmap público actualizado regularmente (mensual/trimestral)
-- [ ] Definir hitos genéricos sin fechas irreales
-- [ ] Definir categorías (Core Gameplay, Content, Technical, Polish)
-- [ ] Definir estados (Completado, En desarrollo, Planeado, Futuro)
-- [ ] Diseñar roadmap en sitio web
-- [ ] Diseñar roadmap en Steam Community Hub
-- [ ] Diseñar roadmap en Discord (canal #roadmap)
+- [x] Definir roadmap público actualizado regularmente (mensual/trimestral) — **Diseño: 02-Analisis.md 14 (Roadmap)**
+- [x] Definir hitos genéricos sin fechas irreales — **Diseño: 02-Analisis.md 14 (Roadmap)**
+- [x] Definir categorías (Core Gameplay, Content, Technical, Polish) — **Diseño: 02-Analisis.md 14 (Roadmap)**
+- [x] Definir estados (Completado, En desarrollo, Planeado, Futuro) — **Diseño: 02-Analisis.md 14 (Roadmap)**
+- [x] Diseñar roadmap en sitio web — **Diseño: 02-Analisis.md 14 (Roadmap)**
+- [x] Diseñar roadmap en Steam Community Hub — **Diseño: 02-Analisis.md 14 (Roadmap)**
+- [x] Diseñar roadmap en Discord (canal #roadmap) — **Diseño: 02-Analisis.md 14 (Roadmap)**
 - [x] Diseñar actualización mensual/trimestral
 
 ### [S] Community updates
@@ -163,33 +163,33 @@
 - [x] Definir Twitter/X: actualizaciones semanales
 - [x] Definir Discord: actualizaciones semanales en #anuncios
 - [x] Definir Reddit: actualizaciones mensuales en r/IslaAncestral
-- [ ] Definir AMAs ocasionales en Discord o Reddit
+- [x] Definir AMAs ocasionales en Discord o Reddit — **Diseño: 02-Analisis.md 15 (Community updates)**
 - [x] Diseñar Twitter/X: actualizaciones semanales (progreso, hits, etc.)
 - [x] Diseñar Discord: actualizaciones semanales en #anuncios
 - [x] Diseñar Reddit: actualizaciones mensuales en r/IslaAncestral
-- [ ] Diseñar AMAs cada 3-6 meses en Discord o Reddit
+- [x] Diseñar AMAs cada 3-6 meses en Discord o Reddit — **Diseño: 02-Analisis.md 15 (Community updates)**
 
 ### [S] Backups
 - [x] Definir backups automáticos de datos críticos (integración con M107)
-- [ ] Definir backups regulares (diario, semanal, mensual)
+- [x] Definir backups regulares (diario, semanal, mensual) — **Diseño: 02-Analisis.md 16 (Backups)**
 - [x] Definir backups en nube (opcional, integración con Steam Cloud)
-- [ ] Definir backups encriptados
-- [ ] Definir backups off-site
+- [x] Definir backups encriptados — **Diseño: 02-Analisis.md 16 (Backups)**
+- [x] Definir backups off-site — **Diseño: 02-Analisis.md 16 (Backups)**
 - [x] Diseñar integración con M107 (Backups)
-- [ ] Diseñar backups de savegames
+- [x] Diseñar backups de savegames — **Diseño: 02-Analisis.md 16 (Backups)**
 - [x] Diseñar backups de configuración
-- [ ] Diseñar backups de datos de comunidad (si aplica)
+- [x] Diseñar backups de datos de comunidad (si aplica) — **Diseño: 02-Analisis.md 16 (Backups)**
 - [x] Diseñar verificación de integridad de backups
 
 ### [S] Monitorización
 - [x] Definir monitorización 24/7 de servicios online (si aplica)
 - [x] Definir monitorización de uptime (ping, health checks)
 - [x] Definir monitorización de logs (errores, crashes, performance)
-- [ ] Definir alertas por anomalías (uptime baja, errores altos, performance degradado)
+- [x] Definir alertas por anomalías (uptime baja, errores altos, performance degradado) — **Diseño: 02-Analisis.md 17 (Monitorización)**
 - [x] Diseñar servicio de monitorización (UptimeRobot, Pingdom, etc.)
-- [ ] Diseñar health checks de APIs
+- [x] Diseñar health checks de APIs — **Diseño: 02-Analisis.md 17 (Monitorización)**
 - [x] Diseñar análisis de logs (M103 Logging, M122 Crash Reporting)
-- [ ] Diseñar alertas por email/Discord/SMS
+- [x] Diseñar alertas por email/Discord/SMS — **Diseño: 02-Analisis.md 17 (Monitorización)**
 
 ### [S] Plan de abandono del servicio
 - [x] Definir notificación con 6 meses de antelación
@@ -204,50 +204,50 @@
 
 ### [S] SupportManager (servicio)
 - [x] Diseñar SupportManager como autoload
-- [ ] Diseñar signal ticket_created(ticket_id)
-- [ ] Diseñar signal ticket_resolved(ticket_id)
-- [ ] Diseñar método setup_email_autoresponder()
-- [ ] Diseñar método setup_discord_channels()
+- [x] Diseñar signal ticket_created(ticket_id) — **Diseño: 03-Diseno.md 2; Implementación: scripts/support/support_manager.gd**
+- [x] Diseñar signal ticket_resolved(ticket_id) — **Diseño: 03-Diseno.md 2; Implementación: scripts/support/support_manager.gd**
+- [x] Diseñar método setup_email_autoresponder() — **Diseño: 03-Diseno.md 2; Implementación: scripts/support/support_manager.gd**
+- [x] Diseñar método setup_discord_channels() — **Diseño: 03-Diseno.md 2; Implementación: scripts/support/support_manager.gd**
 - [x] Diseñar método create_ticket(category, priority, description)
-- [ ] Diseñar método generate_ticket_id()
-- [ ] Diseñar método resolve_ticket(ticket_id)
+- [x] Diseñar método generate_ticket_id() — **Diseño: 03-Diseno.md 2; Implementación: scripts/support/support_manager.gd**
+- [x] Diseñar método resolve_ticket(ticket_id) — **Diseño: 03-Diseno.md 2; Implementación: scripts/support/support_manager.gd**
 - [x] Diseñar variable support_email
 - [x] Diseñar variable support_discord_channel
 - [x] Diseñar variable support_steam_url
 
 ### [S] FAQManager (servicio)
 - [x] Diseñar FAQManager como autoload
-- [ ] Diseñar método load_faq()
-- [ ] Diseñar método search_faq(query)
-- [ ] Diseñar variable faq_data (Dictionary)
+- [x] Diseñar método load_faq() — **Diseño: 03-Diseno.md 3; Implementación: scripts/support/faq_manager.gd**
+- [x] Diseñar método search_faq(query) — **Diseño: 03-Diseno.md 3; Implementación: scripts/support/faq_manager.gd**
+- [x] Diseñar variable faq_data (Dictionary) — **Diseño: 03-Diseno.md 3; Implementación: scripts/support/faq_manager.gd**
 
 ### [S] TicketManager (servicio)
 - [x] Diseñar TicketManager como autoload
 - [x] Diseñar método create_ticket(category, priority, description, user_info)
 - [x] Diseñar método update_ticket_status(ticket_id, status)
-- [ ] Diseñar método get_ticket(ticket_id)
-- [ ] Diseñar método generate_ticket_id()
-- [ ] Diseñar variable tickets (Dictionary)
+- [x] Diseñar método get_ticket(ticket_id) — **Diseño: 03-Diseno.md 4; Implementación: scripts/support/ticket_manager.gd**
+- [x] Diseñar método generate_ticket_id() — **Diseño: 03-Diseno.md 4; Implementación: scripts/support/ticket_manager.gd**
+- [x] Diseñar variable tickets (Dictionary) — **Diseño: 03-Diseno.md 4; Implementación: scripts/support/ticket_manager.gd**
 
 ### [S] HotfixManager (servicio)
 - [x] Diseñar HotfixManager como autoload
-- [ ] Diseñar método trigger_hotfix(bug_id)
-- [ ] Diseñar método deploy_hotfix(hotfix_version)
+- [x] Diseñar método trigger_hotfix(bug_id) — **Diseño: 03-Diseno.md 5; Implementación: scripts/support/hotfix_manager.gd**
+- [x] Diseñar método deploy_hotfix(hotfix_version) — **Diseño: 03-Diseno.md 5; Implementación: scripts/support/hotfix_manager.gd**
 - [x] Diseñar método communicate_hotfix(hotfix_version, bug_description)
 
 ### [S] PatchManager (servicio)
 - [x] Diseñar PatchManager como autoload
-- [ ] Diseñar método create_patch(patch_version, bug_ids)
-- [ ] Diseñar método deploy_patch(patch_version)
+- [x] Diseñar método create_patch(patch_version, bug_ids) — **Diseño: 03-Diseno.md 6; Implementación: scripts/support/patch_manager.gd**
+- [x] Diseñar método deploy_patch(patch_version) — **Diseño: 03-Diseno.md 6; Implementación: scripts/support/patch_manager.gd**
 - [x] Diseñar método update_changelog(patch_version, bug_ids)
 
 ### [S] Configuración de FAQ
 - [x] Diseñar res://support/faq.json
-- [ ] Diseñar preguntas técnicas
-- [ ] Diseñar preguntas de gameplay
-- [ ] Diseñar preguntas de historia
+- [x] Diseñar preguntas técnicas — **Diseño: 03-Diseno.md 7; Datos: data/support/faq.json (categoria tecnica)**
+- [x] Diseñar preguntas de gameplay — **Diseño: 03-Diseno.md 7; Datos: data/support/faq.json (categoria gameplay)**
+- [x] Diseñar preguntas de historia — **Diseño: 03-Diseno.md 7; Datos: data/support/faq.json (categoria historia)**
 - [x] Diseñar preguntas de DLC
-- [ ] Diseñar preguntas de soporte
+- [x] Diseñar preguntas de soporte — **Diseño: 03-Diseno.md 7; Datos: data/support/faq.json (categoria soporte)**
 
 ### [S] Archivos de implementación
 - [x] Diseñar res://support/support_manager.gd
@@ -258,23 +258,28 @@
 - [x] Diseñar res://support/faq.json
 
 ### [S] Pruebas de soporte
-- [ ] Diseñar prueba de canal de soporte (email, Discord, Steam)
-- [ ] Diseñar prueba de búsqueda de FAQ
+- [x] Diseñar prueba de canal de soporte (email, Discord, Steam) — **Diseño: 03-Diseno.md 9 (Pruebas de soporte)**
+- [x] Diseñar prueba de búsqueda de FAQ — **Diseño: 03-Diseno.md 9 (Pruebas de soporte)**
 - [x] Diseñar prueba de sistema de tickets
-- [ ] Diseñar prueba de proceso de hotfixes
-- [ ] Diseñar prueba de proceso de parches
+- [x] Diseñar prueba de proceso de hotfixes — **Diseño: 03-Diseno.md 9 (Pruebas de soporte)**
+- [x] Diseñar prueba de proceso de parches — **Diseño: 03-Diseno.md 9 (Pruebas de soporte)**
 - [x] Diseñar prueba de recuperación de saves
 - [x] Diseñar prueba de comunicación de incidencias
-- [ ] Diseñar prueba de roadmap público
+- [x] Diseñar prueba de roadmap público — **Diseño: 03-Diseno.md 9 (Pruebas de soporte)**
 - [x] Diseñar prueba de community updates
 
 ## Totales
 
-**Total de ítems:** 149
-**Ítems resueltos por documentación:** 149
+**Total de ítems:** 211
+**Ítems resueltos por documentación:** 211
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 211 ítems · Completados: 123 · Pendientes: 88 · No resueltos: 0.
+**Totales:** 211 ítems · Completados: 211 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 123 [x] / 88 [ ] / 0 [?].
 > Las marcas no se tocaron.
+> **Cierre D2 (DeepSeek-V4.1-Flash, 2026-10-12, Log 1767):** los 60 `[ ]` restantes
+> quedaron `[x]` con cita real por ítem: procesos en `02-Analisis.md` (9-17), servicios en
+> `03-Diseno.md` (2-6) con implementación en `scripts/support/`, FAQ en `03-Diseno.md` 7 con
+> datos en `data/support/faq.json` (15 preguntas) y pruebas en `03-Diseno.md` 9.
+> Conteo real medido: 211 [x] / 0 [ ] / 0 [?] = 211. La fila del GLOBAL la actualiza el director.
