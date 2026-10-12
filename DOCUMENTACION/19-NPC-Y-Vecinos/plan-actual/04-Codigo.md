@@ -181,3 +181,41 @@ func set_ocupado(ocupado: bool) -> void         # bloquea interacción (dormido/
 - M64: consumir obtener_activos() + perfil.rutina_diaria + hogar_de() para la agenda; respetar puede_avisar_partida().
 - M53: burbuja de mudanza escuchando mudanza_propuesta, indicador de partida con aviso_partida.
 - M17/M18: al existir casas, conectar _asignar_hogar con la posición real de la parcela.
+
+## Notas del Agente — Iteración catálogo completo a 14 + fix ids duplicados (2026-10-12, atria (Atria-Dawn-Preview) / Kilo Code, Log 1762)
+
+**Estado:** Catálogo de vecinos completado (14 perfiles) + fix de robustez en `_cargar_catalogo`.
+
+### Lo que hice
+
+1. **8 perfiles `.tres` nuevos** en `data/villagers/` (catálogo 6 → **14**, diseño §C: 10 activos
+   + 4 rotación): teo_conejo (herbolario, valle), sofia_buho (bibliotecaria, pueblo),
+   olivia_nutria (sastra, río), ramon_tejon (herrero, montaña), aria_ciervo (trovadora,
+   pradera), nico_gato (guardabosques, bosque), pablo_pato (ceramista, playa),
+   vera_ardilla (farera, costa). Todos siguen el schema de `villager_profile.gd` y el formato
+   de catalina_oso/finneas_zorro. Verificado contra disco: 14 archivos, 14 ids únicos,
+   rutinas 8-9 franjas, gustos 2-3, cumpleaños en calendario Aurora (mes 1-12, día 1-28).
+2. **FIX `_cargar_catalogo` (villager_manager.gd):** ids duplicados se sobrescribían
+   silenciosamente. Ahora `push_warning` + contador `_duplicados_catalogo` y el log de arranque
+   reporta `[M19] Catálogo de vecinos: N perfiles (M duplicados descartados)`.
+3. **Test nuevo** `scripts/npc/test_catalogo_m19_atria.gd`: 14 perfiles, ids únicos, campos
+   obligatorios, gustos no vacíos, cumpleaños en rango, rutina ≥4 franjas con 'dormir', y la
+   API del manager (`catalogo_count()`, `_duplicados_catalogo`, `obtener_perfil()`).
+
+### Hallazgo clave
+
+El ítem C "Catálogo de candidatos mayor que el límite activo (14 perfiles)" estaba marcado
+`[x]` **siendo falso** — solo existían 6 `.tres` (glm-5.3-flash lo marcó con 5; mercedes_lince
+fue añadida después). 6 < POBLACION_MAX (10), así que el catálogo ni siquiera superaba el
+límite activo. Ahora es real con 14.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **Test NO ejecutado** (sin Godot en el sandbox): pendiente CI/headless. Validación estática:
+  parseo Python de los 14 `.tres` + lectura del código del manager (indentación tabs, API
+  `obtener_perfil` existente en L123).
+- **Sin validación visual**: el spawner activa los primeros `POBLACION_ARRANQUE = 6` al día 1;
+  los 8 nuevos llegan por mudanza/rotación (M53/M64).
+- La observación del QA de agnes (boot con `especie=?` y alturas no calculadas) sigue abierta —
+  no es de mi alcance (puente glb↔perfil, scripts/player/).
+- No toqué CHECKLIST-GLOBAL ni apliqué sellos. No se committeó.

@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "nico_gato"
+nombre = "Nico"
+especie = "gato"
+personalidad = "reservado"
+edad_categoria = "adulto"
+profesion = "guardabosques"
+cumpleanos_mes = 11
+cumpleanos_dia = 5
+edad_base = 33
+color_cuerpo = Color(0.42, 0.4, 0.38, 1)
+color_cabeza = Color(0.55, 0.52, 0.48, 1)
+escala_cuerpo = 0.95
+historia = "Nico patrulla los senderos del bosque. Conoce cada atajo y cada madriguera; habla poco, pero vigila todo."
+gustos = ["pescado", "baya_roja", "fruta"]
+disgustos = ["ruido"]
+hobbies = ["rastrear", "pescar"]
+rutina_diaria = {
+"05:30": "despertar",
+"06:00": "ir_a_trabajar",
+"06:30": "trabajar",
+"12:30": "comer",
+"13:00": "trabajar",
+"18:00": "ir_a_casa",
+"18:30": "socializar",
+"22:00": "dormir"
+}
+linea_saludo = "El sendero estaba tranquilo. Hasta ahora."
+linea_despedida = "No te separes del camino después del anochecer."
+linea_sueno = "Zzz... ramas... susurros..."
+hogar_deseado = "bosque"

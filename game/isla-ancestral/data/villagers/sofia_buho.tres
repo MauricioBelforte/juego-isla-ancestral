@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "sofia_buho"
+nombre = "Sofía"
+especie = "buho"
+personalidad = "sabia"
+edad_categoria = "anciano"
+profesion = "bibliotecaria"
+cumpleanos_mes = 10
+cumpleanos_dia = 18
+edad_base = 62
+color_cuerpo = Color(0.5, 0.45, 0.4, 1)
+color_cabeza = Color(0.65, 0.6, 0.5, 1)
+escala_cuerpo = 1.05
+historia = "Sofía custodia el archivo de la plaza. Conoce cada mapa de las islas... y los secretos que no están en ellos."
+gustos = ["cristal", "miel", "fruta"]
+disgustos = ["piedra"]
+hobbies = ["leer", "cartografía"]
+rutina_diaria = {
+"07:00": "despertar",
+"08:00": "ir_a_trabajar",
+"08:30": "trabajar",
+"12:30": "comer",
+"13:00": "trabajar",
+"18:00": "ir_a_casa",
+"19:00": "socializar",
+"22:30": "dormir"
+}
+linea_saludo = "Pasa. El polvo de estos libros perdona, pero el tiempo no."
+linea_despedida = "Vuelve con preguntas. Las respuestas no se van a ningún lado."
+linea_sueno = "Zzz... índice... página cuarenta..."
+hogar_deseado = "pueblo"

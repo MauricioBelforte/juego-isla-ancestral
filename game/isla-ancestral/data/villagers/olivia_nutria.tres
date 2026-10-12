@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "olivia_nutria"
+nombre = "Olivia"
+especie = "nutria"
+personalidad = "juguetona"
+edad_categoria = "joven"
+profesion = "sastra"
+cumpleanos_mes = 5
+cumpleanos_dia = 9
+edad_base = 23
+color_cuerpo = Color(0.45, 0.4, 0.35, 1)
+color_cabeza = Color(0.6, 0.5, 0.4, 1)
+escala_cuerpo = 0.9
+historia = "Olivia cose trajes de lana para toda la isla. Dicen que su bufanda del invierno salvó la expedición al Templo."
+gustos = ["lana", "tinte", "fruta"]
+disgustos = ["mineral_cobre"]
+hobbies = ["coser", "bucear"]
+rutina_diaria = {
+"06:30": "despertar",
+"07:30": "ir_a_trabajar",
+"08:00": "trabajar",
+"12:00": "comer",
+"13:00": "trabajar",
+"17:30": "ir_a_casa",
+"18:30": "socializar",
+"22:00": "dormir"
+}
+linea_saludo = "¡Qué milagro! Siéntate, te estaba midiendo a ojo."
+linea_despedida = "Que la lana te abrigue. El mar está frío esta semana."
+linea_sueno = "Zzz... puntada... y dos... y tres..."
+hogar_deseado = "rio"

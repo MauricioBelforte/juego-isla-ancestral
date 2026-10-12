@@ -43,6 +43,8 @@ var _target_actual: Node = null
 ## ── Estado de mudanzas (persistible) ──────────────────
 ## Catálogo cargado de data/villagers/: perfil_id -> VillagerProfile
 var _catalogo: Dictionary = {}
+## Contador de ids duplicados detectados al cargar el catálogo (FIX Log 1762)
+var _duplicados_catalogo: int = 0
 ## Candidatos con propuesta activa (visitantes): perfil_id -> true
 var _visitantes: Dictionary = {}
 ## Mudanzas aprobadas pendientes de llegada: perfil_id -> dia_llegada (absoluto)
@@ -94,9 +96,19 @@ func _cargar_catalogo() -> void:
 		if not archivo.ends_with(".tres"):
 			continue
 		var perfil := load("res://data/villagers/" + archivo)
-		if perfil != null and perfil.get("id") != null and str(perfil.get("id")) != "":
-			_catalogo[str(perfil.get("id"))] = perfil
-	print("[M19] Catálogo de vecinos: %d perfiles" % _catalogo.size())
+		if perfil == null or perfil.get("id") == null or str(perfil.get("id")) == "":
+			push_warning("[M19] Perfil sin id válido descartado: %s" % archivo)
+			continue
+		var pid: String = str(perfil.get("id"))
+		# FIX M19 (2026-10-12, Log 1762): ids duplicados se detectaban
+		# silenciosamente (_catalogo[pid] = perfil sobrescribía el anterior).
+		# Ahora se alerta y se cuenta el conflicto para que el catálogo sea
+		# siempre 1 id = 1 vecino (checklist ítem "Ids únicos").
+		if _catalogo.has(pid):
+			push_warning("[M19] Id de vecino duplicado: '%s' (%s sobrescribe a otro perfil)" % [pid, archivo])
+			_duplicados_catalogo += 1
+		_catalogo[pid] = perfil
+	print("[M19] Catálogo de vecinos: %d perfiles (%d duplicados descartados)" % [_catalogo.size(), _duplicados_catalogo])
 
 
 func catalogo_count() -> int:

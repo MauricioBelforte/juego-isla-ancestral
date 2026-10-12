@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "aria_ciervo"
+nombre = "Aria"
+especie = "ciervo"
+personalidad = "soñadora"
+edad_categoria = "joven"
+profesion = "trovadora"
+cumpleanos_mes = 2
+cumpleanos_dia = 12
+edad_base = 21
+color_cuerpo = Color(0.55, 0.42, 0.32, 1)
+color_cabeza = Color(0.7, 0.58, 0.42, 1)
+escala_cuerpo = 1.0
+historia = "Aria canta las estaciones de Aurora. La noche que tocó en la plaza, hasta el faro parecía escuchar."
+gustos = ["flor", "miel", "fruta"]
+disgustos = ["mineral_hierro"]
+hobbies = ["música", "mirar estrellas"]
+rutina_diaria = {
+"08:00": "despertar",
+"09:00": "ir_a_trabajar",
+"10:00": "trabajar",
+"13:00": "comer",
+"14:00": "trabajar",
+"19:00": "ir_a_casa",
+"20:00": "socializar",
+"23:30": "dormir"
+}
+linea_saludo = "Shh... ¿Escuchas eso? La isla tararea hoy."
+linea_despedida = "Que la música te encuentre donde el mapa se acaba."
+linea_sueno = "Mmm... la nota... que no termina..."
+hogar_deseado = "pradera"

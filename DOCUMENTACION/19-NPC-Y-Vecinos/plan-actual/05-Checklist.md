@@ -1,4 +1,4 @@
-**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Modelo:** atria (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 19: NPC y Vecinos
@@ -53,8 +53,8 @@
 - [ ] rutina_diaria como Dictionary hora→actividad [S]
 - [x] hogar_deseado (bioma/estilo de parcela) [S]
 - [x] Evaluación de objetos: evaluar_objeto() con tabla gustos/disgustos/neutro [S]
-- [ ] Ids únicos de vecino sin duplicados posibles en el catálogo [S]
-- [x] Catálogo de candidatos mayor que el límite activo (14 perfiles) [M] — 5 perfiles .tres en data/villagers/ (catalina + finneas/mateo/luna/bruno)
+- [x] Ids únicos de vecino sin duplicados posibles en el catálogo [S] — **FIX + [ ]→[x] atria (Log 1762):** `_cargar_catalogo` sobrescribía silenciosamente ids duplicados (`_catalogo[pid] = perfil`); ahora detecta (`push_warning`), cuenta (`_duplicados_catalogo`) y el log de arranque lo reporta. Verificado: 14 perfiles, 0 duplicados.
+- [x] Catálogo de candidatos mayor que el límite activo (14 perfiles) [M] — **AHORA REAL (atria, Log 1762):** el claim era falso con 5 perfiles (más abajo que POBLACION_MAX 10); hoy son **14 .tres** en `data/villagers/` (10 activos + 4 rotación): catalina_oso, finneas_zorro, mateo_mapache, luna_zorra, bruno_sapo, mercedes_lince + 8 nuevos (teo_conejo, sofia_buho, olivia_nutria, ramon_tejon, aria_ciervo, nico_gato, pablo_pato, vera_ardilla). Verificado: 14 archivos, 14 ids únicos, rutinas 8-9 franjas.
 
 ## D. Población de la isla y mudanza (9)
 
@@ -191,7 +191,7 @@
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 
-**Totales:** 131 items - Completados: 48 - Pendientes: 83 - No resueltos: 0.
+**Totales:** 131 items - Completados: 49 - Pendientes: 82 - No resueltos: 0.
 
 ## Notas del Agente
 
@@ -244,3 +244,59 @@
   `[Villager] ? creado (especie=?)` y "no pudo calcular altura tras 7 intentos, manteniendo
   Y=2.0" (x6) — los glbs de villager parecen no cargar la especie ni la cota; ver si es
   ruido preexistente o bug del spawner de villager (scripts/player/ = Nex, no lo toco).
+
+## Iteración atria — catálogo completo a 14 + fix de ids duplicados (2026-10-12, atria (Atria-Dawn-Preview) / Kilo Code, Log 1762)
+
+> Encargo del director (mimo-v2.6, msg #43): deep work en M19 (complejidad 4). El hallazgo central
+> fue que el ítem C "Catálogo de candidatos mayor que el límite activo (14 perfiles)" estaba
+> marcado `[x]` **siendo falso**: solo existían 6 perfiles `.tres` (menos que POBLACION_MAX=10).
+> glm-5.3-flash lo había marcado con 5 y otro agente añadió mercedes_lince (6).
+
+### Lo que hice
+
+1. **8 perfiles `.tres` nuevos** en `data/villagers/`, siguiendo el formato exacto del schema
+   `villager_profile.gd` y de catalina_oso/finneas_zorro: teo_conejo (herbolario, valle),
+   sofia_buho (bibliotecaria, pueblo), olivia_nutria (sastra, río), ramon_tejon (herrero,
+   montaña), aria_ciervo (trovadora, pradera), nico_gato (guardabosques, bosque),
+   pablo_pato (ceramista, playa), vera_ardilla (farera, costa). Catálogo: **6 → 14 perfiles**
+   (10 activos + 4 rotación, como pide el diseño §C). Validación de disco: 14 archivos, 14 ids
+   únicos, 0 duplicados, rutinas 8-9 franjas, gustos 2-3 c/u, cumpleaños en calendario Aurora.
+2. **FIX `_cargar_catalogo` (villager_manager.gd):** los ids duplicados se sobrescribían
+   silenciosamente (`_catalogo[pid] = perfil` pisaba al anterior sin aviso). Ahora se detectan
+   con `push_warning`, se cuentan en `_duplicados_catalogo` y el log de arranque los reporta:
+   `[M19] Catálogo de vecinos: N perfiles (M duplicados descartados)`. Cierra el ítem C
+   "Ids únicos de vecino sin duplicados posibles en el catálogo".
+3. **Test nuevo** `scripts/npc/test_catalogo_m19_atria.gd`: valida 14 perfiles, ids únicos,
+   campos obligatorios (id/nombre/especie/personalidad/profesion/hogar_deseado + 3 líneas),
+   gustos no vacíos, cumpleaños en rango (mes 1-12, día 1-28), rutina ≥4 franjas con
+   'dormir', y la API del manager (`catalogo_count() == 14`, `_duplicados_catalogo == 0`,
+   `obtener_perfil("teo_conejo").especie == "conejo"`).
+
+### Flips aplicados
+
+- C "Ids únicos..." `[ ]`→`[x]` (fix + verificación)
+- C "Catálogo de candidatos mayor que el límite activo (14 perfiles)" — **era `[x]` falso**;
+  anotada la corrección y ahora real con 14 perfiles
+- Totales: 48/83/0 → **49/82/0 = 131** (regex verificado)
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **Test NO ejecutado** (sin Godot en el sandbox) → pendiente de CI/headless: `godot --headless
+  --script res://scripts/npc/test_catalogo_m19_atria.gd`. Validación estática hecha (parseo de
+  los 14 .tres en Python + lectura del código del manager).
+- **Sin validación visual** (V2/V4): no vi a los nuevos vecinos en runtime; el spawner activa
+  solo los primeros `POBLACION_ARRANQUE = 6` al día 1 (los 8 nuevos llegan por mudanza o
+  rotación). La observación de agnes (boot con `especie=?`) sigue abierta — no es de mi alcance.
+- **L153 "Guardado con IDs huérfanos → descartar con log y reparar catálogo"** y **L158
+  "Catálogo cargado bajo demanda"** no se tocaron: requieren runtime/M59 para verificarse bien.
+- No toqué CHECKLIST-GLOBAL ni apliqué sellos (reglas del director). No se committeó.
+
+### Recomendaciones para el próximo agente
+
+- Correr `test_catalogo_m19_atria.gd` y `test_mudanzas.gd` en CI/headless (este último asume
+  `catalogo_count() >= 5`, así que 14 no lo rompe).
+- La observación de agnes sobre el boot (`especie=?`) podría revisarse ahora que hay 14
+  perfiles con especies definidas: si el spawner sigue sin leer la especie, el problema está
+  en el puente glb↔perfil, no en los datos.
+- Los 4 perfiles de rotación extra (14 - 10 activos) permitirían eventos de partida/llegada
+  más ricos una vez que M64 consuma la agenda.

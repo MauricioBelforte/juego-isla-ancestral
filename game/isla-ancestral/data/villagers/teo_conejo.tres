@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "teo_conejo"
+nombre = "Teo"
+especie = "conejo"
+personalidad = "curioso"
+edad_categoria = "joven"
+profesion = "herbolario"
+cumpleanos_mes = 8
+cumpleanos_dia = 3
+edad_base = 19
+color_cuerpo = Color(0.6, 0.55, 0.5, 1)
+color_cabeza = Color(0.75, 0.7, 0.6, 1)
+escala_cuerpo = 0.85
+historia = "Teo colecciona hierbas de cada bioma de Aurora. Sostiene que la hoja correcta cura cualquier pena."
+gustos = ["semillas", "flor", "fruta"]
+disgustos = ["piedra"]
+hobbies = ["herboristería", "caminar"]
+rutina_diaria = {
+"05:30": "despertar",
+"06:00": "ir_a_trabajar",
+"06:30": "trabajar",
+"12:00": "comer",
+"12:30": "trabajar",
+"17:00": "ir_a_casa",
+"18:00": "socializar",
+"21:30": "dormir"
+}
+linea_saludo = "¡Oh! Justo la persona que quería ver. ¿Huelo a aventura?"
+linea_despedida = "Guarda estas semillas. Nunca se sabe cuándo hacen falta."
+linea_sueno = "Mmm... hojas de valle..."
+hogar_deseado = "valle"

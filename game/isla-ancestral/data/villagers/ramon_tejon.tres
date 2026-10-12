@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "ramon_tejon"
+nombre = "Ramón"
+especie = "tejon"
+personalidad = "robusto"
+edad_categoria = "adulto"
+profesion = "herrero"
+cumpleanos_mes = 9
+cumpleanos_dia = 27
+edad_base = 41
+color_cuerpo = Color(0.4, 0.35, 0.3, 1)
+color_cabeza = Color(0.55, 0.45, 0.35, 1)
+escala_cuerpo = 1.15
+historia = "Ramón forjó las bisagras del puente del puerto. Trabaja el metal cantando, y la fragua le responde."
+gustos = ["mineral_hierro", "mineral_cobre", "madera"]
+disgustos = ["flor"]
+hobbies = ["forjar", "cantar"]
+rutina_diaria = {
+"05:00": "despertar",
+"06:00": "ir_a_trabajar",
+"06:30": "trabajar",
+"12:00": "comer",
+"12:30": "trabajar",
+"18:00": "ir_a_casa",
+"19:00": "socializar",
+"21:00": "dormir"
+}
+linea_saludo = "Cuidado con las chispas. Hoy se trabaja de verdad."
+linea_despedida = "Vuelve con el filo roma, te lo dejo como nuevo."
+linea_sueno = "Zzz... al rojo vivo... al rojo..."
+hogar_deseado = "montaña"

@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "vera_ardilla"
+nombre = "Vera"
+especie = "ardilla"
+personalidad = "energica"
+edad_categoria = "joven"
+profesion = "farera"
+cumpleanos_mes = 12
+cumpleanos_dia = 1
+edad_base = 25
+color_cuerpo = Color(0.58, 0.42, 0.3, 1)
+color_cabeza = Color(0.7, 0.55, 0.38, 1)
+escala_cuerpo = 0.8
+historia = "Vera mantiene el faro del sur encendido cuando la tormentar cierra el puerto. Sube los escalones de dos en dos."
+gustos = ["semillas", "fruta", "madera"]
+disgustos = ["piedra"]
+hobbies = ["trepar", "coleccionar semillas"]
+rutina_diaria = {
+"04:30": "despertar",
+"05:00": "ir_a_trabajar",
+"05:30": "trabajar",
+"12:00": "comer",
+"12:30": "trabajar",
+"17:30": "ir_a_casa",
+"19:00": "socializar",
+"21:30": "dormir"
+}
+linea_saludo = "¡Sube! La vista desde arriba paga el mareo."
+linea_despedida = "Dejo la linterna encendida por si vuelves tarde."
+linea_sueno = "Zzz... que no se apague... la llama..."
+hogar_deseado = "costa"

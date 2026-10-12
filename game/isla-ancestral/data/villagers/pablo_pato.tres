@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "pablo_pato"
+nombre = "Pablo"
+especie = "pato"
+personalidad = "amable"
+edad_categoria = "adulto"
+profesion = "ceramista"
+cumpleanos_mes = 7
+cumpleanos_dia = 22
+edad_base = 36
+color_cuerpo = Color(0.5, 0.52, 0.45, 1)
+color_cabeza = Color(0.6, 0.62, 0.5, 1)
+escala_cuerpo = 0.9
+historia = "Pablo modela el barro del río hasta dar con formas que parecen vivas. Su taza favorita tiene una grieta que él llama sonrisa."
+gustos = ["arcilla", "madera", "semillas"]
+disgustos = ["miel"]
+hobbies = ["alarfar", "remar"]
+rutina_diaria = {
+"06:00": "despertar",
+"07:00": "ir_a_trabajar",
+"07:30": "trabajar",
+"12:00": "comer",
+"12:30": "trabajar",
+"17:00": "ir_a_casa",
+"18:00": "socializar",
+"21:30": "dormir"
+}
+linea_saludo = "El barro hoy está dócil. ¿Un café en taza nueva?"
+linea_despedida = "Mira la grieta de la taza: es una sonrisa disfrazada."
+linea_sueno = "Zzz... que sea redonda... redonda..."
+hogar_deseado = "playa"
