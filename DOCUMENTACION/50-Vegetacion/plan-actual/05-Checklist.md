@@ -6,168 +6,168 @@
 ## A. Problema y objetivos
 
 - [x] Definir el problema: sin sistema de vegetación el mundo se siente vacío o el frame explota [S]
-- [ ] Definir el objetivo: vegetación densa pero barata, viva y determinista por bioma [S]
-- [ ] Registrar dependencias: M09 (biomas), M10 (PRNG), M08 (tala), M45 (mallas), M04 (MultiMesh), M61/M62 (presupuestos) [M]
-- [ ] Mapear la sección 49 "VEGETACIÓN" del plan maestro al ID 50 de la tabla global [M]
-- [ ] Separar dentro/fuera de alcance: agricultura → M33, tala como recurso → M08/M13, viento → M48 (shader de este módulo) [S]
-- [ ] Documentar restricciones: MultiMesh GPU, determinismo, clamps de terreno, estaciones [M]
-- [ ] Definir criterios de aceptación verificables (8 criterios) [S]
+- [x] Definir el objetivo: vegetación densa pero barata, viva y determinista por bioma [S] — **Diseño: 01-Requerimientos.md 2 (Objetivo)**
+- [x] Registrar dependencias: M09 (biomas), M10 (PRNG), M08 (tala), M45 (mallas), M04 (MultiMesh), M61/M62 (presupuestos) [M] — **Diseño: 01-Requerimientos.md 1 (ID del Módulo); 04-Codigo.md 5 (Dependencias de Implementación)**
+- [x] Mapear la sección 49 "VEGETACIÓN" del plan maestro al ID 50 de la tabla global [M] — **Diseño: 01-Requerimientos.md 1 (ID del Módulo)**
+- [x] Separar dentro/fuera de alcance: agricultura → M33, tala como recurso → M08/M13, viento → M48 (shader de este módulo) [S] — **Diseño: 01-Requerimientos.md 3 (Alcance)**
+- [x] Documentar restricciones: MultiMesh GPU, determinismo, clamps de terreno, estaciones [M] — **Diseño: 01-Requerimientos.md 4 (Restricciones)**
+- [x] Definir criterios de aceptación verificables (8 criterios) [S] — **Diseño: 01-Requerimientos.md 6 (Criterios de Aceptación)**
 
 ## B. RF1 — Catálogo de especies
 
-- [ ] Listar las 26+ especies del plan maestro [M]
-- [ ] Hierba y flores [S]
-- [ ] Arbustos [S]
-- [ ] Árboles pequeños, grandes y ancestrales [S]
-- [ ] Palmeras y bambú [S]
-- [ ] Plantas tropicales [S]
-- [ ] Plantas acuáticas y submarinas [S]
-- [ ] Musgo, enredaderas y hongos [S]
-- [ ] Plantas luminosas [S]
-- [ ] Variantes estacionales [S]
-- [ ] Definir parámetros por especie: malla, material, biomas, densidad [M]
+- [x] Listar las 26+ especies del plan maestro [M] — **Diseño: 01-Requerimientos.md 5 (RF1); 02-Analisis.md 1.1 (Catálogo de especies)**
+- [x] Hierba y flores [S] — **Diseño: 01-Requerimientos.md 5 (RF1)**
+- [x] Arbustos [S] — **Diseño: 01-Requerimientos.md 5 (RF1)**
+- [x] Árboles pequeños, grandes y ancestrales [S] — **Diseño: 01-Requerimientos.md 5 (RF1)**
+- [x] Palmeras y bambú [S] — **Diseño: 01-Requerimientos.md 5 (RF1)**
+- [x] Plantas tropicales [S] — **Diseño: 01-Requerimientos.md 5 (RF1)**
+- [x] Plantas acuáticas y submarinas [S] — **Diseño: 01-Requerimientos.md 5 (RF1)**
+- [x] Musgo, enredaderas y hongos [S] — **Diseño: 01-Requerimientos.md 5 (RF1)**
+- [x] Plantas luminosas [S] — **Diseño: 01-Requerimientos.md 5 (RF1)**
+- [x] Variantes estacionales [S] — **Diseño: 01-Requerimientos.md 5 (RF1); 03-Diseno.md 3.3 (Estaciones)**
+- [x] Definir parámetros por especie: malla, material, biomas, densidad [M] — **Diseño: 02-Analisis.md 1.1 (Catálogo de especies)**
 
 ## C. RF2 — Densidad y distribución por bioma
 
-- [ ] Definir tabla bioma → especies → densidades [M]
-- [ ] Definir distribución con PRNG de chunk (M10) [M]
-- [ ] Definir clamps por pendiente [M]
-- [ ] Definir clamps por altura (línea de árboles) [M]
-- [ ] Definir playa sin vegetación alta [S]
-- [ ] Definir determinismo total (misma semilla, mismo bosque) [M]
+- [x] Definir tabla bioma → especies → densidades [M] — **Diseño: 01-Requerimientos.md 5 (RF2); 03-Diseno.md 1 (densidades_bioma.tres)**
+- [x] Definir distribución con PRNG de chunk (M10) [M] — **Diseño: 02-Analisis.md 1.2 (Densidad por bioma); 03-Diseno.md 2.1**
+- [x] Definir clamps por pendiente [M] — **Diseño: 03-Diseno.md 2.1 (Generación de vegetación de un chunk)**
+- [x] Definir clamps por altura (línea de árboles) [M] — **Diseño: 03-Diseno.md 2.1**
+- [x] Definir playa sin vegetación alta [S] — **Diseño: 01-Requerimientos.md 5 (RF8); 03-Diseno.md 2.1**
+- [x] Definir determinismo total (misma semilla, mismo bosque) [M] — **Diseño: 02-Analisis.md 1.2; 03-Diseno.md 2.1**
 
 ## D. RF3 — Instancing
 
-- [ ] Definir MultiMesh por especie × chunk [M]
-- [ ] Definir límite de instancias por chunk [M]
-- [ ] Definir presupuesto de instancias visibles por escena [M]
-- [ ] Definir memoria VRAM por instancia ≤ 64 bytes [M]
-- [ ] Definir 1 draw call por especie/chunk [M]
+- [x] Definir MultiMesh por especie × chunk [M] — **Diseño: 01-Requerimientos.md 5 (RF3); 03-Diseno.md 1**
+- [x] Definir límite de instancias por chunk [M] — **Diseño: 03-Diseno.md 3.1 (Presupuesto de instancias)**
+- [x] Definir presupuesto de instancias visibles por escena [M] — **Diseño: 03-Diseno.md 3.1**
+- [x] Definir memoria VRAM por instancia ≤ 64 bytes [M] — **Diseño: 03-Diseno.md 3.1**
+- [x] Definir 1 draw call por especie/chunk [M] — **Diseño: 01-Requerimientos.md 5 (RF3); 03-Diseno.md 3.1**
 
 ## E. RF4 — Viento procedural
 
-- [ ] Definir vertex shader GPU (fase = hash instancia) [M]
-- [ ] Definir amplitud/frecuencia por especie [M]
-- [ ] Definir modulación por bioma y clima (M32) [M]
-- [ ] Definir bloqueo en nieve (amplitud 0.2) [S]
-- [ ] Definir determinismo (sin RNG por frame) [M]
+- [x] Definir vertex shader GPU (fase = hash instancia) [M] — **Diseño: 03-Diseno.md 3.2 (Viento); 04-Codigo.md 2**
+- [x] Definir amplitud/frecuencia por especie [M] — **Diseño: 03-Diseno.md 3.2**
+- [x] Definir modulación por bioma y clima (M32) [M] — **Diseño: 03-Diseno.md 3.2; 02-Analisis.md 1.4 (Viento)**
+- [x] Definir bloqueo en nieve (amplitud 0.2) [S] — **Diseño: 03-Diseno.md 3.2**
+- [x] Definir determinismo (sin RNG por frame) [M] — **Diseño: 02-Analisis.md 1.4; 02-Analisis.md 2 (Alternativas Consideradas)**
 
 ## F. RF5 — Interacción con el jugador
 
-- [ ] Definir tala de árboles voxel (M08) [M]
-- [ ] Definir caída de follaje tras tala (tween 1-2 s) [M]
-- [ ] Definir hierba pisada transitoria [M]
-- [ ] Definir recolección de flores (M33) [M]
-- [ ] Definir que lo decorativo no sea destructible [M]
+- [x] Definir tala de árboles voxel (M08) [M] — **Diseño: 01-Requerimientos.md 5 (RF5); 03-Diseno.md 2.2**
+- [x] Definir caída de follaje tras tala (tween 1-2 s) [M] — **Diseño: 03-Diseno.md 2.2 (Tala de un árbol)**
+- [x] Definir hierba pisada transitoria [M] — **Diseño: 02-Analisis.md 1.5 (Interacción con jugador)**
+- [x] Definir recolección de flores (M33) [M] — **Diseño: 02-Analisis.md 1.5; 01-Requerimientos.md 5 (RF5)**
+- [x] Definir que lo decorativo no sea destructible [M] — **Diseño: 01-Requerimientos.md 4 (Restricciones)**
 
 ## G. RF6 — Interacción con clima
 
-- [ ] Definir viento fuerte modulando amplitud (M32) [M]
-- [ ] Definir lluvia solo sonora (M42), no visual [S]
-- [ ] Definir nieve estacionaria opcional (M32/M90) [S]
+- [x] Definir viento fuerte modulando amplitud (M32) [M] — **Diseño: 01-Requerimientos.md 5 (RF6); 03-Diseno.md 3.2**
+- [x] Definir lluvia solo sonora (M42), no visual [S] — **Diseño: 01-Requerimientos.md 5 (RF6)**
+- [x] Definir nieve estacionaria opcional (M32/M90) [S] — **Diseño: 01-Requerimientos.md 5 (RF6); 03-Diseno.md 3.3**
 
 ## H. RF7 — Interacción con agua
 
-- [ ] Definir plantas acuáticas en aguas poco profundas (M51) [M]
-- [ ] Definir plantas submarinas en el fondo [M]
-- [ ] Definir sin vegetación bajo hielo [S]
-- [ ] Definir límites de profundidad por especie [M]
+- [x] Definir plantas acuáticas en aguas poco profundas (M51) [M] — **Diseño: 01-Requerimientos.md 5 (RF7); 02-Analisis.md 1.7**
+- [x] Definir plantas submarinas en el fondo [M] — **Diseño: 01-Requerimientos.md 5 (RF7); 02-Analisis.md 1.7**
+- [x] Definir sin vegetación bajo hielo [S] — **Diseño: 01-Requerimientos.md 5 (RF7)**
+- [x] Definir límites de profundidad por especie [M] — **Diseño: 02-Analisis.md 1.7 (Terreno, agua y clima)**
 
 ## I. RF8 — Interacción con terreno
 
-- [ ] Definir clamp de pendiente ≤ umbral por especie [M]
-- [ ] Definir línea de árboles por altura (M09) [M]
-- [ ] Definir playa desnuda [S]
-- [ ] Definir no vegetación dentro de cuevas [M]
+- [x] Definir clamp de pendiente ≤ umbral por especie [M] — **Diseño: 01-Requerimientos.md 5 (RF8); 02-Analisis.md 1.7**
+- [x] Definir línea de árboles por altura (M09) [M] — **Diseño: 01-Requerimientos.md 5 (RF8)**
+- [x] Definir playa desnuda [S] — **Diseño: 01-Requerimientos.md 5 (RF8)**
+- [x] Definir no vegetación dentro de cuevas [M] — **Diseño: 02-Analisis.md 1.7; 02-Analisis.md 1.8**
 
 ## J. RF9 — Estaciones
 
-- [ ] Definir variantes de color por estación (M29) [M]
-- [ ] Definir floración en primavera [S]
-- [ ] Definir hojas en otoño [S]
-- [ ] Definir nieve en invierno (opcional) [S]
-- [ ] Definir transición suave (fade 5 s) [M]
+- [x] Definir variantes de color por estación (M29) [M] — **Diseño: 01-Requerimientos.md 5 (RF9); 03-Diseno.md 3.3**
+- [x] Definir floración en primavera [S] — **Diseño: 03-Diseno.md 3.3**
+- [x] Definir hojas en otoño [S] — **Diseño: 03-Diseno.md 3.3**
+- [x] Definir nieve en invierno (opcional) [S] — **Diseño: 03-Diseno.md 3.3**
+- [x] Definir transición suave (fade 5 s) [M] — **Diseño: 03-Diseno.md 2.3 (Cambio de estación)**
 
 ## K. RF10 — Crecimiento
 
-- [ ] Definir árboles jóvenes → adultos por tiempo de mundo [M]
-- [ ] Definir densidad regulada por chunk [M]
-- [ ] Definir sin saltos visuales (transiciones) [M]
-- [ ] Definir regeneración solo por eventos de juego [M]
+- [x] Definir árboles jóvenes → adultos por tiempo de mundo [M] — **Diseño: 01-Requerimientos.md 5 (RF10); 02-Analisis.md 1.6**
+- [x] Definir densidad regulada por chunk [M] — **Diseño: 01-Requerimientos.md 5 (RF10)**
+- [x] Definir sin saltos visuales (transiciones) [M] — **Diseño: 01-Requerimientos.md 5 (RF10)**
+- [x] Definir regeneración solo por eventos de juego [M] — **Diseño: 02-Analisis.md 1.5; 03-Diseno.md 2.2**
 
 ## L. RF11 — LOD y culling
 
 - [x] LOD no implementado; instancias simples por ahora (GLB) [?] -- agnes-2026-09-07: vegetation_spawner.gd usa instanciacion directa sin LOD; pendiente iteracion futura o M61 rendimiento
-- [ ] Definir distancia de LOD (24 m) y cull (40 m) [M]
-- [ ] Definir culling por frustum + distancia [M]
-- [ ] Definir presupuesto contra M61 [M]
+- [x] Definir distancia de LOD (24 m) y cull (40 m) [M] — **Diseño: 03-Diseno.md 3.1 (LOD 24 m / cull 40 m)**
+- [x] Definir culling por frustum + distancia [M] — **Diseño: 03-Diseno.md 3.1**
+- [x] Definir presupuesto contra M61 [M] — **Diseño: 03-Diseno.md 3.1; 01-Requerimientos.md 5 (RF11)**
 
 ## M. RF12 — Optimización
 
-- [ ] Definir draw calls por chunk ≤ umbral [M]
-- [ ] Definir pooling de instancias (M62) [M]
-- [ ] Definir liberación de memoria al descargar chunk [M]
+- [x] Definir draw calls por chunk ≤ umbral [M] — **Diseño: 01-Requerimientos.md 5 (RF12); 03-Diseno.md 3.1**
+- [x] Definir pooling de instancias (M62) [M] — **Diseño: 01-Requerimientos.md 5 (RF12)**
+- [x] Definir liberación de memoria al descargar chunk [M] — **Diseño: 04-Codigo.md 2 (limpiar_chunk)**
 - [x] ~~Definir registro vegetation_budget.json~~ **ELIMINADO (director, 2026-10-11, msg 116):** el rol de presupuesto por bioma lo cumple \`densidad\` en \`data/vegetacion/vegetacion_config.json\` (12/25/22/10/15/10/30 por bioma). No se crea JSON separado. Evidencia: verificado por stepfun-step-5-preview (Log 1657).
 
 ## N. RF13 — Validación
 
-- [ ] Definir validate_vegetation.gd [M]
+- [x] Definir validate_vegetation.gd [M] — **Diseño: 02-Analisis.md 1.8 (Validación técnica); 04-Codigo.md 2 (validate_vegetation.gd)**
 - [ ] Verificar densidad real vs tabla [M]
-- [x] Verificar instancias fuera de agua/cueva (arte sucio) [M] — iter. 6 (Log 646): BUG-022 fix (h<3 omitidas), test_distribucion.gd confirma distribución por bioma correcta, 109 instancias pobladas
+- [x] Verificar instancias fuera de agua/cueva (arte sucio) [M] — iter. 6 (Log 646): BUG-022 fix (h<3 omitidas) en vegetation_spawner.gd L87, ejercido por el spawner en runtime; test_distribucion.gd es DEBUG sin aserciones, NO es evidencia de test (H5 corregido 2026-10-11), 109 instancias pobladas
 - [?] — agnes-2026-09-06: LOD no implementado; instancias simples por ahora (GLB media) Verificar LOD presente [S]
 - [ ] Verificar presupuesto (instancias/draw calls/VRAM) [M]
 - [ ] Verificar naming [S]
 
 ## O. RF14 — Naming y organización
 
-- [ ] Definir prefijos veg_, tree_, foliage_ [S]
-- [ ] Alinear con M108 [M]
+- [x] Definir prefijos veg_, tree_, foliage_ [S] — **Diseño: 01-Requerimientos.md 5 (RF14)**
+- [x] Alinear con M108 [M] — **Diseño: 01-Requerimientos.md 5 (RF14); 04-Codigo.md 5**
 
 ## P. Requisitos no funcionales
 
-- [ ] Rendimiento: instancias visibles ≤ 8.000 (preset medio) [M]
-- [ ] Memoria: buffers de MultiMesh contra M62 [M]
-- [ ] Determinismo: PRNG de chunk [M]
-- [ ] Cozy: vegetación variada sin ruido visual [M]
-- [ ] Mantenible: catálogo y tabla centrales [M]
+- [x] Rendimiento: instancias visibles ≤ 8.000 (preset medio) [M] — **Diseño: 03-Diseno.md 3.1 (8.000 instancias, preset medio M90)**
+- [x] Memoria: buffers de MultiMesh contra M62 [M] — **Diseño: 03-Diseno.md 3.1 (VRAM <= 64 B/instancia)**
+- [x] Determinismo: PRNG de chunk [M] — **Diseño: 02-Analisis.md 1.2 (determinismo PRNG de chunk)**
+- [x] Cozy: vegetación variada sin ruido visual [M] — **Diseño: 01-Requerimientos.md 2 (Objetivo)**
+- [x] Mantenible: catálogo y tabla centrales [M] — **Diseño: 03-Diseno.md 1 (catálogo y tablas centrales)**
 
 ## Q. Alternativas consideradas
 
-- [ ] Descartar MeshInstance por planta [M]
-- [ ] Descartar vegetación procedural con RNG en runtime [M]
-- [ ] Descartar árboles 100% malla 3D (tala voxel) [M]
-- [ ] Descartar viento con bones por instancia [M]
+- [x] Descartar MeshInstance por planta [M] — **Diseño: 02-Analisis.md 2 (Alternativas Consideradas)**
+- [x] Descartar vegetación procedural con RNG en runtime [M] — **Diseño: 02-Analisis.md 2**
+- [x] Descartar árboles 100% malla 3D (tala voxel) [M] — **Diseño: 02-Analisis.md 2**
+- [x] Descartar viento con bones por instancia [M] — **Diseño: 02-Analisis.md 2**
 - [x] Descartar un MultiMesh gigante mundial [S] -- agnes-2026-09-07: vegetation_spawner.gd usa instanciacion directa (res.instantiate()) no MultiMesh; 109 instancias gestionadas individualmente
-- [ ] Descartar viento con RNG por frame [S]
+- [x] Descartar viento con RNG por frame [S] — **Diseño: 02-Analisis.md 2**
 
 ## R. Riesgos y mitigaciones
 
-- [ ] Riesgo de draw calls desbordados → presupuesto por chunk + LOD [M]
-- [ ] Riesgo de arte sucio (agua/acantilados) → placement post-terreno + validador [M]
-- [ ] Riesgo de viento costoso → LOD reduce verts [M]
-- [ ] Riesgo de reaparecer árboles talados → regeneración por eventos [M]
-- [ ] Riesgo de densidad desigual → PRNG con seeds derivadas [M]
-- [ ] Riesgo de determinismo roto → deltas versionados (M10/M60) [M]
+- [x] Riesgo de draw calls desbordados → presupuesto por chunk + LOD [M] — **Diseño: 02-Analisis.md 4 (Riesgos y Mitigaciones)**
+- [x] Riesgo de arte sucio (agua/acantilados) → placement post-terreno + validador [M] — **Diseño: 02-Analisis.md 4**
+- [x] Riesgo de viento costoso → LOD reduce verts [M] — **Diseño: 02-Analisis.md 4**
+- [x] Riesgo de reaparecer árboles talados → regeneración por eventos [M] — **Diseño: 02-Analisis.md 4**
+- [x] Riesgo de densidad desigual → PRNG con seeds derivadas [M] — **Diseño: 02-Analisis.md 4**
+- [x] Riesgo de determinismo roto → deltas versionados (M10/M60) [M] — **Diseño: 02-Analisis.md 4**
 
 ## S. Integraciones
 
-- [ ] Documentar integración con M08/M10 (tala/deltas/PRNG) [S]
-- [ ] Documentar integración con M09 (biomas) [S]
-- [ ] Documentar integración con M45/M47 (mallas/materiales) [S]
-- [ ] Documentar integración con M48 (viento) [S]
-- [ ] Documentar integración con M61/M62 (presupuestos) [S]
-- [ ] Documentar integración con M29 (estaciones) [S]
-- [ ] Documentar integración con M33 (agricultura) [S]
-- [ ] Documentar integración con M32 (clima) [S]
-- [ ] Documentar integración con M51 (agua) [S]
-- [ ] Documentar integración con M52 (VFX) [S]
-- [ ] Documentar integración con M108/M118 (import/CI) [S]
+- [x] Documentar integración con M08/M10 (tala/deltas/PRNG) [S] — **Diseño: 03-Diseno.md 4 (Integraciones Clave)**
+- [x] Documentar integración con M09 (biomas) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M45/M47 (mallas/materiales) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M48 (viento) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M61/M62 (presupuestos) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M29 (estaciones) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M33 (agricultura) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M32 (clima) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M51 (agua) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M52 (VFX) [S] — **Diseño: 03-Diseno.md 4**
+- [x] Documentar integración con M108/M118 (import/CI) [S] — **Diseño: 03-Diseno.md 4**
 
 ## T. Herramientas y flujos
 
-- [ ] Documentar flujo de generación de chunk [M]
-- [ ] Documentar flujo de tala [M]
-- [ ] Documentar flujo de cambio de estación [M]
+- [x] Documentar flujo de generación de chunk [M] — **Diseño: 03-Diseno.md 2.1**
+- [x] Documentar flujo de tala [M] — **Diseño: 03-Diseno.md 2.2**
+- [x] Documentar flujo de cambio de estación [M] — **Diseño: 03-Diseno.md 2.3**
 
 ## U. Criterios de aceptación verificados
 
@@ -182,7 +182,7 @@
 
 ## V. Notas finales
 
-- [ ] Documentar el desfase de numeración del plan maestro (49=VEGETACIÓN → ID 50) [S]
+- [x] Documentar el desfase de numeración del plan maestro (49=VEGETACIÓN → ID 50) [S] — **Diseño: 01-Requerimientos.md 1 (ID del Módulo)**
 - [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
 - [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
@@ -273,10 +273,21 @@ Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
 - Cualquier reemplazo de GLB: borrar .godot/imported/*nombre*.scn + *.glb.import → godot --headless --import → relanzar.
 - El patrón del autoload temporal de verificación (teleport + viewport PNG) es el mejor método para verificar escala con visión; reutilizarlo para NPCs/props.
 
-**Totales:** 142 ítems · Completados: 29 · Pendientes: 110 · No resueltos: 3.
+**Totales:** 142 ítems · Completados: 127 · Pendientes: 12 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 29 [x] / 110 [ ] /
 > 3 [?]. Las marcas no se tocaron.
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
 Los [29 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: test_vegetation_headless.gd 7/0 = scripts/vegetacion/.
+
+> **Barrido D4 (DeepSeek-V4.1-Flash, 2026-10-12, Log 1771):** 98 de los 110 `[ ]`
+> quedaron `[x]` con cita real por ítem (diseño en `01-Requerimientos.md`, `02-Analisis.md`,
+> `03-Diseno.md` y `04-Codigo.md`). Quedan **12 `[ ]`** que NO se flipearon por ser
+> afirmaciones de VERIFICACIÓN que exigen evidencia de runtime inexistente:
+> 3 de la sección N (`Verificar densidad real vs tabla`, `Verificar presupuesto`,
+> `Verificar naming`), 7 de la sección U (criterios de aceptación: la escena pivote sin caída
+> de frame, viento determinista, estaciones, costo MultiMesh y regeneración dependen de
+> MultiMesh/LOD/shader de viento/estaciones, **no implementados**) y 2 de la iter. 10
+> (`escalas.json` a 1.0 y revisión visual final del usuario). Conteo real: 127 [x] / 12 [ ] /
+> 3 [?] = 142. La fila del GLOBAL la actualiza el director.
