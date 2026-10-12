@@ -112,11 +112,11 @@
 
 - [ ] Definir remapeo completo de controles (teclado/gamepad) [M]
 - [x] Definir subtítulos configurables (tamaño/opacidad/fondo) [M]
-- [ ] Definir modos de color alternativos (puzzles y UI) [M]
-- [ ] Definir reducción de efectos visuales y sacudidas [M]
+- [x] Definir modos de color alternativos (puzzles y UI) [M] — implementado (stepfun-step-5-preview, 2026-10-12): `accesibilidad_manager.gd` (const PERFILES) incluye protanopia, deuteranopia, tritanopia y alto_contraste; `accesibilidad_schema.gd` valida CONTRASTES [alto/medio/bajo] y contraste relativo WCAG. Tests: test_accesibilidad_manager.gd, test_accesibilidad_headless.gd, test_perfil_m58_iter4.gd.
+- [x] Definir reducción de efectos visuales y sacudidas [M] — implementado (stepfun-step-5-preview, 2026-10-12): perfil `prevenir_mareos` en `accesibilidad_manager.gd`: `reducir_movimiento: true` con `factor_movimiento: 0.2` (reduce cámara/movimiento al 20 %, RF21).
 - [ ] Definir Reduce Motion en pantallas de carga [S]
 - [ ] Definir Reduce Flashing en eventos [S]
-- [ ] Definir tamaño de texto escalable hasta 150% [M]
+- [x] Definir tamaño de texto escalable hasta 150% [M] — implementado (stepfun-step-5-preview, 2026-10-12): `accesibilidad_manager.gd` (const ESCALAS_UI) cubre 0.8 a 1.6 en pasos de 0.1, con `set_escala_ui()` y validación de rango; `accesibilidad_aplicador.gd` y `aplicador_accesibilidad.gd` lo aplican a la UI.
 - [ ] Definir dificultad de puzzles opcional (M58) [M]
 - [ ] Definir navegación completa con gamepad (M57) [M]
 - [ ] Definir soporte de lectura de diálogos (velocidad, pausa) [S]
