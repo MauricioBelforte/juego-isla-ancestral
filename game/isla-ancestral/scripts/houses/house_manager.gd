@@ -42,12 +42,18 @@ func registrar_casa(pos: Vector3, id: String = "") -> String:
 	return id
 
 ## Devuelve la casa del jugador (primer registrada o por ID).
+## Instrumenta M153/M104 `volver_a_casa` cuando se resuelve la parcela.
 func obtener_casa_jugador() -> Dictionary:
 	if _parcela_del_jugador != "" and _casas.has(_parcela_del_jugador):
 		return _casas[_parcela_del_jugador]
 	if _casas.size() > 0:
 		_parcela_del_jugador = _casas.keys()[0]
-		return _casas[_parcela_del_jugador]
+		var casa: Dictionary = _casas[_parcela_del_jugador]
+		# M153 ítem 33 (telemetría M104). Silencioso si no hay AnalyticsDirector.
+		var tm := load("res://scripts/analytics/telemetria_m104.gd")
+		if tm != null and tm.has_method("volver_a_casa"):
+			tm.volver_a_casa(_parcela_del_jugador, casa.get("pos", Vector3.ZERO))
+		return casa
 	return {}
 
 ## Devuelve todas las casas registradas.

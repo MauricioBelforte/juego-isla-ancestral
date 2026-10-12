@@ -213,6 +213,12 @@ func elegir(ruta_id: String, contexto: Dictionary = {}, semilla: int = 0, red: T
 	if candidatos.is_empty():
 		return {"ok": false, "motivo": "sin eventos aplicables", "evento": {}}
 	var elegido: Dictionary = _elegir_ponderado(candidatos, semilla)
+	# M153 ítem 42 (telemetría M104 `acercarse_puerto`): instrumenta el destino
+	# real del viaje. Silencioso si no hay AnalyticsDirector (headless/opt-out).
+	if not elegido.is_empty():
+		var tm := load("res://scripts/analytics/telemetria_m104.gd")
+		if tm != null and tm.has_method("acercarse_puerto"):
+			tm.acercarse_puerto(destino if not destino.is_empty() else ruta_id, Vector3.ZERO, 0.0)
 	return {"ok": true, "motivo": "", "evento": elegido}
 
 
