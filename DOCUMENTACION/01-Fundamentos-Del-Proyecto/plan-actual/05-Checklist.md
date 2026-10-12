@@ -27,11 +27,11 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M03** Game Engine [C] 🔴 — elegir Unity o Godot, fijar versión, configurar render pipeline e input
 - [ ] **M04** Lenguaje y Programación [M] 🔴 — C#/GDScript, convenciones, namespaces, arquitectura de software
 - [ ] **M05** Control de Versiones [S] 🟡 — Git, .gitignore, ramas, mensajes de commit, Git LFS
-- [ ] **M06** Arquitectura General [C] 🔴 — managers, eventos globales, modularidad, evitar GameManager monolítico
+- [x] **M06** Arquitectura General [C] 🔴 — managers, eventos globales, modularidad, evitar GameManager monolítico
 
 ### FASE 2 — MUNDO Y TECNOLOGÍA CENTRAL
 
-- [ ] **M07** Mundo Voxel [C] 🔴 — chunking, face/greedy meshing, threading, LOD, colisiones por grilla
+- [x] **M07** Mundo Voxel [C] 🔴 — chunking, face/greedy meshing, threading, LOD, colisiones por grilla
 - [ ] **M08** Terreno y Geografía [C] 🔴 — montañas, valles, ríos, playas, biomas de Aurora
 - [ ] **M09** Generación del Mundo [C] 🔴 — seed, generador de terreno/biomas/vegetación/minerales/cuevas
 - [ ] **M10** Personaje del Jugador [M] 🔴 — modelo 3D, animaciones, controlador, colisiones, interacción
@@ -61,7 +61,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M28** Tiempo y Calendario [M] 🔴 — día/noche, estaciones, festivales, cumpleaños, eventos
 - [ ] **M29** Reloj en Tiempo Real [M] 🟡 — Gran Vapor mensual, zona horaria, offline, anti-exploits
 - [ ] **M30** Ciclo Día/Noche [M] 🟡 — iluminación, cielo, estrellas, comportamiento de NPC y fauna
-- [ ] **M31** Clima [M] 🟡 — sol, lluvia, tormenta, niebla, nieve, transiciones, accesibilidad
+- [x] **M31** Clima [M] 🟡 — sol, lluvia, tormenta, niebla, nieve, transiciones, accesibilidad
 
 ### FASE 5 — ACTIVIDADES Y CONTENIDO
 
@@ -70,8 +70,8 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M34** Minería [M] 🟡 — vetas, profundidad, minerales ancestrales, derrumbes controlados
 - [ ] **M35** Fauna [M] 🟡 — especies no hostiles, hábitat, migraciones, observación, ecosistemas
 - [ ] **M36** Museos y Colecciones [M] 🟢 — salas, vitrinas, fósiles, porcentaje completado
-- [ ] **M37** Economía [C] 🔴 — Gemas de Ámbar, Pases de Mérito, precios, sumideros, anti-exploits
-- [ ] **M38** Tiendas [M] 🟡 — tienda general, muebles, ropa, vivero, rotación de stock
+- [x] **M37** Economía [C] 🔴 — Gemas de Ámbar, Pases de Mérito, precios, sumideros, anti-exploits
+- [x] **M38** Tiendas [M] 🟡 — tienda general, muebles, ropa, vivero, rotación de stock
 - [ ] **M39** Infraestructura [M] 🟡 — puentes, rampas, faro, puerto, plaza, proyectos de Finneas
 
 ### FASE 6 — ARTE, AUDIO Y PRESENTACIÓN
@@ -128,15 +128,15 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 ### FASE 11 — LEGAL Y ADMINISTRACIÓN
 
-- [ ] **M77** Legal — Propiedad Intelectual [M] 🔴 — marcas, autoría, licencias, terceros
-- [ ] **M78** Legal — Contratos [M] 🟡 — freelancers, cesión de derechos, work-for-hire
+- [x] **M77** Legal — Propiedad Intelectual [M] 🔴 — marcas, autoría, licencias, terceros
+- [x] **M78** Legal — Contratos [M] 🟡 — freelancers, cesión de derechos, work-for-hire
 - [ ] **M79** Legal — Privacidad [M] 🔴 — GDPR/COPPA, política de privacidad, consentimientos
 - [ ] **M80** Legal — Menores [M] 🟡 — clasificación, controles parentales, contenido
 - [ ] **M81** Clasificación por Edades [S] 🟡 — IARC/ESRB/PEGI (cero violencia → permisiva)
 - [ ] **M82** Licencias de Software [M] 🟡 — engine, plugins, fuentes, librerías
-- [ ] **M83** Música y Audio — Legal [M] 🟡 — derechos de reproducción, sincronización, ámbitos territoriales
+- [x] **M83** Música y Audio — Legal [M] 🟡 — derechos de reproducción, sincronización, ámbitos territoriales
 - [ ] **M84** Modelos 3D — Legal [M] 🟡 — licencias de cada modelo, atribución, registro
-- [ ] **M85** IA Generativa [M] 🔴 — política de IA, declaración Steam, qué delegar y qué no
+- [x] **M85** IA Generativa [M] 🔴 — política de IA, declaración Steam, qué delegar y qué no
 
 ### FASE 12 — PLATAFORMA Y MARKETING
 
@@ -150,15 +150,15 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M93** Retención sin FOMO [M] 🟡 — objetivos diarios/semanales, sin castigos por ausencia
 - [ ] **M94** Monetización [M] 🟡 — premium, DLC de islas vs contenido gratis, precio
 - [ ] **M95** Plataformas [M] 🟡 — PC/Steam prioritario, Steam Deck, EGS/GOG a evaluar
-- [ ] **M96** Steam / Store Page [M] 🔴 — página, capsule art, capturas, trailer, wishlists
-- [ ] **M97** Trailer [M] 🟡 — teaser, gameplay, lanzamiento
+- [x] **M96** Steam / Store Page [M] 🔴 — página, capsule art, capturas, trailer, wishlists
+- [x] **M97** Trailer [M] 🟡 — teaser, gameplay, lanzamiento
 - [ ] **M98** Marketing [M] 🟡 — identidad, redes, devlogs, press kit, Next Fest
 - [ ] **M99** Community Management [M] 🟢 — Discord, reglas, feedback, FAQ
 
 ### FASE 13 — QA Y DESARROLLO
 
-- [ ] **M100** QA General [M] 🔴 — funcional, regresión, rendimiento, guardado, UI, audio
-- [ ] **M101** Bug Tracking [S] 🟡 — herramienta, categorías, severidades, reproducción
+- [x] **M100** QA General [M] 🔴 — funcional, regresión, rendimiento, guardado, UI, audio
+- [x] **M101** Bug Tracking [S] 🟡 — herramienta, categorías, severidades, reproducción
 - [ ] **M102** Logging [M] 🟡 — niveles, rotación, crash reporting, exportación
 - [ ] **M103** Analytics [M] 🟢 — eventos, sesiones, anonimización, dashboard
 - [ ] **M104** Telemetría de Gameplay [M] 🟢 — tutorías, abandono de puzzles, zonas ignoradas
@@ -167,9 +167,9 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M107** Pipeline de Assets [M] 🔴 — naming, carpetas, formatos, import settings, validadores
 - [ ] **M108** Herramientas Internas [M] 🟡 — editores de bloques/NPC/diálogos/recetas, teleport
 - [ ] **M109** Debug Menu [S] 🟡 — teletransporte, tiempo/clima, objetos, regenerar chunks
-- [ ] **M110** Código de Calidad [M] 🔴 — sin duplicados, tests, interfaces, deuda controlada
+- [x] **M110** Código de Calidad [M] 🔴 — sin duplicados, tests, interfaces, deuda controlada
 - [ ] **M111** Testing Automático [M] 🔴 — unit, integración, save/load, economía, voxel, navegación
-- [ ] **M112** Pruebas de Stress [M] 🟡 — miles de bloques, muchos NPC, sesiones largas
+- [x] **M112** Pruebas de Stress [M] 🟡 — miles de bloques, muchos NPC, sesiones largas
 - [ ] **M113** Playtest [M] 🔴 — interno, externo, primera experiencia, con gamepad, hardware bajo
 - [ ] **M114** Hardware [M] 🟡 — PC mínimo/recomendado, GPU integrada/dedicada, SSD/HDD
 
@@ -184,7 +184,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M121** Crash Reporting [S] 🟢 — captura de stack, versión, agrupación, priorización
 - [ ] **M122** Modding [C] 🟢 — decidir si habrá, API, seguridad (opcional muy a futuro)
 - [ ] **M123** Contenido Generado por Usuarios [M] 🟢 — moderación, privacidad, términos
-- [ ] **M124** Términos de Servicio [S] 🟢 — EULA, licencia de uso, reembolsos
+- [x] **M124** Términos de Servicio [S] 🟢 — EULA, licencia de uso, reembolsos
 - [ ] **M125** Marketing Legal [S] 🟢 — screenshots, música, influencers, claims
 - [ ] **M126** Copyright del Juego [S] 🟢 — registro, evidencias de autoría, titulares
 - [ ] **M127** Identidad de Marca [M] 🟡 — nombre (verificar colisión), logo, paleta, símbolo de Aurora
@@ -195,10 +195,10 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 ### FASE 15 — PRODUCCIÓN Y GESTIÓN
 
 - [ ] **M131** Producción del Equipo [S] 🟡 — roles definidos aunque sea equipo chico
-- [ ] **M132** Gestión del Proyecto [M] 🔴 — kanban/scrum, milestones, sprints, backlog
-- [ ] **M133** Presupuesto [M] 🟡 — programación, arte, marketing, servidores, contingencia
-- [ ] **M134** Riesgos del Proyecto [M] 🔴 — scope creep, técnico, financiero, mitigaciones
-- [ ] **M135** Roadmap [M] 🔴 — preproducción → prototipo → slice → alpha → beta → lanzamiento
+- [x] **M132** Gestión del Proyecto [M] 🔴 — kanban/scrum, milestones, sprints, backlog
+- [x] **M133** Presupuesto [M] 🟡 — programación, arte, marketing, servidores, contingencia
+- [x] **M134** Riesgos del Proyecto [M] 🔴 — scope creep, técnico, financiero, mitigaciones
+- [x] **M135** Roadmap [M] 🔴 — preproducción → prototipo → slice → alpha → beta → lanzamiento
 
 ### FASE 16 — HITOS DE DESARROLLO
 
@@ -220,7 +220,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M148** Nombres y Nomenclatura [M] 🟡 — islas, personajes, Sellos, consistencia, marcas
 - [ ] **M149** Diseño Sonoro Narrativo [M] 🟢 — sonido de Resonancia, de cada Sello, silencios narrativos
 - [ ] **M150** Control Final [M] 🔴 — verificación integral: diversión, economía, mundo vivo, rendimiento
-- [ ] **M151** Principios que no deberían perderse [S] 🔴 — cero combate, cero FOMO, sin grind, sin espagueti
+- [x] **M151** Principios que no deberían perderse [S] 🔴 — cero combate, cero FOMO, sin grind, sin espagueti
 - [ ] **M152** Objetivo Final del Proyecto [M] 🔴 — Aurora como hogar, curiosidad por explorar, mundo vivo post-créditos
 
 ---
