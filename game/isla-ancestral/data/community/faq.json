@@ -1,0 +1,29 @@
+{
+  "fuente": "M100 — FAQ oficial de la comunidad",
+  "version": "1.0",
+  "idiomas": ["es", "en"],
+  "faq": [
+    {"id": "faq_001", "categoria": "general", "pregunta": "¿Cuándo sale el juego?", "respuesta": "Isla Ancestral está en desarrollo. La fecha de lanzamiento se anunciará en Steam y Discord al abrir el Early Access."},
+    {"id": "faq_002", "categoria": "general", "pregunta": "¿En qué plataformas jugaré?", "respuesta": "PC (Windows 10/11, macOS, Linux) y Steam Deck. Consolas en evaluación post-lanzamiento."},
+    {"id": "faq_003", "categoria": "general", "pregunta": "¿Es un juego gratuito?", "respuesta": "No. Isla Ancestral es un juego de pago en Steam. Verificá la página del juego para el precio."},
+    {"id": "faq_004", "categoria": "general", "pregunta": "¿Hay modo multi-jugador?", "respuesta": "v1.0 es single-player. El modo multi-jugador está en evaluación para una expansión post-lanzamiento."},
+    {"id": "faq_005", "categoria": "requisitos", "pregunta": "¿Cuál es el mínimo de hardware?", "respuesta": "CPU: 4 cores / 2.8 GHz. RAM: 4 GB. GPU: 1 GB VRAM. Disco: 2 GB. Verificá la página de Steam para los requisitos completos."},
+    {"id": "faq_006", "categoria": "requisitos", "pregunta": "¿Corre en Steam Deck?", "respuesta": "Sí. El juego está verificado para Steam Deck con preset de calidad 'Medium'."},
+    {"id": "faq_007", "categoria": "juego", "pregunta": "¿Hay combate?", "respuesta": "No. Isla Ancestral es un cozy voxel sin combate. La interacción con el mundo es de cuidado, construcción y exploración."},
+    {"id": "faq_008", "categoria": "juego", "pregunta": "¿Cuánto dura la partida?", "respuesta": "La historia principal es ~20-30 horas. El sandbox puede extenderse indefinidamente."},
+    {"id": "faq_009", "categoria": "modding", "pregunta": "¿Habrá soporte de mods?", "respuesta": "El soporte de mods está planificado post-RC. Verificá la roadmap en Discord."},
+    {"id": "faq_010", "categoria": "compra", "pregunta": "¿Dónde puedo comprar el juego?", "respuesta": "Steam es la plataforma principal al lanzamiento. EGS en evaluación."},
+    {"id": "faq_011", "categoria": "compra", "pregunta": "¿Hay demo?", "respuesta": "Una demo en Steam se liberará antes del lanzamiento completo. Seguí la página del juego para notificarte."},
+    {"id": "faq_012", "categoria": "soporte", "pregunta": "¿Dónde reporto un bug?", "respuesta": "Usá el botón 'Reportar' en Discord (canal #reportar-bug) o la sección de bugs de la página de Steam. Incluir: versión, OS, pasos para reproducir."},
+    {"id": "faq_013", "categoria": "soporte", "pregunta": "¿Cómo pido ayuda para un problema de progreso?", "respuesta": "Canal Discord #ayuda-juego. Incluir: captura de pantalla + descripción. El equipo responde en <48h."},
+    {"id": "faq_014", "categoria": "legal", "pregunta": "¿Puedo hacer streams del juego?", "respuesta": "Sí, siempre. Verificá las pautas para creadores en la sección de contenido de la web del juego."},
+    {"id": "faq_015", "categoria": "legal", "pregunta": "¿Puedo usar assets del juego en mis proyectos?", "respuesta": "No. Los assets son propiedad del equipo de desarrollo. Verificá los términos de la página de Steam."}
+  ],
+  "canales_oficiales": {
+    "steam": "steam://store/1XXXXXX",
+    "discord": "https://discord.gg/isla-ancestral",
+    "twitter": "https://x.com/islaancestral",
+    "youtube": "https://youtube.com/@islaancestral"
+  },
+  "frecuencia_actualizacion": "mensual"
+}

@@ -1,0 +1,21 @@
+DMCA Takedown Request
+=====================
+
+Date: [YYYY-MM-DD]
+Copyright Owner: [Nombre]
+Contact: [email]
+
+## Work
+Title: [Título]
+URL: [Enlace]
+Description: [Descripción]
+
+## Infringing Content
+URL: [Enlace del contenido infractor]
+
+## Declaration
+I state under penalty of perjury that I am the owner of the copyright
+or authorized to act on the owner's behalf, and that the use of the
+material has not been authorized by the copyright owner.
+
+Signature: [Firma]

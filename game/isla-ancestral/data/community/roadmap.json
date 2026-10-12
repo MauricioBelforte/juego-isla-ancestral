@@ -1,0 +1,11 @@
+{
+  "hitos": [
+    {"estado": "completado", "titulo": "MVP jugable", "descripcion": "Isla principal + ciclo día/noche"},
+    {"estado": "en_desarrollo", "titulo": "Templos + puzzle", "descripcion": "Mecánicas de resuene"},
+    {"estado": "planeado", "titulo": "Viajes entre islas", "descripcion": "Gran Vapor + biomas"},
+    {"estado": "futuro", "titulo": "Comunidad expandida", "descripcion": "Más vecinos + eventos"}
+  ],
+  "categorias": ["Core Gameplay", "Content", "Technical", "Polish"],
+  "actualizacion": "mensual_o_cambios",
+  "hitos_sin_fechas": true
+}

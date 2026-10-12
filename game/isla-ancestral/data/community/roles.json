@@ -1,0 +1,14 @@
+{
+  "roles": [
+    {"id": "admin", "nombre": "Admin", "permisos": ["bannear", "editar_canales", "gestionar_mods"], "descripcion": "Máximo control del servidor"},
+    {"id": "mod", "nombre": "Moderador", "permisos": ["bannear", "silenciar", "mover_mensajes"], "descripcion": "Moderación del día a día"},
+    {"id": "helper", "nombre": "Ayudante", "permisos": ["responder_dudas", "guiar_nuevos"], "descripcion": "Apoyo a la comunidad"},
+    {"id": "user", "nombre": "Jugador", "permisos": ["leer_canales", "escribir_general"], "descripcion": "Miembro estándar"}
+  ],
+  "canales": {
+    "admin": ["#anuncios", "#devlogs", "#capturas", "#sugerencias", "#bug-reportes", "#off-topic"],
+    "mod": ["#anuncios", "#bug-reportes", "#off-topic"],
+    "helper": ["#preguntas", "#general"],
+    "user": ["#general", "#preguntas", "#off-topic"]
+  }
+}

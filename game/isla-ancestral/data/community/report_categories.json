@@ -1,0 +1,13 @@
+{
+  "categorias": [
+    {"id": "toxico", "nombre": "Contenido tóxico", "descripcion": "Acoso, discriminación, spam"},
+    {"id": "spoiler", "nombre": "Spoiler no etiquetado", "descripcion": "Spoilers sin tag [SPOILER]"},
+    {"id": "nsfw", "nombre": "NSFW inapropiado", "descripcion": "Contenido sexual/gráfico fuera de canal designado"},
+    {"id": "impersonacion", "nombre": "Impersonación", "descripcion": "Fingir ser el equipo del desarrollo"},
+    {"id": "copyright", "nombre": "Infracción de copyright", "descripcion": "Contenido ajeno sin licencia"},
+    {"id": "otro", "nombre": "Otro", "descripcion": "Con descripción obligatoria"}
+  ],
+  "workflow": ["usuario_reporta", "mod_revisa", "accion", "notificar_reportante", "notificar_reportado_si_accion"],
+  "notificacion_mods": true,
+  "notificar_reportante": true
+}
