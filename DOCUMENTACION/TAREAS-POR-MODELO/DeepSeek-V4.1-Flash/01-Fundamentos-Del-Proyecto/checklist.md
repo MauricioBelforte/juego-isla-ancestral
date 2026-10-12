@@ -7,6 +7,11 @@
 
 > Extraídas del `05-Checklist.md` del módulo (152 pendientes / 0 dudas de 152 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
 
+> **Iter. 1 (2026-10-12, Log 1722).** Los 152 ítems son **módulos**, no tareas (el `05-Checklist.md` es el
+> índice maestro del plan). **No se sincronizó marca alguna: 0 flips** (regla dura `41ff104` del dueño:
+> `[x]` = código implementado + testing). Se midió el estado real: 22 módulos con checklist cerrada, 21
+> con GLOBAL `✅` → **propuestos** al director. Ver `07-Resultados-Testings.md` §5.
+
 ## Tareas
 
 - [ ] T-001 **M01** Visión y Concepto [M] 🔴 — definir nombre definitivo, pilares, pitch, alcance v1.0

@@ -277,6 +277,156 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 - **Entregable:** msg 38 del canal Ling-3.1-Flash (2026-10-11 05:05:26).
 - **Límites respetados:** READ-ONLY; 0 ediciones de marcas, 0 commits, 0 push. Flips son del director/usuario.
 
+### L-13 — QA cruzado §21.8: M113-Pruebas-De-Stress (elección ante mimo msg 41) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 41 del director mimo-v2.6 (M107 ACEPTADA + elección entre M97 y M113 para QA cruzado §21.8, 2026-10-11 18:06). Elegí M113: mi auditoría msg 38 quedó a 3 h del sello de stepfun y documentó deuda real — verificar si se resolvió antes de sellar ✅ es el valor del QA cruzado.
+- **Veredicto: PROCEDE — sello ✅ válido con deuda documentada.**
+- **Conteo:** 132 `[x]` / 0 `[ ]` / 0 `[?]` = exacto contra Totales (132·132·0·0) y GLOBAL (132/132). 0 drift.
+- **Aritmética consistente:** 102 (agnes 2026-10-07) + 29 (usuario, commit 531f597) + 1 (L70, stepfun, commit 0c5942f 06:06 / Log 1668 09:05) = 132.
+- **Muestreo §21.8.2.b 8/8 sustentados:** stress_comparator.gd, stress_runner.gd (registro `_SC_FLYCAM` verificado en diff 0c5942f), stress_scenario.gd, test_stress_m113_comparador.gd (**re-corrida headless EXIT 0**), test_stress_m113.gd (**re-corrida headless EXIT 0**), flycam_stress.gd (L70: seed 42, 480×200=96.000 muestras, 5 métricas, plan sintético 45 pts — leído completo), 5 escenarios en escenarios/, Log 1668 (firma stepfun) + msg 125 (canal stepfun).
+- **0 citaciones fantasma.**
+- **Deuda documentada (no inflación):** perf_base.json ausente por diseño (agnes L251: 5 regresiones falsas en HW variable; dueño M61/CI; mecanismo sí existe: StressComparator + RUTA_BASELINE + --update-baseline + gate exit 1); 06/07-Testings ausentes (recomendable); 29 flips del usuario son ítems "Definir" sustentados por 03-Diseno.md/04-Codigo.md (valores numéricos con M61/M19/M50/M65, declarado en L225/L236/L257).
+- **Acciones:** GLOBAL fila 113 🟡→✅ "Verificado por Ling-3.1-Flash 2026-10-11" (deuda con dueño en Notas); sección "QA Cruzado §21.8" añadida a 05-Checklist.md.
+- **Entregable:** msg 42 del canal Ling-3.1-Flash (2026-10-11 18:14:51).
+- **Límites respetados:** QA es verificación con evidencia; única edición de estado = fila GLOBAL (sello §21.8, competencia del verificador); 0 flips de ítems, 0 commits, 0 push.
+
+### L-14 — Cierre M107-Backups (encargo completo mimo msg 44 + 07-Resultados msg 43) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** msg 44 del director mimo-v2.6: "M107-Backups — cerrar TODO lo que falte" (Paso 1 leer, Paso 2 implementar, Paso 3 verificar, Paso 4 reportar). Aclaración clave: los 25 pendientes son `[?]` (No resueltos), no `[ ]` — 16 completables por agente + 9 user-dependent.
+- **07-Resultados-Testings.md creado** (opción 2 de msg 43): 3 suites, 39 checks, 0 fallos, EXIT 0 (re-corridas vivas).
+- **03-Diseno.md §1 ampliado** (3 subsecciones): Dependencias (M59/M06/M122/M133/M135); Catálogo de los 15 puntos de Plan-inicial-minimo.md §106 (L2913-2929) con mapeo punto-a-punto; Criterios de aceptación verificables (5).
+- **12-Solucion-Problemas.md creado**: 10 problemas + soluciones, parámetros reales de los 4 .ps1 y BackupManager.
+- **16 flips `[?]`→`[x]`** vía script ASCII-seguro (16/16 hits=1 cada uno): 3 "degradado" (§1), troubleshooting, 3 estructuras disco externo (§4), 4 integraciones especificadas (04-Codigo.md §3), 2 backups de saves, logs M133, plan M135, 15 puntos §106 reformulado.
+- **Totales actualizado:** 176 ítems · Completados: 167 · Pendientes: 0 · No resueltos: 9.
+- **Verificación:** 3 suites re-corridas headless 39/0/0, 0 SCRIPT ERROR, EXIT 0; UTF-8 0 BOM 0 mojibake en 4 archivos; conteo final x=167/pendiente=0/pregunta=9/suma=176.
+- **9 `[?]` user-dependent** (honestos, dueño usuario): RF9 backup externo, Copia 3/Local disco externo físico, verificación disco conectado, Google Cloud Console, Drive API, credenciales OAuth, consentimiento, token. Módulo NO sellable (§21.6) hasta validación en hardware real.
+- **Restricciones respetadas:** GLOBAL NO tocado (lo actualiza el director); quality.yml/bootstrap.gd/interaction_manager.gd intocados; sin commit (atria-dawn).
+- **Entregables:** msg 45 (canal) + Log 1677 (pool consumido 1324→1323).
+
+### L-15 — Lote de 36 definiciones M99-Marketing (encargo mimo msg 46) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 46 del director mimo-v2.6 (M107 cierre ACEPTADO + encargo M99-Marketing: lote grande de 30-40 `[ ]`, 2026-10-11 19:02). M99 estaba en 7/169; módulo de documentación pura.
+- **Qué hizo:** lote de 36 definiciones en `03-Diseno.md` §9 agrupadas por tema: 9 estrategia de marketing (RF1/RF2), 9 redes sociales (RF3), 9 comunidad (RF3/RF4/RF7/RF8), 9 análisis y métricas (RF9/RF10/RF12/RF13). 36 flips `[ ]`→`[x]` en `05-Checklist.md` (ítems 1.1-1.6, 3.1-3.3, 5.1-5.10, 6.1-6.8, 11.1, 19.4, 20.4, 20.6, 20.7, 23.5, 24.5, 25.8, 25.9) + Totales 7/162/0 → **43/126/0 = 169**. Notas del Agente en 04-Codigo.md + nota de trazabilidad del lote en el checklist.
+- **Verificación:** conteo regex 43 `[x]` / 126 `[ ]` / 0 `[?]` exacto contra Totales; UTF-8 sin BOM, 0 mojibake (chequeo de doble-codificación sobre los 3 archivos).
+- **Restricciones respetadas:** CHECKLIST-GLOBAL.md NO tocado (lo actualiza el director); 0 commits.
+- **Entregables:** msg 47 del canal Ling-3.1-Flash (2026-10-11 19:38:08) + Log 1684 (pool consumido 1684→1685).
+
+### L-16 — Lote documental M128-Identidad-De-Marca (encargo mimo msg 48) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 48 del director mimo-v2.6 (M99 aceptado + encargo M128:
+  lote documental de 15-20 `[ ]` en secciones que Hy3 no toque, 2026-10-11 19:45).
+  Hy3 trabaja los 4 `[?]` de drift (L52/L83/L136/L161) + sección H (BrandConfig/
+  contraste).
+- **Qué hice:** clasifiqué los 45 `[ ]` ítem por ítem y entregué los **9 que son
+  documentales-implementables** por un agente de texto (el resto es arte M46, acción
+  humana/legal u operativo — marcarlos habría sido inflación Familia A):
+  - **L97+L146** (fuentes en builds): verificación en disco — 4 TTF en
+    `res://assets/fonts/` + `theme_ux.gd` L23-25; Godot exporta `res://` por defecto.
+  - **L120** (plantillas de posts): `07-Plantillas-Posts-Marca.md` — 3 templates
+    (anuncio/devlog/hito) con paleta, tipografía, logo, dimensiones y combinaciones de
+    contraste seguras WCAG (Blanco Perla/Azul Bosque ≈6.9:1, Carbón/Dorado Anciano
+    ≈6.3:1 — cálculo manual consistente con el test H3 de Hy3).
+  - **L129** (template proveedores): `08-Template-Proveedores-Merchandise.md`.
+  - **L149** (documentar hallazgos): `06-Hallazgos-Contraste-y-Coherencia.md` —
+    contraste WCAG + restricciones de uso + auditoría sección J.
+  - **L159** (fecha de actualización): `09-Registro-Mantenimiento.md`.
+  - **L166/L167/L168** (coherencia M97/M98/M99): auditoría con citas `archivo:línea`
+    — las 3 PASAN (M97: 03-Diseno L88/L96/L116; M98: §2 L16-18 + §7 L58; M99: §9).
+- **Auditorías que NO pasaron (quedan `[ ]` con dueño):** L145/L169 (UI usa paleta
+  pastel propia `theme_ux.gd` L13-20 ≠ paleta oficial M128 §3 — dueño M53; tipografía
+  SÍ es de marca) y L170 (M131 sin formato de marca — dueño M131).
+- **Hallazgos nuevos:** (1) paleta UI desalineada de la de marca; (2) nombres de
+  paleta M99 (océano/arena/coral/niebla/tinta) vs M128 §3 (Azul Bosque/Dorado
+  Anciano/Blanco Perla) — alinear con M45/M46; (3) app icon 512 vs 1024 (checklist
+  vs 03-Diseno §2 — Godot/Steam requieren 1024+, dueño M46).
+- **Módulo:** 51/100 → **60/100** (36 `[ ]` + 4 `[?]`). Conteo regex verificado:
+  60/36/4 = 100 exacto contra Totales.
+- **Entregables:** msg 49 del canal Ling-3.1-Flash (2026-10-11 20:23:41) + Log 1690
+  (pool consumido 1689→1690: el 1689 lo tomó otro agente entre lectura y escritura).
+
+### L-17 — Cierre M131-Créditos: catalogo .tres + especificación de audio (encargo mimo msg 50) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 50 del director mimo-v2.6 (M128 aceptado + encargo
+  M131: "tiene 10 `[ ]` KnownIssues, es documental, tu nicho", 2026-10-11 20:25).
+  M131 estaba en 85/10/0 = 95.
+- **Qué hice:**
+  - **E.L58 resuelta con artefacto real:** generado
+    `game/isla-ancestral/data/legal/catalogo_creditos.tres` (Resource tipado
+    `CreditsCatalog`, 1402 bytes) desde `data/legal/creditos.json` vía generador
+    headless `scripts/legal/generar_catalogo_tres_m131.gd` (EXIT=0, verificado:
+    7 secciones, 2 idiomas, version 2). Nueva clase
+    `scripts/legal/credits_catalog.gd`.
+  - **9 ítems de audio (I.L90-97, I.L99) documentados, NO flippeados:** bloqueo
+    verificado = 0 archivos de audio en el repo (rglob .ogg/.wav/.opus/.mp3 → 0).
+    Especificación `10-Especificacion-Integracion-Audio.md` con dueño
+    (M41/M42/M43/M91), assets requeridos, puntos de cableado `archivo:línea`
+    verificados y criterio de aceptación por ítem.
+  - Checklist M131: **86/9/0 = 95** (flip E.L58 + Totales + nota de cierre).
+- **Lecciones técnicas:** `class_name` globales no registrados en `--script`
+  headless (→ `preload` explícito); el JSON devuelve `Array` plano (→ arrays
+  tipados construidos explícitamente); `quit()` debe alcanzarse en `_init()` o el
+  bucle principal arranca el juego y cuelga el proceso (proceso colgado matado:
+  Id 19128).
+- **Verificación:** conteo regex 86 `[x]` / 9 `[ ]` / 0 `[?]` exacto contra
+  Totales; UTF-8 sin BOM, 0 mojibake en los 4 archivos tocados.
+- **Restricciones respetadas:** CHECKLIST-GLOBAL.md NO tocado (lo actualiza el
+  director); 0 commits.
+- **Entregables:** msg 51 del canal Ling-3.1-Flash (2026-10-11 20:50:38) +
+  Log 1692 (pool consumido 1692→1693).
+
+### L-18 — Lote de auditoría M53-UI-UX (encargo mimo msg 52, takeover por stall) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 52 del director mimo-v2.6 (M131 aceptado +
+  encargo M53-UI-UX: lote de 15-20 `[ ]`, 2026-10-11 20:54). Otra sesión
+  Ling-3.1-Flash (Kilo Code) reclamó M53 en msg 53 (20:57:10) pero acumuló
+  43+ min con 0 escrituras y 0 reserva de msg → **takeover por stall**.
+- **Cifra corregida:** el checklist real tiene 26 `[ ]` (139/26/0 = 165),
+  no 122 `[ ]` (cifra del encargo de versión anterior).
+- **Qué hice:** clasificación ítem por ítem (método M128/M131):
+  - **2 flips con evidencia en disco:** L188 (minimap textura caché,
+    `minimap_widget.gd:4/8-10/23-26`) y L189 (tooltip pool,
+    `tooltip_service.gd:14/78-81/170-172` — duplicado de G.L109,
+    Patrón D resuelto).
+  - **10 auditorías documentadas** con cita `archivo:línea` y dueño
+    (quedan `[ ]`): L99 (redibujo event-driven, decisión de diseño),
+    L102 (M54 en 133/177), L126 (NotificationService sin SFX en código —
+    drift con H.L121), L137 (cálculo WCAG: 4/4 pares pasan AA,
+    10.4:1/8.6:1/6.6:1/4.65:1), L138 (paleta UI ≠ marca M128 §3),
+    L139 (autowrap sí, locale alemán no — M87), L148 (get_subtitulos
+    sin opacidad, `accesibilidad_manager.gd:263-266`), L157 (sin mapeo
+    por dispositivo — drift con B.L46), L186 (múltiples CanvasLayer,
+    sin merge), L193 (sin font subsetting — M88).
+- **Módulo:** 139/26/0 → **141/24/0 = 165**. Conteo regex verificado
+  exacto contra Totales; UTF-8 sin BOM, 0 mojibake.
+- **Restricciones respetadas:** CHECKLIST-GLOBAL.md NO tocado; 0 commits.
+- **Entregables:** msg 54 del canal Ling-3.1-Flash (2026-10-11 21:49:02) +
+  Log 1699 (pool consumido 1699→1700).
+- **Límites respetados:** 4 `[?]` de Hy3 intocados; CHECKLIST-GLOBAL.md NO tocado
+  (lo actualiza el director); 0 commits; UTF-8 sin BOM, 0 mojibake.
+
+### L-18 — M131 gaps documentales del cierre (04-Codigo, 07-Resultados, E-30/E-31, test anti-drift) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** segunda entrega del encargo M131 (msg 50/52 del director). El
+  cierre paralelo (msg 51 / Log 1692) dejó 4 gaps abiertos.
+- **Qué hice:**
+  - `04-Codigo.md` actualizado: tabla §1 (3 archivos nuevos + test 15
+    checks), sección 3 con E.L58 resuelta, Notas del Agente.
+  - `07-Resultados-Testings.md` CREADO (gap DoD de agnes, Log 1425):
+    suite 1 (test_credits_m131.gd) **15 checks / 0 fallos / EXIT=0**;
+    suite 2 (test_credits_layer_m131.gd) **43 checks / 0 fallos /
+    EXIT=0** (ambas re-corridas 2026-10-11, godot472.exe headless).
+  - **7 checks anti-drift** agregados a `test_credits_m131.gd`: el
+    `.tres` debe existir, cargar como `CreditsCatalog` y coincidir con
+    el JSON canónico (ids + politicas).
+  - `GUIA-GODOT/06-registro-errores.md`: **E-30** (`class_name` global
+    no declarado en `--script` headless → `preload` explícito) y
+    **E-31** (`str(Dictionary)` orden-dependiente → `==` compara
+    contenido) documentados.
+- **Entregables:** msg 53 del canal Ling-3.1-Flash (2026-10-11 20:57:10)
+  + Log 1695 (pool consumido 1695→1696; el 1694 lo tomó otro agente).
+- **Recepción:** encargo M53-UI-UX (msg 52 del director: auditoría
+  documental, lote 15-20 `[ ]`) — checklist real tiene 26 `[ ]` (no 122).
+
 ### L-10 — Auditoría coherencia checklist vs disco: M58-Accesibilidad (Opción 3, 2º módulo) — `[x]` COMPLETADA (2026-10-11)
 
 - **Qué era:** msg 32 del director mimo-v2.6 (Opción 3, 1 módulo; sugerencia M51 o M58). El turno previo entregó M51 (msg 33/L-09); este ciclo auditó **M58-Accesibilidad** en paralelo read-only (relevante: Hy3 recién asignado a M58 en msg 30).
@@ -300,6 +450,332 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 - **Veredicto:** M107 COHERENTE, NO candidato a ✅ (25 `[?]` + 06/07 ausentes) — 🟡 Con dudas honesto.
 - **Entregable:** msg 40 del canal Ling-3.1-Flash (2026-10-11 05:11:27).
 - **Límites respetados:** READ-ONLY; 0 ediciones de marcas, 0 commits, 0 push. Flips son del director/usuario.
+
+### L-19 — M99 bloque 3 (contenido/SEO): 23 definiciones §10 + 6 reconciliados (encargo mimo msg 55) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 55 del director mimo-v2.6 (M53 takeover aceptado + encargo
+  M99 bloque 3 contenido/SEO: "Los 24 pendientes de M53 requieren runtime/otros
+  módulos. Si querés seguir, tomá M99 bloque 3 (contenido/SEO)", 2026-10-11 21:51).
+- **Qué hice:**
+  - `03-Diseno.md`: nuevo §10 "Lote de definiciones bloque 3 — contenido/SEO" —
+    **23 definiciones** en 5 subsecciones (10.1 press/media kit RF5, 10.2 clips RF6,
+    10.3 devlogs RF7, 10.4 blog RF7, 10.5 outreach/demo RF10/RF11).
+  - `05-Checklist.md`: **29 flips** `[ ]`→`[x]` con cita (`archivo §` + Log):
+    23 a §10 + **6 reconciliados** con definiciones preexistentes en `docs/marketing/`
+    (Log 1698, atria-dawn-s2) — ítems 12.1-12.4 y 22.4 → `web-especificaciones.md`
+    §3; 13.2 → `logo-especificaciones.md` §6 (ambos verificados en disco antes de
+    citar; sin reescribir, regla "NO duplicar trabajo" AGENTS.md §3).
+  - **Corrección de drift:** la línea Totales decía 72/97 pero el conteo real antes
+    del lote era **101/68** (29 ítems de otros agentes sin actualizar Totales) →
+    corregida a **130/39/0 = 169** con nota en el checklist.
+  - BOM eliminado del checklist (UTF-8 sin BOM, AGENTS.md §28; condición preexistente).
+- **Verificación:** conteo regex **130 [x] / 39 [ ] / 0 [?] = 169** ✓; 59 definiciones
+  `(ítem N.N)` en 03-Diseno.md = 36 (§9) + 23 (§10) ✓; ambos archivos UTF-8 sin
+  BOM, 0 mojibake; artefactos citados verificados en disco.
+- **Entregables:** msg 56 del canal Ling-3.1-Flash (2026-10-11 22:15:52) +
+  Log 1701 (pool consumido 1701→1702).
+- **Nota de bookkeeping:** el backlog tiene dos entradas L-18 (M53 takeover y M131
+  gaps) — colisión de numeración preexistente de la sesión previa; esta es L-19.
+- **Recepción:** pendiente de respuesta del director (¿siguiente bloque de M99 u
+  otro módulo?).
+
+### L-20 — Cierre de runtime de M53-UI-UX: 4 suites verdes, 2 bugs corregidos (BUG-129/130), 5 flips → 146/19/0 (continuación takeover msg 54/55) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** continuación del takeover M53 (msg 54/55): los 4 tests headless
+  de la sesión previa estaban 3/4 verdes; quedaba el fallo de wrap-around de
+  `test_m53_lista_larga.gd` (owner=Item_0001) y la verificación de extremos.
+- **Qué hice:**
+  1. **BUG-129 corregido** (`menu_navigator.gd:72`): `wrapi` de Godot 4.7 tiene
+     max EXCLUSIVO (range = max−min; verificado con sonda headless:
+     `wrapi(499,0,499)=0`, `wrapi(4,0,4)=0`) — el wrap-around ciclaba por
+     [0, N−2] y **el último control de toda lista era inalcanzable** por
+     navegación direccional. Fix: `wrapi(next_idx, 0, focusables.size())`.
+  2. **BUG-130 corregido** (`notification_service.gd:105-115`): toasts
+     **ilegibles con el tema global** (Label sin `font_color` override heredaba
+     TEXT_DARK sobre panel oscuro = **1.26:1 WCAG**). Fix: overrides explícitos
+     (texto 0.92,0.88,0.82 = 12.5:1; icono 0.85,0.72,0.35 = 8.5:1) +
+     docstring corregido (decía "con SFX"; el servicio es visual).
+  3. **test_m53_wcag.gd extendido** a 17 checks (paneles oscuros tooltip/toast,
+     instanciando los servicios reales con el tema global aplicado).
+  4. **test_m53_extremos.gd fixeado** (BUG-048: `create_tween()` en vez de
+     `Tween.new()`+`add_child()` — Tween es RefCounted en 4.7).
+  5. **4 suites verdes: 46 checks / 0 fallos / EXIT 0** (wcag 17, extremos 8,
+     capas 14, lista_larga 7 — esta última antes 7/1).
+  6. **5 flips** en `05-Checklist.md` (L137 I.8, L152 J.10, L171 L.1, L172
+     L.2, L179 L.9) con evidencia test↔disco → **146 [x] / 19 [ ] / 0 [?]**
+     (conteo verificado por regex en disco).
+  7. BUG-129/130 registrados en `DOCUMENTACION/11-BUGS.md` (§5 tabla + §7
+     resueltos); **§36** en `GUIA-GODOT/01-gdscript-errores-comunes.md`
+     (`wrapi` max exclusivo + Label sobre panel oscuro). Sonda
+     `probe_wrapi_tmp.gd` borrada tras la verificación.
+- **Entregables:** msg 58 del canal Ling-3.1-Flash (2026-10-11 22:24:22) +
+  Log 1705 (pool consumido 1705→1706; el 1704 lo tomó otro agente
+  entre lectura y escritura).
+- **Recepción:** msg 57 del director (M99 bloque 3 ACEPTADO 130/169; "Los 39
+  [ ] restantes de M99 son ejecución operativa. Si querés otro módulo, decime")
+  — **pendiente respuesta del director** sobre el siguiente encargo (propuesta
+  en msg 58: M99 bloque 4 o QA cruzada §21.8 de módulo recién sellado).
+- **Nota:** el resumen de sesión previa estaba desactualizado (no incluía
+  L-19/M99 bloque 3 ni msg 56/57); el backlog es la fuente de verdad.
+
+### L-21 — Verificación H.L121 (falso verde) + BUG-133 + propuesta M151 QA §21.8 (encargo mimo msg 59) — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 59 del director mimo-v2.6 (M53 runtime
+  ACEPTADO 146/165 + "Si querés otro módulo, decime", 2026-10-11
+  22:33). Cierre de la verificación H.L121 flaggeada por la otra
+  sesión Ling en msg 58.
+- **Qué hice:**
+  - **H.L121 = FALSO VERDE confirmado** (verificación de los 3
+    caminos de toast, READ-ONLY): `notification_service.gd` (203
+    líneas, leído completo) = 0 SFX (visual-only por diseño; el
+    test H.9 `test_m53_no_redundancia.gd:45-53` asserta que
+    `push()` NO crea AudioStreamPlayer). Emisores verificados sin
+    SFX: `achievement_service.gd:248-267` (M72 logros) y
+    `collection_registry.gd:111-123` (M37 museo). H.L121 `[x]`
+    "Toasts con icono y SFX por tipo" no se sostiene.
+  - **BUG-133 encontrado y registrado** (`DOCUMENTACION/11-BUGS.md`,
+    tabla §5 + ficha §6): `crafting_feedback.gd:119` llama
+    `notif.show_notification()` — método inexistente en
+    NotificationService (grep global: 0 definiciones, 2 matches =
+    la llamada) → guard `has_method` false → `print` fallback:
+    **los toasts de crafting nunca se muestran**. Fix sugerido:
+    `notif.push({"text": texto, "type": <ToastType>})`.
+  - **Propuesta de siguiente módulo (msg 60):** M151-Control-Final
+    QA cruzada §21.8 (GLOBAL L154 "QA §21.8 pendiente", autor
+    mimo-v2.6-flash-free → independencia limpia §21.8.4);
+    alternativa: re-auditoría stale (cola pre-armada s3). M99
+    descartado (agnes bloque 5, msg 285; 14 [ ] operativos fuera
+    de nicho).
+- **Restricciones respetadas:** READ-ONLY en marcas (0 flips — el
+  flip de H.L121 es del director; §21.8.4 me prohíbe el sello §21.8
+  de M53, mismo modelo que la otra sesión); 0 commits.
+- **Entregables:** msg 60 del canal Ling-3.1-Flash (2026-10-11
+  22:40:54) + BUG-133 en `11-BUGS.md` + **Log 1708** (pool
+  consumido 1708→1709 vía `--reservar`; el 1707 lo tomó
+  otro agente — M68 QA, 22:40).
+- **Recepción:** pendiente de decisión del director (M151 vs
+  re-auditoría stale).
+
+### L-22 — Encargo msg 61: H.L121 degradado a [?] + QA §21.8 de M151-Control-Final — `[x]` COMPLETADA (2026-10-11)
+
+- **Qué era:** respuesta a msg 61 del director mimo-v2.6
+  (H.L121 falso verde ACEPTADO + 3 acciones: degradar H.L121
+  a `[?]`, registrar bug crafting_feedback, QA §21.8 de M151
+  autorizada, 2026-10-11 22:46).
+- **Qué hice:**
+  1. **H.L121 degradado a `[?]`** en
+    `DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md`
+    L121 (nota de evidencia + re-escopo: "Toasts con icono
+    por tipo; SFX por canal audio separado — dueño
+    M91/FeedbackDirector"). Totales: **145 [x] / 19 [ ] /
+    1 [?] = 165** (era 146/19/0). Nota de degradación
+    agregada; referencia en H.10 (L126) actualizada.
+  2. **BUG-133** ya registrado (msg 60).
+  3. **QA §21.8 de M151-Control-Final** (verificador ≠ autor
+    iter. 4: Ling ≠ mimo, §21.8.4) — **Veredicto: COHERENTE,
+    sin inflación; 23 [x] sustentados; NO candidato a ✅**
+    (138 [ ] + 6 [?]):
+    - Conteo regex 23/138/6 = 167 exacto vs Totales y GLOBAL.
+    - Muestreo 8/8 re-corrido sin confiar: test_verificar_puntos
+      **14 PASS/0 exit 0**; detector ciego **exit 3**;
+      --plantilla **26 puntos exit 0**;
+      test_control_final_headless **12 checks/0 exit 0**;
+      control_final_gate CLI **BLOQUEADO zero_criticos, exit 1**;
+      release-build.yml L49-102 bloqueante; regenerar_estado_
+      release.py + estado_release.json coherentes; schema.gd +
+      gate.gd en `game/isla-ancestral/scripts/control_final/`.
+    - Familia B: 03-Diseno.md (86 líneas) completo, 0 fantasma.
+    - Patrón C: 0 citaciones fantasma (Logs 1279/1289/1320 +
+      commits f8119c1/5d0ffd5/23b4cb9 verificados).
+    - Patrón D: 0 duplicados (bloque OBSOLETO en blockquote,
+      excluido del conteo).
+    - Patrón M114: 0 deferrals (138 [ ] = alcance
+      post-lanzamiento legítimo; 6 [?] con dueño).
+    - Hallazgos iter. 4 verificados REALES: quality.yml:976
+      `--ci-gates-ok "1"` hardcodeado; acta no existe;
+      estado_release.json detrás de la realidad.
+- **Restricciones:** único flip = H.L121 (autorizado por el
+  director); CHECKLIST-GLOBAL NO tocado (fila 53 pendiente de
+  actualización por el director: 146/165 → 145/165); 0 commits.
+- **Entregables:** msg 62 del canal Ling-3.1-Flash (2026-10-11
+  22:58:36) + **Log 1710** (pool consumido 1710→1711 vía
+  `--reservar`; el 1709 lo tomó otro agente).
+- **Recepción:** msg 64 del director (2026-10-11 23:04:59): M151 QA
+  ACEPTADO ("COHERENTE, sin inflación... Tu QA fue exhaustivo"),
+  H.L121 degradado correctamente, M53 actualizado a 145/165,
+  BUG-133 registrado. Sin módulo nuevo asignado.
+
+### L-23 — Reporte de cierre de ciclo + pedido de próximo módulo (directiva del usuario 2026-10-12) — `[x]` COMPLETADA (2026-10-12)
+
+- **Qué era:** el usuario señaló que sin reporte el director no
+  delega ("si el director no sabe que hiciste no te delega nada")
+  y pidió regla de reporte obligatoria en el cronómetro. El
+  director aceptó todo (msg 59/61/64) pero nunca respondió
+  "¿otro módulo?" (msg 59) ni "¿otro módulo o cerramos el
+  ciclo?" (msg 62).
+- **Qué hice:**
+  1. **Cronómetro reemplazado** (borrado
+     `wku_12d36a0c3001rYeP1Yk9OQ1Slr`, creado
+     `wku_12e1165bb001JR7Di7fB0ME0jU`, `*/30 * * * *`):
+     nueva REGLA DE REPORTE OBLIGATORIA — si la ronda ejecuta
+     tareas con cambios en disco, escribir el reporte en el
+     canal vía `scripts/reservar_mensaje.py` ANTES de terminar
+     el turno; si no hubo tareas, silencio (T-19).
+  2. **msg 65 del canal** (2026-10-12 00:06:27): reporte
+     consolidado de cierre de ciclo con evidencia (M53
+     145/19/1, BUG-129/130/133, 4 suites 46/0, QA M151
+     coherente 23/167) + **pedido explícito de asignación**
+     (primario: re-auditoría stale >30 días, cola de s3;
+     alternativa: QA cruzada de M107 cerrado por s3).
+- **Verificación anti-inflación de la otra sesión (ronda
+  02:30Z):** M53 en disco = 145 [x] / 19 [ ] / 1 [?] (regex)
+  y BUG-133 presente en `11-BUGS.md` (§5 + §6) — claims de
+  msg 62 reales.
+- **Entregables:** msg 65 del canal Ling-3.1-Flash.
+- **Recepción:** msg 66 del director (00:10:05): ciclo M53+M151
+  CERRADO ("Excelente trabajo") + encargo M99 QA §21.8.
+
+### L-24 — Ronda 10-min: ciclo M99 cerrado (QA aceptada + drift Totales corregido) — `[x]` COMPLETADA (2026-10-12)
+
+- **Qué era:** primera ronda de cronómetro a 10 min
+  (usuario: "baja tu cronometro cada 10 minutos"). El
+  encargo M99 QA (msg 66) fue ejecutado por la otra
+  sesión Ling (msg 68: COHERENTE, sin inflación,
+  155/169, NO candidato a ✅, runtime 11/0 exit 0) y
+  aceptado por el director (msg 69), quien corrigió el
+  drift de Totales ("lo corrijo yo ahora").
+- **Qué hice:**
+  1. **Cronómetro reemplazado** (borrado
+     `wku_12e1165bb001JR7Di7fB0ME0jU`, creado
+     `wku_12e22135a001UdUAOx8HY6ox17`, `*/10 * * * *`).
+  2. **Verificación de la corrección del director**
+     (auditoría checklist↔disco): línea Totales de
+     `DOCUMENTACION/99-Marketing/plan-actual/05-Checklist.md`
+     L289 ahora "169 ítems · Completados: 155 ·
+     Pendientes: 14 · No resueltos: 0"; conteo regex
+     155 [x] / 14 [ ] / 0 [?] = 169 — **0 drift** vs
+     Totales y CHECKLIST-GLOBAL (fila 99).
+  3. **msg 70 del canal** (00:32:26): recepción de
+     msg 69 con evidencia de la corrección (regla de
+     reporte del broadcast msg 67: último mensaje del
+     director → reporte obligatorio).
+- **Entregables:** msg 70 del canal Ling-3.1-Flash.
+- **Recepción:** msg 71 del director (00:37:21):
+  encargo BUG-133 — "NO está arreglado... Fix:
+  cambiar por notif.push(...)".
+
+### L-25 — Encargo msg 71: BUG-133 corregido (toasts de crafting visibles) — `[x]` COMPLETADA (2026-10-12)
+
+- **Qué era:** fix de BUG-133
+  (`crafting_feedback.gd:119` llamaba
+  `notif.show_notification()`, método inexistente →
+  toasts de crafting invisibles, solo consola).
+- **Qué hice:**
+  1. **Fix** (`crafting_feedback.gd:114-121`):
+     guard `has_method("push")` +
+     `notif.push({"text": texto, "type":
+     <ToastType>, "icon": tipo})`; mapeo "ok"→ITEM
+     (📦), "descubrimiento"/"fallo"→EVENT (🔔).
+  2. **Corrección al fix sugerido (msg 71):** las
+     claves reales de `push()` son `text`/`type`
+     (`notification_service.gd:67-68`), NO
+     `texto`/`tipo` — con las claves del msg 71 el
+     toast se crearía vacío (`_spawn_node` lee
+     `text`/`type`, L94-95).
+  3. **Test headless nuevo**
+     `scripts/crafting/test_m16_crafting_toast.gd`:
+     **9 checks / 0 fallos / EXIT 0** (Godot
+     4.7.2, autoload real `/root/NotificationService`).
+     Debug: la v1 del test creaba un nodo
+     duplicado "NotificationService" en /root — el
+     autoload ya existe desde el boot; la v2 usa
+     el autoload real (camino runtime). Parse fix:
+     `get_node_or_null` es de Node, no de
+     SceneTree → `root.get_node_or_null(...)`.
+  4. **BUG-133 → RESUELTO** en
+     `DOCUMENTACION/11-BUGS.md` (tabla §5 +
+     ficha §6 con código y evidencia).
+- **Entregables:** msg 72 del canal
+  Ling-3.1-Flash (00:56:22) + test M16 +
+  11-BUGS.md actualizado.
+- **Recepción:** msg 73 del director
+   (00:58:26): BUG-133 ACEPTADO ("Tu fix es
+   correcto"). Recepción msg 74
+   (01:01:34, regla broadcast msg 67).
+
+### L-26 — Sesión cron: BUG-133 verificado (test v2 corregido) + documentación cerrada — `[x]` COMPLETADA (2026-10-12)
+
+- **Qué era:** cierre del encargo msg 71
+   (BUG-133) desde la revisión del canal: el
+   test de verificación v1 daba 2 FAILURES
+   (falso negativo) y quedaban pendientes
+   log, M53 L121 y notas del agente.
+- **Qué hice:**
+   1. **Diagnóstico del falso negativo:** en
+      `--script` headless los autoloads SÍ
+      instancian al boot; el test v1 creaba
+      un nodo duplicado "NotificationService"
+      (Godot lo renombra) y `_notificar()`
+      (ruta absoluta) empujaba al autoload
+      real → conteo 0.
+   2. **Test v2 corregido**
+      (`test_m16_crafting_toast.gd`): autoload
+      real `/root/NotificationService`, conteo
+      relativo `antes`, limpieza `clear_all()`,
+      E-31 documentado → **9 checks / 0 fallos
+      / EXIT 0**.
+   3. **Regresión `test_crafting.gd`: 0
+      fallos / EXIT 0.**
+   4. **Encoding UTF-8 sin BOM** verificado en
+      ambos `.gd`.
+   5. **NUL reparado** en
+      `DOCUMENTACION/16-Crafting/plan-actual/
+      04-Codigo.md` (posición 24359 → '0',
+      byte-exacto, longitud preservada) +
+      Notas del Agente BUG-133 añadidas.
+   6. **M53 `05-Checklist.md` L121:**
+      correlato BUG-133 → RESUELTO (re-escopo
+      SFX sigue pendiente, dueño M91).
+- **Entregables:** Log 1723 + test v2 + docs
+   (msg 72/74 ya cubren la entrega al
+   director; no se requiere msg 75).
+- **Recepción:** msg 73 del director (BUG-133
+   ACEPTADO, "Tu fix es correcto").
+
+### L-27 — Encargo msg 78: M83-Licencias barrido (núcleo ampliado) — `[x]` COMPLETADA (2026-10-12)
+
+- **Qué era:** encargo del director (msg 78): "Amplía,
+   no recrees" el núcleo de M83
+   (`license_scanner.gd`, `license_validator.gd`,
+   `license_policy.gd`), test headless, no tocar
+   CHECKLIST-GLOBAL, no commit, UTF-8, reportar en canal.
+- **Qué hice:**
+   1. **Ampliación** `license_scanner.gd`:
+      `verificar_uso_comercial()` (B.9), `detectar_dual()`
+      (B.14), `verificar_integridad()` (G.9),
+      `include_in_build()` (C.5), `generate_notice(...,
+      build_version)` (C.6), `save_notices(..., build_version,
+      formato)` txt/md/json + copias con texto original
+      (C.4/G.6) + `_notices_md()`.
+   2. **Verificado stale → [x]:** B.4/B.7/B.8, B.11/B.12/B.13,
+      C.2/C.8/C.9 (existían, mal marcados).
+   3. **Test nuevo** `test_m83_barrido.gd`: **37 checks,
+      0 fallos, EXIT 0** (2 bugs de test corregidos: afirmación
+      `is_empty` vs INFO/WARN de obligaciones; tilde
+      "atribución").
+   4. **Regresiones:** scanner agnes 24/0 EXIT 0; validator
+      17/0 EXIT 0.
+   5. **Checklist M83:** 19 ítems `[x]`, Totales corregido
+      (stale 32 → real 34 → ahora **53/47/0**), Reserva actual
+      + sección Iteración 5.
+   6. **Encoding:** UTF-8 sin BOM (BOM removido de
+      `license_scanner.gd`).
+   7. **Entrega:** msg 80 del canal (Responde a msg 78).
+- **Cumplimiento:** CHECKLIST-GLOBAL no tocado ✓, sin commit ✓.
+- **Lo que NO hice (honestidad):** §D/§E/§F (M72/M117/M55/M71),
+   G.1-G.5/G.10, H.9/H.10, §I — fuera de alcance o de otros
+   módulos dueños.
+- **Entregables:** msg 80 + Log 1730 + test + docs.
 
 ## Candidatos de nicho (sujeto a L-01)
 

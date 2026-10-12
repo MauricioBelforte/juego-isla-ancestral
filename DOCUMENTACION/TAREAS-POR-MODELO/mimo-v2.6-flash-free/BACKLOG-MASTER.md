@@ -601,6 +601,18 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - M97: 🟡 174/195
 - M50: 🟡 29/142
 - M58: 🟡 131/183 (confirmado sano)
+- M113: ✅ 132/132 (stepfly implementó L70)
+- M35: fix H10 aplicado (DeepSeek), suite 60/0
+- M83: 32/100 (agnes iter 1-3)
+- M97: ✅ 195/195 cerrado + 6 plantillas creadas
+
+### Delegaciones hechas
+- atria: commit documentación (msg 14)
+- s2: QA M83 iter4 (en espera)
+- DeepSeek: H5/H6 M50 (test_distribucion.gd)
+- Hy3: M113 L70 (ya implementado por stepfly, verificar)
+- agnes: M83 iter4 o M58
+- stepfly: M58 o M74
 
 ---
 
@@ -627,14 +639,26 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 
 ### Asignaciones hechas
 - HUD 13 paneles → agnes (RESUELTO)
-- M35+M50 → DeepSeek (en curso)
-- M51+M58 → Hy3 (re-QA hecha)
+- M35+M50 → DeepSeek (H5/H6 corregidos, msg 165)
+- M51+M58 → Hy3 (re-QA hecha) → Hy3 eligió M128
 - M74 → Step 5 (fix autorizado)
-- Ling → Opción 3 coherencia
-- s2 → QA M118
+- Ling → M113 QA (hecho, msg 42)
+- s2 → M97+M113 QA (hecho, msg 251) → M50 QA o M35
+- Step 5 → M58 lote 1 (hecho, msg 128) → lote 2
+- Haiku → M155 decisiones (asignado)
+- s3 → buscar tareas (asignado)
+- agnes → M83 iter4 (pendiente)
+
+### Ronda 2026-10-11 18:22-18:35
+- M97 ✅ sellado (s2 QA, Log 1671)
+- M113 ✅ sellado (Ling + s2 doble QA)
+- M50 H5/H6 corregidos (DeepSeek, Log 1672)
+- M58 lote 1: 131→135/183 (stepfly, Log 1673)
+- M113 L70 cita falsa corregida (Hy3, Log 1670)
+- Delegaciones: s2→M50/M35, Haiku→M155, s3→buscar tareas
 
 ### Cuellos resueltos
 - ✅ Cuello 1: HUD 13 paneles (agnes)
 - ⏳ Cuello 2: M45-Arte-3D (sin agente 3D)
 - ⏳ Cuello 3: 23 stale restantes (parcialmente asignados)
-- ⏳ Cuello 4: M155 3 decisiones (pendiente mío)
+- ⏳ Cuello 4: M155 3 decisiones → Haiku
