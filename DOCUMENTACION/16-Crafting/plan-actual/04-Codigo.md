@@ -356,7 +356,7 @@ En builds release los `print` se eliminan o se compilan condicionados (`if OS.is
 
 ### Evidencia
 - Salida de test: [M16] ¡Receta ancestral!: Talismán ancestral y === TEST M16 CRAFTING: 0 fallo(s) ===.
-- Archivos tocados: scripts/crafting/crafting_feedback.gd, DOCUMENTACION/16-Crafting/plan-actual/04-Codigo.md,  5-Checklist.md, CHECKLIST-GLOBAL.md, guía 08, ESTADO-PARALELO.md. Log 512.
+- Archivos tocados: scripts/crafting/crafting_feedback.gd, DOCUMENTACION/16-Crafting/plan-actual/04-Codigo.md, 05-Checklist.md, CHECKLIST-GLOBAL.md, guía 08, ESTADO-PARALELO.md. Log 512.
 
 ### Lo que NO pude hacer (honestidad obligatoria)
 - RF9 preview 3D real: depende de M45 (assets), fuera de alcance M16.
@@ -368,3 +368,31 @@ En builds release los `print` se eliminan o se compilan condicionados (`if OS.is
 - Retomar RF9 cuando M45 provea ItemData.preview_mesh.
 - Retomar RF12 cuando M91/M52 tengan núcleo.
 - Retomar RF14 cuando M38/M53 avancen: agregar más recetas con origen: compra + precio_pergamino.
+
+## Notas del Agente — Fix BUG-133: toasts de crafting visibles (Ling 3.1 Flash / Kilo Code) — Log 1723
+
+**Modelo:** Ling 3.1 Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-12 01:05
+**Estado:** Completado — BUG-133 RESUELTO (encargo director mimo msg 71).
+
+### Lo que hice
+- **Fix** (`scripts/crafting/crafting_feedback.gd:114-122`, aplicado por la instancia hermana de Ling-3.1-Flash — msg 72): `_notificar()` reescrito — guard `has_method("push")` (no `show_notification`, que NO existe en NotificationService) + `notif.push({"text": texto, "type": <ToastType>, "icon": tipo})`.
+- **Corrección al fix sugerido en msg 71:** las claves reales de `push()` son `text`/`type` (`notification_service.gd:67-68`), NO `texto`/`tipo` — `_spawn_node` lee `toast.get("text")`/`toast.get("type")` (L94-95); con `"texto"`/`"tipo"` el toast se crearía vacío (silencioso, peor que el bug original).
+- Mapeo: `"ok"` → `ToastType.ITEM` (📦 obtención — el crafting produce items); `"descubrimiento"`/`"fallo"` → `ToastType.EVENT` (🔔).
+- **Test nuevo** `scripts/crafting/test_m16_crafting_toast.gd` (headless): **9 checks / 0 fallos / EXIT 0** (Godot 4.7.2). Verifica contra el autoload real `/root/NotificationService` — en modo `--script` los autoloads de `project.godot` SÍ se instancian al arrancar; la primera versión del test creaba un nodo duplicado bajo root (Godot lo renombra) y contaba 0 toasts (falso negativo corregido con conteo relativo `antes` + limpieza `clear_all()`).
+- **Regresión** `test_crafting.gd`: **0 fallos / EXIT 0**.
+- **Encoding:** ambos `.gd` UTF-8 sin BOM verificados.
+- **Reparación colateral:** este archivo (`04-Codigo.md`) tenía 1 byte NUL incrustado (posición 24359, donde debía ser "0" de "05-Checklist.md") que bloqueaba el read tool — reparado byte-exacto (NUL → '0', longitud preservada 25066).
+
+### Evidencia
+- `=== TEST M16 BUG-133: 9 checks, 0 fallo(s) ===` EXIT=0
+- `=== TEST M16 CRAFTING: 0 fallo(s) ===` EXIT=0
+- BUG-133 → RESUELTO en `DOCUMENTACION/11-BUGS.md` (tabla §5 + ficha §6).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- El SFX de los toasts sigue sin existir (NotificationService es visual-only por diseño) — re-escopo de M53 H.L121 pendiente, dueño M91/FeedbackDirector. No es parte de BUG-133.
+
+### Recomendaciones para el próximo agente
+- Al escribir tests headless contra autoloads: NO crear instancias propias con el mismo nombre — el autoload ya vive en `/root` desde el boot (E-31 documentado en el header del test).
+- Al llamar `push()`: usar las claves reales `text`/`type` (inglés) y un `ToastType`, no Strings libres.

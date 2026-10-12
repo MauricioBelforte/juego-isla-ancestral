@@ -112,14 +112,14 @@ func _tocar(player: AudioStreamPlayer) -> void:
 
 
 func _notificar(texto: String, tipo: String) -> void:
-	var notif: Node = get_node_or_null("/root/NotificationService")
-	if notif == null:
+	var notif = get_node_or_null("/root/NotificationService")
+	if notif == null or not notif.has_method("push"):
 		print("[M16] %s" % texto)
 		return
-	if notif.has_method("show_notification"):
-		notif.show_notification(texto, tipo)
-	else:
-		print("[M16] %s" % texto)
+	var tipo_toast = notif.ToastType.EVENT
+	if tipo == "ok":
+		tipo_toast = notif.ToastType.ITEM
+	notif.push({"text": texto, "type": tipo_toast, "icon": tipo})
 
 
 func _emitir_particulas_doradas(color: Color = Color(1.0, 0.85, 0.35, 1.0), cantidad: int = 24, lifetime: float = 0.9) -> void:
