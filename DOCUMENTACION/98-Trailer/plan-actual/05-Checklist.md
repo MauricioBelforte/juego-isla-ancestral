@@ -1,10 +1,10 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
 
-# 05-Checklist.md — Módulo 98: Trailer (101 ítems)
+# 05-Checklist.md — Módulo 98: Trailer (102 ítems)
 
 ## Convención
-- `[ ]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
+- `[x]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
 - Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
 
 ## 1. Definir tráiler teaser (1º)
@@ -212,3 +212,36 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 98 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## Auditoría anti-inflación §21.8.2.b — atria (Atria-Dawn-Preview) / Kilo Code, 2026-10-12 (Log 1758, encargo director msg #38)
+
+> El encargo llegaba con conteos que **no coincidían con el disco** ("36/63, 25 [ ] + 2 [?]"). Verificación
+> con regex estricto sobre este archivo: **102 [x] / 0 [ ] / 0 [?] = 102**, coincidente con la línea Totales
+> (sin drift) y con la fila de CHECKLIST-GLOBAL (`✅ Completado`, 102/102, QA §21.8 verificado por Hy3,
+> Log 1615, 2026-10-10).
+
+**Muestreo de 8 ítems `[x]` con verbo de definición** (regla 21.8.2.b: verificar frase literal en la sección
+citada de `03-Diseno.md`, 83 l.):
+
+| Ítem (sección del checklist) | Cita | Encontrado en 03-Diseno.md |
+|---|---|---|
+| §2 "tráiler de gameplay de 60-90 s" | §1 | "Gameplay \| 60-90 s \| Beta (M141)" ✓ |
+| §2 "ritmo: cortes cada 2-3 s" | §2 | "cortes cada 2-3 s" ✓ |
+| §11 "plano de una mecánica de puzzle" | §3 | "Entrada al templo + una mecánica" ✓ |
+| §16 "versión 16:9 (3840×2160 máx)" | §6 | "16:9 horizontal \| 3840×2160 máx" ✓ |
+| §19 "tamaño 1920×1080 (YouTube)" | §7 | "1920×1080 (YouTube)" ✓ |
+| §14 "prohibidos: los 6 sellos" | §8 | "Los 6 sellos \| Lore central (M148)" ✓ |
+| §15 "subtítulos en los 6 idiomas" | §5 | "Idiomas: 6 (es, en, pt, fr, de, it)" ✓ |
+| §20 "acta de licencia por track" | §9 | "contrato/licencia en la auditoría de M84" ✓ |
+
+**8/8 verificados.** Artefactos en disco: `03-Diseno.md` (83 l.), `docs/marketing/guion-trailer.md` (25 l.),
+`data/marketing/trailer_spec.json` (12 tomas, 75 s, 6 idiomas, 3 anti-spoiler),
+`scripts/marketing/trailer_validator.gd`, `scripts/marketing/test_trailer_m98.gd` (12 checks: 5 data + 2
+validator + 5 errores; exit 0/1). El sello ✅ de Hy3 (Log 1615, modelo distinto, Godot 4.7.2 real) es **válido**.
+
+**Correcciones documentales (sin tocar marcas):** encabezado "(101 ítems)" → "(102 ítems)" y convención
+"`[ ]` = completado" → "`[x]` = completado" (error tipográfico que hacía ambigua la convención).
+
+**Conclusión:** no hay deep work pendiente de mi perfil en M98. El módulo es diseño + capa de validación, ya
+verificada. La nota de drift del 2026-09-20 ("4 [x] / 98 [ ]") quedó obsoleta por los flips Familia B de
+agnes-3-flash (2026-10-10), verificados por el director en disco y por Hy3.
