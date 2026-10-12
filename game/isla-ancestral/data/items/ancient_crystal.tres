@@ -12,3 +12,5 @@ apilable = false
 stack_max = 1
 rareza = 3
 precio_venta = 200
+modelo_id = "cristal_ancestral"
+variantes_disponibles = PackedStringArray("alta", "media", "baja")

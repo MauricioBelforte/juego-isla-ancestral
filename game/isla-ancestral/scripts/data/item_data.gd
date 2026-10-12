@@ -74,6 +74,12 @@ enum Interaccion {
 @export var material: String = ""
 @export var color: String = ""
 @export var variante: String = ""
+# M166 — Variantes de assets por perfil de rendimiento (03-Diseno.md §6).
+# modelo_id vincula este item con el asset 3D del pipeline Blender (M166/M108);
+# AssetProfile.ruta(modelo_id) resuelve la variante segun el perfil activo.
+@export var modelo_id: String = ""
+@export var usa_multimesh: bool = false
+@export var variantes_disponibles: PackedStringArray = ["media", "baja"]
 @export var requiere_herramienta: String = ""
 @export var exportable: bool = true
 @export var icono: Texture2D = null      # M45 — placeholder opcional

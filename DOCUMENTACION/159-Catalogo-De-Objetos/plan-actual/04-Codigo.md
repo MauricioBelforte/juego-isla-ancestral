@@ -98,3 +98,54 @@ enum Interaccion { NINGUNA, SENTARSE, DORMIR, ALMACENAR, COCINAR,
 - Completar catálogo por categoría hasta >=300 objetos.
 - Agregar tests de `get_items_by_source` y carga headless Godot.
 - Integrar catálogo con M14/M16/M18/M39 cuando estén listos.
+
+## 7. Integracion y Validacion (lote DeepSeek-V4.1-Flash, 2026-10-11)
+
+Implementa la seccion "Integracion y Validacion" del `05-Checklist.md` (L210-L219).
+
+- Validador: `scripts/data/validar_catalogo_m159.gd` (exit 0 sin hallazgos, 1 con hallazgos, 3 ciego).
+- Suite headless: `scripts/data/test_catalogo_m159.gd` (17 checks / 0 fallos / EXIT 0 x3).
+
+### 7.1 Medicion del catalogo (Godot 4.7.2 headless, 2026-10-11)
+
+| Condicion (checklist) | Linea | Resultado medido | Estado |
+|---|---|---|---|
+| IDs unicos | L210 | 121 IDs / 0 duplicados / 0 sin id | OK |
+| Toda categoria con objetos | L211 | 16/16 categorias (minimo 3 objetos) | OK |
+| Todo objeto con icono | L212 | 0/121 con icono (`icono == null` en todos) | GAP |
+| Interactivo con interaccion | L213 | 0 violaciones | OK |
+| Colocable con tamano | L214 | 0 violaciones (todos `tamano >= (1,1)`) | OK |
+| Objeto de tienda con precio | L215 | 0 sin ningun precio; 121 con `precio_venta>0`, 93 con `precio_compra>0` | OK |
+| Total >= 300 objetos | L216 | 121 / 300 (faltan 179) | GAP |
+
+**Gaps abiertos (medidos, no bloquean la suite):**
+- L212: ningun `.tres` tiene `icono` asignado (M45 debe producir los `icon_*.png`).
+- L216: el catalogo tiene 121 objetos; el objetivo de diseno es >= 300.
+
+### 7.2 Integracion con M14 (Inventario)
+
+Consumo REAL y medido: `scripts/inventario/inventario_service.gd` resuelve cada slot con
+`get_node_or_null("/root/ItemDatabase")` + `db.get_item(s.item_id)` (L171-172 y L305-307).
+Contrato: `ItemDatabase.get_item(id: String) -> ItemData` (null si el id no existe).
+
+### 7.3 Integracion con M16 (Crafting)
+
+`scripts/crafting/crafting_recipe.gd` declara `materiales: {item_id: cantidad}` y
+`resultado_id: String` (L21, L23): todos los ids son ids del catalogo M159.
+`crafting_service.gd` NO llama a `ItemDatabase` directamente; opera contra el inventario
+(`inv.count_item(id)`), asi que la integracion es INDIRECTA (el id existe porque M14 lo
+resolvio contra el catalogo). **No hay validacion** de que `materiales`/`resultado_id`
+existan en `data/items/` -> deuda (validador de recetas).
+
+### 7.4 Integracion con M18 (Casas)
+
+**NO implementada.** `scripts/houses/furniture_data.gd` (`FurnitureData`) define su propio
+esquema (`nombre`, `categoria: String`, `capacidad_slots`, `ancho/profundo/alto`,
+`requiere_superficie`, `requiere_pared`) y **no tiene `item_id`**: el mueble de M18 no esta
+vinculado a un `ItemData` de M159. `scripts/houses/house_decor.gd` (`HouseDecor`) coloca por
+`mueble_id: String` (L72) contra ese esquema propio, sin consultar `ItemDatabase`.
+La tabla de la seccion 1 afirmaba que `scripts/house/house_decor.gd` "coloca objetos del
+catalogo" — es drift: la ruta real es `scripts/houses/house_decor.gd` y no hay vinculo por id.
+Para cerrar la integracion, M18 debe agregar `item_id: String` a `FurnitureData` y validarlo
+contra `ItemDatabase`.
+

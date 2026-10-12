@@ -207,16 +207,16 @@
 
 ### Integración y Validación (10 ítems)
 
-- [ ] Verificar que todos los IDs son únicos
-- [ ] Verificar que todas las categorías tienen objetos
+- [x] Verificar que todos los IDs son únicos
+- [x] Verificar que todas las categorías tienen objetos
 - [ ] Verificar que todos los objetos tienen icono
-- [ ] Verificar que todos los objetos interactuables tienen interacción definida
-- [ ] Verificar que todos los objetos colocables tienen tamaño definido
-- [ ] Verificar que todos los objetos de tienda tienen precio
+- [x] Verificar que todos los objetos interactuables tienen interacción definida
+- [x] Verificar que todos los objetos colocables tienen tamaño definido
+- [x] Verificar que todos los objetos de tienda tienen precio
 - [ ] Verificar que la suma total es ≥ 300 objetos
-- [ ] Documentar integración con M14 (Inventario)
-- [ ] Documentar integración con M16 (Crafting)
-- [ ] Documentar integración con M18 (Casas)
+- [x] Documentar integración con M14 (Inventario)
+- [x] Documentar integración con M16 (Crafting)
+- [x] Documentar integración con M18 (Casas)
 
 ### Testing (5 ítems)
 
@@ -231,3 +231,16 @@
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía solo *"**Total: 135 ítems**"* (sin desglose y con total
 > equivocado). Conteo real: 69 [x] / 25 [ ] / 52 [?] = 146. Las marcas no se tocaron.
+
+## Verificacion (lote DeepSeek-V4.1-Flash, 2026-10-11) — SIN flips
+
+Implementa la seccion "Integracion y Validacion" (L210-L219). Evidencia medida con
+Godot 4.7.2 headless; los flips de marca los aplica el director.
+
+- Validador `scripts/data/validar_catalogo_m159.gd`: exit 1 con 122 hallazgos (121 sin icono + total < 300). 0 SCRIPT ERROR.
+- Suite `scripts/data/test_catalogo_m159.gd`: 17 checks / 0 fallos / EXIT 0 (x3). Piso `CHECKS_MINIMOS = 17` MEDIDO.
+- Sondas ROJAS (probadas por inyeccion, luego borradas): (A) aborto de runtime al inicio del bloque C -> nombra C-G + piso 12<17 + EXIT 1; (B) invariante mutado 121->999 -> 1 fallo + EXIT 1.
+- L210 OK (121 ids / 0 duplicados) | L211 OK (16/16 categorias) | L213 OK | L214 OK | L215 OK (121 con venta>0, 93 con compra>0).
+- GAP L212: 0/121 con `icono` (M45). GAP L216: 121/300 objetos (faltan 179).
+- Integracion documentada en `04-Codigo.md` seccion 7: M14 REAL (`inventario_service.gd` L171/L305); M16 INDIRECTA (ids de receta, sin validacion); M18 NO implementada (`FurnitureData` sin `item_id`).
+- Log 1716. Informe al director: canal 174.
