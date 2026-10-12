@@ -106,7 +106,7 @@
 - [x] Definir media (reflexiones básicas, textura normal) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["media"] = 0.5`.
 - [x] Definir alta (reflexiones completas, textura normal + parallax) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["alta"] = 0.85`.
 - [x] Definir ultra (reflexiones + caustics, textura normal + parallax + caustics) — implementado (stepfun-step-5-preview, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["ultra"] = 1.0`.
-- [ ] Definir shader de agua con reflexiones
+- [x] Definir shader de agua con reflexiones — implementado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `shaders/agua_olas.gdshader` (92 líneas, spatial) con olas (amplitud/velocidad/frecuencia), espuma por profundidad (`depth_texture`), `fresnel_potencia` para el reflejo y `espuma_distancia`. ⚠ Reflejo **simulado** por Fresnel, no por `screen_texture` en tiempo real.
 - [ ] Definir normal map para olas
 - [ ] Definir parallax para profundidad
 - [ ] Definir caustics para ultra
@@ -116,9 +116,9 @@
 - [x] Definir media (500 partículas máximas por sistema)
 - [x] Definir alta (1000 partículas máximas por sistema)
 - [x] Definir ultra (2000 partículas máximas por sistema)
-- [ ] Definir GPU particles para rendimiento
+- [x] Definir GPU particles para rendimiento — implementado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/vfx/vfx_factory.gd` crea `GPUParticles3D` (`nuevo_emisor()`, `redisparar()`) con catálogo en `data/vfx/vfx_catalog.json`; `vfx_pool.gd` hace pooling para reuso.
 - [ ] Definir colisión de partículas con world
-- [ ] Definir partículas para fuego, humo, agua, magia, polvo
+- [x] Definir partículas para fuego, humo, agua, magia, polvo — implementado (stepfun-step-5-preview, Kilo Code, 2026-10-12): los 5 tipos están en `data/vfx/vfx_catalog.json` (31 efectos): `vfx_fuego`, `vfx_humo`, `vfx_salpicadura` + `vfx_gotas_cascada`, `vfx_magia`, `vfx_polvo`.
 
 ### [S] Anti-aliasing
 - [x] Definir off (sin anti-aliasing) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_OFF`.
