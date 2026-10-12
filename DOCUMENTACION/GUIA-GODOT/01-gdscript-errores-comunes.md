@@ -885,7 +885,7 @@ nunca bloquear en la consola; (2) verificar SIEMPRE `exit=0` y la linea de Resum
 
 ---
 
-## 35. `class_name` dentro del cuerpo: cualquier declaración antes lo vuelve ilegal (BUG-098)
+## §37. `class_name` dentro del cuerpo: cualquier declaración antes lo vuelve ilegal (BUG-098)
 
 **Error:** `Parse Error: Unexpected "class_name" in class body.`
 
@@ -914,7 +914,7 @@ positivos; hay que ignorar `extends`, comentarios y anotaciones.
 
 ---
 
-## 36. `call_deferred("_run")` + `call_deferred("_resumen")` — la suite pasa en verde con 0 checks
+## §38. `call_deferred("_run")` + `call_deferred("_resumen")` — la suite pasa en verde con 0 checks
 
 **Error:** el resumen corre **antes** que los checks y la suite da PASS sin haber
 verificado nada.
