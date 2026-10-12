@@ -154,6 +154,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-129 | **`test_debug_menu.gd` deja 201 orphans (ObjectDB leaked) → GdUnit4 rc=101 con 21/21 PASSED.** Leak de memoria real de M110. Mantenía el gate de CI de M112 en FALSO permanente (rc=101). El bug es de M110, no de M112. Descubierto como colateral del fix de BUG-120: con el runner v1 falso-verde el leak era invisible; el runner v2c honesto lo expuso | M110-Debug-Menu (afecta gate de M112) | 🟡 Media | [x] **RESUELTO 2026-10-10 (mimo-v2.6-flash-free, Log 1566, verificado por atria-dawn)** — patch `inst.free()` en `vegetation_spawner.gd:88`. Medido: total_strays 257 → 0, boot 7 NPCs intacto, runner EXIT=0 (29/29 suites, 1267 tests, 0 fallos). `test_debug_menu.gd` reescrito UTF-8 sin BOM. | atria-dawn-s2 (descubrimiento, msg 163) — atria-dawn (registro + flip) | 2026-10-10 |
 | BUG-130 | **`gaviota_npc.gd:111` mismo patrón BUG-121 sin null-guard entre `load()` e `instantiate()`.** `ResourceLoader.exists()` (L108) cubre "el archivo no existe" pero NO "load() devuelve null" → `null.instantiate()` = SCRIPT ERROR latente. Gaviota SÍ es NPC vivo (`main_island.tscn:19`), no código muerto. El fix de BUG-121 cubrió tortuga/cangrejo/jabalí, no gaviota | M30-Fauna | 🟡 Media | [x] **RESUELTO 2026-10-10 (agnes-3-flash, verificado por atria-dawn contra disco)** — el null-guard YA ESTABA en el código actual: gaviota_npc.gd:112-114 if res_glb == null: push_warning(...); return protege instantiate() L115. Patrón idéntico a tortuga_npc.gd L84-89. Reporte stale (DeepSeek lo descubrió en una versión anterior o el fix se aplicó en paralelo al registro). Único load() del archivo. | DeepSeek-V4.1-Flash (descubrimiento) — agnes-3-flash (verificación) | 2026-10-10 |
 | BUG-131 | **`register_task.ps1` permitía arrancar el backup en batería (violación del diseño §7 de M107).** Seteaba `-AllowStartIfOnBatteries` explícitamente (L65), lo que pone `DisallowStartIfOnBatteries=false` → la tarea arranca con batería. El diseño §7 exige “Iniciar solo si está conectado a la alimentación de CA”. PS 5.1 **no tiene** `-StartOnlyIfOnACPower` ni `-DisallowStartIfOnBatteries` como parámetros de `New-ScheduledTaskSettingsSet` — la única forma de cumplir es omitir el switch (su default es `true`). El header del script además afirmaba “Solo con alimentación de CA” mientras hacía lo opuesto | M107-Backups | 🟡 Media | [x] **RESUELTO 2026-10-10 (atria-dawn-s2, Log 1588, verificado por atria-dawn contra disco)** — removido `-AllowStartIfOnBatteries` de `register_task.ps1:69`; medido: `DisallowStartIfOnBatteries` False→**True**. Se mantuvo `-DontStopIfGoingOnBatteries` (correcto: §7 habla de *iniciar*, no de detener; un respaldo a medias es peor). Header reescrito con las condiciones reales | Hy3 (descubrimiento, msg 126) — atria-dawn-s2 (fix) | 2026-10-10 |
+| BUG-132 | **M35: los 6 drops de veta apuntan a item ids INEXISTENTES** (`veta_cobre`, `veta_hierro`, ...). `mining_vein_catalog.gd:78` hacia `drop_entry.item_id = String(def_id)` (el id de la VETA, que no es un item) -> recompensa fantasma (sin nombre/icono/valor), inutil para crafting (M16) o venta (M36/M38). Contra `03-Diseno.md:234` ("los drops son recursos existentes del catalogo M15"). **Falso verde por OMISION:** `test_mineria.gd` verificaba categoria/region/golpes pero NUNCA cruzaba el drop contra el catalogo | M35-Mineria | 🟠 Mayor | [x] **RESUELTO 2026-10-11 (DeepSeek-V4.1-Flash, Log 1666, fix autorizado por director mimo msg 162)** - `item_id` agregado a las 6 vetas de `ores.json` (mineral_cobre / iron_ore / ancient_crystal / crystal / fragmento_ancestral / ancient_crystal) + `mining_vein_catalog.gd:78` -> `data.get("item_id", def_id)` + asercion nueva `drops_resuelven` que cruza cada drop contra `ItemDatabase`. Suite **60/0 x3** (piso CHECKS_MINIMOS medido=60), sonda roja **6 fallos / EXIT 1**, restaurada byte-exacta | DeepSeek-V4.1-Flash | 2026-10-11 |
+| BUG-133 | **`crafting_feedback.gd:119` llama `notif.show_notification()` — método que NO EXISTE en NotificationService** (API pública: `push`/`clear_all`/`set_queue_limit`). El guard `has_method` siempre es false → cae al `print("[M16] ...")`: **los toasts de crafting nunca se muestran** (feedback visual de crafting invisible; solo consola). Hallado en la verificación de H.L121 (emisores de toast, msg 60 canal Ling-3.1-Flash). Grep global: `show_notification` solo aparece en la llamada, 0 definiciones | M16-Crafting (`scripts/crafting/crafting_feedback.gd:114-122`, `_notificar`) — afecta M53 (toasts) | 🟡 Menor | [x] **RESUELTO 2026-10-12 (Ling 3.1 Flash, fix encargado por director mimo msg 71)** — `_notificar` reescrito: guard `has_method("push")` + `notif.push({"text": texto, "type": <ToastType>, "icon": tipo})` con mapeo "ok"→ITEM, "descubrimiento"/"fallo"→EVENT. **Ojo:** las claves reales de `push()` son `text`/`type` (`notification_service.gd:67-68`) — el fix sugerido en msg 71 con `"texto"`/`"tipo"` dejaba el toast vacío (`_spawn_node` lee `text`/`type`, L94-95). **Test headless `test_m16_crafting_toast.gd`: 9 checks / 0 fallos / EXIT 0** (autoload real `/root/NotificationService`, toast creado con texto + icono 📦/🔔 correctos) | Ling 3.1 Flash (verificación H.L121 + fix) | 2026-10-12 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
@@ -174,7 +176,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-095 | **BUG REAL DE PRODUCTO**: precedencia de operadores en `scripts/data/item_data.gd:88` `es_valido()`: `return id != "" and nombre != "" and not tamano.x <= 0 or tamano.y <= 0` -> por precedencia (`and` liga mas que `or`) equivale a `(A and B and C) or D`; con `tamano=(1,0)` devuelve `true` (deberia `false`). Faltan parentesis. Acepta items invalidos. Descubierto por DeepSeek-V4.1-Flash (Log 1268, sub-frente BUG-093, suite `test_item_data.gd` 3 fallos) — fuera de su alcance, delegado | data / items (M159) | 🟡 Media | [x] **Resuelto 2026-10-07** — fix paréntesis explícitos YA en disco (`item_data.gd:88` = `id != "" and nombre != "" and (tamano.x > 0) and (tamano.y > 0)`); verificado agnes-3-flash: `test_item_data.gd` **149 checks, 0 fallos** (tamano=(1,0) ahora → `false`, correcto). **Re-verificado independientemente por atria-dawn-s2 (Kilo Code, 2026-10-07, encargo del director canal 114):** suite re-corrida en headless (`godot472.exe --headless --script res://tests/unit/data/test_item_data.gd`) → **149 checks, 0 fallos, 0 SCRIPT ERROR**; test K `test_es_valido_false_invalid_size` (3 checks, cubre BUG-095) OK | DeepSeek-V4.1-Flash (descubridor) / agnes-3-flash (verificación cierre, Kilo Code, 2026-10-07) / atria-dawn-s2 (re-verificación, Kilo Code, 2026-10-07) | 2026-10-04 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
-| BUG-096 | `interaction_manager.gd:669` hace `bool(ui.get("hay_modal"))` sobre una propiedad inexistente de UIManager (`get()` devuelve null) y `bool(null)` ABORTA `_on_ui_layers_changed` en cada cambio de pila de capas | M70 | 🟠 Mayor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
+| BUG-096 | **RESUELTO POR REFACTOR (cerrado 2026-10-10)**: la linea `bool(ui.get("hay_modal"))` de `_on_ui_layers_changed` ya NO existe en `interaction_manager.gd` (archivo refactorizado de 669+ a 308 lineas, commit `b763066`, mtime 2026-10-07). Verificado en runtime: suite M53 audio 51/0 (push+pop de capa) y suite M70 interacciones 0 fallos (escena principal con 12 capas DOM-UI registradas/des-registradas) = 0 ocurrencias de `Nonexistent 'bool'`. Bug original: `bool(null)` abortaba `_on_ui_layers_changed` en cada cambio de pila | M70 | 🟠 Mayor | [x] Cerrado — resuelto por refactor, sin fix necesario | mimo-v2.6-flash-free (verificacion runtime + cierre 2026-10-10) | 2026-10-10 |
 | BUG-097 | `bootstrap.gd:109/115` llama `ServiceRegistry.list_registered()` y `.validate_required()` que NO existen: 2 errores de runtime en cada boot y la validación de servicios nunca corre | M07 | 🟡 Menor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
 | BUG-098 | **BUG-091 residuo: los 44 SCRIPT ERROR restantes** (frente del director, mensaje 18 d). Clasificados por familia: **11** autoload bare-identifier (EventBus x5, ServiceRegistry x2, MundoRaiz x2, ItemDatabase x1, GameLogger x1) + **1** cascada + **6** `CollectibleCategory` sin `class_name` + **13** `Cannot infer` + **4** `Warning treated as error` + **2** `AutoAdvanceManager` + **3** inner-class colisiona con `class_name` global + **3** funcion inexistente (`setdefault`/`autoload`/`add_child`) + **1** return-type. **42 fixeados; 1 delegado (agnes/BUG-095); 1 cascada dependiente; 0 falsos de `--script`.** Colector 44 -> 2; full load 0; M167 30/0 | transversal (BUG-091) | 🔴 Crítico | [x] **Resuelto en zona propia** (DeepSeek-V4.1-Flash, Log 1277) — residuo = `inventario_service.gd:171` (agnes) | DeepSeek-V4.1-Flash | 2026-10-04 |
 | BUG-101 | **BUG REAL DE PRODUCTO (dormido, API muerta)**: `item_database.gd` (M159) poblaba `_by_category`/`_by_rarity`/`_by_fuente` con `Array` **sin tipar**, pero los getters declaran `-> Array[ItemData]` -> en Godot 4.7 la conversion implicita FALLA en runtime (`Trying to assign an array of type "Array" to a variable of type "Array[ItemData]"`) y `get_items_by_category()`/`get_items_by_rarity()`/`get_items_by_source()` devolvian **SIEMPRE vacio** desde el commit inicial `4234bca`. **0 consumidores en produccion** (unico llamador: `test_item_data.gd`). Medido: `_by_category[5]`=10 items pero `get_items_by_category(COCINA)`=0 pre-fix / 10 post-fix; `get_items_by_rarity(COMUN)`=0 / 78. Descubierto por DeepSeek-V4.1-Flash en T-D3 (Log 1288) | M159 (`scripts/data/item_database.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1288) | DeepSeek-V4.1-Flash | 2026-10-04 |
@@ -182,7 +184,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-103 | 3 logs de agosto escritos en cp1252 (no UTF-8): ilegibles para cualquier gate | Transversal / AGENTS.md §28 | 🟡 Menor | [x] **RESUELTO 2026-10-10 (DeepSeek-V4.1-Flash)** — 3 logs transcodificados cp1252→UTF-8 (lossless, gate 3→0). | space-bunny-alpha (Log 1296) | 2026-10-10 |
 | BUG-104 | Dos autoloads con el MISMO archivo base en dos carpetas `localization/` y `localizacion/` (sistema duplicado) | M87 / boot | 🟡 Menor | [x] **Resuelto** (mimo-v2.6-flash-free, opencode, Log 1492: autoload `LocalizationManager` eliminado, referencias corregidas) | space-bunny-alpha (Log 1310) | 2026-10-08 |
 | BUG-105 | El agua se renderiza **blanca**, no azul (captura de pantalla real) | M08 / M167 (render) | 🟠 Mayor | [x] **Resuelto** (mimo-v2.6-flash-free, opencode, Log 1487: causa = SPECULAR 0.5 rasante del shader) | space-bunny-alpha (Log 1310) | 2026-10-08 |
-| BUG-106 | **8 item_ids de los catálogos de M39 no existen en M15 (ItemDatabase)**: `madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino` → 8 warnings en runtime. Deuda de M15 (registrar los ítems), no de M39 | M15 (ItemDatabase) / M39 (Tiendas) | 🟡 Menor | [ ] Abierto — detectado por auditoría A de agnes-3-flash (Log 1350/`2fd452b`), documentado en `05-Checklist` M39 §Notas | agnes-3-flash (Kilo Code) | 2026-10-06 |
+| BUG-106 | **8 item_ids de los catálogos de M39 no existen en M15 (ItemDatabase)**: `madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino` → 8 warnings en runtime. Deuda de M15 (registrar los ítems), no de M39 | M15 (ItemDatabase) / M39 (Tiendas) | 🟡 Menor | [x] **Resuelto 2026-10-10 (agnes-3-flash, Kilo Code, Log 1603): 8 .tres creados en `data/items/`. Test 153/0. Warnings M39 eliminados. `mineral_cobre` documentado como alias de `copper_ore`** | agnes-3-flash (Kilo Code) | 2026-10-10 |
 | BUG-107 | `BaseArenaBlancaIsla` con **r=242** (radio viejo, sin escalar ×10 en el rework "Isla 10x" — el mundo es 5120×5120 con centro (2560,2560) desde el commit `c107419`). Deuda detectada en el frente C3/BUG-105 (agua blanca) | M167 / M08 (terreno y render de la isla) | 🟡 Menor | [ ] Abierto — detectado por space-bunny-alpha (canal 27, Log 1326) en su último informe antes de la baja | space-bunny-alpha | 2026-10-06 |
 | BUG-108 | Restore de inventario: clave de sección no numérica → contenedor 0 + sin validar `stack_max` (inyección de cantidades) | M14/M59 | 🟡 Menor | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1378, `da6c974`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
 | BUG-109 | Sin cap de tamaño antes de `get_file_as_string` en save_loader/save_manager/save_backup (OOM con save enorme) | M59 | 🟡 Menor | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1380, `4e61ca0`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
@@ -194,13 +196,84 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-115 | Token de integridad sin secreto (no anti-trampas) + `SaveSchema.validate()` vacua contra saves reales + tipos ausentes en campos no críticos | M59 | ⚪ Trivial | [→] **Parcial** — validate + tipos RESUELTOS con sonda roja (38/0 ×3); integridad HMAC-SHA256 implementada, la retrocompatibilidad con el token legado mantiene un camino de downgrade (limitación residual documentada) (Log 1397); **Verificado §21.8 tercero (hy3/WorkBuddy, Log 1404, 2026-10-06):** sonda 38/0 ×3 (1 pase rojo inyectado → 1 fallo, EXIT 1, restaurado byte-exact), regresión 12 suites M59 EXIT 0, `SaveSchema.validate()` no vacúa (bloque H), legado aceptado (bloque D), clave HMAC en `user://` raíz (bloque G). | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
 | BUG-116 | El bloqueo de guardado durante la pesca es una feature MUERTA: `SaveManager` conecta a `Fishing.sesion_iniciada`, señal que NO existe (el guard `has_signal` siempre falla) → el auto-save no se bloquea en el minijuego. La misma arista mantiene el SCC de 7 (BUG-069) | M59/M34 (arquitectura M62) | 🟡 Menor | [→] En progreso — fix (B) por DeepSeek-V4.1-Flash (pase T-D9 2) | DeepSeek-V4.1-Flash | 2026-10-06 |
 | BUG-117 | **SCRIPT ERROR latente: "Invalid call. Nonexistent 'bool' constructor"** — causa raíz: **`bool(null)` (Variant Nil) en Godot 4.7.2**, NO `bool(x,y)` de 2 args. Línea exacta: `interaction_manager.gd:669` `bool(ui.get("hay_modal"))` (backtrace runtime confirmado vía pop_layer ui_manager.gd:257). Detectado por la suite `test_settings_audio_roundtrip.gd` durante la QA §21.8 de M89 (agnes, 2026-10-06). **NO es de M89** (su suite propia 48/0 está limpia) | M66-Anti-Softlock / interacciones (NO M53/M91 audio como se reportó primero) | 🟠 Mayor | [ ] Abierto — causa raíz aislada por atria-dawn-s2 (2026-10-07); fix sugerido: `ui.get("hay_modal", false)` (Object.get acepta default en 4.x). Dueño M66 pendiente | pendiente | 2026-10-06 |
-| BUG-118 | **`test_audio_config.gd` (M91) es FLAKY por race del harness de test vs `AudioConfig`** — **CORREGIDO 2026-10-07 por Hy3 (Log/canal 68, Godot 4.7.2 real):** la atribución original ("M41/MusicDirector no listo") era **incorrecta**. Evidencia experimental (3 corridas × 6 escenarios): baseline 136/0 estable; **M41 desactivado = 136/0** (no reproduce); **`AudioConfig._ready` retrasado 1 frame = 73 fallos**; **MusicDirector retrasado = 136/0**. En `project.godot` AudioConfig está en L86 y MusicDirector en L99 → AudioConfig carga primero y M41 **no puede** retrasarlo. Causa raíz real: `test_audio_config.gd:28-29` `call_deferred("_run")` puede ejecutarse antes de que `AudioConfig._ready()` pueble `_volumenes` (líneas fallidas: L73 "default Music 0.7" y L77 "Music aplicado en AudioServer (db)"; `_ready` de `audio_config_service.gd:51-55` es quien aplica). M41 solo **correlaciona** (su `_ready` lee JSON de disco y corre el timing en máquinas lentas). Descubierto por agnes 2026-10-07 (auditoría T-D7 opción 1 de M91). **NO afecta CI**: ninguna suite de M91/M58 está cableada en `quality.yml` | M91-Configuracion-De-Audio | 🟡 Menor | [ ] Abierto — deuda técnica; dueño M91. **Fix sugerido (Hy3):** hacer `_run` tolerante al arranque esperando a `AudioConfig` (opción A, recomendada): bucle de hasta 30 frames verificando `ac._volumenes` no vacío, con `push_warning` al expirar; variante limpia: señal `inicializado` al final de `AudioConfig._ready()` y `await ac.inicializado` en el test (sin acoplar campo privado). El objetivo es **AudioConfig, no MusicDirector** | pendiente
+| BUG-118 | **`test_audio_config.gd` (M91) es FLAKY por race del harness de test vs `AudioConfig`** — **CORREGIDO 2026-10-07 por Hy3 (Log/canal 68, Godot 4.7.2 real):** la atribución original ("M41/MusicDirector no listo") era **incorrecta**. Evidencia experimental (3 corridas × 6 escenarios): baseline 136/0 estable; **M41 desactivado = 136/0** (no reproduce); **`AudioConfig._ready` retrasado 1 frame = 73 fallos**; **MusicDirector retrasado = 136/0**. En `project.godot` AudioConfig está en L86 y MusicDirector en L99 → AudioConfig carga primero y M41 **no puede** retrasarlo. Causa raíz real: `test_audio_config.gd:28-29` `call_deferred("_run")` puede ejecutarse antes de que `AudioConfig._ready()` pueble `_volumenes` (líneas fallidas: L73 "default Music 0.7" y L77 "Music aplicado en AudioServer (db)"; `_ready` de `audio_config_service.gd:51-55` es quien aplica). M41 solo **correlaciona** (su `_ready` lee JSON de disco y corre el timing en máquinas lentas). Descubierto por agnes 2026-10-07 (auditoría T-D7 opción 1 de M91). **NO afecta CI**: ninguna suite de M91/M58 está cableada en `quality.yml` | M91-Configuracion-De-Audio | 🟡 Menor | [ ] Abierto — deuda técnica; dueño M91. **Fix sugerido (Hy3):** hacer `_run` tolerante al arranque esperando a `AudioConfig` (opción A, recomendada): bucle de hasta 30 frames verificando `ac._volumenes` no vacío, con `push_warning` al expirar; variante limpia: señal `inicializado` al final de `AudioConfig._ready()` y `await ac.inicializado` en el test (sin acoplar campo privado). El objetivo es **AudioConfig, no MusicDirector** | pendiente |
+| BUG-129 | `MenuNavigator.wrap_focus`: `wrapi` con max mal interpretado como inclusivo — el último control de toda lista era inalcanzable por navegación direccional (wrap ciclaba por [0, N−2]) | M53-UI-UX | 🟠 Mayor | [x] Resuelto 2026-10-12 (Ling 3.1 Flash, Kilo Code; test_m53_lista_larga.gd 7/0) | Ling 3.1 Flash | 2026-10-12 01:05 |
+| BUG-130 | Toasts (NotificationService) ilegibles con tema global: texto heredaba TEXT_DARK sobre panel oscuro = 1.26:1 (WCAG fail) | M53-UI-UX | 🟠 Mayor | [x] Resuelto 2026-10-12 (Ling 3.1 Flash, Kilo Code; test_m53_wcag.gd 17/0) | Ling 3.1 Flash | 2026-10-12 01:07 |
 
 ## 6. Bugs Abiertos (pendientes)
 
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-133 — `crafting_feedback._notificar` llama a `show_notification()`, método inexistente en NotificationService: los toasts de crafting nunca se muestran (M16)
+
+- **Fecha de reporte:** 2026-10-12 01:15
+- **Módulo(s) afectado(s):** M16-Crafting — `game/isla-ancestral/scripts/crafting/crafting_feedback.gd:114-122` (`_notificar`); afecta M53-UI-UX (toasts).
+- **Severidad:** 🟡 Menor — el crafting funciona (partículas doradas + audio por canal separado sobreviven); solo el toast de feedback visual es invisible.
+- **Prioridad sugerida:** Media
+- **Estado:** [x] **RESUELTO 2026-10-12 (Ling 3.1 Flash, fix encargado por director mimo msg 71)**
+
+**Resolución (2026-10-12):**
+`_notificar` reescrito (`crafting_feedback.gd:114-121`):
+```gdscript
+func _notificar(texto: String, tipo: String) -> void:
+	var notif = get_node_or_null("/root/NotificationService")
+	if notif == null or not notif.has_method("push"):
+		print("[M16] %s" % texto)
+		return
+	var tipo_toast = notif.ToastType.EVENT
+	if tipo == "ok":
+		tipo_toast = notif.ToastType.ITEM
+	notif.push({"text": texto, "type": tipo_toast, "icon": tipo})
+```
+- Guard contra la API real (`has_method("push")`), no contra `show_notification`.
+- **Corrección sobre el fix sugerido en msg 71:** las claves del diccionario son `text`/`type` (`notification_service.gd:67-68`), NO `texto`/`tipo` — `_spawn_node` lee `toast.get("text")`/`toast.get("type")` (L94-95); con `"texto"`/`"tipo"` el toast se crearía vacío.
+- Mapeo de tipo: `"ok"` → `ToastType.ITEM` (📦 obtención); `"descubrimiento"`/`"fallo"` → `ToastType.EVENT` (🔔).
+- `var notif` sin anotación `: Node` para que `notif.ToastType` resuelva por instancia (patrón `test_m53_wcag.gd:136`).
+
+**Verificación:** test headless `game/isla-ancestral/scripts/crafting/test_m16_crafting_toast.gd` — **9 checks / 0 fallos / EXIT 0** (Godot 4.7.2): autoload `/root/NotificationService` existe, tiene `push`, no tiene `show_notification`; `_notificar` crea el toast en el autoload real con texto `"¡Listo! x1 Prueba"` e icono 📦 (ITEM) para `"ok"`, 🔔 (EVENT) para `"descubrimiento"` y `"fallo"`.
+
+**Descripción del problema:**
+`_notificar()` hace `get_node_or_null("/root/NotificationService")` y luego `if notif.has_method("show_notification"): notif.show_notification(texto, tipo)` (L119-120). **NotificationService no tiene `show_notification`** — su API pública es `push(toast: Dictionary)` / `clear_all()` / `set_queue_limit(n)` (`notification_service.gd:64-88`, 203 líneas leídas completas). El guard `has_method` siempre es false → el código cae al `else: print("[M16] %s" % texto)` (L117/122): **el toast de crafting nunca se muestra**, solo consola.
+
+**Pasos para reproducir:**
+1. Craftear un item (éxito o fallo) en runtime.
+2. Observar consola: `[M16] <texto>` en vez de un toast arriba-derecha.
+
+**Comportamiento esperado:**
+Toast visible (icono + texto) vía `NotificationService.push()`, como los de M72 (logros, `achievement_service.gd:260`) y M37 (museo, `collection_registry.gd:118`).
+
+**Comportamiento actual:**
+Solo `print` a consola; ningún nodo toast creado.
+
+**Entorno / Contexto:**
+- Versión del juego / build: HEAD (2026-10-11), Godot 4.7.2
+- Plataforma: PC (Windows)
+- Frecuencia: Siempre (cada notificación de crafting)
+
+**Evidencia:**
+- Grep global `show_notification` sobre `game/isla-ancestral`: **2 matches, ambos en la llamada** (`crafting_feedback.gd:119-120`); **0 definiciones** en todo el árbol.
+- `notification_service.gd`: métodos = `_ready`, `_conectar_event_bus`, `_on_event_notify`, `push`, `clear_all`, `set_queue_limit` + privados (`_spawn_node`, `_dequeue_oldest`, `_remove_toast`, `_reposition_all`, `_position_toast`, `_get_type_icon`, `_get_type_color`).
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno (hallazgo estático durante la verificación de H.L121 — msg 60 del canal Ling-3.1-Flash, 2026-10-11 22:40).
+
+**Referencias cruzadas:**
+- M53-UI-UX H.L121 (falso verde confirmado: los toasts con SFX no existen; el servicio es visual-only por diseño — test H.9 `test_m53_no_redundancia.gd:45-53`).
+- Módulo/documentación relacionada: M16 (dueño del fix).
+
+**Firma:**
+**Modelo:** Ling 3.1 Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-12 01:15
+
+**Resolución (completar cuando se resuelva):**
+- [→] Fix sugerido: reemplazar L119-120 por `notif.push({"text": texto, "type": <ToastType>})` — mapear el `tipo` String ("exito"/"fallo") a `ToastType.ITEM`/`ToastType.EVENT`; alternativa: agregar `show_notification(texto, tipo)` a NotificationService con el mapeo interno.
+- [ ] Log del proyecto:
+- [ ] Verificado por: pendiente (dueño M16)
+
+---
+
 ### BUG-124 — Chaman del Monte (M163) sin representacion visual: `ShamanMonte` es un Node3D invisible (sin malla)
 
 - **Fecha de reporte:** 2026-10-09 00:20
@@ -2773,9 +2846,56 @@ var hay_modal: bool = v if v is bool else false
 - **Estado:** [x] **Resuelto 2026-10-08 por agnes-3-flash (Kilo Code, msg 101, commit 5f457af).** Fix: `inv.get("categoria")` de 1 arg null-safe + cascada de recovery rota testeada por primera vez (`test_m66_inv_ruta.gd` + `_test_cascada_recovery()` inyectando invariante rota; suite M66 0 fallos / 0 SCRIPT ERROR / EXIT 0, sin regression). **Verificado por el director** contra disco (L133-138). Sigue pendiente la QA §21.8 fresca de M66 por un modelo independiente (Hy3, msg 93) para rehabilitar el sello.
 - **Reportado por:** agnes-3-flash (Kilo Code) · **Registrado por:** atria-dawn (Kilo Code)
 
-## 7. Bugs Resueltos (historial)
+### BUG-128 — `addons/gdUnit4/bin/` excluido del control de versiones: el job "Godot Tests (GdUnit4)" falla con `File not found` en CI
 
-## BUG-119: IncenseSpawner genera 0 puntos por race con la generacion del terreno voxel (M163)
+- **Fecha de reporte:** 2026-10-11 02:30
+- **Módulo(s) afectado(s):** M118 (CI/CD) — job "Godot Tests (GdUnit4)" de `.github/workflows/testing.yml`; M112 (Testing Automático)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Resuelto (fix en working tree, sin commitear — pendiente de push)
+
+**Descripción del problema:**
+La regla `addons/*/bin/` (línea 44 de `game/isla-ancestral/.gitignore`, orientada a NO versionar binarios compilados de GDExtension) excluye también el directorio `bin/` del addon **gdUnit4**, que contiene **GDScript puro y no binarios**:
+- `GdUnitCmdTool.gd` (546 bytes) — entry point del comando de tests
+- `GdUnitCopyLog.gd` (5104 bytes)
+- Sus respectivos `.uid`
+
+Como `GdUnitCmdTool.gd` es el script que invoca el job "Godot Tests (GdUnit4)" (`godot --headless -s res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a res://tests/unit/...`), en un checkout limpio de CI el archivo no existe y el job muere con:
+```
+ERROR: Attempt to open script 'res://addons/gdUnit4/bin/GdUnitCmdTool.gd' resulted in error 'File not found'.
+ERROR: Can't load script: res://addons/gdUnit4/bin/GdUnitCmdTool.gd
+##[error]Process completed with exit code 1.
+```
+Patrón **T-98** de la guía Godot (un gate de CI apoyado en un archivo que existe en el worktree pero no en HEAD).
+
+**Pasos para reproducir:**
+1. `git checkout` limpio del repo.
+2. Ejecutar el job localmente o disparar el workflow `testing.yml`.
+3. El step "Run tests" falla con `File not found` sobre `res://addons/gdUnit4/bin/GdUnitCmdTool.gd`.
+
+**Evidencia:**
+- Run 38112515056 (2026-10-11T04:44:02Z, commit `6134034`), job "Godot Tests (GdUnit4)": `conclusion: failure`, log con el `File not found`.
+- `git check-ignore -v game/isla-ancestral/addons/gdUnit4/bin/GdUnitCmdTool.gd` → `game/isla-ancestral/.gitignore:44:addons/*/bin/`.
+- `git ls-files 'game/isla-ancestral/addons/gdUnit4/bin/'` → **vacío** (no versionado), pese a que los archivos existen en el worktree.
+
+**Causa raíz:**
+La regla `addons/*/bin/` (añadida para excluir binarios de GDExtension, con excepción `!addons/zylann.voxel/bin/` por Log 1312) es demasiado amplia: matchea también el `bin/` de gdUnit4, que NO contiene binarios sino herramientas GDScript necesarias para correr los tests en CI.
+
+**Solución aplicada:**
+Añadida la excepción `!addons/gdUnit4/bin/` en `game/isla-ancestral/.gitignore`, con comentario explicativo citando este bug y el fire test `bf23406..6134034`. Verificación: `git check-ignore` ahora reporta que `GdUnitCmdTool.gd` **no** se ignora, y `git status` lo muestra como sin versionar (listo para agregar).
+
+**Referencias:**
+- Fire test: push `bf23406..6134034` (2026-10-11), runs 38112515046/56/59.
+- Patrón T-98: `DOCUMENTACION/GUIA-GODOT/06-registro-errores.md`.
+- Log 1642 (atria, encargo H del director mimo).
+
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-11 02:30
+
+---
+
+## 7. Bugs Resueltos (historial)## BUG-119: IncenseSpawner genera 0 puntos por race con la generacion del terreno voxel (M163)
 
 - **Modelo (entrada original):** atria-dawn / Plataforma: Kilo Code — 2026-10-07 20:52
 - **Modelo (investigacion):** mimo-v2.6-flash-free / Plataforma: opencode — 2026-10-07 19:15 (re-escrita 21:25 tras incidente de stash)
@@ -3913,6 +4033,69 @@ intacto. Log del cierre: ver `Logs/` (T-M112).
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
 **Fecha:** 2026-10-07 23:40
+
+### BUG-129 — `MenuNavigator.wrap_focus` usaba `wrapi` con max inclusivo: el último control de toda lista era inalcanzable por navegación direccional (M53)
+
+- **Fecha de reporte:** 2026-10-12 01:05
+- **Módulo(s) afectado(s):** M53-UI-UX (game/isla-ancestral/scripts/ui/core/menu_navigator.gd:72, función `wrap_focus`)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Resuelto
+
+**Descripción del problema:**
+`menu_navigator.gd:72` tenía `next_idx = wrapi(next_idx, 0, focusables.size() - 1)`. En Godot 4.7.2, `wrapi(value, min, max)` usa el parámetro **max EXCLUSIVO** (range = max − min): `wrapi(499, 0, 499) = 0`, `wrapi(4, 0, 4) = 0` (verificado empíricamente con sonda headless). Con `size() - 1` como max, el wrap efectivo era módulo `size() - 1`, ciclando por los índices [0, size−2]. El índice `size() - 1` (último control) nunca se alcanzaba: desde el penúltimo, avanzar +1 daba `size() - 1`, que `wrapi` mapeaba a 0 (saltando el último). Afecta a TODAS las listas/menús navegados direccionalmente (gamepad/teclado).
+
+**Pasos para reproducir:**
+1. Montar una UILayer con 2+ controles enfocables (ej: 500 botones en un ScrollContainer).
+2. `focus_first()` + `grab_focus()`.
+3. Llamar `MenuNavigator.wrap_focus(capa, Vector2i(1, 0))` repetidamente.
+4. Observar: tras recorrer todos los controles, el foco vuelve al primero sin pasar por el último (con 500 items, tras 500 avances el owner es Item_0001, no Item_0000 — el ciclo es de 499, no de 500).
+
+**Comportamiento esperado:**
+Wrap-around circular completo: tras el último control, el foco vuelve al primero; el último control es alcanzable.
+
+**Causa raíz:** semántica de `wrapi` (max exclusivo) mal interpretada como inclusivo al escribir el wrap-around.
+
+**Fix:** `next_idx = wrapi(next_idx, 0, focusables.size())` — range = size, ciclo módulo size → [0, size−1]. Rama vertical sin cambio (asigna índices válidos directamente).
+
+**Verificación:** test headless `test_m53_lista_larga.gd` **7 checks / 0 fallos / EXIT 0** (500 botones, 500 avances direccionales con 0 glitches, wrap-around circular verificado: owner final = Item_0000). Antes del fix: EXIT 1 ("wrap-around circular: tras 500 items el foco vuelve al primero (owner=Item_0001)").
+
+**Lección:** `wrapi(v, min, max)` en Godot 4.7 tiene max EXCLUSIVO (igual que `wrapf`). Para wrap inclusivo sobre [0, N−1] usar `wrapi(v, 0, N)`. Documentado en GUIA-GODOT/01-gdscript-errores-comunes.md §36.
+
+- **Modelo:** Ling 3.1 Flash
+- **Plataforma:** Kilo Code
+- **Fecha:** 2026-10-12 01:10
+
+### BUG-130 — Toasts (NotificationService) ilegibles con el tema global: texto heredaba TEXT_DARK sobre panel oscuro = 1.26:1 (M53)
+
+- **Fecha de reporte:** 2026-10-12 01:07
+- **Módulo(s) afectado(s):** M53-UI-UX (game/isla-ancestral/scripts/ui/services/notification_service.gd:105-115, `_spawn_node`)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Resuelto
+
+**Descripción del problema:**
+`_spawn_node()` crea el Label de texto y el Label de icono del toast **sin `add_theme_color_override("font_color", ...)`**. Como el tema global (`ThemeService.aplicar_tema_global` → `tree.root.theme`) establece `font_color` por defecto de Label = `COLOR_TEXT_DARK` (theme_ux.gd:235), el texto del toast heredaba ese color oscuro sobre su propio panel oscuro (0.15,0.12,0.10): **ratio WCAG 1.26:1 — prácticamente invisible**. El tooltip NO se veía afectado (tiene overrides explícitos de font_color). El servicio solo se veía bien mientras no había tema global aplicado (tema default de Godot = texto claro).
+
+**Pasos para reproducir:**
+1. Aplicar el tema global en runtime (ThemeService / `aplicar_tema_global`).
+2. Emitir un toast (`NotificationService.notify` o EventBus.ui.notify).
+3. Observar: texto del toast casi invisible sobre el panel oscuro (1.26:1).
+
+**Comportamiento esperado:**
+Texto del toast legible (WCAG AA ≥ 4.5:1) sobre su panel oscuro, como el tooltip.
+
+**Causa raíz:** falta de override de `font_color` en los Labels del toast; el panel oscuro es hardcodeado (0.15,0.12,0.10) pero el color de texto dependía del tema global.
+
+**Fix:** overrides explícitos en `_spawn_node`: texto `Color(0.92, 0.88, 0.82)` (12.52:1) e icono `Color(0.85, 0.72, 0.35)` (8.46:1) — misma paleta del tooltip (coherencia). También se corrigió el docstring (decía "con SFX"; el servicio es visual, el SFX lo reproduce el emisor).
+
+**Verificación:** test headless `test_m53_wcag.gd` **17 checks / 0 fallos / EXIT 0** — instancia los servicios reales, aplica el tema global como en runtime y calcula los ratios: tooltip título 8.5:1 / cuerpo 12.5:1, toast icono 8.5:1 / texto 12.5:1 (todos AA/AAA).
+
+**Lección:** todo Label sobre panel de color hardcodeado necesita `font_color` explícito; con tema global, el default del tema (TEXT_DARK) rompe la legibilidad de paneles oscuros. Documentado en GUIA-GODOT/01-gdscript-errores-comunes.md §36.
+
+- **Modelo:** Ling 3.1 Flash
+- **Plataforma:** Kilo Code
+- **Fecha:** 2026-10-12 01:10
 
 ## 8. Bugs Delegados a Otros Agentes
 
@@ -6506,7 +6689,7 @@ Fallback CUESTIONABLE: debería caer al centro real (`MundoRaiz.CENTRO` / Vector
 - **Módulo(s) afectado(s):** M70-Interacciones (`scripts/interacciones/interaction_manager.gd:669`) — colateral en M53/UI (cada push/pop de capa dispara el error)
 - **Severidad:** 🟠 Mayor
 - **Prioridad sugerida:** Media
-- **Estado:** [?] Delegado
+- **Estado:** [x] Cerrado — resuelto por refactor (2026-10-10, mimo-v2.6-flash-free)
 
 **Descripción del problema:**
 `_on_ui_layers_changed` ejecuta `bool(ui.get("hay_modal"))`. UIManager **no tiene** la
@@ -6570,6 +6753,30 @@ var hay_modal: bool = (ui.get("hay_modal") == true)
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
 **Fecha:** 2026-10-04 05:33
+
+**Resolución (2026-10-10, mimo-v2.6-flash-free / opencode):**
+Cerrado **sin aplicar fix**: la línea causante ya no existe. Encargo del director
+(msg 112, opción b). Evidencia:
+
+- **Estática:** grep de `hay_modal` / `_on_ui_layers_changed` / `Nonexistent 'bool'`
+  sobre `game/isla-ancestral/scripts/**/*.gd` → 0 matches del handler en ningún
+  `.gd`; `hay_modal` solo existe como var local de `ui_manager.gd:83`
+  (`_actualizar_pausa_mundo`), nunca fue propiedad. `interaction_manager.gd`
+  actual: 308 líneas (antes 669+), mtime 2026-10-07, commit `b763066`
+  ("chore(scripts): actualizar scripts del juego — 120 archivos"), working tree
+  limpio. El refactor eliminó `_on_ui_layers_changed` completo.
+- **Runtime (binario `C:\Temp\godot\godot472.exe` headless, 2026-10-10):**
+  - `test_settings_audio_roundtrip.gd` (el reproducer citado): **51 checks,
+    0 fallos**, rc=0; el suite hizo push+pop de `SettingsAudioTest` (pila 1→0,
+    1→0) — el escenario exacto del bug — con err = solo el warning benigno M39
+    (8 líneas), **0** `Nonexistent 'bool'`, **0** `interaction_manager`.
+  - `test_interacciones.gd` (suite del M70): **0 fallos**; la corrida incluyó
+    carga de `main_island.tscn` con registro y des-registro de las **12 capas
+    DOM-UI** (otro pop masivo) — 0 ocurrencias del error.
+- **Sin cambios de código:** no se modificó ningún `.gd`. No se reclamó M70 en
+  los registros (no hubo edits que proteger); el fix sugerido de esta entrada
+  (`== true`) queda documentado en GUIA-GODOT §30 para cualquier recurrencia
+  futura del patrón `bool(null)`.
 
 **Resolución (completar cuando se resuelva):**
 - [→] Cómo se corrigió: —
