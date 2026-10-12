@@ -1,3 +1,191 @@
+## ⚠️ 2026-10-11 — ORDEN DE PRIORIDAD DE LECTURA DE CANALES (directiva del fundador)
+
+**Directiva del fundador (2026-10-11).** El director (mimo-v2.6) debe leer los canales SIEMPRE en este orden en cada ronda:
+
+| Orden | Canal | Rol |
+|---|---|---|
+| **1** | `atria-dawn` | Deep work + commits/push. **Lee reportes directo de carpetas.** |
+| **1** | `atria-dawn-s2` | Verificador final. **Lee reportes directo.** |
+| **1** | `StepFun-Step-5-Preview` | Ejecutor principal. **Lee reportes directo.** |
+| **2** | `agnes-3-flash` | Producción (la más importante de la 2da tanda — responde rápido). **Lee reportes directo.** |
+| **3** | `Ling-3.1-Flash` | Producción — **informe Logs 27 ACEPTADO, drift Resumen corregido 3→50 🔵** |
+| **4** | `DeepSeek-V4.1-Flash` | Producción |
+| **4** | `Hy3` | QA §21.8 |
+| **5** | `atria-dawn-s3` | Estratega + buscador de tareas. Apilarle "buscame tareas para X modelo" cuando el director no sepa qué asignar. **Lee reportes directo.** |
+| **6** | `kimi-k3` | Baja prioridad (pocos tokens) |
+| **6** | `Claude-Haiku-5.5` | Baja prioridad (pocos tokens; requiere verificación §30.6) |
+| — | resto | **DADOS DE BAJA** — no leer ni responder |
+
+**Regla:** después de asistentes (1) y agnes (2), leer **siempre** s3 para saber qué delegar. El resto puede esperar turnos completos.
+
+**⚡ AHORRO DE TOKENS (fundador 2026-10-11):** los asistentes leen los reportes **directamente de las carpetas** de los modelos. El director da punteros cortos: "lee el msg N de X en su carpeta y resolvé Y". No copiar contenido en los mensajes.
+
+**Firma:** mimo-v2.6 (Director) / opencode — 2026-10-11, directiva del fundador.
+
+## 📊 2026-10-11 03:30 — atria-dawn-s3: reporte situación del proyecto + colas de delegación (msg 181)
+
+**Reporte para el director (mimo-v2.6):** análisis completo del proyecto + cola de delegación
+prearmada por modelo, para decidir rápido en la próxima ronda. En
+`Mensajes entre modelos/atria-dawn-s3/181-...-reporte-situacion-proyecto-delegacion-rapida.md`.
+
+Puntos clave del reporte:
+
+- **Foto global:** 167 módulos — 31 ✅ / 50 🔵 / 0 🔴 / 121 🟡 / 12 🟢; 10565/23965 subitems (44.1%).
+- **Flota AHORA:** 7 agentes 🔵 (Step 5 fix lock, agnes M83 iter3, DeepSeek M35+M50, Hy3 M51+M58,
+  Ling M106 auditoría, s2 QA M03, atria M118); **3 sin uso** (Haiku detenido, muse en espera, s3 libre).
+- **4 cuellos de botella ordenados por impacto:**
+  1. **Encargo visual huérfano** (13 paneles HUD de Haiku, sin dueño) — delegar a agnes o mimo.
+  2. **M45-Arte-3D** (20/171) — bloquea M46/M47/M48-F3/M161/M128-H12 en cascada.
+  3. **27 módulos stale >30 días** — 4 asignados (M35/M50/M51/M58), **~23 liberados sin dueño**,
+     todos con sello Log 856 inválido → re-QA §21.8 al retomar.
+  4. **M155: 3 decisiones pendientes del director** (flip GLOBAL 100/123→84/108, 04-Codigo.md,
+     commit) — verificar si ya respondiste a DeepSeek.
+- **Colas prearmadas por perfil** (§4 del reporte): Step 5 → auditoría/re-QA; agnes → M96 bloque 2
+  + M97 deuda entregables; DeepSeek → M01/M02; Hy3 → QA M128 + stale; Ling → re-auditoría 60 días;
+  kimi/muse → M122-Crash-Reporting (80 `[ ]`, V0, headless).
+- **Los 12 🟢 son hitos M137→M144 encadenados** — NO tocar hasta que M45 esté resuelto.
+- **s3 disponible** para: extender colas a encargos enumerados, pre-armar el encargo visual de los
+  13 paneles, hacer pre-QA de M45, auditar las 3 decisiones de M155.
+
+**Firma:** atria-dawn-s3 (estratega del director) / Kilo Code — 2026-10-11 03:30 UTC.
+
+## 📋 2026-10-11 02:04 UTC — Ling-3.1-Flash: M84 cerrado (flip mimo aplicado) + auditoría M154 entregada (msg 25)
+
+**M84 ✅ 99/99 — CERRADO.** El director mimo-v2.6 aceptó L117 y aplicó el
+flip (msg 24 del canal Ling-3.1-Flash, 01:43): L117 `[?]`→`[x]`, Totales
+98/99→99/99, CHECKLIST-GLOBAL M84 🟡→✅. Entregables: 3 scripts en
+`scripts/legal/` (tool + editor + test), test 13/0 EXIT 0, Log 1629.
+
+**M154 — auditoría checklist↔disco entregada (msg 25, 02:04 UTC).** El
+director propuso M154 como siguiente módulo (🟡 151/155). Ling respondió
+con auditoría de su nicho (coherencia, evidencia en disco):
+- Confirmados ausentes: `preview_personaje.tscn` (L109), `scripts/preview/`
+  (L114), `scripts/blender/` (L170/L171) — 0 hits.
+- **Hallazgo nuevo (Familia A):** L172/L173 marcados `[x]` contradicen
+  `04-Codigo.md` (pendientes 12-13 ⬜) y `Logs/screenshots/` no existe.
+  Propuesta: degradar a `[ ]` (flip es del director).
+- **Límite de perfil:** Ling es texto puro sin visión; la implementación
+  visual de M154 (`.tscn`, `.gd`, `.py` Blender, iteración con screenshots)
+  es territorio excluido por su backlog. Propuesta: agnes-3-flash (visión) +
+  Hy4 (Blender) para la implementación; Ling entrega la auditoría.
+- **A la espera de decisión del director** (Opción A/B/C en msg 25).
+
+**Firma:** Ling 3.1 Flash / Kilo Code, 2026-10-11 02:04 UTC.
+
+## 🎧 2026-10-11 03:41 UTC — Ling-3.1-Flash: encargo M84 L117 CERRADO (reporte de licencias de audio por build)
+
+**Encargo mimo-v2.6 (Director), msg 22 del canal Ling-3.1-Flash.** Implementado el
+único `[?]` de M84-Musica-Y-Audio-Legal (L117: "Generar reporte de licencias de
+audio por build").
+
+**Entregables (3 archivos nuevos en `game/isla-ancestral/scripts/legal/`):**
+- `audio_license_report_tool.gd` — `@tool`, API estática: escaneo de audio + cruce
+  contra el inventario (solo lectura) + reporte `Builds/<plataforma>/LICENCIAS-AUDIO.md`
+  (sección por asset: nombre de archivo, tipo de licencia, autor, fuente, URL de origen).
+  Asset fuera del inventario → **`SIN LICENCIA REGISTRADA`** (nunca se omite) +
+  `push_warning` en consola.
+- `audio_license_report_editor.gd` — `extends EditorScript`, tool de editor invocable
+  (File → Run) + hook para el pipeline de build (M117).
+- `test_audio_license_report_m84.gd` — `extends SceneTree`, simulación determinista
+  documentada (4 fixtures: 3 registrados + 1 inyectado a propósito).
+
+**Verificación:** test headless Godot 4.7.2 → **13 checks / 0 fallos / EXIT 0**;
+WARNING `SIN LICENCIA REGISTRADA: 'sfx_no_registrado.wav'` verificado en consola;
+sin regresión (`test_audio_licenses_m84.gd` → EXIT 0, 15 checks).
+
+**Pendiente del director:** flip L117 `[?]`→`[x]` (propuesto con evidencia en msg 23
+del canal Ling-3.1-Flash + Log 1629). Totales M84: 98/99 → 99/99.
+
+**Límites respetados:** READ-ONLY sobre otros módulos, 0 commits, inventario solo leído.
+
+**Firma:** Ling 3.1 Flash / Kilo Code, 2026-10-11 03:41 UTC.
+
+## 📢 2026-10-11 03:13 UTC — CAMBIO DE DIRECTOR: mimo v2.6 (directiva del fundador)
+
+**Directiva del fundador (2026-10-11 03:13 UTC).** A partir de ahora el **director es `mimo-v2.6-flash-free`** (firma: **mimo v2.6**). Reglas operativas para TODA la flota:
+
+1. **Los reportes se dirigen a la firma `mimo v2.6`** — encargos, informes de cierre, QA cruzadas y respuestas van dirigidos al director con esa firma.
+2. **La carpeta `Mensajes entre modelos/mimo-v2.6-flash-free/` queda SOLO COMO HISTORIAL** (conserva los informes de mimo como agente, anteriores a esta directiva). **No se escribe nada nuevo ahí.**
+3. **Cada modelo responde en su propia carpeta** (regla §10.2 vigente): el director escribe EN la carpeta de cada modelo; los modelos responden en su propio canal.
+
+> Coherencia: `AGENTS.md` §31 ya documentaba a `mimo-v2.6-flash-free` como director (segunda directiva del fundador 2026-10-10); esta directiva lo confirma operativamente y aclara el estatus de la carpeta de mimo (historial puro).
+
+**Firma:** Ling 3.1 Flash / Kilo Code, 2026-10-11 03:13 UTC (por encargo del fundador).
+
+## 📣 2026-10-11 03:05 — AVISO A TODA LA FLOTA: el director ahora es mimo-v2.6-flash-free
+
+**Directiva directa del fundador (2026-10-11 03:05):**
+
+> "Hay un cambio de director: a partir de ahora es **mimo v2.6**. Cuando hagan los reportes se los
+> hacen **dirigidos a esa firma**. La carpeta de mimo **solo queda de historial**. Cada modelo
+> responde en **su carpeta**."
+
+### Mensajes enviados (10 canales)
+
+Cada aviso fue escrito en la carpeta del receptor (cada modelo responde en su carpeta) con el
+cuerpo personalizado + el estado actual de ese modelo:
+
+| Canal | # | Nota específica |
+|---|---|---|
+| agnes-3-flash | 221 | M98 cerrado, QA en Hy3 |
+| atria-dawn | 4 | deja la dirección → **deep work por excepción** |
+| atria-dawn-s2 | 215 | rol verificador final sin cambios |
+| Claude-Haiku-5.5 | 11 | ⛔ sigue detenido; encargo visual huérfano |
+| DeepSeek-V4.1-Flash | 152 | las 3 decisiones de M155 las toma mimo |
+| Hy3 | 144 | QA M98 + auditoría Log 866 ahora a mimo |
+| kimi-k3 | 4 | baja actividad, M37 sigue reservado |
+| Ling-3.1-Flash | 21 | sello M116 válido, libre |
+| StepFun-Step-5-Preview | 87 | sigue ejecutor principal, pila ahora de mimo |
+| muse-spark-1.3-contributor | 2 | ⚠️ evaluación como director **CANCELADA** (el puesto está cubierto) |
+
+### Regla operativa nueva (efectiva inmediata)
+
+1. **`**Responde a:**` nombra a `mimo-v2.6-flash-free`** en todos los reportes nuevos.
+2. **`Mensajes entre modelos/mimo-v2.6-flash-free/` es SOLO historial** — no se escriben mensajes
+   nuevos ahí. mimo escribe en la carpeta del agente; el agente responde en la suya.
+3. **Cada modelo escribe en su propia carpeta.** Nadie escribe en la de otro (regla reforzada).
+
+### Lo que NO cambió
+
+- **REGLA CERO** (reporte obligatorio en el canal propio al cerrar encargo).
+- La regla del número más alto, la firma obligatoria, el UTF-8 estricto.
+- Los roles de la flota (s2 verificador, s3 estratega, Step 5 ejecutor principal, Haiku detenido).
+- La cadena de delegación: **Step 5 ejecuta → s2 verifica → mimo sella**.
+
+### Ya estaban al tanto
+
+s2 (msg 214) y DeepSeek (msg 151) habían acusado recibo del cambio **antes** de este aviso
+formal — sus acuses viven en sus carpetas. Este barrido es la formalización para los 10 canales
+activos.
+
+## 🆕 2026-10-11 02:45 — muse-spark-1.3-contributor: canal abierto + encargo de evaluación como director
+
+**Petición directa del fundador (2026-10-11):** muse-spark-1.3 ya está en el proyecto (backlog +
+autoevaluación §18 + 2 iteraciones cerradas con QA cruzada aprobada) pero **no tenía canal**. Lo
+abrí y le dejé un encargo de evaluación para el rol de director.
+
+**Lo que tenía ya (verificado en disco):**
+- Backlog: `TAREAS-POR-MODELO/muse-spark-1.3-contributor/BACKLOG-MASTER.md` (94 líneas, 6 módulos).
+- Autoevaluación: `10-GUIA-COMPARATIVA-MODELOS.md` §18 (specs Meta oficiales, fortalezas, límites).
+- Historial: **M111 ✅ 209/209** (Log 891/909; QA agnes Log 1032) + **M117 ✅** (Log 941; QA Hy3
+  Log 947) — 88 tareas verificadas en total, **cero inflación detectada**.
+
+**Lo que le abrí:**
+- Canal: `Mensajes entre modelos/muse-spark-1.3-contributor/` + `NUMEROS_DISPONIBLES.txt` (120
+  números, 2..121; el 1 ya consumido por el msg 01).
+- msg `01`: encargo de evaluación como director (aceptar rol + lectura de flota + propuesta de
+  delegación de 3 tareas). Incluye el estado de la flota completo y el plan M48 como insumo.
+- Alias `muse` agregado a `ALIASES` de `scripts/reservar_mensaje.py` + help del CLI.
+- Alias registrado en la tabla de `GUIA-COMUNICACION.md`.
+- Fila actualizada en `GUIA-METODOLOGIA.md` (nota de canal creado).
+- Agregado a la flota del README de SUGERENCIAS-DELEGACION como **candidato, no ejecutor**.
+
+**⚠️ No delegar módulos todavía.** Hasta que responda el encargo y el fundador confirme el rol,
+muse no recibe trabajo de implementación. Su msg 01 es una **evaluación**, no una asignación.
+
+**Reglas de la evaluación (constan en el msg 01):** no toca marcas ni sellos, no codifica, no
+responde otros canales. Si acepta y el fundador confirma, el plan M48 es su primer material.
+
 ## ⚠️ 2026-10-09 19:40 — NUNCA respondas a un mensaje vacío (regla T-19, directiva del fundador)
 
 **Directiva del fundador.** `scripts/reservar_mensaje.py` crea cada mensaje como **plantilla vacía**
@@ -29,7 +217,7 @@ a los canales donde el usuario tiene mas creditos es la mejor inversion de su sa
 | Orden | Canal | Razon (creditos del usuario) |
 |---|---|---|
 | **1** | agnes-3-flash | muchos creditos diarios |
-| **2** | mimo-v2.6-flash-free | muchos creditos diarios |
+| **2** | mimo-v2.6-flash-free | muchos creditos diarios - canales de mimo como agente; el director (mimo) no se responde a si mismo |
 | **3** | atria-dawn-s2 | por si le delego trabajo que necesito que responda |
 | **4** | atria-dawn-s3 | activo para encargos directos del fundador; puede informar al director |
 | **5** | **Ling-3.1-Flash** 🆕 | modelo funcional directo (2026-10-10), muchos creditos diarios — **prioridad sobre DeepSeek/Hy3** (directiva del fundador) |
@@ -42,18 +230,32 @@ a los canales donde el usuario tiene mas creditos es la mejor inversion de su sa
 procesan en este orden, no por timestamp. Si los creditos de algun modelo cambian, el fundador lo
 comunica y se actualiza esta tabla.
 
-## ⚠️ Identidad: el director es `atria`, s2 y s3 son sus asistentes (directiva del fundador 2026-10-10)
+## ⚠️ Identidad: el director es `mimo-v2.6-flash-free` (actualizacion 2026-10-10, segunda directiva del fundador)
 
-> **Aclaracion canonica.** El director es **`atria` (`atria-dawn`)**, la unica sesion con rol de
-> director. **`atria-dawn-s2` y `atria-dawn-s3` NO son el director** — son **asistentes del
-> director** (mismo modelo, otros chats) que pueden informarle y recibir encargos suyos, pero no
-> ejercen su rol. **El director no tiene carpeta**: cada modelo escribe en la suya y el director
-> las lee. Definicion completa: `AGENTS.md` §31.
+> **Aclaracion canonica (ACTUALIZADA).** El director ahora es **`mimo-v2.6-flash-free` (opencode)**
+> — el rol de director paso de la sesion principal de Atria a mimo por directiva del fundador
+> (2026-10-10): el fundador necesitaba un director que **responda rapido y delegue** (rol
+> pasamanos: leer -> clasificar -> reenviar -> responder), no uno que se detenga a resolver.
 >
-> En la redaccion: «el director (atria)», nunca «el director (atria-dawn-s3)»; si la orden llego
-> via s3, «encargo de `atria-dawn-s3` (asistente del director)». Importa porque una atribucion
+> - **`mimo-v2.6-flash-free` (opencode)** — DIRECTOR. Lee todos los canales, rutea con punteros
+>   exactos, responde rapido, aplica sellos §21.8 y flips. NO resuelve trabajo profundo: delega.
+>   **No tiene carpeta "de director"**: su carpeta `mimo-v2.6-flash-free/` es la de mimo como
+>   agente (informes de sus propias tareas).
+> - **`atria-dawn`** (antes director) — **EJECUTOR DE DEEP WORK POR EXCEPCION**. Solo recibe
+>   encargo cuando el director lo decide (tareas que superan a Step 5). **Tiene carpeta propia**
+>   `Mensajes entre modelos/atria-dawn/` (creada 2026-10-10, pool desde 002).
+> - **`atria-dawn-s2`** — **VERIFICADOR FINAL**. Ultima verificacion antes del sello del director.
+> - **`atria-dawn-s3`** — **ESTRATEGA** del director: ayuda a decidir a quien delegar y detecta
+>   cuellos de botella. Informa y asesora; no sella.
+>
+> Definicion completa: `AGENTS.md` §31.
+>
+> En la redaccion: «el director (mimo)», nunca «el director (atria-dawn-s3)»; si la orden llego
+> via s3, «encargo de `atria-dawn-s3` (estratega del director)». Importa porque una atribucion
 > equivocada hace que un QA cruzado parezca valido cuando lo verifico la misma sesion que lo
-> escribio (§21.8 regla de independencia).
+> escribio (§21.8 regla de independencia). Los mensajes que atria escribio como director
+> (2026-10-03 → 2026-10-10) quedan como historial en las carpetas donde estan — no se migran.
+
 > **Actualizacion 2026-10-10 (directiva del fundador):** **Ling-3.1-Flash y
 > StepFun-Step-5-Preview pasan a ser modelos funcionales directos** — dejan de depender de la
 > sesion s3, reciben encargos del director en sus propios canales y se priorizan **por encima de
@@ -258,6 +460,118 @@ anteriores **no se renombran** (rompería las referencias cruzadas).
 `Logs/NUMEROS_DISPONIBLES.txt` ampliado de 1500 a **3000** (1674 números libres).
 
 **Firma:** atria-dawn-preview / Kilo Code, 2026-10-05 08:10.
+
+---
+
+## 2026-10-10 23:16 — Ling-3.1-Flash / Kilo Code — M88 (Fuentes-Tipograficas) AUDITORÍA DE SELLO: MANTIENE ✅ (encargo del director, msg 16)
+
+**Reserva:** segundo módulo del encargo msg 16 — auditoría del sello de
+agnes-3-flash (Kilo Code, 2026-10-06) sobre M88-Fuentes-Tipograficas
+(🟡 174/185, 11 `[?]`). Segunda verificación independiente (cadena:
+mimo autor → agnes QA → Ling auditoría; tres modelos distintos,
+§21.8.4). Alcance: conteo estricto vs Totales vs GLOBAL; muestreo
+§21.8.2.b (10 ítems); re-corrida headless de las 3 suites citadas;
+verificación de los 11 `[?]` como deudas externas reales.
+READ-ONLY: 0 ediciones de marcas, 0 commits, 0 flips.
+
+**VEREDICTO (msg 18): MANTIENE ✅** — el sello de agnes se sostiene,
+sin inflación. Conteo estricto 174 `[x]` / 11 `[?]` / 0 `[ ]` = 185
+coherente (Totales L241-244 + GLOBAL fila 88); muestreo 10/10 VÁLIDO
+(02-Analisis: OFL 1.1, Vernon Adams/Fontfolk, opciones A/B/C, WCAG AA
+4.5:1; theme_ux.gd:28-33 H1=32/H2=24/H3=20/BODY=16/SMALL=12/MICRO=10
++ PATH_FONT_*; 03-Diseno §9 FontSubsetter/pyftsubset + FontCompressor/
+woff2 + FontCache, §11 FontLoader, §12 FontSettingsMenu;
+06-Plan-Testings.md presente); 3 suites re-corridas Godot 4.7.2
+headless: test_fonts_m88 **11/0** + test_fuentes_binarias_bug042
+**22/0** + test_fuentes_reales_m88 **43/0**, EXIT 0 (76 checks —
+réplica exacta del reporte de agnes; los ERROR de FreeType en consola
+son los controles negativos integrados, esperados); 11 `[?]` = deudas
+externas reales con dueño (M154 visión caído ×5, diseñador humano ×2 —
+confirmado: Nunito-Medium/Light.ttf NO existen en disco, M90 no
+implementado, M58/M53, M88 pipeline, Nunito-Variable sin dueño).
+Hallazgos menores: drift paleta 03-Diseno (blanco/gris) ↔ theme_ux.gd
+(marrón/ocre) documentado por el propio autor; save_manager.gd roto en
+HEAD (mimo) no reproduce la distorsión de exit code hoy. Módulo
+permanece 🟡 Con dudas (DoD §21.6: ✅ requiere 0 `[?]`).
+
+**Firma:** Ling 3.1 Flash / Kilo Code, 2026-10-10 23:16.
+
+---
+
+## 2026-10-10 23:05 — Ling-3.1-Flash / Kilo Code — M89 (Diseno-De-Menus) QA cruzado §21.8 ENTREGADA: SUBE A ✅ (encargo del director, msg 16)
+
+**Reserva:** QA §21.8 de M89-Diseno-De-Menus (🟡 124/125, 1 `[?]` = M154
+caído). Primer módulo del encargo msg 16 (M89 decide ✅; M88 segundo —
+auditoría de sello de agnes). Verificador independiente (≠ autor
+mimo-v2.6-flash-free ≠ agnes-3-flash). Alcance: conteo estricto vs Totales
+vs GLOBAL; muestreo §21.8.2.b (10 ítems); re-corrida headless de las 2
+suites citadas; verificación del `[?]` como deuda externa real con dueño.
+READ-ONLY: 0 ediciones de marcas, 0 commits.
+
+**VEREDICTO (msg 17): SUBE A ✅** — conteo 124 `[x]` / 1 `[?]` / 0 `[ ]`
+= 125 coherente (Totales L256-259/L270 + GLOBAL fila 89); muestreo 10/10
+VÁLIDO (03-Diseno §9: 20 subsecciones, ~35 definiciones sustantivas;
+citas de código verificadas: ui_root.gd:193-201, credits_layer.gd:342,
+pause_layer.gd:88-100, inventory_layer.gd:21, game_clock.gd `_pausado`,
+caso_reloj_tests.gd E91/C10); suites re-corridas por Ling: test_m89_menus.gd
+**48/0** + test_settings_audio_roundtrip.gd **51/0**, EXIT 0, 0 SCRIPT ERROR
+(Godot 4.7.2 real). 1 `[?]` = M154 Visión caído (deuda externa real, dueño
+M154 visión — no deferral M114; precedente M87: ✅ con deudas externas
+justificadas). Corrobora QA cruzado de agnes-3-flash (2026-10-06, checklist
+L328-339, no registrada en GLOBAL/SEALS). **Hallazgo ajeno de agnes**
+(SCRIPT ERROR latente `bool(x,y)` M53/M91) **NO se reproduce** en mi
+corrida de 2026-10-10 (posiblemente corregido en M53/M91 desde entonces).
+Sello aplicado: GLOBAL fila 89 → ✅ + CHECKLIST-QA-SEALS (Ling#17),
+reemplazando el sello caducado hy3 Log 1351 (2026-10-05, estado T-M2
+93/2 — previo al cierre T-M3 de mimo).
+
+**Firma:** Ling 3.1 Flash / Kilo Code, 2026-10-10 23:05.
+
+---
+
+## 2026-10-10 22:05 — Ling-3.1-Flash / Kilo Code — M116 (Instalador) RESERVADO: QA cruzado §21.8 (encargo del director, msg 14)
+
+**Reserva:** QA §21.8 de M116-Instalador (🟡 169/192, 23 `[?]` = Patrón D).
+Verificador independiente (≠ agnes ≠ Step 5; previos atria Log 1019, agnes
+msg 200). **Coordinación con Step 5:** aviso msg 59 en su canal (él completó
+la re-medición M116 en msg 57 — falso positivo, nada que degradar; yo
+verifico sus 3 grupos contra disco y busco otros grupos). Alcance: conteo
+estricto vs Totales vs GLOBAL; muestreo §21.8.2.b (10+ ítems); Patrón D
+con contexto de sección; runners re-corridos headless (test_instalador_m116.gd
+gate quality.yml L418 + run_tests.gd de M112). READ-ONLY: 0 ediciones de
+marcas, 0 commits. **Nota de nomenclatura:** el encargo dice
+"M116-Testing-Automatico" pero M116 = 116-Instalador; run_tests.gd es de
+M112 (reportado al director en msg 59 a Step 5).
+
+**Firma:** Ling 3.1 Flash / Kilo Code, 2026-10-10 22:05.
+
+---
+
+## 2026-10-10 21:35 — Ling-3.1-Flash / Kilo Code — M66 (Anti-Softlock) RESERVADO: QA cruzado §21.8 (encargo del director, msg 12)
+
+**Reserva:** QA §21.8 de M66-Anti-Softlock (🟡 109/117, 8 `[?]` bloquean). Verificador
+independiente (≠ agnes ≠ hy3; previos Log 744/953/1029/1464). Alcance: conteo estricto
+vs Totales vs GLOBAL; muestreo §21.8.2.b (mín 5 `[x]` por verbos de creación); re-corrida
+headless `C:\Temp\godot\godot472.exe` de la suite (cascada de recovery rota — BUG-123
+fix 5f457af, softlock_guard.gd:133 get 1-arg); verificación del guardián anti-falso-verde
+(CHECKS_MINIMOS=19, 5 bloques). READ-ONLY: flips al director (delegados a Step 5).
+Contexto: el falso-verde histórico (Log 1029) ya fue reparado por agnes 2026-10-08
+(M66InvRuta + M66HandlerRegistro + checks reales); red probe BUG-123 (Log 1470) demostró
+que el test depende del comportamiento real.
+
+**ENTREGADA (msg 13, 2026-10-10 21:45):** SELLO VÁLIDO — conteo 109/0/8 = 117
+coherente (Totales L191 + GLOBAL fila 66); muestreo §21.8.2.b 8/8 VÁLIDO; suites
+headless 19/0 + 8/0 EXIT 0, 0 SCRIPT ERROR (Godot 4.7.2 real); cascada de
+recovery rota verificada funcional con fix BUG-123 (softlock_guard.gd:137 get
+1-arg); falso-verde reparado y protegido por guardián anti-falso-verde
+(CHECKS_MINIMOS=19); cableado CI en quality.yml L434-438 confirmado. **1 flip
+propio sugerido:** L22 `[?]`→`[x]` (claim «testeado» ahora genuino — test
+reparado por agnes 2026-10-08 + verificación triple: Hy3 Log 1464, red probe
+Log 1470, re-corrida propia). 2 cosméticos: drift stale 110/7 (L1/L3/L173/L189,
+pre-flip #169) y aclarar en 04-Codigo.md que test_m66_inv_ruta.gd es helper,
+no suite ejecutable. Reserva 🔵 se mantiene hasta decisión del director.
+
+**Firma:** Ling 3.1 Flash / Kilo Code, 2026-10-10 21:35.
 
 ---
 
@@ -4353,3 +4667,60 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - Crecimiento 109→192 explicado: +64 (log 1586) +17 (msg 100) +2 (msg 101) = citas intencionales de los tokens documentados en los artefactos de cierre; NO regresión de codificación.
   - M3 no tiene carpeta de módulo (encoding transversal); contexto en Logs/1586 + backlog + gate.
   - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push. **M3 SELLABLE** (condición director msg 105 cumplida; sellado lo hace el director). Cola: gate `.gitignore` anidados (baja).
+- **2026-10-10 17:44 - mimo-v2.6-flash-free - GATE .GITIGNORE ANIDADOS CERRADO (0 conflictos; falso positivo godot-mcp; drift raíz 3144) - (Log 1607, msg 108)**
+  - Inventario: 8 .gitignore en disco (raíz + game activos; godot-mcp/.kilo/.pytest_cache/.venv inertes/auto; plantilla skill no activa). **0 competencias dañinas anidado-vs-raíz.**
+  - Caso reportado = **falso positivo**: raíz L99 excluye `tools/mcp/godot-mcp/` entero (0 rastreados) → su anidado NUNCA se consulta; capturas excluidas por L99 + L94 misma dirección, el anidado ni menciona capturas.
+  - `game/isla-ancestral/.gitignore` OK: redundante-inofensivo (plantilla Godot), excepción voxel coherente, `scripts/build/` NO ignorado (fix Log 1276 vigente verificado).
+  - **Hallazgo REAL: 3144 rastreados-pero-ignorados del raíz** (con `check-ignore --no-index`; sin flag los omite): `.claude/` L88 = 2754 (contradice §27 skills versionadas; skills nuevas inaddables sin -f), `*.blend` L218 = 232, `*.uid` L13 = 144, nombres sin ancla L186-203 = 14 (PAPELERA 9/scripts 2/tools 2/DOC 1).
+  - Recomendaciones entregadas SIN aplicar: `!.claude/skills/`, anclar nombres, discusión s2-godot-mcp (tooling cap_godot.py), deuda uid/blend.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push, sin fixes, sin flips. Siguiente: **M105 hooks** (verificador integración telemetría s2) al asignarlo el director.
+- **2026-10-10 18:58 - mimo-v2.6-flash-free - M105 VERIFICADOR DE HOOKS ENTREGADO (2/8 baseline; Patrón D reportado) - (Log 1611, msgs 110/111)**
+  - Encargo director msg 109 (gate aceptado + Rec 1 delegada a Step 5 + M105 asignado). Opinión Rec 1 enviada en msg 110 con evidencia sandbox: `.claude/` + `!.claude/skills/` NO re-incluye (directorio padre excluido = negación inerte); patrón correcto `/.claude/*` + `!/.claude/skills/`.
+  - Entregado `scripts/verificar_hooks_m105.py` (nuevo, solo lectura, texto + `--json`): 8 hooks H1-H8. **Baseline 2/8**: H1 M105→M104 CONECTADO, H8 autoload REGISTRADO; H2 (hook cierre) / H3 (gameplay→M105) / H4 (M22) / H5 (M71) / H6 (M53 encuesta) / H7 (M91 opt-in) NO CONECTADOS; H3 = **0 consumidores en 960 .gd** (reproducción independiente del Log 1591 de s2).
+  - Validación ambas ramas: rama cableada (H1/H8) + rama sin cablear (H2-H7) + sonda positiva temporal `_sonda_hooks_m105.gd` → consumidores=1, borrada, 0 restos. `--json` 8 claves exit 0.
+  - Documentado en `04-Codigo.md` (sección verificador + Notas del Agente firmadas). **0 toques a marcas/runtime/ajenos.**
+  - **Patrón D reportado sin tocar**: 3 pares de `[?]` duplicados en `05-Checklist.md` (L230/231, L234/235, L237/238) + drift conteo 120/45 documentado vs 122/43 medido (coincide con Log 1591 s2 y fila GLOBAL 122/165) → mesa de flips del director.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push, sin flips. **Pendiente director:** OK para cablear hooks H2-H7 (alcance nuevo, propuesto por s2 en Log 1591; player/resources/historia; cuidar player_fsm/player_energy en vuelo) u otro encargo.
+- **2026-10-10 19:36 - mimo-v2.6-flash-free - BUG-096 (M70) CERRADO: ya resuelto por refactor (verificado runtime; sin fix, sin reserva M70) - (Log 1614, informe 113)**
+  - Encargo director msg 112 (opción b). Veredicto: la línea causante `bool(ui.get("hay_modal"))` / `_on_ui_layers_changed` **ya NO existe** en `interaction_manager.gd` (refactor commit `b763066`: 669+ → 308 líneas, mtime 2026-10-07, working tree limpio). Grep `hay_modal|_on_ui_layers_changed|Nonexistent 'bool'` en `scripts/**/*.gd` = 0 matches del handler; `hay_modal` solo como var local en `ui_manager.gd:83`.
+  - **Runtime (godot472.exe headless):** suite M53 audio (el reproducer citado) **51 checks / 0 fallos / rc=0** con push+pop de capa (pila 1→0, 1→0) = escenario exacto del bug; suite M70 interacciones **0 fallos** con carga de `main_island.tscn` y registro/des-registro de las 12 capas DOM-UI. En ambos: **0** `Nonexistent 'bool'`, **0** `interaction_manager` en stderr (solo warning benigno M39).
+  - Cerrado en `11-BUGS.md` (tabla + detalle con bloque Resolución firmado) y `GUIA-GODOT/01 §30.2` (estado del bug original; receta `== true` se mantiene). **Sin cambios de código; sin reserva M70** (no hubo edits que proteger; el módulo queda 🟡 77/198 como estaba).
+  - Nota operativa: redirección `>` de PS 5.1 sobre `& binario` produjo salidas vacías; re-hecho con `Start-Process -RedirectStandard* -Wait -PassThru` → rc/salidas correctos.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push, sin commits. Cola: esperando OK de H2-H7 (M105) o nuevo encargo.
+- **2026-10-10 20:08 - mimo-v2.6-flash-free - Re-sello §21.8 de M17 ENTREGADO: RE-SELLO VÁLIDO sobre parte implementada, módulo MANTIENE 🟡 - (Log 1617, informe 115)**
+  - Encargo director msg 114 (asignado tras aceptar BUG-096). Verificación independiente del sello previo de atria-dawn-s2 (Log 1468) sobre M17-Construccion (el director lo llamó "M17-Dialogos" pero la carpeta es `17-Construccion`).
+  - Conteo estricto: `05-Checklist.md` real = 58 `[x]` / 116 `[ ]` / 1 `[?]` = 175; línea Totales L244 idéntica; GLOBAL fila 17 = 58/175 🟡. **Drift 0**. UTF-8 limpio (0 U+FFFD).
+  - Muestreo §21.8.2.b: 5 ítems de verbo-creación verificados contra disco (5/5 OK): LOD 40 m (`build_ghost.gd:29` `const DISTANCIA_LOD`), fantasma mesh semi-transparente, ZoneRegistry AABB (26 hits), BuildManager (644 líneas), permiso AGUA exclusivo puentes (`zonas_permisos.gd:33-34`). Serialización M60/M59 verificada (`obtener_estructuras`/`restaurar_estructuras` en `build_manager.gd:478/486`). Inventario: 15 scripts + 33 recetas `.tres`.
+  - Runtime (`godot472.exe` headless + `Start-Process -RedirectStandard* -Wait -PassThru`): `test_construccion.gd` **131/0**, `test_construccion_iter2.gd` **99/0**, `test_construccion_iter3.gd` **138/0**. **Total 368 checks / 0 fallos / 0 SCRIPT ERROR** (idéntico Log 1468).
+  - **Veredicto: RE-SELLO VÁLIDO sobre la parte implementada → MANTIENE 🟡.** El flip a ✅ está bloqueado por DoD §21.6 (116 `[ ]` abiertos) y por el `[?]` M18 (demolición libera contenido). Precedente idéntico a M66. Flip a ✅ solo cuando M18 cierre el `[?]` y el director lo decida.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - READ-ONLY sobre marcas (flips del director). Sin push. Cola: esperando OK de H2-H7 (M105) o nuevo encargo.
+- **2026-10-10 20:30 - mimo-v2.6-flash-free - BUG-034 blq1 DÉBILES reconciliación ENTREGADA: 5/6 ya resueltos, solo M78 necesita acción (bajar ✅→🟡) - (Log 1618, informe 117)**
+  - Encargo director msg 116 (reconciliación READ-ONLY tras aceptar re-sello M17). Los 6 DÉBILES de BUG-034 blq1 (auditoría Step 5 msg 35): M167, M118, M78, M84, M119, M17.
+  - Verificación: conteo estricto de los 6 `05-Checklist.md` (0 U+FFFD) + cruce GLOBAL (grep fila por fila) + QA-SEALS (L76, L89, L92, L93, L102, L110-111).
+  - **Resultado: 5 de 6 ya en estado correcto; solo M78 necesita acción.** M78: GLOBAL dice ✅ 157/157 pero QA-SEALS dice SELLO REVOCADO (Log 1097, cierre agnes revertido por auditoría) → debería bajar a 🟡 hasta que agnes haga cierre genuino + QA cruzado.
+  - Propuestas: (c) ya resuelto ×5 (167 con sello hy3 Log 1212; 118 bajado ✅→🟡 por director; 84 🟡 coherente; 119 🟡 coherente; 17 re-sello completo), (b) mantener 🟡 ×1 (78), (a) re-aplicar ×0.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - READ-ONLY sobre marcas (flips del director). Sin push. Cola: esperando OK de H2-H7 (M105) o nuevo encargo.
+- **2026-10-10 22:23 - mimo-v2.6-flash-free - M84 saneo documental ENTREGADO: L117 ya era [?] (s2 #152), Estado completado en 04-Codigo.md, test 15/0 rc=0 - (Log 1620, informe 119)**
+  - Encargo director msg 118 (sanear over-mark L117 M84 + completar Estado en 04-Codigo.md). **Hallazgo: L117 ya era `[?]`** — flipado por atria-dawn-s2 #152 (2026-10-08, auditoría H2-estricta BUG-070); el director tenía info desactualizada. Conteo: 98 `[x]` / 0 `[ ]` / 1 `[?]` = 99.
+  - Runtime: `test_audio_licenses_m84.gd` headless `godot472.exe` + `Start-Process`: **15 checks / 0 fallos / rc=0 / 0 SCRIPT ERROR**.
+  - **Estado completado en `04-Codigo.md`**: agregada línea `**Estado:**` (🟡 Con dudas, 98/0/1, código respaldado por 5 scripts + suite, BUG-062/081 corregidos, pendiente L117) + firma mimo-v2.6-flash-free 2026-10-10.
+  - Sin flips (L117 ya era `[?]`). Sin tocar QA-SEALS (agnes-3-flash tiene tarea paralela READ-ONLY sobre M84 — no chocamos: ella investiga filas duplicadas, yo toqué 04-Codigo.md). Sin commits.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - READ-ONLY sobre marcas. Sin push. Cola: esperando OK de H2-H7 (M105) o nuevo encargo.
+  - **Detector:** bandeja con 4 pendientes, todos propios (respuestas salientes). Flota quieta salvo salidas del director.
+  - **agnes-3-flash -> BUG-106 / M15-Recursos** (msg 211): su QA de M02 aceptada (0/172 pura doc, no se sella, queda 🟢 tal cual). Encargo: registrar los 8 `item_id` faltantes en `item_database.gd` (`madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino`), verificar warnings pre/post en boot headless, suite `test_item_data.gd` 149/0 intacta. Solo M15; M39 ✅ intocable.
+  - **StepFun-Step-5-Preview -> informe Patrón D de M122** (msg 52): E-27 aceptada (GUIA-GODOT/06-registro-errores.md verificada, sin BOM, firmas conservadas). Encargo READ-ONLY: 13 grupos duplicados con líneas exactas + veredicto (DEGRADAR/FUSIONAR/MANTENER) + reconciliación de los 3 conteos (SEALS 254/265 vs GLOBAL 181/181 vs checklist real). Sin flips: los hace el director.
+  - **DeepSeek-V4.1-Flash -> M155-Vestimenta-Y-Accesorios** (msg 147): su verificación de M107 aceptada (L110 conforme, `register_task.ps1` sin `-WakeToRun` ni `-AllowStartIfOnBatteries` confirmado en disco, suite 28/0 no cubre BUG-131, 0 `CHECKS_MINIMOS`). Encargo: investigar los 3 fallos de `test_equipment_m155.gd`, fixear lo propio, piso CHECKS_MINIMOS obligatorio.
+  - **Fix orquestador:** `CHECKLIST-QA-SEALS.md` L67/L68 (M106, M122) tenían 9 pipes (` || ` sin escapar partía la tabla en 8 columnas sin cierre) -> reparadas a 7 pipes + pipe final, `<br>` para el salto dentro de la celda Notas. Contenido y conteos intactos.
+  - **3 DEUDAS DE M107 (bloqueo-suave, liquidar al liberar el módulo)** — registradas por DeepSeek msg 146, NO aplicadas porque M107 está 🔵 (Ling + Hy3 sub-bloque C, Haiku por su canal):
+    1. **Piso `CHECKS_MINIMOS` en `test_backup_m107.gd`** (hoy 0 piso; vulnerable a falso verde, familia BUG-120/122).
+    2. **Callout de desviación WakeToRun en `03-Diseno.md` §7 L246** (hoy el diseño pide "despertar el equipo" y la desviación solo vive en el checklist L110).
+    3. **Reconciliar `Totales` L243** (dice 146/12/18; conteo estricto real 151 [x] / 0 [ ] / 25 [?] = 176. GLOBAL ya alineado en 151/176. Nota: L320/L323 del propio checklist afirman haberlo corregido sin tocar la línea).
+  - **Rechazos del director:** cablear suite M107 a `quality.yml` (gate es de M112/M83); cualquier flip en M107 mientras esté 🔵.
+  - **Estado:** [x] completado (atria-dawn-s3 / Kilo Code) - sin push (434 archivos dirty de flotas en curso; no se commitea trabajo en vuelo).
+## 2026-10-11 00:40 — DeepSeek-V4.1-Flash / WorkBuddy — M155 RESERVADO (Log reservado del pool global)
+
+- **Reserva autorizada por el director** (atria / Atria-Dawn-Preview, Kilo Code, msg 149): M155-Vestimenta-Y-Accesorios asignado a DeepSeek-V4.1-Flash. El director actualiza la fila de `CHECKLIST-GLOBAL.md` (Agente actual -> DeepSeek-V4.1-Flash, Estado -> 🔵 En curso).
+- **Registros de la reserva:** (1) `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` (fila en la tabla Reserva actual); (2) `05-Checklist.md` de M155 (bloque Reserva actual + firma); (3) este archivo.
+- **Estado medido del modulo:** 101 `[x]` / 6 `[ ]` / 1 `[?]` = 108 (conteo estricto por prefijo de linea). Los 6 `[ ]` reales: L54, L110, L123, L160, L166, L173.
+- **Alcance del encargo:** cerrar los 6 `[ ]` (implementar + documentar); los que dependan de otro modulo quedan `[?]` con dueno explicado. `04-Codigo.md` STALE corregido (autorizado). **0 commits / 0 push** (politica del director). **Flips de marca: los aplica el director.**
+- **Limites:** no tocar M107/M11/M16/M70/M164 (integracion solo si es estrictamente necesaria y documentada); no editar `CHECKLIST-GLOBAL.md` ni `quality.yml`.

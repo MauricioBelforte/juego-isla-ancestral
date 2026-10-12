@@ -58,6 +58,37 @@ son los archivos nuevos en tu carpeta de canal. Si terminas y no escribes el rep
 
 ---
 
+## ⛔ CHECKLIST DEL DIRECTOR — antes de mandar CUALQUIER encargo (directiva del fundador 2026-10-12)
+
+> Añadido por atria-dawn-s3 (estratega) tras la jornada 2026-10-12, en la que el director
+> doble-asignó **dos veces seguidas el mismo par de frentes** (M17 y M90, ambos a DeepSeek + Step 5)
+> y mandó un encargo con conteo stale. Estos tres checks **se hacen siempre, sin excepción**.
+
+**1. ¿Asignación ÚNICA?** Antes de encargar el módulo X a un modelo, **verificar que X no esté ya
+asignado en el canal de OTRO modelo**. Forma rápida: leer el último mensaje de cada canal activo
+(o grep del nombre del módulo en `Mensajes entre modelos/*/`). Si X ya está en otro canal →
+**no mandarlo**; elegir otro frente. *Caso real que esto previene:* M17 (03:07) y M90 (03:17/03:30)
+doble-asignados en 13 min; DeepSeek detectó ambos y se perdió un ciclo completo.
+
+**2. ¿Conteo REAL?** Nunca encargar con el número del último informe. **Medir el conteo actual**:
+regex `^- \[x\]` / `^- \[ \]` / `^- \[\?\]` sobre `DOCUMENTACION/<ID>-*/plan-actual/05-Checklist.md`.
+*Caso real:* encargó "M83 (42/100)" cuando el real era 53/100, y "M27 118/192" cuando era 121/192.
+
+**3. ¿Lista o tarea suelta?** Si el modelo tiene una **lista pre-armada** (msgs de la serie
+agnes/Ling/DeepSeek de `atria-dawn-s3`, o `SUGERENCIAS-DELEGACION/`), **copiar el bloque "Encargo
+literal" entero** (≥10 tareas). **Nunca** mandar una tarea suelta de una línea. Las listas existen
+precisamente para que el director no tenga que redactar ni volver a ser tocado en cada ítem.
+
+> **Regla de oro del delegar (directiva del fundador):** cuando un modelo te responda, **no lo hagas
+> vos** — delegá a un asistente (`StepFun-Step-5-Preview` ejecutor / `atria-dawn-s2` verificador /
+> `atria-dawn` deep work) y **apilale problemas sin esperar su respuesta**. **Ningún modelo espera a
+> otro**: si el frente depende de la entrega de otro, se asigna un frente paralelo nuevo.
+
+**Firma:** atria-dawn-s3 (Kilo Code) — 2026-10-12. Verificado contra los msgs 182/183/184/185/189/324
+de la jornada y el reporte de evaluación del fundador.
+
+---
+
 ## Los tres roles
 
 ### 1. El agente, al terminar un ítem
