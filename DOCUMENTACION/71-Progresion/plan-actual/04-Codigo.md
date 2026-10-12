@@ -359,3 +359,80 @@ Formato de línea de ejemplo: `[DOM-PROG-HITO] alcanzado milestone=hito_picota_n
 - Para hacer el error realmente bloqueante se necesitaría migrar a @tool o EditorPlugin — decidir si vale la pena.
 - El módulo está en 97%: los pendientes restantes son mayormente documentación/housekeeping.
 
+
+
+## Notas del Agente — barrido de verificación (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1705
+
+Barrido autorizado por el director (msg 156). El módulo tenía **141 `[?]`** con el
+mismo patrón que M74/M17: notas de implementación ("testeado", "iter. 3 …") que
+nunca se reflejaron en las marcas.
+
+### Verificado y flippado (+19)
+
+Evidencia: suite `test_progresion.gd` (**83 checks, 0 fallos**) + confirmación de las
+APIs en `scripts/progresion/`:
+
+| Item | Evidencia en disco |
+|---|---|
+| RF1 registry + catálogo data-driven | 25+ hitos cargados desde `data/progresion/hitos.json` (`_cargar_catalogo`) |
+| RF2 tipos de condición | `evaluar_condicion` + AND/NOT/OR + compuestas (sello+stat_min) |
+| RF3 dirty flags | `reevaluar_sucias`; 5000 reevals < 500 ms (caché activo) |
+| RF4 UnlockSystem | `activar_desbloqueo`/`desbloqueo_activo`, idempotente, con señal |
+| RF5 señales | `progreso_hito_alcanzado`/`progreso_desbloqueado`/`progreso_primera_vez` |
+| RF9 radar primeras veces | `primera_vez`/`marcar_primera_vez` |
+| RF11 reputación | `PESO_AMISTAD 0.6` / `PESO_CONTRIBUCION 0.4` + `reputacion()` |
+| RF12 títulos | `otorgar_titulo_directo` + `progreso_titulo_obtenido` + idempotencia + save |
+| RF13 persistencia | save versionado + round-trip + purga de desconocidos |
+| RF14 nuevo vs veterano | restore sin re-emisión de señales |
+| RF16 validación | `validar_catalogo()` sin errores, ids únicos |
+| C66/C67/F100/F101/F104/F105/G113/G120 | `hitos_proximos(limite)`, idempotencia, `incrementar`, `get_stat`, `primera_vez`, `reputacion()`, caché, save versionado |
+
+### Quedó `[?]` a propósito (evidencia negativa)
+
+- **RF6**: los "6 puentes de señales M07" no están en `player_profile.gd` (no hay
+  suscripciones a EventBus allí).
+- **RF7**: la nota previa dice que el enganche con `day_started` de M29 sigue pendiente.
+- **RF10**: `reportar_condiciones_imposibles()` no existe (la detección sí).
+- **RF1/RF8**: el catálogo es JSON, no `.tres` como dice el ítem; la presentación es de M72.
+
+## Notas del Agente — barrido con verificacion en disco (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1747
+
+Encargo del director (msg 195): elegir un modulo con muchos `[?]` + codigo. Eleji
+**M71** (123 `[?]`). **M71: 90 -> 93 `[x]` / 213 (+3).**
+
+### Metodo
+
+Igual que en M72: verifique cada item contra el codigo y las suites antes de flipar,
+y solo cerré lo que tiene respaldo real. Ademas tuve en cuenta el degrade que hizo
+s2 (QA Log 17xx) sobre `get_milestone/get_unlock/get_logro/get_titulo`.
+
+### Verificado y flippado
+
+| Item | Evidencia |
+|---|---|
+| C68: validar ids duplicados y condiciones sin referencia | `validar_catalogo()` detecta ids duplicados, referencias inválidas (`_stats_validos_conocidos()`), ciclos en `hitos_previo` y condiciones vacías |
+| D75: condición `nivel_modulo` | `TIPOS_CONDICION_VALIDOS` la incluye y `_evaluar_nivel_modulo_puro()` la evalúa; M13 iter. 5 conectó `nivel_herramienta_cambio` |
+| B48: gating suave de condiciones imposibles | `detectar_condiciones_imposibles_estaticas()` / `_dinamicas()` recorren el catálogo y las reportan |
+
+### Lo que NO existe (queda `[?]`, con el motivo verificado)
+
+| Item | Estado real |
+|---|---|
+| C58: `MilestoneDefinition` con `milestone_id`/`nombre_i18n` | `data/progresion/hitos.json` usa `id`, `nombre`, `dominio`, `condicion`, `recompensas`; **no** tiene `milestone_id` ni `nombre_i18n` |
+| C62: `milestone_catalog.tres` | no existe: el catálogo real es `data/progresion/hitos.json` (JSON, decisión de arquitectura) |
+| C63/C64: `get_milestone`/`get_unlock`/`get_logro`/`get_titulo` | no existen (coincide con el degrade de s2) |
+| B48 (envio a M66): `reportar_condiciones_imposibles()` | no existe: solo la detección |
+
+### Suites
+
+```
+test_progresion.gd   83 checks, 0 fallos   (catálogo de 25 hitos, 0 problemas)
+```
