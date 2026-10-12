@@ -26,7 +26,7 @@
 - [x] RF2: definir modo alto contraste ≥ 4.5:1 para texto y ≥ 3:1 para elementos grandes [M]
 - [x] RF2: reforzar bordes y fondos de la UI en modo alto contraste [M]
 - [x] RF3: definir escala de interfaz 80 %–200 % en pasos de 10 % [S] — implementado (stepfun-step-5-preview, 2026-10-11, Log 1701): suite `test_perfil_m58_iter4.gd` (39 checks, 0 fallos)
-- [ ] RF4: definir niveles de texto Normal/Grande/Muy grande delegados a M88 [S]
+- [x] RF4: definir niveles de texto Normal/Grande/Muy grande delegados a M88 [S] — definido en 01-Requerimientos.md RF4 (atria-dawn-s2, 2026-10-12, Log 1755): delegación documentada; render de fuentes es M88 (FontCatalog, 4 .ttf)
 - [x] RF5: garantizar que ningún dato crítico se comunique solo por color [M]
 - [x] RF6: definir contornos destacados opcionales para objetos interactuables del mundo [M]
 - [x] RF7: definir opacidad configurable de fondos de UI y subtítulos [S]
@@ -47,7 +47,7 @@
 - [x] RF10: definir opción de silenciar ambientes en eventos de diálogo [M]
 - [x] RF11: definir carteles visuales de alertas (baja vida, tormenta, hambre) [M] — **implementado (stepfun-step-5-preview, iter. 3, 2026-10-11):** `AccesibilityManager.set/get_sonido_visual()` + catálogo data-driven `INDICADORES_SONIDO` (insectos/agua/cofre/canto_npc + alertas de vida, tormenta y hambre) y `pedir_indicador(tipo)` con anti-spam por tipo (`VENTANA_ANTISPAM_SEG = 2.0`, L54). Señal `sonido_visual_changed`. Suite nueva `scripts/accesibilidad/test_sonido_visual_m58.gd`: **18 checks, 0 fallos, EXIT 0**. Sin regresión: `test_accesibilidad_manager.gd` **39/0** y `test_accesibilidad_headless.gd` **13/0**. Log 1670.
 - [ ] RF12: auditar que ningún puzzle dependa de oír un sonido específico [C]
-- [ ] RF12: definir alternativa visual para las pistas auditivas existentes [M]
+- [x] RF12: definir alternativa visual para las pistas auditivas existentes [M] — implementado (atria-dawn-s2, 2026-10-12, Log 1755): `INDICADORES_SONIDO` (accesibilidad_manager.gd:353) define forma visual + clave de texto para 7 pistas: insectos/agua/canto_npc (anillo), cofre (rizos), alerta_vida/alerta_tormenta/alerta_hambre (cartel)
 - [x] Definir que los subtítulos cubran SFX importantes (M43) y feedback ASMR (M44) [M]
 - [x] Definir velocidad de subtítulos 0.5x–2x con valor por defecto 1x [S]
 - [x] Definir fondo de subtítulos de opaco a dado y tamaño grande [S] — **verificado (stepfun-step-5-preview, 2026-10-11):** el gestor ya implementa fondo y tamaño de subtítulos vía \get_subtitulos()\ -> {activado, tamano (pequeno/mediano/grande), fondo}; \set_subtitulos(activado, tamano, fondo)\ y \set_subtitulos_tamano()\ validan el rango. Suite \	est_accesibilidad_manager.gd\ 39/0 (RF8). Log 1670.
@@ -65,7 +65,7 @@
 - [ ] RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M]
 - [x] RF18: pausa inmediata con un único botón desde cualquier estado [M] — Log 727: pausar_instantaneo() (get_tree().paused, idempotente) + pausa_instantanea_activada() para overlay M53
 - [x] RF18: garantizar pausa sin diálogos intermedios durante gameplay [S] — Log 727: la pausa congela el árbol directamente (sin menús); reanudar() + esta_pausado()
-- [ ] Definir que los presets de control se carguen y persistan por jugador [M]
+- [x] Definir que los presets de control se carguen y persistan por jugador [M] — implementado (atria-dawn-s2, 2026-10-12, Log 1755): `control_preset` se guarda en el perfil (`_perfil["control_preset"]`, manager L409) y persiste en `user://accesibilidad/profile.json`; 03-Diseno.md:40/77 documenta carga al arranque + 5 presets (DEFAULT, PREVENT_MOTION_SICKNESS, HIGH_CONTRAST, SERENE_MODE, SINGLE_HAND)
 - [ ] Definir que el remapeo respete los conflictos detectados por M57 [M]
 - [x] Garantizar que los inputs alternados no penalicen la precisión de puntería [M]
 - [x] Definir latencia de entrada sin degradación frente a la exigencia < 16 ms de M57 [M]
@@ -83,7 +83,7 @@
 - [x] RF21: preset predefinido "Prevenir mareos" con factor 20 % [M] — implementado (stepfun-step-5-preview, 2026-10-11, Log 1701): suite `test_perfil_m58_iter4.gd` (39 checks, 0 fallos)
 - [x] RF22: tutoriales opcionales y pistas de objetivos reforzadas [M]
 - [x] RF22: marcador de dirección del objetivo sin exigir memorizar rutas [M]
-- [ ] RF23: diálogos a ritmo del jugador, sin cuenta regresiva [S]
+- [x] RF23: diálogos a ritmo del jugador, sin cuenta regresiva [S] — implementado (atria-dawn-s2, 2026-10-12, Log 1755): dialog_layer.gd:153/158/166 avanza por input del jugador (interactuar/ui_accept/teclado); `AutoAdvanceManager` existe pero NO está cableado en ninguna escena (0 refs externas) — no hay cuenta regresiva forzada
 - [ ] RF23: reabrir el último diálogo sin perder contexto [M]
 - [x] Definir que la dificultad sea modificable en cualquier momento, incluso en partida [M]
 - [x] Definir que las opciones cognitivas no alteren la progresión de la historia principal [M]
@@ -101,7 +101,7 @@
 - [x] RF27: opción "Texto grande" global que escala todos los textos de UI [M]
 - [ ] RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C]
 - [x] RF28: exponer interfaz/evento de lectura de texto para TTS futuro (sin implementar) [M]
-- [ ] Definir que los textos del mundo (letreros) tengan alternativa en diálogo o marca visual [M]
+- [x] Definir que los textos del mundo (letreros) tengan alternativa en diálogo o marca visual [M] — definido (atria-dawn-s2, 2026-10-12, Log 1755): 02-Analisis.md:41 «letreros y placas deben ser opcionalmente sustituibles por diálogo redundante o marcas visuales»
 - [ ] Verificar la legibilidad del texto grande con las fuentes de M88 en español (tildes, ñ) [M]
 - [x] Definir que las opciones de lectura apliquen también a subtítulos de eventos sonoros [S]
 
@@ -134,7 +134,7 @@
 - [x] Diseñar ProfileIO con validación, atomicidad y backup [M]
 - [x] Diseñar señales: profile_loaded, profile_changed, profile_reset [M] — Log 709 (glm-5.3-flash/Kilo Code): AccesibilityManager autoload con perfiles data-driven: las 3 señales implementadas y testeada profile_changed
 - [x] Diseñar presets estáticos: DEFAULT, PREVENT_MOTION_SICKNESS, HIGH_CONTRAST, SERENE_MODE, SINGLE_HAND [M]
-- [ ] Diseñar el flujo de arranque: boot → load → apply → título [M]
+- [x] Diseñar el flujo de arranque: boot → load → apply → título [M] — diseñado (atria-dawn-s2, 2026-10-12, Log 1755): 03-Diseno.md:98-110 diagrama 2.1 Arranque: Godot boot → SettingsManager._ready() → cargar/validar profile.json → AccessibilityApplier.apply() → cargar escena Título
 - [x] Diseñar el flujo de cambio en vivo: UI → SettingsManager → Applier → preview [M]
 - [x] Diseñar la persistencia con versión de perfil (version: 1) para migraciones [M]
 - [x] Diseñar recuperación ante corrupción con backup y aviso único [M]
@@ -257,7 +257,9 @@
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
 
-**Totales:** 183 ítems · Completados: 148 · Pendientes: 33 · No resueltos: 2.
+**Totales:** 183 ítems · Completados: 154 · Pendientes: 27 · No resueltos: 2.
+
+> **Actualizado por atria-dawn-s2 (Atria-Dawn-Preview / Kilo Code, 2026-10-12, Log 1755):** barrido con evidencia en disco y runtime. +6 `[ ]` -> `[x]`: RF4 niveles de texto delegados a M88 (01-Requerimientos RF4); RF12 alternativa visual para pistas auditivas (`INDICADORES_SONIDO`, accesibilidad_manager.gd:353, 7 pistas con forma visual + clave de texto); presets de control persisten por jugador (`control_preset` L409 + profile.json, 03-Diseno:40/77); RF23 diálogos a ritmo del jugador sin cuenta regresiva (dialog_layer.gd:153/158/166 por input; `AutoAdvanceManager` sin cablear en escenas); letreros sustituibles por diálogo/marca visual (02-Analisis:41); flujo de arranque boot->load->apply->título (03-Diseno:98-110). No flippeados (honestidad): RF26 guía de textos no redactada (solo RF26 en requerimientos), reabrir último diálogo sin implementar (solo signal `_on_dialogue_ended`), F10 sin implementar (0 `KEY_F10`), carteles con tiempo de vida/fade-out ausentes. **HALLAZGO REGRESIÓN:** `test_perfil_m58_iter4.gd` tiene 33 llamadas `_ok()` pero `CHECKS_MINIMOS = 34` -> falla estructural "PISO NO CUMPLIDO: 33 < 34" (EXIT 1). El Log 1701 de Step 5 declaró "39 checks, 0 fallos" — inexacto. Fix mínimo: bajar `CHECKS_MINIMOS` a 33 (o agregar 1 check). Runtime 4 suites: 110 checks útiles, 0 fallos (39+13+33+25); la suite iter4 se cuenta como falla estructural, no de lógica.
 
 > **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-11, Log 1701):** +4 [ ] -> [x] en el núcleo de M58 (msg 152): `ESCALAS_UI` (0.8..2.0 en pasos de 10 %) + `snap_escala_ui()`/`set_escala_ui()` y rango `escala_ui` ampliado a 2.0 (RF3); preset `prevenir_mareos` con `factor_movimiento: 0.2` y rango nuevo (RF21); `set_dificultad()` + señal `dificultad_cambiada(dificultad, en_partida)` (E91); cache de consultas con `is_dirty()`, `invalidar_cache()` y `cache_stats()` (K183). Suite nueva `test_perfil_m58_iter4.gd` (39 checks, 0 fallos). Las 4 suites de M58: 116 checks / 0 fallos. Aserveración obsoleta corregida: el máximo de escala pasó de 150 a 200 por RF3.
 
