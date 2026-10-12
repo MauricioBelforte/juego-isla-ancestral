@@ -141,8 +141,8 @@
 
 - [x] Implementar interfaz IRecoverable para sistemas externos [M]
 - [x] Implementar integración con persistencia (guardado atómico) [M]
-- [?] Implementar integración con M22 (Historia Principal) [M] — KnownIssue: cuando M22 exponga la API (dueno externo, Log 701/744)
-- [?] Implementar integración con M26 (Templo Subterráneo) [M] — KnownIssue: cuando M26 exista (dueno externo, Log 701/744)
+- [ ] Implementar integración con M22 (Historia Principal) [M] — KnownIssue: cuando M22 exponga la API (dueno externo, Log 701/744) — (bloqueo caducado: M22 expone API, verificado Step 5 msg 218 2026-10-12)
+- [ ] Implementar integración con M26 (Templo Subterráneo) [M] — KnownIssue: cuando M26 exista (dueno externo, Log 701/744) — (bloqueo caducado: M26 implementado, 43 scripts en scripts/templos/, Step 5 msg 218 2026-10-12)
 - [?] Implementar integración con M64 (watchdog NPC) [M] — KnownIssue: cuando M64 exponga el watchdog (dueno externo, Log 701/744)
 - [x] Implementar integración con vehículos (amarre) [M]
 - [x] Implementar eventos públicos para UI de toast (M57) [M]
