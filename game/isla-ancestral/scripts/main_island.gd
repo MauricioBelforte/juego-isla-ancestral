@@ -110,50 +110,13 @@ func _setup_terrain() -> void:
 	mat.vertex_color_use_as_albedo = true
 	terrain.material_override = mat
 	
-	# Mesher con catálogo de bloques por bioma
+	# Mesher con la library canónica de bloques (M08 BlockCatalog — fuente
+	# única). Antes la library se construía inline aquí, duplicando y
+	# divergiendo del catálogo (modelos desalineados con los ids — Log 1727,
+	# unificación por encargo del director).
+	var catalog := BlockCatalog.new()
 	var mesher := VoxelMesherBlocky.new()
-	var library := VoxelBlockyLibrary.new()
-	
-	# Modelo 0: Aire
-	var air := VoxelBlockyModelEmpty.new()
-	air.set_name("air")
-	library.add_model(air)
-	
-	# Modelos 1-20: Bloques con colores de bioma
-	_add_block(library, "dirt", Color(0.55, 0.35, 0.16))
-	_add_block(library, "grass", Color(0.33, 0.44, 0.12))  # 55711E
-	_add_block(library, "stone", Color(0.49, 0.49, 0.52))
-	_add_block(library, "bedrock", Color(0.2, 0.2, 0.2))
-	_add_block(library, "sand", Color(0.96, 0.94, 0.88))
-	_add_block(library, "clay", Color(0.6, 0.5, 0.4))
-	_add_block(library, "wood", Color(0.45, 0.3, 0.15))
-	_add_block(library, "planks", Color(0.6, 0.45, 0.25))
-	_add_block(library, "copper_ore", Color(0.7, 0.45, 0.2))
-	_add_block(library, "iron_ore", Color(0.6, 0.6, 0.65))
-	_add_block(library, "crystal", Color(0.4, 0.7, 0.9))
-	_add_block(library, "gemstone", Color(0.9, 0.7, 0.1))
-	_add_block(library, "glass", Color(0.8, 0.9, 1.0))
-	_add_block(library, "ancient_crystal", Color(0.6, 0.8, 1.0))
-	_add_block(library, "lamp_glyph", Color(1.0, 0.9, 0.4))
-	_add_block(library, "ice", Color(0.7, 0.85, 1.0))
-	_add_block(library, "water", Color(0.10, 0.45, 0.75))  # azul oceano mas claro
-	# IDs 18-25: placeholders alineados con BlockType (M24-M26 los usarán a futuro)
-	_add_block(library, "pressure_plate", Color(0.35, 0.3, 0.28))
-	_add_block(library, "light_receiver", Color(0.9, 0.8, 0.3))
-	_add_block(library, "glyph_emitter", Color(0.3, 0.8, 0.8))
-	_add_block(library, "sliding_block", Color(0.45, 0.5, 0.55))
-	_add_block(library, "flow_vase", Color(0.75, 0.45, 0.3))
-	_add_block(library, "adobe_wall", Color(0.8, 0.65, 0.45))
-	_add_block(library, "floor_tile", Color(0.85, 0.8, 0.7))
-	_add_block(library, "roof_tile", Color(0.7, 0.3, 0.25))
-	_add_block(library, "snow", Color(0.95, 0.95, 0.98))
-	_add_block(library, "gravel", Color(0.55, 0.5, 0.45))
-	_add_block(library, "moss", Color(0.25, 0.5, 0.2))
-	_add_block(library, "mud", Color(0.35, 0.25, 0.15))
-	_add_block(library, "shallow_water", Color(0.25, 0.82, 0.78))
-	
-	library.bake()
-	mesher.library = library
+	mesher.library = catalog.get_library()
 	terrain.mesher = mesher
 	
 	# Generador de isla con biomas (M09/M10) — PERFIL ORIGINAL (M167 config
@@ -266,12 +229,6 @@ func _crear_base_verde_isla() -> void:
 	if mundo_raiz_disco != null:
 		disco.position = mundo_raiz_disco.centro_vec3(2.95)
 	add_child(disco)
-
-func _add_block(library: VoxelBlockyLibrary, block_name: String, color: Color) -> void:
-	var cube := VoxelBlockyModelCube.new()
-	cube.set_name(block_name)
-	cube.set_color(color)
-	library.add_model(cube)
 
 func _setup_player_visual() -> void:
 	var player = get_node_or_null("Player")

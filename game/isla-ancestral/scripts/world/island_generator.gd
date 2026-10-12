@@ -31,6 +31,10 @@ var _terrain_noise: FastNoiseLite = null
 ## Ruido para biomas
 var _biome_noise: FastNoiseLite = null
 
+## Ruido para vetas de mineral (preconstruido: FIX M61/RF25, Log 1755 — antes
+## se allocaba FastNoiseLite por cada bloque subterráneo en _has_ore)
+var _ore_noise: FastNoiseLite = null
+
 func _init(catalog: BlockCatalog, world_seed: int = 42) -> void:
 	_catalog = catalog
 	seed_value = world_seed
@@ -58,6 +62,12 @@ func _setup_noises() -> void:
 	_biome_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	_biome_noise.frequency = 0.01
 	_biome_noise.fractal_octaves = 2
+
+	# Ruido de vetas de mineral (M61/RF25: una sola asignación, no por bloque)
+	_ore_noise = FastNoiseLite.new()
+	_ore_noise.seed = seed_value + 3000
+	_ore_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	_ore_noise.frequency = 0.1
 
 ## Genera el valor de altura para una posición (x, z)
 func get_height(x: int, z: int) -> int:
@@ -164,6 +174,8 @@ func get_block_at(x: int, y: int, z: int) -> int:
 				return BlockType.SAND
 			"snow":
 				return BlockType.SNOW
+			"wetland":
+				return BlockType.MUD
 			"forest", "grassland":
 				return BlockType.GRASS
 			"mountain":
@@ -175,6 +187,8 @@ func get_block_at(x: int, y: int, z: int) -> int:
 		match biome:
 			"beach":
 				return BlockType.SAND
+			"wetland":
+				return BlockType.MUD
 			"mountain":
 				return BlockType.STONE
 			_:
@@ -188,34 +202,44 @@ func get_block_at(x: int, y: int, z: int) -> int:
 ## Determina el bioma basado en posición y altura
 func _get_biome(x: int, z: int) -> String:
 	var height := get_height(x, z)
-	var biome_val := _biome_noise.get_noise_2d(float(x), float(z))
-	
+	# Eje de humedad (M09 03-Diseno §3 regla 1: mezcla por 2 ejes, altura +
+	# humedad, fronteras diagonales nunca lineas rectas).
+	var humedad := _biome_noise.get_noise_2d(float(x), float(z))
+
 	# Playa: cerca del nivel del agua (0-3)
 	if height <= 3:
 		return "beach"
-	
+
+	# Cumbre nevada. FIX BUG-043 (2026-10-12, encargo director msg 32): el
+	# check de snow (umbral 0.8) debe ir ANTES que el de mountain (0.65).
+	# Antes estaban al reves: toda celda con altura de nieve superaba el
+	# umbral de mountain primero y devolvia "mountain", dejando el bioma
+	# snow inalcanzable (snow=0 sobre 2000 muestras; alt. max real ~38).
+	if height > max_height * 0.8:
+		return "snow"
+
 	# Montaña: alta altitud
 	if height > max_height * 0.65:
 		return "mountain"
-	
-	# Nieve: muy alta
-	if height > max_height * 0.8:
-		return "snow"
-	
-	# Bosque vs pradera según ruido
-	if biome_val > 0.0:
+
+	# Humedal: humedad alta y baja altitud (M09 03-Diseno §2: 0-8, barro,
+	# juncos). Usa el bloque MUD existente (id 29).
+	if height <= 8 and humedad > 0.45:
+		return "wetland"
+
+	# Bosque vs pradera según humedad
+	if humedad > 0.0:
 		return "forest"
-	
+
 	return "grassland"
 
 ## Verifica si hay un mineral en esta posición
+## FIX M61/RF25 (2026-10-12, Log 1755): el ruido se preconstruye una sola vez
+## en _setup_noises() como los demás (_ore_noise). Antes se hacía
+## FastNoiseLite.new() en CADA llamada — una asignación por cada bloque
+## subterráneo del camino caliente del generador (get_block_at → _has_ore).
 func _has_ore(x: int, y: int, z: int) -> bool:
-	var ore_noise := FastNoiseLite.new()
-	ore_noise.seed = seed_value + 3000
-	ore_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
-	ore_noise.frequency = 0.1
-	
-	var val := ore_noise.get_noise_3d(float(x), float(y), float(z))
+	var val := _ore_noise.get_noise_3d(float(x), float(y), float(z))
 	return val > 0.6
 
 ## Obtiene el tipo de mineral
@@ -231,7 +255,10 @@ func _get_ore_type(y: int) -> int:
 ## Obtiene el color de debug para una posición (para visualización procedural)
 func get_debug_color(x: int, y: int, z: int) -> Color:
 	var block_id := get_block_at(x, y, z)
-	var bt: BlockType = _catalog.get_block(block_id)
-	if bt:
-		return bt.debug_color
-	return Color.MAGENTA
+	# El catálogo es opcional (en producción se pasa null): fallback a
+	# BlockType.create_default para no depender de él (Log 1728).
+	if _catalog != null:
+		var bt: BlockType = _catalog.get_block(block_id)
+		if bt != null:
+			return bt.debug_color
+	return BlockType.create_default(block_id).debug_color

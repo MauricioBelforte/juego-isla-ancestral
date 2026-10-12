@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 10: Generación del Mundo
 
@@ -40,7 +40,7 @@
 ## C. Pipeline de capas (16)
 
 - [x] Capa 1 Altura: Simplex multi-octava → mapa de alturas 64×64 [M]
-- [?] Capa 2 Biomas: altura + humedad → mapa de biomas (umbrales M09) [M] — QA atria-dawn: parcialmente falso. `_get_biome` usa altura + UN solo ruido (sin eje de humedad); los umbrales están hardcodeados (0.65/0.8×max_height en island_generator.gd:198-203), no vienen de M09; y hay 5 biomas ("beach/forest/grassland/mountain/snow"), no los 13 de M09.
+- [?] Capa 2 Biomas: altura + humedad → mapa de biomas (umbrales M09) [M] — QA atria-dawn: parcialmente falso. `_get_biome` usa altura + un solo ruido (sin eje de humedad); los umbrales están hardcodeados (0.65/0.8×max_height en island_generator.gd:198-203), no vienen de M09; y hay 5 biomas ("beach/forest/grassland/mountain/snow"), no los 13 de M09. **Actualizado 2026-10-12 (Log 1753):** fix BUG-043 (snow antes que mountain) + incorporación del bioma `wetland` con eje de humedad → ahora **6 biomas** en el pipeline de la Isla Raíz (todos los producibles por heightmap+ruido; los 7 restantes del catálogo M09 son de otras islas o de colocación narrativa — ver 04-Codigo.md §7). Los umbrales siguen hardcodeados (no de M09) y los tests están **pendientes de CI/headless**.
 - [?] Capa 3 Formaciones: recetas M09 + marcadores → modificadores [M] — QA atria-dawn: FALSO. No existe ninguna capa de formaciones: `island_generator.gd` no genera ríos, lagos, cascadas, cañones ni la Gran Grieta. Búsqueda de `cueva|tunel|grieta|canyon` en scripts/world → 0 coincidencias de código.
 - [?] Capa 4 Roca y cuevas: Simplex 3D → densidad de piedra/aire [M] — QA atria-dawn: FALSO. El único ruido 3D es `_has_ore` (vetas de mineral); no hay generación de cuevas ni de aire en piedra.
 - [x] Capa 5 Minerales: vetas por profundidad + bioma (M46) [M]
@@ -159,8 +159,12 @@
 5. **Test A de determinismo (§37):** no existía hasta ahora; el nuevo cubre 2 órdenes de muestreo puntual, no "3 órdenes de regen → mismos bytes" de chunks completos.
 6. **Contradicción con M09 confirmada** (cadena del Log 944): el consumidor directo de las recetas de M09 nunca las consumió — implementó su propia lógica.
 
-**Bug real encontrado — bioma "snow" inalcanzable (registrado como BUG-043):**
-`_get_biome` (island_generator.gd:198-203) comprueba `mountain` (h > 0.65×max = 26) **antes** que `snow` (h > 0.8×max = 32). El muestreo de 2000 posiciones da **mountain=80, snow=0**, con altura máx real 38 > 32: hay posiciones que *deberían* ser nieve y se clasifican como montaña. El bloque SNOW (id 26) existe en BlockType y en la library de `main_island.gd:131`, pero el generador **nunca lo produce**. No se fixeó en esta iter: el perfil del terreno (max_height 40, boost 1.0) fue restaurado por el usuario (Log 791) y alterar la generación es decisión visual — el fix (reordenar 2 checks) queda para el dueño del módulo con visto bueno del usuario.
+**Bug resuelto — BUG-043 fixeado 2026-10-12 (Log 1753, encargo director msg 32):**
+FIX aplicado en `island_generator.gd::_get_biome`: el check de `snow` (h > 0.8×max = 32) ahora se evalúa **antes** que el de `mountain` (h > 0.65×max = 26). Antes toda celda de cumbre nevada devolvía "mountain" y el bioma snow era inalcanzable (snow=0/2000, alt. máx real 38). El bloque SNOW ya existía en BlockType y en la library de `main_island.gd:131`; el generador nunca lo producía. **El perfil de alturas del usuario (Log 791) quedó intacto** — solo se reordenaron los checks.
+
+**Bioma wetland incorporado (mismo fix):** M09 §3 regla 1 pide mezcla por altura + humedad; ahora `_biome_noise` alimenta también el bioma `wetland` (humedad > 0.45 y h ≤ 8 → superficie y subsuelo MUD, id 29 ya existente). Pipeline de la Isla Raíz: **6 biomas** (beach, grassland, forest, wetland, mountain, snow). Los 7 biomas restantes del catálogo M09 son de otras islas (desierto/tropical/volcánico), de colocación narrativa (ruinas/resonancia) o requieren features de terreno futuras (valle/nevado) — ver 04-Codigo.md §7 para el mapeo completo diseño↔runtime.
+
+**Tests:** `test_generacion_m10_atria.gd` ampliado con `_test_bioma_humedal` (cobertura de los 6 biomas). **Pendientes de CI/headless** — Godot no es ejecutable en el sandbox de esta sesión.
 
 **Código muerto / desviaciones menores:**
 - `BlockCatalog` (block_catalog.gd, 140 l.) **no tiene ningún usuario en runtime** — ni `BlockCatalog.new()` ni `get_library()` se llaman en ningún lado. Su library de 20 modelos tiene un **orden que no coincide** con los ids de BlockType (ICE=16→modelo 16 es GRAVEL; WATER=17→MOSS; SNOW/26, GRAVEL/27, MOSS/28, MUD/29 y SHALLOW_WATER/30 fuera de rango). Es inofensivo porque la library real la construye `main_island.gd:96-139` inline con el orden correcto (31 modelos, ids 0–30 ✓), pero el archivo engaña.
@@ -172,7 +176,7 @@
 
 **Recomendaciones para el próximo agente:**
 1. **Decidir el alcance real de M10:** o bien implementar las capas 3/4/8 (formaciones, cuevas, estructuras) y los knobs, o reescribir esos items como "contrato propuesto para M1/otros módulos" (como en M09).
-2. Fix del bioma snow (reordenar checks en `_get_biome`) — con visto bueno del usuario sobre el perfil visual.
+2. ~~Fix del bioma snow (reordenar checks en `_get_biome`)~~ — **HECHO 2026-10-12 (Log 1753):** checks reordenados + bioma wetland incorporado. Falta correr los tests en CI/headless y validar visualmente la cumbre nevada y el humedal.
 3. `_has_ore`: mover el `FastNoiseLite.new()` a `_setup_noises()`.
 4. Borrar `BlockCatalog` muerto o cablearlo de verdad (que `main_island.gd` lo use en vez de la library inline, que es la que funciona).
 5. Escribir el test A completo (3 órdenes de chunks completos → mismos bytes) usando VoxelBuffer.
