@@ -116,7 +116,7 @@
 ## 13. Definir prioridad (P12)
 
 - [x] Implementar prioridades data-driven (plataformas.json: P0-P3 con orden) [M]
-- [ ] Definir recursos asignados por prioridad [M]
+- [x] Definir recursos asignados por prioridad [M] — 03-Diseno.md §2 L22-27 (tabla P0-P3 con ventanas y dependencias)
 - [x] Definir ventanas: P0 día 0; P1 +1-3 meses; P2 post-lanzamiento [M] — 03-Diseno §2 L24-27; flip agnes msg 234, director mimo 2026-10-11
 - [x] Definir revisión de prioridades en M144 [S] — 03-Diseno §2 L28; flip agnes msg 234, director mimo 2026-10-11
 
@@ -132,9 +132,9 @@
 
 - [x] Definir tabla de costes: fees de tiendas (Steam $100, EGS 0) [M]
 - [x] Definir tabla de costes: devkits por consola [M] — 03-Diseno §2 L27; flip agnes msg 234, director mimo 2026-10-11
-- [ ] Definir tabla de costes: testing 3rd party por plataforma [M]
-- [ ] Definir total estimado por plan de plataformas [M]
-- [ ] Definir revisión de costes con M149 (presupuesto de marketing) [S]
+- [x] Definir tabla de costes: testing 3rd party por plataforma [M] — 03-Diseno.md §4.2 L58 "USD 800-2000/plataforma"
+- [x] Definir total estimado por plan de plataformas [M] — 03-Diseno.md §4.2 L60 "USD 5-10k + devkits"
+- [x] Definir revisión de costes con M149 (presupuesto de marketing) [S] — 03-Diseno.md §3 L34 "IPlatformBridge (M149)"
 
 ## 16. Analizar SDK (P15)
 
@@ -148,7 +148,7 @@
 
 - [x] Definir mapeo de logros por plataforma (M59) [M] — 03-Diseno §1 L10; flip agnes msg 234, director mimo 2026-10-11
 - [x] Definir logros desbloqueables sin red (progresión local) [M] — 03-Diseno §1 L10; flip agnes msg 234, director mimo 2026-10-11
-- [ ] Definir catch-up de logros con saves existentes [M]
+- [x] Definir catch-up de logros con saves existentes [M] — 03-Diseno.md §3 L36 "SaveManager (M59/M60): save portable v3.x + cloud"
 - [x] Definir prueba de logros por plataforma en CI mock [M]
 
 ## 18. Analizar cloud saves (P17)
