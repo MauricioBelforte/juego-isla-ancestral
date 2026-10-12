@@ -236,3 +236,26 @@ func show_ripple(position_2d: Vector2, intensity: float) -> void: ...
 - Ejecutar el plan de testings del 05-Checklist (sección M) y dejar `07-Resultados-Testings.md` en plan-actual cuando el plan de testings amerite.
 - Confirmar el comportamiento del shader de daltonismo en calidad Baja (fallback modulate) antes de cerrar el módulo.
 - Al completar la implementación, actualizar `CHECKLIST-GLOBAL.md` (estado ✅/🟡, progreso real) y `ESTADO-PARALELO.md` si aplica, con la firma correspondiente.
+
+## Notas del Agente — núcleo de perfil, iter. 4 (2026-10-11)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1701
+
+Encargo del director (msg 152): tomar M58-Accesibilidad. De los 37 `[ ]` quedan 33
+porque 4 eran de núcleo implementables y ya están hechos:
+
+| Item | Implementación |
+|---|---|
+| RF3 (escala 80–200 % en pasos de 10 %) | `ESCALAS_UI` (13 valores), `snap_escala_ui()`, `set_escala_ui()`; rango `escala_ui` ampliado de 0.8–1.5 a **0.8–2.0** |
+| RF21 (preset "Prevenir mareos" factor 20 %) | perfil `prevenir_mareos` con `reducir_movimiento: true` y `factor_movimiento: 0.2`; rango nuevo `factor_movimiento` (0.0–1.0) |
+| E91 (aviso al cambiar dificultad en partida) | `set_dificultad(valor, en_partida)`, `get_dificultad()` y señal `dificultad_cambiada(dificultad, en_partida)` |
+| K183 (cache de consultas) | `is_dirty()`, `invalidar_cache()`, `cache_stats()`; `get_campo()` responde del cache mientras el perfil no esté sucio |
+
+Suite nueva `test_perfil_m58_iter4.gd` (39 checks, 0 fallos). Las 4 suites de M58:
+**116 checks, 0 fallos**.
+
+**Aserción obsoleta corregida:** `test_sonido_visual_m58.gd` esperaba que el máximo
+de `escala_ui` fuera 1.5; RF3 pide 200 %, así que se actualizó a 2.0 (cambio de
+requisito, no un parche para que el test pase).

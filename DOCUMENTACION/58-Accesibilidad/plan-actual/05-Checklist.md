@@ -6,7 +6,7 @@
 ## A. Problema y objetivos (12)
 
 - [x] Definir el problema: jugadores con discapacidades visuales, auditivas, motoras, cognitivas o de lectura quedan excluidos sin opciones [S]
-- [ ] Ubicar M58 como módulo transversal dependiente de M53 (UI-UX) y M57 (Interfaz de Control) [S]
+- [x] Ubicar M58 como módulo transversal dependiente de M53 (UI-UX) y M57 (Interfaz de Control) [S]
 - [x] Registrar relaciones con M88 (fuentes), M90 (gráficos), M91 (audio/subtítulos) y M87 (traducciones) [S]
 - [x] Definir el objetivo: sistema completo, persistente y aplicable en tiempo real [S]
 - [x] Cubrir las cinco áreas: visual/color, auditiva, motora, cognitiva y lectoescritura [S]
@@ -25,7 +25,7 @@
 - [x] RF1: definir intensidad del filtro 0–100 % con valor por defecto conservador [M]
 - [x] RF2: definir modo alto contraste ≥ 4.5:1 para texto y ≥ 3:1 para elementos grandes [M]
 - [x] RF2: reforzar bordes y fondos de la UI en modo alto contraste [M]
-- [ ] RF3: definir escala de interfaz 80 %–200 % en pasos de 10 % [S]
+- [x] RF3: definir escala de interfaz 80 %–200 % en pasos de 10 % [S] — implementado (stepfun-step-5-preview, 2026-10-11, Log 1701): suite `test_perfil_m58_iter4.gd` (39 checks, 0 fallos)
 - [ ] RF4: definir niveles de texto Normal/Grande/Muy grande delegados a M88 [S]
 - [x] RF5: garantizar que ningún dato crítico se comunique solo por color [M]
 - [x] RF6: definir contornos destacados opcionales para objetos interactuables del mundo [M]
@@ -41,16 +41,16 @@
 
 - [x] RF8: subtítulos activos por defecto en diálogos y eventos ambientales [S] — Log 727: SUBTITULOS_DEFECTO en AccesibilityManager (true/mediano/fondo) + get_subtitulos()
 - [x] RF8: definir opciones de tamaño, fondo y velocidad de subtítulos (integra M91) [M]
-- [ ] RF9: definir indicadores visuales (rizos/anillos) para sonidos no visualizables [M]
-- [ ] RF9: cubrir insectos, agua, cofres y cantos de NPC con indicador visual [M]
+- [x] RF9: definir indicadores visuales (rizos/anillos) para sonidos no visualizables [M] — **implementado (stepfun-step-5-preview, iter. 3, 2026-10-11):** `AccesibilityManager.set/get_sonido_visual()` + catálogo data-driven `INDICADORES_SONIDO` (insectos/agua/cofre/canto_npc + alertas de vida, tormenta y hambre) y `pedir_indicador(tipo)` con anti-spam por tipo (`VENTANA_ANTISPAM_SEG = 2.0`, L54). Señal `sonido_visual_changed`. Suite nueva `scripts/accesibilidad/test_sonido_visual_m58.gd`: **18 checks, 0 fallos, EXIT 0**. Sin regresión: `test_accesibilidad_manager.gd` **39/0** y `test_accesibilidad_headless.gd` **13/0**. Log 1670.
+- [x] RF9: cubrir insectos, agua, cofres y cantos de NPC con indicador visual [M] — **implementado (stepfun-step-5-preview, iter. 3, 2026-10-11):** `AccesibilityManager.set/get_sonido_visual()` + catálogo data-driven `INDICADORES_SONIDO` (insectos/agua/cofre/canto_npc + alertas de vida, tormenta y hambre) y `pedir_indicador(tipo)` con anti-spam por tipo (`VENTANA_ANTISPAM_SEG = 2.0`, L54). Señal `sonido_visual_changed`. Suite nueva `scripts/accesibilidad/test_sonido_visual_m58.gd`: **18 checks, 0 fallos, EXIT 0**. Sin regresión: `test_accesibilidad_manager.gd` **39/0** y `test_accesibilidad_headless.gd` **13/0**. Log 1670.
 - [x] RF10: referenciar los buses de audio de M91 sin duplicar su lógica [S]
 - [x] RF10: definir opción de silenciar ambientes en eventos de diálogo [M]
-- [ ] RF11: definir carteles visuales de alertas (baja vida, tormenta, hambre) [M]
+- [x] RF11: definir carteles visuales de alertas (baja vida, tormenta, hambre) [M] — **implementado (stepfun-step-5-preview, iter. 3, 2026-10-11):** `AccesibilityManager.set/get_sonido_visual()` + catálogo data-driven `INDICADORES_SONIDO` (insectos/agua/cofre/canto_npc + alertas de vida, tormenta y hambre) y `pedir_indicador(tipo)` con anti-spam por tipo (`VENTANA_ANTISPAM_SEG = 2.0`, L54). Señal `sonido_visual_changed`. Suite nueva `scripts/accesibilidad/test_sonido_visual_m58.gd`: **18 checks, 0 fallos, EXIT 0**. Sin regresión: `test_accesibilidad_manager.gd` **39/0** y `test_accesibilidad_headless.gd` **13/0**. Log 1670.
 - [ ] RF12: auditar que ningún puzzle dependa de oír un sonido específico [C]
 - [ ] RF12: definir alternativa visual para las pistas auditivas existentes [M]
 - [x] Definir que los subtítulos cubran SFX importantes (M43) y feedback ASMR (M44) [M]
 - [x] Definir velocidad de subtítulos 0.5x–2x con valor por defecto 1x [S]
-- [ ] Definir fondo de subtítulos de opaco a dado y tamaño grande [S]
+- [x] Definir fondo de subtítulos de opaco a dado y tamaño grande [S] — **verificado (stepfun-step-5-preview, 2026-10-11):** el gestor ya implementa fondo y tamaño de subtítulos vía \get_subtitulos()\ -> {activado, tamano (pequeno/mediano/grande), fondo}; \set_subtitulos(activado, tamano, fondo)\ y \set_subtitulos_tamano()\ validan el rango. Suite \	est_accesibilidad_manager.gd\ 39/0 (RF8). Log 1670.
 - [x] Verificar que los indicadores de audio no produzcan spam visual en sesiones largas [M]
 
 ## D. RF — Área motora (17)
@@ -80,7 +80,7 @@
 - [x] RF20: timers de pesca y misiones extendidos o eliminados en modo Sereno [M]
 - [x] RF21: modo reducción de movimiento con factor 0–100 % (anti-mareo) [C]
 - [x] RF21: aplicar el factor a shake, parallax, transiciones y motion blur [C]
-- [ ] RF21: preset predefinido "Prevenir mareos" con factor 20 % [M]
+- [x] RF21: preset predefinido "Prevenir mareos" con factor 20 % [M] — implementado (stepfun-step-5-preview, 2026-10-11, Log 1701): suite `test_perfil_m58_iter4.gd` (39 checks, 0 fallos)
 - [x] RF22: tutoriales opcionales y pistas de objetivos reforzadas [M]
 - [x] RF22: marcador de dirección del objetivo sin exigir memorizar rutas [M]
 - [ ] RF23: diálogos a ritmo del jugador, sin cuenta regresiva [S]
@@ -88,7 +88,7 @@
 - [x] Definir que la dificultad sea modificable en cualquier momento, incluso en partida [M]
 - [x] Definir que las opciones cognitivas no alteren la progresión de la historia principal [M]
 - [x] Garantizar que el modo Sereno conserve la economía cozy (sin socavar crafting/recursos) [M]
-- [ ] Definir aviso claro al cambiar de dificultad en partida activa [S]
+- [x] Definir aviso claro al cambiar de dificultad en partida activa [S] — implementado (stepfun-step-5-preview, 2026-10-11, Log 1701): suite `test_perfil_m58_iter4.gd` (39 checks, 0 fallos)
 - [x] Verificar que la reducción de movimiento no rompa la cámara en espacios cerrados (M26) [C]
 
 ## F. RF — Área lectoescritura (11)
@@ -115,7 +115,7 @@
 - [x] NFR: escritura atómica del JSON con backup [M]
 - [x] NFR: cero errores de consola al entrar en Play Mode [M]
 - [x] NFR: cero advertencias de tipos GDScript en el módulo [M]
-- [ ] NFR: debounce de guardado (no escribir en cada tick de slider) [M]
+- [x] NFR: debounce de guardado (no escribir en cada tick de slider) [M]
 - [ ] NFR: UI del menú navegable 100 % por teclado y mando [M]
 - [x] NFR: textos de ayuda de una línea por opción [S]
 - [x] NFR: documentación 100 % en español y checklist completo antes de delegar [S]
@@ -127,9 +127,9 @@
 - [x] Diseñar AccessibilityApplier (servicio estático) con aplicación por áreas [M]
 - [x] Diseñar AccessibilityMenuUI como vista pura sin lógica de gameplay [M]
 - [x] Diseñar ColorFilter con shader passthrough + fallback modulate [C]
-- [ ] Diseñar MotionReducer que consume amplitudes de M12 [M]
-- [ ] Diseñar AimAssist con slider de magnetismo y amortiguador [M]
-- [ ] Diseñar InputPresets (single_hand, low_mobility) integrados a M57 [M]
+- [x] Diseñar MotionReducer que consume amplitudes de M12 [M]
+- [x] Diseñar AimAssist con slider de magnetismo y amortiguador [M]
+- [x] Diseñar InputPresets (single_hand, low_mobility) integrados a M57 [M]
 - [x] Diseñar DifficultyProvider que expone flags a sistemas de juego [M]
 - [x] Diseñar ProfileIO con validación, atomicidad y backup [M]
 - [x] Diseñar señales: profile_loaded, profile_changed, profile_reset [M] — Log 709 (glm-5.3-flash/Kilo Code): AccesibilityManager autoload con perfiles data-driven: las 3 señales implementadas y testeada profile_changed
@@ -138,7 +138,7 @@
 - [x] Diseñar el flujo de cambio en vivo: UI → SettingsManager → Applier → preview [M]
 - [x] Diseñar la persistencia con versión de perfil (version: 1) para migraciones [M]
 - [x] Diseñar recuperación ante corrupción con backup y aviso único [M]
-- [ ] Diseñar el diagrama de estados del perfil (DEFAULT → EDITADO → PERSISTIDO → RECUPERADO) [S]
+- [x] Diseñar el diagrama de estados del perfil (DEFAULT → EDITADO → PERSISTIDO → RECUPERADO) [S]
 
 ## I. Integración con M53 y M57 (12)
 
@@ -159,8 +159,8 @@
 
 - [x] JSON corrupto o ilegible → defaults + aviso único + intento de backup [M]
 - [x] JSON de versión antigua → migración a la versión actual [M]
-- [ ] Perfil con valores fuera de rango → coerce a rangos válidos [M]
-- [ ] Slider arrastrado rápido → debounce de guardado sin pérdida del último valor [M]
+- [x] Perfil con valores fuera de rango → coerce a rangos válidos [M] — **implementado (stepfun-step-5-preview, iter. 3, 2026-10-11):** `RANGOS` (6 campos acotados: subtitulos_velocidad 0.5-2.0, volumen_general/musica/efectos 0-1, tiempo_mantener_ms 100-5000, escala_ui 0.8-1.5) + `_coaccionar()` vía `clampf`/`roundf`; `set_campo` coacciona y `campos_con_rango()` expone el catálogo. Campos sin rango (p.ej. `dificultad`) no se tocan. Suite `test_sonido_visual_m58.gd` 25/0. Log 1674.
+- [x] Slider arrastrado rápido → debounce de guardado sin pérdida del último valor [M] — **implementado (stepfun-step-5-preview, iter. 3, 2026-10-11):** `set_campo_lento()` aplica el valor y emite `profile_changed` de inmediato (el slider responde), y `tick_debounce(delta)` agrupa la escritura a disco tras `DEBOUNCE_GUARDADO_SEG = 0.5` sin cambios. `_flush()` fuerza el guardado pendiente en `_exit_tree()`, así el último valor no se pierde. Suite `test_sonido_visual_m58.gd` 25/0. Log 1674.
 - [x] Jugador cambia de preset gráfico con filtro activo → aplicar fallback correcto sin reset [M]
 - [ ] Mando desconectado a mitad de sesión → perfil intacto, prompts actualizados por M57 [M]
 - [x] Cambio de escala UI con diálogo abierto → el layout se reajusta sin desbordes [C]
@@ -180,7 +180,7 @@
 - [x] Rizos de audio indicadores reutilizados con pooling (sin instancias infinitas) [M]
 - [ ] Carteles de alerta con tiempo de vida y fade-out sin tween acumulados [M]
 - [x] Scale de UI aplicado una sola vez por cambio, no por frame [M]
-- [ ] Consultas al perfil cacheadas cuando no hay cambios (is_dirty) [M]
+- [x] Consultas al perfil cacheadas cuando no hay cambios (is_dirty) [M] — implementado (stepfun-step-5-preview, 2026-10-11, Log 1701): suite `test_perfil_m58_iter4.gd` (39 checks, 0 fallos)
 - [ ] Escaneo de interactuables para contornos solo en radio cercano al jugador [C]
 - [ ] Verificar que M58 no sume draw calls perceptibles en escenas pobladas (M61) [C]
 
@@ -190,7 +190,7 @@
 - [x] Crear 02-Analisis.md con análisis del dominio (5 áreas), alternativas A1–A8 y decisiones D1–D8 [S]
 - [x] Crear 03-Diseno.md con arquitectura, flujos y persistencia [S]
 - [x] Crear 04-Codigo.md con 20 archivos previstos y firmas GDScript [S]
-- [ ] Crear 05-Checklist.md con 125+ ítems verificables [S]
+- [x] Crear 05-Checklist.md con 125+ ítems verificables [S]
 - [x] Marcar los archivos previstos como "Pendiente de implementación" [S]
 - [x] Firmar los documentos con modelo y plataforma [S]
 - [x] Mantener el plan-actual byte a byte idéntico a plan-inicial [S]
@@ -257,7 +257,11 @@
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
 
-**Totales:** 183 ítems · Completados: 131 · Pendientes: 50 · No resueltos: 2.
+**Totales:** 183 ítems · Completados: 148 · Pendientes: 33 · No resueltos: 2.
+
+> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-11, Log 1701):** +4 [ ] -> [x] en el núcleo de M58 (msg 152): `ESCALAS_UI` (0.8..2.0 en pasos de 10 %) + `snap_escala_ui()`/`set_escala_ui()` y rango `escala_ui` ampliado a 2.0 (RF3); preset `prevenir_mareos` con `factor_movimiento: 0.2` y rango nuevo (RF21); `set_dificultad()` + señal `dificultad_cambiada(dificultad, en_partida)` (E91); cache de consultas con `is_dirty()`, `invalidar_cache()` y `cache_stats()` (K183). Suite nueva `test_perfil_m58_iter4.gd` (39 checks, 0 fallos). Las 4 suites de M58: 116 checks / 0 fallos. Aserveración obsoleta corregida: el máximo de escala pasó de 150 a 200 por RF3.
+
+> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-11):** +7 [x] con evidencia en docs y codigo del propio modulo: M58 como transversal (02-Analisis:80), debounce de guardado (accesibilidad_manager.gd:56-92), MotionReducer y AimAssist disenados con su logica (04-Codigo:156-173), presets single_hand/low_mobility integrados a M57 (03-Diseno:83,157), diagrama de estados del perfil (03-Diseno:169) y este checklist con 183 items (>= 125 pedidos). Los 37 [ ] restantes son de implementacion de UI/input o integracion real con M53/M57 (requieren trabajo visual): se dejan pendientes.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 50 [ ] /
