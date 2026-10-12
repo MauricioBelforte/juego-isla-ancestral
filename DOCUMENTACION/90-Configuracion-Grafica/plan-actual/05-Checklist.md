@@ -22,7 +22,7 @@
 - [x] Anti-aliasing — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `AA_OPCIONES` [off,fxaa,msaa_2x,msaa_4x,taa].
 - [x] Anisotropic filtering — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `aniso` [2,4,8,16] en los presets.
 - [x] Post-processing — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `post` (bool) en los presets.
-- [x] Bloom — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `bloom` (bool) en los presets.
+- [x] Bloom — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `bloom` (bool) en los presets. Evidencia adicional: `main_island.tscn` L42-44 tiene `glow_enabled = true`, `glow_intensity = 0.4`, `glow_bloom = 0.05`.
 - [x] Motion blur — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `motion_blur` (bool) en los presets.
 - [x] Depth of field — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `dof` (bool) en los presets.
 - [x] FSR/DLSS/XeSS si corresponde — implementado (stepfun-step-5-preview, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `UPSCALING` [off,fsr_1_0,fsr_2_0,dlss,xess].
@@ -142,7 +142,7 @@
 - [ ] Definir activación/desactivación de todos los efectos
 
 ### [S] Bloom
-- [ ] Definir toggle de bloom
+- [ ] Definir toggle de bloom — **PARCIAL (stepfun-step-5-preview, Kilo Code, 2026-10-12):** el bloom está **activo** en la escena principal (`main_island.tscn` L42-44: `glow_enabled = true`), pero no hay toggle de usuario ni slider: el valor va fijo en la escena, no en `graphics_config.gd`.
 - [ ] Definir intensidad (slider 0-1)
 - [ ] Definir threshold (slider 0-1)
 - [ ] Definir radius (slider 0-1)
