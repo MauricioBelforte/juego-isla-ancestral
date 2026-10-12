@@ -3,7 +3,7 @@
 > **Modelo:** mimo-v2.6-flash-free
 > **Plataforma:** opencode
 > **Fecha:** 2026-10-07 (M163: §34 class_name recién creado + --script con error de carga corre el juego)
-> **Histórico:** 2026-10-07 atria-dawn-s2 (BUG-117: atribución corregida M53/M91 → M66; §6.4 cross-ref a §30; parser 930 .gd: 0 bool de 2 args)
+> **Histórico:** 2026-10-12 Ling 3.1 Flash (M53: §36 — `wrapi` max exclusivo + Label sobre panel oscuro con tema global); 2026-10-07 atria-dawn-s2 (BUG-117: atribución corregida M53/M91 → M66; §6.4 cross-ref a §30; parser 930 .gd: 0 bool de 2 args)
 > **Histórico:** 2026-10-06 mimo-v2.6-flash-free (M88: §32 sonda de licencia — reemplazo global muta la whitelist; §33 git checkout «unable to unlink» en Windows); 2026-10-04 mimo-v2.6-flash-free (M53: §30 — `bool(null)` y suites colgadas); 2026-10-03 mimo-v2.6-flash-free (M43 Lote B1: §29 — JSON->float); 2026-09-30 agnes-3-flash (P-52: §26-§28)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §1 + §9.1-§9.19
 > **Validado en:** Isla Ancestral — Godot 4.7.2
@@ -849,3 +849,97 @@ nunca bloquear en la consola; (2) verificar SIEMPRE `exit=0` y la linea de Resum
 | `git checkout -- archivo` = «unable to unlink» (Windows) | `git show HEAD:<ruta>` + escritura binaria (`wb`); cerrar Godot si persiste | §33 |
 | `Identifier "MiClase" not declared` con class_name recién creado | `godot --headless --editor --quit` para refrescar el cache | §34.1 |
 | `--script` con error de carga ejecuta el juego (runner colgado) | redirigir a archivo + timeout; exigir `exit=0` + Resumen | §34.2 |
+| `godot --headless --import` borra `.godot/global_script_class_cache.cfg` → todos los `class_name` dejan de resolver | Tras agregar clase nueva, correr `--import` ANTES de testear; si se borra el caché, reconstruir con segundo `--import` | §35 |
+| `wrapi`/`wrapf` con max "inclusivo" (último item de lista inalcanzable) | max es EXCLUSIVO (range = max−min): usar `wrapi(v, 0, N)` para rango [0, N−1] | §36 |
+| Label sobre panel oscuro ilegible con tema global (1.26:1) | `add_theme_color_override("font_color", ...)` explícito; el default del tema es TEXT_DARK | §36 |
+
+---
+
+## §35. Godot --import borra el caché de clases (2026-10-11, Step 5, M74)
+
+**Síntoma:** tras ejecutar `godot --headless --import`, las suites fallan con `Identifier "MiClase" not declared` para clases que SÍ existen en disco (propias y ajenas).
+
+**Causa:** `--import` puede borrar `.godot/global_script_class_cache.cfg`. Sin ese archivo, Godot no resuelve NINGÚN `class_name` del proyecto.
+
+**Solución:**
+1. Correr `godot --headless --import` DESPUÉS de agregar una clase nueva con `class_name` (para que se registre).
+2. Si el caché se borra, un segundo `--import` lo reconstruye (verificado: 593 clases reconstruidas).
+3. Los scripts nuevos con `class_name` necesitan `.uid` para ser registrados correctamente.
+
+**Lección relacionada (Step 5, M74):** los dobles de test deben copiar el contrato REAL del módulo, no uno inventado. Ej: M14 `add_item()` devuelve `restante` (lo que NO entró), no la cantidad aceptada.
+
+---
+
+## §36. `wrapi`/`wrapf` tienen el parámetro max EXCLUSIVO + Labels sobre panel oscuro (2026-10-12, Ling 3.1 Flash, M53)
+
+**Síntoma (wrapi):** el wrap-around de `MenuNavigator.wrap_focus` (`menu_navigator.gd:72`) ciclaba por [0, N−2]: **el último control de cualquier lista era inalcanzable** por navegación direccional (con 2 controles, el segundo jamás se enfocaba). El test de lista larga (500 items) fallaba: tras 500 avances el foco era Item_0001, no Item_0000 (el ciclo era de 499, no de 500).
+
+**Causa:** `wrapi(value, min, max)` en Godot 4.7.2 usa **max EXCLUSIVO** (range = max − min). Verificado empíricamente (sonda headless): `wrapi(499, 0, 499) = 0`, `wrapi(4, 0, 4) = 0`, `wrapi(5, 0, 4) = 1`, `wrapi(-1, 0, 4) = 3`. Escribir `wrapi(idx, 0, size - 1)` produce un wrap módulo `size - 1`, no módulo `size`.
+
+**Solución:** para wrap inclusivo sobre [0, N−1] usar `wrapi(idx, 0, N)` (max = size). El bug se corrigió así en `menu_navigator.gd:72` y `test_m53_lista_larga.gd` pasó 7/0.
+
+**Regla:** `wrapi(v, min, max)` ≡ `min + ((v - min) % (max - min))`. Si necesitás que el rango incluya `max`, pasá `max + 1`.
+
+**Hallazgo colateral (mismo lote M53):** los Labels sobre paneles de color hardcodeado necesitan `font_color` explícito. Con el tema global, el default de Label es `COLOR_TEXT_DARK` (theme_ux.gd:235), que sobre un panel oscuro (0.15,0.12,0.10) da **1.26:1 (ilegible)**. Los toasts (`notification_service.gd:105-115`) tenían ese bug — el tooltip no (tiene overrides propios). Fix: overrides `Color(0.92,0.88,0.82)` texto (12.5:1) / `Color(0.85,0.72,0.35)` icono (8.5:1). Verificado por `test_m53_wcag.gd` 17/0. BUG-129 y BUG-130 en `DOCUMENTACION/11-BUGS.md`.
+
+
+---
+
+## 35. `class_name` dentro del cuerpo: cualquier declaración antes lo vuelve ilegal (BUG-098)
+
+**Error:** `Parse Error: Unexpected "class_name" in class body.`
+
+```gdscript
+# ❌ Incorrecto — las constantes antes del class_name meten al parser en
+# "class body", donde class_name ya no es válido
+const EVENTO_VOLVER_A_CASA := "volver_a_casa"
+class_name TelemetriaM104
+extends RefCounted
+
+# ✅ Correcto — class_name primero (o después de extends), sin nada antes
+class_name TelemetriaM104
+extends RefCounted
+
+const EVENTO_VOLVER_A_CASA := "volver_a_casa"
+```
+
+**Dato verificado (2026-10-12, stepfun-step-5-preview, Log 1690):** el orden
+`extends` → `class_name` también es válido (lo usan 11 archivos del repo).
+Lo único ilegal es tener **cualquier declaración de miembro** (`const`, `var`,
+`func`, `@export`) **antes** del `class_name`. Las anotaciones `@tool` sí se
+permiten antes.
+
+**Detector correcto:** marcar "class_name después de extends" da 66 falsos
+positivos; hay que ignorar `extends`, comentarios y anotaciones.
+
+---
+
+## 36. `call_deferred("_run")` + `call_deferred("_resumen")` — la suite pasa en verde con 0 checks
+
+**Error:** el resumen corre **antes** que los checks y la suite da PASS sin haber
+verificado nada.
+
+```gdscript
+# ❌ Incorrecto — ambos diferidos: _resumen() corre primero (0 checks)
+func _init() -> void:
+	call_deferred("_run")
+	call_deferred("_resumen")
+
+# ✅ Correcto — _run() llama al resumen explícito al final
+func _init() -> void:
+	call_deferred("_run")
+
+func _run() -> void:
+	_b1(mgr)
+	_b2(mgr)
+	_resumen()   # explícito, al final
+
+func _resumen() -> void:
+	if _checks < CHECKS_MINIMOS: print("RESULTADO: FALLO"); quit(1); return
+	quit(0 if _fallos == 0 else 1)
+```
+
+**Regla:** en suites headless, el guardián anti-falso-verde (`CHECKS_MINIMOS` +
+conteo de bloques) sólo sirve si el resumen corre **después** de todos los checks.
+Este error se repitió 3 veces en el proyecto (M104, M58, M69) antes de quedar
+estacionalizado.
