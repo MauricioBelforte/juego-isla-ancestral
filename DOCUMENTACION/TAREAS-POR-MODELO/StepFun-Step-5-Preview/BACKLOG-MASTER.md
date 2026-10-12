@@ -66,3 +66,7 @@ inflación de drift (M24 L229).
 4. Al completar, marcar los TRES lugares: este backlog + `05-Checklist.md` del módulo +
    `CHECKLIST-GLOBAL.md`.
 5. **Un `[?]` vale más que un `[x]` falso.** Sin excepciones.
+
+## Registro de logs reservados
+
+- [x] Log creado: **1768** — BUG-098, 2 archivos con parseo roto corregidos (renumerado desde 1690 el 2026-10-12 por colisión de número, orden del director mimo msg 215; el 1690 original quedó para Ling 3.1 Flash).
