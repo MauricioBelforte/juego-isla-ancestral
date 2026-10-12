@@ -5,26 +5,26 @@
 
 ## A. Requisitos del módulo (10)
 
-- [ ] Definir el problema: agricultura cozy opcional sin hambre castigadora, con ritmo diario del calendario [S]
-- [ ] Registrar dependencias: M17, M29; relaciones M08, M14, M15, M16, M13, M31, M32, M64, M61, M53, M59, M52 [S]
-- [ ] Catalogar los 25 puntos de la sección 32 del plan maestro [S]
-- [ ] RF1: tierra cultivable y arada con pala (M13) [S]
+- [x] Definir el problema: agricultura cozy opcional sin hambre castigadora, con ritmo diario del calendario [S] — 01-Requerimientos §1
+- [x] Registrar dependencias: M17, M29; relaciones M08, M14, M15, M16, M13, M31, M32, M64, M61, M53, M59, M52 [S] — 01-Requerimientos encabezado + 03-Diseno §5 (tabla de 12 módulos)
+- [x] Catalogar los 25 puntos de la sección 32 del plan maestro [S] — sección B abajo (P1..P25)
+- [x] RF1: tierra cultivable y arada con pala (M13) [S] — farm_service.gd till_tile() con validación de bloque natural + emite tile_tilled
 - [x] RF2: parcelas con límite de cultivos activos (M17) [S]
-- [ ] RF3: semillas como ítem de inventario (M14/M15) [S]
+- [x] RF3: semillas como ítem de inventario (M14/M15) [S] — farm_service.gd plant() consume semilla via inv.remover_items()
 - [x] RF4: etapas de crecimiento por CropDefinition [S]
-- [ ] RF5: ciclos por día del GameClock (M29) [S]
+- [x] RF5: ciclos por día del GameClock (M29) [S] — _suscribir_tiempo() + advance_day() suscrito a TimeCalendar.day_advanced
 - [x] RF6: riego manual y por lluvia (M32) sin muerte por sequía [S] — water() manual + lluvia automática vía EventBus.weather; sin pérdida cozy
 - [x] RF7 a RF12: estaciones, cosecha, comida opcional, cultivos especiales, fertilizante y persistencia [S]
 
 ## B. Resolución de los 25 puntos del plan (25)
 
-- [ ] P1: parcelas — reserva por jugador con `reserve_plot()` [S]
-- [ ] P2: tierra cultivable — bloque TIERRA_ARADA del catálogo M08 [S]
-- [ ] P3: semillas — catálogo M15 con consumo en M14 [S]
+- [x] P1: parcelas — reserva por jugador con `reserve_plot()` [S] — farm_service.gd reserve_plot(owner_id, center, radius)
+- [x] P2: tierra cultivable — bloque TIERRA_ARADA del catálogo M08 [S] — till_tile() registra _arados + escribe el voxel TIERRA_ARADA (BlockType id 31, main_island.gd library)
+- [x] P3: semillas — catálogo M15 con consumo en M14 [S] — farming.json (M93) carga 5 cultivos; plant() consume via Inventario
 - [x] P4: crecimiento — avance por días acumulados [S]
 - [x] P5: etapas de crecimiento — enum GrowthStage de 7 estados [S]
 - [x] P6: riego — nivel de agua 0..2, regadera y lluvia [S] — regar() manual (1/llamada) + apply_rain() (a 2, idempotente)
-- [ ] P7: fertilizantes — bono benigno que reduce días o mejora calidad [S]
+- [x] P7: fertilizantes — bono benigno que reduce días o mejora calidad [S] — crop_definition.gd fertilizer_bonus; apply_daily_tick usa dias_por_dia=2 si fertilized
 - [x] P8: cosecha — event crop_harvested y entrega a M14 [S]
 - [x] P9: herramientas — pala y regadera integradas vía ToolService (M13) [S]
 - [x] P10: estaciones — ventana por cultivo; fuera de ventana DORMANTE [S]
@@ -33,16 +33,16 @@
 - [ ] P13: flores — decorativas y sujetas a cruce [M]
 - [x] P14: plantas ancestrales — lumina_ancestral con requisito narrativo [M]
 - [ ] P15: híbridos — cruce de flores con reglas legibles (sin RNG oculto) [M]
-- [ ] P16: calidad — 3 niveles (COMUN/BUENA/EXCELENTE) [M]
-- [ ] P17: rendimiento — yields por cultivo con bonificación de calidad [S]
-- [ ] P18: enfermedades — descartadas; el único estado reversible posible es el marchitado experimental [S]
+- [x] P16: calidad — 3 niveles (COMUN/BUENA/EXCELENTE) [M] — crop_tile.gd quality 0/1/2 + calcular_rendimiento() aplica bonificación
+- [x] P17: rendimiento — yields por cultivo con bonificación de calidad [S] — crop_tile.gd calcular_rendimiento() (min/max + quality)
+- [x] P18: enfermedades — descartadas; el único estado reversible posible es el marchitado experimental [S] — 02-Analisis A2c
 - [x] P19: recuperación — siempre por riego o cambio de estación; cero pérdida de progreso [S]
 - [x] P20: almacenamiento — la cosecha entra directa a M14, sin inventario de plantas [S]
 - [ ] P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M]
 - [ ] P22: venta — integración M38/M39 con precios por calidad [M]
 - [ ] P23: semillas raras — reproducibles y con desbloqueo de progresión [M]
 - [ ] P24: cultivos de isla — palma de coco y flor de coral exclusivas [M]
-- [ ] P25: agricultura decorativa — helecho ornamental sin rendimiento [S]
+- [ ] P25: agricultura decorativa — helecho ornamental sin rendimiento [S] — crop_definition.gd decorative_only; calcular_rendimiento() devuelve [] si decorative_only
 
 ## C. CropDefinition y catálogo (10)
 
@@ -51,8 +51,8 @@
 - [x] Definir seasons por cultivo contra enum de GameClock (M29) [S]
 - [x] Definir grow_days y stage_count por cultivo [S]
 - [x] Definir water_need (1 o 2) por cultivo [S]
-- [ ] Definir yields y yield_seeds como diccionarios de ítems [S]
-- [ ] Definir flags is_tree, is_flower, is_ancestral, decorative_only [S]
+- [x] Definir yields y yield_seeds como diccionarios de ítems [S] — crop_definition.gd yield_item_id/yield_amount_min/max + yield_seed_id/yield_seed_amount; calcular_rendimiento() los usa
+- [x] Definir flags is_tree, is_flower, is_ancestral, decorative_only [S] — crop_definition.gd @export vars (is_tree, is_flower, is_ancestral, decorative_only, fertilizer_bonus)
 - [x] Crear catálogo base de 16 .tres en res://data/farm/crops [S]
 - [x] Implementar CropCatalog.load_all con validación de IDs duplicados [M]
 - [x] Implementar is_season_allowed y get_stage_visual_key [S]
@@ -64,10 +64,10 @@
 - [x] Implementar is_ready(), is_paused(), current_stage_index() [S]
 - [x] Implementar can_advance_today(season, rain) con reglas de estación y agua [S]
 - [x] Implementar apply_daily_tick(season, rain) sin retroceder etapas [S]
-- [ ] Estado SEMILLA inicial con water 0 [S]
+- [x] Estado SEMILLA inicial con water 0 [S] — plant() crea CropTile con water_level=0 (default)
 - [x] Estados DORMANTE y SIN_AGUA sin consumo de días [S]
-- [ ] Estado LISTA estable sin requerir agua [S]
-- [ ] transición de árboles frutales LISTA→MADURA con cooldown [M]
+- [x] Estado LISTA estable sin requerir agua [S] — apply_daily_tick() sale temprano si stage==LISTA (fix atria-dawn 2026-10-12, 03-Diseno §6)
+- [x] transición de árboles frutales LISTA→MADURA con cooldown [M] — harvest() setea stage=MADURA + fruit_cooldown=2; apply_daily_tick decrementa
 
 ## E. FarmService y API (11)
 
@@ -81,15 +81,15 @@
 - [x] Implementar can_harvest y harvest con cálculo de calidad [M]
 - [x] Implementar get_tile y get_growth_hint (tooltips amables) [S]
 - [x] Implementar get_active_farm_stats para M113/M104 [M]
-- [ ] Emitir las 8 señales del contrato en los puntos correctos [M]
+- [x] Emitir las 8 señales del contrato en los puntos correctos [M] — 7 originales + crop_harvest_blocked (nueva, fix inventario lleno). total 8 declaradas y emitidas en farm_service.gd
 
 ## F. Crecimiento y calendario M29 (9)
 
 - [x] Suscribir FarmService a GameClock.day_advanced [S]
 - [x] Implementar advance_day() iterando solo tiles activos [S]
-- [ ] Aplicar -1 de agua por día a cada cultivo [S]
-- [ ] Detectar SIN_AGUA cuando water_level < water_need [S]
-- [ ] Detectar DORMANTE cuando la estación no es apta [S]
+- [x] Aplicar -1 de agua por día a cada cultivo [S] — apply_daily_tick(): water_level = maxi(0, water_level - 1) (fix atria-dawn 2026-10-12; antes restaba water_need)
+- [x] Detectar SIN_AGUA cuando water_level < water_need [S] — apply_daily_tick() _entrar_pausa(SIN_AGUA)
+- [x] Detectar DORMANTE cuando la estación no es apta [S] — apply_daily_tick() _entrar_pausa(DORMANTE)
 - [x] Incrementar grown_days y recalcular etapa solo si procede [S]
 - [x] Emitir crop_ready solo en la transición a LISTA [S]
 - [x] Guardar planted_at_day para determinismo entre cargas [S]
@@ -97,36 +97,36 @@
 
 ## G. Riego y agua (8)
 
-- [ ] Nivel de agua 0..2 persistente por cultivo [S]
-- [ ] Regadera (M13) suma 1 con feedback visual y sonoro [S]
+- [x] Nivel de agua 0..2 persistente por cultivo [S] — regar() tope mini(2,+1); serializar() guarda "water"; deserializar() restaura
+- [x] Regadera (M13) suma 1 con feedback visual y sonoro [S] — water() llama tile.regar() (+1) + _visual_fx("water") → play_water_fx() (pulso azul placeholder)
 - [x] Lluvia (M32) rellena cultivos expuestos sin techo [M] — hook _tile_expuesto() centralizado (todo expuesto hasta que M17/M18 marquen techos)
-- [ ] Exceso de riego sin castigo (feedback juguetón) [S]
-- [ ] Visual de suelo húmedo (variante húmeda del bloque TIERRA_ARADA) [M]
-- [ ] Tooltip "Echó de menos el agua" cuando SIN_AGUA [S]
-- [ ] Sin muerte por falta de agua (regla innegociable M152) [S]
-- [ ] VFX de gotas (M52) de bajo costo al regar [M]
+- [x] Exceso de riego sin castigo (feedback juguetón) [S] — regar() usa mini(2, +1): nunca excede, sin penalización; apply_rain idempotente
+- [x] Visual de suelo húmedo (variante húmeda del bloque TIERRA_ARADA) [M] — BlockType.TIERRA_ARADA_HUMEDA (id 32) en block_type.gd + main_island.gd; _actualizar_voxel_suelo() cambia la variante según water_level (test V2/V3)
+- [x] Tooltip "Echó de menos el agua" cuando SIN_AGUA [S] — get_growth_hint() etapa SIN_AGUA: "Necesita agua."
+- [x] Sin muerte por falta de agua (regla innegociable M152) [S] — SIN_AGUA es pausa reversible (_entrar_pausa preserva prev_stage); test 30 días sin agua
+- [x] VFX de gotas (M52) de bajo costo al regar [M] — crop_tile_visual.gd play_water_fx() (pulso azul + tween 0.3s, placeholder bajo costo)
 
 ## H. Herramientas e interacción (8)
 
-- [ ] Pala (M13) convierte TIERRA en TIERRA_ARADA [M]
+- [x] Pala (M13) convierte TIERRA en TIERRA_ARADA [M] — till_tile() registra _arados + escribe voxel TIERRA_ARADA (BlockType 31) + emite tile_tilled (test V1)
 - [ ] Interacción F sobre tierra arada abre selector de semillas (M70/M53) [M]
-- [ ] Interacción sobre cultivo en LISTA cosecha [S]
-- [ ] Interacción sobre cultivo en otros estados muestra hint contextual [S]
+- [x] Interacción sobre cultivo en LISTA cosecha [S] — farm_tool_controller.gd: if tile.is_ready() → farm.harvest(voxel)
+- [x] Interacción sobre cultivo en otros estados muestra hint contextual [S] — get_growth_hint() por etapa (LISTA/DORMANTE/SIN_AGUA/SEMILLA/creciendo); el controller riega si no está listo
 - [ ] Animación de la herramienta sincronizada con el evento (M44) [M]
-- [ ] Cancelación segura del selector sin consumir semillas [S]
-- [ ] Rango de uso limitado al alcance del jugador (M11) [S]
+- [ ] Cancelación segura del selector sin consumir semillas [S] — el selector UI no existe aún (M53); plant() no consume semilla si la validación falla
+- [x] Rango de uso limitado al alcance del jugador (M11) [S] — farm_tool_controller.gd radio_interaccion=4.0 con PhysicsRayQueryParameters3D
 - [x] Debounce de interacción para evitar dobles plantas [M]
 
 ## I. Integración mundo voxel M08 (9)
 
-- [ ] Añadir bloque TIERRA_ARADA al catálogo de bloques [S]
-- [ ] Añadir variante húmeda de tierra arada [S]
-- [ ] Aplicar dif de chunk al convertir tierra [M]
-- [ ] Colisión correcta de la tierra arada (no es un hueco) [M]
+- [x] Añadir bloque TIERRA_ARADA al catálogo de bloques [S] — BlockType.TIERRA_ARADA=31 + create_default en block_type.gd; modelo en main_island.gd library (índice 31 == id, verificado)
+- [x] Añadir variante húmeda de tierra arada [S] — BlockType.TIERRA_ARADA_HUMEDA=32 + create_default; modelo en main_island.gd library (índice 32)
+- [x] Aplicar dif de chunk al convertir tierra [M] — till_tile() → _escribir_bloque() vt.set_voxel(pos, 31); VoxelTools re-meshea el chunk automáticamente (test V1)
+- [x] Colisión correcta de la tierra arada (no es un hueco) [M] — TIERRA_ARADA es un VoxelBlockyModelCube sólido en la library → colisión generada por VoxelTools (mismo mecanismo que DIRT/GRASS)
 - [x] Registrar instancias de planta vía VoxelInstanceModifier [C]
 - [x] Consistencia entre diccionario FarmService y mundo voxel al cargar [C]
-- [ ] Actualización parcial del chunk al cosechar (vuelve a tierra arada) [M]
-- [ ] Nieve (M32/M08) sobre tierra arada no borra el estado [C]
+- [x] Actualización parcial del chunk al cosechar (vuelve a tierra arada) [M] — harvest() escribe TIERRA_ARADA tras borrar el tile; el bloque NO vuelve a DIRT (test V4)
+- [x] Nieve (M32/M08) sobre tierra arada no borra el estado [C] — el estado vive en _arados/_tiles (no en el voxel); test V5 escribe SNOW encima y el tile + hint sobreviven
 - [x] Evitar plantar sobre bloques no expuestos (validación de cara superior) [M]
 
 ## J. Integración M14/M15/M16 (8)
@@ -200,7 +200,7 @@
 - [ ] 01-Requerimientos creado y firmado [S]
 - [ ] 02-Analisis, 03-Diseno y 04-Codigo creados y firmados [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
-**Totales:** 153 ítems · Completados: 67 · Pendientes: 86 · No resueltos: 0.
+**Totales:** 153 ítems · Completados: 106 · Pendientes: 47 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].

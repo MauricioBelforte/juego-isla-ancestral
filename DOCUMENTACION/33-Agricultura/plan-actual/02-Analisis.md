@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** atria (Atria-Dawn-Preview) (último modificador; núcleo por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 # 02-Analisis.md — Módulo 33: Agricultura
 
@@ -99,3 +99,19 @@ La agricultura cozy exige resolver tres tensiones clásicas del género:
 3. **A4a (planta como bloque voxel):** cara en mesh/animación y pobre para el estilo cozy; se descarta.
 4. **A5a (crecimiento en tiempo real):** rompe determinismo, pausa y guardado; se descarta.
 5. **A6a (hambre castigadora):** contradice el encargo y M152; se descarta.
+
+## 5. Prototipo sugerido (checklist O)
+
+Alcance mínimo jugable para validar el bucle antes de expandir el catálogo:
+
+- **3 cultivos** del catálogo M93 (`farming.json`): `tomate` (verano, 4 días),
+  `zanahoria` (primavera, 3 días) y `calabaza` (otoño, 6 días) — uno por
+  estación temprana para ejercitar la ventana estacional.
+- **Riego manual** con la regadera: `FarmService.water()` sube el nivel 0→1→2.
+- **Avance diario** suscrito a `TimeCalendar.day_advanced` → `advance_day()`.
+
+Flujo del prototipo: arar (`till_tile`) → plantar (`plant`, consume semilla) →
+regar (`water`) → avanzar días (`advance_day` o el calendario real) →
+cosechar (`harvest`, entrega ítems al inventario). Este bucle ya está cubierto
+por `scripts/farm/test_farm.gd` (ciclo completo) y `test_farm_m33_lote.gd`
+(estaciones, sequía, determinismo, inventario lleno, stress).

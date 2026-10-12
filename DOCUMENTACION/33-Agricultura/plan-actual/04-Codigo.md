@@ -288,3 +288,126 @@ if WeatherService.is_raining_today():
 ### Recomendaciones para el próximo agente
 - M17/M18: al implementar techos, que marquen cobertura consultando `Farm._tile_expuesto` (o que Farm exponga `set_cubierta(pos, bool)`).
 - MultiMesh (M61): partir de `_crear_visual`/`_actualizar_visual` existentes; presupuesto 1 ms.
+
+---
+
+## Notas del Agente — Deep work M33 (atria-dawn, Kilo Code, 2026-10-12)
+
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-12 00:50:00
+**Estado:** Lote grande cerrado (67 → ~105/153 pendientes de confirmación del director)
+
+### Lo que hice
+- **Fix `apply_daily_tick` (crop_tile.gd):** el estado LISTA ahora es estable —
+  sale temprano antes de consumir agua o evaluar pausas (03-Diseno §6:
+  "LISTA no requiere agua; espera al jugador sin penalización"). Antes un
+  cultivo listo consumía 1 de agua por día y podía caer en SIN_AGUA estando
+  cosechable.
+- **Fix consumo de agua (crop_tile.gd):** ahora resta exactamente 1 por día
+  (03-Diseno §2.4.5: "resta 1 de agua"), no `water_need` (que podía ser 2).
+- **Fix `harvest()` (farm_service.gd):** `agregar_items` es atómica (reverte y
+  devuelve false si no cabe todo). Antes se ignoraba el retorno → el cultivo se
+  borraba y la cosecha se perdía. Ahora: si falla, se emite la nueva señal
+  `crop_harvest_blocked(voxel_pos, items)` y el tile **se conserva** en LISTA
+  (regla cozy M152: cero pérdidas). Cierra el edge case K "inventario lleno".
+- **Idempotencia del tick diario (farm_service.gd):** nueva variable
+  `_ultimo_dia_avanzado` persistida en el save data (`ultimo_dia`). Si
+  `advance_day()` se llama dos veces para el mismo día absoluto (guardado a
+  mitad del avance + recarga), la segunda es no-op. Cierra el edge case K
+  "guardado a mitad del avance de día".
+- **Señal 8/8 del contrato:** añadida `crop_harvest_blocked` a las 7 existentes.
+- **Tests nuevos (`scripts/farm/test_farm_m33_lote.gd`, 6 bloques):**
+  determinismo serializar/deserializar + round-trip FarmStateStore + tile
+  corrupto aislado; 4 estaciones con calabaza de ventana parcial (DORMANTE
+  fuera de ventana, retoma sin pérdida); 30 días sin agua (SIN_AGUA, nunca
+  muerte, reanuda al regar); inventario lleno con stub atómico de Inventario
+  (tile conservado + señal emitida); pisoteo NPC (shake, cero pérdida de
+  estado); stress 400 cultivos + `advance_day` temporizado + `apply_rain`
+  idempotente.
+- **Docs:** añadí §5 "Prototipo sugerido" a 02-Analisis (3 cultivos + riego
+  manual + avance diario); actualicé firmas.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **No ejecuté los tests localmente:** Godot no es ejecutable desde este
+  sandbox. Los tests están escritos con la guardia anti-falso-verde
+  (CHECKS_MINIMOS + bloques _WB) y deben correrse via CI o `--headless`.
+- **Items que requieren módulos externos (dejados [ ]):** HUD/notificaciones
+  (M53), iconos (M45/M46), venta con precios por calidad (M38/M39), bloque
+  TIERRA_ARADA del catálogo M08 (dif de chunk, variante húmeda, nieve),
+  audio (M43/M44), VFX de gotas reales (M52), navegación M64 (coste alto),
+  selector de semillas interactivo (M70/M53).
+- **MultiMesh/LOD (L):** el visual actual es placeholder BoxMesh por planta;
+  el pool MultiMesh queda para la integración con M50/M61.
+
+### Intentos fallidos / decisiones
+- Primera versión del test de inventario lleno usaba variables bool capturadas
+  en lambdas — GDScript captura por valor y el flag nunca propagaba. Corregido
+  con el patrón Array mutable (`var flag := [false]`) documentado en Log 306.
+- El stress test siembra en lotes de 5 semillas porque `agregar_items` es
+  atómica y respeta el límite de stacks; un lote único de 400 puede rechazarse.
+- Umbral de stress del test: 50 ms (headless holgado) — M61 pide ≤2 ms en
+  runtime; el placeholder por-nodo no cumple eso, el MultiMesh sí lo hará.
+
+### Recomendaciones para el próximo agente
+- Correr `test_farm_m33_lote.gd` en CI/headless y reportar los ms reales de
+  `advance_day` con 400 cultivos (dato para M61).
+- El siguiente bloque natural es M08 (bloque TIERRA_ARADA + dif de chunk) que
+  desbloquea 6+ items de la sección I.
+
+
+---
+
+## Notas del Agente — Integracion M08 TIERRA_ARADA (atria-dawn, Kilo Code)
+
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-12 03:40:00
+**Estado:** 7 items cerrados (106/153); pendiente verificacion del director
+
+### Lo que hice
+- **M08 block_type.gd:** constantes `TIERRA_ARADA = 31` y
+  `TIERRA_ARADA_HUMEDA = 32` + casos en `create_default` (nombres, pala,
+  colores). IDs 31/32 libres (no colisionan con 0..30 existentes).
+- **M08 main_island.gd:** dos `_add_block` al FINAL de la VoxelBlockyLibrary
+  (modelos 31 y 32). **Invariante critico verificado:** el indice del modelo
+  == block id para los 33 modelos (el canal CHANNEL_TYPE guarda el id y
+  VoxelMesherBlocky lo usa como indice). Anadirlos al final no desplazo
+  ningun indice existente (0..30 intocados).
+- **M33 farm_service.gd:**
+  - `till_tile()` escribe el voxel TIERRA_ARADA via `_escribir_bloque()`.
+  - Nuevos helpers `_leer_bloque()` / `_escribir_bloque()` (VoxelTool con
+    `channel = VoxelBuffer.CHANNEL_TYPE`) y `_actualizar_voxel_suelo()`
+    (humeda si water_level >= 1, seca si no; solo escribe si el voxel difiere
+    -> evita re-mesh innecesario, presupuesto M61).
+  - `water()`, `apply_rain()` y `advance_day()` actualizan la variante.
+  - `harvest()` escribe TIERRA_ARADA al borrar el cultivo (la tierra queda
+    arada y reutilizable; nunca vuelve a DIRT).
+  - **Fix del lookup del terreno:** `_buscar_terreno()` usaba la ruta
+    `IslaRaiz/VoxelTerrain` que NO existe en main_island.tscn (el
+    VoxelTerrain cuelga de la raiz), de modo que la validacion de bloque
+    natural nunca se activaba en el juego real. Ahora usa el criterio
+    canonico de TerrainLocator/tool_controller (hijos de la escena actual mas
+    fallback recursivo).
+  - Seam de test `set_terrain_para_tests(t)` (duck-typed) para headless.
+- **Test nuevo `scripts/farm/test_farm_voxel_m33.gd`** (6 bloques, guardia
+  anti-falso-verde): arar escribe 31, regar a 32, advance_day seca a 31,
+  lluvia a 32, cosecha conserva arada, nieve externa no borra el estado,
+  modo logico sin terrain. **No ejecutado**: Godot no es ejecutable desde
+  este sandbox; delegar a CI/headless.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **No ejecute los tests** (Godot no ejecutable en el sandbox).
+- No verifique visualmente el dif de chunk en el juego (M08 es V2 en la guia
+  08; requiere correr el juego). La correccion es logica/datos verificada
+  estaticamente (invariante indice==id + grep de simbolos).
+- Quedan 47 `[ ]`, casi todos de modulos externos (M53/M45/M38/M39/M43/M61/
+  M64/M17/M70).
+
+### Decision de diseno
+- La tierra arada es un **bloque solido** (VoxelBlockyModelCube): la colision
+  la genera VoxelTools igual que DIRT/GRASS (item I4). La variante humeda es
+  otro bloque solido de color mas oscuro (feedback visual del riego, item G).
+- El estado agricola vive en los diccionarios `_arados`/`_tiles` del
+  FarmService, **no** en el voxel: cualquier escritura externa (nieve M32,
+  construccion M17) no borra el estado (item I6).

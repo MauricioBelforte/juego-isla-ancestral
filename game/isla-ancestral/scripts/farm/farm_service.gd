@@ -15,6 +15,7 @@ signal crop_planted(crop_id: StringName, voxel_pos: Vector3i)
 signal crop_stage_changed(voxel_pos: Vector3i, stage: int)
 signal crop_ready(voxel_pos: Vector3i)
 signal crop_harvested(voxel_pos: Vector3i, items: Array)
+signal crop_harvest_blocked(voxel_pos: Vector3i, items: Array)  # inventario lleno (K)
 signal tile_tilled(voxel_pos: Vector3i)
 signal tile_watered(voxel_pos: Vector3i, water_level: int)
 signal day_advanced(day_index: int)
@@ -27,6 +28,8 @@ var _definiciones: Dictionary = {}  # crop_id -> CropDefinition
 var _parcelas: Dictionary = {}    # owner_id -> Array[Rect3i] (reserva simple M17)
 var _arados: Dictionary = {}      # Vector3i -> true (tierra arada registrada en el servicio)
 var _store := FarmStateStore.new()
+var _ultimo_dia_avanzado: int = -1  # idempotencia del tick diario (K)
+var _terrain_test: Node = null      # inyección solo para tests headless
 
 func _ready() -> void:
 	_cargar_definiciones()
@@ -114,36 +117,91 @@ func _on_dia_avanzado(_info) -> void:
 ## ── API pública ──────────────────────────────────────────
 
 ## Arar un bloque de tierra (pala M13). Validación voxel defensiva:
-## si el VoxelTerrain está disponible, exige bloque natural (GRASS=2/DIRT=1);
-## en headless (sin terrain) se registra en _arados sin validación de bloque.
-## La conversión VISUAL a TIERRA_ARADA (voxel de M08) queda para cuando M08
-## agregue el bloque arado (iter. 3+ — no se tocan módulos de otros agentes).
+## si el VoxelTerrain está disponible, exige bloque natural (GRASS=2/DIRT=1)
+## y escribe TIERRA_ARADA (M08, id 31) en el voxel; en headless (sin terrain)
+## se registra en _arados sin validación de bloque (modo lógico).
 func till_tile(voxel_pos: Vector3i) -> bool:
 	if _tiles.has(voxel_pos) or _arados.has(voxel_pos):
 		return false  # ya arada/con cultivo
 	if not _bloque_es_terreno_natural(voxel_pos):
 		return false
 	_arados[voxel_pos] = true
+	_escribir_bloque(voxel_pos, BlockType.TIERRA_ARADA)  # M08: TIERRA -> TIERRA_ARADA
 	tile_tilled.emit(voxel_pos)
 	return true
 
 ## Verifica que el voxel sea terreno natural usando el VoxelTerrain real (si existe).
 ## Sin terrain disponible (headless/tests) devuelve true (validación de unidad).
 func _bloque_es_terreno_natural(voxel_pos: Vector3i) -> bool:
-	var terrain = _buscar_terreno()
-	if terrain == null or not terrain.has_method("get_voxel_tool"):
+	var bloque: int = _leer_bloque(voxel_pos)
+	if bloque < 0:
 		return true
-	var vt = terrain.get_voxel_tool()
-	if vt == null:
-		return true
-	var bloque: int = int(vt.get_voxel(voxel_pos)) & 0xFF
 	return bloque == 1 or bloque == 2  # DIRT / GRASS
 
-func _buscar_terreno():
+## Terreno activo (M08). Lookup canónico — mismo criterio que TerrainLocator
+## (M167) y tool_controller (M13): VoxelTerrain hijo de la escena actual, con
+## fallback de árbol completo. Corrige la ruta vieja "IslaRaiz/VoxelTerrain"
+## que no existía en main_island.tscn (VoxelTerrain cuelga de la raíz).
+## Retorna Node (no VoxelTerrain) para permitir inyección de un terrain fake
+## en tests headless (los call sites usan duck typing: has_method/get_voxel_tool).
+func _buscar_terreno() -> Node:
+	if _terrain_test != null and is_instance_valid(_terrain_test):
+		return _terrain_test
 	var tree := get_tree()
 	if tree == null:
 		return null
-	return tree.root.get_node_or_null("IslaRaiz/VoxelTerrain") if tree.root.get_node_or_null("IslaRaiz") else null
+	var raiz = tree.current_scene
+	if raiz != null:
+		for child in raiz.get_children():
+			if child is VoxelTerrain:
+				return child
+	return _buscar_terreno_recursivo(tree.root)
+
+func _buscar_terreno_recursivo(nodo: Node) -> VoxelTerrain:
+	if nodo is VoxelTerrain:
+		return nodo as VoxelTerrain
+	for child in nodo.get_children():
+		var r = _buscar_terreno_recursivo(child)
+		if r != null:
+			return r
+	return null
+
+## Lee el bloque del mundo voxel en una posición (-1 si no hay terrain).
+func _leer_bloque(voxel_pos: Vector3i) -> int:
+	var terrain = _buscar_terreno()
+	if terrain == null or not terrain.has_method("get_voxel_tool"):
+		return -1
+	var vt = terrain.get_voxel_tool()
+	if vt == null:
+		return -1
+	vt.channel = VoxelBuffer.CHANNEL_TYPE  # get_voxel_tool retorna instancia nueva
+	return int(vt.get_voxel(voxel_pos)) & 0xFF
+
+## Escribe un bloque en el mundo voxel (M08). No-op si no hay terrain
+## (headless/tests sin mundo). set_voxel dispara el re-mesh del chunk (dif de
+## chunk automático de Voxel Tools — checklist I3).
+func _escribir_bloque(voxel_pos: Vector3i, block_id: int) -> void:
+	var terrain = _buscar_terreno()
+	if terrain == null or not terrain.has_method("get_voxel_tool"):
+		return
+	var vt = terrain.get_voxel_tool()
+	if vt == null:
+		return
+	vt.channel = VoxelBuffer.CHANNEL_TYPE
+	vt.set_voxel(voxel_pos, block_id)
+
+## Inyección de terrain para tests headless (duck-typed: solo necesita
+## get_voxel_tool()). Pasar null para volver al lookup real.
+func set_terrain_para_tests(t: Node) -> void:
+	_terrain_test = t
+
+## Variante visual del suelo arado (checklist G "suelo húmedo" + I2): húmeda
+## si el cultivo tiene agua, seca si no. Regla legible y determinista (sin RNG).
+## Solo escribe si el voxel difiere (evita re-mesh innecesario — presupuesto M61).
+func _actualizar_voxel_suelo(tile: CropTile) -> void:
+	var block_id: int = BlockType.TIERRA_ARADA_HUMEDA if tile.water_level >= 1 else BlockType.TIERRA_ARADA
+	if _leer_bloque(tile.voxel_pos) != block_id:
+		_escribir_bloque(tile.voxel_pos, block_id)
 
 ## Plantar una semilla (consume 1 del inventario M14). Requiere tierra arada.
 func plant(crop: CropDefinition, voxel_pos: Vector3i) -> bool:
@@ -180,6 +238,7 @@ func water(voxel_pos: Vector3i) -> void:
 	tile.regar()
 	tile_watered.emit(voxel_pos, tile.water_level)
 	_actualizar_visual(tile)
+	_actualizar_voxel_suelo(tile)  # M08: tierra arada seca -> húmeda
 	_visual_fx(voxel_pos, "water")
 
 ## Lluvia (M32): rellena agua de todos los cultivos expuestos.
@@ -194,6 +253,7 @@ func apply_rain() -> void:
 			if nuevo != tile.water_level:
 				tile.water_level = nuevo
 				tile_watered.emit(voxel_pos, tile.water_level)
+				_actualizar_voxel_suelo(tile)  # M08: lluvia -> variante húmeda
 
 func can_harvest(voxel_pos: Vector3i) -> bool:
 	var tile: CropTile = _tiles.get(voxel_pos, null)
@@ -221,7 +281,13 @@ func harvest(voxel_pos: Vector3i) -> Array:
 		var dict_items: Dictionary = {}
 		for e in items:
 			dict_items[str(e["item_id"])] = int(e["cantidad"])
-		inv.agregar_items(dict_items)
+		# agregar_items es atómica: si no cabe todo, revierte y devuelve false.
+		# El cultivo NO se pierde (regla cozy M152): el tile se conserva en
+		# LISTA y se emite crop_harvest_blocked con el sobrante para que la UI
+		# avise al jugador (checklist K "inventario lleno").
+		if not inv.agregar_items(dict_items):
+			crop_harvest_blocked.emit(voxel_pos, items)
+			return items
 	crop_harvested.emit(voxel_pos, items)
 	_visual_fx(voxel_pos, "harvest")
 	if tile.crop_def != null and tile.crop_def.is_tree:
@@ -231,8 +297,11 @@ func harvest(voxel_pos: Vector3i) -> Array:
 		tile.grown_days = int(tile.crop_def.grow_days) - 1
 		_actualizar_visual(tile)
 	else:
+		# El bloque TIERRA_ARADA se conserva (checklist I5): la tierra queda
+		# arada y reutilizable; solo se va el cultivo (y el agua con él).
 		_tiles.erase(voxel_pos)
 		_eliminar_visual(voxel_pos)
+		_escribir_bloque(voxel_pos, BlockType.TIERRA_ARADA)
 	return items
 
 func get_tile(voxel_pos: Vector3i) -> CropTile:
@@ -256,8 +325,16 @@ func get_growth_hint(voxel_pos: Vector3i) -> String:
 	return "Creciendo... %d día(s) restantes (riego diario)." % dias_faltan
 
 ## Avance diario (M29): estación -> apply_daily_tick por tile.
+## Idempotente (K): si el día absoluto ya fue procesado (guardado a mitad del
+## avance + recarga), no se reaplica el tick — jamás doble avance de cultivos.
 func advance_day() -> void:
 	var cal = get_node_or_null("/root/TimeCalendar")
+	if cal and cal.has_method("get_dia_absoluto"):
+		var dia: int = int(cal.get_dia_absoluto())
+		if dia == _ultimo_dia_avanzado:
+			day_advanced.emit(dia)
+			return
+		_ultimo_dia_avanzado = dia
 	var season: int = int(cal.get_estacion()) if cal else 0
 	for voxel_pos in _tiles:
 		var tile: CropTile = _tiles[voxel_pos]
@@ -269,6 +346,7 @@ func advance_day() -> void:
 		if cambio:
 			crop_stage_changed.emit(voxel_pos, tile.stage)
 		_actualizar_visual(tile)
+		_actualizar_voxel_suelo(tile)  # M08: al secarse (water 0) vuelve a la variante seca
 	day_advanced.emit(int(cal.get_dia_absoluto()) if cal else 0)
 
 ## Parcelas (M17, reserva simple)
@@ -276,6 +354,17 @@ func reserve_plot(owner_id: int, center: Vector3i, radius: int) -> bool:
 	if _parcelas.has(center):
 		return false
 	_parcelas[center] = {"owner": owner_id, "radius": radius}
+	return true
+
+## Fertilizante (M13/M15, bono benigno): marca el cultivo como fertilizado.
+## Efecto legible (03-Diseno A7): acelera el crecimiento (días dobles) y
+## mejora la calidad del rendimiento. Sin penalización por mal uso (RF11).
+func fertilize(voxel_pos: Vector3i) -> bool:
+	var tile: CropTile = _tiles.get(voxel_pos, null)
+	if tile == null or tile.fertilized:
+		return false
+	tile.fertilized = true
+	_actualizar_visual(tile)
 	return true
 
 ## Estadísticas para analytics M104 / profiler M61.
@@ -340,12 +429,16 @@ func get_section_name() -> String:
 func get_save_data() -> Dictionary:
 	var data := _store.to_save_dict(_tiles.values())
 	data["arados"] = _arados_serializar()
+	data["ultimo_dia"] = _ultimo_dia_avanzado  # idempotencia (K) persistente
 	return data
 
 func restore_save_data(data: Dictionary) -> void:
 	_arados.clear()
 	for a in data.get("arados", []):
 		_arados[Vector3i(int(a[0]), int(a[1]), int(a[2]))] = true
+	# Recuperar el último día procesado: si el guardado cayó a mitad de un
+	# advance_day y el calendario sigue en el mismo día, no se reaplica el tick.
+	_ultimo_dia_avanzado = int(data.get("ultimo_dia", -1))
 	var tiles = _store.from_save_dict(data, func(crop_id): return _definiciones.get(StringName(crop_id), null))
 	_tiles.clear()
 	for tile in tiles:

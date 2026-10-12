@@ -21,6 +21,7 @@ var quality: int = 0        # 0 COMUN / 1 BUENA / 2 EXCELENTE
 var planted_at_day: int = 0
 var prev_stage: int = GrowthStage.SEMILLA  # etapa previa a pausa (reanudar)
 var fruit_cooldown: int = 0                 # árboles frutales: días hasta nueva fruta
+var _sequia_sufrida: bool = false           # calidad A7: true si alguna vez entró en SIN_AGUA
 
 func is_ready() -> bool:
 	return stage == GrowthStage.LISTA
@@ -48,6 +49,10 @@ func can_advance_today(season: int, rain: bool) -> bool:
 func apply_daily_tick(season: int, rain: bool) -> bool:
 	if crop_def == null:
 		return false
+	# LISTA es estable (03-Diseno §6): espera al jugador sin consumir agua
+	# ni retroceder. Salir de aquí antes de cualquier consumo.
+	if stage == GrowthStage.LISTA:
+		return false
 	var estacion_apta: bool = crop_def.seasons.is_empty() or crop_def.seasons.has(season)
 	# Pausa por estación (regla cozy: DORMANTE nunca retrocede)
 	if not estacion_apta:
@@ -59,8 +64,8 @@ func apply_daily_tick(season: int, rain: bool) -> bool:
 	# Activo: reanudar si venía de pausa (misma etapa, mismos días)
 	if is_paused():
 		stage = prev_stage
-	# Consumir agua del día
-	water_level = maxi(0, water_level - crop_def.water_need)
+	# Consumir agua del día (03-Diseno §2.4.5: resta 1, no water_need)
+	water_level = maxi(0, water_level - 1)
 	# Árboles frutales en cooldown: contar días, sin avanzar etapa
 	if crop_def.is_tree and fruit_cooldown > 0:
 		fruit_cooldown -= 1
@@ -83,8 +88,21 @@ func _entrar_pausa(nuevo: int) -> bool:
 		return false
 	if not is_paused():
 		prev_stage = stage
+	if nuevo == GrowthStage.SIN_AGUA:
+		_sequia_sufrida = true  # calidad A7: el riego constante sube la calidad
 	stage = nuevo
 	return true
+
+## Calidad legible (03-Diseno A7, sin RNG oculto):
+##  - EXCELENTE (2): riego constante (nunca entró en SIN_AGUA) Y fertilizado.
+##  - BUENA (1): riego constante O fertilizado.
+##  - COMUN (0): sufrió sequía y no se fertilizó.
+func calcular_calidad() -> int:
+	if _sequia_sufrida and not fertilized:
+		return 0
+	if not _sequia_sufrida and fertilized:
+		return 2
+	return 1
 
 ## Riego manual: sube agua hasta 2 (nunca se desperdicia con castigo).
 func regar() -> void:
@@ -97,6 +115,7 @@ func calcular_rendimiento() -> Array:
 	var out: Array = []
 	if crop_def == null or crop_def.decorative_only:
 		return out
+	quality = calcular_calidad()  # A7: la calidad se deriva del cuidado recibido
 	var cantidad: int = crop_def.yield_amount_max if quality >= 2 else (
 		crop_def.yield_amount_min + (1 if quality >= 1 else 0))
 	if cantidad < crop_def.yield_amount_min:
@@ -119,6 +138,7 @@ func serializar() -> Dictionary:
 		"planted": planted_at_day,
 		"prev": prev_stage,
 		"cooldown": fruit_cooldown,
+		"sequia": _sequia_sufrida,
 	}
 
 func deserializar(data: Dictionary, def: CropDefinition) -> void:
@@ -133,3 +153,4 @@ func deserializar(data: Dictionary, def: CropDefinition) -> void:
 	planted_at_day = int(data.get("planted", 0))
 	prev_stage = int(data.get("prev", 0))
 	fruit_cooldown = int(data.get("cooldown", 0))
+	_sequia_sufrida = bool(data.get("sequia", false))
