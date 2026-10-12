@@ -1,7 +1,626 @@
 {
 	"schema_version": 1,
 	"peces": [
-		{"id": "pez_sardina", "nombre_i18n": "PESCA.PEZ_SARDINA", "temporadas": ["todas"], "horas": [4, 20], "clima": ["despejado", "lluvia"], "peso_kg": [0.3, 1.2], "precio_compra": 30, "precio_venta": 20, "probabilidad": 0.25, "pity": null},
-		{"id": "pez_luna", "nombre_i18n": "PESCA.PEZ_LUNA", "temporadas": ["verano"], "horas": [21, 3], "clima": ["lluvia"], "peso_kg": [12.0, 60.0], "precio_compra": 900, "precio_venta": 550, "probabilidad": 0.03, "pity": 80}
+		{
+			"id": "pez_sardina",
+			"nombre_i18n": "PESCA.PEZ_SARDINA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				6,
+				16
+			],
+			"clima": [
+				"despejado",
+				"lluvia"
+			],
+			"peso_kg": [
+				0.3,
+				1.2
+			],
+			"precio_compra": 30,
+			"precio_venta": 20,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_anchoa",
+			"nombre_i18n": "PESCA.PEZ_ANCHOA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				6,
+				12
+			],
+			"clima": [
+				"despejado"
+			],
+			"peso_kg": [
+				0.2,
+				0.9
+			],
+			"precio_compra": 26,
+			"precio_venta": 18,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_bocachica",
+			"nombre_i18n": "PESCA.PEZ_BOCACHICA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				10,
+				16
+			],
+			"clima": [
+				"despejado",
+				"lluvia"
+			],
+			"peso_kg": [
+				0.4,
+				1.4
+			],
+			"precio_compra": 28,
+			"precio_venta": 19,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_pejerrey",
+			"nombre_i18n": "PESCA.PEZ_PEJERREY",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				4,
+				8
+			],
+			"clima": [
+				"despejado",
+				"lluvia",
+				"niebla"
+			],
+			"peso_kg": [
+				0.2,
+				0.8
+			],
+			"precio_compra": 30,
+			"precio_venta": 21,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_carpa",
+			"nombre_i18n": "PESCA.PEZ_CARPA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				9,
+				15
+			],
+			"clima": [
+				"despejado",
+				"niebla"
+			],
+			"peso_kg": [
+				1.0,
+				4.5
+			],
+			"precio_compra": 45,
+			"precio_venta": 31,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_vieja",
+			"nombre_i18n": "PESCA.PEZ_VIEJA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				10,
+				18
+			],
+			"clima": [
+				"despejado"
+			],
+			"peso_kg": [
+				0.4,
+				1.5
+			],
+			"precio_compra": 34,
+			"precio_venta": 24,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_rubio",
+			"nombre_i18n": "PESCA.PEZ_RUBIO",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				10,
+				17
+			],
+			"clima": [
+				"despejado"
+			],
+			"peso_kg": [
+				0.4,
+				1.8
+			],
+			"precio_compra": 42,
+			"precio_venta": 29,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_arenque",
+			"nombre_i18n": "PESCA.PEZ_ARENQUE",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				6,
+				18
+			],
+			"clima": [
+				"lluvia",
+				"tormenta"
+			],
+			"peso_kg": [
+				0.3,
+				1.0
+			],
+			"precio_compra": 25,
+			"precio_venta": 17,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_corvina",
+			"nombre_i18n": "PESCA.PEZ_CORVINA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				5,
+				11
+			],
+			"clima": [
+				"despejado",
+				"lluvia"
+			],
+			"peso_kg": [
+				0.8,
+				3.2
+			],
+			"precio_compra": 55,
+			"precio_venta": 38,
+			"probabilidad": 0.6
+		},
+		{
+			"id": "pez_sargo",
+			"nombre_i18n": "PESCA.PEZ_SARGO",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				8,
+				16
+			],
+			"clima": [
+				"despejado",
+				"lluvia"
+			],
+			"peso_kg": [
+				0.3,
+				1.1
+			],
+			"precio_compra": 36,
+			"precio_venta": 25,
+			"probabilidad": 0.6,
+			"biomas": [
+				"arrecife"
+			]
+		},
+		{
+			"id": "pez_pargo",
+			"nombre_i18n": "PESCA.PEZ_PARGO",
+			"temporadas": [
+				"verano"
+			],
+			"horas": [
+				15,
+				20
+			],
+			"clima": [
+				"despejado"
+			],
+			"peso_kg": [
+				1.5,
+				6.0
+			],
+			"precio_compra": 95,
+			"precio_venta": 66,
+			"probabilidad": 0.25
+		},
+		{
+			"id": "pez_trucha",
+			"nombre_i18n": "PESCA.PEZ_TRUCHA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				5,
+				10
+			],
+			"clima": [
+				"despejado",
+				"lluvia"
+			],
+			"peso_kg": [
+				0.8,
+				3.5
+			],
+			"precio_compra": 120,
+			"precio_venta": 84,
+			"probabilidad": 0.25
+		},
+		{
+			"id": "pez_salmon",
+			"nombre_i18n": "PESCA.PEZ_SALMON",
+			"temporadas": [
+				"otono"
+			],
+			"horas": [
+				6,
+				14
+			],
+			"clima": [
+				"lluvia",
+				"niebla"
+			],
+			"peso_kg": [
+				2.0,
+				8.0
+			],
+			"precio_compra": 150,
+			"precio_venta": 105,
+			"probabilidad": 0.25,
+			"pity": 40
+		},
+		{
+			"id": "pez_abadejo",
+			"nombre_i18n": "PESCA.PEZ_ABADEJO",
+			"temporadas": [
+				"invierno"
+			],
+			"horas": [
+				20,
+				4
+			],
+			"clima": [
+				"lluvia",
+				"tormenta"
+			],
+			"peso_kg": [
+				2.0,
+				9.0
+			],
+			"precio_compra": 380,
+			"precio_venta": 266,
+			"probabilidad": 0.25,
+			"pity": 40
+		},
+		{
+			"id": "pez_luciernaga",
+			"nombre_i18n": "PESCA.PEZ_LUCIERNAGA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				22,
+				2
+			],
+			"clima": [
+				"despejado",
+				"niebla"
+			],
+			"peso_kg": [
+				0.4,
+				1.6
+			],
+			"precio_compra": 420,
+			"precio_venta": 294,
+			"probabilidad": 0.25,
+			"pity": 40
+		},
+		{
+			"id": "pez_aguja",
+			"nombre_i18n": "PESCA.PEZ_AGUJA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				18,
+				23
+			],
+			"clima": [
+				"despejado",
+				"niebla"
+			],
+			"peso_kg": [
+				1.0,
+				3.0
+			],
+			"precio_compra": 240,
+			"precio_venta": 168,
+			"probabilidad": 0.1,
+			"pity": 30
+		},
+		{
+			"id": "pez_mero",
+			"nombre_i18n": "PESCA.PEZ_MERO",
+			"temporadas": [
+				"verano"
+			],
+			"horas": [
+				14,
+				19
+			],
+			"clima": [
+				"despejado"
+			],
+			"peso_kg": [
+				3.0,
+				12.0
+			],
+			"precio_compra": 300,
+			"precio_venta": 210,
+			"probabilidad": 0.1,
+			"pity": 40
+		},
+		{
+			"id": "pez_luna",
+			"nombre_i18n": "PESCA.PEZ_LUNA",
+			"temporadas": [
+				"verano"
+			],
+			"horas": [
+				21,
+				3
+			],
+			"clima": [
+				"lluvia"
+			],
+			"peso_kg": [
+				12.0,
+				60.0
+			],
+			"precio_compra": 900,
+			"precio_venta": 550,
+			"probabilidad": 0.1,
+			"pity": 80
+		},
+		{
+			"id": "pez_anguila",
+			"nombre_i18n": "PESCA.PEZ_ANGUILLA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				21,
+				5
+			],
+			"clima": [
+				"niebla",
+				"lluvia"
+			],
+			"peso_kg": [
+				0.6,
+				4.0
+			],
+			"precio_compra": 340,
+			"precio_venta": 238,
+			"probabilidad": 0.1,
+			"pity": 40
+		},
+		{
+			"id": "pez_koi_dorado",
+			"nombre_i18n": "PESCA.PEZ_KOI_DORADO",
+			"temporadas": [
+				"primavera"
+			],
+			"horas": [
+				6,
+				18
+			],
+			"clima": [
+				"despejado"
+			],
+			"peso_kg": [
+				2.0,
+				7.0
+			],
+			"precio_compra": 1500,
+			"precio_venta": 1100,
+			"probabilidad": 0.04,
+			"pity": 120
+		},
+		{
+			"id": "pez_atun_real",
+			"nombre_i18n": "PESCA.PEZ_ATUN_REAL",
+			"temporadas": [
+				"verano"
+			],
+			"horas": [
+				7,
+				17
+			],
+			"clima": [
+				"despejado",
+				"lluvia"
+			],
+			"peso_kg": [
+				30.0,
+				120.0
+			],
+			"precio_compra": 2200,
+			"precio_venta": 1600,
+			"probabilidad": 0.04,
+			"pity": 150
+		},
+		{
+			"id": "pez_pez_espada",
+			"nombre_i18n": "PESCA.PEZ_ESPADA",
+			"temporadas": [
+				"otono"
+			],
+			"horas": [
+				8,
+				16
+			],
+			"clima": [
+				"despejado"
+			],
+			"peso_kg": [
+				40.0,
+				160.0
+			],
+			"precio_compra": 2600,
+			"precio_venta": 1900,
+			"probabilidad": 0.04,
+			"pity": 150
+		},
+		{
+			"id": "pez_napoleon",
+			"nombre_i18n": "PESCA.PEZ_NAPOLEON",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [
+				9,
+				17
+			],
+			"clima": [
+				"despejado",
+				"niebla"
+			],
+			"peso_kg": [
+				15.0,
+				70.0
+			],
+			"precio_compra": 2400,
+			"precio_venta": 1750,
+			"probabilidad": 0.04,
+			"pity": 150
+		},
+		{
+			"id": "pez_ancestral_laguna",
+			"nombre_i18n": "PESCA.PEZ_ANCESTRAL_LAGUNA",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [],
+			"clima": [
+				"despejado",
+				"lluvia",
+				"niebla",
+				"tormenta"
+			],
+			"peso_kg": [
+				5.0,
+				30.0
+			],
+			"precio_compra": 5000,
+			"precio_venta": 3800,
+			"probabilidad": 0.01,
+			"biomas": [
+				"pozo_ancestral"
+			],
+			"pity": 200,
+			"pieza_museo": "pieza_pez_laguna"
+		},
+		{
+			"id": "pez_ancestral_raiz",
+			"nombre_i18n": "PESCA.PEZ_ANCESTRAL_RAIZ",
+			"temporadas": [
+				"todas"
+			],
+			"horas": [],
+			"clima": [
+				"despejado",
+				"lluvia",
+				"niebla",
+				"tormenta"
+			],
+			"peso_kg": [
+				8.0,
+				45.0
+			],
+			"precio_compra": 6500,
+			"precio_venta": 5000,
+			"probabilidad": 0.01,
+			"biomas": [
+				"pozo_ancestral"
+			],
+			"pity": 200,
+			"pieza_museo": "pieza_pez_raiz"
+		}
+	],
+	"cebos": [
+		{
+			"id": "cebo_lombriz",
+			"nombre_i18n": "PESCA.CEBO_LOMBRIZ",
+			"multiplicador_probabilidad": 1.15,
+			"multiplicador_espera": 1.0,
+			"consumo_por_captura": 1
+		},
+		{
+			"id": "cebo_camaron",
+			"nombre_i18n": "PESCA.CEBO_CAMARON",
+			"multiplicador_probabilidad": 1.35,
+			"multiplicador_espera": 0.85,
+			"consumo_por_captura": 1
+		},
+		{
+			"id": "cebo_mazorca",
+			"nombre_i18n": "PESCA.CEBO_MAZORCA",
+			"multiplicador_probabilidad": 1.25,
+			"multiplicador_espera": 1.15,
+			"consumo_por_captura": 1
+		},
+		{
+			"id": "cebo_ancestral",
+			"nombre_i18n": "PESCA.CEBO_ANCESTRAL",
+			"multiplicador_probabilidad": 1.6,
+			"multiplicador_espera": 0.75,
+			"consumo_por_captura": 2
+		}
+	],
+	"canas": [
+		{
+			"id": "cana_vieja",
+			"nombre_i18n": "PESCA.CANA_VIEJA",
+			"rango_lanzamiento": 8.0,
+			"ventana_exito": 0.5,
+			"multiplicador_espera": 1.0,
+			"multiplicador_rareza": 1.0
+		},
+		{
+			"id": "cana_bambu",
+			"nombre_i18n": "PESCA.CANA_BAMBU",
+			"rango_lanzamiento": 11.0,
+			"ventana_exito": 0.65,
+			"multiplicador_espera": 0.9,
+			"multiplicador_rareza": 1.0
+		},
+		{
+			"id": "cana_ancestral",
+			"nombre_i18n": "PESCA.CANA_ANCESTRAL",
+			"rango_lanzamiento": 14.0,
+			"ventana_exito": 0.85,
+			"multiplicador_espera": 0.8,
+			"multiplicador_rareza": 1.15
+		}
 	]
 }

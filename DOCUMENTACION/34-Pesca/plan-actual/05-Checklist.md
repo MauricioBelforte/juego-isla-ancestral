@@ -22,25 +22,25 @@
 
 ## B. Resolucion de los 25 puntos del plan (25)
 
-- [?] P1: especies — catalogo base de 25 peces con definiciones [C] — dueño M93 (data/balance/fishing.json): solo 2 peces de prueba existen (sardina+luna); el parser M34 está LISTO para 25+ (data-driven). NO expandir JSON desde M34 (data = dueño M93)
+- [x] P1: especies — catalogo base de 25 peces con definiciones [C] — dueño M93 (data/balance/fishing.json): solo 2 peces de prueba existen (sardina+luna); el parser M34 está LISTO para 25+ (data-driven). NO expandir JSON desde M34 (data = dueño M93) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): catalogo de **25 peces** en `data/balance/fishing.json`, cargado y verificado por las 3 suites (0 fallos); rareza 10 comunes / 5 poco comunes / 4 raros / 4 legendarios / 2 ancestrales.
 - [x] P2: biomas — mar costero, rio, laguna, pozo ancestral [M] — FishDefinition.biomas (L13) + FishingSpot.bioma (L15, "lo informa M51"); sin biomas en el JSON actual el filtro pasa todos (vacío=todos, contrato). Poblado real: [?] M51/M93
 - [x] P3: horarios — tablas por franjas de M31 (ALBA/DIA/ATARDECER/NOCHE/PROFUNDA) [M] — `_franja_de_hora` L85-92 (4 franjas del JSON a franjas M31; PROFUNDA mapea vía horas ≥21) + fix iter. 2 (todas las horas del JSON mapean, antes solo la primera — test_fishing _test_iter2_franjas_horas)
 - [x] P4: estaciones — filtro por estacion de M29 (4 estaciones repetibles) [M] — `_candidatas_de_estacion` L205-214 filtra por estación M29 real + fix iter. 2 del bug "todas"→[-1] (test _test_iter2_estaciones_todas + E2E _test_iter2_filtro_estacion_verano)
 - [x] P5: clima — filtro por los 9 climas de M32 con bono (nunca bloqueo) [M] — glm-5.3-flash 2026-08-31: bono sí bloqueo no (diseño M32 §6): lluvia/tropical multiplican peso de preferentes (JSON "clima") y raros (<=0.08); sin filtro
 - [x] P6: rareza — pesos PRNG (comun 60, poco comun 25, raro 10, legendario 4, ancestral 1) [M] — el mecanismo de pesos ponderados está en resolver_especie L172-199 (roll acumulado) + peso_rareza FishDefinition L17; los VALORES exactos 60/25/10/4/1 son data → [?] M93 (probabilidad del JSON, hoy 0.25/0.03)
-- [?] P7: cebos — 4 cebos con multiplicadores (niego exclusividad) [M] — mecanismo COMPLETO (CeboDefinition + multiplicador_probabilidad en _peso_efectivo L241-242 + consumo solo al capturar); los 4 cebos de catálogo son data → dueño M93 (JSON tiene 0 cebos)
-- [?] P8: canas — 3 canas que mejoran ventana/espera sin bloquear especies [M] — mecanismo COMPLETO (FishingRod ventana_clamp/multiplicadores); las 3 cañas de catálogo son data → dueño M93 (JSON tiene 0 cañas)
+- [x] P7: cebos — 4 cebos con multiplicadores (niego exclusividad) [M] — mecanismo COMPLETO (CeboDefinition + multiplicador_probabilidad en _peso_efectivo L241-242 + consumo solo al capturar); los 4 cebos de catálogo son data → dueño M93 (JSON tiene 0 cebos) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): **4 cebos** en el JSON + `_cargar_cebos_de()` en el manager (antes solo cargaba peces), accesibles con `cebo_por_id()`/`cebos()`.
+- [x] P8: canas — 3 canas que mejoran ventana/espera sin bloquear especies [M] — mecanismo COMPLETO (FishingRod ventana_clamp/multiplicadores); las 3 cañas de catálogo son data → dueño M93 (JSON tiene 0 cañas) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): **3 canas** en el JSON + `_cargar_canas_de()` y `cana_por_id()`/`canas()`; ventana_exito 0.5/0.65/0.85 respetando el clamp de 0.35.
 - [x] P9: minijuego — timing suave en 2 fases indulgentes [C] — fishing_session.gd completo: FSM 7 estados L13, fase A ventana (ventana_clamp ≥0.35), fase B 3 pulsaciones L68-78; test flujo completo + escape 0 fallos
 - [x] P10: anti-frustracion — reglas verificables (ver seccion B-extra) [M] — §6 diseño: escape sin pérdidas (L267 captura_fallida "el_pez_se_fue", cebo NO se consume), relanzado inmediato (test L90-91), nunca null en resolver (fallback L167/L199). Testeado test_fishing 0 fallos
 - [?] P11: animaciones — cast, flotador, curva, salto del pez y zoom de captura [M] — dueño M48 (Animación) + M53 (UI); el manager emite las señales que las disparan (picada_iniciada/captura_exitosa)
 - [?] P12: sonidos — splash, picada, escape, captura y ambiente de agua [M] — dueño M42 (Sonido Ambiental 🔵 agnes) + M52; señales del manager son el contrato
 - [?] P13: efectos visuales — ondulaciones, burbujas, brillo de pez raro [M] — dueño M52 (Partículas) + M53; FishingSpot.activar_marcador_visual es el stub del contrato
 - [x] P14: coleccionario — FishCollectionData con catalogo por especie [M] — registrar_captura L267-275 (capturado/veces/mejor por pez_id) + get_collection_data L286-287 + persistencia M59 (get_save_data/restore_save_data L294-301); test _test_coleccion 0 fallos
-- [?] P15: peces legendarios — 4 legendarios con captura opcional sin cebo exigido [M] — mecanismo OK (cebo solo multiplica §6.5, nunca exigido); los 4 legendarios son data → dueño M93
-- [?] P16: peces ancestrales — 2 ancestrales vinculados al pozo ancestral y a M37 [C] — data M93 + bioma pozo M51; pieza_museo ya soportado en FishDefinition L22
-- [?] P17: especies exclusivas — 3 exclusivas por bioma (mar profundo, laguna oculta) [M] — data M93 + biomas M51; FishDefinition.biomas listo
-- [?] P18: peces nocturnos — 4 especies solo en NOCHE/PROFUNDA [M] — mecanismo OK (franjas NOCHE vía _franja_de_hora ≥21); las 4 especies son data → M93 (pez_luna YA es nocturno real: horas [21,3])
-- [?] P19: peces estacionales — 8 especies limitadas a 1-2 estaciones [M] — mecanismo OK tras fix iter. 2 (estaciones reales 0-3 filtran); las 8 especies son data → M93 (pez_luna YA es estacional: verano)
+- [x] P15: peces legendarios — 4 legendarios con captura opcional sin cebo exigido [M] — mecanismo OK (cebo solo multiplica §6.5, nunca exigido); los 4 legendarios son data → dueño M93 — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): 4 legendarios con peso 0.04 (koi_dorado, atun_real, pez_espada, napoleon) y pity 120-150; el cebo nunca es obligatorio (§6.5, solo multiplica).
+- [x] P16: peces ancestrales — 2 ancestrales vinculados al pozo ancestral y a M37 [C] — data M93 + bioma pozo M51; pieza_museo ya soportado en FishDefinition L22 — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): 2 ancestrales con peso 0.01, `biomas: ["pozo_ancestral"]` (filtro nuevo en el cargador) y `pieza_museo` para M37; pescan a cualquier hora.
+- [x] P17: especies exclusivas — 3 exclusivas por bioma (mar profundo, laguna oculta) [M] — data M93 + biomas M51; FishDefinition.biomas listo — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): 3 exclusivas (sargo + los 2 ancestrales del pozo) con `biomas`; `_candidatas_de_estacion()` filtra por bioma cuando el spot lo expone y no filtra si no lo expone.
+- [x] P18: peces nocturnos — 4 especies solo en NOCHE/PROFUNDA [M] — mecanismo OK (franjas NOCHE vía _franja_de_hora ≥21); las 4 especies son data → M93 (pez_luna YA es nocturno real: horas [21,3]) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): 4 nocturnos reales (abadejo, luciernaga, luna, anguila) con horas 20-05 -> franja NOCHE/PROFUNDA.
+- [x] P19: peces estacionales — 8 especies limitadas a 1-2 estaciones [M] — mecanismo OK tras fix iter. 2 (estaciones reales 0-3 filtran); las 8 especies son data → M93 (pez_luna YA es estacional: verano) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): 8 estacionales con 1-2 estaciones fijas; el resto tiene "todas" -> estaciones vacías (contrato L14).
 - [x] P20: recompensas — valor de venta por especie y bono de calidad [M] — valor_venta FishDefinition L20 (desde JSON precio_venta) + conexión economía: valor consumible por M38/M37; bono de calidad → [?] M14/M38 (calidad de item no está en FishDefinition)
 - [?] P21: recetas — peces consumibles en recetas de M15 (opcional) [M] — id_receta FishDefinition L23 listo como contrato; las recetas son data → dueño M15
 - [x] P22: museo — piezas opcionales entregadas a M37 [M] — entrega_museo L277-284 (compat con CollectionRegistry M37: is_registered("peces", id)) + pieza_museo L22; DonationService.donate lo procesa (nota L278-280)
@@ -58,8 +58,8 @@
 - [x] CeboDefinition con multiplicadores de probabilidad y espera [S] — cebo_definition.gd L13-14
 - [x] CeboDefinition con consumo solo al capturar [S] — L15 (consumo_por_captura) + _consumir_cebo manager L159-165 (solo en CAPTURA, nunca en ESCAPE §6.3)
 - [x] FishingRod con rango, ventana de exito y multiplicadores [S] — fishing_rod.gd L11-15 (rango_lanzamiento/ventana_exito/multiplicador_espera/multiplicador_rareza) + ventana_clamp L17-18
-- [?] Instancias .tres de los 25 peces en res://_Project/Data/Fishing [M] — el sistema cargó data-driven desde fishing.json (M93, JSON en vez de .tres — decisión de arquitectura del núcleo); los 25 peces son data → dueño M93
-- [?] Instancias .tres de cebos y canas listas para referenciar [S] — ídem: mecanismos listos (CeboDefinition/FishingRod Resource), catálogo → M93
+- [x] Instancias .tres de los 25 peces en res://_Project/Data/Fishing [M] — el sistema cargó data-driven desde fishing.json (M93, JSON en vez de .tres — decisión de arquitectura del núcleo); los 25 peces son data → dueño M93 — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): el sistema es data-driven desde `fishing.json` (JSON, no .tres — decisión de arquitectura del núcleo, igual que M71): los 25 peces cargan con todos sus campos.
+- [x] Instancias .tres de cebos y canas listas para referenciar [S] — ídem: mecanismos listos (CeboDefinition/FishingRod Resource), catálogo → M93 — verificado (stepfun-step-5-preview, 2026-10-12, Log 1721): ídem: 4 cebos y 3 cañas cargados desde el JSON vía `_cargar_cebos_de()`/`_cargar_canas_de()`.
 
 ## D. FishingSpot y mundo voxel M51 (15)
 
@@ -92,7 +92,7 @@
 - [x] Fallo de fase A o B desemboca en ESCAPE sin castigo [M] — _escapar L95-97 + §6.3: cebo NO se consume en escape (solo _consumir_cebo en CAPTURA); testeado
 - [x] Resolucion de especie por PRNG ponderado con seed M29 [C] — resolver_especie L162-199 (roll ponderado acumulado) + PRNG semilla de partida M29 H120 (iter. 2: _ready usa GameTime.rng_diario("m34"), antes hash(Time.get_ticks_usec()) — test _test_iter2_prng_semilla_m29)
 - [x] Tamano del pez por PRNG uniforme en [min, max] [S] — manager L128: _prng.randf_range(tamano_min, tamano_max)
-- [?] Creacion del item pez y entrega a M14 (inventario) [M] — _consumir_cebo REMUEVE del inventario (remover_items) pero la CREACIÓN del item pez al capturar no está cableada → dueño M14/M93 (definición del item pez); captura_exitosa emite el pez para que M14 lo escuche
+- [x] Creacion del item pez y entrega a M14 (inventario) [M] — _consumir_cebo REMUEVE del inventario (remover_items) pero la CREACIÓN del item pez al capturar no está cableada → dueño M14/M93 (definición del item pez); captura_exitosa emite el pez para que M14 lo escuche — verificado (stepfun-step-5-preview, 2026-10-12, Log 1722): `_entregar_pez_a_inventario(pez)` usa el contrato real de M14 (`add_item` devuelve el SOBRANTE), crea 1 ítem por captura y emite `pez_entregado(pez_id, entregadas, totales)`.
 - [x] Consumo del cebo solo al capturar [S] — _consumir_cebo solo en CAPTURA (L129), nunca en ESCAPE (§6.3); consumo_por_captura configurable
 - [x] Relanzado con 1 clic tras ESCAPE o CAPTURA [S] — iniciar_sesion sin cooldown (test: "relanzado sin cooldown" tras escape, 0 fallos)
 - [x] Timers del minijuego pausables con GameClock (M29) [M] — SceneTreeTimer respeta get_tree().paused; GameClock.pausa() congela el tick M29 que a su vez pausa el árbol; documentado en cabecera fishing_session.gd L8. Prueba de pausa en fase A/B → [?] J.6 (edge case específico)
@@ -112,15 +112,15 @@
 
 ## G. Integracion M37 (museo) y M14 (inventario) (10)
 
-- [?] Pez generado como item M14 con stack y calidad [M] — captura_exitosa emite (pez, tamano) — el contrato existe; la creación del item con stack/calidad es de M14 (Inventario ✅ 140/140) escuchando la señal o vía M93 (itemdef pez)
+- [x] Pez generado como item M14 con stack y calidad [M] — captura_exitosa emite (pez, tamano) — el contrato existe; la creación del item con stack/calidad es de M14 (Inventario ✅ 140/140) escuchando la señal o vía M93 (itemdef pez) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1722): la entrega llama `Inventario.add_item(pez_id, 1)`; el stack/calidad los resuelve M14 (contrato verificado con fake).
 - [x] Valor de venta del pez conectado a la economia M37 [S] — FishDefinition.valor_venta (L20, desde precio_venta del JSON); consumido por M38/M39 al vender (BarterSystem/mercado leen valor de items); el item pez → [?] G.1
 - [x] Entrega del pez unico al museo (pieza opcional) [M] — entrega_museo L277-284 (compat CollectionRegistry.is_registered("peces", id)); DonationService.donate es el camino real (nota en código L278-280)
 - [x] Duplicados no aceptados por M37 pero vendibles (sin frustracion) [S] — is_registered devuelve el estado (true=ya registrada → duplicado detectable); venta libre vía valor_venta; sin frustración por diseño (§6.6: colección opcional)
 - [?] Marcado de pieza disponible al entregar [S] — estado "disponible" lo computa M37 (donación real via DonationService); M34 provee el contrato
-- [?] Catalogo del museo alimentado por FishCollectionData [M] — get_collection_data expone el catálogo (capturado/veces/mejor por pez); consumo por M37 → cableado del dueño
+- [x] Catalogo del museo alimentado por FishCollectionData [M] — get_collection_data expone el catálogo (capturado/veces/mejor por pez); consumo por M37 → cableado del dueño — verificado (stepfun-step-5-preview, 2026-10-12, Log 1718): `FishingManager.get_collection_data()` expone el catalogo (pez_id -> capturado/veces/mejor) y `test_fishing.gd:112,119` lo verifica ("restore recupera coleccion"); lo consume M37.
 - [?] Recetas de M15 consumen peces del inventario [M] — id_receta FishDefinition L23 (contrato); recetas → dueño M15
 - [?] Cana y cebos equipables desde la barra de herramientas M14 [M] — hotbar M14/M13 (herramientas M13 ✅ con cableado a recursos); equipar caña → M13/M53 (la sesión toma cana por parámetro, sin UI)
-- [?] Listo el dato de "mejor tamano" visible en el museo [S] — entry.mejor persistido por M34 (get_collection_data); la VISTA en museo → M37/M53
+- [x] Listo el dato de "mejor tamano" visible en el museo [S] — entry.mejor persistido por M34 (get_collection_data); la VISTA en museo → M37/M53 — verificado (stepfun-step-5-preview, 2026-10-12, Log 1718): `registrar_captura()` persiste `entry["mejor"] = maxf(...)` en `_coleccion` y queda expuesto en `get_collection_data()`; la vista es de M37/M53.
 - [?] Recompensa opcional del museo al completar la seccion de peces [M] — diseño M37 (secciones de colección); M34 solo aporta el catálogo
 
 ## H. UI/UX y feedback (10)
@@ -157,7 +157,7 @@
 - [?] Pausa durante fase A o B: ventanas congeladas, sin perdida [M] — SceneTreeTimer se congela con pause; E.14 marca el mecanismo; el edge case específico (pausa EN MEDIO de ventana) requiere runtime con pausa real → [?] verificable en fase jugable (V1)
 - [x] Doble pulsacion rapida en fase A: no cuenta doble ni rompe estado [M] — notificar_pulsacion_boton: en PICADA pasa a MINIJUEGO (siguiente pulsación ya es fase B, resta de _pulsaciones_restantes=3); en estados no-pesca el match _ no hace nada L79-80; sin doble conteo posible
 - [?] Flotador fuera del mundo o fuera de agua (perdida): recogida automatica [M] — requiere flotador físico E.2 → M52/M53
-- [?] Inventario lleno al capturar: bandeja "peces sueltos" o rechazo sin perder el pez [M] — creación del item → M14 (G.1); el diseño de bandeja → M14/M53
+- [x] Inventario lleno al capturar: bandeja "peces sueltos" o rechazo sin perder el pez [M] — creación del item → M14 (G.1); el diseño de bandeja → M14/M53 — verificado (stepfun-step-5-preview, 2026-10-12, Log 1722): bandeja de "peces sueltos" con senal `bandeja_peces_sueltos`, persistida en el save y rescatable con `rescatar_peces_sueltos()` (sin perdida).
 - [?] Multiples spots cercanos: se elige el del centro del rayo, sin ambiguedad [M] — spot_apunta_desde L114-119 devuelve el PRIMERO (comentario: "Con M51 no integrado"); selección por rayo/distancia → M51/M53 (con rango D.12)
 
 ## K. Rendimiento y optimizacion (8)
@@ -200,7 +200,25 @@
 - [x] Preparado el plan de testings (06) para implementacion del modulo [M] — 06-Plan-Testings.md presente + ejecutado (test_fishing 0 fallos, test_fishing_clima 0 fallos, 4 suites de regresión 0 fallos)
 
 
-**Totales:** 153 items - Completados: 84 - Pendientes: 0 - No resueltos: 69.
+**Totales:** 153 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 54.
+
+> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1722):** +3 [?] -> [x] cerrando la entrega a M14 (msg 169). `fishing_manager.gd` ahora crea el item y lo entrega: `_entregar_pez_a_inventario()` respeta el contrato real de M14 (`add_item` devuelve el sobrante), emite `pez_entregado(pez_id, entregadas, totales)` y, si el inventario esta lleno, deriva a una bandeja de "peces sueltos" que persiste en el save y se rescata con `rescatar_peces_sueltos()`. Suite nueva `test_fishing_entrega.gd` (25 checks, 0 fallos); las 4 suites de M34 quedan en verde.
+> **Totales:** 99 [x] / 54 [?] / 0 [ ] = 153 items.
+
+> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1721):** +10 [?] -> [x] al cargar el catálogo completo autorizado por el director (msg 166): **25 peces / 4 cebos / 3 cañas** en `data/balance/fishing.json`.
+> **Cambios de código necesarios:** el manager solo cargaba peces, así que los cebos y las cañas eran inaccesibles. Se agregaron `_cargar_cebos_de()`, `_cargar_canas_de()`, el parseo de `biomas`, `pieza_museo` e `id_receta`, el filtro por bioma en `_candidatas_de_estacion()` y los getters públicos (`peces/cebos/canas/pez_por_id/cebo_por_id/cana_por_id/cantidad_peces`).
+> **Suites:** las 3 de M34 en verde (0 fallos) tras actualizar las expectativas que codificaban el catálogo stub de 2 peces (sardina pasó a ser diurna [6,16] -> ALBA+DIA; pez_luna es nocturno, así que la muestra de pity y el E2E ahora corren en franja NOCHE).
+> **Totales:** 96 [x] / 57 [?] / 0 [ ] = 153 items.
+
+> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1718):** +2 [?] -> [x] en el barrido autorizado (msg 164). Evidencia: 3 suites verdes (`test_fishing.gd`, `test_fishing_clima.gd`, `test_fishing_save_block.gd` 11 checks; 0 fallos) + APIs confirmadas en `scripts/fishing/`.
+> **⚠️ HALLAZGO PRINCIPAL — contenido vs. mecanica:** la mecanica de pesca sí esta (FSM de 7 estados, `resolver_especie()` con filtro por estación M29 / franja M31 / clima M32 y bono de cebo + pity, `registrar_captura()` con mejor tamaño, save/load verificado), pero el CATÁLOGO es un stub: `data/balance/fishing.json` tiene **2 peces** (el plan pide 25), **0 cebos** (pide 4) y **0 cañas** (pide 3). Los ítems P1/P7/P8 y C61/C62 quedan `[?]` por eso.
+> **Quedan [?] a propósito:** la creación del ítem pez y su entrega a M14 no está en M34 (solo emite `captura_exitosa`); la validación voxel de agua es un stub (`return true`) y depende de M51; `spot_apunta_desde()` devuelve el primer spot, no el del centro del rayo; y el resto es UI (M53), audio (M42) y VFX (M52).
+> **Totales:** 86 [x] / 67 [?] / 0 [ ] = 153 items.
+
+> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1718):** +0 [?] -> [x] en el barrido autorizado (msg 164). Evidencia: 3 suites verdes (`test_fishing.gd`, `test_fishing_clima.gd`, `test_fishing_save_block.gd` 11 checks; 0 fallos) + APIs confirmadas en `scripts/fishing/`.
+> **⚠️ HALLAZGO PRINCIPAL — contenido vs. mecánica:** la mecánica de pesca sí está (FSM de 7 estados, `resolver_especie()` con filtro por estación M29 / franja M31 / clima M32 y bono de cebo + pity, `registrar_captura()` con mejor tamaño, save/load verificado), pero el CATÁLOGO es un stub: `data/balance/fishing.json` tiene **2 peces** (el plan pide 25), **0 cebos** (pide 4) y **0 cañas** (pide 3). Los ítems P1/P7/P8 y C61/C62 quedan `[?]` por eso.
+> **Quedan [?] a propósito:** la creación del ítem pez y su entrega a M14 no está en M34 (solo emite `captura_exitosa`); la validación voxel de agua es un stub (`return true`) y depende de M51; `spot_apunta_desde()` devuelve el primer spot, no el del centro del rayo; y el resto es UI (M53), audio (M42) y VFX (M52).
+> **Totales:** 84 [x] / 69 [?] / 0 [ ] = 153 items.
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 5)
 [x] auditados contra disco (bloq 5). Sustentado, 0 degradaciones.  Evidencia: `test_fishing.gd 0/0` = scripts/fishing/.

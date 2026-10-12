@@ -210,3 +210,129 @@ func _on_captura_fallida(motivo: String) -> void
 - **M51/M52/M53:** es_agua_pescable es el punto de integración voxel; las señales del manager (4) + sesión (3) son el contrato completo de UI; el stub `spot_apunta_desde` devuelve el primer spot (sin raycast real).
 - **QA cruzado §21.8 (verificador: Hy3, NO auto-verificar):** puntos rápidos → test_fishing.gd 0 fallos (bloques iter2: `_test_iter2_estaciones_todas`/`_test_iter2_franjas_horas`/`_test_iter2_prng_semilla_m29`/`_test_iter2_filtro_estacion_verano`), test_fishing_clima 0 fallos, fishing_manager.gd L33-38 (rng_diario) + L72-82 (fix todas) + L63-68 (fix horas).
 - **Si tocás M34 de nuevo:** _franja_de_hora NO devuelve ALBA para hora 4 (es NOCHE, `<5`); ATARDECER es 17-20; ALBA solo 5-6.
+
+## Notas del Agente — barrido de verificacion (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1718
+
+Barrido autorizado por el director (msg 164). **M34: 84 -> 86 `[x]` / 153 (+2).**
+
+### Evidencia
+
+```
+test_fishing.gd             TEST M34 PESCA: 0 fallo(s)
+test_fishing_clima.gd       TEST M34 CLIMA: 0 fallo(s)
+test_fishing_save_block.gd  TEST FISHING-SAVE-BLOCK: 11 checks, 0 fallo(s)
+```
+
+### Verificado y flippado (+2)
+
+| Item | Evidencia |
+|---|---|
+| G120 catalogo del museo | `FishingManager.get_collection_data()` + `test_fishing.gd:112,119` ("restore recupera coleccion") |
+| G123 mejor tamano | `registrar_captura()` persiste `entry["mejor"] = maxf(...)` y se expone en `get_collection_data()` |
+
+### HALLAZGO PRINCIPAL — la mecanica esta, el contenido no
+
+La mecanica de pesca **si esta implementada**: FSM de 7 estados en `fishing_session.gd`
+(IDLE/LANZANDO/ESPERA_PICADA/PICADA/MINIJUEGO/CAPTURA/ESCAPE), `resolver_especie()` con filtro
+por estacion (M29), franja horaria (M31) y clima (M32), bonus de cebo y pity, y
+`registrar_captura()` con seguimiento de mejor tamano. El save/load tambien esta verificado.
+
+**Pero el catalogo es un stub:** `data/balance/fishing.json` tiene **2 peces** (el plan pide 25),
+**0 cebos** (pide 4) y **0 canas** (pide 3). Por eso P1/P7/P8 y C61/C62 quedan `[?]`.
+
+### Quedo `[?]` a proposito (evidencia negativa)
+
+- Creacion del item pez y entrega a M14 (E95/G115): M34 solo emite `captura_exitosa(pez, tamano)`,
+  el contrato; nadie crea el item ni lo suma al inventario.
+- Validacion de agua por voxel (D69/D70/D71): `es_agua_pescable()` es un `return true`, depende de M51.
+- `spot_apunta_desde()` (J161): devuelve el *primer* spot registrado, no el del centro del rayo
+  (hay ambiguedad con varios spots).
+- UI (M53), audio (M42), VFX (M52), accesibilidad (M57) y precios/balance (M93/M38): de otros modulos.
+
+## Notas del Agente — catálogo completo (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1721
+
+Encargo del director (msg 166): cargar el catálogo completo. **M34: 86 -> 96 `[x]` / 153 (+10).**
+
+### Contenido cargado (`data/balance/fishing.json`)
+
+| Bloque | Cantidad | Detalle |
+|---|---|---|
+| Peces | **25** | 10 comunes (0.60) / 5 poco comunes (0.25) / 4 raros (0.10) / 4 legendarios (0.04) / 2 ancestrales (0.01) |
+| Cebos | **4** | lombriz 1.15x, camaron 1.35x + espera 0.85x, mazorca 1.25x, ancestral 1.6x + espera 0.75x |
+| Cañas | **3** | vieja (ventana 0.5), bambu (0.65, alcance 11), ancestral (0.85, alcance 14, rareza 1.15x) |
+
+Requisitos de diseño verificados uno por uno: 4 legendarios con pity 120-150, 2 ancestrales con
+`biomas: ["pozo_ancestral"]` y `pieza_museo` para M37, 3 exclusivas por bioma, 4 nocturnos
+(horas 20-05 -> NOCHE/PROFUNDA) y 8 estacionales. Sin ids duplicados.
+
+### Código nuevo en `fishing_manager.gd`
+
+Antes el manager **solo cargaba peces**: los 4 cebos y las 3 cañas del JSON eran inaccesibles.
+
+- `_cargar_catalogo()` reemplaza a `_cargar_peces()` y carga los tres bloques.
+- `_cargar_cebos_de()` / `_cargar_canas_de()`: instancian `CeboDefinition` / `FishingRod`.
+- Parseo de `biomas` (P17), `pieza_museo` (P16) e `id_receta` (P21).
+- `_bioma_de_spot()` + filtro por bioma en `_candidatas_de_estacion()`: si el spot no expone bioma
+  (M51 sin integrar) **no filtra**, para no dejar al jugador sin nada que pescar.
+- Getters públicos: `peces()`, `cebos()`, `canas()`, `pez_por_id()`, `cebo_por_id()`,
+  `cana_por_id()`, `cantidad_peces()`.
+
+### Expectativas de test actualizadas (codificaban el stub de 2 peces)
+
+- `test_fishing.gd`: sardina paso a peso 0.60 y horario diurno [6,16] -> franjas **[0, 1]**
+  (ALBA + DIA; hora 6 es ALBA, DIA arranca en 7).
+- La muestra de **pity** y el E2E de estación/franja ahora corren en franja NOCHE (`hora 3`):
+  `pez_luna` es nocturno y a las 12 de la tarde ya no calificaba.
+- La regresión multi-hora se conserva con `pez_aguja` [18,23] -> ATARDECER + NOCHE.
+
+### Suites
+
+```
+test_fishing.gd             TEST M34 PESCA: 0 fallo(s)
+test_fishing_clima.gd       TEST M34 CLIMA: 0 fallo(s)
+test_fishing_save_block.gd  TEST FISHING-SAVE-BLOCK: 11 checks, 0 fallo(s)
+```
+
+## Notas del Agente — entrega a M14 (2026-10-12)
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+**Log:** 1722
+
+Encargo del director (msg 169): cerrar la entrega del ítem pez a M14. **M34: 96 -> 99 `[x]` / 153 (+3).**
+
+### Implementación (`fishing_manager.gd`)
+
+`_entregar_pez_a_inventario(pez)` — crea 1 ítem por captura y lo entrega:
+
+- Usa el **contrato real de M14**: `add_item(item_id, amount)` devuelve el SOBRANTE no aceptado
+  (0 = todo entró). No se inventó una API propia.
+- Emite `pez_entregado(pez_id, entregadas, totales)` para que la UI muestre el resultado.
+- **Sin M14 en el árbol** (tests/módulo apagado): la captura va completa a la bandeja,
+  nunca se pierde ni se falsifica como entregada.
+- **Inventario lleno** (J160): el resto cae en `_bandeja_peces` con la señal
+  `bandeja_peces_sueltos(cantidad)`. La bandeja **persiste en el save**
+  (`bandeja_peces`) y se recupera con `rescatar_peces_sueltos()`.
+
+### Contrato verificado con fake
+
+El autoload real `/root/Inventario` gana el nombre, así que un fake con ese nombre
+queda tapado. La suite instala el fake removiendo el autoload y lo restaura al final
+(`_instalar_fake()` / `_restaurar()`).
+
+### Suite
+
+```
+test_fishing_entrega.gd    25 checks, 0 fallos, 4 bloques
+test_fishing.gd             TEST M34 PESCA: 0 fallo(s)
+test_fishing_clima.gd       TEST M34 CLIMA: 0 fallo(s)
+test_fishing_save_block.gd  11 checks, 0 fallo(s)
+```

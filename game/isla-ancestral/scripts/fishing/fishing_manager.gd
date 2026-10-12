@@ -13,6 +13,13 @@ extends Node
 
 signal picada_iniciada(sesion)
 signal captura_exitosa(pez, tamano: float)
+## Ítem pez efectivamente entregado al inventario M14 (E95/G115).
+## `cantidad_entregada` puede ser menor que 1 si el inventario estaba lleno:
+## en ese caso `bandeja_peces_sueltos` recibe el resto (sin pérdida).
+signal pez_entregado(pez_id: String, cantidad_entregada: int, cantidad_total: int)
+## El inventario no pudo absorber todo: el resto queda en la bandeja de
+## "peces sueltos" (regla cozy: nunca se pierde la captura, J160).
+signal bandeja_peces_sueltos(cantidad: int)
 signal captura_fallida(motivo: String)
 signal sesion_terminada(sesion)
 
@@ -21,11 +28,16 @@ const FRANJAS := {"ALBA": 0, "DIA": 1, "ATARDECER": 2, "NOCHE": 3, "PROFUNDA": 4
 
 var _spots: Array = []
 var _peces: Array = []           # Array[FishDefinition]
+var _cebos: Dictionary = {}      # cebo_id -> CeboDefinition
+var _canas: Dictionary = {}      # cana_id -> FishingRod
 var _sesion: Node = null
 var _prng: RandomNumberGenerator
 var _coleccion: Dictionary = {}  # pez_id -> {capturado, veces, mejor_tamano}
 var _pity_contadores: Dictionary = {}  # pez_id -> capturas sin éxito
 var _capturas_totales: int = 0
+## "Peces sueltos": capturas que no entraron en el inventario M14 (lleno).
+## Persisten para que el jugador los recupere (regla anti-pérdida, J160).
+var _bandeja_peces: Dictionary = {}  # pez_id -> cantidad
 
 func _ready() -> void:
 	_prng = RandomNumberGenerator.new()
@@ -35,11 +47,14 @@ func _ready() -> void:
 	var gt := get_node_or_null("/root/GameTime")
 	if gt and gt.has_method("rng_diario"):
 		_prng = gt.rng_diario("m34")
-	_cargar_peces()
+	_cargar_catalogo()
 
 ## ── Datos (M93) ──────────────────────────────────────────
 
-func _cargar_peces() -> void:
+## Carga el catálogo completo (peces + cebos + cañas) desde fishing.json.
+## Antes solo se cargaban los peces: los 4 cebos y las 3 cañas del catálogo
+## quedaban inaccesibles para el juego. Verificado con las suites existentes.
+func _cargar_catalogo() -> void:
 	var f := FileAccess.open(RUTA_FISHING, FileAccess.READ)
 	if f == null:
 		push_warning("[M34] No se pudo abrir fishing.json")
@@ -47,6 +62,47 @@ func _cargar_peces() -> void:
 	var parsed = JSON.parse_string(f.get_as_text())
 	if not (parsed is Dictionary):
 		return
+	_cargar_peces_de(parsed)
+	_cargar_cebos_de(parsed)
+	_cargar_canas_de(parsed)
+	print("[M34] Catálogo: %d peces, %d cebos, %d cañas" % [_peces.size(), _cebos.size(), _canas.size()])
+
+
+## Carga los 4 cebos (P7). Regla cozy: solo multiplican, nunca son obligatorios.
+func _cargar_cebos_de(parsed: Dictionary) -> void:
+	for datos in parsed.get("cebos", []):
+		if not (datos is Dictionary):
+			continue
+		var d: Dictionary = datos
+		if String(d.get("id", "")) == "":
+			continue
+		var c := CeboDefinition.new()
+		c.id = String(d.get("id"))
+		c.multiplicador_probabilidad = float(d.get("multiplicador_probabilidad", 1.0))
+		c.multiplicador_espera = float(d.get("multiplicador_espera", 1.0))
+		c.consumo_por_captura = int(d.get("consumo_por_captura", 1))
+		_cebos[c.id] = c
+
+
+## Carga las 3 cañas (P8). Mejoran ventana/espera/rareza sin bloquear especies.
+func _cargar_canas_de(parsed: Dictionary) -> void:
+	for datos in parsed.get("canas", []):
+		if not (datos is Dictionary):
+			continue
+		var d: Dictionary = datos
+		if String(d.get("id", "")) == "":
+			continue
+		var r := FishingRod.new()
+		r.id = String(d.get("id"))
+		r.rango_lanzamiento = float(d.get("rango_lanzamiento", 8.0))
+		r.ventana_exito = float(d.get("ventana_exito", 0.5))
+		r.multiplicador_espera = float(d.get("multiplicador_espera", 1.0))
+		r.multiplicador_rareza = float(d.get("multiplicador_rareza", 1.0))
+		_canas[r.id] = r
+
+
+func _cargar_peces_de(parsed: Dictionary) -> void:
+	_peces.clear()
 	for datos in parsed.get("peces", []):
 		var pez := FishDefinition.new()
 		pez.id = str(datos.get("id", ""))
@@ -80,6 +136,16 @@ func _cargar_peces() -> void:
 				var est := _estacion_numero(String(t))
 				if est >= 0:
 					pez.estaciones.append(est)
+		# P17: exclusivas por bioma (lista de ids M51; vacío = todos).
+		# Antes no se leían, así que el filtro por bioma nunca podía aplicarse.
+		var biomas: Array = datos.get("biomas", [])
+		for b in biomas:
+			var nombre_b: String = String(b)
+			if nombre_b != "" and not pez.biomas.has(nombre_b):
+				pez.biomas.append(nombre_b)
+		# P16: pieza de museo (M37) y receta (M15), opcionales.
+		pez.pieza_museo = String(datos.get("pieza_museo", ""))
+		pez.id_receta = String(datos.get("id_receta", ""))
 		_peces.append(pez)
 
 func _franja_de_hora(hora: int) -> int:
@@ -151,6 +217,9 @@ func _on_estado_sesion(nuevo: int, ses, _spot) -> void:
 		var tamano := _prng.randf_range(pez.tamano_min, pez.tamano_max) if pez else 0.5
 		registrar_captura(pez, tamano)
 		captura_exitosa.emit(pez, tamano)
+		# E95/G115: crear el ítem y entregarlo a M14 (antes solo se emitía la
+		# señal: nadie creaba el pez ni lo sumaba al inventario).
+		_entregar_pez_a_inventario(pez)
 		_consumir_cebo(ses)
 		_terminar()
 	elif nuevo == FishingSession.Estado.ESCAPE:
@@ -158,6 +227,67 @@ func _on_estado_sesion(nuevo: int, ses, _spot) -> void:
 		captura_fallida.emit("el_pez_se_fue")
 		_pity_incrementar()
 		_terminar()
+
+
+## ── Entrega a M14 (E95/G115) ────────────────────────────────────────────
+
+## Entrega 1 ítem pez al inventario (M14). Contrato real de M14:
+## `add_item(item_id, amount)` devuelve el SOBRANTE no aceptado (0 = todo entró).
+## Si no entra todo, el resto va a la bandeja de "peces sueltos" (J160): la
+## captura nunca se pierde. Devuelve {entregado, bandeja, motivo}.
+func _entregar_pez_a_inventario(pez) -> Dictionary:
+	var resultado: Dictionary = {"entregado": 0, "bandeja": 0, "motivo": &""}
+	if pez == null:
+		resultado["motivo"] = &"sin_pez"
+		return resultado
+	var item_id: String = String(pez.id)
+	if item_id == "":
+		resultado["motivo"] = &"sin_id"
+		return resultado
+	var inv = get_node_or_null("/root/Inventario")
+	if inv == null or not inv.has_method("add_item"):
+		# Sin M14 disponible (headline/tests): toda la captura a la bandeja.
+		_bandeja_peces[item_id] = int(_bandeja_peces.get(item_id, 0)) + 1
+		resultado["bandeja"] = 1
+		resultado["motivo"] = &"sin_inventario"
+		bandeja_peces_sueltos.emit(1)
+		return resultado
+	var restante: int = int(inv.add_item(item_id, 1))
+	var entregado: int = 1 - restante
+	resultado["entregado"] = entregado
+	if restante > 0:
+		_bandeja_peces[item_id] = int(_bandeja_peces.get(item_id, 0)) + restante
+		resultado["bandeja"] = restante
+		resultado["motivo"] = &"inventario_lleno"
+		bandeja_peces_sueltos.emit(restante)
+	pez_entregado.emit(item_id, entregado, 1)
+	return resultado
+
+## Peces que no entraron en el inventario (para la UI y el save).
+func peces_sueltos() -> Dictionary:
+	return _bandeja_peces.duplicate()
+
+## Intenta vaciar la bandeja en el inventario (llamado por la UI al liberar
+## espacio). Devuelve cuántos se rescataron.
+func rescatar_peces_sueltos() -> int:
+	var inv = get_node_or_null("/root/Inventario")
+	if inv == null or not inv.has_method("add_item"):
+		return 0
+	var rescatados: int = 0
+	for item_id in _bandeja_peces.keys():
+		var pendiente: int = int(_bandeja_peces[item_id])
+		while pendiente > 0:
+			var restante: int = int(inv.add_item(String(item_id), pendiente))
+			var entro: int = pendiente - restante
+			rescatados += entro
+			pendiente = restante
+			if restante > 0:
+				break  # inventario sigue lleno
+		if pendiente > 0:
+			_bandeja_peces[item_id] = pendiente
+		else:
+			_bandeja_peces.erase(item_id)
+	return rescatados
 
 func _terminar() -> void:
 	if _sesion:
@@ -176,15 +306,43 @@ func _consumir_cebo(ses) -> void:
 	if inv and inv.has_method("remover_items"):
 		inv.remover_items({str(ses.cebo.id): ses.cebo.consumo_por_captura})
 
+## ── Acceso al catálogo (para HUD, tiendas M38/M39 y QA) ────────────────
+
+func peces() -> Array:
+	return _peces.duplicate()
+
+func pez_por_id(id: String) -> FishDefinition:
+	for pez in _peces:
+		if String(pez.id) == String(id):
+			return pez
+	return null
+
+func cebos() -> Dictionary:
+	return _cebos.duplicate()
+
+func cebo_por_id(id: String) -> CeboDefinition:
+	return _cebos.get(String(id), null)
+
+func canas() -> Dictionary:
+	return _canas.duplicate()
+
+func cana_por_id(id: String) -> FishingRod:
+	return _canas.get(String(id), null)
+
+func cantidad_peces() -> int:
+	return _peces.size()
+
+
 ## ── Resolución de especie (flujo 4) ──────────────────────
 
 ## Filtra por estación M29 + franja M31 + clima M32; elige por PRNG ponderado
 ## con bono de cebo y pity (§flujo 4 + §6.5: el cebo solo multiplica).
 func resolver_especie(_spot, cebo: CeboDefinition = null) -> FishDefinition:
-	var cal = get_node_or_null("/root/TimeCalendar")
+	var cal = get_node_or_null("/root/GameTime") if get_node_or_null("/root/GameTime") else get_node_or_null("/root/TimeCalendar")
 	var estacion: int = int(cal.get_estacion()) if cal else 0
 	var hora: int = cal.get_hora() if cal else 12
-	var candidatas: Array = _candidatas_de_estacion(estacion, hora)
+	var bioma_spot: String = _bioma_de_spot(_spot)
+	var candidatas: Array = _candidatas_de_estacion(estacion, hora, bioma_spot)
 	if candidatas.is_empty():
 		candidatas = _peces  # fallback: nunca pescar "nada" (cozy)
 	# Peso: base x bono cebo x bono clima x pity
@@ -207,11 +365,14 @@ func resolver_especie(_spot, cebo: CeboDefinition = null) -> FishDefinition:
 			return elegido
 	return candidatas[0] if candidatas.size() > 0 else null
 
-## Candidatas por estación M29 + franja M31 (extraído de resolver_especie
-## para testabilidad, patrón _peso_efectivo del Log 310). El clima NO filtra
-## (§6 M32: bono sí, bloqueo no — solo multiplica pesos en _peso_efectivo).
-## Contrato: estaciones/franjas VACÍAS = todas (FishDefinition L14-15).
-func _candidatas_de_estacion(estacion: int, hora: int = 12) -> Array:
+## Candidatas por estación M29 + franja M31 + bioma M51 (extraído de
+## resolver_especie para testabilidad, patrón _peso_efectivo del Log 310). El
+## clima NO filtra (§6 M32: bono sí, bloqueo no — solo multiplica pesos en
+## _peso_efectivo).
+## Contrato: estaciones/franjas/biomas VACÍOS = todos (FishDefinition L14-15).
+## `bioma_spot` vacío (M51 no integrado) = no filtra, para no dejar al jugador
+## sin nada que pescar.
+func _candidatas_de_estacion(estacion: int, hora: int = 12, bioma_spot: String = "") -> Array:
 	var franja_actual: int = _franja_de_hora(hora)
 	var candidatas: Array = []
 	for pez in _peces:
@@ -219,8 +380,23 @@ func _candidatas_de_estacion(estacion: int, hora: int = 12) -> Array:
 			continue
 		if pez.franjas.size() > 0 and not pez.franjas.has(franja_actual):
 			continue
+		if bioma_spot != "" and pez.biomas.size() > 0 and not pez.biomas.has(bioma_spot):
+			continue
 		candidatas.append(pez)
 	return candidatas
+
+## Bioma del spot (id textual de M51). Devuelve "" si el spot no lo expone:
+## sin bioma conocido no se filtra (regla cozy: nunca dejar de pescar).
+func _bioma_de_spot(spot) -> String:
+	if spot == null:
+		return ""
+	var b: Variant = spot.get("bioma")
+	if b is String and String(b) != "":
+		return String(b)
+	var idb: Variant = spot.get("bioma_id")
+	if idb is String and String(idb) != "":
+		return String(idb)
+	return ""
 
 ## ── Bonos de clima (M32→M34, glm-5.3-flash 2026-08-31) ──
 ## Diseño M32 §6 / checklist P21: "lluvia +15% raro; tropical +25% raro;
@@ -307,9 +483,14 @@ func get_section_name() -> String:
 
 func get_save_data() -> Dictionary:
 	return {"coleccion": _coleccion.duplicate(true), "pity": _pity_contadores.duplicate(),
-		"capturas_totales": _capturas_totales}
+		"capturas_totales": _capturas_totales,
+		# J160: los peces que no entraron por inventario lleno también se guardan.
+		"bandeja_peces": _bandeja_peces.duplicate(true)}
 
 func restore_save_data(data: Dictionary) -> void:
 	_coleccion = data.get("coleccion", {}).duplicate(true)
 	_pity_contadores = data.get("pity", {}).duplicate(true)
 	_capturas_totales = int(data.get("capturas_totales", 0))
+	var bandeja: Variant = data.get("bandeja_peces", {})
+	if bandeja is Dictionary:
+		_bandeja_peces = (bandeja as Dictionary).duplicate(true)

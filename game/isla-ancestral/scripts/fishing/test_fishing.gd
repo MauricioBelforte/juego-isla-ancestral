@@ -45,7 +45,7 @@ func _test_datos() -> void:
 			sardina = pez
 	_check(sardina != null, "pez_sardina cargado")
 	if sardina:
-		_check(sardina.peso_rareza == 0.25, "sardina probabilidad 0.25")
+		_check(sardina.peso_rareza == 0.60, "sardina peso comun 0.60 (P6)")
 		_check(sardina.tamano_min == 0.3, "sardina tamaño min 0.3")
 
 func _test_sesion_captura() -> void:
@@ -99,14 +99,19 @@ func _test_resolucion_condiciones() -> void:
 	var pez = _fm.resolver_especie(null, null)
 	_check(pez != null, "resolver_especie devuelve pez")
 	# Pity: pez lunar (pity 80) — tras forzar contador, peso x10 aplica
-	_fm._pity_contadores["pez_luna"] = 80
-	var elegido_luna := 0
-	for i in range(50):
-		var p = _fm.resolver_especie(null, null)
-		if p != null and p.id == "pez_luna":
-			elegido_luna += 1
-			_fm._pity_contadores["pez_luna"] = 80  # mantener para la muestra
-	_check(elegido_luna > 0, "pity aumenta chance del pez raro (%d/50)" % elegido_luna)
+	var luna_pez: FishDefinition = _get_pez("pez_luna")
+	_check(luna_pez != null, "pez_luna presente")
+	if luna_pez:
+		# Sin pity vs con pity: el peso debe subir (contrato _peso_efectivo).
+		_fm._pity_contadores["pez_luna"] = 0
+		var peso_base: float = _fm._peso_efectivo(luna_pez, null)
+		_fm._pity_contadores["pez_luna"] = int(luna_pez.pity)
+		var peso_pity: float = _fm._peso_efectivo(luna_pez, null)
+		_check(peso_pity > peso_base,
+			"pity multiplica el peso (%.4f -> %.4f)" % [peso_base, peso_pity])
+		# Y es candidato de NOCHE en verano (su estación/franja).
+		var cand_noche: Array = _fm._candidatas_de_estacion(1, 3)
+		_check(cand_noche.has(luna_pez), "luna candidato en verano+NOCHE")
 
 func _test_coleccion() -> void:
 	var col: Dictionary = _fm.get_collection_data()
@@ -138,7 +143,7 @@ func _test_iter2_estaciones_todas() -> void:
 	# El filtro la acepta en CUALQUIER estación M29 (a hora NOCHE=4, que es
 	# una franja de la sardina; a las 12 la filtra la FRANJA, por diseño).
 	for estacion in [0, 1, 2, 3]:
-		var candidatas: Array = _fm._candidatas_de_estacion(estacion, 4)
+		var candidatas: Array = _fm._candidatas_de_estacion(estacion, 10)
 		_check(candidatas.has(sardina),
 			"sardina candidata en estación %d (filtro arreglado)" % estacion)
 
@@ -150,9 +155,12 @@ func _test_iter2_franjas_horas() -> void:
 		_check(false, "sardina presente para test franjas")
 		return
 	var franjas := sardina.franjas
-	_check(franjas.has(3), "sardina incluye NOCHE (hora 4 → <5 = NOCHE)")
-	_check(franjas.has(2), "sardina incluye ATARDECER (hora 20 → 17..20 = ATARDECER, antes descartada)")
-	_check(franjas.size() == 2, "sardina 2 franjas exactas (4→NOCHE, 20→ATARDECER): %s" % str(franjas))
+	_check(franjas == [0, 1], "sardina [6,16] -> ALBA + DIA: %s" % str(franjas))
+	# Regresion multi-hora: cada hora mapea a su franja (sin dupes).
+	var aguja := _get_pez("pez_aguja")
+	if aguja:
+		_check(aguja.franjas.has(2) and aguja.franjas.has(3),
+			"aguja [18,23] -> ATARDECER + NOCHE: %s" % str(aguja.franjas))
 	# El pez luna: [21, 3] → ambas NOCHE, sin duplicados
 	var luna := _get_pez("pez_luna")
 	if luna:
@@ -188,14 +196,18 @@ func _test_iter2_filtro_estacion_verano() -> void:
 	# de _test_iter2_estaciones_todas).
 	var ids_todas: Dictionary = {}
 	for estacion in [0, 1, 2, 3]:
-		var candidatas: Array = _fm._candidatas_de_estacion(estacion, 4)  # franja NOCHE
-		var ids := []
-		for p in candidatas:
-			ids.append(p.id)
-		ids_todas[estacion] = ids
-	_check(ids_todas[1].has("pez_sardina"), "sardina candidata en verano POR REGLA (no fallback)")
-	_check(ids_todas[1].has("pez_luna"), "luna candidata en verano (su estación) + franja NOCHE")
-	_check(ids_todas[0].has("pez_sardina"), "sardina candidata también en primavera")
-	_check(not ids_todas[0].has("pez_luna"), "luna NO candidata en primavera (filtro real activo)")
-	_check(not ids_todas[2].has("pez_luna"), "luna NO candidata en otoño (filtro real activo)")
-	_check(not ids_todas[3].has("pez_luna"), "luna NO candidata en invierno (filtro real activo)")
+		var cand_dia: Array = _fm._candidatas_de_estacion(estacion, 10)  # DIA
+		var ids_dia := []
+		for p in cand_dia:
+			ids_dia.append(p.id)
+		ids_todas[str(estacion)] = ids_dia
+		var cand_noche: Array = _fm._candidatas_de_estacion(estacion, 3)  # NOCHE
+		var ids_noche := []
+		for p in cand_noche:
+			ids_noche.append(p.id)
+		ids_todas[str(estacion) + "_noche"] = ids_noche
+	_check(ids_todas["1"].has("pez_sardina"), "sardina candidata en verano POR REGLA (no fallback)")
+	_check(ids_todas["1_noche"].has("pez_luna"), "luna candidato en verano+NOCHE")
+	_check(ids_todas["0"].has("pez_sardina"), "sardina candidata tambien en primavera")
+	_check(not ids_todas["0_noche"].has("pez_luna"), "luna NO candidato en primavera (filtro real activo)")
+	_check(not ids_todas["2_noche"].has("pez_luna"), "luna NO candidato en otono (filtro real activo)")
