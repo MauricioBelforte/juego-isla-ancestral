@@ -13,7 +13,9 @@
 
 extends SceneTree
 
-const CHECKS_MINIMOS: int = 85
+const CHECKS_MINIMOS: int = 80  # bajado de 85 a 80 el 2026-10-12 por orden del
+# director mimo (msg 221): el test tiene ~86 checks reales (83 estaticos + 1 dentro
+# de un bucle de 4), y un minimo de 85 dejaba margen de solo 1 check.
 ## Ademas del piso de checks, la suite debe cerrar sus 6 bloques:
 ## un abort a mitad de camino no puede pasar por verde.
 const BLOQUES_MINIMOS: int = 6

@@ -278,6 +278,12 @@ jobs:
           # Mínimos en vez de números fijos + ids únicos (fix BUG-033: fijaba
           # 5 elementos / 2 políticas con el catálogo en 7 / 5 -> false-red).
           godot --headless --script scripts/legal/test_copyright_m127.gd 2>&1 || FAIL=1
+# M90 iter. 2: graphics_config + su suite headless (85 checks con guardian
+# anti-falso-verde). Cubre resoluciones, modos de ventana, calidades, AA,
+# upscaling, VSync, FPS, escalas, presets y deteccion automatica.
+# Agregado el 2026-10-12 por stepfun-step-5-preview (orden del director mimo, msg 221):
+# la carpeta scripts/settings/ estaba sin versionar y sin gate.
+godot --headless --script scripts/settings/test_graphics_config.gd 2>&1 || FAIL=1
           # Run M111 quality-utils test: Math/Validation/Format utils, constants,
           # enums, structs, patterns y components (SceneTree, sin GdUnit4).
           godot --headless -s res://tests/test_m111_utils_headless.gd 2>&1 || FAIL=1
