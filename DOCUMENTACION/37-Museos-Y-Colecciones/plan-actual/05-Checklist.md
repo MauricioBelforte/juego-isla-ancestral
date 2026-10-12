@@ -23,8 +23,8 @@
 ## A. Alcance y requisitos (10)
 
 - [x] Definir el problema: museo como sistema de coleccion visitable y gratificante [S]
-- [ ] Registrar dependencias: M36 (fauna), M34 (pesca), M25 (ruinas), M55 (diario) [S]
-- [ ] Registrar relaciones: M29/M31 (reloj), M71 (logros), M39 (infraestructura), M69 (fast travel) [S]
+- [x] Registrar dependencias: M36 (fauna), M34 (pesca), M25 (ruinas), M55 (diario) [S] — BARRIDO s2 2026-10-12 (Log 1725): 01-Requerimientos.md L9: dependencias M36/M34/M25/M55 documentadas
+- [x] Registrar relaciones: M29/M31 (reloj), M71 (logros), M39 (infraestructura), M69 (fast travel) [S] — BARRIDO s2 2026-10-12 (Log 1725): 01-Requerimientos.md L10: relaciones M29/M31/M71/M39/M69 documentadas
 - [x] RF1: edificio de museo visitable en Aurora [S]
 - [x] RF2: donacion de fauna avistada desde M36 [S] — iter. 3: exposición "fauna" con las 7 especies reales del catálogo M36 (gaviota/conejo/nutria/lechuza/salamandra/cangrejo/halcón); donación testeada
 - [x] RF3: donacion de peces capturados desde M34 [S] — glm-5.3-flash 2026-09-01: implementado y testeado (trucha del catálogo M34 al acuario)
@@ -35,14 +35,14 @@
 
 ## B. Analisis y decisiones (8)
 
-- [ ] Analizar alternativa A: colecciones solo con logros y menu, sin edificio [S]
-- [ ] Analizar alternativa B: museo fisico visitable con vitrinas instanciadas [S]
-- [ ] Analizar alternativa C: tour guiado con camara fija y galeria cinematica [S]
-- [ ] Analizar alternativa D: catalogo integrado unicamente en M55 Diario [S]
+- [x] Analizar alternativa A: colecciones solo con logros y menu, sin edificio [S] — BARRIDO s2 2026-10-12 (Log 1725): 02-Analisis.md §3: alternativa A analizada (tabla Ventajas/Desventajas/Decision)
+- [x] Analizar alternativa B: museo fisico visitable con vitrinas instanciadas [S] — BARRIDO s2 2026-10-12 (Log 1725): 02-Analisis.md §3: alternativa B analizada y elegida
+- [x] Analizar alternativa C: tour guiado con camara fija y galeria cinematica [S] — BARRIDO s2 2026-10-12 (Log 1725): 02-Analisis.md §3: alternativa C analizada
+- [x] Analizar alternativa D: catalogo integrado unicamente en M55 Diario [S] — BARRIDO s2 2026-10-12 (Log 1725): 02-Analisis.md §3: alternativa D analizada
 - [x] Decidir: edificio visitable con vitrinas instanciadas (alternativa B) [S]
 - [x] Decidir: CollectionRegistry como autoridad unica de progreso [S] — implementado como autoload autoridad única
 - [x] Decidir: DonationService separado para validacion y consumo [S] — implementado como autoload separado (§2.4)
-- [ ] Documentar alternativas descartadas con justificacion tecnica [S]
+- [x] Documentar alternativas descartadas con justificacion tecnica [S] — BARRIDO s2 2026-10-12 (Log 1725): 02-Analisis.md §3+§4: tabla completa con justificacion tecnica + decisiones
 
 ## C. Arquitectura y datos (12)
 
@@ -196,10 +196,10 @@
 
 ## N. QA, testings y polish (12)
 
-- [ ] Test: donacion feliz completa una exposicion entera [M]
-- [ ] Test: donacion duplicada rechazada con motivo correcto [M]
+- [x] Test: donacion feliz completa una exposicion entera [M] — BARRIDO s2 2026-10-12 (Log 1725): test_museo.gd _test_donacion_feliz() + test_museo_rf2d bloque C (100% + recompensa)
+- [x] Test: donacion duplicada rechazada con motivo correcto [M] — BARRIDO s2 2026-10-12 (Log 1725): test_museo.gd _test_rechazos() (rechazo duplicado §4.3.1 con motivo)
 - [ ] Test: vitrina ocupada nunca sobrescrita [M]
-- [ ] Test: recompensa otorgada una sola vez en multiples cargas [M]
+- [x] Test: recompensa otorgada una sola vez en multiples cargas [M] — BARRIDO s2 2026-10-12 (Log 1725): test_museo.gd _test_recompensa_unica_idempotente() + rf2d bloque C (reclamada persistida)
 - [ ] Test: museo 100% desbloquea el trofeo final [M]
 - [x] Test: guardar y cargar conserva piezas y vitrinas [M] (RF2c: test_museo_rf3.gd 0/0 + idempotencia + casos limite, agnes)
 - [ ] Test: integracion de senales con M36/M34/M25/M55 [C]
@@ -249,7 +249,7 @@
 - M53: usar get_resumen_para_ui() para el cartel de entrada y get_donatable_items(sala) para el panel de donación; escuchar EventBus.ui.notify {tipo:"museo"} y señales donation_accepted/rejected/reward_granted.
 - Al agregar exposiciones nuevas: seguir el vocabulario de validar_catalogo() (id único, items no vacíos, recompensa con item_id) — la validación se ejecuta en cada boot.
 - Para "obras de arte ancestral" (RF5): definir los ids con M25/M163 y añadir la sala al JSON — el resto del flujo ya funciona.
-**Totales:** 148 ítems · Completados: 86 · Pendientes: 62 · No resueltos: 0.
+**Totales:** 148 ítems · Completados: 96 · Pendientes: 52 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 36 [x] / 112 [ ] / 0 [?].
