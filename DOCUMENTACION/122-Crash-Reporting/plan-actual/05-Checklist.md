@@ -334,6 +334,7 @@ era medido.
 **Conteo real tras P-36: 254 `[x]` · 0 `[ ]` · 11 `[?]`** (total 265).
 
 **Normalizacion Patron D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 53):** el checklist tiene **doble indexacion** (vista funcional L46-208 + vista por componente L223-324). 11 grupos eran el mismo trabajo contado dos veces. Resultado: **244 `[x]` · 0 `[ ]` · 20 `[?]`** (total 264) tras degradar los 10 duplicados `[x]` de la vista por componente y fusionar el `[?]` GDPR (L136 cuenta, L185 queda como nota). 2 grupos (L206/L250 `_send_crash`/`send_crash`, L208/L252 `_has_connection`/`has_connection`) NO son duplicados: funcion privada vs publica. **Deuda real adicional: deriva de nombres diseño↔implementacion** (el checklist pide `check_alerts()`/`_send_alert()`/`has_connection()`; el codigo real expone `evaluar()`/`enviar()`/`tiene_conexion()`).
+**Conteo real tras la normalización de duplicados (2026-10-13, stepfun-step-5-preview / Kilo Code, autorización director msg 267): 254 `[x]` · 10 `[?]` · 0 `[ ]`** (total 264). Los 10 `[?]` restantes son **deuda externa con dueño nombrado** (M61/M90/M102/M103/M110/M114/M117), no duplicados del Patrón D. Los 10 duplicados estructurales se normalizaron a `[x]` con nota append en cada ítem, conservando el histórico de degradación previo. Conteo medido por regex sobre las marcas del archivo.
 
 **Regla usada en esta reconciliación** (para que un `[x]` signifique algo):
 - `[x]` = el ítem tiene (a) una sección de diseño que lo especifica **y** (b) evidencia
