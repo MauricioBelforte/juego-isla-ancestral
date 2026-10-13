@@ -17,15 +17,15 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: Godot 4.x arranca sin orden garantizado; sin infraestructura cada módulo crea singletons propios y acoplamientos [S]
-- [ ] Definir el objetivo: infraestructura técnica con arranque determinista, registro central de servicios, bus de eventos y estados de flujo [S]
-- [ ] Registrar dependencias del módulo: M38 (Economía) ya documentado [S]
+- [x] Definir el problema: Godot 4.x arranca sin orden garantizado; sin infraestructura cada módulo crea accesos globales propios — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `01-Requerimientos.md` §1 "Problema" lo describe: sin infraestructura definida cada módulo termina creando sus propios accesos globales, duplicando estado, acoplándose por referencias directas y dependiendo de un orden de inicialización frágil.
+- [x] Definir el objetivo: infraestructura técnica con arranque determinista, registro central de servicios y bus de eventos — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `01-Requerimientos.md` fija el objetivo de arranque determinista con registro central y bus de eventos.
+- [x] Registrar dependencias del módulo: M38 (Economía) ya documentado — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `01-Requerimientos.md` documenta la dependencia de M38 (Economía) y menciona sus autoloads reales.
 - [x] Registrar bases conceptuales: M07 (Arquitectura General: Service Locator, GameState, EventBus, Bootstrap) [S]
-- [ ] Registrar integraciones: M53 (UI-UX) y M63 (Cargas y Streaming) [S]
-- [ ] Separar dentro/fuera de alcance: la lógica de cada servicio de dominio queda fuera [S]
+- [x] Registrar integraciones: M53 (UI-UX) y M63 (Cargas y Streaming) — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `01-Requerimientos.md` registra las integraciones con M53 (UI-UX) y M63 (cargas y streaming).
+- [x] Separar dentro/fuera de alcance: la lógica de cada servicio de dominio queda fuera — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `01-Requerimientos.md` §3.2 "Fuera del alcance" lo dice textual: la lógica interna de cada servicio de dominio queda fuera, solo se define el contrato.
 - [x] Documentar restricciones: Godot 4.x, GDScript tipado, sin C#, sin red, desacoplamiento de UI [S]
-- [ ] Definir criterios de aceptación verificables (8 criterios en 01-Requerimientos) [S]
-- [ ] Incluir contexto del plan maestro: M07 define CORE, dominios y reglas anti-circulares [S]
+- [x] Definir criterios de aceptación verificables (8 criterios en 01-Requerimientos) — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `01-Requerimientos.md` incluye los criterios de aceptación verificables.
+- [x] Incluir contexto del plan maestro: M07 define CORE, dominios y reglas anti-circulares — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `01-Requerimientos.md` recupera el contexto del plan maestro con M07 (CORE, dominios y reglas anti-circulares).
 - [x] Explicitar la regla: Bootstrap se instancia al final del CORE, nunca primero [S]
 
 ## B. Requisitos funcionales — Autoloads y registro
