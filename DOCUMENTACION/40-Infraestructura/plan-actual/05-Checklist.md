@@ -136,35 +136,35 @@
 
 - [x] Analizar autoloads vs inyección de dependencias: Godot no tiene DI nativa [M]
 - [x] Analizar el Service Locator (M07): beneficios, riesgos de "acoplador universal" [M]
-- [ ] Analizar el EventBus central con dominios tipados [M]
+- [x] Analizar el EventBus central con dominios tipados — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` desarrolla el EventBus con dominios tipados como opción central.
 - [x] Analizar el rol del Bootstrap como orquestador final [M]
-- [ ] Analizar el orden de carga en project.godot y su fragilidad si no se declara [M]
-- [ ] Analizar las escenas de arranque (boot/menú/mundo) y sus transiciones [M]
-- [ ] Analizar el diagnóstico de dependencias circulares (estático + runtime) [M]
-- [ ] Evaluar locator vs singleton global por módulo: se adopta locator por contratos [M]
-- [ ] Evaluar inyección manual como central: descartada, se usa puntual en tests [M]
-- [ ] Evaluar señales sueltas vs bus: se adopta EventBus con dominios base de M07 [M]
+- [x] Analizar el orden de carga en project.godot y su fragilidad si no se declara — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` analiza el orden de carga en `project.godot` y su fragilidad.
+- [x] Analizar las escenas de arranque (boot/menú/mundo) y sus transiciones — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` analiza las escenas de arranque boot/menú/mundo y sus transiciones.
+- [x] Analizar el diagnóstico de dependencias circulares (estático + runtime) — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` cubre el diagnóstico de dependencias circulares.
+- [x] Evaluar locator vs singleton global por módulo: se adopta locator por contratos — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` compara locator vs singleton global y adopta el locator por contratos.
+- [x] Evaluar inyección manual como central: descartada, se usa puntual en tests — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` evalúa la inyección manual: descartada como centro, puntual en tests.
+- [x] Evaluar señales sueltas vs bus: se adopta EventBus con dominios base de M07 — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` compara señales sueltas vs bus y adopta el EventBus.
 - [x] Evaluar Bootstrap primero vs último: se adopta último con sanity check [M]
-- [ ] Evaluar orden físico de dominio como contrato: descartado por auto-registro [M]
-- [ ] Evaluar escena única persistente vs multi-escena: se adopta multi-escena [M]
-- [ ] Evaluar diagnóstico solo runtime vs dual: se adopta estático + runtime [S]
+- [x] Evaluar orden físico de dominio como contrato: descartado por auto-registro — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` evalúa el orden físico de dominio y lo descarta por auto-registro.
+- [x] Evaluar escena única persistente vs multi-escena: se adopta multi-escena — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` compara escena única persistente vs multi-escena y adopta multi-escena.
+- [x] Evaluar diagnóstico solo runtime vs dual: se adopta estático + runtime — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` documenta la adopción del diagnóstico dual estático + runtime.
 
 ## J. Diseño — Orden de carga y mapa de servicios
 
 - [ ] Fijar prioridades numéricas legibles en project.godot (10/20/30/40/50/60/1) [S]
-- [ ] Documentar que el requisito real es el ORDEN, validado por test de arranque [M]
+- [x] Documentar que el requisito real es el ORDEN, validado por test de arranque — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` documenta que el requisito real es el orden y lo vincula al test de arranque.
 - [x] EventBus como primer autoload por no tener dependencias [S]
-- [ ] Logger segundo con contrato mínimo (detalle M103) [S]
-- [ ] GameState tercero como dato puro sin servicios [S]
+- [x] Logger segundo con contrato mínimo (detalle M103) — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` fija el orden de carga con Logger en segunda posición y su contrato mínimo, con el detalle delegado a M103.
+- [x] GameState tercero como dato puro sin servicios — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` tabla de orden: *"3. GameState · dato puro de partida (M07), sin servicios"*.
 - [x] ServiceRegistry cuarto (base del auto-registro) [S]
 - [x] SceneManager quinto (depende de EventBus y ServiceRegistry) [S]
 - [x] GameFlowManager sexto (máquina pura sin dependencias de carga) [S]
 - [x] Bootstrap séptimo y último (orquestador con verificación final) [S]
 - [x] Mapa de servicios: contratos core.* registrados por sus propios autoloads [M]
-- [ ] Mapa de servicios: contratos economia.* registrados por M38 [M]
+- [x] Mapa de servicios: contratos economia.* registrados por M38 — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` incluye el mapa de servicios con los contratos `economia.*` a cargo de M38.
 - [ ] Mapa de servicios: dejar registrados los contrato reservados para dominios futuros (mundo_voxel, ui) [M]
-- [ ] Documentar la política de registro único por contrato [S]
-- [ ] Documentar la consulta O(1) con Dictionary [S]
+- [x] Documentar la política de registro único por contrato — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` documenta la política de registro único por contrato.
+- [x] Documentar la consulta O(1) con Dictionary — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` documenta la consulta O(1) con Dictionary.
 
 ## K. Diseño — Flujo de arranque y escenas
 
