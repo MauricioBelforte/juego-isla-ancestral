@@ -133,33 +133,33 @@
 - [?] Boleto/requisitos (M28) no bloquean el regreso a Aurora [S] | AUDIT 2026-10-13 (step-5-kilocode): el flag de requisito existe (island_definition.gd L75, M22 via WorldState) pero no hay logica de boleto que-blquee/no-bloquee el regreso.
 - [?] NPC viajeros (M28) respetan la isla cargada (spawn solo si su isla activa) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de spawn condicionado de NPC viajeros a la isla activa.
 - [?] El barco no atraca en islas sin desbloqueo (anillo LEJANO) [M] | AUDIT 2026-10-13 (step-5-kilocode): esta_desbloqueada() existe y esta testeada (island_registry.gd L404, test_islas_m27.gd L417-420) pero tiene 0 llamadores en produccion: ni travel_service ni el guard la consultan para atracar.
-- [?] Si la isla destino ya está cacheada, la travesía se salta la carga (inmediato) [M] | AUDIT 2026-10-13 (step-5-kilocode): no existe la constante OCEANO_ALTURA; equivalentes: NIVEL_MAR=0.0 configurable (island_travel_guard.gd L32/L56) y nivel de mar deterministico validado en validate_water.gd L19 (RF2). El nombre del item no esta implementado.
+- [?] Si la isla destino ya está cacheada, la travesía se salta la carga (inmediato) [M] | AUDIT 2026-10-13 (step-5-kilocode): no existe cacheado(id) (ver item 13) ni logica de saltear carga; la travesia siempre evalua carga.
 
 ## H. Integración con M51 — Agua y océano
 
 > **Bloque DELEGADO (iter. 1) — dueño M51:** el océano, las profundidades y la espuma son de M51. Ítems marcados `[?]`.
 
-- [?] Nivel de mar global definido (OCEANO_ALTURA) en el mundo voxel [M] | AUDIT 2026-10-13 (step-5-kilocode): island_design_catalog.gd L102 declara el oceanico navegable (RF4) pero delega barco/navegacion a otro modulo; no hay implementacion de navegacion entre islas.
-- [?] El agua entre islas es navegable por barco (no bloqueo invisible) [C] | AUDIT 2026-10-13 (step-5-kilocode): SHALLOW_WATER existe como bloque (M08) pero no hay profundidades por isla (arrecife Coral / fosa Submarina) configuradas.
-- [?] Profundidades por isla: arrecife poco profundo de Coral, fosa de Submarina [M] | AUDIT 2026-10-13 (step-5-kilocode): la espuma existe en el plano de agua global de M51 (agua_animada.gd L5, espuma_orilla L17-20) pero no esta verificada playa por playa de cada isla.
-- [?] Espuma de costas (M51) presente en playas de cada isla [S] | AUDIT 2026-10-13 (step-5-kilocode): validate_water.gd L17 valida deriva de corriente acotada (RF14/O.106, CURRENT_DRIFT_MAX=0.3) pero no hay evidencia de que el barco no salga de los bounds del archipielago.
-- [?] Corrientes de M51 no llevan el barco fuera de los bounds del archipiélago [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de congelacion/inundacion de agua dentro de islas; los hits de 'congela' son de pausas/tiempo, no de agua.
-- [?] El agua no se congela ni inunda dentro de las islas salvo eventos M32 [M]
+- [?] Nivel de mar global definido (OCEANO_ALTURA) en el mundo voxel [M] | AUDIT 2026-10-13 (step-5-kilocode): no existe la constante OCEANO_ALTURA; equivalentes: NIVEL_MAR=0.0 configurable (island_travel_guard.gd L32/L56) y nivel de mar deterministico validado en validate_water.gd L19 (RF2). El nombre del item no esta implementado.
+- [?] El agua entre islas es navegable por barco (no bloqueo invisible) [C] | AUDIT 2026-10-13 (step-5-kilocode): island_design_catalog.gd L102 declara el oceanico navegable (RF4) pero delega barco/navegacion a otro modulo; no hay implementacion de navegacion entre islas.
+- [?] Profundidades por isla: arrecife poco profundo de Coral, fosa de Submarina [M] | AUDIT 2026-10-13 (step-5-kilocode): SHALLOW_WATER existe como bloque (M08) pero no hay profundidades por isla (arrecife Coral / fosa Submarina) configuradas.
+- [?] Espuma de costas (M51) presente en playas de cada isla [S] | AUDIT 2026-10-13 (step-5-kilocode): la espuma existe en el plano de agua global de M51 (agua_animada.gd L5, espuma_orilla L17-20) pero no esta verificada playa por playa de cada isla.
+- [?] Corrientes de M51 no llevan el barco fuera de los bounds del archipiélago [C] | AUDIT 2026-10-13 (step-5-kilocode): validate_water.gd L17 valida deriva de corriente acotada (RF14/O.106, CURRENT_DRIFT_MAX=0.3) pero no hay evidencia de que el barco no salga de los bounds del archipielago.
+- [?] El agua no se congela ni inunda dentro de las islas salvo eventos M32 [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de congelacion/inundacion de agua dentro de islas; los hits de 'congela' son de pausas/tiempo, no de agua.
 - [x] La isla Flotante y las del Cielo no tienen océano debajo (es_flotante) [S] | PROMOVIDO [x] 2026-10-13 (step-5-kilocode, Patron D): es_flotante implementado y verificado — campo en island_definition.gd L74 (comentario L73 'sin oceano debajo'), logica en island_travel_guard.gd L208-215 ('debajo de isla flotante: vacio, no oceano'), validacion de punto de llegada en island_definition.gd L168-169 y test dedicado test_islas_m27_iter2.gd L354 ('bajo una isla flotante NO hay oceano, diseno H').
-- [?] Los sonidos del mar (M42) cambian según distancia a la isla más cercana [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de interaccion agua-puzzles (M23/M24) condicionada a isla cargada.
-- [?] El agua interactúa con puzzles de islas (M23/M24) solo isla cargada [M]
-- [?] Rendimiento del océano: shader de agua (M51) presupuestado por M61 [C]
+- [?] Los sonidos del mar (M42) cambian según distancia a la isla más cercana [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de sonidos de mar por distancia (M42).
+- [?] El agua interactúa con puzzles de islas (M23/M24) solo isla cargada [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de interaccion agua-puzzles (M23/M24) condicionada a isla cargada.
+- [?] Rendimiento del océano: shader de agua (M51) presupuestado por M61 [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de presupuesto de shader de oceano (M51) contra frame budget de M61.
 
 ## I. Integración con M09 y M32 — biomas y clima
 
 > **Bloque DELEGADO (iter. 1) — dueño M09/M32:** las recetas de bioma y el clima por isla son de M09/M32. Ítems marcados `[?]`.
 
 - [x] Cada isla declara bioma_base y mezcla contra el catálogo de 13 biomas de M09 [M]
-- [?] Transiciones entre biomas dentro de una isla suaves (falloff M09) [M]
-- [?] Playas/acantilados por recetas de formaciones de M09 [M]
-- [?] Clima por isla consultado por M32 (lluvia en Verde, nieve en Nieve) [M]
-- [?] La música cambia al desembarcar (M41 theme de la isla) [S]
-- [?] La fauna (M36) y vegetación (M50) respetan el bioma al spawnar [M]
+- [?] Transiciones entre biomas dentro de una isla suaves (falloff M09) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de falloff de biomas dentro de isla en islas/ ni world/.
+- [?] Playas/acantilados por recetas de formaciones de M09 [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de recetas de formaciones (playas/acantilados) de M09.
+- [?] Clima por isla consultado por M32 (lluvia en Verde, nieve en Nieve) [M] | AUDIT 2026-10-13 (step-5-kilocode): clima_tendencia es solo dato de definicion (generar_islas.gd L124, island_definition.gd L53); 0 consumidores en M32.
+- [?] La música cambia al desembarcar (M41 theme de la isla) [S] | AUDIT 2026-10-13 (step-5-kilocode): el campo musica existe por isla (generar_islas.gd L154+ 'mus_aurora' etc.) pero no hay consumo al desembarcar en los scripts de audio/M41.
+- [?] La fauna (M36) y vegetación (M50) respetan el bioma al spawnar [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de spawn de fauna/vegetacion condicionado al bioma.
 
 ## J. Persistencia y mapa
 
@@ -192,15 +192,15 @@
 > **Bloque DELEGADO (iter. 1) — dueño M61/M62:** los presupuestos de memoria/frame y el LRU son de M61/M62. Ítems marcados `[?]`.
 
 - [x] Máximo 2 islas completas en memoria a la vez [C] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandTravelGuard.MAX_ISLAS_EN_MEMORIA = 2` con `TOPE_MEMORIA_MB = 2048` (presupuesto de memoria del diseño).
-- [?] Aurora siempre cargada pero con streaming fino de chunks lejanos [M]
+- [?] Aurora siempre cargada pero con streaming fino de chunks lejanos [M] | AUDIT 2026-10-13 (step-5-kilocode): Aurora siempre carga por fallback de archipielago.gd y hay bounds para streaming (island_definition.gd L99) pero no hay evidencia de streaming fino de chunks lejanos para Aurora.
 - [x] Metadatos (definiciones) livianos: sin cargar voxel de islas lejanas [S] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. el registro solo carga `IslandDefinition` (datos puros); los voxels los escribe `IslandOps` por etapas (`ETAPAS = [losa, props, audio, navmesh]`).
 - [x] LRU con tope de memoria configurado por M62 [C]
 - [x] Sin allocs grandes en el hot path de búsqueda de vecinas [M] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandOps.MAX_OPS_POR_FRAME = 1` (presupuesto de "no congelar el frame") y `debe_precargar(pos, isla, presupuesto)` que por defecto respeta ese tope.
 - [x] Búsquedas de vecinas con índice espacial (grid por anillo) [M] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandRegistry.vecinas(id, corte_anillo)` filtra por anillo sobre el catálogo (`corte_anillo`), usado por `debe_precargar()`.
 - [x] Carga de props por etapas (sin picos) [M] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandOps.ETAPAS` / `PESOS = [0.60, 0.25, 0.10, 0.05]`: la carga se reparte en 4 etapas con peso, y `progreso_hasta(etapa)` las acumula.
-- [?] Precalentamiento en el menú (M63): cachea Aurora al boot [M]
-- [?] Telemetría de carga (M105): tiempos por isla, memoria, errores [C]
-- [?] Profiling: la carga de la isla más grande cabe en frame budget M61 [C]
+- [?] Precalentamiento en el menú (M63): cachea Aurora al boot [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de precalentamiento/cacheo de Aurora en el menu (M63).
+- [?] Telemetría de carga (M105): tiempos por isla, memoria, errores [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de telemetria de carga por isla (tiempos/memoria/errores) ligada a M105.
+- [?] Profiling: la carga de la isla más grande cabe en frame budget M61 [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de profiling de carga contra frame budget de M61.
 - [x] La precarga de vecinas no inicia si la GPU está al límite (M61) [C] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `debe_precargar(pos_jugador, isla_actual, presupuesto)` devuelve como máximo `MAX_OPS_POR_FRAME` ids, de modo que la precarga nunca desborda el frame.
 - [x] Los .tres usan PackedStringArray (serialización compacta M60) [S]
 
@@ -217,14 +217,14 @@
 
 > **Bloque DELEGADO (iter. 1) — dueño M54/M28/M21:** mapa, transiciones y comentarios de NPC son de M54/M28/M21. Ítems marcados `[?]`.
 
-- [?] Mensaje al descubrir una isla (toast/M54) sin romper la inmersión [S]
-- [?] El mapa muestra nombre de la isla al pasar el cursor (M54) [S]
-- [?] Transición de embarque suave (M28) con música de travesía [M]
-- [?] Ningún contenido exclusivo se pierde: accesible luego por otras vías (M73/feria) [M]
-- [?] El regreso siempre disponible: sin estados bloqueados [S]
-- [?] Indicador de "isla nueva por descubrir" sutil en el mapa (sin FOMO) [S]
-- [?] Los NPC residentes comentan sus islas (M21) al volver (coherente con M64) [M]
-- [?] Test manual de recorrido completo: Aurora → Coral → Aurora (idioma y UX) [C]
+- [?] Mensaje al descubrir una isla (toast/M54) sin romper la inmersión [S] | AUDIT 2026-10-13 (step-5-kilocode): descubrir() existe y devuelve true solo la primera vez 'para el toast de M54' (island_registry.gd L359), con tests (test_islas_m27.gd L382+), pero 0 consumidores en produccion: el toast no esta cableado.
+- [?] El mapa muestra nombre de la isla al pasar el cursor (M54) [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de tooltip/nombre en mapa dentro de islas/; el mapa es de M54.
+- [?] Transición de embarque suave (M28) con música de travesía [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de transicion de embarque con musica de travesia.
+- [?] Ningún contenido exclusivo se pierde: accesible luego por otras vías (M73/feria) [M] | AUDIT 2026-10-13 (step-5-kilocode): solo existe la nota de diseno (island_design_catalog.gd L120, regla cozy M73/M28); no hay implementacion de vias alternativas.
+- [?] El regreso siempre disponible: sin estados bloqueados [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de estados bloqueados; no hay evidencia de garantia de regreso siempre disponible.
+- [?] Indicador de "isla nueva por descubrir" sutil en el mapa (sin FOMO) [S] | AUDIT 2026-10-13 (step-5-kilocode): solo nota de diseno 'sin FOMO' (island_design_catalog.gd L122); no hay indicador en mapa.
+- [?] Los NPC residentes comentan sus islas (M21) al volver (coherente con M64) [M] | AUDIT 2026-10-13 (step-5-kilocode): el campo npc_residentes existe (island_definition.gd L62, generar_islas.gd L130) pero no hay dialogos de M21 que lo consuman.
+- [?] Test manual de recorrido completo: Aurora → Coral → Aurora (idioma y UX) [C] | AUDIT 2026-10-13 (step-5-kilocode): los tests usan aurora/coral para assertions unitarias (test_islas_m27.gd L211/244/527) pero no hay test manual de recorrido completo con idioma/UX.
 
 ## O. Testing (M112/M114)
 
@@ -235,11 +235,11 @@
 - [x] Test unitario: bounds y centro de isla correctos [S]
 - [x] Test unitario: registry tolera .tres faltante (error + Aurora) [M]
 - [x] Test unitario: semilla_id determinista por isla [S]
-- [?] Test integración: viaje Aurora→Nieve y regreso sin pérdida de estado [C]
+- [?] Test integración: viaje Aurora→Nieve y regreso sin pérdida de estado [C] | AUDIT 2026-10-13 (step-5-kilocode): no existe test de integracion de viaje Aurora->Nieve con verificacion de no-perdida de estado.
 - [x] Test integración: carga de vecina al navegar el borde sin congelar [C]
-- [?] Test integración: regen 80/0 conserva anclas válidas [C]
+- [?] Test integración: regen 80/0 conserva anclas válidas [C] | AUDIT 2026-10-13 (step-5-kilocode): no existe test de regen 80/0 con conservacion de anclas (ver item 6).
 - [x] Test integración: guardar/cargar partida restaura descubrimiento [M] — + sección `islas` en el payload de M59
-- [?] Test de estrés: 2 islas cargadas + 1 precargando bajo presupuesto M61 [C]
+- [?] Test de estrés: 2 islas cargadas + 1 precargando bajo presupuesto M61 [C] | AUDIT 2026-10-13 (step-5-kilocode): los presupuestos existen (island_ops.gd L51 'no congelar el frame', island_travel_guard.gd L37 memoria) pero no hay test de estres 2 islas + 1 precarga.
 
 ## Dependencia: Visión del Agente (M154)
 
@@ -249,7 +249,7 @@
 - [x] `data/islas/islas.json` — config de las 4 islas (RIZ 256/256/256 Raíz, COR 1024/256/220 Coral, CEN 256/1024/220 Ceniza, AUR 1024/1024/200 Aurora) con biomas y color de agua por isla
 - [x] `scripts/islas/islas_schema.gd` — IslasSchema: valida codigos (RIZ/COR/CEN/AUR), centro 2D, radio>0, nombre, biomas>0, color_agua #RRGGBB
 - [x] Test headless: 5/5 checks OK (config válida, radio 256 de RIZ, 3 biomas Aurora, detección de color inválido e isla faltante)
-- [?] Coordenadas/disposición de world (via M160) y generación de islas por viaje (M27/M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp)
+- [?] Coordenadas/disposición de world (via M160) y generación de islas por viaje (M27/M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp) | AUDIT 2026-10-13 (step-5-kilocode): delegado a deepseek-v4-flash-vision-exp (dueno declarado en el propio item); M160 existe en disco (DOCUMENTACION/160-Diseno-De-Ubicaciones-Del-Mundo). No verificado por mi: es frente de otro agente.
 ## Iteración 2 (2026-09-02 21:30 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] `scripts/islas/sincronizar_islas_mapa.gd` — verificador de coherencia Islas (islas.json) ↔ Mapa (map_data.json): 4/4 islas coherentes, 9/9 POIs asignados a islas válidas (exit 0)
@@ -271,10 +271,10 @@ Reserva de log: **831** (el 830 colisionó con GLM-5.3/M32). Reclamo §21.4.7 (d
 - [x] `scripts/islas/test_islas_m27.gd` — **171 checks / 0 fallos**, estable en 3 corridas
 - [x] Regresiones verdes: legacy M27 5/0 · `sincronizar_islas_mapa` OK · M60 iter.3 132/0 · M60 base 94/0 · M68 177/0 · auditor de aliasing OK(9)
 - [x] `04-Codigo.md` reescrito (rutas reales, API, dataset, contratos, 8 desviaciones, 4 trampas, pendientes honestos)
-- [?] `IslandLoading` (carga/descarga/streaming) → **M63** (ver bloque E)
-- [?] Capa de anclas real, re-roll de 8 intentos, regen 80/0 → **M10** (ver bloque D)
-- [?] Ids reales de contenido exclusivo → **M50/M36/M15/M23-M24/M19** (hoy declarativos/provisionales)
-- [?] Migrar el mapa de `islas.json` (4) al catálogo de 13 → **M54**
+- [?] `IslandLoading` (carga/descarga/streaming) → **M63** (ver bloque E) | AUDIT 2026-10-13 (step-5-kilocode): delegado a M63 (bloque E); island_ops.gd documenta IslandLoading sobre streaming de M63 pero la carga real es del modulo M63.
+- [?] Capa de anclas real, re-roll de 8 intentos, regen 80/0 → **M10** (ver bloque D) | AUDIT 2026-10-13 (step-5-kilocode): delegado a M10 (bloque D); ver items 4-7 de este bloque: no hay re-roll de 8 intentos ni test de regen con anclas.
+- [?] Ids reales de contenido exclusivo → **M50/M36/M15/M23-M24/M19** (hoy declarativos/provisionales) | AUDIT 2026-10-13 (step-5-kilocode): delegado a M50/M36/M15/M23-M24/M19; los ids hoy son declarativos (fauna_endemica/flora_endemica como campos, catalogo real de M36).
+- [?] Migrar el mapa de `islas.json` (4) al catálogo de 13 → **M54** | AUDIT 2026-10-13 (step-5-kilocode): data/islas/islas.json sigue con 4 islas mientras el catalogo de definir_islas genera 13; la migracion del mapa es de M54 y esta pendiente.
 
 ## Iteración 4 — Edge cases K1–K9 + catálogo de la §26 (2026-09-15 03:20, DeepSeek-V4.1-Flash / WorkBuddy)
 
@@ -319,7 +319,7 @@ Los `93 [?]` quedan intactos: son de M63/M61, M10, M54, M50/M36/M15/M23/M19 y M2
 - Nadie llama todavía a `IslandOps`/`IslandTravelGuard` → **M63** (streaming) y **M28** (barco) deben cablearlas
 - Asimetría de M59: `esta_descubierta(aurora) == true` pero `islas_descubiertas()` no la lista → **M59/M54**
 
-**Totales:** 192 ítems · Completados: 126 · Pendientes: 0 · No resueltos: 66. (Corregido por director 2026-10-12: conteo real disco 126/66; agnes reportó 99, Totales decía 121/71)
+**Totales:** 192 ítems · Completados: 127 · Pendientes: 0 · No resueltos: 65. (Corregido por director 2026-10-12: conteo real disco 126/66; agnes reportó 99, Totales decía 121/71)
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1710):** +10 [?] -> [x] en el barrido autorizado (msg 158). Evidencia: 3 suites verdes (`test_islas_headless.gd` 5 + `test_islas_m27.gd` 171 + `test_islas_m27_iter2.gd` 238 = **414 checks, 0 fallos**) + APIs confirmadas en `scripts/islas/`.
 > **Quedan [?] a propósito:** las señales `isla_cargando/cargada/descargada` (E92-E94) no existen como signals (el progreso se consulta con `progreso()`/`info()`, no se emite); `IslandPref` (E90) son constantes `StringName`, no un enum; y los items atribuidos a otros módulos en sus propias notas (M10, M15, M19, M25, M26, M28, M36, M51, M62, M64).
