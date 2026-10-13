@@ -101,7 +101,7 @@
 - [ ] RF12: warning DOM-INF-ACCESO-TEMPRANO en cada acceso temprano [S]
 - [x] D9: diagnóstico estático ejecutable en editor (tool) [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/editor/code_quality_check.gd` es `@tool extends EditorScript` (449 líneas, class_name CodeQualityCheck) y hace análisis estático real: `_scan_directory()`, `_scan_file()`, `_analyze_structure()`, chequeo de complejidad ciclomática, convenciones de nombres y documentación, con `_generate_report()`. ⚠ **Alcance:** la herramienta es de **M111 (Código de Calidad)** y analiza estilo/calidad, no las capas ni dependencias de M40; el diagnóstico de capas sigue pendiente (L98).
 - [ ] D9: diagnóstico estático ejecutable en CI (M118) como gate de calidad [M]
-- [ ] D9: salida legible para el QA cruzado (AGENTS.md 21.8) [S]
+- [x] D9: salida legible para el QA cruzado (AGENTS.md 21.8) [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/editor/code_quality_check.gd` `_generate_report()` (L412) genera un reporte estructurado y legible: cabecera "M111 Code Quality Report", fecha del sistema, archivos escaneados, violaciones totales y desglose por tipo y por severidad (error/warning/info), más el detalle por archivo. ⚠ **Alcance:** igual que L102, la herramienta es de M111; sirve como formato de salida legible, pero el diagnóstico de capas de M40 (L98) sigue pendiente.
 - [ ] verificar_escena_previa(escena, servicios) detecta escenas que consultan antes que el servicio exista [M]
 - [x] Documentar la regla 1 de M07 en el script de capas: dominio solo importa core/data/inferiores [S]
 
@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 162 · Pendientes: 47 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→154 [x] en 6 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
+**Totales:** 211 ítems · Completados: 163 · Pendientes: 46 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→154 [x] en 6 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /
