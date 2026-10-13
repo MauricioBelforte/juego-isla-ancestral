@@ -64,7 +64,7 @@
 - [x] RF2: Bootstrap en _ready() ejecuta sanity check de los 6 autoloads CORE previos [M]
 - [x] RF2: carga de configuración general (Settings M90) con fallback a defaults [M]
 - [ ] RF2: detección de partida guardada (M60) y decisión nueva/cargar [M]
-- [ ] RF2: verificación de integridad de contratos de dominio (RF11) [M]
+- [x] RF2: verificación de integridad de contratos de dominio (RF11) [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/core/bootstrap.gd` L132 `verificar_integridad_dominios()` es el paso del bootstrap que lo ejecuta; consume `ServiceRegistry.validate_required()` y emite `DOM-INF-FALTANTE` con la lista de dominios no registrados. No es duplicado de L42: L42 es la API del registry, este ítem es el paso del arranque que la invoca.
 - [ ] RF2: diagnóstico de capas en editor y log en runtime [M]
 - [ ] RF2: transición a ESTADO_MENU y carga de main_menu.tscn con progreso [M]
 - [x] RF2: log DOM-INF-BOOT con el orden real de autoloads y contratos [M]
@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 159 · Pendientes: 50 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→154 [x] en 6 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
+**Totales:** 211 ítems · Completados: 160 · Pendientes: 49 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→154 [x] en 6 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /
