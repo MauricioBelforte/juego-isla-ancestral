@@ -786,3 +786,78 @@ Notas:
 
 **Firma:** MiMo V2.5 · OpenCode · 2026-08-31.
 
+
+---
+
+## CI / Verificacion de suites headless (Godot real en la maquina)
+
+> **Agregado 2026-10-12 por stepfun-step-5-preview (Kilo Code), por indicacion del director
+> mimo (msg 234).** Motivacion: durante una sesion completa reporte repetidas veces "no puedo
+> ejecutar Godot" sin tener el binario en el PATH, cuando estaba disponible en disco. Casi
+> cableo un gate a CI sin haber corrido el test.
+
+### Ruta del binario
+
+```
+C:\Temp\godot\Godot_v4.7.2-stable_win64_console.exe
+```
+
+Variantes utiles en el mismo directorio:
+
+```
+C:\Temp\godot\godot472.exe
+C:\Temp\godot\Godot_v4.7.2-stable_win64.exe
+C:\Temp\godot\Godot_v4.7.2-stable_win64_console.exe
+```
+
+No esta en el PATH: hay que invocarlo con ruta completa. Para filtrar la salida del test
+propio (el proyecto imprime muchisimo log al arrancar), usar `Select-String` sobre
+`[OK]`, `[FALLO]`, `RESULTADO`.
+
+### Comando canonico
+
+```powershell
+& "C:\Temp\godot\Godot_v4.7.2-stable_win64_console.exe" --headless `
+    --path game/isla-ancestral --script res://scripts/<modulo>/test_algo.gd
+```
+
+`$LASTEXITCODE` es el veredicto real: `0` = verde, `1` = fallo. **Nunca cablear un gate a
+`quality.yml` sin haber ejecutado antes el test con este binario.**
+
+### Patron OBLIGATORIO para suites headless nuevas
+
+```gdscript
+extends SceneTree                                  # NO extends Node
+
+const LO_QUE_SEA = preload("res://scripts/...gd") # NO class_name global
+
+func _init() -> void:
+	call_deferred("_run")
+
+func _resumen() -> void:
+	if _checks < CHECKS_MINIMOS:
+		print("RESULTADO: FALLO ..."); quit(1); return
+	quit(0 if _fallos == 0 else 1)
+```
+
+**Por que:** en un checkout limpio (como el de CI) el cache de clases de Godot todavia no
+esta generado, asi que un `class_name` global recien creado **no resuelve** y el test muere
+con `Parse Error: Identifier "X" not declared in the current scope`. `preload()` no depende
+del cache. Ademas, los autoloads suelen no tener `class_name` (son nodos nombrados), por lo
+que `MiAutoload.new()` no tiene tipo inferible: tambien hay que cargarlos con `preload()`.
+
+Error real que se evita (detectado el 2026-10-12 en `test_m40_contratos.gd`):
+
+```
+SCRIPT ERROR: Parse Error: Identifier "Contratos" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot infer the type of "reg" variable because the value
+              doesn't have a set type.
+```
+
+### Regla de honestidad operativa
+
+Ningun informe debe decir "no puedo ejecutar Godot" o "no puedo verificar en runtime" cuando
+el binario existe en la ruta de arriba. Si una suite no se ejecuto, hay que decirlo
+explicitamente y decir por que (p. ej. el binario desaparecio), no asumirlo.
+
+**Firma:** stepfun-step-5-preview · Kilo Code · 2026-10-12.
