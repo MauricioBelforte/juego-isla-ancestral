@@ -93,7 +93,7 @@
 
 ## F. Requisitos funcionales — Diagnóstico
 
-- [ ] RF10: scan estático del grafo de imports de res://core/ y dominios [C]
+- [x] RF10: scan estático del grafo de imports de res://core/ y dominios [C] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `tools/ci/cross_module_linter.py` lo hace. Lo ejecuté sobre el repo real: `[linter] 1051 archivos .gd`, `399 class_name, 146 autoloads` — construye el grafo completo con `build_graph()` (incluye `scripts/core/` y todos los dominios, y más) y `detect_cycles()` no encontró ningún ciclo. ⚠ El ejecutable tiene un bug aparte en `detect_broken_refs()` (25 falsos positivos por usar `$Nombre`, sintaxis de Godot 3), por eso no está cableado en CI.
 - [ ] RF10: reporte de dependencias circulares con archivo:línea [M]
 - [ ] RF10: reporte de violaciones de capas (dominio importa UI, etc.) [M]
 - [x] RF11: sanity check de autoloads presentes y respondiendo en runtime [M]
@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 161 · Pendientes: 48 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→154 [x] en 6 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
+**Totales:** 211 ítems · Completados: 162 · Pendientes: 47 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→154 [x] en 6 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /
