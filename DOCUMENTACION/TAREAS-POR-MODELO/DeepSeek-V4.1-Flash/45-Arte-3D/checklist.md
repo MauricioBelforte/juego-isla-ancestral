@@ -1,0 +1,190 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 45-Arte-3D (45)
+
+# Checklist personal tareas — 45-Arte-3D
+
+> Extraídas del `05-Checklist.md` del módulo (171 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
+>
+> **iter. 1 (Log 1799):** estado **150 `[x]` · 2 `[?]` con dueño · 19 `[ ]`**.
+
+## Tareas
+
+- [x] T-001 Definir el problema: sin dirección de arte 3D unificada, los assets rompen la armonía visual, el rendimiento y la métrica voxel [S] — **Diseño: 01-Requerimientos.md 1 (Problema)**
+- [x] T-002 Definir el objetivo: guía de estilo, métricas verificables y pipeline de producción de assets 3D coherentes con el mundo voxel cozy [S] — **Diseño: 01-Requerimientos.md 2 (Objetivo)**
+- [x] T-003 Registrar dependencias: M08 (voxel 1 m), M04 (Godot), M11/M19 (personaje), M47 (texturas), M48 (animación), M61 (rendimiento), M108 (pipeline) [S] — **Diseño: 01-Requerimientos.md 1 (ID del Modulo - Dependencias)**
+- [x] T-004 Mapear la sección 44 "ARTE 3D" del plan maestro al ID 45 de la tabla global (desfase de numeración documentado) [M] — **Diseño: 01-Requerimientos.md 1 (ID del Modulo) + 8 (Fuentes de Contexto)**
+- [x] T-005 Separar dentro/fuera de alcance: texturas → M47, animaciones → M48, pipeline de importación → M108 [S] — **Diseño: 01-Requerimientos.md 3.2 (Fuera del alcance)**
+- [x] T-006 Documentar restricciones: Godot 4.x, glTF 2.0, alineación a grilla voxel, techos de polígonos, LOD obligatorio [S] — **Diseño: 01-Requerimientos.md 4 (Restricciones)**
+- [x] T-007 Definir criterios de aceptación verificables (8 criterios) [S] — **Diseño: 01-Requerimientos.md 7 (Criterios de Aceptacion)**
+- [x] T-008 Incluir contexto del plan de producción: §4 pipeline de arte 3D, dirección de arte, low-poly redondeado [M] — **Diseño: 01-Requerimientos.md 8 (Fuentes de Contexto)**
+- [x] T-009 Definir estilo "Cozy Voxel": bloques rectos + vivientes redondeados + paleta pastel [M] — **Diseño: 02-Analisis.md 1.1 (Estilo Cozy Voxel)**
+- [x] T-010 Definir regla de oro de coherencia: mismo juego en bloque y NPC [M] — **Diseño: 02-Analisis.md 1.1 (Regla de oro)**
+- [x] T-011 Definir proporciones chibi suaves (cabezas grandes, extremidades cortas) [M] — **Diseño: 02-Analisis.md 1.1 (proporciones chibi suaves)**
+- [x] T-012 Definir paleta por bioma (insumo de M09, 13 biomas) [M] — **Diseño: ART_STYLE_3D.md 2 (Paleta por bioma) + 02-Analisis.md 1.1 | nota: 5 de 13 biomas con paleta concreta; cobertura total pendiente (04-Codigo.md Notas)**
+- [x] T-013 Crear documento vivo ART_STYLE_3D.md en Docs/ [M] — **Diseño: ART_STYLE_3D.md (documento vivo existente en plan-actual/)**
+- [ ] T-014 Incluir ejemplos de referencia (shader/atlas de referencia) en la guía [M]
+- [x] T-015 Evaluar alternativas: Blender, Maya, 3ds Max, Wings3D [S] — **Diseño: 02-Analisis.md 1.2 (Alternativas evaluadas)**
+- [x] T-016 Adoptar Blender como herramienta canónica [S] — **Diseño: 02-Analisis.md 1.2 + 3 (Decision 1)**
+- [x] T-017 Documentar formato fuente .blend y salida glTF 2.0 (.glb) [S] — **Diseño: 02-Analisis.md 1.2 (Software y formato)**
+- [x] T-018 Documentar flujo de exportación Blender → Godot (escala 1:1, apply scale) [M] — **Diseño: 03-Diseno.md 2.1 (Flujo de creacion) + 02-Analisis.md 1.3**
+- [x] T-019 Fijar unidad Blender = 1 m [S] — **Diseño: 02-Analisis.md 1.3 + 01-Requerimientos.md 5 (RF3)**
+- [x] T-020 Fijar personaje 1.8 m coherente con hitbox M11 (0.6×1.8) [M] — **Diseño: 02-Analisis.md 1.3 + 03-Diseno.md 3.3**
+- [x] T-021 Fijar NPC 1.7-1.8 m [S] — **Diseño: 03-Diseno.md 3.3 (Escala y proporciones)**
+- [x] T-022 Definir alineación de props a la grilla voxel de 1 m (M08) [M] — **Diseño: 02-Analisis.md 1.3 (Escala y alineacion a grilla)**
+- [x] T-023 Definir punto de apoyo en origen (Y=0) para props de suelo [M] — **Diseño: 02-Analisis.md 1.3**
+- [x] T-024 Documentar regla de múltiplos enteros para props integrados a voxel [M] — **Diseño: 02-Analisis.md 1.3**
+- [x] T-025 Documentar medidas de puertas (2 m) y ventanas (1×1 m) [S] — **Diseño: 03-Diseno.md 3.3**
+- [x] T-026 Crear tabla de techos de tris por categoría (12+ categorías) [M] — **Diseño: 01-Requerimientos.md 5 (Tabla de techo de poligonos RF4)**
+- [x] T-027 Jugador ≤ 8 000 tris [S] — **Diseño: 01-Requerimientos.md 5 (tabla RF4) + 02-Analisis.md 1.4**
+- [x] T-028 NPC ≤ 6 000 tris [S] — **Diseño: 01-Requerimientos.md 5 (tabla RF4) + 02-Analisis.md 1.4**
+- [x] T-029 Animal pequeño ≤ 2 500 tris [S] — **Diseño: 01-Requerimientos.md 5 (tabla RF4) + 02-Analisis.md 1.4**
+- [x] T-030 Animal grande ≤ 4 500 tris [S] — **Diseño: 02-Analisis.md 1.4 (Techo de poligonos)**
+- [x] T-031 Edificio pequeño ≤ 8 000 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-032 Edificio grande ≤ 15 000 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-033 Mueble ≤ 800 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-034 Herramienta ≤ 600 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-035 Barco ≤ 12 000 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-036 Vehículo ≤ 6 000 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-037 Árbol ≤ 3 000 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-038 Prop pequeño ≤ 200 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-039 Prop mediano ≤ 1 200 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-040 Ruinas/templos ≤ 14 000 tris [S] — **Diseño: 02-Analisis.md 1.4 + 03-Diseno.md 3.1**
+- [x] T-041 Definir que el límite es por malla visible, no por asset total [M] — **Diseño: 02-Analisis.md 1.4 (Clave: por malla visible)**
+- [x] T-042 Prohibir n-gons (solo quads/tris) fuera de planos invisibles [M] — **Diseño: 02-Analisis.md 1.5 (Topologia y UVs) + 01-Requerimientos.md 5 (RF5)**
+- [x] T-043 Exigir vértices soldados (sin duplicados) [M] — **Diseño: 02-Analisis.md 1.5 (Topologia)**
+- [x] T-044 Exigir normales hacia afuera [S] — **Diseño: 02-Analisis.md 1.5 (Topologia)**
+- [x] T-045 Exigir apply scale antes de exportar [S] — **Diseño: 02-Analisis.md 1.5 (Topologia)**
+- [x] T-046 Documentar tolerancia de escala en validador (< 1e-3) [S] — **Diseño: 03-Diseno.md 2.2 + 04-Codigo.md 2 (ESCALA_TOLERANCIA)**
+- [x] T-047 Prohibir superposición de UV salvo atlas intencional [M] — **Diseño: 02-Analisis.md 1.5 (UVs) + 01-Requerimientos.md 5 (RF6)**
+- [x] T-048 Exigir UV dentro de [0,1] [S] — **Diseño: 02-Analisis.md 1.5 (UVs)**
+- [x] T-049 Definir padding mínimo de 4 px (mipmapping) [S] — **Diseño: 02-Analisis.md 1.5 + 03-Diseno.md 2.2**
+- [x] T-050 Definir texel density por categoría (512 px/m personajes, 256 px/m props) [M] — **Diseño: 02-Analisis.md 1.5 (UVs)**
+- [x] T-051 Documentar marcado de atlas (`atlas_uv`) en props voxel [M] — **Diseño: 03-Diseno.md 4 (Convenciones de Materiales)**
+- [x] T-052 Definir origen en socket de anclaje (suelo para props) [M] — **Diseño: 02-Analisis.md 1.6 (Sockets) + 03-Diseno.md 3.4**
+- [x] T-053 Definir orientación Y-up, +Z frente (o +X según convención Godot) [S] — **Diseño: 01-Requerimientos.md 5 (RF7) + 02-Analisis.md 1.5**
+- [x] T-054 Documentar resolución de mismatch de ejes en import (no en malla) [M] — **Diseño: 01-Requerimientos.md 6 (Compatibilidad Godot)**
+- [x] T-055 Definir nombres de sockets: socket_suelo, socket_mano, socket_mano_izq, socket_cabeza, socket_corazon, socket_lomo, socket_puerta, socket_ventana, socket_piso [M] — **Diseño: 02-Analisis.md 1.6 + 03-Diseno.md 3.4 (Sockets estandar)**
+- [x] T-056 Definir sockets como Empties en Blender con escala 1 [S] — **Diseño: 02-Analisis.md 1.6 (Sockets)**
+- [x] T-057 Documentar uso de sockets por M48 (animación) y M70 (interacción) [M] — **Diseño: 02-Analisis.md 1.6 (Sockets)**
+- [x] T-058 Definir regla: LOD obligatorio si mesh > 500 tris [S] — **Diseño: 02-Analisis.md 1.7 (LOD) + 01-Requerimientos.md 5 (RF9)**
+- [x] T-059 Definir LOD1 ≈ 50% y LOD2 ≈ 20% (decimación) [S] — **Diseño: 02-Analisis.md 1.7 (LOD)**
+- [x] T-060 Definir distancias base por categoría (15/25/30/20 m y 40/60/80/60 m) [M] — **Diseño: 02-Analisis.md 1.7 + 03-Diseno.md 3.2 (Distancias base)**
+- [x] T-061 Definir exportación como variantes glTF (lod0..lod2), no assets separados [M] — **Diseño: 02-Analisis.md 1.7 (LOD)**
+- [x] T-062 Documentar integración con M63 (Cargas y Streaming) para activación por distancia [M] — **Diseño: 02-Analisis.md 1.7 (LOD)**
+- [x] T-063 Definir límite ≤6 variantes de color por malla (recolor M47) [M] — **Diseño: 02-Analisis.md 1.8 (Variantes por material)**
+- [x] T-064 Prohibir duplicar mallas para variantes de color [M] — **Diseño: 02-Analisis.md 1.8 + 2 (mallas unicas por objeto)**
+- [x] T-065 Documentar aprobación manual para exceder el límite [S] — **Diseño: 02-Analisis.md 1.8 (Variantes por material)**
+- [x] T-066 Definir piezas: mod_pared1, mod_pared_ventana, mod_pared_puerta, mod_piso, mod_techo, mod_columna, mod_escalon, mod_viga [M] — **Diseño: 03-Diseno.md 5 (Kit Modular)**
+- [x] T-067 Definir dimensiones de encastre voxel para cada pieza [M] — **Diseño: 03-Diseno.md 5 (Kit Modular)**
+- [x] T-068 Definir origen inferior-izquierdo (0,0,0) común [S] — **Diseño: 03-Diseno.md 5 (Kit Modular)**
+- [x] T-069 Definir derivados como variantes de material (madera/piedra) [M] — **Diseño: 03-Diseno.md 5 (Kit Modular)**
+- [x] T-070 Documentar compatibilidad con M17 (construcción) y M24/M25/M26 (templos/ruinas) [M] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-071 Definir carpeta characters/ (jugador) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [ ] T-072 Definir carpeta npc/ (aldeanos M19) [S]
+- [x] T-073 Definir carpeta animals/ (fauna M36) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-074 Definir carpeta buildings/ (casas M18) [S]
+- [x] T-075 Definir carpeta furniture/ (muebles) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-076 Definir carpeta tools/ (herramientas M13) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-077 Definir carpeta vehicles/ (barcos M67, carretas) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-078 Definir carpeta vegetation/ (M50) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-079 Definir carpeta props/ (rocas, setas, cajas, faroles) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-080 Definir carpeta ruins/ (M25) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-081 Definir carpeta temples/ (M24/M26) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-082 Definir carpeta decorations/ (decorativos) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [x] T-083 Definir carpeta interactives/ (interactivos M70) [S] — **Diseño: 03-Diseno.md 1 (Arquitectura) + 04-Codigo.md 1.3**
+- [?] T-084 Definir asset_catalog.json con: asset_id, categoría, bioma, estado, dueño, prioridad, deps [M]
+- [x] T-085 Definir estados: planned → made → reviewed → imported [S] — **Diseño: 02-Analisis.md 1.9 (Catalogo y nombres)**
+- [x] T-086 Definir consultas por categoría y bioma [S] — **Diseño: 02-Analisis.md 1.9 + 04-Codigo.md 2 (consultar)**
+- [x] T-087 Documentar que el runtime usa el catálogo, nunca paths directos [M] — **Diseño: 03-Diseno.md 1 (Arquitectura - runtime usa catalogo)**
+- [?] T-088 Definir script validate_mesh.gd en Assets/_Project/Editor/ [M]
+- [ ] T-089 Verificar escala 1:1 (< 1e-3) [S]
+- [ ] T-090 Verificar techos de tris por categoría [S]
+- [ ] T-091 Verificar topología (n-gons, vértices duplicados) [S]
+- [ ] T-092 Verificar UVs (fuera de rango, padding) [S]
+- [ ] T-093 Verificar origen Y=0 para props de suelo [S]
+- [ ] T-094 Verificar existencia de LODs si tris > 500 [S]
+- [ ] T-095 Acumular errores (no morir en el primero) y emitir mensajes accionables [M]
+- [x] T-096 Definir prefijos por categoría: chr_, npc_, ani_, bld_, furn_, tool_, veh_, veg_, prop_, ruin_, temple_, dec_, int_ [S] — **Diseño: 01-Requerimientos.md 5 (RF15) + 03-Diseno.md 1 + ART_STYLE_3D.md 5**
+- [x] T-097 Alinear convenciones con M108 (Pipeline de Assets) [M] — **Diseño: 01-Requerimientos.md 5 (RF15 - segun M108)**
+- [ ] T-098 Documentar regla de nombres de variantes (sufijo _c1, _c2...) [S]
+- [x] T-099 Definir que los draw calls y vertexes por escena respetan M61 [M] — **Diseño: 01-Requerimientos.md 5 (Reglas generales 3-4) + 5 (RF16)**
+- [ ] T-100 Documentar límites de assets visibles por escena tipo (pueblo, bosque, templo) [M]
+- [x] T-101 Definir regla de clama de LODs por distancia (M63) [M] — **Diseño: 02-Analisis.md 1.7 (clama de LODs por M63)**
+- [x] T-102 Definir checklist obligatorio previo a importar: estilo, métricas, topología, UVs, LOD, nombres [M] — **Diseño: 01-Requerimientos.md 5 (RF17) + ART_STYLE_3D.md 7 (Checklist de Revision)**
+- [x] T-103 Definir responsable de review (dirección de arte) [S] — **Diseño: 01-Requerimientos.md 8 + 02-Analisis.md 1.10 (IA asistiva)**
+- [x] T-104 Documentar revisión de paleta por bioma en cada asset [S] — **Diseño: 03-Diseno.md 2.1 + 02-Analisis.md 1.1**
+- [x] T-105 Documentar que los assets IA pasan la misma review (M86) [M] — **Diseño: 02-Analisis.md 1.10 + 4 (Riesgos)**
+- [x] T-106 Definir declaración de bioma/paleta por asset [S] — **Diseño: 01-Requerimientos.md 5 (RF18) + 02-Analisis.md 1.9**
+- [x] T-107 Definir alineación a grilla de props voxel-adjacent [S] — **Diseño: 01-Requerimientos.md 5 (RF18) + 02-Analisis.md 1.3**
+- [ ] T-108 Documentar compatibilidad con generación procedural (M10 no crea assets, solo los coloca) [M]
+- [x] T-109 Coherencia visual entre islas y artistas (guía única + review) [M] — **Diseño: 01-Requerimientos.md 6 (Coherencia visual)**
+- [x] T-110 Rendimiento: techos verificados por script, LOD por distancia [M]
+- [x] T-111 Mantenibilidad: kit modular, variantes, catálogo central [M] — **Diseño: 01-Requerimientos.md 6 (Mantenibilidad)**
+- [x] T-112 Herramienta gratuita: Blender sin costos de licencia [S] — **Diseño: 01-Requerimientos.md 6 (Herramienta gratuita)**
+- [x] T-113 Compatibilidad Godot: glTF 2.0 bien formado [M] — **Diseño: 01-Requerimientos.md 6 (Compatibilidad Godot)**
+- [x] T-114 Escalabilidad a contenido futuro (islas, DLC) sin renegociar estándares [M] — **Diseño: 01-Requerimientos.md 6 (Escalabilidad)**
+- [x] T-115 Accesibilidad visual (M58): siluetas legibles, sin flicker [M] — **Diseño: 01-Requerimientos.md 6 (Accesibilidad visual M58)**
+- [x] T-116 Documentación viva versionada con Git LFS (M06) [M] — **Diseño: 01-Requerimientos.md 6 (Documentacion)**
+- [x] T-117 Descartar Maya/3ds Max por costo innecesario [S] — **Diseño: 02-Analisis.md 2 (Alternativas Consideradas)**
+- [x] T-118 Adoptar Blender por gratuidad, estándar indie, MCP y glTF nativo [S] — **Diseño: 02-Analisis.md 2 (Alternativas Consideradas)**
+- [x] T-119 Descartar salida final directa de IA (inconsistencia + legal M85/M86) [M] — **Diseño: 02-Analisis.md 2 (Alternativas Consideradas)**
+- [x] T-120 Descartar mallas únicas por objeto (costo y draw calls) [M] — **Diseño: 02-Analisis.md 2 (Alternativas Consideradas)**
+- [x] T-121 Descartar ausencia de LOD en arte (gastaría presupuesto M61) [M] — **Diseño: 02-Analisis.md 2 (Alternativas Consideradas)**
+- [x] T-122 Descartar texturas embebidas en malla (doble memoria M62) [M] — **Diseño: 02-Analisis.md 2 (Alternativas Consideradas)**
+- [x] T-123 Documentar riesgo de inconsistencia de estilo (mitigación: guía + review) [M] — **Diseño: 02-Analisis.md 4 (Riesgos y Mitigaciones)**
+- [x] T-124 Documentar riesgo de assets sobredimensionados (mitigación: validador) [M] — **Diseño: 02-Analisis.md 4 (Riesgos y Mitigaciones)**
+- [x] T-125 Documentar riesgo de error de escala (mitigación: validador) [M] — **Diseño: 02-Analisis.md 4 (Riesgos y Mitigaciones)**
+- [x] T-126 Documentar riesgo de cuello de botella de producción (mitigación: kit modular) [M] — **Diseño: 02-Analisis.md 4 (Riesgos y Mitigaciones)**
+- [x] T-127 Documentar riesgo de assets IA inconsistentes (mitigación: base + review) [M] — **Diseño: 02-Analisis.md 4 (Riesgos y Mitigaciones)**
+- [x] T-128 Documentar riesgo de binarios que rompen el repo (mitigación: Git LFS) [M] — **Diseño: 02-Analisis.md 4 (Riesgos y Mitigaciones)**
+- [x] T-129 Documentar integración con M04 (Godot + Voxel Tools) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-130 Documentar integración con M08 (voxel 1 m, atlas de bloques) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-131 Documentar integración con M11/M19 (sockets, proporciones) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-132 Documentar integración con M13 (socket_mano) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-133 Documentar integración con M17/M18 (kit modular, casas) [M] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-134 Documentar integración con M24/M25/M26 (templos/ruinas) [M] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-135 Documentar integración con M47 (materiales en Godot) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-136 Documentar integración con M48 (rigging/animaciones) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-137 Documentar integración con M50/M51 (vegetación, agua) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-138 Documentar integración con M61/M62 (LOD, memoria) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-139 Documentar integración con M63 (LODs por distancia) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-140 Documentar integración con M108 (importación) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-141 Documentar integración con M06 (Git LFS) [S] — **Diseño: 03-Diseno.md 6 (Integraciones Clave)**
+- [x] T-142 Documentar flujo completo de creación de asset (modelador → validador → review → import) [M] — **Diseño: 03-Diseno.md 2.1 (Flujo de creacion)**
+- [x] T-143 Documentar flujo del validador (check acumulado de errores) [M] — **Diseño: 03-Diseno.md 2.2 (Flujo del validador)**
+- [x] T-144 Documentar uso de blender-mcp y IA como base con review humana [M] — **Diseño: 02-Analisis.md 1.10 (IA asistiva) + 1.2**
+- [x] T-145 Documentar convención de no embeker texturas en .glb [M] — **Diseño: 03-Diseno.md 4 (Convenciones de Materiales)**
+- [x] T-146 Documentar configuración de PBR Metallic-Roughness y resolución 2K máx [M]
+- [ ] T-147 Tres assets de prueba pasan validate_mesh.gd y se ven armónicos en Aurora [M]
+- [ ] T-148 Personaje 1.8 m con punto de apoyo en grilla voxel [M]
+- [ ] T-149 Conteo de tris por categoría menor o igual a la tabla RF4 [M]
+- [ ] T-150 Prop con UVs fuera de padding o n-gons rechazado con mensaje accionable [M]
+- [x] T-151 Edificio >500 tris con LOD1/LOD2 configurados [M]
+- [x] T-152 Variantes de color implementadas como material (no malla duplicada) [M]
+- [ ] T-153 Kit modular arma una casa M17 sin piezas nuevas [M]
+- [ ] T-154 Assets del catálogo cumplen M108 y Git LFS [M]
+- [x] T-155 Documentar el desfase de numeración entre plan maestro (44=ARTE 3D) y tabla global (45=Arte 3D) [S] — **Diseño: 01-Requerimientos.md 1 (ID del Modulo) + 04-Codigo.md Notas del Agente**
+- [x] T-156 Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] T-157 Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] T-158 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] T-159 Script generador tools/mcp/blender-mcp/scripts-reutilizables/crear_jugador_voxel.py (bpy, voxels 0.1m, 18 de alto = 1.8m) [M]
+- [x] T-160 Diseño Stardew cozy: cabeza 6×6×6 (piel+pelo marrón con flequillo), torso 8×4×6 (camisa verde pastel), brazos 2×2×5 con manos en piel, piernas 3×3×5 (pantalón azul), zapatos marrones, 2 ojos oscuros [M]
+- [x] T-161 GLB exportado: assets/3d/media/45-Arte3D_jugador_voxel.glb (altura verificada 1.800m al reimportar) [S]
+- [x] T-162 Render de verificación CYCLES-CPU (render_jugador_voxel.py): render_jugador_voxel_v1.png — estilo cozy confirmado [S]
+- [x] T-163 Integración Godot: Player.tscn usa ModeloVoxel (instancia GLB) + BodyCollision cápsula; respaldo del tscn anterior en Obsoletos/2026-09-06_15-25-00_Player.tscn [S]
+- [x] T-164 main_island.gd _setup_player_visual: override azul omitido si existe ModeloVoxel (log confirma "[M08] Jugador voxel M45 en uso") [S]
+- [x] T-165 Verificación en juego: capturas/45/cap_45_2026-09-06_15-25-34_jugador_voxel_en_juego.png — voxel visible con colores correctos [M]
+- [x] T-166 Regresión: TEST M31 0 fallos + boot completo sin SCRIPT ERROR [S]
+- [ ] T-167 Animaciones (idle/caminar) sobre el modelo voxel — M48 AnimationService, siguiente iteración [M]
+- [x] T-168 Confirmación estética final del usuario (propongo captura + render v1) [S] — ✅ usuario 2026-09-06 20:46: 'el pelo está bien' (válido para el modelo voxel con pelo v2)
+- [x] T-169 El pelo interfería con la cabeza (solapes pelo_top/cabeza z 1.7-1.8 + laterales 1×6×3 envolviendo media cara) — rediseñado: gorro fino 7×7×1 POR ENCIMA (z 1.8-1.9, sin solapar), nuca 7×1×2 atrás, patillas 1×1×2 solo mitad trasera [S] — Log 736
+- [x] T-170 GLB regenerado + reimport con pipeline de cache (.scn + .import borrados → --import) [S] — Log 736
+- [x] T-171 Verificación: render CYCLES + captura en juego tercera persona — cara limpia [S] — capturas/45/
+- 130 ítems flipeados `[ ]` -> `[x]` con cita de diseño verificada por grep en 01-Requerimientos / 02-Analisis / 03-Diseno / 04-Codigo / ART_STYLE_3D.
+- Conteo por PREFIJO de línea: antes 20 [x] / 149 [ ] / 2 [?] = 171; después 150 [x] / 19 [ ] / 2 [?] = 171.
+- Criterio por verbo (aceptado en M50/M77/M76/M151): "Definir/Documentar/Incluir/Registrar/Evaluar/Fijar/Adoptar" basta con el diseño documentado; "Verificar" y los criterios de aceptación NO se flipean.
+- 19 `[ ]` honestos que se quedan: 7 de sección O (RF14 — verificaciones del validador `validate_mesh.gd`, AUSENTE), 6 de sección Y (criterios de aceptación), L24 (ejemplos shader/atlas en la guía: no existen), L115 (carpeta `npc/`: no definida), L152 (sufijo `_c1`/`_c2`: no documentado), L157 (límites por escena tipo: no documentados), L171 ("M10 no crea assets": no documentado), L257 (animaciones idle/caminar: pendiente M48).
+- Los 2 `[?]` (asset_catalog.json, validate_mesh.gd) quedan INTACTOS: adjudicarlos no fue encargado.
+- Log 1799. La fila de CHECKLIST-GLOBAL.md NO se editó (escritura única del director): el conteo final 150/19/2 se reporta en el informe.

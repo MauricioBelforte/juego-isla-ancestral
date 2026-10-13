@@ -31,6 +31,19 @@
 # apagar la telemetría NUNCA se emitían `session_ended` ni `session_duration`.
 # Ahora se finaliza la sesión mientras `opt_in` sigue en true.
 #
+# ── iter. 8: cierre de sesion + evento chapter_completed (higiene M105) ─
+# Modelo: DeepSeek-V4.1-Flash
+# Plataforma: WorkBuddy
+# Fecha: 2026-10-13
+# Higiene de los items con trabajo real de M105 (informe 216 §6, items 1 y 3):
+#   - Item 1: la UNICA ruta que finalizaba la sesion era `establecer_opt_in(false)`.
+#     Al cerrar la ventana/el arbol no se emitia `session_ended` ni
+#     `session_duration`. Se agrega `_notification` (WM_CLOSE_REQUEST / EXIT_TREE)
+#     y `_finalizar_sesion()` pasa a ser IDEMPOTENTE (`_sesion_cerrada`).
+#   - Item 3: se define el evento `chapter_completed` (EVT + `track_chapter_completed`).
+#     La emision depende del hook de M22 (sistema de capitulos), no implementado.
+# Suite: `scripts/telemetry/test_telemetria_iter8.gd`.
+#
 # M105: Telemetría de Gameplay — TelemetryDirector (autoload).
 #
 # Responsabilidad: capturar eventos de comportamiento de jugador (RF1-RF17),
@@ -104,6 +117,7 @@ const EVT := {
 	ZONE_EXITED = "zone_exited",
 	SESSION_STARTED = "session_started",
 	SESSION_ENDED = "session_ended",
+	CHAPTER_COMPLETED = "chapter_completed",
 }
 
 ## Keys de métrica (enviadas a M104 como tipo "metrica" con datos estructurado).
@@ -147,6 +161,10 @@ var _zona_ignorada_reportada: Dictionary = {}
 var analytics_service: Node = null
 ## Path de settings (seteable en tests para aislar user://).
 var _settings_path: String = SETTINGS_PATH_DEFAULT
+## iter. 8 — Bandera de cierre idempotente. `_finalizar_sesion()` puede llegar a
+## llamarse dos veces en la misma sesión (p. ej. opt-out manual y luego cierre de
+## ventana): esta bandera evita emitir `session_ended`/`session_duration` dos veces.
+var _sesion_cerrada: bool = false
 ## ─── Lifecycle ────────────────────────────
 
 func _init() -> void:
@@ -252,6 +270,7 @@ func _configurar_timers() -> void:
 
 func _iniciar_sesion() -> void:
 	_inicio_sesion_ms = Time.get_ticks_msec()
+	_sesion_cerrada = false  # iter. 8 — reabre la sesión para el cierre idempotente.
 	_tracked.clear()
 	_zona_entrada.clear()
 	_zona_duracion.clear()
@@ -263,9 +282,24 @@ func _iniciar_sesion() -> void:
 		ads.registrar_evento(ANALYTICS_TIPO_EVENTO, {"evento": "gameplay_session_start"})
 
 func _finalizar_sesion() -> void:
+	# iter. 8 — IDEMPOTENTE. Antes de esta iteración, la única ruta que finalizaba
+	# la sesión era `establecer_opt_in(false)`; cerrar la ventana perdía
+	# `session_ended` y `session_duration`. Ahora `_notification()` la invoca en el
+	# cierre, y esta guarda evita duplicar los eventos si el opt-out ya la cerró.
+	if _sesion_cerrada:
+		return
+	_sesion_cerrada = true
 	var dur := _duracion_sesion_seg()
 	enviar_evento("session_ended", {"duracion_seg": dur})
 	_registrar_metrica(METRIC_SESSION_DURATION, dur)
+
+## iter. 8 — Cierre de sesión al salir de la app (higiene M105, item 1).
+## Godot envía `NOTIFICATION_WM_CLOSE_REQUEST` cuando se pide cerrar la ventana y
+## `NOTIFICATION_EXIT_TREE` cuando el nodo sale del árbol (fin de la app). Como
+## `_finalizar_sesion()` es idempotente, atender ambos avisos no duplica eventos.
+func _notification(que: int) -> void:
+	if que == NOTIFICATION_WM_CLOSE_REQUEST or que == NOTIFICATION_EXIT_TREE:
+		_finalizar_sesion()
 
 func _duracion_sesion_seg() -> int:
 	if not opt_in or _inicio_sesion_ms == 0:
@@ -354,6 +388,17 @@ func track_festival_first_participated(festival_id: String) -> void:
 
 func track_community_project_first_completed(proyecto_id: String) -> void:
 	_track_first(&"proyecto", EVT.COMMUNITY_PROJECT_FIRST_COMPLETED, {"proyecto_id": proyecto_id})
+
+## iter. 8 — Evento `chapter_completed` (higiene M105, item 3).
+## Define el contrato que consumía el hueco documental: antes el evento se
+## mencionaba en el checklist pero NO existía ni en EVT ni como API. A diferencia
+## de los `*_first_*`, se emite UNA vez por CADA capítulo completado (no se
+## deduplica por sesión): el valor analítico está en la secuencia de capítulos.
+## El hook de emisión pertenece a M22 (sistema de capítulos, aún sin implementar).
+func track_chapter_completed(capitulo_id: String) -> void:
+	if not opt_in:
+		return
+	enviar_evento(EVT.CHAPTER_COMPLETED, {"capitulo_id": capitulo_id})
 
 ## Registro de dificultad percibida (rating 1-5). La UI post-puzzle (M53) la dispara.
 func track_difficulty_perceived(puzzle_id: String, rating: int) -> void:

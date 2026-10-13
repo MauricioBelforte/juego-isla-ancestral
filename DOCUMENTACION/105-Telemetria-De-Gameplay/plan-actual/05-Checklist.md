@@ -28,7 +28,7 @@
 
 - Estado: 🟡 Con dudas — re-verificacion selectiva cerrada 2026-09-16 (Log 926). Retomable.
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
-- Resultado: **122 `[x]` · 40 `[?]` · 0 `[ ]`** (total 162)
+- Resultado: **129 `[x]` · 33 `[?]` · 0 `[ ]`** (total 162)
 - Salida: 3 metricas `time_to_first_*` que faltaban · bug de `session_ended`/`session_duration`
   al apagar opt-in · senal `solicitar_encuesta` que era codigo muerto · guardianes
   anti-falso-verde en los 4 suites (probados por inyeccion, 4 sondas) · los 4 suites
@@ -162,7 +162,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [x] Definir evento zone_exited [S]
 - [x] Definir evento session_started [S]
 - [x] Definir evento session_ended [S]
-- [?] Definir evento chapter_completed (dep sistema de capítulos no implementado; pendiente integración) [M]
+- [x] Definir evento chapter_completed (dep sistema de capítulos no implementado; pendiente integración) [M] — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: DEFINIDO en codigo (`telemetry_director.gd` L120 `EVT.CHAPTER_COMPLETED` + L398 `track_chapter_completed()`) y documentado en `03-Diseno.md` §3 (L42) + §7 (L87). El hook de emision queda del lado de M22 (sistema de capitulos). Suite `test_telemetria_iter8.gd` 17/17.
 
 ### [S] Métricas de tiempo
 - [x] Definir métrica time_to_first_discovery
@@ -197,7 +197,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [?] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`.
 - [?] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales; M105 ya emite los 11 eventos "first".
 - [?] Definir análisis de datos para identificar tiempos anormales — requiere datos reales; M105 ya emite las métricas `time_to_first_*` + `session_duration`.
-- [?] Definir ajuste de balance basado en datos reales → KnownIssue no bloqueante DoD: requiere datos reales de balance (juego no jugado suficientemente); framework M105 listo para consumir datos cuando existan. El framework M105 expone la API de metricas; el procesamiento de datos NO esta en 03-Diseno.md (no existe seccion de analisis).
+- [x] Definir ajuste de balance basado en datos reales → KnownIssue no bloqueante DoD: requiere datos reales de balance (juego no jugado suficientemente); framework M105 listo para consumir datos cuando existan. El framework M105 expone la API de metricas; el procesamiento de datos NO esta en 03-Diseno.md (no existe seccion de analisis). — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: el diseno del analisis existe ahora en `03-Diseno.md` §7 (L71-112); regla de balance en L92. La ejecucion sigue diferida a datos reales de gameplay (KnownIssue no bloqueante de DoD).
 
 ### [S] Opt-in y GDPR
 - [x] Definir opt-in explícito
@@ -228,13 +228,13 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [?] Diseñar M22 notificar a M105 cuando se completan capitulos → KnownIssue no bloqueante DoD: hook del lado de M22 requiere senyal prereq_met→m105; disenio documentado, implementacion requiere M22 iteracion adicional. Integracion M22→M105 es proximo paso.
 - [?] Diseñar M105 registrar progreso de historia principal — **M22** (hook); M105 ya expone `enviar_evento()`.
 - _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere agregación multi-jugador (volumen real de partidas); patron de deteccion disenado (tiempos anormales por capítulo), implementacion requerira datos acumulados post-release. Core telemetria operativo.
-- [?] Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere volumen real de datos de progresion; La metrica de atasco NO esta disenada en 03-Diseno.md (el doc no tiene seccion de analisis): queda [?] hasta que exista diseno + datos.
+- [x] Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere volumen real de datos de progresion; La metrica de atasco NO esta disenada en 03-Diseno.md (el doc no tiene seccion de analisis): queda [?] hasta que exista diseno + datos. — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: diseno de la metrica de atasco en `03-Diseno.md` §7 (fila L87 + regla L99-100). Ejecucion diferida a volumen real de progresion (KnownIssue no bloqueante de DoD).
 ### [S] Integración con M102 (Bug Tracking)
 - [?] Diseñar integración con M102 para generación de issues — **M102** (M105 expone los patrones detectados).
-- [?] Diseñar datos de telemetría identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos + análisis; cita previa a 03-Diseno.md §3.4 FALSA: ese doc solo tiene §1-§6, no hay seccion de analisis. No existe patron documentado: queda [?] hasta que exista diseno + datos reales, ejecucion requiere datos de juego real acumulados.
+- [x] Diseñar datos de telemetría identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos + análisis; cita previa a 03-Diseno.md §3.4 FALSA: ese doc solo tiene §1-§6, no hay seccion de analisis. No existe patron documentado: queda [?] hasta que exista diseno + datos reales, ejecucion requiere datos de juego real acumulados. — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: patron documentado en `03-Diseno.md` §7 (fila L88 + regla L101-102). La cita previa a §3.4 era FALSA; ahora la cita es §7 real. Ejecucion diferida a datos reales acumulados.
 - _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar datos de telemetria identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos; patron de deteccion disenado (tiempos anormales, tasa abandono), ejecucion requiere datos de juego real.
-- [?] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento
-- [?] Diseñar M105 generar issues en M102 basados en patrones de datos → KnownIssue no bloqueante DoD: integracion M105→M102 disenada (la cita previa a 03-Diseno.md §3.5 era FALSA: el doc solo tiene §1-§6); generacion automatica requiere patrón detectado en datos reales. Pipeline documentado, ejecución deferred.
+- [x] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: dueno = M105 (diseno en `03-Diseno.md` §7, fila L86 + regla L96-98); salida = candidato a bug de rendimiento -> issue en M102. Ejecucion diferida a datos reales.
+- [x] Diseñar M105 generar issues en M102 basados en patrones de datos → KnownIssue no bloqueante DoD: integracion M105→M102 disenada (la cita previa a 03-Diseno.md §3.5 era FALSA: el doc solo tiene §1-§6); generacion automatica requiere patrón detectado en datos reales. Pipeline documentado, ejecución deferred. — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: pipeline documentado en `03-Diseno.md` §7 (salida 'Issue en M102' L88 + contrato con M102 L104-108). La cita previa a §3.5 era FALSA; ahora es §7 real. Generacion automatica diferida a patron detectado.
 - _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar M105 generar issues en M102 basados en patrones de datos → KnownIssue no bloqueante DoD: integracion M105→M102 disenada (formato issue template); generacion automatica requiere patrón detectado en datos reales. Pipeline documentado.
 ### [S] GameplayTelemetry (servicio)
 - [x] Diseñar GameplayTelemetry como autoload
@@ -315,7 +315,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 ### [S] GameplayTelemetrySaver
 - [x] Diseñar GameplayTelemetrySaver — plan-inicial descartado: el guardado del opt-in vive en `_persistir_opt_in()`; no hay artefacto separado.
 - [x] Diseñar método save_opt_in_status() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_persistir_opt_in()` (ConfigFile con `make_dir_recursive_absolute`).
-- [?] Diseñar integración al cerrar el juego — no implementado: no hay hook de cierre (`_notification`); la sesión solo se finaliza al apagar opt-in (`_finalizar_sesion()`).
+- [x] Diseñar integración al cerrar el juego — no implementado: no hay hook de cierre (`_notification`); la sesión solo se finaliza al apagar opt-in (`_finalizar_sesion()`). — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: IMPLEMENTADO: hook de cierre `_notification()` en `telemetry_director.gd` L300-301 (WM_CLOSE_REQUEST / EXIT_TREE -> `_finalizar_sesion()` idempotente via `_sesion_cerrada` L167); paso de cierre en `03-Diseno.md` §4 (L55) y §3 (L43); suite `test_telemetria_iter8.gd` 17/17.
 
 ### [S] Archivos de implementación
 - [x] Diseñar res://scripts/telemetry/telemetry_director.gd — BUG-070 Familia B (fix de cita 2026-10-08, DeepSeek-V4.1-Flash): la ruta `res://telemetry/gameplay_telemetry.gd` del plan inicial no existe; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload TelemetryDirector). No es over-mark: el diseno y la implementacion existen.
@@ -334,16 +334,42 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 
 ## Totales
 
-**Total de ítems:** 165
-**Ítems implementados y cubiertos por test:** 122
-**Ítems bloqueados con dueño nombrado (`[?]`):** 40
+**Total de ítems:** 162
+**Ítems implementados y cubiertos por test:** 129
+**Ítems bloqueados con dueño nombrado (`[?]`):** 33
 **Ítems sin implementar ni diseñar (`[ ]`):** 0
 
 > El conteo lo define `scripts/verificar_checklist.py` (regex `^\s*- \[x\]`). El
 > "138" anterior era una cifra escrita a mano, no medida.
 
-**Totales:** 162 ítems · Completados: 122 · Pendientes: 0 · No resueltos: 40.
+**Totales:** 162 ítems · Completados: 129 · Pendientes: 0 · No resueltos: 33.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 122 [x] / 0 [ ] /
 > 40 [?] (tras las 3 fusiones Patron D del director 2026-10-10: 43 -> 40).
+
+## iter. 8 — higiene M105 items 1-3 (2026-10-13, DeepSeek-V4.1-Flash)
+
+Cierre de los ítems 1-3 recomendados en el informe 216 §6 (autorizados por el
+director, msg 217/219). **7 flips `[?]` -> `[x]` con cita real** (archivo+línea):
+
+| Línea | Ítem | Cita real |
+|---|---|---|
+| 165 | Definir evento `chapter_completed` | `telemetry_director.gd` L120 (`EVT.CHAPTER_COMPLETED`) + L398 (`track_chapter_completed()`); `03-Diseno.md` §3 (L42) + §7 (L87) |
+| 200 | Análisis de balance | `03-Diseno.md` §7 (L71-112), regla L92 |
+| 231 | Capítulos con atasco | `03-Diseno.md` §7 (fila L87 + regla L99-100) |
+| 234 | Bugs emergentes | `03-Diseno.md` §7 (fila L88 + regla L101-102) |
+| 236 | Tiempos anormales (dueño M105) | `03-Diseno.md` §7 (fila L86 + regla L96-98) |
+| 237 | M105 -> M102 issues | `03-Diseno.md` §7 (salida L88 + contrato L104-108) |
+| 318 | Integración al cerrar el juego | `telemetry_director.gd` L300-301 (`_notification`) + `_sesion_cerrada` L167; `03-Diseno.md` §4 (L55) + §3 (L43); suite iter8 17/17 |
+
+**Código (item 1):** `_notification()` (WM_CLOSE_REQUEST / EXIT_TREE) -> `_finalizar_sesion()`
+idempotente (`_sesion_cerrada`). Antes la única ruta de cierre era `establecer_opt_in(false)`:
+cerrar la app perdía `session_ended`/`session_duration`.
+**Diseño (item 2):** nueva sección `03-Diseno.md` §7 "Analisis de datos".
+**Doc (item 3):** `chapter_completed` definido (EVT + API) y L236 con dueño.
+
+**Suite nueva:** `scripts/telemetry/test_telemetria_iter8.gd` 17/17, EXIT 0
+(guardián de bloques + piso MEDIDO 17, probado en rojo). Hermanas iter. 5/6/7
+(10/11/27) + base (16) sin regresión. **Higiene:** `Total de ítems` 165 -> 162
+(medido; era una cifra escrita a mano, no medida).
