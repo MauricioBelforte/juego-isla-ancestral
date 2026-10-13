@@ -31,13 +31,13 @@ inflación de drift (M24 L229).
 
 ### En curso
 
-- [→] **BUG-034 bloque 2** — 54+26 filas de sellos §21.8 de Hy3 en `CHECKLIST-QA-SEALS.md`.
+- [x] **BUG-034 bloque 2** (CERRADO 2026-10-13, msg 255: 83 filas auditadas, 0 violaciones §21.8.4; el registro de hy3 está sano) — 54+26 filas de sellos §21.8 de Hy3 en `CHECKLIST-QA-SEALS.md`.
       Sub-bloques de ~18-20. ⚠️ Hy3 verificó módulos que él mismo implementó → marcar cada
       violación de la regla de independencia §21.8.4. (Delegada por el director, msg 36.)
 
 ### En cola (delegadas)
 
-- [ ] **S1 — Auditoría anti-inflación de M48-Animacion** (delegada, director msg 159). Prioridad 1
+- [x] **S1 — Auditoría anti-inflación de M48-Animacion** (CERRADO 2026-10-13, msg 256: M48 honesto en 9/123, 9/9 [x] respaldados en disco, 2 suites verdes 8/0 y 12/0, 0 inflación. NOTA: la advertencia de que el núcleo no existía era del LOTE 9 de BUG-070, previo a mi Fase 1 del Log 1603) (delegada, director msg 159). Prioridad 1
       de la flota. M48 declara 9/123 pero el LOTE 9 de BUG-070 verificó que su núcleo **no existe
       en disco** (`validate_animation.gd`, `jugador_lib.tres`, `npc_humanoide_lib.tres`, 0 hits).
       Método E-12d: contar → verificar artefacto contra disco → clasificar binario. **READ-ONLY
@@ -46,9 +46,9 @@ inflación de drift (M24 L229).
 
 ### Pendientes (sugeridos por s3, sin delegar)
 
-- [ ] **S2 — QA §21.8 de M53-UI-UX** (cuello de botella #1: 11 módulos lo esperan, 🟡 139/165).
+- [x] **S2 — QA §21.8 de M53-UI-UX** (CERRADO 2026-10-12, msg 242: 143→144/165, 17 ítems muestreados, 4 suites verdes, BUG-133 resuelto; 1 ítem inflado detectado y 2 falsos negativos) (cuello de botella #1: 11 módulos lo esperan, 🟡 139/165).
       Independencia ✓ (lo trabajaron Hy4 y glm-5.3-flash, ambos inactivos).
-- [ ] **S4 — Barrido de inflación en módulos ⬜/🟢 sin tocar** (M01 0/152, M02 0/172, M98, M99).
+- [x] **S4 — Barrido de inflación en módulos ⬜/🟢 sin tocar** (CERRADO 2026-10-12, msg 246: M01/M02/M98/M99 barridos, 2 drift de Totales, M99 violaba DoD y fue bajado de ✅) (M01 0/152, M02 0/172, M98, M99).
       Su precisión de conteo los dejaría honestos de una pasada.
 
 ## Límites (regla de independencia §21.8)
