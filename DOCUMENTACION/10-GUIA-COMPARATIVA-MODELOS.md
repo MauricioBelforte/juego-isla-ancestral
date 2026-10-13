@@ -2918,6 +2918,42 @@ de "documentación para Hy3" a "implementación técnica, mejor para step-5-kilo
 **Firma:** atria-dawn-s3 (Atria-Dawn-Preview / Kilo Code) — 2026-10-12 22:40:00. Lecciones verificadas
 en mi propia práctica de supervisión este turno (msgs 144–147 al director).
 
+### Lección 6 — Umbrales de atasco por cadencia: interactivo vs asíncrono horario (2026-10-13 02:24)
+
+**Síntoma:** en la misma noche, mi detector de atasco (canal ∧ disco quietos >60 min) falló **3
+veces, cada una por una causa distinta**:
+
+| Caso | Silencio | Causa real | Error del detector |
+|---|---|---|---|
+| `atria-dawn-s2` (-99m) | canal + disco | **QA headless** (corre suites Godot en memoria; no escribe hasta el reporte final) | El trabajo en memoria es invisible al mtime de disco |
+| `DeepSeek` / `atria-dawn` (-55m) | canal | **Iteración larga silenciosa** (130 flips con cita, commits al final) | Lección 4 ya cubierta, pero el umbral fijo seguía mal |
+| **`step-5-workbuddy` (-64m)** | canal + disco | **Scheduler horario**: *"mi automatización corre cada 1 hora y recién ahora me tocó el turno de revisión de canal"* | El agente es asíncrono, no interactivo |
+
+**Diagnóstico erróneo costoso:** marqué a WorkBuddy como "CAÍDO confirmado" en dos mensajes al
+director (msgs 170 y 171) y **propuse reubicar su iteración 2 de M04 en agnes**. WorkBuddy
+respondió `(1) EN CURSO` y ya había dejado huella (`Logs/1801` a las 02:19). Si el director hubiera
+ejecutado mi propuesta, ** habría pisado trabajo en curso**. Corregí con un msg URGENTE (173) a
+tiempo.
+
+**Conclusión — el umbral de atasco no es universal, depende de la cadencia del agente:**
+
+| Tipo de agente | Cadencia de revisión de canal | Umbral de atasco recomendado |
+|---|---|---|
+| **Interactivo** (Kilo Code, opencode) | Continua (responde en la misma sesión) | **20-30 min** de canal ∧ disco quietos |
+| **Asíncrono horario** (WorkBuddy con scheduler) | Cada ~60 min (turno de revisión) | **90+ min** (1.5 ciclos de su scheduler) |
+
+**Aplicación:**
+1. Antes de flagear un agente como atascado, **verificar su cadencia de revisión** (preguntarle
+   directamente si hace scheduler, o mirar su patrón histórico de deltas entre msgs).
+2. Un agente asíncrono con 60 min de silencio **no es atasco** — está entre turnos.
+3. Para distinguir "entre turnos" de "caído de plataforma": el **siguiente turno** (60-70 min) debe
+   traer actividad. Si pasan **2 ciclos completos sin actividad** (~120 min), ahí sí es caída.
+4. **Nunca proponer reubicación de un módulo en curso** sin antes haber preguntado al agente por
+   su canal. El costo de preguntar es 1 mensaje; el costo de pisar trabajo es revertir flips ajenos.
+
+**Firma:** atria-dawn-s3 (Atria-Dawn-Preview / Kilo Code) — 2026-10-13 02:50:00. Verificada en mi
+propia práctica (msgs 167, 170, 171, 173 al director; msg 6 a WorkBuddy; respuesta msg 7 de él).
+
 ---
 
 ## §21.23 — Configuración de dos frentes StepFun Step 5 (2026-10-12 23:10, atria-dawn-s3)
