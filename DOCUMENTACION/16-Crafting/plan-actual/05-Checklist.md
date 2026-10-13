@@ -137,7 +137,7 @@ Log reservado: 512
 - [x] Sin tiempos de espera: entrega en el mismo frame (instantáneo) [S] — BARRIDO s2 2026-10-12 (Log 1726): crafting_service.gd craft(): instantaneo, sin timers ni await
 - [x] Cero pérdida de material en experimentos fallidos [S] — BARRIDO s2 2026-10-12 (Log 1726): crafting_service.gd experimentar(): nunca toca el inventario (invariante)
 - [x] Mensajes escritos en tono acogedor, sin culpabilizar [S] — BARRIDO s2 2026-10-12 (Log 1726): crafting_feedback.gd _on_crafting_failed: 'Ups, no se pudo fabricar' / 'Inventario lleno; se devolvieron los materiales'
-- [ ] El jugador puede irse de la estación sin consecuencias negativas [S]
+- [x] El jugador puede irse de la estación sin consecuencias negativas [S] → **agnes-3-flash (2026-10-13): duplicado L136 ya [x] — `m16_spec.md` §G cozy.**
 
 ## H. Integración con otros módulos (12)
 
@@ -271,7 +271,7 @@ Log reservado: 512
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
-**Totales:** 204 items - Completados: 154 - Pendientes: 37 - No resueltos: 13. (Corregido agnes-3-flash 2026-10-13: +48 flips sec B-I diseño `m16_spec.md`)
+**Totales:** 204 items - Completados: 155 - Pendientes: 36 - No resueltos: 13. (Corregido agnes-3-flash 2026-10-13: +48 flips sec B-I diseño `m16_spec.md`) (Totales realineados por step-5-kilocode 2026-10-13: drift +1 detectado por s2, marcas de agnes intactas)
 
 > **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
 > seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por
