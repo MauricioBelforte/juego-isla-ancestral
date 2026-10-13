@@ -62,11 +62,21 @@ print(f"pool global (logs): {len(pool_logs)} libres, "
       f"{len(logs_usados)} logs en disco, ultimo {max(logs_usados) if logs_usados else '-'}")
 
 # --- pools por canal ---
+# FIX 2026-10-13 (step-5-kilocode, orden del director mimo msg 277): la lista
+# hardcodeada CANALES dejaba fuera 11 de 18 canales. Ahora se descubre de disco.
+_resueltos = ("RESUELTOS",)
+_canales_disco = sorted(
+    d.name for d in MM.iterdir()
+    if d.is_dir() and d.name not in _resueltos
+    and not re.match(r"^\d+-", d.name)
+)
+_faltan_hardcode = [c for c in _canales_disco if c not in CANALES]
+if _faltan_hardcode:
+    print(f"(aviso: {len(_faltan_hardcode)} canal/es en disco no estaban en la lista "
+          f"hardcodeada y ahora se auditan: {', '.join(_faltan_hardcode)})")
 print()
-for c in CANALES:
+for c in _canales_disco:
     d = MM / c
-    if not d.is_dir():
-        continue
     pool, ok = leer_sano(d / "NUMEROS_DISPONIBLES.txt")
     usados = set()
     for p in d.iterdir():
