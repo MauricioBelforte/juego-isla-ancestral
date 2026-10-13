@@ -34,6 +34,15 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MENSAJES = os.path.join(RAIZ, "Mensajes entre modelos")
 POOL = os.path.join(RAIZ, "Logs", "NUMEROS_DISPONIBLES.txt")
 
+# FIX año-como-numero (2026-10-13, atria-dawn-s2, encargo del fundador):
+# re.match(r"^(\d+)-", f) captaba el AÑO de los mensajes escritos sin prefijo
+# numerico (ej: "2026-10-13_16-35-00-mimo-a-s2-...md" -> 2026). Como el numero
+# nuevo se calcula como max(existentes)+1, todos los canales con un mensaje sin
+# numero saltaban a 2027+ ignorando su pool (tope 500) y colisionando entre si
+# (2027 y 2028 duplicados en los canales s2 y agnes). NUM_MSG_RE exige el
+# formato completo NN-AAAA-MM-DD_HH-MM-SS-: solo cuentan los mensajes numerados.
+NUM_MSG_RE = re.compile(r"^(\d+)-\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}-")
+
 # Alias cortos y legibles para el nombre del archivo (emisor-a-receptor).
 # La clave es el nombre de la carpeta; el valor es lo que va en el nombre del archivo.
 ALIASES = {
@@ -196,7 +205,7 @@ def main():
         # Lo crea al vuelo: 1..TOPE menos los numeros ya usados en la carpeta.
         _us = set()
         for f in os.listdir(carpeta):
-            m = re.match(r"^(\d+)-", f)
+            m = NUM_MSG_RE.match(f)
             if m and os.path.isfile(os.path.join(carpeta, f)):
                 _us.add(int(m.group(1)))
         _lib = [str(n) for n in range(1, TOPE + 1) if n not in _us]
@@ -215,7 +224,7 @@ def main():
     # Clave numerica: "40-..." > "1340-..." como string seria falso; se ordena por
     # el numero inicial del nombre cuando existe, y luego por el nombre completo.
     def _clave(f):
-        m = re.match(r"^(\d+)-", f)
+        m = NUM_MSG_RE.match(f)
         return (0, int(m.group(1)), f) if m else (1, 0, f)
 
     MENSAJE_RE = re.compile(r"^\d+-\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}-")
@@ -263,7 +272,7 @@ def main():
     # Sin esto, un fantasma + un mensaje real con el mismo numero se duplican.
     fantasmas = {}
     for f in os.listdir(carpeta):
-        m = re.match(r"^(\d+)-", f)
+        m = NUM_MSG_RE.match(f)
         if not m or not os.path.isfile(os.path.join(carpeta, f)):
             continue
         usados.add(m.group(1))
@@ -300,7 +309,7 @@ def main():
         # 268 entregado dos veces el 2026-10-13). Para el conteo solo importa el prefijo
         # numerico del nombre, no que la ruta sea accesible.
         exist_nums = [int(m.group(1)) for f in os.listdir(carpeta)
-                      if (m := re.match(r"^(\d+)-", f))]
+                      if (m := NUM_MSG_RE.match(f))]
         ultimo_num = max(exist_nums) if exist_nums else 0
         cand = ultimo_num + 1
         while str(cand) in usados and str(cand) not in fantasmas:
