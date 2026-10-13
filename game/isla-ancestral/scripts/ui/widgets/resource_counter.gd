@@ -63,5 +63,15 @@ func _set_coins(amount: int) -> void:
 		_coin_value.text = str(amount)
 
 
+## M40 (violacion de L208 corregida): antes accedia por nodo directo al
+## autoload de economia. Ahora va por contrato del ServiceRegistry, como
+## pide la regla de desacoplamiento de M07.
+## Nota: se conserva el fallback por nodo para no romper el HUD si el
+## registro aún no corrió (arranque), pero el camino preferente es el contrato.
 func _get_economy() -> Node:
+	var reg := get_node_or_null("/root/ServiceRegistry")
+	if reg != null and reg.has_method("get_service"):
+		var svc: Variant = reg.get_service(Contratos.ECONOMY_MANAGER)
+		if svc != null:
+			return svc as Node
 	return get_node_or_null("/root/EconomyManager")

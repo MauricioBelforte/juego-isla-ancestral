@@ -9,14 +9,33 @@
 extends Node
 
 var _registry: Dictionary = {}
+## Contratos sobre los que ya se emitió DOM-INF-ACCESO-TEMPRANO (evita spam).
+var _avisados_tempranos: Dictionary = {}
+## Contador de registros duplicados rechazados (diagnostico).
+var _duplicados_rechazados: int = 0
 
 ## Registra un servicio por contrato (string).
-func register(contract: String, instance: Object) -> void:
+## Devuelve false y emite DOM-INF-REGISTRO si el contrato YA estaba registrado
+## (M40 RF3: el segundo registro se rechaza, no se sobrescribe).
+## Cambio de firma void -> bool (2026-10-12, stepfun-step-5-preview): los
+## llamadores que ignoran el retorno no se ven afectados.
+func register(contract: String, instance: Object) -> bool:
+	if _registry.has(contract):
+		push_warning("[M40] DOM-INF-REGISTRO: contrato duplicado '%s' — segundo registro rechazado" % contract)
+		_duplicados_rechazados += 1
+		return false
 	_registry[contract] = instance
+	return true
 
 ## Devuelve la instancia registrada para un contrato, o null.
+## M40 RF12: si el contrato no está registrado, emite DOM-INF-ACCESO-TEMPRANO
+## (una sola vez por contrato, para no llenar el log).
 func get_service(contract: String) -> Variant:
-	return _registry.get(contract, null)
+	var svc: Variant = _registry.get(contract, null)
+	if svc == null and not _avisados_tempranos.has(contract):
+		_avisados_tempranos[contract] = true
+		push_warning("[M40] DOM-INF-ACCESO-TEMPRANO: consulta de '%s' antes de registrarse (devuelve null)" % contract)
+	return svc
 
 ## Devuelve si existe un servicio registrado para el contrato.
 func has(contract: String) -> bool:
@@ -47,6 +66,10 @@ func validate_required(required: Array) -> Array[String]:
 		if not _registry.has(String(svc)):
 			missing.append(String(svc))
 	return missing
+
+## Diagnostico: cuantos registros duplicados se rechazaron.
+func duplicados_rechazados() -> int:
+	return _duplicados_rechazados
 
 func _ready() -> void:
 	print("[M40] ServiceRegistry listo (%d servicios registrados)" % _registry.size())
