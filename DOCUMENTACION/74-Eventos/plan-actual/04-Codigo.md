@@ -238,6 +238,7 @@ var es_variante_cubierta: bool = false
 | Contenido de minijuegos | Contratos definidos; contenidos concretos llegan con M34/M35/M33 |
 | Localización (M57) | Claves `nombre_clave`/`descripcion_clave` en tablas localizables |
 | Integración rutinas NPC | Ocupación por datos (M19) sin modificar M19 |
+| **DUCK-TYPING ROTO (deuda de los dueños): recompensas AMISTAD / PROGRESO / COLECCIÓN sin destino en producción** | `recompensa_def.gd` llama por duck-typing a `/root` y los 3 métodos **no existen en producción** (sólo están en `test_event_manager_verificacion.gd`): M20 debe exponer `sumar_puntos(id_npc, bonus)` · M71 debe exponer `registrar_progreso_evento(id, cantidad)` · M37 debe exponer `registrar_recuerdo(datos)` en `/root/Museo`. Efecto hoy: la recompensa de amistad **no se entrega** (cae al `push_warning` y devuelve false) y las de progreso/colección quedan como hook dormido. **Dueños: M20 (amistad), M71 (progresión), M37 (museo/colección).** Verificado 2026-10-13 por step-5-kilocode contra disco (Log 1821). Alternativa para M20: consumir su API real `get_puntos()`/`aplicar_puntos()` vía `VecinoAmistad`; el código de entrega de M74 queda como está. |
 | Sonido/ambiente festival | Referenciar recursos de M41/M42/M43 por `flags` |
 
 ## 6. Tabla de pruebas de límites (para M112)
@@ -285,7 +286,7 @@ var es_variante_cubierta: bool = false
 
 ## Notas del Agente — verificación runtime de los ítems en [?] (2026-10-11)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1690
 
@@ -325,7 +326,7 @@ catálogo real y dobles de prueba.
 
 ## Notas del Agente — buzón de entregas (2026-10-11)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1694
 
@@ -358,7 +359,7 @@ nuevos necesitan `.uid`; al no tenerlo, Godot no los registra en el cache.
 
 ## Notas del Agente — eventos relativos + re-validación al cargar (2026-10-11)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1697
 
@@ -401,7 +402,7 @@ M74: **181 checks, 0 fallos**.
 
 ## Notas del Agente — solapes por prioridad (2026-10-11)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1699
 
