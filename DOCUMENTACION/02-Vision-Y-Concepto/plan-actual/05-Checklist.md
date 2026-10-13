@@ -1,4 +1,4 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 01: Visión y Concepto

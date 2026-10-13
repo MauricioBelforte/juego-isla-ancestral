@@ -1,4 +1,4 @@
-﻿**Modelo:** SWE-1.6
+**Modelo:** SWE-1.6
 **Plataforma:** DEVIN
 
 # 05-Checklist.md — Módulo 100: Community Management

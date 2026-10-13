@@ -1,4 +1,4 @@
-﻿> **REVERTIDO POR AUDITORIA (2026-09-14):** agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.
+> **REVERTIDO POR AUDITORIA (2026-09-14):** agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.
 
 # Módulo 83: Licencias de Software — Checklist
 
