@@ -208,9 +208,9 @@
 - [ ] Crear `04-Codigo.md` del componente [S]
 - [ ] Crear `05-Checklist.md` con 100+ ítems [M]
 - [x] Documentar por qué no aplican 06/07 (módulo documental) [S] → **agnes-3-flash (2026-10-12): `hoja-decisiones-fundador.md` — M02 es módulo de visión/documental, no aplica 06/07.**
-- [ ] Copiar plan-inicial → plan-actual (espejo vigente) [S]
+- [?] Copiar plan-inicial → plan-actual (espejo vigente) [S] - **INVALIDO POR DISEÑO (director 2026-10-12, barrido Step 5 msg 246): plan-inicial NO MODIFICAR y plan-actual NO debe ser identico (AGENTS.md §3). Mismo criterio que M40 L261.**
 - [ ] Actualizar `DOCUMENTACION/README.md` con el componente 02 [S]
-- [ ] Actualizar `CHECKLIST-GLOBAL.md` con el estado del módulo M01 [S]
+- [ ] Actualizar \CHECKLIST-GLOBAL.md\ con el estado del módulo M02 [S]
 - [ ] Generar log en `Logs/` con el formato estándar (NN) [S]
 - [ ] Firmar los documentos con modelo y plataforma [S]
 - [ ] Registrar las Notas del Agente en `04-Codigo.md` [S]
@@ -229,5 +229,5 @@
 
 ---
 
-**Totales:** 172 ítems · Completados: 0 · Pendientes: 172 · No resueltos: 0.
+**Totales:** 172 items · Completados: 151 · Pendientes: 20 · No resueltos: 1. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 151 [x] / 1 [?] / 20 [ ]; correccion de dato autorizada por director msg 257.)
 **Nota:** los 10 pendientes tienen dueño explícito en otros módulos (M02 verificación legal del nombre, QA/Playtesting, Publicación) y quedan registrados por trazabilidad; no son deudas de este módulo.

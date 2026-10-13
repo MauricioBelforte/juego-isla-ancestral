@@ -21,7 +21,7 @@
 - **ACTIVA:** Reserva Log 981 agnes-3-flash/Kilo Code (2026-09-18 02:55) — M126 en curso (iter. acotada
   data-layer + gate CI + V0): verificar el scaffold de validación (`marketing_legal.json` +
   `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` 9/0) + cablear el test al gate duro
-**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 101 items · Completados: 100 · Pendientes: 0 · No resueltos: 1. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 100 [x] / 1 [?] / 0 [ ]; correccion de dato autorizada por director msg 257.)
    **agnes-3-flash (Kilo Code, 2026-10-12):** CERRADO ✅ — se crearon `comunicado_creadores_embargo.md` + `confirmacion_sorteo.md` (2 [?] → [x]).
 
 # 05-Checklist.md — Módulo 126: Marketing Legal
@@ -87,7 +87,7 @@
 - [x] Diseñar giveaways de merchandise (envío internacional)
 
 ### [S] Archivos de implementación
-- [x] Diseñar legal/marketing_legal_review.md
+- [?] Diseñar legal/marketing_legal_review.md - **ARTEFACTO INEXISTENTE (director 2026-10-12, barrido Step 5 msg 250): legal/ y docs/legal/ no existen; el banner del checklist lo admite. DoD §21.6.**
 
 ### [S] Pruebas de marketing legal
 - [x] Diseñar prueba de que screenshots sean legales para usar → KnownIssue no bloqueante DoD: politica de screenshots documentada en 03-Diseno.md §3.6 (capturas propias vs terceros); legal review requerida.
