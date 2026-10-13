@@ -33,7 +33,7 @@
 | 20 | Render pipeline | ✅ Forward+ (Vulkan); Mobile para builds livianas |
 | 21+ | Calidad/resolución/framerate | ✅ 60 FPS objetivo, resolución ajustable, VSync opcional |
 | 24 | Input system | ✅ Input Map de Godot (teclado + mando) |
-| 25 | Físicas | ✅ Godot Physics; colisiones voxel vía Voxel Tools |
+| 25 | Físicas | ✅ Jolt Physics (activa en project.godot L344); colisiones voxel vía Voxel Tools. Actualizado 2026-10-13 — el project.godot real usa Jolt (L344); el diseno original decia Godot Physics. Divergencia resuelta por director. |
 | 26-27 | Capas/Tags | ✅ Layer system de Godot |
 | 28 | Escenas iniciales | ⏳ Al crear proyecto base (M1) |
 | 29 | Build profiles | ⏳ Export presets (Windows/Linux/Web) en M1 |

@@ -9,6 +9,8 @@ Módulo de **decisión técnica + configuración**. Hoy (fase documental) define
 
 ## 2. Arquitectura de referencia (Godot 4.x)
 
+**Versión exacta del motor: Godot 4.7.2 estable** (binario real `D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/`; `project.godot` L16 fija `config/features=PackedStringArray("4.7", "Forward Plus")`). Registrado el 2026-10-13 para cumplir 03-Diseno.md sec.5 L44 (Log 1822, iter 6 seccion F).
+
 ```
 proyecto/                     ← raíz del juego (raíz de este repo, futura en Assets/)
 ├── project.godot             ← config del proyecto (renderer, input, layers)

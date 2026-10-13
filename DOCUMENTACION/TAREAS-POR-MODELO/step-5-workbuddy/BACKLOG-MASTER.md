@@ -27,6 +27,15 @@ carpeta). Identidad de firma: **step 5 workbuddy**.
       1811. ASCII puro verificado por bytes (0 no-ASCII; 1er intento con §/★
       corregido antes de cerrar).
 
+- [x] Log reservado: **1822** — M04-Game-Engine iteracion 6: 12 flips seccion F
+      (Configuracion del proyecto base) con cita real. Archivo:
+      `Logs/1822-M04-iter6-config-proyecto-base_2026-10-13_17-34-18.md`.
+      Pool medido antes: head 1822 (1813-1821 los consumieron otros agentes) ->
+      1823. ASCII puro verificado por bytes (0 no-ASCII).
+      Ademas: 02-Analisis.md L36 -> Jolt Physics (unica edicion autorizada por la
+      directora) y 04-Codigo.md sec.2 registra la version exacta 4.7.2 (E3 resuelto).
+      Conteo: 70 -> 82 [x] / 46 [ ] / 0 [?] = 128 (medido por prefijo de linea).
+
 ## Commits (delegados a atria-dawn; yo no commiteo ni pusheo)
 
 - [x] M04 iter 1: pedido msg 65 a atria-dawn -> commit **e38ad5a**
@@ -41,8 +50,9 @@ carpeta). Identidad de firma: **step 5 workbuddy**.
 - [x] M04 iter 3: pedido msg 76 a atria-dawn -> commit **e237d07** (push
       764cc70..e237d07, Log 1809/9d9bc5f) verificado por mi en HEAD y en
       origin/main. Acuse enviado (msg 78).
-- [ ] M04 iter 4: pedido msg 79 a atria-dawn (2026-10-13 04:50) -> pendiente de
-      commit. 8 archivos: 02-Analisis.md, 05-Checklist.md, Log 1810,
+- [x] M04 iter 4: pedido msg 79 a atria-dawn (2026-10-13 04:50) -> commit
+      **0526aa5** (iter 4+5 juntas) verificado en origin/main (`git show --stat` +
+      `git branch -r --contains`), 2026-10-13 16:49. Archivos: 02-Analisis.md, 05-Checklist.md, Log 1810,
       BACKLOG-MASTER, tracker, msgs 12/78/79. Pool de canal excluido (stale).
 
 ## Lote WB (encargo del director, msg 01; orden aprobado msg 03)

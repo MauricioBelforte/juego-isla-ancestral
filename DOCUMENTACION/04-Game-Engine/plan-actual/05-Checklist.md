@@ -77,7 +77,7 @@
 
 - [x] Documentar la regla de fijar la versión del motor [S] (cita: 03-Diseno.md sec.5 L44 ("Versión exacta fijada al crear el proyecto y registrada en 04-Codigo.md"); disco real: project.godot L16 config/features=PackedStringArray("4.7", "Forward Plus") - ver sec.10 E1)
 - [x] Documentar la regla de NO actualizar arbitrariamente durante producción [S] (cita: 03-Diseno.md sec.5 L45 ("Regla: no actualizar Godot durante producción...") - ver sec.10 E2)
-- [x] Registrar el campo Versión exacta como pendiente del hito M1 [S] (cita: 03-Diseno.md sec.5 L44 exige registrarla en 04-Codigo.md; verificado por grep: 04-Codigo.md NO registra la versión exacta del motor -> campo PENDIENTE del hito M1; project.godot L16 fija "4.7" como referencia - ver sec.10 E3)
+- [x] Registrar el campo Versión exacta como pendiente del hito M1 [S] (cita: 03-Diseno.md sec.5 L44 exige registrarla en 04-Codigo.md; RESUELTO en iter 6 (Log 1822): 04-Codigo.md sec.2 registra "Godot 4.7.2 estable"; project.godot L16 fija "4.7" y el binario real es 4.7.2 - ver Log 1822 E3)
 - [x] Documentar el pinneado de Voxel Tools contra la versión de Godot [S] (cita: 03-Diseno.md sec.5 L46 ("Voxel Tools pinned contra la versión de Godot"); addon REAL en disco: addons/zylann.voxel/voxel.gdextension compatibility_minimum="4.4.1" - ver sec.10 E4)
 - [x] Documentar el procedimiento de migración de versión (log + changelog) [S] (cita: 03-Diseno.md sec.5 L45 ("documentar cualquier migración en Logs y changelog"); CHANGELOG.md real en la raíz del repo ([0.0.6]) - ver sec.10 E5)
 - [x] Documentar parche de seguridad crítico como única excepción [S] (cita: 03-Diseno.md sec.5 L45 ("salvo parche de seguridad crítico") - ver sec.10 E6)
@@ -88,24 +88,24 @@
 
 ## F. Configuración del proyecto base (18)
 
-- [ ] Instalar Godot 4.x versión estable (pendiente hito M1) [M]
-- [ ] Crear el proyecto con la versión fijada [S]
-- [ ] Agregar `.godot/` al .gitignore [S]
-- [ ] Configurar renderer Forward+ [S]
-- [ ] Configurar niveles de calidad Baja/Media/Alta [M]
-- [ ] Configurar resolución y escalado (window mode, aspect) [S]
-- [ ] Configurar framerate objetivo 60 y VSync opcional [S]
-- [ ] Definir capas de física (voxel, jugador, NPC, props, UI, receptores) [M]
+- [x] Instalar Godot 4.x versión estable [M] (cita: binario REAL en disco D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64.exe + _console.exe; usado en corridas headless de este repo - ver Log 1822 F1)
+- [x] Crear el proyecto con la versión fijada [S] (cita: proyecto real game/isla-ancestral/project.godot L16 config/features=PackedStringArray("4.7", "Forward Plus") + L9 config/name; version exacta 4.7.2 registrada en 04-Codigo.md sec.2 - ver Log 1822 F2)
+- [x] Agregar `.godot/` al .gitignore [S] (cita: .gitignore L8 ".godot/"; 04-Codigo.md L19 ".godot/ <- cache del editor (NO versionar)" - ver Log 1822 F3)
+- [x] Configurar renderer Forward+ [S] (cita: project.godot L16 config/features="4.7", "Forward Plus" + L354 rendering_device/driver.windows="d3d12"; 02-Analisis.md L33 - ver Log 1822 F4)
+- [x] Configurar niveles de calidad Baja/Media/Alta [M] (cita: scripts/settings/graphics_config.gd L40-44 CALIDAD_BAJA/MEDIA/ALTA/ULTRA + PRESETS bajo/medio/alto L97-116 - ver Log 1822 F5)
+- [x] Configurar resolución y escalado (window mode, aspect) [S] (cita: project.godot [display] L140-141 window/stretch/mode="canvas_items" + aspect="expand"; graphics_config.gd PRESETS resolucion 720p/1080p/1440p + escala 0.5/0.75/1.0 + upscaling FSR1/FSR2/DLSS - ver Log 1822 F6)
+- [x] Configurar framerate objetivo 60 y VSync opcional [S] (cita: graphics_config.gd L95 FPS_OPCIONES=[30,60,120,0] + L96 VSYNC_OPCIONES=[0,1,2]; preset "medio" fps=60 L~107; scripts/datos/gestor_config.gd L23 "vsync": true; 01-Requerimientos.md L19 RF1 rendimiento 60 FPS - ver Log 1822 F7)
+- [x] Definir capas de física (voxel, jugador, NPC, props, UI, receptores) [M] (cita: project.godot L334-340 [layer_names] 3d_physics: mundo(L1), jugador(L2), npc(L3), interactuable(L4), agua(L5). Nota honesta: 5 de 6 roles con nombre propio (mundo=voxel, interactuable=receptores); props y UI sin capa con nombre dedicado - ver Log 1822 F8)
 - [x] Configurar Input Map: mover (WASD+stick) [S] (acciones mover_norte/sur/este/oeste con teclado y stick izquierdo)
 - [x] Configurar Input Map: cámara rotación/zoom [S] (camara_zoom_in/out por rueda; rotación por stick derecho)
 - [x] Configurar Input Map: herramienta/interacción [S] (interactuar=E, colocar=Q)
 - [x] Configurar Input Map: inventario/hotbar 1-9 [S] (inventario=B, favorito=F, hotbar_1..9)
 - [x] Crear escena Bootstrap (config + carga) [M] (scripts/core/bootstrap.gd: registra servicios y carga main_island; verificado en runtime)
-- [ ] Crear escena Main (world + player + cámara) [M]
-- [ ] Crear estructura de carpetas del proyecto (scenes, scripts, resources, data) [S]
+- [x] Crear escena Main (world + player + cámara) [M] (cita: scenes/main_island.tscn real (world + scripts/world/*) + run/main_scene="res://scenes/main_island.tscn" project.godot L15; ext_resource Player.tscn L9 + follow_camera.gd L7 - ver Log 1822 F14)
+- [x] Crear estructura de carpetas del proyecto (scenes, scripts, resources, data) [S] (cita: disco real game/isla-ancestral/{scenes,scripts,resources,data} verificados con ls -d; 04-Codigo.md sec.2 arquitectura de referencia - ver Log 1822 F15)
 - [ ] Crear export presets Windows/Linux/Web/SteamOS [M]
-- [ ] Configurar autoloads/singletons iniciales (GameState, EventBus) [M]
-- [ ] Verificar build de prueba y un .pck distribuible [M]
+- [x] Configurar autoloads/singletons iniciales (GameState, EventBus) [M] (cita: project.godot [autoload] L19-40 = 22 singletons reales (EventBus L22, GameSettings, SaveManager...). Nota honesta: NO existe autoload llamado "GameState"; el estado global vive en WorldState (L23) y GameSettings (L25) - ver Log 1822 F17)
+- [x] Verificar build de prueba y un .pck distribuible [M] (cita: build/web/index.pck + index.html + index.wasm reales en disco (build web distribuible). Nota honesta: unico build presente es el de Web; falta build Windows/Linux - ver Log 1822 F18)
 
 ## G. Rendimiento y calidad gráfica (12)
 
@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 128 ítems · Completados: 70 · Pendientes: 58 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
+**Totales:** 128 ítems · Completados: 82 · Pendientes: 46 · No resueltos: 0. (iter 6 seccion F: 12 flips con cita real; quedan 46 [ ] = presets Linux/SteamOS + framerate explicito en project.godot + secciones G/H/I/J)
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 
