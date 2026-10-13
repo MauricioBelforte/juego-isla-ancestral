@@ -57,7 +57,7 @@
 - [ ] Diseñar Cole: banco local con oficina de 2 h al día [M]
 - [ ] Definir 10+ líneas de diálogo por NPC (M21) [M]
 - [ ] Definir variantes de diálogo por estación/día (M29) [M]
-- [x] Implementar anti-stuck con teleport a waypoint previo (M66) [M]
+- [?] Implementar anti-stuck con teleport a waypoint previo (M66) [M] — DEGRADADO a [?] por step-5-kilocode (Kilo Code, 2026-10-12, orden del director mimo msg 277, barrido propio msg 276, Log 1807): hay anti-stuck real (`scripts/ia_npc/m65_animal_ai.gd:165`, "abortar (anti-stuck)"), pero el **teleport a waypoint previo no existe** — grep de `teleport|waypoint` sobre ese archivo da 0 resultados. Mitad hecho.
 - [ ] Definir pronombres/nombres canónicos del elenco (M147) [S]
 - [ ] Definir rangos de horarios de rutina sin solapamiento catastrófico [M]
 
@@ -65,7 +65,7 @@
 
 - [ ] Definir la moneda AO como única divisa de fase [S]
 - [ ] Definir las 2 tiendas de Aurora + 1 de Coral [M]
-- [x] Integrar precios desde `curvas.json` (M93: lineal clave/suave logarítmica metas) [M]
+- [?] Integrar precios desde `curvas.json` (M93: lineal clave/suave logarítmica metas) [M] — DEGRADADO a [?] por step-5-kilocode (Kilo Code, 2026-10-12, orden del director mimo msg 277, barrido propio msg 276, Log 1807): `curvas.json` **no existe** en ninguna ruta del repo y ningún script lo carga (grep de `curvas.json|curvas.load|load_curvas` sobre `scripts/**/*.gd` da 0). Sólo está definido en papel (`02-Analisis.md`, `03-Diseno.md`). El verbo es "Integrar", no "Definir".
 - [ ] Aplicar márgenes de venta 55-70% sobre compra (M93) [S]
 - [ ] Definir el stock regenerativo diario de cada tienda [M]
 - [ ] Documentar los 60+ ítems del mundo con precio base (M15) [C]
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 12 · Pendientes: 130 · No resueltos: 0.
+**Totales:** 142 ítems · Completados: 10 · Pendientes: 130 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
