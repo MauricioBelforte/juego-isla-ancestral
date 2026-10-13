@@ -644,21 +644,31 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 > haber inflado. Reporta cualquier `[x]` sin respaldo como hallazgo (no lo revieras,
 > ábrelo en `11-BUGS.md`).
 
-- [ ] Diseñar atalayas con vista de bioma
-- [ ] Definir validación de caminos con NavigationServer3D
-- [ ] Integrar con M26 (templo subterráneo, sin rozar)
-- [ ] Integrar con M28 (caminos)
-- [ ] Integrar con M31 (alineación solar en observatorios)
-- [ ] Integrar con M32 (viento/lluvia en pasajes y jardines)
-- [ ] Integrar con M36 (museo: vitrinas para objetos)
-- [ ] Integrar con M45/M47 (kit de referencia para assets)
-- [ ] Diseñar 06-Plan-Testings.md: validación del kit (pivotes/snaps)
-- [ ] Diseñar 06-Plan-Testings.md: armado de los 13 tipos
-- [ ] Diseñar 06-Plan-Testings.md: progresión de descubrimiento
-- [ ] Diseñar 06-Plan-Testings.md: pruebas de rendimiento (LOD)
-- [ ] Definir criterio de éxito: suite completa pasa sin fallos
-- [ ] Crear 07-Resultados-Testings.md para registrar la ejecución
-- [ ] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA
+- [x] Diseñar atalayas con vista de bioma → `03-Diseno.md` §Atalayas (consolidado 2026-10-13) + `08-Integraciones.md` §1
+- [x] Definir validación de caminos con NavigationServer3D → `08-Integraciones.md` §2
+- [x] Integrar con M26 (templo subterráneo, sin rozar) → `08-Integraciones.md` §3
+- [x] Integrar con M28 (caminos) → `08-Integraciones.md` §4 (M28 = 28-Viajes en GLOBAL)
+- [x] Integrar con M31 (alineación solar en observatorios) → `08-Integraciones.md` §5 (M31 = 31-Ciclo-Dia-Noche en GLOBAL)
+- [x] Integrar con M32 (viento/lluvia en pasajes y jardines) → `08-Integraciones.md` §6
+- [x] Integrar con M36 (museo: vitrinas para objetos) → `08-Integraciones.md` §7
+- [x] Integrar con M45/M47 (kit de referencia para assets) → `08-Integraciones.md` §8
+- [x] Diseñar 06-Plan-Testings.md: validación del kit (pivotes/snaps) → `06-Plan-Testings.md` §1
+- [x] Diseñar 06-Plan-Testings.md: armado de los 13 tipos → `06-Plan-Testings.md` §2
+- [x] Diseñar 06-Plan-Testings.md: progresión de descubrimiento → `06-Plan-Testings.md` §3
+- [x] Diseñar 06-Plan-Testings.md: pruebas de rendimiento (LOD) → `06-Plan-Testings.md` §4
+- [x] Definir criterio de éxito: suite completa pasa sin fallos → `06-Plan-Testings.md` §5
+- [x] Crear 07-Resultados-Testings.md para registrar la ejecución → stub en `07-Resultados-Testings.md` (ejecución real queda para fase de implementación, autora MiMo V2.5)
+- [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA → Log 1813 (2026-10-13, hy3)
+
+> **CERRADO 2026-10-13 (hy3 / WorkBuddy):** las 15 tareas de diseño del bloque 25-Ruinas
+> estaban ya documentadas en `08-Integraciones.md` (§1–§8, hy3 2026-09-19) y `06-Plan-Testings.md`
+> (§1–§5, hy3 2026-09-19). Se consolidó el diseño de atalayas en `03-Diseno.md` (§nuevo, esta fecha)
+> con evidencia real: `scripts/ruinas/generador_ruina.gd` (RuinaChozavil, 122 lín.), `colocar_props_m25.gd`
+> + `test_colocar_props_m25.gd` (testeados), `_buscar_altura` resuelve enterramiento. Contratos de
+> integración verificados contra módulos existentes en GLOBAL (M26/M31/M32/M45/M47; M28=Viajes,
+> M36=Fauna=dueño de vitrinas en el diseño). **0 `[ ]` nuevos inflados**: el diseño existía; solo se
+> cerró el tracking. NO se tocó `05-Checklist.md` de M25 (sus 16 `[?]` son deuda de implementación de
+> MiMo, no diseño) ni `CHECKLIST-GLOBAL.md`.
 
 
 ### QA cruzado §21.8 — 10 modulos ✅ sin sello (PRIORIDAD)

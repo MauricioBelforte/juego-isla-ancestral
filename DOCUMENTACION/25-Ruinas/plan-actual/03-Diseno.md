@@ -389,6 +389,48 @@ func _obtener_id() -> String:
 - Cámaras secretas pueden estar debajo de ruinas principales.
 - Acceso por pasaje_subterraneo + escalera_recta.
 
+## Atalayas con vista de bioma (diseño detallado — ítem 1 del backlog)
+
+> Consolidado de `08-Integraciones.md` §1 y del tipo "Caseríos/atalayas" en la tabla de
+> arriba (L92 / L114–L118). Objetivo: torre delgada de soporte a la exploración que da
+> vista anticipada del bioma y dispara el descubrimiento de ruinas vecinas. **Diseño
+> (no implementación):** el autor de M25 (MiMo V2.5) construye contra este contrato.
+
+### Especificación geométrica
+- **Kit:** 4–8 piezas reusando el catálogo `03-Diseno.md` L23–L49, sin piezas nuevas:
+  `muro_recto` ×3–4 como fuste + `techo_plano` (2×2) como plataforma + `balaustrada`
+  (1×0,5) en los 4 bordes + `escalera_recta` de acceso.
+- **Altura de observación útil ≥ 6 m** para sobrepasar el canopy del bioma. El enterramiento
+  contra terreno voxel ya lo resuelve `_buscar_altura` de M25 (ver `04-Codigo.md` L11 y riesgo en
+  `08-Integraciones.md` §1).
+- **Plataforma 360°:** `techo_plano` + `balaustrada` en los 4 bordes → visión sin caída.
+
+### Vista de bioma y descubrimiento anticipado
+- Al subir (transición `Descubierta`), la atalaya consulta **M63** (`ruina_descubierta` / POI en
+  horizonte) en radio ampliado (**≥ 60 m** vs. los 15 m base de `03-Diseno.md` L277) para marcar
+  ruinas vecinas en el mapa **M58** antes de llegar.
+- **Sin puzzle obligatorio:** es estructura de apoyo a exploración (banda Exploración), coherente
+  con `03-Diseno.md` L114–L118.
+- **LOD:** plataforma + baranda en `lod1_mesh` a distancia (presupuesto M166 / `budgets.json`); la
+  torre es estática (cero `Update` por ruina, `03-Diseno.md` L396).
+
+### Iluminación / lectura ambiental
+- **Tinte de bioma** vía paletas de `03-Diseno.md` L77–L85 (M45/M47), override `StandardMaterial3D`
+  — sin modificar geometría.
+- **Visibilidad nocturna** depende de **M31** (Ciclo-Día-Noche, `get_sol_dir()` / ciclo de fases):
+  el haz de luz de `03-Diseno.md` L143–L147 es el mecanismo complementario para lectura de lejos de
+  noche; la atalaya **no** duplica ese rol.
+
+### Contrato de implementación
+- Mismo `RuinaProgresion` de `03-Diseno.md` L286–L319 (`estado_cambiado`, guardado atómico). No
+  introduce scripts nuevos: se ensambla con `RuinAssembler.ensamblar("atalaya", …)`
+  (`04-Codigo.md` L72).
+- **Aceptación** (`08-Integraciones.md` §1): ensambla sin traslape; emite
+  `estado_cambiado(ruina_id, Descubierta)` al subir; 0 `SCRIPT ERROR` en validación headless.
+- **Evidencia real del estado actual (2026-10-13):** M25 tiene `scripts/ruinas/generador_ruina.gd`
+  (`RuinaChozavil`, 122 lín.), `colocar_props_m25.gd` + `test_colocar_props_m25.gd` (testeados) y
+  `preview_ruina.gd`; la atalaya es un tipo futuro del kit modular, no aún ensamblado.
+
 ## Presupuestos
 
 - **Piezas estáticas**: LOD 0-2 vía M63 (culling por región); sin simulación.
