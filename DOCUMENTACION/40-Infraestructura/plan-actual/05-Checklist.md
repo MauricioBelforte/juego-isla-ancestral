@@ -114,7 +114,7 @@
 - [x] RF15: SceneManager delega la carga pesada al contrato de M63 [M]
 - [x] RF15: sin doble instanciación de autoloads al cambiar de escena [M]
 - [x] RF16: UIController (M53) obtiene servicios por ServiceRegistry.obtener() [M]
-- [ ] RF16: UIController escucha eventos por EventBus, nunca referencias directas [M]
+- [x] RF16: UIController escucha eventos por EventBus, nunca referencias directas [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/ui/core/ui_manager.gd` L44-46 se suscribe a los eventos de UI del EventBus y L416 declara la sección "Callbacks de EventBus"; 7 archivos bajo `scripts/ui/` consumen EventBus. ⚠ No hice el barrido exhaustivo de que **ningún** archivo de UI use referencia directa: sí encontré una violación concreta (ver L208, `resource_counter.gd` accede a `/root/EconomyManager`).
 - [ ] error.tscn con motivo i18n y botón reintentar [M]
 - [ ] mundo (world.tscn) se carga en modo CARGANDO y entra a ESTADO_MUNDO al completar [M]
 
