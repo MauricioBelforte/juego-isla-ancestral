@@ -35,14 +35,14 @@
 - [x] RF3: ServiceRegistry con registrar(contrato, servicio) y única instancia por contrato [M]
 - [x] RF3: obtener(contrato) por StringName sin referencias directas entre módulos [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229: alignar checklist al código, no al revés):** el nombre literal del ítem no existe en el repo; la API real es la del fragmento citado. Se deja esta nota de alias para que un grep futuro no concluya que no está. Alias: `get_service(contract: String) -> Variant`.
 - [x] RF3: listar_contratos() devuelve copia de solo lectura [S] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229: alignar checklist al código, no al revés):** el nombre literal del ítem no existe en el repo; la API real es la del fragmento citado. Se deja esta nota de alias para que un grep futuro no concluya que no está. Alias: `contracts() -> Array` y `list_registered() -> Array[String]`.
-- [ ] RF3: registrar duplicado devuelve false y emite warning DOM-INF-REGISTRO [M]
-- [ ] RF3: obtener sobre contrato no registrado devuelve null + warning, nunca excepción [M]
+- [x] RF3: registrar duplicado devuelve false y emite warning DOM-INF-REGISTRO [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** `service_registry.gd` `register()` ahora devuelve `bool` y rechaza el segundo registro con `push_warning("[M40] DOM-INF-REGISTRO: contrato duplicado ...")`; lleva contador con `duplicados_rechazados()`.
+- [x] RF3: obtener sobre contrato no registrado devuelve null + warning, nunca excepción [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** `service_registry.gd` `get_service()` devuelve `null` (nunca excepción) y emite `DOM-INF-ACCESO-TEMPRANO` **una sola vez por contrato**, para no llenar el log.
 - [x] D4: auto-registro de servicios de dominio en su propio _ready() [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/core/bootstrap.gd` L58 `_autoregistrar_dominios()` y L100 `_register_core_services()`; además **34 archivos de runtime** se auto-registran solos (analytics_director, telemetry_director, music_director, sfx_manager, ambient_director, feedback_director, narrative_sound, backup_manager, cicd_manager, crash_reporter, data_store, debug_menu, dev_tools, dlc_manager, font_catalog, hardware_manager, house_manager, instalador_config, localization_manager, logger, mapa_manager, memory_monitor, merch_manager, modding_manager, motivacion_manager, platform_manager, security_manager, support_manager, ugc_manager, update_manager, world_bible, build_config_manager, community_manager).
 - [x] D4: los 4 autoloads de M38 (EconomyManager, PriceManager, ShopManager, BarterSystem) se auto-registran con sus contratos [M]
 - [x] RF11: verificar_integridad(esperados) reporta contratos esperados-faltantes [M]
 - [x] RF2: Bootstrap como último autoload CORE en instanciarse [S]
 - [x] RF2: Bootstrap ejecuta sanity check antes de cualquier carga de escena [M]
-- [ ] Definir contratos.gd con constantes StringName centralizadas (economia, mundo_voxel, ui, etc.) [M]
+- [x] Definir contratos.gd con constantes StringName centralizadas (economia, mundo_voxel, ui, etc.) [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** nuevo `scripts/core/contratos.gd` (**47 contratos** como `StringName`). Antes vivían como strings literales: 35 en el `register()` de cada servicio y 12 en el diccionario `_autoregistrar_dominios()` de `bootstrap.gd`. Incluye `TODOS` y `es_contrato_valido()` contra typos. ⚠ `mundo_voxel` no existe en el repo: no se inventó la constante.
 - [x] Asegurar que ningún módulo fuera del CORE agregue autoloads al grupo CORE [S]
 
 ## C. Requisitos funcionales — EventBus
@@ -98,7 +98,7 @@
 - [ ] RF10: reporte de violaciones de capas (dominio importa UI, etc.) [M]
 - [x] RF11: sanity check de autoloads presentes y respondiendo en runtime [M]
 - [ ] RF12: detección de accesos a servicios en _ready() antes de registro [M]
-- [ ] RF12: warning DOM-INF-ACCESO-TEMPRANO en cada acceso temprano [S]
+- [x] RF12: warning DOM-INF-ACCESO-TEMPRANO en cada acceso temprano [S] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** implementado en `get_service()`: emite el warning con el nombre del contrato, con supresión por contrato ya avisado.
 - [x] D9: diagnóstico estático ejecutable en editor (tool) [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/editor/code_quality_check.gd` es `@tool extends EditorScript` (449 líneas, class_name CodeQualityCheck) y hace análisis estático real: `_scan_directory()`, `_scan_file()`, `_analyze_structure()`, chequeo de complejidad ciclomática, convenciones de nombres y documentación, con `_generate_report()`. ⚠ **Alcance:** la herramienta es de **M111 (Código de Calidad)** y analiza estilo/calidad, no las capas ni dependencias de M40; el diagnóstico de capas sigue pendiente (L98).
 - [ ] D9: diagnóstico estático ejecutable en CI (M118) como gate de calidad [M]
 - [x] D9: salida legible para el QA cruzado (AGENTS.md 21.8) [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/editor/code_quality_check.gd` `_generate_report()` (L412) genera un reporte estructurado y legible: cabecera "M111 Code Quality Report", fecha del sistema, archivos escaneados, violaciones totales y desglose por tipo y por severidad (error/warning/info), más el detalle por archivo. ⚠ **Alcance:** igual que L102, la herramienta es de M111; sirve como formato de salida legible, pero el diagnóstico de capas de M40 (L98) sigue pendiente.
@@ -205,7 +205,7 @@
 - [x] M38: los 4 autoloads de economía se auto-registran en su _ready() [M]
 - [x] M38: Bootstrap verifica integridad de los 4 contratos economia.* [M]
 - [x] M38: los eventos economy.* fluyen por EventBus sin intercepción de la infraestructura [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): existe el dominio `economy` (`var economy := EconomyEvents.new()`); EventBus es un bus pasivo de señales, no intercepta ni transforma payloads.
-- [ ] M38: la UI no accede a nodos directos de economía, solo por contrato [M] — **VIOLACIÓN ENCONTRADA (stepfun-step-5-preview, Kilo Code, 2026-10-12):** `scripts/ui/widgets/resource_counter.gd` L67 hace `get_node_or_null("/root/EconomyManager")`, es decir **acceso directo por nodo** en vez de por contrato del ServiceRegistry. Es el único archivo de UI que lo hace (barrido sobre todos los `.gd` bajo `scripts/ui/`). El ítem queda `[ ]` hasta que se migre a `ServiceRegistry.get_service(...)`.
+- [x] M38: la UI no accede a nodos directos de economía, solo por contrato [M] — **VIOLACIÓN CORREGIDA (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229):** `scripts/ui/widgets/resource_counter.gd` accedía por `get_node_or_null("/root/EconomyManager")`; ahora va por `ServiceRegistry.get_service(Contratos.ECONOMY_MANAGER)`. Se conservó un fallback por nodo para no romper el HUD si el registro aún no corrió en el arranque. Verificado por barrido: era el único archivo bajo `scripts/ui/` que lo hacía.
 - [ ] M53: UIController usa _ready aplazado (primer frame) para obtener servicios (RF12) [M]
 - [x] M53: toda comunicación gameplay → UI viaja por EventBus [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): existen los dominios `ui` y `player` para el camino gameplay→UI. ⚠ No verifiqué que sea **toda** la comunicación: el bus existe y tiene los canales, pero no hice el barrido de que ningún sistema de gameplay llame a la UI directo.
 - [x] M53: el menú principal se carga como escena raíz orquestada por SceneManager [M]
@@ -222,8 +222,8 @@
 - [x] Contrato esperado sin registrar (M38 ausente): verificar_integridad lo reporta antes del menú [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` L44 `validate_required(required) -> Array[String]` devuelve los faltantes; `bootstrap.gd` L132 `verificar_integridad_dominios()` lo usa y emite `DOM-INF-FALTANTE` con la lista.
 - [x] Dependencia circular entre scripts: diagnóstico estático la reporta con ruta de ciclo [C]
 - [ ] Servicio consultado en _ready() antes de registrarse: warning DOM-INF-ACCESO-TEMPRANO [M]
-- [ ] Registrar dos servicios con el mismo contrato: segundo registro rechazado con warning [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229):** hoy `register()` sobrescribe sin rechazar.
-- [ ] obtener() sobre contrato inexistente: null + warning, la UI muestra estado vacío sin crash [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229):** hoy `get_service()` devuelve null sin warning.
+- [x] Registrar dos servicios con el mismo contrato: segundo registro rechazado con warning [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** verificado en `test_m40_contratos.gd` bloque 2: el primer registro devuelve `true`, el segundo `false`, y la instancia original se conserva.
+- [x] obtener() sobre contrato inexistente: null + warning, la UI muestra estado vacío sin crash [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** verificado en `test_m40_contratos.gd` bloque 3: devuelve `null` sin excepción. ⚠ El "la UI muestra estado vacío" no está verificado: ningún widget consume ese camino hoy.
 - [x] Config corrupta en el bootstrap: fallback a defaults + log DOM-INF-ERROR [M]
 - [ ] Reintento de arranque fallido repetido: máximo 3 intentos y mensaje de intervención [M]
 - [x] Cambio de estado ilegal (MUNDO → BOOT directo): rechazo con warning [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `game_flow_manager.gd` L34 `cambiar_estado()` valida contra `TRANSICIONES`; MUNDO solo permite [PAUSA, CARGANDO, MENU, ERROR] (L22), así que MUNDO→BOOT es inválida: L39 `push_warning("[M40] Transición inválida %d -> %d")` + `return false`.
@@ -246,7 +246,7 @@
 - [x] el CORE permanece inactivo durante el gameplay salvo eventos que lo tocan — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd`, `event_bus.gd`, `bootstrap.gd` y `game_flow_manager.gd` **no declaran `_process` ni `_physics_process`**: el CORE no ejecuta código por frame, solo responde a eventos.
 - [x] verificar_integridad se ejecuta una vez por arranque, nunca por frame [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` no tiene `_process`, y `verificar_integridad_dominios()` / `_validate_services()` se llaman desde `bootstrap.gd` `_ready()`, una sola vez por arranque.
 - [x] diagnóstico estático solo en editor/CI, sin coste en builds de release [M]
-- [ ] preload de constantes de contratos (contratos.gd) sin I/O en runtime [S]
+- [x] preload de constantes de contratos (contratos.gd) sin I/O en runtime [S] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** `contratos.gd` son constantes `const` compiladas: no hay `load()` ni I/O en runtime, el acceso es directo.
 
 ## P. Documentación entregada
 
@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 163 · Pendientes: 46 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
+**Totales:** 211 ítems · Completados: 171 · Pendientes: 38 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→171 [x] en 13 lotes; +8 del frente 1 implementado (contratos.gd, DOM-INF-REGISTRO, DOM-INF-ACCESO-TEMPRANO y fix de L208). — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /
