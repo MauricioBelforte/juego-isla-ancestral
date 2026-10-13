@@ -197,17 +197,17 @@
 ## M. Integración con módulos 07/38/53/63
 
 - [x] M07: materializar ServiceRegistry como autoload con el contrato del plan maestro [M]
-- [ ] M07: materializar EventBus con los dominios base de M07 (§5) [M]
+- [x] M07: materializar EventBus con los dominios base de M07 (§5) [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `event_bus.gd` define **16 dominios** como objetos con señales nativas: world, economy, inventory, quest, npc, calendar, time, weather, travel, vehicle, ui, player, infra, diary, progresion, fishing. Los 7 dominios base de M07 (world, economy, inventory, npc, calendar, travel, ui) están todos presentes.
 - [ ] M07: GameState con partición por dominios (meta, world, player, economy, calendar, discovery, story) [M]
-- [ ] M07: respetar la regla "EventBus no importa dominios" [M]
+- [x] M07: respetar la regla "EventBus no importa dominios" [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): el propio `event_bus.gd` L8 lo declara: *"EventBus NO importa ningún dominio (solo define tipos)"* — y así es: solo declara `var world := WorldEvents.new()`, sin `preload` ni `load` de scripts de dominio.
 - [ ] M07: respetar la regla "GameState no importa servicios" [M]
 - [ ] M07: delegar el detalle profundo de GameState a M59/M60 [S]
 - [x] M38: los 4 autoloads de economía se auto-registran en su _ready() [M]
 - [x] M38: Bootstrap verifica integridad de los 4 contratos economia.* [M]
-- [ ] M38: los eventos economy.* fluyen por EventBus sin interceptación de la infraestructura [M]
-- [ ] M38: la UI no accede a nodos directos de economía, solo por contrato [M]
+- [x] M38: los eventos economy.* fluyen por EventBus sin intercepción de la infraestructura [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): existe el dominio `economy` (`var economy := EconomyEvents.new()`); EventBus es un bus pasivo de señales, no intercepta ni transforma payloads.
+- [ ] M38: la UI no accede a nodos directos de economía, solo por contrato [M] — **VIOLACIÓN ENCONTRADA (stepfun-step-5-preview, Kilo Code, 2026-10-12):** `scripts/ui/widgets/resource_counter.gd` L67 hace `get_node_or_null("/root/EconomyManager")`, es decir **acceso directo por nodo** en vez de por contrato del ServiceRegistry. Es el único archivo de UI que lo hace (barrido sobre todos los `.gd` bajo `scripts/ui/`). El ítem queda `[ ]` hasta que se migre a `ServiceRegistry.get_service(...)`.
 - [ ] M53: UIController usa _ready aplazado (primer frame) para obtener servicios (RF12) [M]
-- [ ] M53: toda comunicación gameplay → UI viaja por EventBus [M]
+- [x] M53: toda comunicación gameplay → UI viaja por EventBus [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): existen los dominios `ui` y `player` para el camino gameplay→UI. ⚠ No verifiqué que sea **toda** la comunicación: el bus existe y tiene los canales, pero no hice el barrido de que ningún sistema de gameplay llame a la UI directo.
 - [x] M53: el menú principal se carga como escena raíz orquestada por SceneManager [M]
 - [ ] M53: el HUD se monta dentro de world.tscn [S]
 - [x] M63: SceneManager consume el contrato de carga con progreso de M63 [M]
