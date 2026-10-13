@@ -31,18 +31,18 @@
 
 ## B. Física y constantes (12)
 
-- [?] Hitbox: ancho 0.6, alto 1.8, profundo 0.3 m → código usa CapsuleShape3D radio 0.4, height 1.5 (Player.tscn:7-8) [S] # divergencia documentada
-- [?] Velocidad de caminar: 4.2 m/s → `Player.tscn:13` serializa `move_speed=5.0`, pero `_ready()` fuerza `25.0` en modo DEV; la suite mide 25.0 [S] # divergencia documentada
-- [?] Velocidad de correr: 6.5 m/s → NO implementado (sin sprint) [S]
-- [?] Velocidad de nadar: 2.5 m/s → NO implementado (solo _en_agua()+velocity.y=4.0 para subir) [S]
-- [?] Velocidad de buceo: 1.8 m/s → NO implementado [S]
-- [?] Altura de salto: 1.2 m → código jump_force=8, gravity=20 → alt=1.6m; divergencia [S]
-- [?] Gravedad 12 m/s² y velocidad terminal 20 m/s [S]
-- [?] Step-up 0.6 m → NO implementado (VoxelBoxMover.get_motion no expone step-up configurable) [S]
-- [?] Aire de buceo: 18 s → NO implementado (no hay sistema de aire) [S]
-- [?] Stamina: máx 100, drenado 12/s, regen 8/s → NO implementado [S]
-- [?] Radio de magnetismo de luz: 1.2 m → NO implementado (sin sistema de luz) [S]
-- [?] Rango de interacción: 4 m → NO implementado (sin InteractionService) [S]
+- [?] Hitbox: ancho 0.6, alto 1.8, profundo 0.3 m → código usa CapsuleShape3D radio 0.4, height 1.5 (Player.tscn:7-8) [S] # divergencia documentada | AUDIT 2026-10-13 (step-5-kilocode): confirmado — Player.tscn L13-14 declara radius=0.4/height=1.5 (diseno pedia 0.6/1.8); divergencia documentada en el propio item.
+- [?] Velocidad de caminar: 4.2 m/s → `Player.tscn:13` serializa `move_speed=5.0`, pero `_ready()` fuerza `25.0` en modo DEV; la suite mide 25.0 [S] # divergencia documentada | AUDIT 2026-10-13 (step-5-kilocode): confirmado — Player.tscn L19 serializa move_speed=5.0 y player.gd L60 lo fuerza a 25.0 en modo DEV (comment 'la escena player.tscn sobrescribe'); la suite mide 25.0.
+- [?] Velocidad de correr: 6.5 m/s → NO implementado (sin sprint) [S] | AUDIT 2026-10-13 (step-5-kilocode): el sprint SI esta implementado como FACTOR proporcional — player_core_m11.gd L50 VELOCIDAD_CORRER=6.5 escalando move_speed por FACTOR_SPRINT (6.5/4.2), con restauracion al soltar (L19-30). El item dice 'NO implementado (sin sprint)': DESACTUALIZADO, la evidencia en disco lo contradice.
+- [?] Velocidad de nadar: 2.5 m/s → NO implementado (solo _en_agua()+velocity.y=4.0 para subir) [S] | AUDIT 2026-10-13 (step-5-kilocode): nadar existe como elevacion — player.gd L322 velocity.y=4.0 para subir con espacio dentro del agua; no hay velocidad horizontal de nado 2.5 m/s.
+- [?] Velocidad de buceo: 1.8 m/s → NO implementado [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de buceo con velocidad 1.8 m/s; existe nadar-a-superficie (tecla N, player.gd L445-466) que es otro mecanismo.
+- [?] Altura de salto: 1.2 m → código jump_force=8, gravity=20 → alt=1.6m; divergencia [S] | AUDIT 2026-10-13 (step-5-kilocode): confirmado — jump_force=8 con gravity=20 (Player.tscn L20-21) da 1.6 m, no 1.2 m; divergencia documentada.
+- [?] Gravedad 12 m/s² y velocidad terminal 20 m/s [S] | AUDIT 2026-10-13 (step-5-kilocode): gravity=20.0 confirmada (Player.tscn L20, player.gd L9) vs 12 del diseno; no hay velocidad terminal explicita (sin clamp de caida).
+- [?] Step-up 0.6 m → NO implementado (VoxelBoxMover.get_motion no expone step-up configurable) [S] | AUDIT 2026-10-13 (step-5-kilocode): confirmado — la colision usa VoxelBoxMover (player.gd L16/L89) sin step-up configurable; no hay implementacion de step-up 0.6 m.
+- [?] Aire de buceo: 18 s → NO implementado (no hay sistema de aire) [S] | AUDIT 2026-10-13 (step-5-kilocode): no hay sistema de aire de buceo; los hits de 'aire' son de la funcion de superficie (player.gd L458/L466), no de oxigeno.
+- [?] Stamina: máx 100, drenado 12/s, regen 8/s → NO implementado [S] | AUDIT 2026-10-13 (step-5-kilocode): PlayerEnergy existe (player_energy.gd, class_name PlayerEnergy, ENERGIA_MAX=100) con modelo cozy 1/min por decision del director (msg 135) — NO el 12/s drain y 8/s regen del diseno; el propio archivo documenta que 03-Diseno.md quedo como deuda documental. Ademas NO esta cableado a player.gd (comentario L24-25: 'No esta cableado a player.gd').
+- [?] Radio de magnetismo de luz: 1.2 m → NO implementado (sin sistema de luz) [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de magnetismo/luz en scripts/player/; no hay sistema de luz ni esporas.
+- [?] Rango de interacción: 4 m → NO implementado (sin InteractionService) [S] | AUDIT 2026-10-13 (step-5-kilocode): NO existe InteractionService con ese nombre, pero el equivalente de M70 existe y tiene rango: interaction_manager.gd (autoload 'interacciones') con DEFAULT_RANGO=2.5 + radio por interactuable (interactable_base.gd L18 documenta 1.5 m por defecto -> 4.0 m totales, coincide con el diseno); test_interacciones.gd L124 verifica 2.5+0.5=3 m.
 
 ## C. FSM de estados (16)
 
@@ -65,52 +65,52 @@
 
 ## D. Interacción y luz (14)
 
-- [?] InteractionService con raycast de 4 m → **CORREGIDO 2026-09-20:** el nombre `InteractionService` no existe, pero un equivalente SÍ: `scripts/interacciones/interaction_manager.gd`, autoload `50-interacciones` (M70, en HEAD). Selecciona objetivo por distancia (`_elegir_objetivo`, línea ~193), pero su rango real es **2.5 m** (`const DEFAULT_RANGO := 2.5`, línea 37), no 4 m, y **no está cableado al jugador**: `inyectar_jugador()` no se llama desde ninguna escena (0 ocurrencias fuera del propio manager). Falta el puente M11↔M70; sin él el sistema está inerte respecto del personaje. [M]
-- [?] Highlight del objetivo en rango → NO implementado [M]
-- [?] Un interactable a la vez (prioridad centro de rayo) → NO implementado [M]
-- [?] HUD: prompt `[F] <nombre>` (localizable M57) [M]
+- [?] InteractionService con raycast de 4 m → **CORREGIDO 2026-09-20:** el nombre `InteractionService` no existe, pero un equivalente SÍ: `scripts/interacciones/interaction_manager.gd`, autoload `50-interacciones` (M70, en HEAD). Selecciona objetivo por distancia (`_elegir_objetivo`, línea ~193), pero su rango real es **2.5 m** (`const DEFAULT_RANGO := 2.5`, línea 37), no 4 m, y **no está cableado al jugador**: `inyectar_jugador()` no se llama desde ninguna escena (0 ocurrencias fuera del propio manager). Falta el puente M11↔M70; sin él el sistema está inerte respecto del personaje. [M] | AUDIT 2026-10-13 (step-5-kilocode): confirmada la correccion del item — el equivalente es scripts/interacciones/interaction_manager.gd (autoload, M70) con contrato IInteractable, senales objetivo_seleccionado/objetivo_perdido/interaccion_iniciada/terminada/cancelada/estado_cambiado (L24-29), histeresis 0.15 m (L38) y desempate por orden de registro.
+- [?] Highlight del objetivo en rango → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): no hay highlight del objetivo del jugador; los unicos highlights son de herramientas/preview (tool_controller.gd L59, preview_herramientas.gd), que es otro frente.
+- [?] Un interactable a la vez (prioridad centro de rayo) → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): el manager tiene histeresis y orden de registro como desempate (interaction_manager.gd L38 y comentario L12) pero NO hay seleccion por centro de rayo: la seleccion es por distancia (L207-208).
+- [?] HUD: prompt `[F] <nombre>` (localizable M57) [M] | AUDIT 2026-10-13 (step-5-kilocode): el HUD del prompt EXISTE — hud_screen.gd L17 referencia %InteractPrompt y scripts/ui/hud/interact_prompt.gd implementa show_prompt(text)/hide_prompt() (consumido por M70); el texto localizable (M57) no esta verificado en el prompt.
 - [x] IInteractable consumible por cualquier módulo → **CORREGIDO 2026-09-20:** la interfaz SÍ existe: `scripts/interfaces/i_interactable.gd` (`class_name IInteractable`, v2 de M70, verificado en HEAD con `git cat-file -e`). El QA del Log 977 buscó sólo dentro de `scripts/player/` y la declaró inexistente. M11 no la consume (ver D.68). [M]
-- [?] Esporas de luz: spawn desde M27/natural → NO implementado (sin sistema de luz) [M]
-- [?] Magnetismo 1.2 m con animación de entrada 0.3 s → NO implementado [M]
-- [?] PlayerLightInventory (M14) recibe las esporas → NO implementado (M14 es modulo separado) [M]
-- [?] HUD de luz total (6 esferas, M14/M28) → NO implementado [M]
-- [?] Recogida sin límite (progresión del alma) → NO implementado [S]
-- [?] Audio de recogida (campana suave) → NO implementado [S]
-- [?] Evento `light_collected(count)` en EventBus [M]
-- [?] Destellos visibles en streaming lejano (no se cargan inútilmente fuera del radio) [M]
-- [?] Recogida idempotente: si se salvó la espora como recogida, no reaparece al regenerar → NO implementado [M]
+- [?] Esporas de luz: spawn desde M27/natural → NO implementado (sin sistema de luz) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de esporas/luz en scripts/player/; sin sistema de luz.
+- [?] Magnetismo 1.2 m con animación de entrada 0.3 s → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): sin magnetismo ni animacion de entrada de 0.3 s.
+- [?] PlayerLightInventory (M14) recibe las esporas → NO implementado (M14 es modulo separado) [M] | AUDIT 2026-10-13 (step-5-kilocode): PlayerLightInventory no existe; la recepcion de esporas es de M14, modulo separado.
+- [?] HUD de luz total (6 esferas, M14/M28) → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): no hay HUD de luz total (6 esferas).
+- [?] Recogida sin límite (progresión del alma) → NO implementado [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de recogida de esporas/luz en scripts/player/; el sistema de luz no existe (ver item 11).
+- [?] Audio de recogida (campana suave) → NO implementado [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de audio de recogida de esporas.
+- [?] Evento `light_collected(count)` en EventBus [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de light_collected en todo game/isla-ancestral/scripts/; EventBus existe (event_bus.gd) pero sin esa senal.
+- [?] Destellos visibles en streaming lejano (no se cargan inútilmente fuera del radio) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin destellos en streaming lejano; no hay entidades de luz para streamear.
+- [?] Recogida idempotente: si se salvó la espora como recogida, no reaparece al regenerar → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): no hay esporas que recoger ni persistencia de recogida (M59 no lleva este estado).
 
 ## E. Energía y bienestar (14)
 
-- [?] Stamina siempre informativa (nunca bloquea caminar) → NO implementado [M]
-- [?] Barra visible solo al drenar (fade) → NO implementado [M]
-- [?] Icono de fatiga suave al 30% → NO implementado [M]
-- [?] Vibración sutil + tinte en bordes al 30% → NO implementado [M]
-- [?] Sin daño por caída (amortiguación en alturas > 3 bloques) → PARCIAL: no hay sistema de daño por caída en `player.gd`, pero la amortiguación solicitada no está implementada [M]
+- [?] Stamina siempre informativa (nunca bloquea caminar) → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): PlayerEnergy ES informativo por diseno — player_energy.gd L13/L41/L57: umbral de fatiga 30% 'informativo, no bloqueante' y la regla cozy impide que baje por caminar/correr; pero el modelo NO esta cableado a player.gd (comentario L24-25), asi que en runtime no hay nada que bloquee ni informe.
+- [?] Barra visible solo al drenar (fade) → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): no hay barra de stamina con fade; PlayerEnergy.expone en_fatiga() pero ningun HUD lo consume (M53).
+- [?] Icono de fatiga suave al 30% → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): UMBRAL_FATIGA=30.0 existe en el modelo (player_energy.gd L41) con _fatiga_avisada (L45); el icono suave en HUD es de M53 y no existe.
+- [?] Vibración sutil + tinte en bordes al 30% → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): sin vibracion ni tinte de bordes al 30% (M53).
+- [?] Sin daño por caída (amortiguación en alturas > 3 bloques) → PARCIAL: no hay sistema de daño por caída en `player.gd`, pero la amortiguación solicitada no está implementada [M] | AUDIT 2026-10-13 (step-5-kilocode): confirmado — no hay sistema de dano por caida en player.gd (los hits de 'fall' son del fallback de mano M13 y del suelo fantasma); la amortiguacion >3 bloques no esta implementada.
 - [x] Regeneración libre parado o caminando → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
-- [?] Hueco de fatiga: sprint no acumula deuda permanente → NO implementado [M]
-- [?] Bucle día/noche afecta energía (descanso M29) → NO implementado [M]
-- [?] Alimentos otorgan bonos de bienestar (M29) → NO implementado en player.gd [M]
-- [?] Cero penalización por dormir poco (aviso suave) → NO implementado [M]
-- [?] System settings: toggle sprint (hold/alternate) → NO implementado [S]
-- [?] Validación cozy: sin castigos por jugar "mal" [M]
+- [?] Hueco de fatiga: sprint no acumula deuda permanente → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): el modelo de energia es estructuralmente sin deuda (regen 1/min SIEMPRE, player_energy.gd L11-13) pero el hueco de fatiga del sprint no esta medido ni expuesto; el modelo no esta cableado a player.gd.
+- [?] Bucle día/noche afecta energía (descanso M29) → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): player_core_m11.gd L254-260 tiene recargar_dormir()/recargar_descanso() (reglas L67/L68) pero nadie las invoca desde el ciclo dia/noche M29: 0 llamadores.
+- [?] Alimentos otorgan bonos de bienestar (M29) → NO implementado en player.gd [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de alimentos/bienestar en player.gd; no hay consumo de comida para energia.
+- [?] Cero penalización por dormir poco (aviso suave) → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): sin aviso suave por dormir poco; las rutinas de descanso existen (recargar_dormir) pero sin disparador.
+- [?] System settings: toggle sprint (hold/alternate) → NO implementado [S] | AUDIT 2026-10-13 (step-5-kilocode): no hay toggle hold/alternate de sprint en settings; player_core_m11.gd aplica el factor al mantener la accion de correr.
+- [?] Validación cozy: sin castigos por jugar "mal" [M] | AUDIT 2026-10-13 (step-5-kilocode): la validacion cozy es de diseno (regla L70 en player_energy.gd: 'la energia NUNCA llega a cero por caminar o correr'); no hay test automatizado que la verifique en runtime.
 - [x] Aviso de fatiga no interrumpe el flujo (no modal) → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
-- [?] El sprint vuelve a 0 sin penalizar la siguiente acción → NO implementado [S]
+- [?] El sprint vuelve a 0 sin penalizar la siguiente acción → NO implementado [S] | AUDIT 2026-10-13 (step-5-kilocode): player_core_m11.gd L19-30 documenta que RESTAURA move_speed al soltar el sprint (sin penalizar la siguiente accion); verificado en el codigo del adaptador.
 
 ## F. Animaciones y audio (12)
 
-- [?] 10 clips placeholder: idle, walk, run, jump, fall, swim, dive, interact, sleep, craft → NO existen AnimationPlayer ni AnimationTree en Player.tscn [M]
-- [?] Blend tree walk↔run por velocidad → NO existe AnimationTree [M]
-- [?] Crossfade 0.1 s entre estados → NO aplicable (sin animaciones) [S]
-- [?] Pasos por superficie (césped, arena, piedra, barro, agua) → NO implementado [M]
-- [?] Saltos y aterrizajes con audio → NO implementado [S]
-- [?] Splash de entrada/salida del agua → NO implementado [S]
-- [?] Chirrido de interacción (madera/metal según objeto) → NO implementado [M]
-- [?] Assets finales → M65 (terceros) → Pendiente de M65 [M]
+- [?] 10 clips placeholder: idle, walk, run, jump, fall, swim, dive, interact, sleep, craft → NO existen AnimationPlayer ni AnimationTree en Player.tscn [M] | AUDIT 2026-10-13 (step-5-kilocode): Player.tscn SI tiene AnimationPlayer (L48, hijo de AnimacionM48) con AnimationLibrary jugador_lib.tres (L7) — pero la libreria solo tiene 3 clips placeholder: anim_jugador_idle, anim_jugador_walk, anim_jugador_run. Faltan jump, fall, swim, dive, interact, sleep, craft.
+- [?] Blend tree walk↔run por velocidad → NO existe AnimationTree [M] | AUDIT 2026-10-13 (step-5-kilocode): no existe AnimationTree en Player.tscn (solo AnimationPlayer); el blend tree walk<->run no existe. animacion_jugador_m48.gd documenta el mapeo FSM->clips con los 3 placeholders.
+- [?] Crossfade 0.1 s entre estados → NO aplicable (sin animaciones) [S] | AUDIT 2026-10-13 (step-5-kilocode): sin AnimationTree no hay crossfade; el item es no-aplicable mientras no existan mas clips.
+- [?] Pasos por superficie (césped, arena, piedra, barro, agua) → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de pasos por superficie (footstep) ligados al jugador; los hits de 'pasos' son de escalas UI de accesibilidad.
+- [?] Saltos y aterrizajes con audio → NO implementado [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de audio de salto/aterrizaje en scripts/player/.
+- [?] Splash de entrada/salida del agua → NO implementado [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de splash de entrada/salida de agua.
+- [?] Chirrido de interacción (madera/metal según objeto) → NO implementado [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de chirrido de interaccion por material.
+- [?] Assets finales → M65 (terceros) → Pendiente de M65 [M] | AUDIT 2026-10-13 (step-5-kilocode): assets finales de personaje pendientes de M65 (terceros); no verificable desde M11.
 - [x] Sin voz del personaje (cozy) → VERIFICADO 2026-09-20: 0 ocurrencias de `AudioStream`/`voice`/`voz`/`.wav`/`.ogg` en `player.gd` (grep). La nota ya decia VERIFICADO y llevaba el glifo `[x]`, pero el marcador era `[?]`.
 - [x] La música del mundo la lleva M53 → VERIFICADO 2026-09-20: 0 ocurrencias de `music`/`musica`/`BGM` en `player.gd` (grep). Mismo defecto de marcador que F.110.
-- [?] Sin loops de audio solapados al transicionar estados rápidos → NO aplicable (sin audio de pasos/animaciones) [M]
-- [?] Volúmenes por capa: pasos → interacción → ambiente (M53) → NO aplicable (sin audio de personaje) [S]
+- [?] Sin loops de audio solapados al transicionar estados rápidos → NO aplicable (sin audio de pasos/animaciones) [M] | AUDIT 2026-10-13 (step-5-kilocode): no-aplicable hoy — sin audio de pasos ni saltos no hay loops que solapar.
+- [?] Volúmenes por capa: pasos → interacción → ambiente (M53) → NO aplicable (sin audio de personaje) [S] | AUDIT 2026-10-13 (step-5-kilocode): no-aplicable hoy — sin audio de personaje no hay capas que mezclar (M53).
 
 ## G. Documentación e integración (12)
 
@@ -119,7 +119,7 @@
 - [x] 03-Diseno.md creado y firmado [S]
 - [x] 04-Codigo.md creado y firmado [S]
 - [x] 05-Checklist.md creado y firmado (este archivo) [S]
-- [?] Constantes consumibles en data/player/player_motion.tres → directorio data/player/ NO EXISTE [M]
+- [?] Constantes consumibles en data/player/player_motion.tres → directorio data/player/ NO EXISTE [M] | AUDIT 2026-10-13 (step-5-kilocode): confirmado — el directorio game/isla-ancestral/data/player/ NO EXISTE (hay 80 carpetas de datos, ninguna es 'player'); las constantes viven hardcodeadas en player.gd (move_speed L8, gravity L9, jump_force L10).
 - [x] Contrato PlayerState → EventBus + GameState.M11 [M]
 - [x] Entrada por action map Input System de Godot [S]
 - [x] Sin contradicciones con M07 (ServiceLocator, capas) [M]
@@ -132,14 +132,14 @@
 - [x] Los 30 puntos de la sección 10 resueltos [M]
 - [x] Criterios de aceptación cumplidos [M]
 - [x] FSM con tabla de permisos completa → IMPLEMENTADO en player_fsm.gd + player_core_m11.gd (DeepSeek Log 1594, suite 87/0)
-- [?] Constantes físicas documentadas y consumibles → NO existe data/player/player_motion.tres [M]
+- [?] Constantes físicas documentadas y consumibles → NO existe data/player/player_motion.tres [M] | AUDIT 2026-10-13 (step-5-kilocode): idem — no existe player_motion.tres ni equivalente; las constantes fisicas estan en el script y en Player.tscn L19-21.
 - [x] Filosofía cozy preservada (sin castigos) [M]
 - [x] Spawn del jugador definido (hogar o muelle) [M]
-- [?] Guardado de posición/estado en GameState.M11 → NO existe GameState ni sección M11; player_save_provider solo guarda posición/spawn/zone [M]
+- [?] Guardado de posición/estado en GameState.M11 → NO existe GameState ni sección M11; player_save_provider solo guarda posición/spawn/zone [M] | AUDIT 2026-10-13 (step-5-kilocode): no existe GameState con seccion M11; player_save_provider.gd (M59) guarda name/position/spawn_position/zone con duck-typing y trata spawn_position como punto de reanudacion, no spawn real — energetgia/stamina/FSM no se persisten.
 - [x] DoD cumplida: 5 archivos + firma + log [M]
 - [x] Salto con ESPACIO y velocidad dev (viewer dinamico) [S] (2026-08-29) — implementado por Hy3, documentado en `04-Codigo.md` §5 [S]
 - [x] Suite headless `test_player_m11.gd`: 30 checks, 0 fallos, Godot 4.7.2, EXIT 0 y 0 `SCRIPT ERROR` propios [M]
-- [?] Anti-frustration: buceo flota, caída sin daño, stamina informa → caída sin daño PARCIAL: no hay daño, pero falta amortiguación; buceo/sprint NO implementados [M]
+- [?] Anti-frustration: buceo flota, caída sin daño, stamina informa → caída sin daño PARCIAL: no hay daño, pero falta amortiguación; buceo/sprint NO implementados [M] | AUDIT 2026-10-13 (step-5-kilocode): caida sin dano confirmada (no hay sistema de dano) pero sin amortiguacion; buceo y sprint — el sprint SI existe como factor (player_core_m11.gd L50) aunque el buceo no; la triada anti-frustration no esta completa.
 - [x] Ready para: M12 (cámara), M13 (herramientas), M14 (inventario) [S]
 
 ## I. Selección de personaje (8)
