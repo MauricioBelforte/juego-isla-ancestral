@@ -21,7 +21,7 @@
 - [x] Declarar que el módulo es delegable para implementación tras M08/M10 base y presupuestos M61 [S]
 - [x] Mantener el alcance separado de M28 (barco/viaje), M51 (agua), M63 (streaming general) [S] — `IslandOps` es cola pura, la guardia decide pero no mueve el barco, e `IslandLoading` NO se implementó (M63)
 - [x] Definir criterios de aceptación verificables (catálogo 13 islas, anclas válidas, viaje ida y vuelta, contenido exclusivo) [S] — catálogo y anclas verificados por test; el viaje es de M28
-- [?] Asegurar coherencia cozy: sin contenido crítico exclusivo e inaccesible, regreso siempre gratis [S] — el regreso gratis es de **M28**
+- [?] Asegurar coherencia cozy: sin contenido crítico exclusivo e inaccesible, regreso siempre gratis [S] — el regreso gratis es de **M28** | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia en disco; el regreso gratis es contrato de M28, no de M27.
 - [x] Verificar que el diseño no contradice los principios innegociables (M152 cozy, sin FOMO) [S] — respawn cozy, guardado que espera, nunca descargar la principal ni la actual: sin pérdida ni castigo
 - [x] Documentar el módulo en los 5 archivos obligatorios (plan-inicial y plan-actual) [M]
 
@@ -51,7 +51,7 @@
 ## C. IslandRegistry — catálogo del archipiélago
 
 - [x] Create autoload IslandRegistry como servicio tipo Service Locator (M07) [S]
-- [x] init(anclas: Dictionary) que construye el catálogo desde M10 [M] — sustituido por `anclar(id, ancla, semilla)` por isla (04-Codigo §6.5); la capa de anclas es de **M10** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): sustituido por `island_registry.anclar(id, ancla, semilla_isla)` + `posicion_ancla()` (test_islas_m27.gd bloque E).
+- [x] init(anclas: Dictionary) que construye el catálogo desde M10 [M] — sustituido por `anclar(id, ancla, semilla)` por isla (04-Codigo §6.5); la capa de anclas es de **M10** — verificado (step-5-kilocode, 2026-10-12, Log 1710): sustituido por `island_registry.anclar(id, ancla, semilla_isla)` + `posicion_ancla()` (test_islas_m27.gd bloque E).
 - [x] get_isla(id) -> IslandDefinition con manejo de id inexistente (null + log WARN) [S]
 - [x] todas_las_islas() -> Array ordenada determinista por id (nunca por orden de carga) [M]
 - [x] isla_principal() -> Aurora (id constante `aurora`) [S]
@@ -61,60 +61,60 @@
 - [x] validar_anclas() -> Array[String] de errores [M]
 - [x] Señal archipielago_cargado emitida al terminar init [S]
 - [x] Registro sin duplicados: ids únicos garantizados al cargar .tres [S] — primera gana
-- [?] Carga de .tres diferida (no bloqueante) al iniciar partida [M] — hoy la carga es síncrona en `_ready()` (13 `.tres` livianos); la carga diferida depende de **M63**
+- [?] Carga de .tres diferida (no bloqueante) al iniciar partida [M] — hoy la carga es síncrona en `_ready()` (13 `.tres` livianos); la carga diferida depende de **M63** | AUDIT 2026-10-13 (step-5-kilocode): confirmada carga sincrona (island_registry.gd L73/L154 usan ResourceLoader.load directo); no hay carga diferida ni threads; depende de M63.
 - [x] Estado "descubierta/visitada" consultable (delega a M59 GameState) [M]
 - [x] Orden de catálogo estable entre ejecuciones (misma semilla) [S]
 - [x] Fallback: si falta un .tres, se loguea ERROR y Aurora siempre carga [M] — verificado con carpetas temporales
 
 ## D. Anclas y generación (M10)
 
-- [x] Solicitar a M10 la capa de anclas que posiciona cada isla [C] — **M10** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. M27 solo **pide** las anclas: `island_registry.anclar(id, ancla, semilla_isla)` las recibe y las expone con `posicion_ancla()`; la generación es de M10 (límite documentado).
-- [x] Las anclas se derivan del PRNG de contexto 2 (mismo mundo, misma semilla) [M] — **M10** (M27 sólo deriva `semilla_de_isla`) — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. M27 **deriva** `semilla_de_isla` (determinista por isla); el PRNG de contexto 2 es de M10 (límite documentado).
+- [x] Solicitar a M10 la capa de anclas que posiciona cada isla [C] — **M10** — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. M27 solo **pide** las anclas: `island_registry.anclar(id, ancla, semilla_isla)` las recibe y las expone con `posicion_ancla()`; la generación es de M10 (límite documentado).
+- [x] Las anclas se derivan del PRNG de contexto 2 (mismo mundo, misma semilla) [M] — **M10** (M27 sólo deriva `semilla_de_isla`) — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. M27 **deriva** `semilla_de_isla` (determinista por isla); el PRNG de contexto 2 es de M10 (límite documentado).
 - [x] Validar distancia mínima entre centros: radio_a + radio_b + MARGEN_MAR (64 m) [M]
-- [?] Validar que ninguna isla invade el templo subterráneo (M26) ni ruinas (M25) [C] — **M10/M25/M26**
+- [?] Validar que ninguna isla invade el templo subterráneo (M26) ni ruinas (M25) [C] — **M10/M25/M26** | AUDIT 2026-10-13 (step-5-kilocode): generar_islas.gd valida solapamientos entre anillos de islas, pero NO existe validacion contra templo M26 ni ruinas M25.
 - [x] Validar que Aurora está en el centro del mundo/archipiélago [S]
-- [x] Re-roll de ancla con la misma semilla ante solapamiento (máx 8 intentos) [C] — M27 **detecta**; el re-roll es de **M10** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. M27 **detecta** el solapamiento (`duplicados` en `validar_catalogo()`); el re-roll es de M10 (límite documentado).
-- [?] Log WARN con detalle de cada ancla re-rollada [S] — **M10**
-- [?] Log ERROR si tras 8 intentos no hay ancla válida (fallback: echar isla al anillo siguiente) [M] — **M10**
-- [?] Regeneración 80/0 de M10 produce anclas consistentes (test de regen) [C] — **M10**
-- [?] Estructuras ancladas de M10 respetan las islas (no generan dentro del mar) [M] — **M10**
+- [x] Re-roll de ancla con la misma semilla ante solapamiento (máx 8 intentos) [C] — M27 **detecta**; el re-roll es de **M10** — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. M27 **detecta** el solapamiento (`duplicados` en `validar_catalogo()`); el re-roll es de M10 (límite documentado).
+- [?] Log WARN con detalle de cada ancla re-rollada [S] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de re-roll/reroll/re_roll en scripts/islas ni world; no existe log WARN de ancla re-rollada.
+- [?] Log ERROR si tras 8 intentos no hay ancla válida (fallback: echar isla al anillo siguiente) [M] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): no existe log ERROR por intentos de ancla; INTENTOS_MAX=12 es de terreno_horizonte.gd (otro contexto, no anclas).
+- [?] Regeneración 80/0 de M10 produce anclas consistentes (test de regen) [C] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): test_generacion_m10_atria.gd cubre determinismo de regen de chunks/biomas/semilla, 0 hits de ancla; no hay test de consistencia de anclas.
+- [?] Estructuras ancladas de M10 respetan las islas (no generan dentro del mar) [M] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de validacion de estructuras contra agua/mar; island_props.gd solo declara props por PRNG.
 - [x] Semilla dev para tests deterministas de anclas [S] — `semilla_de_isla()` + layout de referencia del test
-- [?] Los NPC (M19) y POI de M09 se generan sobre el terreno de la isla ya anclado [M] — **M19/M09**
+- [?] Los NPC (M19) y POI de M09 se generan sobre el terreno de la isla ya anclado [M] — **M19/M09** | AUDIT 2026-10-13 (step-5-kilocode): NPC usan TerrainLocator.get_height() (shaman_npc.gd L27, incense_spawner.gd L161) pero no hay verificacion del contrato isla-ya-anclada ni tests de M19/M09 al respecto.
 
 ## E. IslandLoading — carga, descarga y streaming (M63)
 
 > **Bloque DELEGADO (iter. 1) — dueño M63:** `IslandLoading` depende del streaming y de los presupuestos de memoria de M63/M61. M27 ya expone lo que necesita (`coordenadas_por_isla()`, `vecinas()`, `punto_llegada_mundo()`, `punto_partida_mundo()`). Ítems marcados `[?]`.
 
-- [x] Create servicio IslandLoading separado del generador (no tocar M10) [S] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): `island_ops.gd`: cola de operaciones independiente de M10 (test_islas_m27_iter2.gd bloque A).
-- [x] cargar_isla(id, preferencia) -> bool con estados de progreso [C] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): `island_ops.encolar(tipo, isla, prioridad)` + `progreso()`/`info()` con estados pendiente/en_curso/hecha/cancelada/fallida (iter2 bloque B).
-- [?] Enum IslandPref { PRELOAD, DESCARGA } [S]
-- [x] Pesos de carga: losa 60%, props 25%, audio 10%, navmesh 5% [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): `ETAPAS = [losa, props, audio, navmesh]` y `PESOS = [0.60, 0.25, 0.10, 0.05]`; tests "pesos 60/25/10/5" y "los pesos suman 1.0".
-- [?] Emitir isla_cargando(id, progreso, etapa) en cada etapa [S]
-- [?] Emitir isla_cargada(id) al 100% [S]
-- [?] Emitir isla_descargada(id) al liberar [S]
-- [x] descargar_isla(id) nunca descarga Aurora (isla principal) [S] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): `debe_precargar()` excluye la isla actual; Aurora es `isla_principal()` del registro.
+- [x] Create servicio IslandLoading separado del generador (no tocar M10) [S] — verificado (step-5-kilocode, 2026-10-12, Log 1710): `island_ops.gd`: cola de operaciones independiente de M10 (test_islas_m27_iter2.gd bloque A).
+- [x] cargar_isla(id, preferencia) -> bool con estados de progreso [C] — verificado (step-5-kilocode, 2026-10-12, Log 1710): `island_ops.encolar(tipo, isla, prioridad)` + `progreso()`/`info()` con estados pendiente/en_curso/hecha/cancelada/fallida (iter2 bloque B).
+- [?] Enum IslandPref { PRELOAD, DESCARGA } [S] | AUDIT 2026-10-13 (step-5-kilocode): no existe enum IslandPref; la capacidad equivalente existe como TIPO_CARGA/TIPO_DESCARGA/TIPO_PRECARGA (island_ops.gd L27-29) y el enum de anillos es {NUCLEO,CERCANO,MEDIO,LEJANO} (island_ring.gd L17). El item tal como esta escrito no esta implementado.
+- [x] Pesos de carga: losa 60%, props 25%, audio 10%, navmesh 5% [M] — verificado (step-5-kilocode, 2026-10-12, Log 1710): `ETAPAS = [losa, props, audio, navmesh]` y `PESOS = [0.60, 0.25, 0.10, 0.05]`; tests "pesos 60/25/10/5" y "los pesos suman 1.0".
+- [?] Emitir isla_cargando(id, progreso, etapa) en cada etapa [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de signal isla_cargando; existe signal island_loaded(island) en event_bus.gd L120 pero sin progreso ni etapa.
+- [?] Emitir isla_cargada(id) al 100% [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de signal isla_cargada; existe signal island_loaded(island) en event_bus.gd L120 pero sin id de etapa ni 100%.
+- [?] Emitir isla_descargada(id) al liberar [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de signal isla_descargada; no existe señal de liberacion.
+- [x] descargar_isla(id) nunca descarga Aurora (isla principal) [S] — verificado (step-5-kilocode, 2026-10-12, Log 1710): `debe_precargar()` excluye la isla actual; Aurora es `isla_principal()` del registro.
 - [x] descargar_isla(id) nunca descarga la isla actual del jugador [S]
-- [?] cacheado(id) -> bool para evitar recargas [S]
-- [?] isla_actual() -> StringName rastreada por el servicio [S]
+- [?] cacheado(id) -> bool para evitar recargas [S] | AUDIT 2026-10-13 (step-5-kilocode): los 23 hits de 'cacheado' son de materiales/PRNG, ninguno es cacheado(id)->bool de islas.
+- [?] isla_actual() -> StringName rastreada por el servicio [S] | AUDIT 2026-10-13 (step-5-kilocode): los 9 hits de isla_actual son parametros de funciones de island_travel_guard.gd, no existe isla_actual()->StringName rastreada por un servicio.
 - [x] punto_de_llegada(id) -> Vector3 world-space del muelle [M]
 - [x] punto_de_partida(id) -> Vector3 world-space del embarque [M]
-- [x] Precarga de isla vecina al cruzar el borde de chunks (radio + RADIO_PRECARGA) [C] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): `island_travel_guard.debe_precargar(pos, isla_actual)` + `registry.vecinas(id)` (K1: precarga sin congelar).
-- [x] Descarga LRU bajo presión de memoria (M62) respetando candidatas [C] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): K9 descarga forzada por presión de memoria, verde en iter2.
-- [x] Carga asíncrona sin congelar el frame (threads de Voxel Tools + M63) [C] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): `MAX_OPS_POR_FRAME = 1` + K2 viaje con descarga en curso.
-- [?] Progreso real por pesos reportado a la pantalla de viaje (M28) [M]
-- [x] Si la carga falla (sin disco/red), log ERROR y mensaje cozy al jugador [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): `island_ops.fallar(motivo)` con estado FALLIDA e historial.
-- [x] El jugador nunca queda atrapado: fallback = seguir en la isla actual [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1710): K8 respawn cozy (iter2 bloque C).
+- [x] Precarga de isla vecina al cruzar el borde de chunks (radio + RADIO_PRECARGA) [C] — verificado (step-5-kilocode, 2026-10-12, Log 1710): `island_travel_guard.debe_precargar(pos, isla_actual)` + `registry.vecinas(id)` (K1: precarga sin congelar).
+- [x] Descarga LRU bajo presión de memoria (M62) respetando candidatas [C] — verificado (step-5-kilocode, 2026-10-12, Log 1710): K9 descarga forzada por presión de memoria, verde en iter2.
+- [x] Carga asíncrona sin congelar el frame (threads de Voxel Tools + M63) [C] — verificado (step-5-kilocode, 2026-10-12, Log 1710): `MAX_OPS_POR_FRAME = 1` + K2 viaje con descarga en curso.
+- [?] Progreso real por pesos reportado a la pantalla de viaje (M28) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de reporte de progreso por pesos a la pantalla de viaje; los pesos viven en IslandOps (prioridades) pero no hay consumo desde M28.
+- [x] Si la carga falla (sin disco/red), log ERROR y mensaje cozy al jugador [M] — verificado (step-5-kilocode, 2026-10-12, Log 1710): `island_ops.fallar(motivo)` con estado FALLIDA e historial.
+- [x] El jugador nunca queda atrapado: fallback = seguir en la isla actual [M] — verificado (step-5-kilocode, 2026-10-12, Log 1710): K8 respawn cozy (iter2 bloque C).
 
 ## F. IslandProps — contenido exclusivo por isla
 
 - [x] Create servicio IslandProps con registrar_spawner(tipo, callable) [S]
 - [x] materializar(isla, zona) que invoca spawners registrados [M]
-- [x] Spawn de flora endémica (contrato M50) solo en bioma de la isla [C] — M27 pasa `items`/`bounds`/`centro`; la colocación es del spawner de **M50** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1746): scripts en `scripts/islas/` + suite `test_islas_m27.gd` (171 checks) e `test_islas_m27_iter2.gd` (238 checks) en verde. `IslandProps.materializar()` pasa a los spawners el contexto `items` (de `isla.flora_endemica`), `bounds` (`isla.bounds_locales()`) y `centro` (`isla.centro_mundo()`) con la semilla por isla; el filtrado por bioma es del spawner de M50 (límite documentado).
-- [?] Spawn de fauna endémica (contrato M36) dentro de los bounds de la isla [C] — **M36**
-- [?] Spawn de recursos exclusivos (contrato M15) en zonas deterministas [M] — **M15**
-- [?] Spawn de POI (muelle, plaza, faro, templo, mirador) consumidos por M64 [M] — **M64**
+- [x] Spawn de flora endémica (contrato M50) solo en bioma de la isla [C] — M27 pasa `items`/`bounds`/`centro`; la colocación es del spawner de **M50** — verificado (step-5-kilocode, 2026-10-12, Log 1746): scripts en `scripts/islas/` + suite `test_islas_m27.gd` (171 checks) e `test_islas_m27_iter2.gd` (238 checks) en verde. `IslandProps.materializar()` pasa a los spawners el contexto `items` (de `isla.flora_endemica`), `bounds` (`isla.bounds_locales()`) y `centro` (`isla.centro_mundo()`) con la semilla por isla; el filtrado por bioma es del spawner de M50 (límite documentado).
+- [?] Spawn de fauna endémica (contrato M36) dentro de los bounds de la isla [C] — **M36** | AUDIT 2026-10-13 (step-5-kilocode): el campo fauna_endemica existe (island_definition.gd L60, generar_islas.gd L128, island_props.gd L121) pero no hay spawn dentro de bounds con contrato M36 verificado.
+- [?] Spawn de recursos exclusivos (contrato M15) en zonas deterministas [M] — **M15** | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de spawn de recursos exclusivos de M15 en la isla; los unicos 'zonas' son de CombatIslandSystem (otro modulo).
+- [?] Spawn de POI (muelle, plaza, faro, templo, mirador) consumidos por M64 [M] — **M64** | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de catalogo de POI (muelle/plaza/faro/templo/mirador) para islas; los hits de plaza/faro son de rutinas NPC e historias, no de M64.
 - [x] limpiar(id) libera props al descargar la isla [M]
-- [?] Los props no se generan en el mar (zona acuática M51) [S] — el recorte contra el mar es del spawner / **M51**
+- [?] Los props no se generan en el mar (zona acuática M51) [S] — el recorte contra el mar es del spawner / **M51** | AUDIT 2026-10-13 (step-5-kilocode): island_props.gd no valida agua/mar; el comentario L126 delega el recorte al spawner/M51, sin implementacion visible.
 - [x] Determinismo: misma semilla genera los mismos props (PRNG por isla) [M]
 - [x] Los props de islas lejanas no se spawnan hasta que la isla se carga [S] — `materializar()` se niega sin ancla
 
@@ -122,31 +122,31 @@
 
 > **Bloque DELEGADO (iter. 1) — dueño M28:** el barco, la travesía y la pantalla de viaje son de M28. Ítems marcados `[?]`.
 
-- [?] Contrato: M28 consulta posicion_ancla(destino) para trazar la ruta [M]
-- [?] Embarque: jugador en punto_partida → M28 inicia travesía [M]
-- [?] Pantalla de viaje muestra progreso real de IslandLoading (M63) [M]
-- [?] Desembarco posiciona al jugador en punto_de_llegada(destino) [M]
-- [?] Al desembarcar se marca la isla como visitada (M59/M54) [S]
-- [?] Regreso a Aurora gratis desde cualquier muelle (anti-frustración) [S]
-- [?] Viajes estacionales/de expedición consultan calendario M29 [C]
-- [?] Viajes nocturnos y estacionales respetan clima (M32) y hora (M31) [M]
-- [?] Boleto/requisitos (M28) no bloquean el regreso a Aurora [S]
-- [?] NPC viajeros (M28) respetan la isla cargada (spawn solo si su isla activa) [M]
-- [?] El barco no atraca en islas sin desbloqueo (anillo LEJANO) [M]
-- [?] Si la isla destino ya está cacheada, la travesía se salta la carga (inmediato) [M]
+- [?] Contrato: M28 consulta posicion_ancla(destino) para trazar la ruta [M] | AUDIT 2026-10-13 (step-5-kilocode): posicion_ancla() esta expuesta y testeada por la suite propia de M27 (test_islas_m27.gd L274) y citada en island_design_catalog.gd L97, pero M28/viaje no la consume (0 llamadores fuera de M27).
+- [?] Embarque: jugador en punto_partida → M28 inicia travesía [M] | AUDIT 2026-10-13 (step-5-kilocode): evidencia parcial en 2 modulos: punto_partida_mundo() (island_definition.gd L114) lo consume island_travel_guard.gd L118 y hay test (test_islas_m27.gd L525-526); M28 tiene request_travel() (viajes/travel_service.gd L101). La cadena completa embarque->travesia no esta verificada como unidad.
+- [?] Pantalla de viaje muestra progreso real de IslandLoading (M63) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de progreso real de IslandLoading hacia la pantalla de viaje; M63 no aparece como proveedor de progreso.
+- [?] Desembarco posiciona al jugador en punto_de_llegada(destino) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de punto_de_llegada en todo scripts/islas/.
+- [?] Al desembarcar se marca la isla como visitada (M59/M54) [S] | AUDIT 2026-10-13 (step-5-kilocode): marcar_visitada() existe (island_registry.gd L367, con nota M59/M54) pero tiene 0 llamadores: nunca se invoca al desembarcar.
+- [?] Regreso a Aurora gratis desde cualquier muelle (anti-frustración) [S] | AUDIT 2026-10-13 (step-5-kilocode): ID_PRINCIPAL=aurora existe (island_travel_guard.gd L31) pero no hay logica de regreso gratis desde cualquier muelle.
+- [?] Viajes estacionales/de expedición consultan calendario M29 [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de estacional/temporada en islas/; no hay consulta al calendario M29.
+- [?] Viajes nocturnos y estacionales respetan clima (M32) y hora (M31) [M] | AUDIT 2026-10-13 (step-5-kilocode): clima_tendencia es solo dato (generar_islas.gd L124); no hay consumo de M32/M31 en el flujo de viaje.
+- [?] Boleto/requisitos (M28) no bloquean el regreso a Aurora [S] | AUDIT 2026-10-13 (step-5-kilocode): el flag de requisito existe (island_definition.gd L75, M22 via WorldState) pero no hay logica de boleto que-blquee/no-bloquee el regreso.
+- [?] NPC viajeros (M28) respetan la isla cargada (spawn solo si su isla activa) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de spawn condicionado de NPC viajeros a la isla activa.
+- [?] El barco no atraca en islas sin desbloqueo (anillo LEJANO) [M] | AUDIT 2026-10-13 (step-5-kilocode): esta_desbloqueada() existe y esta testeada (island_registry.gd L404, test_islas_m27.gd L417-420) pero tiene 0 llamadores en produccion: ni travel_service ni el guard la consultan para atracar.
+- [?] Si la isla destino ya está cacheada, la travesía se salta la carga (inmediato) [M] | AUDIT 2026-10-13 (step-5-kilocode): no existe la constante OCEANO_ALTURA; equivalentes: NIVEL_MAR=0.0 configurable (island_travel_guard.gd L32/L56) y nivel de mar deterministico validado en validate_water.gd L19 (RF2). El nombre del item no esta implementado.
 
 ## H. Integración con M51 — Agua y océano
 
 > **Bloque DELEGADO (iter. 1) — dueño M51:** el océano, las profundidades y la espuma son de M51. Ítems marcados `[?]`.
 
-- [?] Nivel de mar global definido (OCEANO_ALTURA) en el mundo voxel [M]
-- [?] El agua entre islas es navegable por barco (no bloqueo invisible) [C]
-- [?] Profundidades por isla: arrecife poco profundo de Coral, fosa de Submarina [M]
-- [?] Espuma de costas (M51) presente en playas de cada isla [S]
-- [?] Corrientes de M51 no llevan el barco fuera de los bounds del archipiélago [C]
+- [?] Nivel de mar global definido (OCEANO_ALTURA) en el mundo voxel [M] | AUDIT 2026-10-13 (step-5-kilocode): island_design_catalog.gd L102 declara el oceanico navegable (RF4) pero delega barco/navegacion a otro modulo; no hay implementacion de navegacion entre islas.
+- [?] El agua entre islas es navegable por barco (no bloqueo invisible) [C] | AUDIT 2026-10-13 (step-5-kilocode): SHALLOW_WATER existe como bloque (M08) pero no hay profundidades por isla (arrecife Coral / fosa Submarina) configuradas.
+- [?] Profundidades por isla: arrecife poco profundo de Coral, fosa de Submarina [M] | AUDIT 2026-10-13 (step-5-kilocode): la espuma existe en el plano de agua global de M51 (agua_animada.gd L5, espuma_orilla L17-20) pero no esta verificada playa por playa de cada isla.
+- [?] Espuma de costas (M51) presente en playas de cada isla [S] | AUDIT 2026-10-13 (step-5-kilocode): validate_water.gd L17 valida deriva de corriente acotada (RF14/O.106, CURRENT_DRIFT_MAX=0.3) pero no hay evidencia de que el barco no salga de los bounds del archipielago.
+- [?] Corrientes de M51 no llevan el barco fuera de los bounds del archipiélago [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de congelacion/inundacion de agua dentro de islas; los hits de 'congela' son de pausas/tiempo, no de agua.
 - [?] El agua no se congela ni inunda dentro de las islas salvo eventos M32 [M]
-- [?] La isla Flotante y las del Cielo no tienen océano debajo (es_flotante) [S]
-- [?] Los sonidos del mar (M42) cambian según distancia a la isla más cercana [M]
+- [x] La isla Flotante y las del Cielo no tienen océano debajo (es_flotante) [S] | PROMOVIDO [x] 2026-10-13 (step-5-kilocode, Patron D): es_flotante implementado y verificado — campo en island_definition.gd L74 (comentario L73 'sin oceano debajo'), logica en island_travel_guard.gd L208-215 ('debajo de isla flotante: vacio, no oceano'), validacion de punto de llegada en island_definition.gd L168-169 y test dedicado test_islas_m27_iter2.gd L354 ('bajo una isla flotante NO hay oceano, diseno H').
+- [?] Los sonidos del mar (M42) cambian según distancia a la isla más cercana [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de interaccion agua-puzzles (M23/M24) condicionada a isla cargada.
 - [?] El agua interactúa con puzzles de islas (M23/M24) solo isla cargada [M]
 - [?] Rendimiento del océano: shader de agua (M51) presupuestado por M61 [C]
 
@@ -166,8 +166,8 @@
 - [x] Guardar islas_descubiertas (PackedStringArray) en GameState M59 [M]
 - [x] Guardar islas_visitadas (PackedStringArray) en GameState M59 [M]
 - [x] Al cargar partida, el registro restaura descubrimiento/visita [M] — round-trip verificado
-- [x] El mapa (M54) marca islas descubiertas y visitadas [S] — M27 expone `visible_en_mapa`/`esta_descubierta`; el pintado es de **M54** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1746): scripts en `scripts/islas/` + suite `test_islas_m27.gd` (171 checks) e `test_islas_m27_iter2.gd` (238 checks) en verde. `IslandRegistry.esta_descubierta()`/`esta_visitada()` + señal `isla_descubierta`; `descubrir()` devuelve true solo la primera vez (para el toast de M54). El pintado del mapa es de M54.
-- [x] Islas secretas ocultas en el mapa hasta descubrirlas [S] — lógica en M27, pintado en **M54** — verificado (stepfun-step-5-preview, 2026-10-12, Log 1746): scripts en `scripts/islas/` + suite `test_islas_m27.gd` (171 checks) e `test_islas_m27_iter2.gd` (238 checks) en verde. `IslandRegistry.visible_en_mapa(id)` devuelve false mientras la isla sea secreta y no este descubierta; testeado en `test_islas_m27.gd` ("visible_en_mapa(secreta) == false sin descubrir" y "== true tras descubrir").
+- [x] El mapa (M54) marca islas descubiertas y visitadas [S] — M27 expone `visible_en_mapa`/`esta_descubierta`; el pintado es de **M54** — verificado (step-5-kilocode, 2026-10-12, Log 1746): scripts en `scripts/islas/` + suite `test_islas_m27.gd` (171 checks) e `test_islas_m27_iter2.gd` (238 checks) en verde. `IslandRegistry.esta_descubierta()`/`esta_visitada()` + señal `isla_descubierta`; `descubrir()` devuelve true solo la primera vez (para el toast de M54). El pintado del mapa es de M54.
+- [x] Islas secretas ocultas en el mapa hasta descubrirlas [S] — lógica en M27, pintado en **M54** — verificado (step-5-kilocode, 2026-10-12, Log 1746): scripts en `scripts/islas/` + suite `test_islas_m27.gd` (171 checks) e `test_islas_m27_iter2.gd` (238 checks) en verde. `IslandRegistry.visible_en_mapa(id)` devuelve false mientras la isla sea secreta y no este descubierta; testeado en `test_islas_m27.gd` ("visible_en_mapa(secreta) == false sin descubrir" y "== true tras descubrir").
 - [x] Reintentar regen 80/0 no pierde progreso de islas (persistencia aparte) [C] — sección `islas` independiente del mundo voxel
 
 ## K. Edge cases
@@ -191,17 +191,17 @@
 
 > **Bloque DELEGADO (iter. 1) — dueño M61/M62:** los presupuestos de memoria/frame y el LRU son de M61/M62. Ítems marcados `[?]`.
 
-- [x] Máximo 2 islas completas en memoria a la vez [C] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandTravelGuard.MAX_ISLAS_EN_MEMORIA = 2` con `TOPE_MEMORIA_MB = 2048` (presupuesto de memoria del diseño).
+- [x] Máximo 2 islas completas en memoria a la vez [C] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandTravelGuard.MAX_ISLAS_EN_MEMORIA = 2` con `TOPE_MEMORIA_MB = 2048` (presupuesto de memoria del diseño).
 - [?] Aurora siempre cargada pero con streaming fino de chunks lejanos [M]
-- [x] Metadatos (definiciones) livianos: sin cargar voxel de islas lejanas [S] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. el registro solo carga `IslandDefinition` (datos puros); los voxels los escribe `IslandOps` por etapas (`ETAPAS = [losa, props, audio, navmesh]`).
+- [x] Metadatos (definiciones) livianos: sin cargar voxel de islas lejanas [S] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. el registro solo carga `IslandDefinition` (datos puros); los voxels los escribe `IslandOps` por etapas (`ETAPAS = [losa, props, audio, navmesh]`).
 - [x] LRU con tope de memoria configurado por M62 [C]
-- [x] Sin allocs grandes en el hot path de búsqueda de vecinas [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandOps.MAX_OPS_POR_FRAME = 1` (presupuesto de "no congelar el frame") y `debe_precargar(pos, isla, presupuesto)` que por defecto respeta ese tope.
-- [x] Búsquedas de vecinas con índice espacial (grid por anillo) [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandRegistry.vecinas(id, corte_anillo)` filtra por anillo sobre el catálogo (`corte_anillo`), usado por `debe_precargar()`.
-- [x] Carga de props por etapas (sin picos) [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandOps.ETAPAS` / `PESOS = [0.60, 0.25, 0.10, 0.05]`: la carga se reparte en 4 etapas con peso, y `progreso_hasta(etapa)` las acumula.
+- [x] Sin allocs grandes en el hot path de búsqueda de vecinas [M] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandOps.MAX_OPS_POR_FRAME = 1` (presupuesto de "no congelar el frame") y `debe_precargar(pos, isla, presupuesto)` que por defecto respeta ese tope.
+- [x] Búsquedas de vecinas con índice espacial (grid por anillo) [M] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandRegistry.vecinas(id, corte_anillo)` filtra por anillo sobre el catálogo (`corte_anillo`), usado por `debe_precargar()`.
+- [x] Carga de props por etapas (sin picos) [M] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `IslandOps.ETAPAS` / `PESOS = [0.60, 0.25, 0.10, 0.05]`: la carga se reparte en 4 etapas con peso, y `progreso_hasta(etapa)` las acumula.
 - [?] Precalentamiento en el menú (M63): cachea Aurora al boot [M]
 - [?] Telemetría de carga (M105): tiempos por isla, memoria, errores [C]
 - [?] Profiling: la carga de la isla más grande cabe en frame budget M61 [C]
-- [x] La precarga de vecinas no inicia si la GPU está al límite (M61) [C] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `debe_precargar(pos_jugador, isla_actual, presupuesto)` devuelve como máximo `MAX_OPS_POR_FRAME` ids, de modo que la precarga nunca desborda el frame.
+- [x] La precarga de vecinas no inicia si la GPU está al límite (M61) [C] — verificado (step-5-kilocode, 2026-10-12, Log 1736): `scripts/islas/island_ops.gd` + `island_travel_guard.gd`, suites `test_islas_m27_iter2.gd` (238 checks) y `test_islas_headless.gd` (5 checks) en verde. `debe_precargar(pos_jugador, isla_actual, presupuesto)` devuelve como máximo `MAX_OPS_POR_FRAME` ids, de modo que la precarga nunca desborda el frame.
 - [x] Los .tres usan PackedStringArray (serialización compacta M60) [S]
 
 ## M. Documentación y logs
@@ -321,7 +321,7 @@ Los `93 [?]` quedan intactos: son de M63/M61, M10, M54, M50/M36/M15/M23/M19 y M2
 
 **Totales:** 192 ítems · Completados: 126 · Pendientes: 0 · No resueltos: 66. (Corregido por director 2026-10-12: conteo real disco 126/66; agnes reportó 99, Totales decía 121/71)
 
-> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1710):** +10 [?] -> [x] en el barrido autorizado (msg 158). Evidencia: 3 suites verdes (`test_islas_headless.gd` 5 + `test_islas_m27.gd` 171 + `test_islas_m27_iter2.gd` 238 = **414 checks, 0 fallos**) + APIs confirmadas en `scripts/islas/`.
+> **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1710):** +10 [?] -> [x] en el barrido autorizado (msg 158). Evidencia: 3 suites verdes (`test_islas_headless.gd` 5 + `test_islas_m27.gd` 171 + `test_islas_m27_iter2.gd` 238 = **414 checks, 0 fallos**) + APIs confirmadas en `scripts/islas/`.
 > **Quedan [?] a propósito:** las señales `isla_cargando/cargada/descargada` (E92-E94) no existen como signals (el progreso se consulta con `progreso()`/`info()`, no se emite); `IslandPref` (E90) son constantes `StringName`, no un enum; y los items atribuidos a otros módulos en sus propias notas (M10, M15, M19, M25, M26, M28, M36, M51, M62, M64).
 > **Totales:** 109 [x] / 83 [?] / 0 [ ] = 192 items.
 
