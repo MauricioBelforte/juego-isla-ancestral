@@ -62,3 +62,24 @@
 - **Unity + asset voxel de pago:** costo anual + dependencia comercial; solo si hubiera presupuesto de contratación.
 - **Unreal + Custom Voxel:** demasiado motor para el género; curva y tasa eliminatorias.
 - **Motor propio voxel**: descartado (reinventar el mundo; plan-producción no lo contempla).
+
+## 6. Verificación de costos y licencias — sección B del checklist (2026-10-12, step 5 workbuddy)
+
+Auditoría de los 10 ítems de la sección B (`05-Checklist.md`, líneas 35-44) contra evidencia
+en disco. Cada flip del checklist cita esta sección.
+
+| # | Ítem | Evidencia (archivo + línea) |
+|---|---|---|
+| B1 | Costo Godot: gratis siempre, MIT, sin regalías | Este archivo L15 ("gratis (MIT), sin regalías") y L45 ("Gratis siempre"). Fuente primaria: godotengine.org/license (MIT, "free to use... for any purpose", verificado 2026-10-12) |
+| B2 | Costo Unity: gratis < USD 200k, Pro ~USD 2.300/asiento/año | Este archivo L45: "Gratis < USD 200k; Pro ~USD 2.300/año" (tabla comparativa §3) |
+| B3 | Episodio Runtime Fee 2023 y su cancelación | `DOCUMENTACION/00-PLAN-INICIAL/Plan-de-produccion.md` L100: "El 'Runtime Fee' de 2023 generó una fuga masiva a Godot/Unreal; Unity lo canceló por completo en septiembre de 2024 y volvió al modelo por asiento" |
+| B4 | Caso Unreal: 5% tras USD 1M de ingresos | Este archivo L16 ("tasa del 5%"). Umbral verificado 2026-10-12 en fuente oficial unrealengine.com/release: "5% royalty on worldwide gross revenue over the first $1 million USD" |
+| B5 | Modelo autofinanciado compatible con Godot | `01-Requerimientos.md` L23 (RF5 "Costo cero o bajo — autofinanciado sin presupuesto asegurado") y L30 (RNF "Sin regalías ni fee por instalación que pongan en riesgo el modelo autofinanciado"), cruzado con este archivo L15 |
+| B6 | Costos de assets/plugins a futuro (presupuesto separado) | `DOCUMENTACION/00-PLAN-INICIAL/Plan-de-produccion.md` §15 "Presupuesto y financiamiento" (L420) y L271 (middleware FMOD/Wwise: licencias gratuitas bajo umbrales, confirmar umbral vigente) |
+| B7 | Voxel Tools es MIT y gratuito | `game/isla-ancestral/addons/zylann.voxel/LICENSE.md` L1-3 ("MIT License — Copyright (c) 2016-2024 Marc Gilleron"); refuerzo: este archivo L56 |
+| B8 | Licencias de exportación sin fees (Vulkan/drivers) | Motor MIT (B1: godotengine.org/license) => exportar no arrastra fee. Drivers de video Vulkan/OpenGL: bibliotecas del sistema operativo, sin licencia con costo. Evidencia de exportación real en el repo: `build/` (`.pck` + `.wasm` distribuibles) |
+| B9 | Costo cero como factor decisivo del análisis | `DOCUMENTACION/00-PLAN-INICIAL/Plan-de-produccion.md` L111: "el costo cero pase lo que pase con tus ingresos... son dos ventajas que pesan mucho para un equipo con recursos limitados" |
+| B10 | Costo de herramientas de apoyo registrado en módulo de arte | `DOCUMENTACION/46-Arte-2D/plan-actual/02-Analisis.md` L43 ("Herramientas: Inkscape (gratuita), Krita (pintura), Blender solo como soporte 3D→2D") |
+
+Nota de método: los ítems B4 y B8 combinan cita interna (este archivo / addon) con verificación
+de fuente externa oficial fechada (2026-10-12). Sin fuente externa no se escribió el dato.

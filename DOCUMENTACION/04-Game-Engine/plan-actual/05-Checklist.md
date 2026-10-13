@@ -32,16 +32,16 @@
 
 ## B. Costos y licencias (10)
 
-- [ ] Documentar costo Godot: gratis siempre, MIT, sin regalías [S]
-- [ ] Documentar costo Unity: gratis < USD 200k, Pro ~USD 2.300/asiento/año [S]
-- [ ] Documentar el episodio Runtime Fee 2023 y su cancelación (contexto) [S]
-- [ ] Documentar el caso Unreal: 5% tras USD 1M de ingresos [S]
-- [ ] Verificar que el modelo autofinanciado es compatible con Godot [S]
-- [ ] Documentar costos de assets/plugins a futuro (presupuesto separado) [S]
-- [ ] Documentar que Voxel Tools es MIT y gratuito [S]
-- [ ] Verificar licencias de exportación (Vulkan/video drivers no requieren fees) [S]
-- [ ] Documentar el costo cero como factor decisivo del análisis [S]
-- [ ] Registrar el costo de herramientas de apoyo (Blender gratis, etc.) en módulo de arte [S]
+- [x] Documentar costo Godot: gratis siempre, MIT, sin regalías [S] (cita: 02-Analisis.md L15 y L45; fuente godotengine.org/license verificada 2026-10-12 — ver §6 B1)
+- [x] Documentar costo Unity: gratis < USD 200k, Pro ~USD 2.300/asiento/año [S] (cita: 02-Analisis.md L45, tabla comparativa §3 — ver §6 B2)
+- [x] Documentar el episodio Runtime Fee 2023 y su cancelación (contexto) [S] (cita: Plan-de-produccion.md L100 — ver §6 B3)
+- [x] Documentar el caso Unreal: 5% tras USD 1M de ingresos [S] (cita: 02-Analisis.md L16 + umbral verificado en unrealengine.com/release 2026-10-12 — ver §6 B4)
+- [x] Verificar que el modelo autofinanciado es compatible con Godot [S] (cita: 01-Requerimientos.md L23 RF5 y L30 RNF cruzados con 02-Analisis.md L15 — ver §6 B5)
+- [x] Documentar costos de assets/plugins a futuro (presupuesto separado) [S] (cita: Plan-de-produccion.md §15 L420 + L271 middleware — ver §6 B6)
+- [x] Documentar que Voxel Tools es MIT y gratuito [S] (cita: game/isla-ancestral/addons/zylann.voxel/LICENSE.md L1-3 — ver §6 B7)
+- [x] Verificar licencias de exportación (Vulkan/video drivers no requieren fees) [S] (cita: motor MIT (§6 B1) + exportación real en build/ (.pck/.wasm) — ver §6 B8)
+- [x] Documentar el costo cero como factor decisiva del análisis [S] (cita: Plan-de-produccion.md L111 — ver §6 B9)
+- [x] Registrar el costo de herramientas de apoyo (Blender gratis, etc.) en módulo de arte [S] (cita: 46-Arte-2D/plan-actual/02-Analisis.md L43 — ver §6 B10)
 
 ## C. Soporte voxel y rendimiento (14)
 
@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 128 ítems · Completados: 14 · Pendientes: 114 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
+**Totales:** 128 ítems · Completados: 24 · Pendientes: 104 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 
