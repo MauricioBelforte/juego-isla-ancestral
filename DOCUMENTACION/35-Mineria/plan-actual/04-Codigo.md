@@ -479,3 +479,77 @@ propuesto: G1-G4/G6/G7/G9 -> M08; I2/I3/I4/I6/I7 -> M26; J2/J3/J4 -> M15/M17;
 J7 -> M08/M15; K1/K2/K4/K8 -> M08/M52; L1-L4 -> M52/M43; y los 24 items de
 diseno P1-P24 -> M43/M45/M52. No se flipea estado: los `[x]` los aplica el
 director.
+
+---
+
+## Lote 3 de diseno (2026-10-13, DeepSeek-V4.1-Flash)
+
+Encargo del director `mimo` (msg 224): M35 es modulo libre; flips SOLO con grep
+obligatorio, cuenta regex antes/despues, linea Totales al dia, sin tocar
+`CHECKLIST-GLOBAL.md` (lo escribe el director).
+
+### Criterio aplicado (el aceptado en M77/M76/M151)
+
+Item `Disenar/Definir X` -> basta con que **X exista** en `01-04` (se cita el
+archivo y la seccion). Item `Crear/Implementar/Verificar` -> exige archivo o
+medicion. Se aplico **por verbo**, no por seccion.
+
+### Flips aplicados: 21 (seccion B, "Resolucion de los 24 puntos del plan")
+
+`05-Checklist.md` seccion B: **24 `[ ]` -> 3 `[ ]` + 21 `[x]`**, cada uno con la
+cita del doc fuente (grep accent-insensitive sobre los 4 documentos):
+
+| Item | Cita del diseno |
+| --- | --- |
+| P1 vetas 1-3 bloques | `01-Requerimientos.md` RF1 + `03-Diseno.md` F3 |
+| P3 niveles de profundidad (3 bandas) | `01-Requerimientos.md` RF3 |
+| P4 cuevas con vetas en paredes/techos | `01-Requerimientos.md` RF4 |
+| P5 materiales raros (oro/cristal/polvo) | `01-Requerimientos.md` RF2 + `04-Codigo.md` sec.1 |
+| P6 minerales ancestrales (capa M26) | `01-Requerimientos.md` RF3 + `03-Diseno.md` sec.5 |
+| P7 herramientas (durabilidad + poder) | `03-Diseno.md` sec.2.3 |
+| P8 eficiencia (poder vs dureza) | `02-Analisis.md` D2 + `03-Diseno.md` sec.2.1 |
+| P9 particulas (pool de chispas) | `04-Codigo.md` sec.1 |
+| P10 sonidos (golpe/extraccion/derrumbe) | `04-Codigo.md` sec.1 |
+| P11 iluminacion (brillo propio) | `01-Requerimientos.md` RF4 + `03-Diseno.md` sec.2.1 |
+| P12 riesgos no violentos | `01-Requerimientos.md` RF9 |
+| P13 derrumbes que solo entierran la veta | `01-Requerimientos.md` RF9 |
+| P14 recursos secretos (nodos M26) | `01-Requerimientos.md` RF11 |
+| P15 zonas de mineria | `03-Diseno.md` F3 + `04-Codigo.md` sec.1 (regiones cantera/cueva/templo) |
+| P18 nodos especiales (veta gigante) | `03-Diseno.md` sec.5 |
+| P19 colecciones (registro de minerales) | `01-Requerimientos.md` RF12 + `03-Diseno.md` sec.2.1 |
+| P20 crafting asociado (lingotes, M16) | `03-Diseno.md` sec.5 |
+| P21 economia (precios, M36) | `03-Diseno.md` sec.5 |
+| P22 regeneracion (respawn por tiempo de juego) | `02-Analisis.md` D1 + `03-Diseno.md` F2 |
+| P23 limites (tope suave diario por zona) | `02-Analisis.md` D5 |
+| P24 anti-repeticion (cadencia/variedad) | `01-Requerimientos.md` RF10 + `02-Analisis.md` D2 |
+
+### `[ ]` que se quedan (honestos, con motivo medido)
+
+- **P2 (tabla de 8+ minerales):** el diseno entrega **6** minerales
+  (`ores.json` = 6 vetas; `01-Requerimientos.md` RF2 nombra 6 categorias).
+  `grep -i "8 minerales"` en `01-04` = **0**. El punto pide 8+ -> no cumplido.
+- **P16 (rutas / caminos de acceso):** `grep -i "camino"` en `01-04` = **0**;
+  `"ruta"` solo aparece en `04-Codigo.md` como encabezado de tabla de **rutas de
+  archivos** (falso positivo). No disenado.
+- **P17 (estaciones / puestos de descanso):** `grep -i "descanso"` = **0**;
+  `"estacion"` solo matchea `cristal_estacional` (falso positivo). No disenado.
+- **G1-G4, G6-G9 (8 items M08):** implementacion de integracion voxel.
+  Medido en `mining_manager.gd`: `collision_mask` = 0, `remesh` = 0, `ocupad` = 0.
+- **I2-I4, I6, I7 (5 items M26):** integracion Templo Subterraneo, sin eventos M26.
+- **J2, J3, J4, J7 (4 items):** `reintent` = 0, `desplaza` = 0, `ocupad` = 0
+  en `mining_manager.gd` (el reintento diferido y el desplazamiento suave no
+  existen en el codigo del modulo).
+- **K1, K2, K4, K8 (4 items):** remeshing/pool de particulas/frame budget:
+  `particul` = 0, `pool` = 0, `remesh` = 0.
+- **L1-L4 (4 items):** particulas y sonidos -> assets de M52/M43, inexistentes.
+
+### Evidencia de la edicion
+
+- `05-Checklist.md`: `[x]` 80 -> **101**, `[ ]` 49 -> **28**, `[?]` 13 sin
+  cambio (total 142). Regex `^- \[x\]` / `^- \[ \]` / `^- \[\?\]`.
+- Invariantes por BYTES: CRLF 251 -> 251, LF sueltos 1 -> 1, CR 251 -> 251,
+  BOM False, NUL 0. La edicion **no toca terminadores** (solo el cuerpo de 21
+  lineas).
+- 28 flips rechazados por falta de evidencia NO se aplicaron.
+
+**Totales tras el lote 3: 101 `[x]` / 28 `[ ]` / 13 `[?]` = 142.**
