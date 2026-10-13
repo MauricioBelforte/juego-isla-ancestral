@@ -343,7 +343,7 @@
 - `test_logros_m72_statids.gd` → **9 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`**.
 - `test_logros.gd` → **0 fallos, exit 0** (1 `SCRIPT ERROR` ajeno de M39 al boot).
 
-**Totales:** 185 ítems · Completados: 31 · Pendientes: 151 · No resueltos: 3.
+**Totales:** 185 ítems · Completados: 77 · Pendientes: 105 · No resueltos: 3. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: la línea decía 31/151/3; conteo real por regex = 77 [x] / 3 [?] / 105 [ ]. Drift de 46 arrastrado desde el Log 1730, donde se flippearon +20 sin actualizar Totales.)
 
 > **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1730):** +20 [ ] -> [x] en el lote B+E de M72 (msg 175).
 > **Catálogo RF1:** `data/logros/logros.json` pasó de 11 a **17 logros** con los campos que faltaban (`nombre_i18n`, `descripcion_i18n`, `icono`, `categoria`, `orden`, `logro_steam_id`) y las **7 categorías** del vocabulario. También se corrigió mojibake heredado (`Guardiá­a` -> `Guardián`).

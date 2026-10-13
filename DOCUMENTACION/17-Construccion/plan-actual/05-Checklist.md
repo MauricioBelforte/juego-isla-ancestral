@@ -241,7 +241,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 175 ítems · Completados: 80 · Pendientes: 94 · No resueltos: 1.
+**Totales:** 175 ítems · Completados: 81 · Pendientes: 93 · No resueltos: 1. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: la línea decía 80/94/1; conteo real por regex = 81 [x] / 1 [?] / 93 [ ]. Drift de 1.)
 
 > **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1732):** +4 [ ] -> [x] con utilidades de rejilla y `copiar_pieza` (msg 179).
 > **Nuevo:** `ConstruccionMundo.mundo_desde_celda/celda_desde_mundo/esquina_desde_celda` (estáticas, única utilidad compartida del módulo) y `BuildManager.copiar_pieza()` + `BuildHistory.TIPO_COPIAR`.
