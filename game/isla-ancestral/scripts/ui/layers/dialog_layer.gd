@@ -30,7 +30,10 @@ var _char_index: int = 0
 var _typing_timer: Timer
 
 func _ready() -> void:
-	layer_type = UILayerType.Type.MODAL_FULL
+	# FIX 2026-10-12 (stepfun-step-5-preview, orden del director mimo msg 243):
+# estaba MODAL_FULL, invertido con InventoryLayer. Los dialogos deben pausar el
+# reloj pero dejar el mundo visible (ui_layer_type.gd).
+	layer_type = UILayerType.Type.MODAL_SIMPLE
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	_crear_ui()
 	_crear_typing_timer()

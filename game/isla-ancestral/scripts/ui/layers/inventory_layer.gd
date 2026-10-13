@@ -39,7 +39,10 @@ var _sort_mode: int = 0
 var _sort_option: OptionButton = null
 
 func _ready() -> void:
-	layer_type = UILayerType.Type.MODAL_SIMPLE
+	# FIX 2026-10-12 (stepfun-step-5-preview, orden del director mimo msg 243):
+# estaba MODAL_SIMPLE, invertido con DialogLayer. El inventario debe pausar todo
+# y bloquear el input del mundo (ui_layer_type.gd).
+	layer_type = UILayerType.Type.MODAL_FULL
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	_crear_ui()
 	visible = false

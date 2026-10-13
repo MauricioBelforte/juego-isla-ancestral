@@ -7080,3 +7080,71 @@ colector 920 preloads / **0 SCRIPT ERROR**; full load **0 SCRIPT ERROR**.
 persistencia [M]"). No se debilito ningun test; se corrigio el CODIGO.
 
 **Descubierto por:** DeepSeek-V4.1-Flash en T-D5 (auditoria contra disco de M120, mensaje 24 del director).
+
+
+---
+
+### BUG-134 — DialogLayer e InventoryLayer tenían el `layer_type` intercambiado
+
+- **Fecha de reporte:** 2026-10-12 22:46
+- **Módulo(s) afectado(s):** M53-UI-UX — `scripts/ui/layers/dialog_layer.gd:33`,
+  `scripts/ui/layers/inventory_layer.gd:42`
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Resuelto
+
+**Modelo:** stepfun-step-5-preview
+**Plataforma:** Kilo Code
+
+**Descripción del problema:**
+
+Las dos capas tenían el tipo de modalidad invertido respecto de la semántica definida
+en `scripts/ui/core/ui_layer_type.gd`:
+
+```
+MODAL_SIMPLE: pausa el reloj pero el mundo sigue visible (diálogos)
+MODAL_FULL:   pausa total, bloquea input del mundo (inventario, pausa)
+```
+
+Pero el código tenía:
+
+| Archivo | Tenía | Debía ser |
+|---|---|---|
+| `dialog_layer.gd` | `MODAL_FULL` | `MODAL_SIMPLE` |
+| `inventory_layer.gd` | `MODAL_SIMPLE` | `MODAL_FULL` |
+
+**Impacto:** al abrir un diálogo se pausaba todo el mundo cuando el diseño pide que
+siga visible; y al abrir el inventario no se bloqueaba el input del mundo cuando el
+diseño pide pausa total. Es decir, exactamente al revés de lo jugable.
+
+**Pasos para reproducir:**
+
+1. Iniciar el juego y entrar al mundo.
+2. Hablar con un NPC → se abre `DialogLayer`.
+3. Observar que el mundo queda pausado (debería seguir visible).
+4. Cerrar y abrir el inventario → `InventoryLayer`.
+5. Observar que el input del mundo sigue activo (debería estar bloqueado).
+
+**Comportamiento esperado:**
+
+`dialog_layer.gd` → `layer_type = UILayerType.Type.MODAL_SIMPLE`
+`inventory_layer.gd` → `layer_type = UILayerType.Type.MODAL_FULL`
+
+**Solución aplicada:**
+
+Invertidos los dos valores, con comentario en cada archivo citando este bug. La
+asignación ocurre dentro de `_ready()`, por lo que un test que instancie la clase
+debe añadirla al árbol y esperar un frame antes de leer `layer_type`.
+
+**Verificación:**
+
+- Test de regresión nuevo `scripts/ui/test_layer_type_m53.gd`: **10 checks,
+  4 bloques, 0 fallos, EXIT 0** (patrón `extends SceneTree` + `preload()`).
+- **Comprobado que el test detecta la regresión:** al invertir manualmente
+  `dialog_layer.gd` a `MODAL_FULL`, el test falla con 3 fallos y EXIT 1.
+- Sin regresiones: `test_m53_no_redundancia.gd` 8/0, `test_m110_ui.gd` 17/0.
+- Cableado como gate en `quality.yml`.
+
+**Encontrado por:** stepfun-step-5-preview / Kilo Code en la QA §21.8 de M53-UI-UX
+(muestreo de 17 ítems contra disco), reporte al director en el mensaje 242 del canal
+`StepFun-Step-5-Preview`. Fix autorizado por el director mimo (msg 243).
