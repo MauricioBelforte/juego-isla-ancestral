@@ -31,6 +31,14 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MENSAJES = os.path.join(RAIZ, "Mensajes entre modelos")
 HUECO_MIN = 5  # huecos de 5 o mas numeros se reportan como grandes
 
+# Colisiones cerradas por decision del director (mimo msg 277): son dos mensajes
+# REALES con el mismo numero, ambos historicos. Renumerarlos romperia citas
+# cruzadas, asi que quedan intactos y se excluyen del total de alertas.
+COLISIONES_RESUELTAS = {
+    ("step-5-kilocode", 95): "dos mensajes reales historicos; reasignar romperia citas",
+    ("step-5-kilocode", 96): "dos mensajes reales historicos; reasignar romperia citas",
+}
+
 
 def pipes_sin_escapar(s):
     return len([i for i, c in enumerate(s) if c == "|" and (i == 0 or s[i - 1] != "\\")])
@@ -137,6 +145,14 @@ def main():
         canales = [c for c in canales if os.path.basename(c) == args.canal]
 
     res = [auditar_canal(c) for c in canales]
+
+    # Excluir colisiones cerradas por decision del director (mensaje 277)
+    for r in res:
+        cerradas = {str(n) for (c, n) in COLISIONES_RESUELTAS if c == r["canal"]}
+        if r["colisiones"] and cerradas:
+            r["colisiones"] = {
+                n: v for n, v in r["colisiones"].items() if n not in cerradas
+            }
 
     if args.json:
         print(json.dumps(res, ensure_ascii=False, indent=2))
