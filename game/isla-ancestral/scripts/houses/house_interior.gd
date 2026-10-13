@@ -1,7 +1,7 @@
 # Modelo: Atria-Dawn-Preview (atria-dawn-s2)
 # Plataforma: Kilo Code
 # Fecha: 2026-10-11
-# M18: HouseInterior â€” escena interior con habitaciones desbloqueables por etapa.
+# M18: HouseInterior — escena interior con habitaciones desbloqueables por etapa.
 extends Node3D
 class_name HouseInterior
 
@@ -27,11 +27,11 @@ func salir() -> void:
 func obtener_habitaciones() -> Array:
 	return habitaciones
 
-## Â¿La habitaciÃ³n estÃ¡ desbloqueada?
+## ¿La habitación está desbloqueada?
 func habitacion_desbloqueada(nombre: String) -> bool:
 	return habitaciones.has(nombre)
 
-## AÃ±ade habitaciones (mejora de etapa, granjas, etc.).
+## Añade habitaciones (mejora de etapa, granjas, etc.).
 func agregar_habitaciones(ids: Array) -> void:
 	for id in ids:
 		var sid: String = String(id)
@@ -42,7 +42,7 @@ func agregar_habitaciones(ids: Array) -> void:
 func desbloquear_etapa(etapa: int) -> void:
 	habitaciones = _habitaciones_por_etapa(etapa)
 
-## Mapeo etapa -> habitaciones (M18 03-Diseno Â§3).
+## Mapeo etapa -> habitaciones (M18 03-Diseno §3).
 func _habitaciones_por_etapa(etapa: int) -> Array:
 	var base: Array = ["living"]
 	match etapa:

@@ -14,7 +14,7 @@ func _initialize() -> void:
 	call_deferred("_ejecutar")
 
 func _ejecutar() -> void:
-	# â”€â”€ Bloque 1: HouseData â”€â”€
+	# ── Bloque 1: HouseData ──
 	var hd_script: Script = load("res://scripts/houses/house_data.gd")
 	_check("HouseData.gd carga", hd_script != null)
 	if hd_script != null:
@@ -26,7 +26,7 @@ func _ejecutar() -> void:
 		hd.huella_voxel = Vector2i(0, 4)
 		_check("HouseData huella invalida = false", not hd.huella_valida())
 
-	# â”€â”€ Bloque 2: HouseUpgradeData â”€â”€
+	# ── Bloque 2: HouseUpgradeData ──
 	var hud_script: Script = load("res://scripts/houses/house_upgrade_data.gd")
 	_check("HouseUpgradeData.gd carga", hud_script != null)
 	if hud_script != null:
@@ -42,7 +42,7 @@ func _ejecutar() -> void:
 		hud.requisito_mision = ""
 		_check("HouseUpgradeData sin mision", not hud.requiere_mision())
 
-	# â”€â”€ Bloque 3: HouseStorage â”€â”€
+	# ── Bloque 3: HouseStorage ──
 	var hs_script: Script = load("res://scripts/houses/house_storage.gd")
 	_check("HouseStorage.gd carga", hs_script != null)
 	if hs_script != null:
@@ -67,7 +67,7 @@ func _ejecutar() -> void:
 		hs.queue_free()
 		hs2.queue_free()
 
-	# â”€â”€ Bloque 4: HouseDecor â”€â”€
+	# ── Bloque 4: HouseDecor ──
 	var hdec_script: Script = load("res://scripts/houses/house_decor.gd")
 	_check("HouseDecor.gd carga", hdec_script != null)
 	if hdec_script != null:
@@ -105,7 +105,7 @@ func _ejecutar() -> void:
 		hdec.queue_free()
 		hdec2.queue_free()
 
-	# â”€â”€ Bloque 5: HouseUpgrade â”€â”€
+	# ── Bloque 5: HouseUpgrade ──
 	var hu_script: Script = load("res://scripts/houses/house_upgrade.gd")
 	_check("HouseUpgrade.gd carga", hu_script != null)
 	if hu_script != null:
@@ -139,7 +139,7 @@ func _ejecutar() -> void:
 		hu.queue_free()
 		hu2.queue_free()
 
-	# â”€â”€ Bloque 6: House â”€â”€
+	# ── Bloque 6: House ──
 	var h_script: Script = load("res://scripts/houses/house.gd")
 	_check("House.gd carga", h_script != null)
 	if h_script != null:
@@ -169,7 +169,7 @@ func _ejecutar() -> void:
 		h.queue_free()
 		h2.queue_free()
 
-	# â”€â”€ Bloque 7: HouseInterior â”€â”€
+	# ── Bloque 7: HouseInterior ──
 	var hi_script: Script = load("res://scripts/houses/house_interior.gd")
 	_check("HouseInterior.gd carga", hi_script != null)
 	if hi_script != null:
@@ -193,7 +193,7 @@ func _ejecutar() -> void:
 		hi.queue_free()
 		hi2.queue_free()
 
-	# â”€â”€ Bloque 8: HouseVisit â”€â”€
+	# ── Bloque 8: HouseVisit ──
 	var hv_script: Script = load("res://scripts/houses/house_visit.gd")
 	_check("HouseVisit.gd carga", hv_script != null)
 	if hv_script != null:
@@ -202,21 +202,21 @@ func _ejecutar() -> void:
 		hv.definir_preferencia("bruno_sapo", "ancestral")
 		hv.programar_visita("bruno_sapo", "manana")
 		_check("visitas_programadas manana", hv.visitas_programadas("manana").size() == 1)
-		# Visita sin manager â†’ fallo controlado
+		# Visita sin manager → fallo controlado
 		var r0: Dictionary = hv.iniciar_visita("bruno_sapo", "casa_a", null)
 		_check("sin manager = false", not bool(r0.get("ok", true)))
 		# Mock de manager (Node con obtener_vecino/registrar_entrada_vecino)
 		var mock = _MockManager.new()
 		root.add_child(mock)
 		var r1: Dictionary = hv.iniciar_visita("bruno_sapo", "casa_a", mock)
-		_check("visita vecino dueÃ±o ok", bool(r1.get("ok", false)))
+		_check("visita vecino dueño ok", bool(r1.get("ok", false)))
 		_check("visita repetida = false", not bool(hv.iniciar_visita("bruno_sapo", "casa_a", mock).get("ok", true)))
 		hv.terminar_visita("bruno_sapo", "casa_a", mock)
 		_check("terminar_visita libera slot", bool(hv.iniciar_visita("bruno_sapo", "casa_a", mock).get("ok", false)))
 		_check("vecino ajeno rechazado", not bool(hv.iniciar_visita("catalina_oso", "casa_a", mock).get("ok", true)))
 		var reac: Dictionary = hv.reaccion_decoracion("bruno_sapo", "ancestral")
 		_check("reacciona ancestral (match)", bool(reac.get("reacciona", false)) and String(reac.get("comentario", "")).contains("ancestral"))
-		var reac2: Dictionary = hv.reaccion_decoracion("bruno_sapo", "oceÃ¡nico")
+		var reac2: Dictionary = hv.reaccion_decoracion("bruno_sapo", "oceánico")
 		_check("reacciona no-match menciona preferencia", String(reac2.get("comentario", "")).contains("ancestral"))
 		var uso: Dictionary = hv.vecino_usa_mueble({"categoria": "funcional", "nombre": "silla_madera"})
 		_check("usa silla (sentarse)", uso_ok(uso, "sentarse"))
@@ -231,7 +231,7 @@ func _ejecutar() -> void:
 		hv2.queue_free()
 		mock.queue_free()
 
-	# â”€â”€ Red de seguridad â”€â”€
+	# ── Red de seguridad ──
 	create_timer(0.5).timeout.connect(func(): _fin())
 
 func uso_ok(d: Dictionary, accion: String) -> bool:
@@ -257,7 +257,7 @@ func _fin() -> void:
 func _summary() -> void:
 	print("=== Resumen M18-s2: %d checks, %d fallos ===" % [_checks, _fallos])
 	if _checks < CHECKS_MINIMOS:
-		print("WARNING: solo %d checks (mÃ­nimo %d)" % [_checks, CHECKS_MINIMOS])
+		print("WARNING: solo %d checks (mínimo %d)" % [_checks, CHECKS_MINIMOS])
 
 func _check(nombre: String, cond: bool) -> void:
 	_checks += 1
