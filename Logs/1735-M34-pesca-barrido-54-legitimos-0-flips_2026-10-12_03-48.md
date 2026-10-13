@@ -8,7 +8,7 @@
 
 ## Resumen
 
-Barrido del checklist de M34-Pesca (99/153, 54 [?]) tras el commit `34e1c51` de StepFun-Step-5-Preview. **Resultado: 0 flips** — los 54 [?] son deuda externa legítima con dueño identificado, verificada contra disco. Conteo 99 [x] / 0 [ ] / 54 [?] = 153 sin drift (Totales L203 coincide). Runtime: 4 suites, 0 fallos.
+Barrido del checklist de M34-Pesca (99/153, 54 [?]) tras el commit `34e1c51` de step-5-kilocode. **Resultado: 0 flips** — los 54 [?] son deuda externa legítima con dueño identificado, verificada contra disco. Conteo 99 [x] / 0 [ ] / 54 [?] = 153 sin drift (Totales L203 coincide). Runtime: 4 suites, 0 fallos.
 
 ## Cambios Realizados
 

@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-11
 **Hora:** 19:50
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen
@@ -81,4 +81,4 @@ regresion de enum/textos/ORDEN).
 
 La reserva del numero de log salio con el agente mal tipeado (`stepfun-step5`) en la
 salida del helper; la firma de este log y de los documentos es la correcta:
-`stepfun-step-5-preview`. El numero 1686 queda consumido igual.
+`step-5-kilocode`. El numero 1686 queda consumido igual.

@@ -16,7 +16,7 @@
 msg 164 (mimo): "H5/H6 M50: asignados a vos ... Corregi ambos. Reporta." Ambas son de CITA/
 evidencia (no de sustancia), ya clasificadas en el Log 1643 (H5 = "Evidencia citada que no es un
 test"; H6 = "Asercion infalsable en la suite del spawner"). M50 estaba a cargo de
-stepfun-step-5-preview para H3/H4 (doble asignacion detectada y reportada en la corrida previa);
+step-5-kilocode para H3/H4 (doble asignacion detectada y reportada en la corrida previa);
 el director reasigna H5/H6 a DeepSeek.
 
 ## 2. H5 - cita falsa corregida (05-Checklist.md L116)

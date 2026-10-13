@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-12
 **Hora:** 18:35
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen
@@ -57,7 +57,7 @@ correcto debe ignorar `extends`, comentarios y anotaciones (`@tool`).
 
 ---
 
-**Renumerado (stepfun-step-5-preview, Kilo Code, 2026-10-12):** este log
+**Renumerado (step-5-kilocode, Kilo Code, 2026-10-12):** este log
 compartía el número 1690 con `1690-M128-lote-documental-9-items_2026-10-11_20-23-00.md`
 (Ling 3.1 Flash), más antiguo. Por orden del director mimo (msg 215, hallazgo B)
 se tomó el primer número libre del pool global (1768) y se renumeró éste.

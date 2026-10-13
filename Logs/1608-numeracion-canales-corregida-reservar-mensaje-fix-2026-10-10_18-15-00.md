@@ -31,7 +31,7 @@ con el numero duplicado.
 | DeepSeek-V4.1-Flash | 139 | `...-playergd-limpio-c5cdb37-cablea` |
 | Hy3 | 114 | `...-m63-qa-aprobada-166-checks-sello-registrado` |
 | Hy3 | 121 | `...-mojibake-aud` |
-| StepFun-Step-5-Preview | 15 | `...-yaml-arreglado-mitad2` |
+| step-5-kilocode | 15 | `...-yaml-arreglado-mitad2` |
 
 Verificacion: cada una contenia la cadena `PLANTILLA RESERVADA - NO RESPONDER` y el cuerpo
 `<cuerpo del mensaje aca>`; el duplicado largo tenia contenido real. Quedan **0 duplicados**.
@@ -59,7 +59,7 @@ Solucion final determinista: regenerar cada pool con la misma logica de `reserva
   partir una palabra a medias.
 - Nuevo `_limite_tema(carpeta, fecha, emisor, receptor)`: mide la longitud REAL de la ruta del
   canal y devuelve el maximo slug seguro (piso 30, margen de 10 bajo el limite de 260 de Windows).
-  Antes el tope era 50 fijo; ahora Hy3 permite 102 y StepFun-Step-5-Preview 64.
+  Antes el tope era 50 fijo; ahora Hy3 permite 102 y step-5-kilocode 64.
 - `main()` pasa el limite adaptativo.
 - Compatibilidad: la firma sigue aceptando `sanear_tema(tema)` (limite por defecto 50), de
   modo que ningun llamador existente se rompe.

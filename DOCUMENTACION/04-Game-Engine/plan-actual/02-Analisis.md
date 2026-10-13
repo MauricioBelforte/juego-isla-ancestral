@@ -83,3 +83,31 @@ en disco. Cada flip del checklist cita esta sección.
 
 Nota de método: los ítems B4 y B8 combinan cita interna (este archivo / addon) con verificación
 de fuente externa oficial fechada (2026-10-12). Sin fuente externa no se escribió el dato.
+
+
+## 7. Verificacion de la evaluacion de candidatos - seccion A del checklist (2026-10-13, step 5 workbuddy)
+
+Auditoria de los 12 items de la seccion A (`05-Checklist.md`, lineas 20-31) contra
+evidencia en disco. Cada flip del checklist cita esta seccion. Todas las lineas citadas
+fueron verificadas por grep/sed sobre el archivo en disco ANTES de escribir el flip
+(guardrail del director, msg 5 del 2026-10-13: "grep obligatorio antes de cada flip").
+
+| # | Item | Evidencia (archivo + linea, verificada en disco) |
+|---|---|---|
+| A1 | Evaluar Unity contra los requisitos | Este archivo L14 (punto 1 del plan maestro: "Descartado por defecto: costo por asiento > USD 200k ingresos, ecosistema si maduro pero voxel sin soporte nativo") + L45 (tabla comparativa: costo Unity) |
+| A2 | Evaluar Godot contra los requisitos | Este archivo L15 (punto 2: "Elegido: gratis (MIT), sin regalias, native Linux/SteamOS") + L8 (decision adoptada, §1) |
+| A3 | Evaluar Unreal Engine contra los requisitos | Este archivo L16 (punto 3: "Descartado: overkill para cozy sim, voxel manual, tasa del 5%") |
+| A4 | Documentar por que Unity queda descartado (costo >200k, voxel sin nativo) | Este archivo L14 + L45 ("Gratis < USD 200k; Pro ~USD 2.300/ano") + L46 ("Voxel nativo | No - terceros") |
+| A5 | Documentar por que Unreal queda descartado (overkill, tasa 5%, curva) | Este archivo L16 + L63 ("demasiado motor para el genero; curva y tasa eliminatorias") + L76 (§6 B4: tasa 5% tras USD 1M, umbral verificado en unrealengine.com/release el 2026-10-12) |
+| A6 | Registrar la recomendacion del Plan-de-produccion §2 como fuente de la decision | Este archivo L8, que cita `DOCUMENTACION/00-PLAN-INICIAL/Plan-de-produccion.md` L111 ("Godot 4.x es la opcion mas defendible por defecto"; linea reverificada por sed el 2026-10-13) |
+| A7 | Adoptar Godot 4.x como motor del proyecto | Este archivo L8 + L15 + L29 (punto 16: "Godot 4.x LTS estable"). Proyecto real: `game/isla-ancestral/project.godot` L16 (`config/features=PackedStringArray("4.7", "Forward Plus")`). Cierre de la decision: `Logs/17-CONFIRMACION_MOTOR_GODOT-VOXELTOOLS_2026-08-16_06-10-00.md` |
+| A8 | Documentar la comparativa Unity vs Godot en tabla (costo/voxel/IA/deck) | Este archivo §3 L43-49 (tabla: Costo L45 / Voxel nativo L46 / IA-MCP L47 / Voxel a gran escala L48 / Deck L49) |
+| A9 | Documentar que la decision es revisable SOLO antes del hito M1 | Este archivo L8 ("Adoptada como decision de documentacion; el usuario puede revertirla antes del hito M1") |
+| A10 | Confirmar con el usuario la adopcion de Godot (veto pendiente) | `Logs/17-CONFIRMACION_MOTOR_GODOT-VOXELTOOLS_2026-08-16_06-10-00.md`: "Por encargo explicito del usuario... se cerro la decision final del motor... se descarta el 'volantazo'"; el propio log registra "05-Checklist.md: item de confirmacion -> [x]". Refuerzo: `05-Checklist.md` L159 (seccion J, mismo respaldo) |
+| A11 | Documentar el trade-off de animacion (Godot menos maduro que Mecanim) | Este archivo L22 (punto 9: "Mejor en Unity (Mecanim) pero Godot 4 cubre rigging basico para cozy") |
+| A12 | Documentar el trade-off de bolsa de talento (comunidad Godot mas chica) | Este archivo L26 (punto 13: "Activa y motivada; mas chica que Unity") + L55 (§4, riesgo "Comunidad Godot mas chica para arte/animation" con su mitigacion) |
+
+Nota de metodo: los 12 items son de evaluacion/documentacion cuya evidencia ya existia en
+este archivo (secciones 1-5, autoria del modulo) y en `Logs/17`. La iteracion 2 no crea
+contenido nuevo: verifica cada item contra su cita en disco y marca el checklist. Ningun
+item de implementacion (secciones F/G/J) fue tocado.

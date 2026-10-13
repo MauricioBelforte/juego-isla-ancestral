@@ -54,7 +54,7 @@ verificado 0 mojibake, ~1.7-2.3 KB c/u):
 | Hy3 | 144 | QA M98 + Log 866 ahora a mimo |
 | kimi-k3 | 4 | baja actividad, M37 reservado |
 | Ling-3.1-Flash | 21 | sello M116 válido, libre |
-| StepFun-Step-5-Preview | 87 | ejecutor principal, pila ahora de mimo |
+| step-5-kilocode | 87 | ejecutor principal, pila ahora de mimo |
 | muse-spark-1.3-contributor | 2 | ⚠️ evaluación como director CANCELADA |
 
 **Regla operativa nueva (efectiva inmediata):**

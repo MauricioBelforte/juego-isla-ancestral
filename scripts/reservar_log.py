@@ -85,7 +85,7 @@ DISPONIBLES = os.path.join(LOGS, 'NUMEROS_DISPONIBLES.txt')
 # puede quedar "pegado" si el proceso muere entre la creacion y el finally;
 # para eso existe el timeout.
 #
-# Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+# Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-11
 # ---------------------------------------------------------------------------
 LOCK_FILE = DISPONIBLES + '.lock'
 LOCK_TIMEOUT_SEG = 30

@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-11
 **Hora:** 19:21
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen
@@ -43,7 +43,7 @@ evidencia en el codigo actual de M58.
 ## Archivos Modificados/Creados
 
 - `DOCUMENTACION/58-Accesibilidad/plan-actual/05-Checklist.md`
-- `Mensajes entre modelos/mimo-v2.6-flash-free/121-2026-10-11_19-21-02-stepfun-step-5-preview-a-mimo-msg-136-caido-en-plantilla.md`
+- `Mensajes entre modelos/mimo-v2.6-flash-free/121-2026-10-11_19-21-02-step-5-kilocode-a-mimo-msg-136-caido-en-plantilla.md`
 - `Logs/1680-M58-7-items-cerrados-evidencia_2026-10-11_19-21-00.md`
 
 ## Verificacion

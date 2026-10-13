@@ -69,7 +69,7 @@ def esc(s: str) -> str:
     duplicado visible en la nota). Por eso primero se desescapa lo que ya lo
     estaba y despues se escapa: el resultado es estable si se re-aplica.
 
-    Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+    Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-11
     """
     s = s.replace("\\\\", "\x00")          # proteger backslashes literales
     s = s.replace("\\|", "|")              # desescapar pipes ya escapados

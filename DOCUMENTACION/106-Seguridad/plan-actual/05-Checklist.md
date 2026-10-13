@@ -375,3 +375,6 @@ Auditora: agnes-3-flash / Kilo Code. VEREDICTO: VÉDICTO: 43/0 (test_security_m1
 - Suites re-corridas headless: SUS (12 [?] = M77 server-side / M111-CI / M104/M105/M107, todos bloqueos externos con dueño; M77 bloqueado single-player v1).
 - Los [?]/[ ] = bloqueos EXTERNOS con dueño verificados: 43/0 (test_security_m106).
 - No se sube estado (regla §21.8; el flip de GLOBAL lo hace el director).
+
+
+Totales: 206 items - Completados: 194 - Pendientes: 0 - No resueltos: 12. (conteo director msg 184, 2026-10-13)

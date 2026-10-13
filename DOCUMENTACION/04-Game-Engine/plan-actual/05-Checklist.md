@@ -17,18 +17,18 @@
 
 ## A. Evaluación de candidatos (12)
 
-- [ ] Evaluar Unity contra los requisitos del proyecto [M]
-- [ ] Evaluar Godot contra los requisitos del proyecto [M]
-- [ ] Evaluar Unreal Engine contra los requisitos del proyecto [M]
-- [ ] Documentar por qué Unity queda descartado por defecto (costo >200k, voxel sin nativo) [S]
-- [ ] Documentar por qué Unreal queda descartado (overkill, tasa 5%, curva) [S]
-- [ ] Registrar la recomendación del Plan-de-produccion §2 como fuente de la decisión [S]
-- [ ] Adoptar **Godot 4.x** como motor del proyecto [S]
-- [ ] Documentar la comparativa Unity vs Godot en tabla (costo/voxel/IA/deck) [S]
-- [ ] Documentar que la decisión es revisable SOLO antes del hito M1 [S]
-- [ ] Confirmar con el usuario la adopción de Godot (veto pendiente) [ ] [S]
-- [ ] Documentar el trade-off de animación (Godot menos maduro que Mecanim) [S]
-- [ ] Documentar el trade-off de bolsa de talento (comunidad Godot más chica) [S]
+- [x] Evaluar Unity contra los requisitos del proyecto [M] (cita: 02-Analisis.md L14 + L45 - ver §7 A1)
+- [x] Evaluar Godot contra los requisitos del proyecto [M] (cita: 02-Analisis.md L15 + L8 - ver §7 A2)
+- [x] Evaluar Unreal Engine contra los requisitos del proyecto [M] (cita: 02-Analisis.md L16 - ver §7 A3)
+- [x] Documentar por qué Unity queda descartado por defecto (costo >200k, voxel sin nativo) [S] (cita: 02-Analisis.md L14 + L45 + L46 - ver §7 A4)
+- [x] Documentar por qué Unreal queda descartado (overkill, tasa 5%, curva) [S] (cita: 02-Analisis.md L16 + L63 + L76 - ver §7 A5)
+- [x] Registrar la recomendación del Plan-de-produccion §2 como fuente de la decisión [S] (cita: 02-Analisis.md L8 -> Plan-de-produccion.md L111 - ver §7 A6)
+- [x] Adoptar **Godot 4.x** como motor del proyecto [S] (cita: 02-Analisis.md L8 + L15 + L29; project.godot L16 ("4.7", "Forward Plus"); Logs/17 - ver §7 A7)
+- [x] Documentar la comparativa Unity vs Godot en tabla (costo/voxel/IA/deck) [S] (cita: 02-Analisis.md §3 L43-49 - ver §7 A8)
+- [x] Documentar que la decisión es revisable SOLO antes del hito M1 [S] (cita: 02-Analisis.md L8 - ver §7 A9)
+- [x] Confirmar con el usuario la adopción de Godot (veto pendiente) [ ] [S] (cita: Logs/17-CONFIRMACION_MOTOR_GODOT-VOXELTOOLS_2026-08-16_06-10-00.md - "Por encargo explicito del usuario... se cerro la decision final del motor"; ver §7 A10)
+- [x] Documentar el trade-off de animación (Godot menos maduro que Mecanim) [S] (cita: 02-Analisis.md L22 - ver §7 A11)
+- [x] Documentar el trade-off de bolsa de talento (comunidad Godot más chica) [S] (cita: 02-Analisis.md L26 + L55 - ver §7 A12)
 
 ## B. Costos y licencias (10)
 
@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 128 ítems · Completados: 24 · Pendientes: 104 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
+**Totales:** 128 ítems · Completados: 36 · Pendientes: 92 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 

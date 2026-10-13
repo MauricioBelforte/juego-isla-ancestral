@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-11
 **Hora:** 08:00
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen
@@ -19,8 +19,8 @@ headless. **Encontré un fallo real de producción en una de las suites**, con c
 ### 1. Bloqueo en GLOBAL
 
 `CHECKLIST-GLOBAL.md` L288:
-- Estado: `🟡 Liberado (iter. 2 capítulos 1-7)` → `🔵 En curso (re-QA §21.8 stepfun-step-5-preview)`
-- Agente actual: `—` → `stepfun-step-5-preview`
+- Estado: `🟡 Liberado (iter. 2 capítulos 1-7)` → `🔵 En curso (re-QA §21.8 step-5-kilocode)`
+- Agente actual: `—` → `step-5-kilocode`
 - Fila verificada tras el cambio: 12 pipes sin escapar, 11 celdas, cierra con `|` ✅
 
 ### 2. Conteo del módulo (verificado contra disco)

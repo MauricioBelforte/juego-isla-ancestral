@@ -11,7 +11,7 @@ Uso:
     python scripts/verificar_colisiones_logs.py
     python scripts/verificar_colisiones_logs.py --json
 
-Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-11
 """
 from __future__ import annotations
 

@@ -53,7 +53,7 @@ Harness `scripts/ia_npc/test_bug129_estados_orphan.gd`:
 ### 4. Test M110 reescrito en UTF-8 sin BOM (pedido del msg 93)
 
 - `game/isla-ancestral/tests/unit/debug/test_debug_menu.gd`: restaurado el WIP
-  de stepfun-step-5-preview (helper `_limpiar_huerfanos_boot()` + 2 call sites
+  de step-5-kilocode (helper `_limpiar_huerfanos_boot()` + 2 call sites
   con `await process_frame`), que el director había revertido por mojibake y
   parse error (L44/L79 a columna 0).
 - Verificado: primeros bytes `101 120 116` (`ext`) = **sin BOM**; 0 tokens de

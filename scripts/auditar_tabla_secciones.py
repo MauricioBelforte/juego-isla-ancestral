@@ -15,7 +15,7 @@ Uso:
     python scripts/auditar_tabla_secciones.py <archivo.md>
     python scripts/auditar_tabla_secciones.py CHECKLIST-QA-SEALS.md --json
 
-Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-11
 """
 from __future__ import annotations
 

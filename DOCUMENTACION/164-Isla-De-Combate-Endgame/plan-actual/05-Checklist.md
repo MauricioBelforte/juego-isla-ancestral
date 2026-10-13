@@ -28,7 +28,7 @@
 - [x] GemCurrency tiene add_gems(amount: int) [S] — *iter 1 (atria-dawn, Log 1016): gem_currency.gd*
 - [x] GemCurrency tiene spend_gems(amount: int) -> bool [S] — *iter 1 (atria-dawn, Log 1016): gem_currency.gd*
 - [x] GemCurrency tiene has_gems(amount: int) -> bool [S] — *iter 1 (atria-dawn, Log 1016): gem_currency.gd*
-- [x] GemCurrency se guarda en GameState [M] — *iter 1 (atria-dawn, Log 1016): provider gemas_m164 en SaveManager*
+- [?] GemCurrency se guarda en GameState [M] — *iter 1 (atria-dawn, Log 1016): provider gemas_m164 en SaveManager* — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es codigo muerto (0 call sites). Deuda M164/M59.
 - [x] GemCurrency se persiste al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): get_save_data/restore_save_data versionado*
 - [x] Intercambio de herramienta T1 encantada = 1 gema [S] — *iter 1 (atria-dawn, Log 1016): valor_cambio_por_tier(1)*
 - [x] Intercambio de herramienta T2 encantada = 2 gemas [S] — *iter 1 (atria-dawn, Log 1016): valor_cambio_por_tier(2)*
@@ -131,7 +131,7 @@
 - [x] Integrar con M72 (Logros) para logros [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — M72 registra logros.**
 - [x] Documentar tabla completa de recompensas [S] — *iter 1 (atria-dawn, Log 1016): recompensas_por_defecto() 6 entradas*
 
-## G. Tienda y NPCs (10)
+## G. Tienda y NPCs (9)
 
 - [x] GemExchangeNPC: interambia herramientas por gemas [M] — *iter 1 (atria-dawn, Log 1016): CONTRATO definido (04-Codigo §2)*
 - [x] GemExchangeNPC tiene dialogo contextual [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — M21/M162 diálogo contextual.**
@@ -151,13 +151,13 @@
 - [x] Jefes derrotados guardados en GameState [M] — *iter 1 (atria-dawn, Log 1016): _derrotas persistido*
 - [x] Recompensas obtenidas guardadas en GameState [M] — *iter 1 (atria-dawn, Log 1016): _recompensas persistido*
 - [x] to_dict/from_dict para todos los datos [M] — *iter 1 (atria-dawn, Log 1016): get_save_data/restore_save_data versionados*
-- [x] Integrar con M59 (Guardado) [M] — *iter 1 (atria-dawn, Log 1016): gem_save_provider + combat_island_save_provider*
+- [?] Integrar con M59 (Guardado) [M] — *iter 1 (atria-dawn, Log 1016): gem_save_provider + combat_island_save_provider* — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es codigo muerto (0 call sites). Deuda M164/M59.
 - [x] Las gemas se conservan al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): round-trip verificado en test*
 - [x] Las zonas se conservan al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): round-trip verificado en test*
 - [x] Los enemigos respawnean al cargar [S] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — spawner reaparece enemigos no derrotados al cargar.**
 
 
-**Totales:** 130 items · Completados: 128 · No resueltos: 2 · Pendientes: 0. **CERRADO ✅** (2 [?] = monetización M126/decisión usuario)
+**Totales:** 129 ítems · Completados: 125 · Pendientes: 0 · No resueltos: 4 — drift corregido (sección G = 9 items) + degradación L31/L154 (QA s2 Log 1776).
 
 > **Iter 1 — atria-dawn (Atria-Dawn-Preview) / Kilo Code, 2026-09-18, Log 1016.**
 > Alcance: **parte data-driven unicamente** (encaje A/B del agente). Lo visual/VFX/IA queda

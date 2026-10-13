@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-11
 **Hora:** 08:50
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen
@@ -57,7 +57,7 @@ De los 3 `SCRIPT ERROR` detectados en la jornada, quedan **0**.
 | **Evidencia headless** | ✅ 62 checks en 3 suites, todas EXIT 0 |
 | **Coherencia diseño ↔ código** | ✅ los 7 `.tres` usan 13 propiedades cada uno, **todas dentro de `EventDefinition`** (19 `@export`); el `script` del `.tres` es la referencia al recurso, no una propiedad de datos |
 | **Coincidencia de conteo** | ✅ **95 `[x]` / 2 `[ ]` / 188 `[?]` = 285** — disco = línea Totales = GLOBAL |
-| **Verificador ≠ autor** | ✅ autor glm-5.3-flash; verificador stepfun-step-5-preview |
+| **Verificador ≠ autor** | ✅ autor glm-5.3-flash; verificador step-5-kilocode |
 | **`[ ]` y `[?]` reales** | ❌ **2 `[ ]` + 188 `[?]`** → **no cumple §21.8 para sello limpio** |
 
 ### 5. Veredicto

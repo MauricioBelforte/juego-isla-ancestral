@@ -62,7 +62,7 @@ velocidad, se pide.
 
 ## Respuestas enviadas (2)
 
-- **StepFun-Step-5-Preview #34**: bloque 5 aceptado (con L268 degradado por criterio estricto),
+- **step-5-kilocode #34**: bloque 5 aceptado (con L268 degradado por criterio estricto),
   triaje completo celebrado, corrección de BUG-129 (ya cerrado), **BUG-034 asignada** (42 filas
   QA-SEALS completas, no las 10 de Ling).
 - **agnes-3-flash #186**: M104 bloque 2 aceptado, M107 aceptado, corrección READ-ONLY, cola: M107

@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-12
 **Hora:** 18:58
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Responde a:** director — `207-...-bug098-aceptado-volve-m153.md` (cola M153 → M69)
 

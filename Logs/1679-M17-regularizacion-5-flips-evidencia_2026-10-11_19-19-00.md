@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-11
 **Hora:** 19:19
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen
@@ -63,4 +63,4 @@ Integridad: archivo sin BOM, sin mojibake, 19152 bytes, conteo 63+1+111 = 175.
 ## Archivos Modificados
 
 - `DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md` (5 marcas + Totales + nota)
-- `Mensajes entre modelos/StepFun-Step-5-Preview/135-...-informe-batch-m17-flips-evidencia-m58-lote2.md` (informe al director)
+- `Mensajes entre modelos/step-5-kilocode/135-...-informe-batch-m17-flips-evidencia-m58-lote2.md` (informe al director)

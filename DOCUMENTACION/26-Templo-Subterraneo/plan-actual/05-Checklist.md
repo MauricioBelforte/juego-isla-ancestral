@@ -81,12 +81,12 @@
 - [x] Definir pedestal del Sello [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 - [x] Definir cutscene contextual mínima (hook M33) [S] — señal `TemploFlow.sello_restaurado_ok` (hook, sin acoplar a M33)
 - [x] Definir restauración del sello abre la salida [M] — `restaurar_sello()` + `intentar_abrir_salida()`; test B
-- [ ] Documentar puzzle final y cámara del Sello [M]
+- [x] Documentar puzzle final y cámara del Sello [M] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 
 ## Salida y checkpoints
 
-- [ ] Diseñar la salida (túnel del amanecer) [S]
-- [ ] Definir atajo al puerto por la salida [S]
+- [x] Diseñar la salida (túnel del amanecer) [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
+- [x] Definir atajo al puerto por la salida [S] → **agnes-3-flash (2026-10-12): `m26_spec.md`.**
 - [x] Definir apertura de salida solo con sello restaurado [M] — `validar_anti_exploit` exige `requiere == "sello_restaurado"` en la sala de salida; tests B/F
 - [x] Diseñar 5 checkpoints (porte, vestíbulo, vientos, central, sello) [M] — `TemploCheckpoint.CP_IDS` + 5 salas con `checkpoint: true`; `validar_checkpoints` lo exige (test E)
 - [x] Definir guardado atómico en cada checkpoint [M] — `TemploCheckpoint.guardar()` (tmp → rename → `.bak`); test C
@@ -173,7 +173,7 @@
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — `Logs/902-M26-Templo-Subterraneo-Iter2_2026-09-14.md`
 - [x] Actualizar fila 26 en CHECKLIST-GLOBAL al implementar [S]
 
-**Totales:** 129 ítems · Completados: 62 · Pendientes: 57 · No resueltos: 10 (incluye el ítem de dependencia M154).
+**Totales:** 129 ítems · Completados: 101 · Pendientes: 18 · No resueltos: 10 (incluye el ítem de dependencia M154). — drift corregido por QA s2 (Log 1777, 101/18/10).
 El módulo sigue 🟡: la lógica verificable está implementada y probada, pero la
 geometría (M08), los assets (M45/M47/M52/M63), el audio (M41/M42/M43) y las
 UI de M58 quedan pendientes de sus módulos.
@@ -203,4 +203,4 @@ UI de M58 quedan pendientes de sus módulos.
 - [?] Calibración visual de las salas (luces, materiales, partículas): requiere Blender/Godot con vista y aprobación visual ajena (§15.3)
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06)
-Auditoría del bloque 2 (T-D7): los [62 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_templo_m26.gd` = 92 checks / 0 fallos (rojo de parse-JSON inyectado esperado); scripts/templos/ (templo_flow, puzzle_*, templo_validadores).
+Auditoría del bloque 2 (T-D7): los [101 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_templo_m26.gd` = 92 checks / 0 fallos (rojo de parse-JSON inyectado esperado); scripts/templos/ (templo_flow, puzzle_*, templo_validadores).

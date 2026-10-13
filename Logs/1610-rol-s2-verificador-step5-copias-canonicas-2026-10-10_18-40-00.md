@@ -7,7 +7,7 @@
 
 ## Resumen
 
-El fundador confirmo la jerarquia de delegacion: `StepFun-Step-5-Preview` sigue siendo el
+El fundador confirmo la jerarquia de delegacion: `step-5-kilocode` sigue siendo el
 asistente PRINCIPAL del director (por su velocidad) y el rol de `atria-dawn-s2` pasa a ser
 **verificar que Step 5 trabaje bien**, ya que es el mismo modelo que el director. Se
 formalizo en las dos copias canonicas (AGENTS.md §30.1 y GUIA-COMUNICACION.md) y en el

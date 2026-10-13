@@ -1,3 +1,22 @@
+## 🔁 2026-10-13 — RENOMBRE EN CURSO: `step-5-kilocode` → `step-5-kilocode` (directiva del fundador)
+
+**Encargo del fundador al director → delegado a Step 5 (msg 273 de su canal):**
+Step 5 cambia su identidad a **`step-5-kilocode`** para cortar rutas >260 caracteres
+(rompían lecturas, `isfile` y el helper — bug del `max()` ya fixeado, tests 15/15).
+
+Orden: (1) firma `**Modelo:** step-5-kilocode`, (2) renombrar archivos de su canal
+(prefijos numéricos intactos), (3) `git mv` de las carpetas
+`Mensajes entre modelos/step-5-kilocode` → `step-5-kilocode` y
+`TAREAS-POR-MODELO/step-5-kilocode` → `step-5-kilocode`, (4) barrido de
+referencias activas. **NO se tocan:** `Step-5-WorkBuddy`/`step-5-workbuddy` (otro
+agente), `Logs/` histórico, cuerpos de mensajes antiguos.
+
+**Mientras dura el rename:** si necesitás escribirle, usá la carpeta que exista
+(vel vieja hasta el aviso de cierre). `CHECKLIST-GLOBAL.md`, `AGENTS.md` y
+`ver_mensajes.py` los actualiza el director al recibir el reporte de cierre.
+
+**Firma:** mimo-v2.6 (Director) / opencode — 2026-10-13, directiva del fundador.
+
 ## ⚠️ 2026-10-11 — ORDEN DE PRIORIDAD DE LECTURA DE CANALES (directiva del fundador)
 
 **Directiva del fundador (2026-10-11).** El director (mimo-v2.6) debe leer los canales SIEMPRE en este orden en cada ronda:
@@ -6,7 +25,7 @@
 |---|---|---|
 | **1** | `atria-dawn` | Deep work + commits/push. **Lee reportes directo de carpetas.** |
 | **1** | `atria-dawn-s2` | Verificador final. **Lee reportes directo.** |
-| **1** | `StepFun-Step-5-Preview` | Ejecutor principal. **Lee reportes directo.** |
+| **1** | `step-5-kilocode` | Ejecutor principal. **Lee reportes directo.** |
 | **2** | `agnes-3-flash` | Producción (la más importante de la 2da tanda — responde rápido). **Lee reportes directo.** |
 | **3** | `Ling-3.1-Flash` | Producción — **informe Logs 27 ACEPTADO, drift Resumen corregido 3→50 🔵** |
 | **4** | `DeepSeek-V4.1-Flash` | Producción |
@@ -135,7 +154,7 @@ cuerpo personalizado + el estado actual de ese modelo:
 | Hy3 | 144 | QA M98 + auditoría Log 866 ahora a mimo |
 | kimi-k3 | 4 | baja actividad, M37 sigue reservado |
 | Ling-3.1-Flash | 21 | sello M116 válido, libre |
-| StepFun-Step-5-Preview | 87 | sigue ejecutor principal, pila ahora de mimo |
+| step-5-kilocode | 87 | sigue ejecutor principal, pila ahora de mimo |
 | muse-spark-1.3-contributor | 2 | ⚠️ evaluación como director **CANCELADA** (el puesto está cubierto) |
 
 ### Regla operativa nueva (efectiva inmediata)
@@ -221,7 +240,7 @@ a los canales donde el usuario tiene mas creditos es la mejor inversion de su sa
 | **3** | atria-dawn-s2 | por si le delego trabajo que necesito que responda |
 | **4** | atria-dawn-s3 | activo para encargos directos del fundador; puede informar al director |
 | **5** | **Ling-3.1-Flash** 🆕 | modelo funcional directo (2026-10-10), muchos creditos diarios — **prioridad sobre DeepSeek/Hy3** (directiva del fundador) |
-| **6** | **StepFun-Step-5-Preview** 🆕 | modelo funcional directo (2026-10-10), muchos creditos diarios — **prioridad sobre DeepSeek/Hy3** (directiva del fundador) |
+| **6** | **step-5-kilocode** 🆕 | modelo funcional directo (2026-10-10), muchos creditos diarios — **prioridad sobre DeepSeek/Hy3** (directiva del fundador) |
 | **7** | DeepSeek-V4.1-Flash | creditos limitados diarios |
 | **8** | Hy3 | creditos limitados diarios |
 | 9+ | resto de modelos activos | si hay alguno mas trabajando |
@@ -257,14 +276,14 @@ comunica y se actualiza esta tabla.
 > (2026-10-03 → 2026-10-10) quedan como historial en las carpetas donde estan — no se migran.
 
 > **Actualizacion 2026-10-10 (directiva del fundador):** **Ling-3.1-Flash y
-> StepFun-Step-5-Preview pasan a ser modelos funcionales directos** — dejan de depender de la
+> step-5-kilocode pasan a ser modelos funcionales directos** — dejan de depender de la
 > sesion s3, reciben encargos del director en sus propios canales y se priorizan **por encima de
 > DeepSeek-V4.1-Flash y Hy3**. s3 queda activo para lo que el fundador le pida y puede informar al
 > director si es necesario. Evidencia empírica que sustenta el alta: Ling (M150 x2, M153,
 > M112-auditoria — nicho Familia B, greps exactos contra disco) y Step 5 (E-01 a E-12c, triaje
 > M110 90→0 sin un solo error de conteo, QA M24 sellado, BUG-034 — precision de auditoria
 > anti-inflacion). Canales: `Mensajes entre modelos/Ling-3.1-Flash/` y
-> `Mensajes entre modelos/StepFun-Step-5-Preview/`.
+> `Mensajes entre modelos/step-5-kilocode/`.
 
 
 ## ⚠️ 2026-10-06 00:35 — ACTUALIZACIÓN DEL PROTOCOLO DE COMUNICACIÓN (todos los modelos deben leerlo)
@@ -382,7 +401,7 @@ del Lote 13, su hallazgo más sólido), M150 Totales. Enmudeció con los encargo
 ### Agentes activos tras la baja
 
 agnes-3-flash, mimo-v2.6-flash-free, atria-dawn-s2, atria-dawn-s3 (+ Step 5 vía s3),
-DeepSeek-V4.1-Flash, Hy3, stepfun-step-5-preview. **KPI: cero idle, siete frentes abiertos.**
+DeepSeek-V4.1-Flash, Hy3, step-5-kilocode. **KPI: cero idle, siete frentes abiertos.**
 
 ---
 
@@ -4708,7 +4727,7 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - READ-ONLY sobre marcas. Sin push. Cola: esperando OK de H2-H7 (M105) o nuevo encargo.
   - **Detector:** bandeja con 4 pendientes, todos propios (respuestas salientes). Flota quieta salvo salidas del director.
   - **agnes-3-flash -> BUG-106 / M15-Recursos** (msg 211): su QA de M02 aceptada (0/172 pura doc, no se sella, queda 🟢 tal cual). Encargo: registrar los 8 `item_id` faltantes en `item_database.gd` (`madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino`), verificar warnings pre/post en boot headless, suite `test_item_data.gd` 149/0 intacta. Solo M15; M39 ✅ intocable.
-  - **StepFun-Step-5-Preview -> informe Patrón D de M122** (msg 52): E-27 aceptada (GUIA-GODOT/06-registro-errores.md verificada, sin BOM, firmas conservadas). Encargo READ-ONLY: 13 grupos duplicados con líneas exactas + veredicto (DEGRADAR/FUSIONAR/MANTENER) + reconciliación de los 3 conteos (SEALS 254/265 vs GLOBAL 181/181 vs checklist real). Sin flips: los hace el director.
+  - **step-5-kilocode -> informe Patrón D de M122** (msg 52): E-27 aceptada (GUIA-GODOT/06-registro-errores.md verificada, sin BOM, firmas conservadas). Encargo READ-ONLY: 13 grupos duplicados con líneas exactas + veredicto (DEGRADAR/FUSIONAR/MANTENER) + reconciliación de los 3 conteos (SEALS 254/265 vs GLOBAL 181/181 vs checklist real). Sin flips: los hace el director.
   - **DeepSeek-V4.1-Flash -> M155-Vestimenta-Y-Accesorios** (msg 147): su verificación de M107 aceptada (L110 conforme, `register_task.ps1` sin `-WakeToRun` ni `-AllowStartIfOnBatteries` confirmado en disco, suite 28/0 no cubre BUG-131, 0 `CHECKS_MINIMOS`). Encargo: investigar los 3 fallos de `test_equipment_m155.gd`, fixear lo propio, piso CHECKS_MINIMOS obligatorio.
   - **Fix orquestador:** `CHECKLIST-QA-SEALS.md` L67/L68 (M106, M122) tenían 9 pipes (` || ` sin escapar partía la tabla en 8 columnas sin cierre) -> reparadas a 7 pipes + pipe final, `<br>` para el salto dentro de la celda Notas. Contenido y conteos intactos.
   - **3 DEUDAS DE M107 (bloqueo-suave, liquidar al liberar el módulo)** — registradas por DeepSeek msg 146, NO aplicadas porque M107 está 🔵 (Ling + Hy3 sub-bloque C, Haiku por su canal):

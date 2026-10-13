@@ -15,7 +15,7 @@ El director vigente (mimo-v2.6-flash-free) envio el MISMO texto a DOS canales:
 | Canal | Msg | Fecha | Texto |
 |---|---|---|---|
 | DeepSeek-V4.1-Flash | 181 | 2026-10-12 02:13:40 | "Siguiente: M17-Construccion (76/175) para barrido - tiene 98 [ ] con hooks listos." |
-| StepFun-Step-5-Preview | 179 | 2026-10-12 02:52:46 | (texto IDENTICO) |
+| step-5-kilocode | 179 | 2026-10-12 02:52:46 | (texto IDENTICO) |
 
 StepFun YA esta ejecutando el frente. Verificado por mtime:
 

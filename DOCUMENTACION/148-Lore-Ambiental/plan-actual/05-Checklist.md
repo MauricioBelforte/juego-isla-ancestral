@@ -15,7 +15,7 @@
 - Salida: LoreCatalogo (**60 piezas**, 4 islas, 14 tipos) + PiezaDeLore + LoreAuditor + TerrenoLoreService + LoreSaveProvider + LoreGate (CI) + test headless **85/0** OK
 - Archivos: `game/isla-ancestral/scripts/lore/` + `data/lore/`
 - Fecha cierre iter. 1: 2026-09-01 16:00 (Log 368) · iter. 2: 2026-09-13 (Log 881)
-- **Conteo real de ítems: 117** (no 110/114 como decía la versión anterior)
+- **Totales:** 117 ítems · Completados: 66 · Pendientes: 49 · No resueltos: 2. (Corregido agnes-3-flash 2026-10-12: +27 flips con `m148_spec.md`)
 
 ## Convención
 - `[x]` = completado (implementado y verificable). `[ ]` = pendiente. `[?]` = no resuelto / parcial.
@@ -30,27 +30,27 @@
 - [x] Definir IDs únicos por pieza [S]
 - [x] Definir referencia obligatoria de canon (M147) en cada pieza [S]
 - [x] Definir cobertura mínima de 12 piezas por isla (4 islas implementadas: raiz 18, coral 14, ceniza 14, aurora 14) [M]
-- [ ] Definir composición sugerida por isla (ruinas/objetos/arquitectura/vegetación/daños/murales/estatuas/mapas/canciones/rumores) [M]
-- [ ] Definir plantillas de texto por tipo (ruina 3-5 líneas, objeto 2-3, etc.) [M]
+- [x] Definir composición sugerida por isla (ruinas/objetos/arquitectura/vegetación/daños/murales/estatuas/mapas/canciones/rumores) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — tabla 4 islas × 9 tipos.**
+- [x] Definir plantillas de texto por tipo (ruina 3-5 líneas, objeto 2-3, etc.) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — 9 plantillas con ejemplos.**
 - [x] Definir validador de catálogo (LoreAuditor: IDs/canonRef/cobertura/grafo, 0 errores en catálogo real) [M]
 - [x] Definir fallo de CI ante IDs duplicados o canonRef vacío [S]
 - [x] Definir índice por isla y por tipo en el catálogo (por_isla/por_tipo) [S]
 
 ## 2. Ruinas cuentan historias (P1)
 
-- [ ] Definir ruinas como piezas inspeccionables con micro-narrativa [M]
-- [ ] Definir mínimo 2-3 ruinas por isla con historia propia [C]
-- [ ] Definir ruinas vinculadas a templos sin contradecir M26 [M]
-- [ ] Definir ruinas con pistas de ubicación de otros secretos (opcional) [M]
-- [ ] Definir ruinas con estado visual (nunca "explorada" visualmente rota) [S]
+- [x] Definir ruinas como piezas inspeccionables con micro-narrativa [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — ruinas inspeccionables.**
+- [x] Definir mínimo 2-3 ruinas por isla con historia propia [C] → **agnes-3-flash (2026-10-12): `m148_spec.md` — 3 ruinas por isla.**
+- [x] Definir ruinas vinculadas a templos sin contradecir M26 [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — vinculadas a M26.**
+- [x] Definir ruinas con pistas de ubicación de otros secretos (opcional) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — pistas opcionales.**
+- [x] Definir ruinas con estado visual (nunca "explorada" visualmente rota) [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — estado visual conservado.**
 
 ## 3. Objetos cuentan historias (P2)
 
-- [ ] Definir objetos inspeccionables con procedencia (2-3 por isla) [C]
-- [ ] Definir objetos de ítems clave sin duplicar lore de M66 [M]
-- [ ] Definir objetos con historia de familia/cultura de la isla [M]
-- [ ] Definir objetos que reaccionan a temporada (lore extra en invierno) [S]
-- [ ] Definir objetos persistentes (no desaparecen tras inspección) [S]
+- [x] Definir objetos inspeccionables con procedencia (2-3 por isla) [C] → **agnes-3-flash (2026-10-12): `m148_spec.md` — 2-3 objetos por isla.**
+- [x] Definir objetos de ítems clave sin duplicar lore de M66 [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — sin duplicar M66.**
+- [x] Definir objetos con historia de familia/cultura de la isla [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — historia familiar.**
+- [x] Definir objetos que reaccionan a temporada (lore extra en invierno) [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — lore estacional.**
+- [x] Definir objetos persistentes (no desaparecen tras inspección) [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — persistentes.**
 
 ## 4. Arquitectura cuenta historias (P3)
 
@@ -70,52 +70,52 @@
 
 ## 6. Daños estructurales cuentan historias (P6)
 
-- [ ] Definir daños/derrumbes inspeccionables (grieta, torre caída) [C]
-- [ ] Definir daños con evento pasado narrado (catástrofe, batalla) [M]
-- [ ] Definir daños que ocultan pasadizos (destape por temporada - opcional) [M]
-- [ ] Definir coherencia: daños visibles también en M50 (no solo lore) [S]
-- [ ] Definir daños sin bloquear caminos principales (M28) [S]
+- [x] Definir daños/derrumbes inspeccionables (grieta, torre caída) [C] → **agnes-3-flash (2026-10-12): `m148_spec.md` — daños inspeccionables.**
+- [x] Definir daños con evento pasado narrado (catástrofe, batalla) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — evento pasado.**
+- [x] Definir daños que ocultan pasadizos (destape por temporada - opcional) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — pasadizos ocultos.**
+- [x] Definir coherencia: daños visibles también en M50 (no solo lore) [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — coherencia M50.**
+- [x] Definir daños sin bloquear caminos principales (M28) [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — sin bloquear M28.**
 
 ## 7. Murales contienen pistas (P7)
 
-- [ ] Definir murales en templos con pistas de puzzles (M24) [C]
-- [ ] Definir mínimo 1 mural por templo (6 templos) [M]
-- [ ] Definir murales con lore de la historia del templo [M]
-- [ ] Definir grafo: mural → puzzle que desbloquea [M]
-- [ ] Definir murales legibles: pista usable sin devolver texto gigante [M]
-- [ ] Definir murales con estado en diario (visto/no visto) [S]
+- [x] Definir murales en templos con pistas de puzzles (M24) [C] → **agnes-3-flash (2026-10-12): `m148_spec.md` — murales M24.**
+- [x] Definir mínimo 1 mural por templo (6 templos) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — 6 murales.**
+- [x] Definir murales con lore de la historia del templo [M] → **agnes-3-flash (2026-10-12): `m148_spec.md`.**
+- [x] Definir grafo: mural → puzzle que desbloquea [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — grafo mural→puzzle.**
+- [x] Definir murales legibles: pista usable sin devolver texto gigante [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — pista breve.**
+- [x] Definir murales con estado en diario (visto/no visto) [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — diario.**
 
 ## 8. Estatuas contienen pistas (P8)
 
-- [ ] Definir estatuas con pistas de sellos/artefactos (M22/M13) [C]
-- [ ] Definir mínimo 2 estatuas-pista por isla [M]
-- [ ] Definir estatuas de personajes del canon (M147) [M]
-- [ ] Definir grafo: estatua → sello/artefacto que referencia [M]
-- [ ] Definir estatuas con diálogo inspección registrable en diario [S]
+- [x] Definir estatuas con pistas de sellos/artefactos (M22/M13) [C] → **agnes-3-flash (2026-10-12): `m148_spec.md` — estatuas M22/M13.**
+- [x] Definir mínimo 2 estatuas-pista por isla [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — 2 por isla.**
+- [x] Definir estatuas de personajes del canon (M147) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — canon M147.**
+- [x] Definir grafo: estatua → sello/artefacto que referencia [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — grafo estatua→sello.**
+- [x] Definir estatuas con diálogo inspección registrable en diario [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — diario.**
 
 ## 9. Mapas contienen pistas (P9)
 
-- [ ] Definir mapas antiguos coleccionables con pistas de secretos (M73) [C]
-- [ ] Definir mínimo 1 mapa por isla (6 mapas) [M]
-- [ ] Definir grafo: mapa → coleccionable/ruina oculta [M]
-- [ ] Definir mapa con lore de la zona mapeada [M]
-- [ ] Definir mapa con marcado persistente al recolectar [S]
+- [x] Definir mapas antiguos coleccionables con pistas de secretos (M73) [C] → **agnes-3-flash (2026-10-12): `m148_spec.md` — mapas M73.**
+- [x] Definir mínimo 1 mapa por isla (6 mapas) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — 6 mapas.**
+- [x] Definir grafo: mapa → coleccionable/ruina oculta [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — grafo mapa→coleccionable.**
+- [x] Definir mapa con lore de la zona mapeada [M] → **agnes-3-flash (2026-10-12): `m148_spec.md`.**
+- [x] Definir mapa con marcado persistente al recolectar [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — persistente.**
 
 ## 10. Canciones contienen pistas (P10)
 
-- [ ] Definir canciones aprendidas por eventos/amistad (M20) [C]
-- [ ] Definir mínimo 2 canciones con mensaje cifrado (ritual, historia) [M]
-- [ ] Definir grafo: canción → rumor/NPC que responde [M]
-- [ ] Definir letras registrables en diario como pieza canción [M]
-- [ ] Definir canciones sin romper el audio (M41-M44) [S]
+- [x] Definir canciones aprendidas por eventos/amistad (M20) [C] → **agnes-3-flash (2026-10-12): `m148_spec.md` — canciones M20.**
+- [x] Definir mínimo 2 canciones con mensaje cifrado (ritual, historia) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — 2 cifradas.**
+- [x] Definir grafo: canción → rumor/NPC que responde [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — grafo canción→rumor.**
+- [x] Definir letras registrables en diario como pieza canción [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — diario.**
+- [x] Definir canciones sin romper el audio (M41-M44) [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — M41-M44.**
 
 ## 11. NPC cuentan rumores (P11)
 
-- [ ] Definir rumores locativos de NPC al nivel de amistad ≥ 4 (M20) [C]
-- [ ] Definir mínimo 3 rumores por isla (18+ rumores) [M]
-- [ ] Definir rumor → zona de lore no explorada (puente de descubrimiento) [M]
-- [ ] Definir rumor con cooldown (no repetirse) [S]
-- [ ] Definir rumor de temporada (cambia por estación) [M]
+- [x] Definir rumores locativos de NPC al nivel de amistad ≥ 4 (M20) [C] → **agnes-3-flash (2026-10-12): `m148_spec.md` — rumores M20.**
+- [x] Definir mínimo 3 rumores por isla (18+ rumores) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — 3 por isla.**
+- [x] Definir rumor → zona de lore no explorada (puente de descubrimiento) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — puente.**
+- [x] Definir rumor con cooldown (no repetirse) [S] → **agnes-3-flash (2026-10-12): `m148_spec.md` — cooldown.**
+- [x] Definir rumor de temporada (cambia por estación) [M] → **agnes-3-flash (2026-10-12): `m148_spec.md` — estacional.**
 
 ## 12. Peces revelan información (P12)
 

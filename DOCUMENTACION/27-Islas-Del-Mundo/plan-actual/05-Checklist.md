@@ -319,7 +319,7 @@ Los `93 [?]` quedan intactos: son de M63/M61, M10, M54, M50/M36/M15/M23/M19 y M2
 - Nadie llama todavía a `IslandOps`/`IslandTravelGuard` → **M63** (streaming) y **M28** (barco) deben cablearlas
 - Asimetría de M59: `esta_descubierta(aurora) == true` pero `islas_descubiertas()` no la lista → **M59/M54**
 
-**Totales:** 192 ítems · Completados: 121 · Pendientes: 0 · No resueltos: 71.
+**Totales:** 192 ítems · Completados: 126 · Pendientes: 0 · No resueltos: 66. (Corregido por director 2026-10-12: conteo real disco 126/66; agnes reportó 99, Totales decía 121/71)
 
 > **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1710):** +10 [?] -> [x] en el barrido autorizado (msg 158). Evidencia: 3 suites verdes (`test_islas_headless.gd` 5 + `test_islas_m27.gd` 171 + `test_islas_m27_iter2.gd` 238 = **414 checks, 0 fallos**) + APIs confirmadas en `scripts/islas/`.
 > **Quedan [?] a propósito:** las señales `isla_cargando/cargada/descargada` (E92-E94) no existen como signals (el progreso se consulta con `progreso()`/`info()`, no se emite); `IslandPref` (E90) son constantes `StringName`, no un enum; y los items atribuidos a otros módulos en sus propias notas (M10, M15, M19, M25, M26, M28, M36, M51, M62, M64).

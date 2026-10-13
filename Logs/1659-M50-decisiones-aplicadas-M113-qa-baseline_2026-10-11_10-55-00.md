@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-11
 **Hora:** 10:55
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen
@@ -24,7 +24,7 @@ El ítem `[?] Definir registro vegetation_budget.json` pasó a:
 [x] ~~Definir registro vegetation_budget.json~~ ELIMINADO (director, 2026-10-11, msg 116):
 el rol de presupuesto por bioma lo cumple `densidad` en `data/vegetacion/vegetacion_config.json`
 (12/25/22/10/15/10/30 por bioma). No se crea JSON separado. Evidencia: verificado por
-stepfun-step-5-preview (Log 1657).
+step-5-kilocode (Log 1657).
 ```
 
 ### 2. L212 — redacción corregida

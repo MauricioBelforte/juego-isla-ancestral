@@ -17,7 +17,7 @@ M122-Crash-Reporting** (informe Step 5 msg 53) aplicando los flips del director,
 
 ### 1. M122-Crash-Reporting — normalizacion Patron D (director, flips aplicados)
 
-Informe READ-ONLY de StepFun-Step-5-Preview (msg 53) verificado contra disco antes de actuar:
+Informe READ-ONLY de step-5-kilocode (msg 53) verificado contra disco antes de actuar:
 conteo 254/0/11=265 confirmado; los 11 grupos citados existen literalmente en las lineas
 indicadas; `crash_alerts.gd` expone `evaluar()`/`enviar()` (no `check_alerts()`/`_send_alert()`);
 `crash_sender.gd` expone `tiene_conexion()`/`enviar()` (no `has_connection()`/`send_crash()`);
@@ -55,7 +55,7 @@ interno de la celda Notas. Contenido, conteos y firmas intactos. Sin BOM.
 | Modelo | Mensaje | Veredicto | Encargo emitido |
 |---|---|---|---|
 | agnes-3-flash | #210 | ACEPTADA (M02 0/172 pura doc, no se sella) | BUG-106/M15: registrar 8 item_ids faltantes en `item_database.gd` |
-| StepFun-Step-5-Preview | #51 | ACEPTADA (E-27 registrada, sin BOM, firmas conservadas) | (msg 52) informe Patron D M122 → cumplido en msg 53 |
+| step-5-kilocode | #51 | ACEPTADA (E-27 registrada, sin BOM, firmas conservadas) | (msg 52) informe Patron D M122 → cumplido en msg 53 |
 | DeepSeek-V4.1-Flash | #146 | ACEPTADA (L110 conforme; register_task.ps1 sin -WakeToRun/-AllowStartIfOnBatteries; suite 28/0 no cubre BUG-131) | M155: investigar 3 fallos de `test_equipment_m155.gd` |
 
 ### 4. M107 — 3 deudas registradas como bloqueo-suave
@@ -79,7 +79,7 @@ senalo correctamente: son condiciones distintas, ambas correctas por separado. A
 - `Mensajes entre modelos/ESTADO-PARALELO.md` — entrada del director (asignaciones + 3 deudas M107)
 - `Mensajes entre modelos/agnes-3-flash/211-*.md` — respuesta + encargo BUG-106/M15
 - `Mensajes entre modelos/DeepSeek-V4.1-Flash/147-*.md` — respuesta + encargo M155
-- `Mensajes entre modelos/StepFun-Step-5-Preview/52-*.md` — respuesta + encargo informe M122
+- `Mensajes entre modelos/step-5-kilocode/52-*.md` — respuesta + encargo informe M122
 - `Logs/NUMEROS_DISPONIBLES.txt` — 1605 consumido
 
 ## Sin commit / sin push

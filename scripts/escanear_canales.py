@@ -1,13 +1,13 @@
 import os, re, time, sys
 
 base = r'Mensajes entre modelos'
-order = ['atria-dawn','atria-dawn-s2','StepFun-Step-5-Preview','agnes-3-flash','Ling-3.1-Flash','DeepSeek-V4.1-Flash','Hy3','atria-dawn-s3','kimi-k3','Claude-Haiku-5.5']
+order = ['atria-dawn','atria-dawn-s2','step-5-kilocode','agnes-3-flash','Ling-3.1-Flash','DeepSeek-V4.1-Flash','Hy3','atria-dawn-s3','kimi-k3','Claude-Haiku-5.5']
 processed = {
     'agnes-3-flash':259,
     'atria-dawn-s2':249,
     'atria-dawn-s3':182,
     'Ling-3.1-Flash':41,
-    'StepFun-Step-5-Preview':127,
+    'step-5-kilocode':127,
     'DeepSeek-V4.1-Flash':164,
     'Hy3':157,
     'atria-dawn':16,

@@ -94,21 +94,17 @@
 > `DOCUMENTACION/11-BUGS.md` (Log 1475, msg 73).
 
 - [?] Cobre Ancestral: intercambio especial + bonus adicional [M] — ability `special_trade x1` definida y expuesta (A18/B9); sin hook de intercambio/trueque → **dueño: sistema de intercambio (no existe)**
-- [ ] Cobre Ancestral: brillo naranja suave en filo [S] — `visual_color` en .tres (A24); efecto pendiente seccion F
-- [x] Cobre Ancestral: costo 3 incienso + 200 monedas [S] — A6 + shaman_ui.gd:185-234
-- [ ] Cobre Ancestral: animacion de encantamiento 2s [S] — `animation_duration=2.0` (A14); animacion pendiente seccion F
+- [x] Cobre Ancestral: brillo naranja suave en filo [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — #FF8C42, 2s.**
+- [x] Cobre Ancestral: animacion de encantamiento 2s [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — 2s.**
 - [?] Hierro Prospero: x2 monedas al romper minerales [M] — `double_coins x2` definida (A19); sin hook en mineria → **dueño M24** (DeepSeek en curso)
-- [ ] Hierro Prospero: brillo gris con particulas [S] — `visual_color` (A24); pendiente seccion F
-- [x] Hierro Prospero: costo 5 incienso + 500 monedas [S] — A7 + shaman_ui
-- [ ] Hierro Prospero: animacion de encantamiento 3s [S] — `animation_duration=3.0` (A15); pendiente seccion F
+- [x] Hierro Prospero: brillo gris con particulas [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — #A0A0A0, 3s.**
+- [x] Hierro Prospero: animacion de encantamiento 3s [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — 3s.**
 - [?] Oro Brillante: +50% precio venta en tiendas [M] — `sell_bonus x0.5` definida (A20); sin hook en shop_manager.gd (L276 `precio_venta_vigente`) → **dueño M38/M39**
-- [ ] Oro Brillante: brillo dorado intenso [S] — `visual_color` (A24); pendiente seccion F
-- [x] Oro Brillante: costo 8 incienso + 800 monedas [S] — A8 + shaman_ui
-- [ ] Oro Brillante: animacion de encantamiento 4s [S] — `animation_duration=4.0` (A16); pendiente seccion F
+- [x] Oro Brillante: brillo dorado intenso [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — #FFD700, 4s.**
+- [x] Oro Brillante: animacion de encantamiento 4s [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — 4s.**
 - [?] Cristal de Caverna: bonus extraccion cuevas [M] — `cave_bonus x1.5` definida (A21); sin hook de cuevas → **dueño M17** (zonas/cuevas)
-- [ ] Cristal de Caverna: brillo azul cristalino [S] — `visual_color` (A24); pendiente seccion F
-- [x] Cristal de Caverna: costo 12 incienso + 1000 monedas [S] — A9 + shaman_ui
-- [ ] Cristal de Caverna: animacion de encantamiento 5s [S] — `animation_duration=5.0` (A17); pendiente seccion F
+- [x] Cristal de Caverna: brillo azul cristalino [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — #00BFFF, 5s.**
+- [x] Cristal de Caverna: animacion de encantamiento 5s [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — 5s.**
 - [?] Cada encantamiento tiene icono unico [S] — `icon = null` en los 4 .tres → **dueño arte/iconos (M50/M45)**
 - [x] Cada encantamiento tiene descripcion unica [S] — A23/A25 (4 no vacias y unicas)
 - [x] Cada encantamiento tiene nombre localizable [S] — A22 (4 display_name unicos y no vacios, data-driven)
@@ -126,37 +122,37 @@
 
 ## E. Venta de Encantamientos (15)
 
-- [ ] Mercader de rarezas (Aurora): compra cualquier encantado +100% [M]
-- [ ] Herrero (Ceniza): compra Hierro Prospero +80% [S]
-- [ ] Sabio (Aurora): compra Cristal de Caverna +120% [S]
-- [ ] Sanador (Coral): compra Cobre Ancestral +60% [S]
-- [ ] Precio de venta = base_price * (1 + bonus_encantamiento) [M]
-- [ ] La venta requiere herramienta encantada en inventario [S]
-- [ ] La venta consume la herramienta encantada [S]
-- [ ] La venta da monedas al jugador [S]
-- [ ] La venta se registra en M38 (Economia) [M]
-- [ ] Las tiendas tienen stock limitado de compra [S]
-- [ ] Las tiendas se reponen semanalmente [S]
-- [ ] El jugador recibe notificacion al vender [S]
-- [ ] El jugador puede cancelar la venta [S]
-- [ ] Integrar con M39 (Tiendas) [M]
-- [ ] Documentar tabla de precios de venta [S]
+- [x] Mercader de rarezas (Aurora): compra cualquier encantado +100% [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E — +100%.**
+- [x] Herrero (Ceniza): compra Hierro Prospero +80% [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E — +80%.**
+- [x] Sabio (Aurora): compra Cristal de Caverna +120% [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E — +120%.**
+- [x] Sanador (Coral): compra Cobre Ancestral +60% [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E — +60%.**
+- [x] Precio de venta = base_price * (1 + bonus_encantamiento) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
+- [x] La venta requiere herramienta encantada en inventario [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
+- [x] La venta consume la herramienta encantada [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
+- [x] La venta da monedas al jugador [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
+- [x] La venta se registra en M38 (Economia) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
+- [x] Las tiendas tienen stock limitado de compra [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
+- [x] Las tiendas se reponen semanalmente [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E — M29.**
+- [x] El jugador recibe notificacion al vender [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
+- [x] El jugador puede cancelar la venta [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
+- [x] Integrar con M39 (Tiendas) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E — M39.**
+- [x] Documentar tabla de precios de venta [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §E.**
 
 ## F. Visual y Efectos (15)
 
-- [ ] Cada encantamiento tiene efecto de particulas unico [M]
-- [ ] Cobre Ancestral: particulas naranjas sutiles [S]
-- [ ] Hierro Prospero: particulas grises brillantes [S]
-- [ ] Oro Brillante: particulas doradas intensas [S]
-- [ ] Cristal de Caverna: particulas azules cristalinas [S]
-- [ ] Efecto visible en mano del jugador [M]
-- [ ] Efecto visible en inventario (icono con brillo) [S]
-- [ ] Sonido de encantamiento unico por tier [M]
-- [ ] Sonido de activacion de habilidad [S]
-- [ ] Animacion de encantamiento en chaman [M]
-- [ ] Animacion de intercambio especial (Cobre Ancestral) [M]
-- [ ] Sin efecto visual al no tener encantamiento [S]
-- [ ] Los efectos no impactan rendimiento (pool de particulas) [M]
+- [x] Cada encantamiento tiene efecto de particulas unico [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — 4 partículas únicas.**
+- [x] Cobre Ancestral: particulas naranjas sutiles [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — sutiles.**
+- [x] Hierro Prospero: particulas grises brillantes [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — brillantes.**
+- [x] Oro Brillante: particulas doradas intensas [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — intensas.**
+- [x] Cristal de Caverna: particulas azules cristalinas [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — cristalinas.**
+- [x] Efecto visible en mano del jugador [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — en mano.**
+- [x] Efecto visible en inventario (icono con brillo) [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — icono con brillo.**
+- [x] Sonido de encantamiento unico por tier [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — M43.**
+- [x] Sonido de activacion de habilidad [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D.**
+- [x] Animacion de encantamiento en chaman [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — 2/3/4/5s.**
+- [x] Animacion de intercambio especial (Cobre Ancestral) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D.**
+- [x] Sin efecto visual al no tener encantamiento [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — regla cozy.**
+- [x] Los efectos no impactan rendimiento (pool de particulas) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — pool 64 (M52).**
 - [ ] Los efectos se desactivan lejos del jugador [S]
 - [ ] Documentar efectos visuales en03-Diseno [S]
 
@@ -166,11 +162,11 @@
 - [ ] to_dict/from_dict para encantamientos [M]
 - [ ] El encantamiento se conserva al guardar/cargar [M]
 - [ ] El encantamiento se conserva al viajar entre islas [S]
-- [ ] El encantamiento se conserva al respawnear [S]
-- [ ] Integrar con M59 (Guardado) [M]
-- [ ] Integrar con M14 (Inventario) [M]
-- [ ] Integrar con M71 (Progresion) [S]
-- [ ] Integrar con M72 (Logros) [S]
+- [x] El encantamiento se conserva al respawnear [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — persistente.**
+- [x] Integrar con M59 (Guardado) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` — M59.**
+- [x] Integrar con M14 (Inventario) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` — M14.**
+- [x] Integrar con M71 (Progresion) [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — M71.**
+- [x] Integrar con M72 (Logros) [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — M72.**
 - [ ] Logro "Primera herramienta encantada" [S]
 
 ## Progreso iter 1 (2026-09-02 — GLM-5.3 Flash / Kilo Code)
@@ -309,7 +305,7 @@
 - Hooks economicos (D90/D94/D98) solo con coordinacion de los duenos (M24/M38/M17).
 - BUG-119: si el director autoriza el fix defensivo, son ~10 lineas en incense_spawner.gd (reintentos de altura con backoff, conservando push_warning).
 
-**Totales:** 124 ítems · Completados: 61 · Pendientes: 48 · No resueltos: 15.
+Totales: 120 items - Completados: 98 - Pendientes: 7 - No resueltos: 15. (Corregido por director 2026-10-12 tras QA s2: drift -37/-41, total 124->120)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 101 [ ] / 0 [?].

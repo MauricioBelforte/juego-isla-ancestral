@@ -2624,7 +2624,7 @@ capa (Ling audita → yo verifico → DeepSeek re-verifica al auditor).
   `CHECKLIST-GLOBAL.md` y violé §28 (UTF-8 sin BOM); detectado y eliminado. **Regla nueva: escribir
   archivos de texto del repo con Python `io.open(..., encoding="utf-8")`, nunca `Set-Content`.**
 
-### 21.17 StepFun-Step-5-Preview — el ejecutor más fiable de la flota (alta 2026-10-10)
+### 21.17 step-5-kilocode — el ejecutor más fiable de la flota (alta 2026-10-10)
 
 > **Verificado por mí (atria-dawn-s3, supervisora directa, 2026-10-10).** Step 5 no figuraba en
 > esta guía. Tras 18 entregas consecutivas supervisadas, su evidencia empírica supera a la de
@@ -2816,7 +2816,7 @@ Conclusión: la cadena de 3 niveles (ejecutor → spot-check → sello) es el pa
 #### Veredictos de asignación (directiva del fundador 2026-10-12)
 
 - **Modelos principales con trabajo propio:** **agnes-3-flash, DeepSeek-V4.1-Flash, Hy3.**
-- **StepFun-Step-5-Preview = ejecutor rápido → recibe el TRABAJO LARGO** (lotes de 10-40 ítems).
+- **step-5-kilocode = ejecutor rápido → recibe el TRABAJO LARGO** (lotes de 10-40 ítems).
   Confirmado empíricamente: es el único con 0 fallos en todos los spot-checks y racha de 12+
   entregas consecutivas.
 - **atria-dawn** se reserva para **deep work** que otros no resuelven (detección de inflación
@@ -2852,3 +2852,109 @@ verificada con binario real Godot 4.7.2, greps de evidencia negativa, conteos in
 re-ejecución de suites. Toda afirmación sobre otro modelo fue verificada por mí directamente o
 citada del mensaje del director que la aplica. **Excepción declarada:** §21.20 es inferencia de
 specs oficiales, no evidencia empírica — está marcado como tal en el texto.
+
+---
+
+## §21.22 — Lecciones de método de supervisión (2026-10-12 22:00–22:40, atria-dawn-s3)
+
+Dos lecciones nuevas, autoverificadas en mi propia práctica de supervisión este turno. Se suman a
+las 3 de §21.21.
+
+### Lección 4 — El mtime del canal subestima a los modelos con trabajo largo: cruzar canal + disco
+
+**Síntoma:** a las 22:03, DeepSeek llevaba -25 min sin escribir en su canal y atria -25 min. Ambos
+pasaban el umbral de "inactivo 15-20 min" del protocolo de supervisión. Flag inicial parecía claro.
+
+**Verificación:** antes de flagear, crucé con mtime de disco:
+- DeepSeek había tocado `77-Online-Y-Red/plan-actual/05-Checklist.md` a las **22:03** (mismo minuto).
+- atria estaba escribiendo **código**: `game/.../scripts/terrenos/terrain_footprints.gd` a las 22:04,
+  `terrain_provider.gd` a las 21:51 (M156 lote 2).
+
+**Conclusión:** ambos perfectamente activos. La señal del canal sola producía **dos falsos
+positivos**. La señal correcta es **canal ∨ disco**: si cualquiera de los dos muestra actividad
+reciente, el modelo está trabajando. El canal solo es válido como señal de alarma cuando **ambos**
+están quietos.
+
+**Contraste real en el mismo turno:** Hy3 a las 22:30 llevaba -52m en canal **Y** -60m sin tocar
+`DOCUMENTACION/` completo (ni siquiera sus módulos viejos), con M70 intacto en 77x/121. Ese sí era
+un cuello real: el cruce canal ∧ disco lo confirmó sin ambigüedad.
+
+**Aplicación:** flaguear inactividad solo cuando canal **Y** disco estén quietos sobre el umbral. Un
+modelo que hace deep work de código o documentación masiva puede pasar 30-45 min sin reportar y
+estar produciendo a pleno.
+
+### Lección 5 — La heurística de verbos falla con checklists de requisitos formales (RF/RS/RD)
+
+**Síntoma:** clasifiqué `70-Interacciones` (121 `[ ]`) con mi heurística de verbos de creación (la
+misma que acertó en M51 con 101 ítems y M47 con 92 accionables). Obtuve **20 de 121** y concluí
+equivocadamente que M70 era "casi todo documentación".
+
+**Verificación:** leí los 101 "sin verbo claro". No eran documentación vaga — eran **requisitos
+formales numerados**, cada uno atómico y con criterio de cierre medible entre paréntesis:
+
+```
+- [ ] RF4: filtro de candidatos por distancia (cálculo sin sqrt, al cuadrado) [S]
+- [ ] RF4: espaciado del raycast de visión (1 por ventana de N=4 frames) [M]
+- [ ] RF19: re-evaluación de candidatos cada frame con costo O(n) con n < 40 [M]
+- [ ] RF5: desempate por desviación angular frente del jugador (menor gana) [M]
+```
+
+Eso es **implementación GDScript pura**, no specs narrativas. Mi heurística los descartaba porque los
+RF no usan verbos de creación — usan sustantivos técnicos con el criterio de aceptación entre
+paréntesis.
+
+**Regla corregida:** antes de clasificar un checklist, **detectar su formato**:
+
+| Formato | Heurística correcta |
+|---|---|
+| Narrativo (verbos: crear, implementar, escribir…) | Clasificación por verbo de §21.21 (M51, M47) |
+| **Formal (`RF\d+`/`RS\d+`/`RD\d+`)** | Contar **todos** los `[ ]` como accionables; estimar esfuerzo leyendo el criterio entre paréntesis y la marca `[S]`/`[M]`/`[C]` |
+
+**Aplicación:** si `^\- \[ \] ?(RF|RS|RD)\d+` matchea una porción significativa del checklist, no
+aplicar la heurística de verbos — aplicar la de requisitos formales. En M70 la corrección llevó la
+cifra de "20 accionables" a **121 accionables** (6x) y cambió la recomendación de asignación:
+de "documentación para Hy3" a "implementación técnica, mejor para step-5-kilocode".
+
+**Firma:** atria-dawn-s3 (Atria-Dawn-Preview / Kilo Code) — 2026-10-12 22:40:00. Lecciones verificadas
+en mi propia práctica de supervisión este turno (msgs 144–147 al director).
+
+---
+
+## §21.23 — Configuración de dos frentes StepFun Step 5 (2026-10-12 23:10, atria-dawn-s3)
+
+El fundador habilitó una segunda sesión de `step-5-kilocode` en **WorkBuddy** con saldo
+amplio, mientras la de Kilo Code sigue como asistente del director. Como ambas son el mismo modelo,
+la identidad por chat (§7, regla "identidad = por CHAT, no por plataforma") exigía separarlas.
+
+### Carpetas y firmas (decisión del fundador)
+
+| Carpeta | Plataforma | Firma | Rol |
+|---|---|---|---|
+| `Mensajes entre modelos/step-5-kilocode/` | Kilo Code | step-5-kilocode | Asistente del director (245 msgs históricos, **sin renombrar** para preservar 341 referencias cruzadas) |
+| `Mensajes entre modelos/Step-5-WorkBuddy/` | WorkBuddy | **step 5 workbuddy** | Segundo frente, cola propia |
+
+Pool de números independiente por canal (§10.2 regla 4), `NUMEROS_DISPONIBLES.txt` 001–150 en la
+carpeta nueva. Precedente estructural: es el mismo patrón de `atria-dawn/` + `-s2/` + `-s3/` —
+mismo modelo, carpetas distintas, identidad definida por la carpeta.
+
+### Por qué NO se renombró la carpeta de Kilo Code
+
+341 archivos en `Mensajes entre modelos/` citan `step-5-kilocode` en sus
+`**Responde a:**`. Renombrar rompería la trazabilidad de toda la historia del canal. Además el
+director estaba escribiendo en esa carpeta en el momento (-5m). El fundador confirmó dejarla como
+está y diferenciar solo con el nombre explícito de la nueva.
+
+### Reglas operativas de la configuración de dos frentes
+
+1. **Lotes disjuntos obligatorios**: los dos frentes no pueden tocar el mismo `05-Checklist.md`
+   (edición concurrente — la trampa que costó el M130 con agnes). Lote A (Kilo): M70, M140, M63,
+   M112, M94, M92, M91, M104, M88, M160. Lote WB (WorkBuddy): M90, M67, M04, M109, M17, M75, M56,
+   M73, M20, M158. Verificado disjunto al armarse.
+2. **QA cruzado entre los dos frentes = INVÁLIDO** (§21.8 regla de independencia): mismo modelo
+   aunque sean plataformas distintas. Cuando WorkBuddy cierre un módulo, el QA lo hacen
+   `atria-dawn-s2` o `DeepSeek-V4.1-Flash`, nunca el otro Step 5.
+3. **El `01` de partida lo escribe el director** (§10.2 regla 2) — yo preparo el prompt, no escribo
+   en carpetas de otros agentes.
+
+**Firma:** atria-dawn-s3 (Atria-Dawn-Preview / Kilo Code) — 2026-10-12 23:10:00. Configuración
+decidida por el fundador en chat directo; infraestructura (carpeta + pool) preparada por mí.

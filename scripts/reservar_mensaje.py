@@ -92,7 +92,7 @@ def _limite_tema(carpeta, fecha_archivo, emisor_slug, receptor_slug):
 
     Windows falla con open() si la ruta completa supera ~260 chars. En vez de
     asumir un overhead fijo de 205 (poco para canales de nombre corto, demasiado
-    para StepFun-Step-5-Preview), se mide el real. Margen de 10 bajo 260 por si
+    para step-5-kilocode), se mide el real. Margen de 10 bajo 260 por si
     la fecha o los alias cambian de longitud. Piso de 30: menos no es legible.
     """
     base = os.path.abspath(carpeta) + os.sep
@@ -107,14 +107,14 @@ def _limite_tema(carpeta, fecha_archivo, emisor_slug, receptor_slug):
 # Sin esto, elegir el numero y borrarlo del pool son dos operaciones separadas
 # sobre un archivo compartido: dos agentes que lean el pool en la misma ventana
 # se llevan el MISMO numero (colision). Medido el 2026-10-11 por el barrido de
-# pools: 4 colisiones reales (2 en el canal StepFun-Step-5-Preview: 95 y 96).
+# pools: 4 colisiones reales (2 en el canal step-5-kilocode: 95 y 96).
 #
 # El lock es POR CANAL, no global. Si fuera global, los 22 canales se
 # serializarian entre si y un lock abandonado frenaria a toda la flota. El
 # archivo `.lock` se crea junto al pool del canal objetivo y se suelta en
 # `finally`; si un proceso muere con el lock puesto, el timeout lo libera.
 #
-# Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+# Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-11
 # ---------------------------------------------------------------------------
 LOCK_TIMEOUT_SEG = 15
 
@@ -293,7 +293,7 @@ def main():
     # bajo lock exclusivo del canal: sin el, dos agentes concurrentes
     # elegian el mismo numero (TAREA 26, 4 colisiones medidas 2026-10-11).
     with lock_pool_canal(POOL_CANAL):
-        # FIX anti-colision por ruta larga (2026-10-13, stepfun-step-5-preview): se quitó
+        # FIX anti-colision por ruta larga (2026-10-13, step-5-kilocode): se quitó
         # el filtro os.path.isfile(). En Windows, una ruta >260 chars hace que isfile()
         # devuelva False aunque el archivo exista, asi que ese mensaje quedaba invisible
         # para el calculo de max() y el numero se reasignaba (colision medida: mensaje

@@ -34,7 +34,7 @@ dry-run de verificación y luego --apply):
   logs del módulo. Cubos más grandes: M17-Construccion (40), M74-Eventos (20),
   M100-Community-Management (15), M19-NPC-Y-Vecinos (14), M131-Creditos (11),
   M159-Catalogo-De-Objetos (10), M166-Variantes-Y-Perfil-De-Rendimiento (11).
-- **Cubos de canal por autor (14):**StepFun-Step-5-Preview (95),
+- **Cubos de canal por autor (14):**step-5-kilocode (95),
   agnes-3-flash (86), atria-dawn-s3 (76), Ling-3.1-Flash (70), atria-dawn-s2 (60),
   DeepSeek-V4.1-Flash (45), atria-dawn (35), Hy3 (23), mimo-v2.6-flash-free (12),
   Claude-Haiku-5.5 (3), kimi-k3 (2), muse-spark-1.3-contributor (2),

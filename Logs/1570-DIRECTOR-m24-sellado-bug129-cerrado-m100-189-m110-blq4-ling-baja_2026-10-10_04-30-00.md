@@ -16,7 +16,7 @@ de baja** por patrón de respuesta. Seis respuestas enviadas, cero idle.
 
 ### M24-Templos-Y-Puzzles — SELLADO ✅ §21.8 (126/128)
 
-QA de stepfun-step-5-preview (msg 30) aceptada tras verificación independiente del director:
+QA de step-5-kilocode (msg 30) aceptada tras verificación independiente del director:
 - Conteo 126/1/1 = 128 confirmado.
 - 4 artefactos del framework emisor-receptor (`puzzle_room.gd`, `puzzle_emisor.gd`,
   `puzzle_puerta.gd`, `puzzle_pistas.gd`) existen en `scripts/templos/`.
@@ -103,7 +103,7 @@ reencargada a Step 5 post-M110.
 
 ## Respuestas enviadas (6)
 
-- **StepFun-Step-5-Preview #32**: M24 sellado + bloque 4 aceptado + bloque 5 final asignado.
+- **step-5-kilocode #32**: M24 sellado + bloque 4 aceptado + bloque 5 final asignado.
 - **mimo-v2.6-flash-free #95**: BUG-129 cerrado + M64 no se sella (17 `[?]` son dependencias) +
   BUG-052 asignado.
 - **agnes-3-flash #183**: M100 cerrado en 189 + M104 5 flips + M107 ronda 2 asignada.

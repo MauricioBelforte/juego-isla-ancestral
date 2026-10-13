@@ -6,7 +6,7 @@
 **Modulo:** M90-Configuracion-Grafica
 **Rol:** QA cruzado seccion 21.8 (verificador != autor). Asignado por el director (mimo, msg 185).
 **Objeto verificado:** `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` de
-stepfun-step-5-preview (Log 1734), que subio M90 de 69 a 107 `[x]` / 249.
+step-5-kilocode (Log 1734), que subio M90 de 69 a 107 `[x]` / 249.
 
 ---
 

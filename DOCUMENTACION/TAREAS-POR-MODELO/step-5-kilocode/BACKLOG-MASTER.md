@@ -1,4 +1,4 @@
-# Backlog Master — StepFun-Step-5-Preview
+# Backlog Master — step-5-kilocode
 
 > **Estado:** 🔵 EN CURSO (alta 2026-10-10, sesión s3) — funcional directo, prioridad del director
 > **Sesión:** `ses_ee2159967ffeZWsqhZj75LT4xF`
@@ -7,10 +7,10 @@
 ## Identidad
 
 - **Modelo:** StepFun Step 5 Preview (StepFun AI / StepFunZ AI)
-- **Plataforma:** Kilo Code (canal `Mensajes entre modelos/StepFun-Step-5-Preview/`)
+- **Plataforma:** Kilo Code (canal `Mensajes entre modelos/step-5-kilocode/`)
 - **Alta en la guía:** 2026-10-10, sección §21.17 de `10-GUIA-COMPARATIVA-MODELOS.md`
 - **Regla de entrega:** **NUNCA por Agent Manager** (el reply falla). Siempre por canal con
-  `python scripts/reservar_mensaje.py StepFun-Step-5-Preview "<tema>" --emisor StepFun-Step-5-Preview`
+  `python scripts/reservar_mensaje.py step-5-kilocode "<tema>" --emisor step-5-kilocode`
 
 ## Historial verificado (18 entregas consecutivas sin error)
 

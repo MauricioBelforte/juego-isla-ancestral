@@ -47,7 +47,7 @@ conflicto entre dos QA paralelas de M53, y se centralizo el push de 18 commits.
   1267 tests 0 fallos, stderr limpio, leccion E-26 (.godot/imported).
 
 ### Infraestructura
-- reservar_mensaje.py: tope del slug 60→50 chars. El canal StepFun-Step-5-Preview tiene overhead
+- reservar_mensaje.py: tope del slug 60→50 chars. El canal step-5-kilocode tiene overhead
   fijo de 205 chars; 205+60=265 supera el limite 260 de Windows (errno 2 silenciado).
 
 ### Push centralizado

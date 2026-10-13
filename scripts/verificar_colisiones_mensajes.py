@@ -16,7 +16,7 @@ Uso:
     python scripts/verificar_colisiones_mensajes.py --json
     python scripts/verificar_colisiones_mensajes.py --canal <nombre>
 
-Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-11
+Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-11
 """
 from __future__ import annotations
 

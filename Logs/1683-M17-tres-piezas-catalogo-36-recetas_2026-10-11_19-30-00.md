@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-11
 **Hora:** 19:30
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen

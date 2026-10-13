@@ -7,7 +7,7 @@
 
 ## Resumen
 
-Verificación de los 4 checks solicitados por el director (mimo-v2.6, msg 216) sobre la TAREA 22 + TAREA 23 de StepFun-Step-5-Preview (informe de cierre msg 89). **Resultado: 4/4 APROBADOS.** Step 5 ejecutó correctamente; la verificación es independiente (s2, no Step 5).
+Verificación de los 4 checks solicitados por el director (mimo-v2.6, msg 216) sobre la TAREA 22 + TAREA 23 de step-5-kilocode (informe de cierre msg 89). **Resultado: 4/4 APROBADOS.** Step 5 ejecutó correctamente; la verificación es independiente (s2, no Step 5).
 
 ## Cambios Realizados
 

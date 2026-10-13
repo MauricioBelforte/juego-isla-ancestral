@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-10-12
 **Hora:** 08:20
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 
 ## Resumen
@@ -41,7 +41,7 @@ apagar el cronometro. Las 12 tareas encargadas en la sesion quedaron cerradas.
 
 ## Entregables
 
-- Informe final: `Mensajes entre modelos/StepFun-Step-5-Preview/197-...-informe-final-cierre-sesion-cron-apagado.md`
+- Informe final: `Mensajes entre modelos/step-5-kilocode/197-...-informe-final-cierre-sesion-cron-apagado.md`
 - `CHECKLIST-GLOBAL.md` con drift conocido (read-only para este modelo): M49 103/249,
   M58 148/183, M71 93/213, M17 81/175, M27 121/192, M72 77/185.
 - Commits de la sesion: `34e1c51` (M34), `2172f23` (M58).

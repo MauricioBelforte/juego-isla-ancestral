@@ -23,7 +23,7 @@ Coincide 1:1 con el director (msg 192: 121/192) y con la fila 203 del GLOBAL.
 
 Higiene del archivo medido por BYTES: 33132 B, bom=False, CRLF=0, LF=333,
 CR=0, NUL=0, FFFD=0. **No se toco el archivo** (trae ediciones sin commitear de
-stepfun-step-5-preview, mtime 2026-10-12 04:52).
+step-5-kilocode, mtime 2026-10-12 04:52).
 
 ### Conteo por seccion (x / ? / vacio)
 
@@ -230,7 +230,7 @@ TOTAL     = 63
 - **0 flips** aplicados. **0** ediciones a `CHECKLIST-GLOBAL.md`, `quality.yml`,
   `AGENTS.md` ni al `05-Checklist.md` del modulo.
 - El `05-Checklist.md` y el `04-Codigo.md` de M27 traen **ediciones sin commitear de
-  stepfun-step-5-preview** (mtime 2026-10-12 04:52/04:53): no se tocaron.
+  step-5-kilocode** (mtime 2026-10-12 04:52/04:53): no se tocaron.
 - Colisiones de pool AJENAS detectadas por `reservar_log.py --estado` (no tocadas):
   1290, 1468, 1547, 1559, 1585, 1645, 1698, 1726.
 - De la cola de 12 tareas del msg 191 se ejecuto **D1 (M27)**. D2..D12 quedan para las

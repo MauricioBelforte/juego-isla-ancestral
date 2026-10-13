@@ -209,3 +209,5 @@
 ### Por qué ✅ se mantiene
 
 El NÚCLEO del módulo (determinismo, regla cozy, transiciones, persistencia, API, config, EventBus) está genuinamente implementado y verificado de forma independiente por mí. Los 25 ítems de integración son spec-closures bajo la convención "KnownIssue no bloqueante DoD" del módulo: el lado M32 (API/datos) existe y está testeado; el lado runtime (UI M30, accesibilidad M58, visuales M45/M52, NPC M19) es delegado con dueño identificado. **Aviso para el lector de CHECKLIST-GLOBAL:** "✅ Completado" aquí significa núcleo + contratos; NO significa que el banner de clima, las opciones de accesibilidad o el refugio de NPC estén en el juego todavía.
+
+Totales: 121 items - Completados: 121 - Pendientes: 0 - No resueltos: 0. (conteo director msg 184, 2026-10-13)
