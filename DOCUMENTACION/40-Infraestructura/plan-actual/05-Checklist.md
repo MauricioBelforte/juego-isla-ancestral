@@ -81,7 +81,7 @@
 - [x] RF8: enum Estado con BOOT, MENU, CARGANDO, MUNDO, PAUSA, TRANSICION, ERROR [M]
 - [x] RF9: cambiar_estado(estado) valida la transición contra la tabla permitida [M]
 - [x] RF9: transición ilegal produce warning DOM-INF-ESTADO y rechazo sin cambio [M]
-- [?] D8: BOOT deriva a MENU/CARGANDO/MUNDO/ERROR (mi GFM agrega CARGANDO y MUNDO para prototipo sin menú) [S]
+- [?] D8: BOOT deriva a MENU/CARGANDO/MUNDO/ERROR (mi GFM agrega CARGANDO y MUNDO para prototipo sin menú) [S] **Tabla de divergencias (stepfun-step-5-preview, Kilo Code, 2026-10-12):** el [?] se mantiene porque hay 5 diferencias reales entre 03-Diseno.md seccion 4 y game_flow_manager.gd: el diseno declara el estado TRANSICION (que el codigo no tiene) y restringe BOOT a [MENU, ERROR], CARGANDO a [MUNDO, ERROR], MUNDO a [PAUSA, TRANSICION, ERROR] y ERROR a [BOOT]; el codigo en cambio permite BOOT a [MENU, CARGANDO, MUNDO, ERROR], CARGANDO a [MUNDO, MENU, ERROR], MUNDO a [PAUSA, CARGANDO, MENU, ERROR] y ERROR a [BOOT, MENU]. Hay que decidir si manda el diseno o el codigo.
 - [x] D8: MENU deriva a CARGANDO o ERROR [S]
 - [?] D8: CARGANDO deriva a MUNDO/MENU/ERROR (también permite volver a MENU) [S]
 - [x] D8: MUNDO deriva a PAUSA/CARGANDO/MENU/ERROR [S]
