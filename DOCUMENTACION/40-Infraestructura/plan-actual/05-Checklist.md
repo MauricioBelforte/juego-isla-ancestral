@@ -97,7 +97,7 @@
 - [ ] RF10: reporte de dependencias circulares con archivo:línea [M]
 - [ ] RF10: reporte de violaciones de capas (dominio importa UI, etc.) [M]
 - [x] RF11: sanity check de autoloads presentes y respondiendo en runtime [M]
-- [ ] RF12: detección de accesos a servicios en _ready() antes de registro [M]
+- [x] RF12: detección de accesos a servicios en _ready() antes de registro [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** `service_registry.gd` `get_service()` detecta **cualquier** acceso a un contrato no registrado (no solo en `_ready()`, que es un superconjunto del requisito) y emite `DOM-INF-ACCESO-TEMPRANO` con el nombre del contrato.
 - [x] RF12: warning DOM-INF-ACCESO-TEMPRANO en cada acceso temprano [S] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** implementado en `get_service()`: emite el warning con el nombre del contrato, con supresión por contrato ya avisado.
 - [x] D9: diagnóstico estático ejecutable en editor (tool) [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/editor/code_quality_check.gd` es `@tool extends EditorScript` (449 líneas, class_name CodeQualityCheck) y hace análisis estático real: `_scan_directory()`, `_scan_file()`, `_analyze_structure()`, chequeo de complejidad ciclomática, convenciones de nombres y documentación, con `_generate_report()`. ⚠ **Alcance:** la herramienta es de **M111 (Código de Calidad)** y analiza estilo/calidad, no las capas ni dependencias de M40; el diagnóstico de capas sigue pendiente (L98).
 - [ ] D9: diagnóstico estático ejecutable en CI (M118) como gate de calidad [M]
@@ -221,7 +221,7 @@
 - [x] Autoload faltante en project.godot: sanity check lo detecta y deriva a ESTADO_ERROR [M]
 - [x] Contrato esperado sin registrar (M38 ausente): verificar_integridad lo reporta antes del menú [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` L44 `validate_required(required) -> Array[String]` devuelve los faltantes; `bootstrap.gd` L132 `verificar_integridad_dominios()` lo usa y emite `DOM-INF-FALTANTE` con la lista.
 - [x] Dependencia circular entre scripts: diagnóstico estático la reporta con ruta de ciclo [C]
-- [ ] Servicio consultado en _ready() antes de registrarse: warning DOM-INF-ACCESO-TEMPRANO [M]
+- [x] Servicio consultado en _ready() antes de registrarse: warning DOM-INF-ACCESO-TEMPRANO [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** cubierto por la misma implementación: el warning se emite en la primera consulta fallida, con supresión por contrato para no inundar el log. Verificado en `test_m40_contratos.gd` bloque 3.
 - [x] Registrar dos servicios con el mismo contrato: segundo registro rechazado con warning [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** verificado en `test_m40_contratos.gd` bloque 2: el primer registro devuelve `true`, el segundo `false`, y la instancia original se conserva.
 - [x] obtener() sobre contrato inexistente: null + warning, la UI muestra estado vacío sin crash [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229, frente 1):** verificado en `test_m40_contratos.gd` bloque 3: devuelve `null` sin excepción. ⚠ El "la UI muestra estado vacío" no está verificado: ningún widget consume ese camino hoy.
 - [x] Config corrupta en el bootstrap: fallback a defaults + log DOM-INF-ERROR [M]
@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 171 · Pendientes: 38 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→171 [x] en 13 lotes; +8 del frente 1 implementado (contratos.gd, DOM-INF-REGISTRO, DOM-INF-ACCESO-TEMPRANO y fix de L208). — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
+**Totales:** 211 ítems · Completados: 173 · Pendientes: 36 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→171 [x] en 13 lotes; +8 del frente 1 implementado (contratos.gd, DOM-INF-REGISTRO, DOM-INF-ACCESO-TEMPRANO y fix de L208). — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /
