@@ -1346,3 +1346,47 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - Reporte 214; solicitud de commit a atria (msg 62). Tracker 211 -> 213.
 - Proxima: mensajes `*mimo*a-deepseek*` / `*atria*a-deepseek*` con NN > 213. NO reprocesar mi 214.
   Cola: D9-M105 (confirmar/refutar "sin trabajo real pendiente" contra disco), D10-M45-Arte-3D.
+
+
+## D9-M105 (Telemetria) - 2026-10-12 23:49 (Log 1795)
+
+- [x] Log reservado: **1795** - D9-M105 Telemetria (confirmar/refutar "sin trabajo real pendiente")
+- Mensaje 215 (mimo): D8-M151 ACEPTADO (94/167 exacto, GLOBAL actualizado); los 67 [ ] se quedan.
+  Habilita D9-M105 y D10-M45. Confirmado: atria pusheo M151 (a50686b, bd014fc..a50686b).
+- D9-M105 = VERIFICACION contra disco. **VEREDICTO: REFUTADO.** La fila 105 del GLOBAL (HEAD)
+  dice "M105 sin trabajo real pendiente - liberar agente"; contra disco hay **7 items con
+  trabajo real de M105**.
+- Categoria C (trabajo real, 7): L318 hook de cierre (`_notification`/`NOTIFICATION_WM_CLOSE_REQUEST`/
+  `_exit_tree` = 0 en telemetry_director.gd; `03-Diseno.md` sec.4 sin paso de cierre) - L165
+  `chapter_completed` = 0 - L200/L231/L234/L237 analisis de datos (03-Diseno.md solo tiene sec.1-6,
+  NO existe seccion de analisis; dos citas previas a sec.3.4/3.5 eran FALSAS) - L236 sin dueno
+  ni justificacion.
+- Categoria A (delegado por diseno, 26): 189, 191, 193, 204, 205, 209, 210, 215, 216, 217, 220, 221,
+  224, 227, 228, 229, 233, 245, 250, 293, 295, 296, 299, 300, 301, 302 (M104/M53/M91/M71/M22/M102/legal).
+  Verificado: `generate_session_id`/`session_id`/`save_events_to_cache`/`show_difficulty_survey` = 0
+  en M105 (correcto), y las APIs que M105 si expone existen (`solicitar_encuesta` 4, `puzzle_abandoned` 1,
+  `zone_ignored` 4, `time_to_first` 9, `session_duration` 5, `track_*` 12, `enviar_evento` 10,
+  `registrar_evento` 10, `establecer_opt_in` 2, `cambio_opt_in` 3).
+- Categoria B (datos post-release, 5): 145, 196, 197, 198, 199. Categoria D (residuales, 2): 322, 323.
+  26+5+7+2 = 40.
+- CONFIRMADO (no todo negativo): nucleo operativo SI - 4 suites headless re-corridas hoy con EXIT real:
+  test_telemetry 16/0, iter5 10/0, iter6 11/0, iter7 27/0 = **64 checks, 0 fallos, 4x EXIT 0**.
+  Autoload real en project.godot L29.
+- HALLAZGO: M105 se contradice en sus totales. L337 dice "Total de items: 165"; L345 dice 162;
+  real medido = **122 [x] / 0 [ ] / 40 [?] = 162**; GLOBAL (HEAD) dice `122/165` (stale por 3).
+  Explicacion: 3 fusiones Patron D (43->40) + 2 flips H-3 (120->122) = 165-5+2 = 162.
+  `verificar_checklist.py` NO lo detecta (su Verificacion 4 solo mira lineas `**Totales:**`).
+- Evidencia: 05-Checklist.md de M105 NO modificado (0 bytes de diferencia); log 1795 ASCII puro,
+  LF, 7272 B. Pool: 1795 consumido (head JUSTO antes = 1795 con BOM preexistente, trampa 77;
+  head post 1796). NO se commiteo el pool.
+- Ajeno NO tocado: (1) ERROR "non-existent singleton 'AnimationService'" en las 4 corridas
+  (animacion_jugador_m48.gd:40; no aborta, EXIT 0). (2) CHECKLIST-GLOBAL.md en reescritura ACTIVA
+  por otro agente (mtime 23:41:28; 160 filas; faltan IDs 2, 3, 62, 105, 142, 143, 152, 157;
+  filas concatenadas con `||`, trampa 86) -> la fila 105 se leyo desde `git show HEAD`.
+- Recomendacion NO ejecutada (no aplico cambios sin autorizacion): (1) hook de cierre + paso en
+  03-Diseno sec.4 + check en suite; (2) seccion de analisis en 03-Diseno; (3) definir
+  chapter_completed y dar dueno a L236; (4) alinear L337 165->162 y GLOBAL 122/165->122/162;
+  (5) L322/L323 a [x] por "plan-inicial descartado" si se autoriza.
+- Reporte 216; solicitud de commit a atria (msg 64). Tracker 213 -> 215.
+- Proxima: mensajes `*mimo*a-deepseek*` / `*atria*a-deepseek*` con NN > 215. NO reprocesar mi 216.
+  Cola: D10-M45 (Arte-3D).
