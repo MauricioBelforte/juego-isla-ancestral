@@ -45,7 +45,7 @@ func _test_tiendas_registradas() -> void:
 	_check(_sm.obtener_tienda("mercader_viajero") != null, "mercader_viajero registrada")
 	var stock: Dictionary = _sm.listar_stock("tienda_general")
 	_check(stock.size() >= 3, "tienda_general con stock: %d items" % stock.size())
-	_check(stock.has("madera_roble"), "madera_roble en catálogo")
+	_check(stock.has("wood"), "wood en catálogo")
 
 func _test_compra_basica() -> void:
 	# Dar AO y abrir la tienda (test headless: forzar horario laboral simulando tick)
@@ -55,22 +55,22 @@ func _test_compra_basica() -> void:
 	# compra fuera de horario debe rechazarse con CERRADA... verificar API con tick
 	_sm.tick_hora(2, 10)  # lunes 10:00 -> tienda general abierta (8-20)
 	var saldo_antes: int = int(_eco.saldo)
-	_sm.comprar("tienda_general", "madera_roble", 2)
-	_check(_inv.count_item("madera_roble") >= 2, "compra: madera en inventario")
+	_sm.comprar("tienda_general", "wood", 2)
+	_check(_inv.count_item("wood") >= 2, "compra: madera en inventario")
 	_check(int(_eco.saldo) < saldo_antes, "compra: AO consumido (%d -> %d)" % [saldo_antes, int(_eco.saldo)])
 	var stock: Dictionary = _sm.listar_stock("tienda_general")
-	_check(int(stock.get("madera_roble", 0)) <= stock.get("madera_roble", 999) or true, "stock actualizado")
+	_check(int(stock.get("wood", 0)) <= stock.get("wood", 999) or true, "stock actualizado")
 
 func _test_venta_basica() -> void:
-	# Vender lo comprado (recompra acepta madera_roble)
+	# Vender lo comprado (recompra acepta wood)
 	_sm.tick_hora(2, 10)
 	var saldo_antes: int = int(_eco.saldo)
-	var tengo: int = _inv.count_item("madera_roble")
+	var tengo: int = _inv.count_item("wood")
 	if tengo == 0:
-		_inv.agregar_items({"madera_roble": 2})
+		_inv.agregar_items({"wood": 2})
 		tengo = 2
-	_sm.vender("tienda_general", "madera_roble", 1)
-	_check(_inv.count_item("madera_roble") == tengo - 1, "venta: item removido del inventario")
+	_sm.vender("tienda_general", "wood", 1)
+	_check(_inv.count_item("wood") == tengo - 1, "venta: item removido del inventario")
 	_check(int(_eco.saldo) > saldo_antes, "venta: AO ganado (%d -> %d)" % [saldo_antes, int(_eco.saldo)])
 
 func _test_rechazos() -> void:
@@ -81,16 +81,16 @@ func _test_rechazos() -> void:
 		if not _eco.retirar_monedas(int(_eco.saldo)):
 			break
 	_sm.tick_hora(2, 10)
-	var stock_antes: int = int(_sm.listar_stock("tienda_general").get("madera_roble", 0))
-	_sm.comprar("tienda_general", "madera_roble", 1)
+	var stock_antes: int = int(_sm.listar_stock("tienda_general").get("wood", 0))
+	_sm.comprar("tienda_general", "wood", 1)
 	_check(int(_eco.saldo) == 0, "sin fondos: saldo sigue 0")
 	# Vender algo para restaurar (herrería no acepta madera; general sí)
-	_sm.vender("tienda_general", "madera_roble", 1)
+	_sm.vender("tienda_general", "wood", 1)
 	_check(int(_eco.saldo) > 0, "venta restauró saldo")
 	# Compra fuera de horario (22:00 -> cerrada)
 	_sm.tick_hora(2, 22)
-	var inv_antes: int = _inv.count_item("madera_roble")
-	_sm.comprar("tienda_general", "madera_roble", 1)
-	_check(_inv.count_item("madera_roble") == inv_antes, "cerrada: compra rechazada")
+	var inv_antes: int = _inv.count_item("wood")
+	_sm.comprar("tienda_general", "wood", 1)
+	_check(_inv.count_item("wood") == inv_antes, "cerrada: compra rechazada")
 	# Devolver saldo inicial para no afectar otros tests
 	_eco.depositar_monedas(saldo_guardado)

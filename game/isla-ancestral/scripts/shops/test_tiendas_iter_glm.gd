@@ -140,12 +140,12 @@ func _test_cantidad_invalida(sm) -> void:
 		motivos.append(motivo)
 	sm.compra_rechazada.connect(cb)
 	sm.venta_rechazada.connect(cb)
-	var stock_antes := int(sm.listar_stock("tienda_general").get("madera_roble", 0))
-	sm.comprar("tienda_general", "madera_roble", 0)
-	sm.comprar("tienda_general", "madera_roble", -3)
-	sm.vender("tienda_general", "madera_roble", -1)
+	var stock_antes := int(sm.listar_stock("tienda_general").get("wood", 0))
+	sm.comprar("tienda_general", "wood", 0)
+	sm.comprar("tienda_general", "wood", -3)
+	sm.vender("tienda_general", "wood", -1)
 	_check("L222: rechazos CANTIDAD_INVALIDA (motivo 8) x3", motivos.size() == 3 and motivos[0] == 8 and motivos[1] == 8 and motivos[2] == 8)
-	_check("L222: sin efectos laterales en stock", int(sm.listar_stock("tienda_general").get("madera_roble", 0)) == stock_antes)
+	_check("L222: sin efectos laterales en stock", int(sm.listar_stock("tienda_general").get("wood", 0)) == stock_antes)
 	sm.compra_rechazada.disconnect(cb)
 	sm.venta_rechazada.disconnect(cb)
 
@@ -176,15 +176,15 @@ func _test_atomicidad_inventario_lleno(sm, eco) -> void:
 	sm.tick_hora(1, 12)
 	sm.obtener_tienda("mercader_viajero").mercader_presente = true
 	eco.saldo = 100000
-	var stock_antes := int(sm.listar_stock("mercader_viajero").get("baya_roja", 0))
+	var stock_antes := int(sm.listar_stock("mercader_viajero").get("OBJ-ITE-024", 0))
 	var saldo_antes := int(eco.saldo)
 	var motivos: Array = []
 	var cb := func(_sid: String, _iid: String, motivo: int) -> void:
 		motivos.append(motivo)
 	sm.compra_rechazada.connect(cb)
-	sm.comprar("mercader_viajero", "baya_roja", 1)
+	sm.comprar("mercader_viajero", "OBJ-ITE-024", 1)
 	_check("atomicidad: rechazo INVENTARIO_LLENO (motivo 4)", motivos.size() == 1 and int(motivos[0]) == 4)
-	_check("atomicidad: stock REVERTIDO (sin pérdida)", int(sm.listar_stock("mercader_viajero").get("baya_roja", 0)) == stock_antes)
+	_check("atomicidad: stock REVERTIDO (sin pérdida)", int(sm.listar_stock("mercader_viajero").get("OBJ-ITE-024", 0)) == stock_antes)
 	_check("atomicidad: monedas REVERTIDAS (BUG fix: antes se perdían)", int(eco.saldo) == saldo_antes)
 	sm.compra_rechazada.disconnect(cb)
 	# Restaurar: vaciar las tapas para no contaminar los tests siguientes.
@@ -197,12 +197,12 @@ func _test_atomicidad_inventario_lleno(sm, eco) -> void:
 	inv.remover_items({"TAPA_M39_FULL": int(inv.count_item("TAPA_M39_FULL", true))})
 
 func _test_recargo_mercader_nucleo(sm, eco, db) -> void:
-	var item = db.get_item("baya_roja")
+	var item = db.get_item("OBJ-ITE-024")
 	if item != null and int(item.precio_compra) <= 0:
 		item.set("precio_compra", 100)
-	var precio_base: int = int(eco.precio_compra_vigente("baya_roja", "", 1))
+	var precio_base: int = int(eco.precio_compra_vigente("OBJ-ITE-024", "", 1))
 	_check("M38: precio base > 0 (variabilidad determinista)", precio_base >= 1)
-	var precio_recargado: int = int(eco.precio_compra_vigente("baya_roja", "", 1, 12.0))
+	var precio_recargado: int = int(eco.precio_compra_vigente("OBJ-ITE-024", "", 1, 12.0))
 	_check("L119/M38: recargo 12% > base (M38 aplica recargo)", precio_recargado >= precio_base)
 	# Compra REAL: el total lo emite la señal (fuente de verdad). Se valida
 	# integración: total == precio señalado * cantidad y clamp cozy >= 1. La
@@ -214,7 +214,7 @@ func _test_recargo_mercader_nucleo(sm, eco, db) -> void:
 		pares.append([total, precio])
 	sm.compra_exitosa.connect(cb)
 	eco.saldo = 100000
-	sm.comprar("mercader_viajero", "baya_roja", 1)
+	sm.comprar("mercader_viajero", "OBJ-ITE-024", 1)
 	sm.compra_exitosa.disconnect(cb)
 	_check("L119/L203: la compra del mercader EMITE la señal (1 compra)", pares.size() == 1)
 	if pares.size() == 1:
@@ -238,9 +238,9 @@ func _test_venta_sin_fondos(sm, eco) -> void:
 		if not bool(eco.retirar_monedas(int(eco.saldo))):
 			break
 	_check("L234: el jugador quedó con 0 monedas", int(eco.saldo) == 0)
-	inv.agregar_items({"madera_roble": 2})
+	inv.agregar_items({"wood": 2})
 	sm.tick_hora(1, 12)
-	var stock_antes := int(sm.listar_stock("tienda_general").get("madera_roble", 0))
+	var stock_antes := int(sm.listar_stock("tienda_general").get("wood", 0))
 	var ventas: Array = []
 	var rechazos: Array = []
 	var cb := func(_sid: String, _iid: String, cant: int, _tot: int, pr: int) -> void:
@@ -249,16 +249,16 @@ func _test_venta_sin_fondos(sm, eco) -> void:
 		rechazos.append(motivo)
 	sm.venta_exitosa.connect(cb)
 	sm.venta_rechazada.connect(cbr)
-	sm.vender("tienda_general", "madera_roble", 1)
+	sm.vender("tienda_general", "wood", 1)
 	sm.venta_exitosa.disconnect(cb)
 	sm.venta_rechazada.disconnect(cbr)
 	_check("L234: la venta con 0 monedas NO se rechaza", ventas.size() == 1 and rechazos.is_empty())
 	_check("L234: el ingreso entra al saldo (0 -> %d)" % int(eco.saldo), int(eco.saldo) > 0)
-	_check("L234: la tienda acumula el ítem vendido (acumular_stock)", int(sm.listar_stock("tienda_general").get("madera_roble", 0)) == stock_antes + 1)
+	_check("L234: la tienda acumula el ítem vendido (acumular_stock)", int(sm.listar_stock("tienda_general").get("wood", 0)) == stock_antes + 1)
 	_check("L234: el precio de venta es de M38 con clamp >= 1", ventas.size() == 1 and int(ventas[0][1]) >= 1)
 	# Restaurar el entorno para los tests siguientes.
 	eco.saldo = saldo_guardado
-	var restante: int = int(inv.count_item("madera_roble", true))
+	var restante: int = int(inv.count_item("wood", true))
 	if restante > 0:
-		inv.remover_items({"madera_roble": restante})
+		inv.remover_items({"wood": restante})
 

@@ -10,8 +10,8 @@
 - Fase: 9 (Economía y progreso)
 - Dificultad: 3
 - Visión: V0 (lógica); `shop_ui.gd` existe como esqueleto (M53)
-- Entrada: núcleo shops/ (shop, shop_data, shop_manager, stock_generator, catalogo_tiendas, reputacion_tienda, shop_ui) + suites `test_tiendas.gd` / `test_loop_economico.gd` verdes (EXIT=0, verificadas hoy)
-- Salida: **ENTREGADO** — CANTIDAD_INVALIDA + clamp precio >= 1 + `npc_id`/recargo reales a M38 + canales 2/3 del generador (estaciones/eventos) + consumo `estacion_cambio` + recuperación de días perdidos + mercader presente (aparición + persistencia) + `tienda_cerrada` con próxima apertura + validaciones de catálogo (ItemDatabase) + **fix atomicidad D8 (revert de monedas)** + tests (`test_tiendas_iter_glm.gd` 33/0)
+- Entrada: núcleo shops/ (shop, shop_data, shop_manager, stock_generator, catalogo_tiendas, reputacion_tienda, shop_ui) + suites `test_tiendas.gd` (EXIT=0) / `test_loop_economico.gd` (15/0) verdes
+- Salida: **ENTREGADO** — CANTIDAD_INVALIDA + clamp precio >= 1 + `npc_id`/recargo reales a M38 + canales 2/3 del generador (estaciones/eventos) + consumo `estacion_cambio` + recuperación de días perdidos + mercader presente (aparición + persistencia) + `tienda_cerrada` con próxima apertura + validaciones de catálogo (ItemDatabase) + **fix atomicidad D8 (revert de monedas)** + tests (`test_tiendas_iter_glm.gd` 39/0)
 - Resultado: **127 [x] / 54 [ ]** (antes 81/100) — pendientes: UI M53, ferias M73 en vivo, tipos semillas/pescadería, avisos ids M159 (BUG-046, dueño externo)
 - Archivos: `scripts/shops/shop_manager.gd` (fix D8), `scripts/shops/test_tiendas_iter_glm.gd`, `scripts/shops/test_loop_economico.gd` (BUG-028), `scripts/reporte_ids_items.py`, `scripts/run_shops_tests.bat`, `DOCUMENTACION/11-BUGS.md`, docs del módulo, `scripts-prueba/marcar_iter_glm.py`
 - Fecha cierre: 2026-09-19 (Log 1017)
@@ -301,7 +301,7 @@
 **Auditoría A (canal `agnes-3-flash` arch. 1334/48):** verificar `[x]` c/ evidencia en disco.
 Conteo real actual: **180 [x] / 0 [?] / 1 [ ]** (la nota de drift de 2026-09-20 dice 127/54, stale).
 
-- **Núcleo (VERDADERO):** `test_tiendas.gd` = **0 fallos**; `scripts/shops/` con 11 .gd
+- **Núcleo (VERDADERO):** `test_tiendas.gd` = **0 fallos** (EXIT 0; re-medido 2026-10-13 tras migrar los ids pre-BUG-106); `scripts/shops/` con 11 .gd
   (shop_manager, catalogo_tiendas, + tests) y catálogos registrados (`[M39] Catálogos
   definitivos: tienda_general, herreria, mercader_viajero`). Los 180 `[x]` del sistema de tiendas
   están sustentados. **Sin degradación.**
@@ -312,7 +312,7 @@ Conteo real actual: **180 [x] / 0 [?] / 1 [ ]** (la nota de drift de 2026-09-20 
   no un `[x]` falso de M39: la validación (L38) existe y corre; lo que falta es la **data en M15**.
 - No toqué el estado (lo pone el dueño/coordinador).
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 7)
-Los [x] auditados contra disco y sustentados; 0 degradaciones. Evidencia: test_tiendas_iter_glm.gd 39/0 = scripts/shops/ + catalogos. El 1 [ ] aislado = 'Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame' (necesita hardware/profiling, no es [x] inflado). H2: los 8 item_ids de M39 → M15 (deuda BUG-106, 7/8 resueltos, falta pergamino_rec_tela_lino).
+Los [x] auditados contra disco y sustentados; 0 degradaciones. Evidencia: test_tiendas_iter_glm.gd 39/0 = scripts/shops/ + catalogos. El 1 [ ] aislado = 'Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame' (necesita hardware/profiling, no es [x] inflado). H2: los 8 item_ids de M39 → M15 (deuda BUG-106, 7/8 resueltos, falta pergamino_rec_tela_lino). [CORRECCION 2026-10-13: entre el fix BUG-106 (2026-10-08) y esta migracion, `test_tiendas.gd` y `test_tiendas_iter_glm.gd` quedaron ROJAS (6 fallos cada una) por usar ids pre-BUG-106; migrados los ids (`madera_roble`->`wood`, `baya_roja`->`OBJ-ITE-024`), ambas dan EXIT 0 (39/0 la glm) — Log 1802.]
 
 ## Notas del Agente — Re-verificación de cierre (atria-dawn-s2, Kilo Code, 2026-10-08)
 
@@ -325,3 +325,12 @@ El [ ] aislado que registró agnes arriba fue cerrado por agnes-3-flash el 2026-
 Conteo canónico (regex `(?m)^\s*- \[x\]`): **181 [x] / 0 [ ] / 0 [?] = 181**. Línea de Totales actualizada en consecuencia. CHECKLIST-GLOBAL corregido: Progreso 180/181 → 181/181 (Log 1446). Estado 🟡 sin cambio — el flip a ✅ queda a decisión del director (no se realizó QA §21.8 sobre este cierre).
 
 Advertencias no bloqueantes observadas durante la corrida: 8 item_ids de catálogos de M39 inexistentes en M15 (deuda BUG-106 ya registrada; falta pergamino_rec_tela_lino) y tiendas sin npc_duenio_id (validar en editor).
+
+## Notas del Agente — Corrección de evidencia de tests (DeepSeek-V4.1-Flash, WorkBuddy, 2026-10-13, Log 1802)
+
+Corrección de las 4 afirmaciones de evidencia de tests que s2 denegó en el QA del Lote 350 (msg 360, §4):
+
+- Causa raíz: BUG-106 (2026-10-08) mapeó los ids del catálogo oficial de M39 a ids válidos de M15, pero no actualizó `test_tiendas.gd` ni `test_tiendas_iter_glm.gd`. Ambas suites usaban ids pre-BUG-106 y quedaron ROJAS (6 fallos cada una) mientras el checklist las citaba verdes.
+- Fix aplicado (mecánico): migrados los ids en las 2 suites — 17 reemplazos en `test_tiendas.gd` y 18 en `test_tiendas_iter_glm.gd` (`madera_roble`->`wood`, `baya_roja`->`OBJ-ITE-024`). EOL preservado por archivo (LF y CRLF respectivamente).
+- Re-medición 2026-10-13 (Godot 4.7.2 headless): `test_tiendas.gd` EXIT 0 / 0 fallos; `test_tiendas_iter_glm.gd` 39 [OK] / 0 fallos / EXIT 0; regresión verde `test_loop_economico.gd` 15/0, `test_catalogo_m39_m15.gd` EXIT 0, `test_bug106_verify.gd` 0/8 ausentes, `test_m39_rendimiento_tienda.gd` 8/0. 0 SCRIPT ERROR en las 6 corridas.
+- Conteo sin cambio: **181 [x] / 0 [ ] / 0 [?] = 181** (solo se corrigió texto, ningún flip de marca). El flip de estado a ✅ queda a decisión del director.
