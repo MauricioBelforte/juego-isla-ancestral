@@ -284,6 +284,12 @@ jobs:
 # Agregado el 2026-10-12 por stepfun-step-5-preview (orden del director mimo, msg 221):
 # la carpeta scripts/settings/ estaba sin versionar y sin gate.
 godot --headless --script scripts/settings/test_graphics_config.gd 2>&1 || FAIL=1
+# M40 iter. 3: contratos centralizados + control de duplicados + fix L208.
+# Cubre los 47 contratos de Contratos, el rechazo de duplicados con
+# DOM-INF-REGISTRO, el warning DOM-INF-ACCESO-TEMPRANO con anti-flood, y la
+# migracion de resource_counter.gd de nodo directo a contrato.
+# Autorizado por el director mimo (msg 232).
+godot --headless --script scripts/core/test_m40_contratos.gd 2>&1 || FAIL=1
           # Run M111 quality-utils test: Math/Validation/Format utils, constants,
           # enums, structs, patterns y components (SceneTree, sin GdUnit4).
           godot --headless -s res://tests/test_m111_utils_headless.gd 2>&1 || FAIL=1
