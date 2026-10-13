@@ -33,8 +33,8 @@
 - [x] RF1: declarar los 7 autoloads CORE en project.godot con prioridad explícita [M]
 - [x] RF1: EventBus, Logger, GameState, ServiceRegistry, SceneManager, GameFlowManager y Bootstrap en el orden documentado [M]
 - [x] RF3: ServiceRegistry con registrar(contrato, servicio) y única instancia por contrato [M]
-- [x] RF3: obtener(contrato) por StringName sin referencias directas entre módulos [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/core/service_registry.gd` L18 `get_service(contract: String) -> Variant`: devuelve la instancia registrada o `null`. ⚠ El contrato se tipa como **String**, no `StringName` como pide el ítem — funcionalmente equivalente, difiere el tipo.
-- [x] RF3: listar_contratos() devuelve copia de solo lectura [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` L30 `contracts() -> Array` devuelve `_registry.keys()` (copia en Godot 4) y L35 `list_registered() -> Array[String]`. No existe un método con el nombre literal `listar_contratos()`, pero el contrato funcional está cubierto.
+- [x] RF3: obtener(contrato) por StringName sin referencias directas entre módulos [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229: alignar checklist al código, no al revés):** el nombre literal del ítem no existe en el repo; la API real es la del fragmento citado. Se deja esta nota de alias para que un grep futuro no concluya que no está. Alias: `get_service(contract: String) -> Variant`.
+- [x] RF3: listar_contratos() devuelve copia de solo lectura [S] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229: alignar checklist al código, no al revés):** el nombre literal del ítem no existe en el repo; la API real es la del fragmento citado. Se deja esta nota de alias para que un grep futuro no concluya que no está. Alias: `contracts() -> Array` y `list_registered() -> Array[String]`.
 - [ ] RF3: registrar duplicado devuelve false y emite warning DOM-INF-REGISTRO [M]
 - [ ] RF3: obtener sobre contrato no registrado devuelve null + warning, nunca excepción [M]
 - [x] D4: auto-registro de servicios de dominio en su propio _ready() [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/core/bootstrap.gd` L58 `_autoregistrar_dominios()` y L100 `_register_core_services()`; además **34 archivos de runtime** se auto-registran solos (analytics_director, telemetry_director, music_director, sfx_manager, ambient_director, feedback_director, narrative_sound, backup_manager, cicd_manager, crash_reporter, data_store, debug_menu, dev_tools, dlc_manager, font_catalog, hardware_manager, house_manager, instalador_config, localization_manager, logger, mapa_manager, memory_monitor, merch_manager, modding_manager, motivacion_manager, platform_manager, security_manager, support_manager, ugc_manager, update_manager, world_bible, build_config_manager, community_manager).
@@ -47,9 +47,9 @@
 
 ## C. Requisitos funcionales — EventBus
 
-- [x] RF4: emitir(dominio, evento, payload) con dominios tipados [M]
-- [x] RF4: suscribir(dominio, evento, callable) con id de suscripción [M]
-- [x] RF4: desuscribir(dominio, evento, callable) sin errores si no existía [S]
+- [x] RF4: emitir(dominio, evento, payload) con dominios tipados [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229: alignar checklist al código, no al revés):** el nombre literal del ítem no existe en el repo; la API real es la del fragmento citado. Se deja esta nota de alias para que un grep futuro no concluya que no está. Alias: `EventBus.<dominio>.<evento>.emit(payload)` (señales nativas, 16 dominios).
+- [x] RF4: suscribir(dominio, evento, callable) con id de suscripción [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229: alignar checklist al código, no al revés):** el nombre literal del ítem no existe en el repo; la API real es la del fragmento citado. Se deja esta nota de alias para que un grep futuro no concluya que no está. Alias: `EventBus.<dominio>.<evento>.connect(callable)`.
+- [x] RF4: desuscribir(dominio, evento, callable) sin errores si no existía [S] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229: alignar checklist al código, no al revés):** el nombre literal del ítem no existe en el repo; la API real es la del fragmento citado. Se deja esta nota de alias para que un grep futuro no concluya que no está. Alias: `EventBus.<dominio>.<evento>.disconnect(callable)`.
 - [x] D5: dominios base según M07 (world, economy, inventory, npc, calendar, travel, ui) [M]
 - [x] D5: dominio infra con eventos game_flow, boot.completado, carga.iniciada/completada [M]
 - [x] RF4: el emisor nunca conoce receptores (sin acoplamiento emisor→receptor) [M]
@@ -74,7 +74,7 @@
 - [ ] D10: máximo 3 reintentos automáticos documentados en log, luego espera intervención [M]
 - [ ] RF7: boot.tscn siempre la primera escena del proyecto [S]
 - [ ] D10: prohibido crash mudo, loop de carga o menú a medio construir [S]
-- [x] RF8: estado inicial del juego siempre ESTADO_BOOT [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `scripts/core/game_flow_manager.gd` L13 `enum Estado { BOOT, MENU, CARGANDO, MUNDO, PAUSA, ERROR }` y L29 `var estado: int = Estado.BOOT`. No existe la constante con el nombre literal `ESTADO_BOOT`: es el valor de enum `Estado.BOOT`.
+- [x] RF8: estado inicial del juego siempre ESTADO_BOOT [S] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229: alignar checklist al código, no al revés):** el nombre literal del ítem no existe en el repo; la API real es la del fragmento citado. Se deja esta nota de alias para que un grep futuro no concluya que no está. Alias: `Estado.BOOT` (valor del enum de `game_flow_manager.gd`).
 
 ## E. Requisitos funcionales — Estados de juego
 
@@ -222,8 +222,8 @@
 - [x] Contrato esperado sin registrar (M38 ausente): verificar_integridad lo reporta antes del menú [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` L44 `validate_required(required) -> Array[String]` devuelve los faltantes; `bootstrap.gd` L132 `verificar_integridad_dominios()` lo usa y emite `DOM-INF-FALTANTE` con la lista.
 - [x] Dependencia circular entre scripts: diagnóstico estático la reporta con ruta de ciclo [C]
 - [ ] Servicio consultado en _ready() antes de registrarse: warning DOM-INF-ACCESO-TEMPRANO [M]
-- [ ] Registrar dos servicios con el mismo contrato: segundo registro rechazado con warning [M]
-- [ ] obtener() sobre contrato inexistente: null + warning, la UI muestra estado vacío sin crash [M]
+- [ ] Registrar dos servicios con el mismo contrato: segundo registro rechazado con warning [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229):** hoy `register()` sobrescribe sin rechazar.
+- [ ] obtener() sobre contrato inexistente: null + warning, la UI muestra estado vacío sin crash [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229):** hoy `get_service()` devuelve null sin warning.
 - [x] Config corrupta en el bootstrap: fallback a defaults + log DOM-INF-ERROR [M]
 - [ ] Reintento de arranque fallido repetido: máximo 3 intentos y mensaje de intervención [M]
 - [x] Cambio de estado ilegal (MUNDO → BOOT directo): rechazo con warning [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `game_flow_manager.gd` L34 `cambiar_estado()` valida contra `TRANSICIONES`; MUNDO solo permite [PAUSA, CARGANDO, MENU, ERROR] (L22), así que MUNDO→BOOT es inválida: L39 `push_warning("[M40] Transición inválida %d -> %d")` + `return false`.
@@ -236,8 +236,8 @@
 
 ## O. Optimización
 
-- [x] obtener() como lectura de Dictionary sin instanciación [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` L18-19: `func get_service(contract) -> Variant: return _registry.get(contract, null)`. Lectura directa, sin `new()` ni `instantiate()`.
-- [x] emitir() como reenvío directo del Callable, sin nodos temporales [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `event_bus.gd` (199 líneas) define 14 dominios como objetos con **señales nativas** (`var world := WorldEvents.new()`), no un método `emitir()` que reenvíe por Callable. No hay nodos temporales. ⚠ Difiere de la API literal del ítem.
+- [x] obtener() como lectura de Dictionary sin instanciación [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229):** el nombre literal no existe en el repo; la API real es la del fragmento citado. Nota de alias para que un grep futuro no concluya que no está. Alias: get_service(contract).
+- [x] emitir() como reenvío directo del Callable, sin nodos temporales [M] — **renombrado al código real (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 229):** el nombre literal no existe en el repo; la API real es la del fragmento citado. Nota de alias para que un grep futuro no concluya que no está. Alias: EventBus.<dominio>.<evento>.emit(...).
 - [x] cero _process en todos los autoloads CORE [M]
 - [x] máquinas puras sin temporizadores ni pooling en GameFlowManager y SceneManager [M]
 - [x] poda de suscriptores huérfanos para evitar fugas de Callables [M]
@@ -258,7 +258,7 @@
 - [x] Incluir Notas del Agente en 04-Codigo.md con honestidad y recomendaciones — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `04-Codigo.md` incluye la sección de Notas del Agente con recomendaciones para el próximo.
 - [ ] Crear 05-Checklist.md con más de 125 ítems todos completados [M]
 - [x] Firmar todos los archivos con modelo y plataforma [S] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): los 5 archivos de `plan-actual/` tienen firma de modelo y plataforma en la cabecera.
-- [ ] Copiar plan-inicial a plan-actual byte a byte (verificación por hash) [S]
+- [ ] Copiar plan-inicial a plan-actual byte a byte (verificación por hash) [S] — **Ítem inválido por diseño (orden del director mimo, msg 229, hallazgo K):** contradice AGENTS.md §3, que define plan-actual/ como la documentación vigente que hay que ACTUALIZAR. Verificado: de los 5 archivos, 02-Analisis y 03-Diseno son idénticos, pero 01-Requerimientos (12449 vs 13068), 04-Codigo (11716 vs 16607) y 05-Checklist (17969 vs 22946) difieren — y deben diferir. No se flipea ni se borra: la honestidad manda.
 - [x] Recomendar 06-Plan-Testings y 07-Resultados-Testings para la fase de implementación [S]
 
 ## Q. Testings
