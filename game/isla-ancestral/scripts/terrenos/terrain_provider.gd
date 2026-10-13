@@ -35,6 +35,11 @@ func _cargar_terrenos() -> void:
 			"nombre": String(t.get("nombre", "")),
 			"modificador": float(t.get("modificador", 1.0)),
 			"debug_color": String(t.get("debug_color", "")),
+			# M156 iter. 5 (lote I, 2026-10-13): config visual data-driven (§5.1/§5.2).
+			# Claves opcionales: terreno sin "huella"/"particulas" →
+			# get_visual_config() = {}.
+			"huella": t.get("huella", {}),
+			"particulas": t.get("particulas", {}),
 		}
 	print("[M156] Terrenos cargados: %d" % _terrenos.size())
 
@@ -61,9 +66,36 @@ func get_terrain_name(terrain_id: int) -> String:
 	return String(t.get("nombre", ""))
 
 
+## M156 iter. 5 (lote I, 2026-10-13, atria-dawn): config visual data-driven.
+## Devuelve {"huella_distancia", "huella_tamano", "huella_alpha", "color",
+## "particulas_frecuencia", "particulas_intensidad"}.
+## Terreno desconocido → diccionario vacio (el consumidor no dibuja).
 func get_visual_config(terrain_id: int) -> Dictionary:
-	# V2: las escenas visuales llegan con M45/M52 — la estructura ya existe
-	return {}
+	var t: Dictionary = _terrenos.get(terrain_id, {})
+	var h: Dictionary = t.get("huella", {})
+	if h.is_empty():
+		return {}
+	var color := _parsear_color(String(t.get("debug_color", "1,1,1")))
+	var p: Dictionary = t.get("particulas", {})
+	return {
+		"huella_distancia": float(h.get("distancia", 0.7)),
+		"huella_tamano": float(h.get("tamano", 0.5)),
+		"huella_alpha": float(h.get("alpha", 0.4)),
+		"color": color,
+		"particulas_frecuencia": float(p.get("frecuencia", 1.0)),
+		"particulas_intensidad": int(p.get("intensidad", 2)),
+	}
+
+
+## "r,g,b" (0-1) -> Color. Cadena invalida → Color.WHITE.
+func _parsear_color(texto: String) -> Color:
+	var partes := texto.split(",")
+	if partes.size() < 3:
+		return Color.WHITE
+	var r := float(partes[0])
+	var g := float(partes[1])
+	var b := float(partes[2])
+	return Color(clampf(r, 0.0, 1.0), clampf(g, 0.0, 1.0), clampf(b, 0.0, 1.0))
 
 
 func get_audio_config(terrain_id: int) -> Dictionary:

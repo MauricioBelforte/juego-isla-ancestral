@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+
+[node name="Particulas" type="CPUParticles3D"]
+emitting = false
+amount = 4
+lifetime = 0.8
+direction = Vector3(0, 1, 0)
+spread = 25.0
+gravity = Vector3(0, -6, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+color = Color(0.4, 0.75, 0.3, 1)
+scale = Vector3(0.04, 0.04, 0.04)

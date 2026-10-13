@@ -179,35 +179,35 @@
 
 ## I. Feedback Visual
 
-- [?] Crear sistema de huellas por terreno [M] - BUG-070 lote 8: sistema de huellas inexistente - huella_*.tscn son [ ] (L183-189), 0 archivos de huellas en disco
-- [ ] Crear escena huella_ceped.tscn [S]
-- [ ] Crear escena huella_barro.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear escena huella_pavimento.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear escena huella_arena.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear escena huella_agua.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear escena huella_nieve.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear escena huella_rocas.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [?] Crear sistema de particulas por terreno [M] - BUG-070 lote 8: sistema de particulas inexistente - particulas_*.gd son [?]/[ ] (L191-196)
-- [ ] Crear particulas_ceped.gd [S]
-- [?] Crear particulas_barro.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
-- [?] Crear particulas_arena.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
-- [?] Crear particulas_agua.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
-- [?] Crear particulas_nieve.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
-- [?] Crear particulas_rocas.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
-- [ ] Configurar ParticleProcessMaterial para ceped [M]
-- [ ] Configurar ParticleProcessMaterial para barro [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Configurar ParticleProcessMaterial para arena [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Configurar ParticleProcessMaterial para agua [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Configurar ParticleProcessMaterial para nieve [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Configurar ParticleProcessMaterial para rocas [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [?] Implementar activacion solo en movimiento [S] - BUG-070 lote 8: sistema de huellas inexistente - huella_*.tscn son [ ] (L183-189), 0 archivos de huellas en disco
-- [?] Implementar desactivacion al detenerse [S] - BUG-070 lote 8: sistema de huellas inexistente - huella_*.tscn son [ ] (L183-189), 0 archivos de huellas en disco
-- [?] Configurar frecuencia de efectos por terreno [M] - BUG-070 lote 8: sistema de huellas inexistente - huella_*.tscn son [ ] (L183-189), 0 archivos de huellas en disco
-- [?] Configurar intensidad de efectos por terreno [M] - BUG-070 lote 8: sistema de huellas inexistente - huella_*.tscn son [ ] (L183-189), 0 archivos de huellas en disco
-- [ ] Instanciar huellas en posicion del jugador [M]
-- [?] Destruir huellas despues de tiempo configurable [S] - BUG-070 lote 8: sistema de huellas inexistente - huella_*.tscn son [ ] (L183-189), 0 archivos de huellas en disco
-- [ ] Limitar numero maximo de huellas activas [M]
-- [?] Implementar pooling de huellas [M] - BUG-070 lote 8: sistema de huellas inexistente - huella_*.tscn son [ ] (L183-189), 0 archivos de huellas en disco
+- [x] Crear sistema de huellas por terreno [M] — atria-dawn 2026-10-13 (lote I): scripts/terrenos/terrain_footprints.gd (gestor con pooling, fade-out, espaciado data-driven) + 7 escenas huella_*.tscn + integrado en Player.tscn como nodo TerrainFootprints; 41/41 checks headless
+- [x] Crear escena huella_ceped.tscn [S] — atria-dawn 2026-10-13: scenes/terrenos/huella_ceped.tscn (PlaneMesh + StandardMaterial3D color 0.4,0.75,0.3 alpha 0.35)
+- [x] Crear escena huella_barro.tscn [S] — atria-dawn 2026-10-13: scenes/terrenos/huella_barro.tscn
+- [x] Crear escena huella_pavimento.tscn [S] — atria-dawn 2026-10-13: scenes/terrenos/huella_pavimento.tscn
+- [x] Crear escena huella_arena.tscn [S] — atria-dawn 2026-10-13: scenes/terrenos/huella_arena.tscn
+- [x] Crear escena huella_agua.tscn [S] — atria-dawn 2026-10-13: scenes/terrenos/huella_agua.tscn
+- [x] Crear escena huella_nieve.tscn [S] — atria-dawn 2026-10-13: scenes/terrenos/huella_nieve.tscn
+- [x] Crear escena huella_rocas.tscn [S] — atria-dawn 2026-10-13: scenes/terrenos/huella_rocas.tscn
+- [x] Crear sistema de particulas por terreno [M] — atria-dawn 2026-10-13 (lote I): scripts/terrenos/terrain_particles.gd (gestor con pooling de emisores, rafagas por frecuencia data-driven) + 7 escenas particulas_*.tscn (CPUParticles3D procedural) + nodo TerrainParticles en Player.tscn; 41/41 checks headless
+- [ ] Crear particulas_ceped.gd [S] — atria-dawn 2026-10-13 (lote I): NO se crea el .gd nombrado; la implementacion es scenes/terrenos/particulas_ceped.tscn (CPUParticles3D con props directas) + gestor unico terrain_particles.gd. CPUParticles3D no soporta script por terreno — ver nota en Notas del Agente
+- [?] Crear particulas_barro.gd [S] — atria-dawn 2026-10-13: idem particulas_ceped.gd — escena particulas_barro.tscn en su lugar (data-driven)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [?] Crear particulas_arena.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_arena.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [?] Crear particulas_agua.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_agua.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [?] Crear particulas_nieve.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_nieve.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [?] Crear particulas_rocas.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_rocas.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [ ] Configurar ParticleProcessMaterial para ceped [M] — atria-dawn 2026-10-13 (lote I): NO aplica — CPUParticles3D NO soporta process_material (propiedad de GPUParticles3D, medido en runtime). Configuracion equivalente directa en el nodo particulas_ceped.tscn (direction/spread/gravity/initial_velocity/color/scale por terreno)
+- [ ] Configurar ParticleProcessMaterial para barro [M] — atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_barro.tscn
+- [ ] Configurar ParticleProcessMaterial para arena [M] — atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_arena.tscn
+- [ ] Configurar ParticleProcessMaterial para agua [M] — atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_agua.tscn
+- [ ] Configurar ParticleProcessMaterial para nieve [M] — atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_nieve.tscn
+- [ ] Configurar ParticleProcessMaterial para rocas [M] — atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_rocas.tscn
+- [x] Implementar activacion solo en movimiento [S] — atria-dawn 2026-10-13 (lote I): terrain_footprints.gd L162-166 y terrain_particles.gd L141-147 (velocidad horizontal >= velocidad_minima @export)
+- [x] Implementar desactivacion al detenerse [S] — atria-dawn 2026-10-13 (lote I): reinicia el espaciado/timer al detenerse (footprints L165, particles L145) — §5.3.4
+- [x] Configurar frecuencia de efectos por terreno [M] — atria-dawn 2026-10-13 (lote I): data/terrenos/terrenos.json "huella.distancia" (0.5-1.0) y "particulas.frecuencia" (0.4-1.2) por terreno, leidos por provider get_visual_config
+- [x] Configurar intensidad de efectos por terreno [M] — atria-dawn 2026-10-13 (lote I): "huella.tamano"/"huella.alpha" y "particulas.intensidad" (1-8) por terreno en terrenos.json
+- [x] Instanciar huellas en posicion del jugador [M] — atria-dawn 2026-10-13 (lote I): terrain_footprints.gd _posicion_pies() — pies del jugador, 0.25m retraso opuesto a la marcha
+- [x] Destruir huellas despues de tiempo configurable [S] — atria-dawn 2026-10-13 (lote I): @export duracion_huella (8s) + fade-out por tween (duracion_fade) + liberacion al pool
+- [x] Limitar numero maximo de huellas activas [M] — atria-dawn 2026-10-13 (lote I): @export max_huellas (24) con reciclado de la mas vieja; verificado en test (limitadas a 4)
+- [x] Implementar pooling de huellas [M] — atria-dawn 2026-10-13 (lote I): _pool de MeshInstance3D reutilizadas (mesh compartido por terreno, alpha por material_override unico); test verifica pool crece y reusa
 
 ## J. Feedback Audio
 
@@ -311,9 +311,9 @@
 - [x] Implementar timer de deteccion (no cada frame) [M]
 - [x] Implementar cache de ultimo terreno [S]
 - [x] Implementar debounce para evitar flickering [M]
-- [ ] Limitar numero maximo de huellas activas [M]
-- [?] Implementar pooling de huellas [M] - BUG-070 lote 8 re-verificacion (DeepSeek #112): duplicado de L210 (ya [?]); grep pool|huella sobre scripts de terreno = 0 hits
-- [ ] Usar Object pooling para particulas [M]
+- [x] Limitar numero maximo de huellas activas [M] — atria-dawn 2026-10-13 (lote I): duplicado de L209, cubierto por terrain_footprints.gd max_huellas
+- [x] Implementar pooling de huellas [M] — atria-dawn 2026-10-13 (lote I): duplicado de L210, cubierto por terrain_footprints.gd (_pool)
+- [x] Usar Object pooling para particulas [M] — atria-dawn 2026-10-13 (lote I): terrain_particles.gd _pool de CPUParticles3D reutilizadas; verificado en test (pool crece a 3 y reusa)
 - [?] Verificar que raycast no impacta FPS [M] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2) - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): implementador admitio en L404 que 7 [x] NO se hicieron (montaje/medicion diferido a iter. 2); TerrainDetector ausente de escenas/player (grep 0 hits) - regla M114: diferido no es hecho
 - [ ] Verificar que audio no causa lag [S]
 - [x] Medir tiempo de ejecucion por deteccion [S]
@@ -388,7 +388,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 307 items - Completados: 182 - Pendientes: 69 - No resueltos: 56. (atria-dawn 2026-10-13: 13 flips `[ ]`→`[x]` con cita real verificada en disco — ver "Notas del Agente" al final. Previo: 169/82/56.) (BUG-070 lote 8 + re-verificacion DeepSeek #112, atria-dawn 2026-10-09: 49 [x] degradados a [?] en total - inflacion confesa M114 L404 + Patron D + Familia A sin artefacto en disco. Conteo real en marcas: 153/91/63.)
+**Totales:** 307 items - Completados: 202 - Pendientes: 58 - No resueltos: 47. (atria-dawn 2026-10-13 lote I: 20 flips (11 `[ ]`→`[x]` + 9 `[?]`→`[x]`) por implementacion de los sistemas de huellas y particulas; 41/41 checks headless + suites existentes sin regresion. Previo: 182/69/56.) (atria-dawn 2026-10-13: 13 flips `[ ]`→`[x]` con cita real verificada en disco — ver "Notas del Agente" al final. Previo: 169/82/56.) (BUG-070 lote 8 + re-verificacion DeepSeek #112, atria-dawn 2026-10-09: 49 [x] degradados a [?] en total - inflacion confesa M114 L404 + Patron D + Familia A sin artefacto en disco. Conteo real en marcas: 153/91/63.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"299 items - Completados: 299 - Pendientes: 0"* — un
@@ -485,3 +485,79 @@ Cada flip se verificó leyendo el archivo citado antes de marcar:
 - El núcleo data-driven funciona (provider + modifiers + detector + integracion M11/M155 verificada). El delta restante es **feedback visual/audio/UI** (secciones I, J, L): son ~30 items que cuelgan de 3 sistemas a crear (huellas, particulas, indicador UI) — ver 03-Diseno.md §5/§6/§7 para el diseño ya escrito.
 - Considerar si el módulo debe cerrarse como "core data-driven V0" (feedback V1/V2): el diseño ya recortó huellas/particulas/indicador UI en V0 (ver Reserva actual: "huellas/particulas/indicador UI recortados V0"). Si el director decide eso, los items I/J/L/S se marcan `[?]` con justificacion de scope-cut, no `[x]`.
 - `scripts/terrain/` (legacy) coexiste con `scripts/terrenos/` — los class_name renombrados a *Legacy (Log de deepseek); conviene confirmar que nadie los importa antes de eliminar.
+
+## Notas del Agente — LOTE I: feedback visual (atria-dawn / Kilo Code, 2026-10-13)
+
+**Modelo:** atria (Atria-Dawn-Preview)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-13 01:50
+**Estado:** Lote I completado (huellas + particulas). 20 flips aplicados.
+**Encargo:** director #56 — "crear los sistemas I/J/L", orden I → J → L, commit
+por lote con pathspec, test headless.
+
+### Sistemas creados (todos en disco, testeados)
+
+- `scripts/terrenos/terrain_footprints.gd` — gestor de huellas: pooling de
+  MeshInstance3D, limite `max_huellas`, fade-out por tween, espaciado por
+  distancia recorrida, activacion solo en movimiento, autoconexion al hermano
+  TerrainDetector (signal terrain_changed).
+- `scripts/terrenos/terrain_particles.gd` — gestor de particulas: pooling de
+  CPUParticles3D, limite `max_emisores`, rafagas por frecuencia data-driven,
+  intensidad → amount.
+- `scenes/terrenos/huella_{ceped,barro,pavimento,arena,agua,nieve,rocas}.tscn`
+  (7 escenas) — PlaneMesh + StandardMaterial3D color del terreno, alpha, sin
+  texturas externas.
+- `scenes/terrenos/particulas_*.tscn` (7 escenas) — CPUParticles3D procedural
+  (direction/spread/gravity/initial_velocity/color/scale por terreno).
+- `data/terrenos/terrenos.json` — schema_version 2: anadidas "huella"
+  (distancia/tamano/alpha) y "particulas" (frecuencia/intensidad) por terreno.
+- `scripts/terrenos/terrain_provider.gd` — `get_visual_config()` implementado
+  (antes retornaba {}) + fix: `_cargar_terrenos` ahora conserva las claves
+  "huella"/"particulas" (antes las descartaba).
+- `scenes/player/Player.tscn` — nodos hijos TerrainFootprints y
+  TerrainParticles (no se toco player.gd: §15, sistemas autoconectados).
+- `tests/test_terrain_footprints_m156.gd` — suite nueva, 41 checks.
+
+### Verificacion
+
+- `test_terrain_footprints_m156.gd`: **41 OK / 0 FAIL** (headless Godot
+  4.7.2, `--headless --path game/isla-ancestral`).
+- Sin regresion: test_terrenos.gd 27/0, test_terrenos_b3.gd 28/0,
+  test_terrenos_integracion.gd 39/0.
+- Conteo estricto post-flips: **202 [x] / 58 [ ] / 47 [?] = 307** (sin drift).
+
+### Lo que NO se flipo (honestidad obligatoria)
+
+- **`Crear particulas_*.gd` (6 items, L191-196):** el artefacto .gd nombrado no
+  existe y no tiene sentido (un script por terreno). La implementacion es
+  escena + gestor unico. Quedan `[ ]`/`[?]` con nota.
+- **`Configurar ParticleProcessMaterial para *` (7 items, L197-202):**
+  ParticleProcessMaterial es propiedad de **GPUParticles3D**, no de
+  CPUParticles3D (medido en runtime: "Invalid access to property
+  'process_material' on CPUParticles3D"). La config equivalente va directa en
+  el nodo de cada escena. Quedan `[ ]` con nota "no aplica".
+  Si el director prefiere GPUParticles3D para igualar el diseno literal, es un
+  cambio de motor de particulas (no solo de material) — queda a su decision.
+- **Seccion S (polish):** pendiente de los sistemas J (audio) y L (indicador
+  UI), que son los proximos lotes.
+
+### Decisiones tecnicas
+
+- **CPUParticles3D sobre GPUParticles3D:** funciona en headless sin GPU y es
+  adecuado para particulas pequenas de terreno (pocas, cortas). Documentado en
+  el gestor y aqui.
+- **Materials:** mesh compartido por terreno (inmutable) + material_override
+  duplicado por nodo activo (alpha independiente por huella para el fade).
+- **Sin texturas/binarios nuevos:** todo procedural (el director prohibio
+  inventar assets binarios).
+
+### Recomendaciones para el proximo agente
+
+- **Lote J (audio):** el diseno §6 + §8 ya tiene el script TerrainFootstepAudio
+  escrito como referencia; falta crear los samples wav (el director dijo:
+  si no existen, dejar `[ ]` con "pendiente asset" — no inventar binarios).
+- **Lote L (indicador UI):** §7 — TextureRect + Label + ProgressBar; actualizar
+  on terrain_changed (no cada frame).
+- Los meshes/materiales procedurales se pueden mejorar visualmente con
+  texturas reales cuando M45/M52 entreguen assets (el visual_config de
+  TerrainDataM156 ya tiene los placeholders).

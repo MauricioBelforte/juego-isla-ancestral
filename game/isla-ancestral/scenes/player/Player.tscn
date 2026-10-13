@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://assets/3d/media/45-Arte3D_jugador_voxel.glb" id="2_voxel"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/player/player_core_m11.gd" id="4_core_m11"]
 [ext_resource type="AnimationLibrary" path="res://scripts/animacion/libraries/jugador_lib.tres" id="5_jugador_lib"]
 [ext_resource type="Script" path="res://scripts/animacion/animacion_jugador_m48.gd" id="6_anim_m48"]
+[ext_resource type="Script" path="res://scripts/terrenos/terrain_footprints.gd" id="7_footprints"]
+[ext_resource type="Script" path="res://scripts/terrenos/terrain_particles.gd" id="8_particles"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
 radius = 0.4
@@ -30,6 +32,12 @@ collision_mask = 32
 collide_with_areas = false
 collide_with_bodies = true
 script = ExtResource("3_terrain")
+
+[node name="TerrainFootprints" type="Node3D" parent="."]
+script = ExtResource("7_footprints")
+
+[node name="TerrainParticles" type="Node3D" parent="."]
+script = ExtResource("8_particles")
 
 [node name="NucleoM11" type="Node" parent="."]
 script = ExtResource("4_core_m11")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rocas"]
+albedo_color = Color(0.5, 0.5, 0.55, 0.25)
+transparency = 1
+shading_mode = 0
+cull_mode = 2
+no_depth_test = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rocas"]
+material = SubResource("StandardMaterial3D_rocas")
+size = Vector2(1, 1)
+
+[node name="Huella" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_rocas")
+cast_shadow = 0
