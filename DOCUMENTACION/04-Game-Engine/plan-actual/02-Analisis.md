@@ -111,3 +111,35 @@ Nota de metodo: los 12 items son de evaluacion/documentacion cuya evidencia ya e
 este archivo (secciones 1-5, autoria del modulo) y en `Logs/17`. La iteracion 2 no crea
 contenido nuevo: verifica cada item contra su cita en disco y marca el checklist. Ningun
 item de implementacion (secciones F/G/J) fue tocado.
+
+
+## 8. Verificacion de soporte voxel y rendimiento - seccion C del checklist (2026-10-13, step 5 workbuddy)
+
+Auditoria de los 14 items de la seccion C (`05-Checklist.md`, lineas 48-61) contra evidencia
+en disco. Cada flip del checklist cita esta seccion. Todas las lineas citadas fueron
+verificadas por grep/sed sobre el archivo en disco ANTES de escribir el flip (guardrail del
+director, msgs 5 y 9 del 2026-10-13: "grep/sed por item antes del flip").
+
+| # | Item | Evidencia (archivo + linea, verificada en disco) |
+|---|---|---|
+| C1 | Voxel Tools (Zylann) como modulo clave | Este archivo L19 (punto 6 del plan maestro: "Voxel Tools (godot_voxel, Zylann)... caso de uso exacto del juego") + L20 (punto 7: "Voxel Tools + editor propio de chunks"); `03-Diseno.md` L12 (stack: "Terreno voxel | Voxel Tools (Zylann) - GDExtension C++"); addon real en disco: `game/isla-ancestral/addons/zylann.voxel/` (LICENSE.md MIT de Marc Gilleron, `bin/` con libvoxel.*.dll/.so, `voxel.gdextension`) |
+| C2 | Voxel Tools es C++/GDExtension orientado a rendimiento | Este archivo L19 ("C++/GDExtension") + L46 (tabla comparativa: "Voxel Tools (C++)"); `03-Diseno.md` L12 ("GDExtension C++"); binario compilado en disco `addons/zylann.voxel/bin/libvoxel.windows.editor.x86_64.dll` (+ .so/.dylib del resto de plataformas) |
+| C3 | Soporte de terreno editable en tiempo real | Este archivo L19 ("terreno editable") + L20 ("editor propio de chunks"); `03-Diseno.md` L12; `DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md` seccion 5 L106 (edicion por raycast: `vt.do_ray(origin, direction, 50.0)`, `vt.do_point`, `vt.set_voxel`); runtime: `05-Checklist.md` L13 ("sistema VoxelTerrain + VoxelGeneratorNoise2D + colision operativos") |
+| C4 | Colisiones voxel tipo Minecraft del modulo | `01-Requerimientos.md` L19 (RF1: "Terreno por bloques, extraccion/colocacion, colisiones voxel, rendimiento 60 FPS"); este archivo L19 ("colisiones") + L36 (punto 25: "colisiones voxel via Voxel Tools"); `03-Diseno.md` L12; runtime: `05-Checklist.md` L13 |
+| C5 | Streaming de chunks infinito | Este archivo L19 ("streaming") + L48 ("Voxel a gran escala | Disenado para eso"); `01-Requerimientos.md` L22 (RF4: "LOD y streaming | Chunks lejanos con menos detalle; streaming entre islas"); `03-Diseno.md` L26 (streaming por isla con carga diegetica). Nota de honestidad: los docs del modulo documentan el streaming del addon (L19) y el streaming entre islas (L26); la palabra "infinito" no aparece afirmada explicitamente - se cita lo que existe |
+| C6 | LOD Transvoxel para terreno suave | Este archivo L19 ("LOD Transvoxel"); `03-Diseno.md` L25 ("LOD Transvoxel para chunks lejanos; transicion suave al editar"); `01-Requerimientos.md` L22 (RF4) |
+| C7 | Meshing multihilo (sin bloquear hilo principal) | `03-Diseno.md` L24 ("Remallado en hilos secundarios; nunca bloquear el hilo principal") + L12 ("meshing multihilo"); `01-Requerimientos.md` L21 (RF3: "Threading de generacion | Remallado de chunks sin bloquear el hilo principal") |
+| C8 | Face culling como requisito innegociable (GDD directiva 1) | `01-Requerimientos.md` L20 (RF2: "Face culling / greedy meshing | Solo caras visibles (GDD directiva 1)"); `03-Diseno.md` L23 ("Face culling + greedy meshing obligatorios (GDD directiva 1)"); `DOCUMENTACION/02-Vision-Y-Concepto/plan-actual/03-Diseno.md` L86 ("voxel con face culling (solo caras visibles) desde el dia 1 (GDD seccion 5 directiva 1)") |
+| C9 | Greedy meshing como optimizacion a evaluar | `01-Requerimientos.md` L20 (RF2, mismo requisito que C8); `03-Diseno.md` L23. Nota de honestidad: el diseno del modulo lo fija como OBLIGATORIO (GDD directiva 1), mas firme que el "a evaluar" del item; se cita el estado real documentado |
+| C10 | Diffs de chunk para persistencia (no guardar mundo entero) | `03-Diseno.md` L27 ("Persistencia por diffs de chunk (no guardar el mundo entero)") - coincidencia textual con el item |
+| C11 | Conteo de draw calls del terreno mesheado | Medicion real: `Logs/386-M61-Rendimiento-Mediciones-Reales_2026-09-01_19-05-00.md` L17 ("Draw calls promedio 374.0 | objetivo <= 400 (E.59) | Dentro") y L28 ("~374 draw calls y 16.35 ms/frame - margen para el contenido que entrara"); `DOCUMENTACION/08-Mundo-Voxel/plan-actual/03-Diseno.md` L115 ("Metricas: draw calls/chunk, ms de remesh, radio optimo"); `61-Rendimiento/plan-actual/01-Requerimientos.md` L52 (RF5: "Draw calls, overdraw, shader cost por render pas") |
+| C12 | Presupuesto de particulas/vfx del motor | `DOCUMENTACION/52-Particulas-Y-VFX/plan-actual/03-Diseno.md` seccion 3.1 L73-95 (catalogo con "Particulas max" por efecto: 24 a 1.000) + L32 ("respeta el presupuesto por escena") + L41 ("emisores activos < 12"); `61-Rendimiento/plan-actual/02-Analisis.md` L46 ("GPUParticles + pool para las de larga vida... el pool da control de presupuesto"); `32-Clima/plan-actual/04-Codigo.md` L84 (particulas_clima "Con M61 (presupuesto 1 ms)") |
+| C13 | Raycast voxel para herramientas (pala/pico/hacha) | `DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md` seccion 5 L96-116 ("Terrateniente - Edicion de bloques por raycast": obtener VoxelTool, `vt.do_ray`, colocar en hit_pos + hit_normal); `03-Diseno.md` L14 ("Colisiones voxel via raycast de Voxel Tools"); este archivo L20 (punto 7) |
+| C14 | Validacion 60 FPS como criterio de aceptacion del motor | `03-Diseno.md` seccion 4 L41 (prototipo: "chunk 16 al cubo con face culling + editing + camara orbitando + raycast de bloque a 60 FPS sostenidos en una PC media y Steam Deck. Si falla, revisar greedy meshing/threading antes de avanzar; si persiste, re-evaluar motor"); `01-Requerimientos.md` L40 (criterio de aceptacion 4) + L45 ("El GDD exige voxel a 60 FPS: esa es la vara minima del motor"); este archivo L58 (riesgo transvoxel -> "Hito M1 valida antes de avanzar"); `Log 386` L16 (59.35 FPS promedio medidos en bench real, WARN por Vsync) |
+
+Nota de metodo: los 14 items son de documentacion cuya evidencia ya existia en los docs del
+modulo (secciones 1-5 y `01-Requerimientos`/`03-Diseno`), en el addon instalado en disco, en
+`GUIA-GODOT/08` y en el bench real del Log 386. La iteracion 3 no crea contenido nuevo:
+verifica cada item contra su cita en disco y marca el checklist. Ningun item de implementacion
+(secciones F/G/J) fue tocado. Notas de honestidad explicitas en C5 ("infinito" no afirmado
+textualmente) y C9 (el diseno es mas firme que el item: obligatorio, no "a evaluar").

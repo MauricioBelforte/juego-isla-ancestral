@@ -45,20 +45,20 @@
 
 ## C. Soporte voxel y rendimiento (14)
 
-- [ ] Documentar Voxel Tools (Zylann) como módulo clave [S]
-- [ ] Documentar que Voxel Tools es C++/GDExtension orientado a rendimiento [S]
-- [ ] Documentar soporte de terreno editable en tiempo real [S]
-- [ ] Documentar colisiones voxel tipo Minecraft del módulo [S]
-- [ ] Documentar streaming de chunks infinito [S]
-- [ ] Documentar LOD Transvoxel para terreno suave [S]
-- [ ] Documentar meshing multihilo (sin bloquear hilo principal) [S]
-- [ ] Documentar face culling como requisito innegociable (GDD directiva 1) [S]
-- [ ] Documentar greedy meshing como optimización a evaluar [S]
-- [ ] Documentar diffs de chunk para persistencia (no guardar mundo entero) [S]
-- [ ] Documentar el conteo de draw calls del terreno mesheado [S]
-- [ ] Documentar el presupuesto de partículas/vfx del motor [S]
-- [ ] Documentar el raycast voxel para herramientas (pala/pico/hacha) [S]
-- [ ] Documentar la validación 60 FPS como criterio de aceptación del motor [S]
+- [x] Documentar Voxel Tools (Zylann) como módulo clave [S] (cita: 02-Analisis.md L19 (punto 6: "Voxel Tools (godot_voxel, Zylann)... caso de uso exacto del juego") + L20 (punto 7); 03-Diseno.md L12 (stack: terreno voxel = Voxel Tools); addon en disco game/isla-ancestral/addons/zylann.voxel/ (LICENSE.md MIT + bin/ + voxel.gdextension) - ver §8 C1)
+- [x] Documentar que Voxel Tools es C++/GDExtension orientado a rendimiento [S] (cita: 02-Analisis.md L19 ("C++/GDExtension") + L46 ("Voxel Tools (C++)"); 03-Diseno.md L12 ("GDExtension C++"); binario compilado en disco addons/zylann.voxel/bin/libvoxel.windows.editor.x86_64.dll - ver §8 C2)
+- [x] Documentar soporte de terreno editable en tiempo real [S] (cita: 02-Analisis.md L19 ("terreno editable") + L20 ("editor propio de chunks"); 03-Diseno.md L12; GUIA-GODOT/08-terreno-voxel.md §5 L106 (vt.do_ray/do_point/set_voxel); runtime: 05-Checklist.md L13 (VoxelTerrain + VoxelGeneratorNoise2D operativos) - ver §8 C3)
+- [x] Documentar colisiones voxel tipo Minecraft del módulo [S] (cita: 01-Requerimientos.md L19 (RF1: "colisiones voxel"); 02-Analisis.md L19 + L36 ("colisiones voxel vía Voxel Tools"); 03-Diseno.md L12; runtime: 05-Checklist.md L13 ("colisión operativos") - ver §8 C4)
+- [x] Documentar streaming de chunks infinito [S] (cita: 02-Analisis.md L19 ("streaming") + L48 ("Voxel a gran escala | Diseñado para eso"); 01-Requerimientos.md L22 (RF4: "LOD y streaming"); 03-Diseno.md L26 (streaming por isla) - ver §8 C5)
+- [x] Documentar LOD Transvoxel para terreno suave [S] (cita: 02-Analisis.md L19 ("LOD Transvoxel"); 03-Diseno.md L25 ("LOD Transvoxel para chunks lejanos; transición suave al editar"); 01-Requerimientos.md L22 (RF4) - ver §8 C6)
+- [x] Documentar meshing multihilo (sin bloquear hilo principal) [S] (cita: 03-Diseno.md L24 ("Remallado en hilos secundarios; nunca bloquear el hilo principal") + L12 ("meshing multihilo"); 01-Requerimientos.md L21 (RF3: "Remallado de chunks sin bloquear el hilo principal") - ver §8 C7)
+- [x] Documentar face culling como requisito innegociable (GDD directiva 1) [S] (cita: 01-Requerimientos.md L20 (RF2: "Face culling / greedy meshing | Solo caras visibles (GDD directiva 1)"); 03-Diseno.md L23; 02-Vision-Y-Concepto/plan-actual/03-Diseno.md L86 ("voxel con face culling... desde el día 1 (GDD §5 directiva 1)") - ver §8 C8)
+- [x] Documentar greedy meshing como optimización a evaluar [S] (cita: 01-Requerimientos.md L20 (RF2); 03-Diseno.md L23 ("Face culling + greedy meshing obligatorios (GDD directiva 1)") - ver §8 C9 (nota: el diseño lo fija OBLIGATORIO, más firme que "a evaluar"))
+- [x] Documentar diffs de chunk para persistencia (no guardar mundo entero) [S] (cita: 03-Diseno.md L27 ("Persistencia por diffs de chunk (no guardar el mundo entero)") - ver §8 C10)
+- [x] Documentar el conteo de draw calls del terreno mesheado [S] (cita: Logs/386-M61-Rendimiento-Mediciones-Reales_2026-09-01_19-05-00.md L17 ("Draw calls promedio 374.0 | <= 400 | Dentro") + L28 ("~374 draw calls y 16.35 ms/frame"); 08-Mundo-Voxel/plan-actual/03-Diseno.md L115 ("draw calls/chunk, ms de remesh"); 61-Rendimiento/plan-actual/01-Requerimientos.md L52 (RF5) - ver §8 C11)
+- [x] Documentar el presupuesto de partículas/vfx del motor [S] (cita: 52-Particulas-Y-VFX/plan-actual/03-Diseno.md §3.1 L73-95 (catálogo con "Partículas máx" 24-1000 por efecto) + L32 ("respeta el presupuesto por escena") + L41 ("emisores activos < 12"); 61-Rendimiento/plan-actual/02-Analisis.md L46 (GPUParticles + pool para presupuesto) - ver §8 C12)
+- [x] Documentar el raycast voxel para herramientas (pala/pico/hacha) [S] (cita: GUIA-GODOT/08-terreno-voxel.md §5 L96-116 ("Edición de bloques por raycast": vt.do_ray(origin, direction, 50.0), do_point, set_voxel); 03-Diseno.md L14 ("Colisiones voxel vía raycast de Voxel Tools"); 02-Analisis.md L20 (punto 7) - ver §8 C13)
+- [x] Documentar la validación 60 FPS como criterio de aceptación del motor [S] (cita: 03-Diseno.md §4 L41 (prototipo chunk 16³ + face culling + editing + cámara + raycast "a 60 FPS sostenidos"; "Si falla... re-evaluar motor"); 01-Requerimientos.md L40 (criterio 4) + L45 ("El GDD exige voxel a 60 FPS: esa es la vara mínima del motor"); 02-Analisis.md L58 (hito M1 valida); Log 386 L16 (59.35 FPS medidos) - ver §8 C14)
 
 ## D. Ecosistema del motor (10)
 
@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 128 ítems · Completados: 36 · Pendientes: 92 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
+**Totales:** 128 ítems · Completados: 50 · Pendientes: 78 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 
