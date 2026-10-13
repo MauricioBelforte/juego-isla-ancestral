@@ -293,9 +293,14 @@ def main():
     # bajo lock exclusivo del canal: sin el, dos agentes concurrentes
     # elegian el mismo numero (TAREA 26, 4 colisiones medidas 2026-10-11).
     with lock_pool_canal(POOL_CANAL):
+        # FIX anti-colision por ruta larga (2026-10-13, stepfun-step-5-preview): se quitó
+        # el filtro os.path.isfile(). En Windows, una ruta >260 chars hace que isfile()
+        # devuelva False aunque el archivo exista, asi que ese mensaje quedaba invisible
+        # para el calculo de max() y el numero se reasignaba (colision medida: mensaje
+        # 268 entregado dos veces el 2026-10-13). Para el conteo solo importa el prefijo
+        # numerico del nombre, no que la ruta sea accesible.
         exist_nums = [int(m.group(1)) for f in os.listdir(carpeta)
-                      if (m := re.match(r"^(\d+)-", f))
-                      and os.path.isfile(os.path.join(carpeta, f))]
+                      if (m := re.match(r"^(\d+)-", f))]
         ultimo_num = max(exist_nums) if exist_nums else 0
         cand = ultimo_num + 1
         while str(cand) in usados and str(cand) not in fantasmas:
