@@ -290,6 +290,14 @@ godot --headless --script scripts/settings/test_graphics_config.gd 2>&1 || FAIL=
 # migracion de resource_counter.gd de nodo directo a contrato.
 # Autorizado por el director mimo (msg 232).
 godot --headless --script scripts/core/test_m40_contratos.gd 2>&1 || FAIL=1
+# M118: cross-module linter (grafo de imports) + su test.
+# FIX 2026-10-12 (stepfun-step-5-preview): detect_broken_refs se desactivo
+# porque usaba la sintaxis de singleton de Godot 3 ($Nombre), que en Godot 4
+# es get_node(Nodo) y daba ~25 falsos positivos. El reemplazo por .new() daba
+# 749. Conserva lo que si sirve: ciclos de dependencias. Referencias rotas se
+# detectan con godot --headless --check-only.
+python tools/ci/cross_module_linter.py || FAIL=1
+python tools/ci/test_cross_module_linter.py || FAIL=1
           # Run M111 quality-utils test: Math/Validation/Format utils, constants,
           # enums, structs, patterns y components (SceneTree, sin GdUnit4).
           godot --headless -s res://tests/test_m111_utils_headless.gd 2>&1 || FAIL=1

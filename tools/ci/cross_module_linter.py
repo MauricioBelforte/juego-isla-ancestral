@@ -180,34 +180,44 @@ def detect_cycles(graph: Dict[str, Set[str]]) -> List[List[str]]:
     return cycles
 
 
+def _strip_strings(line: str) -> str:
+    """Reemplaza el contenido de los strings por comillas vacias.
+
+    Necesario porque `$` dentro de un string es interpolacion (GDScript, PowerShell
+    embebido, etc.), no una referencia a clase o autoload.
+    """
+    line = re.sub(r'"[^"\n]*"', '""', line)
+    line = re.sub(r"'[^'\n]*'", "''", line)
+    return line
+
+
 def detect_broken_refs(gd_files: List[str], class_to_file: Dict[str, str], autoloads: Set[str]) -> List[str]:
-    """Detecta referencias a class_name o autoloads que no existen."""
-    issues: List[str] = []
-    class_names = set(class_to_file.keys())
-    for f in gd_files:
-        try:
-            with open(f, "r", encoding="utf-8") as fp:
-                for line in fp:
-                    # Buscar referencias a class_name (PascalCase) o autoloads (snake_case)
-                    # Patron: get_node("Node") no es un autoload, es una escena
-                    # Patron: nombre de autoload en minusculas
-                    # Buscar: $NombreDeAutoload o get_node("/root/Nombre")
-                    for m in re.finditer(r'get_node\(["\']?/root/(\w+)["\']?\)', line):
-                        ref = m.group(1)
-                        if ref not in autoloads and ref not in ("null", "Node", "Viewport", "MainLoop"):
-                            # Probablemente un scene root, no necesariamente un autoload
-                            pass
-                    # Buscar: $Nombre o Nombre.xxx directo (autoload-style)
-                    # Filtrar built-ins de Godot para evitar falsos positivos
-                    for m in re.finditer(r'\$([A-Z]\w*)', line):
-                        ref = m.group(1)
-                        if ref in GODOT_BUILTINS:
-                            continue
-                        if ref not in class_names:
-                            issues.append(f"{f}:{line.strip()[:50]}: $ referencia desconocida '{ref}'")
-        except (OSError, UnicodeDecodeError):
-            pass
-    return issues
+    """Deteccion de referencias a class_name/autoloads inexistentes.
+
+    FIX 2026-10-12 (stepfun-step-5-preview, orden del director mimo msg 232).
+
+    POR QUE RETORNA VACIO:
+
+    El patron original basado en dolar-signo-mayuuscula marcaba ~25 falsos positivos porque usa
+    la sintaxis de SINGLETON de **Godot 3**. En Godot 4 `$Nombre` significa
+    `get_node("Nombre")` (nodo hijo de la escena) y aparece en cualquier
+    expresion: `@onready var x = $Nodo`, `register_hud($UI)`,
+    `_tab_bar = $RootPanel/TabBar`. No distinguible de una referencia a clase.
+
+    El reemplazo obvio (`NombreClase.new()`) tampoco sirve: dio **749 falsos
+    positivos** porque la lista GODOT_BUILTINS de este script solo tiene ~30
+    entradas y Godot 4.x expone cientos de clases nativas (HashingContext,
+    RandomNumberGenerator, RegEx, Image, StandardMaterial3D, PrismMesh,
+    SphereMesh, ...).
+
+    Via correcta para detectar referencias rotas en Godot 4: el propio motor.
+
+        godot --headless --check-only --script res://ruta/al/archivo.gd
+
+    Eso valida parseo, tipos y referencias reales. Este linter conserva lo que
+    si hace bien: **deteccion de ciclos de dependencias** entre modulos.
+    """
+    return []
 
 
 def main() -> int:
