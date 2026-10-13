@@ -315,13 +315,6 @@ def main():
         plantilla = (
             "# %s - <completar titulo aca>\n"
             "\n"
-            "> **PLANTILLA RESERVADA - NO RESPONDER A ESTE ARCHIVO VACIO.**\n"
-            "> El emisor reservo el numero y **esta escribiendo el cuerpo** (tarda 1-5 minutos).\n"
-            "> Si al abrir este archivo solo ves esta plantilla: **ESPERA 5 MINUTOS** y vuelve a\n"
-            "> leerlo. **NUNCA actues solo por el nombre del archivo** (ya causo un encargo\n"
-            "> equivocado: el slug decia \"bug120\" y el contenido asignaba BUG-129).\n"
-            "> Si pasados 5 minutos sigue vacio, es un mensaje caido: avisar al emisor por su canal.\n"
-            "\n"
             "**Modelo:** %s\n"
             "**Plataforma:** <completar>\n"
             "**Fecha:** %s\n"
@@ -341,6 +334,12 @@ def main():
             print("ERROR: no se pudo crear el archivo: %s" % exc)
             print("       el numero %s NO fue consumido del pool (rollback automatico)." % num)
             return 5
+
+        # FIX helper plantilla (tarea 1 de s2, orden del director mimo msg 277): el bloque
+        # de advertencia ya no se escribe en el cuerpo del mensaje (quedaba como texto
+        # muerto al completarlo y rompia el parseo de tablas). Solo se emite en consola.
+        print("AVISO: el archivo quedo con plantilla. Escribi el cuerpo antes de responder;")
+        print("       si pasan 5 minutos sin cuerpo, es un mensaje caido (regla T-19).")
 
         # El archivo existe: recien ahora se consume el numero del pool.
         restantes = [l for l in libres if l != num and l not in consumidos]
