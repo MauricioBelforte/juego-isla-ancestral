@@ -5,6 +5,8 @@
 
 ## Checklist de implementación del módulo
 
+**Totales:** 264 items · Completados: 254 · Pendientes: 0 · No resueltos: 10. (Creado el 2026-10-13 por step-5-kilocode / Kilo Code, autorizacion del director mimo msg 272/273. Este modulo no tenia linea Totales estandar: su conteo vivia en notas de texto libre mas abajo, que se conservan intactas. Conteo medido por regex sobre las marcas del archivo: 254 [x] / 10 [?] / 0 [ ]. Los 10 [?] son deuda externa con duenno nombrado, no duplicados del Patron D.)
+
 ### [S] Especificación de crash reporting
 - [x] Generar dump con stack trace y sesion [M]
 - [x] Enviar dump con reintentos (max 3) [M]
@@ -110,9 +112,9 @@
 - [x] Diseñar workflow de creación de issue
 - [x] Diseñar detección de crash crítico
 - [x] Diseñar creación automática de issue en GitHub
-- [x] Diseñar vinculación de issue con crash en dashboard — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L88. **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L88 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar vinculación de issue con crash en dashboard — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L88. **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L88 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
 - [x] Diseñar cierre de issue cuando crash resuelto
-- [x] Diseñar plantilla de issue de crash — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L87. **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L87 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar plantilla de issue de crash — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L87. **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L87 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
 - [x] Diseñar inclusión de stack trace en issue [M]
 - [x] Diseñar inclusión de metadata en issue [M]
 - [x] Diseñar inclusión de contexto en issue [M]
@@ -220,7 +222,7 @@
 - [x] Diseñar recolección de GPU, GPU driver
 - [x] Diseñar recolección de RAM total, RAM disponible
 - [x] Diseñar recolección de versión del juego
-- [x] Diseñar recolección de versión de Godot — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L46. **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L46 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar recolección de versión de Godot — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L46. **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L46 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
 - [x] Diseñar recolección de modo de ejecución
 - [x] Diseñar recolección de escena activa
 - [x] Diseñar recolección de hora del juego
@@ -233,7 +235,7 @@
 - [x] Diseñar sanitize() [M]
 - [x] Diseñar _is_unsafe_key() [M]
 - [x] Diseñar lista de unsafe keys [M]
-- [x] Diseñar validación de safe keys — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L57. **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L57 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar validación de safe keys — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L57. **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L57 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
 
 ### [S] CrashCache
 - [x] Diseñar CrashCache.gd
@@ -256,7 +258,7 @@
 - [x] Diseñar manejo de respuesta HTTP [M]
 
 ### [S] CrashDashboard
-- [x] Diseñar CrashDashboard.gd — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L167. **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L167 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar CrashDashboard.gd — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L167. **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L167 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
 - [x] Diseñar load_crashes()
 - [x] Diseñar _display_crashes()
 - [x] Diseñar _display_crash_chart()
@@ -294,9 +296,9 @@
 - [x] Diseñar label de metadata del sistema
 
 ### [S] CrashAlerts
-- [x] Diseñar CrashAlerts.gd — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L176. **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L176 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
-- [x] Diseñar check_alerts() [M] — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L177. **Deriva de nombres:** la implementacion real crash_alerts.gd expone evaluar()/enviar(), no check_alerts()/_send_alert(). **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L177 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
-- [x] Diseñar _send_alert() [M] — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L178. **Deriva de nombres:** ver L298 (crash_alerts.gd usa enviar()). **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L178 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar CrashAlerts.gd — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L176. **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L176 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar check_alerts() [M] — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L177. **Deriva de nombres:** la implementacion real crash_alerts.gd expone evaluar()/enviar(), no check_alerts()/_send_alert(). **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L177 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar _send_alert() [M] — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L178. **Deriva de nombres:** ver L298 (crash_alerts.gd usa enviar()). **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L178 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
 - [x] Diseñar umbral de crash crítico (5%)
 - [x] Diseñar umbral de crash nueva (1%)
 - [x] Diseñar notificación por Slack webhook
@@ -316,12 +318,12 @@
 - [x] Diseñar 06-Plan-Testings.md (APLICA) [M]
 - [x] Diseñar tests de captura de crash
 - [x] Diseñar tests de recolección de metadata
-- [x] Diseñar tests de sanitización de contexto — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L198. **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L198 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar tests de sanitización de contexto — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L198. **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L198 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
 - [x] Diseñar tests de offline mode [M]
 - [x] Diseñar tests de integración con M103
 - [x] Diseñar tests de integración con M102
 - [x] Diseñar tests de integración con M110
-- [x] Diseñar tests de agrupación de crashes — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L199. **[NORMALIZADO a [x] el 2026-10-13 por stepfun-step-5-preview / Kilo Code, autorización director msg 267: gemela canónica [x] en L199 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
+- [x] Diseñar tests de agrupación de crashes — **DUPLICADO ESTRUCTURAL** (normalizacion Patron D, atria-dawn-s3 2026-10-10, informe Step 5 msg 53): trabajo contado una sola vez en la vista funcional L199. **[NORMALIZADO a [x] el 2026-10-13 por step-5-kilocode / Kilo Code, autorización director msg 267: gemela canónica [x] en L199 con el mismo texto; sustancia verificada sin cambios, sólo se corrige la marca duplicada. Histórico de degradación previo conservado arriba.]**
 - [x] Diseñar tests de priorización de crashes
 
 ## Totales (reconciliado por DeepSeek-V4.1-Flash, P-36, Log 1150, 2026-09-25)
@@ -334,7 +336,7 @@ era medido.
 **Conteo real tras P-36: 254 `[x]` · 0 `[ ]` · 11 `[?]`** (total 265).
 
 **Normalizacion Patron D (atria-dawn-s3, 2026-10-10, informe Step 5 msg 53):** el checklist tiene **doble indexacion** (vista funcional L46-208 + vista por componente L223-324). 11 grupos eran el mismo trabajo contado dos veces. Resultado: **244 `[x]` · 0 `[ ]` · 20 `[?]`** (total 264) tras degradar los 10 duplicados `[x]` de la vista por componente y fusionar el `[?]` GDPR (L136 cuenta, L185 queda como nota). 2 grupos (L206/L250 `_send_crash`/`send_crash`, L208/L252 `_has_connection`/`has_connection`) NO son duplicados: funcion privada vs publica. **Deuda real adicional: deriva de nombres diseño↔implementacion** (el checklist pide `check_alerts()`/`_send_alert()`/`has_connection()`; el codigo real expone `evaluar()`/`enviar()`/`tiene_conexion()`).
-**Conteo real tras la normalización de duplicados (2026-10-13, stepfun-step-5-preview / Kilo Code, autorización director msg 267): 254 `[x]` · 10 `[?]` · 0 `[ ]`** (total 264). Los 10 `[?]` restantes son **deuda externa con dueño nombrado** (M61/M90/M102/M103/M110/M114/M117), no duplicados del Patrón D. Los 10 duplicados estructurales se normalizaron a `[x]` con nota append en cada ítem, conservando el histórico de degradación previo. Conteo medido por regex sobre las marcas del archivo.
+**Conteo real tras la normalización de duplicados (2026-10-13, step-5-kilocode / Kilo Code, autorización director msg 267): 254 `[x]` · 10 `[?]` · 0 `[ ]`** (total 264). Los 10 `[?]` restantes son **deuda externa con dueño nombrado** (M61/M90/M102/M103/M110/M114/M117), no duplicados del Patrón D. Los 10 duplicados estructurales se normalizaron a `[x]` con nota append en cada ítem, conservando el histórico de degradación previo. Conteo medido por regex sobre las marcas del archivo.
 
 **Regla usada en esta reconciliación** (para que un `[x]` signifique algo):
 - `[x]` = el ítem tiene (a) una sección de diseño que lo especifica **y** (b) evidencia
