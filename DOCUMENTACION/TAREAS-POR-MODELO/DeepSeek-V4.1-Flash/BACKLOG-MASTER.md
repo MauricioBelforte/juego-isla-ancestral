@@ -1316,3 +1316,33 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - Higiene: 0 commits / 0 push (atria-dawn). Colisiones de pool AJENAS: 1290, 1468, 1547, 1559,
   1585, 1645, 1698, 1726 (+ BOM preexistente en NUMEROS_DISPONIBLES.txt, trampa 77).
 - Reporte 212; solicitud de commit a atria (msg 59). Tracker 209 -> 211.
+
+
+## D8-M151 (Control Final) - 2026-10-12 23:16 (Log 1792)
+
+- [x] Log reservado: **1792** - D8-M151 Control Final (71 flips de diseno con cita real)
+- Mensaje 213 (mimo): D7-M76 ACEPTADO (81/130 exacto); los 19 "Definir/Documentar" sin respaldo
+  se quedan `[ ]`. Habilita cola D8-M151 / D9-M105 / D10-M45.
+- M151 = modulo DOCUMENTAL/DE PROCESO (auditoria de los 26 puntos maestros post-lanzamiento;
+  sin codigo de runtime del juego). 23/167 -> **94/167**: 71 flips con cita real a 01-Requerimientos
+  (3/5/6/8) / 02-Analisis (2 D1-D5, 4, 5, 6) / 03-Diseno (2 mapa de 26 puntos, 3, 4) / 04-Codigo (3, 5).
+- Criterio por verbo (el aceptado en M77/M76): `Definir X` basta si X existe en 01-04;
+  `Verificar`/`Crear`/`Entregar` exigen medicion o archivo. En M151 casi todos los items dicen
+  "Definir ...", incluidos los "Definir verificacion de X".
+- 67 [ ] honestos: conceptos que SOLO estan en el checklist (grep -ic = 0 en los 4 docs):
+  retencion/fatiga, legibilidad/friccion, curiosidades/coleccionables, pistas, amistad, exploits,
+  artefactos, retroalimentacion UI, fauna silvestre, decorado estacional, audio estacional,
+  musica por acto, ducking, volumen, contraste UI, streaming, LOD/culling, backup/cloud,
+  migracion de versiones, anti-softlock, hardware minimo, remapeo/subtitulos/flashing,
+  6 idiomas, vigencia/respaldo de contratos, licencias de audio/Unity, capturas, requisitos de
+  tienda, FAQ, triaje, rollback, notas de parche, in-place, mejoras de comunidad, log de cierre.
+- Deuda ya documentada (NO tocada, es de la iter. 3 de SB): `04-Codigo.md` sec.6 declara que
+  `generar_acta.py`, `importar_telemetria.py`, `importar_encuestas.py` y el acta `.json` NO existen.
+- Evidencia: [x]=94 [ ]=67 [?]=6 (total 167); git diff --numstat 72/71; bytes 21988 -> 25367;
+  LF 377, CRLF 0, CR 0, BOM False, NUL 0, FFFD 0; git ls-files --eol i/lf w/lf.
+  verificar_checklist.py: 17 -> 18 inconsistencias (la nueva = la ESPERADA: GLOBAL 23/167 vs 94/167).
+- Higiene: 0 commits / 0 push (atria-dawn). Colisiones de pool AJENAS: 1290, 1468, 1547, 1559,
+  1585, 1645, 1698, 1726. Pool de logs: 1792 consumido (head post 1793), NO commiteado.
+- Reporte 214; solicitud de commit a atria (msg 62). Tracker 211 -> 213.
+- Proxima: mensajes `*mimo*a-deepseek*` / `*atria*a-deepseek*` con NN > 213. NO reprocesar mi 214.
+  Cola: D9-M105 (confirmar/refutar "sin trabajo real pendiente" contra disco), D10-M45-Arte-3D.

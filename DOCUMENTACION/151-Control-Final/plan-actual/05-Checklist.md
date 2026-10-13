@@ -9,151 +9,151 @@
 
 ## 1. Proceso de auditoría (RF1-RF8)
 
-- [ ] Definir ventana de auditoría de 7-14 días post-lanzamiento [S]
-- [ ] Definir fijación de criterios de los 26 puntos con la biblia (M147) en S1 [M]
-- [ ] Definir semáforo ✔/⚠/✖ con evidencia por punto (D1) [S]
-- [ ] Definir evidencia obligatoria para cada estado (sin evidencia = no aprobado) [S]
-- [ ] Definir plan de acción con dueño y fecha para cada ⚠/✖ [S]
-- [ ] Definir 0 puntos en ✖ al cierre (requisito) [S]
-- [ ] Definir acta firmada por producción y QA [S]
-- [ ] Definir índice de documentos administrativos en el acta [S]
-- [ ] Definir traspaso de ⚠ a la hoja de ruta de M144 [S]
+- [x] Definir ventana de auditoría de 7-14 días post-lanzamiento [S] — **Diseño: 02-Analisis.md 2 D4**
+- [x] Definir fijación de criterios de los 26 puntos con la biblia (M147) en S1 [M] — **Diseño: 02-Analisis.md 4**
+- [x] Definir semáforo ✔/⚠/✖ con evidencia por punto (D1) [S] — **Diseño: 02-Analisis.md 2 D1**
+- [x] Definir evidencia obligatoria para cada estado (sin evidencia = no aprobado) [S] — **Diseño: 01-Requerimientos.md 6**
+- [x] Definir plan de acción con dueño y fecha para cada ⚠/✖ [S] — **Diseño: 02-Analisis.md 2 D5**
+- [x] Definir 0 puntos en ✖ al cierre (requisito) [S] — **Diseño: 01-Requerimientos.md 5.2**
+- [x] Definir acta firmada por producción y QA [S] — **Diseño: 01-Requerimientos.md 5.6**
+- [x] Definir índice de documentos administrativos en el acta [S] — **Diseño: 01-Requerimientos.md 8.4**
+- [x] Definir traspaso de ⚠ a la hoja de ruta de M144 [S] — **Diseño: 01-Requerimientos.md 5.7 | 02-Analisis.md 6**
 - [x] Definir auditoría sin implementación (solo certificación) [S]
 
 ## 2. Identidad propia (P1)
 
-- [ ] Definir propuesta de juego (elevator pitch) escrita en acta [S]
-- [ ] Definir benchmark contra 3 juegos similares (diferenciación) [M]
-- [ ] Definir verificación de estilo artístico único (M06/M49) [M]
-- [ ] Definir verificación de tono narrativo único (M147) [S]
-- [ ] Definir verificación de nombre/marca disponible (PI, P22) [S]
+- [x] Definir propuesta de juego (elevator pitch) escrita en acta [S] — **Diseño: 03-Diseno.md 2 #1 | 01-Requerimientos.md 3.1**
+- [x] Definir benchmark contra 3 juegos similares (diferenciación) [M] — **Diseño: 03-Diseno.md 2 #1**
+- [x] Definir verificación de estilo artístico único (M06/M49) [M] — **Diseño: 01-Requerimientos.md 3.1**
+- [x] Definir verificación de tono narrativo único (M147) [S] — **Diseño: 01-Requerimientos.md 3.1**
+- [x] Definir verificación de nombre/marca disponible (PI, P22) [S] — **Diseño: 03-Diseno.md 2 #22**
 
 ## 3. Bucle principal divertido (P2)
 
-- [ ] Definir criterio: encuesta diversión ≥ 4/5 del bucle [S]
-- [ ] Definir 3 sesiones observadas de bucle (mañana, mitad, final de partida) [M]
+- [x] Definir criterio: encuesta diversión ≥ 4/5 del bucle [S] — **Diseño: 03-Diseno.md 2 #2 | 02-Analisis.md 5.3**
+- [x] Definir 3 sesiones observadas de bucle (mañana, mitad, final de partida) [M] — **Diseño: 03-Diseno.md 2 #2**
 - [ ] Definir métrica de sesión larga (retención ≥ 60% a la hora) [M]
 - [ ] Definir criterio anti-fatiga: 40 h sin quiebre percibido (M93) [M]
 - [ ] Definir registro de qué es "bucle principal" (predictable en acta) [S]
 
 ## 4. Construir divertido (P3)
 
-- [ ] Definir criterio: encuesta construcción ≥ 4/5 [S]
-- [ ] Definir sesión de construcción de 30 min observada [M]
+- [x] Definir criterio: encuesta construcción ≥ 4/5 [S] — **Diseño: 03-Diseno.md 2 #3 | 02-Analisis.md 5.3**
+- [x] Definir sesión de construcción de 30 min observada [M] — **Diseño: 03-Diseno.md 2 #3**
 - [ ] Definir verificación de legibilidad del grid y catálogo (M17/M65) [M]
 - [ ] Definir verificación de recompensa visual por construcción [S]
 - [ ] Definir verificación de no-fricción: piezas se colocan sin bugs [S]
 
 ## 5. Explorar divertido (P4)
 
-- [ ] Definir criterio: encuesta exploración ≥ 4/5 [S]
-- [ ] Definir mapa de descubrimientos por isla completo (M28/M50) [M]
+- [x] Definir criterio: encuesta exploración ≥ 4/5 [S] — **Diseño: 03-Diseno.md 2 #4 | 02-Analisis.md 5.3**
+- [x] Definir mapa de descubrimientos por isla completo (M28/M50) [M] — **Diseño: 03-Diseno.md 2 #4**
 - [ ] Definir verificación de curiosidades por zona (hit de vista) [M]
 - [ ] Definir verificación de recompensas de exploración (coleccionables) [S]
 - [ ] Definir verificación de desplazamiento cómodo (viajes/cámara) [M]
 
 ## 6. Puzzles divertidos (P5)
 
-- [ ] Definir criterio: encuesta puzzles ≥ 4/5 [S]
-- [ ] Definir criterio: tasa de rendición < 15% (M93) [M]
+- [x] Definir criterio: encuesta puzzles ≥ 4/5 [S] — **Diseño: 03-Diseno.md 2 #5 | 02-Analisis.md 5.3**
+- [x] Definir criterio: tasa de rendición < 15% (M93) [M] — **Diseño: 03-Diseno.md 2 #5 | 04-Codigo.md 3**
 - [ ] Definir verificación de pistas en todos los templos (M24/M26) [M]
 - [ ] Definir verificación de dificultad progresiva sin picos [M]
 - [ ] Definir verificación de accesibilidad de puzzles (modo color/dificultad) [S]
 
 ## 7. NPC interesante (P6)
 
-- [ ] Definir criterio: encuesta NPC ≥ 4/5 [S]
-- [ ] Definir revisión del guión final por acto (M21/M23) [M]
-- [ ] Definir verificación de personalidad por NPC (biblia) [M]
+- [x] Definir criterio: encuesta NPC ≥ 4/5 [S] — **Diseño: 03-Diseno.md 2 #6 | 02-Analisis.md 5.3**
+- [x] Definir revisión del guión final por acto (M21/M23) [M] — **Diseño: 03-Diseno.md 2 #6**
+- [x] Definir verificación de personalidad por NPC (biblia) [M] — **Diseño: 01-Requerimientos.md 3.6**
 - [ ] Definir verificación de cadenas de amistad memorables (M20) [S]
 - [ ] Definir verificación de voz/guiño audiovisual en hitos [S]
 
 ## 8. Economía funciona (P7)
 
-- [ ] Definir verificación: simulación M93 40 h sin quiebras [M]
-- [ ] Definir verificación: curva precio/día sana en todas las islas [M]
+- [x] Definir verificación: simulación M93 40 h sin quiebras [M] — **Diseño: 03-Diseno.md 2 #7**
+- [x] Definir verificación: curva precio/día sana en todas las islas [M] — **Diseño: 03-Diseno.md 2 #7**
 - [ ] Definir verificación: sin exploits conocidos abiertos [M]
 - [ ] Definir verificación: tiendas/AO sin precios rotos [M]
 - [ ] Definir verificación: recompensas proporcionales al esfuerzo [M]
 
 ## 9. Progresión funciona (P8)
 
-- [ ] Definir verificación de los 6 sellos desbloqueables en orden libre [M]
-- [ ] Definir verificación de habilidades con ventajas visibles (M71) [M]
-- [ ] Definir verificación de herramientas 5 niveles sin saltos de poder [M]
+- [x] Definir verificación de los 6 sellos desbloqueables en orden libre [M] — **Diseño: 03-Diseno.md 2 #8**
+- [x] Definir verificación de habilidades con ventajas visibles (M71) [M] — **Diseño: 03-Diseno.md 2 #8**
+- [x] Definir verificación de herramientas 5 niveles sin saltos de poder [M] — **Diseño: 01-Requerimientos.md 3.8**
 - [ ] Definir verificación de artefactos 6+1 sin dominancia excesiva (M13) [M]
 - [ ] Definir verificación de retroalimentación de progreso en UI (M53) [S]
 
 ## 10. Mundo se siente vivo (P9)
 
-- [ ] Definir verificación de rutinas NPC completas 7 días (M25) [M]
-- [ ] Definir verificación de eventos sin huecos de actividad [M]
+- [x] Definir verificación de rutinas NPC completas 7 días (M25) [M] — **Diseño: 03-Diseno.md 2 #9**
+- [x] Definir verificación de eventos sin huecos de actividad [M] — **Diseño: 03-Diseno.md 2 #9**
 - [ ] Definir verificación de reacciones del mundo (clima/ciclo) [M]
 - [ ] Definir verificación de vida silvestre (fauna M36) [S]
 - [ ] Definir verificación de inexistencia de "NPC robot" (diálogos repetidos) [S]
 
 ## 11. Estaciones con propósito (P10)
 
-- [ ] Definir verificación de cultivos por temporada funcional (M33) [M]
-- [ ] Definir verificación de eventos por temporada (M74) [M]
+- [x] Definir verificación de cultivos por temporada funcional (M33) [M] — **Diseño: 03-Diseno.md 2 #10**
+- [x] Definir verificación de eventos por temporada (M74) [M] — **Diseño: 03-Diseno.md 2 #10**
 - [ ] Definir verificación de decorado estacional por isla (M50) [M]
 - [ ] Definir verificación de impacto económico estacional (precios) [M]
 - [ ] Definir verificación de audio estacional (M43) [S]
 
 ## 12. Clima con propósito (P11)
 
-- [ ] Definir verificación de lluvia con efecto agricultura (M32) [M]
-- [ ] Definir verificación de helada con riesgo real [M]
+- [x] Definir verificación de lluvia con efecto agricultura (M32) [M] — **Diseño: 03-Diseno.md 2 #11**
+- [x] Definir verificación de helada con riesgo real [M] — **Diseño: 03-Diseno.md 2 #11**
 - [ ] Definir verificación de clima cambiante por isla (M50) [M]
 - [ ] Definir verificación de visual de clima coherente por zona [S]
 - [ ] Definir verificación de aviso climático en diario (M55) [S]
 
 ## 13. Música refuerza zonas (P12)
 
-- [ ] Definir verificación de playlist por zona/isla (M41) [M]
+- [x] Definir verificación de playlist por zona/isla (M41) [M] — **Diseño: 03-Diseno.md 2 #12**
 - [ ] Definir verificación de música por acto (M41) [M]
-- [ ] Definir test auditivo de 5 zonas (ritmo/tono acorde) [S]
+- [x] Definir test auditivo de 5 zonas (ritmo/tono acorde) [S] — **Diseño: 03-Diseno.md 2 #12**
 - [ ] Definir verificación de transiciones sin cortes [S]
 - [ ] Definir verificación de ducking con diálogos [S]
 
 ## 14. Audio refuerza acciones (P13)
 
-- [ ] Definir matriz de SFX por interacción completa (M42) [M]
+- [x] Definir matriz de SFX por interacción completa (M42) [M] — **Diseño: 03-Diseno.md 2 #13**
 - [ ] Definir verificación de SFX de hitos (brindis, sellos) [S]
-- [ ] Definir verificación de feedback sonoro de crafting/construcción [S]
+- [x] Definir verificación de feedback sonoro de crafting/construcción [S] — **Diseño: 01-Requerimientos.md 3.13**
 - [ ] Definir verificación de volumen balanceado en las 6 zonas [M]
 - [ ] Definir verificación de voces en hitos (M44) [S]
 
 ## 15. Gráficos coherentes (P14)
 
-- [ ] Definir revisión de guía de estilo (M06/M49) vigente [M]
-- [ ] Definir verificación de estilo unificado entre islas [M]
-- [ ] Definir screenshot por zona para el acta (6+1) [S]
+- [x] Definir revisión de guía de estilo (M06/M49) vigente [M] — **Diseño: 03-Diseno.md 2 #14**
+- [x] Definir verificación de estilo unificado entre islas [M] — **Diseño: 01-Requerimientos.md 3.14**
+- [x] Definir screenshot por zona para el acta (6+1) [S] — **Diseño: 03-Diseno.md 2 #14**
 - [ ] Definir verificación de contraste de UI coherente (M58) [S]
 - [x] Definir verificación de no assets placeholder en build final [S]
 
 ## 16. Voxels técnicamente eficientes (P15)
 
-- [ ] Definir verificación de presupuesto de voxels (M08/M11) [M]
-- [ ] Definir verificación de draw calls por zona dentro de presupuesto (M61) [M]
-- [ ] Definir verificación de memoria de chunks/caché (M62) [M]
+- [x] Definir verificación de presupuesto de voxels (M08/M11) [M] — **Diseño: 03-Diseno.md 2 #15**
+- [x] Definir verificación de draw calls por zona dentro de presupuesto (M61) [M] — **Diseño: 03-Diseno.md 2 #15**
+- [x] Definir verificación de memoria de chunks/caché (M62) [M] — **Diseño: 03-Diseno.md 2 #15**
 - [ ] Definir verificación de streaming de chunks sin picos (M63) [M]
 - [ ] Definir verificación de LOD/culling activo en todas las islas [M]
 
 ## 17. Guardado confiable (P16)
 
-- [ ] Definir re-verificación de 30 ciclos de guardar/cargar [M]
-- [ ] Definir verificación de 0 reportes de save perdido en 72 h (M143) [M]
+- [x] Definir re-verificación de 30 ciclos de guardar/cargar [M] — **Diseño: 03-Diseno.md 2 #16**
+- [x] Definir verificación de 0 reportes de save perdido en 72 h (M143) [M] — **Diseño: 03-Diseno.md 2 #16**
 - [ ] Definir verificación de backup/reintento de cloud (M60) [M]
 - [ ] Definir verificación de migración de versiones sin pérdida [M]
 - [ ] Definir verificación de anti-softlock con ítems clave (M66) [M]
 
 ## 18. Rendimiento aceptable (P17)
 
-- [ ] Definir verificación de crash < 0.5% en telemetría real [M]
-- [ ] Definir verificación de fps p99 ≥ objetivo (M61) [M]
+- [x] Definir verificación de crash < 0.5% en telemetría real [M] — **Diseño: 03-Diseno.md 2 #17**
+- [x] Definir verificación de fps p99 ≥ objetivo (M61) [M] — **Diseño: 03-Diseno.md 2 #17**
 - [ ] Definir verificación de tiempos de carga dentro de presupuesto (M63) [M]
-- [ ] Definir verificación de memoria estable en sesiones largas (M62) [M]
+- [x] Definir verificación de memoria estable en sesiones largas (M62) [M] — **Diseño: 01-Requerimientos.md 5.4**
 - [ ] Definir verificación de performance en hardware mínimo y recomendado [M]
 
 ## 19. Accesibilidad contemplada (P18)
@@ -162,7 +162,7 @@
 - [ ] Definir verificación de remapeo, subtítulos y modos de color [M]
 - [ ] Definir verificación de reduce motion/flashing [S]
 - [ ] Definir verificación de tamaño de texto 150% [S]
-- [ ] Definir registro de M58 en el acta con evidencia [S]
+- [x] Definir registro de M58 en el acta con evidencia [S] — **Diseño: 01-Requerimientos.md 8.1**
 
 ## 20. Localización contemplada (P19)
 
@@ -170,35 +170,35 @@
 - [ ] Definir verificación de 6 idiomas sin claves rotas [M]
 - [ ] Definir verificación de subtítulos y textos UI por idioma [M]
 - [ ] Definir verificación de fechas/formatos por idioma [S]
-- [ ] Definir registro de M87 en el acta con evidencia [S]
+- [x] Definir registro de M87 en el acta con evidencia [S] — **Diseño: 01-Requerimientos.md 8.1**
 
 ## 21. Contratos documentados (P20)
 
-- [ ] Definir índice de contratos del equipo (roles, NDA) [S]
-- [ ] Definir índice de contratos de terceros (voces, arte, música) [S]
-- [ ] Definir ubicación segura de contratos documentada (sin exponer) [S]
+- [x] Definir índice de contratos del equipo (roles, NDA) [S] — **Diseño: 03-Diseno.md 2 #20**
+- [x] Definir índice de contratos de terceros (voces, arte, música) [S] — **Diseño: 03-Diseno.md 2 #20**
+- [x] Definir ubicación segura de contratos documentada (sin exponer) [S] — **Diseño: 03-Diseno.md 2 #20 | 04-Codigo.md 5**
 - [ ] Definir verificación de vigencia de contratos clave [S]
 - [ ] Definir copia de respaldo de contratos firmados [S]
 
 ## 22. Licencias documentadas (P21)
 
-- [ ] Definir inventario de licencias de assets (store/vendors) [M]
-- [ ] Definir inventario de licencias de herramientas de desarrollo [M]
+- [x] Definir inventario de licencias de assets (store/vendors) [M] — **Diseño: 03-Diseno.md 2 #21**
+- [x] Definir inventario de licencias de herramientas de desarrollo [M] — **Diseño: 03-Diseno.md 2 #21**
 - [ ] Definir verificación de licencias de audio/música (M41-M44) [M]
 - [ ] Definir verificación de licencias de plugins de Unity [M]
-- [ ] Definir indexado de licencias en el acta [S]
+- [x] Definir indexado de licencias en el acta [S] — **Diseño: 01-Requerimientos.md 8.4**
 
 ## 23. Propiedad intelectual documentada (P22)
 
-- [ ] Definir registro de marca (nombre del juego) [S]
-- [ ] Definir registro de logo y elementos de marca [S]
+- [x] Definir registro de marca (nombre del juego) [S] — **Diseño: 03-Diseno.md 2 #22**
+- [x] Definir registro de logo y elementos de marca [S] — **Diseño: 03-Diseno.md 2 #22**
 - [ ] Definir verificación de disponibilidad de nombre en plataformas [S]
 - [ ] Definir política de uso de la marca para la comunidad [S]
-- [ ] Definir indexado de PI en el acta [S]
+- [x] Definir indexado de PI en el acta [S] — **Diseño: 01-Requerimientos.md 8.4**
 
 ## 24. Página de tienda preparada (P23)
 
-- [ ] Definir verificación de store page publicada (M149) [M]
+- [x] Definir verificación de store page publicada (M149) [M] — **Diseño: 03-Diseno.md 2 #23**
 - [ ] Definir verificación de capturas finales cargadas [S]
 - [ ] Definir verificación de requisitos correctos [S]
 - [ ] Definir verificación de enlaces a soporte/canales en la página [S]
@@ -206,21 +206,21 @@
 
 ## 25. Soporte preparado (P24)
 
-- [ ] Definir verificación de canales activos post-lanzamiento (M152) [M]
-- [ ] Definir verificación de SLA cumplido en las primeras 72 h [S]
+- [x] Definir verificación de canales activos post-lanzamiento (M152) [M] — **Diseño: 03-Diseno.md 2 #24**
+- [x] Definir verificación de SLA cumplido en las primeras 72 h [S] — **Diseño: 03-Diseno.md 2 #24**
 - [ ] Definir verificación de FAQ actualizada con bugs reales [M]
 - [ ] Definir verificación de triaje de soporte en producción [S]
 
 ## 26. Sistema de actualización preparado (P25)
 
-- [ ] Definir verificación del pipeline de hotfix/parche probado (M142/M143) [M]
+- [x] Definir verificación del pipeline de hotfix/parche probado (M142/M143) [M] — **Diseño: 03-Diseno.md 2 #25**
 - [ ] Definir verificación de actualización in-place sin pérdida de saves [M]
 - [ ] Definir verificación de notas de parche listas (plantilla) [S]
 - [ ] Definir verificación de rollback disponible si falla un parche [M]
 
 ## 27. Plan post-lanzamiento preparado (P26)
 
-- [ ] Definir hoja de ruta M144 aprobada (contenido, bugs, comunidad) [M]
+- [x] Definir hoja de ruta M144 aprobada (contenido, bugs, comunidad) [M] — **Diseño: 03-Diseno.md 2 #26**
 - [ ] Definir cola de hotfix 2.0.x documentada (M143) [S]
 - [ ] Definir lista de mejoras de comunidad priorizada (5-FUTURAS-MEJORAS) [S]
 - [ ] Definir dueño por función del post-lanzamiento [S]
@@ -228,11 +228,11 @@
 
 ## 28. Acta y cierre
 
-- [ ] Definir acta generada con los 26 puntos y evidencia [M]
+- [x] Definir acta generada con los 26 puntos y evidencia [M] — **Diseño: 01-Requerimientos.md 8.1 | 03-Diseno.md 4**
 - [x] Definir verificación automática: puntos sin evidencia = alerta [M] — `scripts/auditoria/verificar_puntos.py` (SB-01/M151, Log 1289): valida los 26 puntos, evidencia obligatoria, plan de acción con dueño/fecha/desc en cada ⚠/✖, y en `--cierre` exige 0 bloqueantes + firmas producción y QA. 11 tests propios en `scripts/auditoria/test_verificar_puntos.py`
-- [ ] Definir firma de producción y QA [S]
-- [ ] Definir archivo del acta en plan-actual [S]
-- [ ] Definir traspaso formal de ⚠ y aprendizajes a M144 [S]
+- [x] Definir firma de producción y QA [S] — **Diseño: 01-Requerimientos.md 5.6 | 03-Diseno.md 4**
+- [x] Definir archivo del acta en plan-actual [S] — **Diseño: 01-Requerimientos.md 5.6 | 04-Codigo.md 5**
+- [x] Definir traspaso formal de ⚠ y aprendizajes a M144 [S] — **Diseño: 01-Requerimientos.md 5.7 | 02-Analisis.md 6**
 - [ ] Definir log de cierre del módulo en Logs/ [S]
 
 
@@ -350,6 +350,7 @@ quirúrgico Trampa 114; **sin push**. QA §21.8 de M88 → Hy3 (no bloqueante).
 Eso es **FALSO**: el archivo contenía 139 `[ ]` en ese momento. Es el mismo patrón H-D
 detectado en 13 `05-Checklist.md` más (SB-02, Log 1279).
 **Cifra real y falsable tras la iteración 4 (mimo 2026-10-06): 23 `[x]` · 6 `[?]` · 138 `[ ]` = 167.**
+**Cifra real y falsable tras la iteración 5 — barrido D8 (DeepSeek-V4.1-Flash, 2026-10-12, Log 1792): 94 `[x]` · 6 `[?]` · 67 `[ ]` = 167.** 71 flips con cita real a `01-04` (criterio por verbo: "Definir X" exige que X exista en los documentos). Los 67 `[ ]` restantes son conceptos que **solo** aparecen en el checklist (retención/fatiga, exploits, artefactos, LOD/culling, accesibilidad fina, licencias de audio, etc.), verificados por grep = 0 en `01-04`.
 (Iter. 3 de SB: 16/5/138 = 159. La iter. 4 agregó 8 ítems (5 verificaciones + 3 hallazgos), cerró
 los 2 `[?]` de "gate no cableado" y "JSON congelado" como `[x]` al verificarse los workflows, y
 corrigió la cifra "11 tests" → 14. Conteo re-mediado con script, no a ojo.)
