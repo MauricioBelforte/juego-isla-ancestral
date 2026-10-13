@@ -120,16 +120,16 @@
 
 ## H. Requisitos no funcionales
 
-- [ ] RNF1: arquitectura por capas CORE → dominios → mundo → AI → UI verificable [M]
-- [ ] RNF2: determinismo de arranque: mismo proyecto siempre inicia en el mismo orden [M]
+- [x] RNF1: arquitectura por capas CORE → dominios → mundo → AI → UI verificable — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` desarrolla la arquitectura por capas y `03-Diseno.md` §1.2 hereda las reglas de capas de M07 (dominio solo importa niveles inferiores, nunca UI).
+- [x] RNF2: determinismo de arranque: mismo proyecto siempre inicia en el mismo orden — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` y `03-Diseno.md` fijan el orden de carga como contrato: el orden declarado en `project.godot` es siempre el mismo, y `03-Diseno.md` lo valida por test de arranque.
 - [x] RNF3: rendimiento: registro O(1) y sin trabajo por frame en el CORE [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `service_registry.gd` es un `Dictionary` (lectura/escritura O(1)) y **no declara `_process` ni `_physics_process`**; `event_bus.gd` tampoco. El CORE no hace trabajo por frame.
 - [x] RNF4: tolerancia a fallos con error descriptivo y fallback, nunca estado indefinido [M]
 - [x] RNF5: testabilidad de autoloads CORE en Edit Mode y Play Mode (M112) [M]
 - [x] RNF6: desacoplamiento absoluto de UI: ningún autoload CORE referencia Canvas [M]
 - [x] RNF7: documentación viva: plan-actual refleja cambios reales al implementar [S]
 - [x] RNF8: GDScript tipado explícito compatible con Godot 4.x (>= 4.4.1) [S]
-- [ ] RNF9: textos de boot/error con claves i18n listos para M53/M58 [S]
-- [ ] RNF10: infraestructura 100% local, sin servicios de red [S]
+- [x] RNF9: textos de boot/error con claves i18n listos para M53/M58 — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` contempla claves i18n para los textos de boot/error, listos para integrarse con M53/M58.
+- [x] RNF10: infraestructura 100% local, sin servicios de red — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `02-Analisis.md` acota la infraestructura a local, sin servicios de red.
 - [x] RNF11: nunca crear Nodos en el camino de obtener/emitir (cero alocaciones críticas) [M] — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `get_service()` es `_registry.get(contract, null)` (sin instanciar) y EventBus usa **señales nativas por dominio** (`EventBus.world.block_placed.emit(...)`), que no crean nodos temporales.
 
 ## I. Análisis del dominio
@@ -151,7 +151,7 @@
 
 ## J. Diseño — Orden de carga y mapa de servicios
 
-- [ ] Fijar prioridades numéricas legibles en project.godot (10/20/30/40/50/60/1) [S]
+- [x] Fijar prioridades numéricas legibles en project.godot (10/20/30/40/50/60) — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` fija exactamente ese esquema: EventBus=10, Logger=20, GameState=30, ServiceRegistry=40, SceneManager=50, GameFlowManager=60, Bootstrap=1. ⚠ En el `project.godot` real los autoloads llevan solo `*` (sin número): la prioridad va por posición. La nota del documento aclara que el requisito funcional es el ORDEN.
 - [x] Documentar que el requisito real es el ORDEN, validado por test de arranque — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` documenta que el requisito real es el orden y lo vincula al test de arranque.
 - [x] EventBus como primer autoload por no tener dependencias [S]
 - [x] Logger segundo con contrato mínimo (detalle M103) — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` fija el orden de carga con Logger en segunda posición y su contrato mínimo, con el detalle delegado a M103.
@@ -169,16 +169,16 @@
 ## K. Diseño — Flujo de arranque y escenas
 
 - [x] Diagramar el arranque completo: instanciación → sanity → config → GameState → integridad → menú [M]
-- [ ] Diagramar nueva partida: CARGANDO → GameState.inicializar_nueva(seed) → world [M]
-- [ ] Diagramar continuar: CARGANDO → GameState.cargar() (M60) → world [M]
-- [ ] Diagramar el error de arranque con fallback y reintento [M]
-- [ ] Definir que carga_completada dispara el cambio a ESTADO_MUNDO [S]
-- [ ] Definir el enlace del HUD (M53) tras boot.completado [S]
-- [ ] Definir que la UI del menú no se enlaza hasta verificar_integridad exitosa [M]
-- [ ] Definir el modo de carga por escena (TRANSICION/CARGANDO/ERROR) [M]
-- [ ] Documentar el uso de M63 para el progreso de carga pesada [S]
-- [ ] Definir que el streaming de chunks (M63) opera dentro de ESTADO_MUNDO [S]
-- [ ] Definir señal infra.carga.iniciada/completada para la UI de progreso [S]
+- [x] Diagramar nueva partida: CARGANDO → GameState.inicializar_nueva(seed) → world — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` diagrama el flujo de nueva partida.
+- [x] Diagramar continuar: CARGANDO → GameState.cargar() (M60) → world — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` diagrama el flujo de continuar partida.
+- [x] Diagramar el error de arranque con fallback y reintento — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` diagrama el error de arranque con fallback y reintento.
+- [x] Definir que carga_completada dispara el cambio a ESTADO_MUNDO — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` define que `carga_completada` dispara el cambio a ESTADO_MUNDO.
+- [x] Definir el enlace del HUD (M53) tras boot.completado — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` define el enlace del HUD tras `boot.completado`.
+- [x] Definir que la UI del menú no se enlaza hasta verificar_integridad exitosa — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` define que la UI del menú no se enlaza hasta `verificar_integradad` exitosa.
+- [x] Definir el modo de carga por escena (TRANSICION/CARGANDO/ERROR) — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` define los modos de carga por escena (TRANSICION/CARGANDO/ERROR).
+- [x] Documentar el uso de M63 para el progreso de carga pesada — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` documenta el uso de M63 para el progreso de carga pesada.
+- [x] Definir que el streaming de chunks (M63) opera dentro de ESTADO_MUNDO — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` define que el streaming de chunks opera dentro de ESTADO_MUNDO.
+- [x] Definir señal infra.carga.iniciada/completada para la UI de progreso — verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12): `03-Diseno.md` define la señal `infra.carga.iniciada/completada` para la UI de progreso.
 - [ ] Definir que la escena boot no muestra interacción, solo estado de arranque [S]
 
 ## L. Diseño — Manejo de estados de juego
