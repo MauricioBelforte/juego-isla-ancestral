@@ -192,7 +192,7 @@
   cuando esos módulos expongan la API.
 - **Estado:** M66 pasa de `🟡 Con dudas` a **core verificado + gate CI, esperando externos** (110/117).
 
-**Totales:** 117 ítems · Completados: 110 · Pendientes: 0 · No resueltos: 7.
+**Totales:** 117 items · Completados: 110 · Pendientes: 2 · No resueltos: 5. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 110 [x] / 5 [?] / 2 [ ]; correccion de dato autorizada por director msg 257.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 109 [x] / 0 [ ] /

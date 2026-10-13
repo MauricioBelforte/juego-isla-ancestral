@@ -279,7 +279,7 @@ estática hecha: JSON parsea (python json), indentación a tabs y paréntesis ba
 - [x] Medición real del bench (Log 386) validada contra el presupuesto manualmente: frame 16.35 ms <= 16.7 ms total (dentro de tolerancia) — punto de partida del gate CI
 - [?] Cableado del gate a GitHub Actions (job que corra validate_budget + bench en CI) — pertenece al módulo M118 (CI-CD, 0/100, 🟢 disponible); el runner necesita GPU/Windows para el bench y el workflow actual usa Godot 4.3 (el proyecto es 4.7.2) — actualizarlo es tarea de M118
 
-**Totales:** 144 ítems · Completados: 49 · Pendientes: 89 · No resueltos: 6.
+**Totales:** 148 items · Completados: 53 · Pendientes: 89 · No resueltos: 6. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 53 [x] / 6 [?] / 89 [ ]; correccion de dato autorizada por director msg 257.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 39 [x] / 101 [ ] /

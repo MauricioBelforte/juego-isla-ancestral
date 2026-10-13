@@ -142,7 +142,7 @@
 - [x] Procedimiento para auditar licencias periódicamente
 - [?] Acción externa no ejecutable por agente (requiere contacto humano con abogado) [M] → **agnes-3-flash (2026-10-12): DEGRADADO [x]→[?] — KnownIssue externo: requiere contacto humano con abogado (M83 no es auto-ejecutable). Documentación lista; revisión legal = acción del fundador.**
 
-**Totales:** 100 ítems · Completados: 53 · Pendientes: 47 · No resueltos: 0.
+**Totales:** 100 items · Completados: 98 · Pendientes: 1 · No resueltos: 1. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 98 [x] / 1 [?] / 1 [ ]; correccion de dato autorizada por director msg 257.)
 **Nota:** Verificación item por item por MiMo V2.5 (OpenCode) 2026-09-15. Solo items con código real verificado en license_validator.gd + licencias.json + test_licenses_m83.gd.
 **Corrección agnes-3-flash (Log 974, 2026-09-17):** el `Totales` anterior decía "Completados: 7" pero el archivo traía **9** `[x]` (stale). Ahora, tras mi iter. scanner, son **16 `[x]` / 84 `[ ]`** (7 nuevos en §A: A.2/A.4/A.6/A.7/A.8/A.9/A.14 respaldados por `license_scanner.gd` + test 24/0).
 
