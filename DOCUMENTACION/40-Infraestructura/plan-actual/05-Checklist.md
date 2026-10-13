@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 95 · Pendientes: 114 · No resueltos: 2.
+**Totales:** 211 ítems · Completados: 154 · Pendientes: 55 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→154 [x] en 6 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /
