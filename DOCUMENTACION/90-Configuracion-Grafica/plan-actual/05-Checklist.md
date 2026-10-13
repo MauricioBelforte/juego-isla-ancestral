@@ -334,7 +334,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 249 ítems · Completados: 123 · Pendientes: 122 · No resueltos: 4.
+**Totales:** 249 ítems · Completados: 149 · Pendientes: 96 · No resueltos: 4. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: la línea decía 123/122/4; conteo real por regex = 149 [x] / 4 [?] / 96 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?].
