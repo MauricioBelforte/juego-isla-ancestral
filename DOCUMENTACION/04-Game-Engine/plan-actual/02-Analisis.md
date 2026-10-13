@@ -143,3 +143,64 @@ modulo (secciones 1-5 y `01-Requerimientos`/`03-Diseno`), en el addon instalado 
 verifica cada item contra su cita en disco y marca el checklist. Ningun item de implementacion
 (secciones F/G/J) fue tocado. Notas de honestidad explicitas en C5 ("infinito" no afirmado
 textualmente) y C9 (el diseno es mas firme que el item: obligatorio, no "a evaluar").
+
+
+## 9. Verificacion del ecosistema del motor - seccion D del checklist (2026-10-13, step 5 workbuddy)
+
+Auditoria de los 10 items de la seccion D (`05-Checklist.md`, lineas 65-74) contra
+evidencia en disco. Cada flip del checklist cita esta seccion. Todas las lineas
+citadas fueron verificadas por grep/sed sobre el archivo en disco ANTES de escribir
+el flip (guardrail del director, msgs 5/9/11 del 2026-10-13). Encargo: msg 11
+(iter 4 = seccion D, elegida por el director sobre E).
+
+| # | Item | Evidencia (archivo + linea, verificada en disco) |
+|---|---|---|
+| D1 | Estado de la comunidad Godot (activa, en crecimiento) | Este archivo L26 (punto 13 del plan maestro: "Comunidad | Activa y motivada; mas chica que Unity") + L55 (riesgo "Comunidad Godot mas chica para arte/animation" con mitigacion "tutorials oficiales"); `01-Requerimientos.md` L31 (RNF "Comunidad y documentacion suficientes para resolver problemas sin freelance") |
+| D2 | Documentacion oficial estable de Godot 4.x | Este archivo L27 (punto 14: "Documentacion | Docs estables desde 4.x"); `01-Requerimientos.md` L31 (mismo RNF) |
+| D3 | Mercado de plugins (Voxel Tools + dialogos + UI) | Este archivo L28 (punto 15: "Plugins | Menor mercado que Asset Store; Voxel Tools cubre el critico") + L24 (punto 11: UI con Control nodes, sin plugin). Dialogos tambien resueltos sin plugin: sistema propio en disco `game/isla-ancestral/scripts/dialogos/dialogue_graph.gd` |
+| D4 | Opciones MCP de Godot para IA (GDAI MCP, godot-mcp) | Este archivo L47 (tabla comparativa §3: "IA/MCP | ... Comunitarios solidos (GDAI MCP)"); `01-Requerimientos.md` L26 (RF8: "Integracion con herramientas IA/MCP | El usuario desarrolla con agentes IA"); MCP REAL en el repo: `tools/mcp/godot-mcp/` (README.md, build/, capturas/) |
+| D5 | Comparativa MCP vs Unity (MCP oficial beta + Unity MCP 12.7k estrellas) | Este archivo L47 ("Oficial en beta + Unity MCP (12.7k★)"). Verificacion externa 2026-10-13: CoplayDev/unity-mcp existe y esta listado en el MCP Registry oficial (github.com/mcp/coplaydev/unity-mcp) - consistente con "oficial"; el conteo de estrellas es dato volatil citado del doc del modulo, no reverificado |
+| D6 | Editores de dialogo (sistema de nodos de Godot) | `DOCUMENTACION/01-Fundamentos-Del-Proyecto/plan-actual/02-Analisis.md` L92: "NO escribir dialogo en codigo. Usar editor visual (sistema de nodos de Godot / Yarn Spinner o Ink en Unity)"; sistema propio implementado en disco: `scripts/dialogos/dialogue_graph.gd` + `dialogue_manager.gd` + `dialog_graph_validator.gd` |
+| D7 | Pipeline de audio cubre lo-fi + ASMR | Este archivo L23 (punto 10: "Audio | AudioServer + bus system; suficiente"); `03-Diseno.md` L17 ("AudioServer + buses | Musica lo-fi + SFX ASMR"); `01-Requerimientos.md` L25 (RF7); codigo real: `game/isla-ancestral/scripts/audio/` con 17 .gd (music_director.gd, sfx_manager.gd, ambient_director.gd, dynamic_range_manager.gd, narrative_sound.gd, audio_config_service.gd, compression_manager.gd...) |
+| D8 | UI de Control nodes cubre HUD/inventario/hotbar | Este archivo L24 (punto 11: "UI | UGUI de Godot (Control nodes) suficiente para HUD/inventario"); `03-Diseno.md` L16 ("UI | Control nodes (le da a UGUI) | Canvas/HUD del juego"); acciones reales en `game/isla-ancestral/project.godot` L222 (seccion [input] inventario={) y L243 (hotbar_1={); autoloads L36 (`inventario_service.gd`) y L56 (`hotbar_state.gd`) |
+| D9 | Networking no es requisito v1.0 | Este archivo L25 (punto 12: "Networking | No necesita en v1.0 (multijugador fuera de alcance) - Godot tiene high-level multiplayer") |
+| D10 | Estado del editor de particulas (GPU particles) | El sistema de particulas del proyecto es GPU: `DOCUMENTACION/52-Particulas-Y-VFX/plan-actual/03-Diseno.md` §3.1 L73-95 (los 20 efectos del catalogo usan GPUParticles3D/GPUParticles2D); codigo real: `scripts/particles/vfx_factory.gd`, `vfx_pool.gd`, `vfx_director.gd`, `preview_particles.gd` (todos con GPUParticles) |
+
+Nota de metodo: los 10 items son de documentacion/verificacion sobre el ecosistema.
+La evidencia combina (a) docs del modulo (secciones 1-5, autoria del modulo) y de
+modulos relacionados (M01 Fundamentos, M52 Particulas), (b) artefactos REALES en
+disco (tools/mcp/godot-mcp, scripts/dialogos, scripts/audio, scripts/particles,
+acciones de input en project.godot) y (c) una verificacion externa fechada
+(2026-10-13, MCP Registry) solo para el item D5, donde el dato es volatil. Ningun
+item de implementacion (secciones F/G/J) fue tocado.
+
+## 10. Verificacion de version y gestion del motor - seccion E del checklist (2026-10-13, step 5 workbuddy)
+
+10 verificaciones con cita archivo+linea. Estandar: grep/sed ANTES de cada flip,
+conteo por prefijo de linea antes/despues (60 -> 70 [x] / 0 [?] / 58 [ ] = 128),
+linea Totales actualizada. Log 1812.
+
+| Item | Verificacion | Evidencia |
+|---|---|---|
+| E1 | Regla de fijar la version del motor | 03-Diseno.md sec.5 L44 ("Version exacta fijada al crear el proyecto y registrada en 04-Codigo.md"); disco real: project.godot L16 config/features=PackedStringArray("4.7", "Forward Plus") |
+| E2 | Regla de NO actualizar arbitrariamente | 03-Diseno.md sec.5 L45 ("Regla: no actualizar Godot durante produccion...") |
+| E3 | Campo Version exacta como pendiente del hito M1 | 03-Diseno.md sec.5 L44 exige registrarla en 04-Codigo.md; grep sobre 04-Codigo.md: NO registra la version exacta del motor -> campo PENDIENTE del hito M1; project.godot L16 fija "4.7" como referencia |
+| E4 | Pinneado de Voxel Tools contra la version de Godot | 03-Diseno.md sec.5 L46 ("Voxel Tools pinned contra la version de Godot"); addon REAL en disco: addons/zylann.voxel/voxel.gdextension compatibility_minimum="4.4.1" |
+| E5 | Procedimiento de migracion (log + changelog) | 03-Diseno.md sec.5 L45 ("documentar cualquier migracion en Logs y changelog"); CHANGELOG.md real en la raiz del repo ([0.0.6]) |
+| E6 | Parche de seguridad critico como unica excepcion | 03-Diseno.md sec.5 L45 ("salvo parche de seguridad critico") |
+| E7 | Congelacion de assets/plugins por version | 03-Diseno.md sec.5 L46 ("Los assets/plugins se fijan por version") |
+| E8 | Renderer elegido: Forward+ (Vulkan) | project.godot L16 config/features=PackedStringArray("4.7", "Forward Plus") + 02-Analisis.md L33 ("Render pipeline | Forward+ (Vulkan)") |
+| E9 | Renderer Mobile como alternativa para builds livianas | 02-Analisis.md L33 ("Render pipeline | Forward+ (Vulkan); Mobile para builds livianas") |
+| E10 | Decision de fisica (Godot Physics, Jolt si hace falta) | 02-Analisis.md L36 ("Fisicas | Godot Physics; colisiones voxel via Voxel Tools"); DIVERGENCIA medida: project.godot L344 3d/physics_engine="Jolt Physics" (la config real ya usa Jolt) |
+
+Notas de honestidad:
+- E3: el item pide REGISTRAR el campo como pendiente, no rellenarlo. La version
+  exacta del motor (4.7.2) no esta registrada en 04-Codigo.md (verificado por
+  grep); solo "4.7" en project.godot L16. Queda pendiente del hito M1.
+- E10: el documento de diseno dice "Godot Physics" pero el project.godot REAL
+  tiene 3d/physics_engine="Jolt Physics" (L344). Es una divergencia diseno-
+  implementacion que se reporta al director; el item se marca con la decision
+  documentada mas la medida real.
+- E9: "Mobile para builds livianas" es una alternativa documentada en el
+  analisis; no es la config activa (Forward Plus si lo es).
+Ningun item de implementacion (secciones F/G/J) fue tocado.

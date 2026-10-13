@@ -62,29 +62,29 @@
 
 ## D. Ecosistema del motor (10)
 
-- [ ] Documentar estado de la comunidad Godot (activa, en crecimiento) [S]
-- [ ] Documentar la documentación oficial estable de Godot 4.x [S]
-- [ ] Documentar el mercado de plugins (Voxel Tools + diálogos + UI) [S]
-- [ ] Documentar las opciones MCP de Godot para desarrollo con IA (GDAI MCP, godot-mcp) [S]
-- [ ] Documentar comparativa MCP vs Unity (MCP oficial beta + Unity MCP 12.7k★) [S]
-- [ ] Documentar los editores de diálogo (sistema de nodos de Godot) [S]
-- [ ] Verificar que el pipeline de audio cubre lo-fi + ASMR [S]
-- [ ] Verificar que la UI de Control nodes cubre HUD/inventario/hotbar [S]
-- [ ] Documentar que el networking no es requisito v1.0 [S]
-- [ ] Documentar el estado del editor de partículas (GPU particles) [S]
+- [x] Documentar estado de la comunidad Godot (activa, en crecimiento) [S] (cita: 02-Analisis.md L26 (punto 13: "Comunidad | Activa y motivada; mas chica que Unity") + L55 (riesgo "Comunidad Godot mas chica para arte/animation", mitigacion "tutorials oficiales"); 01-Requerimientos.md L31 (RNF "Comunidad y documentacion suficientes para resolver problemas sin freelance") - ver §9 D1)
+- [x] Documentar la documentación oficial estable de Godot 4.x [S] (cita: 02-Analisis.md L27 (punto 14: "Documentacion | Docs estables desde 4.x") + 01-Requerimientos.md L31 (RNF documentacion suficiente) - ver §9 D2)
+- [x] Documentar el mercado de plugins (Voxel Tools + diálogos + UI) [S] (cita: 02-Analisis.md L28 (punto 15: "Plugins | Menor mercado que Asset Store; Voxel Tools cubre el critico") + L24 (UI: Control nodes suficiente); dialogos resueltos con sistema propio en disco: scripts/dialogos/dialogue_graph.gd - ver §9 D3)
+- [x] Documentar las opciones MCP de Godot para desarrollo con IA (GDAI MCP, godot-mcp) [S] (cita: 02-Analisis.md L47 (tabla §3: "IA/MCP | ... Comunitarios solidos (GDAI MCP)"); 01-Requerimientos.md L26 (RF8 "Integracion con herramientas IA/MCP"); MCP REAL en el repo: tools/mcp/godot-mcp/ (README.md + build/ + capturas/) - ver §9 D4)
+- [x] Documentar comparativa MCP vs Unity (MCP oficial beta + Unity MCP 12.7k★) [S] (cita: 02-Analisis.md L47 (tabla §3: "IA/MCP | Oficial en beta + Unity MCP (12.7k★) | Comunitarios solidos (GDAI MCP)"); verificacion externa 2026-10-13: CoplayDev/unity-mcp listado en el MCP Registry oficial (github.com/mcp/coplaydev/unity-mcp) - ver §9 D5)
+- [x] Documentar los editores de diálogo (sistema de nodos de Godot) [S] (cita: 01-Fundamentos-Del-Proyecto/plan-actual/02-Analisis.md L92 ("NO escribir dialogo en codigo. Usar editor visual (sistema de nodos de Godot / Yarn Spinner o Ink en Unity)"); sistema propio en disco: scripts/dialogos/dialogue_graph.gd + dialogue_manager.gd + dialog_graph_validator.gd - ver §9 D6)
+- [x] Verificar que el pipeline de audio cubre lo-fi + ASMR [S] (cita: 02-Analisis.md L23 (punto 10: "Audio | AudioServer + bus system; suficiente"); 03-Diseno.md L17 ("AudioServer + buses | Musica lo-fi + SFX ASMR"); 01-Requerimientos.md L25 (RF7); codigo real: scripts/audio/ (17 .gd: music_director.gd, sfx_manager.gd, ambient_director.gd, dynamic_range_manager.gd, narrative_sound.gd...) - ver §9 D7)
+- [x] Verificar que la UI de Control nodes cubre HUD/inventario/hotbar [S] (cita: 02-Analisis.md L24 (punto 11: "UI | UGUI de Godot (Control nodes) suficiente para HUD/inventario"); 03-Diseno.md L16 ("UI | Control nodes (le da a UGUI) | Canvas/HUD del juego"); acciones reales en project.godot L222 (inventario={) y L243 (hotbar_1={); autoloads scripts/inventario/inventario_service.gd (L36) + hotbar_state.gd (L56) - ver §9 D8)
+- [x] Documentar que el networking no es requisito v1.0 [S] (cita: 02-Analisis.md L25 (punto 12: "Networking | No necesita en v1.0 (multijugador fuera de alcance) - Godot tiene high-level multiplayer") - ver §9 D9)
+- [x] Documentar el estado del editor de partículas (GPU particles) [S] (cita: 52-Particulas-Y-VFX/plan-actual/03-Diseno.md sec.3.1 L73-95 (catalogo: los 20 efectos usan GPUParticles3D/GPUParticles2D); codigo real: scripts/particles/ (vfx_factory.gd, vfx_pool.gd, vfx_director.gd, preview_particles.gd - todos con GPUParticles) - ver §9 D10)
 
 ## E. Versión y gestión del motor (10)
 
-- [ ] Documentar la regla de fijar la versión del motor [S]
-- [ ] Documentar la regla de NO actualizar arbitrariamente durante producción [S]
-- [ ] Registrar el campo Versión exacta como pendiente del hito M1 [S]
-- [ ] Documentar el pinneado de Voxel Tools contra la versión de Godot [S]
-- [ ] Documentar el procedimiento de migración de versión (log + changelog) [S]
-- [ ] Documentar parche de seguridad crítico como única excepción [S]
-- [ ] Documentar la congelación de assets/plugins por versión [S]
-- [ ] Registrar el renderer elegido: Forward+ (Vulkan) [S]
-- [ ] Documentar el renderer Mobile como alternativa para builds livianas [S]
-- [ ] Documentar la decisión de física (Godot Physics, Jolt si hace falta) [S]
+- [x] Documentar la regla de fijar la versión del motor [S] (cita: 03-Diseno.md sec.5 L44 ("Versión exacta fijada al crear el proyecto y registrada en 04-Codigo.md"); disco real: project.godot L16 config/features=PackedStringArray("4.7", "Forward Plus") - ver sec.10 E1)
+- [x] Documentar la regla de NO actualizar arbitrariamente durante producción [S] (cita: 03-Diseno.md sec.5 L45 ("Regla: no actualizar Godot durante producción...") - ver sec.10 E2)
+- [x] Registrar el campo Versión exacta como pendiente del hito M1 [S] (cita: 03-Diseno.md sec.5 L44 exige registrarla en 04-Codigo.md; verificado por grep: 04-Codigo.md NO registra la versión exacta del motor -> campo PENDIENTE del hito M1; project.godot L16 fija "4.7" como referencia - ver sec.10 E3)
+- [x] Documentar el pinneado de Voxel Tools contra la versión de Godot [S] (cita: 03-Diseno.md sec.5 L46 ("Voxel Tools pinned contra la versión de Godot"); addon REAL en disco: addons/zylann.voxel/voxel.gdextension compatibility_minimum="4.4.1" - ver sec.10 E4)
+- [x] Documentar el procedimiento de migración de versión (log + changelog) [S] (cita: 03-Diseno.md sec.5 L45 ("documentar cualquier migración en Logs y changelog"); CHANGELOG.md real en la raíz del repo ([0.0.6]) - ver sec.10 E5)
+- [x] Documentar parche de seguridad crítico como única excepción [S] (cita: 03-Diseno.md sec.5 L45 ("salvo parche de seguridad crítico") - ver sec.10 E6)
+- [x] Documentar la congelación de assets/plugins por versión [S] (cita: 03-Diseno.md sec.5 L46 ("Los assets/plugins se fijan por versión") - ver sec.10 E7)
+- [x] Registrar el renderer elegido: Forward+ (Vulkan) [S] (cita: project.godot L16 config/features=PackedStringArray("4.7", "Forward Plus") + 02-Analisis.md L33 ("Render pipeline | Forward+ (Vulkan)") - ver sec.10 E8)
+- [x] Documentar el renderer Mobile como alternativa para builds livianas [S] (cita: 02-Analisis.md L33 ("Render pipeline | Forward+ (Vulkan); Mobile para builds livianas") - ver sec.10 E9)
+- [x] Documentar la decisión de física (Godot Physics, Jolt si hace falta) [S] (cita: 02-Analisis.md L36 ("Físicas | Godot Physics; colisiones voxel vía Voxel Tools"); DIVERGENCIA medida: project.godot L344 3d/physics_engine="Jolt Physics" (la config real ya usa Jolt) - ver sec.10 E10)
 
 ## F. Configuración del proyecto base (18)
 
@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 128 ítems · Completados: 50 · Pendientes: 78 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
+**Totales:** 128 ítems · Completados: 70 · Pendientes: 58 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 

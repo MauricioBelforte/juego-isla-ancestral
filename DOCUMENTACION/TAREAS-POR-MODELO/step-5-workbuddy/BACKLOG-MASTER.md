@@ -20,6 +20,12 @@ carpeta). Identidad de firma: **step 5 workbuddy**.
       `Logs/1806-M04-iter3-soporte-voxel_2026-10-13_03-45-00.md`.
       Pool medido antes: head 1806 (1802-1805 los consumieron otros agentes) ->
       1807. ASCII puro verificado por bytes (0 no-ASCII).
+- [x] Log reservado: **1810** — M04-Game-Engine iteracion 4: 10 flips seccion D
+      (Ecosistema del motor) con cita real. Archivo:
+      `Logs/1810-M04-iter4-ecosistema-motor_2026-10-13_04-40-00.md`.
+      Pool medido antes: head 1810 (1807-1809 los consumieron otros agentes) ->
+      1811. ASCII puro verificado por bytes (0 no-ASCII; 1er intento con §/★
+      corregido antes de cerrar).
 
 ## Commits (delegados a atria-dawn; yo no commiteo ni pusheo)
 
@@ -32,11 +38,12 @@ carpeta). Identidad de firma: **step 5 workbuddy**.
       (05-Checklist con 36 [x] + Log 1801 en el arbol) y en origin/main
       (origin == HEAD == 764cc70). Fila GLOBAL aplicada por el director
       (24 -> 36/128, confirmado en su msg 9 y en HEAD:CHECKLIST-GLOBAL).
-- [ ] M04 iter 3: pedido msg 76 a atria-dawn (2026-10-13 03:52) -> pendiente de
-      commit. 7 archivos: 02-Analisis.md, 05-Checklist.md, Log 1806,
-      BACKLOG-MASTER, tracker .ultima-revision-step-5.txt, msgs 10/76.
-      Pool de canal excluido (stale: cabeza 002 zero-padded vs mensajes
-      unpadded hasta el 10).
+- [x] M04 iter 3: pedido msg 76 a atria-dawn -> commit **e237d07** (push
+      764cc70..e237d07, Log 1809/9d9bc5f) verificado por mi en HEAD y en
+      origin/main. Acuse enviado (msg 78).
+- [ ] M04 iter 4: pedido msg 79 a atria-dawn (2026-10-13 04:50) -> pendiente de
+      commit. 8 archivos: 02-Analisis.md, 05-Checklist.md, Log 1810,
+      BACKLOG-MASTER, tracker, msgs 12/78/79. Pool de canal excluido (stale).
 
 ## Lote WB (encargo del director, msg 01; orden aprobado msg 03)
 
@@ -46,7 +53,7 @@ step-5-kilocode activo hoy).
 
 | Modulo | Carpeta | Estado iteracion |
 |---|---|---|
-| M04-Game-Engine | DOCUMENTACION/04-Game-Engine/ | iter 1: 14->24 [x] (Log 1796, commit e38ad5a + push); iter 2: 24->36 [x] seccion A (Log 1801, en origin/main 764cc70); iter 3: 36->50 [x] seccion C (Log 1806, ped. commit msg 76) |
+| M04-Game-Engine | DOCUMENTACION/04-Game-Engine/ | iter 1: 14->24 [x] (Log 1796, commit e38ad5a + push); iter 2: 24->36 [x] seccion A (Log 1801, origin/main); iter 3: 36->50 [x] seccion C (Log 1806, commit e237d07 + push); iter 4: 50->60 [x] seccion D (Log 1810, ped. commit msg 79, SIN COMMITEAR verificado 05:05); iter 5: 60->70 [x] seccion E (Log 1812, ped. commit msg 81) |
 | M109-Herramientas-Internas | DOCUMENTACION/109-Herramientas-Internas/ | pendiente |
 | M67-Vehiculos | DOCUMENTACION/67-Vehiculos/ | pendiente |
 | M75-Postgame | DOCUMENTACION/75-Postgame/ | pendiente |
@@ -63,7 +70,11 @@ M104, M88, M160.
 ## Pendientes de esta iteracion
 
 - [x] Iteracion 2 de M04: seccion A (Evaluacion de candidatos, 12 items) con cita — HECHA (Log 1801; 24->36 [x] / 92 [ ] / 0 [?] = 128). ACEPTADA por el director (msg 9); fila GLOBAL aplicada por el.
-- [x] Iteracion 3 de M04: seccion C (Soporte voxel y rendimiento, 14 items) — HECHA (Log 1806; 36->50 [x] / 78 [ ] / 0 [?] = 128; informe msg 10). Pend: que el director aplique la fila GLOBAL 36 -> 50/128.
-- [x] Acuse del commit de iter 2: verificado (HEAD con 36 [x] + Log 1801; origin/main == HEAD == 764cc70).
-- [ ] Acuse del commit de iter 3 cuando atria-dawn confirme (verificar sha + origin/main antes de acusar).
-- [ ] Iteracion 4 de M04: seccion D (Ecosistema del motor, 10 items) o E (Version y gestion, 10) — a definir por el director (propuesto en msg 10).
+- [x] Iteracion 3 de M04: seccion C (Soporte voxel y rendimiento, 14 items) — HECHA (Log 1806; 36->50 [x] / 78 [ ] / 0 [?] = 128; informe msg 10). ACEPTADA por el director (msg 11); GLOBAL aplicada por el; commit e237d07 + push verificado.
+- [x] Iteracion 4 de M04: seccion D (Ecosistema del motor, 10 items) — HECHA (Log 1810; 50->60 [x] / 68 [ ] / 0 [?] = 128; informe msg 12). Pend: que el director aplique la fila GLOBAL 50 -> 60/128.
+- [x] Acuse del commit de iter 3: verificado e237d07 en HEAD + origin/main (msg 78 a atria).
+- [ ] Acuse del commit de iter 4 cuando atria-dawn confirme (verificar sha + origin/main antes de acusar).
+- [x] Iteracion 5 de M04: seccion E (Version y gestion del motor, 10 items) — HECHA (Log 1812; 60->70 [x] / 58 [ ] / 0 [?] = 128; informe msg 14). Pend: que el director aplique la fila GLOBAL 60 -> 70/128.
+- [x] Reportado al director (msg 12): la fila GLOBAL de M04 quedo en "Completado" con 68 [ ] pendientes (DoD 21.6). RESUELTO: el director bajo la fila a "Con dudas" 60/128 (msg 13). Fila GLOBAL 60/128 verificada en disco.
+
+- [ ] Acuse del commit de iter 4: VERIFICADO 2026-10-13 05:05 — git log --all -- Logs/1810-* = VACIO; origin/main = edc12ca NO lo contiene; HEAD local = a7a3b39 (2 commits ajenos de pool). Iter 4 + log 1810 + msg 12 + msg 79 siguen sin commitear; pedido renovado a atria en msg 81 (junto con iter 5).
