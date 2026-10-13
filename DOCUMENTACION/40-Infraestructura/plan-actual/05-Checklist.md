@@ -271,7 +271,7 @@
 - [x] Definir test de transiciones válidas e ilegales de GameFlowManager (test_infraestructura_m40.gd) [M]
 - [x] Definir test de registro duplicado y contrato faltante (sin excepciones) [M]
 - [ ] Definir test de diagnóstico estático sobre un árbol de prueba con ciclo artificial [C]
-- [ ] Definir test de escena prematura: warning DOM-INF-ACCESO-TEMPRANO y fallback [M]
+- [x] Definir test de escena prematura: warning DOM-INF-ACCESO-TEMPRANO y fallback [M] — **IMPLEMENTADO (stepfun-step-5-preview, Kilo Code, 2026-10-12):** `scripts/core/test_m40_contratos.gd` bloque 3 verifica exactamente ese comportamiento: consultar un contrato no registrado devuelve `null` sin excepción (el fallback) y emite `DOM-INF-ACCESO-TEMPRANO`. ⚠ **Alcance:** el test ejercita el **ServiceRegistry** directamente, no una escena real instanciada que consulte en su `_ready()`. El contrato warning+fallback queda cubierto; falta el caso con escena.
 - [x] Definir test de error de arranque con config corrupta y reintento exitoso [C]
 - [x] Definir test de rendimiento: 10.000 emisiones de eventos sin picos de memoria (escenario cubierto en test_infraestructura) [M]
 - [x] Definir test de Play Mode: boot → menú → mundo completo sin errores en consola (boot headless verificado) [C]
@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 173 · Pendientes: 36 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→171 [x] en 13 lotes; +8 del frente 1 implementado (contratos.gd, DOM-INF-REGISTRO, DOM-INF-ACCESO-TEMPRANO y fix de L208). — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
+**Totales:** 211 ítems · Completados: 174 · Pendientes: 35 · No resueltos: 2. — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→171 [x] en 13 lotes; +8 del frente 1 implementado (contratos.gd, DOM-INF-REGISTRO, DOM-INF-ACCESO-TEMPRANO y fix de L208). — actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /
