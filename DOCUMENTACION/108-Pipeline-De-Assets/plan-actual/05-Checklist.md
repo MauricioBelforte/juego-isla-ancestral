@@ -22,43 +22,68 @@
 
 - [x] Definir el problema: sin pipeline los assets entran sin formato, nombre, optimización ni legalidad verificables [S]
 - [ ] Vincular el problema con la optimización obligatoria del proyecto (AGENTS.md 21.4.8) [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] Establecer el objetivo: flujo único de entrada, validación, importación, review y aprobación de assets [S]
 - [ ] Definir el alcance: models 3D, texturas, materiales, audio, fuentes, UI y paletas voxel [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] Excluir del alcance: el terreno voxel generado en runtime por Voxel Tools (M08) [S]
+  · espera: depende de M8 (coordinar con su dueno)
 - [ ] Registrar dependencias: M45 (Arte 3D) y M78 (Legal PI), con relaciones a M04, M08, M47, M48, M61, M62, M63, M86, M107, M111, M112, M118 [M]
+  · espera: depende de M4/M8/M45/M47/M48/M61/M62/M63/M78/M86/M107/M111/M112/M118 (coordinar con su dueno)
 - [ ] Establecer que M45 puede estar sin documentar y se referencia por su catálogo de entregables [S]
+  · espera: depende de M45 (coordinar con su dueno)
 - [ ] Fijar los criterios de aceptación del módulo (7 criterios del 01-Requerimientos) [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
 ## B. RF — Formatos por tipo
 
 - [x] RF2: definir glTF 2.0 (glb binario) como formato estándar de modelos en runtime [S]
 - [ ] RF2: admitir gltf + bin en staging para edición y diffs legibles [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RF2: aceptar OBJ solo para geometría simple y formato de edición [S]
 - [ ] RF2: definir PNG como textura lossless con canal alfa [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] RF2: definir WebP como textura lossy sin alfa dura [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] RF2: definir OGG Vorbis como audio estándar (música, ambiente, SFX) [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] RF2: admitir WAV solo para loops cortos de UI/feedback ≤ 5 s [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF3: prohibir FBX como entrada directa y documentar la ruta de conversión Blender → glTF [M]
+  · espera: pendiente de documentacion (marcado [M])
 - [ ] RF3: prohibir TGA, BMP y GIF como texturas de entrada [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF3: prohibir MP3, M4A y MIDI como audio de entrada [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RF3: prohibir formatos propietarios no documentados y propietarios de video [S]
 - [ ] Definir TTF/OTF con licencia libre verificada como fuente (M88: Nunito, Fredoka One) [S]
+  · espera: depende de M88 (coordinar con su dueno)
 - [ ] Exigir potencias de 2 en texturas para compresión VRAM eficiente [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Fijar límites de resolución por tipo: props ≤ 2048², atlas ≤ 4096², iconos ≤ 256² [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Definir paletas voxel como PNG atlas con mipmaps off y filtrado off (anti-bleeding M08) [M]
+  · espera: depende de M8 (coordinar con su dueno)
 - [x] Documentar los formatos prohibidos y sus rutas de conversión en ASSET-PIPELINE.md [S]
 
 ## C. RF — Convenciones de nombres
 
 - [ ] RF4: definir prefijos obligatorios por tipo: mdl_, tex_, mat_, aud_, anim_, fnt_, ui_, vox_ [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] RF4: usar snake_case en minúsculas sin espacios, tildes, ñ ni caracteres especiales [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF4: definir la secuencia {prefijo}_{entidad}_{variante}_{sufijo} [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] RF4: numerar variantes en dos dígitos (_01) [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF4: usar sufijos de mapa: _albedo, _normal, _roughness, _emission, _height [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RF4: limitar nombres a 64 caracteres máximo [S]
 - [x] RF4: derivar el id estable del asset desde el nombre de archivo [M]
 - [ ] RF4: garantizar que el id nunca se reutiliza tras un retiro [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] Definir la convención opcional de respaldo _lod0/_lod1/_lod2 para LODs manuales [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [x] Documentar ejemplos canónicos de nombres en la guía [S]
 - [x] Hacer que el validador cheque la regex de nombres sobre todo el árbol assets/ [M]
 - [x] Definir que las rutas de catálogos y guardados (M15/M59) usan el id derivado del nombre [M]
@@ -69,12 +94,18 @@
 - [x] RF5: versionar los archivos .import generados por Godot en Git [S]
 - [x] RF5: fijar la versión del motor (Godot ≥ 4.4.1 por Voxel Tools) para import determinista [S]
 - [ ] RF5: definir preset de textura 3D: mipmaps on, VRAM Compressed, high_quality, filter on, repeat off [M]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] RF5: definir preset de textura UI: mipmaps off, VRAM Compressed, filter off según caso [M]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] RF5: definir preset de paleta voxel: mipmaps off, filter off, repeat off [M]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [x] RF5: definir preset de mesh glb: import_as Mesh, LODs auto ×3, shadow mesh on, vertex compression on, tangents on [M]
 - [ ] RF5: definir preset de audio OGG con calidad por uso (música alta, SFX media) [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] RF5: definir preset de audio WAV loop con normalize, trim y bounds de loop [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] RF5: definir preset de fuente TTF con MSDF on, antialiasing on y subsetting [M]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [x] Implementar apply_import_presets.gd que reimporte con los presets y corrija desviaciones [C]
 - [x] Detectar en el validador texturas importadas sin VRAM Compressed y reportarlas [M]
 - [x] Excluir staging/ de la importación de runtime mediante .gdignore [S]
@@ -83,19 +114,28 @@
 ## E. RF — Optimización
 
 - [ ] RF6: activar mipmaps en todas las texturas de runtime [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF6: usar compresión VRAM BPTC/S3TC en PC vía Godot [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RF6: habilitar LOD automático de Godot 4.x en meshes importados [M]
 - [x] RF6: habilitar vertex compression en la importación de meshes [M]
 - [ ] RF6: generar shadow mesh en meshes para sombras baratas [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF6: definir presupuesto por tipo: props ≤ 1.5k tris, NPCs ≤ 6k, fauna ≤ 4k, mobiliario ≤ 2.5k [M]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] RF6: instanciar props repetidos con MultiMesh o VoxelInstancer (M08) [M]
+  · espera: depende de M8 (coordinar con su dueno)
 - [ ] RF6: usar un solo mesh con N transforms para vegetación y piedras decorativas [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Usar atlas ≤ 4096² con margen de 4 px anti-bleeding para props compartidos [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Compartir materiales entre assets con los mismos mapas (evitar duplicados) [M]
 - [ ] Preparar los presets para poder cambiar a ETC2/ASTC si hubiera mobile (M96) [S]
+  · espera: depende de M96 (coordinar con su dueno)
 - [x] Configurar audio OGG ~112 kbps música y ~96 kbps SFX [S]
 - [x] Asegurar AABB correctos tras importar para el culling (M61) [M]
 - [ ] Verificar en review ausencia de popping visible en transición de LODs [M]
+  · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [x] Estimar VRAM/RAM por asset con asset_memory_reporter.gd contra el presupuesto de M62 [C]
 - [x] No permitir assets que excedan el presupuesto sin excepción documentada firmada [M]
 
@@ -103,16 +143,26 @@
 
 - [x] RF9: definir plantilla de review humana por asset [M]
 - [ ] RF9: revisar escala correcta en grilla de 1 m del mundo (M08) [S]
+  · espera: depende de M8 (coordinar con su dueno)
 - [ ] RF9: revisar origen y pivote del modelo en posición correcta [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF9: revisar UVs sin superposición accidental y normal maps consistentes [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] RF9: revisar alfa sin bordes blancos (fix_alpha_border) [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF9: revisar mipmaps y filtrado visualmente sin saltos [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] RF9: revisar LODs a las distancias de uso y sombras sin artefactos [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] RF9: revisar look dev cozy coherente con la dirección de arte [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] RF9: revisar peso estimado en memoria contra la tabla por tipo [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] RF9: revisar que la ficha esté completa, incluida la licencia (M78) [S]
+  · espera: depende de M78 (coordinar con su dueno)
 - [x] RF8: crear la ficha de asset como fuente de verdad del estado [M]
 - [ ] RF9: crear la escena asset_preview.tscn con caja de referencia de 1 m y cámara orbitante [M] (revertido: asset_preview.tscn inexistente, BUG-070 Familia A, Ling 3.1 Flash msg 53, atria-dawn 2026-10-08)
+  · espera: pendiente de implementacion (codigo)
 - [x] RF9: permitir review por lotes para escalar a 500+ assets [M]
 - [x] RF12: documentar el procedimiento de actualización de un asset con changelog en la ficha [S]
 
@@ -120,6 +170,7 @@
 
 - [x] RN: ningún asset entra sin mipmaps, compresión VRAM y LODs aplicados [M]
 - [ ] RN: calidad visual cozy sin texturas 4K indiscriminadas; atlas y MultiMesh para draw calls bajos [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RN: nombres, fichas, guías y reportes en español [S]
 - [x] RN: herramientas del pipeline en GDScript con comentarios en español (M05) [M]
 - [x] RN: determinismo de importación con versión de Godot bloqueada y presets versionados [M]
@@ -128,6 +179,7 @@
 - [x] RN: el pipeline funciona con 500+ assets sin colapso de importación ni de review [M]
 - [x] RN: scripts y plantillas del pipeline con revisión de pares (M111) [S]
 - [ ] RN: binarios grandes gestionados con Git LFS (M06/M107) [M]
+  · espera: depende de M6/M107 (coordinar con su dueno)
 - [x] RN: trazabilidad: la ficha permite saber origen, estado y responsable del asset [S]
 - [x] RN: el validador es headless-compatible para CI (M118) [C]
 
@@ -136,14 +188,20 @@
 - [x] Analizar formatos por tipo y descartar alternativas (FBX, JPG, TGA, MP3) con razones [M]
 - [x] Justificar glb sobre FBX: importador estable, LODs automáticos, sin dependencias [M]
 - [ ] Justificar WebP sobre JPG: sin artefactos de bloque en arte flat cozy [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Justificar PNG sobre TGA: soporte universal y canal alfa [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] Justificar OGG sobre MP3: sin licencias de códec y streaming nativo [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] Analizar la compresión por plataforma: BPTC/S3TC PC, ETC2/ASTC futuro mobile [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Analizar el importador de texturas de Godot: mipmaps, VRAM Compressed, high_quality [M]
 - [x] Analizar el importador de glTF: LODs automáticos, shadow mesh, vertex compression [M]
 - [x] Analizar el importador de audio y fuentes (MSDF para escalado cozy) [M]
 - [ ] Analizar batching y atlasing por categorías visuales del proyecto [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Documentar el riesgo de bleeding de atlas y su mitigación (margen + mipmaps off) [S]
+  · espera: pendiente de documentacion (marcado [S])
 - [x] Documentar el riesgo de import no determinista y su mitigación (versión bloqueada + presets) [S]
 - [x] Documentar el riesgo legal de assets sin atribución y su mitigación (validador bloquea) [S]
 - [x] Concluir que el pipeline se cubre 100% con GDScript puro sin plugins [M]
@@ -153,8 +211,10 @@
 - [x] Diseñar el diagrama del pipeline: staging → validación → importación → review → aprobación [M]
 - [x] Definir la estructura de carpetas assets/ con staging, final, archive, fichas [M]
 - [ ] Definir que staging/ es la única puerta de entrada (RF1) [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [x] Definir que las escenas solo referencian assets/final/ [M]
 - [ ] Definir que archive/ conserva retirados sin cargarse [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [x] Diseñar asset_validator.gd: reglas, reporte markdown y salida JSON para CI [C]
 - [x] Diseñar apply_import_presets.gd: reimporta y corrige desviaciones de import [C]
 - [x] Diseñar promote_asset.gd: mueve aprobados de staging a final y actualiza el índice [M]
@@ -163,6 +223,7 @@
 - [x] Diseñar asset_memory_reporter.gd: totaliza VRAM/RAM contra M62 [C]
 - [x] Diseñar la ficha de asset con todos sus campos (origen, licencia, estado, referencias) [M]
 - [ ] Definir el flujo de estados: staging → validado → en_review → aprobado → retirado [S]
+  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [x] Definir que la ficha es la única fuente del estado del asset [S]
 - [x] Diseñar asset_preview.tscn con referencia de escala y luces estándar [M]
 - [x] Integrar las herramientas al menú Proyecto > Pipeline de Assets del editor [M]
@@ -171,17 +232,24 @@
 
 - [x] M45: el catálogo de entregables de Arte 3D debe pasar por staging del pipeline [M]
 - [ ] M45: modelar props y NPCs respetando la metría de 1 m del mundo voxel [M]
+  · espera: depende de M45 (coordinar con su dueno)
 - [x] M78: la ficha exige licencia SPDX y atribución; el validador falla sin ellas [M]
 - [x] M78: los assets licenciados se marcan y trazan según la política de PI [M]
 - [x] M86: assets de IA generativa solo con revisión legal y etiquetado explícito en ficha [M]
 - [ ] M47: respetar los sufijos de mapas (albedo/normal/roughness/emission) definidos en Texturas y Materiales [S]
+  · espera: depende de M47 (coordinar con su dueno)
 - [ ] M48: animaciones embebidas en glb; anim_ solo para clips excepcionales [S]
+  · espera: depende de M48 (coordinar con su dueno)
 - [x] M62: asset_memory_reporter.gd totaliza la VRAM/RAM contra el presupuesto del módulo [C]
 - [ ] M63: ids estables = rutas estables para el caché LRU y el streaming de texturas [M]
+  · espera: depende de M63 (coordinar con su dueno)
 - [x] M63: marcar assets grandes (música, cinemáticas) para carga bajo demanda [M]
 - [ ] M08: paletas voxel en voxel_palettes/ con filtrado off y mipmaps off [M]
+  · espera: depende de M8 (coordinar con su dueno)
 - [ ] M08: props del mundo instanciados con VoxelInstancer/MultiMesh compartido [M]
+  · espera: depende de M8 (coordinar con su dueno)
 - [ ] M61: ejecutar los presupuestos finos de Rendimiento cuando estén publicados (en curso) [M]
+  · espera: depende de M61 (coordinar con su dueno)
 - [x] M118: el validador corre en CI headless y rompe el build si hay errores [C]
 - [x] M111: los scripts del pipeline pasan code review y cumplen la guía de estilo GDScript [S]
 - [x] M112: pruebas unitarias de las reglas del validador (nombres, formatos, límites) [C]
@@ -197,7 +265,9 @@
 - [x] Ficha de estado inconsistente con la ubicación del archivo: detectado por el validador [M]
 - [x] Archivo corrupto o truncado: el importador falla y el reporte lo clasifica como error de asset [M]
 - [ ] Atlas que excede 4096²: rechazo con sugerencia de dividir por categorías [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Audio WAV de más de 5 s: rechazo con sugerencia de conversión a OGG [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] Normal map sin tangentes: reimportado con ensure_tangents y verificación visual [M]
 - [x] Renombrado de asset aprobado: migración de referencias con alias y log de cambio [M]
 - [x] Dos agentes importando a la vez: regla de exclusión mutua en staging (archivo de lock) [M]
@@ -206,13 +276,16 @@
 
 - [x] El validador recorre el árbol en una sola pasada con estadísticas por tipo [C]
 - [ ] Reportes markdown con resumen ejecutivo (aprobados, errores, pendientes) [S]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] El validador usa parallel/skip de carpetas archive/ y .godot/ para no perder tiempo [M]
 - [x] Los presets evitan reimports innecesarios: solo se reimporta lo que cambió [M]
 - [ ] El apilado de atlas se hace una sola vez por categoría y se cache a su resultado [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] La escena de preview carga un solo asset a la vez para review rápido [S]
 - [x] El memory reporter estima sin abrir los archivos (usa import settings) [C]
 - [x] Los logs del pipeline no crecen indefinidamente (rotación según AGENTS.md 18) [S]
 - [ ] El índice _APROBADAS.md se regenera incrementalmente, no de cero [M]
+  · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Las herramientas headless devuelven exit code 0/1 para detectar fallos en CI [S]
 
 ## M. Documentación
@@ -223,6 +296,7 @@
 - [x] Documentar la tabla de presets de importación por tipo [M]
 - [x] Documentar la plantilla de ficha de asset en la guía [S]
 - [ ] Documentar el flujo completo con su diagrama y responsables por etapa [M]
+  · espera: pendiente de documentacion (marcado [M])
 - [x] Documentar los procedimientos de actualización y retiro de assets [M]
 - [x] Mantener plan-actual sincronizado con la implementación real al cerrar el módulo [S]
 
@@ -251,14 +325,19 @@
 **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-01
 - [x] Probar el edge case de asset gigante y su rechazo [M]
 - [ ] Probar el edge case de textura sin comprimir y su corrección con presets [M]
+  · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [x] Probar el edge case de nombre conflictivo y la resolución guiada [M]
 - [x] Probar el edge case de asset discontinuado con y sin dependencias [M]
 - [x] Probar el validador en headless con y sin errores (exit codes) [C]
 - [x] Probar que el reimport con presets no rompe referencias de escenas existentes [M]
 - [ ] Probar la generación de LODs y shadow meshes en un glb de referencia [M]
+  · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [ ] Probar el memory reporter contra un caso conocido y verificar sus números [M]
+  · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [ ] Probar el promote/retiro dejando el índice _APROBADAS.md correcto [M]
+  · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [ ] Ejecutar los testings antes de la primera prueba manual del usuario y documentar resultados [M]
+  · espera: pendiente de documentacion (marcado [M])
 
 ## Dependencia: Visión del Agente (M154)
 
@@ -279,6 +358,7 @@
 ## Evidencia M108 — Log 540
 - Log 540: núcleo V0 creado; 12 scripts en `tools/asset_pipeline/`; runner headless y escena de prueba creados; bloqueo headless documentado.
 - [ ] Test headless M108 ejecutado y verde 0 fallos — `[?]` (Log 529 previsto; escena de prueba se cerró sin output en intentos automáticos) [C] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
+  · espera: depende de M108 (coordinar con su dueno)
 - [x] Validator/presets/promote_asset/atlas_builder/retire_asset/memory_reporter operativos — `[?]` (dueño M108 núcleo) [M]
 - [x] Flujo staging → final con CI headless y exit code — `[?]` (dueño M108/M118) [C]
 
