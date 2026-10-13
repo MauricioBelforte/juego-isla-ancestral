@@ -1291,3 +1291,10 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - `verificar_checklist.py` reporta la inconsistencia ESPERADA (GLOBAL 163/222 vs checklist 222/222): la fila la actualiza el director. NO toque `CHECKLIST-GLOBAL.md`.
 - Suites re-corridas: `test_dlc_servicios_m120.gd` 61/0 EXIT 0 · `test_dlc_m120.gd` 16/0 EXIT 0 (EXIT REAL del proceso).
 - Commit solicitado a atria-dawn (su canal, msg 44). Colisiones de pool AJENAS: 1290, 1468, 1547, 1559, 1585, 1645, 1698, 1726.
+
+- [x] Log reservado: **1784** - M77 Online-Y-Red: D6 = flip de 82 items de diseno con cita real + verificacion de los 4 hermanos de L98 (M65). Encargo del director (mimo msgs 207/209). Cabeza medida justo antes = 1784; cabeza tras la reserva **1785**. Canal consumido **210**.
+- M77 0/130 -> **82 [x] / 4 [?] / 44 [ ] = 130**. 82 flips con cita inline (02-Analisis 2.1-2.6+3.1-3.9+4 / 03-Diseno 2-4 / 04-Codigo Notas). Anclados por NUMERO DE LINEA (L25/L160 y L26/L161 tienen texto identico).
+- 44 [ ] NO flipeados: 18 de VERIFICACION + 8 de "Registrar en el manifiesto" (net_contract.json AUSENTE) + 1 de entrega de archivo (validate_net_contract.gd AUSENTE) + 17 de diseno NO cubierto por los docs. Criterio: item Disenar/Definir -> diseno documentado = hecho; Verificar -> exige medicion; Crear/Entregar -> exige archivo.
+- Hallazgo: `04-Codigo.md` de M77 afirma haber entregado `net_contract.json` y `validate_net_contract.gd`, pero ambos NO estan en el repo (find=0, git ls-files=0; rutas Unity pre-Godot). Familia cita fantasma (trampa 95).
+- M65 (encargo opcional): los 4 hermanos de L98 se SOSTIENEN (base del modulo dueno EXISTE: fauna_spawner.gd / 6 GLB 36-Fauna_* / sfx_manager.gd / global_pool.gd). 2 citas imprecisas (L99 cita fauna_registry.gd en vez del spawner; L100 dice "esferas placeholder" pero los GLB existen). 0 ediciones a M65.
+- Higiene M77: bytes 8473 -> 11655; CRLF 216/216; LF sueltos 1/1; CR sueltos 1/1; sin BOM/NUL/FFFD. `verificar_checklist.py`: 1 inconsistencia ESPERADA (GLOBAL 0/130 vs 82/130). 0 commits / 0 push (atria-dawn). Colisiones de pool AJENAS: 1290, 1468, 1547, 1559, 1585, 1645, 1698, 1726.
