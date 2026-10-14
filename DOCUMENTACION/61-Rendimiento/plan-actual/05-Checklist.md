@@ -50,8 +50,8 @@ estática hecha: JSON parsea (python json), indentación a tabs y paréntesis ba
 - [x] Crear `bench_recorder.gd` [C] — `scripts/performance/bench_recorder.gd`: recorrido 90 s (6 waypoints × 15 s), overlay FPS + draw calls + objects en pantalla, muestreo cada 30 frames, JSON en `user://logs/bench/bench_AAAAMMDD.json`, check `ValidateBudget`/veredicto 60 FPS, hardware capturado (RenderingServer)
 - [x] Instrumentar con BudgetProfile (etiquetas del Profiler, metodología RF D.55) [M] — sección render medida con `begin_section`/`frame_post_draw`/`end_section` en el recorder
 - [x] Fix regresión de indentación en `equipment_manager.gd` (35 líneas espacios→tabs) que bloqueaba el boot [S] — causa del Debugger Break (ver guía 07 §9.60)
-- [?]Ejecución del bench → mediciones reales [C] — COMPLETADO 2026-09-01 (Log 386): 90 s, 179 muestras; FPS 59.35 (WARN -0.65), draw calls 374.0 (máx 471; objetivo <=400 ✅), objects 477, process 0.018 ms, frame 16.35 ms; JSON user://logs/bench/bench_2026-09-01.json + 2 capturas en tools/mcp/godot-mcp/capturas/61-Rendimiento/  — [x]→[?] por atria-dawn (E-12a QA §21.8, stepfun-step-5-preview msg 18, 2026-10-09): el JSON ench_2026-09-01.json NO existe en ninguna ruta (0 hits glob); el item afirma mediciones reales sin artefacto.
-- [?]Documentar metodología de capturas del profiler [S] — capturas planificadas en `tools/mcp/godot-mcp/capturas/61-Rendimiento/` (overlay con FPS/draw calls visible en primer plano) + sección 6 de 04-Codigo  — [x]→[?] por atria-dawn (E-12a QA §21.8, stepfun-step-5-preview msg 18, 2026-10-09): las capturas existen en disco pero NO estan versionadas (git ls-files capturas/61 = 0).
+- [?]Ejecución del bench → mediciones reales [C] — COMPLETADO 2026-09-01 (Log 386): 90 s, 179 muestras; FPS 59.35 (WARN -0.65), draw calls 374.0 (máx 471; objetivo <=400 ✅), objects 477, process 0.018 ms, frame 16.35 ms; JSON user://logs/bench/bench_2026-09-01.json + 2 capturas en tools/mcp/godot-mcp/capturas/61-Rendimiento/  — [x]→[?] por atria-dawn (E-12a QA §21.8, step-5-kilocode msg 18, 2026-10-09): el JSON ench_2026-09-01.json NO existe en ninguna ruta (0 hits glob); el item afirma mediciones reales sin artefacto.
+- [?]Documentar metodología de capturas del profiler [S] — capturas planificadas en `tools/mcp/godot-mcp/capturas/61-Rendimiento/` (overlay con FPS/draw calls visible en primer plano) + sección 6 de 04-Codigo  — [x]→[?] por atria-dawn (E-12a QA §21.8, step-5-kilocode msg 18, 2026-10-09): las capturas existen en disco pero NO estan versionadas (git ls-files capturas/61 = 0).
 
 # 05-Checklist.md — Módulo 61: Rendimiento (130 ítems)
 
@@ -279,7 +279,7 @@ estática hecha: JSON parsea (python json), indentación a tabs y paréntesis ba
 - [x] Medición real del bench (Log 386) validada contra el presupuesto manualmente: frame 16.35 ms <= 16.7 ms total (dentro de tolerancia) — punto de partida del gate CI
 - [?] Cableado del gate a GitHub Actions (job que corra validate_budget + bench en CI) — pertenece al módulo M118 (CI-CD, 0/100, 🟢 disponible); el runner necesita GPU/Windows para el bench y el workflow actual usa Godot 4.3 (el proyecto es 4.7.2) — actualizarlo es tarea de M118
 
-**Totales:** 148 items · Completados: 53 · Pendientes: 89 · No resueltos: 6. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 53 [x] / 6 [?] / 89 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 148 items · Completados: 53 · Pendientes: 89 · No resueltos: 6. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 53 [x] / 6 [?] / 89 [ ]; correccion de dato autorizada por director msg 257.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 39 [x] / 101 [ ] /

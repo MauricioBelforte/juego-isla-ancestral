@@ -4,7 +4,7 @@
 
 # 07-Resultados-Testings.md — Módulo 74: Eventos
 
-## 1. Suites ejecutadas (por stepfun-step-5-preview / Kilo Code, 2026-10-11)
+## 1. Suites ejecutadas (por step-5-kilocode / Kilo Code, 2026-10-11)
 
 Resultados extraídos de los Logs 1690, 1694, 1697 y 1699 y de las notas del propio checklist
 (atribución textual; este entorno no tiene Godot y no las re-ejecutó).

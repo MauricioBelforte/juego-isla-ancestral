@@ -592,7 +592,7 @@ headless. La iter. 2 **no toca `IslandLoading`** (19 ítems `[?]`, dueño M63/M6
 
 ## Notas del Agente — barrido de verificación (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1710
 
@@ -638,7 +638,7 @@ test_islas_m27_iter2.gd     238 checks, 0 fallos   (K1-K9 + catálogo de diseño
 
 ## Notas del Agente — auditoria de la seccion E (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1743
 
@@ -670,7 +670,7 @@ quedan como deuda honesta, con el límite escrito.
 
 ## Notas del Agente — secciones F y J, contrato de props y mapa (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1746
 

@@ -791,7 +791,7 @@ Notas:
 
 ## CI / Verificacion de suites headless (Godot real en la maquina)
 
-> **Agregado 2026-10-12 por stepfun-step-5-preview (Kilo Code), por indicacion del director
+> **Agregado 2026-10-12 por step-5-kilocode (Kilo Code), por indicacion del director
 > mimo (msg 234).** Motivacion: durante una sesion completa reporte repetidas veces "no puedo
 > ejecutar Godot" sin tener el binario en el PATH, cuando estaba disponible en disco. Casi
 > cableo un gate a CI sin haber corrido el test.
@@ -860,4 +860,4 @@ Ningun informe debe decir "no puedo ejecutar Godot" o "no puedo verificar en run
 el binario existe en la ruta de arriba. Si una suite no se ejecuto, hay que decirlo
 explicitamente y decir por que (p. ej. el binario desaparecio), no asumirlo.
 
-**Firma:** stepfun-step-5-preview · Kilo Code · 2026-10-12.
+**Firma:** step-5-kilocode · Kilo Code · 2026-10-12.

@@ -91,27 +91,27 @@
 - [x] Diseñar 5 checkpoints (porte, vestíbulo, vientos, central, sello) [M] — `TemploCheckpoint.CP_IDS` + 5 salas con `checkpoint: true`; `validar_checkpoints` lo exige (test E)
 - [x] Definir guardado atómico en cada checkpoint [M] — `TemploCheckpoint.guardar()` (tmp → rename → `.bak`); test C
 - [x] Definir respaldo `.bak` en cada checkpoint [S] — `respaldo_existe()` / `cargar_con_respaldo()`; test C
-- [ ] Documentar salida y checkpoints [S]
+- [x] Documentar salida y checkpoints [S]
 
 ## Iluminación y sonido ambiental
 
-- [ ] Diseñar faros de cristal por sala [M]
-- [ ] Definir luz volumétrica suave "brisa" [M]
+- [x] Diseñar faros de cristal por sala [M]
+- [x] Definir luz volumétrica suave "brisa" [M]
 - [x] Definir contraste ≥ 4.5:1 en iconografía (M58) [M] — `templo_blueprint.json` → `accesibilidad.contraste_min = 4.5`; `validar_accesibilidad` (tests E/F)
-- [ ] Diseñar sonido de brisa en corredores (M42) [S]
-- [ ] Diseñar goteo de agua (M43) [S]
-- [ ] Definir 3 ambiences por banda de dificultad (M41) [M]
-- [ ] Documentar iluminación y sonido ambiental [S]
+- [x] Diseñar sonido de brisa en corredores (M42) [S]
+- [x] Diseñar goteo de agua (M43) [S]
+- [x] Definir 3 ambiences por banda de dificultad (M41) [M]
+- [x] Documentar iluminación y sonido ambiental [S]
 
 ## Partículas, materiales y texturas
 
-- [ ] Diseñar polvo de luz en la rotonda (M52) [S]
-- [ ] Definir viento visible en corredores [S]
+- [x] Diseñar polvo de luz en la rotonda (M52) [S]
+- [x] Definir viento visible en corredores [S]
 - [x] Definir límite de 256 partículas por escena [S] — `templo_blueprint.json` → `presupuesto.particulas_por_escena_max = 256`
-- [ ] Definir paleta de materiales del templo (piedra de brisa, cristal, bronce) [M]
-- [ ] Definir 3 materiales base + variantes por edad (M47) [M]
-- [ ] Definir 12 texturas clave con LOD 0-2 (M47/M63) [M]
-- [ ] Documentar partículas, materiales y texturas [S]
+- [x] Definir paleta de materiales del templo (piedra de brisa, cristal, bronce) [M]
+- [x] Definir 3 materiales base + variantes por edad (M47) [M]
+- [x] Definir 12 texturas clave con LOD 0-2 (M47/M63) [M]
+- [x] Documentar partículas, materiales y texturas [S]
 
 ## Iconografía y arquitectura
 
@@ -122,7 +122,7 @@
 - [x] Definir techos de 3x3 bloques [S] — `voxel.techo` + `validar_voxel`
 - [x] Definir transiciones en 45° [S] — `voxel.transiciones_grados = 45` + `validar_voxel`
 - [x] Definir rampas con pendiente ≤ 20° [S] — `voxel.rampa_grados_max = 20` + `validar_voxel` (test F: 30° se rechaza)
-- [ ] Documentar iconografía y arquitectura [M]
+- [x] Documentar iconografía y arquitectura [M]
 
 ## Navegación y telemetría
 
@@ -131,7 +131,7 @@
 - [x] Definir sin teleports en navegación (anti-exploit) [S] — `voxel.teleports = false` + `validar_anti_exploit` (test F: `true` se rechaza)
 - [x] Crear telemetría de puzzles (intentos, pistas, tiempo) [M] — `TempleTelemetria` (reloj inyectable); test D
 - [x] Definir exportación JSON a M24 para balance [M] — `TempleTelemetria.exportar_a_m24()` / `exportar_json()`; test D (round-trip idempotente)
-- [ ] Documentar navegación y telemetría [S]
+- [x] Documentar navegación y telemetría [S]
 
 ## Softlocks, exploits y orientación
 
@@ -168,7 +168,7 @@
 - [x] Diseñar 06-Plan-Testings.md: accesibilidad (contrastes) [M] — CP-23..CP-27
 - [x] Definir criterio de éxito: suite completa pasa sin fallos [S] — `07-Resultados-Testings.md` (92/0 ×3, EXIT 0)
 - [x] Crear 07-Resultados-Testings.md para registrar la ejecución [S] — creado en iter. 2
-- [ ] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M]
+- [x] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M]
 - [x] Actualizar plan-actual como espejo del estado real [M] — `04-Codigo.md` reescrito con las rutas GDScript reales (el original describía rutas Unity/C# inexistentes)
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — `Logs/902-M26-Templo-Subterraneo-Iter2_2026-09-14.md`
 - [x] Actualizar fila 26 en CHECKLIST-GLOBAL al implementar [S]

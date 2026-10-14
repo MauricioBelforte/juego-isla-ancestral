@@ -212,7 +212,7 @@
 #### Recomendaciones
 - Agregar nuevos recursos al JSON (no al código): match por substring permite cubrir variantes (veta_*, mineral_*, madera_*).
 - Para texturas UV procedurales (siguiente iteración), extender material_para() con un campo "textura" en el JSON.
-**Totales:** 121 items · Completados: 118 · Pendientes: 0 · No resueltos: 3. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 118 [x] / 3 [?] / 0 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 121 items · Completados: 118 · Pendientes: 0 · No resueltos: 3. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 118 [x] / 3 [?] / 0 [ ]; correccion de dato autorizada por director msg 257.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 18 [x] / 101 [ ] / 0 [?].

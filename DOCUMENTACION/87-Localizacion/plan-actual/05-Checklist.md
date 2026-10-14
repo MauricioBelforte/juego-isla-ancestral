@@ -275,7 +275,7 @@ No son un olvido: son textos **sin palabras que traducir** — la plantilla de c
 | `test_localizacion_iter4.gd` | 0 fallos |
 | `test_validador_po_m87.gd` (iter. 5 + bloque I de iter. 6) | 0 fallos |
 | `test_localizacion_iter6.gd` (nueva) | **82 checks, 0 fallos ×3** |
-| `test_ui_i18n_m53.gd` (M53+M58, Log 1118) | **3 fallos -> 0 fallos** (fix 2026-10-12, stepfun-step-5-preview) |
+| `test_ui_i18n_m53.gd` (M53+M58, Log 1118) | **3 fallos -> 0 fallos** (fix 2026-10-12, step-5-kilocode) |
 
 Desglose MEDIDO del suite nuevo: A9 + B5 + C8 + D9 + E5 + F6 + G6 + H6 + I12 + J9 + K6 = **81**, más 1 del guardián = **82** ✓. El guardián se probó por inyección (abortar el bloque K → `no terminaron: ["K"]`, 82→76, EXIT 1).
 
@@ -351,7 +351,7 @@ apareció. Se endureció el gate de M87 (patrón acumulativo) junto con el resto
 > Conteo real actual: 131 [x] / 0 [ ] / 5 [?].
 
 
-### Fix 2026-10-12 (stepfun-step-5-preview, pedido del director)
+### Fix 2026-10-12 (step-5-kilocode, pedido del director)
 
 `test_ui_i18n_m53.gd` tenía **3 fallos** con esta traza:
 

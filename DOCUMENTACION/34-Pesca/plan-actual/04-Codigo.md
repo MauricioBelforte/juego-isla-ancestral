@@ -213,7 +213,7 @@ func _on_captura_fallida(motivo: String) -> void
 
 ## Notas del Agente — barrido de verificacion (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1718
 
@@ -255,7 +255,7 @@ por estacion (M29), franja horaria (M31) y clima (M32), bonus de cebo y pity, y
 
 ## Notas del Agente — catálogo completo (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1721
 
@@ -303,7 +303,7 @@ test_fishing_save_block.gd  TEST FISHING-SAVE-BLOCK: 11 checks, 0 fallo(s)
 
 ## Notas del Agente — entrega a M14 (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1722
 

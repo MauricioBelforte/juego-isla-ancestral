@@ -39,36 +39,36 @@
 - [x] RF3: radio de interacción configurable por interactuable (default 2.5 m) [S]
 - [ ] RF3: respetar el rango base del personaje de M11 (4 m) sin excederlo por defecto [M]
   · espera: depende de M11 (coordinar con su dueno)
-- [ ] RF4: filtro de candidatos por distancia (cálculo sin sqrt, al cuadrado) [S]
+- [x] RF4: filtro de candidatos por distancia (cálculo sin sqrt, al cuadrado) [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L206-208 `dist_cuad` (sin sqrt).**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RF4: exclusión de interactuables con estado OCULTO en el filtro barato [S]
 - [x] RF4: exclusión de interactuables INTERACTUANDO de la selección [S]
-- [ ] RF4: validación de requisitos previos vía `requisitos_cumplidos(jugador)` [M]
+- [x] RF4: validación de requisitos previos vía `requisitos_cumplidos(jugador)` [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L210 `it.requisitos_cumplidos(_jugador)`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RF4: línea de visión voxel solo para categorías configuradas (npc, cofre, puerta, evento) [C]
 - [ ] RF4: espaciado del raycast de visión (1 por ventana de N=4 frames) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RF4: fallback a PhysicsRayQuery si la categoría lo configura (sin VoxelTool) [M]
-- [ ] RF19: re-evaluación de candidatos cada frame con costo O(n) con n < 40 [M]
+- [x] RF19: re-evaluación de candidatos cada frame con costo O(n) con n < 40 [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L77 `_evaluar_y_seleccionar()` en `_process`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RF24: posiciones de interactuables móviles (animales, NPC) sin cachear más de 1 frame [M]
 - [x] RF11: consultar el estado del interactuable en cada evaluación (sin cache de estado) [S]
 
 ## C. RF: selección y prioridad (15)
 
-- [ ] RF5: seleccionar SIEMPRE un único objetivo, nunca varios [S]
+- [x] RF5: seleccionar SIEMPRE un único objetivo, nunca varios [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L231 `_objetivo_actual = mejor.obj`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF5: ordenar por prioridad de categoría (mapeo publicable en el catálogo) [M]
+- [x] RF5: ordenar por prioridad de categoría (mapeo publicable en el catálogo) [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L237-238 `a.prioridad > b.prioridad` + `catalogo_categorias.gd`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] RF5: desempate por distancia (menor gana) entre misma categoría [S]
+- [x] RF5: desempate por distancia (menor gana) entre misma categoría [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L239-240 `a.dist < b.dist`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF5: desempate por desviación angular frente del jugador (menor gana) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] RF5: resolución final de empates por orden de registro (estable y determinístico) [S]
+- [x] RF5: resolución final de empates por orden de registro (estable y determinístico) [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L242-243 `_interactuables.find(a.obj) < _interactuables.find(b.obj)`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF5: selección 100% determinística para la misma entrada [M]
+- [x] RF5: selección 100% determinística para la misma entrada [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L217 `sort_custom` estable (prioridad, dist, registro).**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] RF6: histéresis anti-parpadeo: mantener objetivo si la ventaja del nuevo es <= 0.15 m [M]
+- [x] RF6: histéresis anti-parpadeo: mantener objetivo si la ventaja del nuevo es <= 0.15 m [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L38 `HISTERESIS_M = 0.15` + L227-228.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] RF5: cambio de objetivo con fade (0.08-0.12 s), nunca salto brusco [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
@@ -78,11 +78,11 @@
 - [x] RF16: respetar cooldown declarado por el interactuable (no re-seleccionar durante el mismo) [M]
 - [ ] RF13: re-selección inmediata al girar el jugador si la desviación angular cambia el orden [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] RF6: expulsar el objetivo actual si sale de rango en el mismo frame [S]
+- [x] RF6: expulsar el objetivo actual si sale de rango en el mismo frame [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L218-219 `_perder_objetivo_si_corresponde()`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF19: ordenamiento con k candidatos típico < 8 (k log k barato) [S]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF5: exponer el objetivo seleccionado a través de `obtener_objetivo_actual()` [S]
+- [x] RF5: exponer el objetivo seleccionado a través de `obtener_objetivo_actual()` [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L171-172 `func obtener_objetivo_actual()`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
 ## D. RF: prompts visuales (14)
@@ -110,16 +110,16 @@
 ## E. RF: acción y despacho (17)
 
 - [x] RF8: presionar E dispara `interactuar(datos)` del objetivo seleccionado [S]
-- [ ] RF8: el gestor no decide la mecánica: solo despacha por contrato [S]
+- [x] RF8: el gestor no decide la mecánica: solo despacha por contrato [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L133 `obj.interactuar(datos)` — el consumidor decide.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF9: soporte de interacciones instantáneas y de larga duración (hold/activa) [M]
+- [x] RF9: soporte de interacciones instantáneas y de larga duración (hold/activa) [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L139-140 auto-finaliza si `duracion <= 0`, larga duración se queda en INTERACTUANDO.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RF10: bloqueo global INTERACTUANDO: sin nuevas selecciones ni prompts durante la interacción [S]
-- [ ] RF4: presionar E con solo candidato atenuado emite feedback "no disponible" respetuoso [M]
+- [x] RF4: presionar E con solo candidato atenuado emite feedback "no disponible" respetuoso [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L124-126 "no_disponible" + cancelada.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] RF8: presionar E sin ningún candidato no produce error ni castigo (regla cozy) [S]
+- [x] RF8: presionar E sin ningún candidato no produce error ni castigo (regla cozy) [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L119-121 "Sin candidato: no genera error ni castigo (regla cozy RF8)".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF9: el consumidor emite `interaccion_terminada(ok)` para liberar el gestor [M]
+- [x] RF9: el consumidor emite `interaccion_terminada(ok)` para liberar el gestor [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L143-147 `finalizar_interaccion()` emite `interaccion_terminada`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RF15: micro-animación pulse del prompt al iniciar la interacción [S]
 - [ ] RF15: chirrido de interacción por categoría (base de sonido M11/M44) [S]
@@ -144,13 +144,13 @@
 ## F. RF: cancelación (10)
 
 - [x] RF12: cancelar prompt y selección al salir del rango del objetivo [S]
-- [ ] RF12: cancelación suave de la interacción en curso con `cancelar_interaccion()` [M]
+- [x] RF12: cancelación suave de la interacción en curso con `cancelar_interaccion()` [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L150-154 `cancelar_interaccion(objetivo, motivo)`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] RF12: log M103 si el consumidor no responde a la cancelación [M]
   · espera: depende de M103 (coordinar con su dueno)
 - [ ] RF13: cambio de objetivo por reorden de prioridad sin parpadeo (histéresis) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] RF14: cancelar selección al abrir menú, diálogo, inventario o pausa [S]
+- [x] RF14: cancelar selección al abrir menú, diálogo, inventario o pausa [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L157-168 `set_estado_dormido(dormido)`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RF14: re-evaluar automáticamente al cerrar la UI en el siguiente frame [S]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
@@ -166,12 +166,12 @@
 - [ ] RF15: feedback sonoro unificado por categoría (chirrido de madera/metal/animal) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RF15: feedback visual del prompt (pulse) al iniciar interacción [S]
-- [ ] RF15: feedback de éxito distinguible del de fallo [S]
+- [x] RF15: feedback de éxito distinguible del de fallo [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L147 `interaccion_terminada.emit(objetivo, ok)` — ok true/false distingue.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF15: feedback de "no disponible" con tono respetuoso (nunca chirrido de error) [M]
+- [x] RF15: feedback de "no disponible" con tono respetuoso (nunca chirrido de error) [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L126 `interaccion_cancelada.emit(obj, "no_disponible")` — señal suave, no error.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] RF22: presionar E con prompt atenuado visible responde con razón localizable [M]
-- [ ] RF15: sin feedback intrusivo: nada de shake de cámara ni invasión (regla cozy) [S]
+- [x] RF15: sin feedback intrusivo: nada de shake de cámara ni invasión (regla cozy) [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L7 "NO conoce los consumidores, solo despacha" — sin cámara/shake.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RF15: el prompt de éxito se oculta antes de la re-evaluación [S]
 - [ ] RF15: las partículas del consumidor se reproducen vía señal, no las dibuja el gestor [M]
@@ -185,12 +185,12 @@
 
 ## H. Requisitos no funcionales (15)
 
-- [ ] RN-cozy: la interacción nunca castiga al jugador [S]
+- [x] RN-cozy: la interacción nunca castiga al jugador [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L119-121 "no genera error ni castigo" + L126 "feedback respetuoso".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RN-cozy: prompts suaves, sin parpadeos ni titileos [S]
-- [ ] RN-cozy: la cancelación por distancia es suave, sin cortes bruscos [S]
+- [x] RN-cozy: la cancelación por distancia es suave, sin cortes bruscos [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L251-254 `_perder_objetivo_si_corresponde()` emite `objetivo_perdido` (fade, no corte).**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RN-rendimiento: filtrado por distancia al cuadrado sin sqrt [S]
+- [x] RN-rendimiento: filtrado por distancia al cuadrado sin sqrt [S] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L206 `dist_cuad` (sin sqrt).**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] RN-rendimiento: raycast de visión espaciado (N=4) y acotado por categoría [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
@@ -204,11 +204,11 @@
   · espera: depende de M70 (coordinar con su dueno)
 - [ ] RN-voxel: línea de visión compatible con Voxel Tools (VoxelTool de M08) [C]
   · espera: depende de M8 (coordinar con su dueno)
-- [ ] RN-determinismo: selección idéntica para entrada idéntica (debug M110 y tests) [M]
+- [x] RN-determinismo: selección idéntica para entrada idéntica (debug M110 y tests) [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L217 `sort_custom` estable + L242 orden registro.**
   · espera: depende de M110 (coordinar con su dueno)
-- [ ] RN-testeabilidad: dependencias inyectables (jugador, voxel) para tests sin escena real [M]
+- [x] RN-testeabilidad: dependencias inyectables (jugador, voxel) para tests sin escena real [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L82-87 `configurar_jugador()` + `configurar_voxel()`.**
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
-- [ ] RN-seguridad: ningún error de contrato rompe el frame; degradación a NO_DISPONIBLE + log [M]
+- [x] RN-seguridad: ningún error de contrato rompe el frame; degradación a NO_DISPONIBLE + log [M] → **agnes-3-flash (2026-10-14): `interaction_manager.gd` L92-93 null checks + L197-198 `is_instance_valid` (degradación suave).**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 ## I. Diseño y arquitectura (17)
@@ -219,16 +219,16 @@
 - [x] Definir enum InteractionState del gestor (INACTIVO, SELECCIONANDO, INTERACTUANDO, DORMIDO) [S]
 - [x] Diseñar Interactable base (Node3D) con registro/desregistro automático [M]
 - [x] Diseñar PromptHUD en CanvasLayer propio con indicador world-space y línea HUD [C]
-- [ ] Diseñar Resource CategoriaInteraccion (ícono, sonido, prioridad, etiqueta, visión) [M]
+- [x] Diseñar Resource CategoriaInteraccion (ícono, sonido, prioridad, etiqueta, visión) [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` L43 "CategoriaInteraccion | Resource | ícono, sonido, prioridad, label, requiere línea de visión".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Diseñar catálogo `categorias_interaccion.tres` con las 8 categorías [M]
+- [x] Diseñar catálogo `categorias_interaccion.tres` con las 8 categorías [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` L44 "CatalogoCategorias | Resource .tres" + `catalogo_categorias.gd` en disco.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Diseñar flujo de detección/secuencia de 7 pasos por frame [M]
+- [x] Diseñar flujo de detección/secuencia de 7 pasos por frame [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §2.1 "Flujo de detección y selección (por frame)".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Diseñar flujo de acción con bloqueo INTERACTUANDO [M]
-- [ ] Diseñar flujo de cancelación por distancia/UI/cambio de objetivo/desregistro [M]
+- [x] Diseñar flujo de cancelación por distancia/UI/cambio de objetivo/desregistro [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §2.3 "Flujo de cancelación".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Diseñar flujo de persistencia con escritura diferida (0.5 s) [M]
+- [x] Diseñar flujo de persistencia con escritura diferida (0.5 s) [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §2.4 "Flujo de persistencia" + `interaction_manager.gd` L261-275 `get_save_data/restore_save_data`.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Diseñar las 6 señales de salida del módulo [S]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
@@ -424,7 +424,7 @@
 > **Estado:** M70 permanece 🟡 (QA completado, pendiente cierre de dueño). NO se marca ✅ porque los prompts visuales (M53/M154) y la integración con 10 consumidores siguen fuera de iter 1.
 > 
 > **Estado del módulo:** 🟡 Liberado con honestidad — listo para QA cruzado por Hy3 (WorkBuddy) o cualquier agente distinto. NO listo para ✅ hasta que M53 integre el prompt visual y se cierre M154.
-**Totales:** 198 ítems · Completados: 77 · Pendientes: 121 · No resueltos: 0.
+**Totales:** 198 ítems · Completados: 109 · Pendientes: 89 · No resueltos: 0. (Corregido agnes-3-flash 2026-10-14: +32 flips lotes 1-5 con grep `interaction_manager.gd` + `03-Diseno.md`)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 77 [x] / 121 [ ] / 0 [?].

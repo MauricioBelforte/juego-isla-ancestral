@@ -271,7 +271,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 185 items · Completados: 132 · Pendientes: 51 · No resueltos: 2. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 132 [x] / 2 [?] / 51 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 185 items · Completados: 132 · Pendientes: 51 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 132 [x] / 2 [?] / 51 [ ]; correccion de dato autorizada por director msg 257.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 97 [x] / 87 [ ] /

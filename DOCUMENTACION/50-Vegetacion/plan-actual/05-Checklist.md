@@ -107,7 +107,7 @@
 - [x] Definir draw calls por chunk ≤ umbral [M] — **Diseño: 01-Requerimientos.md 5 (RF12); 03-Diseno.md 3.1**
 - [x] Definir pooling de instancias (M62) [M] — **Diseño: 01-Requerimientos.md 5 (RF12)**
 - [x] Definir liberación de memoria al descargar chunk [M] — **Diseño: 04-Codigo.md 2 (limpiar_chunk)**
-- [x] ~~Definir registro vegetation_budget.json~~ **ELIMINADO (director, 2026-10-11, msg 116):** el rol de presupuesto por bioma lo cumple \`densidad\` en \`data/vegetacion/vegetacion_config.json\` (12/25/22/10/15/10/30 por bioma). No se crea JSON separado. Evidencia: verificado por stepfun-step-5-preview (Log 1657).
+- [x] ~~Definir registro vegetation_budget.json~~ **ELIMINADO (director, 2026-10-11, msg 116):** el rol de presupuesto por bioma lo cumple \`densidad\` en \`data/vegetacion/vegetacion_config.json\` (12/25/22/10/15/10/30 por bioma). No se crea JSON separado. Evidencia: verificado por step-5-kilocode (Log 1657).
 
 ## N. RF13 — Validación
 

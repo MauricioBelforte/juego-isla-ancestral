@@ -48,8 +48,8 @@
 
 ## D. Prioridades y rendimiento (10)
 
-- [x] Lógica O(1) para lookup de destinos [S] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1691): `scripts/fasttravel/fast_travel_service.gd` + `test_fast_travel_headless.gd` (17 checks, 0 fallos, PASS con guardián). índice `_indice` id -> ancla + `ancla_de(id)`; la suite verifica que cubre las 4 anclas.
-- [x] Sin cálculos complejos por frame [S] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1691): `scripts/fasttravel/fast_travel_service.gd` + `test_fast_travel_headless.gd` (17 checks, 0 fallos, PASS con guardián). el servicio no declara `_process` ni `_physics_process`; el lookup es por diccionario.
+- [x] Lógica O(1) para lookup de destinos [S] — verificado (step-5-kilocode, 2026-10-12, Log 1691): `scripts/fasttravel/fast_travel_service.gd` + `test_fast_travel_headless.gd` (17 checks, 0 fallos, PASS con guardián). índice `_indice` id -> ancla + `ancla_de(id)`; la suite verifica que cubre las 4 anclas.
+- [x] Sin cálculos complejos por frame [S] — verificado (step-5-kilocode, 2026-10-12, Log 1691): `scripts/fasttravel/fast_travel_service.gd` + `test_fast_travel_headless.gd` (17 checks, 0 fallos, PASS con guardián). el servicio no declara `_process` ni `_physics_process`; el lookup es por diccionario.
 - [x] Pool de estados (disponible/bloqueado/cooldown) [S] → **agnes-3-flash (2026-10-12): `m69_spec.md` §D.**
 - [x] Integración con M29/M31 sin conflictos [S] → **agnes-3-flash (2026-10-12): `m69_spec.md` §D.**
 - [x] Test de pool: estados máx sin memory leak [M] → **agnes-3-flash (2026-10-12): `m69_spec.md` §D.**
@@ -61,7 +61,7 @@
 
 ## E. Mapa de puntos de viaje (15)
 
-> **Estado verificado (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 212/215):** la infraestructura de desbloqueo **sí existe** — `scripts/fasttravel/fast_travel_service.gd` tiene la señal `ancla_desbloqueada(id)`, `desbloquear()`, `esta_desbloqueada()` y `anclas_desbloqueadas()`, con 17 checks en `test_fast_travel_headless.gd`. Lo que **no existe** son los 14 ítems de esta sección: `data/fasttravel/anclas.json` declara solo **4 anclas** (Pueblo Raíz, Casa del Jugador, Tienda General, Playa del Norte), todas con `desbloquea: true` **estático** — no hay condiciones progresivas, faltan 8 de las 10 anclas temáticas (Santuario, Isla, Bosque, Montaña, Desierto, Cueva, Valle, Ciudadela) y no hay señales de descubrimiento por zona/bioma en `event_bus.gd` que puedan alimentarlas. Tampoco hay UI con orden alfabético, búsqueda, atajo de teclado ni prioridad por proximidad/costo. Por eso los 14 quedan `[ ]`.
+> **Estado verificado (step-5-kilocode, Kilo Code, 2026-10-12, orden del director mimo msg 212/215):** la infraestructura de desbloqueo **sí existe** — `scripts/fasttravel/fast_travel_service.gd` tiene la señal `ancla_desbloqueada(id)`, `desbloquear()`, `esta_desbloqueada()` y `anclas_desbloqueadas()`, con 17 checks en `test_fast_travel_headless.gd`. Lo que **no existe** son los 14 ítems de esta sección: `data/fasttravel/anclas.json` declara solo **4 anclas** (Pueblo Raíz, Casa del Jugador, Tienda General, Playa del Norte), todas con `desbloquea: true` **estático** — no hay condiciones progresivas, faltan 8 de las 10 anclas temáticas (Santuario, Isla, Bosque, Montaña, Desierto, Cueva, Valle, Ciudadela) y no hay señales de descubrimiento por zona/bioma en `event_bus.gd` que puedan alimentarlas. Tampoco hay UI con orden alfabético, búsqueda, atajo de teclado ni prioridad por proximidad/costo. Por eso los 14 quedan `[ ]`.
 
 - [x] Pueblo: desbloqueado tras área inicial [S] → **agnes-3-flash (2026-10-12): `m69_spec.md` §E — 10 anclas.**
 - [x] Santuario: desbloqueado tras visitar a pie [S] → **agnes-3-flash (2026-10-12): `m69_spec.md` §E.**
@@ -165,7 +165,7 @@
 - [ ] M28: integración con waypoints descubiertos [S]
 - [x] M63: consulta de logros asociados a first-travel [S]
 - [ ] M29-M31: restricción temporal (noche, tormenta) [S]
-- [?] M104: evento analytics fast_travel_used [S] — **[x]→[?] barrido atria (Log 1760):** grep `fast_travel_used` en `scripts/`, `tests/` y `data/` → **0 hits**. El evento de analytics no existe en runtime. **Precisión (stepfun-step-5-preview, Kilo Code, 2026-10-12):** el grep por el nombre literal `fast_travel_used` da 0 hits, pero el evento **genérico sí existe**: `analytics_director.gd` define la constante `EV_FEATURE_USADA` y `test_analytics.gd:82` la usa con `{"feature": "fast_travel"}`. Lo que no hay es **emisión desde runtime** (grep de `EV_FEATURE_USADA` fuera de tests: solo la definición en `analytics_director.gd`). El `[?]` se mantiene, pero la nota original inducía a error al decir "el evento no existe".
+- [?] M104: evento analytics fast_travel_used [S] — **[x]→[?] barrido atria (Log 1760):** grep `fast_travel_used` en `scripts/`, `tests/` y `data/` → **0 hits**. El evento de analytics no existe en runtime. **Precisión (step-5-kilocode, Kilo Code, 2026-10-12):** el grep por el nombre literal `fast_travel_used` da 0 hits, pero el evento **genérico sí existe**: `analytics_director.gd` define la constante `EV_FEATURE_USADA` y `test_analytics.gd:82` la usa con `{"feature": "fast_travel"}`. Lo que no hay es **emisión desde runtime** (grep de `EV_FEATURE_USADA` fuera de tests: solo la definición en `analytics_director.gd`). El `[?]` se mantiene, pero la nota original inducía a error al decir "el evento no existe".
 - [ ] M110: debug menu con listado de anchors [S]
 - [ ] M122: captura de crash si portal falla [S]
 - [ ] M124: balance económico según distancia [S]
