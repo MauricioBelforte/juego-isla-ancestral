@@ -132,23 +132,23 @@
 - [x] Documentar el raycast voxel para herramientas (M13) [S] (cita: DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md sec.5 L96 ("Terrateniente - Edicion de bloques por raycast"); 03-Diseno.md L41 (prototipo con raycast de bloque) - ver Log 1833 H6)
 - [x] Documentar los singletons GameState/EventBus (M59 Guardado) [S] (cita: 59-Guardado/plan-actual/03-Diseno.md L25 ("autoloads: SaveManager, GameState M60, EventBus M07"); 01-Requerimientos.md L9 ("M07 (EventBus - avisos de guardado)") - ver Log 1833 H7)
 - [x] Documentar el Input Map remapeable (M57/M58) [S] (acciones en project.godot [input]; remapeables desde Project Settings; ver 04-Codigo.md)
-- [ ] Documentar el asset pipeline de audio (M41-M44) [S]
+- [x] Documentar el asset pipeline de audio (M41-M44) [S] (cita: rutas de assets en 41-Musica/plan-actual/04-Codigo.md L18 (res://audio/music/...wav), 42-Sonido-Ambiental/plan-actual/04-Codigo.md L16 (res://audio/ambient/...wav) y 43-Efectos-De-Sonido/plan-actual/04-Codigo.md L16 (res://audio/sfx/...wav) y 44-ASMR-Y-Feedback/plan-actual/04-Codigo.md L15 (res://audio/microfoley/...wav); buses en 42-Sonido-Ambiental/plan-actual/03-Diseno.md L64-L65 (total <= 11 bus activos) + 41-Musica/plan-actual/04-Codigo.md L39 (integracion M42 buses + M44 feedback sobre buses jerarquicos de M06); codigo real scripts/audio/ (10 .gd de produccion + 7 suites). NOTA honesta: hay 0 archivos de audio entregados por el compositor (43-Efectos-De-Sonido/plan-actual/04-Codigo.md L69) - ver Log 1836 H9)
 - [x] Documentar el pipeline de arte procedimental voxel (M45-M48) [S] (cita: 47-Texturas-Y-Materiales/plan-actual/01-Requerimientos.md L18 ("texturas procedurales deterministas para variantes por bioma") + L28 + L31 (determinismo sin RNG en runtime); 45-Arte-3D/plan-actual/01-Requerimientos.md L38 (vegetacion procedural) + L40 (generacion procedural de mallas M08/M10) - ver Log 1833 H10)
 - [x] Documentar la UI del juego (Control nodes) con M53 [S] (cita: 53-UI-UX/plan-actual/02-Analisis.md L27-L29 (Alternativa B adoptada: "Cada pantalla es una escena de Control con el foco correctamente cableado") + L44; 03-Diseno.md L42 (open(initial_focus: Control)) - ver Log 1833 H11)
 - [x] Documentar que el autosave del editor usa `.godot/` (no versionar) [S] (cita: .gitignore L8 (".godot/" ignorado); disco: game/isla-ancestral/.godot/ existe y no esta versionado (git check-ignore rc=0) - ver Log 1833 H12)
 
 ## I. Riesgos y edge cases (10)
 
-- [ ] Documentar riesgo: dependencia de Voxel Tools (comunitaria) [S]
-- [ ] Documentar mitigación: MIT + versión fijada + código fuente disponible [S]
-- [ ] Documentar riesgo: transvoxel perf en islas grandes [S]
-- [ ] Documentar riesgo: reaprendizaje si el usuario viene de Unity [S]
-- [ ] Documentar riesgo: actualización de Godot a mitad de producción [S]
-- [ ] Documentar edge case: Windows vs Linux paths en tools (portabilidad) [S]
-- [ ] Documentar edge case: export SteamOS exige pruebas en Deck real [S]
-- [ ] Documentar edge case: drivers Vulkan en PCs viejas (fallback a OpenGL) [S]
-- [ ] Documentar edge case: pérdida de compatibilidad de saves con cambios de versión [S]
-- [ ] Documentar decisión: si M1 falla 60 FPS, re-evaluar motor con replanificación [S]
+- [x] Documentar riesgo: dependencia de Voxel Tools (comunitaria) [S] (cita: 02-Analisis.md L56 (tabla de riesgos sec.4: "Voxel Tools = dependencia comunitaria") + L28 (punto 15: "Plugins | Menor mercado que Asset Store; Voxel Tools cubre el critico") - ver Log 1836 I1)
+- [x] Documentar mitigación: MIT + versión fijada + código fuente disponible [S] (cita: 02-Analisis.md L56 (mitigacion: "Version fijada + codigo fuente disponible (MIT)"); disco real: addons/zylann.voxel/LICENSE.md (MIT, L1-3) + voxel.gdextension compatibility_minimum="4.4.1"; 03-Diseno.md L46 (assets/plugins fijados por version) - ver Log 1836 I2)
+- [x] Documentar riesgo: transvoxel perf en islas grandes [S] (cita: 02-Analisis.md L58 (tabla de riesgos: "Rendimiento transvoxel en islas grandes | Hito M1 valida antes de avanzar") + L48 ("Voxel a gran escala | Disenado para eso"); 03-Diseno.md L25 (LOD Transvoxel para chunks lejanos); medicion real Logs/386-M61 (374 draw calls promedio <= 400; 59.35 FPS) - ver Log 1836 I3)
+- [x] Documentar riesgo: reaprendizaje si el usuario viene de Unity [S] (cita: 02-Analisis.md L57 (tabla de riesgos: "Reaprendizaje si el usuario viene de Unity | Costo aceptado; desventaja documentada") + L22 (animacion menos madura que Mecanim) + L26 (comunidad mas chica); decision de origen del usuario: Logs/17-CONFIRMACION_MOTOR_GODOT-VOXELTOOLS_2026-08-16 - ver Log 1836 I4)
+- [x] Documentar riesgo: actualización de Godot a mitad de producción [S] (cita: 03-Diseno.md sec.5 L45 ("no actualizar Godot durante produccion salvo parche de seguridad critico; documentar cualquier migracion en Logs y changelog") + L46 (congelacion por version); CHANGELOG.md real en la raiz del repo - ver Log 1836 I5)
+- [x] Documentar edge case: Windows vs Linux paths en tools (portabilidad) [S] (cita: CI corre en Linux: .github/workflows/quality.yml L12 runs-on ubuntu-latest (+ backup.yml L25, bug_metrics.yml L14, dev-build.yml L24); exports REALES multiplataforma: export_presets.cfg preset.0 Web, preset.1 Windows, preset.2 Linux, preset.3 SteamOS (Linux/X11) - export headless EXIT 0 de Linux y SteamOS (Log 1833 F16) - ver Log 1836 I6)
+- [x] Documentar edge case: export SteamOS exige pruebas en Deck real [S] (cita: export_presets.cfg preset.3 "SteamOS" (Linux/X11, exportado OK headless, Log 1833 F16); 03-Diseno.md L41 (prototipo 60 FPS en "PC media y Steam Deck"). NOTA honesta: sin hardware Deck real, la validacion en dispositivo sigue pendiente - ver Log 1836 I7)
+- [x] Documentar edge case: drivers Vulkan en PCs viejas (fallback a OpenGL) [S] (cita: project.godot L16 (config/features="4.7", "Forward Plus" = Vulkan) + L354 (rendering_device/driver.windows="d3d12"); alternativa documentada: 02-Analisis.md L33 ("Forward+ (Vulkan); Mobile para builds livianas") - ver Log 1836 I8)
+- [x] Documentar edge case: pérdida de compatibilidad de saves con cambios de versión [S] (cita: 59-Guardado/plan-actual/03-Diseno.md L95 ("Migracion | Backup previo + solo hacia delante (M60)") + L54 (schema_version < actual -> migrar con backup previo) + L109 (M60 define formato, schema_version y migraciones) - ver Log 1836 I9)
+- [x] Documentar decisión: si M1 falla 60 FPS, re-evaluar motor con replanificación [S] (cita: 03-Diseno.md sec.4 L41 ("Si falla, revisar greedy meshing/threading antes de avanzar; si persiste, re-evaluar motor (con re-planificacion)"); 01-Requerimientos.md L45 (60 FPS = vara minima del motor); medicion real Logs/386-M61 (59.35 FPS) - ver Log 1836 I10)
 
 ## J. Validación del hito M1 y cierre del módulo (12)
 
@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 128 ítems · Completados: 105 · Pendientes: 23 · No resueltos: 0. (iter 8: F16 export presets Linux/SteamOS creados y exportados OK + 10 flips seccion H; quedan 23 [ ] = pipeline de audio M41-M44 sin evidencia + framerate explicito en project.godot + secciones I/J)
+**Totales:** 128 ítems · Completados: 116 · Pendientes: 12 · No resueltos: 0. (iter 9: H9 asset pipeline de audio documentado con cita real + 10 flips seccion I de riesgos y edge cases; quedan 12 [ ] = seccion J, validacion del hito M1)
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 

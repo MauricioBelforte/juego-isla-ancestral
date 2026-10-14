@@ -1,3 +1,4 @@
+
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
@@ -203,4 +204,48 @@ Notas de honestidad:
   documentada mas la medida real.
 - E9: "Mobile para builds livianas" es una alternativa documentada en el
   analisis; no es la config activa (Forward Plus si lo es).
+Ningun item de implementacion (secciones F/G/J) fue tocado.
+
+## 11. Verificacion de H9 (audio) y seccion I (riesgos y edge cases) - checklist (2026-10-14, step 5 workbuddy)
+
+11 verificaciones con cita archivo+linea (H9 + I1-I10). Estandar: grep/sed ANTES
+de cada flip, conteo por prefijo de linea antes/despues (105 -> 116 [x] / 0 [?] /
+12 [ ] = 128), linea Totales actualizada. Log 1836.
+
+| Item | Verificacion | Evidencia |
+|---|---|---|
+| H9 | Asset pipeline de audio (M41-M44) | Rutas de assets documentadas: 41-Musica/plan-actual/04-Codigo.md L18 (res://audio/music/...wav), 42-Sonido-Ambiental/plan-actual/04-Codigo.md L16 (res://audio/ambient/...wav), 43-Efectos-De-Sonido/plan-actual/04-Codigo.md L16 (res://audio/sfx/...wav) y 44-ASMR-Y-Feedback/plan-actual/04-Codigo.md L15 (res://audio/microfoley/...wav); buses: 42-Sonido-Ambiental/plan-actual/03-Diseno.md L64-L65 (total <= 11 bus activos) + 41-Musica/plan-actual/04-Codigo.md L39 (integracion M42 buses + M44 feedback sobre buses jerarquicos de M06); codigo REAL en disco: scripts/audio/ con 10 .gd de produccion (music_director, ambient_director, sfx_manager, compression_manager [M91 limiter de picos], dynamic_range_manager, audio_config_service, output_device_manager, feedback_director, narrative_sound, shuffle_sampler) + 7 suites (test_musica_m41, test_ambient_m42, test_sfx_m43, test_feedback_m44, test_audio_effects_m91, test_audio_config, test_narrative_m150) |
+| I1 | Riesgo: dependencia de Voxel Tools (comunitaria) | Este archivo L56 (tabla de riesgos sec.4: "Voxel Tools = dependencia comunitaria") + L28 (punto 15: "Plugins: menor mercado que Asset Store; Voxel Tools cubre el critico") |
+| I2 | Mitigacion: MIT + version fijada + codigo fuente | Este archivo L56 ("Version fijada + codigo fuente disponible (MIT)"); disco: addons/zylann.voxel/LICENSE.md (MIT, L1-3) + voxel.gdextension compatibility_minimum="4.4.1"; 03-Diseno.md L46 (assets/plugins fijados por version) |
+| I3 | Riesgo: transvoxel perf en islas grandes | Este archivo L58 ("Rendimiento transvoxel en islas grandes: Hito M1 valida antes de avanzar") + L48 ("Voxel a gran escala: Disenado para eso"); 03-Diseno.md L25 (LOD Transvoxel para chunks lejanos); medicion real Logs/386-M61 (374 draw calls promedio <= 400; 59.35 FPS) |
+| I4 | Riesgo: reaprendizaje desde Unity | Este archivo L57 ("Reaprendizaje si el usuario viene de Unity: Costo aceptado; desventaja documentada") + L22 (animacion menos madura que Mecanim) + L26 (comunidad mas chica); decision de origen: Logs/17-CONFIRMACION_MOTOR_GODOT-VOXELTOOLS_2026-08-16 |
+| I5 | Riesgo: actualizacion de Godot a mitad de produccion | 03-Diseno.md sec.5 L45 ("no actualizar Godot durante produccion salvo parche de seguridad critico; documentar cualquier migracion en Logs y changelog") + L46 (congelacion por version); CHANGELOG.md real en la raiz del repo |
+| I6 | Edge case: Windows vs Linux paths en tools | CI corre en Linux: .github/workflows/quality.yml L12 runs-on: ubuntu-latest (+ backup.yml L25, bug_metrics.yml L14, dev-build.yml L24); exports REALES multiplataforma: export_presets.cfg preset.0 Web, preset.1 Windows, preset.2 Linux, preset.3 SteamOS (Linux/X11) - export headless EXIT 0 de Linux y SteamOS (Log 1833 F16) |
+| I7 | Edge case: export SteamOS exige pruebas en Deck real | export_presets.cfg preset.3 "SteamOS" (Linux/X11, exportado OK); 03-Diseno.md L41 (prototipo 60 FPS en "PC media y Steam Deck"). NOTA honesta: sin Deck real, la validacion en dispositivo queda pendiente |
+| I8 | Edge case: drivers Vulkan en PCs viejas | project.godot L16 (config/features="4.7", "Forward Plus" = Vulkan) + L354 (rendering_device/driver.windows="d3d12"); alternativa documentada: este archivo L33 ("Render pipeline: Forward+ (Vulkan); Mobile para builds livianas") |
+| I9 | Edge case: compatibilidad de saves entre versiones | 59-Guardado/plan-actual/03-Diseno.md L95 ("Migracion: Backup previo + solo hacia delante (M60)") + L54 (schema_version < actual -> migrar con backup) + L109 (M60 define formato, schema_version y migraciones) |
+| I10 | Decision: si M1 falla 60 FPS, re-evaluar motor | 03-Diseno.md sec.4 L41 ("Si falla, revisar greedy meshing/threading antes de avanzar; si persiste, re-evaluar motor (con re-planificacion)"); 01-Requerimientos.md L45 (60 FPS = vara minima); medicion real Logs/386-M61 (59.35 FPS) |
+
+Notas de honestidad:
+- H9: el pipeline de DATOS de audio (rutas de assets bajo res://audio/{music,
+  ambient,sfx}/, bus system, ducking por EventBus, volumen por bus M91) esta
+  documentado en los modulos M41-M43 y el codigo existe en scripts/audio/.
+  Lo que FALTA es la entrega del compositor: 0 archivos de audio en el
+  proyecto (43-Efectos-De-Sonido/plan-actual/04-Codigo.md L69). Es deuda de
+  assets, no de documentacion: el item pide documentar el pipeline.
+- Suites de audio medidas EN ESTA iteracion (godot headless, 2026-10-14):
+  test_sfx_m43 = 127 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR (verde limpio);
+  test_feedback_m44 = 9 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR (verde limpio);
+  test_musica_m41 = 14 checks, "0 fallos", EXIT 0 pero con 5 SCRIPT ERROR
+  (set_ducking / esta_pausado / sting_reproducido inexistentes en
+  music_director.gd) y test_ambient_m42 = 9 checks, "0 fallos", EXIT 0 con
+  2 SCRIPT ERROR (mismos metodos ausentes en ambient_director.gd). Por la regla
+  anti-falso-verde del proyecto, un SCRIPT ERROR aborta bloques en silencio:
+  el "0 fallos" de M41/M42 NO se toma como verde completo. Es deuda de los
+  modulos M41/M42 (suites desalineadas con el codigo): se reporta al director,
+  no se toca.
+- I7: el preset SteamOS existe y exporta, pero no hay hardware Deck para la
+  prueba real; el edge case queda documentado con esa salvedad.
+- I8: "Mobile para builds livianas" es la alternativa documentada para bajo
+  rendimiento; la config activa sigue siendo Forward Plus (Vulkan).
 Ningun item de implementacion (secciones F/G/J) fue tocado.
