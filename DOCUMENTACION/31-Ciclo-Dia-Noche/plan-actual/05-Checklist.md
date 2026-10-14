@@ -79,7 +79,7 @@
 - [x] Nodo `DirLightSol` con parámetros definidos [S] → main_island.tscn DirectionalLight + @onready L15
 - [x] Nodo `DirLightLuna` sin sombras [S] → L16 + test "luna encendida en Noche" [OK]
 - [x] Sky procedural con gradiente [S] → WorldEnvironment + sky_color_ramp (M49); ProceduralSkyMaterial del diseño → núcleo usa ramp de color ambiente (decisión documentada Log M49 731)
-- [?] Luna esférica con textura de fases [S] → luz sin mesh — M45 (K.2)
+- [?] Luna esférica con textura de fases [S] → luz sin mesh — M45 (K.2) | AUDIT 2026-10-14 (step-5-kilocode): luz DirectionalLight3D sin mesh; textura de fases de M45 (K.2).
 - [?] Nubes velo 2D con drift lento [S] → sin implementar (K.2) | AUDIT 2026-10-14 (step-5-kilocode): sin implementar (0 hits en scripts/islas ni world). Deuda de M45 (K.2).
 - [?] Niebla (FogVolume ligero) [S] → data fog_curve.tres; FogVolume nodo no existe en escena (K.2) | AUDIT 2026-10-14 (step-5-kilocode): data fog_curve.tres existe (fase_umbral.json §niebla) pero el nodo FogVolume no existe en ninguna escena .tscn (0 hits).
 - [?] Prefab de farol con omni 3200K [S] → sin implementar; dueño M18/M45 (K.2) | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de prefab de farol con luz omni 3200K en escenas; los 30 hits de 'farol' son de puzzles de cadenas (test_historias.gd). Dueño M18/M45 (K.2).
@@ -105,7 +105,7 @@
 - [x] Curvas versionables en GameState? NO — solo data estática [S] → *(decisión: data estática en data/light/, no en save — resuelta)*
 - [x] Localizable sin datos duros en scripts [S] → nombres de fase solo para logs (PHASE_NAMES interno); UI de fases es de consumidores
 - [x] Umbral de luz de faroles en data (no hardcode) [S] → fase_umbral.json §luces_artificiales umbral_encendido 0.35
-- [?] Validación de rangos de curvas en dev mode (M110) [M] → M110 dev tools sin implementar; test_curvas_luz valida rangos en CI (parcial, dueño M110)
+- [?] Validación de rangos de curvas en dev mode (M110) [M] → M110 dev tools sin implementar; test_curvas_luz valida rangos en CI (parcial, dueño M110) | AUDIT 2026-10-14 (step-5-kilocode): test_curvas_luz.gd EXISTE (validacion en CI); M110 dev tools sin implementar. Parcial. Dueno M110.
 
 ## F. Consumidores e integración (14)
 
@@ -118,11 +118,11 @@
 - [?] M15 Recursos: flor lumínica + cristales estelares nocturnos [M] → M15 solo tiene respawn estacional (iter. 5); contenido nocturno inexistente — dueño M15/M93 (data de recursos) | AUDIT 2026-10-14 (step-5-kilocode): M15 solo tiene temporada_respawn (iter. 5); flor lumínica y cristales estelares inexistentes. Dueño M15.
 - [x] M34 Pesca: peces luna + pesca luna llena [S] → M34 FRANJAS propias por hora (fishing_manager L20, L65-67: NOCHE 21-5) + pez lunar en data (test_fishing "pez lunar pity 80"); luna llena del calendario: dueño M29/M34 fino
 - [x] M39 Tiendas: cierre 21:00 [S] → shop.esta_abierta(dia_semana, hora) + franjas_horarias del catálogo (catalogo_tiendas L40-95) — horario real, no consume fase (correcto: usa M29 hora)
-- [?] M17 Construcción: faroles sin red eléctrica en v1 [S] → M17 sin faroles; puzzle farol_cargado existe en M23 data — dueño M17/M18
+- [?] M17 Construcción: faroles sin red eléctrica en v1 [S] → M17 sin faroles; puzzle farol_cargado existe en M23 data — dueño M17/M18 | AUDIT 2026-10-14 (step-5-kilocode): M17 sin faroles; puzzle farol_cargado en data/cadenas (M23). Dueno M17/M18.
 - [?] M13 Linterna: sugerencia automática opcional [S] → M13 sin linterna (grep 0); dueño M13 contenido + M92 sugerencia | AUDIT 2026-10-14 (step-5-kilocode): 'Linterna' existe en equipment_manager.gd L129 (data) pero sin lógica de linterna en el mundo; el puzzle faro-linterna existe en test_historias.gd L71-72. Dueño M13 contenido + M92 sugerencia.
 - [x] M33 Cultivos: sin efecto horario (decisión cozy) [S] → verificado: farm/*.gd sin lectura de hora/luz (grep 0) — LA AUSENCIA ES LA DECISIÓN documentada
 - [?] M37 Museo: horario definido [M] → scripts/museos inexistente; M37 28/148 fila global — dueño M37 | AUDIT 2026-10-14 (step-5-kilocode): scripts/museos no existe; M37 28/148. Dueño M37.
-- [?] M32 Clima: lluvia de estrellas nunca con tormenta [S] → WeatherService enum sin "lluvia de estrellas" (es evento M74 + partículas M52); coordinación de dueños, no código M31
+- [?] M32 Clima: lluvia de estrellas nunca con tormenta [S] → WeatherService enum sin "lluvia de estrellas" (es evento M74 + partículas M52); coordinación de dueños, no código M31 | AUDIT 2026-10-14 (step-5-kilocode): verificado — weather_service.gd (scripts/clima/) tiene enum Clima {SOLEADO, NUBLADO, LLUVIA, TORMENTA, NIEBLA, NIEVE, VIENTO...} SIN 'lluvia de estrellas'; el evento es de M74 + particulas M52. Confirmado.
 - [x] Contrato API solo por señales (desacople) [S] → fase_cambio señal en EventBus.time (L106) + API get_fase/es_de_dia; consumers no importan el script de M31 (grep: 0 imports de day_night_cycle fuera de tests)
 - [x] Sin dependencia de GameState en el motor visual [S] → day_night_cycle.gd solo lee GameTime (get_hora/hora_cambio) — 0 referencias a GameState/SaveManager
 
@@ -130,28 +130,28 @@
 
 > *(Contenido de juego que EXIGE módulos dueño: M52 partículas, M74 eventos, M15 flora, M25 ruinas, M55 diario, M58 accesibilidad. M31 entrega: fase NOCHE detectable + data de estrellas. Nada crítico de historia exige noche — verificado §6 diseño.)*
 
-- [?] Lluvia de estrellas: días 10 y 25, 22:00-23:30 [M] → fase_umbral.json §estrellas documenta la ventana; evento del calendario + partículas = M74/M52
-- [?] Partículas de estrellas fugaces (M52) [C] → M52 sin implementar
-- [?] Lince de luna: día 15, Claro del Bosque [C] → fauna especial de M36/M93 data
-- [?] Interacción "observar" del lince (sin caza) [M] → ídem
-- [?] Flora brillante: Senda de las Luciérnagas [C] → M15 contenido + M45 assets
-- [?] Bono x2 de noche en flora (único bonus horario) [M] → hook futuro: consumers pueden leer es_de_dia(); implementación M15/M93
-- [?] Murales luminosos en ruinas (M25, lore M148) [C] → dueños M25/M148
+- [?] Lluvia de estrellas: días 10 y 25, 22:00-23:30 [M] → fase_umbral.json §estrellas documenta la ventana; evento del calendario + partículas = M74/M52 | AUDIT 2026-10-14 (step-5-kilocode): fase_umbral.json §estrellas documenta la ventana 20:00-22:00; el evento de calendario (dias 10/25) y las particulas son de M74/M52 sin implementar. Data parcial, implementacion externa.
+- [?] Partículas de estrellas fugaces (M52) [C] → M52 sin implementar | AUDIT 2026-10-14 (step-5-kilocode): M52 sin implementar (0 hits de particulas de estrellas en scripts). Dueno M52.
+- [?] Lince de luna: día 15, Claro del Bosque [C] → fauna especial de M36/M93 data | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de lince en data/fauna/catalog.json (7 especies: gaviota_playera, conejo_pradera, nutria_ribera, lechuza_bosque, salamandra_ancestral, cangrejo_humedal, halcon_montana). Fauna especial de M36/M93 sin crear.
+- [?] Interacción "observar" del lince (sin caza) [M] → ídem | AUDIT 2026-10-14 (step-5-kilocode): el lince no existe en data/fauna/catalog.json (7 especies). Dueno M36.
+- [?] Flora brillante: Senda de las Luciérnagas [C] → M15 contenido + M45 assets | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de flora brillante o senda de luciernagas; M15 contenido + M45 assets sin crear.
+- [?] Bono x2 de noche en flora (único bonus horario) [M] → hook futuro: consumers pueden leer es_de_dia(); implementación M15/M93 | AUDIT 2026-10-14 (step-5-kilocode): hook futuro — es_de_dia() EXISTE en game_clock.gd L120, time_calendar.gd L155 y day_night_cycle.gd L207 (los consumidores pueden leerlo); la implementacion del bono es de M15/M93.
+- [?] Murales luminosos en ruinas (M25, lore M148) [C] → dueños M25/M148 | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de murales luminosos; duenos M25/M148.
 - [x] Nada crítico para la historia exige noche [S] → diseño §6 explícito + M22/M23 sin gating nocturno (verificado: grep historia sin "noche" obligatorio) — pilar cozy
-- [?] Diario M55 registra "deseo" de estrellas [S] → M55 sin implementar
-- [?] TTS/texto accesible en eventos (M58) [M] → M58 sin implementar
+- [?] Diario M55 registra "deseo" de estrellas [S] → M55 sin implementar | AUDIT 2026-10-14 (step-5-kilocode): M55 sin implementar (0 hits de diario en scripts). Dueno M55.
+- [?] TTS/texto accesible en eventos (M58) [M] → M58 sin implementar | AUDIT 2026-10-14 (step-5-kilocode): M58 sin implementar para TTS; dueno M58.
 
 ## H. Navegación y anti-oscuridad (10)
 
 - [x] Piso ambiente nocturno 0.15 LDR [S] → sky_curve 0.15 profunda + test L70 [OK] + fallback L140
-- [?] Linterna del jugador rango 12 m [M] → no existe (M13/M45) — dueño externo
+- [?] Linterna del jugador rango 12 m [M] → no existe (M13/M45) — dueño externo | AUDIT 2026-10-14 (step-5-kilocode): data 'Linterna' existe en equipment_manager.gd L129 pero sin logica de mundo; dueno M13/M45.
 - [x] Sin parpadeos de linterna (comfort) [S] → *(estructural: al no existir linterna no hay parpadeo; regla para el dueño M13 documentada en diseño §7)*
-- [?] Opción M58 "Noche clara" (piso 0.35) [M] → M58 sin implementar; el piso es constante en curva — el hook sería parametrizar sky_curve (K.2 con dueño M58)
-- [?] Faroles cada 40 m en poblado [C] → M18-BIS 🔵 WorkBuddy está construyendo casas — coordinar al liberar; prefab farol inexistente
+- [?] Opción M58 "Noche clara" (piso 0.35) [M] → M58 sin implementar; el piso es constante en curva — el hook sería parametrizar sky_curve (K.2 con dueño M58) | AUDIT 2026-10-14 (step-5-kilocode): M58 sin implementar; el piso es constante en curva, el hook seria parametrizar sky_curve (K.2). Dueno M58.
+- [?] Faroles cada 40 m en poblado [C] → M18-BIS 🔵 WorkBuddy está construyendo casas — coordinar al liberar; prefab farol inexistente | AUDIT 2026-10-14 (step-5-kilocode): prefab farol inexistente; M18-BIS WorkBuddy esta construyendo casas — coordinar al liberar. Dueno M18/M45.
 - [x] Prohibido negro puro en ambiente [S] → piso 0.15 verificado (ambiente nunca 0: test + curvas + fallback)
 - [x] Transiciones sin flash de oscuridad [S] → tween 1 s interpolando (no snap) + aplicación instantánea SOLO en carga (L45)
-- [?] Minimapa operable de noche [S] → M12 minimapa sin implementar
-- [?] QA M114: checklist visual nocturno por zona [M] → M114 sin implementar; soy solo-texto — QA visual del usuario o agente con visión
+- [?] Minimapa operable de noche [S] → M12 minimapa sin implementar | AUDIT 2026-10-14 (step-5-kilocode): M12 minimapa SI existe en disco (mapa_manager.gd) pero sin modo nocturno; dueno M12.
+- [?] QA M114: checklist visual nocturno por zona [M] → M114 sin implementar; soy solo-texto — QA visual del usuario o agente con visión | AUDIT 2026-10-14 (step-5-kilocode): M114 sin implementar; QA visual del usuario o agente con vision. Dueno M114.
 - [x] Regla de oro escrita en 03-Diseno §7 [S] → verificada sección "## 7. Anti-oscuridad (regla de oro)"
 
 ## I. Rendimiento y pruebas (12)
@@ -159,11 +159,11 @@
 - [x] Ciclo por minuto de juego (no por frame) [S] → solo `_on_hora_cambio` dispara trabajo (L66-68); 0 trabajo por frame (sin _process) — por hora de juego en la práctica, mejor que el mínimo pedido
 - [x] Presupuesto ≤ 2 ms GPU peak [S] → *(tweens de propiedades de luz, sin shaders por frame; presupuesto documentado §4 — verificación con profiler es M61 [?])*
 - [x] Sin sombras de luna [S] → DirLightLuna shadow off (nodo escena) — verificado iter. 1
-- [?] 1 draw call de nubes [S] → sin nubes (D); la regla queda para el dueño escénico
+- [?] 1 draw call de nubes [S] → sin nubes (D); la regla queda para el dueño escénico | AUDIT 2026-10-14 (step-5-kilocode): sin nubes (D); la regla queda para el dueno escenico (M45).
 - [x] Niebla ≤ 120 m [S] → *(sin FogVolume runtime; la regla documentada §4 para el implementador)*
 - [x] Estrellas estáticas [S] → *(sin canvas aún; regla documentada D "Sin partículas por estrella")*
 - [x] Test: cambio de fase en límite 19:59→20:00 [S] → test_ciclo L48-54: 19→ATARDECER, 20→NOCHE (límite del cambio franja)
-- [?] Test: umbral farol antes/después [M] → sin autoswitch runtime (RF6 [?]) — test se escribirá con la feature (dueño M18/M45)
+- [?] Test: umbral farol antes/después [M] → sin autoswitch runtime (RF6 [?]) — test se escribirá con la feature (dueño M18/M45) | AUDIT 2026-10-14 (step-5-kilocode): sin autoswitch runtime (RF6 [?]); el test se escribira con la feature. Dueno M18/M45.
 - [x] Test: fase correcta al cargar partida [S] → `_ready` con hora_inicial de GameTime L42-45 + check "fase inicial a las 08:00 es DIA" [OK]
 - [x] Test: franjas estables (sin doble señal) [S] → check "sin doble señal misma hora" [OK] L60-63
 - [x] Test: curvas dentro de rango (piso 0.15) [S] → test_curvas_luz 0 fallos (rango/piso/24 puntos)
@@ -215,19 +215,19 @@
 ### K.2 Pendiente para iteraciones futuras [?]
 
 - [x] Curvas 24-puntos en `data/light/day_curve.tres`, `sky_curve.tres`, `moon_curve.tres`, `fog_curve.tres` + `fase_umbral.json` (datos) — glm-5.3-flash 2026-09-01 (iter. 2, Log 452): generadas con serializador de Godot, núcleo data-driven con fallback, test 0 fallos
-- [?] Transición amanecer/atardecer de 90 s con curvas de interpolación (polish) [M]
-- [?] `Sky` procedural con gradiente por hora y estrellas alpha 0→100% 20:00-22:00 [C]
-- [?] Luna esférica con textura de fases (M45) [C]
+- [?] Transición amanecer/atardecer de 90 s con curvas de interpolación (polish) [M] | AUDIT 2026-10-14 (step-5-kilocode): day_night_cycle.gd tiene curvas de interpolacion (Curve) para transiciones; el polish de 90 s especifico no esta parametrizado. Parcial.
+- [?] `Sky` procedural con gradiente por hora y estrellas alpha 0→100% 20:00-22:00 [C] | AUDIT 2026-10-14 (step-5-kilocode): fase_umbral.json tiene curvas de sol/luna/cielo; el Sky procedural con gradiente por hora es de M45 (K.2). Data parcial, escenico externo.
+- [?] Luna esférica con textura de fases (M45) [C] | AUDIT 2026-10-14 (step-5-kilocode): luz DirectionalLight3D sin mesh; textura de fases de M45 (K.2).
 - [?] Nubes velo 2D con drift lento y densidad estacional [C] | AUDIT 2026-10-14 (step-5-kilocode): sin implementar (0 hits en scripts/islas ni world). Deuda de M45 (K.2).
-- [?] Niebla por estación/hora (FogVolume ligero ≤120 m) [M]
+- [?] Niebla por estación/hora (FogVolume ligero ≤120 m) [M] | AUDIT 2026-10-14 (step-5-kilocode): fog_curve.tres existe (data) pero el nodo FogVolume no esta en escenas; la variacion por estacion/hora no esta implementada. Data parcial, nodo ausente.
 - [?] Prefab de farol con omni 3200K r 8 m y autoswitch por umbral 0.35 [M] | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de prefab de farol con luz omni 3200K en escenas; los 30 hits de 'farol' son de puzzles de cadenas (test_historias.gd). Dueño M18/M45 (K.2).
-- [?] Faroles cada 40 m en poblado (M18) [C]
-- [?] Sincronización lluvia de estrellas con M52 (días 10/25 22:00-23:30) [M] — **precisión QA V2 agnes-3-flash (Log 1052, 2026-09-19): el catálogo M52 (31 eventos, `data/vfx/vfx_catalog.json`) NO tiene evento de lluvia de estrellas/estrellas; la sincronización no puede existir hasta que M52 añada el evento. Dueño M52 (nuevo evento) + M31 (hook de días 10/25).**
-- [?] Flora brillante con bonus x2 (M15) [M]
-- [?] Murales luminosos en ruinas (M25/M148) [C]
-- [?] Opción M58 "Noche clara" (piso 0.35) — M58 sin implementar [M]
-- [?] Integración con M49 iluminación global — M49 sin implementar [C]
-- [?] QA visual M114 (checklist nocturno por zona) — M114 sin implementar [C]
+- [?] Faroles cada 40 m en poblado (M18) [C] | AUDIT 2026-10-14 (step-5-kilocode): prefab farol inexistente; M18-BIS WorkBuddy esta construyendo casas — coordinar al liberar. Dueno M18/M45.
+- [?] Sincronización lluvia de estrellas con M52 (días 10/25 22:00-23:30) [M] — **precisión QA V2 agnes-3-flash (Log 1052, 2026-09-19): el catálogo M52 (31 eventos, `data/vfx/vfx_catalog.json`) NO tiene evento de lluvia de estrellas/estrellas; la sincronización no puede existir hasta que M52 añada el evento. Dueño M52 (nuevo evento) + M31 (hook de días 10/25).** | AUDIT 2026-10-14 (step-5-kilocode): fase_umbral.json §estrellas tiene la ventana; la sincronizacion con M52 (dias 10/25) es de M74/M52 sin implementar.
+- [?] Flora brillante con bonus x2 (M15) [M] | AUDIT 2026-10-14 (step-5-kilocode): hook es_de_dia() existe (game_clock.gd L120, time_calendar.gd L155, day_night_cycle.gd L207); el bonus x2 es de M15/M93 sin implementar.
+- [?] Murales luminosos en ruinas (M25/M148) [C] | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de murales luminosos; duenos M25/M148.
+- [?] Opción M58 "Noche clara" (piso 0.35) — M58 sin implementar [M] | AUDIT 2026-10-14 (step-5-kilocode): M58 sin implementar; el piso es constante en curva, el hook seria parametrizar sky_curve (K.2). Dueno M58.
+- [?] Integración con M49 iluminación global — M49 sin implementar [C] | AUDIT 2026-10-14 (step-5-kilocode): M49 sin implementar (0 hits de integracion de iluminacion global). Dueno M49.
+- [?] QA visual M114 (checklist nocturno por zona) — M114 sin implementar [C] | AUDIT 2026-10-14 (step-5-kilocode): M114 sin implementar; QA visual del usuario o agente con vision. Dueno M114.
 - [x] Captura visual in-engine (V4) de las 5 franjas con `cap_godot.py --modulo 31` [M] — **Cerrado mimo-v2.5 (Log 1084, 2026-09-19): 4 capturas V4 en `tools/mcp/godot-mcp/capturas/31-Ciclo-Dia-Noche/` (DIA 08:00, ATARDECER 19:30, NOCHE 22:00, PROFUNDA 04:54). Falta ALBA 06:00 (pendiente captura). Método: modificación temporal de `_hora` en game_clock.gd + PIL ImageGrab.**
 - [x] Documentar en GUIA-GODOT/INDICE.md §9: pitfall Curve.add_point (dominio 0-1, no horas) — documentado como §9.60 pendiente de copiar (ver Log 452); patrón get_node_or_null ya documentado por iter. previa
 
