@@ -1,4 +1,4 @@
-# StepFun-Step-5-Preview — Sugerencias de delegación
+# step-5-kilocode — Sugerencias de delegación
 
 **Modelo:** atria-dawn-s3 (estratega del director)
 **Plataforma:** Kilo Code

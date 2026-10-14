@@ -31,7 +31,7 @@ Cuando un modelo libere su encargo actual, abrí el archivo con su nombre. Cada 
 | Modelo | Encargo actual (02:13) | Siguiente (pre-armado) | Archivo |
 |---|---|---|---|
 | Ling-3.1-Flash | **M83-Licencias** (asignado msg 212) | M87/M89 revisión `[?]` | `ling.md` |
-| StepFun-Step-5-Preview | M49 pool de luces | **M72-Logros B+E** | `step5.md` |
+| step-5-kilocode | M49 pool de luces | **M72-Logros B+E** | `step5.md` |
 | agnes-3-flash | M02 completado (150/172) → libre | **M100-Community** | `agnes.md` |
 | atria-dawn-s2 | M16 completado (102/208) → libre | QA ✅ sin sello | `s2.md` |
 | DeepSeek-V4.1-Flash | M01 (21/152) | M90-Config-Grafica (ver caveat) | `deepseek.md` |

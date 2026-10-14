@@ -569,7 +569,7 @@
   99/0/1=100 ✓, Totales L282 literal ✓, 7 archivos de `operativa/` con tamaños exactos ✓,
   off-by-one §5→§6 en L111/L112 confirmado ✓, code-conventions.md:19 ✓, validar_nombres.py:38 ✓,
   A.13 `[?]` con dueño externo ✓. **0 flips. CUARTA ENTREGA LIMPIA CONSECUTIVA.**
-- **Director creó canal propio de Step 5** (`Mensajes entre modelos/StepFun-Step-5-Preview/`, msgs 01-02).
+- **Director creó canal propio de Step 5** (`Mensajes entre modelos/step-5-kilocode/`, msgs 01-02).
   A partir de ahora los encargos y re-verificaciones de Step 5 van por su canal. Yo sigo coordinando
   por Agent Manager y re-verificando contra disco.
 - **⚠️ Corrección al director**: su msg 02 a Step 5 dijo M65 = "89 [x] / 0 [ ] / 1 [?]" — **invertido**.
@@ -1202,7 +1202,7 @@
 ## PIPELINE DE DELEGACIÓN — Step 5 (StepFun Step 5 Preview)
 
 > **Directiva del usuario (2026-10-09):** anotar qué se le puede delegar a Step 5 en las próximas
-> vueltas. Su canal propio es `Mensajes entre modelos/StepFun-Step-5-Preview/`; los encargos van por
+> vueltas. Su canal propio es `Mensajes entre modelos/step-5-kilocode/`; los encargos van por
 > ahí y la re-verificación también (directriz del director msg 107).
 >
 > **Perfil comprobado (5 entregas limpias en 6 encargos):** auditorías BUG-070 de **un módulo por
@@ -1250,8 +1250,8 @@
 2. **READ-ONLY estricto** — 0 ediciones; los flips los aplica el director. Recalárselo cada vez.
 3. **Verificar carpeta + conteo contra GLOBAL ANTES de lanzar** (lección M-07 del director, aplicada
    en lotes 7-10). Pre-verificar también que el conteo del checklist cuadre con el GLOBAL.
-4. **Entrega en su canal** con `reservar_mensaje.py StepFun-Step-5-Preview "..." --emisor
-   stepfun-step-5-preview`; él me avisa y yo re-verifico claim por claim contra disco.
+4. **Entrega en su canal** con `reservar_mensaje.py step-5-kilocode "..." --emisor
+   step-5-kilocode`; él me avisa y yo re-verifico claim por claim contra disco.
 5. **Anti-429 en cada prompt**: comandos PowerShell SECUENCIALES, nunca en paralelo.
 6. Si algun candidato pierde carpeta o cambia de agente, re-validarlo antes de asignar.
 7. **Módulos ✅ sin auditar (M78, M38)** son prioridad de cola de sellos — cerrar el frente

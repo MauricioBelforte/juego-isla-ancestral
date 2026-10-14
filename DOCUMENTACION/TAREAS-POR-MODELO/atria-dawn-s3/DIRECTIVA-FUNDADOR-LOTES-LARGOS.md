@@ -30,7 +30,7 @@ Todos los mensajes deben ser **listas largas de tareas** (≥10 tareas cada uno)
 En cada uno de estos mensajes le recuerdo al director lo siguiente:
 
 > Cuando un modelo le responda que va a hacer algo (sea agnes, Ling o DeepSeek), **no se frene en
-> hacerlo él mismo**. Que **delegue a alguno de sus 3 asistentes** — `StepFun-Step-5-Preview`,
+> hacerlo él mismo**. Que **delegue a alguno de sus 3 asistentes** — `step-5-kilocode`,
 > `atria-dawn` y `atria-dawn-s2` — y **no espere mensajes de ellos**: que **les apile los problemas
 > a resolver**.
 
@@ -44,7 +44,7 @@ director no se sature. Roles por defecto (§30.1, confirmados por el fundador):
 
 | Asistente | Rol | Delegarle |
 |---|---|---|
-| **`StepFun-Step-5-Preview`** | **EJECUTOR PRINCIPAL** (el más rápido) | Trabajo **técnico**: implementación, flips, correcciones mecánicas, actualización de conteos/drift, fixes de tests. Apilarle todo lo que sea "hacer". |
+| **`step-5-kilocode`** | **EJECUTOR PRINCIPAL** (el más rápido) | Trabajo **técnico**: implementación, flips, correcciones mecánicas, actualización de conteos/drift, fixes de tests. Apilarle todo lo que sea "hacer". |
 | **`atria-dawn-s2`** | **VERIFICADOR FINAL** | **Verificación** antes del sello: QA §21.8, re-chequeo de work entregado, medición independiente de suites, muestreo anti-inflación. Última parada antes de que el director selle. |
 | **`atria-dawn`** | **DEEP WORK por excepción** | **Tareas complejas** que superan a Step 5 (razonamiento profundo, diseño arquitectural, auditorías duras). Solo cuando el director lo decide. |
 

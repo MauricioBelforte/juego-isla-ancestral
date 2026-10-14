@@ -1,0 +1,149 @@
+# AUDITORIA: numeracion interna vs nombre de archivo (03:47 2026-10-14)
+# Escaneo: 2334 archivos | OK 2189 | MISMATCH 34 | SIN header '#' 111
+
+## MISMATCH (header # NN - != NN del nombre)
+agnes-3-flash          | arch=48   | header=1334 | 48-2026-10-05_05-37-28-atria-a-agnes-auditoria-a-confirmada-t-a4-bis-m11-m104.md
+atria-dawn             | arch=67   | header=66   | 67-2026-10-13_00-05-00-atria-a-step-5-workbuddy-m04-commit-hecho-e38ad5a.md
+atria-dawn             | arch=84   | header=83   | 84-2026-10-13_16-35-00-mimo-a-atria-commits-pendientes-m04-m35.md
+atria-dawn             | arch=85   | header=2027 | 85-2026-10-13_16-52-55-atria-a-atria-commits-m04-iter45-m35-lote3-pusheados.md
+atria-dawn             | arch=86   | header=2029 | 86-2026-10-13_17-21-53-atria-a-atria-acuse-standby-liberado-commits.md
+atria-dawn             | arch=87   | header=2031 | 87-2026-10-13_17-48-27-atria-a-atria-m04-iter6-verificado-pido-luz-verde-commit.md
+atria-dawn             | arch=88   | header=2032 | 88-2026-10-13_20-21-19-atria-a-atria-m04-iter6-commiteado-pusheado-31e6d94.md
+atria-dawn-s2          | arch=37   | header=1331 | 37-2026-10-05_05-34-42-atria-a-s2-aprobacion-gdunit4-wiring-m62-linter0-eol147.md
+atria-dawn-s2          | arch=373  | header=184  | 373-2026-10-13_16-45-00-mimo-a-s2-lote354-s3-reenviado.md
+atria-dawn-s2          | arch=374  | header=376  | 374-2026-10-13_20-10-00-mimo-a-s2-ronda6-denegados-r3-m112-aplicado-sello-m35.md
+atria-dawn-s2          | arch=375  | header=377  | 375-2026-10-14_08-00-00-mimo-a-todos-nuevo-sistema-ultima-revision.md
+atria-dawn-s2          | arch=376  | header=2027 | 376-2026-10-13_17-00-57-s2-a-s2-ronda6-agnes-m141-m15-m16-denegados-m139-ok-m35-sello-m117-sin-drift.md
+atria-dawn-s2          | arch=377  | header=2029 | 377-2026-10-13_17-29-47-s2-a-s2-m112-r3-6flips-verificados-sello-recomendado.md
+atria-dawn-s2          | arch=38   | header=1335 | 38-2026-10-05_08-05-00-deepseek-a-s2-td9-hecho-aditivo-pido-wiring.md
+atria-dawn-s2          | arch=39   | header=1336 | 39-2026-10-05_20-29-57-deepseek-a-s2-td9-2-ciclos-bug069-corte-minimo-medido.md
+DeepSeek-V4.1-Flash    | arch=228  | header=226  | 228-2026-10-13_16-35-00-mimo-a-deepseek-m35-aceptada-qa-s2-m76.md
+DeepSeek-V4.1-Flash    | arch=229  | header=186  | 229-2026-10-13_16-45-00-mimo-a-deepseek-m02-m01-s3-reenviado.md
+DeepSeek-V4.1-Flash    | arch=41   | header=1332 | 41-2026-10-05_05-34-42-atria-a-deepseek-td9-2-aprobado-colision-resuelta-eol-147.md
+DeepSeek-V4.1-Flash    | arch=42   | header=1329 | 42-2026-10-05_07-50-00-atria-a-deepseek-td7-cierra-34-filas.md
+DeepSeek-V4.1-Flash    | arch=43   | header=1340 | 43-2026-10-05_20-45-17-atria-a-deepseek-status-td9-2-coordinaste-con-s2-m112-baja-11.md
+DeepSeek-V4.1-Flash    | arch=44   | header=1343 | 44-2026-10-05_21-05-58-deepseek-a-atria-td9-status-m60-t018-fix.md
+Hy3                    | arch=193  | header=190  | 193-2026-10-13_16-35-00-mimo-a-hy3-m25-cerrada-nuevas-tareas-diseno.md
+Hy3                    | arch=194  | header=187  | 194-2026-10-13_16-47-00-mimo-a-hy3-drift-diseno-s3-reenviado.md
+Hy3                    | arch=203  | header=204  | 203-2026-10-14_08-00-00-mimo-a-todos-nuevo-sistema-ultima-revision.md
+Hy3                    | arch=47   | header=1333 | 47-2026-10-05_05-37-28-atria-a-hy3-th6-aceptado-m64-arreglado-autorizo-sello.md
+Hy3                    | arch=48   | header=1339 | 48-2026-10-05_20-43-42-atria-a-hy3-sello-m64-aceptado-qa-seals-autorizado-m53-reverificacion.md
+mimo-v2.6-flash-free   | arch=14   | header=13   | 14-2026-10-04_17-56-00-recepcion-t1-m55-diario.md
+mimo-v2.6-flash-free   | arch=24   | header=1338 | 24-2026-10-05_20-41-23-atria-a-mimo-tm2-cerrado-confirmado-t-m1-lote2-autorizado.md
+mimo-v2.6-flash-free   | arch=25   | header=1346 | 25-2026-10-05_21-16-37-mimo-a-mimo-informe-cierre-tm1-lote2-m55.md
+step-5-kilocode        | arch=282  | header=281  | 282-2026-10-13_16-35-00-mimo-a-step5-verificar-commits-atria-higiene-m15-m16.md
+step-5-kilocode        | arch=283  | header=185  | 283-2026-10-13_16-45-00-mimo-a-step5-deuda-s3-reenviado.md
+Step-5-WorkBuddy       | arch=23   | header=24   | 23-2026-10-14_08-00-00-mimo-a-todos-nuevo-sistema-ultima-revision.md
+
+## SIN header # NN - (verificar si usan otro formato o les falta numero)
+04-Voxel-Sin-Soporte-Web | 2026-08-25_1-OX-ALPHA-hallazgo-voxel-web.md
+05-Ecosistema-Vision-Para-OpenCode | 2026-08-25_2-OX-ALPHA-ecosistema-vision-sin-mcp.md
+06-M70-Conflicto-Edicion-Concurrente | 2026-10-02_17-30-00_1-ATRIA-DAWN-aviso-pausa.md
+agnes-3-flash          | 289-2026-10-12_00-16-06-mimo-a-agnes-recordatorio-cron-reportar-siempre.md
+atria-dawn             | 23-2026-10-12_00-16-01-mimo-a-atria-recordatorio-cron-reportar-siempre.md
+atria-dawn             | 30-2026-10-12_04-59-51-atria-a-atria-informe-barrido-m74-96-flips.md
+atria-dawn             | 33-2026-10-12_05-51-54-atria-a-atria-informe-barrido-m71-75-flips.md
+atria-dawn-s2          | 102-2026-10-06_23-53-50-agnes-a-s2-volumen-m120-dlc-sustentado-disenos-documentados.md
+atria-dawn-s2          | 103-2026-10-07_00-01-45-agnes-a-s2-volumen-m100-community-sustentado-datos-en-disco.md
+atria-dawn-s2          | 104-2026-10-07_00-05-58-agnes-a-s2-volumen-m113-stress-sustentado-framework-en-disco.md
+atria-dawn-s2          | 105-2026-10-07_00-08-38-agnes-a-s2-volumen-m85-3d-legal-sustentado-1-queda-deuda-sb02.md
+atria-dawn-s2          | 106-2026-10-07_00-12-24-agnes-a-s2-volumen-m131-creditos-sustentado-fase-final-lote-completo.md
+atria-dawn-s2          | 107-2026-10-07_00-18-42-atria-a-s2-guarda-implementada-dry-run-grupo-a-no-necesita-cambios-m68-hecho-pedido-regla-m144.md
+atria-dawn-s2          | 108-2026-10-07_00-22-55-atria-a-s2-lote-11-modulos-verificados-m25-listo-para-flip-cierre-tanda.md
+atria-dawn-s2          | 109-2026-10-07_00-24-42-atria-a-s2-m25-listo-flip-condiciones-cumplidas-agnes-verifico-122-0-0-contra-disco.md
+atria-dawn-s2          | 112-2026-10-07_02-33-08-agnes-a-s2-correccion-m25-24-glb-acceptada-esperando-siguiente-frente.md
+atria-dawn-s2          | 171-2026-10-09_16-56-23-s2-a-atria-script-verificar-backlogs-metodo-lote12-estandarizado.md
+atria-dawn-s2          | 174-2026-10-09_18-59-04-s2-a-atria-parser-arreglado-hy3-verificado-lote13.md
+atria-dawn-s2          | 175-2026-10-10_18-19-48-s2-a-s2-numeracion-canales-corregida-6-plantillas-fix-raiz-reservar-mensaje.md
+atria-dawn-s2          | 177-2026-10-09_20-19-33-s2-a-atria-qa-218-m118-no-sellable-2-imprecisiones.md
+atria-dawn-s2          | 178-2026-10-10_18-25-28-s2-a-s2-nuevo-rol-mano-derecha-del-director-cron-10min.md
+atria-dawn-s2          | 180-2026-10-09_21-07-16-s2-a-atria-m118-muestreo-8-8-propuesta-sello.md
+atria-dawn-s2          | 181-2026-10-10_18-37-22-s2-a-s2-rol-confirmado-verificador-de-step-5-copias-canonicas-editadas.md
+atria-dawn-s2          | 183-2026-10-09_22-05-22-s2-a-atria-lote14-barrido-completo-2-retrocesos-reales.md
+atria-dawn-s2          | 189-2026-10-10_19-05-02-s2-a-s2-jerarquia-aclarada-director-es-atria-s2-s3-asistentes-sin-carpeta.md
+atria-dawn-s2          | 194-2026-10-10_19-23-58-s2-a-s2-respuesta-al-203-m105-drift-2-mantiene-hooks-en-espera-m156-en-tus-manos.md
+atria-dawn-s2          | 204-2026-10-10_20-28-13-s2-a-s2-reporte-de-estado-jerarquia-commiteada-pendientes-flip-m156-player-tscn.md
+atria-dawn-s2          | 212-2026-10-10_22-55-30-atria-a-s2-encargo-e-aceptado-m46-correccion-art-style-nuevo-encargo-f.md
+atria-dawn-s2          | 267-2026-10-11_20-31-26-s2-a-s2-encargo-q-m18-implementacion-34-items.md
+atria-dawn-s2          | 269-2026-10-11_20-46-22-s2-a-s2-m74-reconciliacion-188-dudas-aceptado.md
+atria-dawn-s2          | 270-2026-10-11_21-15-07-s2-a-s2-m74-colision-con-step5-no-commitee-fix-rendimiento.md
+atria-dawn-s2          | 272-2026-10-11_21-44-40-s2-a-s2-m99-lote-documental-29-items-completado.md
+atria-dawn-s2          | 274-2026-10-11_22-00-57-s2-a-s2-m99-bloque3-colision-con-agnes-me-retiro.md
+atria-dawn-s2          | 276-2026-10-11_22-20-33-s2-a-s2-m166-qa-sin-inflacion-f1-f4-listos-para-sello.md
+atria-dawn-s2          | 278-2026-10-11_22-42-08-s2-a-s2-m68-qa-sin-inflacion-no-candidato-a-sello.md
+atria-dawn-s2          | 280-2026-10-11_23-20-03-s2-a-s2-m53-qa-2-fallos-sello-denegado.md
+atria-dawn-s2          | 282-2026-10-11_23-44-58-s2-a-s2-m71-qa-1-fallo-l64-sello-valido.md
+atria-dawn-s2          | 284-2026-10-11_23-56-31-s2-a-s2-m71-l64-degradado-totales-actualizados.md
+atria-dawn-s2          | 286-2026-10-12_00-03-25-s2-a-s2-m71-cerrado-global-ok-90-213-sin-encargo.md
+atria-dawn-s2          | 288-2026-10-12_00-16-02-mimo-a-s2-recordatorio-cron-reportar-siempre.md
+atria-dawn-s2          | 289-2026-10-12_00-31-01-s2-a-s2-m53-reqa-sello-sigue-denegado-bug133-no-arreglado.md
+atria-dawn-s2          | 291-2026-10-12_00-42-30-s2-a-s2-m53-l130-l131-ok-totales-drift-2-sin-arreglar.md
+atria-dawn-s2          | 293-2026-10-12_01-13-02-s2-a-s2-m37-barrido-10-flips-52-deuda-real-commiteado.md
+atria-dawn-s2          | 295-2026-10-12_01-21-50-s2-a-s2-m37-aceptado-global-ok-libre-para-encargo.md
+atria-dawn-s2          | 297-2026-10-12_02-08-10-s2-a-s2-m16-barrido-59-flips-test-rf14-rojo-commiteado.md
+atria-dawn-s2          | 299-2026-10-12_02-22-15-s2-a-s2-m34-colision-trabajo-sin-commitear-de-step5.md
+atria-dawn-s2          | 319-2026-10-12_17-19-08-s2-a-s2-m58-barrido-6-flips-regresion-suite.md
+atria-dawn-s2          | 321-2026-10-12_18-00-42-s2-a-s2-m49-barrido-39-flips-3-inconsistencias.md
+atria-dawn-s2          | 34-2026-10-05_04-54-00-voxel-linter-0-gate-m151-m112.md
+atria-dawn-s2          | 35-2026-10-05_05-35-00-gate-m151-verificado-m87-resuelto.md
+atria-dawn-s2          | 36-2026-10-05_05-55-00-m106-env-m112-11-diagnostico-m60.md
+atria-dawn-s2          | 49-2026-10-06_06-37-00-s2-a-atria-dawn-fix-formatting-check-log-1363.md
+atria-dawn-s2          | 50-2026-10-06_06-55-00-s2-a-atria-dawn-confirmacion-formatting-check-verde-28s.md
+atria-dawn-s2          | 52-2026-10-06_06-58-00-s2-a-atria-dawn-t-om04-21-alertas-t-l01-no-aplicar.md
+atria-dawn-s2          | 53-2026-10-06_07-05-00-s2-a-atria-dawn-correccion-m112-4-fallos-no-10.md
+atria-dawn-s2          | 56-2026-10-06_08-26-00-s2-a-atria-dawn-t-l10-sellos-legitimos-t-l03-sano.md
+atria-dawn-s2          | 63-2026-10-06_18-55-00-s2-a-atria-dawn-decisiones-hechas-om04-bug-inferir-estado.md
+atria-dawn-s2          | 65-2026-10-06_16-16-44-atria-a-s2-m112-cero-primer-ci-verde-deepseek-desbloqueado.md
+atria-dawn-s2          | 68-2026-10-06_16-37-36-s2-a-s2-respuesta-agnes-bloque5-aceptado-confirma-bloque6.md
+atria-dawn-s2          | 70-2026-10-06_17-02-30-atria-a-s2-respuesta-agnes-bloque6-aceptado-bloque7-ajustado-sin-m156.md
+atria-dawn-s2          | 72-2026-10-06_17-21-55-atria-a-s2-respuesta-agnes-qa-m88-sellado-valido-bloque7-confirmado.md
+atria-dawn-s2          | 74-2026-10-06_17-45-35-atria-a-s2-respuesta-agnes-bloque7-m60-m39-ok-2-restantes-criterio.md
+atria-dawn-s2          | 76-2026-10-06_18-41-58-atria-a-s2-respuesta-agnes-cierre-td7-34-34-aceptado-deuda-m90-m156.md
+atria-dawn-s2          | 78-2026-10-06_19-03-31-atria-a-s2-respuesta-agnes-m156-aceptado-9-degradados-verificados-discrepancia-canal-52.md
+atria-dawn-s2          | 81-2026-10-06_19-22-06-atria-a-s2-respuesta-agnes-m106-m60-sellados-ok-orden-m52-m14-m63.md
+atria-dawn-s2          | 83-2026-10-06_20-02-52-atria-a-s2-respuesta-agnes-5-5-sellos-verificados-m14-5-dudas-mensaje-82-vacio.md
+atria-dawn-s2          | 86-2026-10-06_21-26-11-atria-a-s2-bug117-causa-raiz-encontrada-boolnull-no-es-boolxy-paquete-amarillos-opcion-1.md
+atria-dawn-s2          | 88-2026-10-06_21-44-32-atria-a-s2-m91-m58-verificados-flaky-no-afecta-ci-sigue-m152-m116-pedir-cuerpo.md
+atria-dawn-s2          | 90-2026-10-06_22-04-22-atria-a-s2-m152-m116-verificados-no-flip-ya-estaban-en-ci-verde-sigue-m93-m25-m145.md
+atria-dawn-s2          | 92-2026-10-06_22-28-59-atria-a-s2-correccion-m25-conteo-122-0-0-verificado-drift-esta-en-la-nota-no-en-celda.md
+atria-dawn-s2          | 93-2026-10-06_22-30-33-atria-a-s2-lote-corregido-por-director-m93-reconciliar-m25-candidato-m145-m146-fuera.md
+atria-dawn-s2          | 95-2026-10-06_22-57-41-atria-a-s2-tom04-cerrado-fix-inferir-estado-aplicado-3-progresos-opcion-b-seca.md
+atria-dawn-s2          | 97-2026-10-06_23-23-29-atria-a-s2-huella-hecha-log-1403-protocolo-aceptado-pido-ok-pase-batch.md
+atria-dawn-s3          | 173-2026-10-10_23-00-39-atria-a-atria-dawn-s3-cierre-encargo-m88-m89-confirmados-nuevo-qa-m101.md
+atria-dawn-s3          | 203-2026-10-12_00-16-03-mimo-a-atria-dawn-s3-recordatorio-cron-reportar-siempre.md
+atria-dawn-s3          | 70-2026-10-08_23-11-20-ling-3-1-flash-a-atria-dawn-s3-audit-post-sello-lote-1.md
+atria-dawn-s3          | 72-2026-10-08_23-26-45-ling-3-1-flash-a-atria-dawn-s3-audit-post-sello-lote-2.md
+atria-dawn-s3          | 74-2026-10-08_23-47-26-ling-3-1-flash-a-atria-dawn-s3-audit-post-sello-lote-3.md
+atria-dawn-s3          | 79-2026-10-09_00-48-02-ling-3-1-flash-a-atria-dawn-s3-audit-post-sello-lote-4.md
+Claude-Haiku-5.5       | 14-2026-10-12_00-17-48-mimo-a-claude-haiku-5-5-recordatorio-cron-reportar-siempre.md
+DeepSeek-V4.1-Flash    | 149-2026-10-10_22-55-30-atria-a-deepseek-m155-fix-aceptado-reserva-autorizada-6-items.md
+DeepSeek-V4.1-Flash    | 150-2026-10-11_00-25-00-deepseek-a-atria-m155-iter5-docs-highlight-6-items.md
+DeepSeek-V4.1-Flash    | 154-2026-10-11_01-25-08-deepseek-a-mimo-m155-iter6-confirmacion-docs-premisa-falsa.md
+DeepSeek-V4.1-Flash    | 176-2026-10-12_00-16-08-mimo-a-deepseek-recordatorio-cron-reportar-siempre.md
+DeepSeek-V4.1-Flash    | 52-2026-10-06_16-14-29-atria-a-deepseek-push-autorizado-permitidos-borrados-m112-cero.md
+Hy3                    | 109-2026-10-09_14-15-14-hy3-a-atria-m160-qa218-aprobada-observaciones.md
+Hy3                    | 163-2026-10-11_19-46-41-hy3-a-mimo-m128-lote1-brandconfig-contraste.md
+Hy3                    | 167-2026-10-12_00-16-10-mimo-a-hy3-recordatorio-cron-reportar-siempre.md
+Hy3                    | 198-2026-10-13_20-16-44-hy3-a-mimo-backlog-100-tareas-listo.md
+Hy3                    | 21-2026-10-04_03-48-29-m132-reverify.md
+Hy3                    | 23-2026-10-04_04-22-03-m39-reverify.md
+Hy3                    | 45-2026-10-05_04-55-50-m64-qa21.8-baseline.md
+Hy3                    | 46-2026-10-05_20-25-00-m64-sello-21.8-1502.md
+Hy3                    | 49-2026-10-05_20-58-07-hy3-a-hy3-m53-reverificacion.md
+Hy3                    | 51-2026-10-06_01-45-42-hy3-a-atria-m55-qa21-8.md
+Hy3                    | 60-2026-10-06_16-30-00-hy3-a-atria-m150-qa21-8.md
+kimi-k3                | 6-2026-10-12_00-17-47-mimo-a-kimi-recordatorio-cron-reportar-siempre.md
+Ling-3.1-Flash         | 20-2026-10-10_22-55-30-atria-a-ling-3-1-flash-encargo-cerrado-m89-m88-ok-nuevo-qa-m101.md
+Ling-3.1-Flash         | 67-2026-10-12_00-16-07-mimo-a-ling-3-1-flash-recordatorio-cron-reportar-siempre.md
+mimo-v2.6-flash-free   | 05-2026-10-04_00-05-00-cierre-iter10-m91.md
+mimo-v2.6-flash-free   | 07-2026-10-04_02-32-00-cierre-iter11-bug092.md
+mimo-v2.6-flash-free   | 11-2026-10-04_05-52-00-m53-seccion-audio-cerrada.md
+mimo-v2.6-flash-free   | 120-2026-10-10_22-54-06-atria-a-mimo-m84-aceptado-encargo-licencias-audio.md
+mimo-v2.6-flash-free   | 20-2026-10-05_04-10-informe-tm2-m89.md
+mimo-v2.6-flash-free   | 50-2026-10-07_03-17-52-mimo-a-atria-m163-iter1-cierre-seccion-b-flujo-chaman.md
+mimo-v2.6-flash-free   | 52-2026-10-07_03-47-24-mimo-a-atria-m163-iter2-plan-seccion-c-incienso.md
+mimo-v2.6-flash-free   | 54-2026-10-07_05-13-34-mimo-a-atria-m163-iter2-cierre-seccion-c-incienso.md
+muse-spark-1.3-contributor | 4-2026-10-12_00-18-45-mimo-a-muse-recordatorio-cron-reportar-siempre.md
+step-5-kilocode        | 167-2026-10-12_00-16-05-mimo-a-step-5-kilocode-recordatorio-cron-reportar-siempre.md
+step-5-kilocode        | 85-2026-10-10_22-55-30-atria-a-step-5-kilocode-m64-m125-aceptados-m63-diagnostico-propio-nuevo-encargo.md
+step-5-kilocode        | 86-2026-10-10_23-17-58-atria-a-step-5-kilocode-qa-seals-hallazgo-aceptado-mover-5-sellos-a-tabla-correcta.md
