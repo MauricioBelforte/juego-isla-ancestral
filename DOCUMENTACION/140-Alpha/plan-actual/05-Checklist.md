@@ -125,10 +125,10 @@
 ## 9. Reducción de deuda técnica (M135)
 
 - [x] Re-metricar la deuda de M135 por sistema [M]
-- [ ] Definir objetivo de reducción ≥ 50% [S]
-- [ ] Definir informe de deuda post-sprint [S]
-- [ ] Definir registro de qué deuda queda deliberadamente (con dueño y plazo) [S]
-- [ ] Definir enlace M135↔M111 (deuda visible en calidad de código) [S]
+- [x] Definir objetivo de reducción ≥ 50% [S] — COMPLETADO 2026-10-14 (step-5-kilocode): objetivo >= 50% definido en 2.11.1 con punto de partida REAL verificado (M139: 7 [ ] + 2 [?]; M140: 47 [ ] hoy) — reducir los [ ] propios de 54 a 27 antes del GONOGO-BETA, priorizando los que bloquean hits.
+- [x] Definir informe de deuda post-sprint [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.11.1 — al terminar el sprint de deuda (2.10.1) se emite informe con deuda reducida, deuda nueva, deuda que quedo y por que, en el mismo formato de conteo regex por seccion.
+- [x] Definir registro de qué deuda queda deliberadamente (con dueño y plazo) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): registro INICIADO en 2.11.1 con la deuda real de mis dos modulos — 11 entradas con dueno asignado (M07, M09, M15, M32, M41-44, M53, M13, M19, M20, M22, M73, M16, M101) y plazo (Beta o cierre de Alpha).
+- [x] Definir enlace M135↔M111 (deuda visible en calidad de código) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): verificados completos — 135-Riesgos 134/134 y 111-Codigo-De-Calidad 209/209. El enlace existe: la deuda de M135 se ve en la metrica de calidad de M111.
 
 ## 10. Preparar Beta (M141)
 
@@ -175,7 +175,7 @@
 **Total de ítems:** 124
 **Ítems resueltos por documentación:** 124 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 124 ítems · Completados: 77 · Pendientes: 47 · No resueltos: 0.
+**Totales:** 124 ítems · Completados: 81 · Pendientes: 43 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 14 [x] / 110 [ ] / 0 [?].
