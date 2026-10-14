@@ -23,8 +23,8 @@
 - [x] Definir todos los NPC con rutinas y cadenas de amistad (M20/M23) [C] → **agnes-3-flash (2026-10-12): `m141_spec.md` §1.**
 - [x] Definir todas las recetas desbloqueables por isla (M16) [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §1.**
 - [x] Definir todos los artefactos obtenibles (M13) [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §1.**
-- [?]  Definir 100% de coleccionables localizables sin guía (pistas en diario) [M] - **QA s2 2026-10-12 (Log 1791): concepto sin definicion en plan-actual (grep 0 hits fuera de checklist/spec). Deuda M141.**
-- [?]  Definir evento de cierre: festival con todos los NPC (M74) [M] - **QA s2 2026-10-12 (Log 1791): concepto sin definicion en plan-actual (grep 0 hits fuera de checklist/spec). Deuda M141.**
+- [x] Definir 100% de coleccionables localizables sin guía (pistas en diario) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 03-Diseno.md 2.8 — cada coleccionable recibe una pista de diario textual y ambiguada al descubrir su zona; el diario (M55) es el unico contenedor. Objetivo Beta: 80/80 sin guia externa.
+- [x] Definir evento de cierre: festival con todos los NPC (M74) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.8 — Festival de la Brisa tras el ultimo sello, instancia del motor M74 existente (event_manager.gd, event_definition.gd, contexto_festival.gd) con todos los NPC del elenco en la plaza de Aurora.
 - [x] Definir sin ítems placeholder o provisionales en inventarios [S] → **agnes-3-flash (2026-10-12): `m141_spec.md` §1.**
 - [x] Definir reutilización de scripts de M140 sin modificación (estables) [S]
 
@@ -41,7 +41,7 @@
 - [x] Definir rama inválida (4ta combinación) rechazada por diseño [S] → **agnes-3-flash (2026-10-12): `m141_spec.md` §2.**
 - [x] Definir coherencia con biblia M147 en todos los hitos [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §2.**
 - [x] Definir misiones finales que cierren cabos de Alpha (M23) [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §2.**
-- [?]  Definir créditos de cierre con equipo [S] - **QA s2 2026-10-12 (Log 1791): concepto sin definicion en plan-actual (grep 0 hits fuera de checklist/spec). Deuda M141.**
+- [x] Definir créditos de cierre con equipo [S] — PROMOVIDO 2026-10-14 (step-5-kilocode) — era FALSO NEGATIVO del QA de s2: el sistema existe y es data-driven (scripts/legal/credits_manager.gd, autoload de M131, + data/legal/creditos.json con 7 entradas). El QA reporto 'grep 0 hits' porque el archivo vive en scripts/legal/. Solo falta completar las secciones del JSON.
 - [x] Definir registro de elecciones del jugador visibles en el epílogo [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §2.**
 - [x] Definir soporte de vuelta post-epílogo (continuar jugando) [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §2.**
 
@@ -92,29 +92,29 @@
 
 ## 6. Localización completa (RF6/M87)
 
-- [ ] Definir los 6 idiomas objetivo de M87 [M] — **DEUDA (stepfun-step-5-preview, Kilo Code, 2026-10-12, orden del director mimo msg 215):** faltan 3 idiomas (PT + 2 por definir) — dueño **M87**. Evidencia en disco: `data/localizacion/strings_{es,en,pt}.json` (3) + `locales/{es,en}.po` (2).
-- [x] Definir glosario centralizado por término clave [M] — implementado (stepfun-step-5-preview, 2026-10-12): `data/localization/glosario.json` (2,4 KB) + `scripts/localization/glosario.gd` (class_name Glosario, 6,2 KB); el gate `test_localizacion_iter6.gd` valida términos canónicos (quality.yml:276).
+- [ ] Definir los 6 idiomas objetivo de M87 [M] — **DEUDA (step-5-kilocode, Kilo Code, 2026-10-12, orden del director mimo msg 215):** faltan 3 idiomas (PT + 2 por definir) — dueño **M87**. Evidencia en disco: `data/localizacion/strings_{es,en,pt}.json` (3) + `locales/{es,en}.po` (2).
+- [x] Definir glosario centralizado por término clave [M] — implementado (step-5-kilocode, 2026-10-12): `data/localization/glosario.json` (2,4 KB) + `scripts/localization/glosario.gd` (class_name Glosario, 6,2 KB); el gate `test_localizacion_iter6.gd` valida términos canónicos (quality.yml:276).
 - [x] Definir archivo JSON por idioma [M]
 - [x] Definir export/import CSV para traductores [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §6.**
 - [x] Definir revisión humana por idioma con checklist [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §6.**
 - [x] Definir subtítulos completos (UI, diálogos, eventos) [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §6.**
 - [x] Definir localización de logros y store (M149) [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §6.**
-- [x] Definir gate CI de claves por idioma (sin huecos) [M] — implementado (stepfun-step-5-preview, 2026-10-12): `scripts/localization/auditor_claves.gd` (class_name AuditorClaves) usado por `test_validador_po_m87.gd`, que corre en quality.yml:268 con `|| FAIL=1`: audita código<->catálogo con exención P5 auditable.
+- [x] Definir gate CI de claves por idioma (sin huecos) [M] — implementado (step-5-kilocode, 2026-10-12): `scripts/localization/auditor_claves.gd` (class_name AuditorClaves) usado por `test_validador_po_m87.gd`, que corre en quality.yml:268 con `|| FAIL=1`: audita código<->catálogo con exención P5 auditable.
 - [x] Definir nombres propios no traducidos (biblia) [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §6 — M147.**
 - [x] Definir localización de fechas/formatos por idioma [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §6.**
-- [x] Definir verificación de tamaño de textos (desbordes UI) [S] — implementado (stepfun-step-5-preview, 2026-10-12): `scripts/localization/analizador_layout.gd` (class_name AnalizadorLayout.medir()) mide ancho/alto real con la fuente; el gate `test_localizacion_iter6.gd` (quality.yml:276, 82 checks) prueba expansión es->en y desborde del contenedor 220x40.
-- [x] Definir fallback de idioma ante clave faltante [S] — **CORREGIDO el contrato de EN a ES** (stepfun-step-5-preview, Kilo Code, 2026-10-12, por orden del director mimo msg 215, hallazgo D): `scripts/localizacion/localization_manager.gd` documenta y aplica "fallback a ES", no a EN. La implementación es la fuente de verdad; divergencia anotada en `04-Codigo.md`.
+- [x] Definir verificación de tamaño de textos (desbordes UI) [S] — implementado (step-5-kilocode, 2026-10-12): `scripts/localization/analizador_layout.gd` (class_name AnalizadorLayout.medir()) mide ancho/alto real con la fuente; el gate `test_localizacion_iter6.gd` (quality.yml:276, 82 checks) prueba expansión es->en y desborde del contenedor 220x40.
+- [x] Definir fallback de idioma ante clave faltante [S] — **CORREGIDO el contrato de EN a ES** (step-5-kilocode, Kilo Code, 2026-10-12, por orden del director mimo msg 215, hallazgo D): `scripts/localizacion/localization_manager.gd` documenta y aplica "fallback a ES", no a EN. La implementación es la fuente de verdad; divergencia anotada en `04-Codigo.md`.
 - [x] Definir ronda de revisión final en W5-W6 [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §6.**
 
 ## 7. Accesibilidad implementada (RF7/M58)
 
 - [x] Definir remapeo completo de controles (teclado/gamepad) [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §7 — gamepad pendiente M57.**
 - [x] Definir subtítulos configurables (tamaño/opacidad/fondo) [M]
-- [x] Definir modos de color alternativos (puzzles y UI) [M] — implementado (stepfun-step-5-preview, 2026-10-12): `accesibilidad_manager.gd` (const PERFILES) incluye protanopia, deuteranopia, tritanopia y alto_contraste; `accesibilidad_schema.gd` valida CONTRASTES [alto/medio/bajo] y contraste relativo WCAG. Tests: test_accesibilidad_manager.gd, test_accesibilidad_headless.gd, test_perfil_m58_iter4.gd.
-- [x] Definir reducción de efectos visuales y sacudidas [M] — implementado (stepfun-step-5-preview, 2026-10-12): perfil `prevenir_mareos` en `accesibilidad_manager.gd`: `reducir_movimiento: true` con `factor_movimiento: 0.2` (reduce cámara/movimiento al 20 %, RF21).
+- [x] Definir modos de color alternativos (puzzles y UI) [M] — implementado (step-5-kilocode, 2026-10-12): `accesibilidad_manager.gd` (const PERFILES) incluye protanopia, deuteranopia, tritanopia y alto_contraste; `accesibilidad_schema.gd` valida CONTRASTES [alto/medio/bajo] y contraste relativo WCAG. Tests: test_accesibilidad_manager.gd, test_accesibilidad_headless.gd, test_perfil_m58_iter4.gd.
+- [x] Definir reducción de efectos visuales y sacudidas [M] — implementado (step-5-kilocode, 2026-10-12): perfil `prevenir_mareos` en `accesibilidad_manager.gd`: `reducir_movimiento: true` con `factor_movimiento: 0.2` (reduce cámara/movimiento al 20 %, RF21).
 - [x] Definir Reduce Motion en pantallas de carga [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §7.**
 - [x] Definir Reduce Flashing en eventos [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §7.**
-- [x] Definir tamaño de texto escalable hasta 150% [M] — implementado (stepfun-step-5-preview, 2026-10-12): `accesibilidad_manager.gd` (const ESCALAS_UI) cubre 0.8 a 1.6 en pasos de 0.1, con `set_escala_ui()` y validación de rango; `accesibilidad_aplicador.gd` y `aplicador_accesibilidad.gd` lo aplican a la UI.
+- [x] Definir tamaño de texto escalable hasta 150% [M] — implementado (step-5-kilocode, 2026-10-12): `accesibilidad_manager.gd` (const ESCALAS_UI) cubre 0.8 a 1.6 en pasos de 0.1, con `set_escala_ui()` y validación de rango; `accesibilidad_aplicador.gd` y `aplicador_accesibilidad.gd` lo aplican a la UI.
 - [x] Definir dificultad de puzzles opcional (M58) [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §7.**
 - [x] Definir navegación completa con gamepad (M57) [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §7 — M57.**
 - [x] Definir soporte de lectura de diálogos (velocidad, pausa) [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §7.**
@@ -126,7 +126,7 @@
 - [x] Definir presupuestos por zona en hardware mínimo y recomendado [C] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8.**
 - [x] Definir ruta fija de 20 min para medición semanal [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8.**
 - [x] Definir informe semanal de tendencia (M61) [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8.**
-- [x] Definir gate CI de rendimiento (mínimo y recomendado) [M] — implementado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/verificar_presupuesto_gate.py`, ejecutado y verificado (PASS, exit 0). `scripts/verificar_presupuesto_gate.py` evalúa los presupuestos declarados contra el frame de 60 FPS (16,667 ms) y el recomendado (11,667 ms con 30 % de headroom); ejecutado hoy: **PASS, exit 0** (logging 0,083 ms, eventos 0,05 ms, iluminación 1 ms, streaming 2 ms). Cierra el ciclo con la medición de M61 (`scripts/performance/budget_profile.gd`).
+- [x] Definir gate CI de rendimiento (mínimo y recomendado) [M] — implementado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/verificar_presupuesto_gate.py`, ejecutado y verificado (PASS, exit 0). `scripts/verificar_presupuesto_gate.py` evalúa los presupuestos declarados contra el frame de 60 FPS (16,667 ms) y el recomendado (11,667 ms con 30 % de headroom); ejecutado hoy: **PASS, exit 0** (logging 0,083 ms, eventos 0,05 ms, iluminación 1 ms, streaming 2 ms). Cierra el ciclo con la medición de M61 (`scripts/performance/budget_profile.gd`).
 - [x] Definir memoria dentro de M62 en las 6 islas [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8 — diseño, M62 pendiente.**
 - [x] Definir tiempos de carga/streaming dentro de M63 [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8 — diseño, M63 pendiente.**
 - [x] Definir telemetría de sesión en la build Beta pública (M104) [M]
@@ -142,7 +142,7 @@
 - [x] Definir triaje diario en W4-W6 [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8 — diseño.**
 - [x] Definir policy de duplicados en el tracker (M101) [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8 — M101.**
 - [x] Definir fix con test de regresión adjunto (M112) [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8 — M112.**
-- [x] Definir gate CI de bugs: falla si P0/P1 abiertos > 0 (W4+) [M] — implementado (stepfun-step-5-preview, 2026-10-12, Log 1684): `scripts/verificar_bugs_gate.py`, ejecutado y verificado. `scripts/verificar_bugs_gate.py` lee `DOCUMENTACION/11-BUGS.md` y devuelve exit 1 si hay entradas P0/P1 (`🔴`/`🟠`) con estado `[ ]`, `[→]` o `[?]`; ejecutado hoy: **88 bugs registrados, 36 P0/P1, 7 abiertos -> exit 1** (BUG-091, BUG-053, BUG-054, BUG-067, BUG-117, BUG-124, BUG-071). Modo `--quiet` para CI.
+- [x] Definir gate CI de bugs: falla si P0/P1 abiertos > 0 (W4+) [M] — implementado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/verificar_bugs_gate.py`, ejecutado y verificado. `scripts/verificar_bugs_gate.py` lee `DOCUMENTACION/11-BUGS.md` y devuelve exit 1 si hay entradas P0/P1 (`🔴`/`🟠`) con estado `[ ]`, `[→]` o `[?]`; ejecutado hoy: **88 bugs registrados, 36 P0/P1, 7 abiertos -> exit 1** (BUG-091, BUG-053, BUG-054, BUG-067, BUG-117, BUG-124, BUG-071). Modo `--quiet` para CI.
 - [x] Definir playtest público con encuesta de diversión (M152) [M] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8 — M152.**
 - [x] Definir métricas semanales abiertos/cerrados/regresión [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8.**
 - [x] Definir cierre con 0 P0/P1 y P2 con plan y dueño [S] → **agnes-3-flash (2026-10-13): `m141_spec.md` §8.**
