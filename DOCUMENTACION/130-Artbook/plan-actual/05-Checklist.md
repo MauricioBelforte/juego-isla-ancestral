@@ -236,7 +236,7 @@ El módulo fue liberado como "núcleo iter. 1" con JSON + Validator + Test. **No
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 134 ítems · Completados: 134 · Pendientes: 0 · No resueltos: 0. — L136 y L137 colapsados como duplicados (→ 135/135 anterior) por stepfun-step-5-preview (Kilo Code, 2026-10-12), orden del director mimo (msgs 212 y 215). — L137 colapsado como **DUPLICADO de L100** por stepfun-step-5-preview (Kilo Code, 2026-10-12), por orden del director mimo (msg 212) con sugerencia de Hy3. Los flips de agnes-3-flash del mismo día ya venían reflejados en GLOBAL (136/136).
+**Totales:** 134 ítems · Completados: 134 · Pendientes: 0 · No resueltos: 0. — L136 y L137 colapsados como duplicados (→ 135/135 anterior) por step-5-kilocode (Kilo Code, 2026-10-12), orden del director mimo (msgs 212 y 215). — L137 colapsado como **DUPLICADO de L100** por step-5-kilocode (Kilo Code, 2026-10-12), por orden del director mimo (msg 212) con sugerencia de Hy3. Los flips de agnes-3-flash del mismo día ya venían reflejados en GLOBAL (136/136).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no había línea de Totales. Conteo real de marcas: 96 [x] / 50 [ ] / 0 [?].

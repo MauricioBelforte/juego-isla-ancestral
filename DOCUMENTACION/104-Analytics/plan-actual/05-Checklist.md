@@ -152,7 +152,7 @@
 - [?] Indicador visual de envío en curso [S] — requiere UI (progress bar/label); backend es offline (sin red en v1)
 - [x] Histórico de consentimientos del usuario [S] → **agnes-3-flash (2026-10-12): `opt_out.cfg` + timestamps de `config_cambio` en lotes. Histórico = agregado en M206.**
 
-**Totales:** 119 items · Completados: 107 · Pendientes: 4 · No resueltos: 8. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 107 [x] / 8 [?] / 4 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 119 items · Completados: 107 · Pendientes: 4 · No resueltos: 8. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 107 [x] / 8 [?] / 4 [ ]; correccion de dato autorizada por director msg 257.)
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, privacidad y reglas cierran aquí.
 ## N. Implementacion (ox-alpha/Cline 2026-08-29, V0, verificado headless)
 

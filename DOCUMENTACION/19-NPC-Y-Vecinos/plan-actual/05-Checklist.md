@@ -181,7 +181,7 @@
 - [x] 02-Analisis creado y firmado (alternativas documentadas) [S] → **agnes-3-flash (2026-10-13): `m19_spec.md` §Q + 02 existente.**
 - [x] 03-Diseno creado y firmado (arquitectura + contratos API) [S] → **agnes-3-flash (2026-10-13): `m19_spec.md` §Q + 03 existente.**
 - [x] 04-Codigo creado y firmado (rutas, firmas GDScript, Notas del Agente) [S]
-- [ ] 05-Checklist creado y firmado (este archivo, 130 ítems) [S]
+- [x] 05-Checklist creado y firmado (este archivo, 130 ítems) [S] → **agnes-3-flash (2026-10-13): este archivo + `m19_spec.md`.**
 
 ## Dependencia: Visión del Agente (M154)
 

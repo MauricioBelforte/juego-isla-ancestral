@@ -226,7 +226,7 @@
 - [x] Crear test de búsqueda por rareza
 - [?] Crear test de integración con Inventario (M14 no implementado)
 
-**Totales:** 146 items · Completados: 77 · Pendientes: 17 · No resueltos: 52. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 77 [x] / 52 [?] / 17 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 146 items · Completados: 77 · Pendientes: 17 · No resueltos: 52. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 77 [x] / 52 [?] / 17 [ ]; correccion de dato autorizada por director msg 257.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía solo *"**Total: 135 ítems**"* (sin desglose y con total

@@ -71,11 +71,11 @@
 - [x] Crear tests de integración tiempo → calendario (día/noche avanza fecha) [C] → test_time_calendar_events.gd
 - [x] Crear tests de integración calendario → eventos (evento se dispara en fecha) [C] → test_time_calendar_events.gd
 - [x] Crear tests de integración economía → tienda (compra/venta sincronizada) [C] → test_economy_npc_shop.gd
-- [ ] Crear tests de integración NPC → amistad (diálogos, mood) [C] → test_villager_social.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
+- [x] Crear tests de integración NPC → amistad (diálogos, mood) [C] → test_villager_social.gd — [ ]→[x] por Ling-3.1-Flash (R3, 2026-10-13): artefacto SÍ existe desde 2026-10-12 (commit b107794, cubo M19 — el revert de 2026-10-08 quedó stale). Verificado headless Godot 4.7.2: EXIT=0, "Resumen M19+M20: 24 checks, 0 fallos", 5.2s. Nota honesta: "mood" (estado de ánimo) no existe como sistema en M19 (villager_profile.gd sin campo ánimo, grep 0 hits) — el test cubre charla + regalo → puntos/nivel de amistad, documentado en su propio header.
 - [x] Crear tests de integración guardado → carga (round-trip estado idéntico) [C] → test_inventory_economy.gd, test_time_calendar_events.gd
-- [ ] Crear tests de integración crafting → inventario (consumo + resultado) [C] → test_crafting_inventory.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
+- [x] Crear tests de integración crafting → inventario (consumo + resultado) [C] → test_crafting_inventory.gd — [ ]→[x] por Ling-3.1-Flash (R3, 2026-10-13): artefacto SÍ existe desde 2026-10-12 (commit 35f7cc5, cubo M16 — revert stale). Verificado headless Godot 4.7.2: EXIT=0, "Resumen M16+M14: 21 checks, 0 fallos", 6.2s.
 - [ ] Crear tests de integración agricultura → inventario (semillas + cosechas) [C] → test_farming_inventory.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
-- [ ] Crear tests de integración pesca → economía (pescar + vender) [C] → test_fishing_economy.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
+- [x] Crear tests de integración pesca → economía (pescar + vender) [C] → test_fishing_economy.gd — [ ]→[x] por Ling-3.1-Flash (R3, 2026-10-13): artefacto SÍ existe desde 2026-10-12 (commit cd3d949, cubo M34 — revert stale). Verificado headless Godot 4.7.2: EXIT=0, "Resumen M34+M38: 18 checks, 0 fallos", 7.1s.
 - [x] Verificar que cada integration test es independiente de los demás [M]
 
 ### RF — Tests headless sin UI
@@ -96,8 +96,8 @@
 - [x] Generar reporte de cobertura localmente [M] → configurado en testing.yml
 - [x] Definir umbral global mínimo (≥ 40%) [M] → 70% lines, 60% functions, 50% branches
 - [x] Definir umbral de módulos núcleo (≥ 60%) [M]
-- [?]Alcanzar cobertura global ≥ 40% [C] → pendiente ejecución real  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
-- [?]Alcanzar cobertura núcleo ≥ 60% [C] → pendiente ejecución real  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Alcanzar cobertura global ≥ 40% [C] → pendiente ejecución real — ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): NO MEDIBLE con el tooling actual. El addon GdUnit4 v6.2.1 instalado NO incluye runner de cobertura headless (grep "coverage" en addons/gdUnit4 = 1 hit, un comentario en src/core/attributes/TestCaseAttribute.gd:54; GdUnitCmdTool.gd no expone flags de cobertura). tests/gdunit_coverage.json existe como POLÍTICA (enabled=true, thresholds lines 70/functions 60/branches 50, include res://scripts/**/*.gd) pero ningún runner la consume. Deuda de tooling (GdUnit4 con coverage runner o integración externa). Dueno: M112.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Alcanzar cobertura núcleo ≥ 60% [C] → pendiente ejecución real — ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): NO MEDIBLE, misma causa que L99 (sin runner de cobertura headless en GdUnit4 v6.2.1). Deuda de tooling. Dueno: M112.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
 - [x] Excluir código de UI del cálculo de cobertura [M] → exclude patterns en config
 - [x] Excluir shaders y código generado de la cobertura [M]
 - [x] Justificar en documentación las áreas excluidas [S] → gdunit_coverage.json
@@ -122,8 +122,8 @@
 - [x] Documentar paralelización por módulo como mejora si la suite excede 10 min [S]
 
 ### RN — Requisitos no funcionales
-- [?]Cumplir tiempo total de suite ≤ 10 minutos [C] → pendiente ejecución real  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
-- [?]Cumplir tiempo de unit tests ≤ 2 minutos [C] → pendiente ejecución real  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Cumplir tiempo total de suite ≤ 10 minutos [C] → pendiente ejecución real — ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): MEDIDO — 620.1s = 10.34min. NO cumple <10min (excede por 20s). EXIT=0, "RESULTADO: ÉXITO MEDIDO — 38/38 suites · 1728 tests ejecutados · 0 fallos" (1707 checks SceneTree + 21 cases GdUnit4). El tiempo lo dominan ~38 arranques de motor headless (~15-16s de boot c/u). Queda [?] como deuda de optimización de performance. Dueno: M112.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [x]Cumplir tiempo de unit tests ≤ 2 minutos [C] → MEDIDO por Ling-3.1-Flash (R3, 2026-10-13): 95.1s = 1.59min < 2min ✓. EXIT=0. GdUnitCmdTool headless Godot 4.7.2 sobre tests/unit: "Overall Summary: 21 test cases | 0 errors | 0 failures | 0 flaky | 0 skipped | 0 orphans" (debug 3 + foto 5 + inventario 10 + ui 3 — los 4 dirs con suites GdUnit4 nativas `extends GdUnitTestSuite.gd`; tiempo interno GdUnit 1s364ms, el resto es boot de motor). Nota: los tests unit estilo SceneTree de los otros dirs (data, dlc, economia, editor, interfaces, player, terrain, time) corren en la suite completa run_tests.gd (38 suites, 1728 tests, 0 fallos, 620.1s).
 - [x] Mantener cada test individual ≤ 5 segundos [M]
 - [x] Garantizar determinismo: mismo resultado en cada corrida [M]
 - [x] Garantizar independencia: tests no dependen del orden de ejecución [M]
@@ -163,12 +163,12 @@
 
 ### Integración con M111 (Código de Calidad)
 - [x] Testear interfaces definidas en M111 (IInteractable, IDamageable, ISaveable) [M] → test_i_interactable.gd, test_i_damageable.gd, test_i_saveable.gd
-- [?] Testear utilidades de M111 (MathUtils, ValidationUtils, FormatUtils) [M] → pendiente (scripts no existen aún) → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #152, 2026-10-08): over-mark — el propio texto del ítem admite que no se hizo. Ver msg s2 #152.
+- [x] Testear utilidades de M111 (MathUtils, ValidationUtils, FormatUtils) [M] → test_m111_utils_headless.gd (Log 891) — [?]→[x] por Ling-3.1-Flash (R3, 2026-10-13): el claim "scripts no existen aún" está stale; scripts/utils/{math,validation,format}_utils.gd existen y están testeados headless. Verificado Godot 4.7.2: EXIT=0, "M111-UTILS-P1: passed=62 failed=0", 6.1s (MathUtils, ValidationUtils, FormatUtils, GameConstants, GameEnums, structs, patterns, components).
 - [x] Validar que code quality check no rompe la suite de tests [M]
 - [x] Aplicar convenciones de nomenclatura M111 a los archivos de test [S]
 - [x] Aplicar límites de tamaño de M111 a los tests (métodos ≤ 50 líneas) [S]
 - [x] Verificar testabilidad del código: inyección de dependencias en sistemas [M]
-- [?]Testear patrones de M111 (state machine, observer, factory) [M] -- agnes-2.5-flash 2026-09-13: tests especificados en 03-Diseno.md §1 (unit/code_quality/: validación de interfaces/patrones de M111) + §7 (contrato M111: la suite valida estándares de código) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.16 inexistente]; M111 ✅ cerrado. Implementation deferred to M111 integration.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Testear patrones de M111 (state machine, observer, factory) [M] -- ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): COBERTURA PARCIAL. test_m111_utils_headless.gd::_test_patterns() cubre StateMachine, Factory, Command, Strategy (suite completa passed=62 failed=0, EXIT=0, 6.1s). Observer: scripts/patterns/observer.gd AUSENTE del repo (grep 0 hits) aunque la doc de M111 lo documenta (03-Diseno.md:318-319, 04-Codigo.md:30) — archivo documentado pero no implementado; no hay nada que testear. 3 de 4 patrones testeados. Dueno: M111 (implementar observer.gd) → M112 (testearlo después). -- agnes-2.5-flash 2026-09-13: tests especificados en 03-Diseno.md §1 (unit/code_quality/: validación de interfaces/patrones de M111) + §7 (contrato M111: la suite valida estándares de código) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.16 inexistente]; M111 ✅ cerrado. Implementation deferred to M111 integration.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
 - [x] Usar interfaces en fixtures para contratos estables [S] -- agnes-2.5-flash 2026-09-13: politica implementada en tests/helpers/test_helpers.gd (implements_interface()) + 03-Diseno.md §3 (fixtures por builders, sin estado compartido entre tests) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.17 inexistente]; contract testing approach defined. Spec documented.
 - [x] Documentar en M111 las interdependencias con el módulo 112 [S]
 
@@ -188,7 +188,7 @@
 - [x] Testear inventario como sistema base de M101 [M] → test_inventory_slot.gd, test_contenedor_inventario.gd
 - [x] Cubrir con tests los sistemas núcleo de M101 [C]
 - [x] Testear generación determinista del mundo voxel [C]
-- [?]Testear biome y terreno con seed fijo [C] -- agnes-2.5-flash 2026-09-13: test especificado en 03-Diseno.md §3 (fixture_terrain.tscn con seed fijo para tests de generación y biome) + §7 (contrato M101: generación determinista del terreno) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.18 inexistente]; requires M08/M09/27 integration. Deferred.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Testear biome y terreno con seed fijo [C] -- ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): 0 tests con "seed|SEED" en todo tests/ (grep 2026-10-13). test_terrain_modifiers.gd existe (extends SceneTree) pero no usa seed fijo; fixture_terrain.tscn ausente (L156, git 0 hits). Deferral real confirmado. Dueno: M08/M09/M27. -- agnes-2.5-flash 2026-09-13: test especificado en 03-Diseno.md §3 (fixture_terrain.tscn con seed fijo para tests de generación y biome) + §7 (contrato M101: generación determinista del terreno) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.18 inexistente]; requires M08/M09/27 integration. Deferred.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
 - [x] Testear persistencia de mundo en M101 [C]
 - [x] Verificar que los tests de M101 corren headless [M]
 - [x] Mantener los sistemas de M101 desacoplados de UI para ser testeables [M]
@@ -198,7 +198,7 @@
 - [x] Testear paths de error que generarían crashes (null refs, excepciones) [M]
 - [x] Verificar que el crash reporter se desactiva en modo test [M] -- agnes-2.5-flash 2026-09-13: verificacion documentada en 03-Diseno.md §7 (contrato M122: "los tests no deben generar crash reports falsos (verificar que el crash reporter se desactiva en modo test)") [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.11 inexistente]; M122 integration. Spec defined.
 - [x] Evitar que tests generen falsos positivos de crash en CI [M]
-- [?]Testear que fallbacks de M122 responden ante datos inválidos [M] -- agnes-2.5-flash 2026-09-13: test especificado en 03-Diseno.md §7 (contrato M122: los tests detectan crash paths — excepciones, null refs — antes de llegar al jugador) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.19 inexistente; sustento parcial: "fallbacks ante datos inválidos" no es literal en ningún doc]; M122 ✅ cerrado. Integration deferred.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Testear que fallbacks de M122 responden ante datos inválidos [M] -- ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): 0 tests de crash paths/fallbacks en tests/ (grep "fallback|crash" 2026-10-13). M122 cerrado pero sus tests de fallback no existen. Deferral real confirmado. Dueno: M122. -- agnes-2.5-flash 2026-09-13: test especificado en 03-Diseno.md §7 (contrato M122: los tests detectan crash paths — excepciones, null refs — antes de llegar al jugador) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.19 inexistente; sustento parcial: "fallbacks ante datos inválidos" no es literal en ningún doc]; M122 ✅ cerrado. Integration deferred.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
 - [x] Validar que la suite detecta excepciones como fallo de test [S]
 - [x] Verificar que los logs de tests no contaminan logs de producción [M]
 - [x] Documentar casos de crash cubiertos por tests de regresión [S] -- agnes-2.5-flash 2026-09-12: politica documentada en 03-Diseno.md §7 (contrato M122: los tests detectan crash paths) + §1 (regression/stable_flows: re-ejecución de flujos críticos ya verificados) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.5 inexistente]; testing framework cubre casos principales. Doc present.
@@ -253,14 +253,14 @@
 - [x] Probar fallo intencional de un test y verificar exit code ≠ 0 [M] → verificado en run
 - [x] Probar éxito de todos los tests y verificar exit code = 0 [M] → ✅ 3 corridas
 - [x] Validar reporte de resultados generado (XML/texto) [M] → GdUnit4 genera JUnit XML
-- [?]Validar reporte de cobertura generado con umbrales [M] → pendiente (requiere instrumentación)  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Validar reporte de cobertura generado con umbrales [M] → pendiente (requiere instrumentación) — ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): NO MEDIBLE, misma causa que L99/L100 (gdunit_coverage.json es política sin runner que la consuma en GdUnit4 v6.2.1 headless). Deuda de tooling. Dueno: M112.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
 - [x] Ejecutar suite 3 veces seguidas y verificar cero flaky [C] → ✅ 2026-08-29 3/3 OK
-- [?]Ejecutar suite en una máquina limpia (simulando CI) [C] → pendiente CI real  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
-- [?]Verificar que el tiempo total cumple los ≤ 10 minutos [C] → pendiente medición  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
-- [?]Verificar que los unit tests cumplen ≤ 2 minutos [C] → pendiente medición  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Ejecutar suite en una máquina limpia (simulando CI) [C] → pendiente CI real — ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): CI real existe y está cableado (.github/workflows/testing.yml: ubuntu-latest, jobs test/lint/quality-gate, SIN || true, verificado 2026-10-13), pero ejecutarlo requiere push a main/develop — fuera de alcance de sesión local. Deferral real (se ejecuta en CI real al próximo push). Dueno: M118.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [?]Verificar que el tiempo total cumple los ≤ 10 minutos [C] → pendiente medición — ADJUDICADO Ling-3.1-Flash (R3, 2026-10-13): MEDIDO (ver L125) — 620.1s = 10.34min, NO cumple <10min (excede por 20s). Medición honesta documentada; queda [?] como deuda de performance. Dueno: M112.  — [x]→[?] por atria-dawn (BUG-070 LOTE 13, Ling msg 130): deferral disfrazado — el propio item admite pendiente/deferred; DoD §21.6 no se cumple.
+- [x]Verificar que los unit tests cumplen ≤ 2 minutos [C] → MEDIDO por Ling-3.1-Flash (R3, 2026-10-13): 95.1s = 1.59min < 2min ✓ (verificación del ítem L126, misma corrida). EXIT=0, 21/21 test cases GdUnit4, 0 errors, 0 failures, 0 orphans. Salida: %TEMP%\m112_r3_unit.txt.
 - [x] Ajustar configuración de framework ante fallos de integración [M]
 - [x] Confirmar que ningún archivo fuera de DOCUMENTACION/112-Testing-Automatico/ fue modificado [S]
-**Totales:** 225 ítems · Completados: 205 · Pendientes: 8 · No resueltos: 12. — **Recontado por atria-dawn (BUG-070 LOTE 13, 2026-10-09, auditoria Ling msg 130):** 14 flips anti-inflacion (3 Familia A fixtures inexistentes L155-157 [x]→[ ], 11 deferral disfrazado M114 [x]→[?]).
+**Totales:** 225 ítems · Completados: 211 · Pendientes: 5 · No resueltos: 9. — **Recontado por Ling-3.1-Flash (R3, 2026-10-13):** 6 flips con evidencia headless (L74, L76, L78 [ ]→[x]: tests de integración que SÍ existen desde 2026-10-12 y pasan; L166 [?]→[x]: test_m111_utils_headless.gd passed=62 failed=0; L126+L260 [?]→[x]: unit tests medidos 95.1s=1.59min < 2min, 21/21 cases). Recontado previo por atria-dawn (BUG-070 LOTE 13, 2026-10-09, auditoria Ling msg 130): 14 flips anti-inflacion (3 Familia A fixtures inexistentes L155-157 [x]→[ ], 11 deferral disfrazado M114 [x]→[?]).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 208 [x] / 0 [ ] / 0 [?].
@@ -289,8 +289,45 @@ y (2) reetiquetar el framework honestamente en las docs del modulo. NO se toco
 
 - [x] tests/unit/data/test_npc_visual_database.gd -> rc=1 sin resumen (watchdog aborta en el primer bloque). REVERTIDO a [x] 2026-10-09 (director): evidencia de atria-dawn-s2 (msg 163) — suite pasó limpia rc=0 checks=356 en su corrida completa; el rc=1 era flaky. Dueno: suite de visual/NPC [C]
 - [x] tests/unit/player/test_equipment_manager.gd -> rc=1 sin resumen (watchdog en bloque A). REVERTIDO a [x] 2026-10-09 (director): evidencia de atria-dawn-s2 (msg 163) — suite pasó limpia rc=0 checks=44 en su corrida completa; el rc=1 era flaky. Dueno: M59 / equipo [C]
-- [x] GdUnit4 tests/unit/debug/test_debug_menu.gd -> 201 orphans -> rc=101 con 0 failures (21/21 PASSED). Dueno: M110 [M] — FLIP director 2026-10-09: BUG-129 RESUELTO (stepfun-step-5-preview, verificado por s3 + director con corrida propia: 3/3 PASSED · 0 orphans · EXIT 0). Gate rc=101 → rc=0.
+- [x] GdUnit4 tests/unit/debug/test_debug_menu.gd -> 201 orphans -> rc=101 con 0 failures (21/21 PASSED). Dueno: M110 [M] — FLIP director 2026-10-09: BUG-129 RESUELTO (step-5-kilocode, verificado por s3 + director con corrida propia: 3/3 PASSED · 0 orphans · EXIT 0). Gate rc=101 → rc=0.
 - [x] tests/test_debug_menu.gd (raiz) -> RESUELTO 2026-10-08 (frente A msg 65, Log 1461): diagnosticada stale (API v1 muerta por refactor data-driven de debug_menu.gd; 1 solo commit, nunca actualizada) y MOVIDA a tests/Obsoletos/2026-09-01_00-00-00_test_debug_menu_v1_api_muerta.gd con cabecera de obsolescencia + cobertura viva verificada (unit/debug GdUnit4 21/21 + test_debug_m110 + headless). EXCLUIR de run_tests.gd vaciado: 25 descubiertas / 0 excluidas / 718 tests (antes 26/1). NO se toco el 05-Checklist de M110 (auditoria Ling). [S]
 - [x] .github/workflows/testing.yml -> flag "--path" invalido + "|| true" (el CI nunca falla). AUTORIZADO por el director (msg 59, 2026-10-08) y FIXEADO: paso "Run tests" con -a <4 dirs> + --ignoreHeadlessMode, sin "--"/"--path" ni "|| true"; evidencia local 21/21 tests, 4/4 suites, EXIT 0. Luego (msg 61, 2026-10-08): quitados tambien los 2 "|| true" del job lint -> 0 en todo el archivo; ambos pasos medidos inaptos para CI (colgante / EditorScript) -> BUG-122. RESUELTO 2026-10-08 (frente B msg 70, Log 1469): Check formatting REEMPLAZADO por "Check GDScript parse (gate duro)" con colector (971 preloads / 0 SCRIPT ERROR / EXIT 0, sin || true operativos) y Run static analysis RETIRADO con evidencia (EditorScript no instanciable en headless; adaptacion M111 pendiente de coordinacion). Solo testing.yml tocado; regresion runner 25/0/718/3 + gate 76/0 = baseline. Dueno: M118 [x]
 
 **Totales T-M112:** 17 [x] / 0 [?] / 0 [ ] (testing.yml paso de [?] a [x] el 2026-10-08 con el fix autorizado en msg 59). La linea "Totales: 208" de arriba es el conteo historico del modulo; la auditoria debe sumar esta seccion aparte.
+
+---
+
+## Addendum R3 — Auditoría Ling-3.1-Flash (2026-10-13, encargo msg 111 del director)
+
+**Estado final:** 225 ítems · 211 [x] · 5 [ ] · 9 [?] (conteo verificado por script: [x]=211 [ ]=5 [?]=9).
+
+### Flips aplicados (6, todos con evidencia headless Godot 4.7.2)
+| Ítem | Flip | Evidencia |
+|---|---|---|
+| L74 | [ ]→[x] | `tests/integration/test_villager_social.gd` EXISTE (commit b107794, cubo M19, 2026-10-12 — el revert de 2026-10-08 quedó stale). EXIT=0, "Resumen M19+M20: 24 checks, 0 fallos", 5.2s. Nota honesta: "mood" no existe como sistema (villager_profile.gd sin campo ánimo, grep 0 hits); el test cubre charla + regalo → puntos/nivel de amistad. |
+| L76 | [ ]→[x] | `tests/integration/test_crafting_inventory.gd` EXISTE (commit 35f7cc5, cubo M16). EXIT=0, "Resumen M16+M14: 21 checks, 0 fallos", 6.2s. |
+| L78 | [ ]→[x] | `tests/integration/test_fishing_economy.gd` EXISTE (commit cd3d949, cubo M34). EXIT=0, "Resumen M34+M38: 18 checks, 0 fallos", 7.1s. |
+| L166 | [?]→[x] | `tests/test_m111_utils_headless.gd` (Log 891). EXIT=0, "M111-UTILS-P1: passed=62 failed=0", 6.1s. `scripts/utils/{math,validation,format}_utils.gd` verificados en disco (el claim "scripts no existen aún" estaba stale). |
+| L126 | [?]→[x] | Unit tests GdUnit4: EXIT=0, **95.1s = 1.59min < 2min**. "Overall Summary: 21 test cases \| 0 errors \| 0 failures \| 0 flaky \| 0 skipped \| 0 orphans" (debug 3 + foto 5 + inventario 10 + ui 3 — los 4 dirs con suites GdUnit4 nativas `extends GdUnitTestSuite.gd`; tiempo interno GdUnit 1s364ms). |
+| L260 | [?]→[x] | Verificación de L126 (misma corrida). |
+
+### Suite completa (evidencia de tiempo, L125/L259)
+- `run_tests.gd`: EXIT=0, **620.1s = 10.34min**. "RESULTADO: ÉXITO MEDIDO — 38/38 suites · 1728 tests ejecutados · 0 fallos" (checks SceneTree: 1707 · test cases GdUnit4: 21).
+- **NO cumple <10min** (excede por 20s) → L125/L259 quedan [?] con medición honesta documentada. El tiempo lo dominan ~38 arranques de motor headless (~15-16s de boot c/u). Deuda de performance.
+
+### [?] adjudicados (9, sin flip — verdictos documentados en cada línea)
+- **L99/L100/L256 (cobertura):** NO medible con el tooling actual — GdUnit4 v6.2.1 headless no incluye runner de cobertura (grep "coverage" en addons/gdUnit4 = 1 hit, un comentario en `src/core/attributes/TestCaseAttribute.gd:54`; `GdUnitCmdTool.gd` no expone flags). `tests/gdunit_coverage.json` existe como POLÍTICA (thresholds lines 70/functions 60/branches 50) pero ningún runner la consume. Deuda de tooling. Dueno: M112.
+- **L125/L259 (≤10min):** medido 10.34min — no cumple (ver arriba). Dueno: M112 (optimización de arranque).
+- **L171 (patrones M111):** COBERTURA PARCIAL — `_test_patterns()` cubre StateMachine, Factory, Command, Strategy; **Observer: `scripts/patterns/observer.gd` AUSENTE del repo** (grep 0 hits) aunque la doc de M111 lo documenta (03-Diseno.md:318-319, 04-Codigo.md:30) — archivo prometido pero no implementado. Dueno: M111 (implementar) → M112 (testear después).
+- **L191 (biome/terreno seed fijo):** 0 tests con "seed|SEED" en todo tests/ (grep 2026-10-13); `test_terrain_modifiers.gd` existe pero no usa seed; `fixture_terrain.tscn` ausente (L156). Dueno: M08/M09/M27.
+- **L201 (fallbacks M122):** 0 tests de crash paths/fallbacks (grep "fallback|crash" 2026-10-13). Dueno: M122.
+- **L258 (máquina limpia CI):** CI real existe y está cableado (`.github/workflows/testing.yml`: ubuntu-latest, jobs test/lint/quality-gate, SIN `|| true`, verificado 2026-10-13); ejecutarlo requiere push a main/develop — fuera de alcance de sesión local. Dueno: M118.
+
+### [ ] confirmados (5, artefactos genuinamente ausentes, git 0 hits — no flipeables)
+- L77 `test_farming_inventory.gd` (agricultura M27 no implementada) · L154 `autoload_overrides.gd` (patrón de mocking revertido BUG-070) · L155 `fixture_items.tres` · L156 `fixture_terrain.tscn` · L157 `fixture_npc.tscn`.
+
+### Patrón de corrida headless que funciona (Windows)
+```powershell
+Start-Process -FilePath 'C:\Temp\godot\godot472.exe' -ArgumentList @('--headless','--path','game/isla-ancestral','--script','res://tests/run_tests.gd') -WorkingDirectory <repo> -NoNewWindow -Wait -RedirectStandardOutput $out -RedirectStandardError $err -PassThru
+```
+(Salidas de esta auditoría: `%TEMP%\m112_r3_{villager,crafting,fishing,m111,full,unit}.txt` + `_err.txt`. Nota: el patrón `& exe args > file 2>&1` dentro de `Measure-Command` falla en esta shell — EXIT vacío, tiempo 0s.)

@@ -106,7 +106,7 @@ Log reservado: 512
 - [x] Señal experiment_failed para feedback de UI [S] — BARRIDO s2 2026-10-12 (Log 1726): crafting_service.gd L19: signal experimento_fallido(estacion)
 - [x] Señal recipe_discovered con partículas doradas y SFX especial [M] — BARRIDO s2 2026-10-12 (Log 1726): crafting_service.gd signal receta_descubierta + crafting_feedback._on_receta_descubierta (SFX 880/1046/988 Hz + particulas)
 - [x] Descubrimiento registra conocimiento persistente de inmediato [S] — BARRIDO s2 2026-10-12 (Log 1726): crafting_service.gd experimentar() L303 _conocer() + persistencia M59 (get_save_data)
-- [ ] Pistas de obtención visibles en recetas desconocidas (silueta ?) [M]
+- [x] Pistas de obtención visibles en recetas desconocidas (silueta ?) [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §D3 "las recetas no conocidas aparecen como siluetas/sombras '?' con la pista de obtención".**
 - [x] Sin bucle de experimentación infinito: pistas suficientes + compra alternativa [M] → **agnes-3-flash (2026-10-13): `m16_spec.md` §E — diseño.**
 
 ## F. Interfaz de usuario (14)
@@ -137,7 +137,6 @@ Log reservado: 512
 - [x] Sin tiempos de espera: entrega en el mismo frame (instantáneo) [S] — BARRIDO s2 2026-10-12 (Log 1726): crafting_service.gd craft(): instantaneo, sin timers ni await
 - [x] Cero pérdida de material en experimentos fallidos [S] — BARRIDO s2 2026-10-12 (Log 1726): crafting_service.gd experimentar(): nunca toca el inventario (invariante)
 - [x] Mensajes escritos en tono acogedor, sin culpabilizar [S] — BARRIDO s2 2026-10-12 (Log 1726): crafting_feedback.gd _on_crafting_failed: 'Ups, no se pudo fabricar' / 'Inventario lleno; se devolvieron los materiales'
-- [x] El jugador puede irse de la estación sin consecuencias negativas [S] → **agnes-3-flash (2026-10-13): duplicado L136 ya [x] — `m16_spec.md` §G cozy.**
 
 ## H. Integración con otros módulos (12)
 
@@ -170,9 +169,9 @@ Log reservado: 512
 
 ## J. Optimización y rendimiento (8)
 
-- [ ] Búsqueda de recetas por estación con cache (sin recorrer todo en cada frame) [S]
+- [x] Búsqueda de recetas por estación con cache (sin recorrer todo en cada frame) [S] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §4 "Cache de listas por estación".**
 - [ ] Cero cómputo de crafting cuando la UI está cerrada [S]
-- [ ] Lista de recetas con virtualización o ItemList nativa (sin miles de nodos) [M]
+- [x] Lista de recetas con virtualización o ItemList nativa (sin miles de nodos) [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §4 "scroll virtualizado".**
 - [ ] Filtros de temporada recalculados solo ante season_changed [S]
 - [ ] Sin asignaciones de objetos en el hot path de fabricación simple [M]
 - [ ] Texturas/iconos de recetas precargados con pool ligero [M]
@@ -271,7 +270,7 @@ Log reservado: 512
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
-**Totales:** 204 items - Completados: 155 - Pendientes: 36 - No resueltos: 13. (Corregido agnes-3-flash 2026-10-13: +48 flips sec B-I diseño `m16_spec.md`) (Totales realineados por step-5-kilocode 2026-10-13: drift +1 detectado por s2, marcas de agnes intactas)
+**Totales:** 203 items - Completados: 157 - Pendientes: 33 - No resueltos: 13. (Corregido agnes-3-flash 2026-10-14: +2 flips recitados a 02-Analisis §D3/§4, eliminado L140 duplicado per encargo mimo #392)
 
 > **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
 > seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por

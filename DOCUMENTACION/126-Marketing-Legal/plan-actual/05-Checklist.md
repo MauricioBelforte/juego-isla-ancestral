@@ -21,7 +21,7 @@
 - **ACTIVA:** Reserva Log 981 agnes-3-flash/Kilo Code (2026-09-18 02:55) — M126 en curso (iter. acotada
   data-layer + gate CI + V0): verificar el scaffold de validación (`marketing_legal.json` +
   `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` 9/0) + cablear el test al gate duro
-**Totales:** 101 items · Completados: 100 · Pendientes: 0 · No resueltos: 1. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 100 [x] / 1 [?] / 0 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 101 items · Completados: 100 · Pendientes: 0 · No resueltos: 1. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 100 [x] / 1 [?] / 0 [ ]; correccion de dato autorizada por director msg 257.)
    **agnes-3-flash (Kilo Code, 2026-10-12):** CERRADO ✅ — se crearon `comunicado_creadores_embargo.md` + `confirmacion_sorteo.md` (2 [?] → [x]).
 
 # 05-Checklist.md — Módulo 126: Marketing Legal

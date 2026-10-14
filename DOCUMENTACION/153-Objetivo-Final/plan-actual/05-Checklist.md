@@ -30,7 +30,7 @@
 - [x] Convertir "Aurora como hogar" en criterio verificable [S] → vision_contract.json O1: criterio definido
 - [x] Definir indicador: vuelta voluntaria ≥1/sesión 30 min [M] → O1.indicador = "telemetria: evento volver_a_casa"
 - [x] Asignar dueños: M17, M15, M18 [S] → O1.duenos = ["M17", "M15", "M18"]
-- [x] Instrumentar evento telemetria volver_a_casa (M104) → KnownIssue no bloqueante DoD: evento especificado en contrato M104; implementacion deferred a iteracion futura M105 (M105 cerrado sin estos eventos específicos). Telemetria base operativa (M105 ✅). — implementado (stepfun-step-5-preview, 2026-10-12, Log 1690/1692): `scripts/analytics/telemetria_m104.gd` con `volver_a_casa`, `acercarse_puerto` y `pausa_contemplativa`; silencioso sin AnalyticsDirector (opt-out/headless), `--check-only` 0 errores y suites de consumo en verde; disparado en `house_manager.obtener_casa_jugador()` al resolver la parcela del jugador (M18), con `casa_id` y `pos`.
+- [x] Instrumentar evento telemetria volver_a_casa (M104) → KnownIssue no bloqueante DoD: evento especificado en contrato M104; implementacion deferred a iteracion futura M105 (M105 cerrado sin estos eventos específicos). Telemetria base operativa (M105 ✅). — implementado (step-5-kilocode, 2026-10-12, Log 1690/1692): `scripts/analytics/telemetria_m104.gd` con `volver_a_casa`, `acercarse_puerto` y `pausa_contemplativa`; silencioso sin AnalyticsDirector (opt-out/headless), `--check-only` 0 errores y suites de consumo en verde; disparado en `house_manager.obtener_casa_jugador()` al resolver la parcela del jugador (M18), con `casa_id` y `pos`.
 - [x] Incluir O1 en la prueba de visión de M113 [S] → prueba_vision.md incluye O1
 
 ## B. O2 — Curiosidad por la Siguiente Isla
@@ -39,7 +39,7 @@
 - [x] Definir indicador: isla visible + viaje deseable (M26/M27/M28) [M] → O2.indicador = "telemetria: acercamientos al puerto + playtest"
 - [x] Asignar dueños: M26, M27, M28 [S] → O2.duenos = ["M26", "M27", "M28"]
 - [x] Documentar sin FOMO (subordinado a M151) [S] → vision_contract.json O2: criterio redactado sin urgencia/expiración; principios_superiores verificados
-- [x] Instrumentar evento acercarse_puerto (M104) → KnownIssue no bloqueante DoD: evento especificado en contrato M104; implementacion deferred a iteracion futura M105. Telemetria base operativa (M105 ✅). — implementado (stepfun-step-5-preview, 2026-10-12, Log 1690): `scripts/analytics/telemetria_m104.gd`; silencioso sin AnalyticsDirector (opt-out/headless), `--check-only` 0 errores; disparado en `transport_route_events.elegir()` con el `stop_id`/ruta real del viaje.
+- [x] Instrumentar evento acercarse_puerto (M104) → KnownIssue no bloqueante DoD: evento especificado en contrato M104; implementacion deferred a iteracion futura M105. Telemetria base operativa (M105 ✅). — implementado (step-5-kilocode, 2026-10-12, Log 1690): `scripts/analytics/telemetria_m104.gd`; silencioso sin AnalyticsDirector (opt-out/headless), `--check-only` 0 errores; disparado en `transport_route_events.elegir()` con el `stop_id`/ruta real del viaje.
 
 ## C. O3 — Recordar a los NPC
 
@@ -175,7 +175,7 @@
 - [x] Definir indicador: 2+ pausas de 5 min sin input [M] → O19.indicador = "telemetria: evento pausa_contemplativa + observacion"
 - [x] Asignar dueños: M40, M41, M42, M43, M10 [S] → O19.duenos = ["M40", "M41", "M42", "M43", "M10"]
 - [x] Documentar audio cozy y vista al mar (M11) [M] → O19 + M146 (calma; mirador WM-5)
-- [x] Instrumentar evento pausa_contemplativa (M104) → KnownIssue no bloqueante DoD: evento especificado en contrato M104; implementacion deferred a iteracion futura M105. Telemetria base operativa (M105 ✅). — implementado (stepfun-step-5-preview, 2026-10-12, Log 1690): `scripts/analytics/telemetria_m104.gd`; silencioso sin AnalyticsDirector (opt-out/headless), `--check-only` 0 errores; `scripts/analytics/pausa_contemplativa.gd` observa `EventBus.pausa_cambiada` o expone `observar_pausa()` para el adaptador de UI; anti-spam de 30 s.
+- [x] Instrumentar evento pausa_contemplativa (M104) → KnownIssue no bloqueante DoD: evento especificado en contrato M104; implementacion deferred a iteracion futura M105. Telemetria base operativa (M105 ✅). — implementado (step-5-kilocode, 2026-10-12, Log 1690): `scripts/analytics/telemetria_m104.gd`; silencioso sin AnalyticsDirector (opt-out/headless), `--check-only` 0 errores; `scripts/analytics/pausa_contemplativa.gd` observa `EventBus.pausa_cambiada` o expone `observar_pausa()` para el adaptador de UI; anti-spam de 30 s.
 
 ## T. Regla de Integración
 

@@ -67,7 +67,7 @@
 - [x] Definir escenario con 50 000 instancias vegetales [C]
 - [x] Definir métrica: culling correcto y memoria < umbral [M]
 - [x] Definir verificación de viento/anima sin degradación [M]
-- [x] Definir prueba con cámara rápida (sobrevuelo) [S] — **implementado (stepfun-step-5-preview, 2026-10-11):** `scripts/stress/escenarios/flycam_stress.gd` (class FlyCamStress), registrado en `stress_runner.gd` como 5º escenario. Recorrido de 480 muestras x 200 pasadas (96.000 muestras, seed 42) sobre el plan de M50, midiendo `recorrido_ms`, `frame_ms`/`frame_us` e `integridad_ok`. Verif. indep. Hy3 (2026-10-11) confirma headless: `StressRunner completado: 5 escenarios`, FlyCam `fuera de radio: 0` (integridad_ok=1.0), EXIT 0, 0 SCRIPT ERROR. Nota: la cita original "Log 1666" era de M35/M50 (DeepSeek), no de M113 — corregida para evitar falsa atribución.
+- [x] Definir prueba con cámara rápida (sobrevuelo) [S] — **implementado (step-5-kilocode, 2026-10-11):** `scripts/stress/escenarios/flycam_stress.gd` (class FlyCamStress), registrado en `stress_runner.gd` como 5º escenario. Recorrido de 480 muestras x 200 pasadas (96.000 muestras, seed 42) sobre el plan de M50, midiendo `recorrido_ms`, `frame_ms`/`frame_us` e `integridad_ok`. Verif. indep. Hy3 (2026-10-11) confirma headless: `StressRunner completado: 5 escenarios`, FlyCam `fuera de radio: 0` (integridad_ok=1.0), EXIT 0, 0 SCRIPT ERROR. Nota: la cita original "Log 1666" era de M35/M50 (DeepSeek), no de M113 — corregida para evitar falsa atribución.
 - [x] Definir verificación del render (batches/draw calls) [M]
 
 ## 6. Muchos objetos (5º)

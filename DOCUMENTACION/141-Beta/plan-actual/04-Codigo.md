@@ -86,7 +86,7 @@ public bool CertificacionOk(ChecklistPlataforma c); // M149
 - El candidato a RC es la build del cierre de W6: tag `beta-rc-candidate` + guarda de `manifest.json` de contenido para M142.
 - Los 2 logs de certificación (M149) se generan con `CertificationChecklist`.
 
-## 7. Divergencia documentada: fallback de idioma (2026-10-12, stepfun-step-5-preview)
+## 7. Divergencia documentada: fallback de idioma (2026-10-12, step-5-kilocode)
 
 - **El checklist decia:** "Definir fallback de idioma (EN) ante clave faltante".
 - **La implementacion hace:** `scripts/localizacion/localization_manager.gd` aplica fallback a **ES**, no a EN.
