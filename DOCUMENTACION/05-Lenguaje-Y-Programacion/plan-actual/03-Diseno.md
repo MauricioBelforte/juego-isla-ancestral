@@ -78,3 +78,141 @@ res://
 3. Logs para entradas/salidas de sistemas críticos (Logger).
 4. Sin llamadas a UI desde gameplay (señales/eventos).
 5. Sin acceso a `GameState` fuera de módulos de datos (regla de capas).
+## 7. Anti-patrones adicionales (E8-E10)
+
+Complementa la tabla de anti-patrones de `02-Analisis` sección 3 (7 entradas). Los tres
+siguientes se documentan acá porque su mitigación es una **regla de diseño**, no un patrón
+transversal.
+
+### 7.1 E8 — No mutar el árbol ni las conexiones del engine en el momento equivocado (usar `deferred`)
+
+**Anti-patrón:** llamar `add_child()`, `remove_child()` o `change_scene_to_file()` **dentro de
+`_ready()`** (o de cualquier callback con el que el engine esté construyendo/desmontando el
+árbol). Godot aborta la operación con `Parent node is busy setting up children` /
+`Parent node is busy adding/removing children`.
+
+**Mitigación (regla):** toda mutación del árbol que ocurra en `_ready()` o en un callback de
+señal del engine se difiere con `call_deferred()`.
+
+- Referencia: `GUIA-GODOT/01-gdscript-errores-comunes.md` §13 (add_child en `_ready`) y §14
+  (`change_scene_to_file()` en `_ready`).
+- Aplicado en el proyecto (medido 2026-10-14): `scripts/core/bootstrap.gd` difiere las 4
+  operaciones de arranque (`_verificar_game_flow`, `_autoregistrar_dominios`,
+  `verificar_integridad_dominios`, `_load_main_scene` — líneas 47-50);
+  `scripts/core/scene_manager.gd:33` difiere `_do_cambio(ruta)`.
+
+### 7.2 E9 — No procesar todo en `_process` (timers/eventos primero)
+
+**Anti-patrón:** resolver por polling en `_process` lo que un timer, una señal o un `await`
+resuelven mejor (input, temporizadores, esperas). Coste por frame desperdiciado, orden de
+ejecución no determinista y acoplamiento temporal.
+
+**Mitigación (regla):**
+- Input: `_unhandled_input()` / `_input()`. **NUNCA** `Input.is_action_just_pressed()` dentro
+  de `_process` (GUIA-GODOT/01 §4).
+- Tiempo/calendario: escuchar `GameTime` (observer) o usar `GameClock`/`Timer`; no acumular
+  deltas a mano.
+- Esperas: `await` sobre una señal o un `Timer`, no un contador de frames.
+- Un `_process` que sí haga falta (p. ej. un lookup perezoso con reintento) debe **acotar** su
+  trabajo con un tope de frames y una guarda de estado (patrón de GUIA-GODOT/01 §26).
+
+> Contexto medido (2026-10-14): **58** scripts de `game/isla-ancestral/scripts/` definen
+> `func _process`. No todos son anti-patrón (movimiento, cámara y UI lo usan legítimamente),
+> pero es el universo a auditar cuando M61 pida presupuesto de frame.
+
+### 7.3 E10 — No duplicar lógica entre módulos (reutilizar `utils`/servicios)
+
+**Anti-patrón:** copiar la misma función (validaciones, conversiones, formateo, matemática de
+dominio) en dos módulos. Duplica los bugs y obliga a corregir en N lugares.
+
+**Mitigación (regla):**
+- Helper puro y sin dependencias de escena → `scripts/utils/` (§2).
+- Regla de reuso: si un **tercer** módulo necesita la misma lógica, se **extrae** a `utils` o a
+  un servicio autoload, y los tres la consumen.
+- La duplicación suele nacer de un archivo que creció de más: > 400 líneas obliga a justificar
+  o a romper en módulos (§1, Reglas de estilo 6).
+
+## 8. Edge cases del lenguaje (H1-H6)
+
+Casos de borde que no son anti-patrones de arquitectura sino **trampas del lenguaje/engine**.
+Cada uno trae la regla y una referencia real del repo o de la GUIA-GODOT.
+
+### 8.1 H1 — Migración GDScript 2 (Godot 3.x) → GDScript 4 (scripts legacy)
+
+El proyecto es **Godot 4.7.2** (`project.godot` `config/features = PackedStringArray("4.7",
+"Forward Plus")`, línea 16) y no arrastra scripts de Godot 3. La regla cubre el caso de
+incorporar código legacy (assets, snippets, freelancers):
+
+- **No hay migración automática fiable.** Un script de Godot 3 se **reescribe**, no se parchea:
+  `yield` → `await`, `export` → `@export`, `onready` → `@onready`, `instance()` →
+  `instantiate()`, `PoolStringArray` → `PackedStringArray`, `OS.get_ticks_msec()` (se mantiene).
+- **Verificar SIEMPRE que compila antes de darlo por bueno.** Los dos métodos "obvios" mienten
+  (GUIA-GODOT/01 §31): `GDScript.new()` + `source_code` da falsos positivos sobre `class_name`
+  ya registrados, y `ResourceLoader.load()` solo **NO** detecta un error de sintaxis. El método
+  correcto es `load()` + `reload()` sobre el recurso (ruta `res://`).
+- Referencia de migración: `GUIA-GODOT/09-godot4-migracion.md`.
+
+### 8.2 H2 — Señales emitidas antes de `_ready()` (timing y `deferred`)
+
+Dos caras del mismo problema de **orden de inicialización**:
+
+- **Emitir** una señal antes de que el receptor haya corrido su `_ready()`/`connect()` pierde el
+  evento (una señal no se re-emite). Regla: el emisor no emite en `_init()`; como mínimo, diferir
+  la primera emisión con `call_deferred()`.
+- **Resolver** un autoload desde el `_ready()` de un nodo de escena puede devolver `null` aunque
+  el autoload exista (es *timing*, no ausencia): lookup perezoso + reintento con tope vía
+  `Engine.get_main_loop().root.get_node_or_null(...)` (GUIA-GODOT/01 §26).
+- En modo `--script` un autoload **no** es identificador global: usar
+  `root.get_node_or_null("/root/<Nombre>")` (GUIA-GODOT/01 §24).
+
+### 8.3 H3 — Resources mutables compartidos (duplicarlos)
+
+Godot **cachea los `Resource` por ruta**: `ResourceLoader.load()` sobre un `.tres` ya cargado
+devuelve **la misma instancia**. Mutar esa instancia (o sus variables de script no exportadas)
+contamina a todos los consumidores y sobrevive a un "reload".
+
+- **Regla:** un `.tres` que se lee es **inmutable**; si hay que modificarlo, `.duplicate()`.
+- Aplicado en el proyecto: `scripts/accesibilidad/accesibilidad_manager.gd:207` duplica el
+  perfil antes de mutarlo (`PERFILES[nombre].duplicate()`) y `:266` devuelve una copia.
+- Referencia: `DOCUMENTACION/27-Islas-Del-Mundo/plan-actual/04-Codigo.md` §8 trampa 2 (el
+  `cargar_definiciones()` tuvo que resetear a mano `ancla`/`semilla_isla` porque la instancia
+  cacheada sobrevivía al reload).
+
+### 8.4 H4 — Rutas `res://` vs `user://` (guardados)
+
+- `res://` = recursos del proyecto, **solo lectura en build exportado** (dentro del `.pck`).
+  Todo lo que se escribe en runtime va a `user://`.
+- `user://` en este proyecto resuelve a `game/isla-ancestral/Godot/app_userdata/isla-ancestral/`
+  (medido: contiene `saves/`, `backups/`, `checkpoints/`, `logs/`, `config.cfg`). **Ese
+  directorio ES el `user://` real: nunca borrarlo entero.**
+- `DirAccess.open("user://...")` puede devolver `null` en headless con `--path` relativo, y
+  `ProjectSettings.globalize_path("user://...")` devuelve una ruta **relativa**
+  (`./Godot/app_userdata/...`). Solución: recomponer con `globalize_path("res://")` + la parte
+  relativa (helper `_abrir_dir()`), o usar la API estática (`DirAccess.dir_exists_absolute`).
+  `FileAccess.open("user://...", WRITE)` sí funciona.
+- Guardado: `scripts/saving/save_schema.gd:17` fija `SAVE_DIR = "user://saves"` y
+  `scripts/saving/save_writer.gd:49` pone la clave de integridad en la **raíz** de `user://`
+  (no dentro de `saves/`, que las suites vacían).
+- Referencia: `DOCUMENTACION/27-Islas-Del-Mundo/plan-actual/04-Codigo.md` §8 trampa 1.
+
+### 8.5 H5 — Floats y determinismo (generación procedural)
+
+- **La generación debe ser reproducible a partir de una semilla explícita.** Todo
+  `RandomNumberGenerator`/`FastNoiseLite` recibe una semilla derivada del mundo o del día, nunca
+  del reloj del sistema.
+- Aplicado: `scripts/world/island_generator.gd` fija semillas derivadas por capa (`seed_value`,
+  `+1000`, `+2000`, `+3000` — líneas 47/54/61/68); `scripts/time/game_clock.gd:203` expone
+  `rng_diario(ns)` = `RandomNumberGenerator` con semilla **hasheada por namespace + día**.
+- **Comparar floats con tolerancia, no con `==`** (salvo valor exacto por construcción). Ojo:
+  `JSON.parse_string()` devuelve **todo número como `float`** → `[0,4,7]` llega como
+  `[0.0,4.0,7.0]` y el `==` de `Array` es exacto por elemento (GUIA-GODOT/01 §29). Regla: en
+  tests de datos, normalizar a `int` antes de comparar (no aflojar la aserción).
+
+### 8.6 H6 — Threads y nodos (`call_deferred` obligatorio)
+
+- **El árbol de escena NO es thread-safe.** Un hilo de trabajo no puede tocar nodos: al terminar,
+  devuelve el resultado al hilo principal con `call_deferred()` (o `WorkerThreadPool` +
+  `call_deferred`), y recién ahí muta la escena.
+- Regla: la lógica pesada que corre en un hilo opera sobre **datos puros** (arrays/diccionarios),
+  nunca sobre `Node`/`Resource` vivos; la aplicación a la escena se difiere.
+- Mismo principio que E8: la mutación del árbol va diferida (GUIA-GODOT/01 §13-§14).

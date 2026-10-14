@@ -88,9 +88,9 @@
 - [x] Prohibir strings mágicos para estados (enums centrales) [S] (02-Analisis §3)
 - [x] Prohibir pooling manual repetido (usar PoolService) [S] (02-Analisis §3)
 - [x] Prohibir acceso directo a GameState desde gameplay (capas) [S] (03-Diseno §6.5)
-- [ ] Prohibir modificar señales del engine en el momento equivocado (deferred) [S]
-- [ ] Prohibir procesar todo en `_process` (timers/eventos) [S]
-- [ ] Prohibir duplicar lógica entre módulos (reutilizar utils) [S]
+- [x] Prohibir modificar señales del engine en el momento equivocado (deferred) [S] (03-Diseno §7.1 (deferred obligatorio; aplicado en bootstrap.gd:47-50 y scene_manager.gd:33))
+- [x] Prohibir procesar todo en `_process` (timers/eventos) [S] (03-Diseno §7.2 (input por _unhandled_input; MEDIDO: 58 scripts con _process))
+- [x] Prohibir duplicar lógica entre módulos (reutilizar utils) [S] (03-Diseno §7.3 (helper a scripts/utils/ al 3er consumidor))
 
 ## F. Calidad y "done" por script (10)
 
@@ -120,12 +120,12 @@
 
 ## H. Edge cases y verificación documental (12)
 
-- [ ] Documentar edge case: migración GDScript 2 → 4 (scripts legacy) [S]
-- [ ] Documentar edge case: señales emitidas antes de ready (deferred) [S]
-- [ ] Documentar edge case: resources mutables compartidos (duplicarlos) [S]
-- [ ] Documentar edge case: ruta de `res://` vs `user://` (guardados) [S]
-- [ ] Documentar edge case: floats y determinismo (generación procedural) [S]
-- [ ] Documentar edge case: threads y nodos (call_deferred obligatorio) [S]
+- [x] Documentar edge case: migración GDScript 2 → 4 (scripts legacy) [S] (03-Diseno §8.1 (GUIA-GODOT/09 + GUIA-GODOT/01 §31))
+- [x] Documentar edge case: señales emitidas antes de ready (deferred) [S] (03-Diseno §8.2 (GUIA-GODOT/01 §26 y §24))
+- [x] Documentar edge case: resources mutables compartidos (duplicarlos) [S] (03-Diseno §8.3 (cache por ruta; accesibilidad_manager.gd:207/266))
+- [x] Documentar edge case: ruta de `res://` vs `user://` (guardados) [S] (03-Diseno §8.4 (save_schema.gd:17; save_writer.gd:49))
+- [x] Documentar edge case: floats y determinismo (generación procedural) [S] (03-Diseno §8.5 (island_generator.gd:47/54/61/68; game_clock.gd:203))
+- [x] Documentar edge case: threads y nodos (call_deferred obligatorio) [S] (03-Diseno §8.6 (arbol no thread-safe))
 - [ ] Verificar trazabilidad de los 31 puntos del plan maestro [S]
 - [ ] Verificar coherencia con AGENTS.md (convenciones §24) [S]
 - [ ] Actualizar CHECKLIST-GLOBAL con el estado de M05 [S]
@@ -135,7 +135,7 @@
 
 ---
 
-**Totales:** 103 ítems · Completados: 82 · Pendientes: 21 · No resueltos: 0.
+**Totales:** 103 ítems · Completados: 91 · Pendientes: 12 · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 
@@ -171,5 +171,27 @@
 - **H1-H6** (edge cases): sin contenido en los 5 documentos -> requieren disenarse (fuente: GUIA-GODOT/01).
 - **H7** (trazabilidad de los 31 puntos): 02-Analisis §1 titula "31 puntos" pero la tabla tiene **27 filas** -> inconsistencia a resolver (27 o 31).
 - **H8** (coherencia con AGENTS.md §24): **FALLA** - AGENTS.md §24 "Stack Tecnologico" describe **Unity + C#** mientras M05 fija Godot 4.x + GDScript. Drift de documento ajeno; reportado, NO editado.
+- **H9** (actualizar CHECKLIST-GLOBAL): la fila 05 existe; el flip de la fila lo aplica el director.
+- **H11** (log de finalizacion + ULTIMO_NUMERO): log generado; `ULTIMO_NUMERO.txt` esta **retirado** (protocolo v3, commits `2ac8b4b`/`b65c30b`) -> item obsoleto.
+
+## Diseno faltante escrito (2026-10-14 - DeepSeek-V4.1-Flash)
+
+9 flips `[ ]` -> `[x]` tras ESCRIBIR el diseno faltante en `03-Diseno` (orden del director, msg 235). Totales: **91/103**. NO se toco CHECKLIST-GLOBAL (la fila la aplica el director).
+
+- **E8/E9/E10** (anti-patrones deferred / `_process` / duplicar logica): disenados en `03-Diseno` §7.1/§7.2/§7.3 (GUIA-GODOT/01 §13-§14/§4/§26 + rutas reales del repo).
+- **H1-H6** (edge cases): disenados en `03-Diseno` §8.1-§8.6 (migracion GDScript 3->4, senales antes de ready, resources compartidos, `res://` vs `user://`, floats/determinismo, threads+nodos).
+
+### Los 12 `[ ]` restantes (honestidad - NO flipeados)
+
+- **F7** (tests unitarios obligatorios para logica pura): dueno externo **M-QA** (04-Codigo §4).
+- **F9** (actualizacion de este checklist al crear modulos nuevos): regla de proceso; no vive en los 5 documentos del modulo.
+- **F10** (registro de cada decision de codigo en Logs): cubierto por AGENTS.md §6, no por M05.
+- **G2** (flujo hacia M11): 04-Codigo §4 lo declara pendiente con dueno **M11**.
+- **G6** (flujo hacia M58): solo aparece como dueno de `settings.gd`, no como flujo.
+- **G8** (flujo hacia QA): dueno **M-QA** (04-Codigo §4).
+- **G9** (flujo hacia M08): solo aparece como dueno de `scripts/world/voxel/*`, no como flujo.
+- **G10** (ningun modulo contradice la guia): auditoria cross-modulo; requiere el barrido de todos los modulos.
+- **H7** (trazabilidad de los 31 puntos): 02-Analisis §1 titula "31 puntos" pero la tabla tiene **27 filas** -> inconsistencia a resolver (27 o 31).
+- **H8** (coherencia con AGENTS.md §24): **FALLA** - AGENTS.md §24 describe **Unity + C#** mientras M05 fija Godot 4.x + GDScript. Drift de documento ajeno; reportado, NO editado.
 - **H9** (actualizar CHECKLIST-GLOBAL): la fila 05 existe; el flip de la fila lo aplica el director.
 - **H11** (log de finalizacion + ULTIMO_NUMERO): log generado; `ULTIMO_NUMERO.txt` esta **retirado** (protocolo v3, commits `2ac8b4b`/`b65c30b`) -> item obsoleto.
