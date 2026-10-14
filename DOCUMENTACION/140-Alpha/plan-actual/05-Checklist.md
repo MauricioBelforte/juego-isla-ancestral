@@ -153,11 +153,11 @@
 
 - [x] Validar M58 en sistemas nuevos (subtítulos, remapeo, reducción de efectos) [M]
 - [x] Definir config de dificultad de puzzles (M58) [S]
-- [ ] Definir modos de color para puzzles de espejos/sombras (M58) [M]
-- [ ] Definir navegación del diario con gamepad (M57) [M]
-- [ ] Definir estados vacíos de colecciones con texto claro (M53) [S]
-- [ ] Definir feedback de audio completo en nuevas interacciones (M44) [S]
-- [ ] Definir tamaño mínimo de texto al 150% (M58) [S]
+- [ ] Definir modos de color para puzzles de espejos/sombras (M58) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): los modos de color existen (8 hits: accesibilidad_schema, gestor_config, mapa_manager) pero hay 0 hits de 'espejo'/'sombra' en el manager: no estan aplicados a puzzles. Ver 4.2. No inflado.
+- [ ] Definir navegación del diario con gamepad (M57) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): 0 hits de la combinacion diario+gamepad (si hay 29 hits de gamepad en general, incluido control_input.gd). Ver 4.2. No inflado.
+- [ ] Definir estados vacíos de colecciones con texto claro (M53) [S] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): los 5 hits son de otros sistemas; no hay un patron de estado vacio para colecciones. Definido en 4.2 como texto + ilustracion, nunca lista vacia. No inflado.
+- [x] Definir feedback de audio completo en nuevas interacciones (M44) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): presente — feedback_director.gd (M44) con test_feedback_m44.gd; las nuevas interacciones de Alpha entran por receta de capas (M139 2.8.1). Ver 4.2.
+- [x] Definir tamaño mínimo de texto al 150% (M58) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): presente — verificados 47 hits de escala de texto en scripts/ (accesibilidad_schema, accesibilidad_aplicador, action_prompt_overlay). La escala al 150% existe como ajuste de M58. Ver 4.2.
 
 ## 13. Cierre de fase (GONOGO-BETA)
 
@@ -175,7 +175,7 @@
 **Total de ítems:** 124
 **Ítems resueltos por documentación:** 124 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 124 ítems · Completados: 92 · Pendientes: 32 · No resueltos: 0.
+**Totales:** 124 ítems · Completados: 94 · Pendientes: 30 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 14 [x] / 110 [ ] / 0 [?].
