@@ -35,12 +35,12 @@
 
 ## 3. Enclave de Coral (núcleo del 2º bioma)
 
-- [ ] Definir el enclave visitable: muelle, tienda glasswork, 1 NPC [M]
-- [ ] Asegurar que Coral NO se construye en fase: queda "inacabado a propósito" [S]
-- [ ] Documentar el anzuelo de curiosidad al océano (M152/M153) [S]
-- [ ] Definir el NPC enano de Coral con 10+ líneas de diálogo (M21) [M]
-- [ ] Definir la tienda única de Coral (arrecife glasswork) con stock propio (M39) [M]
-- [ ] Registrar hit explícito para Alpha: completar Coral (M140) [S]
+- [x] Definir el enclave visitable: muelle, tienda glasswork, 1 NPC [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 03-Diseno.md seccion 2.2 — muelle, 1 NPC (Bram, ver 2.3.1), tienda unica de arrecife glasswork (stock propio abajo) y vista al oceanico como anzuelo. Es DEFINICION: la construccion del enclave queda para Alpha (ver item 2).
+- [x] Asegurar que Coral NO se construye en fase: queda "inacabado a propósito" [S] — COMPLETADO 2026-10-14 (step-5-kilocode): regla explicita en 03-Diseno.md 2.2 — 'visitable no construido', 'se deja inacabado a proposito con hit explicito para Alpha (M140)'. Hit H11 agregado a la tabla de hits el 2026-10-14.
+- [x] Documentar el anzuelo de curiosidad al océano (M152/M153) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): documentado en 03-Diseno.md 2.2 — 'vista al oceanico como anzuelo de curiosidad (M152/M153)'. Modulos 152-Principios-Innegociables y 153-Objetivo-Final existen en disco.
+- [x] Definir el NPC enano de Coral con 10+ líneas de diálogo (M21) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): Bram, enano vidriero de arrecife — agregado al elenco (03-Diseno.md 2.3) con rol, rutina (muelle->taller->mirador) y gancho, y 11 lineas de dialogo base escritas en la seccion 2.3.1. Variantes por estacion/dia (M29) e IA (M64) quedan como trabajo de sus modulos duenos.
+- [x] Definir la tienda única de Coral (arrecife glasswork) con stock propio (M39) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): stock propio definido en 03-Diseno.md 2.3.1 — cristal_arrecife, lampara_coral, prisma_mareal, cebo_brillante, botella_mensaje, pendiente_marea. Regla: ninguno se consigue en Aurora; el enclave es la unica fuente (M39).
+- [x] Registrar hit explícito para Alpha: completar Coral (M140) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): hit H11 'Coral completado: enclave terminado e integrado al flujo de Alpha' agregado a la tabla de hits de 03-Diseno.md; la nota de cierre paso de H1-H10 a H1-H11.
 
 ## 4. Primeros NPC (M19/M64)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 22 · Pendientes: 118 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 28 · Pendientes: 112 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
