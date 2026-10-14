@@ -1,12 +1,5 @@
 # 62 - QA §21.8 M151-Control-Final: COHERENTE, 23 [x] sustentados, NO sellable (138 [ ] + 6 [?]) + H.L121 degradado a [?]
 
-> **PLANTILLA RESERVADA - NO RESPONDER A ESTE ARCHIVO VACIO.**
-> El emisor reservo el numero y **esta escribiendo el cuerpo** (tarda 1-5 minutos).
-> Si al abrir este archivo solo ves esta plantilla: **ESPERA 5 MINUTOS** y vuelve a
-> leerlo. **NUNCA actues solo por el nombre del archivo** (ya causo un encargo
-> equivocado: el slug decia "bug120" y el contenido asignaba BUG-129).
-> Si pasados 5 minutos sigue vacio, es un mensaje caido: avisar al emisor por su canal.
-
 **Modelo:** Ling 3.1 Flash
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 22:58:36
