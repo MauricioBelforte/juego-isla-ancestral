@@ -108,7 +108,7 @@
 
 ## H. Pilares narrativos (9)
 
-- [ ] Definir N1 "La tecnología es conexión, no poder" (Resonancia) [S]
+- [x] Definir N1 "La tecnología es conexión, no poder" (Resonancia) [S] - **Evidencia: 03-Diseno.md sec.6 (tabla de Pilares Narrativos: fila N1)**
 - [x] Definir N2 "Todos los mundos están conectados" (red bajo los océanos) [S]
 - [x] Definir N3 "No eres un héroe" (habitante, no destino) [S]
 - [x] Verificar coherencia N1 con la mecánica voxel (modificar = cuidar) [S]
@@ -202,32 +202,32 @@
 
 ## O. Documentación y calidad del módulo (12)
 
-- [ ] Crear `01-Requerimientos.md` del componente [S]
-- [ ] Crear `02-Analisis.md` del componente [S]
-- [ ] Crear `03-Diseno.md` del componente [S]
-- [ ] Crear `04-Codigo.md` del componente [S]
-- [ ] Crear `05-Checklist.md` con 100+ ítems [M]
+- [x] Crear `01-Requerimientos.md` del componente [S] - **Evidencia: 01-Requerimientos.md existe (5082 B, 6 secciones)**
+- [x] Crear `02-Analisis.md` del componente [S] - **Evidencia: 02-Analisis.md existe (6005 B, 6 secciones)**
+- [x] Crear `03-Diseno.md` del componente [S] - **Evidencia: 03-Diseno.md existe (7950 B, 12 secciones)**
+- [x] Crear `04-Codigo.md` del componente [S] - **Evidencia: 04-Codigo.md existe (4216 B, 5 secciones)**
+- [x] Crear `05-Checklist.md` con 100+ ítems [M] - **Evidencia: 05-Checklist.md existe (172 ítems, >= 100)**
 - [x] Documentar por qué no aplican 06/07 (módulo documental) [S] → **agnes-3-flash (2026-10-12): `hoja-decisiones-fundador.md` — M02 es módulo de visión/documental, no aplica 06/07.**
 - [?] Copiar plan-inicial → plan-actual (espejo vigente) [S] - **INVALIDO POR DISEÑO (director 2026-10-12, barrido Step 5 msg 246): plan-inicial NO MODIFICAR y plan-actual NO debe ser identico (AGENTS.md §3). Mismo criterio que M40 L261.**
-- [ ] Actualizar `DOCUMENTACION/README.md` con el componente 02 [S]
-- [ ] Actualizar \CHECKLIST-GLOBAL.md\ con el estado del módulo M02 [S]
-- [ ] Generar log en `Logs/` con el formato estándar (NN) [S]
-- [ ] Firmar los documentos con modelo y plataforma [S]
-- [ ] Registrar las Notas del Agente en `04-Codigo.md` [S]
+- [x] Actualizar `DOCUMENTACION/README.md` con el componente 02 [S] - **Evidencia: DOCUMENTACION/README.md L23 y L123 citan 02-Vision-Y-Concepto**
+- [x] Actualizar \CHECKLIST-GLOBAL.md\ con el estado del módulo M02 [S] - **Evidencia: CHECKLIST-GLOBAL.md fila 02 (151/172) existe**
+- [x] Generar log en `Logs/` con el formato estándar (NN) [S] - **Evidencia: Logs/05-CREACION_COMPONENTE_02-VISION_2026-08-15_23-45-00.md + Log 1825**
+- [x] Firmar los documentos con modelo y plataforma [S] - **Evidencia: 01/02/03/04 llevan **Modelo:** Deepseek V4 Flash + **Plataforma:** OpenCode**
+- [x] Registrar las Notas del Agente en `04-Codigo.md` [S] - **Evidencia: 04-Codigo.md sec.5 "Notas del Agente" (L50)**
 
 ## P. Edge cases y consistencia global (9)
 
-- [ ] Verificar que ninguna definición contradice el GDD [S]
-- [ ] Verificar que ninguna definición contradice la biblia narrativa [S]
-- [ ] Verificar que ninguna definición contradice el plan de producción [S]
-- [ ] Verificar nombres consistentes entre repo, carpetas y documentos (Isla Ancestral) [S]
-- [ ] Verificar que los 26 puntos del plan maestro tienen estado explícito [S]
-- [ ] Verificar que los módulos dependientes identificados en Requerimientos son correctos [S]
-- [ ] Verificar que el checklist no tiene ítems duplicados [S]
-- [ ] Verificar que los ítems marcan estado honesto (sin [ ] falsos) [S]
-- [ ] Confirmar coherencia del alcance v1.0 con CHECKLIST-GLOBAL (153 módulos) [S]
+- [x] Verificar que ninguna definición contradice el GDD [S] — **Evidencia: spot-check 2026-10-13 de las definiciones nucleares de M02 (nombre "Isla Ancestral", género Cozy Voxel/Life Simulation, filosofía "ausencia total de combate/muerte/penalizaciones") contra `00-PLAN-INICIAL/IDEA-BASE-DEL-JUEGO.md` (GDD) §1: coinciden; 0 contradicciones detectadas.**
+- [x] Verificar que ninguna definición contradice la biblia narrativa [S] — **Evidencia: `00-PLAN-INICIAL/HISTORIA-DEL-JUEGO.md` (Biblia) §Género: género "Cozy Voxel / Life Simulation / Puzzle Adventure / Exploración" y tono "misterioso, cálido, contemplativo, aventurero y esperanzador" coinciden con 03-Diseno.md §1; 0 contradicciones.**
+- [x] Verificar que ninguna definición contradice el plan de producción [S] — **Evidencia: `00-PLAN-INICIAL/Plan-de-produccion.md` §1: alcance v1.0 (Aurora + 1-2 islas + 2-3 sellos + cierre parcial) idéntico al definido en 03-Diseno.md §11; 0 contradicciones.**
+- [x] Verificar nombres consistentes entre repo, carpetas y documentos (Isla Ancestral) [S] - **Evidencia: grep "Isla Ancestral" en los 4 docs del modulo (medido)**
+- [x] Verificar que los 26 puntos del plan maestro tienen estado explícito [S] - **Evidencia: 02-Analisis.md sec.1: tabla de 26 filas con Estado (medido)**
+- [ ] Verificar que los módulos dependientes identificados en Requerimientos son correctos [S] — **Pendiente: los nombres citados en 01-Requerimientos.md ("M02 Documentación del Proyecto", "M05 Estilo de Arte Visual", "M14 UI/UX") no mapean 1:1 a carpetas del repo; requiere reconciliar la numeración (drift 01/02) antes de verificar. Medido 2026-10-13.**
+- [x] Verificar que el checklist no tiene ítems duplicados [S] - **Evidencia: medido: 0 items duplicados (sort|uniq -d vacio)**
+- [ ] Verificar que los ítems marcan estado honesto (sin [ ] falsos) [S] — **Pendiente: auditoría de tercero (verificador ≠ autor, §21.8); no auto-verificable por el autor del módulo.**
+- [ ] Confirmar coherencia del alcance v1.0 con CHECKLIST-GLOBAL (153 módulos) [S] — **Pendiente: la premisa "153 módulos" está stale; CHECKLIST-GLOBAL tiene 168 filas de módulo (medido 2026-10-13). El director debe fijar el número correcto antes de confirmar.**
 
 ---
 
-**Totales:** 172 items · Completados: 151 · Pendientes: 20 · No resueltos: 1. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: conteo real por regex = 151 [x] / 1 [?] / 20 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 172 items · Completados: 168 · Pendientes: 3 · No resueltos: 1. (DeepSeek-V4.1-Flash, Log 1825, 2026-10-13: lotes b1+b2+b3 = 17 flips con evidencia real medida; quedan 3 [ ] de verificacion cruzada — L225 modulos dependientes, L227 honestidad de estados, L228 premisa stale "153 modulos" (CHECKLIST-GLOBAL tiene 168 filas). Conteo por regex. Correccion de dato previa autorizada por director msg 257, atribuida a step-5-kilocode.)
 **Nota:** los 10 pendientes tienen dueño explícito en otros módulos (M02 verificación legal del nombre, QA/Playtesting, Publicación) y quedan registrados por trazabilidad; no son deudas de este módulo.
