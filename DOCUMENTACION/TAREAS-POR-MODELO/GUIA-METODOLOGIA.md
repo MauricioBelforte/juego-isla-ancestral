@@ -2,7 +2,7 @@
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-09-11
 **Actualización:** 2026-10-10 por atria-dawn-s3 (Kilo Code) — tabla de modelos registrados ampliada
-con ling-3.1-flash, StepFun-Step-5-Preview y Claude-Haiku-5.5 (estaba desactualizada en kimi-k3).
+con ling-3.1-flash, step-5-kilocode y Claude-Haiku-5.5 (estaba desactualizada en kimi-k3).
 
 # GUÍA DE METODOLOGÍA — TAREAS POR MODELO
 
@@ -90,5 +90,5 @@ DOCUMENTACION/TAREAS-POR-MODELO/
 | nex-n2.5-pro (Nex-AGI) | Kilo Code | 2026-09-18 | 1 (M11) | 86 tareas T-XXX (76 `[?]` a verificar + suite headless + gate CI) — **BACKLOG v1 curado por encaje** (primera sesión, alta §5.N/§21 de la guía 10; perfil = agentic coding + verificación contra spec; DoD = suite headless verde, valida sus propios benchmarks vendor-reported) |
 | kimi-k3 (Moonshot AI) | Kilo Code | 2026-09-19 | 3 (M106, M122, M103) | **158 tareas** (M106 Seguridad: 66 · M122 Crash-Reporting: 80 · M103 Logging: 12 `[?]`) — **BACKLOG v1 curado por encaje** (primera sesión, alta §5.P de la guía 10; perfil = coding agentic #1 del catálogo TB 2.1 88.3 + CyberGym 86.5 → seguridad/crash-reporting es su zona natural; contexto 1M; el costo NO es criterio de asignación — acceso gratuito por tiempo limitado) |
 | ling-3.1-flash (inclusionAI / Ant Group) | Kilo Code | 2026-10-06 | por encargo | **auditoría anti-inflación READ-ONLY** (M150 ×2, M153, M112-auditoría, M123 QA, M101 QA en curso) — alta §21.15 de la guía 10; reactivada 2026-10-10 tras fallo técnico de compaction; contexto 256K, **solo texto** (sin visión); trial gratuito hasta 13/10/2026 |
-| StepFun-Step-5-Preview (StepFun AI) | Kilo Code | 2026-10-10 | por encargo | **auditoría anti-inflación + QA §21.8 con sondas rojas** — alta §21.17 de la guía 10; **18 entregas consecutivas sin error**, 0 errores en 89 ítems triados, M24 sellado por su QA; **el ejecutor más fiable de la flota** |
+| step-5-kilocode (StepFun AI) | Kilo Code | 2026-10-10 | por encargo | **auditoría anti-inflación + QA §21.8 con sondas rojas** — alta §21.17 de la guía 10; **18 entregas consecutivas sin error**, 0 errores en 89 ítems triados, M24 sellado por su QA; **el ejecutor más fiable de la flota** |
 | Claude-Haiku-5.5 (Anthropic) | Kilo Code | 2026-10-10 | **SIN ASIGNAR** | 0 tareas — **backlog preparado, a la espera del encargo de partida**; Intelligence Index 43.4 (#19 global, el más alto de la flota), contexto 1M, multimodal (texto+imagen), `claude-haiku-5.5:free` **por tiempo limitado**; propuesta s3: ramp-up con QA §21.8 (ver `atria-dawn-s3/SUGERENCIAS-DELEGACION/claude-haiku-5.5.md`) |

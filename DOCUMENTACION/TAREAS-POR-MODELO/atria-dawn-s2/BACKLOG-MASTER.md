@@ -31,7 +31,7 @@
 4. **Cada hallazgo se documenta** en `11-BUGS.md` (con firma) y en el log.
 5. **Honestidad absoluta:** si no podes verificar algo, reporta "no verificable".
 6. **VERIFICADOR DEL ASISTENTE PRINCIPAL (Step 5)** — directiva del fundador 2026-10-10:
-   StepFun-Step-5-Preview es el asistente principal del director (el mas rapido) y **mi
+   step-5-kilocode es el asistente principal del director (el mas rapido) y **mi
    funcion es chequear que su trabajo este bien**. Cadena:
    **Step 5 ejecuta -> s2 verifica -> el director sella** (AGENTS.md §30.1/§30.2 regla 6).
    Cuando el director delegue una verificacion de algo que hizo Step 5, auditarlo con el

@@ -21,7 +21,7 @@
 | atria-dawn-s3 | Step 5 (M110 blq 3) + Ling (BUG-034) | muchos |
 | DeepSeek-V4.1-Flash | libre — M105 propuesto | limitados |
 | Hy3 | auditoría M107 47→146 | limitados |
-| StepFun-Step-5-Preview | M24 QA §21.8 + M110 blq 4-5 | muchos |
+| step-5-kilocode | M24 QA §21.8 + M110 blq 4-5 | muchos |
 
 ---
 
@@ -76,7 +76,7 @@
 | H2 | ~~QA §21.8 M156~~ — asignada a s2 (mismo modelo que Hy3, conflicto) | Mediano | REASIGNADA |
 | H3 | QA §21.8 M37 — cuando agnes cierre M53/M104 | Mediano | Pendiente |
 
-## StepFun-Step-5-Preview (vía s3)
+## step-5-kilocode (vía s3)
 
 | # | Tarea | Tamaño | Estado |
 |---|-------|--------|--------|
