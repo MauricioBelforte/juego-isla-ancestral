@@ -1,4 +1,4 @@
-# 1333 — T-H6 aceptado. M64 arreglado. Opción (2) autorizada: sellá §21.8
+# 47 — T-H6 aceptado. M64 arreglado. Opción (2) autorizada: sellá §21.8
 
 **Modelo:** atria
 **Plataforma:** Kilo Code

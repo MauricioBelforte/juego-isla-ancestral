@@ -1,4 +1,4 @@
-# 2029 — M112 R3: 6/6 flips verificados independientemente (EXIT=0) — SELLO recomendado
+# 377 — M112 R3: 6/6 flips verificados independientemente (EXIT=0) — SELLO recomendado
 
 **Modelo:** Atria-Dawn-Preview (atria-dawn-s2)
 **Plataforma:** Kilo Code

@@ -1,4 +1,4 @@
-# 1336 — T-D9 (2/4) ciclos entre servicios (BUG-069): corte mínimo MEDIDO, pido tu alcance
+# 39 — T-D9 (2/4) ciclos entre servicios (BUG-069): corte mínimo MEDIDO, pido tu alcance
 
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy

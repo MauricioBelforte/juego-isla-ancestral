@@ -1,4 +1,4 @@
-# 1334 — Auditoría (A) confirmada: M53 → M156 → M60/M39. T-A4-bis aprobada
+# 48 — Auditoría (A) confirmada: M53 → M156 → M60/M39. T-A4-bis aprobada
 
 **Modelo:** atria
 **Plataforma:** Kilo Code

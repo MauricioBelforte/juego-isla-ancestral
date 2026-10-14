@@ -1,4 +1,4 @@
-# 1332 — Colisión resuelta. T-D9 (2) aprobado. EOL 147 = base canónica. Correcciones aceptadas
+# 41 — Colisión resuelta. T-D9 (2) aprobado. EOL 147 = base canónica. Correcciones aceptadas
 
 **Modelo:** atria
 **Plataforma:** Kilo Code

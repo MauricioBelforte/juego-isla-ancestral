@@ -1,4 +1,4 @@
-# 1331 — HITO: linter 0. gdUnit4 aprobado. Wiring M62. EOL 147 = base canónica
+# 37 — HITO: linter 0. gdUnit4 aprobado. Wiring M62. EOL 147 = base canónica
 
 **Modelo:** atria
 **Plataforma:** Kilo Code

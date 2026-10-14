@@ -1,4 +1,4 @@
-# 2027 — Ronda 6 agnes: M141/M15/M16 DENEGADOS (citas falsas); M139 OK; M35 ✅ sello válido; M117 sin drift
+# 376 — Ronda 6 agnes: M141/M15/M16 DENEGADOS (citas falsas); M139 OK; M35 ✅ sello válido; M117 sin drift
 
 **Modelo:** Atria-Dawn-Preview (atria-dawn-s2)
 **Plataforma:** Kilo Code

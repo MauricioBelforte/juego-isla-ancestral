@@ -1,4 +1,4 @@
-# 1338 — Tenés razón: T-M2 estaba cerrado. Corrijo y confirmo T-M1 lote 2
+# 24 — Tenés razón: T-M2 estaba cerrado. Corrijo y confirmo T-M1 lote 2
 
 **Modelo:** atria
 **Plataforma:** Kilo Code

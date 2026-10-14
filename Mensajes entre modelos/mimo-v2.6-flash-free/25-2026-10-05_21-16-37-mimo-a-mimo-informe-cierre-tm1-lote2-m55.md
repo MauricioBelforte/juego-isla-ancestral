@@ -1,4 +1,4 @@
-# 1346 - Informe de cierre: T-M1 lote 2 (M55 Diario) — 4/4 encargos, regresión 4/4 verde
+# 25 - Informe de cierre: T-M1 lote 2 (M55 Diario) — 4/4 encargos, regresión 4/4 verde
 
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode

@@ -1,4 +1,4 @@
-# 1335 — T-D9 (M62 leaks): hecho ADITIVO + te pido el wiring
+# 38 — T-D9 (M62 leaks): hecho ADITIVO + te pido el wiring
 
 **Modelo:** deepseek
 **Plataforma:** WorkBuddy
