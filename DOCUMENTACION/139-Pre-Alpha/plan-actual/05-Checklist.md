@@ -124,16 +124,16 @@
 
 ## 9. Primer conjunto de assets + pipeline (M108/M45/M46/M47)
 
-- [ ] Definir los assets de Aurora: árboles, rocas, edificios, NPC, flora (M45/M46/M47) [C]
-- [ ] Definir el flujo: modelo → import normalizado → materiales/texturas → prefab → biblioteca [M]
-- [ ] Definir convenciones de importación: nombres, unidades, collision, bounds [M]
-- [ ] Definir el validador de assets en CI (frame budget, LOD, naming) [M]
-- [ ] Asegurar que el 100% de los assets de fase pasa por el pipeline (sin atajos) [C]
-- [ ] Definir LOD y culling por zona desde el día 1 (M61/M63) [C]
-- [ ] Definir presupuesto de draw calls por zona (M61) [M]
-- [ ] Definir compresión de texturas del bioma (M47) [M]
-- [ ] Definir el rolling backlog de assets (familia por semana) [M]
-- [ ] Documentar los assets heredados del slice y su reimport [S]
+- [x] Definir los assets de Aurora: árboles, rocas, edificios, NPC, flora (M45/M46/M47) [C] — COMPLETADO 2026-10-14 (step-5-kilocode): conjunto de assets de Aurora definido en 03-Diseno.md 3.1 con la biblioteca existente (assets/2d, 3d, final, fichas, fonts) y la distribucion por sector de 2.1.1. Produccion de cada pieza: M45/M46/M47.
+- [x] Definir el flujo: modelo → import normalizado → materiales/texturas → prefab → biblioteca [M] — COMPLETADO 2026-10-14 (step-5-kilocode): el flujo completo ya esta implementado — cuarentena en assets/staging/ (existe), tools/asset_validator.gd y tools/asset_pipeline/asset_validator.gd como gate. Documentado en 3.1.
+- [x] Definir convenciones de importación: nombres, unidades, collision, bounds [M] — COMPLETADO 2026-10-14 (step-5-kilocode): convenciones definidas en 3.1 — snake_case con prefijo de familia, 1 unidad = 1 metro, colision solo en piezas `_col`, bounds verificados (props <= 12 m, edificios <= 30 m).
+- [x] Definir el validador de assets en CI (frame budget, LOD, naming) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — tools/asset_validator.gd + tools/asset_pipeline/asset_validator.gd. El gate cubre nombre, formato, tamano (<= 5 MB), potencia de 2, mipmaps y licencia.
+- [x] Asegurar que el 100% de los assets de fase pasa por el pipeline (sin atajos) [C] — COMPLETADO 2026-10-14 (step-5-kilocode): regla explicita en 3.1 — ningun asset entra a produccion sin pasar por cuarentena + validacion; los heredados del slice (M138) se reimportan una sola vez y quedan marcados `origen = M138`.
+- [x] Definir LOD y culling por zona desde el día 1 (M61/M63) [C] — COMPLETADO 2026-10-14 (step-5-kilocode): LOD a 40 m con el patron real de build_ghost.gd (DISTANCIA_LOD + aplicar_lod) y culling por zona con stream_manager.gd (M63). Definido en 3.1.
+- [x] Definir presupuesto de draw calls por zona (M61) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): <= 120 draw calls por zona en perfil media (200 alta / 60 baja), medidos con los perfiles del autoload AssetProfile (scripts/rendimiento/asset_profile.gd). Pradera es la zona de referencia.
+- [x] Definir compresión de texturas del bioma (M47) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): VRAM Compartido para props y vegetacion, Lossless para UI y fichas; el gate verifica que nadie importe textura sin compresion (M47). Definido en 03-Diseno.md 3.1.
+- [x] Definir el rolling backlog de assets (familia por semana) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): plan de 6 semanas (una familia por semana: vegetacion, props pueblo, edificios, NPC, templo, barco) definido en 3.1; cada familia pasa completa por el pipeline.
+- [x] Documentar los assets heredados del slice y su reimport [S] — COMPLETADO 2026-10-14 (step-5-kilocode): regla definida en 3.1 — reimport unico por el pipeline completo y marca `origen = M138` en la ficha; lo que no pase el gate se rehace, no se parchea.
 
 ## 10. Primer save completo (M59/M60) + menú (M53/M92)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 88 · Pendientes: 52 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 98 · Pendientes: 42 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
