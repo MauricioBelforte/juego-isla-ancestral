@@ -80,18 +80,18 @@
 
 ## 6. Primer sistema de construcción (M17/M16/M18)
 
-- [ ] Definir el catálogo de 30+ piezas (vallas, caminos, mobiliario, deco) [M]
-- [ ] Definir 3 estructuras: casa de campo, invernadero pequeño, gazebo [M]
-- [ ] Definir la colocación por grid ligero (sin física) [M]
-- [ ] Definir validación contra terreno voxel y colisiones (M08/M09) [M]
-- [ ] Definir preview translúcido con feedback de validez (M44) [S]
-- [ ] Definir desbloqueo por amistad/misiones con Obé (M20/M23) [M]
-- [ ] Definir persistencia de piezas en save v3 [M]
-- [ ] Definir el costo de cada pieza en AO y materiales (M93) [M]
-- [ ] Definir cómo las piezas interactúan con el clima (invernadero) [S]
-- [ ] Definir límite de piezas por zona (presupuesto M61) [M]
-- [ ] Definir categorías visuales de piezas coherentes con la estética cozy (M46) [S]
-- [ ] Definir piezas que interactúan con NPC (bancos sentables, vallas) [M]
+- [x] Definir el catálogo de 30+ piezas (vallas, caminos, mobiliario, deco) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): catalogo de 30 piezas definido en 03-Diseno.md 2.6.1 (6 vallas, 6 caminos, 10 mobiliario, 8 deco). 6 ya existen como .tres en data/houses/; las 24 restantes son definicion para M17/M46.
+- [x] Definir 3 estructuras: casa de campo, invernadero pequeño, gazebo [M] — COMPLETADO 2026-10-14 (step-5-kilocode): casa de campo (4 etapas), invernadero pequeno (3) y gazebo (2) definidas en 2.6.1; house_manager.gd ya tiene avanzar_etapa()/obtener_etapa().
+- [x] Definir la colocación por grid ligero (sin física) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): grid de 1 m sin fisica definido en 2.6.1, encajando con el validador de nucleo puro (construccion_validator.gd: 'sin dependencias de nodos, VoxelTools ni autoloads').
+- [x] Definir validación contra terreno voxel y colisiones (M08/M09) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — construccion_validator.gd valida superficie/pared/agua y zonas_permisos.gd protege ruinas y templos (M25). Definicion completada en 2.6.1.
+- [x] Definir preview translúcido con feedback de validez (M44) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — build_preview.gd y build_ghost.gd (feedback visual de validez). Definicion de la regla en 2.6.1.
+- [x] Definir desbloqueo por amistad/misiones con Obé (M20/M23) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — data/economia/friendship.json (nivel 2 recetas_basicas, nivel 4 recetas_avanzadas + trueque). Obe (M23) como gancho de mision, definido en 2.6.1.
+- [x] Definir persistencia de piezas en save v3 [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — buildings_save_provider.gd implementa ISaveProvider (M59) y test_m18_m60_integration.gd tiene 10 checks. Nota honesta: el provider existe pero la fuente M17 todavia no esta implementada.
+- [x] Definir el costo de cada pieza en AO y materiales (M93) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): tabla de costos por categoria en 2.6.1 (vallas 3-8 AO + 1 material, caminos 1-2 AO, mobiliario 15-120 AO + 1-3 materiales, deco 5-40 AO); recetas en crafting.json (M16).
+- [x] Definir cómo las piezas interactúan con el clima (invernadero) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): regla definida en 2.6.1 — solo el invernadero interactua con el clima (lluvia x2 crecimiento, sol directo x0.5); el resto es neutro.
+- [x] Definir límite de piezas por zona (presupuesto M61) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): limites definidos en 2.6.1 (40 parcela / 25 plaza / 0 ruinas y templos) sobre el respaldo existente — construccion_validator.gd ya rechaza con Motivo.LIMITE_DE_ZONA y zonas_permisos.gd.
+- [x] Definir categorías visuales de piezas coherentes con la estética cozy (M46) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): 4 materiales canonicos (madera, piedra, tela, planta) con paleta Maldivas definidos en 2.6.1; nada de metal salvo el herrero.
+- [x] Definir piezas que interactúan con NPC (bancos sentables, vallas) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): banco_plaza sentable definido en 2.6.1 (la accion SENTARSE ya existe en item_data.gd) y usable como waypoint de descanso por NPC de rutina libre (Pax).
 
 ## 7. Primer templo — Templo de Brisa (M26/M24/M13)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 53 · Pendientes: 87 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 65 · Pendientes: 75 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
