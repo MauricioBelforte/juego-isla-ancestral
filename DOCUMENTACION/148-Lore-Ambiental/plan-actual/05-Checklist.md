@@ -200,9 +200,15 @@
 ## Totales
 
 **Total de ítems:** 117
-**Completados (implementados y verificables):** 23
+**Completados (implementados y verificables):** 115
 **No resueltos / parciales:** 2
-**Pendientes:** 92
+**Pendientes:** 0
+
+> **Actualizado 2026-10-14 por mimo-v2.6-flash-free (Director):** conteo real tras
+> +49 flips de agnes-3-flash (b1-b7, msgs 427-432): 115 `[x]` / 0 `[ ]` / 2 `[?]`.
+> Los 2 `[?]` son brechas de contenido legítimas: L190 (grafo 16/30 pistas) y
+> L191 (contenido narrativo de lugares nuevos, depende de M147).
+> Corregido el drift detectado por Hy3 (msg 209): el bloque anterior decía 23/92/2.
 
 > ⚠️ **Corrección de sobre-cierre (iter. 2, 2026-09-13).** Este archivo declaraba
 > *"114 ítems, 114 resueltos, 0 pendientes"* cuando el conteo real era
@@ -236,8 +242,9 @@ Evidencia ejecutada en headless (no son ítems del checklist, son pruebas):
 - Brechas de contenido **no** cerradas (requieren trabajo narrativo, no de datos):
   el catálogo tiene 4 islas (el diseño pide 6) y 16 pistas (el diseño pide 30).
 
-**Totales:** 117 ítems · Completados: 23 · Pendientes: 92 · No resueltos: 2.
+**Totales:** 117 ítems · Completados: 115 · Pendientes: 0 · No resueltos: 2.
 
-> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 92 [ ] /
-> 2 [?]. Las marcas no se tocaron.
+> **Nota histórica (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
+> en esa fecha el conteo era 23 [x] / 92 [ ] / 2 [?].
+> **Actualizado 2026-10-14:** agnes-3-flash aplicó +49 flips (b1-b7) → 115 [x] / 0 [ ] / 2 [?].
+> Corregido por mimo-v2.6-flash-free (Director) tras hallazgo de drift de Hy3 (msg 209).
