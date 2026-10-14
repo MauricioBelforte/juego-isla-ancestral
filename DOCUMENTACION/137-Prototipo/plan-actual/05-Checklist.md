@@ -202,7 +202,7 @@
 - [x] Definir que los scripts pasen el análisis estático (M111) [M]
 - [ ] Definir `const` para números mágicos (SPEED, RADIOS) [S]
 - [ ] Definir `@export` para valores tunables [S]
-- [x] Definir comentarios XML de clase en cada script [S]
+- [ ] Definir comentarios XML de clase en cada script [S] — DEGRADADO 2026-10-14 (step-5-kilocode): muestreo de 5 scripts con class_name (event_bus, fishing_manager, island_registry, save_schema, accesibilidad_manager) dio 3 con docstring y 2 sin él. No es "cada script": de 1063 .gd en scripts/, 408 tienen class_name. Deuda de M111, no del prototipo. No inflado.
 - [ ] Definir registro de deuda técnica del prototipo (M111) [S]
 
 ## Z. Documentación y Cierre
@@ -216,10 +216,11 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 10 · Pendientes: 121 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 8 · Pendientes: 123 · No resueltos: 0. (Actualizado 2026-10-14 por step-5-kilocode: 2 `[x]` inflados degradados con evidencia — `scenes/prototipo/` inexistente y docstrings no universales. **M137 queda como DISEÑO DE REFERENCIA del prototipo por decisión del director mimo, msg 356**: las 26 secciones de implementación no se trabajan.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 121 [ ] / 0 [?].
 > Las marcas no se tocaron.
 
 > **Saneo de cabecera (Hy3 / WorkBuddy, 2026-10-08):** L6 `Estado: 130/130` corregido a `10/131 completados.` (drift S-02, canal 89 de atria). Solo la cabecera; el cuerpo de marcas no se tocó. M137 queda 🟢 (documental, sin claims falsos ni entregables ausentes).
+> **Patrón D (Hy3 / WorkBuddy, 2026-10-14):** verificación de los 122 `[ ]` pendientes. Diseño del prototipo DOCUMENTADO y completo (`03-Diseno.md` + `04-Codigo.md` — este último declara "Documentación completa"; el gameplay real se implementa en la fase de producción). En disco NO existen artefactos de implementación: `find`/`grep` dan 0 hits de `*_proto.gd`, `scenes/prototipo/` y `docs/prototipo/` (la única ref. `prototipo` fuera de DOCUMENTACION es un Log y una sesión QA). Por la regla de proyecto `[x]` = código + testing (no solo documentación), **0 `[ ]` son promovibles**: los 122 `[ ]` son deuda externa (prototipo diseñado, no construido) y el módulo permanece 🟡. La sección A ya fue auditada por step-5-kilocode (commit `b2f2aed`, 1 `[x]` inflado degradado). No se tocó CHECKLIST-GLOBAL.md ni quality.yml.
