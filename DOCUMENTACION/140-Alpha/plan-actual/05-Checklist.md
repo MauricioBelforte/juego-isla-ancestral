@@ -114,12 +114,12 @@
 ## 8. Corrección de arquitectura (M07/M111)
 
 - [x] Definir inventario de TODO/FIXME por script CI [M]
-- [ ] Definir sprint de deuda de 2 semanas [M]
-- [ ] Definir objetivo: 0 TODO/FIXME al cierre [S]
+- [x] Definir sprint de deuda de 2 semanas [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.10.1 — 2 semanas antes del GONOGO-BETA, solo deuda. Coincide con el feature freeze de balance de 2.4.1 (uno corre codigo, el otro congela datos).
+- [x] Definir objetivo: 0 TODO/FIXME al cierre [S] — COMPLETADO 2026-10-14 (step-5-kilocode): objetivo definido en 2.10.1 con punto de partida REAL verificado — hay 25 TODO/FIXME en 21 archivos de scripts/. El objetivo es 0 al cierre de Alpha; los que queden pasan a Beta documentados. No inflado: el conteo real es 25, no 0.
 - [x] Definir revisiones de diseño por sistema integrado [M]
 - [x] Definir la verificación de interfaz entre managers (M07) [M]
-- [ ] Definir eliminación de código muerto de fases previas [S]
-- [ ] Definir refactor de hot spots de rendimiento detectados [M]
+- [x] Definir eliminación de código muerto de fases previas [S] — COMPLETADO 2026-10-14 (step-5-kilocode): patron existente verificado — 3 carpetas Obsoletos (clock, fauna, localizacion). Politica definida en 2.10.1: nada se borra en caliente, se mueve a Obsoletos/ con fecha y se borra al cerrar la fase.
+- [x] Definir refactor de hot spots de rendimiento detectados [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.10.1 — sale del dashboard de BudgetProfile (2.8.1): la categoria que mas presupuesto consuma se refactoriza primero; si la mejora no supera el 15%, se revierte.
 - [x] Definir metrica de complejidad ciclomática por sistema (M111) [S]
 
 ## 9. Reducción de deuda técnica (M135)
@@ -175,7 +175,7 @@
 **Total de ítems:** 124
 **Ítems resueltos por documentación:** 124 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 124 ítems · Completados: 73 · Pendientes: 51 · No resueltos: 0.
+**Totales:** 124 ítems · Completados: 77 · Pendientes: 47 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 14 [x] / 110 [ ] / 0 [?].
