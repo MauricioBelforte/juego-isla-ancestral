@@ -165,15 +165,15 @@
 ## 12. Métricas y rendimiento (M61/M62/M63/M104/M105)
 
 - [x] Definir metricas de fase: FPS/p99, memoria, tiempos de carga, uso por sistema [M]
-- [ ] Definir dashboards locales para playtest (M114) [M]
-- [ ] Aplicar frame budget por categoría a cada zona nueva [C]
-- [ ] Definir presupuesto de memoria 1.5 GB con streaming (M62) [M]
-- [ ] Definir el gate de zona: falla CI si no cumple presupuesto [M]
-- [ ] Definir telemetría de sesión local sin envío remoto (M104/M105) [M]
-- [ ] Definir playtest de fase: 2-4 h con 5+ testers (M114) [M]
-- [ ] Definir la encuesta de sesión (M114) [S]
-- [ ] Definir criterio ≥ 80% "quería seguir jugando" [S]
-- [ ] Definir medición de distancia de streaming y pops (M63) [M]
+- [x] Definir dashboards locales para playtest (M114) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): dashboard local (F3) definido en 03-Diseno.md 4.1 — FPS, p99 de frame, memoria, tiempos de carga y presupuesto por categoria. Lee BudgetProfile (existente) + AssetProfile; 100% local.
+- [x] Aplicar frame budget por categoría a cada zona nueva [C] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — scripts/performance/budget_profile.gd con CATEGORIAS_OFICIALES + test_budget_profile.gd. Regla de fase en 4.1: toda zona nueva declara su presupuesto; 100% de una categoria durante 60 frames marca la zona fuera_de_presupuesto.
+- [x] Definir presupuesto de memoria 1.5 GB con streaming (M62) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — DOCUMENTACION/62-Memoria/plan-actual/03-Diseno.md (RF2/presets M90) con total 1.500 / 2.000 / 2.500 MB. El preset base de fase es 1.500 MB. Regla ya presente en stream_manager.gd: en menu y pantallas modales no se consume presupuesto.
+- [x] Definir el gate de zona: falla CI si no cumple presupuesto [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 4.1 — test_budget_profile.gd + pipeline M108 actuan de gate; si una zona no declara presupuesto o se pasa del techo, la CI falla y no se mergea la zona.
+- [x] Definir telemetría de sesión local sin envío remoto (M104/M105) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — scripts/telemetry/telemetry_director.gd con opt-in (establecer_opt_in/_cargar_opt_in) y tests iter5/iter7; escribe en user://, sin envio remoto. Si el jugador no acepta, no se registra nada.
+- [x] Definir playtest de fase: 2-4 h con 5+ testers (M114) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — DOCUMENTACION/114-Playtest/ con protocolo profesional, plantilla PLAYTEST-ENCUESTA.md y nomenclatura estandarizada por tester.
+- [x] Definir la encuesta de sesión (M114) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): la plantilla PLAYTEST-ENCUESTA.md de M114 es la encuesta post-sesion; se aplica al terminar cada sesion. Definido en 4.1.
+- [x] Definir criterio ≥ 80% "quería seguir jugando" [S] — COMPLETADO 2026-10-14 (step-5-kilocode): umbral de exito de fase definido en 4.1 — se mide sobre las encuestas de los 5+ testers (promedio de la pregunta de continuidad).
+- [x] Definir medición de distancia de streaming y pops (M63) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — stream_manager.gd con LOD por region y distancias declaradas (chunk_lod0 1.0, chunk_lod1 3.0...). La metrica de pops se agrega al dashboard local, definida en 4.1.
 
 ## 13. Cierre de fase (GONOGO a Alpha M140)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 116 · Pendientes: 24 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 125 · Pendientes: 15 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
