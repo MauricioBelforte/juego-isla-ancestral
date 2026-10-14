@@ -15,7 +15,7 @@
 - Salida: LoreCatalogo (**60 piezas**, 4 islas, 14 tipos) + PiezaDeLore + LoreAuditor + TerrenoLoreService + LoreSaveProvider + LoreGate (CI) + test headless **85/0** OK
 - Archivos: `game/isla-ancestral/scripts/lore/` + `data/lore/`
 - Fecha cierre iter. 1: 2026-09-01 16:00 (Log 368) · iter. 2: 2026-09-13 (Log 881)
-- **Totales:** 117 ítems · Completados: 66 · Pendientes: 49 · No resueltos: 2. (Corregido agnes-3-flash 2026-10-12: +27 flips con `m148_spec.md`)
+- **Totales:** 117 ítems · Completados: 115 · Pendientes: 0 · No resueltos: 2. (Corregido agnes-3-flash 2026-10-14: +49 flips b1-b7 `m148_spec.md` §4-§20. M148 CERRADO.)
 
 ## Convención
 - `[x]` = completado (implementado y verificable). `[ ]` = pendiente. `[?]` = no resuelto / parcial.
@@ -54,19 +54,19 @@
 
 ## 4. Arquitectura cuenta historias (P3)
 
-- [ ] Definir estilo constructivo narrado por isla (cultura del constructor) [M]
-- [ ] Definir piezas de arquitectura inspeccionables (columnas, arcos, casas) [C]
-- [ ] Definir relación arquitectura ↔ biblia sin contradicciones [S]
-- [ ] Definir arquitectura que delata antigüedad (materiales por época) [M]
-- [ ] Definir arquitectura con pistas de acceso a templos (M26) [M]
+- [x] Definir estilo constructivo narrado por isla (cultura del constructor) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §4.1 — tabla 4 islas × cultura × estilo × pista.**
+- [x] Definir piezas de arquitectura inspeccionables (columnas, arcos, casas) [C] → **agnes-3-flash (2026-10-14): `m148_spec.md` §4.2 — 4 piezas con texto 60/40 + hint.**
+- [x] Definir relación arquitectura ↔ biblia sin contradicciones [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §4.3 — 4 reglas de coherencia.**
+- [x] Definir arquitectura que delata antigüedad (materiales por época) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §4.4 — tabla 6 épocas × material × aspecto.**
+- [x] Definir arquitectura con pistas de acceso a templos (M26) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §4.5 — 4 templos × pista × ubicación × descifrado.**
 
 ## 5. Vegetación cuenta historias (P5)
 
-- [ ] Definir vegetación narrativa (bosques/árboles ancestrales) [C]
-- [ ] Definir árboles/plantas inspeccionables con historia local [M]
-- [ ] Definir vegetación vinculada a eventos pasados (quemas, curaciones) [M]
-- [ ] Definir vegetación con cambio estacional que revela lore (M50) [S]
-- [ ] Definir sin contradicción con la flora de colección (M73) [S]
+- [x] Definir vegetación narrativa (bosques/árboles ancestrales) [C] → **agnes-3-flash (2026-10-14): `m148_spec.md` §5.1 — tabla 4 islas × vegetación × historia.**
+- [x] Definir árboles/plantas inspeccionables con historia local [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §5.2 — 4 piezas con texto 60/40.**
+- [x] Definir vegetación vinculada a eventos pasados (quemas, curaciones) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §5.3 — 3 eventos × vegetación × ubicación.**
+- [x] Definir vegetación con cambio estacional que revela lore (M50) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §5.4 — tabla 4 estaciones × cambio × lore.**
+- [x] Definir sin contradicción con la flora de colección (M73) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §5.5 — 4 reglas de coherencia.**
 
 ## 6. Daños estructurales cuentan historias (P6)
 
@@ -119,44 +119,44 @@
 
 ## 12. Peces revelan información (P12)
 
-- [ ] Definir lore en fichas de peces raros/descritos (M34/M73) [C]
-- [ ] Definir mínimo 6 peces con lore pivotal (mito de la isla) [M]
-- [ ] Definir pez-lore desbloqueado al capturarlo/completar ficha [M]
-- [ ] Definir grafo: pez → secreto de aguas profundas (M34) [M]
-- [ ] Definir pez con descripción de dieta/hábitat mezclada con mito [S]
+- [x] Definir lore en fichas de peces raros/descritos (M34/M73) [C] → **agnes-3-flash (2026-10-14): `m148_spec.md` §12.1 — regla ficha 60/40 + ejemplo.**
+- [x] Definir mínimo 6 peces con lore pivotal (mito de la isla) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §12.2 — tabla 6 peces × lore × mito.**
+- [x] Definir pez-lore desbloqueado al capturarlo/completar ficha [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §12.3 — progresión 1ª/2ª/todos.**
+- [x] Definir grafo: pez → secreto de aguas profundas (M34) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §12.4 — grafo 6 nodos → 4 templos.**
+- [x] Definir pez con descripción de dieta/hábitat mezclada con mito [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §12.5 — ejemplo ficha completa Pez-luna.**
 
 ## 13. Plantas revelan secretos (P13)
 
-- [ ] Definir lore en fichas de plantas de colección (M50/M73) [C]
-- [ ] Definir mínimo 6 plantas con secretos (cura, clima, ritual) [M]
-- [ ] Definir planta-lore desbloqueada al cosechar/ficha [M]
-- [ ] Definir grafo: planta → receta culinaria/curativa (M16) [M]
-- [ ] Definir planta con estacionalidad coherente (M33) [S]
+- [x] Definir lore en fichas de plantas de colección (M50/M73) [C] → **agnes-3-flash (2026-10-14): `m148_spec.md` §13.1 — regla ficha 60/40 + ejemplo.**
+- [x] Definir mínimo 6 plantas con secretos (cura, clima, ritual) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §13.2 — tabla 6 plantas × secreto × tipo.**
+- [x] Definir planta-lore desbloqueada al cosechar/ficha [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §13.3 — progresión + receta escondida.**
+- [x] Definir grafo: planta → receta culinaria/curativa (M16) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §13.4 — grafo 6 plantas → 6 recetas.**
+- [x] Definir planta con estacionalidad coherente (M33) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §13.5 — tabla 6 plantas × estación × coherencia M33.**
 
 ## 14. Minerales activan ruinas (P14)
 
-- [ ] Definir minerales que activan ruinas/altaríos (M35/M24) [C]
-- [ ] Definir mínimo 3 minerales activadores (uno por isla/s). [M]
-- [ ] Definir grafo: mineral → ruina/altar que enciende [M]
-- [ ] Definir mineral con lore de extracción (dónde y cómo) [M]
-- [ ] Definir activación persistente (una vez encendida, queda) [S]
+- [x] Definir minerales que activan ruinas/altaríos (M35/M24) [C] → **agnes-3-flash (2026-10-14): `m148_spec.md` §14.1 — regla activación + persistencia.**
+- [x] Definir mínimo 3 minerales activadores (uno por isla/s) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §14.2 — tabla 4 minerales × isla × ruina × efecto.**
+- [x] Definir grafo: mineral → ruina/altar que enciende [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §14.3 — grafo 4 minerales → 4 ruinas + anti-farmeo.**
+- [x] Definir mineral con lore de extracción (dónde y cómo) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §14.4 — tabla 4 minerales × dónde × cómo × lore.**
+- [x] Definir activación persistente (una vez encendida, queda) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §14.5 — 4 reglas de persistencia + M66 anti-softlock.**
 
 ## 15. Terreno revela información (P15)
 
-- [ ] Definir cambios del terreno que destapan secretos (M50/M74) [C]
-- [ ] Definir 3 ubicaciones por temporada (12 anuales) [M]
+- [x] Definir cambios del terreno que destapan secretos (M50/M74) [C] → **agnes-3-flash (2026-10-14): `m148_spec.md` §15.1 — 3 cambios × estación × secreto.**
+- [x] Definir 3 ubicaciones por temporada (12 anuales) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §15.2 — tabla 4 estaciones × 3 ubicaciones.**
 - [x] Definir TerrenoLoreService con hook de nueva temporada (4 temporadas, secretos JSON) [M]
-- [ ] Definir secretos de terreno registrados en el diario [M]
-- [ ] Definir sin recompensa duplicada de lore ya explorado [S]
+- [x] Definir secretos de terreno registrados en el diario [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §15.3 — diario registra qué/dónde/cuándo + estado.**
+- [x] Definir sin recompensa duplicada de lore ya explorado [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §15.4 — 3 reglas anti-duplicación.**
 
 ## 16. Regla anti-infodump (P16/RF7)
 
-- [ ] Definir proporción mínima 60% lore ambiental vs diálogo explicativo [S]
-- [ ] Definir auditoría de muestreo de 10 zonas (2 por isla) [M]
-- [ ] Definir checklist de auditoría (¿explica algo que el mundo ya cuenta?) [M]
-- [ ] Definir plantillas de texto cortas por tipo de pieza [M]
-- [ ] Definir diálogos de NPC que avancen trama, no que expliquen el mundo [M]
-- [ ] Definir sin texto duplicado entre diálogo y pieza (una sola vía) [S]
+- [x] Definir proporción mínima 60% lore ambiental vs diálogo explicativo [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §16.1.**
+- [x] Definir auditoría de muestreo de 10 zonas (2 por isla) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §16.2.**
+- [x] Definir checklist de auditoría (¿explica algo que el mundo ya cuenta?) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §16.3.**
+- [x] Definir plantillas de texto cortas por tipo de pieza [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §16.1 (texto 60/40) + Plantillas (pág. 3).**
+- [x] Definir diálogos de NPC que avancen trama, no que expliquen el mundo [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §16.1 "NPC reactivo, no explicativo".**
+- [x] Definir sin texto duplicado entre diálogo y pieza (una sola vía) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §16.3 "máx 4 pistas por Templo".**
 
 ## 17. Persistencia (RF8/M59)
 
@@ -168,32 +168,32 @@
 
 ## 18. Diario y UI (M55)
 
-- [ ] Definir sección "Lore Ambiental" en el diario [M]
-- [ ] Definir contador "Lore de {isla} x/12" [M]
-- [ ] Definir filtros: nuevos / leídos / pistas [M]
-- [ ] Definir notificación ligera de nuevo lore (no modal) [S]
-- [ ] Definir entrada con tipo de pieza, texto e isla [M]
-- [ ] Definir sin UI fuera del diario/colecciones (M55/M73) [S]
-- [ ] Definir accesible con gamepad (M57/M58) [M]
+- [x] Definir sección "Lore Ambiental" en el diario [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §17.1.**
+- [x] Definir contador "Lore de {isla} x/12" [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §17.2.**
+- [x] Definir filtros: nuevos / leídos / pistas [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §17.3.**
+- [x] Definir notificación ligera de nuevo lore (no modal) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §17.4.**
+- [x] Definir entrada con tipo de pieza, texto e isla [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §17.5.**
+- [x] Definir sin UI fuera del diario/colecciones (M55/M73) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §17.6.**
+- [x] Definir accesible con gamepad (M57/M58) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §17.7.**
 
 ## 19. Rendimiento y estabilidad
 
-- [ ] Definir sin draw calls extras (solo triggers/colisiones) [M]
+- [x] Definir sin draw calls extras (solo triggers/colisiones) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §18.1.**
 - [x] Definir búsqueda eficiente de piezas (índice por Id en LoreCatalogo) [M]
-- [ ] Definir memoria estable (SO referenciados, sin cargas duplicadas) [M]
-- [ ] Definir triggers desactivados cuando ya explorados (bajo costo) [S]
-- [ ] Definir sin impacto en tiempos de carga (M63) [S]
+- [x] Definir memoria estable (SO referenciados, sin cargas duplicadas) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §18.2.**
+- [x] Definir triggers desactivados cuando ya explorados (bajo costo) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §18.3.**
+- [x] Definir sin impacto en tiempos de carga (M63) [S] → **agnes-3-flash (2026-10-14): `m148_spec.md` §18.4.**
 
 ## 20. Integración y calidad
 
 - [x] Definir integración con sistema de interacción (IInteractable) [M]
 - [?] Definir grafo de pistas auditado (30 pistas, 3 por misterio crítico) [M] — auditoría REAL implementada; el catálogo solo tiene **16 pistas** (faltan 14, es contenido)
-- [ ] Definir puente de descubrimiento por rumores (no lore invisible) [M]
+- [x] Definir puente de descubrimiento por rumores (no lore invisible) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §19.1.**
 - [x] Definir tests de catálogo en headless (test_lore_m148.gd, 23/0 OK) [M]
 - [x] Definir tests de trigger/persistencia en PlayMode [M]
 - [x] Definir CI: LoreGate en build [M]
-- [ ] Definir revisión narrativa de todas las piezas contra M147 [C]
-- [ ] Definir 0 contradicciones detectables con la biblia [M]
+- [x] Definir revisión narrativa de todas las piezas contra M147 [C] → **agnes-3-flash (2026-10-14): `m148_spec.md` §20.1.**
+- [x] Definir 0 contradicciones detectables con la biblia [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §20.2.**
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [x] Definir log del módulo en Logs/ [S]
 

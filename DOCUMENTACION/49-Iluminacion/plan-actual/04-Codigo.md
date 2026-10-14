@@ -186,7 +186,7 @@ func validar_escena(escena: Node3D) -> Array[String]:
 - `scripts/ia_npc/` (MiMo, M64) emite SCRIPT ERROR en headless: `npc_needs.gd:41-43` (get() con 2 args, parse error) y `npc_agent.gd:82` (.new() en GDScript base). El bootstrap spawnea NPC agents y crashea, pero NO afecta los checks de iluminacion. Prohibido tocar por encomienda; lo reporto para coordinacion.
 ## Notas del Agente — barrido de verificación (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1716
 

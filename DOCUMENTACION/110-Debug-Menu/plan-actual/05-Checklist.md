@@ -18,10 +18,10 @@
 - Log: `Logs/928-M110-Debug-Menu-Reconciliacion-Cableo-Stubs_2026-09-16_06-13.md`
 
 
-## Reserva actual — 🔵 stepfun-step-5-preview (2026-10-09)
+## Reserva actual — 🔵 step-5-kilocode (2026-10-09)
 
 - **Alcance ACOTADO:** BUG-129 solamente (`tests/unit/debug/test_debug_menu.gd` deja 201 orphans ObjectDB -> GdUnit4 rc=101). NO es una toma del modulo completo: los 90 `[?]` siguen liberados para sus duenos.
-- **Entregable:** fix del leak (queue_free/free de nodos y recursos creados en los tests) + verificacion rc=101 -> rc=0 con el binario `C:/Temp/godot/godot472.exe` (runner v2c de s2) + reporte en su canal `StepFun-Step-5-Preview`.
+- **Entregable:** fix del leak (queue_free/free de nodos y recursos creados en los tests) + verificacion rc=101 -> rc=0 con el binario `C:/Temp/godot/godot472.exe` (runner v2c de s2) + reporte en su canal `step-5-kilocode`.
 - **Restricciones:** NO tocar `run_tests.gd` (zona de s2); NO tocar el autoload `debug_menu.gd` salvo que el analisis lo justifique (documentar antes y despues). M112 (Ling, en curso) depende del gate: coordinar cualquier cambio en el runner.
 ## A. Requisitos del módulo (24)
 
@@ -63,96 +63,96 @@
 - [x] TabBar [S] — `scenes/debug/debug_menu.tscn` TabBar (5 pestañas config JSON)
 - [x] ContentPanel [S] — `scenes/debug/debug_menu.tscn` ContentPanel + DebugConsole
 - [x] TitleBar con cierre [S] — `scenes/debug/debug_menu.tscn` TitleBar + CloseButton
-- [ ] Documentar layout de panel [M] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Documentar layout de panel [M] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
 
 ## C. Panel Jugador (17)
 
 > Backend completo y testado (sección A). Widgets inexistentes.
 
-- [ ] Teletransporte: inputs X/Y/Z [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Teletransporte: botón "Ir" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [x] POI predefinidos (dropdown) [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): backend verificado en disco; widget visual sigue siendo dueño M110-UI.
+- [ ] Teletransporte: inputs X/Y/Z [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Teletransporte: botón "Ir" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [x] POI predefinidos (dropdown) [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): backend verificado en disco; widget visual sigue siendo dueño M110-UI.
 - [x] Lista de POI [M] — `data/debug/poi_list.tres` + `scripts/debug/poi_list.gd` (3 POIs: Pueblo Raiz, Museo, Spawn)
-- [ ] Inventario: selector de item [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Inventario: input de cantidad [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Inventario: botón "Dar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Inventario: input de dinero [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Inventario: botón "Dar dinero" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: selector de misión [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: botón "Completar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: selector de herramienta [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: botón "Desbloquear herramienta" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: selector de isla [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: botón "Desbloquear isla" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: selector de Sello [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: botón "Desbloquear Sello" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Inventario: selector de item [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Inventario: input de cantidad [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Inventario: botón "Dar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Inventario: input de dinero [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Inventario: botón "Dar dinero" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Progresión: selector de misión [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Progresión: botón "Completar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Progresión: selector de herramienta [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Progresión: botón "Desbloquear herramienta" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Progresión: selector de isla [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Progresión: botón "Desbloquear isla" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Progresión: selector de Sello [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Progresión: botón "Desbloquear Sello" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
 
 ## D. Panel Mundo (12)
 
-- [ ] Slider de hora (0-23) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Label de hora actual [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Dropdown de estación [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Dropdown de clima [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Input de seed [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Botón "Aplicar seed" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Input de chunk X [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Input de chunk Z [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Botón "Regenerar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Slider de hora (0-23) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Label de hora actual [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Dropdown de estación [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Dropdown de clima [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Input de seed [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Botón "Aplicar seed" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Input de chunk X [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Input de chunk Z [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Botón "Regenerar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
 - [x] Integración M29 (GameClock) [S] — avanzar_hasta/avanzar_dia/get_hora; A1/G3
 - [x] Integración M31 (WeatherSystem) [S] — get_clima/clima_de_manana/borrar_cache; A2/G2
 - [x] Integración M08 (WorldVoxel) [S] — _obtener_voxel_terrain() + invalidate_area; F1/F2
 
 ## E. Panel Entidades (8)
 
-- [ ] Selector de NPC [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Botón "Resetear" NPC [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Label de estado IA actual [S] — dueño: M110-UI + M64  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Selector de puzzle [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Botón "Resetear" puzzle [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Selector de NPC [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Botón "Resetear" NPC [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Label de estado IA actual [S] — dueño: M110-UI + M64  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Selector de puzzle [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [ ] Botón "Resetear" puzzle [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
 - [x] Integración M19 (NPCManager) [S] — reset_npc() duck-typing; D1-D3
 - [x] Integración M24 (PuzzleSystem) [S] — reset_puzzle() + _buscar_puzzle_room(); E1/E2
-- [ ] Integración M64 (IA) [S] — toggle_ai_states marca estado; dibujado requiere M64; dueño: M64  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Integración M64 (IA) [S] — toggle_ai_states marca estado; dibujado requiere M64; dueño: M64  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 
 ## F. Panel Visualización (10)
 
-- [x] CheckBox "Mostrar Colliders" [S] — backend RF14 OK; widget dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
-- [x] CheckBox "Mostrar FPS" [S] — backend RF15 nuevo; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
-- [x] CheckBox "Mostrar Chunks" [S] — backend RF16; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
-- [x] CheckBox "Mostrar Navegación" [S] — backend RF17 nuevo; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
-- [x] CheckBox "Mostrar Hitboxes" [S] — backend RF18; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
-- [x] CheckBox "Mostrar Estados IA" [S] — backend RF19 nuevo; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [x] CheckBox "Mostrar Colliders" [S] — backend RF14 OK; widget dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [x] CheckBox "Mostrar FPS" [S] — backend RF15 nuevo; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [x] CheckBox "Mostrar Chunks" [S] — backend RF16; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [x] CheckBox "Mostrar Navegación" [S] — backend RF17 nuevo; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [x] CheckBox "Mostrar Hitboxes" [S] — backend RF18; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [x] CheckBox "Mostrar Estados IA" [S] — backend RF19 nuevo; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
 - [x] Colores de visualización [S] — esquema en config JSON
 - [x] Límites de cantidad visualizada [S] — MAX_CHUNKS_RADIO=5, MAX_NAVIGATION_RADIO=50, MAX_AI_STATES_RADIO=50
-- [ ] DebugDraw para visualizaciones [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [x] Integración con DebugVisualizer [S] — VERIFICADO: debug_visualizer.gd existe (110 lineas) y se conecta a toggle_visual_cambiado; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [ ] DebugDraw para visualizaciones [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [x] Integración con DebugVisualizer [S] — VERIFICADO: debug_visualizer.gd existe (110 lineas) y se conecta a toggle_visual_cambiado; dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
 
 ## G. Panel Sistema (12)
 
 - [x] Consola RichTextLabel scrollable [S] — debug_console.gd RichTextLabel + scroll_following (test_m110_ui2.gd 14/0)
-- [ ] Consola: filtro por nivel [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [ ] Consola: filtro por categoría [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [ ] Consola: campo de búsqueda [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [ ] Consola: checkbox "Auto-scroll" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Consola: filtro por nivel [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Consola: filtro por categoría [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Consola: campo de búsqueda [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Consola: checkbox "Auto-scroll" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 - [x] Consola: límite de 100 líneas [S] — CONSOLA_MAX_LINEAS=100 + slice
 - [x] Diagnóstico: botón "Exportar Diagnóstico" [S] — comando ejecuta exportador real; A3/A4
-- [ ] Diagnóstico: botón "Reportar Bug" [S] — report_bug() inexistente; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [ ] Configuración: botón "Guardar Configuración" [S] — sin save_config(); dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Diagnóstico: botón "Reportar Bug" [S] — report_bug() inexistente; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Configuración: botón "Guardar Configuración" [S] — sin save_config(); dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 - [x] Integración M103 (Logger) [S] — _conectar_logger() a line_emitted; suite B
-- [ ] Integración M102 (Bug Tracking) [S] — dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [ ] Integración DiagnosticExporter [S] — embebido en debug_menu.gd; refactor dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Integración M102 (Bug Tracking) [S] — dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Integración DiagnosticExporter [S] — embebido en debug_menu.gd; refactor dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 
 ## H. Consola in-game (10)
 
 - [x] RichTextLabel scrollable [S] — debug_console.gd RichTextLabel + scroll_following (test_m110_ui2.gd 14/0)
-- [ ] Filtro por nivel [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [ ] Filtro por categoría [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [ ] Búsqueda de texto [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
-- [x] Auto-scroll [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
-- [x] Coloreado por nivel [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, stepfun-step-5-preview msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [ ] Filtro por nivel [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Filtro por categoría [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [ ] Búsqueda de texto [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [x] Auto-scroll [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
+- [x] Coloreado por nivel [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): backend + capa visual verificados en disco.
 - [x] Suscribirse a señales de Logger [S] — _conectar_logger(); log de arranque
 - [x] Actualizar en tiempo real [S] — _on_logger_line + console_get_lines(); suite B
 - [x] Limitar a 100 líneas (rotativo) [S] — CONSOLA_MAX_LINEAS=100
-- [x] Botón "Limpiar consola" [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d, stepfun-step-5-preview msg 24, 2026-10-09): backend verificado en disco; widget visual sigue siendo dueño M110-UI.
+- [x] Botón "Limpiar consola" [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): backend verificado en disco; widget visual sigue siendo dueño M110-UI.
 
 ## I. Debug Visualizer (12)
 
@@ -169,14 +169,14 @@
 - [x] Límite navigation (radio 50m) [S] — MAX_NAVIGATION_RADIO=50.0
 - [x] Límite AI states (radio 50m) [S] — MAX_AI_STATES_RADIO=50.0
 - [x] Solo visualizar cuando Debug Menu visible [S] — `_process()` en debug_visualizer.gd guarda en `esta_visible()`
-- [ ] Integración DebugDraw de Godot [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] Integración DebugDraw de Godot [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 
 ## J. Diagnostic Exporter (14)
 
-- [ ] DiagnosticExporter.gd [S] — embebido en debug_menu.gd; refactor dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] DiagnosticExporter.gd [S] — embebido en debug_menu.gd; refactor dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 - [x] _collect_metadata() [S] — _build_metadata()
 - [x] export_diagnostic() [S] — _export_diagnostic_zip() real (ZIP + .txt); A3/A4
-- [ ] report_bug() [S] — inexistente; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] report_bug() [S] — inexistente; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 - [x] Capturar versión del juego [S] — App.VERSION + M119
 - [x] Capturar plataforma y specs [S] — OS.get_name() + video_adapter
 - [x] Capturar seed de generación [S] — metadata
@@ -187,17 +187,17 @@
 - [x] Capturar screenshot [S] — PNG en ZIP; omitido en headless (correcto)
 - [x] Crear ZIP con metadata+logs+screenshot [S] — 9 zips verificados
 - [x] URL de GitHub con plantilla [S] — github_url_template en metricas_sistema()
-- [ ] Abrir navegador con URL [S] — sin invocación cableada; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] Abrir navegador con URL [S] — sin invocación cableada; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 
 ## K. API del Debug Menu (29)
 
-- [ ] show() [S] — no existe (alternar() es la vía); dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
-- [ ] hide() [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] show() [S] — no existe (alternar() es la vía); dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] hide() [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 - [x] toggle() [S] — alternar(); suite B (F12)
 - [x] is_visible() [S] — esta_visible()
-- [ ] show_panel(panel) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
-- [ ] hide_panel(panel) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
-- [ ] toggle_panel(panel) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, stepfun-step-5-preview msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] show_panel(panel) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] hide_panel(panel) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [ ] toggle_panel(panel) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 - [x] teleport_player(position) [S] — + fallback grupo "player"; A6
 - [x] set_game_time(hour) [S] — A1
 - [x] set_season(season) [S] — C1/C2
@@ -311,7 +311,7 @@
 **Totales:** 225 ítems · [x] Completados: 150 · [?] No resueltos (con dueño): 0 · Pendientes: 75.
 
 > El módulo queda como **API backend completa y verificada**. Los `[?]` originales fueron cerrados
-> por el triaje E-12d (stepfun-step-5-preview, 5 bloques, msgs 24-33, 2026-10-09/10): los que
+> por el triaje E-12d (step-5-kilocode, 5 bloques, msgs 24-33, 2026-10-09/10): los que
 > afirmaban existencia y la tenían pasaron a `[x]`; los widgets de UI pendientes pasaron a `[ ]`
 > con dueño M110-UI; report_bug (M102) e integración IA (M64) quedaron con dueño asignado. **Ningún
 > comando backend queda sin implementar.** La capa de UI es un módulo separado (M110-UI) que puede

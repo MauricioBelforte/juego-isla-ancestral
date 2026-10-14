@@ -363,7 +363,7 @@ Formato de línea de ejemplo: `[DOM-PROG-HITO] alcanzado milestone=hito_picota_n
 
 ## Notas del Agente — barrido de verificación (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1705
 
@@ -401,7 +401,7 @@ APIs en `scripts/progresion/`:
 
 ## Notas del Agente — barrido con verificacion en disco (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1747
 

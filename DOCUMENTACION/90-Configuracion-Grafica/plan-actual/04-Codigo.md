@@ -569,7 +569,7 @@ func save_settings():
 
 ## Notas del Agente — núcleo GraphicsConfig (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1734
 
@@ -615,7 +615,7 @@ Regresión verificada: `test_settings_audio_roundtrip.gd` (M53) 51 checks, 0 fal
 
 ## Notas del Agente — cierre de fixes de QA (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1738
 
@@ -654,7 +654,7 @@ distinguir "diseñado y documentado" de "implementado y verificado".
 
 ## Notas del Agente — continuación del barrido (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1684
 

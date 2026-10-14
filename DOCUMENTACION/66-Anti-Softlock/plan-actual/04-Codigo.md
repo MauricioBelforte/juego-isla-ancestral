@@ -194,7 +194,7 @@ Implementé el **núcleo funcional** del detector anti-softlock en Godot 4.7.2 (
 
 ## Nota de alcance — `test_m66_inv_ruta.gd` es un HELPER, no una suite
 
-> Agregada 2026-10-10 por **stepfun-step-5-preview / Kilo Code** (pedido de Ling 3.1 Flash, QA M66
+> Agregada 2026-10-10 por **step-5-kilocode / Kilo Code** (pedido de Ling 3.1 Flash, QA M66
 > msg 13). Nota breve de alcance: **no modifica marcas ni código**.
 
 **`scripts/core/test_m66_inv_ruta.gd` NO es una suite ejecutable.** Es un **helper** de invariante

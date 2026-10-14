@@ -131,7 +131,7 @@ Cambios en archivos existentes:
 
 ## Notas del Agente — iter. 4: edge cases de la sección L
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11
 **Log:** 1684
@@ -155,7 +155,7 @@ reinicia junto con el estado de sesión.
 
 ## Notas del Agente — iter. 5: edge cases restantes (sección L)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11
 **Log:** 1687
@@ -181,7 +181,7 @@ los anclajes de flip deben ser únicos y específicos, no prefijos.
 
 ## Notas del Agente — iter. 6: garantías de integración (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1703
 
@@ -209,7 +209,7 @@ otro agente (M166, "capa B" de assets) agregó `AssetProfile.ruta(...)` en
 
 ## Notas del Agente — F1 retractado + M17 reparado (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1712
 
@@ -247,7 +247,7 @@ test_construccion_iter6.gd   22 checks, 0 fallos
 
 ## Notas del Agente — iter. 7: utilidades de rejilla + copiar pieza (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1732
 
@@ -296,7 +296,7 @@ utilidades + copiar). Regresión verificada sin cambios en `test_construccion.gd
 
 ## Notas del Agente — auditoria de la seccion K (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1745
 

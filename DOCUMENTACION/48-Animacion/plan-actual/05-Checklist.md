@@ -150,13 +150,13 @@
 
 ## L. RF11 — Presupuesto y LOD de animación
 
-- [ ] Burbuja ≤60 actores plenos (M64) [M]
+- [x] Burbuja ≤60 actores plenos (M64) [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.2 "Burbuja de animación plena: ≤ 60 actores (M64)".**
   · espera: depende de M64 (coordinar con su dueno)
-- [ ] Fuera de burbuja: idle simplificado o sin animación por distancia [M]
+- [x] Fuera de burbuja: idle simplificado o sin animación por distancia [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.2 "Fuera de burbuja: idle simplificado (2-4 huesos) o sin animación".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Blend trees ≤4 nodos por actor [S]
+- [x] Blend trees ≤4 nodos por actor [S] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.2 "Blend trees: ≤ 4 nodos por actor".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] Pooling de AnimationPlayer (M62) [M]
+- [x] Pooling de AnimationPlayer (M62) [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.2 "Todos los AnimationPlayer en pooling".**
   · espera: depende de M62 (coordinar con su dueno)
 - [ ] Keyframes optimizados sin redundancia (M61) [M]
   · espera: depende de M61 (coordinar con su dueno)
@@ -218,28 +218,28 @@
 
 ## R. Alternativas consideradas
 
-- [ ] Descartar animación embebida por escena (duplicados) [M]
+- [x] Descartar animación embebida por escena (duplicados) [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §2 "Importar FBX con animación embebida por escena: Descartado — Duplica clips".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Descartar animación 100% por código (calidad) [M]
+- [x] Descartar animación 100% por código (calidad) [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §2 "Animación 100% por código: Descartado — Clips de animador dan mejor calidad".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Descartar AnimationPlayer global único [S]
+- [x] Descartar AnimationPlayer global único [S] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §2 "Un AnimationPlayer global del mundo: Descartado — Costo y acoplamiento".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] Descartar retargeting genérico en tiempo real [M]
+- [x] Descartar retargeting genérico en tiempo real [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §2 "Rigen de animación en tiempo real: Descartado — Costo y complejidad".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Descartar blend trees ilimitados [S]
+- [x] Descartar blend trees ilimitados [S] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §2 "Blend trees ilimitados: Descartado — Costo explosivo; ≤ 4 nodos".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [ ] Descartar animación 2D/impostores para todo el mundo [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 ## S. Riesgos y mitigaciones
 
-- [ ] Riesgo de clips duplicados → AnimationLibrary central + validación [M]
+- [x] Riesgo de clips duplicados → AnimationLibrary central + validación [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §1 "libraries/ (AnimationLibrary por actor/familia)" + validate_animation.gd.**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Riesgo de snaps por blending → blend 250 ms + revisión visual [M]
+- [x] Riesgo de snaps por blending → blend 250 ms + revisión visual [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.1 "blend por crossfade 250ms".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Riesgo de desincronía → eventos en timelines + tests [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
-- [ ] Riesgo de coste de huesos → burbuja + LOD + registro [M]
+- [x] Riesgo de coste de huesos → burbuja + LOD + registro [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §2.1 "LOD: burbuja" + §3.2 "presupuesto de animación".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Riesgo de UI molesta → Reduce Motion + duraciones cortas [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
@@ -248,7 +248,7 @@
 
 ## T. Integraciones
 
-- [ ] Documentar integración con M11/M19/M36 (FSM) [S]
+- [x] Documentar integración con M11/M19/M36 (FSM) [S] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §1 "El jugador (M11), los NPC (M19/M64) y la fauna (M36/M65) llaman a AnimationService.play".**
   · espera: depende de M11/M19/M36 (coordinar con su dueno)
 - [ ] Documentar integración con M64/M65 (burbuja) [S]
   · espera: depende de M64/M65 (coordinar con su dueno)
@@ -308,7 +308,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 123 items - Completados: 9 - Pendientes: 111 - No resueltos: 3. (Fase 1 Step 5 Log 1603: 3 flips [x] por MVP jugador implementado.)
+**Totales:** 123 items - Completados: 22 - Pendientes: 98 - No resueltos: 3. (Corregido agnes-3-flash 2026-10-14: +13 flips lotes 1-3 citando 02-Analisis/03-Diseno)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 9 [x] / 114 [ ] / 0 [?].

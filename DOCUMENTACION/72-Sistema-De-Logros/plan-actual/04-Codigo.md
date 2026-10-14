@@ -304,7 +304,7 @@ func store_stats() -> void: ...
 
 ## Notas del Agente — lote B+E, RF1 + persistencia (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1730
 
@@ -353,7 +353,7 @@ Las 3 suites de M72 en verde.
 
 ## Notas del Agente — barrido de ítems con tests reales (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1735
 
@@ -404,7 +404,7 @@ test_logros_m72_statids.gd  1 test   (detección de stat_ids desconocidos)
 
 ## Notas del Agente — seccion D, notificacion de logros (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1744
 

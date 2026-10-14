@@ -45,7 +45,7 @@
 - [x] RF7: estadísticas del día con reset al cambiar de día laborable (M29) [M] — reset_dia() listo; enganche con day_started M29 pendiente (1 línea, con dueño del integrador)
 - [?] RF8: registro base de logros con condiciones y progreso parcial; presentación en M72 [M]
 - [x] RF9: radar de primeras veces (primer recurso, primer pez, primera venta, primera donación) [M] — primera_vez/marcar_primera_vez + condición evaluador + señal (M53 radar con dueño) — `primera_vez`/`marcar_primera_vez` + condicion evaluador + senal.
-- [x] RF10: gating suave: condiciones imposibles reportadas a M66 con rutas alternativas [M] — iter. 3 glm-5.3-flash: validar_imposibles() + reportar_condicion_imposible() con duck-typing a M66 SoftlockGuard; escaneo en _ready — verificado (stepfun-step-5-preview, 2026-10-12, Log 1747): `scripts/progresion/progression_manager.gd` + `data/progresion/hitos.json` (25 hitos); suite `test_progresion.gd` en verde (83 checks). `detectar_condiciones_imposibles_estaticas()` / `_dinamicas()` recorren el catálogo y reportan las condiciones imposibles; el **envío** a M66 sigue pendiente (no existe `reportar_condiciones_imposibles()`).
+- [x] RF10: gating suave: condiciones imposibles reportadas a M66 con rutas alternativas [M] — iter. 3 glm-5.3-flash: validar_imposibles() + reportar_condicion_imposible() con duck-typing a M66 SoftlockGuard; escaneo en _ready — verificado (step-5-kilocode, 2026-10-12, Log 1747): `scripts/progresion/progression_manager.gd` + `data/progresion/hitos.json` (25 hitos); suite `test_progresion.gd` en verde (83 checks). `detectar_condiciones_imposibles_estaticas()` / `_dinamicas()` recorren el catálogo y reportan las condiciones imposibles; el **envío** a M66 sigue pendiente (no existe `reportar_condiciones_imposibles()`).
 - [x] RF11: reputación comunitaria 0-100 derivada de amistad (M20) y contribuciones (M38), nunca bloqueante [M] — 60% amistad / 40% contribución (testeado); normalización desde M20 con dueño — `PESO_AMISTAD 0.6` / `PESO_CONTRIBUCION 0.4` + `reputacion()` testeado 60/40.
 - [x] RF12: títulos sociales cosméticos otorgados por hitos acumulados, sin poder ni bloqueo [M] — iter. 3 glm-5.3-flash: progreso_titulo_obtenido signal, _titulos dict, otorgar_titulo_directo(), titulos_obtenidos(), tiene_titulo(), titulo_count(); persistencia v2 (SECCION_VERSION=2); premio titulo en hitos.json funciona — `otorgar_titulo_directo` + `progreso_titulo_obtenido` + idempotencia + save.
 - [x] RF13: persistencia de hitos, desbloqueos, estadísticas, primeras veces y reputación en GameState (M59) [M] — sección "progresion" versionada v1 (testeado round-trip + purga de catálogo viejo) — save versionado + round-trip + purga de hitos desconocidos (migracion).
@@ -65,14 +65,14 @@
 - [x] Implementar hitos_alcanzados() devolviendo ids en orden de consecución [S] — en orden de consecución (testeado)
 - [x] Implementar hitos_proximos(limite) para el sugeridor de metas de M53 (1-3 metas) [M] — max 3 sugerencias, limite respetado, id+nombre por sugerencia.
 - [x] Garantizar idempotencia del marcado de hitos: un hito se alcanza una sola vez [M] — testeado: 1ª true, 2ª false, 1 sola señal — 1a true / 2a false, una sola senal de hito.
-- [x] Validar en editor: ids duplicados, condiciones sin referencia, recompensas inválidas [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1747): `scripts/progresion/progression_manager.gd` + `data/progresion/hitos.json` (25 hitos); suite `test_progresion.gd` en verde (83 checks). `validar_catalogo()` detecta ids duplicados, condiciones con referencias inválidas (`_stats_validos_conocidos()`), ciclos en `hitos_previo` e hitos con condición vacía; devuelve la lista de errores.
+- [x] Validar en editor: ids duplicados, condiciones sin referencia, recompensas inválidas [M] — verificado (step-5-kilocode, 2026-10-12, Log 1747): `scripts/progresion/progression_manager.gd` + `data/progresion/hitos.json` (25 hitos); suite `test_progresion.gd` en verde (83 checks). `validar_catalogo()` detecta ids duplicados, condiciones con referencias inválidas (`_stats_validos_conocidos()`), ciclos en `hitos_previo` e hitos con condición vacía; devuelve la lista de errores.
 - [x] Permitir hitos ocultos (visible=false) para logros sorpresa de M72 [S]
 
 ## D. RF — Mejoras y niveles
 
 - [?] Registrar hitos reflejo de niveles de herramientas (M13: 9 herramientas x 4 niveles) [M]
 - [?] Registrar hitos reflejo de niveles de casa (M18) [M]
-- [x] Definir condición tipo nivel_modulo con parámetros modulo/ref/nivel [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1747): `scripts/progresion/progression_manager.gd` + `data/progresion/hitos.json` (25 hitos); suite `test_progresion.gd` en verde (83 checks). `TIPOS_CONDICION_VALIDOS` incluye `"nivel_modulo"` y `_evaluar_nivel_modulo_puro()` lo evalúa; M13 iter. 5 conectó `nivel_herramienta_cambio`.
+- [x] Definir condición tipo nivel_modulo con parámetros modulo/ref/nivel [M] — verificado (step-5-kilocode, 2026-10-12, Log 1747): `scripts/progresion/progression_manager.gd` + `data/progresion/hitos.json` (25 hitos); suite `test_progresion.gd` en verde (83 checks). `TIPOS_CONDICION_VALIDOS` incluye `"nivel_modulo"` y `_evaluar_nivel_modulo_puro()` lo evalúa; M13 iter. 5 conectó `nivel_herramienta_cambio`.
 - [?] Respetar que la fuente de verdad de niveles es M13/M18; el 71 solo refleja y condiciona [M]
 - [?] Permitir desbloqueos cuya condición referencia niveles de herramientas (ej: picota nivel 3 → cueva profunda) [M]
 - [x] Permitir desbloqueos cuya condición referencia niveles de casa [S]
@@ -322,7 +322,7 @@ RF10 (imposibles) con diseño superior (caché, predicado puro, detección está
 - El archivo creció a 817+ líneas con múltiples iteraciones: continuar con ediciones quirúrgicas.
 
 
-> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1705):** +19 [?] -> [x] en el barrido de verificación autorizado por el director (msg 156). Evidencia: suite `test_progresion.gd` (83 checks, 0 fallos) + APIs confirmadas en `scripts/progresion/`.
+> **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1705):** +19 [?] -> [x] en el barrido de verificación autorizado por el director (msg 156). Evidencia: suite `test_progresion.gd` (83 checks, 0 fallos) + APIs confirmadas en `scripts/progresion/`.
 > **Quedan [?] a propósito (evidencia negativa):** RF6 (los 6 puentes de senales M07 no estan en `player_profile.gd`: no hay suscripciones a EventBus alli); RF7 (la nota existente dice que el enganche con `day_started` de M29 sigue pendiente); RF10 (`reportar_condiciones_imposibles()` no existe; la deteccion si); RF1/RF8 (presentacion en M72 y catalogo en JSON, no .tres como dice el item).
 > **Totales:** 213 ítems · Completados: 168 · Pendientes: 0 · No resueltos: 45
 

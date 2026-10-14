@@ -239,7 +239,7 @@ func show_ripple(position_2d: Vector2, intensity: float) -> void: ...
 
 ## Notas del Agente — núcleo de perfil, iter. 4 (2026-10-11)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1701
 
@@ -263,7 +263,7 @@ requisito, no un parche para que el test pase).
 
 ## Notas del Agente — fix del piso de checks de iter. 4 (2026-10-12)
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Log:** 1683
 

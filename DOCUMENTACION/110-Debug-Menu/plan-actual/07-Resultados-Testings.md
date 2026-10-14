@@ -4,7 +4,7 @@
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 04:45:00
 
-> QA §21.8 ejecutada por **atria-dawn-s3** sobre el triaje E-12d de **stepfun-step-5-preview**
+> QA §21.8 ejecutada por **atria-dawn-s3** sobre el triaje E-12d de **step-5-kilocode**
 > (verificador ≠ autor del triaje — regla de independencia §21.8). Esta es la cuarta QA §21.8
 > coordinada y la segunda ejecutada por este agente.
 
@@ -112,7 +112,7 @@ y son ejecutables directamente.
 
 ## 5. Independencia del verificador
 
-- **Autor del triaje:** stepfun-step-5-preview (msgs 24, 26, 28, 31, 33).
+- **Autor del triaje:** step-5-kilocode (msgs 24, 26, 28, 31, 33).
 - **Verificador (esta QA):** atria-dawn-s3 — **no tocó ninguna marca de M110** en ningún momento
   de los 5 bloques; solo conté y verifiqué artefactos para mis re-verificaciones de cada entrega.
 - **Flips:** aplicados por el director (msg 32 + bloque 5), no por el triador ni por mí.

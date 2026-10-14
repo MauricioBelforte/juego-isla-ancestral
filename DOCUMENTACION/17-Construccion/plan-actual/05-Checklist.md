@@ -80,12 +80,12 @@
 - [ ] Paso de rejilla fijo de 1 m derivado del tamaño de voxel de M08 [C]
 - [ ] Origen de la rejilla idéntico al origen global del mundo voxel [C]
 - [ ] Las piezas de NxN celdas ocupan exactamente su área completa en la rejilla [M]
-- [x] Compensación de medio voxel (offset 0.5 m) aplicada de forma consistente en preview y datos [C] — implementado (stepfun-step-5-preview, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `OFFSET_MEDIO_VOXEL = 0.5` usado por `mundo_desde_celda()`; el centro de (4,2,6) es (4.5,2.5,6.5).
+- [x] Compensación de medio voxel (offset 0.5 m) aplicada de forma consistente en preview y datos [C] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `OFFSET_MEDIO_VOXEL = 0.5` usado por `mundo_desde_celda()`; el centro de (4,2,6) es (4.5,2.5,6.5).
 - [ ] Altura de planta: 1 m por nivel de bloque; habitaciones de 3 m en M18 [M]
 - [ ] Límites de mundo: la colocación se rechaza fuera del AABB jugable de M08 [M]
-- [x] Conversión celda voxel ↔ posición mundial en una única utilidad compartida [M] — implementado (stepfun-step-5-preview, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `ConstruccionMundo.mundo_desde_celda()` / `celda_desde_mundo()` / `esquina_desde_celda()`, estáticas y verificadas por round-trip en 5 casos.
+- [x] Conversión celda voxel ↔ posición mundial en una única utilidad compartida [M] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `ConstruccionMundo.mundo_desde_celda()` / `celda_desde_mundo()` / `esquina_desde_celda()`, estáticas y verificadas por round-trip en 5 casos.
 - [ ] La rejilla solo se calcula sobre terreno cargado (nunca sobre chunks vacíos) [M]
-- [x] El snap se redondea hacia abajo (floor) en dirección positiva del mundo [S] — implementado (stepfun-step-5-preview, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `celda_desde_mundo()` aplica `floor` en los 3 ejes, incluidos negativos (-0.1 -> -1, no 0).
+- [x] El snap se redondea hacia abajo (floor) en dirección positiva del mundo [S] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `celda_desde_mundo()` aplica `floor` en los 3 ejes, incluidos negativos (-0.1 -> -1, no 0).
 - [ ] La rejilla es coherente tras guardar y cargar (misma celda ↔ misma posición) [M]
 
 ## E. Previsualización fantasma (BuildGhost) (10)
@@ -107,7 +107,7 @@
 - [ ] La validación se re-ejecuta con cada rotación (celdas afectadas cambian) [M]
 - [ ] Subir/bajar la pieza una planta por pulsación con límite de altura [S]
 - [ ] El fantasma muestra la pieza en el nivel elevado sin flotar visualmente mal [M]
-- [x] Copiar una pieza colocada a la rejilla conserva su rotación [S] — implementado (stepfun-step-5-preview, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `BuildManager.copiar_pieza(origen, destino)` copia conservando `rot` y cobra como colocación nueva; rechaza destino ocupado, origen vacío y sin recursos.
+- [x] Copiar una pieza colocada a la rejilla conserva su rotación [S] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `BuildManager.copiar_pieza(origen, destino)` copia conservando `rot` y cobra como colocación nueva; rechaza destino ocupado, origen vacío y sin recursos.
 - [ ] Mover una pieza desocupa las celdas originales solo al confirmar [C]
 - [ ] Al mover, los recursos no se re-cobran (solo se reubican) [M]
 - [ ] Almacenar requiere inventario con espacio libre (M14) [M]
@@ -170,15 +170,15 @@
 
 - [x] M08: escrituras voxel por celdas con marca dirty en los chunks afectados [C]
 - [ ] M08: los datos de pieza viven en capa voxel separada del terreno generado [C]
-- [x] M14: descuento, devolución y almacenamiento de piezas como ítems [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1745): `build_manager.gd` + suites `test_construccion.gd` (131 checks) e `iter6`/`iter7`, todas en verde. `conectar_inventario(inv)` + `_invertir()` cubren **descuento y devolución** (duck-typing con M14); los bloques 8-10 de `test_construccion.gd` prueban costo real, devolución del 50 % al demoler y re-cobro al deshacer. El **almacenamiento** de piezas como ítems del inventario es de M14 (límite documentado).
+- [x] M14: descuento, devolución y almacenamiento de piezas como ítems [M] — verificado (step-5-kilocode, 2026-10-12, Log 1745): `build_manager.gd` + suites `test_construccion.gd` (131 checks) e `iter6`/`iter7`, todas en verde. `conectar_inventario(inv)` + `_invertir()` cubren **descuento y devolución** (duck-typing con M14); los bloques 8-10 de `test_construccion.gd` prueban costo real, devolución del 50 % al demoler y re-cobro al deshacer. El **almacenamiento** de piezas como ítems del inventario es de M14 (límite documentado).
 - [ ] M18: las ampliaciones de la casa usan proyectos de piezas de este módulo [C]
 - [ ] M25: ruinas como contenido solo visual (deconstruible = false) [M]
 - [x] M64: señal obra_activa al entrar/salir y navmesh_delta al colocar/demoler [C]
 - [ ] M73: recetas de festival temporales en el catálogo (devolucion = 0) [M]
 - [x] M58: serialización de lista de piezas y restauración idempotente [C]
 - [ ] M31: faroles y luces conectados al ciclo día/noche [M]
-- [x] M32: la lluvia solo agrega VFX, nunca modifica o arruina piezas [S] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1703): suite `test_construccion_iter6.gd` (23 checks, 0 fallos)
-- [x] M71: logros de construcción escuchan la señal pieza_colocada [M] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1703): suite `test_construccion_iter6.gd` (23 checks, 0 fallos)
+- [x] M32: la lluvia solo agrega VFX, nunca modifica o arruina piezas [S] — verificado (step-5-kilocode, 2026-10-12, Log 1703): suite `test_construccion_iter6.gd` (23 checks, 0 fallos)
+- [x] M71: logros de construcción escuchan la señal pieza_colocada [M] — verificado (step-5-kilocode, 2026-10-12, Log 1703): suite `test_construccion_iter6.gd` (23 checks, 0 fallos)
 - [ ] M93: proyectos de construcción de meta larga cuentan piezas colocadas [M]
 
 ## L. Edge cases (12)
@@ -198,8 +198,8 @@
 
 ## M. Optimización (8)
 
-- [x] Dirty flags por chunk: solo se regeneran los chunks tocados por la pieza [C] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1703): suite `test_construccion_iter6.gd` (23 checks, 0 fallos)
-- [x] Sin regeneración global de mesh del mundo al construir [C] — verificado (stepfun-step-5-preview, 2026-10-12, Log 1703): suite `test_construccion_iter6.gd` (23 checks, 0 fallos)
+- [x] Dirty flags por chunk: solo se regeneran los chunks tocados por la pieza [C] — verificado (step-5-kilocode, 2026-10-12, Log 1703): suite `test_construccion_iter6.gd` (23 checks, 0 fallos)
+- [x] Sin regeneración global de mesh del mundo al construir [C] — verificado (step-5-kilocode, 2026-10-12, Log 1703): suite `test_construccion_iter6.gd` (23 checks, 0 fallos)
 - [x] BuildGhost con pooling: cero alocaciones en el tick de preview [M]
 - [ ] Raycast de colocación limitado a 1 por frame con cache de celda [M]
 - [x] Ocupación consultada en mapa de celdas en memoria (diccionario) [M]
@@ -241,23 +241,23 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 175 ítems · Completados: 81 · Pendientes: 93 · No resueltos: 1. (Corregido por stepfun-step-5-preview, Kilo Code, 2026-10-13: la línea decía 80/94/1; conteo real por regex = 81 [x] / 1 [?] / 93 [ ]. Drift de 1.)
+**Totales:** 175 ítems · Completados: 81 · Pendientes: 93 · No resueltos: 1. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la línea decía 80/94/1; conteo real por regex = 81 [x] / 1 [?] / 93 [ ]. Drift de 1.)
 
-> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1732):** +4 [ ] -> [x] con utilidades de rejilla y `copiar_pieza` (msg 179).
+> **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1732):** +4 [ ] -> [x] con utilidades de rejilla y `copiar_pieza` (msg 179).
 > **Nuevo:** `ConstruccionMundo.mundo_desde_celda/celda_desde_mundo/esquina_desde_celda` (estáticas, única utilidad compartida del módulo) y `BuildManager.copiar_pieza()` + `BuildHistory.TIPO_COPIAR`.
 > **Suite nueva** `test_construccion_iter7.gd` (25 checks, 0 fallos). Suites verificadas sin regresión: `test_construccion.gd`, `iter2`, `iter6`.
 > **Totales:** 80 [x] / 1 [?] / 94 [ ] = 175 items.
 
-> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-12, Log 1703):** +4 [ ] -> [x] con garantías de integración verificadas en headless (msg 154): `pieza_colocada`/`pieza_demolida` emiten `(receta_id, celda)` y `navmesh_delta` las celdas tocadas (K181, M71 puede suscribirse ya); cero hooks de clima en `scripts/construccion/` y ninguna API de clima en el manager (K180, M32); escrituras y borrados puntuales por celda, sin ninguna llamada a regenerar/remesh (M201/M202). Suite nueva `test_construccion_iter6.gd` (23 checks, 0 fallos).
+> **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1703):** +4 [ ] -> [x] con garantías de integración verificadas en headless (msg 154): `pieza_colocada`/`pieza_demolida` emiten `(receta_id, celda)` y `navmesh_delta` las celdas tocadas (K181, M71 puede suscribirse ya); cero hooks de clima en `scripts/construccion/` y ninguna API de clima en el manager (K180, M32); escrituras y borrados puntuales por celda, sin ninguna llamada a regenerar/remesh (M201/M202). Suite nueva `test_construccion_iter6.gd` (23 checks, 0 fallos).
 > ⚠️ **AVISO DE COLISIÓN:** `test_construccion_iter2.gd` y `iter3` NO compilan desde que otro agente (M166, capa B de assets) agregó `AssetProfile.ruta()` en `build_ghost.gd:96` sin definir la clase `AssetProfile` en el repo. No es un problema de mi cambio: mis suites (iter6, iter1) compilan y pasan. Falta que el agente de M166 agregue la clase o haga el import.
 
-> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-11):** +3 [x] con los ultimos edge cases de la seccion L (msg 142): demolicion ordenada (`piezas_apoyadas_en()` + SOSTIENE_OTRA_PIEZA), fantasma al pool al cerrar el modo (`conectar_fantasma`/`salir_modo`) y guardado a mitad de colocacion (el fantasma nunca entra en el save). Suite nueva `test_construccion_iter5.gd` (39 checks, 0 fallos). Las 5 suites de M17: 452 checks / 0 fallos. Bug latente corregido: un fantasma en pool segua reportando la receta anterior.
+> **Actualizado por step-5-kilocode (Kilo Code, 2026-10-11):** +3 [x] con los ultimos edge cases de la seccion L (msg 142): demolicion ordenada (`piezas_apoyadas_en()` + SOSTIENE_OTRA_PIEZA), fantasma al pool al cerrar el modo (`conectar_fantasma`/`salir_modo`) y guardado a mitad de colocacion (el fantasma nunca entra en el save). Suite nueva `test_construccion_iter5.gd` (39 checks, 0 fallos). Las 5 suites de M17: 452 checks / 0 fallos. Bug latente corregido: un fantasma en pool segua reportando la receta anterior.
 
-> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-11):** +3 [x] implementando los edge cases de la seccion L pedidos por el director (msg 140): rechazo temporal por NPC (`MOTIVOS_TEMPORALES`), limite del mundo por AABB (`FUERA_DEL_MUNDO`) y cooldown anti doble-confirmacion (`DOBLE_CONFIRMACION`). Suite nueva `test_construccion_iter4.gd` (45 checks, 0 fallos). Las 4 suites de M17 quedan en 413 checks / 0 fallos. Regresion encontrada y corregida: el cooldown sobrevivia a `limpiar_estructuras()` y rompia 20 checks de la suite 1; ahora se resetea con el estado de sesion.
+> **Actualizado por step-5-kilocode (Kilo Code, 2026-10-11):** +3 [x] implementando los edge cases de la seccion L pedidos por el director (msg 140): rechazo temporal por NPC (`MOTIVOS_TEMPORALES`), limite del mundo por AABB (`FUERA_DEL_MUNDO`) y cooldown anti doble-confirmacion (`DOBLE_CONFIRMACION`). Suite nueva `test_construccion_iter4.gd` (45 checks, 0 fallos). Las 4 suites de M17 quedan en 413 checks / 0 fallos. Regresion encontrada y corregida: el cooldown sobrevivia a `limpiar_estructuras()` y rompia 20 checks de la suite 1; ahora se resetea con el estado de sesion.
 
-> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-11):** +3 [x] por los 3 assets nuevos del catalogo pedidos por el director (`puente_3.tres` planks 9 3 celdas, `camino_cesped.tres` grass 2, `cerca_bambu.tres` wood 2 con malla real 50-Vegetacion_canas_bambu.glb). Las suites quedaron en 368 checks / 0 fallos (131 + 99 + 138) tras actualizar las expectativas de 33 a 36 recetas en test_construccion_iter2.gd.
+> **Actualizado por step-5-kilocode (Kilo Code, 2026-10-11):** +3 [x] por los 3 assets nuevos del catalogo pedidos por el director (`puente_3.tres` planks 9 3 celdas, `camino_cesped.tres` grass 2, `cerca_bambu.tres` wood 2 con malla real 50-Vegetacion_canas_bambu.glb). Las suites quedaron en 368 checks / 0 fallos (131 + 99 + 138) tras actualizar las expectativas de 33 a 36 recetas en test_construccion_iter2.gd.
 
-> **Actualizado por stepfun-step-5-preview (Kilo Code, 2026-10-11):** +5 [x] con evidencia en disco (`_invertir` reembolso exacto + test_construccion.gd:361-366; catálogo de 4 paredes + 2 puertas; `escribir_voxel` marca chunk dirty; `registrar()` invalida el redo + test_construccion.gd:274; `superficie_ok` con "techo" en 3 recetas). NO se inflaron los 15 que proponía una nota ajena: 10 de esos ítems quedan [ ] por falta de evidencia (puente_3, camino césped, cerca bambú, almacenamiento M14, stacks M14, balance M92, zona->navmesh/M93, integraciones M18/M25/M31/M32/M71/M73). H139 sigue [ ]: el diseño de iter. 3 oculta el fantasma fuera de zona en vez de pintarlo rojo (contradicción de diseño documentada, ver nota de iter. 3). Ítems no renumerados: solo cambió la marca.
+> **Actualizado por step-5-kilocode (Kilo Code, 2026-10-11):** +5 [x] con evidencia en disco (`_invertir` reembolso exacto + test_construccion.gd:361-366; catálogo de 4 paredes + 2 puertas; `escribir_voxel` marca chunk dirty; `registrar()` invalida el redo + test_construccion.gd:274; `superficie_ok` con "techo" en 3 recetas). NO se inflaron los 15 que proponía una nota ajena: 10 de esos ítems quedan [ ] por falta de evidencia (puente_3, camino césped, cerca bambú, almacenamiento M14, stacks M14, balance M92, zona->navmesh/M93, integraciones M18/M25/M31/M32/M71/M73). H139 sigue [ ]: el diseño de iter. 3 oculta el fantasma fuera de zona en vez de pintarlo rojo (contradicción de diseño documentada, ver nota de iter. 3). Ítems no renumerados: solo cambió la marca.
 
 > **Actualizado por DeepSeek-V4.1-Flash (WorkBuddy, Log 1211, 2026-10-03, iter. 1):**
 > +12 [x] (P5, P8, G1, G2, G3, H1, I1, I3, L3, M5, K-M58, P-costos) respaldados por el

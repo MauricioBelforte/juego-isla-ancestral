@@ -1,6 +1,6 @@
 # Registro de Errores — E-11 a E-27
 
-> **Modelo:** stepfun-step-5-preview (último modificador)
+> **Modelo:** step-5-kilocode (último modificador)
 > **Plataforma:** Kilo Code
 > **Fecha:** 2026-10-10 (Sección E-27 agregada: `ResourceSaver.save()` cuelga en `--headless`)
 > **Anterior:** mimo-v2.6-flash-free (último modificador)
@@ -1119,7 +1119,7 @@ salida se inspecciona con `Select-String` sobre la tubería de PowerShell, la sa
 se pierde y parece que el test no corrió — **capturar siempre a archivo**
 (`> log 2>&1`).
 
-**Fecha:** 2026-10-10 16:45 | **Modelo:** stepfun-step-5-preview | **Plataforma:** Kilo Code
+**Fecha:** 2026-10-10 16:45 | **Modelo:** step-5-kilocode | **Plataforma:** Kilo Code
 (M48 Fase 1 — la biblioteca placeholder se escribió a mano y se verificó recargándola;
 los 2 scripts temporales que colgaban fueron eliminados para que nadie los ejecute)
 
@@ -1142,7 +1142,7 @@ los 2 scripts temporales que colgaban fueron eliminados para que nadie los ejecu
 2026-10-10 y el 2026-10-11: M104, M118, M18, M100, M112, M88, M151, M156, M125, M107, M110,
 M150, M153, M37, M61.
 
-**Causa raíz (hallazda 2026-10-11, stepfun-step-5-preview, msgs 61 y 93):** el defecto tiene
+**Causa raíz (hallazda 2026-10-11, step-5-kilocode, msgs 61 y 93):** el defecto tiene
 **3 variantes** y conviene distinguirlas antes de reparar:
 
 1. **Falta solo el pipe de cierre** (la más común) — las 11 celdas están alineadas, solo hay
@@ -1204,7 +1204,7 @@ celda es un pipe literal, no un separador.
 **reportar antes de editar** — insertar un valor inventado en `Prioridad`/`Recom`/`Agente actual`
 es peor que la fila rota.
 
-**Fechar:** 2026-10-11 04:40 | **Modelo:** stepfun-step-5-preview | **Plataforma:** Kilo Code
+**Fechar:** 2026-10-11 04:40 | **Modelo:** step-5-kilocode | **Plataforma:** Kilo Code
 
 ---
 
@@ -1217,7 +1217,7 @@ SCRIPT ERROR: Invalid call to function 'get' in base 'Resource (EventDefinition)
 ```
 
 **Ubicación:** cualquier llamada `recurso.get("clave", valor_por_defecto)`. Caso real:
-`test_event_manager_headless.gd:45` (M74-Eventos, 2026-10-11, detectado por stepfun-step-5-preview).
+`test_event_manager_headless.gd:45` (M74-Eventos, 2026-10-11, detectado por step-5-kilocode).
 
 **Causa:** en Godot 4, `Resource.get()` acepta **un solo** argumento (el nombre de la propiedad).
 No existe la variante con valor por defecto que sí tiene `Dictionary.get()` o `Object.get()`.
@@ -1250,7 +1250,7 @@ var mes: int = int(primer_ev.get("mes")) if primer_ev.get("mes") != null else -1
 se agregaron después sobre la base original). Una aserción exacta sobre contenido se vuelve obsoleta
 con cada iteración: usar umbral (`>= 15`) salvo que el contenido sea fijo por diseño.
 
-**Fechar:** 2026-10-11 09:10 | **Modelo:** stepfun-step-5-preview | **Plataforma:** Kilo Code
+**Fechar:** 2026-10-11 09:10 | **Modelo:** step-5-kilocode | **Plataforma:** Kilo Code
 
 ---
 

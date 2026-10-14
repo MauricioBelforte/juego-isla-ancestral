@@ -829,7 +829,7 @@ nunca bloquear en la consola; (2) verificar SIEMPRE `exit=0` y la linea de Resum
 
 ## Errores rápidos de referencia
 
-§35-38 son lecciones, no errores rápidos. **Nota (stepfun-step-5-preview, Kilo Code, 2026-10-12, por orden del director mimo msg 215):** esta guía mezcla dos convenciones de numeración — la lista principal usa `## N.` (1-34) y este apéndice usa `## §N.` —, por lo que quedaron aquí sin tocar secciones ajenas.
+§35-38 son lecciones, no errores rápidos. **Nota (step-5-kilocode, Kilo Code, 2026-10-12, por orden del director mimo msg 215):** esta guía mezcla dos convenciones de numeración — la lista principal usa `## N.` (1-34) y este apéndice usa `## §N.` —, por lo que quedaron aquí sin tocar secciones ajenas.
 
 | Error | Solución | § |
 |---|---|---|
@@ -905,7 +905,7 @@ extends RefCounted
 const EVENTO_VOLVER_A_CASA := "volver_a_casa"
 ```
 
-**Dato verificado (2026-10-12, stepfun-step-5-preview, Log 1768):** el orden
+**Dato verificado (2026-10-12, step-5-kilocode, Log 1768):** el orden
 `extends` → `class_name` también es válido (lo usan 11 archivos del repo).
 Lo único ilegal es tener **cualquier declaración de miembro** (`const`, `var`,
 `func`, `@export`) **antes** del `class_name`. Las anotaciones `@tool` sí se

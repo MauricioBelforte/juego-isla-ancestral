@@ -20,7 +20,7 @@
 | Exports | `@export` con rango/descripción | `@export_range(0, 100) var damage: int` |
 
 ### Reglas de estilo
-1. 4 espacios; líneas ≤ 120 chars; una responsabilidad por archivo.
+1. TAB (indentación por tabulación, estándar GDScript); líneas ≤ 120 chars; una responsabilidad por archivo. *(Corregido 2026-10-14 por director: 1016/1054 .gd versionados usan TAB, no 4 espacios — la realidad del código manda.)*
 2. Comentarios solo con propósito/por-qué (nunca obvios).
 3. Idiomas de comentarios: español (equipo) — las UI strings van por separado (M53).
 4. Nada de `print()` de debug en producción: usar `Logger` con nivel.

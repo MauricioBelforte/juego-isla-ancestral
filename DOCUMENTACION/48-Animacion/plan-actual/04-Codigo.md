@@ -1,4 +1,4 @@
-**Modelo:** stepfun-step-5-preview (Fase 0, reconstrucción anti-inflación)
+**Modelo:** step-5-kilocode (Fase 0, reconstrucción anti-inflación)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10
 
@@ -229,7 +229,7 @@ una FSM de estados en memoria que ningún sistema consume.
 
 ## Notas del Agente
 
-**Modelo:** stepfun-step-5-preview
+**Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10
 **Estado:** Fase 0 completada (documentación reconstruida contra disco, READ-ONLY sobre código)
