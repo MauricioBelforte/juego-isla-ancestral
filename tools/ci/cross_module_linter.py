@@ -194,7 +194,7 @@ def _strip_strings(line: str) -> str:
 def detect_broken_refs(gd_files: List[str], class_to_file: Dict[str, str], autoloads: Set[str]) -> List[str]:
     """Deteccion de referencias a class_name/autoloads inexistentes.
 
-    FIX 2026-10-12 (stepfun-step-5-preview, orden del director mimo msg 232).
+    FIX 2026-10-12 (step-5-kilocode, orden del director mimo msg 232).
 
     POR QUE RETORNA VACIO:
 

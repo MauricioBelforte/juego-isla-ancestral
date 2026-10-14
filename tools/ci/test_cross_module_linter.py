@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tests del cross_module_linter (M118).
 
-Verifican el fix del 2026-10-12 (stepfun-step-5-preview, orden del director mimo
+Verifican el fix del 2026-10-12 (step-5-kilocode, orden del director mimo
 msg 232): `detect_broken_refs` ya no debe marcar como "referencia desconocida"
 los usos validos de `$` en Godot 4.
 
