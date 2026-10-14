@@ -1,7 +1,7 @@
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Módulo 109: Herramientas Internas (110 ítems)
+# 05-Checklist.md — Módulo 109: Herramientas Internas (138 ítems)
 
 ## Convención
 - `[ ]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
@@ -10,14 +10,14 @@
 ## 1. Framework de editor (RF1-RF5)
 
 - [x] Definir EditorToolBase con undo, guardado y validación [C]
-- [ ] Definir guardado directo en SO/mods de M108 [M]
+- [x] Definir guardado directo en SO/mods de M108 [M]
 - [x] Definir búsqueda por id/nombre/tag en cada editor [M]
-- [ ] Definir colores de validación (rojo bloqueante / amarillo aviso) [S]
+- [x] Definir colores de validación (rojo bloqueante / amarillo aviso) [S]
 - [x] Definir shortcuts por editor (Ctrl+1..14) [S]
 - [x] Definir export/import JSON/CSV en cada editor [M]
 - [ ] Definir reutilización de lista vista/detalle en todos [M]
-- [ ] Definir Undo de Unity en edición de SO [M]
-- [ ] Definir validación incremental al guardar [M]
+- [x] Definir Undo de Unity en edición de SO [M]
+- [x] Definir validación incremental al guardar [M]
 - [ ] Definir red/amarillo por campo con error específico [S]
 
 ## 2. Editor de bloques (RF1)
@@ -147,15 +147,15 @@
 ## 18. Herramienta de debug (RF7)
 
 - [x] Definir menú de debug (M110): flags e invincibilidad [M]
-- [ ] Definir dar objetos/dinero al jugador [S]
-- [ ] Definir completar misión / desbloquear herramienta [S]
-- [ ] Definir cambiar hora/estación/clima [S]
-- [ ] Definir desbloquear isla/sello [S]
-- [ ] Definir resetear NPC y puzzle [S]
-- [ ] Definir regenerar chunk [M]
-- [ ] Definir mostrar colliders, FPS, chunks, navegación [M]
-- [ ] Definir mostrar hitboxes y estados de IA [M]
-- [ ] Definir exportar diagnóstico [S]
+- [x] Definir dar objetos/dinero al jugador [S]
+- [x] Definir completar misión / desbloquear herramienta [S]
+- [x] Definir cambiar hora/estación/clima [S]
+- [x] Definir desbloquear isla/sello [S]
+- [x] Definir resetear NPC y puzzle [S]
+- [x] Definir regenerar chunk [M]
+- [x] Definir mostrar colliders, FPS, chunks, navegación [M]
+- [x] Definir mostrar hitboxes y estados de IA [M]
+- [x] Definir exportar diagnóstico [S]
 
 ## 19. Herramienta de inspección (RF8)
 
@@ -174,30 +174,30 @@
 ## 21. Herramienta de validación (RF10)
 
 - [x] Definir DataValidator global con cross-checks [C]
-- [ ] Definir análisis de recetas→objetos inexistentes [M]
-- [ ] Definir análisis de misiones→diálogos/objetivos [M]
-- [ ] Definir análisis de tiendas→items [M]
-- [ ] Definir análisis de economía→NPC [M]
-- [ ] Definir análisis de rutinas→POI [M]
-- [ ] Definir análisis de loot→objetos [M]
+- [x] Definir análisis de recetas→objetos inexistentes [M]
+- [x] Definir análisis de misiones→diálogos/objetivos [M]
+- [x] Definir análisis de tiendas→items [M]
+- [x] Definir análisis de economía→NPC [M]
+- [x] Definir análisis de rutinas→POI [M]
+- [x] Definir análisis de loot→objetos [M]
 - [x] Definir reporte JSON por dominio con flag bloqueante [M]
 - [x] Definir integración del validator como gate en CI (M112) [M]
 - [x] Definir reutilización del validator en M151 [S]
 
 ## 22. Herramienta de generación (RF11)
 
-- [ ] Definir ContentGenerator con seeds de M10 [M]
-- [ ] Definir sub-seeds para ruinas (M25) y spawns [M]
-- [ ] Definir regeneración reproducible (misma seed → mismo mundo) [M]
-- [ ] Definir valor de semilla en metadata del save (M59) [S]
-- [ ] Definir reporte de generación tras regen [S]
+- [x] Definir ContentGenerator con seeds de M10 [M]
+- [x] Definir sub-seeds para ruinas (M25) y spawns [M]
+- [x] Definir regeneración reproducible (misma seed → mismo mundo) [M]
+- [x] Definir valor de semilla en metadata del save (M59) [S]
+- [x] Definir reporte de generación tras regen [S]
 
 ## 23. Calidad y cierre (RF12)
 
 - [x] Definir aislamiento asmdef Editor (nada en build de jugador) [C]
 - [x] Definir verificación por script de exclusión en build [M]
 - [x] Definir compatibilidad con M110 (Debug Menu) [M]
-- [ ] Definir compatibilidad con M108 (mods) [M]
+- [x] Definir compatibilidad con M108 (mods) [M]
 - [ ] Definir soporte de herramientas para QA (M102) [S]
 - [ ] Definir documentación plan-actual actualizada y firmada [S]
 - [ ] Definir log del módulo en Logs/ [S]
@@ -205,7 +205,7 @@
 
 ## Totales
 
-**Total de ítems:** 127
+**Total de ítems:** 138
 **Ítems resueltos por documentación:** 127 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
 ## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
@@ -224,8 +224,24 @@
 - [x] Auditor no-recursivo (get_files_at) — los builds headless con -s no sostienen el listado recursivo por DirAccess en este entorno (documentado; el npc_visual_check usa load() que sí recorre)
 - [?] Panel del editor de diálogos en el dock (vista de grafo + edición de texto de nodo) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
 
-**Totales:** 138 ítems · Completados: 27 · Pendientes: 108 · No resueltos: 3.
+**Totales:** 138 ítems · Completados: 52 · Pendientes: 83 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 27 [x] / 108 [ ] /
 > 3 [?]. Las marcas no se tocaron.
+## Iteración 3 (2026-10-14 — Step-5-WorkBuddy / WorkBuddy, Log 1845)
+
+- 12 flips `[ ]` -> `[x]` (seccion 18: 6 items de debug; seccion 21: 6 analisis del DataValidator). Modulo design-heavy (items "Definir X"): diseno documentado = hecho (politica del director, M120).
+- Seccion 18 -> 03-Diseno.md L72 (fila DebugMenu: dar objetos/dinero, hora/estacion/clima, desbloquear isla/sello, reset NPC/puzzle, regenerar chunk, mostrar colliders/FPS/chunks/navegacion) + respaldo DoD 01-Requerimientos.md L54.
+- Seccion 21 -> 03-Diseno.md L76 (cross-checks DataValidator: recetas, misiones, tiendas, economia, rutinas, loot).
+- Conteo medido tras flips: 39 [x] / 96 [ ] / 3 [?] = 138 (invariante verificado).
+- Drift corregido: header (110 items) -> (138); "Total de items: 127" -> 138; linea Totales actualizada 27/108/3 -> 39/96/3.
+- Los 3 [?] quedan como estan (verificacion visual del dock y paneles de editores, dueno externo deepseek-v4-flash-vision-exp).
+## Iteración 4 (2026-10-14 — Step-5-WorkBuddy / WorkBuddy, Log 1845)
+
+- 13 flips `[ ]` -> `[x]`: framework de editor (4), debug (3), generacion (5), cierre M108 (1).
+- Seccion 1 -> 03-Diseno.md L40-42 (Undo Unity, guardado directo SO/mods M108, colores de validacion) + 02-Analisis.md L18 (D2-A2: validacion incremental por editor al guardar).
+- Seccion 18 -> 03-Diseno.md L72 (hitboxes/IA, exportar diagnostico) + DoD 01-Requerimientos.md L54. Nota honesta: 'completar mision' es textual en L72/L54; 'desbloquear herramienta' NO es textual (el diseno dice 'desbloquear isla/sello') - marcado por respaldo del DoD, con la salvedad documentada.
+- Seccion 22 -> 03-Diseno.md L80-83 (ContentGenerator con semilla M10, sub-seeds ruinas/spawns, regeneracion reproducible, semilla en metadata del save, export de reporte).
+- Seccion 23 -> 02-Analisis.md L14 (D1-A2: 'compatibles con M108').
+- Conteo medido tras flips: 52 [x] / 83 [ ] / 3 [?] = 138 (invariante verificado).
