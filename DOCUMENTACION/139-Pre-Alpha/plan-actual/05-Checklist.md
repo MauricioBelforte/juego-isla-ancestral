@@ -21,17 +21,17 @@
 
 ## 2. Primer bioma — Aurora (M10/M09/M27)
 
-- [ ] Definir la geografía de Aurora: costa E (puerto), pradera central (pueblo), bosque W, colina N (templo), acantilados S (faro) [M]
-- [ ] Definir el área navegable de ~2 km² [S]
-- [ ] Dividir Aurora en 6 zonas de streaming (M63) [M]
-- [ ] Definir los POIs de cada sector (muelle, plaza, talleres, tienda, mina, templo, faro) [M]
-- [ ] Definir la vegetación del bioma: palmeras, bambú, hibiscos, pasto alto (M50) [M]
-- [ ] Definir el litoral con agua jugable para pesca (M51/M34) [M]
-- [ ] Definir la flora transmisora de estado (M09) [S]
-- [ ] Definir puntos de descanso/cama (M11/M18) [S]
-- [ ] Definir el ciclo día/noche aplicado a Aurora (M31) [S]
-- [ ] Definir el clima base del bioma (tropical suave) (M32) [S]
-- [ ] Definir la fauna inicial visible de Aurora (aves, peces costeros) (M36) [M]
+- [x] Definir la geografía de Aurora: costa E (puerto), pradera central (pueblo), bosque W, colina N (templo), acantilados S (faro) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): 5 sectores definidos en 03-Diseno.md seccion 2.1.1 (costa E-puerto, pradera central-pueblo, bosque W, colina N-templo, acantilados S-faro) con contenido y modulos por sector.
+- [x] Definir el área navegable de ~2 km² [S] — COMPLETADO 2026-10-14 (step-5-kilocode): ~2 km2 definidos en 03-Diseno.md 2.1.1; limite mar-tierra por el nivel de mar de M51.
+- [x] Dividir Aurora en 6 zonas de streaming (M63) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): Costa-E, Pradera, Bosque-W, Colina-N, Acantilados-S y Puerto (transicion) definidas en 03-Diseno.md 2.1.1; base real scripts/stream/stream_manager.gd con suite M63 (6 iteraciones).
+- [x] Definir los POIs de cada sector (muelle, plaza, talleres, tienda, mina, templo, faro) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): POIs por sector definidos en 03-Diseno.md 2.1.1 (muelle, plaza+talleres+tienda, mina, templo, faro). Sin catalogo de POIs en disco: la implementacion es de M22/M64.
+- [x] Definir la vegetación del bioma: palmeras, bambú, hibiscos, pasto alto (M50) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldo real en data/vegetacion/vegetacion_config.json v2 — palmeras (3 tipos en playa), bambu (canas_bambu en ribera), pasto alto (hierba_alta). Hibisco no existe con ese nombre (equivalentes flor_isla/arbusto_floral): deuda de nombrado de M50 anotada en 03-Diseno.md 2.1.1.
+- [x] Definir el litoral con agua jugable para pesca (M51/M34) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): litoral de Aurora definido pescable en 03-Diseno.md 2.1.1; el sistema de pesca existe (scripts/fishing/) sujeto a que M51 integre los voxels de agua (stub es_agua_pescable documentada en M34).
+- [ ] Definir la flora transmisora de estado (M09) [S] — PARCIAL 2026-10-13 (step-5-kilocode): la flora existe (baya_roja registrada en el museo M37) pero el catalogo de flora transmisora de estados de M09 no esta en disco. Definicion pendiente del dueno M09; ver 03-Diseno.md 2.1.1.
+- [x] Definir puntos de descanso/cama (M11/M18) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): puntos de descanso definidos en 03-Diseno.md 2.1.1 (Pradera y Puerto); camas existen como muebles (data/houses/cama_madera.tres, catalogo M18). Implementacion: M18.
+- [x] Definir el ciclo día/noche aplicado a Aurora (M31) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): Aurora usa el ciclo global de M31 sin variacion propia (modulo 31-Ciclo-Dia-Noche + TimeCalendar autoload). Definido en 03-Diseno.md 2.1.1.
+- [ ] Definir el clima base del bioma (tropical suave) (M32) [S] — PARCIAL 2026-10-13 (step-5-kilocode): tropical suave definido en 03-Diseno.md 2.1.1, pero data/clima/ NO EXISTE (verificado). La definicion queda documentada a la espera de que M32 tenga datos para consumirla.
+- [x] Definir la fauna inicial visible de Aurora (aves, peces costeros) (M36) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): aves con respaldo real en data/fauna/catalog.json — gaviota_playera (playa), lechuza_bosque (bosque), halcon_montana (montana). Peces costeros no estan en el catalogo de fauna (son de M34/fishing.json): deuda de catalogo de M36 anotada.
 
 ## 3. Enclave de Coral (núcleo del 2º bioma)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 13 · Pendientes: 127 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 22 · Pendientes: 118 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
