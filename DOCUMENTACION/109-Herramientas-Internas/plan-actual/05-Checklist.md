@@ -22,105 +22,105 @@
 
 ## 2. Editor de bloques (RF1)
 
-- [ ] Definir edición de bloque voxel: id, nombre, textura, tags [M]
-- [ ] Definir edición de físico (sólido/transparente) [S]
-- [ ] Definir validación de ids únicos [S]
-- [ ] Definir referencia a texturas existentes (M47/M108) [M]
-- [ ] Definir vista previa del bloque en 3D [M]
+- [x] Definir edición de bloque voxel: id, nombre, textura, tags [M]
+- [x] Definir edición de físico (sólido/transparente) [S]
+- [x] Definir validación de ids únicos [S]
+- [x] Definir referencia a texturas existentes (M47/M108) [M]
+- [x] Definir vista previa del bloque en 3D [M]
 
 ## 3. Editor de biomas (RF1)
 
-- [ ] Definir edición de bioma: paleta, vegetación, clima [M]
-- [ ] Definir validación de referencia al terreno/bioma válido [M]
-- [ ] Definir edición de vegetación con referencia a bloques [M]
-- [ ] Definir edición de alturas/pisos de generación [S]
-- [ ] Definir previsualización del bioma [S]
+- [x] Definir edición de bioma: paleta, vegetación, clima [M]
+- [x] Definir validación de referencia al terreno/bioma válido [M]
+- [x] Definir edición de vegetación con referencia a bloques [M]
+- [x] Definir edición de alturas/pisos de generación [S]
+- [x] Definir previsualización del bioma [S]
 
 ## 4. Editor de NPC (RF1)
 
-- [ ] Definir edición de NPC: nombre, profesión, casa [M]
-- [ ] Definir edición de rutina diaria con POI/tiempo (M19) [C]
-- [ ] Definir edición de relaciones/amistad (M20) [M]
-- [ ] Definir enlace con economía del NPC (M38) [M]
-- [ ] Definir validación de rutina: POI y tiempos válidos [M]
-- [ ] Definir vista previa del horario semanal [S]
+- [x] Definir edición de NPC: nombre, profesión, casa [M]
+- [x] Definir edición de rutina diaria con POI/tiempo (M19) [C]
+- [x] Definir edición de relaciones/amistad (M20) [M]
+- [x] Definir enlace con economía del NPC (M38) [M]
+- [x] Definir validación de rutina: POI y tiempos válidos [M]
+- [x] Definir vista previa del horario semanal [S]
 
 ## 5. Editor de diálogos (RF1)
 
 - [x] Definir editor de árbol de nodos (M21) [C]
-- [ ] Definir edición de condiciones por flag [M]
-- [ ] Definir edición de efectos (objetos, amistad, misiones) [M]
-- [ ] Definir validación: referencias a flags/objetos/misiones existentes [M]
+- [x] Definir edición de condiciones por flag [M]
+- [x] Definir edición de efectos (objetos, amistad, misiones) [M]
+- [x] Definir validación: referencias a flags/objetos/misiones existentes [M]
 - [x] Definir simulación de conversación en editor [M]
-- [ ] Definir export de diálogos para localización (M87) [M]
+- [x] Definir export de diálogos para localización (M87) [M]
 
 ## 6. Editor de misiones (RF1)
 
-- [ ] Definir edición de etapa/objetivo/recompensa (M22/23) [M]
-- [ ] Definir validación: objetivos refieren items/NPC/POI válidos [M]
-- [ ] Definir detección de ciclos en prereq de misiones [C]
+- [x] Definir edición de etapa/objetivo/recompensa (M22/23) [M]
+- [x] Definir validación: objetivos refieren items/NPC/POI válidos [M]
+- [x] Definir detección de ciclos en prereq de misiones [C]
 - [ ] Definir vistas de misión principal vs secundarias [S]
-- [ ] Definir export a testear en M112 [S]
+- [x] Definir export a testear en M112 [S]
 
 ## 7. Editor de recetas (RF1)
 
-- [ ] Definir edición de receta de crafting (M16/17) [M]
-- [ ] Definir edición de estación de trabajo requerida [S]
-- [ ] Definir validación de ingreso/salida con objetos existentes [M]
+- [x] Definir edición de receta de crafting (M16/17) [M]
+- [x] Definir edición de estación de trabajo requerida [S]
+- [x] Definir validación de ingreso/salida con objetos existentes [M]
 - [ ] Definir detección de recetas inalcanzables [M]
 - [ ] Definir vista por categoría de crafting [S]
 
 ## 8. Editor de economía (RF1)
 
-- [ ] Definir edición de precios base por objeto (M38) [M]
-- [ ] Definir edición de influencia de NPC en precios [M]
-- [ ] Definir validación: precios > 0 y NPC refiere economía [M]
+- [x] Definir edición de precios base por objeto (M38) [M]
+- [x] Definir edición de influencia de NPC en precios [M]
+- [x] Definir validación: precios > 0 y NPC refiere economía [M]
 - [ ] Definir simulador de mercado rápido [M]
-- [ ] Definir export de tabla de precios a CSV [S]
+- [x] Definir export de tabla de precios a CSV [S]
 
 ## 9. Editor de tiendas (RF1)
 
-- [ ] Definir edición de inventario y stock (M39) [M]
-- [ ] Definir edición de restock por día [S]
-- [ ] Definir validación de items existentes y sin duplicados [M]
+- [x] Definir edición de inventario y stock (M39) [M]
+- [x] Definir edición de restock por día [S]
+- [x] Definir validación de items existentes y sin duplicados [M]
 - [ ] Definir vista por NPC/vendedor [S]
 
 ## 10. Editor de clima (RF1)
 
-- [ ] Definir edición de climas (M32) con duración y transición [M]
-- [ ] Definir edición de FX asociados (lluvia, niebla) [M]
-- [ ] Definir validación de duración y sin saltos de intensidad [S]
-- [ ] Definir previsualización del clima [S]
+- [x] Definir edición de climas (M32) con duración y transición [M]
+- [x] Definir edición de FX asociados (lluvia, niebla) [M]
+- [x] Definir validación de duración y sin saltos de intensidad [S]
+- [x] Definir previsualización del clima [S]
 
 ## 11. Editor de estaciones (RF1)
 
-- [ ] Definir edición de estaciones con duración y eventos (M31) [M]
-- [ ] Definir validación de no solapamiento de fechas [S]
-- [ ] Definir edición de efectos por estación (terreno M51/M50) [M]
+- [x] Definir edición de estaciones con duración y eventos (M31) [M]
+- [x] Definir validación de no solapamiento de fechas [S]
+- [x] Definir edición de efectos por estación (terreno M51/M50) [M]
 - [ ] Definir vista de calendario anual [S]
 
 ## 12. Editor de puzzles (RF1)
 
-- [ ] Definir edición de condiciones y orden (M24) [M]
-- [ ] Definir edición de recompensa y unlock de zona [M]
-- [ ] Definir validación: solución alcanzable sin bugs [C]
-- [ ] Definir previsualización interactiva [M]
-- [ ] Definir marcado de puzzles del Templo Subterráneo (M26) [S]
+- [x] Definir edición de condiciones y orden (M24) [M]
+- [x] Definir edición de recompensa y unlock de zona [M]
+- [x] Definir validación: solución alcanzable sin bugs [C]
+- [x] Definir previsualización interactiva [M]
+- [x] Definir marcado de puzzles del Templo Subterráneo (M26) [S]
 
 ## 13. Editor de ruinas (RF1)
 
-- [ ] Definir edición de layout de ruina (M25) [C]
-- [ ] Definir edición de loot table [M]
-- [ ] Definir validación: loot refiere objetos; layout valida contra seed [M]
-- [ ] Definir regeneración de ruina con misma seed [M]
-- [ ] Definir previsualización de la ruina generada [S]
+- [x] Definir edición de layout de ruina (M25) [C]
+- [x] Definir edición de loot table [M]
+- [x] Definir validación: loot refiere objetos; layout valida contra seed [M]
+- [x] Definir regeneración de ruina con misma seed [M]
+- [x] Definir previsualización de la ruina generada [S]
 
 ## 14. Editor de spawns (RF1)
 
-- [ ] Definir edición de spawn por bioma/hora/estación [M]
-- [ ] Definir edición de densidad y fauna/flora (M36/65) [M]
-- [ ] Definir validación: entidad existe y density ≤ máximo [M]
-- [ ] Definir previsualización de densidad aplicada [S]
+- [x] Definir edición de spawn por bioma/hora/estación [M]
+- [x] Definir edición de densidad y fauna/flora (M36/65) [M]
+- [x] Definir validación: entidad existe y density ≤ máximo [M]
+- [x] Definir previsualización de densidad aplicada [S]
 
 ## 15. Editor de mapas (RF1)
 
@@ -206,8 +206,8 @@
 ## Totales
 
 **Total de ítems:** 138
-**Ítems resueltos por documentación:** 127 (0 pendientes, 0 dudas — DoD cubierto)
-**Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+**Ítems resueltos por documentación:** 107 (28 pendientes, 3 dudas)
+**Ítems pendientes de implementación:** 28 (resto de vistas/exports sin respaldo textual: ver iteracion 5)
 ## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] Framework común de editores: `scripts/editor/tools/editor_base.gd` (@tool PanelContainer) — lista de entradas + formulario por campo + guardado con backup .bak + mensajes de estado (base data-driven para los 14 editores RF1)
@@ -224,7 +224,7 @@
 - [x] Auditor no-recursivo (get_files_at) — los builds headless con -s no sostienen el listado recursivo por DirAccess en este entorno (documentado; el npc_visual_check usa load() que sí recorre)
 - [?] Panel del editor de diálogos en el dock (vista de grafo + edición de texto de nodo) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
 
-**Totales:** 138 ítems · Completados: 52 · Pendientes: 83 · No resueltos: 3.
+**Totales:** 138 ítems · Completados: 107 · Pendientes: 28 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 27 [x] / 108 [ ] /
@@ -245,3 +245,25 @@
 - Seccion 22 -> 03-Diseno.md L80-83 (ContentGenerator con semilla M10, sub-seeds ruinas/spawns, regeneracion reproducible, semilla en metadata del save, export de reporte).
 - Seccion 23 -> 02-Analisis.md L14 (D1-A2: 'compatibles con M108').
 - Conteo medido tras flips: 52 [x] / 83 [ ] / 3 [?] = 138 (invariante verificado).
+## Iteración 5 (2026-10-14 — Step-5-WorkBuddy / WorkBuddy, Log 1847)
+
+- 55 flips `[ ]` -> `[x]` en las secciones 2-14 (los 14 editores de dominio de RF1). Modulo design-heavy: diseno documentado = hecho (politica del director, M120).
+- Seccion 2 (bloques) -> 03-Diseno §3 L50 ("Bloques | id, nombre, textura/MOD, físico (sólido/transparente), tags | ids únicos; texturas existen") + 01-Requerimientos §3.1 (L13).
+- Seccion 3 (biomas) -> 03-Diseno §3 L51 ("Biomas | id, paleta, vegetación, clima asociado, altura/piso | refere a bioma de terreno válido; vegetación refiere bloques") + 01-Requerimientos §3.2 (L14).
+- Seccion 4 (NPC) -> 03-Diseno §3 L52 ("NPC | id, nombre, profesión, rutina (M19), relación (M20), economía | rutina refiere tiempo/POI válidos") + 01-Requerimientos §3.3 (L15) + fila Economia L56 ("influencia NPC (M38)") para el item de enlace con economia.
+- Seccion 5 (dialogos) -> 03-Diseno §3 L53 ("Diálogos | nodos, línea, condiciones (flags), efectos (objetos/amistad) | referencias a flags/objetos/misiones existentes") + RF6 (01-Requerimientos L43) para el export.
+- Seccion 6 (misiones) -> 03-Diseno §3 L54 ("Misiones | etapas, objetivos, condiciones, recompensas (M22/23) | objetivos refieren items/NPC/POI válidos; no ciclos en prerreq") + 01-Requerimientos §5.7 (L58, tests en M112) y 02-Analisis L56 para el export a testear.
+- Seccion 7 (recetas) -> 03-Diseno §3 L55 ("Recetas | ingreso/salida, estación de trabajo, desbloqueo (M16/17) | ing/out refiere objetos; estación existe") + 01-Requerimientos §3.6 (L18).
+- Seccion 8 (economia) -> 03-Diseno §3 L56 ("Economía | precio base por objeto, influencia NPC (M38) | precios > 0; NPC refiere economía existente") + 01-Requerimientos §3.7 (L19) + RF6 para el export CSV.
+- Seccion 9 (tiendas) -> 03-Diseno §3 L57 ("Tiendas | inventario, restock, moneda (M39) | items existen; no duplicados") + 01-Requerimientos §3.8 (L20).
+- Seccion 10 (clima) -> 03-Diseno §3 L58 ("Clima | climas (M32), transiciones, FX | duración > 0; top - grade sin saltos") + 01-Requerimientos §3.9 (L21).
+- Seccion 11 (estaciones) -> 03-Diseno §3 L59 ("Estaciones | duración, eventos por estación (M31) | no solapamiento de fechas") + 01-Requerimientos §3.10 (L22).
+- Seccion 12 (puzzles) -> 03-Diseno §3 L60 ("Puzzles | condiciones, orden, recompensa (M24) | recompensa refiere ítem; solución alcanzable") + 01-Requerimientos §3.11 (L23) + 03-Diseno §1 L23 (PuzzleEditorWindow, M24/25/26) para el marcado del Templo.
+- Seccion 13 (ruinas) -> 03-Diseno §3 L61 ("Ruinas | layout, loot table, puzzles (M25) | loot refiere objetos; layout valida contra seed") + 01-Requerimientos §3.12 (L24) + 03-Diseno §6 L81-82 (sub-seeds para ruinas, regenerar con semilla X reproducible) para la regeneracion.
+- Seccion 14 (spawns) -> 03-Diseno §3 L62 ("Spawns | bioma/hora, entidad (M36/65), densidad | entidad existe; no rates > máximo") + 01-Requerimientos §3.13 (L25, "fauna/flora por bioma/hora").
+- Previsualizaciones -> RF4 (01-Requerimientos L41): "Previsualización en vivo (cambios aplicados al entrar al juego)" — requisito generico del toolset que cubre los 8 items de vista previa de las secciones 2-14.
+- **Salvedades honestas** (concepto respaldado, acotador no textual en ninguna fuente del modulo): preview del bloque "en 3D" (L29), "casa" del NPC (L41), "horario semanal" (L46), "misiones" como efecto de dialogo (L52), destino "localizacion (M87)" del export (L55), restock "por dia" (L84), FX "lluvia, niebla" (L91), efectos por estacion sobre "terreno M51/M50" (L99), "unlock de zona" (L105), preview "interactiva" de puzzles (L107), "marcado" de puzzles del Templo (L108), estacion en spawns (L120). Marcados por el respaldo del diseno base, con esta nota explicita.
+- **Quedan [ ] honestos (6 items de secciones 2-14, sin respaldo textual medido):** L62 vistas mision principal vs secundarias; L70 deteccion de recetas inalcanzables; L71 vista por categoria de crafting; L78 simulador de mercado rapido; L86 vista por NPC/vendedor; L100 vista de calendario anual. Ninguna fuente del modulo los documenta.
+- Conteo medido tras los 55 flips: 107 [x] / 28 [ ] / 3 [?] = 138 (invariante verificado por script).
+- Drift corregido: las lineas del bloque Totales heredado decian "resueltos por documentacion: 127 (0 pendientes, 0 dudas)" y "pendientes de implementacion: 0" -> alineadas al conteo real (107 / 28), y la linea del apendice 52/83/3 -> 107/28/3.
+- Fuera de alcance de esta iteracion (siguen [ ]): seccion 1 (L18 reutilizacion lista vista/detalle, L21 rojo/amarillo por campo), secciones 15-17, 19, 20 y 3 items de la 23 (soporte QA M102, documentacion firmada, log del modulo).
