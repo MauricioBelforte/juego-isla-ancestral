@@ -102,20 +102,20 @@
 - [x] Definir: acceso de datos solo vía módulos de datos [S] (03-Diseno §6.5)
 - [ ] Definir: tests unitarios obligatorios para lógica pura (M-QA) [S]
 - [x] Definir: revisión de convenciones en cada PR (revisión de código) [S] (01-Requerimientos §4.2 (guia verificable para cualquier PR) + 03-Diseno §1)
-- [ ] Definir: actualización de este checklist al crear módulos nuevos [S]
-- [ ] Definir: registro de cada decisión de código en Logs [S]
+- [x] Definir: actualización de este checklist al crear módulos nuevos [S] (03-Diseno §9.1; AGENTS.md §21.1)
+- [x] Definir: registro de cada decisión de código en Logs [S] (03-Diseno §9.2; AGENTS.md §6.1-§6.3)
 
 ## G. Integración con otros módulos (10)
 
 - [x] Documentar flujo hacia M07 (arquitectura: managers y autoloads) [S] (04-Codigo §3 (EventBus/autoloads -> M07))
-- [ ] Documentar flujo hacia M11 (state machine del jugador) [S]
+- [x] Documentar flujo hacia M11 (state machine del jugador) [S] (04-Codigo §3 (FSM del jugador -> M11; `player_fsm.gd`:1-2/25/108; `EventBus.PlayerEvents`))
 - [x] Documentar flujo hacia M29 (GameClock) [S] (04-Codigo §3 (EventBus tipado -> M29))
 - [x] Documentar flujo hacia M59 (GameState/guardado) [S] (04-Codigo §3 (Logger+ErrorHandler -> M59))
 - [x] Documentar flujo hacia M53 (UI sin lógica) [S] (04-Codigo §3 (regla de capas -> M53))
-- [ ] Documentar flujo hacia M58 (Settings de accesibilidad) [S]
+- [x] Documentar flujo hacia M58 (Settings de accesibilidad) [S] (04-Codigo §3 (autoload `GameSettings` -> M58; `core/game_settings.gd`:7/29; `scripts/accesibilidad/`))
 - [x] Documentar flujo hacia M61 (rendimiento: pooling/timers) [S] (04-Codigo §3 (Logger+ErrorHandler -> M61))
 - [ ] Documentar flujo hacia QA (tests unitarios desde M1) [S]
-- [ ] Documentar flujo hacia M08 (voxel tools + estado de chunks) [S]
+- [x] Documentar flujo hacia M08 (voxel tools + estado de chunks) [S] (04-Codigo §3 (EventBus dominio `world` -> M08; `core/event_bus.gd`:50-56))
 - [ ] Verificar que ningún módulo contradice la guía de convenciones [S]
 
 ## H. Edge cases y verificación documental (12)
@@ -126,16 +126,16 @@
 - [x] Documentar edge case: ruta de `res://` vs `user://` (guardados) [S] (03-Diseno §8.4 (save_schema.gd:17; save_writer.gd:49))
 - [x] Documentar edge case: floats y determinismo (generación procedural) [S] (03-Diseno §8.5 (island_generator.gd:47/54/61/68; game_clock.gd:203))
 - [x] Documentar edge case: threads y nodos (call_deferred obligatorio) [S] (03-Diseno §8.6 (arbol no thread-safe))
-- [ ] Verificar trazabilidad de los 31 puntos del plan maestro [S]
+- [x] Verificar trazabilidad de los 27 puntos del plan maestro [S] (MEDIDO 2026-10-14: plan-inicial-minimo §4 = 27 puntos (L106-137); tabla 02-Analisis §1 = 27 filas, mapeo 1:1)
 - [ ] Verificar coherencia con AGENTS.md (convenciones §24) [S]
 - [ ] Actualizar CHECKLIST-GLOBAL con el estado de M05 [S]
 - [x] Actualizar DOCUMENTACION/README.md con el componente 05 [S] (verificado: README lista 05-Lenguaje-Y-Programacion (nota: su conteo 102/102 quedo stale))
-- [ ] Generar log de finalización y actualizar ULTIMO_NUMERO [S]
+- [x] Generar log de finalización (ULTIMO_NUMERO retirado: protocolo v3) [S] (Log 1842; ULTIMO_NUMERO.txt retirado en commits 2ac8b4b/b65c30b; el log se numera desde Logs/NUMEROS_DISPONIBLES.txt)
 - [x] Copiar plan-inicial → plan-actual (espejo vigente) [S] (verificado: DOCUMENTACION/05-Lenguaje-Y-Programacion/plan-actual/ existe (5 archivos; espejo vigente))
 
 ---
 
-**Totales:** 103 ítems · Completados: 91 · Pendientes: 12 · No resueltos: 0.
+**Totales:** 103 ítems · Completados: 98 · Pendientes: 5 · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 
@@ -195,3 +195,23 @@
 - **H8** (coherencia con AGENTS.md §24): **FALLA** - AGENTS.md §24 describe **Unity + C#** mientras M05 fija Godot 4.x + GDScript. Drift de documento ajeno; reportado, NO editado.
 - **H9** (actualizar CHECKLIST-GLOBAL): la fila 05 existe; el flip de la fila lo aplica el director.
 - **H11** (log de finalizacion + ULTIMO_NUMERO): log generado; `ULTIMO_NUMERO.txt` esta **retirado** (protocolo v3, commits `2ac8b4b`/`b65c30b`) -> item obsoleto.
+
+## Cierre de items de proceso (2026-10-14 - DeepSeek-V4.1-Flash)
+
+4 flips `[ ]` -> `[x]` (F9, F10, H7, H11) sobre items de **proceso/documento** del propio modulo, listados por el director (msg 239). Totales: **95/103**.
+
+- **F9** (actualizacion del checklist al crear modulos): definido en `03-Diseno` §9.1 (dos indices: maestro M01 + fila GLOBAL; el `05-Checklist` del modulo es la fuente de verdad de sus subitems).
+- **F10** (registro de decisiones en Logs): definido en `03-Diseno` §9.2 (protocolo v3, AGENTS.md §6).
+- **H7** (trazabilidad de los puntos del plan maestro): **RESUELTO por medicion** - el plan maestro (`00-PLAN-INICIAL/Plan-inicial-minimo.md` §4, L106-137) tiene **27** puntos, no 31; la tabla de `02-Analisis` §1 mapea 1:1 con ellos. Drift "31" corregido en `02-Analisis` §1 y `04-Codigo` (linea 59).
+- **H11** (log de finalizacion + ULTIMO_NUMERO): log generado (Log 1842); `ULTIMO_NUMERO.txt` esta **retirado** (protocolo v3) -> item reescrito para reflejarlo.
+
+### Los 5 `[ ]` restantes (honestidad - NO flipeados)
+
+> **Iter. 4 (2026-10-14, DeepSeek-V4.1-Flash):** G2/G6/G9 pasaron a `[x]` con evidencia medida
+> (ver `04-Codigo` §3 y su nota). Quedan 5.
+
+- **F7** (tests unitarios obligatorios para logica pura): dueno externo **M-QA** (04-Codigo §4).
+- **G8** (flujo hacia QA): dueno **M-QA** (04-Codigo §4).
+- **G10** (ningun modulo contradice la guia): **FALLA la verificacion** - medido 2026-10-14 sobre los 1054 `.gd` versionados de `scripts/`: **1016 con TAB** vs **13 con 4 espacios**, mientras `03-Diseno` L23 declara "4 espacios". La guia contradice al codigo -> decision del director (corregir la guia a TAB o declarar la regla aspiracional). NO se normalizan 1016 archivos.
+- **H8** (coherencia con AGENTS.md §24): **FALLA** - AGENTS.md §24 describe **Unity + C#** mientras M05 fija Godot 4.x + GDScript. Drift de documento ajeno; reportado, NO editado.
+- **H9** (actualizar CHECKLIST-GLOBAL): la fila 05 refleja 91/103; debe pasar a 98/103 (la fila la aplica el director).

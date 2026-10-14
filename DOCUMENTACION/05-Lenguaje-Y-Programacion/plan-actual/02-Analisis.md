@@ -3,7 +3,9 @@
 
 # 02-Analisis.md — Módulo 05: Lenguaje y Programación
 
-## 1. Análisis de los 31 puntos del plan maestro (sección 4)
+## 1. Análisis de los 27 puntos del plan maestro (sección 4)
+
+> **Corrección 2026-10-14 (DeepSeek-V4.1-Flash):** el título decía "31 puntos" (drift). Medido: `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md` §4 "LENGUAJE Y PROGRAMACIÓN" (L106-137) tiene **27** puntos, y la tabla de abajo mapea 1:1 con esos 27 (columna `#` 1-27). El número correcto es **27**.
 
 | # | Punto | Resolución |
 |---|---|---|

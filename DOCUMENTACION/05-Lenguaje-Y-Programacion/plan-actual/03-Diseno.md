@@ -216,3 +216,42 @@ contamina a todos los consumidores y sobrevive a un "reload".
 - Regla: la lógica pesada que corre en un hilo opera sobre **datos puros** (arrays/diccionarios),
   nunca sobre `Node`/`Resource` vivos; la aplicación a la escena se difiere.
 - Mismo principio que E8: la mutación del árbol va diferida (GUIA-GODOT/01 §13-§14).
+
+## 9. Proceso de código (F9-F10)
+
+Reglas de proceso que aplican a TODO módulo de código. Se documentan en M05 porque este módulo
+fija el lenguaje y las convenciones del proyecto; las fuentes normativas son `AGENTS.md` (§6 logs,
+§21 protocolo multiagente) y el índice maestro de módulos.
+
+### 9.1 F9 — Actualización de checklists al crear módulos nuevos
+
+Al **crear** un módulo `M##` (o añadir un componente al proyecto) se actualizan **dos** índices, y
+ninguno se regenera a mano item por item:
+
+1. **Índice maestro de módulos** — `DOCUMENTACION/01-Fundamentos-Del-Proyecto/plan-actual/05-Checklist.md`
+   (152 items). Cada item `**M##**` apunta a la carpeta `DOCUMENTACION/{##+1:03d}-{Nombre}`
+   (medido: `**M04** Lenguaje y Programación` -> `05-Lenguaje-Y-Programacion`). Un módulo nuevo
+   agrega su item `**M##**` con el conteo medido de su `05-Checklist.md`.
+2. **Fila del módulo en `CHECKLIST-GLOBAL.md`** (raíz; 1 fila = 1 módulo). Su celda `Progreso` debe
+   coincidir con el `**Totales:**` del `05-Checklist.md` del módulo: `scripts/verificar_checklist.py`
+   lo cruza y sale con exit 1 si difieren.
+
+Regla dura: el módulo nace con su propio `05-Checklist.md` (secciones + `**Totales:**`), y **ese
+checklist es la fuente de verdad de sus subitems**; el índice maestro y la fila GLOBAL solo
+**resumen** (AGENTS.md §21.1). El item del índice maestro y la fila GLOBAL los aplica su dueño
+(el director), no el módulo que se está cerrando.
+
+### 9.2 F10 — Registro de cada decisión de código en Logs
+
+Toda decisión de código (fix, refactor, elección de patrón, cambio de dataset) se registra en un log
+en `Logs/` según **AGENTS.md §6**:
+
+- **Numeración (protocolo v3, §6.1):** el número se **consume** tomando la **primera línea** de
+  `Logs/NUMEROS_DISPONIBLES.txt` con `scripts/reservar_log.py --reservar` (un número = un archivo; no
+  hay archivo de reserva). El número se anota en el backlog personal
+  (`TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`) antes de escribir el log.
+- **Formato (§6.2):** `Logs/{N}-DESC_AAAA-MM-DD_HH-MM-SS.md`, con header `# Log {N}: ...`, fecha/hora
+  reales, modelo, plataforma, resumen, cambios y archivos modificados.
+- **Higiene:** el log es **ASCII puro** (`LC_ALL=C grep -c '[^ -~]'` == 0). `ULTIMO_NUMERO.txt` y
+  `Logs/reservas/` están **retirados** desde el protocolo v3 (commits `2ac8b4b`/`b65c30b`).
+- La DoD (AGENTS.md §21.6) exige el log generado para marcar `[x]` un subitem.

@@ -37,6 +37,26 @@ Módulo de **convenciones y patrones**. No genera código de juego aún (se apli
 | Patrón autoload para servicios | M07 (arquitectura) |
 | Logger+ErrorHandler obligatorios | M59 (guardado), M61 (rendimiento) |
 | Regla de capas (gameplay sin UI) | M53 (UI), M07 |
+| FSM del jugador: `enum`+`match` en `RefCounted` (no nodos) | M11 (`player_fsm.gd`) |
+| Config global vía autoload `GameSettings` (señal `settings_changed`) | M58 (accesibilidad) |
+| Estado del mundo por EventBus tipado (dominio `world`) | M08 (`chunk_modified`, `block_placed`) |
+
+> **Flujos M11/M58/M08 documentados (2026-10-14, DeepSeek-V4.1-Flash).** Cierra los ítems
+> `G. Documentar flujo hacia M11/M58/M08` del `05-Checklist.md`. Medición (rutas relativas a
+> `game/isla-ancestral/`):
+> - **M11** — `scripts/player/player_fsm.gd` es `class_name PlayerFSM` + `extends RefCounted`
+>   (L1-2), `enum Estado` (L25), `transicionar()` (L108), `derivar(snapshot)` (L125). Es la
+>   convención "lógica pura en `RefCounted`, sin nodos" (03-Diseno §6.5 y §7.x) aplicada a la
+>   state machine del jugador. Eventos del jugador: `EventBus.PlayerEvents`
+>   (`core/event_bus.gd`, `player_died`/`level_up`/`damage_taken`).
+> - **M58** — el autoload `GameSettings` (`scripts/core/game_settings.gd`, fila de §2 de este
+>   doc) declara `signal settings_changed` (L7) y persiste en `user://settings.cfg` (L29). La
+>   config de accesibilidad vive en `scripts/accesibilidad/` (`accesibilidad_manager.gd` L25
+>   `RUTA_PERFIL := "user://accessibility_profile.json"`, `aplicador_accesibilidad.gd`).
+> - **M08** — el dominio `world` del EventBus tipado define el estado de chunks:
+>   `core/event_bus.gd` L50-56 (`block_placed`, `block_removed`, `chunk_modified`,
+>   `biome_changed`); los scripts de mundo están en `scripts/world/` (`block_catalog.gd`,
+>   `block_type.gd`).
 
 ## 4. Pendientes del módulo (dueño asignado)
 
@@ -56,7 +76,7 @@ Módulo de **convenciones y patrones**. No genera código de juego aún (se apli
 
 ### Lo que hice
 - Decidí GDScript como lenguaje principal con justificación (Voxel Tools cubre el rendimiento).
-- Resolví los 31 puntos del plan maestro (sección 4) con diseño de patrones transversales.
+- Resolví los 27 puntos del plan maestro (sección 4) con diseño de patrones transversales.
 - Guía de convenciones verificable + arquitectura de carpetas + reglas "done".
 
 ### Lo que NO pude hacer (honestidad obligatoria)
