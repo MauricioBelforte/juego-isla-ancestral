@@ -9,15 +9,23 @@ Módulo de **convenciones y patrones**. No genera código de juego aún (se apli
 
 ## 2. Archivos que este módulo influye directamente
 
-| Archivo futuro | Sistema | Módulo dueño |
+| Archivo real (verificado 2026-10-13) | Sistema | Módulo dueño |
 |---|---|---|
-| `scripts/core/event_bus.gd` | EventBus | M05/M07 |
-| `scripts/core/game_clock.gd` | Reloj/calendario | M29 |
-| `scripts/core/logger.gd` | Logs con rotación | M05 |
-| `scripts/core/error_handler.gd` | Errores central | M05 |
-| `scripts/core/settings.gd` | Config | M05/M58 |
-| `scripts/world/voxel/*` | Voxel | M08 |
-| `scripts/gameplay/player/*` | Jugador | M11 |
+| `scripts/core/event_bus.gd` | EventBus (autoload `EventBus`) | M05/M07 |
+| `scripts/time/game_clock.gd` | Reloj/calendario (autoload `GameTime`) | M29 |
+| `scripts/logging/logger.gd` | Logs con rotación (autoload `GameLogger`) | M05 |
+| `scripts/core/game_settings.gd` | Config (autoload `GameSettings`) | M05/M58 |
+| `scripts/world/` (block_*, terreno) | Voxel/mundo | M08 |
+| `scripts/player/` (player.gd, equipment_*) | Jugador | M11 |
+| (NO existe) `scripts/core/error_handler.gd` | Errores central | M05 — diseñado (03-Diseno §3), SIN implementar |
+
+> **Drift de rutas corregido (2026-10-13, DeepSeek-V4.1-Flash).** La tabla previa citaba rutas inexistentes:
+> `scripts/core/game_clock.gd` (real: `scripts/time/game_clock.gd`), `scripts/core/logger.gd` (real:
+> `scripts/logging/logger.gd`), `scripts/core/settings.gd` (real: `scripts/core/game_settings.gd`) y
+> `scripts/gameplay/player/*` (real: `scripts/player/`; no existe `scripts/gameplay/`). Además
+> `scripts/core/error_handler.gd` **NO existe** en el árbol: el patrón ErrorHandler está diseñado pero
+> sin implementación. Medición: `find game/isla-ancestral/scripts -name '<x>.gd'` + bloque `[autoload]`
+> de `project.godot`. Esto cierra el drift señalado en la fila 05 de `CHECKLIST-GLOBAL.md`.
 
 ## 3. Decisiones que otros módulos consumen
 

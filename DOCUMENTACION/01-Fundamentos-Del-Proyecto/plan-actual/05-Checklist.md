@@ -79,7 +79,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 - [ ] **M40** Música [C] 🟡 — acústica/lo-fi por bioma, leitmotifs, música adaptativa, loops
 - [ ] **M41** Sonido Ambiental [M] 🟡 — viento, agua, océano, cuevas, ruinas, mecanismos
-- [ ] **M42** Efectos de Sonido [M] 🟡 — pasos, herramientas, bloques, diálogo, menús, logros
+- [x] **M42** Efectos de Sonido [M] 🟡 — pasos, herramientas, bloques, diálogo, menús, logros (checklist 43-Efectos-De-Sonido 97/97 (0 [ ] / 0 [?]))
 - [ ] **M43** ASMR y Feedback [M] 🟡 — sensaciones táctiles de picar/cosechar/construir, capas sonoras
 - [ ] **M44** Arte 3D [C] 🔴 — estilo cozy voxel redondeado, presupuesto de polígonos, LOD
 - [ ] **M45** Arte 2D [M] 🟡 — logo, iconos, UI, mapas, símbolos ancestrales, guías de estilo
@@ -176,12 +176,12 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 ### FASE 14 — ENTREGA Y PUBLICACIÓN
 
-- [ ] **M115** Instalador [S] 🟢 — build release, instalación limpia, actualización, desinstalación
+- [x] **M115** Instalador [S] 🟢 — build release, instalación limpia, actualización, desinstalación (checklist 116-Instalador 192/192)
 - [ ] **M116** Build System [M] 🟡 — builds automatizados dev/QA/staging/release, versión, firmado
 - [ ] **M117** CI/CD [M] 🟢 — tests automáticos, builds, artifacts, branch protection
 - [ ] **M118** Actualizaciones [M] 🟡 — patches, versionado, compatibilidad de saves, migraciones
-- [ ] **M119** DLC y Expansiones [M] 🟢 — estrategia post-lanzamiento, nuevas islas
-- [ ] **M120** Soporte Post-Lanzamiento [M] 🟢 — canal de soporte, tickets, hotfixes, roadmap
+- [x] **M119** DLC y Expansiones [M] 🟢 — estrategia post-lanzamiento, nuevas islas (checklist 120-DLC-Y-Expansiones 222/222)
+- [x] **M120** Soporte Post-Lanzamiento [M] 🟢 — canal de soporte, tickets, hotfixes, roadmap (checklist 121-Soporte-Post-Lanzamiento 211/211)
 - [ ] **M121** Crash Reporting [S] 🟢 — captura de stack, versión, agrupación, priorización
 - [ ] **M122** Modding [C] 🟢 — decidir si habrá, API, seguridad (opcional muy a futuro)
 - [ ] **M123** Contenido Generado por Usuarios [M] 🟢 — moderación, privacidad, términos
@@ -190,7 +190,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M126** Copyright del Juego [S] 🟢 — registro, evidencias de autoría, titulares
 - [ ] **M127** Identidad de Marca [M] 🟡 — nombre (verificar colisión), logo, paleta, símbolo de Aurora
 - [ ] **M128** Merchandising [S] 🟢 — soundtrack, poster, artbook (post-lanzamiento)
-- [ ] **M129** Artbook [M] 🟢 — arte conceptual, evolución del mundo (post-lanzamiento)
+- [x] **M129** Artbook [M] 🟢 — arte conceptual, evolución del mundo (post-lanzamiento) (checklist 130-Artbook 134/134)
 - [ ] **M130** Créditos [S] 🟡 — todos los roles, licencias, herramientas, agradecimientos
 
 ### FASE 15 — PRODUCCIÓN Y GESTIÓN
@@ -238,7 +238,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 | Fases | 17 |
 
 > **Nota de desglose:** cada uno de los 152 ítems se convertirá en un componente `DOCUMENTACION/{NN}-Modulo/` con su `plan-inicial/` (5+2 archivos) y `plan-actual/`, generando así **152 checklists de ≥100 ítems** (15.200+ puntos de control totales). El orden de creación de los componentes sigue la numeración de fases, priorizando los módulos de la Fase 1 y los de mayor riesgo técnico (M07, M37, M58, M60, M63).
-**Totales:** 152 items - Completados: 21 - Pendientes: 131 - No resueltos: 0. (Corregido por director 2026-10-12: barrido Step 5 msg 246, decia 0 completados - plantilla copiada sin actualizar)
+**Totales:** 152 items - Completados: 26 - Pendientes: 126 - No resueltos: 0. (Corregido por director 2026-10-12: barrido Step 5 msg 246, decia 0 completados - plantilla copiada sin actualizar)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 152 [ ] / 0 [?].
