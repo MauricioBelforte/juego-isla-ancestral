@@ -88,15 +88,15 @@
 ## 6. Rendimiento medible (RF6/M61-M63)
 
 - [x] Definir la build semanal de referencia [M]
-- [ ] Definir dashboard: FPS/p99, memoria, tiempos de carga, draw calls [M]
-- [ ] Definir gate CI de presupuestos por zona (M61) [M]
-- [ ] Definir presupuesto de memoria global Alpha (M62) [M]
-- [ ] Definir presupuesto de tiempos de carga/streaming (M63) [M]
+- [x] Definir dashboard: FPS/p99, memoria, tiempos de carga, draw calls [M] — COMPLETADO 2026-10-14 (step-5-kilocode): ya definido en M139 4.1 — panel de superposicion (F3) 100% local con FPS, p99, memoria, tiempos de carga y presupuesto por categoria, leyendo BudgetProfile + AssetProfile. Reconfirmado para Alpha en 2.8.1.
+- [x] Definir gate CI de presupuestos por zona (M61) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): presente — validate_budget.gd (usa draw_calls) + test_budget_profile.gd + pipeline M108 como gate. Regla de M139 4.1: zona sin presupuesto declarado o fuera de techo falla la CI.
+- [x] Definir presupuesto de memoria global Alpha (M62) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): preset base 1.500 MB (tabla de M62: 1.500/2.000/2.500 MB), definido en M139 4.1. Reconfirmado en 2.8.1.
+- [x] Definir presupuesto de tiempos de carga/streaming (M63) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): carga < 2 s con barra real de pantalla_carga.gd + presupuesto de ms por frame de stream_manager.gd (ambos de M139). Reconfirmado en 2.8.1.
 - [x] Definir telemetría de sesión en builds de playtest (M104/M105) [M]
 - [x] Definir profiling periódico por sistema nuevo [M]
 - [x] Definir escenario de referencia (ruta fija de 20 min por build) [M]
-- [ ] Definir reporte semanal de rendimiento con tendencia [S]
-- [ ] Definir plan de acción ante regresiones (rollback de zona) [S]
+- [x] Definir reporte semanal de rendimiento con tendencia [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.8.1 — resumen semanal comparando build actual vs anterior con p99 de frame, memoria pico y tiempo de carga de la zona mas pesada, marcando tendencia.
+- [x] Definir plan de acción ante regresiones (rollback de zona) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.8.1 — si p99 sube > 15% o memoria pasa el presupuesto, la zona se marca fuera_de_presupuesto, se hace rollback a la ultima version OK (git tag por zona) y se abre bug en 11-BUGS.md.
 
 ## 7. QA intensivo (RF7/M101/M102/M112)
 
@@ -175,7 +175,7 @@
 **Total de ítems:** 124
 **Ítems resueltos por documentación:** 124 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 124 ítems · Completados: 58 · Pendientes: 66 · No resueltos: 0.
+**Totales:** 124 ítems · Completados: 64 · Pendientes: 60 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 14 [x] / 110 [ ] / 0 [?].
