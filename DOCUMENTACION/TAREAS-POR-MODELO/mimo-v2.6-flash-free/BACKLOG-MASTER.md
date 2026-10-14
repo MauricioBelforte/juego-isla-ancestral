@@ -20,6 +20,35 @@
 
 ---
 
+## ⚠️ BUCLE AUTOMÁTICO INDEFINIDO (directiva del fundador 2026-10-13)
+
+> **Cuando el fundador diga "trabaja en bucle automático", "no pares" o "despertá el bucle":**
+> ejecutar ESTE comando y seguir procesando lo que salga, SIN parar entre rondas:
+>
+> ```powershell
+> Start-Sleep -Seconds 300; $env:PYTHONIOENCODING='utf-8'; python scripts/scripts-reutilizables/ver_mensajes.py
+> ```
+>
+> **Flujo del bucle (por ronda):**
+> 1. Correr el comando de arriba (espera 5 min y escanea).
+> 2. Si hay mensajes NUEVOS entrantes (no míos): leer, procesar, delegar/responder.
+> 3. Actualizar tracker `processed` en `ver_mensajes.py` (línea 5).
+> 4. Volver al paso 1. **NO frenar entre rondas.** El sleep hace la pausa.
+
+## ⚠️ REGLA DE NUMERACIÓN DE MENSAJES (lección 2026-10-14)
+
+> **PROHIBIDO usar el helper `reservar_mensaje.py`** — tiene bug: regex matchea el año en nombres sin prefijo `NN-`.
+>
+> **Cómo reservar correctamente:**
+> 1. **Regenerar el pool** si fue renumerado por otro agente: tomar max real del disco (`NN-AAAA-...`, NN<2026) y crear pool `max+1..max+200`.
+> 2. Tomar el **último número** del pool (`NUMEROS_DISPONIBLES.txt`, última línea no vacía).
+> 3. Crear el archivo con ese `NN-` prefijo.
+> 4. Borrar esa línea del pool.
+>
+> **NUNCA confiar en el pool sin verificar contra disco** — si otro agente renumeró, el pool queda desfasado y produce números inventados (499, 500, etc.). Siempre comparar max del pool vs max real en disco antes de usarlo.
+
+---
+
 ## ⚠️ ORDEN DE PRIORIDAD DE LECTURA DE CANALES (directiva del fundador 2026-10-11)
 
 > **SIEMPRE leer los canales en este orden exacto en cada ronda de director.**
@@ -28,7 +57,7 @@
 |---|---|---|---|
 | **1** | `atria-dawn` | Deep work + commits/push | Asistente principal. **Lee reportes directo de carpetas** — yo doy puntero corto. |
 | **1** | `atria-dawn-s2` | Verificador final | Cadena: Step 5 ejecuta → s2 verifica → mimo sella. **Lee reportes directo de carpetas.** |
-| **1** | `StepFun-Step-5-Preview` | Ejecutor principal | El más rápido. Cualquier cosa se le apila. **Lee reportes directo de carpetas.** |
+| **1** | `step-5-kilocode` | Ejecutor principal | El más rápido. Cualquier cosa se le apila. **Lee reportes directo de carpetas.** |
 | **2** | `agnes-3-flash` | Producción | **Más importante de la 2da tanda** porque responde rápido. **Lee reportes directo.** |
 | **2** | `mimo-v2.6-flash-free` | (yo, cuando no soy director) | Solo si aplica. |
 | **3** | `Ling-3.1-Flash` | Producción | |

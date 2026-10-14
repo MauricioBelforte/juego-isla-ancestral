@@ -1,0 +1,1167 @@
+# BACKLOG-100-TAREAS - por modelo (estratega atria-dawn-s3)
+
+**Generado por:** Hy3 (verificador S21.8) - automatizacion de canal
+**Fecha:** 2026-10-13
+**Fuente:** CHECKLIST-GLOBAL.md (estado/Recom/Progreso) + 05-Checklist.md de cada modulo asignado
+**Encargo base:** msg 257 de mimo (director) + msg 500 (acuse Hy3)
+
+> Cada tarea es un [ ] o [?] REAL extraido del 05-Checklist.md del modulo (sin inventar).
+> Asignacion: modulos con Recom = ese modelo van primero; el resto se rutearon desde modulos
+> amarillos con [ ] reales, atomicos por modulo (sin solape). agnes-3-flash/step-5-kilocode cap complejidad en 2.
+
+## Resumen por modelo
+
+| Modelo | Modulos listados | Tareas listadas | Disponibles reales hoy |
+|---|---|---|---|
+| agnes-3-flash | 4 | 190 | 200 (en 6 modulos) |
+| step-5-kilocode | 2 | 208 | 316 (en 3 modulos) |
+| DeepSeek-V4.1-Flash | 1 | 131 | 858 (en 19 modulos) |
+| Hy3 | 2 | 161 | 201 (en 3 modulos) |
+| Step-5-WorkBuddy | 1 | 121 | 121 (en 1 modulos) |
+| atria-dawn | 2 | 140 | 246 (en 4 modulos) |
+| atria-dawn-s2 | 3 | 134 | 155 (en 4 modulos) |
+
+> Se listan hasta ~100 tareas por modelo (cap de legibilidad); las disponibles reales
+> superan ese tope en varios frentes. Para ampliar un frente, pedime el modulo completo.
+
+## 3-5 modulos mas urgentes de la flota (desbloquean mas)
+
+- **M139 139-Pre-Alpha** - estado 🟡 Con dudas, progreso 10/142, prio Alta, 130 [ ] + 2 [?]. Dependen de: 138.
+- **M70 70-Interacciones** - estado 🟡 Liberado (iter. 3 ✅), progreso 77/198, prio Alta, 121 [ ] + 0 [?]. Dependen de: 11, 13.
+- **M48 48-Animacion** - estado 🟡 Con dudas, progreso 9/123, prio Alta, 111 [ ] + 3 [?]. Dependen de: 1, 13, 156.
+- **M05 05-Lenguaje-Y-Programacion** - estado 🟡 Con dudas, progreso 4/103, prio Alta, 99 [ ] + 0 [?]. Dependen de: 04.
+- **M108 108-Pipeline-De-Assets** - estado 🟡 Con dudas, progreso 122/205, prio Alta, 80 [ ] + 3 [?]. Dependen de: 45.
+
+## Solapamientos (mismo modulo en 2+ modelos)
+
+- 0 solapamientos detectados (asignacion atomica por modulo).
+
+## agnes-3-flash  (190 tareas listadas, 4 modulos, 200 disponibles)
+
+### M54 54-Mapa - estado 🟡 Liberado (P-59 OK, 133/177) - progreso 133/177
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: norte arriba requiere rotación del sprite/texture; DISENO documentado en 03-Diseno.md §2.1; IMPLEMENTACIÓN visual pendiente de ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: estilo ilustrado cozy documentado en 03-Diseno.md §2.1 (manchas bioma con paleta pastel, bordes suaves); IMPLEMENTACIÓN requier... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Navegacion 100% con gamepad y teclado (foco nativo M53) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.1; implementacion requiere M53 Th... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Marcador del pueblo (M09/M27) registrado en MarkersCatalog [M] - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Marcadores de tiendas individuales (M39) registrados automáticamente por evento → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.3 (shop... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Marcadores de casas de NPCs (M19) registrados por evento → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.17 (NPC house markers); M19 vi... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Marcadores de islas/zones (M27) según islands exploradas → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.18 (island/zone markers); M27 ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Iconos SVG por tipo (casa, tienda, NPC, templo, destino, pin) de M46/M53 → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.4 (icon ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Tooltip del marcador al enfocar/hover (M53 TooltipService) [S] - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Confirmación amable antes del viaje (confirm popup de M53 con costo/duración si M69 lo define) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Test end-to-end: bloqueado → desbloqueo → viaje → cancelación → llegada → agnes-2.5-flash 2026-09-13: protocolo disenado en 03-Diseno.md §4.39 (e2e travel te... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Marcado de `visited` al cruzar el borde de una región (evento M09/M27) → agnes-2.5-flash 2026-09-13: logica documentada en 03-Diseno.md §4.8 (visited flag on... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Actualización solo en mosaicos sucios (sin regenerar la textura completa por frame) → agnes-2.5-flash 2026-09-13: algoritmo documentado en 03-Diseno.md §4.9 ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Persistencia de exploración con M60 (bits por región/celda, no texturas) [C] - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Transición suave de revelado (Tween 300 ms) reducible por reduce_motion (M58) → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.10 ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Límites de región delineados dentro de la niebla (bordes visibles) → agnes-2.5-flash 2026-09-13: criterio documentado en 03-Diseno.md §4.21 (region border vi... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Niebla más clara en zonas visitadas y oscura en no exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.22 (fog density by visite... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Presupuesto mapa ≤ 5% del frame con Profiler (M61) en escena poblada [C] - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Sin allocaciones en el flujo caliente (pool de sprites y tooltips) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.30 (zero-alloc hot p... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Textura de niebla con modularidad de mosaicos (ImageTexture parcial) → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.31 (modular ti... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Compresion de la textura por M108 (Pipeline de assets) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.41 (fog texture compression via ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Explorer (niebla) como nodo de dominio con lógica pura de datos → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.32 (Explorer as pur... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.1 (RegionData alimentado por M09/M27); IMPLEMENTACIÓN bloqueada por M09/M27 (regiones/bio... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.1 (posición jugador por evento baja frecuencia); IMPLEMENTACIÓN bloqueada por M11 (player... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.2 (registro casas NPCs como marcadores dinámicos); IMPLEMENTACIÓN bloqueada por M19 (NPC ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.3 (ruta visual destino viaje); IMPLEMENTACIÓN bloqueada por M28 (viajes); KnownIssue no b... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.2 (tiendas registradas automáticamente); IMPLEMENTACIÓN bloqueada por M39 (ShopManager au... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §4 accesibilidad (reduce_motion, daltonismo, contraste AA); IMPLEMENTACIÓN bloqueada por M58... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - M60: persistencia de exploración, pines, preferencias y caché de textura [C] - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - M63: bake en background con barra de progreso (AGENTS 8) [M] -- agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.4; IMPLEMENTACIÓN bloqueada... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.3 (destinos, desbloqueo, viaje por interfaz Callable); IMPLEMENTACIÓN bloqueada por M69 (... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Jugador en otra isla (M27): selector de islas exploradas y minimapa de la isla actual [C] - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Viaje rápido solicitado con diálogo abierto: petición encolada por pila M53 → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.13 (fast tr... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Marcadores de islas/zones (M27) según islands exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.18 (island/zone markers); M27 ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Cruce de región por barco (M28): revelado de golpe sin glitch (granos por mosaico) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.15 (... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Bake incremental por secciones del mundo para no bloquear (M63) [C] -- agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §3.4; IMPLEMENTACIÓN bl... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Pool único de sprites de marcadores, clusters y pines en ambas vistas → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.36 (single sp... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Texturas comprimidas y dimensionadas por M108 [M] -- agnes-2.5-flash 2026-09-12: M108 pipeline documentation; texturas minimap compressadas segun preset cali... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Test de rendimiento con mundo voxel completo (≤ 5% frame) [C] -- agnes-2026-09-07: test_mapa_m54_e2e.gd _test_rendimiento_voxel(); verifica child_count razon... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Test de navegación completa con gamepad (30 minutos) [M] -- agnes-2026-09-07: test_mapa_m54_e2e.gd _test_viaje_rapido_m69(); verifica MapManager accesible pa... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Test de viaje rapido end-to-end con M69 → agnes-2.5-flash 2026-09-13: protocolo disenado en 03-Diseno.md §4.16 (e2e travel test); M69 fast travel service. Sp... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Datos: `data/map/map_data.json` — 9 POIs reales de la Isla Raíz (spawn/Chozavil/ruina/mesa/faro/templo_raíz/playa/plaza/ladera) con categorías y coordenadas ... - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - `scripts/map/map_schema.gd` — valida POIs (id único, nombre, categorías permitidas, coords 0-512 dentro del mundo) - compl:2 - dep:53 - estado:🟡
+- [ ] **M54** - Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0 - compl:2 - dep:53 - estado:🟡
+
+### M83 83-Licencias-De-Software - estado 🟡 Con dudas - progreso 98/100
+- [ ] **M83** - Generar attribución de assets en build output - compl:2 - dep:17,123 - estado:🟡
+- [?] **M83** - Acción externa no ejecutable por agente (requiere contacto humano con abogado) [M] → **agnes-3-flash (2026-10-12): DEGRADADO [x]→[?] — KnownIssue externo: re... - compl:2 - dep:17,123 - estado:🟡
+
+### M104 104-Analytics - estado 🟡 Con dudas - progreso 107/119
+- [?] **M104** - P6: toggle opt-out en configuración M91 [S] - BUG-070 lote 11 (atria-dawn, evidencia DeepSeek #115): Patron D con L56 [?] - M91 (gestor_config.gd) existe per... - compl:2 - dep:95,114 - estado:🟡
+- [?] **M104** - Toggle reporte analytics en menú M91 [S] — requiere UI en `gestor_config.gd` (M91); backend `analytics_director.gd` expone `esta_opt_out()`/`establecer_opt_o... - compl:2 - dep:95,114 - estado:🟡
+- [?] **M104** - Visualización de estado "Analytics: Activo/Desactivado" [S] — requiere UI (RichTextLabel/Label en M91/M90); backend expone `esta_opt_out()` - compl:2 - dep:95,114 - estado:🟡
+- [ ] **M104** - Compresión gzip antes de envio [S] - compl:2 - dep:95,114 - estado:🟡
+- [ ] **M104** - Profileo semanal con TaskManager [S] - BUG-070 lote 11 (atria-dawn, evidencia DeepSeek #115): TaskManager = 0 hits en scripts/ y project.godot - compl:2 - dep:95,114 - estado:🟡
+- [ ] **M104** - Advertencia si overhead > 1% [S] - compl:2 - dep:95,114 - estado:🟡
+- [ ] **M104** - Sin memory leak en stress test 1h [S] - compl:2 - dep:95,114 - estado:🟡
+- [?] **M104** - Configuración primera ejecución: opt-out por defecto [S] — diseño actual es opt-in (`opt_out=false`, analytics ON por defecto); cambiar a opt-out por defecto... - compl:2 - dep:95,114 - estado:🟡
+- [?] **M104** - Toggle accesible desde M90 [S] — requiere UI en M90/M91; backend expone API, falta widget - compl:2 - dep:95,114 - estado:🟡
+- [?] **M104** - Botón "borrar mis datos" en configuración [S] — `analytics_director.gd` `clear_data()` + test 24/0 - BUG-070 lote 11 (atria-dawn, evidencia DeepSeek #115): P... - compl:2 - dep:95,114 - estado:🟡
+- [?] **M104** - Solo envío en Wi-Fi (configurable) [S] — Godot 4.x no expone detección de tipo de red (Wi-Fi vs cable); requiere API de plataforma - compl:2 - dep:95,114 - estado:🟡
+- [?] **M104** - Indicador visual de envío en curso [S] — requiere UI (progress bar/label); backend es offline (sin red en v1) - compl:2 - dep:95,114 - estado:🟡
+
+### M139 139-Pre-Alpha - estado 🟡 Con dudas - progreso 10/142
+- [ ] **M139** - Definir contratos de interfaces entre capas: `IInteractable`, `ITienda`, `ITemplo`, `IViajable` [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir `SesionMaster` como único orquestador de arranque (bootstrapping) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Documentar el flujo de sesión: menú → continuar/nuevo → carga de zona [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Documentar el modo "degradación" si un servicio falla al arrancar (M66) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la geografía de Aurora: costa E (puerto), pradera central (pueblo), bosque W, colina N (templo), acantilados S (faro) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el área navegable de ~2 km² [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Dividir Aurora en 6 zonas de streaming (M63) [M] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Definir los POIs de cada sector (muelle, plaza, talleres, tienda, mina, templo, faro) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la vegetación del bioma: palmeras, bambú, hibiscos, pasto alto (M50) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el litoral con agua jugable para pesca (M51/M34) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la flora transmisora de estado (M09) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir puntos de descanso/cama (M11/M18) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el ciclo día/noche aplicado a Aurora (M31) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el clima base del bioma (tropical suave) (M32) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la fauna inicial visible de Aurora (aves, peces costeros) (M36) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el enclave visitable: muelle, tienda glasswork, 1 NPC [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Asegurar que Coral NO se construye en fase: queda "inacabado a propósito" [S] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Documentar el anzuelo de curiosidad al océano (M152/M153) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el NPC enano de Coral con 10+ líneas de diálogo (M21) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la tienda única de Coral (arrecife glasswork) con stock propio (M39) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Registrar hit explícito para Alpha: completar Coral (M140) [S] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar la plantilla `npc_profile.gd` (rutina, horarios, personalidad) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar la IA de rutina `rutina_ia.gd` (máquina de estados + waypoints) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir Finneas como vecino principal (heredado del slice M138) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar Maribel: rutina muelle → mercado (40% del día) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar el gancho de Maribel: pescado +15% al entardecer [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar Obé: rutina taller → mina; desbloquea piezas de construcción [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar Tía Rúa: tienda abierta 08:00-20:00 (M39) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar Pax: rutina libre serpenteando bosque/playa [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar el gancho de Pax: coleccionables escondidos (M73) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar Kor: bucle fijo en acantilado S, misterio del faro (M153) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar Cole: banco local con oficina de 2 h al día [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir 10+ líneas de diálogo por NPC (M21) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir variantes de diálogo por estación/día (M29) [M] - compl:1 - dep:138 - estado:🟡
+- [?] **M139** - Implementar anti-stuck con teleport a waypoint previo (M66) [M] — DEGRADADO a [?] por step-5-kilocode (Kilo Code, 2026-10-12, orden del director mimo msg 277... - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Definir pronombres/nombres canónicos del elenco (M147) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir rangos de horarios de rutina sin solapamiento catastrófico [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la moneda AO como única divisa de fase [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir las 2 tiendas de Aurora + 1 de Coral [M] - compl:1 - dep:138 - estado:🟡
+- [?] **M139** - Integrar precios desde `curvas.json` (M93: lineal clave/suave logarítmica metas) [M] — DEGRADADO a [?] por step-5-kilocode (Kilo Code, 2026-10-12, orden del ... - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Aplicar márgenes de venta 55-70% sobre compra (M93) [S] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el stock regenerativo diario de cada tienda [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Documentar los 60+ ítems del mundo con precio base (M15) [C] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Diseñar el banco local de Cole: interés 0.5% diario [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el techo de depósito del banco (anti-inflación) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el flujo de venta: confirmación, oro, sonido ASMR, persistencia [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la simulación económica en CI (M93/M118) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el umbral de fallo de la simulación (< 30 h sin romper curva) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir anti-grind: precios de compra suben levemente con stock bajo [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el catálogo de 30+ piezas (vallas, caminos, mobiliario, deco) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir 3 estructuras: casa de campo, invernadero pequeño, gazebo [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la colocación por grid ligero (sin física) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir validación contra terreno voxel y colisiones (M08/M09) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir preview translúcido con feedback de validez (M44) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir desbloqueo por amistad/misiones con Obé (M20/M23) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir persistencia de piezas en save v3 [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el costo de cada pieza en AO y materiales (M93) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir cómo las piezas interactúan con el clima (invernadero) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir límite de piezas por zona (presupuesto M61) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir categorías visuales de piezas coherentes con la estética cozy (M46) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir piezas que interactúan con NPC (bancos sentables, vallas) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el acceso por la colina N con 2 puzzles ambientales en la subida [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la sala 1 "Las Velas": 3 velas con ráfagas de viento en orden [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el feedback de las velas (sonido y luz, M42/M44) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la sala 2 "El Carillón": 5 campanas con melodía suave [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el feedback ASMR del carillón (M44) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la Herramienta del Viento como recompensa (M13) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el lore canónico del templo con símbolos (M147/M153) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Asegurar que NO se revela spoiler de los otros 5 templos (M153) [S] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Definir hint no intrusivo por formato de acceso (M58/M66) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la variante de solución (3 rutas por sala) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Garantizar ausencia de softlock en el templo (M66) [M] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la recompensa extra: pieza de lore coleccionable (M73) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir cómo el viento afecta al exterior tras obtener la herramienta [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el Gran Vapor atracado en el puerto como vehículo de fase [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la interacción de embarque (IViajable) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la cutscene corta de travesía (sin gameplay de mar) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el desembarco en Coral y la vuelta [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el costo del viaje (ticket AO bajo) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir qué se puede llevar (inventario completo) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la vista del océano como anzuelo de curiosidad (M51/M152) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la cámara del Gran Vapor (M12) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el audio de travesía (olas, gaviotas, música) (M42/M41) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Asegurar que el viaje no sea repetitivo (variante de diálogo del tripulante) [S] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Definir los assets de Aurora: árboles, rocas, edificios, NPC, flora (M45/M46/M47) [C] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el flujo: modelo → import normalizado → materiales/texturas → prefab → biblioteca [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir convenciones de importación: nombres, unidades, collision, bounds [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el validador de assets en CI (frame budget, LOD, naming) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Asegurar que el 100% de los assets de fase pasa por el pipeline (sin atajos) [C] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Definir LOD y culling por zona desde el día 1 (M61/M63) [C] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir presupuesto de draw calls por zona (M61) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir compresión de texturas del bioma (M47) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el rolling backlog de assets (familia por semana) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Documentar los assets heredados del slice y su reimport [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir versionado de schema (M60) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir escritura transaccional (temp + rename) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir verificación de integridad al continuar (M66) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir recuperación con copia alternativa [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir carga < 2 s en 20/20 ciclos [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el menú principal: continuar/nuevo/ajustes/créditos [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir deshabilitado de UI durante cargas (regla sección 8 AGENTS.md) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir pantalla de carga con barra y mensajes de estado [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el flujo "nuevo juego" con confirmación de sobrescritura [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir navegación de menú con gamepad y teclado (M57/M58) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el tutorial visual sin texto de la fase (M92) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir buses: Music, Ambient, SFX, ASMR, UI [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir transiciones de música por zona y estado (día/noche, lluvia) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el ambiente por sector (puerto, bosque, templo, faro) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir eventos de SFX por interacción (M43) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir eventos ASMR de recolección y venta (M44) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el audio UI (menús, confirmaciones) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la música del templo con tensión suave [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la persistencia de niveles de volumen [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir dashboards locales para playtest (M114) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Aplicar frame budget por categoría a cada zona nueva [C] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Definir presupuesto de memoria 1.5 GB con streaming (M62) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el gate de zona: falla CI si no cumple presupuesto [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir telemetría de sesión local sin envío remoto (M104/M105) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir playtest de fase: 2-4 h con 5+ testers (M114) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la encuesta de sesión (M114) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir criterio ≥ 80% "quería seguir jugando" [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir medición de distancia de streaming y pops (M63) [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir los 10 hits H1-H10 con criterios verificables [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la revisión DoD antes de declarar completada la fase (sección 12 AGENTS.md) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el documento GONOGO firmado con fecha [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir los riesgos residuales que pasan a Alpha [M] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir la mano derecha de continuidad para M140 (qué se entrega) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Definir el registro de learning de la fase (qué se corrigió) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Asegurar 0 errores en consola al entrar en Play Mode (regla sección 12) [M] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Asegurar flujo completo verificado en Play Mode antes de cerrar (sección 12) [M] - compl:2 - dep:138 - estado:🟡
+- [ ] **M139** - Documentar el coste de la fase (tiempo real vs estimado) [S] - compl:1 - dep:138 - estado:🟡
+- [ ] **M139** - Documentar el inventario de bugs conocidos y clasificados (M101/M102) [M] - compl:1 - dep:138 - estado:🟡
+
+## step-5-kilocode  (208 tareas listadas, 2 modulos, 316 disponibles)
+
+### M17 17-Construccion - estado 🟡 Con dudas - progreso 81/175
+- [ ] **M17** - Definir el problema: construcción cozy sobre mundo voxel con rejilla de 1 m alineada a M08 [S] - compl:1 - dep:08 - estado:🟡
+- [ ] **M17** - Registrar dependencias: M08 (Mundo Voxel), M14 (Inventario) y relaciones M18, M25, M64, M58, M31, M32, M73, M92, M93, M71 [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF1: modo construcción y modo decoración con entrada/salida rápida [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF2: rejilla voxel de 1 m alineada al mundo con snapping de 90° [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF3: previsualización fantasma con estado válido/inválido [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF4: rotación de piezas en pasos de 90° [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF5: elevación por plantas con revalidación en cada nivel [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF6: permisos de zona (edificable, protegida, narrativa, agua) [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF7: costo de recursos con verificación y descuento en M14 [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF8: validación de ocupación, soporte y reglas por pieza [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF9-RF11: colocación con undo, copiar/mover/almacenar, demolición con devolución [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - RF12-RF14: catálogo de 12 familias de piezas, integración M18/M25/M64 y persistencia M58 [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P3: grid — rejilla voxel de 1 m alineada al origen global de M08 [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P4: snapping — ajuste de posición y rotación (90°) a la celda más cercana [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P6: elevación — planta base y subir/bajar con altura máxima por zona [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P7: copia — tomar pieza existente como plantilla del fantasma [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P9: recolocar — redondeo a rejilla y undo que devuelve la pieza a su celda [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P10: almacenamiento — devolver piezas al inventario M14 sin pérdidas [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P11: demolición — confirmación suave y retiro de la pieza del mundo [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P14: objetos inválidos — toda regla fallida bloquea la colocación con motivo [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P15: colisiones — piezas con colisión estática real; puertas con hueco navegable [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P16: restricciones — reglas por pieza, topes por zona, alturas y parcelas ajenas [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P21: ventanas — 1x1 en pared, transparentes a la luz (M48) [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P22: escaleras — bloque inclinado que exige apoyo y conecta plantas [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P23: puentes — losa 1-4 celdas solo sobre agua dentro de zona permitida [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P26: iluminación — faroles con SpotLight/OmniLight ligados al ciclo M31 [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - P27: muebles — camas, mesas, sillas y estanterías con interacción M18 [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Abrir modo con herramienta de construcción (M13) o tecla asignada [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Cerrar modo con la misma acción sin confirmación agresiva [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - HUD de modo con categorías del catálogo y costo de la pieza activa [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - El movimiento del jugador se suspende solo durante la colocación [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - El mundo continúa activo (NPC, clima, tiempo) mientras se construye [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Selección de pieza por categorías: estructura, mobiliario, iluminación, decoración [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Desbloqueos de piezas visibles en el catálogo (M70/M93) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Tutorial de construcción integrado y repetible (plan maestro línea 2549) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Indicador de celda destino resaltado sobre el mundo [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Cero clicks rápidos duplicados: cooldown de confirmación de 150 ms [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Paso de rejilla fijo de 1 m derivado del tamaño de voxel de M08 [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Origen de la rejilla idéntico al origen global del mundo voxel [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Las piezas de NxN celdas ocupan exactamente su área completa en la rejilla [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Altura de planta: 1 m por nivel de bloque; habitaciones de 3 m en M18 [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Límites de mundo: la colocación se rechaza fuera del AABB jugable de M08 [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - La rejilla solo se calcula sobre terreno cargado (nunca sobre chunks vacíos) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - La rejilla es coherente tras guardar y cargar (misma celda ↔ misma posición) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Rotar la pieza en 4 pasos de 90° con la tecla dedicada [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - La validación se re-ejecuta con cada rotación (celdas afectadas cambian) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Subir/bajar la pieza una planta por pulsación con límite de altura [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - El fantasma muestra la pieza en el nivel elevado sin flotar visualmente mal [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Mover una pieza desocupa las celdas originales solo al confirmar [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Al mover, los recursos no se re-cobran (solo se reubican) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Almacenar requiere inventario con espacio libre (M14) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Demolición con ventana de confirmación y preview de lo que se devuelve [M] - compl:2 - dep:08 - estado:🟡
+- [?] **M17** - La demolición de piezas funcionales (camas, almacenamiento) libera su contenido [C] — **[x] falso detectado por atria-dawn-s2 (volumen DoD, msg 133, 2026-10-... - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Puerta exige pared contigua en la celda de instalación [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Ventana exige pared contigua de al menos 1 celda [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Escalera exige apoyo en piso o pared y no bloquea la circulación [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Puente solo sobre agua (laguna/mar interior) y dentro de alcance de zona [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Camino solo sobre césped/arena (nunca sobre roca o pendiente fuerte) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Ninguna celda de la pieza puede solapar un NPC activo (consulta M64) [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Las piezas no pueden bloquear la única salida de la zona de construcción [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Las piezas de ruina M25 y parcelas de NPC son siempre no colocables ni demolidas [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Aviso claro con motivo al intentar colocar fuera de zona (fantasma rojo + texto) [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Las zonas se serializan en M58 y se restauran antes de las piezas [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Cambios de zona emiten señal a M64 (navmesh) y a M93 (proyectos) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - El almacenamiento convierte la pieza en ítem del inventario sin perder receta [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Los stacks de M14 se agrupan al devolver materiales sobrantes [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Balance inicial de costos delegado a M92 con tabla de referencia en las recetas [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - M08: los datos de pieza viven en capa voxel separada del terreno generado [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - M18: las ampliaciones de la casa usan proyectos de piezas de este módulo [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - M25: ruinas como contenido solo visual (deconstruible = false) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - M73: recetas de festival temporales en el catálogo (devolucion = 0) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - M31: faroles y luces conectados al ciclo día/noche [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - M93: proyectos de construcción de meta larga cuentan piezas colocadas [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Raycast de colocación limitado a 1 por frame con cache de celda [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Materiales de pieza compartidos entre instancias (static batching de Godot) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Presupuesto medido con profiler: preview <= 1 ms por frame (M113) [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - 01-Requerimientos.md creado con problema, RF, NFR y criterios de aceptación [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - 02-Analisis.md creado con resolución de los 28 puntos y decisiones justificadas [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - 03-Diseno.md creado con arquitectura, flujos, contratos API e integraciones [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - 05-Checklist.md creado con 110+ ítems firmados (este archivo) [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Copias idénticas de los 5 archivos en plan-actual/ para seguimiento futuro [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Animación de colocación: transición breve fantasma → pieza real (escala/hammer) [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Partículas de polvo al colocar y demoler (M51: VFX de construcción) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Sonido de colocación y de demolición que varía con el material (M43) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Sonido ambiental de obras: martilleo suave mientras el modo está activo [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Aura de validación: destello suave verde al confirmar válido [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Aviso amable (no punitivo) con vibración sutil al fallar la colocación [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Los NPC cercanos miran la obra con curiosidad y comentan (M64 reacción cozy) [M] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - El jugador puede admirar sus construcciones desde la cámara sin salir del modo [S] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Tests de integración: colocar → guardar → cargar → restaurar idéntico (M58) [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Tests de integración: la navmesh se actualiza con puertas y obras (M64) [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Playtest de construcción (M113) con teclado y mando: flujo completo sin fricción [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - Recorrido M114: construir y decorar la casa del jugador (M18) sin errores de consola [C] - compl:2 - dep:08 - estado:🟡
+- [ ] **M17** - QA final: 0 errores en Play Mode, 0 excepciones al entrar/salir del modo repetidamente [M] - compl:2 - dep:08 - estado:🟡
+
+### M48 48-Animacion - estado 🟡 Con dudas - progreso 9/123
+- [ ] **M48** - Definir el objetivo: kit de animación central con producción coherente, FSM espejo y presupuesto verificado [S] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Registrar dependencias: M45 (rigs), M11/M19/M36 (FSM), M64/M65 (IA), M04 (Godot), M61/M62 (presupuestos), M43/M44/M52 (eventos) [M] - compl:2 - dep:· espera: pendiente de definicion de diseno (contrato del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Mapear la sección 47 "ANIMACIÓN" del plan maestro al ID 48 de la tabla global [M] - compl:2 - dep:· espera: depende de M4/M11/M19/M36/M43/M44/M45/M52/M61/M62/M64/M65 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Separar dentro/fuera de alcance: rigs → M45, FSM de comportamiento → M11/M64/M65, VFX → M52, sonido → M43 [S] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Documentar restricciones: Godot 4.x, FPS 30 base (UI 60), determinismo de mundo, sin RNG, sincronía en timelines [M] - compl:1 - dep:· espera: depende de M11/M43/M45/M52/M64/M65 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Definir criterios de aceptación verificables (8 criterios) [S] - compl:1 - dep:· espera: pendiente de documentacion (marcado [M]) - estado:🟡
+- [ ] **M48** - Incluir contexto del plan de producción §4 (rigs por familia, coherencia) [M] - compl:2 - dep:· espera: pendiente de definicion de diseno (contrato del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Definir pipeline: rig (M45) → blocking → polish → export 30 fps [M] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Definir convenciones de exportación: FBX, T-pose única, bones subset por familia [M] - compl:1 - dep:· espera: depende de M45 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Definir familias de rigs: humanoide, cuadrúpedo, ave, pez [M] - compl:1 - dep:· espera: pendiente de definicion de diseno (contrato del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Definir plantilla de import en editor (import_animation_defaults.gd) [M] - compl:1 - dep:· espera: pendiente de definicion de diseno (contrato del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Definir máximos de duración por categoría [S] - compl:1 - dep:· espera: pendiente de definicion de diseno (contrato del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Cubrir los 11 estados de la FSM de M11 con animaciones (idle, caminar, correr, saltar, caer, nadar, bucear, salir a superficie, interactuar, dormir, fabricar... - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Saltar, nadar, escalar del jugador [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Extraer, colocar, minar, pescar del jugador [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Cosecha, regado, diálogo, dormir del jugador [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Definir blend space 2D de locomoción (dirección × velocidad) [M] - compl:1 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Definir sockets de herramientas (grip) con M45 [M] - compl:1 - dep:· espera: pendiente de definicion de diseno (contrato del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Idle y caminata de NPC (M19) [S] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Rutinas de trabajo de NPC (M64) [M] - compl:2 - dep:· espera: depende de M19 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Conversación y gestos de amistad (M20) [M] - compl:2 - dep:· espera: depende de M64 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Animaciones festivas (M74) [M] - compl:2 - dep:· espera: depende de M20 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Definir variantes por personalidad (≤3 por gesto) [M] - compl:1 - dep:· espera: depende de M74 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Estados de M36/M65: idle, pastorear, huir, volar, nadar, dormir [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Variantes de fase en manadas/bancos (fases escalonadas) [M] - compl:2 - dep:· espera: depende de M36/M65 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Definir LOD de animación de fauna (distancia) [M] - compl:1 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - 9 herramientas × 4 niveles con animación de uso [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Swing de minado/pico con eventos de impacto [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Plantación, regado y cosecha [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Pesca: lanzar, espera, tensión, cobro [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Martillo y lupa (mecánicas infinitas) [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Puertas: abrir/cerrar con easing [S] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Puentes: bajar/subir [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Mecanismos: activar/desactivar [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Ascensores: subir/bajar con easing [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Construcción: colocar/levantar piezas (M17) [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Puzzles: mover piezas, activación (M24) [M] - compl:2 - dep:· espera: depende de M17 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Barcos: balanceo en agua, atraque (M28/M67) [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Dirigibles: ascender/descender, balanceo [M] - compl:2 - dep:· espera: depende de M28/M67 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Submarinos: sumergir/emergir [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Vegetación: viento procedural determinista (M50) [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Agua: ondas procedurales deterministas (M51) [M] - compl:2 - dep:· espera: depende de M50 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Fuego: procedural de partículas (M52) [M] - compl:2 - dep:· espera: depende de M51 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Sin RNG en runtime (fases fijas por TIME) [M] - compl:2 - dep:· espera: depende de M52 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Transiciones de menú 60 fps (M53) [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Recompensas, contadores, sparkles (M71/M72) [M] - compl:2 - dep:· espera: depende de M53 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Descubrimientos y tooltips [M] - compl:2 - dep:· espera: depende de M71/M72 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Diálogos: retratos, burbujas, gestos (M21/M46) [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Reducir movimiento con M58 (Reduce Motion) [M] - compl:2 - dep:· espera: depende de M21/M46 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - No animar UI fuera de pantalla [S] - compl:2 - dep:· espera: depende de M58 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Eventos de sonido embebidos en timelines (M43) [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Eventos de feedback ASMR en timelines (M44) [M] - compl:2 - dep:· espera: depende de M43 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Triggers de partículas en timelines (M52) [M] - compl:2 - dep:· espera: depende de M44 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Regla: el evento se emite al frame que lo produce visualmente [M] - compl:2 - dep:· espera: depende de M52 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Test de desincronía sonido/impacto [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Burbuja ≤60 actores plenos (M64) [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Fuera de burbuja: idle simplificado o sin animación por distancia [M] - compl:2 - dep:· espera: depende de M64 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Blend trees ≤4 nodos por actor [S] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Pooling de AnimationPlayer (M62) [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Keyframes optimizados sin redundancia (M61) [M] - compl:2 - dep:· espera: depende de M62 (coordinar con su dueno) - estado:🟡
+- [?] **M48** - Definir script validate_animation.gd [M] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Verificar naming anim_[actor]_[estado] [S] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Verificar fps 30 base / UI 60 [S] - compl:2 - dep:· espera: pendiente de verificacion/QA (criterio del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Verificar duración dentro de máximos por categoría [S] - compl:2 - dep:· espera: pendiente de verificacion/QA (criterio del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Verificar T-pose única y bones subset [M] - compl:2 - dep:· espera: pendiente de verificacion/QA (criterio del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Verificar keyframes de evento requeridos [M] - compl:2 - dep:· espera: pendiente de verificacion/QA (criterio del item) (marcado [M]) - estado:🟡
+- [?] **M48** - Verificar coste por actor en animation_budget.json [M] - compl:2 - dep:· espera: pendiente de verificacion/QA (criterio del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Definir prefijos anim_, librerías por actor [S] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Alinear con M108 [M] - compl:2 - dep:· espera: pendiente de definicion de diseno (contrato del item) (marcado [S]) - estado:🟡
+- [?] **M48** - Definir animation_budget.json por actor/animación [C] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Definir suma por escena pivote contra presupuesto M61 [M] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Definir alerta de excedente en editor [S] - compl:1 - dep:· espera: depende de M61 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Definir señales animation_started/finished/missing [M] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Prohibir que la capa de animación decida comportamiento [M] - compl:2 - dep:· espera: pendiente de definicion de diseno (contrato del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Rendimiento: burbuja, LOD, pooling, blend trees acotados [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Memoria (M62): bibliotecas compartidas, sin duplicados por escena [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Cozy: movimientos suaves, anticipación corta, follow-through sutil [M] - compl:2 - dep:· espera: depende de M62 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Accesible: Reduce Motion en UI (M58) [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Determinismo: mundo procedural sin RNG [M] - compl:2 - dep:· espera: depende de M58 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Mantenible: catálogo estado→clip único [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Descartar animación embebida por escena (duplicados) [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Descartar animación 100% por código (calidad) [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Descartar AnimationPlayer global único [S] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Descartar retargeting genérico en tiempo real [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Descartar blend trees ilimitados [S] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Descartar animación 2D/impostores para todo el mundo [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S]) - estado:🟡
+- [ ] **M48** - Riesgo de clips duplicados → AnimationLibrary central + validación [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Riesgo de snaps por blending → blend 250 ms + revisión visual [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Riesgo de desincronía → eventos en timelines + tests [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Riesgo de coste de huesos → burbuja + LOD + registro [M] - compl:2 - dep:· espera: pendiente de verificacion/QA (criterio del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Riesgo de UI molesta → Reduce Motion + duraciones cortas [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Riesgo de imports inconsistentes → plantilla + validador [S] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Documentar integración con M11/M19/M36 (FSM) [S] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Documentar integración con M64/M65 (burbuja) [S] - compl:1 - dep:· espera: depende de M11/M19/M36 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar integración con M45 (rigs/sockets) [S] - compl:1 - dep:· espera: depende de M64/M65 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar integración con M13 (herramientas) [S] - compl:1 - dep:· espera: depende de M45 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar integración con M43/M44/M52 (eventos) [S] - compl:1 - dep:· espera: depende de M13 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar integración con M50/M51 (procedural) [S] - compl:1 - dep:· espera: depende de M43/M44/M52 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar integración con M21/M53/M58 (UI) [S] - compl:1 - dep:· espera: depende de M50/M51 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar integración con M61/M62 (presupuesto) [S] - compl:1 - dep:· espera: depende de M21/M53/M58 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar integración con M74 (festivales) [S] - compl:1 - dep:· espera: depende de M61/M62 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar integración con M108/M118 (import + CI) [S] - compl:1 - dep:· espera: depende de M74 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - Documentar flujo de producción de un clip [M] - compl:1 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Documentar flujo de validación al importar [M] - compl:1 - dep:· espera: pendiente de documentacion (marcado [M]) - estado:🟡
+- [ ] **M48** - Documentar plantilla de import FBX [M] - compl:1 - dep:· espera: pendiente de documentacion (marcado [M]) - estado:🟡
+- [ ] **M48** - 100% de estados FSM de actores cubiertos con animaciones [M] - compl:2 - dep:1, 13, 156 - estado:🟡
+- [ ] **M48** - Toda mecánica lista tiene animación o "intencional sin animación" definida [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Clips generados con un flujo único y validados sin errores [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Transiciones sin snaps (blend ≤250 ms) [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Sonido y feedback al frame correcto [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Coste de escena pivote dentro del presupuesto M61 [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Mundo determinista sin RNG visible [M] - compl:2 - dep:· espera: depende de M61 (coordinar con su dueno) - estado:🟡
+- [ ] **M48** - UI respeta M58 y corre a 60 fps [M] - compl:2 - dep:· espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M]) - estado:🟡
+- [ ] **M48** - Documentar el desfase de numeración del plan maestro (47=ANIMACIÓN → ID 48) [S] - compl:1 - dep:1, 13, 156 - estado:🟡
+
+## DeepSeek-V4.1-Flash  (131 tareas listadas, 1 modulos, 858 disponibles)
+
+### M01 01-Fundamentos-Del-Proyecto - estado 🟡 Con dudas - progreso 21/152
+- [ ] **M01** - **M01** Visión y Concepto [M] 🔴 — definir nombre definitivo, pilares, pitch, alcance v1.0 - compl:1 - dep:— - estado:🟡
+- [ ] **M01** - **M02** Documentación del Proyecto [M] 🔴 — GDD, narrativa, sistemas, convenciones, backlog inicial - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M03** Game Engine [C] 🔴 — elegir Unity o Godot, fijar versión, configurar render pipeline e input - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M04** Lenguaje y Programación [M] 🔴 — C#/GDScript, convenciones, namespaces, arquitectura de software - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M05** Control de Versiones [S] 🟡 — Git, .gitignore, ramas, mensajes de commit, Git LFS - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M08** Terreno y Geografía [C] 🔴 — montañas, valles, ríos, playas, biomas de Aurora - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M09** Generación del Mundo [C] 🔴 — seed, generador de terreno/biomas/vegetación/minerales/cuevas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M10** Personaje del Jugador [M] 🔴 — modelo 3D, animaciones, controlador, colisiones, interacción - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M11** Cámara [M] 🔴 — tercera persona cenital inclinada, zoom, clipping, sensibilidad configurable - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M12** Herramientas [C] 🔴 — pala, pico, hacha, gancho mecánico, lanza-semillas, vara de flujo (sin daño) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M13** Inventario [M] 🔴 — slots, stacks, hotbar, cofres, transferencia rápida, peso - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M14** Recursos [M] 🔴 — madera, piedra, arena, minerales, frutas, peces, rareza, respawn - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M15** Crafting [M] 🔴 — banco de trabajo, recetas, desbloqueos, preview, feedback - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M16** Construcción [C] 🔴 — modo construcción/decoración, grid, snapping, rotación, demolición - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M17** Casas [M] 🟡 — parcelas, ampliaciones, habitaciones, muebles interactivos, almacenamiento - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M18** NPC y Vecinos [C] 🔴 — especies, personalidades, rutinas, horarios, hogares, relaciones - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M19** Sistema de Amistad [M] 🟡 — puntos de amistad, niveles, regalos, desbloqueos, eventos únicos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M20** Diálogos [C] 🔴 — motor por nodos, flags narrativos, opciones, localización - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M21** Historia Principal [C] 🔴 — prólogo, capítulos, Sellos, templos, finales y ritmo - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M22** Historias Secundarias [M] 🟡 — arcos de vecinos, lugares, ruinas, objetos, postgame - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M23** Templos y Puzzles [C] 🔴 — framework emisor→receptor, dificultad, pistas, checkpoints - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M24** Ruinas [M] 🟡 — variantes pequeñas/medianas/grandes, inscripciones, pasajes ocultos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M25** Templo Subterráneo [C] 🔴 — Templo de la Brisa: entrada, tutorial, salas, cámara del Sello - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M26** Islas del Mundo [C] 🟡 — Isla de Coral, Verde, Cenizas, Cielo (diseño completo por isla) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M27** Viajes [M] 🟡 — Gran Vapor, boletos, requisitos, pantalla de viaje diegética - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M28** Tiempo y Calendario [M] 🔴 — día/noche, estaciones, festivales, cumpleaños, eventos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M29** Reloj en Tiempo Real [M] 🟡 — Gran Vapor mensual, zona horaria, offline, anti-exploits - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M30** Ciclo Día/Noche [M] 🟡 — iluminación, cielo, estrellas, comportamiento de NPC y fauna - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M32** Agricultura [M] 🟡 — parcelas, semillas, riego, fertilizante, estaciones, plantas ancestrales - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M33** Pesca [M] 🟡 — especies, minijuego no frustrante, coleccionario, peces legendarios - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M34** Minería [M] 🟡 — vetas, profundidad, minerales ancestrales, derrumbes controlados - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M35** Fauna [M] 🟡 — especies no hostiles, hábitat, migraciones, observación, ecosistemas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M36** Museos y Colecciones [M] 🟢 — salas, vitrinas, fósiles, porcentaje completado - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M39** Infraestructura [M] 🟡 — puentes, rampas, faro, puerto, plaza, proyectos de Finneas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M40** Música [C] 🟡 — acústica/lo-fi por bioma, leitmotifs, música adaptativa, loops - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M41** Sonido Ambiental [M] 🟡 — viento, agua, océano, cuevas, ruinas, mecanismos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M42** Efectos de Sonido [M] 🟡 — pasos, herramientas, bloques, diálogo, menús, logros - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M43** ASMR y Feedback [M] 🟡 — sensaciones táctiles de picar/cosechar/construir, capas sonoras - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M44** Arte 3D [C] 🔴 — estilo cozy voxel redondeado, presupuesto de polígonos, LOD - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M45** Arte 2D [M] 🟡 — logo, iconos, UI, mapas, símbolos ancestrales, guías de estilo - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M46** Texturas y Materiales [M] 🟡 — tierra, césped, piedra, agua, variantes por bioma - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M47** Animación [C] 🟡 — jugador, NPC, fauna, vegetación, mecanismos, UI - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M48** Iluminación [M] 🟡 — URP/Forward+, GI suave, horaria, faroles, cuevas, optimización - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M49** Vegetación [M] 🟡 — hierba, árboles ancestrales, plantas luminosas, viento, instancing - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M50** Agua [C] 🟡 — océano, ríos, cascadas, congelamiento, evaporación, puzzles hidráulicos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M51** Partículas y VFX [M] 🟡 — polvo, hojas, Resonancia, activación de runas, obtención de Sello - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M52** UI/UX [C] 🔴 — HUD, menús, inventario, mapa, diario, calendario, tooltips - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M53** Mapa [M] 🟡 — mapa global, descubrimiento progresivo, marcadores, leyenda - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M54** Diario del Jugador [M] 🟢 — registro de personajes, pistas, Sellos, ruinas, fotografías - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M55** Fotografía [M] 🟢 — modo fotografía, filtros, álbum, galería - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M56** Interfaz de Control [M] 🔴 — teclado, ratón, gamepad, remapeo, Steam Deck - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M57** Accesibilidad [M] 🔴 — daltonismo, subtítulos, texto ajustable, reducción de movimiento - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M58** Guardado [C] 🔴 — autosave, slots, GameState versionado, backups, recuperación - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M59** Datos y Serialización [M] 🔴 — formato, IDs persistentes, versionado de schema, migraciones - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M60** Rendimiento [C] 🔴 — 60 FPS, presupuestos, profiling, culling, batching, instancing - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M61** Memoria [M] 🔴 — texturas, meshes, audio, streaming, memory leaks, sesiones largas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M62** Cargas y Streaming [M] 🔴 — carga asíncrona, chunks cercanos, progreso real - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M63** IA de NPC [C] 🔴 — máquina de estados, rutinas, pathfinding sobre terreno modificable - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M64** Animales IA [M] 🟡 — comportamiento no hostil, migraciones, spawn/despawn - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M65** Anti-Softlock [M] 🔴 — recuperación de objetos clave, reinicio de puzzles, fallbacks - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M66** Vehículos [M] 🟢 — barco (y post-v1.0 submarino), física, cámara, docking - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M67** Transporte y Navegación [M] 🟢 — puerto, rutas, señalización, fast travel narrativo - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M68** Fast Travel [S] 🟢 — puntos de viaje, requisitos, anti-bypass de eventos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M69** Interacciones [M] 🔴 — distancia, indicador, prioridad, contextuales, cancelación - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M70** Progresión [M] 🔴 — narrativa, herramientas, construcción, social, islas, desbloqueos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M71** Sistema de Logros [M] 🟡 — básicos, exploración, social, colección, secretos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M72** Coleccionables [M] 🟡 — reliquias, fragmentos, conchas, fósiles, documentos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M73** Eventos [M] 🟡 — festivales estacionales, llegada del vapor, eventos raros - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M74** Postgame [M] 🟢 — Era del Alba, nuevas islas, objetivos 100%, contenido libre - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M75** Multijugador [C] 🟢 — decidir local/online, cantidad, voz de diseño (post-v1.0) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M76** Online y Red [C] 🟢 — cliente-servidor, sincronización, latencia, seguridad (post-v1.0) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M79** Legal — Privacidad [M] 🔴 — GDPR/COPPA, política de privacidad, consentimientos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M80** Legal — Menores [M] 🟡 — clasificación, controles parentales, contenido - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M81** Clasificación por Edades [S] 🟡 — IARC/ESRB/PEGI (cero violencia → permisiva) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M82** Licencias de Software [M] 🟡 — engine, plugins, fuentes, librerías - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M84** Modelos 3D — Legal [M] 🟡 — licencias de cada modelo, atribución, registro - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M86** Localización [M] 🟡 — idioma base, claves, tablas, QA lingüístico - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M87** Fuentes Tipográficas [S] 🟢 — fuente principal/secundaria, licencia, tildes y ñ - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M88** Diseño de Menús [M] 🟡 — principal, pausa, inventario, ajustes, créditos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M89** Configuración Gráfica [S] 🟡 — resolución, calidad, VSync, FPS, presets - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M90** Configuración de Audio [S] 🟡 — volúmenes independientes, rango dinámico - compl:3 - dep:— - estado:🟡
+- [ ] **M01** - **M91** Tutorial [M] 🔴 — movimiento, cámara, recolección, construcción, progresivo - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M92** Balance [C] 🔴 — precios, recompensas, crafting, amistad, simulación económica - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M93** Retención sin FOMO [M] 🟡 — objetivos diarios/semanales, sin castigos por ausencia - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M94** Monetización [M] 🟡 — premium, DLC de islas vs contenido gratis, precio - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M95** Plataformas [M] 🟡 — PC/Steam prioritario, Steam Deck, EGS/GOG a evaluar - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M98** Marketing [M] 🟡 — identidad, redes, devlogs, press kit, Next Fest - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M99** Community Management [M] 🟢 — Discord, reglas, feedback, FAQ - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M102** Logging [M] 🟡 — niveles, rotación, crash reporting, exportación - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M103** Analytics [M] 🟢 — eventos, sesiones, anonimización, dashboard - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M104** Telemetría de Gameplay [M] 🟢 — tutorías, abandono de puzzles, zonas ignoradas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M105** Seguridad [M] 🟢 — APIs, claves, validación, anti-manipulación (si online) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M106** Backups [S] 🔴 — repositorio, assets, documentación, builds, restauración - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M107** Pipeline de Assets [M] 🔴 — naming, carpetas, formatos, import settings, validadores - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M108** Herramientas Internas [M] 🟡 — editores de bloques/NPC/diálogos/recetas, teleport - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M109** Debug Menu [S] 🟡 — teletransporte, tiempo/clima, objetos, regenerar chunks - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M111** Testing Automático [M] 🔴 — unit, integración, save/load, economía, voxel, navegación - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M113** Playtest [M] 🔴 — interno, externo, primera experiencia, con gamepad, hardware bajo - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M114** Hardware [M] 🟡 — PC mínimo/recomendado, GPU integrada/dedicada, SSD/HDD - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M115** Instalador [S] 🟢 — build release, instalación limpia, actualización, desinstalación - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M116** Build System [M] 🟡 — builds automatizados dev/QA/staging/release, versión, firmado - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M117** CI/CD [M] 🟢 — tests automáticos, builds, artifacts, branch protection - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M118** Actualizaciones [M] 🟡 — patches, versionado, compatibilidad de saves, migraciones - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M119** DLC y Expansiones [M] 🟢 — estrategia post-lanzamiento, nuevas islas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M120** Soporte Post-Lanzamiento [M] 🟢 — canal de soporte, tickets, hotfixes, roadmap - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M121** Crash Reporting [S] 🟢 — captura de stack, versión, agrupación, priorización - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M122** Modding [C] 🟢 — decidir si habrá, API, seguridad (opcional muy a futuro) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M123** Contenido Generado por Usuarios [M] 🟢 — moderación, privacidad, términos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M125** Marketing Legal [S] 🟢 — screenshots, música, influencers, claims - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M126** Copyright del Juego [S] 🟢 — registro, evidencias de autoría, titulares - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M127** Identidad de Marca [M] 🟡 — nombre (verificar colisión), logo, paleta, símbolo de Aurora - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M128** Merchandising [S] 🟢 — soundtrack, poster, artbook (post-lanzamiento) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M129** Artbook [M] 🟢 — arte conceptual, evolución del mundo (post-lanzamiento) - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M130** Créditos [S] 🟡 — todos los roles, licencias, herramientas, agradecimientos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M131** Producción del Equipo [S] 🟡 — roles definidos aunque sea equipo chico - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M136** Prototipo [C] 🔴 — movimiento, cámara, voxel básico, extracción/colocación, mini puzzle, save - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M137** Vertical Slice [C] 🔴 — Aurora + templo completo + NPC con arco, arte final, medición de rendimiento - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M138** Pre-Alpha [C] 🔴 — núcleo jugable, arquitectura estable, primer bioma, primeros sistemas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M139** Alpha [C] 🔴 — mecánicas completas, historia jugable, primer balance, QA intensivo - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M140** Beta [C] 🔴 — contenido completo, rendimiento objetivo, cero bugs críticos, localización - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M141** Release Candidate [C] 🔴 — freeze, builds limpias, saves compatibles, certificación - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M142** Lanzamiento [C] 🔴 — publicación en Steam, monitoreo, hotfix de emergencia - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M143** Después del Lanzamiento [M] 🟡 — reviews, bugs, rendimiento, retención, parches - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M144** Diseño de Experiencia [M] 🟡 — sensación de llegada, descubrimiento, hogar, comunidad, misterio - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M145** Diseño Emocional [M] 🟡 — calma, sorpresa, nostalgia, pertenencia, legado - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M146** World Building [C] 🔴 — historia de Aurora, Arquitectos, Resonancia, Primeros Jardineros, Elysia - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M147** Lore Ambiental [M] 🟡 — ruinas/objetos/vegetación que cuentan historias, pistas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M148** Nombres y Nomenclatura [M] 🟡 — islas, personajes, Sellos, consistencia, marcas - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M149** Diseño Sonoro Narrativo [M] 🟢 — sonido de Resonancia, de cada Sello, silencios narrativos - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M150** Control Final [M] 🔴 — verificación integral: diversión, economía, mundo vivo, rendimiento - compl:2 - dep:— - estado:🟡
+- [ ] **M01** - **M152** Objetivo Final del Proyecto [M] 🔴 — Aurora como hogar, curiosidad por explorar, mundo vivo post-créditos - compl:2 - dep:— - estado:🟡
+
+## Hy3  (161 tareas listadas, 2 modulos, 201 disponibles)
+
+### M128 128-Identidad-De-Marca - estado 🟡 Con dudas - progreso 60/100
+- [ ] **M128** - Verificar disponibilidad de dominio web (islaancestral.com) → KnownIssue no bloqueante DoD: verificacion requiere accion humana (whois + purchase); politica ... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Registrar redes sociales con nombre consistente - compl:2 - dep:78 - estado:🟡
+- [?] **M128** - Crear alertas de monitoreo de trademark → REVERTIDO Familia A (auditoría BUG-070 lote 7, Ling 3.1 Flash, director confirma): la citación "03-Diseno.md §1.3" ... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Diseñar logo principal del juego - compl:1 - dep:78 - estado:🟡
+- [ ] **M128** - Crear variante mono (B/N) del logo - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear variante icono (app icon) 512x512 → KnownIssue no bloqueante DoD: specs documentadas en 03-Diseno.md §2.1 (512x512 PNG); creacion requiere artista M46.... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear variante horizontal para headers → KnownIssue no bloqueante DoD: specs documentadas en 03-Diseno.md §2.2 (horizontal lockup); creacion requiere artista... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear variante vertical para merchandise - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Exportar en formatos: PNG, SVG, AI → KnownIssue no bloqueante DoD: formatos especificados en 03-Diseno.md §2.4 (PNG raster, SVG vector, AI source); exportaci... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear versiones para fondo claro y oscuro → KnownIssue no bloqueante DoD: variantes documentadas en 03-Diseno.md §2.5 (light/dark mode); creacion requiere ar... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Test de legibilidad en tamanos pequenos → KnownIssue no bloqueante DoD: criterio definido en 03-Diseno.md §2.6; testing requiere assets físicos. Deferred a M46. - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Test de impresión en merchandise - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Aprobar logo final con equipo - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Distribuir logo a partners y prensa - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear paleta en formato ASE/CLR - compl:2 - dep:78 - estado:🟡
+- [?] **M128** - Crear variaciones para modo oscuro → REVERTIDO Familia A (auditoría BUG-070 lote 7): DUPLICADO contradictorio con L67 [ ] "Crear versiones para fondo claro y... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Distribuir paleta al equipo de diseño - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear muestras de tipografia → KnownIssue no bloqueante DoD: samples disenadas en 03-Diseno.md §1.3 (typography swatches); creacion requiere artista M46. Spe... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Distribuir fuentes al equipo → KnownIssue no bloqueante DoD: politica de fuentes documentada en 03-Diseno.md §1.4 (licencias tipograficas); distribucion requ... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Registrar dominio islaancestral.com → KnownIssue no bloqueante DoD: registro requiere accion humana (registrador); politica documentada en 03-Diseno.md §1.5.... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear sitio web con información del juego - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear perfiles en redes sociales principales - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear kit de prensa con assets de marca - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear email corporativo (press@islaancestral.com) → KnownIssue no bloqueante DoD: politica de emails corporativos documentada en 03-Diseno.md §1.6; creacion ... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Monitorear menciones de la marca - compl:2 - dep:78 - estado:🟡
+- [?] **M128** - Crear checklist de QA para merchandise recibido → REVERTIDO Familia A (auditoría BUG-070 lote 7): tokens "QA|checklist|merchandise" en todo plan-actual → 0 a... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Test de logo en tamaños mínimos - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Test de legibilidad de tipografia → KnownIssue no bloqueante DoD: testing criteria documentado en 03-Diseno.md §1.8; requiere assets físicos para testing vis... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Validar que UI del juego usa paleta de marca → AUDITORÍA 2026-10-11 (Ling 3.1 Flash): NO PASA — theme_ux.gd L13-20 usa paleta pastel propia (arena/ocre/marró... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Test de impresión de logo en merchandise - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Auditoría visual pre-lanzamiento - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear brand/ con todos los assets - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear manual-de-marca.pdf - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Crear press kit descargable → KnownIssue no bloqueante DoD: estructura press kit documentada en 03-Diseno.md §1.9 (logo, screenshots, factsheet); creacion re... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Distribuir manual a todos los socios - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Actualizar manual cuando cambien elementos → KnownIssue no bloqueante DoD: politica de versionado del brand guide documentada en 03-Diseno.md §1.10 (changelo... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Mantener backups de assets de marca - compl:2 - dep:78 - estado:🟡
+- [?] **M128** - Crear changelog del manual de marca → REVERTIDO Familia A (auditoría BUG-070 lote 7): grep "changelog|versionado" en todo plan-actual → solo la propia línea ... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Verificar que M53 (UI/UX) usa paleta y tipografía de marca → AUDITORÍA 2026-10-11 (Ling 3.1 Flash): PARCIAL — tipografía SÍ (theme_ux.gd L23-25, fuentes M88)... - compl:2 - dep:78 - estado:🟡
+- [ ] **M128** - Verificar que M131 (Créditos) usa formato de marca → AUDITORÍA 2026-10-11 (Ling 3.1 Flash): NO PASA — plan-actual de M131 sin referencias a identidad de marc... - compl:2 - dep:78 - estado:🟡
+
+### M137 137-Prototipo - estado 🟢 Disponible - progreso 10/131
+- [ ] **M137** - Definir escena `prototipo_isla.tscn` como escena principal [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir autoload `game_state_proto.gd` (M59) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir autoload `world_seed.gd` con seed fija 20260819 [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir carpeta `docs/prototipo/` para los reportes del hito [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir `player_proto.gd` (CharacterBody3D) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir movimiento 8 direcciones con velocidad 5.0 [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir salto con `JUMP_VELOCITY = 4.5` [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir `move_and_slide()` con colisiones voxel [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que el jugador camine sobre escaleras de 1 bloque [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir SpringArm3D en tercera persona [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir distancia cámara 2-8 m (sin clip) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir control mouse orbit [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test: cámara no atraviesa terreno en 10 posiciones [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test: sin nausea (encuesta playtest) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir VoxelTerrain isla 64³-96³ [C] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir generador de isla: elevación + playa + agua circundante [C] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir extracción por raycast con radio máx 3 [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir colocación de bloques en cara apuntada [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test de bordes de chunk sin crash [C] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir árbol de madera (bloques referenciados) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir obtención de madera al extraer árbol [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir crafting esbozo: 2 maderas → herramienta (M16) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir herramienta con durabilidad infinita en prototipo [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que la herramienta abra el puzzle (flujo M24) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir `inventario_proto.gd` con slot único [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir contador de madera [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir bool de herramienta [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir UI placeholder de contador (M53 esbozo) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test de inventario tras guardar/cargar [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir NPC "Guía" con StaticBody simple [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir interacción con tecla E [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir 3 frases: bienvenida, pista del puzzle, agradecimiento [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir caja de diálogo flotante placeholder [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test: diálogo no re-abre si ya se completó la misión [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir puerta de ruina bloqueada [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir apertura con herramienta [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir recompensa: mensaje + reliquia decorativa [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir bypass posible (registrar en reporte) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test: puzzle resoluble en < 3 min [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir save v1 con version, seed, player, inventory, chunks, flags [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir guardado delta solo de chunks modificados [C] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir carga con seed mismatch → aviso (no crash) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test guardar→salir→cargar con 0 pérdidas [C] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir isla única alcanzable en < 2 min caminando [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir spawn en la playa [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir vegetación mínima (árboles, pasto bloque) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que el mundo se regenere idéntico con la seed [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test: seed distinta → save inválido avisado [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir sky procedural simple [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir duración de ronda: 6 min reales [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que "dormir" en la casa adelante el día [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir luz direccional que sigue el ciclo [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir sin impacto en gameplay (solo visual) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir lluvia con particle system simple [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir toggles de clima en debug (F1/F2) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que la lluvia no afecte rendimiento (M61) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir sonido de lluvia placeholder (M42 esbozo) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test de lluvia en zona densa (FPS estable) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir casa con puerta interactuable [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir cama que permite "pasar el día" [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir interior mínimo (suelo + paredes) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que la casa sea accesible sin herramientas [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test: dormir → amanecer sin bugs [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir ruina de 5-8 bloques decorativos [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir reliquia decorativa placeholder [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir pista de puzzle en la ruina (mensaje en muro) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que la ruina no tenga combate (cozy M152) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test: recorrer ruina sin colisiones rotas [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir sesión de 15 min por tester [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir mínimo 3 testers [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir encuesta de 5 preguntas (RF14) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir plantilla `PLAYTEST.md` con resultados [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir pregunta: diversión 1-10 [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir pregunta: intención de volver a jugar (sí/no) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir pregunta: momento más aburrido [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir pregunta: momento más divertido [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir observación: acciones repetidas espontáneamente [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir checklist M152: sin grind, sin ansiedad, sin castigo [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir checklist M152: combate ausente/opcional [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir checklist M153: la sesión se siente dentro de la visión [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir checklist M153: ritmo accesible sin metagaming forzado [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir plantilla `FILOSOFIA-CHECK.md` firmada por tester/equipo [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir medición FPS cada 5 s durante sesión [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir escena densa de prueba (zona de 64³ llena) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir profiling con CPU/GPU (M61) si FPS < 60 [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir reporte de rendimiento en `PLAYTEST.md` [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir input provisional teclado/mouse [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir acciones: izq, der, adel, atras, saltar, usar [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que no haya conflicto con debug (F1/F2) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir nota: input real se diseña en M57 [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir criterio 1: diversión ≥ 7/10 [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir criterio 2: intención de seguir ≥ 80% [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir criterio 3: FPS ≥ 60 [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir criterio 4: filosofía sin fallos críticos [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir criterio 5: bucle completo ≥ 90% de testers [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir consecuencias de GO: pasar a M138 (Vertical Slice) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir consecuencias de NO-GO: ajuste 7 días o replanificar [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir tag git `prototipo-v1` en el commit de cierre [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir `GONOGO.md` firmado con fecha [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir push del estado del prototipo al cierre [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir sesión de retrospectiva post-hito [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir doc `RETROSPECTIVA.md` con lecciones técnicas [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir doc con lecciones de diseño (qué gustó/oró) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir lista de deudas técnicas diferidas a M138 [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir checklist de entrada a M138 con estos hallazgos [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test de caminar por bordes de precipicio [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test de extraer bloque bajo los pies (no caer en void) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test de diálogo interrumpido (guardar durante diálogo) [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test de dormir con lluvia activa [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir test de sesión con save repetido 10 veces [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir autoloads como singletons claros [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir nombres de archivos consistentes (`*_proto.gd`) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que el código del prototipo se pueda descartar sin afectar M138 [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir `const` para números mágicos (SPEED, RADIOS) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir `@export` para valores tunables [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir registro de deuda técnica del prototipo (M111) [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que `docs/prototipo/` se actualice hasta el GONOGO [M] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir actualización de `CHECKLIST-GLOBAL.md` al cerrar el hito [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir log en `Logs/` del cierre del hito [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir que la fila 137 quede 🟢 DELEGABLE al cerrar [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+- [ ] **M137** - Definir comunicar al usuario la decisión GO/NO-GO y próximos pasos [S] - compl:1 - dep:08, 11, 14, 59 - estado:🟢
+
+## Step-5-WorkBuddy  (121 tareas listadas, 1 modulos, 121 disponibles)
+
+### M70 70-Interacciones - estado 🟡 Liberado (iter. 3 ✅) - progreso 77/198
+- [ ] **M70** - Registrar dependencias del módulo: M11, M13, M08 [S] - compl:3 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Registrar consumidores del módulo: M19, M21, M33, M35, M36, M65, M18, M14, M17, M22/M24/M26 [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Definir el objetivo: una única tecla de interacción con indicador visual y prioridad determinística [S] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Definir fuera de alcance: mecánicas concretas de los consumidores, inventario, diálogos, IA [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Establecer restricción cozy: tecla E sin objetivo nunca genera error ni castigo [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Establecer restricción de rendimiento: presupuesto de detección < 0.5 ms por frame [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF1: desregistro automático al salir del mundo activo (`_exit_tree`, M63 streaming) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF2: enumerar las 8 categorías de interacción con prioridad base [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF2: cada categoría define ícono, sonido y etiqueta por defecto [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF3: respetar el rango base del personaje de M11 (4 m) sin excederlo por defecto [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF4: filtro de candidatos por distancia (cálculo sin sqrt, al cuadrado) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF4: validación de requisitos previos vía `requisitos_cumplidos(jugador)` [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF4: espaciado del raycast de visión (1 por ventana de N=4 frames) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF19: re-evaluación de candidatos cada frame con costo O(n) con n < 40 [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: seleccionar SIEMPRE un único objetivo, nunca varios [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: ordenar por prioridad de categoría (mapeo publicable en el catálogo) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: desempate por distancia (menor gana) entre misma categoría [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: desempate por desviación angular frente del jugador (menor gana) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: resolución final de empates por orden de registro (estable y determinístico) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: selección 100% determinística para la misma entrada [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF6: histéresis anti-parpadeo: mantener objetivo si la ventaja del nuevo es <= 0.15 m [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: cambio de objetivo con fade (0.08-0.12 s), nunca salto brusco [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: excluir de la selección a los atenuados si hay al menos un objetivo válido [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF13: re-selección inmediata al girar el jugador si la desviación angular cambia el orden [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF6: expulsar el objetivo actual si sale de rango en el mismo frame [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF19: ordenamiento con k candidatos típico < 8 (k log k barato) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF5: exponer el objetivo seleccionado a través de `obtener_objetivo_actual()` [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF6: indicador "E + ícono de categoría" world-space sobre el objetivo [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF6: el indicador flota sobre `obtener_posicion_interaccion()` con suavizado de posición [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF6: línea de contexto en HUD con nombre localizado del objetivo ("Hablar con Mira") [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF20: ícono de tecla según dispositivo activo (teclado E / gamepad A o B, M57) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF6: línea de contexto oculta durante la micro-animación de interacción [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF8: el gestor no decide la mecánica: solo despacha por contrato [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF9: soporte de interacciones instantáneas y de larga duración (hold/activa) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF4: presionar E con solo candidato atenuado emite feedback "no disponible" respetuoso [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF8: presionar E sin ningún candidato no produce error ni castigo (regla cozy) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF9: el consumidor emite `interaccion_terminada(ok)` para liberar el gestor [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: chirrido de interacción por categoría (base de sonido M11/M44) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: partículas opcionales provistas por el consumidor vía señal previa [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: feedback diferenciado de éxito (campana suave) y fallo (tono bajo, sin castigo) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF17: validación de herramienta en mano (M13) dentro de `requisitos_cumplidos` [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF17: validación de item seleccionado en inventario (M14) para regalos [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF17: validación de hora/día (M29/M31) para puertas y cosechas de temporada [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF17: validación de nivel de amistad (M20) para interacciones sociales [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF25: pausa de procesamiento al pausar el juego (ProcessMode correcto) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF25: gestión de la señal de modal abierto (M53/M57) -> estado DORMIDO [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF12: cancelación suave de la interacción en curso con `cancelar_interaccion()` [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF12: log M103 si el consumidor no responde a la cancelación [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF13: cambio de objetivo por reorden de prioridad sin parpadeo (histéresis) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF14: cancelar selección al abrir menú, diálogo, inventario o pausa [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF14: re-evaluar automáticamente al cerrar la UI en el siguiente frame [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF23: cancelación de zona de trigger si el jugador sale antes de activar [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF12: verificar que no queden señales colgadas (objetivo_perdido) tras cancelar [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: feedback sonoro unificado por categoría (chirrido de madera/metal/animal) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: feedback de éxito distinguible del de fallo [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: feedback de "no disponible" con tono respetuoso (nunca chirrido de error) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: sin feedback intrusivo: nada de shake de cámara ni invasión (regla cozy) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: las partículas del consumidor se reproducen vía señal, no las dibuja el gestor [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: sonido de "nadie cerca" mínimo y amable (opcional, bajo volumen) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RF15: textos de feedback 100% localizables con `tr()` [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-cozy: la interacción nunca castiga al jugador [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-cozy: la cancelación por distancia es suave, sin cortes bruscos [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-rendimiento: filtrado por distancia al cuadrado sin sqrt [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-rendimiento: raycast de visión espaciado (N=4) y acotado por categoría [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-localización: todo texto visible pasa por `tr()` [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-persistencia: `GameState.M70` con esquema acotado y escritura diferida [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-voxel: línea de visión compatible con Voxel Tools (VoxelTool de M08) [C] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-determinismo: selección idéntica para entrada idéntica (debug M110 y tests) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-testeabilidad: dependencias inyectables (jugador, voxel) para tests sin escena real [M] - compl:3 - dep:11, 13 - estado:🟡
+- [ ] **M70** - RN-seguridad: ningún error de contrato rompe el frame; degradación a NO_DISPONIBLE + log [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Diseñar Resource CategoriaInteraccion (ícono, sonido, prioridad, etiqueta, visión) [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Diseñar catálogo `categorias_interaccion.tres` con las 8 categorías [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Diseñar flujo de detección/secuencia de 7 pasos por frame [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Diseñar flujo de cancelación por distancia/UI/cambio de objetivo/desregistro [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Diseñar flujo de persistencia con escritura diferida (0.5 s) [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Diseñar las 6 señales de salida del módulo [S] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M11: leer posición, frente y estado FSM del jugador (inyección) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M11: pasar a DORMIDO si el jugador está ocupado (dormir, cutscene, minijuego) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M11: respetar el rango base de interacción de 4 m del personaje [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M08: integrar VoxelTool para la línea de visión (bloqueo por voxel sólido) [C] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M13: validar requisitos de herramienta dentro de `requisitos_cumplidos` [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M19: `set_ocupado(true)` -> NO_DISPONIBLE con razón ("Duerme", "Ocupado") [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M19: migrar la burbuja world-space de vecinos al indicador del 70 (sin duplicados) [C] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M21: apertura de diálogo al E sin UI propia en el 70 [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M20: regalo al E con item seleccionado de M14 y validación de amistad [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M33: recoger cosechas maduras al E [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M14: abrir cofres con estado persistente (abierto) en GameState.M70 [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M18: abrir/cerrar puertas al E; bloqueo por llave con razón [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M65: acariciar/alimentar animales al E con factor de ánimo [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M35/M46: recoger recursos cosechables al E (objeto) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M22/M24/M26: activar triggers/cutscenes al E o por zona [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - M103: logging estructurado de errores de contrato, degradaciones y timeouts [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Varios objetos juntos a la misma distancia: gana prioridad de categoría [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Dos objetos idénticos superpuestos: se ordena por registro y nunca alterna [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Jugador se aleja durante una interacción en curso: cancelación suave [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Jugador gira 180 grados con dos objetos equidistantes: cambia por desviación angular [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Pausa a mitad de interacción: DORMIDO, al reanudar continúa sin glitches [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Cooldown de puerta y tecla E en auto-repeat: no se re-abre fuera de cooldown [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Filtro de distancia con producto punto al cuadrado, sin sqrt en el paso rápido [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Espaciado del raycast de línea de visión (N=4 frames) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Pool del indicador world-space (sin instancias/destrucciones por frame) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Evitar allocaciones de Arrays en el hot path (reuso de buffers) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Ordenamiento solo sobre candidatos pre-filtrados (k < 8) [S] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Escritura de persistencia diferida y por lote (cada 0.5 s como máximo) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Verificación del presupuesto < 0.5 ms/frame con el profiler en escena densa [C] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Documentar métricas de referencia para LOD de detección en zonas muy pobladas [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Crear 01-Requerimientos.md con problema, objetivos, alcance, restricciones, RF y RN [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Crear 02-Analisis.md con análisis del dominio, categorías, alternativas y decisiones D1-D7 [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Crear 03-Diseno.md con arquitectura, nodos, contrato, flujos y rendimiento [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Crear 05-Checklist.md con 130+ ítems verificables [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Documentar la integración con M11/M13/M19 y demás consumidores en 03-Diseno.md [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Documentar la regla de unificación de tecla (E vs F histórica) como pendiente para M57 [S] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Definir escenario "esquina": objetivo tras pared voxel con categoría de visión [C] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Definir escenario "cosecha": 30 plantas maduras en fila sin parpadeo [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Definir escenario "puerta bloqueante": E repetida durante interacción en curso [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Definir escenario "streaming": alta/baja de zona con M63 sin referencias colgadas [M] - compl:1 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Plan de tests de determinismo: misma entrada -> misma selección (assert en Edit Mode) [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Plan de tests de persistencia: cofre abierto, puerta y animal acariciado sobreviven sesión [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Plan de pruebas de cancelación: distancia, UI, pausa y cambio de objetivo [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Plan de pruebas de input: teclado E, gamepad A/B, remapeo y auto-repeat [M] - compl:2 - dep:11, 13 - estado:🟡
+- [ ] **M70** - Plan de pruebas de localización: nombres y razones traducibles sin cortes de layout [M] - compl:2 - dep:11, 13 - estado:🟡
+
+## atria-dawn  (140 tareas listadas, 2 modulos, 246 disponibles)
+
+### M33 33-Agricultura - estado 🟡 Con dudas - progreso 106/153
+- [ ] **M33** - P11: cultivos especiales — trigo invernal, higos, ancestrales de desbloqueo M22 [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - P13: flores — decorativas y sujetas a cruce [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - P15: híbridos — cruce de flores con reglas legibles (sin RNG oculto) [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - P22: venta — integración M38/M39 con precios por calidad [M] - compl:2 - dep:· espera: modulo(s) dependiente(s): M16 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - P23: semillas raras — reproducibles y con desbloqueo de progresión [M] - compl:2 - dep:· espera: modulo(s) dependiente(s): M38, M39 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - P24: cultivos de isla — palma de coco y flor de coral exclusivas [M] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - P25: agricultura decorativa — helecho ornamental sin rendimiento [S] — crop_definition.gd decorative_only; calcular_rendimiento() devuelve [] si decorative_only - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - Interacción F sobre tierra arada abre selector de semillas (M70/M53) [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Animación de la herramienta sincronizada con el evento (M44) [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Cancelación segura del selector sin consumir semillas [S] — el selector UI no existe aún (M53); plant() no consume semilla si la validación falla - compl:2 - dep:· espera: modulo(s) dependiente(s): M44 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - Notificación de objetos obtenidos al cosechar (M53) [S] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Iconos de cultivos y semillas definidos en M45/M46 [M] - compl:2 - dep:· espera: modulo(s) dependiente(s): M53 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - Venta de cosechas con precios por calidad (M38/M39) [M] - compl:2 - dep:· espera: modulo(s) dependiente(s): M45, M46 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - Cultivo en DORMANTE al pasar a estación apta: retoma sin pérdida [S] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Sequía prolongada: pausa indefinida sin muerte [S] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - Pisoteo de NPC: agitación visual sin pérdida de progreso [M] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - Cosecha con inventario lleno: sobrante devuelto con notificación [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Árbol frutal en invierno: entra en DORMANTE y conserva cooldown [S] - compl:2 - dep:· espera: feature de M14-Inventario (definir contrato/dueno por asignar) - estado:🟡
+- [ ] **M33** - Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Guardado a mitad del avance de día: el tick es idempotente [C] - compl:2 - dep:· espera: modulo(s) dependiente(s): M17 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - Evaluación diaria ≤ 2 ms con 400 cultivos [C] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Visual por MultiMesh agrupado por especie/etapa [C] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - LOD de 2 niveles para instancias [M] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - Sin procesamiento por frame en estados pausados [S] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Prueba de stress: 400 cultivos + lluvia global en 1 tick [C] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - HUD agrícola: indicador de estado por cultivo apuntado (M53) [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Notificación cozy al madurar cultivos [S] - compl:2 - dep:· espera: modulo(s) dependiente(s): M53 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - Tooltip con hints legibles y cálidos [S] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - Tutorial amable: "La comida es opcional aqui" (M92, M152) [S] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - Sonido de arar (M43/M44) con capa ASMR de tierra [M] - compl:2 - dep:· espera: modulo(s) dependiente(s): M92, M152 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - Sonido de regar con goteo suave [S] - compl:2 - dep:· espera: modulo(s) dependiente(s): M43, M44 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - Sonido de cosecha satisfactoria [S] - compl:2 - dep:· espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar) - estado:🟡
+- [ ] **M33** - VFX de polvo al arar y brillo al madurar (M52) [M] - compl:2 - dep:· espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar) - estado:🟡
+- [ ] **M33** - Animación de sway según el viento del clima (M31/M32) [M] - compl:2 - dep:· espera: modulo(s) dependiente(s): M52 (coordinar con su dueno) - estado:🟡
+- [ ] **M33** - Test: determinismo entre guardado y recarga (mismo día, mismo estado) [M] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Test: 4 estaciones con cultivo de ventana parcial [M] - compl:2 - dep:· espera: feature de M41-Guardado (definir contrato/dueno por asignar) - estado:🟡
+- [ ] **M33** - Test: 30 días sin agua: pausa, nunca muerte [M] - compl:2 - dep:· espera: feature de suite de tests del modulo (definir contrato/dueno por asignar) - estado:🟡
+- [ ] **M33** - Test: pisoteo de NPC sobre campo con ruta y sin ruta [C] - compl:2 - dep:· espera: feature de M51-Agua (definir contrato/dueno por asignar) - estado:🟡
+- [ ] **M33** - Test: invierno con nieve sobre tierra arada [C] - compl:2 - dep:· espera: feature de suite de tests del modulo (definir contrato/dueno por asignar) - estado:🟡
+- [ ] **M33** - Test: inventario lleno al cosechar [S] - compl:2 - dep:· espera: feature de suite de tests del modulo (definir contrato/dueno por asignar) - estado:🟡
+- [ ] **M33** - 5 alternativas descartadas documentadas en 02-Analisis [S] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - Prototipo sugerido: 3 cultivos + riego manual + avance diario [S] - compl:2 - dep:08, 15 - estado:🟡
+- [ ] **M33** - 01-Requerimientos creado y firmado [S] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - 02-Analisis, 03-Diseno y 04-Codigo creados y firmados [S] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+- [ ] **M33** - 05-Checklist creado y firmado (este archivo) [S] - compl:2 - dep:· espera: feature/dependencia externa por definir (dueno por asignar) - estado:🟡
+
+### M61 61-Rendimiento - estado 🟡 Con dudas - progreso 53/148
+- [ ] **M61** - Documentar objetivo por preset de calidad (M91) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [?] **M61** - Alinear con M114 (hardware objetivo) [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [?] **M61** - Alinear con M114 y presets M91 [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [?] **M61** - Documentar metodología (Profiler Godot + etiquetas) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir draw calls por escena objetivo [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir control de overdraw (vegetación/sombras) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar coste de shaders por material [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir límite de draw calls por chunk [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Coordinar pausas de GC con M62 [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar presupuesto de VRAM en bench [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir texturas 4K comprimidas máx (M47) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir presupuesto de VRAM por escena [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir atlas de UI (M53) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar compresión BC/ASTC por plataforma [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar VRAM < presupuesto en GPU mínima [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar tamaño máximo de paquete de datos [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir carga asíncrona obligatoria (M63) [S] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir progreso real con mensajes de estado (AGENTS §8) [S] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir bloqueo cero del hilo principal [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar precarga de escena siguiente [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar pantalla de carga sin frames congelados [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir generación en background thread (M07) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir <5 ms/frame consumido por generación [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir sin trabajo voxel en main thread [S] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar cola de chunks con prioridad [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar generación con stream continuo (M63) [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir sin GC en el bucle de interacción [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir pooling de buffers de mesh [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar remesh en background (M07) [S] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar destrucción masiva sin picos [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir LOD de actualización por distancia (M19/M64) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar pooling de instancias NPC [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar pueblo completo 60 FPS [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir pooling de partículas (M52) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir GPUParticles para larga vida (fuego/lava) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar límite por evento [S] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar festival (M74) sin picos [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir sombras dinámicas solo personajes y objetos clave [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir sombras blended para estáticos [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir rango de cascada limitado [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar costo de sombras por material [S] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar noche con faroles (M49) 60 FPS [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir GI suave sin bounce caro (M49) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir luz horaria barata (1 directional + sky) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir luces real-time minimizadas [S] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar lightmap/baked para interiores (M17) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar ciclo día/noche sin drop [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir plano único de agua (M51) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir normales animadas en shader (no CPU) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir reflejos solo superficie [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar transparencia ordenada [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar mar visible sin overdraw [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir GPU instancing obligatorio (M50) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir viento en vertex shader (no CPU) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir culling de vegetación por viento oclusivo [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar presupuesto de instancias por chunk [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar bosque denso 60 FPS [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir LOD escalonado por distancia [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir que el mar siempre se ve (cozy) [S] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar memoria de chunks por distancia (M62) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar preset mínimo 30 FPS [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Usar frustum del engine por defecto [S] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir culling por chunks (M07) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir culling de NPC/objetos por distancia [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar culling de partículas [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar culling eficaz en bench [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir occlusion por celdas de chunks [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Aplicar solo en cuevas y templos (M24/M25) [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Descartar occlusion global en terreno abierto [S] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar coste de GPU queries acotado [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar templo subterráneo (M25) 60 FPS [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir impostor lejano (malla simpl. + textura) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir LOD de NPC/fauna por distancia [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar ausencia de pop en cámara principal [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Usar meshes combinados por chunk (M07) [S] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir batching de estáticos por bioma [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir límite de materiales por batch [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar batching de UI (M53) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar draw calls dentro de presupuesto [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Aplicar a vegetación (M50) [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Aplicar a rocas y fragmentos (M08) [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Aplicar a partículas de larga vida [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Documentar instancing de peces (M34) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar instancing con multimesh de Voxel Tools [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Pooling de partículas (M52) [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Pooling de fauna y peces (M35/M34) [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Pooling de efectos de herramientas [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Pooling de buffers de remesh [M] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Validar cero allocations en lazo caliente [C] - compl:2 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir reuso de Arrays/Variants [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Definir GC en pausas seguras (transiciones M63) [M] - compl:1 - dep:53,98,91 - estado:🟡
+- [ ] **M61** - Verificar con verificar_checklist.py (sin alertas nuevas) [S] - compl:2 - dep:53,98,91 - estado:🟡
+- [?] **M61** - Cableado del gate a GitHub Actions (job que corra validate_budget + bench en CI) — pertenece al módulo M118 (CI-CD, 0/100, 🟢 disponible); el runner necesita ... - compl:2 - dep:53,98,91 - estado:🟡
+
+## atria-dawn-s2  (134 tareas listadas, 3 modulos, 155 disponibles)
+
+### M12 12-Camara - estado 🟡 Con dudas - progreso 57/102
+- [?] **M12** - Lerp angular 10°/s [S] -- follow_camera.gd usa look_at directo (sin lerp angular) - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Interior (M24): distancia máx 2.2 m y zoom bloqueado [M] -- requiere M24 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - En agua: la cámara sube 0.5 m sobre el nivel (visibilidad de buceo) [M] -- requiere M24 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - En pendientes pronunciadas el pitch se ajusta sin sacudidas [M] -- no implementado - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Cámara nocturna: mínima distancia 3 m para ambiente (M29) [M] -- requiere M29 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Build: aérea 45°, distancia 12 m, solo con herramienta equipada (M17) [M] -- requiere M17 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Regreso automático a Explore al desequipar [M] -- requiere M17 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Dialog: encuadre de escena fijo, input bloqueado [M] -- requiere M21 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Cutscene: planos fijos con fade (M22/M26) [M] -- requiere M22/M26 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Minimap: vista supervisor 2D sobre todo [M] -- requiere M10 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - HUD se esconde en Dialog/Cutscene [M] -- requiere M21/M22 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - En diálogo: el jugador se gira suavemente hacia el NPC (0.5 s) [M] -- requiere M21 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Zoom de cutscene por evento (M22/M26 define) [S] -- requiere M22/M26 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Zoom por atajos de teclado [S] -- no implementado (solo scroll) - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Niveles: cercano 2.5, estándar 5, lejano 8 m [S] -- zoom es continuo 4.0-20.0 m (diseño Animal Crossing) - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Zoom por defecto configurable en settings [S] -- no hay setting de zoom por defecto en GameSettings - compl:2 - dep:— - estado:🟡
+- [?] **M12** - En Build, zoom mínimo 4 m (nunca macro) [M] -- requiere M17 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - En interiores, zoom bloqueado en cercano [M] -- requiere M24 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Al apuntar con herramienta: acercamiento temporal a 3.5 m (0.3 s) [M] -- requiere M13 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Vuelta a distancia elegida al soltar herramienta [M] -- requiere M13 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Transición de escena: fade 0.3 s + swap + lerp 0.2 s [M] -- requiere sistema de escenas - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Transición de modo suave (fade leve 0.15 s) [M] -- requiere modos activos - compl:2 - dep:— - estado:🟡
+- [?] **M12** - La cámara no se mueve durante el swap de escena [M] -- requiere sistema de escenas - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Estados de transición robustos (sin cámara fantasma) [M] -- requiere modos activos - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Compatible con guardado/recarga (posición de cámara persistida) [M] -- requiere M59 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Transiciones de Interact (0.3 s de bloqueo de M11) sin cámara rara [M] -- requiere M11 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Reapertura de juego: fade de entrada 0.5 s (suave) [S] -- requiere M59 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Solo eventos narrativos (vórtice, terremoto) [M] → requiere event bus narrativo (EventBus existe pero no tiene canal específico para shake narrativo; follow_... - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Canal `EventBus.ui.shake_requested(amp, dur)` [S] -- requiere M05 (EventBus) - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Log de eventos de shake (M05 Logger) [S] -- requiere M05 - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Supervisor 2D en Canvas 128×128 [M] -- QA atria-dawn: SISTEMA DE MINIMAPA INEXISTENTE: minimap_view.gd no existe; no hay CanvasLayer ni textura de minimapa - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Esquina superior derecha (reposicionable) [S] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Fuente: texturas de biomas del generador (M10) [M] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Sin cámara render (0 coste de render) [M] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Marcadores: POI M71, casa M31, caminos, grieta, puerto [M] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Iconos 24×24 px con colores por tipo [S] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Se actualiza al descubrir POI o regenerar mundo [M] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Tecla M para abrir/cerrar [S] -- QA atria-dawn: sistema de minimapa inexistente (tecla M sin mapear a minimapa) - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Minimapa cerrado en Dialog/Cutscene [S] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Persistencia de posición/visibilidad en GameState.M12 [S] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Minimapa deshabilitado en cutscenes largas (M22) [S] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Zoom del minimapa (1x/2x) configurable [S] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Textos de marcadores localizables (M57) [S] -- QA atria-dawn: sistema de minimapa inexistente - compl:2 - dep:— - estado:🟡
+- [?] **M12** - Limitador de rotación 240°/s suave [M] -- no implementado (orbit libre) - compl:2 - dep:— - estado:🟡
+- [?] **M12** - 1 cámara activa + minimapa con textura (sin cámaras extras) [M] → requiere M54-Mapa (4/176, minimapa no implementado) - compl:2 - dep:— - estado:🟡
+
+### M18 18-Casas - estado 🟡 Con dudas - progreso 114/149
+- [ ] **M18** - RF2: casa del jugador construible desde el modo construcción [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P7: cocina — habitación funcional con interacción y recetas M16 [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P8: taller — habitación funcional con recetas de M16 [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P9: jardín — zona exterior de la casa con plantas (M33) [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P12: exteriores — modelo exterior que cambia de aspecto por etapa [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P15: camas — dormir avanza la hora según M29 y restaura energía [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P16: mesas — soporte para colocar objetos encima [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P17: sillas — sentarse con animación y salida [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P18: lámparas — encendido/apagado e iluminación interior [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P19: electrodomésticos — horno, fregadero con interacción simple [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P20: objetos decorativos — celdas del grid con preview y validación [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P21: objetos de pared — cuadros y colgantes en celdas de pared [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P22: cuadros — decoración de pared con rotación y reubicación [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P23: plantas — macetas interiores y plantas de jardín [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P24: colecciones — catálogo de muebles por estilo (set completo premia) [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - P25: estilos de decoración — presets ancestral, floral, oceánico, cénit [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Cimientos visibles con la huella de la casa en el modo construcción [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Visual del exterior (choza, obra, etapa) coherente con el estado [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Plantas y macetas con requisitos de superficie [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Sets de colección por estilo con bonus de visita [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Catálogo de estilos con presets visuales [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Obra de casa iniciada mediante el patrón de construcción M17 [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Iluminación interior propia (independiente del ciclo M31) [M] - compl:3 - dep:14, 21 - estado:🟡
+- [ ] **M18** - PRNG de partida M29 para preferencias y variaciones de visita [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Eventos M29 (cumpleaños, festivales) generan visitas especiales [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Grid de decoración sin allocs en el bucle de validación por frame [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Culling de muebles dentro de la habitación [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Carga asíncrona del interior sin congelar el frame [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Iluminación cálida interior por habitación [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Microfeedback del mueble colocado (chirrido/martillito) [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - API estable para consumo de M17, M14 y M19 [S] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Test: flujo completo construir, entrar, ampliar, decorar, almacenar [C] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Test: 3 días simulados con visitas de vecinos sin fallos [C] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Test: mudanza de muebles contenedores sin perdida de items [M] - compl:2 - dep:14, 21 - estado:🟡
+- [ ] **M18** - Test: obra en curso sin softlocks (M66) [M] - compl:2 - dep:14, 21 - estado:🟡
+
+### M34 34-Pesca - estado ✅ Completado - progreso 99/153
+- [?] **M34** - Catalogar los 25 puntos de la seccion 33 del plan maestro [S] — dueño: M01/M136 (plan maestro); los 25 puntos están en sección B abajo, el catálogo formal de... - compl:2 - dep:— - estado:✅
+- [?] **M34** - P11: animaciones — cast, flotador, curva, salto del pez y zoom de captura [M] — dueño M48 (Animación) + M53 (UI); el manager emite las señales que las dispar... - compl:2 - dep:— - estado:✅
+- [?] **M34** - P12: sonidos — splash, picada, escape, captura y ambiente de agua [M] — dueño M42 (Sonido Ambiental 🔵 agnes) + M52; señales del manager son el contrato | AUD... - compl:2 - dep:— - estado:✅
+- [?] **M34** - P13: efectos visuales — ondulaciones, burbujas, brillo de pez raro [M] — dueño M52 (Partículas) + M53; FishingSpot.activar_marcador_visual es el stub del con... - compl:2 - dep:— - estado:✅
+- [?] **M34** - P21: recetas — peces consumibles en recetas de M15 (opcional) [M] — id_receta FishDefinition L23 listo como contrato; las recetas son data → dueño M15 | AUDI... - compl:2 - dep:— - estado:✅
+- [?] **M34** - P23: desafios — objetivos opcionales (catalogo completo, pez mas grande) [M] — dueño M72 (logros): achievement_service ya consume captura_exitosa (RF2, Log 5... - compl:2 - dep:— - estado:✅
+- [?] **M34** - FishingSpot como Node3D creado por chunk de agua [S] — FishingSpot (Node3D, fishing_spot.gd) existe con _ready autorregistro, pero la CREACIÓN por chunk es d... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Validacion de agua por voxels (tipo AGUA) con VoxelTool de M51 [C] — es_agua_pescable() L29-30 es stub (return true); validación real → dueño M51 (VoxelTool ... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Validacion de aire encima del voxel de agua [M] — ídem, parte de es_agua_pescable → M51 | AUDIT 2026-10-13 (step-5-kilocode): misma stub — la validacion de a... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Validacion de orilla accesible a pie (BFS limitado sobre chunks) [M] — ídem → M51 | AUDIT 2026-10-13 (step-5-kilocode): misma stub — no hay BFS de orilla acc... - compl:3 - dep:— - estado:✅
+- [?] **M34** - Bioma del spot derivado del voxel/chunk (identificador de bioma M51) [M] — FishingSpot.bioma L15 ("lo informa M51") + get_bioma() L32; derivación real → M51 ... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Punto de impacto del anzuelo calculado sobre la superficie del agua [M] — get_punto_impacto() L35-36 devuelve global_position (contrato simple); cálculo sobr... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Marcador visual opcional (ondulaciones / burbujas) [S] — activar_marcador_visual L38-39 (visible=true) / desactivar L41-42 (stub pass); VFX real → M52 | AUDI... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Spot dentro de rango de la cana (rango_lanzamiento de FishingRod) [M] — FishingRod.rango_lanzamiento L12 existe; spot_apunta_desde recibe _rango pero con 1 s... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Opcion de hacer visible el spot al equipar la cana (help) [M] — activar_marcador_visual es el contrato; trigger "al equipar" → M53/M13 (hotbar) | AUDIT 2026-... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Prueba de spot en mar, rio, laguna y pozo ancestral [S] — requiere M51 (biomas reales) + M93 (peces de cada bioma); testeable al integrar | AUDIT 2026-10-13 ... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Lanzamiento del flotador con fisica parabolica (RigidBody3D) [M] — dueño M52/M53 (visual/física); la sesión programa la picada SIN flotador visible (stub por... - compl:3 - dep:— - estado:✅
+- [?] **M34** - Flotador queda flotando en el punto de impacto [M] — ídem M52/M53; get_punto_impacto() del spot es el contrato | AUDIT 2026-10-13 (step-5-kilocode): idem — g... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Evento de festival (M29) con bono temporal de capturas [M] — TimeCalendar.proximos_eventos existe (L138-147, "festival" repetible) pero M34 no consume evento... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Marcado de pieza disponible al entregar [S] — estado "disponible" lo computa M37 (donación real via DonationService); M34 provee el contrato | AUDIT 2026-10-... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Recetas de M15 consumen peces del inventario [M] — id_receta FishDefinition L23 (contrato); recetas → dueño M15 | AUDIT 2026-10-13 (step-5-kilocode): id_rece... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Cana y cebos equipables desde la barra de herramientas M14 [M] — hotbar M14/M13 (herramientas M13 ✅ con cableado a recursos); equipar caña → M13/M53 (la sesi... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Recompensa opcional del museo al completar la seccion de peces [M] — diseño M37 (secciones de colección); M34 solo aporta el catálogo | AUDIT 2026-10-13 (ste... - compl:2 - dep:— - estado:✅
+- [?] **M34** - FishingHud con indicador de espera discreto [M] — dueño M53 (UI/UX): la señal ventana_activa(inicio, duracion) de la sesión L16 es el contrato para el HUD; M... - compl:3 - dep:— - estado:✅
+- [?] **M34** - Indicador de picada clara (icono + sonido + hundimiento) [M] — contrato: picada_iniciada + estado PICADA + ventana_activa; consumo visual → M53/M42 | AUDIT 2... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Ventana de reaccion visible con anillo/barra suave [M] — contrato: ventana_activa(inicio_ventana, duracion) L59; visual → M53 | AUDIT 2026-10-13 (step-5-kilo... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Feedback de pulsacion exitosa (tick visual/sonoro) [S] — contrato: pulsaciones_minijuego(restantes) L17; visual → M53/M42 | AUDIT 2026-10-13 (step-5-kilocode... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Feedback de escape cozy ("el pez se fue") sin culpa [S] — captura_fallida("el_pez_se_fue") L134-135 (motivo NO punitivo por diseño); la VISTA → M53 | AUDIT 2... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Zoom de captura con nombre y tamano del pez [M] — captura_exitosa(pez, tamano) L128 (payload completo: FishDefinition + tamaño); zoom → M53 | AUDIT 2026-10-1... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Notificacion de nueva especie al catalogo [S] — dato detectable (entry.veces == 1 tras registrar_captura); NotificationService M53 es el canal; consumo → M53... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Notificacion de pieza de museo disponible [S] — ídem M37/M53 | AUDIT 2026-10-13 (step-5-kilocode): idem item 20/23 — el dato de pieza disponible se calcula e... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Textos localizables (M86) en todos los nombres y mensajes [S] — nombre_i18n del JSON ("PESCA.PEZ_SARDINA") ya ES clave localizable (FishDefinition.nombre_es ... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Sonido de lanzamiento (swish suave) [S] — M42 (Sonido Ambiental 🔵 agnes) / M52; señales LANZANDO al inicio | AUDIT 2026-10-13 (step-5-kilocode): existe el es... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Sonido de splash al entrar el flotador [S] — ídem M42/M52 (con flotador E.2) | AUDIT 2026-10-13 (step-5-kilocode): sin flotador fisico (item 17/18) no hay ev... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Sonido de picada distintivo y relajante [S] — contrato picada_iniciada; samples → M42 (pendiente: compositor) | AUDIT 2026-10-13 (step-5-kilocode): picada_in... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Sonido de escape del pez (no punitivo) [S] — contrato captura_fallida(motivo); samples → M42 | AUDIT 2026-10-13 (step-5-kilocode): captura_fallida('el_pez_se... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Sonido de captura festivo y corto [S] — contrato captura_exitosa; samples → M42 | AUDIT 2026-10-13 (step-5-kilocode): captura_exitosa(pez, tamano) es el cont... - compl:2 - dep:— - estado:✅
+- [?] **M34** - VFX de ondulaciones en el punto de impacto [M] — M52 (Partículas y VFX); stub marcador D.10 | AUDIT 2026-10-13 (step-5-kilocode): sin VFX de ondulacion; el u... - compl:2 - dep:— - estado:✅
+- [?] **M34** - VFX de burbujas en spots activos [M] — ídem M52 | AUDIT 2026-10-13 (step-5-kilocode): sin VFX de burbujas en spots activos (M52). - compl:2 - dep:— - estado:✅
+- [?] **M34** - Brillo sutil para peces raros/legendarios al caer [M] — ídem M52; dato de rareza disponible (peso_rareza/UMBRAL_RARO) | AUDIT 2026-10-13 (step-5-kilocode): e... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Sesion activa y el jugador se aleja fuera de rango: ESCAPE limpio [M] — requiere posición del jugador (Player M11) + rango real D.12 → cableado M13/M53 (el c... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Jugador lanza a agua no pescable (piscina decorativa): rechazo suave [M] — requiere validación voxel D.4 → M51 (es_agua_pescable stub) | AUDIT 2026-10-13 (st... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Pausa durante fase A o B: ventanas congeladas, sin perdida [M] — SceneTreeTimer se congela con pause; E.14 marca el mecanismo; el edge case específico (pausa... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Flotador fuera del mundo o fuera de agua (perdida): recogida automatica [M] — requiere flotador físico E.2 → M52/M53 | AUDIT 2026-10-13 (step-5-kilocode): no... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Multiples spots cercanos: se elige el del centro del rayo, sin ambiguedad [M] — spot_apunta_desde L114-119 devuelve el PRIMERO (comentario: "Con M51 no integ... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Modo accesibilidad "captura automatica" (M57) [M] — dueño M57 (Interfaz de Control): la FSM admite notificar_pulsacion_boton programático, pero el toggle de ... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Opciones de contraste para ventanas del minijuego (M57) [S] — dueño M57/M53 (UI) | AUDIT 2026-10-13 (step-5-kilocode): dueno M57/M53; sin opciones de contras... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Reduccion de efectos (ondulaciones/brillos) en opciones [S] — dueño M57/M52 (los efectos no existen aún) | AUDIT 2026-10-13 (step-5-kilocode): dueno M57/M52;... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Cebos y canas balanceados sin grind (precios accesibles en M37) [M] — data de precios → dueño M93/M38 (JSON tiene 0 cebos/cañas con precio_compra solo en pec... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Peces ancestrales con presentacion suave (burbujas doradas, sin combate) [M] — data M93 + VFX M52; sin combate YA garantizado (§6: sin castigos) | AUDIT 2026... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Desafios opcionales visibles desde el registro [S] — UI → dueño M53 (vista del registro); datos en get_collection_data listos | AUDIT 2026-10-13 (step-5-kilo... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Vista previa de condiciones en el registro (donde/cuando pescar cada especie) [M] — UI → dueño M53; los datos por pez (estaciones/franjas/climas) están en Fi... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Copia identica de los 5 archivos en plan-actual [S] — plan-actual diverge de plan-inicial POR DISEÑO (plan-actual es el vigente; plan-inicial es histórico NO... - compl:2 - dep:— - estado:✅
+- [?] **M34** - Registro de capturas para telemetria de balance (sin afectar determinismo) [M] — M72 achievement_service YA consume captura_exitosa (stats peces_capturados/p... - compl:2 - dep:— - estado:✅
+
