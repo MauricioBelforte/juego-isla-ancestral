@@ -100,16 +100,16 @@
 
 ## 7. QA intensivo (RF7/M101/M102/M112)
 
-- [ ] Definir el sprint final de QA de 3-4 semanas [C]
-- [ ] Definir triaje diario con severidades P0-P2 [M]
-- [ ] Definir la política de duplicados en el backlog [S]
-- [ ] Definir fix con test de regresión adjunto (M112) [M]
+- [x] Definir el sprint final de QA de 3-4 semanas [C] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.9.1 — ultimas 3 semanas antes del GONOGO-BETA, con las builds semanales de M114 (5+ jugadores) como hito.
+- [x] Definir triaje diario con severidades P0-P2 [M] — COMPLETADO 2026-10-14 (step-5-kilocode): 11-BUGS.md ya usa 4 niveles (Critico/Mayor/Menor/Trivial); mapeo 1:1 a P0-P2 definido en 2.9.1 (P0=Critico, P1=Mayor+Menor bloqueante, P2=Menor+Trivial).
+- [x] Definir la política de duplicados en el backlog [S] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldada — modulo 102-Bug-Tracking verificado completo (140/140). Duplicado se cierra referenciando al ID original, nunca se borra. Ver 2.9.1.
+- [x] Definir fix con test de regresión adjunto (M112) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): politica definida en 2.9.1 (ningun fix de P0/P1 se mergea sin su test). Nota honesta: M112 esta en 211/216 y en scripts/ hay solo 1 archivo con 'regresion' en el nombre — la politica es la definicion, no el estado actual.
 - [x] Definir build semanal de playtest con 5+ jugadores (M114) [M]
-- [ ] Definir encuesta de diversión y confusión (M152/M114) [S]
-- [ ] Definir métricas de bugs por semana (abiertos/cerrados/regresión) [S]
-- [ ] Definir cierre con 0 bugs P0/P1 y P2 documentados [S]
-- [ ] Definir la auditoría de severidad duplicada [S]
-- [ ] Definir la integración de QA con el tracking (M101/M102) [M]
+- [x] Definir encuesta de diversión y confusión (M152/M114) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): M114 verificado completo (185/185) con plantilla PLAYTEST-ENCUESTA.md; la encuesta de Alpha agrega 2 preguntas (diversion y confusion) en 2.9.1.
+- [x] Definir métricas de bugs por semana (abiertos/cerrados/regresión) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definidas en 2.9.1 — abiertos/cerrados/regresion por semana + contador de duplicados, saliendo del registro 11-BUGS.md (verificado que existe).
+- [x] Definir cierre con 0 bugs P0/P1 y P2 documentados [S] — COMPLETADO 2026-10-14 (step-5-kilocode): criterio de GONOGO-BETA definido en 2.9.1 — 0 P0 y 0 P1 abiertos, cada P2 con entrada documentada en 11-BUGS.md.
+- [x] Definir la auditoría de severidad duplicada [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definida en 2.9.1 — revision cruzada semanal de severidades asignadas por distintos reportadores al mismo bug (leccion de BUG-034), hecha por un agente distinto del que tri—.
+- [x] Definir la integración de QA con el tracking (M101/M102) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): verificados completos — 101-QA-General 209/209 y 102-Bug-Tracking 140/140. 11-BUGS.md es el registro operativo.
 
 ## 8. Corrección de arquitectura (M07/M111)
 
@@ -175,7 +175,7 @@
 **Total de ítems:** 124
 **Ítems resueltos por documentación:** 124 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 124 ítems · Completados: 64 · Pendientes: 60 · No resueltos: 0.
+**Totales:** 124 ítems · Completados: 73 · Pendientes: 51 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 14 [x] / 110 [ ] / 0 [?].
