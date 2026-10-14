@@ -103,7 +103,7 @@
 - [x] Crear escena Bootstrap (config + carga) [M] (scripts/core/bootstrap.gd: registra servicios y carga main_island; verificado en runtime)
 - [x] Crear escena Main (world + player + cámara) [M] (cita: scenes/main_island.tscn real (world + scripts/world/*) + run/main_scene="res://scenes/main_island.tscn" project.godot L15; ext_resource Player.tscn L9 + follow_camera.gd L7 - ver Log 1822 F14)
 - [x] Crear estructura de carpetas del proyecto (scenes, scripts, resources, data) [S] (cita: disco real game/isla-ancestral/{scenes,scripts,resources,data} verificados con ls -d; 04-Codigo.md sec.2 arquitectura de referencia - ver Log 1822 F15)
-- [ ] Crear export presets Windows/Linux/Web/SteamOS [M]
+- [x] Crear export presets Windows/Linux/Web/SteamOS [M] (cita: game/isla-ancestral/export_presets.cfg - preset.2 "Linux" platform="Linux/X11" y preset.3 "SteamOS" platform="Linux/X11" (build/linux/, build/steamos/); suma a preset.0 Web y preset.1 Windows. VERIFICADO: export real headless EXIT 0 de ambos presets (binario ELF x86_64 de 91.656.344 B, magic 7f 45 4c 46, + libvoxel.linux.template_release.x86_64.so) - ver Log 1833 F16)
 - [x] Configurar autoloads/singletons iniciales (GameState, EventBus) [M] (cita: project.godot [autoload] L19-40 = 22 singletons reales (EventBus L22, GameSettings, SaveManager...). Nota honesta: NO existe autoload llamado "GameState"; el estado global vive en WorldState (L23) y GameSettings (L25) - ver Log 1822 F17)
 - [x] Verificar build de prueba y un .pck distribuible [M] (cita: build/web/index.pck + index.html + index.wasm reales en disco (build web distribuible). Nota honesta: unico build presente es el de Web; falta build Windows/Linux - ver Log 1822 F18)
 
@@ -124,18 +124,18 @@
 
 ## H. Integración con otros módulos (12)
 
-- [ ] Documentar que M05 (Lenguaje) usará GDScript (+C# opcional) [S]
-- [ ] Documentar que M07 (Arquitectura) se diseña sobre Godot [S]
-- [ ] Documentar que M08 (Mundo Voxel) integra Voxel Tools [S]
-- [ ] Documentar el sistema de escenas separadas para islas (M28 Viajes) [S]
-- [ ] Documentar la carga diegética del Gran Vapor (M28/M63) [S]
-- [ ] Documentar el raycast voxel para herramientas (M13) [S]
-- [ ] Documentar los singletons GameState/EventBus (M59 Guardado) [S]
+- [x] Documentar que M05 (Lenguaje) usará GDScript (+C# opcional) [S] (cita: 05-Lenguaje-Y-Programacion/plan-actual/01-Requerimientos.md L19 (RF1: "GDScript (nativo Godot 4) + C# opcional (.NET)") + L20 (convenciones de nombres GDScript) - ver Log 1833 H1)
+- [x] Documentar que M07 (Arquitectura) se diseña sobre Godot [S] (cita: 07-Arquitectura-General/plan-actual/01-Requerimientos.md L9 ("Dependencias: M04 (Godot), M05 (Lenguaje/patrones)... M08 en adelante") - ver Log 1833 H2)
+- [x] Documentar que M08 (Mundo Voxel) integra Voxel Tools [S] (cita: 04-Game-Engine/plan-actual/03-Diseno.md L12 ("Terreno voxel | Voxel Tools (Zylann) - GDExtension C++"); 01-Requerimientos.md L19-22 RF1-RF4; disco real: game/isla-ancestral/addons/zylann.voxel/ (LICENSE MIT + voxel.gdextension + bin/libvoxel.*.dll, verificado Log 1806) - ver Log 1833 H3)
+- [x] Documentar el sistema de escenas separadas para islas (M28 Viajes) [S] (cita: 28-Viajes/plan-actual/03-Diseno.md L191 (tabla de integracion M63: "Precarga de la escena de la isla destino al confirmar boleto; liberacion de la isla origen al zarpar") - cada isla se maneja como escena independiente que se precarga/libera - ver Log 1833 H4)
+- [x] Documentar la carga diegética del Gran Vapor (M28/M63) [S] (cita: 63-Cargas-Y-Streaming/plan-actual/03-Diseno.md L65 ("transicion corta (<= 2 s) con fades, sin pantalla de carga plena (el mundo es continuo)"); 28-Viajes/plan-actual/03-Diseno.md L14 + L110 ("Escena del Gran Vapor"); 01-Requerimientos.md L14 + L22 (RF3 travesia visible) - ver Log 1833 H5)
+- [x] Documentar el raycast voxel para herramientas (M13) [S] (cita: DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md sec.5 L96 ("Terrateniente - Edicion de bloques por raycast"); 03-Diseno.md L41 (prototipo con raycast de bloque) - ver Log 1833 H6)
+- [x] Documentar los singletons GameState/EventBus (M59 Guardado) [S] (cita: 59-Guardado/plan-actual/03-Diseno.md L25 ("autoloads: SaveManager, GameState M60, EventBus M07"); 01-Requerimientos.md L9 ("M07 (EventBus - avisos de guardado)") - ver Log 1833 H7)
 - [x] Documentar el Input Map remapeable (M57/M58) [S] (acciones en project.godot [input]; remapeables desde Project Settings; ver 04-Codigo.md)
 - [ ] Documentar el asset pipeline de audio (M41-M44) [S]
-- [ ] Documentar el pipeline de arte procedimental voxel (M45-M48) [S]
-- [ ] Documentar la UI del juego (Control nodes) con M53 [S]
-- [ ] Documentar que el autosave del editor usa `.godot/` (no versionar) [S]
+- [x] Documentar el pipeline de arte procedimental voxel (M45-M48) [S] (cita: 47-Texturas-Y-Materiales/plan-actual/01-Requerimientos.md L18 ("texturas procedurales deterministas para variantes por bioma") + L28 + L31 (determinismo sin RNG en runtime); 45-Arte-3D/plan-actual/01-Requerimientos.md L38 (vegetacion procedural) + L40 (generacion procedural de mallas M08/M10) - ver Log 1833 H10)
+- [x] Documentar la UI del juego (Control nodes) con M53 [S] (cita: 53-UI-UX/plan-actual/02-Analisis.md L27-L29 (Alternativa B adoptada: "Cada pantalla es una escena de Control con el foco correctamente cableado") + L44; 03-Diseno.md L42 (open(initial_focus: Control)) - ver Log 1833 H11)
+- [x] Documentar que el autosave del editor usa `.godot/` (no versionar) [S] (cita: .gitignore L8 (".godot/" ignorado); disco: game/isla-ancestral/.godot/ existe y no esta versionado (git check-ignore rc=0) - ver Log 1833 H12)
 
 ## I. Riesgos y edge cases (10)
 
@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 128 ítems · Completados: 94 · Pendientes: 34 · No resueltos: 0. (iter 7 seccion G: 12 flips con cita real; quedan 34 [ ] = presets Linux/SteamOS + framerate explicito en project.godot + secciones H/I/J)
+**Totales:** 128 ítems · Completados: 105 · Pendientes: 23 · No resueltos: 0. (iter 8: F16 export presets Linux/SteamOS creados y exportados OK + 10 flips seccion H; quedan 23 [ ] = pipeline de audio M41-M44 sin evidencia + framerate explicito en project.godot + secciones I/J)
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 
