@@ -1,4 +1,4 @@
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-12
 #
 # M34 Pesca iter. 3 — entrega del ítem pez a M14 (E95/G115/J160).

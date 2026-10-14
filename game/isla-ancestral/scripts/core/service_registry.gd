@@ -17,7 +17,7 @@ var _duplicados_rechazados: int = 0
 ## Registra un servicio por contrato (string).
 ## Devuelve false y emite DOM-INF-REGISTRO si el contrato YA estaba registrado
 ## (M40 RF3: el segundo registro se rechaza, no se sobrescribe).
-## Cambio de firma void -> bool (2026-10-12, stepfun-step-5-preview): los
+## Cambio de firma void -> bool (2026-10-12, step-5-kilocode): los
 ## llamadores que ignoran el retorno no se ven afectados.
 func register(contract: String, instance: Object) -> bool:
 	if _registry.has(contract):

@@ -1,4 +1,4 @@
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-11
 #
 # M74 Eventos — RF4.10 (eventos relativos por calendario) y RF4.12

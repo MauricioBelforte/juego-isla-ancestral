@@ -1,4 +1,4 @@
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-11
 #
 # M74 Eventos — Buzón de entregas (RF6.9 / RF6.10 / I9 / J15 / M8).

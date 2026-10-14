@@ -1,4 +1,4 @@
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-11
 #
 # M74 Eventos — suite de VERIFICACION de los items que la QA cruzada (Hy3, Log

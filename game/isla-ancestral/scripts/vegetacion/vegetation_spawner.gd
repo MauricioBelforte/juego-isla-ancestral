@@ -7,7 +7,7 @@
 # Autoload autocontenido: espera 2 frames (terreno listo), genera el plan y
 # crea las instancias (variante media) en las posiciones del plan.
 #
-# BUG-129 fix raíz (2026-10-09, stepfun-step-5-preview): antes las instancias se
+# BUG-129 fix raíz (2026-10-09, step-5-kilocode): antes las instancias se
 # colgaban con `get_tree().current_scene.add_child(inst)` (L80 original). En
 # headless (tests) `current_scene` no es el árbol medido por GdUnit, así que las
 # ~109 instancias GLB quedaban HUÉRFANAS y contaminaban la medición

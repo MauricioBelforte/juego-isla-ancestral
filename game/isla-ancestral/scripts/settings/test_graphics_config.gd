@@ -1,5 +1,5 @@
 # M90 Configuración Gráfica iter. 1 — núcleo GraphicsConfig.
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-12
 #
 # Verifica el diseño de 03-Diseno.md §1 como núcleo puro:
@@ -61,7 +61,7 @@ func _salir() -> void:
 	if _fallos == 0 and _checks >= CHECKS_MINIMOS and _bloques >= BLOQUES_MINIMOS:
 		print("RESULTADO: PASS (%d checks, %d bloques)" % [_checks, _bloques])
 		quit(0)
-		return  # FIX 2026-10-12 (stepfun-step-5-preview): sin este return la ejecucion
+		return  # FIX 2026-10-12 (step-5-kilocode): sin este return la ejecucion
 		       # seguia y caia en el quit(1) de abajo, dejando EXIT 1 con 0 fallos.
 	print("RESULTADO: FAIL (%d checks de %d, %d bloques de %d, %d fallos)" % [
 		_checks, CHECKS_MINIMOS, _bloques, BLOQUES_MINIMOS, _fallos])

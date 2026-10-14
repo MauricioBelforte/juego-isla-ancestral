@@ -1,5 +1,5 @@
 # M40 iter. 3 — Test headless de Contratos + ServiceRegistry + fix L208.
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-12
 #
 # Verifica la implementacion del frente 1 (orden del director mimo, msg 232):

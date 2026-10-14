@@ -345,7 +345,7 @@ func get_subtitulos() -> Dictionary:
 		"tamano": String(_perfil.get("subtitulos_tamano", "mediano")),
 		"fondo": bool(_perfil.get("subtitulos_fondo", true))}
 
-# ═══════════ Iter. 3 (stepfun-step-5-preview): RF9 + RF11 ═══════════
+# ═══════════ Iter. 3 (step-5-kilocode): RF9 + RF11 ═══════════
 
 ## RF9: estados de sonido no visualizable -> indicador visual.
 ## Catálogo data-driven: cada entrada define el texto localizable y el rizo/anillo

@@ -1,5 +1,5 @@
 # M72 Logros iter. 7 — campos RF1 + persistencia E (secciones B y E).
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-12
 #
 # Amplía test_logros.gd (no lo reemplaza). Verifica:

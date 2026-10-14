@@ -1,4 +1,4 @@
-# Modelo: stepfun-step-5-preview
+# Modelo: step-5-kilocode
 # Plataforma: Kilo Code
 # Fecha: 2026-10-11
 #

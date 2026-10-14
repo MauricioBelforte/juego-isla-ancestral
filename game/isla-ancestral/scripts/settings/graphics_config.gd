@@ -1,5 +1,5 @@
 # M90: GraphicsConfig — núcleo de configuración gráfica.
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-12
 #
 # Implementa el diseño de 03-Diseno.md §1 (Pantalla / Performance / Calidad /

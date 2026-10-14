@@ -9,7 +9,7 @@
 #   El resto (JUMP, FALL, SWIM, DIVE, SURFACE, INTERACT, SLEEP, CRAFT) no tiene
 #   clip: el servicio emite animation_missing y cae a idle (fallback documentado).
 #
-# Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-10
+# Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-10
 # Modificado 2026-10-11 por atria-dawn: referencia al autoload AnimationService
 # reemplazada por Engine.get_singleton (fix CI M118, BUG-129).
 

@@ -1,5 +1,5 @@
 # M53 QA — Test de regresion de los tipos de modalidad de las capas UI.
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-12
 #
 # Por que existe: la QA de M53 encontro que DialogLayer e InventoryLayer tenian el

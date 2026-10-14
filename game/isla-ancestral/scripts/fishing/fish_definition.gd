@@ -10,7 +10,7 @@ extends Resource
 
 @export var id: String = ""
 @export var nombre_es: String = ""
-# FIX 2026-10-12 (stepfun-step-5-preview, orden director mimo msg 251): era Array[int],
+# FIX 2026-10-12 (step-5-kilocode, orden director mimo msg 251): era Array[int],
 # pero el código guardaba nombres textuales. Godot rechazaba el append(String) y el
 # has(String) devolvía false → el filtro por bioma nunca filtraba nada.
 @export var biomas: Array[String] = []      # nombres de bioma M51 (vacío = todos)

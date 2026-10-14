@@ -30,7 +30,7 @@ var _char_index: int = 0
 var _typing_timer: Timer
 
 func _ready() -> void:
-	# FIX 2026-10-12 (stepfun-step-5-preview, orden del director mimo msg 243):
+	# FIX 2026-10-12 (step-5-kilocode, orden del director mimo msg 243):
 # estaba MODAL_FULL, invertido con InventoryLayer. Los dialogos deben pausar el
 # reloj pero dejar el mundo visible (ui_layer_type.gd).
 	layer_type = UILayerType.Type.MODAL_SIMPLE

@@ -10,7 +10,7 @@
 #   Godot_v4.7.2 --headless --path game/isla-ancestral \
 #       --script res://scripts/animacion/test_animacion_play_m48.gd
 #
-# Modelo: stepfun-step-5-preview | Plataforma: Kilo Code | Fecha: 2026-10-10
+# Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-10
 
 extends SceneTree
 

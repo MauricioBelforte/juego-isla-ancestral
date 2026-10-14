@@ -1,5 +1,5 @@
 # M17 Construcción iter. 7 — utilidades de rejilla (D83/D86/D88) + copiar pieza (F110).
-# Modelo: stepfun-step-5-preview (Kilo Code)
+# Modelo: step-5-kilocode (Kilo Code)
 # Fecha: 2026-10-12
 #
 # Ejecutar:
