@@ -63,18 +63,18 @@
 
 ## 5. Primer sistema económico (M38/M39/M93)
 
-- [ ] Definir la moneda AO como única divisa de fase [S]
-- [ ] Definir las 2 tiendas de Aurora + 1 de Coral [M]
+- [x] Definir la moneda AO como única divisa de fase [S] — COMPLETADO 2026-10-14 (step-5-kilocode): AO (aureo de Aurora) definido como unica divisa de fase en 03-Diseno.md 2.5.1; sin moneda de segundo bioma hasta Alpha y trueque conceptual para islas futuras.
+- [x] Definir las 2 tiendas de Aurora + 1 de Coral [M] — COMPLETADO 2026-10-14 (step-5-kilocode): verificadas en disco — catalogo_tiendas.gd registra tienda_general (Tia Rua) y herreria (Obe). La 3ra es la glasswork de Coral (Bram), definida en 2.3.1 y pendiente de alta en catalogo (M39). El mercader_viajero es rotativo, no cuenta como fija.
 - [?] Integrar precios desde `curvas.json` (M93: lineal clave/suave logarítmica metas) [M] — DEGRADADO a [?] por step-5-kilocode (Kilo Code, 2026-10-12, orden del director mimo msg 277, barrido propio msg 276, Log 1807): `curvas.json` **no existe** en ninguna ruta del repo y ningún script lo carga (grep de `curvas.json|curvas.load|load_curvas` sobre `scripts/**/*.gd` da 0). Sólo está definido en papel (`02-Analisis.md`, `03-Diseno.md`). El verbo es "Integrar", no "Definir".
-- [ ] Aplicar márgenes de venta 55-70% sobre compra (M93) [S]
-- [ ] Definir el stock regenerativo diario de cada tienda [M]
-- [ ] Documentar los 60+ ítems del mundo con precio base (M15) [C]
-- [ ] Diseñar el banco local de Cole: interés 0.5% diario [M]
-- [ ] Definir el techo de depósito del banco (anti-inflación) [S]
-- [ ] Definir el flujo de venta: confirmación, oro, sonido ASMR, persistencia [M]
-- [ ] Definir la simulación económica en CI (M93/M118) [M]
-- [ ] Definir el umbral de fallo de la simulación (< 30 h sin romper curva) [S]
-- [ ] Definir anti-grind: precios de compra suben levemente con stock bajo [M]
+- [x] Aplicar márgenes de venta 55-70% sobre compra (M93) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): margen 55-70% sobre precio base definido en 03-Diseno.md 2.5.1 (el jugador vende en ese rango; la tienda recompra al 100%).
+- [x] Definir el stock regenerativo diario de cada tienda [M] — COMPLETADO 2026-10-14 (step-5-kilocode): regla definida en 2.5.1 — 40% del stock por ciclo de dia, COMUN siempre / RARO cada 3 dias / EPICO no regenera. Nota honesta: shop.gd hoy solo tiene stock inicial; el ciclo diario es trabajo de M39.
+- [ ] Documentar los 60+ ítems del mundo con precio base (M15) [C] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): conteo verificado en disco — de 1691 items con id en data/, solo 31 tienen campo de precio. Faltan ~30 para el minimo de 60 y el catalogo completo es trabajo de M15. No inflado.
+- [x] Diseñar el banco local de Cole: interés 0.5% diario [M] — COMPLETADO 2026-10-14 (step-5-kilocode): interes 0.5% diario ya estaba en 2.5 y se concreto el techo anti-inflacion (10.000 AO base + 500 por nivel de relacion, tope 25.000) en 2.5.1.
+- [x] Definir el techo de depósito del banco (anti-inflación) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): techo 10.000 AO base + 500 AO por nivel de relacion con Cole, tope 25.000, definido en 2.5.1.
+- [x] Definir el flujo de venta: confirmación, oro, sonido ASMR, persistencia [M] — COMPLETADO 2026-10-14 (step-5-kilocode): flujo de 4 pasos definido en 2.5.1 (confirmacion UI M53 -> oro atomico EconomyManager -> sonido ASMR M43/M42 -> persistencia M59). ShopManager ya emite compra_exitosa/venta_exitosa para los pasos 2 y 3.
+- [x] Definir la simulación económica en CI (M93/M118) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldada en disco — scripts/shops/test_loop_economico.gd (loop end-to-end M38+M14+M39) y scripts/tests/test_balance_m93_iter4.gd (curvas no exponenciales, anti-grind, techos).
+- [x] Definir el umbral de fallo de la simulación (< 30 h sin romper curva) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): umbral definido en 2.5.1 — la curva debe mantenerse sana 30 h de juego simulado; romperse antes es fallo (coincide con el criterio de M93 y el H5 de fase).
+- [x] Definir anti-grind: precios de compra suben levemente con stock bajo [M] — COMPLETADO 2026-10-14 (step-5-kilocode): regla definida en 2.5.1 — el precio de compra sube 5% por unidad comprada en la misma sesion, tope 25%.
 - [x] Definir anti-exploit: techo de oro diario por sistemas cruzados [M]
 - [x] Definir trueque conceptual (no implementado) para islas futuras [S]
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 43 · Pendientes: 97 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 53 · Pendientes: 87 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].

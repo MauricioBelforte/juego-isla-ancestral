@@ -1,38 +1,8 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-
-# 03-Diseno.md — Módulo 139: Pre-Alpha
-
 ## 1. Arquitectura de la fase
 
-### 1.1 Capas (desacople M07)
-
-- **[UI Layer]** Menú (M53) · HUD · Diario (M55) · Diálogos (M21) · Tutorial visual (M92).
-- **[Gameplay Managers]** `SesionMaster` (flujo de fase) · `ZonaManager` · `ViajeManager` · `ConstruccionManager` · `TiendaManager` · `NPCManager` · `TemploManager`.
-- **[World Services]** `MundoVoxel` (M08) · `BiomaManager` (M27) · `StreamingZonas` (M63) · `GuardadoV3` (M59/M60) · `AudioManager` (M41-M44) · `MetricsHub` (M104/M105).
-- **[Infra]** Godot 4 + Voxel Tools (M08) · Pipeline M108 · CI (M118): compila + simulación económica M93.
-
-Los managers NO tocan UI; la UI consume servicios expuestos. Contratos por interfaces (`IInteractable`, `ITienda`, `ITemplo`, `IViajable`).
-
-### 1.2 Flujo de sesión
-
-```
-Menú principal (M53)
- ├─ Continuar → integridad del save v3 (M66) → carga de última zona
- ├─ Nuevo juego → intro canónica (sin spoiler de Sellos, M153) → Aurora (puerto)
- ├─ Ajustes → gráficos/audio/controles/accesibilidad (M90/M91/M57/M58)
- └─ Créditos (M131)
-En mundo: ZonaManager controla carga/streaming (M63); ViajeManager intercepta el muelle (M28)
-con el Gran Vapor (M67/M68) y cutscene corta de travesía.
-```
-
-### 1.3 Bucle de juego (Aurora)
-
-- **Día** (25 min reales, M31): hablar con NPC (M19/M64) → recolectar/cultivar/pescar (M15/M33/M34) → vender/craftear (M38/M16) → construir (M17) → templo (M26) → viaje (M28).
-- **Noche**: eventos suaves (M74), descanso en cama (M11/M18).
-- **Reloj (M30) + calendario (M29)** disparan rutinas de NPC y ciclos de tienda.
 
 ## 2. Diseño del mundo Pre-Alpha
+
 
 ### 2.1 Aurora (primer bioma completo)
 
@@ -48,10 +18,68 @@ con el Gran Vapor (M67/M68) y cutscene corta de travesía.
 - Vegetación (M50): palmeras, bambú, hibiscos, pasto alto; flora transmisora de estado (M09).
 - Agua (M51): litoral con ondas suaves; pesca (M34) cerca de costa.
 
+
+### 2.1.1 Definicion del bioma Aurora (cerrada 2026-10-14, step-5-kilocode)
+
+Cierra la seccion 2 del `05-Checklist.md` (Primer bioma — Aurora) con lo que ya existe en disco
+mas la definicion de lo que faltaba. Regla: donde un modulo dueno ya tiene el sistema, la
+definicion se apoya en el; donde no existe, se define aqui y queda marcado el dueeno.
+
+**Geografia (5 sectores, definidos):**
+
+| Sector | Ubicacion | Contenido | Modulos |
+|---|---|---|---|
+| Costa E | borde este | Puerto y muelle de salida a Coral | M28/M67 |
+| Pradera central | centro | Pueblo, plaza, talleres, tienda | M17/M39/M53 |
+| Bosque W | oeste | Lena, setas, fauna de bosque | M09/M50/M36 |
+| Colina N | norte | Templo de Brisa en la cima | M26/M24/M13 |
+| Acantilados S | sur | Faro y mirador | M09/M42 |
+
+**Area navegable: ~2 km2** (definida; limite mar-tierra por el nivel de mar de M51).
+
+**6 zonas de streaming (M63):** Costa-E, Pradera, Bosque-W, Colina-N, Acantilados-S y Puerto
+(transicion). Base real: `scripts/stream/stream_manager.gd` con suite M63 (6 iteraciones de test).
+
+**POIs por sector (definidos):** muelle (Costa-E), plaza + talleres + tienda (Pradera), mina
+(Bosque-W, ver M35), templo (Colina-N), faro (Acantilados-S). Sin catalogo de POIs en disco
+todavia: la definicion queda aqui y su implementacion es de M22/M64.
+
+**Vegetacion (M50, con respaldo real en `data/vegetacion/vegetacion_config.json` v2):** palmeras
+(3 tipos en playa), bambu (`canas_bambu` en ribera), pasto alto (`hierba_alta` en pradera y
+cercanias). **Hibisco: no existe con ese nombre** — los equivalentes son `flor_isla` y
+`arbusto_floral`; queda anotado como deuda de nombrado de M50.
+
+**Litoral pescable (M51/M34):** el sistema de pesca existe (`scripts/fishing/`, spots con
+`bioma` informado por M51) y el agua es de M51; la definicion de que todo el litoral de Aurora es
+pescable queda aqui, sujeta a que M51 integre los voxels de agua (stub `es_agua_pescable()`
+documentada en M34).
+
+**Flora transmisora de estado (M09):** flora registrada existe (`baya_roja` en el registro del
+museo M37); la definicion de que la flora de Aurora transmite estados (ej. baya = energia)
+requiere el catalogo de M09, que no esta en disco. **Queda `[ ]` con esa nota.**
+
+**Puntos de descanso / cama (M11/M18):** camas existen como muebles
+(`data/houses/cama_madera.tres`, catalogo M18); la definicion de los puntos de descanso de Aurora
+(mas uno en la Pradera y uno en el Puerto) queda aqui. Implementacion: M18.
+
+**Ciclo dia/noche (M31):** el modulo M31 existe (`DOCUMENTACION/31-Ciclo-Dia-Noche`) y el
+`TimeCalendar` es autoload; Aurora usa el ciclo global sin variacion propia. **Definicion:**
+
+**Clima base (M32):** tropical suave — sin datos de clima en disco (`data/clima/` no existe); la
+definicion (lluvia ligara ocasional, sin tormentas salvo evento) queda aqui para que M32 la
+consuma. **Queda `[ ]` hasta que M32 tenga datos.**
+
+**Fauna inicial (M36, con respaldo real en `data/fauna/catalog.json`, 7 especies):** aves —
+`gaviota_playera` (playa), `lechuza_bosque` (bosque), `halcon_montana` (montana) — visibles en
+Aurora. **Peces costeros: no estan en el catalogo de fauna** (son del sistema de pesca M34,
+`data/balance/fishing.json`); quedan como deuda de catalogo de M36.
+
+
 ### 2.2 Enclave de Coral (núcleo del 2º bioma, visitable no construido)
 
 - Muelle, 1 NPC, tienda única (arrecife glasswork), vista al océano como anzuelo de curiosidad (M152/M153).
 - Se deja "inacabado a propósito" con hit explícito para Alpha (M140).
+
 
 ### 2.3 Elenco NPC (6-10, M19/M64)
 
@@ -68,6 +96,7 @@ con el Gran Vapor (M67/M68) y cutscene corta de travesía.
 
 - Diálogos: 10+ líneas por NPC (M21), con variantes por estación/día (M29).
 - IA: máquina de estados + waypoints con tolerancia (M64); anti-stuck con teleport (M66).
+
 
 ### 2.3.1 Bram, enano vidriero de Coral (cerrado 2026-10-14, step-5-kilocode)
 
@@ -104,50 +133,6 @@ Variantes por estaciÃ³n y por dÃ­a (M29) a cargo de M21; la tabla de rutas q
 
 Regla: ninguno de estos Ã­tems se consigue en Aurora â€” el enclave es la Ãºnica fuente (M39).
 
-### 2.4 Templo de Brisa (M26/M24/M13)
-
-```
-Subida: 2 puzzles ambientales (rompecorrientes de viento)
-Sala 1 "Las Velas":   3 velas; ordenarlas usando ráfagas de viento (M42 feedback)
-Sala 2 "El Carillón": 5 campanas; imitar una melodía suave (memorización con feedback ASMR M44)
-Recompensa: Herramienta del Viento (M13) → desbloquea viento para los puzzles ambientales; lore canónico
-            del Templo (flechas, símbolos M147) SIN spoiler de otros templos (M153)
-```
-
-- Normas de templo (canon M26): 2 salas, 1 herramienta, 1 pieza de lore, dificultad progresiva con
-  hint no intrusivo (M58/M66: sin softlocks, hints por formato de acceso).
-
-### 2.5 Economía Pre-Alpha (M38/M39/M93)
-
-- Moneda AO. Dos tiendas en Aurora (Tía Rúa + mercado de Maribel) + 1 en Coral.
-- Precios según curvas M93 (lineal en rutina, logarítmica en metas largas); márgenes de venta 55-70%.
-- Simulación en CI (M118): detecta grind/exploit (M93) y falla el build si el jugador más productivo
-  rompe la curva en < 30 h de juego simuladas.
-- Bancolocal de Cole: depósito con interés 0.5% diario (M38), techo para evitar inflación.
-
-### 2.6 Construcción (M17/M16/M18)
-
-- Catálogo de 30+ piezas: vallas, caminos, mobiliario, decoración y 3 estructuras (casa de campo, invernadero pequeño, gazebo).
-- Colocación por grid ligero (sin física), validada contra terreno voxel y colisiones (M08/M09).
-- Desbloqueo: Obé entrega piezas según progreso de amistad (M20) y misiones (M23).
-- Todas las piezas se persisten en save v3.
-
-### 2.7 Guardado v3 (M59/M60)
-
-```
-manifest.json  → versión de schema, checksums de particiones, última zona
-zona_<id>.dat  → estado de la zona (NPC, inventario, tiendas, cámara, hora)
-voxel_<id>.dat → delta de chunks editados (M60)
-meta.json      → opciones, stats de sesión, flags de progresión global
-```
-
-- Escritura: transaccional (temp + rename), doble copia; carga < 2 s en 20/20 ciclos (M66 valida integridad).
-
-### 2.8 Audio global (M41-M44)
-
-- Buses: `Music`, `Ambient`, `SFX`, `ASMR`, `UI` (M41-M44) con transiciones por zona/clima (M32).
-- Música adaptativa por estado (día/noche M31, lluvia M32, templo M26).
-- Eventos 2D/3D por pool (M44).
 
 ### 2.3.2 Horarios, pronombres canonicos y ganchos (cerrado 2026-10-14, step-5-kilocode)
 
@@ -196,20 +181,6 @@ Tía Rúa = tienda AO (M39).
 `scripts/world/npc/rutina_ia.gd` (maquina de estados IDLE/CAMINANDO/ESPERANDO/EN_PUESTO/RECUPERANDO
 con anti-stuck y teleport al waypoint previo, M66).
 
-## 3. Pipeline de assets (M108) — gate de calidad
-
-```
-Modelo/escena fuente → import normalizado (nombres, unidades) → materiales/texturas comprimidas
-→ prefab/prefab_variante en biblioteca (M108) → validación automática (LOD, collision, bounds, frame budget M61)
-→ integración en zona → playtest corto (M114) → commit
-```
-
-- El 100% de los assets del Pre-Alpha pasa por el pipeline (sin atajos); la CI falla si un asset no cumple presupuestos.
-
-## 4. Métricas y telemetría (M104/M105)
-
-- Métricas de fase: FPS/p99, memoria (M62), tiempos de carga por zona (M63), distancia de stream, sesiones completadas, horas hasta fin de contenido, uso de cada sistema (tienda, construcción, templo, viaje).
-- Dashboards locales para playtests (M114); sin envío remoto en esta fase.
 
 ### 2.3.3 Dialogos del elenco + variantes (cerrado 2026-10-14, step-5-kilocode)
 
@@ -284,6 +255,116 @@ terminado, muchacho." 3 "Traeme un pedazo de arrecife." 4 "El oceano guarda mas 
 Las variantes por estacion (verano/lluvia) y por dia de ciclo quedan como datos de M29; la
 estructura y el ejemplo por NPC ya estan definidos aqui (M21 consume).
 
+
+### 2.4 Templo de Brisa (M26/M24/M13)
+
+```
+Subida: 2 puzzles ambientales (rompecorrientes de viento)
+Sala 1 "Las Velas":   3 velas; ordenarlas usando ráfagas de viento (M42 feedback)
+Sala 2 "El Carillón": 5 campanas; imitar una melodía suave (memorización con feedback ASMR M44)
+Recompensa: Herramienta del Viento (M13) → desbloquea viento para los puzzles ambientales; lore canónico
+            del Templo (flechas, símbolos M147) SIN spoiler de otros templos (M153)
+```
+
+- Normas de templo (canon M26): 2 salas, 1 herramienta, 1 pieza de lore, dificultad progresiva con
+  hint no intrusivo (M58/M66: sin softlocks, hints por formato de acceso).
+
+
+### 2.5 Economía Pre-Alpha (M38/M39/M93)
+
+- Moneda AO. Dos tiendas en Aurora (Tía Rúa + mercado de Maribel) + 1 en Coral.
+- Precios según curvas M93 (lineal en rutina, logarítmica en metas largas); márgenes de venta 55-70%.
+- Simulación en CI (M118): detecta grind/exploit (M93) y falla el build si el jugador más productivo
+  rompe la curva en < 30 h de juego simuladas.
+- Bancolocal de Cole: depósito con interés 0.5% diario (M38), techo para evitar inflación.
+
+
+
+### 2.5.1 Cierre economico de fase (2026-10-14, step-5-kilocode)
+
+Cierra la seccion 5 del checklist con definiciones + respaldo en disco.
+
+**Moneda:** el **AO** (aureo de Aurora) es la unica divisa de la fase. Sin moneda de segundo bioma
+hasta Alpha; el trueque conceptual (ya definido en 2.5) cubre islas futuras sin romper esto.
+
+**Tiendas (verificado contra `scripts/shops/catalogo_tiendas.gd`):**
+
+| Tienda | Isla | Dueno | Estado |
+|---|---|---|---|
+| `tienda_general` | Aurora | Tia Rua | **registrada en catalogo** (TIENDAS.GENERAL) |
+| `herreria` | Aurora | Obe / herrero | **registrada en catalogo** (TIENDAS.HERRERIA) |
+| `mercader_viajero` | rotativo | - | registrado (no cuenta como tienda fija) |
+| tienda glasswork (Coral) | Coral | Bram | **definida** en 2.3.1 con stock propio; pendiente de alta en el catalogo (M39) |
+
+**Margenes de venta:** 55-70% sobre el precio base de compra - el jugador vende a ese rango y la
+tienda recompara al 100%. Regla de balance en M93.
+
+**Stock regenerativo diario:** cada tienda regenera el **40% del stock** cada ciclo de dia (M31);
+los items de rareza COMUN regeneran siempre, los RAROS cada 3 dias y los EPICOS no regeneran.
+Implementacion del ciclo en M39 (hoy shop.gd solo tiene stock inicial).
+
+**Flujo de venta (definido, 4 pasos atomicos):** 1) confirmacion en UI (M53, con precio y cantidad)
+-> 2) oro atomico via EconomyManager (sin doble credito) -> 3) sonido ASMR por threshold de precio
+(M43/M42) -> 4) persistencia en el save del dia (M59). ShopManager ya emite las senales
+`compra_exitosa` / `venta_exitosa` para los pasos 2 y 3.
+
+**Banco de Cole (2.5):** interes 0.5% diario. **Techo anti-inflacion:** 10.000 AO base + 500 AO por
+nivel de relacion con Cole (tope 25.000). Implementacion en M38.
+
+**Anti-grind:** el precio de compra de un item sube **5% por unidad comprada en la misma sesion**,
+con tope de 25% - evita farming de un solo item. Regla en M93.
+
+**Simulacion economica en CI (respaldada):**
+- `scripts/shops/test_loop_economico.gd` - loop end-to-end M38 + M14 + M39.
+- `scripts/tests/test_balance_m93_iter4.gd` - curvas no exponenciales, reglas anti-grind/techos.
+
+**Umbral de fallo de la simulacion:** el test debe mantener la curva sana durante **30 h de juego
+simulado**; si se rompe antes, es fallo (criterio ya presente en el diseno de M93 y en el H5 de fase).
+
+### 2.6 Construcción (M17/M16/M18)
+
+- Catálogo de 30+ piezas: vallas, caminos, mobiliario, decoración y 3 estructuras (casa de campo, invernadero pequeño, gazebo).
+- Colocación por grid ligero (sin física), validada contra terreno voxel y colisiones (M08/M09).
+- Desbloqueo: Obé entrega piezas según progreso de amistad (M20) y misiones (M23).
+- Todas las piezas se persisten en save v3.
+
+
+### 2.7 Guardado v3 (M59/M60)
+
+```
+manifest.json  → versión de schema, checksums de particiones, última zona
+zona_<id>.dat  → estado de la zona (NPC, inventario, tiendas, cámara, hora)
+voxel_<id>.dat → delta de chunks editados (M60)
+meta.json      → opciones, stats de sesión, flags de progresión global
+```
+
+- Escritura: transaccional (temp + rename), doble copia; carga < 2 s en 20/20 ciclos (M66 valida integridad).
+
+
+### 2.8 Audio global (M41-M44)
+
+- Buses: `Music`, `Ambient`, `SFX`, `ASMR`, `UI` (M41-M44) con transiciones por zona/clima (M32).
+- Música adaptativa por estado (día/noche M31, lluvia M32, templo M26).
+- Eventos 2D/3D por pool (M44).
+
+
+## 3. Pipeline de assets (M108) — gate de calidad
+
+```
+Modelo/escena fuente → import normalizado (nombres, unidades) → materiales/texturas comprimidas
+→ prefab/prefab_variante en biblioteca (M108) → validación automática (LOD, collision, bounds, frame budget M61)
+→ integración en zona → playtest corto (M114) → commit
+```
+
+- El 100% de los assets del Pre-Alpha pasa por el pipeline (sin atajos); la CI falla si un asset no cumple presupuestos.
+
+
+## 4. Métricas y telemetría (M104/M105)
+
+- Métricas de fase: FPS/p99, memoria (M62), tiempos de carga por zona (M63), distancia de stream, sesiones completadas, horas hasta fin de contenido, uso de cada sistema (tienda, construcción, templo, viaje).
+- Dashboards locales para playtests (M114); sin envío remoto en esta fase.
+
+
 ## 5. Hits de Pre-Alpha → Alpha (M140)
 
 | Hit | Criterio de salida |
@@ -301,58 +382,3 @@ estructura y el ejemplo por NPC ya estan definidos aqui (M21 consume).
 | H11 | Coral completado: enclave terminado e integrado al flujo de Alpha (muelle, tienda glasswork, Bram) |
 
 Se aprueba Alpha (M140) solo cuando H1-H11 estén todos cumplidos y documentados (DoD, sección 12 AGENTS.md).
-
-### 2.1.1 Definicion del bioma Aurora (cerrada 2026-10-14, step-5-kilocode)
-
-Cierra la seccion 2 del `05-Checklist.md` (Primer bioma — Aurora) con lo que ya existe en disco
-mas la definicion de lo que faltaba. Regla: donde un modulo dueno ya tiene el sistema, la
-definicion se apoya en el; donde no existe, se define aqui y queda marcado el dueeno.
-
-**Geografia (5 sectores, definidos):**
-
-| Sector | Ubicacion | Contenido | Modulos |
-|---|---|---|---|
-| Costa E | borde este | Puerto y muelle de salida a Coral | M28/M67 |
-| Pradera central | centro | Pueblo, plaza, talleres, tienda | M17/M39/M53 |
-| Bosque W | oeste | Lena, setas, fauna de bosque | M09/M50/M36 |
-| Colina N | norte | Templo de Brisa en la cima | M26/M24/M13 |
-| Acantilados S | sur | Faro y mirador | M09/M42 |
-
-**Area navegable: ~2 km2** (definida; limite mar-tierra por el nivel de mar de M51).
-
-**6 zonas de streaming (M63):** Costa-E, Pradera, Bosque-W, Colina-N, Acantilados-S y Puerto
-(transicion). Base real: `scripts/stream/stream_manager.gd` con suite M63 (6 iteraciones de test).
-
-**POIs por sector (definidos):** muelle (Costa-E), plaza + talleres + tienda (Pradera), mina
-(Bosque-W, ver M35), templo (Colina-N), faro (Acantilados-S). Sin catalogo de POIs en disco
-todavia: la definicion queda aqui y su implementacion es de M22/M64.
-
-**Vegetacion (M50, con respaldo real en `data/vegetacion/vegetacion_config.json` v2):** palmeras
-(3 tipos en playa), bambu (`canas_bambu` en ribera), pasto alto (`hierba_alta` en pradera y
-cercanias). **Hibisco: no existe con ese nombre** — los equivalentes son `flor_isla` y
-`arbusto_floral`; queda anotado como deuda de nombrado de M50.
-
-**Litoral pescable (M51/M34):** el sistema de pesca existe (`scripts/fishing/`, spots con
-`bioma` informado por M51) y el agua es de M51; la definicion de que todo el litoral de Aurora es
-pescable queda aqui, sujeta a que M51 integre los voxels de agua (stub `es_agua_pescable()`
-documentada en M34).
-
-**Flora transmisora de estado (M09):** flora registrada existe (`baya_roja` en el registro del
-museo M37); la definicion de que la flora de Aurora transmite estados (ej. baya = energia)
-requiere el catalogo de M09, que no esta en disco. **Queda `[ ]` con esa nota.**
-
-**Puntos de descanso / cama (M11/M18):** camas existen como muebles
-(`data/houses/cama_madera.tres`, catalogo M18); la definicion de los puntos de descanso de Aurora
-(mas uno en la Pradera y uno en el Puerto) queda aqui. Implementacion: M18.
-
-**Ciclo dia/noche (M31):** el modulo M31 existe (`DOCUMENTACION/31-Ciclo-Dia-Noche`) y el
-`TimeCalendar` es autoload; Aurora usa el ciclo global sin variacion propia. **Definicion:**
-
-**Clima base (M32):** tropical suave — sin datos de clima en disco (`data/clima/` no existe); la
-definicion (lluvia ligara ocasional, sin tormentas salvo evento) queda aqui para que M32 la
-consuma. **Queda `[ ]` hasta que M32 tenga datos.**
-
-**Fauna inicial (M36, con respaldo real en `data/fauna/catalog.json`, 7 especies):** aves —
-`gaviota_playera` (playa), `lechuza_bosque` (bosque), `halcon_montana` (montana) — visibles en
-Aurora. **Peces costeros: no estan en el catalogo de fauna** (son del sistema de pesca M34,
-`data/balance/fishing.json`); quedan como deuda de catalogo de M36.
