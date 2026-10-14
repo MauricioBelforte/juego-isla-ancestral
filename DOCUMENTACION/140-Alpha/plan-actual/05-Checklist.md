@@ -57,18 +57,18 @@
 
 ## 4. Primer balance completo (M93/M38)
 
-- [ ] Definir curvas Alpha para: precios, drops, XP, amistad, dificultad de puzzles, cultivos [C]
-- [ ] Definir la simulación M93 en CI con escenarios: productivo, completista, administrador [M]
-- [ ] Definir umbral: 40 h simuladas sin alertas críticas [M]
+- [x] Definir curvas Alpha para: precios, drops, XP, amistad, dificultad de puzzles, cultivos [C] — COMPLETADO 2026-10-14 (step-5-kilocode): las 7 curvas definidas en 03-Diseno.md 2.4.1 (precios, drops, XP, amistad, puzzles, cultivos, dificultad). Nota honesta: `data/balance/curvas.json` NO existe - las curvas viven distribuidas en test_balance_m93_iter*.gd (verificado).
+- [x] Definir la simulación M93 en CI con escenarios: productivo, completista, administrador [M] — COMPLETADO 2026-10-14 (step-5-kilocode): la simulacion existe (balance_service.gd + test_balance_m93_iter3/4.gd + validate_balance.gd, 69 scripts de balance). Los 3 escenarios (productivo/completista/administrador) se definieron como perfiles - no existian como tales (0 hits). Ver 2.4.1.
+- [x] Definir umbral: 40 h simuladas sin alertas críticas [M] — COMPLETADO 2026-10-14 (step-5-kilocode): umbral definido en 2.4.1 (40 h sin alertas criticas). Nota honesta: el umbral verificado hoy es de 30 h (M93/M139).
 - [x] Definir ajuste en tiempo de dato (JSON re-cargable) sin recompilar [M]
-- [ ] Definir playtest dirigido mensual con data de oro/hora [M]
-- [ ] Definir feature freeze de balance 2 semanas antes del GONOGO [S]
-- [ ] Definir márgenes por categoría (55-70%) [S]
-- [ ] Definir anti-grind y anti-exploit en los nuevos flujos (M93) [M]
-- [ ] Definir balance de regalos de amistad por afinidad (M20/M93) [M]
-- [ ] Definir balance de recetas por isla (M16/M93) [M]
-- [ ] Definir balance de temporada (precios estacionales de cultivos) [S]
-- [ ] Definir reporte de balance semanal al team (M104) [S]
+- [x] Definir playtest dirigido mensual con data de oro/hora [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.4.1 (sesion mensual midiendo oro por hora por escenario). Nota honesta: no existe instrumentacion de oro/hora (0 hits).
+- [x] Definir feature freeze de balance 2 semanas antes del GONOGO [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.4.1 - 2 semanas antes del GONOGO-BETA se congelan las curvas; solo correcciones de bugs.
+- [x] Definir márgenes por categoría (55-70%) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): ya definidos y verificados en M139 2.5.1 (venta al 55-70% del precio base). Reconfirmado en 2.4.1.
+- [x] Definir anti-grind y anti-exploit en los nuevos flujos (M93) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): regla ya definida en M139 2.5.1 (precio +5% por unidad en sesion, tope 25%); extendida a los flujos nuevos de Alpha (regalos y cocina) en 2.4.1.
+- [x] Definir balance de regalos de amistad por afinidad (M20/M93) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.4.1 - valor del regalo por nivel (x1/x1.5/x2/x3) con tope del 10% del oro diario. Nota honesta: la variable 'afinidad' no existe (0 hits); hoy se mide por nivel.
+- [ ] Definir balance de recetas por isla (M16/M93) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado contra disco - data/balance/crafting.json tiene solo 7 recetas de las 60+ que pide M16. El balance por isla no se puede hacer sobre 7 recetas. No inflado.
+- [x] Definir balance de temporada (precios estacionales de cultivos) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado con 57 hits de estacional/temporada (test_balance_m93_iter3/4, test_mercado_estacion_ferias); precios estacionales definidos en 2.4.1 (x1.2 en cosecha, x0.8 fuera).
+- [x] Definir reporte de balance semanal al team (M104) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.4.1 - resumen semanal automatico (oro/hora, curvas fuera de rango, top de explotados) desde BudgetProfile + telemetria local (M104).
 
 ## 5. Contenido suficiente (RF5)
 
@@ -175,7 +175,7 @@
 **Total de ítems:** 124
 **Ítems resueltos por documentación:** 124 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 124 ítems · Completados: 43 · Pendientes: 81 · No resueltos: 0.
+**Totales:** 124 ítems · Completados: 53 · Pendientes: 71 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 14 [x] / 110 [ ] / 0 [?].
