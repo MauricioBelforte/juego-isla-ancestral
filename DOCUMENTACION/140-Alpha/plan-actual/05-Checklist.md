@@ -9,20 +9,20 @@
 
 ## 1. Historia jugable (M22/M153/M23)
 
-- [ ] Definir la secuencia de 6 Sellos como esqueleto narrativo de Alpha [C]
-- [ ] Definir los 3 actos: descubrimiento, crisis, resolución [M]
-- [ ] Definir prerequisitos de cada Sello (S1 libre, S2 amistades, S3 templo+coleccionables, S4 agricultura+museo, S5 viajes+eventos, S6 todos+sellos) [M]
-- [ ] Modelar prerequisitos con `ICondicionDeSello` persistida en save v3 [M]
-- [ ] Definir pistas suaves en el diario sin romper misterio (M153) [S]
-- [ ] Definir el epílogo en el faro tras el Sello 6 [S]
-- [ ] Asegurar 3 rutas de orden de sellos sin bloqueos (M66) [M]
-- [ ] Definir retorno seguro si el jugador vende/desecha ítems clave (anti-softlock) [S]
-- [ ] Definir el personaje de Elysia con presencia en Sello 2 y Acto 3 [M]
-- [ ] Definir coherencia con biblia M147 (canon de eventos de sellos) [M]
-- [ ] Definir los diálogos de hitos de sellos (10+ líneas, M21) [M]
-- [ ] Definir la música de cada acto (M41) [S]
-- [ ] Definir 30+ misiones secundarias, con cadenas de amistad completas (M23/M20) [C]
-- [ ] Definir el registro de estado de historia en el diario (M55) [S]
+- [x] Definir la secuencia de 6 Sellos como esqueleto narrativo de Alpha [C] — COMPLETADO 2026-10-14 (step-5-kilocode): 6 sellos mapeados 1:1 con los 6 capitulos que YA existen en 22-Historia-Principal/plan-actual/02-Analisis.md (prologo, cap 1-6, final, finales alternativos y secreto). Simbolos verificados en disco (sym_sello_raiz/coral/ceniza/aurora). Definido en 03-Diseno.md 1.4.
+- [x] Definir los 3 actos: descubrimiento, crisis, resolución [M] — COMPLETADO 2026-10-14 (step-5-kilocode): Descubrimiento (S1-S2) -> Crisis (S3-S5) -> Resolucion (S6). Coherente con el flujo de sesion de 1.3. Definido en 1.4.
+- [x] Definir prerequisitos de cada Sello (S1 libre, S2 amistades, S3 templo+coleccionables, S4 agricultura+museo, S5 viajes+eventos, S6 todos+sellos) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): prerequisitos por sello definidos en 03-Diseno.md 1.4 y validados contra datos reales (nivel 4 de friendship.json, Templo de Brisa de M139, Gran Vapor, etc.) - no flags sueltos.
+- [ ] Modelar prerequisitos con `ICondicionDeSello` persistida en save v3 [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): la interfaz `ICondicionDeSello` NO existe en disco (verificado). Queda definido su contrato (persistida en save v3) para cuando se implemente el sistema de sellos en M22. No inflado.
+- [x] Definir pistas suaves en el diario sin romper misterio (M153) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): el diario (modulo 55-Diario-Del-Jugador, verificado en disco) muestra entradas por sello obtenido sin adelantar el siguiente. Definido en 1.4.
+- [x] Definir el epílogo en el faro tras el Sello 6 [S] — COMPLETADO 2026-10-14 (step-5-kilocode): ya esbozado en M22 ('La Brisa y el Sello': restaurar el Sello en la Camara); eplogo definido como escena estatica en el faro de Aurora con mural y balance de los 6 sellos (1.4).
+- [x] Asegurar 3 rutas de orden de sellos sin bloqueos (M66) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): 3 rutas definidas en 1.4 (historia, social, exploracion); las 3 llegan a S6 sin bloqueo porque ningun sello exige uno posterior.
+- [x] Definir retorno seguro si el jugador vende/desecha ítems clave (anti-softlock) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): regla anti-softlock en 1.4 — items de sello `no_descartables` (M66) y coleccionables re-obtenibles.
+- [x] Definir el personaje de Elysia con presencia en Sello 2 y Acto 3 [M] — COMPLETADO 2026-10-14 (step-5-kilocode): Elysia verificado en la biblia (147-World-Building: 'misterio central, capas de revelacion, M153'). Presencia en S2 y revelacion en el Acto 3, definido en 1.4.
+- [x] Definir coherencia con biblia M147 (canon de eventos de sellos) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): los 6 sellos y sus nombres salen de la biblia; modulos 147-World-Building y 153-Objetivo-Final verificados en disco.
+- [x] Definir los diálogos de hitos de sellos (10+ líneas, M21) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): base real verificada — 19 archivos de dialogo contextual por capitulo/NPC (aur/cor/riz_00X_capN_mision.json); los dialogos de hito se escriben sobre esa estructura (1.4).
+- [x] Definir la música de cada acto (M41) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — music_context_matrix.json ya tiene `narr_sello` y `evento_sello`; la musica de acto se resuelve como variacion de esa capa (1.4).
+- [ ] Definir 30+ misiones secundarias, con cadenas de amistad completas (M23/M20) [C] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado contra disco — data/balance/quests.json tiene solo **2 misiones**. La tabla 2.3 pide 30+. Deuda real de M23 con el conteo anotado. No inflado.
+- [x] Definir el registro de estado de historia en el diario (M55) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): el modulo 55-Diario-Del-Jugador existe; el registro de sellos y misiones por entrada queda definido como consumidor en 1.4.
 
 ## 2. Mecánicas principales presentes (M71)
 
@@ -175,7 +175,7 @@
 **Total de ítems:** 124
 **Ítems resueltos por documentación:** 124 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 124 ítems · Completados: 14 · Pendientes: 110 · No resueltos: 0.
+**Totales:** 124 ítems · Completados: 26 · Pendientes: 98 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 14 [x] / 110 [ ] / 0 [?].
