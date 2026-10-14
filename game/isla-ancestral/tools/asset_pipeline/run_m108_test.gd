@@ -1,3 +1,14 @@
+# run_m108_test.gd — M108: test headless del pipeline de staging (RF11 / CI M118).
+# Valida assets/staging/ con asset_validator_logic.gd, escribe el reporte en
+# tools/reportes/ y devuelve el número de errores como exit code (0 = verde).
+#
+# Uso: godot --headless --path game/isla-ancestral scenes/tests/test_m108.tscn
+#
+# **Modelo:** step-3.7-flash:free (original); Ling 3.1 Flash (reparación 2026-10-14:
+# migrado a la API real ResultadoPipeline — validar_pipeline no retorna Dictionary)
+# **Plataforma:** Kilo Code
+# **Fecha:** 2026-09-02 (reparación 2026-10-14)
+
 extends Node
 
 func _ready() -> void:
@@ -22,20 +33,20 @@ func _ready() -> void:
 
     log_lines.append("[M108 TEST] Instancia creada OK")
 
-    var resultado: Dictionary = instancia.validar_pipeline("res://assets/staging/")
-    log_lines.append("[M108 TEST] Pipeline validado: %d errores, %d aprobados" % [resultado.get("errores_total", 0), resultado.get("aprobados", 0)])
+    var resultado = instancia.validar_pipeline("res://assets/staging/")
+    log_lines.append("[M108 TEST] Pipeline validado: %d errores, %d aprobados" % [resultado.errores_total, resultado.aprobados])
 
     var errores: int = instancia.escribir_reporte(resultado)
+    log_lines.append("[M108 TEST] Reporte escrito en tools/reportes/_validacion_staging.md: %d errores" % errores)
 
     log_lines.append("")
     log_lines.append("=== TEST M108: 5 checks, %d fallos ===" % errores)
     if errores > 0:
-        var detalles: Array = resultado.get("detalles", [])
-        for detalle in detalles:
-            if not detalle.get("aprobado", true):
-                log_lines.append("  %s: %s" % [detalle.get("archivo", "?"), ", ".join(detalle.get("errores", []))])
+        for detalle in resultado.detalles:
+            if not detalle.aprobado:
+                log_lines.append("  %s: %s" % [detalle.archivo, ", ".join(detalle.errores)])
     else:
-        log_lines.append("Todos los checks pasaron.")
+        log_lines.append("Todos los checks pasaban.")
 
     _guardar_log(log_lines, errores)
     get_tree().quit(errores)

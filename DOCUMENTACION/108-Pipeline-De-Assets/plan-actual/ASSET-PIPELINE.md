@@ -1,23 +1,62 @@
 **Modelo:** deepseek-v4-flash-vision-exp
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-01
+**Modificado:** Ling 3.1 Flash / Kilo Code — 2026-10-14 (§1: flujo completo con diagrama y responsables por etapa)
 
 # ASSET-PIPELINE.md — Guía del Pipeline de Assets (Módulo 108)
 
 > **Puerta única:** todo asset que entra al juego pasa por esta guía. No se admite importar assets sueltos fuera del flujo.
 
-## 1. Flujo de entrada
+## 1. Flujo completo (diagrama y responsables por etapa)
 
 ```
-staging/ (nuevos desde Blender/M45)
-  → 1. Validación automática (asset_validator.gd: nombre, formato, tamaño, ficha, licencia)
-  → 2. Importación (presets de importación de Godot, deterministas)
-  → 3. Review manual (plantilla de la sección 5)
-  → 4. Aprobación (ficha con estado APROBADO + registro)
-  → disponible para el juego
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 1. ENTRADA — staging/ (M45 / módulo productor) · puerta única (RF1)         │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                     │
+                                     ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 2. VALIDACIÓN AUTOMÁTICA — asset_validator.gd (M108, headless / CI M118)   │
+│    nombre · formato · tamaño · ficha · licencia → tools/reportes/            │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                     │ 0 errores
+                                     ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 3. IMPORTACIÓN — apply_import_presets.gd (M108) · presets RF5/RF6 · .import │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                     │
+                                     ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 4. REVIEW MANUAL — plantilla §5 (RF9) · M166 barrido E-13 + dueño de módulo │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                     │
+                                     ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 5. APROBACIÓN — ficha estado APROBADO (M108 + M78 verifica licencia)        │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                     │
+                                     ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 6. CONSUMO — assets/{3d,2d,audio,fonts,ui}/ · presupuestos M61/M62          │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                     │
+                                     ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 7. RETIRO (RF12) — retire_asset.gd → archive/ + _RETIRADOS.md (M108)        │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-- **staging:** `assets/staging/` — carpeta de llegada de assets nuevos (se limpia al aprobar).
+| Etapa | Responsable | Artefacto / herramienta | Salida |
+|---|---|---|---|
+| 1. Entrada | M45 (Arte 3D) o el módulo productor | `assets/staging/` (puerta única, RF1) | asset crudo en staging |
+| 2. Validación automática | M108 | `tools/asset_validator.gd` (headless, CI M118) → `tools/reportes/asset_validation.txt` | errores → rechazo en origen; 0 errores → sigue |
+| 3. Importación | M108 | `tools/asset_pipeline/apply_import_presets.gd` + `.import` versionado | presets de importación aplicados |
+| 4. Review manual | M166 (barrido E-13 visual) + dueño del módulo productor | checklist §5 en la ficha | `PENDIENTE-REVIEW` → evidencia visual |
+| 5. Aprobación | M108 + M78 (verificación de licencia) | ficha con `estado: APROBADO` | asset disponible para el juego |
+| 6. Consumo | motor (Godot 4.7.2) | `assets/3d/{media,baja,alta}/`, `assets/2d/`, `assets/audio/`, `assets/fonts/`, `assets/ui/` | draw calls / VRAM dentro de presupuesto (M61/M62) |
+| 7. Retiro | M108 | `tools/asset_pipeline/retire_asset.gd` → `assets/archive/` + `_RETIRADOS.md` | `RETIRADO`, excluido del build |
+
+- **staging:** `assets/staging/` — carpeta de llegada de assets nuevos (puerta única de entrada, RF1; se limpia al aprobar).
 - **Producción:** `assets/3d/{media,baja,alta}/` (variantes por perfil M166), `assets/2d/`, `assets/audio/`, `assets/fonts/`, `assets/ui/` — las carpetas de consumo del motor.
 - **Fichas:** `assets/fichas/{id}.md` — una por asset (ver sección 4).
 - **Reportes:** el validador escribe `tools/reportes/asset_validation.txt`.

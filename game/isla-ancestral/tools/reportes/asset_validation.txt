@@ -13,36 +13,130 @@
   [OK] assets/3d/alta/15-Recursos_veta_cobre.glb
   [OK] assets/3d/alta/15-Recursos_veta_hierro.glb
   [OK] assets/3d/alta/15-Recursos_veta_oro.glb
+  assets/3d/alta/16-Crafting_azada.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_azada.md
+  assets/3d/alta/16-Crafting_bowl_barro.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_bowl_barro.md
   [OK] assets/3d/alta/16-Crafting_cuerda_enrollada.glb
+  assets/3d/alta/16-Crafting_frasco_agua.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_frasco_agua.md
+  assets/3d/alta/16-Crafting_gema_tallada.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_gema_tallada.md
+  assets/3d/alta/16-Crafting_hacha_hierro.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_hacha_hierro.md
   [OK] assets/3d/alta/16-Crafting_hacha_piedra.glb
   [OK] assets/3d/alta/16-Crafting_lingote_metal.glb
+  assets/3d/alta/16-Crafting_machete.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_machete.md
+  assets/3d/alta/16-Crafting_martillo.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_martillo.md
   [OK] assets/3d/alta/16-Crafting_tablon_madera.glb
+  assets/3d/alta/18-Casas_alfombra.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_alfombra.md
+  assets/3d/alta/18-Casas_cama_basica.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cama_basica.md
+  assets/3d/alta/18-Casas_cama_doble.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cama_doble.md
+  assets/3d/alta/18-Casas_casa_casona.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_casona.md
+  assets/3d/alta/18-Casas_casa_choza_ampliada.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_choza_ampliada.md
   [OK] assets/3d/alta/18-Casas_casa_completa_ejemplo.glb
+  assets/3d/alta/18-Casas_casa_mediana.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_mediana.md
+  assets/3d/alta/18-Casas_comoda.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_comoda.md
+  assets/3d/alta/18-Casas_cuadro_ancestral.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cuadro_ancestral.md
+  assets/3d/alta/18-Casas_decor_alfombra_floral.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_alfombra_floral.md
+  assets/3d/alta/18-Casas_decor_alfombra_tejida.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_alfombra_tejida.md
+  assets/3d/alta/18-Casas_decor_banco_exterior.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_banco_exterior.md
+  assets/3d/alta/18-Casas_decor_baul_madera.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_baul_madera.md
+  assets/3d/alta/18-Casas_decor_cofre_perlas.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_cofre_perlas.md
+  assets/3d/alta/18-Casas_decor_concha_decor.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_concha_decor.md
+  assets/3d/alta/18-Casas_decor_cuadro_floral.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_cuadro_floral.md
+  assets/3d/alta/18-Casas_decor_espejo_marco.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_espejo_marco.md
+  assets/3d/alta/18-Casas_decor_estatuilla_ave.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_estatuilla_ave.md
+  assets/3d/alta/18-Casas_decor_farol_coral.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_farol_coral.md
+  assets/3d/alta/18-Casas_decor_farol_mesa.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_farol_mesa.md
+  assets/3d/alta/18-Casas_decor_fuente_chica.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_fuente_chica.md
+  assets/3d/alta/18-Casas_decor_guirnalda.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_guirnalda.md
+  assets/3d/alta/18-Casas_decor_idol_piedra.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_idol_piedra.md
+  assets/3d/alta/18-Casas_decor_jarron_agua.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_jarron_agua.md
+  assets/3d/alta/18-Casas_decor_jarron_flores.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_jarron_flores.md
+  assets/3d/alta/18-Casas_decor_lampara_pie.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_lampara_pie.md
+  assets/3d/alta/18-Casas_decor_lampara_techo.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_lampara_techo.md
+  assets/3d/alta/18-Casas_decor_maceta_flor.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_maceta_flor.md
+  assets/3d/alta/18-Casas_decor_maceta_helecho.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_maceta_helecho.md
+  assets/3d/alta/18-Casas_decor_maceta_palmera.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_maceta_palmera.md
+  assets/3d/alta/18-Casas_decor_mascara_ancestral.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_mascara_ancestral.md
+  assets/3d/alta/18-Casas_decor_mecedora.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_mecedora.md
+  assets/3d/alta/18-Casas_decor_olla_barro.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_olla_barro.md
+  assets/3d/alta/18-Casas_decor_plato_frutas.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_plato_frutas.md
+  assets/3d/alta/18-Casas_decor_reloj_pared.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_reloj_pared.md
+  assets/3d/alta/18-Casas_decor_repisa_pared.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_repisa_pared.md
+  assets/3d/alta/18-Casas_decor_totem_chico.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_totem_chico.md
+  assets/3d/alta/18-Casas_decor_vasija_ritual.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_vasija_ritual.md
+  assets/3d/alta/18-Casas_decor_vela_plato.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_decor_vela_plato.md
   [OK] assets/3d/alta/18-Casas_escalera_mano.glb
+  assets/3d/alta/18-Casas_estanteria.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_estanteria.md
+  assets/3d/alta/18-Casas_estufa_lena.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_estufa_lena.md
+  assets/3d/alta/18-Casas_lampara_pie.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_lampara_pie.md
+  assets/3d/alta/18-Casas_maceta_interior.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_maceta_interior.md
+  assets/3d/alta/18-Casas_mesa_madera.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_mesa_madera.md
+  assets/3d/alta/18-Casas_nevera_rustica.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_nevera_rustica.md
   [OK] assets/3d/alta/18-Casas_pared_madera.glb
   [OK] assets/3d/alta/18-Casas_pared_puerta.glb
   [OK] assets/3d/alta/18-Casas_pared_ventana.glb
   [OK] assets/3d/alta/18-Casas_piso_madera.glb
   [OK] assets/3d/alta/18-Casas_puerta_articulada.glb
+  assets/3d/alta/18-Casas_silla_madera.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_silla_madera.md
+  assets/3d/alta/18-Casas_sillon.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_sillon.md
   [OK] assets/3d/alta/18-Casas_techo_dos_aguas.glb
   [OK] assets/3d/alta/18-Casas_techo_paja.glb
+  assets/3d/alta/18-Casas_velador.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_velador.md
   [OK] assets/3d/alta/18-Casas_ventana_marco.glb
   [OK] assets/3d/alta/18-Casas_zocalo_piedra.glb
+  assets/3d/alta/19-NPCs_cabeza_alargada.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_alargada.md
+  assets/3d/alta/19-NPCs_cabeza_cuadrada.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_cuadrada.md
+  assets/3d/alta/19-NPCs_cabeza_redonda.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_redonda.md
+  assets/3d/alta/19-NPCs_npc_base.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_npc_base.md
+  assets/3d/alta/19-NPCs_npc_sentado.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_npc_sentado.md
+  assets/3d/alta/19-NPCs_sombrero_paja.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_sombrero_paja.md
+  assets/3d/alta/19-NPCs_vestimenta_anciano.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_anciano.md
+  assets/3d/alta/19-NPCs_vestimenta_campesina.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_campesina.md
+  assets/3d/alta/19-NPCs_vestimenta_pescador.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_pescador.md
   [OK] assets/3d/alta/25-Ruinas-Templos_altar_ritual.glb
   [OK] assets/3d/alta/25-Ruinas-Templos_antorcha_pared.glb
+  assets/3d/alta/25-Ruinas-Templos_arco_entrada_templo.glb -> [AVISO] ficha sin estado APROBADO: 25-Ruinas-Templos_arco_entrada_templo.md
   [OK] assets/3d/alta/25-Ruinas-Templos_cofre_ancestral.glb
+  assets/3d/alta/25-Ruinas-Templos_estatua_ancestral_erosionada.glb -> [AVISO] ficha sin estado APROBADO: 25-Ruinas-Templos_estatua_ancestral_erosionada.md
   [OK] assets/3d/alta/25-Ruinas-Templos_losa_grabado.glb
   [OK] assets/3d/alta/25-Ruinas-Templos_puente_cuerda.glb
   [OK] assets/3d/alta/25-Ruinas-Templos_puerta_templo.glb
+  assets/3d/alta/27-Islas-Ubicaciones_campamento_abandonado.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_campamento_abandonado.md
+  assets/3d/alta/27-Islas-Ubicaciones_cascada.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_cascada.md
+  assets/3d/alta/27-Islas-Ubicaciones_cementerio_barcos.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_cementerio_barcos.md
+  assets/3d/alta/27-Islas-Ubicaciones_faro_viejo.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_faro_viejo.md
+  assets/3d/alta/27-Islas-Ubicaciones_volcan.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_volcan.md
+  assets/3d/alta/33-Agricultura_bananero.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_bananero.md
+  assets/3d/alta/33-Agricultura_canaveral.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_canaveral.md
+  assets/3d/alta/33-Agricultura_compostera.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_compostera.md
+  assets/3d/alta/33-Agricultura_cultivo_brote.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_brote.md
+  assets/3d/alta/33-Agricultura_cultivo_creciendo.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_creciendo.md
+  assets/3d/alta/33-Agricultura_cultivo_lista.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_lista.md
+  assets/3d/alta/33-Agricultura_cultivo_madura.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_madura.md
+  assets/3d/alta/33-Agricultura_espantapajaros.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_espantapajaros.md
+  assets/3d/alta/33-Agricultura_regadera.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_regadera.md
+  assets/3d/alta/33-Agricultura_tierra_arada.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_tierra_arada.md
+  assets/3d/alta/33-Agricultura_tierra_regada.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_tierra_regada.md
+  assets/3d/alta/35-Mineria_carretilla_minero.glb -> [AVISO] ficha sin estado APROBADO: 35-Mineria_carretilla_minero.md
+  assets/3d/alta/36-Fauna_cangrejo_playa.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_cangrejo_playa.md
+  assets/3d/alta/36-Fauna_conejo.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_conejo.md
+  assets/3d/alta/36-Fauna_gaviota.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_gaviota.md
+  assets/3d/alta/36-Fauna_jabali.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_jabali.md
+  assets/3d/alta/36-Fauna_nutria_ribera_v2.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_nutria_ribera_v2.md
+  assets/3d/alta/36-Fauna_tortuga_marina.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_tortuga_marina.md
   [OK] assets/3d/alta/40-Infraestructura_bote_pesca.glb
   [OK] assets/3d/alta/40-Infraestructura_cartel_indicador.glb
   [OK] assets/3d/alta/40-Infraestructura_farola_fuego.glb
   [OK] assets/3d/alta/40-Infraestructura_muelle_madera.glb
   [OK] assets/3d/alta/40-Infraestructura_pozo_piedra.glb
+  assets/3d/alta/40-Infraestructura_puente_cuerda_colgante.glb -> [AVISO] ficha sin estado APROBADO: 40-Infraestructura_puente_cuerda_colgante.md
   [OK] assets/3d/alta/40-Infraestructura_puente_troncos.glb
+  assets/3d/alta/45-Arte3D_ancla_naufragio.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_ancla_naufragio.md
   [OK] assets/3d/alta/45-Arte3D_anillo_piedras_ritual.glb
+  assets/3d/alta/45-Arte3D_barco_hundido.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_barco_hundido.md
+  assets/3d/alta/45-Arte3D_caveira_criatura.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_caveira_criatura.md
   [OK] assets/3d/alta/45-Arte3D_concha_mar.glb
+  assets/3d/alta/45-Arte3D_coral_abanico.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_coral_abanico.md
   [OK] assets/3d/alta/45-Arte3D_estrella_mar.glb
+  assets/3d/alta/45-Arte3D_jarrones_urnas.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_jarrones_urnas.md
   [OK] assets/3d/alta/45-Arte3D_monolito_glifos.glb
   [OK] assets/3d/alta/45-Arte3D_totem_isla.glb
   [OK] assets/3d/alta/45-Arte3D_vieira_playa.glb
@@ -79,36 +173,98 @@
   [OK] assets/3d/baja/15-Recursos_veta_cobre.glb
   [OK] assets/3d/baja/15-Recursos_veta_hierro.glb
   [OK] assets/3d/baja/15-Recursos_veta_oro.glb
+  assets/3d/baja/16-Crafting_azada.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_azada.md
+  assets/3d/baja/16-Crafting_bowl_barro.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_bowl_barro.md
   [OK] assets/3d/baja/16-Crafting_cuerda_enrollada.glb
+  assets/3d/baja/16-Crafting_frasco_agua.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_frasco_agua.md
+  assets/3d/baja/16-Crafting_gema_tallada.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_gema_tallada.md
+  assets/3d/baja/16-Crafting_hacha_hierro.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_hacha_hierro.md
   [OK] assets/3d/baja/16-Crafting_hacha_piedra.glb
   [OK] assets/3d/baja/16-Crafting_lingote_metal.glb
+  assets/3d/baja/16-Crafting_machete.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_machete.md
+  assets/3d/baja/16-Crafting_martillo.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_martillo.md
   [OK] assets/3d/baja/16-Crafting_tablon_madera.glb
+  assets/3d/baja/18-Casas_alfombra.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_alfombra.md
+  assets/3d/baja/18-Casas_cama_basica.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cama_basica.md
+  assets/3d/baja/18-Casas_cama_doble.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cama_doble.md
+  assets/3d/baja/18-Casas_casa_casona.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_casona.md
+  assets/3d/baja/18-Casas_casa_choza_ampliada.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_choza_ampliada.md
   [OK] assets/3d/baja/18-Casas_casa_completa_ejemplo.glb
+  assets/3d/baja/18-Casas_casa_mediana.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_mediana.md
+  assets/3d/baja/18-Casas_comoda.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_comoda.md
+  assets/3d/baja/18-Casas_cuadro_ancestral.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cuadro_ancestral.md
   [OK] assets/3d/baja/18-Casas_escalera_mano.glb
+  assets/3d/baja/18-Casas_estanteria.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_estanteria.md
+  assets/3d/baja/18-Casas_estufa_lena.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_estufa_lena.md
+  assets/3d/baja/18-Casas_lampara_pie.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_lampara_pie.md
+  assets/3d/baja/18-Casas_maceta_interior.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_maceta_interior.md
+  assets/3d/baja/18-Casas_mesa_madera.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_mesa_madera.md
+  assets/3d/baja/18-Casas_nevera_rustica.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_nevera_rustica.md
   [OK] assets/3d/baja/18-Casas_pared_madera.glb
   [OK] assets/3d/baja/18-Casas_pared_puerta.glb
   [OK] assets/3d/baja/18-Casas_pared_ventana.glb
   [OK] assets/3d/baja/18-Casas_piso_madera.glb
   [OK] assets/3d/baja/18-Casas_puerta_articulada.glb
+  assets/3d/baja/18-Casas_silla_madera.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_silla_madera.md
+  assets/3d/baja/18-Casas_sillon.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_sillon.md
   [OK] assets/3d/baja/18-Casas_techo_dos_aguas.glb
   [OK] assets/3d/baja/18-Casas_techo_paja.glb
+  assets/3d/baja/18-Casas_velador.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_velador.md
   [OK] assets/3d/baja/18-Casas_ventana_marco.glb
   [OK] assets/3d/baja/18-Casas_zocalo_piedra.glb
+  assets/3d/baja/19-NPCs_cabeza_alargada.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_alargada.md
+  assets/3d/baja/19-NPCs_cabeza_cuadrada.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_cuadrada.md
+  assets/3d/baja/19-NPCs_cabeza_redonda.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_redonda.md
+  assets/3d/baja/19-NPCs_npc_base.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_npc_base.md
+  assets/3d/baja/19-NPCs_npc_sentado.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_npc_sentado.md
+  assets/3d/baja/19-NPCs_sombrero_paja.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_sombrero_paja.md
+  assets/3d/baja/19-NPCs_vestimenta_anciano.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_anciano.md
+  assets/3d/baja/19-NPCs_vestimenta_campesina.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_campesina.md
+  assets/3d/baja/19-NPCs_vestimenta_pescador.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_pescador.md
   [OK] assets/3d/baja/25-Ruinas-Templos_altar_ritual.glb
   [OK] assets/3d/baja/25-Ruinas-Templos_antorcha_pared.glb
+  assets/3d/baja/25-Ruinas-Templos_arco_entrada_templo.glb -> [AVISO] ficha sin estado APROBADO: 25-Ruinas-Templos_arco_entrada_templo.md
   [OK] assets/3d/baja/25-Ruinas-Templos_cofre_ancestral.glb
+  assets/3d/baja/25-Ruinas-Templos_estatua_ancestral_erosionada.glb -> [AVISO] ficha sin estado APROBADO: 25-Ruinas-Templos_estatua_ancestral_erosionada.md
   [OK] assets/3d/baja/25-Ruinas-Templos_losa_grabado.glb
   [OK] assets/3d/baja/25-Ruinas-Templos_puente_cuerda.glb
   [OK] assets/3d/baja/25-Ruinas-Templos_puerta_templo.glb
+  assets/3d/baja/27-Islas-Ubicaciones_campamento_abandonado.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_campamento_abandonado.md
+  assets/3d/baja/27-Islas-Ubicaciones_cascada.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_cascada.md
+  assets/3d/baja/27-Islas-Ubicaciones_cementerio_barcos.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_cementerio_barcos.md
+  assets/3d/baja/27-Islas-Ubicaciones_faro_viejo.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_faro_viejo.md
+  assets/3d/baja/27-Islas-Ubicaciones_volcan.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_volcan.md
+  assets/3d/baja/33-Agricultura_bananero.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_bananero.md
+  assets/3d/baja/33-Agricultura_canaveral.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_canaveral.md
+  assets/3d/baja/33-Agricultura_compostera.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_compostera.md
+  assets/3d/baja/33-Agricultura_cultivo_brote.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_brote.md
+  assets/3d/baja/33-Agricultura_cultivo_creciendo.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_creciendo.md
+  assets/3d/baja/33-Agricultura_cultivo_lista.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_lista.md
+  assets/3d/baja/33-Agricultura_cultivo_madura.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_madura.md
+  assets/3d/baja/33-Agricultura_espantapajaros.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_espantapajaros.md
+  assets/3d/baja/33-Agricultura_regadera.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_regadera.md
+  assets/3d/baja/33-Agricultura_tierra_arada.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_tierra_arada.md
+  assets/3d/baja/33-Agricultura_tierra_regada.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_tierra_regada.md
+  assets/3d/baja/35-Mineria_carretilla_minero.glb -> [AVISO] ficha sin estado APROBADO: 35-Mineria_carretilla_minero.md
+  assets/3d/baja/36-Fauna_cangrejo_playa.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_cangrejo_playa.md
+  assets/3d/baja/36-Fauna_gaviota.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_gaviota.md
+  assets/3d/baja/36-Fauna_jabali.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_jabali.md
+  assets/3d/baja/36-Fauna_tortuga_marina.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_tortuga_marina.md
   [OK] assets/3d/baja/40-Infraestructura_bote_pesca.glb
   [OK] assets/3d/baja/40-Infraestructura_cartel_indicador.glb
   [OK] assets/3d/baja/40-Infraestructura_farola_fuego.glb
   [OK] assets/3d/baja/40-Infraestructura_muelle_madera.glb
   [OK] assets/3d/baja/40-Infraestructura_pozo_piedra.glb
+  assets/3d/baja/40-Infraestructura_puente_cuerda_colgante.glb -> [AVISO] ficha sin estado APROBADO: 40-Infraestructura_puente_cuerda_colgante.md
   [OK] assets/3d/baja/40-Infraestructura_puente_troncos.glb
+  assets/3d/baja/45-Arte3D_ancla_naufragio.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_ancla_naufragio.md
   [OK] assets/3d/baja/45-Arte3D_anillo_piedras_ritual.glb
+  assets/3d/baja/45-Arte3D_barco_hundido.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_barco_hundido.md
+  assets/3d/baja/45-Arte3D_caveira_criatura.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_caveira_criatura.md
   [OK] assets/3d/baja/45-Arte3D_concha_mar.glb
+  assets/3d/baja/45-Arte3D_coral_abanico.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_coral_abanico.md
   [OK] assets/3d/baja/45-Arte3D_estrella_mar.glb
+  assets/3d/baja/45-Arte3D_jarrones_urnas.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_jarrones_urnas.md
   [OK] assets/3d/baja/45-Arte3D_monolito_glifos.glb
   [OK] assets/3d/baja/45-Arte3D_totem_isla.glb
   [OK] assets/3d/baja/45-Arte3D_vieira_playa.glb
@@ -145,36 +301,100 @@
   [OK] assets/3d/media/15-Recursos_veta_cobre.glb
   [OK] assets/3d/media/15-Recursos_veta_hierro.glb
   [OK] assets/3d/media/15-Recursos_veta_oro.glb
+  assets/3d/media/16-Crafting_azada.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_azada.md
+  assets/3d/media/16-Crafting_bowl_barro.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_bowl_barro.md
   [OK] assets/3d/media/16-Crafting_cuerda_enrollada.glb
+  assets/3d/media/16-Crafting_frasco_agua.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_frasco_agua.md
+  assets/3d/media/16-Crafting_gema_tallada.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_gema_tallada.md
+  assets/3d/media/16-Crafting_hacha_hierro.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_hacha_hierro.md
   [OK] assets/3d/media/16-Crafting_hacha_piedra.glb
   [OK] assets/3d/media/16-Crafting_lingote_metal.glb
+  assets/3d/media/16-Crafting_machete.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_machete.md
+  assets/3d/media/16-Crafting_martillo.glb -> [AVISO] ficha sin estado APROBADO: 16-Crafting_martillo.md
   [OK] assets/3d/media/16-Crafting_tablon_madera.glb
+  assets/3d/media/18-Casas_alfombra.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_alfombra.md
+  assets/3d/media/18-Casas_cama_basica.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cama_basica.md
+  assets/3d/media/18-Casas_cama_doble.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cama_doble.md
+  assets/3d/media/18-Casas_casa_casona.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_casona.md
+  assets/3d/media/18-Casas_casa_choza_ampliada.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_choza_ampliada.md
   [OK] assets/3d/media/18-Casas_casa_completa_ejemplo.glb
+  assets/3d/media/18-Casas_casa_mediana.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_casa_mediana.md
+  assets/3d/media/18-Casas_comoda.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_comoda.md
+  assets/3d/media/18-Casas_cuadro_ancestral.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_cuadro_ancestral.md
   [OK] assets/3d/media/18-Casas_escalera_mano.glb
+  assets/3d/media/18-Casas_estanteria.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_estanteria.md
+  assets/3d/media/18-Casas_estufa_lena.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_estufa_lena.md
+  assets/3d/media/18-Casas_lampara_pie.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_lampara_pie.md
+  assets/3d/media/18-Casas_maceta_interior.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_maceta_interior.md
+  assets/3d/media/18-Casas_mesa_madera.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_mesa_madera.md
+  assets/3d/media/18-Casas_nevera_rustica.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_nevera_rustica.md
   [OK] assets/3d/media/18-Casas_pared_madera.glb
   [OK] assets/3d/media/18-Casas_pared_puerta.glb
   [OK] assets/3d/media/18-Casas_pared_ventana.glb
   [OK] assets/3d/media/18-Casas_piso_madera.glb
   [OK] assets/3d/media/18-Casas_puerta_articulada.glb
+  assets/3d/media/18-Casas_silla_madera.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_silla_madera.md
+  assets/3d/media/18-Casas_sillon.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_sillon.md
   [OK] assets/3d/media/18-Casas_techo_dos_aguas.glb
   [OK] assets/3d/media/18-Casas_techo_paja.glb
+  assets/3d/media/18-Casas_velador.glb -> [AVISO] ficha sin estado APROBADO: 18-Casas_velador.md
   [OK] assets/3d/media/18-Casas_ventana_marco.glb
   [OK] assets/3d/media/18-Casas_zocalo_piedra.glb
+  assets/3d/media/19-NPCs_cabeza_alargada.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_alargada.md
+  assets/3d/media/19-NPCs_cabeza_cuadrada.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_cuadrada.md
+  assets/3d/media/19-NPCs_cabeza_redonda.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_cabeza_redonda.md
+  assets/3d/media/19-NPCs_npc_base.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_npc_base.md
+  assets/3d/media/19-NPCs_npc_sentado.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_npc_sentado.md
+  assets/3d/media/19-NPCs_sombrero_paja.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_sombrero_paja.md
+  assets/3d/media/19-NPCs_vestimenta_anciano.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_anciano.md
+  assets/3d/media/19-NPCs_vestimenta_campesina.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_campesina.md
+  assets/3d/media/19-NPCs_vestimenta_pescador.glb -> [AVISO] ficha sin estado APROBADO: 19-NPCs_vestimenta_pescador.md
   [OK] assets/3d/media/25-Ruinas-Templos_altar_ritual.glb
   [OK] assets/3d/media/25-Ruinas-Templos_antorcha_pared.glb
+  assets/3d/media/25-Ruinas-Templos_arco_entrada_templo.glb -> [AVISO] ficha sin estado APROBADO: 25-Ruinas-Templos_arco_entrada_templo.md
   [OK] assets/3d/media/25-Ruinas-Templos_cofre_ancestral.glb
+  assets/3d/media/25-Ruinas-Templos_estatua_ancestral_erosionada.glb -> [AVISO] ficha sin estado APROBADO: 25-Ruinas-Templos_estatua_ancestral_erosionada.md
   [OK] assets/3d/media/25-Ruinas-Templos_losa_grabado.glb
   [OK] assets/3d/media/25-Ruinas-Templos_puente_cuerda.glb
   [OK] assets/3d/media/25-Ruinas-Templos_puerta_templo.glb
+  assets/3d/media/27-Islas-Ubicaciones_campamento_abandonado.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_campamento_abandonado.md
+  assets/3d/media/27-Islas-Ubicaciones_cascada.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_cascada.md
+  assets/3d/media/27-Islas-Ubicaciones_cementerio_barcos.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_cementerio_barcos.md
+  assets/3d/media/27-Islas-Ubicaciones_faro_viejo.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_faro_viejo.md
+  assets/3d/media/27-Islas-Ubicaciones_volcan.glb -> [AVISO] ficha sin estado APROBADO: 27-Islas-Ubicaciones_volcan.md
+  assets/3d/media/33-Agricultura_bananero.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_bananero.md
+  assets/3d/media/33-Agricultura_canaveral.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_canaveral.md
+  assets/3d/media/33-Agricultura_compostera.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_compostera.md
+  assets/3d/media/33-Agricultura_cultivo_brote.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_brote.md
+  assets/3d/media/33-Agricultura_cultivo_creciendo.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_creciendo.md
+  assets/3d/media/33-Agricultura_cultivo_lista.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_lista.md
+  assets/3d/media/33-Agricultura_cultivo_madura.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_cultivo_madura.md
+  assets/3d/media/33-Agricultura_espantapajaros.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_espantapajaros.md
+  assets/3d/media/33-Agricultura_regadera.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_regadera.md
+  assets/3d/media/33-Agricultura_tierra_arada.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_tierra_arada.md
+  assets/3d/media/33-Agricultura_tierra_regada.glb -> [AVISO] ficha sin estado APROBADO: 33-Agricultura_tierra_regada.md
+  assets/3d/media/35-Mineria_carretilla_minero.glb -> [AVISO] ficha sin estado APROBADO: 35-Mineria_carretilla_minero.md
+  assets/3d/media/36-Fauna_cangrejo_playa.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_cangrejo_playa.md
+  assets/3d/media/36-Fauna_conejo.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_conejo.md
+  assets/3d/media/36-Fauna_gaviota.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_gaviota.md
+  assets/3d/media/36-Fauna_jabali.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_jabali.md
+  assets/3d/media/36-Fauna_tortuga_marina.glb -> [AVISO] ficha sin estado APROBADO: 36-Fauna_tortuga_marina.md
   [OK] assets/3d/media/40-Infraestructura_bote_pesca.glb
   [OK] assets/3d/media/40-Infraestructura_cartel_indicador.glb
   [OK] assets/3d/media/40-Infraestructura_farola_fuego.glb
   [OK] assets/3d/media/40-Infraestructura_muelle_madera.glb
   [OK] assets/3d/media/40-Infraestructura_pozo_piedra.glb
+  assets/3d/media/40-Infraestructura_puente_cuerda_colgante.glb -> [AVISO] ficha sin estado APROBADO: 40-Infraestructura_puente_cuerda_colgante.md
   [OK] assets/3d/media/40-Infraestructura_puente_troncos.glb
+  assets/3d/media/45-Arte3D_ancla_naufragio.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_ancla_naufragio.md
   [OK] assets/3d/media/45-Arte3D_anillo_piedras_ritual.glb
+  assets/3d/media/45-Arte3D_barco_hundido.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_barco_hundido.md
+  assets/3d/media/45-Arte3D_caveira_criatura.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_caveira_criatura.md
   [OK] assets/3d/media/45-Arte3D_concha_mar.glb
+  assets/3d/media/45-Arte3D_coral_abanico.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_coral_abanico.md
   [OK] assets/3d/media/45-Arte3D_estrella_mar.glb
+  assets/3d/media/45-Arte3D_jarrones_urnas.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_jarrones_urnas.md
+  assets/3d/media/45-Arte3D_jugador_voxel.glb -> [AVISO] ficha sin estado APROBADO: 45-Arte3D_jugador_voxel.md
   [OK] assets/3d/media/45-Arte3D_monolito_glifos.glb
   [OK] assets/3d/media/45-Arte3D_totem_isla.glb
   [OK] assets/3d/media/45-Arte3D_vieira_playa.glb
@@ -199,4 +419,4 @@
   [OK] assets/3d/media/70-Interacciones_puerta_corrediza_piedra.glb
   [OK] assets/3d/media/70-Interacciones_valvula_manivela.glb
 
-=== Resultado: 198 assets, 198 OK, 0 error(es), 0 aviso(s) ===
+=== Resultado: 418 assets, 198 OK, 0 error(es), 220 aviso(s) ===

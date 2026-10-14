@@ -161,7 +161,7 @@
 - [ ] RF9: revisar que la ficha esté completa, incluida la licencia (M78) [S]
   · espera: depende de M78 (coordinar con su dueno)
 - [x] RF8: crear la ficha de asset como fuente de verdad del estado [M]
-- [ ] RF9: crear la escena asset_preview.tscn con caja de referencia de 1 m y cámara orbitante [M] (revertido: asset_preview.tscn inexistente, BUG-070 Familia A, Ling 3.1 Flash msg 53, atria-dawn 2026-10-08)
+- [x] RF9: crear la escena asset_preview.tscn con caja de referencia de 1 m y cámara orbitante [M] — CERRADO 2026-10-14 (Ling 3.1 Flash): `scenes/asset_preview.tscn` + `scripts/assets/asset_preview.gd` (caja 1 m, cámara orbitante, carga opcional `--asset`, `--auto-quit`); verificado headless: "[M108] asset_preview: escena lista", shutdown limpio (ver 07-Resultados-Testings.md I-2)
   · espera: pendiente de implementacion (codigo)
 - [x] RF9: permitir review por lotes para escalar a 500+ assets [M]
 - [x] RF12: documentar el procedimiento de actualización de un asset con changelog en la ficha [S]
@@ -295,8 +295,7 @@
 - [x] Documentar la tabla de convenciones de nombres con ejemplos canónicos [M]
 - [x] Documentar la tabla de presets de importación por tipo [M]
 - [x] Documentar la plantilla de ficha de asset en la guía [S]
-- [ ] Documentar el flujo completo con su diagrama y responsables por etapa [M]
-  · espera: pendiente de documentacion (marcado [M])
+- [x] Documentar el flujo completo con su diagrama y responsables por etapa [M] — CERRADO 2026-10-14 (Ling 3.1 Flash): `ASSET-PIPELINE.md` §1 (diagrama de 7 etapas + tabla responsable/artefacto/salida)
 - [x] Documentar los procedimientos de actualización y retiro de assets [M]
 - [x] Mantener plan-actual sincronizado con la implementación real al cerrar el módulo [S]
 
@@ -332,12 +331,10 @@
 - [x] Probar que el reimport con presets no rompe referencias de escenas existentes [M]
 - [ ] Probar la generación de LODs y shadow meshes en un glb de referencia [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
-- [ ] Probar el memory reporter contra un caso conocido y verificar sus números [M]
-  · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
+- [x] Probar el memory reporter contra un caso conocido y verificar sus números [M] — CERRADO 2026-10-14 (Ling 3.1 Flash): `tools/asset_pipeline/run_m108_memory_test.gd` — PASS (fixtures exactos: png 1 MiB, glb 2 MiB, ogg 0.5 MiB, vacío; totales RAM 3.50 / VRAM 3.80 MB verificados; path de archivo vacío OK; self-contained, ver 07-Resultados-Testings.md U-1)
 - [ ] Probar el promote/retiro dejando el índice _APROBADAS.md correcto [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
-- [ ] Ejecutar los testings antes de la primera prueba manual del usuario y documentar resultados [M]
-  · espera: pendiente de documentacion (marcado [M])
+- [x] Ejecutar los testings antes de la primera prueba manual del usuario y documentar resultados [M] — CERRADO 2026-10-14 (Ling 3.1 Flash): `plan-actual/06-Plan-Testings.md` + `07-Resultados-Testings.md` (validador 418 assets 0 errores exit 0, test_m108 0 fallos exit 0, memory reporter PASS, asset_preview headless OK)
 
 ## Dependencia: Visión del Agente (M154)
 
@@ -357,12 +354,19 @@
 
 ## Evidencia M108 — Log 540
 - Log 540: núcleo V0 creado; 12 scripts en `tools/asset_pipeline/`; runner headless y escena de prueba creados; bloqueo headless documentado.
-- [ ] Test headless M108 ejecutado y verde 0 fallos — `[?]` (Log 529 previsto; escena de prueba se cerró sin output en intentos automáticos) [C] (revertido: BUG-070 Familia A, artefacto inexistente, agnes-3-flash msg 117 / Ling 3.1 Flash msg s3-60, atria-dawn 2026-10-08)
-  · espera: depende de M108 (coordinar con su dueno)
+- [x] Test headless M108 ejecutado y verde 0 fallos [C] — CERRADO 2026-10-14 (Ling 3.1 Flash): "=== TEST M108: 5 checks, 0 fallos ===" + "Exit code: 0" verificado empíricamente (godot --headless scenes/tests/test_m108.tscn; HasExited True, ExitCode 0). Causa raíz del revertido previo (BUG-070): `run_m108_test.gd` con API Dictionary obsoleta (`validar_pipeline` retorna `ResultadoPipeline`) + reporte escrito dentro de staging; ambos reparados (ver 07-Resultados-Testings.md §2)
 - [x] Validator/presets/promote_asset/atlas_builder/retire_asset/memory_reporter operativos — `[?]` (dueño M108 núcleo) [M]
 - [x] Flujo staging → final con CI headless y exit code — `[?]` (dueño M108/M118) [C]
 
-**Totales:** 205 ítems · Completados: 122 · Pendientes: 80 · No resueltos: 3.
+## Regularización M108 (2026-10-14) — Ling-3.1-Flash / Kilo Code
+
+- **Auditoría:** validador headless dio **418 GLB, 66 fichas, 220 GLB sin ficha → 220 errores, exit 1** (assets entraron fuera del pipeline: M16/M18/M19/M25/M27/M33/M35/M36/M40/M45/M50).
+- **Regularización:** 95 fichas creadas en `assets/fichas/` (161 totales) con `estado: PENDIENTE-REVIEW` honesto (no se reclama aprobación visual E-13 que no se ejecutó; pendiente con el dueño de cada módulo productor).
+- **Validador re-ejecutado:** **418 assets, 198 OK, 0 errores, 220 aviso(s), exit 0** (CI verde; los avisos marcan "ficha sin estado APROBADO").
+- **Reparaciones de código:** `run_m108_test.gd` migrado a API `ResultadoPipeline` (validar_pipeline no retorna Dictionary — causa del colgado headless de L360); `escribir_reporte` ahora escribe en `tools/reportes/_validacion_staging.md` (antes escribía dentro de staging, lo que invalidaba la segunda corrida).
+- **Nuevos:** `scenes/asset_preview.tscn` + `scripts/assets/asset_preview.gd` (L164); `tools/asset_pipeline/run_m108_memory_test.gd` (test headless del memory reporter, self-contained); `plan-actual/06-Plan-Testings.md` + `07-Resultados-Testings.md`.
+
+**Totales:** 205 ítems · Completados: 127 · Pendientes: 75 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 124 [x] / 78 [ ] /

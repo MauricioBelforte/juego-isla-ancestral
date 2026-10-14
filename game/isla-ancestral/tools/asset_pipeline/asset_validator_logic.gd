@@ -168,7 +168,8 @@ func escribir_reporte(resultado: ResultadoPipeline) -> int:
                 lineas.append("")
 
     var reporte := "\n".join(lineas)
-    var ruta := "res://assets/staging/_reporte_validacion.md"
+    var ruta := "res://tools/reportes/_validacion_staging.md"
+    DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://tools/reportes"))
     var archivo := FileAccess.open(ruta, FileAccess.WRITE)
     if archivo:
         archivo.store_string(reporte)
