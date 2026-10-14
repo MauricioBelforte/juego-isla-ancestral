@@ -95,19 +95,19 @@
 
 ## 7. Primer templo — Templo de Brisa (M26/M24/M13)
 
-- [ ] Definir el acceso por la colina N con 2 puzzles ambientales en la subida [M]
-- [ ] Definir la sala 1 "Las Velas": 3 velas con ráfagas de viento en orden [M]
-- [ ] Definir el feedback de las velas (sonido y luz, M42/M44) [S]
-- [ ] Definir la sala 2 "El Carillón": 5 campanas con melodía suave [M]
-- [ ] Definir el feedback ASMR del carillón (M44) [S]
-- [ ] Definir la Herramienta del Viento como recompensa (M13) [M]
-- [ ] Definir el lore canónico del templo con símbolos (M147/M153) [M]
-- [ ] Asegurar que NO se revela spoiler de los otros 5 templos (M153) [S]
-- [ ] Definir hint no intrusivo por formato de acceso (M58/M66) [S]
-- [ ] Definir la variante de solución (3 rutas por sala) [M]
-- [ ] Garantizar ausencia de softlock en el templo (M66) [M]
-- [ ] Definir la recompensa extra: pieza de lore coleccionable (M73) [S]
-- [ ] Definir cómo el viento afecta al exterior tras obtener la herramienta [M]
+- [x] Definir el acceso por la colina N con 2 puzzles ambientales en la subida [M] — COMPLETADO 2026-10-14 (step-5-kilocode): acceso definido en 03-Diseno.md 2.7.1 — 2 puzzles ambientales en la subida (3 tallos de semilla en orden de cercania + 2 antorchas por direccion del viento), ninguno bloquea el paso.
+- [x] Definir la sala 1 "Las Velas": 3 velas con ráfagas de viento en orden [M] — COMPLETADO 2026-10-14 (step-5-kilocode): sala definida en 2.7.1 — 3 velas en orden N->E->S segun la direccion de la rafaga; vela mal encendida se apaga sola y reintenta sin castigo. Base: scripts/templos/puzzle_def.gd (MAX_EMISORES 16).
+- [x] Definir el feedback de las velas (sonido y luz, M42/M44) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.7.1 — silbido de llama por vela (M42) + parpadeo de luz en proporcion a la rafaga (M44).
+- [x] Definir la sala 2 "El Carillón": 5 campanas con melodía suave [M] — COMPLETADO 2026-10-14 (step-5-kilocode): sala definida en 2.7.1 — 5 campanas de metal soplado, melodia de 5 notas graves tomada del lore del capitulo 4; error = campana muda, el puzzle continua.
+- [x] Definir el feedback ASMR del carillón (M44) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.7.1 — tonos puros con decay largo, sin percusiva y volumen bajo (M44/M42).
+- [x] Definir la Herramienta del Viento como recompensa (M13) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definida en 2.7.1 — recompensa al cerrar las 2 salas, permite llamar una rafaga con cooldown de 3 s (M13). Primera herramienta climatica del juego.
+- [x] Definir el lore canónico del templo con símbolos (M147/M153) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — scripts/eventos/data/capitulos/historia_c4_templo_brisa.tres (capitulo 4, gatillo templo_brisa_abierto, 7 sellos requeridos). Definicion ampliada en 2.7.1 (runas de viento + mural del archipielago).
+- [x] Asegurar que NO se revela spoiler de los otros 5 templos (M153) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): garantia definida en 2.7.1 — runas genericas de direccion de viento, ningun texto nombra a los otros 5 templos, y el capitulo 4 solo habla de este. Los 7 sellos son de completitud, no pistas.
+- [x] Definir hint no intrusivo por formato de acceso (M58/M66) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.7.1 — susurro de texto solo si el jugador permanece >20 s a <2 m del puzzle sin interactuar; sin pop-up ni flecha; desactivable en ajustes de accesibilidad (M58/M66).
+- [x] Definir la variante de solución (3 rutas por sala) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): 3 rutas por sala definidas en 2.7.1 — orden (mecanica), observacion (lore/ambiente) y ayuda (hint tras 2 fallos). Las 3 llevan a la misma resolucion.
+- [x] Garantizar ausencia de softlock en el templo (M66) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — scripts/core/invariants/puzzle_invariant.gd (M66: resolubilidad en 30 s + reinicio del slot) y softlock_guard.gd/softlock_rules.gd. Regla anida en 2.7.1: ningun puzzle del templo es obligatorio para salir.
+- [x] Definir la recompensa extra: pieza de lore coleccionable (M73) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definida en 2.7.1 — pagina de lore oculta en la sala 2, visible solo con la Herramienta del Viento ya obtenida; cuenta para el set de M73 (modulo 73-Coleccionables existe).
+- [x] Definir cómo el viento afecta al exterior tras obtener la herramienta [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.7.1 — con la herramienta, las rafagas mueven semillas y hojas en toda la isla y abren atajos de polen (corrientes que aceleran la pradera). Primer cambio global del mundo por una herramienta.
 
 ## 8. Primer viaje — Gran Vapor (M28/M67/M68)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 65 · Pendientes: 75 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 78 · Pendientes: 62 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
