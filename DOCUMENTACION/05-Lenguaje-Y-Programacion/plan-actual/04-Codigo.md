@@ -32,7 +32,7 @@ Módulo de **convenciones y patrones**. No genera código de juego aún (se apli
 | Decisión | Consumida por |
 |---|---|
 | GDScript primario + C# opcional | Todos los módulos de código |
-| Convenciones (snake_case, tipado, 4 espacios) | Todos los módulos de código |
+| Convenciones (snake_case, tipado, TAB) | Todos los módulos de código |
 | EventBus tipado central | M07, M59, M29 |
 | Patrón autoload para servicios | M07 (arquitectura) |
 | Logger+ErrorHandler obligatorios | M59 (guardado), M61 (rendimiento) |

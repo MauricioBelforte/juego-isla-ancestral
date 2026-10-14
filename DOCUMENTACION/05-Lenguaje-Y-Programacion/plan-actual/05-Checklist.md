@@ -34,7 +34,7 @@
 - [x] Fijar señales: snake_case tipadas [S] (03-Diseno §1)
 - [x] Fijar enums: UPPER_SNAKE con nombre contextual [S] (03-Diseno §1)
 - [x] Fijar @export con rangos y descripciones [S] (03-Diseno §1)
-- [x] Fijar indentación de 4 espacios y líneas ≤ 120 [S] (03-Diseno §1 (Reglas de estilo 1))
+- [x] Fijar indentación con TAB (tabulación) y líneas ≤ 120 [S] (03-Diseno §1 (Reglas de estilo 1); corregido 2026-10-14: la guía se pasó a TAB por decisión del director — 1016/1054 `.gd` versionados usan TAB)
 - [x] Fijar la regla de un archivo = una responsabilidad [S] (03-Diseno §1 (Reglas de estilo 1))
 - [x] Fijar la regla de comentarios (propósito/por-qué, español) [S] (03-Diseno §1 (Reglas de estilo 2-3))
 - [x] Fijar la prohibición de print() de debug en producción [S] (03-Diseno §1 (Reglas de estilo 4))
@@ -212,6 +212,18 @@
 
 - **F7** (tests unitarios obligatorios para logica pura): dueno externo **M-QA** (04-Codigo §4).
 - **G8** (flujo hacia QA): dueno **M-QA** (04-Codigo §4).
-- **G10** (ningun modulo contradice la guia): **FALLA la verificacion** - medido 2026-10-14 sobre los 1054 `.gd` versionados de `scripts/`: **1016 con TAB** vs **13 con 4 espacios**, mientras `03-Diseno` L23 declara "4 espacios". La guia contradice al codigo -> decision del director (corregir la guia a TAB o declarar la regla aspiracional). NO se normalizan 1016 archivos.
+- **G10** (ningun modulo contradice la guia): **NO flipeable todavia** - 2a medicion 2026-10-14 (iter 5, DeepSeek-V4.1-Flash). La regla de INDENTACION quedo resuelta: el director corrigio `03-Diseno` L23 a TAB y el codigo es **1016 con TAB** vs **13 con 4 espacios** -> guia y codigo coinciden. PERO otras 2 reglas medibles de la MISMA `03-Diseno` §1 siguen contradichas por el codigo: (a) "lineas <= 120 chars" -> **692 lineas >120** en **283 archivos** versionados (9 son comentarios); (b) "nada de `print()` de debug en produccion" -> **3546 lineas** con `print(` al inicio en **207 archivos** no-test (solo 8 en editor/tools/debug/qa). Un `[x]` aqui seria un sello inflado. Escalado al director (msg 244) con 3 opciones: acotar el item a la indentacion / declarar las 2 reglas aspiracionales con deuda / dejar `[ ]`.
 - **H8** (coherencia con AGENTS.md §24): **FALLA** - AGENTS.md §24 describe **Unity + C#** mientras M05 fija Godot 4.x + GDScript. Drift de documento ajeno; reportado, NO editado.
-- **H9** (actualizar CHECKLIST-GLOBAL): la fila 05 refleja 91/103; debe pasar a 98/103 (la fila la aplica el director).
+- **H9** (actualizar CHECKLIST-GLOBAL): la fila 05 ya refleja **98/103** (aplicado por el director, msg 243); sin flips en la iter 5 el valor no cambia.
+
+## Re-verificacion G10 (2026-10-14 - DeepSeek-V4.1-Flash, iter 5)
+
+El director autorizo (msg 243) flipear G10 "ahora que la guia y el codigo coinciden". Se re-midio ANTES de tocar la marca: la coincidencia vale para la regla de INDENTACION (guia corregida a TAB), pero NO para las otras 2 reglas medibles de la misma `03-Diseno` §1.
+
+- Indentacion: **1016** archivos versionados con TAB vs **13** con 4 espacios. Comando: `git grep -lP '^\t' -- 'scripts/**/*.gd' | wc -l`.
+- Regla "lineas <= 120 chars": **692 lineas** por encima de 120 en **283 archivos** (9 son comentarios). Comando: `git grep -cP '^.{121,}$' -- 'scripts/**/*.gd' | wc -l`.
+- Regla "nada de `print()` de debug en produccion": **3546 lineas** con `print(` al inicio en **207 archivos** no-test (8 en editor/tools/debug/qa). Comando: `git grep -lE '^\s*print\(' -- 'scripts/**/*.gd' | grep -v test_ | wc -l`.
+
+Conclusion: G10 se queda `[ ]`; flipearlo seria un sello inflado. Escalado al director (msg 244) con 3 opciones: (a) acotar el item a la regla de indentacion, (b) declarar las 2 reglas restantes aspiracionales con deuda y dueno, (c) dejar `[ ]`.
+
+Tambien se corrigieron 2 menciones stale de "4 espacios" (`04-Codigo` L35 y este checklist L37) para que M05 no contradiga su propia guia corregida. **0 flips** en esta iteracion -> `Totales` sin cambio (**98/103**) y NO se toco `CHECKLIST-GLOBAL`.
