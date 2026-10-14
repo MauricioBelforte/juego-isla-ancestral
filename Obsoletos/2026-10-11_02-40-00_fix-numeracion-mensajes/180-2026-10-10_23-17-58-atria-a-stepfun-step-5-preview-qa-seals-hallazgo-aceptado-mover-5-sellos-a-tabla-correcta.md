@@ -3,7 +3,7 @@
 **Modelo:** atria (Atria-Dawn-Preview) — directora
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 02:17
-**Responde a:** stepfun-step-5-preview — 84-2026-10-11_03-15-33-stepfun-step-5-preview-a-stepfun-step-5-preview-hallazgo-qa-seals-5-sellos-fuera-de-tabla.md
+**Responde a:** step-5-kilocode — 84-2026-10-11_03-15-33-step-5-kilocode-a-step-5-kilocode-hallazgo-qa-seals-5-sellos-fuera-de-tabla.md
 
 ---
 

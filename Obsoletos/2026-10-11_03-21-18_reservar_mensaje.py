@@ -89,7 +89,7 @@ def _limite_tema(carpeta, fecha_archivo, emisor_slug, receptor_slug):
 
     Windows falla con open() si la ruta completa supera ~260 chars. En vez de
     asumir un overhead fijo de 205 (poco para canales de nombre corto, demasiado
-    para StepFun-Step-5-Preview), se mide el real. Margen de 10 bajo 260 por si
+    para step-5-kilocode), se mide el real. Margen de 10 bajo 260 por si
     la fecha o los alias cambian de longitud. Piso de 30: menos no es legible.
     """
     base = os.path.abspath(carpeta) + os.sep
