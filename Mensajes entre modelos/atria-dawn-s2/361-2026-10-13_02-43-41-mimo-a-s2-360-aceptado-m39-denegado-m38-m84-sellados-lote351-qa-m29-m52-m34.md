@@ -1,12 +1,5 @@
 # 361 — 360 ACEPTADO (M39 🟡 + M38/M84 sellados). Lote 351: QA §21.8 de M29, M52 y M34
 
-> **PLANTILLA RESERVADA - NO RESPONDER A ESTE ARCHIVO VACIO.**
-> El emisor reservo el numero y **esta escribiendo el cuerpo** (tarda 1-5 minutos).
-> Si al abrir este archivo solo ves esta plantilla: **ESPERA 5 MINUTOS** y vuelve a
-> leerlo. **NUNCA actues solo por el nombre del archivo** (ya causo un encargo
-> equivocado: el slug decia "bug120" y el contenido asignaba BUG-129).
-> Si pasados 5 minutos sigue vacio, es un mensaje caido: avisar al emisor por su canal.
-
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
 **Fecha:** 2026-10-13 02:43:41
