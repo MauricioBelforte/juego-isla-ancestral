@@ -44,22 +44,22 @@
 
 ## 4. Primeros NPC (M19/M64)
 
-- [ ] Diseñar la plantilla `npc_profile.gd` (rutina, horarios, personalidad) [M]
-- [ ] Diseñar la IA de rutina `rutina_ia.gd` (máquina de estados + waypoints) [M]
-- [ ] Definir Finneas como vecino principal (heredado del slice M138) [S]
-- [ ] Diseñar Maribel: rutina muelle → mercado (40% del día) [M]
-- [ ] Diseñar el gancho de Maribel: pescado +15% al entardecer [S]
-- [ ] Diseñar Obé: rutina taller → mina; desbloquea piezas de construcción [M]
-- [ ] Diseñar Tía Rúa: tienda abierta 08:00-20:00 (M39) [M]
-- [ ] Diseñar Pax: rutina libre serpenteando bosque/playa [M]
-- [ ] Diseñar el gancho de Pax: coleccionables escondidos (M73) [S]
-- [ ] Diseñar Kor: bucle fijo en acantilado S, misterio del faro (M153) [M]
-- [ ] Diseñar Cole: banco local con oficina de 2 h al día [M]
-- [ ] Definir 10+ líneas de diálogo por NPC (M21) [M]
-- [ ] Definir variantes de diálogo por estación/día (M29) [M]
+- [x] Diseñar la plantilla `npc_profile.gd` (rutina, horarios, personalidad) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): script CREADO en scripts/world/npc/npc_profile.gd (class_name NpcProfile, Resource con ruta/horarios/personalidad/pronombres/gancho y funcion validar()). Contrato verificado con tabs consistentes.
+- [x] Diseñar la IA de rutina `rutina_ia.gd` (máquina de estados + waypoints) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): script CREADO en scripts/world/npc/rutina_ia.gd (class_name RutinaIA) con maquina de estados IDLE/CAMINANDO/ESPERANDO/EN_PUESTO/RECUPERANDO, seleccion de waypoint por franja horaria y recuperar() anti-stuck (M66). Movimiento fino delegado a M64.
+- [x] Definir Finneas como vecino principal (heredado del slice M138) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): Finneas heredado del slice M138 con evidencia en disco (assets exportados trueque_finneas_herramienta y finneas_zorro) y definido en el elenco 2.3 con rutina taller->plaza->faro y gancho de cadena intro (M22/M23).
+- [x] Diseñar Maribel: rutina muelle → mercado (40% del día) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): rutina y franja definidas en 03-Diseno.md 2.3.2 — muelle 06-12 (40% del dia, pesca) y mercado 12-18 (60%).
+- [x] Diseñar el gancho de Maribel: pescado +15% al entardecer [S] — COMPLETADO 2026-10-14 (step-5-kilocode): gancho 'pescado +15% al entardecer' definido en 2.3 y confirmado en 2.3.2; el calculo de precio es de M38/M39.
+- [x] Diseñar Obé: rutina taller → mina; desbloquea piezas de construcción [M] — COMPLETADO 2026-10-14 (step-5-kilocode): rutina taller 08-16 / mina 16-22 definida en 2.3.2; gancho 'desbloquea piezas de construccion (M17)' en 2.3.
+- [x] Diseñar Tía Rúa: tienda abierta 08:00-20:00 (M39) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): horario 08:00-20:00 documentado en 2.3 y 2.3.2 (franja 12-18 + reglas de apertura); la implementacion del horario comercial es de M39.
+- [x] Diseñar Pax: rutina libre serpenteando bosque/playa [M] — COMPLETADO 2026-10-14 (step-5-kilocode): rutina bosque 06-12 / playa 12-18 / libre 18-22 definida en 2.3.2; 'serpenteando' cubierto por la tolerancia de desvio de rutina_ia.
+- [x] Diseñar el gancho de Pax: coleccionables escondidos (M73) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): gancho 'coleccionables escondidos (M73)' definido en 2.3 y listado en 2.3.2.
+- [x] Diseñar Kor: bucle fijo en acantilado S, misterio del faro (M153) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): bucle fijo en acantilado S 06-22 definido en 2.3.2 (campo bucle_fijo en npc_profile.gd); gancho 'misterio del faro (M153)' en 2.3.
+- [x] Diseñar Cole: banco local con oficina de 2 h al día [M] — COMPLETADO 2026-10-14 (step-5-kilocode): oficina de banco 14-16 (2 h al dia) definida en 2.3.2; interes 0.5% diario con techo anti-inflacion en 2.5 (M38).
+- [x] Definir 10+ líneas de diálogo por NPC (M21) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): 10 lineas base escritas para cada uno de los 8 NPC del elenco en 03-Diseno.md 2.3.3 (Finneas, Maribel, Obe, Tia Rua, Pax, Kor, Cole, Bram). Formato y tabla de consumo quedan para M21.
+- [x] Definir variantes de diálogo por estación/día (M29) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): variantes contextuales definidas en 03-Diseno.md 2.3.3 — una por NPC para 3 contextos (lluvia, noche, festival), con nota de que las variantes por estacion y dia de ciclo son datos de M29.
 - [?] Implementar anti-stuck con teleport a waypoint previo (M66) [M] — DEGRADADO a [?] por step-5-kilocode (Kilo Code, 2026-10-12, orden del director mimo msg 277, barrido propio msg 276, Log 1807): hay anti-stuck real (`scripts/ia_npc/m65_animal_ai.gd:165`, "abortar (anti-stuck)"), pero el **teleport a waypoint previo no existe** — grep de `teleport|waypoint` sobre ese archivo da 0 resultados. Mitad hecho.
-- [ ] Definir pronombres/nombres canónicos del elenco (M147) [S]
-- [ ] Definir rangos de horarios de rutina sin solapamiento catastrófico [M]
+- [x] Definir pronombres/nombres canónicos del elenco (M147) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): tabla de pronombres y nombres canonicos de los 8 NPC en 03-Diseno.md 2.3.2, con M147-World-Building como guia de referencia.
+- [x] Definir rangos de horarios de rutina sin solapamiento catastrófico [M] — COMPLETADO 2026-10-14 (step-5-kilocode): tabla de rangos 06-12/12-18/18-22/22-06 para los 8 NPC en 2.3.2, con regla anti-solapamiento (puestos fijos en zonas distintas) y tolerancia 0.75 m (M66).
 
 ## 5. Primer sistema económico (M38/M39/M93)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 28 · Pendientes: 112 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 43 · Pendientes: 97 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
