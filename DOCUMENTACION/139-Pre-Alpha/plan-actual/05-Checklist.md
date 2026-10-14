@@ -152,15 +152,15 @@
 
 ## 11. Primer sistema de audio global (M41-M44)
 
-- [ ] Definir buses: Music, Ambient, SFX, ASMR, UI [M]
-- [ ] Definir transiciones de música por zona y estado (día/noche, lluvia) [M]
-- [ ] Definir el ambiente por sector (puerto, bosque, templo, faro) [M]
-- [ ] Definir eventos de SFX por interacción (M43) [M]
-- [ ] Definir eventos ASMR de recolección y venta (M44) [S]
-- [ ] Definir el audio UI (menús, confirmaciones) [S]
-- [ ] Definir la música del templo con tensión suave [S]
+- [ ] Definir buses: Music, Ambient, SFX, ASMR, UI [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): de los 5 buses que pide el item, 4 existen verificados en audio_config_service.gd (Master base + Music, SFX, Ambient, Voice, UI, Cinematic = 7 buses). Falta el bus **ASMR**: hoy el ASMR se implementa como capas dentro de FeedbackDirector (M44) sobre el bus SFX. Definicion de la deuda en 03-Diseno.md 2.8.1: crear ASMR como hijo de Master con atenuacion -6 dB y limite de True Peak en 3 dB. No inflado.
+- [x] Definir transiciones de música por zona y estado (día/noche, lluvia) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — data/audio/music_context_matrix.json (temas, capas, stings, variaciones) + autoload MusicDirector. La matriz ya cubre contexto por zona y estado (coral_dia/noche/lluvia, leit_gran_vapor). Definido en 03-Diseno.md 2.8.1.
+- [x] Definir el ambiente por sector (puerto, bosque, templo, faro) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — data/audio/ambient_biome_bank.json con capas para 10 sectores (playa, bosque, pradera, volcan, montana, selva, desierto, laguna, arrecife, ceniza) y variante clima_2; autoload AmbientDirector. Mapeo de los 4 sectores de fase en 2.8.1.
+- [x] Definir eventos de SFX por interacción (M43) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — autoload SFXManager (M43). Regla de fase en 2.8.1: todo interactuable tiene sample con variacion de tono.
+- [x] Definir eventos ASMR de recolección y venta (M44) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — FeedbackDirector (M44) aplica recetas de capas por accion con precedencia contextual (interior/clima/hora) y blacklist anti-agresion. Regla de fase en 2.8.1 (recoleccion cristalina, venta con decay medio).
+- [x] Definir el audio UI (menús, confirmaciones) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): bus `UI` verificado en audio_config_service.gd; regla de fase en 2.8.1 — confirmaciones cortas y no repetitivas (max 1 sonido cada 150 ms al navegar).
+- [x] Definir la música del templo con tensión suave [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definida en 2.8.1 como sting (no tema completo) — acordes graves con quinta suspendida, sin percusion, solo en las 2 salas de puzzle y saliendo al resolverlas, 20% mas bajo que el tema base.
 - [x] Definir la mezcla con config de audio (M91) [M]
-- [ ] Definir la persistencia de niveles de volumen [S]
+- [x] Definir la persistencia de niveles de volumen [S] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — GameSettings delega en AudioConfig.set_volumen() como fuente de verdad; los niveles se guardan en el save de ajustes y se aplican al arrancar.
 
 ## 12. Métricas y rendimiento (M61/M62/M63/M104/M105)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 109 · Pendientes: 31 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 116 · Pendientes: 24 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
