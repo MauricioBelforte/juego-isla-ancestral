@@ -10,13 +10,13 @@
 ## 1. Arquitectura de la fase (M07)
 
 - [x] Definir capas de la fase: UI → Managers → World Services → Infra (desacople M07) [S]
-- [ ] Definir contratos de interfaces entre capas: `IInteractable`, `ITienda`, `ITemplo`, `IViajable` [M]
+- [x] Definir contratos de interfaces entre capas: `IInteractable`, `ITienda`, `ITemplo`, `IViajable` [M] — COMPLETADO 2026-10-14 (step-5-kilocode): `IInteractable` preexistia (M70) y se crearon las 3 que faltaban (`scripts/interfaces/i_tienda.gd`, `i_templo.gd`, `i_viajable.gd`) con el patron de default neutro de `IInteractable` v2. Consumidores previstos identificados: ShopManager/shop.gd (M39), travel_service.gd (M28), templos (M26, sin script aun). Ver seccion 7.1 de 04-Codigo.md.
 - [x] Asegurar que ningún manager de gameplay toca la UI directamente (regla M07) [M]
-- [ ] Definir `SesionMaster` como único orquestador de arranque (bootstrapping) [M]
-- [ ] Documentar el flujo de sesión: menú → continuar/nuevo → carga de zona [M]
+- [ ] Definir `SesionMaster` como único orquestador de arranque (bootstrapping) [M] — PARCIAL 2026-10-13 (step-5-kilocode): `scripts/core/sesion_master.gd` CREADO con la maquina de estados (INACTIVA/INICIALIZANDO/ACTIVA/CERRANDO/CERRADA), inicializacion por capas (Infra → World Services → Managers → UI), cierre en orden inverso y registro via `ServiceRegistry`. Falta la ACTIVACION: el juego arranca hoy con `main_island.tscn` + ~20 autoloads y no hay master activo; activarlo como autoload requiere validacion en runtime. Ver seccion 7.2 de 04-Codigo.md.
+- [x] Documentar el flujo de sesión: menú → continuar/nuevo → carga de zona [M] — COMPLETADO 2026-10-13 (step-5-kilocode): documentado en la seccion 7.3 de 04-Codigo.md — menu principal → continuar/nuevo → `SesionMaster.inicializar(nueva_partida)` → carga de zona (`ZonaManager`, M63) → mundo activo → tick → cierre en orden inverso, con la UI deshabilitada durante la carga (regla M53).
 - [x] Definir ciclo de vida de los managers (init, tick, shutdown) [M]
 - [x] Definir la comunicación entre managers por señales/servicios (sin referencias cruzadas) [M]
-- [ ] Documentar el modo "degradación" si un servicio falla al arrancar (M66) [S]
+- [x] Documentar el modo "degradación" si un servicio falla al arrancar (M66) [S] — COMPLETADO 2026-10-13 (step-5-kilocode): seccion 7.4 de 04-Codigo.md — la sesion NO aborta: se registra el fallo (GameLogger + telemetria M105), el servicio queda degradado con default neutro del contrato, si el fallo es de guardado se ofrece recuperar copia o partida nueva (patron de `integridad_save`/M66 y `SoftlockGuard`), y la sesion continua degradada con los fallos documentados para el GONOGO de M140.
 - [x] Mantener el desacople al agregar un sistema nuevo sin re-trabajo estructural [C]
 
 ## 2. Primer bioma — Aurora (M10/M09/M27)
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 10 · Pendientes: 130 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 13 · Pendientes: 127 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].

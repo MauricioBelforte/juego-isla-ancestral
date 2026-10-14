@@ -9,7 +9,7 @@
 
 | Archivo (res://) | Propósito | Módulos |
 |---|---|---|
-| `scripts/core/sesion_master.gd` | Flujo de fase: menú → mundo, GONOGO local, inicialización de managers | M07/M53/M139 |
+| `scripts/core/sesion_master.gd` | Flujo de fase: menú → mundo, GONOGO local, inicialización de managers — **CREADO 2026-10-14** (contrato de ciclo de vida; activación pendiente, ver sección 7) | M07/M53/M139 |
 | `scripts/core/zonas/zona_manager.gd` | Streaming por zona, presupuesto de memoria, prioridades de carga | M63/M62 |
 | `scripts/core/zonas/viaje_manager.gd` | Gran Vapor: embarcar, travesía, desembarcar en Coral y vuelta | M28/M67/M68 |
 | `scripts/core/save/guardado_v3.gd` | Save particionado + manifest + checksums; escritura transaccional | M59/M60 |
@@ -110,3 +110,49 @@
 - Aurora_Factory reutiliza los generadores del slice (M08/M10/M50/M51), los parametriza y los conecta a `ZonaManager`.
 - No se tocan los hits ya establecidos de M137 (prototipo núcleo) ni M138 (GONOGO superado): el Pre-Alpha es una capa de escala sobre ellos.
 - Los ítems de integración cruzada están referenciados en el `05-Checklist.md` con sus módulos de origen.
+
+## 7. Arquitectura de arranque (implementada 2026-10-14 por step-5-kilocode)
+
+Cierra los 4 primeros ítems `[ ]` de la secciÃ³n 1 del `05-Checklist.md` (Arquitectura de la
+fase, M07) con artefactos reales en disco.
+
+### 7.1 Contratos de interfaces entre capas — COMPLETO
+
+| Interfaz | Archivo | Estado |
+|---|---|---|
+| `IInteractable` | `scripts/interfaces/i_interactable.gd` | preexistente (M70, 2026-09-01) |
+| `ITienda` | `scripts/interfaces/i_tienda.gd` | **creado** — comprar/vender/precio/stock/horario |
+| `ITemplo` | `scripts/interfaces/i_templo.gd` | **creado** — ofrendar/bendiciÃ³n/puzzle |
+| `IViajable` | `scripts/interfaces/i_viajable.gd` | **creado** — solicitar/cancelar/progreso/destinos |
+
+Las 3 nuevas siguen el patrÃ³n de `IInteractable` v2: mÃ©todos con default neutro para no
+romper implementadores parciales. Consumidores previstos identificados: `ShopManager`/`shop.gd`
+(M39), servicio de viajes `travel_service.gd` (M28) y templos (M26, sin script aún).
+
+### 7.2 `SesionMaster` — DEFINIDO, activaciÃ³n pendiente
+
+`scripts/core/sesion_master.gd` define el Ãºnico orquestador de arranque: mÃ¡quina de estados
+`INACTIVA → INICIALIZANDO → ACTIVA → CERRANDO → CERRADA`, inicializaciÃ³n por capas
+(Infra → World Services → Managers → UI), cierre en orden inverso y registro de servicios vÃ­a
+`ServiceRegistry` (autoload existente).
+
+**Estado honesto:** el juego hoy arranca con `run/main_scene="res://scenes/main_island.tscn"` +
+~20 autoloads en `project.godot`; **no hay SesionMaster activo**. El script es la definiciÃ³n del
+contrato. Activarlo como autoload requiera validaciÃ³n en runtime (no hecha en este frente para
+no romper producciÃ³n), por eso el ítem del checklist quedÃ³ `[ ]` con esa nota.
+
+### 7.3 Flujo de sesiÃ³n documentado
+
+`menÃº principal` → (`continuar` | `nuevo juego`) → `SesionMaster.inicializar(nueva_partida)` →
+carga de zona (`ZonaManager`, M63) → mundo activo → tick de sesiÃ³n → cierre en orden inverso.
+Durante la carga la UI queda deshabilitada (regla M53: la UI nunca decide gameplay).
+
+### 7.4 Modo degradaciÃ³n si un servicio falla al arrancar (M66)
+
+Si un servicio de capa Infra/World/Managers falla al inicializar, la sesiÃ³n **no aborta**:
+1. Se registra el fallo (`GameLogger` + telemetrÃ­a M105) con el nombre del servicio y el motivo.
+2. El servicio queda marcado como degradado; sus consumidores reciben el default neutro del contrato.
+3. Si el fallo es de guardado (`SaveManager`/M59), se ofrece recuperar copia o empezar partida nueva
+   (patrÃ³n ya usado por `integridad_save`/M66 y por el antí-softlock `SoftlockGuard`).
+4. La sesiÃ³n continÃº en modo degradado; el GONOGO de fase (M140) exige que los fallos
+   degradados estÃ©n documentados antes de pasar a Alpha.
