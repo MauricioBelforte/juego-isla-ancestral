@@ -63,7 +63,7 @@ step-5-kilocode activo hoy).
 
 | Modulo | Carpeta | Estado iteracion |
 |---|---|---|
-| M04-Game-Engine | DOCUMENTACION/04-Game-Engine/ | iter 1: 14->24 [x] (Log 1796, commit e38ad5a + push); iter 2: 24->36 [x] seccion A (Log 1801, origin/main); iter 3: 36->50 [x] seccion C (Log 1806, commit e237d07 + push); iter 4: 50->60 [x] seccion D (Log 1810, ped. commit msg 79, SIN COMMITEAR verificado 05:05); iter 5: 60->70 [x] seccion E (Log 1812, ped. commit msg 81) |
+| M04-Game-Engine | DOCUMENTACION/04-Game-Engine/ | iter 1: 14->24 [x] (Log 1796, commit e38ad5a + push); iter 2: 24->36 [x] seccion A (Log 1801, origin/main); iter 3: 36->50 [x] seccion C (Log 1806, commit e237d07 + push); iter 4: 50->60 [x] seccion D (Log 1810, ped. commit msg 79, SIN COMMITEAR verificado 05:05); iter 5: 60->70 [x] seccion E (Log 1812, ped. commit msg 81); iter 6: 70->82 [x] seccion F (Log 1822, commit 31e6d94 + push origin/main, verificado); iter 7: 82->94 [x] seccion G (Log 1831, ped. commit msg 94 a atria) |
 | M109-Herramientas-Internas | DOCUMENTACION/109-Herramientas-Internas/ | pendiente |
 | M67-Vehiculos | DOCUMENTACION/67-Vehiculos/ | pendiente |
 | M75-Postgame | DOCUMENTACION/75-Postgame/ | pendiente |
@@ -87,4 +87,7 @@ M104, M88, M160.
 - [x] Iteracion 5 de M04: seccion E (Version y gestion del motor, 10 items) — HECHA (Log 1812; 60->70 [x] / 58 [ ] / 0 [?] = 128; informe msg 14). Pend: que el director aplique la fila GLOBAL 60 -> 70/128.
 - [x] Reportado al director (msg 12): la fila GLOBAL de M04 quedo en "Completado" con 68 [ ] pendientes (DoD 21.6). RESUELTO: el director bajo la fila a "Con dudas" 60/128 (msg 13). Fila GLOBAL 60/128 verificada en disco.
 
-- [ ] Acuse del commit de iter 4: VERIFICADO 2026-10-13 05:05 — git log --all -- Logs/1810-* = VACIO; origin/main = edc12ca NO lo contiene; HEAD local = a7a3b39 (2 commits ajenos de pool). Iter 4 + log 1810 + msg 12 + msg 79 siguen sin commitear; pedido renovado a atria en msg 81 (junto con iter 5).
+- [x] Acuse del commit de iter 4+5: VERIFICADO 2026-10-13 (corrida 17:36) - commit 0526aa5 (iter 4+5) verificado en origin/main; pedido renovado msg 81 atendido.
+- [x] Iteracion 6 de M04: seccion F (Configuracion del proyecto base, 12 flips de 18) - HECHA (Log 1822; 70->82 [x] / 46 [ ] / 0 [?] = 128; informe msg 16). ACEPTADA por el director (msg 18); GLOBAL aplicada por el; commit 31e6d94 + push verificado (msg 94 a atria).
+- [x] Iteracion 7 de M04: seccion G (Rendimiento y calidad grafica, 12 items) - HECHA (Log 1831; 82->94 [x] / 34 [ ] / 0 [?] = 128; informe msg 19). Pend: que el director aplique la fila GLOBAL 82 -> 94/128.
+- [ ] Acuse del commit de iter 7: VERIFICADO 2026-10-13 23:00 - iter 6 commiteada (31e6d94); — git log --all -- Logs/1810-* = VACIO; origin/main = edc12ca NO lo contiene; HEAD local = a7a3b39 (2 commits ajenos de pool). Iter 4 + log 1810 + msg 12 + msg 79 siguen sin commitear; pedido renovado a atria en msg 81 (junto con iter 5).

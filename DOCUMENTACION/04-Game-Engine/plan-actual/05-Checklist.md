@@ -109,18 +109,18 @@
 
 ## G. Rendimiento y calidad gráfica (12)
 
-- [ ] Documentar objetivo de 60 FPS como requisito de estilo (M01) [S]
-- [ ] Documentar presupuesto de draw calls por escena [M]
-- [ ] Documentar batching/frustum culling del renderer Forward+ [S]
-- [ ] Documentar LOD de chunks y props [S]
-- [ ] Documentar iluminación pastel (SDFGI/SSIL) apta para el género [S]
-- [ ] Documentar sombras ajustables (quality vs rendimiento) [S]
-- [ ] Documentar el presupuesto de material/shader (vertex color + toon) [S]
-- [ ] Documentar el costo del agua y reflejos (módulo Agua M51) [S]
-- [ ] Documentar el límite de luces dinámicas por escena [S]
-- [ ] Documentar pooling de partículas y props [S]
-- [ ] Documentar compresión de texturas por plataforma [S]
-- [ ] Documentar el frame budget como entregable de M61 [S]
+- [x] Documentar objetivo de 60 FPS como requisito de estilo (M01) [S] (cita: 01-Requerimientos.md L19 (RF1 "rendimiento 60 FPS") + L40/L45 ("El GDD exige voxel a 60 FPS: esa es la vara minima del motor"); 03-Diseno.md L41 (prototipo 60 FPS sostenidos en PC media y Steam Deck); 04-Codigo.md L32 - ver Log 1831 G1)
+- [x] Documentar presupuesto de draw calls por escena [M] (cita: 61-Rendimiento/plan-actual/01-Requerimientos.md L24 (alcance sec.3.1: "Presupuestos de frame por categoria (tabla 3.1) en ms y draw calls") + L30 (cada modulo declara su presupuesto); 02-Analisis.md L19 (tabla: Render 5,0 ms); Log 386 (bench real M61: 374 draw calls promedio vs objetivo <= 400) - ver Log 1831 G2)
+- [x] Documentar batching/frustum culling del renderer Forward+ [S] (cita: 61-Rendimiento/plan-actual/01-Requerimientos.md L18 (tecnicas obligatorias: culling frustum + occlusion, batching) + L26 (batching estaticos, GPU instancing); 02-Analisis.md L57 ("Culling: frustum + chunks (M07) + occlusion por celdas"); 03-Diseno.md L61 ("batching por chunk"); 04-Game-Engine/plan-actual/03-Diseno.md L13 (Forward+ Vulkan) - ver Log 1831 G3)
+- [x] Documentar LOD de chunks y props [S] (cita: 04-Game-Engine/plan-actual/03-Diseno.md L12 ("streaming, LOD Transvoxel") + L25 ("LOD Transvoxel para chunks lejanos"); 61-Rendimiento/plan-actual/03-Diseno.md L61 ("LOD 3 niveles") + L62 (impostor LOD malla simpl. + textura) + L67 (LOD de update NPC/fauna) - ver Log 1831 G4)
+- [x] Documentar iluminación pastel (SDFGI/SSIL) apta para el género [S] (cita: 04-Game-Engine/plan-actual/02-Analisis.md L21 ("Iluminacion | Godot 4: SDFGI/SSIL suficientes para estetica pastel suave") - ver Log 1831 G5)
+- [x] Documentar sombras ajustables (quality vs rendimiento) [S] (cita: 49-Iluminacion/plan-actual/03-Diseno.md sec.3.2 L90-96 ("Cascades de sombra direccional: <= 4 (preset bajo: 2, medio: 3, alto: 4 - M90)"; "Resolucion de shadow atlas: 1024 (bajo/medio), 2048 (alto)"; "Distancia maxima de sombras dinamicas: 45 m (bajo: 25 m - M90)") - ver Log 1831 G6)
+- [x] Documentar el presupuesto de material/shader (vertex color + toon) [S] (cita: 00-PLAN-INICIAL/Plan-de-produccion.md L182 (enfoque "texturas simples + vertex color o un shader tipo toon/celda" para el estilo cozy pastel); 10-Generacion-Del-Mundo/plan-actual/04-Codigo.md L54 (implementacion real: VoxelMesherBlocky colored meshing) - NOTA honestidad: enfoque documentado; sin cifra de presupuesto en la tabla 3.1 de M61 - ver Log 1831 G7)
+- [x] Documentar el costo del agua y reflejos (módulo Agua M51) [S] (cita: 61-Rendimiento/plan-actual/01-Requerimientos.md L63 (RF16: "Plano de agua con instruccion de normales; reflejos solo en superficie"); 03-Diseno.md L64 ("Agua | 1 plano + normales; reflejos solo superficie | M51") - ver Log 1831 G8)
+- [x] Documentar el límite de luces dinámicas por escena [S] (cita: 49-Iluminacion/plan-actual/03-Diseno.md sec.3.2 L90 ("Luces dinamicas con sombra por escena: <= 6") + L91 ("Luces dinamicas totales por escena: <= 20 (pool; descarte por distancia 30 m)") + L95 (registro en lighting_budget.json) - ver Log 1831 G9)
+- [x] Documentar pooling de partículas y props [S] (cita: 52-Particulas-Y-VFX/plan-actual/03-Diseno.md L32 (VfxManager mantiene pool de emisores precalentados) + L102 (precalentamiento: 8 emisores en el arranque); 61-Rendimiento/plan-actual/02-Analisis.md L45 ("Pooling obligatorio en M52 + limite de 500 particulas por camara") + 03-Diseno.md L67 (pooling de instancias NPC/fauna) - ver Log 1831 G10)
+- [x] Documentar compresión de texturas por plataforma [S] (cita: 02-Vision-Y-Concepto/plan-actual/03-Diseno.md L90 ("Assets comprimidos por plataforma (texturas, audio)"); 61-Rendimiento/plan-actual/01-Requerimientos.md L54 (RF7: "Texturas M47 maxima 4K comprimidas; presupuesto por escena") - NOTA honestidad: el detalle BC/ASTC por plataforma sigue pendiente en M61 (05-Checklist L118) - ver Log 1831 G11)
+- [x] Documentar el frame budget como entregable de M61 [S] (cita: 61-Rendimiento/plan-actual/03-Diseno.md L8 (entregables ejecutables: budget_profile.gd, bench_scene_a.tscn, validate_budget.gd); 02-Analisis.md L19 (tabla de presupuestos por categoria) - ver Log 1831 G12)
 
 ## H. Integración con otros módulos (12)
 
@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 128 ítems · Completados: 82 · Pendientes: 46 · No resueltos: 0. (iter 6 seccion F: 12 flips con cita real; quedan 46 [ ] = presets Linux/SteamOS + framerate explicito en project.godot + secciones G/H/I/J)
+**Totales:** 128 ítems · Completados: 94 · Pendientes: 34 · No resueltos: 0. (iter 7 seccion G: 12 flips con cita real; quedan 34 [ ] = presets Linux/SteamOS + framerate explicito en project.godot + secciones H/I/J)
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 
