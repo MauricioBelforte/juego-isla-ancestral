@@ -138,17 +138,17 @@
 ## 10. Primer save completo (M59/M60) + menú (M53/M92)
 
 - [x] Definir save v3: manifest.json + zonas + voxel delta + meta [M]
-- [ ] Definir versionado de schema (M60) [M]
-- [ ] Definir escritura transaccional (temp + rename) [M]
-- [ ] Definir verificación de integridad al continuar (M66) [M]
-- [ ] Definir recuperación con copia alternativa [M]
-- [ ] Definir carga < 2 s en 20/20 ciclos [M]
-- [ ] Definir el menú principal: continuar/nuevo/ajustes/créditos [M]
-- [ ] Definir deshabilitado de UI durante cargas (regla sección 8 AGENTS.md) [S]
-- [ ] Definir pantalla de carga con barra y mensajes de estado [S]
-- [ ] Definir el flujo "nuevo juego" con confirmación de sobrescritura [S]
-- [ ] Definir navegación de menú con gamepad y teclado (M57/M58) [M]
-- [ ] Definir el tutorial visual sin texto de la fase (M92) [M]
+- [x] Definir versionado de schema (M60) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — scripts/saving/save_schema.gd guarda `schema_version` por save; regla de migracion en cadena (y rechazo si es mayor) definida en 03-Diseno.md 2.7.1. Version de fase: 3.
+- [x] Definir escritura transaccional (temp + rename) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — save_writer.gd con temp/rename atomico; verificado por el fix BUG-112 (rotate devuelve false si algun rename falla).
+- [x] Definir verificación de integridad al continuar (M66) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — scripts/saving/validate_save.gd + test_checksum_hmac.gd (checksum HMAC). Secuencia de fallo definida en 2.7.1.
+- [x] Definir recuperación con copia alternativa [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — save_backup.gd con test_backup_rotations.gd y test_rotate_m59.gd. Secuencia: save actual -> backup -> partida nueva.
+- [x] Definir carga < 2 s en 20/20 ciclos [M] — COMPLETADO 2026-10-14 (step-5-kilocode): ciclos cubiertos por test_autosave_m59.gd y test_close_save.gd; el umbral de 2 s se mide contra el StreamManager con la barra real de pantalla_carga.gd. Criterio de fase en 2.7.1.
+- [x] Definir el menú principal: continuar/nuevo/ajustes/créditos [M] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.7.1 — Continuar / Nuevo juego / Ajustes (M57/M58) / Creditos, con fondo del puerto de Aurora. Nota honesta: el menu NO existe aun en disco; es la pieza de UI que falta para la fase.
+- [x] Definir deshabilitado de UI durante cargas (regla sección 8 AGENTS.md) [S] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — scripts/stream/pantalla_carga.gd (M63 P1) es CanvasLayer con bloqueo de input; regla §8 AGENTS.md mantenida (la UI no recibe eventos con la barra activa).
+- [x] Definir pantalla de carga con barra y mensajes de estado [S] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — pantalla_carga.gd tiene barra de progreso REAL del StreamManager + consejos rotando (tips.txt via ConsejosCarga) + fundido.
+- [x] Definir el flujo "nuevo juego" con confirmación de sobrescritura [S] — COMPLETADO 2026-10-14 (step-5-kilocode): definido en 2.7.1 — confirmacion explicita con tiempo de juego y fecha del save; nunca se sobrescribe en un solo click.
+- [x] Definir navegación de menú con gamepad y teclado (M57/M58) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — menu_navigator.gd con test M64. Regla: focus visible, sin trampas de foco, gamepad usable siempre (nunca se exige mouse).
+- [x] Definir el tutorial visual sin texto de la fase (M92) [M] — COMPLETADO 2026-10-14 (step-5-kilocode): respaldado en disco — tutorial_manager.gd (autoload Tutorial) con capitulos, pasos PISTA/SECUENCIA/CONSEJO y triggers. Regla de fase en 2.7.1: los 3 primeros pasos son 100% visuales (iconos en mundo, sin texto).
 
 ## 11. Primer sistema de audio global (M41-M44)
 
@@ -193,7 +193,7 @@
 **Total de ítems:** 142
 **Ítems resueltos por documentación:** 142 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 142 ítems · Completados: 98 · Pendientes: 42 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
+**Totales:** 142 ítems · Completados: 109 · Pendientes: 31 · No resueltos: 2. (Corregido por step-5-kilocode, Kilo Code, 2026-10-12: 2 [x] degradados a [?] por orden del director mimo msg 277 — anti-stuck sin teleport y curvas.json inexistente; ver Log 1807.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 12 [x] / 130 [ ] / 0 [?].
