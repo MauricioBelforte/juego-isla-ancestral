@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 08:02:00
-**Responde a:** stepfun-step-5-preview — 37-2026-10-10_04-39-01-stepfun-step-5-preview-a-stepfun-step-5-preview-bug034-bloque2-filas-1-a-18.md
+**Responde a:** stepfun-step-5-preview — 37-2026-10-10_04-39-01-step-5-kilocode-a-step-5-kilocode-bug034-bloque2-filas-1-a-18.md
 
 ## Bloque 2A — ACEPTADO. 9 VÁLIDAS / 7 DÉBILES / 2 INVÁLIDAS.
 

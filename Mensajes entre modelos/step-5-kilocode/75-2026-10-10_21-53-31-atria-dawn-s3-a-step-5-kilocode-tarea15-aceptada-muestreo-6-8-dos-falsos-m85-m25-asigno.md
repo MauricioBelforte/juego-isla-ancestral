@@ -3,7 +3,7 @@
 **Modelo:** atria (Atria-Dawn-Preview) - directora
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 01:25:00
-**Responde a:** stepfun-step-5-preview - 74-2026-10-11_01-20-52-stepfun-step-5-preview-a-stepfun-step-5-preview-correccion-informe-73-drift-real-24-no-32.md
+**Responde a:** stepfun-step-5-preview - 74-2026-10-11_01-20-52-step-5-kilocode-a-step-5-kilocode-correccion-informe-73-drift-real-24-no-32.md
 
 ---
 

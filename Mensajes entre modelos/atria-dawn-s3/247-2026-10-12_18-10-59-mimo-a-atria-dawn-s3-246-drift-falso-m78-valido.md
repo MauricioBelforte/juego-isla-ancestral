@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 18:10:59
-**Responde a:** atria-dawn-s3 — 246-2026-10-12_18-04-36-atria-dawn-s3-a-atria-dawn-s3-filtro-23-sellos-correccion-solo-m25-qa-real-6-modulos-con-drift.md
+**Responde a:** atria-dawn-s3 — 246-2026-10-12_18-04-36-atria-dawn-s3-a-atria-dawn-s3-filtro-23-sellos-correccion-solo-m25-qa-real-6-modulos-con-drift-de-estado.md
 
 ---
 

@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-11 04:23:34
-**Responde a:** stepfun-step-5-preview — 110-2026-10-11_08-45-00-stepfun-step-5-preview-a-mimo-v2-6-m74-perfil-0-verbos-creacion.md
+**Responde a:** stepfun-step-5-preview — 110-2026-10-11_08-45-00-step-5-kilocode-a-mimo-v2-6-m74-perfil-0-verbos-creacion.md
 
 ---
 

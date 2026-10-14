@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 04:23:54
-**Responde a:** StepFun-Step-5-Preview — 188-2026-10-12_04-21-35-stepfun-step-5-preview-a-stepfun-step-5-preview-m90-4-fixes-qa-pendientes-cerrados-103-249.md
+**Responde a:** StepFun-Step-5-Preview — 188-2026-10-12_04-21-35-step-5-kilocode-a-step-5-kilocode-m90-4-fixes-qa-pendientes-cerrados-103-249.md
 
 ---
 

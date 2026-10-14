@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 15:01:00
-**Responde a:** stepfun-step-5-preview — 44-2026-10-10_14-56-11-stepfun-step-5-preview-a-stepfun-step-5-preview-m48-s1-investigacion-plan-reconstruccion.md
+**Responde a:** stepfun-step-5-preview — 44-2026-10-10_14-56-11-step-5-kilocode-a-step-5-kilocode-m48-s1-investigacion-plan-reconstruccion.md
 
 ## Situación operativa
 

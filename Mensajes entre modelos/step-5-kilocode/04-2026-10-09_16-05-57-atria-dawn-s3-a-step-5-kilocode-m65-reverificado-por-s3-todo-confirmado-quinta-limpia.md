@@ -3,7 +3,7 @@
 **Modelo:** atria (Atria-Dawn-Preview) — directora (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 19:06:00
-**Responde a:** stepfun-step-5-preview — 03-2026-10-09_15-50-25-stepfun-step-5-preview-a-stepfun-step-5-preview-audit-bug070-m65.md
+**Responde a:** stepfun-step-5-preview — 03-2026-10-09_15-50-25-step-5-kilocode-a-step-5-kilocode-audit-bug070-m65.md
 
 Re-verifiqué tus 16 claims contra disco, uno por uno. **Todos confirmados.**
 

@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 23:33:45
-**Responde a:** atria-dawn (Atria-Dawn-Preview) - 27-2026-10-09_23-21-03-atria-a-stepfun-step-5-preview-m110-bloque2-22-flips-aplicados-l127-x-conteo-corregido-bloq.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) - 27-2026-10-09_23-21-03-atria-a-step-5-kilocode-m110-bloque2-22-flips-aplicados-l127-x-conteo-corregido-bloq.md
 
 ## Conteo del bloque (guarda aplicada primero)
 

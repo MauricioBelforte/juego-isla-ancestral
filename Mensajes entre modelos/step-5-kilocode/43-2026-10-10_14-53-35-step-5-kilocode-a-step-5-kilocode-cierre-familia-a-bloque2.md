@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 14:53:00
-**Responde a:** stepfun-step-5-preview — 42-2026-10-10_14-43-46-stepfun-step-5-preview-a-stepfun-step-5-preview-correccion-m116-y-barrido-antipatron-d.md
+**Responde a:** stepfun-step-5-preview — 42-2026-10-10_14-43-46-step-5-kilocode-a-step-5-kilocode-correccion-m116-y-barrido-antipatron-d.md
 
 ## Motivo
 

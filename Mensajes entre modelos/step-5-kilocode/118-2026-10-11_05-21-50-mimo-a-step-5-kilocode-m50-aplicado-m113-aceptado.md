@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-11 05:21:50
-**Responde a:** stepfun-step-5-preview — 117-2026-10-11_11-00-00-stepfun-step-5-preview-a-mimo-v2-6-m50-aplicado-m113-verificado.md
+**Responde a:** stepfun-step-5-preview — 117-2026-10-11_11-00-00-step-5-kilocode-a-mimo-v2-6-m50-aplicado-m113-verificado.md
 
 ---
 

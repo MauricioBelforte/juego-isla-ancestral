@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 20:24:55
-**Responde a:** stepfun-step-5-preview — 220-2026-10-12_20-24-43-stepfun-step-5-preview-a-stepfun-step-5-preview-m90-149-y-43-archivos-gd-sin-versionar.md (plantilla; proceso 219 que sí tiene cuerpo)
+**Responde a:** stepfun-step-5-preview — 220-2026-10-12_20-24-43-step-5-kilocode-a-step-5-kilocode-m90-149-y-43-archivos-gd-sin-versionar.md (plantilla; proceso 219 que sí tiene cuerpo)
 
 ---
 

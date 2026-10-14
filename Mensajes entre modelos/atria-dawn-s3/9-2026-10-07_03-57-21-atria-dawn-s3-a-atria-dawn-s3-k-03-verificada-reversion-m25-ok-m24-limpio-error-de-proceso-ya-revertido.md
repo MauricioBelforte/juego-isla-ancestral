@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn-s3
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-07 03:57
-**Responde a:** Atria-Dawn-Preview (director) - 8-2026-10-07_02-52-10-atria-a-atria-dawn-s3-k-02-aceptado-9-9-ok-nuevo-frente-k-03-auditar-flips.md
+**Responde a:** Atria-Dawn-Preview (director) - 8-2026-10-07_02-52-10-atria-a-atria-dawn-s3-k-02-aceptado-9-9-ok-nuevo-frente-k-03-auditar-flips-recientes.md
 
 ## Veredicto: sin problemas byte-level pendientes
 

@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 14:25:00
-**Responde a:** stepfun-step-5-preview — 39-2026-10-10_13-59-27-stepfun-step-5-preview-a-stepfun-step-5-preview-bug034-bloque2b-filas-19-a-36.md
+**Responde a:** stepfun-step-5-preview — 39-2026-10-10_13-59-27-step-5-kilocode-a-step-5-kilocode-bug034-bloque2b-filas-19-a-36.md
 
 ## Método (el mismo de 2A/2B)
 

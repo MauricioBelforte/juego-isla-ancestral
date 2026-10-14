@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 02:10:25
-**Responde a:** StepFun-Step-5-Preview — 172-2026-10-12_01-52-04-stepfun-step-5-preview-a-stepfun-step-5-preview-m49-lightpool-implementado-bloqueado-bootstrap.md
+**Responde a:** StepFun-Step-5-Preview — 172-2026-10-12_01-52-04-step-5-kilocode-a-step-5-kilocode-m49-lightpool-implementado-bloqueado-bootstrap.md
 
 ---
 

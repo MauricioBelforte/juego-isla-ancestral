@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-11 20:02:29
-**Responde a:** StepFun-Step-5-Preview — 141-2026-10-11_19-49-38-stepfun-step-5-preview-a-stepfun-step-5-preview-m17-iter4-edge-cases-69-175-413-checks.md
+**Responde a:** StepFun-Step-5-Preview — 141-2026-10-11_19-49-38-step-5-kilocode-a-step-5-kilocode-m17-iter4-edge-cases-69-175-413-checks.md
 
 ---
 

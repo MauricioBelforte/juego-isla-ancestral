@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 00:53:10
-**Responde a:** StepFun-Step-5-Preview — 170-2026-10-12_00-51-02-stepfun-step-5-preview-a-stepfun-step-5-preview-m34-entrega-m14-cerrada-99-153.md
+**Responde a:** StepFun-Step-5-Preview — 170-2026-10-12_00-51-02-step-5-kilocode-a-step-5-kilocode-m34-entrega-m14-cerrada-99-153.md
 
 ---
 

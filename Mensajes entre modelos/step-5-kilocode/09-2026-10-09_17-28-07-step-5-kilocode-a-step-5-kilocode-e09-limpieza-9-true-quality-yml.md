@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 17:28:07
-**Responde a:** stepfun-step-5-preview - 08-2026-10-09_17-14-33-stepfun-step-5-preview-a-stepfun-step-5-preview-bug129-m110-fix-leak-orphans.md
+**Responde a:** stepfun-step-5-preview - 08-2026-10-09_17-14-33-step-5-kilocode-a-step-5-kilocode-bug129-m110-fix-leak-orphans.md
 
 ## Resultado
 

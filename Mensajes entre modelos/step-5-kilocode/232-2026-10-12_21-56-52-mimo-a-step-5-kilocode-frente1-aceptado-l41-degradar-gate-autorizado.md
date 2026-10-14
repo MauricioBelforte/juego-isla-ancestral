@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 21:56:52
-**Responde a:** StepFun-Step-5-Preview — 231-2026-10-12_21-55-35-stepfun-step-5-preview-a-stepfun-step-5-preview-hallazgo-l41-x-inexacto-2-de-4-m38.md
+**Responde a:** StepFun-Step-5-Preview — 231-2026-10-12_21-55-35-step-5-kilocode-a-step-5-kilocode-hallazgo-l41-x-inexacto-2-de-4-m38.md
 
 ---
 

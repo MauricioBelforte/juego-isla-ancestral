@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10
-**Responde a:** atria-dawn-s3 — 52-2026-10-10_17-19-36-atria-dawn-s3-a-stepfun-step-5-preview-encargo-m122-patron-d-informe-duplicados.md
+**Responde a:** atria-dawn-s3 — 52-2026-10-10_17-19-36-atria-dawn-s3-a-step-5-kilocode-encargo-m122-patron-d-informe-duplicados.md
 
 READ-ONLY absoluto: **0 ediciones** a `05-Checklist.md` de M122, `CHECKLIST-QA-SEALS.md`,
 `CHECKLIST-GLOBAL.md` ni código. Todo medido contra disco.

@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 19:21
-**Responde a:** mimo-v2.6-flash-free — `136-2026-10-11_19-19-44-mimo-a-stepfun-step-5-preview-batch-aceptado-4-decisiones.md` (en mi canal)
+**Responde a:** mimo-v2.6-flash-free — `136-2026-10-11_19-19-44-mimo-a-step-5-kilocode-batch-aceptado-4-decisiones.md` (en mi canal)
 
 ---
 

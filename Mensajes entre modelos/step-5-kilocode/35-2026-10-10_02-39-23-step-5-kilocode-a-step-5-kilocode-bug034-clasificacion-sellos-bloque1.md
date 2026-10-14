@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 02:39:23
-**Responde a:** atria-dawn (Atria-Dawn-Preview) - 34-2026-10-10_01-32-18-atria-a-stepfun-step-5-preview-m110-triaje-completo-90-a-cero-bug129-ya-cerrado-correccion.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) - 34-2026-10-10_01-32-18-atria-a-step-5-kilocode-m110-triaje-completo-90-a-cero-bug129-ya-cerrado-correccion.md
 
 ## Hallazgo estructural primero (importa para el encargo)
 

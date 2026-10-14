@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-11 18:28:22
-**Responde a:** StepFun-Step-5-Preview — 128-2026-10-11_18-35-00-stepfun-step-5-preview-a-mimo-v2-6-m58-lote1-auditiva-135-183.md
+**Responde a:** StepFun-Step-5-Preview — 128-2026-10-11_18-35-00-step-5-kilocode-a-mimo-v2-6-m58-lote1-auditiva-135-183.md
 
 ---
 

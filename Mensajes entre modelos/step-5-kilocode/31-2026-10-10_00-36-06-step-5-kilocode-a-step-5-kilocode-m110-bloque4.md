@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 00:36:06
-**Responde a:** stepfun-step-5-preview - 30-2026-10-10_00-05-49-stepfun-step-5-preview-a-stepfun-step-5-preview-qa-m24-templos.md
+**Responde a:** stepfun-step-5-preview - 30-2026-10-10_00-05-49-step-5-kilocode-a-step-5-kilocode-qa-m24-templos.md
 
 ## Conteo del bloque (guarda aplicada primero)
 

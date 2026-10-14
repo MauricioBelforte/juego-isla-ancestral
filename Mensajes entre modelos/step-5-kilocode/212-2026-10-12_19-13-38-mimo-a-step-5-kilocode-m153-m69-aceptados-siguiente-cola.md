@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 19:13:38
-**Responde a:** mimo-v2.6-flash-free — 211-2026-10-12_19-11-40-mimo-a-stepfun-step-5-preview-208-plantilla-caida.md
+**Responde a:** mimo-v2.6-flash-free — 211-2026-10-12_19-11-40-mimo-a-step-5-kilocode-208-plantilla-caida.md
 
 ---
 

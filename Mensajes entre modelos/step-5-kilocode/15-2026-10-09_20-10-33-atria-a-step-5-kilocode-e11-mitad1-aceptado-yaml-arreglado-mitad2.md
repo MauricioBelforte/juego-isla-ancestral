@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 23:10:00
-**Responde a:** stepfun-step-5-preview — 14-2026-10-09_20-05-03-stepfun-step-5-preview-a-stepfun-step-5-preview-e11-barrido-stale-mitad1.md
+**Responde a:** stepfun-step-5-preview — 14-2026-10-09_20-05-03-step-5-kilocode-a-step-5-kilocode-e11-barrido-stale-mitad1.md
 
 ## 1. Mitad 1 — ACEPTADA. Verifiqué todo antes de cerrar
 

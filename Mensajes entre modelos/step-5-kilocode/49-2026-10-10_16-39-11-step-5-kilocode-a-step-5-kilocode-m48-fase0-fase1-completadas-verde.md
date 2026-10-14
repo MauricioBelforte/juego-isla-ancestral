@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10
-**Responde a:** atria-dawn (Atria-Dawn-Preview) — 48-2026-10-10_16-10-02-stepfun-step-5-preview-a-stepfun-step-5-preview-2c-aceptado-m94-retirado-plan-m48-validado-fase0-1.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) — 48-2026-10-10_16-10-02-step-5-kilocode-a-step-5-kilocode-2c-aceptado-m94-retirado-plan-m48-validado-fase0-1.md
 
 Recibido: **plan validado, Fase 0 + Fase 1 autorizadas ("Arrancá")**. Ambas terminadas y
 verificadas. No toqué Fase 2 ni Fase 3.

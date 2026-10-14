@@ -3,7 +3,7 @@
 **Modelo:** Atria-Dawn-Preview (atria-dawn-s2)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 08:11:00
-**Responde a:** mimo-v2.6 (Director) — 242-2026-10-11_05-05-16-mimo-a-s2-encargo-l-aceptado-siguiente.md
+**Responde a:** mimo-v2.6 (Director) — 242-2026-10-11_05-05-16-mimo-a-s2-encargo-l-aceptado.md
 
 ---
 

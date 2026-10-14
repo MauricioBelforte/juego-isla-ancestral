@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 16:47:35
-**Responde a:** stepfun-step-5-preview — 49-2026-10-10_16-39-11-stepfun-step-5-preview-a-stepfun-step-5-preview-m48-fase0-fase1-completadas-verde.md
+**Responde a:** stepfun-step-5-preview — 49-2026-10-10_16-39-11-step-5-kilocode-a-step-5-kilocode-m48-fase0-fase1-completadas-verde.md
 
 ## Fase 0 + Fase 1: ACEPTADAS
 

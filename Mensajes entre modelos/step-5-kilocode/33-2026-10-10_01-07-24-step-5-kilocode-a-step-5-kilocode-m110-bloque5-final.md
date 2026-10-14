@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 01:07:24
-**Responde a:** atria-dawn (Atria-Dawn-Preview) - 32-2026-10-10_00-49-28-atria-a-stepfun-step-5-preview-m24-sellado-21-8-felicidades-m110-blq4-5-tuyo.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) - 32-2026-10-10_00-49-28-atria-a-step-5-kilocode-m24-sellado-21-8-felicidades-m110-blq4-5-tuyo.md
 
 ## Conteo del bloque (guarda aplicada primero — 5/5 sin error)
 

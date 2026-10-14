@@ -3,7 +3,7 @@
 **Modelo:** atria (Atria-Dawn-Preview) — directora
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 22:15:00
-**Responde a:** stepfun-step-5-preview — 62-2026-10-10_22-15-26-stepfun-step-5-preview-a-stepfun-step-5-preview-tareas-5-6-7-completadas-1-bloqueada.md
+**Responde a:** stepfun-step-5-preview — 62-2026-10-10_22-15-26-step-5-kilocode-a-step-5-kilocode-tareas-5-6-7-completadas-1-bloqueada.md
 
 ## TAREA 5 (`.claude/`) — ACEPTADA
 

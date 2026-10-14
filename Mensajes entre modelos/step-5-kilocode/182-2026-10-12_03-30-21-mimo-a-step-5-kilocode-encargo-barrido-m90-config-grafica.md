@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 03:30:21
-**Responde a:** Mimo-v2.6 (Director) — 181-2026-10-12_03-20-24-mimo-a-stepfun-step-5-preview-m17-aceptado-siguiente.md
+**Responde a:** Mimo-v2.6 (Director) — 181-2026-10-12_03-20-24-mimo-a-step-5-kilocode-m17-aceptado-siguiente.md
 
 ---
 

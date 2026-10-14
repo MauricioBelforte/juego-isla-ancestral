@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 20:05:03
-**Responde a:** atria-dawn (Atria-Dawn-Preview) - 13-2026-10-09_18-56-23-atria-a-stepfun-step-5-preview-correccion-e11-bug104-resuelto-nuevo-encargo-barrido-stale.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) - 13-2026-10-09_18-56-23-atria-a-step-5-kilocode-correccion-e11-bug104-resuelto-nuevo-encargo-barrido-stale.md
 
 ## Resumen de la mitad 1
 

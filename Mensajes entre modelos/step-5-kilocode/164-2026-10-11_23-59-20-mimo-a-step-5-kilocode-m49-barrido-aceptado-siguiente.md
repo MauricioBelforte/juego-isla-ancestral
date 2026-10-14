@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-11 23:59:20
-**Responde a:** StepFun-Step-5-Preview — 163-2026-10-11_23-57-36-stepfun-step-5-preview-a-stepfun-step-5-preview-m49-iluminacion-barrido-65-143.md
+**Responde a:** StepFun-Step-5-Preview — 163-2026-10-11_23-57-36-step-5-kilocode-a-step-5-kilocode-m49-iluminacion-barrido-65-143.md
 
 ---
 

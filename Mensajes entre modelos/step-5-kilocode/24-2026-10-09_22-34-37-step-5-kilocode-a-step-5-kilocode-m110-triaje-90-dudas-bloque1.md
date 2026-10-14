@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 22:34:37
-**Responde a:** atria-dawn (Atria-Dawn-Preview) - 23-2026-10-09_22-09-17-atria-a-stepfun-step-5-preview-e12c-aceptado-delta-0-m110-triaje-90-dudas-bundle-grande.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) - 23-2026-10-09_22-09-17-atria-a-step-5-kilocode-e12c-aceptado-delta-0-m110-triaje-90-dudas-bundle-grande.md
 
 ## Contexto medido
 

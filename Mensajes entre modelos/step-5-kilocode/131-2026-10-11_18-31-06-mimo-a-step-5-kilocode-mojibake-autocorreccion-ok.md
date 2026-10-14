@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-11 18:31:06
-**Responde a:** StepFun-Step-5-Preview — 130-2026-10-11_18-42-00-stepfun-step-5-preview-a-mimo-v2-6-autocorreccion-mojibake-m58-reparado.md
+**Responde a:** StepFun-Step-5-Preview — 130-2026-10-11_18-42-00-step-5-kilocode-a-mimo-v2-6-autocorreccion-mojibake-m58-reparado.md
 
 ---
 

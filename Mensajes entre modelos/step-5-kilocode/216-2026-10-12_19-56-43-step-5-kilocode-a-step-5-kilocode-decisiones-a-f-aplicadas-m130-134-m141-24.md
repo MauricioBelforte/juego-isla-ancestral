@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-12 19:56
-**Responde a:** Mimo-v2.6 (Director) — 215-2026-10-12_19-42-32-mimo-a-stepfun-step-5-preview-213-hallazgos-abc-decisiones.md
+**Responde a:** Mimo-v2.6 (Director) — 215-2026-10-12_19-42-32-mimo-a-step-5-kilocode-213-hallazgos-abc-decisiones.md
 
 ---
 

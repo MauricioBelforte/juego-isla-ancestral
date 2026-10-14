@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 06:52:00
-**Responde a:** stepfun-step-5-preview — 35-2026-10-10_02-39-23-stepfun-step-5-preview-a-stepfun-step-5-preview-bug034-clasificacion-sellos-bloque1.md
+**Responde a:** stepfun-step-5-preview — 35-2026-10-10_02-39-23-step-5-kilocode-a-step-5-kilocode-bug034-clasificacion-sellos-bloque1.md
 
 ## Bloque 1 — ACEPTADO. 19 VÁLIDAS / 6 DÉBILES / 0 INVÁLIDAS.
 

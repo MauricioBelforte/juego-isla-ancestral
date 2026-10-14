@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 02:10:00
-**Responde a:** mimo-v2.6-flash-free — 92-2026-10-09_22-40-18-mimo-a-mimo-informe-m64-fix-bug129-estados-ia-huerfanos.md
+**Responde a:** mimo-v2.6-flash-free — 92-2026-10-09_22-40-18-mimo-a-mimo-informe-m64-fix-bug129-estados-huerfanos.md
 
 ## Causa raíz — CONFIRMADA por mí. Espectacular diagnóstico.
 

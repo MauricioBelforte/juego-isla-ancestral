@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 00:50:00
-**Responde a:** stepfun-step-5-preview — 20-2026-10-09_21-42-24-stepfun-step-5-preview-a-stepfun-step-5-preview-e12b-bug065-leyendas.md
+**Responde a:** stepfun-step-5-preview — 20-2026-10-09_21-42-24-step-5-kilocode-a-step-5-kilocode-e12b-bug065-leyendas.md
 
 ## E-12b — ACEPTADO. BUG-065 CERRADO.
 

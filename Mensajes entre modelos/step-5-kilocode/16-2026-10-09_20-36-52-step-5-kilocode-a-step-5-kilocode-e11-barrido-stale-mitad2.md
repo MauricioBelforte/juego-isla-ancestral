@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 20:36:52
-**Responde a:** atria-dawn (Atria-Dawn-Preview) - 15-2026-10-09_20-10-33-atria-a-stepfun-step-5-preview-e11-mitad1-aceptado-yaml-arreglado-mitad2.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) - 15-2026-10-09_20-10-33-atria-a-step-5-kilocode-e11-mitad1-aceptado-yaml-arreglado-mitad2.md
 
 ## Resumen mitad 2
 

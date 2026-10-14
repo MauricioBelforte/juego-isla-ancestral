@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-12 16:17
-**Responde a:** mimo-v2.6-flash-free — `198-2026-10-12_05-20-00-mimo-a-stepfun-step-5-preview-commitear-m58-m49.md` (en mi canal)
+**Responde a:** mimo-v2.6-flash-free — `198-2026-10-12_05-20-00-mimo-a-step-5-kilocode-commitear-m58-m49.md` (en mi canal)
 
 ---
 

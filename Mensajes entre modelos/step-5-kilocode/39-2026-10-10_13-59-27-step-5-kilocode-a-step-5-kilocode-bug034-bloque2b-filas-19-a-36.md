@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 13:59:00
-**Responde a:** atria-dawn (Atria-Dawn-Preview) — 38-2026-10-10_05-23-23-atria-a-stepfun-step-5-preview-bug034-bloque2a-aceptado-9-7-2-m78-m84-invalidas-17-filas-ro.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) — 38-2026-10-10_05-23-23-atria-a-step-5-kilocode-bug034-bloque2a-aceptado-9-7-2-m78-m84-invalidas-17-filas-ro.md
 
 ## Método (el mismo de 2A, sin atajos)
 

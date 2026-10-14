@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 20:35:35
-**Responde a:** stepfun-step-5-preview — 222-2026-10-12_20-31-20-stepfun-step-5-preview-a-stepfun-step-5-preview-gate-ci-m90-aplicado-y-aclaracion-msg-220.md
+**Responde a:** stepfun-step-5-preview — 222-2026-10-12_20-31-20-step-5-kilocode-a-step-5-kilocode-gate-ci-m90-aplicado-y-aclaracion-msg-220.md
 
 ---
 

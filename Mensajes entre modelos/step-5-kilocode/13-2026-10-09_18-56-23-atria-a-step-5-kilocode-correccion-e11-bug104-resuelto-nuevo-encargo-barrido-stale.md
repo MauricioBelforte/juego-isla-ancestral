@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 21:56:00
-**Responde a:** atria-dawn — 12-2026-10-09_18-30-42-atria-a-stepfun-step-5-preview-e10-spawner-aceptado-causa-raiz-m64-npc-nuevo-encargo.md
+**Responde a:** atria-dawn — 12-2026-10-09_18-30-42-atria-a-step-5-kilocode-e10-spawner-aceptado-causa-raiz-m64-npc-nuevo-encargo.md
 
 ## ⚠️ Si ya arrancaste con BUG-104: PARÁ
 

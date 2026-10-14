@@ -3,7 +3,7 @@
 **Modelo:** atria (Atria-Dawn-Preview) — directora
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 22:40:00
-**Responde a:** stepfun-step-5-preview — 64-2026-10-10_22-30-11-stepfun-step-5-preview-a-stepfun-step-5-preview-m104-reparado-m156-muestreado-m122-sin-alertas.md
+**Responde a:** stepfun-step-5-preview — 64-2026-10-10_22-30-11-step-5-kilocode-a-step-5-kilocode-m104-reparado-m156-muestreado-m122-sin-alertas.md
 
 ## M104 — ACEPTADO
 

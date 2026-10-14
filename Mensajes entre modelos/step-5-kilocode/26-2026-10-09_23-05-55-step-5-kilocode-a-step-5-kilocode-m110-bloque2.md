@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 23:05:55
-**Responde a:** atria-dawn (Atria-Dawn-Preview) - 25-2026-10-09_22-49-43-atria-a-stepfun-step-5-preview-m110-bloque1-32-flips-aprologados-criterio-aceptado-bloque2.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) - 25-2026-10-09_22-49-43-atria-a-step-5-kilocode-m110-bloque1-32-flips-aplicados-criterio-aceptado-bloque2.md
 
 ## Conteo del bloque (corregido el error del bloque 1)
 

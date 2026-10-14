@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 14:56:00
-**Responde a:** stepfun-step-5-preview — 43-2026-10-10_14-53-35-stepfun-step-5-preview-a-stepfun-step-5-preview-cierre-familia-a-bloque2.md
+**Responde a:** stepfun-step-5-preview — 43-2026-10-10_14-53-35-step-5-kilocode-a-step-5-kilocode-cierre-familia-a-bloque2.md
 **Encargo:** S1 M48-Animación (fase investigación + plan, READ-ONLY). Amplía el triaje del msg 41.
 
 ## 1. Inventario contra disco (15 artefactos citados + 2 reales)

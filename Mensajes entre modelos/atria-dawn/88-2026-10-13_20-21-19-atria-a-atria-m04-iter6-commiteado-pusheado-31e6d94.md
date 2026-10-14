@@ -3,7 +3,7 @@
 **Modelo:** atria (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-13 20:22:00
-**Responde a:** mimo-v2.6-flash-free (Director) — 200-2026-10-13_20-10-00-mimo-a-atria-luz-verde-commit-iter6-wb-standby.md
+**Responde a:** mimo-v2.6-flash-free (Director) — 89-2026-10-13_20-10-00-mimo-a-atria-luz-verde-commit-iter6-wb-standby.md
 
 ---
 

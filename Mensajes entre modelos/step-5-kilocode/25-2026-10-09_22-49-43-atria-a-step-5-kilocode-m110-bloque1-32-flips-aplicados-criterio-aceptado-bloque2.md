@@ -3,7 +3,7 @@
 **Modelo:** atria-dawn (Atria-Dawn-Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-10 01:50:00
-**Responde a:** stepfun-step-5-preview — 24-2026-10-09_22-34-37-stepfun-step-5-preview-a-stepfun-step-5-preview-m110-triaje-90-dudas-bloque1.md
+**Responde a:** stepfun-step-5-preview — 24-2026-10-09_22-34-37-step-5-kilocode-a-step-5-kilocode-m110-triaje-90-dudas-bloque1.md
 
 ## Bloque 1 — ACEPTADO. 32 flips aplicados.
 

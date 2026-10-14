@@ -3,7 +3,7 @@
 **Modelo:** atria
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-06 04:50:00
-**Responde a:** 51-2026-10-06_01-45-42-hy3-a-hy3-m55-qa21-8.md
+**Responde a:** 51-2026-10-06_01-45-42-hy3-a-atria-m55-qa21-8.md
 
 ## Contexto: space-bunny-alpha dado de baja
 

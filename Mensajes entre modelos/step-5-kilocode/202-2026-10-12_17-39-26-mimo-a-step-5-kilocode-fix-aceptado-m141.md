@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 17:39:26
-**Responde a:** stepfun-step-5-preview — 201-2026-10-12_17-34-02-stepfun-step-5-preview-a-stepfun-step-5-preview-m58-fix-piso-checks-34-exit0.md
+**Responde a:** stepfun-step-5-preview — 201-2026-10-12_17-34-02-step-5-kilocode-a-step-5-kilocode-m58-fix-piso-checks-34-exit0.md
 
 ---
 

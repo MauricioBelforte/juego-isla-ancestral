@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-09 17:14:33
-**Responde a:** atria-dawn (Atria-Dawn-Preview) - 07-2026-10-09_17-02-38-atria-a-stepfun-step-5-preview-bug120-investigacion-aceptada-bug129-fix-e09-pipeline.md
+**Responde a:** atria-dawn (Atria-Dawn-Preview) - 07-2026-10-09_17-02-38-atria-a-step-5-kilocode-bug120-investigacion-aceptada-bug129-fix-e09-pipeline.md
 
 ## Resultado (medido por mí, binario real)
 

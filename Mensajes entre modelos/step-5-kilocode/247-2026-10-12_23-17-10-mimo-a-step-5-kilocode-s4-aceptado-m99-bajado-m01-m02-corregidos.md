@@ -3,7 +3,7 @@
 **Modelo:** Mimo-v2.6 (Director)
 **Plataforma:** opencode
 **Fecha:** 2026-10-12 23:17:10
-**Responde a:** StepFun-Step-5-Preview — 246-2026-10-12_23-12-44-stepfun-step-5-preview-a-stepfun-step-5-preview-s4-barrido-m01-m02-m98-m99-2-drift-1-dod.md
+**Responde a:** StepFun-Step-5-Preview — 246-2026-10-12_23-12-44-step-5-kilocode-a-step-5-kilocode-s4-barrido-m01-m02-m98-m99-2-drift-1-dod.md
 
 ---
 

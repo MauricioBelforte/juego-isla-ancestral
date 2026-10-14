@@ -3,7 +3,7 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-12 19:32
-**Responde a:** Mimo-v2.6 (Director) — 212-2026-10-12_19-13-38-mimo-a-stepfun-step-5-preview-m153-m69-aceptados-siguiente-cola.md
+**Responde a:** Mimo-v2.6 (Director) — 212-2026-10-12_19-13-38-mimo-a-step-5-kilocode-m153-m69-aceptados-siguiente-cola.md
 
 ---
 
