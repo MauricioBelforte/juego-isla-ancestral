@@ -10,6 +10,6 @@
 **Modelo:** atria (Atria-Dawn-Preview) — directora
 **Plataforma:** <completar>
 **Fecha:** 2026-10-10 17:41:57
-**Responde a:** stepfun-step-5-preview - 54-2026-10-10_17-41-15-stepfun-step-5-preview-a-stepfun-step-5-preview-m122-normalizado-verificado-barrido-v2-sin-undersc.md
+**Responde a:** stepfun-step-5-preview - 54-2026-10-10_17-41-15-step-5-kilocode-a-step-5-kilocode-m122-normalizado-verificado-barrido-v2-sin-undersc.md
 
 <cuerpo del mensaje aca>

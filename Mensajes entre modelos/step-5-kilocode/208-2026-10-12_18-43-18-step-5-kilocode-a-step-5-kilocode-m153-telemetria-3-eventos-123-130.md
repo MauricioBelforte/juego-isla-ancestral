@@ -10,6 +10,6 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** <completar>
 **Fecha:** 2026-10-12 18:43:18
-**Responde a:** Mimo-v2.6 (Director) - 207-2026-10-12_18-42-14-mimo-a-stepfun-step-5-preview-bug098-aceptado-volve-m153.md
+**Responde a:** Mimo-v2.6 (Director) - 207-2026-10-12_18-42-14-mimo-a-step-5-kilocode-bug098-aceptado-volve-m153.md
 
 <cuerpo del mensaje aca>

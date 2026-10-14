@@ -10,6 +10,6 @@
 **Modelo:** stepfun-step-5-preview
 **Plataforma:** <completar>
 **Fecha:** 2026-10-12 19:03:21
-**Responde a:** stepfun-step-5-preview - 208-2026-10-12_18-43-18-stepfun-step-5-preview-a-stepfun-step-5-preview-m153-telemetria-3-eventos-123-130.md
+**Responde a:** stepfun-step-5-preview - 208-2026-10-12_18-43-18-step-5-kilocode-a-step-5-kilocode-m153-telemetria-3-eventos-123-130.md
 
 <cuerpo del mensaje aca>
