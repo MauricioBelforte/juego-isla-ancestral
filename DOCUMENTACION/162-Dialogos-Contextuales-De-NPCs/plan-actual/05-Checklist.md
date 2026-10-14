@@ -65,12 +65,12 @@
 - [x] 28. Documentar diálogos del Animador de la Plaza (NPC-RIZ-008) — 8 capítulos
 - [x] 29. Verificar coherencia del Mayor con eventos de M22 por capítulo
 - [x] 30. Verificar coherencia del Viejo Sabio con misterios de M22
-- [?] 31. Verificar que el Carpintero refleje progresión de herramientas T1
-- [?] 32. Verificar que la Vendedora refleje cambios económicos por capítulo
-- [?] 33. Verificar que el Pescador refleje cambios en el mar por capítulo
-- [?] 34. Verificar que la Agricultora refleje impacto de cenizas en cultivos
-- [?] 35. Verificar que la Niña tenga diálogos innocent-appropriate
-- [?] 36. Verificar que el Animador mencione eventos/festivales relevantes
+- [?] 31. Verificar que el Carpintero refleje progresión de herramientas T1 | AUDIT 2026-10-14 (step-5-kilocode): reflejo parcial — ContextualDialogueManager recibe amistad_<slug> (M20) y capitulo (M22); la progresion de herramientas T1 (M13) NO es dimension del selector (L7-16). Sin verificacion por herramienta.
+- [?] 32. Verificar que la Vendedora refleje cambios económicos por capítulo | AUDIT 2026-10-14 (step-5-kilocode): el selector usa flag_capitulo (M22) como proxy de cambios economicos; no hay dimension economica directa (M38). Parcial por capitulo.
+- [?] 33. Verificar que el Pescador refleje cambios en el mar por capítulo | AUDIT 2026-10-14 (step-5-kilocode): sin dimension de mar/pesca en el selector; los 367 grafos cubren SALUDO/HISTORIA/MISION/AMBIENTE/AMISTAD/ESTACIONAL/HORA. No verificable.
+- [?] 34. Verificar que la Agricultora refleje impacto de cenizas en cultivos | AUDIT 2026-10-14 (step-5-kilocode): cen_001-005 existen con grafos por capitulo (5 NPCs), pero el 'impacto de cenizas' como estado de M32/M15 no es dimension del selector. No verificable.
+- [?] 35. Verificar que la Niña tenga diálogos innocent-appropriate | AUDIT 2026-10-14 (step-5-kilocode): no hay etiqueta de edad/inappropriate en los datos ni en el selector; la adecuacion es de contenido (M21/M148), no verificable por estructura.
+- [?] 36. Verificar que el Animador mencione eventos/festivales relevantes | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de feria/festival en contextual_dialogue_manager.gd; los eventos son de M74 y no alimentan el selector de M162. No verificable.
 - [x] 37. Crear JSON del Mayor (NPC-RIZ-001)
 - [x] 38. Crear JSON del Carpintero (NPC-RIZ-002)
 - [x] 39. Crear JSON de la Vendedora (NPC-RIZ-003)
@@ -81,12 +81,12 @@
 - [x] 44. Crear JSON del Animador (NPC-RIZ-008)
 - [x] 45. Verificar que ningún diálogo de RIZ revele información de capítulos futuros
 - [x] 46. Verificar que los saludos del Mayor sean consistentes entre capítulos
-- [?] 47. Verificar que las misiones del Carpintero sean completables
+- [?] 47. Verificar que las misiones del Carpintero sean completables | AUDIT 2026-10-14 (step-5-kilocode): hay 19 grafos tipo MISION; la completabilidad depende de las cadenas de M23 (datos verificados) pero no hay test que cruce mision de dialogo con cadena completable.
 - [x] 48. Verificar que los secretos del Sabio se revelen gradualmente
-- [?] 49. Verificar que la Agricultora tenga remedios por estación
-- [?] 50. Verificar que el Animador mencione festivales de M29
-- [?] 51. Verificar que la Vendedora tenga stock coherente con capítulo
-- [?] 52. Verificar que el Pescador mencione peces de M160
+- [?] 49. Verificar que la Agricultora tenga remedios por estación | AUDIT 2026-10-14 (step-5-kilocode): hay grafos ESTACIONALES (generados por gen_m162_estaciones.py) y la dimension estacion (M29) si alimenta el selector; el contenido 'remedios' no se verifico nodo por nodo.
+- [?] 50. Verificar que el Animador mencione festivales de M29 | AUDIT 2026-10-14 (step-5-kilocode): idem — sin dimension de festivales en el selector; M29 alimenta hora/estacion/dia/mes, no eventos.
+- [?] 51. Verificar que la Vendedora tenga stock coherente con capítulo | AUDIT 2026-10-14 (step-5-kilocode): sin dimension de stock/economia en M162; la coherencia de stock es de M38/M16.
+- [?] 52. Verificar que el Pescador mencione peces de M160 | AUDIT 2026-10-14 (step-5-kilocode): solo 2 de 367 grafos mencionan 'pez'; M160 no tiene datos de peces en data/ (no existe data/m160). Mencion no verificable.
 
 ---
 
@@ -97,21 +97,21 @@
 - [x] 55. Documentar diálogos del Comerciante Viajero (NPC-COR-003) — 8 capítulos
 - [x] 56. Documentar diálogos del Guardia del Puerto (NPC-COR-004) — 8 capítulos
 - [x] 57. Documentar diálogos de la Niña de la Playa (NPC-COR-005) — 8 capítulos
-- [?] 58. Verificar coherencia del Herrero con sistema de forja de M158
-- [?] 59. Verificar que la Pescadora mencione arrecifes de M160
-- [?] 60. Verificar que el Comerciante refleje precios progresivos de M38
-- [?] 61. Verificar que el Guardia mencione rutas de M160
-- [?] 62. Verificar que la Niña de la Playa tenga diálogos innocent-appropriate
+- [?] 58. Verificar coherencia del Herrero con sistema de forja de M158 | AUDIT 2026-10-14 (step-5-kilocode): 4 de 367 grafos mencionan 'forja'; M158 no tiene datos en data/ (no existe data/m158). Coherencia no verificable.
+- [?] 59. Verificar que la Pescadora mencione arrecifes de M160 | AUDIT 2026-10-14 (step-5-kilocode): 3 de 367 grafos mencionan 'arrecife'; M160 no tiene datos de arrecifes en disco. No verificable.
+- [?] 60. Verificar que el Comerciante refleje precios progresivos de M38 | AUDIT 2026-10-14 (step-5-kilocode): 0 de 367 grafos mencionan 'precio'; la dimension economica de M38 no alimenta el selector de M162. No verificable.
+- [?] 61. Verificar que el Guardia mencione rutas de M160 | AUDIT 2026-10-14 (step-5-kilocode): 3 de 367 grafos mencionan 'ruta'; data/viajes/rutas.json existe (820 B) pero es de transporte (M69), no de M160. Mencion laxa.
+- [?] 62. Verificar que la Niña de la Playa tenga diálogos innocent-appropriate | AUDIT 2026-10-14 (step-5-kilocode): idem item 35 — sin etiqueta de adecuacion por edad en datos ni selector. No verificable por estructura.
 - [x] 63. Crear JSON del Herrero (NPC-COR-001)
 - [x] 64. Crear JSON de la Pescadora (NPC-COR-002)
 - [x] 65. Crear JSON del Comerciante (NPC-COR-003)
 - [x] 66. Crear JSON del Guardia (NPC-COR-004)
 - [x] 67. Crear JSON de la Niña de la Playa (NPC-COR-005)
-- [?] 68. Verificar que el Herrero mencione cobre de Coral
-- [?] 69. Verificar que el Comerciante tenga items exclusivos de Coral
-- [?] 70. Verificar que el Guardia mencione peligros del arrecife
-- [?] 71. Verificar que la Pescadora tenga tips de pesca por capítulo
-- [?] 72. Verificar coherencia de COR con eventos de M22
+- [?] 68. Verificar que el Herrero mencione cobre de Coral | AUDIT 2026-10-14 (step-5-kilocode): 4 de 367 grafos mencionan 'cobre'; la mencion existe pero el vinculo con el cobre de Coral (M15/M160) no esta explicitado.
+- [?] 69. Verificar que el Comerciante tenga items exclusivos de Coral | AUDIT 2026-10-14 (step-5-kilocode): sin dimension de items/stock en M162; los items exclusivos son de M15/M38.
+- [?] 70. Verificar que el Guardia mencione peligros del arrecife | AUDIT 2026-10-14 (step-5-kilocode): 6 de 367 grafos mencionan 'peligro'; mencion generica, no especifica del arrecife. No verificable.
+- [?] 71. Verificar que la Pescadora tenga tips de pesca por capítulo | AUDIT 2026-10-14 (step-5-kilocode): los grafos de cor_003/004/005 existen por capitulo (cap0-cap7); el contenido 'tips de pesca' no se verifico nodo por nodo.
+- [?] 72. Verificar coherencia de COR con eventos de M22 | AUDIT 2026-10-14 (step-5-kilocode): la dimension flag_capitulo (M22, 0-7) SI alimenta el selector (L13); los grafos de cor_001-005 existen por capitulo. Coherencia por capitulo respaldada; por evento (M74) no.
 
 ---
 
@@ -122,21 +122,21 @@
 - [x] 75. Documentar diálogos de la Cocinera del Pueblo (NPC-CEN-003) — 8 capítulos
 - [x] 76. Documentar diálogos del Bibliotecario (NPC-CEN-004) — 8 capítulos
 - [x] 77. Documentar diálogos del Guardia de la Mina (NPC-CEN-005) — 8 capítulos
-- [?] 78. Verificar coherencia del Herrero Avanzado con sistema de hierro de M158
-- [?] 79. Verificar que el Minero mencione minerales de M160
-- [?] 80. Verificar que la Cocinera tenga recetas por capítulo
-- [?] 81. Verificar que el Bibliotecario revele lore gradual de M22
-- [?] 82. Verificar que el Guardia mencione la mina de M160
+- [?] 78. Verificar coherencia del Herrero Avanzado con sistema de hierro de M158 | AUDIT 2026-10-14 (step-5-kilocode): 4 grafos mencionan 'forja'; M158 no tiene datos en disco (no existe data/m158). Coherencia no verificable.
+- [?] 79. Verificar que el Minero mencione minerales de M160 | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de 'mineral' en los 367 grafos; M160 no tiene datos de minerales en disco. No verificable.
+- [?] 80. Verificar que la Cocinera tenga recetas por capítulo | AUDIT 2026-10-14 (step-5-kilocode): grafos de cen_003 existen por capitulo; el contenido 'recetas' no se verifico nodo por nodo. Parcial.
+- [?] 81. Verificar que el Bibliotecario revele lore gradual de M22 | AUDIT 2026-10-14 (step-5-kilocode): la dimension flag_capitulo (M22) permite revelado gradual por capitulo; el contenido lore del Bibliotecario no se verifico nodo por nodo. Parcial.
+- [?] 82. Verificar que el Guardia mencione la mina de M160 | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de 'mina' en los 367 grafos; M160 no tiene datos de mina en disco. No verificable.
 - [x] 83. Crear JSON del Herrero Avanzado (NPC-CEN-001)
 - [x] 84. Crear JSON del Minero (NPC-CEN-002)
 - [x] 85. Crear JSON de la Cocinera (NPC-CEN-003)
 - [x] 86. Crear JSON del Bibliotecario (NPC-CEN-004)
 - [x] 87. Crear JSON del Guardia de la Mina (NPC-CEN-005)
-- [?] 88. Verificar que el Bibliotecario mencione cenizas de biblioteca antigua
-- [?] 89. Verificar que el Herrero tenga hierro de Ceniza
-- [?] 90. Verificar que la Cocinera mencione ingredientes de CEN
-- [?] 91. Verificar que el Minero tenga misiones de exploración
-- [?] 92. Verificar coherencia de CEN con eventos de M22
+- [?] 88. Verificar que el Bibliotecario mencione cenizas de biblioteca antigua | AUDIT 2026-10-14 (step-5-kilocode): grafos de cen_004 existen por capitulo; el contenido 'cenizas de biblioteca' no se verifico nodo por nodo.
+- [?] 89. Verificar que el Herrero tenga hierro de Ceniza | AUDIT 2026-10-14 (step-5-kilocode): 4 grafos mencionan 'forja'; el hierro de Ceniza como material de M158 no tiene datos en disco. No verificable.
+- [?] 90. Verificar que la Cocinera mencione ingredientes de CEN | AUDIT 2026-10-14 (step-5-kilocode): grafos de cen_003 existen; ingredientes de CEN como datos de M15/M160 no estan en disco. No verificable.
+- [?] 91. Verificar que el Minero tenga misiones de exploración | AUDIT 2026-10-14 (step-5-kilocode): hay 19 grafos tipo MISION en el registro; misiones de exploracion del Minero no se verificaron contra cadenas de M23.
+- [?] 92. Verificar coherencia de CEN con eventos de M22 | AUDIT 2026-10-14 (step-5-kilocode): flag_capitulo (M22) SI alimenta el selector; grafos de cen_001-005 por capitulo. Coherencia por capitulo respaldada; por evento (M74) no.
 
 ---
 
@@ -147,10 +147,10 @@
 - [x] 95. Documentar diálogos del Guardia Ancestral (NPC-AUR-003) — 8 capítulos
 - [x] 96. Documentar diálogos del Artista del Pueblo (NPC-AUR-004) — 8 capítulos
 - [x] 97. Documentar diálogos del Viajero Misterioso (NPC-AUR-005) — 8 capítulos
-- [?] 98. Verificar coherencia del Encantador con sistema de encantamientos de M158
-- [?] 99. Verificar que la Sanadora tenga pociones por capítulo
-- [?] 100. Verificar que el Guardia Ancestral mencione el templo de M160
-- [?] 101. Verificar que el Artista mencione ubicaciones de M160
+- [?] 98. Verificar coherencia del Encantador con sistema de encantamientos de M158 | AUDIT 2026-10-14 (step-5-kilocode): M158 sin datos en disco (no existe data/m158). No verificable.
+- [?] 99. Verificar que la Sanadora tenga pociones por capítulo | AUDIT 2026-10-14 (step-5-kilocode): grafos de cen_005 existen por capitulo; contenido 'pociones' no verificado nodo por nodo.
+- [?] 100. Verificar que el Guardia Ancestral mencione el templo de M160 | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de 'templo' en los 367 grafos; M160 sin datos de templo en disco. No verificable.
+- [?] 101. Verificar que el Artista mencione ubicaciones de M160 | AUDIT 2026-10-14 (step-5-kilocode): M160 sin datos de ubicaciones en disco. No verificable.
 - [x] 102. Verificar que el Viajero Misterioso tenga arco narrativo propio
 - [x] 103. Crear JSON del Encantador (NPC-AUR-001)
 - [x] 104. Crear JSON de la Sanadora (NPC-AUR-002)
@@ -158,10 +158,10 @@
 - [x] 106. Crear JSON del Artista (NPC-AUR-004)
 - [x] 107. Crear JSON del Viajero Misterioso (NPC-AUR-005)
 - [x] 108. Verificar que el Viajero Misterioso revele identidad gradualmente
-- [?] 109. Verificar que el Encantador mencione magia de AUR
-- [?] 110. Verificar que la Sanadora tenga remedios de hierbas de AUR
-- [?] 111. Verificar coherencia de AUR con eventos de M22
-- [?] 112. Verificar que el Guardia Ancestral proteja templo consistentemente
+- [?] 109. Verificar que el Encantador mencione magia de AUR | AUDIT 2026-10-14 (step-5-kilocode): grafos de aur_005 existen; 'magia de AUR' como contenido no verificado nodo por nodo.
+- [?] 110. Verificar que la Sanadora tenga remedios de hierbas de AUR | AUDIT 2026-10-14 (step-5-kilocode): grafos ESTACIONALES de aur_003 existen (gen_m162_estaciones.py); contenido 'remedios de hierbas' no verificado.
+- [?] 111. Verificar coherencia de AUR con eventos de M22 | AUDIT 2026-10-14 (step-5-kilocode): flag_capitulo (M22) alimenta el selector; grafos de aur_001-005 por capitulo. Por capitulo respaldada; por evento no.
+- [?] 112. Verificar que el Guardia Ancestral proteja templo consistentemente | AUDIT 2026-10-14 (step-5-kilocode): sin dimension de proteccion/templo en el selector; no verificable por estructura.
 
 ---
 
@@ -170,7 +170,7 @@
 - [x] 113. Verificar que DialogueManager.get_dialogue() retorna diálogo válido para cada NPC en cada capítulo (selector `ContextualDialogueManager.seleccionar` + simulación 8/8 OK)
 - [x] 114. Verificar que las condiciones de amistad filtran correctamente (0-29, 30-69, 70-100) — mecanismo listo, contenido por nivel de amistad pendiente
 - [x] 115. Verificar que las estaciones generan diálogos diferentes (variante PRIMAVERA del Mayor demostrada)
-- [?] 116. Verificar que las franjas horarias generan diálogos diferentes — mecanismo listo, contenido por hora pendiente
+- [?] 116. Verificar que las franjas horarias generan diálogos diferentes — mecanismo listo, contenido por hora pendiente | AUDIT 2026-10-14 (step-5-kilocode): la dimension hora/es_de_noche SI alimenta el selector (L15) y hay 23 grafos generados por noche (gen_m162_noche.py); las franjas horarias completas y el conteo esperado no estan definidos como dato verificable.
 - [x] 117. Verificar que el fallback funciona cuando no hay diálogo válido (simulado: Viajero diurno, NPC sin HISTORIA)
 - [x] 118. Verificar que ningún diálogo contradice la historia de M22 (contenido alineado capítulo a capítulo)
 - [x] 119. Verificar que los 23 JSONs tienen formato consistente (todos grafos M21 validados)
