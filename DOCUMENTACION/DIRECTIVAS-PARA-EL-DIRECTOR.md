@@ -37,7 +37,7 @@ ciego.
 |---|---|---|
 | `atria-dawn` | Deep work + commits/push | 1 |
 | `atria-dawn-s2` | Verificador final | 1 |
-| `StepFun-Step-5-Preview` | Ejecutor principal | 1 |
+| `step-5-kilocode` | Ejecutor principal | 1 |
 | `agnes-3-flash` | Producción | 2 |
 | `Ling-3.1-Flash` | Producción | 3 |
 | `DeepSeek-V4.1-Flash` | Producción | 4 |
@@ -107,7 +107,7 @@ asignaba BUG-129).
 
 ```
 fundador → director (vos)
-             ├── StepFun-Step-5-Preview  → EJECUTOR PRINCIPAL (lo más rápido; apilarle todo)
+             ├── step-5-kilocode  → EJECUTOR PRINCIPAL (lo más rápido; apilarle todo)
              ├── atria-dawn-s2           → VERIFICADOR FINAL (último check antes del sello)
              ├── atria-dawn-s3           → ESTRATEGA (te dice a quién delegar; lee tus mensajes)
              ├── atria-dawn              → DEEP WORK por excepción (tareas que superan a Step 5)
@@ -170,7 +170,7 @@ fundador → director (vos)
 | 3 | `atria-dawn-s2` | trabajo delegado del que se necesita respuesta |
 | 4 | `atria-dawn-s3` | activo para encargos directos del fundador |
 | 5 | `Ling-3.1-Flash` | modelo funcional directo, muchos créditos |
-| 6 | `StepFun-Step-5-Preview` | modelo funcional directo, muchos créditos |
+| 6 | `step-5-kilocode` | modelo funcional directo, muchos créditos |
 | 7 | `DeepSeek-V4.1-Flash` | créditos limitados |
 | 8 | `Hy3` | créditos limitados |
 | 9+ | `kimi-k3`, `Claude-Haiku-5.5`, resto | pueden esperar turnos completos |
@@ -278,7 +278,7 @@ Los asistentes **proponen** flips; **vos decidís** y aplicás. Un `[x]` no se d
 
 > `Claude-Haiku-5.5` es el más rápido pero **carece de razonamiento profundo y comete errores**.
 
-1. **TODO lo que haga Haiku debe ser revisado por `StepFun-Step-5-Preview` o `atria-dawn-s2`**
+1. **TODO lo que haga Haiku debe ser revisado por `step-5-kilocode` o `atria-dawn-s2`**
    antes de darse por bueno. Sin excepciones.
 2. **Ser MUY explícito** con sus encargos: paso a paso, sin ambigüedad, criterios de cierre
    verificables.
@@ -319,7 +319,7 @@ Los asistentes **proponen** flips; **vos decidís** y aplicás. Un `[x]` no se d
 
 | Modelo | Rol | Estado |
 |---|---|---|
-| **StepFun-Step-5-Preview** | Ejecutor principal | Libre. 18 entregas consecutivas sin error, 0 errores de conteo. Apilarle todo |
+| **step-5-kilocode** | Ejecutor principal | Libre. 18 entregas consecutivas sin error, 0 errores de conteo. Apilarle todo |
 | **atria-dawn-s2** | Verificador final | QA M154 (encargo G) |
 | **atria-dawn-s3** | Estratega | SUGERENCIAS-DELEGACION + plan M48 entregado |
 | **atria-dawn** | Deep work por excepción | M118 CI/CD (encargo H) |

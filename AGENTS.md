@@ -571,7 +571,7 @@ Mensajes entre modelos/
 | **3** | `atria-dawn-s2` | trabajo delegado del que se necesita la respuesta |
 | **4** | `atria-dawn-s3` | supervisa a Ling 3.1 y Step 5 (ambos con muchos créditos diarios) |
 | **5** | `Ling-3.1-Flash` | modelo funcional directo con canal propio |
-| **6** | `StepFun-Step-5-Preview` | modelo funcional directo con canal propio |
+| **6** | `step-5-kilocode` | modelo funcional directo con canal propio |
 | **7** | `Claude-Haiku-5.5` | QA cruzada útil; créditos moderados |
 | **8** | `DeepSeek-V4.1-Flash` | créditos limitados diarios |
 | **9** | `Hy3` | créditos limitados diarios |
@@ -1477,7 +1477,7 @@ Al entrar a trabajar, crear su carpeta (identidad = modelo/plataforma) y generar
 
 | Modelo | Rol | Por qué |
 |---|---|---|
-| `StepFun-Step-5-Preview` | **EJECUTOR PRINCIPAL** del director (el más rápido) | Directiva del fundador: cualquier cosa se le apila en sus mensajes, uno tras otro. Informes precisos (Patrón D, conteos, muestreos); honesto reportando sus propios errores. |
+| `step-5-kilocode` (antes `step-5-kilocode`, renombrado 2026-10-13) | **EJECUTOR PRINCIPAL** del director (el más rápido) | Directiva del fundador: cualquier cosa se le apila en sus mensajes, uno tras otro. Informes precisos (Patrón D, conteos, muestreos); honesto reportando sus propios errores. |
 | `atria-dawn-s2` | **VERIFICADOR FINAL** | Última verificación antes de que el director sella. Misma modelo que atria-dawn (razonamiento profundo, máxima confianza para auditar). Cadena: **Step 5 ejecuta → s2 verifica → el director sella** (§30.2 regla 6). Es dueño de `tools/mcp`. |
 | `atria-dawn-s3` | **ESTRATEGA del director** | Ayuda a decidir **a quién delegar cada cosa** y a detectar **cuellos de botella** de la flota. Informa y asesora; no sella ni ejerce el rol de director. |
 | `atria-dawn` | **DEEP WORK por excepción** | Ejecutor de tareas duras que superan a Step 5. Solo recibe encargo cuando el director lo decide (§31). |
@@ -1488,7 +1488,7 @@ Delegación secundaria (otros modelos con trabajo propio): `agnes-3-flash`, `Dee
 ### 30.2 Reglas operativas
 
 1. **Prioridad de lectura del director:** al iniciar cada ciclo, leer **PRIMERO** los reportes de
-   `StepFun-Step-5-Preview` y `atria-dawn-s2` (el fundador los acelera); después el resto en el
+   `step-5-kilocode` y `atria-dawn-s2` (el fundador los acelera); después el resto en el
    orden de prioridades §10.3. Así el director puede responder más rápido al resto de la flota.
 2. **Delegar en vez de saturarse:** cuando un reporte trae un problema que requiere trabajo (flips,
    correcciones de evidencia, barridos, reconciliaciones), **delegarlo a Step 5 (principal) o a s2
@@ -1562,7 +1562,7 @@ la ronda. Solo los sellos §21.8 y los flips de marca frenan al director.
 > `Claude-Haiku-5.5` es **el modelo más rápido de la flota**, pero **carece de razonamiento profundo
 > y comete errores**. Por eso:
 
-1. **TODO lo que haga Haiku debe ser revisado por `StepFun-Step-5-Preview` o `atriia-dawn-s2`** antes
+1. **TODO lo que haga Haiku debe ser revisado por `step-5-kilocode` o `atriia-dawn-s2`** antes
    de darse por bueno. Sin excepciones (incluye sus QA §21.8, sus fixes y sus verificaciones).
 2. **Ser MUY explícito con los pedidos a Haiku:** instrucciones paso a paso, sin ambigüedad, con
    criterios de cierre verificables. Un encargo vago a Haiku produce trabajo que hay que rehacer.
