@@ -7,11 +7,11 @@
 
 ## A. Setup del Proyecto
 
-- [ ] Definir escena `prototipo_isla.tscn` como escena principal [M]
-- [x] Definir carpeta `scenes/prototipo/` para todos los scripts del hito [S]
-- [ ] Definir autoload `game_state_proto.gd` (M59) [M]
-- [ ] Definir autoload `world_seed.gd` con seed fija 20260819 [S]
-- [ ] Definir carpeta `docs/prototipo/` para los reportes del hito [S]
+- [ ] Definir escena `prototipo_isla.tscn` como escena principal [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `prototipo_isla.tscn`; la escena principal en project.godot es `res://scenes/main_island.tscn`.
+- [ ] Definir carpeta `scenes/prototipo/` para todos los scripts del hito [S] — DEGRADADO 2026-10-14 (step-5-kilocode): verificado contra disco — la carpeta `game/isla-ancestral/scenes/prototipo/` NO existe (las carpetas de scenes/ son debug, museo, npc, player, terrain, terrenos, tests, ui). El script del hito tampoco existe. No inflado.
+- [ ] Definir autoload `game_state_proto.gd` (M59) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `game_state_proto.gd` (hay `GameState` y `save_*.gd` de producción, no el autoload del prototipo).
+- [ ] Definir autoload `world_seed.gd` con seed fija 20260819 [S] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `world_seed.gd` y hay 0 hits de la semilla fija 20260819 en scripts/.
+- [ ] Definir carpeta `docs/prototipo/` para los reportes del hito [S] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — la carpeta `game/isla-ancestral/docs/prototipo/` no existe (docs/ tiene 1 archivo suelto).
 
 ## B. Movimiento del Jugador (M11, RF1)
 
