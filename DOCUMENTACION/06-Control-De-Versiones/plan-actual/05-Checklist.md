@@ -22,7 +22,7 @@
 - [x] Documentar política de commits directos + excepciones (features de riesgo) [S]
 - [x] Verificar que el repo clona sin dependencias locales [S]
 - [x] Documentar el flujo de backup (remoto GitHub + zip mensual local) [S]
-- [ ] Evaluar protección de rama main en GitHub → dueño: Publicación [S]
+- [x] Evaluar protección de rama main en GitHub → dueño: Publicación [S] — FLIP 2026-10-15 (WB msg 37, Log 1857): evaluación ejecutada por API (`gh api` → 404 Branch not found = rama no existe en remoto, protección no aplicable). Flip GLOBAL en commit 64f4502; checklist corregido por director en commit posterior.
 
 ## B. Estrategia de ramas (12)
 
@@ -136,4 +136,4 @@
 
 ---
 
-**Totales:** 100 ítems · Completados: 99 · Pendientes: 1 (protección rama main → dueño: Publicación) · No resueltos: 0.
+**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
