@@ -239,7 +239,95 @@ def generar_lore_oculto():
     return muestras
 
 
-def main(solo=None):
+# Variaciones: para que varios disparos seguidos no suenen idénticos.
+# Cada variación desplaza el tono base y rota ligeramente el timbre.
+VARIACION_SEMITONOS = [-1, 1, -2, 2]      # cicla según índice
+VARIACION_AMP = [1.0, 0.92, 1.05, 0.88]   # cicla según índice
+
+
+def generar_variacion(situacion, spec, indice):
+    """Igual que `generar` pero con desplazamiento de tono y amplitud.
+
+    El propósito de las variaciones en el juego es que dos disparos seguidos no
+    suenen clonados. Se logra movando el tono unos semitonos y variando la
+    amplitud; la receta base (notas, orden, timbre) se conserva.
+    """
+    dur = float(spec.get('duracion_s', 0.3))
+    n = int(dur * SAMPLE_RATE)
+    notas = list(spec.get('notas_semitonos', [0]))
+    orden = spec.get('orden', 'ascendente')
+    tono = spec.get('tono', 'calido')
+    base_hz = 440.0
+    desplazamiento = VARIACION_SEMITONOS[indice % len(VARIACION_SEMITONOS)]
+    amp = VARIACION_AMP[indice % len(VARIACION_AMP)] * AMP_BASE
+
+    muestras = [0.0] * n
+    por_nota = n // max(1, len(notas))
+    for idx, st in enumerate(notas):
+        f = semitonos_a_hz(base_hz, st + desplazamiento)
+        inicio = idx * por_nota
+        fin = n if idx == len(notas) - 1 else (idx + 1) * por_nota
+        largo = fin - inicio
+        env = envolvente(largo, ATAQUE_S, RELEASE_S, dur / len(notas))
+        for j in range(largo):
+            t = j / SAMPLE_RATE
+            muestras[inicio + j] += amp * math.sin(2 * math.pi * f * t) * env[j]
+
+    timbres = TIMBRES.get(tono, ['seno'])
+    if 'arm2' in timbres or 'arm3' in timbres:
+        mult = 3 if 'arm3' in timbres else 2
+        for idx, st in enumerate(notas):
+            f = semitonos_a_hz(base_hz, st + desplazamiento) * mult
+            inicio = idx * por_nota
+            fin = n if idx == len(notas) - 1 else (idx + 1) * por_nota
+            for j in range(fin - inicio):
+                t = j / SAMPLE_RATE
+                muestras[inicio + j] += (amp * AMP_ARMONICO / AMP_BASE) * math.sin(2 * math.pi * f * t)
+    if 'ruido_lp' in timbres:
+        r = ruido_filtrado(n, pasa_bajos=True, seed=11 + indice)
+        env = envolvente(n, ATAQUE_S, RELEASE_S, dur)
+        for j in range(n):
+            muestras[j] += amp * 1.2 * r[j] * env[j]
+    if 'ruido_hp' in timbres:
+        r = ruido_filtrado(n, pasa_bajos=False, seed=5 + indice)
+        env = envolvente(n, ATAQUE_S, RELEASE_S, dur)
+        for j in range(n):
+            muestras[j] += amp * 0.8 * r[j] * env[j]
+    if 'ruido_hp_mod' in timbres:
+        r = ruido_filtrado(n, pasa_bajos=False, seed=9 + indice)
+        env = envolvente(n, ATAQUE_S, RELEASE_S, dur)
+        for j in range(n):
+            mod = 0.6 + 0.4 * math.sin(2 * math.pi * 6.0 * j / SAMPLE_RATE)
+            muestras[j] += amp * 0.7 * r[j] * env[j] * mod
+
+    pico = max(abs(s) for s in muestras) if muestras else 0.0
+    if pico > 0.85:
+        factor = 0.85 / pico
+        muestras = [s * factor for s in muestras]
+    return muestras
+
+
+def nombres_variaciones(situacion, spec):
+    """Devuelve los nombres de archivo de cada variación de una situación."""
+    n = spec.get('variaciones')
+    if n:
+        return ['%s_%d.wav' % (situacion, i + 1) for i in range(n)]
+    etapas = spec.get('etapas')
+    if etapas:
+        return ['%s_%s.wav' % (situacion, e) for e in etapas]
+    tipos = spec.get('tipos')
+    if tipos:
+        return ['%s_%s.wav' % (situacion, t) for t in tipos]
+    if spec.get('varias_por_superficie'):
+        # superficies: las de sfx_surfaces.json si existen, si no 3 genéricas
+        return ['%s_superficie%d.wav' % (situacion, i + 1) for i in range(3)]
+    rangos = spec.get('rangos_altura')
+    if rangos:
+        return ['%s_altura%d.wav' % (situacion, i + 1) for i in range(rangos)]
+    return []
+
+
+def main(solo=None, variaciones=False):
     with io.open(RUTA_TONES, encoding='utf-8') as fh:
         tones = json.load(fh)
 
@@ -256,8 +344,25 @@ def main(solo=None):
         v['archivo'] = ruta.replace(os.sep, '/')
         reporte.append(v)
         estado = 'OK' if v['ok'] else 'REVISAR'
-        print('%-16s pico=%.3f  dc=%+.5f  dur=%.2fs  clip=%d  [%s]'
+        print('%-22s pico=%.3f  dc=%+.5f  dur=%.2fs  clip=%d  [%s]'
               % (k, v['pico'], v['offset_dc'], v['duracion_s'], v['clipping'], estado))
+
+    if variaciones:
+        print()
+        print('--- variaciones ---')
+        for k in claves:
+            spec = tones[k]
+            nombres = nombres_variaciones(k, spec)
+            for i, nombre in enumerate(nombres):
+                m = generar_variacion(k, spec, i)
+                ruta = os.path.join(SALIDA, nombre)
+                escribir_wav(ruta, m)
+                v = verificar(m, nombre.replace('.wav', ''))
+                v['archivo'] = ruta.replace(os.sep, '/')
+                reporte.append(v)
+                estado = 'OK' if v['ok'] else 'REVISAR'
+                print('%-22s pico=%.3f  dc=%+.5f  dur=%.2fs  clip=%d  [%s]'
+                      % (nombre, v['pico'], v['offset_dc'], v['duracion_s'], v['clipping'], estado))
 
     # lore_oculto: momento narrativo de M150, no está en sfx_tones.json
     if solo is None or 'lore_oculto' in solo:
@@ -279,5 +384,6 @@ def main(solo=None):
 
 if __name__ == '__main__':
     import sys
-    args = sys.argv[1:]
-    main(args if args else None)
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    con_vars = '--variaciones' in sys.argv[1:]
+    main(args if args else None, variaciones=con_vars)
