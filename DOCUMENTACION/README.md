@@ -101,6 +101,18 @@ DOCUMENTACION/
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
+## Logs/ — numeración secuencial obligatoria
+
+`Logs/` (en la raíz del proyecto) guarda los logs de cada tarea. La regla completa
+está en `AGENTS.md` §6.1; el resumen operativo es:
+
+- **Archivo central:** `Logs/NUMEROS_DISPONIBLES.txt` — una línea por número, en
+  orden ascendente (1000, 1001, 1002...).
+- **Reserva:** al terminar una tarea, tomar la primera línea, **borrarla** del
+  archivo y guardarla en tu backlog personal. Cada número se consume una sola vez.
+- **Nombre del log:** `{NUMERO}-DESCRIPCION_BREVE_AAAA-MM-DD_HH-MM-SS.md`.
+- **Rotación:** `Logs/rotated/` recibe los logs rotados cuando se archivan.
+
 ## Sistema de Componentes
 
 Cada componente (`NN-Nombre/`) contiene dos carpetas:

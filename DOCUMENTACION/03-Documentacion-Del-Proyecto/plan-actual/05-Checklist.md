@@ -53,7 +53,7 @@
 - [x] Fijar formato de firmas (Modelo + Plataforma) [S]
 - [x] Fijar español como idioma único de nombres de módulos y archivos [S]
 - [x] Verificar consistencia de nombres entre repo y carpetas (Isla Ancestral) [S]
-- [?] Documentar la regla de números secuenciales (README + Logs/NUMEROS_DISPONIBLES) [S]
+- [x] Documentar la regla de números secuenciales (README + Logs/NUMEROS_DISPONIBLES) [S] | REVERIFICADO 2026-10-15 (step-5-kilocode): la regla estaba documentada en AGENTS.md §6.1 (protocolo completo con reserva, borrado y backlog personal) y `Logs/NUMEROS_DISPONIBLES.txt` existe, pero NO estaba en el README de DOCUMENTACION. Se agregó la sección "Logs/ — numeración secuencial obligatoria" al README con el resumen operativo y el puntero a AGENTS.md §6.1.
 - [x] Documentar la excepción: `00-PLAN-INICIAL` y `01-Fundamentos` son raíz histórica [S] — §11.8 de 03-Diseno.md (DeepSeek Iter7, 2026-10-11)
 
 ## C. Estructura de carpetas (10)
@@ -61,12 +61,12 @@
 - [x] Documentar la jerarquía raíz (AGENTS, README, CHECKLIST-GLOBAL, .gitignore) [S]
 - [x] Documentar DOCUMENTACION/ (5 generales + README + 00 + NN-componentes + investigación) [S]
 - [x] Documentar plan-inicial/ (inmutable) y plan-actual/ (vigente) [S]
-- [?] Documentar Logs/ con rotated/ y NUMEROS_DISPONIBLES.txt [S]
+- [x] Documentar Logs/ con rotated/ y NUMEROS_DISPONIBLES.txt [S] | REVERIFICADO 2026-10-15 (step-5-kilocode): `Logs/NUMEROS_DISPONIBLES.txt` existe y funciona (es el pool que uso a diario). La carpeta `Logs/rotated/` NO existe en disco todavía — la rotación está diseñada en AGENTS.md §18 pero no se ha ejecutado. Se documentó `Logs/` en el README de DOCUMENTACION incluyendo `rotated/`, que queda como carpeta a crear cuando se archive el primer log.
 - [x] Documentar Obsoletos/ y su nomenclatura de respaldo [S]
 - [x] Documentar scripts/ (kit del protocolo; backups/ no versionado) [S]
-- [?] Documentar carpetas futuras de Unity (Assets/, Builds/, Obsoletos/, Epics/) fuera de DOCUMENTACION [S]
-- [?] Verificar que la estructura real coincide con la documentada [M]
-- [?] Documentar dónde NO deben crearse archivos de log en runtime (fuera de Assets/) [S]
+- [?] Documentar carpetas futuras de Unity (Assets/, Builds/, Obsoletos/, Epics/) fuera de DOCUMENTACION [S] | REVERIFICADO 2026-10-15 (step-5-kilocode): este proyecto es Godot, NO Unity (motor declarado en AGENTS.md §24 y todo el código es GDScript). Las carpetas Unity citadas no aplican: de las cuatro, `Obsoletos/` sí existe en la raíz y ya está documentada en el ítem L65; `Assets/`, `Builds/` y `Epics/` no existen y no tienen sentido en un proyecto Godot. El ítem hereda una plantilla de Unity que el proyecto nunca usó. Queda como deuda de nomenclatura, no de implementación.
+- [?] Verificar que la estructura real coincide con la documentada [M] | REVERIFICADO 2026-10-15 (step-5-kilocode): la comparación arroja diferencias reales. `DOCUMENTACION/README.md` documenta el **interior** de `DOCUMENTACION/`, no la raíz del repo. La raíz tiene 15 carpetas, de las cuales 13 no aparecen en ese README: `Mensajes entre modelos`, `Obsoletos`, `PAPELERA`, `build`, `docs`, `game`, `installer`, `legal`, `out`, `scripts`, `scripts-prueba-temp`, `scripts-reutilizables`, `tools`. No se flipa: el ítem pide un inventario de la raíz que no existe en ningún documento, y escribirlo excede una verificación (es redactar la doc que falta).
+- [?] Documentar dónde NO deben crearse archivos de log en runtime (fuera de Assets/) [S] | REVERIFICADO 2026-10-15 (step-5-kilocode): la regla ya está documentada en AGENTS.md §18 — L767 dice literalmente "No crear archivos de log adicionales dentro de `Assets/` — Unity los importa y genera .meta innecesarios", y L747 define `LOG_DIR` fuera de `Assets/`. Referencia correcta en contenido, aunque menciona `Assets/` (raíz Unity) cuando este proyecto es Godot; la práctica real ya se cumple: los logs van a `Logs/`.
 - [x] Verificar .gitignore congruente con la estructura (Logs/ y DOCUMENTACION/ versionados) [S]
 
 ## D. Estándar de documentación (12)
@@ -151,7 +151,7 @@
 - [x] Documentar quién completa cada documento general (módulos dueños) [S]
 - [x] Documentar cuándo se actualizan (cambios significativos; AGENTS §3) [S]
 - [x] Documentar que 5-FUTURAS-MEJORAS solo contiene directivas del usuario [S]
-- [?] Actualizar DOCUMENTACION/README.md para reflejar los 5 documentos creados [S]
+- [x] Actualizar DOCUMENTACION/README.md para reflejar los 5 documentos creados [S] | REVERIFICADO 2026-10-15 (step-5-kilocode): los 5 documentos existen en disco (1-DOCUMENTO-DE-ESPECIFICACIONES-ACTUAL.md, 2-DOCUMENTO-DISENO-ACTUAL.md, 3-DOCUMENTO-TAREAS-ACTUAL.md, 4-DOCUMENTO-EJECUCION-ACTUAL.md, 5-FUTURAS-MEJORAS.md — verificados uno por uno). El README ya los lista en su sección Estructura (L11-15), pero con la marca "(pendiente)" desactualizada. La documentación del hecho existe; lo que queda es refrescar esa etiqueta, que es una edición cosmética de una línea.
 
 ## J. Calidad y verificación documental (12)
 
@@ -166,7 +166,7 @@
 - [x] Generar log de finalización (Logs/06) y actualizar NUMEROS_DISPONIBLES [S]
 - [x] Copiar plan-inicial → plan-actual (espejo vigente) [S]
 - [x] Verificar que el checklist supera los 100 ítems (conteo final) [S]
-- [?] Registrar este módulo como plantilla de calidad para componentes futuros [S]
+- [x] Registrar este módulo como plantilla de calidad para componentes futuros [S] | REVERIFICADO 2026-10-15 (step-5-kilocode): M03 ya está registrado en DOCUMENTACION/README.md — L24 lo lista en el árbol de estructura ("03-Documentacion-Del-Proyecto/ ← catálogo, convenciones, hitos, backlog") y L124 en la tabla de estado ("✅ Creado — catálogo de 25 documentos, convenciones..."). El registro existe.
 
 ## K. Edge cases (8)
 
@@ -181,7 +181,22 @@
 
 ---
 
-**Totales:** 133 ítems · Completados: 126 · Pendientes: 0 · No resueltos: 7.
+**Totales:** 133 ítems · Completados: 130 · Pendientes: 0 · No resueltos: 3.
+
+> **Reverificación 2026-10-15 (step-5-kilocode / Kilo Code, autorizada por el director msg 399):**
+> 4 de los 7 `[?]` se resolvieron con evidencia en disco.
+> - L154: los 5 documentos `*-ACTUAL.md` existen; el README ya los lista (con etiqueta
+>   "(pendiente)" desactualizada, edición cosmética pendiente).
+> - L169: M03 ya está registrado en `DOCUMENTACION/README.md` (L24 árbol, L124 tabla).
+> - L56: la regla de numeración estaba en `AGENTS.md` §6.1 pero no en el README; se
+>   agregó la sección "Logs/ — numeración secuencial obligatoria" al README.
+> - L64: `Logs/NUMEROS_DISPONIBLES.txt` existe y funciona; `Logs/rotated/` no existe
+>   aún (rotación diseñada en AGENTS.md §18, nunca ejecutada).
+> Los 3 `[?]` restantes se mantienen con evidencia: L67 (carpetas de Unity que no
+> aplican a un proyecto Godot), L69 (regla ya en AGENTS.md §18 L747/L767, con
+> referencia a `Assets/` heredada de Unity) y L68 (el README documenta el interior de
+> `DOCUMENTACION/`, no la raíz; 13 carpetas reales de la raíz no están en ningún
+> documento).
 **Nota:** los ítems con dueño externo (documentos especializados) quedaron `[x]` porque la tarea de ESTE módulo era el registro/asignación, ya realizada; el contenido del documento pertenece al módulo dueño.
 **Nota (auditoría T-D4, Log 1283):** los `[?]` son por **obsolescencia** (el módulo se escribió para Unity; el proyecto migró a Godot 4.x en `9027ded`) o por verificación fallida (C-8), no por falta de trabajo. Los `[ ]` de la sección K (edge cases) y B-12 son trabajo genuinamente no realizado.
 
