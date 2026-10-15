@@ -79,7 +79,7 @@
 - [x] Definir ejecución de tests M112 en todo build [C]
 - [x] Definir tests EditMode + PlayMode en gates [M] → T-019 verificado (quality test-suite + testing GdUnit4 + quality-gate)
 - [x] Definir test suite reducido en PR [M]
-- [?] Definir suite completa en nightly [M] → T-020 sin schedule en workflows (dueno M118)
+- [?] Definir suite completa en nightly [M] → T-020: testing/quality/dev-build/release-build SIN schedule (backup.yml y bug_metrics.yml si lo tienen) (dueno M118) [nota refinada 2026-10-15, step-5 412]
 - [x] Definir suite en release (obligatoria) [M] → T-021 verificado (release needs test)
 - [x] Definir reporte de tests en artifact [S] → T-022 verificado (upload ci-test-report + coverage + release artifacts)
 
@@ -119,7 +119,7 @@
 
 ## 13. Firmar ejecutables (13º)
 
-- [?] Definir firmado Windows con signtool [M] → T-038 code_signing.bat presente pero enable=false + sin cert (dueno M116/infra)
+- [?] Definir firmado Windows con signtool [M] → T-038: installer/code_signing.bat existe y pide CERT_PFX/CERT_PASSWORD; sin certificado y sin flag enable=false (el HMAC firmar_artefacto() de cicd_manager.gd es integridad, no code signing) (dueno M116/infra) [nota refinada 2026-10-15, step-5 412]
 - [?] Definir firmado macOS con notarytool + staple [M] → T-039 sin preset/runner (dueno M96/infra)
 - [x] Definir certificados de producción y de prueba [M]
 - [x] Definir firmado desde staging (prueba temprana) [M] → T-040 diseno A2 + fallback §6

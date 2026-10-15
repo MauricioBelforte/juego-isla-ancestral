@@ -49,7 +49,7 @@
 - [?] Capa 8 Estructuras: prefabs por marcador POI [M] — QA atria-dawn: FALSO. El generador no coloca ninguna estructura; "faro" solo existe como dato del canon de M147 (WorldBible), no como placement del generador. Las estructuras reales viven en otros módulos (M26 templo, M33 granja).
 - [x] Orden fijo y documentado de las 8 capas [S]
 - [x] Salida por capa definida (datos puros, sin side effects globales) [M]
-- [x] Diffs del jugador se aplican DESPUÉS de regenerar [M]
+- [ ] Diffs del jugador se aplican DESPUÉS de regenerar [M] — DEGRADADO 2026-10-15 (step-5 412, grep repo-wide): 0 hits de reaplicacion de diffs; regenerar_chunk (debug_menu.gd L554-566) solo hace vt.invalidate_area y no reaplica ediciones del jugador
 - [x] Chunks 16³ alineados a la grilla de M08 [S]
 - [?] Implementación como autoload WorldGenerator [S] — QA atria-dawn: FALSO. `world_generator.gd` es un VoxelGeneratorScript instanciado por `main_island.gd:144` (load().new() → terrain.generator); NO está en los autoloads de project.godot.
 - [x] Sin tocar GameState durante la generación (solo lectura) [M]
@@ -137,7 +137,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 106 ítems · Completados: 89 · Pendientes: 1 · No resueltos: 16.
+**Totales:** 106 ítems · Completados: 88 · Pendientes: 2 · No resueltos: 16.
 
 ---
 
