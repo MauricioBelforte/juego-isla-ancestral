@@ -1,4 +1,4 @@
-# Audios procedurales para revisión — 52 sonidos (pedido del fundador)
+# Audios procedurales para revisión — 57 sonidos (pedido del fundador)
 
 **Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
@@ -71,7 +71,7 @@ Los parámetros están en constantes al inicio de
 
 ## Estado
 
-**52 de 52** WAV entregados (22 base + 30 variaciones). Las 21 situaciones de sfx_tones.json tienen su WAV base, 21/21, mas lore_oculto. No toqué `data/` ni los catálogos de
+**57 de 57** WAV entregados (22 base + 30 variaciones + 5 stings). Las 21 situaciones de sfx_tones.json tienen su WAV base, 21/21, mas lore_oculto. No toqué `data/` ni los catálogos de
 audio: esto es material de revisión, la integración al juego es de M43.
 
 ## Tanda 2: las variaciones (25 WAV extra)
@@ -132,3 +132,32 @@ cristal necesita un ataque mas rapido) es criterio de diseno. Lo que hice fue un
 asignacion fisicamente razonable y verificable en orden, no una afinacion de
 estudio. Si algun material te suena mal, se ajusta en TIMBRES_MATERIAL dentro del
 generador.
+
+## Tanda 4: los 5 stings musicales
+
+music_context_matrix.json define 5 momentos musicales cortos (LUFS -18). Son frases
+de 2-4 s, la misma categoría que lore_oculto, así que se pueden componer con acordes
+en vez de sintetizar tonos sueltos:
+
+| Archivo | Duración | Carácter |
+|---|---|---|
+| sting_sello.wav | 2.1 s | sostenido y ceremonial (3 acordes mayores) |
+| sting_puzzle.wav | 1.4 s | construye y corta, el ajá (4 acordes ascendentes) |
+| sting_descubrimiento.wav | 2.2 s | apertura amplia, intervalo abierto (8va y 11na) |
+| sting_llegada.wav | 2.0 s | el más expansivo, abre con fuerza |
+| sting_creditos.wav | 3.6 s | reflexivo, progresión que desciende y resuelve |
+
+Cada acorde tiene envolvente propia y sus notas entran escalonadas (arpegio sutil), con
+el timbre (armónicos y ataque) elegido según el carácter del momento. **Verificado
+numéricamente que las formas difieren** — la energía por tercios de cada uno es distinta
+y coherente con lo que pretende: llegada abre en 0.200 y decae, descubrimiento abre
+fuerte y se apaga, puzzle sostiene y corta al final.
+
+## Lo que NO sinteticé y por qué
+
+Las **24 capas de music_context_matrix.json** (ase_aurora, 	iempo_noche,
+evento_tormenta, los 4 leitmotifs, etc.) son **beds ambientales pensados para sonar
+en loop durante minutos**. Sintetizarlos con senos daría un zumbido de laboratorio, no
+música. Esos necesitan composición o assets reales, y es la única parte del audio del
+juego que no puedo cubrir por síntesis. Los 24 	emas del JSON no son assets
+independientes: son combinaciones de esas capas.

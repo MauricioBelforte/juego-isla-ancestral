@@ -194,6 +194,79 @@ def escribir_wav(ruta, muestras):
         w.writeframes(frames)
 
 
+# --- Stings musicales (music_context_matrix.json: 5 momentos, LUFS -18) ---
+# Frases cortas de 2-4 s. Misma categoría que `lore_oculto`: se pueden componer
+# con acordes y conseguir intención musical. Cada uno tiene carácter distinto y
+# una progresión armónica propia.
+STINGS = {
+    'sting_sello': {
+        'acordes': [[0, 4, 7], [5, 9, 12], [7, 11, 14]],
+        'dur_acorde': 0.7, 'tono_base': 261.63, 'timbre': 'calido',
+    },
+    'sting_puzzle': {
+        'acordes': [[0, 4, 7], [2, 5, 9], [4, 7, 11], [7, 11, 14]],
+        'dur_acorde': 0.35, 'tono_base': 329.63, 'timbre': 'brillante',
+    },
+    'sting_descubrimiento': {
+        'acordes': [[0, 7, 12], [4, 11, 16]],
+        'dur_acorde': 1.1, 'tono_base': 293.66, 'timbre': 'etereo',
+    },
+    'sting_llegada': {
+        'acordes': [[0, 4, 7, 11], [5, 9, 12, 16]],
+        'dur_acorde': 1.0, 'tono_base': 246.94, 'timbre': 'calido',
+    },
+    'sting_creditos': {
+        'acordes': [[0, 4, 7], [-3, 0, 4], [-5, -1, 2]],
+        'dur_acorde': 1.2, 'tono_base': 261.63, 'timbre': 'reflexivo',
+    },
+}
+
+TIMBRES_STING = {
+    'calido':      {'arm2': 0.10, 'arm3': 0.03, 'ataque': 0.05},
+    'brillante':   {'arm2': 0.14, 'arm3': 0.08, 'ataque': 0.02},
+    'etereo':      {'arm2': 0.06, 'arm3': 0.10, 'ataque': 0.12},
+    'reflexivo':   {'arm2': 0.08, 'arm3': 0.02, 'ataque': 0.08},
+}
+
+
+def generar_sting(nombre):
+    """Compone un sting: progresión de acordes con envolvente por acorde."""
+    spec = STINGS[nombre]
+    acordes = spec['acordes']
+    dur_ac = spec['dur_acorde']
+    base = spec['tono_base']
+    cfg = TIMBRES_STING[spec['timbre']]
+
+    n_total = int(dur_ac * len(acordes) * SAMPLE_RATE)
+    muestras = [0.0] * n_total
+    n_ac = int(dur_ac * SAMPLE_RATE)
+
+    for i_ac, acorde in enumerate(acordes):
+        inicio = i_ac * n_ac
+        fin = n_total if i_ac == len(acordes) - 1 else inicio + n_ac
+        largo = fin - inicio
+        env = envolvente(largo, cfg['ataque'], dur_ac * 0.55, dur_ac)
+        # las notas del acorde entran escalonadas (arpegio sutil)
+        for j_nota, semitono in enumerate(acorde):
+            f = semitonos_a_hz(base, semitono)
+            delay = int(j_nota * 0.018 * SAMPLE_RATE)
+            for j in range(largo):
+                if j < delay:
+                    continue
+                t = (j - delay) / SAMPLE_RATE
+                muestras[inicio + j] += AMP_BASE * 0.55 * math.sin(2 * math.pi * f * t) * env[j]
+                if cfg['arm2']:
+                    muestras[inicio + j] += AMP_BASE * cfg['arm2'] * math.sin(2 * math.pi * f * 2 * t) * env[j]
+                if cfg['arm3']:
+                    muestras[inicio + j] += AMP_BASE * cfg['arm3'] * math.sin(2 * math.pi * f * 3 * t) * env[j]
+
+    pico = max(abs(s) for s in muestras) if muestras else 0.0
+    if pico > 0.85:
+        factor = 0.85 / pico
+        muestras = [s * factor for s in muestras]
+    return muestras
+
+
 def generar_lore_oculto():
     """Sonido de misterio para `lore_oculto` (momentos de narrative_sound.json).
 
@@ -457,6 +530,23 @@ def main(solo=None, variaciones=False):
                 estado = 'OK' if v['ok'] else 'REVISAR'
                 print('%-22s pico=%.3f  dc=%+.5f  dur=%.2fs  clip=%d  [%s]'
                       % (nombre, v['pico'], v['offset_dc'], v['duracion_s'], v['clipping'], estado))
+
+    # stings musicales de music_context_matrix.json (5 momentos)
+    if solo is None or any(s in solo for s in STINGS):
+        print()
+        print('--- stings musicales ---')
+        for nombre in STINGS:
+            if solo is not None and nombre not in solo:
+                continue
+            m = generar_sting(nombre)
+            ruta = os.path.join(SALIDA, nombre + '.wav')
+            escribir_wav(ruta, m)
+            v = verificar(m, nombre)
+            v['archivo'] = ruta.replace(os.sep, '/')
+            reporte.append(v)
+            estado = 'OK' if v['ok'] else 'REVISAR'
+            print('%-22s pico=%.3f  dc=%+.5f  dur=%.2fs  clip=%d  [%s]'
+                  % (nombre, v['pico'], v['offset_dc'], v['duracion_s'], v['clipping'], estado))
 
     # lore_oculto: momento narrativo de M150, no está en sfx_tones.json
     if solo is None or 'lore_oculto' in solo:
