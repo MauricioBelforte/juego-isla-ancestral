@@ -1,4 +1,4 @@
-# Audios procedurales para revisión — 57 sonidos (pedido del fundador)
+# Audios procedurales para revisión — 63 sonidos (pedido del fundador)
 
 **Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
@@ -71,7 +71,7 @@ Los parámetros están en constantes al inicio de
 
 ## Estado
 
-**57 de 57** WAV entregados (22 base + 30 variaciones + 5 stings). Las 21 situaciones de sfx_tones.json tienen su WAV base, 21/21, mas lore_oculto. No toqué `data/` ni los catálogos de
+**63 de 63** WAV entregados (22 base + 30 variaciones + 5 stings + 6 recetas de feedback). Las 21 situaciones de sfx_tones.json tienen su WAV base, 21/21, mas lore_oculto. No toqué `data/` ni los catálogos de
 audio: esto es material de revisión, la integración al juego es de M43.
 
 ## Tanda 2: las variaciones (25 WAV extra)
@@ -161,3 +161,30 @@ en loop durante minutos**. Sintetizarlos con senos daría un zumbido de laborato
 música. Esos necesitan composición o assets reales, y es la única parte del audio del
 juego que no puedo cubrir por síntesis. Los 24 	emas del JSON no son assets
 independientes: son combinaciones de esas capas.
+
+## Tanda 5: las 6 recetas de feedback que faltaban
+
+eedback_recetas.json (consumido por eedback_director.gd) declara 8 situaciones.
+Solo 2 tenian WAV (plantar, cosechar); renderice las 6 que faltaban.
+
+A diferencia de sfx_tones.json (que da NOTAS), estas recetas describen **CAPAS** que
+hay que mezclar. El JSON dice cuales; el timbre de cada capa y la duracion salen del
+generador:
+
+| Archivo | Capas que pide el JSON | Duracion |
+|---|---|---|
+| loque_roto.wav | crack + roca + eco (+ reverb interior) | 0.48 s |
+| loque_colocado.wav | thud + arena (+ reverb interior) | 0.36 s |
+| cocinar.wav | sizzle + vapor | 0.45 s |
+| brir_contenedor.wav | madera_apertura + click_cierre (+ reverb interior) | 0.38 s |
+| pescar_captura.wav | splash + lucha | 0.50 s |
+| mineria_golpe.wav | golpe_roca + eco (+ reverb cueva) | 0.65 s |
+
+Verificado numericamente: todos con clipping 0 y pico <= 0.579. El ataque queda al
+principio en los seis (energia por cuartos decreciente), que es lo que corresponde
+para golpes e impactos.
+
+**Salvedad honesta:** tres recetas pisten interior_capa (reverb interior o de cueva).
+Eso lo sintetice como una cola de ruido con decay — **no es una reverb real por
+convolucion**. Sirve para dar sensacion de espacio cerrado, pero no sustituye a una IR
+verdadera. Si el fundador nota que suena artificial en cueva, es eso.
