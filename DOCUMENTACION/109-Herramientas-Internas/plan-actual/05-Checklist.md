@@ -124,23 +124,23 @@
 
 ## 15. Editor de mapas (RF1)
 
-- [ ] Definir edición de islas (M27/54) y puntos de interés [M]
-- [ ] Definir edición de viajes entre islas (M28) [M]
-- [ ] Definir validación: POI únicos e islas referenciadas [M]
-- [ ] Definir vista del mapa completo [S]
-- [ ] Definir export de estructura del mapa [S]
+- [x] Definir edición de islas (M27/54) y puntos de interés [M]
+- [x] Definir edición de viajes entre islas (M28) [M]
+- [x] Definir validación: POI únicos e islas referenciadas [M]
+- [x] Definir vista del mapa completo [S]
+- [x] Definir export de estructura del mapa [S]
 
 ## 16. Herramienta de teleport (RF7)
 
-- [ ] Definir teleport a coordenadas exactas [S]
-- [ ] Definir teleport a isla/POI/sello [M]
+- [x] Definir teleport a coordenadas exactas [S]
+- [x] Definir teleport a isla/POI/sello [M]
 - [ ] Definir teleport con guardado del punto anterior [S]
 - [x] Definir integración con Debug Menu (M110) [S]
 
 ## 17. Herramienta de spawn (RF7)
 
-- [ ] Definir spawn de objetos bajo cursor [S]
-- [ ] Definir spawn de NPC y fauna [S]
+- [x] Definir spawn de objetos bajo cursor [S]
+- [x] Definir spawn de NPC y fauna [S]
 - [ ] Definir spawn con cantidad y densidad editable [S]
 - [ ] Definir validación de no duplicar entidades únicas [S]
 
@@ -159,15 +159,15 @@
 
 ## 19. Herramienta de inspección (RF8)
 
-- [ ] Definir inspector de entidad (componentes) [M]
-- [ ] Definir navegación por árbol de objetos [S]
+- [x] Definir inspector de entidad (componentes) [M]
+- [x] Definir navegación por árbol de objetos [S]
 - [x] Definir edición inline de variables en editor [M]
 - [ ] Definir copia de estado al portapapeles [S]
 
 ## 20. Herramienta de profiling (RF9)
 
 - [x] Definir stats del editor: FPS, memoria, draw calls (M61/62) [M]
-- [ ] Definir stats por chunk/NPC/AI [M]
+- [x] Definir stats por chunk/NPC/AI [M]
 - [ ] Definir export de muestras a CSV [S]
 - [x] Definir visual en overlay del editor [S]
 
@@ -200,14 +200,14 @@
 - [x] Definir compatibilidad con M108 (mods) [M]
 - [ ] Definir soporte de herramientas para QA (M102) [S]
 - [ ] Definir documentación plan-actual actualizada y firmada [S]
-- [ ] Definir log del módulo en Logs/ [S]
+- [x] Definir log del módulo en Logs/ [S]
 - [x] Definir feed a M112 (tests de editor) y M151 (validator) [S]
 
 ## Totales
 
 **Total de ítems:** 138
-**Ítems resueltos por documentación:** 107 (28 pendientes, 3 dudas)
-**Ítems pendientes de implementación:** 28 (resto de vistas/exports sin respaldo textual: ver iteracion 5)
+**Ítems resueltos por documentación:** 120 (15 pendientes, 3 dudas)
+**Ítems pendientes de implementación:** 15 (vistas/exports sin respaldo textual: ver iteracion 5; teleport/spawn/inspeccion/profiling sin respaldo: ver iteracion 6)
 ## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] Framework común de editores: `scripts/editor/tools/editor_base.gd` (@tool PanelContainer) — lista de entradas + formulario por campo + guardado con backup .bak + mensajes de estado (base data-driven para los 14 editores RF1)
@@ -267,3 +267,15 @@
 - Conteo medido tras los 55 flips: 107 [x] / 28 [ ] / 3 [?] = 138 (invariante verificado por script).
 - Drift corregido: las lineas del bloque Totales heredado decian "resueltos por documentacion: 127 (0 pendientes, 0 dudas)" y "pendientes de implementacion: 0" -> alineadas al conteo real (107 / 28), y la linea del apendice 52/83/3 -> 107/28/3.
 - Fuera de alcance de esta iteracion (siguen [ ]): seccion 1 (L18 reutilizacion lista vista/detalle, L21 rojo/amarillo por campo), secciones 15-17, 19, 20 y 3 items de la 23 (soporte QA M102, documentacion firmada, log del modulo).
+
+## Iteración 6 (2026-10-14 — Step-5-WorkBuddy / WorkBuddy, Log 1854)
+
+- 13 flips `[ ]` -> `[x]` (lote 3 autorizado por el director, msg 33): seccion 15 editor de mapas (5), seccion 16 teleport (2), seccion 17 spawn (2), seccion 19 inspeccion (2), seccion 20 profiling (1), L203 log del modulo (1).
+- Seccion 15 -> 03-Diseno §3 L63 ("Mapas | islas (M27/54), puntos de interes, viajes (M28) | POI unicos; islas referenciadas por viajes") + RF4 (01-Requerimientos L41, previsualizacion en vivo) para la vista + RF6 (01-Requerimientos L43, export JSON/CSV) para el export.
+- Seccion 16 -> 03-Diseno §4 L68 ("TeleportTool | mover jugador a coords / isla / POI / sello") + 01-Requerimientos §3.15 L27 ("moverse a coordenada/isla/POI en editor y debug").
+- Seccion 17 -> 03-Diseno §4 L69 ("SpawnTool | instanciar objeto/NPC/fauna bajo cursor") + 01-Requerimientos §3.16 L28 ("instanciar objetos/NPC/fauna bajo cursor").
+- Seccion 19 -> 03-Diseno §4 L70 ("InspectorTool | arbol de componentes/variables de entidad") + RF8 (01-Requerimientos L45 "Inspeccion de entidad: arbol de componentes y variables") + 01-Requerimientos §3.18 L30.
+- Seccion 20 -> 01-Requerimientos §3.19 L31 ("profiling del editor: stats de chunk/NPC/AI (M62/M61)") - respaldo textual directo.
+- L203 -> cumplido por este ciclo: el log del modulo se escribio en Logs/ con numero del pool (1854).
+- **Quedan [ ] honestos de las secciones del lote 3 (5 items, grep = 0 en las 4 fuentes del modulo):** L137 teleport con guardado del punto anterior; L144 spawn con cantidad y densidad editable; L145 validacion de no duplicar entidades unicas (la herramienta de spawn no tiene validacion documentada; "no duplicados" es de tiendas §3 L57); L165 copia de estado al portapapeles; L171 export de muestras a CSV (RF9 no menciona export; RF6 es de los 14 editores).
+- Conteo medido tras los 13 flips: 120 [x] / 15 [ ] / 3 [?] = 138 (invariante verificado por script).
