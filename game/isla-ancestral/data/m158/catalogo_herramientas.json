@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "modulo": "M158",
+  "titulo": "Catalogo de herramientas, forja y encantamientos (indice por modulo)",
+  "generado": "2026-10-15",
+  "nota": "Indice que cruza las fuentes por dominio ya existentes; NO duplica datos, referencia por id. Fuentes: data/balance/tools.json, data/herramientas/tiers_config.json, data/balance/crafting.json, data/enchantments/*.tres.",
+  "tiers": [
+    {
+      "id": "T1_COBRE",
+      "nivel": 1,
+      "nombre": "Cobre",
+      "dano": 1.0,
+      "velocidad": 1.0,
+      "area": 1,
+      "color": "cobre"
+    },
+    {
+      "id": "T2_HIERRO",
+      "nivel": 2,
+      "nombre": "Hierro",
+      "dano": 2.0,
+      "velocidad": 1.5,
+      "area": 1,
+      "color": "hierro"
+    },
+    {
+      "id": "T3_ORO",
+      "nivel": 3,
+      "nombre": "Oro",
+      "dano": 3.5,
+      "velocidad": 2.0,
+      "area": 2,
+      "color": "oro"
+    },
+    {
+      "id": "T4_CRISTAL",
+      "nivel": 4,
+      "nombre": "Cristal",
+      "dano": 5.0,
+      "velocidad": 3.0,
+      "area": 2,
+      "color": "cristal"
+    }
+  ],
+  "herramientas": [
+    {
+      "id": "pico_cobre",
+      "material": "cobre",
+      "nivel_en_tools_json": 2,
+      "nivel_en_tiers_config": 1,
+      "tier": "T1_COBRE",
+      "durabilidad": 150,
+      "coste_mejora": 80,
+      "receta": "rec_pico_cobre"
+    },
+    {
+      "id": "hacha_cobre",
+      "material": "cobre",
+      "nivel_en_tools_json": 2,
+      "nivel_en_tiers_config": 1,
+      "tier": "T1_COBRE",
+      "durabilidad": 150,
+      "coste_mejora": 80,
+      "receta": "rec_hacha_cobre"
+    },
+    {
+      "id": "pico_hierro",
+      "material": "hierro",
+      "nivel_en_tools_json": 3,
+      "nivel_en_tiers_config": 2,
+      "tier": "T2_HIERRO",
+      "durabilidad": 300,
+      "coste_mejora": 180,
+      "receta": null
+    },
+    {
+      "id": "hacha_hierro",
+      "material": "hierro",
+      "nivel_en_tools_json": 3,
+      "nivel_en_tiers_config": 2,
+      "tier": "T2_HIERRO",
+      "durabilidad": 300,
+      "coste_mejora": 180,
+      "receta": null
+    },
+    {
+      "id": "herramienta_basica",
+      "material": null,
+      "nivel_en_tools_json": 1,
+      "nivel_en_tiers_config": null,
+      "tier": null,
+      "durabilidad": 60,
+      "coste_mejora": 0,
+      "receta": null
+    }
+  ],
+  "desbloqueo_de_zonas": [
+    {
+      "gate_id": "gate_rama_gruesa",
+      "tipo": "rama_gruesa",
+      "required_tier": "T1_COBRE",
+      "required_tool": "hacha",
+      "zone_id": "zona_bosque_denso",
+      "blocks_story": false
+    },
+    {
+      "gate_id": "gate_muro_piedra",
+      "tipo": "muro_piedra",
+      "required_tier": "T2_HIERRO",
+      "required_tool": "pico",
+      "zone_id": "zona_cantera",
+      "blocks_story": false
+    },
+    {
+      "gate_id": "gate_raiz_anciana",
+      "tipo": "raiz_anciana",
+      "required_tier": "T2_HIERRO",
+      "required_tool": "hacha",
+      "zone_id": "zona_raices",
+      "blocks_story": false
+    },
+    {
+      "gate_id": "gate_sello_ancestral",
+      "tipo": "sello_ancestral",
+      "required_tier": "T3_ORO",
+      "required_tool": "pico",
+      "zone_id": "zona_templo_ceniza",
+      "blocks_story": true
+    },
+    {
+      "gate_id": "gate_cristal_bloqueado",
+      "tipo": "cristal_bloqueado",
+      "required_tier": "T4_CRISTAL",
+      "required_tool": "martillo",
+      "zone_id": "zona_cueva_cristal",
+      "blocks_story": true
+    },
+    {
+      "gate_id": "gate_tumba_ancestral",
+      "tipo": "tumba_ancestral",
+      "required_tier": "T4_CRISTAL",
+      "required_tool": "pala",
+      "zone_id": "zona_tumba",
+      "blocks_story": true
+    }
+  ],
+  "forjas": [
+    {
+      "isla": "isla_raiz",
+      "tier": "T1_COBRE",
+      "materiales": {},
+      "monedas": 0,
+      "profesional": "carpintero",
+      "nota": "T1 gratis: regalo del carpintero"
+    },
+    {
+      "isla": "isla_ceniza",
+      "tier": "T2_HIERRO",
+      "materiales": {
+        "hierro": 10
+      },
+      "monedas": 500,
+      "profesional": "herrero"
+    },
+    {
+      "isla": "isla_coral",
+      "tier": "T3_ORO",
+      "materiales": {
+        "oro": 20
+      },
+      "monedas": 2000,
+      "profesional": "orfebre"
+    },
+    {
+      "isla": "isla_aurora",
+      "tier": "T4_CRISTAL",
+      "materiales": {
+        "cristal": 5
+      },
+      "monedas": 5000,
+      "profesional": "cristalero"
+    }
+  ],
+  "profesiones": [
+    {
+      "course_id": "curso_carpinteria",
+      "profesion": "carpinteria",
+      "costo": 300,
+      "tier_max_venta": "T1_COBRE",
+      "isla": "isla_raiz"
+    },
+    {
+      "course_id": "curso_herreria",
+      "profesion": "herreria",
+      "costo": 1500,
+      "tier_max_venta": "T2_HIERRO",
+      "isla": "isla_ceniza"
+    },
+    {
+      "course_id": "curso_herreria_avanzada",
+      "profesion": "herreria",
+      "costo": 5000,
+      "tier_max_venta": "T3_ORO",
+      "isla": "isla_coral"
+    },
+    {
+      "course_id": "curso_cristaleria",
+      "profesion": "encantamiento",
+      "costo": 10000,
+      "tier_max_venta": "T4_CRISTAL",
+      "isla": "isla_aurora"
+    }
+  ],
+  "encantamientos": [
+    {
+      "id": "ancestral_cobre",
+      "display_name": "Cobre Ancestral",
+      "description": "Intercambio especial con NPCs y bonus adicional",
+      "tool_tier": 1,
+      "ability_type": "special_trade",
+      "ability_value": 1.0,
+      "incense_cost": 3,
+      "coin_cost": 200,
+      "fuente": "data/enchantments/ancestral_cobre.tres"
+    },
+    {
+      "id": "brillante_oro",
+      "display_name": "Oro Brillante",
+      "description": "+50% precio de venta en tiendas",
+      "tool_tier": 3,
+      "ability_type": "sell_bonus",
+      "ability_value": 0.5,
+      "incense_cost": 8,
+      "coin_cost": 800,
+      "fuente": "data/enchantments/brillante_oro.tres"
+    },
+    {
+      "id": "caverna_cristal",
+      "display_name": "Cristal de Caverna",
+      "description": "Bonus de extracción en cuevas",
+      "tool_tier": 4,
+      "ability_type": "cave_bonus",
+      "ability_value": 1.5,
+      "incense_cost": 12,
+      "coin_cost": 1000,
+      "fuente": "data/enchantments/caverna_cristal.tres"
+    },
+    {
+      "id": "prospero_hierro",
+      "display_name": "Hierro Prospero",
+      "description": "x2 monedas al romper minerales",
+      "tool_tier": 2,
+      "ability_type": "double_coins",
+      "ability_value": 2.0,
+      "incense_cost": 5,
+      "coin_cost": 500,
+      "fuente": "data/enchantments/prospero_hierro.tres"
+    }
+  ],
+  "huecos_de_datos": [
+    "Las herramientas de hierro (pico_hierro, hacha_hierro) existen en data/balance/tools.json pero NO tienen receta en data/balance/crafting.json.",
+    "Drift de nivel: tools.json y tiers_config.json no coinciden en el nivel de las herramientas (pico_cobre, hacha_cobre, pico_hierro, hacha_hierro, herramienta_basica).",
+    "Las forjas usan ids de isla (isla_raiz) distintos a los codigos de data/islas/islas.json (RIZ, COR, CEN, AUR).",
+    "No hay encantamiento de tier para hacha/pala/martillo: los encantamientos declaran tool_tier pero no tool_id."
+  ]
+}

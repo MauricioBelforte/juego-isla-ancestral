@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "modulo": "M160",
+  "titulo": "Catalogo de ubicaciones del mundo (indice por modulo)",
+  "generado": "2026-10-15",
+  "nota": "Indice que cruza las fuentes por dominio ya existentes; NO duplica datos, referencia por id. Fuentes: data/ubicaciones/ubicaciones.json, data/islas/islas.json, data/balance/fishing.json, data/mining/ores.json, data/herramientas/tiers_config.json.",
+  "islas": [
+    {
+      "codigo": "RIZ",
+      "nombre": "Isla Raíz",
+      "biomas": [
+        "playa",
+        "pradera",
+        "bosque",
+        "montana"
+      ],
+      "centro": [
+        256,
+        256
+      ],
+      "radio": 256,
+      "pesca": true
+    },
+    {
+      "codigo": "COR",
+      "nombre": "Isla Coral",
+      "biomas": [
+        "playa",
+        "arrecife",
+        "laguna"
+      ],
+      "centro": [
+        1024,
+        256
+      ],
+      "radio": 220,
+      "pesca": true
+    },
+    {
+      "codigo": "CEN",
+      "nombre": "Isla Ceniza",
+      "biomas": [
+        "volcan",
+        "ceniza",
+        "roca"
+      ],
+      "centro": [
+        256,
+        1024
+      ],
+      "radio": 220,
+      "pesca": false
+    },
+    {
+      "codigo": "AUR",
+      "nombre": "Isla Aurora",
+      "biomas": [
+        "bosque_ancestral",
+        "pradera",
+        "lago"
+      ],
+      "centro": [
+        1024,
+        1024
+      ],
+      "radio": 200,
+      "pesca": true
+    }
+  ],
+  "ubicaciones": [
+    {
+      "id": "ubic_faro",
+      "nombre": "Faro",
+      "isla": "RIZ",
+      "tipo": "hito",
+      "sello": "sello_raiz",
+      "coords": [
+        350,
+        350
+      ],
+      "biomas_isla": [
+        "playa",
+        "pradera",
+        "bosque",
+        "montana"
+      ],
+      "pesca_disponible": true,
+      "minerales": [],
+      "templos_relacionados": []
+    },
+    {
+      "id": "ubic_templo_raiz",
+      "nombre": "Templo de la Raíz",
+      "isla": "RIZ",
+      "tipo": "templo",
+      "sello": "sello_raiz",
+      "coords": [
+        200,
+        200
+      ],
+      "biomas_isla": [
+        "playa",
+        "pradera",
+        "bosque",
+        "montana"
+      ],
+      "pesca_disponible": true,
+      "minerales": [
+        "veta_ancestral",
+        "veta_polvo_estrellas"
+      ],
+      "templos_relacionados": [
+        "ubic_templo_raiz"
+      ]
+    },
+    {
+      "id": "ubic_laguna_coral",
+      "nombre": "Laguna Coral",
+      "isla": "COR",
+      "tipo": "laguna",
+      "sello": "sello_coral",
+      "coords": [
+        1024,
+        256
+      ],
+      "biomas_isla": [
+        "playa",
+        "arrecife",
+        "laguna"
+      ],
+      "pesca_disponible": true,
+      "minerales": [],
+      "templos_relacionados": []
+    },
+    {
+      "id": "ubic_templo_coral",
+      "nombre": "Templo Coral",
+      "isla": "COR",
+      "tipo": "templo",
+      "sello": "sello_coral",
+      "coords": [
+        1200,
+        256
+      ],
+      "biomas_isla": [
+        "playa",
+        "arrecife",
+        "laguna"
+      ],
+      "pesca_disponible": true,
+      "minerales": [
+        "veta_ancestral",
+        "veta_polvo_estrellas"
+      ],
+      "templos_relacionados": [
+        "ubic_templo_coral"
+      ]
+    },
+    {
+      "id": "ubic_volcan",
+      "nombre": "Volcán",
+      "isla": "CEN",
+      "tipo": "volcan",
+      "sello": "sello_ceniza",
+      "coords": [
+        256,
+        1024
+      ],
+      "biomas_isla": [
+        "volcan",
+        "ceniza",
+        "roca"
+      ],
+      "pesca_disponible": false,
+      "minerales": [],
+      "templos_relacionados": []
+    },
+    {
+      "id": "ubic_templo_ceniza",
+      "nombre": "Templo de la Ceniza",
+      "isla": "CEN",
+      "tipo": "templo",
+      "sello": "sello_ceniza",
+      "coords": [
+        400,
+        1024
+      ],
+      "biomas_isla": [
+        "volcan",
+        "ceniza",
+        "roca"
+      ],
+      "pesca_disponible": false,
+      "minerales": [
+        "veta_ancestral",
+        "veta_polvo_estrellas"
+      ],
+      "templos_relacionados": [
+        "ubic_templo_ceniza"
+      ]
+    },
+    {
+      "id": "ubic_aurora_cielo",
+      "nombre": "Cielo de la Aurora",
+      "isla": "AUR",
+      "tipo": "cielo",
+      "sello": "sello_aurora",
+      "coords": [
+        1024,
+        1024
+      ],
+      "biomas_isla": [
+        "bosque_ancestral",
+        "pradera",
+        "lago"
+      ],
+      "pesca_disponible": true,
+      "minerales": [],
+      "templos_relacionados": []
+    },
+    {
+      "id": "ubic_templo_aurora",
+      "nombre": "Templo de la Aurora",
+      "isla": "AUR",
+      "tipo": "templo",
+      "sello": "sello_aurora",
+      "coords": [
+        1150,
+        1024
+      ],
+      "biomas_isla": [
+        "bosque_ancestral",
+        "pradera",
+        "lago"
+      ],
+      "pesca_disponible": true,
+      "minerales": [
+        "veta_ancestral",
+        "veta_polvo_estrellas"
+      ],
+      "templos_relacionados": [
+        "ubic_templo_aurora"
+      ]
+    },
+    {
+      "id": "ubic_spawn_riz",
+      "nombre": "Punto de partida",
+      "isla": "RIZ",
+      "tipo": "punto",
+      "sello": "",
+      "coords": [
+        256,
+        256
+      ],
+      "biomas_isla": [
+        "playa",
+        "pradera",
+        "bosque",
+        "montana"
+      ],
+      "pesca_disponible": true,
+      "minerales": [],
+      "templos_relacionados": []
+    },
+    {
+      "id": "ubic_biblioteca_choza",
+      "nombre": "Biblioteca de la Chozavil",
+      "isla": "RIZ",
+      "tipo": "hogar",
+      "sello": "",
+      "coords": [
+        320,
+        320
+      ],
+      "biomas_isla": [
+        "playa",
+        "pradera",
+        "bosque",
+        "montana"
+      ],
+      "pesca_disponible": true,
+      "minerales": [],
+      "templos_relacionados": []
+    }
+  ],
+  "minerales_por_region": {
+    "cantera": [
+      "veta_cobre",
+      "veta_hierro",
+      "veta_oro"
+    ],
+    "cueva": [
+      "veta_cristal"
+    ],
+    "templo": [
+      "veta_ancestral",
+      "veta_polvo_estrellas"
+    ]
+  },
+  "zonas_por_gate": [
+    {
+      "gate_id": "gate_rama_gruesa",
+      "zone_id": "zona_bosque_denso",
+      "tipo": "rama_gruesa",
+      "required_tier": "T1_COBRE",
+      "required_tool": "hacha",
+      "blocks_story": false
+    },
+    {
+      "gate_id": "gate_muro_piedra",
+      "zone_id": "zona_cantera",
+      "tipo": "muro_piedra",
+      "required_tier": "T2_HIERRO",
+      "required_tool": "pico",
+      "blocks_story": false
+    },
+    {
+      "gate_id": "gate_raiz_anciana",
+      "zone_id": "zona_raices",
+      "tipo": "raiz_anciana",
+      "required_tier": "T2_HIERRO",
+      "required_tool": "hacha",
+      "blocks_story": false
+    },
+    {
+      "gate_id": "gate_sello_ancestral",
+      "zone_id": "zona_templo_ceniza",
+      "tipo": "sello_ancestral",
+      "required_tier": "T3_ORO",
+      "required_tool": "pico",
+      "blocks_story": true
+    },
+    {
+      "gate_id": "gate_cristal_bloqueado",
+      "zone_id": "zona_cueva_cristal",
+      "tipo": "cristal_bloqueado",
+      "required_tier": "T4_CRISTAL",
+      "required_tool": "martillo",
+      "blocks_story": true
+    },
+    {
+      "gate_id": "gate_tumba_ancestral",
+      "zone_id": "zona_tumba",
+      "tipo": "tumba_ancestral",
+      "required_tier": "T4_CRISTAL",
+      "required_tool": "pala",
+      "blocks_story": true
+    }
+  ],
+  "peces": {
+    "fuente": "data/balance/fishing.json",
+    "total": 25,
+    "por_bioma_declarado": {
+      "arrecife": [
+        "pez_sargo"
+      ],
+      "pozo_ancestral": [
+        "pez_ancestral_laguna",
+        "pez_ancestral_raiz"
+      ]
+    },
+    "resto": "sin campo de ubicacion/isla en datos: aplican por temporada, hora y clima"
+  },
+  "huecos_de_mapeo": [
+    "Las regiones de mining (\"cantera\", \"cueva\") no tienen ubicacion en data/ubicaciones/ubicaciones.json.",
+    "Los zone_id de los gates (zona_cantera, zona_cueva_cristal, zona_raices, ...) no mapean a ningun id ubic_* de ubicaciones.json.",
+    "23 de 25 peces no tienen campo de ubicacion: el mapeo pez->ubicacion no existe en datos.",
+    "veta_oro y veta_polvo_estrellas comparten item_id \"ancient_crystal\" en data/mining/ores.json."
+  ]
+}
