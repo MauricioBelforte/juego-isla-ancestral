@@ -4,7 +4,7 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Con dudas (145/155; 7 bloqueados (M28 viajes / M54 mapa / 3 integraciones runtime M39-M18-M25) + 3 pendientes)
+- Estado: 🟡 Con dudas (145/155; 8 bloqueados (M28 viajes / M54 mapa / 3 integraciones runtime M39-M18-M25 / horarios tiendas M39-M21) + 2 pendientes)
 - Agente: — (reserva liberada; última iteración de mimo 2026-09-20, reconciliación 2026-09-24)
 - Fase: F4/F5
 - Dificultad: 3
@@ -45,7 +45,7 @@
 - [x] Documentar LOC-RIZ-PUER-001 (Puerto) con 4 objetos — ubicaciones_loc.json
 - [x] Definir conexiones entre ubicaciones del pueblo — world_locations.gd conexiones + _reflejar_conexiones()
 - [x] Definir requisitos de acceso para cada ubicación — can_access() + requisitos en JSON
-- [ ] Definir horarios de NPCs en tiendas
+- [?] Definir horarios de NPCs en tiendas → bloqueado: requiere M39/M21 (horarios runtime, no resoluble en M160; reclasificado 2026-10-15 por decision del director, informe 256)
 - [x] Crear Resources .tres para cada ubicación — 9 archivos .tres + 39 en JSON
 - [x] Validar conexiones bidireccionales — validar_conexiones() línea 314
 - [x] Definir objetos interactuables por ubicación — objetos en JSON con interactuable flag
@@ -181,16 +181,17 @@
 - [x] Documentar integración con otros módulos → 08-Guia-Ubicaciones.md §4
 - [x] Crear guía para agregar nuevas ubicaciones → 08-Guia-Ubicaciones.md §5
 
-**Totales:** 155 items - Completados: 145 - Pendientes: 3 - No resueltos: 7.
+**Totales:** 155 items - Completados: 145 - Pendientes: 2 - No resueltos: 8.
 **Completados: 145 [x]**  (BUG-070 lote 8, atria-dawn 2026-10-09: 3 [x] degradados a [?] - L54/L55/L72 'Integrar con M39/M18/M25' con 'pendiente runtime' = deferral M114)
-**Bloqueados: 7 [?] (M28 viajes / M54 mapa / 3 integraciones runtime M39-M18-M25)**
-**Pendientes: 3 [ ] (horarios NPCs en tiendas, regeneracion objetos M158, integracion puzzles M25)**
+**Bloqueados: 8 [?] (M28 viajes / M54 mapa / 3 integraciones runtime M39-M18-M25 / horarios de tiendas M39-M21)**
+**Pendientes: 2 [ ] (regeneracion objetos M158 -parcial 57/57 regeneracion_seg, 40/57 herramienta-tier-, integracion puzzles M25)**
+**Cambio 2026-10-15 (DeepSeek, Log 1862, informe 256, decision del director msg 257):** L48 'Definir horarios de NPCs en tiendas' reclasificado `[ ]` -> `[?]` (dueno M39/M21, horarios runtime, no resoluble en M160). L193 conserva `[ ]` con anotacion de medicion. Conteo previo: 145 [x] / 7 [?] / 3 [ ].
 ## Iteración 5 — Catálogo JSON completo + grafo de conexiones (2026-09-06 03:40, glm-5.3-flash / Kilo Code)
 
 - [x] `data/ubicaciones/ubicaciones_loc.json` — 39 ubicaciones LOC-* (RIZ naturaleza + COR/CEN/AUR pueblos/tiendas/talleres/casas/puertos) → archivo existe en data/ubicaciones/
 - [x] Grafo de conexiones completo y bidireccional: 0 faltantes, 0 unidireccionales (10 reflejadas en memoria; los .tres originales intactos)
 - [x] `world_locations.gd` — cargar_catalogo_json() (prioridad .tres, fallback JSON), _reflejar_conexiones(), get_conexiones(), get_recolectables() → verificado: lineas 233, 297, 328, 335
-- [ ] Objetos con regeneración (regeneracion_seg) y herramienta/tier M158 por objeto (T1..T3 según isla)
+- [ ] Objetos con regeneración (regeneracion_seg) y herramienta/tier M158 por objeto (T1..T3 según isla) — medido 2026-10-15 (DeepSeek, Log 1862): regeneracion_seg 57/57; herramienta/tier 40/57 (17 pendientes de confirmar T1)
 - [x] Test headless test_ubicaciones_iter5.gd: archivo existe en scripts/data/
 - [x] Checklist: 74 → 149 items completados (actualizado en esta revision)
 - [ ] Integracion runtime de puzzles de ruinas con M25 — M25 cerrado (122/122), integracion pendiente
