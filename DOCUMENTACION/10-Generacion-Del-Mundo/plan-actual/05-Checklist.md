@@ -23,7 +23,7 @@
 ## B. Ruido y semillas (14)
 
 - [x] Seleccionar Simplex como ruido base [S]
-- [x] Configurar 4-6 octavas con amplitud 0-192 m (Aurora) [M]
+- [ ] Configurar 4-6 octavas con amplitud 0-192 m (Aurora) [M] — DEGRADADO 2026-10-15 (step-5 410, muestreo Patron D): fractal_octaves reales 2/3/4 (terrain 4, island 3, biome 2) vs 4-6 requeridas en el item
 - [x] Ruido 2D para altura y humedad [S]
 - [x] Ruido 3D para cuevas y vetas [S]
 - [x] PRNG global por semilla (seed global de partida) [S]
@@ -137,7 +137,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 106 ítems · Completados: 90 · Pendientes: 0 · No resueltos: 16.
+**Totales:** 106 ítems · Completados: 89 · Pendientes: 1 · No resueltos: 16.
 
 ---
 
