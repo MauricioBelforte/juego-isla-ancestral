@@ -222,7 +222,7 @@
 - [x] DOCUMENTACION/36-Fauna/plan-actual creada en QA (Log 414) [S]
 - [x] 05-Checklist >= 100 ítems [S]
 - [x] Log 414 de QA cruzado firmado [S]
-- [ ] Crear plan-inicial/ como reversa historica [M] — KnownIssue no bloqueante DoD: plan-inicial sera creado cuando se estabilice la documentacion; no bloquea funcionamiento del modulo.
+- [x] Crear plan-inicial/ como reversa historica [M] — FLIP 2026-10-15 (mimo, aprobacion msg 41 WB / Log 1863): plan-inicial/ existe con los 5 docs base desde commit 41ff104 (2026-08-24); condicion "documentacion estabilizada" cumplida (227/228, sin dueno activo).
 - [x] Viñeta/tooltip de avistamiento en HUD (M53) [M] — KnownIssue no bloqueante DoD: dueño M53; datos de avistamientos existen. Avanzar cuando M53 tenga HUD de journal.
 - [x] Sonidos de fauna contextuales (M43) [M] — KnownIssue no bloqueante DoD: dueño M43; sistema SFXManager funciona. Avanzar cuando M43 tenga voces de fauna.
 
@@ -268,7 +268,7 @@ otros módulos, verificados como legítimos en QA cruzado).
 - [x] Proyecto corre sin errores nuevos (warnings globales preexistentes, no de M36) [S]
 - **Iter. conejo Hy4 (Logs 664-678, glm-5.3-flash/Kilo Code):** cuerpo y cabeza reconstruidos con bmesh lofting (anillos YZ variando X — metodología Hy4 de crear_jabali_lowpoly.py). 3D real logrado. Pendiente: ajuste fino de detalles (ojos/orejas dentro de cabeza), registro en FaunaManager, nutria/lechuza/abeja/pez/erizo/rana con mismo pipeline. Respaldo en Obsoletos/.
 
-**Totales:** 228 ítems · Completados: 226 · Pendientes: 2 · No resueltos: 0.
+**Totales:** 228 ítems · Completados: 227 · Pendientes: 1 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 228 [x] / 0 [ ] / 0 [?].
