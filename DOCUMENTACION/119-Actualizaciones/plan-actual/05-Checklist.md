@@ -45,7 +45,7 @@
 
 ## D. Descarga e Instalación (10 ítems)
 
-- [ ] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: no existe como clase en disco ni como sección propia en `03-Diseno.md` — arquitectura sustituida, P-41 Log 1157) | CORRECCION 2026-10-15 (step-5-kilocode): la nota citaba `UpdateManager.download_update()` L123, pero `update_manager.gd` tiene solo 79 lineas y no existe ninguna funcion de descarga (verificado: sus 10 funciones son _ready, _cargar_versions, _registrar_servicio, comparar_versiones, _parsear, hay_actualizacion, version_remota, set_canal, politica, _guardar_version). No esta plegado en ningun lado: la funcionalidad de descarga simplemente NO existe en el proyecto.
+- [ ] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: no existe como clase en disco ni como sección propia en `03-Diseno.md` — arquitectura sustituida, P-41 Log 1157) | CORRECCION 2026-10-15 (step-5-kilocode): la nota citaba `UpdateManager.download_update()` L123, pero `update_manager.gd` tiene 92 lineas (wc -l; medido 2026-10-15 por Step-5-WorkBuddy, msg 45) y no existe ninguna funcion de descarga (verificado: sus 10 funciones son _ready, _cargar_versions, _registrar_servicio, comparar_versiones, _parsear, hay_actualizacion, version_remota, set_canal, politica, _guardar_version). No esta plegado en ningun lado: la funcionalidad de descarga simplemente NO existe en el proyecto.
 - [x] Descarga incremental (solo cambios, no todo el juego)
 - [x] Barra de progreso de descarga
 - [x] Soporte para resume de descarga
@@ -84,7 +84,7 @@
 
 ## G. Rollback (10 ítems)
 
-- [ ] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: no existe como clase en disco ni como sección propia en `03-Diseno.md` — arquitectura sustituida, P-41 Log 1157) | CORRECCION 2026-10-15 (step-5-kilocode): la nota citaba `UpdateManager.rollback()` L134-136, pero `update_manager.gd` tiene solo 79 lineas y no existe ninguna funcion de rollback (verificado: sus 10 funciones no incluyen rollback ni restore). Tampoco existe en `scripts/backup/` ni en `scripts/saving/` (los hits de 'migracion' del proyecto son de IA de animales, sin relacion). La funcionalidad de rollback NO existe en ningun lado.
+- [ ] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: no existe como clase en disco ni como sección propia en `03-Diseno.md` — arquitectura sustituida, P-41 Log 1157) | CORRECCION 2026-10-15 (step-5-kilocode): la nota citaba `UpdateManager.rollback()` L134-136, pero `update_manager.gd` tiene 92 lineas (wc -l; medido 2026-10-15 por Step-5-WorkBuddy, msg 45) y no existe ninguna funcion de rollback (verificado: sus 10 funciones no incluyen rollback ni restore). Tampoco existe en `scripts/backup/` ni en `scripts/saving/` (los hits de 'migracion' del proyecto son de IA de animales, sin relacion). La funcionalidad de rollback NO existe en ningun lado.
 - [x] Mantener versión anterior accesible
 - [x] Restaurar save desde backup
 - [x] Verificar integridad post-rollback
