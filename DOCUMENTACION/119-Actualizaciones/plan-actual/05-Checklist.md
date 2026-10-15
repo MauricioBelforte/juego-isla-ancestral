@@ -45,7 +45,7 @@
 
 ## D. Descarga e Instalación (10 ítems)
 
-- [ ] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: no existe como clase en disco ni como sección propia en `03-Diseno.md`; plegado como `UpdateManager.download_update()` L123 — arquitectura sustituida, P-41 Log 1157)
+- [ ] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: no existe como clase en disco ni como sección propia en `03-Diseno.md` — arquitectura sustituida, P-41 Log 1157) | CORRECCION 2026-10-15 (step-5-kilocode): la nota citaba `UpdateManager.download_update()` L123, pero `update_manager.gd` tiene solo 79 lineas y no existe ninguna funcion de descarga (verificado: sus 10 funciones son _ready, _cargar_versions, _registrar_servicio, comparar_versiones, _parsear, hay_actualizacion, version_remota, set_canal, politica, _guardar_version). No esta plegado en ningun lado: la funcionalidad de descarga simplemente NO existe en el proyecto.
 - [x] Descarga incremental (solo cambios, no todo el juego)
 - [x] Barra de progreso de descarga
 - [x] Soporte para resume de descarga
@@ -84,7 +84,7 @@
 
 ## G. Rollback (10 ítems)
 
-- [ ] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: no existe como clase en disco ni como sección propia en `03-Diseno.md`; plegado como `UpdateManager.rollback()` L134-136 — arquitectura sustituida, P-41 Log 1157)
+- [ ] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: no existe como clase en disco ni como sección propia en `03-Diseno.md` — arquitectura sustituida, P-41 Log 1157) | CORRECCION 2026-10-15 (step-5-kilocode): la nota citaba `UpdateManager.rollback()` L134-136, pero `update_manager.gd` tiene solo 79 lineas y no existe ninguna funcion de rollback (verificado: sus 10 funciones no incluyen rollback ni restore). Tampoco existe en `scripts/backup/` ni en `scripts/saving/` (los hits de 'migracion' del proyecto son de IA de animales, sin relacion). La funcionalidad de rollback NO existe en ningun lado.
 - [x] Mantener versión anterior accesible
 - [x] Restaurar save desde backup
 - [x] Verificar integridad post-rollback
@@ -143,11 +143,11 @@
 - [x] Semver/canales/rollback cerrados con evidencia local en checklist personal [S]
 - [x] Tareas locales cerradas: 33 ítems de estrategia/rollback/tests sin dueño externo [S]
 - [x] T-001/T-002/T-003/T-004/T-005/T-006: estrategia de tipos/frecuencia/QA/comms/política forzada/roadmap documentada en `04-Codigo.md` [S]
-- [ ] T-022: diseño de UpdateDownloader — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `UpdateDownloader.new()` dentro del diseño sustituido, retirada en P-41); implementación formal con dueño M96/M118 [S] — **KnownIssue no bloqueante DoD: dueño de diseño M96/M118** (verificado por atria-dawn-s3 2026-10-08: `03-Diseno.md` §2 no tiene sección `UpdateDownloader`; la funcionalidad de descarga vive plegada en `UpdateManager.download_update()` L123. Cerrable cuando el dueño documente la clase separada o se acepte formalmente la arquitectura sustituida)
+- [ ] T-022: diseño de UpdateDownloader — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `UpdateDownloader.new()` dentro del diseño sustituido, retirada en P-41); implementación formal con dueño M96/M118 [S] — **KnownIssue no bloqueante DoD: dueño de diseño M96/M118** (verificado por atria-dawn-s3 2026-10-08: `03-Diseno.md` §2 no tiene sección `UpdateDownloader`; la funcionalidad de descarga vive plegada en `UpdateManager.download_update()` L123. Cerrable cuando el dueño documente la clase separada o se acepte formalmente la arquitectura sustituida) | CORRECCION 2026-10-15 (step-5-kilocode): la cita `UpdateManager.download_update()` L123 es inexacta: `update_manager.gd` tiene 79 lineas y ninguna funcion de descarga. La funcionalidad de descarga NO vive plegada en ningun lado: no existe en el proyecto.
 - [x] T-023 a T-031: diseño de descarga incremental/progreso/resume/integridad/tmp/errores/cancelación/espacio/logging documentado en `04-Codigo.md` [S]
 - [x] T-032 a T-041: diseño de SaveMigrator + SaveMigration Resource + backup/secuencialidad/integridad/rollback/array/script/logging/notificación documentado en `03-Diseno.md` §3 (`SaveMigrator`) y §5 (estrategia de migración + backup) [S]
 - [x] T-042 a T-048: diseño de notificaciones (popup/badge/forzado/post-update/changelog) documentado en `04-Codigo.md` [S]
-- [ ] T-049 a T-056: diseño de RollbackManager + políticas + UI — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `RollbackManager.new()` dentro del diseño sustituido, retirada en P-41) [S] — **KnownIssue no bloqueante DoD: dueño de diseño M107/M59** (verificado por atria-dawn-s3 2026-10-08: `03-Diseno.md` §2 no tiene sección `RollbackManager`; el rollback vive plegado en `UpdateManager.rollback()` L134-136. Cerrable cuando el dueño documente la clase separada o se acepte formalmente la arquitectura sustituida)
+- [ ] T-049 a T-056: diseño de RollbackManager + políticas + UI — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `RollbackManager.new()` dentro del diseño sustituido, retirada en P-41) [S] — **KnownIssue no bloqueante DoD: dueño de diseño M107/M59** (verificado por atria-dawn-s3 2026-10-08: `03-Diseno.md` §2 no tiene sección `RollbackManager`; el rollback vive plegado en `UpdateManager.rollback()` L134-136. Cerrable cuando el dueño documente la clase separada o se acepte formalmente la arquitectura sustituida) | CORRECCION 2026-10-15 (step-5-kilocode): la cita `UpdateManager.rollback()` L134-136 es inexacta: `update_manager.gd` tiene 79 lineas y ninguna funcion de rollback. Tampoco existe en scripts/backup/ ni scripts/saving/. La funcionalidad de rollback NO existe en el proyecto.
 - [x] T-057 a T-086: diseño de integraciones plataforma/delta/DLC + testing + release/FAQ/registro/seguridad/firmas/hash documentado en `04-Codigo.md` [S]
 - [x] T-014/T-015: API de versión disponible + log de versión en `_ready()` [S]
 - [x] T-007: proceso de hotfix documentado en `04-Codigo.md` (P0/P1/SLA/flujo) [S]
