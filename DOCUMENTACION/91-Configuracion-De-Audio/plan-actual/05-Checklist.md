@@ -339,6 +339,47 @@
 - **QA cruzado §21.8:** ✅ **VERIFICADO por Hy3/WorkBuddy (Log 1225, 2026-10-03)** — verificador de modelo distinto (hy3 ≠ mimo). 103/0 + 82/0, guardián rojo.
 - **Suites al liberar:** `--module audio` 8 OK + `--module subtitle` 1 OK = **9 OK / 0 FAIL** (DoD de entrega cumplida).
 
+## Notas del Agente — Reverificación 2026-10-15 (step-5-kilocode / Kilo Code, director msg 413)
+
+Reverificación de los 32 abiertos contra disco. **0 flips aplicados** (los aplica el
+director). Conteo sin cambio: 207 `[x]` / 31 `[ ]` / 1 `[?]` = 239.
+
+**Ojo especial del director — L288 y `03-Diseno.md` §16-18: VERIFICADO Y LIMPIO.** Las tres
+secciones existen con contenido real (§18 lleva en su título literal "— L288") y §16
+documenta una corrección honesta: las clases `AudioSettingsLoader`/`AudioSettingsSaver`
+del diseño original **no existen** en código y la persistencia real usa M60.
+
+**Hallazgo 1 — UI real que la nota L338 desactualiza.** `settings_audio_layer.gd` construye
+por código 3 sliders de volumen (L106-108), dropdown de rango dinámico (L118→L198), toggle
+de compresión (L119) y dropdown de dispositivo (L120→L236) con backend
+`OutputDeviceManager` (`output_device_manager.gd` L31/L36) y handler completo
+(`_on_dispositivo_sel` L291 + estado en L372-376/L411-416). Es decir: **la UI de L147 y
+L198-L211 existe**, contrariamente a lo que sugiere atribuir esos 13 ítems solo a M53.
+
+**Hallazgo 2 — las etiquetas de esa UI no son presentables.** El panel referencia 14 claves
+`SETTINGS.*` y **13 no existen en ningún catálogo** (`strings_es/en/pt.json`); la única
+presente es `SETTINGS.AUDIO_TITULO`. El código cae a clave literal
+(`localization_manager.gd` `_buscar_texto()` devuelve la clave con `push_warning`), así que
+el jugador vería "SETTINGS.MAESTRO" en pantalla. Las 13, con su línea exacta:
+`SETTINGS.MAESTRO` (L106), `SETTINGS.MUSICA` (L107), `SETTINGS.EFECTOS` (L108),
+`SETTINGS.RANGO_QUIET` (L42), `SETTINGS.RANGO_MEDIO` (L43),
+`SETTINGS.RANGO_DINAMICO_PRESET` (L44), `SETTINGS.SILENCIAR` (L184),
+`SETTINGS.COMPRESION` (L222), `SETTINGS.DISPOSITIVO_SALIDA` (L240), `SETTINGS.VOLVER`
+(L133), `SETTINGS.OPCIONES` (L114), `SETTINGS.AUDIO_FALLA` (L421).
+
+El `03-Diseno.md` L439-440 ya prevé que las cadenas las resuelve el autoload `Localization`
+(M87), así que **estas 13 claves son deuda de M91 en el catálogo de M87**. No se tocó
+ningún catálogo.
+
+**Hallazgo 3 — el bloqueo de "0 assets de audio" quedó levantado.** El 2026-10-15 se
+renderizaron 97 WAV procedurales que cubren las 21 situaciones de `sfx_tones.json`, las 8
+recetas de `feedback_recetas.json` y los 35 momentos de `narrative_sound.json`. Lo que
+sigue faltando para L240-L243 son los métodos `play_hover/click/notification/error_sound`
+(0 hits de `func` en el repo), no los audios.
+
+**L166 sigue `[x]` inflado:** cita `AudioServer.set_bus_channel_count()` con 0 hits en
+código y 0 hits en el diseño. Mismo patrón que L26/L52 de M10.
+
 ---
 
 ## QA cruzado §21.8 — Hy3 (Log 1225, 2026-10-03)
