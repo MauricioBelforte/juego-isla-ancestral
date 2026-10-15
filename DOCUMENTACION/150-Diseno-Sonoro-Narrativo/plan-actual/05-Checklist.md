@@ -49,7 +49,7 @@
 - [x] Diseñar frecuencia: elección de Sello por el jugador → spec §4: "elección de Sello por el jugador"
 - [x] Diseñar leitmotif: repetición al recordar Sello → implementado: leitmotif asociado pero falta integración
 - [x] Disenar trigger: jugador elige Sello → sonido del Sello → implementado: momento "jugador_elige_sello" con leitmotif "aurora_motivo" (v1.1)
-- [?] Disenar trigger: jugador recuerda Sello → leitmotif del Sello → spec §4: "repetición al recordar Sello"; requiere M22 (memoria)
+- [ ] Disenar trigger: jugador recuerda Sello → leitmotif del Sello → spec §4: "repetición al recordar Sello"; requiere M22 (memoria) | VERIFICADO 2026-10-15 (step-5-kilocode): el dato y la API existen (data/audio/narrative_sound.json tiene `sello_obtenido`, `jugador_elige_sello` y `jugador_completa_sello` con leitmotif `aurora_motivo`; scripts/audio/narrative_sound.gd expone `play_momento()` y `play_leitmotif()`), y M22 ya está completo 91/91, así que la dependencia no bloquea. Pero NO hay momento ni trigger de "recuerdo" de sello, y ningún sistema de gameplay invoca esos momentos: las únicas llamadas a `play_momento` están dentro del propio narrative_sound.gd. Diseñado, no implementado.
 - [x] Disenar trigger: jugador completa Sello → variacion del leitmotif → implementado: momento "jugador_completa_sello" intensidad 1.0 (v1.1)
 
 ### [S] Sonido distintivo de Elysia
@@ -87,7 +87,7 @@
 - [x] Definir instrumentos: susurro, eco, sintetizador tenso → implementado: en momento misterio_detectado
 - [x] Diseñar frecuencia: descubrimiento de secreto, lore oculto → spec §8: "descubrimiento de secreto, lore oculto"
 - [x] Disenar trigger: jugador descubre secreto → sonido de misterio → implementado: momento "misterio_detectado" existente (v1.1)
-- [?] Disenar trigger: jugador encuentra lore oculto → sonido de misterio → spec §8: "jugador encuentra lore oculto → sonido de misterio"; requiere M148 (Lore)
+- [ ] Disenar trigger: jugador encuentra lore oculto → sonido de misterio → spec §8: "jugador encuentra lore oculto → sonido de misterio"; requiere M148 (Lore) | VERIFICADO 2026-10-15 (step-5-kilocode): existe el momento `misterio_detectado` (categoría ambiental) en data/audio/narrative_sound.json y la API `play_mystery_sound()` en scripts/audio/narrative_sound.gd L111-112, y M148-Lore-Ambiental está en 115/117. Pero no hay momento específico de "lore oculto" y nadie invoca `play_mystery_sound()`: las únicas llamadas a `play_momento` están dentro del propio servicio. Falta el disparador desde el sistema de lore de M148. Diseñado, no implementado.
 - [x] Disenar trigger: jugador entra a area misteriosa → ambiente tenso → implementado: momento "area_misteriosa" intensidad 0.4 (v1.1)
 
 ### [S] Sonido de puertas antiguas
@@ -120,11 +120,11 @@
 ### [S] Leitmotifs sonoros
 - [x] Definir repetición con variación → implementado: cada leitmotif tiene variantes en narrative_sound.json
 - [x] Definir leitmotifs de personajes (Aurora, Elysia, NPCs) → implementado: aurora_motivo, elysia_motivo
-- [?] Definir leitmotifs de islas (cada isla tiene leitmotif) → spec §12: "cada isla tiene leitmotif"; requiere M41/M42/M43 (audio engine)
+- [ ] Definir leitmotifs de islas (cada isla tiene leitmotif) → spec §12: "cada isla tiene leitmotif"; requiere M41/M42/M43 (audio engine) | VERIFICADO 2026-10-15 (step-5-kilocode): data/audio/narrative_sound.json define 4 leitmotifs (`aurora_motivo`, `elysia_motivo`, `templo_motivo`, `resonancia_motivo`), pero son de personaje y concepto, NO de isla. Las 4 islas del mundo (RIZ, COR, CEN, AUR en data/islas/islas.json) no tienen leitmotif propio. Lo que sí existe por isla son las capas de música de fondo en data/audio/music_context_matrix.json (`base_aurora`, `base_coral`, `base_ceniza`, `base_verde`), que son un dato distinto a un leitmotif. No cumple.
 - [x] Definir leitmotifs de temas (cozy, tensión, peligro, misterio) → implementado: variantes en cada leitmotif
 - [x] Diseñar leitmotif de Aurora: repetición con variación según contexto → implementado: variantes ["calm", "tension", "triumph"]
 - [x] Diseñar leitmotif de Elysia: repetición con variación según contexto → implementado: variantes ["mystery", "wonder", "danger"]
-- [?] Diseñar leitmotif de cada isla: repetición en isla específica → spec §12: "repetición en isla específica"; requiere M41/M42/M43 (audio engine)
+- [ ] Diseñar leitmotif de cada isla: repetición en isla específica → spec §12: "repetición en isla específica"; requiere M41/M42/M43 (audio engine) | VERIFICADO 2026-10-15 (step-5-kilocode): no hay leitmotif por isla que se repita al entrar en ella (ver ítem anterior: los 4 leitmotifs son de personaje/concepto). Sí existen la infraestructura para hacerlo — regla `fade_out_leitmotif_al_cambiar_zona` en narrative_sound.json y `set_audio_context()`/`setup_audio_context()` en scripts/audio/narrative_sound.gd L85-91, más los temas por isla en music_context_matrix.json (`aurora_dia`, `coral_dia`, `ceniza_dia`) — pero falta el dato del leitmotif por isla y el disparador al cambiar de zona. Infraestructura lista, contenido ausente.
 - [x] Diseñar leitmotif de cada templo: repetición en templo específico → implementado: templo_motivo variantes ["exploration", "puzzle", "completion"]
 
 ### [S] Variación de intensidad
