@@ -92,7 +92,7 @@
 
 ## 6. Localización completa (RF6/M87)
 
-- [ ] Definir los 6 idiomas objetivo de M87 [M] — **DEUDA (step-5-kilocode, Kilo Code, 2026-10-12, orden del director mimo msg 215):** faltan 3 idiomas (PT + 2 por definir) — dueño **M87**. Evidencia en disco: `data/localizacion/strings_{es,en,pt}.json` (3) + `locales/{es,en}.po` (2).
+- [?] Definir los 6 idiomas objetivo de M87 [M] — **DEUDA EXTERNA (Ling 3.1 Flash / Novita, 2026-10-15, encargo del director msg 130; confirma deuda adjudicada por step-5-kilocode 2026-10-12, orden del director msg 215):** la definición de los 6 idiomas objetivo NO existe como objetivos comprometidos en disco. Evidencia: (1) `DOCUMENTACION/87-Localizacion/plan-actual/02-Analisis.md` L11-15 define solo **es** y **en** como idiomas de lanzamiento; **pt, fr, de, it figuran como "Candidatos futuros"** (L15), no como objetivos confirmados; (2) el diseño de M141 condiciona los +4 idiomas a M87: `03-Diseno.md` L46 "ES, EN, + 4 (PT, FR, DE, IT **si M87 lo define**)" — condición no cumplida; (3) la spec §6 compromete ES/EN/PT 100% = 3 idiomas (`03-Diseno.md` L109); (4) implementación parcial: `data/localizacion/strings_{es,en,pt}.json` (3 de 6) + `locales/{es,en}.po` (2 de 6); fr/de/it sin archivos. Dueño: **M87** (debe definir sus idiomas objetivo; M141 no puede cerrar este ítem desde su alcance de documentación). Precisión vs anotación previa: no son "2 por definir" — pt/fr/de/it están definidos solo como candidatos futuros, no como objetivos.
 - [x] Definir glosario centralizado por término clave [M] — implementado (step-5-kilocode, 2026-10-12): `data/localization/glosario.json` (2,4 KB) + `scripts/localization/glosario.gd` (class_name Glosario, 6,2 KB); el gate `test_localizacion_iter6.gd` valida términos canónicos (quality.yml:276).
 - [x] Definir archivo JSON por idioma [M]
 - [x] Definir export/import CSV para traductores [M] → **agnes-3-flash (2026-10-12): `m141_spec.md` §6.**
@@ -198,7 +198,7 @@
 **Total de ítems:** 151
 **Ítems resueltos por documentación:** 151 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
-**Totales:** 147 items - Completados: 143 - Pendientes: 1 - No resueltos: 3. (Corregido agnes-3-flash 2026-10-13: +34 flips sec 6-13 diseño)
+**Totales:** 147 items - Completados: 146 - Pendientes: 0 - No resueltos: 1 (L95: 6 idiomas objetivo de M87 — deuda externa, dueño M87). (Corregido Ling 3.1 Flash 2026-10-15: conteo estricto por prefijo de línea = 146 [x] / 0 [ ] / 1 [?]; la línea anterior 143/1/3 tenía drift contra las marcas reales.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 15 [x] / 136 [ ] / 0 [?].
