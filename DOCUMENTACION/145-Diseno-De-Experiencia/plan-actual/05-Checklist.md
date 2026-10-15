@@ -104,10 +104,10 @@
 - [x] Definir requisito: modo de alto contraste → R7
 - [x] Definir requisito: reducción de movimiento → R8
 - [x] Crear checklist de accesibilidad (WCAG 2.1 AA) → §2
-- [?] Verificar contraste de colores → requiere paleta aplicada globalmente (M53 ThemeUx); metodo disenado en 03-Diseno.md §2. M53 ✅ cerrado. Verificacion visual deferred.
-- [?] Verificar que sonidos tienen representacion visual → requiere audio integrado (M41-M44); §3 → M41/M42/M43 ✅ cerrados; representacion visual disenada en 03-Diseno.md §3. Deferred a integracion.
-- [?] Verificar que eventos visuales tienen audio → requiere VFX integrados (M52); §3 disenado. M52 parcialmente cerrado. Integracion deferred.
-- [?] Verificar legibilidad de texto → requiere UI integrada; §3 disenado. M53 ✅ cerrado (UI layer operational). Legibilidad deferred a integration test.
+- [?] Verificar contraste de colores → requiere paleta aplicada globalmente (M53 ThemeUx); metodo disenado en 03-Diseno.md §2. M53 en 144/165 (Con dudas, NO cerrado al 2026-10-15) - la paleta no esta aplicada globalmente. Verificacion visual deferred. | REVERIFICADO 2026-10-15 (step-5-kilocode): estados de modulos contrastados contra CHECKLIST-GLOBAL.md.
+- [?] Verificar que sonidos tienen representacion visual → requiere audio integrado (M41-M44); §3 → M41 58/110 y M42 62/100 (Con dudas, NO cerrados al 2026-10-15); solo M43 esta completado 97/97. representacion visual disenada en 03-Diseno.md §3. Deferred a integracion. | REVERIFICADO 2026-10-15 (step-5-kilocode): estados de modulos contrastados contra CHECKLIST-GLOBAL.md.
+- [?] Verificar que eventos visuales tienen audio → requiere VFX integrados (M52); §3 disenado. M52 completado 147/148 (al 2026-10-15, ya no parcial). Integracion deferred. | REVERIFICADO 2026-10-15 (step-5-kilocode): estados de modulos contrastados contra CHECKLIST-GLOBAL.md.
+- [?] Verificar legibilidad de texto → requiere UI integrada; §3 disenado. M53 en 144/165 (Con dudas); UI layer operational segun la nota. Legibilidad deferred a integration test. | REVERIFICADO 2026-10-15 (step-5-kilocode): estados de modulos contrastados contra CHECKLIST-GLOBAL.md.
 - [?] Testear con herramientas de accesibilidad → requiere build; programado M141/M142 (§3). KnownIssue no bloqueante DoD.
 - [x] Documentar estándares completos → documento completo
 
