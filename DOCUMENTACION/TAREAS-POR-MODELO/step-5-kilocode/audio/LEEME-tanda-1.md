@@ -219,3 +219,43 @@ Dos momentos merecen oido especial:
   pausas narrativas, no sonidos.** Renderizarlas como silencio es lo correcto.
 - **`area_misteriosa` y `misterio_detectado`** usan el arquetipo de tension, que mete un
   tritono sonando por encima. Es disonante a proposito.
+
+## Estado final: cobertura completa de los 3 catálogos con consumidor
+
+Verificado contra disco al cierre (2026-10-15):
+
+| Catálogo | Dueño | Declarados | Con WAV |
+|---|---|---|---|
+| `data/audio/sfx_tones.json` | M43 (SFX) | 21 | **21** |
+| `data/audio/feedback_recetas.json` | M44 (ASMR/feedback) | 8 | **8** |
+| `data/audio/narrative_sound.json` | M150 (diseño sonoro) | 35 | **35** |
+| **Total situaciones** | | **64** | **64** |
+
+Además de esas 64 situaciones hay 33 WAV extra que **no** son situaciones sueltas sino
+las familias que el propio JSON pide: 30 variaciones (por material, por superficie, por
+etapa, por altura) y 5 stings musicales. **Total entregado: 97 WAV.**
+
+### Integridad numérica de los 97
+
+- **0 muestras saturadas** (ni una muestra con `|x| >= 32700`).
+- Pico máximo **0.850** en todos; el pico 0.000 son los dos silencios narrativos.
+- 112,1 segundos de audio en total, 9,5 MB.
+- Todos mono / 16-bit / 44.100 Hz.
+
+### Lo único que queda fuera, y por qué
+
+Las **24 capas** de `data/audio/music_context_matrix.json` (`base_aurora`,
+`tiempo_noche`, `evento_tormenta`, los 4 leitmotifs...) son **beds ambientales para
+loopear minutos**. Sintetizarlas con senos daría un zumbido, no música. Necesitan
+composición o assets reales. Los 24 `temas` de ese JSON no son assets independientes:
+son combinaciones de esas capas.
+
+### Cómo regenerar todo
+
+```
+python scripts/scripts-reutilizables/generar_audios_procedurales.py
+```
+
+Los parámetros ajustables por oreja están en constantes al inicio del generador
+(`AMP_BASE`, `ATAQUE_S`, `RELEASE_S`, `TIMBRES_MATERIAL`, `TIMBRES_STING`,
+`TIMBRES_MOMENTO`, `CAPAS_TIMBRE`).
