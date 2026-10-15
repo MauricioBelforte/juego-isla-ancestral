@@ -223,6 +223,55 @@
 
 **Totales:** 150 items - Completados: 113 - Pendientes: 37 - No resueltos: 0.
 
+## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
+
+**Resultado: 0 flips. Los 37 se mantienen.** Auditoría pedida por el director (msg 407).
+
+**Lo que sí existe y está verificable en disco** (para que el próximo no vuelva a
+buscarlo):
+
+- El servicio existe y es sustancial: `scripts/rendimiento/memoria/memory_monitor.gd`,
+  **568 líneas**, con ~70 funciones públicas. Cubre semáforo de memoria, presupuestos
+  por sistema, baseline y drift (`baseline_mb`, `drift_porciento`, `drift_check`),
+  cola de descarga con veto por carga en curso, evicción de atlas
+  (`evictar_atlas`), cambio de región (`avisar_cambio_region`), bancos de audio
+  (`pedir_banco_audio`, `bancos_audio_diferidos`) y puntos de interés.
+- La suite de tests es grande: **~373 `_check()` en 8 archivos** —
+  `test_memoria_m62_iter3.gd` (135), `test_memoria_m62_iter5.gd` (61),
+  `test_enforcement_m62.gd` (49), `test_memoria_m62.gd` (29), `test_pool_iter2.gd`
+  (28), `test_m62_leaks_teleport.gd` (22), `test_m62_pureza_save.gd` (21),
+  `test_m62_liberacion.gd` (17).
+
+**Por qué ningún `[ ]` se promueve**, con el detalle por naturaleza:
+
+1. **11 ítems miden una sesión real** (30 min de juego, drift < 5%, baselines de
+   600/1600/2200/2000/2500 MB, tormenta máxima). No hay forma de verificarlos sin
+   ejecutar el juego; ningún número de esos está medido en disco.
+2. **14 ítems dependen de otro módulo** y nombran el dueño entre paréntesis (M63,
+   M42, M41, M32, M09, M12, M69, M28, M27, M26, M08, M91). Verifiqué los
+   consumidores reales de las APIs clave de M62 y **solo una está integrada**: el
+   handshake de carga con `scripts/stream/stream_manager.gd`, que llama
+   `avisar_carga_iniciada/terminada` (L158-175) y `registrar_candidato_descarga`
+   (L308-309). El resto —`evictar_atlas`, `avisar_cambio_region`,
+   `pedir_banco_audio`, `drift_check`, `estabilizar_baseline`, `doble_descarga_evitada`,
+   `iniciar_descarga_audio`— **no tiene ningún consumidor fuera de los tests**: el
+   mecanismo está construido y probado aisladamente, pero nada en el juego lo llama,
+   así que el comportamiento que describen los ítems no ocurre.
+3. **16 ítems son mecanismo propio** pero igualmente describen comportamiento
+   (buffers de VoxelTools por chunk, colliders de chunks descargados, diffs del
+   jugador sin historial infinito). La capacidad existe en `memory_monitor.gd` y los
+   tests la ejercen, pero no hay evidencia de que el chunking o el sistema de
+   edición la invoque.
+
+**Conclusión operativa:** M62 está **construido y bien testeado, pero integrado solo
+por el camino de streaming**. Los 37 `[ ]` no son deuda de implementación del módulo
+sino de **cableado**: falta que M63, M09, M42, M41 y el sistema de chunks llamen a
+las APIs que ya existen. Ese es el trabajo real que queda, y es de los dueños de
+esos módulos, no de M62.
+
+**Salvedad honesta:** no ejecuté ningún test (Godot no disponible en este entorno).
+El conteo de `_check()` es lectura de fuente, no resultado de corrida.
+
 ## Notas del Agente (iter. 2 GlobalPool — Log 604, glm-5.3-flash/Kilo Code)
 
 ### Lo que hice
