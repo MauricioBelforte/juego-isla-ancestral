@@ -141,7 +141,7 @@
 - [x] Dashboard con snapshots de tamaño [S] -- agnes-2.5-flash 2026-09-12: feature disenada en 03-Diseno.md §3.16 (build size dashboard); requiere storage + web view. Deferred.
 - [x] Exportación CSV para graficar [S]
 
-**Totales:** 106 ítems · Completados: 105 · Pendientes: 1 · No resueltos: 0.
+**Totales:** 106 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 1 (L199: validación CI real — deuda externa; CI rojo 3/3 medido por API 2026-10-15).
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"106 items · Completados: 92 · Pendientes: 13 ·
@@ -196,4 +196,19 @@
 - [x] Auditoría de workflows (4): backup.yml (Google Drive), bug_metrics.yml (Python), quality.yml (GDScript Linter headless), testing.yml (GdUnit4 via firebelley/godot-export)
 - [x] **Fix: testing.yml usaba godot_version 4.3 con el proyecto 4.7.2** (el CI de tests estaba roto de facto) → actualizado a 4.7.2
 - [x] El gate de tests del CI usa GdUnit4 (run tests del proyecto) — pipeline coherente con la metodología de tests del repo
-- [ ] Validación en GitHub Actions real (requiere push; la action firebelley v5.2.1 puede necesitar actualización) [S] -- agnes-2.5-flash 2026-09-12: validacion documentada en 03-Diseno.md §4.1 (GitHub Actions validation); requiere push real para fire test. KnownIssue no bloqueante DoD. **[QA s2 2026-10-09, Log 1539]** CASO A — infra externa (push real al remote para fire test de la action) no disponible; KnownIssue legítimo, se mantiene `[ ]` (no es `[?]`).
+- [?] Validación en GitHub Actions real (requiere push; la action firebelley v5.2.1 puede necesitar actualización) [S] -- agnes-2.5-flash 2026-09-12: validacion documentada en 03-Diseno.md §4.1 (GitHub Actions validation); requiere push real para fire test. KnownIssue no bloqueante DoD. **[QA s2 2026-10-09, Log 1539]** CASO A — infra externa (push real al remote para fire test de la action) no disponible; KnownIssue legítimo, se mantiene `[ ]` (no es `[?]`). **[Ling 3.1 Flash 2026-10-15, encargo del director msg 128]** juicio CASO A OBSOLETO: los pushes reales SÍ ocurren (la flota pushéa a main cada pocas horas; 12 runs recientes, todos push/main) y la validación real SÍ se ejecuta — pero medida hoy por API (`gh`) es **ROJA 3/3** en los últimos 3 pushes → **deuda externa, no flippable como éxito** (WB msg 37: "la validación destapó que el CI está roto"). Evidencia y causas raíz en la Nota del Agente al pie.
+
+## Nota del Agente — QA de módulo (Ling 3.1 Flash / Novita, 2026-10-15, encargo del director msg 128)
+
+**Veredicto:** el ítem L199 "Validación en GitHub Actions real" es **`[?]` deuda externa**. La validación real EXISTE y se ejecuta en cada push a main, pero el resultado medido hoy es **CI ROJO 3/3** en los últimos 3 pushes (commits eae6b96, 38526576930 "M05", 7337d50 "M04 iter 8"). No es flippable como éxito: cerrarlo exigiría un run verde, lo cual exige arreglos en archivos prohibidos o de otros dueños.
+
+**Evidencia (API GitHub Actions, `gh run list` / `gh run view`, 2026-10-15):**
+1. **Testing Suite — failure** (run 38526930544, 2m32s, push main): el job **Godot Tests (GdUnit4) PASA** (2m24s), pero el job **GDScript Lint & Format FALLA** en el paso "Check GDScript parse (gate duro)" (47s, exit 1) → el job Quality Gate (needs: test+lint) queda rojo. El gate duro es por diseño (BUG-122, msg 61/70: "CI rojo-visible > CI verde-falso"): detecta SCRIPT ERROR en el colector de sintaxis corriendo en el runner.
+2. **quality.yml — failure 0s, "workflow file issue"** (run 38526929167): GitHub ni siquiera arranca el workflow. **Causa raíz reproducida localmente:** `python -c "import yaml; yaml.safe_load(open('quality.yml'))"` → `yaml.scanner.ScannerError: while scanning a simple key ... could not find expected ':'`, **L286-287**. El archivo tiene un error de sintaxis YAML. **quality.yml es PROHIBIDO para este encargo (msg 128)** y el quality-gate es de M112/M83 (ESTADO-PARALELO: "gate es de M112/M83").
+3. **Development Build (M118 CI-CD) — cancelled 3/3** (run 38526930516, 15m42s): el job "Tests + Lint" excede el máximo de 15m0s (annotation: "The job has exceeded the maximum execution time of 15m0s") → el job se cancela y "Build Development Binary" y "Notify Slack/Discord" nunca se ejecutan. El timeout de 15m es config de `dev-build.yml` (archivo de M118, pero su ajuste es decisión de dueño, no documentación QA).
+
+**Corroboración cruzada:** Step-5-WorkBuddy msg 37 (2026-10-15 00:10 GMT-3, Log 1857) midió lo mismo por API: "Testing Suite failure (3/3 últimas corridas, 2m32s-2m43s), quality.yml 'workflow file issue' en 0s (3/3), Development Build cancelled (3/3, 15m39s)" y concluyó: "la validación real ya ocurre via los pushes de la flota y el resultado medido hoy es ROJO -> ese item NO es flippable como éxito". Mi verificación por API coincide con WB en los 3 veredictos.
+
+**Por qué es deuda externa y no pendiente accionable desde M118-doc:** (a) quality.yml L286 → archivo prohibido + dueño M112/M83; (b) lint gate rojo en runner → requiere diagnóstico de CI (diferencia runner vs local) en testing.yml, fuera del rol QA documental; (c) timeout 15m de dev-build.yml → decisión de dueño. Ninguna de las 3 se cierra con documentación.
+
+**Recomendación para el director:** (1) autorizar a un agente con permiso a arreglar quality.yml L286-287 (error YAML puro, de bajo riesgo); (2) diagnosticar el lint gate en runner (el parse local con `--check-only` + colector pasa en Windows headless — ver Logs M41/M43 de hoy — pero falla en ubuntu-latest); (3) decidir el timeout de dev-build.yml (15m → mayor, o dividir Tests|Lint en jobs paralelos). Con los 3 verdes, L199 se flippea a `[x]` con el run verde como cita.
