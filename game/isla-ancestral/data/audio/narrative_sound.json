@@ -250,11 +250,35 @@
     },
     "templo_completado": {
       "nombre": "Templo Completado",
-      "descripcion": "Variacion final al completar un templo",
+      "descripcion": "Sonido de logro al completar un templo ancestral",
       "intensidad": 1.0,
       "leitmotif": "templo_motivo",
       "duracion_s": 4.0,
       "categoria": "logro"
+    },
+    "sello_recordado": {
+      "nombre": "Sello Recordado",
+      "descripcion": "Repetición del leitmotif del Sello cuando el jugador recuerda un sello ya obtenido",
+      "intensidad": 0.7,
+      "leitmotif": "aurora_motivo",
+      "duracion_s": 2.5,
+      "categoria": "narrativo"
+    },
+    "lore_oculto": {
+      "nombre": "Lore Oculto Encontrado",
+      "descripcion": "Sonido de misterio al encontrar una pieza de lore oculta en el mundo",
+      "intensidad": 0.9,
+      "leitmotif": "",
+      "duracion_s": 2.0,
+      "categoria": "descubrimiento"
+    },
+    "isla_entrada": {
+      "nombre": "Entrada a Isla",
+      "descripcion": "Leitmotif de la isla al cargarla (se resuelve por isla con leitmotifs_por_isla)",
+      "intensidad": 0.8,
+      "leitmotif": "isla_riz_motivo",
+      "duracion_s": 4.0,
+      "categoria": "descubrimiento"
     }
   },
   "leitmotifs": {
@@ -289,16 +313,54 @@
       "tonalidad": "Mixolidio",
       "tempo_bpm": 66,
       "variantes": ["activate", "idle", "break"]
+    },
+    "isla_riz_motivo": {
+      "nombre": "Motivo de la Isla Raíz",
+      "descripcion": "Tema de la Isla Raíz (RIZ), origen del jugador: cálido y acogedor",
+      "instrumentos": ["guitarra", "cuerdas", "flauta"],
+      "tonalidad": "Mayor",
+      "tempo_bpm": 76,
+      "variantes": ["calm", "tension", "triumph"]
+    },
+    "isla_cor_motivo": {
+      "nombre": "Motivo de la Isla Coral",
+      "descripcion": "Tema de la Isla Coral (COR), arrecife y lagunas: brillante y fluido",
+      "instrumentos": ["marimba", "arpa", "vientos"],
+      "tonalidad": "Mayor",
+      "tempo_bpm": 84,
+      "variantes": ["calm", "tension", "triumph"]
+    },
+    "isla_cen_motivo": {
+      "nombre": "Motivo de la Isla Ceniza",
+      "descripcion": "Tema de la Isla Ceniza (CEN), volcán y ceniza: grave y persistente",
+      "instrumentos": ["percusión grave", "gongs", "cuerdas"],
+      "tonalidad": "Menor",
+      "tempo_bpm": 58,
+      "variantes": ["calm", "tension", "triumph"]
+    },
+    "isla_aur_motivo": {
+      "nombre": "Motivo de la Isla Aurora",
+      "descripcion": "Tema de la Isla Aurora (AUR), bosque ancestral: etéreo y luminoso",
+      "instrumentos": ["cristal", "sintetizador", "coro"],
+      "tonalidad": "Mixolidio",
+      "tempo_bpm": 64,
+      "variantes": ["calm", "tension", "triumph"]
     }
+  },
+  "leitmotifs_por_isla": {
+    "RIZ": "isla_riz_motivo",
+    "COR": "isla_cor_motivo",
+    "CEN": "isla_cen_motivo",
+    "AUR": "isla_aur_motivo"
   },
   "reglas": {
     "silencio_narrativo_tras_sello": true,
     "fade_out_leitmotif_al_cambiar_zona": true
   },
   "metadata": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "creado_por": "deepseek-v4-flash",
     "fecha": "2026-09-01",
-    "notas": "Data-driven: cualquier momento/leitmotif agregado al JSON aparece en el juego sin tocar codigo. v1.1: +28 momentos (maquina, telemetria, aurora, elysia, sello, resonancia, descubrimiento, puertas, templo, narrativos)."
+    "notas": "Data-driven: cualquier momento/leitmotif agregado al JSON aparece en el juego sin tocar codigo. v1.1: +28 momentos (maquina, telemetria, aurora, elysia, sello, resonancia, descubrimiento, puertas, templo, narrativos). v1.2 (step-5-kilocode, 2026-10-15): integracion M150 - 4 leitmotifs por isla (RIZ/COR/CEN/AUR), momentos sello_recordado y lore_oculto, y mapa leitmotifs_por_isla."
   }
 }
