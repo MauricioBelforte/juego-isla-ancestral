@@ -30,13 +30,15 @@ def elegir_numero_seguro(canal):
         print(f'ERROR: no existe pool de {canal}')
         return None
     lineas = [l.strip() for l in open(pool_path, encoding='utf-8').read().splitlines() if l.strip()]
-    # numeros que ya existen en disco
+    # numeros que ya existen en disco (recursivo: los mensajes pueden estar en
+    # subcarpetas de rango 0-99/100-199/... — orden del fundador 2026-10-15)
     existentes = set()
-    for f in os.listdir(canal_dir):
-        if f[0].isdigit() and '-' in f:
-            nn = f.split('-')[0]
-            if nn.isdigit() and int(nn) < 2026:
-                existentes.add(nn)
+    for raiz, _dirs, files in os.walk(canal_dir):
+        for f in files:
+            if f[0].isdigit() and '-' in f:
+                nn = f.split('-')[0]
+                if nn.isdigit() and int(nn) < 2026:
+                    existentes.add(nn)
     # elegir el primero del pool que NO exista en disco
     for l in lineas:
         if l not in existentes:
@@ -68,17 +70,20 @@ found = False
 for c in order:
     path = os.path.join(base, c)
     if not os.path.isdir(path): continue
-    files = [f for f in os.listdir(path) if f.endswith('.md') and re.match(r'^\d+-', f)]
-    files.sort(key=lambda f: int(f.split('-')[0]))
+    files = []
+    for raiz, _dirs, fnames in os.walk(path):
+        for f in fnames:
+            if f.endswith('.md') and re.match(r'^\d+-', f):
+                files.append(os.path.join(raiz, f))
+    files.sort(key=lambda p: int(os.path.basename(p).split('-')[0]))
     last = processed.get(c, 0)
-    new = [f for f in files if int(f.split('-')[0]) > last]
-    for f in new:
+    new = [fp for fp in files if int(os.path.basename(fp).split('-')[0]) > last]
+    for fp in new:
         found = True
-        fp = os.path.join(path, f)
         sz = os.path.getsize(fp)
         content = open(fp, encoding='utf-8').read()
         is_template = 'PLANTILLA RESERVADA' in content and '<cuerpo del mensaje aca>' in content
         tag = ' [PLANTILLA]' if is_template else ''
-        print(f'NUEVO [{c}]: {f} ({sz}b){tag}')
+        print(f'NUEVO [{c}]: {os.path.basename(fp)} ({sz}b){tag}')
 if not found:
     print('SIN NUEVOS')

@@ -79,7 +79,9 @@ for c in _canales_disco:
     d = MM / c
     pool, ok = leer_sano(d / "NUMEROS_DISPONIBLES.txt")
     usados = set()
-    for p in d.iterdir():
+    # rglob: los mensajes pueden estar en subcarpetas de rango 0-99/100-199/...
+    # (orden del fundador 2026-10-15)
+    for p in d.rglob("*"):
         if not p.is_file() or not MENSAJE_RE.match(p.name):
             continue
         m = NUM.match(p.name)
