@@ -1,0 +1,299 @@
+LISTADO DE CLAVES i18n AUSENTES — material de revision
+Total: 112 claves en 22 scripts
+NO es traduccion final: es PROPUESTA derivada del nombre, para revision humana.
+Nota: se excluyo DIARY.CAT_, que no es clave sino PREFIJO usado en concatenacion
+(_t("DIARY.CAT_" + String(cat).to_upper()) en diary_layer.gd L335/L412).
+
+=== BLOQUE LISTO PARA PEGAR (formato catalogo) ===
+
+  "DIARY.BUSCAR": "Buscar",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.CATEGORIAS": "Categorias",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.CAT_LUGARES": "Lugares",   # usada en: scripts/localization/auditor_claves.gd
+  "DIARY.DETALLE": "Detalle",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.DIA": "Dia",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.ESTADO_COMPLETADO": "Estado Completado",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.ESTADO_NUEVO": "Estado Nuevo",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.ESTADO_VISTO": "Estado Visto",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.FAVORITO": "Favorito",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.FILTRO": "Filtro",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.FILTRO_COMPLETADOS": "Filtro Completados",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.FILTRO_FAVORITOS": "Filtro Favoritos",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.FILTRO_NUEVOS": "Filtro Nuevos",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.FILTRO_TODOS": "Filtro Todos",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.FILTRO_VISTOS": "Filtro Vistos",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.PROGRESO_CAT": "Progreso Cat",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.PROGRESO_GLOBAL": "Progreso Global",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.REFERENCIAS": "Referencias",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.SIN_ENTRADAS": "Sin Entradas",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.SIN_RESULTADOS": "Sin Resultados",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.SIN_SELECCION": "Sin Seleccion",   # usada en: scripts/ui/layers/diary_layer.gd
+  "DIARY.TITULO": "Titulo",   # usada en: scripts/ui/layers/diary_layer.gd
+  "EQUIP.BONO": "Bono",   # usada en: scripts/ui/equipment_ui.gd, scripts/ui/layers/equipment_layer.gd
+  "EQUIP.BONO_EQUIPO": "Bono Equipo",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.CATALOGO_TITULO": "Catalogo Titulo",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.EQUIPADO": "Equipado",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.HINT": "Hint",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.PRENDAS": "Prendas",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.REQ": "Req",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.REQ_CAPITULO": "Req Capitulo",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.REQ_FLAG": "Req Flag",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.TITULO": "Titulo",   # usada en: scripts/ui/i18n/ui_i18n.gd, scripts/ui/layers/equipment_layer.gd
+  "EQUIP.TOOLTIP_ELEGIR": "Tooltip Elegir",   # usada en: scripts/ui/layers/equipment_layer.gd
+  "EQUIP.TOOLTIP_QUITAR": "Tooltip Quitar",   # usada en: scripts/ui/layers/equipment_layer.gd, scripts/ui/services/tooltip_service.gd
+  "EQUIP.VACIO": "Vacio",   # usada en: scripts/ui/equipment_ui.gd, scripts/ui/layers/equipment_layer.gd
+  "HUD.ENERGIA": "Energía",   # usada en: scripts/localization/retraductor_ui.gd, scripts/ui/i18n/ui_i18n.gd
+  "ITEMS.SE_OFRECEN": "Se ofrecen %d objetos",   # usada en: scripts/localization/localization_manager.gd
+  "LOADING.CARGANDO": "Cargando...",   # usada en: scripts/ui/layers/loading_layer.gd
+  "LOADING.TIP": "Consejo",   # usada en: scripts/ui/layers/loading_layer.gd
+  "LOADING.TITULO": "Cargando",   # usada en: scripts/ui/layers/loading_layer.gd
+  "MAIN_MENU.PLAY": "Jugar",   # usada en: scripts/localization/localization_manager.gd
+  "SETTINGS.ADVANCED": "Avanzado",   # usada en: scripts/ui/layers/dialog_layer.gd
+  "SETTINGS.AJUSTES": "Ajustes",   # usada en: scripts/ui/layers/menus_layer.gd, scripts/ui/layers/pause_layer.gd
+  "SETTINGS.APLICAR": "Aplicar",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.AUDIO_FALLA": "No se pudo aplicar el ajuste de audio",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.BUSCAR": "Buscar",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.CANCELAR": "Cancelar",   # usada en: scripts/ui/layers/confirm_popup.gd
+  "SETTINGS.CERRAR": "Cerrar",   # usada en: scripts/crafting/crafting_ui.gd, scripts/shops/shop_ui.gd, scripts/ui/layers/credits_layer.gd
+  "SETTINGS.COMPRESION": "Compresión",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.CONFIRMAR": "Confirmar",   # usada en: scripts/ui/layers/confirm_popup.gd
+  "SETTINGS.CONTINUAR": "Continuar",   # usada en: scripts/ui/layers/credits_layer.gd, scripts/ui/layers/menus_layer.gd, scripts/ui/layers/pause_layer.gd
+  "SETTINGS.CRAFT_FALLO": "No se pudo crear el objeto",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.CRAFT_OK": "Objeto creado",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.CREAR_N": "Crear N",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.CREDITOS": "Créditos",   # usada en: scripts/ui/layers/credits_layer.gd, scripts/ui/layers/menus_layer.gd
+  "SETTINGS.DESCARTAR": "Descartar",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.DESCARTAR_MENSAJE": "El objeto se perderá definitivamente.",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.DESCARTAR_TITULO": "¿Descartar objeto?",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.DISPOSITIVO_SALIDA": "Dispositivo de salida",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.EFECTOS": "Efectos",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.ELEGIR_OPCION": "Elige una opción",   # usada en: scripts/ui/layers/dialog_layer.gd
+  "SETTINGS.FOGATA": "Fogata",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.FUERA_TEMPORADA": "Fuera de temporada",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.GUARDAR": "Guardar",   # usada en: scripts/ui/layers/pause_layer.gd
+  "SETTINGS.IDIOMA_DESC": "Elige el idioma del juego",   # usada en: scripts/localization/retraductor_ui.gd, scripts/ui/i18n/ui_i18n.gd
+  "SETTINGS.INVENTARIO": "Inventario",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.INVENTARIO_HINT": "Selecciona un objeto para ver detalles",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.JUGAR": "Jugar",   # usada en: scripts/ui/layers/menus_layer.gd
+  "SETTINGS.MAESTRO": "Maestro",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.MESA_TRABAJO": "Mesa de trabajo",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.MUSICA": "Música",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.OPCIONES": "Opciones",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.ORDENAR": "Ordenar",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.PAUSA": "Pausa",   # usada en: scripts/ui/layers/credits_layer.gd, scripts/ui/layers/pause_layer.gd
+  "SETTINGS.RANGO_DINAMICO": "Rango dinámico",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.RANGO_DINAMICO_PRESET": "Rango dinámico (preajuste)",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.RANGO_MEDIO": "Medio",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.RANGO_QUIET": "Suave",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.SALIR": "Salir",   # usada en: scripts/ui/layers/menus_layer.gd, scripts/ui/layers/pause_layer.gd
+  "SETTINGS.SELECCIONA_RECETA": "Selecciona Receta",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.SILENCIAR": "Silenciar",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "SETTINGS.SIN_RECETAS": "Sin Recetas",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.SLOTS": "Espacios",   # usada en: scripts/localization/validador_po.gd, scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.SLOT_LIBRE": "Espacio libre",   # usada en: scripts/ui/layers/inventory_layer.gd
+  "SETTINGS.TELAR": "Telar",   # usada en: scripts/crafting/crafting_ui.gd
+  "SETTINGS.TITULO": "Ajustes",   # usada en: scripts/ui/layers/menus_layer.gd
+  "SETTINGS.VOLVER": "Volver",   # usada en: scripts/ui/layers/settings_audio_layer.gd
+  "TIENDAS.CATALOGO": "Catálogo",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.CERRADA": "Cerrada",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.COMPRAR_N": "Comprar %d",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.COMPRA_INFO": "Compra realizada",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.GENERAL": "General",   # usada en: scripts/shops/catalogo_tiendas.gd, scripts/shops/shop_ui.gd
+  "TIENDAS.HERRERIA": "Herrería",   # usada en: scripts/shops/catalogo_tiendas.gd
+  "TIENDAS.INVENTARIO_LLENO": "Inventario lleno",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.SALDO": "Saldo",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.SELECCIONA": "Selecciona",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.SIN_FONDOS": "Sin Fondos",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.SIN_ITEMS": "Sin Items",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.SIN_STOCK": "Sin Stock",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.TRANSACCION_FALLO": "Transaccion Fallo",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.TRANSACCION_OK": "Transaccion Ok",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.VENDER_N": "Vender N",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.VENDER_TITULO": "Vender Titulo",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.VENTA_INFO": "Venta Info",   # usada en: scripts/shops/shop_ui.gd
+  "TIENDAS.VIAJERO": "Viajero",   # usada en: scripts/shops/catalogo_tiendas.gd
+  "TUTORIAL.CAPITULO_COMPLETADO": "Capítulo completado",   # usada en: scripts/tutorial/tutorial_manager.gd
+  "TUTORIAL.HERRAMIENTA": "Herramienta",   # usada en: scripts/tutorial/tutorial_manager.gd
+  "TUTORIAL.HERRAMIENTA_USO": "Usa la herramienta para interactuar",   # usada en: scripts/tutorial/tutorial_manager.gd
+  "TUTORIAL.INTERACTUAR": "Interactuar",   # usada en: scripts/tutorial/tutorial_manager.gd
+  "TUTORIAL.PROLOGO_BIENVENIDA": "Bienvenido a la isla",   # usada en: scripts/tutorial/tutorial_manager.gd
+  "TUTORIAL.PROLOGO_MOVERSE": "Usa las flechas para moverte",   # usada en: scripts/tutorial/tutorial_manager.gd
+  "TUTORIAL.VECINO": "Vecino",   # usada en: scripts/tutorial/tutorial_manager.gd
+
+=== DETALLE POR SCRIPT ===
+
+scripts/crafting/crafting_ui.gd
+    SETTINGS.CERRAR                    -> Cerrar
+    SETTINGS.CRAFT_FALLO               -> No se pudo crear el objeto
+    SETTINGS.CRAFT_OK                  -> Objeto creado
+    SETTINGS.CREAR_N                   -> Crear N
+    SETTINGS.FOGATA                    -> Fogata
+    SETTINGS.FUERA_TEMPORADA           -> Fuera de temporada
+    SETTINGS.MESA_TRABAJO              -> Mesa de trabajo
+    SETTINGS.SELECCIONA_RECETA         -> Selecciona Receta
+    SETTINGS.SIN_RECETAS               -> Sin Recetas
+    SETTINGS.TELAR                     -> Telar
+
+scripts/diario/validate_diary.gd
+    DIARY.CAT_                         -> Cat
+
+scripts/localization/auditor_claves.gd
+    DIARY.CAT_                         -> Cat
+    DIARY.CAT_LUGARES                  -> Lugares
+
+scripts/localization/localization_manager.gd
+    ITEMS.SE_OFRECEN                   -> Se ofrecen %d objetos
+    MAIN_MENU.PLAY                     -> Jugar
+
+scripts/localization/retraductor_ui.gd
+    HUD.ENERGIA                        -> Energía
+    SETTINGS.IDIOMA_DESC               -> Elige el idioma del juego
+
+scripts/localization/validador_po.gd
+    SETTINGS.SLOTS                     -> Espacios
+
+scripts/shops/catalogo_tiendas.gd
+    TIENDAS.GENERAL                    -> General
+    TIENDAS.HERRERIA                   -> Herrería
+    TIENDAS.VIAJERO                    -> Viajero
+
+scripts/shops/shop_ui.gd
+    SETTINGS.CERRAR                    -> Cerrar
+    TIENDAS.CATALOGO                   -> Catálogo
+    TIENDAS.CERRADA                    -> Cerrada
+    TIENDAS.COMPRAR_N                  -> Comprar %d
+    TIENDAS.COMPRA_INFO                -> Compra realizada
+    TIENDAS.GENERAL                    -> General
+    TIENDAS.INVENTARIO_LLENO           -> Inventario lleno
+    TIENDAS.SALDO                      -> Saldo
+    TIENDAS.SELECCIONA                 -> Selecciona
+    TIENDAS.SIN_FONDOS                 -> Sin Fondos
+    TIENDAS.SIN_ITEMS                  -> Sin Items
+    TIENDAS.SIN_STOCK                  -> Sin Stock
+    TIENDAS.TRANSACCION_FALLO          -> Transaccion Fallo
+    TIENDAS.TRANSACCION_OK             -> Transaccion Ok
+    TIENDAS.VENDER_N                   -> Vender N
+    TIENDAS.VENDER_TITULO              -> Vender Titulo
+    TIENDAS.VENTA_INFO                 -> Venta Info
+
+scripts/tutorial/tutorial_manager.gd
+    TUTORIAL.CAPITULO_COMPLETADO       -> Capítulo completado
+    TUTORIAL.HERRAMIENTA               -> Herramienta
+    TUTORIAL.HERRAMIENTA_USO           -> Usa la herramienta para interactuar
+    TUTORIAL.INTERACTUAR               -> Interactuar
+    TUTORIAL.PROLOGO_BIENVENIDA        -> Bienvenido a la isla
+    TUTORIAL.PROLOGO_MOVERSE           -> Usa las flechas para moverte
+    TUTORIAL.VECINO                    -> Vecino
+
+scripts/ui/equipment_ui.gd
+    EQUIP.BONO                         -> Bono
+    EQUIP.VACIO                        -> Vacio
+
+scripts/ui/i18n/ui_i18n.gd
+    EQUIP.TITULO                       -> Titulo
+    HUD.ENERGIA                        -> Energía
+    SETTINGS.IDIOMA_DESC               -> Elige el idioma del juego
+
+scripts/ui/layers/confirm_popup.gd
+    SETTINGS.CANCELAR                  -> Cancelar
+    SETTINGS.CONFIRMAR                 -> Confirmar
+
+scripts/ui/layers/credits_layer.gd
+    SETTINGS.CERRAR                    -> Cerrar
+    SETTINGS.CONTINUAR                 -> Continuar
+    SETTINGS.CREDITOS                  -> Créditos
+    SETTINGS.PAUSA                     -> Pausa
+
+scripts/ui/layers/dialog_layer.gd
+    SETTINGS.ADVANCED                  -> Avanzado
+    SETTINGS.ELEGIR_OPCION             -> Elige una opción
+
+scripts/ui/layers/diary_layer.gd
+    DIARY.BUSCAR                       -> Buscar
+    DIARY.CATEGORIAS                   -> Categorias
+    DIARY.CAT_                         -> Cat
+    DIARY.DETALLE                      -> Detalle
+    DIARY.DIA                          -> Dia
+    DIARY.ESTADO_COMPLETADO            -> Estado Completado
+    DIARY.ESTADO_NUEVO                 -> Estado Nuevo
+    DIARY.ESTADO_VISTO                 -> Estado Visto
+    DIARY.FAVORITO                     -> Favorito
+    DIARY.FILTRO                       -> Filtro
+    DIARY.FILTRO_COMPLETADOS           -> Filtro Completados
+    DIARY.FILTRO_FAVORITOS             -> Filtro Favoritos
+    DIARY.FILTRO_NUEVOS                -> Filtro Nuevos
+    DIARY.FILTRO_TODOS                 -> Filtro Todos
+    DIARY.FILTRO_VISTOS                -> Filtro Vistos
+    DIARY.PROGRESO_CAT                 -> Progreso Cat
+    DIARY.PROGRESO_GLOBAL              -> Progreso Global
+    DIARY.REFERENCIAS                  -> Referencias
+    DIARY.SIN_ENTRADAS                 -> Sin Entradas
+    DIARY.SIN_RESULTADOS               -> Sin Resultados
+    DIARY.SIN_SELECCION                -> Sin Seleccion
+    DIARY.TITULO                       -> Titulo
+    SETTINGS.CERRAR                    -> Cerrar
+
+scripts/ui/layers/equipment_layer.gd
+    EQUIP.BONO                         -> Bono
+    EQUIP.BONO_EQUIPO                  -> Bono Equipo
+    EQUIP.CATALOGO_TITULO              -> Catalogo Titulo
+    EQUIP.EQUIPADO                     -> Equipado
+    EQUIP.HINT                         -> Hint
+    EQUIP.PRENDAS                      -> Prendas
+    EQUIP.REQ                          -> Req
+    EQUIP.REQ_CAPITULO                 -> Req Capitulo
+    EQUIP.REQ_FLAG                     -> Req Flag
+    EQUIP.TITULO                       -> Titulo
+    EQUIP.TOOLTIP_ELEGIR               -> Tooltip Elegir
+    EQUIP.TOOLTIP_QUITAR               -> Tooltip Quitar
+    EQUIP.VACIO                        -> Vacio
+
+scripts/ui/layers/inventory_layer.gd
+    SETTINGS.APLICAR                   -> Aplicar
+    SETTINGS.BUSCAR                    -> Buscar
+    SETTINGS.DESCARTAR                 -> Descartar
+    SETTINGS.DESCARTAR_MENSAJE         -> El objeto se perderá definitivamente.
+    SETTINGS.DESCARTAR_TITULO          -> ¿Descartar objeto?
+    SETTINGS.INVENTARIO                -> Inventario
+    SETTINGS.INVENTARIO_HINT           -> Selecciona un objeto para ver detalles
+    SETTINGS.ORDENAR                   -> Ordenar
+    SETTINGS.SLOTS                     -> Espacios
+    SETTINGS.SLOT_LIBRE                -> Espacio libre
+
+scripts/ui/layers/loading_layer.gd
+    LOADING.CARGANDO                   -> Cargando...
+    LOADING.TIP                        -> Consejo
+    LOADING.TITULO                     -> Cargando
+
+scripts/ui/layers/menus_layer.gd
+    SETTINGS.AJUSTES                   -> Ajustes
+    SETTINGS.CONTINUAR                 -> Continuar
+    SETTINGS.CREDITOS                  -> Créditos
+    SETTINGS.JUGAR                     -> Jugar
+    SETTINGS.SALIR                     -> Salir
+    SETTINGS.TITULO                    -> Ajustes
+
+scripts/ui/layers/pause_layer.gd
+    SETTINGS.AJUSTES                   -> Ajustes
+    SETTINGS.CONTINUAR                 -> Continuar
+    SETTINGS.GUARDAR                   -> Guardar
+    SETTINGS.PAUSA                     -> Pausa
+    SETTINGS.SALIR                     -> Salir
+
+scripts/ui/layers/settings_audio_layer.gd
+    SETTINGS.AUDIO_FALLA               -> No se pudo aplicar el ajuste de audio
+    SETTINGS.COMPRESION                -> Compresión
+    SETTINGS.DISPOSITIVO_SALIDA        -> Dispositivo de salida
+    SETTINGS.EFECTOS                   -> Efectos
+    SETTINGS.MAESTRO                   -> Maestro
+    SETTINGS.MUSICA                    -> Música
+    SETTINGS.OPCIONES                  -> Opciones
+    SETTINGS.RANGO_DINAMICO            -> Rango dinámico
+    SETTINGS.RANGO_DINAMICO_PRESET     -> Rango dinámico (preajuste)
+    SETTINGS.RANGO_MEDIO               -> Medio
+    SETTINGS.RANGO_QUIET               -> Suave
+    SETTINGS.SILENCIAR                 -> Silenciar
+    SETTINGS.VOLVER                    -> Volver
+
+scripts/ui/services/tooltip_service.gd
+    EQUIP.TOOLTIP_QUITAR               -> Tooltip Quitar
+
