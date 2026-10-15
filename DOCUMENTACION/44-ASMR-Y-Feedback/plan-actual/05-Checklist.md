@@ -90,7 +90,7 @@
 - [x] Test: receta→capas correctas (M112) [M]
 - [x] Test: keyframes sincronizados [M]
 - [x] Test: blacklist de picos no dispara [M]
-- [x] Test: recorrido M114 — 15 min sin fatiga [M] | REVERIFICADO 2026-10-15 (step-5-kilocode): el test no existe en disco (0 hits de recorrido/15 min/fatiga en scripts de audio/feedback) y la propia nota T-M4 del modulo dice que este item queda en el grupo "recorrido de fatiga M114 (dueno M114)" junto a los 5 [?]. El item L128 hermano lo confirma: recorrido NO ejecutado. La marca [x] no tiene evidencia que la sostenga: el test de la suite real cubre keyframes, blacklist y true peak (L91-L94), no el recorrido de 15 min.
+- [?] Test: recorrido M114 — 15 min sin fatiga [M] | DEGRADADO de [x] a [?] el 2026-10-15 por step-5-kilocode, autorizado por el director (msg 397): el test no existe en disco (0 hits de recorrido/15 min/fatiga en scripts de audio/feedback) y la propia nota T-M4 del modulo agrupa este item en la deuda con dueno M114. El item hermano L128 lo confirma: recorrido NO ejecutado. La suite real cubre keyframes, blacklist y true peak (L91, L92, L94), no el recorrido de 15 min. DoD §21.6 exige evidencia.
 - [x] Master test True Peak ≤ -1 dBFS toda sesión [M]
 
 ## J. Integración con otros módulos (12)
@@ -170,7 +170,7 @@
 - **Al cerrar:** este bloque · Totales · CG fila 44 · ESTADO · backlog · log · mensaje 46.
 
 
-**Totales:** 113 ítems · Completados: 108 · Pendientes: 0 · No resueltos: 5.
+**Totales:** 113 ítems · Completados: 107 · Pendientes: 0 · No resueltos: 6.
 **Nota (T-M4):** 32 `[x]` nuevos con cita por ítem (diseño 01-03 + datos reales `feedback_recetas.json`/`blacklist.json` + §8 nuevo); los 5 `[?]` son integraciones sin cablear (4, dueño AGENTE DELEGADO) y el recorrido de fatiga M114 (dueño M114).
 diseño, recetas, blacklist y reglas contextuales cierran aquí.
 
