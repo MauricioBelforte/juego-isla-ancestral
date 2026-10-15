@@ -20,10 +20,10 @@
 - [x] RF2: frecuencia estacional determinista [S]
 - [x] RF3: duración corta y agradable (2-6 h de juego) [S]
 - [x] RF4: transiciones crossfade 60-90 s [S]
-- [x] RF5: partículas GPU compartidas y pausables [S]
+- [?] RF5: partículas GPU compartidas y pausables [S] — DEGRADADO 2026-10-15 (agnes 483, muestreo §21.8.2.b): 0 hits de partículas en scripts/clima/; probablemente en M51 (Agua) o M49 (Iluminación)
 - [x] RF6: sonidos y música por clima [S]
 - [x] RF7: atenuación de iluminación por clima [S]
-- [x] RF8: efectos sobre vegetación, agua y nieve visual [S]
+- [?] RF8: efectos sobre vegetación, agua y nieve visual [S] — DEGRADADO 2026-10-15 (agnes 483, muestreo §21.8.2.b): sin evidencia en M32; probablemente en M50 (Vegetación) y M51 (Agua)
 - [x] RF9/10/11/12: comportamiento mundo, eventos, anti-molestia y accesibilidad [S]
 
 ## B. Resolución de los 25 puntos del plan (25)
