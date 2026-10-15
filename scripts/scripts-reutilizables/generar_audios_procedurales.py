@@ -229,6 +229,170 @@ TIMBRES_STING = {
 }
 
 
+# --- Recetas de feedback (feedback_recetas.json, consumido por feedback_director.gd) ---
+# A diferencia de sfx_tones.json (que da notas), estas recetas describen CAPAS que
+# hay que mezclar: cada capa es un ruido o tono con su propio carácter. El JSON
+# declara las capas; acá está el timbre de cada una y la duración total.
+CAPAS_TIMBRE = {
+    'crack':          {'tipo': 'ruido_hp', 'dur': 0.08, 'amp': 0.50},
+    'roca':           {'tipo': 'ruido_lp', 'dur': 0.22, 'amp': 0.45},
+    'eco':            {'tipo': 'tono',     'dur': 0.30, 'amp': 0.12, 'frec': 180.0},
+    'thud':           {'tipo': 'tono',     'dur': 0.15, 'amp': 0.40, 'frec': 110.0},
+    'arena':          {'tipo': 'ruido_lp', 'dur': 0.18, 'amp': 0.30},
+    'tierra_mano':    {'tipo': 'ruido_lp', 'dur': 0.15, 'amp': 0.35},
+    'semilla':        {'tipo': 'tono',     'dur': 0.10, 'amp': 0.20, 'frec': 660.0},
+    'hoja':           {'tipo': 'ruido_hp', 'dur': 0.12, 'amp': 0.30},
+    'arranque':       {'tipo': 'ruido_lp', 'dur': 0.18, 'amp': 0.35},
+    'sizzle':         {'tipo': 'ruido_hp_mod', 'dur': 0.45, 'amp': 0.40},
+    'vapor':          {'tipo': 'ruido_hp', 'dur': 0.35, 'amp': 0.22},
+    'madera_apertura': {'tipo': 'ruido_lp', 'dur': 0.20, 'amp': 0.35},
+    'click_cierre':   {'tipo': 'ruido_hp', 'dur': 0.06, 'amp': 0.45},
+    'splash':         {'tipo': 'ruido_hp_mod', 'dur': 0.25, 'amp': 0.45},
+    'lucha':          {'tipo': 'ruido_hp_mod', 'dur': 0.50, 'amp': 0.35},
+    'golpe_roca':     {'tipo': 'ruido_hp', 'dur': 0.07, 'amp': 0.50},
+}
+
+# Reverb interior/cueva: cola sintética (unos ms de ruido con decay) que el JSON
+# pide en varias recetas. No es IR real, es una aproximación audible.
+REVERB = {
+    'reverb_interior': {'dur': 0.18, 'amp': 0.14},
+    'reverb_cueva':    {'dur': 0.35, 'amp': 0.20},
+    '':                {'dur': 0.0,  'amp': 0.0},
+}
+
+
+# --- Momentos narrativos (narrative_sound.json: 35 momentos) ---
+# Cada momento trae del JSON: `categoria`, `intensidad` (0.0-1.0) y `duracion_s`.
+# De esos tres datos reales sale el arquetipo: la categoría fija la progresión
+# armónica y el timbre, y la INTENSIDAD del JSON fija la amplitud (no se inventa
+# el volumen: 0.2 es un click de UI, 1.0 es un momento de logro pleno).
+ARQUETIPOS = {
+    'logro':          {'acordes': [[0, 4, 7], [5, 9, 12], [7, 11, 14]], 'timbre': 'brillante', 'dur_ac': 0.45},
+    'descubrimiento': {'acordes': [[0, 7, 12], [4, 11, 16]],            'timbre': 'etereo',    'dur_ac': 0.8},
+    'interaccion':    {'acordes': [[0, 5], [2, 7]],                    'timbre': 'mecanico',  'dur_ac': 0.3},
+    'personaje':      {'acordes': [[0, 4], [3, 7]],                    'timbre': 'calido',    'dur_ac': 0.7},
+    'ui':             {'acordes': [[0, 7]],                            'timbre': 'limpio',    'dur_ac': 0.15},
+    'narrativo':      {'acordes': [[0, 5], [-2, 3]],                   'timbre': 'reflexivo', 'dur_ac': 0.9},
+    'ambiental':      {'acordes': [[0, 1, 7]],                         'timbre': 'tension',   'dur_ac': 1.4},
+}
+
+# Timbres de momentos: armónicos + ataque + presencia de tritono (tensión)
+TIMBRES_MOMENTO = {
+    'brillante':  {'arm2': 0.14, 'arm3': 0.08, 'ataque': 0.02, 'tritono': False},
+    'etereo':     {'arm2': 0.06, 'arm3': 0.10, 'ataque': 0.12, 'tritono': False},
+    'mecanico':   {'arm2': 0.10, 'arm3': 0.03, 'ataque': 0.01, 'tritono': False},
+    'calido':     {'arm2': 0.10, 'arm3': 0.03, 'ataque': 0.06, 'tritono': False},
+    'limpio':     {'arm2': 0.04, 'arm3': 0.0,  'ataque': 0.005, 'tritono': False},
+    'reflexivo':  {'arm2': 0.08, 'arm3': 0.02, 'ataque': 0.10, 'tritono': False},
+    'tension':    {'arm2': 0.05, 'arm3': 0.06, 'ataque': 0.20, 'tritono': True},
+}
+
+
+def generar_momento(nombre, spec):
+    """Compone un momento narrativo desde su categoria, intensidad y duración."""
+    cat = spec.get('categoria', 'interaccion')
+    intensidad = float(spec.get('intensidad', 0.6))
+    dur = float(spec.get('duracion_s', 2.0))
+    arq = ARQUETIPOS.get(cat, ARQUETIPOS['interaccion'])
+    cfg = TIMBRES_MOMENTO[arq['timbre']]
+    acordes = arq['acordes']
+    dur_ac = arq['dur_ac']
+
+    # la duración por acorde se ajusta a la que pide el JSON
+    dur_ac = dur / max(1, len(acordes))
+    n_total = int(dur * SAMPLE_RATE)
+    muestras = [0.0] * n_total
+    n_ac = n_total // max(1, len(acordes))
+    base = 261.63
+    # la intensidad del JSON manda la amplitud: 1.0 pleno, 0.2 casi un click
+    amp = intensidad * 0.45
+
+    for i_ac, acorde in enumerate(acordes):
+        inicio = i_ac * n_ac
+        fin = n_total if i_ac == len(acordes) - 1 else inicio + n_ac
+        largo = fin - inicio
+        env = envolvente(largo, cfg['ataque'], dur_ac * 0.5, dur_ac)
+        for j_nota, st in enumerate(acorde):
+            f = semitonos_a_hz(base, st)
+            delay = int(j_nota * 0.015 * SAMPLE_RATE)
+            for j in range(largo):
+                if j < delay:
+                    continue
+                t = (j - delay) / SAMPLE_RATE
+                muestras[inicio + j] += amp * math.sin(2 * math.pi * f * t) * env[j]
+                if cfg['arm2']:
+                    muestras[inicio + j] += amp * cfg['arm2'] * math.sin(2 * math.pi * f * 2 * t) * env[j]
+                if cfg['arm3']:
+                    muestras[inicio + j] += amp * cfg['arm3'] * math.sin(2 * math.pi * f * 3 * t) * env[j]
+        # timbre de tensión: el tritono suena por encima, disonante a propósito
+        if cfg['tritono']:
+            f_tri = semitonos_a_hz(base, 6)
+            for j in range(largo):
+                t = j / SAMPLE_RATE
+                muestras[inicio + j] += amp * 0.35 * math.sin(2 * math.pi * f_tri * t) * env[j]
+
+    pico = max(abs(s) for s in muestras) if muestras else 0.0
+    if pico > 0.85:
+        factor = 0.85 / pico
+        muestras = [s * factor for s in muestras]
+    return muestras
+
+
+def generar_receta(nombre, spec):
+    """Mezcla las capas que declara feedback_recetas.json más la cola de reverb."""
+    capas = spec.get('capas', [])
+    reverb_id = spec.get('interior_capa', '')
+    dur_total = max(CAPAS_TIMBRE[c]['dur'] for c in capas if c in CAPAS_TIMBRE) if capas else 0.3
+    dur_total += REVERB.get(reverb_id, {'dur': 0})['dur']
+    n = int(dur_total * SAMPLE_RATE)
+    muestras = [0.0] * n
+
+    for nombre_capa in capas:
+        cfg = CAPAS_TIMBRE.get(nombre_capa)
+        if cfg is None:
+            continue
+        d = cfg['dur']
+        largo = int(d * SAMPLE_RATE)
+        env = envolvente(largo, 0.004, d * 0.6, d)
+        amp = cfg['amp']
+        if cfg['tipo'] == 'ruido_lp':
+            r = ruido_filtrado(largo, pasa_bajos=True, seed=hash(nombre_capa) % 9999)
+            for j in range(largo):
+                muestras[j] += amp * r[j] * env[j]
+        elif cfg['tipo'] == 'ruido_hp':
+            r = ruido_filtrado(largo, pasa_bajos=False, seed=hash(nombre_capa) % 9999)
+            for j in range(largo):
+                muestras[j] += amp * r[j] * env[j]
+        elif cfg['tipo'] == 'ruido_hp_mod':
+            r = ruido_filtrado(largo, pasa_bajos=False, seed=hash(nombre_capa) % 9999)
+            for j in range(largo):
+                mod = 0.65 + 0.35 * math.sin(2 * math.pi * 7.0 * j / SAMPLE_RATE)
+                muestras[j] += amp * r[j] * env[j] * mod
+        elif cfg['tipo'] == 'tono':
+            f = cfg.get('frec', 220.0)
+            for j in range(largo):
+                t = j / SAMPLE_RATE
+                muestras[j] += amp * math.sin(2 * math.pi * f * t) * env[j]
+
+    # cola de reverb: ruido con decay largo, entra cuando terminan las capas
+    rv = REVERB.get(reverb_id)
+    if rv and rv['dur'] > 0:
+        ini = int(max(CAPAS_TIMBRE[c]['dur'] for c in capas if c in CAPAS_TIMBRE) * SAMPLE_RATE) if capas else 0
+        largo = int(rv['dur'] * SAMPLE_RATE)
+        r = ruido_filtrado(largo, pasa_bajos=True, seed=4242)
+        for j in range(largo):
+            if ini + j >= n:
+                break
+            decay = (1.0 - j / largo) ** 2
+            muestras[ini + j] += rv['amp'] * r[j] * decay
+
+    pico = max(abs(s) for s in muestras) if muestras else 0.0
+    if pico > 0.85:
+        factor = 0.85 / pico
+        muestras = [s * factor for s in muestras]
+    return muestras
+
+
 def generar_sting(nombre):
     """Compone un sting: progresión de acordes con envolvente por acorde."""
     spec = STINGS[nombre]
@@ -539,6 +703,51 @@ def main(solo=None, variaciones=False):
             if solo is not None and nombre not in solo:
                 continue
             m = generar_sting(nombre)
+            ruta = os.path.join(SALIDA, nombre + '.wav')
+            escribir_wav(ruta, m)
+            v = verificar(m, nombre)
+            v['archivo'] = ruta.replace(os.sep, '/')
+            reporte.append(v)
+            estado = 'OK' if v['ok'] else 'REVISAR'
+            print('%-22s pico=%.3f  dc=%+.5f  dur=%.2fs  clip=%d  [%s]'
+                  % (nombre, v['pico'], v['offset_dc'], v['duracion_s'], v['clipping'], estado))
+
+    # momentos narrativos de narrative_sound.json
+    try:
+        with io.open('game/isla-ancestral/data/audio/narrative_sound.json', encoding='utf-8') as fh:
+            narrativa = json.load(fh).get('momentos', {})
+    except OSError:
+        narrativa = {}
+    pendientes = [k for k in narrativa if k not in [x[:-4] for x in os.listdir(SALIDA)]]
+    if pendientes:
+        print()
+        print('--- momentos narrativos (narrative_sound.json) ---')
+        for nombre in pendientes:
+            if solo is not None and nombre not in solo:
+                continue
+            m = generar_momento(nombre, narrativa[nombre])
+            ruta = os.path.join(SALIDA, nombre + '.wav')
+            escribir_wav(ruta, m)
+            v = verificar(m, nombre)
+            v['archivo'] = ruta.replace(os.sep, '/')
+            reporte.append(v)
+            estado = 'OK' if v['ok'] else 'REVISAR'
+            print('%-22s pico=%.3f  dc=%+.5f  dur=%.2fs  clip=%d  [%s]'
+                  % (nombre, v['pico'], v['offset_dc'], v['duracion_s'], v['clipping'], estado))
+
+    # recetas de feedback_director.gd (feedback_recetas.json)
+    try:
+        with io.open('game/isla-ancestral/data/audio/feedback_recetas.json', encoding='utf-8') as fh:
+            recetas = json.load(fh)
+    except OSError:
+        recetas = {}
+    if recetas:
+        print()
+        print('--- recetas de feedback (feedback_recetas.json) ---')
+        for nombre, spec in recetas.items():
+            if solo is not None and nombre not in solo:
+                continue
+            m = generar_receta(nombre, spec)
             ruta = os.path.join(SALIDA, nombre + '.wav')
             escribir_wav(ruta, m)
             v = verificar(m, nombre)
