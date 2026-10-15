@@ -1,4 +1,4 @@
-# Audios procedurales para revisión — 63 sonidos (pedido del fundador)
+# Audios procedurales para revisión — 97 sonidos (pedido del fundador)
 
 **Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
@@ -71,7 +71,7 @@ Los parámetros están en constantes al inicio de
 
 ## Estado
 
-**63 de 63** WAV entregados (22 base + 30 variaciones + 5 stings + 6 recetas de feedback). Las 21 situaciones de sfx_tones.json tienen su WAV base, 21/21, mas lore_oculto. No toqué `data/` ni los catálogos de
+**97 de 97** WAV entregados (22 base + 30 variaciones + 5 stings + 6 recetas de feedback + 35 momentos narrativos + lore_oculto). Las 21 situaciones de sfx_tones.json tienen su WAV base, 21/21, mas lore_oculto. No toqué `data/` ni los catálogos de
 audio: esto es material de revisión, la integración al juego es de M43.
 
 ## Tanda 2: las variaciones (25 WAV extra)
@@ -188,3 +188,34 @@ para golpes e impactos.
 Eso lo sintetice como una cola de ruido con decay — **no es una reverb real por
 convolucion**. Sirve para dar sensacion de espacio cerrado, pero no sustituye a una IR
 verdadera. Si el fundador nota que suena artificial en cueva, es eso.
+
+## Tanda 6: los 35 momentos narrativos (el hueco mas grande)
+
+`narrative_sound.json` declara **35 momentos** y solo 1 tenia WAV (`lore_oculto`, que
+agregue yo). Renderice los 34 restantes.
+
+Cada momento trae del JSON tres datos que use tal cual, sin inventar ninguno:
+`categoria` (fija la progresion armonica y el timbre), `intensidad` 0.0-1.0 (**fija la
+amplitud**) y `duracion_s`. Siete arquetipos, uno por categoria:
+
+| Categoria | Momentos | Caracter |
+|---|---|---|
+| logro | 4 | acordes mayores ascendentes, brillante |
+| descubrimiento | 7 | intervalos abiertos (8va/11na), etereo |
+| interaccion | 10 | dos notas, mecanico y corto |
+| personaje | 5 | calido, presentacion del personaje |
+| ui | 3 | un par de notas, limpio y breve |
+| narrativo | 3 | reflexivo, desciende |
+| ambiental | 2 | **tritono** a proposito (tension) |
+
+**Verificado que la intensidad manda el volumen**: el pico de cada WAV sigue el orden de
+la `intensidad` del JSON (los de 1.0 llegan a 0.85; los de 0.2 quedan en 0.18). No es
+casualidad: la formula usa `amp = intensidad * 0.45`.
+
+Dos momentos merecen oido especial:
+- **`silencio_revelacion` y `silencio_pos_musica` salen en silencio literal (pico 0.000)**.
+  No es un fallo: el JSON les pone `intensidad: 0.0` y su descripcion es "Pausa de tension
+  antes de una revelacion" / "Pausa de impacto despues de una pieza musical". **Son
+  pausas narrativas, no sonidos.** Renderizarlas como silencio es lo correcto.
+- **`area_misteriosa` y `misterio_detectado`** usan el arquetipo de tension, que mete un
+  tritono sonando por encima. Es disonante a proposito.
