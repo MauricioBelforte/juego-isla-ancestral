@@ -27,6 +27,8 @@
 5. `@warning_ignore` solo con justificación escrita.
 6. Cada script > 400 líneas debe justificarse (señal de romper en módulos).
 
+> **Reglas de estilo aspiracionales (NO bloqueantes)** — *decisión del director (msg 245, 2026-10-14):* las reglas 1 (líneas ≤ 120 chars) y 4 (nada de `print()` de debug en producción) quedan **aspiracionales**, no bloqueantes. Deuda cross-módulo anotada (692 líneas >120 en 283 archivos; 3546 líneas `print(` en 207 archivos no-test, medido 2026-10-14). No se normaliza para preservar `git blame`.
+
 ## 2. Arquitectura de carpetas de código (en `res://`)
 
 ```

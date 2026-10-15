@@ -238,7 +238,21 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 | Fases | 17 |
 
 > **Nota de desglose:** cada uno de los 152 ítems se convertirá en un componente `DOCUMENTACION/{NN}-Modulo/` con su `plan-inicial/` (5+2 archivos) y `plan-actual/`, generando así **152 checklists de ≥100 ítems** (15.200+ puntos de control totales). El orden de creación de los componentes sigue la numeración de fases, priorizando los módulos de la Fase 1 y los de mayor riesgo técnico (M07, M37, M58, M60, M63).
-**Totales:** 152 items - Completados: 26 - Pendientes: 126 - No resueltos: 0. (Corregido por director 2026-10-12: barrido Step 5 msg 246, decia 0 completados - plantilla copiada sin actualizar)
+**Totales:** 152 items - Completados: 26 - Pendientes: 126 - No resueltos: 0.
+
+## Auditoria del indice maestro (2026-10-14 - DeepSeek-V4.1-Flash, iter 6)
+
+Medicion de los 152 items contra el criterio documentado (checklist propia 100% cerrada Y fila GLOBAL `[OK]`):
+
+- Checklists propias 100% cerradas: **29**; de esas con GLOBAL `[OK]`: **26** = las **26** ya flipeadas.
+- **Candidatos nuevos: 0.** Los 26/152 del indice son correctos.
+- 3 cerradas pero GLOBAL NO `[OK]` (no flipeables por el criterio, igual que `M024`): `M018` -> `19-NPC-Y-Vecinos` (GLOBAL verde Disponible), `M021` -> `22-Historia-Principal` (verde Disponible), `M099` -> `100-Community-Management` (amarillo Con dudas).
+- En curso: **122**; sin iniciar: **1** (`M045` -> `46-Arte-2D`).
+- Suma de los 152 sub-checklists: **17469 [x] / 967 [?] / 3527 [ ] = 21963**.
+
+**0 flips aplicados.** M01 no puede avanzar solo: depende de que los otros modulos cierren su checklist y su GLOBAL pase a `[OK]`.
+Detalle y metodo en `07-Resultados-Testings.md` seccion 5.3.
+ (Corregido por director 2026-10-12: barrido Step 5 msg 246, decia 0 completados - plantilla copiada sin actualizar)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 152 [ ] / 0 [?].

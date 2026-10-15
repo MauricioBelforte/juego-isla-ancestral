@@ -116,7 +116,7 @@
 - [x] Documentar flujo hacia M61 (rendimiento: pooling/timers) [S] (04-Codigo §3 (Logger+ErrorHandler -> M61))
 - [ ] Documentar flujo hacia QA (tests unitarios desde M1) [S]
 - [x] Documentar flujo hacia M08 (voxel tools + estado de chunks) [S] (04-Codigo §3 (EventBus dominio `world` -> M08; `core/event_bus.gd`:50-56))
-- [ ] Verificar que ningún módulo contradice la guía de convenciones [S]
+- [x] Verificar que ningún módulo contradice la guía de convenciones [S] (03-Diseno §1: las 2 reglas restantes —líneas ≤120 y `print()`— quedaron declaradas **aspiracionales/no bloqueantes** por decisión del director (msg 245); la guía ya no contradice al código)
 
 ## H. Edge cases y verificación documental (12)
 
@@ -135,7 +135,7 @@
 
 ---
 
-**Totales:** 103 ítems · Completados: 98 · Pendientes: 5 · No resueltos: 0.
+**Totales:** 103 ítems · Completados: 99 · Pendientes: 4 · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 
@@ -205,25 +205,31 @@
 - **H7** (trazabilidad de los puntos del plan maestro): **RESUELTO por medicion** - el plan maestro (`00-PLAN-INICIAL/Plan-inicial-minimo.md` §4, L106-137) tiene **27** puntos, no 31; la tabla de `02-Analisis` §1 mapea 1:1 con ellos. Drift "31" corregido en `02-Analisis` §1 y `04-Codigo` (linea 59).
 - **H11** (log de finalizacion + ULTIMO_NUMERO): log generado (Log 1842); `ULTIMO_NUMERO.txt` esta **retirado** (protocolo v3) -> item reescrito para reflejarlo.
 
-### Los 5 `[ ]` restantes (honestidad - NO flipeados)
+### Los 4 `[ ]` restantes (honestidad - NO flipeados)
 
 > **Iter. 4 (2026-10-14, DeepSeek-V4.1-Flash):** G2/G6/G9 pasaron a `[x]` con evidencia medida
-> (ver `04-Codigo` §3 y su nota). Quedan 5.
+> (ver `04-Codigo` §3 y su nota).
+> **Iter. 6 (2026-10-14, DeepSeek-V4.1-Flash):** G10 paso a `[x]` tras la decision del director
+> (msg 245, opcion b: declarar las 2 reglas aspiracionales). Quedan 4.
 
 - **F7** (tests unitarios obligatorios para logica pura): dueno externo **M-QA** (04-Codigo §4).
 - **G8** (flujo hacia QA): dueno **M-QA** (04-Codigo §4).
-- **G10** (ningun modulo contradice la guia): **NO flipeable todavia** - 2a medicion 2026-10-14 (iter 5, DeepSeek-V4.1-Flash). La regla de INDENTACION quedo resuelta: el director corrigio `03-Diseno` L23 a TAB y el codigo es **1016 con TAB** vs **13 con 4 espacios** -> guia y codigo coinciden. PERO otras 2 reglas medibles de la MISMA `03-Diseno` §1 siguen contradichas por el codigo: (a) "lineas <= 120 chars" -> **692 lineas >120** en **283 archivos** versionados (9 son comentarios); (b) "nada de `print()` de debug en produccion" -> **3546 lineas** con `print(` al inicio en **207 archivos** no-test (solo 8 en editor/tools/debug/qa). Un `[x]` aqui seria un sello inflado. Escalado al director (msg 244) con 3 opciones: acotar el item a la indentacion / declarar las 2 reglas aspiracionales con deuda / dejar `[ ]`.
+- **G10** (ningun modulo contradice la guia): **RESUELTO (iter 5)** — ver `## Re-verificacion G10 y cierre` al final. El director resolvio con la opcion (b): declarar aspiracionales las reglas de lineas <=120 y `print()`, con lo cual la guia deja de contradecir al codigo.
 - **H8** (coherencia con AGENTS.md §24): **FALLA** - AGENTS.md §24 describe **Unity + C#** mientras M05 fija Godot 4.x + GDScript. Drift de documento ajeno; reportado, NO editado.
-- **H9** (actualizar CHECKLIST-GLOBAL): la fila 05 ya refleja **98/103** (aplicado por el director, msg 243); sin flips en la iter 5 el valor no cambia.
+- **H9** (actualizar CHECKLIST-GLOBAL): la fila 05 refleja **98/103**; el flip de la fila a **99/103** lo aplica el director (no se toca CHECKLIST-GLOBAL desde el modulo).
 
-## Re-verificacion G10 (2026-10-14 - DeepSeek-V4.1-Flash, iter 5)
+## Cierre de G10 (2026-10-14 - DeepSeek-V4.1-Flash, iter 6)
 
-El director autorizo (msg 243) flipear G10 "ahora que la guia y el codigo coinciden". Se re-midio ANTES de tocar la marca: la coincidencia vale para la regla de INDENTACION (guia corregida a TAB), pero NO para las otras 2 reglas medibles de la misma `03-Diseno` §1.
+Historia de las mediciones de G10:
 
-- Indentacion: **1016** archivos versionados con TAB vs **13** con 4 espacios. Comando: `git grep -lP '^\t' -- 'scripts/**/*.gd' | wc -l`.
+- **Iter. 5 (msg 243):** el director autorizo flipear G10 "ahora que la guia y el codigo coinciden". Se re-midio ANTES de tocar la marca: la coincidencia valia para la regla de INDENTACION (guia corregida a TAB), pero NO para las otras 2 reglas medibles de la misma `03-Diseno` §1.
+- **Iter. 6 (msg 245):** el director resolvio con la **opcion (b): declarar las 2 reglas aspiracionales (no bloqueantes)** en `03-Diseno` §1, porque normalizar 692 lineas >120 y 3546 `print()` romperia `git blame` y varios `print` son intencionales. Con la guia declarando las reglas aspiracionales, G10 deja de ser contradiccion -> se flipea `[x]`.
+
+Mediciones (2026-10-14, sobre `scripts/**/*.gd` versionado):
+- Indentacion: **1016** archivos con TAB vs **13** con 4 espacios. Comando: `git grep -lP '^\t' -- 'scripts/**/*.gd' | wc -l`.
 - Regla "lineas <= 120 chars": **692 lineas** por encima de 120 en **283 archivos** (9 son comentarios). Comando: `git grep -cP '^.{121,}$' -- 'scripts/**/*.gd' | wc -l`.
 - Regla "nada de `print()` de debug en produccion": **3546 lineas** con `print(` al inicio en **207 archivos** no-test (8 en editor/tools/debug/qa). Comando: `git grep -lE '^\s*print\(' -- 'scripts/**/*.gd' | grep -v test_ | wc -l`.
 
-Conclusion: G10 se queda `[ ]`; flipearlo seria un sello inflado. Escalado al director (msg 244) con 3 opciones: (a) acotar el item a la regla de indentacion, (b) declarar las 2 reglas restantes aspiracionales con deuda y dueno, (c) dejar `[ ]`.
+Accion: nota aspiracional agregada a `03-Diseno` §1 (ver alli). **1 flip** (G10) -> `Totales` **99/103**. NO se toco `CHECKLIST-GLOBAL` (la fila a 99/103 la aplica el director).
 
-Tambien se corrigieron 2 menciones stale de "4 espacios" (`04-Codigo` L35 y este checklist L37) para que M05 no contradiga su propia guia corregida. **0 flips** en esta iteracion -> `Totales` sin cambio (**98/103**) y NO se toco `CHECKLIST-GLOBAL`.
+En la iter. 5 previa se corrigieron 2 menciones stale de "4 espacios" (`04-Codigo` L35 y este checklist L37) para que M05 no contradiga su propia guia corregida.

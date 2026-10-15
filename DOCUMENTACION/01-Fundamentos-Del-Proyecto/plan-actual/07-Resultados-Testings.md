@@ -85,6 +85,34 @@ Mapeo medido: ítem `**M##**` ↔ carpeta `DOCUMENTACION/{##+1:03d}-{Nombre}`.
 > reproducible con el script de `.workbuddy-ai/tmp/` (no versionado); la fuente de cada conteo es el
 > `05-Checklist.md` de cada componente, no una tabla derivada.
 
+### 5.3 Refresco medido (2026-10-14, DeepSeek-V4.1-Flash - iter 6)
+
+Mismo criterio documentado en 5.1/5.2: **checklist propia 100 % cerrada (`[?]=0`, `[ ]=0`) Y fila GLOBAL `✅`**.
+
+| Métrica | Valor medido |
+|---|---|
+| Checklists propias **100 % cerradas** | **29** |
+| De esas, con fila GLOBAL en `✅` | **26** |
+| Flipeadas hoy en el índice maestro | **26** |
+| **Candidatos NUEVOS** (cerrada Y `✅` Y sin flip) | **0** |
+| Cerradas pero GLOBAL **no** `✅` | **3** |
+| En curso | **122** |
+| Sin iniciar | **1** (`M045` -> `46-Arte-2D`) |
+| Suma de los 152 sub-checklists | **17 469 `[x]` / 967 `[?]` / 3 527 `[ ]` = 21 963** |
+
+**Las 3 cerradas sin `✅`** (mismo caso que `M024 Ruinas`: cerrada pero GLOBAL no `✅` -> **NO flipeables** por el criterio):
+
+| Ítem | Carpeta | Estado GLOBAL |
+|---|---|---|
+| `M018` | `19-NPC-Y-Vecinos` | `🟢 Disponible` |
+| `M021` | `22-Historia-Principal` | `🟢 Disponible` |
+| `M099` | `100-Community-Management` | `🟡 Con dudas` |
+
+**Conclusión: `26/152` es correcto y NO hay flips disponibles.** Los 126 `[ ]` restantes dependen de que
+los otros módulos cierren su checklist **y** su fila GLOBAL pase a `✅`; `M01` no puede avanzar por sí solo.
+Se reporta al director para que normalice el estado GLOBAL de los 3 módulos cerrados (si corresponde),
+lo que habilitaría 3 flips.
+
 ## 6. Integridad de bytes
 
 | Archivo | BOM | EOL | NUL | FFFD |
