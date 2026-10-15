@@ -90,7 +90,7 @@
 - [x] Test: receta→capas correctas (M112) [M]
 - [x] Test: keyframes sincronizados [M]
 - [x] Test: blacklist de picos no dispara [M]
-- [x] Test: recorrido M114 — 15 min sin fatiga [M]
+- [x] Test: recorrido M114 — 15 min sin fatiga [M] | REVERIFICADO 2026-10-15 (step-5-kilocode): el test no existe en disco (0 hits de recorrido/15 min/fatiga en scripts de audio/feedback) y la propia nota T-M4 del modulo dice que este item queda en el grupo "recorrido de fatiga M114 (dueno M114)" junto a los 5 [?]. El item L128 hermano lo confirma: recorrido NO ejecutado. La marca [x] no tiene evidencia que la sostenga: el test de la suite real cubre keyframes, blacklist y true peak (L91-L94), no el recorrido de 15 min.
 - [x] Master test True Peak ≤ -1 dBFS toda sesión [M]
 
 ## J. Integración con otros módulos (12)
@@ -125,7 +125,7 @@
 
 ## L. Polish y QA final (8)
 
-- [?] 15 min de juego sin fatiga auditiva (QA M114) — M114 ✅ 186/186 pero sin ítem de fatiga/recorrido ASMR en su 05 (rg «fatiga|15 min» sin hallazgo M44); recorrido NO ejecutado; dueño: M114 (playtest) [M]
+- [?] 15 min de juego sin fatiga auditiva (QA M114) — M114 está en 185/186 (🟡 Con dudas, NO completado al 2026-10-15; su único `[?]` es el discurso de briefing) y no tiene ítem de fatiga/recorrido ASMR en su checklist (rg «fatiga» = 0 hits en M114); recorrido NO ejecutado; dueño: M114 (playtest) [M] | REVERIFICADO 2026-10-15 (step-5-kilocode): los otros 4 `[?]` del módulo se confirmaron correctos contra disco (sensacion() sin llamadas externas, abrir_contenedor solo en datos, set_contexto sin uso de hora, pausar/reanudar como stubs `pass` en feedback_director.gd L79-83). Item L93 marca el mismo test como `[x]` sin evidencia: hay contradicción interna entre L93 y este ítem, documentada en ambos.
 - [x] Ninguna acción "chincha" en ningún bioma [M]
 - [x] Volumetría coherente entre todas las capas — sustento: 03 §8.2 NUEVO (jerarquía relativa por capa: ambiente 0 dB / acción -3 LUFS / microfoley -18 dB / música ducking; techos 03 §4/§5) [S]
 - [x] Microfoley dulce y premiador en cada interacción [S]
