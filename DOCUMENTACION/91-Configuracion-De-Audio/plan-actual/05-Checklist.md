@@ -144,7 +144,7 @@
 - [x] Definir Bluetooth — mimo-v2.6-flash-free 2026-10-02 (opencode): CATEGORIAS_LISTA
 - [x] Definir AudioServer.get_output_device_list() para lista de dispositivos — mimo-v2.6-flash-free 2026-10-02 (opencode): texto corregido (el original dice `get_device_list()`, API de Godot 3; ver plan-inicial/05-Checklist.md:145). Real Godot 4.7.2: `AudioServer.get_output_device_list()` (sondeo T-107)
 - [x] Definir AudioServer.set_output_device() para cambiar dispositivo — mimo-v2.6-flash-free 2026-10-02 (opencode): texto corregido (el original dice `set_device()`, API de Godot 3; ver plan-inicial/05-Checklist.md:146). Real: `AudioServer.set_output_device()` (sondeo T-107)
-- [ ] Definir dropdown en settings para seleccionar dispositivo
+- [x] Definir dropdown en settings para seleccionar dispositivo (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
 
 ### [S] Pruebas con auriculares
 - [x] Definir estéreo (izquierda/derecha) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.3 - tono de 200 Hz con AudioEffectPanner.pan=-1 durante 1,5 s, silencio, y luego pan=+1; comprobacion automatica leyendo get_bus_peak_volume_left/right_db
@@ -163,7 +163,7 @@
 - [x] Definir balance de canales — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.5 - procedimiento identico al de L152
 - [x] Definir test de audio (sonido de prueba en cada canal)
 - [x] Definir AudioServer.get_channel_count() para detectar canales
-- [x] Definir AudioServer.set_bus_channel_count() para configurar canales
+- [?] Definir AudioServer.set_bus_channel_count() para configurar canales (0 hits de set_bus_channel_count en scripts/ ni en el diseno; degradado director 2026-10-15 §21.8.2.b)
 - [x] Definir test button en settings — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.7 - boton «Probar altavoces» con el mismo patron que L157
 
 ### [S] Integración con M58 (Accesibilidad)
@@ -195,9 +195,9 @@
 
 ### [S] Menú de configuración de audio
 - [x] Diseñar AudioSettingsMenu
-- [ ] Diseñar controles para volumen maestro (slider)
-- [ ] Diseñar controles para volumen de música (slider)
-- [ ] Diseñar controles para volumen de efectos (slider)
+- [x] Diseñar controles para volumen maestro (slider) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
+- [x] Diseñar controles para volumen de música (slider) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
+- [x] Diseñar controles para volumen de efectos (slider) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
 - [ ] Diseñar controles para volumen de ambiente (slider)
 - [ ] Diseñar controles para volumen de voces (slider)
 - [ ] Diseñar controles para volumen de UI (slider)
@@ -205,8 +205,8 @@
 - [x] Diseñar controles para audio 3D (toggle)
 - [x] Diseñar controles para subtítulos (toggle + sliders + color picker) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 6: toggle + sliders (size, opacity) + color picker (background y text) con API set_*/get_* completa
 - [ ] Diseñar controles para sonidos de interfaz (toggle)
-- [ ] Diseñar controles para rango dinámico (dropdown)
-- [ ] Diseñar controles para compresión (toggle)
+- [x] Diseñar controles para rango dinámico (dropdown) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
+- [x] Diseñar controles para compresión (toggle) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
 - [ ] Diseñar controles para dispositivo de salida (dropdown)
 - [ ] Diseñar botones de prueba (auriculares, altavoces)
 
@@ -321,7 +321,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 ítems · Completados: 207 · Pendientes: 31 · No resueltos: 1.
+**Totales:** 239 items · Completados: 212 · Pendientes: 25 · No resueltos: 2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].

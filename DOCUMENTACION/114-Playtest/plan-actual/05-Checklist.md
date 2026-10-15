@@ -45,7 +45,7 @@
 ## 4. RF — Sesiones guiadas
 
 - [x] Definir el rol del moderador en sesiones guiadas [S]
-- [?] Escribir el discurso de briefing estándar en español (5 minutos) → REVERTIDO por auditoría BUG-070 (atria-dawn, msg s3 #73, 2026-10-08): verbo `Escribir` + artefacto final inexistente (solo existe el outline en 03-Diseno.md L31 `briefing script outline`). El propio ítem admite `redaccion final requiere facilitador humano`. Conocido y visible (no inflación oculta), pero no cumple DoD estricta.
+- [x] Escribir el discurso de briefing estandar en espanol (5 minutos) (FLIP director 2026-10-15: el artefacto SII existe en 04-Codigo.md L57-60, commit 53c2948 de 2026-08-17; verificado con git log -S + blame por Ling, msg 135. La auditoria BUG-070 cito solo 03-Diseno.md).
 - [x] Definir la técnica think-aloud y su instrucción al tester [S]
 - [x] Establecer regla de no ayuda: el moderador no da la solución salvo bloqueo absoluto [S]
 - [x] Definir la regla de los 10 segundos de silencio antes de intervenir [S]
@@ -239,7 +239,7 @@
 - [x] Definir criterio de éxito del piloto: 3 sesiones completas, 80% de encuestas, informe en una semana [S]
 - [x] Definir que los errores del piloto se corrigen en las plantillas antes de la ronda oficial [S]
 - [x] Definir medición del tiempo real de análisis por sesión para ajustar el presupuesto de horas [S]
-**Totales:** 186 ítems · Completados: 185 · Pendientes: 0 · No resueltos: 1.
+**Totales:** 186 items · Completados: 186 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 186 [x] / 0 [ ] / 0 [?].
