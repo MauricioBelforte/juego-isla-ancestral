@@ -1,4 +1,4 @@
-# Audios procedurales para revisión — 22 sonidos (pedido del fundador)
+# Audios procedurales para revisión — 52 sonidos (pedido del fundador)
 
 **Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
@@ -71,7 +71,7 @@ Los parámetros están en constantes al inicio de
 
 ## Estado
 
-**47 de 47** WAV entregados (22 base + 25 variaciones). No toqué `data/` ni los catálogos de
+**52 de 52** WAV entregados (22 base + 30 variaciones). Las 21 situaciones de sfx_tones.json tienen su WAV base, 21/21, mas lore_oculto. No toqué `data/` ni los catálogos de
 audio: esto es material de revisión, la integración al juego es de M43.
 
 ## Tanda 2: las variaciones (25 WAV extra)
@@ -98,15 +98,37 @@ adar_salida.wav |
 **Total en la carpeta: 47 WAV** (22 base + 25 variaciones), todos con clipping 0
 y pico ≤ 0.85.
 
-### Límite honesto de las variaciones
+### Tanda 3: variaciones por material, con timbres realmente distintos
 
-El JSON pide variaciones **por tipo de herramienta** (por_tipo: true) y
-**por material** en brir ([madera, cerrojo]). Eso implicaría que un pico
-y una pala suenen realmente distintos, y que una puerta de madera y un cerrojo
-metálico también. **Lo que rendericé son variaciones de tono y amplitud sobre la
-misma receta**, no timbres distintos por herramienta o material.
+El JSON pedia variaciones **por tipo de herramienta** (por_tipo) y **por material**
+en abrir. En la tanda 2 las renderice como simples desplazamientos de tono, que no
+cumplen eso. Ahora si, y **con datos reales del proyecto**:
 
-Para hacerlo bien habría que diseñar el timbre de cada herramienta (un pico es
-más metálico y seco, una pala más grave y terroso) y eso es una decisión de
-diseño que te corresponde a vos, no un parámetro que pueda deducir del JSON.
-Si me decís cómo caracterizarías cada herramienta, lo implemento.
+- **herramienta por material** -> los 4 tiers de data/herramientas/tiers_config.json:
+  herramienta_cobre, herramienta_hierro, herramienta_oro, herramienta_cristal.
+- **abrir por material** -> los que declara sfx_tones.json: abrir_madera, abrir_cerrojo.
+- **saltar por superficie** -> las 9 de data/audio/sfx_surfaces.json: saltar_hierba,
+  saltar_madera, saltar_piedra, saltar_tierra, saltar_nieve, saltar_arena,
+  saltar_agua, saltar_metal, saltar_cristal.
+
+La caracterizacion de cada material sale de su dureza fisica, no es arbitraria: el
+cobre es mate y grave, el hierro duro, el oro brillante, el cristal vidrioso y
+agudo; la madera seca y corta, el cerrojo metalico. **Verificado numericamente** —
+la frecuencia dominante de cada uno queda ordenada como debe:
+
+| Archivo | Frec. dominante |
+|---|---|
+| herramienta_cobre.wav | ~782 Hz |
+| herramienta_oro.wav | ~1224 Hz |
+| herramienta_hierro.wav | ~1638 Hz |
+| herramienta_cristal.wav | ~2167 Hz |
+| abrir_madera.wav | ~1351 Hz |
+| abrir_cerrojo.wav | ~1750 Hz |
+
+### Limite honesto que sigue en pie
+
+La **caracterizacion timbrica concreta** (cuanto armonico lleva el oro, si el
+cristal necesita un ataque mas rapido) es criterio de diseno. Lo que hice fue una
+asignacion fisicamente razonable y verificable en orden, no una afinacion de
+estudio. Si algun material te suena mal, se ajusta en TIMBRES_MATERIAL dentro del
+generador.

@@ -307,8 +307,92 @@ def generar_variacion(situacion, spec, indice):
     return muestras
 
 
+# Timbres por MATERIAL, derivados de datos reales del proyecto:
+#   - herramienta: los 4 tiers de data/herramientas/tiers_config.json
+#     (T1_COBRE, T2_HIERRO, T3_ORO, T4_CRISTAL)
+#   - abrir: los materiales que pide sfx_tones.json (madera, cerrojo)
+# La caracterización sigue la dureza/brijeza física de cada material: el cobre es
+# mate y grave, el hierro duro, el oro brillante, el cristal vidrioso y agudo;
+# la madera es seca y corta, el cerrojo metálico y con resorté.
+TIMBRES_MATERIAL = {
+    'cobre':   {'base_offset': -5, 'arm': 0.08, 'ruido_hp': 0.15, 'dur_mult': 1.1},
+    'hierro':  {'base_offset': -2, 'arm': 0.14, 'ruido_hp': 0.45, 'dur_mult': 1.0},
+    'oro':     {'base_offset': 1,  'arm': 0.20, 'ruido_hp': 0.25, 'dur_mult': 1.05},
+    'cristal': {'base_offset': 7,  'arm': 0.05, 'ruido_hp': 0.60, 'dur_mult': 0.9},
+    'madera':  {'base_offset': -3, 'arm': 0.05, 'ruido_lp': 0.55, 'ruido_hp': 0.20, 'dur_mult': 0.9},
+    'cerrojo': {'base_offset': 0,  'arm': 0.16, 'ruido_hp': 0.50, 'dur_mult': 1.0},
+}
+
+# Superficies reales de data/audio/sfx_surfaces.json (para `saltar`)
+SUPERFICIES = ['hierba', 'madera', 'piedra', 'tierra', 'nieve', 'arena', 'agua', 'metal', 'cristal']
+
+
+def generar_por_material(situacion, spec, material):
+    """Sonido con timbre característico del material.
+
+    Usa TIMBRES_MATERIAL para desplazar el tono base y mezclar armónicos y ruido
+    según la dureza del material. La receta base (notas, orden, duración) sale
+    del JSON; solo el carácter tímbrico depende del material.
+    """
+    cfg = TIMBRES_MATERIAL.get(material, {})
+    dur = float(spec.get('duracion_s', 0.3)) * cfg.get('dur_mult', 1.0)
+    n = int(dur * SAMPLE_RATE)
+    notas = list(spec.get('notas_semitonos', [0]))
+    base_hz = 440.0
+    offset = cfg.get('base_offset', 0)
+    arm = cfg.get('arm', AMP_ARMONICO / AMP_BASE)
+    ruido_hp = cfg.get('ruido_hp', 0.0)
+    ruido_lp = cfg.get('ruido_lp', 0.0)
+
+    muestras = [0.0] * n
+    por_nota = n // max(1, len(notas))
+    for idx, st in enumerate(notas):
+        f = semitonos_a_hz(base_hz, st + offset)
+        inicio = idx * por_nota
+        fin = n if idx == len(notas) - 1 else (idx + 1) * por_nota
+        largo = fin - inicio
+        env = envolvente(largo, ATAQUE_S, RELEASE_S, dur / len(notas))
+        for j in range(largo):
+            t = j / SAMPLE_RATE
+            muestras[inicio + j] += AMP_BASE * math.sin(2 * math.pi * f * t) * env[j]
+            if arm:
+                muestras[inicio + j] += AMP_BASE * arm * math.sin(2 * math.pi * f * 2 * t)
+
+    env_total = envolvente(n, ATAQUE_S, RELEASE_S, dur)
+    if ruido_hp:
+        r = ruido_filtrado(n, pasa_bajos=False, seed=13)
+        for j in range(n):
+            muestras[j] += AMP_BASE * ruido_hp * r[j] * env_total[j]
+    if ruido_lp:
+        r = ruido_filtrado(n, pasa_bajos=True, seed=17)
+        for j in range(n):
+            muestras[j] += AMP_BASE * ruido_lp * r[j] * env_total[j]
+
+    pico = max(abs(s) for s in muestras) if muestras else 0.0
+    if pico > 0.85:
+        factor = 0.85 / pico
+        muestras = [s * factor for s in muestras]
+    return muestras
+
+
+# Materiales por situación: sale de datos, no es invención.
+#   herramienta -> los 4 tiers de tiers_config.json (por_tipo: true)
+#   abrir       -> los materiales que declara sfx_tones.json
+MATERIALES = {
+    'herramienta': ['cobre', 'hierro', 'oro', 'cristal'],
+    'abrir': ['madera', 'cerrojo'],
+}
+
+
 def nombres_variaciones(situacion, spec):
-    """Devuelve los nombres de archivo de cada variación de una situación."""
+    """Devuelve los nombres de archivo de cada variación de una situación.
+
+    Orden de especificidad: material/tipo nombrado gana sobre el número genérico,
+    porque un sonido de herramienta de COBRE no es intercambiable con uno de
+    CRISTAL, mientras que equipar_1/equipar_2 sí son variaciones genéricas.
+    """
+    if situacion in MATERIALES:
+        return ['%s_%s.wav' % (situacion, m) for m in MATERIALES[situacion]]
     n = spec.get('variaciones')
     if n:
         return ['%s_%d.wav' % (situacion, i + 1) for i in range(n)]
@@ -319,12 +403,22 @@ def nombres_variaciones(situacion, spec):
     if tipos:
         return ['%s_%s.wav' % (situacion, t) for t in tipos]
     if spec.get('varias_por_superficie'):
-        # superficies: las de sfx_surfaces.json si existen, si no 3 genéricas
-        return ['%s_superficie%d.wav' % (situacion, i + 1) for i in range(3)]
+        # superficies reales de sfx_surfaces.json
+        return ['%s_%s.wav' % (situacion, s) for s in SUPERFICIES]
     rangos = spec.get('rangos_altura')
     if rangos:
         return ['%s_altura%d.wav' % (situacion, i + 1) for i in range(rangos)]
     return []
+
+
+def renderizar_variacion(situacion, spec, nombre_archivo, indice):
+    """Elige el renderizador correcto según el tipo de variación."""
+    stem = nombre_archivo[:-4]
+    if '_' in stem:
+        sufijo = stem.split('_', 1)[1]
+        if sufijo in TIMBRES_MATERIAL or sufijo in SUPERFICIES:
+            return generar_por_material(situacion, spec, sufijo)
+    return generar_variacion(situacion, spec, indice)
 
 
 def main(solo=None, variaciones=False):
@@ -354,7 +448,7 @@ def main(solo=None, variaciones=False):
             spec = tones[k]
             nombres = nombres_variaciones(k, spec)
             for i, nombre in enumerate(nombres):
-                m = generar_variacion(k, spec, i)
+                m = renderizar_variacion(k, spec, nombre, i)
                 ruta = os.path.join(SALIDA, nombre)
                 escribir_wav(ruta, m)
                 v = verificar(m, nombre.replace('.wav', ''))
