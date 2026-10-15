@@ -1,16 +1,25 @@
-ESTRUCTURA DE ESTA CARPETA — regla del fundador (2026-10-15)
+ESTRUCTURA DE ESTA CARPETA - regla del fundador (2026-10-15)
 
-- Los mensajes del canal viven en la RAIZ de esta carpeta.
-- Solo se crea una subcarpeta de rango (0-99, 100-199, 200-299, 300-399, ...)
-  cuando ese rango ya tiene sus 100 numeros COMPLETOS.
-- Si un rango esta incompleto (ej: 300-399 con solo 70 mensajes), los archivos
-  se quedan en la raiz: NO se crea la carpeta todavia.
-- Razon: no cambiar la metodologia actual (el director trabaja sobre los
-  mensajes recientes en la raiz).
+Los mensajes viven en la RAIZ. Cuando un rango de 100 numeros se COMPLETA
+(0-99, 100-199, 200-299, ...), sus archivos se mueven a una subcarpeta con ese
+nombre y quedan como archivo historico.
 
-Las carpetas existentes hoy (0-99, 100-199, 200-299) son archivo historico de
-rangos ya completos.
+Asi, en la raiz solo quedan los mensajes del rango actual (los ultimos 100),
+que se listan rapido y facilitan el scroll para encontrar lo nuevo.
+
+Reglas:
+1. NO se crea la subcarpeta de un rango hasta que existan mensajes del rango
+   SIGUIENTE. Ejemplo: con mensajes hasta el 372, se archivan 0-99, 100-199 y
+   200-299, y quedan sueltos en la raiz los del 300 al 372.
+2. Si un numero del rango nunca existio (hueco) o hubo colisiones, el rango se
+   archiva igual: lo que cuenta es que el siguiente rango ya empezo.
+3. NO se mueven ni renombran archivos que no empiecen con numero + guion.
+4. Los archivos de control (NUMEROS_DISPONIBLES.txt, .ultima-revision-*.txt)
+   se quedan siempre en la raiz.
+5. Los mensajes nuevos siguen creandose en la raiz con el numero que toque.
 
 Nota tecnica: scripts/verificar_pool_numeros.py y
 scripts/scripts-reutilizables/ver_mensajes.py listan de forma RECURSIVA, asi
-que leen sin problemas una estructura mixta (raiz + subcarpetas de rango).
+que leen sin problemas la estructura mixta (raiz + subcarpetas de rango).
+
+Carpeta: step-5-kilocode

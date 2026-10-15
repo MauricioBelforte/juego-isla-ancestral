@@ -203,11 +203,14 @@ def main():
     TOPE = 500
     if not os.path.isfile(POOL_CANAL):
         # Lo crea al vuelo: 1..TOPE menos los numeros ya usados en la carpeta.
+        # Recursivo: los mensajes pueden estar en subcarpetas de rango
+        # 0-99/100-199/... (orden del fundador 2026-10-15).
         _us = set()
-        for f in os.listdir(carpeta):
-            m = NUM_MSG_RE.match(f)
-            if m and os.path.isfile(os.path.join(carpeta, f)):
-                _us.add(int(m.group(1)))
+        for _raiz, _dirs, _files in os.walk(carpeta):
+            for f in _files:
+                m = NUM_MSG_RE.match(f)
+                if m:
+                    _us.add(int(m.group(1)))
         _lib = [str(n) for n in range(1, TOPE + 1) if n not in _us]
         with open(POOL_CANAL, "w", encoding="utf-8", newline="\n") as fh:
             fh.write("\n".join(_lib) + "\n")
