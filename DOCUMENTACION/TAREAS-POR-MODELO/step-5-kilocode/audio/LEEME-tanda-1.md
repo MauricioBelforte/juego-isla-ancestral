@@ -1,4 +1,4 @@
-# Audios procedurales para revisión — tanda 1 (3 de 21)
+# Audios procedurales para revisión — 22 sonidos (pedido del fundador)
 
 **Modelo:** step-5-kilocode
 **Plataforma:** Kilo Code
@@ -7,69 +7,69 @@
 ## Qué es esta carpeta
 
 Audios **generados por código**, no grabados. Los rendericé desde las recetas que ya
-existen en `game/isla-ancestral/data/audio/sfx_tones.json` — el catálogo de 21
-situaciones que diseñó M43 y que `sfx_manager.gd` ya consume.
+existen en el proyecto, para que el fundador los escuche por nombre con cualquier
+reproductor y evalúe el timbre **antes** de que nadie los integre al juego.
 
-**El objetivo es que los escuches por nombre con tu reproductor y me digas si el timbre
-pega con lo que imaginaste**, antes de que nadie los integre al juego.
+- **21 situaciones** salen de `game/isla-ancestral/data/audio/sfx_tones.json` — el
+  catálogo que diseñó M43 y que `sfx_manager.gd` ya consume.
+- **`lore_oculto.wav`** sale de `narrative_sound.json` v1.2.0 (momento que agregué yo
+  en el commit 47353d0 para M150).
+
+Formato de todos: **mono / 16-bit / 44.100 Hz**, que Godot lee directo.
 
 ## Cómo escucharlos
 
-Abrí esta carpeta con cualquier reproductor. El nombre del archivo es la situación:
+Abrí esta carpeta con tu reproductor. El nombre del archivo es la situación.
+Escuchalos en este orden si querés comparar familias de timbre:
 
-| Archivo | Situación | Duración | Timbre |
-|---|---|---|---|
-| `pescar.wav` | pesca | 0.60 s | agua + seno modulado |
-| `cosechar.wav` | cosechar cultivos | 0.35 s | follaje |
-| `herramienta.wav` | usar herramienta | 0.20 s | metálico |
+| Grupo | Archivos |
+|---|---|
+| Agua / naturaleza | `pescar`, `nadar`, `regar`, `cosechar`, `plantar` |
+|UI / economia | `confirmacion`, `logro`, `error`, `recoger`, `compra`, `venta`, `menu`, `seleccion`, `dialog` |
+| Movimiento | `saltar`, `caer`, `equipar` |
+| Objetos | `abrir`, `cerrar`, `herramienta`, `crafting_exito` |
+| Narrativo | `lore_oculto` |
 
-## De dónde salió cada sonido
+## Verificación numérica (lo que sí pude comprobar sin oreja)
 
-Los tres salen **directamente del JSON de M43**, no los inventé yo:
+Los 22 se midieron antes de entregarse. **Todos con clipping = 0 y pico ≤ 0.85**, así
+que ninguno distorsiona. Offset DC en todos los casos bajo 0.007: no van a hacer pop.
 
-```
-"pescar":      {"notas_semitonos": [0,2,5,7], "orden": "ascendente",
-                "duracion_s": 0.6, "tono": "agua",
-                "etapas": ["cast","splash","bote","reel"]}
-"cosechar":    {"notas_semitonos": [0,4,7], "orden": "ascendente",
-                "duracion_s": 0.35, "tono": "follaje", "logro_ligero": true}
-"herramienta": {"notas_semitonos": [0,4], "orden": "ascendente",
-                "duracion_s": 0.2, "tono": "metálico",
-                "variaciones": 4, "por_tipo": true}
-```
+Dos que merecen ojo:
+- **`plantar.wav`** tiene offset DC de −0.0068, el más alto de la tanda. Es ruido
+  filtrado pasa-bajos y ese filtro de un polo arrastra componente continua. Suave,
+  pero si escuchás algo raro en los graves, es esto.
+- **`cosechar.wav`** tiene pico 0.625, el más alto. Ya está normalizado, no satura.
 
-Las `notas_semitonos` las convertí a frecuencias (0 = 440 Hz, cada semitono ×2^(1/12)).
-El campo `tono` definió el timbre: **agua** = seno + ruido modulado, **follaje** = ruido
-filtrado pasa-bajos, **metálico** = seno + ruido pasa-altos.
+## Lo que NO puedo verificar — y necesito de vos
 
-## Verificación numérica (lo que sí puedo comprobar sin oreja)
+**Si suenan bien.** Puedo demostrar que no saturan, no que un seno con armónicos suene
+a "cosechar" o que el tritono de `lore_oculto` suene a misterio. Eso lo definís vos.
 
-Cada WAV se midió antes de entregarse:
+## Salvedades honestas sobre el alcance
 
-| Archivo | Pico | Offset DC | Duración | Clipping |
-|---|---|---|---|---|
-| `pescar.wav` | 0.449 | −0.00001 | 0.60 s | 0 |
-| `cosechar.wav` | 0.625 | −0.00251 | 0.35 s | 0 |
-| `herramienta.wav` | 0.350 | +0.00000 | 0.20 s | 0 |
-
-**Pico ≤ 0.999 y clipping = 0** en los tres: no distorsionan. Offset DC casi cero: no
-van a hacer pop en los parlantes. Formato mono / 16-bit / 44.1 kHz, que Godot lee
-directamente.
-
-## Lo que no puedo verificar y necesito de vos
-
-**Si suenan bien.** Puedo demostrar que no saturan, no que un seno de 880 Hz con armónicos
-suene a "cosechar". Eso lo definís vos.
+1. **Un sonido por situación, no las variaciones.** El JSON pide variaciones que mi
+   generador no renderiza: `herramienta` pide 4, `abrir` pide 3 (madera/cerrojo),
+   `equipar` pide 2, `saltar` pide variar por superficie, `caer` pide 3 rangos de
+   altura, `pescar` pide 4 etapas (cast/splash/bote/reel), `nadar` pide 3 tipos.
+   Entregué **uno representativo por situación**. Si el enfoque te gusta, renderizo
+   las familias completas.
+2. **`compra` y `venta` piden "monedas": 2** — un detalle de sonido de monedas que no
+   sinteticé. Quedan como el tono base nomás.
+3. **`lore_oculto` es diseño mío**, no viene del JSON: usé un tritono (4ª aumentada),
+   que suena irresuelto, con una 5ª que aparece al final y se corta. Es el único de
+   los 22 donde inventé la receta.
+4. **No ejecuté nada en Godot** (no disponible en este entorno). La verificación es
+   numérica sobre el WAV, no de escucha.
 
 ## Para ajustar
 
 Los parámetros están en constantes al inicio de
-`scripts-prueba-temp/generar_audios.py`: `AMP_BASE` (volumen general),
-`AMP_ARMONICO` (brillo), `ATAQUE_S` y `RELEASE_S` (suavidad). Si me decís "más seco",
-"más brillante" o "más largo", los cambio y regenero.
+`scripts-prueba-temp/generar_audios.py`: `AMP_BASE` (volumen), `AMP_ARMONICO`
+(brillo), `ATAQUE_S` / `RELEASE_S` (suavidad). Decime "más seco", "más brillante",
+"más largo" de un sonido y lo regenero.
 
-## Qué falta
+## Estado
 
-Quedan **18 de 21 situaciones** por renderizar. Cuando valides estas tres, sigo con el
-resto. No toqué `data/` ni el catálogo: esto es material de revisión, la integración al
-juego es de M43.
+**22 de 22** objetivos de esta tanda entregados. No toqué `data/` ni los catálogos de
+audio: esto es material de revisión, la integración al juego es de M43.
