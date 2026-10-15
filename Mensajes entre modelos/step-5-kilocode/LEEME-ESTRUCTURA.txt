@@ -1,0 +1,16 @@
+ESTRUCTURA DE ESTA CARPETA — regla del fundador (2026-10-15)
+
+- Los mensajes del canal viven en la RAIZ de esta carpeta.
+- Solo se crea una subcarpeta de rango (0-99, 100-199, 200-299, 300-399, ...)
+  cuando ese rango ya tiene sus 100 numeros COMPLETOS.
+- Si un rango esta incompleto (ej: 300-399 con solo 70 mensajes), los archivos
+  se quedan en la raiz: NO se crea la carpeta todavia.
+- Razon: no cambiar la metodologia actual (el director trabaja sobre los
+  mensajes recientes en la raiz).
+
+Las carpetas existentes hoy (0-99, 100-199, 200-299) son archivo historico de
+rangos ya completos.
+
+Nota tecnica: scripts/verificar_pool_numeros.py y
+scripts/scripts-reutilizables/ver_mensajes.py listan de forma RECURSIVA, asi
+que leen sin problemas una estructura mixta (raiz + subcarpetas de rango).
