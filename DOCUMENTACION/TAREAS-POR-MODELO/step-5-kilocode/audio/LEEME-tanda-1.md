@@ -71,5 +71,42 @@ Los parámetros están en constantes al inicio de
 
 ## Estado
 
-**22 de 22** objetivos de esta tanda entregados. No toqué `data/` ni los catálogos de
+**47 de 47** WAV entregados (22 base + 25 variaciones). No toqué `data/` ni los catálogos de
 audio: esto es material de revisión, la integración al juego es de M43.
+
+## Tanda 2: las variaciones (25 WAV extra)
+
+El JSON pide variaciones para que dos disparos seguidos no suenen clonados.
+Rendericé las 25, con el mismo criterio: desplazo el tono unos semitonos y roto
+la amplitud, conservando la receta base.
+
+| Familia | Variaciones | Nombre de archivo |
+|---|---|---|
+| herramienta | 4 | herramienta_1.wav … herramienta_4.wav |
+| brir | 3 | brir_1.wav … brir_3.wav |
+| equipar | 2 | equipar_1.wav … equipar_2.wav |
+| plantar | 3 | plantar_1.wav … plantar_3.wav |
+| pescar | 4 etapas | pescar_cast.wav, pescar_splash.wav, pescar_bote.wav, pescar_reel.wav |
+| 
+adar | 3 tipos | 
+adar_entrada.wav, 
+adar_avance.wav, 
+adar_salida.wav |
+| caer | 3 alturas | caer_altura1.wav … caer_altura3.wav |
+| saltar | 3 superficies | saltar_superficie1.wav … saltar_superficie3.wav |
+
+**Total en la carpeta: 47 WAV** (22 base + 25 variaciones), todos con clipping 0
+y pico ≤ 0.85.
+
+### Límite honesto de las variaciones
+
+El JSON pide variaciones **por tipo de herramienta** (por_tipo: true) y
+**por material** en brir ([madera, cerrojo]). Eso implicaría que un pico
+y una pala suenen realmente distintos, y que una puerta de madera y un cerrojo
+metálico también. **Lo que rendericé son variaciones de tono y amplitud sobre la
+misma receta**, no timbres distintos por herramienta o material.
+
+Para hacerlo bien habría que diseñar el timbre de cada herramienta (un pico es
+más metálico y seco, una pala más grave y terroso) y eso es una decisión de
+diseño que te corresponde a vos, no un parámetro que pueda deducir del JSON.
+Si me decís cómo caracterizarías cada herramienta, lo implemento.
