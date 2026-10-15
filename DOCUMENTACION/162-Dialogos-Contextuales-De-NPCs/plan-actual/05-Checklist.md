@@ -86,7 +86,7 @@
 - [?] 49. Verificar que la Agricultora tenga remedios por estación | AUDIT 2026-10-14 (step-5-kilocode): hay grafos ESTACIONALES (generados por gen_m162_estaciones.py) y la dimension estacion (M29) si alimenta el selector; el contenido 'remedios' no se verifico nodo por nodo.
 - [?] 50. Verificar que el Animador mencione festivales de M29 | AUDIT 2026-10-14 (step-5-kilocode): idem — sin dimension de festivales en el selector; M29 alimenta hora/estacion/dia/mes, no eventos.
 - [?] 51. Verificar que la Vendedora tenga stock coherente con capítulo | AUDIT 2026-10-14 (step-5-kilocode): sin dimension de stock/economia en M162; la coherencia de stock es de M38/M16.
-- [?] 52. Verificar que el Pescador mencione peces de M160 | AUDIT 2026-10-14 (step-5-kilocode): solo 2 de 367 grafos mencionan 'pez'; M160 no tiene datos de peces en data/ (no existe data/m160). Mencion no verificable.
+- [ ] 52. Verificar que el Pescador mencione peces de M160 | AUDIT 2026-10-14 (step-5-kilocode): solo 2 de 367 grafos mencionan 'pez'; M160 no tiene datos de peces en data/ (no existe data/m160). Mencion no verificable. | REVERIFICADO 2026-10-15 (step-5-kilocode) contra data/m160/catalogo_ubicaciones.json: los 20 grafos de riz_005 mencionan pez/peces/pesca de forma GENERICA y ninguno de los 25 peces del catalogo (sardina, anchoa, carpa, trucha, salmon, mero...). Ademas el texto dice "El mar de Aurora es generoso" y "Aurora siempre tendra mar para pescar", pero el Pescador es de RIZ (Isla Raiz): el catalogo tiene AUR = Cielo de la Aurora con biomas bosque_ancestral/pradera/lago. Mencion laxa e isla incorrecta.
 
 ---
 
@@ -97,7 +97,7 @@
 - [x] 55. Documentar diálogos del Comerciante Viajero (NPC-COR-003) — 8 capítulos
 - [x] 56. Documentar diálogos del Guardia del Puerto (NPC-COR-004) — 8 capítulos
 - [x] 57. Documentar diálogos de la Niña de la Playa (NPC-COR-005) — 8 capítulos
-- [?] 58. Verificar coherencia del Herrero con sistema de forja de M158 | AUDIT 2026-10-14 (step-5-kilocode): 4 de 367 grafos mencionan 'forja'; M158 no tiene datos en data/ (no existe data/m158). Coherencia no verificable.
+- [ ] 58. Verificar coherencia del Herrero con sistema de forja de M158 | AUDIT 2026-10-14 (step-5-kilocode): 4 de 367 grafos mencionan 'forja'; M158 no tiene datos en data/ (no existe data/m158). Coherencia no verificable. | REVERIFICADO 2026-10-15 (step-5-kilocode) contra data/m158/catalogo_herramientas.json: los 15 grafos de cor_001 dicen "Las cenizas estan enfriando la fragua. El metal no fluye bien" y "La fragua no se apaga nunca. Ni siquiera en la noche eterna". El catalogo indica que la forja de Coral (isla_coral) es T3_ORO/orfebre con oro:20 y 2000 monedas, sin nada de cenizas ni noche eterna: ese contenido pertenece a isla_ceniza. Texto del NPC no coincide con el catalogo.
 - [?] 59. Verificar que la Pescadora mencione arrecifes de M160 | AUDIT 2026-10-14 (step-5-kilocode): 3 de 367 grafos mencionan 'arrecife'; M160 no tiene datos de arrecifes en disco. No verificable.
 - [?] 60. Verificar que el Comerciante refleje precios progresivos de M38 | AUDIT 2026-10-14 (step-5-kilocode): 0 de 367 grafos mencionan 'precio'; la dimension economica de M38 no alimenta el selector de M162. No verificable.
 - [?] 61. Verificar que el Guardia mencione rutas de M160 | AUDIT 2026-10-14 (step-5-kilocode): 3 de 367 grafos mencionan 'ruta'; data/viajes/rutas.json existe (820 B) pero es de transporte (M69), no de M160. Mencion laxa.
@@ -122,7 +122,7 @@
 - [x] 75. Documentar diálogos de la Cocinera del Pueblo (NPC-CEN-003) — 8 capítulos
 - [x] 76. Documentar diálogos del Bibliotecario (NPC-CEN-004) — 8 capítulos
 - [x] 77. Documentar diálogos del Guardia de la Mina (NPC-CEN-005) — 8 capítulos
-- [?] 78. Verificar coherencia del Herrero Avanzado con sistema de hierro de M158 | AUDIT 2026-10-14 (step-5-kilocode): 4 grafos mencionan 'forja'; M158 no tiene datos en disco (no existe data/m158). Coherencia no verificable.
+- [x] 78. Verificar coherencia del Herrero Avanzado con sistema de hierro de M158 | AUDIT 2026-10-14 (step-5-kilocode): 4 grafos mencionan 'forja'; M158 no tiene datos en disco (no existe data/m158). Coherencia no verificable. | VERIFICADO 2026-10-15 (step-5-kilocode) contra data/m158/catalogo_herramientas.json: cen_001 (13 grafos) dice "El hierro de Ceniza es el mejor del archipielago" y "Forjo herramientas de hierro"; el catalogo confirma la forja isla_ceniza (T2_HIERRO, profesional herrero, materiales hierro:10, 500 monedas) y las herramientas pico_hierro/hacha_hierro (durabilidad 300). Texto y catalogo coinciden.
 - [?] 79. Verificar que el Minero mencione minerales de M160 | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de 'mineral' en los 367 grafos; M160 no tiene datos de minerales en disco. No verificable.
 - [?] 80. Verificar que la Cocinera tenga recetas por capítulo | AUDIT 2026-10-14 (step-5-kilocode): grafos de cen_003 existen por capitulo; el contenido 'recetas' no se verifico nodo por nodo. Parcial.
 - [?] 81. Verificar que el Bibliotecario revele lore gradual de M22 | AUDIT 2026-10-14 (step-5-kilocode): la dimension flag_capitulo (M22) permite revelado gradual por capitulo; el contenido lore del Bibliotecario no se verifico nodo por nodo. Parcial.
@@ -147,7 +147,7 @@
 - [x] 95. Documentar diálogos del Guardia Ancestral (NPC-AUR-003) — 8 capítulos
 - [x] 96. Documentar diálogos del Artista del Pueblo (NPC-AUR-004) — 8 capítulos
 - [x] 97. Documentar diálogos del Viajero Misterioso (NPC-AUR-005) — 8 capítulos
-- [?] 98. Verificar coherencia del Encantador con sistema de encantamientos de M158 | AUDIT 2026-10-14 (step-5-kilocode): M158 sin datos en disco (no existe data/m158). No verificable.
+- [ ] 98. Verificar coherencia del Encantador con sistema de encantamientos de M158 | AUDIT 2026-10-14 (step-5-kilocode): M158 sin datos en disco (no existe data/m158). No verificable. | REVERIFICADO 2026-10-15 (step-5-kilocode) contra data/m158/catalogo_herramientas.json: los 17 grafos de aur_001 dicen "El encantamiento requiere paciencia", "Las antiguas las usaban para encantar" y "Trae los 7 sellos y te ensenare el encantamiento final". Ninguno menciona los 4 encantamientos del catalogo (Cobre Ancestral, Hierro Prospero, Oro Brillante, Cristal de Caverna) ni incienso, coste o tool_tier. Mencion generica, no verificable contra el sistema.
 - [?] 99. Verificar que la Sanadora tenga pociones por capítulo | AUDIT 2026-10-14 (step-5-kilocode): grafos de cen_005 existen por capitulo; contenido 'pociones' no verificado nodo por nodo.
 - [?] 100. Verificar que el Guardia Ancestral mencione el templo de M160 | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de 'templo' en los 367 grafos; M160 sin datos de templo en disco. No verificable.
 - [?] 101. Verificar que el Artista mencione ubicaciones de M160 | AUDIT 2026-10-14 (step-5-kilocode): M160 sin datos de ubicaciones en disco. No verificable.
@@ -265,11 +265,14 @@
 - **Iter. contenido 4 (Log 640, glm-5.3-flash/Kilo Code):** 18 HISTORIA nocturnas para AUR/CEN/COR/riz_006-008 (cobertura nocturna COMPLETA 23/23 NPCs). Registry 328 → 346; 346/346 grafos OK. Generador `gen_m162_noche_all.py` idempotente. Regresión M21 0 fallos.
 - **Iter. contenido 5 (Log 641, glm-5.3-flash/Kilo Code):** 20 HISTORIA estacionales para los 5 NPCs RIZ (4 estaciones × 5). Registry 346 → 366; 366/366 grafos OK. Generador \gen_m162_estaciones.py\ idempotente. Regresión M21 implícita (sin cambios de selector).
 
-**Totales:** 120 ítems · Completados: 80 · Pendientes: 0 · No resueltos: 40.
+**Totales:** 120 ítems · Completados: 81 · Pendientes: 3 · No resueltos: 36.
 
-> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 80 [x] / 0 [ ] /
-> 40 [?]. Las marcas no se tocaron.
+> **Actualizado por verificación de catálogos (step-5-kilocode / Kilo Code, 2026-10-15):** se
+> reverificaron los 4 ítems que el director habilitó al crear `data/m160/catalogo_ubicaciones.json`
+> y `data/m158/catalogo_herramientas.json`. Resultado: ítem 78 promovido a `[x]` (texto de
+> `cen_001` y catálogo de forja/hierro coinciden) y ítems 52, 58 y 98 bajados de `[?]` a `[ ]`
+> con evidencia (menciones genéricas, y en 52 y 58 el texto contradice el catálogo).
+> Conteo real por marcas del archivo: 81 [x] / 3 [ ] / 36 [?].
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06)
 Auditoría del bloque 2 (T-D7): los [80 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_contextual_dialogue_m162.gd` = 0 fallos (EXIT 0); scripts/dialogos/ + data/dialogues/contextual/*.json.
