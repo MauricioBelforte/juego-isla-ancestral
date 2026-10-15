@@ -112,11 +112,11 @@
 ## N. RF13 — Validación
 
 - [x] Definir validate_vegetation.gd [M] — **Diseño: 02-Analisis.md 1.8 (Validación técnica); 04-Codigo.md 2 (validate_vegetation.gd)**
-- [ ] Verificar densidad real vs tabla [M]
+- [x] Verificar densidad real vs tabla [M] — FLIP 2026-10-15 (mimo, evidencia WB 43/Log 1864): densidades medidas hoy 1:1 con vegetacion_config.json v2 (playa 12, pradera 25, bosque 22, montana 10, ribera 15 + 25 spawn)
 - [x] Verificar instancias fuera de agua/cueva (arte sucio) [M] — iter. 6 (Log 646): BUG-022 fix (h<3 omitidas) en vegetation_spawner.gd L87, ejercido por el spawner en runtime; test_distribucion.gd es DEBUG sin aserciones, NO es evidencia de test (H5 corregido 2026-10-11), 109 instancias pobladas
 - [?] — agnes-2026-09-06: LOD no implementado; instancias simples por ahora (GLB media) Verificar LOD presente [S]
 - [ ] Verificar presupuesto (instancias/draw calls/VRAM) [M]
-- [ ] Verificar naming [S]
+- [x] Verificar naming [S] — FLIP 2026-10-15 (mimo, evidencia WB 43/Log 1864): 45 GLB canonico 50-Vegetacion_{tipo}.glb en assets/3d/media/ existen, variante media 109 GLBs, 0 SCRIPT ERROR
 
 ## O. RF14 — Naming y organización
 
@@ -273,7 +273,7 @@ Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
 - Cualquier reemplazo de GLB: borrar .godot/imported/*nombre*.scn + *.glb.import → godot --headless --import → relanzar.
 - El patrón del autoload temporal de verificación (teleport + viewport PNG) es el mejor método para verificar escala con visión; reutilizarlo para NPCs/props.
 
-**Totales:** 142 ítems · Completados: 127 · Pendientes: 12 · No resueltos: 3.
+**Totales:** 142 ítems · Completados: 129 · Pendientes: 10 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 29 [x] / 110 [ ] /
