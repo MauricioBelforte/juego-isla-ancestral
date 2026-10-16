@@ -171,7 +171,17 @@
 | M167 | drift-0 | 2026-10-16 12:20:00 |
 | M168 | drift-0 | 2026-10-16 12:20:00 |
 
-## Acciones del director sobre los DRIFT
+## Acciones del director sobre los DRIFT (APLICADAS 2026-10-17)
+
+| Modulo | DRIFT | Accion aplicada |
+|---|---|---|
+| M52 | L144 validate_vfx.gd [x] sin archivo | **APLICADA**: degradado a [?] (flip GLM-5.3 Flash-Director, Tarea A del ex-director) + L60 VfxManager tambien [?]. Checklist 145/148. |
+| M93 | L190 balance_report.gd [x] sin archivo | **APLICADA**: degradado a [ ] (flip GLM-5.3 Flash-Director). Checklist 130/134. Fila GLOBAL 93 actualizada. |
+| M137 | L122 playtest_runner.gd [x] sin disco | **APLICADA**: degradado a [ ] (flip GLM-5.3 Flash-Director). Checklist 8 [x]+123 [ ] + fila GLOBAL 137 (pendiente confirmar fila). |
+
+Los 3 DRIFT de la flota resultado: responsables con atencion y correccion aplicada; el barrido de agnescumple su funcion de detector - el corrector es el director (estandar §21.8.2.b con medicion).
+
+## Notas de renumeracion historicas (DKN de algunos mensajes)
 
 ### M93
 
