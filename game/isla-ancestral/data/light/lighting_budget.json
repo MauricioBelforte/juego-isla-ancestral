@@ -1,0 +1,38 @@
+{
+	"schema_version": 1,
+	"descripcion": "Registro de presupuesto y memoria de iluminación M49. Data-driven: los consumidores (M62 MemoryMonitor, CI M118 bake) leen vía este JSON. Creado por agnes-3-flash (Sapiens AI) 2026-10-16 — resuelve el [?] 'lighting_budget.json no existe' (05-Checklist M49 L130/L159, Log 1759).",
+	"presupuesto_luz": {
+		"max_luces_dinamicas_por_escena": 20,
+		"referencia": "MAX_DINAMICAS en 04-Codigo.md M49 §1.3 (pool de luces dinámicas, M62)",
+		"por_perfil": {
+			"interior_casa": 3,
+			"templo": 6,
+			"cueva": 4,
+			"exterior_pueblo": 20
+		}
+	},
+	"shadow": {
+		"directional_shadow_max_distance": 120,
+		"notes": "Valor fijo medido en código (Log 1759, orden del director). Sin presets por calidad (M90 pendiente). El validador validate_lighting_m49.gd L138 aserta <= 200."
+	},
+	"view_distance": {
+		"valor": 1024.0,
+		"lod_split_count": 5,
+		"lod_distance": 160.0,
+		"referencia": "main_island.gd L138/L147/L149 (valores reales del código; el ítem original declaraba 2048/6 — corregido a 1024/5)"
+	},
+	"bake": {
+		"version": "v1",
+		"semilla_fija": true,
+		"referencia": "CI M118 dispara bake con semilla fija; esta versión se rastreaba en este registro. Baked: sí para interior_casa/templo/cueva/ruinas; no para exterior pueblo/campo."
+	},
+	"memoria": {
+		"lightmap_por_perfil_mb": {
+			"interior_casa": 8,
+			"templo": 16,
+			"cueva": 8,
+			"exterior_pueblo": 32
+		},
+		"reporte_a": "M62 MemoryMonitor (recebe reporte de presupuesto de lighting, 03-Diseno.md M49 §3.3)"
+	}
+}
