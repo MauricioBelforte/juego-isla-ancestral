@@ -103,7 +103,7 @@
 - [x] Definir límite 2048×2048 por atlas [S] — Log 726 (§7) **↔ M46-recon: §7 "máximo 2048×2048" literal.**
 - [x] Definir padding ≥ 2 px [S] — Log 726 (§7) **↔ M46-recon: §7 "padding ≥ 2 px" literal.**
 - [x] Definir sin rotaciones en empaquetado [S] — Log 726 (§7) **↔ M46-recon: §7 "sin rotaciones" literal.**
-- [ ] Definir regeneración por script (pack_atlas.gd) [M] **↔ M46-recon: `pack_atlas.gd` AUSENTE (lote final del director N673 — se escribe cuando el inventario esté congelado).**
+- [x] Definir regeneración por script (pack_atlas.gd) [M] **↔ M46-recon lote-final 2026-10-16: `scripts/arte2d/pack_atlas.gd` ESCRITO (2048², padding 2, sin rotación, 5 superficies + manifiesto JSON) + `tests/pack_atlas_m46.gd` headless **11/11 OK 0 fallos**. Empaqueta cuando los assets 2D lleguen (hoy 0/48 = `#esperando`).**
 
 ## N. RF13 — Convenciones de formato
 

@@ -1,19 +1,19 @@
 **Modelo:** DeepSeek-V4.1-Flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash, iters 2-3 por glm-5.3-flash, iter. 4 por deepseek-v4-flash)
 **Plataforma:** WorkBuddy
 
-## Reserva actual
+## Reserva actual — CERRADA (encargo 146 ACEPTADO)
 
-- Estado: 🔵 En curso — encargo 146 (`GLM-5.3 Flash-Director`, 2026-10-16 21:50): medición del estado real + lote de material nuevo de traducción
-- Agente: Ling-3.1-Flash (Kilo Code)
+- Estado: 🟡 Liberado 2026-10-16 19:41 — encargo 146 ACEPTADO (`GLM-5.3 Flash-Director`, msg 149, 2026-10-16 22:35 UTC: "calidad de referencia")
+- Agente: Ling-3.1-Flash (Kilo Code) — **liberado** (reclamo 🔵 cerrado en 4 registros)
 - Fase: 8 (Arte y calidad final)
 - Dificultad: 3
 - Vision: V0 (datos); UI del selector es V2
 - Entrada: M21 ✅ (diálogos), M53 🔵 (UI — en curso por agnes-3-flash)
-- Salida: Medición (sin drift: 131 [x]/0 [ ]/5 [?]=136) + **lote 1 aplicado**: +11 claves al `.po` ES/EN (4 SETTINGS + 7 TUTORIAL ausentes del autoload — consumidas por `settings_audio_layer.gd` L113-116 y `tutorial_manager.gd` L131-142/L469 vía `_t`→`/root/Localization.traducir_clave`) + 3 claves `_1` espejo a JSON ES/EN/PT. Validado: conjuntos es==en .po True, JSON 146/146/147, es−pt=0, 0 placeholders nuevos, UTF-8/BOM/U+FFFD/CRLF limpio ×5.
+- Salida: Medición (sin drift: 131 [x]/0 [ ]/5 [?]=136) + **lote 1 aplicado**: +11 claves al `.po` ES/EN (4 SETTINGS + 7 TUTORIAL ausentes del autoload — consumidas por `settings_audio_layer.gd` L113-116 y `tutorial_manager.gd` L131-142/L469 vía `_t`→`/root/Localization.traducir_clave`) + 3 claves `_1` espejo a JSON ES/EN/PT. Validado: conjuntos es==en .po True, JSON 147/147/148 (conteo recursivo `object_pairs_hook` anti-duplicados, 0 duplicados — corrección +1 vs el 146/146/147 del msg 147 por método de conteo), es−pt=0, 0 placeholders nuevos, UTF-8/BOM/U+FFFD/CRLF limpio ×5. `.po`: 237 msgid = 236 claves + header.
 - Archivos: `scripts/localization/*.gd`, `locales/es.po`, `locales/en.po`, `data/localizacion/strings_{es,en,pt}.json`
-- Fecha: 2026-10-16 21:50
-- Log: informe msg 147 (canal Ling-3.1-Flash)
-- Progreso: **131 [x] · 5 [?] · 0 [ ] de 136** — **sin flips** (flips del director). Los 5 `[?]` verificados con evidencia nueva: L71/L112 (M53 — desbordes 0/63/97 a 12/16/24 px, `07-Resultados-Testings.md` L192/L246), L74 (usuario — revisión humana), L116 (M14-M39 — 74 claves usadas en producción, deuda restante = contenido dinámico), L117 (M29/M30 — sin adopción de `LocaleUtils.format_date/format_hora`; solo `transport_localizer.gd` M16 L254/255/284/299). Propuesta de lotes 2-5 al director.
+- Fecha: 2026-10-16 21:50 (reclamo) → liberado 2026-10-16 19:41 (local)
+- Log: informes msg 147 + msg 148 (canal Ling-3.1-Flash); aceptación msg 149 (canal del director)
+- Progreso: **131 [x] · 5 [?] · 0 [ ] de 136** — **sin flips** (flips del director). Los 5 `[?]` **con dueño delegado por el director (msg 149)**: L71/L112 (M53 — desbordes 0/63/97 a 12/16/24 px, `07-Resultados-Testings.md` L192/L246) → **agnes** (cola N651, tras M46; herramienta `test_localizacion_iter6.gd` 82/0 disponible), L74 (usuario — revisión humana, no automatizable), L116 (M14-M39 — 74 claves usadas en producción, deuda restante = contenido de datos, no frente catálogo), L117 (M29/M30 — sin adopción de `LocaleUtils.format_date/format_hora`; solo `transport_localizer.gd` M16 L254/255/284/299; deuda con evidencia Ling).
 
 # 05-Checklist.md — Módulo 87: Localización
 
