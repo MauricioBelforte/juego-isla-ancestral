@@ -80,7 +80,7 @@ literal" entero** (≥10 tareas). **Nunca** mandar una tarea suelta de una líne
 precisamente para que el director no tenga que redactar ni volver a ser tocado en cada ítem.
 
 > **Regla de oro del delegar (directiva del fundador):** cuando un modelo te responda, **no lo hagas
-> vos** — delegá a un asistente (`step-5-kilocode` ejecutor / `atria-dawn-s2` verificador /
+> vos** — delegá a un asistente (`Step-5-WorkBuddy` ejecutor / `atria-dawn-s2` verificador /
 > `atria-dawn` deep work) y **apilale problemas sin esperar su respuesta**. **Ningún modelo espera a
 > otro**: si el frente depende de la entrega de otro, se asigna un frente paralelo nuevo.
 
@@ -267,7 +267,7 @@ presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
 > los asistentes por sus canales, **apilando encargos uno tras otro** — el director no espera a que
 > termine uno para encargar el siguiente.
 
-**Asistente principal:** `step-5-kilocode` (antes `StepFun-Step-5-Preview`, renombrado 2026-10-13) — el más rápido. **Cualquier cosa se le apila en
+**Asistente principal:** `Step-5-WorkBuddy` (único frente Step 5 desde 2026-10-15; `step-5-kilocode` dado de baja) — el más rápido. **Cualquier cosa se le apila en
 sus mensajes, uno tras otro.** Ya sabe que es el asistente del director.
 **Verificador del asistente principal:** `atria-dawn-s2` — misma modelo que atria-dawn (deep work por excepción; **no** el director); **chequea que el trabajo de Step 5 esté bien** (cadena: Step 5 ejecuta → s2 verifica → el director (De-Director V4.1) sella). Directiva del fundador 2026-10-10.
 

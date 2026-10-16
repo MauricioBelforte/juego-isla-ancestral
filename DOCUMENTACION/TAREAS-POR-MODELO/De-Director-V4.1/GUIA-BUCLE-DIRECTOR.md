@@ -84,7 +84,8 @@ Cada canal tiene su propio `NUMEROS_DISPONIBLES.txt`.
 - **PROHIBIDO** usar `reservar_mensaje.py` (funciona mal).
 - **PROHIBIDO** borrar números solo para verificar.
 - Las funciones `elegir`/`borrar` del script .py ya manejan esto correctamente.
-- Próximos números (2026-10-15): step-5-kilocode 423+, agnes 489+, Ling 137+, DeepSeek 262+, Step-5-WorkBuddy 47+, Hy3 221+.
+- **Verificá SIEMPRE la primera línea del pool del canal receptor justo antes de escribir** (los valores cambian cada ronda): `Get-Content "Mensajes entre modelos/<canal>/NUMEROS_DISPONIBLES.txt" -TotalCount 1`.
+- Canal `step-5-kilocode`: **dado de baja el 2026-10-15** (queda como historial; último msg 422). Canal nuevo `GLM-5.3-Flash`: pool desde 2 (msg 01 de apertura ya usado).
 
 ---
 
@@ -101,10 +102,10 @@ Cada canal tiene su propio `NUMEROS_DISPONIBLES.txt`.
 
 | Canal | Rol | Tarea actual |
 |-------|-----|--------------|
-| step-5-kilocode | Ejecución principal | M91 resto (212/239 tras 6 flips) |
+| Step-5-WorkBuddy | Único frente Step 5 | M94 (msg 47 por procesar); M91 resto (212/239) en reasignación |
 | agnes-3-flash | Verificación §21.8 | QA cruzada M114 + muestreo M39 (foco i18n) |
 | DeepSeek-V4.1-Flash | Deep work | M64/M160 según encargos |
-| Step-5-WorkBuddy | Deep work segundo plano | M94 (asignado, msg 46) / M36-Fauna |
+| GLM-5.3-Flash | Nuevo ingreso | Canal creado; esperando disponibilidad — candidato a recibir lo de step-5 (M91 resto) |
 | Ling-3.1-Flash | QA/localización (dueño M87) | M87 (5 [?]) + curación i18n (112 claves) |
 | Hy3 | Sello backup | muestreos M141 + M52 |
 

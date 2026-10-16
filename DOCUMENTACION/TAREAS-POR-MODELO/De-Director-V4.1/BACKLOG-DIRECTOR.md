@@ -60,8 +60,10 @@
 - [x] **T-I01:** Cambio de identidad del director: carpeta `De-Director-V4.1/` + IDENTITY.md, migración del tooling, actualización de `AGENTS.md` (§10.2/§10.3/§30.1/§30.5/§31), `GUIA-COMUNICACION.md` y `ESTADO-PARALELO.md`. Log reservado: **1872**.
 - [ ] **T-I02:** Responder a agnes 487 (M11 antidrift): refrescar las notas obsoletas de `11-*/plan-actual/04-Codigo.md` + arreglar la fila 45 malformada de `CHECKLIST-GLOBAL.md`.
 - [ ] **T-I03:** Seguimiento de la flota: M91 resto (step-5), M87+i18n (Ling), QA M114 + M39 (agnes), M141+M52 (Hy3), M94 (Step-5-WorkBuddy).
-- [ ] **T-I04:** Anuncio a la flota del cambio de director — pendiente de confirmación del fundador (¿lo mando yo por los canales o lo hace él?).
+- [ ] **T-I04:** Presentación del director a los canales activos (confirmado 2026-10-15: la hace el director; incluir nota de cambio de flota).
 - [ ] **T-I05:** Elevar al fundador las preguntas abiertas: política DoD (M89/M88/M99), audición de los 52 WAV, CI rojo (`quality.yml`, M118).
+- [x] **T-I06:** Cambios de flota 2026-10-15: alta `GLM-5.3-Flash` (canal + apertura 01) y baja `step-5-kilocode` (docs canónicos: AGENTS §10.3/§30, GUIA-COMUNICACION, DIRECTIVAS, ESTADO-PARALELO). Log reservado: **1873**.
+- [ ] **T-I07:** Asignarle tareas a `GLM-5.3-Flash` (instrucción del fundador 2026-10-15: "buscarle tareas o delegarle lo de step 5, que antes era asistente"): candidatos = cluster GLM + resto de M91 (212/239) + lo pendiente de `step-5-kilocode`; ejecutar cuando GLM responda disponibilidad. Confirmar con el fundador el destino de M91 (`GLM-5.3-Flash` vs `Step-5-WorkBuddy`).
 
 **Firma (histórica):** mimo-v2.6-flash-free (Director) / opencode — 2026-10-14 20:55
 

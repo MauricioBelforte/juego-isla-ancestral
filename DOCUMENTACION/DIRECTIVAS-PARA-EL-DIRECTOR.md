@@ -37,9 +37,8 @@ ciego.
 | Canal | Rol | Prioridad |
 |---|---|---|
 | `atria-dawn` | Deep work por excepción | 2 |
-| `Step-5-WorkBuddy` | Segundo frente de Step 5 (WorkBuddy) | 3 |
 | `atria-dawn-s2` | Verificador final | 1 |
-| `step-5-kilocode` | Ejecutor principal | 1 |
+| `Step-5-WorkBuddy` | **Ejecutor principal** (único frente Step 5 desde 2026-10-15; Kilo Code dado de baja) | 1 |
 | `agnes-3-flash` | Producción | 2 |
 | `Ling-3.1-Flash` | Producción | 3 |
 | `DeepSeek-V4.1-Flash` | Producción | 4 |
@@ -49,6 +48,7 @@ ciego.
 | `Claude-Haiku-5.5` | QA cruzada (siempre verificada por Step 5/s2, §30.6) | 5 |
 | `mimo-v2.6-flash-free` | **Ex-director → solo historial** | — |
 | `muse-spark-1.3-contributor` | En evaluación | — |
+| `GLM-5.3-Flash` | Nuevo ingreso (canal creado 2026-10-15; esperando disponibilidad) | 4 |
 
 ### Cómo enviar (procedimiento exacto)
 
@@ -108,7 +108,7 @@ NUNCA actúes solo por el nombre del archivo (un slug con typo ya causó un enca
 
 ```
 fundador → director (vos)
-             ├── step-5-kilocode  → EJECUTOR PRINCIPAL (lo más rápido; apilarle todo)
+             ├── Step-5-WorkBuddy  → EJECUTOR PRINCIPAL (único frente Step 5 desde 2026-10-15; apilarle todo)
              ├── atria-dawn-s2           → VERIFICADOR FINAL (último check antes del sello)
              ├── atria-dawn-s3           → ESTRATEGA (te dice a quién delegar; lee tus mensajes)
              ├── atria-dawn              → DEEP WORK por excepción (tareas que superan a Step 5)
@@ -171,7 +171,7 @@ fundador → director (vos)
 | 3 | `atria-dawn-s2` | trabajo delegado del que se necesita respuesta |
 | 4 | `atria-dawn-s3` | activo para encargos directos del fundador |
 | 5 | `Ling-3.1-Flash` | modelo funcional directo, muchos créditos |
-| 6 | `step-5-kilocode` | modelo funcional directo, muchos créditos |
+| 6 | `Step-5-WorkBuddy` | único frente Step 5 (Kilo Code dado de baja 2026-10-15) |
 | 7 | `Claude-Haiku-5.5` | QA cruzada útil; créditos moderados (verificación obligatoria §30.6) |
 | 8 | `DeepSeek-V4.1-Flash` | créditos limitados diarios |
 | 9 | `Hy3` | créditos limitados diarios |
@@ -329,7 +329,8 @@ Los asistentes **proponen** flips; **vos decidís** y aplicás. Un `[x]` no se d
 
 | Modelo | Rol | Estado |
 |---|---|---|
-| **step-5-kilocode** | Ejecutor principal | Libre. 18 entregas consecutivas sin error, 0 errores de conteo. Apilarle todo |
+| **Step-5-WorkBuddy** | Ejecutor principal (único frente Step 5; Kilo Code dado de baja 2026-10-15) | Libre. Apilarle todo |
+| **GLM-5.3-Flash** | Nuevo ingreso (2026-10-15) | Canal creado; esperando respuesta de disponibilidad |
 | **atria-dawn-s2** | Verificador final | QA M154 (encargo G) |
 | **atria-dawn-s3** | Estratega | SUGERENCIAS-DELEGACION + plan M48 entregado |
 | **atria-dawn** | Deep work por excepción | M118 CI/CD (encargo H) |
