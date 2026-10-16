@@ -278,30 +278,30 @@ jobs:
           # Mínimos en vez de números fijos + ids únicos (fix BUG-033: fijaba
           # 5 elementos / 2 políticas con el catálogo en 7 / 5 -> false-red).
           godot --headless --script scripts/legal/test_copyright_m127.gd 2>&1 || FAIL=1
-# M90 iter. 2: graphics_config + su suite headless (85 checks con guardian
-# anti-falso-verde). Cubre resoluciones, modos de ventana, calidades, AA,
-# upscaling, VSync, FPS, escalas, presets y deteccion automatica.
-# Agregado el 2026-10-12 por stepfun-step-5-preview (orden del director mimo, msg 221):
-# la carpeta scripts/settings/ estaba sin versionar y sin gate.
-godot --headless --script scripts/settings/test_graphics_config.gd 2>&1 || FAIL=1
-# M40 iter. 3: contratos centralizados + control de duplicados + fix L208.
-# Cubre los 47 contratos de Contratos, el rechazo de duplicados con
-# DOM-INF-REGISTRO, el warning DOM-INF-ACCESO-TEMPRANO con anti-flood, y la
-# migracion de resource_counter.gd de nodo directo a contrato.
-# Autorizado por el director mimo (msg 232).
-godot --headless --script scripts/core/test_m40_contratos.gd 2>&1 || FAIL=1
-# M118: cross-module linter (grafo de imports) + su test.
-# FIX 2026-10-12 (stepfun-step-5-preview): detect_broken_refs se desactivo
-# porque usaba la sintaxis de singleton de Godot 3 ($Nombre), que en Godot 4
-# es get_node(Nodo) y daba ~25 falsos positivos. El reemplazo por .new() daba
-# 749. Conserva lo que si sirve: ciclos de dependencias. Referencias rotas se
-# detectan con godot --headless --check-only.
-python tools/ci/cross_module_linter.py || FAIL=1
-python tools/ci/test_cross_module_linter.py || FAIL=1
-# M53 QA: test de regresion de los tipos de modalidad de las capas UI.
-# Detecta que DialogLayer quede en MODAL_SIMPLE e InventoryLayer en MODAL_FULL
-# (estaban invertidos; fix 2026-10-12, orden del director mimo msg 243).
-godot --headless --script scripts/ui/test_layer_type_m53.gd 2>&1 || FAIL=1
+          # M90 iter. 2: graphics_config + su suite headless (85 checks con guardian
+          # anti-falso-verde). Cubre resoluciones, modos de ventana, calidades, AA,
+          # upscaling, VSync, FPS, escalas, presets y deteccion automatica.
+          # Agregado el 2026-10-12 por stepfun-step-5-preview (orden del director mimo, msg 221):
+          # la carpeta scripts/settings/ estaba sin versionar y sin gate.
+          godot --headless --script scripts/settings/test_graphics_config.gd 2>&1 || FAIL=1
+          # M40 iter. 3: contratos centralizados + control de duplicados + fix L208.
+          # Cubre los 47 contratos de Contratos, el rechazo de duplicados con
+          # DOM-INF-REGISTRO, el warning DOM-INF-ACCESO-TEMPRANO con anti-flood, y la
+          # migracion de resource_counter.gd de nodo directo a contrato.
+          # Autorizado por el director mimo (msg 232).
+          godot --headless --script scripts/core/test_m40_contratos.gd 2>&1 || FAIL=1
+          # M118: cross-module linter (grafo de imports) + su test.
+          # FIX 2026-10-12 (stepfun-step-5-preview): detect_broken_refs se desactivo
+          # porque usaba la sintaxis de singleton de Godot 3 ($Nombre), que en Godot 4
+          # es get_node(Nodo) y daba ~25 falsos positivos. El reemplazo por .new() daba
+          # 749. Conserva lo que si sirve: ciclos de dependencias. Referencias rotas se
+          # detectan con godot --headless --check-only.
+          python tools/ci/cross_module_linter.py || FAIL=1
+          python tools/ci/test_cross_module_linter.py || FAIL=1
+          # M53 QA: test de regresion de los tipos de modalidad de las capas UI.
+          # Detecta que DialogLayer quede en MODAL_SIMPLE e InventoryLayer en MODAL_FULL
+          # (estaban invertidos; fix 2026-10-12, orden del director mimo msg 243).
+          godot --headless --script scripts/ui/test_layer_type_m53.gd 2>&1 || FAIL=1
           # Run M111 quality-utils test: Math/Validation/Format utils, constants,
           # enums, structs, patterns y components (SceneTree, sin GdUnit4).
           godot --headless -s res://tests/test_m111_utils_headless.gd 2>&1 || FAIL=1
