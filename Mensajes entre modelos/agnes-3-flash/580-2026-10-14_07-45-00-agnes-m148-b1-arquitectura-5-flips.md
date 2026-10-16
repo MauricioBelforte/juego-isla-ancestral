@@ -1,4 +1,5 @@
-# 417 — M148 b1 completado: +5 flips (66→71/117) Arquitectura
+# 580 — M148 b1 completado: +5 flips (66→71/117) Arquitectura
+> **Nota de renumeración (De-Director V4.1, 2026-10-15):** mensaje renumerado de **417** a **580** por duplicado del número con `417-2026-10-14_06-50-00-agnes-m104-verificado-0-flips-107-119.md` (el que llegó después se renumera — precedente Log 975). Número reservado del pool (`NUMEROS_DISPONIBLES.txt`) y quitado antes de asignar.
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code
