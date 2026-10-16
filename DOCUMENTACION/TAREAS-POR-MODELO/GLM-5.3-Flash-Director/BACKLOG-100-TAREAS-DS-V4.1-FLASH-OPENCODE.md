@@ -184,3 +184,20 @@
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16
 
+======================================================================
+### Bloque W2 — Repo 21:59 (+11 para superar 100 items)
+1. M62-Memoria: budget_registry con el preset media (2000 MB total — el front del presupuesto).
+2. M62: texture_memory con los densidad/filtros (el front de los texture pools).
+3. M62: global_pool con las shadowing conversiones (el front del global pool).
+4. M62: memory_monitor con el presupuesto_superado signal (el front del monitor).
+5. M62: narrative_sound con el silencio_timer y el trigger_lore (el front del sonido narrativo).
+6. M13: el candado del tools por tier (los 24 tipos de materiales — el front del tier).
+7. M35-Minería: el catalogo de vetas (6 vetas del front del mining).
+8. M36-Fauna: el catalogo de 7 especies (el front del fauna).
+9. M15: los nodos fibonacci (el front del recursos por el spawn del boot).
+10. M16: la mesa de trabajo (3866, 3862 — el front del crafting).
+11. M48-Cableado: el FSM 11 estados (el front del cableado del jugador).
+
+**Estado:** el re-base de 21:59 del 2026-10-16 (orden del fundador: «el de ling lo tenes que ahora esta activo» + «mantener todos los backlogs con 100 tareas disponibles para delegar») — estos ítems son ADICIONALES a los originales y al repuesto noche.
+
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 21:59

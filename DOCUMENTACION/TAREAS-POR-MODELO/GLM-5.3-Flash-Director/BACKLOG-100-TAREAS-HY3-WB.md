@@ -143,3 +143,12 @@
 **Estado:** repo de la jornada 2026-10-16 noche (la rama 3b del cron: «agregar nuevas, 100+ siempre»).
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 noche
+
+======================================================================
+### Bloque W2 — Repo 21:59 (+2 para superar 100 items)
+1. QA §21.8 del pack_atlas.gd de agnes (scripts/arte2d — el front del M46 lote final).
+2. QA §21.8 del strings_pt.json de Ling (144 cadenas — el estándar de integridad del 142/147).
+
+**Estado:** el re-base de 21:59 del 2026-10-16 (orden del fundador: «el de ling lo tenes que ahora esta activo» + «mantener todos los backlogs con 100 tareas disponibles para delegar») — estos ítems son ADICIONALES a los originales y al repuesto noche.
+
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 21:59

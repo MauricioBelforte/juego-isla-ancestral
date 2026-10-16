@@ -143,3 +143,21 @@
 **Estado:** repo de la jornada 2026-10-16 noche (la rama 3b del cron: «agregar nuevas, 100+ siempre»).
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 noche
+
+======================================================================
+### Bloque W2 — Repo 21:59 (+11 para superar 100 items - disponibles para delegar)
+1. QA visual M39-Bosque: los árboles low-poly y el chancho (la paleta del bioma).
+2. QA visual M60-DataStore: los provider buildings activos (el front de guardado).
+3. QA visual M116: los 3 plataformas del instalador (el front del instalador).
+4. QA visual M119: el canal estable 1.0.0 (el estado del update).
+5. QA visual M100: los 5 canales comunitarios (el front del community).
+6. QA visual M121: las 15 FAQ del support (el front del support).
+7. QA visual M123: los 2 mods (el front del modding).
+8. QA visual M124: las 3 piezas UGC (el front del UGC).
+9. QA visual M95: los 3 ediciones + 2 DLC (el front del monetización).
+10. QA visual M147: el canon 1.0.0 (6 personajes, 8 lugares — el front del lore).
+11. QA visual M160: los 39 catálogos + 48 ubicaciones y 13 islas.
+
+**Estado:** el re-base de 21:59 del 2026-10-16 (orden del fundador: «el de ling lo tenes que ahora esta activo» + «mantener todos los backlogs con 100 tareas disponibles para delegar») — estos ítems son ADICIONALES a los originales y al repuesto noche.
+
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 21:59
