@@ -70,7 +70,7 @@
 - [x] Validar referencias a variables inexistentes del WorldStateService (allowlist en validar(grafo, claves_mundo)) [S] — barrido M21 (encargo msg 94): dialog_graph_validator.gd CLAVES_MUNDO_BASE L34-40 + _clave_conocida() L45-54 (prefijos amistad_/flag_ + sufijo _amistad); test_clima_dialogo_m21.gd 7 checks 0 fallos (rechaza "climaX")
 - [x] DialogGraphValidator (validacion estatica complementaria a DialogueGraph.validate): nodos huerfanos + operadores invalidos + claves de mundo desconocidas; validar_texto/archivo; test_validacion_grafo_m21.gd 0 fallos (Log 300) [S]
 - [x] Gate CI/editor de validacion: validate_all_dialogues.gd (extends SceneTree) valida res://data/dialogues/*.json con DialogGraphValidator y sale !=0 en problemas; start_dialogue tambien corre el validador (nodos huerfanos + operadores) como gate en runtime ([VAL-DGV]); test_validacion_ci_m21.gd 0 fallos (Log 309) [S]
-- [ ] Emitir log [VAL-DGT] con conteo de errores y advertencias [S]
+- [x] Emitir log [VAL-DGT] con conteo de errores y advertencias [S] **flip 2026-10-16 (Hy3 lote 1 msg 244, sello director): _resumen_validacion con conteo N errores/M advertencias + resumen persistido en _ultimo_resumen_validacion**
 - [x] Fallback amigable al usar un grafo invalido (mensaje por defecto) [S] — barrido M21 (encargo msg 94): dialogue_manager.gd start_dialogue() L97-101 (validate() con problemas → logs [VAL-DGT] + return false, sin crashear; ídem H.149)
 - [ ] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M]
 
@@ -90,17 +90,17 @@
 - [ ] Implementar avance automatico opcional con temporizador y pausa en opciones [S]
 - [ ] Implementar salto de pagina automatico para lineas largas [M]
 - [ ] Mostrar contador de paginas cuando hay multiples saltos [M]
-- [ ] Aplicar color de texto por tipo de hablante (NPC, deidad, narrador) [S]
+- [x] Aplicar color de texto por tipo de hablante (NPC, deidad, narrador) [S] **flip 2026-10-16 (Hy3 lote 1 msg 244, sello director): _color_por_hablante + COLOR_SPEAKER_* en theme_ux (dorado NPC/deidad/cream)**
 - [ ] Usar las fuentes del modulo M87 en textos y retratos [S]
 - [x] Ocultar y resetear la UI al terminar la conversacion [S] — barrido M21 (Ling-3.1-Flash/Kilo, 2026-10-12, encargo msg 102): ui/dialogue_ui.gd _on_dialogue_ended() L114-118 (hide + limpiar _ultima_reaccion/_expresion)
 
 ## E. Opciones y ramificación (10)
 
 - [x] Implementar DialogueOption con text_key, next_id, conditions y effects [S] — barrido M21 (Ling-3.1-Flash/Kilo, 2026-10-12, encargo msg 94): dialogue_option.gd L11-15 (text_key/next_id/conditions/blocked_text_key/effect)
-- [?] Mostrar la lista de opciones filtrada por condiciones del mundo [S] — barrido M21 (encargo msg 94): NO implementado — node_entered emite nodo.options sin filtrar (dialogue_manager.gd L229) y la UI las muestra todas (ui/dialogue_ui.gd L102-110); el filtrado por condiciones de mundo para DISPLAY no existe (evaluate_conditions solo salta nodos, no filtra opciones)
+- [x] Mostrar la lista de opciones filtrada por condiciones del mundo [S] — barrido M21 (encargo msg 94): NO implementado — node_entered emite nodo.options sin filtrar (dialogue_manager.gd L229) y la UI las muestra todas (ui/dialogue_ui.gd L102-110); el filtrado por condiciones de mundo para DISPLAY no existe (evaluate_conditions solo salta nodos, no filtra opciones) **flip 2026-10-16 (Hy3 lote 1 msg 244, sello director): _filtrar_opciones_visibles con evaluate_conditions + _opciones_visibles para indices alineados (L267/324 dialogue_manager.gd)**
 - [ ] Ocultar opciones bloqueadas cuando hide_blocked es true [S]
 - [ ] Mostrar opciones bloqueadas con texto alternativo y visual gris [S]
-- [?] Navegar opciones con teclado (arriba/abajo + confirmar) [S] — barrido M21 (encargo msg 94): PARCIAL — selección por teclas 1-4 (ui/dialogue_ui.gd _input L156-165); flechas arriba/abajo no implementadas
+- [x] Navegar opciones con teclado (arriba/abajo + confirmar) [S] — barrido M21 (encargo msg 94): PARCIAL — selección por teclas 1-4 (ui/dialogue_ui.gd _input L156-165); flechas arriba/abajo no implementadas **flip 2026-10-16 (Hy3 lote 1 msg 244, sello director): KEY_UP/DOWN con wrap + ENTER elige resaltada; test lote1 navega 0->2**
 - [ ] Navegar opciones con gamepad (dpad + boton A) [S]
 - [x] Seleccionar opciones con mouse (hover y click) [S] — barrido M21 (encargo msg 94): ui/dialogue_ui.gd L107-109 (Button.new() + btn.pressed.connect(_on_opt_pressed.bind(i)) → clickable con mouse)
 - [x] Aplicar los effects de la opcion elegida una sola vez [S] — barrido M21 (encargo msg 94): dialogue_manager.gd choose_option() L149-163 (apply_effects del nodo + de la opción al elegir; no se re-aplican)

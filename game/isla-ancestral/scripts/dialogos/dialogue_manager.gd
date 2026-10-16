@@ -261,7 +261,13 @@ func _entrar_nodo(nodo: DialogueNode) -> void:
 	_nodo_actual = nodo
 	nodo.apply_effects(_session_vars, estado_combinado)
 	var texto_resuelto := resolve_text(nodo.text_key, nodo.placeholders)
-	node_entered.emit(nodo.id, nodo.speaker_key, texto_resuelto, nodo.tipo, nodo.options)
+	# M21 E L100 (Hy3 / WorkBuddy): filtrar opciones por condicion de mundo para DISPLAY.
+	# Se emite la lista ya filtrada (no se muta nodo.options del grafo cacheado).
+	if nodo.tipo == DialogueNode.TIPO_OPCIONES:
+		_opciones_visibles = _filtrar_opciones_visibles(nodo, estado_combinado)
+	else:
+		_opciones_visibles = []
+	node_entered.emit(nodo.id, nodo.speaker_key, texto_resuelto, nodo.tipo, _opciones_visibles)
 	if nodo.tipo == DialogueNode.TIPO_EVENTO:
 		avance_evento()
 	elif nodo.tipo == DialogueNode.TIPO_FIN:
@@ -311,6 +317,17 @@ func _combinar_estado(nodo: DialogueNode = null) -> Dictionary:
 
 func avance_evento() -> void:
 	advance()
+
+## M21 E L100 (Hy3 / WorkBuddy): devuelve solo las opciones cuya condicion de mundo
+## se cumple, para mostrarlas al jugador. Usa DialogueOption.evaluate_conditions con el
+## estado ya combinado (sesion + mundo) que _entrar_nodo calculo. El orden se preserva.
+func _filtrar_opciones_visibles(nodo: DialogueNode, estado_combinado: Dictionary) -> Array:
+	var visibles: Array = []
+	for op in nodo.options:
+		if op is DialogueOption and not op.evaluate_conditions(estado_combinado):
+			continue
+		visibles.append(op)
+	return visibles
 
 ## M21 (iter 7): cachea y devuelve el script DialogGraphValidator (load en runtime,
 ## evita dependencia de parse-time / §9.50).
