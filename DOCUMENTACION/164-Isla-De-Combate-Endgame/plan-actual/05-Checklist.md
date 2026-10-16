@@ -29,7 +29,7 @@
 - [x] GemCurrency tiene spend_gems(amount: int) -> bool [S] — *iter 1 (atria-dawn, Log 1016): gem_currency.gd*
 - [x] GemCurrency tiene has_gems(amount: int) -> bool [S] — *iter 1 (atria-dawn, Log 1016): gem_currency.gd*
 - [?] GemCurrency se guarda en GameState [M] — *iter 1 (atria-dawn, Log 1016): provider gemas_m164 en SaveManager* — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es codigo muerto (0 call sites). Deuda M164/M59.
-- [x] GemCurrency se persiste al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): get_save_data/restore_save_data versionado*
+- [?] GemCurrency se persiste al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): get_save_data/restore_save_data versionado* — provider gemas_m164 muerto (gem_save_provider.gd sin instanciar); reconectar al implementar (Hy3 219)
 - [x] Intercambio de herramienta T1 encantada = 1 gema [S] — *iter 1 (atria-dawn, Log 1016): valor_cambio_por_tier(1)*
 - [x] Intercambio de herramienta T2 encantada = 2 gemas [S] — *iter 1 (atria-dawn, Log 1016): valor_cambio_por_tier(2)*
 - [x] Intercambio de herramienta T3 encantada = 3 gemas [S] — *iter 1 (atria-dawn, Log 1016): valor_cambio_por_tier(3)*
@@ -145,7 +145,7 @@
 
 ## H. Persistencia (10)
 
-- [x] Gemas guardadas en GameState.M164 [M] — *iter 1 (atria-dawn, Log 1016): seccion gemas_m164*
+- [?] Gemas guardadas en GameState.M164 [M] — *iter 1 (atria-dawn, Log 1016): seccion gemas_m164* — provider gemas_m164 muerto (gem_save_provider.gd sin instanciar); reconectar al implementar (Hy3 219)
 - [x] Zonas desbloqueadas guardadas en GameState [M] — *iter 1 (atria-dawn, Log 1016): seccion isla_combate_m164*
 - [x] Enemigos derrotados contados en GameState [M] — *iter 1 (atria-dawn, Log 1016): _derrotas persistido*
 - [x] Jefes derrotados guardados en GameState [M] — *iter 1 (atria-dawn, Log 1016): _derrotas persistido*
@@ -157,7 +157,7 @@
 - [x] Los enemigos respawnean al cargar [S] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — spawner reaparece enemigos no derrotados al cargar.**
 
 
-**Totales:** 129 ítems · Completados: 125 · Pendientes: 0 · No resueltos: 4 — drift corregido (sección G = 9 items) + degradación L31/L154 (QA s2 Log 1776).
+**Totales:** 129 ítems · Completados: 123 · Pendientes: 0 · No resueltos: 6 — drift corregido (sección G = 9 items) + degradación L31/L154 (QA s2 Log 1776) + degradación B.32/H.148 (muestreo Hy3 219, 2026-10-15).
 
 > **Iter 1 — atria-dawn (Atria-Dawn-Preview) / Kilo Code, 2026-09-18, Log 1016.**
 > Alcance: **parte data-driven unicamente** (encaje A/B del agente). Lo visual/VFX/IA queda

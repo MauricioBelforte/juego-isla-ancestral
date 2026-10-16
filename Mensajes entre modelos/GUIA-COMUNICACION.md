@@ -362,8 +362,9 @@ y el hilo **sigue siendo consecutivo y legible** (01, 02, 03…).
 sigue por el número y, ante cualquier duda, por la **fecha/hora** del nombre y el campo
 `**Responde a:**`.
 
-> ⚠️ **REGLA DEL NÚMERO MÁS ALTO (directiva del fundador 2026-10-11):** la respuesta **siempre**
-> sale con el número **más alto** disponible del pool del canal — nunca con un hueco del medio.
+> ⚠️ **REGLA DE NUMERACIÓN — MANDA LA SECUENCIA DEL HILO (aclaración del fundador 2026-10-15,
+> tras confusión real de GLM-5.3-Flash):** el número de un mensaje SIEMPRE es el siguiente
+> consecutivo del canal: **`NN = (último NNN- de mensaje en la carpeta) + 1`**.
 >
 > **Por qué:** el director lee los **números altos** de cada carpeta para encontrar lo nuevo. Si tu
 > respuesta aterriza en un número por debajo del último mensaje existente, queda **sepultada** y el
@@ -373,11 +374,25 @@ sigue por el número y, ante cualquier duda, por la **fecha/hora** del nombre y 
 > canal ya iba por el **148** — el pool le ofreció un hueco del medio y el helper lo tomó. El
 > mensaje quedó perdido; hubo que renumerarlo a mano al 148.
 >
-> **Regla:** si encuentran un hueco en el medio (un número que falta en la secuencia),
-> **lo ignoran**. Se perdió por una mala comunicación; **no lo reutilizan**. El helper
-> `scripts/reservar_mensaje.py` ya está fijado para tomar siempre el número más alto disponible
-> (fix verificado con `scripts/test_reservar_mensaje_colision.py`, 18/18 PASS). Si reservan a mano,
-> apliquen la misma regla.
+> **Síntoma real inverso (2026-10-15):** el canal **GLM-5.3-Flash** estaba recién abierto (solo el
+> mensaje **01** del director) y su pool pre-cargado ofrecía **2..150**. El agente aplicó literal
+> "tomar el número más alto del pool" y respondió con el **150** — rompió la consecutividad del
+> hilo (tenía que ser **02**) y dejó un número sepultado en el medio. El fundador lo corrigió a
+> mano. **Moraleja: el "más alto del pool" es un atajo válido SOLO cuando el pool refleja la
+> secuencia del hilo; en un canal nuevo con pool sobredimensionado, numerar con `último + 1`.
+> Nunca elijas un número por encima de `último + 1`.**
+>
+> **Regla práctica (orden de decisión):**
+> 1. Listar la carpeta del canal y encontrar el número del **último mensaje existente**.
+> 2. Tu número = **ese número + 1** (si tu mensaje es una respuesta dentro del mismo canal).
+> 3. Borrar **SOLO ese número** del `NUMEROS_DISPONIBLES.txt` del canal.
+> 4. Los números del pool **por encima** de `último + 1` se IGNORAN para el hilo (son reserva del
+>    pool, no candidatos).
+> 5. Los **huecos del medio** (un número que falta en la secuencia) **jamás se reutilizan** — se
+>    perdieron por una mala comunicación (ayuda del helper intacta: fix 2026-10-11, tests 18/18
+>    PASS).
+> 6. Ante cualquier discrepancia pool ↔ hilo (pool vacío, huecos, sobrantes), **avisar al
+>    director** para que sanee el pool; mientras tanto, numerar SIEMPRE con `último + 1`.
 
 ### Nombre de archivo: emisor → receptor (directiva del fundador)
 
@@ -1101,3 +1116,8 @@ escrituras parciales). Todas son variantes de "lo que lees no es lo que el emiso
 (`NN-...-<emisor>-a-<receptor>-tema.md`) para ver de un vistazo quién le escribe a quién
 (directiva del fundador); (3) **`Responde a` nombra al MODELO además del archivo** (directiva del fundador 2026-10-06: `**Responde a:** <MODELO> — <archivo>`, helper incluido — T-17); (4) T-11 (byte NUL) y T-12 (numeración por carpeta) agregadas. Historial: sección "Trampas operacionales de la jornada
 2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales. T-16 anadido 2026-10-06 01:40 (cabeza del pool de logs por debajo del ultimo log: el pool global arranca en max(logs)+1, huecos no se reutilizan). T-17 anadido 2026-10-06 05:20 ("Responde a" debe nombrar al MODELO, no solo el archivo). T-18 anadido 2026-10-06 07:20 (hueco 1351-1500 por doble asignador del experimento del pool global: logs 1501-1513 renumerados a 1351-1363 por fecha real; el numero de un log no es su fecha). **T-19 anadido 2026-10-09 19:40** (directiva del fundador: plantilla reservada se lee "vacia" mientras el emisor escribe — **esperar 5 minutos, nunca responder a un mensaje vacio, nunca actuar solo por el nombre del archivo**; banner autoexplicativo en `reservar_mensaje.py`, seccion "En escritura" en el detector, regla en `AGENTS.md` §10.2 y aviso en `ESTADO-PARALELO.md`).
+
+---
+
+**Firma de actualización:** **Modelo:** GLM-5.3-Flash · **Plataforma:** Kilo Code ·
+**Fecha:** 2026-10-15 22:30 · **Actualización:** Reformulación de la regla de numeración de mensajes por directiva del fundador 2026-10-15 — **manda la SECUENCIA DEL HILO, no el "número más alto del pool"**: `NN = (último NNN- de mensaje en la carpeta) + 1`. El "más alto del pool" queda como **atajo válido solo cuando el pool refleja la secuencia del hilo**; en un canal recién abierto con pool sobredimensionado (caso real: canal GLM-5.3-Flash iba por el 01 con pool 2..150 → el agente respondió 150 y el fundador lo corrigió a 02), los sobrantes se ignoran, se numera con `último + 1` y se borra **solo ese número** del pool. Prohibido numerar por encima de `último + 1`. Huecos del medio siguen sin reutilizarse; cualquier discrepancia pool ↔ hilo se reporta al director para saneo. Regla espejo actualizada en `AGENTS.md` §10.2 (punto 4).

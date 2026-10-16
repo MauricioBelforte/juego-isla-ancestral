@@ -96,7 +96,7 @@
 ## 9. Eventos repetibles (P8)
 
 - [x] Definir motor de variantes sobre M74 (MotorEventosVariantes) [C]
-- [x] Definir 3+ variantes por festividad (4 y 3 variantes en 2 festividades) [C]
+- [?] Definir 3+ variantes por festividad (4 y 3 variantes en 2 festividades) [C] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b)
 - [x] Definir ciclo de variantes (rotación cíclica 3+) [M]
 - [x] Definir recompensa por participación acumulada (participaciones acumuladas) [M]
 - [?] Definir que la festividad siga el día de juego (M29) [M] -- agnes-2.5-flash 2026-09-12: integración con M29 documentada en 03-Diseno.md §8.3; fiestas usan calendario interno. M29 ✅. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 35.** Se mantiene la primera ocurrencia como [x].
@@ -162,14 +162,14 @@
 - [x] Definir sección Objetivos en el diario [M]
 - [?] Definir sección Sobremesa en el diario (cobrables) [M] -- agnes-2.5-flash 2026-09-12: feature diseñada en 03-Diseno.md §16.5 (Sobremesa section in M55 diary); cobrables = claimable rewards. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 69.** Se mantiene la primera ocurrencia como [x].
 - [?] Definir contador de pendientes visible [S] -- agnes-2.5-flash 2026-09-12: feature diseñada en 03-Diseno.md §16.6 (pending counter in UI); helper without pressure. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 70.** Se mantiene la primera ocurrencia como [x].
-- [x] Definir notificación suave de objetivo cumplido [S]
+- [?] Definir notificación suave de objetivo cumplido [S] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b)
 - [x] Definir navegacion gamepad del tablero (M57) [M] -- agnes-2.5-flash 2026-09-12: politica documentada en 03-Diseno.md §16.7 (gamepad navigation); implementacion requiere M57 autoload presente. Deferred a M57.
 
 ## 18. Persistencia (M59)
 
 - [x] Definir save con campo motivación (snapshot/restaurar: objetivos, recompensas, variantes) [M]
 - [?] Definir migración v3.1 → v3.2 [M] -- agnes-2.5-flash 2026-09-12: migration path documentado en 03-Diseno.md §18.1 (version migration); M59 SaveManager handles. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 75.** Se mantiene la primera ocurrencia como [x].
-- [x] Definir 30 ciclos de carga/guardado sin pérdida de objetivos [M]
+- [?] Definir 30 ciclos de carga/guardado sin pérdida de objetivos [M] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b)
 - [x] Definir sin dependencia de reloj real en persistencia [S]
 
 ## 19. Telemetría (M104)
@@ -188,7 +188,7 @@
 - [x] Definir suite EventosVariantes (3+ variantes, ciclo, round-trip) — test_motivacion_m94.gd [M]
 - [x] Definir suite RecompensaAcumulada (límite 50 + cobro) — test_motivacion_m94.gd [M]
 - [?] Definir suite Postgame (desbloqueo + 3 bloques) [M] -- agnes-2.5-flash 2026-09-12: test suite diseñada en 03-Diseno.md §20.2 (postgame suite: unlock + 3 blocks); M112 testing framework. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 84.** Se mantiene la primera ocurrencia como [x].
-- [x] Definir suite MigraciónMotivacion (v3.1→3.2) [M]
+- [?] Definir suite MigraciónMotivacion (v3.1→3.2) [M] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b)
 - [?] Definir playtest de 5 usuarios: ¿sienten presión de volver? (M114) [M] -- agnes-2.5-flash 2026-09-12: protocolo disenado en 03-Diseno.md §20.3 (playtest guide); ejecucion requiere jugadores reales. KnownIssue no bloqueante DoD. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): M114 deferral disfrazado — el contenido/artefacto afirmado no existe hoy (deferred a M22/M27/M114).**
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [x] Definir log del módulo en Logs/ [S]
@@ -222,7 +222,7 @@
 - [x] Re-corrido con binario real: **EXIT 0 — 38 checks, 0 fallos** (antes 38/5). Ver
   `11-BUGS.md` §7 BUG-061.
 
-**Totales:** 138 ítems · Completados: 87 · Pendientes: 0 · No resueltos: 51.
+**Totales:** 138 ítems · Completados: 83 · Pendientes: 0 · No resueltos: 55. — (+4 degradados por auditoría §21.8.2.b, Step-5 47, 2026-10-15)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:

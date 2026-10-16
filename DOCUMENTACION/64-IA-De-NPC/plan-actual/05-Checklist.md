@@ -53,13 +53,13 @@ M21/M20.
 - [x] Crear clase base State.gd con enter/update/exit/check_transitions
 - [x] Implementar StateMachine.gd con update y transition_to
 - [x] Implementar IdleState con sub-estados (Wait, Look, Fidget)
-- [x] Implementar MovementState con sub-estados (WalkTo, RunTo, Avoid, Wander)
-- [x] Implementar WorkState con sub-estados (WorkAnimate, WorkPause, WorkComplete)
-- [x] Implementar SocialState con sub-estados (Greet, Chat, GroupChat)
-- [x] Implementar EatState con sub-estados (GoToEat, Eating, LeaveEat)
-- [x] Implementar SleepState con sub-estados (GoToSleep, Sleeping, WakeUp)
-- [x] Implementar ReactState con sub-estados (ReactRain, ReactEvent, ReactPlayer, ReactDanger)
-- [x] Implementar InteractState con sub-estados (TalkToPlayer, GiveGift, Trade)
+- [?] Implementar MovementState con sub-estados (WalkTo, RunTo, Avoid, Wander) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [?] Implementar WorkState con sub-estados (WorkAnimate, WorkPause, WorkComplete) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [?] Implementar SocialState con sub-estados (Greet, Chat, GroupChat) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [?] Implementar EatState con sub-estados (GoToEat, Eating, LeaveEat) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [?] Implementar SleepState con sub-estados (GoToSleep, Sleeping, WakeUp) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [?] Implementar ReactState con sub-estados (ReactRain, ReactEvent, ReactPlayer, ReactDanger) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [?] Implementar InteractState con sub-estados (TalkToPlayer, GiveGift, Trade) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
 - [x] Definir reglas de transición para cada par de estados
 - [x] Implementar prioridad de transiciones (urgente > alta > media > baja)
 - [x] Implementar historial de estados (para debugging)
@@ -107,14 +107,14 @@ M21/M20.
 - [x] Configurar path_desired_distance y target_desired_distance
 - [x] Configurar radius del NPC
 - [x] Implementar anti-atasco (stuck detection > 2 s)
-- [x] Implementar desvío de obstáculos
-- [x] Implementar separación entre NPCs (fuerza de separación)
+- [?] Implementar desvío de obstáculos — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [?] Implementar separación entre NPCs (fuerza de separación) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
 - [x] Implementar respawn de emergencia (> 10 s atascado)
-- [x] Limitar paths simultáneos a 60
+- [?] Limitar paths simultáneos a 60 — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
 - [?] Implementar navmesh del mundo (M08) — [?] dueño: M08 (navmesh voxel)
 - [?] Verificar pathfinding en terreno irregular — requiere M08 navmesh
 - [?] Verificar pathfinding con obstáculos dinámicos (otros NPCs)
-- [x] Medir rendimiento de pathfinding con 60 NPCs — test_rendimiento_m64.gd (8/0)
+- [?] Medir rendimiento de pathfinding con 60 NPCs — test_rendimiento_m64.gd (8/0) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
 - [x] Documentar configuración de navegación en 03-Diseno.md
 
 ### Social (10 items)
@@ -147,7 +147,7 @@ M21/M20.
 - [x] Implementar niveles de simulación (full/medium/light/sleep)
 - [x] Implementar actualización por distancia al jugador
 - [x] Verificar que NPCs lejanos no consumen pathfinding (simulación level)
-- [x] Implementar métricas de rendimiento (tiempo de tick)
+- [?] Implementar métricas de rendimiento (tiempo de tick) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
 - [x] Implementar logging de estado (DOM-IA)
 - [x] Verificar presupuesto de agentes (M61: BudgetRegistry 32MB)
 - [x] Implementar watchdog anti-atascos (NPCWatchdog con timeouts y recovery)
@@ -190,18 +190,18 @@ M21/M20.
 
 | Sección | Completados | Total | % |
 |---------|-------------|-------|---|
-| FSM | 19 | 20 | 95% |
+| FSM | 12 | 20 | 60% |
 | Rutinas | 14 | 15 | 93% |
 | Necesidades | 9 | 10 | 90% |
-| Navegación | 12 | 15 | 80% |
+| Navegación | 8 | 15 | 53% |
 | Social | 7 | 10 | 70% |
 | Reacciones | 7 | 10 | 70% |
-| NPCManager | 11 | 11 | 100% |
+| NPCManager | 10 | 11 | 91% |
 | Integración | 5 | 10 | 50% |
 | Testing | 16 | 16 | 100% |
 | BUG-129 (causa raíz) | 2 | 2 | 100% |
-| **TOTAL** | **102** | **119** | **86%** |
-**Totales:** 119 items - Completados: 102 - Pendientes: 0 - No resueltos: 17.
+| **TOTAL** | **90** | **119** | **76%** |
+**Totales:** 119 items - Completados: 90 - Pendientes: 0 - No resueltos: 29. — (+12 degradados por muestreo §21.8.2.b, DeepSeek 262, 2026-10-15)
 
 
 ## Notas del Agente

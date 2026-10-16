@@ -524,16 +524,29 @@ Mensajes entre modelos/
    python scripts/reservar_mensaje.py <carpeta-receptor> <tema> [--emisor <carpeta-emisor>]
    ```
     El helper lista los últimos mensajes de la carpeta destino (para el `**Responde a:**`), toma
-    el número **más alto** disponible del pool **de esa carpeta**, lo borra del pool y crea el
-    archivo con la plantilla. **No numerar a mano.** Si faltan números, se amplía el
-    `NUMEROS_DISPONIBLES.txt` del canal.
-    > ⚠️ **Regla del número más alto (directiva del fundador 2026-10-11):** la respuesta **siempre**
-    > sale con el número **más alto** del pool, **nunca** con un hueco del medio. El director lee
-    > los números altos de cada carpeta; un mensaje en un número bajo queda **sepultado** y no lo
-    > ve. Si encuentran un hueco en el medio (número que falta en la secuencia), **lo ignoran** —
-    > se perdió por una mala comunicación, no lo reutilizan. El helper ya aplica esto
-    > automáticamente (fix 2026-10-11, tests 18/18 PASS). Síntoma real: DeepSeek respondió en el
-    > 113 cuando su canal iba por el 148 → mensaje perdido, renumerado a mano.
+    del pool **de esa carpeta** el número que corresponde a la secuencia del hilo, lo borra del
+    pool y crea el archivo con la plantilla. **No numerar a mano.** Si faltan números, se amplía
+    el `NUMEROS_DISPONIBLES.txt` del canal.
+    > ⚠️ **Regla de numeración: manda la SECUENCIA DEL HILO (directiva del fundador 2026-10-15,
+    > tras confusión real de GLM-5.3-Flash):** el número de un mensaje SIEMPRE es el siguiente
+    > consecutivo del canal: `NN = (último NNN- de mensaje en la carpeta) + 1`.
+    >
+    > - **Por qué:** el director lee los números altos de cada carpeta para encontrar lo nuevo; un
+    >   mensaje numerado **por debajo del último mensaje existente** queda **sepultado** y no se
+    >   ve (síntoma real 2026-10-11: DeepSeek respondió en el 113 cuando su canal iba por el 148 →
+    >   renumerado a mano).
+    > - **El "número más alto del pool" es un ATAJO, no la regla:** solo coincide con el siguiente
+    >   del hilo cuando el pool refleja la secuencia del canal. **Nunca elijas un número por
+    >   encima de `último + 1`.**
+    > - **CANAL NUEVO o pool sobredimensionado:** si el pool trae números muy por encima de
+    >   `último + 1` (ej. canal recién abierto con pool pre-cargado 2..150), esos sobrantes se
+    >   IGNORAN para numerar el hilo: se usa `último + 1` y se borra SOLO ese número del pool.
+    >   Caso real (2026-10-15): el canal GLM-5.3-Flash iba por el 01 y su pool ofrecía hasta 150 →
+    >   el agente tomó 150 y el fundador lo corrigió al 02.
+    > - **Huecos del medio (número que falta en la secuencia):** jamás se reutilizan (se perdieron
+    >   por una mala comunicación; el helper ya lo aplica, fix 2026-10-11, tests 18/18 PASS).
+    > - Ante cualquier discrepancia pool ↔ hilo (pool vacío, huecos, sobrantes), avisar al director
+    >   para que sanee el pool; mientras tanto, numerar SIEMPRE con `último + 1`.
    **Los LOGS usan el pool global** `Logs/NUMEROS_DISPONIBLES.txt` (logs y mensajes **no**
    comparten numeración). **Un número = un archivo** dentro de su ámbito (T-13). Salud de los
    pools: `python scripts/verificar_pool_numeros.py`.
