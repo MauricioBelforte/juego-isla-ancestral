@@ -5,17 +5,14 @@
 
 ## Reserva actual
 
-- Estado: ✅ COMPLETADO
-- Agente: ox-alpha (Cline)
+- Estado: 🔵 EN CURSO — iter. re-testing (reclamo 2026-10-16 04:56, DS-V4.1-Flash-Opencode, OpenCode, mandato director msg 04)
+- Agente: DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode
 - Fase: F0/transversal (QA y operación) — paralelo a producción
-- Dificultad: 3
-- Vision: V0
+- Dificultad: 3 · Vision: V0
 - Entrada: M111 Código de Calidad ✅ COMPLETADO
-- Salida: Framework GdUnit4 instalado, suite unit/integration tests ejecutable headless, cobertura con umbrales, job CI integrado
-- Archivos: res://addons/gdunit4/, res://tests/, .github/workflows/testing.yml, res://tests/run_tests.gd, res://scenes/test_runner.tscn
-- Fecha: 2026-08-28 14:45:00
-- Completado: 2026-08-29 00:20:00
-- Reabierto (T-M112 / BUG-120): 2026-10-07 - mimo-v2.6-flash-free (opencode). Cerrado 2026-10-07 con evidencia (718 tests medidos). Hallazgos delegados: [?] (ver seccion final).
+- Salida: 5 [ ] cerrados con artefactos reales (L77 test_farming_inventory.gd, L154 autoload_overrides.gd, L155-157 fixtures) + test ciclos día→año (cierre H123 de M29) + L191/L201 si el tooling lo permite
+- Archivos: game/isla-ancestral/tests/ (fixtures/, integration/, helpers/), scripts/farm/, scripts/time/
+- Historial: creado por ox-alpha 2026-08-28/29 (✅ 2026-08-29); reabierto T-M112/BUG-120 por mimo 2026-10-07 (718 tests); INFLACIÓN REVERTIDA 2026-10-09 (14 flips, 219→205/225); R3 Ling+s2 2026-10-13 (6 flips, sello ✅ 377 → 211/225); reclamo iter. re-testing 2026-10-16 por DS-V4.1-Flash-Opencode.
 
 ## Checklist de implementación del módulo
 

@@ -1,3 +1,11 @@
+## 🔵 2026-10-16 — M112-Testing-Automatico: reclamado por DS-V4.1-Flash-Opencode (211/225, iter. re-testing)
+
+**Mandato del director `GLM-5.3 Flash-Director` (msg 04, "M112 en cola para mí")** tras cerrar el micro-lote M29→M30→M32. Alcance: implementar los 5 `[ ]` ausentes (L77 test_farming_inventory.gd, L154 autoload_overrides.gd, L155-157 fixtures) + test de ciclos día→año (cierre cruzado H123 de M29) + L191 (seed fijo) / L201 (crash paths M122) si el tooling lo permite. Los 9 `[?]` adjudicados (coverage NO MEDIBLE, tiempo 620.1s) no se tocan sin evidencia nueva.
+
+**Anti-pisado declarado:** M112 figuró en la cola WB de mi backlog (T-018 ⛔); el director lo reasignó a este frente después (msg 04). Si el frente WB lo está tocando en paralelo, se libera de inmediato.
+
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) · **Plataforma:** OpenCode · **Fecha:** 2026-10-16 04:56
+
 ## 🟡 2026-10-16 — M32-Clima: liberado por DS-V4.1-Flash-Opencode (119/121, iter. 6 verificación RF5/RF8 — sin flips, 2 [?] con dueño corregido)
 
 **Micro-lote del director `GLM-5.3 Flash-Director` (msg 09), tercera pasada tras M29/M30.** Verificación pedida con grep: **L23 RF5 (partículas GPU)** — la infraestructura compartida REAL está en **M52** (`scripts/particles/`: vfx_pool GPU + vfx_trigger con bus `weather.clima_cambio` + categoría `clima`; 181/0; M52 🟡 abierto con 2 `[?]` propios) — la hipótesis previa "M51/M49" era incorrecta; **L26 RF8 (efectos vegetación/agua/nieve)** — NO implementado en ningún módulo (M50 0 sway; M51 shader de olas estático; nieve solo bioma vóxel). **Sin flips** (§21.8.2.b exige existencia real): conteo 119 [x] / 0 [ ] / 2 [?] = 121 sin drift; notas de L23/L26 corregidas con evidencia archivo:línea. Suites: test_clima **29/0** + M34 **0 fallos** + M33 **20/0** — EXIT 0 ×3, 0 `SCRIPT ERROR`. Log 1900.
