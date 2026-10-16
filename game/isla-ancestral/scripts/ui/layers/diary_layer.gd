@@ -66,6 +66,7 @@ var _entradas_cache: Array = []
 var _first_fila: int = 0
 var _ventana: int = FILAS_VENTANA_MIN
 var _paso: float = FILA_ALTURA + 4.0
+var _pool_seq: int = 0  # contador de nombres únicos temporales del pool
 
 var _lbl_titulo: Label
 var _lbl_cats: Label
@@ -513,6 +514,11 @@ func _actualizar_ventana(first: int) -> void:
 			_pool_filas.append(f)
 	while _filas.size() < activos:
 		var b := _tomar_fila_pool()
+		# Nombre único temporal ANTES de add_child: los nombres reciclados del
+		# pool colisionan con los hermanos en árbol (Godot agrega sufijo "2").
+		# El nombre final (Fila_<id>) lo pone el bucle de reasignación de abajo.
+		b.name = "Fila_pool_%d" % _pool_seq
+		_pool_seq += 1
 		_lista.add_child(b)
 		_filas.append(b)
 	if _espaciador_abajo.get_parent() != null:

@@ -266,3 +266,4 @@ game/build/
 # mixto CONOCIDO: la regla los ignora, pero archivos previos quedaron rastreados
 # antes de que existiera. No se tocan las reglas (decision del director); queda
 # documentado como deuda. Referencia: msg 108 de mimo-v2.6-flash-free (Log 1607).
+Mensajes entre modelos/**/NUMEROS_DISPONIBLES.txt

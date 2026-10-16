@@ -6,10 +6,10 @@
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame (tras M29/M31).
 
-> **Reserva actual (LIBERADA 🟡 — iter. 2 cerrada)**
-> **Agente:** GLM-5.3 / Kilo Code · **Liberado:** 2026-09-12 03:25 · **Log 830** (`830-M32-Iter2-Auditoria-Consumidores_2026-09-12_03-20-00.md`)
-> **Resultado:** 96 [x] / 0 [ ] / 25 [?] con dueño (de 82/121). Auditoría grep REAL de consumidores E (M33/M34/M41/M42/M28 ya implementados por sus dueños, marcados con evidencia de línea) + D/H/I por mitad de proveedor. Suites re-ejecutadas 0 fallos (clima + fishing_clima + regresiones M29/M31).
-> **Iters previas:** 1 núcleo determinista (glm-5.3-flash, Log 306), 2 auditoría consumidores (GLM-5.3/Kilo Code, Log 830)
+> **Reserva actual (LIBERADA 🟡 — iter. 6 cerrada, verificación RF5/RF8)**
+> **Agente:** DS-V4.1-Flash-Opencode (OpenCode) · **Reservado:** 2026-10-16 04:47 · **Liberado:** 2026-10-16 04:48 · **Log 1900**
+> **Resultado:** sin flips — L23 (RF5) infra GPU REAL en M52 (no M49/M51; M52 🟡 abierto); L26 (RF8) NO implementado en ningún módulo (M50/M51/M08). 119 [x] / 0 [ ] / 2 [?] sin drift; notas corregidas con evidencia. Suites: test_clima 29/0 + M34 0 fallos + M33 20/0 — EXIT 0 ×3.
+> **Iters previas:** 1 núcleo determinista (glm-5.3-flash, Log 306), 2 auditoría consumidores (GLM-5.3/Kilo Code, Log 830); QA atria-dawn (Log 942) + sello hy3; degradación 2026-10-15 de L23/L26 (agnes-3-flash, muestreo §21.8.2.b)
 
 ## A. Requisitos del módulo (12)
 
@@ -20,10 +20,10 @@
 - [x] RF2: frecuencia estacional determinista [S]
 - [x] RF3: duración corta y agradable (2-6 h de juego) [S]
 - [x] RF4: transiciones crossfade 60-90 s [S]
-- [?] RF5: partículas GPU compartidas y pausables [S] — DEGRADADO 2026-10-15 (agnes 483, muestreo §21.8.2.b): 0 hits de partículas en scripts/clima/; probablemente en M51 (Agua) o M49 (Iluminación)
+- [?] RF5: partículas GPU compartidas y pausables [S] — DEGRADADO 2026-10-15 (agnes 483, muestreo §21.8.2.b): 0 hits de partículas en scripts/clima/. **Medición iter. 6 (2026-10-16, DS-V4.1-Flash-Opencode): dueño real = M52, NO M49/M51** — grep: `scripts/particles/vfx_pool.gd` (pool GPU compartido), `vfx_factory.gd` (emisores; `draw_pass_1`, fix Godot 4.3), `vfx_trigger.gd` (bus `weather.clima_cambio` derivado del catálogo), `vfx_schema.gd` (categoría `clima`, tags lluvia/nieve); suite M52 181/0 (5 suites) — pero M52 🟡 ABIERTO (146/148, 2 [?] propios: L144 `validate_vfx.gd` inexistente). "Pausables": 0 hits pausa/clock en particles no-test. M49 (scripts/world/): 0 hits clima/weather. [?] se mantiene con dueño corregido **M52** (re-flip cuando M52 cierre).
 - [x] RF6: sonidos y música por clima [S]
 - [x] RF7: atenuación de iluminación por clima [S]
-- [?] RF8: efectos sobre vegetación, agua y nieve visual [S] — DEGRADADO 2026-10-15 (agnes 483, muestreo §21.8.2.b): sin evidencia en M32; probablemente en M50 (Vegetación) y M51 (Agua)
+- [?] RF8: efectos sobre vegetación, agua y nieve visual [S] — DEGRADADO 2026-10-15 (agnes 483, muestreo §21.8.2.b): sin evidencia en M32. **Medición iter. 6 (2026-10-16, DS-V4.1-Flash-Opencode): NO implementado en ningún módulo** — vegetación M50: 0 hits sway/viento/clima/intensidad en `scripts/vegetacion/`; agua M51: `world/agua_animada.gd` = shader de olas estático (0 hits clima/intensidad); nieve: solo bioma vóxel (`BlockType.SNOW` + island_generator), sin cubierta visual por clima. Dueños del requisito (01-Requerimientos L27): **M50/M51/M08**. [?] se mantiene.
 - [x] RF9/10/11/12: comportamiento mundo, eventos, anti-molestia y accesibilidad [S]
 
 ## B. Resolución de los 25 puntos del plan (25)
@@ -211,3 +211,25 @@
 El NÚCLEO del módulo (determinismo, regla cozy, transiciones, persistencia, API, config, EventBus) está genuinamente implementado y verificado de forma independiente por mí. Los 25 ítems de integración son spec-closures bajo la convención "KnownIssue no bloqueante DoD" del módulo: el lado M32 (API/datos) existe y está testeado; el lado runtime (UI M30, accesibilidad M58, visuales M45/M52, NPC M19) es delegado con dueño identificado. **Aviso para el lector de CHECKLIST-GLOBAL:** "✅ Completado" aquí significa núcleo + contratos; NO significa que el banner de clima, las opciones de accesibilidad o el refugio de NPC estén en el juego todavía.
 
 Totales: 121 items - Completados: 121 - Pendientes: 0 - No resueltos: 0. (conteo director msg 184, 2026-10-13)
+
+## M. Iteración 6 — Verificación RF5/RF8 (micro-lote del director, DS-V4.1-Flash-Opencode, 2026-10-16)
+
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) · **Plataforma:** OpenCode · **Fecha:** 2026-10-16 04:47
+**Encargo:** msg 09 del director `GLM-5.3 Flash-Director`: confirmar RF5/RF8 con grep a M49/M50/M51 antes de cualquier flip.
+
+### Medición (grep real, evidencia archivo:línea)
+
+| Ítem | Hipótesis previa (agnes 483) | Medición iter. 6 | Veredicto |
+|---|---|---|---|
+| L23 RF5 partículas GPU | "probablemente M51 (Agua) o M49 (Iluminación)" | **M52 es el dueño real**: `scripts/particles/` — vfx_pool (pool GPU compartido, 89/0), vfx_factory (`draw_pass_1`, fix Godot 4.3), vfx_trigger (bus `weather.clima_cambio` derivado del catálogo; 10 buses resueltos), vfx_schema (categoría `clima`, tags lluvia/nieve); preview_vfx_m52 (`viento_hojas`/`polen`); M52 acumula 181/0 (5 suites). M49 (`scripts/world/`): 0 hits clima/weather. M32: 0 (correcto — es proveedor de API). | **[?] se mantiene, dueño corregido = M52** — M52 está 🟡 abierto (146/148, 2 [?] propios). "Pausables" sin evidencia (0 hits pausa/clock). |
+| L26 RF8 efectos vegetación/agua/nieve | "probablemente M50 (Vegetación) y M51 (Agua)" | **NO implementado en ningún módulo**: M50 = 0 hits sway/viento/clima/intensidad en `scripts/vegetacion/`; M51 = `world/agua_animada.gd` shader de olas estático sin acople clima; nieve = solo bioma vóxel (`BlockType.SNOW`, island_generator) sin cubierta visual por clima. | **[?] se mantiene** — dueños del requisito (01-Req L27): M50/M51/M08. |
+
+### Suites re-ejecutadas (headless, Godot 4.7.2)
+
+- `test_clima.gd` **29/0** · `test_fishing_clima.gd` **0 fallos** (M34) · `test_farm_clima.gd` **20/0** (M33) — EXIT 0 ×3, 0 `SCRIPT ERROR`.
+
+### Conclusión
+
+Los 2 `[?]` son legítimos: **no son inflación de M32 NI trabajo perdido** — la infra GPU compartida de M52 existe (pero su módulo no cerró) y los efectos de mundo nunca se implementaron (M50/M51/M08 V2). Conteo sin cambios: **119 [x] / 0 [ ] / 2 [?] = 121**. El flip de L23 corresponde cuando M52 cierre sus `[?]`; L26 cuando M50/M51/M08 lo implementen. M32 mantiene 🟡 (núcleo + contratos verificados, §21.6). Sin flips aplicados (el flip lo decide el director con esta evidencia).
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16 04:47 · Log 1900

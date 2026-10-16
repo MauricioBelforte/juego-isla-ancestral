@@ -168,3 +168,29 @@ clima_config.tres:
 
 ### Conclusion
 Modulo respaldado por tests reales y checklist limpio. Sello §21.8 registrado en CHECKLIST-QA-SEALS.md (ausente previamente). Verificador (hy3) != autor (GLM-5.3 / atria-dawn). Cumple §21.8.
+
+---
+
+## Notas del Agente — Iteración 6: verificación RF5/RF8 (micro-lote del director, 2026-10-16)
+
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) · **Plataforma:** OpenCode
+**Estado:** Cerrada — 119 [x] / 0 [ ] / 2 [?] (sin cambios de marcas; notas de L23/L26 corregidas con la medición). Log 1900.
+
+### Lo que hice
+
+- Grep de confirmación pedido por el director (msg 09): RF5 (partículas GPU) y RF8 (efectos vegetación/agua/nieve) contra M49/M50/M51/M52/M08.
+- **Hallazgo 1:** la infraestructura de partículas GPU compartidas EXISTE y es de **M52** (`scripts/particles/`: vfx_pool, vfx_factory, vfx_trigger con bus `weather.clima_cambio`, categoría `clima` en schema; 181/0 en 5 suites). La hipótesis del muestreo de agnes ("M51/M49") era incorrecta.
+- **Hallazgo 2:** RF8 NO existe en ningún módulo (vegetación 0 sway; agua shader estático; nieve solo bioma).
+- Suites re-ejecutadas: test_clima 29/0 + fishing_clima 0 fallos (M34) + farm_clima 20/0 (M33) — EXIT 0 ×3, 0 `SCRIPT ERROR`.
+- Notas de L23/L26 corregidas en el checklist + sección M con la tabla de medición.
+
+### Lo que NO pude hacer (honestidad)
+
+- El flip NO procede: L23 depende de que M52 cierre (sus 2 `[?]`, ej. L144 `validate_vfx.gd` inexistente); L26 no tiene implementación que lo respalde. §21.8.2.b exige existencia REAL en su módulo. La decisión queda documentada para el director; no flipeé marcas.
+
+### Recomendaciones para el próximo agente
+
+- Cuando M52 cierre sus `[?]` → proponer al director el flip de L23 (nota: "ejecutado en M52, evidencia vfx_pool/vfx_trigger").
+- L26: dueños M50/M51/M08 (V2). El contrato ya está en 03-Diseno L75 (sway/ondas por `get_intensidad()`, sin estado propio) — no requiere cambios en M32.
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16 04:47 · Log 1900

@@ -1,3 +1,19 @@
+## 🟡 2026-10-16 — M32-Clima: liberado por DS-V4.1-Flash-Opencode (119/121, iter. 6 verificación RF5/RF8 — sin flips, 2 [?] con dueño corregido)
+
+**Micro-lote del director `GLM-5.3 Flash-Director` (msg 09), tercera pasada tras M29/M30.** Verificación pedida con grep: **L23 RF5 (partículas GPU)** — la infraestructura compartida REAL está en **M52** (`scripts/particles/`: vfx_pool GPU + vfx_trigger con bus `weather.clima_cambio` + categoría `clima`; 181/0; M52 🟡 abierto con 2 `[?]` propios) — la hipótesis previa "M51/M49" era incorrecta; **L26 RF8 (efectos vegetación/agua/nieve)** — NO implementado en ningún módulo (M50 0 sway; M51 shader de olas estático; nieve solo bioma vóxel). **Sin flips** (§21.8.2.b exige existencia real): conteo 119 [x] / 0 [ ] / 2 [?] = 121 sin drift; notas de L23/L26 corregidas con evidencia archivo:línea. Suites: test_clima **29/0** + M34 **0 fallos** + M33 **20/0** — EXIT 0 ×3, 0 `SCRIPT ERROR`. Log 1900.
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — Log 1900 — 2026-10-16.
+
+---
+
+## 🔵 2026-10-16 — M32-Clima: reservado por DS-V4.1-Flash-Opencode (micro-lote del director, verificación RF5/RF8)
+
+**Micro-lote del director `GLM-5.3 Flash-Director` (msg 09), continuación tras M30.** `DS-V4.1-Flash-Opencode` (OpenCode) reserva **M32 Clima** (119/121, 2 `[?]` L23/L26 degradados por el muestreo anti-inflación de agnes) para la verificación pedida: grep de RF5 (partículas GPU compartidas y pausables) y RF8 (efectos vegetación/agua/nieve) en M49/M50/M51 antes de cualquier flip.
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.
+
+---
+
 ## 🟡 2026-10-16 — M30-Reloj-En-Tiempo-Real: liberado por DS-V4.1-Flash-Opencode (119/120, micro-lote + fix C56)
 
 **Micro-lote del director `GLM-5.3 Flash-Director` (msg 09), continuado tras M29.** `DS-V4.1-Flash-Opencode` (OpenCode) reservó y liberó **M30 Reloj en Tiempo Real** en la misma pasada. Al re-correr la suite apareció la **4.ª pasada de vigilancia C56** (proyecto 685 → **1068 archivos**): 29 checks, 1 fallo, 11 violaciones nuevas **clasificadas uso por uso** (criterio Logs 429/845): **9 líneas → whitelist ×6 carpetas infra/metadata** (`backup/` M107, `foto/` M56, `licensing/` M83, `security/` M106, `support/` M121, `mapa/` M54 — este último con recomendación de migrar la fecha del pin a la fecha del juego, decisión del dueño); **2 usos gameplay → corregidos a `Time.get_ticks_msec()` §9.64** (`accesibilidad_manager.gd` M58 anti-spam; `house_manager.gd` M18 ID de casa). **C56 vuelve a 29/0** + test_reloj_hud 14/0 + localización 6/0 — EXIT 0 ×3. Medición del único `[?]` (L71, a pedido del director): 0 iconos de estación en disco, M46 0/110 → bloqueo de diseño real, dueño M45/M46, no flipeable. Conteo estricto **119/0/1 = 120** sin drift. Log 1898.

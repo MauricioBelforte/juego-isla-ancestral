@@ -82,11 +82,11 @@ func _run() -> void:
 
 	# ── 2) Edge: 500+ entradas sintéticas en personajes ─────────────
 	var cat_per: Array = diary._catalogo.get("personajes", [])
-	var base_entradas := diary.total_entradas()
+	var base_entradas: int = diary.total_entradas()
 	for i in N_SINTETICAS:
 		var eid := "perf_synth_%03d" % i
 		cat_per.append({"id": eid, "titulo": "Sintética %03d" % i, "secreta": false, "descripcion": "", "refs": []})
-		var ok := diary.registrar(eid, "personajes")
+		var ok: bool = diary.registrar(eid, "personajes")
 		if i < 3:
 			_check(ok, "registrar sintética %03d" % i)
 	_check(diary.total_entradas() == base_entradas + N_SINTETICAS, "catálogo con %d entradas (%d + %d)" % [diary.total_entradas(), base_entradas, N_SINTETICAS])
@@ -102,15 +102,15 @@ func _run() -> void:
 	var n_edge := _contar_filas(lista)
 	_check(n_edge <= capa.FILAS_VENTANA_MAX, "VIRTUALIZACIÓN: %d filas en árbol ≤ %d (L194)" % [n_edge, capa.FILAS_VENTANA_MAX])
 	_check(n_edge >= capa.FILAS_VENTANA_MIN, "ventana ≥ piso (%d ≥ %d)" % [n_edge, capa.FILAS_VENTANA_MIN])
-	var alto_total := float(esp_a.custom_minimum_size.y) + float(n_edge) * capa._paso + float(esp_b.custom_minimum_size.y)
-	var alto_esperado := float(n_lista) * capa._paso
+	var alto_total: float = float(esp_a.custom_minimum_size.y) + float(n_edge) * capa._paso + float(esp_b.custom_minimum_size.y)
+	var alto_esperado: float = float(n_lista) * capa._paso
 	_check(absf(alto_total - alto_esperado) < capa._paso, "altura de contenido ≈ n*paso (%.0f ≈ %.0f)" % [alto_total, alto_esperado])
 
 	# ── 4) Scroll: la ventana desliza ───────────────────────────────
 	var scroll = _buscar(capa, "ScrollLista")
 	_check(scroll != null, "ScrollLista existe")
 	_check(scroll.get_v_scroll_bar().is_connected("value_changed", Callable(capa, "_on_lista_scroll")), "value_changed del scrollbar conectado al handler")
-	var mid := float(n_lista / 2) * capa._paso
+	var mid: float = float(n_lista / 2) * capa._paso
 	capa._on_lista_scroll(mid)
 	var first_medio := int(floor(mid / capa._paso))
 	_check(capa._first_fila == first_medio, "scroll al medio → first_fila = %d (obtuvo %d)" % [first_medio, capa._first_fila])
@@ -125,13 +125,13 @@ func _run() -> void:
 	_check(n_despues == n_antes, "POOLING (L196): mismas filas tras deslizar (%d → %d)" % [n_antes, n_despues])
 
 	# ── 6) LazyLoad (L195): 1 categoría materializada por refresco ───
-	var antes := diary.debug_llamadas_entradas_de()
+	var antes: int = diary.debug_llamadas_entradas_de()
 	capa._refrescar_completo()
-	var delta := diary.debug_llamadas_entradas_de() - antes
+	var delta: int = diary.debug_llamadas_entradas_de() - antes
 	_check(delta <= 2, "LazyLoad: refresco ≤ 2 llamadas entradas_de (activa; las 13 no visibles NO se materializan — obtuvo %d)" % delta)
 	var pg: Dictionary = diary.progreso_global()
-	var vistas_manual := 0
-	var total_manual := 0
+	var vistas_manual: int = 0
+	var total_manual: int = 0
 	for cat in diary.get_categorias():
 		var p: Dictionary = diary.progreso_categoria(cat)
 		vistas_manual += int(p.get("vistas", 0))
@@ -186,3 +186,4 @@ func _resumen() -> void:
 		_fallos += 1
 		print("FALLO: piso de checks no alcanzado (%d < %d)" % [_checks, CHECKS_MINIMOS])
 	print("=== TEST M55 DIARIO PERF: %d checks, %d fallo(s) ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
