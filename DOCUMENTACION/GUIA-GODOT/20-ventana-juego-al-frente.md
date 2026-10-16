@@ -111,3 +111,12 @@ Write-Output "ventana del juego al frente (ALT-trick + restore) - $($p.Id)"
 Guardar como `%-temp-%\kilo\traer_juego.ps1` y ejecutar: `powershell -NoProfile -ExecutionPolicy Bypass -File <ruta>`.
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16
+
+
+## ESTADO REAL DE LA VERIFICACION (honestidad 2026-10-16 21:45 - CONFIRMADO 21:47)
+
+- El script **corre sin errores** y la **captura de VENTANA por titulo EXACTO funciona confiable** (el backbuffer del juego se captura aunque la ventana este detras).
+- La **primera** pasada: el foco volvio a VS Code/WorkBuddy despues del SetForeground (el foreground-lock de Windows bloquea a llamadores que no son el foreground).
+- La ** segunda pasada (con el paso 4 activate/minimize/restore del propio juego incluido): CONFIRMADO VISUALMENTE por captura full-screen - el juego quedo AL FRENTE sobre WorkBuddy y VS Code, con el theme D102 visible (panel Controles con fondo dark legible, reloj con hora/fecha cream, hotbar con outline).
+- **Leccion: el paso 4 (minimize + restore del propio juego) es OBLIGATORIO** - sin el las ventanas compiten y pierden el foreground.
+- **Para capturar la UI del juego NO hace falta el al-frente** (la captura de ventana por titulo exacto basta - via usada todo el dia).
