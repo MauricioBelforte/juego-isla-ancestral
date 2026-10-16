@@ -112,10 +112,11 @@ en el código**. Ver detalle y tabla de constantes en la sección "K. QA Cruzado
 - **0 menciones** de: stamina, StateMachine/FSM, IInteractable/interact, luz,
   nado/buceo, sprint, character_id/selección, AnimationPlayer/Tree, audio de pasos,
   guardado de posición.
-- **6 scripts previstos no existen**: `player_controller.gd`, `player_fsm.gd`,
+- **6 scripts previstos no existen** (diagnóstico original — ver actualización abajo): `player_controller.gd`, `player_fsm.gd`,
   `interaction_service.gd`, `light_collector.gd`, `player_energy.gd` y
   `character_selector.gd`; `terrain_detector.gd` existe fuera de M11, en `scripts/terrain/`.
   Los 3 `.tres` previstos tampoco existen y `data/player/` no existe.
+  > **Actualizado 2026-10-16 (GLM-5.3-Flash, encargo del director — evidencia agnes msg 487, verificada con `git ls-files`):** 3 de los 6 ya EXISTEN en `game/isla-ancestral/scripts/player/`: **`player_fsm.gd`, `player_energy.gd` y `character_selector.gd`** (implementados, ver tabla de archivos más abajo; junto a `player_core_m11.gd` y el módulo de equipamiento M155). Siguieron sin existir: `player_controller.gd`, `interaction_service.gd` y `light_collector.gd` (0 hits en el repo). `terrain_detector.gd` sigue fuera de M11 (ahora en `scripts/terrain/` y `scripts/terrenos/`).
 - Los contratos §3 (`PlayerState` observable, `player_fatigue(30%)`,
   `light_collected(count)`, `terrain_changed`) **nunca se publicaron**.
 

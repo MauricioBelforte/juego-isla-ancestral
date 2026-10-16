@@ -57,7 +57,7 @@
 
 ## C. RF2 — Pool central
 
-- [x] Definir VfxManager (autoload) [M]
+- [?] Definir VfxManager (autoload) [M] — `VfxManager inexistente — impl real VfxDirector sin autoload registrado (Hy3 221); decidir registro al cerrar M52`. Verificado por GLM-5.3-Flash 2026-10-16: `git grep VfxManager -- "*.gd" "*.tscn"` = 0 hits; `project.godot` sin autoload VFX; `vfx_director.gd` sí existe.
 - [x] Definir pool de emisores one-shot prestados/liberados [M] — iter. 5: `vfx_pool.gd` (`prestar`/`liberar`/`liberar_todos`)
 - [x] Definir loops registrados con culling [M] — iter. 6: `vfx_loops.gd`: registro por zona con culling por radio (RF14) + `resumen()` para telemetría.
 - [x] Definir precalentamiento del pool (8 emisores) [M] — iter. 5: `precalentar()` / `precalentar_catalogo()`
@@ -141,7 +141,7 @@
 
 ## P. RF15 — Validación
 
-- [x] Definir validate_vfx.gd [M]
+- [?] Definir validate_vfx.gd [M] — archivo no existe — drift detectado 2026-10-15 (agnes 526); verificado por GLM-5.3-Flash con `git ls-files "*validate_vfx*"` (0 hits; solo menciones en docs). La validación real se cubre por turnos en `vfx_pool.gd`/schema (iter. 5-6) — ver ítems inferiores.
 - [x] Verificar presupuesto por escena [M] — iter. 5: `stats()` del pool + bloque D del test
 - [x] Verificar naming [S] — iter. 6: `RE_ID` del schema + bloque B; el generador valida lo mismo al ESCRIBIR el catálogo.
 - [x] Verificar determinismo (semillas) [M] — iter. 5: `validar_semillas()` + bloque B del test
@@ -375,7 +375,7 @@ El catálogo real tiene **8 de los 25** efectos del plan maestro.
 - **No apruebo estéticamente** (M154 = usuario); esta sección documenta el estado medido, no un
   veredicto de "queda bien".
 
-**Totales:** 148 ítems · Completados: 147 · Pendientes: 0 · No resueltos: 1. **CERRADO ✅** (Corregido agnes-3-flash 2026-10-13: +10 flips diseño)
+**Totales:** 148 ítems · Completados: 145 · Pendientes: 0 · No resueltos: 3. **CERRADO ✅** (Corregido agnes-3-flash 2026-10-13: +10 flips diseño). **Degradación 2026-10-15 (GLM-5.3-Flash, encargo del director): L144 `validate_vfx.gd` [x]→[?] — archivo no existe (git ls-files: 0 hits; solo menciones doc).** **Degradación 2 2026-10-16 (addendum del director): L60 `Definir VfxManager (autoload)` [x]→[?] — `VfxManager` inexistente (git grep 0 hits en *.gd/*.tscn), impl real `vfx_director.gd` SIN autoload en `project.godot` (Hy3 221); decidir registro al cerrar M52.** Par final confirmado por conteo de script: **145 [x] / 3 [?] = 148** (la línea `[!]` legacy queda aparte).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 137 [x] / 10 [ ] /
