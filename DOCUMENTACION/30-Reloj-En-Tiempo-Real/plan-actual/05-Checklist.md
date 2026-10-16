@@ -8,7 +8,7 @@
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame (después de M29).
 
-> **Reserva actual:** 🟡 **Liberada 98/104 (iter. 4 cerrada)** — GLM-5.3 / Kilo Code · liberado 2026-09-12 00:30 · **Log 845** · Vigilancia continua C56 (tercera pasada): bug de 11-BUGS.md (registrado con A/B, Log 824) resuelto — whitelist `res://scripts/ci/` (cicd_manager M117/M118, retención de artefactos = metadata de archivos, infra jamás gameplay). **caso_reloj 29/29 (685 archivos, 0 violaciones)** + 6 regresiones 0 fallos. BOM preexistente saneado de caso_reloj_tests.gd. Señal de regresión C56 restaurada para todo el proyecto. Iters previas: 1 (GLM/Cline 26/08), 2 (glm-5.3-flash + glm-5.3/Cline, Log 318/320), 3 re-auditoría C56 (glm-5.3/Cline, Log 429), 4 fix C56 ci/ (GLM-5.3/Kilo Code, Log 845). Pendientes con dueño externo: D67 M45/M46, D74 M64, C58/G113 M74/M28/M36, F105/F106 M59/M57.
+> **Reserva actual:** 🟡 **Liberada 2026-10-16 (micro-lote del director)** — DS-V4.1-Flash-Opencode / OpenCode · reserva 04:34 → liberado 04:38 · **Log 1898** · Fix C56 4.ª pasada (685 → 1068 archivos: 11 violaciones clasificadas — 9 líneas a whitelist ×6 carpetas infra/metadata; 2 usos gameplay de M58/M18 corregidos a `Time.get_ticks_msec()` §9.64) + verificación 119/120 (1 `[?]` L71 con dueño M45/M46 — medición: 0 iconos en disco) · suites 29/0 + 14/0 + 6/0 EXIT 0 ×3 · *Historial:* 🟡 **Liberada 98/104 (iter. 4 cerrada)** — GLM-5.3 / Kilo Code · liberado 2026-09-12 00:30 · **Log 845** · Vigilancia continua C56 (tercera pasada): bug de 11-BUGS.md (registrado con A/B, Log 824) resuelto — whitelist `res://scripts/ci/` (cicd_manager M117/M118, retención de artefactos = metadata de archivos, infra jamás gameplay). **caso_reloj 29/29 (685 archivos, 0 violaciones)** + 6 regresiones 0 fallos. BOM preexistente saneado de caso_reloj_tests.gd. Señal de regresión C56 restaurada para todo el proyecto. Iters previas: 1 (GLM/Cline 26/08), 2 (glm-5.3-flash + glm-5.3/Cline, Log 318/320), 3 re-auditoría C56 (glm-5.3/Cline, Log 429), 4 fix C56 ci/ (GLM-5.3/Kilo Code, Log 845). Pendientes con dueño externo: D67 M45/M46, D74 M64, C58/G113 M74/M28/M36, F105/F106 M59/M57.
 
 ## A. Requisitos del módulo (12)
 
@@ -68,7 +68,7 @@
 
 - [x] Hora HH:MM con formato 12h/24h configurable [S] → `RelojHud.formatear_hora` (test 14/14 OK)
 - [x] Fecha completa: "Viernes, 12 de Primavera, Año 1" [S] → `_fecha_visual()` vía RelojHud
-- [?] Icono de estacion (hoja/sol/hoja seca/copo) [M] -- agnes-2.5-flash 2026-09-12: chip textual coloreado como placeholder; iconos SVG requieren M45/M46 assets (fase arte). KnownIssue no bloqueante DoD — funcionalidad operativa sin iconos.
+- [?] Icono de estacion (hoja/sol/hoja seca/copo) [M] -- agnes-2.5-flash 2026-09-12: chip textual coloreado como placeholder; iconos SVG requieren M45/M46 assets (fase arte). KnownIssue no bloqueante DoD — funcionalidad operativa sin iconos. *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1898: MEDICIÓN a pedido del director — 0 iconos de estación en disco (glob completo), M46 en 0/110; bloqueo de diseño REAL con dueño M45/M46; no flipeable hoy.)*
 - [x] Color de fondo por estación [S] → chip `StyleBoxFlat` tintado con `COLOR_ESTACION`
 - [x] Ubicación: superior derecha del HUD [S] → anclado TOP_RIGHT en captura iter1
 - [x] Desplegable al pasar el cursor (detalle) [S] → tooltip vía TooltipService (M53) por rect del cursor, SIN bloquear clicks (D78 intacto); captura oficial cap_30_2026-08-31_23-30-00_02_hover.png
@@ -250,3 +250,30 @@ Tercera pasada de vigilancia continua (240 → 407 → 619 → 685 archivos): el
 Los [107 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_reloj_hud.gd 14/0` = scripts/clock/ (reloj_hud) en disco; 13 [?] in-flight NO tocados.
 
 Totales: 120 items - Completados: 119 - Pendientes: 0 - No resueltos: 1. (conteo director msg 184, 2026-10-13)
+
+---
+
+## Iteración 5 — micro-lote: fix C56 4.ª pasada + verificación (2026-10-16, DS-V4.1-Flash-Opencode / OpenCode, Log 1898)
+
+**Estado:** 🟡 Liberada — 119 [x] / 0 [ ] / 1 [?] = 120 (conteo estricto medido). Suites: C56 29/0 (tras el fix) + test_reloj_hud 14/0 + test_reloj_localizacion 6/0 — EXIT 0 ×3.
+
+### Lo que hice
+
+- **Vigilancia continua C56 (micro-lote del director, msg 09):** al re-correr la suite, el check falló (29 checks, 1 fallo) con el proyecto crecido de **685 → 1068 archivos**: 11 violaciones nuevas, clasificadas uso por uso (criterio Log 429/845):
+  - **Whitelist ×6 carpetas** (infra/metadata, comentario módulo+motivo+log en `WHITELIST_RELOJ_SO`): `backup/` (M107: nombre de ZIP + retención por edad), `foto/` (M56: nombre del archivo de captura), `licensing/` (M83: "Generado: fecha" de reportes legales), `security/` (M106: ts de logs de auditoría volcados a user://), `support/` (M121: fechas de parches/tickets), `mapa/` (M54: fecha real del pin anotada por el jugador — **recomendación al dueño: migrar a fecha del juego**, decisión de diseño).
+  - **Fix gameplay ×2 → `Time.get_ticks_msec()` (§9.64, patrón fauna/inventario Log 429):** `scripts/accesibilidad/accesibilidad_manager.gd` (M58: cooldown anti-spam de indicadores; valor en memoria, no persistido, inmune al reloj SO), `scripts/houses/house_manager.gd` (M18: generación de ID único de casa). Módulos 🟡 liberados, sin reserva activa — fix transversal documentado.
+- **Medición del `[?]` L71** (a pedido del director, msg 09): 0 iconos de estación en disco (glob completo), M46 en 0/110 → bloqueo de diseño REAL, dueño M45/M46, no flipeable.
+- **Conteo estricto:** 119 [x] / 0 [ ] / 1 [?] = 120 — sin drift (coincide con fila GLOBAL).
+- **Registros 4-4** (GLOBAL, guía 08, ESTADO-PARALELO, este checklist) + Log 1898 + reporte al canal.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- L71 NO es cerrable hoy: los iconos son assets de M45/M46 (fase arte, M46 en 0/110). Queda `[?]` con dueño.
+- `mapa/` quedó en whitelist con criterio "fecha real del mundo"; si el director prefiere que los pines usen la fecha del juego, es decisión de diseño del dueño de M54 (recomendación registrada, no regla).
+
+### Recomendaciones para el próximo agente
+
+- La vigilancia C56 es obligatoria en CADA regresión: el proyecto crece y los módulos nuevos reintroducen usos (240 → 407 → 619 → 685 → **1068** en 4 pasadas).
+- Patrón de clasificación probado (4 veces ya): leer el `[VIOLA]` exacto → abrir contexto → ¿gameplay en vivo? ticks §9.64; ¿metadata/infra/diagnóstico? whitelist comentada con módulo+motivo+log.
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.

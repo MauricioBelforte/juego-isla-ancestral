@@ -1,4 +1,4 @@
-﻿extends SceneTree
+extends SceneTree
 
 ## Test headless M166-H12 — variantes_disponibles en ItemData (Log a asignar).
 ## Verifica: (1) ItemData expone los campos M166; (2) los items heroicos con

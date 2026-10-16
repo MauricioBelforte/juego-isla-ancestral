@@ -1,4 +1,4 @@
-﻿> **RECONCILIADO 2026-09-18 (hy3 / WorkBuddy):** se restauran los [x] verificados por mimo-v2.5 (2026-09-16, item por item) con evidencia de codigo real + tests headless Godot 4.7.2 (EXIT 0, 0 SCRIPT ERROR). La reversiÃ³n e261ced (2026-09-14) se anula SOLO para Ã­tems con [S] (verificado por mimo). Los [M] (dependencia externa) y sin-tag quedan en [?]. VÃ©ase Log hy3.
+> **RECONCILIADO 2026-09-18 (hy3 / WorkBuddy):** se restauran los [x] verificados por mimo-v2.5 (2026-09-16, item por item) con evidencia de codigo real + tests headless Godot 4.7.2 (EXIT 0, 0 SCRIPT ERROR). La reversiÃ³n e261ced (2026-09-14) se anula SOLO para Ã­tems con [S] (verificado por mimo). Los [M] (dependencia externa) y sin-tag quedan en [?]. VÃ©ase Log hy3.
 
 ï»¿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

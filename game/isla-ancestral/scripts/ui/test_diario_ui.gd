@@ -104,7 +104,7 @@ func _run() -> void:
 	var vacio = _buscar(capa, "LblVacio")
 	_check(vacio != null and vacio.visible, "estado vacío visible sin descubrimientos")
 	var lista = _buscar(capa, "ListaEntradas")
-	_check(lista != null and lista.get_child_count() == 0, "0 filas con diario vacío")
+	_check(lista != null and _contar_filas(lista) == 0, "0 filas con diario vacío")
 	var barra = _buscar(capa, "ProgresoCat")
 	_check(barra != null and float(barra.value) == 0.0, "barra de % en 0 con diario vacío")
 	var lbl_g = _buscar(capa, "LblProgresoGlobal")
@@ -113,7 +113,7 @@ func _run() -> void:
 	# ── Registrar 1 entrada: solo esa es visible ──────────────────────
 	_check(diary.registrar("vecino_catalina_oso", "personajes"), "registrar catalina OK")
 	capa.open()  # reabrir refresca (on_layer_opened)
-	_check(lista.get_child_count() == 1, "1 fila tras registrar (las otras 4 de personajes invisibles, §3.2)")
+	_check(_contar_filas(lista) == 1, "1 fila tras registrar (las otras 4 de personajes invisibles, §3.2)")
 	var fila_c = _buscar(capa, "Fila_vecino_catalina_oso")
 	_check(fila_c != null and fila_c.text.contains("Catalina Oso"), "fila con título crudo del catálogo (obtuvo: %s)" % str(fila_c.text) if fila_c else "sin fila catalina")
 	_check(vacio != null and not vacio.visible, "estado vacío oculto cuando hay filas")
@@ -154,24 +154,24 @@ func _run() -> void:
 	_check(opt != null and opt.item_count == 5, "filtro con 5 opciones (obtuvo %d)" % (opt.item_count if opt else -1))
 	_check(opt != null and opt.get_item_text(0) == "Todos" and opt.get_item_text(4) == "Favoritos", "textos de filtro i18n (Todos/Favoritos)")
 	capa._on_filtro_selected(3)  # COMPLETADOS: catalina está VISTO
-	_check(lista.get_child_count() == 0, "filtro Completados: 0 filas (catalina solo Visto)")
+	_check(_contar_filas(lista) == 0, "filtro Completados: 0 filas (catalina solo Visto)")
 	_check(vacio != null and vacio.visible, "vacío visible cuando el filtro no deja filas")
 	capa._on_filtro_selected(1)  # NUEVOS (registrada esta sesión)
-	_check(lista.get_child_count() == 1, "filtro Nuevos: 1 fila (registrada en esta sesión)")
+	_check(_contar_filas(lista) == 1, "filtro Nuevos: 1 fila (registrada en esta sesión)")
 	capa._on_filtro_selected(4)  # FAVORITOS (recién desmarcada)
-	_check(lista.get_child_count() == 0, "filtro Favoritos: 0 filas (sin favoritos)")
+	_check(_contar_filas(lista) == 0, "filtro Favoritos: 0 filas (sin favoritos)")
 	capa._on_filtro_selected(0)  # TODOS
-	_check(lista.get_child_count() == 1, "filtro Todos: 1 fila de nuevo")
+	_check(_contar_filas(lista) == 1, "filtro Todos: 1 fila de nuevo")
 
 	# ── Búsqueda (con y sin acento, M87) ──────────────────────────────
 	var busc = _buscar(capa, "Buscador")
 	_check(busc != null, "Buscador existe")
 	busc.text = "catalina"
 	busc.text_changed.emit("catalina")
-	_check(lista.get_child_count() == 1, "búsqueda 'catalina' → 1 fila")
+	_check(_contar_filas(lista) == 1, "búsqueda 'catalina' → 1 fila")
 	busc.text = "zzzz"
 	busc.text_changed.emit("zzzz")
-	_check(lista.get_child_count() == 0, "búsqueda sin resultados → 0 filas")
+	_check(_contar_filas(lista) == 0, "búsqueda sin resultados → 0 filas")
 	_check(vacio != null and vacio.visible and vacio.text == "Sin resultados para la búsqueda.", "mensaje amistoso de sin resultados (obtuvo: %s)" % str(vacio.text) if vacio else "sin LblVacio")
 	_check(diary.registrar("lugar_isla_raiz", "lugares"), "registrar Isla Raíz OK")
 	busc.text = "raíz"
@@ -189,11 +189,11 @@ func _run() -> void:
 	if tab_lug:
 		tab_lug.emit_signal("pressed")
 	_check(String(capa._categoria_actual) == "lugares", "clic de pestaña cambia la categoría")
-	_check(lista.get_child_count() == 1, "lugares: 1 fila (las 4 no descubiertas invisibles)")
+	_check(_contar_filas(lista) == 1, "lugares: 1 fila (las 4 no descubiertas invisibles)")
 	var tab_foto = _buscar(capa, "Tab_fotografias")
 	if tab_foto:
 		tab_foto.emit_signal("pressed")
-	_check(lista.get_child_count() == 0, "fotografías (catálogo 0 entradas): 0 filas")
+	_check(_contar_filas(lista) == 0, "fotografías (catálogo 0 entradas): 0 filas")
 	_check(vacio != null and vacio.visible and vacio.text == "Todavía no hay entradas en esta categoría.", "mensaje amistoso de categoría vacía (obtuvo: %s)" % str(vacio.text) if vacio else "sin LblVacio")
 
 	# ── Cobertura del catálogo (honesto: 13 de 14) ────────────────────
@@ -324,6 +324,17 @@ func _buscar(node: Node, nombre: String) -> Node:
 		if r:
 			return r
 	return null
+
+## Cuenta SOLO las filas (Buttons "Fila_*"): los espaciadores de la
+## virtualización (W, iter. 4) viven en el mismo VBox pero no son filas.
+func _contar_filas(lista: Node) -> int:
+	if lista == null:
+		return -1
+	var n := 0
+	for h in lista.get_children():
+		if h is Button and String(h.name).begins_with("Fila_"):
+			n += 1
+	return n
 
 ## Recorre los controles VISIBLES y detecta claves i18n sin traducir en texto
 func _sin_claves_crudas(node: Node) -> bool:

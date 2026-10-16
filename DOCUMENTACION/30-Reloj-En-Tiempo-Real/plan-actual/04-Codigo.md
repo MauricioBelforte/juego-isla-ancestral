@@ -194,3 +194,32 @@
 - El scan crece con el proyecto (240 → 407 → 619 → 685 archivos en 3 re-auditorías): la vigilancia continua sigue siendo obligatoria en CADA corrida de regresión — un fallo de C56 no es "ruido conocido", es una señal a clasificar.
 - Patrón de clasificación (probado 3 veces por esta línea): (1) correr el test y leer el `[VIOLA]` exacto; (2) abrir el archivo y clasificar el uso: ¿alimenta lógica de juego/persistencia? → gameplay, corregir a `Time.get_ticks_msec()` + `has()`; ¿es diagnóstico/metadata/infra? → whitelist con comentario de módulo+motivo+log; (3) re-verificar 29/29.
 - Si M111/M112 absorben este scan algún día: mantener la auto-exclusión del propio archivo de test y la whitelist comentada (son parte del contrato del check).
+
+---
+
+## Notas del Agente — Iteración 5 (micro-lote: fix C56 4.ª pasada + verificación)
+
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash)
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-16
+**Estado:** 🟡 Liberada — 119 [x] / 0 [ ] / 1 [?] = 120 (conteo estricto; sin drift)
+**Log:** 1898
+
+### Lo que hice
+
+- **Vigilancia continua C56 (micro-lote del director, msg 09):** al re-correr la suite, el check falló (29 checks, 1 fallo) con el proyecto crecido de **685 → 1068 archivos**: 11 violaciones nuevas clasificadas uso por uso (criterio Log 429/845):
+  - **Whitelist ×6 carpetas** (infra/metadata, comentario módulo+motivo+log en `WHITELIST_RELOJ_SO`): `backup/` (M107), `foto/` (M56), `licensing/` (M83), `security/` (M106), `support/` (M121), `mapa/` (M54 — fecha real del pin; recomendación al dueño: migrar a fecha del juego, decisión de diseño).
+  - **Fix gameplay ×2 → `Time.get_ticks_msec()` (§9.64, patrón fauna/inventario Log 429):** `scripts/accesibilidad/accesibilidad_manager.gd` (M58: cooldown anti-spam en memoria, inmune al reloj SO), `scripts/houses/house_manager.gd` (M18: ID único de casa). Módulos 🟡 liberados sin reserva activa — fix transversal.
+- **Medición del `[?]` L71** (a pedido del director): 0 iconos de estación en disco (glob completo), M46 en 0/110 → bloqueo de diseño REAL, dueño M45/M46, no flipeable.
+- **Suites finales:** C56 29/0 + test_reloj_hud 14/0 + test_reloj_localizacion 6/0 — EXIT 0 ×3.
+- Registros 4-4 + Log 1898 + reporte al canal (msg 10).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- L71 no es cerrable hoy (assets M45/M46). Queda `[?]` con dueño.
+
+### Recomendaciones para el próximo agente
+
+- El patrón de clasificación C56 (probado 4 veces): leer el `[VIOLA]` exacto → contexto → gameplay en vivo = ticks §9.64; metadata/infra/diagnóstico = whitelist comentada módulo+motivo+log. Vigilancia obligatoria en cada regresión (240 → 407 → 619 → 685 → 1068).
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.

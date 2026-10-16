@@ -1,4 +1,4 @@
-﻿# AVISO — backlogs movidos a la carpeta del DIRECTOR (2026-10-16)
+# AVISO — backlogs movidos a la carpeta del DIRECTOR (2026-10-16)
 
 Los archivos `BACKLOG-100-TAREAS-*.md` que estaban acá fueron **copiados** a
 `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/` y desde ahí se mantienen

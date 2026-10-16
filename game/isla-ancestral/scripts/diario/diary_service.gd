@@ -39,6 +39,11 @@ var _nuevas_sesion: Array[String] = []
 ## Preferencias de UI persistidas (T-M1 lote 2): filtro de estado y
 ## categoría abierta del diario, guardadas con el save (sección diary, "ui")
 var _ui_prefs: Dictionary = {"filtro": 0, "categoria": "personajes"}
+## Contador de diagnóstico (iter. 4, checklist W/L195): cuántas veces se
+## materializó la lista de una categoría. Con la virtualización +
+## progreso_global, un refresco completo debe llamar entradas_de() solo para
+## la categoría ACTIVA (antes: una por categoría en el % global).
+var _llamadas_entradas_de: int = 0
 
 
 func _ready() -> void:
@@ -222,6 +227,7 @@ func get_ui_prefs() -> Dictionary:
 
 ## Entradas descubierto + registro, por categoría (UI: lista virtualizada M61)
 func entradas_de(categoria: String) -> Array[Dictionary]:
+	_llamadas_entradas_de += 1
 	var result: Array[Dictionary] = []
 	for e in _catalogo.get(categoria, []):
 		var eid := String(e.get("id", ""))
@@ -287,6 +293,34 @@ func _emitir_progreso(categoria: String) -> void:
 		bus.diary.progreso_cambiado.emit(float(p.get("percent", 0.0)))
 	if bus != null and int(p.get("descubiertas", 0)) > 0 and absf(float(p.get("percent", 0.0)) - 1.0) < 0.001:
 		bus.diary.categoria_completa.emit(categoria)
+
+
+## Progreso GLOBAL del diario SIN materializar entradas (LazyLoad, checklist
+## L195): recorre catálogo y _estados directo (0 Dictionary por entrada).
+## Misma semántica que progreso_categoria (§3.2: % sobre lo DESCUBIERTO).
+## La UI lo usa para el % global en vez de sumar 14 progreso_categoria()
+## (que materializaban todas las categorías en cada apertura).
+func progreso_global() -> Dictionary:
+	var vistas := 0
+	var total := 0
+	for cat in _catalogo:
+		for e in _catalogo[cat]:
+			var eid := String(e.get("id", ""))
+			# descubierta = registrada o secreta (mismo criterio que entradas_de §3.2)
+			if not _estados.has(eid) and not bool(e.get("secreta", false)):
+				continue
+			total += 1
+			if int(_estados.get(eid, {}).get("estado", 0)) >= Estado.VISTO:
+				vistas += 1
+	var percent := 0.0
+	if total > 0:
+		percent = float(vistas) / float(total)
+	return {"vistas": vistas, "descubiertas": total, "percent": percent}
+
+
+## Contador de diagnóstico para tests (LazyLoad, checklist L195).
+func debug_llamadas_entradas_de() -> int:
+	return _llamadas_entradas_de
 
 
 ## ── Persistencia (M59, §2.3) ────────────────────────────

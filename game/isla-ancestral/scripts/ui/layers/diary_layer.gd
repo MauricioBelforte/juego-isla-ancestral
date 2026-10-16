@@ -26,8 +26,12 @@
 # `favorito` → alterna el favorito de la entrada seleccionada si la capa está
 # visible. Esc → close_top (purga la capa VISIBLE — fix T-M1 en ui_manager).
 #
-# Rendimiento: lista con free() inmediato y sin pool — la virtualización es
-# checklist W (Lote 2). Ver 04-Codigo.md Notas del Agente.
+# Rendimiento (iter. 4, Step-5-WorkBuddy, Log 1898): lista VIRTUALIZADA — solo
+# la ventana visible existe en el árbol (espaciadores arriba/abajo con la altura
+# total), filas recicladas de un pool (M62) y % global calculado SIN materializar
+# las categorías no visibles (progreso_global, LazyLoad L195). Medido con 500+
+# entradas: apertura < 100 ms, ≤ FILAS_VENTANA_MAX nodos-fila, 1 llamada
+# entradas_de por refresco para la categoría activa. Ver 04-Codigo.md iter. 4/5.
 #
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/ui/test_diario_ui.gd
 
@@ -37,6 +41,14 @@ extends UILayer
 ## Índices del filtro de estado (orden de FiltroEstado)
 enum Filtro { TODOS, NUEVOS, VISTOS, COMPLETADOS, FAVORITOS }
 
+## ── Virtualización de la lista (checklist W, iter. 4 Step-5-WorkBuddy) ──
+## Altura base de fila; el paso real se mide con get_combined_minimum_size()
+## (tema) + la separación del VBox. La ventana visible se recicla de un pool.
+const FILA_ALTURA: float = 28.0
+const FILAS_VENTANA_MIN: int = 8
+const FILAS_VENTANA_MAX: int = 24
+const FILAS_OVERSCAN: int = 2
+
 var _categoria_actual: String = ""
 var _busqueda: String = ""
 var _filtro: int = Filtro.TODOS
@@ -44,6 +56,16 @@ var _sel: Dictionary = {}  # copia de la entrada seleccionada en la lista
 
 var _tabs: Array[Button] = []
 var _filas: Array[Button] = []
+
+## Virtualización (W): scroll + espaciadores de altura total + pool de filas
+var _scroll: ScrollContainer
+var _espaciador_arriba: Control
+var _espaciador_abajo: Control
+var _pool_filas: Array[Button] = []
+var _entradas_cache: Array = []
+var _first_fila: int = 0
+var _ventana: int = FILAS_VENTANA_MIN
+var _paso: float = FILA_ALTURA + 4.0
 
 var _lbl_titulo: Label
 var _lbl_cats: Label
@@ -210,12 +232,21 @@ func _crear_ui() -> void:
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.custom_minimum_size = Vector2(0, 320)
 	col_centro.add_child(scroll)
+	_scroll = scroll
 
 	_lista = VBoxContainer.new()
 	_lista.name = "ListaEntradas"
 	_lista.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_lista.add_theme_constant_override("separation", 4)
 	scroll.add_child(_lista)
+
+	# Virtualización (W): espaciadores de altura total (arriba/abajo) — las
+	# filas de la ventana visible viven ENTRE ellos.
+	_espaciador_arriba = _nuevo_espaciador("EspaciadorArriba")
+	_lista.add_child(_espaciador_arriba)
+	_espaciador_abajo = _nuevo_espaciador("EspaciadorAbajo")
+	_lista.add_child(_espaciador_abajo)
+	scroll.get_v_scroll_bar().value_changed.connect(_on_lista_scroll)
 
 	_lbl_vacio = Label.new()
 	_lbl_vacio.name = "LblVacio"
@@ -414,24 +445,118 @@ func _texto_fila(e: Dictionary) -> String:
 	return txt
 
 
+## Refresco VIRTUALIZADO (W, iter. 4): recicla las filas al pool, calcula la
+## ventana visible según el viewport y solo instancia esa ventana (los
+## espaciadores sostienen la altura total para el scroll).
 func _refrescar_lista() -> void:
 	for f in _filas:
 		if is_instance_valid(f):
-			f.free()
+			f.get_parent().remove_child(f)
+			_pool_filas.append(f)
 	_filas.clear()
+	_first_fila = 0
 	var entradas := _entradas_visibles()
-	for e in entradas:
-		var b := Button.new()
-		b.name = "Fila_" + String(e.get("id", ""))
-		b.text = _texto_fila(e)
-		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.tooltip_text = String(e.get("titulo", ""))  # texto completo (checklist W)
-		b.pressed.connect(_on_fila_pressed.bind((e as Dictionary).duplicate()))
+	_entradas_cache = entradas
+	if entradas.is_empty():
+		_espaciador_arriba.custom_minimum_size = Vector2(0, 0)
+		_espaciador_abajo.custom_minimum_size = Vector2(0, 0)
+		_lbl_vacio.visible = true
+		_lbl_vacio.text = _t("DIARY.SIN_RESULTADOS") if _busqueda.strip_edges() != "" else _t("DIARY.SIN_ENTRADAS")
+		return
+	_lbl_vacio.visible = false
+	_calcular_ventana()
+	_actualizar_ventana(_first_fila)
+
+
+## Espaciador invisible (solo altura) para la virtualización.
+func _nuevo_espaciador(nombre: String) -> Control:
+	var c := Control.new()
+	c.name = nombre
+	c.custom_minimum_size = Vector2(0, 0)
+	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return c
+
+
+## Ventana visible: alto del viewport / paso + overscan, acotada.
+## En headless (sin layout) el viewport mide 0 -> piso FILAS_VENTANA_MIN.
+func _calcular_ventana() -> void:
+	var alto := 0.0
+	if _scroll != null:
+		alto = _scroll.size.y
+	if alto <= 0.0:
+		alto = float(FILAS_VENTANA_MIN) * _paso
+	var v := int(ceil(alto / _paso)) + FILAS_OVERSCAN
+	_ventana = clampi(v, FILAS_VENTANA_MIN, FILAS_VENTANA_MAX)
+
+
+## Reasigna la ventana [first, first+activos): espaciadores con la altura
+## total y filas recicladas del pool (M62). first se acota a [0, n-ventana].
+func _actualizar_ventana(first: int) -> void:
+	var n := _entradas_cache.size()
+	first = clampi(first, 0, maxi(0, n - _ventana))
+	_first_fila = first
+	var activos := mini(_ventana, n - first)
+	# paso real: alto mínimo de la primera fila (tema) + separación del VBox
+	if activos > 0:
+		var h := 0.0
+		if _filas.size() > 0 and is_instance_valid(_filas[0]):
+			h = _filas[0].get_combined_minimum_size().y
+		elif _pool_filas.size() > 0 and is_instance_valid(_pool_filas[0]):
+			h = _pool_filas[0].get_combined_minimum_size().y
+		_paso = (h + 4.0) if h > 0.0 else (FILA_ALTURA + 4.0)
+	_espaciador_arriba.custom_minimum_size = Vector2(0, float(first) * _paso)
+	_espaciador_abajo.custom_minimum_size = Vector2(0, float(maxi(0, n - first - activos)) * _paso)
+	while _filas.size() > activos:
+		var f: Button = _filas.pop_back()
+		if is_instance_valid(f):
+			f.get_parent().remove_child(f)
+			_pool_filas.append(f)
+	while _filas.size() < activos:
+		var b := _tomar_fila_pool()
 		_lista.add_child(b)
 		_filas.append(b)
-	_lbl_vacio.visible = entradas.is_empty()
-	if entradas.is_empty():
-		_lbl_vacio.text = _t("DIARY.SIN_RESULTADOS") if _busqueda.strip_edges() != "" else _t("DIARY.SIN_ENTRADAS")
+	if _espaciador_abajo.get_parent() != null:
+		_lista.move_child(_espaciador_abajo, -1)
+	for i in activos:
+		var e: Dictionary = _entradas_cache[first + i]
+		var b := _filas[i]
+		b.name = "Fila_" + String(e.get("id", ""))
+		b.text = _texto_fila(e)
+		b.tooltip_text = String(e.get("titulo", ""))  # texto completo (checklist W)
+		b.custom_minimum_size = Vector2(0, FILA_ALTURA)
+		b.set_meta("entrada", (e as Dictionary).duplicate())
+
+
+## Fila del pool (o nueva): la señal pressed se conecta UNA sola vez con el
+## botón bindeado; al reciclarse solo cambian meta/nombre/texto (M62).
+func _tomar_fila_pool() -> Button:
+	var b: Button
+	if _pool_filas.size() > 0:
+		b = _pool_filas.pop_back()
+	else:
+		b = Button.new()
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.pressed.connect(_on_fila_pool_pressed.bind(b))
+	b.visible = true
+	return b
+
+
+func _on_fila_pool_pressed(boton: Button) -> void:
+	if boton == null or not is_instance_valid(boton):
+		return
+	var e = boton.get_meta("entrada", {})
+	_sel = (e as Dictionary).duplicate()
+	_refrescar_detalle()
+
+
+## Scroll de la lista: desliza la ventana (solo si cambia el índice inicial).
+func _on_lista_scroll(valor: float) -> void:
+	if _entradas_cache.is_empty():
+		return
+	var first := int(floor(valor / _paso))
+	first = clampi(first, 0, maxi(0, _entradas_cache.size() - _ventana))
+	if first != _first_fila:
+		_actualizar_ventana(first)
 
 
 func _refrescar_detalle() -> void:
@@ -531,14 +656,15 @@ func _refrescar_progreso() -> void:
 	var total := 0
 	var pct_cat := 0.0
 	if d != null:
-		for cat in d.get_categorias():
-			var p: Dictionary = d.progreso_categoria(cat)
-			var v := int(p.get("vistas", 0))
-			var t := int(p.get("descubiertas", 0))
-			vistas += v
-			total += t
-			if String(cat) == _categoria_actual and t > 0:
-				pct_cat = clampf(float(p.get("percent", 0.0)) * 100.0, 0.0, 100.0)
+		# % de la categoría ACTIVA (entradas_de ya materializada para la lista)
+		if _categoria_actual != "":
+			var pc: Dictionary = d.progreso_categoria(_categoria_actual)
+			if int(pc.get("descubiertas", 0)) > 0:
+				pct_cat = clampf(float(pc.get("percent", 0.0)) * 100.0, 0.0, 100.0)
+		# % GLOBAL sin materializar el resto de las categorías (LazyLoad, L195)
+		var pg: Dictionary = d.progreso_global()
+		vistas = int(pg.get("vistas", 0))
+		total = int(pg.get("descubiertas", 0))
 	_barra_cat.value = pct_cat
 	var pct_g := 0
 	if total > 0:
@@ -556,6 +682,8 @@ func _on_tab(cat: String) -> void:
 		_buscador.text = ""  # sin text_changed (ya refrescamos abajo)
 	_guardar_prefs_ui()
 	_pintar_tabs_activos()
+	if _scroll != null:
+		_scroll.scroll_vertical = 0
 	_refrescar_lista()
 	_refrescar_detalle()
 	_refrescar_progreso()
@@ -564,6 +692,8 @@ func _on_tab(cat: String) -> void:
 func _on_busqueda_changed(txt: String) -> void:
 	_busqueda = txt
 	_sel = {}
+	if _scroll != null:
+		_scroll.scroll_vertical = 0
 	_refrescar_lista()
 	_refrescar_detalle()
 
@@ -572,6 +702,8 @@ func _on_filtro_selected(idx: int) -> void:
 	_filtro = idx
 	_sel = {}
 	_guardar_prefs_ui()
+	if _scroll != null:
+		_scroll.scroll_vertical = 0
 	_refrescar_lista()
 	_refrescar_detalle()
 
@@ -659,6 +791,19 @@ func _aplicar_prefs_ui() -> void:
 
 func on_layer_closed() -> void:
 	pass  # visible=false lo gestiona UILayer.close()
+
+
+## Libera las filas fuera del árbol (pool) al salir — super des-registra.
+func _exit_tree() -> void:
+	for f in _filas:
+		if is_instance_valid(f):
+			f.free()
+	_filas.clear()
+	for f in _pool_filas:
+		if is_instance_valid(f):
+			f.free()
+	_pool_filas.clear()
+	super._exit_tree()
 
 
 func focus_first() -> Control:
