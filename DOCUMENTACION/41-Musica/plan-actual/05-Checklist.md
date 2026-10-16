@@ -4,7 +4,13 @@
 # 05-Checklist.md — Módulo 41: Música
 
 ## Reserva actual
-- **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-16 19:55.** Reclamo M41 (Tarea 2 cola N650 del director). Medición: 58 `[x]` / 50 `[ ]` / 2 `[?]` = 110. Los 50 `[ ]` son stems/temas (P1, P6-P51) + integración de buses M91. Lote 1 = 5 ítems (stems de franja + 1 bus M91). Reclamo en 4 registros: CHECKLIST-GLOBAL fila 41 + este checklist + GUIA-ORDEN 08 + ESTADO-PARALELO.
+- **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-16 19:55.** Reclamo M41 (Tarea 2 cola N650 del director). Medición: 58 `[x]` / 50 `[ ]` / 2 `[?]` = 110. Reclamo en 4 registros: CHECKLIST-GLOBAL fila 41 + este checklist + GUIA-ORDEN 08 + ESTADO-PARALELO.
+- **Lote 1 (director N667, 2026-10-16) — 4 ítems de wiring/matríz (NO stems .ogg):**
+  - **M91 wiring ✓:** `audio_config_service.gd` (7 `BUSES_HIJOS` L33: Music/SFX/Ambient/Voice/UI/Cinematic) + `compression_manager.gd` existen → música ya wiring contra buses M91.
+  - **Matriz contexto música→escena ✓:** `data/audio/music_context_matrix.json` = 23 temas × 16 capas (base_×6 + evento_×7 + tiempo_×2) — el brief exacto para el compositor externo (P6-P24).
+  - **2 `[?]` cerrados con conteo documentado (director N667):** L113 "Temas de lugar 6" → 6 `base_*`; L115 "Variaciones +24" → 11/24 variaciones definidas. Flip `[?]→[x]`.
+  - **50 `[ ]` de stems:** quedan `[ ]` con `#esperando:assets-audio` (deuda de composición EXTERNA — no fabrico .ogg; director N667 ítem 4).
+- **Post-lote 1:** 60 `[x]` / 50 `[ ]` / 0 `[?]` = 110. Los 50 = deuda de assets (`#esperando:assets-audio`), no bloqueo del módulo.
 
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame (tras sistema de audio base).
