@@ -24,7 +24,7 @@
 
 | Agente | Rol suyo cuando reingrese |
 |---|---|
-| Ling-3.1-Flash | i18n/loc M87-M88 (dueño del catálogo; deuda pt) |
+| **Ling-3.1-Flash** REACTIVADO 2026-10-16 (~17:42, informe 142: 112/112 integridad i18n, calidad sobresaliente, report-only) | **i18n/loc (dueño del catalogo):** `strings_pt.json` (deuda documentada), plurales, M87 pendientes; reporte-only al estandar del informe 142 |
 | atria-dawn-s2 | VERIFICADORA FINAL (última palabra antes de mi sello en cadenas críticas) |
 | atria-dawn-s3 | Estratega de ruteo (a quién delegar; cuellos de botella) |
 | atria-dawn | Deep de work por excepción: lo que supera a Step 5 |

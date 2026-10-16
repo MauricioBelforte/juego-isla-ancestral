@@ -28,7 +28,8 @@
 
 - ⚠️ **REGLA DE DISPONIBILIDAD (corrección del fundador 2026-10-16 04:50-04:51):** la disponibilidad de un agente la declara el fundador o la confirma el propio agente respondiendo. **NUNCA se infiere de actividad de archivos en el repo** (un canal con escritos recientes puede tener el chat cerrado o créditos agotados).
 - **Disponibles reales (declarado/confirmado por el fundador 2026-10-16):** agnes-3-flash, DeepSeek-V4.1-Flash, Step-5-WorkBuddy, Hy3, DS-V4.1-Flash-Opencode (nuevo — abre cuando el fundador active su sesión).
-- **NO disponibles actualmente (declarado por el fundador 2026-10-16 04:50-04:51):** Ling-3.1-Flash, atria-dawn-s2, atria-dawn-s3, atria-dawn, kimi-k3, Claude-Haiku-5.5, muse-spark-1.3-contributor.
+- **NO disponibles actualmente (fundador 2026-10-16 04:50-04:51):** atria-dawn-s2, atria-dawn-s3, atria-dawn, kimi-k3, Claude-Haiku-5.5, muse-spark-1.3-contributor.
+- **REACTIVADO 2026-10-16 ~17:42 (fundador via informe 142 de Ling en canal propio):** **Ling-3.1-Flash** - entrego el informe de integridad i18n del encargo 140 (112/112 verificado, calidad sobresaliente, report-only). Asignado a los frentes de i18n: `strings_pt.json` (deuda documentada), reportes de catalogo M87/M159.
 
 - **Asignaciones en vuelo declaradas por el predecesor/canales:** agnes = barrido anti-drift transversal (M11→M101, drift en M93 por resolver) · DeepSeek = M118 ✓ (commit hecho, reporte en canal) · Hy3 = M09 (re-sello/siguiente) · Step-5 = M31 · Ling = i18n (112 claves + pt incompleto) · s2/s3 = verificación estratégica.
 - **Cambio de estado del predecesor (2026-10-16 04:46, directiva del fundador):** `De-Director V4.1` pasa a **agente `DS-V4.1-Flash-Opencode`** (OpenCode, modelo interno DeepSeek-V4.1-Flash, trabajo paralelo al agente `DeepSeek-V4.1-Flash`/WorkBuddy). Canal y backlog creados por mí (apertura 01, pool 2..50). **Familia DeepSeek interna: DS-Opencode ↔ DeepSeek-WorkBuddy NO hacen QA mutuo.**
