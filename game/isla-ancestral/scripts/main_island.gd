@@ -31,6 +31,27 @@ func _ready():
 ## Sin esto, ocultar_hud (H) era no-op: _hud nunca se asignaba porque nadie
 ## instanciaba scenes/ui/hud.tscn. El hotbar (EquippedPanel) y el RelojWidget
 ## cuelgan de esta capa, asi que se ocultan en cadena con un solo toggle.
+
+	# D102_PANEL_CONTROLES: panel dark + texto claro para el ControlsLabel (legibilidad)
+	var _lbl_ctrl := get_node_or_null("UI/ControlsLabel")
+	if _lbl_ctrl == null:
+		_lbl_ctrl = find_child("ControlsLabel", true, false)
+	if _lbl_ctrl is Label:
+		var _sb_ctrl := StyleBoxFlat.new()
+		_sb_ctrl.bg_color = Color(0.09, 0.10, 0.15, 0.88)
+		_sb_ctrl.set_corner_radius_all(8)
+		_sb_ctrl.border_color = Color(0.87, 0.66, 0.33, 0.45)
+		_sb_ctrl.set_border_width_all(1)
+		_sb_ctrl.content_margin_left = 10.0
+		_sb_ctrl.content_margin_top = 8.0
+		_sb_ctrl.content_margin_right = 12.0
+		_sb_ctrl.content_margin_bottom = 10.0
+		(_lbl_ctrl as Label).add_theme_stylebox_override("normal", _sb_ctrl)
+		(_lbl_ctrl as Label).add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))
+		(_lbl_ctrl as Label).add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+		(_lbl_ctrl as Label).add_theme_constant_override("outline_size", 4)
+		(_lbl_ctrl as Label).add_theme_constant_override("line_spacing", 6)
+		print("[D102] panel dark aplicado a ControlsLabel")
 func _registrar_hud() -> void:
 	var ui_manager := get_node_or_null("/root/UIManager")
 	if ui_manager and ui_manager.has_method("register_hud"):
