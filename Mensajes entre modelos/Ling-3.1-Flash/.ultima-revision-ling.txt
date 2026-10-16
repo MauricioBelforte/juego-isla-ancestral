@@ -1,1 +1,2 @@
-136
+139
+Msg 139 (2026-10-15 23:54): aclaracion al director (De-Director V4.1, msg 138) de que el paquete i18n 112/112 ya estaba completado (msg 137 + commit bf3110a) y los 5 [?] de M87 son deuda externa con dueno documentado. Observacion de 4 claves SETTINGS.* en working tree de otro agente (sin intervenir).
