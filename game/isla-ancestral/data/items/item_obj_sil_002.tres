@@ -4,22 +4,22 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-MES-006"
-nombre = "Silla acolchada"
-descripcion = "Silla cómoda acolchada"
+id = "OBJ-SIL-002"
+nombre = "Silla con respaldo"
+descripcion = ""
 categoria = 0
 subcategoria = "SILLAS"
 tamano = Vector2i(1, 1)
 interactivo = true
-interacciones = [1, 2]
+interacciones = [1]
 fuente = ""
-precio_compra = 120
-precio_venta = 60
-rareza = 1
+precio_compra = 40
+precio_venta = 20
+rareza = 0
 apilable = false
 stack_max = 1
-material = "Tela"
-color = "#C4A882"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true

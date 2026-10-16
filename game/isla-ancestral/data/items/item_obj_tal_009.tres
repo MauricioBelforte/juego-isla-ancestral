@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-TAL-009"
+nombre = "Mesa de encantamientos"
+descripcion = ""
+categoria = 6
+subcategoria = "TRABAJO"
+tamano = Vector2i(2, 2)
+interactivo = true
+interacciones = [5]
+fuente = ""
+precio_compra = 600
+precio_venta = 300
+rareza = 2
+apilable = false
+stack_max = 1
+material = ""
+color = ""
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

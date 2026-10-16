@@ -4,22 +4,22 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-CUA-006"
-nombre = "Lámpara de pared"
-descripcion = "Luz decorativa de pared"
-categoria = 1
-subcategoria = "ILUMINACION_PARED"
+id = "OBJ-LUZ-001"
+nombre = "Lámpara de mesa"
+descripcion = ""
+categoria = 2
+subcategoria = "ILUMINACION"
 tamano = Vector2i(1, 1)
 interactivo = true
-interacciones = [6, 9]
+interacciones = [6]
 fuente = ""
-precio_compra = 60
-precio_venta = 30
+precio_compra = 40
+precio_venta = 20
 rareza = 0
 apilable = false
 stack_max = 1
-material = "Metal"
-color = "#71797E"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true

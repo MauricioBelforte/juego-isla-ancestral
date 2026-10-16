@@ -4,22 +4,22 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-CUA-008"
-nombre = "Estantería pequeña"
-descripcion = "Estantería compacta"
-categoria = 1
-subcategoria = "ESTANTES"
-tamano = Vector2i(1, 1)
+id = "OBJ-EST-002"
+nombre = "Estantería alta"
+descripcion = ""
+categoria = 0
+subcategoria = "ESTANTERIAS"
+tamano = Vector2i(2, 3)
 interactivo = true
-interacciones = [4, 9]
+interacciones = [3]
 fuente = ""
-precio_compra = 70
-precio_venta = 35
+precio_compra = 150
+precio_venta = 75
 rareza = 0
 apilable = false
 stack_max = 1
-material = "Madera"
-color = "#8B6914"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true

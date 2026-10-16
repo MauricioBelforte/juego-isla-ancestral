@@ -4,22 +4,22 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-CUA-005"
+id = "OBJ-REL-001"
 nombre = "Reloj de pared"
-descripcion = "Reloj antiguo de pared"
+descripcion = ""
 categoria = 1
 subcategoria = "RELOJES"
 tamano = Vector2i(1, 1)
 interactivo = true
-interacciones = [9, 10]
+interacciones = [9]
 fuente = ""
-precio_compra = 150
-precio_venta = 75
-rareza = 1
+precio_compra = 60
+precio_venta = 30
+rareza = 0
 apilable = false
 stack_max = 1
-material = "Madera"
-color = "#8B6914"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true

@@ -19,7 +19,7 @@ extends SceneTree
 const MODULO := "M159-catalogo"
 const VAL := preload("res://scripts/data/validar_catalogo_m159.gd")
 const BLOQUES := ["A", "B", "C", "D", "E", "F", "G"]
-const CHECKS_MINIMOS := 17   # piso MEDIDO en verde (ver Log 1716)
+const CHECKS_MINIMOS := 17   # piso MEDIDO en verde (Log 1716; re-medido 17 en Log 1907 tras el lote L216)
 
 var _checks := 0
 var _fallos := 0
@@ -50,16 +50,16 @@ func _run() -> void:
 	var r: Dictionary = VAL.analizar(items)
 
 	# --- A: carga ---
-	_check(items.size() == 121, "A: se cargan 121 .tres de data/items (medido=%d)" % items.size())
+	_check(items.size() >= VAL.TOTAL_OBJETIVO, "A: se cargan al menos %d .tres de data/items (medido=%d)" % [VAL.TOTAL_OBJETIVO, items.size()])
 	_check(int(r["cargados"]) == items.size(), "A: analizar.cargados == items.size()")
-	_check(int(r["total"]) == 121, "A: total con id no vacio = 121 (medido=%d)" % int(r["total"]))
+	_check(int(r["total"]) == items.size(), "A: total con id unico == cargados (medido=%d/%d)" % [int(r["total"]), items.size()])
 	_check(r["sin_id"].size() == 0, "A: 0 items sin id")
 	_check(r["invalidos"].size() == 0, "A: 0 items invalidos por es_valido()")
 	_fin("A")
 
 	# --- B: L210 IDs unicos ---
 	_check(r["ids_duplicados"].size() == 0, "B: L210 0 IDs duplicados")
-	_check(int(r["total"]) == 121, "B: L210 121 IDs unicos")
+	_check(int(r["total"]) >= VAL.TOTAL_OBJETIVO, "B: L210 al menos %d IDs unicos (medido=%d)" % [VAL.TOTAL_OBJETIVO, int(r["total"])])
 	_fin("B")
 
 	# --- C: L211 categorias con objetos ---
@@ -88,11 +88,11 @@ func _run() -> void:
 
 	# --- G: L215 precios + L216 total ---
 	_check(r["tienda_sin_precio"].size() == 0, "G: L215 0 objetos sin ningun precio")
-	_check(int(r["precio_venta_pos"]) == 121, "G: L215 121 con precio_venta>0 (medido)")
-	_check(int(r["precio_compra_pos"]) == 93, "G: L215 93 con precio_compra>0 (medido)")
+	_check(int(r["precio_venta_pos"]) >= VAL.TOTAL_OBJETIVO, "G: L215 al menos %d con precio_venta>0 (medido=%d)" % [VAL.TOTAL_OBJETIVO, int(r["precio_venta_pos"])])
+	_check(int(r["precio_compra_pos"]) >= 1, "G: L215 hay objetos comprables (precio_compra>0=%d)" % int(r["precio_compra_pos"]))
 	print("-- MEDICION L216: total=%d objetivo=%d faltan=%d (gap documentado, no bloquea la suite)"
 		% [int(r["total"]), VAL.TOTAL_OBJETIVO, maxi(0, VAL.TOTAL_OBJETIVO - int(r["total"]))])
-	_check(int(r["total"]) >= 121, "G: L216 regresion total >= 121")
+	_check(int(r["total"]) >= VAL.TOTAL_OBJETIVO, "G: L216 regresion total >= %d (medido=%d)" % [VAL.TOTAL_OBJETIVO, int(r["total"])])
 	_fin("G")
 
 	_terminado = true

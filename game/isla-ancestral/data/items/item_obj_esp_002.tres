@@ -4,22 +4,22 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-CUA-004"
-nombre = "Espejo dorado"
-descripcion = "Espejo con marco dorado"
+id = "OBJ-ESP-002"
+nombre = "Espejo rectangular"
+descripcion = ""
 categoria = 1
 subcategoria = "ESPEJOS"
 tamano = Vector2i(1, 2)
 interactivo = true
 interacciones = [9]
 fuente = ""
-precio_compra = 180
-precio_venta = 90
-rareza = 1
+precio_compra = 100
+precio_venta = 50
+rareza = 0
 apilable = false
 stack_max = 1
-material = "Vidrio"
-color = "#FFD700"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true

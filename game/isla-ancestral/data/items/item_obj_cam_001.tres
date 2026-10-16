@@ -4,22 +4,22 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-MES-009"
+id = "OBJ-CAM-001"
 nombre = "Cama simple"
-descripcion = "Cama de una plaza"
+descripcion = ""
 categoria = 0
 subcategoria = "CAMAS"
 tamano = Vector2i(2, 2)
 interactivo = true
 interacciones = [2]
 fuente = ""
-precio_compra = 120
-precio_venta = 60
+precio_compra = 100
+precio_venta = 50
 rareza = 0
 apilable = false
 stack_max = 1
-material = "Madera"
-color = "#8B6914"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true

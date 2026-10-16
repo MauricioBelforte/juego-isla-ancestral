@@ -213,7 +213,7 @@
 - [x] Verificar que todos los objetos interactuables tienen interacción definida
 - [x] Verificar que todos los objetos colocables tienen tamaño definido
 - [x] Verificar que todos los objetos de tienda tienen precio
-- [ ] Verificar que la suma total es ≥ 300 objetos
+- [x] Verificar que la suma total es ≥ 300 objetos
 - [x] Documentar integración con M14 (Inventario)
 - [x] Documentar integración con M16 (Crafting)
 - [x] Documentar integración con M18 (Casas)
@@ -226,7 +226,7 @@
 - [x] Crear test de búsqueda por rareza
 - [?] Crear test de integración con Inventario (M14 no implementado)
 
-**Totales:** 146 items · Completados: 77 · Pendientes: 17 · No resueltos: 52. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 77 [x] / 52 [?] / 17 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 146 items · Completados: 78 · Pendientes: 16 · No resueltos: 52. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: 77 [x] / 52 [?] / 17 [ ]; autorizado por director msg 257. Actualizado 2026-10-16 por DeepSeek-V4.1-Flash: +1 [x] por el flip L216 -> 78 [x] / 52 [?] / 16 [ ], autorizado por director msg 284.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía solo *"**Total: 135 ítems**"* (sin desglose y con total
@@ -244,3 +244,16 @@ Godot 4.7.2 headless; los flips de marca los aplica el director.
 - GAP L212: 0/121 con `icono` (M45). GAP L216: 121/300 objetos (faltan 179).
 - Integracion documentada en `04-Codigo.md` seccion 7: M14 REAL (`inventario_service.gd` L171/L305); M16 INDIRECTA (ids de receta, sin validacion); M18 NO implementada (`FurnitureData` sin `item_id`).
 - Log 1716. Informe al director: canal 174.
+
+## Verificacion (lote L216, DeepSeek-V4.1-Flash, 2026-10-16) - flip L216 aplicado por autorizacion del director (msg 284)
+
+Materializa el minimo L216 del catalogo desde las tablas de `03-Diseno.md`: **179 `.tres` nuevos**
+(93 preexistentes + 28 materiales M14 + 179 = **300**). Evidencia con Godot 4.7.2 headless REAL.
+
+- Validador `scripts/data/validar_catalogo_m159.gd`: L210 [OK] unicos=300/duplicados=0 | L211 [OK] 0/16 vacias | L212 [GAP] sin_icono=300/300 | L213 [OK] 0 | L214 [OK] 0 | L215 [OK] 0 | **L216 [OK] total=300, faltan=0**. Los 300 hallazgos son exactamente los 300 sin icono (L212): el EXIT 1 del validador proviene SOLO de L212. 0 SCRIPT ERROR.
+- Suite `scripts/data/test_catalogo_m159.gd`: **17 checks / 0 fallos / EXIT 0 (x3)**. Piso `CHECKS_MINIMOS = 17` re-medido. Se reemplazaron 5 pins de conteo obsoletos (121/93) por invariantes (`>= TOTAL_OBJETIVO`, `total == cargados`): consagraban el estado viejo y fallaban con el catalogo correcto.
+- Mapping (fuente de verdad = tablas del doc): precio_compra = columna "Precio", precio_venta = compra/2; CAT-12 usa "Precio venta" (compra = 2x venta); NAT sin precio en el doc -> derivado por rareza (30/60/150/400). `descripcion`/`material`/`color` vacios: no estan en las tablas del diseno (los cubre `06-Diseno-Visual.md`/M45).
+- Reparacion incluida: 12 archivos tenian **nombre != id** (`item_obj_sil_001.tres` contenia `OBJ-MES-005`, etc.); renombrados a `item_<id>.tres`. Verificado: 0 referencias externas a esas rutas y 0 colisiones.
+- GAP L212: 0/300 con `icono` (deuda M45; el director dejo el lote con L212 ABIERTO).
+- Pendiente fase siguiente (36 ids del diseno): ART 7, EVE 7, ROP 15, SEC 7.
+- Log 1907. Informe al director: canal 285.

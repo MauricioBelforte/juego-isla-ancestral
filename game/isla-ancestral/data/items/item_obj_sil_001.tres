@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-MES-005"
+id = "OBJ-SIL-001"
 nombre = "Silla de madera"
-descripcion = "Silla rústica de madera"
+descripcion = ""
 categoria = 0
 subcategoria = "SILLAS"
 tamano = Vector2i(1, 1)
@@ -18,8 +18,8 @@ precio_venta = 15
 rareza = 0
 apilable = false
 stack_max = 1
-material = "Madera"
-color = "#8B6914"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true

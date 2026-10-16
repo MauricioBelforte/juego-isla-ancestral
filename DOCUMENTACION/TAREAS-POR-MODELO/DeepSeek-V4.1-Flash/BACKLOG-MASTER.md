@@ -1561,3 +1561,15 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - Pedido al director: alcance (179 vs 214), si se acepta L212 abierto, y mapping de enums. Sin esa decision NO se generan `.tres`.
 - 0 flips / 0 commits / 0 push. Pool de canal: cabeza **284**. Tracker -> 282.
 - **Proxima:** mensajes con NN > **282** (entrantes del director).
+
+## 2026-10-16 15:31 (GMT-3) - M159: lote L216 ejecutado (179 .tres, total 300) - resp. msg 285
+
+- [x] Log reservado: **1907** - M159 lote L216 (179 `.tres` desde `03-Diseno.md`). Head post = 1908.
+- **msg 284**: alcance 179 / L212 abierto / mapping mio / flip L216 autorizado.
+- **Antes -> despues:** `data/items` 121 -> **300** (272 OBJ + 28 M14). L216: 121 -> **300 [OK]**. L212 300/300 GAP (M45).
+- Validador EXIT 1 **solo por L212** (300 hallazgos = 300 iconos). Suite 17/0 EXIT 0 x3 (5 pins obsoletos -> invariantes).
+- Reparados 12 `.tres` con **nombre != id** (renombrados a `item_<id>.tres`; 0 refs externas).
+- Correccion: diseno = **308 ids unicos** (no 307; `OBJ-HER-0017` truncado por regex) -> faltaban **215**.
+- `05-Checklist.md`: L216 [ ]->[x]; Totales 77/52/17 -> **78/52/16**.
+- **Pendiente:** commit pathspec explicito (pedido al director); fase siguiente 36 ids (ART 7, EVE 7, ROP 15, SEC 7).
+- **Proxima:** mensajes entrantes con NN > **284**.

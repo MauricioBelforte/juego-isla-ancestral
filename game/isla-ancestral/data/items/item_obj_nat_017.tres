@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-NAT-017"
+nombre = "Meteorito"
+descripcion = ""
+categoria = 8
+subcategoria = "ROCAS"
+tamano = Vector2i(2, 2)
+interactivo = true
+interacciones = [9, 12]
+fuente = ""
+precio_compra = 400
+precio_venta = 200
+rareza = 3
+apilable = false
+stack_max = 1
+material = ""
+color = ""
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

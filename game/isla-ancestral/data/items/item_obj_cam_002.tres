@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-MES-010"
+id = "OBJ-CAM-002"
 nombre = "Cama doble"
-descripcion = "Cama de dos plazas"
+descripcion = ""
 categoria = 0
 subcategoria = "CAMAS"
 tamano = Vector2i(2, 2)
@@ -15,11 +15,11 @@ interacciones = [2]
 fuente = ""
 precio_compra = 200
 precio_venta = 100
-rareza = 1
+rareza = 0
 apilable = false
 stack_max = 1
-material = "Madera"
-color = "#A0522D"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true

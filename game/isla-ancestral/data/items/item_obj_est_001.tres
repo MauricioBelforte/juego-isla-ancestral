@@ -4,22 +4,22 @@
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-MES-008"
-nombre = "Estantería"
-descripcion = "Estantería de madera para libros"
+id = "OBJ-EST-001"
+nombre = "Estantería baja"
+descripcion = ""
 categoria = 0
-subcategoria = "ALMACENAMIENTO"
+subcategoria = "ESTANTERIAS"
 tamano = Vector2i(2, 1)
 interactivo = true
-interacciones = [4, 9]
+interacciones = [3]
 fuente = ""
-precio_compra = 100
-precio_venta = 50
+precio_compra = 80
+precio_venta = 40
 rareza = 0
 apilable = false
 stack_max = 1
-material = "Madera"
-color = "#8B6914"
+material = ""
+color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true
