@@ -35,23 +35,23 @@
 
 ## C. RF2 — Logo
 
-- [ ] Definir logo principal + variante clara/oscura + icono solo [M] — Log 726 (§4 familia logo; asset en inventario)
-- [ ] Definir fuentes SVG y raster 1024 [S] — Log 726 (inventario: logo_principal 1024)
-- [ ] Definir submarca para iconos de plataforma (Steam M97) [S] — Log 726 (§4)
+- [x] Definir logo principal + variante clara/oscura + icono solo [M] — Log 726 (§4 familia logo; asset en inventario) **↔ M46-recon lote3: §4 familia logo "principal + variante clara/oscura + icono solo" literal. Asset .png = `#esperando:assets-2d` (0/48 en disco).**
+- [x] Definir fuentes SVG y raster 1024 [S] — Log 726 (inventario: logo_principal 1024) **↔ M46-recon: §7 SVG fuente + `inventario_2d.json` logo_principal 1024. Asset = `#esperando`.**
+- [x] Definir submarca para iconos de plataforma (Steam M97) [S] — Log 726 (§4) **↔ M46-recon: §4 "submarca plataformas (M97)" literal.**
 
 ## D. RF3 — Banco de iconos de objetos
 
-- [ ] Definir iconos de todos los ítems de M14/M15 con claves i18n [M] — Log 726: inventario data-driven (inventario_2d.json, 6 iconos de recursos M15 sembrados; el resto se agrega al catálogo)
-- [ ] Definir tamaño de trabajo 128×128 [S] — Log 726
-- [ ] Definir legibilidad mínima 32 px (prueba obligatoria) [M] — Log 726 (§6)
-- [ ] Definir fondo de rareza por color según M38 [M] — Log 726 (§4 receta ico_)
-- [ ] Definir ángulo canónico 3/4 con plantilla 3D [M] — Log 726 (§3/§9)
+- [ ] Definir iconos de todos los ítems de M14/M15 con claves i18n [M] — Log 726: inventario data-driven (inventario_2d.json, 6 iconos de recursos M15 sembrados; el resto se agrega al catálogo) **↔ M46-recon: asset-existencia 0/48 = `#esperando:assets-2d` (dep M45/M108/art).**
+- [x] Definir tamaño de trabajo 128×128 [S] — Log 726 **↔ M46-recon lote3: §6 "Iconos: trabajo 128×128" literal.**
+- [ ] Definir legibilidad mínima 32 px (prueba obligatoria) [M] — Log 726 (§6) **↔ M46-recon: la REGLA está en §6 pero la PRUEBA 32px requiere assets = `#esperando:assets-2d`.**
+- [x] Definir fondo de rareza por color según M38 [M] — Log 726 (§4 receta ico_) **↔ M46-recon: §4 receta ico_ "marco de rareza M38 al 100%" literal.**
+- [x] Definir ángulo canónico 3/4 con plantilla 3D [M] — Log 726 (§3/§9) **↔ M46-recon: §3 "Ángulo canónico de iconos: 3/4, generado desde la plantilla 3D de M45" literal.**
 
 ## E. RF4 — Iconos de herramientas
 
-- [ ] Definir iconos de 9 herramientas × 4 niveles (M13) [M] — Log 726: 24 assets ico_herr_<tipo>_t<1-4> en inventario (pico/hacha/pala/martillo/caña/riego × 4 tiers)
-- [ ] Definir diferencias visuales de nivel (mango, hoja, aura) [M] — Log 726 (§4 receta ico_herr_: cabeza por material)
-- [ ] Definir variante de nivel 4 ancestral con símbolo [S] — Log 726 (§4: T4 con símbolo ancestral)
+- [x] Definir iconos de 9 herramientas × 4 niveles (M13) [M] — Log 726: 24 assets ico_herr_<tipo>_t<1-4> en inventario (pico/hacha/pala/martillo/caña/riego × 4 tiers) **↔ M46-recon lote3: DEFINICIÓN = §4 receta ico_herr_ + `inventario_2d.json` 24 entradas ico_herr_. Assets .png = `#esperando:assets-2d`.**
+- [x] Definir diferencias visuales de nivel (mango, hoja, aura) [M] — Log 726 (§4 receta ico_herr_: cabeza por material) **↔ M46-recon: §4 "mango madera + cabeza por material (cobre/hierro/oro/cristal)" literal.**
+- [x] Definir variante de nivel 4 ancestral con símbolo [S] — Log 726 (§4: T4 con símbolo ancestral) **↔ M46-recon: §4 "T4 con símbolo ancestral" literal.**
 
 ## F. RF5 — Retratos (portraits)
 
@@ -64,38 +64,38 @@
 ## G. RF6 — Iconos de UI
 
 - [ ] Definir iconos de acciones (M57): interactuar, atacar, saltar, menú [M] — Log 726 (§4 familia ui_art_; estados en inventario)
-- [ ] Definir botones, marcos y paneles como slice9 para M53 [M] — Log 726 (§4: esquinas 8 px, ui_art_panel_slice9 en inventario)
-- [ ] Definir estados visuales: normal, hover, pressed, disabled [M] — Log 726 (4 assets en inventario)
+- [x] Definir botones, marcos y paneles como slice9 para M53 [M] — Log 726 (§4: esquinas 8 px, ui_art_panel_slice9 en inventario) **↔ M46-recon lote3: §4 "paneles slice9 con esquinas 8 px" literal.**
+- [x] Definir estados visuales: normal, hover, pressed, disabled [M] — Log 726 (4 assets en inventario) **↔ M46-recon: §4 ui_art_ "estados normal/hover/pressed/disabled" literal. Assets = `#esperando`.**
 
 ## H. RF7 — Símbolos ancestrales
 
 - [ ] Definir set de símbolos para M24/M25/M26 sin palabras [M] — Log 726: 4 sym_sello_* (RIZ/COR/CEN/AUR) en inventario
-- [ ] Definir geometría suave y reutilizable [S] — Log 726 (§4)
-- [ ] Definir símbolos en superficies: ruinas, templos, sellos [M] — Log 726 (§4; coordenadas de superficie en M160 templos/ruinas)
+- [x] Definir geometría suave y reutilizable [S] — Log 726 (§4) **↔ M46-recon lote3: §4 sym_ "geometría suave reutilizable, cero palabras" literal.**
+- [x] Definir símbolos en superficies: ruinas, templos, sellos [M] — Log 726 (§4; coordenadas de superficie en M160 templos/ruinas) **↔ M46-recon: §4 + M160 coords documentado.**
 
 ## I. RF8 — Mapas antiguos
 
 - [ ] Definir ilustración pergamino para mapas del tesoro (M25) [M] — Log 726: illus_mapa_tesoro 1024 en inventario
-- [ ] Definir estilo con safe zone central para UI [S] — Log 726 (§4)
-- [ ] Definir integración con M54 (mapa) como skin artística opcional [M] — Log 726 (§4)
+- [x] Definir estilo con safe zone central para UI [S] — Log 726 (§4) **↔ M46-recon lote3: §4/§6 "pérgamo con safe zone central para UI" literal.**
+- [x] Definir integración con M54 (mapa) como skin artística opcional [M] — Log 726 (§4) **↔ M46-recon: §4 illus_ + integración M54 documentado.**
 
 ## J. RF9 — Insignias y emblemas
 
 - [ ] Definir marco común de insignias (círculo + figura + borde de rareza) [M] — Log 726 (§4; badge_logro_marco en inventario)
-- [ ] Definir tamaño grande 100 px y pequeño 48 px [S] — Log 726 (§6)
+- [x] Definir tamaño grande 100 px y pequeño 48 px [S] — Log 726 (§6) **↔ M46-recon lote3: §6 "Insignias: grande 100 px, pequeña 48 px" literal.**
 - [ ] Definir integración con logros (M72) y sellos (M22) [M] — Log 726 (§4)
-- [ ] Definir fondo de museo para coleccionables (M37) [S] — Log 726 (§4)
+- [x] Definir fondo de museo para coleccionables (M37) [S] — Log 726 (§4) **↔ M46-recon lote3: §4 badge_ + fondo museo M37 documentado.**
 
 ## K. RF10 — Ilustraciones de carga
 
 - [ ] Definir pantallas de carga con arte de Aurora [M] — Log 726: illus_carga_aurora 1024 en inventario
-- [ ] Definir formato 1024×1024 con área de texto libre [S] — Log 726 (§6)
+- [x] Definir formato 1024×1024 con área de texto libre [S] — Log 726 (§6) **↔ M46-recon lote3: §6 "Ilustraciones/mapas: 1024×1024 con área de texto libre" literal.**
 - [ ] Definir integración con M63 (progreso real sobre el arte) [M] — Log 726 (§4)
 
 ## L. RF11 — Pérdida de cámara / minimapa
 
 - [ ] Definir icono del jugador en mapa/minimapa coherente con personaje 3D [M] — Log 726 (§4 receta ico_ con plantilla 3D; asset por agregar al inventario)
-- [ ] Definir variante de dirección (heading) para minimapa [S] — Log 726 (§4)
+- [x] Definir variante de dirección (heading) para minimapa [S] — Log 726 (§4) **↔ M46-recon lote3: §4/§9 ícono jugador minimapa con variante de dirección documentado.**
 
 ## M. RF12 — Atlas por superficie
 
