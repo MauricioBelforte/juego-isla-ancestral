@@ -5,6 +5,9 @@
 
 # 05-Checklist.md — Módulo 49: Iluminación
 
+## Reserva actual
+- **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-16 18:30.** Reclamo QA visual de los 38 `[?]` (director N650, cola M49). Medición: 105 `[x]` / 0 `[ ]` / 38 `[?]` = 143. Lote 1 = 5 `[?]` priorizados (corrección a valor real de código + artefactos faltantes). Reclamo en 4 registros: CHECKLIST-GLOBAL fila 49 + este checklist + GUIA-ORDEN 08 + ESTADO-PARALELO.
+
 ## A. Problema y objetivos
 
 - [x] Definir el problema: sin sistema de luz el voxel degenera en sombras quebradas y coste desbordado [S]

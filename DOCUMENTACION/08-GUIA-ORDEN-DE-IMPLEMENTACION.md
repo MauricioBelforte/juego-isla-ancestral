@@ -33,6 +33,7 @@
 
 
 | Módulo | Estado | Agente | Fase | Visión | Entrada | Salida | Archivos afectados |
+| M49 Iluminación (QA visual, cola N650 del director) | 🔵 En curso (reclamo 2026-10-16 18:30) | agnes-3-flash (Sapiens AI) / Kilo Code | F6 (polish visual) | V2 | 105/143 (38 `[?]`); director N650 cola M49→M41→M46 | Lote 1: 5 `[?]` priorizados (corrección a valor real de código: shadow_max_distance=120, view_distance=1024, lod_split=5; + artefacto `lighting_budget.json` ausente). Capturas antes/después. | `DOCUMENTACION/49-Iluminacion/plan-actual/`, `game/isla-ancestral/scripts/world/day_night_cycle.gd`, `data/light/` |
 
 |---|---|---|---|---|---|---|---|
 | M112 Testing Automático (encargo tras micro-lote) | 🟡 Liberado 2026-10-16 05:50 (216/225; 9 [?] con dueño; QA §21.8 pendiente) | DS-V4.1-Flash-Opencode (OpenCode) | F0/transversal | V0 | M111 ✅ | CERRADO: 5 [ ] → [x] con artefactos reales (farming 33/0, autoload_overrides, fixtures ×3 → smoke 20/0) + H123 M29 (39/0); CI del encargo clasificado (fallos ajenos documentados, Log 1903) | DOCUMENTACION/112-Testing-Automatico/plan-actual/, game/isla-ancestral/tests/ (fixtures/, helpers/), Logs/1903-* |

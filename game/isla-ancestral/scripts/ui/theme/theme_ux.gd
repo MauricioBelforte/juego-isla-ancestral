@@ -10,14 +10,14 @@ class_name ThemeUx
 const BASE_SIZE := Vector2i(1920, 1080)
 
 ## Paleta pastel
-const COLOR_BG_ARENA := Color(0.95, 0.90, 0.82)       # Fondo arena
-const COLOR_ACCENT_OCRE := Color(0.72, 0.55, 0.30)    # Acento ocre
-const COLOR_TEXT_DARK := Color(0.25, 0.18, 0.12)       # Texto marrón oscuro
-const COLOR_HIGHLIGHT_GOLD := Color(0.85, 0.72, 0.35)  # Highlight dorado suave
-const COLOR_HOVER := Color(0.88, 0.82, 0.70)           # Hover suave
-const COLOR_PRESSED := Color(0.78, 0.72, 0.60)         # Presionado
-const COLOR_DISABLED := Color(0.65, 0.60, 0.55)        # Deshabilitado
-const COLOR_FOCUS_RING := Color(0.85, 0.72, 0.35, 0.8) # Anillo de foco
+const COLOR_BG_ARENA := Color(0.11, 0.12, 0.18, 0.94)  # D102: fondo noche opaco (antes arena clara ilegible con texto blanco)
+const COLOR_ACCENT_OCRE := Color(0.87, 0.66, 0.33)     # D102: acento ambar mas vivo
+const COLOR_TEXT_DARK := Color(0.94, 0.92, 0.85)       # D102: texto cream claro (dark theme)
+const COLOR_HIGHLIGHT_GOLD := Color(0.92, 0.76, 0.40)  # D102: dorado mas vivo
+const COLOR_HOVER := Color(0.20, 0.22, 0.32)           # D102: hover dark
+const COLOR_PRESSED := Color(0.16, 0.17, 0.26)         # D102: presionado dark
+const COLOR_DISABLED := Color(0.40, 0.42, 0.50)        # D102: deshabilitado dark
+const COLOR_FOCUS_RING := Color(0.92, 0.76, 0.40, 0.8) # D102: anillo dorado vivo
 
 ## Rutas de fuentes (M88) — load_dynamic_font para Godot 4.7
 const PATH_FONT_BODY := "res://assets/fonts/Nunito-Regular.ttf"
@@ -42,7 +42,8 @@ var font_title: Font = null
 
 ## Construye el tema desde cero
 func build() -> Theme:
-	base = Theme.new()
+	_aplicar_estilos_hud_runtime()
+	base = Theme.new()  # asigna la propiedad de clase (los _setup_* la usan)
 	_load_fonts()
 
 	# Colores base
@@ -391,3 +392,31 @@ func _setup_focus_styles() -> void:
 	base.set_stylebox("focus", "Button", focus_style)
 	base.set_stylebox("focus", "LineEdit", focus_style)
 	base.set_stylebox("focus", "OptionButton", focus_style)
+
+
+## D102: aplicacion de estilos HUD por codigo (evita tocar el .tscn parseable)
+func _aplicar_estilos_hud_runtime() -> void:
+	if Engine.is_editor_hint():
+		return
+	var tree := Engine.get_main_loop() as SceneTree
+	if tree == null:
+		return
+	if not tree.node_added.is_connected(_on_nodo_hud_agregado):
+		tree.node_added.connect(_on_nodo_hud_agregado)
+
+
+func _on_nodo_hud_agregado(nodo: Node) -> void:
+	if nodo.name == "ControlsLabel" and nodo is Label:
+		var sb := StyleBoxFlat.new()
+		sb.bg_color = Color(0.09, 0.10, 0.15, 0.88)
+		sb.set_corner_radius_all(8)
+		sb.border_color = Color(0.87, 0.66, 0.33, 0.45)
+		sb.set_border_width_all(1)
+		sb.content_margin_left = 10.0
+		sb.content_margin_top = 8.0
+		sb.content_margin_right = 12.0
+		sb.content_margin_bottom = 10.0
+		(nodo as Label).add_theme_stylebox_override("normal", sb)
+		(nodo as Label).add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))
+		(nodo as Label).add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+		(nodo as Label).add_theme_constant_override("outline_size", 4)

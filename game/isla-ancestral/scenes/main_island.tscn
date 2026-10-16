@@ -16,7 +16,8 @@
 [ext_resource type="Script" path="res://scripts/fauna/tortuga_npc.gd" id="14_tortuga"]
 [ext_resource type="Script" path="res://scripts/fauna/cangrejo_npc.gd" id="15_cangrejo"]
 [ext_resource type="Script" path="res://scripts/fauna/jabali_npc.gd" id="16_jabali"]
-[ext_resource type="Script" path="res://scripts/fauna/gaviota_npc.gd" id="17_gaviota"][ext_resource type="Script" path="res://scripts/vegetacion/vegetation_spawner.gd" id="18_vegspawn"]
+[ext_resource type="Script" path="res://scripts/fauna/gaviota_npc.gd" id="17_gaviota"]
+[ext_resource type="Script" path="res://scripts/vegetacion/vegetation_spawner.gd" id="18_vegspawn"]
 [ext_resource type="Script" path="res://scripts/fauna/fauna_spawner.gd" id="19_faunaspawn"]
 
 
@@ -50,6 +51,8 @@ adjustment_enabled = true
 adjustment_brightness = 1.02
 adjustment_contrast = 1.06
 adjustment_saturation = 1.12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_controls_d102"]
 
 [node name="Main" type="Node3D" unique_id=1675065870]
 script = ExtResource("1_main")
@@ -104,12 +107,9 @@ text = "FPS: 0"
 [node name="ControlsLabel" type="Label" parent="UI" unique_id=1997514694]
 offset_left = 10.0
 offset_top = 50.0
-offset_right = 360.0
-offset_bottom = 165.0
-theme_override_colors/font_color = Color(0.95, 0.93, 0.86)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
-theme_override_constants/outline_size = 5
-theme_override_styles/normal = SubResource("StyleBoxFlat_controls_d102")
+offset_right = 350.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Controles:
 WASD - Mover
 Scroll - Zoom in/out
