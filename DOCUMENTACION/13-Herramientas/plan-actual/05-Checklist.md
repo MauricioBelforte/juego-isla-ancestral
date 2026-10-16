@@ -5,6 +5,8 @@
 
 > **Reserva actual (2026-09-10 23:50):** 🟡 Liberado — iter 4 cerrada 2026-09-11 00:55 (**GLM-5.3 (Kilo Code)**, Log 815: persistencia hotbar M59 + cableado M13→M15). Fase 3 previa cerrada por Hy3 (Kilo) 2026-08-28 (relevo autorizado del usuario).
 
+> **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-16 23:20.** Reclamo M13 (doc refresh, Tarea siguiente del director N680). **Medición real: 84 [x] / 34 [ ] / 2 [?] = 120** (coincide con la fila GLOBAL 13). **Drift 0:** los `[x]` son válidos — la funcionalidad está en `scripts/tools/tool_data.gd` (catálogo 9×4) + `tool_controller.gd` (try_extract/try_place/cableado M15) + `tool_feedback.gd` + `tools_save_provider.gd` + `test_herramientas.gd`. **Doc-stale corregido:** el `04-Codigo.md` §2 listaba 4 archivos obsoletos (`tool.gd`, `tool_item.gd`, `tool_registry.gd`, `tool_actions.gd`) que se **consolidaron** — se actualizó el mapa viejo→real (barrido #678). Los 34 `[ ]` son deuda con dueño externo (M16/M33/M35/M50/M12/M71/M22/M45/M19/M53/M26/M44/M59) — no bloquean el módulo. Reclamo en 4 registros: CHECKLIST-GLOBAL fila 13 + este checklist + GUIA-ORDEN 08 + ESTADO-PARALELO.
+
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente (con dueño entre paréntesis cuando aplica) · [?] no resuelto.
 
 ## A. Requisitos del módulo (12)

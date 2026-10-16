@@ -7,16 +7,26 @@
 
 Módulo que **especifica el sistema de herramientas** (catálogo, durabilidad, contratos, mejora) a implementar en el prototipo del hito M1. No crea scripts todavía. Sin 06/07 aún (los tests de herramientas entran en M1: extracción, contratos, reparación).
 
-## 2. Archivos involucrados (implementación prevista)
+## 2. Archivos involucrados
+
+**Layout REAL en disco (refresh agnes-3-flash 2026-10-16, doc-stale detectado en barrido #678):** el diseño original de §2 se **consolidó** al implementar — 4 de los 6 archivos previstos quedaron fusionados. Mapeo viejo → real:
 
 ```
-scripts/tools/tool.gd                 → Resource base (Tool)
-scripts/tools/tool_item.gd            → instancia con durabilidad (M14 integra)
-scripts/tools/tool_registry.gd        → catálogo estático (ServiceLocator M07)
-scripts/tools/tool_actions.gd         → dispatch de acciones por herramienta
-scripts/tools/tool_feedback.gd        → sonidos/partículas
-data/tools/tool_catalog.tres          → tabla completa (9 × 4 niveles)
+# Previsto (diseño original)             →  REAL en disco (consolidado)
+scripts/tools/tool.gd (Resource Tool)     →  scripts/tools/tool_data.gd   (class_name ToolData: catálogo 9×4, STATS, nombre_id)
+scripts/tools/tool_item.gd (instancia)    →  scripts/tools/tool_data.gd   (instancia + durabilidad; M14 integra)
+scripts/tools/tool_registry.gd (catálogo) →  scripts/tools/tool_data.gd   (catálogo estático; ServiceLocator M07)
+scripts/tools/tool_actions.gd (dispatch)  →  scripts/tools/tool_controller.gd (try_extract/try_place + dispatch + cableado M15)
+scripts/tools/tool_feedback.gd            →  scripts/tools/tool_feedback.gd (OK: sonidos/partículas)
+data/tools/tool_catalog.tres (tabla)      →  tool_data.gd STATS por código (el .tres se difirió a M16/M159)
+# Adicional real (no estaba en el diseño original):
+scripts/tools/preview_herramientas.gd     →  preview/mira
+scripts/tools/tools_save_provider.gd      →  persistencia M59 "herramientas_m13"
+scripts/tools/test_herramientas.gd        →  test headless (36 combos, 0 fallos)
 ```
+
+> Nota: los 4 nombres obsoletos (`tool.gd`, `tool_item.gd`, `tool_registry.gd`, `tool_actions.gd`) **no existen** en `scripts/tools/` (0 hits de sus clases) — el contenido vive en `tool_data.gd` + `tool_controller.gd`. El `05-Checklist.md` M13 (84/120) es válido: los `[x]` apuntan a la funcionalidad real en los archivos del mapa de arriba.
+
 
 ## 3. Contratos de integración
 
