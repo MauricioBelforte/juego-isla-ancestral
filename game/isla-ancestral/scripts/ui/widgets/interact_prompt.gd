@@ -8,7 +8,7 @@ class_name InteractPrompt
 
 ## ── Configuración ───────────────────────────────────────
 const COLOR_TEXT := Color(0.25, 0.18, 0.12)
-const COLOR_BG := Color(0.95, 0.90, 0.82, 0.85)
+const COLOR_BG := Color(0.09, 0.10, 0.15, 0.88)
 const COLOR_KEY := Color(0.72, 0.55, 0.30)
 
 ## ── Nodos ──────────────────────────────────────────────

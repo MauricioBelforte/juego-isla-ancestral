@@ -8,6 +8,12 @@
 ## Reserva actual
 - **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-16 18:30.** Reclamo QA visual de los 38 `[?]` (director N650, cola M49). Medición: 105 `[x]` / 0 `[ ]` / 38 `[?]` = 143. Lote 1 = 5 `[?]` priorizados (corrección a valor real de código + artefactos faltantes). Reclamo en 4 registros: CHECKLIST-GLOBAL fila 49 + este checklist + GUIA-ORDEN 08 + ESTADO-PARALELO.
 
+**Captura V2 del perfil (director N669, 2026-10-16) — HECHA:**
+- Juego lanzado via godot-mcp (`main_island.tscn`, D3D12 Forward+, ventana `isla-ancestral (DEBUG)`, **FPS 60**, solo warnings — 0 errores duros).
+- `[DayNightCycle]` data-driven cargado (curvas `data/light/`, ramps sun/sky M49 iter.3, fog_curve, season_mod).
+- **2 capturas V2 en `tools/mcp/godot-mcp/capturas/49-Iluminacion/`:** `cap_49_perfil-day-lote1_2026-10-16_20-50.png` (fase **DIA**: cielo azul, isla clara, terreno+agua+fauna+HUD) y `cap_49_perfil-fog-transition-lote1_2026-10-16_20-55.png` (transición **fog/desaturación**: cielo beige, terreno cálido, agua teal).
+- Log confirma `fase_cambio: DIA -> ATARDECER` → el perfil **transiciona en tiempo real**. Evidencia QA: renderiza 2 fases a FPS 60; `lighting_budget.json` documenta los parámetros. Los 33 `[?]` restantes = sub-luz de contenido (noche L33, faroles M90, hogueras M52, cueva M11) — dep. externa, no flippeable por la captura.
+
 ## A. Problema y objetivos
 
 - [x] Definir el problema: sin sistema de luz el voxel degenera en sombras quebradas y coste desbordado [S]

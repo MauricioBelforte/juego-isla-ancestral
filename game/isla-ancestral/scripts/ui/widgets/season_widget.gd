@@ -7,7 +7,7 @@ class_name SeasonWidget
 
 ## ── Colores ──────────────────────────────────────────────
 const COLOR_TEXT := Color(0.25, 0.18, 0.12)
-const COLOR_BG := Color(0.95, 0.90, 0.82, 0.7)
+const COLOR_BG := Color(0.09, 0.10, 0.15, 0.8)
 
 ## ── Nodos ──────────────────────────────────────────────
 var _icon_label: Label

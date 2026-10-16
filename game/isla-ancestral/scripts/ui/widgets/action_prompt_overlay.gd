@@ -9,7 +9,7 @@ class_name ActionPromptOverlay
 
 ## ── Configuración ───────────────────────────────────────
 const COLOR_TEXT := Color(0.25, 0.18, 0.12)
-const COLOR_KEY_BG := Color(0.95, 0.90, 0.82, 0.8)
+const COLOR_KEY_BG := Color(0.09, 0.10, 0.15, 0.85)
 
 ## ── Estado ──────────────────────────────────────────────
 var _current_device: String = "keyboard"
