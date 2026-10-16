@@ -8,8 +8,8 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Liberada (iter. 4 lote 1 cielo/estrellas/90 s cerrada — 124 [x] / 0 [ ] / 45 [?])
-- Agente: GLM-5.3 / Kilo Code (iter. 3) + mimo-v2.5 reconciliación + Step-5-WorkBuddy (iter. 4 lote 1, Log 1878)
+- Estado: 🟡 Liberada (iter. 4 lote 1 cielo/estrellas/90 s + lote 2 niebla/estacion cerrados — 125 [x] / 0 [ ] / 44 [?])
+- Agente: GLM-5.3 / Kilo Code (iter. 3) + mimo-v2.5 reconciliación + Step-5-WorkBuddy (iter. 4 lote 1 Log 1878 + lote 2 Log 1884)
 - Fase: 5 - Base de producción
 - Dificultad: 3
 - Visión: V0 (auditoría; sin QA visual)
@@ -96,7 +96,7 @@
 
 - [x] `day_curve.tres`: 24 puntos sol [S] → data/light/day_curve.tres + test_curvas_luz 0 fallos
 - [x] `sky_curve.tres`: 24 puntos cielo [S] → ídem
-- [?] `season_mod.tres`: 4 mods estacionales [S] → NO existe; curva única anual (K.2 visual fino) | AUDIT 2026-10-14 (step-5-kilocode): NO existe (0 hits de season_mod); hay una curva anual única. K.2 visual fino.
+- [x] `season_mod.tres`: 4 mods estacionales [S] → IMPLEMENTADO — `data/light/season_mod.tres` (Curve, dominio 0-3: Primavera 1.0, Verano 1.1, Otoño 0.95, Invierno 0.85; generado con `gen_season_mod.gd`) y consumido por `day_night_cycle.gd` (`mod_estacional()` sobre day_curve = sol y sky_curve = ambiente/cielo, con piso anti-oscuridad 0.15 §7; estación de M29 vía `get_estacion()`/`estacion_cambio`). Test: `test_niebla_estacion_m31.gd` (47 checks / 0 fallos / EXIT 0 x3). | FLIP 2026-10-16 (Step-5-WorkBuddy, lote 2, Log 1884): gap propio cerrado — el archivo NO existía ("curva única anual"); hoy existe y se consume por estación. | AUDIT 2026-10-14 (step-5-kilocode): NO existe (0 hits de season_mod); hay una curva anual única. K.2 visual fino.
 - [x] `fase_umbral.tres`: umbrales [S] → fase_umbral.json (formato JSON por iter. 2, mismo rol)
 - [x] Interpolación lerp entre vecinos [S] → `Curve.sample()` interpola nativamente entre puntos (dominio 0-1, §9.60)
 - [x] Sin cambios de golpe (tween por minuto) [S] → tween 1 s por hora_cambio (minuto a minuto no dispara; transición por hora con curvas suaves)
@@ -188,7 +188,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales (reconciliación mimo-v2.5, 2026-09-19; actualizado iter. 4 lote 1 Step-5-WorkBuddy 2026-10-15, Log 1878):** 169 ítems · **124 `[x]` · 0 `[ ]` · 45 `[?]`** (lote 1 cerro 4 [?] con implementacion real: P6 estrellas, D-canvas estrellas, K-90 s, K-Sky procedural — test_cielo_estrellas_m31.gd 39 checks / 0 fallos / EXIT 0 x3). Los 45 restantes son: ~5 escénicos V2 (assets inexistentes), ~17 contenido de otros módulos, ~21 duplicados entre secciones, ~2 tests, ~2 gaps propios M31.
+**Totales (reconciliación mimo-v2.5, 2026-09-19; actualizado iter. 4 lote 1 Step-5-WorkBuddy 2026-10-15 Log 1878 + lote 2 2026-10-16 Log 1884):** 169 ítems · **125 `[x]` · 0 `[ ]` · 44 `[?]`** (lote 1 cerro 4 [?] con implementacion real: P6 estrellas, D-canvas estrellas, K-90 s, K-Sky procedural — test_cielo_estrellas_m31.gd 39/0/EXIT 0 x3; lote 2 cerro el gap propio E-season_mod + el gap de consumo de niebla — los ítems de niebla siguen [?] por el nodo FogVolume externo). Los 44 restantes son: ~5 escénicos V2 (assets inexistentes, M45/M18), ~17 contenido de otros módulos, ~21 duplicados entre secciones, ~2 tests de features externas (I.36 nubes, I.37 farol — se escriben con la feature del dueño). Los 2 gaps propios M31 quedaron cerrados en el lote 2.
 **Nota histórica:** diseño original "131 ítems, 0 pendientes" (pre-implementación); iters 1-2 (núcleo+curvas) marcaron 16; esta auditoría tiende el puente formal doc↔código del resto.
 
 ## K. Iteración 1 — Núcleo runtime (GLM Kilo 2026-08-31) — Log 302
@@ -219,7 +219,7 @@
 - [x] `Sky` procedural con gradiente por hora y estrellas alpha 0→100% 20:00-22:00 [C] | AUDIT 2026-10-14 (step-5-kilocode): fase_umbral.json tiene curvas de sol/luna/cielo; el Sky procedural con gradiente por hora es de M45 (K.2). Data parcial, escenico externo. | FLIP 2026-10-15 (Step-5-WorkBuddy, lote 1, Log 1878): IMPLEMENTADO — ProceduralSkyMaterial por hora (sky_energy_multiplier = sky_curve.tres §P5; sky_top_color/sky_horizon_color = sky_color_ramp.tres; ground_* por lerp) en day_night_cycle.gd _asegurar_cielo_procedural L135 + _aplicar_iluminacion L259; material duplicado en runtime (no muta el recurso de la escena). Estrellas: ver L44. Test: test_cielo_estrellas_m31.gd bloque C (13 checks).
 - [?] Luna esférica con textura de fases (M45) [C] | AUDIT 2026-10-14 (step-5-kilocode): luz DirectionalLight3D sin mesh; textura de fases de M45 (K.2).
 - [?] Nubes velo 2D con drift lento y densidad estacional [C] | AUDIT 2026-10-14 (step-5-kilocode): sin implementar (0 hits en scripts/islas ni world). Deuda de M45 (K.2).
-- [?] Niebla por estación/hora (FogVolume ligero ≤120 m) [M] | AUDIT 2026-10-14 (step-5-kilocode): fog_curve.tres existe (data) pero el nodo FogVolume no esta en escenas; la variacion por estacion/hora no esta implementada. Data parcial, nodo ausente.
+- [?] Niebla por estación/hora (FogVolume ligero ≤120 m) [M] | AUDIT 2026-10-14 (step-5-kilocode): fog_curve.tres existe (data) pero el nodo FogVolume no esta en escenas; la variacion por estacion/hora no esta implementada. Data parcial, nodo ausente. | PARCIAL 2026-10-16 (Step-5-WorkBuddy, lote 2, Log 1884): gap de consumo propio cerrado — day_night_cycle.gd carga fog_curve.tres y aplica niebla_densidad(hora) al Environment (base 0.00018 de la niebla marina); el nodo FogVolume volumétrico sigue ausente (K.2, dueño externo M45) y por eso el ítem sigue [?].
 - [?] Prefab de farol con omni 3200K r 8 m y autoswitch por umbral 0.35 [M] | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de prefab de farol con luz omni 3200K en escenas; los 30 hits de 'farol' son de puzzles de cadenas (test_historias.gd). Dueño M18/M45 (K.2).
 - [?] Faroles cada 40 m en poblado (M18) [C] | AUDIT 2026-10-14 (step-5-kilocode): prefab farol inexistente; M18-BIS WorkBuddy esta construyendo casas — coordinar al liberar. Dueno M18/M45.
 - [?] Sincronización lluvia de estrellas con M52 (días 10/25 22:00-23:30) [M] — **precisión QA V2 agnes-3-flash (Log 1052, 2026-09-19): el catálogo M52 (31 eventos, `data/vfx/vfx_catalog.json`) NO tiene evento de lluvia de estrellas/estrellas; la sincronización no puede existir hasta que M52 añada el evento. Dueño M52 (nuevo evento) + M31 (hook de días 10/25).** | AUDIT 2026-10-14 (step-5-kilocode): fase_umbral.json §estrellas tiene la ventana; la sincronizacion con M52 (dias 10/25) es de M74/M52 sin implementar.

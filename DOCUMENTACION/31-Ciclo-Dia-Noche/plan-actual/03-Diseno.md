@@ -82,3 +82,10 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 3. Opción M58 "Noche clara": piso 0.35.
 4. Prohibido: negro puro en ambiente, flash total oscuridad en transiciones.
 5. QA M114: checklist visual nocturno en todas las zonas (nunca "no veo nada").
+
+## Nota de deriva documentada (2026-10-16, Step-5-WorkBuddy - iter. 4 lote 2, Log 1884)
+
+> Registro pedido por el director (msg 51): regla "manda el dato" - se documenta la deriva como deuda SIN reescribir el diseno ni fabricar contenido nuevo.
+
+- **Tabla de componentes de la sec. 3, fila Sky (item B-P3 del checklist)**: el diseno dice "gradiente por hora (24 puntos), energia 0.18-1.0"; el dato real (data-driven) es sky_curve.tres con piso 0.15 en hora profunda (anti-oscuridad sec. 7) y sky_color_ramp.tres (M49) con 9 paradas.
+- **Tabla de componentes de la sec. 3, fila Fog**: el rango "0.08-0.25 por estacion/hora" corresponde al nodo FogVolume volumetrico (K.2, dueno externo M45); el fog del Environment que consume M31 se ancla a la niebla marina autoreada del proyecto (0.00018) y fog_curve.tres gobierna la variacion relativa por hora.

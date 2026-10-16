@@ -51,6 +51,33 @@ var _cielo_mat: ProceduralSkyMaterial = null
 var _estrella_domo: MeshInstance3D = null
 var _estrella_mat: StandardMaterial3D = null
 
+## ── M31 lote 2 (Step-5-WorkBuddy, 2026-10-16, msg 51 del director) ──
+## Niebla por hora (fog_curve.tres, fase_umbral.json §niebla) + modulación
+## estacional (season_mod.tres, diseño §4: "4 multiplicadores por estación
+## (M29) aplicados a ambas curvas"). Cierra los 2 gaps propios de M31
+## (reconciliación 2026-09-19: "fog_curve existe pero no se carga en código"
+## y "season_mod.tres no existe"). Log 1884.
+const RUTA_FOG_CURVA: String = "res://data/light/fog_curve.tres"
+const RUTA_SEASON_MOD: String = "res://data/light/season_mod.tres"
+## Base autoreada de la niebla marina del proyecto (main_island.gd L204:
+## fog_density = 0.00018). fog_curve.tres gobierna la variación RELATIVA por
+## hora (sus valores 0.5-1.3 no son densidad absoluta de Environment). El
+## rango 0.08-0.25 del diseño §3 es del FogVolume volumétrico (K.2, dueño
+## externo M45), no del fog del Environment — drift documentado en Log 1884.
+const FOG_BASE: float = 0.00018
+## Piso anti-oscuridad (regla de oro, diseño §7; test_curvas_luz.gd L70):
+## la modulación estacional NUNCA baja el ambiente de 0.15.
+const PISO_AMBIENTE: float = 0.15
+
+## M31 lote 2: curva de niebla por hora y moduladores estacionales
+var _fog_curve: Curve = null
+var _season_mod: Curve = null
+## Estación vigente (game_clock.get_estacion(): 0 Primavera, 1 Verano,
+## 2 Otoño, 3 Invierno) y última hora aplicada (para re-aplicar al
+## cambiar de estación).
+var _estacion_actual: int = 0
+var _hora_actual: int = 8
+
 
 func _ready() -> void:
 	_cargar_curvas()
@@ -66,12 +93,18 @@ func _ready() -> void:
 		push_warning("[DayNightCycle] DirLightLuna no encontrado en la escena")
 	if env == null:
 		push_warning("[DayNightCycle] WorldEnvironment no encontrado en la escena")
+	# M31 lote 2: estación vigente de M29 (game_clock.get_estacion()) para la
+	# modulación estacional; se lee ANTES de la aplicación inicial.
+	if _gt != null and _gt.has_method("get_estacion"):
+		_estacion_actual = int(_gt.get_estacion())
 	var hora_inicial: int = 8
 	if _gt != null and _gt.has_method("get_hora"):
 		hora_inicial = int(_gt.get_hora())
 	_aplicar_iluminacion(hora_inicial, false)
 	if _gt != null and _gt.has_signal("hora_cambio"):
 		_gt.hora_cambio.connect(_on_hora_cambio)
+	if _gt != null and _gt.has_signal("estacion_cambio"):
+		_gt.estacion_cambio.connect(_on_estacion_cambio)
 
 
 func _cargar_curvas() -> void:
@@ -88,6 +121,18 @@ func _cargar_curvas() -> void:
 		push_warning("[DayNightCycle] day_curve.tres ausente; fallback a valores del núcleo")
 	if _sun_color_ramp != null:
 		print("[DayNightCycle] Ramps de color cargados (sun/sky) — M49 iter. 3")
+	# M31 lote 2: niebla por hora (fog_curve.tres) + modulación estacional
+	# (season_mod.tres, diseño §4). Si faltan, neutros documentados.
+	_fog_curve = load(RUTA_FOG_CURVA) as Curve
+	_season_mod = load(RUTA_SEASON_MOD) as Curve
+	if _fog_curve != null:
+		print("[DayNightCycle] fog_curve.tres cargado (niebla por hora)")
+	else:
+		push_warning("[DayNightCycle] fog_curve.tres ausente; niebla con base fija")
+	if _season_mod != null:
+		print("[DayNightCycle] season_mod.tres cargado (modulacion estacional, diseno sec. 4)")
+	else:
+		push_warning("[DayNightCycle] season_mod.tres ausente; modulacion estacional neutra (1.0)")
 
 
 ## M31 lote 1 (Step-5-WorkBuddy 2026-10-15): umbrales de fase_umbral.json
@@ -223,6 +268,37 @@ func _duracion_transicion(fase_anterior: int, fase_nueva: int) -> float:
 	return _duracion_hora
 
 
+## M31 lote 2 (Step-5-WorkBuddy 2026-10-16): multiplicador estacional segun
+## season_mod.tres (diseno sec. 4: "4 multiplicadores por estacion (M29)
+## aplicados a ambas curvas"). Sin data = 1.0 (neutro). El dominio de la curva
+## es 0-3 (indice de estacion de game_clock), no la fraccion del dia.
+func mod_estacional(estacion: int) -> float:
+	if _season_mod == null:
+		return 1.0
+	var dom_min: float = _season_mod.min_domain
+	var dom_max: float = _season_mod.max_domain
+	return _season_mod.sample(clampf(float(estacion), dom_min, dom_max))
+
+
+## M31 lote 2 (Step-5-WorkBuddy 2026-10-16): densidad de niebla por hora segun
+## fog_curve.tres (fase_umbral.json sec.niebla). La curva es la variacion
+## RELATIVA (0.5 mediodia - 1.3 pico del atardecer); FOG_BASE ancla la escala
+## del proyecto (niebla marina 0.00018). Sin data = FOG_BASE (lo autoreado).
+func niebla_densidad(hora: float) -> float:
+	if _fog_curve == null:
+		return FOG_BASE
+	var t := clampf(hora, 0.0, 24.0) / 24.0
+	return FOG_BASE * _fog_curve.sample(t)
+
+
+## M31 lote 2 (Step-5-WorkBuddy 2026-10-16): al cambiar la estacion (senal
+## estacion_cambio de M29) se re-aplica la iluminacion con la hora vigente; la
+## modulacion estacional cambia sol/ambiente (transicion suave, sin salto).
+func _on_estacion_cambio(estacion: int) -> void:
+	_estacion_actual = estacion
+	_aplicar_iluminacion(_hora_actual, true, _duracion_hora)
+
+
 func _on_hora_cambio(hora: int) -> void:
 	var fase_anterior := _fase_actual
 	_evaluar_fase(hora)
@@ -257,6 +333,8 @@ func _fase_de_hora(hora: int) -> int:
 ## duracion < 0 = valor por defecto del núcleo (compatibilidad con
 ## test_curvas_luz.gd, que llama con 2 argumentos).
 func _aplicar_iluminacion(hora: int, tween: bool, duracion: float = -1.0) -> void:
+	# M31 lote 2: última hora aplicada (la re-aplica _on_estacion_cambio)
+	_hora_actual = hora
 	if sun == null or moon == null or env == null:
 		return
 
@@ -303,6 +381,13 @@ func _aplicar_iluminacion(hora: int, tween: bool, duracion: float = -1.0) -> voi
 		moon_energy = 0.12
 		ambient_energy = 0.15
 
+	# M31 lote 2: modulacion estacional (season_mod.tres, diseno sec. 4) sobre
+	# day_curve (sol) y sky_curve (ambiente). El piso anti-oscuridad 0.15
+	# (regla de oro sec. 7) SIEMPRE gana: la modulacion nunca baja el ambiente.
+	var mod_est: float = mod_estacional(_estacion_actual)
+	sun_energy *= mod_est
+	ambient_energy = maxf(ambient_energy * mod_est, PISO_AMBIENTE)
+
 	var dur: float = 1.0 if duracion < 0.0 else duracion
 	duracion = dur if tween else 0.0
 	# M49 iter. 3: color ambiente por ramp también se anima
@@ -314,12 +399,17 @@ func _aplicar_iluminacion(hora: int, tween: bool, duracion: float = -1.0) -> voi
 	# por hora (ítems K.2 L219, B-P6 L44, D L87 del checklist).
 	var t_cielo := float(clampi(hora, 0, 24)) / 24.0
 	var energia_cielo: float = _sky_curve.sample(t_cielo) if _sky_curve != null else 1.0
+	# M31 lote 2: misma modulacion estacional y piso que el ambiente (sec. 4/7)
+	energia_cielo = maxf(energia_cielo * mod_est, PISO_AMBIENTE)
 	var color_cielo: Color = _sky_color_ramp.sample(t_cielo) if _sky_color_ramp != null else Color(0.4, 0.55, 0.8, 1)
 	var cielo_top: Color = color_cielo
 	var cielo_horizon: Color = color_cielo.lerp(Color(1, 1, 1, 1), 0.3)
 	var suelo_horizon: Color = color_cielo.lerp(Color(0.25, 0.2, 0.15, 1), 0.5)
 	var suelo_bottom: Color = color_cielo.lerp(Color(0.15, 0.12, 0.1, 1), 0.7)
 	var alpha_est: float = alpha_estrellas(float(hora))
+	# M31 lote 2: niebla por hora (fog_curve.tres) sobre el Environment
+	var densidad_niebla: float = niebla_densidad(float(hora))
+	env.environment.fog_enabled = true
 	var color_estrellas: Color = Color(1, 1, 1, 0)
 	if _estrella_mat != null:
 		color_estrellas = _estrella_mat.albedo_color
@@ -345,6 +435,7 @@ func _aplicar_iluminacion(hora: int, tween: bool, duracion: float = -1.0) -> voi
 			_tween.parallel().tween_property(_cielo_mat, "ground_bottom_color", suelo_bottom, duracion)
 		if _estrella_mat != null:
 			_tween.parallel().tween_property(_estrella_mat, "albedo_color", color_estrellas, duracion)
+		_tween.parallel().tween_property(env.environment, "fog_density", densidad_niebla, duracion)
 	else:
 		sun.light_energy = sun_energy
 		moon.light_energy = moon_energy
@@ -362,6 +453,7 @@ func _aplicar_iluminacion(hora: int, tween: bool, duracion: float = -1.0) -> voi
 			_cielo_mat.ground_bottom_color = suelo_bottom
 		if _estrella_mat != null:
 			_estrella_mat.albedo_color = color_estrellas
+		env.environment.fog_density = densidad_niebla
 
 	_rotar_fuentes(hora)
 

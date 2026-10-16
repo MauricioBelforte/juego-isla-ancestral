@@ -206,3 +206,36 @@ DayNightCycle (autoload/único, M07):
 - M45 (escénicos): el domo de estrellas y el cielo procedural ya están cableados; los assets (texturas, nubes) se montan sobre esta base.
 - M58 ("Noche clara", piso 0.35): el hook natural es `alpha_estrellas()`/`sky_curve` — hoy el piso es constante en curva.
 - M18/M45 (farol + autoswitch): `fase_umbral.json` §luces_artificiales (umbral 0.35, 3200K, r 8 m) sigue listo para consumir.
+
+
+## Notas del Agente - Iteracion 4 lote 2: niebla por hora + modulacion estacional (Step-5-WorkBuddy, 2026-10-16)
+
+**Modelo:** Step-5-WorkBuddy
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-16
+**Encargo:** msg 51 del director De-Director V4.1 (2026-10-15): cerrar los gaps PROPIOS de M31 (~2) + los tests de secciones propias; registrar el drift sec. P3 como deuda documentada sin reescribir el diseno.
+**Estado:** 125 [x] / 0 [ ] / 44 [?] = 169 (1 [?] propio cerrado: E-season_mod; el gap de consumo de niebla tambien cerrado). Evidencia: Log 1884 + test_niebla_estacion_m31.gd (47 checks / 0 fallos / EXIT 0 x3).
+
+### Lo que hice
+- **season_mod.tres (data nueva, game/isla-ancestral/data/light/season_mod.tres)**: Curve con dominio 0-3 (indice de estacion de game_clock: 0 Primavera, 1 Verano, 2 Otono, 3 Invierno) y multiplicadores 1.0 / 1.1 / 0.95 / 0.85 - DECISION DE IMPLEMENTACION (el diseno sec. 4 no fija cifras). Generado con gen_season_mod.gd (patron validante de gen_curvas.gd: valida ANTES de guardar, quit(1) si falla).
+- **Consumo estacional (day_night_cycle.gd)**: mod_estacional(estacion) lee la curva; _aplicar_iluminacion la aplica a day_curve (sol) y sky_curve (ambiente + energia del cielo procedural) - "ambas curvas" del diseno sec. 4. La luna (moon_curve) NO se modula. La estacion vigente se lee de M29 (get_estacion()) en _ready y se re-aplica por la senal estacion_cambio (_on_estacion_cambio, con _hora_actual trackeada).
+- **Piso anti-oscuridad (regla de oro sec. 7)**: la modulacion NUNCA baja el ambiente de 0.15 - maxf(valor * mod, PISO_AMBIENTE) (en Invierno 0.15 x 0.85 = 0.1275 queda clampeado a 0.15).
+- **Niebla por hora (day_night_cycle.gd)**: niebla_densidad(hora) = FOG_BASE (0.00018, niebla marina autoreada en main_island.gd L204) x fog_curve.tres (variacion relativa 0.5 mediodia - 1.3 pico atardecer). Cierra el gap "fog_curve existe pero no se carga en codigo". El Environment recibe fog_density por hora (tween incluido) y fog_enabled = true.
+- **Test nuevo test_niebla_estacion_m31.gd**: 47 checks / 0 fallos / EXIT 0 x3, 0 SCRIPT ERROR. Guardas anti-falso-verde: bloques A-C con _fin(), piso CHECKS_MINIMOS = 47 MEDIDO en verde, _summary por call_deferred. **Guardian probado EN ROJO por inyeccion** (aborto por runtime al inicio del bloque C -> EXIT 1, "[FAIL] solo 28 checks ejecutados (minimo 47)"). Regresiones verdes x2: test_curvas_luz.gd (0 fallos), test_ciclo_dia_noche.gd (16/0), test_cielo_estrellas_m31.gd (39/0).
+- **Flips aplicados (1, con cita)**: E-season_mod (L99) [?] -> [x]. 124 -> **125 [x] / 44 [?] / 0 [ ] = 169** (prefijo de linea, invariante OK). Header + Totales actualizados. Nota PARCIAL en K.2-niebla (L222): el nodo FogVolume volumetrico sigue ausente (K.2, dueno externo M45) y por eso los items de niebla siguen [?].
+
+### Lo que NO se pudo hacer (honestidad obligatoria)
+- Los items de niebla (B-P11 L49, D L84, K.2 L222) SIGUEN [?]: exigen el nodo FogVolume volumetrico en escena + variacion estacional cualitativa ("matinal otono, bruma verano") que no tiene data - contenido de dueno externo (M45).
+- La variacion estacional de la NIEBLA no se implemento (el diseno sec. 3 la menciona "por estacion/hora" pero no hay data; inventarla seria fabricar contenido).
+- Los multiplicadores estacionales son decision de implementacion propia (verano 1.1 / invierno 0.85): el diseno sec. 4 no fija valores.
+
+### Deuda documentada (drift, NO reescrito)
+- **sec. P3 (tabla de componentes, fila Sky)**: el diseno dice "energia 0.18-1.0" y "gradiente 24 puntos"; el dato real es sky_curve.tres con piso 0.15 en hora profunda (anti-oscuridad sec. 7) y sky_color_ramp.tres (M49) con 9 paradas. Manda el dato; registrado en 03-Diseno.md como deuda del dueno del documento.
+- **Escala de niebla**: el rango 0.08-0.25 del diseno sec. 3 es del FogVolume volumetrico; el fog del Environment se ancla a 0.00018 (niebla marina autoreada). Registrado, no modificado.
+- **fase_umbral.json sec.niebla (prosa)**: dice "noche 0.9" pero la curva horneada da 1.0296 a las 03:00 (interpola 0.9 -> 1.1). Manda el dato; la prosa del JSON es aproximada.
+- **TRAMPA MEDIDA**: Curve.sample() usa la curva HORNEADA (bake), no la interpolacion lineal exacta entre puntos - la 1a version del test esperaba 1.02 a las 03:00 y el medido fue 1.0296. Se asegura el valor medido, no la aritmetica de memoria.
+
+### Recomendaciones para el proximo agente
+- M45 (escenicos): el fog del Environment ya se consume por hora; el nodo FogVolume volumetrico (0.08-0.25 por estacion/hora) sigue pendiente y es el que cierra B-P11/D/K.2-niebla.
+- M18/M45 (farol + autoswitch): fase_umbral.json sec.luces_artificiales (umbral 0.35, 3200K, r 8 m) sigue listo para consumir.
+- M58 ("Noche clara", piso 0.35): el hook natural es sky_curve/alpha_estrellas; hoy el piso es constante.
