@@ -5,24 +5,33 @@
 
 # 05-Checklist.md — Módulo 46: Arte 2D
 
+## Reserva actual
+- **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-16 21:15.** Reclamo M46 (Tarea 3 cola N650 del director). Reclamo en 4 registros: CHECKLIST-GLOBAL fila 46 + este checklist + GUIA-ORDEN 08 + ESTADO-PARALELO.
+
+**RECONCILIACIÓN (hallazgo clave, agnes-3-flash 2026-10-16):** el 05-Checklist quedó **0/110 [x]** (revertido por auditoría 2026-09-14: "marcado completado sin verificación") pero el **diseño+tooling ESTÁN implementados en disco**: `ART_STYLE_2D.md` (10 §: §1 identidad, §2 paleta, §3 trazo/sombras, §4 familias/recetas, §5 expresiones, §6 tamaños, §7 pipeline, §8 validación, §9 flujos, §10 desfase) + `data/arte2d/inventario_2d.json` (48 assets catálogo) + `scripts/arte2d/validar_arte_2d.gd` (headless 0 fallos). Por eso re-marco los ítems de **diseño/espec** con evidencia a § del guía (no "por hacer"; son hechos documentados).
+
+**Lo pendiente REAL (no se flipa, dep. externa):** producción de **assets 2D** — **0/48 PNG/SVG/WebP en `assets/`** (dep. M45 plantillas 3D + M108 pipeline + arte externo) + `pack_atlas.gd` **ausente** + tests visuales 32px (requieren assets) + retratos M161. Estos quedan `[ ]` con `#esperando:assets-2d` / dep.
+
+**Lote 1 (this cycle):** Section A (8) + Section B RF1 (5) = 13 ítems de diseño flippeados con evidencia a ART_STYLE_2D.md §1-4. Lotes 2+: resto de ítems de diseño/espec/validador por §; los de assets quedan `#esperando`.
+
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: sin dirección 2D, iconos/retratos/UI se sienten de otro juego e incoherentes con el 3D [S] — Log 726 (ART_STYLE_2D §1)
-- [ ] Definir el objetivo: guía de estilo 2D heredada del 3D, bancos de iconos/retratos, atlas y validación [S] — Log 726
-- [ ] Registrar dependencias: M45 (3D), M53 (UI), M88 (fuentes), M14 (iconos), M47 (texturas), M57 (input), M108 (pipeline) [S] — Log 726 (inventario_2d.json campo fuente)
-- [ ] Mapear la sección 45 "ARTE 2D" del plan maestro al ID 46 de la tabla global (desfase de numeración) [M] — Log 726 (ART_STYLE_2D §10)
-- [ ] Separar dentro/fuera de alcance: layout de UI → M53, fuentes → M88, animación → M48, texturas 3D → M47 [S]
-- [ ] Documentar restricciones: estilo heredado, sin texto en arte, atlas ≤2K, resoluciones estándar, SVG fuente [S] — Log 726 (ART_STYLE_2D §7)
-- [ ] Definir criterios de aceptación verificables (8 criterios) [S] — Log 726 (sección W del checklist)
-- [ ] Incluir contexto del plan de producción §4: paleta pastel, "el juego cozy vive y muere por sus menús" [M] — Log 726 (ART_STYLE_2D §1-2)
+- [x] Definir el problema: sin dirección 2D, iconos/retratos/UI se sienten de otro juego e incoherentes con el 3D [S] — Log 726 (ART_STYLE_2D §1) **↔ M46-recon 2026-10-16: verificado §1 (identidad visual cozy) en ART_STYLE_2D.md en disco.**
+- [x] Definir el objetivo: guía de estilo 2D heredada del 3D, bancos de iconos/retratos, atlas y validación [S] — Log 726 **↔ M46-recon: el guía ART_STYLE_2D.md (10 §) existe en disco = objetivo cumplido.**
+- [x] Registrar dependencias: M45 (3D), M53 (UI), M88 (fuentes), M14 (iconos), M47 (texturas), M57 (input), M108 (pipeline) [S] — Log 726 (inventario_2d.json campo fuente) **↔ M46-recon: deps registradas en §7 + inventario_2d.json.**
+- [x] Mapear la sección 45 "ARTE 2D" del plan maestro al ID 46 de la tabla global (desfase de numeración) [M] — Log 726 (ART_STYLE_2D §10) **↔ M46-recon: §10 (desfase de numeración) explícito en ART_STYLE_2D.md.**
+- [x] Separar dentro/fuera de alcance: layout de UI → M53, fuentes → M88, animación → M48, texturas 3D → M47 [S] **↔ M46-recon: separación por módulo documentada en §4/§7 (ui_art_→M53, etc.).**
+- [x] Documentar restricciones: estilo heredado, sin texto en arte, atlas ≤2K, resoluciones estándar, SVG fuente [S] — Log 726 (ART_STYLE_2D §7) **↔ M46-recon: §7 (atlas 2048, SVG fuente, cero texto) en disco.**
+- [x] Definir criterios de aceptación verificables (8 criterios) [S] — Log 726 (sección W del checklist) **↔ M46-recon: criterios en sección W + §8 (validación).**
+- [x] Incluir contexto del plan de producción §4: paleta pastel, "el juego cozy vive y muere por sus menús" [M] — Log 726 (ART_STYLE_2D §1-2) **↔ M46-recon: §1-2 (paleta pastel cozy) en disco.**
 
 ## B. RF1 — Guía de estilo 2D
 
-- [ ] Definir ART_STYLE_2D.md derivado de M45: paleta, trazo, sombreado, redondeo [M] — Log 726 (DOCUMENTACION/46-Arte-2D/plan-actual/ART_STYLE_2D.md)
-- [ ] Definir trazo exterior redondeado 2-3 px a 128 px [S] — Log 726 (§3)
-- [ ] Definir sombra plana inferior 10% [S] — Log 726 (§3)
-- [ ] Prohibir gradientes complejos, ruido, texturas foto, neón [S] — Log 726 (§3)
-- [ ] Definir recetas visuales por familia de iconos [M] — Log 726 (§4)
+- [x] Definir ART_STYLE_2D.md derivado de M45: paleta, trazo, sombreado, redondeo [M] — Log 726 (DOCUMENTACION/46-Arte-2D/plan-actual/ART_STYLE_2D.md) **↔ M46-recon: el archivo existe en disco (90 líneas, 10 §).**
+- [x] Definir trazo exterior redondeado 2-3 px a 128 px [S] — Log 726 (§3) **↔ M46-recon: §3 "Trazo exterior redondeado 2-3 px a 128 px" literal en disco.**
+- [x] Definir sombra plana inferior 10% [S] — Log 726 (§3) **↔ M46-recon: §3 "Sombra plana inferior al 10% (sin gradiente)" literal.**
+- [x] Prohibir gradientes complejos, ruido, texturas foto, neón [S] — Log 726 (§3) **↔ M46-recon: §3 "Prohibido: gradientes complejos, ruido, texturas fotográficas, neón" literal.**
+- [x] Definir recetas visuales por familia de iconos [M] — Log 726 (§4) **↔ M46-recon: §4 tabla familias/recetas (ico_/ico_herr_/pt_/ui_art_/sym_/illus_/badge_/logo_) literal.**
 
 ## C. RF2 — Logo
 

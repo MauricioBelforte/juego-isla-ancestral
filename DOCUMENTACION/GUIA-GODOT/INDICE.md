@@ -127,3 +127,5 @@
 | §11 — Blender → Godot | `11-blender-godot.md` |
 | §12 — Animales bimodo | `12-animales-bimodo.md` |
 | §13 — Horizonte/Impostores | `18-impostores-terreno.md` |
+
+- **Traer la ventana del juego al frente (PowerShell/Win32)**: [GUIA-GODOT/20-ventana-juego-al-frente.md](GUIA-GODOT/20-ventana-juego-al-frente.md) - tecnica ALT-trick + restore (probada x3 el 2026-10-16)
