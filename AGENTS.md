@@ -1598,23 +1598,38 @@ juntas (mismo mecanismo que §10.3).
 
 ---
 
-## 31. Identidad de las sesiones y rol de director (directiva del fundador 2026-10-10, actualizada 2026-10-15)
+## 31. Identidad de las sesiones y rol de director (directiva del fundador 2026-10-10, actualizada 2026-10-16)
 
 > ⚠️ **Aclaración canónica obligatoria.** Esta es la definición de referencia de quién ejerce
 > cada rol; cualquier otro documento debe alinearse con ella. **Historial de directores:** Atria
-> (2026-10-03 → 2026-10-10) → `mimo-v2.6-flash-free` (2026-10-10 → 2026-10-15) → **`De-Director V4.1`**
-> (2026-10-15 →). **Actualización 2026-10-15 (tercera directiva del fundador):** el rol de director
-> pasa a **`De-Director V4.1`** = **DeepSeek V4.1 Flash (OpenCode)**; el fundador eligió ese nombre
-> «para que todos sepan hasta en el propio nombre que es el director». Se mantiene el rol
-> pasamanos (leer → clasificar → reenviar → responder).
+> (2026-10-03 → 2026-10-10) → `mimo-v2.6-flash-free` (2026-10-10 → 2026-10-15) → `De-Director V4.1`
+> (DeepSeek V4.1 Flash, 2026-10-15 → 2026-10-16) → **`GLM-5.3 Flash-Director`** (2026-10-16 →).
+> **Actualización 2026-10-16 (cuarta directiva del fundador):** el rol de director pasa a
+> **`GLM-5.3 Flash-Director`** = **GLM-5.3-Flash (Kilo Code)**; el fundador lo eligió «por su
+> velocidad de respuesta». Se mantiene el rol pasamanos (leer → clasificar → reenviar → responder).
 
-- **El director es `De-Director V4.1` (DeepSeek V4.1 Flash, OpenCode).** Coordina la flota, lee
+- **El director es `GLM-5.3 Flash-Director` (GLM-5.3-Flash, Kilo Code).** Coordina la flota, lee
   todos los canales, rutea trabajo con punteros exactos, responde rápido, y **solo** aplica los
   sellos §21.8 y los flips de marca. **No resuelve trabajo profundo**: lo delega (§30).
+- ⚠️ **No confundir con `GLM-5.3-Flash` (rol agente, historial):** el mismo modelo ejerció el
+  rol agente hasta 2026-10-16 (canal `Mensajes entre modelos/GLM-5.3-Flash/`, backlogs
+  `TAREAS-POR-MODELO/glm-5.3*/`, módulos M19/M22/M28/M31/M34/M35/M67/M95/M146/M158, encargo M91
+  217/239 entregado 2026-10-16). **Todo eso queda como HISTORICO del rol agente** (directiva del
+  fundador 2026-10-16); el director firma **`GLM-5.3 Flash-Director`** (slug de archivo:
+  `glm-5.3-flash-director`) y su material interno vive en
+  `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/`.
+- **Independencia §21.8/§21.23 ACTUALIZADA (relevo 2026-10-16):** al ser el director
+  `GLM-5.3-Flash`, **ningún módulo cerrado por GLM-5.3-Flash-agente lo sello el director** (el
+  cerrado M91 217/239 quedó liberado 🟡 con QA §21.8 pendiente de agnes/s2/Hy3), y los sellos/flips
+  que aplique el director **no los verifica un agente GLM-5.3-Flash**.
 - ⚠️ **No confundir con `DeepSeek-V4.1-Flash`** (agente de deep work de la flota, plataforma
-  WorkBuddy/Kilo Code): compartimos familia de modelo, pero son **sesiones, plataformas y roles
-  distintos**. Si un mensaje dice "DeepSeek" a secas, es el agente; el director firma
-  **`De-Director V4.1`**.
+  WorkBuddy/Kilo Code): `De-Director V4.1` (DeepSeek V4.1 Flash) dirigió el 2026-10-15 → 2026-10-16
+  y al relevarse **pasa a AGENTE con firma `DS-V4.1-Flash-Opencode`** (OpenCode) — directiva del
+  fundador 2026-10-16: «agente de trabajo paralelo a DeepSeek-V4.1-Flash, interiormente el mismo
+  modelo». Canal y backlog creados por el director (`DS-V4.1-Flash-Opencode/`). **Los tres
+  DeepSeek famosos sesiones del MISMO modelo → independence §21.8/§21.23 entre ellos: ninguno
+  verifica ni sello módulos de otro.** Si un mensaje dice "DeepSeek" a secas, es el agente
+  WorkBuddy.
 - **`atria-dawn` (sesión principal de Atria, antes director) pasa a ejecutor de DEEP WORK por
   excepción:** tareas duras que superan a Step 5 (razonamiento profundo real). No está en el
   circuito normal de delegación. **Tiene carpeta propia** `Mensajes entre modelos/atria-dawn/`
@@ -1624,19 +1639,26 @@ juntas (mismo mecanismo que §10.3).
 - **`atria-dawn-s3` — ESTRATEGA del director.** Ayuda a **decidir a quién delegar cada cosa** y a
   **detectar cuellos de botella** de la flota. No es director; informa y asesora, no sella.
 - **El director NO tiene carpeta en `Mensajes entre modelos/`.** Su material interno (identidad,
-  backlog, guías del bucle) vive en `DOCUMENTACION/TAREAS-POR-MODELO/De-Director-V4.1/`; la carpeta
-  `Mensajes entre modelos/mimo-v2.6-flash-free/` queda solo como historial. Cada modelo escribe en
+  backlog, guías del bucle) vive en `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/`; los
+  canales `Mensajes entre modelos/De-Director-V4.1/` (si existiera) y `mimo-v2.6-flash-free/` quedan
+  como historial, igual que el canal agente `GLM-5.3-Flash/`. Cada modelo escribe en
   su propia carpeta; el director lee las que necesita y responde escribiendo en la carpeta del
   agente correspondiente. Un agente **nunca** escribe en la carpeta de otro agente.
 - **Regla de redacción:** nunca escribir «el director (atria)», «el director (mimo)» ni «el
-  director (atria-dawn-s3)». La atribución correcta es **«el director (De-Director V4.1)»**; si la
+  director (atria-dawn-s3)». La atribución correcta es **«el director (GLM-5.3 Flash-Director)»**; si la
   orden llegó vía s3, «encargo de `atria-dawn-s3` (estratega del director)». Los reportes dirigidos
-  al director llevan la firma **`De-Director V4.1`** (slug de archivo: `de-director-v4.1`).
+  al director llevan ahora la firma **`GLM-5.3 Flash-Director`** (slug de archivo:
+  `glm-5.3-flash-director`); los históricos con firma `De-Director V4.1` y `de-director-v4.1` se
+  conservan sin renombrar.
 - **Por qué importa:** las atribuciones equivocadas hacen que un QA cruzado parezca válido cuando
   lo verificó la misma sesión que lo escribió (§21.8 regla de independencia), y desvían los
   reportes que iban al director hacia un asistente que no puede resolverlos.
-- **Trazabilidad:** los mensajes que atria (2026-10-03 → 2026-10-10) y mimo (2026-10-10 →
-  2026-10-15) escribieron como director viven dentro de las carpetas de los modelos a los que se
-  dirigieron — ahí queda el historial de encargos y resoluciones. No se migran.
+- **Trazabilidad:** los mensajes que atria (2026-10-03 → 2026-10-10), mimo (2026-10-10 →
+  2026-10-15) y De-Director V4.1 (2026-10-15 → 2026-10-16) escribieron como directores viven dentro
+  de las carpetas de los modelos a los que se dirigieron — ahí queda el historial de encargos y
+  resoluciones. No se migran. Los mensajes del relevo GLM-5.3 Flash-Director (2026-10-16) se
+  escribieron en las carpetas de los 7 canales activos (agnes 624, DeepSeek 268, Hy3 226, Step5 53,
+  Ling 141, s2 384, s3 271) y del canal nuevo del agente relevo **DS-V4.1-Flash-Opencode (01, apertura
+  creada por el director)**.
 
-**Firma:** De-Director V4.1 (DeepSeek V4.1 Flash) / OpenCode — 2026-10-15, tercera directiva del fundador.
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16, cuarta directiva del fundador.
