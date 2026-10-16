@@ -13,7 +13,7 @@ PROJECT_ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
 def main() -> int:
     script = os.path.join(HERE, "bump_version.py")
     tests = []
-    r1 = subprocess.run(["python", script, "--help"], capture_output=True, text=True, timeout=10)
+    r1 = subprocess.run(["python", script, "--help"], capture_output=True, text=True, timeout=10, encoding="utf-8", errors="replace")
     tests.append((r1.returncode == 0, f"--help: exit {r1.returncode}"))
     # Tests con tempdirs separados (cada uno empieza con 0.0.0-dev)
     for test_name, kind, initial_ver, expected_new in [
@@ -28,8 +28,7 @@ def main() -> int:
                 f.write(f'config/version="{initial_ver}"\n')
             r = subprocess.run(
                 ["python", script, kind, "--dry-run"],
-                capture_output=True, text=True, timeout=10, cwd=tmp,
-                encoding="utf-8", errors="replace",
+                capture_output=True, text=True, timeout=10, cwd=tmp, encoding="utf-8", errors="replace",
             )
             tests.append((r.returncode == 0, f"{test_name}: exit {r.returncode}"))
             tests.append((f"{initial_ver} -> {expected_new}" in r.stdout, f"bump {initial_ver} -> {expected_new}"))
@@ -44,7 +43,7 @@ def main() -> int:
             f.write('{"version": 1, "elementos": [{"id": "a", "year": 2024}]}')
         with open(os.path.join(tmp, "CHANGELOG.md"), "w") as f:
             f.write("# Changelog\n\n")
-        r = subprocess.run(["python", script, "minor", "--dry-run"], capture_output=True, text=True, timeout=10, cwd=tmp)
+        r = subprocess.run(["python", script, "minor", "--dry-run"], capture_output=True, text=True, timeout=10, encoding="utf-8", errors="replace", cwd=tmp)
         with open(proj, "r", encoding="utf-8") as f:
             content = f.read()
         tests.append(('config/version="0.0.0-dev"' in content, "DRY no modifica project.godot"))
@@ -59,7 +58,7 @@ def main() -> int:
             f.write('{"version": 1, "elementos": [{"id": "a", "year": 2024}]}')
         with open(os.path.join(tmp, "CHANGELOG.md"), "w") as f:
             f.write("# Changelog\n\n")
-        r = subprocess.run(["python", script, "patch"], capture_output=True, text=True, timeout=10, cwd=tmp)
+        r = subprocess.run(["python", script, "patch"], capture_output=True, text=True, timeout=10, encoding="utf-8", errors="replace", cwd=tmp)
         tests.append((r.returncode == 0, f"real: exit {r.returncode}"))
         with open(proj, "r", encoding="utf-8") as f:
             content = f.read()
@@ -73,7 +72,7 @@ def main() -> int:
         os.makedirs(os.path.join(tmp, "installer"), exist_ok=True)
         with open(os.path.join(tmp, "installer", "IslaAncestral.iss"), "w", encoding="utf-8") as f:
             f.write('#define AppVersion   "0.0.2"          ; DEBE coincidir\n')
-        r = subprocess.run(["python", script, "patch"], capture_output=True, text=True, timeout=10, cwd=tmp)
+        r = subprocess.run(["python", script, "patch"], capture_output=True, text=True, timeout=10, encoding="utf-8", errors="replace", cwd=tmp)
         with open(os.path.join(tmp, "installer", "IslaAncestral.iss"), "r", encoding="utf-8") as f:
             iss = f.read()
         tests.append(('#define AppVersion   "0.0.1"' in iss, "real: el bump sincroniza el .iss a 0.0.1"))
@@ -87,7 +86,7 @@ def main() -> int:
         os.makedirs(os.path.join(tmp, "installer"), exist_ok=True)
         with open(os.path.join(tmp, "installer", "IslaAncestral.iss"), "w", encoding="utf-8") as f:
             f.write('#define AppVersion   "0.0.2"          ; DEBE coincidir\n')
-        r = subprocess.run(["python", script, "patch", "--dry-run"], capture_output=True, text=True, timeout=10, cwd=tmp)
+        r = subprocess.run(["python", script, "patch", "--dry-run"], capture_output=True, text=True, timeout=10, encoding="utf-8", errors="replace", cwd=tmp)
         with open(os.path.join(tmp, "installer", "IslaAncestral.iss"), "r", encoding="utf-8") as f:
             iss = f.read()
         tests.append(('#define AppVersion   "0.0.2"' in iss, "DRY no modifica el .iss"))
@@ -101,7 +100,7 @@ def main() -> int:
         preset = os.path.join(tmp, "game", "isla-ancestral", "export_presets.cfg")
         with open(preset, "w", encoding="utf-8") as f:
             f.write('[preset.1]\n\nname="Windows"\n[preset.1.options]\n\napplication/file_version="0.0.2"\napplication/product_version="0.0.2"\napplication/company_name="Isla Ancestral"\n')
-        r = subprocess.run(["python", script, "patch"], capture_output=True, text=True, timeout=10, cwd=tmp)
+        r = subprocess.run(["python", script, "patch"], capture_output=True, text=True, timeout=10, encoding="utf-8", errors="replace", cwd=tmp)
         with open(preset, "r", encoding="utf-8") as f:
             cfg = f.read()
         tests.append((r.returncode == 0, f"preset: exit {r.returncode}"))
@@ -116,12 +115,12 @@ def main() -> int:
         preset = os.path.join(tmp, "game", "isla-ancestral", "export_presets.cfg")
         with open(preset, "w", encoding="utf-8") as f:
             f.write('application/file_version="0.0.2"\napplication/product_version="0.0.2"\n')
-        r = subprocess.run(["python", script, "patch", "--dry-run"], capture_output=True, text=True, timeout=10, cwd=tmp)
+        r = subprocess.run(["python", script, "patch", "--dry-run"], capture_output=True, text=True, timeout=10, encoding="utf-8", errors="replace", cwd=tmp)
         with open(preset, "r", encoding="utf-8") as f:
             cfg = f.read()
         tests.append(('application/file_version="0.0.2"' in cfg, "DRY no modifica el preset"))
     # Kind invalido
-    r5 = subprocess.run(["python", script, "invalid"], capture_output=True, text=True, timeout=10)
+    r5 = subprocess.run(["python", script, "invalid"], capture_output=True, text=True, timeout=10, encoding="utf-8", errors="replace")
     tests.append((r5.returncode != 0, f"kind invalido: exit != 0"))
     fallos = 0
     for ok, msg in tests:

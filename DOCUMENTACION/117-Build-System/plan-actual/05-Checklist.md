@@ -97,8 +97,8 @@
 - [x] Definir ZIP Windows + instalador (M116) [M] → T-026 verificado (preset Windows + installer/ + validador M116 15/0)
 - [?] Definir .app macOS + zip [M] → T-027 sin preset macOS (dueno M96)
 - [x] Definir estructura de carpetas correcta [M] → T-028 verificado (game/build/windows + check V7)
-- [?] Definir no data duplicada en artifact [S] → T-029 sin build real (dueno build real)
-- [?] Definir tamaño objetivo del artifact por plataforma [M] → T-030 sin build real (CiCdManager size_bytes listo)
+- [x] Definir no data duplicada en artifact [S] → T-029 CERRADO iter. 4 (Log 1888, 2026-10-16): build real x3 (Windows/Linux/SteamOS) — `embed_pck=true` → un binario por plataforma + solo la GDExtension voxel (`libvoxel.*`), sin `.pck` suelto ni data duplicada
+- [x] Definir tamaño objetivo del artifact por plataforma [M] → T-030 CERRADO iter. 4 (Log 1888): medido real Windows **125.98 MB** total (exe 120.80 + DLL 5.18), Linux/SteamOS **96.58 MB** c/u (bin 86.8 + SO 9.78); objetivo provisional Windows ≤130 MB, Linux/SteamOS ≤100 MB (gate `CiCdManager.size_bytes`), ratificable por M96
 - [x] Definir manifest SHA-256 completo [M] → T-031 verificado (CiCdManager + SHA256SUMS release)
 
 ## 11. Subir artifacts (11º)
@@ -209,9 +209,52 @@
   de ObjectDB son preexistentes y ajenos a M117/M111). El gate duro + runner `run_tests.py` es el
   cierre correcto; el "aislamiento" queda documentado como limitación de Godot, no defecto de M117. [M]
 
+## Evidencia M117 iter. 4 (2026-10-16, Log 1888 — DS-V4.1-Flash-Opencode/OpenCode)
+
+> Encargo del director `GLM-5.3 Flash-Director` (msg 02 del canal `DS-V4.1-Flash-Opencode`):
+> clasificar los 18 `[?]` (cerrables con código/config CI vs externos con dueño) y cerrar los
+> cerrables con flujo §13/§14. Resultado: **2 cerrados (T-029/T-030)** + **16 externos
+> confirmados** → **94 [x] / 0 [ ] / 16 [?]**; módulo liberado 🟡.
+
+- **Fix tooling detectado de paso (desync real):** `bump_version.py` no sincronizaba
+  `application/file_version`/`application/product_version` de `export_presets.cfg` → quedaron en
+  `0.0.2` vs `project.godot` `0.0.6` (misma clase que el `.iss` del Log 946). Nueva
+  `_set_version_in_export_presets()` + constante `EXPORT_PRESETS_CFG` (top-level y cwd-root) +
+  wire en `main()`; preset realineado a `0.0.6`. [M]
+- **Tests:** `python -X utf8 tools/ci/test_bump_version.py` → **18/18 OK** (14 previos + 4 nuevos:
+  sync real del preset, conserva el resto, DRY no modifica, exit 0); `run_tests.py --module build`
+  → **2 OK / 0 FAIL** (`test-build_m117` + `test-instalador_m116`, EXIT 0). Hardening del harness:
+  lectores de subprocess con `encoding="utf-8", errors="replace"` (elimina `UnicodeDecodeError`
+  cosmético del stdout cp1252 de los hijos). [M]
+- **T-029 CERRADO — no data duplicada (build real ×3):** `embed_pck=true` en los presets → un
+  binario por plataforma sin `.pck` suelto ni data repetida; único extra por plataforma es la
+  GDExtension voxel (`libvoxel.windows.template_release.x86_64.dll` 5.18 MB /
+  `libvoxel.linux.template_release.x86_64.so` 9.78 MB). [S]
+- **T-030 CERRADO — tamaño real medido (baseline objetivo):** Windows **125.98 MB** total
+  (`game/build/windows/`: exe 120.80 + DLL 5.18); Linux y SteamOS **96.58 MB** c/u
+  (`game/build/{linux,steamos}/`: bin 86.8 + SO 9.78). Objetivo provisional declarado:
+  Windows ≤ 130 MB, Linux/SteamOS ≤ 100 MB (gate `CiCdManager.size_bytes`), ratificable por M96. [M]
+- **Fix fuga de datos de tests al artifact:** `res://Godot/` (redirect de `user://` en tests)
+  empaquetaba basura (`app_userdata/isla-ancestral/m87_val_en_ok.po` — recurso de traducción
+  importado; los JSON de analytics NO entraban; fixtures M116 ya cubiertas por su `project.godot`
+  anidado). Fix durable: `exclude_filter="Godot/*"` en los **4 presets** + `.gdignore` local en
+  `Godot/` (gitignored; elimina también el warning de scan). Verificado: **0 hits `res://Godot`**
+  en el log de savepack; exe **−0.68 MB** (121.48 → 120.80). [S]
+- **Exports reales ×3 (Godot 4.7.2 headless):** Windows / Linux / SteamOS, EXIT 0, con **ruta de
+  salida absoluta** (la CLI resuelve relativas contra el dir del proyecto y no crea el dir destino
+  — gotcha documentado). Web no se re-exportó (el `build/web/` local es preexistente y ajeno a
+  esta iteración). [M]
+- **Clasificación final de los 18 `[?]`:** 2 cerrados (T-029/T-030) + **16 externos con dueño**:
+  M118×9, M96/infra×4, M116×1, M113×2 (desglose por `T-###` en la sección Totales). Los ítems de
+  i18n llevan además tag `#esperando:M87` (congelado; dueño real `Ling-3.1-Flash`) y las cautelas
+  M52/M31 fueron resueltas por el director (msg 05): NO tomar. [M]
+- **MCP Godot (§12.1):** `get_debug_output` → "No active Godot process" (no había editor
+  corriendo; los exports usan el binario standalone). No aplica corrección runtime: la iter. 4 no
+  modificó GDScript (solo `export_presets.cfg` + `tools/ci/`). [S]
+
 ## Reserva actual
 
-- **Reservada:** Reserva 2026-10-16 `DS-V4.1-Flash-Opencode` (OpenCode) — encargo del director `GLM-5.3 Flash-Director` (msg 02 del canal): clasificación de los 18 `[?]` (cerrables CI/config vs externos con dueño) + cierre §13/§14 (MCP Godot + suites headless). En curso.
+- **Liberada:** Reserva 2026-10-16 `DS-V4.1-Flash-Opencode` (OpenCode) — encargo del director `GLM-5.3 Flash-Director` (msg 02 del canal): clasificación de los 18 `[?]` completada + cierre §13/§14 iter. 4 (Log 1888). **94 [x] / 0 [ ] / 16 [?]** — T-029/T-030 cerrados con export real ×3 (Windows/Linux/SteamOS); fuga `res://Godot/` al artifact cerrada (`exclude_filter="Godot/*"` + `.gdignore` local); `bump_version.py` sincroniza `export_presets.cfg` (tests 18/18). Liberado 🟡; QA §21.8 → Hy3/agnes/s2.
 - **Liberada:** Reserva Log 946 agnes-3-flash/Kilo Code (2026-09-17 04:58) — M117 Build-System iter. 3
   (tooling/CI): sync `installer/*.iss` en `bump_version.py` + fix desync `.iss`→0.0.6 + cierre `[?]`
   "test_build_m117.gd no corre aislado" vía gate duro `quality.yml`. Cerrada 2026-09-17 05:15 (Log 946
@@ -227,30 +270,30 @@
 
 > Actualizado por muse-spark-1.3-contributor (Cline) — iter. 2, Log 941 (2026-09-16).
 > Conteo por seccion verificado con script (no estimado).
+> **Actualizado por DS-V4.1-Flash-Opencode (OpenCode) — iter. 4, Log 1888 (2026-10-16):** T-029/T-030 cerrados con export real ×3 → **94 [x] / 0 [ ] / 16 [?]** (conteo re-verificado con script).
 
 **Items reales del modulo (secciones 1 a 17):** 110
-**Resueltos [x]:** 92
+**Resueltos [x]:** 94
 **Pendientes [ ]:** 0
-**No resueltos [?] con dueno externo:** 18
+**No resueltos [?] con dueno externo:** 16
 
-Desglose de los 18 `[?]` por dueno:
+Desglose de los 16 `[?]` por dueno:
 
 | Dueno | Items | Que falta |
 |-------|-------|-----------|
 | M118 (CI-CD) | T-018, T-020, T-037, T-043..T-046, T-048, T-050 | Enforcement de commits en PR, schedule nightly, permisos por rol, script smoke operativo del artifact, keystore central |
-| M96 / infra (macOS/Linux) | T-012, T-027, T-039, T-052 | Presets macOS/Linux ausentes en `export_presets.cfg`, notarytool+staple, firmado real con cert CA |
+| M96 / infra (macOS/Linux) | T-012, T-025, T-027, T-039 | Presets macOS/Linux ausentes en `export_presets.cfg`, notarytool+staple, firmado real con cert CA |
 | M116 / infra (firmado Windows) | T-038 | `signtool` real (preset `codesign` presente pero `enable=false`) |
 | M113 (stress) | T-023, T-024 | Gates de stress rapido en QA |
-| build real (medicion) | T-029, T-030 | Artefacto real para medir data duplicada y tamano objetivo |
 
 Las 16 viñetas de Evidencia y Reserva son informativas y no usan casillas de tareas.
-El conteo automático del archivo debe coincidir con las secciones 1 a 17: **92 `[x]` / 0 `[ ]` / 18 `[?]`**, total 110.
+El conteo automático del archivo debe coincidir con las secciones 1 a 17: **94 `[x]` / 0 `[ ]` / 16 `[?]`**, total 110.
 
 **Nota de honestidad (§21.6):** la fila previa de `CHECKLIST-GLOBAL.md` declaraba `66/119`.
 El denominador 119 era incorrecto: el modulo tiene 110 items y la fila sumaba tambien las
 secciones de Evidencia y Reserva. Estado corregido y reportado como **`92/110`**.
 
-**Totales:** 110 ítems · Completados: 92 · Pendientes: 0 · No resueltos: 18.
+**Totales:** 110 ítems · Completados: 94 · Pendientes: 0 · No resueltos: 16.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 0 [ ] /

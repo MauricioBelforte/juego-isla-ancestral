@@ -212,3 +212,36 @@ boot → menú → nuevo mundo → 1 día → save/load → quit(0)
 - Si se agrega una plataforma más al instalador (macOS/Linux, M96), revisar que su `.iss` lleve
   `#define AppVersion` (la función ya lo cubre por glob `installer/*.iss`).
 - QA cruzado §21.8 del Log 946 lo hace un verificador ≠ agnes-3-flash.
+
+---
+
+## Notas del Agente — iter. 4 — DS-V4.1-Flash-Opencode / OpenCode (Log 1888, 2026-10-16)
+
+**Modelo:** DS-V4.1-Flash-Opencode
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-16 02:45
+**Estado:** Encargo del director cumplido — módulo liberado 🟡 (94 [x] / 0 [ ] / 16 [?])
+
+### Lo que hice
+- **Clasificación de los 18 `[?]`** (encargo del director, msg 02): 2 cerrables localmente (T-029/T-030, build real) + 16 externos confirmados con dueño (M118×9, M96/infra×4, M116×1, M113×2).
+- **Fix `bump_version.py`:** sincronización de `application/file_version`/`application/product_version` de `export_presets.cfg` (`_set_version_in_export_presets()`, `EXPORT_PRESETS_CFG` en top-level y cwd-root, wire en `main()`). Desync real `0.0.2`→`0.0.6` corregido (misma clase que el `.iss` del Log 946).
+- **Tests:** `test_bump_version.py` +4 casos → **18/18 OK**; `run_tests.py --module build` → **2 OK / 0 FAIL**; hardening del harness (lectores de subprocess con `encoding="utf-8", errors="replace"` → 0 `UnicodeDecodeError` por stdout cp1252 de los hijos).
+- **Exports reales ×3** (Windows/Linux/SteamOS, EXIT 0) en `game/build/{windows,linux,steamos}/` con mediciones: Windows **125.98 MB** total; Linux/SteamOS **96.58 MB** c/u.
+- **T-029/T-030 cerrados** con evidencia de artifact real (pck embebido, sin data duplicada; tamaños medidos + objetivo provisional Windows ≤130 MB / Linux-SteamOS ≤100 MB).
+- **Fuga cerrada:** `exclude_filter="Godot/*"` en los 4 presets + `.gdignore` local; verificación empírica 0 hits `res://Godot` + exe −0.68 MB.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Los **16 `[?]` externos** siguen abiertos por diseño: firmado con certificados reales (M96/infra, M116), nightly schedule + smoke + permisos/keystore (M118), presets macOS (M96), gates de stress (M113). No son resolubles localmente.
+- **MCP Godot (§12.1):** `get_debug_output` → "No active Godot process" durante la iteración (los exports usan el binario standalone headless). No aplica: 0 cambios GDScript.
+- Web no se re-exportó: el `build/web/` local es preexistente y ajeno a esta iteración (no se usa como evidencia).
+
+### Intentos fallidos / decisiones
+- Primer re-export falló con `ERROR: Preparar plantilla: La ruta de exportación proporcionada no existe`: la CLI resuelve rutas de salida **relativas al directorio del proyecto** (no al CWD) y **no crea** el dir destino. Solución: ruta absoluta + dir preexistente.
+- La fuga `Godot/`: el `.po` de M87 entraba como recurso de traducción **importado** (los JSON de analytics no entran al pck). Fix doble (preset + `.gdignore` local); no se borró nada del árbol ajeno.
+- El tooling consumió **Log 1888** del pool (cabeza quedó en 1889).
+
+### Recomendaciones para el próximo agente
+- **No quitar `exclude_filter="Godot/*"`** de los presets: es el fix durable de la fuga de datos de tests al artifact.
+- Cualquier export manual: ruta de salida **absoluta** y el dir de salida debe existir de antemano.
+- Observación de packaging (candidata a M118/M96, **no aplicada**): `addons/gdUnit4/**` + `test_*.gd` compilados viajan en el artifact release; evaluar exclusión verificando antes que ningún autoload/plugin dependa de gdUnit4.
+- QA cruzado §21.8 de la iter. 4 → verificador ≠ DS-V4.1-Flash-Opencode y ≠ familia DeepSeek (Hy3 / agnes-3-flash / atria-dawn-s2).

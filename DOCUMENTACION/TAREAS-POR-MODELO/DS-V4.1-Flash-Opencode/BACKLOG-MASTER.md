@@ -20,8 +20,8 @@ Banco `DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/BACKLOG-100-TAREAS-DEEPSEEK
 
 ## Estado actual
 
-- **Encargo activo: M117-Build-System** (msg 02 del director, 2026-10-16) → T-019. Claim en 4 registros + lectura de `DOCUMENTACION/117-Build-System/plan-actual/` (§21.5) en curso.
-- Candidato siguiente ya declarado al director: micro-lote [S] **M29 / M30 / M32** (T-050/051/053). Alternativas: M112 / M40 (hoy ⛔ cola WB, liberables por el director).
+- **Encargo M117-Build-System CERRADO** (msg 02 del director, 2026-10-16) → T-019 [x]. Claim en 4 registros — liberado 🟡 **94/110** (2 cerrados con build real, 16 `[?]` externos); Log 1888 + informe en el canal (msg 06). QA §21.8 → Hy3/agnes/s2.
+- **Micro-lote AUTORIZADO en serie** (msg 04): **M29 → M30 → M32** (T-050/051/053) — próximo tras este cierre. **M112** en cola para mí (confirmar al director en msg 06); M40 ⛔ (frente WB, disponibilidad la decide el director).
 
 ## ⛔ Cola WB (GLM msg 02) — NO reclamar
 
@@ -65,7 +65,7 @@ Módulos que el director asignó al frente WorkBuddy: **M01, M40, M59, M60, M62,
 - [ ] **T-016 ⛔** — M110-Debug-Menu (150/225): lotes de 10 (paneles) — ⛔ cola WB
 - [ ] **T-017 ⛔** — M110 b2: integración con telemetría M105 — ⛔ cola WB
 - [ ] **T-018 ⛔** — M112-Testing (211/225): 14 pendientes — ⛔ cola WB
-- [→] **T-019** — **M117-Build-System (92/110): encargo del director (msg 02) — 18 pendientes por clasificar y cerrar** — TAREA ACTIVA
+- [x] **T-019** — **M117-Build-System (94/110): encargo del director (msg 02) CUMPLIDO** — iter. 4 (Log 1888): T-029/T-030 cerrados con export real ×3 (Windows 125.98 MB / Linux-SteamOS 96.58 MB c/u); fuga `Godot/` al artifact cerrada; `bump_version.py` sincroniza `export_presets.cfg` + tests 18/18; liberado 🟡, 16 `[?]` externos (M118×9/M96×4/M116×1/M113×2)
 - [ ] **T-020 ⛔** — M118-CI/CD: delegado a WB — ⛔ cola WB
 - [ ] **T-021 ⛔** — M123-Modding (106/108): 2 pendientes — ⛔ cola WB
 - [ ] **T-022 ⛔** — M124-CGU (83/108): 25 pendientes — ⛔ cola WB
@@ -213,6 +213,7 @@ Módulos que el director asignó al frente WorkBuddy: **M01, M40, M59, M60, M62,
 ## Logs
 
 - 2026-10-16 — **Log creado: 1885** — `Logs/1885-alta-frente-ds-v4.1-flash-opencode_2026-10-16_02-09-54.md` (alta + backlog v2 + encargo M117 + colisión 02/02 → 03).
+- 2026-10-16 — **Log reservado + creado: 1888** — `Logs/1888-m117-cierre-iter-4-build-real-y-fuga-godot_2026-10-16_02-41-01.md` (M117 iter. 4: exports reales ×3 + fix fuga Godot + bump sync presets; T-019 [x]; informado al director en msg 06).
 
 ## Historial
 
