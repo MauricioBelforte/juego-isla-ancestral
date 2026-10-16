@@ -174,3 +174,35 @@ DayNightCycle (autoload/único, M07):
 - M41/M42 (al liberar): EventBus.time.fase_cambio.connect(...) → set_fase(fase) / selección variante _noche — el contrato ya está testeado de este lado.
 - M18/M45 (faroles): fase_umbral.json §luces_artificiales tiene umbral 0.35 / 3200K / r 8 m listos para consumir.
 - M93/M15 (flora nocturna): hook futuro es_de_dia()/fase_cambio para el bono x2 — la decisión cozy está documentada en diseño §6.
+
+---
+
+## Notas del Agente — Iteracion 4 lote 1: cielo/estrellas/90 s (Step-5-WorkBuddy, 2026-10-15)
+
+**Modelo:** Step-5-WorkBuddy
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-15
+**Encargo:** msg 49 del director De-Director V4.1 (2026-10-15): M31 lote 1 = skybox/luces programadas (los 49 pendientes del modulo, hoy 120/169).
+**Estado:** 124 [x] / 0 [ ] / 45 [?] = 169 (4 [?] cerrados con implementacion real). Evidencia: Log 1878 + test_cielo_estrellas_m31.gd (39 checks / 0 fallos / EXIT 0 x3).
+
+### Lo que hice
+- **Cielo procedural por hora** (`day_night_cycle.gd`, `_asegurar_cielo_procedural` L135 + `_aplicar_iluminacion` L259): el `ProceduralSkyMaterial` del Environment se conduce por hora — `sky_energy_multiplier` desde `sky_curve.tres` (diseño §P5) y `sky_top_color`/`sky_horizon_color` desde `sky_color_ramp.tres` (M49 iter. 3); `ground_horizon_color`/`ground_bottom_color` derivados por lerp. El material se DUPLICA en runtime: no se muta el recurso compartido cacheado de la escena. API real medida por sonda headless: la propiedad es `sky_energy_multiplier` (no `sky_energy`, que es Godot 3).
+- **Canvas de estrellas** (`_asegurar_domo_estrellas` L156 + `_generar_textura_estrellas` L182): domo `MeshInstance3D` (SphereMesh r=900, flip_faces, unshaded + transparente) con `ImageTexture` procedural de 600 estrellas (semilla fija 31031, determinista entre sesiones). El alpha sale de `alpha_estrellas(hora)` L201: subida 0→100% entre 20:00 y 22:00 (fase_umbral.json §estrellas, diseño §P6), noche sostenida en alpha_max y bajada como espejo del gradiente de subida (2 h) sobre la franja del alba (5→7) — el diseño §P6 fija solo la subida.
+- **Transiciones de 90 s** (`_duracion_transicion` L218, llamado desde `_on_hora_cambio` L226): los `duracion_gradiente_amanecer`/`duracion_gradiente_atardecer` de `time_config.tres` (M29, L31-32 = 90 s) se consumen en las transiciones que tocan ALBA/ATARDECER; el resto mantiene el crossfade de 1 s de fase_umbral.json §transicion (comportamiento del núcleo Log 302). Cierra el "dato definido, no aplicado" de la correccion 2026-10-15 (step-5-kilocode).
+- **Umbrales cargados** (`_cargar_umbrales` L95, `_cargar_duraciones` L115): fase_umbral.json y time_config.tres se leen en `_ready`; si faltan, valores por defecto documentados.
+- **Test nuevo** `scripts/world/test_cielo_estrellas_m31.gd`: 39 checks / 0 fallos / EXIT 0 x3, 0 SCRIPT ERROR, con guardas anti-falso-verde (bloques A-D con `_fin()`, piso `CHECKS_MINIMOS` = 39 medido en verde, `_summary` por `call_deferred`). Guardián probado EN ROJO por inyeccion (aborto en bloque C -> nombra ["C","D"], 19 checks, EXIT 1). Extiende `test_curvas_luz.gd` (regresión verde: 0 fallos).
+- **Flips aplicados** (4, con cita): B-P6 (L44), D-canvas de estrellas (L87), K-90 s (L218), K-Sky procedural (L219) [?] -> [x].
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Nubes velo, niebla FogVolume, luna esférica con textura, faroles: escénicos V2 con dueño (M45/M18) — los [?] correspondientes siguen intactos.
+- La bajada de las estrellas (5→7) es una decisión de implementación (espejo de la subida): el diseño §P6 solo documenta la subida 20→22.
+
+### Drift/discrepancias detectadas (reportadas, no tocadas)
+- Diseño §P3 dice "energía 0.18-1.0" para el Sky; `sky_curve.tres` da 0.15 en hora profunda (§P5 del JSON). Manda el dato (data-driven).
+- Diseño §P3 dice "gradiente 24 puntos"; `sky_color_ramp.tres` (M49) tiene 9 paradas. El muestreo es por hora (hora/24).
+- Rutas del diseño (§1: `res://world/light/cielo.gd`) divergen de la real (`scripts/world/day_night_cycle.gd`, consolidado): nubes/niebla de M45 no están en M31.
+
+### Recomendaciones para el próximo agente
+- M45 (escénicos): el domo de estrellas y el cielo procedural ya están cableados; los assets (texturas, nubes) se montan sobre esta base.
+- M58 ("Noche clara", piso 0.35): el hook natural es `alpha_estrellas()`/`sky_curve` — hoy el piso es constante en curva.
+- M18/M45 (farol + autoswitch): `fase_umbral.json` §luces_artificiales (umbral 0.35, 3200K, r 8 m) sigue listo para consumir.
