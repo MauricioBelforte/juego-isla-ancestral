@@ -107,7 +107,7 @@ func _check(nombre: String, cond: bool) -> void:
 
 ## Catálogo falso: expone get_price_def(item_id) -> PriceDefinition | null.
 class _CatFake:
-	extends RefCounted
+	extends Resource
 
 	func get_price_def(item_id: String):
 		var bandas := {
@@ -122,10 +122,19 @@ class _CatFake:
 		return _Def.new(item_id, bandas[item_id])
 
 class _Def:
-	extends RefCounted
+	extends Resource
 
 	var item_id: String = ""
 	var rareza: String = ""
+	# M38 fix (2026-10-16): contrato REAL de PriceDefinition (extends Resource).
+	# RefCounted sin precio_compra abortaba _precio_base_compra() y _catalog_venta()
+	# con SCRIPT ERROR mientras la suite publicaba "0 fallos" (falso verde).
+	var precio_compra: int = 0
+	var precio_venta: int = 0
+	# 1.0 = mercado completo: preserva el default que price_manager aplicaba cuando
+	# el campo estaba ausente (no cambiar por el 0.5 de PriceDefinition).
+	var variabilidad_mercado: float = 1.0
+	var temporada: String = ""
 
 	func _init(p_item_id: String, p_rareza: String) -> void:
 		item_id = p_item_id

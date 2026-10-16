@@ -71,7 +71,7 @@ func _check(nombre: String, cond: bool) -> void:
 ## Catalogo falso para la prueba: reproduce la interfaz publica minima de
 ## EconomyPriceCatalog.get_price_def(item_id) -> PriceDefinition | null.
 class _CatFake:
-	extends RefCounted
+	extends Resource
 
 	func get_price_def(item_id: String):
 		var defs := {
@@ -87,10 +87,22 @@ class _CatFake:
 		return _Def.new(item_id, defs[item_id])
 
 class _Def:
-	extends RefCounted
+	extends Resource
 
 	var item_id: String = ""
 	var rareza: String = ""
+	# M38 fix (2026-10-16): el fake debe honrar el contrato REAL de PriceDefinition
+	# (extends Resource, con precio_compra/precio_venta/variabilidad_mercado/temporada).
+	# Antes era RefCounted y sin precio_compra: price_manager._precio_base_compra()
+	# moria con SCRIPT ERROR ("Invalid access to property 'precio_compra'") y
+	# _catalog_venta() con "Trying to assign RefCounted to Resource" -> la suite
+	# publicaba "0 fallos" con 2 abortos de runtime (falso verde).
+	var precio_compra: int = 0
+	var precio_venta: int = 0
+	# 1.0 = mercado completo: preserva el default que price_manager aplicaba cuando
+	# el campo estaba ausente (no cambiar por el 0.5 de PriceDefinition).
+	var variabilidad_mercado: float = 1.0
+	var temporada: String = ""
 
 	func _init(p_item_id: String, p_rareza: String) -> void:
 		item_id = p_item_id

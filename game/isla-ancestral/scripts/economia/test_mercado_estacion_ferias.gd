@@ -107,7 +107,7 @@ func _check(nombre: String, cond: bool) -> void:
 
 ## Catalogo falso: get_price_def(item_id) -> def con precio_compra y temporada_bonus.
 class _CatFake:
-	extends RefCounted
+	extends Resource
 
 	func get_price_def(item_id: String):
 		var d := {
@@ -120,9 +120,25 @@ class _CatFake:
 		return _Def.new(d[item_id]["precio_compra"], d[item_id]["temporada_bonus"])
 
 class _Def:
-	extends RefCounted
+	extends Resource
 
+	# M38 fix (2026-10-16): contrato REAL de PriceDefinition (extends Resource, con
+	# rareza). Antes era RefCounted y sin rareza: price_manager._banda_de() moria con
+	# 6 SCRIPT ERROR ("Invalid access to property 'rareza'") mientras la suite
+	# publicaba "0 fallos" (falso verde).
+	var item_id: String = ""
+	var rareza: String = ""
 	var precio_compra: int = 0
+	var precio_venta: int = 0
+	# 1.0 = mercado COMPLETO. Explicito a proposito: antes el campo NO existia y
+	# price_manager._variabilidad_item() devolvia 1.0 por defecto (misma semantica).
+	# NO poner 0.5 (el default de PriceDefinition): atenuaria el ajuste estacional y
+	# de feria a la mitad y romperia las aserciones RF9/RF14 (medido: 3 fallos).
+	var variabilidad_mercado: float = 1.0
+	var temporada: String = ""
+	# Campo LEGADO que usa ESTA suite para inyectar el bono estacional; price_manager
+	# lee PriceDefinition.temporada (renombrado en iter 4). Se deja intacto a
+	# proposito: cablearlo cambiaria la semantica de las aserciones RF9/RF14.
 	var temporada_bonus: String = ""
 
 	func _init(pc: int, tb: String) -> void:
