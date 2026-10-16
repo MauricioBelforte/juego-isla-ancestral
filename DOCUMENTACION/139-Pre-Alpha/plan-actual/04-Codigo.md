@@ -125,34 +125,34 @@ fase, M07) con artefactos reales en disco.
 | `ITemplo` | `scripts/interfaces/i_templo.gd` | **creado** — ofrendar/bendiciÃ³n/puzzle |
 | `IViajable` | `scripts/interfaces/i_viajable.gd` | **creado** — solicitar/cancelar/progreso/destinos |
 
-Las 3 nuevas siguen el patrÃ³n de `IInteractable` v2: mÃ©todos con default neutro para no
+Las 3 nuevas siguen el patrón de `IInteractable` v2: métodos con default neutro para no
 romper implementadores parciales. Consumidores previstos identificados: `ShopManager`/`shop.gd`
 (M39), servicio de viajes `travel_service.gd` (M28) y templos (M26, sin script aún).
 
 ### 7.2 `SesionMaster` — DEFINIDO, activaciÃ³n pendiente
 
-`scripts/core/sesion_master.gd` define el Ãºnico orquestador de arranque: mÃ¡quina de estados
-`INACTIVA → INICIALIZANDO → ACTIVA → CERRANDO → CERRADA`, inicializaciÃ³n por capas
-(Infra → World Services → Managers → UI), cierre en orden inverso y registro de servicios vÃ­a
+`scripts/core/sesion_master.gd` define el único orquestador de arranque: máquina de estados
+`INACTIVA → INICIALIZANDO → ACTIVA → CERRANDO → CERRADA`, inicialización por capas
+(Infra → World Services → Managers → UI), cierre en orden inverso y registro de servicios vía
 `ServiceRegistry` (autoload existente).
 
 **Estado honesto:** el juego hoy arranca con `run/main_scene="res://scenes/main_island.tscn"` +
-~20 autoloads en `project.godot`; **no hay SesionMaster activo**. El script es la definiciÃ³n del
-contrato. Activarlo como autoload requiera validaciÃ³n en runtime (no hecha en este frente para
+~20 autoloads en `project.godot`; **no hay SesionMaster activo**. El script es la definición del
+contrato. Activarlo como autoload requiera validación en runtime (no hecha en este frente para
 no romper producciÃ³n), por eso el ítem del checklist quedÃ³ `[ ]` con esa nota.
 
-### 7.3 Flujo de sesiÃ³n documentado
+### 7.3 Flujo de sesión documentado
 
-`menÃº principal` → (`continuar` | `nuevo juego`) → `SesionMaster.inicializar(nueva_partida)` →
-carga de zona (`ZonaManager`, M63) → mundo activo → tick de sesiÃ³n → cierre en orden inverso.
+`menú principal` → (`continuar` | `nuevo juego`) → `SesionMaster.inicializar(nueva_partida)` →
+carga de zona (`ZonaManager`, M63) → mundo activo → tick de sesión → cierre en orden inverso.
 Durante la carga la UI queda deshabilitada (regla M53: la UI nunca decide gameplay).
 
-### 7.4 Modo degradaciÃ³n si un servicio falla al arrancar (M66)
+### 7.4 Modo degradación si un servicio falla al arrancar (M66)
 
-Si un servicio de capa Infra/World/Managers falla al inicializar, la sesiÃ³n **no aborta**:
-1. Se registra el fallo (`GameLogger` + telemetrÃ­a M105) con el nombre del servicio y el motivo.
+Si un servicio de capa Infra/World/Managers falla al inicializar, la sesión **no aborta**:
+1. Se registra el fallo (`GameLogger` + telemetría M105) con el nombre del servicio y el motivo.
 2. El servicio queda marcado como degradado; sus consumidores reciben el default neutro del contrato.
 3. Si el fallo es de guardado (`SaveManager`/M59), se ofrece recuperar copia o empezar partida nueva
    (patrÃ³n ya usado por `integridad_save`/M66 y por el antí-softlock `SoftlockGuard`).
-4. La sesiÃ³n continÃº en modo degradado; el GONOGO de fase (M140) exige que los fallos
-   degradados estÃ©n documentados antes de pasar a Alpha.
+4. La sesión continú en modo degradado; el GONOGO de fase (M140) exige que los fallos
+   degradados estén documentados antes de pasar a Alpha.

@@ -100,38 +100,38 @@ Aurora. **Peces costeros: no estan en el catalogo de fauna** (son del sistema de
 
 ### 2.3.1 Bram, enano vidriero de Coral (cerrado 2026-10-14, step-5-kilocode)
 
-Cierra el item "NPC enano de Coral con 10+ lÃ­neas de diÃ¡logo (M21)" del checklist.
-Rol: vidriero de arrecife. Rutina: muelle â taller de vidrio â mirador (bucle fijo con
-tolerancia, M64). Gancho: pide material del arrecife y da la pista del 2Âº bioma.
+Cierra el item "NPC enano de Coral con 10+ líneas de diálogo (M21)" del checklist.
+Rol: vidriero de arrecife. Rutina: muelle → taller de vidrio → mirador (bucle fijo con
+tolerancia, M64). Gancho: pide material del arrecife y da la pista del 2º bioma.
 
-**DiÃ¡logos base (11 lÃ­as, tono cozy, sin apuro):**
+**Diálogos base (11 lías, tono cozy, sin apuro):**
 
-1. "Â¿Viste cÃ³mo brilla el cristal cuando baja la marea? Eso es trabajo mÃ­o, y un poco del mar."
-2. "El enclave no estÃ¡ terminado, muchacho. Algunas cosas se dejan a medias para que el que venga despuÃ©s tenga quÃ© inventar."
+1. "¿Viste cómo brilla el cristal cuando baja la marea? Eso es trabajo mío, y un poco del mar."
+2. "El enclave no está terminado, muchacho. Algunas cosas se dejan a medias para que el que venga después tenga qué inventar."
 3. "Traeme un pedazo de arrecife y te hago algo que ni la tienda de Aurora tiene."
-4. "El ocÃ©ano guarda mÃ¡s islas. Yo solo cuido la orilla de esta."
-5. "De chico creÃ­a que el mar terminaba en el acantilado. QuÃ© sÃ© yo."
-6. "Si vas a navegar, llevÃ¡ cristal. Los peces grandes cobran peaje."
-7. "Cuando llueve, el cristal canta. Quedate un rato y escuchÃ¡."
-8. "Mi taller es chico, pero ve todo el ocÃ©ano."
-9. "No compres baratijas. ComprÃ¡ cosas que duren mÃ¡s que vos."
-10. "VolvÃ© cuando quieras. El mar no tiene apuro, y yo tampoco."
+4. "El océano guarda más islas. Yo solo cuido la orilla de esta."
+5. "De chico creía que el mar terminaba en el acantilado. Qué sé yo."
+6. "Si vas a navegar, llevá cristal. Los peces grandes cobran peaje."
+7. "Cuando llueve, el cristal canta. Quedate un rato y escuchá."
+8. "Mi taller es chico, pero ve todo el océano."
+9. "No compres baratijas. Comprá cosas que duren más que vos."
+10. "Volvé cuando quieras. El mar no tiene apuro, y yo tampoco."
 11. *(noche)* "A esta hora el enclave parece terminado. Espejismo lindo."
 
-Variantes por estaciÃ³n y por dÃ­a (M29) a cargo de M21; la tabla de rutas queda en M19/M64.
+Variantes por estación y por día (M29) a cargo de M21; la tabla de rutas queda en M19/M64.
 
-**Tienda Ãºnica de Coral (arrecife glasswork) â— stock propio definido 2026-10-14 (step-5-kilocode):**
+**Tienda única de Coral (arrecife glasswork) ‗ stock propio definido 2026-10-14 (step-5-kilocode):**
 
-| Ãtem | Tipo | MÃ³dulo |
+| Ítem | Tipo | Módulo |
 |---|---|---|
 | `cristal_arrecife` | material base de crafteo | M16/M17 |
-| `lampara_coral` | decoraciÃ³n (luz cÃ¡lida) | M18/M53 |
-| `prisma_mareal` | decoraciÃ³n rara (baja rotaciÃ³n) | M39 |
+| `lampara_coral` | decoración (luz cálida) | M18/M53 |
+| `prisma_mareal` | decoración rara (baja rotación) | M39 |
 | `cebo_brillante` | cebo de pesca (+rareza de picada) | M34 |
-| `botella_mensaje` | objeto de misiÃ³n (pista del 2Âº bioma) | M22/M153 |
-| `pendiente_marea` | accesorio estÃ©tico | M39 |
+| `botella_mensaje` | objeto de misión (pista del 2º bioma) | M22/M153 |
+| `pendiente_marea` | accesorio estético | M39 |
 
-Regla: ninguno de estos Ã­tems se consigue en Aurora â€” el enclave es la Ãºnica fuente (M39).
+Regla: ninguno de estos ítems se consigue en Aurora — el enclave es la única fuente (M39).
 
 
 ### 2.3.2 Horarios, pronombres canonicos y ganchos (cerrado 2026-10-14, step-5-kilocode)
