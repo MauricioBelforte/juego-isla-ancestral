@@ -124,3 +124,22 @@
 **Total: 105 ítems.** Mantenimiento continuo por GLM-5.3-Flash (cron 5 min).
 
 **Firma:** GLM-5.3-Flash / Kilo Code — 2026-10-16
+
+======================================================================
+### Bloque W — Repo 2026-10-16 noche (+12 verificación runtime por módulo)
+1. QA §21.8 de las iteraciones del theme D102 (el ahorro del dark — la fila de los 8 colores).
+2. Verificación runtime de los 22 eventos de M74 (los festival_*_nombre del boot).
+3. Verificación runtime del canon M147 (6 personajes, 8 lugares — WorldBible 1.0.0).
+4. Verificación runtime de M160 (39 catálogos, 48 ubicaciones, 13 islas).
+5. Verificación runtime de M75 (7 actividades postgame, activo=false).
+6. Verificación runtime de M95 (3 ediciones, 2 DLC).
+7. Verificación runtime de M129 (10 productos merch).
+8. Verificación runtime de M73 (15 items 4 categorías).
+9. Verificación runtime de M158 (4 tiers 6 gates 4 forjas 4 cursos).
+10. Verificación runtime de M156 (7 terrenos).
+11. Verificación runtime de M64 (7 especies fauna, 13 individuos).
+12. QA §21.8 de las iteraciones M29/M30/M32 de DS-Opencode (fam. distinta — puede auditarte).
+
+**Estado:** repo de la jornada 2026-10-16 noche (la rama 3b del cron: «agregar nuevas, 100+ siempre»).
+
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 noche

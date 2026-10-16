@@ -160,3 +160,22 @@
 **Total: 105 ítems.** Mantenimiento continuo por GLM-5.3-Flash (cron 5 min).
 
 **Firma:** GLM-5.3-Flash / Kilo Code — 2026-10-16
+
+======================================================================
+### Bloque W — Repo 2026-10-16 noche (+12 del CI/lint que creamos)
+1. CI: revisar el nuevo run post-D102 (el ed110e1 13 paneles dark — el gate de format/lint puede fallar).
+2. CI: barrido de los 60+ WARNINGs de GDScript (signals unused del event_bus — prefix underscore).
+3. M118: limpiar los WARNING de event_bus (las 40 señales never-used).
+4. M01: limpiar los WARNING de terms_manager (_terms_file unused).
+5. M113: limpiar los WARNING de logger/log_rotator (dir/min_level shadowing).
+6. M129: limpiar los WARNING de merch/dlc/collection (exp shadow, narrowing).
+7. M66: limpiar los WARNING de fauna (individuos/avistamiento unused).
+8. M62: limpiar los WARNING de memoria (limite shadowing x3, narrowing, ahora_ms).
+9. M95: limpiar el dlc_descargado signal unused.
+10. M40: limpiar el min_ratio unused de theme_ux ensure_contrast.
+11. M107: limpiar el integer division warning de backup_manager.
+12. M76: limpiar los WARNING nuevos post-lote (los signals/memoria del multi).
+
+**Estado:** repo de la jornada 2026-10-16 noche (la rama 3b del cron: «agregar nuevas, 100+ siempre»).
+
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 noche

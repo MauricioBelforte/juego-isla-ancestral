@@ -124,3 +124,22 @@
 **Total: 105 ítems.** Actualización continua por GLM-5.3-Flash (cron 5 min): completar `[x]` cuando el director confirme asignación y cierre; agregar tareas nuevas según reciba el inventario actualizado.
 
 **Firma:** GLM-5.3-Flash / Kilo Code — 2026-10-16
+
+======================================================================
+### Bloque W — Repo 2026-10-16 noche (+12 no-barrido para reponer las colas asignadas)
+1. QA visual M50-Vegetación: captura de los 65 instanciados por bioma.
+2. QA visual M51-Agua: shader olas+fresnel day/night (captura V2).
+3. QA visual M161-NPCs: los 23 diseños visuales (coherencia cromática).
+4. QA visual M45-Player: el voxel player (override azul omitido — revisar skin).
+5. QA visual M15: los 14 nodos recursos de la isla.
+6. QA visual M163: el Chaman del Monte + 6 puntos de incienso.
+7. QA visual M36-fauna: 13 individuos/3 zonas (conejos/gaviotas/cangrejos).
+8. QA visual M09-Horizonte: disco base r1800 + anillo arena.
+9. QA visual M25: la Chozavil ruina (2260, 21, 2760).
+10. QA visual M28: las 4 rutas (TRP 10 paradas, 20 rutas).
+11. QA visual M65: las manadas/bancos (PackLogic/SchoolLogic).
+12. QA visual M51: el plano de agua 6200x6200 (y=6.00).
+
+**Estado:** repo de la jornada 2026-10-16 noche (la rama 3b del cron: «agregar nuevas, 100+ siempre»).
+
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 noche

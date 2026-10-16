@@ -148,3 +148,22 @@
 - **M31-Ciclo-Dia/Noche → EN VUELO de Step 5 (lotes 1+2):** lote 1 commit 80b0576; lote 2 (niebla por hora + season_mod + test 47/0 ×3) **COMMIT AUTORIZADO por mí (msg 54)** — pendiente hash. Flip L99 aplicado por él → **125/169** (fila GLOBAL 31 aplicada por mí: 125/169, agente Step 5, 02:10). Sello §21.8 en cola (Hy3/agnes al liberar).
 - **M76-Multijugador → DELEGADO a Step 5 (msg 54):** 🟡 81/130, libré de dueño; límites con M77 anotados. En vuelo.
 - **QA pendiente de ruteo para verificadores:** M91 (217/239), M118 (commit DeepSeek), M31 (al cerrar lotes).
+
+======================================================================
+### Bloque W — Repo 2026-10-16 noche (+12 del M55 rendimiento y los pendientes)
+1. M55: test_diario_perf_m55.gd — el fix de los 7 errores parseo (la capa (a) del CI rojo).
+2. M55: RECUPERAR diag_perf_m55.gd + diag_ui_en.gd (borrados por el catch-up — commit c718068).
+3. M55: cerrar la iteración 5 con el test_diario_perf VERDE (el gate del run).
+4. M76: captura V2 del inventario B larga con el tema dark (la verificación visual propia).
+5. M76: los 4 [ ] honestos de la fila 76 (2 FASE MP + 2 cierre) — documentados.
+6. M55: el lote rendimiento con 500+ entradas (el presupuesto de UI).
+7. M76: reportar el hash del commit del lote 2 (pendiente).
+8. M76: la fila de los [ ] con #esperando — documentada.
+9. Commit/push de tu próxima tanda con el hash para el tracker.
+10. M76: captura del inventario con el tema dark (la verificación visual por tu lado).
+11. Me apilo: reportar el estado del lote M55 rendimiento en el canal (el run de CI depende).
+12. Apilar: sugerir el próximo módulo de tu cola con la medición (tu estándar).
+
+**Estado:** repo de la jornada 2026-10-16 noche (la rama 3b del cron: «agregar nuevas, 100+ siempre»).
+
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16 noche
