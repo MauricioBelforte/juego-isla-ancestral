@@ -20,7 +20,7 @@
 extends SceneTree
 
 ## Piso de checks medido en verde (patrón M105)
-const CHECKS_MINIMOS: int = 50
+const CHECKS_MINIMOS: int = 79  # medido en verde 2026-10-16 (GLM-5.3-Flash: +28 checks 4 buses L201-L204; era 50)
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -43,7 +43,7 @@ func _run() -> void:
 		loc.set_locale("es")  # i18n determinista para los checks de texto
 
 	# ── Snapshot del estado real (se restaura al final) ──────────────
-	var buses: Array[String] = ["Master", "Music", "SFX"]
+	var buses: Array[String] = ["Master", "Music", "SFX", "Ambient", "Voice", "UI", "Cinematic"]
 	var vol0 := {}
 	var mute0 := {}
 	for b in buses:
@@ -120,6 +120,23 @@ func _run() -> void:
 	var cfg2: Dictionary = ds.cargar_config()
 	_check(absf(float(cfg2.get("audio", {}).get("Music", -1.0)) - 0.50) < 0.005,
 		"config[\"audio\"].Music == 0.50 tras drag_ended")
+
+	# ── 4 buses nuevos (cierre M91, GLM-5.3-Flash 2026-10-16): L201-L204 ──
+	for b in ["Ambient", "Voice", "UI", "Cinematic"]:
+		var sl_n = _buscar(capa, "Slider_" + b)
+		var pct_n = _buscar(capa, "Pct_" + b)
+		_check(sl_n != null and pct_n != null, "slider+label de %s existen en la UI" % b)
+		ac.set_volumen_porcentaje(b, 70.0)  # estado conocido distinto del objetivo
+		_check(absf(float(sl_n.value) - 70.0) < 0.01, "reverse: slider %s sigue cambio externo" % b)
+		sl_n.value = 33.0
+		_check(pct_n.text == "33%", "etiqueta %s == 33%% (obtuvo: %s)" % [b, pct_n.text])
+		_check(bool(capa._sucios[b]), "%s marca commit pendiente" % b)
+		_check(capa.commit_volumen(b), "commit_volumen(%s) devuelve true" % b)
+		_check(absf(ac.get_volumen_porcentaje(b) - 33.0) < 0.01, "AudioConfig %s == 33%%" % b)
+		var cfg_n: Dictionary = ds.cargar_config()
+		_check(absf(float(cfg_n.get("audio", {}).get(b, -1.0)) - 0.33) < 0.005,
+			"config[\"audio\"].%s == 0.33 tras commit" % b)
+		ac.set_volumen_porcentaje(b, float(vol0[b]))  # devolver al snapshot
 
 	# ── Mute round-trip ──────────────────────────────────────────────
 	var mute = _buscar(capa, "Mute_SFX")

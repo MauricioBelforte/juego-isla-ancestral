@@ -31,8 +31,11 @@
 class_name SettingsAudioLayer
 extends UILayer
 
-## Buses expuestos en la sección (subconjunto relevante; AudioConfig valida)
-const BUSES_SECCION: Array[String] = ["Master", "Music", "SFX"]
+## Buses expuestos en la sección (los 7 del catálogo; AudioConfig valida).
+## Ampliado 2026-10-16 (GLM-5.3-Flash, cierre M91): antes solo
+## ["Master", "Music", "SFX"] — se agregan Ambient/Voice/UI/Cinematic
+## (sliders L201-L204 del checklist M91).
+const BUSES_SECCION: Array[String] = ["Master", "Music", "SFX", "Ambient", "Voice", "UI", "Cinematic"]
 
 ## Debounce de persistencia durante drag/teclado (segundos, §21.4)
 const DEBOUNCE_COMMIT: float = 0.25
@@ -106,6 +109,11 @@ func _crear_ui() -> void:
 	_crear_fila_volumen(vbox, "Master", "SETTINGS.MAESTRO")
 	_crear_fila_volumen(vbox, "Music", "SETTINGS.MUSICA")
 	_crear_fila_volumen(vbox, "SFX", "SETTINGS.EFECTOS")
+	# 4 buses nuevos (cierre M91, GLM-5.3-Flash 2026-10-16): sliders L201-L204
+	_crear_fila_volumen(vbox, "Ambient", "SETTINGS.AMBIENTE")
+	_crear_fila_volumen(vbox, "Voice", "SETTINGS.VOCES")
+	_crear_fila_volumen(vbox, "UI", "SETTINGS.UI")
+	_crear_fila_volumen(vbox, "Cinematic", "SETTINGS.CINEMATICAS")
 
 	vbox.add_child(HSeparator.new())
 

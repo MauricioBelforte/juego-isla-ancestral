@@ -1396,3 +1396,44 @@ apertura con `.startswith("```")` y después el siguiente elemento que **sea**
 - **M53:** al wire-up del menú, usar `set_opcion("rango_dinamico", …)` etc. (claves en español) y conectar `opcion_cambiada` solo si la UI necesita reflejar cambios externos.
 - Si algún día se añade una 4ª opción: agregar la clave a `OPCIONES_VALIDAS`, `_valor_opcion_valido()`, `_aplicar_opcion()` y un check en el bloque BUG-092 de la suite.
 - QA §21.8 sigue abierto: un modelo distinto debe verificar el cierre de BUG-092.
+
+---
+
+## Notas del Agente — Iteración 12 (cierre heredado de step-5-kilocode)
+
+**Modelo:** GLM-5.3-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-16 02:20
+**Estado:** Parcial (con dudas) — liberado 🟡, NO ✅ (dependencias externas)
+
+### Lo que hice
+
+- **Herencia:** retomé el trabajo en vuelo de `step-5-kilocode` (212/239) por encargo del director (canal GLM-5.3-Flash msg 03). Inventario del checklist: 212 [x] / 25 [ ] / 2 [?].
+- **Clasificación de los 25 `[ ]` + 2 `[?]`:** 5 implementables de inmediato (menú de configuración, L201-L204 + L210), el resto dependencias externas o hardware real.
+- **Implementado (`settings_audio_layer.gd`):** `BUSES_SECCION` de 3 → 7 buses (Master/Music/SFX/Ambient/Voice/UI/Cinematic) — sliders L201-L204 del checklist con las filas genéricas `_crear_fila_volumen` + claves i18n nuevas `SETTINGS.AMBIENTE/VOCES/UI/CINEMATICAS` en `strings_es.json` y `strings_en.json`.
+- **Verificado (L210):** el dropdown de dispositivo de salida YA existía (`_opt_dispositivo` OptionButton + `_crear_fila_dispositivo()` L236-253) — flip con cita.
+- **Tests (Godot 4.7.2 headless, 3 corridas verdes):** `test_settings_audio_roundtrip` extendido con 28 checks para los 4 buses nuevos → **79 checks / 0 fallos / EXIT 0** (piso `CHECKS_MINIMOS` 50 → 79 medido); regresiones `test_audio_config` **136/0** y `test_audio_effects_m91` **82/0**.
+- **Hallazgo material:** el hallazgo grave del msg 419 de step-5-kilocode (13 claves `SETTINGS.*` ausentes del panel de audio) **ya está RESUELTO** en los catálogos es/en (verificado por script: `cadenas.SETTINGS.MAESTRO`...DISPOSITIVO_SALIDA todas presentes hoy). Quien lo saneó no dejó rastro en docs — recomendable dejar constancia en M87.
+- **Documentado como deuda externa (NO de este módulo):** catálogo `strings_pt.json` incompleto (1 sola clave `SETTINGS.*` vs ~50 de es — el fallback del manager cae a español, no a inglés) — dueño M87.
+
+### Lo que NO pude cerrar (honestidad obligatoria — quedan 20 [ ] + 2 [?])
+
+- **L18 + L110-L116 + L207 + L240-L243** (sonidos de interfaz y sus toggles/métodos): dependen de producción de assets de audio (0 .wav/.ogg/.mp3 en el repo) — nota de mimo 2026-10-02 se mantiene; los cierres de lógica están listos para cuando existan assets (M43/M53).
+- **L22/L23** (pruebas con auriculares/altavoces): requieren hardware real del usuario — no son headless.
+- **L107** (accesibilidad M58) y **L179/L181** (subtítulos multi-idioma + localización de dispositivos): dueño M87/M58.
+- **L88/L151 [?]** (HRTF): bloqueo de motor — Godot 4.7.2 no expone HRTF (sondeo previo en 03-Diseno §5.1.1).
+- **L166 [?]**: mantiene su degradación previa (`set_bus_channel_count`, 0 usos).
+
+### Intentos fallidos / decisiones
+
+- El assignment del director decía "27 pendientes" (step-5-kilocode msg 418 hablaba de 32): el conteo real hoy era 27 (25 [ ] + 2 [?]).
+- Consideré implementar L211 (botones de prueba con tono sintético vía AudioStreamWAV generado por código) y L207 (toggle ui_sounds sin assets: control inerte) — descartado: serían código muerto hasta que existan los sonidos; documentado como lote siguiente.
+- El hallazgo 419 pidió visto bueno del director para tocar los catálogos (M87): al verificar resultó ya resuelto — no toqué nada de eso; solo agregué las 4 claves NUEVAS de mis sliders (AMBIENTE/VOCES/UI/CINEMATICAS).
+
+### Recomendaciones para el próximo agente
+
+- **M43/producción de assets:** al existir los sonidos de UI, implementar L207/L211/L240-L243 y los hijos L110-L116 (el layer y AudioConfig ya están listos; el test roundtrip está preparado para 7 buses).
+- **M87:** completar las ~49 SETTINGS.* de `strings_pt.json` (el fallback actual de those claves cae en español).
+- **M58/M87:** L107/L179/L181 con dueño propio.
+- **HRTF:** sin resolver hasta que el motor exponga la API (03-Diseno §5.1.1 tiene las alternativas: plugin binaural o panorama estéreo).
+- QA §21.8 de esta iteración 12 sigue abierta: verificador externo (agnes/s2/Hy3; NO DeepSeek-V4.1-Flash ni De-Director por independencia de modelo).

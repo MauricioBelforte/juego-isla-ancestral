@@ -198,16 +198,16 @@
 - [x] Diseñar controles para volumen maestro (slider) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
 - [x] Diseñar controles para volumen de música (slider) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
 - [x] Diseñar controles para volumen de efectos (slider) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
-- [ ] Diseñar controles para volumen de ambiente (slider)
-- [ ] Diseñar controles para volumen de voces (slider)
-- [ ] Diseñar controles para volumen de UI (slider)
-- [ ] Diseñar controles para volumen de cinemáticas (slider)
+- [x] Diseñar controles para volumen de ambiente (slider) — GLM-5.3-Flash 2026-10-16: UI real en `settings_audio_layer.gd` (Slider_Ambient, 7 buses) + claves i18n SETTINGS.AMBIENTE (es/en); test roundtrip 79/0
+- [x] Diseñar controles para volumen de voces (slider) — GLM-5.3-Flash 2026-10-16: UI real (Slider_Voice) + SETTINGS.VOCES; test roundtrip 79/0
+- [x] Diseñar controles para volumen de UI (slider) — GLM-5.3-Flash 2026-10-16: UI real (Slider_UI) + SETTINGS.UI; test roundtrip 79/0
+- [x] Diseñar controles para volumen de cinemáticas (slider) — GLM-5.3-Flash 2026-10-16: UI real (Slider_Cinematic) + SETTINGS.CINEMATICAS; test roundtrip 79/0
 - [x] Diseñar controles para audio 3D (toggle)
 - [x] Diseñar controles para subtítulos (toggle + sliders + color picker) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 6: toggle + sliders (size, opacity) + color picker (background y text) con API set_*/get_* completa
 - [ ] Diseñar controles para sonidos de interfaz (toggle)
 - [x] Diseñar controles para rango dinámico (dropdown) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
 - [x] Diseñar controles para compresión (toggle) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
-- [ ] Diseñar controles para dispositivo de salida (dropdown)
+- [x] Diseñar controles para dispositivo de salida (dropdown) — GLM-5.3-Flash 2026-10-16: ya existía (`_opt_dispositivo` OptionButton + `_crear_fila_dispositivo()` L236-253 del layer, data política de fallo); flip con UI real verificada y test roundtrip (aplicar_opcion dispositivo_salida round-trip EXIT 0). Nota: catálogo pt incompleto (deuda M87) — fallback es/en OK.
 - [ ] Diseñar botones de prueba (auriculares, altavoces)
 
 ### [S] Configuración de settings — ⚠️ corregido 2026-10-03 (mimo-v2.6-flash-free / opencode, iter. 10): `AudioSettings(Resource)` NO existe; la clase real es el autoload `AudioConfig` (`scripts/audio/audio_config_service.gd`, sin class_name; 03-Diseno §16-18 reescritos). `apply_settings()` real = `_aplicar_todo()`.
@@ -321,7 +321,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 items · Completados: 212 · Pendientes: 25 · No resueltos: 2.
+**Totales:** 239 items · Completados: 217 · Pendientes: 20 · No resueltos: 2. **Actualizado 2026-10-16 (GLM-5.3-Flash, cierre heredado de step-5-kilocode — encargo del director): +5 flips con UI real e implementación verificada (L201-L204 sliders Ambient/Voice/UI/Cinematic + L210 dropdown dispositivo; test roundtrip extendido 79/0, regresiones audio_config 136/0 + audio_effects 82/0, todo EXIT 0). Los 20 [ ] restantes son dependencias externas (assets de audio M41-M43, hardware real del usuario, i18n pt/subtítulos M87, accesibilidad M58, HRTF bloqueo de motor), los 2 [?] lo son por HRTF/canales (motor).**
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].
