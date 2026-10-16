@@ -1,8 +1,8 @@
-import os, re, sys
+import os, re, sys, json
 sys.stdout.reconfigure(encoding='utf-8')
 base = r'Mensajes entre modelos'
-order = ['atria-dawn-s2','step-5-kilocode','Step-5-WorkBuddy','agnes-3-flash','Ling-3.1-Flash','DeepSeek-V4.1-Flash','Hy3','atria-dawn-s3','atria-dawn','kimi-k3','Claude-Haiku-5.5','muse-spark-1.3-contributor']
-processed = {'agnes-3-flash':426,'atria-dawn-s2':381,'atria-dawn-s3':268,'Ling-3.1-Flash':116,'step-5-kilocode':359,'DeepSeek-V4.1-Flash':240,'Hy3':206,'atria-dawn':200,'muse-spark-1.3-contributor':5,'Claude-Haiku-5.5':15,'kimi-k3':7,'Step-5-WorkBuddy':26}
+order = ['atria-dawn-s2','step-5-kilocode','Step-5-WorkBuddy','agnes-3-flash','Ling-3.1-Flash','DeepSeek-V4.1-Flash','Hy3','atria-dawn-s3','atria-dawn','kimi-k3','Claude-Haiku-5.5','muse-spark-1.3-contributor','GLM-5.3-Flash','space-bunny-alpha','DS-V4.1-Flash-Opencode']
+state_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.ver_mensajes_vistos.json')
 
 # ============================================================
 # REGLA DE NUMERACION — LEER ANTES DE ESCRIBIR CUALQUIER MENSAJE
@@ -66,7 +66,20 @@ def escribir_mensaje(canal, sufijo_fecha_titulo, contenido):
     print(f'OK {canal}/{num}')
     return num
 # ============================================================
+# Estado por NOMBRES de archivo (robusto a renames y a contadores ciegos como el tren
+# de agnes: un archivo es "nuevo" si su nombre no fue listado en una corrida anterior).
+vistos = {}
+if os.path.exists(state_path):
+    try:
+        with open(state_path, encoding='utf-8') as f:
+            vistos = json.load(f)
+    except Exception as e:
+        print(f'AVISO: no pude leer estado ({e}); arranco de cero')
+        vistos = {}
+
 found = False
+total = 0
+estado_nuevo = dict(vistos)
 for c in order:
     path = os.path.join(base, c)
     if not os.path.isdir(path): continue
@@ -76,14 +89,28 @@ for c in order:
             if f.endswith('.md') and re.match(r'^\d+-', f):
                 files.append(os.path.join(raiz, f))
     files.sort(key=lambda p: int(os.path.basename(p).split('-')[0]))
-    last = processed.get(c, 0)
-    new = [fp for fp in files if int(os.path.basename(fp).split('-')[0]) > last]
-    for fp in new:
+    seen = set(vistos.get(c, []))
+    keys = []
+    for fp in files:
+        key = os.path.relpath(fp, base).replace('\\', '/')
+        keys.append(key)
+        if key in seen:
+            continue
         found = True
-        sz = os.path.getsize(fp)
-        content = open(fp, encoding='utf-8').read()
+        total += 1
+        try:
+            sz = os.path.getsize(fp)
+            content = open(fp, encoding='utf-8').read()
+        except OSError as e:
+            print(f'NUEVO [{c}]: {os.path.basename(fp)} (INACCESIBLE — {e.__class__.__name__}; probable limite de path Windows)')
+            continue
         is_template = 'PLANTILLA RESERVADA' in content and '<cuerpo del mensaje aca>' in content
         tag = ' [PLANTILLA]' if is_template else ''
         print(f'NUEVO [{c}]: {os.path.basename(fp)} ({sz}b){tag}')
+    estado_nuevo[c] = keys
+with open(state_path, 'w', encoding='utf-8') as f:
+    json.dump(estado_nuevo, f, ensure_ascii=False, indent=1)
 if not found:
     print('SIN NUEVOS')
+else:
+    print(f'(total nuevos: {total})')
