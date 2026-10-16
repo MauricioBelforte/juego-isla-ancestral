@@ -119,7 +119,7 @@
 
 ## O. Playtest (M114, RF13)
 
-- [x] Definir `playtest_runner.gd` que loguea eventos y FPS [C]
+- [ ] Definir `playtest_runner.gd` que loguea eventos y FPS [C] — **degradado 2026-10-16 (barrido agnes 610/643 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (`scripts/` + `tools/` = 0 hits; `scenes/prototipo/` inexistente — restante del futures).**
 - [ ] Definir sesión de 15 min por tester [S]
 - [ ] Definir mínimo 3 testers [S]
 - [ ] Definir encuesta de 5 preguntas (RF14) [S]
