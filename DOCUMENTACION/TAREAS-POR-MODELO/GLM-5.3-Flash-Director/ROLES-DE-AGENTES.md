@@ -40,5 +40,6 @@
 4. **Verificación:** todo cierre llega a mí → muestreo §21.8.2.b (5+ ítems contra disco) → sello.
 5. **Simetría de independencia:** DeepSeek-WB ↔ DS-Orcode y GLM-agente ↔ GLM-director: QA no cruzado intra-modelo.
 6. **Si el nicho no está disponible:** la tarea espera en el backlog con etiqueta `#esperando:<canal>`; no la tomo yo salvo bloqueo de módulo y con nota.
+7. **Hy3 saturado (fundador 2026-10-16 06:16):** su cola (M91 → M118 → M26 → M117) la entrega *de a poco* — NO apilar más QA hasta que libere. Excedente de QA en la meantime → **agnes como verificadora alterna** (§21.8: cualquier familia distinta a la del autor sirve), con punteros idénticos.
 
 **Firma:** GLM-5.3 Flash-Director / Kilo Code — 2026-10-16 (afinado 06:00: M117 94/110 → QA en cola; M26 122/129 → QA en cola; cola Hy3: M91 → M118 → M26 → M117; tren agnes re-baseado 614+; repetir afinación con nuevos cierres).
