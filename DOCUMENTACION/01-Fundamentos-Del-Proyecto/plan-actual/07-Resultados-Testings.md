@@ -113,6 +113,62 @@ los otros módulos cierren su checklist **y** su fila GLOBAL pase a `✅`; `M01`
 Se reporta al director para que normalice el estado GLOBAL de los 3 módulos cerrados (si corresponde),
 lo que habilitaría 3 flips.
 
+### 5.4 Refresco medido (2026-10-15, DeepSeek-V4.1-Flash - iter 7)
+
+Encargo del director (msg 251: "M01-Fundamentos 21/152, trabajar por lotes de ~20 con evidencia real").
+Mismo criterio que 5.1/5.2/5.3: **checklist propia 100 % cerrada (`[?]=0`, `[ ]=0`) Y fila GLOBAL `✅`**.
+Script no versionado: `.workbuddy-ai/tmp/_m01_iter7_scan.py` + `_m01_iter7_cola.py`. Log **1858**.
+
+| Métrica | Valor medido |
+|---|---|
+| Ítems del maestro | **152** |
+| Marcas `[x]` / `[ ]` / `[?]` | **26 / 126 / 0** |
+| Checklists propias **100 % cerradas** | **29** |
+| De esas, con fila GLOBAL `✅` | **26** |
+| Flipeadas en el maestro | **26** |
+| **Candidatos NUEVOS** | **0** |
+| En curso | **122** |
+| Sin iniciar | **1** (`M045` -> `46-Arte-2D`) |
+| Ítems sin carpeta resoluble | **0** |
+| Suma de las 152 sub-checklists | **17 485 `[x]` / 970 `[?]` / 3 508 `[ ]` = 21 963** |
+
+**Auditoría de los 26 flips existentes: 26/26 válidos, 0 flips stale** (cada uno con su checklist
+propia cerrada y su fila GLOBAL en `✅`).
+
+**El director reportó `21/152`:** ese `21` es la tabla de 5.1 (iter 1) y quedó **stale** tras el
+refresco 5.3. La cifra vigente es **26/152**, medida por prefijo de línea.
+
+**Estructura del bloqueo (dato nuevo):** de los 152 ítems, **46 módulos** tienen `[ ]=0` pero `[?]>0`
+—no están cerrados por ítems **no resueltos**, no por trabajo pendiente—. De los 970 `[?]` totales,
+solo **203** viven en módulos con `[ ]` abiertos; los otros **767** están en esos 46 módulos.
+
+**Los 3 cerrados sin `✅`** (mismo caso que `M024 Ruinas`; siguen **NO flipeables** por el criterio):
+
+| Ítem | Carpeta real | Estado GLOBAL |
+|---|---|---|
+| `M018` | `19-NPC-Y-Vecinos` (128/128 cerrado) | `🟢 Disponible` — pendiente QA §21.8 |
+| `M021` | `22-Historia-Principal` (91/91 cerrado) | `🟢 Disponible` — pendiente QA §21.8 |
+| `M099` | `100-Community-Management` (220/220) | `🟡 Con dudas` |
+
+**Cola accionable (ruta al próximo lote):** 17 módulos tienen **1-5 `[ ]`** pendientes. Los más
+cercanos al flip son los que ya tienen GLOBAL `✅`: `M05` -> `06-Control-De-Versiones` (99/0/**1**) y
+`M140` -> `141-Beta` (146/0/**1**). Cerrar ese único ítem en cada uno habilita **2 flips** sin tocar
+el GLOBAL.
+
+> **Nota de mapeo (evidencia dura, corrige el msg 250 del director).** El mapeo del índice maestro es
+> `M## -> {##+1}`; la tabla `CHECKLIST-GLOBAL.md` rotula sus filas con el **número de carpeta**. Pruebas:
+> `M42` "Efectos de Sonido" lleva anotado `checklist 43-Efectos-De-Sonido 97/97` y la fila GLOBAL `43`
+> es `43-Efectos-De-Sonido`; `M41` "Sonido Ambiental" -> `42-Sonido-Ambiental`; `M17` "Casas" ->
+> `18-Casas`; `M18` "NPC y Vecinos" -> `19-NPC-Y-Vecinos`; `M03` "Game Engine" -> `04-Game-Engine`.
+> Los valores que el msg 248 escribió en las filas `18`/`21`/`99` (128/128, 91/91, 220/220) son los de
+> las carpetas `19-NPC-Y-Vecinos`, `22-Historia-Principal` y `100-Community-Management`: la intención
+> era normalizar esas 3 carpetas cerradas y el flip se escribió en las filas equivocadas por mezclar
+> las dos numeraciones. **La reversión del msg 250 fue correcta para 18/21/99; el resultado para M01 no
+> cambia** (los 3 ítems cerrados sin `✅` son los mismos módulos bajo cualquier lectura).
+
+**Conclusión: `26/152` es correcto y NO hay flips disponibles en esta iteración.** M01 sigue bloqueado
+por cierre ajeno; el volumen está en los `[?]` de los 46 módulos, no en los `[ ]`.
+
 ## 6. Integridad de bytes
 
 | Archivo | BOM | EOL | NUL | FFFD |
@@ -120,6 +176,7 @@ lo que habilitaría 3 flips.
 | `scripts/proyecto/test_fundamentals_m01.gd` | No | LF (107) | 0 | 0 |
 | `plan-actual/06-Plan-Testings.md` | No | CRLF | 0 | 0 |
 | `plan-actual/07-Resultados-Testings.md` | No | CRLF | 0 | 0 |
+| `Logs/1858-M01-Iter7-...md` (iter 7) | No | CRLF (171) | 0 | 0 bytes >127 (ASCII puro) |
 
 ## 7. Pendiente / no cubierto
 

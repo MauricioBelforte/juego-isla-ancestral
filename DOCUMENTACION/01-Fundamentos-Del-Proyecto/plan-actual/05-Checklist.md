@@ -254,6 +254,22 @@ Medicion de los 152 items contra el criterio documentado (checklist propia 100% 
 Detalle y metodo en `07-Resultados-Testings.md` seccion 5.3.
  (Corregido por director 2026-10-12: barrido Step 5 msg 246, decia 0 completados - plantilla copiada sin actualizar)
 
+## Auditoria del indice maestro (2026-10-15 - DeepSeek-V4.1-Flash, iter 7)
+
+Encargo del director (msg 251). Medicion con el mismo criterio (checklist propia 100 % cerrada Y fila GLOBAL `[OK]`). Log **1858**.
+
+- **Marcas medidas por prefijo de linea: 26 `[x]` / 126 `[ ]` / 0 `[?]`.** La cifra `21/152` del encargo es la tabla 5.1 del `07-Resultados-Testings.md` (iter 1), stale tras el refresco 5.3. **Vigente: 26/152.**
+- Checklists propias 100 % cerradas: **29**; de esas con GLOBAL `[OK]`: **26** = las **26** ya flipeadas.
+- **Candidatos nuevos: 0.** Los 26 flips existentes se re-verificaron uno por uno: **26/26 validos, 0 stale**.
+- 3 cerradas sin GLOBAL `[OK]` (no flipeables, igual que `M024`): `M018` -> `19-NPC-Y-Vecinos` (Disponible, pendiente QA 21.8), `M021` -> `22-Historia-Principal` (Disponible, pendiente QA 21.8), `M099` -> `100-Community-Management` (Con dudas).
+- En curso: **122**; sin iniciar: **1** (`M045` -> `46-Arte-2D`). Suma de los 152 sub-checklists: **17485 [x] / 970 [?] / 3508 [ ] = 21963**.
+- **Estructura del bloqueo:** 46 modulos tienen `[ ]=0` pero `[?]>0` (767 de los 970 `[?]` totales). La palanca de M01 esta en resolver `[?]`, no en cerrar `[ ]`.
+- **Cola accionable:** 17 modulos a 1-5 `[ ]` de cerrar; los mas cercanos con GLOBAL ya `[OK]` son `M05` -> `06-Control-De-Versiones` (99/0/1) y `M140` -> `141-Beta` (146/0/1).
+
+**0 flips aplicados.** M01 sigue bloqueado por cierre ajeno. Detalle y metodo en `07-Resultados-Testings.md` seccion 5.4.
+
+> **Nota de mapeo (evidencia dura):** el item `M##` de ESTE indice maestro corresponde a la carpeta `{##+1:03d}`; la tabla `CHECKLIST-GLOBAL.md` rotula sus filas con el **numero de carpeta** (fila `18` = `18-Casas`, fila `19` = `19-NPC-Y-Vecinos`). Son dos numeraciones distintas y conviven: `M42` "Efectos de Sonido" anota `checklist 43-Efectos-De-Sonido 97/97` y la fila GLOBAL `43` es `43-Efectos-De-Sonido`. Al cruzar este indice con el GLOBAL, desplazar +1.
+
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 152 [ ] / 0 [?].
 > Las marcas no se tocaron.

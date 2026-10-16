@@ -191,7 +191,7 @@
 
 ## L. Testing y QA (7)
 
-- [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M]
+- [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M] → archivo inexistente (medido 2026-10-15, DeepSeek 258); re-apuntar a shaman_intro.json al implementar; requiere test play-mode real (las 15 suites headless no lo cubren).
 - [x] Test de salto rapido: tipeo, linea, nodo y salto completo (test_skip_m21.gd: skip hasta FIN, se detiene en OPCIONES, efectos aplicados, choose_option tras skip) 0 fallos (Log 309) [S] — verificado barrido M21 (encargo msg 102, 2026-10-12): 13 checks 0 fallos headless
 - [x] Test de ramas: cada condicion verdadera y falsa evaluada [M] — barrido M21 R1: test_condiciones_mundo.gd evalúa AMBAS ramas — _test_condiciones_nodo L105-108 (estacion==0 entra / !=0 saltado, adaptativo al estado real) y _test_condicion_sesion L161-171 (amistad 1.0 → rama bloqueada [falsa]; amistad 5.0 → rama entra [verdadera]); 8 checks 0 fallos headless
 - [x] Test de validacion: 5 grafos invalidos propositados detectados en editor [M] — iter 9 (Hy3/WorkBuddy): test_validacion_5_invalidos_m21.gd (huérfano/operador/clave/next/goto) 0 fallos — verificado barrido M21 (encargo msg 102, 2026-10-12): 6 checks 0 fallos headless

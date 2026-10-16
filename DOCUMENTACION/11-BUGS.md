@@ -7148,3 +7148,79 @@ debe añadirla al árbol y esperar un frame antes de leer `layer_type`.
 **Encontrado por:** stepfun-step-5-preview / Kilo Code en la QA §21.8 de M53-UI-UX
 (muestreo de 17 ítems contra disco), reporte al director en el mensaje 242 del canal
 `StepFun-Step-5-Preview`. Fix autorizado por el director mimo (msg 243).
+
+---
+
+## 8.5 Delegados — auditoría Patrón D de M160 (DeepSeek-V4.1-Flash, informe 256 / Log 1862)
+
+### BUG-135 — La integración M18 -> M160 está MUERTA: `house_manager.gd` llama a `WorldLocations.buscar_cerca()`, método que no existe
+
+- **Fecha de reporte:** 2026-10-15 02:51
+- **Módulo(s) afectado(s):** M18 (Casas) — `game/isla-ancestral/scripts/houses/house_manager.gd` L231-238; contraparte M160 (WorldLocations) — `game/isla-ancestral/scripts/data/world_locations.gd`
+- **Severidad:** 🟡 Menor (hoy el guard devuelve `true`, que coincide con el camino "sin M160 -> no bloquear")
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado — dueño M18/M160; decide el agente que tome ese frente
+
+**Descripción del problema:**
+
+`HouseManager.casa_en_ubicacion_conocida(casa_id)` (L231) pretende verificar si una casa está en una ubicación conocida de M160. Su implementación (L236-238):
+
+```
+var wl = get_node_or_null("/root/WorldLocations")
+if wl == null or not wl.has_method("buscar_cerca"):
+    return true  # sin M160 -> no bloquear
+return wl.buscar_cerca(Vector2(pos.x, pos.z), 100.0)
+```
+
+`buscar_cerca` **no existe en todo el proyecto**: 0 definiciones (`grep -rn "func buscar_cerca" --include=*.gd` = 0 resultados). La API real de `WorldLocations` es: `get_location`, `get_locations_by_island`, `get_locations_by_type`, `can_access`, `cargar_catalogo_json`, `_reflejar_conexiones`, `validar_conexiones`, `get_conexiones`, `get_recolectables`.
+
+Consecuencia: el guard `has_method("buscar_cerca")` es **siempre falso** -> la función retorna `true` **siempre**, y la línea 238 (`wl.buscar_cerca(...)`) es **código muerto** (nunca se ejecuta). La integración M18 -> M160 es un grafo vivo en la documentación y muerto en runtime. Es la misma familia que BUG-116 (señal/método inexistente + guard que lo enmascara) y la trampa 24 del proyecto.
+
+**Pasos para reproducir:**
+
+1. Abrir `game/isla-ancestral/scripts/houses/house_manager.gd` en L231-238.
+2. `grep -rn "func buscar_cerca" --include=*.gd .` en la raíz del proyecto Godot -> 0 definiciones.
+3. Llamar `casa_en_ubicacion_conocida("<cualquier_id>")` con el autoload `WorldLocations` presente -> retorna `true` sin consultar M160 (el `has_method` corta antes).
+
+**Comportamiento esperado:**
+
+Que `casa_en_ubicacion_conocida()` consulte de verdad el catálogo M160 (p. ej. implementando `buscar_cerca(pos: Vector2, radio: float)` en `world_locations.gd`, o reescribiendo la llamada sobre la API existente `get_location`/`get_locations_by_island`), y que devuelva `false` cuando la casa NO está sobre ninguna ubicación conocida.
+
+**Comportamiento actual:**
+
+Retorna `true` incondicionalmente. El caso "casa fuera de toda ubicación conocida" nunca se detecta.
+
+**Entorno / Contexto:**
+- Versión del juego / build: Godot 4.7.2-stable (headless)
+- Plataforma: PC (Windows)
+- Seed del mundo / save afectado: N/A
+- Configuración gráfica o de audio: N/A
+- Ocurre desde la versión / commit: N/A (no hay commit de origen identificado; el guard está desde la implementación de M18)
+- Frecuencia: Siempre
+
+**Evidencia:**
+- Mensaje de error exacto: N/A (no hay error: el guard lo enmascara silenciosamente)
+- Logs / archivos relacionados: `Logs/1862-M160-Reverificacion-Patron-D-7Q-3B_2026-10-15_02-51-34.md` (medición original, informe 256 al director)
+- Capturas o videos (ruta): N/A
+- **Hallazgo colateral:** `game/isla-ancestral/scripts/houses/test_m18_casas.gd:117` afirma `_check("casa_en_ubicacion_conocida (headless=true)", hm.casa_en_ubicacion_conocida(id1))` -> el test **consagra** el comportamiento degradado (espera `true` porque no hay `WorldLocations` en headless). Al arreglar el bug hay que revisar esa aserción, no solo el código.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno: es un hallazgo de auditoría (Patrón D, solo lectura). No se tocó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no
+- GitHub Issue #: N/A
+- Módulo/documentación relacionada: `DOCUMENTACION/160-Diseno-De-Ubicaciones-Del-Mundo/plan-actual/05-Checklist.md` (L55 `[?]` "Integrar con M18 (Casas) para ampliaciones" — este bug es la razón de fondo por la que sigue `[?]`); fila 160 de `CHECKLIST-GLOBAL.md`; BUG-116 (misma familia); trampa 24 (arista viva en el grafo, muerta en runtime)
+
+**Firma:**
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy (opencode)
+**Fecha:** 2026-10-15 02:51
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió:
+- [ ] Archivos/commits modificados:
+- [ ] Log del proyecto:
+- [ ] Verificado por:
+
+---
