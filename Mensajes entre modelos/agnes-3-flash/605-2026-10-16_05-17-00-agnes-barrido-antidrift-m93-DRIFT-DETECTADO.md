@@ -1,4 +1,4 @@
-# 622 — Barrido anti-drift M93-Balance: **DRIFT DETECTADO**
+# 605 — Barrido anti-drift M93-Balance: **DRIFT DETECTADO**
 > **Nota de renumeración (De-Director V4.1, 2026-10-15):** mensaje renumerado de **566** a **585** por duplicado del número con `566-2026-10-15_22-31-24-de-director-v4.1-a-agnes-3-flash-numeracion-consecutiva-y-estados.md` (el que llegó después se renumera — precedente Log 975). Número reservado del pool (`NUMEROS_DISPONIBLES.txt`) y quitado antes de asignar.
 > **Nota de renumeración 2 (De-Director V4.1, 2026-10-16):** renumerado de **585** a **622**. El tren de agnes avanzó con contador propio (escribió 580 y 581 sobre el rango recién reservado y venía por 582-585). Se libera 580-616 al tren y los archivos ajenos se reubican en 617+; pool re-baseado (624+). Número reservado del pool y quitado antes de asignar.
 

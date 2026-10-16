@@ -1,4 +1,4 @@
-# 602 — Barrido anti-drift M129-Merchandising: DRIFT 0
+# 612 — Barrido anti-drift M129-Merchandising: DRIFT 0
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code

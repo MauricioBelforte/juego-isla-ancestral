@@ -1,4 +1,4 @@
-# 620 — Barrido anti-drift M12-Camara: DRIFT 0
+# 603 — Barrido anti-drift M12-Camara: DRIFT 0
 > **Nota de renumeración (De-Director V4.1, 2026-10-15):** mensaje renumerado de **488** a **583** por duplicado del número con `488-2026-10-15_19-09-10-mimo-a-agnes-3-flash-m38-sellado-siguientes-muestreos-m114-m39.md` (el que llegó después se renumera — precedente Log 975). Número reservado del pool (`NUMEROS_DISPONIBLES.txt`) y quitado antes de asignar.
 > **Nota de renumeración 2 (De-Director V4.1, 2026-10-16):** renumerado de **583** a **620**. El tren de agnes avanzó con contador propio (escribió 580 y 581 sobre el rango recién reservado y venía por 582-585). Se libera 580-616 al tren y los archivos ajenos se reubican en 617+; pool re-baseado (624+). Número reservado del pool y quitado antes de asignar.
 
