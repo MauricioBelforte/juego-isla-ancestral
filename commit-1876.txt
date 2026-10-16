@@ -1,0 +1,11 @@
+Se corrigió la numeración de mensajes al consecutivo del hilo y se derivó M91 a GLM-5.3-Flash
+
+- Se documentó la regla reformada de numeración (manda la secuencia del hilo) en AGENTS.md y GUIA-COMUNICACION.md — Log 1875 de GLM-5.3-Flash, directiva del fundador
+- Se renumeró la presentación del director en el canal de agnes-3-flash al consecutivo real (547 → 565) y la nota de regla/estados quedó en 566 (corridas al frente libre por las carreras del barrido continuo); pool saneado (567-610)
+- Se envió a GLM-5.3-Flash el encargo del cierre de M91 y las tareas documentales de M52 y M11 (canal 03)
+- Se corrigió la fila 45 malformada de CHECKLIST-GLOBAL.md y se verificó el sello de agnes en M38
+- Se respondieron los canales de la flota con decisiones y nuevas delegaciones: DeepSeek-V4.1-Flash (264, CI roto M118), Hy3 (223, QA cruzado M09), Step-5-WorkBuddy (49, M31 lote 1) y GLM-5.3-Flash (05, addendum M52 con L60)
+- Se aplicaron degradaciones por muestreo (§21.8.2.b): M64 (12 ítems), M94 (4), M164 (2); totales de los checklists y filas correspondientes de CHECKLIST-GLOBAL actualizados
+- Se incorporaron los mensajes y pools pendientes de versionar de los canales del director (DeepSeek, Hy3, Step-5-WorkBuddy, GLM-5.3-Flash y agnes-3-flash); los logs de cada agente pendiente de commit se dejan a su autorización
+- Nota: los barridos continuos de agnes-3-flash (mNN, contador interno ciego) no se versionan; solo los mensajes del director (565/566) — el barrido pisó esos números minutos después
+- Log 1876 del director

@@ -46,3 +46,6 @@
 ## Logs
 
 - [x] Log creado: **1017** — M39 cierre iter GLM (atomicidad catalogo D8 + falso-verde loop economico)
+- [x] Log reservado y creado: **1875** — Regla de numeración de mensajes: manda la secuencia del hilo (directiva del fundador 2026-10-15; GUIA-COMUNICACION.md + AGENTS.md §10.2). *(GLM-5.3-Flash / Kilo Code, canal `Mensajes entre modelos/GLM-5.3-Flash/`)*
+- [x] Log reservado y creado: **1876** — Backlogs 100+ tareas por modelo activo (5 archivos en esta carpeta, 105 tareas cada uno) + Tareas A/B del director (M52 degradación validate_vfx + M11 notas refrescadas). *(GLM-5.3-Flash / Kilo Code, 2026-10-16)*
+- [x] Log reservado y creado: **1877** — M91 cierre heredado de step-5-kilocode: 212→217/239 (+5 flips L201-L204/L210, sliders 7 buses + claves i18n es/en, tests 79/0 + 136/0 + 82/0, liberado 🟡 con deudas externas). *(GLM-5.3-Flash / Kilo Code, 2026-10-16)*
