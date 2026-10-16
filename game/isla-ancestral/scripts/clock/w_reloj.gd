@@ -114,14 +114,14 @@ func _construir_ui() -> void:
 	_lbl_hora.name = "Hora"
 	_lbl_hora.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_lbl_hora.add_theme_font_size_override("font_size", 34)
-	_lbl_hora.add_theme_color_override("font_color", Color(0.09, 0.10, 0.15, 0.92))
+	_lbl_hora.add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))  # D102-fix: cream claro (el dark fantasma hacia el numero invisible)
 	vbox.add_child(_lbl_hora)
 
 	_lbl_fecha = Label.new()
 	_lbl_fecha.name = "Fecha"
 	_lbl_fecha.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_lbl_fecha.add_theme_font_size_override("font_size", 14)
-	_lbl_fecha.add_theme_color_override("font_color", Color(0.85, 0.65, 0.30, 0.45))
+	_lbl_fecha.add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))  # D102-fix: cream pleno (el ambar 0.45 no se leia sobre el fondo dark)
 	vbox.add_child(_lbl_fecha)
 
 	# Chip de estación: mini panel coloreado + nombre
