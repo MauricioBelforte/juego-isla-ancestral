@@ -177,7 +177,7 @@
 |---|---|---|
 | M52 | L144 validate_vfx.gd [x] sin archivo | **APLICADA**: degradado a [?] (flip GLM-5.3 Flash-Director, Tarea A del ex-director) + L60 VfxManager tambien [?]. Checklist 145/148. |
 | M93 | L190 balance_report.gd [x] sin archivo | **APLICADA**: degradado a [ ] (flip GLM-5.3 Flash-Director). Checklist 130/134. Fila GLOBAL 93 actualizada. |
-| M137 | L122 playtest_runner.gd [x] sin disco | **APLICADA**: degradado a [ ] (flip GLM-5.3 Flash-Director). Checklist 8 [x]+123 [ ] + fila GLOBAL 137 (pendiente confirmar fila). |
+| M137 | L122 playtest_runner.gd [x] sin disco | **APLICADA**: degradado a [ ] (flip GLM-5.3 Flash-Director). Checklist 7 [x]+124 [ ] (medido post-flip) + fila GLOBAL 137 actualizada a 7/131. |
 
 Los 3 DRIFT de la flota resultado: responsables con atencion y correccion aplicada; el barrido de agnescumple su funcion de detector - el corrector es el director (estandar §21.8.2.b con medicion).
 
