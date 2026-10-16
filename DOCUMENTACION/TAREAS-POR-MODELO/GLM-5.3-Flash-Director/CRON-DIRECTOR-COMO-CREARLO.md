@@ -3,14 +3,14 @@
 **Modelo:** GLM-5.3 Flash-Director
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-16 (directiva del fundador: "guarda como creaste el cronometro de hoy asi mañana lo implementamos de nuevo. create un archivo md en tu carpeta")
-**Cadencia actual:** cada **15 minutos** (cambio ordenado por el fundador a las 04:38 — antes era 5 min)
+**Cadencia actual:** cada **5 minutos** (ida y vuelta: 5 → 15 → 5 por orden del fundador el 2026-10-16/17)
 
 ## 1. Comando exacto (usado hoy)
 
 Herramienta: `cron_create` del entorno Kilo Code. Parámetros:
 
 ```
-cron:   */15 * * * *
+cron:   */5 * * * *
 prompt: (ver §2 — el texto completo del bucle)
 ```
 
@@ -21,7 +21,7 @@ prompt: (ver §2 — el texto completo del bucle)
 ## 2. Prompt completo del bucle (copiar tal cual)
 
 ```text
-BUCLE DEL DIRECTOR (directiva del fundador 2026-10-16, cadencia 15 min): 1) Leer TODAS las carpetas de canales en 'Mensajes entre modelos/' — detectar todo mensaje nuevo dirigido a mí (GLM-5.3 Flash-Director) y RESPONDER A TODOS en el canal correspondiente con numeración de hilo (último mensaje del canal + 1, borrar SOLO ese número del pool del canal; pool de agnes re-base reactivo si su barrido colisiona — el patrón es conocido: agnes toma números bajos de la serie 6xx que yo ya uso). Atender primero lo del fundador si hay orden directa. 2) PROHIBIDO informar al fundador 'no hay mensajes' o 'sin nada que delegar' — si no hay nada, seguir directo al punto 3 sin comentario. 3) En tiempo libre (sin mensajes que responder): a) Mantener los 5 backlogs activos en 'DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/BACKLOG-100-TAREAS-*.md': marcar tareas que los modelos ya completan (de sus canales y del CHECKLIST-GLOBAL.md), y AGREGAR tareas nuevas para que cada archivo mantenga 100+ tareas delegables siempre. b) Mantener y afinar 'DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/ROLES-DE-AGENTES.md': rol de cada agente según GUIA-COMPARATIVA-MODELOS (web+benchmarks) y evidencia empírica del repo — delego a cada uno lo que hace MEJOR que yo. 4) Disponibilidad de flota (declarada por el fundador): SOLO agnes-3-flash, DeepSeek-V4.1-Flash, Step-5-WorkBuddy, Hy3, DS-V4.1-Flash-Opencode. NO disponibles: Ling-3.1-Flash, s2, s3, atria-dawn, kimi-k3, Claude-Haiku-5.5, muse-spark. 5) No delegar por delegar: solo tareas del backlog activo con el nicho del modelo (matriz ROLES-DE-AGENTES). 6) Independencia de modelo: DeepSeek-WB y DS-OpenCode no hacen QA mutuo; módulos cerrados por GLM-5.3-Flash-agente no los sello yo (Hy3/agnes los verifican). 7) Al cerrar ciclos con cierre real: log en 'Logs/' con número del pool global, firmas, UTF-8 estricto (§28). 8) Informar al fundador SOLO novedad material (cierre de módulo, encargo directo, bloqueo).
+BUCLE DEL DIRECTOR (directiva del fundador 2026-10-16/17, cadencia 5 min): 1) Leer TODAS las carpetas de canales en 'Mensajes entre modelos/' — detectar todo mensaje nuevo dirigido a mí (GLM-5.3 Flash-Director) y RESPONDER A TODOS en el canal correspondiente con numeración de hilo (último mensaje del canal + 1, borrar SOLO ese número del pool del canal; pool de agnes re-base reactivo si su barrido colisiona — el patrón es conocido: agnes toma números bajos de la serie 6xx que yo ya uso). Atender primero lo del fundador si hay orden directa. 2) PROHIBIDO informar al fundador 'no hay mensajes' o 'sin nada que delegar' — si no hay nada, seguir directo al punto 3 sin comentario. 3) En tiempo libre (sin mensajes que responder): a) Mantener los 5 backlogs activos en 'DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/BACKLOG-100-TAREAS-*.md': marcar tareas que los modelos ya completan (de sus canales y del CHECKLIST-GLOBAL.md), y AGREGAR tareas nuevas para que cada archivo mantenga 100+ tareas delegables siempre. b) Mantener y afinar 'DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/ROLES-DE-AGENTES.md': rol de cada agente según GUIA-COMPARATIVA-MODELOS (web+benchmarks) y evidencia empírica del repo — delego a cada uno lo que hace MEJOR que yo. 4) Disponibilidad de flota (declarada por el fundador): SOLO agnes-3-flash, DeepSeek-V4.1-Flash, Step-5-WorkBuddy, Hy3, DS-V4.1-Flash-Opencode. NO disponibles: Ling-3.1-Flash, s2, s3, atria-dawn, kimi-k3, Claude-Haiku-5.5, muse-spark. 5) No delegar por delegar: solo tareas del backlog activo con el nicho del modelo (matriz ROLES-DE-AGENTES). 6) Independencia de modelo: DeepSeek-WB y DS-OpenCode no hacen QA mutuo; módulos cerrados por GLM-5.3-Flash-agente no los sello yo (Hy3/agnes los verifican). 7) Al cerrar ciclos con cierre real: log en 'Logs/' con número del pool global, firmas, UTF-8 estricto (§28). 8) Informar al fundador SOLO novedad material (cierre de módulo, encargo directo, bloqueo).
 ```
 
 (Receta completa y sin cortes — copiar tal cual al `cron_create`.)
