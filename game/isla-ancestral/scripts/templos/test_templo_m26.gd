@@ -28,6 +28,9 @@ const RUTA_BLUEPRINT := "res://data/templos/templo_blueprint.json"
 const RUTA_ITER1 := "res://data/templos/templo_subterraneo.json"
 const DIR_TEST := "user://test_m26_cp"
 
+# Piso de checks MEDIDO en verde (iter. 3): un aborto silencioso baja el conteo.
+const CHECKS_MINIMOS := 110
+
 var _checks := 0
 var _fallos := 0
 var _marcadores: Array[String] = []
@@ -276,6 +279,8 @@ func _bloque_e() -> void:
 	_check("checkpoints: 0 problemas", ValGd.validar_checkpoints(layout, bp).is_empty(), str(ValGd.validar_checkpoints(layout, bp)))
 	var todo: Dictionary = ValGd.validar_todo(layout, bp)
 	_check("validar_todo().ok == true", bool(todo.get("ok", false)))
+	_check("glifos: 0 problemas (8 = 4 comunes + 4 de camara)", ValGd.validar_glifos(layout).is_empty(), str(ValGd.validar_glifos(layout)))
+	_check("presupuesto: 0 problemas (regiones + instancing)", ValGd.validar_presupuesto(bp).is_empty(), str(ValGd.validar_presupuesto(bp)))
 	_check("las 20 salas son alcanzables desde 'porte'", ValGd.alcanzables(layout, "porte").size() == 20)
 	_check("7 puzzles con recompensa (7 sellos de cristal)", _contar_recompensas(layout) == 7)
 	_check("las 4 salas secretas tienen recompensa", _contar_salas_secretas(layout) == 4)
@@ -374,10 +379,92 @@ func _bloque_g() -> void:
 	_fin("G")
 
 
+# ------------------------------------------------------------------ H ------
+
+func _glifos_catalogo(layout: Dictionary) -> Array:
+	var out: Array = []
+	for g in (layout.get("glifos", []) as Array):
+		out.append(str((g as Dictionary).get("id", "")))
+	return out
+
+
+func _bloque_h() -> void:
+	print("[H] Glifos (8 = 4+4) y presupuesto por region — el diseño pasa y detecta fallos inyectados")
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(RUTA_DISENO))
+	var bp: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(RUTA_BLUEPRINT))
+
+	# --- el diseño real: catalogo completo y coherente -----------------------
+	var cat: Array = layout.get("glifos", []) as Array
+	var comunes := 0
+	var camara := 0
+	for g in cat:
+		var tipo := str((g as Dictionary).get("tipo", ""))
+		if tipo == "comun":
+			comunes += 1
+		elif tipo == "camara":
+			camara += 1
+	_check("catalogo con 8 glifos", cat.size() == 8)
+	_check("4 comunes + 4 de camara", comunes == 4 and camara == 4)
+	var catalogo := _glifos_catalogo(layout)
+	var faltan_en_catalogo: Array = []
+	for g in _glifos_del_diseno():
+		if not catalogo.has(str(g)):
+			faltan_en_catalogo.append(str(g))
+	_check("los 7 glifos de anillo estan en el catalogo", faltan_en_catalogo.is_empty(), str(faltan_en_catalogo))
+	_check("el 8.o glifo (amanecer) NO esta en los anillos", not _glifos_del_diseno().has("glifo_amanecer"))
+
+	# --- fallos inyectados: el validador NO aprueba todo --------------------
+	# 1) quitar el 8.o glifo
+	var l1: Dictionary = layout.duplicate(true)
+	(l1["glifos"] as Array).pop_back()
+	_check("detecta catalogo de 7 glifos", _tiene(ValGd.validar_glifos(l1), "deben existir 8"))
+
+	# 2) tipo invalido (rompe el 4+4)
+	var l2: Dictionary = layout.duplicate(true)
+	(l2["glifos"] as Array)[0]["tipo"] = "otro"
+	_check("detecta tipo de glifo invalido", _tiene(ValGd.validar_glifos(l2), "tipo invalido"))
+	_check("detecta el desbalance comun/camara", _tiene(ValGd.validar_glifos(l2), "comunes"))
+
+	# 3) glifo de anillo fuera del catalogo
+	var l3: Dictionary = layout.duplicate(true)
+	(l3["anillos"] as Array)[0]["glifo"] = "glifo_fantasma"
+	_check("detecta anillo con glifo fuera del catalogo", _tiene(ValGd.validar_glifos(l3), "fuera del catalogo"))
+
+	# 4) glifo duplicado
+	var l4: Dictionary = layout.duplicate(true)
+	(l4["glifos"] as Array)[1]["id"] = "glifo_brisa"
+	_check("detecta glifo duplicado", _tiene(ValGd.validar_glifos(l4), "duplicado"))
+
+	# 5) presupuesto: instancing y streaming apagados
+	var b1: Dictionary = bp.duplicate(true)
+	b1["presupuesto"]["instancing_columnas"] = false
+	_check("detecta falta de instancing de columnas", _tiene(ValGd.validar_presupuesto(b1), "instancing"))
+	var b2: Dictionary = bp.duplicate(true)
+	b2["presupuesto"]["streaming_por_piso"] = false
+	_check("detecta falta de streaming por piso", _tiene(ValGd.validar_presupuesto(b2), "streaming"))
+
+	# 6) presupuesto: regiones incompletas y suma desbordada
+	var b3: Dictionary = bp.duplicate(true)
+	(b3["presupuesto"]["regiones"] as Dictionary).erase("central")
+	_check("detecta region de checkpoint faltante", _tiene(ValGd.validar_presupuesto(b3), "falta la region"))
+	var b4: Dictionary = bp.duplicate(true)
+	b4["presupuesto"]["regiones"]["central"] = 999999
+	_check("detecta suma de regiones > rotonda", _tiene(ValGd.validar_presupuesto(b4), "supera la rotonda"))
+
+	# 7) presupuesto: particulas y luz volumetrica fuera de limite
+	var b5: Dictionary = bp.duplicate(true)
+	b5["presupuesto"]["particulas_por_escena_max"] = 512
+	_check("detecta particulas > 256", _tiene(ValGd.validar_presupuesto(b5), "particulas"))
+	var b6: Dictionary = bp.duplicate(true)
+	b6["presupuesto"]["luz_volumetrica_salas"] = 5
+	_check("detecta luz volumetrica > 2 salas", _tiene(ValGd.validar_presupuesto(b6), "luz volumetrica"))
+	_fin("H")
+
+
 # ----------------------------------------------------------------- run -----
 
 func _run() -> void:
-	print("=== [M26] Templo Subterráneo — iteración 2 (DeepSeek-V4.1-Flash / WorkBuddy) ===")
+	print("=== [M26] Templo Subterráneo — iteración 3 (DeepSeek-V4.1-Flash / WorkBuddy) ===")
 	glifos = _glifos_del_diseno()
 	_check("se leyeron 7 glifos del diseño", glifos.size() == 7)
 	_bloque_a()
@@ -387,9 +474,15 @@ func _run() -> void:
 	_bloque_e()
 	_bloque_f()
 	_bloque_g()
+	_bloque_h()
 	# Anti-falso-verde: si un bloque no se ejecutó (error de script que aborta la
 	# función en silencio), su marcador falta y esto lo delata.
-	for b in ["A", "B", "C", "D", "E", "F", "G"]:
+	for b in ["A", "B", "C", "D", "E", "F", "G", "H"]:
 		_check("bloque %s ejecutado hasta el final" % b, _marcadores.has(b))
+	# Piso de checks MEDIDO en verde: un aborto silencioso (total o dentro de un
+	# helper) baja el conteo, y sin piso el resumen seguiría diciendo "0 fallos".
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("  [FALLO] solo %d checks ejecutados (minimo %d medido en verde)" % [_checks, CHECKS_MINIMOS])
 	print("=== Resumen M26: %d checks, %d fallos ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)

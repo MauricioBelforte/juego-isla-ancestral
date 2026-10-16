@@ -1,8 +1,19 @@
 # 05 — Checklist — M26: Templo Subterráneo
 
-**Modelo:** Deepseek V4 Flash (diseño, 2026-08-17) · DeepSeek-V4.1-Flash / WorkBuddy (iter. 2, 2026-09-14)
-**Plataforma:** OpenCode (diseño) · WorkBuddy (iter. 2)
-**Fecha:** 2026-08-17 (diseño) · 2026-09-14 (iter. 2)
+**Modelo:** Deepseek V4 Flash (diseño, 2026-08-17) · DeepSeek-V4.1-Flash / WorkBuddy (iter. 2, 2026-09-14 · iter. 3, 2026-10-16)
+**Plataforma:** OpenCode (diseño) · WorkBuddy (iter. 2, iter. 3)
+**Fecha:** 2026-08-17 (diseño) · 2026-09-14 (iter. 2) · 2026-10-16 (iter. 3)
+
+## Reserva actual
+
+- **Estado:** 🔵 En curso (reserva 2026-10-16 — encargo del director `GLM-5.3 Flash-Director`, msg 269). El módulo sigue 🟡: aguarda QA §21.8 (Hy3/agnes/s2) y dependencias externas.
+- **Agente:** DeepSeek-V4.1-Flash (WorkBuddy)
+- **Fase:** F6 (vertical slice)
+- **Dificultad:** 4
+- **Visión:** V2
+- **Entrada:** M24 Templos y Puzzles (avanzado) + M25 Ruinas (avanzado)
+- **Salida:** iter. 3 entregada — **122/129 `[x]`, 7 `[?]` con dueño externo, 0 `[ ]`**; lógica verificable implementada y probada (110 checks / 0 fallos, gate 106/0)
+- **Archivos afectados:** `game/isla-ancestral/data/templos/`, `game/isla-ancestral/scripts/templos/`, `DOCUMENTACION/26-Templo-Subterraneo/plan-actual/`, `Logs/1886-*`
 
 ## Convención
 
@@ -115,7 +126,7 @@
 
 ## Iconografía y arquitectura
 
-- [?] Diseñar 8 glifos del Sello (4 comunes + 4 de cámara) [M] — el diseño pide 8 (4+4); `templo_layout_diseno.json` nombra 7 (uno por anillo). Falta el 8.º y la separación común/cámara
+- [x] Diseñar 8 glifos del Sello (4 comunes + 4 de cámara) [M] — **DeepSeek-V4.1-Flash (iter. 3, 2026-10-16):** catálogo `glifos` en `templo_layout_diseno.json` con los 8 y su tipo — 4 comunes (brisa, raíz, luna, marea) + 4 de cámara (cenit, eco, sello, amanecer). `TemploValidadores.validar_glifos()` exige el 4+4, que los 7 glifos de anillo existan en el catálogo y que sobre exactamente 1; bloque E (0 problemas) y bloque H (5 inyecciones)
 - [?] Definir glosario en la Guía del Templo (M24) [S] — la Guía del Templo es de M24 (no implementada en este repo)
 - [x] Definir arquitectura voxel-compatible (corredores 4x4x4 m) [C] — `voxel.corredor` en el blueprint + `validar_voxel` (tests E/F)
 - [x] Definir puertas de 2x3 bloques [S] — `voxel.puerta` + `validar_voxel`
@@ -145,7 +156,7 @@
 - [x] Implementar mojones visuales cada 40 m [M] — `orientacion.mojon_metros_max = 40` + `validar_orientacion` (test F: 60 m se rechaza)
 - [?] Implementar mapa de zona simplificado (panel M58) [M] — el panel es de M58; no hay artefacto. (El diseño y el validador existen, la UI no)
 - [x] Definir prueba de deriva (jugador perdido < 2 min) [M] — `orientacion.deriva_max_s = 120` + `validar_orientacion`
-- [ ] Documentar softlocks, exploits y orientación [M]
+- [x] Documentar softlocks, exploits y orientación [M] — **DeepSeek-V4.1-Flash (iter. 3, 2026-10-16):** `04-Codigo.md` §"Softlocks, exploits y orientación (documentación consolidada)" — tabla regla de diseño → artefacto → verificación (softlock/alcanzabilidad, 2+ caminos, sellos únicos, salida sellada, rampas ≤20°, teleports, mojones ≤40 m, deriva) con el alcance honesto (deriva real = runtime)
 
 ## Accesibilidad y rendimiento
 
@@ -154,10 +165,10 @@
 - [x] Definir sin presión temporal en puzzles [S] — `accesibilidad.presion_temporal = false` + `validar_accesibilidad` (test F)
 - [x] Definir subtítulos activables (M43) [S] — `accesibilidad.subtitulos = true` + `validar_accesibilidad` (la UI de subtítulos es de M43)
 - [x] Definir reducción de partículas y parpadeo (fotosensibilidad) [S] — `accesibilidad.reduccion_particulas` / `reduccion_parpadeo` + `validar_accesibilidad`
-- [?] Definir presupuesto por región (M63, streaming por piso) [M] — el blueprint fija presupuesto de rotonda y de partículas, pero el streaming por región es de M63
-- [?] Definir instancing de columnas en la rotonda [S] — no hay campo de instancing en el blueprint; depende de M61/M63
+- [x] Definir presupuesto por región (M63, streaming por piso) [M] — **DeepSeek-V4.1-Flash (iter. 3, 2026-10-16):** `presupuesto.regiones` en el blueprint, una región por checkpoint (porte 60k · vestíbulo 90k · vientos 130k · central 120k · sello 80k = 480k ≤ 500k) + `streaming_por_piso`; `validar_presupuesto()` exige coincidencia 1:1 con `checkpoints` y que la suma no supere la rotonda (bloque E + bloque H). El **streaming** lo implementa M63
+- [x] Definir instancing de columnas en la rotonda [S] — **DeepSeek-V4.1-Flash (iter. 3, 2026-10-16):** `presupuesto.instancing_columnas = true` en el blueprint + `validar_presupuesto()` lo exige (bloque E; bloque H: `false` se rechaza). Las draw calls son de M61
 - [x] Definir luz volumétrica solo en 2 salas fijas [S] — `presupuesto.luz_volumetrica_salas = 2`
-- [ ] Documentar accesibilidad y rendimiento [M]
+- [x] Documentar accesibilidad y rendimiento [M] — **DeepSeek-V4.1-Flash (iter. 3, 2026-10-16):** `04-Codigo.md` §"Accesibilidad y rendimiento (documentación consolidada)" — tabla regla → artefacto → verificación (iconos ≥16 px, contraste ≥4.5:1, sin presión temporal, subtítulos, reducción de partículas/parpadeo, partículas ≤256, luz volumétrica en 2 salas, reparto por región) con el alcance honesto (streaming/instancing = M63/M61)
 
 ## Testings y documentación
 
@@ -173,7 +184,8 @@
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — `Logs/902-M26-Templo-Subterraneo-Iter2_2026-09-14.md`
 - [x] Actualizar fila 26 en CHECKLIST-GLOBAL al implementar [S]
 
-**Totales:** 129 ítems · Completados: 101 · Pendientes: 18 · No resueltos: 10 (incluye el ítem de dependencia M154). — drift corregido por QA s2 (Log 1777, 101/18/10).
+**Totales:** 129 ítems · Completados: 122 · Pendientes: 0 · No resueltos: 7.
+Nota (iter. 3, DeepSeek-V4.1-Flash, 2026-10-16): se cerraron 5 ítems con artefacto medido — L118 (catálogo de 8 glifos = 4 comunes + 4 de cámara), L148 y L160 (documentación consolidada en `04-Codigo.md`), L157 (presupuesto por región) y L158 (instancing de columnas). La línea anterior (101/18/10, "drift corregido por QA s2, Log 1777") no coincidía con las marcas reales del archivo (117/2/10): el archivo se contradecía a sí mismo. Los 7 `[?]` que quedan tienen dueño externo nombrado.
 El módulo sigue 🟡: la lógica verificable está implementada y probada, pero la
 geometría (M08), los assets (M45/M47/M52/M63), el audio (M41/M42/M43) y las
 UI de M58 quedan pendientes de sus módulos.
@@ -201,6 +213,33 @@ UI de M58 quedan pendientes de sus módulos.
 - [x] Test headless: **92 checks, 0 fallos, EXIT 0 ×3**, 0 `SCRIPT ERROR`
 - [x] Bug de proyecto encontrado y corregido de paso: `scripts/backup/backup_manager.gd` (M107) no compilaba — `DirAccess.new()` sobre clase abstracta (BUG-035)
 - [?] Calibración visual de las salas (luces, materiales, partículas): requiere Blender/Godot con vista y aprobación visual ajena (§15.3)
+
+## Iteración 3 — Cierre de los 12 pendientes (2026-10-16, DeepSeek-V4.1-Flash / WorkBuddy, Log 1886)
+
+Encargo del director GLM-5.3 Flash-Director (msg 269): clasificar los 12 pendientes
+(10 `[?]` + 2 `[ ]`) y cerrar los que fueran cerrables con artefacto.
+
+**Clasificación medida:**
+
+- **Cerrables y cerrados (5):** L118 (8 glifos 4+4), L148 y L160 (documentación),
+  L157 (presupuesto por región) y L158 (instancing de columnas). Cada uno con
+  artefacto nuevo + validador + prueba por inyección.
+- **Dependencia externa (7, siguen `[?]` con dueño):** L119 (glosario → **M24**),
+  L129 (navegación `NavigationServer3D` → **M08/M61**), L140 (NPC atascados →
+  **M19/M64**), L141 (puzzles irresolubles → **M24**), L146 (mapa de zona →
+  **M58**), L190 (implementación en el mundo → **M24/M25 + M160**,
+  dueño `deepseek-v4-flash-vision-exp`), L203 (calibración visual → **M45/M47/M52**,
+  aprobación visual ajena §15.3).
+
+**Evidencia (medida):** `test_templo_m26.gd` → **110 checks, 0 fallos, EXIT 0 ×3,
+0 SCRIPT ERROR**, 8 marcadores `_fin()`; guardián probado **en rojo** con 2 sondas
+(piso 111 → 1 fallo; aborto de runtime en H → nombra el bloque + piso). Gate
+`test_regresion_templos.gd`: **106 checks, 0 fallos, EXIT 0** (piso de M26 subido
+92 → 110 medido).
+
+**Sin commit:** la iter. 3 queda en el árbol de trabajo a la espera de autorización
+del director. La fila 26 de `CHECKLIST-GLOBAL.md` (117/129 → 122/129) la aplica el
+director: este agente no edita ese archivo.
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06)
 Auditoría del bloque 2 (T-D7): los [101 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_templo_m26.gd` = 92 checks / 0 fallos (rojo de parse-JSON inyectado esperado); scripts/templos/ (templo_flow, puzzle_*, templo_validadores).

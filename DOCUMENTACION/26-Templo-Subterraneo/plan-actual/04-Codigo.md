@@ -161,3 +161,54 @@ módulo sigue 🟡 porque la geometría (M08), los assets (M45/M47/M52/M63), el 
   salida de **toda** corrida headless del proyecto (BUG-035).
 - El encabezado original del checklist afirmaba `100/100 [x]` sin marcadores
   puestos: era sobre-cierre de bookkeeping. Ver `05-Checklist.md` §Convención.
+
+## Softlocks, exploits y orientacion (documentacion consolidada - iter. 3, 2026-10-16)
+
+Cierra el item `05-Checklist.md` *"Documentar softlocks, exploits y orientacion"*. El diseno
+esta en `03-Diseno.md` seccion *"Reglas de gating (anti-exploit)"* y en *"Sistemas de soporte
+(Orientacion)"*; aca se documenta **que artefacto lo implementa y como se verifica**.
+
+| Regla de diseno | Artefacto | Verificacion |
+|---|---|---|
+| Toda sala alcanzable desde la entrada (sin zonas muertas) | `TemploValidadores.validar_softlock()` (BFS desde la sala `entrada`) | bloque E (0 problemas sobre el diseno real) + bloque F (se corta `sec_mural` -> "inalcanzable") |
+| Zona con recompensa con 2+ caminos (M66) | `validar_softlock()` (`tipo == "secreta"` o `recompensa` no vacia -> vecinos >= 2) | bloque E + bloque F (`sec_placa` con 1 camino -> "menos de 2 caminos") |
+| Sin callejones sin salida | `validar_softlock()` (toda sala != salida con >= 1 conexion) | bloque E |
+| Sellos unicos (no duplicables) | `validar_anti_exploit()` (recompensa repetida) + `TemploFlow.registrar_sello()` (rechaza duplicado) + `activar_anillo()` (rechaza reutilizar un sello colocado) | bloque B (`sello_duplicado`, `sello_ya_colocado`) + bloque F (recompensa duplicada) |
+| Entrada por la salida sellada | `TemploFlow.intentar_abrir_salida()` + `salidas[0].requiere == "sello_restaurado"` | bloque B (falla sin sello y NO cambia estado) + bloque F (salida sin `requiere`) |
+| Rampas <= 20 grados (aceleracion por salto) | `validar_voxel()` / `validar_anti_exploit()` contra `RAMPA_GRADOS_MAX` | bloque F (30 grados se rechaza) |
+| Sin teleports | `blueprint.voxel.teleports == false` + `barreras_en_huecos == true` | bloque F (`teleports = true` se rechaza) |
+| Mojones cada <= 40 m | `blueprint.orientacion.mojon_metros_max` + `validar_orientacion()` | bloque F (60 m se rechaza) |
+| Deriva del jugador < 2 min | `blueprint.orientacion.deriva_max_s = 120` + `validar_orientacion()` | bloque E (umbral declarado). La deriva REAL necesita jugador en runtime (ver "No cubierto") |
+| Mapa de zona simplificado (panel M58) | `blueprint.orientacion.mapa_de_zona = true` (bandera declarada) | bloque E. La UI es de M58 (item `[?]`) |
+
+**Alcance honesto:** todo lo anterior es verificable **headless** porque trabaja sobre el grafo
+de datos (`templo_layout_diseno.json`) y los umbrales del blueprint. La **deriva real del
+jugador** y el **mapa de zona renderizado** NO se verifican aca: requieren runtime con jugador
+(M11/M61) y la UI de M58.
+
+## Accesibilidad y rendimiento (documentacion consolidada - iter. 3, 2026-10-16)
+
+Cierra el item `05-Checklist.md` *"Documentar accesibilidad y rendimiento"*. Diseno en
+`03-Diseno.md` seccion *"Accesibilidad (M58)"* y *"Rendimiento (M61)"*.
+
+| Regla de diseno | Artefacto | Verificacion |
+|---|---|---|
+| Iconografia >= 16 px (M58) | `blueprint.accesibilidad.icono_px_min` + `validar_accesibilidad()` | bloque E (umbral declarado); el mismo validador se prueba por inyeccion en el contraste (bloque F) |
+| Contraste >= 4.5:1 | `accesibilidad.contraste_min = 4.5` + `validar_accesibilidad()` | bloque F (2.0:1 se rechaza) |
+| Sin presion temporal en puzzles | `accesibilidad.presion_temporal = false` | bloque F (`true` se rechaza) |
+| Subtitulos activables (M43) | `accesibilidad.subtitulos = true` | bloque E. La UI de subtitulos es de M43 |
+| Reduccion de particulas y parpadeo | `accesibilidad.reduccion_particulas` / `reduccion_parpadeo` | bloque E |
+| Particulas <= 256 por escena | `presupuesto.particulas_por_escena_max` + `validar_presupuesto()` | bloque E + bloque H (512 se rechaza) |
+| Luz volumetrica solo en 2 salas | `presupuesto.luz_volumetrica_salas = 2` + `validar_presupuesto()` | bloque E + bloque H (5 salas se rechaza) |
+| Rotonda <= 500k poligonos, drawcall-friendly | `presupuesto.rotonda_poligonos_max = 500000` | bloque H: la **suma** de las regiones no puede superarla |
+| Instancing de columnas en la rotonda (M61) | `presupuesto.instancing_columnas = true` + `validar_presupuesto()` | bloque E + bloque H (`false` se rechaza) |
+| Presupuesto por region / streaming por piso (M63) | `presupuesto.regiones` (una region por checkpoint) + `presupuesto.streaming_por_piso` | bloque H (region de checkpoint faltante o suma desbordada se rechazan) |
+
+**Reparto por region (iter. 3):** `porte 60k | vestibulo 90k | vientos 130k | central 120k |
+sello 80k` = **480k <= 500k**. Las claves de `regiones` deben coincidir 1:1 con
+`blueprint.checkpoints`: una region nueva sin checkpoint, o un checkpoint sin region, es un
+problema reportado por `validar_presupuesto()`.
+
+**Alcance honesto:** los umbrales y el reparto son datos verificables; el **streaming por
+piso** y el **instancing** los implementa M63/M61 - aca se declaran y se protegen contra
+drift. El **frame budget real** no se mide (no hay geometria: M08).

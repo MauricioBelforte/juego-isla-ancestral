@@ -1,13 +1,23 @@
 {
   "templo_id": "templo_subterraneo",
   "nombre": "Templo Subterraneo (Templo de la Brisa)",
-  "version": 2,
+  "version": 3,
   "nota": "Metria voxel-compatible y presupuestos del M26 segun 03-Diseno.md. Consumido por TemploValidadores (suites voxel/accesibilidad/orientacion/anti-exploit) y por M08 para la generacion volumetrica.",
   "voxel": {
     "unidad_m": 1.0,
-    "corredor": {"ancho": 4, "alto": 4, "largo": 4},
-    "puerta": {"ancho": 2, "alto": 3},
-    "techo": {"ancho": 3, "alto": 3},
+    "corredor": {
+      "ancho": 4,
+      "alto": 4,
+      "largo": 4
+    },
+    "puerta": {
+      "ancho": 2,
+      "alto": 3
+    },
+    "techo": {
+      "ancho": 3,
+      "alto": 3
+    },
     "transiciones_grados": 45,
     "rampa_grados_max": 20,
     "teleports": false,
@@ -31,11 +41,26 @@
     "sellos_unicos": true,
     "salida_requiere": "sello_restaurado"
   },
-  "checkpoints": ["porte", "vestibulo", "vientos", "central", "sello"],
+  "checkpoints": [
+    "porte",
+    "vestibulo",
+    "vientos",
+    "central",
+    "sello"
+  ],
   "checkpoint_respaldo_bak": true,
   "presupuesto": {
     "rotonda_poligonos_max": 500000,
     "particulas_por_escena_max": 256,
-    "luz_volumetrica_salas": 2
+    "luz_volumetrica_salas": 2,
+    "instancing_columnas": true,
+    "streaming_por_piso": true,
+    "regiones": {
+      "porte": 60000,
+      "vestibulo": 90000,
+      "vientos": 130000,
+      "central": 120000,
+      "sello": 80000
+    }
   }
 }

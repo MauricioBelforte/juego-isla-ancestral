@@ -31,7 +31,7 @@ const CHECKS_MINIMOS := 106   # MEDIDO en verde (5 checks por suite x 19 + 2 del
 const BLOQUES := ["A", "B", "C"]
 
 ## Piso TOTAL de checks medidos en verde (suma de las suites con contador):
-## 42 datos + 38 multilateral + 64 bloques + 60 luz + 62 espejos + 92 m26 + 4 headless
+## 42 datos + 38 multilateral + 64 bloques + 60 luz + 62 espejos + 110 m26 + 4 headless
 ## + 57 agua + 59 hielo + 59 gravedad + 54 sonido + 58 pistas
 ## + 43 dificultad + 39 tutorial + 43 presion + 47 simbolos + 45 herramientas + 44 recompensas = 910.
 const TOTAL_MINIMO := 910
@@ -56,7 +56,7 @@ var SUITES := [
 	{"nombre": "test_puzzle_simbolos", "ruta": "res://scripts/templos/test_puzzle_simbolos.gd", "piso": 47, "reporta_checks": true},
 	{"nombre": "test_puzzle_herramientas", "ruta": "res://scripts/templos/test_puzzle_herramientas.gd", "piso": 45, "reporta_checks": true},
 	{"nombre": "test_puzzle_recompensas", "ruta": "res://scripts/templos/test_puzzle_recompensas.gd", "piso": 44, "reporta_checks": true},
-	{"nombre": "test_templo_m26", "ruta": "res://scripts/templos/test_templo_m26.gd", "piso": 92, "reporta_checks": true},
+	{"nombre": "test_templo_m26", "ruta": "res://scripts/templos/test_templo_m26.gd", "piso": 110, "reporta_checks": true},
 	{"nombre": "test_templo_headless", "ruta": "res://scripts/templos/test_templo_headless.gd", "piso": 4, "reporta_checks": true},
 ]
 

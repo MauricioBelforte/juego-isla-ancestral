@@ -26,6 +26,11 @@ const DERIVA_MAX_S := 120.0
 const CP_ESPERADOS := 5
 const ANILLOS_ESPERADOS := 7
 const SELLOS_ESPERADOS := 7
+const GLIFOS_ESPERADOS := 8
+const GLIFOS_COMUNES := 4
+const GLIFOS_CAMARA := 4
+const PARTICULAS_POR_ESCENA_MAX := 256
+const LUZ_VOLUMETRICA_SALAS_MAX := 2
 
 
 # ---------------------------------------------------------------- grafo ----
@@ -314,6 +319,121 @@ static func validar_checkpoints(layout: Dictionary, blueprint: Dictionary) -> Ar
 	return errores
 
 
+# ---------------------------------------------------------------- glifos ----
+
+## Iconografia del Sello (03-Diseno, "Sistemas de soporte"): 8 glifos =
+## 4 comunes + 4 de camara. Los 7 anillos usan 7 de ellos; el 8.o queda libre
+## (glifo del tunel del amanecer / salida).
+static func validar_glifos(layout: Dictionary) -> Array[String]:
+	var errores: Array[String] = []
+	var gl: Variant = layout.get("glifos", [])
+	if typeof(gl) != TYPE_ARRAY:
+		return ["layout sin catalogo 'glifos'"]
+	var lista: Array = gl as Array
+	if lista.size() != GLIFOS_ESPERADOS:
+		errores.append("deben existir %d glifos (hay %d)" % [GLIFOS_ESPERADOS, lista.size()])
+	var ids: Dictionary = {}
+	var comunes := 0
+	var camara := 0
+	var desconocidos := 0
+	for g in lista:
+		if typeof(g) != TYPE_DICTIONARY:
+			errores.append("glifo que no es objeto")
+			continue
+		var gd: Dictionary = g as Dictionary
+		var gid := str(gd.get("id", ""))
+		if gid.is_empty():
+			errores.append("glifo sin id")
+			continue
+		if not gid.begins_with("glifo_"):
+			errores.append("glifo con id fuera de la familia 'glifo_': %s" % gid)
+		if ids.has(gid):
+			errores.append("glifo duplicado: %s" % gid)
+		ids[gid] = true
+		var tipo := str(gd.get("tipo", ""))
+		if tipo == "comun":
+			comunes += 1
+		elif tipo == "camara":
+			camara += 1
+		else:
+			desconocidos += 1
+			errores.append("glifo %s con tipo invalido: '%s' (esperado comun|camara)" % [gid, tipo])
+	if comunes != GLIFOS_COMUNES:
+		errores.append("deben ser %d glifos comunes (hay %d)" % [GLIFOS_COMUNES, comunes])
+	if camara != GLIFOS_CAMARA:
+		errores.append("deben ser %d glifos de camara (hay %d)" % [GLIFOS_CAMARA, camara])
+	# Todo glifo de anillo debe existir en el catalogo; y debe sobrar exactamente 1.
+	var anillos: Variant = layout.get("anillos", [])
+	var usados: Dictionary = {}
+	if typeof(anillos) == TYPE_ARRAY:
+		for a in (anillos as Array):
+			if typeof(a) != TYPE_DICTIONARY:
+				continue
+			var gid_anillo := str((a as Dictionary).get("glifo", ""))
+			if gid_anillo.is_empty():
+				errores.append("anillo sin glifo")
+				continue
+			if not ids.has(gid_anillo):
+				errores.append("anillo con glifo fuera del catalogo: %s" % gid_anillo)
+			usados[gid_anillo] = true
+	var libres := 0
+	for gid in ids:
+		if not usados.has(gid):
+			libres += 1
+	if not ids.is_empty() and libres != 1:
+		errores.append("debe quedar exactamente 1 glifo sin anillo (quedan %d)" % libres)
+	return errores
+
+
+# ----------------------------------------------------------- presupuesto ----
+
+## Presupuesto de rendimiento (M61/M63): particulas, luz volumetrica, instancing
+## de columnas y reparto por region (una region por checkpoint, suma <= rotonda).
+static func validar_presupuesto(blueprint: Dictionary) -> Array[String]:
+	var errores: Array[String] = []
+	var pre: Variant = blueprint.get("presupuesto", {})
+	if typeof(pre) != TYPE_DICTIONARY:
+		return ["blueprint sin seccion presupuesto"]
+	var pd: Dictionary = pre as Dictionary
+	var rotonda := int(pd.get("rotonda_poligonos_max", 0))
+	if rotonda <= 0:
+		errores.append("presupuesto.rotonda_poligonos_max debe ser > 0")
+	if int(pd.get("particulas_por_escena_max", 99999)) > PARTICULAS_POR_ESCENA_MAX:
+		errores.append("particulas por escena %s > %d" % [pd.get("particulas_por_escena_max", 99999), PARTICULAS_POR_ESCENA_MAX])
+	if int(pd.get("luz_volumetrica_salas", 99999)) > LUZ_VOLUMETRICA_SALAS_MAX:
+		errores.append("luz volumetrica en %s salas > %d" % [pd.get("luz_volumetrica_salas", 99999), LUZ_VOLUMETRICA_SALAS_MAX])
+	if not bool(pd.get("instancing_columnas", false)):
+		errores.append("falta instancing de columnas en la rotonda (M61)")
+	if not bool(pd.get("streaming_por_piso", false)):
+		errores.append("falta declarar streaming por piso (M63)")
+	# Reparto por region: una region por checkpoint, y la suma cabe en la rotonda.
+	var reg: Variant = pd.get("regiones", {})
+	if typeof(reg) != TYPE_DICTIONARY or (reg as Dictionary).is_empty():
+		errores.append("presupuesto sin reparto por region (M63)")
+		return errores
+	var rd: Dictionary = reg as Dictionary
+	var declarados: Array = []
+	var cps: Variant = blueprint.get("checkpoints", [])
+	if typeof(cps) == TYPE_ARRAY:
+		for c in (cps as Array):
+			declarados.append(str(c))
+	for clave in rd:
+		if not declarados.has(str(clave)):
+			errores.append("region '%s' no corresponde a ningun checkpoint declarado" % clave)
+	for c in declarados:
+		if not rd.has(c):
+			errores.append("falta la region '%s' (checkpoint declarado)" % c)
+	var suma := 0
+	for clave in rd:
+		var v := int(rd[clave])
+		if v <= 0:
+			errores.append("region '%s' con presupuesto <= 0" % clave)
+		suma += v
+	if rotonda > 0 and suma > rotonda:
+		errores.append("la suma de las regiones (%d) supera la rotonda (%d)" % [suma, rotonda])
+	return errores
+
+
 # --------------------------------------------------------------- conjunto --
 
 ## Corre todas las suites y devuelve {suite: [errores]}. `ok` = todas vacías.
@@ -325,6 +445,8 @@ static func validar_todo(layout: Dictionary, blueprint: Dictionary) -> Dictionar
 		"accesibilidad": validar_accesibilidad(blueprint),
 		"orientacion": validar_orientacion(blueprint),
 		"checkpoints": validar_checkpoints(layout, blueprint),
+		"glifos": validar_glifos(layout),
+		"presupuesto": validar_presupuesto(blueprint),
 	}
 	var ok := true
 	for clave in res:

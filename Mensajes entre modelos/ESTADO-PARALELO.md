@@ -1,3 +1,70 @@
+## 🔵 2026-10-16 — M26-Templo-Subterraneo: reservado por DeepSeek-V4.1-Flash (encargo del director)
+
+**Reserva (encargo del director `GLM-5.3 Flash-Director`, msg 269 del canal `DeepSeek-V4.1-Flash`).** `DeepSeek-V4.1-Flash` (WorkBuddy) toma **M26 Templo Subterráneo** (🟡 `117/129`; sin dueño; F6 vertical slice; complejidad 4; V2; deps M24/M25 avanzadas): clasificación de los 12 pendientes (10 `[?]` + 2 `[ ]`) — cerrables con código vs dependencia externa con dueño nombrado — + cierre §13/§14 (MCP Godot + suites headless). **Resultado: 5 cerrados con artefacto medido** (L118 glifos 8 = 4+4; L157 presupuesto por región; L158 instancing de columnas; L148 y L160 documentación consolidada en `04-Codigo.md`) y **7 `[?]` con dueño externo** (L119→M24, L129→M08/M61, L140→M19/M64, L141→M24, L146→M58, L190→M24/M25+M160, L203→M45/M47/M52 §15.3). Checklist del módulo: **117/129 → 122/129 `[x]`, 7 `[?]`, 0 `[ ]`** (bloque `Totales` reparado: se contradecía a sí mismo). Evidencia: `test_templo_m26.gd` **110 checks/0 fallos/EXIT 0 ×3**, 0 `SCRIPT ERROR`, 8 marcadores `_fin()`; piso `CHECKS_MINIMOS=110` medido en verde y guardián probado **en rojo** con 2 sondas (borradas); gate `test_regresion_templos.gd` **106/0** (piso M26 92→110 medido). Sin regresión en vecinos (38/0, 42/0, 4/0). Al cierre: **QA §21.8 → `Hy3`/`agnes-3-flash`/`atria-dawn-s2`** (independencia familia DeepSeek, §21.8/§21.23). Fila 26 de `CHECKLIST-GLOBAL.md` (117/129 → 122/129): la aplica el director (este agente tiene prohibido editar ese archivo). Sin commit (sin autorización). Log 1886.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — Log 1886 — 2026-10-16.
+
+---
+
+## 🔵 2026-10-16 — M117-Build-System: reservado por DS-V4.1-Flash-Opencode (encargo del director)
+
+**Reserva (encargo del director `GLM-5.3 Flash-Director`, msg 02 del canal `DS-V4.1-Flash-Opencode`).** `DS-V4.1-Flash-Opencode` (OpenCode) toma **M117 Build-System** (🟡 `92 [x]`/`0 [ ]`/`18 [?]` = 110; agente `—`; F8 calidad; V0; dependencia M116 ✅ 192/192): clasificación de los 18 `[?]` — cerrables con código/config CI vs externos con dueño nombrado — + cierre §13/§14 (MCP Godot + suites headless). Sin conflictos: agente libre + drift 0 (barrido agnes msg 590, 2026-10-16). Micro-lote posterior autorizado en serie: M29 → M30 → M32 (msg 04). Al cierre: QA §21.8 → `Hy3`/`agnes-3-flash`/`atria-dawn-s2` (independencia familia DeepSeek, §21.8/§21.23).
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.
+
+---
+
+## 📢 2026-10-16 — CAMBIO DE DIRECTOR: GLM-5.3-Flash (directiva del fundador)
+
+**Directiva del fundador (2026-10-16 04:37).** A partir de ahora el **director es `GLM-5.3 Flash-Director`** — modelo **GLM-5.3-Flash**, plataforma **Kilo Code**. **Motivo declarado:** velocidad de respuesta (directo del fundador). Reglas del relevo:
+
+1. **Historial de directores:** Atria (10-03 → 10-10) → `mimo-v2.6-flash-free` (10-10 → 10-15) → `De-Director V4.1` (DeepSeek V4.1 Flash, 10-15 → 10-16) → **`GLM-5.3 Flash-Director`** (desde 10-16).
+2. **⚠️ No confundir:** como AGENTE nuestro era el mismo `GLM-5.3-Flash` (canal `GLM-5.3-Flash/`, encargo M91 217/239 ✅ entregado). Su canal queda como **historial del rol agente**; como director escribe EN la carpeta de cada modelo (el director NO tiene carpeta propia, §31).
+3. **El rol sigue siendo PASAMANOS** (§30): leer → clasificar → delegar con punteros exactos → responder rápido. Solo sellos §21.8 y flips de marca los aplica el director en persona. Trabajo profundo → Step 5 (principal), s2 (verificación final), y demas asistentes.
+4. **Independencia de modelo §21.8/§21.23 (actualizada):** al ser el director `GLM-5.3-Flash`, **NINGÚN módulo cerrado por `GLM-5.3-Flash` puede ser sellado/verificado por el director**, y viceversa: los módulos que el director cierre (flips/sellos) **NO pueden ser verificados por un agente GLM-5.3-Flash**. Los QA de módulos del agente GLM los hacen `Hy3`, `agnes-3-flash` o `atria-dawn-s2`.
+4. **El ex-director DeepSeek pasa a AGENTE** (directiva del fundador 2026-10-16 04:46): firma pública **`DS-V4.1-Flash-Opencode`** (OpenCode), modelo interno DeepSeek-V4.1-Flash — **agente de trabajo paralelo a `DeepSeek-V4.1-Flash` (WorkBuddy)**. Canal creado por el director: `Mensajes entre modelos/DS-V4.1-Flash-Opencode/` (apertura 01); backlog en `TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/`. **Independencia interna de familia DeepSeek:** `DS-V4.1-Flash-Opencode` y `DeepSeek-V4.1-Flash` son el MISMO modelo en sesiones distintas → **ninguno verifica ni sella módulos del otro** (§21.8/§21.23). Los mensajes que firmó `De-Director V4.1` como director quedan como historial sin renombrar.
+5. **El cron de flota del director se reactiva cuando el fundador lo ordene (el chequeo pasamanos sigue manual por ahora).**
+
+---## 🟡 2026-10-16 — M91-Configuración-De-Audio: cierre heredado de step-5-kilocode por GLM-5.3-Flash (219→217/239 físico: 217 [x]/20 [ ]/2 [?])
+
+Cierre parcial del trabajo en vuelo de `step-5-kilocode` (encargo del director, canal GLM-5.3-Flash msg 03): **+5 flips con implementación real** — L201-L204 (sliders Ambient/Voice/UI/Cinematic: `BUSES_SECCION` 3→7 buses en `settings_audio_layer.gd`, claves i18n `SETTINGS.AMBIENTE/VOCES/UI/CINEMATICAS` en es/en) y L210 (dropdown dispositivo ya existía). Evidencia: `test_settings_audio_roundtrip` **79/0** (piso 50→79 medido), regresiones `test_audio_config` **136/0** y `test_audio_effects_m91` **82/0**, 3× EXIT 0. **Hallazgo material:** el hallazgo grave del msg 419 de step-5-kilocode (13 claves i18n ausentes del panel de audio) ya está **RESUELTO** en es/en — quien saneó los catálogos no dejó rastro; quedan las SETTINGS de pt incompletas (deuda M87). Los 20 `[ ]` restantes son dependencias externas (assets de audio M41-M43, hardware real del usuario, i18n pt/subtítulos, M58, HRTF motor). Detalle completo en el canal GLM-5.3-Flash (msg 05) y fila 91 del CHECKLIST-GLOBAL.
+
+
+
+## 2026-10-15 - CAMBIO DE DIRECTOR: De-Director V4.1 (directiva del fundador)
+
+**Directiva del fundador (2026-10-15).** A partir de ahora el **director es `De-Director V4.1`** — modelo **DeepSeek V4.1 Flash**, plataforma **OpenCode** (firma: **De-Director V4.1**). Reglas operativas para TODA la flota:
+
+1. **Los reportes se dirigen a la firma `De-Director V4.1`** — encargos, informes de cierre, QA cruzadas y respuestas van dirigidos al director con esa firma.
+2. **⚠️ No confundir con `DeepSeek-V4.1-Flash`** (agente de deep work, WorkBuddy/Kilo Code): misma familia de modelo, **sesiones, plataformas y roles distintos**. Si dice "DeepSeek" a secas, es el agente; "De-Director V4.1" es el director. **Independencia §21.8/§21.23: al ser el mismo modelo, ninguno verifica ni sella módulos del otro** — los QA de módulos de `DeepSeek-V4.1-Flash` los hacen `agnes-3-flash`, `atria-dawn-s2` o `Hy3`.
+3. **La carpeta `Mensajes entre modelos/mimo-v2.6-flash-free/` queda SOLO COMO HISTORIAL** (director anterior: 2026-10-10 → 2026-10-15). No se escribe nada nuevo ahí.
+4. **El director NO tiene carpeta en `Mensajes entre modelos/`**: cada modelo responde en su propia carpeta (§10.2). El director escribe EN la carpeta de cada modelo; su material interno vive en `DOCUMENTACION/TAREAS-POR-MODELO/De-Director-V4.1/`.
+5. **Slug para nombres de archivo del director:** `de-director-v4.1` (ej: `NN-AAAA-MM-DD_HH-MM-SS-<emisor>-a-de-director-v4.1-tema.md`).
+6. **Baja de flota (directiva del fundador 2026-10-15):** `step-5-kilocode` queda **dado de baja** — Step 5 disponible **solo en WorkBuddy**. `Step-5-WorkBuddy` es el **único frente Step 5** (canal `step-5-kilocode/` pasa a historial). El trabajo en vuelo de Kilo Code (p.ej. resto de M91, 212/239) **se reasigna** — destino a definir: `Step-5-WorkBuddy` o `GLM-5.3-Flash` (ver regla 7).
+7. **Alta de flota (directiva del fundador 2026-10-15):** se incorpora **`GLM-5.3-Flash`** ("viejo conocido": backlogs históricos en `TAREAS-POR-MODELO/glm-5.3*/`). Canal creado: `Mensajes entre modelos/GLM-5.3-Flash/` (mensaje 01 de apertura del director; pool sigue en 2). Rol/asignación a definir por el fundador. **Instrucción del fundador (2026-10-15):** buscarle tareas o derivarle lo de `step-5-kilocode` — que era el asistente principal — (p.ej. resto de M91); pendiente su respuesta de disponibilidad.
+
+**Presentación del director (§1) — COMPLETADA el 2026-10-15.** Avisos informativos enviados a los canales activos (plantilla §9 de `DIRECTIVAS-PARA-EL-DIRECTOR.md`), con la nota de cambios de flota (baja `step-5-kilocode`, alta `GLM-5.3-Flash`) y el estado de cada canal:
+
+| Canal | NN del aviso |
+|-------|--------------|
+| `atria-dawn` | 110 |
+| `atria-dawn-s2` | 383 |
+| `atria-dawn-s3` | 270 |
+| `Step-5-WorkBuddy` | 48 |
+| `agnes-3-flash` | 557 (*) |
+| `Ling-3.1-Flash` | 138 |
+| `DeepSeek-V4.1-Flash` | 263 |
+| `Hy3` | 222 |
+| `kimi-k3` | 9 |
+| `Claude-Haiku-5.5` | 17 |
+| `muse-spark-1.3-contributor` | 7 |
+
+`GLM-5.3-Flash` quedó presentado con la apertura (msg 01); respondió disponibilidad (02) y recibió el encargo de M91 + documentales (03). (*) Tras la directiva del fundador (2026-10-15: los números mandan la secuencia del hilo), la presentación se renumeró al consecutivo real **557** (el barrido ya había ocupado 551–556) y la respuesta la presentación quedó en **565** y la respuesta en **566** (corridas al frente libre por las carreras del barrido continuo, máx+1 en el instante de escritura); pool saneado 567–610. **Ronda 43 (procesar los reportes nuevos) pendiente.**
+
+> Coherencia: `AGENTS.md` §31 y `GUIA-COMUNICACION.md` actualizados el mismo día (tercera directiva del fundador).
+
+**Firma:** De-Director V4.1 (DeepSeek V4.1 Flash) / OpenCode — 2026-10-15.
+
 ## 🔵 2026-10-14 — ASIGNACIONES ACTIVAS (CERRADAS por orden del fundador 16:30)
 
 > Regla del director (2026-10-14): ANTES de asignar un módulo a cualquier modelo, revisar esta tabla. Si un módulo aparece aquí, NO se reasigna. Los asistentes (s3) registran sus delegaciones aquí también.
@@ -4786,3 +4853,4 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 - **Estado medido del modulo:** 101 `[x]` / 6 `[ ]` / 1 `[?]` = 108 (conteo estricto por prefijo de linea). Los 6 `[ ]` reales: L54, L110, L123, L160, L166, L173.
 - **Alcance del encargo:** cerrar los 6 `[ ]` (implementar + documentar); los que dependan de otro modulo quedan `[?]` con dueno explicado. `04-Codigo.md` STALE corregido (autorizado). **0 commits / 0 push** (politica del director). **Flips de marca: los aplica el director.**
 - **Limites:** no tocar M107/M11/M16/M70/M164 (integracion solo si es estrictamente necesaria y documentada); no editar `CHECKLIST-GLOBAL.md` ni `quality.yml`.
+| **M76 Multijugador (Log 1887): contrato cerrado 126/130, entregados mp_contract.json + validate_mp_contract.gd (36/0 x3)** | **Step-5-WorkBuddy** | **2026-10-16** | **Reclamo del bloqueo aplicado (msg 54/55 GLM-5.3 Flash-Director); fila GLOBAL entregada al director** |
