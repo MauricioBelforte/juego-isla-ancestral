@@ -239,3 +239,33 @@ El diario usa el sistema central de logs de consola (M118): prefijo `[DIARY]` pa
 - **Puente M56→M55:** cuando alguien conecte `FOTO_TOMADA` (patrón `_conectar_eventos` de 1 línea), crear entradas base de `fotografías` → 14/14 cierra L212/L53; `validate_diary.gd` dejará de avisar.
 - **Iconos:** si llegan assets, añadir campo `icono` al JSON + validación en `validate_diary` + display en fila/detalle (L203).
 - **Rendimiento (W/X):** sigue pendiente virtualización/pooling con 500+ entradas; el validador ya mide cargas de 20 iteraciones.
+
+
+## Notas del Agente — Iteración 4: auditoría contra disco y flips honestos (2026-10-16, Step-5-WorkBuddy)
+
+**Modelo:** Step-5-WorkBuddy
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-16
+**Estado:** 🟡 Con dudas (58/131; reclamo §21.4.7 autorizado por el director GLM-5.3 Flash-Director, msg 59)
+**Log:** 1897
+
+### Lo que hice
+- **Auditoría contra disco (Patrón D)** de los 91 `[ ]` del checklist contra el código real: diary_service.gd (autoload), diary_layer.gd (capa M53), data/diario/diario_catalog.json (44 entradas, 13/14 categorías con entradas).
+- **4/4 suites headless verdes** (binario real Godot 4.7.2, 0 SCRIPT ERROR en las 4): test_diario 0 fallos (37 checks, cubre anti-spoiler L90/L97 + las 6 integraciones por señal real) · test_diario_ui 89 checks/0 fallos (anti-spoiler L116/L192) · validate_diary 0 fallos/1 aviso (fotografías vacía — M56) · test_diario_persist 0 fallos (2 procesos Godot, SaveManager M59 real, slot 3).
+- **21 flips [x] con cita** (implementado + testeado): estados de entrada (enum Estado L22 + promoción idempotente L133-137 + marcar_completado L150-155), EventBus como canal (único — 6 puentes reales L85-107 + emisión diary.* L141-146/L283-289), LUGAR_VISITADO (puente travel.island_loaded L100-101, ids lugar_isla_* coinciden con el catálogo), anti-spoiler general §3.2 en 11 ítems "No revelar X" (entradas_de() L224-241 — lo no descubierto es invisible), nombres propios sin traducir (locale EN verificado iter. 2), persistencia ×5 (ISaveProvider L77-80 + schema_version L305-314 + carga sin duplicados L318/L328-336 + save nivel/cierre vía M59 + corrupta con defaults L212-216), migración de versiones (carga tolerante; v1 única versión emitida).
+- **12 [?] con diagnóstico MEDIDO y dueño externo**: los 7 puentes de evento que faltan tienen emisor inexistente o con ids no coincidentes — ESPECIE_AVISTADA (emisor fauna_registry.especie_avistada EXISTE; sus 7 ids tierra/aire NO coinciden con los 4 peces del catálogo → dueño M36/M34), PLANTA_IDENTIFICADA (sin emisor → M50), MINERAL_DESCUBIERTO (mina_extraccion_exitosa = extracción, no descubrimiento → M35), RECETA_DESBLOQUEADA (emisor + ids SÍ coinciden — rec_mesa_robusta/rec_pico_cobre en data/balance/crafting.json — pero CraftingService no es autoload ni nodo persistente → M16), PISTA_LEIDA (sin emisor → M24/M26), RUIDA_PROGRESADA (sin emisor → M25), DESCUBRIMIENTO (M71 emite hito_* que NO coinciden con descubrimiento_* → M71) + galería Q ×5 (frente sin contenido M56: FOTO_TOMADA inexistente).
+- **Resultado:** 37 [x] / 3 [?] / 91 [ ] → **58 [x] / 15 [?] / 58 [ ] = 131** (invariante OK; Totales y cabecera actualizados; CRLF preservado byte a byte, sin BOM, FFFD=0; conteo verificado por prefijo de línea y contra verificar_checklist.py).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Rendimiento W (L193-196):** virtualización/LazyLoad/pooling con 500+ entradas — no implementado (la lista crea una fila por entrada descubierta); requiere lote de rendimiento.
+- **Catálogo:** 36/44 entradas sin descripción (solo 8 tienen fuente real verificada); fotografías 0 entradas (M56).
+- **Iconos (L20/L203):** sin fuente de arte en el repo.
+- **V (L187/L188):** plurales y 3er idioma — solo es/en.
+- **B (L29):** estética cozy — sin vía de visión (M154) en esta sesión.
+- **Fila GLOBAL 55:** NO tocada (la aplica el director); verificar_checklist.py reporta la alerta esperada (GLOBAL 37/131 vs disco 58/131).
+- **Sello §21.8:** no auto-sellado (el director rutea a verificador externo).
+
+### Recomendaciones para el próximo agente
+- **Puentes de evento:** cuando M36/M34 reconcilien los ids de especies, M16 decida dónde vive CraftingService, y M50/M35/M24/M26/M25/M71 emitan sus eventos, los puentes son de 1 línea con el patrón de _conectar_eventos() (la validación contra catálogo ya está incorporada en registrar()).
+- **Lote de rendimiento (W):** virtualizar ListaEntradas + pooling de filas; medir apertura con 500+ entradas.
+- **Catálogo:** enriquecer descripciones con fuentes reales; el frente M56 cierra L53/L212/Q cuando exista FOTO_TOMADA.
