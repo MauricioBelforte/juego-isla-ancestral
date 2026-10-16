@@ -114,14 +114,14 @@ func _construir_ui() -> void:
 	_lbl_hora.name = "Hora"
 	_lbl_hora.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_lbl_hora.add_theme_font_size_override("font_size", 34)
-	_lbl_hora.add_theme_color_override("font_color", Color(0.96, 0.94, 0.88))
+	_lbl_hora.add_theme_color_override("font_color", Color(0.09, 0.10, 0.15, 0.92))
 	vbox.add_child(_lbl_hora)
 
 	_lbl_fecha = Label.new()
 	_lbl_fecha.name = "Fecha"
 	_lbl_fecha.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_lbl_fecha.add_theme_font_size_override("font_size", 14)
-	_lbl_fecha.add_theme_color_override("font_color", Color(0.85, 0.83, 0.76))
+	_lbl_fecha.add_theme_color_override("font_color", Color(0.85, 0.65, 0.30, 0.45))
 	vbox.add_child(_lbl_fecha)
 
 	# Chip de estación: mini panel coloreado + nombre
@@ -138,7 +138,7 @@ func _construir_ui() -> void:
 	var chip_center := CenterContainer.new()
 	_lbl_estacion = Label.new()
 	_lbl_estacion.add_theme_font_size_override("font_size", 13)
-	_lbl_estacion.add_theme_color_override("font_color", Color(0.95, 0.97, 0.92))
+	_lbl_estacion.add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))
 	chip_center.add_child(_lbl_estacion)
 	_chip_estacion.add_child(chip_center)
 
