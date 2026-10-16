@@ -108,7 +108,7 @@ Módulos que el director asignó al frente WorkBuddy: **M01, M40, M59, M60, M62,
 
 ### Bloque F — Datos, clock, eventos
 
-- [ ] **T-050** — M29-Tiempo (192/195): 3 pendientes — 4 [S] · ⭐ candidato micro-lote
+- [x] **T-050** — M29 verificado en micro-lote (192/195; 3 [?] con dueño M53/M112) — Log 1896 — 2026-10-16
 - [ ] **T-051** — M30-Reloj (119/120): 1 pendiente — 2 [S] · ⭐ candidato micro-lote
 - [ ] **T-052** — M31-Ciclo-Día/Noche (120/169): lote técnico (skybox/luz) — 10 [C] · ⚠️ frente WB activo (lotes)
 - [ ] **T-053** — M32-Clima (119/121): 2 pendientes — 3 [S] · ⭐ candidato micro-lote

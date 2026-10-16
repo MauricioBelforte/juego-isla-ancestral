@@ -163,3 +163,31 @@ godot --headless --script tests/integration/test_time_calendar_events.gd 2>&1 ||
   (`godot --headless -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd --path res://tests ... || true`)
   — Godot consume `--path` antes de que GdUnit4 lea su propio `--path res://tests`, y el `|| true`
   la hace **infalsable**. El estándar **vivo** del proyecto es `extends SceneTree` + `--script`.
+
+---
+
+## Notas del Agente — Iteración 3 (verificación micro-lote)
+
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash)
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-16
+**Estado:** 🟡 (máximo cerrable; 3 `[?]` con dueño externo)
+**Log:** 1896
+
+### Lo que hice
+
+- Re-corrida headless de las 4 suites del módulo (04:12:54): `test_time_calendar.gd` **74/0** + `test_time_calendar_events.gd` **51/0** + `test_calendario.gd` **13/0** + `test_semilla_iter1.gd` **25/0** = **163 checks / 0 fallos / EXIT 0 ×4**.
+- Evidencia dura de los 3 `[?]`: grep `flecha` sobre `game/isla-ancestral/` = **0 flechas de HUD** (solo edge-arrow del minimapa, M54) → los 2 ítems de flecha (L75/L207) quedan `[?]` con frontera M53 explícita y evidencia de no-existencia.
+- Conteo estricto 192/0/3=195 (sin drift); acotado el "CERRADO ✅" de L143 (con `[?]` abiertos no cumple DoD §21.6); estado real 🟡.
+- Registro en los 4 registros (GLOBAL, guía 08, ESTADO-PARALELO, checklist del módulo).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- Los 3 `[?]` NO son cerrables dentro de M29: la flecha visual es de **M53** (dueño externo) y **H123** son tests que viven en **M112** → cierre cruzado comprometido: implemento M112 a continuación (aprobado por el director, msg 07); al agregar el test de ciclos día→año y pasar en verde, flipeo H123 a `[x]`.
+
+### Notas
+
+- Sin cambios de código del módulo (pasada de verificación y registro).
+- `test_calendario.gd` cierra con 4 ObjectDB leaks + 1 resource in use (EXIT 0, preexistente) — observación para la limpieza de M112/M118 si se desea.
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.

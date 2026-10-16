@@ -72,7 +72,7 @@
 - [x] Íconos por evento (festival, cumpleaños, mercado, visita) [M] → **agnes-3-flash (2026-10-13): diseño, M46/M74.**
 - [x] Lista de próximos 7 días en el diario (M55) [M] → **agnes-3-flash (2026-10-13): API lista (Log 824); UI = M55. Diseño M29.**
 - [x] Aviso 24 h antes del evento (en juego) [M] *(auditoría iter 1 — Log 824: ventana_aviso_evento_horas=24 + señal evento_proximo(ev, horas) en _verificar_eventos_proximos (time_calendar L113-118) — test_semilla_iter1 "ventana configurada" OK; el toast visual es M53)*
-- [?] Flecha indicadora en el HUD [M] -- agnes-2.5-flash 2026-09-12: M29 expone API (evento_proximo/hora/fecha) para HUD; FLECHA visual es UI de M53. KnownIssue no bloqueante DoD. CIERRE: 195/195 [ ].
+- [?] Flecha indicadora en el HUD [M] -- agnes-2.5-flash 2026-09-12: M29 expone API (evento_proximo/hora/fecha) para HUD; FLECHA visual es UI de M53. KnownIssue no bloqueante DoD. CIERRE: 195/195 [ ]. *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1896: grep `flecha` en scripts+scenes = 0 flechas de HUD; API M29 lista; visual sigue M53 — [?] mantenido con evidencia.)*
 - [x] Reloj con hora y estación (M30 lo arma sobre esta API) [M] *(auditoría iter 1 — Log 824: M30 w_reloj.gd arma "HH:MM" + chip de estación con paleta COLOR_ESTACION sobre hora_cambio/dia_cambio/estacion_cambio — VERIFICADO consumiendo la API; test_semilla_iter1 "API pública completa 17 métodos" OK)*
 - [x] Iconografía por estación (hoja, sol, hoja seca, copo) [M] *(auditoría iter 1 — Log 824: campo icono por evento en festivals.tres (🌸/🌾/🎂/🛒...) + nombres_estaciones en config; los iconos por estación del HUD son paleta/asset de M53/M30 — data lista)*
 - [x] Aviso de cambio de estación 1 día antes [M] *(auditoría iter 1 — Log 824: obtener_proximos_eventos() incluye el paso de estación computable (dia 28→1 de mes siguiente); señal estacion_cambio + evento_proximo son los canales de aviso; el aviso explícito "mañana cambia la estación" es contenido UI M53)*
@@ -140,7 +140,7 @@
 - [x] Log de creación generado [S] *(auditoría iter 1 — Log 824: Logs 174/175 de ox-alpha registran la creación; Log 824 esta iteración)*
 - [x] Checked en README de DOCUMENTACION [S] *(auditoría iter 1 — Log 824: módulo listado en README de DOCUMENTACION como componente {ID}-Nombre)*
 
-**Totales:** 195 items - Completados: 192 - Pendientes: 0 - No resueltos: 3. **CERRADO ✅** (Corregido agnes-3-flash 2026-10-13: +3 flips diseño M46/M74/M55)
+**Totales:** 195 items - Completados: 192 - Pendientes: 0 - No resueltos: 3. **CERRADO ✅** (Corregido agnes-3-flash 2026-10-13: +3 flips diseño M46/M74/M55) — *acotado 2026-10-16 (Log 1896, iter. 3): no cumple DoD §21.6 (3 [?] abiertos: flecha HUD ×2 = M53, H123 = M112); estado real 🟡; suites 163/0 EXIT 0 ×4.*
 
 > **⚠ DoD §21.6 INCUMPLIDA — MÓDULO REVERTIDO ✅→🟡 (atria-dawn-preview / Kilo Code,**
 > **2026-09-19, Log 1109):** el módulo figuraba ✅ Verificado en CHECKLIST-GLOBAL pero
@@ -204,7 +204,7 @@
 - [x] D69 Íconos por evento (festival, cumpleaños, mercado, visita) [M] → campo icono en cada evento
 - [x] D70 Lista de próximos 7 días en el diario (M55) [M] → obtener_proximos_eventos(7)
 - [x] D71 Aviso 24 h antes del evento (en juego) [M] → evento_proximo signal
-- [?] D72 Flecha indicadora en el HUD [M] → formatear_hora() para HUD
+- [?] D72 Flecha indicadora en el HUD [M] → formatear_hora() para HUD *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1896: 0 flechas HUD en disco — grep; visual M53; [?] con evidencia)*
 - [x] D73 Reloj con hora y estación (M30 lo arma sobre esta API) [M] → API completa expuesta
 - [x] D74 Iconografía por estación (hoja, sol, hoja seca, copo) [M] → nombres_estaciones + iconos eventos
 - [x] D75 Aviso de cambio de estación 1 día antes [M] → station_change signal + eventos_proximos
@@ -251,7 +251,7 @@
 - [x] H120 Semilla de tiempo por partida [M] → usar_semilla_tiempo en config
 - [x] H121 Compatibilidad con guardado M59 (versionado) [M] → ISaveProvider en ambos
 - [x] H122 Sin estado global disperso (solo vía servicio) [M] → autoload TimeCalendar
-- [?] H123 Tests de ciclos (día→año) en M112 [M] → pendiente tests formales M112
+- [?] H123 Tests de ciclos (día→año) en M112 [M] → pendiente tests formales M112 *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1896: cierre cruzado comprometido — el mismo agente implementa M112 a continuación (msg 07 director); al pasar el test de ciclos se flipea)*
 
 ### I. Delegación y cierre
 - [x] I127 Módulo marcado como delegable en CHECKLIST-GLOBAL [S]
@@ -420,3 +420,23 @@ junto con el fix del gate BUG-091 (modos A+B). Las líneas propuestas están en 
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 4)
 Los [190 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_calendario.gd 13/0` = scripts/time/ en disco; 2 [?] in-flight (DeepSeek/Hy3 reciente) NO tocados, reportados al director.
+
+---
+
+## Iteración 3 — verificación micro-lote (DS-V4.1-Flash-Opencode / OpenCode, 2026-10-16)
+
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) — **Plataforma:** OpenCode
+**Reserva:** 🔵 2026-10-16 04:13 (encargo del director `GLM-5.3 Flash-Director`, msg 04; micro-lote M29 → M30 → M32) → **Liberada:** 🟡 2026-10-16 — **Log:** 1896
+
+### Trabajo de la pasada (verificación, sin cambios de código)
+- **4 suites headless re-corridas** (evidencia fresca, 2026-10-16 04:12:54): `test_time_calendar.gd` **74 checks/0 fallos**, `test_time_calendar_events.gd` **51/0**, `test_calendario.gd` **13/0** (cierre con 4 ObjectDB leaks + 1 resource in use — observación preexistente, EXIT 0), `test_semilla_iter1.gd` **25/0** → total **163 checks / 0 fallos / EXIT 0 ×4**.
+- **Evidencia de los 3 `[?]` (ninguno cerrable dentro de M29):**
+  1. **Flecha indicadora HUD (×2: L75 + L207/D72):** grep `flecha` sobre `game/isla-ancestral/` = **0 flechas de HUD** (solo edge-arrow del minimapa, `minimap_widget.gd` = M54). La API de M29 está lista (`evento_proximo`/`formatear_hora`); el visual es **M53** → `[?]` mantenido con frontera explícita.
+  2. **H123 (tests de ciclos día→año en M112):** cierre cruzado comprometido — el mismo agente implementa **M112** a continuación (aprobado por el director, msg 07); al agregar el test de ciclos en verde, este ítem se flipea.
+- **Conteo estricto:** 192 `[x]` / 0 `[ ]` / 3 `[?]` = 195 (sin drift; grep de pendientes limpio).
+
+### Notas
+- El "CERRADO ✅" de agnes (ronda 5, L143) queda **acotado**: con 3 `[?]` abiertos el módulo no cumple DoD §21.6 → estado real **🟡 Con dudas** (máximo cerrable sin M53/M112).
+- QA §21.8 (si llegara a ✅): `Hy3`/`agnes-3-flash`/`atria-dawn-s2` (independencia familia DeepSeek, §21.8/§21.23).
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.
