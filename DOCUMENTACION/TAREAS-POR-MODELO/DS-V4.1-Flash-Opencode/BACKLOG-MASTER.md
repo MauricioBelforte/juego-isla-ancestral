@@ -64,7 +64,7 @@ Módulos que el director asignó al frente WorkBuddy: **M01, M40, M59, M60, M62,
 - [ ] **T-015 ⛔** — M63-Cargas (67/101): 34 pendientes → streaming/prioridad — ⛔ cola WB
 - [ ] **T-016 ⛔** — M110-Debug-Menu (150/225): lotes de 10 (paneles) — ⛔ cola WB
 - [ ] **T-017 ⛔** — M110 b2: integración con telemetría M105 — ⛔ cola WB
-- [ ] **T-018 ⛔** — M112-Testing (211/225): 14 pendientes — ⛔ cola WB
+- [x] **T-018 ⛔→✅ reasignada y ejecutada** — **M112-Testing (216/225): iter. re-testing cerrada por reasignación del director (msg 04)** — 5 flips con artefactos reales: test_farming_inventory.gd 33/0; autoload_overrides.gd; fixture_items.tres; fixture_terrain.tscn/.gd; fixture_npc.tscn (smoke 20/0); + H123 de M29 39/0. 9 [?] con dueño intactos. QA §21.8 pendiente. Log 1903 — 2026-10-16
 - [x] **T-019** — **M117-Build-System (94/110): encargo del director (msg 02) CUMPLIDO** — iter. 4 (Log 1888): T-029/T-030 cerrados con export real ×3 (Windows 125.98 MB / Linux-SteamOS 96.58 MB c/u); fuga `Godot/` al artifact cerrada; `bump_version.py` sincroniza `export_presets.cfg` + tests 18/18; liberado 🟡, 16 `[?]` externos (M118×9/M96×4/M116×1/M113×2)
 - [ ] **T-020 ⛔** — M118-CI/CD: delegado a WB — ⛔ cola WB
 - [ ] **T-021 ⛔** — M123-Modding (106/108): 2 pendientes — ⛔ cola WB
@@ -111,7 +111,7 @@ Módulos que el director asignó al frente WorkBuddy: **M01, M40, M59, M60, M62,
 - [x] **T-050** — M29 verificado en micro-lote (192/195; 3 [?] con dueño M53/M112) — Log 1896 — 2026-10-16
 - [x] **T-051** — M30 verificado + fix C56 4.ª pasada en micro-lote (119/120; 1 [?] con dueño M45/M46) — Log 1898 — 2026-10-16
 - [ ] **T-052** — M31-Ciclo-Día/Noche (120/169): lote técnico (skybox/luz) — 10 [C] · ⚠️ frente WB activo (lotes)
-- [ ] **T-053** — M32-Clima (119/121): 2 pendientes — 3 [S] · ⭐ candidato micro-lote
+- [x] **T-053** — M32-Clima (119/121; 2 [?] con dueño M52/M50-M51-M08, sin flips — verificación RF5/RF8 con grep) — ejecutada en micro-lote del director — Log 1900 — 2026-10-16
 - [ ] **T-054** — M74-Eventos (227/285): lote técnico de scheduler — 10 [C]
 - [ ] **T-055** — M74 b2: hooks con M22/M23 — 10 [C]
 - [ ] **T-056** — M71-Progresión (168/213): lote XP/niveles — 10 [C]
@@ -208,12 +208,13 @@ Módulos que el director asignó al frente WorkBuddy: **M01, M40, M59, M60, M62,
 - [ ] **T-132** — M66-Anti-Softlock b2: iteración 2 (4 pendientes) — 6 [M]
 - [ ] **T-133** — M98-Trailer: soporte técnico de capturas (⚠️ verificar con el director) — 6 [M]
 
-**Totales: 133 líneas · 103 reclamables (75 base + 28 refuerzos) · 30 ⛔ cola WB.**
+**Totales: 133 líneas · 103 reclamables (75 base + 28 refuerzos) · 29 ⛔ cola WB (T-018 reasignada y ejecutada).**
 
 ## Logs
 
 - 2026-10-16 — **Log creado: 1885** — `Logs/1885-alta-frente-ds-v4.1-flash-opencode_2026-10-16_02-09-54.md` (alta + backlog v2 + encargo M117 + colisión 02/02 → 03).
 - 2026-10-16 — **Log reservado + creado: 1888** — `Logs/1888-m117-cierre-iter-4-build-real-y-fuga-godot_2026-10-16_02-41-01.md` (M117 iter. 4: exports reales ×3 + fix fuga Godot + bump sync presets; T-019 [x]; informado al director en msg 06).
+- 2026-10-16 — **Logs del día (micro-lotes + cierre):** 1896 (M29), 1898 (M30), 1900 (M32) — y **Log reservado + creado: 1903** — `Logs/1903-M112-Cierre-Iter-Re-Testing-Y-Clasificacion-CI_2026-10-16_05-58-00.md` (M112: 5 flips → 216/225 sin drift + CI run 38871847892 clasificado — fallos ajenos documentados; T-018 [x]; informado al director en msg 13).
 
 ## Historial
 

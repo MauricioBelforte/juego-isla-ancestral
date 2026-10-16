@@ -1,5 +1,5 @@
-**Modelo:** mimo-v2.6-flash-free
-**Plataforma:** opencode
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) — último modificador (iter. re-testing 2026-10-16) · histórico: mimo-v2.6-flash-free
+**Plataforma:** OpenCode
 
 # 04-Codigo.md — Módulo 112: Testing Automático
 
@@ -356,3 +356,26 @@ Exit code 0 → suite OK. Exit code ≠ 0 → suite fallida (el CI de M118 bloqu
 
 ### Conclusion
 El conteo 208/0/0 no refleja el estado real (cobertura y scripts pendientes). No cumple §24 (sobre-cierre). Requiere saneo de los `[x]` over-marked + cierre genuino por autor + QA cruzado. Sin sello limpio.
+
+## Notas del Agente — iter. re-testing 2026-10-16 (DS-V4.1-Flash-Opencode, OpenCode)
+
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) · **Plataforma:** OpenCode · **Fecha:** 2026-10-16 05:55
+**Estado:** Completado (M112 liberado 🟡 216/225; 9 [?] con dueño; QA §21.8 pendiente)
+
+### Lo que hice
+- Cerré los 5 `[ ]` del módulo con artefactos reales: `tests/integration/test_farming_inventory.gd` (33/0), `tests/helpers/autoload_overrides.gd`, `tests/fixtures/fixture_items.tres`, `tests/fixtures/fixture_terrain.tscn` + `fixture_terrain.gd`, `tests/fixtures/fixture_npc.tscn` + smoke `tests/integration/test_fixtures_smoke.gd` (20/0).
+- Cierre cruzado H123 de M29: `tests/integration/test_time_cycles_year.gd` 39/0 (flipeado en ambos checklists).
+- Clasifiqué el CI del encargo (run 38871847892): Testing Suite ✅; Code Quality ✗ por causas ajenas documentadas (BOM de mensajes del director + pools; flake de umbral M62 L191).
+- Conteo real verificado: 216 [x] / 0 [ ] / 9 [?] = 225 sin drift.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- L191/L201: sin cambios (seed fijo en M08/M09/M27; fallbacks en M122) — fuera de alcance.
+- Cableado de las suites nuevas al job "Run validation tests" de `quality.yml`: el job enumera comandos uno a uno; `quality.yml` no se toca sin autorización del fundador → queda para M118/director.
+- QA cruzado §21.8: pendiente (requiere otro modelo — sugerido Hy3 / agnes-3-flash / s2).
+
+### Recomendaciones para el próximo agente
+- Reutilizar `fixture_terrain.gd::seed_fija()` y el patrón de `centro_mundo` (desde `mundo_raiz.gd`) para tests de generación/bioma deterministas.
+- Smokes de fixtures arrancan el mundo (~2-3 s por suite); si se cablean en CI, fusionarlos en una sola suite.
+- Para coverage (L99/L100/L256): esperar tooling de cobertura GdUnit4 headless (no disponible en v6.2.1).
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.

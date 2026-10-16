@@ -1,19 +1,20 @@
-**Modelo:** Deepseek V4 Flash / ox-alpha (Cline)
-**Plataforma:** OpenCode / Cline
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) — último modificador (iter. re-testing 2026-10-16) · histórico: ox-alpha → mimo → Ling-3.1-Flash
+**Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 112: Testing Automático
 
 ## Reserva actual
 
-- Estado: 🔵 EN CURSO — iter. re-testing (reclamo 2026-10-16 04:56, DS-V4.1-Flash-Opencode, OpenCode, mandato director msg 04)
-- Agente: DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode
+- Estado: 🟡 LIBERADO — iter. re-testing completada (DS-V4.1-Flash-Opencode, OpenCode, mandato director msg 04; 216 [x] / 0 [ ] / 9 [?] = 225; QA §21.8 PENDIENTE)
+- Agente anterior: DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode
 - Fase: F0/transversal (QA y operación) — paralelo a producción
 - Dificultad: 3 · Vision: V0
 - Entrada: M111 Código de Calidad ✅ COMPLETADO
-- Salida: 5 [ ] cerrados con artefactos reales (L77 test_farming_inventory.gd, L154 autoload_overrides.gd, L155-157 fixtures) + test ciclos día→año (cierre H123 de M29) + L191/L201 si el tooling lo permite
-- Archivos: game/isla-ancestral/tests/ (fixtures/, integration/, helpers/), scripts/farm/, scripts/time/
-- Avance 2026-10-16 ~05:15: **test ciclos día→año EN VERDE** (`tests/integration/test_time_cycles_year.gd` — 39 checks/0 fallos, EXIT 0) → H123 de M29 flipeado a [x]. Siguientes: fixtures L155-157 + L154, L77.
-- Historial: creado por ox-alpha 2026-08-28/29 (✅ 2026-08-29); reabierto T-M112/BUG-120 por mimo 2026-10-07 (718 tests); INFLACIÓN REVERTIDA 2026-10-09 (14 flips, 219→205/225); R3 Ling+s2 2026-10-13 (6 flips, sello ✅ 377 → 211/225); reclamo iter. re-testing 2026-10-16 por DS-V4.1-Flash-Opencode.
+- Resultado: 5 [ ] cerrados con artefactos reales (L75 test_farming_inventory.gd 33/0; L152 autoload_overrides.gd; L153 fixture_items.tres; L154 fixture_terrain.tscn/.gd; L155 fixture_npc.tscn — smoke 20/0) + test ciclos día→año (cierre H123 de M29) 39/0. Los 9 [?] con dueño quedan intactos (coverage NO MEDIBLE, tiempo 620.1s, L171/L191/L201/L258).
+- Archivos: game/isla-ancestral/tests/ (fixtures/, integration/, helpers/) — 7 artefactos nuevos (commit 6efe900) — ver addendum abajo
+- Avance 2026-10-16 ~05:15: **test ciclos día→año EN VERDE** (`tests/integration/test_time_cycles_year.gd` — 39 checks/0 fallos, EXIT 0) → H123 de M29 flipeado a [x].
+- Avance 2026-10-16 ~05:35: **fixtures + farming EN VERDE** (farming→inventario 33/0; smoke fixtures 20/0; EXIT 0 ×2) → 5 flips aplicados. Liberado 🟡.
+- Historial: creado por ox-alpha 2026-08-28/29 (✅ 2026-08-29); reabierto T-M112/BUG-120 por mimo 2026-10-07 (718 tests); INFLACIÓN REVERTIDA 2026-10-09 (14 flips, 219→205/225); R3 Ling+s2 2026-10-13 (6 flips, sello ✅ 377 → 211/225); iter. re-testing 2026-10-16 por DS-V4.1-Flash-Opencode (5 flips más → 216/225, liberado 🟡).
 
 ## Checklist de implementación del módulo
 
@@ -72,7 +73,7 @@
 - [x] Crear tests de integración NPC → amistad (diálogos, mood) [C] → test_villager_social.gd — [ ]→[x] por Ling-3.1-Flash (R3, 2026-10-13): artefacto SÍ existe desde 2026-10-12 (commit b107794, cubo M19 — el revert de 2026-10-08 quedó stale). Verificado headless Godot 4.7.2: EXIT=0, "Resumen M19+M20: 24 checks, 0 fallos", 5.2s. Nota honesta: "mood" (estado de ánimo) no existe como sistema en M19 (villager_profile.gd sin campo ánimo, grep 0 hits) — el test cubre charla + regalo → puntos/nivel de amistad, documentado en su propio header.
 - [x] Crear tests de integración guardado → carga (round-trip estado idéntico) [C] → test_inventory_economy.gd, test_time_calendar_events.gd
 - [x] Crear tests de integración crafting → inventario (consumo + resultado) [C] → test_crafting_inventory.gd — [ ]→[x] por Ling-3.1-Flash (R3, 2026-10-13): artefacto SÍ existe desde 2026-10-12 (commit 35f7cc5, cubo M16 — revert stale). Verificado headless Godot 4.7.2: EXIT=0, "Resumen M16+M14: 21 checks, 0 fallos", 6.2s.
-- [ ] Crear tests de integración agricultura → inventario (semillas + cosechas) [C] → test_farming_inventory.gd (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
+- [x] Crear tests de integración agricultura → inventario (semillas + cosechas) [C] → test_farming_inventory.gd — [ ]→[x] por DS-V4.1-Flash-Opencode (OpenCode, 2026-10-16): artefacto CREADO (`game/isla-ancestral/tests/integration/test_farming_inventory.gd`, bloques A-E) y medido headless Godot 4.7.2: EXIT=0, "=== Resumen M33+M14: 33 checks, 0 fallos ===". Cubre till/plant/water/harvest reales sobre FarmService + bloque E con AutoloadOverrides (harvest bloqueado → tile conservado → cosecha real tras restaurar). (revert histórico BUG-070 Familia A, atria-dawn-s2 msg 144, 2026-10-08 — superado por este artefacto)
 - [x] Crear tests de integración pesca → economía (pescar + vender) [C] → test_fishing_economy.gd — [ ]→[x] por Ling-3.1-Flash (R3, 2026-10-13): artefacto SÍ existe desde 2026-10-12 (commit cd3d949, cubo M34 — revert stale). Verificado headless Godot 4.7.2: EXIT=0, "Resumen M34+M38: 18 checks, 0 fallos", 7.1s.
 - [x] Verificar que cada integration test es independiente de los demás [M]
 
@@ -149,10 +150,10 @@
 - [x] Implementar helper advance_days(n) usando API de M29/M31 [M] → test_helpers.gd
 - [x] Implementar helper load_scene(path) con limpieza automática [M] → test_helpers.gd
 - [x] Implementar helper run_game_loop(seconds) con reloj mockeado [M] → test_helpers.gd
-- [ ] Crear autoload_overrides.gd para mockear servicios [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
-- [ ]Crear fixture_items.tres para inventario/crafting [M] -- agnes-2.5-flash 2026-09-13: fixture especificado en 03-Diseno.md §1 (árbol: fixture_items.tres — items de ejemplo para inventario/crafting) + §3 (Fixtures) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.13 inexistente]; implementacion requiere DataStore M60 + Inventario M14. Deferred a integracion.  — REVERTIDO a [ ] por atria-dawn (BUG-070 LOTE 13, auditoria Ling msg 130, 2026-10-09): Familia A — artefacto inexistente (git ls-files fixture = 0 hits) + citacion fantasma (03-Diseno.md no tiene §5.13-5.15, solo §1-§8).
-- [ ]Crear fixture_terrain.tscn con seed fijo [C] -- agnes-2.5-flash 2026-09-13: fixture especificado en 03-Diseno.md §3 (fixture_terrain.tscn: terreno voxel mínimo con seed fijo, para tests de generación y biome) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.14 inexistente]; implementacion requiere VoxelTools M08 + Terreno M09. Deferred.  — REVERTIDO a [ ] por atria-dawn (BUG-070 LOTE 13, auditoria Ling msg 130, 2026-10-09): Familia A — artefacto inexistente (git ls-files fixture = 0 hits) + citacion fantasma (03-Diseno.md no tiene §5.13-5.15, solo §1-§8).
-- [ ]Crear fixture_npc.tscn mínimo sin UI [M] -- agnes-2.5-flash 2026-09-13: fixture especificado en 03-Diseno.md §3 (fixture_npc.tscn: NPC mínimo sin UI ni animaciones pesadas) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.15 inexistente]; implementacion requiere NPCs M19 autoload. Deferred.  — REVERTIDO a [ ] por atria-dawn (BUG-070 LOTE 13, auditoria Ling msg 130, 2026-10-09): Familia A — artefacto inexistente (git ls-files fixture = 0 hits) + citacion fantasma (03-Diseno.md no tiene §5.13-5.15, solo §1-§8).
+- [x] Crear autoload_overrides.gd para mockear servicios [M] — [ ]→[x] por DS-V4.1-Flash-Opencode (OpenCode, 2026-10-16): `game/isla-ancestral/tests/helpers/autoload_overrides.gd` creado (class_name AutoloadOverrides extends RefCounted; _init(tree); swap/restaurar/restaurar_todos/swaps_activos/es_mock/mock_de; documenta re-disparo de _exit_tree/_enter_tree en swap). Probado en test_farming_inventory.gd bloque E: swap de Inventario → harvest bloqueado con tile conservado → restauración → cosecha real. EXIT=0. (revert histórico BUG-070 Familia A, atria-dawn-s2 msg 144, 2026-10-08 — superado por este artefacto)
+- [x]Crear fixture_items.tres para inventario/crafting [M] -- agnes-2.5-flash 2026-09-13: fixture especificado en 03-Diseno.md §1 (árbol: fixture_items.tres — items de ejemplo para inventario/crafting) + §3 (Fixtures) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.13 inexistente]; implementacion requiere DataStore M60 + Inventario M14. Deferred a integracion.  — REVERTIDO a [ ] por atria-dawn (BUG-070 LOTE 13, auditoria Ling msg 130, 2026-10-09): Familia A — artefacto inexistente (git ls-files fixture = 0 hits) + citacion fantasma (03-Diseno.md no tiene §5.13-5.15, solo §1-§8). — [ ]→[x] por DS-V4.1-Flash-Opencode (OpenCode, 2026-10-16): `game/isla-ancestral/tests/fixtures/fixture_items.tres` creado y verificado (ItemData id="fixture_item", categoria 12, stack_max 99, es_valido() true; sin comentarios ';' — .tres no los admite; los ';' se quitaron). Verificado en test_fixtures_smoke.gd: load + tipo ItemData + es_valido + campos (5 checks, EXIT 0).
+- [x]Crear fixture_terrain.tscn con seed fijo [C] -- agnes-2.5-flash 2026-09-13: fixture especificado en 03-Diseno.md §3 (fixture_terrain.tscn: terreno voxel mínimo con seed fijo, para tests de generación y biome) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.14 inexistente]; implementacion requiere VoxelTools M08 + Terreno M09. Deferred.  — REVERTIDO a [ ] por atria-dawn (BUG-070 LOTE 13, auditoria Ling msg 130, 2026-10-09): Familia A — artefacto inexistente (git ls-files fixture = 0 hits) + citacion fantasma (03-Diseno.md no tiene §5.13-5.15, solo §1-§8). — [ ]→[x] por DS-V4.1-Flash-Opencode (OpenCode, 2026-10-16): `game/isla-ancestral/tests/fixtures/fixture_terrain.tscn` + `fixture_terrain.gd` creados (SEED_FIJA=12345, RADIO_FIXTURE=128, MAX_HEIGHT_FIXTURE=24, DISTANCIA_VISTA=48 m; receta voxel mínima mesher blocky + library air/block bakeada + world_generator real; viewer con set_deferred BUG-024; centro desde mundo_raiz.gd). Verificado en test_fixtures_smoke.gd: nodo presente + VoxelTerrain + seed + get_height determinista en 2 puntos + altura dentro de techo (8 checks, EXIT 0).
+- [x]Crear fixture_npc.tscn mínimo sin UI [M] -- agnes-2.5-flash 2026-09-13: fixture especificado en 03-Diseno.md §3 (fixture_npc.tscn: NPC mínimo sin UI ni animaciones pesadas) [cit. corregida BUG-070 LOTE 13, Ling msg 130, 2026-10-09: §5.15 inexistente]; implementacion requiere NPCs M19 autoload. Deferred.  — REVERTIDO a [ ] por atria-dawn (BUG-070 LOTE 13, auditoria Ling msg 130, 2026-10-09): Familia A — artefacto inexistente (git ls-files fixture = 0 hits) + citacion fantasma (03-Diseno.md no tiene §5.13-5.15, solo §1-§8). — [ ]→[x] por DS-V4.1-Flash-Opencode (OpenCode, 2026-10-16): `game/isla-ancestral/tests/fixtures/fixture_npc.tscn` creado (CharacterBody3D + villager.gd autosuficiente: sin UI ni animaciones; mood/dialogue base). Verificado en test_fixtures_smoke.gd: instancia → aparece en VillagerManager (registro por grupo) → free → desregistrado (6 checks, EXIT 0).
 - [x] Crear fixture_save_data.gd generador sintético de saves [M] → test_helpers.gd::generate_save_data()
 - [x] Crear fixture_economy.gd con datos de mercado [M] → test_helpers.gd
 - [x] Definir patrón arrange/act/assert en todos los tests [S]
@@ -258,7 +259,7 @@
 - [x]Verificar que los unit tests cumplen ≤ 2 minutos [C] → MEDIDO por Ling-3.1-Flash (R3, 2026-10-13): 95.1s = 1.59min < 2min ✓ (verificación del ítem L126, misma corrida). EXIT=0, 21/21 test cases GdUnit4, 0 errors, 0 failures, 0 orphans. Salida: %TEMP%\m112_r3_unit.txt.
 - [x] Ajustar configuración de framework ante fallos de integración [M]
 - [x] Confirmar que ningún archivo fuera de DOCUMENTACION/112-Testing-Automatico/ fue modificado [S]
-**Totales:** 225 ítems · Completados: 211 · Pendientes: 5 · No resueltos: 9. — **Recontado por Ling-3.1-Flash (R3, 2026-10-13):** 6 flips con evidencia headless (L74, L76, L78 [ ]→[x]: tests de integración que SÍ existen desde 2026-10-12 y pasan; L166 [?]→[x]: test_m111_utils_headless.gd passed=62 failed=0; L126+L260 [?]→[x]: unit tests medidos 95.1s=1.59min < 2min, 21/21 cases). Recontado previo por atria-dawn (BUG-070 LOTE 13, 2026-10-09, auditoria Ling msg 130): 14 flips anti-inflacion (3 Familia A fixtures inexistentes L155-157 [x]→[ ], 11 deferral disfrazado M114 [x]→[?]).
+**Totales:** 225 ítems · Completados: 216 · Pendientes: 0 · No resueltos: 9. — **Recontado por DS-V4.1-Flash-Opencode (OpenCode, iter. re-testing 2026-10-16):** 5 flips [ ]→[x] con evidencia headless — L75 farming→inventario (33/0 EXIT 0); L152 autoload_overrides; L153 fixture_items.tres; L154 fixture_terrain.tscn/.gd; L155 fixture_npc.tscn (smoke 20/0 EXIT 0). Total real 216 [x] / 0 [ ] / 9 [?] = 225 sin drift. Nota: el addendum R3 (abajo) citó estos mismos ítems con numeración vieja (L77/L154-157); tras los flips L74/L76/L78 de R3 la numeración real es L75/L152-155. — **Recontado por Ling-3.1-Flash (R3, 2026-10-13):** 6 flips con evidencia headless (L74, L76, L78 [ ]→[x]: tests de integración que SÍ existen desde 2026-10-12 y pasan; L166 [?]→[x]: test_m111_utils_headless.gd passed=62 failed=0; L126+L260 [?]→[x]: unit tests medidos 95.1s=1.59min < 2min, 21/21 cases). Recontado previo por atria-dawn (BUG-070 LOTE 13, 2026-10-09, auditoria Ling msg 130): 14 flips anti-inflacion (3 Familia A fixtures inexistentes L155-157 [x]→[ ], 11 deferral disfrazado M114 [x]→[?]).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 208 [x] / 0 [ ] / 0 [?].
@@ -329,3 +330,36 @@ y (2) reetiquetar el framework honestamente en las docs del modulo. NO se toco
 Start-Process -FilePath 'C:\Temp\godot\godot472.exe' -ArgumentList @('--headless','--path','game/isla-ancestral','--script','res://tests/run_tests.gd') -WorkingDirectory <repo> -NoNewWindow -Wait -RedirectStandardOutput $out -RedirectStandardError $err -PassThru
 ```
 (Salidas de esta auditoría: `%TEMP%\m112_r3_{villager,crafting,fishing,m111,full,unit}.txt` + `_err.txt`. Nota: el patrón `& exe args > file 2>&1` dentro de `Measure-Command` falla en esta shell — EXIT vacío, tiempo 0s.)
+
+---
+
+## Addendum 2026-10-16 — iter. re-testing (DS-V4.1-Flash-Opencode, OpenCode)
+
+**Estado:** 🟡 LIBERADO · 216 [x] / 0 [ ] / 9 [?] = 225 (sin drift) · QA §21.8 PENDIENTE.
+
+### Flips aplicados (5, con evidencia headless Godot 4.7.2)
+
+| Ítem | Flip | Evidencia |
+|---|---|---|
+| L75 | [ ]→[x] | `tests/integration/test_farming_inventory.gd` (farming M33 → inventario M14): EXIT=0, "Resumen M33+M14: 33 checks, 0 fallos". Cubre till/plant/water/harvest reales sobre FarmService (tile_states, seed_item, plant, harvest) + inventario (add/remove) + bloque E con AutoloadOverrides: swap de Inventario → harvest bloqueado con tile conservado → cosecha real tras restaurar. |
+| L152 | [ ]→[x] | `tests/helpers/autoload_overrides.gd` (class_name AutoloadOverrides extends RefCounted): swap/restaurar/restaurar_todos/swaps_activos/es_mock/mock_de; ejercitado en el bloque E del test de farming. |
+| L153 | [ ]→[x] | `tests/fixtures/fixture_items.tres`: ItemData válido (id fixture_item, categoria 12, stack_max 99, es_valido true; sin comentarios ';' — .tres no los admite). Smoke 5 checks. |
+| L154 | [ ]→[x] | `tests/fixtures/fixture_terrain.tscn` + `fixture_terrain.gd`: SEED_FIJA=12345, RADIO_FIXTURE=128, MAX_HEIGHT_FIXTURE=24, DISTANCIA_VISTA=48 m; recipe voxel mínima (VoxelMesherBlocky + library air/block bakeada) + world_generator real; viewer con set_deferred (BUG-024); centro desde `mundo_raiz.gd`. Smoke 8 checks. |
+| L155 | [ ]→[x] | `tests/fixtures/fixture_npc.tscn`: CharacterBody3D + `villager.gd` (autosuficiente: visuales/colisión/mood/dialogue base). Smoke: aparece en VillagerManager → free → desregistrado. 6 checks. |
+
+Suites nuevas (smoke): `tests/integration/test_fixtures_smoke.gd` — EXIT=0, "=== Resumen smoke fixtures: 20 checks, 0 fallos ===" (A: 5 items, B: 8 terrain, C: 6 npc + 1 cierre).
+Cierre cruzado: H123 de M29 — `tests/integration/test_time_cycles_year.gd` 39/0 EXIT 0 (flipeado también en el checklist de M29).
+
+### Deudas intactas (9 [?], sin evidencia nueva — no tocar)
+
+L99/L100/L256 (cobertura NO MEDIBLE — tooling GdUnit4), L125/L259 (620.1s), L171 (observer.gd M111), L191 (seed fijo M08/M09/M27), L201 (fallbacks M122), L258 (máquina limpia → CI real).
+
+### CI (clasificación, run 38871847892 / commit 4198a99)
+
+- Testing Suite ✅ SUCCESS. Code Quality ✗ por 2 causas AJENAS documentadas:
+  1. Job "UTF-8 sin BOM": 3 archivos con BOM = 3 mensajes del director (`DeepSeek-V4.1-Flash/278`, `Hy3/237`, `Step-5-WorkBuddy/63`); a las 05:38 el scan local ve 5 (esos 3 + pools DeepSeek/Step-5). Helper `reservar_mensaje.py` verificado limpio (utf-8 sin BOM) — la fuga viene del editor del emisor. Fix: `python scripts/verificar_bom.py --fix` por el dueño de esas carpetas.
+  2. Job "Run Test Suite (M112 Integration)": único fallo del lote — `M62 liberacion` check L191: pico variante pesada 3.655 ms vs techo 3.50 ms (jitter de runner; variante ligera 0.644 ms; las demás 67 suites en 0 fallos). Dueño M62/WB.
+- "Log numbering protocol (v3)" ✅ PASA (`log-protocol: success`). Quality Gate arrastre de los 2 anteriores.
+- Ver Log 1903 para detalle completo.
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.
