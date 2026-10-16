@@ -11,8 +11,8 @@ class_name HotbarWidget
 const SLOT_COUNT := 8
 const SLOT_SIZE := Vector2(40, 40)
 const SLOT_SPACING := 4
-const HIGHLIGHT_COLOR := Color(0.85, 0.72, 0.35, 0.8)
-const SLOT_BG := Color(0.20, 0.18, 0.15, 0.7)
+const HIGHLIGHT_COLOR := Color(0.92, 0.76, 0.40, 0.9)  # D102: dorado vivo
+const SLOT_BG := Color(0.09, 0.10, 0.15, 0.92)  # D102: opaco dark (el 0.7 translucido se veia beige sobre la arena)
 
 ## ── Estado ──────────────────────────────────────────────
 var _selected_slot: int = 0
@@ -79,7 +79,7 @@ func _build_ui() -> void:
 		style.bg_color = SLOT_BG
 		style.set_corner_radius_all(6)
 		style.set_border_width_all(1)
-		style.border_color = Color(0.4, 0.35, 0.30, 0.5)
+		style.border_color = Color(0.87, 0.66, 0.33, 0.55)  # D102: borde ambar
 		panel.add_theme_stylebox_override("panel", style)
 
 		# Label del ítem
@@ -120,7 +120,7 @@ func _update_highlights() -> void:
 				style.border_color = HIGHLIGHT_COLOR
 				style.set_border_width_all(2)
 			else:
-				style.border_color = Color(0.4, 0.35, 0.30, 0.5)
+				style.border_color = Color(0.87, 0.66, 0.33, 0.55)  # D102: borde ambar
 				style.set_border_width_all(1)
 
 
