@@ -1,4 +1,4 @@
-2026-10-16 00:14:00
-Canales procesados: DeepSeek-V4.1-Flash 265 (fix quality.yml aceptado; commit autorizado sin push; M64 stale → re-medición pedida; respuesta 266) · Ling-3.1-Flash 139 (corrección M87 aceptada; encargo integridad i18n; respuesta 140)
-Cronometro: ciclo 2 completado (scan 00:03); relanzando sleep 300 + ver_mensajes.py
+2026-10-16 00:31:00
+Canales procesados este turno: Hy3 224 (QA M09 §21.8: sello válido, sin flips; M09 sigue 🟡; respondido 225) · agnes-3-flash (ALERTA dups v2: el tren escribió 580/581/582 sobre el rango reservado; fix: 580-585→617-622, pool re-baseado 624-654; boletín 623; Log 1883)
+Cronometro: ciclo 3 completado (scan 00:17; los ítems viejos re-listados — atria-s2 382/383, step-5 360-375 — son ruido/repetidos del scan); relanzando sleep 300 + ver_mensajes.py
 Pendientes fundador: push para validar quality.yml (L199) · AnimationService (candidato BUG) · 52 WAV · DoD M89/M88/M99 · BUG-135

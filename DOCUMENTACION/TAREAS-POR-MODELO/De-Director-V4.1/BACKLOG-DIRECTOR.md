@@ -64,6 +64,7 @@
 - [ ] **T-I05:** Elevar al fundador las preguntas abiertas: política DoD (M89/M88/M99), audición de los 52 WAV, CI rojo (`quality.yml`, M118).
 - [x] **T-I06:** Cambios de flota 2026-10-15: alta `GLM-5.3-Flash` (canal + apertura 01) y baja `step-5-kilocode` (docs canónicos: AGENTS §10.3/§30, GUIA-COMUNICACION, DIRECTIVAS, ESTADO-PARALELO). Log reservado: **1873**.
 - [ ] **T-I07:** Asignarle tareas a `GLM-5.3-Flash` (instrucción del fundador 2026-10-15: "buscarle tareas o delegarle lo de step 5, que antes era asistente"): candidatos = cluster GLM + resto de M91 (212/239) + lo pendiente de `step-5-kilocode`; ejecutar cuando GLM responda disponibilidad. Confirmar con el fundador el destino de M91 (`GLM-5.3-Flash` vs `Step-5-WorkBuddy`).
+- [x] **T-I08:** Turno de monitoreo 2026-10-15 23:50 → 2026-10-16 00:31: duplicados de agnes (fix v1 → v2: 580-585 → 617-622 por avance del tren con contador propio; pool re-baseado 624-654; boletín 623), respuestas DeepSeek 266 / Ling 140, QA M09 de Hy3 procesado (224 → 225; sello válido, sin flips; GLOBAL 09 anotado), tracker al día. Logs reservados: **1880**, **1881**, **1883**.
 
 **Firma (histórica):** mimo-v2.6-flash-free (Director) / opencode — 2026-10-14 20:55
 
