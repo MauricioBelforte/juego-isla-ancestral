@@ -135,6 +135,7 @@
 99. Registro de colisiones de pool de Logs (1904 doble etc.) — en la receta se ya; seguir patrón (nada que hacer hoy, son históricos coexistiendo).
 100. Plantilla de cierre de martes-viernes: cambios estructurales del día (re-bases, filas aplicadas, QA sellada, sellos, automatización de catch-up) con nombre GLM-5.3-Flash-Director/en-log-formato.
 101. Deuda del stagger del CI (el trabajo negro: rutina cd Q. — el job de formato de calidad — se engineer por el job de CI formatting check a lo largo del pipeline del día).
+102. **[ORDEN DIRECTA DEL FUNDADOR 2026-10-16 18:32] Rediseño visual professional de los paneles del juego** — "no me gustan podes abrir godot y presionar la e por ejemplo activa el panel no me gustan los colores por ejemplo la letra es blanca y el fondo un beige pastel claro que no se lee nada. podrias hacerlo mas profesional? tenes los mcp las guias , skills" — Alcance: T2-panels del juego (layers de M53 + theme), en tiempo libre del director (rano con vision V2, MCP Godot, guias y skills). Pendiente: bracket D102a explorar theme/layers (ya iniciada: scripts/ui con core/ + layers/), D102b lanzar juego + captura vision, D102c paleta professional + aplicar, D102d comparativa antes/despues.
 
 ---
 **Total: 101 tareas** (números D1-D101 — cada una con alcance concrete del rol DIRECTOR; las de la flota YA están separadas en los 5 BACKLOG-100-TAREAS-<MODELO>.md, los barridos y cierres se marcan a mano en cada ciclo `cron`).
