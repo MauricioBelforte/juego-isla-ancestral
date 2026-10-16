@@ -1,7 +1,7 @@
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Módulo 124: Contenido Generado por Usuarios (110 ítems)
+# 05-Checklist.md — Módulo 124: Contenido Generado por Usuarios (108 ítems)
 
 ## Convención
 - `[x]` = completado. `[ ]` = pendiente. `[?]` = no resuelto (decisión / servicio / UI / legal / proceso, con dueño externo).
@@ -163,9 +163,10 @@
 
 ## Totales
 
-**Total de ítems:** 106
-**Ítems completados:** 81 — de los cuales **16** los implementé en la iter. 2 (Log 905)
+**Total de ítems:** 108
+**Ítems completados:** 83 — de los cuales **16** los implementé en la iter. 2 (Log 905)
 **Ítems no resueltos `[?]`:** 25 (decisión / servicio / infra / UI / legal / proceso, con dueño externo)
+**Ítems pendientes `[ ]`:** 0
 
 > ⚠️ **Corrección de sobre-cierre (2026-09-15, iter. 2):** este bloque decía
 > "106 resueltos, 0 pendientes" cuando el cuerpo del checklist tenía **41 `[ ]` reales**.
