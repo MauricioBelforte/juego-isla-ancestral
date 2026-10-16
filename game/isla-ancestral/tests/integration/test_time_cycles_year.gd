@@ -27,7 +27,7 @@ extends SceneTree
 
 const TIMEOUT_SEG := 60.0
 ## Piso de checks MEDIDO en verde (no estimado): un aborto parcial baja el conteo.
-const CHECKS_MINIMOS := 30
+const CHECKS_MINIMOS := 39
 const BLOQUES_ESPERADOS: Array[String] = ["A", "B", "C", "D", "E", "F", "G"]
 
 const CLOCK := preload("res://scripts/time/game_clock.gd")
@@ -221,13 +221,19 @@ func _bloque_b_transicion_anio() -> void:
 func _bloque_c_anio_2() -> void:
 	_ini("C. Año 2 completo")
 	var primer_fallo := ""
-	for i in range(336):
+	for i in range(335):
 		C.call("_nuevo_dia")
 		if primer_fallo == "":
 			primer_fallo = _invariante(i + 1)
-	_check("336 pasos sin violaciones de invariantes", primer_fallo == "", primer_fallo)
-	_check("año 2 termina en 28/12/2", C.call("get_fecha") == {"dia": 28, "mes": 12, "anio": 2},
+	_check("335 pasos sin violaciones de invariantes", primer_fallo == "", primer_fallo)
+	_check("año 2 termina en 28/12/2 (día 672)", C.call("get_fecha") == {"dia": 28, "mes": 12, "anio": 2},
 		str(C.call("get_fecha")))
+	_check("dia_absoluto()==672 al cierre del año 2", int(C.call("dia_absoluto")) == 672)
+	var emis_dia_antes: int = _emis_dia
+	C.call("_nuevo_dia")
+	_check("segundo cruce de año limpio a 1/1/3",
+		C.call("get_fecha") == {"dia": 1, "mes": 1, "anio": 3}, str(C.call("get_fecha")))
+	_check("emite dia_cambio en el segundo cruce", _emis_dia == emis_dia_antes + 1)
 	# Hito intermedio: día 168 del año 2 = 28/6/2, absoluto 504.
 	var c2 = CLOCK.new()
 	c2.call("set", "_dia", 28)

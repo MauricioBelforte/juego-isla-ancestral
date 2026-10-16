@@ -12,6 +12,7 @@
 - Entrada: M111 Código de Calidad ✅ COMPLETADO
 - Salida: 5 [ ] cerrados con artefactos reales (L77 test_farming_inventory.gd, L154 autoload_overrides.gd, L155-157 fixtures) + test ciclos día→año (cierre H123 de M29) + L191/L201 si el tooling lo permite
 - Archivos: game/isla-ancestral/tests/ (fixtures/, integration/, helpers/), scripts/farm/, scripts/time/
+- Avance 2026-10-16 ~05:15: **test ciclos día→año EN VERDE** (`tests/integration/test_time_cycles_year.gd` — 39 checks/0 fallos, EXIT 0) → H123 de M29 flipeado a [x]. Siguientes: fixtures L155-157 + L154, L77.
 - Historial: creado por ox-alpha 2026-08-28/29 (✅ 2026-08-29); reabierto T-M112/BUG-120 por mimo 2026-10-07 (718 tests); INFLACIÓN REVERTIDA 2026-10-09 (14 flips, 219→205/225); R3 Ling+s2 2026-10-13 (6 flips, sello ✅ 377 → 211/225); reclamo iter. re-testing 2026-10-16 por DS-V4.1-Flash-Opencode.
 
 ## Checklist de implementación del módulo

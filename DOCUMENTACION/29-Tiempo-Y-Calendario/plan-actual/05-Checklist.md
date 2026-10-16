@@ -140,7 +140,7 @@
 - [x] Log de creación generado [S] *(auditoría iter 1 — Log 824: Logs 174/175 de ox-alpha registran la creación; Log 824 esta iteración)*
 - [x] Checked en README de DOCUMENTACION [S] *(auditoría iter 1 — Log 824: módulo listado en README de DOCUMENTACION como componente {ID}-Nombre)*
 
-**Totales:** 195 items - Completados: 192 - Pendientes: 0 - No resueltos: 3. **CERRADO ✅** (Corregido agnes-3-flash 2026-10-13: +3 flips diseño M46/M74/M55) — *acotado 2026-10-16 (Log 1896, iter. 3): no cumple DoD §21.6 (3 [?] abiertos: flecha HUD ×2 = M53, H123 = M112); estado real 🟡; suites 163/0 EXIT 0 ×4.*
+**Totales:** 195 items - Completados: 193 - Pendientes: 0 - No resueltos: 2. **CERRADO ✅** (Corregido agnes-3-flash 2026-10-13: +3 flips diseño M46/M74/M55) — *acotado 2026-10-16 (Log 1896, iter. 3): no cumple DoD §21.6 (2 [?] abiertos: flecha HUD ×2 = M53); estado real 🟡; suites 163/0 EXIT 0 ×4; H123 cerrado 2026-10-16 (test ciclos M112, 39 checks verde).*
 
 > **⚠ DoD §21.6 INCUMPLIDA — MÓDULO REVERTIDO ✅→🟡 (atria-dawn-preview / Kilo Code,**
 > **2026-09-19, Log 1109):** el módulo figuraba ✅ Verificado en CHECKLIST-GLOBAL pero
@@ -251,7 +251,7 @@
 - [x] H120 Semilla de tiempo por partida [M] → usar_semilla_tiempo en config
 - [x] H121 Compatibilidad con guardado M59 (versionado) [M] → ISaveProvider en ambos
 - [x] H122 Sin estado global disperso (solo vía servicio) [M] → autoload TimeCalendar
-- [?] H123 Tests de ciclos (día→año) en M112 [M] → pendiente tests formales M112 *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1896: cierre cruzado comprometido — el mismo agente implementa M112 a continuación (msg 07 director); al pasar el test de ciclos se flipea)*
+- [x] H123 Tests de ciclos (día→año) en M112 [M] → **✅ CERRADO 2026-10-16 (test formal implementado en M112)** — `tests/integration/test_time_cycles_year.gd`, 39 checks/0 fallos, EXIT 0 (bloques A-G: años 1-2 completos, transiciones de año limpias, 8 estaciones sin saltos, día-del-año round-trip, persistencia save/restore, integridad 672 emisiones) *(DS-V4.1-Flash-Opencode; flip al verde — cierre cruzado M29↔M112 cumplido)*
 
 ### I. Delegación y cierre
 - [x] I127 Módulo marcado como delegable en CHECKLIST-GLOBAL [S]
@@ -432,7 +432,7 @@ Los [190 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia
 - **4 suites headless re-corridas** (evidencia fresca, 2026-10-16 04:12:54): `test_time_calendar.gd` **74 checks/0 fallos**, `test_time_calendar_events.gd` **51/0**, `test_calendario.gd` **13/0** (cierre con 4 ObjectDB leaks + 1 resource in use — observación preexistente, EXIT 0), `test_semilla_iter1.gd` **25/0** → total **163 checks / 0 fallos / EXIT 0 ×4**.
 - **Evidencia de los 3 `[?]` (ninguno cerrable dentro de M29):**
   1. **Flecha indicadora HUD (×2: L75 + L207/D72):** grep `flecha` sobre `game/isla-ancestral/` = **0 flechas de HUD** (solo edge-arrow del minimapa, `minimap_widget.gd` = M54). La API de M29 está lista (`evento_proximo`/`formatear_hora`); el visual es **M53** → `[?]` mantenido con frontera explícita.
-  2. **H123 (tests de ciclos día→año en M112):** cierre cruzado comprometido — el mismo agente implementa **M112** a continuación (aprobado por el director, msg 07); al agregar el test de ciclos en verde, este ítem se flipea.
+  2. **H123 (tests de ciclos día→año en M112):** cierre cruzado comprometido — el mismo agente implementa **M112** a continuación (aprobado por el director, msg 07); **test implementado y en verde 2026-10-16** (`tests/integration/test_time_cycles_year.gd`, 39 checks/0 fallos, EXIT 0) → ítem flipeado a [x].
 - **Conteo estricto:** 192 `[x]` / 0 `[ ]` / 3 `[?]` = 195 (sin drift; grep de pendientes limpio).
 
 ### Notas
