@@ -33,6 +33,7 @@
 
 
 | Módulo | Estado | Agente | Fase | Visión | Entrada | Salida | Archivos afectados |
+| M41 Música (Tarea 2 cola N650 del director) | 🔵 En curso (reclamo 2026-10-16 19:55) | agnes-3-flash (Sapiens AI) / Kilo Code | F4 (contenido audio) | V0 | 58/110 (50 [ ] + 2 [?] = 52 pendientes); MusicDirector data-driven ya implementado (27/0 test) | Lote 1: 5 stems (franja día/noche/estación) + 1 integración de bus M91. Composición de los 51 temas P1-P51. | `DOCUMENTACION/41-Musica/plan-actual/`, `data/audio/music_context_matrix.json`, `scripts/audio/` |
 | M49 Iluminación (QA visual, cola N650 del director) | 🔵 En curso (reclamo 2026-10-16 18:30) | agnes-3-flash (Sapiens AI) / Kilo Code | F6 (polish visual) | V2 | 105/143 (38 `[?]`); director N650 cola M49→M41→M46 | Lote 1: 5 `[?]` priorizados (corrección a valor real de código: shadow_max_distance=120, view_distance=1024, lod_split=5; + artefacto `lighting_budget.json` ausente). Capturas antes/después. | `DOCUMENTACION/49-Iluminacion/plan-actual/`, `game/isla-ancestral/scripts/world/day_night_cycle.gd`, `data/light/` |
 
 |---|---|---|---|---|---|---|---|

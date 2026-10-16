@@ -84,6 +84,14 @@ var _grafos_cache: Dictionary = {}
 ## headless, ver GUIA-GODOT/09-godot4-migracion.md); se resuelve con load() en runtime.
 var _validador_script = null
 
+## M21 L73 (Hy3): ultimo resumen de validacion emitido, para inspeccion/tests.
+var _ultimo_resumen_validacion: String = ""
+
+## M21 E L100 (Hy3): opciones visibles del nodo actual TRAS filtrar por condicion de
+## mundo para DISPLAY. Se mantiene aparte de nodo.options (el grafo cacheado NO se
+## muta) para que choose_option(index) mapee al indice que ve el jugador.
+var _opciones_visibles: Array = []
+
 func is_dialogue_active() -> bool:
 	return _nodo_actual != null
 
@@ -94,10 +102,10 @@ func start_dialogue(dialogue_id: String, context: Dictionary = {}) -> bool:
 	var grafo := _cargar_grafo(dialogue_id)
 	if grafo == null or grafo.nodes.is_empty():
 		return false
-	var problemas: Array = grafo.validate()
-	if not problemas.is_empty():
-		for prob in problemas:
-			push_error("[VAL-DGT] " + str(prob))
+	# M21 L73 (Hy3 / WorkBuddy): validacion estatica del grafo + resumen con conteo de
+	# errores/advertencias. Devuelve false y emite [VAL-DGT] por cada problema mas el
+	# resumen "[VAL-DGT] N errores, M advertencias".
+	if not _validar_grafo_y_reportar(grafo):
 		return false
 	# M21 (iter 8 / Hy3 WorkBuddy): validacion estatica complementaria (nodos huerfanos,
 	# operadores de condicion y claves de mundo). Ahora SI se chequean claves desconocidas
@@ -122,6 +130,31 @@ func stop_dialogue() -> void:
 	_nodo_actual = null
 	_grafo_actual = null
 	dialogue_ended.emit(_dialogue_id, ultimo)
+
+## M21 L73 (Hy3 / WorkBuddy): valida el grafo y, si hay problemas, emite [VAL-DGT] por
+## cada uno mas el resumen "[VAL-DGT] N errores, M advertencias". Devuelve true si el
+## grafo es valido. El resumen queda en _ultimo_resumen_validacion para inspeccion/tests.
+func _validar_grafo_y_reportar(grafo: DialogueGraph) -> bool:
+	var problemas: Array = grafo.validate()
+	if problemas.is_empty():
+		return true
+	for prob in problemas:
+		push_error("[VAL-DGT] " + str(prob))
+	_ultimo_resumen_validacion = _resumen_validacion(problemas)
+	push_error(_ultimo_resumen_validacion)
+	return false
+
+## M21 L73 (Hy3 / WorkBuddy): arma el resumen de conteo. "no tiene nodo FIN" se cuenta
+## como advertencia (ver dialogue_graph.gd L86); el resto son errores.
+func _resumen_validacion(problemas: Array) -> String:
+	var n_errores := 0
+	var n_advertencias := 0
+	for prob in problemas:
+		if str(prob).contains("no tiene nodo FIN"):
+			n_advertencias += 1
+		else:
+			n_errores += 1
+	return "[VAL-DGT] %d errores, %d advertencias" % [n_errores, n_advertencias]
 
 ## M21 (iter 10 / Hy3 WorkBuddy): estado de tipeo. La UI lo setea via set_tipeando()
 ## para que advance() respete el texto en curso (RF4 / [?] D.3: "advance() que respeta
@@ -149,9 +182,11 @@ func advance() -> void:
 func choose_option(index: int) -> void:
 	if not is_dialogue_active() or _nodo_actual == null:
 		return
-	if index < 0 or index >= _nodo_actual.options.size():
+	# M21 E L100 (Hy3): elige sobre la lista ya filtrada para DISPLAY, no sobre
+	# nodo.options (que conserva TODAS las opciones del grafo cacheado).
+	if index < 0 or index >= _opciones_visibles.size():
 		return
-	var opcion = _nodo_actual.options[index]
+	var opcion = _opciones_visibles[index]
 	var estado_combinado := _combinar_estado(_nodo_actual)
 	_nodo_actual.apply_effects(_session_vars, estado_combinado)
 	if opcion is DialogueOption and opcion.effect.size() > 0:

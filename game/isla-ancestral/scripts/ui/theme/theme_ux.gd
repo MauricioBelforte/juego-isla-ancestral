@@ -19,6 +19,12 @@ const COLOR_PRESSED := Color(0.16, 0.17, 0.26)         # D102: presionado dark
 const COLOR_DISABLED := Color(0.40, 0.42, 0.50)        # D102: deshabilitado dark
 const COLOR_FOCUS_RING := Color(0.92, 0.76, 0.40, 0.8) # D102: anillo dorado vivo
 
+## M21 (D L93): colores de texto por tipo de hablante, coherentes con la paleta
+## dark del HUD. Fuente unica de verdad para el color del dialogo.
+const COLOR_SPEAKER_NARRADOR := COLOR_TEXT_DARK      # cream claro (narrador / por defecto)
+const COLOR_SPEAKER_NPC := Color(0.55, 0.85, 0.55)   # verde suave y legible sobre fondo nocturno
+const COLOR_SPEAKER_DEIDAD := COLOR_HIGHLIGHT_GOLD    # dorado (deidad)
+
 ## Rutas de fuentes (M88) — load_dynamic_font para Godot 4.7
 const PATH_FONT_BODY := "res://assets/fonts/Nunito-Regular.ttf"
 const PATH_FONT_BODY_BOLD := "res://assets/fonts/Nunito-Bold.ttf"

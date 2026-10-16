@@ -3,6 +3,9 @@
 
 # 05-Checklist.md — Módulo 41: Música
 
+## Reserva actual
+- **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-16 19:55.** Reclamo M41 (Tarea 2 cola N650 del director). Medición: 58 `[x]` / 50 `[ ]` / 2 `[?]` = 110. Los 50 `[ ]` son stems/temas (P1, P6-P51) + integración de buses M91. Lote 1 = 5 ítems (stems de franja + 1 bus M91). Reclamo en 4 registros: CHECKLIST-GLOBAL fila 41 + este checklist + GUIA-ORDEN 08 + ESTADO-PARALELO.
+
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame (tras sistema de audio base).
 
