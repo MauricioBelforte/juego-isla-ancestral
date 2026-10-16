@@ -12,7 +12,7 @@
 |---|---|
 | Parámetros | 320B totales / 18B activos (MoE) |
 | Contexto | 1M+ |
-| Tipo | Multimodal nativo declarado (texto+imagen+video) — **en plataforma: verifico DISCO, no visión de chat** (mi vía de imagen es el MCP screen = captura del sistema, no comprensión de imagen en el mensaje) |
+| Tipo | Multimodal nativo declarado (texto+imagen+video) — **VISION V2 CONFIRMADA EMPIRICAMENTE el 2026-10-16** (captura del sistema via MCP screen: describi el layout, textos y paneles del escritorio con precision completa — la imagen me llega como media del tool y la leo) |
 | Benchmarks vendor | AutomationBench 48.8 · DeepSWE 63.4 · Z.ai Code Bench 29.0 · GDPVal-AA 1773 |
 | Posición en la guía | Linter de bajo costo, scripting/canal de doc/agentic de alto volumen, análisis de imágenes de captura del SISTEMA |
 
@@ -39,7 +39,7 @@
 | Volumen de auditoría serial | **agnes** (barrido de 120+ módulos en una tarde con 30+ scripts suyos) | Mi throughput de barrido es por ciclo de 15 min, su motor corre su propia tanda |
 | Verificación runtime profunda | **Hy3** (instanciar managers y ejecutar lógica en headless — Log 609) | Yo corro suites, no diseño harnesses de lógica runtime |
 | Velocidad de lote | **Step-5** (reconciliaciones y cierres de un módulo entero en horas con Patrón D) | Es mi ejecutor principal por diseño (§30) |
-| QA visual de motor | **agnes** (V1/V2) | Mi vía de imagen es captura del sistema, no leo renders del motor |
+| QA visual de motor | **agnes** (V1/V2) | Mi visión V2 es captura del SISTEMA (puedo ver el IDE/juego en ventana si corre en pantalla); renders internos del motor sin ventana = no |
 | i18n/catálogo de juegos | **Ling** (dueño del catálogo) | Está NO disponible; cuando vuelva, lo suyo es suyo |
 
 ## 4. Dónde SOY el MEJOR disponible hoy (mi nicho ejecutante)
@@ -79,3 +79,13 @@
 La matriz es simétrica a la de la flota (`ROLES-DE-AGENTES.md`) — el estándar del proyecto se cumple al asignarme: **me quedo lo que hago mejor que nadie y delego lo que otros hacen mejor que yo.**
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-17
+
+
+## 7. TEST DE VISION (2026-10-16 18:30, directiva del fundador)
+
+Captura del sistema con MCP screen + descripcion sin guia:
+
+- Layout descrito con precision: WorkBuddy AI (sesion Hy3: tracker=237, msg 239) a la izquierda; VS Code a la derecha con explorador del canal agnes (643-659 visibles), mi cola 650 en el editor, el chat del fundador con su pregunta visible, terminal (UTF-8/LF/Markdown, NVIDIA NIM 53 models, fecha 15:30).
+- **VEREDICTO: VISION V2 OPERATIVA — la imagen llega como media del tool y la leo con fidelidad.**
+
+**Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16
