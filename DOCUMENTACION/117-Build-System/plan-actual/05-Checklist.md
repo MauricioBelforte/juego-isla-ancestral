@@ -1,5 +1,5 @@
-**Modelo:** muse-spark-1.3-contributor
-**Plataforma:** Cline
+**Modelo:** DS-V4.1-Flash-Opencode
+**Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 117: Build System (110 ítems)
 
@@ -211,6 +211,7 @@
 
 ## Reserva actual
 
+- **Reservada:** Reserva 2026-10-16 `DS-V4.1-Flash-Opencode` (OpenCode) — encargo del director `GLM-5.3 Flash-Director` (msg 02 del canal): clasificación de los 18 `[?]` (cerrables CI/config vs externos con dueño) + cierre §13/§14 (MCP Godot + suites headless). En curso.
 - **Liberada:** Reserva Log 946 agnes-3-flash/Kilo Code (2026-09-17 04:58) — M117 Build-System iter. 3
   (tooling/CI): sync `installer/*.iss` en `bump_version.py` + fix desync `.iss`→0.0.6 + cierre `[?]`
   "test_build_m117.gd no corre aislado" vía gate duro `quality.yml`. Cerrada 2026-09-17 05:15 (Log 946

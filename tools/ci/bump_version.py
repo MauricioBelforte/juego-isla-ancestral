@@ -6,8 +6,17 @@
 #   - CHANGELOG.md (entrada nueva con la version)
 #   - data/operaciones/postlaunch_checks.json (si tiene campo version)
 #   - installer/*.iss (#define AppVersion "..." — M117 iter. 3, Log 946; V3 de M116)
+#   - game/isla-ancestral/export_presets.cfg (application/file_version +
+#     application/product_version — M117 iter. 4, 2026-10-16)
 # Tipos de bump: major, minor, patch.
 # Uso: python tools/ci/bump_version.py [major|minor|patch] [--dry-run]
+#
+# FIX M117 iter. 4 (DS-V4.1-Flash-Opencode / OpenCode, 2026-10-16):
+# el preset Windows de export_presets.cfg quedo con file_version/product_version
+# "0.0.2" mientras project.godot iba por 0.0.6: el bump no sincronizaba el preset
+# (misma clase de bug que el .iss, corregido en iter. 3). El bump ahora sincroniza
+# ambos campos en cualquier preset que los tenga; ausente = skip tolerante.
+# Test: tools/ci/test_bump_version.py
 #
 # FIX M117 iter. 2 (muse-spark-1.3-contributor / Cline, Log 902):
 # el PROJECT_ROOT se calculaba solo desde la UBICACION del script
@@ -33,6 +42,7 @@ COPYRIGHT_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "l
 CHANGELOG_MD = os.path.join(PROJECT_ROOT, "CHANGELOG.md")
 POSTLAUNCH_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "operaciones", "postlaunch_checks.json")
 INSTALLER_DIR = os.path.join(PROJECT_ROOT, "installer")
+EXPORT_PRESETS_CFG = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "export_presets.cfg")
 
 
 def _root_desde_cwd() -> Optional[str]:
@@ -59,6 +69,7 @@ if _CWD_ROOT:
     CHANGELOG_MD = os.path.join(PROJECT_ROOT, "CHANGELOG.md")
     POSTLAUNCH_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "operaciones", "postlaunch_checks.json")
     INSTALLER_DIR = os.path.join(PROJECT_ROOT, "installer")
+    EXPORT_PRESETS_CFG = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "export_presets.cfg")
 
 
 
@@ -222,6 +233,33 @@ def _set_version_in_installer_iss(new_version: str, dry_run: bool) -> Tuple[bool
     return True, f"installer: {total} AppVersion en {archivos} archivo(s)"
 
 
+def _set_version_in_export_presets(new_version: str, dry_run: bool) -> Tuple[bool, str]:
+    """Actualiza application/file_version y application/product_version de
+    export_presets.cfg (los metadatos del .exe de Windows) para que coincidan con
+    config/version de project.godot. Solo reescribe el valor numerico (conserva el
+    resto del preset). Ausente = skip tolerante: un repo sin export_presets.cfg o
+    sin esos campos (presets Linux/Web/etc.) no rompe el bump.
+
+    FIX M117 iter. 4 (DS-V4.1-Flash-Opencode / OpenCode, 2026-10-16): el preset
+    Windows habia quedado en 0.0.2 mientras project.godot iba por 0.0.6 — misma
+    clase de desync que el .iss (iter. 3): cada bump lo desalineaba mas."""
+    if not os.path.exists(EXPORT_PRESETS_CFG):
+        return True, "export_presets.cfg ausente — skip"
+    with open(EXPORT_PRESETS_CFG, "r", encoding="utf-8") as f:
+        content = f.read()
+    new_content, n = re.subn(
+        r'(application/(?:file_version|product_version)=")[\w.-]+(")',
+        lambda m: m.group(1) + new_version + m.group(2),
+        content,
+    )
+    if n == 0:
+        return True, "export_presets.cfg: sin file_version/product_version para actualizar"
+    if not dry_run:
+        with open(EXPORT_PRESETS_CFG, "w", encoding="utf-8") as f:
+            f.write(new_content)
+    return True, f"export_presets.cfg: {n} campo(s) de version actualizados"
+
+
 def bump_semver(current: Tuple[int, int, int], kind: str) -> Tuple[int, int, int]:
     """Incrementa la version segun kind."""
     major, minor, patch = current
@@ -258,6 +296,7 @@ def main() -> int:
         (_set_version_in_copyright_json, (new_version, new_year, args.dry_run)),
         (_add_changelog_entry, (new_version, new_year, args.dry_run)),
         (_set_version_in_installer_iss, (new_version, args.dry_run)),
+        (_set_version_in_export_presets, (new_version, args.dry_run)),
     ]:
         ok, msg = func(*args_)
         status = "OK" if ok else "FAIL"

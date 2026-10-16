@@ -114,3 +114,88 @@ El estado real del módulo en CHECKLIST-GLOBAL es `🟢 Disponible` con contrato
 - En v1: **cero impacto** (no hay red ni segundo jugador).
 - FASE LOCAL futura: 2 viewports (GPU cost ~1.6-1.9× a 1080p, según Profiler M116); el contrato exige probar 60 FPS en la consola objetivo antes de aprobar la feature.
 - FASE ONLINE futura: presupuesto de red documentado en M77; aquí solo el hit de decisión.
+
+## 7. Contrato MP Futuro - Definiciones (cierre de alcance, 2026-10-16)
+
+Definiciones de producto del contrato MP futuro. Los items tecnicos de red
+(tick real, NAT, cifrado de transporte, reconexion) son de M77: aqui se fija la
+decision de producto y la referencia, no la implementacion.
+
+### 7.1 Migracion de host
+- FASE LOCAL (split-screen): no hay sesiones remotas; si el host cierra, la
+  partida termina (no aplica migracion).
+- FASE ONLINE: migracion/reconexion de host es contrato de M77 (dueno).
+
+### 7.2 Tick rate de referencia
+- Rango contractual del estado de mundo en online: 10-20 Hz.
+- Referencia: M77 ya documenta snapshots @ 10 Hz (M77 05-Checklist L11/L33 [x]).
+  M76 fija el rango; M77 la frecuencia exacta.
+
+### 7.3 Interpolacion de animaciones del invitado
+- M77 ya lo documenta (M77 05-Checklist L123 [x]): interpolacion de entidades
+  remotas con buffer 100-200 ms (M77 L96/L100). Referencia cruzada, no se duplica.
+
+### 7.4 Logros e historia de la isla ajena
+- El invitado NUNCA desbloquea logros de la isla ajena (M72).
+- El invitado NUNCA avanza la historia ajena (M22).
+- Regla dura del contrato (RF19/RF20): progreso siempre individual.
+
+### 7.5 Lista de amigos
+- Feature de FASE ONLINE, dueno M77. En v1 y en FASE LOCAL no existe.
+
+### 7.6 Nombre de jugador
+- Editable: perfil local (M92), sin cuentas en v1 (RF12).
+
+### 7.7 Set base de emotes
+- hola, gracias, risa, enojo (4 emotes base). Rueda de emotes (M44).
+
+### 7.8 Animaciones de emotes
+- Emotes = notificaciones express (M44) + animacion del avatar (M13).
+- En local NO requieren red (offline-first, M59).
+
+### 7.9 Catalogo de muebles compartido
+- Solo lectura para el invitado (nunca catalogo editable por el visitante).
+
+### 7.10 Undo/redo del invitado
+- El invitado tiene undo de SUS acciones en su zona asignada (anti-error).
+- El host tiene rollback global de la sesion (ver 7.17).
+
+### 7.11 Solucion compartida de puzzles sin estado duplicado
+- Host autoritativo: el host mantiene el estado canonico del puzzle;
+  el invitado envia inputs y ve el estado (sin duplicar estado, 2.3 A1).
+
+### 7.12 Puzzles con 1 solucion
+- Los puzzles cooperativos (M24) tienen solucion unica y determinista;
+  nada de puzzles rojos por estado duplicado.
+
+### 7.13 Eventos (M74)
+- Se viven juntos (misma isla, misma sesion) pero cuentan individual
+  (progreso individual RF20).
+
+### 7.14 Sin exposicion de datos locales
+- v1 sin red: los datos locales (user://) nunca se exponen.
+- Codigo de visita futuro: expira y no autoriza lectura de datos del host.
+
+### 7.15 Cifrado de transporte (futuro)
+- FASE ONLINE exige TLS en toda comunicacion (dueno M77: seguridad de API
+  HTTPS/TLS, rate limit). Contrato de producto, no implementacion.
+
+### 7.16 Respaldo del mundo del host
+- Backups de M59: ante incidente el host restaura SU mundo.
+- El invitado nunca persiste en la isla del host (2.2 A1).
+
+### 7.17 Rollback de cambios del invitado
+- El host puede revertir los cambios del invitado en su isla
+  (bitacora de acciones por sesion de visita).
+
+### 7.18 Baneo de visitas
+- El host puede banear visitas (lista local de excluidos).
+
+### 7.19 Privacidad de cuentas futuras
+- Si se habilitan cuentas (FASE ONLINE, M77): politica de privacidad
+  obligatoria antes del lanzamiento online (dueno M77).
+
+> **Limite con M77 (coordinar, no pisar):** todo lo tecnico de red
+> (tick real, NAT traversal, reconciliacion, cifrado, reconexion, cuentas,
+> amigos online) pertenece a M77. M76 define la decision de producto y
+> este contrato; el manifiesto mp_contract.json es la fuente compartida.

@@ -1,0 +1,58 @@
+{
+  "mp_v1": "single",
+  "mp_future": "local_first",
+  "players_local": 2,
+  "players_online_max": 4,
+  "authority": "host",
+  "persistence": "individual",
+  "anti_griefing": "permisos por diseno: invitado sin zona destructiva",
+  "permisos": {
+    "invitado_edita_zona_asignada": true,
+    "casa_del_host_protegida": true,
+    "construccion_cooperativa_zona_permitida": true,
+    "catalogo_muebles_compartido": "solo lectura"
+  },
+  "economia": "solo decoracion; nunca items de historia (M22/M23) ni colecciones de avance (M73)",
+  "chat": "frases rapidas",
+  "emotes": {
+    "set_base": [
+      "hola",
+      "gracias",
+      "risa",
+      "enojo"
+    ],
+    "requieren_red": false
+  },
+  "identidad": {
+    "sin_cuentas_v1": true,
+    "perfiles_locales": true,
+    "nombre_jugador_editable": true
+  },
+  "progreso": {
+    "compartido": "nunca",
+    "invitado_logros_isla_ajena": false,
+    "invitado_avanza_historia_ajena": false
+  },
+  "invitaciones": {
+    "local": "segundo mando",
+    "online_futuro": "codigo de visita con expiracion",
+    "lista_amigos": "futura (M77)"
+  },
+  "seguridad": {
+    "offline_first": true,
+    "abre_puertos_v1": false,
+    "exposicion_datos_locales": "ninguna (sin red)"
+  },
+  "moderacion": {
+    "baneo_visitas_host": true,
+    "reporte_jugadores": "si hay texto libre futuro",
+    "cero_moderacion_v1": true
+  },
+  "persistencia_respaldo": {
+    "respaldo_mundo_host": true,
+    "rollback_cambios_invitado": true
+  },
+  "online_hit": "downloads > 10000",
+  "servidores_v1": false,
+  "coste_estimado_mensual": 0
+}

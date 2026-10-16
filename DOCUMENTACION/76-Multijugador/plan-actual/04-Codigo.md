@@ -115,3 +115,52 @@ No existe editor/binary Godot en el entorno de trabajo: el verificador es **prot
 - M77 (Online y Red): arquitectura cliente-servidor futura — documentar con el mismo formato contrato; respetar `mp_contract.json` como fuente de decisiones.
 - No abrir M76 hasta hit de métricas; si se abre, empezar por FASE LOCAL (frame budget split-screen primero).
 - El `check_core_clean()` debe correrse en CI en cada PR del núcleo.
+
+## 7. Entregables del contrato (2026-10-16, Step-5-WorkBuddy)
+
+### 7.1 `mp_contract.json` — manifiesto de decisiones (ENTREGADO)
+
+- Ruta: `game/isla-ancestral/data/multijugador/mp_contract.json` (1555 B, ASCII, LF).
+- La ruta vieja citaba `Assets/_Project/Data/Postgame/` (fantasma Unity): el
+  archivo nunca existio en el repo Godot (hallazgo de la auditoria T-D7).
+- Contiene las decisiones de producto de M76 (mp_v1, authority, chat, economia,
+  progreso, permisos, identidad, emotes, moderacion, seguridad, respaldos).
+- Los campos tecnicos de red (snapshot_hz, buffer_interpolacion_ms) son de M77:
+  el manifiesto es la fuente compartida, cada dueno agrega lo suyo.
+
+### 7.2 `validate_mp_contract.gd` — verificador headless (ENTREGADO)
+
+- Ruta: `game/isla-ancestral/scripts/multijugador/validate_mp_contract.gd`.
+- Estandar headless del repo (extends SceneTree + --script).
+- Bloque A: manifiesto (22 checks de campos y coherencia).
+- Bloque B: nucleo limpio regla M15 (0 archivos mp_*.gd, 0 refs mp_local/mp_online
+  con word boundary, 0 refs de red; recorrida de 1068 .gd con guarda de ceguera).
+- Bloque C: coherencia cruzada del contrato (9 checks).
+- Guardas anti-falso-verde: BLOQUES + _fin(), piso CHECKS_MINIMOS = 36 MEDIDO en
+  verde, _summary por call_deferred, watchdog de diagnostico.
+
+### 7.3 Mediciones
+
+| Prueba | Resultado |
+|---|---|
+| validate_mp_contract.gd x3 | 36 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR |
+| Guardian en rojo (aborto runtime bloque B) | EXIT 1, nombra [B], 32 checks < piso 36 |
+| refs de red en scripts v1 (grep + validador) | 0 |
+| plan-inicial vs plan-actual | 130 items exactos, enunciados base 130/130 |
+
+### 7.4 Trampa encontrada y documentada
+
+- El validador se detectaba A SI MISMO: `validate_mp_contract.gd` contiene los
+  strings que prohibe (ENetMultiplayerPeer, MultiplayerAPI, mp_local). Solucion:
+  exclusion DECLARADA de `validate_*` en el bloque B, con conteo de excluidos
+  (no silenciosa).
+- El substring `mp_local` matchea dentro de `dump_locales_m68.gd`
+  ("dum**p_local**es"): el patron usa word boundary `\bmp_(?:local|online)\b`.
+- Git Bash paso `\n`/`\t` LITERALES al heredoc de python (trampa 35 del skill):
+  la inyeccion del guardian se rehizo con chr(10)/chr(9).
+
+### 7.5 Lo que NO se pudo cerrar (honestidad)
+
+- L60 determinismo local (split): requiere FASE MP implementada (no hay codigo).
+- L92 invitacion no expone datos: requiere implementacion de invitacion.
+- L210/L211 cierre de modulo: fila GLOBAL la aplica el director (msg 55).
