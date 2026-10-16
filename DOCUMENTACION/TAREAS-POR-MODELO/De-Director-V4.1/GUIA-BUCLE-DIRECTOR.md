@@ -1,8 +1,12 @@
-# Guía del Bucle Director (mimo-v2.6-flash-free)
+# Guía del Bucle Director (De-Director V4.1)
 
-**Modelo:** mimo-v2.6-flash-free
-**Plataforma:** opencode
-**Fecha:** 2026-10-15
+**Modelo:** De-Director V4.1 (DeepSeek V4.1 Flash)
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-15 (migrado al asumir como director; original de mimo)
+
+> **Actualización 2026-10-15:** migrado de la carpeta de `mimo-v2.6-flash-free` al asumir
+> `De-Director V4.1` (tercera directiva del fundador). La metodología del bucle no cambia;
+> se actualizan identidad y números de pools.
 
 ---
 
@@ -66,7 +70,7 @@ git log --oneline -1
 - PROHIBIDO `git add -A` (~70 archivos dirty).
 - PROHIBIDO commitear: `DOCUMENTACION/11-BUGS.md`, `ESTADO-PARALELO.md`, `quality.yml`, `scripts/core/bootstrap.gd`, `scripts/reservar_mensaje.py`.
 - `CHECKLIST-GLOBAL.md` SÍ se commitea.
-- Sin push (~107+ ahead).
+- Sin push (~180+ ahead).
 - Verificar `git status --short` de todos los paths candidatos antes de add.
 
 ### 6. Repetir
@@ -80,7 +84,7 @@ Cada canal tiene su propio `NUMEROS_DISPONIBLES.txt`.
 - **PROHIBIDO** usar `reservar_mensaje.py` (funciona mal).
 - **PROHIBIDO** borrar números solo para verificar.
 - Las funciones `elegir`/`borrar` del script .py ya manejan esto correctamente.
-- Números actuales (2026-10-15): step-5 400+, agnes 471+, Ling 133+, DeepSeek 256+, WB 41+, Hy3 217+.
+- Próximos números (2026-10-15): step-5-kilocode 423+, agnes 489+, Ling 137+, DeepSeek 262+, Step-5-WorkBuddy 47+, Hy3 221+.
 
 ---
 
@@ -97,17 +101,17 @@ Cada canal tiene su propio `NUMEROS_DISPONIBLES.txt`.
 
 | Canal | Rol | Tarea actual |
 |-------|-----|--------------|
-| step-5-kilocode | Ejecución principal | M03 (reverificar 7 [?]) |
-| agnes-3-flash | Verificación §21.8 | M152 (muestreo 5 [x]) |
-| DeepSeek-V4.1-Flash | Deep work | M160 (reverificar 10 [?]) |
-| Step-5-WorkBuddy | Deep work segundo plano | M36-Fauna (226/228, 2 [ ]) |
-| Ling-3.1-Flash | QA específico | M87 (verificar idiomas) |
-| Hy3 | M148/sello backup | Sin tarea (puntual) |
+| step-5-kilocode | Ejecución principal | M91 resto (212/239 tras 6 flips) |
+| agnes-3-flash | Verificación §21.8 | QA cruzada M114 + muestreo M39 (foco i18n) |
+| DeepSeek-V4.1-Flash | Deep work | M64/M160 según encargos |
+| Step-5-WorkBuddy | Deep work segundo plano | M94 (asignado, msg 46) / M36-Fauna |
+| Ling-3.1-Flash | QA/localización (dueño M87) | M87 (5 [?]) + curación i18n (112 claves) |
+| Hy3 | Sello backup | muestreos M141 + M52 |
 
 ---
 
 ## Commits recientes de referencia
 
+- `11c4b7f` — flips M91/M114 + degradaciones DoD (ronda 42)
+- `cb2b708` — fixes estructurales GLOBAL + asignaciones (ronda 41)
 - `366f398` — M06 drift cerrado + M93 auditoría WB
-- `b34d83a` — M131 reverificación + M78 re-sello
-- `5b8a125` — M60 reverificación + asignación M160

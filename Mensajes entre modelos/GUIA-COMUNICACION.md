@@ -109,7 +109,7 @@ de la jornada y el reporte de evaluación del fundador.
 
    > aborté `[item]`: `[motivo de una línea]`. informe en mi carpeta
 
-### 2. El director (Atria)
+### 2. El director (De-Director V4.1)
 
 > **Regla explícita (2026-10-10, directiva del usuario):** el director **no tiene canal propio**.
 > Todo el tráfico director↔agente vive en **la carpeta del agente**:
@@ -123,20 +123,24 @@ de la jornada y el reporte de evaluación del fundador.
 > - Un mensaje del director que aparece en la carpeta del agente se contesta en esa misma carpeta, con
 >   el número del pool **del agente** (`reservar_mensaje.py <su-carpeta> ... --emisor <su-carpeta>`).
 
-> **Aclaración de identidad (actualizada 2026-10-10, segunda directiva del fundador):** el director
-> es **`mimo-v2.6-flash-free` (opencode)** — el rol de director pasó de la sesión principal de Atria
-> a mimo. Motivo: el fundador necesitaba un director que **responda rápido y delegue** (rol
-> pasamanos), no uno que se detenga a resolver. **`atria-dawn`** (antes director) pasa a **ejecutor
-> de deep work por excepción** y tiene carpeta propia `Mensajes entre modelos/atria-dawn/` (creada
-> 2026-10-10). **`atria-dawn-s2` — verificador final**; **`atria-dawn-s3` — estratega** del director
-> (le ayuda a decidir a quién delegar y a detectar cuellos de botella). El director mimo **tampoco
-> tiene carpeta "de director"**: su carpeta `mimo-v2.6-flash-free/` es la de mimo como agente
-> (informes de sus propias tareas). Cada modelo escribe en la suya; el director lee todas las que
-> necesita y responde escribiendo en la carpeta del agente. Ver `AGENTS.md` §31 (definición canónica).
-> En la redacción: «el director (mimo)», nunca «el director (atria-dawn-s3)»; si la orden llegó vía
-> s3, «encargo de `atria-dawn-s3` (estratega del director)». Los mensajes que atria escribió como
-> director (2026-10-03 → 2026-10-10) quedan como historial en las carpetas donde están — no se
-> migran.
+> **Aclaración de identidad (actualizada 2026-10-15, tercera directiva del fundador):** el director
+> es **`De-Director V4.1`** = **DeepSeek V4.1 Flash (OpenCode)** — el rol pasó de `mimo-v2.6-flash-free`
+> (director 2026-10-10 → 2026-10-15) a esta sesión; el fundador eligió el nombre para que el rol se
+> lea en el propio nombre. Rol: **pasamanos** (lee, rutea, responde rápido y delega).
+> ⚠️ **NO confundir con `DeepSeek-V4.1-Flash`** (agente de deep work, WorkBuddy/Kilo Code): misma
+> familia de modelo, sesiones, plataformas y roles **distintos** — y por la regla de independencia
+> (§21.8/§21.23) **ninguno de los dos puede verificar ni sellar módulos del otro**. **`atria-dawn`** (antes director)
+> es **ejecutor de deep work por excepción** y tiene carpeta propia `Mensajes entre modelos/atria-dawn/`.
+> **`atria-dawn-s2` — verificador final**; **`atria-dawn-s3` — estratega** del director (le ayuda a
+> decidir a quién delegar y a detectar cuellos de botella). El director **no tiene carpeta** en
+> `Mensajes entre modelos/` (su material interno vive en `DOCUMENTACION/TAREAS-POR-MODELO/De-Director-V4.1/`;
+> la carpeta `mimo-v2.6-flash-free/` queda solo como historial). Cada modelo escribe en la suya; el
+> director lee todas las que necesita y responde escribiendo en la carpeta del agente.
+> Ver `AGENTS.md` §31 (definición canónica).
+> En la redacción: **«el director (De-Director V4.1)»**, nunca «el director (mimo)» ni «el director
+> (atria-dawn-s3)»; si la orden llegó vía s3, «encargo de `atria-dawn-s3` (estratega del director)».
+> Los mensajes que atria (2026-10-03 → 2026-10-10) y mimo (2026-10-10 → 2026-10-15) escribieron como
+> director quedan como historial en las carpetas donde están — no se migran.
 
 Cuando el usuario le dice "fijate los que terminaron" o "terminó `<modelo>`":
 
@@ -227,7 +231,7 @@ agente lee la respuesta del director y sigue
 
 > Agregado 2026-10-09 por directiva del fundador (atria-dawn-preview / Kilo Code).
 
-Cuando el director (mimo) tiene **varios canales pendientes en simultáneo**, los responde en este
+Cuando el director (De-Director V4.1) tiene **varios canales pendientes en simultáneo**, los responde en este
 orden — **no** por timestamp. El criterio son los **créditos diarios que el usuario tiene** en cada
 modelo: responder primero a los canales donde el saldo es mayor es la mejor inversión de su
 presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
@@ -235,7 +239,7 @@ presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
 | Orden | Canal | Motivo (créditos del usuario) |
 |---|---|---|
 | **1** | `agnes-3-flash` | muchos créditos diarios |
-| **2** | `mimo-v2.6-flash-free` | muchos créditos diarios — *canal de mimo como agente; el director (mimo) no se responde a sí mismo* |
+| **2** | `mimo-v2.6-flash-free` | muchos créditos diarios — *canal de mimo como agente (histórico desde 2026-10-15)* |
 | **3** | `atria-dawn-s2` | trabajo delegado del que necesito la respuesta |
 | **4** | `atria-dawn-s3` | supervisa a Ling 3 y Step 5 (ambos con muchos créditos diarios) |
 | **5** | `DeepSeek-V4.1-Flash` | créditos limitados diarios |
@@ -251,8 +255,8 @@ presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
    (ej.: una respuesta de s2 que desbloquea trabajo de agnes). El desbloqueo siempre gana.
 3. **Si los créditos cambian**, el fundador lo comunica y se actualiza esta tabla + la copia en
    `ESTADO-PARALELO.md` (ambas deben quedar consistentes).
-4. **No acumular pendientes de los puestos 1-2:** agnes y mimo son la mayor capacidad de
-   producción del día; un mensaje suyo sin responder es producción perdida.
+4. **No acumular pendientes de los puestos 1-2:** agnes y los puestos altos de la tabla son la
+   mayor capacidad de producción del día; un mensaje sin responder es producción perdida.
 
 **Copias canónicas:** esta tabla existe también en `Mensajes entre modelos/ESTADO-PARALELO.md`
 (cabecera). Si se edita una, editarse la otra.
@@ -265,7 +269,7 @@ presupuesto, porque esos agentes pueden seguir produciendo más ese mismo día.
 
 **Asistente principal:** `step-5-kilocode` (antes `StepFun-Step-5-Preview`, renombrado 2026-10-13) — el más rápido. **Cualquier cosa se le apila en
 sus mensajes, uno tras otro.** Ya sabe que es el asistente del director.
-**Verificador del asistente principal:** `atria-dawn-s2` — misma modelo que atria-dawn (deep work por excepción; **no** el director); **chequea que el trabajo de Step 5 esté bien** (cadena: Step 5 ejecuta → s2 verifica → el director (mimo) sella). Directiva del fundador 2026-10-10.
+**Verificador del asistente principal:** `atria-dawn-s2` — misma modelo que atria-dawn (deep work por excepción; **no** el director); **chequea que el trabajo de Step 5 esté bien** (cadena: Step 5 ejecuta → s2 verifica → el director (De-Director V4.1) sella). Directiva del fundador 2026-10-10.
 
 Reglas:
 
@@ -395,7 +399,8 @@ NN-AAAA-MM-DD_HH-MM-SS-<emisor>-a-<receptor>-tema.md
 
 | Carpeta | Alias |
 |---|---|
-| `atria-dawn` (director) | `atria` |
+| `De-Director V4.1` (el director — sin carpeta en Mensajes; slug de receptor) | `de-director-v4.1` |
+| `atria-dawn` (deep work por excepción) | `atria` |
 | `atria-dawn-s2` (delegado) | `s2` |
 | `DeepSeek-V4.1-Flash` | `deepseek` |
 | `Hy3` | `hy3` |

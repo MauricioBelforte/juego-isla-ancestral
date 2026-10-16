@@ -1,13 +1,15 @@
 # Formato de cronómetro del director (para reactivar mañana)
 
-**Modelo:** mimo-v2.6-flash-free
-**Plataforma:** opencode
-**Fecha:** 2026-10-15
+**Modelo:** De-Director V4.1 (DeepSeek V4.1 Flash)
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-15 (migrado al asumir como director; original de mimo)
 
 > Guardado por pedido implícito del fundador ("hoy es un nuevo día, ¿anotaste cómo
 > hacer el cronómetro en tu carpeta?"). La metodología que funcionó fue la que step-5
 > registró en `TAREAS-POR-MODELO/step-5-kilocode/FORMATO-CRONÓMETRO-FUNDADOR.md`;
-> esta es la versión del DIRECTOR (mimo), adaptada a mi rol de pasamanos.
+> esta es la versión del DIRECTOR (De-Director V4.1), adaptada al rol de pasamanos.
+> **Migrado el 2026-10-15** de la carpeta de `mimo-v2.6-flash-free` al asumir
+> `De-Director V4.1`: misma metodología; cambian identidad y archivo tracker.
 
 ## La idea central (las dos mitades)
 
@@ -17,7 +19,7 @@ El error clásico del director es responder "sin mensajes nuevos" y no producir 
 
 1. **Mitad de monitoreo (lo de siempre):** escanear TODOS los canales sin filtro,
    leer los nuevos, procesarlos (flip/edición de fila/responsa), mantener
-   `.ultima-revision-mimo.txt` al día.
+   `.ultima-revision-de-director.txt` al día.
 2. **Mitad de producción:** si no hay mensajes entrantes, el director NO se queda
    quieto — trabaja su propia cola: `BACKLOG-DIRECTOR.md` / `BACKLOG-MASTER.md`,
    cola de muestreos pendientes, cierres de módulos 🟡, o tareas que el fundador
@@ -29,7 +31,7 @@ no digas "sin nada" — trabajá en la tarea del fundador.*
 ## Prompt listo para copiar/pegar mañana
 
 ```
-REACTIVAR BUCLE DE DIRECTOR (mimo-v2.6-flash-free). Cronómetro: cada ciclo = 1 ronda
+REACTIVAR BUCLE DE DIRECTOR (De-Director V4.1). Cronómetro: cada ciclo = 1 ronda
 de monitoreo + 1 unidad de producción.
 
 CICLO (timeout 360000 ms):
@@ -38,7 +40,7 @@ CICLO (timeout 360000 ms):
    viejo como NUEVO; ignorar los ya leídos).
 2) Si hay mensajes NUEVOS → leerlos COMPLETO, procesar (fila CHECKLIST-GLOBAL con la
    línea exacta leída, flips, responsa con rondaNN.py en temp, commit con paths
-   explícitos), actualizar .ultima-revision-mimo.txt.
+   explícitos), actualizar .ultima-revision-de-director.txt.
 3) Si NO hay mensajes → NO reportar "sin mensajes": ejecutar 1 unidad de producción
    del BACKLOG-DIRECTOR.md (o de la cola que el fundador haya indicado).
 4) Repetir con: Start-Sleep -Seconds 300 (o el sleep manual entre rondas).
@@ -54,16 +56,17 @@ REGLAS QUE NO CAMBIAN:
 - Numeración: helpers elegir_numero_seguro/borrar del rondaNN.py; borrar del pool
   SOLO tras escribir.
 - Identidad por CARPETA (Mensajes entre modelos/<modelo>/), no por IDENTITY.md.
-- Al terminar ronda: reporte en mi carpeta del canal (REGLA CERO) — el director no
-  ve marcas [x], solo archivos nuevos en su canal.
+- Al terminar ronda: reporte de cierre en este directorio (`De-Director-V4.1/`) o al
+  fundador por chat — el director no tiene carpeta de canal (la REGLA CERO aplica a
+  los agentes; el director reporta en su carpeta/fundador).
 ```
 
 ## Al apagar (cierre de sesión)
 
 1. Terminar lo que esté en vuelo (commits pendientes primero).
 2. Ronda final de LECTURA de todos los canales.
-3. Reporte de cierre en `Mensajes entre modelos/mimo-v2.6-flash-free/` (número del
-   pool del canal).
+3. Reporte de cierre en `DOCUMENTACION/TAREAS-POR-MODELO/De-Director-V4.1/` — el
+   director no tiene carpeta de canal.
 4. Verificar que NO queden procesos del bucle:
    `Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'ver_mensajes|Start-Sleep' }`
 5. Todo commiteado con mensajes en español (pasado descriptivo). Sin push salvo

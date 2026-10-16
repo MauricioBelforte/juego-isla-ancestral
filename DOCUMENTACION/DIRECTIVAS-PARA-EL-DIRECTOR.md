@@ -2,9 +2,10 @@
 
 > **Modelo:** atria-dawn-s3 (Atria-Dawn-Preview)
 > **Plataforma:** Kilo Code
-> **Fecha:** 2026-10-11
+> **Fecha:** 2026-10-11 (creación); actualizado 2026-10-15 por De-Director V4.1
 > **Propósito:** archivo único de onboarding para quien ejerza el rol de director de la flota.
 > **Creado a pedido del fundador** para que un cambio de director no pierda la investigación.
+> **Historial de directores:** Atria (2026-10-03 → 2026-10-10) → `mimo-v2.6-flash-free` (2026-10-10 → 2026-10-15) → **`De-Director V4.1`** (DeepSeek V4.1 Flash, OpenCode; 2026-10-15 →). Ver `AGENTS.md` §31 (definición canónica).
 
 ---
 
@@ -35,7 +36,8 @@ ciego.
 
 | Canal | Rol | Prioridad |
 |---|---|---|
-| `atria-dawn` | Deep work + commits/push | 1 |
+| `atria-dawn` | Deep work por excepción | 2 |
+| `Step-5-WorkBuddy` | Segundo frente de Step 5 (WorkBuddy) | 3 |
 | `atria-dawn-s2` | Verificador final | 1 |
 | `step-5-kilocode` | Ejecutor principal | 1 |
 | `agnes-3-flash` | Producción | 2 |
@@ -44,28 +46,26 @@ ciego.
 | `Hy3` | QA §21.8 | 4 |
 | `atria-dawn-s3` | Estratega + buscador de tareas | 5 |
 | `kimi-k3` | Baja prioridad | 6 |
-| `Claude-Haiku-5.5` | Baja (⛔ detenido sin créditos) | 6 |
+| `Claude-Haiku-5.5` | QA cruzada (siempre verificada por Step 5/s2, §30.6) | 5 |
 | `mimo-v2.6-flash-free` | **Ex-director → solo historial** | — |
 | `muse-spark-1.3-contributor` | En evaluación | — |
 
 ### Cómo enviar (procedimiento exacto)
 
-**1. Reservar cada mensaje con el helper** (nunca numerar a mano):
-
-```bash
-python scripts/reservar_mensaje.py <carpeta-receptor> "presentacion-nuevo-director" --emisor <tu-carpeta>
-```
-
-El helper toma el **número más alto** del pool de esa carpeta, crea la plantilla y completa el
-`**Responde a:**` con el último mensaje de ese canal. Alias disponibles en `ALIASES` del script:
-`atria`, `s2`, `deepseek`, `hy3`, `agnes`, `mimo`, `bunny`, `kimi`, `muse`.
+**1. Reservar el número de cada mensaje en la carpeta receptora** (nunca numerar a mano): tomar el
+**número más alto** de `NUMEROS_DISPONIBLES.txt` de esa carpeta, borrarlo del pool y **escribir el
+mensaje completo de una sola vez** (sin ventana de plantilla vacía — la trampa T-19). El campo
+`**Responde a:**` cita el último mensaje de ese canal. Emisor del director: slug
+`de-director-v4.1` (el archivo se llama `NN-AAAA-MM-DD_HH-MM-SS-de-director-v4.1-a-<receptor>-tema.md`).
 
 **2. Escribir el cuerpo reemplazando `<cuerpo del mensaje aca>`** (la plantilla avisa que tarda
 1-5 minutos; es el patrón normal).
 
 **3. Contenido obligatorio de cada aviso:**
 
-- **Quién sos** (modelo + plataforma) y que a partir de ese momento **sos el director**.
+- **Quién sos** (modelo + plataforma) y que a partir de ese momento **sos el director**. Si compartís
+  modelo con otra sesión de la flota, **aclarar la distinción como primer punto** (precedente §21.23:
+  `De-Director V4.1` = DeepSeek V4.1 Flash en OpenCode; `DeepSeek-V4.1-Flash` = agente en WorkBuddy).
 - **Los reportes se dirigen a tu firma** — el campo `**Responde a:**` de los mensajes nuevos debe
   nombrarte a ti, además del archivo al que responden.
 - **Tu carpeta queda como historial** — nadie escribe mensajes nuevos ahí.
@@ -91,10 +91,11 @@ la flota y procesalos en tu primera ronda. Lo que está en sus carpetas no se pi
 
 ### ⚠️ Trampa T-19 (NUNCA responder un mensaje vacío)
 
-`reservar_mensaje.py` crea la **plantilla vacía** y el cuerpo se completa 1-5 minutos después. Si
-abrís un mensaje y solo tiene la plantilla: **esperá 5 minutos y releelo**. NUNCA actúes solo por el
-nombre del archivo (un slug con typo ya causó un encargo equivocado: decía "bug120" y el cuerpo
-asignaba BUG-129).
+Mientras el emisor escribe, el archivo puede existir con la **plantilla vacía** y el cuerpo se
+completa 1-5 minutos después (con el método actual del director la ventana es ~0, pero aplica a
+mensajes de la flota). Si abrís un mensaje y solo tiene la plantilla: **esperá 5 minutos y releelo**.
+NUNCA actúes solo por el nombre del archivo (un slug con typo ya causó un encargo equivocado: decía
+"bug120" y el cuerpo asignaba BUG-129).
 
 ---
 
@@ -166,14 +167,15 @@ fundador → director (vos)
 | Orden | Canal | Motivo |
 |---|---|---|
 | 1 | `agnes-3-flash` | muchos créditos diarios |
-| 2 | `mimo-v2.6-flash-free` | muchos créditos — *canal de mimo como agente; si él es el director, se salta* |
+| 2 | `mimo-v2.6-flash-free` | muchos créditos — *canal de mimo como agente (histórico desde 2026-10-15); el director no tiene canal* |
 | 3 | `atria-dawn-s2` | trabajo delegado del que se necesita respuesta |
 | 4 | `atria-dawn-s3` | activo para encargos directos del fundador |
 | 5 | `Ling-3.1-Flash` | modelo funcional directo, muchos créditos |
 | 6 | `step-5-kilocode` | modelo funcional directo, muchos créditos |
-| 7 | `DeepSeek-V4.1-Flash` | créditos limitados |
-| 8 | `Hy3` | créditos limitados |
-| 9+ | `kimi-k3`, `Claude-Haiku-5.5`, resto | pueden esperar turnos completos |
+| 7 | `Claude-Haiku-5.5` | QA cruzada útil; créditos moderados (verificación obligatoria §30.6) |
+| 8 | `DeepSeek-V4.1-Flash` | créditos limitados diarios |
+| 9 | `Hy3` | créditos limitados diarios |
+| 10+ | `kimi-k3`, `muse-spark-1.3-contributor`, resto | pueden esperar turnos completos |
 
 **Reglas:** (1) el orden es de **atención**, no de importancia; (2) si una entrega **desbloquea** a
 otro agente, sube de prioridad aunque el canal esté más abajo; (3) no acumular pendientes en los
@@ -196,7 +198,7 @@ Sin reporte, no hay próximo encargo y el usuario tiene que preguntar "¿termina
 ### Estructura de cada mensaje
 
 - **Nombre:** `NN-AAAA-MM-DD_HH-MM-SS-<emisor>-a-<receptor>-tema-breve.md`
-- **Reserva SIEMPRE con el helper.** Número del pool de la carpeta del **receptor**.
+- **Número:** el más alto del pool de la carpeta del **receptor** (se borra del pool al escribirlo; mensaje completo de una sola vez, T-19).
 - **Regla del número más alto (directiva del fundador 2026-10-11):** la respuesta **siempre** sale
   con el número **más alto** del pool, **nunca** con un hueco del medio. Los huecos se ignoran.
 - **Firma obligatoria dentro del archivo:**
@@ -257,6 +259,13 @@ Antes de otorgar o mantener un `✅ Verificado por`:
 El verificador debe ser un **modelo distinto** al que completó el módulo (lo que vale es el modelo,
 no la plataforma — la identidad la define el chat). Si el verificador es el mismo, el sello no vale.
 
+**Mismo modelo en dos sesiones = QA cruzado INVÁLIDO** (precedente §21.23 — dos frentes de Step 5,
+`DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md`: "QA cruzado entre los dos frentes = INVÁLIDO: mismo
+modelo aunque sean plataformas distintas"). Aplicado a la configuración actual: `De-Director V4.1`
+(DeepSeek V4.1 Flash, OpenCode) **no puede sellar** módulos cuyo autor sea `DeepSeek-V4.1-Flash`
+(WorkBuddy) — esos sellos los dan `agnes-3-flash`, `atria-dawn-s2` o `Hy3`. Los **flips de estado**
+(drift, `[x]` inflado, `✅`→`🟡`) sí son corrección de estado y no requieren independencia.
+
 ### Flips de marca
 
 Los asistentes **proponen** flips; **vos decidís** y aplicás. Un `[x]` no se degrada por delegación.
@@ -308,7 +317,8 @@ Los asistentes **proponen** flips; **vos decidís** y aplicás. Un `[x]` no se d
 | **Commits** | Español, tiempo verbal pasado descriptivo. `git add -- <path>` con pathspec. Revisar `git diff --cached --name-only` antes de cada commit. Si hay trabajo ajeno en staging: `git reset -- <path>` |
 | **Push** | Todo push deja huella en el log del ejecutante (rango empujado + fecha/hora + ejecutante), AGENTS.md §4.3 |
 | **Testing con binario real** | `C:\Temp\godot\godot472.exe --headless --path game/isla-ancestral`. Prohibido el verde por omisión: la suite tiene que CARGAR y AFIRMAR el camino de éxito |
-| **Reserva de mensajes** | SIEMPRE con `python scripts/reservar_mensaje.py`. Nunca numerar a mano |
+| **Reserva de mensajes** | Número **más alto** del pool de la carpeta receptora, borrado del pool al escribir; mensaje **completo de una sola vez** (sin plantilla vacía, T-19). Nunca numerar a mano |
+| **Firma del director** | `De-Director V4.1 (DeepSeek V4.1 Flash) / OpenCode`. Nunca "DeepSeek" a secas (dos sesiones: el director y el agente `DeepSeek-V4.1-Flash` de WorkBuddy) |
 | **Mensajes entre modelos** | Protocolo completo en `Mensajes entre modelos/GUIA-COMUNICACION.md` |
 
 ---
@@ -402,4 +412,6 @@ Los asistentes **proponen** flips; **vos decidís** y aplicás. Un `[x]` no se d
 
 ---
 
-**Modelo:** atria-dawn-s3 (Atria-Dawn-Preview) / **Plataforma:** Kilo Code / **Fecha:** 2026-10-11
+**Modelo:** atria-dawn-s3 (Atria-Dawn-Preview) / **Plataforma:** Kilo Code / **Fecha:** 2026-10-11 (creación)
+
+**Actualizado por:** De-Director V4.1 (DeepSeek V4.1 Flash) / OpenCode — 2026-10-15 (cambio de director: identidad, tabla de canales, independencia de mismo modelo, método de reserva).

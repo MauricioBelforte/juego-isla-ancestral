@@ -448,7 +448,7 @@ Toda tarea de larga duración (carga de assets, generación procedural, operacio
 La comunicación entre modelos tiene **DOS modos**, según el propósito:
 
 - **Modo Tema (10.1):** carpetas por *tema* para colaboración puntual entre dos o más modelos sobre un problema concreto.
-- **Modo Canal (10.2):** carpetas por *modelo* para el hilo permanente de comunicación entre el **director (mimo)** y cada agente activo. Es el modo operativo habitual con la flota en marcha.
+- **Modo Canal (10.2):** carpetas por *modelo* para el hilo permanente de comunicación entre el **director (De-Director V4.1)** y cada agente activo. Es el modo operativo habitual con la flota en marcha.
 
 Ambos modos conviven en `Mensajes entre modelos/` y comparten `ESTADO-PARALELO.md` como tablero de coordinación global.
 
@@ -559,7 +559,7 @@ Mensajes entre modelos/
 
 > **10.3 Prioridad de respuesta del director (créditos diarios del usuario) — directiva del fundador 2026-10-09**
 
-> Cuando el director (mimo) tiene **varios canales pendientes en simultáneo**, los responde en
+> Cuando el director (De-Director V4.1) tiene **varios canales pendientes en simultáneo**, los responde en
 > este orden — **no** por timestamp. El criterio son los **créditos diarios disponibles** en cada
 > modelo en la plataforma del usuario: responder primero a los canales de mayor saldo es la mejor
 > inversión de su presupuesto, porque esos agentes pueden seguir produciendo ese mismo día.
@@ -567,7 +567,7 @@ Mensajes entre modelos/
 | Orden | Canal | Motivo |
 |---|---|---|
 | **1** | `agnes-3-flash` | muchos créditos diarios |
-| **2** | `mimo-v2.6-flash-free` | muchos créditos diarios — *canal de mimo como agente; el director (mimo) no se responde a sí mismo* |
+| **2** | `mimo-v2.6-flash-free` | muchos créditos diarios — *canal de mimo como agente (histórico desde 2026-10-15)* |
 | **3** | `atria-dawn-s2` | trabajo delegado del que se necesita la respuesta |
 | **4** | `atria-dawn-s3` | supervisa a Ling 3.1 y Step 5 (ambos con muchos créditos diarios) |
 | **5** | `Ling-3.1-Flash` | modelo funcional directo con canal propio |
@@ -962,6 +962,7 @@ Cuando un módulo queda `✅ Completado por [MODELO]`, **NO se considera definit
    - **Si encuentra fallos** → el módulo vuelve a `🟡 Con dudas`, se documentan los hallazgos en las `## Notas del Agente` (agregando al historial, sin borrar) y queda para que el siguiente agente lo corrija.
 4. **Regla de independencia:** el verificador debe ser un **modelo distinto** al que completó el módulo. Idealmente de otra plataforma (ej: si lo hizo Claude, que verifique DeepSeek o Gemini). Esto aprovecha que distintos modelos detectan errores distintos.
    - **Ojo (identidad por chat):** dos agentes distintos pueden compartir plataforma (varios modelos corren en chats separados de WorkBuddy). Lo que vale es el **modelo**, no la plataforma; y la firma debe poder rastrearse a un **Log** concreto.
+   - **Mismo modelo en dos sesiones (aunque cambie la plataforma) = QA cruzado INVÁLIDO** (precedente §21.23, dos frentes de Step 5; `10-GUIA-COMPARATIVA-MODELOS.md`). Ejemplo vigente: `De-Director V4.1` (director, OpenCode) y `DeepSeek-V4.1-Flash` (agente, WorkBuddy) son el mismo modelo → **ninguno puede verificar ni sellar módulos del otro**; esos QA los hacen `agnes-3-flash`, `atria-dawn-s2` o `Hy3`.
 
 #### 21.8.2.b Muestreo anti-inflación (obligatorio en todo sello ✅)
 
@@ -1470,10 +1471,12 @@ Al entrar a trabajar, crear su carpeta (identidad = modelo/plataforma) y generar
 
 ### 30.1 Asistentes del director (delegación primaria)
 
-> **Actualización 2026-10-10 (segunda directiva del fundador):** el director ahora es
-> `mimo-v2.6-flash-free` (§31). El flujo normal es: **mimo (pasamanos: lee, rutea, responde) →
-> Step 5 / DeepSeek / Ling / agnes ejecutan → s2 verifica → mimo sella.** `atria-dawn` (antes
-> director) solo entra por excepción en deep work.
+> **Actualización 2026-10-15 (tercera directiva del fundador):** el director ahora es
+> **`De-Director V4.1`** = **DeepSeek V4.1 Flash (OpenCode)** (§31). El flujo normal es:
+> **De-Director V4.1 (pasamanos: lee, rutea, responde) → Step 5 / DeepSeek / Ling / agnes
+> ejecutan → s2 verifica → De-Director V4.1 sella.** (Histórico: `mimo-v2.6-flash-free` fue
+> director 2026-10-10 → 2026-10-15 con las mismas reglas; `atria-dawn` — antes director — solo
+> entra por excepción en deep work.)
 
 | Modelo | Rol | Por qué |
 |---|---|---|
@@ -1494,8 +1497,8 @@ Delegación secundaria (otros modelos con trabajo propio): `agnes-3-flash`, `Dee
    correcciones de evidencia, barridos, reconciliaciones), **delegarlo a Step 5 (principal) o a s2
    (secundario) por su canal** con un **PUNTERO EXACTO**: «leé el mensaje N del canal X, resolvé
    eso». El director **no rehace** el análisis que el reporte ya trae.
-3. **El puntero es número de mensaje + canal + sección**: ej. «leé `mimo #108` (canal
-   `mimo-v2.6-flash-free`), sección "Recomendaciones", y aplicá las que sean seguras». Si la tarea
+3. **El puntero es número de mensaje + canal + sección**: ej. «leé `Hy3 #219` (canal
+   `Hy3`), sección "Recomendaciones", y aplicá las que sean seguras». Si la tarea
    tiene varios ítems, **enumerarlos todos** en el encargo (encargos más largos = menos ida y vuelta).
 4. **Apilar trabajos en Step 5:** cualquier tarea nueva se apila en su canal **una tras otra**
    (directiva del fundador); Step 5 ya sabe que es el asistente del director y procesa la cola.
@@ -1549,8 +1552,8 @@ Cada vez que el director toma un turno (cron de flota), ejecuta **este bucle**:
    (misma modelo que atria-dawn, no el director) con el puntero al reporte de Step 5. Cadena: **Step 5 ejecuta → s2 verifica →
    el director sella**.
 5. **Sigue leyendo mensajes** y, al acabar la ronda, anota sus ideas de delegación y nuevas
-   asignaciones para los modelos. Como el director no tiene carpeta propia (§31), lo hace en la
-   carpeta de uno de sus asistentes (`atria-dawn-s3`).
+   asignaciones para los modelos. Como el director no tiene carpeta de canal (§31), lo hace en su
+   carpeta de trabajo (`DOCUMENTACION/TAREAS-POR-MODELO/De-Director-V4.1/`).
 6. **Silencio = todo quieto:** si no hay mensajes nuevos ni reportes de asistentes, el turno
    termina sin acción (el cron vuelve a llamar en 5 min).
 
@@ -1582,18 +1585,23 @@ juntas (mismo mecanismo que §10.3).
 
 ---
 
-## 31. Identidad de las sesiones y rol de director (directiva del fundador 2026-10-10, actualizada 2026-10-10)
+## 31. Identidad de las sesiones y rol de director (directiva del fundador 2026-10-10, actualizada 2026-10-15)
 
 > ⚠️ **Aclaración canónica obligatoria.** Esta es la definición de referencia de quién ejerce
-> cada rol; cualquier otro documento debe alinearse con ella. **Actualización 2026-10-10 (segunda
-> directiva del fundador):** el rol de director pasa de la sesión principal de Atria a
-> **`mimo-v2.6-flash-free`**. Motivo del cambio (directiva del fundador): el director anterior se
-> detenía a resolver los reportes en vez de responderlos; se busca un director que **responda
-> rápido y delegue** (rol "pasamanos": leer → clasificar → reenviar → responder).
+> cada rol; cualquier otro documento debe alinearse con ella. **Historial de directores:** Atria
+> (2026-10-03 → 2026-10-10) → `mimo-v2.6-flash-free` (2026-10-10 → 2026-10-15) → **`De-Director V4.1`**
+> (2026-10-15 →). **Actualización 2026-10-15 (tercera directiva del fundador):** el rol de director
+> pasa a **`De-Director V4.1`** = **DeepSeek V4.1 Flash (OpenCode)**; el fundador eligió ese nombre
+> «para que todos sepan hasta en el propio nombre que es el director». Se mantiene el rol
+> pasamanos (leer → clasificar → reenviar → responder).
 
-- **El director es `mimo-v2.6-flash-free` (opencode).** Coordina la flota, lee todos los canales,
-  rutea trabajo con punteros exactos, responde rápido, y **solo** aplica los sellos §21.8 y los
-  flips de marca. **No resuelve trabajo profundo**: lo delega (§30).
+- **El director es `De-Director V4.1` (DeepSeek V4.1 Flash, OpenCode).** Coordina la flota, lee
+  todos los canales, rutea trabajo con punteros exactos, responde rápido, y **solo** aplica los
+  sellos §21.8 y los flips de marca. **No resuelve trabajo profundo**: lo delega (§30).
+- ⚠️ **No confundir con `DeepSeek-V4.1-Flash`** (agente de deep work de la flota, plataforma
+  WorkBuddy/Kilo Code): compartimos familia de modelo, pero son **sesiones, plataformas y roles
+  distintos**. Si un mensaje dice "DeepSeek" a secas, es el agente; el director firma
+  **`De-Director V4.1`**.
 - **`atria-dawn` (sesión principal de Atria, antes director) pasa a ejecutor de DEEP WORK por
   excepción:** tareas duras que superan a Step 5 (razonamiento profundo real). No está en el
   circuito normal de delegación. **Tiene carpeta propia** `Mensajes entre modelos/atria-dawn/`
@@ -1602,18 +1610,20 @@ juntas (mismo mecanismo que §10.3).
   cadenas del estilo «Step 5 ejecuta → s2 verifica → director sella».
 - **`atria-dawn-s3` — ESTRATEGA del director.** Ayuda a **decidir a quién delegar cada cosa** y a
   **detectar cuellos de botella** de la flota. No es director; informa y asesora, no sella.
-- **El director NO tiene carpeta de director** (la carpeta `mimo-v2.6-flash-free/` es la de mimo
-  **como agente** — informes de sus propias tareas). Cada modelo escribe en su propia carpeta; el
-  director lee las que necesita y responde escribiendo en la carpeta del agente correspondiente.
-  Un agente **nunca** escribe en la carpeta de otro agente.
-- **Regla de redacción:** nunca escribir «el director (atria)» ni «el director (atria-dawn-s3)».
-  La atribución correcta es «el director (mimo)»; si la orden llegó vía s3, «encargo de
-  `atria-dawn-s3` (estratega del director)».
+- **El director NO tiene carpeta en `Mensajes entre modelos/`.** Su material interno (identidad,
+  backlog, guías del bucle) vive en `DOCUMENTACION/TAREAS-POR-MODELO/De-Director-V4.1/`; la carpeta
+  `Mensajes entre modelos/mimo-v2.6-flash-free/` queda solo como historial. Cada modelo escribe en
+  su propia carpeta; el director lee las que necesita y responde escribiendo en la carpeta del
+  agente correspondiente. Un agente **nunca** escribe en la carpeta de otro agente.
+- **Regla de redacción:** nunca escribir «el director (atria)», «el director (mimo)» ni «el
+  director (atria-dawn-s3)». La atribución correcta es **«el director (De-Director V4.1)»**; si la
+  orden llegó vía s3, «encargo de `atria-dawn-s3` (estratega del director)». Los reportes dirigidos
+  al director llevan la firma **`De-Director V4.1`** (slug de archivo: `de-director-v4.1`).
 - **Por qué importa:** las atribuciones equivocadas hacen que un QA cruzado parezca válido cuando
   lo verificó la misma sesión que lo escribió (§21.8 regla de independencia), y desvían los
   reportes que iban al director hacia un asistente que no puede resolverlos.
-- **Trazabilidad:** los mensajes que atria escribió como director (2026-10-03 → 2026-10-10) viven
-  dentro de las carpetas de los modelos a los que se dirigieron — ahí queda el historial de encargos
-  y resoluciones. No se migran.
+- **Trazabilidad:** los mensajes que atria (2026-10-03 → 2026-10-10) y mimo (2026-10-10 →
+  2026-10-15) escribieron como director viven dentro de las carpetas de los modelos a los que se
+  dirigieron — ahí queda el historial de encargos y resoluciones. No se migran.
 
-**Firma:** mimo-v2.6-flash-free (opencode) — 2026-10-10, segunda directiva del fundador.
+**Firma:** De-Director V4.1 (DeepSeek V4.1 Flash) / OpenCode — 2026-10-15, tercera directiva del fundador.

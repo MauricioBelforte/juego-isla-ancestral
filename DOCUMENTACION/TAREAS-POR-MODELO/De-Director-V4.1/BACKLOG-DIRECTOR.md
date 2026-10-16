@@ -1,9 +1,10 @@
-# BACKLOG DEL DIRECTOR — mimo-v2.6-flash-free
+# BACKLOG DEL DIRECTOR — De-Director V4.1
 
-**Modelo:** mimo-v2.6-flash-free (Director)
-**Plataforma:** opencode
-**Fecha:** 2026-10-14 20:55
-**Rol:** Estratega + Director (absorbe s3, ver §REDISTRIBUCION-ROLES-2026-10-14.md)
+**Modelo:** De-Director V4.1 (DeepSeek V4.1 Flash)
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-15
+**Rol:** Director (pasamanos: leer → clasificar → reenviar → responder; sellos §21.8 y flips de marca)
+**Historial:** migrado desde `TAREAS-POR-MODELO/mimo-v2.6-flash-free/` al asumir el 2026-10-15 (tercera directiva del fundador). Las tareas de abajo son de la etapa mimo (2026-10-14); las no marcadas quedan como referencia histórica — la cola vigente está al final.
 
 > Este backlog es la cola de trabajo del DIRECTOR. Los backlogs de ejecución
 > (step-5, agnes, etc.) viven en sus propias carpetas.
@@ -54,4 +55,14 @@
 | M48-Animación | 22/123 | agnes | ⏳ pendiente |
 | M15-Recursos | 190/219 | agnes | ⏳ pendiente |
 
-**Firma:** mimo-v2.6-flash-free (Director) / opencode — 2026-10-14 20:55
+## Cola vigente — De-Director V4.1 (desde 2026-10-15)
+
+- [x] **T-I01:** Cambio de identidad del director: carpeta `De-Director-V4.1/` + IDENTITY.md, migración del tooling, actualización de `AGENTS.md` (§10.2/§10.3/§30.1/§30.5/§31), `GUIA-COMUNICACION.md` y `ESTADO-PARALELO.md`. Log reservado: **1872**.
+- [ ] **T-I02:** Responder a agnes 487 (M11 antidrift): refrescar las notas obsoletas de `11-*/plan-actual/04-Codigo.md` + arreglar la fila 45 malformada de `CHECKLIST-GLOBAL.md`.
+- [ ] **T-I03:** Seguimiento de la flota: M91 resto (step-5), M87+i18n (Ling), QA M114 + M39 (agnes), M141+M52 (Hy3), M94 (Step-5-WorkBuddy).
+- [ ] **T-I04:** Anuncio a la flota del cambio de director — pendiente de confirmación del fundador (¿lo mando yo por los canales o lo hace él?).
+- [ ] **T-I05:** Elevar al fundador las preguntas abiertas: política DoD (M89/M88/M99), audición de los 52 WAV, CI rojo (`quality.yml`, M118).
+
+**Firma (histórica):** mimo-v2.6-flash-free (Director) / opencode — 2026-10-14 20:55
+
+**Firma (vigente):** De-Director V4.1 (DeepSeek V4.1 Flash) / OpenCode — 2026-10-15
