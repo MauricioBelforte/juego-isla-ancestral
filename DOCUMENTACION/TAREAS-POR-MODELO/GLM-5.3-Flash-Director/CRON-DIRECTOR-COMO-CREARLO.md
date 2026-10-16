@@ -3,14 +3,14 @@
 **Modelo:** GLM-5.3 Flash-Director
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-16 (directiva del fundador: "guarda como creaste el cronometro de hoy asi mañana lo implementamos de nuevo. create un archivo md en tu carpeta")
-**Cadencia actual:** cada **15 minutos** (ida y vuelta: 5 → 15 → 5 → 15 — el 2026-10-16 18:13 el fundador redujo la flota por creditos: SOLO agnes/Hy3/DeepSeek activos, Step-5 y DS-Opencode se reactivan en un par de horas)
+**Cadencia actual:** cada **5 minutos** (ida y vuelta: 5 → 15 → 5 — el 2026-10-16 23:09 el fundador volvió a 5 min con el tema dark ya aplicado)
 
 ## 1. Comando exacto (usado hoy)
 
 Herramienta: `cron_create` del entorno Kilo Code. Parámetros:
 
 ```
-cron:   */15 * * * *
+cron:   */5 * * * *
 prompt: (ver §2 — el texto completo del bucle)
 ```
 
