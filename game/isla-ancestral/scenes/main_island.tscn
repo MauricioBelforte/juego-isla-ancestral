@@ -104,9 +104,12 @@ text = "FPS: 0"
 [node name="ControlsLabel" type="Label" parent="UI" unique_id=1997514694]
 offset_left = 10.0
 offset_top = 50.0
-offset_right = 350.0
-offset_bottom = 150.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+offset_right = 360.0
+offset_bottom = 165.0
+theme_override_colors/font_color = Color(0.95, 0.93, 0.86)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 5
+theme_override_styles/normal = SubResource("StyleBoxFlat_controls_d102")
 text = "Controles:
 WASD - Mover
 Scroll - Zoom in/out
