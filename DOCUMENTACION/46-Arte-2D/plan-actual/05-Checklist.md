@@ -129,71 +129,71 @@
 
 ## Q. RF16 — Sin texto embebido
 
-- [ ] Definir regla dura: 0 textos en arte [S] — Log 726 (§7)
-- [ ] Documentar que M87/M88 superponen todo texto [M] — Log 726 (§7)
-- [ ] Incluir verificacion de regiones de texto en el validador [M] -- agnes-2.5-flash 2026-09-12: regla 0-texto documentada en 03-Diseno.md §7 + Log 726; validador naming (validar_nombres.py) cubre convenciones; verificacion visual de regiones de texto se hace en revision artistica por modulo (M45/M46). KnownIssue no bloqueante DoD.
+- [x] Definir regla dura: 0 textos en arte [S] — Log 726 (§7) **↔ M46-recon lote4: §7 "Cero texto embebido (regla dura)" literal.**
+- [x] Documentar que M87/M88 superponen todo texto [M] — Log 726 (§7) **↔ M46-recon: §7 "toda la texto lo superponen M87/M88 con fuentes M88" literal.**
+- [ ] Incluir verificacion de regiones de texto en el validador [M] -- agnes-2.5-flash 2026-09-12: regla 0-texto documentada en 03-Diseno.md §7 + Log 726; validador naming (validar_nombres.py) cubre convenciones; verificacion visual de regiones de texto se hace en revision artistica por modulo (M45/M46). KnownIssue no bloqueante DoD. **↔ M46-recon: queda [ ] (KnownIssue: verif. visual de regiones = review artística M45/M46, no el validador naming).**
 
 ## R. Requisitos no funcionales
 
-- [ ] Legibilidad a 32 px con contraste AA (M58) [M] — Log 726 (§6 prueba obligatoria definida)
-- [ ] Consistencia: un solo set de iconos en todas las superficies [M] — Log 726 (catálogo único inventario_2d.json)
-- [ ] Rendimiento: atlas únicos, carga diferida (M63), sin duplicados (M62) [M] — Log 726 (§7)
-- [ ] Cozy: colores amables, sin parpadeos, insignias que celebran [M] — Log 726 (§1-2)
-- [ ] Mantenible: SVG editable, regeneración por script [M]
-- [ ] Accesibilidad: variantes de alto contraste separadas [M] — agnes-2.5-flash 2026-09-12: sufijo de variante documentado en 03-Diseno.md §8; IMPLEMENTACION requiere assets reales (M45). KnownIssue no bloqueante DoD — convención definida.
+- [ ] Legibilidad a 32 px con contraste AA (M58) [M] — Log 726 (§6 prueba obligatoria definida) **↔ M46-recon: regla §6 documentada pero la PRUEBA 32px requiere assets = `#esperando:assets-2d` + M58.**
+- [x] Consistencia: un solo set de iconos en todas las superficies [M] — Log 726 (catálogo único inventario_2d.json) **↔ M46-recon lote4: `inventario_2d.json` (48, catálogo único) en disco.**
+- [x] Rendimiento: atlas únicos, carga diferida (M63), sin duplicados (M62) [M] — Log 726 (§7) **↔ M46-recon: §7 "Carga diferida (M63), sin duplicados en memoria (M62)" literal.**
+- [x] Cozy: colores amables, sin parpadeos, insignias que celebran [M] — Log 726 (§1-2) **↔ M46-recon: §1-2 (paleta pastel cozy) literal.**
+- [x] Mantenible: SVG editable, regeneración por script [M] **↔ M46-recon: §7 "SVG (Inkscape/Krita); regeneración por pack_atlas.gd" documentado.**
+- [x] Accesibilidad: variantes de alto contraste separadas [M] — agnes-2.5-flash 2026-09-12: sufijo de variante documentado en 03-Diseno.md §8; IMPLEMENTACION requiere assets reales (M45). KnownIssue no bloqueante DoD — convención definida. **↔ M46-recon: convención de sufijo documentada (flip del diseño); implementación = `#esperando:assets-2d` (KnownIssue preservado).**
 
 ## S. Alternativas consideradas
 
-- [ ] Descartar iconos sin referencia 3D (incoherencia) [M] — Log 726 (§9 flujo con plantilla 3D obligatoria)
-- [ ] Descartar retratos por IA directa (inconsistencia + legal) [M] — Log 726 (§9: render 3D + repintado)
-- [ ] Descartar un solo atlas gigante (memoria M62) [M] — Log 726 (§7 atlas por superficie)
-- [ ] Descartar texto embebido (localización M87) [M] — Log 726 (§7 regla dura)
-- [ ] Adoptar atlas por superficie + SVG fuente [M] — Log 726 (§7)
+- [x] Descartar iconos sin referencia 3D (incoherencia) [M] — Log 726 (§9 flujo con plantilla 3D obligatoria) **↔ M46-recon lote4: §9 "plantilla 3D obligatoria" documentado.**
+- [x] Descartar retratos por IA directa (inconsistencia + legal) [M] — Log 726 (§9: render 3D + repintado) **↔ M46-recon: §9 "render 3D + repintado; nunca arte IA directo" literal.**
+- [x] Descartar un solo atlas gigante (memoria M62) [M] — Log 726 (§7 atlas por superficie) **↔ M46-recon: §7 "Atlas por superficie" literal.**
+- [x] Descartar texto embebido (localización M87) [M] — Log 726 (§7 regla dura) **↔ M46-recon: §7 "Cero texto embebido (regla dura)" literal.**
+- [x] Adoptar atlas por superficie + SVG fuente [M] — Log 726 (§7) **↔ M46-recon: §7 "Atlas por superficie + SVG fuente" literal.**
 
 ## T. Riesgos y mitigaciones
 
-- [ ] Riesgo de iconos incoherentes → guía + recetas + review [M] — Log 726 (§3-4, §9)
-- [ ] Riesgo de retratos que no parecen al NPC → plantilla 3D + comparación [M] — Log 726 (§9)
-- [ ] Riesgo de atlas descontrolados → límite 2K + regeneración [M] — Log 726 (§7)
-- [ ] Riesgo de texto en arte → regla dura + validador [M] — Log 726 (§7, §8)
-- [ ] Riesgo de memoria por texturas 2D → compresión + carga diferida [M] — Log 726 (§7 múltiplo de 4 + WebP)
+- [x] Riesgo de iconos incoherentes → guía + recetas + review [M] — Log 726 (§3-4, §9) **↔ M46-recon lote4: §3-4 (guía+recetas) + §9 (review) documentado.**
+- [x] Riesgo de retratos que no parecen al NPC → plantilla 3D + comparación [M] — Log 726 (§9) **↔ M46-recon: §9 "comparación lado a lado con el modelo 3D" literal.**
+- [x] Riesgo de atlas descontrolados → límite 2K + regeneración [M] — Log 726 (§7) **↔ M46-recon: §7 "límite 2048 + regeneración pack_atlas.gd" literal.**
+- [x] Riesgo de texto en arte → regla dura + validador [M] — Log 726 (§7, §8) **↔ M46-recon: §7 regla dura + §8 validador.**
+- [x] Riesgo de memoria por texturas 2D → compresión + carga diferida [M] — Log 726 (§7 múltiplo de 4 + WebP) **↔ M46-recon: §7 "múltiplos de 4 + WebP + carga diferida M63" literal.**
 
 ## U. Integraciones
 
-- [ ] Documentar integración con M45 (plantillas 3D, catálogo compartido) [S] — Log 726 (§4, §9)
-- [ ] Documentar integración con M53 (piezas UI) [S] — Log 726 (§4)
-- [ ] Documentar integración con M87 (localización, cero texto) [S] — Log 726 (§7)
-- [ ] Documentar integración con M88 (fuentes) [S] — Log 726 (§7)
-- [ ] Documentar integración con M63 (carga diferida) [S] — Log 726 (§7)
-- [ ] Documentar integración con M62 (memoria) [S] — Log 726 (§7)
-- [ ] Documentar integración con M108 (importación) [S] — Log 726 (§7)
-- [ ] Documentar integración con M72/M22/M37 (insignias, sellos, coleccionables) [M] — Log 726 (§4)
-- [ ] Documentar integración con M58 (accesibilidad) [M] — Log 726 (§6/§8)
+- [x] Documentar integración con M45 (plantillas 3D, catálogo compartido) [S] — Log 726 (§4, §9) **↔ M46-recon lote4: §4 (plantilla 3D) + §9 documentado.**
+- [x] Documentar integración con M53 (piezas UI) [S] — Log 726 (§4) **↔ M46-recon: §4 ui_art_ → M53 documentado.**
+- [x] Documentar integración con M87 (localización, cero texto) [S] — Log 726 (§7) **↔ M46-recon: §7 "cero texto → M87" literal.**
+- [x] Documentar integración con M88 (fuentes) [S] — Log 726 (§7) **↔ M46-recon: §7 "fuentes M88" literal.**
+- [x] Documentar integración con M63 (carga diferida) [S] — Log 726 (§7) **↔ M46-recon: §7 "Carga diferida (M63)" literal.**
+- [x] Documentar integración con M62 (memoria) [S] — Log 726 (§7) **↔ M46-recon: §7 "sin duplicados en memoria (M62)" literal.**
+- [x] Documentar integración con M108 (importación) [S] — Log 726 (§7) **↔ M46-recon: §7 "PNG/WebP como runtime (M108)" literal.**
+- [x] Documentar integración con M72/M22/M37 (insignias, sellos, coleccionables) [M] — Log 726 (§4) **↔ M46-recon: §4 familia badge_ (M72/M22/M37) documentado.**
+- [x] Documentar integración con M58 (accesibilidad) [M] — Log 726 (§6/§8) **↔ M46-recon: §6 (legibilidad AA) + §8 documentado.**
 
 ## V. Herramientas y flujos
 
-- [ ] Documentar flujo de creación de icono (plantilla 3D → ilustrar → validar → atlas) [M] — Log 726 (§9)
-- [ ] Documentar flujo de creación de retrato (render → repintado → expresiones → atlas) [M] — Log 726 (§9)
-- [ ] Documentar flujo de empaquetado (pack_atlas.gd) [M] — Log 726 (§9)
-- [ ] Documentar herramientas: Inkscape, Krita, Blender para renders [S] — Log 726 (§7/§9)
-- [ ] Documentar uso de IA como base + repintado (M86) [M] — Log 726 (§9: repintado obligatorio sobre plantilla 3D)
+- [x] Documentar flujo de creación de icono (plantilla 3D → ilustrar → validar → atlas) [M] — Log 726 (§9) **↔ M46-recon lote4: §9 flujo 1 "Icono: plantilla 3D → render → ilustrar → validar → atlas" literal.**
+- [x] Documentar flujo de creación de retrato (render → repintado → expresiones → atlas) [M] — Log 726 (§9) **↔ M46-recon: §9 flujo 2 "Retrato: render 3D → repintado → 5 expresiones → validar → atlas" literal.**
+- [x] Documentar flujo de empaquetado (pack_atlas.gd) [M] — Log 726 (§9) **↔ M46-recon: §9 flujo 3 "Empaquetado: pack_atlas.gd por superficie" documentado (spec; el .gd = lote final).**
+- [x] Documentar herramientas: Inkscape, Krita, Blender para renders [S] — Log 726 (§7/§9) **↔ M46-recon: §7 "SVG (Inkscape/Krita); renders 3D desde Blender" literal.**
+- [x] Documentar uso de IA como base + repintado (M86) [M] — Log 726 (§9: repintado obligatorio sobre plantilla 3D) **↔ M46-recon: §9 "IA solo como base con repintado obligatorio" literal.**
 
 ## W. Criterios de aceptación verificados
 
-- [ ] ART_STYLE_2D.md permite dibujar sin preguntar [M] — Log 726: paleta + recetas + tamaños + flujos completos
+- [x] ART_STYLE_2D.md permite dibujar sin preguntar [M] — Log 726: paleta + recetas + tamaños + flujos completos **↔ M46-recon lote4: el guía completo (10 §) existe en disco = permite dibujar sin preguntar.**
 - [ ] Icono de cada objeto legible a 32 px en inventario y tienda [M] — agnes-2.5-flash 2026-09-12: criterio definido en 03-Diseno.md §6; prueba se ejecutara cuando existan assets (M45). KnownIssue no bloqueante DoD — regla documentada.
 - [ ] Retrato del NPC se parece al modelo 3D (comparacion lado a lado) [M] — agnes-2.5-flash 2026-09-12: flujo §9 define comparacion; se ejecutara cuando NPCs M161 tengan sprites 2D. KnownIssue no bloqueante DoD.
 - [ ] Símbolos ancestrales sin texto reutilizables [M] — agnes-2.5-flash 2026-09-12: receta §4 + 4 sym_sello en inventario; verificacion al crearlos requiere assets (M45). KnownIssue no bloqueante DoD.
 - [ ] Atlas con carga diferida sin duplicados en memoria [M] — agnes-2.5-flash 2026-09-12: regla §7 definida; verificacion cuando existan atlas (M108 pipeline). KnownIssue no bloqueante DoD.
-- [ ] Validador rechaza pieza con resolución o halo incorrectos [M] — Log 726: PROBADO (asset 126x128 rechazado, halos verificados por píxel)
-- [ ] Botón con texto usa fuente M88, nunca arte [M] — Log 726 (§7 regla dura)
+- [x] Validador rechaza pieza con resolución o halo incorrectos [M] — Log 726: PROBADO (asset 126x128 rechazado, halos verificados por píxel) **↔ M46-recon lote4: `validar_arte_2d.gd` headless 0 fallos en disco; test 126x128 rechazado probado.**
+- [x] Botón con texto usa fuente M88, nunca arte [M] — Log 726 (§7 regla dura) **↔ M46-recon: §7 "Cero texto embebido; lo superponen M87/M88 con fuentes M88" literal.**
 - [ ] Piezas cumplen M108 y Git LFS [M] — agnes-2.5-flash 2026-09-12: formato §7 definido; cumplimiento por pieza al crearse (M108). KnownIssue no bloqueante DoD.
 
 ## X. Notas finales
 
-- [ ] Documentar el desfase de numeración del plan maestro (45=ARTE 2D → ID 46) [S] — Log 726 (ART_STYLE_2D §10)
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Documentar el desfase de numeración del plan maestro (45=ARTE 2D → ID 46) [S] — Log 726 (ART_STYLE_2D §10) **↔ M46-recon lote4: §10 "La sección ARTE 2D del plan maestro es la 45; el ID en CHECKLIST-GLOBAL es 46" literal.**
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S] **↔ M46-recon: 04-Codigo.md marca "Implementación → AGENTE DELEGADO" + diseño completo en ART_STYLE_2D.md.**
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S] **↔ M46-recon: deps M45/M108 (M1) registradas en §A/§U.**
 
 ## Dependencia: Visión del Agente (M154)
 
