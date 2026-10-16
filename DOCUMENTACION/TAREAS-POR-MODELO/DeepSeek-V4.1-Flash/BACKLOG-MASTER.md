@@ -1551,16 +1551,16 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - **Artefactos:** Log **1899** (ASCII puro: 0 no-ASCII, 162 CRLF, sin BOM), informe **276** (UTF-8 sin BOM, LF), tracker -> **275**, log diario.
 - **PENDIENTE:** autorizacion de commit para Log 1899 + informe 276 + tracker (pedida en 276); **M159** (aprobado en msg 275 seccion 2, arranca por el conteo L216).
 - **Proxima:** mensajes con NN > **275**.
-
-## 2026-10-16 14:46 (GMT-3) - M159 arrancado por el conteo L216 (msg 282 -> resp. 283)
-
-- [x] Log reservado: **1906** — M159 conteo L216 medido (head post = 1907).
-- **msg 282** (GLM-5.3 Flash-Director, 05:55): cierre de jornada; hallazgo B aceptado; bucle pausado por el fundador.
-- **L216 MEDIDO: 121 < 300 -> NO flippeable** (queda `[?]` con el numero real). L212 GAP (121/121 sin icono).
-- Desglose nuevo: 121 `.tres` = **93** catalogo M159 (`OBJ-XXX-NNN`) + **28** materiales M14. Diseno `03-Diseno.md` = **307** ids unicos (1 dup `OBJ-HER-001`). Faltan **214** (diseno) / **179** (minimo L216). 0 realizados fuera del diseno.
-- Pedido al director: alcance (179 vs 214), si se acepta L212 abierto, y mapping de enums. Sin esa decision NO se generan `.tres`.
-- 0 flips / 0 commits / 0 push. Pool de canal: cabeza **284**. Tracker -> 282.
-- **Proxima:** mensajes con NN > **282** (entrantes del director).
+
+## 2026-10-16 14:46 (GMT-3) - M159 arrancado por el conteo L216 (msg 282 -> resp. 283)
+
+- [x] Log reservado: **1906** — M159 conteo L216 medido (head post = 1907).
+- **msg 282** (GLM-5.3 Flash-Director, 05:55): cierre de jornada; hallazgo B aceptado; bucle pausado por el fundador.
+- **L216 MEDIDO: 121 < 300 -> NO flippeable** (queda `[?]` con el numero real). L212 GAP (121/121 sin icono).
+- Desglose nuevo: 121 `.tres` = **93** catalogo M159 (`OBJ-XXX-NNN`) + **28** materiales M14. Diseno `03-Diseno.md` = **307** ids unicos (1 dup `OBJ-HER-001`). Faltan **214** (diseno) / **179** (minimo L216). 0 realizados fuera del diseno.
+- Pedido al director: alcance (179 vs 214), si se acepta L212 abierto, y mapping de enums. Sin esa decision NO se generan `.tres`.
+- 0 flips / 0 commits / 0 push. Pool de canal: cabeza **284**. Tracker -> 282.
+- **Proxima:** mensajes con NN > **282** (entrantes del director).
 
 ## 2026-10-16 15:31 (GMT-3) - M159: lote L216 ejecutado (179 .tres, total 300) - resp. msg 285
 
@@ -1573,3 +1573,16 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - `05-Checklist.md`: L216 [ ]->[x]; Totales 77/52/17 -> **78/52/16**.
 - **Pendiente:** commit pathspec explicito (pedido al director); fase siguiente 36 ids (ART 7, EVE 7, ROP 15, SEC 7).
 - **Proxima:** mensajes entrantes con NN > **284**.
+
+## 2026-10-16 18:58 (GMT-3) - msg 286/287: verificacion del run de CI (ROJO, 2 capas)
+
+- **Tracker 284 -> 287.** Mensajes nuevos: **286** (cola ruteada: verificar el run de quality.yml) + **287** (L216 verificado/sellado; **lote 2 de M159 SUSPENDIDO**; L212 abierto).
+- **CI ROJO (8/8 runs failure).** Run `38971317017` (HEAD `2a943a3`, 8m1s): **12 jobs, 9 verdes / 3 rojos**.
+  - (a) `Run Test Suite (M112)` -> **un solo test falla**: `M62 liberacion` 15/1. `L191 pico pesado = 3.801 ms` vs limite `3.50 ms` (`scripts/rendimiento/memoria/test_m62_liberacion.gd:47`; gate `quality.yml:518`). **Local x3: 0.368 / 0.443 / 0.399 ms -> 15/0 EXIT 0.** = ruido del runner (10.3x el local), NO degradacion de codigo.
+  - (b) `UTF-8 sin BOM` -> **8 mensajes del DIRECTOR con BOM** (canales DS-V4.1-Flash-Opencode, DeepSeek-V4.1-Flash x2, Hy3 x3, Step-5-WorkBuddy, agnes-3-flash). Job fail-fast -> 3 steps SKIPPED.
+  - (c) `Quality Gate Summary` = consecuencia de (a) y (b).
+- **Hallazgo secundario (falso verde):** 2 `SCRIPT ERROR` de RUNTIME abortan funciones de test sin marcar fallo: `scripts/logros/test_logros.gd:291` (`size` en base `Callable`) y `scripts/ia_npc/test_rendimiento_m64.gd:64` (`register` en base `Node (NPCWatchdog)`).
+- **Artefactos:** Log **1911** (ASCII puro, 109 CRLF, sin BOM); mensaje **288** (UTF-8 sin BOM, LF). Tracker -> **287**.
+- **Limites:** 0 commits / 0 push / 0 flips / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot, 05-Checklist.
+- **Pendiente del director:** decidir sobre L191 (ratio vs umbral), arreglar el BOM de su tooling, y la deuda de guardas en M72/M64. **L199 de M118 sigue NO flippeable.**
+- **Proxima:** mensajes entrantes con NN > **287**.

@@ -699,3 +699,38 @@ msgstr "Día %s"
 #. no-traducir: secreto del lore (§3.2); el "???" es intencional en todos los idiomas
 msgid "DIARY.BLOQUEADO"
 msgstr "???"
+
+# M87 (encargo 146, 2026-10-16): consumidas en produccion via autoload (settings_audio_layer.gd L113-116, tutorial_manager.gd L131-142/L469); faltaban del .po, existian en data/localizacion/strings_*.json
+msgid "SETTINGS.AMBIENTE"
+msgstr "Ambiente"
+
+msgid "SETTINGS.CINEMATICAS"
+msgstr "Cinemáticas"
+
+msgid "SETTINGS.UI"
+msgstr "Interfaz"
+
+msgid "SETTINGS.VOCES"
+msgstr "Voces"
+
+msgid "TUTORIAL.CAPITULO_COMPLETADO"
+msgstr "Capítulo concluido"
+
+msgid "TUTORIAL.HERRAMIENTA"
+msgstr "Herramienta"
+
+msgid "TUTORIAL.HERRAMIENTA_USO"
+msgstr "Usa la herramienta para interactuar"
+
+msgid "TUTORIAL.INTERACTUAR"
+msgstr "Interactuar"
+
+msgid "TUTORIAL.PROLOGO_BIENVENIDA"
+msgstr "Bienvenido a la isla"
+
+msgid "TUTORIAL.PROLOGO_MOVERSE"
+msgstr "Usa las flechas para moverte"
+
+msgid "TUTORIAL.VECINO"
+msgstr "Vecino"
+

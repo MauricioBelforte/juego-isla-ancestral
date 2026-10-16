@@ -143,6 +143,9 @@
     "TUTORIAL.INTERACTUAR": "Interactuar",
     "TUTORIAL.PROLOGO_BIENVENIDA": "Bienvenido a la isla",
     "TUTORIAL.PROLOGO_MOVERSE": "Usa las flechas para moverte",
-    "TUTORIAL.VECINO": "Vecino"
+    "TUTORIAL.VECINO": "Vecino",
+    "SETTINGS.CREAR_1": "Crear",
+    "TIENDAS.COMPRAR_1": "Comprar",
+    "TIENDAS.VENDER_1": "Vender"
   }
 }

@@ -143,6 +143,9 @@
     "TUTORIAL.INTERACTUAR": "Interact",
     "TUTORIAL.PROLOGO_BIENVENIDA": "Welcome to the island",
     "TUTORIAL.PROLOGO_MOVERSE": "Use the arrows to move",
-    "TUTORIAL.VECINO": "Neighbor"
+    "TUTORIAL.VECINO": "Neighbor",
+    "SETTINGS.CREAR_1": "Craft",
+    "TIENDAS.COMPRAR_1": "Buy",
+    "TIENDAS.VENDER_1": "Sell"
   }
 }

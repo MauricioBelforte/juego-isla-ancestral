@@ -144,6 +144,9 @@
     "TUTORIAL.PROLOGO_BIENVENIDA": "Bem-vindo à ilha",
     "TUTORIAL.PROLOGO_MOVERSE": "Use as setas para se mover",
     "TUTORIAL.VECINO": "Vizinho",
-    "eventos.historia_c2_nombre": "A Ponte das Memórias"
+    "eventos.historia_c2_nombre": "A Ponte das Memórias",
+    "SETTINGS.CREAR_1": "Criar",
+    "TIENDAS.COMPRAR_1": "Comprar",
+    "TIENDAS.VENDER_1": "Vender"
   }
 }

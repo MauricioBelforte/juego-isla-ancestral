@@ -56,10 +56,10 @@
 ## F. RF5 — Retratos (portraits)
 
 - [ ] Definir retrato de cada NPC (M19) y jugador [M] — Log 726: pt_npc_riz_001_* (5 expresiones) sembrados en inventario; patrón replicable por NPC
-- [ ] Definir 5 expresiones base: base, alegre, triste, sorprendido, pensativo [M] — Log 726 (§5)
-- [ ] Definir +3 expresiones extra para NPCs románticos (M20) [M] — Log 726 (§5: coqueteo/sonrojado/corazon)
-- [ ] Definir plantilla 3D obligatoria (render del modelo + repintado) [M] — Log 726 (§4 receta pt_)
-- [ ] Definir tamaño 256×256 y prueba a 96 px [S] — Log 726 (§6)
+- [x] Definir 5 expresiones base: base, alegre, triste, sorprendido, pensativo [M] — Log 726 (§5) **↔ M46-recon lote2: §5 "Base: base, alegre, triste, sorprendido, pensativo" literal.**
+- [x] Definir +3 expresiones extra para NPCs románticos (M20) [M] — Log 726 (§5: coqueteo/sonrojado/corazon) **↔ M46-recon: §5 "NPCs románticos: + coqueteo, sonrojado, corazon" literal.**
+- [x] Definir plantilla 3D obligatoria (render del modelo + repintado) [M] — Log 726 (§4 receta pt_) **↔ M46-recon: §4 receta pt_ "render 3D del modelo como base + repintado" literal.**
+- [x] Definir tamaño 256×256 y prueba a 96 px [S] — Log 726 (§6) **↔ M46-recon: §6 "Retratos: 256×256, prueba a 96 px" literal.**
 
 ## G. RF6 — Iconos de UI
 
@@ -99,33 +99,33 @@
 
 ## M. RF12 — Atlas por superficie
 
-- [ ] Definir ui_atlas, icons_atlas, portraits_atlas, story_atlas, badges_atlas [M] — Log 726 (§7; carpetas por familia en assets/2d/)
-- [ ] Definir límite 2048×2048 por atlas [S] — Log 726 (§7)
-- [ ] Definir padding ≥ 2 px [S] — Log 726 (§7)
-- [ ] Definir sin rotaciones en empaquetado [S] — Log 726 (§7)
-- [ ] Definir regeneración por script (pack_atlas.gd) [M]
+- [x] Definir ui_atlas, icons_atlas, portraits_atlas, story_atlas, badges_atlas [M] — Log 726 (§7; carpetas por familia en assets/2d/) **↔ M46-recon lote2: §7 "Atlas por superficie (RF12): ui_atlas, icons_atlas, portraits_atlas, story_atlas, badges_atlas" literal en disco.**
+- [x] Definir límite 2048×2048 por atlas [S] — Log 726 (§7) **↔ M46-recon: §7 "máximo 2048×2048" literal.**
+- [x] Definir padding ≥ 2 px [S] — Log 726 (§7) **↔ M46-recon: §7 "padding ≥ 2 px" literal.**
+- [x] Definir sin rotaciones en empaquetado [S] — Log 726 (§7) **↔ M46-recon: §7 "sin rotaciones" literal.**
+- [ ] Definir regeneración por script (pack_atlas.gd) [M] **↔ M46-recon: `pack_atlas.gd` AUSENTE (lote final del director N673 — se escribe cuando el inventario esté congelado).**
 
 ## N. RF13 — Convenciones de formato
 
-- [ ] Definir SVG como fuente editable (Inkscape/Krita) [S] — Log 726 (§7)
-- [ ] Definir PNG/WebP como runtime (M108) [S] — Log 726 (§7)
-- [ ] Definir transparencia sin halos (alfa limpio) [M] — Log 726 (§7; verificado por validador)
-- [ ] Definir tamaños múltiplos de 4 (compresión) [S] — Log 726 (§7; verificado por validador)
+- [x] Definir SVG como fuente editable (Inkscape/Krita) [S] — Log 726 (§7) **↔ M46-recon lote2: §7 "Fuente editable: SVG (Inkscape/Krita)" literal.**
+- [x] Definir PNG/WebP como runtime (M108) [S] — Log 726 (§7) **↔ M46-recon: §7 "Runtime: PNG/WebP" literal.**
+- [x] Definir transparencia sin halos (alfa limpio) [M] — Log 726 (§7; verificado por validador) **↔ M46-recon: §7 "alfa limpio sin halos" + validador en disco.**
+- [x] Definir tamaños múltiplos de 4 (compresión) [S] — Log 726 (§7; verificado por validador) **↔ M46-recon: §7 "múltiples de 4" + validador en disco.**
 
 ## O. RF14 — Validación de pieza
 
-- [ ] Definir script validate_2d.gd en Assets/_Project/Editor/ [M]
-- [ ] Verificar formato y tamaño cuadrado permitido [S] — Log 726: validador chequea cuadrado para ico_/pt_/sym_/badge_ (probado con asset 126x128 rechazado)
-- [ ] Verificar resolución múltiplo de 4 [S] — Log 726: validador (probado)
-- [ ] Verificar alfa sin halos en bordes [M] — Log 726: _alfa_bordes_limpio() inspecciona píxeles del borde (0 o 255)
-- [ ] Verificar duplicados de id contra catálogo [M] — Log 726: cobertura contra inventario_2d.json (ids únicos por definición de catálogo)
-- [ ] Verificar convenciones de nombres por tipo [S] — Log 726: NAMING_PATTERN extendido a 7 prefijos RF15 (probado)
+- [x] Definir script validate_2d.gd en Assets/_Project/Editor/ [M] **↔ M46-recon lote2 2026-10-16: el validador REAL = `scripts/arte2d/validar_arte_2d.gd` (existe, headless 0 fallos por Log 954; el texto citaba la ruta de diseño — el artefacto está en scripts/arte2d/).**
+- [x] Verificar formato y tamaño cuadrado permitido [S] — Log 726: validador chequea cuadrado para ico_/pt_/sym_/badge_ (probado con asset 126x128 rechazado) **↔ M46-recon: `validar_arte_2d.gd` en disco (headless 0 fallos).**
+- [x] Verificar resolución múltiplo de 4 [S] — Log 726: validador (probado) **↔ M46-recon: validador en disco.**
+- [x] Verificar alfa sin halos en bordes [M] — Log 726: _alfa_bordes_limpio() inspecciona píxeles del borde (0 o 255) **↔ M46-recon: `_alfa_bordes_limpio()` en `validar_arte_2d.gd`.**
+- [x] Verificar duplicados de id contra catálogo [M] — Log 726: cobertura contra inventario_2d.json (ids únicos por definición de catálogo) **↔ M46-recon: `inventario_2d.json` (48) + validador en disco.**
+- [x] Verificar convenciones de nombres por tipo [S] — Log 726: NAMING_PATTERN extendido a 7 prefijos RF15 (probado) **↔ M46-recon: validador NAMING en disco.**
 
 ## P. RF15 — Convenciones de nombres
 
-- [ ] Definir prefijos: ico_, pt_, illus_, sym_, badge_, ui_art_ [S] — Log 726 (validador + ART_STYLE_2D §4)
-- [ ] Alinear con M108 (Pipeline de Assets) [M] — Log 726 (§7)
-- [ ] Definir sufijos de variantes de expresión (pt_<npc>_alegre) [S] — Log 726 (§5)
+- [x] Definir prefijos: ico_, pt_, illus_, sym_, badge_, ui_art_ [S] — Log 726 (validador + ART_STYLE_2D §4) **↔ M46-recon lote2: §4 tabla familias/recetas (prefijos ico_/ico_herr_/pt_/ui_art_/sym_/illus_/badge_/logo_) + validador NAMING en disco.**
+- [x] Alinear con M108 (Pipeline de Assets) [M] — Log 726 (§7) **↔ M46-recon: §7 pipeline M108 documentado.**
+- [x] Definir sufijos de variantes de expresión (pt_<npc>_alegre) [S] — Log 726 (§5) **↔ M46-recon: §5 "Sufijo de variante: pt_<npc>_<expresion>" literal.**
 
 ## Q. RF16 — Sin texto embebido
 

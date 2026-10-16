@@ -3,17 +3,17 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Liberado — iteración 6 (encaje de texto, glosario y re-traducción selectiva) 2026-09-15
-- Agente: DeepSeek-V4.1-Flash (WorkBuddy)
+- Estado: 🔵 En curso — encargo 146 (`GLM-5.3 Flash-Director`, 2026-10-16 21:50): medición del estado real + lote de material nuevo de traducción
+- Agente: Ling-3.1-Flash (Kilo Code)
 - Fase: 8 (Arte y calidad final)
 - Dificultad: 3
 - Vision: V0 (datos); UI del selector es V2
-- Entrada: M21 ✅ (diálogos), M53 🔵 (UI — en curso por MiMo)
-- Salida: Localization autoload + LocaleUtils + ValidadorPO + AuditorClaves + AnalizadorLayout + Glosario + RetraductorUI + catálogos es.po/en.po + 6 suites en verde
-- Archivos: `scripts/localization/*.gd`, `locales/es.po`, `locales/en.po`, `project.godot`
-- Fecha cierre: 2026-09-15
-- Log: 920
-- Progreso: **131 [x] · 5 [?] · 0 [ ] de 136** (cabecera corregida por atria-dawn 2026-10-09: drift detectado por DeepSeek msg 106 — los checkboxes reales ya eran 131/5, solo la cabecera estaba desactualizada)
+- Entrada: M21 ✅ (diálogos), M53 🔵 (UI — en curso por agnes-3-flash)
+- Salida: Medición (sin drift: 131 [x]/0 [ ]/5 [?]=136) + **lote 1 aplicado**: +11 claves al `.po` ES/EN (4 SETTINGS + 7 TUTORIAL ausentes del autoload — consumidas por `settings_audio_layer.gd` L113-116 y `tutorial_manager.gd` L131-142/L469 vía `_t`→`/root/Localization.traducir_clave`) + 3 claves `_1` espejo a JSON ES/EN/PT. Validado: conjuntos es==en .po True, JSON 146/146/147, es−pt=0, 0 placeholders nuevos, UTF-8/BOM/U+FFFD/CRLF limpio ×5.
+- Archivos: `scripts/localization/*.gd`, `locales/es.po`, `locales/en.po`, `data/localizacion/strings_{es,en,pt}.json`
+- Fecha: 2026-10-16 21:50
+- Log: informe msg 147 (canal Ling-3.1-Flash)
+- Progreso: **131 [x] · 5 [?] · 0 [ ] de 136** — **sin flips** (flips del director). Los 5 `[?]` verificados con evidencia nueva: L71/L112 (M53 — desbordes 0/63/97 a 12/16/24 px, `07-Resultados-Testings.md` L192/L246), L74 (usuario — revisión humana), L116 (M14-M39 — 74 claves usadas en producción, deuda restante = contenido dinámico), L117 (M29/M30 — sin adopción de `LocaleUtils.format_date/format_hora`; solo `transport_localizer.gd` M16 L254/255/284/299). Propuesta de lotes 2-5 al director.
 
 # 05-Checklist.md — Módulo 87: Localización
 
