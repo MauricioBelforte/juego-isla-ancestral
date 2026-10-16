@@ -187,7 +187,7 @@
 
 ## U. Documentación y Mantenimiento
 
-- [x] Definir `balance_report.gd` que genera reporte markdown legible [M]
+- [ ] Definir `balance_report.gd` que genera reporte markdown legible [M] — **degradado 2026-10-16 (barrido agnes 622 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (`scripts/` y `scripts/balance/` = 5 .gd, ninguno balance_report.gd). Verificar si el reporte se genera vía validate_balance.gd/CI (reformular) o implementar.**
 - [x] Definir que el reporte se actualice en cada cambio de balance [S]
 - [x] Definir bump de `balance_version` en cada cambio [S]
 - [x] Definir CHANGELOG de balance en `docs/balance/CHANGELOG.md` [S]

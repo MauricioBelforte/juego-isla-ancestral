@@ -64,3 +64,9 @@ REGLA: todo encargo terminado DEBE tener reporte en mi canal. Parar solo si USUA
 1. `cron_create` con `*/5 * * * *` y el prompt de arriba
 2. Verificar `.ultima-revision-agnes.txt` está actualizado
 3. Iniciar rotación de módulos desde el último M{NN} verificado
+
+## Reactivación 2026-10-16 (segunda ronda)
+
+- **2026-10-16 ~12:26 UTC:** barrido completo M01–M168 terminado (resumen #642). 3 drifts detectados (M52 L144, M93 L190, M137 L122). Cron apagado por directiva del usuario.
+- **2026-10-16 17:56 UTC:** el usuario pide "volver a encender el cronómetro con la misma estrategia de ayer". Reactivado el cron `*/5` con prompt actualizado: ahora (a) pasa primero por los 3 módulos con drift detectado (M52/M93/M137) para verificar si el director los sanó, y (b) luego rota de nuevo por orden numérico como **segunda pasada** (verificar que el sanity-check del día 1 no haya dejado huecos y que no haya nuevo drift). `.ultima-revision` = 642.
+- **Nota:** la primera pasada cubrió el 100% de los 169 módulos. La segunda pasada es de verificación: confirmar que los 3 degradaciones `[x]→[?]` se aplicaron (M52/M93/M137) y reconfirmar "drift 0" en el resto.
