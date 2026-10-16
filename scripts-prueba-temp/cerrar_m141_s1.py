@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, re
 p = "DOCUMENTACION/141-Beta/plan-actual/05-Checklist.md"
 with io.open(p, encoding="utf-8") as f:

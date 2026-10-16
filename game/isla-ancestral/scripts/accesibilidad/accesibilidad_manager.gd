@@ -388,7 +388,7 @@ func pedir_indicador(tipo: String, forzar: bool = false) -> Dictionary:
 	if not INDICADORES_SONIDO.has(tipo):
 		push_warning("[M58] Indicador desconocido: %s" % tipo)
 		return {}
-	var ahora := Time.get_unix_time_from_system()
+	var ahora := Time.get_ticks_msec() / 1000.0
 	if not forzar and _ultimo_indicador.has(tipo) and \
 			ahora - float(_ultimo_indicador[tipo]) < VENTANA_ANTISPAM_SEG:
 		return {}

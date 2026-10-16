@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, re, sys
 sys.stdout.reconfigure(encoding="utf-8")
 c = io.open("DOCUMENTACION/141-Beta/plan-actual/05-Checklist.md", encoding="utf-8").read()

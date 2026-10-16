@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, os, re, glob
 libs = glob.glob("game/isla-ancestral/**/jugador_lib.tres", recursive=True)
 for lib in libs:

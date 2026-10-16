@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Correccion de numeracion de mensajes mal puesta (pedido del usuario, 2026-10-13).
 Regla: cada mensaje toma el numero correcto de SU pool; los huecos del medio NO se reutilizan
 (solo se toma el siguiente disponible real). Fugas del pool (numeros con archivo ya existente)

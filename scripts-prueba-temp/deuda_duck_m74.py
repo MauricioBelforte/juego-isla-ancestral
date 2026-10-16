@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io
 
 p = "DOCUMENTACION/74-Eventos/plan-actual/04-Codigo.md"

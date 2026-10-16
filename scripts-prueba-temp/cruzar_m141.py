@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, re, sys
 sys.stdout.reconfigure(encoding="utf-8")
 spec = io.open("DOCUMENTACION/141-Beta/plan-actual/m141_spec.md", encoding="utf-8").read()

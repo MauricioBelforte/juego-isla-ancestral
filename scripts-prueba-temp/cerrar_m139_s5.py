@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, re
 
 p = "DOCUMENTACION/139-Pre-Alpha/plan-actual/05-Checklist.md"

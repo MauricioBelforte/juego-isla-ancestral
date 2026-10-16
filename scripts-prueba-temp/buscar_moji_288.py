@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, re
 p = "Mensajes entre modelos/step-5-kilocode/288-2026-10-14_02-40-00-step-5-kilocode-a-step-5-kilocode-m27-auditada-completa-recreado-log1819.md"
 with io.open(p, encoding="utf-8") as f:

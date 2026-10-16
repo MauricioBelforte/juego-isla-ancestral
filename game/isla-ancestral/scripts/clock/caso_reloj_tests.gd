@@ -310,6 +310,28 @@ const WHITELIST_RELOJ_SO := [
 	# y updates/. Sin esto el scan marcaba 1 falso positivo y el check C56
 	# fallaba con 685 archivos (bug registrado en 11-BUGS.md con A/B, Log 824).
 	"res://scripts/ci/",
+	# Vigilancia continua C56 — CUARTA pasada (2026-10-16, DS-V4.1-Flash-Opencode,
+	# Log 1898, micro-lote del director): el proyecto creció de 685 a 1068 archivos
+	# (M18/M54/M56/M58/M83/M106/M107/M121 nuevos) y reaparecieron usos del reloj-SO.
+	# Clasificación uno por uno (criterio saving/legal/updates de Log 429/845):
+	# - backup/ (M107): timestamp en el NOMBRE de cada ZIP + retención por edad de
+	#   archivos (metadata del sistema de archivos, misma familia que ci/);
+	# - foto/ (M56): timestamp en el NOMBRE del archivo de la captura (foto_AAAA-*.png);
+	# - licensing/ (M83): "Generado: fecha" en reportes/notices (dato legal real);
+	# - security/ (M106): ts de los logs de auditoría volcados a user:// (diagnóstico);
+	# - support/ (M121): fechas de parches y de tickets (metadata de soporte);
+	# - mapa/ (M54): "fecha" del pin = fecha REAL en que el jugador anotó el pin, se
+	#   muestra al jugador (dato del mundo real, sin ventaja; el dueño de M54 puede
+	#   migrarlo a la fecha del juego — recomendación en Log 1898, no regla).
+	# GAMEPLAY corregido a ticks (§9.64, mismo patrón que fauna/inventario Log 429):
+	# - accesibilidad/ (M58): cooldown anti-spam de indicadores → get_ticks_msec()/1000;
+	# - houses/ (M18): generación de ID único de casa → get_ticks_msec().
+	"res://scripts/backup/",
+	"res://scripts/foto/",
+	"res://scripts/licensing/",
+	"res://scripts/security/",
+	"res://scripts/support/",
+	"res://scripts/mapa/",
 ]
 
 func _scan_anti_reloj_so() -> void:

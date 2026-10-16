@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, os, re, sys
 sys.stdout.reconfigure(encoding='utf-8')
 muestra = ['event_bus.gd','world_seed.gd','save_schema.gd','fishing_manager.gd','island_registry.gd']

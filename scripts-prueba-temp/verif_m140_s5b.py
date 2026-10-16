@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import re, io, sys, json, glob, os
 sys.stdout.reconfigure(encoding='utf-8')
 # islas: buscar en generar_islas.gd y catalogo

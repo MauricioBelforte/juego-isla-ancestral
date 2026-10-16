@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import subprocess, sys
 sys.stdout.reconfigure(encoding="utf-8")
 pares = [

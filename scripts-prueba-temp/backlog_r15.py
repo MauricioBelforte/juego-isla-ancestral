@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io
 p = "DOCUMENTACION/TAREAS-POR-MODELO/step-5-kilocode/BACKLOG-MASTER.md"
 with io.open(p, encoding="utf-8") as f:

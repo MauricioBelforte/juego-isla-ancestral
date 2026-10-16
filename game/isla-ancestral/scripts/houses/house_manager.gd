@@ -31,7 +31,7 @@ func _ready() -> void:
 ## Registra una nueva casa. Devuelve el ID asignado.
 func registrar_casa(pos: Vector3, id: String = "") -> String:
 	if id.is_empty():
-		id = "casa_%d" % (int(Time.get_unix_time_from_system()) % 100000)
+		id = "casa_%d" % (Time.get_ticks_msec() % 100000)
 	_casas[id] = {
 		"pos": pos,
 		"etapa": 1,

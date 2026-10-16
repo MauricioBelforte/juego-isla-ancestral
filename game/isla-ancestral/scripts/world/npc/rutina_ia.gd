@@ -66,7 +66,9 @@ func _waypoint_para_hora(hora: int) -> int:
 	for franja in _perfil.horarios:
 		var desde: int = franja.get("desde", 0)
 		var hasta: int = franja.get("hasta", 0)
-		if desde <= hora < hasta:
+		# GDScript NO soporta comparacion encadenada: `desde <= hora < hasta` daba
+		# "Invalid operands bool and int for < operator" (parse error, rompia el CI).
+		if desde <= hora and hora < hasta:
 			return int(franja.get("waypoint", 0))
 	return 0
 

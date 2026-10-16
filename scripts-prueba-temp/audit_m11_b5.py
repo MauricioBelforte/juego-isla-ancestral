@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, re
 
 p = "DOCUMENTACION/11-Personaje-Del-Jugador/plan-actual/05-Checklist.md"

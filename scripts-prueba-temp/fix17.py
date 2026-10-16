@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, os
 d = "Mensajes entre modelos/Step-5-WorkBuddy"
 p = os.path.join(d, "17-2026-10-13_16-35-00-mimo-a-wb-iter5-aceptada-jolt-iter6-autorizada.md")

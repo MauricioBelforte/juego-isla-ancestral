@@ -1,4 +1,4 @@
-﻿## Liberado — parte de copyright (Log 1035, 2026-09-18 20:55, agnes-3-flash / Kilo Code)
+## Liberado — parte de copyright (Log 1035, 2026-09-18 20:55, agnes-3-flash / Kilo Code)
 
 - Auditoría empírica del claim M127 (Log 1022) COMPLETADA: **434 .glb de `assets/3d` sin
   atribución por-archivo (0 CON / 434 SIN / 0 AMBIGUO); el +16 sobre el techo 418 son

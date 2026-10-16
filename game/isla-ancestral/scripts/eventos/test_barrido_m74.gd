@@ -126,11 +126,11 @@ func _b3_reentrada(mgr) -> void:
 	mgr._estado_anual.clear()
 	var ev := _ev("fest_reentrada", {"dia": 10, "mes": 3})
 	mgr._catalogo["fest_reentrada"] = ev
-	var ok1 := mgr.iniciar_participacion(&"fest_reentrada", {})
-	var ok2 := mgr.iniciar_participacion(&"fest_reentrada", {})
+	var ok1: bool = mgr.iniciar_participacion(&"fest_reentrada", {})
+	var ok2: bool = mgr.iniciar_participacion(&"fest_reentrada", {})
 	_ok(ok1 == true, "primera participacion ok")
 	_ok(ok2 == false, "segunda participacion en el mismo ano bloqueada")
-	var r := mgr.puede_participar(&"fest_reentrada")
+	var r: Dictionary = mgr.puede_participar(&"fest_reentrada")
 	_ok(not r["ok"] and String(r["razon"]) == "ya_participado_este_anio", "puede_participar explica por que")
 	_fin("3")
 
@@ -250,10 +250,10 @@ func _b10_sorpresas(mgr) -> void:
 	mgr._sorpresa_semanal_count = 0
 	mgr._ultima_semana_sorpresa = -1
 	# Sin GameTime en headless: semana_dia = 0. Las 3 primeras entran.
-	var ok1 := mgr.registrar_sorpresa(&"sorp_a")
-	var ok2 := mgr.registrar_sorpresa(&"sorp_b")
-	var ok3 := mgr.registrar_sorpresa(&"sorp_c")
-	var ok4 := mgr.registrar_sorpresa(&"sorp_d")
+	var ok1: bool = mgr.registrar_sorpresa(&"sorp_a")
+	var ok2: bool = mgr.registrar_sorpresa(&"sorp_b")
+	var ok3: bool = mgr.registrar_sorpresa(&"sorp_c")
+	var ok4: bool = mgr.registrar_sorpresa(&"sorp_d")
 	_ok(ok1 and ok2 and ok3, "3 sorpresas en la semana ok (limite = 3)")
 	_ok(not ok4, "la 4ta sorpresa de la semana se rechaza")
 	_fin("10")

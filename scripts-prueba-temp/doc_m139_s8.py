@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io
 
 p = "DOCUMENTACION/139-Pre-Alpha/plan-actual/03-Diseno.md"

@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, os, subprocess
 
 d = "Mensajes entre modelos/agnes-3-flash"

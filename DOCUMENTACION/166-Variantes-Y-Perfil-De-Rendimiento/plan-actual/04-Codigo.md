@@ -1,4 +1,4 @@
-﻿# 04-Codigo — M166 · Variantes de Assets por Perfil de Rendimiento
+# 04-Codigo — M166 · Variantes de Assets por Perfil de Rendimiento
 
 **Módulo:** 166 · **Estado:** plan-actual · **Piloto:** cofre ancestral aprobado · **Fecha:** 2026-08-28
 

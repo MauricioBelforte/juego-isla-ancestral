@@ -43,6 +43,13 @@ func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 		_fallos += 1
 		print("  [FALLO] %s %s" % [nombre, detalle])
 
+
+## Object.get() acepta UN solo argumento: el get() de 2 args es el de Dictionary.
+## Llamar p.get(clave, default) sobre un Resource era "Too many arguments for get() call".
+func _prop(p: Resource, clave: String, por_defecto: Variant) -> Variant:
+	var v: Variant = p.get(clave)
+	return por_defecto if v == null else v
+
 func _listar_tres() -> Array:
 	var out: Array = []
 	var dir := DirAccess.open(RUTA_DIR)
@@ -71,11 +78,11 @@ func _test_ids_unicos() -> void:
 	var duplicados: Array = []
 	var archivos := _listar_tres()
 	for a in archivos:
-		var p = load(RUTA_DIR + "/" + a)
+		var p: Resource = load(RUTA_DIR + "/" + a)
 		if p == null:
 			_check("perfil cargable: %s" % a, false, "load() == null")
 			continue
-		var pid: String = str(p.get("id", ""))
+		var pid: String = str(_prop(p, "id", ""))
 		if pid == "":
 			_check("perfil con id no vacío: %s" % a, false)
 			continue
@@ -92,22 +99,22 @@ func _test_campos_obligatorios() -> void:
 	var campos := ["id", "nombre", "especie", "personalidad", "profesion", "hogar_deseado"]
 	var lineas := ["linea_saludo", "linea_despedida", "linea_sueno"]
 	for a in _listar_tres():
-		var p = load(RUTA_DIR + "/" + a)
+		var p: Resource = load(RUTA_DIR + "/" + a)
 		if p == null:
 			continue
-		var pid: String = str(p.get("id", "?"))
+		var pid: String = str(_prop(p, "id", "?"))
 		for c in campos:
-			var v = p.get(c, null)
+			var v = _prop(p, c, null)
 			_check("%s: %s no vacío" % [pid, c], v != null and str(v) != "", "valor=%s" % str(v))
 		for l in lineas:
-			var s = p.get(l, null)
+			var s = _prop(p, l, null)
 			_check("%s: %s no vacía" % [pid, l], s != null and str(s) != "")
 		# gustos/disgustos no vacíos (al menos 1 gusto)
-		var gustos = p.get("gustos", [])
+		var gustos = _prop(p, "gustos", [])
 		_check("%s: al menos 1 gusto" % pid, gustos != null and gustos.size() >= 1)
 		# cumpleaños en rango del calendario Aurora (mes 1-12, dia 1-28)
-		var mes: int = int(p.get("cumpleanos_mes", 0))
-		var dia: int = int(p.get("cumpleanos_dia", 0))
+		var mes: int = int(_prop(p, "cumpleanos_mes", 0))
+		var dia: int = int(_prop(p, "cumpleanos_dia", 0))
 		_check("%s: cumpleaños en rango (mes %d, dia %d)" % [pid, mes, dia],
 			(mes >= 1 and mes <= 12 and dia >= 1 and dia <= 28) or (mes == 0 and dia == 0))
 
@@ -115,11 +122,11 @@ func _test_campos_obligatorios() -> void:
 func _test_rutinas() -> void:
 	print("--- Rutinas diarias ---")
 	for a in _listar_tres():
-		var p = load(RUTA_DIR + "/" + a)
+		var p: Resource = load(RUTA_DIR + "/" + a)
 		if p == null:
 			continue
-		var pid: String = str(p.get("id", "?"))
-		var r = p.get("rutina_diaria", {})
+		var pid: String = str(_prop(p, "id", "?"))
+		var r = _prop(p, "rutina_diaria", {})
 		_check("%s: rutina >= 4 franjas" % pid, r != null and r.size() >= 4, "size=%d" % (r.size() if r != null else -1))
 		if r != null and r.size() > 0:
 			var tiene_dormir: bool = false
@@ -142,5 +149,5 @@ func _test_api_manager() -> void:
 	var p = vm.obtener_perfil("teo_conejo")
 	_check("manager: obtener_perfil('teo_conejo') no es null", p != null)
 	if p != null:
-		_check("manager: teo_conejo.especie == 'conejo'", str(p.get("especie", "")) == "conejo")
+		_check("manager: teo_conejo.especie == 'conejo'", str(_prop(p, "especie", "")) == "conejo")
 	vm.free()

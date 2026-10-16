@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Actualiza referencias internas a los numeros viejos dentro de los archivos renombrados."""
 import io, os, re
 

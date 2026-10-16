@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, os, re
 
 # (canal, numero_viejo, numero_nuevo)

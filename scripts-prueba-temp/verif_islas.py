@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, re, sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 p = 'game/isla-ancestral/scripts/island_catalog.gd'

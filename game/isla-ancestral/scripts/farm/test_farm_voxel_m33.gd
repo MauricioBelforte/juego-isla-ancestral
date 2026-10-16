@@ -110,7 +110,7 @@ func _test_variante_humeda_y_seca() -> void:
 	_check(int(t.get_voxel_tool().get_voxel(pos)) == BlockType.TIERRA_ARADA, "recien arada: variante seca (31)")
 	_inv.agregar_items({"zanahoria": 5})
 	_check(_farm.plant(_farm.obtener_def(&"zanahoria"), pos), "plantar zanahoria")
-	var tile := _farm.get_tile(pos)
+	var tile: CropTile = _farm.get_tile(pos)
 	_check(tile != null, "tile creado")
 	_farm.water(pos)
 	_check(int(t.get_voxel_tool().get_voxel(pos)) == BlockType.TIERRA_ARADA_HUMEDA, "regar -> variante humeda (32)")
@@ -139,14 +139,14 @@ func _test_cosecha_conserva_arada() -> void:
 	_farm.till_tile(pos)
 	_inv.agregar_items({"zanahoria": 5})
 	_farm.plant(_farm.obtener_def(&"zanahoria"), pos)
-	var tile := _farm.get_tile(pos)
+	var tile: CropTile = _farm.get_tile(pos)
 	var d: int = 0
 	while not tile.is_ready() and d < 10:
 		_farm.water(pos)
 		tile.apply_daily_tick(0, false)  # primavera, sin lluvia
 		d += 1
 	_check(tile.is_ready(), "zanahoria llego a LISTA")
-	var items := _farm.harvest(pos)
+	var items: Array = _farm.harvest(pos)
 	_check(not items.is_empty(), "harvest entrega items")
 	_check(_farm.get_tile(pos) == null, "harvest elimina el tile (no es arbol)")
 	_check(int(t.get_voxel_tool().get_voxel(pos)) == BlockType.TIERRA_ARADA, "cosecha: el bloque sigue TIERRA_ARADA (no DIRT)")

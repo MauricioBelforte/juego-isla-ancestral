@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import re, io, sys, json, glob, os
 sys.stdout.reconfigure(encoding='utf-8')
 t = io.open('game/isla-ancestral/scripts/islas/definir_islas.gd', encoding='utf-8').read()
