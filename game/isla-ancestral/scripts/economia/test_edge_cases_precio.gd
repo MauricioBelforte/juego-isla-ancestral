@@ -19,8 +19,38 @@
 # se usa OBJ-COC-001 (item_obj_coc_001.tres, id verificado).
 extends SceneTree
 
-var _fallos := 0
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Autorizado por el director GLM-5.3 Flash-Director
+#     (msg 280, 2026-10-16, hallazgo B). Piso = checks reales MEDIDOS en verde.
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 20
+const _WB_BLOQUES: Array[String] = ["carga", "cantidad_invalida", "mayorista", "venta", "clamp", "bandas_catalogo", "registro_venta", "reseteo_dia"]
 var _checks := 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado := false
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M38 edge cases: %d checks, %d fallos ===" % [_checks, _fallos])
+	if _fallos > 0:
+		print("FALLOS DETECTADOS")
+	else:
+		print("EDGE CASES DE PRECIOS OK")
+	quit(1 if _fallos > 0 else 0)
+
+var _fallos := 0
 var _pm = null
 var _db = null
 
@@ -29,11 +59,12 @@ const ITEM := "OBJ-COC-001"
 func _initialize() -> void:
 	print("=== TEST EDGE CASES DE PRECIOS (M38) ===")
 	call_deferred("_ejecutar")
+	call_deferred("_summary")
 
 func _ejecutar() -> void:
 	var cls: Script = load("res://scripts/economia/price_manager.gd")
 	if cls == null or not cls.can_instantiate():
-		print("[FAIL] no se pudo cargar price_manager.gd"); quit(1); return
+		print("[FAIL] no se pudo cargar price_manager.gd"); _summary(); return
 	_pm = cls.new()
 	_db = root.get_node_or_null("ItemDatabase")
 	_pm._catalog = _CatFake.new()
@@ -41,31 +72,36 @@ func _ejecutar() -> void:
 	# Precio controlado sobre un item REAL. Guardamos el valor original.
 	var item = _db.get_item(ITEM)
 	if item == null:
-		print("[FAIL] item %s no existe en ItemDatabase" % ITEM); quit(1); return
+		print("[FAIL] item %s no existe en ItemDatabase" % ITEM); _summary(); return
 	var pc_orig := int(item.precio_compra)
 	var pv_orig := int(item.precio_venta)
 	item.set("precio_compra", 100)
 	item.set("precio_venta", 60)
+	_fin("carga")
 
 	# ── Cantidad inválida (0 / negativa) se comporta como minorista ──
 	_check("minorista cantidad=1 == base (100)", int(_pm.precio_compra_vigente(ITEM, "", 1)) == 100)
 	_check("cantidad=0 == minorista (100)", int(_pm.precio_compra_vigente(ITEM, "", 0)) == 100)
 	_check("cantidad=-3 == minorista (100)", int(_pm.precio_compra_vigente(ITEM, "", -3)) == 100)
+	_fin("cantidad_invalida")
 
 	# ── Mayorista por tramos (control) ──
 	_check("volumen 5 → 5% (95)", int(_pm.precio_compra_vigente(ITEM, "", 5)) == 95)
 	_check("volumen 10 → 10% (90)", int(_pm.precio_compra_vigente(ITEM, "", 10)) == 90)
 	_check("volumen 20 → 15% (85)", int(_pm.precio_compra_vigente(ITEM, "", 20)) == 85)
 	_check("volumen 50 → tope 15% (85)", int(_pm.precio_compra_vigente(ITEM, "", 50)) == 85)
+	_fin("mayorista")
 
 	# ── Venta: estable, sin bonus por volumen (anti-arbitraje) ──
 	var v1 := int(_pm.precio_venta_vigente(ITEM))
 	_check("venta definida (base*0.6 = 60)", v1 == 60)
 	_check("venta >= 1 siempre", v1 >= 1)
+	_fin("venta")
 
 	# ── Clamp defensivo: precio nunca 0/negativo incluso con descuento sobre base 1 ──
 	item.set("precio_compra", 1)
 	_check("precio base 1 con descuento → clamp a >=1", int(_pm.precio_compra_vigente(ITEM, "", 20)) >= 1)
+	_fin("clamp")
 	# Restaurar valores originales del item real
 	item.set("precio_compra", pc_orig)
 	item.set("precio_venta", pv_orig)
@@ -76,6 +112,7 @@ func _ejecutar() -> void:
 	_check("raro → 2", _pm.limite_ventas_dia("EDGE-RARO") == 2)
 	_check("epico → 1", _pm.limite_ventas_dia("EDGE-EPICO") == 1)
 	_check("item sin banda/catálogo → default 3", _pm.limite_ventas_dia("EDGE-DEFAULT") == 3)
+	_fin("bandas_catalogo")
 
 	# ── registrar_venta + rebaja por límite diario ──
 	_check("sin ventas: no rebajado", not _pm.precio_rebajado_hoy("EDGE-EPICO"))
@@ -83,18 +120,16 @@ func _ejecutar() -> void:
 	_check("epico en límite (1): no rebajado", not _pm.precio_rebajado_hoy("EDGE-EPICO"))
 	_pm.registrar_venta("EDGE-EPICO", 1, 1)
 	_check("epico excede límite (2): rebajado", _pm.precio_rebajado_hoy("EDGE-EPICO"))
+	_fin("registro_venta")
 
 	# ── Reseteo por cambio de día ──
 	_pm.registrar_venta("EDGE-DEFAULT", 9, 2)  # cambia al día 2; primera venta 9 → supera límite 3
 	_check("día 2 con 9 ventas (1ra del día): rebajado", _pm.precio_rebajado_hoy("EDGE-DEFAULT"))
 	_pm.registrar_venta("EDGE-DEFAULT", 1, 3)  # nuevo día 3: contador se resetea a 0 antes de sumar 1
 	_check("día 3 con 1 venta: NO rebajado (contador reseteado)", not _pm.precio_rebajado_hoy("EDGE-DEFAULT"))
+	_fin("reseteo_dia")
 
-	print("=== Resumen: %d checks, %d fallos ===" % [_checks, _fallos])
-	if _fallos > 0:
-		print("FALLOS DETECTADOS"); quit(1)
-	else:
-		print("EDGE CASES DE PRECIOS OK"); quit(0)
+	_summary()
 
 func _check(nombre: String, cond: bool) -> void:
 	_checks += 1

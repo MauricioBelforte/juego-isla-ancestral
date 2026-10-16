@@ -4,33 +4,66 @@ extends SceneTree
 ## + RF13 reputacion + RF14 ferias. Uso:
 ## godot --headless --path game/isla-ancestral --script res://scripts/economia/test_mercado_estacion_ferias.gd
 
-var _fallos := 0
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Autorizado por el director GLM-5.3 Flash-Director
+#     (msg 280, 2026-10-16, hallazgo B). Piso = checks reales MEDIDOS en verde.
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 23
+const _WB_BLOQUES: Array[String] = ["carga", "rf11_base", "rf9_estacional", "rf14_feria", "rf11_reforzado", "rf13_reputacion"]
 var _checks := 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado := false
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M38 mercado: %d checks, %d fallos ===" % [_checks, _fallos])
+	if _fallos > 0:
+		print("FALLOS DETECTADOS")
+	else:
+		print("MERCADO ESTACION + ANTI-GRIND + REPUTACION + FERIAS OK")
+	quit(1 if _fallos > 0 else 0)
+
+var _fallos := 0
 var _pm = null
 var _eco = null
 
 func _initialize() -> void:
 	print("=== TEST MERCADO: ESTACION + ANTI-GRIND + REPUTACION + FERIAS (M38 iter.3) ===")
 	call_deferred("_ejecutar")
+	call_deferred("_summary")
 
 func _ejecutar() -> void:
 	var cls: Script = load("res://scripts/economia/price_manager.gd")
 	if cls == null or not cls.can_instantiate():
-		print("[FAIL] no se pudo cargar price_manager.gd"); quit(1); return
+		print("[FAIL] no se pudo cargar price_manager.gd"); _summary(); return
 	_pm = cls.new()
 	_pm._catalog = _CatFake.new()
 	_eco = root.get_node_or_null("EconomyManager")
 	_check("autoload EconomyManager presente", _eco != null)
 	if _eco == null:
-		quit(1); return
+		_summary(); return
 
 	var compra_base: int = int(_pm.precio_compra_vigente("ECO-NO-SEASON"))
 	var venta_base: int = int(_pm.precio_venta_vigente("ECO-NO-SEASON"))
+	_fin("carga")
 
 	# ── RF11: sin estacion/feria, precios base estables ──
 	_check("compra base 100 sin ajustes", compra_base == 100)
 	_check("venta base 60 (tope 60%) sin ajustes", venta_base == 60)
 	_check("RF11: venta SIEMPRE menor que compra (anti-grind)", venta_base < compra_base)
+	_fin("rf11_base")
 
 	# ── RF9: ajuste estacional ──
 	_pm.forzar_estacion("verano")
@@ -45,6 +78,7 @@ func _ejecutar() -> void:
 	_pm.forzar_estacion("")
 	var compra_reset: int = int(_pm.precio_compra_vigente("ECO-NO-SEASON"))
 	_check("RF9 reset: compra vuelve a 100", compra_reset == 100)
+	_fin("rf9_estacional")
 
 	# ── RF14: precios especiales de feria ──
 	_pm.aplicar_precios_feria(1.2, 1.2)
@@ -62,6 +96,7 @@ func _ejecutar() -> void:
 	var venta_limp: int = int(_pm.precio_venta_vigente("ECO-NO-SEASON"))
 	_check("RF14 limpiar feria vuelve a 100/60", compra_limp == 100 and venta_limp == 60)
 	_check("RF14 feria activa = false tras limpiar", not _pm.esta_feria_activa())
+	_fin("rf14_feria")
 
 	# ── RF11 reforzado: feria agresiva en venta NUNCA supera la compra ──
 	_pm.aplicar_precios_feria(1.0, 5.0)
@@ -69,6 +104,7 @@ func _ejecutar() -> void:
 	var venta_agr: int = int(_pm.precio_venta_vigente("ECO-NO-SEASON"))
 	_check("RF11 feria x5 en venta limitada a la compra (anti-rentable)", venta_agr <= compra_agr and venta_agr == compra_agr)
 	_pm.limpiar_precios_feria()
+	_fin("rf11_reforzado")
 
 	# ── RF13 (parcial): reputacion ──
 	_check("reputacion inicial 50", int(_eco.get_reputacion()) == 50)
@@ -87,14 +123,9 @@ func _ejecutar() -> void:
 	var antes: int = int(_eco.get_reputacion())
 	_eco.depositar_monedas(1)
 	_check("depositar suma +1 de reputacion", int(_eco.get_reputacion()) == antes + 1)
+	_fin("rf13_reputacion")
 
-	print("=== Resumen: %d checks, %d fallos ===" % [_checks, _fallos])
-	if _fallos > 0:
-		print("FALLOS DETECTADOS")
-		quit(1)
-	else:
-		print("MERCADO ESTACION + ANTI-GRIND + REPUTACION + FERIAS OK")
-		quit(0)
+	_summary()
 
 func _check(nombre: String, cond: bool) -> void:
 	_checks += 1

@@ -9,39 +9,74 @@ extends SceneTree
 ##  - item sin override -> default 3
 ##  - Registro de ventas: exceder el limite -> precio_rebajado_hoy
 
-var _fallos := 0
+# --- Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS MEDIDO
+#     + _summary() diferido. Autorizado por el director GLM-5.3 Flash-Director
+#     (msg 280, 2026-10-16, hallazgo B). Piso = checks reales MEDIDOS en verde.
+#     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
+const CHECKS_MINIMOS := 11
+const _WB_BLOQUES: Array[String] = ["carga", "bandas", "default", "variantes", "registro"]
 var _checks := 0
+var _wb_vistos: Dictionary = {}
+var _wb_cerrado := false
+
+func _fin(nombre: String) -> void:
+	_wb_vistos[nombre] = true
+
+func _summary() -> void:
+	if _wb_cerrado:
+		return
+	_wb_cerrado = true
+	for b in _WB_BLOQUES:
+		if not _wb_vistos.has(b):
+			_fallos += 1
+			print("[FAIL] bloque %s NO se ejecuto (posible SCRIPT ERROR)" % b)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== Resumen M38 topes: %d checks, %d fallos ===" % [_checks, _fallos])
+	if _fallos > 0:
+		print("FALLOS DETECTADOS")
+	else:
+		print("TOPES POR BANDA OK")
+	quit(1 if _fallos > 0 else 0)
+
+var _fallos := 0
 var _pm = null
 
 func _initialize() -> void:
 	print("=== TEST TOPES POR BANDA DE RAREZA (M38) ===")
 	call_deferred("_ejecutar")
+	call_deferred("_summary")
 
 func _ejecutar() -> void:
 	var cls: Script = load("res://scripts/economia/price_manager.gd")
 	if cls == null or not cls.can_instantiate():
 		print("[FAIL] no se pudo cargar price_manager.gd")
-		quit(1)
+		_summary()
 		return
 	_pm = cls.new()
 
 	# Inyeccion de un catalogo falso que expone get_price_def(item_id) con el
 	# campo "rareza", igual que EconomyPriceCatalog.get_price_def (M38).
 	_pm._catalog = _CatFake.new()
+	_fin("carga")
 
 	# Via 1: el catalogo define la banda explicitamente.
 	_check("comun -> 3", _pm.limite_ventas_dia("item_comun") == 3)
 	_check("poco_comun -> 3", _pm.limite_ventas_dia("item_poco") == 3)
 	_check("raro -> 2", _pm.limite_ventas_dia("item_raro") == 2)
 	_check("epico -> 1", _pm.limite_ventas_dia("item_epico") == 1)
+	_fin("bandas")
 
 	# Via 2: sin override -> default 3.
 	_check("item sin override -> default 3", _pm.limite_ventas_dia("no_existe") == 3)
 	_check("item vacio -> default 3", _pm.limite_ventas_dia("") == 3)
+	_fin("default")
 
 	# Normalizacion de variantes de escritura.
 	_check("variante 'legendario' -> 1", _pm.limite_ventas_dia("item_legend") == 1)
 	_check("variante 'uncommon' -> 3", _pm.limite_ventas_dia("item_uncommon") == 3)
+	_fin("variantes")
 
 	# Registro de ventas: rebaja cuando se excede el limite.
 	_pm.registrar_venta("item_epico", 2, 1)
@@ -50,14 +85,9 @@ func _ejecutar() -> void:
 	_check("comun tras 2 ventas -> NO rebajado", not _pm.precio_rebajado_hoy("item_comun"))
 	_pm.registrar_venta("item_comun", 2, 1)
 	_check("comun tras 4 ventas -> rebajado", _pm.precio_rebajado_hoy("item_comun"))
+	_fin("registro")
 
-	print("=== Resumen: %d checks, %d fallos ===" % [_checks, _fallos])
-	if _fallos > 0:
-		print("FALLOS DETECTADOS")
-		quit(1)
-	else:
-		print("TOPES POR BANDA OK")
-		quit(0)
+	_summary()
 
 func _check(nombre: String, cond: bool) -> void:
 	_checks += 1
