@@ -10,14 +10,16 @@ class_name ThemeUx
 const BASE_SIZE := Vector2i(1920, 1080)
 
 ## Paleta pastel
-const COLOR_BG_ARENA := Color(0.11, 0.12, 0.18, 0.94)  # D102: fondo noche opaco (antes arena clara ilegible con texto blanco)
+const COLOR_BG_ARENA := Color(0.14, 0.16, 0.24, 0.94)  # D102: panel Medio dark (contraste con boton)  # D102: fondo noche opaco (antes arena clara ilegible con texto blanco)
 const COLOR_ACCENT_OCRE := Color(0.87, 0.66, 0.33)     # D102: acento ambar mas vivo
 const COLOR_TEXT_DARK := Color(0.94, 0.92, 0.85)       # D102: texto cream claro (dark theme)
 const COLOR_HIGHLIGHT_GOLD := Color(0.92, 0.76, 0.40)  # D102: dorado mas vivo
 const COLOR_HOVER := Color(0.20, 0.22, 0.32)           # D102: hover dark
-const COLOR_PRESSED := Color(0.16, 0.17, 0.26)         # D102: presionado dark
+const COLOR_PRESSED := Color(0.13, 0.14, 0.22)         # D102: presionado dark
 const COLOR_DISABLED := Color(0.40, 0.42, 0.50)        # D102: deshabilitado dark
 const COLOR_FOCUS_RING := Color(0.92, 0.76, 0.40, 0.8) # D102: anillo dorado vivo
+const COLOR_BTN_ELEVADO := Color(0.19, 0.21, 0.32)  # D102: boton mas oscuro que el panel (inversion del contraste)     # D102: boton elevado (mas claro que el panel para contraste)
+const COLOR_BTN_HOVER := Color(0.27, 0.30, 0.44)  # D102: hover proporcional       # D102: hover elevado
 
 ## M21 (D L93): colores de texto por tipo de hablante, coherentes con la paleta
 ## dark del HUD. Fuente unica de verdad para el color del dialogo.
@@ -259,7 +261,7 @@ func _setup_panel_styles() -> void:
 func _setup_button_styles() -> void:
 	# Botón cozy normal
 	var btn_normal := StyleBoxFlat.new()
-	btn_normal.bg_color = COLOR_BG_ARENA
+	btn_normal.bg_color = COLOR_BTN_ELEVADO  # D102: contraste vs panel
 	btn_normal.border_color = COLOR_ACCENT_OCRE
 	btn_normal.set_border_width_all(1)
 	btn_normal.set_corner_radius_all(8)
@@ -268,7 +270,7 @@ func _setup_button_styles() -> void:
 
 	# Hover
 	var btn_hover := StyleBoxFlat.new()
-	btn_hover.bg_color = COLOR_HOVER
+	btn_hover.bg_color = COLOR_BTN_HOVER  # D102: hover elevado
 	btn_hover.border_color = COLOR_ACCENT_OCRE
 	btn_hover.set_border_width_all(2)
 	btn_hover.set_corner_radius_all(8)
@@ -414,7 +416,7 @@ func _aplicar_estilos_hud_runtime() -> void:
 func _on_nodo_hud_agregado(nodo: Node) -> void:
 	if nodo.name == "ControlsLabel" and nodo is Label:
 		var sb := StyleBoxFlat.new()
-		sb.bg_color = Color(0.09, 0.10, 0.15, 0.88)
+		sb.bg_color = Color(0.14, 0.16, 0.24, 0.88)
 		sb.set_corner_radius_all(8)
 		sb.border_color = Color(0.87, 0.66, 0.33, 0.45)
 		sb.set_border_width_all(1)

@@ -12,7 +12,7 @@ const SLOT_COUNT := 8
 const SLOT_SIZE := Vector2(40, 40)
 const SLOT_SPACING := 4
 const HIGHLIGHT_COLOR := Color(0.92, 0.76, 0.40, 0.9)  # D102: dorado vivo
-const SLOT_BG := Color(0.09, 0.10, 0.15, 0.92)  # D102: opaco dark (el 0.7 translucido se veia beige sobre la arena)
+const SLOT_BG := Color(0.14, 0.16, 0.24, 0.92)  # D102: opaco dark (el 0.7 translucido se veia beige sobre la arena)
 
 ## ── Estado ──────────────────────────────────────────────
 var _selected_slot: int = 0

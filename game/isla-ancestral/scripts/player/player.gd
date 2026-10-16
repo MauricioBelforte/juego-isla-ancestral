@@ -1057,7 +1057,7 @@ func _create_hotbar_hud() -> void:
 		slot.custom_minimum_size = Vector2(48, 48)
 		slot.name = "Slot_%d" % i
 		var slot_sb := StyleBoxFlat.new()
-		slot_sb.bg_color = Color(0.09, 0.10, 0.15, 0.92)  # D102: opaco (el beta 0.7 se veia beige sobre la arena)
+		slot_sb.bg_color = Color(0.14, 0.16, 0.24, 0.92)  # D102: opaco (el beta 0.7 se veia beige sobre la arena)
 		slot_sb.set_corner_radius_all(8)
 		slot_sb.border_color = Color(0.85, 0.65, 0.30, 0.35)  # D102: borde ambar
 		slot_sb.set_border_width_all(2)

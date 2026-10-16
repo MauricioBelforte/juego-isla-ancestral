@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func _crear_ui() -> void:
 	var bg := ColorRect.new()
-	bg.color = Color(0.09, 0.10, 0.15)
+	bg.color = Color(0.14, 0.16, 0.24)
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	bg.name = "Fondo"
 	add_child(bg)
