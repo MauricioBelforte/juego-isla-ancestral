@@ -89,7 +89,11 @@ EXCLUIDOS_ARCH = ('./AGENTS.md', './scripts/verify_final.py',
                   # Script de PRUEBA de atria-dawn-s2 (untracked: no existe en
                   # CI). Contiene literales mojibake A PROPOSITO en su tabla de
                   # deteccion, igual que fix_encoding.py. Medido el 2026-09-24.
-                  './DOCUMENTACION/TAREAS-POR-MODELO/atria-dawn-s2/scripts-prueba/verificar_cierre.py')
+                  './DOCUMENTACION/TAREAS-POR-MODELO/atria-dawn-s2/scripts-prueba/verificar_cierre.py',
+                  # Helper one-shot de marcado de M37 (agnes, 2026-10-08): su unica
+                  # secuencia mojibake vive en la regex de DETECCION (L36) -> A
+                  # PROPOSITO, familia fix_encoding.py. Medido el 2026-10-17.
+                  './scripts/t_m37_mark.py')
 EXCLUIDOS_DIR = ('./Obsoletos', './scripts/backups', './out',
                  './.workbuddy-ai', './.git', './node_modules', './.godot',
                  './addons', './bin', './Logs',

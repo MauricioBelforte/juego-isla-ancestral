@@ -23,6 +23,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BACKUP_ROOT = os.path.join(ROOT, "Obsoletos",
                            "encoding-backup-" + datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
 
+def _longpath(p):
+    p = os.path.abspath(p)
+    if os.name == "nt" and len(p) >= 240:
+        return "\\\\?\\" + p
+    return p
+
 TEXT_EXTS = {".md", ".txt", ".py", ".gd", ".cs", ".json", ".tscn", ".tres",
              ".cfg", ".csv", ".yml", ".yaml", ".ini", ".sh", ".bat", ".html",
              ".css", ".js", ".ts", ".gdns", ".gdn", ".import"}
@@ -30,7 +36,7 @@ TEXT_EXTS = {".md", ".txt", ".py", ".gd", ".cs", ".json", ".tscn", ".tres",
 # Carpetas excluidas del escaneo.
 EXCLUDE_DIRS = {".git", "Library", "Temp", "obj", ".godot", "capturas",
                 "node_modules", "Obsoletos", "Logs", ".import", "__pycache__",
-                ".venv"}
+                ".venv", ".kilo"}
 
 # Exclusion SOLO en la raiz del repo. Antes esta lista se aplicaba por nombre
 # de directorio en cualquier profundidad, y eso dejaba fuera
@@ -250,7 +256,7 @@ def main():
     print("-" * 60)
     for full in iter_files():
         try:
-            with open(full, "rb") as f:
+            with open(_longpath(full), "rb") as f:
                 raw = f.read()
         except Exception as e:
             print("  [ERR lectura] %s -> %s" % (full, e))
@@ -283,9 +289,9 @@ def main():
                 if not no_backup:
                     relp = os.path.relpath(full, ROOT)
                     bp = os.path.join(BACKUP_ROOT, relp)
-                    os.makedirs(os.path.dirname(bp), exist_ok=True)
-                    shutil.copy2(full, bp)
-                with open(full, "wb") as f:
+                    os.makedirs(_longpath(os.path.dirname(bp)), exist_ok=True)
+                    shutil.copy2(_longpath(full), _longpath(bp))
+                with open(_longpath(full), "wb") as f:
                     f.write(new)
     print("Resumen por categoria:")
     for k, v in sorted(stats.items()):

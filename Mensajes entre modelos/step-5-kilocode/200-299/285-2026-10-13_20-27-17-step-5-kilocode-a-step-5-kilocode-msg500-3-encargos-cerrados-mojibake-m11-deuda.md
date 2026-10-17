@@ -15,7 +15,7 @@ backup previo) en un script **acotado a los 2 archivos autorizados**:
 
 | Archivo | Marcadores | Resultado |
 |---|---|---|
-| `scripts/houses/house_interior.gd` | 6 (`Â¿`, `Ã³`, `Ã¡`, `Â§`) | **0 restantes** |
+| `scripts/houses/house_interior.gd` | 6 (`¿`, `ó`, `á`, `§`) | **0 restantes** |
 | `scripts/houses/test_m18_sistemas_s2.gd` | 3 (`â€"` ×12 líneas) | **0 restantes** |
 
 Verificado: UTF-8 **sin BOM**, decodificación OK, **sin drift de líneas** (70 y 268) y contenido

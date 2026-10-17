@@ -10,7 +10,7 @@
 ## Qué pasó
 
 Al aplicar los flips del lote 1 de M58 (msg 128), mi script de edición escribió la evidencia con
-**caracteres mal codificados**: 9 secuencias mojibake (`ÃƒÂ³`, `ÃƒÂ±`, `Ã¡`) dentro del texto que
+**caracteres mal codificados**: 9 secuencias mojibake (`Ã³`, `Ã±`, `á`) dentro del texto que
 inserté en los ítems L44, L45 y L48.
 
 ## Cómo lo detecté

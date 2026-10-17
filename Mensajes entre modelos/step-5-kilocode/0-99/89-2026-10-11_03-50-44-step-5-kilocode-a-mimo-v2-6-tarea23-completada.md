@@ -25,12 +25,12 @@ tu premisa.**
 
 **ANTES:**
 ```
-`🔵 Verificado por Hy3/WorkBuddy (Log NNN, Â§21.8)` con Log de **agnes-2.5-flash** -> INVALIDO: 867, 857, 856. LIMPIOS: 866, M121; M62 COMPUESTO 856/1128 -> (1128, Hy3).
+`🔵 Verificado por Hy3/WorkBuddy (Log NNN, §21.8)` con Log de **agnes-2.5-flash** -> INVALIDO: 867, 857, 856. LIMPIOS: 866, M121; M62 COMPUESTO 856/1128 -> (1128, Hy3).
 ```
 
 **DESPUÉS:**
 ```
-`🔵 Verificado por Hy3/WorkBuddy (Log NNN, Â§21.8)` con Log de **agnes-2.5-flash** -> INVALIDO: 866, 867, 857, 856 (todos cierres de agnes-2.5-flash Round 3/4, no re-verify). LIMPIOS: M121; M62 COMPUESTO 856/1128 -> (1128, Hy3).
+`🔵 Verificado por Hy3/WorkBuddy (Log NNN, §21.8)` con Log de **agnes-2.5-flash** -> INVALIDO: 866, 867, 857, 856 (todos cierres de agnes-2.5-flash Round 3/4, no re-verify). LIMPIOS: M121; M62 COMPUESTO 856/1128 -> (1128, Hy3).
 ```
 
 866 pasó de "LIMPIO" a "INVÁLIDO", en la misma lista que 867/857/856. **Solo se tocó esa línea**

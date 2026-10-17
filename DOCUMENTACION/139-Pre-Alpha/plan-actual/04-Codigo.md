@@ -113,7 +113,7 @@
 
 ## 7. Arquitectura de arranque (implementada 2026-10-14 por step-5-kilocode)
 
-Cierra los 4 primeros ítems `[ ]` de la secciÃ³n 1 del `05-Checklist.md` (Arquitectura de la
+Cierra los 4 primeros ítems `[ ]` de la sección 1 del `05-Checklist.md` (Arquitectura de la
 fase, M07) con artefactos reales en disco.
 
 ### 7.1 Contratos de interfaces entre capas — COMPLETO
@@ -122,14 +122,14 @@ fase, M07) con artefactos reales en disco.
 |---|---|---|
 | `IInteractable` | `scripts/interfaces/i_interactable.gd` | preexistente (M70, 2026-09-01) |
 | `ITienda` | `scripts/interfaces/i_tienda.gd` | **creado** — comprar/vender/precio/stock/horario |
-| `ITemplo` | `scripts/interfaces/i_templo.gd` | **creado** — ofrendar/bendiciÃ³n/puzzle |
+| `ITemplo` | `scripts/interfaces/i_templo.gd` | **creado** — ofrendar/bendición/puzzle |
 | `IViajable` | `scripts/interfaces/i_viajable.gd` | **creado** — solicitar/cancelar/progreso/destinos |
 
 Las 3 nuevas siguen el patrón de `IInteractable` v2: métodos con default neutro para no
 romper implementadores parciales. Consumidores previstos identificados: `ShopManager`/`shop.gd`
 (M39), servicio de viajes `travel_service.gd` (M28) y templos (M26, sin script aún).
 
-### 7.2 `SesionMaster` — DEFINIDO, activaciÃ³n pendiente
+### 7.2 `SesionMaster` — DEFINIDO, activación pendiente
 
 `scripts/core/sesion_master.gd` define el único orquestador de arranque: máquina de estados
 `INACTIVA → INICIALIZANDO → ACTIVA → CERRANDO → CERRADA`, inicialización por capas
@@ -139,7 +139,7 @@ romper implementadores parciales. Consumidores previstos identificados: `ShopMan
 **Estado honesto:** el juego hoy arranca con `run/main_scene="res://scenes/main_island.tscn"` +
 ~20 autoloads en `project.godot`; **no hay SesionMaster activo**. El script es la definición del
 contrato. Activarlo como autoload requiera validación en runtime (no hecha en este frente para
-no romper producciÃ³n), por eso el ítem del checklist quedÃ³ `[ ]` con esa nota.
+no romper producción), por eso el ítem del checklist quedó `[ ]` con esa nota.
 
 ### 7.3 Flujo de sesión documentado
 
@@ -153,6 +153,6 @@ Si un servicio de capa Infra/World/Managers falla al inicializar, la sesión **n
 1. Se registra el fallo (`GameLogger` + telemetría M105) con el nombre del servicio y el motivo.
 2. El servicio queda marcado como degradado; sus consumidores reciben el default neutro del contrato.
 3. Si el fallo es de guardado (`SaveManager`/M59), se ofrece recuperar copia o empezar partida nueva
-   (patrÃ³n ya usado por `integridad_save`/M66 y por el antí-softlock `SoftlockGuard`).
+   (patrón ya usado por `integridad_save`/M66 y por el antí-softlock `SoftlockGuard`).
 4. La sesión continú en modo degradado; el GONOGO de fase (M140) exige que los fallos
    degradados estén documentados antes de pasar a Alpha.

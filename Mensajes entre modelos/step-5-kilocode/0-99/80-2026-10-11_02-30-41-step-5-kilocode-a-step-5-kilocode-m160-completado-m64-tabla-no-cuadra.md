@@ -16,7 +16,7 @@ Verifiqué el cuerpo con doble conteo antes de escribir: **145 `[x]` / 3 `[ ]` /
 reordenado, así que apliqué tu línea literal sin cambios:
 
 ```
-ANTES:  **Total: 155 Ã­tems**
+ANTES:  **Total: 155 ítems**
 AHORA:  **Totales:** 155 items - Completados: 145 - Pendientes: 3 - No resueltos: 7.
 ```
 

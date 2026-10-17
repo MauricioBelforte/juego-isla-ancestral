@@ -1,6 +1,6 @@
 > **RECONCILIADO 2026-09-18 (hy3 / WorkBuddy):** se restauran los [x] verificados por mimo-v2.5 (2026-09-16, item por item) con evidencia de codigo real + tests headless Godot 4.7.2 (EXIT 0, 0 SCRIPT ERROR). La reversión e261ced (2026-09-14) se anula SOLO para ítems con [S] (verificado por mimo). Los [M] (dependencia externa) y sin-tag quedan en [?]. Véase Log hy3.
 
-ï»¿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 49: Iluminación
@@ -102,10 +102,10 @@
 ## M. RF12 — Sombras
 
 - [x] Definir cascades ≤ 4 (por preset M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "cascades <= 4 (preset bajo: 2, medio: 3, alto: 4 — M90)" — verificado (step-5-kilocode, 2026-10-12, Log 1716): `03-Diseno.md:91`: cascades ≤ 4 (bajo 2, medio 3, alto 4).
-- [x] Definir distancia dinÃ¡mica de sombras (45 m / 25 m bajo) [M] — CORREGIDO al valor real del código (atria-dawn-s2, 2026-10-12, Log 1759, orden del director): `directional_shadow_max_distance = 120` fijo, sin presets por calidad (M90 no los proporcionó); los 45 m/25 m del ítem original NO están implementados. — iter. 1 implementada (Log 642, glm-5.3-flash / Kilo Code): verificado visualmente â€” iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: directional_shadow_max_distance=120 (base; por-preset iter. 2) **flip 2026-10-16 (GLM-5.3 Flash-Director): confirmado validate_lighting_m49 L138 (<=200) y valor 120 fijo**
+- [x] Definir distancia dinámica de sombras (45 m / 25 m bajo) [M] — CORREGIDO al valor real del código (atria-dawn-s2, 2026-10-12, Log 1759, orden del director): `directional_shadow_max_distance = 120` fijo, sin presets por calidad (M90 no los proporcionó); los 45 m/25 m del ítem original NO están implementados. — iter. 1 implementada (Log 642, glm-5.3-flash / Kilo Code): verificado visualmente — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: directional_shadow_max_distance=120 (base; por-preset iter. 2) **flip 2026-10-16 (GLM-5.3 Flash-Director): confirmado validate_lighting_m49 L138 (<=200) y valor 120 fijo**
 - [x] Definir bias voxel fino sin acne [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "shadow_bias 0.005-0.01, normal_bias 0.4 (calibrar; sin acne)" [hy3-validado 2026-09-18: OK shadow_bias 0.050, shadow_normal_bias 1.5, shadow max_distance 120]
 - [x] Definir resolución de shadow atlas por preset (1024/2048) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2: "Shadow atlas: 1024 (bajo/medio), 2048 (alto)" — verificado (step-5-kilocode, 2026-10-12, Log 1716): `03-Diseno.md:92`: 1024 (bajo/medio), 2048 (alto).
-- [?] Definir sombras suaves (PCF â‰¥ 4 samples) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md soft shadows required; PCF 4+ samples documented; validate_lighting_m49.gd verifica quality
+- [?] Definir sombras suaves (PCF ≥ 4 samples) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md soft shadows required; PCF 4+ samples documented; validate_lighting_m49.gd verifica quality
 - [x] Prohibir siluetas negras (ambiente de relleno) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: ambient 0.85 + fog sutil eliminan negros absolutos (verificado en captura) [hy3-validado 2026-09-18: OK ambient cálido R=0.85 G=0.78 B=0.68 (elimina negros absolutos)]
 
 ## N. RF13 — Optimización de luces
@@ -162,10 +162,10 @@
 
 - [x] Riesgo de overdraw en pueblo → pool + topes + distancia [M] — mitigado e implementado (atria-dawn-s2, 2026-10-12, Log 1759): `light_pool.gd` max 20 dinámicas, ≤6 sombra, descarte 30 m; suite 44 checks. -- agnes-2.5-flash 2026-09-12: mitigated by pool design (max 20 dynamic lights), distance culling (30m), shadow limits (<=6)
 - [x] Riesgo de acne voxel → bias fino + validación visual [M] — mitigado (atria-dawn-s2, 2026-10-12, Log 1759): shadow_bias 0.050 + shadow_normal_bias 1.5 (hy3-validado Log 1045); validate_lighting_m49.gd 0 fallos; capturas sin acne (Log 642). -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 bias 0.005-0.01; validate_lighting_m49.gd checks shadow quality
-- [x] Riesgo de bake desactualizado â†’ CI con bake + versiÃ³n en registro [M] -- agnes-2.5-flash 2026-09-12: CI M118 triggers bake on changes; version tracked in lighting_budget.json — **artefacto NO existe** (atria-dawn-s2, 2026-10-12, Log 1759): 0 hits en disco; la dependencia del registro es teórica. **flip 2026-10-16 (GLM-5.3 Flash-Director): artefacto creado data/light/lighting_budget.json (7 llaves, JSON valido)**
+- [x] Riesgo de bake desactualizado → CI con bake + versión en registro [M] -- agnes-2.5-flash 2026-09-12: CI M118 triggers bake on changes; version tracked in lighting_budget.json — **artefacto NO existe** (atria-dawn-s2, 2026-10-12, Log 1759): 0 hits en disco; la dependencia del registro es teórica. **flip 2026-10-16 (GLM-5.3 Flash-Director): artefacto creado data/light/lighting_budget.json (7 llaves, JSON valido)**
 - [?] Riesgo de snaps entre franjas → easing 3 s [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §2.1: "easing de valores actuales → nuevos (3 s; sin snaps)"
 - [x] Riesgo de cuevas ilegibles → piso 0.15 + niebla diferenciada [M] — mitigado (atria-dawn-s2, 2026-10-12, Log 1759): ambiente ≥ 0.15 validado por `_test_ambient_minimum` (validate_lighting_m49.gd, 0 fallos); fog_curve.tres existe en data/light/. -- agnes-2.5-flash 2026-09-12: mitigated by piso 0.15 minimum + fog_curve.tres per biome
-- [x] Riesgo de sombras caras â†’ distancias por preset + pruebas M90 [M] -- agnes-2.5-flash 2026-09-12: shadow distance capped by preset (bajo:25m, medio/alto:45m); M90 validates — CORREGIDO al valor real (atria-dawn-s2, 2026-10-12, Log 1759, orden del director): `directional_shadow_max_distance = 120` fijo, sin presets por calidad; el "cap por preset (bajo:25m, medio/alto:45m)" NO está implementado (M90 pendiente). **flip 2026-10-16 (GLM-5.3 Flash-Director): confirmado validate_lighting_m49 L138 (<=200) y valor 120 fijo**
+- [x] Riesgo de sombras caras → distancias por preset + pruebas M90 [M] -- agnes-2.5-flash 2026-09-12: shadow distance capped by preset (bajo:25m, medio/alto:45m); M90 validates — CORREGIDO al valor real (atria-dawn-s2, 2026-10-12, Log 1759, orden del director): `directional_shadow_max_distance = 120` fijo, sin presets por calidad; el "cap por preset (bajo:25m, medio/alto:45m)" NO está implementado (M90 pendiente). **flip 2026-10-16 (GLM-5.3 Flash-Director): confirmado validate_lighting_m49 L138 (<=200) y valor 120 fijo**
 
 ## V. Integraciones
 
@@ -190,7 +190,7 @@
 
 ## X. Criterios de aceptación verificados
 
-- [?] Escena pivote â‰¥ 30 fps en hardware medio con preset default [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target; M90 quality presets validate frame budget
+- [?] Escena pivote ≥ 30 fps en hardware medio con preset default [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target; M90 quality presets validate frame budget
 - [x] 5 franjas distinguibles y correctas según M31 [M] — verificado (atria-dawn-s2, 2026-10-12, Log 1759): `test_ramps_color_m49.gd` 10 checks (franjas naranja/blanco/rojizo/azul + interpolación) + `test_ciclo_dia_noche.gd` 16 checks, 0 fallos. -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.1 5 franjas (ALBA/DIA/ATARDECER/NOCHE/PROFUNDA) with distinct color palettes
 - [x] Cuevas legibles (piso 0.15) sin luces por instancia [M] — verificado (atria-dawn-s2, 2026-10-12, Log 1759): `_test_ambient_minimum` en validate_lighting_m49.gd (0 fallos); luces solo desde pool (no por instancia). -- agnes-2.5-flash 2026-09-12: validated by _test_ambient_minimum in validate_lighting_m49.gd; pool-based lighting ensures no instance lights
 - [x] Luces dinámicas ≤ tope verificado por validador [M] — verificado (atria-dawn-s2, 2026-10-12, Log 1759): validate_lighting_m49.gd (≤6 sombra + ≤20 total) + test_light_pool_m49.gd 44 checks, 0 fallos. -- agnes-2.5-flash 2026-09-12: validate_lighting_m49.gd _test_sombras checks <=6 shadow + <=20 total
@@ -272,13 +272,13 @@
 - **`franja_1200_final` (mediodía 12:01, FPS 60):** terreno voxel bien iluminado, luz pareja, cielo azul claro,
   HUD completo (reloj M30 "1 de Primavera, ¡Festivo!", hotbar, barras). Sanos, sin quemaduras de exposición.
 - **`franja_0000_final` (noche 00:01, FPS 60):** escena **muy oscura**, el terreno queda casi negro (silueta
-  azul tenue). **Confirmado por el usuario (2026-09-16) como DISEÃ‘O:** la noche se espera oscura **para que
-  funcionen las antorchas** como fuente de luz. â†’ **NO es bug.** Dependencia: la jugabilidad nocturna depende
+  azul tenue). **Confirmado por el usuario (2026-09-16) como DISEÑO:** la noche se espera oscura **para que
+  funcionen las antorchas** como fuente de luz. → **NO es bug.** Dependencia: la jugabilidad nocturna depende
   del sistema de **antorchas/luz del jugador** (M45/M52 o módulo de antorchas); sin él, la noche es injugable.
 - **`atardecer_1800` (FPS 59):** luz cálida/anaranjada sobre el terreno voxel, cielo azul→cálido. Color grading
   de atardecer correcto.
 - **`skyline_montanas_v1` (horizonte, FPS 60):** playa/isla + mar + colinas/montañas low-poly (impostor) +
-  personaje sobre la arena. Coherente con las iter. 5/6 (skyline falso retirado â†’ relieves reales + impostor).
+  personaje sobre la arena. Coherente con las iter. 5/6 (skyline falso retirado → relieves reales + impostor).
 - **Lectura global del ciclo:** día brillante → atardecer cálido → noche oscura (por diseño). **FPS ~60 en las 4
   franjas** → sin penalización visible de la iluminación. **No detecté artefactos** (overdraw, z-fighting,
   pop-in, banding del cielo) en estas capturas.
@@ -290,7 +290,7 @@
 
 - **[x]:** 53   **[ ]:** 0   **[?]:** 90   **Total:** 143
 - Restauración (255feb7): tags [S] de mimo-v2.5 (2026-09-16) → [x]; [M]/sin-tag → [?].
-- **Fix validador (hy3, Log 1045):** se voltearon 9 [?]â†’[x] citando checks de validate_lighting_m49.gd (22 checks, 0 fallos, EXIT 0).
+- **Fix validador (hy3, Log 1045):** se voltearon 9 [?]→[x] citando checks de validate_lighting_m49.gd (22 checks, 0 fallos, EXIT 0).
   Ítems volteados: WorldEnvironment/ACES (L20), ambiente piso >=0.15 (L22/L124), direccional sol/luna (L27),
   shadow bias/normal/max_distance (L97), no-siluetas-negras ambiente cálido (L100), fog habilitado + fog_curve (L88/L125), validador definido/funcional (L122).
 - Pendientes reales ([?]): integraciones externas M09 (biomas/sky/cielo procedural), M18/M39 (interiores baked),
@@ -306,7 +306,7 @@
 > **Totales:** 143 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 38.
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1727):** +1 [?] -> [x] implementando el pool de luces dinámicas (msg 171). `scripts/world/light_pool.gd` (6.8 KB): `MAX_DINAMICAS = 20`, `MAX_CONT_SOMBRA = 6`, `RADIO_DESCARTE = 30 m`, reutilización de entradas, **tope total que no roba luces activas** (rechaza y cuenta), **tope de sombra que degrada** (crea sin sombra en vez de rechazar), regla anti-oscuridad en el descarte y flicker determinista (fase desde hash de semilla+tipo+posición) acotado a ≤ 2 Hz y ≤ 15 %, con `catalogo_valido()` que valida el catálogo contra esos topes. Suite `test_light_pool_m49.gd`: **44 checks, 0 fallos**.
-> **Nota:** los tres checks de E41/E42/E43 ya estaban `[x]` desde el barrido anterior (el diseño estaba documentado); esta vuelta lo convirtió en código real y verificado. El Ãºnico `[?`] que quedaba del bloque era el descarte por distancia (E44), ahora implementado.
+> **Nota:** los tres checks de E41/E42/E43 ya estaban `[x]` desde el barrido anterior (el diseño estaba documentado); esta vuelta lo convirtió en código real y verificado. El único `[?`] que quedaba del bloque era el descarte por distancia (E44), ahora implementado.
 > **Totales:** 105 [x] / 38 [?] / 0 [ ] = 143 items.
 
 > **Actualizado por atria-dawn-s2 (Atria-Dawn-Preview / Kilo Code, 2026-10-12, Log 1759):** barrido con evidencia en disco + runtime (5 suites Godot 4.7.2 headless, 70 checks útiles, 0 fallos: test_light_pool_m49 44, validate_lighting_m49 0 fallos/0 advertencias, test_ramps_color_m49 10, test_curvas_luz 0 fallos, test_ciclo_dia_noche 16). **+39 `[?]` -> `[x]`:** (a) 5 ítems del pool de luces ahora implementados en `scripts/world/light_pool.gd` (commit dc8218f de Step 5: MAX_DINAMICAS=20, MAX_CONT_SOMBRA=6, RADIO_DESCARTE=30, flicker determinista ≤2 Hz/≤15 %, set_semilla, catalogo_valido); (b) 4 decisiones de diseño documentadas (lightmaps SÍ interiores, SDFGI/VoxelGI OFF, lightmap mundial descartado); (c) 3 riesgos mitigados y verificados (overdraw, acne voxel, cuevas ilegibles); (d) 2 verificaciones de validador (límites luces, flicker accesible); (e) 3 flujos documentados en 03-Diseno §2.1-2.3; (f) 6 criterios de aceptación verificados por suites; (g) 7 artefactos de data/light/ existentes (sun/sky/moon/day/fog curves + fase_umbral.json); (h) FIX CRÍTICO del script DayNightCycle adjunto; (i) 8 artefactos de iteraciones 3-6 verificados en disco (scripts + capturas en capturas/49/ y capturas/9/).
