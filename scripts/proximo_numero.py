@@ -23,7 +23,7 @@ def audit(canal, consumir=False):
     usados = set()
     for root, _dirs, fs in os.walk(d):
         for f in fs:
-            m = re.match(r'^(\d{3})-', f)
+            m = re.match(r'^(\d{1,3})-', f)
             if m:
                 usados.add(int(m.group(1)))
     mx = max(usados) if usados else 0
