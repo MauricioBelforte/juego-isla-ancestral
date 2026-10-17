@@ -253,5 +253,8 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].
 > Las marcas no se tocaron.
 
+- [ ] **DEUDA DE RENDIMIENTO (detectada por DS-V4.1-Flash-Opencode, tanda 19/vuelta 11 — 2026-10-17):** `advance_day` tarda 407/434 ms sobre 395 cultivos, contra umbral 50 ms del test `test_farm_m33_lote` y <=2 ms runtime exigidos por M61. Fronto sugerido: tick diario por lotes/diferido (no per-cultivo en el mismo frame). [C]
+- [ ] **DEUDA DE HIGIENE DE TEST (mismo hallazgo):** el assert de `stats tiles=400` vs 395 sembrados falla cuando el run hereda cultivos de bloques previos — hacer el test aislado (farm fresco por fixture) o normalizar el conteo previo. [S]
+
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 5)
 [x] auditados contra disco (bloq 5). Sustentado, 0 degradaciones.  Evidencia: `test_farm.gd 0/0` = scripts/farm/ (farm_service, farm_state_store, farm_tool_controller) + data/balance/farming.json.
