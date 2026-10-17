@@ -170,7 +170,7 @@
 100. M52-Partículas (147/148): 1 pendiente — 2 [S]
 101. M66-Anti-Softlock (110/117): 7 pendientes — 6 [M]
 102. M61-Rendimiento (53/148): lote técnico de perfil/culling (tarea suya del nicho CI) — 10 [C]
-103. Re-contado global honesto: corrida de `scripts/verificar_checklist.py` y reporte — 6 [M]
+103. [x] Re-contado global honesto: corrida de `scripts/verificar_checklist.py` y reporte — 6 [M] — **HECHO 2026-10-17 (Log 1940, msg 295)**: 167 modulos, 19.207 `[x]` / 3.656 `[ ]` / 1.150 `[?]` = 24.013; 178 alertas; **GLOBAL ciego en 16 modulos** por tabla degradada (L22 cabecera+separador fusionados, 16 filas con celdas vacias iniciales, 6 sin `|` de cierre). Reparacion de `CHECKLIST-GLOBAL.md` pedida al director (archivo protegido para mi).
 104. Barrido de módulos ✅ sin verificación reciente: muestreo §21.8.2.b pedido por director — 10 [C]
 105. Preparación de specs para módulos ✅→🟡 por [?]. — 8 [M]
 
@@ -1803,3 +1803,17 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - **Límites:** 0 commits / 0 push / 0 flips / 0 auto-sellos §21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot.
 - **Pendiente del director:** autorizar el commit del fix de M62; asignar dueño del mojibake gate y del legal de M127.
 - **Proxima:** mensajes entrantes con NN > **292**. Sin mensaje nuevo → primera tarea `[ ]` de la cola activa (V2).
+
+## 2026-10-17 18:26 (GMT-3) — RAMA 2 / item 103: re-contado global honesto (msg 295)
+
+- **Tracker = 294** (msg 294 = acuse del director: M62 L191 commiteado en `e276765`, verificado en `git log --all`; sin trabajo nuevo). Sin NN > 294 → **RAMA 2**.
+- [x] Log reservado: **1940** — item 103, re-contado global. Canal consumido **295** (pool head 295 = ultimo 294 + 1).
+- **Medido:** `verificar_checklist.py --todos` → **EXIT 1**; **167 modulos**, **19.207 `[x]` / 3.656 `[ ]` / 1.150 `[?]` = 24.013**; **178 alertas** (2 GLOBAL↔checklist, 4 estado-verde-con-[x], 4 timestamp ilegible, **152 filas mal formadas**, 16 `Totales` incoherentes).
+- **CAUSA RAIZ (nueva):** `CHECKLIST-GLOBAL.md` esta degradado → **L22 cabecera+separador en la MISMA linea** (23 columnas detectadas vs 11 reales), **16 filas con celdas vacias iniciales** (hasta 9; L24/27/28/39/51/64/76/78/80/89/91/103/131/141/144/166) y **6 filas sin `|` de cierre** (L79/96/98/112/129/149). Efecto: el parser mapea por posicion → **el "Progreso" no es confiable en 16 modulos** y los 4 `timestamp ilegible` (M159/M41/M46/M49) son sintoma, no bloqueo.
+- **Discrepancias reales (filas sanas):** `46-Arte-2D` GLOBAL 90/110 vs checklist 91/110; `55-Diario` GLOBAL 58/131 vs checklist 62/131 (flip de Log 1934 pendiente en GLOBAL). 4 modulos con `[x]` y estado verde-Disponible: 138/142/143/144.
+- **16 `Totales` que mienten** (peor: `46-Arte-2D` x0→91). Lista completa en Log 1940.
+- **Trampa propia:** primer parser leia ventana de 5 lineas y se comia el `completados` del modulo siguiente (M01=168 en vez de 26; suma 19.336 en vez de 19.207). Corregido y re-medido antes de escribir.
+- **Pedido al director:** (1) reparar `CHECKLIST-GLOBAL.md` (~23 lineas) o autorizarme a hacerlo; (2) asignar dueno de los 16 `Totales`; (3) aplicar 58→62 de M55 en GLOBAL.
+- **Limites:** 0 commits / 0 push / 0 flips / 0 auto-sellos §21.8 / 0 ediciones a `CHECKLIST-GLOBAL.md`, `quality.yml`, `AGENTS.md`, `project.godot`, `05-Checklist`.
+- **Proxima:** NN entrantes > **294**; sin mensaje nuevo → item 104 de la cola (barrido de modulos verdes sin verificacion reciente, muestreo §21.8.2.b).
+

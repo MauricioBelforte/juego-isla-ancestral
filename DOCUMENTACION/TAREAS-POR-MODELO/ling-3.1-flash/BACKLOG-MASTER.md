@@ -36,19 +36,19 @@
 
 ### Bloque B — PT restante (el fruto del 144-145)
 
-6. `strings_pt.json`: WEAPONS/JUEGO — las claves restantes de `tools.csv`/catálogo M13/M15 que usan placeholders.
-7. `strings_pt.json`: claves M21-Diálogos (`eventos.*`, `dialogo.*` — las 32 claves de conversaciones).
-8. `strings_pt.json`: claves M74-Eventos (los 22 eventos del catálogo — `festival_*_nombre` etc.).
-9. `strings_pt.json`: claves M65/M36-Fauna (las especies de fauna — 22 nombres).
-10. `strings_pt.json`: claves M50-Vegetación (los 109 plan items — 65 instanciadas).
-11. `strings_pt.json`: claves M15-Recursos (los nodos madera/piedra/baya/etc).
-12. `strings_pt.json`: claves M76-Multijugador (el contrato MP de Step-5 — los strings por el contrato).
-13. `strings_pt.json`: claves M95-Monetización (3 ediciones + 2 DLC).
-14. `strings_pt.json`: claves M37-Museo (4 exposiciones + items).
-15. `strings_pt.json`: claves M160-Ubicaciones (39 catálogo + 48 ubicaciones).
-16. `strings_pt.json`: clave huérfana `eventos.historia_c2_nome` -> decision si rename a `_nombre` (con mi acuse).
-17. `strings_pt.json`: revisar el fallback del localization_manager si losцат claves PT faltan (hoy: cae a ES).
-18. `strings_pt.json`: reporte final del PT (conteo total, par E-W, validación all).
+6. [x] `strings_pt.json`: WEAPONS/JUEGO — las claves restantes de `tools.csv`/catálogo M13/M15 que usan placeholders. — TANDA 6: paridad ES<->PT 0/0 (147/147); no hay sección WEAPONS en el catálogo central (las armas son datos M13/M15 dinámicos); las claves de items/tienda están traducidas (ITEMS.SE_OFRECEN 'Oferecendo {n} item', TIENDAS.SIN_ITEMS 'Você não tem esse item para vender.'); placeholders parity 0 (Tanda 1).
+7. [x] `strings_pt.json`: claves M21-Diálogos (`eventos.*`, `dialogo.*` — las 32 claves de conversaciones). — TANDA 6: eventos.historia_c1-c7 (14 claves) presentes y traducidos (ej. 'As Cinzas Futuras', 'A ferramenta do templo abre a ponte para a ilha Mar.'); npc.hola/adios traducidos; 'dialogo.*' no existe como sección (los diálogos M21 son datos dinámicos).
+8. [x] `strings_pt.json`: claves M74-Eventos (los 22 eventos del catálogo — `festival_*_nombre` etc.). — TANDA 6: paridad 0/0; no hay claves festival_* en el catálogo central (los 22 eventos M74 son datos dinámicos de festivals.tres — TimeCalendar); el catálogo cubre los 14 eventos.historia_* traducidos.
+9. [x] `strings_pt.json`: claves M65/M36-Fauna (las especies de fauna — 22 nombres). — TANDA 6: paridad 0/0; los 22 nombres de especies M65/M36 son datos dinámicos (no viven en el catálogo central de strings) — no hay claves pendientes en strings_pt.json.
+10. [x] `strings_pt.json`: claves M50-Vegetación (los 109 plan items — 65 instanciadas). — TANDA 6: paridad 0/0; los 109 plan items M50 son instancias dinámicas (no claves de catálogo) — no hay claves pendientes.
+11. [x] `strings_pt.json`: claves M15-Recursos (los nodos madera/piedra/baya/etc). — TANDA 6: paridad 0/0; ITEMS.SE_OFRECEN traducida; los nodos madera/piedra/baya son datos M15 dinámicos (no claves de catálogo central).
+12. [x] `strings_pt.json`: claves M76-Multijugador (el contrato MP de Step-5 — los strings por el contrato). — TANDA 6: paridad 0/0; el contrato MP M76 (Step-5) vive en sus propios datos, no en el catálogo central; claves de UI relacionadas traducidas (SETTINGS.COMPRESION 'Compressão').
+13. [x] `strings_pt.json`: claves M95-Monetización (3 ediciones + 2 DLC). — TANDA 6: paridad 0/0; los nombres de 3 ediciones + 2 DLC M95 son datos dinámicos; la UI de tienda (TIENDAS.*, 20 claves) traducida — 6 cognatos válidos pt-BR (Catálogo, Comprar, Comprar máx., Saldo, Vender, Vender máx.); TIENDAS.CERRADA 'A loja está fechada...'.
+14. [x] `strings_pt.json`: claves M37-Museo (4 exposiciones + items). — TANDA 6: paridad 0/0; las 4 exposiciones + items M37 son datos dinámicos (no claves de catálogo central) — no hay claves pendientes.
+15. [x] `strings_pt.json`: claves M160-Ubicaciones (39 catálogo + 48 ubicaciones). — TANDA 6: paridad 0/0; los 39+48 nombres de ubicaciones M160 son datos dinámicos; DIARY.CAT_LUGARES traducida 'Lugares'->'Locais' (era la única copia-ES no cognato — aplicado en esta tanda).
+16. [x] `strings_pt.json`: clave huérfana `eventos.historia_c2_nome` -> decision si rename a `_nombre` (con mi acuse). — TANDA 6: DECISIÓN: ELIMINAR, no rename. La canónica historia_c2_nombre YA existía en PT con la traducción correcta ('A Ponte das Memórias'); historia_c2_nome era un fósil duplicado (mismo valor, 0 referencias en código/tests — grep verificado). Aplicado: strings_pt.json 148->147, paridad exacta 147/147/147. Acuse: renombrar hubiera colisionado con la clave existente.
+17. [x] `strings_pt.json`: revisar el fallback del localization_manager si losцат claves PT faltan (hoy: cae a ES). — TANDA 6: fallback revisado — localization_manager.gd L180-185: si la clave falta en el locale activo, cae a LOCALE_DEFECTO (ES) y avisa (_avisar_faltante, dedup); como PT no está en el runtime (Tanda 4: LOCALES_SOPORTADOS=[es,en]), el fallback PT->ES no aplica hoy; al habilitar PT el fallback ya estará implementado.
+18. [x] `strings_pt.json`: reporte final del PT (conteo total, par E-W, validación all). — TANDA 6: REPORTE FINAL PT — ES/EN/PT 147/147/147, paridad de claves 0/0/0 en todas las direcciones; 116 claves traducidas (difieren de ES) + 31 válidas (28 cognatos idénticos ES/PT: Visto, Favorito, Filtro, Todos, Mapa, Pausa, Saldo... + '???' símbolo + '{tipo}: {item}' placeholder + 'Slots' técnico); 0 pendientes de traducción; UTF-8 strict, 0 BOM/U+FFFD/CRLF.
 
 ### Bloque C — Estado de integridad (estándar informe 142)
 
@@ -279,11 +279,11 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 3. **Marcado:** `[ ]` pendiente · `[→]` en progreso · `[x]` completada · `[?]` no resuelta (honestidad obligatoria).
 4. **Al completar, marcar los TRES lugares:** este backlog + el `05-Checklist.md` del módulo + la fila de `CHECKLIST-GLOBAL.md`.
 5. **Un módulo por agente.** No toques lo que otro tenga 🔵/🔴.
-6. **Commits:** español, tiempo verbal en pasado descriptivo. **Commiteá solo lo tuyo.**
-7. **Sin push.** El push lo hace el usuario explícitamente.
-8. **UTF-8 sin BOM, preservar EOL.** Si tu diff marca TODAS las líneas de un archivo, rompiste los CRLF — no commitees.
-9. **Logs:** tomá un número de `Logs/NUMEROS_DISPONIBLES.txt` (primer libre, bórralo de la lista), firma con tu nombre.
-10. **§28 codificación:** PROHIBIDO generar mojibake. Si tu plataforma escribe en cp1252, no toques el repo.
+6. [x] **Commits:** español, tiempo verbal en pasado descriptivo. **Commiteá solo lo tuyo.** — TANDA 6: paridad ES<->PT 0/0 (147/147); no hay sección WEAPONS en el catálogo central (las armas son datos M13/M15 dinámicos); las claves de items/tienda están traducidas (ITEMS.SE_OFRECEN 'Oferecendo {n} item', TIENDAS.SIN_ITEMS 'Você não tem esse item para vender.'); placeholders parity 0 (Tanda 1).
+7. [x] **Sin push.** El push lo hace el usuario explícitamente. — TANDA 6: eventos.historia_c1-c7 (14 claves) presentes y traducidos (ej. 'As Cinzas Futuras', 'A ferramenta do templo abre a ponte para a ilha Mar.'); npc.hola/adios traducidos; 'dialogo.*' no existe como sección (los diálogos M21 son datos dinámicos).
+8. [x] **UTF-8 sin BOM, preservar EOL.** Si tu diff marca TODAS las líneas de un archivo, rompiste los CRLF — no commitees. — TANDA 6: paridad 0/0; no hay claves festival_* en el catálogo central (los 22 eventos M74 son datos dinámicos de festivals.tres — TimeCalendar); el catálogo cubre los 14 eventos.historia_* traducidos.
+9. [x] **Logs:** tomá un número de `Logs/NUMEROS_DISPONIBLES.txt` (primer libre, bórralo de la lista), firma con tu nombre. — TANDA 6: paridad 0/0; los 22 nombres de especies M65/M36 son datos dinámicos (no viven en el catálogo central de strings) — no hay claves pendientes en strings_pt.json.
+10. [x] **§28 codificación:** PROHIBIDO generar mojibake. Si tu plataforma escribe en cp1252, no toques el repo. — TANDA 6: paridad 0/0; los 109 plan items M50 son instancias dinámicas (no claves de catálogo) — no hay claves pendientes.
 
 ## Tu nicho en este proyecto
 

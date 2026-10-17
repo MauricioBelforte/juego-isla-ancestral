@@ -542,3 +542,136 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 - [ ] **QA §21.8 restantes (3/5):** M52-Particulas-VFX (137/1/10) → M14-Inventario (136/4/0, Hy3 caído, yo veredictora) → **M63-Cargas (67/27/7) al final (sello INVALIDADO, re-QA de tercero)**. Pendiente confirmación de orden.
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 
+---
+
+# (C) FRENTE ESTÉTICO PREMIUM — PRE-ASIGNADO (directiva del fundador 2026-10-17 21:45)
+
+> **LÉELO DESPUÉS de agotar la COLA ACTIVA (A) y las tandas en vuelo.** Cada bloque lista
+> los ítems `[ ]` REALES extraídos del `05-Checklist.md` correspondiente (verificados contra
+> disco por el director). No duplica lo ya hecho. Firma: GLM-5.3 Flash-Director / Kilo Code.
+
+## M161-Diseño-Visual-De-NPCs — 42 ítems
+
+1. Validar que todos los IDs coinciden con M19 [M]
+2. Crear script de validación de diseños [M]
+3. Documentar variantes primavera
+4. Documentar variantes verano
+5. Documentar variantes otoño
+6. Documentar variantes invierno
+7. Documentar variantes estacionales
+8. Documentar variantes estacionales
+9. Documentar variantes estacionales generales
+10. Verificar que IDs coinciden con M19 (25 NPCs)
+11. Verificar que herramientas coinciden con M159
+12. Verificar que retratos 2D (M46) usan estos diseños
+13. Verificar que modelos 3D (M45) implementan estos diseños
+14. Verificar que NPCs aparecen en ubicaciones M160
+15. Verificar que ropa puede coincidir con M155
+16. Verificar coherencia entre NPCs de misma isla
+17. Documentar integración con M19
+18. Documentar integración con M159
+19. Documentar integración con M45
+20. Documentar integración con M46
+21. Documentar integración con M155
+22. Documentar integración con M160
+23. Documentar integración con M27
+24. Documentar integración con M29
+25. Documentar integración con M39
+26. Crear test de carga de NPCVisualDatabase
+27. Crear test de herramientas M159
+28. Crear test de colores HEX
+29. Crear test de integración con M19
+30. Crear test de integración con M46
+31. Crear test de validación visual
+32. Crear test de coherencia por isla
+33. Crear README con formato de IDs
+34. Documentar paleta de piel completa
+35. Documentar paleta de cabello completa
+36. Documentar paleta de ojos completa
+37. Documentar reglas de identificación por profesión
+38. Documentar reglas de coherencia por isla
+39. Documentar variantes estacionales
+40. Documentar integración con otros módulos
+41. Crear guía para agregar nuevos NPCs
+42. Documentar proporciones y tamaños
+
+## M49-Iluminación (38 [?] de tu claim N650) — 33 ítems
+
+43. Definir cielo procedural por bioma (M09) [M] -- agnes-2.5-flash 2026-09-12: sky_curve.tres + sky_color_ramp.tres EXISTS en data/light/; DayNightCycle._cargar_curvas() las carga; integracion por bioma stubbed (requiere M09 RegionData para bioma actual)xisten en data/light/; integración por bioma requiere M09 RegionData; stub en DayNightCycle._cargar_curvas(); pendiente completado M09
+44. Definir easing de 3 s entre franjas (sin snaps) [M] — Log 731: tween de 1 s existente mantiene la transición; color animado incluido
+45. Definir curva fría de la luna en NOCHE/PROFUNDA [M] — Log 731: luna (0.6,0.65,0.85) fría en franjas nocturnas, verificado en captura 00:01
+46. Definir bake en CI (M118) con semilla fija [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §4 M108/M118 integrations; bake seed fixed in CI pipeline config
+47. Definir memoria de lightmaps contra M62 [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 recibe reporte de lighting
+48. Definir luz de tiendas (M39) y talleres [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_tienda.gd definido; integracion con M39 shop placement; stub en DayNightCycle para luz ambiental tiendamic/; implementación requiere M39 shop placement event; deferred a M39 integration
+49. Definir ventanas con luz diurna (baked) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa profile documents baked window light; IMPLEMENTACIÓN bloqueada por M18 (lightmap bake en escenas con ventanas); KnownIssue no bloqueante DoD.
+50. Definir faroles de pueblo y caminos [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_farol.gd definido; pool de faroles con flicker determinista; posición por evento M39/M28do; posición por evento M39/M28; implementación visual pendiente M90 presets calidad
+51. Definir luz cálida de hogueras/chimeneas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_fuego.gd definido; integrado con M52 particulas fuego; luz cálida desde poolefinido; integrado con M52 partículas fuego; implementación visual pendiente M52/FX
+52. Definir luz ambiental sutil de cristales (M47) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M47 integration documented; crystal emission light definida; integrada con materiales luminosos M47documented; crystal emission light; blocked by M47 material system availability
+53. Definir glow acotado (sin bloom agresivo) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md estilo cozy; bloom agresivo descartado como risk; ambient light color ramps controlan glow sin post-process
+54. Definir esporas de luz (M11) como luz ambiental [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md menciona esporas M11 en cuevas; luz ambiental cálida 0.15-0.25; integrada con perfil subterraneo11 en cuevas; implementacion requiere M11 espora system; blocked por dependencia
+55. Definir transición gradual día→cueva (fade) [M] -- agnes-2.5-flash 2026-09-12: documentado en 03-Diseno.md §2.2 (perfil subterráneo.gd: direccional apagada, ambiente 0.15-0.25, niebla cueva); fade implementado via tween en DayNightCycle._activar_perfil_subterraneo()
+56. Definir perfil subterraneo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/subterraneo.gd estructurado; direccionional apagada, ambiente cálido 0.15-0.25, niebla cueva, luces puntuales fijas/pool
+57. Definir rayo cenital en salas principales (M24/M25) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 menciona templos con rayo cenital; implementacion requiere M24/M25 portal system; diseño documentadomplos/ruinas con lightmap; rayo cenital requiere M24/M25 portal system; blocked por dependencia
+58. Definir iluminación de bajorrelieves [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md no cubre especificamente; IMPLEMENTACIÓN bloqueada por M47 (materiales/emisivos); KnownIssue no bloqueante DoD — deferred a integración M47.
+59. Definir ambience suave por sala [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 tabla perfiles con ambiente por tipo (interior_casa 0.30, templo 0.25, cueva 0.15-0.25)
+60. Definir perfil interior_templo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/interior_templo.gd + §3.3 tabla; ambiente 0.25, lights <= 6, baked SÍ
+61. Definir niebla de jungla densa y costa baja [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md niebla_por_bioma.tres estructurado; valores por bioma definidos en diseño; implementacion requiere M09 bioma catalog estructurado; valores exactos requieren M09 bioma catalog; blocked M09
+62. Definir sombras suaves (PCF ≥ 4 samples) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md soft shadows required; PCF 4+ samples documented; validate_lighting_m49.gd verifica quality
+63. Definir dónde hornea (interiores y estructuras) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3: baked SÍ para interior_casa, templo, cueva, ruinas; NO para exterior pueblo/campo
+64. Definir formato/registro de memoria (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 receives lighting memory reports
+65. Definir regeneración en CI [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md bake en CI (M118) with fixed seed; validate_lighting_m49.gd runs in headless mode
+66. Definir prueba de iluminación en hardware medio (M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md hardware testing documented; M90 graphics presets include lighting validation
+67. Definir presets de calidad de sombras/luz (M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 shadow cascades by preset (bajo:2, medio:3, alto:4); shadow atlas 1024/2048 by preset
+68. Definir objetivo 30 fps mínimo / 60 deseado [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target documented; M61 MemoryMonitor tracks frame budget
+69. Alinear con M108 [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M108 integration documented; sky materials compression handled by M108 pipeline
+70. Memoria: lightmap + registro (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 lightmap budgets by profile; M62 MemoryMonitor receives lighting memory reports
+71. Cozy: atmósfera por franja, legibilidad siempre [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.1 franja presets with cozy palette; piso anti-oscuridad 0.15 guarantees readability
+72. Riesgo de snaps entre franjas → easing 3 s [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §2.1: "easing de valores actuales → nuevos (3 s; sin snaps)"
+73. Escena pivote ≥ 30 fps en hardware medio con preset default [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target; M90 quality presets validate frame budget
+74. Interior de casa horneado y legible sin dinámicas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa: baked SÍ, dinámicas <=3, ambiente 0.30
+75. Niebla por bioma/lluvia sin romper legibilidad [M] -- agnes-2.5-flash 2026-09-12: fog_curve.tres per biome; rain dimming documented; piso 0.15 ensures readability
+
+## M46-Arte-2D — 19 ítems
+
+76. Definir iconos de todos los ítems de M14/M15 con claves i18n [M] — Log 726: inventario data-driven (inventario_2d.json, 6 iconos de recursos M15 sembrados; el resto se ag
+77. Definir legibilidad mínima 32 px (prueba obligatoria) [M] — Log 726 (§6) **↔ M46-recon: la REGLA está en §6 pero la PRUEBA 32px requiere assets = `#esperando:assets-2d`.*
+78. Definir retrato de cada NPC (M19) y jugador [M] — Log 726: pt_npc_riz_001_* (5 expresiones) sembrados en inventario; patrón replicable por NPC
+79. Definir iconos de acciones (M57): interactuar, atacar, saltar, menú [M] — Log 726 (§4 familia ui_art_; estados en inventario)
+80. Definir set de símbolos para M24/M25/M26 sin palabras [M] — Log 726: 4 sym_sello_* (RIZ/COR/CEN/AUR) en inventario
+81. Definir ilustración pergamino para mapas del tesoro (M25) [M] — Log 726: illus_mapa_tesoro 1024 en inventario
+82. Definir marco común de insignias (círculo + figura + borde de rareza) [M] — Log 726 (§4; badge_logro_marco en inventario)
+83. Definir integración con logros (M72) y sellos (M22) [M] — Log 726 (§4)
+84. Definir pantallas de carga con arte de Aurora [M] — Log 726: illus_carga_aurora 1024 en inventario
+85. Definir integración con M63 (progreso real sobre el arte) [M] — Log 726 (§4)
+86. Definir icono del jugador en mapa/minimapa coherente con personaje 3D [M] — Log 726 (§4 receta ico_ con plantilla 3D; asset por agregar al inventario)
+87. Incluir verificacion de regiones de texto en el validador [M] -- agnes-2.5-flash 2026-09-12: regla 0-texto documentada en 03-Diseno.md §7 + Log 726; validador naming (val
+88. Legibilidad a 32 px con contraste AA (M58) [M] — Log 726 (§6 prueba obligatoria definida) **↔ M46-recon: regla §6 documentada pero la PRUEBA 32px requiere assets = `#espe
+89. Icono de cada objeto legible a 32 px en inventario y tienda [M] — agnes-2.5-flash 2026-09-12: criterio definido en 03-Diseno.md §6; prueba se ejecutara cuando existan ass
+90. Retrato del NPC se parece al modelo 3D (comparacion lado a lado) [M] — agnes-2.5-flash 2026-09-12: flujo §9 define comparacion; se ejecutara cuando NPCs M161 tengan sprit
+91. Símbolos ancestrales sin texto reutilizables [M] — agnes-2.5-flash 2026-09-12: receta §4 + 4 sym_sello en inventario; verificacion al crearlos requiere assets (M45). Know
+92. Atlas con carga diferida sin duplicados en memoria [M] — agnes-2.5-flash 2026-09-12: regla §7 definida; verificacion cuando existan atlas (M108 pipeline). KnownIssue no b
+93. Piezas cumplen M108 y Git LFS [M] — agnes-2.5-flash 2026-09-12: formato §7 definido; cumplimiento por pieza al crearse (M108). KnownIssue no bloqueante DoD.
+94. Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMEN
+
+## M45-Arte-3D (validación e inspección visual) — 19 ítems
+
+95. Incluir ejemplos de referencia (shader/atlas de referencia) en la guía [M]
+96. Definir carpeta npc/ (aldeanos M19) [S]
+97. Verificar escala 1:1 (< 1e-3) [S]
+98. Verificar techos de tris por categoría [S]
+99. Verificar topología (n-gons, vértices duplicados) [S]
+100. Verificar UVs (fuera de rango, padding) [S]
+101. Verificar origen Y=0 para props de suelo [S]
+102. Verificar existencia de LODs si tris > 500 [S]
+103. Acumular errores (no morir en el primero) y emitir mensajes accionables [M]
+104. Documentar regla de nombres de variantes (sufijo _c1, _c2...) [S]
+105. Documentar límites de assets visibles por escena tipo (pueblo, bosque, templo) [M]
+106. Documentar compatibilidad con generación procedural (M10 no crea assets, solo los coloca) [M]
+107. Tres assets de prueba pasan validate_mesh.gd y se ven armónicos en Aurora [M]
+108. Personaje 1.8 m con punto de apoyo en grilla voxel [M]
+109. Conteo de tris por categoría menor o igual a la tabla RF4 [M]
+110. Prop con UVs fuera de padding o n-gons rechazado con mensaje accionable [M]
+111. Kit modular arma una casa M17 sin piezas nuevas [M]
+112. Assets del catálogo cumplen M108 y Git LFS [M]
+113. Animaciones (idle/caminar) sobre el modelo voxel — M48 AnimationService, siguiente iteración [M]
+
