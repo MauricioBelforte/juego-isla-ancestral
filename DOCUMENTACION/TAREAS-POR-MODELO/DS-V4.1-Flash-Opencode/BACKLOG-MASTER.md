@@ -160,6 +160,15 @@
 137. reposicion tecnica M63/infra: M63-Streaming: P6: audio — bancos regionales precargados [S] — dueño M42; el 63 solo encola el tipo `banco_audio`
 138. reposicion tecnica M63/infra: M63-Streaming: P7: texturas — atlas + mips por LOD [S] — dueño M47
 139. reposicion tecnica M63/infra: M63-Streaming: P8: shaders — precalentamiento + caché de variantes [S] — precarga de shaders hecha (H); caché de variantes es de M47/render
+140. reposicion tecnica infra (directo del 05 real): M63-Streaming: RF4+RF5: NPC, audio, texturas, shaders + precalentamiento [S] — precalentamiento hecho (H); los 4 tipos existen como tipos de cola pero su poblado real es de M08/M42/M47
+141. reposicion tecnica infra (directo del 05 real): M63-Streaming: P1: pantalla de carga — arte cozy, barra real, consejos [S] — barra real hecha (iter. 4); arte cozy/consejos son de M53/arte 2D
+142. reposicion tecnica infra (directo del 05 real): M63-Streaming: P3: chunks cercanos — radio R=3, máx 5 en movimiento rápido [S] — el radio/ límite reales son de M08
+143. reposicion tecnica infra (directo del 05 real): M63-Streaming: P5: NPCs necesarios — instanciar al entrar, pausar al salir [S] — dueño M15/M16 (NPC)
+144. reposicion tecnica infra (directo del 05 real): M63-Streaming: P6: audio — bancos regionales precargados [S] — dueño M42; el 63 solo encola el tipo `banco_audio`
+145. reposicion tecnica infra (directo del 05 real): M63-Streaming: P7: texturas — atlas + mips por LOD [S] — dueño M47
+146. reposicion tecnica infra (directo del 05 real): M63-Streaming: P8: shaders — precalentamiento + caché de variantes [S] — precarga de shaders hecha (H); caché de variantes es de M47/render
+147. reposicion tecnica infra (directo del 05 real): M40-Infra: Soporte de espía de eventos para el Debug Menu (M110) [S]
+148. reposicion tecnica infra (directo del 05 real): M40-Infra: RF2: detección de partida guardada (M60) y decisión nueva/cargar [M]
 # (B) ESTADO HIST M96/infrax4, M116x1, M113x2) = fuera del alcance del lote; 0 flips disponibles; suite M117 rc=0.
 21. M119-Update: el canal estable — los checks de updates (el vision del sistema de updates del juego). — [x] 2026-10-17 (Tanda 4): verificado: canal estable 1.0.0 + suite test_updates_m119 rc=0 (15/0); los 9 [ ] son deuda externa con dueno (M59/M96/M118/M107) — 0 flips (consistente con auditoria previa Step-5 Log 1866); M119 = 109/118.
 23. El barrido BOM masivo (155+) — la verificación post-lote (DeepSeek-WB: 0 BOM en scripts/production). — [x] 2026-10-17 (Tanda 3): barrido 15.502 rastreados: 0 BOM fuera de Obsoletos/; 12 históricos en Obsoletos/ excluidos por diseño del gate (verificar_bom.py:28-45); job BOM del CI verde.
