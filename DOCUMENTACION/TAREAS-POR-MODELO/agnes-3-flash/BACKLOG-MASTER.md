@@ -22,7 +22,7 @@
   corras, actualizá **tu archivo de cuenta** `DOCUMENTACION/TAREAS-POR-MODELO/agnes-3-flash/REGISTRO-BARRIDOS.md`
   (módulo barrido, medición [x]/[ ]/[?], veredicto drift 0 / drift con detalle, fecha). Ese
   archivo ES tu cuenta — lo mantenés VOS en cada vuelta y lo citás en tu reporte. El director
-  lo audita y consolida. Los barridos ya corridos (21 módulos, serie completa #659→#701) están
+  lo audita y consolida. Los barridos ya corridos (21 módulos, serie completa #655→#696) están
   precargados ahí de la migración — tu trabajo nuevo va ABAJO de esa tabla. [M]
 
 

@@ -298,10 +298,10 @@ La gran mayoría (M02–M04, M08, M15, M17–M18, M20–M26, M28–M31, M33–M3
 
 ## CIERRE DE LA SERIE (697 — 2026-10-17 03:00)
 
-- **M93 (697):** L190 balance_report.gd ahora [ ] honesto (MISS coherente en disco). 130 [x] = spec de balance, drift 0. **Los 3 drifts originales del barrido #659 CONFIRMADOS RESUELTOS:** M52 L144 -> [?] (#695), M93 L190 -> [ ] (#697), M137 L122 -> [ ] (#696).
+- **M93 (697):** L190 balance_report.gd ahora [ ] honesto (MISS coherente en disco). 130 [x] = spec de balance, drift 0. **Los 3 drifts originales del barrido #655 CONFIRMADOS RESUELTOS:** M52 L144 -> [?] (#690), M93 L190 -> [ ] (#687), M137 L122 -> [ ] (#691).
 - **Saldo total de la serie:** 14 modulos barridos (M13/M33/M35/M36/M42/M44/M45/M47/M48/M50/M51/M52/M93/M137), drift 0 en todos.
 - Hallazgos transversales de agnes: (1) el proyecto separa diseno/spec [x] de produccion de assets pendiente (#esperando), no inflacion; (2) micro doc-drifts de nombres stale (no bloquean); (3) mojibake preexistente apartado 28 en M44 L93-128 + M51 L233 (va al verificador 28.1).
-- M49 L33 NOCHE sigue parked (decision del director, #692). Cron agnes sigue activo.
+- M49 L33 NOCHE sigue parked (decision del director, #687). Cron agnes sigue activo.
 
 ### Ola extendida post-cierre (697+)
 

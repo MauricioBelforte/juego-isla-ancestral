@@ -10,18 +10,18 @@ UTF-8 §28 y verificado contra disco (sin marcadores inflados).
 
 | # de barrido | Mensaje canal | Módulo | Medición [x]/[ ]/[?] | Veredicto | Fecha | Nota |
 
-## Serie histórica migrada (barridos #659 → #701 — cuenta consolidada por el director)
+## Serie histórica migrada (barridos #655 → #696 — cuenta consolidada por el director)
 
-- **Serie CIERRE ORIGINAL (msgs 693-697, 2026-10-17 ~02:00-03:00):** M45 (693), M51 (694), M52 (695),
-  M93 (697), M137 (696) — DRIFT DETECTADO EN: M52-L144 validate_vfx.gd → [?] (verificado #695,
-  vfx_pool.gd existe), M93-L190 balance_report.gd → [ ] (MISS coherente #697), M137-L122
-  playtest_runner.gd → [ ] (#696). LOS 3 DRIFTS ORIGINALES DEL #659 CONFIRMADOS RESUELTOS.
-- **Ola extendida (msgs 699-701, 2026-10-17 03:15-03:30):** M54 (699, drift 0 + micro doc-drift
+- **Serie CIERRE ORIGINAL (msgs 688-692, 2026-10-17 ~02:00-03:00):** M45 (693), M51 (694), M52 (695),
+  M93 (697), M137 (696) — DRIFT DETECTADO EN: M52-L144 validate_vfx.gd → [?] (verificado #690,
+  vfx_pool.gd existe), M93-L190 balance_report.gd → [ ] (MISS coherente #687), M137-L122
+  playtest_runner.gd → [ ] (#691). LOS 3 DRIFTS ORIGINALES DEL #655 CONFIRMADOS RESUELTOS.
+- **Ola extendida (msgs 694-696, 2026-10-17 03:15-03:30):** M54 (699, drift 0 + micro doc-drift
   Unity-refs), M55-M65 (701: M55/M58/M61/M62/M63/M65, drift 0 en los 6).
 - **TOTAL SERIE: 21 módulos barridos, drift 0 en todos** (los 3 drifts históricos degradados y
   verificados). Consolidación director: `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/BARRIDO-AGNES-ACUMULADO.md`.
 - **Tramos/Cierres:** cierre de tramo = mensaje al director (hitos, no por barrido individual);
-  si aparece un DRIFT → aviso INMEDIATO con detalle (regla del msg 700).
+  si aparece un DRIFT → aviso INMEDIATO con detalle (regla del msg 696).
 
 ## Deuda documental detectada (no bloqueante — para saneo futuro con encargo del director)
 
