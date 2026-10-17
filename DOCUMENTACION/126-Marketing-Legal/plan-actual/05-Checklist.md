@@ -299,7 +299,7 @@ atria-dawn → este)
 
 **Firma:** Hy3 / WorkBuddy — 2026-09-19
 
-**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
+**Totales historico (QA Hy3 2026-09-19):** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 59 [x] / 42 [ ] /
