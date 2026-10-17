@@ -143,3 +143,6 @@
 **Al marcar:** completar con `[x]` + fecha + evidencia (hash del commit, run CI, test salida) — las pendientes quedan números de cola.
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-17
+
+--- 
+**Log reservado:** **1906** - check de la fila de archivos BACKLOG-100-TAREAS (2 de 6 flota, validate ondisk=checked) - [S]
