@@ -16,6 +16,26 @@
 - Archivos: `scripts/data/item_data.gd`, `scripts/data/item_database.gd`, `data/items/`
 - Fecha: 2026-09-01 18:36
 
+## Reclamo M159 b1 — agnes-3-flash (Bloque A visual, director N702)
+- **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-17 03:45.** Reclamo M159 b1 (ítem backlog 18, Bloque A visual). Reclamo en 3 registros: CHECKLIST-GLOBAL fila 159 + este bloque + ESTADO-PARALELO. M159 hoy: 84 [x] / 18 [ ] / 49 [?] = 151.
+
+**INVENTARIO de los 300 `.tres` (data/items/) — b1 (hallazgo anti-inflación §21.8.2.b):**
+- **Data-complete:** 300/300 ítems con `nombre` + `descripcion` + `categoria` + `precio` + `rareza` + `tamano` (0 `nombre` vacío). El catálogo es **completo en datos**.
+- **GAP de icono/modelo (REFINADO):** **300/300 sin ícono utilizable** — 272/300 tienen `icono=null` explícito; los 28 restantes son recursos M15 del **schema anterior** (sin campo `icono`/`modelo_3d` → también sin ícono). Coincide EXACTAMENTE con el **L212 del director ("300/300 sin icono", OPEN, deuda M45/M46)**.
+- **Hallazgo anti-inflación:** los `[x]` "Crear iconos para cada objeto" + "Crear modelos 3D placeholder" **NO están soportados** en los 300 ítems (0 íconos en disco). Es el patrón conocido: **data/catalogo hecho, producción de assets (iconos .png M46 + modelos 3D M45) pendiente** → `#esperando:assets`.
+- **Visual QA de iconos:** **N/A este tramo** — no hay íconos del catálogo M159 en disco que capturar (300/300 vacíos). El QA visual de íconos se hace cuando M45/M46 produzcan los assets (`cap_159_`).
+- **Confirmación:** el hallazgo es **L212 ya documentado por el director** (OPEN, deuda M45) — **no es drift nuevo ni `[x]` inflado** que yo deba degradar; es una deuda de asset-production pendiente.
+
+**Alcance b1 (este tramo):** inventario + hallazgo de huecos + flag anti-inflación. NO flippeo los `[x]` "Crear iconos/modelos" por mi cuenta — los dejo para el director (mismo patrón M49/M41: propongo, el director aplica el flip). Integración M14/M16 = b3 posterior.
+
+## b2 — Producción de iconos placeholder (director N704, tandas de 10)
+
+- **Herramienta (reutilizada, §15):** `tools/gen_iconos_m159.gd` — genera íconos placeholder 2D 48×48 (relleno = color de CATEGORÍA, borde 3px = color de RAREZA, esquinas suaves, **cero texto** M46, paleta D102 amber/cream sobre dark). Corrige el campo `icono` del `.tres` a la ruta real.
+- **Tanda 1 (hecha):** 10 ítems de **tracción de gameplay** (criterio: los que el jugador toca en el loop básico — recursos + minerales): `baya_roja`, `madera_roble`, `piedra_caliza`, `mineral_cobre`, `fibra_algodon`, `wood`, `stone`, `iron_ore`, `grass`, `clay`. → 10 PNG en `assets/2d/items_m159/ico_<id>.png` + campo `icono` del `.tres` apuntando al PNG real.
+- **Visual QA:** `tools/mcp/godot-mcp/capturas/159-Catalogo-De-Objetos/cap_159_tanda1_contact_sheet.png` (composita los 10 sobre fondo dark D102). Verificado: distinguibles por color de categoría (baya=azulado, mayoría=verde) + borde de rareza (gris=común, teal=inusual), legibles a 48×48.
+- **Bug corregido:** el 1er run generaba `icono="res://res://..."` (prefijo doble) — se quitó el `"res://"+` sobrante (OUT_DIR ya lo trae); re-run limpio.
+- **Flip:** los 10 ítems ahora tienen `icono` real en disco, pero el `[ ]` "Verificar que todos los objetos tienen icono" (300) **NO se flippea todavía** (10/300). Flippa al completar las tandas que cubran una categoría completa. Fila GLOBAL sigue 78/146 (real).
+
 ---
 
 ## Checklist de Implementación

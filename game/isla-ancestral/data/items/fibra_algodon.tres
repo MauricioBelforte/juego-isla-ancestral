@@ -12,3 +12,5 @@ apilable = true
 stack_max = 99
 rareza = 1
 precio_venta = 4
+
+icono = "res://assets/2d/items_m159/ico_fibra_algodon.png"
