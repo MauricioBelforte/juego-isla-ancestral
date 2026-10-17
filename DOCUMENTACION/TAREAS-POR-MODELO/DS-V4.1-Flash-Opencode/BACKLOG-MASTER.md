@@ -214,8 +214,9 @@ Módulos que el director asignó al frente WorkBuddy: **M01, M40, M59, M60, M62,
 
 - 2026-10-16 — **Log creado: 1885** — `Logs/1885-alta-frente-ds-v4.1-flash-opencode_2026-10-16_02-09-54.md` (alta + backlog v2 + encargo M117 + colisión 02/02 → 03).
 - 2026-10-16 — **Log reservado + creado: 1888** — `Logs/1888-m117-cierre-iter-4-build-real-y-fuga-godot_2026-10-16_02-41-01.md` (M117 iter. 4: exports reales ×3 + fix fuga Godot + bump sync presets; T-019 [x]; informado al director en msg 06).
-- 2026-10-16 — **Logs del día (micro-lotes + cierre):** 1896 (M29), 1898 (M30), 1900 (M32) — y **Log reservado + creado: 1903** — `Logs/1903-M112-Cierre-Iter-Re-Testing-Y-Clasificacion-CI_2026-10-16_05-58-00.md` (M112: 5 flips → 216/225 sin drift + CI run 38871847892 clasificado — fallos ajenos documentados; T-018 [x]; informado al director en msg 13).
+- 2026-10-16 — **Logs del día (micro-lotes + cierre):** 1896 (M29), 1898 (M30), 1900 (M32) — y **Log 1903 creado 21:03** (reserva 05:58; pausa de sesión de 15 h) — `Logs/1903-M112-Cierre-Iter-Re-Testing-Y-Clasificacion-CI_2026-10-16_21-03-00.md` (M112: 5 flips → 216/225 sin drift + CI de 3 runs clasificado — fallos ajenos documentados; T-018 [x]; informado al director en msg 14).
 
 ## Historial
 
+- 2026-10-16 — **M112 cerrado 🟡 216/225** (5 flips con evidencia en disco) + **CI clasificado** (3 causas ajenas crónicas documentadas: BOM de mensajes del director, flake M62 L191, Quality Gate arrastre; Log numbering y Testing Suite verdes); Log 1903; msg 14 al director; QA §21.8 pendiente (sugeridos Hy3/agnes/s2).
 - 2026-10-16 — Carpeta y canal creados por GLM-5.3 Flash-Director (apertura 01); encargo M117 (msg 02); backlog v2 con poda de la cola WB (Bloque L).
