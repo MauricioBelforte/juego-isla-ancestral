@@ -34,7 +34,8 @@
      responder → escribirle un RECORDATORIO en su canal.
 4. **El cron de cada AGENTE es, en este orden:**
    - **(1a)** Leer su carpeta — **el ÚLTIMO archivo** — y si el director dejó instrucciones,
-     responderle primero (si el mensaje deja dudas, se completa EL MISMO archivo, no se crea otro).
+     responderle primero creando SU PROPIO mensaje (cada uno escribe su mensaje; el director,
+     si le faltó algo en uno de los suyos, lo completa en ese mismo archivo).
    - **(1b)** Si no hay mensajes → ir SIEMPRE a su BACKLOG-MASTER
      (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, cola activa) y trabajar la
      próxima tarea — **JAMÁS quedarse sin trabajo** (el director repone tareas si queda corto).

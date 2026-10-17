@@ -30,17 +30,17 @@
 
 1. M117-Build-System: 94/110 (16 [?] con dueño — QA Hy3 dictó sellado el cierre M117 aunque déjalo en iter. 4 — la cola formal si hay cambios en la iteración 5).
 2. M112-Testing (211/225 — 14 [ ]): Cerrar menos 14 tests pendientes con el ISSUE 3.1/3.2/3.3.
-3. Fix de economía M38 (hallazgo B): las guardas anti-falso-verde ya aplicadas — la verificación por el OWN run headless.
+3. Fix de economía M38 (hallazgo B): las guardas anti-falso-verde ya aplicadas — la verificación por el OWN run headless. — [x] 2026-10-17 (Tanda 1): OWN run headless; suites economía rc=0, 0 SCRIPT ERROR.
 4. Hallazgo C (temporada_bonus no ejercitado): archivado (deuda de cobertura — dueño M16/M38) — NO en el frente.
 5. El lint CLAUDE (de los formateos del repos) — un pass del lint suyo si el CI aplica.
 
 ### Bloque B — La cola de CI (verificación del run)
 
-6. Correr el run `quality.yml` headless (verificar el estado y la salidas) — commit evidencia.
-7. Si el run roja: diagnosticar por capas (los qué job fallan — el puntero exacto).
-8. Si roja por el WIP ajeno (Step-5 lote rendimiento en vuelo): NO reparar (reportar al director para rutear).
-9. Si roja por el mojibake histórico (18 archivos §28 excluidos): reportar como "rojo por diseño" (fundador decide).
-10. Si VERDE: reportar al director para el flip L199 de M118 (el director lo flipea).
+6. Correr el run `quality.yml` headless (verificar el estado y la salidas) — commit evidencia. — [x] 2026-10-17: reproducción local completa (11 jobs; 96/96 rc=0); evidencia out/local-ci-2026-10-17/; Log 1912.
+7. Si el run roja: diagnosticar por capas (los qué job fallan — el puntero exacto). — [x] 2026-10-17: legal-tools rojo=M159 (20 PNG); encoding rojo=BOM propio (ARREGLADO) + mojibake §28; resto VERDE.
+8. Si roja por el WIP ajeno (Step-5 lote rendimiento en vuelo): NO reparar (reportar al director para rutear). — [x] 2026-10-17: rojo ajeno NO reparado (M159/agnes), reportado (informe 029).
+9. Si roja por el mojibake histórico (18 archivos §28 excluidos): reportar como "rojo por diseño" (fundador decide). — [x] 2026-10-17: reportado 'rojo por diseño' (13/0/263; §28 — fundador decide).
+10. Si VERDE: reportar al director para el flip L199 de M118 (el director lo flipea). — [x] 2026-10-17: test-suite/godot-lint VERDE en local (flip L199 decisión del director); run global rojo solo por M159 + §28.
 11. Los logs de CI (los runs históricos — el monitoreo de los 15 rojos + fix de M139/M19/M74/M33).
 12. El BuildConfigManager (4 targets, 4 presets — el frente del M117 v4).
 13. El InstaladorConfig (3 plataformas, 5 pasos — el frente del M116).
