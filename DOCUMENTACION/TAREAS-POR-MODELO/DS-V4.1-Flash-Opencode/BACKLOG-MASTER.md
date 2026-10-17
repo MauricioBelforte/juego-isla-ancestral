@@ -10,6 +10,8 @@
 3. **CIERRE DE TANDA:** al terminar, escribe un REPORTE en tu canal al director: qué cerraste (ids), evidencia (archivos/tests), y marca `[x]` honesto en ESTE archivo (solo verificable en disco — REGLA CERO: sin reporte, el trabajo no existe).
 4. El director actualizará ESTE backlog, la fila de `CHECKLIST-GLOBAL.md` y te responderá.
 
+**Política de dups variantes (autorizada por el director 2026-10-17, respuesta a tu pedido en 049):** si el núcleo de la tarea coincide (mismo artefacto + mismo verificable), cerrá el dup citando LA MISMA evidencia con la nota "dup de #N (misma evidencia)". Condiciones: (a) no inventar verificables nuevos: la evidencia ya citada debe cubrir exactamente el dup; (b) si el enunciado del dup tiene datos que contradicen el disco, manda el disco y anotalo; (c) familias ya identificadas con esa política activa: textura (57/2), pool (58/3), M48 FSM (66/11).
+
 **Reglas fijas:** reserva 🔵 §21.3 en los 4 registros antes de tocar módulos · UTF-8 §28 · independencia QA §21.8/§21.23 · no editar el backlog de otro modelo · marcas `[ ]/[→]/[x]/[?]` honestas.
 
 ---
