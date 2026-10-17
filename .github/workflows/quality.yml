@@ -296,8 +296,8 @@ jobs:
           # es get_node(Nodo) y daba ~25 falsos positivos. El reemplazo por .new() daba
           # 749. Conserva lo que si sirve: ciclos de dependencias. Referencias rotas se
           # detectan con godot --headless --check-only.
-          python tools/ci/cross_module_linter.py || FAIL=1
-          python tools/ci/test_cross_module_linter.py || FAIL=1
+          python "$GITHUB_WORKSPACE/tools/ci/cross_module_linter.py || FAIL=1
+          python "$GITHUB_WORKSPACE/tools/ci/test_cross_module_linter.py || FAIL=1
           # M53 QA: test de regresion de los tipos de modalidad de las capas UI.
           # Detecta que DialogLayer quede en MODAL_SIMPLE e InventoryLayer en MODAL_FULL
           # (estaban invertidos; fix 2026-10-12, orden del director mimo msg 243).
