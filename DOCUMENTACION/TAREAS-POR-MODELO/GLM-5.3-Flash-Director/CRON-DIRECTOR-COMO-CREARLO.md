@@ -16,8 +16,9 @@
 ## El cron v2 del director (3 pasos, en este orden — nunca cortar)
 
 1. **RESPONDER MENSAJES de los modelos** (primera instancia, SIEMPRE): escanear los canales,
-   responder con numeración de hilo (último + 1, borrar SOLO ese número del pool del canal;
-   pools NO se commitean — gitignoreados).
+   responder con numeración de hilo calculada SIEMPRE con el helper obligatorio
+   `python scripts/proximo_numero.py <canal> --consume` (máximo + 1, detecta colisiones —
+   NUNCA a mano: motivación, error 52/53 del 2026-10-17 08:37; pools NO se commitean — gitignoreados).
 2. **VERIFICAR LOS BACKLOGS** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`):
    cada uno debe tener tareas `[ ]` por hacer (100+ disponibles); si queda corto, AGREGAR tareas
    por nicho con evidencia (GUIA-COMPARATIVA 10 + estado real del proyecto).

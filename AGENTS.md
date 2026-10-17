@@ -527,6 +527,12 @@ Mensajes entre modelos/
    ```bash
    python scripts/reservar_mensaje.py <carpeta-receptor> <tema> [--emisor <carpeta-emisor>]
    ```
+   > **⚠️ HELPER ADICIONAL OBLIGATORIO (directiva del fundador 2026-10-17 08:42):** antes de
+   > escribir o mover CUALQUIER mensaje, calcular el número con
+   > `python scripts/proximo_numero.py <canal>` (y `--consume` para tomarlo del pool). Máximo
+   > del canal + 1, sin excepciones, scan recursivo (canales archivados en subcarpetas incluidos).
+   > Detecta colisiones (números del pool ya usados), reporta huecos y nunca se numeran mensajes
+   > a mano. Debe existir en `scripts/` de todo proyecto con esta metodología.
     El helper lista los últimos mensajes de la carpeta destino (para el `**Responde a:**`), toma
     del pool **de esa carpeta** el número que corresponde a la secuencia del hilo, lo borra del
     pool y crea el archivo con la plantilla. **No numerar a mano.** Si faltan números, se amplía

@@ -64,6 +64,25 @@ DIRECTOR (cron): 1º responde mensajes → 2º chequea que los backlogs tengan t
 
 ---
 
+## HELPER OBLIGATORIO DE NUMERACIÓN — `scripts/proximo_numero.py` (directiva del fundador 2026-10-17 08:42)
+
+> **NUNCA numerar un mensaje a mano.** Antes de escribir (o mover) cualquier archivo de mensaje
+> en `Mensajes entre modelos/`, el director (y cualquier agente) DEBE calcular el número con el
+> helper y consumirlo del pool así:
+>
+> ```
+> python scripts/proximo_numero.py <canal>            # próximo número + auditoría (LEER ANTES de escribir)
+> python scripts/proximo_numero.py <canal> --consume  # además consume ese número del pool
+> ```
+>
+> Qué hace: calcula próximo = **máximo prefijo existente en el canal + 1** (scan recursivo —
+> canales archivados en subcarpetas incluidos), reconstruye/sanhea el pool (remueve números ya
+> usados detectando colisiones — el bug del 52/53 de DS), reporta huecos (informativos, NO
+> reutilizables) y verifica que el próximo esté disponible. Motivación: el error real del
+> director del 2026-10-17 08:37 (publicó el 53 cuando el próximo era el 52) — que no se repita.
+
+---
+
 ## Regla de oro
 
 > **El informe detallado se escribe en la carpeta del modelo. Por el chat, solo se avisa.**
