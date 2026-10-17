@@ -306,4 +306,5 @@ La gran mayoría (M02–M04, M08, M15, M17–M18, M20–M26, M28–M31, M33–M3
 ### Ola extendida post-cierre (697+)
 
 - **M54-Mapa (699):** 133/177, drift 0. Los [x] apuntan a scripts/mapa/ + scripts/map/ + scripts/ui/ reales (mapa_manager, map_data_service, minimap_widget, tests incluidos). Micro doc-drift NO en [x]: refs estilo Unity (//mapa/...) + map_ui.gd / marker_pool.gd obsoletas en 04-Codigo (pendiente de saneo documental, no bloquea). Total de la ola: 15 modulos, drift 0.
+- **Tramo M55-M65 (701):** M55 (58/58/15=131), M58 (154/27/2=183), M61 (53/89/6=148), M62 (113/37/0=150), M63 (67/7/27=101), M65 (89/1/0=90) — drift 0 en los 6. La ola extendida completa: 21 modulos, drift 0. Deuda documental acumulada NO bloqueante: M54 (// Unity + map_ui/marker_pool), M13/M35/M33/M42/M51 (refs obsoletas en 04-Codigo). Ola CERRADA por decision del director (702) — agnes rota al Bloque A visual (M159 b1).
 
