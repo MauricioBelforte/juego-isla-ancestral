@@ -67,13 +67,13 @@
 
 29. M88: medición del estado (`05-Checklist M88` — 174/185).
 30. M88: resolver los ítems pendientes (11 `[ ]`/`[?]`).
-31. Control de glifos: los caracteres especiales de each idioma (á, ñ, ß, п...) presentes en la fuente.
+31. [x] Control de glifos: los caracteres especiales de each idioma (á, ñ, ß, п...) presentes en la fuente. — TANDA 9: **CREADO `scripts/validar_glifos_fuentes.py`** (stdlib, parser cmap TTF formatos 0/4/6/12 sin fontTools, report-only, exit 0/1). 20 caracteres no-ASCII requeridos (extraídos de ES/EN/PT). **Nunito ×3: 18/20 — FALTAN U+2014 (—) y U+2192 (→); FredokaOne: 19/20 — FALTA U+2192 (→). → (U+2192) se usa en 62 lugares runtime (M68.ROUTE.* ES.po/EN.po: 20 rutas de transporte + template `→ {destino} · {metros} m`) → TOFU visible en la UI de transporte con las fuentes actuales. — (U+2014) en 8 lugares runtime (EQUIP.HINT / EQUIP.TOOLTIP_QUITAR, ES/EN) → tofu en Nunito (solo FredokaOne lo cubre). Deuda reportada al director/fundador: la corrección (añadir glifos a las fuentes / reemplazar caracteres en catálogos M68+M14 / fallback de fuente) es decisión del dueño de M88 — M68 y M14 son módulos de otros agentes, NO tocados.
 32. Control fuente tamanho (la precisa en UI con fuente personalizada).
 
 ### Bloque E — Subtítulos y diálogos multi-idioma (nicho Hy3/mío)
 
 33. M113: los subtítulos multi-idioma (los diálogos de M21/M162 con interliniado).
-34. Subtítulos: control de longitud de texto por idioma (ES vs PT — el draw de text ancho).
+34. [x] Subtítulos: control de longitud de texto por idioma (ES vs PT — el draw de text ancho). — TANDA 9: 146 claves comunes — ES 2691 chars (avg 18.4, máx EQUIP.HINT 79), EN 2417 (avg 16.6, máx 65), PT 2607 (avg 17.9, máx 78). **PT vs ES: -3.1% promedio** (PT más corto en promedio, no el típico +10-20%). **9 claves con PT >15% más larga que ES**: SETTINGS.AJUSTES +86% (7→13), SETTINGS.FOGATA +33%, SETTINGS.AUDIO_FALLA +28%, SETTINGS.DESCARTAR_MENSAJE +22%, EQUIP.BONO +21%, SETTINGS.SIN_RECETAS +19%, LOADING.CARGANDO +18%, TUTORIAL.VECINO +17%, EQUIP.BONO_EQUIPO +15%. El máximo absoluto (EQUIP.HINT 79 ES / 78 PT) está cubierto por el ancho de ES; riesgo de desbordamiento acotado a Settings (M91) y Equip (M14) — verificación visual por sus dueños. Limitación: proxy por chars; el ancho en píxeles (get_string_size) requiere Godot headless — follow-up si el director lo pide.
 
 ### Bloque F — El contraste general M91 (ya aplicado — el QA)
 
