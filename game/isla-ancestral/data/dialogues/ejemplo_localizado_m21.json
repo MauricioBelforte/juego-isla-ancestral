@@ -1,0 +1,38 @@
+{
+	"id": "ejemplo_localizado_m21",
+	"start": "saludo",
+	"nodes": {
+		"saludo": {
+			"tipo": 0,
+			"speaker_key": "npc.anciano",
+			"text_key": "EJEMPLO_M21_SALUDO",
+			"next_id": "opciones"
+		},
+		"opciones": {
+			"tipo": 1,
+			"speaker_key": "npc.anciano",
+			"text_key": "EJEMPLO_M21_PREGUNTA",
+			"options": [
+				{
+					"text_key": "EJEMPLO_M21_OPCION_SI",
+					"next_id": "despedida"
+				},
+				{
+					"text_key": "EJEMPLO_M21_OPCION_NO",
+					"next_id": "despedida",
+					"blocked_text_key": "EJEMPLO_M21_OPCION_BLOQUEADA"
+				}
+			]
+		},
+		"despedida": {
+			"tipo": 0,
+			"speaker_key": "npc.anciano",
+			"text_key": "EJEMPLO_M21_DESPEDIDA",
+			"next_id": "fin"
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.anciano"
+		}
+	}
+}

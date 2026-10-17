@@ -23,6 +23,10 @@ const TIPO_FIN := 3
 @export var next_id: String = ""
 @export var goto_id: String = ""
 @export var options: Array = []
+## M21 E L101 (Hy3 / WorkBuddy, Lote 2 msg 249): cuando true, las opciones bloqueadas
+## (las que tienen blocked_text_key) NO se muestran; cuando false, se muestran grisadas
+## con su texto alternativo (L102). Aditivo y retrocompatible (default false).
+@export var hide_blocked: bool = false
 
 ## Evalua las condiciones del nodo contra el estado de sesion
 func evaluate_conditions(session_vars: Dictionary) -> bool:
