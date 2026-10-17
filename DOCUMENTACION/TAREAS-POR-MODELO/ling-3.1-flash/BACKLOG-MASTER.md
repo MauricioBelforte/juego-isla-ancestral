@@ -94,8 +94,8 @@
 
 ### Bloque H — Los pendientes de placeholder parity (nuevo ítem luego del 142)
 
-46. Control placeholder `%1$s`-estilos vs `{n}`-estilos (los 2 estilos en uso — el estándar del proyecto unificar).
-47. Control pluralización (los plurales por idioma ES/EN/PT si aplican — las cantidades del juego).
+46. [x] Control placeholder `%1$s`-estilos vs `{n}`-estilos (los 2 estilos en uso — el estándar del proyecto unificar). — TANDA 2 (2026-10-17): censo `control_i18n_tanda2.py` — ES/EN: 5 printf + 9 named + 0 both + 133 none (PT: 5/9/0/134 — el +1 es la huérfana histórica); **0 inconsistencias de estilo ES↔EN y ES↔PT** (por clave). Los 2 estilos coexisten POR DISEÑO: printf (`%s`×4, `%d`×4) en DIARY/TIENDAS/SETTINGS (conteos) y named (`{c}`×3, `{p}`×2, `{item}`×2, `{n}`×2, `{tipo}`×1, `{rareza}`×1) en EQUIP/ITEMS (UI estructurada). Unificar = decisión de diseño (director/fundador), no es bug de consistencia.
+47. [x] Control pluralización (los plurales por idioma ES/EN/PT si aplican — las cantidades del juego). — TANDA 2: `.po` es/en declaran `Plural-Forms: nplurals=2; plural=(n != 1);` pero tienen **0 claves plurales** (ninguna entrada `msgstr[0]/msgstr[1]`). El runtime SÍ soporta plurales (`localization_manager.gd`: `_plural_forms`, `_indice_plural`, `tr_key(..., n)`, `format_text` inyecta `{n}`) — la infraestructura está lista; el catálogo aún no la usa (las cantidades hoy son claves separadas nombre/desc, no formas plurales).
 48. Control 3rd language 3er idioma (los 3er idioma del juego — la decisión del scope multilingüe).
 49. Control de formato de números/fecha por idioma (los TimeCalendar strings).
 50. Control de los sufixes de idioma en los archivos (es/en/pt — sistemático).
