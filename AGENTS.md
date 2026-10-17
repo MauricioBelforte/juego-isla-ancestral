@@ -374,15 +374,19 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 
 ### Flujo de trabajo: Backlog Personal → Módulo → CHECKLIST-GLOBAL
 
-> ⚠️ **IMPORTANTE:** Cada modelo debe trabajar desde su **backlog personal** (`TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`). La CHECKLIST-GLOBAL es solo un tablero de resumen para el usuario — **NO** es la fuente de trabajo del agente.
+> ⚠️ **IMPORTANTE (METODOLOGÍA V2, fundador 2026-10-17):** cada modelo trabaja desde SU backlog
+> en su canal: `Mensajes entre modelos/<MODELO>/BACKLOG-100-TAREAS-<MODELO>.md` — mantenido por
+> el DIRECTOR (ver §29.1). La CHECKLIST-GLOBAL es solo un tablero de resumen para el usuario —
+> **NO** es la fuente de trabajo del agente.
 
-**Flujo obligatorio:**
-1. **Leer tu backlog personal** → buscar tareas pendientes (`[ ]`) en tu carpeta
-2. **Elegir una tarea** de tus módulos asignados (columna `Recom` de CHECKLIST-GLOBAL)
-3. **Bloquear** → marcar `[→]` en tu backlog personal + `🔵` en CHECKLIST-GLOBAL
-4. **Ejecutar** la tarea (leer `plan-actual/` del módulo, implementar, documentar)
-5. **Completar** → marcar `[x]` en los 3 lugares (backlog personal, `05-Checklist.md`, CHECKLIST-GLOBAL)
-6. **Repetir** hasta agotar tokens
+**Flujo obligatorio (V2):**
+1. **Leer si el director te escribió** en tu canal → responder primero (numeración de hilo)
+2. **Leer tu backlog** (en tu canal) → buscar tareas pendientes (`[ ]`) según tu nicho
+3. **Elegir una TANDA de tareas** y bloquearlas → marcar `[→]` en tu backlog + `🔵` en CHECKLIST-GLOBAL (si toca un módulo)
+4. **Ejecutar** las tareas (leer `plan-actual/` del módulo, implementar, documentar)
+5. **Completar** → marcar `[x]` en los 3 lugares (tu backlog en el canal, `05-Checklist.md`, CHECKLIST-GLOBAL)
+6. **Reportar el cierre de la tanda** al director en tu canal (REGLA CERO)
+7. **Repetir** hasta agotar tokens
 
 **NO ir directo a la CHECKLIST-GLOBAL a buscar trabajo.** Tu backlog es tu fuente de verdad.
 
@@ -1431,8 +1435,33 @@ reemplazo), y `Logs/` (registro histórico).
 
 > **Agregado:** 2026-09-02 · **Fuente:** directiva del usuario · **Primero en usar:** deepseek-v4-flash-vision-exp / Kilo Code
 > **Actualizado:** 2026-09-11 · **Fuente:** directiva del usuario — cada modelo trabaja desde su propio backlog
+> **⚡ METODOLOGÍA V2 (directiva del fundador 2026-10-17):** los backlogs de flota se MUDAN a los
+> canales. Ver sección 29.1 — **donde esta sección diga `TAREAS-POR-MODELO/<MODELO>/`, léase
+> `Mensajes entre modelos/<MODELO>/BACKLOG-100-TAREAS-<MODELO>.md`**. El flujo por módulos/Recom
+> y las marcas siguen vigentes; lo que cambia es la UBICACIÓN y QUIÉN mantiene el archivo
+> (el Director) y el ciclo de trabajo (mensajes primero, tanda del backlog después, reporte al cierre).
 
-### Flujo de trabajo obligatorio para TODO modelo
+### 29.1 METODOLOGÍA V2 — Backlogs de flota en los canales del director (fundador 2026-10-17)
+
+1. **Ubicación de los backlogs de flota (desde 2026-10-17):**
+   `Mensajes entre modelos/<MODELO>/BACKLOG-100-TAREAS-<MODELO>.md` (estilo checklist, 100+
+   tareas disponibles). Cada agente ya sabe que ese archivo existe en su canal.
+2. **El DIRECTOR los mantiene** (`GLM-5.3-Flash-Director`): agrega/marca tareas con evidencia,
+   investigando `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` y el estado real del proyecto.
+   Solo el backlog PROPIO del director queda en `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/`.
+3. **Ciclo del AGENTE (cron propio, en este orden):** (1a) leer si el director le escribió en
+   su canal → responder primero; (1b) si no hay mensajes → trabajar una TANDA de tareas de SU
+   backlog (las que él elija, según su nicho); (1c) al terminar la tanda → reporte de cierre al
+   director en su canal + marcas `[x]` honestas en su backlog + `05-Checklist` + fila GLOBAL.
+4. **Ciclo del DIRECTOR (3 pasos, en este orden):** (1) responder mensajes de los modelos;
+   (2) verificar que cada backlog tenga tareas por hacer (agregar si queda corto, por nicho);
+   (3) si un modelo tiene tareas disponibles y pasa mucho tiempo sin avanzar ni responder →
+   escribirle un RECORDATORIO en su canal.
+5. **NO cambian:** la numeración de mensajes (hilo último+1, pools por canal gitignoreados),
+   la reserva 🔵 de módulos §21.3, la REGLA CERO de reportes, el QA cruzado §21.8,
+   UTF-8 §28 y los logs de cierre formal en `Logs/`.
+
+### Flujo de trabajo obligatorio para TODO modelo (VIGENTE versión V2)
 
 > ⚠️ **IMPORTANTE:** La CHECKLIST-GLOBAL.md es solo un **tablero de resumen** para el usuario. Cada modelo **DEBE** trabajar desde su **propio backlog personal** en `TAREAS-POR-MODELO/<MODELO>/`.
 

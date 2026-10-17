@@ -1,3 +1,27 @@
+# METODOLOGIA V2 (directiva del fundador 2026-10-17) — COMO USAR ESTE ARCHIVO
+
+**Modelo mantenimiento:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code
+**Fecha de alta:** 2026-10-17
+
+Este archivo es TU backlog de tareas, y lo mantiene ACTUALIZADO el DIRECTOR (GLM-5.3-Flash-Director) en TU carpeta de canal. Ya no resides en DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/.
+
+## Tu ciclo como agente (en este orden):
+
+1. **PRIMERA INSTANCIA:** lee si el director te escribio un mensaje en tu canal (Mensajes entre modelos/agnes-3-flash/). Si hay mensaje dirigido a ti, RESPONDELO primero (numeracion de hilo: ultimo + 1; borra SOLO ese numero del pool NUMEROS_DISPONIBLES.txt de tu carpeta — pools NO se commitean).
+2. **SEGUNDA INSTANCIA:** si NO hay mensajes del director, toma el proximo item [ ] de ESTE backlog que puedas hacer segun tu nicho (GUIA-COMPARATIVA DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md). Trabaja una TANDA de tareas (las que elijas).
+3. **CIERRE DE TANDA:** al terminar tu tanda, escribe un REPORTE en tu canal al director: que tasks cerraste (ids), evidencia (archivos/tenets/tests), y actualiza las marcas [ ]->[x] de las que completaste (marca solo lo verificable en disco, honestidad del protocolo).
+4. El director actualizara este backlog, llevara la fila de CHECKLIST-GLOBAL.md y te respondera.
+
+## Reglas que NO cambian:
+
+- Reserva de modulo (§21.3 azules) en CHECKLIST-GLOBAL + ESTADO-PARALELO + 05-Checklist antes de tocar modulos.
+- Numeracion de mensajes por hilo (ultimo + 1) con pool por canal. Pools gitignoreados.
+- UTF-8 estricto (apendice 28), firmas de documento, logs de cierre en Logs/ (tareas de cierre formal).
+- Independencia de modelo en QA (§21.8/21.23).
+- NO delegues ni edites el backlog de OTRO modelo ni la carpeta de OTRO agente.
+
+---
+
 # BACKLOG 100+ TAREAS PARA AGNES-3-FLASH — Investigación previa por GLM-5.3-Flash
 
 **Modelo:** GLM-5.3-Flash (encargado del fundador 2026-10-16: un backlog con 100+ tareas por modelo activo)

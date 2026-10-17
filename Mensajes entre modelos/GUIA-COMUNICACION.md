@@ -1,11 +1,63 @@
 # Guía de Comunicación — Protocolo de Mensajes entre Modelos
 
-**Modelo:** atria-Dawn-Preview (director)
+**Modelo:** GLM-5.3-Flash-Director (GLM-5.3-Flash) — última modificación 2026-10-17
 **Plataforma:** Kilo Code
-**Fecha:** 2026-10-03 20:30:21
+**Fecha original:** 2026-10-03 20:30:21
 
 > Lectura **obligatoria** para todos los agentes y para el director. Referencia normativa de
 > AGENTS.md §10 (Modo Canal) y de los backlogs personales.
+
+---
+
+## ⭐ METODOLOGÍA V2 — Backlogs de flota en los canales (directiva del fundador 2026-10-17)
+
+> **Esta sección REEMPLAZA (a partir de 2026-10-17) el flujo de backlogs de las secciones
+> siguientes donde digan que el backlog personal vive en `DOCUMENTACION/TAREAS-POR-MODELO/`**.
+> La Regla de oro, la REGLA CERO, la numeración por hilo (último + 1) y los pools por canal
+> siguen vigentes sin cambio.
+
+### Qué cambió
+
+1. **Cada modelo tiene SU archivo de 100+ tareas EN SU PROPIA CARPETA DE CANAL:**
+   `Mensajes entre modelos/<modelo>/BACKLOG-100-TAREAS-<MODELO>.md` — estilo checklist.
+   Ya NO se mantienen en `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/`
+   (esa carpeta quedó solo con el backlog del propio director y material interno).
+2. **El DIRECTOR (GLM-5.3-Flash-Director) es el responsable de mantener esos archivos
+   actualizados para cada modelo**, con evidencia, investigando la
+   `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` y el estado real del proyecto. Los
+   agentes NO editan el backlog de otro modelo ni la carpeta de otro agente; las marcas
+   `[ ]→[x]` de sus propias tareas las hace cada agente sobre SU backlog.
+3. **El cron del DIRECTOR se simplificó a 3 pasos, EN ESTE ORDRE:**
+   - **(1)** Responder los mensajes de los modelos (primera instancia, siempre).
+   - **(2)** Verificar que cada backlog de flota tenga tareas por hacer (si un backlog queda
+     corto, agregar tareas según nicho/capacidades del modelo).
+   - **(3)** Si un modelo tiene tareas disponibles y pasa MUCHO tiempo sin avanzar ni
+     responder → escribirle un RECORDATORIO en su canal.
+4. **El cron de cada AGENTE es, en este orden:**
+   - **(1a)** Leer si el director le escribió un mensaje en su canal → responderlo primero.
+   - **(1b)** Si no hay mensajes → elegir una TANDA de tareas de SU backlog y trabajarlas.
+   - **(1c)** Al terminar la tanda → reporte de cierre al director en su canal
+     (qué cerró, evidencia, marcas actualizadas).
+
+### El ciclo completo (resumen operational)
+
+```
+FUNDADOR encarga al director → el director DELEGA por canal (mensaje) o deja previsto en backlog
+AGENTE (cron): 1º responde mensajes del director → 2º trabaja una tanda de SU backlog
+             → 3º reporte de cierre de tanda al director
+DIRECTOR (cron): 1º responde mensajes → 2º chequea que los backlogs tengan tareas por hacer
+             → 3º recordatorio a los silenciosos → actualiza backlog/fila GLOBAL de cada cierre
+```
+
+### Qué NO cambió
+
+- Reserva de módulo 🔵 en los 4 registros (§21.3) antes de tocar un módulo.
+- Numeración de mensajes: hilo (último + 1), pool por canal, pools gitignoreados.
+- REGLA CERO (sin reporte no existe trabajo), Regla de oro (detalle en carpeta, chat solo avisa).
+- UTF-8 (§28), log de cierre en `Logs/` para tareas de cierre formal, firmas.
+- QA cruzado §21.8 (Hy3/agnes verifican lo de GLM; DeepSeek-WB y DS-Opencode no se verifican entre sí).
+- Los pools de numeración viven en cada canal; el backlog del DIRECTOR sigue en
+  `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/` (sin canal propio, §31 de AGENTS.md).
 
 ---
 
