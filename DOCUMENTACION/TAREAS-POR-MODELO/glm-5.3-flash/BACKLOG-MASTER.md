@@ -1,3 +1,78 @@
+# BACKLOG-MASTER — GLM-5.3-Flash (rol agente) — UNIFICADO (metodología V2, fundador 2026-10-17)
+
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Unificación 2026-10-17:** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior. **ESTE es el único backlog válido de GLM-5.3-Flash (rol agente)** (directiva: un solo archivo por modelo en su carpeta).
+
+## TU CICLO COMO AGENTE (en este orden)
+
+1. **PRIMERA INSTANCIA:** lee si el director te escribió un mensaje en tu canal (`Mensajes entre modelos/GLM-5.3-Flash (rol agente)/`). Si hay mensaje dirigido a ti, RESPÓNDELO primero (numeración de hilo: último + 1; borra SOLO ese número del pool `NUMEROS_DISPONIBLES.txt` de tu carpeta de canal — pools NO se commitean).
+2. **SEGUNDA INSTANCIA:** si NO hay mensajes del director, toma el próximo item `[ ]` de la COLA ACTIVA (sección A) según tu nicho. Trabaja una TANDA de tareas (las que elijas).
+3. **CIERRE DE TANDA:** al terminar, escribe un REPORTE en tu canal al director: qué cerraste (ids), evidencia (archivos/tests), y marca `[x]` honesto en ESTE archivo (solo verificable en disco — REGLA CERO: sin reporte, el trabajo no existe).
+4. El director actualizará ESTE backlog, la fila de `CHECKLIST-GLOBAL.md` y te responderá.
+
+**Reglas fijas:** reserva 🔵 §21.3 en los 4 registros antes de tocar módulos · UTF-8 §28 · independencia QA §21.8/§21.23 · no editar el backlog de otro modelo · marcas `[ ]/[→]/[x]/[?]` honestas.
+
+---
+
+# (A) COLA ACTIVA — 100+ TAREAS (tandas curadas por el director)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Cline
+
+# BACKLOG MASTER — glm-5.3-flash
+
+> Backlog personal según `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`. Fuente: columna **Recom** de `CHECKLIST-GLOBAL.md` (patrón `GLM-5.3 Flash`), ítems pendientes `[ ]`/`[?]` de los `05-Checklist.md`.
+
+**Módulos asignados:** 22  |  **Tareas pendientes totales:** 2009
+
+> ⛔ **REGLA OBLIGATORIA — CODIFICACION UTF-8**
+> Todos los archivos del proyecto DEBEN guardarse en UTF-8 sin BOM. NUNCA en cp1252/ANSI.
+> Los caracteres rotos (Ã³, â€", ðŸŸ¢, etc.) RETRASAN EL TRABAJO, ROMPEN EL FLUJO y CAUSAN PERDIDA DE TIEMPO E INFORMACION.
+> Si tu plataforma escribe en cp1252, NO TOQUES EL REPOSITORIO hasta configurar UTF-8.
+> Ver AGENTS.md seccion 28 paradetalles y herramientas de reparacion.
+
+## Orden de trabajo (v2 — curado 2026-09-15, glm-5.3-flash / Cline)
+
+> **Curación v2:** conteos re-verificados contra los `05-Checklist.md` reales (regex `^- \[ \]` / `^- \[\?\]`) tras la auditoría global que revirtió varios módulos y el regenerado de CHECKLIST-GLOBAL (`generar_checklist_global.py`, con backup). **Resueltos y cerrados por otros agentes:** 32-Clima (0/0, auditoría agnes 13/09), 38-Economia (0/0), 93-Balance (134/134), 145 (0/0), 146 (0/0), 65-Animales-IA (0/0). **149-Nombres:** reservado por otro agente (checklist regenerado) — fuera de mi cola. **Conflictos:** 66-Anti-Softlock (Log 701 declara 117/117 pero el checklist real tiene 117 `[ ]` post-reversión) → tareas en `[→]` pendiente de reconciliación. **31/34/64:** re-clasificados a `[?]` con dueño por otros — no accionables ahora.
+
+| # | ID | Módulo | Pendientes reales (05-Checklist) | Notas | Subcarpeta |
+|---|----|--------|----------------------------------|-------|------------|
+| 1 | 92 | 92-Tutorial | 76 (75 ab + 1 ?) | Alta · iter.4 data-driven (Log 987, 97/185): guiones .tres + Q2/Q7 + R-block · falta UI M53 + RF11-RF18 + Q1/Q8 + S10-S12 | `92-Tutorial/checklist.md` |
+| 2 | 39 | 39-Tiendas | 54 | Media · iter. glm cerrada (Log 1017): checklist 81→127 [x]; pendientes UI M53/ferias M73/QA | `39-Tiendas/checklist.md` |
+| 3 | 158 | 158-Herramientas-Y-Desbloqueo-De-Zonas | 87 | 🟢 0→87 hecho por otro; núcleo a retomar | `158-Herramientas-Y-Desbloqueo-De-Zonas/checklist.md` |
+| 4 | 19 | 19-NPC-Y-Vecinos | 83 | Alta · núcleo iter. 3 (Log 553) | `19-NPC-Y-Vecinos/checklist.md` |
+| 5 | 25 | 25-Ruinas | 84 | Media · kit modular | `25-Ruinas/checklist.md` |
+| 6 | 33 | 33-Agricultura | 86 | Media · núcleo + clima | `33-Agricultura/checklist.md` |
+| 7 | 37 | 37-Museos-Y-Colecciones | 112 | 🟢 Media | `37-Museos-Y-Colecciones/checklist.md` |
+| 8 | 28 | 28-Viajes | 80 | 🟢 Media · núcleo V0 (Log 371) | `28-Viajes/checklist.md` |
+| 9 | 35 | 35-Mineria | 82 (69 ab + 13 ?) | Media · núcleo + QA | `35-Mineria/checklist.md` |
+| 10 | 77 | 77-Online-Y-Red | 126 | 🟢 Media · sin núcleo aún | `77-Online-Y-Red/checklist.md` |
+| 11 | 153 | 153-Objetivo-Final | ~130 (regenerado) | Alta · mis 10 tareas vuelven a estar abiertas | `153-Objetivo-Final/checklist.md` |
+| — | 31 | 31-Ciclo-Dia-Noche | 54 `[?]` | no accionable ahora (dueños) | `31-Ciclo-Dia-Noche/checklist.md` |
+| — | 34 | 34-Pesca | 69 `[?]` | no accionable ahora | `34-Pesca/checklist.md` |
+| — | 64 | 64-IA-De-NPC | 49 `[?]` | no accionable ahora | `64-IA-De-NPC/checklist.md` |
+| — | 66 | 66-Anti-Softlock | 7 `[?]` (87 `[x]`) | ✅ RECONCILIADO 2026-09-15 (Log 913): restauración verificada 110/117; los 7 `[ ]` restantes tienen dueño externo (M27/M64/M22/M26) | `66-Anti-Softlock/checklist.md` |
+
+**Pendiente real accionable: ~860** (de 2.007 al inicio de la curación; baja 110 al reconciliar M66 y ~51 en la iter. 3 de M92). Resueltos/conflictos/no-accionables documentados arriba y en los checklists personales.
+
+## Reglas de sincronización (al completar una T-###)
+
+1. Marcar `[x]` en esta checklist personal (con evidencia: log + test).
+2. Marcar el ítem correspondiente en el `05-Checklist.md` del módulo.
+3. Actualizar la fila del módulo en `CHECKLIST-GLOBAL.md` (progreso).
+
+## Logs
+
+- [x] Log creado: **1017** — M39 cierre iter GLM (atomicidad catalogo D8 + falso-verde loop economico)
+- [x] Log reservado y creado: **1875** — Regla de numeración de mensajes: manda la secuencia del hilo (directiva del fundador 2026-10-15; GUIA-COMUNICACION.md + AGENTS.md §10.2). *(GLM-5.3-Flash / Kilo Code, canal `Mensajes entre modelos/GLM-5.3-Flash/`)*
+- [x] Log reservado y creado: **1876** — Backlogs 100+ tareas por modelo activo (5 archivos en esta carpeta, 105 tareas cada uno) + Tareas A/B del director (M52 degradación validate_vfx + M11 notas refrescadas). *(GLM-5.3-Flash / Kilo Code, 2026-10-16)*
+- [x] Log reservado y creado: **1877** — M91 cierre heredado de step-5-kilocode: 212→217/239 (+5 flips L201-L204/L210, sliders 7 buses + claves i18n es/en, tests 79/0 + 136/0 + 82/0, liberado 🟡 con deudas externas). *(GLM-5.3-Flash / Kilo Code, 2026-10-16)*
+
+
+---
+
+# (B) ESTADO HISTÓRICO Y ENCAJE — registro del BACKLOG-MASTER anterior (preservado 2026-10-17)
+
 **Modelo:** glm-5.3-flash
 **Plataforma:** Cline
 

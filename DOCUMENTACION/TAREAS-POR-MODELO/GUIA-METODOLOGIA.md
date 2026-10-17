@@ -1,11 +1,12 @@
-> ⚠️ **ACTUALIZADO — METODOLOGÍA V2 (directiva del fundador 2026-10-17):** **ESTA GUÍA QUEDÓ
-> OBSOLETA PARA LOS BACKLOGS DE FLOTA.** Los backlogs de tareas de cada modelo NO viven más en
-> `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/` — ahora viven EN SU CANAL:
-> `Mensajes entre modelos/<MODELO>/BACKLOG-100-TAREAS-<MODELO>.md`, y los mantiene el DIRECTOR
-> (GLM-5.3-Flash-Director). El ciclo del agente: 1º responder mensajes del director; 2º si no
-> hay, trabajar una tanda de SU backlog de canal y reportar al cierre (REGLA CERO). Detalle
-> completo: `AGENTS.md` §29.1 y `Mensajes entre modelos/GUIA-COMUNICACION.md` (MÉTODOLOGÍA V2).
-> Esta guía queda como referencia histórica del formato de marcas y la estructura original.
+> ⭐ **METODOLOGÍA V2 (directiva del fundador 2026-10-17, corregida ~04:45):** los backlogs
+> de flota viven AQUI — `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` — y están
+> **UNIFICADOS** (un solo archivo por modelo: (A) cola activa de 100+ tareas curada por el
+> director con evidencia + GUIA-COMPARATIVA, (B) estado/registro histórico del master anterior).
+> El backlog NO vive en `Mensajes entre modelos/` (eso es solo comunicación: mensajes, pool,
+> puntero). El ciclo del agente: 1º responder mensajes del director en su canal; 2º si no hay,
+> trabajar una tanda de la COLA ACTIVA de ESTE archivo; 3º reporte de cierre al director
+> (REGLA CERO) + marca `[x]` honesta. Detalle: `AGENTS.md` §29.1 y
+> `Mensajes entre modelos/GUIA-COMUNICACION.md` (METODOLOGÍA V2).
 
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy

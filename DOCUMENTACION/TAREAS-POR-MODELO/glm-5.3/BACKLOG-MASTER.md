@@ -1,3 +1,21 @@
+# BACKLOG-MASTER — GLM-5.3 (flagship, historia) — UNIFICADO (metodología V2, fundador 2026-10-17)
+
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Unificación 2026-10-17:** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior. **ESTE es el único backlog válido de GLM-5.3 (flagship, historia)** (directiva: un solo archivo por modelo en su carpeta).
+
+## TU CICLO COMO AGENTE (en este orden)
+
+1. **PRIMERA INSTANCIA:** lee si el director te escribió un mensaje en tu canal (`Mensajes entre modelos/GLM-5.3 (flagship, historia)/`). Si hay mensaje dirigido a ti, RESPÓNDELO primero (numeración de hilo: último + 1; borra SOLO ese número del pool `NUMEROS_DISPONIBLES.txt` de tu carpeta de canal — pools NO se commitean).
+2. **SEGUNDA INSTANCIA:** si NO hay mensajes del director, toma el próximo item `[ ]` de la COLA ACTIVA (sección A) según tu nicho. Trabaja una TANDA de tareas (las que elijas).
+3. **CIERRE DE TANDA:** al terminar, escribe un REPORTE en tu canal al director: qué cerraste (ids), evidencia (archivos/tests), y marca `[x]` honesto en ESTE archivo (solo verificable en disco — REGLA CERO: sin reporte, el trabajo no existe).
+4. El director actualizará ESTE backlog, la fila de `CHECKLIST-GLOBAL.md` y te responderá.
+
+**Reglas fijas:** reserva 🔵 §21.3 en los 4 registros antes de tocar módulos · UTF-8 §28 · independencia QA §21.8/§21.23 · no editar el backlog de otro modelo · marcas `[ ]/[→]/[x]/[?]` honestas.
+
+---
+
+# (A) COLA ACTIVA — 100+ TAREAS (tandas curadas por el director)
+
 **Modelo:** glm-5.3
 **Plataforma:** Kilo Code
 
@@ -46,3 +64,6 @@
 2. Marcar el ítem correspondiente en el `05-Checklist.md` del módulo.
 3. Actualizar la fila del módulo en `CHECKLIST-GLOBAL.md` (progreso).
 
+
+
+---

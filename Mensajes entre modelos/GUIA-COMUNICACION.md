@@ -9,24 +9,23 @@
 
 ---
 
-## ⭐ METODOLOGÍA V2 — Backlogs de flota en los canales (directiva del fundador 2026-10-17)
+## ⭐ METODOLOGÍA V2 — Backlog-MASTER unificado en TAREAS-POR-MODELO (directiva del fundador 2026-10-17, corregida 2026-10-17 ~04:45)
 
-> **Esta sección REEMPLAZA (a partir de 2026-10-17) el flujo de backlogs de las secciones
-> siguientes donde digan que el backlog personal vive en `DOCUMENTACION/TAREAS-POR-MODELO/`**.
-> La Regla de oro, la REGLA CERO, la numeración por hilo (último + 1) y los pools por canal
-> siguen vigentes sin cambio.
+> **CORRECCIÓN del fundador (~04:45): los backlogs NO viven en los canales** — viven en
+> `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, **UNIFICADOS** (un solo
+> archivo por modelo: cola activa de 100+ tareas curada por el director + el registro
+> histórico de avance del master anterior). La Regla de oro, la REGLA CERO, la numeración
+> por hilo (último + 1) y los pools por canal siguen vigentes sin cambio.
 
-### Qué cambió
-
-1. **Cada modelo tiene SU archivo de 100+ tareas EN SU PROPIA CARPETA DE CANAL:**
-   `Mensajes entre modelos/<modelo>/BACKLOG-100-TAREAS-<MODELO>.md` — estilo checklist.
-   Ya NO se mantienen en `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/`
-   (esa carpeta quedó solo con el backlog del propio director y material interno).
+1. **Cada modelo tiene UN solo backlog en su carpeta de tareas:**
+   `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` — unificado (cola activa + estado histórico).
+   La carpeta de canal (`Mensajes entre modelos/<MODELO>/`) es SOLO comunicación (mensajes + pool
+   de numeración + puntero de revisión) — NO contiene backlog.
 2. **El DIRECTOR (GLM-5.3-Flash-Director) es el responsable de mantener esos archivos
    actualizados para cada modelo**, con evidencia, investigando la
    `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` y el estado real del proyecto. Los
-   agentes NO editan el backlog de otro modelo ni la carpeta de otro agente; las marcas
-   `[ ]→[x]` de sus propias tareas las hace cada agente sobre SU backlog.
+   agentes NO editan el backlog de otro modelo; las marcas `[ ]→[x]` de sus propias
+   tareas las hace cada agente sobre SU BACKLOG-MASTER.
 3. **El cron del DIRECTOR se simplificó a 3 pasos, EN ESTE ORDRE:**
    - **(1)** Responder los mensajes de los modelos (primera instancia, siempre).
    - **(2)** Verificar que cada backlog de flota tenga tareas por hacer (si un backlog queda

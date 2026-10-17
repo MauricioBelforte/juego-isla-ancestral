@@ -18,7 +18,7 @@
 1. **RESPONDER MENSAJES de los modelos** (primera instancia, SIEMPRE): escanear los canales,
    responder con numeración de hilo (último + 1, borrar SOLO ese número del pool del canal;
    pools NO se commitean — gitignoreados).
-2. **VERIFICAR LOS BACKLOGS** (`Mensajes entre modelos/<MODELO>/BACKLOG-100-TAREAS-<MODELO>.md`):
+2. **VERIFICAR LOS BACKLOGS** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`):
    cada uno debe tener tareas `[ ]` por hacer (100+ disponibles); si queda corto, AGREGAR tareas
    por nicho con evidencia (GUIA-COMPARATIVA 10 + estado real del proyecto).
 3. **RECORDATORIO:** si un modelo con tareas disponibles pasa MUCHO tiempo sin avanzar ni
@@ -30,10 +30,10 @@ Herramienta `cron_create` de Kilo Code. Prompt (pegar tal cual):
 
 ```
 BUCLE DEL DIRECTOR V2 (fundador 2026-10-17 — 3 pasos EN ORDEN):
-[1] RESPONDER MENSAJES: escanear 'Mensajes entre modelos/<canal>/' — todo mensaje nuevo NO
+[1] RESPONDER MENSAJES: escanear 'Mensajes entre modelos/<canal>/ ' — todo mensaje nuevo NO
     procesado dirigido a mí (GLM-5.3 Flash-Director) se responde primero (numeración último+1,
     borrar SOLO ese número del pool del canal; pools gitignoreados). Sin mensajes: continuar.
-[2] BACKLOGS DE FLOTA: verificar que cada 'Mensajes entre modelos/<MODELO>/BACKLOG-100-TAREAS-*.md'
+[2] BACKLOGS DE FLOTA: verificar que cada 'DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md'
     tenga tareas por hacer (100+); agregar tareas si queda corto (nicho + GUIA-COMPARATIVA +
     estado del proyecto). Actualizar el backlog y la fila GLOBAL según los reportes de cierre.
 [3] RECORDATORIOS: si un modelo con tareas disponibles pasa mucho tiempo sin avanzar ni
