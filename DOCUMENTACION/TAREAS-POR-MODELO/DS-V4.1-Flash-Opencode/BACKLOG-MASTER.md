@@ -120,7 +120,46 @@
 98. test_barrido_m74 — el fix del tipado (7 errores). — [x] 2026-10-17 (Tanda 2): verificado rc=0, 0 SCRIPT ERROR (fix de 4582b67).
 99. test_farm_voxel_m33 — el fix del tipado (3 errores). — [x] 2026-10-17 (Tanda 2): verificado rc=0, 0 SCRIPT ERROR (fix de 4582b67).
 100. La cascada del editor — posterior a los 4 fixes. — [x] 2026-10-17 (Tanda 2): sin cascada tras los 4 fixes (parse checks verdes + run CI fd72c38 sin SCRIPT ERROR del editor).
-
+### REPOSICIÓN 2026-10-17 20:02 (directo del 05 real de los módulos — tareas SIN hacer verificadas)
+101. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Texturas de región se liberan al salir de la misma (con M63 y M09) [M]
+102. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evidencia de por qué.** El auditor nuevo mide **2 componentes fuertemente conexas** (7 nodos: `CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather`; y 2 nodos: `ThemeService, UIManager`) más 9 referencias a un autoload declarado después. Escalado como **BUG-069**; el gate los tiene en lista de permitidos para que ningún ciclo NUEVO pase
+103. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base [C]
+104. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline [C]
+105. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Descarga dura al 95%: atlas fuera de pantalla y bancos de biomas viajeros [M]
+106. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Buffers de VoxelTools por chunk se liberan al descargar (sin acumulación) [C]
+107. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Colliders estáticos de chunks descargados se liberan junto con la mesh [M]
+108. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Sin duplicación de meshes entre M63 (streaming) y el 62 (descarga) [M]
+109. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Generación de mallas en hilos (M08): resultados por cola sin copias extra [C]
+110. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM [M]
+111. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos [M]
+112. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región [M]
+113. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C]
+114. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M]
+115. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Los buses (M91) no retienen streams detenidos [S]
+116. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M]
+117. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C]
+118. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S]
+119. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M]
+120. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M]
+121. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M]
+122. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable [M]
+123. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Baseline menú principal: objetivo < 600 MB [S]
+124. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Baseline spawn de Aurora: objetivo < 1.600 MB [S]
+125. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S]
+126. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S]
+127. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S]
+128. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C]
+129. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M]
+130. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C]
+131. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M]
+132. [ ] reposición técnica nicho CI/memoria/build: M62-Memoria: Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
+133. reposicion tecnica M63/infra: M63-Streaming: RF4+RF5: NPC, audio, texturas, shaders + precalentamiento [S] — precalentamiento hecho (H); los 4 tipos existen como tipos de cola pero su poblado real es de M08/M42/M47
+134. reposicion tecnica M63/infra: M63-Streaming: P1: pantalla de carga — arte cozy, barra real, consejos [S] — barra real hecha (iter. 4); arte cozy/consejos son de M53/arte 2D
+135. reposicion tecnica M63/infra: M63-Streaming: P3: chunks cercanos — radio R=3, máx 5 en movimiento rápido [S] — el radio/ límite reales son de M08
+136. reposicion tecnica M63/infra: M63-Streaming: P5: NPCs necesarios — instanciar al entrar, pausar al salir [S] — dueño M15/M16 (NPC)
+137. reposicion tecnica M63/infra: M63-Streaming: P6: audio — bancos regionales precargados [S] — dueño M42; el 63 solo encola el tipo `banco_audio`
+138. reposicion tecnica M63/infra: M63-Streaming: P7: texturas — atlas + mips por LOD [S] — dueño M47
+139. reposicion tecnica M63/infra: M63-Streaming: P8: shaders — precalentamiento + caché de variantes [S] — precarga de shaders hecha (H); caché de variantes es de M47/render
 # (B) ESTADO HIST M96/infrax4, M116x1, M113x2) = fuera del alcance del lote; 0 flips disponibles; suite M117 rc=0.
 21. M119-Update: el canal estable — los checks de updates (el vision del sistema de updates del juego). — [x] 2026-10-17 (Tanda 4): verificado: canal estable 1.0.0 + suite test_updates_m119 rc=0 (15/0); los 9 [ ] son deuda externa con dueno (M59/M96/M118/M107) — 0 flips (consistente con auditoria previa Step-5 Log 1866); M119 = 109/118.
 23. El barrido BOM masivo (155+) — la verificación post-lote (DeepSeek-WB: 0 BOM en scripts/production). — [x] 2026-10-17 (Tanda 3): barrido 15.502 rastreados: 0 BOM fuera de Obsoletos/; 12 históricos en Obsoletos/ excluidos por diseño del gate (verificar_bom.py:28-45); job BOM del CI verde.
