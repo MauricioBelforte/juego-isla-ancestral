@@ -303,3 +303,7 @@ La gran mayoría (M02–M04, M08, M15, M17–M18, M20–M26, M28–M31, M33–M3
 - Hallazgos transversales de agnes: (1) el proyecto separa diseno/spec [x] de produccion de assets pendiente (#esperando), no inflacion; (2) micro doc-drifts de nombres stale (no bloquean); (3) mojibake preexistente apartado 28 en M44 L93-128 + M51 L233 (va al verificador 28.1).
 - M49 L33 NOCHE sigue parked (decision del director, #692). Cron agnes sigue activo.
 
+### Ola extendida post-cierre (697+)
+
+- **M54-Mapa (699):** 133/177, drift 0. Los [x] apuntan a scripts/mapa/ + scripts/map/ + scripts/ui/ reales (mapa_manager, map_data_service, minimap_widget, tests incluidos). Micro doc-drift NO en [x]: refs estilo Unity (//mapa/...) + map_ui.gd / marker_pool.gd obsoletas en 04-Codigo (pendiente de saneo documental, no bloquea). Total de la ola: 15 modulos, drift 0.
+
