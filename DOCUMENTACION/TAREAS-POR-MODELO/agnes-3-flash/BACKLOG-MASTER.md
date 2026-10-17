@@ -18,7 +18,7 @@
 
 > Depurada+repopulada 2026-10-17 07:15 por el director: SOLO tareas sin hacer (los cerrados de esta noche -> registro en (B)). Pendientes reales 93 + reposicion 7 = 100 en cola. CICLO: 1) leer ultimo archivo del canal; 2) sin mensajes: tomar tarea de aca; 3) reportar en cada vuelta (REGLA CERO).
 
-1. M45-Arte-3D: medición Patrón D del checklist real (objetivo: diagonalizar pendientes, 150/171 → inventario de los 21 restantes) [S]
+1. [x] M45-Arte-3D: medición Patrón D del checklist real (objetivo: diagonalizar pendientes, 150/171 → inventario de los 21 restantes) [S] — **cerrado agnes 2026-10-17 (msg 709): 19 [ ] + 2 [?] inventariados (11 validación needs `validate_mesh.gd`[MISS]+GLB, 5 doc [2 flippeables], 3 integración-dep); 4 registros reclamados.**
 2. M52-Particulas-Y-VFX (147/148): 1 pendiente + verificación visual de emitters en juego con capturas — 4 [M]
 3. M49-Iluminacion b1 (105/143): 38 pendientes de arte/luz → resolver por lotes de 5 con captura antes/después — 10 [M]
 4. M49-Iluminacion b3: cierre y re-contado honesto (cap_godot por lote, nomenclatura cap_49_) — 8 [M]

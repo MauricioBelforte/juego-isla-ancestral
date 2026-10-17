@@ -35,15 +35,15 @@
 15. M41: la rejilla la matriz de contexto (23 temas x 16 capas) — revisión de agnes con el brief del compositor.
 16. M41: los nombres de los temas el catalogo (los 24 temas del boot de MusicDirector).
 17. M13-Herramientas: los tests del front cfg (115 slots a la楼层).
-18. M15: catalogo de recursos — los nodos madera_roble/piedra_caliza/fibra_algodon/baya_roja/veta_* (los 14 nodos del boot).
-19. M62-Memoria: budget_registry — el 2000 MB total presupuesto (preset=media).
-20. M62: texture_memory (el 500/505 loops — el 24222 bytes trunc — test fix).
-21. M62: global_pool (el 67/110/176 — las shadowing conversions — revisar).
-22. M40-Bootstrap: los 5 servicios core (con 2019/10 registro).
-23. M106: los securities policy (4 partidos).
-24. M122: crash reporter sesión id (el único creation).
-25. M48-Cableado jugador: el FSM 11 estados (los front del player).
-26. M32: las 2 [?] pendientes del front (el 119/200 of the clima).
+18. M15: catalogo de recursos — los nodos madera_roble/piedra_caliza/fibra_algodon/baya_roja/veta_* (los 14 nodos del boot). — [x] 2026-10-17 (Tanda 9): catálogo verificado contra disco: 6 defs base (resource_manager.gd:47-52) + 6 vetas (data/mining/ores.json; '[M35] 6 vetas' en boot) = 12 tipos. Suites: test_recursos 23/0, test_m15_iter6 14/0, test_recurso_nodo 14/0 (rc=0, 0 SCRIPT ERROR, out/tanda9/).
+19. M62-Memoria: budget_registry — el 2000 MB total presupuesto (preset=media). — [x] 2026-10-17 (Tanda 12): verificado preset=media total 2000 MB (baja 1500, alta 2500) + boot "[M62] MemoryMonitor listo (preset=media, total=2000 MB)" — 2 suites rc=0 (160 checks, 0 fallos) — out/tanda12
+20. M62: texture_memory (el 500/505 loops — el 24222 bytes trunc — test fix). — [x] 2026-10-17 (Tanda 13): texture_memory verificado — iter5 rc=0 (60 checks: bloque F "Atlas: evicción LRU con log") + iter3 bloque I "texturas/atlas/detector 500" en verde (133 checks) — out/tanda13
+21. M62: global_pool (el 67/110/176 — las shadowing conversions — revisar). — [x] 2026-10-17 (Tanda 14): convertido (limite→tope en L67/L110/L176; método limite() intacto) + verificado — pool_iter2 25/0, enforcement_m62 47/0, base 27/0 rc=0 — out/tanda14
+22. M40-Bootstrap: los 5 servicios core (con 2019/10 registro). — [x] 2026-10-17 (Tanda 11): verificado en boot runtime "Servicios core registrados (5): [logger, analytics, telemetry, event_bus, service_registry]" + 5 suites rc=0 (96 checks, 0 fallos) — out/tanda11
+23. M106: los securities policy (4 partidos). — [x] 2026-10-17 (Tanda 15): 4 políticas verificadas — 8 suites M106 rc=0, 0 fallos (237 checks: core 43 "4 políticas" + database 15, env 13, environments 24, input 25, middleware 19, secrets 20, services 78) — out/tanda15
+24. M122: crash reporter sesión id (el único creation). — [x] 2026-10-17 (Tanda 16): session id de creación Única verificado — crash_reporter.gd L22 (_ready) = único sitio de asignación; 2 corridas con ids distintos; suites rc=0: 13/0 + 168/0 (181 checks) — out/tanda16
+25. M48-Cableado jugador: el FSM 11 estados (los front del player). — [x] 2026-10-17 (Tanda 17): FSM 11 estados verificado — player_fsm.gd enum L25-37 (IDLE…CRAFT, 11) + "A2 11 estados declarados (11)" + boot M48 "Cableado jugador listo (FSM con 11 estados)"; suites rc=0: 87/0 + 12/0 + 8/0 (107 checks) — out/tanda17
+26. M32: las 2 [?] pendientes del front (el 119/200 of the clima). — [x] 2026-10-17 (Tanda 18): revisadas — auditoría Log 1900 re-verificada hoy: grep NEGATIVO fresco (0 partículas en scripts/clima/, 0 sway/viento en vegetación) + suites rc=0 (test_clima 29/0, farm_clima 20/0, fishing_clima 0 fallos); los 2 [?] siguen legítimos: RF5 dueño M52 (🟡) / RF8 sin implementar en ningún módulo — resolución = ruteo del director, no de M32 — out/tanda18
 27. The front of the farm (farm_tool_controller montado — 1 cambios de farm_tool pool).
 28. M67-VehicleManager: 3 presets del front.
 29. M75-Postgame: 7 actividades del post del front.
@@ -239,24 +239,24 @@
 ### Bloque L — El flujo de M13/M15 (las herramientas o recursos)
 
 63. M13-Herramientas: los tests del front cfg (115 slots a la楼层).
-64. M15: catalogo de recursos — los nodos madera_roble/piedra_caliza/fibra_algodon/baya_roja/veta_* (los 14 nodos del boot).
+64. M15: catalogo de recursos — los nodos madera_roble/piedra_caliza/fibra_algodon/baya_roja/veta_* (los 14 nodos del boot). — [x] 2026-10-17 (Tanda 9): catálogo verificado contra disco: 6 defs base (resource_manager.gd:47-52) + 6 vetas (data/mining/ores.json; '[M35] 6 vetas' en boot) = 12 tipos. Suites: test_recursos 23/0, test_m15_iter6 14/0, test_recurso_nodo 14/0 (rc=0, 0 SCRIPT ERROR, out/tanda9/).
 
 ### Bloque M — El front de presupuesto de memoria.
 
 65. M62-Memoria: budget_registry — el 2000 MB total presupuesto (preset=media).
-66. M62: texture_memory (el 500/505 loops — el 24222 bytes trunc — test fix).
-67. M62: global_pool (el 67/110/176 — las shadowing conversions — revisar).
+66. M62: texture_memory (el 500/505 loops — el 24222 bytes trunc — test fix). — [x] 2026-10-17 (Tanda 13): texture_memory verificado — iter5 rc=0 (60 checks: bloque F "Atlas: evicción LRU con log") + iter3 bloque I "texturas/atlas/detector 500" en verde (133 checks) — out/tanda13
+67. M62: global_pool (el 67/110/176 — las shadowing conversions — revisar). — [x] 2026-10-17 (Tanda 14): convertido (limite→tope en L67/L110/L176; método limite() intacto) + verificado — pool_iter2 25/0, enforcement_m62 47/0, base 27/0 rc=0 — out/tanda14
 
 ### Bloque N — El front del boot de la bootstrap (los servicios).
 
-68. M40-Bootstrap: los 5 servicios core (con 2019/10 registro).
-69. M106: los securities policy (4 partidos).
-70. M122: crash reporter sesión id (el único creation).
+68. M40-Bootstrap: los 5 servicios core (con 2019/10 registro). — [x] 2026-10-17 (Tanda 11): verificado en boot runtime "Servicios core registrados (5): [logger, analytics, telemetry, event_bus, service_registry]" + 5 suites rc=0 (96 checks, 0 fallos) — out/tanda11
+69. M106: los securities policy (4 partidos). — [x] 2026-10-17 (Tanda 15): 4 políticas verificadas — 8 suites M106 rc=0, 0 fallos (237 checks: core 43 "4 políticas" + database 15, env 13, environments 24, input 25, middleware 19, secrets 20, services 78) — out/tanda15
+70. M122: crash reporter sesión id (el único creation). — [x] 2026-10-17 (Tanda 16): session id de creación Única verificado — crash_reporter.gd L22 (_ready) = único sitio de asignación; 2 corridas con ids distintos; suites rc=0: 13/0 + 168/0 (181 checks) — out/tanda16
 
 ### Bloque O — El estado de los interacciones de los items (el front de the player).
 
-71. M48-Cableado jugador: el FSM 11 estados (los front del player).
-72. M32: las 2 [?] pendientes del front (el 119/200 of the clima).
+71. M48-Cableado jugador: el FSM 11 estados (los front del player). — [x] 2026-10-17 (Tanda 17): FSM 11 estados verificado — player_fsm.gd enum L25-37 (IDLE…CRAFT, 11) + "A2 11 estados declarados (11)" + boot M48 "Cableado jugador listo (FSM con 11 estados)"; suites rc=0: 87/0 + 12/0 + 8/0 (107 checks) — out/tanda17
+72. M32: las 2 [?] pendientes del front (el 119/200 of the clima). — [x] 2026-10-17 (Tanda 18): revisadas — auditoría Log 1900 re-verificada hoy: grep NEGATIVO fresco (0 partículas en scripts/clima/, 0 sway/viento en vegetación) + suites rc=0 (test_clima 29/0, farm_clima 20/0, fishing_clima 0 fallos); los 2 [?] siguen legítimos: RF5 dueño M52 (🟡) / RF8 sin implementar en ningún módulo — resolución = ruteo del director, no de M32 — out/tanda18
 73. The front of the farm (farm_tool_controller montado — 1 cambios de farm_tool pool).
 
 ### Bloque P — Los flujos del front del M67-M75 (lositters).

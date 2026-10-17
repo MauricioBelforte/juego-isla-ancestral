@@ -4,6 +4,8 @@
 #
 # M16/M39: Test RF14 — la tienda general vende pergaminos de receta y el
 # flujo completo funciona: comprar → inventario → usar_pergamino → receta aprendida.
+# FIX BUG-136 (2026-10-17, ds-v4.1-flash-opencode, autorizado por director msg 039):
+# aserción de stock alineada al id canónico post-BUG-106 (OBJ-ART-002).
 # Ejecutar: Godot --headless --path game\isla-ancestral --script res://scripts/crafting/test_pergaminos_tienda.gd
 
 extends SceneTree
@@ -27,13 +29,16 @@ func _run() -> void:
 	var shop = sm.obtener_tienda("tienda_general") if sm.has_method("obtener_tienda") else null
 	_check(shop != null, "tienda_general registrada")
 	if shop != null:
+		# FIX BUG-136: post-BUG-106 el catálogo mapea "pergamino_rec_tela_lino" ->
+		# OBJ-ART-002 ("Pergamino místico"); el substring "pergamino" en el item_id
+		# ya no existe. Aceptar el id canónico o el alias viejo.
 		var tiene_pergamino := false
 		var def = shop.definicion
 		for entry in def.catalogo_venta:
 			var eid: String = str(entry.item_id) if "item_id" in entry else ""
-			if eid.contains("pergamino"):
+			if eid == "OBJ-ART-002" or eid.contains("pergamino"):
 				tiene_pergamino = true
-		_check(tiene_pergamino, "tienda_general vende un pergamino (RF14)")
+		_check(tiene_pergamino, "tienda_general vende el pergamino OBJ-ART-002 (RF14, mapeo BUG-106)")
 	# Flujo: dar AO → comprar (simulado: agregar item) → usar pergamino
 	eco.depositar_monedas(1000)
 	inv.agregar_items({"pergamino_rec_tela_lino": 1})

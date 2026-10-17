@@ -3,6 +3,16 @@
 
 # 05-Checklist.md — Módulo 45: Arte 3D
 
+## Reclamo b1 — agnes-3-flash (medición Patrón D, N708)
+- **🔵 En curso — agnes-3-flash (Sapiens AI) / Kilo Code, 2026-10-17 07:25.** Reclamo M45 b1 (task #1 COLA ACTIVA, director N708). M45 hoy: **150 [x] / 19 [ ] / 2 [?] = 171**. Reclamo en 4 registros.
+
+**Medición Patrón D + inventario de los 19 [ ] + 2 [?] (categorización, sin flip en b1):**
+- **(a) 11 ítems de VALIDACIÓN** (L140-146 + L228-231): escala 1:1, techos de tris, topología, UVs, origen Y=0, LODs, acumular-errores, "3 assets pasan `validate_mesh.gd`", "personaje 1.8m", "conteo tris por categoría", "prop rechazado". **Todos requieren `validate_mesh.gd` (MISS en disco, es el `[?]`) + GLB reales** → `#esperando:asset+tooling` (M45/M108). No flippeables sin eso.
+- **(b) 5 ítems DOC** (L24 ejemplos de referencia, L115 carpeta `npc/`, L152 regla variantes `_c1/_c2`, L157 límites de assets por escena, L171 compat M10): contra 03-Diseno — `npc` (4 hits) y `M10` (5 hits) **probablemente cubiertos → flippeables**; `ejemplos de referencia` / `regla _c1/_c2` / `límites por escena` (0 hits) = pendientes reales.
+- **(c) 3 ítems INTEGRACIÓN-dep** (L234 kit M17, L235 M108+LFS, L257 anims M48): dueños externos (M17/M108/M48).
+
+**Veredicto b1: medición hecha, 0 drift (los 150 [x] ya verificados por D10 Hya/s2).** Flips pendientes para lotes posteriores: los 5 doc cubiertos en 03-Diseno (propuesta al director); validación + integración = `#esperando` (asset/tooling/dep).
+
 ## A. Problema y objetivos
 
 - [x] Definir el problema: sin dirección de arte 3D unificada, los assets rompen la armonía visual, el rendimiento y la métrica voxel [S] — **Diseño: 01-Requerimientos.md 1 (Problema)**

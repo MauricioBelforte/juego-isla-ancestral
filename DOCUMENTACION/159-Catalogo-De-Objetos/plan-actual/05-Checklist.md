@@ -36,6 +36,11 @@
 - **Bug corregido:** el 1er run generaba `icono="res://res://..."` (prefijo doble) — se quitó el `"res://"+` sobrante (OUT_DIR ya lo trae); re-run limpio.
 - **Flip:** los 10 ítems ahora tienen `icono` real en disco, pero el `[ ]` "Verificar que todos los objetos tienen icono" (300) **NO se flippea todavía** (10/300). Flippa al completar las tandas que cubran una categoría completa. Fila GLOBAL sigue 78/146 (real).
 - **Tanda 2 (hecha):** 10 ítems (herramientas T1 `item_obj_her_001..005` + recursos `gemstone/glass/ice/mud/moss`) → 10 PNG más en `assets/2d/items_m159/` + `.tres` linked. **20/300 ítems con ícono** (tandas 1+2). QA: `cap_159_tanda2_contact_sheet.png` (verifiqué: gemstone borde ámbar rareza=2 "raro", her_002 borde teal rareza=1 "inusual", categorías por color).
+- **Tanda 3 (hecha):** 10 ítems (cocina `item_obj_coc_001..005` + ítems/comida `item_obj_ite_001..005`) → 10 PNG más. **30/300 ítems con ícono** (tandas 1+2+3). QA: `cap_159_tanda3_contact_sheet.png` (verifiqué: cocina=purpur, ítems=olive, algunos borde teal rareza=1; distinguibles + legibles 48×48 sobre dark D102).
+- **Tanda 4 (hecha):** 10 ítems (vestimenta `item_obj_rop_001..005` + ancestrales `item_obj_art_001..005`) → 10 PNG más. **40/300 ítems con ícono.** **Categorías ropa + ancestrales = 5/5 completas** (ícono por ítem). QA: `cap_159_tanda4_contact_sheet.png` (ropa=olive, ancestrales=azul con borde dorado rareza raro/legendario — correcto).
+- **Tanda 5 (hecha):** 10 ítems (materiales `item_obj_ite_006..015`) → 10 PNG más. **50/300 ítems con ícono.** QA: `cap_159_tanda5_contact_sheet.png` (materiales=olive, algunos borde teal rareza=1; legibles 48×48).
+- **Tanda 6 (hecha):** 20 ítems (materiales `item_obj_ite_020..039`, el bloque ite restante existente) → 20 PNG más. **70/300 ítems con ícono.** QA: `cap_159_tanda6_contact_sheet.png` (2×10, materiales olive, algunos borde teal). **OBJ-ITE (materiales) = 35/35 existentes con ícono** (001-015 + 020-039; los 016-019/040-043 no tienen `.tres`).
+- **Regla de flips por categoría (director N712):** los ítems "Crear iconos" por subcategoría ya están `[x]` (L75/87/98/107/117/129) — los voy **soportando** completando cada categoría 5/5 (ropa+ancestrales hechas). El ítem paraguas L235 "todos los objetos tienen icono" (300) sigue `[ ]` hasta el cierre total (ahora 50/300).
 
 ---
 

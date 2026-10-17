@@ -23,5 +23,5 @@ color = "#B22222"
 variante = ""
 requiere_herramienta = ""
 exportable = true
-icono = null
+icono = "res://assets/2d/items_m159/ico_item_obj_coc_002.png"
 modelo_3d = null

@@ -64,9 +64,9 @@ func precalentar(familia: String, cantidad: int, factory: Callable = Callable())
 	if not _pools.has(familia):
 		_pools[familia] = []
 	var creados := 0
-	var limite: int = _limites.get(familia, 256)
+	var tope: int = _limites.get(familia, 256)
 	for i in range(cantidad):
-		if (_pools[familia] as Array).size() >= limite:
+		if (_pools[familia] as Array).size() >= tope:
 			break
 		var obj: Node = factory.call()
 		if obj == null:
@@ -107,8 +107,8 @@ func devolver(familia: String, objeto: Node) -> bool:
 	if not _pools.has(familia):
 		_pools[familia] = []
 	var pool: Array = _pools[familia]
-	var limite: int = _limites.get(familia, 256)
-	if pool.size() >= limite:
+	var tope: int = _limites.get(familia, 256)
+	if pool.size() >= tope:
 		# Fallback honesto (checklist RF): no crecer sin tope
 		objeto.queue_free()
 		return false
@@ -173,8 +173,8 @@ func _descolgar(objeto: Node) -> void:
 	if _holder != null and is_instance_valid(_holder) and objeto.get_parent() == _holder:
 		_holder.remove_child(objeto)
 
-func set_limite(familia: String, limite: int) -> void:
-	_limites[familia] = limite
+func set_limite(familia: String, tope: int) -> void:
+	_limites[familia] = tope
 
 func limite(familia: String) -> int:
 	return int(_limites.get(familia, 256))

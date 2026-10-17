@@ -1,0 +1,74 @@
+# CRONÓMETRO V2 — DS-V4.1-Flash-Opencode — estado: ACTIVO
+
+**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash)
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-17 04:18
+**Fuente:** directiva del fundador 2026-10-17 (nueva metodología V2): *"activa el cronometro cada 5 minutos, primero lees el mensaje del director y haces lo que te pide; si no hay mensajes vas a tu backlog master a buscar tareas para hacer, elegís una y se lo reportás al director cuando la termines."*
+
+## Estado actual
+
+- **ACTIVO** desde 2026-10-17 04:18 (esta sesión OpenCode). Cadencia: **cada 5 minutos** (cada vuelta/turno de sesión).
+- Sin mensajes del director pendientes al activar (canal procesado completo hasta 038).
+- Marcador de posición: `Mensajes entre modelos/DS-V4.1-Flash-Opencode/.ultima-revision-ds.txt` = 38 (número más alto del canal ya procesado).
+
+## El ciclo V2 (3 pasos EN ORDEN — nunca cortar)
+
+1. **EL DIRECTOR PRIMERO (primera instancia, SIEMPRE):** leer `.ultima-revision-ds.txt` → ojear el canal `Mensajes entre modelos/DS-V4.1-Flash-Opencode/` por archivos `NN` > marcador dirigidos a mí (`*a-ds-v4.1-flash-opencode*`). Si hay mensaje del director: leerlo COMPLETO, ejecutar lo que pide, responder con mensaje propio (numeración último + 1, borrar SOLO ese número del pool) y actualizar el marcador. Regla T-19: si el mensaje aparece con la plantilla vacía, esperar 5 minutos y releer.
+2. **SIN MENSAJES → BACKLOG:** ir a `DOCUMENTACION/TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/BACKLOG-MASTER.md`, sección **(A) COLA ACTIVA** → elegir la próxima tarea `[ ]` según mi nicho (CI/build/testing/economía/verificación con evidencia) → trabajar la tanda (leer `plan-actual/` del módulo, verificar contra disco, correr suites headless).
+3. **CIERRE DE TANDA — REPORTE AL DIRECTOR (REGLA CERO):** al terminar: (a) informe en mi canal (mensaje nuevo, numeración último + 1 del pool, con evidencia: archivos/rutas/tests); (b) marcas `[x]` honestas en el BACKLOG-MASTER (solo con evidencia real, jamás "por hacer"); (c) Log en `Logs/` (número del pool global) cuando la tanda lo amerite; (d) actualizar el marcador. El director actualiza la fila de `CHECKLIST-GLOBAL.md` y responde.
+
+**Regla de oro:** si no hay mensajes, SIEMPRE hay backlog — JAMÁS quedarse sin producir ni reportar "sin mensajes" en vacío.
+
+## El prompt del cronómetro (copiar/pegar para reactivar en otra sesión)
+
+```text
+[CICLO-5min DS-Opencode]
+(1) Leer Mensajes entre modelos/DS-V4.1-Flash-Opencode/.ultima-revision-ds.txt (número más alto procesado).
+(2) Ojear el canal por mensajes NN > marcador dirigidos a mí (*a-ds-v4.1-flash-opencode*). Si hay:
+    leerlo completo, ejecutar lo que pide el director, responder con mensaje propio (último + 1,
+    borrar SOLO ese número del pool) y actualizar el marcador. T-19: plantilla vacía → esperar 5 min y releer.
+(3) Si NO hay mensajes: ir al BACKLOG-MASTER (DOCUMENTACION/TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/
+    BACKLOG-MASTER.md), sección (A) COLA ACTIVA, elegir UNA tarea [ ] de mi nicho y trabajarla con
+    evidencia (disco + suites headless).
+(4) Cierre: reporte al director en mi canal (REGLA CERO) + marcas [x] honestas en el backlog + Log si
+    amerita; actualizar marcador. El director actualiza la fila de CHECKLIST-GLOBAL.md y responde.
+(5) No quedarme nunca sin producir. Si no hay mensajes del director, SIEMPRE hay backlog.
+Reglas fijas: UTF-8 §28 · firma DS-V4.1-Flash-Opencode/OpenCode · NO commits ni push (los maneja el
+director) · no editar backlog/canales/checklists de otros modelos · independencia QA §21.8/§21.23 · no
+auto-sellos (los flips los aplica el director) · no trabajar módulos 🔵 ajenos · quality.yml solo con
+autorización del fundador.
+```
+
+## Notas de plataforma (OpenCode)
+
+- El cronómetro **no es un proceso de fondo** en OpenCode: cada vuelta se ejecuta en un turno de sesión (el fundador/lanzador dispara la vuelta cada ~5 min). El estado persistente es: este archivo + `.ultima-revision-ds.txt` + `BACKLOG-MASTER.md`.
+- Identidad por **carpeta/canal**: `Mensajes entre modelos/DS-V4.1-Flash-Opencode/` — si un `IDENTITY.md` compartido dice otra cosa, gana la carpeta (AGENTS.md §7).
+
+## Archivos clave
+
+| Archivo | Rol |
+|---|---|
+| `Mensajes entre modelos/DS-V4.1-Flash-Opencode/` | Mi canal (director ↔ yo) |
+| `Mensajes entre modelos/DS-V4.1-Flash-Opencode/.ultima-revision-ds.txt` | Marcador (número más alto procesado) |
+| `Mensajes entre modelos/DS-V4.1-Flash-Opencode/NUMEROS_DISPONIBLES.txt` | Pool de números de mensajes (gitignoreado) |
+| `DOCUMENTACION/TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/BACKLOG-MASTER.md` | Mi backlog unificado V2 — (A) COLA ACTIVA |
+| `Logs/NUMEROS_DISPONIBLES.txt` | Pool global de números de log |
+| `CHECKLIST-GLOBAL.md` | Tablero de módulos (lo actualiza el director) |
+
+## Registro de vueltas
+
+| Vuelta | Fecha/hora | Director | Producción | Resultado |
+|---|---|---|---|---|
+| 1 | 2026-10-17 04:18 | sin mensajes nuevos (>38; canal hasta 038) | Activación del cronómetro V2 + primera tarea V2: M15 catálogo de recursos (ítem 18 de la cola) | ✅ T9 cerrada: M15 (6+6 defs, 51 checks/0 fallos, out/tanda9/); ítems 18+64 [x]; Log 1920 |
+
+**Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-17.
+
+| 2 | 04:29 | **Director 039** (acuse T7-8 + decisiones: BUG-031 rojo a propósito; fix pergaminos AUTORIZADO; QA M62 nunca mío) | Fix BUG-136 (T10: rc=0, 7/7; out/tanda10/) + BUG-136 Resuelto en 11-BUGS + reporte msg 040 + Log 1921 | ✅ |
+| 3 | 04:49 | Director 041 (acuse vuelta 2: su premisa "14" corregida por mi medición 12; pool 41-150) — respondido en 042 | M40 — los 5 servicios core verificados (ítem 22): boot runtime 5/5 exactos + 5 suites rc=0 (96 checks, 0 fallos) — out/tanda11 | OK |
+| 4 | 04:52 | sin mensajes nuevos (>042) | M62 budget_registry verificado (ítem 19): media 2000 MB (baja 1500/alta 2500) + 2 suites rc=0 (160 checks, 0 fallos) — out/tanda12 (Log 1923) | OK |
+| 5 | 04:55 | sin mensajes nuevos (>043) | M62 texture_memory verificado (ítem 20): iter5 rc=0 (60 checks, bloque F atlas-con-log) + iter3 bloque I (133 checks) — out/tanda13 (Log 1924) | OK |
+| 6 | 04:59 | sin mensajes nuevos (>044) | M62 global_pool: shadowing conversions L67/110/176 (limite→tope) ítem 21 verificado — pool_iter2 25/0 + enforcement 47/0 + base 27/0 rc=0 — out/tanda14 (Log 1925) | OK |
+| 7 | 05:04 | acuse 046 (vueltas 3-6: M40/M62 OK; shadowing aceptado; frags reconocidos) | M106 4 políticas verificadas ítem 23 — 8 suites rc=0, 237 checks 0 fallos — out/tanda15 (Log 1926, msg 047) | OK |
+| 8 | 05:06 | sin mensajes nuevos (>047) | M122 session id creación única ítem 24 — crash_reporter.gd L22 único sitio; suites rc=0 13/0+168/0 (181 checks); ids distintos en 2 corridas — out/tanda16 (Log 1927) | OK |
+| 9 | 05:09 | sin mensajes nuevos (>048) | M48 FSM 11 estados ítem 25 — enum player_fsm L25-37 (11) + boot M48; suites rc=0 87/0+12/0+8/0 (107 checks) — out/tanda17 (Log 1928) | OK |
+| 10 | 05:20 | sin mensajes nuevos (>049) | M32 2[?] revisadas (ítem 26): greps negativos frescos + 3 suites rc=0 (29/0+20/0+0 fallos); [?] legítimos → pedido ruteo RF8. INCIDENCIA: BACKLOG truncado por bug de script de cierre y RESTAURADO (HEAD+marcas T9-T18, diff exacto 17 líneas) — out/tanda18 (Log 1929, msg 050) | OK |

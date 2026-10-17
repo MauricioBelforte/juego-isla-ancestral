@@ -153,6 +153,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-127 | Export Web **sin libreria wasm32 de Voxel Tools** (`voxel.gdextension`): el juego NO arranca en navegador (mundo vacio, `TerrainLocator`/`VillagerManager` fallan al parsear) — via **M154 V3 queda no operativa** para QA de gameplay | Export Web (`export_presets.cfg`) / M154-V3 / addons zylann.voxel | 🟡 Menor (web no es plataforma de venta — plan Steam/PC) | [ ] Abierto (pipeline export+Playwright SI funciona como metodo; fix = compilar ext. wasm32 o retirar V3 del alcance) | mimo-v2.6-flash-free | | BUG-128 | **HUD sin registrar (`UIManager._hud = null`): toggle de H inerte** — la tecla H pasaba por `_unhandled_input` pero la rama del toggle se salteaba en silencio; hotbar y reloj en vivo nunca aparecian (su registro ocurría solo en escenas de test) | M53-UI-UX | 🟡 Media | [x] **RESUELTO 2026-10-09 (mimo-v2.6-flash-free, Log 1516, aceptado por director msg 84, verif. cruzada 18/0)** — `_registrar_hud()` en `main_island.gd` + suite `test_bug128_hud_real.gd` | mimo-v2.6-flash-free | 2026-10-09 |
 | BUG-129 | **`test_debug_menu.gd` deja 201 orphans (ObjectDB leaked) → GdUnit4 rc=101 con 21/21 PASSED.** Leak de memoria real de M110. Mantenía el gate de CI de M112 en FALSO permanente (rc=101). El bug es de M110, no de M112. Descubierto como colateral del fix de BUG-120: con el runner v1 falso-verde el leak era invisible; el runner v2c honesto lo expuso | M110-Debug-Menu (afecta gate de M112) | 🟡 Media | [x] **RESUELTO 2026-10-10 (mimo-v2.6-flash-free, Log 1566, verificado por atria-dawn)** — patch `inst.free()` en `vegetation_spawner.gd:88`. Medido: total_strays 257 → 0, boot 7 NPCs intacto, runner EXIT=0 (29/29 suites, 1267 tests, 0 fallos). `test_debug_menu.gd` reescrito UTF-8 sin BOM. | atria-dawn-s2 (descubrimiento, msg 163) — atria-dawn (registro + flip) | 2026-10-10 |
 | BUG-130 | **`gaviota_npc.gd:111` mismo patrón BUG-121 sin null-guard entre `load()` e `instantiate()`.** `ResourceLoader.exists()` (L108) cubre "el archivo no existe" pero NO "load() devuelve null" → `null.instantiate()` = SCRIPT ERROR latente. Gaviota SÍ es NPC vivo (`main_island.tscn:19`), no código muerto. El fix de BUG-121 cubrió tortuga/cangrejo/jabalí, no gaviota | M30-Fauna | 🟡 Media | [x] **RESUELTO 2026-10-10 (agnes-3-flash, verificado por atria-dawn contra disco)** — el null-guard YA ESTABA en el código actual: gaviota_npc.gd:112-114 if res_glb == null: push_warning(...); return protege instantiate() L115. Patrón idéntico a tortuga_npc.gd L84-89. Reporte stale (DeepSeek lo descubrió en una versión anterior o el fix se aplicó en paralelo al registro). Único load() del archivo. | DeepSeek-V4.1-Flash (descubrimiento) — agnes-3-flash (verificación) | 2026-10-10 |
+| BUG-136 | `test_pergaminos_tienda.gd` (M16/M39): aserción de stock obsoleta post-BUG-106 (`OBJ-ART-002`) — false-red "tienda_general vende un pergamino" | M16/M39 | 🟡 Menor | [x] Resuelto (2026-10-17; fix autorizado por el director msg 039 — ver §6) | DS-V4.1-Flash-Opencode | 2026-10-17 04:28 |
 | BUG-131 | **`register_task.ps1` permitía arrancar el backup en batería (violación del diseño §7 de M107).** Seteaba `-AllowStartIfOnBatteries` explícitamente (L65), lo que pone `DisallowStartIfOnBatteries=false` → la tarea arranca con batería. El diseño §7 exige “Iniciar solo si está conectado a la alimentación de CA”. PS 5.1 **no tiene** `-StartOnlyIfOnACPower` ni `-DisallowStartIfOnBatteries` como parámetros de `New-ScheduledTaskSettingsSet` — la única forma de cumplir es omitir el switch (su default es `true`). El header del script además afirmaba “Solo con alimentación de CA” mientras hacía lo opuesto | M107-Backups | 🟡 Media | [x] **RESUELTO 2026-10-10 (atria-dawn-s2, Log 1588, verificado por atria-dawn contra disco)** — removido `-AllowStartIfOnBatteries` de `register_task.ps1:69`; medido: `DisallowStartIfOnBatteries` False→**True**. Se mantuvo `-DontStopIfGoingOnBatteries` (correcto: §7 habla de *iniciar*, no de detener; un respaldo a medias es peor). Header reescrito con las condiciones reales | Hy3 (descubrimiento, msg 126) — atria-dawn-s2 (fix) | 2026-10-10 |
 | BUG-132 | **M35: los 6 drops de veta apuntan a item ids INEXISTENTES** (`veta_cobre`, `veta_hierro`, ...). `mining_vein_catalog.gd:78` hacia `drop_entry.item_id = String(def_id)` (el id de la VETA, que no es un item) -> recompensa fantasma (sin nombre/icono/valor), inutil para crafting (M16) o venta (M36/M38). Contra `03-Diseno.md:234` ("los drops son recursos existentes del catalogo M15"). **Falso verde por OMISION:** `test_mineria.gd` verificaba categoria/region/golpes pero NUNCA cruzaba el drop contra el catalogo | M35-Mineria | 🟠 Mayor | [x] **RESUELTO 2026-10-11 (DeepSeek-V4.1-Flash, Log 1666, fix autorizado por director mimo msg 162)** - `item_id` agregado a las 6 vetas de `ores.json` (mineral_cobre / iron_ore / ancient_crystal / crystal / fragmento_ancestral / ancient_crystal) + `mining_vein_catalog.gd:78` -> `data.get("item_id", def_id)` + asercion nueva `drops_resuelven` que cruza cada drop contra `ItemDatabase`. Suite **60/0 x3** (piso CHECKS_MINIMOS medido=60), sonda roja **6 fallos / EXIT 1**, restaurada byte-exacta | DeepSeek-V4.1-Flash | 2026-10-11 |
 | BUG-133 | **`crafting_feedback.gd:119` llama `notif.show_notification()` — método que NO EXISTE en NotificationService** (API pública: `push`/`clear_all`/`set_queue_limit`). El guard `has_method` siempre es false → cae al `print("[M16] ...")`: **los toasts de crafting nunca se muestran** (feedback visual de crafting invisible; solo consola). Hallado en la verificación de H.L121 (emisores de toast, msg 60 canal Ling-3.1-Flash). Grep global: `show_notification` solo aparece en la llamada, 0 definiciones | M16-Crafting (`scripts/crafting/crafting_feedback.gd:114-122`, `_notificar`) — afecta M53 (toasts) | 🟡 Menor | [x] **RESUELTO 2026-10-12 (Ling 3.1 Flash, fix encargado por director mimo msg 71)** — `_notificar` reescrito: guard `has_method("push")` + `notif.push({"text": texto, "type": <ToastType>, "icon": tipo})` con mapeo "ok"→ITEM, "descubrimiento"/"fallo"→EVENT. **Ojo:** las claves reales de `push()` son `text`/`type` (`notification_service.gd:67-68`) — el fix sugerido en msg 71 con `"texto"`/`"tipo"` dejaba el toast vacío (`_spawn_node` lee `text`/`type`, L94-95). **Test headless `test_m16_crafting_toast.gd`: 9 checks / 0 fallos / EXIT 0** (autoload real `/root/NotificationService`, toast creado con texto + icono 📦/🔔 correctos) | Ling 3.1 Flash (verificación H.L121 + fix) | 2026-10-12 |
@@ -205,6 +206,72 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-136 — `test_pergaminos_tienda.gd` (M16/M39): aserción de stock obsoleta post-BUG-106 (`OBJ-ART-002`) — false-red "tienda_general vende un pergamino"
+
+- **Fecha de reporte:** 2026-10-17 04:15
+- **Módulo(s) afectado(s):** M16-Crafting / M39-Tiendas — `game/isla-ancestral/scripts/crafting/test_pergaminos_tienda.gd:30-36` (aserción obsoleta); catálogo SANO: `scripts/shops/catalogo_tiendas.gd:112-122`
+- **Severidad:** 🟡 Menor — el juego y la tienda funcionan; falla solo la suite (false-red de test stale)
+- **Prioridad sugerida:** Media
+- **Estado:** [x] **RESUELTO 2026-10-17 (DS-V4.1-Flash-Opencode / OpenCode; fix autorizado por el director GLM-5.3 Flash-Director, msg 039)**
+
+**Resolución (2026-10-17, DS-V4.1-Flash-Opencode / OpenCode — fix autorizado por el director GLM-5.3 Flash-Director, msg 039):**
+- **Causa:** aserción stale — desde el mapeo del fix BUG-106 la tienda vende el id canónico `OBJ-ART-002` ("Pergamino místico", `data/items/item_obj_art_002.tres`); el test buscaba el substring `"pergamino"` en `item_id`.
+- **Solución:** `game/isla-ancestral/scripts/crafting/test_pergaminos_tienda.gd` — aserción alineada (`eid == "OBJ-ART-002" or eid.contains("pergamino")`) + comentarios de trazabilidad (header y bloque del fix).
+- **Evidencia:** OWN run headless `res://scripts/crafting/test_pergaminos_tienda.gd` → **rc=0, 0 fallos (7/7 checks), 0 SCRIPT ERROR** (`out/tanda10/scripts_crafting_test_pergaminos_tienda.log`).
+- **Firma:** DS-V4.1-Flash-Opencode / OpenCode — 2026-10-17 04:28.
+
+**Descripción del problema:**
+La suite escanea el stock de `tienda_general` buscando el substring `"pergamino"` en los ids (`test_pergaminos_tienda.gd:34`). Tras la migración de ids del fix BUG-106/054 (Log 1803), el catálogo registra el pergamino con el id canónico `OBJ-ART-002` (`catalogo_tiendas.gd:121`; mapeo explícito en el comentario `:20 "pergamino_rec_tela_lino-> OBJ-ART-002"`), por lo que la aserción falla aunque la tienda SÍ vende el pergamino. El resto de la suite (inventario, `usar_pergamino`, idempotencia cozy, RF17) PASA — familia false-red por aserciones obsoletas (BUG-032/BUG-033).
+
+**Pasos para reproducir:**
+1. `& "D:\ISLA ANCESTRAL\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe" --headless --path game/isla-ancestral --script res://scripts/crafting/test_pergaminos_tienda.gd`
+2. Observar `FALLO: tienda_general vende un pergamino (RF14)` + `=== TEST M16 RF14: 1 fallo(s) ===` + EXIT 1.
+
+**Comportamiento esperado:**
+7/7 checks, 0 fallos (aserciones alineadas al id canónico).
+
+**Comportamiento actual:**
+6/7 checks pasan; 1 fallo (aserción de stock obsoleta). EXIT 1.
+
+**Entorno / Contexto:**
+- Versión del juego / build: Godot 4.7.2.stable (ed1daf0bf), headless
+- Plataforma: PC (Windows)
+- Seed del mundo / save afectado: N/A
+- Configuración gráfica o de audio: N/A
+- Ocurre desde la versión / commit: post-fix BUG-106 (Log 1803)
+- Frecuencia: Siempre (determinista)
+
+**Evidencia:**
+- Mensaje de error exacto (copiar completo):
+  ```
+  FALLO: tienda_general vende un pergamino (RF14)
+  === TEST M16 RF14: 1 fallo(s) ===
+  ```
+- Logs / archivos relacionados: `out/tanda8/scripts_crafting_test_pergaminos_tienda.log` (L118); stock `catalogo_tiendas.gd:112-122`; mapeo de alias `scripts/shops/test_bug106_verify.gd:20-21`
+- Capturas o videos (ruta): N/A
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno: hallazgo colateral al correr la familia economía completa (Tanda 8 DS-V4.1-Flash-Opencode, batch de 29 suites). No se tocó el archivo (módulo M39 ✅ — cámbialo su dueño + re-verificación §21.8).
+
+**Fix sugerido (dueño M16/M39):**
+Alinear la aserción: aceptar el id canónico o usar la tabla de alias; p.ej. `if eid == "OBJ-ART-002" or eid.contains("pergamino")` (L34). Re-correr suite → 7/7.
+
+**Referencias cruzadas:**
+- BUG-106 (migración 8 item_ids M39↔M15), BUG-054/050; `test_bug106_verify.gd`
+- Módulo/documentación relacionada: M16, M39 (dueños del fix). Log 1919 (Tanda 8).
+
+**Firma:**
+**Modelo:** DS-V4.1-Flash-Opencode
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-17 04:15
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió:
+- [ ] Archivos/commits modificados:
+- [ ] Log del proyecto:
+- [ ] Verificado por: pendiente (dueño M16/M39)
+
+---
 ### BUG-133 — `crafting_feedback._notificar` llama a `show_notification()`, método inexistente en NotificationService: los toasts de crafting nunca se muestran (M16)
 
 - **Fecha de reporte:** 2026-10-12 01:15
