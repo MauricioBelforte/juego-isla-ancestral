@@ -38,12 +38,11 @@ func _run() -> void:
 	var d := DirAccess.open("res://")
 	if d:
 		d.make_dir_recursive("assets/2d/items_m159")
-	# tanda 6 (N704): materiales OBJ-ITE 020-039 (20, completa el bloque ite existente)
+	# tanda 7 (N704): herramientas OBJ-HER 006-020 (15, completa la categoría 20/20)
 	var ids: Array[String] = [
-		"item_obj_ite_020", "item_obj_ite_021", "item_obj_ite_022", "item_obj_ite_023", "item_obj_ite_024",
-		"item_obj_ite_025", "item_obj_ite_026", "item_obj_ite_027", "item_obj_ite_028", "item_obj_ite_029",
-		"item_obj_ite_030", "item_obj_ite_031", "item_obj_ite_032", "item_obj_ite_033", "item_obj_ite_034",
-		"item_obj_ite_035", "item_obj_ite_036", "item_obj_ite_037", "item_obj_ite_038", "item_obj_ite_039",
+		"item_obj_her_006", "item_obj_her_007", "item_obj_her_008", "item_obj_her_009", "item_obj_her_010",
+		"item_obj_her_011", "item_obj_her_012", "item_obj_her_013", "item_obj_her_014", "item_obj_her_015",
+		"item_obj_her_016", "item_obj_her_0017", "item_obj_her_018", "item_obj_her_019", "item_obj_her_020",
 	]
 	# Deduplicate preserving order
 	var seen := {}

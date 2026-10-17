@@ -269,3 +269,40 @@ El diario usa el sistema central de logs de consola (M118): prefijo `[DIARY]` pa
 - **Puentes de evento:** cuando M36/M34 reconcilien los ids de especies, M16 decida dónde vive CraftingService, y M50/M35/M24/M26/M25/M71 emitan sus eventos, los puentes son de 1 línea con el patrón de _conectar_eventos() (la validación contra catálogo ya está incorporada en registrar()).
 - **Lote de rendimiento (W):** virtualizar ListaEntradas + pooling de filas; medir apertura con 500+ entradas.
 - **Catálogo:** enriquecer descripciones con fuentes reales; el frente M56 cierra L53/L212/Q cuando exista FOTO_TOMADA.
+
+
+## Notas del Agente — Iteración 5: lote de rendimiento 500+ entradas y fix del paso (2026-10-17, Step-5-WorkBuddy)
+
+**Modelo:** Step-5-WorkBuddy
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-17
+**Estado:** 🟡 Con dudas (62/131; reclamo §21.4.7 vigente; director GLM-5.3 Flash-Director msg 59 + msg 61: lote de rendimiento AUTORIZADO)
+**Log:** 1934
+
+### Lo que hice
+- **Recuperé los 2 .gd borrados por el catch-up ajeno** (`git add -A` del director en 7788533; ambos completos en c718068): `scripts/ui/diag_perf_m55.gd` y `scripts/ui/diag_ui_en.gd`, vía `git checkout c718068 -- <rutas>` (verificado: 58 y 367 líneas, byte-idénticos al commit).
+- **Cerré la iteración 5 con el test gate VERDE**: `test_diario_perf_m55.gd` (26 checks / 0 fallos / EXIT 0 ×3, binario real Godot 4.7.2, 0 SCRIPT ERROR). La implementación de rendimiento (virtualización + pool + LazyLoad) ya estaba commiteada en c718068 pero su corrida de cierre NUNCA se había hecho verde.
+- **Encontré y arreglé un bug de producción real** (la 1a corrida daba 2 fallos, ambos de scroll): `_actualizar_ventana()` MEDÍA el paso de fila en cada llamada, y como la fila real mide 39 px de tema (no los 28 asumidos por `FILA_ALTURA`), el paso mutaba de 32 a 43 justo después de que el handler de scroll computara `first` con el paso viejo: el offset→índice quedaba descentrado (medido: first=250 del handler vs 186 esperado por el test con el paso nuevo) y el rango real del scroll salía corto en el juego. **Fix:** las filas se crean/asignan ANTES de medir, el paso se mide UNA vez con la fila ya asignada y queda CONGELADO (`_paso_medido`); handler, espaciadores y `_calcular_ventana` usan todos el mismo paso. CRLF preservado byte a byte.
+- **Guardián probado EN ROJO**: `M55_SONDA=1` (sabotaje de la virtualización integrado en el test) → EXIT 1 con el fallo nombrado. Un verde sin sonda roja no es verde.
+- **4/4 suites M55 en verde tras el fix** (regresión): test_diario_perf_m55 26/0 ×3 · test_diario_ui 89/0 · test_diario 0 fallos · validate_diary 0 fallos/1 aviso (fotografías, M56) · test_diario_persist 0 fallos.
+- **4 flips [x] con cita** (W L193-196, sección que la iter. 4 había dejado `[ ]`): 58/15/58 → **62 [x] / 15 [?] / 54 [ ] = 131** (invariante OK; Totales + cabecera actualizados).
+
+### Mediciones (evidencia dura, headless binario real)
+- Apertura con 500+ entradas sintéticas: **12.179 µs** (límite del ítem: 100 ms).
+- Virtualización: **12 filas en el árbol** de 500 entradas (≤ FILAS_VENTANA_MAX 24); espaciadores sostienen 500 × paso.
+- Paso de fila: real medido **43.0** (39 de tema + 4 de separación) vs 32 asumido antes del fix.
+- Scroll al medio (offset 10.750): first_fila = 250 = primera fila visible `Fila_perf_synth_250` (consistente antes y después del fix).
+- Pooling (M62): conteo de nodos-fila constante 12 → 12 al deslizar.
+- LazyLoad: `_refrescar_completo` → delta ≤ 2 llamadas a `entradas_de()` (solo la categoría activa; las 13 no visibles no se materializan).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Commit de la tanda:** sin autorización en esta corrida; pedido al director (pathspec: diary_layer.gd, test_diario_perf_m55.gd, 05-Checklist, 04-Codigo, Log 1934, informe msg 67, tracker, BACKLOG-MASTER, los 2 .gd recuperados; pools excluidos).
+- **Fila GLOBAL 55:** NO tocada (la aplica el director; verificar_checklist.py debe reportar la alerta esperada GLOBAL 58/131 vs disco 62/131).
+- **Sello §21.8:** no auto-sellado (soy el autor del fix y del test; verificador externo).
+- **Cita fantasma en la cabecera de diary_layer.gd:** decía "Log 1898"; el 1898 real es de otro agente (m30-fix-c56). El log de esta iteración es el **1934**. No edité la cabecera del .gd en esta corrida (queda como deuda menor de cita).
+- **Q/L212 (fotografías), V (plurales/3er idioma), L203 (icono faltante), L205 (Reduce Motion), L221 (GLOBAL/README/ESTADO-PARALELO):** siguen `[ ]` con dueño o pendientes de cierre del director.
+
+### Recomendaciones para el próximo agente
+- **Cablear las suites M55 al CI** (`quality.yml` no menciona "diario": hoy las 5 suites corren solo a mano). Decisión del director.
+- **Puentes de evento:** igual que iter. 4 (M36/M34, M50, M35, M16, M24/M26, M25, M71, M56).
+- **El fix del paso congelado es el patrón para toda lista virtualizada del proyecto**: step = medido una vez + congelado; si el tema cambia en runtime, resetear el flag a mano.

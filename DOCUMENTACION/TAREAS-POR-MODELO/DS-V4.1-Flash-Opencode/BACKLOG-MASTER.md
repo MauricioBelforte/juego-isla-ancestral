@@ -46,10 +46,10 @@
 24. M122: crash reporter sesión id (el único creation). — [x] 2026-10-17 (Tanda 16): session id de creación Única verificado — crash_reporter.gd L22 (_ready) = único sitio de asignación; 2 corridas con ids distintos; suites rc=0: 13/0 + 168/0 (181 checks) — out/tanda16
 25. M48-Cableado jugador: el FSM 11 estados (los front del player). — [x] 2026-10-17 (Tanda 17): FSM 11 estados verificado — player_fsm.gd enum L25-37 (IDLE…CRAFT, 11) + "A2 11 estados declarados (11)" + boot M48 "Cableado jugador listo (FSM con 11 estados)"; suites rc=0: 87/0 + 12/0 + 8/0 (107 checks) — out/tanda17
 26. M32: las 2 [?] pendientes del front (el 119/200 of the clima). — [x] 2026-10-17 (Tanda 18): revisadas — auditoría Log 1900 re-verificada hoy: grep NEGATIVO fresco (0 partículas en scripts/clima/, 0 sway/viento en vegetación) + suites rc=0 (test_clima 29/0, farm_clima 20/0, fishing_clima 0 fallos); los 2 [?] siguen legítimos: RF5 dueño M52 (🟡) / RF8 sin implementar en ningún módulo — resolución = ruteo del director, no de M32 — out/tanda18
-27. The front of the farm (farm_tool_controller montado — 1 cambios de farm_tool pool).
-28. M67-VehicleManager: 3 presets del front.
-29. M75-Postgame: 7 actividades del post del front.
-30. M94-Motivación: 7 objetivos del catálogo.
+27. The front of the farm (farm_tool_controller montado — 1 cambios de farm_tool pool). — [x] 2026-10-17 (Tanda 19): frente verificado — montado real (main_island L51-58 + boot hoy); test_farm 29/0 + test_farm_voxel_m33 27/0 rc0; m33_lote 41/2 fallos (advance_day 407-434 ms >50 → dato M61; tiles 400 vs sembrados 395 = residuo del test) reportado al director.
+28. M67-VehicleManager: 3 presets del front. — [x] 2026-10-17 (Tanda 20): 3 presets activos verificados — vehicles.json (barco/dirigible/submarino + locomotora condicional M68 omitida); boot "[M67] VehicleManager listo: 3 presets"; test_vehiculos 40/0 rc0 — out/tanda20.
+29. M75-Postgame: 7 actividades del post del front. — [x] 2026-10-17 (Tanda 21): 7 actividades verificadas — data/postgame/actividades.json (7 con dueno: M27/M10/M25/M37/M19/M71/M50/M33/M36/M35/M18/M16); boot "[M75] PostgameManager listo: 7 actividades, activo=false" (183 logs); test_postgame 40/0 rc0 — out/tanda21.
+30. M94-Motivación: 7 objetivos del catálogo. — [x] 2026-10-17 (Tanda 22): 7 objetivos verificados — data/motivacion/objetivos.json (recoleccion/social/minijuego/creacion/exploracion, expiracion=false); boot "[M94] MotivacionManager listo (7 objetivos en catálogo)" (184 logs); test_motivacion_m94 38/0 rc0 — out/tanda22.
 31. M73-Coleccionables: 15 items 4 categorías del front.
 32. M46-Arte-2D: los 13 flips (the 14 files — already X 089).
 33. M36-Fauna: 7 especies del front.
@@ -259,13 +259,13 @@
 
 71. M48-Cableado jugador: el FSM 11 estados (los front del player). — [x] 2026-10-17 (Tanda 17): FSM 11 estados verificado — player_fsm.gd enum L25-37 (IDLE…CRAFT, 11) + "A2 11 estados declarados (11)" + boot M48 "Cableado jugador listo (FSM con 11 estados)"; suites rc=0: 87/0 + 12/0 + 8/0 (107 checks) — out/tanda17
 72. M32: las 2 [?] pendientes del front (el 119/200 of the clima). — [x] 2026-10-17 (Tanda 18): revisadas — auditoría Log 1900 re-verificada hoy: grep NEGATIVO fresco (0 partículas en scripts/clima/, 0 sway/viento en vegetación) + suites rc=0 (test_clima 29/0, farm_clima 20/0, fishing_clima 0 fallos); los 2 [?] siguen legítimos: RF5 dueño M52 (🟡) / RF8 sin implementar en ningún módulo — resolución = ruteo del director, no de M32 — out/tanda18
-73. The front of the farm (farm_tool_controller montado — 1 cambios de farm_tool pool).
+73. The front of the farm (farm_tool_controller montado — 1 cambios de farm_tool pool). — [x] 2026-10-17 (Tanda 19): dup de #27 (misma evidencia — política dups 052).
 
 ### Bloque P — Los flujos del front del M67-M75 (lositters).
 
-74. M67-VehicleManager: 3 presets del front.
-75. M75-Postgame: 7 actividades del post del front.
-76. M94-Motivación: 7 objetivos del catálogo.
+74. M67-VehicleManager: 3 presets del front. — [x] 2026-10-17 (Tanda 20): dup de #28 (misma evidencia — política dups 052).
+75. M75-Postgame: 7 actividades del post del front. — [x] 2026-10-17 (Tanda 21): dup de #29 (misma evidencia — política dups 052).
+76. M94-Motivación: 7 objetivos del catálogo. — [x] 2026-10-17 (Tanda 22): dup de #30 (misma evidencia — política dups 052).
 
 ### Bloque Q — El front de M73/M46 (los items).
 

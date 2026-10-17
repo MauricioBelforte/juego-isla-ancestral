@@ -66,6 +66,7 @@ var _entradas_cache: Array = []
 var _first_fila: int = 0
 var _ventana: int = FILAS_VENTANA_MIN
 var _paso: float = FILA_ALTURA + 4.0
+var _paso_medido: bool = false  # el paso REAL (tema) se mide UNA vez y se congela
 var _pool_seq: int = 0  # contador de nombres únicos temporales del pool
 
 var _lbl_titulo: Label
@@ -492,21 +493,17 @@ func _calcular_ventana() -> void:
 
 ## Reasigna la ventana [first, first+activos): espaciadores con la altura
 ## total y filas recicladas del pool (M62). first se acota a [0, n-ventana].
+##
+## Orden importante (iter. 5, fix medido): las filas se crean/asignan ANTES de
+## medir el paso, y el paso se mide UNA sola vez y queda CONGELADO. Medirlo en
+## cada llamada (version anterior) hacia que el handler de scroll computara
+## first con el paso viejo mientras los espaciadores ya usaban el nuevo: el
+## offset->indice quedaba descentrado (medido: paso 32 asumido vs 43 real).
 func _actualizar_ventana(first: int) -> void:
 	var n := _entradas_cache.size()
 	first = clampi(first, 0, maxi(0, n - _ventana))
 	_first_fila = first
 	var activos := mini(_ventana, n - first)
-	# paso real: alto mínimo de la primera fila (tema) + separación del VBox
-	if activos > 0:
-		var h := 0.0
-		if _filas.size() > 0 and is_instance_valid(_filas[0]):
-			h = _filas[0].get_combined_minimum_size().y
-		elif _pool_filas.size() > 0 and is_instance_valid(_pool_filas[0]):
-			h = _pool_filas[0].get_combined_minimum_size().y
-		_paso = (h + 4.0) if h > 0.0 else (FILA_ALTURA + 4.0)
-	_espaciador_arriba.custom_minimum_size = Vector2(0, float(first) * _paso)
-	_espaciador_abajo.custom_minimum_size = Vector2(0, float(maxi(0, n - first - activos)) * _paso)
 	while _filas.size() > activos:
 		var f: Button = _filas.pop_back()
 		if is_instance_valid(f):
@@ -521,8 +518,6 @@ func _actualizar_ventana(first: int) -> void:
 		_pool_seq += 1
 		_lista.add_child(b)
 		_filas.append(b)
-	if _espaciador_abajo.get_parent() != null:
-		_lista.move_child(_espaciador_abajo, -1)
 	for i in activos:
 		var e: Dictionary = _entradas_cache[first + i]
 		var b := _filas[i]
@@ -531,6 +526,18 @@ func _actualizar_ventana(first: int) -> void:
 		b.tooltip_text = String(e.get("titulo", ""))  # texto completo (checklist W)
 		b.custom_minimum_size = Vector2(0, FILA_ALTURA)
 		b.set_meta("entrada", (e as Dictionary).duplicate())
+	# Paso REAL: alto mínimo de la primera fila (tema) + separación del VBox,
+	# medido UNA vez con la fila ya asignada y CONGELADO. El handler de scroll,
+	# los espaciadores y _calcular_ventana usan todos el mismo _paso.
+	if not _paso_medido and _filas.size() > 0:
+		var h := _filas[0].get_combined_minimum_size().y
+		if h > 0.0:
+			_paso = h + 4.0
+			_paso_medido = true
+	_espaciador_arriba.custom_minimum_size = Vector2(0, float(first) * _paso)
+	_espaciador_abajo.custom_minimum_size = Vector2(0, float(maxi(0, n - first - activos)) * _paso)
+	if _espaciador_abajo.get_parent() != null:
+		_lista.move_child(_espaciador_abajo, -1)
 
 
 ## Fila del pool (o nueva): la señal pressed se conecta UNA sola vez con el

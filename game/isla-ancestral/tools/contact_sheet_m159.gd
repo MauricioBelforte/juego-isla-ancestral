@@ -16,7 +16,7 @@ func _run() -> void:
 	var d := DirAccess.open("res://")
 	if d:
 		d.make_dir_recursive("tools/mcp/godot-mcp/capturas/159-Catalogo-De-Objetos")
-	var ids: Array[String] = ["item_obj_ite_020", "item_obj_ite_021", "item_obj_ite_022", "item_obj_ite_023", "item_obj_ite_024", "item_obj_ite_025", "item_obj_ite_026", "item_obj_ite_027", "item_obj_ite_028", "item_obj_ite_029", "item_obj_ite_030", "item_obj_ite_031", "item_obj_ite_032", "item_obj_ite_033", "item_obj_ite_034", "item_obj_ite_035", "item_obj_ite_036", "item_obj_ite_037", "item_obj_ite_038", "item_obj_ite_039"]
+	var ids: Array[String] = ["item_obj_her_006", "item_obj_her_007", "item_obj_her_008", "item_obj_her_009", "item_obj_her_010", "item_obj_her_011", "item_obj_her_012", "item_obj_her_013", "item_obj_her_014", "item_obj_her_015", "item_obj_her_016", "item_obj_her_0017", "item_obj_her_018", "item_obj_her_019", "item_obj_her_020"]
 	var celda := 64
 	var margen := 8
 	var cols := 10
@@ -34,7 +34,7 @@ func _run() -> void:
 			continue
 		var dest := Vector2(margen + col * celda, margen + fila * celda + (celda - im.get_height()) / 2.0)
 		hoja.blit_rect(im, Rect2(Vector2.ZERO, Vector2(im.get_width(), im.get_height())), dest)
-	var abs := ProjectSettings.globalize_path(OUT + "cap_159_tanda6_contact_sheet.png")
+	var abs := ProjectSettings.globalize_path(OUT + "cap_159_tanda7_contact_sheet.png")
 	var r := hoja.save_png(abs)
 	print("=== [M159 b2] contact sheet: %d celdas, save=%s ===" % [ids.size(), ("OK" if r == OK else "FAIL")])
 	quit(0 if r == OK else 1)

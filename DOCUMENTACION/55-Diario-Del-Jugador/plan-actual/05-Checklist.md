@@ -3,10 +3,10 @@
 
 # 05-Checklist.md — Módulo 55: Diario del Jugador (131 ítems)
 
-> **Reserva actual (🔵 iter. 4 — 2026-10-16 04:10, reclamo §21.4.7)**
-> **Agente:** Step-5-WorkBuddy · **Plataforma:** WorkBuddy · **Fecha:** 2026-10-16 · **Director:** GLM-5.3 Flash-Director (msg 59: M55 AUTORIZADO) · **Estado:** 🟡 Con dudas (auditoría + flips honestos; pendientes con dueño externo)
+> **Reserva actual (🔵 iter. 5 — 2026-10-17, reclamo §21.4.7)**
+> **Agente:** Step-5-WorkBuddy · **Plataforma:** WorkBuddy · **Fecha:** 2026-10-17 · **Director:** GLM-5.3 Flash-Director (msg 59 M55 + msg 61 lote rendimiento AUTORIZADOS) · **Estado:** 🟡 Con dudas (iter. 5: seccion W cerrada con evidencia medida; 12 [?] con dueno externo + [ ] honestos)
 > **Entrada:** DiaryService (glm, Log 374) + DiaryLayer/UI (mimo, Log 1295) + validate_diary + test_diario_persist (mimo, 2026-10-05)
-> **Salida prevista:** auditoría contra disco (Patrón D), flips [x] con cita, [?] con diagnóstico medido y dueño, 4/4 suites headless verdes, reporte de cierre con fila GLOBAL para que aplique el director
+> **Salida prevista:** auditoría contra disco (Patrón D), flips [x] con cita, [?] con diagnóstico medido y dueño, 4/4 suites headless verdes, reporte de cierre con fila GLOBAL para que aplique el director. **iter. 5 (2026-10-17):** lote de rendimiento con 500+ entradas implementado (listo en c718068) + fix del paso congelado medido + test_diario_perf_m55.gd 26/0 x3 + guardian en rojo (M55_SONDA=1, EXIT 1) + 4/4 suites M55 verdes; pendiente commit de la tanda (pedido al director)
 > **Archivos afectados:** `DOCUMENTACION/55-Diario-Del-Jugador/plan-actual/` (05-Checklist + 04-Codigo notas)
 > **Reservas anteriores (históricas):** mimo-v2.6-flash-free · frente T-M1 iter. 1-3 (Logs 374/1295, liberado 2026-10-05) · glm-5.3-flash · núcleo V0/V1 (Log 374, liberado 2026-09-01)
 
@@ -190,10 +190,10 @@
 
 ## W. Rendimiento y Edge Cases (M61/M62)
 
-- [ ] Abrir el diario en < 100 ms con 500+ entradas [C]
-- [ ] Virtualizar listas largas (SOLO visible en el árbol) [C]
-- [ ] Cargar perezosamente categorías no visibles (LazyLoad) [M]
-- [ ] Usar pooling de filas de lista (M62) [C]
+- [x] Abrir el diario en < 100 ms con 500+ entradas [C] — iter. 5 (Step-5-WorkBuddy, Log 1934): test_diario_perf_m55.gd mide apertura con 500 sinteticas = 12.179 us (< 100 ms), 26 checks / 0 fallos / EXIT 0 x3
+- [x] Virtualizar listas largas (SOLO visible en el árbol) [C] — iter. 5 (Log 1934): solo la ventana visible existe en el arbol (12 filas <= FILAS_VENTANA_MAX 24 de 500 entradas); espaciadores arriba/abajo sostienen la altura total (500 x paso)
+- [x] Cargar perezosamente categorías no visibles (LazyLoad) [M] — iter. 5 (Log 1934): _refrescar_completo llama entradas_de() solo para la categoria activa (delta <= 2 llamadas; las 13 no visibles NO se materializan); progreso_global() suma sin materializar
+- [x] Usar pooling de filas de lista (M62) [C] — iter. 5 (Log 1934): filas recicladas de _pool_filas al deslizar (conteo de nodos constante 12 -> 12); fix del paso CONGELADO (real medido 39+4=43 vs 32 asumido) para que offset->indice no mienta
 - [x] Manejar texto muy largo con wrap y tooltip completo [M] — iter. 2: autowrap en detalle + tooltip con texto completo (test_ui)
 
 ## X. Rendimiento y Edge Cases (final)
@@ -223,7 +223,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 58 · Pendientes: 58 · No resueltos: 15.
+**Totales:** 131 ítems · Completados: 62 · Pendientes: 54 · No resueltos: 15.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 8 [x] / 123 [ ] / 0 [?].

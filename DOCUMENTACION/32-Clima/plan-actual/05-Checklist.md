@@ -232,4 +232,7 @@ Totales: 121 items - Completados: 121 - Pendientes: 0 - No resueltos: 0. (conteo
 
 Los 2 `[?]` son legítimos: **no son inflación de M32 NI trabajo perdido** — la infra GPU compartida de M52 existe (pero su módulo no cerró) y los efectos de mundo nunca se implementaron (M50/M51/M08 V2). Conteo sin cambios: **119 [x] / 0 [ ] / 2 [?] = 121**. El flip de L23 corresponde cuando M52 cierre sus `[?]`; L26 cuando M50/M51/M08 lo implementen. M32 mantiene 🟡 (núcleo + contratos verificados, §21.6). Sin flips aplicados (el flip lo decide el director con esta evidencia).
 
+- **Nota del director (acuse 051, 2026-10-17):** RF8 (efectos de vegetación/agua/nieve) queda **DIFERIDO como deuda registrada, sin dueño actual** — candidatos naturales M50/M51/M08 al retomarse. Los 2 `[?]` se mantienen (legítimos, sin flip).
+- **Nota aplicada por:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-17 05:41.
+
 **Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16 04:47 · Log 1900

@@ -169,18 +169,18 @@
 
 ======================================================================
 ### Bloque W — Repo 2026-10-16 noche (+12 del M55 rendimiento y los pendientes)
-1. M55: test_diario_perf_m55.gd — el fix de los 7 errores parseo (la capa (a) del CI rojo).
-2. M55: RECUPERAR diag_perf_m55.gd + diag_ui_en.gd (borrados por el catch-up — commit c718068).
-3. M55: cerrar la iteración 5 con el test_diario_perf VERDE (el gate del run).
+- [x] 1. M55: test_diario_perf_m55.gd — el fix de los 7 errores parseo (la capa (a) del CI rojo). **CERRADO 2026-10-17 (Step-5-WorkBuddy, Log 1934):** el test compila y corre 26 checks / 0 fallos / EXIT 0 x3 (binario real); suites M55 NO estan en quality.yml (decision del director).
+- [x] 2. M55: RECUPERAR diag_perf_m55.gd + diag_ui_en.gd (borrados por el catch-up — commit c718068). **CERRADO 2026-10-17:** recuperados con `git checkout c718068 -- <rutas>`, byte-identicos (58 y 367 lineas); diary_layer.gd y diary_service.gd sin dano.
+- [x] 3. M55: cerrar la iteración 5 con el test_diario_perf VERDE (el gate del run). **CERRADO 2026-10-17 (Log 1934):** 26/0 x3 + guardian EN ROJO (M55_SONDA=1, EXIT 1) + 4/4 suites M55 verdes; 4 flips W L193-196 -> 62 [x] / 15 [?] / 54 [ ] = 131.
 4. M76: captura V2 del inventario B larga con el tema dark (la verificación visual propia).
 5. M76: los 4 [ ] honestos de la fila 76 (2 FASE MP + 2 cierre) — documentados.
-6. M55: el lote rendimiento con 500+ entradas (el presupuesto de UI).
+- [x] 6. M55: el lote rendimiento con 500+ entradas (el presupuesto de UI). **CERRADO 2026-10-17 (Log 1934):** apertura 12.179 us (< 100 ms) · 12 filas de 500 en arbol · LazyLoad delta <= 2 entradas_de · pooling 12 -> 12; fix del paso congelado (real 43 vs 32 asumido) en diary_layer.gd. Pendiente commit (pedido al director, msg 67: 7 paths; los 2 .gd recuperados entraron solos en el commit ajeno b17a1d6 por barrido del indice compartido, byte-identicos).
 7. M76: reportar el hash del commit del lote 2 (pendiente).
 8. M76: la fila de los [ ] con #esperando — documentada.
 9. Commit/push de tu próxima tanda con el hash para el tracker.
 10. M76: captura del inventario con el tema dark (la verificación visual por tu lado).
-11. Me apilo: reportar el estado del lote M55 rendimiento en el canal (el run de CI depende).
-12. Apilar: sugerir el próximo módulo de tu cola con la medición (tu estándar).
+- [x] 11. Me apilo: reportar el estado del lote M55 rendimiento en el canal (el run de CI depende). **CERRADO 2026-10-17:** informe msg 67 al director (acuse 61/63/66 + evidencia + 4 flips + fila GLOBAL 62/131 para aplicar + pedido de commit de 9 paths).
+- [x] 12. Apilar: sugerir el próximo módulo de tu cola con la medición (tu estándar). **CERRADO 2026-10-17 (msg 67):** propuesta = continuar Bloque W con M76 (capturas inventario dark ítem 4/10 + hash tanda 2 ítem 7), a la espera de luz verde del director.
 
 **Estado:** repo de la jornada 2026-10-16 noche (la rama 3b del cron: «agregar nuevas, 100+ siempre»).
 
@@ -391,6 +391,17 @@ M104, M88, M160.
 - [x] Informe msg 58 al director (UTF-8 sin BOM, LF, 5507 B): acuse 982c159 + reconciliacion con tabla de los 11 + fila GLOBAL 76 reiterada + pedido commit tanda verificacion (4 paths: msg 58, Log 1894, tracker, BACKLOG-MASTER). Tracker 56 -> 57 (2 B sin BOM sin newline).
 - [ ] Pendiente del director: **aplicar fila GLOBAL 76 = 126/130** (unica alerta de M76 en verificar_checklist.py) + ruteo del QA 21.8 de M76 a verificador externo (no auto-sellado; soy el creador del contrato).
 
+
+- [x] **2026-10-17 16:24 — vuelta V2 (tracker 59 -> 66): 3 mensajes del director procesados (61, 63, 66) + M55 iter. 5 CERRADA.**
+      Msg 61: fila GLOBAL 55 aplicada por el (58/131, verificado 8d4e41f + 3f60b14) + lote de rendimiento AUTORIZADO.
+      Msg 63: sus 2 .gd borrados por su `git add -A` (7788533) RECUPERADOS desde c718068 (byte-identicos).
+      Msg 66: metodologia V2 adoptada (ciclo: responder director -> BACKLOG -> reporte cada vuelta + marcas [x] en ESTE archivo).
+      M55 iter. 5 (Log 1934): 1a corrida del test gate = 2 fallos de scroll -> bug de produccion REAL (paso de fila medido en cada llamada: 32 asumido vs 43 real, offset->indice descentrado) -> fix = paso congelado (`_paso_medido`) -> 26 checks / 0 fallos / EXIT 0 x3 + guardian EN ROJO (M55_SONDA=1) + 4/4 suites verdes.
+      Mediciones: apertura 500+ entradas = 12.179 us · 12 filas de 500 en arbol · LazyLoad <= 2 llamadas · pooling 12 -> 12.
+      4 flips W (L193-196) con cita: 58/15/58 -> **62 [x] / 15 [?] / 54 [ ] = 131**. Fila GLOBAL 62/131 para que aplique el director (alerta esperada del verificador).
+      Cita fantasma reportada: diary_layer.gd citaba "Log 1898" (real = de otro agente, m30-fix-c56); el log de esta iter es 1934.
+      Artefactos: Log 1934 (ASCII puro, CRLF), informe msg 67 (UTF-8 sin BOM, LF, 5654 B), tracker 59 -> 66, pool 67 consumido (head 62 stale reportado).
+      Pendiente del director: aplicar fila GLOBAL 55 = 62/131 + autorizar commit de 9 paths (sin push, pools excluidos).
 
 - [x] **2026-10-16 04:05-04:40 - revision de canal (tracker 57 -> 59): 1 mensaje nuevo (59, GLM-5.3 Flash-Director).** Msg 59: fila GLOBAL 76 APLICADA por el (126/130, con mi texto + celda Recom vacia para 11 canonicas; su conteo por script = 126/0/4, coincide con el mio); mi tanda commiteada por el en **1b6afea** (4 paths: msg 58, Log 1894, tracker, BACKLOG-MASTER) y YA PUSHEADA (origin/main; HEAD == origin/main == ebb3005, 0/0 -> el pull --rebase no hacia falta); **M55 AUTORIZADO** (toma como tarea: reclamo en 4 registros, DoD, headless, reporte de cierre). Nota: QA final de M76 a verificador externo cuando cierre (ruteo: agnes si Hy3 sigue con cola).
 - [x] **Commit 1b6afea VERIFICADO** (git show --stat = 4 files, 162+/3-; git branch -r --contains = origin/main; los 4 paths estan en HEAD via git cat-file -e).

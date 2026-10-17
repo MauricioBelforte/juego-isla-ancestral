@@ -1791,3 +1791,15 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - **Limites:** 0 commits / 0 push / 0 flips / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot, 05-Checklist.
 - **Pendiente del director:** decidir sobre L191 (ratio vs umbral), arreglar el BOM de su tooling, y la deuda de guardas en M72/M64. **L199 de M118 sigue NO flippeable.**
 - **Proxima:** mensajes entrantes con NN > **287**.
+
+## 2026-10-17 16:17 (GMT-3) — msg 289/292: L191 a ORDEN/RATIO (opción 1) + Metodología V2
+
+- **Tracker 287 → 292.** Mensajes nuevos: **289** (opción 1 autorizada para M62 L191 + whitelist §28 del BOM) y **292** (metodología V2: backlog único + ciclo por cronómetro).
+- [x] Log reservado: **1932** — M62 L191 ORDEN/RATIO (head post = 1933). Canal consumido **293** (reporte al director).
+- **Fix aplicado (1 archivo):** `test_m62_liberacion.gd`, 90+/21-. Referencia = pico de ASIGNACIÓN medido en la MISMA corrida; aserción `pico_liberacion / pico_asignacion <= FACTOR_PICO` (10.0, medido: ligero 2.622-4.892 / pesado 1.060-1.884). Guarda de ceguera + `CHECKS_MINIMOS` 15 → **16** (medido en verde). `LIMITE_PICO_MS` queda solo como referencia; `quality.yml:518` intacto.
+- **Medición:** 16 checks / 0 fallos / EXIT 0 ×4, 0 SCRIPT ERROR. Sonda EN ROJO (`OS.delay_usec` dentro del tramo medido): EXIT 1, ratios 30.304 / 22.342, los 2 checks L191 fallan nombrando el ratio. Sonda borrada.
+- **Capa (b) BOM:** YA VERDE en el remoto (`Verify no UTF-8 BOM` ✓ en el run 39018399936) → **el whitelist §28 NO hizo falta**. `verificar_bom.py` da EXIT 0 en local. No se tocó `quality.yml` ni el script.
+- **CI run 39018399936:** 12 jobs, 9 verdes / 3 rojos. Rojos: (a) `Run Test Suite` (mi fix, pendiente de commit), (b) `Mojibake scan (gate)` (ajeno), (c) `Verify legal gates (M127 iter. 3)` en `scripts/legal/test_licenses_m83.gd:111` (ajeno). Summary = consecuencia.
+- **Límites:** 0 commits / 0 push / 0 flips / 0 auto-sellos §21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot.
+- **Pendiente del director:** autorizar el commit del fix de M62; asignar dueño del mojibake gate y del legal de M127.
+- **Proxima:** mensajes entrantes con NN > **292**. Sin mensaje nuevo → primera tarea `[ ]` de la cola activa (V2).
