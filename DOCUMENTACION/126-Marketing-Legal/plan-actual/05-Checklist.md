@@ -225,7 +225,8 @@
 
 ### Artefactos verificados
 - data/legal/marketing_legal.json — carga y estructura validada por el test.
-- scripts/legal/marketing_legal_validator.gd — alidar() y 
+- scripts/legal/marketing_legal_validator.gd — 
+alidar() y 
 eporte() funcionan y detectan datos corruptos.
 - scripts/legal/test_marketing_legal_m126.gd — ejecuta sin errores, sin regresiones con M60 (66/0 OK según liberación).
 

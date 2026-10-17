@@ -167,7 +167,8 @@
 
 ### Artefactos verificados
 - data/legal/merchandising.json — carga y estructura validada por el test.
-- scripts/legal/merch_validator.gd — alidar() y 
+- scripts/legal/merch_validator.gd — 
+alidar() y 
 eporte() funcionan y detectan datos corruptos.
 - scripts/legal/test_merch_m129.gd — ejecuta sin errores, sin regresiones con M60 (66/0 OK según liberación).
 
