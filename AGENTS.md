@@ -380,7 +380,7 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 > **NO** es la fuente de trabajo del agente.
 
 **Flujo obligatorio (V2 — ciclo DEFINITIVO, fundador ~04:55):**
-1. **Leer tu carpeta — el ÚLTIMO archivo** → si el director te escribió, RESPONDER primero creando TU mensaje propio (numeración de hilo; cada uno escribe su mensaje — el director, si le faltó algo, completa su propio archivo)
+1. **Leer tu carpeta — el ÚLTIMO archivo** → si el director te escribió, RESPONDER primero creando TU mensaje propio (numeración de hilo; cada uno escribe su mensaje)
 2. **Sin mensajes nuevos → ir SIEMPRE a tu BACKLOG-MASTER** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, cola activa) — **JAMÁS quedarte sin trabajo** (el backlog nunca se vacía)
 3. **Elegir tareas** y bloquearlas → marcar `[→]` en tu backlog + `🔵` en CHECKLIST-GLOBAL (si toca un módulo)
 4. **Ejecutar** las tareas (leer `plan-actual/` del módulo, implementar, documentar)
@@ -1452,7 +1452,7 @@ reemplazo), y `Logs/` (registro histórico).
 3. **Ciclo del AGENTE (cron propio, en este orden — ciclo DEFINITIVO fundador ~04:55):**
    (1a) **leer su carpeta — el ÚLTIMO archivo** del canal, y si el director dejó instrucciones ahí
    → RESPONDER primero creando SU PROPIO mensaje (cada uno escribe su mensaje, nunca editar el
-   de otro; si al DIRECTOR le faltó algo en SU mensaje, él lo completa en ese mismo archivo); (1b) si no hay mensajes → ir SIEMPRE a su BACKLOG-MASTER
+   de otro); (1b) si no hay mensajes → ir SIEMPRE a su BACKLOG-MASTER
    (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, sección A - COLA ACTIVA) y
    trabajar la próxima tarea — **JAMÁS quedarse sin trabajo: el backlog nunca se vacía**
    (el director repone tareas cuando queda corto); (1c) **REPORTE al director EN CADA VUELTA
