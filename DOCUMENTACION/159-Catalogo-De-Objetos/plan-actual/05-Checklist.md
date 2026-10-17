@@ -35,6 +35,7 @@
 - **Visual QA:** `tools/mcp/godot-mcp/capturas/159-Catalogo-De-Objetos/cap_159_tanda1_contact_sheet.png` (composita los 10 sobre fondo dark D102). Verificado: distinguibles por color de categoría (baya=azulado, mayoría=verde) + borde de rareza (gris=común, teal=inusual), legibles a 48×48.
 - **Bug corregido:** el 1er run generaba `icono="res://res://..."` (prefijo doble) — se quitó el `"res://"+` sobrante (OUT_DIR ya lo trae); re-run limpio.
 - **Flip:** los 10 ítems ahora tienen `icono` real en disco, pero el `[ ]` "Verificar que todos los objetos tienen icono" (300) **NO se flippea todavía** (10/300). Flippa al completar las tandas que cubran una categoría completa. Fila GLOBAL sigue 78/146 (real).
+- **Tanda 2 (hecha):** 10 ítems (herramientas T1 `item_obj_her_001..005` + recursos `gemstone/glass/ice/mud/moss`) → 10 PNG más en `assets/2d/items_m159/` + `.tres` linked. **20/300 ítems con ícono** (tandas 1+2). QA: `cap_159_tanda2_contact_sheet.png` (verifiqué: gemstone borde ámbar rareza=2 "raro", her_002 borde teal rareza=1 "inusual", categorías por color).
 
 ---
 

@@ -38,10 +38,10 @@ func _run() -> void:
 	var d := DirAccess.open("res://")
 	if d:
 		d.make_dir_recursive("assets/2d/items_m159")
-	# tanda 1 (N704): ítems con más tracción de gameplay (recursos + herramientas del loop básico)
+	# tanda 2 (N704): herramientas T1 (jugador) + recursos con tracción
 	var ids: Array[String] = [
-		"baya_roja", "madera_roble", "piedra_caliza", "mineral_cobre", "fibra_algodon",
-		"wood", "stone", "iron_ore", "grass", "clay",
+		"item_obj_her_001", "item_obj_her_002", "item_obj_her_003", "item_obj_her_004", "item_obj_her_005",
+		"gemstone", "glass", "ice", "mud", "moss",
 	]
 	# Deduplicate preserving order
 	var seen := {}

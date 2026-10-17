@@ -16,7 +16,7 @@ func _run() -> void:
 	var d := DirAccess.open("res://")
 	if d:
 		d.make_dir_recursive("tools/mcp/godot-mcp/capturas/159-Catalogo-De-Objetos")
-	var ids: Array[String] = ["baya_roja", "madera_roble", "piedra_caliza", "mineral_cobre", "fibra_algodon", "wood", "stone", "iron_ore", "grass", "clay"]
+	var ids: Array[String] = ["item_obj_her_001", "item_obj_her_002", "item_obj_her_003", "item_obj_her_004", "item_obj_her_005", "gemstone", "glass", "ice", "mud", "moss"]
 	var celda := 64
 	var margen := 8
 	var w := ids.size() * celda + margen * 2
@@ -30,7 +30,7 @@ func _run() -> void:
 			continue
 		var dest := Vector2(margen + i * celda, (celda - im.get_height()) / 2.0)
 		hoja.blit_rect(im, Rect2(Vector2.ZERO, Vector2(im.get_width(), im.get_height())), dest)
-	var abs := ProjectSettings.globalize_path(OUT + "cap_159_tanda1_contact_sheet.png")
+	var abs := ProjectSettings.globalize_path(OUT + "cap_159_tanda2_contact_sheet.png")
 	var r := hoja.save_png(abs)
 	print("=== [M159 b2] contact sheet: %d celdas, save=%s ===" % [ids.size(), ("OK" if r == OK else "FAIL")])
 	quit(0 if r == OK else 1)
