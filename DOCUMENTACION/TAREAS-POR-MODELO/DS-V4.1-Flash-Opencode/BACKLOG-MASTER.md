@@ -52,10 +52,10 @@
 30. M94-Motivación: 7 objetivos del catálogo. — [x] 2026-10-17 (Tanda 22): 7 objetivos verificados — data/motivacion/objetivos.json (recoleccion/social/minijuego/creacion/exploracion, expiracion=false); boot "[M94] MotivacionManager listo (7 objetivos en catálogo)" (184 logs); test_motivacion_m94 38/0 rc0 — out/tanda22.
 31. M73-Coleccionables: 15 items 4 categorías del front. — [x] 2026-10-17 (Tanda 23): data/coleccionables/catalog.json = 15 items / 4 categorias (animales 4, minerales 5, conchas 3, reliquias 3); boot "[M73] ColeccionablesManager ready: 15 items, 4 categorias" (185 logs); test_coleccionables rc0 (out/tanda23).
 32. M46-Arte-2D: los 13 flips (the 14 files — already X 089). — [x] 2026-10-17 (Tanda 24): 13 flips Lote 1 (A 8 + B RF1 5) verificados [x] con evidencia real — ART_STYLE_2D.md 90L/10§ (§1-4 contenido sustantivo en disco); módulo 91/110 [x], 19 [ ] asset-dependientes (M45/M108); READ-ONLY (M46 🔵 agnes). Obs: citas 'literal' son paráfrasis con negritas; Lote 1 cita §7/§10 existentes.
-33. M36-Fauna: 7 especies del front.
-34. M65-Manadas/Bancos: PackLogic/SchoolLogic (los animales de front).
-35. M36-SPAWNER: 10 individuos 3 zonas (el front del volume).
-36. M115-HardwareManager: 3 perfiles del front.
+33. M36-Fauna: 7 especies del front. — [x] 2026-10-17 (Tanda 25): 7 especies verificadas — data/fauna/catalog.json 7 entradas (gaviota_playera/conejo_pradera/nutria_ribera/lechuza_bosque/salamandra_ancestral/cangrejo_humedal/halcon_montana; horario+rareza por especie); boot [M36] FaunaManager ready: 7 especies en catalogo presente en 186 logs de out/; test_fauna.gd rc=0 con Resumen M36: 58 checks, 0 fallos (out/tanda25).
+34. M65-Manadas/Bancos: PackLogic/SchoolLogic (los animales de front). — [x] 2026-10-17 (Tanda 26): PackLogic/SchoolLogic verificadas — scripts/animales_ia/{pack_logic 4762b, school_logic 4493b, m65_animal_ai 13647b, test_m65 7370b}; boot [M65] Manada (PackLogic) creada para conejo_pradera + Banco (SchoolLogic) gaviota_playera/cangrejo_humedal x6 en logs out/ (incl. CI); test_m65.gd rc=0 con TEST M65 ANIMALES-IA: 0 fallo(s) (30 OK; cap presupuesto maximo (3) = WARNING esperado); out/tanda26.
+35. M36-SPAWNER: 10 individuos 3 zonas (el front del volume). — [x] 2026-10-17 (Tanda 27): spawner verificado — montado en scenes/main_island.tscn (constantes MAX_INDIVIDUOS 24 / GRUPOS_INICIALES 3 / INTERVALO 15s, L31-35); boot EN VIVO hoy (headless --quit-after 900, rc=0): poblando fauna (P-49) + grupo conejo_pradera (2) pradera + gaviota_playera (6) playa + cangrejo_humedal (4) humedal + poblacion inicial: 12 individuos en 3 zonas (out/tanda27/boot_spawner.log); historico Log 1165-P-49 (9/10) y CI 2026-10-17 (13/12/14).
+36. M115-HardwareManager: 3 perfiles del front. — [x] 2026-10-17 (Tanda 28): 3 perfiles verificados — data/hardware/hardware_profiles.json (624b): baja (FPS 30) / media (60) / alta (60), plataformas windows/macos/linux; boot [M115] HardwareManager listo (3 perfiles) x189 en out/ (incl. CI 2026-10-17); test_hardware_m115.gd rc=0 Resumen M115: 17 checks, 0 fallos (out/tanda28). Modulo: 78 [x]/0 [ ]/26 [?] deudas historicas ajenas al frente de perfiles.
 37. M158-ToolTierSystem: 4 tiers 6 gates 4 forjas del front.
 38. M160-Ubicaciones: 39 catálogo 48 de las ubicaciones.
 39. El 148 de T del boot (the MC).
@@ -169,6 +169,9 @@
 146. reposicion tecnica infra (directo del 05 real): M63-Streaming: P8: shaders — precalentamiento + caché de variantes [S] — precarga de shaders hecha (H); caché de variantes es de M47/render
 147. reposicion tecnica infra (directo del 05 real): M40-Infra: Soporte de espía de eventos para el Debug Menu (M110) [S]
 148. reposicion tecnica infra (directo del 05 real): M40-Infra: RF2: detección de partida guardada (M60) y decisión nueva/cargar [M]
+
+149. [M125] Escribir `legal/terms_policy.md` (spec de tu 301 §4.1): versión pública/resumida para el sitio, NO sustituye a terms_of_service.md; cubre las 11 materias del molde hermano (o N/A explícito por materia); version/fecha coherentes con terms_config.gd o diferencia explicada; UTF-8 sin BOM, LF. Criterio de cierre: tus 5 puntos verificables. [M]
+150. [M86] Documentar en `03-Diseno.md` el criterio de la L124 (spec de tu 301 §4.2): apartado con la regla `ante duda razonable, la pista se descarta`, contra qué corpus se compara, quién firma, registro del descarte, y corregir la cita fantasma `3.8` a la sección real de la matriz. [M]
 # (B) ESTADO HIST M96/infrax4, M116x1, M113x2) = fuera del alcance del lote; 0 flips disponibles; suite M117 rc=0.
 21. M119-Update: el canal estable — los checks de updates (el vision del sistema de updates del juego). — [x] 2026-10-17 (Tanda 4): verificado: canal estable 1.0.0 + suite test_updates_m119 rc=0 (15/0); los 9 [ ] son deuda externa con dueno (M59/M96/M118/M107) — 0 flips (consistente con auditoria previa Step-5 Log 1866); M119 = 109/118.
 23. El barrido BOM masivo (155+) — la verificación post-lote (DeepSeek-WB: 0 BOM en scripts/production). — [x] 2026-10-17 (Tanda 3): barrido 15.502 rastreados: 0 BOM fuera de Obsoletos/; 12 históricos en Obsoletos/ excluidos por diseño del gate (verificar_bom.py:28-45); job BOM del CI verde.
@@ -322,13 +325,13 @@
 
 ### Bloque R — El flujo de la fauna morphing (el front de the faunas).
 
-79. M36-Fauna: 7 especies del front.
-80. M65-Manadas/Bancos: PackLogic/SchoolLogic (los animales de front).
-81. M36-SPAWNER: 10 individuos 3 zonas (el front del volume).
+79. M36-Fauna: 7 especies del front. — [x] 2026-10-17 (Tanda 25): dup de #33 (misma evidencia — política dups 052).
+80. M65-Manadas/Bancos: PackLogic/SchoolLogic (los animales de front). — [x] 2026-10-17 (Tanda 26): dup de #34 (misma evidencia — política dups 052).
+81. M36-SPAWNER: 10 individuos 3 zonas (el front del volume). — [x] 2026-10-17 (Tanda 27): dup de #35 (misma evidencia — política dups 052).
 
 ### Bloque S — Los perfiles del hardware del front.
 
-82. M115-HardwareManager: 3 perfiles del front.
+82. M115-HardwareManager: 3 perfiles del front. — [x] 2026-10-17 (Tanda 28): dup de #36 (misma evidencia — política dups 052).
 83. M158-ToolTierSystem: 4 tiers 6 gates 4 forjas del front.
 84. M160-Ubicaciones: 39 catálogo 48 de las ubicaciones.
 

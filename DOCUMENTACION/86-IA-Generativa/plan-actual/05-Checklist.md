@@ -121,7 +121,7 @@
 - [x] Definir qué hacer con contenido dudoso (sin registro de origen): se trata como no aprobado hasta rastrearlo [M]
 - [x] Definir qué hacer cuando cambia la política de la plataforma (re-verificación y actualización del documento) [M]
 - [x] Definir qué hacer si una herramienta cambia sus términos de servicio (re-registro con nueva versión) [M]
-- [x] Definir el caso de música generada que "suena similar" a una obra protegida → agnes-2.5-flash 2026-09-13: caso documentado en 03-Diseno.md §3.8 (similar-sounding music case); discrimination policy. Spec defined.
+- [?] — DEGRADADO por barrido 299 (Log 1949: sin sustancia en docs del módulo) Definir el caso de música generada que "suena similar" a una obra protegida → agnes-2.5-flash 2026-09-13: caso documentado en 03-Diseno.md §3.8 (similar-sounding music case); discrimination policy. Spec defined.
 - [x] Definir el caso de assets mixtos (IA + humano): se documenta el porcentaje y la edición humana [M]
 - [x] Definir el caso de prompts que copian estilos de artistas vivos (prohibido como base final) [M]
 - [x] Definir el caso de texto de IA con errores de lore (revisión editorial obligatoria antes del juego) [M]
@@ -170,7 +170,8 @@
 
 ### Artefactos verificados
 - data/legal/ia_generativa.json — carga y estructura validada por el test.
-- scripts/legal/GenAIValidator.gd — alidar()/
+- scripts/legal/GenAIValidator.gd — validar() (restaurado; la línea estaba partida por la degradación L124 — hallazgo DS 301)
+alidar()/
 eporte() detectan datos corruptos.
 - scripts/legal/test_genai_m86.gd — ejecuta sin errores, sin regresiones con M60 (66/0 OK).
 
