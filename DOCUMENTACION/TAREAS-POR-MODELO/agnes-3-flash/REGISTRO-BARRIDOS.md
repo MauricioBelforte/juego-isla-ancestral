@@ -32,4 +32,6 @@ UTF-8 §28 y verificado contra disco (sin marcadores inflados).
 
 | # | Msg | Módulo | Medición | Veredicto | Fecha | Nota |
 |---|---|---|---|---|---|---|
-| (próximo barrido acá — serie reanudada post-metodología V2) | | | | | | |
+| 22 | 707 | M66 Anti-Softlock | 110/2/5 = 117 | drift 0 | 2026-10-17 | refs en disco; 5 [?] = QA/perf pendientes |
+| 23 | 707 | M67 Vehículos | 19/112/0 = 131 | drift 0 | 2026-10-17 | early-stage; `vehicle_manager.gd` + `event_bus.gd` en disco; 112 [ ] = implementación pendiente |
+| 24 | 707 | M68 Transporte-Y-Navegación | 99/18/14 = 131 | drift 0 | 2026-10-17 | refs OK; 14 [?] = integración/rutas |
