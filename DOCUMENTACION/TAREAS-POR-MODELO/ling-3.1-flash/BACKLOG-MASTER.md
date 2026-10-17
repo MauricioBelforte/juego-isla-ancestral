@@ -52,12 +52,12 @@
 
 ### Bloque C — Estado de integridad (estándar informe 142)
 
-19. Control integridad semanal de los 3 catálogos (ES/EN/PT): conteo, UTF-8 strict, BOM, 0 U+FFFD.
-20. Control placeholders ES<-EN: 0 discrepancias (el estándar 142 §3).
-21. Control placeholders EN<-PT.
-22. Control claves muertas (claves presentes en catálogo pero nunca referenciadas en código).
-23. Control claves huérfanas (referenciadas en código pero ausentes del catálogo).
-24. Control duplicadas exactas en cada catálogo.
+19. [x] Control integridad semanal de los 3 catálogos (ES/EN/PT): conteo, UTF-8 strict, BOM, 0 U+FFFD. — TANDA 1 (2026-10-17): 147/147/148 recursivo (anti-duplicados), 0 BOM/U+FFFD/CRLF/dupes ×5 archivos.
+20. [x] Control placeholders ES<-EN: 0 discrepancias (el estándar 142 §3). — TANDA 1: parity por clave 0 discrepantes (walk recursivo).
+21. [x] Control placeholders EN<-PT. — TANDA 1: parity ES<->PT 0 discrepantes.
+22. [x] Control claves muertas (claves presentes en catálogo pero nunca referenciadas en código). — TANDA 1: censo canónico = `AuditorClaves.auditar()` (test_validador_po_m87.gd `_test_auditor_claves`, suite M87 82/0 — agnes M53 iter.6); auditoría estática propia (4 patrones, 1388 .gd): 80 claves referenciadas; las "muertas" estáticas son claves compuestas `tr_key(mod,sec,key)` (3 args), `tr_ctx`, `resolve_text` y prefijos dinámicos (M68.*, DIARY.CAT_*, ITEMS.*) — el auditor canónico las resuelve.
+23. [x] Control claves huérfanas (referenciadas en código pero ausentes del catálogo). — TANDA 1: auditoría estática propia → 3 hits, TODOS falsos positivos (prefijos dinámicos `DIARY.CAT_` en validate_diary/diary_layer, `items.` en inventario_iter4 — ambos reconocidos por AuditorClaves L249/L260 — y artefacto regex `),`); 0 huérfanas reales nuevas; el canon afirma 0 claves de producción ausentes (suite 82/0, catálogos sin cambios desde encargo 146: `git log -- locales/ data/localizacion/`).
+24. [x] Control duplicadas exactas en cada catálogo. — TANDA 1: 0 duplicados ×3 JSON (object_pairs_hook) y .po coherente.
 25. Control claves de usuario-visible vs técnico (las `key_*` de UI).
 26. Reporte de auditoría mensual (el estándar 142 — report-only).
 27. Validador de integridad como script reusuaje (el "control integridad" adaptado del 142 — `scripts/validar_i18n_integridad.gd` o el de su metodología python).
@@ -199,6 +199,19 @@
 **Estado actual:** este archivo creado 2026-10-16 22:00 (directiva del fundador: «el de ling lo tenes que ahora esta activo» — esos tickets todos al rol de Ling con reportes al canal y al estándar del informe 142).
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16
+
+## TANDA 1 — Control de integridad (2026-10-17, metodología V2 msg 158)
+
+**Modelo:** Ling-3.1-Flash / Kilo Code — primera tanda del ciclo V2 (acuse del msg 158 + informe msg 159).
+**Alcance:** Bloque C, tareas 19-24 (control de integridad, estándar informe 142 — report-only, sin edición de catálogos).
+**Evidencia (medición fresca, scripts `control_i18n_v2*.py`):**
+- JSON ES/EN/PT: **147/147/148** claves recursivas (anti-duplicados) · 0 BOM · 0 U+FFFD · 0 CRLF · 0 claves duplicadas ×3.
+- ES↔EN: conjuntos de claves **0/0** · parity de placeholders por clave **0 discrepantes** · 144/147 valores difieren (correcto: son traducciones) · 3 iguales (language-neutral: `DIARY.BLOQUEADO`, `EQUIP.EQUIPADO`, `SETTINGS.SLOTS`).
+- ES↔PT: **0/1** — huérfana histórica `eventos.historia_c2_nome` (PT) — decisión de rename pendiente del director (tarea 16).
+- `.po` ES/EN: **236/236 msgids**, conjuntos **iguales**, 0 BOM/U+FFFD.
+- **Estado cruzado (input para la decisión A/B/C escalada al fundador, msg 153):** normalizando la raíz `cadenas.` del JSON → **121 comunes / 25 solo-JSON / 115 solo-.po**. Solo-JSON: 14 `eventos.historia_c*` + 3 `msg.*` + 2 `npc.*` + 6 `ui.*`. Solo-.po: bloque M68 transporte (~85: EVENT/NARR/ROUTE/SIGN/SPECIAL/STOP/TRIP), 17 `DIARY.CAT_*` + `ENTRADAS`, `CLOCK.ESTACIONES.0-3`, `HUD.VIDA`, `ITEMS.MADERA(_DESC)`, `MAIN_MENU.OPTIONS`, `SETTINGS.IDIOMA`, `UI.INTERACTUAR`, `npc.catalina`, `DIALOGOS.VECINO_SALUDO`.
+- **Huérfanas/muetas (tareas 22/23):** auditoría estática propia (4 patrones de llamada, 1388 `.gd`) → 80 claves referenciadas; 3 hits falsos positivos (prefijos dinámicos `DIARY.CAT_`/`items.` + artefacto regex); el censo canónico es `AuditorClaves.auditar()` (resuelve `tr_key` compuesta, `tr_ctx`, claves como argumento, prefijos dinámicos; separa probes de test) — suite M87 **82/0**, afirma **0 claves de producción ausentes**. Catálogos sin cambios desde el encargo 146 (`git log -- locales/ data/localizacion/` → último: `a7a2754`).
+**Veredicto:** integridad intra-sistema VERDE en los 5 archivos; la deuda .po↔JSON (25/115) queda DOCUMENTADA, no ejecutada (decisión del fundador pendiente).
 
 
 ---
