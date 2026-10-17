@@ -16,6 +16,16 @@
 
 # (A) COLA ACTIVA — 100+ TAREAS (tandas curadas por el director)
 
+### ⭐ TAREA VIGENTE (directiva del fundador 2026-10-17 ~04:57): BARRIDOS + REGISTRO
+
+- `[→]` **Serie de barridos anti-drift + mantenimiento de tu REGISTRO:** en CADA barrido que
+  corras, actualizá **tu archivo de cuenta** `DOCUMENTACION/TAREAS-POR-MODELO/agnes-3-flash/REGISTRO-BARRIDOS.md`
+  (módulo barrido, medición [x]/[ ]/[?], veredicto drift 0 / drift con detalle, fecha). Ese
+  archivo ES tu cuenta — lo mantenés VOS en cada vuelta y lo citás en tu reporte. El director
+  lo audita y consolida. Los barridos ya corridos (21 módulos, serie completa #659→#701) están
+  precargados ahí de la migración — tu trabajo nuevo va ABAJO de esa tabla. [M]
+
+
 # BACKLOG 100+ TAREAS PARA AGNES-3-FLASH — Investigación previa por GLM-5.3-Flash
 
 **Modelo:** GLM-5.3-Flash (encargado del fundador 2026-10-16: un backlog con 100+ tareas por modelo activo)

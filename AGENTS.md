@@ -379,14 +379,14 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 > el DIRECTOR (ver §29.1). La CHECKLIST-GLOBAL es solo un tablero de resumen para el usuario —
 > **NO** es la fuente de trabajo del agente.
 
-**Flujo obligatorio (V2):**
-1. **Leer si el director te escribió** en tu canal → responder primero (numeración de hilo)
-2. **Leer tu backlog** (en tu canal) → buscar tareas pendientes (`[ ]`) según tu nicho
-3. **Elegir una TANDA de tareas** y bloquearlas → marcar `[→]` en tu backlog + `🔵` en CHECKLIST-GLOBAL (si toca un módulo)
+**Flujo obligatorio (V2 — ciclo DEFINITIVO, fundador ~04:55):**
+1. **Leer tu carpeta — el ÚLTIMO archivo** → si el director te escribió, RESPONDER primero (numeración de hilo; si el mensaje deja dudas, se completa EL MISMO archivo, no se crea otro)
+2. **Sin mensajes nuevos → ir SIEMPRE a tu BACKLOG-MASTER** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, cola activa) — **JAMÁS quedarte sin trabajo** (el backlog nunca se vacía)
+3. **Elegir tareas** y bloquearlas → marcar `[→]` en tu backlog + `🔵` en CHECKLIST-GLOBAL (si toca un módulo)
 4. **Ejecutar** las tareas (leer `plan-actual/` del módulo, implementar, documentar)
-5. **Completar** → marcar `[x]` en los 3 lugares (tu backlog en el canal, `05-Checklist.md`, CHECKLIST-GLOBAL)
-6. **Reportar el cierre de la tanda** al director en tu canal (REGLA CERO)
-7. **Repetir** hasta agotar tokens
+5. **Completar** → marcar `[x]` en los 3 lugares (tu BACKLOG-MASTER, `05-Checklist.md`, CHECKLIST-GLOBAL)
+6. **Reportar al director EN CADA VUELTA** de tu cronómetro lo que hiciste (tarea(s), estado, evidencia — aunque no cierres todo), en tu canal (REGLA CERO)
+7. **Repetir** en bucle continuo
 
 **NO ir directo a la CHECKLIST-GLOBAL a buscar trabajo.** Tu backlog es tu fuente de verdad.
 
@@ -1449,12 +1449,17 @@ reemplazo), y `Logs/` (registro histórico).
 2. **El DIRECTOR los mantiene** (`GLM-5.3-Flash-Director`): agrega/marca tareas con evidencia,
    investigando `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` y el estado real del proyecto.
    Solo el backlog PROPIO del director queda en `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/`.
-3. **Ciclo del AGENTE (cron propio, en este orden):** (1a) leer si el director le escribió en
-   su canal → responder primero; (1b) si no hay mensajes → trabajar una TANDA de tareas de SU
-   backlog (las que él elija, según su nicho); (1c) al terminar la tanda → reporte de cierre al
-   director en su canal + marcas `[x]` honestas en su backlog + `05-Checklist` + fila GLOBAL.
+3. **Ciclo del AGENTE (cron propio, en este orden — ciclo DEFINITIVO fundador ~04:55):**
+   (1a) **leer su carpeta — el ÚLTIMO archivo** del canal, y si el director dejó instrucciones ahí
+   → RESPONDER primero; si el mensaje deja dudas, se completa/aclara EL MISMO archivo
+   (NO crear otro); (1b) si no hay mensajes → ir SIEMPRE a su BACKLOG-MASTER
+   (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, sección A - COLA ACTIVA) y
+   trabajar la próxima tarea — **JAMÁS quedarse sin trabajo: el backlog nunca se vacía**
+   (el director repone tareas cuando queda corto); (1c) **REPORTE al director EN CADA VUELTA
+   del cronómetro** en su canal (qué tarea(s) trabajó esa vuelta, estado, evidencia — aunque no
+   cierre todo) + marcas `[x]` honestas en su backlog + `05-Checklist` + fila GLOBAL. Bucle continuo.
 4. **Ciclo del DIRECTOR (3 pasos, en este orden):** (1) responder mensajes de los modelos;
-   (2) verificar que cada backlog tenga tareas por hacer (agregar si queda corto, por nicho);
+   (2) verificar que cada BACKLOG-MASTER tenga tareas por hacer (agregar si queda corto, por nicho);
    (3) si un modelo tiene tareas disponibles y pasa mucho tiempo sin avanzar ni responder →
    escribirle un RECORDATORIO en su canal.
 5. **NO cambian:** la numeración de mensajes (hilo último+1, pools por canal gitignoreados),

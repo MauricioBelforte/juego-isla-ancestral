@@ -33,17 +33,21 @@
    - **(3)** Si un modelo tiene tareas disponibles y pasa MUCHO tiempo sin avanzar ni
      responder → escribirle un RECORDATORIO en su canal.
 4. **El cron de cada AGENTE es, en este orden:**
-   - **(1a)** Leer si el director le escribió un mensaje en su canal → responderlo primero.
-   - **(1b)** Si no hay mensajes → elegir una TANDA de tareas de SU backlog y trabajarlas.
-   - **(1c)** Al terminar la tanda → reporte de cierre al director en su canal
-     (qué cerró, evidencia, marcas actualizadas).
+   - **(1a)** Leer su carpeta — **el ÚLTIMO archivo** — y si el director dejó instrucciones,
+     responderle primero (si el mensaje deja dudas, se completa EL MISMO archivo, no se crea otro).
+   - **(1b)** Si no hay mensajes → ir SIEMPRE a su BACKLOG-MASTER
+     (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, cola activa) y trabajar la
+     próxima tarea — **JAMÁS quedarse sin trabajo** (el director repone tareas si queda corto).
+   - **(1c)** **REPORTE al director EN CADA VUELTA de su cronómetro** (qué trabajó esa vuelta,
+     estado, evidencia — aunque no cierre todo) en su canal.
 
 ### El ciclo completo (resumen operational)
 
 ```
 FUNDADOR encarga al director → el director DELEGA por canal (mensaje) o deja previsto en backlog
-AGENTE (cron): 1º responde mensajes del director → 2º trabaja una tanda de SU backlog
-             → 3º reporte de cierre de tanda al director
+AGENTE (cron): 1º lee el ÚLTIMO archivo de su carpeta y responde al director
+             → 2º sin mensajes: tareas de SU BACKLOG-MASTER (siempre hay — JAMÁS sin trabajo)
+             → 3º reporte al director EN CADA VUELTA (lo hecho esa vuelta)
 DIRECTOR (cron): 1º responde mensajes → 2º chequea que los backlogs tengan tareas por hacer
              → 3º recordatorio a los silenciosos → actualiza backlog/fila GLOBAL de cada cierre
 ```
