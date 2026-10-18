@@ -64,6 +64,38 @@ DIRECTOR (cron): 1º responde mensajes → 2º chequea que los backlogs tengan t
 
 ---
 
+## BALANCE METODOLOGÍA V2 vs V1 — PRIMER DÍA COMPLETO (2026-10-18 05:04, datos verificados contra disco)
+
+> **VEREDICTO del fundador (2026-10-18 05:04): ***"la metodología V2 funciona mejor que la anterior por ahora"***.** Documentado con las cifras del primer día completo del riel V2 (la noche + la madrugada, con 7 agentes en riel).
+
+### Cifras del V2 (primer día completo, 7 agentes activos)
+
+| Métrica | V1 (cron 20 min, 4 bloques) | **V2 (10 min, 7 rieles por nicho)** |
+|---|---|---|
+| Íconos M159 | 0→87 (muy lento) | **0→300 (CERRADO)** — cableado Texture2D real |
+| Vueltas DS-Opencode | (sin cron de cadencia 10 min) | **29 vueltas** (M15→M121) |
+| Vueltas G-5.3-Flash-Agente | (modelo sin canal ni backlog) | **36 mensajes / 26 vueltas** (D102 completo + BOM 300) |
+| Serie anti-drift | parciales | **100 módulos M69-M168 CERRADOS** (3 drifts) |
+| Fixes de código real | dispersos | M62 ratio, D102 contraste, BUG-136, shadowing global_pool, legal/terms_policy.md |
+| Backlogs | ~85/102 (73%) | **7 colas a 100+ siempre repuestas** |
+| Infraestructura | gate rojo perpetuo | **gate de cobertura probado en rojo** (4 casos) + helper de numeración + pools sin colisiones |
+
+### Por qué funciona mejor
+
+1. **La partición director/agente liberó el nicho natural de GLM 5.3** (verificación crítica/persistencia/arquitectura) — antes bloqueado porque el propio director ejecutaba.
+2. **El helper `proximo_numero.py`** eliminó los errores de numeración (52/53, 761, 087 — la misma causa raíz).
+3. **El gate de cobertura de `verificar_checklist.py`** cerró la trampa del falso verde por omisión (los módulos con fila perdida dejaron de ser invisibles).
+4. **Las colas de la flota repuestas a 100+ SIN HACER** mantuvieron a los 7 agentes sin pausas durante 29+ vueltas cada uno.
+5. **La partición por nicho de capacidad** (imagen/visión para agnes, tests en vivo para DS, arquitectura para DeepSeek-WB, rendimiento para Step-5, diálogos para Hy3, i18n para Ling, verificación crítica para G-Agente) coincidió con lo que cada modelo produce mejor.
+
+### Riesgo residual documentado
+
+- El pool de encabezados de la flota con reloj desfasado (10-19/10-22 futuros) — mitigado con el pool saneado por el director y el reloj UTC ruteado.
+- Los 4 tests stale (M112→M72/M64) con los punteros file:line exactos — queda con los dueños de fila.
+- El M159 con los 52 [?] heredados — no flips sin dueño.
+
+---
+
 ## HELPER OBLIGATORIO DE NUMERACIÓN — `scripts/proximo_numero.py` (directiva del fundador 2026-10-17 08:42)
 
 > **NUNCA numerar un mensaje a mano.** Antes de escribir (o mover) cualquier archivo de mensaje
