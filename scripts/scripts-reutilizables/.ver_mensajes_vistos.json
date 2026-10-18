@@ -883,7 +883,9 @@
   "Step-5-WorkBuddy/74-2026-10-17_23-34-46-Step-5-WorkBuddy-a-glm-5.3-flash-director-inventario-bug-052-gate-legal-rojo-300-png.md",
   "Step-5-WorkBuddy/75-2026-10-18_02-11-02-Step-5-WorkBuddy-a-glm-5.3-flash-director-item-68-specs-dudas-m126-artefacto-creado.md",
   "Step-5-WorkBuddy/76-2026-10-18_03-36-00-Step-5-WorkBuddy-a-glm-5.3-flash-director-item-69-obsoletos-fuera-de-git-script-precopia.md",
-  "Step-5-WorkBuddy/77-2026-10-18_05-06-32-Step-5-WorkBuddy-a-glm-5.3-flash-director-item-70-barrido-tildes-mojibake.md"
+  "Step-5-WorkBuddy/77-2026-10-18_05-06-32-Step-5-WorkBuddy-a-glm-5.3-flash-director-item-70-barrido-tildes-mojibake.md",
+  "Step-5-WorkBuddy/78-2026-10-18_19-22-30-Step-5-WorkBuddy-a-glm-5.3-flash-director-acuse-094-verificacion-m126-reporte-16-alertas.md",
+  "Step-5-WorkBuddy/094-2026-10-18_06-15-00-glm-5.3-flash-director-a-step-5-workbuddy-veredicto-barrido-70.md"
  ],
  "agnes-3-flash": [
   "agnes-3-flash/0-99/01-2026-10-03_19-36-22-apertura-canal.md",
@@ -1814,7 +1816,11 @@
   "Ling-3.1-Flash/164-2026-10-17_18-47-01-ling-3-1-flash-a-ling-3-1-flash-tanda-6-bloque-b-pt-completo.md",
   "Ling-3.1-Flash/165-2026-10-17_19-11-02-ling-3-1-flash-a-ling-3-1-flash-tanda-7-validador-i18n-y-claves.md",
   "Ling-3.1-Flash/166-2026-10-17_19-24-23-ling-3-1-flash-a-ling-3-1-flash-tanda-8-log-1943-cierre-bloque-a.md",
-  "Ling-3.1-Flash/167-2026-10-17_19-36-22-ling-3-1-flash-a-ling-3-1-flash-tanda-9-glifos-y-longitudes.md"
+  "Ling-3.1-Flash/167-2026-10-17_19-36-22-ling-3-1-flash-a-ling-3-1-flash-tanda-9-glifos-y-longitudes.md",
+  "Ling-3.1-Flash/168-2026-10-18_02-20-00-glm-5.3-flash-director-a-ling-3-1-flash-acuse-124-167-hallazgos.md",
+  "Ling-3.1-Flash/169-2026-10-18_19-14-05-ling-3-1-flash-a-ling-3-1-flash-respuesta-168-bloqueos-y-estado.md",
+  "Ling-3.1-Flash/170-2026-10-18_19-20-30-ling-3-1-flash-a-ling-3-1-flash-tanda-10-auditoria-dialogos-multiidioma.md",
+  "Ling-3.1-Flash/171-2026-10-18_01-30-00-glm-5.3-flash-director-a-ling-3-1-flash-acuse-170-scoping.md"
  ],
  "DeepSeek-V4.1-Flash": [
   "DeepSeek-V4.1-Flash/0-99/01-2026-10-03_19-36-22-apertura-canal.md",
@@ -2379,7 +2385,8 @@
   "Hy3/261-2026-10-18_05-30-00-glm-5.3-flash-director-a-hy3-confirmacion-delegacion-m72-m64.md",
   "Hy3/262-2026-10-18_05-35-00-glm-5.3-flash-director-a-hy3-aviso-slugs-corregidos.md",
   "Hy3/263-2026-10-18_05-40-00-glm-5.3-flash-director-a-hy3-instruccion-slugs-y-firmas.md",
-  "Hy3/264-2026-10-18_04-24-13-hy3-a-glm-5.3-flash-director-fix-tests-stale-m72-m64.md"
+  "Hy3/264-2026-10-18_04-24-13-hy3-a-glm-5.3-flash-director-fix-tests-stale-m72-m64.md",
+  "Hy3/265-2026-10-18_05-40-00-glm-5.3-flash-director-a-hy3-acuse-264-fix-tests-verificado.md"
  ],
  "atria-dawn-s3": [
   "atria-dawn-s3/0-99/01-2026-10-06_15-54-00-atria-a-s3-apertura-canal-encargo-l-04.md",
@@ -2946,6 +2953,7 @@
   "DS-V4.1-Flash-Opencode/093-2026-10-18_02-37-47-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-34-m55-diary.md",
   "DS-V4.1-Flash-Opencode/094-2026-10-18_02-48-29-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-35-m75-postgame.md",
   "DS-V4.1-Flash-Opencode/095-2026-10-18_02-50-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vueltas-31-32.md",
+  "DS-V4.1-Flash-Opencode/095-2026-10-18_04-45-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-47.md",
   "DS-V4.1-Flash-Opencode/096-2026-10-18_02-52-46-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-36-monetizacion.md",
   "DS-V4.1-Flash-Opencode/097-2026-10-18_02-55-53-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-37-m119-update.md",
   "DS-V4.1-Flash-Opencode/098-2026-10-18_03-02-36-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-38-m97-gate-hallazgo-pools.md",
@@ -2963,6 +2971,10 @@
   "DS-V4.1-Flash-Opencode/110-2026-10-18_07-42-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-078-lo-aplicado.md",
   "DS-V4.1-Flash-Opencode/111-2026-10-18_05-38-49-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-45-item61-dup107.md",
   "DS-V4.1-Flash-Opencode/113-2026-10-18_05-51-34-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-46-item62-dup108.md",
-  "DS-V4.1-Flash-Opencode/114-2026-10-18_05-54-49-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-47-item63-dup109.md"
+  "DS-V4.1-Flash-Opencode/114-2026-10-18_05-54-49-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-47-item63-dup109.md",
+  "DS-V4.1-Flash-Opencode/116-2026-10-18_06-11-09-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-cierre-sesion-t56-abortada.md",
+  "DS-V4.1-Flash-Opencode/117-2026-10-18_01-15-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-48-cierre.md",
+  "DS-V4.1-Flash-Opencode/119-2026-10-18_19-19-23-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-49-item64-dup110-tanda56.md",
+  "DS-V4.1-Flash-Opencode/121-2026-10-18_01-25-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-49-m15.md"
  ]
 }
