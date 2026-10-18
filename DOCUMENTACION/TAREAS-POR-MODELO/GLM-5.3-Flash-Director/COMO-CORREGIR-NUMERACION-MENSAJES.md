@@ -175,6 +175,18 @@ PASADA 6: las referencias antiguas (los Logs + docs) con el mapa old→new
 
 **La condición**: el agente ajusta su puntero SI su última vuelta procesada lo confirma (el mensaje del agente lo confirma antes de que el director lo ajuste) — sino el agente informa su última vuelta procesada y el director deja el puntero al número que el agente declare.
 
+## LOS 3 PUNTOS OBLIGATORIOS DEL FUNDADOR (23:09)
+
+**PUNTO 1 — SIEMPRE que modifiques los números de un canal → GENERA UN INFORME para ese agente** (para que esté al tanto de todo). El informe no es opcional — SIEMPRE, incluso si la corrección parece menor. Sin el informe, el agente no sabe que su canal fue renumerado y sus referencias internas quedan desalineadas.
+
+**PUNTO 2 — En ese informe, LEÉ el \.ultima-revision-<agente>.txt\ del canal:**
+- Si el puntero tiene el número correcto (el máximo de los archivos renumerados, ACORDE a los criterios del método) → confirmá el puntero en el informe con la cita del run/tanda.
+- Si el puntero tiene un **número raro** (estático viejo, un número que no corresponde al máximo real, un desfase frente a la última vuelta del agente) → **AVISÁLE al agente que REVISE esa numeración** con los criterios del método (el máximo de los archivos renumerados + la última vuelta procesada + la política de los toques) y ajuste su puntero acorde.
+
+**PUNTO 3 — En ese informe, EXPLICÁLE al agente el MÉTODO CORRECTO** (el riel de los 7 pasos de este archivo, con la regla del pool del fundador, la numeración por fecha, el título interno, la expansión de las referencias del histórico y la regla de los números 1-3 dígitos con o sin padding). El agente no tiene el método — el director se lo INFORMA en el mismo acuse.
+
+**Los 3 puntos quedan OBLIGATORIOS en el informe post-corrección de cada canal** — sin los 3, el informe no está completo.
+
 **Insertar después del PASO 6 en el método definitivo** — el paso 7 queda como la NOTIFICACIÓN al agente de los cambios de numeración (con el informe completo y la recomendación del puntero).
 
 ---
