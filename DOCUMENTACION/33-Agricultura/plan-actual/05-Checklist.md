@@ -247,7 +247,7 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-**Totales:** 153 ítems · Completados: 106 · Pendientes: 47 · No resueltos: 0.
+**Totales:** 155 ítems · Completados: 106 · Pendientes: 49 · No resueltos: 0. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 106 [x] / 49 [ ] / 0 [?] = 155; el bloque declaraba 153 items y 47 pendientes.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].

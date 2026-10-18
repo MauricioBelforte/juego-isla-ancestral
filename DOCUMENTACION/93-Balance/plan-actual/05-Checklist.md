@@ -232,7 +232,7 @@
 - [x] Definir coordinación con M153 (Sellos) para bloques de progreso [M] — CERRADO (parcial por diseño): seals.json define los 3 bloques (esfuerzo 2/4/6 h, grind 0) coherentes con progression.json (sello_1 8 h/12 sesiones); M153 vision_contract es la gobernanza (O1-O19, guardián validate_vision). Los sellos de gameplay real los implementa M153 en fase jugable — el CONTRATO de balance está cerrado aquí.
 - [x] Definir coordinación con M94 (retención) para ausencia benigna [M] — CERRADO iter. 4: las 3 reglas de M94 viven en tablas M93 (sin decaimiento friendship, cultivos_sin_muerte, bonus_retorno +5 AO/día tope 150) + M94 iter 1 (minimax-m3) implementó el sistema anti-FOMO data-driven que las consume. Contrato cerrado.
 - [x] Definir revisión periódica del balance (cada 3 meses post-lanzamiento) [M]
-**Totales:** 134 ítems · Completados: 131 · Pendientes: 3 · No resueltos: 0.
+**Totales:** 134 ítems · Completados: 130 · Pendientes: 4 · No resueltos: 0. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 130 [x] / 4 [ ] / 0 [?]; el bloque declaraba 131/3/0.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 134 [x] / 0 [ ] / 0 [?].

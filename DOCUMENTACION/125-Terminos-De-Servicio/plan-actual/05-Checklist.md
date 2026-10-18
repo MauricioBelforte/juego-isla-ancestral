@@ -173,7 +173,7 @@ El módulo fue liberado como "núcleo iter. 1" con JSON + Validator + Test. **No
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 105 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 105 ítems · Completados: 104 · Pendientes: 0 · No resueltos: 1. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: L135 degradado a [?] por el barrido 299 - Logs 1944/1949; conteo real 104 [x] / 0 [ ] / 1 [?].)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 75 [x] / 30 [ ] / 0 [?].

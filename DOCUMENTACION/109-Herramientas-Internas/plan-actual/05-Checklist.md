@@ -224,7 +224,7 @@
 - [x] Auditor no-recursivo (get_files_at) — los builds headless con -s no sostienen el listado recursivo por DirAccess en este entorno (documentado; el npc_visual_check usa load() que sí recorre)
 - [?] Panel del editor de diálogos en el dock (vista de grafo + edición de texto de nodo) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
 
-**Totales:** 138 ítems · Completados: 107 · Pendientes: 28 · No resueltos: 3.
+**Totales:** 138 ítems · Completados: 120 · Pendientes: 15 · No resueltos: 3. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: conteo real por marca = 120 [x] / 15 [ ] / 3 [?] = 138; el bloque declaraba 107/28/3.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 27 [x] / 108 [ ] /

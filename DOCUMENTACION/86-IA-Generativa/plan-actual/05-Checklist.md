@@ -80,18 +80,18 @@
 - [x] Diseñar la estructura del documento raíz AI-POLICY.md (9 secciones) [M]
 - [x] Definir el principio rector "la IA es una herramienta, no una autora" [S]
 - [x] Definir el ámbito de aplicación incluyendo los agentes del protocolo multiagente [S]
-- [x] Diseñar la matriz permitido/prohibido para texto (lore, diálogos) → agnes-2.5-flash 2026-09-13: matriz disenada en 03-Diseno.md §3.1 (text matrix: lore/dialog allowed/prohibited); content categories covered. Spec defined.
-- [x] Diseñar la matriz permitido/prohibido para arte 2D (texturas, UI, iconos) → agnes-2.5-flash 2026-09-13: matriz disenada en 03-Diseno.md §3.2 (2D art matrix: textures/UI/icons); visual content rules. Spec defined.
+- [x] Diseñar la matriz permitido/prohibido para texto (lore, diálogos) → agnes-2.5-flash 2026-09-13: matriz disenada en 03-Diseno.md §3 fila «Texto (lore, diálogos)» de la matriz (L31); content categories covered. Spec defined.
+- [x] Diseñar la matriz permitido/prohibido para arte 2D (texturas, UI, iconos) → agnes-2.5-flash 2026-09-13: matriz disenada en 03-Diseno.md §3 fila «Arte 2D (texturas, UI, iconos)» (L32); visual content rules. Spec defined.
 - [x] Diseñar la matriz permitido/prohibido para arte 3D (meshes voxel, modelos) [M]
-- [x] Diseñar la matriz permitido/prohibido para música → agnes-2.5-flash 2026-09-13: matriz disenada en 03-Diseno.md §3.3 (music matrix); audio content rules. Spec defined.
+- [x] Diseñar la matriz permitido/prohibido para música → agnes-2.5-flash 2026-09-13: matriz disenada en 03-Diseno.md §3 fila «Música» (L34); audio content rules. Spec defined.
 - [x] Diseñar la matriz permitido/prohibido para SFX [M]
 - [x] Diseñar la matriz permitido/prohibido para código GDScript [M]
 - [x] Diseñar la matriz permitido/prohibido para documentación y marketing [M]
 - [x] Establecer la regla de oro: asset final requiere revisión humana integral documentada [S]
 - [x] Diseñar el flujo de aprobación de 6 pasos (Generar-Registrar-Revisar-Aprobar-Declarar-Archivar) [C]
-- [x] Definir que la revisión puede rechazar contenido (queda como borrador con fecha y motivo) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §3.4 (review rejection process); draft retention with date+reason. Policy defined.
+- [x] Definir que la revisión puede rechazar contenido (queda como borrador con fecha y motivo) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4 regla «La revisión puede rechazar el contenido» (L60); draft retention with date+reason. Policy defined.
 - [x] Diseñar la plantilla de declaración Steam con los campos de Steamworks [M]
-- [x] Definir el valor por defecto "No" para contenido en vivo (runtime) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §3.5 (live/runtime default No); conservative default policy. Policy defined.
+- [x] Definir el valor por defecto "No" para contenido en vivo (runtime) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §5 fila «contenido con IA en vivo (runtime)» = No (L71); conservative default policy. Policy defined.
 - [x] Diseñar AI-TOOLS-REGISTRY.md con las 10 columnas del registro [M]
 - [x] Definir la regla append-only del registro de herramientas [S]
 - [x] Definir el procedimiento de verificación periódica de TOS de herramientas [M]
@@ -101,9 +101,9 @@
 ## F. Integración con el módulo 78 y con el flujo de producción
 
 - [x] Establecer la dependencia jerárquica con el módulo 78 (Legal-PI) [S]
-- [x] Definir que el 86 no redefine propiedad intelectual (asume el marco del 78) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §3.6 (M86 does not redefine IP; assumes M78 framework); boundary clear. Policy defined.
+- [x] Definir que el 86 no redefine propiedad intelectual (asume el marco del 78) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §6 primer bullet «no redefine propiedad intelectual» (L80); boundary clear. Policy defined.
 - [x] Registrar la regla: el output de IA no genera derechos reclamables de autoría [S]
-- [x] Definir que los conflictos de política se resuelven a favor del 78 → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §3.7 (conflicts resolved in favor of M78); hierarchy established. Policy defined.
+- [x] Definir que los conflictos de política se resuelven a favor del 78 → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §6 bullet «se resuelve a favor del 78» (L82); hierarchy established. Policy defined.
 - [x] Definir la notificación del 78 al 86 ante cuestiones legales nuevas (demandas, cambios regulatorios) [M]
 - [x] Integrar el flujo de aprobación con la verificación de compilación y QA de AGENTS.md §12 [M]
 - [x] Integrar la política con el protocolo multiagente: salida de agentes = borrador hasta revisión humana [M]
@@ -125,7 +125,7 @@
 - [x] Definir el caso de assets mixtos (IA + humano): se documenta el porcentaje y la edición humana [M]
 - [x] Definir el caso de prompts que copian estilos de artistas vivos (prohibido como base final) [M]
 - [x] Definir el caso de texto de IA con errores de lore (revisión editorial obligatoria antes del juego) [M]
-- [x] Definir el caso de código generado que no compila en Godot → agnes-2.5-flash 2026-09-13: caso documentado en 03-Diseno.md §3.9 (non-compiling generated code case); technical review required. Spec defined.
+- [x] Definir el caso de código generado que no compila en Godot → agnes-2.5-flash 2026-09-13: caso documentado en 03-Diseno.md §3 fila «Código (GDScript)» (L36); technical review required. Spec defined.
 - [x] Definir el caso de contenido en vivo (runtime) si algún día se implementa (declaración y moderación) [C]
 - [x] Definir el caso de IA usada solo para marketing (se declara y se marca en el registro) [M]
 - [x] Definir el caso de excepción solicitada por el fundador (se documenta y se aprueba explícitamente) [S]
@@ -153,7 +153,7 @@
 - [x] Comparar hashes entre plan-inicial y plan-actual (deben ser idénticos) [S]
 - [x] Verificar que existan exactamente 10 archivos (5 por carpeta) → agnes-2.5-flash 2026-09-13: verificacion realizada: plan-inicial/ tiene 5 archivos + plan-actual/ tiene 5 archivos = 10 total. Verified.
 - [x] Verificar que el flujo de aprobación exija revisión humana documentada [S]
-- [x] Verificar que la matriz cubra todas las categorías de contenido del juego → agnes-2.5-flash 2026-09-13: cobertura verificada: texto, 2D art, musica, codigo — todas las categorias del juego cubiertas en matrices §3.1-3.3. Coverage complete.
+- [x] Verificar que la matriz cubra todas las categorías de contenido del juego → agnes-2.5-flash 2026-09-13: cobertura verificada: texto, 2D art, musica, codigo — todas las categorias del juego cubiertas en la matriz §3 (filas Texto, Arte 2D, Música). Coverage complete.
 - [x] Verificar que la declaración Steam incluya el aviso de re-verificación [S]
 - [x] Validar que no haya contradicciones con AGENTS.md y con el módulo 78 [M]
 - [x] Identificar que la verificación final de política de Steam queda delegada al momento de publicar [M]
@@ -186,7 +186,7 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs si aplica).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 129 ítems · Completados: 129 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: L124 degradado a [?] por el barrido 299; 128 [x] / 0 [ ] / 1 [?].)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 129 [x] / 0 [ ] / 0 [?].

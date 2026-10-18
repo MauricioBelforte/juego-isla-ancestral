@@ -263,7 +263,7 @@
 artes, no por M46).** Checklist archivo 0/110 (cierre no reflejado) — **flag para el dueño M46**. Liberado
 🟡 para que el dueño re-marque / lo asuman M45/M108.
 
-**Totales:** 110 ítems · Completados: 0 · Pendientes: 110 · No resueltos: 0.
+**Totales:** 110 ítems · Completados: 91 · Pendientes: 19 · No resueltos: 0. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 91 [x] / 19 [ ] / 0 [?]; el bloque declaraba 0/110/0 - el peor de los 16.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 110 [ ] /

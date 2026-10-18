@@ -422,4 +422,4 @@ Los 4 puntos que requieren investigación son: P2/P7 (luna — luz funciona pero
 Los [120 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_ciclo_dia_noche.gd 16/0` = scripts/world/day_night_cycle.gd en disco.
 
 
-Totales: 169 items - Completados: 120 - Pendientes: 0 - No resueltos: 49. (conteo director msg 184, 2026-10-13)
+Totales historico (conteo director msg 184, 2026-10-13; SUPERADO por el bloque vigente de L191 = 125 [x] / 0 [ ] / 44 [?]): 169 items - Completados: 120 - Pendientes: 0 - No resueltos: 49.

@@ -429,7 +429,7 @@ cargados: 7`; `terrain_detector/provider/modifiers/data` + `terrain_data_provide
   inexistente; la colisión de terreno real es vía `terrain_detector` (raycast) → verificación
   pendiente.
 
-**Totales:** `246 [x] → 243 [x]`, `2 [?] → 5 [?]` (M156 = 307 · 243·5·59). El estado `🟡` ya lo
+**Totales historico (transicion 246 a 243, pre-lote):** `246 [x] → 243 [x]`, `2 [?] → 5 [?]` (M156 = 307 · 243·5·59). El bloque VIGENTE es el de L391: 202 [x] / 58 [ ] / 47 [?] = 307 (re-medido por DeepSeek-V4.1-Flash 2026-10-17). El estado `🟡` ya lo
 ponía el dueño/coordinador; mi trabajo fue la degradación honesta + esta nota. **No toqué el
 estado** ni el `event_bus.gd` ajeno (regla §21.4).
 

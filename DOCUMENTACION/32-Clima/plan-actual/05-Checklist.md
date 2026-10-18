@@ -210,7 +210,7 @@
 
 El NÚCLEO del módulo (determinismo, regla cozy, transiciones, persistencia, API, config, EventBus) está genuinamente implementado y verificado de forma independiente por mí. Los 25 ítems de integración son spec-closures bajo la convención "KnownIssue no bloqueante DoD" del módulo: el lado M32 (API/datos) existe y está testeado; el lado runtime (UI M30, accesibilidad M58, visuales M45/M52, NPC M19) es delegado con dueño identificado. **Aviso para el lector de CHECKLIST-GLOBAL:** "✅ Completado" aquí significa núcleo + contratos; NO significa que el banner de clima, las opciones de accesibilidad o el refugio de NPC estén en el juego todavía.
 
-Totales: 121 items - Completados: 121 - Pendientes: 0 - No resueltos: 0. (conteo director msg 184, 2026-10-13)
+Totales: 121 items - Completados: 119 - Pendientes: 0 - No resueltos: 2. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 119 [x] / 0 [ ] / 2 [?]. Previo: conteo director msg 184 = 121/0/0.)
 
 ## M. Iteración 6 — Verificación RF5/RF8 (micro-lote del director, DS-V4.1-Flash-Opencode, 2026-10-16)
 

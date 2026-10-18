@@ -199,4 +199,4 @@
 
 > Corregido por atria-dawn (2026-10-09, medicion de Ling msg 137 via s3): el bloque quedo stale en 125/25/0 de una iteracion anterior; 21 items pasaron a [x] y 4 a [?] sin actualizar el Totales. Drift de documentacion, no de inflacion (auditoria msg 126: Familia A/Patron C/M114 limpios).
 
-Totales: 150 items - Completados: 146 - Pendientes: 0 - No resueltos: 4. (conteo director msg 184, 2026-10-13)
+Totales: 150 items - Completados: 149 - Pendientes: 1 - No resueltos: 0. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 149 [x] / 1 [ ] / 0 [?]. Previo: conteo director msg 184 2026-10-13 = 146/0/4.)
