@@ -550,6 +550,90 @@ def test_ver_detectar_totales_incoherentes():
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+def test_ver_cobertura_falta_fila_es_ceguera():
+    """REGRESIÓN trampa 91 (hallazgo DeepSeek 301, 2026-10-18): un módulo con
+    `05-Checklist.md` y SIN fila en la tabla era INVISIBLE.
+
+    El verificador comparaba el Progreso de las filas que ENCONTRABA, así que el
+    universo medido era la tabla, no el disco: 162 filas contra 167 checklists
+    daban «sin inconsistencias» para los 5 módulos omitidos. Un detector ciego y
+    uno limpio dicen lo mismo (familia 91/100).
+
+    Contrato: faltar una fila es CEGUERA (DetectorCiegoError -> exit 3), no una
+    alerta de contenido. Sobrar una fila es deuda de contenido (alerta, exit 1).
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        base = tmp / "DOCUMENTACION"
+        for nombre in ("01-Uno", "02-Dos", "010-Diez"):
+            (base / nombre / "plan-actual").mkdir(parents=True)
+            (base / nombre / "plan-actual" / "05-Checklist.md").write_text(
+                "- [x] uno\n", encoding="utf-8"
+            )
+        checklists = sorted(base.glob("*/plan-actual/05-Checklist.md"))
+        assert len(checklists) == 3, len(checklists)
+
+        # (a) tabla que cubre los 3 -> sin faltantes ni sobrantes
+        completa = {
+            "01": {"modulo": "01-Uno"},
+            "02": {"modulo": "02-Dos"},
+            "10": {"modulo": "010-Diez"},
+        }
+        faltan, sobran = ver.analizar_cobertura(checklists, completa)
+        assert faltan == [], f"falso positivo de cobertura: {faltan}"
+        assert sobran == [], f"falso positivo de sobrantes: {sobran}"
+
+        # (b) tabla a la que le falta 02 -> lo NOMBRA (no un conteo pelado)
+        sin_02 = {"01": {"modulo": "01-Uno"}, "10": {"modulo": "010-Diez"}}
+        faltan, sobran = ver.analizar_cobertura(checklists, sin_02)
+        assert len(faltan) == 1, faltan
+        assert faltan[0][0] == "2", f"id no normalizado a int-string: {faltan[0]}"
+        assert faltan[0][1] == "02-Dos", faltan[0]
+        assert sobran == [], sobran
+
+        # (c) fila sin checklist -> sobrante, NO ceguera
+        con_fantasma = dict(completa)
+        con_fantasma["99"] = {"modulo": "99-Fantasma"}
+        faltan, sobran = ver.analizar_cobertura(checklists, con_fantasma)
+        assert faltan == [], faltan
+        assert [s[0] for s in sobran] == ["99"], sobran
+
+        # (d) tabla vacía: esta función no opina (la alerta la da analizar_proyecto)
+        assert ver.analizar_cobertura(checklists, {}) == ([], [])
+
+        # (e) EL GATE: con una fila faltante, analizar_proyecto LEVANTA (exit 3)
+        tabla = tmp / "CHECKLIST-GLOBAL.md"
+        encabezado = (
+            "| ID | Módulo | Estado | Progreso |\n"
+            "|----|--------|--------|----------|\n"
+        )
+        tabla.write_text(
+            encabezado
+            + "| 01 | 01-Uno | 🟡 Con dudas | 1/1 |\n"
+            + "| 10 | 010-Diez | 🟡 Con dudas | 1/1 |\n",
+            encoding="utf-8",
+        )
+        original = ver.DOCUMENTACION
+        ver.DOCUMENTACION = base
+        try:
+            try:
+                ver.analizar_proyecto(tabla, 24)
+            except ver.DetectorCiegoError as e:
+                assert "COBERTURA" in str(e), f"sin marca COBERTURA: {e}"
+                assert "02-Dos" in str(e), f"no nombra el módulo faltante: {e}"
+                assert "trampa 91" in str(e), f"sin cita de la trampa: {e}"
+            else:
+                raise AssertionError(
+                    "un módulo sin fila NO se reportó: el verificador volvió a "
+                    "medir un subconjunto del proyecto (trampa 91)"
+                )
+        finally:
+            ver.DOCUMENTACION = original
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 def main():
     print("=" * 60)
     print("🧪 SUITE DE TESTS — SCRIPTS DEL PROTOCOLO MULTIAGENTE")
@@ -582,6 +666,8 @@ def main():
          test_ver_parsear_totales)
     test("Totales incoherentes detectado + control sin falso positivo",
          test_ver_detectar_totales_incoherentes)
+    test("cobertura: módulo sin fila = CIEGO (trampa 91) + control",
+         test_ver_cobertura_falta_fila_es_ceguera)
 
     print()
     print("=" * 60)

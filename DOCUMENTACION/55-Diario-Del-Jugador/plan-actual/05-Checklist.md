@@ -10,7 +10,7 @@
 > **Archivos afectados:** `DOCUMENTACION/55-Diario-Del-Jugador/plan-actual/` (05-Checklist + 04-Codigo notas)
 > **Reservas anteriores (históricas):** mimo-v2.6-flash-free · frente T-M1 iter. 1-3 (Logs 374/1295, liberado 2026-10-05) · glm-5.3-flash · núcleo V0/V1 (Log 374, liberado 2026-09-01)
 
-**Estado:** 58/131 completados (37 previos + 21 de iter. 4 Step-5-WorkBuddy), 15 [?], 58 pendientes — iter. 4 (Step-5-WorkBuddy, Log 1897, reclamo 🔵 2026-10-16, director GLM-5.3 Flash-Director msg 59): auditoría contra disco (Patrón D); 4/4 suites headless verdes (test_diario 37 checks · test_diario_ui 89/0 · validate_diary 0 fallos/1 aviso M56 · test_diario_persist 2-procesos 0 fallos; 0 SCRIPT ERROR en las 4); 21 flips [x] con cita (estados, EventBus, lugares, anti-spoiler ×11, nombres propios, persistencia ×5, migración) + 12 [?] con diagnóstico medido y dueño (7 puentes de evento sin emisor o con ids no coincidentes: M36/M34, M50, M35, M16, M24/M26, M25, M71 + galería M56 ×5). Ver 06/07-Testings. [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 63/131 completados (37 previos + 21 de iter. 4 Step-5-WorkBuddy + 1 de iter. 5), 15 [?], 53 pendientes — iter. 4 (Step-5-WorkBuddy, Log 1897, reclamo 🔵 2026-10-16, director GLM-5.3 Flash-Director msg 59): auditoría contra disco (Patrón D); 4/4 suites headless verdes (test_diario 37 checks · test_diario_ui 89/0 · validate_diary 0 fallos/1 aviso M56 · test_diario_persist 2-procesos 0 fallos; 0 SCRIPT ERROR en las 4); 21 flips [x] con cita (estados, EventBus, lugares, anti-spoiler ×11, nombres propios, persistencia ×5, migración) + 12 [?] con diagnóstico medido y dueño (7 puentes de evento sin emisor o con ids no coincidentes: M36/M34, M50, M35, M16, M24/M26, M25, M71 + galería M56 ×5). Ver 06/07-Testings. [S]=Simple [M]=Medio [C]=Complejo.
 
 ## A. Diseño General del Diario
 
@@ -22,7 +22,7 @@
 
 ## B. Diseño de UI (M53)
 
-- [ ] Diseñar lista virtualizada por categoría con scroll suave [C]
+- [x] Diseñar lista virtualizada por categoría con scroll suave [C] — iter. 5 (Step-5-WorkBuddy, Log 1934): dup de #194, misma evidencia (solo la categoría activa se materializa: 12 filas de 500 en el árbol + espaciadores arriba/abajo); rango de scroll CORRECTO con 500 entradas tras CONGELAR el paso de fila (real medido 43.0 = 39 tema + 4 sep. vs 32 asumido, bug de producción corregido); test_diario_perf_m55.gd 26 checks / 0 fallos / EXIT 0, re-verificado 2026-10-17 18:29
 - [x] Definir detalle de entrada con descripción, refs y acciones [M] - T-M1 lote 2: LblDetalleDesc (autowrap, oculto sin texto) + botones Ref_* navegables (solo refs a entradas descubiertas = anti-spoiler) + acciones favorito/estado/día; clave DIARY.REFERENCIAS en es.po/en.po
 - [x] Añadir barra de progreso por categoría en la cabecera [M] — iter. 2: ProgresoCat en cabecera + % global sobre lo descubierto, clamp [0,100] (test_ui)
 - [x] Añadir estrella de favorito en cada fila [S] — iter. 2: ★ en fila + BtnFavoritoDetalle con undo visual (test_ui, sonda rojo demostrada)
@@ -223,7 +223,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 62 · Pendientes: 54 · No resueltos: 15.
+**Totales:** 131 ítems · Completados: 63 · Pendientes: 53 · No resueltos: 15.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 8 [x] / 123 [ ] / 0 [?].

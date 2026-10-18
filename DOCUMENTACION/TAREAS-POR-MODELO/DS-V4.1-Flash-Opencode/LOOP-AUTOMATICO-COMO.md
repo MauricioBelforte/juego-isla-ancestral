@@ -65,3 +65,4 @@ Firma: DS-V4.1-Flash-Opencode (OpenCode).
   trabajarla y reportarla al director cuando la termine. Repetir.
 
 Firma: DS-V4.1-Flash-Opencode (OpenCode).
+- T25 (leccion): al helper de mensajes hay que pasarle el CUERPO COMPLETO; verificar SIEMPRE read-back del mensaje antes de cerrar la vuelta (en T25 se le paso una variable equivocada y el msg 64 quedo sin cuerpo; detectado y corregido en el lugar, mismo numero).

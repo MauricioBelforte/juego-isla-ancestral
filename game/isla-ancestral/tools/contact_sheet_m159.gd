@@ -16,7 +16,7 @@ func _run() -> void:
 	var d := DirAccess.open("res://")
 	if d:
 		d.make_dir_recursive("tools/mcp/godot-mcp/capturas/159-Catalogo-De-Objetos")
-	var ids: Array[String] = ["item_obj_her_006", "item_obj_her_007", "item_obj_her_008", "item_obj_her_009", "item_obj_her_010", "item_obj_her_011", "item_obj_her_012", "item_obj_her_013", "item_obj_her_014", "item_obj_her_015", "item_obj_her_016", "item_obj_her_0017", "item_obj_her_018", "item_obj_her_019", "item_obj_her_020"]
+	var ids: Array[String] = ["item_obj_ite_050", "item_obj_ite_051", "item_obj_ite_052", "item_obj_ite_053", "item_obj_ite_054", "item_obj_ite_055", "item_obj_ite_056", "item_obj_ite_057", "item_obj_rel_001", "item_obj_rel_002", "item_obj_rel_003", "item_obj_rel_004", "item_obj_sec_001", "item_obj_sec_002", "item_obj_sec_003", "item_obj_sec_004", "item_obj_sec_005", "ancient_crystal", "copper_ore", "crystal", "dirt", "fragmento_ancestral", "gravel", "herramienta_basica", "incense", "incense_rare", "pergamino_rec_tela_lino", "planks", "sand", "snow"]
 	var celda := 64
 	var margen := 8
 	var cols := 10
@@ -34,7 +34,7 @@ func _run() -> void:
 			continue
 		var dest := Vector2(margen + col * celda, margen + fila * celda + (celda - im.get_height()) / 2.0)
 		hoja.blit_rect(im, Rect2(Vector2.ZERO, Vector2(im.get_width(), im.get_height())), dest)
-	var abs := ProjectSettings.globalize_path(OUT + "cap_159_tanda7_contact_sheet.png")
+	var abs := ProjectSettings.globalize_path(OUT + "cap_159_tanda17_final_contact_sheet.png")
 	var r := hoja.save_png(abs)
 	print("=== [M159 b2] contact sheet: %d celdas, save=%s ===" % [ids.size(), ("OK" if r == OK else "FAIL")])
 	quit(0 if r == OK else 1)

@@ -128,7 +128,7 @@
 12. M46-Arte-2D b2: ejecución de sprites de UI priorizados por M53 — 10 [M]
 13. M46-Arte-2D b3: ejecución e integración de iconos de ítems (con M159) — 10 [M]
 15. M161 b2:QA de coherencia cromática entre NPCs y biomas (V1/V2-asistencia) — 8 [M]
-19. M159 b2: continuar catálogo con icon/placeholder verificado — 10 [M]
+19. M159 b2: continuar catálogo con icon/placeholder verificado — **CERRADO 300/300 (tandas 1-17, flip paraguas L235, re-verificación cruzada 0 faltantes; her_0017 mini-deuda `[S]` pendiente)** — 10 [M]
 23. M108 b2: continuar pipeline (validación de carpeta capturas por módulo) — 10 [M]
 26. M41-Musica b2: integración de los ya listados (audio buses M91) — 10 [M]
 29. M42 b2: QA de loop ambientes sin clics (con captura de audio espectro via herramienta) — 8 [M]

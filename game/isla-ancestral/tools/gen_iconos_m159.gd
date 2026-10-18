@@ -38,11 +38,15 @@ func _run() -> void:
 	var d := DirAccess.open("res://")
 	if d:
 		d.make_dir_recursive("assets/2d/items_m159")
-	# tanda 7 (N704): herramientas OBJ-HER 006-020 (15, completa la categoría 20/20)
+	# tanda 17 (N704) ÚLTIMA: OBJ-ITE (8) + OBJ-REL (4) + OBJ-SEC (5) + 13 nombrados M14-M15 = 30 → cierra 300/300
 	var ids: Array[String] = [
-		"item_obj_her_006", "item_obj_her_007", "item_obj_her_008", "item_obj_her_009", "item_obj_her_010",
-		"item_obj_her_011", "item_obj_her_012", "item_obj_her_013", "item_obj_her_014", "item_obj_her_015",
-		"item_obj_her_016", "item_obj_her_0017", "item_obj_her_018", "item_obj_her_019", "item_obj_her_020",
+		"item_obj_ite_050", "item_obj_ite_051", "item_obj_ite_052", "item_obj_ite_053", "item_obj_ite_054",
+		"item_obj_ite_055", "item_obj_ite_056", "item_obj_ite_057",
+		"item_obj_rel_001", "item_obj_rel_002", "item_obj_rel_003", "item_obj_rel_004",
+		"item_obj_sec_001", "item_obj_sec_002", "item_obj_sec_003", "item_obj_sec_004", "item_obj_sec_005",
+		"ancient_crystal", "copper_ore", "crystal", "dirt", "fragmento_ancestral",
+		"gravel", "herramienta_basica", "incense", "incense_rare", "pergamino_rec_tela_lino",
+		"planks", "sand", "snow",
 	]
 	# Deduplicate preserving order
 	var seen := {}

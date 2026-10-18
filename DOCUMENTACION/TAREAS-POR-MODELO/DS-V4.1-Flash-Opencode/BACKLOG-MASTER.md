@@ -56,10 +56,10 @@
 34. M65-Manadas/Bancos: PackLogic/SchoolLogic (los animales de front). — [x] 2026-10-17 (Tanda 26): PackLogic/SchoolLogic verificadas — scripts/animales_ia/{pack_logic 4762b, school_logic 4493b, m65_animal_ai 13647b, test_m65 7370b}; boot [M65] Manada (PackLogic) creada para conejo_pradera + Banco (SchoolLogic) gaviota_playera/cangrejo_humedal x6 en logs out/ (incl. CI); test_m65.gd rc=0 con TEST M65 ANIMALES-IA: 0 fallo(s) (30 OK; cap presupuesto maximo (3) = WARNING esperado); out/tanda26.
 35. M36-SPAWNER: 10 individuos 3 zonas (el front del volume). — [x] 2026-10-17 (Tanda 27): spawner verificado — montado en scenes/main_island.tscn (constantes MAX_INDIVIDUOS 24 / GRUPOS_INICIALES 3 / INTERVALO 15s, L31-35); boot EN VIVO hoy (headless --quit-after 900, rc=0): poblando fauna (P-49) + grupo conejo_pradera (2) pradera + gaviota_playera (6) playa + cangrejo_humedal (4) humedal + poblacion inicial: 12 individuos en 3 zonas (out/tanda27/boot_spawner.log); historico Log 1165-P-49 (9/10) y CI 2026-10-17 (13/12/14).
 36. M115-HardwareManager: 3 perfiles del front. — [x] 2026-10-17 (Tanda 28): 3 perfiles verificados — data/hardware/hardware_profiles.json (624b): baja (FPS 30) / media (60) / alta (60), plataformas windows/macos/linux; boot [M115] HardwareManager listo (3 perfiles) x189 en out/ (incl. CI 2026-10-17); test_hardware_m115.gd rc=0 Resumen M115: 17 checks, 0 fallos (out/tanda28). Modulo: 78 [x]/0 [ ]/26 [?] deudas historicas ajenas al frente de perfiles.
-37. M158-ToolTierSystem: 4 tiers 6 gates 4 forjas del front.
-38. M160-Ubicaciones: 39 catálogo 48 de las ubicaciones.
-39. El 148 de T del boot (the MC).
-40. M127-M52 (los drifts de front).
+37. M158-ToolTierSystem: 4 tiers 6 gates 4 forjas del front. — [x] 2026-10-17 (Tanda 29): data/herramientas/tiers_config.json (2607b) = 4 tiers / 6 gates / 4 forjas / 4 cursos; boot [M158] ToolTierSystem listo: 4 tiers, 6 gates, 4 forjas, 4 cursos x189 en out/ (incl. CI); test_tiers.gd rc=0 TEST M158 TIERS: 0 fallo(s) con forjados T1-T4 en vivo, gate abierto y catalogo viejo ignorado (out/tanda29). Modulo: 53 [x]/87 [ ] restantes ajenos al frente.
+38. M160-Ubicaciones: 39 catálogo 48 de las ubicaciones. — [x] 2026-10-17 (Tanda 30): boot en vivo [M160] catalogo JSON: 39 cargadas, 0 omitidas (.tres), 0 errores + [M160] Ubicaciones cargadas: 48 + conexiones bidireccionales: 10 (x287 en out/, incl. CI); test_ubicaciones_m160.gd rc=0 Resumen M160: 17 checks, 0 fallos (out/tanda30). Modulo 160: 145 [x]/2 [ ]/8 [?] historicos.
+39. El 148 de T del boot (the MC). — [x] 2026-10-17 (Tanda 31): M148-Lore-Ambiental front verificado — boot LoreCatalogo 60 piezas (4 islas) en 10 logs de out/, LoreGate OK 60 piezas/16 pistas/grafo consistente, TerrenoLore secretos por estacion (primavera/verano/otono/invierno); test_lore_m148.gd rc=0 Resumen M148: 85 checks, 0 fallos (el WARNING Catalogo invalido es el caso negativo intencional del auditor; out/tanda31). Modulo 148: 115 [x]/0 [ ]/2 [?].
+40. M127-M52 (los drifts de front). — [x] 2026-10-17 (Tanda 32): M127-Copyright verificado (test_copyright_m127.gd rc=0 13 checks 0 fallos; boot [M127] OK legal/copyright_register.md; modulo 76/0/24) y M52-VFX verificado (test_vfx_m52_iter6.gd rc=0 76 checks 0 fallos RESULTADO OK; boot VfxDirector listo 30 eventos del catalogo x6; modulo 145/0/3 CERRADO). Sin drift entre docs y codigo en ambos frentes (out/tanda32).
 41. M129-Merch: 10 productos del front.
 42. M147-WorldBible: canon 1.0.0 (6 personajes 8 lugares — ES/EN/PT el front).
 43. M147: los strings de los 6 personajes (Catalina/Bruno/Catalina/Finneas/Luna/Mateo).
@@ -332,16 +332,16 @@
 ### Bloque S — Los perfiles del hardware del front.
 
 82. M115-HardwareManager: 3 perfiles del front. — [x] 2026-10-17 (Tanda 28): dup de #36 (misma evidencia — política dups 052).
-83. M158-ToolTierSystem: 4 tiers 6 gates 4 forjas del front.
-84. M160-Ubicaciones: 39 catálogo 48 de las ubicaciones.
+83. M158-ToolTierSystem: 4 tiers 6 gates 4 forjas del front. — [x] 2026-10-17 (Tanda 29): dup de #37 (misma evidencia — política dups 052).
+84. M160-Ubicaciones: 39 catálogo 48 de las ubicaciones. — [x] 2026-10-17 (Tanda 30): dup de #38 (misma evidencia — política dups 052).
 
 ### Bloque T — El front de información del boot (los infos de arranque).
 
-85. El 148 de T del boot (the MC).
+85. El 148 de T del boot (the MC). — [x] 2026-10-17 (Tanda 31): dup de #39 (misma evidencia — política dups 052).
 
 ### Bloque U — El front de otros al emisor (el 148 del centro de front).
 
-86. M127-M52 (los drifts de front).
+86. M127-M52 (los drifts de front). — [x] 2026-10-17 (Tanda 32): dup de #40 (misma evidencia — política dups 052).
 87. M129-Merch: 10 productos del front.
 
 ### Bloque V — Los strings finales del vocabulario.

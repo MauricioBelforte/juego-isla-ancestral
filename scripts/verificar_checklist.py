@@ -19,6 +19,8 @@ Códigos de salida (BUG-075 — no compartir el 1 y el 3):
     1  miré y encontré alertas (inconsistencias reales del protocolo).
     3  DETECTOR CIEGO: no pude leer mi fuente de verdad (archivo ausente, vacío,
        sin tabla, o sin nada que analizar). No es «0 problemas», es «no miré».
+       Desde el 2026-10-18 también es CIEGO si hay módulos con
+       `05-Checklist.md` y SIN fila en la tabla (cobertura, trampa 91).
 """
 
 import argparse
@@ -242,6 +244,59 @@ def estado_emoji(estado: str) -> str:
     return m.group(1) if m else ""
 
 
+# --- Verificacion 6: COBERTURA de la tabla (trampa 91 — hallazgo DeepSeek 301)
+# Motivo: el verificador comparaba el Progreso de las filas que ENCONTRABA. Un
+# modulo con 05-Checklist.md y SIN fila en la tabla no generaba NINGUNA alerta:
+# el universo medido era el de la tabla, no el del disco. Medido el 2026-10-17
+# (Log 1950): 162 filas contra 167 checklists -> 6 modulos invisibles
+# (48/104/115/127/139/148) mientras el script seguia imprimiendo sus alertas
+# normales y su «0 inconsistencias» para esos modulos. Es exactamente el patron
+# de la trampa 91: un detector CIEGO y uno LIMPIO dicen lo mismo.
+#
+# Las dos direcciones NO son simetricas:
+#   * FALTAN filas -> CEGUERA: el orquestador esta midiendo un subconjunto del
+#     proyecto. Un «sin inconsistencias» sobre una tabla incompleta es «no
+#     mire», no «no hay nada» -> DetectorCiegoError (exit 3, BUG-075).
+#   * SOBRAN filas -> deuda de CONTENIDO: una fila sin checklist es una fila
+#     stale, no una ceguera -> alerta (exit 1).
+#
+# Los ids se comparan NORMALIZADOS a int-string: las carpetas van con cero a la
+# izquierda (``01-...``) y una fila puede venir como ``| 1 |``. Comparar crudo
+# inventaria un «falta 01» + un «sobra 1» sobre el MISMO modulo.
+def _norm_id(valor) -> str:
+    texto = str(valor).strip()
+    return str(int(texto)) if texto.isdigit() else texto
+
+
+def analizar_cobertura(checklists, filas_global):
+    """Compara los modulos con checklist contra las filas de la tabla.
+
+    Devuelve ``(faltan, sobran)``:
+      * ``faltan``: lista de ``(id, nombre_modulo)`` con checklist y sin fila.
+      * ``sobran``: lista de ``(id, modulo_declarado)`` con fila y sin checklist.
+
+    Guarda de ceguera propia: si la tabla no tiene NINGUNA fila, esta funcion no
+    opina (``([], [])``) porque ``analizar_proyecto`` ya emite la alerta de
+    «tabla vacia»; devolver 168 «faltan» aqui solo taparia ese diagnostico con
+    ruido. Si no hay checklists, el fail-fast de ``analizar_proyecto`` corta
+    antes de llegar aca.
+    """
+    por_id = {}
+    for cl in checklists:
+        nombre = cl.parent.parent.name
+        mid = nombre.split("-")[0] if "-" in nombre else nombre
+        if mid.isdigit():
+            por_id[_norm_id(mid)] = nombre
+
+    en_tabla = {_norm_id(k): v.get("modulo", k) for k, v in filas_global.items()}
+    if not en_tabla:
+        return [], []
+
+    faltan = [(mid, por_id[mid]) for mid in sorted(por_id, key=int) if mid not in en_tabla]
+    sobran = [(mid, en_tabla[mid]) for mid in sorted(en_tabla, key=int) if mid not in por_id]
+    return faltan, sobran
+
+
 # --- Verificacion 2: estructura de filas de la tabla resumen ----------------
 # Motivo (SB-02, Log 1279): 58 de 167 filas tienen un numero de celdas distinto
 # al del encabezado, y el parser las mapea POR POSICION. Con un pipe sin
@@ -415,6 +470,32 @@ def analizar_proyecto(checklist_global: Path, horas_limite: int,
     filas_global = leer_tabla_global(checklist_global)
     if not filas_global:
         alertas.append("⚠️ La tabla de CHECKLIST-GLOBAL.md está vacía (0 filas)")
+
+    # 0. COBERTURA (trampa 91 — hallazgo DeepSeek 301). Va ANTES del bucle: si
+    # la tabla omite modulos, todo lo que sigue mide un subconjunto y el
+    # veredicto no vale. Faltar una fila es CEGUERA (exit 3), no una alerta de
+    # contenido: el orquestador no puede decir «consistente» sobre un universo
+    # que no miro. Sobrar una fila es deuda de contenido (alerta).
+    faltan, sobran = analizar_cobertura(checklists, filas_global)
+    print(
+        "🔧 Cobertura: %d checklists (plan-actual) / %d filas en la tabla -> "
+        "faltan=%d sobran=%d"
+        % (len(checklists), len(filas_global), len(faltan), len(sobran))
+    )
+    if faltan:
+        detalle = ", ".join(f"{mid} ({nombre})" for mid, nombre in faltan)
+        raise DetectorCiegoError(
+            f"COBERTURA: {len(faltan)} modulo(s) con 05-Checklist.md NO tienen fila "
+            f"en CHECKLIST-GLOBAL.md -> {detalle}. La tabla es la fuente de verdad "
+            "global: mientras falte una fila, cualquier «sin inconsistencias» de "
+            "este verificador es «no mire» (trampa 91). Restaurar las filas desde "
+            "`4d1ee65` re-midiendo Estado/Progreso del checklist ACTUAL del modulo."
+        )
+    for mid, nombre in sobran:
+        alertas.append(
+            f"⚠️ Cobertura: la fila {mid} ({nombre}) no tiene "
+            f"DOCUMENTACION/{nombre}/plan-actual/05-Checklist.md — fila stale."
+        )
 
     # 1. Verificar consistencia de progreso y estado
     for cl in checklists:

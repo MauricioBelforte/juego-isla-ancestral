@@ -72,8 +72,8 @@ func _crear_ui() -> void:
 
 	var panel := PanelContainer.new()
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0.14, 0.16, 0.24, 0.98)
-	sb.border_color = Color(0.72, 0.55, 0.30)
+	sb.bg_color = ThemeUx.COLOR_BG_ARENA
+	sb.border_color = ThemeUx.COLOR_HIGHLIGHT_GOLD
 	sb.set_border_width_all(2)
 	sb.set_corner_radius_all(16)
 	sb.set_content_margin_all(18)
@@ -344,10 +344,10 @@ func _resaltar_slot(indice: int, activo: bool) -> void:
 	var btn: Button = _slots[indice]
 	if activo:
 		var sb := StyleBoxFlat.new()
-		sb.bg_color = Color(0.85, 0.72, 0.35, 0.3)
+		sb.bg_color = Color(ThemeUx.COLOR_HIGHLIGHT_GOLD, 0.3)
 		sb.set_corner_radius_all(6)
 		sb.set_border_width_all(2)
-		sb.border_color = Color(0.85, 0.72, 0.35, 1.0)
+		sb.border_color = ThemeUx.COLOR_HIGHLIGHT_GOLD
 		btn.add_theme_stylebox_override("normal", sb)
 	else:
 		btn.remove_theme_stylebox_override("normal")

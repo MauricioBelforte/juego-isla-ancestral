@@ -171,8 +171,10 @@
 101. M66-Anti-Softlock (110/117): 7 pendientes — 6 [M]
 102. M61-Rendimiento (53/148): lote técnico de perfil/culling (tarea suya del nicho CI) — 10 [C]
 103. [x] Re-contado global honesto: corrida de `scripts/verificar_checklist.py` y reporte — 6 [M] — **HECHO 2026-10-17 (Log 1940, msg 295)**: 167 modulos, 19.207 `[x]` / 3.656 `[ ]` / 1.150 `[?]` = 24.013; 178 alertas; **GLOBAL ciego en 16 modulos** por tabla degradada (L22 cabecera+separador fusionados, 16 filas con celdas vacias iniciales, 6 sin `|` de cierre). Reparacion de `CHECKLIST-GLOBAL.md` pedida al director (archivo protegido para mi).
-104. Barrido de módulos ✅ sin verificación reciente: muestreo §21.8.2.b pedido por director — 10 [C]
-105. Preparación de specs para módulos ✅→🟡 por [?]. — 8 [M]
+104. [x] Barrido de módulos ✅ sin verificación reciente: muestreo §21.8.2.b pedido por director — 10 [C] — **EN CURSO 2026-10-17 (Log 1944, msg 297)**: 5 de los 9 verdes con sello viejo muestreados (M07 6/6 · M111 12/12 · M136 9/9 · M165 6/6 · M125 4/5) = **38 ítems, 1 falla (2,6%)** → **5/5 sellos VÁLIDOS**. Falla real: **M125 L135** `legal/terms_policy.md` NO existe y su propio `04-Codigo.md:227` lo marca "IMPLEMENTACIÓN INMEDIATA" (inflación Familia A). Hallazgo transversal: **3 verdes con ítems abiertos** (M04 126/128 · M05 99/103 · M140 100/124) = DoD §21.6 violada, mismo criterio que bajó M24/M85. Quedan por muestrear M86, M79, M168, M78. GLOBAL tras la reparación del director: 68 filas mal formadas (antes 152), 2 líneas con mojibake, Totales 126/129 con línea duplicada al final. **SEGUNDA MITAD 2026-10-17 (Log 1949, msg 299):** muestreados los 4 verdes restantes — M78 41 citas válidas/12 rotas · M79 0/103 sin cita · M86 3 válidas/12 rotas · M168 0/104 sin cita = **493 ítems, 44 con cita verificable (8,9%), 24 citas a subsecciones inexistentes, 2 `[x]` sin sustancia en M86 (L94, L124)**. Límite del método declarado: 425 ítems (86,2%) no llevan cita → **M79 y M168 NO son muestreables por cita** (no es que pasen: no hay nada que medir).
+105. [x] Preparación de specs para módulos ✅→🟡 por [?]. — 8 [M] — **HECHO 2026-10-17 (Log 1950, msg 301)**: el universo medido es de **2 módulos y 2 ítems**, no más: `M125 L135` (falta `legal/terms_policy.md`) y `M86 L124` (música que “suena similar”). **M86 lo abrió otro agente hoy** (degradó L124 a `[?]`), así que el universo genuino era 1. Specs preparadas con contrato medido: M125 → el artefacto **no lo consume código** (el runtime lee `res://data/legal/terminos.json`; `terms_config.gd:13`), molde hermano `game/isla-ancestral/legal/terms_of_service.md` (159 líneas, 11 secciones), y desajuste a declarar: `terms_date="2026-01-01"` vs documento fechado `2026-10-03`. M86 → la cita `03-Diseno.md §3.8` es **fantasma** (el doc tiene `## 1.` a `## 8.`, la 3 es una tabla); la decisión ya estaba en `plan-inicial/05-Checklist.md:124` (“se descarta si hay duda”) pero nunca se transcribió al diseño. Criterios de cierre entregados (5 puntos M125, 4 puntos M86). **HALLAZGO A (nuevo y grave): al `CHECKLIST-GLOBAL.md` le faltan 6 filas** — 167 checklists vs 162 filas; ausentes 48, 104, 115, 127, 139 y 148; existían íntegras en `4d1ee65` (2026-09-15, 167 filas) y la serie de commits medida es 152 (`3f8382a`) → 159 (`b9e6062`) → 162 (`1bc3dca`) → 162 (`304fdc5`): el director ya recuperó 10, quedan 6. El verificador **no puede verlo** (trampa 91: compara contra el diccionario que arma con las filas que encuentra). **HALLAZGO C**: 3 alertas nuevas en M86 (25→28) por un edit ajeno que aplicó mi hallazgo de L124 pero rompió `validar()`→`alidar()` y borró el newline final. **NO aplicado**: las 6 filas (sin autorización; 6 de 11 columnas son manuales), los artefactos (dueño agnes-2.5-flash), el gate de cobertura (requiere `isla-ancestral-qa-gate`) y ningún commit.
+
+> **Registro de la vuelta 2026-10-17 19:35 (RAMA 2, ítem 104):** Log reservado **1944** (`Logs/1944-M07-Barrido-Verdes-Muestreo-21.8.2.b_2026-10-17_19-35-00.md`, ASCII puro + CRLF, 10.663 B); mensaje **297** al director (UTF-8 sin BOM, LF, 6.167 B). Pool de Logs: cabeza medida justo antes = 1944 → 1945. Pool de canal: 296 → consumido 297 (cabeza 298). 0 commits, 0 push, 0 flips, 0 auto-sellos §21.8.
 
 ---
 **Total: 105 ítems.** Mantenimiento continuo por GLM-5.3-Flash (cron 5 min).
@@ -1817,3 +1819,79 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - **Limites:** 0 commits / 0 push / 0 flips / 0 auto-sellos §21.8 / 0 ediciones a `CHECKLIST-GLOBAL.md`, `quality.yml`, `AGENTS.md`, `project.godot`, `05-Checklist`.
 - **Proxima:** NN entrantes > **294**; sin mensaje nuevo → item 104 de la cola (barrido de modulos verdes sin verificacion reciente, muestreo §21.8.2.b).
 
+## 2026-10-17 20:38 (GMT-3) — msg 298 (items 4 y 5): GLOBAL reparado + muestreo de los 4 verdes
+
+- **Tracker = 298** (movido por una corrida paralela sin reporte; el mensaje 298 NO estaba ejecutado: mi memoria terminaba en el 297). RAMA 1 sobre el 298.
+- [x] Log reservado: **1949** (head medido justo antes = 1948). Canal consumido **299** (pool head 299 = ultimo 298 + 1).
+- **Item 4 — GLOBAL:** 66 filas mal formadas → **0** (antes 95 alertas, ahora **25**). Reglas: `\|\|`→`&#124;&#124;` (14 casos de `|| true` de CI), `\|`→`·`, celdas vacías finales descartadas, cola fusionada en Notas, columna ausente insertada como `—` según posición. Guardas por fila: 11 celdas + termina en `|` + ID/Módulo intactos + **todos los tokens de 4+ chars presentes** + largo ±5%. 66/66, 0 errores.
+- **No-regresión:** las 8 líneas `❌` son byte-idénticas antes/después; 162 filas con ID antes y después; GLOBAL sigue LF puro, sin BOM, 0 NUL (192.983→193.130 B).
+- **Item 4b — Totales 126/129:** no eran duplicados del vigente sino **registros históricos** de QA previas (el bloque del encabezado ya coincidía con la realidad) → relabelados `**Totales histórico (QA Hy3 <fecha>):**`. 16 → **14** `Totales` incoherentes.
+- **Hallazgo medido:** de los 16, **4 tienen DOS bloques** (104/126/129/156; el que miente es el histórico) y **12 tienen un bloque vigente desactualizado** (103/109/125/137/150/19/31/32/33/41/46/93; en 4 el real es MAYOR que el declarado).
+- **Item 5 — muestreo de M86/M79/M168/M78:** 493 ítems `[x]`, **44 con cita verificable (8,9%)**, **425 sin cita (86,2%)**, **24 citas a subsecciones inexistentes** (M86 §3.1-§3.9 ×10, M78 §1.6-§1.11 ×12). Verificación dirigida de 5: 3 con sustancia bajo otra sección (defecto de cita) y **2 sin sustancia en ningún doc (M86 L94 y L124) = `[x]` con justificación falsa** (trampa 95). M79 (0/103) y M168 (0/104) **no son muestreables por cita**.
+- **Commit `304fdc5`** (pathspec de 3 rutas, autorizado por el 298: "y commit avisándome"): `CHECKLIST-GLOBAL.md` + `05-Checklist.md` de M126 y M129, 68/68. **0 push.**
+- **Límites:** 0 flips, 0 auto-sellos §21.8, 0 ediciones a `quality.yml`/`AGENTS.md`/`project.godot`/`05-Checklist` de M21/M159/M55 (sucios por otros agentes, fuera del commit). Pool de logs NO commiteado. Los 11 conflictos de numeración de `reservar_log.py --estado` son ajenos.
+- **Pedidos al director:** (1) autorizar el re-anclaje de las 24 citas; (2) decidir sobre M86 L94/L124; (3) dueño de los 12 `Totales` desactualizados + duplicados históricos de 104/156; (4) criterio para M79/M168 (sello por documento vs nota por ítem).
+- **Próxima:** NN entrantes > **298**; sin mensaje nuevo → próxima tarea `[ ]` de la cola activa.
+
+## 2026-10-17 20:50 (GMT-3) — RAMA 2 / item 105: specs de los verdes con deuda + 6 filas faltantes en el GLOBAL
+
+- **Contexto:** tracker 298, sin NN > 298 en el canal → RAMA 2. Item 105 tomado de la cola activa.
+- **Entregables:** `Logs/1950-M125-M86-Global-Specs-Verdes-Con-Deuda-Y-6-Filas-Faltantes_2026-10-17_20-44-42.md`
+  (ASCII puro + CRLF, 18.634 B, 365 CRLF, 0 no-ASCII) y `Mensajes entre modelos/DeepSeek-V4.1-Flash/300-...-specs-verdes-6-filas-global-y-edit-ajeno-m86.md`
+  (UTF-8 sin BOM + LF, 10.787 B, 0 U+FFFD).
+- **Medición (importando `verificar_checklist.py` como módulo, fuente única de conteo):** 179 carpetas
+  numéricas, **167** `plan-actual/05-Checklist.md`, **162** filas con ID en el GLOBAL, **33** filas verdes.
+- **HALLAZGO A — GLOBAL incompleto:** faltan las filas **48, 104, 115, 127, 139, 148** (6). No es mío ni es de
+  esta semana: mi backup pre-fix y `HEAD` ya tenían 162; `4d1ee65` tenía **167**. Serie: 152 → 159 → 162
+  → 162. Punto ciego del verificador: compara contra las filas que encuentra, así que una fila ausente da 0 alertas.
+- **HALLAZGO B — universo ✅→🟡 por `[?]`:** solo **2** (M125 105/105 real `[x]104 [?]1`; M86 129/129 real
+  `[x]128 [?]1`). Los 5 `🟢 Disponible` con `[x]` no entran (su estado no es ✅).
+- **Specs (contrato medido, no inventado):** M125 → `terms_policy.md` no existe en ninguna ruta y **no lo consume
+  código** (runtime: `res://data/legal/terminos.json`); molde `terms_of_service.md` (159 líneas, 11 secciones);
+  declarar el desajuste `terms_date=2026-01-01` vs documento `2026-10-03`. M86 → `suena similar` tiene **0**
+  ocurrencias en `03-Diseno.md`; la sección 3 es la matriz (cubre licencia y producción humana, NO similitud
+  sustancial); la regla ya estaba en `plan-inicial/05-Checklist.md:124` (“se descarta si hay duda”).
+- **HALLAZGO C — edit ajeno en M86:** el verificador pasó de **25 a 28** alertas; las 3 nuevas son de M86.
+  Alguien aplicó mi degradación de L124 y de paso partió la línea `scripts/legal/GenAIValidator.gd —
+  validar()/` perdiendo la `v` (`alidar()`), y dejó el archivo **sin newline final**. No lo toqué (no es mi archivo).
+- **INFRAESTRUCTURA:** el pool de mi canal (`NUMEROS_DISPONIBLES.txt`) quedó **vacío** (1 byte) con `mtime`
+  **20:42:01**, después de mi lectura inicial (que vio `300`) y antes de consumir. No lo vacié yo: mi script
+  abortó en el assert antes de escribir. Está en `.gitignore:269` → sin historial. **Causa real: el 300 lo
+  consumió el mensaje 300 del director** (20:42:01) → mi mensaje se emitió como 300 y se **renumeró a 301**
+  (colisión de NN, resuelta). Pool repuesto a **302** (`último+1`). Lección: medir el head JUSTO ANTES de
+  escribir, no al empezar la vuelta; pool vacío = `ya lo consumieron`, no `no hay números`.
+- **Límites:** sin cambios de repo ni commits; no apliqué las 6 filas (sin autorización para crear filas: 6 de las
+  11 columnas son manuales); no creé los artefactos (dueño agnes-2.5-flash); no toqué el verificador (gate aceptado).
+- **Pedidos al director:** (1) las 6 filas del GLOBAL (o autorizarme); (2) gate de cobertura en el verificador;
+  (3) dueño de las 2 specs + decisión de `terms_date`; (4) reparar el edit de M86; (5) los 12 `Totales` obsoletos
+  y los duplicados de 104/156 siguen de su lado.
+- **Próximo:** esperar respuesta al msg 301; si no hay, siguiente `[ ]` de la cola activa (ya no queda ninguno
+  después del 105 salvo los bloques W de warnings de GDScript).
+
+## 2026-10-17 21:57 (GMT-3) - msg 302 (puntos 1 y 2): filas 48/139/148 restauradas + gate de cobertura (Log 1955, canal 303)
+
+- **RAMA 1.** Tracker 300 -> **302** (el director respondio al 301 con autorizaciones escritas).
+- **Punto 1 EJECUTADO:** el GLOBAL tenia **165** filas y hay **167** `plan-actual/05-Checklist.md` -> faltaban
+  **3** (48, 139, 148); 104/115/127 ya las habia restaurado el director. Filas insertadas con **Estado/Progreso
+  re-medidos** del checklist ACTUAL (no se consagro el 2026-09-15): 48 = 22/3/98 = 123; 139 = 133/2/7 = 142;
+  148 = 115/2/0 = 117 (coincide con su `**Totales:**`). Ultima actividad medida con `git log -1` del 05.
+  Bytes: 193.852 -> 195.380 | BOM 0 | CRLF 0 | LF 222->225 | NUL 0 | FFFD 0 | **168 filas, 0 ids sin fila**.
+  Verificador: 33 -> 35 alertas con **las mismas 10 inconsistencias** (las 2 nuevas son los avisos de colgado
+  21.4.7 de M48/M139, que la tabla no dejaba ver al no tener fila).
+- **Punto 2 EJECUTADO:** gate de cobertura en `scripts/verificar_checklist.py` (`analizar_cobertura` + `_norm_id`,
+  cableado ANTES del bucle). **FALTAN filas -> exit 3 (DetectorCiegoError)**; **SOBRAN -> alerta (exit 1)**.
+  Probado EN ROJO 4 casos (control / sin la fila 148 / fila 999 / 0 bytes) asertando el CONTENIDO, y probado
+  contra la version **PRE-FIX de HEAD** (importada con `git show`): PRE-FIX no levanta, POST-FIX levanta. Un
+  test que pasa en ambas no protege nada.
+- **Cableado:** `scripts/test_scripts.py` -> `test_ver_cobertura_falta_fila_es_ceguera` (5 casos). Esa suite ya
+  corre en CI (job `checklist-orchestrator`) -> **16 PASS / 0 FAIL** (antes 15), sin tocar `quality.yml`.
+- **Hallazgo nuevo (no buscado):** `sobran=1` = **157-Medios-De-Transporte** sin `plan-actual/05-Checklist.md`
+  (solo plan-inicial). Ya declarado en la nota de su propia fila; se deja como alerta visible.
+- **Punto 5 NO ejecutado (declarado):** re-anclaje de las 24 citas + relabel 104/156 + los 12 `Totales`
+  vigentes. Autorizado, va en la proxima vuelta para no mezclarlo con este lote.
+- **Numeracion:** Log **1955** (pool global 1955 -> 1956); canal **303**; **pool de canal estaba VACIO otra vez**
+  (1 byte) porque el director consumio 300 y 302 -> regenerado como **303..500** (head = ultimo+1 = 303), no se
+  commitea. `reservar_log.py --estado` = **11 problemas AJENOS** (1726/1876/1878/1888...), no tocados.
+- **Limites:** 0 commits / 0 push / 0 flips / 0 auto-sellos 21.8; `CHECKLIST-GLOBAL.md` editado SOLO con la
+  autorizacion escrita del 302; 0 toques a `quality.yml`/`AGENTS.md`/`project.godot`/05-Checklist de modulos.
+- **Proximo:** NN entrantes > **302**; si no hay, item **149** (spec M125) de la cola activa, o el punto 5.

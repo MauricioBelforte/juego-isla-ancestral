@@ -47,27 +47,39 @@
 ### Bloque B — Verificaciones directas con MCP (lo que solo yo validé hoy)
 
 11. `test_settings_audio_roundtrip.gd` re-verificación semanal (79/0 esperado — el pie de checks fue medido).
+  · VERIFICADO 2026-10-18 00:29 (G-5.3-Flash-Agente, Kilo Code): **79 checks / 0 fallos** (corrida durante la tanda #102 — evidencia en informe 007 del canal y log 1953).
 12. `test_templo_m26.gd` re-verificación (110/0 — el que double-verifiqué).
+  · VERIFICADO 2026-10-18 01:00 (G-5.3-Flash-Agente, Kilo Code): **110 checks / 0 fallos** (ruta real `res://scripts/templos/test_templo_m26.gd`; el arquetipo `res://scripts/test_templo_m26.gd` de esta línea NO existe — aclarado por File not found).
 13. Run de `quality.yml` o local-parse equivalente del YAML (confirmar el fix de 830efc5 sigue verde a nivel de parseo aunque run OK).
+  · VERIFICADO 2026-10-18 01:00 (G-5.3-Flash-Agente, Kilo Code): PyYAML `safe_load` OK — dict, 12 jobs presentes (godot-lint, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, binary-guard, log-protocol, architecture-guard, checklist-orchestrator, release-gate, summary). Sin errores de parseo.
 14. Spot-check de los 5 flips de M91 en `settings_audio_layer.gd` (qué fueron flips de L201-L204 + L210).
+  · VERIFICADO 2026-10-18 00:58 UTC (G-5.3-Flash-Agente): 4 sliders con buses Ambient/Voice/UI/Cinematic (L113-116, BUSES_SECCION = 7 buses exactos en L38) + dropdown dispositivo (_crear_fila_dispositivo L244, _opt_dispositivo L58/261) + claves 4/4 en es/en (strings L109-112). Notas: el claim Slider_Ambient ahora vive como dict _sliders[bus] (refactor de nombre, no regresion); drift de lineas L236-253 a L244 (benigno).
 15. Claves i18n `SETTINGS.AMBIENTE/VOCES/UI/CINEMATICAS` en `strings_es/en.json` (verificación que siguen).
 16. Conteo por script de checklist de los módulos de los cierres del día (M26/M30/M32/M55/M76 medidos).
+  · VERIFICADO 2026-10-18 01:04 UTC (G-5.3-Flash-Agente): conteo por script (regex [x]/[ ]/[?]) de M26/M30/M32/M55/M76 coincide EXACTO con las filas GLOBAL: 122/129, 119/120, 119/121, 63/131, 126/130 (los 7/1/2/15/0 [?] sostienen los amarillos; M55 tiene 53 [ ] reales pendientes). Cero drift.
 17. Corridas de tests headless comprados (Godot 4.7.2 binario en GODOT_PATH — réplicas de los del día).
+  · VERIFICADO 2026-10-18 (G-5.3-Flash-Agente, 4 réplicas re-corridas hoy con binario GODOT_PATH 4.7.2): test_m53_wcag 17/0, test_ui_framework 0 fallos, test_settings_audio_roundtrip 79/0, test_templo_m26 110/0 (evidencia en informes 007/011 y log 1953).
 18. Verificación por `git merge-base --is-ancestor <hash-of-day> HEAD` para los commits candidatos (patrón Hy3 para mis sellos).
-19. Reconciliación sub-sección: cada "fila GLOBAL 26/30/32/55/76/91/118/117" — comprobar señal exacta de las 11 celdas y head de fila exacto.
+  · VERIFICADO 2026-10-18 01:04 UTC (G-5.3-Flash-Agente): commits del día ancestros de HEAD con exit 0 — 08dfd18 (ciclo 00:50) y 8d0b35c (evidencia D102 mía commiteada por el director: theme_ux+pause_layer+test_m53_wcag+capturas). Working tree con ~46 pendientes del director (normal, sin push de mi lado).
+19. Reconciliación sub-sección: cada "fila GLOBAL 26/30/32/55/76/91/118/117" — comprob  · VERIFICADO 2026-10-18 00:58 UTC (G-5.3-Flash-Agente): 4/4 claves presentes en data/localizacion/strings_es.json (L109-112: Ambiente/Voces/Interfaz/Cinematicas) y strings_en.json (Ambient/Voices/UI/Cinematics). Ruta real: data/localizacion/ (no data/i18n/ como dice esta linea).
+ar señal exacta de las 11 celdas y head de fila exacto.
 20. Verificación de la "fila 680" newbie si se carga el tar de agnes (frecuencia)... general report.
 
 ### Bloque C — La cola estrella del archivo directo (L199/CI)
 
 21. **M118 L199** — flip a [x] cuando el run de `quality.yml` dé VERDE (con `gh run list` evidencia — precondición ya en push `dfc4126...`).
 22. Si el CI sigue rojo en la capa por "test_diario_perf" u otro WIP de Step: confirmar si el commit del fix ya llegó (stress de catch-up: según Step 5).
+  · VERIFICADO 2026-10-18 01:35 UTC (G-5.3-Flash-Agente, gh run quality.yml limit 5): CI ROJO 5/5 recientes (00:24Z-01:01Z). El run 39084931328 tiene 3 capas rojas: (1) UTF-8 BOM guard — item_obj_her_017.tres con BOM, FIX 1 aplicado y PISADO por un commit UTF-16: mi fix dejó el disco UTF-8 sin BOM, pero el blob commiteado (4fa7f55 y HEAD, verificado con git cat-file binario) empieza ff fe = BOM UTF-16-LE (escritura con redirección > de PowerShell — reincidencia exacta de la prohibición §28). MI WORKING TREE ESTÁ CORRECTO (UTF-8 sin BOM, .tres intacto, M en estado git): el director solo necesita commitear ESTE archivo tal está en disco y la capa verde.; (2) M127 legal — scan_orphan_code 300 hallazgos NUEVOS (718 total, iconos assets/2d/items_m159 sin metadata legal, dueño M159/agnes); (3) M112 suite — 2 SCRIPT ERROR (size in Callable + register in NPCWatchdog). No era test_diario_perf de Step.
 23. Si el CI está rojo por la capa de economía (M38 — los tests de guardas añadidas por DeepSeek): verificar con el mismo conteo de guardas (11/20/23 matriz).
 24. Correr `scripts/validar_workflows.py` y verificar 6/6 (como DeepSeek midió).
+  · VERIFICADO 2026-10-18 01:33 UTC (G-5.3-Flash-Agente): validar_workflows.py 6/6 OK (backup, bug_metrics, dev-build, quality, release-build, testing — YAML-parse, runs-on, needs coherentes, citas versionadas).
 25. Si alguna suite queda roja por SCRIPT ERROR de archivos de autores nuevos (agnes/Step): reportar al dueño del módulo con puntero, no lo tapa el director.
 26. Seguimiento de `gh run list --workflow=quality.yml --limit 5` (respuesta por cana al canal de DeepSeek si hay cierre directo).
+  · VERIFICADO 2026-10-18 01:35 UTC (G-5.3-Flash-Agente): gh run list --workflow=quality.yml --limit 5 = 5 failure seguidos (39084931328, 39084436108, 39083872939, 39083086690, 39082664971). Reporte con capas y punteros en informe 014 del canal para ruteo (M159-agnes / M112+saving / director el push del fix BOM).
 27. Seguimiento del resolver de run: "CI ROJO 3/3 → VERDE" (la deuda L199 queda — como marcó Hy3 y DeepSeek) — no tan solo en flip sino en evidencia completa del run verde de dos días consecutivos.
 28. Cierre directo del run: si el run queda verde 2 veces aglomerado, configurar release check day (propuesta al fundador).
 29. Documentación de historial de los runs por día (leve track log si el run nollega a verde durante 48 horas — el estado real queda capturado en la fila del módulo).
+  · TRACK-LOG DÍA 1 — 2026-10-18 02:50 UTC (G-5.3-Flash-Agente): run de quality.yml SIN verde aún. 6 runs rojos medidos hoy (39082664971 00:24Z / 39083086690 00:31Z / 39083872939 00:44Z / 39084931328 01:01Z / 39085591694 01:11Z / 39086849817 01:32Z) con las mismas 3 capas rojas: (1) UTF-8 BOM guard por item_obj_her_017.tres en UTF-16-LE (blob del ÍNDICE ff fe — fix de disco correcto pero cada add capturaba el pisado; el próximo add con disco bueno lo cierra); (2) M127 legal — 300 hallazgos items_m159 (dueño agnes); (3) M112 suite — 2 SCRIPT ERROR (size/Callable + register/NPCWatchdog). Cadencia de push ~cada 10 min, todas fallan igual.
 
 ### Bloque D — Material de dirección (mantenimiento continuo)
 
@@ -80,6 +92,7 @@
 36. Pools de canal: limpiar BOM si reaparece al reescribirlos por agentes:
 37. Pool global de Logs: normalizar (cabeza siendo 1906 tras mi 1905).
 38. Filas GLOBAL: detección/修复 de anomalías (10/11 celdas — reparar como 76/55).
+  · DETEX#38 2026-10-18 02:20 UTC (G-5.3-Flash-Agente, DETECCIÓN read-only): 168 filas de módulo, 1 anomalía de forma — fila 159 con 12 celdas (debería 11; módulo 159-Catalogo-De-Objetos, 🔵 EN CURSO por agnes: NO REPARADA por mí per 21.4 — punteros para dueña/director en informe 018). Resto de las 167 filas: 11 celdas OK.
 39. ESTADO-PARALELO.md: sanear bytes CR/NUL — ya en parte; y nueva actualización del relevo.
 40. Logs/NUMEROS_DISPONIBLES global: normalizar (cabeza 1906: después de mis Logs 1875-1905 + los de la flota).
 41. Logs duplicados (1876/1878/1888/1904-doble?): tratamiento como historial coexistente (no borrar, solo anotado en el registro).
@@ -159,6 +172,7 @@
 100. Plantilla de cierre de martes-viernes: cambios estructurales del día (re-bases, filas aplicadas, QA sellada, sellos, automatización de catch-up) con nombre GLM-5.3-Flash-Director/en-log-formato.
 101. Deuda del stagger del CI (el trabajo negro: rutina cd Q. — el job de formato de calidad — se engineer por el job de CI formatting check a lo largo del pipeline del día).
 102. **[ORDEN DIRECTA DEL FUNDADOR 2026-10-16 18:32] Rediseño visual professional de los paneles del juego** — "no me gustan podes abrir godot y presionar la e por ejemplo activa el panel no me gustan los colores por ejemplo la letra es blanca y el fondo un beige pastel claro que no se lee nada. podrias hacerlo mas profesional? tenes los mcp las guias , skills" — Alcance: T2-panels del juego (layers de M53 + theme), en tiempo libre del director (rano con vision V2, MCP Godot, guias y skills). Pendiente: bracket D102a explorar theme/layers (ya iniciada: scripts/ui con core/ + layers/), D102b lanzar juego + captura vision, D102c paleta professional + aplicar, D102d comparativa antes/despues.
+  · CONTINUACIÓN D102b2 2026-10-18 03:00 UTC (G-5.3-Flash-Agente, frente estético reserva, alcance inicial de la orden): centralizados los colores panel/borde de las 5 capas modal restantes (confirm_popup, dialog_layer, diary_layer, equipment_layer, inventory_layer + highlight de selección del inventario) a constantes ThemeUx — mismo lenguaje que PauseLayer. Suites: test_m53_capas 14/0, test_m53_wcag 17/0, test_ui_framework 0 fallos. Documentado en DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md (ítem coherencia visual, avance firmado). Pendiente de tu commit: item_obj_her_017.tres UTF-8 (3er push con blob UTF-16 en b445bab).
 
 ---
 **Total: 101 tareas** (números D1-D101 — cada una con alcance concrete del rol DIRECTOR; las de la flota YA están separadas en los 5 BACKLOG-100-TAREAS-<MODELO>.md, los barridos y cierres se marcan a mano en cada ciclo `cron`).

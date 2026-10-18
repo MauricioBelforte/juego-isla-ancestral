@@ -279,3 +279,39 @@ Ejecución: `Godot --headless --path game/isla-ancestral --script res://scripts/
    `get()` devuelve `null` y el `bool(null)` aborta `_on_ui_layers_changed` en cada
    cambio de pila. **Preexistente, fuera de alcance** (`scripts/interacciones/` está
    en la lista de no-toque) → registrado como bug delegado en `DOCUMENTACION/11-BUGS.md`.
+
+## Notas del Agente
+
+**Modelo:** G-5.3-Flash-Agente
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-18 00:40:00
+**Estado:** Completado (rediseño visual de paneles D102 — orden directa del fundador 2026-10-16 18:32, vía backlog del director #102)
+
+### Lo que hice
+
+- **D102a (reconocimiento):** UI ubicada en `game/isla-ancestral/scripts/ui/` (core/ + layers/ + theme/ ...); `ThemeService` autoload aplica `ThemeUx.build()` al root y re-aplica en escala/idioma/resolución — palanca central confirmada.
+- **D102b (visión):** juego lanzado vía MCP; capturas del panel de pausa ANTES (`cap_53_2026-10-18_00-22-30_antes_pausa.png`) y DESPUÉS (`cap_53_2026-10-18_00-28-30_despues_pausa.png`) en `tools/mcp/godot-mcp/capturas/53-UI-UX/`. Puppeteo por SendKeys descartado (solo cerraba capas); se construyó escena determinista `scripts/ui/preview_paneles_m53.{gd,tscn}` que monta el UIRoot real y abre PauseLayer vía `open()` (push_layer no: la capa ya vive en la pila).
+- **D102c (código):**
+  1. `theme/theme_ux.gd` — `ensure_contrast()` reescrito dark-aware (antes forzaba texto casi negro herencia del tema claro = ilegible sobre panel noche; ahora casi blanco 12.4:1, escala a blanco puro si min_ratio no se alcanza — parámetro SE USA y el warning real de Godot desapareció), foco ring radius 8/alpha 1.0 (abrazaba mal: 12 vs botón 8), `COLOR_DISABLED` 0.40→0.34/0.36/0.45 (AA 5.5:1), comentarios de constantes limpiados, helpers privados WCAG.
+  2. `layers/pause_layer.gd` — StyleBoxOverride del panel apunta a `ThemeUx.COLOR_BG_ARENA`/`COLOR_HIGHLIGHT_GOLD` (antes hardcoded 0.72/0.55/0.30).
+  3. `test_m53_wcag.gd` — realineado al contrato dark (3 assertions del tema claro viejo: texto negro/arena, "ocre no pasa" invertido, gold como fondo); firma actualizada.
+- **D102d (verificación):** `test_m53_wcag` **17/0**, `test_ui_framework` **0 fallos**, `test_settings_audio_roundtrip` **79/0** (Godot 4.7.2 headless). Boot con tema corregido: 0 SCRIPT ERROR, `[DOM-UI] mundo PAUSADO (MODAL_FULL visible)` correcto. Todo archivo escrito UTF-8 sin BOM con verificación anti-mojibake.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- La **coherencia visual total** (ítem [ ] del checklist, línea 159): el mismo patrón de StyleBox hardcodeado que tenía PauseLayer existe probablemente en el resto de capas modal (Inventory/Shop/Crafting/Dialog/Equipment/Diary...) — lo dejo documentado como avance, no lo marco [x].
+- La **alineación con la marca M128** (Azul Bosque/Dorado Anciano/Blanco Perla): decisión de dueño del ítem, no es parte de la orden del fundador.
+- **No liberar ✅ ni auto-sellar**: QA externo pendiente (Hy3/agnes, §21.8/§21.23).
+- No toqué sliders de audio ni lógica de capas (límite del director) ni módulos 🔵 de otros.
+
+### Intentos fallidos / decisiones
+
+- `push_layer(pausa)` en la preview no abrió nada: las 12 capas se registran EN la pila al boot → el helper retorna temprano. Solución: `pausa.open()` (API de UILayer base). Documentado en COMO-CREAR + logs del canal.
+- El test WCAG falló 17-checks/1-mi primera corrida por un error de transcripción mío (check de gold contra cream en vez de contra fondo noche) — corregido y re-corrida limpia 17/0. Evidencia completa en el canal (informe 007).
+- SendKeys por PowerShell (`AppActivate` + `{ESC}`/`e`/`i`) no abre capas de forma fiable — descartado por determinista preview scene.
+
+### Recomendaciones para el próximo agente
+
+- Si se pide retocar colores de paneles a futuro: **el punto único de verdad es `theme_ux.gd`** (constantes) — pero revisar Overrides hardcodeados por capa (grep `add_theme_stylebox_override` en `scripts/ui/layers/`).
+- La escena `preview_paneles_m53.tscn` es la herramienta de captura visual del panel sin tocar el juego: `run_project scene=res://scripts/ui/preview_paneles_m53.tscn` + captura de ventana. Borrable sin impacto (no está referenciada por el juego).
+- El warning `min_ratio never used` ya no existe en el boot (verificado). Si reaparece, es que alguien revirtió `ensure_contrast()`.

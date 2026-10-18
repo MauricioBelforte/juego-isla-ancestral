@@ -3,6 +3,17 @@
 
 # 05-Checklist.md — Módulo 53: UI/UX
 
+## Reserva actual — G-5.3-Flash-Agente
+
+- **Estado:** 🟡 Liberado (rediseño visual D102 CERRADO y verificado 2026-10-18 00:40; subitems históricos del módulo quedan como estaban — coherencia visual [ ] con avance documentado). QA externo §21.8: Hy3/agnes (NO auto-sello).
+- **Agente:** G-5.3-Flash-Agente (GLM-5.3-Flash, sesión paralela agente del director — plataforma Kilo Code)
+- **Fecha de reserva:** 2026-10-17 23:52
+- **Encargo:** Orden directa del fundador 2026-10-16 18:32 — **Rediseño visual profesional de los paneles del juego** (brackets D102a-D102d), tarea #102 del BACKLOG-MASTER heredado del director (G-5.3-Flash-Agente, apertura de canal 01). El módulo estaba 🟡 liberado (último agente atria-dawn-s2, actividad 2026-10-12) — reclamable per §21.5.
+- **Alcance:** tema global de paneles (`game/isla-ancestral/scripts/ui/theme/theme_ux.gd` + `theme_service.gd`): paleta profesional legible, contraste texto/fondo, estilos de botones/campos/foco. Los accesos via visor (D102b captura V2/MCP, D102d comparativa antes/después). NO toca lógica de capas UIManager/UILayer ni sliders de audio (front de otro agente).
+- **Límites:** sin commits/push (directiva del director); QA §21.8 lo harán Hy3/agnes (independencia §21.23 — mismo modelo que el director, NUNCA auto-sellar).
+- **Fecha de liberación previsto:** misma jornada (iteración única D102a→D102d con capturas en `capturas/53-UI-UX/`).
+
+
 ## A. Requisitos y alcance (12)
 
 - [x] Definir el problema: HUD mínimo, menús navegables, diálogos, inventario, minimapa, tooltips, feedback visual/audio/táctil, consistencia cozy, sin barreras [S]
@@ -146,6 +157,7 @@
 - [x] Aplicar ThemeUx como tema global en runtime [M]
 - [x] Verificar legibilidad AA en todas las combinaciones de color [M] — RESUELTO 2026-10-12 (Ling 3.1 Flash, takeover M53): test headless `test_m53_wcag.gd` **17 checks / 0 fallos / EXIT 0** calcula el ratio WCAG (luminancia relativa) de todas las combinaciones definidas en código: paleta base (TEXT_DARK/BG_ARENA **10.4:1** AAA, /HOVER **8.6:1** AAA, /PRESSED **6.6:1** AA, /DISABLED **4.65:1** AA, /HIGHLIGHT_GOLD **6.7:1** AAA), alto contraste (0.10,0.05,0.02)/arena **15.4:1**, créditos normal + alto contraste, y paneles oscuros de servicio: tooltip título **8.5:1** / cuerpo **12.5:1**, toast icono **8.5:1** / texto **12.5:1** (sobre 0.15,0.12,0.10). El diálogo usa panel claro (dialog_layer.gd:73 = 0.96,0.92,0.86 → TEXT_DARK **10.9:1**). Documentado: ACCENT_OCRE como texto sobre arena NO es AA (2.46:1) — por eso no se usa como color de texto en modo normal. **Bug corregido**: el toast heredaba TEXT_DARK del tema global sobre su panel oscuro = **1.26:1 (ilegible)**; fix en notification_service.gd con overrides claros.
 - [ ] Verificar coherencia visual entre todas las capas (un solo lenguaje) [M] — HALLAZGO DOCUMENTADO 2026-10-12 (Ling 3.1 Flash; origen: lote M128 msg 49): la paleta UI de `theme_ux.gd:13-20` (pastel: arena 0.95/0.90/0.82, ocre 0.72/0.55/0.30, dorado 0.85/0.72/0.35) **NO es la paleta de marca M128 §3** (Azul Bosque / Dorado Anciano / Blanco Perla) — desalineación UI↔marca. Las capas de servicio (tooltip `tooltip_service.gd:196-203`, toast `notification_service.gd:118-124`) usan su propia paleta cálida oscura (0.15,0.12,0.10) coherente entre sí pero no con el tema base. **Dueño M45/M46/M53**: alinear paleta UI con marca; verificación visual requiere M154 (vía de visión).
+- **AVANZE D102 2026-10-18 (G-5.3-Flash-Agente; orden directa del fundador 2026-10-16 18:32 vía backlog director):** paleta cozy DARK consolidada en `theme_ux.gd` (noche 0.14/0.16/0.24 + cream 0.94/0.92/0.85 + ámbar 0.87/0.66/0.33 — verificado AA con el test WCAG realineado). `PauseLayer` dejó su StyleBoxFlat hardcodeado y ahora apunta a constantes ThemeUx (fuente única de verdad). **Este ítem sigue [ ]**: queda el MISMO patrón por revisar en el resto de capas modal (InventoryLayer/ShopUI/CraftingUI/DialogLayer/EquipmentLayer/DiaryLayer/etc. — presupuesto: ThemeUx constants o, si procede, alinear con marca M128 cuando se decida el dueño). Las capas de servicio tooltip/toast ya tienen su paleta propia legible (verificado por el test). 
   · espera: depende de M45/M46/M53/M128/M154 (coordinar con su dueno)
 - [ ] Revisar textos con locales largos (alemán) sin cortes (M87) [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): la infraestructura anti-cortes SÍ existe — autowrap en tooltips (`tooltip_service.gd:190` `AUTOWRAP_WORD_SMART`), toasts (`notification_service.gd:113`) y diálogos (D.L71 "caja con autowrap"). Pero el **locale alemán no existe**: `scripts/ui/i18n/` solo tiene `ui_es.po`/`ui_en.po` (04-Codigo.md L43). **Bloqueado por M87** (dueño M87: agregar locale de; luego test de longitud).
   · espera: depende de M87 (coordinar con su dueno)
@@ -155,6 +167,7 @@
 - [x] Integrar ui_scale 0.8-1.5 aplicado por ThemeUx en runtime [M]
 - [x] Integrar text_scale independiente del escala de UI [M]
 - [x] Integrar high_contrast con contraste AA y bordes reforzados [M]
+  · **D102c 2026-10-18 (G-5.3-Flash-Agente):** `ensure_contrast()` era del tema claro VIEJO — sobre la paleta dark ponía texto casi negro `Color(0.10,0.05,0.02)` = ilegible (regresión latente si M58 activaba alto contraste sobre panel noche). Reescrito dark-aware: texto casi blanco (12.4:1 sobre noche), escala a blanco puro si `min_ratio` no se alcanza (parámetro ahora SE USA — warning de Godot eliminado), bordes/foco ámbar pleno. Test `test_m53_wcag.gd` realineado al contrato dark: **17 checks / 0 fallos**. Suites `test_ui_framework` (0 fallos) y `test_settings_audio_roundtrip` (79/0) verdes. Comparativa visual: `capturas/53-UI-UX/cap_53_2026-10-18_00-22-30_antes_pausa.png` vs `cap_53_2026-10-18_00-28-30_despues_pausa.png`.
 - [x] Integrar modo daltonismo con formas y texturas además del color [M]
 - [x] Integrar reduce_motion desactivando tweens y transiciones [M]
 - [ ] Integrar tamaño, opacidad y fondo de subtítulos [M] — Log 1118 (agnes-3-flash): **tamaño + fondo + activado integrados** vía M58 RF8 en `SubtituloOverlay` (tamano→px 14/18/24, fondo→alpha, activado→visibilidad; test 39/0). **Opacidad: M58 RF8 no expone campo `opacidad`** (`get_subtitulos()` solo devuelve {activado,tamano,fondo}) → no se integró lo que no existe (anti-falso-verde); queda **decisión M58** (agregar campo) o se fija el alpha por defecto (0.45, ya aplicado). **Verificado 2026-10-12 (Ling 3.1 Flash):** `accesibilidad_manager.gd:263-266` — `get_subtitulos()` devuelve exactamente `{activado, tamano, fondo}`, sin campo `opacidad` (confirmación en código del bloqueo).
