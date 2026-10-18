@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-EST-003"
-nombre = "EstanterÃ­a empotrada"
+nombre = "Estantería empotrada"
 descripcion = ""
 categoria = 0
 subcategoria = "ESTANTERIAS"

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-EXT-005"
-nombre = "DecoraciÃ³n de patio"
+nombre = "Decoración de patio"
 descripcion = ""
 categoria = 7
 subcategoria = "DECORACION_JARDIN"
@@ -19,7 +19,7 @@ precio_venta = 30
 rareza = 0
 apilable = false
 stack_max = 1
-material = "CerÃ¡mica"
+material = "Cerámica"
 color = "#FF69B4"
 variante = ""
 requiere_herramienta = ""

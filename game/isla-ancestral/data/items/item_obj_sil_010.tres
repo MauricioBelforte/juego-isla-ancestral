@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-SIL-010"
-nombre = "Trono pequeÃ±o"
+nombre = "Trono pequeño"
 descripcion = ""
 categoria = 0
 subcategoria = "SILLAS"

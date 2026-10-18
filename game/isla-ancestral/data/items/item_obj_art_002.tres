@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-ART-002"
-nombre = "Pergamino mÃ­stico"
+nombre = "Pergamino místico"
 descripcion = ""
 categoria = 13
 subcategoria = "PERGAMINOS"

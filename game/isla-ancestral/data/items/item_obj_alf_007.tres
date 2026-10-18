@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-ALF-007"
-nombre = "Alfombra mÃ¡gica"
+nombre = "Alfombra mágica"
 descripcion = ""
 categoria = 4
 subcategoria = "ALFOMBRAS"

@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-MES-008"
-nombre = "EstanterÃ­a"
-descripcion = "EstanterÃ­a de madera para libros"
+nombre = "Estantería"
+descripcion = "Estantería de madera para libros"
 categoria = 0
 subcategoria = "ALMACENAMIENTO"
 tamano = Vector2i(2, 1)

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-TAL-008"
-nombre = "Taller de carpinterÃ­a"
+nombre = "Taller de carpintería"
 descripcion = ""
 categoria = 6
 subcategoria = "TRABAJO"

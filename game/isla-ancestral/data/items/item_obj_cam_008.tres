@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-CAM-008"
-nombre = "SillÃ³n reclinable"
+nombre = "Sillón reclinable"
 descripcion = ""
 categoria = 0
 subcategoria = "CAMAS"

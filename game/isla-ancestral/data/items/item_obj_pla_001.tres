@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-PLA-001"
-nombre = "Maceta pequeÃ±a"
+nombre = "Maceta pequeña"
 descripcion = ""
 categoria = 3
 subcategoria = "PLANTAS_INTERIOR"

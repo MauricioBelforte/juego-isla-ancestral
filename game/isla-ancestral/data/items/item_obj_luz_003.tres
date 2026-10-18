@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-LUZ-003"
-nombre = "LÃ¡mpara de mesa"
+nombre = "Lámpara de mesa"
 descripcion = "Luz de sobremesa"
 categoria = 2
 subcategoria = "LAMPARAS_MESA"
@@ -19,7 +19,7 @@ precio_venta = 25
 rareza = 0
 apilable = false
 stack_max = 1
-material = "CerÃ¡mica"
+material = "Cerámica"
 color = "#FFFDD0"
 variante = ""
 requiere_herramienta = ""

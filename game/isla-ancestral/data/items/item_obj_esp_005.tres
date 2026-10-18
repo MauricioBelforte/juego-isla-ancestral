@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-ESP-005"
-nombre = "Espejo mÃ¡gico"
+nombre = "Espejo mágico"
 descripcion = ""
 categoria = 1
 subcategoria = "ESPEJOS"

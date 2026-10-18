@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-ART-004"
-nombre = "MÃ¡scara ceremonial"
+nombre = "Máscara ceremonial"
 descripcion = ""
 categoria = 13
 subcategoria = "RELIQUIAS"

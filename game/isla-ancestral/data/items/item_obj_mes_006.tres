@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "OBJ-MES-006"
 nombre = "Silla acolchada"
-descripcion = "Silla cÃ³moda acolchada"
+descripcion = "Silla cómoda acolchada"
 categoria = 0
 subcategoria = "SILLAS"
 tamano = Vector2i(1, 1)

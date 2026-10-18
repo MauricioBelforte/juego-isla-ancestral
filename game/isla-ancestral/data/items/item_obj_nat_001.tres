@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-NAT-001"
-nombre = "Ãrbol pequeÃ±o"
+nombre = "Árbol pequeño"
 descripcion = ""
 categoria = 8
 subcategoria = "ARBOLES"

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-EVE-004"
-nombre = "MuÃ±eco de nieve"
+nombre = "Muñeco de nieve"
 descripcion = ""
 categoria = 14
 subcategoria = "FESTIVAL_INVIERNO"

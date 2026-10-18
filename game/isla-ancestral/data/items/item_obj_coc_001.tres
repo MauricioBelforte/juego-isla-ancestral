@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-COC-001"
-nombre = "Horno de leÃ±a"
+nombre = "Horno de leña"
 descripcion = ""
 categoria = 5
 subcategoria = "HORNOS"

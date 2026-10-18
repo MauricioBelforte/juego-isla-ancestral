@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "incense"
 nombre = "Incienso"
-descripcion = "Resina aromÃ¡tica de las plantas de montaÃ±a. Arde despacio y calma el alma."
+descripcion = "Resina aromática de las plantas de montaña. Arde despacio y calma el alma."
 categoria = 11
 fuente = "cultivo"
 apilable = true

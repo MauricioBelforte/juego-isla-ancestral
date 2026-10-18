@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-CUA-008"
-nombre = "EstanterÃ­a pequeÃ±a"
-descripcion = "EstanterÃ­a compacta"
+nombre = "Estantería pequeña"
+descripcion = "Estantería compacta"
 categoria = 1
 subcategoria = "ESTANTES"
 tamano = Vector2i(1, 1)

@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "OBJ-MES-002"
 nombre = "Mesa de centro"
-descripcion = "Mesa baja para el salÃ³n"
+descripcion = "Mesa baja para el salón"
 categoria = 0
 subcategoria = "MESAS"
 tamano = Vector2i(2, 1)

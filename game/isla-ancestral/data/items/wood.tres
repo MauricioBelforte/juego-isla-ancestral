@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "wood"
 nombre = "Madera"
-descripcion = "Tronco de Ã¡rbol de la isla. Material de construcciÃ³n y combustible."
+descripcion = "Tronco de árbol de la isla. Material de construcción y combustible."
 categoria = 9
 apilable = true
 stack_max = 99

@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "ice"
 nombre = "Hielo"
-descripcion = "Hielo de las montaÃ±as. Se derrite con calor."
+descripcion = "Hielo de las montañas. Se derrite con calor."
 categoria = 9
 apilable = true
 stack_max = 99

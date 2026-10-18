@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-PLA-004"
-nombre = "OrquÃ­dea"
-descripcion = "Flor exÃ³tica en maceta"
+nombre = "Orquídea"
+descripcion = "Flor exótica en maceta"
 categoria = 3
 subcategoria = "FLORES"
 tamano = Vector2i(1, 1)

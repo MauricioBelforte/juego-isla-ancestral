@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-EXT-007"
-nombre = "PortÃ³n"
+nombre = "Portón"
 descripcion = ""
 categoria = 7
 subcategoria = "EXTERIORES"

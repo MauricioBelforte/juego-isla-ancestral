@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "stone"
 nombre = "Piedra"
-descripcion = "Roca sÃ³lida. Material de construcciÃ³n resistente."
+descripcion = "Roca sólida. Material de construcción resistente."
 categoria = 9
 apilable = true
 stack_max = 99

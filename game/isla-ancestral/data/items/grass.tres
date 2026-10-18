@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1")
 id = "grass"
-nombre = "CÃ©sped"
-descripcion = "Bloque de cÃ©sped con raÃ­ces. Se convierte en tierra al extraerlo."
+nombre = "Césped"
+descripcion = "Bloque de césped con raíces. Se convierte en tierra al extraerlo."
 categoria = 9
 apilable = true
 stack_max = 99

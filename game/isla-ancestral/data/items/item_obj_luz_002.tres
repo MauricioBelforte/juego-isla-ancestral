@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-LUZ-002"
-nombre = "LÃ¡mpara de pie"
+nombre = "Lámpara de pie"
 descripcion = "Luz ambiental de pie"
 categoria = 2
 subcategoria = "LAMPARAS_PIE"

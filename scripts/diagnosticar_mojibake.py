@@ -38,6 +38,7 @@ Codigos de salida: 0 limpio | 1 queda mojibake reparable | 2 uso.
 IRREVERSIBLE y EXCLUIDO se informan pero NO bloquean (no son reparables por
 herramienta: el primero necesita reescritura a mano, el segundo es intencional).
 """
+import datetime
 import os
 import re
 import sys
@@ -93,7 +94,12 @@ EXCLUIDOS_ARCH = ('./AGENTS.md', './scripts/verify_final.py',
                   # Helper one-shot de marcado de M37 (agnes, 2026-10-08): su unica
                   # secuencia mojibake vive en la regex de DETECCION (L36) -> A
                   # PROPOSITO, familia fix_encoding.py. Medido el 2026-10-17.
-                  './scripts/t_m37_mark.py')
+                  './scripts/t_m37_mark.py',
+                  # Contiene U+FFFD ya perdido (Log 507; irrecuperable por el
+                  # metodo mismo). Declarado irreparable por AGENTS.md 28.1.
+                  # Decision del director 034 (2026-10-18, opcion (a)): sale del
+                  # hard-check porque el tool no puede restaurarlo.
+                  './scripts/validar_i18n_integridad.py')
 EXCLUIDOS_DIR = ('./Obsoletos', './scripts/backups', './out',
                  './.workbuddy-ai', './.git', './node_modules', './.godot',
                  './addons', './bin', './Logs',
@@ -130,9 +136,33 @@ def raiz_repo():
 def es_excluido(p):
     """¿La ruta esta en alguna lista de exclusion? (p con '/' y prefijo './')."""
     return (p in EXCLUIDOS_ARCH
+            or msg_historico_canales(p)
             or p.startswith(tuple(d + '/' for d in EXCLUIDOS_DIR))
             or p.startswith(tuple(d[2:] for d in EXCLUIDOS_DIR))
             or any('/' + x + '/' in '/' + p for x in EXCLUIDOS_SUELTOS))
+
+
+# Mensajes historicos de canales (decision del director 034, 2026-10-18,
+# opcion (a) del riel UTF-8): los mensajes ANTERIORES al 2026-10-16 00:00Z
+# citan el mojibake como ejemplo documental (barridos/auditorias previos de
+# higiene). Repararlos destruye la trazabilidad del historial (AGENTS.md 28.1:
+# los documentales no se tocan). Los mensajes DEL CORTE EN ADELANTE siguen en
+# el hard-check para que el gate defienda el contenido nuevo.
+CORTE_MENSAJES = datetime.date(2026, 10, 16)
+RE_FECHA_MSG = re.compile(r'(\d{4}-\d{2}-\d{2})_\d{2}-\d{2}')
+
+
+def msg_historico_canales(p):
+    """¿Es un mensaje de canal con fecha anterior al corte? (p en './')."""
+    if not p.startswith('./Mensajes entre modelos/'):
+        return False
+    m = RE_FECHA_MSG.search(p)
+    if not m:
+        return False
+    try:
+        return datetime.date.fromisoformat(m.group(1)) < CORTE_MENSAJES
+    except ValueError:
+        return False
 
 
 def clasificar(p, raw):

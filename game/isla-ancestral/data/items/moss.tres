@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "moss"
 nombre = "Musgo"
-descripcion = "Musgo verde que crece en superficies hÃºmedas."
+descripcion = "Musgo verde que crece en superficies húmedas."
 categoria = 9
 apilable = true
 stack_max = 99

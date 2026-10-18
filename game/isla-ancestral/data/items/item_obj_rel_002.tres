@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-REL-002"
-nombre = "Reloj de pÃ©ndulo"
+nombre = "Reloj de péndulo"
 descripcion = ""
 categoria = 1
 subcategoria = "RELOJES"

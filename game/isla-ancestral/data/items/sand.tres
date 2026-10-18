@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "sand"
 nombre = "Arena"
-descripcion = "Granos de arena de la playa. Se usa en vidrierÃ­a."
+descripcion = "Granos de arena de la playa. Se usa en vidriería."
 categoria = 9
 apilable = true
 stack_max = 99

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-ITE-056"
-nombre = "Gema pÃºrpura"
+nombre = "Gema púrpura"
 descripcion = ""
 categoria = 11
 subcategoria = "GEMA_Y_MONEDAS"

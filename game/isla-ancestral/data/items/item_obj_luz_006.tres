@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "OBJ-LUZ-006"
 nombre = "Luz de hadas"
-descripcion = "Luces cÃ¡lidas decorativas"
+descripcion = "Luces cálidas decorativas"
 categoria = 2
 subcategoria = "LUCES_DECORATIVAS"
 tamano = Vector2i(1, 1)
@@ -19,7 +19,7 @@ precio_venta = 20
 rareza = 0
 apilable = false
 stack_max = 1
-material = "PlÃ¡stico"
+material = "Plástico"
 color = "#FFD700"
 variante = ""
 requiere_herramienta = ""

@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "clay"
 nombre = "Arcilla"
-descripcion = "Barro arcilloso. Moldeable cuando estÃ¡ hÃºmedo."
+descripcion = "Barro arcilloso. Moldeable cuando está húmedo."
 categoria = 9
 apilable = true
 stack_max = 99

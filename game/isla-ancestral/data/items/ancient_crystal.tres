@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "ancient_crystal"
 nombre = "Cristal Antiguo"
-descripcion = "Cristal de la civilizaciÃ³n ancestral. Guarda memorias olvidadas."
+descripcion = "Cristal de la civilización ancestral. Guarda memorias olvidadas."
 categoria = 14
 apilable = false
 stack_max = 1

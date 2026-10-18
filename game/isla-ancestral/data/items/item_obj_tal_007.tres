@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 id = "OBJ-TAL-007"
-nombre = "Horno de fundiciÃ³n"
+nombre = "Horno de fundición"
 descripcion = ""
 categoria = 6
 subcategoria = "TRABAJO"

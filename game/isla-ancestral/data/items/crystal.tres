@@ -7,7 +7,7 @@
 script = ExtResource("1")
 id = "crystal"
 nombre = "Cristal de Resonancia"
-descripcion = "Cristal que vibra con energÃ­a ancestral. Material raro y valioso."
+descripcion = "Cristal que vibra con energía ancestral. Material raro y valioso."
 categoria = 14
 apilable = true
 stack_max = 50

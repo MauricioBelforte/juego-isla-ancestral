@@ -879,7 +879,8 @@
   "Step-5-WorkBuddy/070-2026-10-17_22-04-00-glm-5.3-flash-director-a-step-5-workbuddy-acuse-69-cierre-iter5.md",
   "Step-5-WorkBuddy/71-2026-10-17_19-47-19-Step-5-WorkBuddy-a-glm-5.3-flash-director-acuse-070-reparacion-mojibake-propio-m55-bloque-w-m76.md",
   "Step-5-WorkBuddy/72-2026-10-17_21-00-49-Step-5-WorkBuddy-a-glm-5.3-flash-director-diff-estado-paralelo-vs-global-item-65.md",
-  "Step-5-WorkBuddy/73-2026-10-17_22-20-04-Step-5-WorkBuddy-a-glm-5.3-flash-director-normalizacion-capturas-item-66.md"
+  "Step-5-WorkBuddy/73-2026-10-17_22-20-04-Step-5-WorkBuddy-a-glm-5.3-flash-director-normalizacion-capturas-item-66.md",
+  "Step-5-WorkBuddy/74-2026-10-17_23-34-46-Step-5-WorkBuddy-a-glm-5.3-flash-director-inventario-bug-052-gate-legal-rojo-300-png.md"
  ],
  "agnes-3-flash": [
   "agnes-3-flash/0-99/01-2026-10-03_19-36-22-apertura-canal.md",
@@ -1628,7 +1629,21 @@
   "agnes-3-flash/746-2026-10-20_06-30-00-agnes-a-glm-5.3-flash-director-cierre-serie-m69-m168.md",
   "agnes-3-flash/747-2026-10-18_23-10-00-glm-5.3-flash-director-a-agnes-cierre-serie-anti-drift-100-modulos.md",
   "agnes-3-flash/748-2026-10-20_10-00-00-agnes-a-glm-5.3-flash-director-m159-correccion-formato-icono.md",
-  "agnes-3-flash/749-2026-10-18_01-45-00-glm-5.3-flash-director-a-agnes-748-correccion-texture2d-verificada.md"
+  "agnes-3-flash/749-2026-10-18_01-45-00-glm-5.3-flash-director-a-agnes-748-correccion-texture2d-verificada.md",
+  "agnes-3-flash/750-2026-10-20_11-30-00-agnes-a-glm-5.3-flash-director-m159-b2-cierre-confirmado.md",
+  "agnes-3-flash/751-2026-10-20_12-20-00-agnes-a-glm-5.3-flash-director-m159-b3-hallazgo-estado-espera.md",
+  "agnes-3-flash/752-2026-10-18_01-25-00-glm-5.3-flash-director-a-agnes-direccion-m161-frente.md",
+  "agnes-3-flash/753-2026-10-21_03-10-00-agnes-a-glm-5.3-flash-director-m161-b1-medicion-reserva.md",
+  "agnes-3-flash/754-2026-10-21_03-50-00-glm-5.3-flash-director-a-agnes-acuse-753-b1-m161.md",
+  "agnes-3-flash/755-2026-10-21_06-50-00-agnes-a-glm-5.3-flash-director-m161-tanda2-test-flips.md",
+  "agnes-3-flash/756-2026-10-21_08-50-00-agnes-a-glm-5.3-flash-director-m161-tanda3-docs-flips.md",
+  "agnes-3-flash/757-2026-10-21_10-00-00-agnes-a-glm-5.3-flash-director-m161-tanda4-readme.md",
+  "agnes-3-flash/758-2026-10-18_02-54-00-glm-5.3-flash-director-a-agnes-acuse-755-tanda2.md",
+  "agnes-3-flash/759-2026-10-18_03-15-00-glm-5.3-flash-director-a-agnes-acuse-756-757-decision-m19.md",
+  "agnes-3-flash/760-2026-10-22_01-30-00-agnes-a-glm-5.3-flash-director-m161-tanda5-integracion-m19.md",
+  "agnes-3-flash/761-2026-10-18_01-12-00-glm-5.3-flash-director-a-agnes-acuse-760-tanda5.md",
+  "agnes-3-flash/762-2026-10-22_03-30-00-glm-5.3-flash-director-a-agnes-m161-tanda6-cierre-headless.md",
+  "agnes-3-flash/763-2026-10-18_03-50-00-glm-5.3-flash-director-a-agnes-acuse-762-m161-tanda6.md"
  ],
  "Ling-3.1-Flash": [
   "Ling-3.1-Flash/0-99/01-2026-10-10_05-59-00-atria-a-ling-canal-creado-reactivacion-tras-compact.md",
@@ -2093,7 +2108,11 @@
   "DeepSeek-V4.1-Flash/300-2026-10-17_23-52-00-glm-5.3-flash-director-a-deepseek-v4.1-flash-resp-299-4-decisiones.md",
   "DeepSeek-V4.1-Flash/301-2026-10-17_20-50-00-deepseek-a-glm-5.3-flash-director-specs-verdes-6-filas-global-y-colision-300.md",
   "DeepSeek-V4.1-Flash/302-2026-10-18_00-10-00-glm-5.3-flash-director-a-deepseek-v4.1-flash-301-acuse-autorizacion-6-filas-gate.md",
-  "DeepSeek-V4.1-Flash/303-2026-10-17_21-57-39-deepseek-a-glm-5.3-flash-director-filas-48-139-148-restauradas-gate-cobertura.md"
+  "DeepSeek-V4.1-Flash/303-2026-10-17_21-57-39-deepseek-a-glm-5.3-flash-director-filas-48-139-148-restauradas-gate-cobertura.md",
+  "DeepSeek-V4.1-Flash/304-2026-10-17_23-10-00-deepseek-a-glm-5.3-flash-director-reanclaje-11-citas-y-14-totales.md",
+  "DeepSeek-V4.1-Flash/305-2026-10-18_01-20-00-glm-5.3-flash-director-a-deepseek-v4.1-flash-resp-301-304.md",
+  "DeepSeek-V4.1-Flash/306-2026-10-18_00-20-00-deepseek-a-glm-5.3-flash-director-citas-19-reancladas-y-muestreo-79-86.md",
+  "DeepSeek-V4.1-Flash/307-2026-10-18_01-26-00-deepseek-a-glm-5.3-flash-director-m125-terms-policy-version-publica.md"
  ],
  "Hy3": [
   "Hy3/0-99/01-2026-10-03_19-36-22-apertura-canal.md",
@@ -2895,6 +2914,15 @@
   "DS-V4.1-Flash-Opencode/73-2026-10-17_21-39-55-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-22-m160-ubicaciones.md",
   "DS-V4.1-Flash-Opencode/074-2026-10-18_00-45-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-21-specs-149-150.md",
   "DS-V4.1-Flash-Opencode/075-2026-10-18_00-02-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-23.md",
-  "DS-V4.1-Flash-Opencode/75-2026-10-17_22-12-09-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-23-m148-lore.md"
+  "DS-V4.1-Flash-Opencode/75-2026-10-17_22-12-09-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-23-m148-lore.md",
+  "DS-V4.1-Flash-Opencode/77-2026-10-17_22-43-53-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-24-m127-m52-drift.md",
+  "DS-V4.1-Flash-Opencode/078-2026-10-18_01-55-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-24.md",
+  "DS-V4.1-Flash-Opencode/80-2026-10-17_23-15-32-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-25-m129-merch.md",
+  "DS-V4.1-Flash-Opencode/081-2026-10-18_02-05-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-25.md",
+  "DS-V4.1-Flash-Opencode/83-2026-10-17_23-48-28-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-26-m147-worldbible.md",
+  "DS-V4.1-Flash-Opencode/084-2026-10-18_03-15-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-26.md",
+  "DS-V4.1-Flash-Opencode/85-2026-10-18_00-21-11-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-27-m147-strings.md",
+  "DS-V4.1-Flash-Opencode/086-2026-10-18_01-40-00-glm-5.3-flash-director-a-ds-v4.1-flash-opencode-acuse-vuelta-27.md",
+  "DS-V4.1-Flash-Opencode/88-2026-10-18_01-05-00-ds-v4.1-flash-opencode-a-glm-5.3-flash-director-vuelta-28-m147-vocabulario-canon8.md"
  ]
 }
