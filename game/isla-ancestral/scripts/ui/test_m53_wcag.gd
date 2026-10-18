@@ -1,11 +1,15 @@
 # Modelo: Ling 3.1 Flash
 # Plataforma: Kilo Code
 # Fecha: 2026-10-12
+# Actualizado (D102c, dark contract): 2026-10-18 — G-5.3-Flash-Agente / Kilo Code
 #
 # M53 I.8: Verificación de legibilidad WCAG AA de la paleta ThemeUx.
 # Calcula el ratio de contraste (WCAG 2.x, luminancia relativa) de
 # las combinaciones texto/fondo de la paleta y verifica los colores
 # que CreditsLayer aplica a sus labels en modo normal y alto contraste.
+# Desde la flip dark D102 (orden fundador 2026-10-16): assertions alineadas a
+# texto claro (cream/casi blanco) sobre paneles noche; el ocre SÍ pasa como
+# texto sobre noche (antes no pasaba sobre arena clara).
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/ui/test_m53_wcag.gd
 #
 # E-30: en --script headless los class_name globales no resuelven
@@ -71,15 +75,16 @@ func _test_paleta_wcag() -> void:
 	_check(_ratio(texto, _THEME_UX.COLOR_HOVER) >= 4.5, "TEXT_DARK/HOVER AA (%.2f:1)" % _ratio(texto, _THEME_UX.COLOR_HOVER))
 	_check(_ratio(texto, _THEME_UX.COLOR_PRESSED) >= 4.5, "TEXT_DARK/PRESSED AA (%.2f:1)" % _ratio(texto, _THEME_UX.COLOR_PRESSED))
 	_check(_ratio(texto, _THEME_UX.COLOR_DISABLED) >= 4.5, "TEXT_DARK/DISABLED AA (%.2f:1)" % _ratio(texto, _THEME_UX.COLOR_DISABLED))
-	_check(_ratio(texto, _THEME_UX.COLOR_HIGHLIGHT_GOLD) >= 4.5, "TEXT_DARK/HIGHLIGHT_GOLD AA (%.2f:1)" % _ratio(texto, _THEME_UX.COLOR_HIGHLIGHT_GOLD))
-	# Alto contraste (ensure_contrast): texto (0.10, 0.05, 0.02) sobre arena
-	var hc := Color(0.10, 0.05, 0.02)
-	_check(_ratio(hc, fondo) >= 4.5, "alto-contraste/BG_ARENA AA (%.2f:1)" % _ratio(hc, fondo))
-	# Documentado: el ocre como COLOR DE TEXTO sobre arena NO pasa AA
-	# (2.46:1). Por eso credits_layer.gd usa TEXT_DARK en modo normal
-	# y reserva el acento dorado para alto contraste (9.9:1 sobre negro).
+	_check(_ratio(_THEME_UX.COLOR_HIGHLIGHT_GOLD, fondo) >= 4.5, "GOLD como texto resaltado sobre fondo noche AA (%.2f:1)" % _ratio(_THEME_UX.COLOR_HIGHLIGHT_GOLD, fondo))
+	# Alto contraste (ensure_contrast, tema dark desde D102): el texto pasa a
+	# casi blanco sobre el panel noche; NUNCA oscuro (era ilegible sobre dark).
+	var hc := Color(0.97, 0.96, 0.93)
+	_check(_ratio(hc, fondo) >= 4.5, "alto-contraste texto claro/panel noche AA (%.2f:1)" % _ratio(hc, fondo))
+	# Documentado (D102c): con la paleta dark, el ocre SÍ pasa AA como texto
+	# sobre el panel noche (antes, sobre arena clara, era 2.46:1 y no pasaba).
+	# Reserva del dorado: deidad y foco (8.5:1 sobre noche).
 	var ocre: Color = _THEME_UX.COLOR_ACCENT_OCRE
-	_check(_ratio(ocre, fondo) < 4.5, "documentado: ACCENT_OCRE como texto sobre arena NO es AA (%.2f:1) — no se usa como color de texto en modo normal" % _ratio(ocre, fondo))
+	_check(_ratio(ocre, fondo) >= 4.5, "ACCENT_OCRE como texto sobre panel noche AA tras D102 (%.2f:1)" % _ratio(ocre, fondo))
 	# El ocre como BORDE no tiene requisito WCAG (no es texto)
 
 func _test_credits_colores() -> void:

@@ -1,25 +1,26 @@
 class_name ThemeUx
 ## Constructor de tema cozy para Isla Ancestral
 ##
-## Construye un Theme de Godot en runtime con la paleta pastel:
-## fondo arena, acento ocre, texto marrón oscuro, highlight dorado suave.
+## Construye un Theme de Godot en runtime con la paleta cozy dark (D102):
+## paneles noche, acento ámbar, texto cream, highlight dorado.
 ## Fuentes: Nunito (cuerpo) y Fredoka One (títulos) de M88.
 
 ## ── Constantes de diseño ─────────────────────────────────
 ## Resolución base para cálculos de escala
 const BASE_SIZE := Vector2i(1920, 1080)
 
-## Paleta pastel
-const COLOR_BG_ARENA := Color(0.14, 0.16, 0.24, 0.94)  # D102: panel Medio dark (contraste con boton)  # D102: fondo noche opaco (antes arena clara ilegible con texto blanco)
-const COLOR_ACCENT_OCRE := Color(0.87, 0.66, 0.33)     # D102: acento ambar mas vivo
-const COLOR_TEXT_DARK := Color(0.94, 0.92, 0.85)       # D102: texto cream claro (dark theme)
-const COLOR_HIGHLIGHT_GOLD := Color(0.92, 0.76, 0.40)  # D102: dorado mas vivo
-const COLOR_HOVER := Color(0.20, 0.22, 0.32)           # D102: hover dark
-const COLOR_PRESSED := Color(0.13, 0.14, 0.22)         # D102: presionado dark
-const COLOR_DISABLED := Color(0.40, 0.42, 0.50)        # D102: deshabilitado dark
-const COLOR_FOCUS_RING := Color(0.92, 0.76, 0.40, 0.8) # D102: anillo dorado vivo
-const COLOR_BTN_ELEVADO := Color(0.19, 0.21, 0.32)  # D102: boton mas oscuro que el panel (inversion del contraste)     # D102: boton elevado (mas claro que el panel para contraste)
-const COLOR_BTN_HOVER := Color(0.27, 0.30, 0.44)  # D102: hover proporcional       # D102: hover elevado
+## Paleta cozy dark (D102): noche con acentos ámbar y texto cream.
+## Contraste WCAG AA verificado por test_m53_wcag.gd (tema dark desde 2026-10-18).
+const COLOR_BG_ARENA := Color(0.14, 0.16, 0.24, 0.94)   # panel noche (D102: antes arena clara ilegible con texto blanco)
+const COLOR_ACCENT_OCRE := Color(0.87, 0.66, 0.33)      # acento ámbar
+const COLOR_TEXT_DARK := Color(0.94, 0.92, 0.85)        # texto cream
+const COLOR_HIGHLIGHT_GOLD := Color(0.92, 0.76, 0.40)   # dorado (foco/highlight)
+const COLOR_HOVER := Color(0.20, 0.22, 0.32)            # hover dark
+const COLOR_PRESSED := Color(0.13, 0.14, 0.22)          # presionado dark
+const COLOR_DISABLED := Color(0.34, 0.36, 0.45)         # deshabilitado (D102c: oscurecido para AA 5.5:1 con cream)
+const COLOR_FOCUS_RING := Color(0.92, 0.76, 0.40, 1.0)  # anillo de foco ámbar pleno (D102c: alpha 1.0)
+const COLOR_BTN_ELEVADO := Color(0.19, 0.21, 0.32)      # botón elevado sobre el panel
+const COLOR_BTN_HOVER := Color(0.27, 0.30, 0.44)        # hover del botón elevado
 
 ## M21 (D L93): colores de texto por tipo de hablante, coherentes con la paleta
 ## dark del HUD. Fuente unica de verdad para el color del dialogo.
@@ -127,31 +128,59 @@ func reload_after_font_change() -> void:
 		_setup_font_bindings()
 
 
-## Ajusta contraste para accesibilidad (M58)
+## Ajusta contraste para accesibilidad (M58) — modo alto contraste sobre tema
+## dark (D102c). El texto pasa a casi blanco sobre los paneles noche y los
+## bordes/foco se vuelven ámbar pleno. Usa min_ratio (WCAG) para verificar que
+## el texto elegido alcanza el ratio pedido contra el panel y, si no, escala
+## hasta blanco puro. NUNCA vuelve a poner texto oscuro (ilegible sobre dark).
 func ensure_contrast(min_ratio: float = 4.5) -> void:
-	# M53 J: Aplicar alto contraste — colores con mayor diferencia
 	if base == null:
 		return
-	# Texto más oscuro para contraste AA (ratio ≥ 4.5:1)
-	base.set_color("font_color", "Label", Color(0.10, 0.05, 0.02))
-	base.set_color("font_color", "Button", Color(0.10, 0.05, 0.02))
-	base.set_color("font_color", "LineEdit", Color(0.10, 0.05, 0.02))
-	# Bordes más gruesos y oscuros
+	var panel := COLOR_BG_ARENA
+	var texto: Color = Color(0.97, 0.96, 0.93)  # casi blanco (>= 12:1 sobre panel noche)
+	if _contrast_ratio(texto, panel) < min_ratio:
+		texto = Color.WHITE
+	base.set_color("font_color", "Label", texto)
+	base.set_color("font_color", "Button", texto)
+	base.set_color("font_color", "LineEdit", texto)
+	# Bordes más visibles (ámbar dorado pleno)
 	if base.has_stylebox("normal", "Button"):
 		var sb: StyleBoxFlat = base.get_stylebox("normal", "Button") as StyleBoxFlat
 		if sb:
 			sb.set_border_width_all(2)
-			sb.border_color = Color(0.20, 0.12, 0.05)
-	# Focus ring más visible
+			sb.border_color = COLOR_HIGHLIGHT_GOLD
+	# Focus ring más visible (ámbar ancho, radio alineado al botón)
 	var focus_style := StyleBoxFlat.new()
 	focus_style.bg_color = Color.TRANSPARENT
-	focus_style.border_color = Color(1.0, 0.85, 0.2)
-	focus_style.set_border_width_all(4)
-	focus_style.set_corner_radius_all(12)
+	focus_style.border_color = COLOR_HIGHLIGHT_GOLD
+	focus_style.set_border_width_all(3)
+	focus_style.set_corner_radius_all(8)
 	focus_style.set_content_margin_all(4)
 	base.set_stylebox("focus", "Button", focus_style)
 	base.set_stylebox("focus", "LineEdit", focus_style)
 	base.set_stylebox("focus", "OptionButton", focus_style)
+
+
+## Ratio de contraste WCAG 2.x (misma fórmula que test_m53_wcag.gd)
+static func _contrast_ratio(a: Color, b: Color) -> float:
+	var l1 := _relative_luminance(a)
+	var l2 := _relative_luminance(b)
+	if l1 < l2:
+		var t := l1
+		l1 = l2
+		l2 = t
+	return (l1 + 0.05) / (l2 + 0.05)
+
+
+## Luminancia relativa WCAG (canales sRGB linealizados)
+static func _relative_luminance(c: Color) -> float:
+	return 0.2126 * _srgb_to_lin(c.r) + 0.7152 * _srgb_to_lin(c.g) + 0.0722 * _srgb_to_lin(c.b)
+
+
+static func _srgb_to_lin(v: float) -> float:
+	if v <= 0.03928:
+		return v / 12.92
+	return pow((v + 0.055) / 1.055, 2.4)
 
 
 ## Indica si reduce_motion está activo (M58)
@@ -259,18 +288,18 @@ func _setup_panel_styles() -> void:
 
 
 func _setup_button_styles() -> void:
-	# Botón cozy normal
+	# Botón cozy normal (elevado sobre el panel, borde ámbar fino)
 	var btn_normal := StyleBoxFlat.new()
-	btn_normal.bg_color = COLOR_BTN_ELEVADO  # D102: contraste vs panel
+	btn_normal.bg_color = COLOR_BTN_ELEVADO
 	btn_normal.border_color = COLOR_ACCENT_OCRE
 	btn_normal.set_border_width_all(1)
 	btn_normal.set_corner_radius_all(8)
 	btn_normal.set_content_margin_all(8)
 	base.set_stylebox("normal", "Button", btn_normal)
 
-	# Hover
+	# Hover (se aclara y el borde engrosa a 2)
 	var btn_hover := StyleBoxFlat.new()
-	btn_hover.bg_color = COLOR_BTN_HOVER  # D102: hover elevado
+	btn_hover.bg_color = COLOR_BTN_HOVER
 	btn_hover.border_color = COLOR_ACCENT_OCRE
 	btn_hover.set_border_width_all(2)
 	btn_hover.set_corner_radius_all(8)
@@ -389,12 +418,13 @@ func _setup_tab_container_styles() -> void:
 
 
 func _setup_focus_styles() -> void:
-	# Anillo de foco dorado (visible con teclado/gamepad)
+	# Anillo de foco dorado (visible con teclado/gamepad). D102c: radio 8 para
+	# abrazar la esquina del botón (antes 12, flotaba separado) y alpha pleno.
 	var focus_style := StyleBoxFlat.new()
 	focus_style.bg_color = Color.TRANSPARENT
 	focus_style.border_color = COLOR_FOCUS_RING
 	focus_style.set_border_width_all(3)
-	focus_style.set_corner_radius_all(12)
+	focus_style.set_corner_radius_all(8)
 	focus_style.set_content_margin_all(4)
 
 	base.set_stylebox("focus", "Button", focus_style)
