@@ -93,6 +93,7 @@
     "SETTINGS.FOGATA": "Fogueira",
     "SETTINGS.FUERA_TEMPORADA": "Fora de temporada",
     "SETTINGS.GUARDAR": "Salvar",
+    "SETTINGS.GUARDAR_BLOQUEADO": "Não é possível salvar agora (há um diálogo, carregamento ou painel aberto).",
     "SETTINGS.GUARDAR_CONFIRMA": "Salvar a partida no slot 1?",
     "SETTINGS.GUARDAR_EXITO": "Partida salva com sucesso.",
     "SETTINGS.GUARDAR_FALLO": "Não foi possível salvar a partida.",
