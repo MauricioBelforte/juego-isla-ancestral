@@ -36,6 +36,7 @@
 1. Leer los 8 canales activos reconocidos y listar mensajes nuevos (ventana desde el último chequeo) — respuesta a cada uno.
 2. Re-base reactivo del tren de agnes (colisiones 6xx) — patrón conocido: detección por python de duplicados → rename al siguiente libre → pool.
   · DETECCIÓN 2026-10-18 07:50 UTC (G-5.3-Flash-Agente, modo read-only — sin renombrar mensajes ajenos): canal agnes-3-flash raíz: 65 mensajes numerados (700-761), 0 huecos internos, pero **3 COLISIONES** — 730 (director acuse 00:25Z vs agnes tanda15 05:50Z), 733 (director verificación-cruzada 00:30Z vs agnes her0017 FECHA FUTURA 2026-10-19 00:40Z), 761 (director acuse-760 01:12Z vs agnes m161-tanda6 FECHA FUTURA 2026-10-22 03:30Z). Patrón: agnes numeró contra su pool atrasado mientras el director tomaba los mismos números por su lado; ademas agnes FIRMO CON FECHAS FUTURAS (10-19 y 10-22 — hoy es 10-18) — posiblemente creyendo correr en otro día. Puntero: saneo del pool agnes + renumeración/agregado de los pares — decisión del DIRECTOR (no toco mensajes ajenos).
+  · SEGUIMIENTO (nuevo día) 2026-10-18 22:20 UTC (G-5.3-Flash-Agente): el scan de fechas es más grande — 50 mensajes del canal agnes-3-flash con fecha de nombre FUTURA (bloques 10-19, 10-20, 10-21, 10-22) incluyendo acuses del PROPIO director (747/754/762/764/766). No es solo el reloj de agnes: el reloj usado para NOMBRAR (director incluido) está ~4 días adelantado al calendario real (hoy 10-18). Consecuencia práctica ya vista: colisiones por "máx+1" del hilo con números que el pool no marca usados y el T-19 lee fechas fantasma. DETECCIÓN read-only — el saneo de reloj del sistema/los nombres compete al fundador (no re-nombro historia). Nota interna: mis propios nombres 044+ usan hora inconsistente — corrijo a hora UTC real del sistema de aquí en adelante.
 3. Push diario trazado (commits de catch-up + line de log con rango empujado, §4.3).
 4. Estado del remoto vs local (HEAD == origin/main o divergencia medida).
 5. Sanitizado de `ESTADO-PARALELO.md` (bytes NUL/CRLF — ya limpié 04; re-verificación).
@@ -214,3 +215,52 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 - **Reinicio**: el fundador vuelve a pedir la apertura de canal o el director re-dota el cron cuando reanude la flota.
 
 Final: G-5.3-Flash-Agente / Kilo Code.
+1. reposicion nicho GLM (directo del 05 real): 59: Botón "Guardar" en pausa con confirmación y feedback (M44) [S]
+2. reposicion nicho GLM (directo del 05 real): 59: Mostrar hora/fecha del último guardado por slot [M]
+3. reposicion nicho GLM (directo del 05 real): 59: Impedir guardado manual durante carga de escena/diálogo [M]
+4. reposicion nicho GLM (directo del 05 real): 59: Deshabilitar botón si no hay cambios (no dirty) [M]
+5. reposicion nicho GLM (directo del 05 real): 59: Guardar manualmente desde el menú principal [S]
+6. reposicion nicho GLM (directo del 05 real): 59: Definir 3+ slots con UI de selección en el menú principal [M]
+7. reposicion nicho GLM (directo del 05 real): 59: Borrar y sobrescribir slot con confirmación [S]
+8. reposicion nicho GLM (directo del 05 real): 59: Id de perfil en el archivo, validado al cargar (sin cruzamiento) [M]
+9. reposicion nicho GLM (directo del 05 real): 59: Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C]
+10. reposicion nicho GLM (directo del 05 real): 59: Probar en Windows/macOS/Linux (rename atómico varía por SO) [C]
+11. reposicion nicho GLM (directo del 05 real): 59: Guardar islas, POI, exploración y niebla (M54) [M]
+12. reposicion nicho GLM (directo del 05 real): 59: Guardar estado de ruinas (M25) y templos (M26) [M]
+13. reposicion nicho GLM (directo del 05 real): 59: Guardar modificaciones del mundo (tala M50, minado M35) [M]
+14. reposicion nicho GLM (directo del 05 real): 59: Testear carga del mundo sin duplicar objetos [C]
+15. reposicion nicho GLM (directo del 05 real): 59: Guardar ítems, cantidades, recursos (M15) y dinero (M38) [M]
+16. reposicion nicho GLM (directo del 05 real): 16: Doble llamado a craft en el mismo frame: cola interna o rechazo silencioso [M]
+17. reposicion nicho GLM (directo del 05 real): 16: Cero cómputo de crafting cuando la UI está cerrada [S]
+18. reposicion nicho GLM (directo del 05 real): 16: Filtros de temporada recalculados solo ante season_changed [S]
+19. reposicion nicho GLM (directo del 05 real): 16: Sin asignaciones de objetos en el hot path de fabricación simple [M]
+20. reposicion nicho GLM (directo del 05 real): 16: Texturas/iconos de recetas precargados con pool ligero [M]
+21. reposicion nicho GLM (directo del 05 real): 16: Sin steps de física extra en estaciones (efecto interactuable básico) [S]
+22. reposicion nicho GLM (directo del 05 real): 16: Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M]
+23. reposicion nicho GLM (directo del 05 real): 16: Test unitario: registro de recetas y detección de duplicados [M]
+24. reposicion nicho GLM (directo del 05 real): 16: Test unitario: validación de materiales y máximo fabricable [M]
+25. reposicion nicho GLM (directo del 05 real): 16: Test: rollback exacto ante inventario lleno en ambos destinos [C]
+26. reposicion nicho GLM (directo del 05 real): 16: Recorrido manual: abrir, fabricar, fallar y cancelar en las 3 estaciones sin bugs [C]
+27. reposicion nicho GLM (directo del 05 real): 16: RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con
+28. reposicion nicho GLM (directo del 05 real): 28: Definir el problema: desplazamiento cozy entre islas con el Gran Vapor [M]
+29. reposicion nicho GLM (directo del 05 real): 28: Catalogar los 25 puntos de la sección 27 del plan maestro [S]
+30. reposicion nicho GLM (directo del 05 real): 28: RF1: boleto y reserva con capacidad del vapor [M]
+31. reposicion nicho GLM (directo del 05 real): 28: RF3: travesía visible entre 20 y 60 segundos [M]
+32. reposicion nicho GLM (directo del 05 real): 28: RF4: llegada con atraque automático y desembarque suave [M]
+33. reposicion nicho GLM (directo del 05 real): 28: RF5: viaje rápido costoso vía M69 [S]
+34. reposicion nicho GLM (directo del 05 real): 28: NFR: cozy, sin soft-locks, accesibilidad, guardado M58 [M]
+35. reposicion nicho GLM (directo del 05 real): 28: P2: diseño del barco — Gran Vapor con cubierta navegable y chimenea [C]
+36. reposicion nicho GLM (directo del 05 real): 28: P3: diseño del dirigible — vehículo opcional de contenido tardío, no bloqueante [M]
+37. reposicion nicho GLM (directo del 05 real): 28: P4: diseño del submarino — vehículo opcional de expediciones, no bloqueante [M]
+38. reposicion nicho GLM (directo del 05 real): 58: Verificar legibilidad de la UI de M53 con escala 200 % sin cortes [C]
+39. reposicion nicho GLM (directo del 05 real): 58: RF12: auditar que ningún puzzle dependa de oír un sonido específico [C]
+40. reposicion nicho GLM (directo del 05 real): 58: RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M]
+41. reposicion nicho GLM (directo del 05 real): 58: Definir que el remapeo respete los conflictos detectados por M57 [M]
+42. reposicion nicho GLM (directo del 05 real): 58: Definir indicador visual del perfil de control activo en el menú [S]
+43. reposicion nicho GLM (directo del 05 real): 58: RF23: reabrir el último diálogo sin perder contexto [M]
+44. reposicion nicho GLM (directo del 05 real): 58: RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M]
+45. reposicion nicho GLM (directo del 05 real): 58: RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C]
+46. reposicion nicho GLM (directo del 05 real): 58: Verificar la legibilidad del texto grande con las fuentes de M88 en español (tildes, ñ) [M]
+47. reposicion nicho GLM (directo del 05 real): 58: NFR: aplicar el perfil con overhead menor a ~1 ms por frame [C]
+48. reposicion nicho GLM (directo del 05 real): 65: [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensional ya implementado en animal_behav
+
