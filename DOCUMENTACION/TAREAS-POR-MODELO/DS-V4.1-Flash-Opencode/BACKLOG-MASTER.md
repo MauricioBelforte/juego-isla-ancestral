@@ -63,12 +63,12 @@
 41. M129-Merch: 10 productos del front. — [x] 2026-10-17 (Tanda 33): data/legal/merchandising.json v2 = 10 productos (camisetas, tazas, posters, artbook, soundtrack, peluches, figuras, mapa_tela, llavero, pack_stickers) + politicas post_lanzamiento/licencias; boot [M129] MerchManager listo (10 productos) x289 en out/; test_merch_m129.gd rc=0 Resumen M129: 24 checks, 0 fallos (out/tanda33). Modulo 129: 101 [x]/0 [ ]/7 [?].
 42. M147-WorldBible: canon 1.0.0 (6 personajes 8 lugares — ES/EN/PT el front). — [x] 2026-10-17 (Tanda 34): canon verificado — data/world_data.json (4147b) canon_version 1.0.0, 6 personajes (finneas/lia/bruno/nilo/vera/orion), 8 lugares (faro/templo_raiz/laguna_coral/templo_coral/volcan/templo_ceniza/aurora_cielo/templo_aurora), 4 simbolos, 4 capas, 5 epocas; boot [M147] WorldBible listo: canon 1.0.0 (6 personajes, 8 lugares) x291; test_world_m147.gd rc=0 Resumen M147: 23 checks, 0 fallos (out/tanda34). ES/EN: locales/en.po 16061b + es.po 16812b con refs del canon; PT: NO existe pt.po (deuda de localizacion M87, observada). Modulo 147: 65 [x]/68 [ ]/1 [?] en curso.
 43. M147: los strings de los 6 personajes (Catalina/Bruno/Catalina/Finneas/Luna/Mateo). — [x] 2026-10-18 (Tanda 35): 6/6 personajes con nombre/rol/isla/bio en data/world_data.json (finneas guia/raiz, lia curandera/raiz, bruno constructor/coral, nilo pescador/coral, vera herreria/ceniza, orion navegante/aurora); i18n POR PERSONAJE no existe todavia — data/localizacion/strings_{es,en,pt}.json = 146 cadenas UI/msg sin claves de personajes (strings_pt.json SI existe; pt.po de locales NO) y locales/*.po 232 msgids solo con menciones incidentales M68; preparacion i18n del canon = deuda del modulo 147 (68 [ ]). Evidencia: out/tanda35/recon_strings_personajes.txt.
-44. The vocabulary de — the canon8 (the canon of reportes).
-45. M100-Community: 5 canales 4 eventos (the community-front).
-46. M121-Support: 15 FAQ 3 canales del front.
-47. M123-Modding: 2 mods del front.
-48. M36-SPAWNER: los grupos del front (PackLogic/SchoolLogic the动物).
-49. M160-Ubicaciones: 39 catálogo 48 ubicaciones the front.
+44. The vocabulary de — the canon8 (the canon of reportes). — [x] 2026-10-18 (Tanda 36): vocabulario canonico de 8 terminos VERIFICADO — 4 simbolos (sello_marea/profundidades/llama/aurora) con nombre+descripcion y 4 capas_por_sello (orden 1-4, isla, revela 3-4 refs validas) = 8/8; 8 lugares con nombre/descripcion/isla = 8/8; ValidateWorld 0 errores (test_world_m147.gd rc=0 23/0); boot [M147] WorldBible canon 1.0.0 x2 fresco; consumo: 4 sellos en consumidores.json (M22) + 1 pieza de lore c/u. DEUDAS: i18n del canon ausente en strings_{es,en,pt}.json y glosario M87 (0 claves); drift doc-vs-data en 03-Diseno.md (sello_del_alba/simbolo_del_sello_brisa/elisia stale; 04-Codigo.md alineado). Evidencia out/tanda36/recon_vocabulario_canon8.txt.
+45. M100-Community: 5 canales 4 eventos (the community-front). — [x] 2026-10-18 (Tanda 37): frente M100 verificado — data/community/community_calendar.json: 5 canales (discord/steam_forums/x_twitter/youtube/newsletter) + 4 eventos (anuncio_ronda1, screenshot_friday, devlog_mensual, newsletter_bimensual) + 4 KPIs; CommunityManager autoload con canales/eventos_por_canal/eventos_por_tipo/kpis y ServiceRegistry; boot [M100] CommunityManager listo (5 canales, 4 eventos); test_community_m100.gd rc=0 8 checks 0 fallos; modulo 220/0/0. Nota: steam_forums queda sin evento propio (el diseno fija 4 eventos/5 canales). Evidencia out/tanda37/recon_m100.txt.
+46. M121-Support: 15 FAQ 3 canales del front. — [x] 2026-10-18 (Tanda 38): frente M121 verificado — data/support/faq.json: 15 FAQ, 3 canales (email/discord/steam_forums), 11 categorias, politica 24h/7d/idiomas es+en; SupportManager autoload + 4 servicios (faq/ticket/hotfix/patch) y senales ticket_created/resolved; boot [M121] SupportManager listo (15 FAQ, 3 canales); suites rc=0 (test_support_m121 15/0; test_support_servicios_m121 70/0); modulo 211/0/0. Drift menor: checklist L14 dice 4 FAQ/6 categorias vs 15/11 reales. Evidencia out/tanda38/recon_m121.txt.
+47. M123-Modding: 2 mods del front. — [x] 2026-10-18 (Tanda 39): frente M123 verificado — data/mods/mod_manifest.json con 2 mods (mod_aurora_items v1.0.0 prioridad 10, 2 assets; mod_aurora_qol v0.9.0 prioridad 5 override mod_aurora_items, 1 asset), schema 1.0, limites 100MB/mod, 10MB/assets, 100 mods; ModdingManager (compat semver, conflictos, activacion, resolver_prioridad, es_compatible_update M118) + ModValidator E01-E14 + ModSandbox ruta_segura; boot [M123] ModdingManager listo (2 mods); suite test_modding_m123 rc=0 69 checks 0 fallos (11 bloques A-K). Modulo 106 [x]/0 [ ]/2 [?] (deudas previas: preview paquete M89 + re-evaluacion GATE, degradadas 2026-10-10). Evidencia out/tanda39/recon_m123.txt.
+48. M36-SPAWNER: los grupos del front (PackLogic/SchoolLogic the动物). — [x] 2026-10-18 (Tanda 40): frente M36-SPAWNER verificado — fauna_spawner.gd (P-49) con GRUPOS_INICIALES=3 zonas (pradera/playa/humedal), MAX_INDIVIDUOS=24, re-spawn 15s; boot runtime: conejo_pradera x2 (manada), gaviota_playera x4 (banco), cangrejo_humedal x5 (banco) = 11 individuos/3 zonas, con [M65] PackLogic/SchoolLogic creadas; snap por clase (terrestre h>=3, acuatica 2.5-4.5, aerea max(h,3)+1.5); suite test_fauna 58/0 rc=0; modulo 227 [x]/1 [ ]/0 [?] (abierta: anti-stuck M65, ajena al frente). Evidencia out/tanda40/recon_m36_spawner.txt.
+49. M160-Ubicaciones: 39 catálogo 48 ubicaciones the front. — [x] 2026-10-18 (Tanda 41): frente M160 re-verificado — ubicaciones_loc.json 39 LOC-* + catalogo_ubicaciones.json (4 islas/10 ubicaciones/3 minerales/6 zonas_gate/4 peces); boot: [M160] conexiones bidireccionales 10 + catalogo 39 cargadas 0 omitidas + Ubicaciones cargadas 48; suite test_ubicaciones_m160 rc=0 17 checks 0 fallos; modulo 145 [x]/2 [ ]/8 [?] (deudas del modulo, no de este frente). Mismo frente verde que Tanda 30 (item 38) — re-verificacion fresca. Evidencia out/tanda41/recon_m160_front.txt.
 50. M55-Diary: 14 categorías 44 entradas (the diary front).
 51. M75: 7 actividades postgame the front.
 52. M99-Monetización: 3 ediciones 2 DLC the front.
@@ -169,6 +169,27 @@
 146. reposicion tecnica infra (directo del 05 real): M63-Streaming: P8: shaders — precalentamiento + caché de variantes [S] — precarga de shaders hecha (H); caché de variantes es de M47/render
 147. reposicion tecnica infra (directo del 05 real): M40-Infra: Soporte de espía de eventos para el Debug Menu (M110) [S]
 148. reposicion tecnica infra (directo del 05 real): M40-Infra: RF2: detección de partida guardada (M60) y decisión nueva/cargar [M]
+
+149. reposicion tecnicaNichos (directo del 05 real): M147: Definir tecnología que construyó templos y Sellos [M]
+150. reposicion tecnicaNichos (directo del 05 real): M147: Definir conexión con los Sellos (M153) [M]
+151. reposicion tecnicaNichos (directo del 05 real): M147: Definir regla 1-5-25 de detalle por personaje [S]
+152. reposicion tecnicaNichos (directo del 05 real): M147: Definir un símbolo por Sello (M153) [M]
+153. reposicion tecnicaNichos (directo del 05 real): M147: Definir glosario mínimo del lenguaje antiguo [M]
+154. reposicion tecnicaNichos (directo del 05 real): M147: Definir trazabilidad bloque de lore → módulos consumidores [M]
+155. reposicion tecnicaNichos (directo del 05 real): M63: RF4+RF5: NPC, audio, texturas, shaders + precalentamiento [S] — precalentamiento hecho (H); los 4 tipos existen como tipos de cola pero su poblado real es de M08/M42/M47
+156. reposicion tecnicaNichos (directo del 05 real): M63: P1: pantalla de carga — arte cozy, barra real, consejos [S] — barra real hecha (iter. 4); arte cozy/consejos son de M53/arte 2D
+157. reposicion tecnicaNichos (directo del 05 real): M63: P3: chunks cercanos — radio R=3, máx 5 en movimiento rápido [S] — el radio/ límite reales son de M08
+158. reposicion tecnicaNichos (directo del 05 real): M63: P5: NPCs necesarios — instanciar al entrar, pausar al salir [S] — dueño M15/M16 (NPC)
+159. reposicion tecnicaNichos (directo del 05 real): M63: P6: audio — bancos regionales precargados [S] — dueño M42; el 63 solo encola el tipo `banco_audio`
+160. reposicion tecnicaNichos (directo del 05 real): M63: P7: texturas — atlas + mips por LOD [S] — dueño M47
+161. reposicion tecnicaNichos (directo del 05 real): M63: P8: shaders — precalentamiento + caché de variantes [S] — precarga de shaders hecha (H); caché de variantes es de M47/render
+
+162. reposicion tecnicaNichos (directo del 05 real): M147: Definir reglas de formato de datos `## DATA { }` [M]
+163. reposicion tecnicaNichos (directo del 05 real): M147: Definir origen de Aurora y su nombre previo [M]
+164. reposicion tecnicaNichos (directo del 05 real): M147: Definir qué sabe el jugador nuevo de Aurora (capa 0-1) [M]
+165. reposicion tecnicaNichos (directo del 05 real): M147: Definir historia de la Isla Verde (cultivos, jardineros) [M]
+166. reposicion tecnicaNichos (directo del 05 real): M147: Definir historia de la Isla de las Cenizas (catástrofe) [M]
+167. reposicion tecnicaNichos (directo del 05 real): M147: Definir origen de los Arquitectos [M]
 
 # (B) ESTADO HIST M96/infrax4, M116x1, M113x2) = fuera del alcance del lote; 0 flips disponibles; suite M117 rc=0.
 21. M119-Update: el canal estable — los checks de updates (el vision del sistema de updates del juego). — [x] 2026-10-17 (Tanda 4): verificado: canal estable 1.0.0 + suite test_updates_m119 rc=0 (15/0); los 9 [ ] son deuda externa con dueno (M59/M96/M118/M107) — 0 flips (consistente con auditoria previa Step-5 Log 1866); M119 = 109/118.
@@ -346,18 +367,18 @@
 
 88. M147-WorldBible: canon 1.0.0 (6 personajes 8 lugares — ES/EN/PT el front). — [x] 2026-10-17 (Tanda 34): dup de #42 (misma evidencia — política dups 052).
 89. M147: los strings de los 6 personajes (Catalina/Bruno/Catalina/Finneas/Luna/Mateo). — [x] 2026-10-18 (Tanda 35): dup de #43 (misma evidencia — política dups 052).
-90. The vocabulary de — the canon8 (the canon of reportes).
+90. The vocabulary de — the canon8 (the canon of reportes). — [x] 2026-10-18 (Tanda 36): dup de #44 (misma evidencia — política dups 052).
 
 ### Bloque W — La HTTP del front de la web del front.
 
-91. M100-Community: 5 canales 4 eventos (the community-front).
-92. M121-Support: 15 FAQ 3 canales del front.
-93. M123-Modding: 2 mods del front.
+91. M100-Community: 5 canales 4 eventos (the community-front). — [x] 2026-10-18 (Tanda 37): dup de #45 (misma evidencia — política dups 052).
+92. M121-Support: 15 FAQ 3 canales del front. — [x] 2026-10-18 (Tanda 38): dup de #46 (misma evidencia — politica dups 052).
+93. M123-Modding: 2 mods del front. — [x] 2026-10-18 (Tanda 39): dup de #47 (misma evidencia — política dups 052).
 
 ### Bloque X — El front de las rutas del juego (los ItemN x el front).
 
-94. M36-SPAWNER: los grupos del front (PackLogic/SchoolLogic the动物).
-95. M160-Ubicaciones: 39 catálogo 48 ubicaciones the front.
+94. M36-SPAWNER: los grupos del front (PackLogic/SchoolLogic the动物). — [x] 2026-10-18 (Tanda 40): dup de #48 (misma evidencia — política dups 052).
+95. M160-Ubicaciones: 39 catálogo 48 ubicaciones the front. — [x] 2026-10-18 (Tanda 41): dup de #49 (misma evidencia — política dups 052).
 
 ### Bloque Y — La calidad del front de los objetos (the items de front).
 
