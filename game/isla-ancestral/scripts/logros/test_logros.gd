@@ -288,7 +288,7 @@ func _test_caché_lectura() -> void:
 
 func _test_guardado_carga_rf9_rn8() -> void:
 	# Simular desbloquear un logro, guardar, restaurar, verificar persistencia
-	var before: int = _ach.desbloqueados.size()
+	var before: int = _ach.desbloqueados().size()
 	# Desbloquear directamente el logro_test_id_inexistente no existe, usar uno real
 	# Forzamos el estado interno para test de guardado
 	_ach._desbloqueados = ["logro_primer_sello"]

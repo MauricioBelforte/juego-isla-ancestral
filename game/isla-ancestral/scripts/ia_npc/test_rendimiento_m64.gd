@@ -61,11 +61,11 @@ func _bloque_a_budget() -> void:
 	for i in range(60):
 		var sm_i = SMScript.new()
 		sm_i._ready()
-		wd.register("npc_%d" % i, sm_i, 30.0, 10)
-	_check("A5: watchdog registra 60 NPCs", wd._entries.size() == 60)
+		wd.register_npc(StringName("npc_%d" % i))
+	_check("A5: watchdog registra 60 NPCs", wd.get_all_states().size() == 60)
 
-	for key in wd._entries.keys():
-		wd.unregister(key)
+	for key in wd.get_all_states().keys():
+		wd.unregister_npc(key)
 	wd.queue_free()
 	_fin("A")
 
