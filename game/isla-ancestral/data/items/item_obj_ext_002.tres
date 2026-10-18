@@ -26,5 +26,5 @@ usa_multimesh = false
 variantes_disponibles = PackedStringArray("alta", "media", "baja")
 requiere_herramienta = ""
 exportable = true
-icono = null
+icono = "res://assets/2d/items_m159/ico_item_obj_ext_002.png"
 modelo_3d = null

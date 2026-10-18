@@ -13,3 +13,5 @@ apilable = true
 stack_max = 99
 rareza = 0
 precio_venta = 5
+
+icono = "res://assets/2d/items_m159/ico_incense.png"

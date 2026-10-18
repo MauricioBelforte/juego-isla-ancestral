@@ -12,3 +12,5 @@ apilable = false
 stack_max = 1
 rareza = 0
 precio_venta = 12
+
+icono = "res://assets/2d/items_m159/ico_herramienta_basica.png"

@@ -12,3 +12,5 @@ apilable = true
 stack_max = 10
 rareza = 3
 precio_venta = 50
+
+icono = "res://assets/2d/items_m159/ico_fragmento_ancestral.png"

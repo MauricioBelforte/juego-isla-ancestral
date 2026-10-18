@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+﻿[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
-id = "OBJ-HER-0017"
+id = "OBJ-HER-017"
 nombre = "Martillo"
 descripcion = ""
 categoria = 10
@@ -23,5 +23,6 @@ color = ""
 variante = ""
 requiere_herramienta = ""
 exportable = true
-icono = "res://assets/2d/items_m159/ico_item_obj_her_0017.png"
+icono = "res://assets/2d/items_m159/ico_item_obj_her_017.png"
 modelo_3d = null
+

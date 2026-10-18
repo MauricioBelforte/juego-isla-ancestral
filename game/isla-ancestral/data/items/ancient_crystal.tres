@@ -14,3 +14,5 @@ rareza = 3
 precio_venta = 200
 modelo_id = "cristal_ancestral"
 variantes_disponibles = PackedStringArray("alta", "media", "baja")
+
+icono = "res://assets/2d/items_m159/ico_ancient_crystal.png"
