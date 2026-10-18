@@ -39,6 +39,33 @@ AI-POLICY.md
 
 **Regla de oro:** todo lo marcado "final" requiere **revisión humana integral documentada** antes de entrar al juego o a la tienda.
 
+### 3.1. Música generada que «suena similar» a una obra protegida
+
+Caso particular de la fila **Música** de la matriz. El riesgo no es que una herramienta copie archivos: es que genere una melodía que un oyente identifique como otra obra. Criterio operativo (spec del ítem L124 del checklist, escrita 2026-10-18):
+
+**1. Regla madre — duda razonable = descarte.** Si el revisor humano no puede afirmar con seguridad que la pista es original, **la pista se descarta**. No se «ajusta un poco» para publicarla: se descarta y se registra (punto 5). El costo de descartar una pista es una hora de trabajo; el costo de publicarla es una reclamación de copyright sobre el juego.
+
+**2. Qué cuenta como duda razonable** (criterios observables, no impresión subjetiva):
+- coincidencia de la **melodía principal** (sucesión de notas) en un fragmento reconocible;
+- coincidencia del **hook / estribillo** (la parte que se recuerda);
+- coincidencia simultánea de armonía **y** ritmo en un pasaje identificable;
+- que **un tercero ajeno al proyecto** señale el parecido nombrando la obra.
+
+**No** son duda razonable: compartir género, instrumentación, tempo, tonalidad o «atmósfera». El estilo no es apropiable.
+
+**3. Contra qué corpus se compara** — tres capas, en este orden:
+- **(a) Catálogo propio** — `game/isla-ancestral/data/audio/` (`music_context_matrix.json`, `narrative_sound.json`, `ambient_biome_bank.json`) y el registro de créditos de audio (módulos 84 y 131). Descarta autoplagio y reutilización de una pista ya licenciada como si fuera nueva.
+- **(b) Obra de referencia concreta** — si el revisor identifica una obra, se compara **contra esa obra** (melodía/hook), no contra «el estilo de» un artista.
+- **(c) Búsqueda por melodía** (servicios públicos de *melody search*) — **solo** si hay una reclamación o una sospecha concreta ya identificada. No es un paso de rutina ni se exige como condición de aprobación.
+
+> Honestidad de alcance: el proyecto **no** tiene fingerprinting automático de audio. El criterio es revisión humana documentada, y el valor por defecto es **descartar**, no aprobar. No se declara una verificación forense que no se hizo.
+
+**4. Quién firma.** La revisión la firma **una persona con nombre y fecha**. En este proyecto (equipo unipersonal + agentes del protocolo) firma el **fundador**. Un agente de IA **no puede firmar** la revisión de una pista generada — su salida es siempre borrador (§4).
+
+**5. Registro del descarte.** Append-only en `AI-TOOLS-REGISTRY.md` (hoy plantilla en `04-Codigo.md §4`), una fila por descarte: herramienta + versión · fecha · pista/asset · obra contra la que se comparó (o «sin referencia concreta») · motivo del descarte · quién firmó. La pista descartada **no se borra del historial**: queda como borrador marcado con fecha y motivo, igual que en el flujo de §4.
+
+**6. Alcance.** Aplica a música y a cualquier audio con melodía identificable (jingles, *stings*, temas de personaje). Un SFX sin melodía (impacto, agua, pasos) queda fuera del criterio de similitud melódica, pero sigue sujeto a la verificación de licencia de la herramienta.
+
 ## 4. Flujo de aprobación de contenido con IA
 
 ```
@@ -106,6 +133,7 @@ Tabla con una fila por herramienta/usuario/uso:
 - Existen plantillas de `AI-POLICY.md` y `AI-TOOLS-REGISTRY.md` (04-Codigo.md).
 - La matriz cubre texto, arte 2D/3D, música, SFX, código, documentación y marketing.
 - El flujo de aprobación exige revisión humana documentada y trazable.
+- El caso de música que «suena similar» (§3.1) define duda razonable, corpus de comparación, firma humana y registro del descarte.
 - La plantilla de declaración Steam incluye el aviso de re-verificación de política vigente.
 - Checklist ≥110 ítems, todos verificables y honestos.
 - Sin contradicciones con el módulo 78 y con el protocolo multiagente (AGENTS.md).

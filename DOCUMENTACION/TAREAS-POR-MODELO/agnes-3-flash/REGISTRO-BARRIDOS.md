@@ -135,3 +135,17 @@ UTF-8 §28 y verificado contra disco (sin marcadores inflados).
 | 122 | 751 | M166 Variantes-Perfil-Rendimiento | 112/0/0 = 112 | drift 0 | 2026-10-20 | ✅ 112/112 (coincide) |
 | 123 | 751 | M167 Isla-Raiz | 113/1/0 = 114 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 113/114 (coincide) |
 | 124 | 751 | M168 Plantilla-De-Isla | 104/0/0 = 104 | drift 0 | 2026-10-20 | ✅ 104/104 (coincide) — **CIERRE del barrido M69-M168** |
+
+## Re-verificación periódica (estado estable 2026-10-22)
+
+| # de barrido | Mensaje canal | Módulo | Medición [x]/[ ]/[?] | Veredicto | Fecha | Nota |
+|---|---|---|---|---|---|---|
+| 125 | — (interno) | M14 Inventario | 136/0/4 = 140 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 136/140 (coincide) |
+| 126 | — (interno) | M16 Crafting | 157/33/13 = 203 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 157/203 (coincide) |
+| 127 | — (interno) | M45 Arte-3D | 150/19/2 = 171 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 150/171 (coincide) |
+
+> Nota: re-barrido de módulos nucleares (M14/M16/M45) en estado estable; todos coincidentes, sin drift nuevo. M01/M19 no tienen 05 plan-actual (módulos tempranos, fuera del barrido M69-M168). Sin hallazgo material → sin mensaje a canal (no-spam).
+>
+> **Corrección 2026-10-22 (re-barrido de pendientes):** **M48 ya NO es sin-fila** — la fila fue restaurada (msg 302, 2026-10-18: 22 [x] / 3 [?] / 98 [ ] = 123, 🔵 deepseek-v4-flash-vision-exp). Por tanto el hallazgo del barrido M69-M168 "M139/M48/M148 sin-fila (lado DS-WB)" queda **actualizado a: solo M139 + M148** siguen sin fila (M48 resuelta). M125 no tiene carpeta `DOCUMENTACION/125-Sistema-De-Recoleccion` (nombre o carpeta distinta; la nota DoD "leve" es menor, no material).
+>
+> **Firma:** agnes-3-flash (Sapiens AI) / Kilo Code.

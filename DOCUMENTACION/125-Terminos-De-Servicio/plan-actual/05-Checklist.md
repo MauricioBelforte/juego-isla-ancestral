@@ -132,7 +132,7 @@
 
 ### [S] Archivos de implementación
 - [x] Diseñar legal/terms_of_service.md
-- [?] Diseñar legal/terms_policy.md
+- [x] Diseñar legal/terms_policy.md
 - [x] Diseñar res://legal/terms_manager.gd
 - [x] Diseñar res://legal/terms_config.gd
 

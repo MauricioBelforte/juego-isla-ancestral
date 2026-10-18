@@ -207,7 +207,7 @@
 
 ---
 
-149. [M125] Escribir legal/terms_policy.md (spec del DeepSeek 301 §4.1): versión pública/resumida para el sitio, NO sustituye a terms_of_service.md; cubre las 11 materias del molde hermano (o N/A explícito por materia); version/fecha coherentes con terms_config.gd o diferencia explicada; UTF-8 sin BOM, LF. Criterio de cierre: los 5 puntos verificables. [M]
+149. [x] [M125] Escribir legal/terms_policy.md (spec del DeepSeek 301 §4.1): versión pública/resumida para el sitio, NO sustituye a terms_of_service.md; cubre las 11 materias del molde hermano (o N/A explícito por materia); version/fecha coherentes con terms_config.gd o diferencia explicada; UTF-8 sin BOM, LF. Criterio de cierre: los 5 puntos verificables. [M] — **HECHO 2026-10-18 (Log 1966, msg 307)**: creado `game/isla-ancestral/legal/terms_policy.md` (nuevo, 12.144 B, 279 lineas, UTF-8 sin BOM, LF puro: 0 CRLF / 0 CR / 0 NUL / 0 U+FFFD). Los 5 criterios medidos: (1) existe y bytes correctos; (2) declara en 0 y 12 que es la version publica/resumida y que NO sustituye al ToS (jerarquia ToS > politica > textos del juego); (3) 11/11 materias presentes, numeradas igual que el ToS, con 3 N/A explicitos (3 cuentas, 5 UGC, 6 reembolsos porque el sitio no vende); (4) version 1 coincide en las 3 fuentes y la diferencia de fecha se declara (runtime `terms_date=2026-01-01` vs ToS 2026-10-03), sin elegir por cuenta propia; (5) cruce programatico de 16 afirmaciones contra el ToS = 0 sin respaldo y control negativo de promesas (`garantizamos`/`sin limite`/`24/7`/`siempre gratis`...) = 0 apariciones. Gates: `diagnosticar_mojibake.py` EXIT 0 (LIMPIO), `verificar_bom.py` EXIT 1 solo por 1 archivo AJENO (tracker de agnes-3-flash, no tocado). Regresion: suite M125 x3 = 18 checks / 0 fallos / EXIT 0. **Hallazgo ajeno no tocado**: `test_terms_m125.gd:97` emite `SCRIPT ERROR: Attempted to free a RefCounted object` (`cfg.free()` sobre un Resource); el aborto cae en la ultima linea del bloque, asi que hoy no pierde checks, pero la suite NO tiene ni `CHECKS_MINIMOS` ni `_fin()` ni `_terminado` -> falso verde LATENTE. **0 flips aplicados en M125**: L135 sigue `[?]` hasta que el director lo mueva.
 150. [M86] Documentar en 03-Diseno.md el criterio de la L124 (spec del DeepSeek 301 §4.2): apartado con la regla ante duda razonable, la pista se descarta, contra qué corpus se compara, quién firma, registro del descarte, y corregir la cita fantasma 3.8 a la sección real de la matriz. [M]
 
 # (B) ESTADO HISTÓRICO Y ENCAJE — registro del BACKLOG-MASTER anterior (preservado íntegro)
@@ -1902,3 +1902,17 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - **Limites:** 0 commits / 0 push / 0 flips / 0 auto-sellos 21.8; `CHECKLIST-GLOBAL.md` editado SOLO con la
   autorizacion escrita del 302; 0 toques a `quality.yml`/`AGENTS.md`/`project.godot`/05-Checklist de modulos.
 - **Proximo:** NN entrantes > **302**; si no hay, item **149** (spec M125) de la cola activa, o el punto 5.
+
+
+---
+
+> **Registro de la vuelta 2026-10-18 01:26 (RAMA 2, item 149):** Log **1966**
+> (`Logs/1966-M125-Terms-Policy-Version-Publica-Sitio_2026-10-18_01-23-00.md`, ASCII puro, 180 CRLF,
+> sin BOM, 9.682 B) y mensaje **307** al director (UTF-8 sin BOM, LF, 5.744 B). Pool de Logs: cabeza
+> medida justo antes = 1966 -> 1967. **Pool de canal STALE (trampa 128):** la cabeza decia **306**
+> pero `306-...` ya existia (mi informe anterior); se uso **307 = ultimo+1**, verificado libre, y se
+> dejo el pool consistente (quitados 306 ya usado y 307 consumido -> cabeza **308**). **Entregado:**
+> `game/isla-ancestral/legal/terms_policy.md` (12.144 B, 279 lineas, UTF-8 sin BOM, LF puro) con las
+> 11 materias del molde, 3 `N/A` explicitos y el bloque de version/fecha declarado. **0 commits /
+> 0 push / 0 flips / 0 auto-sellos 21.8**; `CHECKLIST-GLOBAL.md`, `quality.yml`, `AGENTS.md`,
+> `project.godot`, el `05-Checklist.md` de M125 y la suite ajena quedaron intactos.

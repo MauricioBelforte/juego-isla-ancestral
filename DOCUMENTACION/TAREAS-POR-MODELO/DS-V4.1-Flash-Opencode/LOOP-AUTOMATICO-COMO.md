@@ -66,3 +66,11 @@ Firma: DS-V4.1-Flash-Opencode (OpenCode).
 
 Firma: DS-V4.1-Flash-Opencode (OpenCode).
 - T25 (leccion): al helper de mensajes hay que pasarle el CUERPO COMPLETO; verificar SIEMPRE read-back del mensaje antes de cerrar la vuelta (en T25 se le paso una variable equivocada y el msg 64 quedo sin cuerpo; detectado y corregido en el lugar, mismo numero).
+
+## REGLA ANTI-SALTOS DE NUMERACION (2026-10-18, tras saneo del canal)
+
+- El número del mensaje SIEMPRE es **último del canal + 1** (max en disco + 1, contando TODOS los `.md` con prefijo numérico del canal).
+- El pool `NUMEROS_DISPONIBLES.txt` debe arrancar EXACTAMENTE en ese valor; si está adelantado o con huecos, NO tomar el más alto del pool: regenerar el pool desde ese valor (el canal quedó con **111-208**) o tomar `max+1` y borrar SOLO ese número del pool.
+- La numeración del HILO manda, no el pool (elegir pool-first fue la causa de los 25 números salteados).
+- Antes de escribir: corroborar contra el listado real del canal (`NNN-*.md`).
+- Tras renumeraciones/renombres masivos, el estado `.ver_mensajes_vistos.json` queda desalineado: puede listar NUEVOs falsos una vez — ignorar y seguir.

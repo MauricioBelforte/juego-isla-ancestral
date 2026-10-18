@@ -69,21 +69,21 @@
 47. M123-Modding: 2 mods del front. — [x] 2026-10-18 (Tanda 39): frente M123 verificado — data/mods/mod_manifest.json con 2 mods (mod_aurora_items v1.0.0 prioridad 10, 2 assets; mod_aurora_qol v0.9.0 prioridad 5 override mod_aurora_items, 1 asset), schema 1.0, limites 100MB/mod, 10MB/assets, 100 mods; ModdingManager (compat semver, conflictos, activacion, resolver_prioridad, es_compatible_update M118) + ModValidator E01-E14 + ModSandbox ruta_segura; boot [M123] ModdingManager listo (2 mods); suite test_modding_m123 rc=0 69 checks 0 fallos (11 bloques A-K). Modulo 106 [x]/0 [ ]/2 [?] (deudas previas: preview paquete M89 + re-evaluacion GATE, degradadas 2026-10-10). Evidencia out/tanda39/recon_m123.txt.
 48. M36-SPAWNER: los grupos del front (PackLogic/SchoolLogic the动物). — [x] 2026-10-18 (Tanda 40): frente M36-SPAWNER verificado — fauna_spawner.gd (P-49) con GRUPOS_INICIALES=3 zonas (pradera/playa/humedal), MAX_INDIVIDUOS=24, re-spawn 15s; boot runtime: conejo_pradera x2 (manada), gaviota_playera x4 (banco), cangrejo_humedal x5 (banco) = 11 individuos/3 zonas, con [M65] PackLogic/SchoolLogic creadas; snap por clase (terrestre h>=3, acuatica 2.5-4.5, aerea max(h,3)+1.5); suite test_fauna 58/0 rc=0; modulo 227 [x]/1 [ ]/0 [?] (abierta: anti-stuck M65, ajena al frente). Evidencia out/tanda40/recon_m36_spawner.txt.
 49. M160-Ubicaciones: 39 catálogo 48 ubicaciones the front. — [x] 2026-10-18 (Tanda 41): frente M160 re-verificado — ubicaciones_loc.json 39 LOC-* + catalogo_ubicaciones.json (4 islas/10 ubicaciones/3 minerales/6 zonas_gate/4 peces); boot: [M160] conexiones bidireccionales 10 + catalogo 39 cargadas 0 omitidas + Ubicaciones cargadas 48; suite test_ubicaciones_m160 rc=0 17 checks 0 fallos; modulo 145 [x]/2 [ ]/8 [?] (deudas del modulo, no de este frente). Mismo frente verde que Tanda 30 (item 38) — re-verificacion fresca. Evidencia out/tanda41/recon_m160_front.txt.
-50. M55-Diary: 14 categorías 44 entradas (the diary front).
-51. M75: 7 actividades postgame the front.
-52. M99-Monetización: 3 ediciones 2 DLC the front.
-53. M119-Update fijo: 1.0.0 estable (the stable front).
-54. M97 de front (the automated front — quality.yml gate verde).
-55. The final energy — flow the front (the entertainer of — front).
-56. M62-Memoria: budget_registry con el preset media (2000 MB total — el front del presupuesto).
-57. M62: texture_memory con los densidad/filtros (el front de los texture pools).
-58. M62: global_pool con las shadowing conversiones (el front del global pool).
-59. M62: memory_monitor con el presupuesto_superado signal (el front del monitor).
-60. M62: narrative_sound con el silencio_timer y el trigger_lore (el front del sonido narrativo).
-61. M13: el candado del tools por tier (los 24 tipos de materiales — el front del tier).
-62. M35-Minería: el catalogo de vetas (6 vetas del front del mining).
-63. M36-Fauna: el catalogo de 7 especies (el front del fauna).
-64. M15: los nodos fibonacci (el front del recursos por el spawn del boot).
+50. M55-Diary: 14 categorías 44 entradas (the diary front). — [x] 2026-10-18 (Tanda 42): frente M55-Diary verificado — diario_catalog.json schema 1 con 14 categorias/44 entradas exactas (personajes 5, lugares 5, criaturas 4, sellos 7, misiones 4, eventos 4, cartas 1, recetas 2, plantas 2, minerales 3, ruinas 2, descubrimientos 3, pistas 2, fotografias 0); boot [M55] Catalogo: 14 categorias, 44 entradas + DiaryLayer registrada; suites test_diario rc=0 0 fallos + test_diario_persist rc=0 0 fallos; modulo 63 [x]/53 [ ]/15 [?] (en curso por su duenio; deuda honesta: fotografias 0 por puente M56). Evidencia out/tanda42/recon_diary_front.txt.
+51. M75: 7 actividades postgame the front. — [x] 2026-10-18 (Tanda 43): frente M75-Postgame verificado — data/postgame/actividades.json schema 1 con 7 actividades exactas (postgame_isla_este M27, postgame_isla_flotante M27/M10, postgame_ruina_final M25/M37, postgame_vecinos_nuevos M19/M71 repetible, postgame_hibridacion M50/M33 repetible, postgame_especies_raras M36/M35 repetible, postgame_muebles_evento M18/M16 repetible); boot [M75] Actividades cargadas: 7 + PostgameManager listo: 7; suite test_postgame rc=0 40 checks 0 fallos (activacion, contadores 2x, epilogo, restore sin re-emision); modulo 75-Postgame 17 [x]/113 [ ]/0 [?] (etapa temprana, cola propia del duenio; frente de hoy completo). Evidencia out/tanda43/recon_m75.txt.
+52. M99-Monetización: 3 ediciones 2 DLC the front. — [x] 2026-10-18 (Tanda 44): frente Monetizacion verificado — suite test_monetizacion_m95 rc=0 27 checks 0 fallos (3 ediciones standard 24.99/deluxe 34.99/coleccionista con historia completa y no-P2W; 2 DLC planificados ordenados; deteccion P2W/azar OK); boot [M95] MonetizacionManager listo (3 ediciones, 2 DLC); modulo 95-Monetizacion 19 [x]/94 [ ]/0 [?] (etapa temprana, cola propia). HALLAZGO reportado: 3 fuentes de datos con 2 discrepancias (coleccionista 49.99 en monetizacion.json LEGACY vs 59.99 en ediciones.json; nombres DLC expansion_corales/cosmetico_primavera vs isla_hielo/pack_aurora) — no toco modulo ajeno en curso. Evidencia out/tanda44/recon_m95.txt.
+53. M119-Update fijo: 1.0.0 estable (the stable front). — [x] 2026-10-18 (Tanda 45): frente M119-Update verificado — data/updates/versions.json con 3 canales (estable 1.0.0 / beta 1.1.0-beta.1 / dev 1.1.0-dev.3) + politica (min_versiones_atras 2, aviso_previa, requiere_reinicio); update_manager.gd autoload con persistencia user://version.tres y comparar_versiones semver; boot [M119] Version persistida 1.0.0 (estable) + UpdateManager listo; suite test_updates_m119 rc=0 15 checks 0 fallos; modulo 119-Actualizaciones 109 [x]/9 [ ]/0 [?] (9 [ ] cola propia). Evidencia out/tanda45/recon_m119.txt.
+54. M97 de front (the automated front — quality.yml gate verde). — [x] 2026-10-18 (Tanda 46): M97-Steam-Store-Page verificado 195 [x]/0/0 con los 6 entregables presentes (assets-store, guion-trailer, keywords-tags, lista-capturas, plantilla-descripcion, requisitos-sistema — plan-actual); gate quality.yml: checks livianos HOY verdes en lo propio (test_scripts 16 PASS 0 FAIL rc=0; mojibake LIMPIO rc=0; workflows 6 validos rc=0); run completo previo out/local-ci-2026-10-17 96/96 rc=0 (Tanda 5, Log 1912). HALLAZGO reportado: verificar_pool_numeros rc=1 por pools AJENOS (Hy3 262/263 y Step-5-WorkBuddy 75 creados pero aun en su pool — no los toco). Evidencia out/tanda46/recon_m97_gate.txt.
+55. The final energy — flow the front (the entertainer of — front). — [x] 2026-10-18 (Tanda 47): capstone Bloque Z verificado — BOOT E2E FRESCO hoy (rc=0): 380 líneas, 63 módulos activos, 101 líneas [Mxx], 0 SCRIPT ERROR reales (solo ruido AnimationService, igual que t36), warnings conocidos (M39+VoxelTools); frentes clave fluyendo (M95/M119 1.0.0/M55/M75/M160/M115/M158/M67/M73/M94/M100/M121/M123/M129/M72/M60/M19/M37/M110); release front coherente (M97 ✅195/195, M98 ✅102/102, M99 155/169, M95/M119 con dueño). Evidencia out/tanda47/{boot_e2e_front.log,recon_e2e_front.txt}. FLAG: texto del ítem ambiguo — si el alcance era M143-Lanzamiento (18/111 🟢) u otro, re-rutear.
+56. M62-Memoria: budget_registry con el preset media (2000 MB total — el front del presupuesto). — [x] 2026-10-18 (Tanda 48): misma evidencia de la Tanda 12 (la vuelta 15) — item #19: preset=media total 2000 MB (baja 1500, alta 2500) + boot "[M62] MemoryMonitor listo (preset=media, total=2000 MB)"; 2 suites rc=0 (160 checks, 0 fallos) — out/tanda12. Politica dups 052; no re-ejecutado (orden del director, msg 110).
+57. M62: texture_memory con los densidad/filtros (el front de los texture pools). — [x] 2026-10-18 (Tanda 49): misma evidencia de #20 (Tanda 13, la vuelta 16) — TextureMemory (es_gigante/sin_mips/requiere_degradacion/degradar/aplicar_politica) + iter5 rc=0 (60 checks: bloque F "Atlas: eviccion LRU con log"; out/tanda13) + iter3 bloque I "texturas/atlas/detector 500" en verde (133 checks; out/tanda12). Politica dups 052; no re-ejecutado.
+58. M62: global_pool con las shadowing conversiones (el front del global pool). — [x] 2026-10-18 (Tanda 50): misma evidencia de #21 (Tanda 14, la vuelta 17) — shadowing conversiones (limite->tope en L67/L110/L176; metodo limite() intacto) verificado: pool_iter2 25/0, enforcement_m62 47/0, base 27/0 rc=0 (out/tanda14). Politica dups 052; no re-ejecutado.
+59. M62: memory_monitor con el presupuesto_superado signal (el front del monitor). — [x] 2026-10-18 (Tanda 51): front del monitor verificado — senales documentadas (04-Codigo L65-68) y declaradas en memory_monitor.gd (L52 presupuesto_superado; L228 semaforo_cambiado emitida) + semaforo testeado en verde (iter3, sec. B: niveles 80/90/95 + emision 1->2 sin repetir; 133 checks 0 fallos; out/tanda12). NOTA: presupuesto_superado declarada SIN emit site propio (0 referencias de emision en scripts/; consolidada de facto en semaforo_cambiado) — reportado al director. Politica dups 052; sin re-ejecutar.
+60. M62: narrative_sound con el silencio_timer y el trigger_lore (el front del sonido narrativo). — [x] 2026-10-18 (Tanda 52): front del sonido narrativo verificado (el sistema es M150 — el prefijo "M62:" del scribble es shorthand). Evidencia por acceso: suite test_narrative_m150.gd 12 checks 0 fallos (Logs 884/888/898 Hy3 + 440 agnes) + boot FRESCO Tanda 47 "[M150] NarrativeSound listo (35 momentos, 8 leitmotifs)" (out/tanda47) + codigo: _silencio_timer/play_narrative_silence L167-173 + regla silencio_narrativo_tras_sello aplicada L208-209 + trigger_lore_oculto() L224 (API lista; emision M148 pendiente — ya documentado en M150). Politica dups 052; sin re-ejecutar.
+61. M13: el candado del tools por tier (los 24 tipos de materiales — el front del tier). — [x] 2026-10-18 (Tanda 53): candado del tools por tier verificado con corrida FRESCA de hoy (out/tanda53): M13 test_herramientas 334/0 + iter4 28/0 (contrato nombre_id-M15; hacha->piedra RECHAZADA; e2e pico agota nodo 2 golpes->drops M14), M15 test_recursos 23/0 (campos herramienta_requerida/golpes_requeridos + drops mejorada QA iter 6), M35 test_mineria 92/0 (veta_cobre requiere pico; veta_cobre rechaza hacha; RF6 mejorada T3+). Los 24 tipos de materiales = M47 materiales_recursos.json (n_tipos=24 verificado por script; boot T47 L82; arte3d/materiales_recursos.gd L31-33). Candado por tier: fix H-A mineria/mining_manager.gd L19-33. Politica 052; corrida fresca (no reciclada).
+62. M35-Minería: el catalogo de vetas (6 vetas del front del mining). — [x] 2026-10-18 (Tanda 54): catalogo de vetas verificado — las 6 vetas REALES enumeradas en data/mining/ores.json (veta_cobre, veta_hierro, veta_oro, veta_cristal, veta_ancestral, veta_polvo_estrellas; campos completos: region/banda/golpes/drops/valor/respawn/requiere_mejorada) + loader mining_vein_catalog.gd (registra en M15 sin pisar _mineral_cobre L54; drop a item real H10/BUG-132 L78-79; leer_catalogo L96-105) + boot de hoy "[M35] Catalogo de vetas mineras cargado: 6 vetas" (out/tanda53/test_mineria.log L17) + test_mineria 92/0 (corrida fresca Tanda 53, out/tanda53) + checklist M35 L94/L60/L123 [x]. Politica 052.
+63. M36-Fauna: el catalogo de 7 especies (el front del fauna). — [x] 2026-10-18 (Tanda 55): catalogo de 7 especies verificado — las 7 REALES enumeradas en data/fauna/catalog.json (gaviota_playera, conejo_pradera, nutria_ribera, lechuza_bosque, salamandra_ancestral, cangrejo_humedal, halcon_montana; campos completos: bioma/rareza/ventana/comportamiento/clase/manada/escala/velocidades/color_variantes) + loader fauna_catalog.gd (L13 path; cargar L20-31; fallback in-code 5 L75-84) + corrida FRESCA de hoy: boot "[M36] FaunaManager ready: 7 especies en catalogo" (out/tanda55/test_fauna.log L18) y suite test_fauna 58 checks 0 fallos (L191; "7 especies exactas" L138) + checklist M36 L28-31/L159-162/L231/L241 [x]. Politica 052; corrida fresca (no reciclada).
+64. M15: los nodos fibonacci (el front del recursos por el spawn del boot). — [sesion 2026-10-18 06:11: cronometro apagado por orden del fundador a mitad de la investigacion; "fibonacci" sin referente en el repo (0 hits scripts/data/docs/out); el front del spawn del boot SI verificado (12 nodos; boot T47); hallazgos completos en el informe de cierre del canal; item SIGUE pendiente]
 65. M16: la mesa de trabajo (3866, 3862 — el front del crafting).
 66. M48-Cableado: el FSM 11 estados (el front del cableado del jugador).
 67. Fix de economía M38 (hallazgo B): las guardas anti-falso-verde ya aplicadas — la verificación por el OWN run headless. — [x] 2026-10-17 (Tanda 1): OWN run headless; suites economía rc=0, 0 SCRIPT ERROR.
@@ -315,7 +315,7 @@
 
 ### Bloque M — El front de presupuesto de memoria.
 
-65. M62-Memoria: budget_registry — el 2000 MB total presupuesto (preset=media).
+65. M62-Memoria: budget_registry — el 2000 MB total presupuesto (preset=media). — [x] 2026-10-18 (Tanda 48): dup de #19 con la cita de la vuelta 15 (misma evidencia — politica dups 052).
 66. M62: texture_memory (el 500/505 loops — el 24222 bytes trunc — test fix). — [x] 2026-10-17 (Tanda 13): texture_memory verificado — iter5 rc=0 (60 checks: bloque F "Atlas: evicción LRU con log") + iter3 bloque I "texturas/atlas/detector 500" en verde (133 checks) — out/tanda13
 67. M62: global_pool (el 67/110/176 — las shadowing conversions — revisar). — [x] 2026-10-17 (Tanda 14): convertido (limite→tope en L67/L110/L176; método limite() intacto) + verificado — pool_iter2 25/0, enforcement_m62 47/0, base 27/0 rc=0 — out/tanda14
 
@@ -382,15 +382,15 @@
 
 ### Bloque Y — La calidad del front de los objetos (the items de front).
 
-96. M55-Diary: 14 categorías 44 entradas (the diary front).
-97. M75: 7 actividades postgame the front.
+96. M55-Diary: 14 categorías 44 entradas (the diary front). — [x] 2026-10-18 (Tanda 42): dup de #50 (misma evidencia — política dups 052).
+97. M75: 7 actividades postgame the front. — [x] 2026-10-18 (Tanda 43): dup de #51 (misma evidencia — política dups 052).
 
 ### Bloque Z — El flujo final del front del proyecto.
 
-98. M99-Monetización: 3 ediciones 2 DLC the front.
-99. M119-Update fijo: 1.0.0 estable (the stable front).
-100. M97 de front (the automated front — quality.yml gate verde).
-101. The final energy — flow the front (the entertainer of — front).
+98. M99-Monetización: 3 ediciones 2 DLC the front. — [x] 2026-10-18 (Tanda 44): dup de #52 (misma evidencia — política dups 052).
+99. M119-Update fijo: 1.0.0 estable (the stable front). — [x] 2026-10-18 (Tanda 45): dup de #53 (misma evidencia — política dups 052).
+100. M97 de front (the automated front — quality.yml gate verde). — [x] 2026-10-18 (Tanda 46): dup de #54 (misma evidencia — política dups 052).
+101. The final energy — flow the front (the entertainer of — front). — [x] 2026-10-18 (Tanda 47): dup de #55 (misma evidencia — política dups 052).
 
 ---
 **Total: 101 tareas** (la flota de bloques A-Z del frente DS — los ítems del CI/Build/economía/estructura real del proyecto).
@@ -401,14 +401,14 @@
 
 ======================================================================
 ### Bloque W2 — Repo 21:59 (+11 para superar 100 items)
-1. M62-Memoria: budget_registry con el preset media (2000 MB total — el front del presupuesto).
-2. M62: texture_memory con los densidad/filtros (el front de los texture pools).
-3. M62: global_pool con las shadowing conversiones (el front del global pool).
-4. M62: memory_monitor con el presupuesto_superado signal (el front del monitor).
-5. M62: narrative_sound con el silencio_timer y el trigger_lore (el front del sonido narrativo).
-6. M13: el candado del tools por tier (los 24 tipos de materiales — el front del tier).
-7. M35-Minería: el catalogo de vetas (6 vetas del front del mining).
-8. M36-Fauna: el catalogo de 7 especies (el front del fauna).
+1. M62-Memoria: budget_registry con el preset media (2000 MB total — el front del presupuesto). — [x] 2026-10-18 (Tanda 48): dup 102 de #56 con la cita de la vuelta 15 (misma evidencia — politica dups 052).
+2. M62: texture_memory con los densidad/filtros (el front de los texture pools). — [x] 2026-10-18 (Tanda 49): dup 103 de #57 con la cita de la vuelta 16 (misma evidencia — politica dups 052).
+3. M62: global_pool con las shadowing conversiones (el front del global pool). — [x] 2026-10-18 (Tanda 50): dup 104 de #58 con la cita de la vuelta 17 (misma evidencia — politica dups 052).
+4. M62: memory_monitor con el presupuesto_superado signal (el front del monitor). — [x] 2026-10-18 (Tanda 51): dup 105 de #59 con la cita de la vuelta 15 (misma evidencia — politica dups 052).
+5. M62: narrative_sound con el silencio_timer y el trigger_lore (el front del sonido narrativo). — [x] 2026-10-18 (Tanda 52): dup 106 de #60 con la cita del cierre M150 (suite 12/0; Logs 884/898) (misma evidencia — politica dups 052).
+6. M13: el candado del tools por tier (los 24 tipos de materiales — el front del tier). — [x] 2026-10-18 (Tanda 53): dup 107 de #61 con la cita del cierre Tanda 53 (misma evidencia — politica dups 052; corrida fresca out/tanda53: M13 334/0+28/0, M15 23/0, M35 92/0).
+7. M35-Minería: el catalogo de vetas (6 vetas del front del mining). — [x] 2026-10-18 (Tanda 54): dup 108 de #62 con la cita del cierre Tanda 54 (misma evidencia — politica dups 052; ores.json 6 vetas + boot L17 + test_mineria 92/0).
+8. M36-Fauna: el catalogo de 7 especies (el front del fauna). — [x] 2026-10-18 (Tanda 55): dup 109 de #63 con la cita del cierre Tanda 55 (misma evidencia — politica dups 052; catalog.json 7 especies + boot L18 + test_fauna 58/0 FRESCO out/tanda55).
 9. M15: los nodos fibonacci (el front del recursos por el spawn del boot).
 10. M16: la mesa de trabajo (3866, 3862 — el front del crafting).
 11. M48-Cableado: el FSM 11 estados (el front del cableado del jugador).
