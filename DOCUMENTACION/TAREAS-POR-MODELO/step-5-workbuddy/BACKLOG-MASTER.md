@@ -97,7 +97,7 @@
 51. Barrido de 10 módulos ✅ más antiguos (muestreo 5 c/u, veredicto) — 10 [C]
 52. Barrido siguiente de 10 ✅ — 10 [C]
 53. Barrido de módulos 🟡 con [?] sin justificación inline — 10 [C]
-54. Corrida `scripts/verificar_checklist.py` + reporte de drifts — 6 [M]
+54. Corrida `scripts/verificar_checklist.py` + reporte de drifts — 6 [M] — **[x] HECHO 2026-10-18 19:22 (Step-5-WorkBuddy, Log 1992, msg 78):** corrida real del verificador (EXIT 1 = 16 alertas; exit 3 seria DETECTOR CIEGO, no es el caso). Cobertura: 167 checklists plan-actual / 168 filas (faltan=0, sobran=1). Las 16 alertas clasificadas en 4 grupos con la celda exacta a aplicar (todo en CHECKLIST-GLOBAL.md, que NO toco): **A** 7 filas con [x]>0 y Estado 'Disponible' (115/127/137/138/142/143/144 - solo falla la celda Estado, el Progreso cuadra; propuesta -> 'Con dudas', ninguna habilita Completado); **B** 1 deriva de conteo real (125-Terminos-De-Servicio: GLOBAL 104/105 vs 105 [x] medidos -> 105/105 + fecha 2026-10-18); **C** 1 fila stale (157-Medios-De-Transporte: plan-actual/ VACIO, nota con barras invertidas literales); **D** 7 avisos 21.4.7 (104/139/41/45/46/48/49 - ninguno mio, decision del director). No se cruzan con la deuda de los 16 'Totales' incoherentes ni con mis 6 modulos. Detalle en informe-078-acuse-094-verificador-16-alertas-2026-10-18.md.
 55. Corrida `scripts/verificar_backlogs.py` + reporte — 6 [M]
 56. Corrida `scripts/verificar_pool_numeros.py` + saneo (respaldo director) — 4 [S]
 57. Barrido de Totales inconsistentes (drift > 5) en CHECKLIST-GLOBAL — 8 [C]
@@ -545,3 +545,36 @@ M104, M88, M160.
   0 autosellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot.
 - **Proxima:** NN > 70; sin mensaje -> item 70 (barrido de tildes/mojibake en archivos nuevos del
   dia) u otro de la cola.
+
+
+## Registro de la vuelta 2026-10-18 19:22 (tracker 70 -> 94, RAMA 1 + RAMA 2 / acuse 094 + item 54)
+
+- **Mensaje nuevo del director: 094** ("veredicto barrido 70", 2026-10-18 06:15). Acuse puro + su
+  veredicto sobre mis 4 hallazgos del barrido del dia (todos confirmados: mojibake real 0; los 4
+  Hallazgos eran falsos positivos o ajenos deliberados). Respondido con msg 78 + Log 1992.
+- **Verificacion en disco de las 3 afirmaciones del 094:** (1) flip M126 [?]->[x] del director =
+  CONFIRMADO (commit eca50bc; L90 = [x]; git status limpio en esas rutas); (2) artefacto
+  legal/marketing_legal_review.md = EXISTE (7.073 B, LF, sin BOM, mtime 02:07 de hoy); (3) fila 126
+  del GLOBAL sincronizada solo a MEDIAS: Notas con la linea nueva, pero celda Estado sigue 'Con
+  dudas' con 101 [x] / 0 [?] / 0 [ ].
+- **Hallazgo 1 (ajeno, NO tocado):** L90 de M126 y el banner L9-10 siguen afirmando 'ARTEFACTO
+  INEXISTENTE ... legal/ y docs/legal/ no existen' cuando el artefacto existe. [x] con justificacion
+  falsa (familia M79-L7 / M73 L215). Fix de texto, dueno: director o dueno del modulo.
+- **Hallazgo 2 (ajeno, NO tocado):** 'Con dudas' sin [?] es incoherente con la leyenda. No propongo
+  Completado automatico: el artefacto lo hice yo -> sello 21.8 no auto; el sello del 2026-10-12 fue
+  denegado y no se hereda. Corresponde re-verify independiente (Hy3/agnes).
+- **RAMA 2 (item 54, Bloque C):** scripts/verificar_checklist.py -> EXIT 1 con 16 alertas,
+  clasificadas por grupo con la celda exacta a aplicar (A: 7 filas 'Disponible' con [x] - solo celda
+  Estado; B: 125 104/105 vs 105 medidos; C: 157 con plan-actual/ vacio; D: 7 avisos 21.4.7). Casa
+  propia OK: las 16 no se cruzan con mis 6 modulos ni con la deuda de los 16 'Totales'.
+- **Housekeeping:** el tracker llegaba ya en 94 con mtime 19:09 y SIN respuesta ni artefactos de una
+  corrida previa (mi ultimo artefacto seguia siendo el 77 de las 05:06) -> corrida anterior toco el
+  tracker y no llego a responder; este msg 78 es la respuesta que faltaba. Pool de canal: 78
+  consumido (ultimo+1; cabeza seguia stale en 62, reportado). Pool de Logs: cabeza 1992 medida justo
+  antes -> consumida (cabeza 1993).
+- **Artefactos:** msg 78 (UTF-8 sin BOM, LF puro 5.917 B), informe-078 (LF, 7.371 B), Log 1992
+  (ASCII puro por bytes: 5.138 B, 88 CRLF, 0 LF sueltos, sin BOM), este registro. Tracker 94.
+- **Limites:** 0 commits / 0 push / 0 archivos ajenos modificados / 0 ediciones a
+  CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 flips / 0 autosellos 21.8.
+- **Proxima:** NN > 94; sin mensaje -> item 55 (corrida verificar_backlogs.py + reporte) u otro de la
+  cola.

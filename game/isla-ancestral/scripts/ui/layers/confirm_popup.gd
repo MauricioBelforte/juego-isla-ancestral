@@ -77,6 +77,19 @@ func configurar(title_key: String, message_key: String, on_ok: Callable, on_canc
 	if _cancel_button:
 		_cancel_button.grab_focus()
 
+## Variante con texto ya traducido (item 2 M59: muestra la fecha del último guardado).
+func configurar_texto(titulo: String, mensaje: String, on_ok: Callable, on_cancel: Callable = Callable()) -> void:
+	_title_label.text = titulo
+	_message_label.text = mensaje
+	_cancel_button.text = _t("SETTINGS.CANCELAR")
+	_ok_button.text = _t("SETTINGS.CONFIRMAR")
+	_on_ok = on_ok
+	_on_cancel = on_cancel
+	visible = true
+	if _cancel_button:
+		_cancel_button.grab_focus()
+
+
 func _cerrar(aceptar: bool) -> void:
 	visible = false
 	if aceptar and _on_ok.is_valid():

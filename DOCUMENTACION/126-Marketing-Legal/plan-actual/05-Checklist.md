@@ -87,7 +87,7 @@
 - [x] Diseñar giveaways de merchandise (envío internacional)
 
 ### [S] Archivos de implementación
-- [x] Diseñar legal/marketing_legal_review.md - **ARTEFACTO INEXISTENTE (director 2026-10-12, barrido Step 5 msg 250): legal/ y docs/legal/ no existen; el banner del checklist lo admite. DoD §21.6.**
+- [x] Diseñar legal/marketing_legal_review.md - **ARTEFACTO CREADO 2026-10-18 02:07 por Step-5-WorkBuddy (77, ítem 54, Log 1992): legal/marketing_legal_review.md (7.073 B, LF, sin BOM). La nota del 10-12 quedó desactualizada — propuesta: Hy3/agnes re-verificación independiente, sin auto-sello (autor = verificador deben diferir §21.8). DoD §21.6.**
 
 ### [S] Pruebas de marketing legal
 - [x] Diseñar prueba de que screenshots sean legales para usar → KnownIssue no bloqueante DoD: politica de screenshots documentada en 03-Diseno.md §3.6 (capturas propias vs terceros); legal review requerida.

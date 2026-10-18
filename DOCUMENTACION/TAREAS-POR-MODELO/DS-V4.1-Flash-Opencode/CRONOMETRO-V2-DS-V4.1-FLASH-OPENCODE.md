@@ -1,4 +1,4 @@
-# CRONÓMETRO V2 — DS-V4.1-Flash-Opencode — estado: APAGADO
+# CRONÓMETRO V2 — DS-V4.1-Flash-Opencode — estado: ACTIVO
 
 **Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash)
 **Plataforma:** OpenCode
@@ -7,9 +7,9 @@
 
 ## Estado actual
 
-- **APAGADO** (2026-10-18 06:11, orden del fundador: fin de sesion). Estuvo ACTIVO desde 2026-10-17 04:18 (cadencia 5 min); vueltas 0-47 registradas en la tabla (ultima cerrada: 47). Vuelta 48 (T56, item 64) abortada a mitad de investigacion — sin marcas ni log (pool Logs head 1991 intacto); hallazgos y detalle en el informe de cierre del canal (msg 116).
-- Sin mensajes del director pendientes al activar (canal procesado completo hasta 038).
-- Marcador de posición: `Mensajes entre modelos/DS-V4.1-Flash-Opencode/.ultima-revision-ds.txt` = 38 (número más alto del canal ya procesado).
+- **ACTIVO** (2026-10-18 19:08, reactivacion por orden del fundador: "nuevo dia, activa tu loop automatico"; mecanismo confirmado: beat sleep 300 + scan). Ultima vuelta cerrada: **51** (Tanda 58 — item 66 + dup 112: M48-Cableado FSM 11 estados del jugador; cierre por politica 052 con cita T17 + anclas frescas; Log 1994; informe de vuelta 51). Acuse 124 leido (vuelta 50 aceptada + orden item 66). Sesion previa cerrada 2026-10-18 06:11 (msg 116).
+- Canal procesado completo hasta el informe de la vuelta 51 (acuse 124 leido: vuelta 50 aceptada + orden vuelta 51 item 66; cierre T58 reportado en el informe; el 125 quedo consumido del pool sin archivo).
+- Marcador de posición: `Mensajes entre modelos/DS-V4.1-Flash-Opencode/.ultima-revision-ds.txt` = 119 (número más alto del canal ya procesado).
 
 ## El ciclo V2 (3 pasos EN ORDEN — nunca cortar)
 
@@ -112,6 +112,12 @@ autorización del fundador.
 | 46 | 05:43 | (sin mensajes nuevos al arrancar — cola propia; acuse vuelta-45 llegado 05:40 durante la tanda) | Tanda 54: item 62 (M35 catalogo de vetas — 6 vetas enumeradas en ores.json + loader mining_vein_catalog + boot L17 + test_mineria 92/0) + dup 108 (W2#7) cerrados (politica 052); Log 1989; msg 113; out/tanda53 | OK |
 
 | 47 | 05:54 | (sin mensajes nuevos — cola propia; acuse 085 respondido en msg 113) | Tanda 55: item 63 (M36 fauna — catalogo 7 especies enumeradas en catalog.json + loader fauna_catalog + boot L18 + test_fauna 58/0 FRESCO out/tanda55) + dup 109 (W2#8) cerrados (politica 052); Log 1990; msg 114; out/tanda55 | OK |
+
+| 49 | 2026-10-18 19:19 | (reactivacion nuevo dia por orden del fundador; acuse 117 leido — sin pendientes) | Tanda 56: item 64 (M15 front de recursos por el spawn del boot — boot FRESCO rc=0 12 nodos + test_recursos 23/0 + spawner_runtime 27/0; out/tanda56) + dup 110 (W2#9) cerrados (politica 052); Log 1991; msg 119 | OK |
+
+| 50 | 2026-10-18 19:39 | (beat sleep300: acuse 121 leido — vuelta 49 aceptada + orden item 65) | Tanda 57: item 65 (M16 mesa de trabajo (3866, 3862) — el front del crafting: boot FRESCO rc=0 "[M16] Mesa de trabajo colocada en (3866, ~, 3862)" + test_crafting 0 fallos + test_m16_crafting_toast 9/0; out/tanda57) + dup 111 (W2#10) cerrados (politica 052); Log 1993; msg 123 | OK |
+
+| 51 | 2026-10-18 19:55 | (beat sleep300: acuse 124 leido — vuelta 50 aceptada + orden item 66) | Tanda 58: item 66 (M48-Cableado FSM 11 estados del jugador — politica 052: cita T17/vuelta 9 (player_fsm 11 estados L25-37 + suites 87/0+12/0+8/0 = 107 checks; out/tanda17; Log 1928) + anclas frescas de codigo (animacion_jugador_m48.gd cableado por estado)) + dup 112 (W2#11) cerrados; Log 1994 | OK |
 
 ## Cierre de sesion (2026-10-18 06:11) — cronometro APAGADO
 

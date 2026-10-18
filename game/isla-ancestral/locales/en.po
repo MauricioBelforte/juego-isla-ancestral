@@ -49,6 +49,30 @@ msgstr "Settings"
 msgid "SETTINGS.GUARDAR"
 msgstr "Save"
 
+msgid "SETTINGS.GUARDAR_TITULO"
+msgstr "Save game"
+
+msgid "SETTINGS.GUARDAR_CONFIRMA"
+msgstr "Save the game to slot 1?"
+
+msgid "SETTINGS.GUARDAR_EXITO"
+msgstr "Game saved successfully."
+
+msgid "SETTINGS.GUARDAR_FALLO"
+msgstr "Could not save the game."
+
+msgid "SETTINGS.GUARDAR_BLOQUEADO"
+msgstr "Cannot save now (a dialog, load or panel is open)."
+
+
+msgid "SETTINGS.ULTIMO_GUARDADO"
+msgstr "Last save"
+
+msgid "SETTINGS.SIN_GUARDADO_PREVIO"
+msgstr "No previous save."
+
+
+
 msgid "SETTINGS.SALIR"
 msgstr "Quit"
 

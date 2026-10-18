@@ -31,4 +31,6 @@ func _ready() -> void:
 		push_error("[PREVIEW] PauseLayer no registrada (stack vacío o distinto)")
 		return
 	pausa.open()
-	print("[PREVIEW] PauseLayer abierta para captura visual (tema cozy actual)")
+	if pausa.has_method("_pedir_confirmacion_guardado"):
+		pausa._pedir_confirmacion_guardado()
+		print("[PREVIEW] ConfirmPopup de guardado con meta de último guardado (item 2 cola)")

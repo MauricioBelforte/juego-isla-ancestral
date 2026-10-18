@@ -49,6 +49,30 @@ msgstr "Ajustes"
 msgid "SETTINGS.GUARDAR"
 msgstr "Guardar"
 
+msgid "SETTINGS.GUARDAR_TITULO"
+msgstr "Guardar partida"
+
+msgid "SETTINGS.GUARDAR_CONFIRMA"
+msgstr "¿Guardar la partida en el slot 1?"
+
+msgid "SETTINGS.GUARDAR_EXITO"
+msgstr "Partida guardada correctamente."
+
+msgid "SETTINGS.GUARDAR_FALLO"
+msgstr "No se pudo guardar la partida."
+
+msgid "SETTINGS.GUARDAR_BLOQUEADO"
+msgstr "No se puede guardar ahora (hay un diálogo, carga o panel abierto)."
+
+
+msgid "SETTINGS.ULTIMO_GUARDADO"
+msgstr "Último guardado"
+
+msgid "SETTINGS.SIN_GUARDADO_PREVIO"
+msgstr "Sin guardado previo."
+
+
+
 msgid "SETTINGS.SALIR"
 msgstr "Salir"
 

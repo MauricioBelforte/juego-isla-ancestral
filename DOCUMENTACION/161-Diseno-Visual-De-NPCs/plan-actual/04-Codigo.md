@@ -1,7 +1,7 @@
-**Modelo:** MiMo V2.5
+﻿**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
-# 04-Codigo.md — Módulo 161: Diseño Visual de NPCs
+# 04-Codigo.md â€” MÃ³dulo 161: DiseÃ±o Visual de NPCs
 
 ## 1. Estructura de Datos Propuesta
 
@@ -21,7 +21,7 @@ extends Resource
 ## Isla donde vive
 @export var isla: IslandType
 
-## Rasgos físicos
+## Rasgos fÃ­sicos
 @export var piel: PielType
 @export var cabello: CabelloType
 @export var ojos: OjosType
@@ -36,7 +36,7 @@ extends Resource
 ## Accesorios
 @export var accesorios: Array[AccesorioData]
 
-## Herramienta en mano (ID de M159 o vacío)
+## Herramienta en mano (ID de M159 o vacÃ­o)
 @export var herramienta_derecha: String
 @export var herramienta_izquierda: String
 
@@ -83,7 +83,7 @@ extends Resource
 ## Nombre del accesorio
 @export var nombre: String
 
-## Ubicación (cuello, manos, cinturón, cabeza)
+## UbicaciÃ³n (cuello, manos, cinturÃ³n, cabeza)
 @export var ubicacion: String
 
 ## Color (HEX)
@@ -126,17 +126,17 @@ enum OjosType {
     GRIS     ## EY-05 #808080
 }
 
-## Complexión física.
+## ComplexiÃ³n fÃ­sica.
 enum ComplexionType {
     MEDIA,
     MUSCULOSA,
     DELGADA,
     REDONDA,
     ALTA,
-    PEQUENA  ## para niños
+    PEQUENA  ## para niÃ±os
 }
 
-## Estaciones del año.
+## Estaciones del aÃ±o.
 enum EstacionType {
     PRIMAVERA,
     VERANO,
@@ -148,16 +148,16 @@ enum EstacionType {
 ### 1.5 Autoload: NPCVisualDatabase.gd
 
 ```gdscript
-## Autoload que gestiona el diseño visual de todos los NPCs.
+## Autoload que gestiona el diseÃ±o visual de todos los NPCs.
 extends Node
 
-## Diccionario de diseños visuales: npc_id -> NPCVisualData
+## Diccionario de diseÃ±os visuales: npc_id -> NPCVisualData
 var visuals: Dictionary = {}
 
 func _ready() -> void:
     _load_all_visuals()
 
-## Carga todos los diseños visuales desde archivos .tres
+## Carga todos los diseÃ±os visuales desde archivos .tres
 func _load_all_visuals() -> void:
     var dir = DirAccess.open("res://data/npc_visuals/")
     if dir:
@@ -170,7 +170,7 @@ func _load_all_visuals() -> void:
                     visuals[visual.npc_id] = visual
             file_name = dir.get_next()
 
-## Obtiene el diseño visual de un NPC
+## Obtiene el diseÃ±o visual de un NPC
 func get_visual(npc_id: String) -> NPCVisualData:
     return visuals.get(npc_id)
 
@@ -196,34 +196,34 @@ func get_seasonal_variant(npc_id: String, estacion: EstacionType) -> NPCVisualDa
 
 ```
 data/
-├── npc_visuals/
-│   ├── RIZ/
-│   │   ├── NPC-RIZ-001-mayor.tres
-│   │   ├── NPC-RIZ-002-carpintero.tres
-│   │   ├── NPC-RIZ-003-vendedora.tres
-│   │   ├── NPC-RIZ-004-sabio.tres
-│   │   ├── NPC-RIZ-005-pescador.tres
-│   │   ├── NPC-RIZ-006-agricultora.tres
-│   │   ├── NPC-RIZ-007-nina.tres
-│   │   └── NPC-RIZ-008-animador.tres
-│   ├── COR/
-│   │   ├── NPC-COR-001-herrero.tres
-│   │   ├── NPC-COR-002-pescadora.tres
-│   │   ├── NPC-COR-003-viajero.tres
-│   │   ├── NPC-COR-004-guardia.tres
-│   │   └── NPC-COR-005-nina.tres
-│   ├── CEN/
-│   │   ├── NPC-CEN-001-herrero_adv.tres
-│   │   ├── NPC-CEN-002-minero.tres
-│   │   ├── NPC-CEN-003-cocinera.tres
-│   │   ├── NPC-CEN-004-bibliotecario.tres
-│   │   └── NPC-CEN-005-guardia.tres
-│   └── AUR/
-│       ├── NPC-AUR-001-encantador.tres
-│       ├── NPC-AUR-002-sanadora.tres
-│       ├── NPC-AUR-003-guardia.tres
-│       ├── NPC-AUR-004-artista.tres
-│       └── NPC-AUR-005-viajero.tres
+â”œâ”€â”€ npc_visuals/
+â”‚   â”œâ”€â”€ RIZ/
+â”‚   â”‚   â”œâ”€â”€ NPC-RIZ-001-mayor.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-RIZ-002-carpintero.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-RIZ-003-vendedora.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-RIZ-004-sabio.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-RIZ-005-pescador.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-RIZ-006-agricultora.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-RIZ-007-nina.tres
+â”‚   â”‚   â””â”€â”€ NPC-RIZ-008-animador.tres
+â”‚   â”œâ”€â”€ COR/
+â”‚   â”‚   â”œâ”€â”€ NPC-COR-001-herrero.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-COR-002-pescadora.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-COR-003-viajero.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-COR-004-guardia.tres
+â”‚   â”‚   â””â”€â”€ NPC-COR-005-nina.tres
+â”‚   â”œâ”€â”€ CEN/
+â”‚   â”‚   â”œâ”€â”€ NPC-CEN-001-herrero_adv.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-CEN-002-minero.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-CEN-003-cocinera.tres
+â”‚   â”‚   â”œâ”€â”€ NPC-CEN-004-bibliotecario.tres
+â”‚   â”‚   â””â”€â”€ NPC-CEN-005-guardia.tres
+â”‚   â””â”€â”€ AUR/
+â”‚       â”œâ”€â”€ NPC-AUR-001-encantador.tres
+â”‚       â”œâ”€â”€ NPC-AUR-002-sanadora.tres
+â”‚       â”œâ”€â”€ NPC-AUR-003-guardia.tres
+â”‚       â”œâ”€â”€ NPC-AUR-004-artista.tres
+â”‚       â””â”€â”€ NPC-AUR-005-viajero.tres
 ```
 
 ### 2.2 Ejemplo: NPC-RIZ-002-carpintero.tres
@@ -245,7 +245,7 @@ complexion = 1  # MUSCULOSA
 
 sombrero = {
     "nombre": "Fedora de paja",
-    "estilo": "Ala ancha, cinta marrón",
+    "estilo": "Ala ancha, cinta marrÃ³n",
     "color_principal": "#F5DEB3",
     "color_secundario": "#8B6914",
     "material": "Paja",
@@ -257,15 +257,15 @@ torso = {
     "estilo": "Manga corta, arremangada",
     "color_principal": "#C4A882",
     "material": "Lino grueso",
-    "notas": "Manchas de aserrín"
+    "notas": "Manchas de aserrÃ­n"
 }
 
 piernas = {
-    "nombre": "Pantalón de trabajo",
+    "nombre": "PantalÃ³n de trabajo",
     "estilo": "Largo, resistente",
     "color_principal": "#8B6914",
     "material": "Tela gruesa",
-    "notas": "Manchas de aserrín"
+    "notas": "Manchas de aserrÃ­n"
 }
 
 pies = {
@@ -281,12 +281,12 @@ herramienta_izquierda = ""
 
 accesorios = [
     {"nombre": "Delantal de cuero", "ubicacion": "torso", "color": "#A0522D", "notas": "Bolsillos para herramientas"},
-    {"nombre": "Cinta métrica", "ubicacion": "cinturon", "color": "#FFD700", "notas": "En cinturón"},
-    {"nombre": "Lápiz", "ubicacion": "cabeza", "color": "#FFD700", "notas": "Detrás de la oreja"}
+    {"nombre": "Cinta mÃ©trica", "ubicacion": "cinturon", "color": "#FFD700", "notas": "En cinturÃ³n"},
+    {"nombre": "LÃ¡piz", "ubicacion": "cabeza", "color": "#FFD700", "notas": "DetrÃ¡s de la oreja"}
 ]
 ```
 
-## 3. Integración con Otros Módulos
+## 3. IntegraciÃ³n con Otros MÃ³dulos
 
 ### 3.1 M19 (NPC y Vecinos)
 
@@ -349,26 +349,27 @@ func get_npc_at_location(location_id: String) -> Array[String]:
 **Modelo:** stepfun-3.7-flash
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-01 15:37
-**Estado:** Iter 2 completada — catálogo 23 .tres + tests headless + docs
+**Estado:** Iter 2 completada â€” catÃ¡logo 23 .tres + tests headless + docs
 
 ### Lo que hice
-- Completé 22 archivos `.tres` faltantes (RIZ 7 + COR 5 + CEN 5 + AUR 5) sumados al ejemplo previo NPC-RIZ-002.
-- Organicé la carpeta `data/npc_visuals/` en subcarpetas por isla (`RIZ/`, `COR/`, `CEN/`, `AUR/`).
-- Expandí `test_npc_visual_database.gd` con tests de carga, filtrado por isla, validación de campos obligatorios y validación de formato HEX.
-- Actualicé `05-Checklist.md`: marqué [x] los ítems de diseño/colores/.tres/herramientas/accesorios y testing.
+- CompletÃ© 22 archivos `.tres` faltantes (RIZ 7 + COR 5 + CEN 5 + AUR 5) sumados al ejemplo previo NPC-RIZ-002.
+- OrganicÃ© la carpeta `data/npc_visuals/` en subcarpetas por isla (`RIZ/`, `COR/`, `CEN/`, `AUR/`).
+- ExpandÃ­ `test_npc_visual_database.gd` con tests de carga, filtrado por isla, validaciÃ³n de campos obligatorios y validaciÃ³n de formato HEX.
+- ActualicÃ© `05-Checklist.md`: marquÃ© [x] los Ã­tems de diseÃ±o/colores/.tres/herramientas/accesorios y testing.
 
 ### Lo que NO pude hacer (honestidad obligatoria)
-- No creé variantes estacionales como archivos `.tres` separados. El diseño de datos (`variantes_estacionales: Dictionary`) está listo, pero quedan como trabajo futuro los 92 archivos de variante (23 NPCs × 4 estaciones).
+- No creÃ© variantes estacionales como archivos `.tres` separados. El diseÃ±o de datos (`variantes_estacionales: Dictionary`) estÃ¡ listo, pero quedan como trabajo futuro los 92 archivos de variante (23 NPCs Ã— 4 estaciones).
 
 ### Intentos fallidos / decisiones
-- Intenté autocontener variantes en el `.tres` base, pero Godot requiere recursos externos para `Dictionary` de variantes. Se deja documentado en `04-Codigo.md` y log.
+- IntentÃ© autocontener variantes en el `.tres` base, pero Godot requiere recursos externos para `Dictionary` de variantes. Se deja documentado en `04-Codigo.md` y log.
 
-### Recomendaciones para el próximo agente
-- Crear variantes estacionales siguiendo la paleta §9.4 de `03-Diseno.md`.
-- Integrar con M45 (modelos 3D) y M46 (retratos 2D) cuando esos módulos avancen.
+### Recomendaciones para el prÃ³ximo agente
+- Crear variantes estacionales siguiendo la paleta Â§9.4 de `03-Diseno.md`.
+- Integrar con M45 (modelos 3D) y M46 (retratos 2D) cuando esos mÃ³dulos avancen.
 - Verificar que los IDs M159 de herramientas existan en `ItemDatabase` al integrar con M159.
 
 ```
+
 
 ## Notas de Integración M161 (agnes-3-flash, 2026-10-21, frente N650 #752)
 
@@ -376,9 +377,9 @@ func get_npc_at_location(location_id: String) -> Array[String]:
 
 | Módulo | Consumo de M161 | Estado |
 |---|---|---|
-| M159 (Catálogo) | **Wired** — 7/7 `herramienta_derecha` de los 23 NPCs resuelven a `data/items/` (art_005, her_001/004/006, tal_002) | ✅ verificado |
-| M19 (Villagers) | **Scoping distinto** — M19 = 14 NPCs nombrados (`data/villagers/`), M161 = 23 diseños por rol. No hay 1:1; consumo de M161 por villager M19 **pendiente** | ⚠️ a decisión del director |
-| M45 (Modelos 3D) / M46 (Retratos 2D) | **Pendiente (los 2 `[?]`)** — `modelo_3d=null` + `retrato_path=""` en los 23; owner M45/M46 + Hy4 | 🔴 externo |
-| M155 (Vestimenta) / M160 (Ubicaciones) / M27 / M29 / M39 | **No consumen aún** `NPCVisualData` — solo `_colector_sintaxis.gd` pre-carga el script (verificación de sintaxis, no consumo funcional) | ⚠️ integración docs |
+| M159 (Catálogo) | **Wired** — 7/7 `herramienta_derecha` de los 23 NPCs resuelven a `data/items/` (art_005, her_001/004/006, tal_002) | verificado |
+| M19 (Villagers) | **Scoping distinto** — M19 = 14 NPCs nombrados (`data/villagers/`), M161 = 23 diseños por rol. No hay 1:1; consumo de M161 por villager M19 **pendiente** | a decisión del director |
+| M45 (Modelos 3D) / M46 (Retratos 2D) | **Pendiente (los 2 `[?]`)** — `modelo_3d=null` + `retrato_path=""` en los 23; owner M45/M46 + Hy4 | externo |
+| M155 (Vestimenta) / M160 (Ubicaciones) / M27 / M29 / M39 | **No consumen aún** `NPCVisualData` — solo `_colector_sintaxis.gd` pre-carga el script (verificación de sintaxis, no consumo funcional) | integración docs |
 
 **Conclusión:** los **datos + validación de M161 están listos y verificados** (test 356/0, validador 23/0). El **consumo cross-módulo (M19/M155/M160/M27/M29/M39) queda como deuda de integración** — M161 aporta el visual; que M19 et al. lo consuman es trabajo de esos módulos (no lo toco, §21.4). El `README-FORMATO-IDS.md` documenta cómo integrarlo.
