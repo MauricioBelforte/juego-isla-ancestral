@@ -16,108 +16,109 @@
 
 # (A) COLA ACTIVA — 100+ TAREAS (tandas curadas por el director)
 
-> Depurada+repopulada 2026-10-17 07:15 por el director: SOLO tareas sin hacer (los cerrados de esta noche -> registro en (B)). Pendientes reales 93 + reposicion 7 = 100 en cola. CICLO: 1) leer ultimo archivo del canal; 2) sin mensajes: tomar tarea de aca; 3) reportar en cada vuelta (REGLA CERO).
+> Re-poblada 2026-10-18 ~06:10 por el director (verificado contra disco por agnes en #764: los 3 primeros estaban completos).
+> Fuente: los 05 de M90/M46/M161/M52/M47/M45 (nicho visual/QA). Total 87 items SIN HACER. Firmado GLM-5.3 Flash-Director.
 
-1. [x] M45-Arte-3D: medición Patrón D del checklist real (objetivo: diagonalizar pendientes, 150/171 → inventario de los 21 restantes) [S] — **cerrado agnes 2026-10-17 (msg 709): 19 [ ] + 2 [?] inventariados (11 validación needs `validate_mesh.gd`[MISS]+GLB, 5 doc [2 flippeables], 3 integración-dep); 4 registros reclamados.**
-2. M52-Particulas-Y-VFX (147/148): 1 pendiente + verificación visual de emitters en juego con capturas — 4 [M]
-3. M49-Iluminacion b1 (105/143): 38 pendientes de arte/luz → resolver por lotes de 5 con captura antes/después — 10 [M]
-4. M49-Iluminacion b3: cierre y re-contado honesto (cap_godot por lote, nomenclatura cap_49_) — 8 [M]
-5. M50-Vegetacion (129/142): 13 pendientes; spot-check visual de biomas en runtime — 8 [M]
-6. M51-Agua (140/166): 26 pendientes; QA visual de shaders/espuma/oleaje por captura — 10 [M]
-7. M47-Texturas-Y-Materiales (118/121): 3 pendientes + barrido de tildes visuales en materiales — 5 [S]
-8. M46-Arte-2D (0/110): levantar el plan-actual y planificar los primeros 20 ítems factibles headless (SVG/sprites de UI) — 10 [M]
-9. M161-Diseno-Visual-De-NPCs (94/138): 44 pendientes → lotes de 8 con captura por NPC — 10 [M]
-10. M161 b3: cierre con muestreo §21.8.2.b — 6 [M]
-11. M155-Vestimenta-Y-Accesorios (105/108): 3 pendientes — 4 [S]
-12. M159-Catalogo-De-Objetos b1 (77/146): 69 pendientes → inventario + visual QA de los ya catalogados — 10 [M]
-13. M159 b3: cierre (integración con M14/M16) — 6 [M]
-14. M48-Animación (deuda conocida: pendientes de producción de clips M45/M11): puff listado realista y fraccionable — 8 [M]
-15. M108-Pipeline-De-Assets b1 (127/205): 78 pendientes → por lotes de 10 (glb/imap/texturas) — 10 [C]
-16. M108 b3: cierre y documentación en 04-Codigo — 8 [M]
-17. M41-Musica b1 (58/110): definir lotes de stems/loops pendientes y pedir a Hy4/usuario lo generativo — 10 [M]
-18. M41-Musica b3: cierre con conteo honesto — 6 [M]
-19. M42-Sonido-Ambiental (62/100): 38 pendientes → lotes de 10 (biomas/clima/día-noche) — 10 [M]
-20. M44-ASMR-Y-Feedback (107/113): 6 pendientes — 6 [S]
-21. M150-Diseno-Sonoro-Narrativo (149/150): 1 pendiente + revisión de coherencia narrativa sonora — 3 [S]
-22. M151-Control-Final: sección QA audio (de 151) — 8 [M]
-23. QA visual V1/V2 de capturas `capturas/` de los módulos core (M08-M12): describir + detectar artefactos, reporte al director — 10 [M]
-24. QA visual de M09/M10 impostores (re-test del test del usuario 1300m con cap nueva) — 8 [M]
-25. QA visual del HUD M53 (144/165): legibilidad/contraste — 8 [M]
-26. QA visual del mapa M54 (133/177): superposiciones/leyenda — 8 [M]
-27. QA visual de M58-Accesibilidad (154/183): contraste y tamaños UI — 8 [M]
-28. QA visual M92-Tutorial (132/185): diagramas/pantallas coherentes — 8 [M]
-29. QA visual M89/M88 (menús y fuentes): glifos faltantes por idioma (i18n) — 8 [M]
-30. Re-contado honesto + spot-check del módulo M148 (115/117) — 5 [S]
-31. Re-contado honesto + spot-check de M154-Vision-Del-Agente (149/155) — 4 [S]
-32. Recontado + spot-check M150 (149/150) — 3 [S]
-33. M17-Construccion (81/175): diagnóstico de los 94 restantes y plan de flips factibles — 10 [M]
-34. M18-Casas (114/149): 35 pendientes → diagnóstico + lotes — 8 [M]
-35. M160-Ubicaciones (145/155): 10 pendientes — 8 [S]
-36. M24-Templos (126/128): 2 pendientes — 3 [S]
-37. M25-Ruinas (106/122): 16 pendientes — 8 [M]
-38. M26-Templo-Sub (117/129): 12 pendientes — 8 [M]
-39. M29-Tiempo (192/195): 3 pendientes — 3 [S]
-40. M37-Museos (96/148): 52 pendientes → diagnóstico + lotes de 10 — 10 [M]
-41. Barrido de `Obsoletos/` vs módulos en deuda: detectar material recuperable — 8 [M]
-42. Inventario de capturas faltantes en módulos cerrados (regla mínimo 2/módulo) — 8 [M]
-43. Normalización de nombres de capturas según nomenclatura (cap_id_fecha_nota) — 6 [M]
-44. Auditoría visual de README por módulo (captura vigente enlazada) — 10 [M]
-45. Documentación de hallazgos de QA visual en `11-BUGS.md` con firma — 6 [M]
-46. Barrido de BUG-### abiertos con pieza visual (impostor, HUD, NPCs) y diagnóstico — 10 [M]
-47. Medición Patrón D de M05-M12 (diagonal de conteos vs. Notas) — 8 [M]
-48. Medición de M13-Herramientas (84/120) — modulo propio de agente — 8 [M]
-49. Medición de M15-Recursos (190/219): 29 pendientes, diagnóstico — 8 [M]
-50. Complemento M20-Amistad (50/148): 98 pendientes — UI/visual friendship — 10 [M]
-51. M21-Dialogos: apoyo visual (retratos) — 8 [M]
-52. M161 × M20: coherencia visual de caras/relaciones — 8 [M]
-53. M23-Historias-Secundarias (24/104): diagnóstico de contenido visual requerido — 8 [M]
-54. M147-World-Building (65/134): apoyo visual (planos/mockups) — 10 [M]
-55. M152-Principios-Innegociables: QA de imágenes/documentación (202/202, refresco visual) — 4 [S]
-56. M97/M98/M100: QA visual de store/trailer/comunidad (✅ con deuda visual) — 8 [S]
-57. M95-Monetización (19/113): lectura y comentarios visuales de pricing page — 8 [M]
-58. M121/M122 (si liberados): QA visual de crash-reporting UI — 6 [M]
-59. Revisión de GUIA-COMUNICACION: tablas de aliases para nuevos modelos (soporte visual de canales) — 4 [S]
-60. Cosecha de prompts de assets en `.claude/skills/` aplicables a M45/M46 — 6 [M]
-61. M141-Beta (146/147): 1 pendiente + QA visual del build beta si existe — 4 [S]
-62. M142-RC (23/129): pre-visual de build y checklist visual — 8 [M]
-63. M143/M144: planeación visual de lanzamiento — 8 [M]
-64. M137-Prototipo (8/131): QA visual de prototipos jugables cuanto existan — 8 [M]
-65. M138-Vertical-Slice (11/131): planeación de shots de gameplay con capturas — 8 [M]
-66. M145-Diseno-Experiencia (92/105): 13 pendientes — 8 [M]
-67. M146-Diseno-Emocional (91/100): 9 pendientes — 8 [M]
-68. M158/Zonas (53/140): apoyo visual a desbloqueos — 8 [M]
-69. M156-Terrenos (202/307): apoyo visual a 105 restantes (planos/croquis) — 10 [M]
-70. Ronda de capturas renovadas de 10 módulos cerrados (evidencia fresca) — 10 [M]
-71. QA visual M50-Vegetación: captura de los 65 instanciados por bioma.
-72. QA visual M51-Agua: shader olas+fresnel day/night (captura V2).
-73. QA visual M161-NPCs: los 23 diseños visuales (coherencia cromática).
-74. QA visual M45-Player: el voxel player (override azul omitido — revisar skin).
-75. QA visual M15: los 14 nodos recursos de la isla.
-76. QA visual M163: el Chaman del Monte + 6 puntos de incienso.
-77. QA visual M36-fauna: 13 individuos/3 zonas (conejos/gaviotas/cangrejos).
-78. QA visual M09-Horizonte: disco base r1800 + anillo arena.
-79. QA visual M25: la Chozavil ruina (2260, 21, 2760).
-80. QA visual M28: las 4 rutas (TRP 10 paradas, 20 rutas).
-81. QA visual M65: las manadas/bancos (PackLogic/SchoolLogic).
-82. QA visual M51: el plano de agua 6200x6200 (y=6.00).
-83. QA visual M39-Bosque: los árboles low-poly y el chancho (la paleta del bioma).
-84. QA visual M60-DataStore: los provider buildings activos (el front de guardado).
-85. QA visual M116: los 3 plataformas del instalador (el front del instalador).
-86. QA visual M119: el canal estable 1.0.0 (el estado del update).
-87. QA visual M100: los 5 canales comunitarios (el front del community).
-88. QA visual M121: las 15 FAQ del support (el front del support).
-89. QA visual M123: los 2 mods (el front del modding).
-90. QA visual M124: las 3 piezas UGC (el front del UGC).
-91. QA visual M95: los 3 ediciones + 2 DLC (el front del monetización).
-92. QA visual M147: el canon 1.0.0 (6 personajes, 8 lugares — el front del lore).
-93. QA visual M160: los 39 catálogos + 48 ubicaciones y 13 islas.
-94. **Niebla de guerra en el minimapa** (recorte del FogTextureRect) [M] —
-95. **Textura caché del MapManager** reutilizada sin segundo bake ni
-96. **Actualización por señales** (`exploration_changed`, `markers_changed`,
-97. **Textura base del mapa desde chunk data** del mundo (M10) [C].
-98. Acceso al mapa completo con click/foco sobre el minimapa (`map_toggle`). ✅ iter 2: KEY_M en FullMapLayer.
-99. Convivencia con la pila de capas (diálogo abierto + mapa se encola).
-100. Pausa coherente con M29/M30 al abrir el mapa. ✅ iter 3: TimeCalendar.pausa()/resume() (fix nombre autoload + método en español).
+1. 90-Configuracion-Grafica: Definir culling de objetos fuera de distancia
+2. 90-Configuracion-Grafica: Definir LODs para objetos lejanos (M50) — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_island.gd` L143-154 configura `lod_split_count = 5` y `lod_distance = 160.0` (anillos 2×/4×/8×/16×/32×). No se encontró LOD ni culling por distancia para objetos individuales.
+3. 90-Configuracion-Grafica: Definir iluminación volumétrica (baja/media: off, alta: on, ultra: alta calidad)
+4. 90-Configuracion-Grafica: Definir animación por wind shader
+5. 90-Configuracion-Grafica: Definir interacción con jugador
+6. 90-Configuracion-Grafica: Definir parallax para profundidad
+7. 90-Configuracion-Grafica: Definir colisión de partículas con world
+8. 90-Configuracion-Grafica: Definir toggle de post-processing
+9. 90-Configuracion-Grafica: Definir efectos (bloom, motion blur, depth of field, color grading, tonemapping)
+10. 90-Configuracion-Grafica: Definir activación/desactivación de todos los efectos
+11. 90-Configuracion-Grafica: Definir toggle de bloom — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** el bloom está **activo** en la escena principal (`main_island.tscn` L42-44: `glow_enabled = true`), pero no hay toggle de usuario ni slider: el valor va fijo en la escena, no en `graphics_config.gd`.
+12. 90-Configuracion-Grafica: Definir intensidad (slider 0-1)
+13. 90-Configuracion-Grafica: Definir threshold para fuentes de luz brillantes
+14. 90-Configuracion-Grafica: Definir intensidad (slider 0-1)
+15. 90-Configuracion-Grafica: Definir sample count (slider 4-16)
+16. 90-Configuracion-Grafica: Definir motion blur basado en velocidad de cámara
+17. 90-Configuracion-Grafica: Definir más blur cuando la cámara se mueve más rápido
+18. 90-Configuracion-Grafica: Definir desactivado por defecto (causa mareo)
+19. 90-Configuracion-Grafica: Definir toggle de depth of field
+20. 90-Configuracion-Grafica: Definir intensidad (slider 0-1)
+21. 90-Configuracion-Grafica: Definir distancia (slider 0-100)
+22. 90-Configuracion-Grafica: Definir depth of field basado en distancia de la cámara
+23. 90-Configuracion-Grafica: Definir blur para objetos fuera de foco
+24. 90-Configuracion-Grafica: Definir aperture controla cuánto blur
+25. 90-Configuracion-Grafica: Definir detección de GPU y habilitación correspondiente
+26. 90-Configuracion-Grafica: Definir 125% (oversampling 1.25x)
+27. 90-Configuracion-Grafica: Definir 150% (oversampling 1.5x)
+28. 90-Configuracion-Grafica: Definir detección de RAM (OS.get_static_memory_usage())
+29. 90-Configuracion-Grafica: Definir detección de CPU (OS.get_processor_name())
+30. 90-Configuracion-Grafica: Diseñar tamaño de fuente (slider 0.5x a 2x)
+31. 90-Configuracion-Grafica: Diseñar alto contraste (toggle)
+32. 90-Configuracion-Grafica: Diseñar reducción de motion blur (opción para reducir mareo)
+33. 90-Configuracion-Grafica: Diseñar reducción de bloom (opción para reducir distracción visual)
+34. 90-Configuracion-Grafica: Diseñar aplicación en tiempo real
+35. 90-Configuracion-Grafica: Diseñar FPS counter (opcional, en debug)
+36. 46-Arte-2D: Definir iconos de todos los ítems de M14/M15 con claves i18n [M] — Log 726: inventario data-driven (inventario_2d.json, 6 iconos de recursos M15 sembrados; el resto se agrega al catálogo) **↔ M46-recon: asset-existencia 0/48 = `#esperando:assets-2d` (dep M45/M108/art).**
+37. 46-Arte-2D: Definir legibilidad mínima 32 px (prueba obligatoria) [M] — Log 726 (§6) **↔ M46-recon: la REGLA está en §6 pero la PRUEBA 32px requiere assets = `#esperando:assets-2d`.**
+38. 46-Arte-2D: Definir retrato de cada NPC (M19) y jugador [M] — Log 726: pt_npc_riz_001_* (5 expresiones) sembrados en inventario; patrón replicable por NPC
+39. 46-Arte-2D: Definir iconos de acciones (M57): interactuar, atacar, saltar, menú [M] — Log 726 (§4 familia ui_art_; estados en inventario)
+40. 46-Arte-2D: Definir set de símbolos para M24/M25/M26 sin palabras [M] — Log 726: 4 sym_sello_* (RIZ/COR/CEN/AUR) en inventario
+41. 46-Arte-2D: Definir ilustración pergamino para mapas del tesoro (M25) [M] — Log 726: illus_mapa_tesoro 1024 en inventario
+42. 46-Arte-2D: Definir marco común de insignias (círculo + figura + borde de rareza) [M] — Log 726 (§4; badge_logro_marco en inventario)
+43. 46-Arte-2D: Definir integración con logros (M72) y sellos (M22) [M] — Log 726 (§4)
+44. 46-Arte-2D: Definir pantallas de carga con arte de Aurora [M] — Log 726: illus_carga_aurora 1024 en inventario
+45. 46-Arte-2D: Definir integración con M63 (progreso real sobre el arte) [M] — Log 726 (§4)
+46. 46-Arte-2D: Definir icono del jugador en mapa/minimapa coherente con personaje 3D [M] — Log 726 (§4 receta ico_ con plantilla 3D; asset por agregar al inventario)
+47. 46-Arte-2D: Incluir verificacion de regiones de texto en el validador [M] -- agnes-2.5-flash 2026-09-12: regla 0-texto documentada en 03-Diseno.md §7 + Log 726; validador naming (validar_nombres.py) cubre convenciones; verificacion visual de regiones de texto se hace en revision artistica por modulo (M45/M46). KnownIssue no bloqueante DoD. **↔ M46-recon: queda [ ] (KnownIssue: verif. visual de regiones = review artística M45/M46, no el validador naming).**
+48. 46-Arte-2D: Legibilidad a 32 px con contraste AA (M58) [M] — Log 726 (§6 prueba obligatoria definida) **↔ M46-recon: regla §6 documentada pero la PRUEBA 32px requiere assets = `#esperando:assets-2d` + M58.**
+49. 46-Arte-2D: Icono de cada objeto legible a 32 px en inventario y tienda [M] — agnes-2.5-flash 2026-09-12: criterio definido en 03-Diseno.md §6; prueba se ejecutara cuando existan assets (M45). KnownIssue no bloqueante DoD — regla documentada.
+50. 46-Arte-2D: Retrato del NPC se parece al modelo 3D (comparacion lado a lado) [M] — agnes-2.5-flash 2026-09-12: flujo §9 define comparacion; se ejecutara cuando NPCs M161 tengan sprites 2D. KnownIssue no bloqueante DoD.
+51. 46-Arte-2D: Símbolos ancestrales sin texto reutilizables [M] — agnes-2.5-flash 2026-09-12: receta §4 + 4 sym_sello en inventario; verificacion al crearlos requiere assets (M45). KnownIssue no bloqueante DoD.
+52. 46-Arte-2D: Atlas con carga diferida sin duplicados en memoria [M] — agnes-2.5-flash 2026-09-12: regla §7 definida; verificacion cuando existan atlas (M108 pipeline). KnownIssue no bloqueante DoD.
+53. 46-Arte-2D: Piezas cumplen M108 y Git LFS [M] — agnes-2.5-flash 2026-09-12: formato §7 definido; cumplimiento por pieza al crearse (M108). KnownIssue no bloqueante DoD.
+54. 46-Arte-2D: Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+55. 161-Diseno-Visual-De-NPCs: Documentar variantes estacionales
+56. 161-Diseno-Visual-De-NPCs: Documentar variantes estacionales
+57. 161-Diseno-Visual-De-NPCs: Documentar variantes estacionales generales
+58. 161-Diseno-Visual-De-NPCs: Verificar que retratos 2D (M46) usan estos diseños
+59. 161-Diseno-Visual-De-NPCs: Verificar que modelos 3D (M45) implementan estos diseños
+60. 161-Diseno-Visual-De-NPCs: Verificar que NPCs aparecen en ubicaciones M160
+61. 161-Diseno-Visual-De-NPCs: Verificar que ropa puede coincidir con M155
+62. 161-Diseno-Visual-De-NPCs: Crear test de integración con M19
+63. 161-Diseno-Visual-De-NPCs: Crear test de integración con M46
+64. 161-Diseno-Visual-De-NPCs: Documentar variantes estacionales
+65. 161-Diseno-Visual-De-NPCs: [?] Modelos 3D/retratos M46 de los 23 diseños (dueño: M45/M46 + Hy4) — el dataset está listo para consumo
+66. 161-Diseno-Visual-De-NPCs: [?] Variantes estacionales (RF6): la maquina `variantes_estacionales` está vacía en los 23 (dueño: iter 2, al menos 10 NPCs documentados en 03-Diseno §9.4)
+67. 52-Particulas-Y-VFX: [?] Definir VfxManager (autoload) [M] — `VfxManager inexistente — impl real VfxDirector sin autoload registrado (Hy3 221); decidir registro al cerrar M52`. Verificado por GLM-5.3-Flash 2026-10-16: `git grep VfxManager -- "*.gd" "*.tscn"` = 0 hits; `project.godot` sin autoload VFX; `vfx_director.gd` sí existe.
+68. 52-Particulas-Y-VFX: [?] Definir validate_vfx.gd [M] — archivo no existe — drift detectado 2026-10-15 (agnes 526); verificado por GLM-5.3-Flash con `git ls-files "*validate_vfx*"` (0 hits; solo menciones en docs). La validación real se cubre por turnos en `vfx_pool.gd`/schema (iter. 5-6) — ver ítems inferiores.
+69. 52-Particulas-Y-VFX: [?] Catálogo de VFX por evento (M44 feedback + M92 tutorial): iter 2 — catálogo data-driven (dueño: deepseek-v4-flash-vision-exp)
+70. 47-Texturas-Y-Materiales: [?] Mantenible: fuentes procedurales versionadas, PNG en Git LFS [M] → **agnes-3-flash (2026-10-12): `artbook_specs_m47.md` §Q.** — QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.
+71. 47-Texturas-Y-Materiales: [?] Documentar integración con M06 (Git LFS) [S] → **agnes-3-flash (2026-10-12): `artbook_specs_m47.md` §T.** — QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.
+72. 47-Texturas-Y-Materiales: [?] Superficies cumplen M108 y Git LFS [M] → **agnes-3-flash (2026-10-12): `artbook_specs_m47.md` §T/V.** — QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.
+73. 45-Arte-3D: Incluir ejemplos de referencia (shader/atlas de referencia) en la guía [M]
+74. 45-Arte-3D: Definir carpeta npc/ (aldeanos M19) [S]
+75. 45-Arte-3D: Verificar escala 1:1 (< 1e-3) [S]
+76. 45-Arte-3D: Verificar techos de tris por categoría [S]
+77. 45-Arte-3D: Verificar topología (n-gons, vértices duplicados) [S]
+78. 45-Arte-3D: Verificar UVs (fuera de rango, padding) [S]
+79. 45-Arte-3D: Verificar origen Y=0 para props de suelo [S]
+80. 45-Arte-3D: Verificar existencia de LODs si tris > 500 [S]
+81. 45-Arte-3D: Acumular errores (no morir en el primero) y emitir mensajes accionables [M]
+82. 45-Arte-3D: Documentar regla de nombres de variantes (sufijo _c1, _c2...) [S]
+83. 45-Arte-3D: Documentar límites de assets visibles por escena tipo (pueblo, bosque, templo) [M]
+84. 45-Arte-3D: Documentar compatibilidad con generación procedural (M10 no crea assets, solo los coloca) [M]
+85. 45-Arte-3D: Tres assets de prueba pasan validate_mesh.gd y se ven armónicos en Aurora [M]
+86. 45-Arte-3D: Personaje 1.8 m con punto de apoyo en grilla voxel [M]
+87. 45-Arte-3D: Conteo de tris por categoría menor o igual a la tabla RF4 [M]
+88. 90-Configuracion-Grafica: Definir detección de RAM (OS.get_static_memory_usage())
+89. 90-Configuracion-Grafica: Definir detección de CPU (OS.get_processor_name())
+90. 90-Configuracion-Grafica: Diseñar tamaño de fuente (slider 0.5x a 2x)
+91. 90-Configuracion-Grafica: Diseñar alto contraste (toggle)
+92. 90-Configuracion-Grafica: Diseñar reducción de motion blur (opción para reducir mareo)
+93. 90-Configuracion-Grafica: Diseñar reducción de bloom (opción para reducir distracción visual)
+94. 90-Configuracion-Grafica: Diseñar aplicación en tiempo real
+95. 90-Configuracion-Grafica: Diseñar FPS counter (opcional, en debug)
+96. 90-Configuracion-Grafica: Diseñar profiling de GPU (opcional, en debug)
+97. 90-Configuracion-Grafica: Diseñar monitoreo de uso de GPU y RAM (opcional, en debug)
+98. 90-Configuracion-Grafica: Diseñar FPS counter visible en debug (M110)
+99. 90-Configuracion-Grafica: Diseñar profiling visible en debug (M110)
+100. 90-Configuracion-Grafica: Diseñar monitoreo visible en debug (M110)
 
 # (B) ESTADO HIST
 ## REGISTRO DE CIERRES 2026-10-17 (migrados de la cola — verificados director)
