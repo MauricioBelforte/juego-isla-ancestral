@@ -138,15 +138,15 @@
 - [ ] Verificar que ropa puede coincidir con M155
 - [ ] Verificar coherencia entre NPCs de misma isla
 - [x] Verificar identificación por profesión
-- [ ] Documentar integración con M19
-- [ ] Documentar integración con M159
-- [ ] Documentar integración con M45
-- [ ] Documentar integración con M46
-- [ ] Documentar integración con M155
-- [ ] Documentar integración con M160
-- [ ] Documentar integración con M27
-- [ ] Documentar integración con M29
-- [ ] Documentar integración con M39
+- [x] Documentar integración con M19 — **agnes-3-flash 2026-10-21:** 04-Codigo "Notas de Integración": M19 (14 villager nombrados) y M161 (23 diseños por rol) = sets distintos; consumo de M161 por villager M19 pendiente (a decisión del director).
+- [x] Documentar integración con M159 — **agnes-3-flash 2026-10-21:** 04-Codigo + README: 7/7 refs `herramienta_derecha` → `data/items/` M159 (wired, verificado).
+- [x] Documentar integración con M45 — **agnes-3-flash 2026-10-21:** 04-Codigo: `modelo_3d=null` en los 23 → deuda externa M45 (el `[?]`).
+- [x] Documentar integración con M46 — **agnes-3-flash 2026-10-21:** 04-Codigo: `retrato_path=""` en los 23 → deuda externa M46/Hy4 (el `[?]`).
+- [x] Documentar integración con M155 — **agnes-3-flash 2026-10-21:** 04-Codigo: ropa `RopaData` (HEX) lista; consumo por M155 pendiente (deuda M155/M161 b3).
+- [x] Documentar integración con M160 — **agnes-3-flash 2026-10-21:** 04-Codigo: `isla` (RIZ/COR/CEN/AUR) lista; posicionamiento en M160 pendiente.
+- [x] Documentar integración con M27 — **agnes-3-flash 2026-10-21:** 04-Codigo: consumo cross-módulo pendiente (M161 aporta el visual).
+- [x] Documentar integración con M29 — **agnes-3-flash 2026-10-21:** 04-Codigo: consumo cross-módulo pendiente.
+- [x] Documentar integración con M39 — **agnes-3-flash 2026-10-21:** 04-Codigo: consumo cross-módulo pendiente.
 - [x] Crear test de carga de NPCVisualDatabase — **agnes-3-flash 2026-10-21:** `tests/unit/data/test_npc_visual_database.gd` (headless, 13 bloques A-M) corre **356 checks, 0 fallos** (EXIT 0, "TEST OK"). Bloque K `test_npc_visual_has_required_fields` (138 checks) valida la carga + campos de los 23 NPCs.
 - [x] Crear test de búsqueda por ID
 - [x] Crear test de búsqueda por isla
@@ -166,16 +166,16 @@
 
 ### Documentación (10 ítems)
 
-- [ ] Crear README con formato de IDs
+- [x] Crear README con formato de IDs — **agnes-3-flash 2026-10-21:** `plan-actual/README-FORMATO-IDS.md` (formato `NPC-<ISLA>-<NNN>-<rol>`, los 23 ids, campos, cross-checks M159/M19, cómo agregar un NPC nuevo).
 - [x] Documentar paleta de piel completa — **agnes-3-flash 2026-10-21:** 03-Diseno §1 "Paleta de Colores de Piel" (9 líneas, códigos SK-01…).
 - [x] Documentar paleta de cabello completa — **agnes-3-flash 2026-10-21:** 03-Diseno §2 "Paleta de Colores de Cabello" (12 líneas, códigos HR-01…).
 - [x] Documentar paleta de ojos completa — **agnes-3-flash 2026-10-21:** 03-Diseno §3 "Paleta de Colores de Ojos" (11 líneas, códigos EY-01…).
 - [x] Documentar reglas de identificación por profesión — **agnes-3-flash 2026-10-21:** 03-Diseno §9.1 "Identificación por Profesión".
 - [x] Documentar reglas de coherencia por isla — **agnes-3-flash 2026-10-21:** 03-Diseno §8 (tabla resumen visual por isla) + §9.2 "Colores por Isla".
 - [ ] Documentar variantes estacionales
-- [ ] Documentar integración con otros módulos
+- [x] Documentar integración con otros módulos — **agnes-3-flash 2026-10-21:** tabla "Notas de Integración" en 04-Codigo (estado M159 wired / M19 scoping / M45-M46 externos / M155-M160-M27-M29-M39 consumo pendiente).
 - [ ] Crear guía para agregar nuevos NPCs
-- [ ] Documentar proporciones y tamaños
+- [x] Documentar proporciones y tamaños — **agnes-3-flash 2026-10-21:** 03-Diseno §9.3 "Proporciones NPC" (9 líneas).
 
 **Totales:** 138 ítems · Completados: 94 · Pendientes: 42 · No resueltos: 2.
 

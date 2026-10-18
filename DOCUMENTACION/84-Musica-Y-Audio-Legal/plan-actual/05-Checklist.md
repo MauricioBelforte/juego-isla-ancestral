@@ -1,7 +1,7 @@
 > **RE-MARCADO POR MIMO V2.5 (2026-09-15 22:03):** Verificación manual contra código real. agnes revirtió todo; este checklist refleja solo lo IMPLEMENTADO (codigo/datos existen) o DISEÑADO (documentado en 03-Diseno.md). Scripts manager/credits/créditos solo son templates de diseño, no codigo funcional.
 > **ACTUALIZADO POR MIMO V2.5 (2026-09-15 23:00):** Re-verificación contra código. 5 scripts existen (audio_license.gd, audio_credit.gd, audio_legal_manager.gd, audio_credits_generator.gd, audio_license_validator.gd) + test + data JSON. 36/100 items verificados (36%).
 
-﻿# Módulo 84: Música y Audio — Legal — Checklist
+# Módulo 84: Música y Audio — Legal — Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode

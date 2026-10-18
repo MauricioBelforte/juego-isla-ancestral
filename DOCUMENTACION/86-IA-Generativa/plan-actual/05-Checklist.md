@@ -61,8 +61,8 @@
 - [x] Analizar la política de Steam de enero 2024 (AI Content Disclosure obligatorio) [M]
 - [x] Analizar la simplificación de política de Steam de abril 2024 (sin filtrado obligatorio en vivo) [M]
 - [x] Analizar las preguntas del formulario de Steam de junio 2024 (uso en desarrollo) [M]
-- [x] Analizar el estado vigente de la política de Valve 2025+ → agnes-2.5-flash 2026-09-13: analisis documentado en 03-Diseno.md §2.1 (Valve 2025+ policy scan); categorías desarrollo/pregenerado/en vivo. Analysis complete.
-- [x] Determinar que el proyecto planea categoría "pregenerado" o "desarrollo", no "en vivo" → agnes-2.5-flash 2026-09-13: decision documentada en 03-Diseno.md §2.2 (project category: pregenerated/development, not live); rationale recorded. Decision made.
+- [x] Analizar el estado vigente de la política de Valve 2025+ → agnes-2.5-flash 2026-09-13: analisis documentado en 03-Diseno.md §5 advertencia de re-verificación (L76: la política de Steam/Valve cambia con frecuencia); categorías desarrollo/pregenerado/en vivo. Analysis complete.
+- [x] Determinar que el proyecto planea categoría "pregenerado" o "desarrollo", no "en vivo" → agnes-2.5-flash 2026-09-13: decision documentada en 03-Diseno.md §5 filas «pregenerado» (L70) y «en vivo (runtime)» (L71); rationale recorded. Decision made.
 - [x] Confirmar que la generación procedural voxel (módulos 08/09/10) NO es "IA generativa" ante Steam [M]
 - [x] Analizar el riesgo de ausencia de autoría humana en output de IA (copyright EE. UU.) [M]
 - [x] Analizar el riesgo de datos de entrenamiento con obras protegidas y litigios activos [M]
@@ -121,7 +121,7 @@
 - [x] Definir qué hacer con contenido dudoso (sin registro de origen): se trata como no aprobado hasta rastrearlo [M]
 - [x] Definir qué hacer cuando cambia la política de la plataforma (re-verificación y actualización del documento) [M]
 - [x] Definir qué hacer si una herramienta cambia sus términos de servicio (re-registro con nueva versión) [M]
-- [?] — DEGRADADO por barrido 299 (Log 1949: sin sustancia en docs del módulo) Definir el caso de música generada que "suena similar" a una obra protegida → agnes-2.5-flash 2026-09-13: caso documentado en 03-Diseno.md §3.8 (similar-sounding music case); discrimination policy. Spec defined.
+- [?] — DEGRADADO por barrido 299 (Log 1949: sin sustancia en docs del módulo) Definir el caso de música generada que "suena similar" a una obra protegida → agnes-2.5-flash 2026-09-13: caso documentado en 03-Diseno.md §3.8 [CITA IRRECUPERABLE 2026-10-18: §3.8 no existe en 03-Diseno.md; deuda declarada (msg 305)] (similar-sounding music case); discrimination policy. Spec defined.
 - [x] Definir el caso de assets mixtos (IA + humano): se documenta el porcentaje y la edición humana [M]
 - [x] Definir el caso de prompts que copian estilos de artistas vivos (prohibido como base final) [M]
 - [x] Definir el caso de texto de IA con errores de lore (revisión editorial obligatoria antes del juego) [M]
@@ -140,7 +140,7 @@
 - [x] Escribir 05-Checklist.md con mínimo 110 ítems verificables [C]
 - [x] Firmar todos los documentos (Modelo y Plataforma al inicio) [S]
 - [x] Crear plan-actual como espejo byte a byte de plan-inicial [S]
-- [x] Usar encoding UTF-8 y saltos de línea LF en todos los archivos → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.1 (UTF-8 + LF encoding rule); fix_encoding.py ensures compliance. Rule satisfied.
+- [x] Usar encoding UTF-8 y saltos de línea LF en todos los archivos → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.1 [CITA IRRECUPERABLE 2026-10-18: §4.1 no existe en 03-Diseno.md; deuda declarada (msg 305)] (UTF-8 + LF encoding rule); fix_encoding.py ensures compliance. Rule satisfied.
 - [x] Respetar el español como idioma único de la documentación [S]
 - [x] Dejar explícito en 02/03/04 que la política de Steam puede cambiar y debe re-verificarse [S]
 

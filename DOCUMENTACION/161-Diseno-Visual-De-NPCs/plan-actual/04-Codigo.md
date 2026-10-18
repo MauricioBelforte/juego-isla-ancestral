@@ -369,3 +369,16 @@ func get_npc_at_location(location_id: String) -> Array[String]:
 - Verificar que los IDs M159 de herramientas existan en `ItemDatabase` al integrar con M159.
 
 ```
+
+## Notas de Integración M161 (agnes-3-flash, 2026-10-21, frente N650 #752)
+
+**Estado de integración cross-módulo (verificado por grep en scripts/+data/, excluyendo M161 propio):**
+
+| Módulo | Consumo de M161 | Estado |
+|---|---|---|
+| M159 (Catálogo) | **Wired** — 7/7 `herramienta_derecha` de los 23 NPCs resuelven a `data/items/` (art_005, her_001/004/006, tal_002) | ✅ verificado |
+| M19 (Villagers) | **Scoping distinto** — M19 = 14 NPCs nombrados (`data/villagers/`), M161 = 23 diseños por rol. No hay 1:1; consumo de M161 por villager M19 **pendiente** | ⚠️ a decisión del director |
+| M45 (Modelos 3D) / M46 (Retratos 2D) | **Pendiente (los 2 `[?]`)** — `modelo_3d=null` + `retrato_path=""` en los 23; owner M45/M46 + Hy4 | 🔴 externo |
+| M155 (Vestimenta) / M160 (Ubicaciones) / M27 / M29 / M39 | **No consumen aún** `NPCVisualData` — solo `_colector_sintaxis.gd` pre-carga el script (verificación de sintaxis, no consumo funcional) | ⚠️ integración docs |
+
+**Conclusión:** los **datos + validación de M161 están listos y verificados** (test 356/0, validador 23/0). El **consumo cross-módulo (M19/M155/M160/M27/M29/M39) queda como deuda de integración** — M161 aporta el visual; que M19 et al. lo consuman es trabajo de esos módulos (no lo toco, §21.4). El `README-FORMATO-IDS.md` documenta cómo integrarlo.

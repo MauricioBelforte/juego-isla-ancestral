@@ -61,8 +61,8 @@
 39. El 148 de T del boot (the MC). — [x] 2026-10-17 (Tanda 31): M148-Lore-Ambiental front verificado — boot LoreCatalogo 60 piezas (4 islas) en 10 logs de out/, LoreGate OK 60 piezas/16 pistas/grafo consistente, TerrenoLore secretos por estacion (primavera/verano/otono/invierno); test_lore_m148.gd rc=0 Resumen M148: 85 checks, 0 fallos (el WARNING Catalogo invalido es el caso negativo intencional del auditor; out/tanda31). Modulo 148: 115 [x]/0 [ ]/2 [?].
 40. M127-M52 (los drifts de front). — [x] 2026-10-17 (Tanda 32): M127-Copyright verificado (test_copyright_m127.gd rc=0 13 checks 0 fallos; boot [M127] OK legal/copyright_register.md; modulo 76/0/24) y M52-VFX verificado (test_vfx_m52_iter6.gd rc=0 76 checks 0 fallos RESULTADO OK; boot VfxDirector listo 30 eventos del catalogo x6; modulo 145/0/3 CERRADO). Sin drift entre docs y codigo en ambos frentes (out/tanda32).
 41. M129-Merch: 10 productos del front. — [x] 2026-10-17 (Tanda 33): data/legal/merchandising.json v2 = 10 productos (camisetas, tazas, posters, artbook, soundtrack, peluches, figuras, mapa_tela, llavero, pack_stickers) + politicas post_lanzamiento/licencias; boot [M129] MerchManager listo (10 productos) x289 en out/; test_merch_m129.gd rc=0 Resumen M129: 24 checks, 0 fallos (out/tanda33). Modulo 129: 101 [x]/0 [ ]/7 [?].
-42. M147-WorldBible: canon 1.0.0 (6 personajes 8 lugares — ES/EN/PT el front).
-43. M147: los strings de los 6 personajes (Catalina/Bruno/Catalina/Finneas/Luna/Mateo).
+42. M147-WorldBible: canon 1.0.0 (6 personajes 8 lugares — ES/EN/PT el front). — [x] 2026-10-17 (Tanda 34): canon verificado — data/world_data.json (4147b) canon_version 1.0.0, 6 personajes (finneas/lia/bruno/nilo/vera/orion), 8 lugares (faro/templo_raiz/laguna_coral/templo_coral/volcan/templo_ceniza/aurora_cielo/templo_aurora), 4 simbolos, 4 capas, 5 epocas; boot [M147] WorldBible listo: canon 1.0.0 (6 personajes, 8 lugares) x291; test_world_m147.gd rc=0 Resumen M147: 23 checks, 0 fallos (out/tanda34). ES/EN: locales/en.po 16061b + es.po 16812b con refs del canon; PT: NO existe pt.po (deuda de localizacion M87, observada). Modulo 147: 65 [x]/68 [ ]/1 [?] en curso.
+43. M147: los strings de los 6 personajes (Catalina/Bruno/Catalina/Finneas/Luna/Mateo). — [x] 2026-10-18 (Tanda 35): 6/6 personajes con nombre/rol/isla/bio en data/world_data.json (finneas guia/raiz, lia curandera/raiz, bruno constructor/coral, nilo pescador/coral, vera herreria/ceniza, orion navegante/aurora); i18n POR PERSONAJE no existe todavia — data/localizacion/strings_{es,en,pt}.json = 146 cadenas UI/msg sin claves de personajes (strings_pt.json SI existe; pt.po de locales NO) y locales/*.po 232 msgids solo con menciones incidentales M68; preparacion i18n del canon = deuda del modulo 147 (68 [ ]). Evidencia: out/tanda35/recon_strings_personajes.txt.
 44. The vocabulary de — the canon8 (the canon of reportes).
 45. M100-Community: 5 canales 4 eventos (the community-front).
 46. M121-Support: 15 FAQ 3 canales del front.
@@ -344,8 +344,8 @@
 
 ### Bloque V — Los strings finales del vocabulario.
 
-88. M147-WorldBible: canon 1.0.0 (6 personajes 8 lugares — ES/EN/PT el front).
-89. M147: los strings de los 6 personajes (Catalina/Bruno/Catalina/Finneas/Luna/Mateo).
+88. M147-WorldBible: canon 1.0.0 (6 personajes 8 lugares — ES/EN/PT el front). — [x] 2026-10-17 (Tanda 34): dup de #42 (misma evidencia — política dups 052).
+89. M147: los strings de los 6 personajes (Catalina/Bruno/Catalina/Finneas/Luna/Mateo). — [x] 2026-10-18 (Tanda 35): dup de #43 (misma evidencia — política dups 052).
 90. The vocabulary de — the canon8 (the canon of reportes).
 
 ### Bloque W — La HTTP del front de la web del front.

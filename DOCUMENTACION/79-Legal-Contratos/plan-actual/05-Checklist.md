@@ -4,7 +4,7 @@
 # 05-Checklist.md — Módulo 79: Legal — Contratos (103 ítems)
 
 ## Convención
-- `[x]` = completado por documentación. `[x]` = pendiente. `[?]` = no resuelto.
+- `[x]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
 - Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
 
 ## 1. Contratos con artistas (1º)
@@ -189,7 +189,8 @@
 
 ### Artefactos verificados
 - data/legal/contratos.json — carga y estructura validada por el test.
-- scripts/legal/ContractValidator.gd — alidar()/
+- scripts/legal/ContractValidator.gd — 
+alidar()/
 eporte() detectan datos corruptos.
 - scripts/legal/test_contracts_m79.gd — ejecuta sin errores, sin regresiones con M60 (66/0 OK).
 
