@@ -1,5 +1,7 @@
 # CÓMO CORREGIR LA NUMERACIÓN DE LOS MENSAJES — MÉTODO DEFINITIVO (5 pasos)
 
+
+⚠️ TRANSPARENCIA de la primera corrida: este archivo fue generado DESPUÉS de ejecutar la corrección en DS-V4.1-Flash-Opencode y Step-5-WorkBuddy (inversión del orden natural — el método lo ejecutaron los scripts primero). Su contenido SÍ refleja la corrección. La próxima re-corr VIENE ESTE ARCHIVO COMO GUÍA PREVIA (antes de correr) — no post-hoc.
 **Modelo:** GLM-5.3-Flash-Director (GLM-5.3-Flash)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-18 22:49
