@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+﻿[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+[ext_resource type="CompressedTexture2D" uid="uid://cpv2vud76nutv" path="res://assets/2d/items_m159/ico_item_obj_cua_008.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 id = "OBJ-CUA-008"
-nombre = "Estantería pequeña"
-descripcion = "Estantería compacta"
+nombre = "EstanterÃ­a pequeÃ±a"
+descripcion = "EstanterÃ­a compacta"
 categoria = 1
 subcategoria = "ESTANTES"
 tamano = Vector2i(1, 1)
@@ -23,5 +24,7 @@ color = "#8B6914"
 variante = ""
 requiere_herramienta = ""
 exportable = true
-icono = "res://assets/2d/items_m159/ico_item_obj_cua_008.png"
+icono = ExtResource("2")
 modelo_3d = null
+
+

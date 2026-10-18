@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+﻿[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+[ext_resource type="CompressedTexture2D" uid="uid://r3oie0pv35qn" path="res://assets/2d/items_m159/ico_ancient_crystal.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 id = "ancient_crystal"
 nombre = "Cristal Antiguo"
-descripcion = "Cristal de la civilización ancestral. Guarda memorias olvidadas."
+descripcion = "Cristal de la civilizaciÃ³n ancestral. Guarda memorias olvidadas."
 categoria = 14
 apilable = false
 stack_max = 1
@@ -15,4 +16,5 @@ precio_venta = 200
 modelo_id = "cristal_ancestral"
 variantes_disponibles = PackedStringArray("alta", "media", "baja")
 
-icono = "res://assets/2d/items_m159/ico_ancient_crystal.png"
+icono = ExtResource("2")
+
