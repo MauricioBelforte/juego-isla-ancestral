@@ -88,6 +88,17 @@ io.open(pool, 'rb').read().decode('utf-8', errors='strict')
 ```
 
 - El pool queda con 100 números **SIN huecos**, consecutivos desde max+1.
+
+⚠️ **REGLA DEL FUNDADOR (2026-10-18 23:03) — REVISAR SIEMPRE tras cualquier asignación o corrección:**
+
+**El pool debe QUEDAR con 100 números consecutivos SIN huecos y SIN números ya usados.** Cada vez que:
+1. Asignás un número (con el helper o a mano) → **REMUEVELO del pool** (era el caso del 76 del informe 078 que quedó disponible aún usado).
+2. Corregís la numeración de un canal → **VERIFICÁ que el pool NO contenga ningún número ≤ max de los archivos del canal** (los usados se quitan).
+3. Consumís un número de PRUEBA (sin escribir el archivo real) → **DEVOLVELO al pool** (el riel de los 77-78 de prueba del Step-5 se devolvieron).
+4. El pool pierde números → **AGREGA al FINAL** para que queden 100 consecutivos (max+1 a max+100).
+5. El pool queda **sin BOM** (Python UTF-8, LF, no CRLF, no Set-Content).
+
+Las 5 reglas del pool quedan como el cierre del PASO 4 — **revisar el pool SIEMPRE** después de cada asignación, corrección o consume de prueba.
 - **El puntero `.ultima-revision-<agente>.txt` = max** (el máximo del canal, sin BOM).
 
 ### PASO 5 — BUSCAR REFERENCIAS ANTIGUAS A LOS NÚMEROS VIEJOS
