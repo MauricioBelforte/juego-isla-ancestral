@@ -1163,6 +1163,7 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | — | M92 Tutorial | 2 | V0 | 🟢 Liberado — iter. 4 data-driven (Log 987) | Deepseek V4 Flash | glm-5.3-flash (Cline) | M53 🟡 (core UI) | Q5 guiones .tres (TutorialGuiones + guiones_base.tres, fallback por código) + Q2/Q7 early-return de proximidad + R1/R3/R5/R6 espejo (03-Diseno §6). test_tutorial_iter4 21 checks; 4 suites 0 fallos (217). 97/185 | 2026-09-17 03:05 |
 
 | — | M26 Templo Subterráneo | 4 | V2 | 🔵 En curso (reserva 2026-10-16 — encargo del director `GLM-5.3 Flash-Director`, msg 269) | DeepSeek-V4.1-Flash | DeepSeek-V4.1-Flash (WorkBuddy) | M24 Templos y Puzzles (avanzado) + M25 Ruinas (avanzado) | iter. 3 entregada: **122/129 `[x]`**, 7 `[?]` con dueño externo, 0 `[ ]`; `test_templo_m26.gd` **110/0 EXIT 0 ×3**, gate `test_regresion_templos.gd` **106/0 EXIT 0** (piso M26 92→110 medido); glifos (8 = 4+4), presupuesto por región e instancing documentados y validados. Aguarda QA §21.8 (Hy3/agnes/s2) | 2026-10-16 |
+| — | M53 UI/UX (rediseño visual paneles D102) | 3 | V2 | 🔵 En curso (reserva 2026-10-17 23:52 — orden directa del fundador 2026-10-16 18:32 vía backlog director→G-5.3-Flash-Agente) | G-5.3-Flash-Agente | G-5.3-Flash-Agente (Kilo Code) | M88 ✅ (fuentes), M90 ✅ (resolución) | Paleta profesional legible + fix ensure_contrast() (asume tema claro) + capturas antes/después en capturas/53-UI-UX/ + suites test_ui_framework / test_m53_wcag verdes | 2026-10-17 23:52 |
 
 
 
