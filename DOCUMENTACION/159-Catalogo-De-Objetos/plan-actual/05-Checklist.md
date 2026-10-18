@@ -265,7 +265,7 @@
 - [x] Crear test de búsqueda por rareza
 - [?] Crear test de integración con Inventario (M14 no implementado)
 
-**Totales:** 146 items · Completados: 78 · Pendientes: 16 · No resueltos: 52. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: 77 [x] / 52 [?] / 17 [ ]; autorizado por director msg 257. Actualizado 2026-10-16 por DeepSeek-V4.1-Flash: +1 [x] por el flip L216 -> 78 [x] / 52 [?] / 16 [ ], autorizado por director msg 284.)
+**Totales:** 146 items · Completados: 79 · Pendientes: 15 · No resueltos: 52. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: 77 [x] / 52 [?] / 17 [ ]; autorizado por director msg 257. Actualizado 2026-10-16 por DeepSeek-V4.1-Flash: +1 [x] por el flip L216 -> 78 [x] / 52 [?] / 16 [ ], autorizado por director msg 284. **Actualizado 2026-10-18/20 por agnes-3-flash: +1 [x] por el flip paraguas L235 (verificar todos los objetos tienen icono, 300/300 b2) -> 79 [x] / 52 [?] / 15 [ ].**)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía solo *"**Total: 135 ítems**"* (sin desglose y con total

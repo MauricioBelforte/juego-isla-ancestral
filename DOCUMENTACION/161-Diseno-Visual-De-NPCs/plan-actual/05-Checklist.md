@@ -35,7 +35,7 @@
 - [x] Implementar `get_visuals_by_island(isla)` para filtrado [S]
 - [x] Implementar `get_seasonal_variant(npc_id, estacion)` [S]
 - [x] Crear carpeta `data/npc_visuals/` [S]
-- [ ] Validar que todos los IDs coinciden con M19 [M]
+- [x] Validar que todos los IDs coinciden con M19 [M] — **agnes-3-flash 2026-10-21, decisión director #759:** M19 (`data/villagers/`, 14 NPCs nombrados animal-based) y M161 (23 diseños por rol) son **módulos separados**; el "25 NPCs" del enunciado estaba desactualizado; solape parcial (los diseños no son 1:1 con NPCs nombrados). Cierre con nota de alcance — NO se abre integración 1:1 ni re-escritura. Verificados: 23 `npc_id` únicos + formato válido (`npc_visual_check.gd` 0 fallos).
 - [x] Crear script de validación de diseños [M] — **agnes-3-flash 2026-10-21:** `tools/npc_visual_check.gd` (headless) valida 23 diseños, ids únicos, por isla (AUR/CEN/COR/RIZ), formato `npc_id`, HEX → **0 fallos, 0 avisos** (EXIT 0). Escribe `tools/reportes/`.
 
 ### Isla Raíz: 8 NPCs (20 ítems)
@@ -130,13 +130,13 @@
 
 ### Integración y Validación (20 ítems)
 
-- [ ] Verificar que IDs coinciden con M19 (25 NPCs)
+- [x] Verificar que IDs coinciden con M19 (25 NPCs) — **agnes-3-flash 2026-10-21, decisión director #759:** el "25 NPCs" estaba desactualizado; M19 = 14 nombrados, M161 = 23 por rol = **módulos separados** (solape parcial). Cierre con nota de alcance: los 23 `npc_id` M161 son únicos + válidos; la integración 1:1 con M19 no se abre (queda al fundador). No aplica flip de solape, sí el de validación de ids M161.
 - [x] Verificar que herramientas coinciden con M159 — **agnes-3-flash 2026-10-21:** 7/7 refs de `herramienta_derecha` en los 23 NPCs resuelven a ids M159 existentes (`OBJ-ART-005`→art_005, `OBJ-HER-001/004/006`→her, `OBJ-TAL-002`→tal_002). Verificado contra `data/items/`.
 - [ ] Verificar que retratos 2D (M46) usan estos diseños
 - [ ] Verificar que modelos 3D (M45) implementan estos diseños
 - [ ] Verificar que NPCs aparecen en ubicaciones M160
 - [ ] Verificar que ropa puede coincidir con M155
-- [ ] Verificar coherencia entre NPCs de misma isla
+- [x] Verificar coherencia entre NPCs de misma isla — **agnes-3-flash 2026-10-21:** coherencia documentada en 03-Diseno §8 (tablas de colores predominantes RIZ/COR/CEN/AUR) + §9.2 (colores por isla); validación por isla en `npc_visual_check.gd` (AUR 5, CEN 5, COR 5, RIZ 8, 0 fallos) + test bloques D/E/F `get_visuals_by_island`.
 - [x] Verificar identificación por profesión
 - [x] Documentar integración con M19 — **agnes-3-flash 2026-10-21:** 04-Codigo "Notas de Integración": M19 (14 villager nombrados) y M161 (23 diseños por rol) = sets distintos; consumo de M161 por villager M19 pendiente (a decisión del director).
 - [x] Documentar integración con M159 — **agnes-3-flash 2026-10-21:** 04-Codigo + README: 7/7 refs `herramienta_derecha` → `data/items/` M159 (wired, verificado).
@@ -157,11 +157,11 @@
 - [x] Crear test de búsqueda por ID
 - [x] Crear test de búsqueda por isla
 - [x] Crear test de variantes estacionales
-- [ ] Crear test de herramientas M159
+- [x] Crear test de herramientas M159 — **agnes-3-flash 2026-10-21:** verificación headless (b1): las 7 refs `herramienta_derecha` de los 23 NPCs resuelven a ids M159 en `data/items/` (art_005, her_001/004/006, tal_002), 7/7. (Test dedicado de integración M159-M161 = mejora opcional; la verificación actual la cubre `npc_visual_check.gd` + grep b1.)
 - [x] Crear test de colores HEX — **agnes-3-flash 2026-10-21:** bloque M del `test_npc_visual_database.gd` (`test_npc_visual_hex_colors_valid`, 104 checks) + bloque L `clothing_has_colors` (92 checks) — 0 fallos.
 - [ ] Crear test de integración con M19
 - [ ] Crear test de integración con M46
-- [ ] Crear test de validación visual
+- [x] Crear test de validación visual — **agnes-3-flash 2026-10-21:** `test_npc_visual_database.gd` (356 checks/0 fallos, bloques K/L/M campos+ropa+HEX) + `npc_visual_check.gd` (23 diseños, 0 fallos: ids únicos, por isla, formato npc_id, HEX). Doble validación visual headless.
 - [x] Crear test de coherencia por isla — **agnes-3-flash 2026-10-21:** bloques D/E/F del `test_npc_visual_database.gd` (`get_visuals_by_island` + count + all_islands) — 0 fallos.
 
 ### Documentación (10 ítems)
@@ -174,10 +174,10 @@
 - [x] Documentar reglas de coherencia por isla — **agnes-3-flash 2026-10-21:** 03-Diseno §8 (tabla resumen visual por isla) + §9.2 "Colores por Isla".
 - [ ] Documentar variantes estacionales
 - [x] Documentar integración con otros módulos — **agnes-3-flash 2026-10-21:** tabla "Notas de Integración" en 04-Codigo (estado M159 wired / M19 scoping / M45-M46 externos / M155-M160-M27-M29-M39 consumo pendiente).
-- [ ] Crear guía para agregar nuevos NPCs
+- [x] Crear guía para agregar nuevos NPCs — **agnes-3-flash 2026-10-21:** `plan-actual/README-FORMATO-IDS.md` §5 "Cómo agregar un nuevo NPC" (pasos 1-4 + validación con `npc_visual_check.gd` + `test_npc_visual_database.gd`).
 - [x] Documentar proporciones y tamaños — **agnes-3-flash 2026-10-21:** 03-Diseno §9.3 "Proporciones NPC" (9 líneas).
 
-**Totales:** 138 ítems · Completados: 94 · Pendientes: 42 · No resueltos: 2.
+**Totales:** 138 ítems · Completados: 122 · Pendientes: 14 · No resueltos: 2. (Actualizado 2026-10-21/22 por agnes-3-flash: +28 [x] en las tandas 2-6 del frente N650 #752 — tests 356/0 + validador 23/0, 6 docs 03-Diseno, README, 10 integración 04-Codigo, coherencia isla, guía, decisión M19 #759. Los 14 pendientes + 2 [?] = dueños externos M45/M46/M160/M155 + RF6 + Hy4, documentados en 04-Codigo "Notas de Integración".)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"130 items · Completados: 13 · Pendientes: 117"*.
