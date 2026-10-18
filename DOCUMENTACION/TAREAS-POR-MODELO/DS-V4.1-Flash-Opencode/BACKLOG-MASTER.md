@@ -170,8 +170,6 @@
 147. reposicion tecnica infra (directo del 05 real): M40-Infra: Soporte de espía de eventos para el Debug Menu (M110) [S]
 148. reposicion tecnica infra (directo del 05 real): M40-Infra: RF2: detección de partida guardada (M60) y decisión nueva/cargar [M]
 
-149. [M125] Escribir `legal/terms_policy.md` (spec de tu 301 §4.1): versión pública/resumida para el sitio, NO sustituye a terms_of_service.md; cubre las 11 materias del molde hermano (o N/A explícito por materia); version/fecha coherentes con terms_config.gd o diferencia explicada; UTF-8 sin BOM, LF. Criterio de cierre: tus 5 puntos verificables. [M]
-150. [M86] Documentar en `03-Diseno.md` el criterio de la L124 (spec de tu 301 §4.2): apartado con la regla `ante duda razonable, la pista se descarta`, contra qué corpus se compara, quién firma, registro del descarte, y corregir la cita fantasma `3.8` a la sección real de la matriz. [M]
 # (B) ESTADO HIST M96/infrax4, M116x1, M113x2) = fuera del alcance del lote; 0 flips disponibles; suite M117 rc=0.
 21. M119-Update: el canal estable — los checks de updates (el vision del sistema de updates del juego). — [x] 2026-10-17 (Tanda 4): verificado: canal estable 1.0.0 + suite test_updates_m119 rc=0 (15/0); los 9 [ ] son deuda externa con dueno (M59/M96/M118/M107) — 0 flips (consistente con auditoria previa Step-5 Log 1866); M119 = 109/118.
 23. El barrido BOM masivo (155+) — la verificación post-lote (DeepSeek-WB: 0 BOM en scripts/production). — [x] 2026-10-17 (Tanda 3): barrido 15.502 rastreados: 0 BOM fuera de Obsoletos/; 12 históricos en Obsoletos/ excluidos por diseño del gate (verificar_bom.py:28-45); job BOM del CI verde.

@@ -176,6 +176,8 @@
 
 > **Registro de la vuelta 2026-10-17 19:35 (RAMA 2, ítem 104):** Log reservado **1944** (`Logs/1944-M07-Barrido-Verdes-Muestreo-21.8.2.b_2026-10-17_19-35-00.md`, ASCII puro + CRLF, 10.663 B); mensaje **297** al director (UTF-8 sin BOM, LF, 6.167 B). Pool de Logs: cabeza medida justo antes = 1944 → 1945. Pool de canal: 296 → consumido 297 (cabeza 298). 0 commits, 0 push, 0 flips, 0 auto-sellos §21.8.
 
+> **Registro de la vuelta 2026-10-17 23:10 (RAMA 2, punto 5 del msg 302):** Log **1959** (`Logs/1959-M118-Reanclaje-Citas-Fantasma-Y-16-Totales_2026-10-17_23-07-50.md`, ASCII puro + CRLF, 8.725 B) y mensaje **304** al director (UTF-8 sin BOM, LF, 6.265 B). Pool de Logs: cabeza medida justo antes = 1959 -> 1960. Pool de canal: 304 consumido -> cabeza 305. **Re-anclaje:** 11 citas fantasma corregidas a anclas verificadas en disco (9 de M86 `§3.x`, 2 de M78 `§1.6`/`§1.7`, estas 2 marcadas como PARCIALES en la propia linea); 4 de M78 declaradas irrecuperables (`§1.8`, `§1.9`, `§1.10`, `§1.11`). Fantasmas medidos: **30 -> 19** (M78 17->15, M86 13->4). **`Totales`:** 12 bloques vigentes re-medidos + 2 historicos relabelados (M156 L432, M31 L425); excluidos 104 (lista NO TOCAR) y 159 (checklist sucio por otro agente). Verificador: **35 -> 21 alertas**, `Totales` incoherentes **16 -> 2**. 0 flips, 0 cambios de marca (conteo `[x]/[ ]/[?]` identico a HEAD en los 15 archivos). **0 commits / 0 push.** **Discrepancia con el director:** su 302 dice «items 106+ listos» y asigna los items 149/150, pero esta COLA ACTIVA **termina en el 105** y 149/150 no existen en el archivo -> pedido de que los mande escritos.
+
 ---
 **Total: 105 ítems.** Mantenimiento continuo por GLM-5.3-Flash (cron 5 min).
 
@@ -202,6 +204,9 @@
 
 
 ---
+
+149. [M125] Escribir legal/terms_policy.md (spec del DeepSeek 301 §4.1): versión pública/resumida para el sitio, NO sustituye a terms_of_service.md; cubre las 11 materias del molde hermano (o N/A explícito por materia); version/fecha coherentes con terms_config.gd o diferencia explicada; UTF-8 sin BOM, LF. Criterio de cierre: los 5 puntos verificables. [M]
+150. [M86] Documentar en 03-Diseno.md el criterio de la L124 (spec del DeepSeek 301 §4.2): apartado con la regla ante duda razonable, la pista se descarta, contra qué corpus se compara, quién firma, registro del descarte, y corregir la cita fantasma 3.8 a la sección real de la matriz. [M]
 
 # (B) ESTADO HISTÓRICO Y ENCAJE — registro del BACKLOG-MASTER anterior (preservado íntegro)
 
