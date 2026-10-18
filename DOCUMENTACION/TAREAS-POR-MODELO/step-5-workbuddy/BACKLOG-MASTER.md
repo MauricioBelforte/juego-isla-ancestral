@@ -114,8 +114,8 @@
 65. Escaneo de `ESTADO-PARALELO.md` vs GLOBAL (diff de agentes) — 6 [M] — **[x] HECHO 2026-10-17 (Step-5-WorkBuddy, Log 1951, msg 72)**: 8 reclamos AZUL vigentes cruzados con el GLOBAL (2 DIFF-ESTADO: M13 y M26 reclamados pero fila AMARILLA; 3 DIFF-CELDA: M41/M49 con fecha en "Agente actual", M46 vacía); 11 reservas AZUL colgadas >24 h con el trabajo ya en el GLOBAL (M17/M37/M66/M116/M155/M83/M96/M128/M166/M113/M115); 7 filas malformadas del GLOBAL (M48/M139/M104/M115/M148/M127 con celdas vacías iniciales + M41 corta, antes 16 — el defecto de Log 1940 bajó pero sigue); agente nuevo G-5.3-Flash-Agente (M53) + atribución stale de step-5-kilocode en 7 filas; TRAMPA: el EP no es descendente (liberaciones de M112/M32 arriba de sus reclamos, liberación de M87 dentro del cuerpo de su entrada AZUL) — un parser "última línea gana" da diff falso. Mis 6 módulos cuadran disco vs GLOBAL. Pedidos al director en msg 72.
 66. Normalización de la carpeta `capturas/` (mínimo 2 por módulo) — 8 [M] — **[x] HECHO 2026-10-17 22:20 (Step-5-WorkBuddy, Log 1957, msg 73)**: universo real = `tools/mcp/godot-mcp/capturas/` (convención AGENTS.md §1231; gitignored — sin commit). Reparados **5 archivos que eran directorios** (bug de move/`mkdir`: `cap_12_camera_follow.webp/` en 12-Camara + `cap_09_Aurora{,_biomas,_playa,_playa2}.webp/` en 09-Terreno-Y-Geografia, 1 archivo interno verificado en cada uno). Merges de número pelado: `9/`+`09/`→09-Terreno-Y-Geografia (73), `50/`→50-Vegetacion (16), `49/`→49-Iluminacion (24), `51/`→nueva 51-Agua (21), `155-Vestimenta/`→155-Vestimenta-Y-Accesorios (11), más 19/45/47 → 19-NPC-Y-Vecinos, 45-Arte-3D, 47-Texturas-Y-Materiales. Renombres a canónico: 10-Mundo-Voxel→10-Generacion-Del-Mundo, 37-Museo→37-Museos-Y-Colecciones, 163-Encantamientos→163-Sistema-De-Encantamientos, 105-Agua-Blanca→105-Telemetria-De-Gameplay ("Agua Blanca" no existe en DOCUMENTACION, grep=0), 01-Jugador→01-Fundamentos-Del-Proyecto. 22 sueltos de raíz → carpeta por prefijo `cap_<NN>_`. Cobertura: 169 módulos canónicos, 37 con carpeta, **29 cumplen mínimo 2**, 8 con 1 (deuda), 132 sin carpeta (mayoría no visual). Verificación: snapshots antes/después = 407/407, 0 perdidos. Pendientes del director: 4 carpetas ambiguas (19-Muelle, 52-QA-WEB, QA-M51-M31-M19, gameplay) + 15 sueltos (cap_diag/cap_fix/cap_tienda: 21-Dialogos vs 162-Dialogos-Contextuales) + migrar o archivar `DOCUMENTACION/04-Game-Engine/capturas/`.
 67. Inventario de assets sin atribución (BUG-052, 694 glb) — 10 [C] — **[x] HECHO 2026-10-17 23:34 (Step-5-WorkBuddy, Log 1961, msg 74)**: universo medido en 3 perimetros (gate res://assets = 722 archivos en alcance; versionados = 694 .glb = 418 assets/3d + 250 tools/mcp + 16 respaldos Obsoletos + 10 game/Obsoletos; disco = 1388 incl. la copia .kilo/worktrees). **HALLAZGO GRAVE: `validate_asset_metadata.py --check` = EXIT 1 hoy** — 300 HALLAZGOS NUEVOS, todos PNG de `assets/2d/items_m159/` (48x48, 226 B, placeholders M159; commits 94c1c7f/cd7d85c/13825c6 del 2026-10-17, POSTERIORES al cierre de BUG-052 418/418 del 2026-10-10). Techo .glb clavado 418/418 (0 holgura); magic inválido 0 (BUG-042 resuelto); CON atribución 0/722. El job CI `Verify legal gates (M127 iter. 3)` (`quality.yml:659`) no puede pasar en HEAD (rojo distinto del ajeno `test_licenses_m83.gd:111`). Opciones al director (msg 74): (a) fix pipeline M166/M09 + (b) backfill de los 300 PNG (ofrecido, requiere autorización con paths) — NO (c) baseline nuevo `**/assets/2d/**/*.png` max 300 (consagraría la deuda). Derivas: 11-BUGS.md tabla L135 dice RESUELTO pero el detalle L4486 dice "[ ] Abierto"; nota MAGIC_INVALIDO del scope obsoleta. 0 commits / 0 assets tocados.
-68. Preparación de specs para módulos ✅→🟡 por [?] (subida documental) — 8 [M]
-69. Pre-copia de `Obsoletos/` antes de refactors grandes (§5) — 6 [S]
+68. Preparación de specs para módulos ✅→🟡 por [?] (subida documental) — 8 [M] — **[x] HECHO 2026-10-18 (Step-5-WorkBuddy, Log 1968, msg 75)**: universo medido por prefijo de línea = 168 módulos con checklist, **101 con `[?]` (1.152 ítems)**, partidos en **53 sin `[ ]`** (blanco de la tarea, 783 `[?]`) y **48 con `[ ]` también** (369 `[?]`). Autocorrección: mi primer contador de `[ ]` usaba `(m)` en vez de `(?m)` y medía 0 en todos — detectado al cruzar con M68 (18 reales). Muestreo de 65 ítems en 33 módulos clasificado en A spec/documentación (M126, M3, M123, M52 x2, M73, M2), B dependencia externa con dueño (16 módulos), C contenido/implementación (M148, M52 x1, M109 x3, M60, M24), D revertidos BUG-070/Familia A (M80/M81/M85/M82, 11). **Artefacto creado: `legal/marketing_legal_review.md`** (7.073 B, LF, sin BOM, 0 FFFD) → cierra el único `[?]` de M126 (L90); flip propuesto al director (M126 quedaría 101/101). Hallazgo: la plantilla declaraba Blender/GIMP GPL pero `THIRD-PARTY-NOTICES.md` tiene 0 menciones (medido). Uplift de `DOCUMENTACION/README.md` redactado y propuesto (cierra M3 L67/L68/L69; raíz real = 16 carpetas). M73 L215 verificado: plan-inicial 130 ítems (todos `[ ]`, cabecera miente "130/130 completados") vs plan-actual 135 → la igualdad es inalcanzable por diseño. M52: 2 decisiones de spec medidas (0 hits `VfxManager`; 0 `validate_vfx*`). M29: `[?]` duplicado (L75/L207). Detalle en `specs-dudas-2026-10-18.md` de esta carpeta. 0 commits / 0 flips / 0 ediciones a protegidos.
+69. Pre-copia de `Obsoletos/` antes de refactors grandes (§5) — 6 [S] — **[x] HECHO 2026-10-18 03:36 (Step-5-WorkBuddy, Log 1980, msg 76)**: sin refactor ordenado, la tanda midió si la red §5 existe y dejó la herramienta que la aplica. **Hallazgo principal (medido sobre 732 archivos / 22.631.175 B): `Obsoletos/` está 65,7 % FUERA de git** — 251 versionados (34,3 %), 384 ignorados (52,5 %) y 97 sin seguimiento (13,3 %) = 481 archivos / 16.507.943 B que solo existen en esta máquina. Reglas que los ocultan: `.gitignore:246 Obsoletos/raiz-temporales-*/` (344), `:9 *.import` (16), `:220 out/` (13), `:92 .workbuddy-ai/` (8), `:90 .kilo/` (3), `:243 Obsoletos/libvoxel-TMP-*/` (1). Los 97 sin seguimiento son los respaldos MÁS frescos (`encoding-backup-20261018_005227` con 87 archivos de las 00:52 de hoy, incluye `game/isla-ancestral/data/items/*.tres`) y un `git clean -fd` cualquiera los borra. Convención §5 cumplida solo en 137/732 (18,7 %): 32 con sello en el nombre + 105 en la carpeta; 595 sin sello (peor: `raiz-temporales-20260929/` con 193). 6 respaldos de 0 bytes. La §5 SÍ se usa (104 archivos tocados en 24 h): falla la permanencia, no el hábito. **Entregado `scripts/precopia_obsoletos.py`** (crea `Obsoletos/AAAA-MM-DD_HH-MM-SS_<contexto>/`, copia, escribe `MANIFIESTO.txt` con SHA-256 + tamaño y verifica por tamaño; aborta SIN copiar si una ruta pedida no existe; no sobrescribe destino) probado en 4 casos con el binario real. Pedidos al director (msg 76): commitear los 97 sin seguimiento, ratificar la convención y adoptar el script. 0 commits / 0 pre-copias sobre archivos vivos / 0 ediciones a protegidos.
 70. Barrido de tildes/mojibake en archivos nuevos del día (§28 diagnóstico) — 6 [M]
 
 ### Bloque E — Mundo técnico restante (Recom compartido con DeepSeek)
@@ -479,3 +479,69 @@ M104, M88, M160.
 - **Artefactos:** Log **1961** (ASCII puro verificado por bytes: 0 no-ASCII, 58 CRLF, 0 LF sueltos, sin BOM, 5.965 B; head medido 1961 justo antes -> pool 1962), informe **msg 74** (UTF-8 sin BOM, LF puro, sin BOM, ~4,5 KB), pool del canal: **74 consumido** (ultimo+1 = 73+1; el 62 stale sigue primero, sin tocar), tracker sigue en 70. Evidencia cruda en `.workbuddy-ai/tmp/inv_assets.json` (gitignored).
 - **Limites:** 0 commits / 0 push / 0 assets modificados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot, 11-BUGS.md ni modulos ajenos.
 - **Proxima:** NN > 70; sin mensaje -> item 68 (specs para modulos verde->amarillo por [?]) u otro de la cola.
+---
+
+## Vuelta 2026-10-18 01:5x — RAMA 2 (sin mensajes nuevos; tracker 70) + item 68
+
+- **Sin mensajes nuevos del director** (ultimo = 070, tracker 70). RAMA 2: item 68 de la
+  seccion A = "Preparacion de specs para modulos verde->amarillo por [?]". Respondido con
+  msg 75 + Log 1968.
+- **Universo medido (regex por prefijo de linea):** 168 modulos con checklist; 101 con
+  al menos un [?] (1.152 items); 53 sin ningun [ ] (blanco de la tarea, 783 [?]) y 48 con
+  [ ] ademas (369 [?]).
+- **AUTOCORRECCION (Patron D):** mi primer contador de [ ] usaba `(m)^- \[ \]` en lugar
+  de `(?m)` -> media 0 en TODOS los modulos. Lo detecte al cruzar con el bloque Totales
+  de M68 (18 [ ] reales). Los contadores de [x] y [?] usaban (?m) y son correctos. Contar
+  con el regex corregido antes de publicar cualquier particion.
+- **Artefacto creado:** `legal/marketing_legal_review.md` (7.073 B, 134 LF, UTF-8 sin BOM,
+  0 FFFD) -> cierra el unico [?] de M126 (L90; artefacto inexistente medido 2026-10-12).
+  Flip propuesto al director (M126 quedaria 101/101). Hallazgo: la plantilla declaraba
+  Blender/GIMP GPL pero THIRD-PARTY-NOTICES.md tiene 0 menciones (medido).
+- **Uplift de DOCUMENTACION/README.md redactado y propuesto** (no aplicado): cierra M3
+  L67/L68/L69; raiz real = 16 carpetas; carpetas Unity no aplican (proyecto Godot).
+- **M73 L215 verificado:** plan-inicial = 130 items exactos, todos [ ], con cabecera que
+  miente "130/130 completados" (familia M79-L7); plan-actual = 135 -> la igualdad
+  plan-inicial == plan-actual es inalcanzable por diseno (plan-inicial NO MODIFICAR).
+- **M52:** 2 decisiones de spec medidas - `git grep VfxManager` = 0 hits,
+  `git ls-files "*validate_vfx*"` = 0, sin autoload VFX en project.godot; los archivos
+  reales son vfx_director/factory/pool/schema/trigger/loops + 5 suites (QA Log 1030).
+- **M29:** el [?] "Flecha indicadora en el HUD" esta DUPLICADO (L75 y L207).
+- **Muestreo clasificado (65 items, 33 modulos):** A spec/documentacion (M126, M3, M123,
+  M52 x2, M73, M2) · B dependencia externa con dueno (16 modulos) · C contenido/codigo
+  (M148, M52 x1, M109 x3, M60, M24) · D revertidos BUG-070/Familia A (M80/M81/M85/M82, 11).
+- **Artefactos:** Log 1968 (reservado del pool, head medido 1968 justo antes -> 1969),
+  informe `specs-dudas-2026-10-18.md` (10.079 B, LF, sin BOM), msg 75 (UTF-8 sin BOM, LF),
+  tracker 70 (sin cambios), diario y memoria de automatizacion.
+- **Limites:** 0 commits / 0 push / 0 flips / 0 ediciones a CHECKLIST-GLOBAL.md,
+  quality.yml, AGENTS.md, project.godot ni 05-Checklist ajenos. Unico archivo creado
+  fuera de mi carpeta: legal/marketing_legal_review.md (ruta nombrada por el propio item;
+  `git check-ignore` rc=1 = no ignorada; hermanos legal/* versionados en LF).
+- **Proxima:** NN > 70; sin mensaje -> item 69 (pre-copia de Obsoletos/ antes de refactors
+  grandes) u otro de la cola.
+## Registro de la vuelta 2026-10-18 03:36 (tracker 70 sin cambios, RAMA 2 / item 69)
+
+- **Sin mensajes nuevos del director** (ultimo = 070). Item 69 = "Pre-copia de `Obsoletos/` antes de
+  refactors grandes (parr. 5)". Respondido con msg 76 + Log 1980.
+- **Hallazgo principal:** `Obsoletos/` = 732 archivos / 22.631.175 B, de los cuales **481 (65,7 %)
+  estan FUERA de git** (384 ignorados + 97 sin seguimiento). Un `git clean -fdx` o un clone nuevo
+  se lleva 2 de cada 3 archivos de la carpeta que parr. 5 define como red de seguridad. Los 97 sin
+  seguimiento son los respaldos mas frescos (hoy 00:52, `encoding-backup-20261018_005227`, 87
+  archivos con `data/items/*.tres`).
+- Convencion parr. 5: cumplida en 137/732 (18,7 %) - 32 con sello en el nombre + 105 en la carpeta;
+  595 sin sello. 6 respaldos de 0 bytes. 104 archivos tocados en 24 h (la parr. 5 SI se usa).
+- **Entregado `scripts/precopia_obsoletos.py`** (sin commitear). Probado con el binario real:
+  dry-run 0 escrituras; corrida real 2/2 verificados + manifiesto SHA-256; **ancla faltante ->
+  EXIT 1 sin copiar nada**; destino existente -> EXIT 1 sin sobrescribir. Pruebas contra
+  `.workbuddy-ai/tmp/`, nunca contra `Obsoletos/`.
+- **DEFECTO PROPIO confesado:** al consumir el 76 del pool de canal trunque el archivo un instante
+  (lo abri en modo escritura binaria, que trunca al abrir, y la escritura fallo despues). Reparado
+  desde la copia byte a byte de `.workbuddy-ai/tmp/`; diff contra el respaldo = solo falta la linea
+  `76`. Pool final: 143 numeros, LF puro, sin BOM. Leccion: escribir el contenido completo en
+  memoria y abrir el archivo una sola vez (o tmp + rename).
+- **Artefactos:** Log 1980 (ASCII puro por bytes, 100 CRLF, sin BOM, 5.836 B; head medido 1979 y
+  consumido por otro agente en el medio -> reserve 1980), msg 76 (UTF-8 sin BOM, LF, 5.284 B),
+  informe `item-69-precopia-obsoletos-2026-10-18.md`, tracker 70, diario y memoria.
+- **Limites:** 0 commits / 0 push / 0 archivos de proyecto modificados / 0 borrados / 0 flips /
+  0 autosellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot.
+- **Proxima:** NN > 70; sin mensaje -> item 70 (barrido de tildes/mojibake en archivos nuevos del
+  dia) u otro de la cola.

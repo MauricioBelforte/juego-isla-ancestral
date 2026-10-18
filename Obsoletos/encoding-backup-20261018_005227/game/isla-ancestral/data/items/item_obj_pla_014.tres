@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+[ext_resource type="CompressedTexture2D" uid="uid://brknq7gvurn1t" path="res://assets/2d/items_m159/ico_item_obj_pla_014.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-PLA-014"
+nombre = "Ãrbol ancestral"
+descripcion = ""
+categoria = 3
+subcategoria = "PLANTAS_INTERIOR"
+tamano = Vector2i(2, 2)
+interactivo = true
+interacciones = [7, 9]
+fuente = ""
+precio_compra = 800
+precio_venta = 400
+rareza = 3
+apilable = false
+stack_max = 1
+material = ""
+color = ""
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = ExtResource("2")
+modelo_3d = null
+
+

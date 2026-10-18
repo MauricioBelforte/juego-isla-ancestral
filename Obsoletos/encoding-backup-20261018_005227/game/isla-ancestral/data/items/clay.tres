@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+[ext_resource type="CompressedTexture2D" uid="uid://b75l6je0kr8ip" path="res://assets/2d/items_m159/ico_clay.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "clay"
+nombre = "Arcilla"
+descripcion = "Barro arcilloso. Moldeable cuando estÃ¡ hÃºmedo."
+categoria = 9
+apilable = true
+stack_max = 99
+rareza = 0
+precio_venta = 3
+
+icono = ExtResource("2")
+
