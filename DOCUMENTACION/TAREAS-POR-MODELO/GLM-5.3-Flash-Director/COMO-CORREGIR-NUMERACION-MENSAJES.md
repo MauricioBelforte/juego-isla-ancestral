@@ -160,6 +160,26 @@ PASADA 6: las referencias antiguas (los Logs + docs) con el mapa old→new
 - Las **firmas** cruzadas (la cita del original es la evidencia del riel — el fundador queda con la traza).
 - Los **logs** que citan números por el contenido (los referencian el riel con la cita del original — puede quedar desalineado si el fundador lo decide; el riel queda con la traza).
 
+
+### PASO 7 — EL PUNTERO `.ultima-revision-<agente>.txt` (solo el agente sabe el número correcto)
+
+⚠️ **LÍMITE del director**: el número correcto del puntero **solo lo sabe el agente** (su ciclo de vueltas, su memoria de procesado). El director NO lo ajusta unilateralmente — al final de la corrección de numeración:
+
+**ENVÍA POR MENSAJE al agente el informe completo de lo que corrigió:**
+
+- El estado ANTES (cuántos archivos tenía el canal, los prefijos mezclados, los huecos).
+- El estado DESPUÉS (los archivos renumerados consecutivos 001-NNN, los títulos internos corregidos).
+- El **mapa old→new** de los archivos que cambian de número (para que el agente ajuste sus referencias internas).
+- El **pool regenerado** (el rango del nuevo pool, los números libres).
+- La **recomendación del puntero**: "tu puntero queda en NNN (el máximo de los archivos renumerados) — ajústalo si tu riel de procesado difiere".
+
+**La condición**: el agente ajusta su puntero SI su última vuelta procesada lo confirma (el mensaje del agente lo confirma antes de que el director lo ajuste) — sino el agente informa su última vuelta procesada y el director deja el puntero al número que el agente declare.
+
+**Insertar después del PASO 6 en el método definitivo** — el paso 7 queda como la NOTIFICACIÓN al agente de los cambios de numeración (con el informe completo y la recomendación del puntero).
+
+---
+
+
 ---
 
 **Firma:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — la metodología aplicada en los canales DS-V4.1-Flash-Opencode (108 mensajes, `990b9c4`) y Step-5-WorkBuddy (75 archivos, `07cf51c`) el 2026-10-18.
