@@ -6,15 +6,15 @@
 
 ## Reserva actual
 
-- Estado: 🟢 Disponible
-- Agente: —
+- Estado: 🔵 En curso
+- Agente: agnes-3-flash (Kilo Code)
 - Fase: F4/Vertical slice
 - Dificultad: 3
 - Visión: V1
-- Entrada: M19🟡 M159🟡 M155🟢
+- Entrada: M19🟡 M159🟢 M155🟢
 - Salida: Diseño visual de 23 NPCs en 4 islas + ropa con colores HEX + herramientas en mano con IDs M159 + rasgos físicos + variantes estacionales + reglas por profesión + integración M19/M159/M45/M46/M155/M160/M27 + test headless 0 fallos
 - Archivos: `data/npc_visuals/` (Resources .tres por NPC), `scripts/data/npc_visual_database.gd` (autoload), `data/npc_visuals/npc_visual_catalog.tres`
-- Fecha: 2026-09-01 15:37
+- Fecha reserva: 2026-10-21 (agnes-3-flash, frente N650 asignado por el director #752; permiso de visión/captura concedido). B1 medición: 23 diseños (AUR×5, CEN×5, COR×5, RIZ×8); 7/7 refs herramienta→M159 válidas; variantes_estacionales={} + retrato_path="" (los 2 [?] = owner M45/M46 + iter 2). 42 [ ] + 2 [?] = 94/138.
 
 ---
 
@@ -36,7 +36,7 @@
 - [x] Implementar `get_seasonal_variant(npc_id, estacion)` [S]
 - [x] Crear carpeta `data/npc_visuals/` [S]
 - [ ] Validar que todos los IDs coinciden con M19 [M]
-- [ ] Crear script de validación de diseños [M]
+- [x] Crear script de validación de diseños [M] — **agnes-3-flash 2026-10-21:** `tools/npc_visual_check.gd` (headless) valida 23 diseños, ids únicos, por isla (AUR/CEN/COR/RIZ), formato `npc_id`, HEX → **0 fallos, 0 avisos** (EXIT 0). Escribe `tools/reportes/`.
 
 ### Isla Raíz: 8 NPCs (20 ítems)
 
@@ -131,7 +131,7 @@
 ### Integración y Validación (20 ítems)
 
 - [ ] Verificar que IDs coinciden con M19 (25 NPCs)
-- [ ] Verificar que herramientas coinciden con M159
+- [x] Verificar que herramientas coinciden con M159 — **agnes-3-flash 2026-10-21:** 7/7 refs de `herramienta_derecha` en los 23 NPCs resuelven a ids M159 existentes (`OBJ-ART-005`→art_005, `OBJ-HER-001/004/006`→her, `OBJ-TAL-002`→tal_002). Verificado contra `data/items/`.
 - [ ] Verificar que retratos 2D (M46) usan estos diseños
 - [ ] Verificar que modelos 3D (M45) implementan estos diseños
 - [ ] Verificar que NPCs aparecen en ubicaciones M160
@@ -147,7 +147,7 @@
 - [ ] Documentar integración con M27
 - [ ] Documentar integración con M29
 - [ ] Documentar integración con M39
-- [ ] Crear test de carga de NPCVisualDatabase
+- [x] Crear test de carga de NPCVisualDatabase — **agnes-3-flash 2026-10-21:** `tests/unit/data/test_npc_visual_database.gd` (headless, 13 bloques A-M) corre **356 checks, 0 fallos** (EXIT 0, "TEST OK"). Bloque K `test_npc_visual_has_required_fields` (138 checks) valida la carga + campos de los 23 NPCs.
 - [x] Crear test de búsqueda por ID
 - [x] Crear test de búsqueda por isla
 
@@ -158,20 +158,20 @@
 - [x] Crear test de búsqueda por isla
 - [x] Crear test de variantes estacionales
 - [ ] Crear test de herramientas M159
-- [ ] Crear test de colores HEX
+- [x] Crear test de colores HEX — **agnes-3-flash 2026-10-21:** bloque M del `test_npc_visual_database.gd` (`test_npc_visual_hex_colors_valid`, 104 checks) + bloque L `clothing_has_colors` (92 checks) — 0 fallos.
 - [ ] Crear test de integración con M19
 - [ ] Crear test de integración con M46
 - [ ] Crear test de validación visual
-- [ ] Crear test de coherencia por isla
+- [x] Crear test de coherencia por isla — **agnes-3-flash 2026-10-21:** bloques D/E/F del `test_npc_visual_database.gd` (`get_visuals_by_island` + count + all_islands) — 0 fallos.
 
 ### Documentación (10 ítems)
 
 - [ ] Crear README con formato de IDs
-- [ ] Documentar paleta de piel completa
-- [ ] Documentar paleta de cabello completa
-- [ ] Documentar paleta de ojos completa
-- [ ] Documentar reglas de identificación por profesión
-- [ ] Documentar reglas de coherencia por isla
+- [x] Documentar paleta de piel completa — **agnes-3-flash 2026-10-21:** 03-Diseno §1 "Paleta de Colores de Piel" (9 líneas, códigos SK-01…).
+- [x] Documentar paleta de cabello completa — **agnes-3-flash 2026-10-21:** 03-Diseno §2 "Paleta de Colores de Cabello" (12 líneas, códigos HR-01…).
+- [x] Documentar paleta de ojos completa — **agnes-3-flash 2026-10-21:** 03-Diseno §3 "Paleta de Colores de Ojos" (11 líneas, códigos EY-01…).
+- [x] Documentar reglas de identificación por profesión — **agnes-3-flash 2026-10-21:** 03-Diseno §9.1 "Identificación por Profesión".
+- [x] Documentar reglas de coherencia por isla — **agnes-3-flash 2026-10-21:** 03-Diseno §8 (tabla resumen visual por isla) + §9.2 "Colores por Isla".
 - [ ] Documentar variantes estacionales
 - [ ] Documentar integración con otros módulos
 - [ ] Crear guía para agregar nuevos NPCs

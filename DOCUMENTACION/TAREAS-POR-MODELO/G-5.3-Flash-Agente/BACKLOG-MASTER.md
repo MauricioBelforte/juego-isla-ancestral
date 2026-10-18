@@ -38,9 +38,12 @@
 3. Push diario trazado (commits de catch-up + line de log con rango empujado, §4.3).
 4. Estado del remoto vs local (HEAD == origin/main o divergencia medida).
 5. Sanitizado de `ESTADO-PARALELO.md` (bytes NUL/CRLF — ya limpié 04; re-verificación).
+  · VERIFICADO 2026-10-18 03:45 UTC (G-5.3-Flash-Agente): ESTADO-PARALELO.md sin bytes NUL y sin CRLF (0/0 — el saneo previo del director se mantiene estable; archivo re-escrito idempotente UTF-8 sin BOM).
 6. Lectura de la fila del día de cada módulo tocado (fila GLOBAL: estado real vs editado).
+  · VERIFICADO 2026-10-18 03:55 UTC (G-5.3-Flash-Agente): filas de los módulos tocados hoy por el CI leídas y coherentes con mi ruteo — M64 🟡 (BUG-129 preso de verificación s3), M72 🟡 (step-5), M112 🟡 (DS-Opencode), M118 🟡 (Ling, L199 roja coherente), M127 🟢 (agnes-2.5-flash; los 300 hallazgos del job legal apuntan a M159), M159 🔵 (agnes, generador que emite BOM). Los dueños del CI (021/023) coinciden con las filas: ruteo correcto.
 7. Respuesta a cualquier plantilla vacía T-19 madurada (≥2 ciclos) — aviso o espera.
 8. Normalización del pool de Logs global (cabeza real, sin huecos no documentados).
+  · VERIFICADO 2026-10-18 03:45 UTC (G-5.3-Flash-Agente): pool global de Logs saludable — 1040 números, cabeza 1961, cola 3000, orden monotónico, 0 duplicados, 0 huecos internos (consistencia verificada por script).
 9. Registro del día del director (log en Logs/ con número del pool global).
 10. Aplicación de fila de cierre del día (como el 1905) cuando toque.
 
@@ -71,6 +74,7 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 22. Si el CI sigue rojo en la capa por "test_diario_perf" u otro WIP de Step: confirmar si el commit del fix ya llegó (stress de catch-up: según Step 5).
   · VERIFICADO 2026-10-18 01:35 UTC (G-5.3-Flash-Agente, gh run quality.yml limit 5): CI ROJO 5/5 recientes (00:24Z-01:01Z). El run 39084931328 tiene 3 capas rojas: (1) UTF-8 BOM guard — item_obj_her_017.tres con BOM, FIX 1 aplicado y PISADO por un commit UTF-16: mi fix dejó el disco UTF-8 sin BOM, pero el blob commiteado (4fa7f55 y HEAD, verificado con git cat-file binario) empieza ff fe = BOM UTF-16-LE (escritura con redirección > de PowerShell — reincidencia exacta de la prohibición §28). MI WORKING TREE ESTÁ CORRECTO (UTF-8 sin BOM, .tres intacto, M en estado git): el director solo necesita commitear ESTE archivo tal está en disco y la capa verde.; (2) M127 legal — scan_orphan_code 300 hallazgos NUEVOS (718 total, iconos assets/2d/items_m159 sin metadata legal, dueño M159/agnes); (3) M112 suite — 2 SCRIPT ERROR (size in Callable + register in NPCWatchdog). No era test_diario_perf de Step.
 23. Si el CI está rojo por la capa de economía (M38 — los tests de guardas añadidas por DeepSeek): verificar con el mismo conteo de guardas (11/20/23 matriz).
+  · PUNTos FINOS M112 2026-10-18 03:40 UTC (G-5.3-Flash-Agente, run 39089280881 log-failed): los 2 SCRIPT ERROR son de TESTS STALE que llaman APIs inexistentes — (1) res://scripts/logros/test_logros.gd:291 en _test_guardado_carga_rf9_rn8: Invalid call. Nonexistent function 'size' in base 'Callable' (dueño fila M72); (2) res://scripts/ia_npc/test_rendimiento_m64.gd:64 en _bloque_a_budget: Nonexistent function 'register' in base 'Node (NPCWatchdog)' (dueño fila M64). La capa M112 falla POR ELLOS; el resto de suites del job corren. Nota: NO son economía M38.
 24. Correr `scripts/validar_workflows.py` y verificar 6/6 (como DeepSeek midió).
   · VERIFICADO 2026-10-18 01:33 UTC (G-5.3-Flash-Agente): validar_workflows.py 6/6 OK (backup, bug_metrics, dev-build, quality, release-build, testing — YAML-parse, runs-on, needs coherentes, citas versionadas).
 25. Si alguna suite queda roja por SCRIPT ERROR de archivos de autores nuevos (agnes/Step): reportar al dueño del módulo con puntero, no lo tapa el director.

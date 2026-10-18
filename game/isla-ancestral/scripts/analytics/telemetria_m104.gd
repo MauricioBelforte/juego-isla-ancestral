@@ -1,5 +1,11 @@
 class_name TelemetriaM104
 extends RefCounted
+
+const EVENTO_VOLVER_A_CASA := "volver_a_casa"
+const EVENTO_ACERCARSE_PUERTO := "acercarse_puerto"
+const EVENTO_PAUSA_CONTEMPLATIVA := "pausa_contemplativa"
+
+extends RefCounted
 """Instrumenta los 3 eventos de telemetría M104 que M153-Objetivo-Final pide
 (ítems 33, 42 y 178 del checklist de M153, KnownIssue de DoD no bloqueante):
 
@@ -13,9 +19,6 @@ Diseño (mismo patrón que el resto del proyecto):
   * no rompe el flujo del emisor: cualquier excepción se degrada a nada.
 """
 
-const EVENTO_VOLVER_A_CASA := "volver_a_casa"
-const EVENTO_ACERCARSE_PUERTO := "acercarse_puerto"
-const EVENTO_PAUSA_CONTEMPLATIVA := "pausa_contemplativa"
 
 # -*- coding: utf-8 -*-
 

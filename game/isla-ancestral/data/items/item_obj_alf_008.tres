@@ -1,4 +1,4 @@
-﻿[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
 [ext_resource type="CompressedTexture2D" uid="uid://bn6oj2qpdcm3q" path="res://assets/2d/items_m159/ico_item_obj_alf_008.png" id="2"]

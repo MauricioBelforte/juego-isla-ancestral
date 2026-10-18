@@ -60,7 +60,7 @@
 38. M160-Ubicaciones: 39 catálogo 48 de las ubicaciones. — [x] 2026-10-17 (Tanda 30): boot en vivo [M160] catalogo JSON: 39 cargadas, 0 omitidas (.tres), 0 errores + [M160] Ubicaciones cargadas: 48 + conexiones bidireccionales: 10 (x287 en out/, incl. CI); test_ubicaciones_m160.gd rc=0 Resumen M160: 17 checks, 0 fallos (out/tanda30). Modulo 160: 145 [x]/2 [ ]/8 [?] historicos.
 39. El 148 de T del boot (the MC). — [x] 2026-10-17 (Tanda 31): M148-Lore-Ambiental front verificado — boot LoreCatalogo 60 piezas (4 islas) en 10 logs de out/, LoreGate OK 60 piezas/16 pistas/grafo consistente, TerrenoLore secretos por estacion (primavera/verano/otono/invierno); test_lore_m148.gd rc=0 Resumen M148: 85 checks, 0 fallos (el WARNING Catalogo invalido es el caso negativo intencional del auditor; out/tanda31). Modulo 148: 115 [x]/0 [ ]/2 [?].
 40. M127-M52 (los drifts de front). — [x] 2026-10-17 (Tanda 32): M127-Copyright verificado (test_copyright_m127.gd rc=0 13 checks 0 fallos; boot [M127] OK legal/copyright_register.md; modulo 76/0/24) y M52-VFX verificado (test_vfx_m52_iter6.gd rc=0 76 checks 0 fallos RESULTADO OK; boot VfxDirector listo 30 eventos del catalogo x6; modulo 145/0/3 CERRADO). Sin drift entre docs y codigo en ambos frentes (out/tanda32).
-41. M129-Merch: 10 productos del front.
+41. M129-Merch: 10 productos del front. — [x] 2026-10-17 (Tanda 33): data/legal/merchandising.json v2 = 10 productos (camisetas, tazas, posters, artbook, soundtrack, peluches, figuras, mapa_tela, llavero, pack_stickers) + politicas post_lanzamiento/licencias; boot [M129] MerchManager listo (10 productos) x289 en out/; test_merch_m129.gd rc=0 Resumen M129: 24 checks, 0 fallos (out/tanda33). Modulo 129: 101 [x]/0 [ ]/7 [?].
 42. M147-WorldBible: canon 1.0.0 (6 personajes 8 lugares — ES/EN/PT el front).
 43. M147: los strings de los 6 personajes (Catalina/Bruno/Catalina/Finneas/Luna/Mateo).
 44. The vocabulary de — the canon8 (the canon of reportes).
@@ -340,7 +340,7 @@
 ### Bloque U — El front de otros al emisor (el 148 del centro de front).
 
 86. M127-M52 (los drifts de front). — [x] 2026-10-17 (Tanda 32): dup de #40 (misma evidencia — política dups 052).
-87. M129-Merch: 10 productos del front.
+87. M129-Merch: 10 productos del front. — [x] 2026-10-17 (Tanda 33): dup de #41 (misma evidencia — política dups 052).
 
 ### Bloque V — Los strings finales del vocabulario.
 

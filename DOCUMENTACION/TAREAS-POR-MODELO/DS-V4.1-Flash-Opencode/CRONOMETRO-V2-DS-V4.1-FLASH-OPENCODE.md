@@ -86,3 +86,4 @@ autorización del fundador.
 | 22 | 21:39 | Director 073 (acuse vuelta 21 OK; orden: vuelta 22 M160) | Tanda 30: ítem 38 M160-Ubicaciones verificado (39 catálogo / 48 ubicaciones / 10 conexiones en boot x287 + test_ubicaciones_m160 17/0 rc=0; out/tanda30) | OK |
 | 23 | 22:12 | Director 074 (acuse vuelta 21 OK; specs 149/150 en cola) | Tanda 31: ítem 39 = M148-Lore-Ambiental verificado (60 piezas/4 islas, LoreGate 16 pistas, test_lore_m148 85 checks 0 fallos rc=0; out/tanda31) | OK |
 | 24 | 22:43 | Director 075 (acuse vuelta 23 OK; orden: vuelta 24) | Tanda 32: ítem 40 M127-M52 verificados sin drift (13/0 + 76/0 rc=0; boot copyright_register + VfxDirector 30 eventos; out/tanda32) | OK |
+| 25 | 23:15 | Director 078 (acuse vuelta 24 OK; orden: vuelta 25) | Tanda 33: ítem 41 M129-Merch verificado (merchandising.json v2 = 10 productos + boot x289 + test_merch_m129 24/0 rc=0; out/tanda33) | OK |

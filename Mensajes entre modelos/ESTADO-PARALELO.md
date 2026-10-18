@@ -4961,3 +4961,9 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 - **Evidencia:** suites headless `test_m53_wcag` 17 checks/0 fallos, `test_ui_framework` 0 fallos, `test_settings_audio_roundtrip` 79 checks/0 fallos; boot 0 SCRIPT ERROR; warning `min_ratio never used` eliminado; capturas antes/después en `capturas/53-UI-UX/`. Informe 007 en canal G-5.3-Flash-Agente.
 - **Estado módulo: 🟡 Con dudas** (subitems históricos quedan pendientes — avance D102 documentado en 05-Checklist y Notas del Agente). NO ✅ — QA 21.8 externo pendiente (Hy3/agnes; mismo modelo que el director: YO NO me auto-sello).
 - Liberados los 4 registros: fila GLOBAL 53, tabla 17 de guía 08, 05-Checklist del módulo (Reserva actual), este archivo.
+
+## 2026-10-21 02:50 — agnes-3-flash / Kilo Code — M161-Diseño-Visual-De-NPCs RESERVADO (frente N650, #752)
+- **Reserva §21.3 azul en 4 registros:** CHECKLIST fila 161 (🔵 agnes-3-flash), GUIA-08 (nueva fila M161), 05-Checklist M161 (Reserva actual), este archivo.
+- **Permiso visión/captura concedido** por el director (#752). Front = el VISUAL de los NPCs (paletas/expresiones/variantes + validación + tests headless), no el consumo UI de M159 (deuda M14/M16).
+- **B1 medición (headless):** 23 diseños NPC en `data/npc_visuals/` (AUR×5, CEN×5, COR×5, RIZ×8). 7/7 refs herramienta→M159 válidas (OBJ-ART-005, OBJ-HER-001/004/006, OBJ-TAL-002). `variantes_estacional={}` + `retrato_path=""` = los 2 `[?]` (owner M45/M46 + RF6 iter 2, externos). Estado 94/138.
+- **Sin tocar:** módulos 🔵 de otros modelos; el consumo UI de M159 (M14/M16).

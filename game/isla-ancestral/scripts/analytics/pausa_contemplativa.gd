@@ -1,5 +1,9 @@
 class_name PausaContemplativa
 extends Node
+
+const MIN_INTERVALO_SEG: float = 30.0
+
+extends Node
 """Observador de `pausa_contemplativa` (M153 ítem 178, telemetría M104).
 
 El jugador pausa sin objetivo activo para mirar el paisaje. Ese momento es
@@ -19,7 +23,6 @@ Regla de anti-spam: sólo registra una pausa por `MIN_INTERVALO_SEG` para que
 mantener la pausa no inunde el buffer.
 """
 
-const MIN_INTERVALO_SEG: float = 30.0
 
 # -*- coding: utf-8 -*-
 
