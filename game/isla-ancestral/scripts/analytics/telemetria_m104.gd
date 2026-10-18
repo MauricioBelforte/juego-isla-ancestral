@@ -5,19 +5,18 @@ const EVENTO_VOLVER_A_CASA := "volver_a_casa"
 const EVENTO_ACERCARSE_PUERTO := "acercarse_puerto"
 const EVENTO_PAUSA_CONTEMPLATIVA := "pausa_contemplativa"
 
-extends RefCounted
-"""Instrumenta los 3 eventos de telemetría M104 que M153-Objetivo-Final pide
-(ítems 33, 42 y 178 del checklist de M153, KnownIssue de DoD no bloqueante):
-
-  * volver_a_casa          → entrar/registrar la parcela del jugador
-  * acercarse_puerto       → proximidad a un nodo de transporte (puerto)
-  * pausa_contemplativa    → pausa libre del jugador (sin objetivo activo)
-
-Diseño (mismo patrón que el resto del proyecto):
-  * helper PURO y sin dependencias: registra en `/root/AnalyticsDirector` por
-    duck-typing, y si no está (headless, opt-out, tests) no hace nada.
-  * no rompe el flujo del emisor: cualquier excepción se degrada a nada.
-"""
+# Instrumenta los 3 eventos de telemetría M104 que M153-Objetivo-Final pide
+# (ítems 33, 42 y 178 del checklist de M153, KnownIssue de DoD no bloqueante):
+# 
+#   * volver_a_casa          → entrar/registrar la parcela del jugador
+#   * acercarse_puerto       → proximidad a un nodo de transporte (puerto)
+#   * pausa_contemplativa    → pausa libre del jugador (sin objetivo activo)
+# 
+# Diseño (mismo patrón que el resto del proyecto):
+#   * helper PURO y sin dependencias: registra en `/root/AnalyticsDirector` por
+#     duck-typing, y si no está (headless, opt-out, tests) no hace nada.
+#   * no rompe el flujo del emisor: cualquier excepción se degrada a nada.
+#
 
 
 # -*- coding: utf-8 -*-

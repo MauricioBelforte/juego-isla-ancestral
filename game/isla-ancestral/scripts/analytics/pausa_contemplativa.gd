@@ -3,25 +3,24 @@ extends Node
 
 const MIN_INTERVALO_SEG: float = 30.0
 
-extends Node
-"""Observador de `pausa_contemplativa` (M153 ítem 178, telemetría M104).
-
-El jugador pausa sin objetivo activo para mirar el paisaje. Ese momento es
-deliberado y vale la pena medirlo: indica que el mundo invita a quedarse.
-
-Vía de observación elegida (por qué NO se instrumentó en UIManager):
-  * `UIManager` no tiene un único punto de pausa: pausan `tutorial_manager`,
-    `stream_manager` y varios servicios de audio, y ninguno de ellos es "la"
-    pausa del jugador.
-  * Ensuciar esos módulos para teletría acoplaría M104 a M58/M63/M92/M41.
-
-En su lugar, este observador escucha el bus (`pausa_cambiada`) o, si no existe,
-expone `observar_pausa()` para que el adaptador de UI lo llame cuando sepa que el
-jugador pausó. Siempre silencioso si no hay AnalyticsDirector.
-
-Regla de anti-spam: sólo registra una pausa por `MIN_INTERVALO_SEG` para que
-mantener la pausa no inunde el buffer.
-"""
+# Observador de `pausa_contemplativa` (M153 ítem 178, telemetría M104).
+# 
+# El jugador pausa sin objetivo activo para mirar el paisaje. Ese momento es
+# deliberado y vale la pena medirlo: indica que el mundo invita a quedarse.
+# 
+# Vía de observación elegida (por qué NO se instrumentó en UIManager):
+#   * `UIManager` no tiene un único punto de pausa: pausan `tutorial_manager`,
+#     `stream_manager` y varios servicios de audio, y ninguno de ellos es "la"
+#     pausa del jugador.
+#   * Ensuciar esos módulos para teletría acoplaría M104 a M58/M63/M92/M41.
+# 
+# En su lugar, este observador escucha el bus (`pausa_cambiada`) o, si no existe,
+# expone `observar_pausa()` para que el adaptador de UI lo llame cuando sepa que el
+# jugador pausó. Siempre silencioso si no hay AnalyticsDirector.
+# 
+# Regla de anti-spam: sólo registra una pausa por `MIN_INTERVALO_SEG` para que
+# mantener la pausa no inunde el buffer.
+#
 
 
 # -*- coding: utf-8 -*-
