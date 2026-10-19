@@ -49,6 +49,7 @@ El puntero prueba **LECTURA**, no **RESPUESTA**. Tres casos reales de la misma n
 |---|---|---|
 | **Cron A v3** | :00/:20/:40 | ejecutar el script y atender su salida (verificación por script) |
 | **Cron B v3** | :10/:30/:50 | verificar LAG por canal (misma lógica, segunda red) |
+| **Cron C v1** | :05/:25/:45 | Preservacion (commits por frente, sin push) + investigacion/repoblacion por capacidad (fundador 04:41) |
 
 ## 5. Qué queda obsoleto (no reactivar)
 

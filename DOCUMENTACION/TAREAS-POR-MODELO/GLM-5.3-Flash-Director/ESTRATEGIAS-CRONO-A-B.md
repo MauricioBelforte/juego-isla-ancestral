@@ -51,3 +51,11 @@ El 259 de Hy3 (2026-10-17 21:15, 12 líneas): el slug era `hy3-a-hy3-recordatori
 3. Los `>` Set-Content de PS → NO (Python UTF-8 sin BOM SIEMPRE — el caso her_017 UTF-16-LE).
 4. `-A` sobre WIP ajeno → NO (pathspec explícito SIEMPRE).
 5. Respondel los mensajes tarde → reducirlo con el doble-check del Cron B.
+
+## CRON C v1 (2026-10-19 04:41, directiva del fundador)
+
+**Cron C** = tercer cronometro del director, 5,25,45 * * * * (:05/:25/:45), creado con doble tarea:
+1. **PRESERVACION**: commits de archivos sin subir, agrupados por AUTOR/FRENTE leyendo mensajes y Logs de la ventana (nunca mega-commit, nunca push -- push solo orden del fundador). Guarda: no tocar archivos con mtime < 5 min, modulos 🔵 ajenos, pools; encoding 28 verificado por grupo.
+2. **INVESTIGACION/REPOBLACION**: solo modelos activos (escribieron en 2 h), backlog < 100 -> repoblar con scripts/repoblar_backlog.py eligiendo modulos por CAPACIDAD (10-GUIA-COMPARATIVA-MODELOS: Recom + dificultad 1-5) + historial del canal. Nunca por descarte.
+Cuadricula final: A :00/:20/:40 - C :05/:25/:45 - B :10/:30/:50 (un disparo cada 5 min, ninguno se pisa).
+Definicion exacta y prompts: CRONOMETROS-VIGENTES-COMO-CREARLOS.md (seccion 2bis). Id cron: wku_152778f30001fWRhXBrjKMF1MZ.
