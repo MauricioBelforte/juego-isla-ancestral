@@ -1227,3 +1227,46 @@ escrituras parciales). Todas son variantes de "lo que lees no es lo que el emiso
 
 **Firma de actualización:** **Modelo:** GLM-5.3-Flash · **Plataforma:** Kilo Code ·
 **Fecha:** 2026-10-15 22:30 · **Actualización:** Reformulación de la regla de numeración de mensajes por directiva del fundador 2026-10-15 — **manda la SECUENCIA DEL HILO, no el "número más alto del pool"**: `NN = (último NNN- de mensaje en la carpeta) + 1`. El "más alto del pool" queda como **atajo válido solo cuando el pool refleja la secuencia del hilo**; en un canal recién abierto con pool sobredimensionado (caso real: canal GLM-5.3-Flash iba por el 01 con pool 2..150 → el agente respondió 150 y el fundador lo corrigió a 02), los sobrantes se ignoran, se numera con `último + 1` y se borra **solo ese número** del pool. Prohibido numerar por encima de `último + 1`. Huecos del medio siguen sin reutilizarse; cualquier discrepancia pool ↔ hilo se reporta al director para saneo. Regla espejo actualizada en `AGENTS.md` §10.2 (punto 4).
+---
+
+## REGLA DE NUMERACIÓN POR CANAL — VERSIÓN DEFINITIVA (2026-10-19, directiva del fundador)
+
+> Esta sección SUPERSEDE cualquier explicación anterior sobre cómo numerar mensajes.
+> Motivo real: el director escribió a Step-5 con el número 096 (contador propio) mientras
+> el `NUMEROS_DISPONIBLES.txt` de la carpeta Step-5 decía que por ahí se iba en el 81,
+> número que además YA HABÍA AGARRADO Step-5.
+
+### Qué es cada archivo de un canal (`Mensajes entre modelos/<CANAL>/`)
+
+| Archivo | Qué es | Quién lo usa | Para qué |
+|---|---|---|---|
+| `NN-<fecha>_<hora>-<emisor>-a-<receptor>-tema.md` | El mensaje mismo | Quien escribe | `NN` = el número que sacó del pool de ESTA carpeta al escribirlo |
+| `NUMEROS_DISPONIBLES.txt` | El listado de números libres del canal | **TODOS los que escriben en la carpeta: el agente Y el director** | **De acá se saca SIEMPRE el número del próximo mensaje que se escribe en esa carpeta** |
+| `.ultima-revision-<slug>.txt` | Puntero del último mensaje LEÍDO | Quien lee (el director) | Estado de lectura del barrido; **NO tiene relación con numerar mensajes nuevos** |
+
+### La regla (una sola, sin excepciones)
+
+1. Antes de escribir un mensaje en un canal, abrir el `NUMEROS_DISPONIBLES.txt` DE ESA CARPETA.
+2. Tomar el primer número de la lista (el más bajo). Ese es el `NN` del nombre del archivo.
+3. BORRAR ese número de la lista EN EL MISMO MOMENTO (el pool se consume al tomarlo: el
+   agente de ese canal puede estar escribiendo su propio mensaje al mismo tiempo).
+4. NUNCA inventar un número por fuera del pool (ni "último+1" a mano, ni contadores propios).
+   Si el pool no coincide con el canal, primero se sana el pool, después se escribe.
+
+### Invariantes del pool (verificar en cada vuelta)
+
+- `primer número del pool = máximo NN de la carpeta + 1`. Los huecos del medio JAMÁS se reutilizan.
+- 100 números consecutivos disponibles, sin huecos ni números ya usados.
+- UTF-8 **sin BOM**, LF. Escritura SIEMPRE con Python UTF-8; prohibido PowerShell `>`/`Set-Content`.
+- El número es de UN solo uso: asignar y sacar del pool; si una corrección renumera, primero
+  verificar contra el pool vigente; si un número se toma para una prueba y no se usa, devolverlo.
+
+
+---
+
+## DETECCIÓN DE MENSAJES SIN RESPONDER — MÉTODO V3 (2026-10-19, validado por el fundador)
+
+**Documento canónico:** DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/METODO-DETECCION-V3-LAG.md
+**Script:** python scripts/verificar_mensajes_nuevos.py
+**Regla corta:** un mensaje está sin responder si el NN más alto escrito por el agente en su canal es mayor que el NN más alto de mi último acuse (lag). Sin punteros, sin filtro de receptor.
+**OBSOLETO (no reactivar):** barridos por puntero .ultima-revision o filtrados por slug del receptor (métodos V1/V2 — fallaron con Hy3 259, DS-OC 131-133 y Ling 177-178).

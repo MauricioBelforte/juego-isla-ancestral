@@ -1,6 +1,6 @@
-**Modelo:** DeepSeek-V4.1-Flash
-**Plataforma:** WorkBuddy
-**Fecha:** 2026-09-19 (Log 1094)
+**Modelo:** DeepSeek-V4.1-Flash — DS-V4.1-Flash-Opencode (último modificador)
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-18 (Tanda 60 — sección 12; Log 1998)
 
 # 07-Resultados-Testings.md — Módulo 62: Memoria
 
@@ -321,4 +321,152 @@ el frame equivocado. (Esa fue la 1.ª corrida en rojo: `21 checks, 1 fallo`.)
 ```bash
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_m62_leaks_teleport.gd
+```
+
+## 11. Tanda 59 (2026-10-18, DS-Opencode, Log 1997): L100 — texturas de región se liberan al salir
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L100 del checklist ("Texturas de región se liberan al salir de la misma (con M63 y M09)"), señalado como pendiente de cableado en la auditoría de 2026-10-15.
+- **Suite nueva:** `test_m62_texturas_region.gd` (**33 checks**) con los autoloads REALES `StreamManager` + `MemoryMonitor` vía `--headless --script`:
+  - **A (14):** región en uso — 3 texturas encoladas por el contrato real M63→M62 (`registrar_chunk`), veto por carga (`avisar_cambio_region` no libera en uso), sin envejecido dentro del radio.
+  - **B (11):** salir de la región — `marcar_envejecidos` ×2 → el LRU de M63 libera, `avisar_cambio_region` fuerza el drenaje, cola M62 vacía, **0/3 texturas sobreviven (WeakRef)** y `objetos_vivos` delta 0 (4477→4477).
+  - **C (7):** `evictar_atlas` elige la región vieja por LRU (75 MB → 2; hasta 40 → 1; max_entradas manda; 0 = no-op) + señal `recurso_descargado` ×3 (atlas, 75/40/40).
+- **Resultado:** 33 checks, 0 fallos, **×3 corridas idénticas** (exit 0). Evidencia: `out/tanda59/suite_run{1,2,3}.log`.
+- **Guardián de 3 capas probado EN ROJO (2 inyecciones):** subir el piso → `[FALL] solo 33 (mínimo 40)` + exit 1; abortar B con un SCRIPT ERROR real → el resumen nombra **B** + piso + exit 1 (C corre igual: resumen diferido). Evidencia: `out/tanda59/suite_rojo_piso.log`, `suite_rojo_aborto.log`.
+- **Prelación empírica:** sonda `probe_unreference.gd` (out/tanda59/probe1.log): `unreference()` sin `reference()` previo (`stream_manager.gd` L350) es SEGURO en ambos órdenes — nunca antes ejercitado (las suites viejas registran chunks sin recurso).
+- **Alcance (lo que NO prueba):** el llamador de gameplay (M09/M27) no existe: el cableado de la salida de región sigue siendo deuda de esos módulos. No cubre Play Mode con mundo real.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_texturas_region.gd
+```
+
+## 12. Tanda 60 (2026-10-18, DS-Opencode, Log 1998): L132 — descarga dura al 95% (atlas fuera de pantalla + bancos viajeros)
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L132 del checklist ("Descarga dura al 95%: atlas fuera de pantalla y bancos de biomas viajeros"), la pata del diseño §3 que faltaba: nivel 3 "sin excepción" con viajeros y atlas.
+- **Suite nueva:** `test_m62_duro95.gd` (**39 checks**) con el autoload REAL `MemoryMonitor` vía `--headless --script`:
+  - **A (14):** umbrales 80/90/95 **derivados del presupuesto vivo** (hoy 2032 = 2000 del preset + 32 de `ia_npc` registrado en runtime): `nivel_para` exacto en el umbral y un MB debajo; nivel 1 no ejecuta; nivel 2 drena el tope del preset media (12) e idempotente; nivel 3 **re-aplica** y vacía la cola.
+  - **B (11):** 3 bancos viajeros (60/50/40 MB; dist 60/50/40) + 3 locales + 1 vetado por el handshake M63: orden por distancia desc [60,50,40,10,7,6,5]; el duro drena los 6 libres (168 MB) y el vetado queda contado; al `avisar_carga_terminada`, el próximo duro lo drena (100 MB).
+  - **C (7):** `evictar_atlas` LRU: `fuera_1/2/3` (uso viejo) evictadas en orden (60 MB ≥ 50; señal `atlas`), `pantalla_90` (90 MB, uso reciente) intacta (el tamaño no decide); `hasta_mb=0` es no-op; `max_entradas=1` manda; entradas originales sin mutar.
+  - **D (7):** audio viajero: banco pedido en descarga = `diferido` (y listado), tras `terminar_descarga_audio` = `reproducir`; determinismo del duro (mismos 6 objetos / 168 MB).
+- **Resultado:** 39 checks, 0 fallos, **×4 corridas idénticas** (exit 0). Evidencia: `out/tanda60/suite_run{2,3,4,5}.log`.
+- **Iteración capturada:** `suite_run1.log` (4 fallos) = pin con umbral hardcodeado 2000 vs presupuesto vivo 2032 → derivación con `ceil`.
+- **Guardán de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 39 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda60/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `9f2cb1e4c2362daf471eef5d8743095824acf75b09027e15a23df6f24ea632ab`).
+- **Alcance (lo que NO prueba):** los feeds de producción (tabla de atlas M09/M63; registro de bancos al viajar M42) no existen aún — deuda de esos dueños (en el backlog: ítem 112). No cubre Play Mode con mundo real.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_duro95.gd
+```
+
+## 13. Tanda 61 (2026-10-18, DS-Opencode, Log 2001): L137 — buffers de VoxelTools por chunk se liberan al descargar
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L137 del checklist ("Buffers de VoxelTools por chunk se liberan al descargar (sin acumulación)"), de la sección H (integración M08).
+- **Prelación empírica (específica del payload):** sonda `probe_voxelbuffer_t61{,b}.gd` (out/tanda61/probe{1,2}.log): `VoxelBuffer` (voxel-tools) es **RefCounted** (NO Resource), `create(64,64,64)` OK, WeakRef muere al soltar la última referencia y `objetos_vivos()` (OBJECT_COUNT) lo cuenta exacto (4478 → 4486 → 4478 con 8 buffers de prueba).
+- **Cambio de producción (ensanche):** las firmas de M62 tipadas `Resource` pasaron a `RefCounted` para admitir el payload real: `unload_policy.gd marcar_candidato()`; `memory_monitor.gd esta_en_carga() / _puede_descargar() / registrar_candidato_descarga()` (notas T61 en headers). Retrocompatible; M63 intacto (`registrar_chunk` sigue `Resource`; `avisar_carga_iniciada/terminada` quedan `Resource`).
+- **Suite nueva:** `test_m62_voxel_buffers.gd` (**19 checks**) con los autoloads REALES `MemoryMonitor` + `StreamManager` vía `--headless --script`:
+  - **A (5):** sonda del medidor (control positivo anti-vacuo) — 8 `VoxelBuffer` 64³ reales contados por `objetos_vivos` (+8), mueren al soltar (0/8), base restaurada.
+  - **B (5):** 12 buffers registrados por el contrato M62 (peso 1 = `chunk_lod0`) → drenaje (12 MB) → cola vacía → **0/12 sobreviven (WeakRef)** → sin crecimiento de `objetos_vivos`.
+  - **C (3):** 5 ciclos x 10 buffers → 0/50 retenidos; `objetos_fin=4477` constante en los 5 ciclos; delta global 0 (sin acumulación).
+  - **D (4):** mezcla con la vía real M63: `registrar_chunk` (Resource) + buffer directo en la misma cola → drenaje 2/2, `liberar_envejecidos` suelta el Resource → **0/2 vivos** (regresión del ensanche).
+- **Resultado:** 19 checks, 0 fallos, **×3 corridas idénticas** (exit 0). Evidencia: `out/tanda61/suite_run{1,2,3}.log`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 19 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda61/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `c9632f6e…`; sha actual tras el P.D.: `03b2c6ef…`).
+- **Regresión del ensanche:** las 10 suites M62 previas + `generar_budgets.gd -- --check` → todas verdes (27/47/25/133/16/60/60/21/33/39 checks + 20 budgets; `out/tanda61/reg_*.log`).
+- **Alcance (lo que NO prueba):** el cableado de M08 (crear los buffers por chunk y registrarlos vía `registrar_candidato_descarga`, junto con L134-139) sigue siendo deuda de ese módulo — `chunk_memory.gd` de M08 aparece aún como planificado (04-Codigo). El VoxelTerrain real gestiona sus buffers internos en C++ y no los expone por chunk en GDScript. Esta suite pina el contrato del 62.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_voxel_buffers.gd
+```
+
+
+
+**P.D. (corrección de referencias de Log, misma sesión):** los headers de `unload_policy.gd`, `memory_monitor.gd` y `test_m62_voxel_buffers.gd` citaban «Log 1999» — que es el log real de Step-5-WorkBuddy (barrido de pools). El log correcto de esta tanda es **Log 2001**. El fix es de comentarios (sin cambio de código): la suite se re-corrió tras el fix → 19/0 (out/tanda61/suite_run4_postfix.log) y su sha256 pasó de `c9632f6e…` (guardián/cierre) a `03b2c6ef…` (actual). Es el único delta.
+
+## 14. Tanda 62 (2026-10-18, DS-Opencode, Log 2004): L139 — colliders estáticos de chunks se liberan junto con la mesh
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L139 del checklist ("Colliders estáticos de chunks descargados se liberan junto con la mesh"), de la sección H (integración M08).
+- **Prelación empírica (específica del payload):** sonda `probe_collider_t62.gd` (out/tanda62/probe1.log): el collider real de chunk (`Mesh.create_trimesh_shape()`) es **ConcavePolygonShape3D** (is Resource = true, is RefCounted = true), WeakRef determinista y `objetos_vivos()` (OBJECT_COUNT) lo cuenta exacto (4480 → 4488 → 4480 con 8 formas); el combo NODO StaticBody3D + CollisionShape3D suma +8 huérfanos y `free()` los limpia.
+- **Sin cambio de producción:** el payload ya viaja por la cola M62 como RefCounted desde el ensanche T61; esta tanda solo pina el contrato (no hubo edición de `unload_policy.gd` / `memory_monitor.gd`).
+- **Suite nueva:** `test_m62_colliders_chunk.gd` (**21 checks**) con los autoloads REALES `MemoryMonitor` + `StreamManager` vía `--headless --script`:
+  - **A (5):** sonda del medidor (control positivo anti-vacuo) — 8 `ConcavePolygonShape3D` reales (trimesh con caras) contadas por `objetos_vivos` (+8), mueren al soltar (0/8), base restaurada.
+  - **B (5):** 12 pares {BoxMesh + su trimesh} registrados por el contrato M62 (peso 4 + 1 = `malla_region` + `chunk_lod0`) → drenaje (60 MB) → cola vacía → **0/24 sobreviven (WeakRef de malla y collider)** → sin crecimiento de `objetos_vivos`.
+  - **C (3):** 5 ciclos x 10 pares → 0/100 retenidos; delta global 0 (sin acumulación).
+  - **D (6):** evento de descarga único: mesh del chunk por la vía real M63 (`registrar_chunk`) + collider directo en la misma cola → drenaje 2/2, `liberar_envejecidos` suelta el mesh → **0/2 vivos (mueren JUNTO con la mesh)**; además, la forma NODO (StaticBody3D + CollisionShape3D) se cuenta como huérfano (+2) y `free()` del cuerpo vuelve a la base.
+- **Resultado:** 21 checks, 0 fallos, **×3 corridas idénticas** (exit 0). Evidencia: `out/tanda62/suite_run{1,2,3}.log`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 21 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda62/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `90baf14e…`).
+- **Regresión:** las 10 suites M62 previas + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25 checks + 20 budgets; `out/tanda62/reg_*.log`).
+- **Alcance (lo que NO prueba):** el cableado de M08 (crear el collider por chunk y registrarlo vía `registrar_candidato_descarga`, junto con L134-139) sigue siendo deuda de ese módulo — `chunk_memory.gd` de M08 aparece aún como planificado (04-Codigo). El VoxelTerrain real gestiona sus colliders internos en C++ y no los expone por chunk en GDScript. Esta suite pina el contrato del 62.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_colliders_chunk.gd
+```
+
+## 15. Tanda 63 (2026-10-18, DS-Opencode, Log 2006): L140 — sin duplicación de meshes entre M63 (streaming) y el 62 (descarga)
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L140 del checklist (sección H, integración M08), origen RF5 de 01-Requerimientos (L54): "LRU + pool de meshes: liberar buffers voxel y colliders de chunks lejanos sin duplicar con M63".
+- **Contrato pinneado (sin cambio de producción):** `stream_manager.gd registrar_chunk` ofrece el recurso UNA vez por chunk (gate `es_nuevo`, peso `chunk_lod0` = 1.0); el re-registro por frame NO re-ofrece ni infla la cola; swap bajo el mismo `chunk_id` resuelve solo la oferta vieja al drenar (el nuevo no se re-ofrece); `ejecutar_descarga` del 62 cuenta MB pero NO libera — el drop real es del dueño (`liberar_envejecidos` del M63 con `unreference`); veto de handshake §5.3: `avisar_carga_iniciada/terminada` + filtro `_puede_descargar` (opt-in; producción siempre lo pasa).
+- **Suite nueva:** `test_m62_sin_duplicacion.gd` (**33 checks**) con los autoloads REALES `MemoryMonitor` + `StreamManager` vía `--headless --script`:
+  - **A (7):** identidad y oferta única — 1 chunk = 1 activo + 1 oferta (MISMA instancia, sin copias: `objetos_vivos` estable); 30 re-registros → cola sigue en 1 y 1 activo.
+  - **B (7):** swap — 1 activa + 1 oferta (la vieja); ventana transitoria 2/2; tras drenar el viejo muere (la oferta era su último ref) y el nuevo sigue vivo/activo; solo 1 malla viva; liberar cierra a base.
+  - **C (6):** drenaje del 62 NO libera — 1 candidato; el drenaje cuenta MB y vacía la cola; el recurso sigue vivo; el 63 mantiene su entrada activa; el drop del dueño lo mata recién ahí; ciclo a base.
+  - **D (6):** veto — carga declarada en ambos lados; oferta durante la carga; drenaje CON el filtro de producción `_puede_descargar` → 0 MB, diferido 1, cola intacta (log `DESCARTADA`); al terminar la carga el registro queda limpio y el drenaje consume normal; cierre limpio. Hallazgo: sin filtro el veto NO aplica (opt-in) — mismo camino que usa producción (`_enforcement`, `avisar_cambio_region`).
+  - **E (5):** conservación global — 5 ciclos × 8 chunks (triple registro): 40 WeakRefs 0 retenidas; cola 0 y 0 activos; delta `objetos_vivos` 0; descargas contadas 44 ≥ 40.
+- **Resultado:** 33 checks, 0 fallos, **×3 corridas idénticas** (exit 0). Evidencia: `out/tanda63/suite_run{1,2,3}.log`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 33 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda63/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `60df8436…`).
+- **Regresión:** las 10 suites M62 previas + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25 checks + 20 budgets; `out/tanda63/reg_*.log`).
+- **Alcance (lo que NO prueba):** el cableado de M08 (generar mallas en hilos y registrarlas por chunk, L141) sigue siendo deuda de ese módulo. Esta suite pina el contrato del 62 (idempotencia de oferta + no-duplicación + veto).
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_sin_duplicacion.gd
+```
+
+## 16. Tanda 64 (2026-10-19, DS-Opencode, Log 2007): L141 — generación de mallas en hilos (M08): resultados por cola sin copias extra
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L141 del checklist (sección H, integración M08): "Generación de mallas en hilos (M08): resultados por cola sin copias extra".
+- **Contrato pinneado (sin cambio de producción):** `encolar` con `ruta_recurso` usa `load_threaded_request`/`load_threaded_get` (hilo real, `esta_cargando` activo); la entrega es **la MISMA instancia del cache** (identidad + ruta); la ruta se cierra tras la entrega (anti-doble L158 sin residuo); peso reclamado exactamente 1 vez (delta 4.0); en la ventana de entrega el recurso va declarado (63) y registrado (62) con el veto de producción activo (`_puede_descargar = false`); `_encolar_precarga` rechaza la segunda llamada inmediata (1 sola ruta en vuelo).
+- **Hallazgo del engine (documentado como E-32 en GUIA-GODOT/06-registro-errores.md):** con la descarga del 62 activa (3 patas juntas) el engine **reclama** la instancia descargada; la siguiente carga entrega una instancia **nueva limpia**; racy, pero la reclamación SIEMPRE precede a la entrega → invariante "jamás dos vivas a la vez".
+- **Suite nueva:** `test_m62_hilos_cola_mallas.gd` (**33 checks**) con los autoloads REALES `MemoryMonitor` + `StreamManager` vía `--headless --script`:
+  - **A (7):** cola drenada inicial; encolar malla por la cola real (en vuelo con hilo, peso 4.0 una vez); bombeo drena; UNA entrega con Mesh real; SIN COPIAS: MISMA instancia del cache (identidad + ruta); ruta cerrada; peso reclamado 1 vez y progreso 1.0.
+  - **B (5):** ventana de entrega — declarado (63) + registrado (62); veto de producción activo; handshake cerrado tras la entrega; segunda entrega = MISMA instancia del ancla (sin copia); aviso al 62 contado.
+  - **C (6):** instrumentación (`operacion_completada`); `_encolar_precarga` encola la 1ª y abre la ruta; 2ª inmediata RECHAZADA; 1 sola ruta en vuelo; bombeo cierra; delta == 1.
+  - **D (5):** encolada (cola 1, delta 4.0); progreso < 1.0 con operación pendiente; cada bombeo conserva el delta (sin re-claim); tras drenar cola 0 + peso 4.0 + progreso 1.0; ruta cerrada.
+  - **E (7):** ancla viva → MISMA instancia (sin recarga aún); 5 ciclos entregaron, descargaron y liberaron limpio; 0 nulas, 0 duplicados y todas clasificadas; cola 62 final 0 + 0 chunks; delta `objetos_vivos` ≤ 0 y sin rutas en vuelo; descargas del 63 +5; control positivo (2 `CACHE_MODE_IGNORE` → el detector las ve).
+- **Resultado:** 33 checks, 0 fallos, **×3 corridas idénticas** (runs 8/9/10, exit 0, logs normalizados idénticos). Evidencia: `out/tanda64/suite_run{1..10}.log` (7 corridas de iteración encontraron y documentaron 3 defectos de harness: premisa falsa "ids==1", contador de recargas sin bandera `hubo_prev`, control positivo dependiente de `prev`).
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 33 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda64/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `4666e207…`).
+- **Regresión:** las 10 suites M62 previas + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25 checks + 20 budgets; `out/tanda64/reg_*.log`).
+- **Alcance (lo que NO prueba):** el cableado de producción de M08 (`chunk_memory.gd` generando y registrando mallas en hilos por chunk) sigue siendo deuda de ese módulo. Esta suite pina el contrato de la cola/loader del 62/63.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_hilos_cola_mallas.gd
+```
+
+## 17. Tanda 65 (2026-10-19, DS-Opencode, Log 2010): L142 — diffs y ediciones del jugador (M08) sin historial infinito en RAM
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L142 del checklist (sección H, integración M08): "Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM".
+- **Contrato pinneado (sin cambio de producción):** el camino real de edición (`tool_controller.gd`) escribe con `do_point` — **1 escritura por acción** — y en la fuente NO existen estructuras de historial/op-log (0/8 patrones: `_historial`, `historial_ediciones`, `edit_log`, `log_ediciones`, `op_log`, `undo_stack`, `redo_stack`, `diff_store`), ni `do_sphere`/`do_box`. Los payloads por-chunk editados en burst (8 `set_voxel` c/u) se registran y drenan por la cola del 62 sin residuo.
+- **Suite nueva:** `test_m62_diffs_ediciones.gd` (**24 checks**) con los autoloads REALES `MemoryMonitor` + `StreamManager` vía `--headless --script` (2 checks de base de autoloads):
+  - **A (5):** sonda anti-vacuo + edición real sobre payload (3 `VoxelBuffer` con 8 `set_voxel` c/u; lecturas de vuelta correctas; `objetos_vivos` acotado; WeakRef); medidor de ediciones del camino real.
+  - **B (5):** contrato de fuente de `tool_controller.gd`: existe, >1000 chars, `do_point(` ≥ 2 usos, sin `do_sphere(`/`do_box(`, 0/8 patrones de historial → nada acumula por diseño.
+  - **C (3):** 5 ciclos × 10 chunks editados y registrados por la cola 62 + drenado: 50 WeakRefs, **0 retenidas**, delta `objetos_vivos` 0 (× ciclo impecable).
+  - **D (5):** vía mixta real 62+63: payload editado por la cola del 62 + `Resource` declarado por `registrar_chunk` del 63; drena 2, `liberar_envejecidos`=1, 0/2 vivos, colas finales 0.
+  - **E (4):** control positivo autocontenido (2 payloads retenidos por vars propias → el detector DEBE verlos: 2) + balance global final sin fugas (delta ≤ 0; 4477 objetos base).
+- **Resultado:** 24 checks, 0 fallos, **×3 corridas idénticas** (runs 3/4/5, exit 0, logs normalizados idénticos). Evidencia: `out/tanda65/suite_run{1..5}.log` (runs 1-2 de iteración encontraron 2 defectos de harness: `registrar_chunk` exige `Resource` — VoxelBuffer es RefCounted; WeakRefs contadas en el balance antes de `clear()`). Diagnósticos: A `edits_ok=2 medidor=3` / B `do_point=2 historial=0` / C `ciclos_ok=5/5 vivos_acum=0` / D `libsm=1 vivos=0` / E `control=2 global=4477`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 24 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda65/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `0689b07d…`).
+- **Regresión:** 11 suites M62 (las 10 del set T64 + la suite T64) + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25/33 checks + 20 budgets; `out/tanda65/reg_*.log`).
+- **Hallazgo de herramienta (recogido en GUIA-GODOT/02-voxel-tools.md §20):** `VoxelToolBuffer` no es instanciable desde GDScript en este build (can_instantiate=false; constructor no bindeado; sin `set_buffer`); para editar sin terreno real usar `VoxelBuffer.set_voxel`.
+- **Alcance (lo que NO prueba):** el cableado de producción de M08 (`chunk_memory.gd` acumulando diffs por chunk) sigue siendo deuda de ese módulo. Esta suite pina el contrato del camino real de edición + la liberación por las colas del 62/63.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_diffs_ediciones.gd
 ```

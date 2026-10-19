@@ -1,7 +1,7 @@
 **Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
-# 04-Codigo.md â€” MÃ³dulo 161: DiseÃ±o Visual de NPCs
+# 04-Codigo.md — Módulo 161: Diseño Visual de NPCs
 
 ## 1. Estructura de Datos Propuesta
 
@@ -21,7 +21,7 @@ extends Resource
 ## Isla donde vive
 @export var isla: IslandType
 
-## Rasgos fÃ­sicos
+## Rasgos físicos
 @export var piel: PielType
 @export var cabello: CabelloType
 @export var ojos: OjosType
@@ -36,7 +36,7 @@ extends Resource
 ## Accesorios
 @export var accesorios: Array[AccesorioData]
 
-## Herramienta en mano (ID de M159 o vacÃ­o)
+## Herramienta en mano (ID de M159 o vacío)
 @export var herramienta_derecha: String
 @export var herramienta_izquierda: String
 
@@ -83,7 +83,7 @@ extends Resource
 ## Nombre del accesorio
 @export var nombre: String
 
-## UbicaciÃ³n (cuello, manos, cinturÃ³n, cabeza)
+## Ubicación (cuello, manos, cinturón, cabeza)
 @export var ubicacion: String
 
 ## Color (HEX)
@@ -126,17 +126,17 @@ enum OjosType {
     GRIS     ## EY-05 #808080
 }
 
-## ComplexiÃ³n fÃ­sica.
+## Complexión física.
 enum ComplexionType {
     MEDIA,
     MUSCULOSA,
     DELGADA,
     REDONDA,
     ALTA,
-    PEQUENA  ## para niÃ±os
+    PEQUENA  ## para niños
 }
 
-## Estaciones del aÃ±o.
+## Estaciones del año.
 enum EstacionType {
     PRIMAVERA,
     VERANO,
@@ -148,16 +148,16 @@ enum EstacionType {
 ### 1.5 Autoload: NPCVisualDatabase.gd
 
 ```gdscript
-## Autoload que gestiona el diseÃ±o visual de todos los NPCs.
+## Autoload que gestiona el diseño visual de todos los NPCs.
 extends Node
 
-## Diccionario de diseÃ±os visuales: npc_id -> NPCVisualData
+## Diccionario de diseños visuales: npc_id -> NPCVisualData
 var visuals: Dictionary = {}
 
 func _ready() -> void:
     _load_all_visuals()
 
-## Carga todos los diseÃ±os visuales desde archivos .tres
+## Carga todos los diseños visuales desde archivos .tres
 func _load_all_visuals() -> void:
     var dir = DirAccess.open("res://data/npc_visuals/")
     if dir:
@@ -170,7 +170,7 @@ func _load_all_visuals() -> void:
                     visuals[visual.npc_id] = visual
             file_name = dir.get_next()
 
-## Obtiene el diseÃ±o visual de un NPC
+## Obtiene el diseño visual de un NPC
 func get_visual(npc_id: String) -> NPCVisualData:
     return visuals.get(npc_id)
 
@@ -245,7 +245,7 @@ complexion = 1  # MUSCULOSA
 
 sombrero = {
     "nombre": "Fedora de paja",
-    "estilo": "Ala ancha, cinta marrÃ³n",
+    "estilo": "Ala ancha, cinta marrón",
     "color_principal": "#F5DEB3",
     "color_secundario": "#8B6914",
     "material": "Paja",
@@ -257,15 +257,15 @@ torso = {
     "estilo": "Manga corta, arremangada",
     "color_principal": "#C4A882",
     "material": "Lino grueso",
-    "notas": "Manchas de aserrÃ­n"
+    "notas": "Manchas de aserrín"
 }
 
 piernas = {
-    "nombre": "PantalÃ³n de trabajo",
+    "nombre": "Pantalón de trabajo",
     "estilo": "Largo, resistente",
     "color_principal": "#8B6914",
     "material": "Tela gruesa",
-    "notas": "Manchas de aserrÃ­n"
+    "notas": "Manchas de aserrín"
 }
 
 pies = {
@@ -281,12 +281,12 @@ herramienta_izquierda = ""
 
 accesorios = [
     {"nombre": "Delantal de cuero", "ubicacion": "torso", "color": "#A0522D", "notas": "Bolsillos para herramientas"},
-    {"nombre": "Cinta mÃ©trica", "ubicacion": "cinturon", "color": "#FFD700", "notas": "En cinturÃ³n"},
-    {"nombre": "LÃ¡piz", "ubicacion": "cabeza", "color": "#FFD700", "notas": "DetrÃ¡s de la oreja"}
+    {"nombre": "Cinta métrica", "ubicacion": "cinturon", "color": "#FFD700", "notas": "En cinturón"},
+    {"nombre": "Lápiz", "ubicacion": "cabeza", "color": "#FFD700", "notas": "Detrás de la oreja"}
 ]
 ```
 
-## 3. IntegraciÃ³n con Otros MÃ³dulos
+## 3. Integración con Otros Módulos
 
 ### 3.1 M19 (NPC y Vecinos)
 
@@ -349,23 +349,23 @@ func get_npc_at_location(location_id: String) -> Array[String]:
 **Modelo:** stepfun-3.7-flash
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-01 15:37
-**Estado:** Iter 2 completada â€” catÃ¡logo 23 .tres + tests headless + docs
+**Estado:** Iter 2 completada — catálogo 23 .tres + tests headless + docs
 
 ### Lo que hice
-- CompletÃ© 22 archivos `.tres` faltantes (RIZ 7 + COR 5 + CEN 5 + AUR 5) sumados al ejemplo previo NPC-RIZ-002.
-- OrganicÃ© la carpeta `data/npc_visuals/` en subcarpetas por isla (`RIZ/`, `COR/`, `CEN/`, `AUR/`).
-- ExpandÃ­ `test_npc_visual_database.gd` con tests de carga, filtrado por isla, validaciÃ³n de campos obligatorios y validaciÃ³n de formato HEX.
-- ActualicÃ© `05-Checklist.md`: marquÃ© [x] los Ã­tems de diseÃ±o/colores/.tres/herramientas/accesorios y testing.
+- Completé 22 archivos `.tres` faltantes (RIZ 7 + COR 5 + CEN 5 + AUR 5) sumados al ejemplo previo NPC-RIZ-002.
+- Organicé la carpeta `data/npc_visuals/` en subcarpetas por isla (`RIZ/`, `COR/`, `CEN/`, `AUR/`).
+- Expandí `test_npc_visual_database.gd` con tests de carga, filtrado por isla, validación de campos obligatorios y validación de formato HEX.
+- Actualicé `05-Checklist.md`: marqué [x] los ítems de diseño/colores/.tres/herramientas/accesorios y testing.
 
 ### Lo que NO pude hacer (honestidad obligatoria)
-- No creÃ© variantes estacionales como archivos `.tres` separados. El diseÃ±o de datos (`variantes_estacionales: Dictionary`) estÃ¡ listo, pero quedan como trabajo futuro los 92 archivos de variante (23 NPCs Ã— 4 estaciones).
+- No creé variantes estacionales como archivos `.tres` separados. El diseño de datos (`variantes_estacionales: Dictionary`) está listo, pero quedan como trabajo futuro los 92 archivos de variante (23 NPCs × 4 estaciones).
 
 ### Intentos fallidos / decisiones
-- IntentÃ© autocontener variantes en el `.tres` base, pero Godot requiere recursos externos para `Dictionary` de variantes. Se deja documentado en `04-Codigo.md` y log.
+- Intenté autocontener variantes en el `.tres` base, pero Godot requiere recursos externos para `Dictionary` de variantes. Se deja documentado en `04-Codigo.md` y log.
 
-### Recomendaciones para el prÃ³ximo agente
-- Crear variantes estacionales siguiendo la paleta Â§9.4 de `03-Diseno.md`.
-- Integrar con M45 (modelos 3D) y M46 (retratos 2D) cuando esos mÃ³dulos avancen.
+### Recomendaciones para el próximo agente
+- Crear variantes estacionales siguiendo la paleta §9.4 de `03-Diseno.md`.
+- Integrar con M45 (modelos 3D) y M46 (retratos 2D) cuando esos módulos avancen.
 - Verificar que los IDs M159 de herramientas existan en `ItemDatabase` al integrar con M159.
 
 ```

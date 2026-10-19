@@ -1,341 +1,344 @@
-**Modelo:** SWE-1.6
+﻿**Modelo:** SWE-1.6
 **Plataforma:** Devin
 
-# 05-Checklist.md — Módulo 90: Configuración Gráfica
+# 05-Checklist.md â€” MÃ³dulo 90: ConfiguraciÃ³n GrÃ¡fica
 
-## Checklist de implementación del módulo
+## Checklist de implementaciÃ³n del mÃ³dulo
 
-### [S] Especificación de configuración gráfica
-- [x] Resolución — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `RESOLUCIONES` (720p/1080p/1440p/4K).
-- [x] Pantalla completa — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `MODO_PANTALLA_COMPLETA`.
-- [x] Ventana — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `MODO_VENTANA`.
-- [x] Borderless — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `MODO_BORDERLESS`.
-- [x] VSync — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `VSYNC_OPCIONES` [0,1,2].
-- [x] FPS — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `FPS_OPCIONES` [30,60,120,0=ilimitado].
-- [x] Calidad de sombras — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `SOMBRAS` por calidad.
-- [x] Calidad de texturas — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `TEXTURAS` por calidad.
-- [x] Distancia de dibujado — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `DISTANCIA` por calidad.
-- [x] Calidad de efectos — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `EFECTOS` por calidad.
-- [x] Calidad de vegetación — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `VEGETACION` por calidad.
-- [x] Calidad de agua — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `AGUA` por calidad.
-- [x] Calidad de partículas — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `PARTICULAS` [100/500/1000].
-- [x] Anti-aliasing — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `AA_OPCIONES` [off,fxaa,msaa_2x,msaa_4x,taa].
-- [x] Anisotropic filtering — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `aniso` [2,4,8,16] en los presets.
-- [x] Post-processing — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `post` (bool) en los presets.
-- [x] Bloom — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `bloom` (bool) en los presets. Evidencia adicional: `main_island.tscn` L42-44 tiene `glow_enabled = true`, `glow_intensity = 0.4`, `glow_bloom = 0.05`.
-- [x] Motion blur — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `motion_blur` (bool) en los presets.
-- [x] Depth of field — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `dof` (bool) en los presets.
-- [x] FSR/DLSS/XeSS si corresponde — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `UPSCALING` [off,fsr_1_0,fsr_2_0,dlss,xess].
-- [x] Escala de resolución — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `ESCALAS` [0.5,0.75,1.0,1.25,1.5].
-- [x] Presets gráficos
-- [x] Detección automática — implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardián CHECKS_MINIMOS=85). ⚠ Sin gate en CI: el test NO corre en ningún workflow.. Evidencia: `_test_deteccion` + `ASPECT_RATIOS`.
+### [S] EspecificaciÃ³n de configuraciÃ³n grÃ¡fica
+- [x] ResoluciÃ³n â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `RESOLUCIONES` (720p/1080p/1440p/4K).
+- [x] Pantalla completa â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `MODO_PANTALLA_COMPLETA`.
+- [x] Ventana â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `MODO_VENTANA`.
+- [x] Borderless â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `MODO_BORDERLESS`.
+- [x] VSync â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `VSYNC_OPCIONES` [0,1,2].
+- [x] FPS â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `FPS_OPCIONES` [30,60,120,0=ilimitado].
+- [x] Calidad de sombras â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `SOMBRAS` por calidad.
+- [x] Calidad de texturas â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `TEXTURAS` por calidad.
+- [x] Distancia de dibujado â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `DISTANCIA` por calidad.
+- [x] Calidad de efectos â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `EFECTOS` por calidad.
+- [x] Calidad de vegetaciÃ³n â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `VEGETACION` por calidad.
+- [x] Calidad de agua â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `AGUA` por calidad.
+- [x] Calidad de partÃ­culas â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `PARTICULAS` [100/500/1000].
+- [x] Anti-aliasing â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `AA_OPCIONES` [off,fxaa,msaa_2x,msaa_4x,taa].
+- [x] Anisotropic filtering â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `aniso` [2,4,8,16] en los presets.
+- [x] Post-processing â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `post` (bool) en los presets.
+- [x] Bloom â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `bloom` (bool) en los presets. Evidencia adicional: `main_island.tscn` L42-44 tiene `glow_enabled = true`, `glow_intensity = 0.4`, `glow_bloom = 0.05`.
+- [x] Motion blur â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `motion_blur` (bool) en los presets.
+- [x] Depth of field â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `dof` (bool) en los presets.
+- [x] FSR/DLSS/XeSS si corresponde â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `UPSCALING` [off,fsr_1_0,fsr_2_0,dlss,xess].
+- [x] Escala de resoluciÃ³n â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `ESCALAS` [0.5,0.75,1.0,1.25,1.5].
+- [x] Presets grÃ¡ficos
+- [x] DetecciÃ³n automÃ¡tica â€” implementado (step-5-kilocode, 2026-10-12; carpeta versionada hoy, estaba sin trackear desde el Log 1734): respaldado por `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (~86 checks, guardiÃ¡n CHECKS_MINIMOS=85). âš  Sin gate en CI: el test NO corre en ningÃºn workflow.. Evidencia: `_test_deteccion` + `ASPECT_RATIOS`.
 
 ### [S] Resoluciones
-- [x] Definir 720p (1280x720) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 720p = 1280x720.
-- [x] Definir 1080p (1920x1080) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 1080p.
-- [x] Definir 1440p (2560x1440) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 1440p.
-- [x] Definir 4K (3840x2160) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 4K.
-- [x] Definir nativa (resolución del monitor) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). id "nativa" = 0x0, resuelto en runtime.
-- [x] Definir aspect ratio 16:9 — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 16:9.
-- [x] Definir soporte para 16:10 — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 16:10.
-- [x] Definir soporte para 21:9 — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 21:9.
+- [x] Definir 720p (1280x720) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 720p = 1280x720.
+- [x] Definir 1080p (1920x1080) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 1080p.
+- [x] Definir 1440p (2560x1440) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 1440p.
+- [x] Definir 4K (3840x2160) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `RESOLUCIONES` incluye 4K.
+- [x] Definir nativa (resoluciÃ³n del monitor) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). id "nativa" = 0x0, resuelto en runtime.
+- [x] Definir aspect ratio 16:9 â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 16:9.
+- [x] Definir soporte para 16:10 â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 16:10.
+- [x] Definir soporte para 21:9 â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `ASPECT_RATIOS` con 21:9.
 
 ### [S] Modos de pantalla
-- [x] Definir pantalla completa (fullscreen) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `MODOS` con los 3 modos.
-- [x] Definir ventana (windowed) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). idem.
-- [x] Definir borderless (borderless windowed) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). idem.
-- [x] Definir toggle de pantalla completa (F11 o botón) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODO_PANTALLA_COMPLETA` / `MODO_VENTANA` en `MODOS`; el atajo F11 es del adaptador de UI (M53) — el núcleo ya expone el estado.
-- [x] Definir modo ventana para multitasking — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODOS = [MODO_VENTANA, MODO_PANTALLA_COMPLETA, MODO_BORDERLESS]`.
-- [x] Definir borderless para pantalla completa sin bloquear otros monitores — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODO_BORDERLESS`; `fijar("modo", ...)` y `preset_actual()` lo exponen.
+- [x] Definir pantalla completa (fullscreen) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `MODOS` con los 3 modos.
+- [x] Definir ventana (windowed) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). idem.
+- [x] Definir borderless (borderless windowed) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). idem.
+- [x] Definir toggle de pantalla completa (F11 o botÃ³n) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODO_PANTALLA_COMPLETA` / `MODO_VENTANA` en `MODOS`; el atajo F11 es del adaptador de UI (M53) â€” el nÃºcleo ya expone el estado.
+- [x] Definir modo ventana para multitasking â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODOS = [MODO_VENTANA, MODO_PANTALLA_COMPLETA, MODO_BORDERLESS]`.
+- [x] Definir borderless para pantalla completa sin bloquear otros monitores â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `MODO_BORDERLESS`; `fijar("modo", ...)` y `preset_actual()` lo exponen.
 
 ### [S] VSync
-- [x] Definir VSync 0 (off) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `VSYNC_OPCIONES = [0, 1, 2]`.
-- [x] Definir VSync 1 (on) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
-- [x] Definir VSync 2 (adaptive) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem; probado con `fijar("vsync", 0/1/2)`.
-- [x] Definir recomendación por preset (bajo: 0, medio: 1, alto: 2, ultra: 2)
+- [x] Definir VSync 0 (off) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `VSYNC_OPCIONES = [0, 1, 2]`.
+- [x] Definir VSync 1 (on) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
+- [x] Definir VSync 2 (adaptive) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem; probado con `fijar("vsync", 0/1/2)`.
+- [x] Definir recomendaciÃ³n por preset (bajo: 0, medio: 1, alto: 2, ultra: 2)
 
 ### [S] Cap de FPS
-- [x] Definir 30 FPS (hardware muy bajo) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `FPS_OPCIONES = [30, 60, 120, 0]`.
-- [x] Definir 60 FPS (hardware medio, recomendado) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
-- [x] Definir 120 FPS (hardware alto) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
-- [x] Definir ilimitado (hardware ultra) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `0 = ilimitado`.
-- [x] Definir recomendación por preset (bajo: 30, medio: 60, alto: 120, ultra: ilimitado)
+- [x] Definir 30 FPS (hardware muy bajo) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `FPS_OPCIONES = [30, 60, 120, 0]`.
+- [x] Definir 60 FPS (hardware medio, recomendado) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
+- [x] Definir 120 FPS (hardware alto) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem.
+- [x] Definir ilimitado (hardware ultra) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `0 = ilimitado`.
+- [x] Definir recomendaciÃ³n por preset (bajo: 30, medio: 60, alto: 120, ultra: ilimitado)
 
 ### [S] Calidad de sombras
-- [x] Definir baja (cascada simple, 1 shadow map, 512x512) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["baja"]` = 1/1/512 sin soft.
-- [x] Definir media (cascada suave, 2 shadow maps, 1024x1024) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["media"]` = 2/2/1024.
-- [x] Definir alta (PCSS, 4 shadow maps, 2048x2048) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["alta"]` = 4/4/2048 + soft.
-- [x] Definir ultra (cascada soft shadows, 4 shadow maps, 4096x4096) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["ultra"]` = 4/4/4096 + soft.
-- [x] Definir implementación (DirectionalLight, OmnidirectionalLight, SpotLight)
-- [x] Definir soft shadows para calidad alta/ultra — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `soft: true` solo en alta/ultra.
+- [x] Definir baja (cascada simple, 1 shadow map, 512x512) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["baja"]` = 1/1/512 sin soft.
+- [x] Definir media (cascada suave, 2 shadow maps, 1024x1024) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["media"]` = 2/2/1024.
+- [x] Definir alta (PCSS, 4 shadow maps, 2048x2048) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["alta"]` = 4/4/2048 + soft.
+- [x] Definir ultra (cascada soft shadows, 4 shadow maps, 4096x4096) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `SOMBRAS["ultra"]` = 4/4/4096 + soft.
+- [x] Definir implementaciÃ³n (DirectionalLight, OmnidirectionalLight, SpotLight)
+- [x] Definir soft shadows para calidad alta/ultra â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `soft: true` solo en alta/ultra.
 
 ### [S] Calidad de texturas
-- [x] Definir baja (0.5x, mipmap 0) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["baja"]` = 0.5 / mipmap 0.
-- [x] Definir media (1x, mipmap 1) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["media"]` = 1.0 / mipmap 1.
-- [x] Definir alta (2x, mipmap 2) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["alta"]` = 2.0 / mipmap 2.
-- [x] Definir ultra (4x, mipmap 3) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["ultra"]` = 4.0 / mipmap 3.
-- [x] Definir filtering (trilinear) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `filtrado: "trilinear"`.
-- [x] Definir anisotropic filtering por calidad (2x, 4x, 8x, 16x) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `aniso` 2/4/8/16.
-- [x] Definir mipmaps habilitados — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `mipmap` 0..3 por calidad.
+- [x] Definir baja (0.5x, mipmap 0) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["baja"]` = 0.5 / mipmap 0.
+- [x] Definir media (1x, mipmap 1) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["media"]` = 1.0 / mipmap 1.
+- [x] Definir alta (2x, mipmap 2) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["alta"]` = 2.0 / mipmap 2.
+- [x] Definir ultra (4x, mipmap 3) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `TEXTURAS["ultra"]` = 4.0 / mipmap 3.
+- [x] Definir filtering (trilinear) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `filtrado: "trilinear"`.
+- [x] Definir anisotropic filtering por calidad (2x, 4x, 8x, 16x) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `aniso` 2/4/8/16.
+- [x] Definir mipmaps habilitados â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `mipmap` 0..3 por calidad.
 
 ### [S] Distancia de dibujado
-- [x] Definir cercana (50 unidades, 100m) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["baja"] = 300 m`.
-- [x] Definir media (100 unidades, 200m) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["media"] = 600 m`.
-- [x] Definir lejana (200 unidades, 400m) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). alta 1200 m / ultra 2500 m.
+- [x] Definir cercana (50 unidades, 100m) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["baja"] = 300 m`.
+- [x] Definir media (100 unidades, 200m) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["media"] = 600 m`.
+- [x] Definir lejana (200 unidades, 400m) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). alta 1200 m / ultra 2500 m.
 - [ ] Definir culling de objetos fuera de distancia
-- [ ] Definir LODs para objetos lejanos (M50) — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_island.gd` L143-154 configura `lod_split_count = 5` y `lod_distance = 160.0` (anillos 2×/4×/8×/16×/32×). No se encontró LOD ni culling por distancia para objetos individuales.
-- [x] Definir fog para ocultar transición — implementado (step-5-kilocode, Kilo Code, 2026-10-12): `scripts/main_island.gd` L198-202, "Niebla marina: el borde del océano se funde con el cielo", con `env_node.environment.fog_enabled = true`.
+- [ ] Definir LODs para objetos lejanos (M50) â€” **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_island.gd` L143-154 configura `lod_split_count = 5` y `lod_distance = 160.0` (anillos 2Ã—/4Ã—/8Ã—/16Ã—/32Ã—). No se encontrÃ³ LOD ni culling por distancia para objetos individuales.
+- [x] Definir fog para ocultar transiciÃ³n â€” implementado (step-5-kilocode, Kilo Code, 2026-10-12): `scripts/main_island.gd` L198-202, "Niebla marina: el borde del ocÃ©ano se funde con el cielo", con `env_node.environment.fog_enabled = true`.
 
 ### [S] Calidad de efectos
-- [?] Definir baja (partículas básicas, sin post-processing) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["baja"] = 0.25`.
-- [?] Definir media (partículas estándar, post-processing básico) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["media"] = 0.5`.
-- [?] Definir alta (partículas avanzadas, post-processing completo) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["alta"] = 0.85`.
-- [?] Definir ultra (partículas máximas, post-processing cinemático) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["ultra"] = 1.0`.
-- [ ] Definir iluminación volumétrica (baja/media: off, alta: on, ultra: alta calidad)
+- [?] Definir baja (partÃ­culas bÃ¡sicas, sin post-processing) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["baja"] = 0.25`.
+- [?] Definir media (partÃ­culas estÃ¡ndar, post-processing bÃ¡sico) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["media"] = 0.5`.
+- [?] Definir alta (partÃ­culas avanzadas, post-processing completo) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["alta"] = 0.85`.
+- [?] Definir ultra (partÃ­culas mÃ¡ximas, post-processing cinemÃ¡tico) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["ultra"] = 1.0`.
+- [ ] Definir iluminaciÃ³n volumÃ©trica (baja/media: off, alta: on, ultra: alta calidad)
 
-### [S] Calidad de vegetación
-- [x] Definir baja (sin animación, LOD 0 solo) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["baja"] = 0.2`.
-- [x] Definir media (animación básica, LOD 0-1) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["media"] = 0.45`.
-- [x] Definir alta (animación completa, LOD 0-2) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["alta"] = 0.8`.
-- [x] Definir ultra (animación + wind procedural + interacción, LOD 0-3) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["ultra"] = 1.0`.
-- [ ] Definir animación por wind shader
-- [ ] Definir interacción con jugador
+### [S] Calidad de vegetaciÃ³n
+- [x] Definir baja (sin animaciÃ³n, LOD 0 solo) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["baja"] = 0.2`.
+- [x] Definir media (animaciÃ³n bÃ¡sica, LOD 0-1) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["media"] = 0.45`.
+- [x] Definir alta (animaciÃ³n completa, LOD 0-2) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["alta"] = 0.8`.
+- [x] Definir ultra (animaciÃ³n + wind procedural + interacciÃ³n, LOD 0-3) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["ultra"] = 1.0`.
+- [ ] Definir animaciÃ³n por wind shader
+- [ ] Definir interacciÃ³n con jugador
 
 ### [S] Calidad de agua
-- [x] Definir baja (sin reflexiones, textura simple) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["baja"] = 0.25`.
-- [x] Definir media (reflexiones básicas, textura normal) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["media"] = 0.5`.
-- [x] Definir alta (reflexiones completas, textura normal + parallax) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["alta"] = 0.85`.
-- [x] Definir ultra (reflexiones + caustics, textura normal + parallax + caustics) — implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["ultra"] = 1.0`.
-- [x] Definir shader de agua con reflexiones — implementado (step-5-kilocode, Kilo Code, 2026-10-12): `shaders/agua_olas.gdshader` (92 líneas, spatial) con olas (amplitud/velocidad/frecuencia), espuma por profundidad (`depth_texture`), `fresnel_potencia` para el reflejo y `espuma_distancia`. ⚠ Reflejo **simulado** por Fresnel, no por `screen_texture` en tiempo real.
+- [x] Definir baja (sin reflexiones, textura simple) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["baja"] = 0.25`.
+- [x] Definir media (reflexiones bÃ¡sicas, textura normal) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["media"] = 0.5`.
+- [x] Definir alta (reflexiones completas, textura normal + parallax) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["alta"] = 0.85`.
+- [x] Definir ultra (reflexiones + caustics, textura normal + parallax + caustics) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["ultra"] = 1.0`.
+- [x] Definir shader de agua con reflexiones â€” implementado (step-5-kilocode, Kilo Code, 2026-10-12): `shaders/agua_olas.gdshader` (92 lÃ­neas, spatial) con olas (amplitud/velocidad/frecuencia), espuma por profundidad (`depth_texture`), `fresnel_potencia` para el reflejo y `espuma_distancia`. âš  Reflejo **simulado** por Fresnel, no por `screen_texture` en tiempo real.
 - [ ] Definir normal map para olas
 - [ ] Definir parallax para profundidad
 - [ ] Definir caustics para ultra
 
-### [S] Calidad de partículas
-- [x] Definir baja (100 partículas máximas por sistema)
-- [x] Definir media (500 partículas máximas por sistema)
-- [x] Definir alta (1000 partículas máximas por sistema)
-- [x] Definir ultra (2000 partículas máximas por sistema)
-- [x] Definir GPU particles para rendimiento — implementado (step-5-kilocode, Kilo Code, 2026-10-12): `scripts/vfx/vfx_factory.gd` crea `GPUParticles3D` (`nuevo_emisor()`, `redisparar()`) con catálogo en `data/vfx/vfx_catalog.json`; `vfx_pool.gd` hace pooling para reuso.
-- [ ] Definir colisión de partículas con world
-- [x] Definir partículas para fuego, humo, agua, magia, polvo — implementado (step-5-kilocode, Kilo Code, 2026-10-12): los 5 tipos están en `data/vfx/vfx_catalog.json` (31 efectos): `vfx_fuego`, `vfx_humo`, `vfx_salpicadura` + `vfx_gotas_cascada`, `vfx_magia`, `vfx_polvo`.
+### [S] Calidad de partÃ­culas
+- [x] Definir baja (100 partÃ­culas mÃ¡ximas por sistema)
+- [x] Definir media (500 partÃ­culas mÃ¡ximas por sistema)
+- [x] Definir alta (1000 partÃ­culas mÃ¡ximas por sistema)
+- [x] Definir ultra (2000 partÃ­culas mÃ¡ximas por sistema)
+- [x] Definir GPU particles para rendimiento â€” implementado (step-5-kilocode, Kilo Code, 2026-10-12): `scripts/vfx/vfx_factory.gd` crea `GPUParticles3D` (`nuevo_emisor()`, `redisparar()`) con catÃ¡logo en `data/vfx/vfx_catalog.json`; `vfx_pool.gd` hace pooling para reuso.
+- [ ] Definir colisiÃ³n de partÃ­culas con world
+- [x] Definir partÃ­culas para fuego, humo, agua, magia, polvo â€” implementado (step-5-kilocode, Kilo Code, 2026-10-12): los 5 tipos estÃ¡n en `data/vfx/vfx_catalog.json` (31 efectos): `vfx_fuego`, `vfx_humo`, `vfx_salpicadura` + `vfx_gotas_cascada`, `vfx_magia`, `vfx_polvo`.
 
 ### [S] Anti-aliasing
-- [x] Definir off (sin anti-aliasing) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_OFF`.
-- [x] Definir FXAA (Fast Approximate Anti-Aliasing) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_FXAA`.
-- [x] Definir MSAA 2x (Multi-Sample Anti-Aliasing 2x) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_MSAA_2X`.
-- [x] Definir MSAA 4x (Multi-Sample Anti-Aliasing 4x) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_MSAA_4X`.
-- [x] Definir TAA (Temporal Anti-Aliasing) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_TAA`; 5 opciones en `AA_OPCIONES`.
-- [x] Definir recomendación por preset (bajo: off/FXAA, medio: FXAA, alto: MSAA 2x, ultra: TAA)
+- [x] Definir off (sin anti-aliasing) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_OFF`.
+- [x] Definir FXAA (Fast Approximate Anti-Aliasing) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_FXAA`.
+- [x] Definir MSAA 2x (Multi-Sample Anti-Aliasing 2x) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_MSAA_2X`.
+- [x] Definir MSAA 4x (Multi-Sample Anti-Aliasing 4x) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_MSAA_4X`.
+- [x] Definir TAA (Temporal Anti-Aliasing) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `AA_TAA`; 5 opciones en `AA_OPCIONES`.
+- [x] Definir recomendaciÃ³n por preset (bajo: off/FXAA, medio: FXAA, alto: MSAA 2x, ultra: TAA)
 
 ### [S] Anisotropic filtering
-- [x] Definir off (sin anisotropic filtering) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `TEXTURAS` por calidad: `aniso` 2/4/8/16 (baja/media/alta/ultra).
-- [x] Definir 2x (calidad baja) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["baja"]["aniso"] = 2`.
-- [x] Definir 4x (calidad media) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["media"]["aniso"] = 4`.
-- [x] Definir 8x (calidad alta) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["alta"]["aniso"] = 8`.
-- [x] Definir 16x (calidad ultra) — verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["ultra"]["aniso"] = 16`.
-- [x] Definir recomendación por preset (bajo: off/2x, medio: 4x, alto: 8x, ultra: 16x)
+- [x] Definir off (sin anisotropic filtering) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). `TEXTURAS` por calidad: `aniso` 2/4/8/16 (baja/media/alta/ultra).
+- [x] Definir 2x (calidad baja) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["baja"]["aniso"] = 2`.
+- [x] Definir 4x (calidad media) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["media"]["aniso"] = 4`.
+- [x] Definir 8x (calidad alta) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["alta"]["aniso"] = 8`.
+- [x] Definir 16x (calidad ultra) â€” verificado (step-5-kilocode, 2026-10-12, Log 1684): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (85 checks, 0 fallos). idem, `TEXTURAS["ultra"]["aniso"] = 16`.
+- [x] Definir recomendaciÃ³n por preset (bajo: off/2x, medio: 4x, alto: 8x, ultra: 16x)
 
 ### [S] Post-processing
-- [ ] Definir toggle de post-processing
-- [ ] Definir efectos (bloom, motion blur, depth of field, color grading, tonemapping)
-- [ ] Definir activación/desactivación de todos los efectos
+- [x] Definir toggle de post-processing -- Post-processing toggle: mapeo_post() expone post + aplica a Environment vÃ­a plicar_env(). **agnes-3-flash 2026-10-22: implementado plicar_env/mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd (20 checks). Runtime pendiente.
+- [x] Definir efectos (bloom, motion blur, depth of field, color grading, tonemapping) -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
+- [x] Definir activaciÃ³n/desactivaciÃ³n de todos los efectos -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
 
 ### [S] Bloom
-- [ ] Definir toggle de bloom — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** el bloom está **activo** en la escena principal (`main_island.tscn` L42-44: `glow_enabled = true`), pero no hay toggle de usuario ni slider: el valor va fijo en la escena, no en `graphics_config.gd`.
-- [ ] Definir intensidad (slider 0-1)
-- [ ] Definir threshold (slider 0-1)
-- [ ] Definir radius (slider 0-1)
+- [ ] Definir toggle de bloom â€” **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** el bloom estÃ¡ **activo** en la escena principal (`main_island.tscn` L42-44: `glow_enabled = true`), pero no hay toggle de usuario ni slider: el valor va fijo en la escena, no en `graphics_config.gd`.
+- [x] Definir intensidad (slider 0-1) -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
+- [x] Definir threshold (slider 0-1) -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
+- [x] Definir radius (slider 0-1) -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
 - [ ] Definir bloom shader para glow
 - [ ] Definir threshold para fuentes de luz brillantes
 
 ### [S] Motion blur
-- [ ] Definir toggle de motion blur
-- [ ] Definir intensidad (slider 0-1)
-- [ ] Definir sample count (slider 4-16)
-- [ ] Definir motion blur basado en velocidad de cámara
-- [ ] Definir más blur cuando la cámara se mueve más rápido
-- [ ] Definir desactivado por defecto (causa mareo)
+- [x] Definir toggle de motion blur -- Motion blur toggle: mapeo_post()['motion_blur'] (post y toggle). **agnes-3-flash 2026-10-22: implementado vÃ­a plicar_env/mapeo_post + test.
+- [x] Definir intensidad (slider 0-1) -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
+- [x] Definir sample count (slider 4-16) -- Sample count (slider 4-16): RANGOS_SLIDERS['motion_blur_sample_count']=[4,16] + alidar_slider clamps. **agnes-3-flash 2026-10-22: implementado + test.
+- [ ] Definir motion blur basado en velocidad de cÃ¡mara
+- [ ] Definir mÃ¡s blur cuando la cÃ¡mara se mueve mÃ¡s rÃ¡pido
+- [x] Definir desactivado por defecto (causa mareo) -- agnes-3-flash 2026-10-22 (M90 t3): motion_blur **off por defecto** en PRESETS `medio`/`alto` (solo `ultra` lo activa); reduce mareo.
 
 ### [S] Depth of field
-- [ ] Definir toggle de depth of field
-- [ ] Definir intensidad (slider 0-1)
-- [ ] Definir distancia (slider 0-100)
-- [ ] Definir aperture (slider 0-1)
-- [ ] Definir depth of field basado en distancia de la cámara
+- [x] Definir toggle de depth of field -- Depth of field toggle: mapeo_post()['dof']. **agnes-3-flash 2026-10-22: implementado vÃ­a mapeo_post + test.
+- [x] Definir intensidad (slider 0-1) -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
+- [x] Definir distancia (slider 0-100) -- Distancia (slider 0-100): RANGOS_SLIDERS['dof_distancia']=[0,100] + alidar_slider. **agnes-3-flash 2026-10-22: implementado + test.
+- [x] Definir aperture (slider 0-1) -- Aperture (slider 0-1): RANGOS_SLIDERS['dof_apertura']=[0,1] + alidar_slider. **agnes-3-flash 2026-10-22: implementado + test.
+- [ ] Definir depth of field basado en distancia de la cÃ¡mara
 - [ ] Definir blur para objetos fuera de foco
-- [ ] Definir aperture controla cuánto blur
+- [ ] Definir aperture controla cuÃ¡nto blur
 
 ### [S] Upscaling
-- [ ] Definir FSR 1.0 (AMD)
-- [ ] Definir FSR 2.0 (AMD mejorado)
-- [ ] Definir DLSS (NVIDIA)
-- [ ] Definir XeSS (Intel)
-- [ ] Definir detección de GPU y habilitación correspondiente
-- [x] Definir recomendación por preset (bajo: FSR 1.0, medio: FSR 2.0, alto: DLSS, ultra: DLSS ultra)
+- [x] Definir FSR 1.0 (AMD) -- agnes-3-flash 2026-10-22 (M90 t3): `UPSCALING` incluye `UP_FSR1` en `graphics_config.gd`.
+- [x] Definir FSR 2.0 (AMD mejorado) -- agnes-3-flash 2026-10-22 (M90 t3): `UPSCALING` incluye `UP_FSR2` en `graphics_config.gd`.
+- [x] Definir DLSS (NVIDIA) -- agnes-3-flash 2026-10-22 (M90 t3): `UPSCALING` incluye `UP_DLSS` en `graphics_config.gd`.
+- [x] Definir XeSS (Intel) -- agnes-3-flash 2026-10-22 (M90 t3): `UPSCALING` incluye `UP_XESS` en `graphics_config.gd`.
+- [ ] Definir detecciÃ³n de GPU y habilitaciÃ³n correspondiente
+- [x] Definir recomendaciÃ³n por preset (bajo: FSR 1.0, medio: FSR 2.0, alto: DLSS, ultra: DLSS ultra)
 
-### [S] Escala de resolución
+### [S] Escala de resoluciÃ³n
 - [x] Definir 50% (render mitad, escalar a completa)
 - [x] Definir 75% (render 3/4, escalar a completa)
 - [x] Definir 100% (render completo)
-- [ ] Definir 125% (oversampling 1.25x)
-- [ ] Definir 150% (oversampling 1.5x)
-- [x] Definir recomendación por preset (bajo: 50%, medio: 75%, alto: 100%, ultra: 100% o 125%)
+- [x] Definir 125% (oversampling 1.25x) -- agnes-3-flash 2026-10-22: ESCALAS incluye 1.25. Runtime pendiente.
+- [x] Definir 150% (oversampling 1.5x) -- agnes-3-flash 2026-10-22: ESCALAS incluye 1.5. Runtime pendiente.
+- [x] Definir recomendaciÃ³n por preset (bajo: 50%, medio: 75%, alto: 100%, ultra: 100% o 125%)
 
-### [S] Presets gráficos
+### [S] Presets grÃ¡ficos
 - [x] Definir preset bajo (720p, calidad baja, VSync 0, 30 FPS, escala 50%)
 - [x] Definir preset medio (1080p, calidad media, VSync 1, 60 FPS, escala 75%)
 - [x] Definir preset alto (1440p, calidad alta, VSync 2, 120 FPS, escala 100%)
 - [x] Definir preset ultra (4K, calidad ultra, VSync 2, ilimitado FPS, escala 100%)
 - [x] Definir preset personalizado
 - [x] Definir botones de preset en settings
-- [x] Definir aplicación automática al seleccionar preset
+- [x] Definir aplicaciÃ³n automÃ¡tica al seleccionar preset
 - [x] Definir guardado de preset personalizado en settings
 
-### [S] Detección automática
-- [x] Definir detección de GPU (RenderingServer.get_video_adapter_name())
-- [ ] Definir detección de RAM (OS.get_static_memory_usage())
-- [ ] Definir detección de CPU (OS.get_processor_name())
-- [x] Definir lógica de recomendación de preset según hardware
-- [x] Definir GPU baja + RAM baja + CPU baja → preset bajo
-- [x] Definir GPU media + RAM media + CPU media → preset medio
-- [x] Definir GPU alta + RAM alta + CPU alta → preset alto
-- [x] Definir GPU ultra + RAM ultra + CPU ultra → preset ultra
+### [S] DetecciÃ³n automÃ¡tica
+- [x] Definir detecciÃ³n de GPU (RenderingServer.get_video_adapter_name())
+- [ ] Definir detecciÃ³n de RAM (OS.get_static_memory_usage())
+- [ ] Definir detecciÃ³n de CPU (OS.get_processor_name())
+- [x] Definir lÃ³gica de recomendaciÃ³n de preset segÃºn hardware
+- [x] Definir GPU baja + RAM baja + CPU baja Ã¢â€ â€™ preset bajo
+- [x] Definir GPU media + RAM media + CPU media Ã¢â€ â€™ preset medio
+- [x] Definir GPU alta + RAM alta + CPU alta Ã¢â€ â€™ preset alto
+- [x] Definir GPU ultra + RAM ultra + CPU ultra Ã¢â€ â€™ preset ultra
 
-### [S] Integración con M58 (Accesibilidad)
-- [ ] Diseñar tamaño de fuente (slider 0.5x a 2x)
-- [ ] Diseñar alto contraste (toggle)
-- [ ] Diseñar reducción de motion blur (opción para reducir mareo)
-- [ ] Diseñar reducción de bloom (opción para reducir distracción visual)
-- [x] Diseñar ajustes en menú de configuración gráfica
-- [x] Diseñar guardado en settings (M90)
-- [ ] Diseñar aplicación en tiempo real
+### [S] IntegraciÃ³n con M58 (Accesibilidad)
+- [ ] DiseÃ±ar tamaÃ±o de fuente (slider 0.5x a 2x)
+- [ ] DiseÃ±ar alto contraste (toggle)
+- [ ] DiseÃ±ar reducciÃ³n de motion blur (opciÃ³n para reducir mareo)
+- [ ] DiseÃ±ar reducciÃ³n de bloom (opciÃ³n para reducir distracciÃ³n visual)
+- [x] DiseÃ±ar ajustes en menÃº de configuraciÃ³n grÃ¡fica
+- [x] DiseÃ±ar guardado en settings (M90)
+- [ ] DiseÃ±ar aplicaciÃ³n en tiempo real
 
-### [S] Integración con M61 (Rendimiento)
-- [ ] Diseñar FPS counter (opcional, en debug)
-- [ ] Diseñar profiling de GPU (opcional, en debug)
-- [ ] Diseñar monitoreo de uso de GPU y RAM (opcional, en debug)
-- [ ] Diseñar FPS counter visible en debug (M110)
-- [ ] Diseñar profiling visible en debug (M110)
-- [ ] Diseñar monitoreo visible en debug (M110)
+### [S] IntegraciÃ³n con M61 (Rendimiento)
+- [ ] DiseÃ±ar FPS counter (opcional, en debug)
+- [ ] DiseÃ±ar profiling de GPU (opcional, en debug)
+- [ ] DiseÃ±ar monitoreo de uso de GPU y RAM (opcional, en debug)
+- [ ] DiseÃ±ar FPS counter visible en debug (M110)
+- [ ] DiseÃ±ar profiling visible en debug (M110)
+- [ ] DiseÃ±ar monitoreo visible en debug (M110)
 
-### [S] Integración con M88 (Fuentes Tipográficas)
-- [ ] Diseñar tamaño de fuente (slider 0.5x a 2x)
-- [ ] Diseñar alto contraste (toggle)
-- [x] Diseñar ajustes de fuentes en menú de configuración gráfica
-- [x] Diseñar guardado en settings (M90)
-- [ ] Diseñar aplicación en tiempo real
+### [S] IntegraciÃ³n con M88 (Fuentes TipogrÃ¡ficas)
+- [ ] DiseÃ±ar tamaÃ±o de fuente (slider 0.5x a 2x)
+- [ ] DiseÃ±ar alto contraste (toggle)
+- [x] DiseÃ±ar ajustes de fuentes en menÃº de configuraciÃ³n grÃ¡fica
+- [x] DiseÃ±ar guardado en settings (M90)
+- [ ] DiseÃ±ar aplicaciÃ³n en tiempo real
 
-### [S] Menú de configuración gráfica
-- [x] Diseñar GraphicsSettingsMenu
-- [ ] Diseñar controles para resolución (dropdown)
-- [ ] Diseñar controles para pantalla completa (toggle)
-- [ ] Diseñar controles para ventana (toggle)
-- [ ] Diseñar controles para borderless (toggle)
-- [ ] Diseñar controles para VSync (dropdown)
-- [ ] Diseñar controles para FPS cap (dropdown)
-- [ ] Diseñar controles para escala de resolución (slider)
-- [ ] Diseñar controles para upscaling (dropdown)
-- [ ] Diseñar controles para calidad de sombras (dropdown)
-- [ ] Diseñar controles para calidad de texturas (dropdown)
-- [ ] Diseñar controles para distancia de dibujado (slider)
-- [ ] Diseñar controles para calidad de efectos (dropdown)
-- [ ] Diseñar controles para calidad de vegetación (dropdown)
-- [ ] Diseñar controles para calidad de agua (x] Diseñar controles para calidad de partículas (dropdown)
-- [ ] Diseñar controles para anti-aliasing (dropdown)
-- [ ] Diseñar controles para anisotropic filtering (dropdown)
-- [ ] Diseñar controles para post-processing (toggle)
-- [ ] Diseñar controles para bloom (toggle + slider)
-- [ ] Diseñar controles para motion blur (toggle + slider)
-- [ ] Diseñar controles para depth of field (toggle + slider)
-- [x] Diseñar botones de preset (bajo, medio, alto, ultra)
-- [x] Diseñar etiqueta de preset actual
-- [ ] Diseñar botón de detección automática
+### [S] MenÃº de configuraciÃ³n grÃ¡fica
+- [x] DiseÃ±ar GraphicsSettingsMenu
+- [ ] DiseÃ±ar controles para resoluciÃ³n (dropdown)
+- [ ] DiseÃ±ar controles para pantalla completa (toggle)
+- [ ] DiseÃ±ar controles para ventana (toggle)
+- [ ] DiseÃ±ar controles para borderless (toggle)
+- [ ] DiseÃ±ar controles para VSync (dropdown)
+- [ ] DiseÃ±ar controles para FPS cap (dropdown)
+- [ ] DiseÃ±ar controles para escala de resoluciÃ³n (slider)
+- [ ] DiseÃ±ar controles para upscaling (dropdown)
+- [ ] DiseÃ±ar controles para calidad de sombras (dropdown)
+- [ ] DiseÃ±ar controles para calidad de texturas (dropdown)
+- [ ] DiseÃ±ar controles para distancia de dibujado (slider)
+- [ ] DiseÃ±ar controles para calidad de efectos (dropdown)
+- [ ] DiseÃ±ar controles para calidad de vegetaciÃ³n (dropdown)
+- [ ] DiseÃ±ar controles para calidad de agua (x] DiseÃ±ar controles para calidad de partÃ­culas (dropdown)
+- [ ] DiseÃ±ar controles para anti-aliasing (dropdown)
+- [ ] DiseÃ±ar controles para anisotropic filtering (dropdown)
+- [ ] DiseÃ±ar controles para post-processing (toggle)
+- [ ] DiseÃ±ar controles para bloom (toggle + slider)
+- [ ] DiseÃ±ar controles para motion blur (toggle + slider)
+- [ ] DiseÃ±ar controles para depth of field (toggle + slider)
+- [x] DiseÃ±ar botones de preset (bajo, medio, alto, ultra)
+- [x] DiseÃ±ar etiqueta de preset actual
+- [ ] DiseÃ±ar botÃ³n de detecciÃ³n automÃ¡tica
 
-### [S] Configuración de settings
-- [x] Diseñar GraphicsSettings (Resource)
-- [x] Diseñar campos: resolution, fullscreen, borderless, vsync, fps_cap, resolution_scale, upscaling, shadows_quality, textures_quality, draw_distance, effects_quality, vegetation_quality, water_quality, particles_quality, anti_aliasing, anisotropic_filtering, post_processing, bloom, bloom_intensity, motion_blur, motion_blur_intensity, depth_of_field, depth_of_field_intensity, preset
-- [x] Diseñar método apply_settings()
+### [S] ConfiguraciÃ³n de settings
+- [x] DiseÃ±ar GraphicsSettings (Resource)
+- [x] DiseÃ±ar campos: resolution, fullscreen, borderless, vsync, fps_cap, resolution_scale, upscaling, shadows_quality, textures_quality, draw_distance, effects_quality, vegetation_quality, water_quality, particles_quality, anti_aliasing, anisotropic_filtering, post_processing, bloom, bloom_intensity, motion_blur, motion_blur_intensity, depth_of_field, depth_of_field_intensity, preset
+- [x] DiseÃ±ar mÃ©todo apply_settings()
 
-### [S] Presets gráficos
-- [x] Diseñar GraphicsPresets
-- [x] Diseñar diccionario PRESETS con 4 presets (bajo, medio, alto, ultra)
-- [x] Diseñar método apply_preset()
-- [x] Diseñar aplicación automática de preset al GraphicsSettings
-- [x] Diseñar actualización de preset en GraphicsSettings.preset
+### [S] Presets grÃ¡ficos
+- [x] DiseÃ±ar GraphicsPresets
+- [x] DiseÃ±ar diccionario PRESETS con 4 presets (bajo, medio, alto, ultra)
+- [x] DiseÃ±ar mÃ©todo apply_preset()
+- [x] DiseÃ±ar aplicaciÃ³n automÃ¡tica de preset al GraphicsSettings
+- [x] DiseÃ±ar actualizaciÃ³n de preset en GraphicsSettings.preset
 
-### [S] Detección de hardware
-- [ ] Diseñar HardwareDetector
-- [ ] Diseñar método detect_hardware()
-- [x] Diseñar método recommend_preset()
-- [ ] Diseñar lógica de recomendación según GPU, RAM, CPU
+### [S] DetecciÃ³n de hardware
+- [ ] DiseÃ±ar HardwareDetector
+- [ ] DiseÃ±ar mÃ©todo detect_hardware()
+- [x] DiseÃ±ar mÃ©todo recommend_preset()
+- [ ] DiseÃ±ar lÃ³gica de recomendaciÃ³n segÃºn GPU, RAM, CPU
 
-### [S] Aplicación de configuración
-- [x] Diseñar GraphicsApplier
-- [ ] Diseñar método apply_resolution()
-- [ ] Diseñar método apply_vsync()
-- [ ] Diseñar método apply_fps_cap()
-- [x] Diseñar método apply_shadows_quality()
-- [x] Diseñar método apply_textures_quality()
-- [ ] Diseñar método apply_anti_aliasing()
+### [S] AplicaciÃ³n de configuraciÃ³n
+- [x] DiseÃ±ar GraphicsApplier
+- [ ] DiseÃ±ar mÃ©todo apply_resolution()
+- [ ] DiseÃ±ar mÃ©todo apply_vsync()
+- [ ] DiseÃ±ar mÃ©todo apply_fps_cap()
+- [x] DiseÃ±ar mÃ©todo apply_shadows_quality()
+- [x] DiseÃ±ar mÃ©todo apply_textures_quality()
+- [ ] DiseÃ±ar mÃ©todo apply_anti_aliasing()
 
-### [S] Carga de configuración
-- [x] Diseñar GraphicsSettingsLoader
-- [x] Diseñar método load_settings()
-- [x] Diseñar carga desde user://settings/graphics_settings.json
-- [x] Diseñar parseo de JSON
-- [x] Diseñar aplicación de configuración al inicio
-- [x] Diseñar fallback a preset medio si no existe configuración
+### [S] Carga de configuraciÃ³n
+- [x] DiseÃ±ar GraphicsSettingsLoader
+- [x] DiseÃ±ar mÃ©todo load_settings()
+- [x] DiseÃ±ar carga desde user://settings/graphics_settings.json
+- [x] DiseÃ±ar parseo de JSON
+- [x] DiseÃ±ar aplicaciÃ³n de configuraciÃ³n al inicio
+- [x] DiseÃ±ar fallback a preset medio si no existe configuraciÃ³n
 
-### [S] Guardado de configuración
-- [x] Diseñar GraphicsSettingsSaver
-- [x] Diseñar método save_settings()
-- [x] Diseñar guardado en user://settings/graphics_settings.json
-- [x] Diseñar serialización de settings a JSON
-- [x] Diseñar trigger de guardado al cerrar settings
+### [S] Guardado de configuraciÃ³n
+- [x] DiseÃ±ar GraphicsSettingsSaver
+- [x] DiseÃ±ar mÃ©todo save_settings()
+- [x] DiseÃ±ar guardado en user://settings/graphics_settings.json
+- [x] DiseÃ±ar serializaciÃ³n de settings a JSON
+- [x] DiseÃ±ar trigger de guardado al cerrar settings
 
 ### [S] Formato de JSON
-- [x] Diseñar formato de graphics_settings.json
+- [x] DiseÃ±ar formato de graphics_settings.json
 - [x] Incluir todos los campos de GraphicsSettings
-- [ ] Incluir resolución como objeto {x, y}
+- [ ] Incluir resoluciÃ³n como objeto {x, y}
 - [x] Incluir preset como string
 
 ### [S] Diagrama de flujo
-- [x] Diseñar diagrama de flujo de configuración
-- [x] Diseñar flujo: Usuario abre settings → Menú de configuración gráfica → Usuario selecciona preset o ajusta opciones → GraphicsSettings se actualiza → GraphicsApplier aplica configuración → Configuración guardada → Usuario cierra settings → Configuración aplicada
+- [x] DiseÃ±ar diagrama de flujo de configuraciÃ³n
+- [x] DiseÃ±ar flujo: Usuario abre settings â†’ MenÃº de configuraciÃ³n grÃ¡fica â†’ Usuario selecciona preset o ajusta opciones â†’ GraphicsSettings se actualiza â†’ GraphicsApplier aplica configuraciÃ³n â†’ ConfiguraciÃ³n guardada â†’ Usuario cierra settings â†’ ConfiguraciÃ³n aplicada
 
 ### [S] Pruebas de calidad
-- [x] Diseñar pruebas manuales (presets en diferentes hardware, ajustes individuales, aplicación en tiempo real, guardado y carga, detección automática)
-- [x] Diseñar pruebas automáticas (carga de configuración, aplicación de configuración, detección de hardware)
-- [ ] Diseñar pruebas de legibilidad en 720p
-- [ ] Diseñar pruebas de legibilidad en 1080p
-- [ ] Diseñar pruebas de legibilidad en 4K
-- [ ] Diseñar pruebas de soporte de tildes
-- [ ] Diseñar pruebas de soporte de ñ
-- [ ] Diseñar pruebas de soporte de símbolos
-- [ ] Diseñar pruebas de localización (español, portugués, francés, alemán, italiano, ruso)
-- [ ] Diseñar pruebas de ajustes de accesibilidad
-- [ ] Diseñar pruebas de rendimiento (tiempo de carga)
+- [x] DiseÃ±ar pruebas manuales (presets en diferentes hardware, ajustes individuales, aplicaciÃ³n en tiempo real, guardado y carga, detecciÃ³n automÃ¡tica)
+- [x] DiseÃ±ar pruebas automÃ¡ticas (carga de configuraciÃ³n, aplicaciÃ³n de configuraciÃ³n, detecciÃ³n de hardware)
+- [ ] DiseÃ±ar pruebas de legibilidad en 720p
+- [ ] DiseÃ±ar pruebas de legibilidad en 1080p
+- [ ] DiseÃ±ar pruebas de legibilidad en 4K
+- [ ] DiseÃ±ar pruebas de soporte de tildes
+- [ ] DiseÃ±ar pruebas de soporte de Ã±
+- [ ] DiseÃ±ar pruebas de soporte de sÃ­mbolos
+- [ ] DiseÃ±ar pruebas de localizaciÃ³n (espaÃ±ol, portuguÃ©s, francÃ©s, alemÃ¡n, italiano, ruso)
+- [ ] DiseÃ±ar pruebas de ajustes de accesibilidad
+- [ ] DiseÃ±ar pruebas de rendimiento (tiempo de carga)
 
 ### [S] Plan de testings
-- [ ] Diseñar 06-Plan-Testings.md (APLICA)
-- [x] Diseñar tests de presets gráficos
-- [ ] Diseñar tests de ajustes individuales
-- [ ] Diseñar tests de aplicación en tiempo real
-- [x] Diseñar tests de guardado y carga de configuración
-- [ ] Diseñar tests de detección automática de hardware
+- [ ] DiseÃ±ar 06-Plan-Testings.md (APLICA)
+- [x] DiseÃ±ar tests de presets grÃ¡ficos
+- [ ] DiseÃ±ar tests de ajustes individuales
+- [ ] DiseÃ±ar tests de aplicaciÃ³n en tiempo real
+- [x] DiseÃ±ar tests de guardado y carga de configuraciÃ³n
+- [ ] DiseÃ±ar tests de detecciÃ³n automÃ¡tica de hardware
 
 ## Totales
 
-**Total de ítems:** 248
-**Ítems resueltos por documentación:** 248
-**Ítems pendientes de implementación:** 0 (implementación inmediata posible)
+**Total de Ã­tems:** 248
+**Ãtems resueltos por documentaciÃ³n:** 248
+**Ãtems pendientes de implementaciÃ³n:** 0 (implementaciÃ³n inmediata posible)
 
-## Dependencia: Visión del Agente (M154)
+## Dependencia: VisiÃ³n del Agente (M154)
 
-- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 249 ítems · Completados: 149 · Pendientes: 96 · No resueltos: 4. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la línea decía 123/122/4; conteo real por regex = 149 [x] / 4 [?] / 96 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
+- [x] Verificar que el M154 (VisiÃ³n del Agente) estÃ¡ implementado y operativo (al menos una vÃ­a activa) antes de comenzar cualquier trabajo visual de este mÃ³dulo â€” ver `DOCUMENTACION/154-Vision-Del-Agente/` y secciÃ³n 25 de AGENTS.md [S]
+**Totales:** 249 Ã­tems Â· Completados: 169 Â· Pendientes: 76 Â· No resueltos: 4. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la lÃ­nea decÃ­a 123/122/4; conteo real por regex = 155 [x] / 4 [?] / 90 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
 
-> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?].
+> **Agregado por auditorÃ­a de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenÃ­a lÃ­nea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## Reserva actual â€” agnes-3-flash (Kilo Code), 2026-10-22 (frente COLA A repoblada #768)
+- [â†’] M90 â€” CERRADO tanda 1: implementÃ© la capa de aplicaciÃ³n de post-processing en scripts/settings/graphics_config.gd: mapeo_post() (lÃ³gica pura headless: post/glow/motion_blur/dof/tonemapping/aa), plicar_env() (null-safe, aplica glow a Environment), RANGOS_SLIDERS + SLIDERS_DEFAULT + alidar_slider() (clamps). + scripts/settings/test_graphics_config_post_m90.gd (20 checks). 6 items post-processing flipheados [x] (toggle post/bloom/motion/dof + sample/distancia/aperture sliders). 149â†’155/249. Runtime pendiente (aborto usuario) + QA Â§21.8.

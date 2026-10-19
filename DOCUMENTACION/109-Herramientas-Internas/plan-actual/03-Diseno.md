@@ -87,3 +87,44 @@ Assets/_Project/Editor/  (asmdef: IslaAncestral.EditorTools)
 2. El Debug Menu se compila solo en `ENABLE_DEBUG_MENU` (dev/demo/QA builds).
 3. Las herramientas de teleport/spawn solo operan en Play Mode del Editor (o Debug build con flag).
 4. Sin edición directa de datos en el runtime del jugador (siempre vía servicios M04).
+
+## 8. Definiciones de la iteración 7 (2026-10-19 - Step-5-WorkBuddy / WorkBuddy, Log 2009)
+
+Las 15 definiciones que cerraron los últimos `[ ]` del checklist (secciones 1, 6, 7, 8, 9,
+11, 16, 17, 19, 20 y 23). Modulo design-heavy: diseño documentado = hecho (política del
+director, M120).
+
+### 8.1 Framework de editor (complementa la sección 2)
+
+| Ítem | Definición |
+|------|------------|
+| Reutilización de lista vista/detalle en todos (L18) | Patron maestro-detalle único sobre `EditorToolBase`: panel izquierdo = lista filtrable (search por id/nombre/tag, sección 2), panel derecho = formulario del registro seleccionado. Al cambiar de registro se refresca el detalle sin reabrir ventana; filtro y seleccion sobreviven al cambio de editor via Ctrl+1..14. Aceptación: los 14 editores comparten la misma instancia del control de lista (0 código de lista duplicado por editor). |
+| Rojo/amarillo por campo con error especifico (L21) | Cada campo del formulario se pinta segun el resultado de `Validate()`: rojo = error bloqueante (no deja guardar), amarillo = advertencia (guarda con confirmacion). El mensaje especifico del validador (id duplicado, referencia inexistente, fuera de rango) se muestra junto al campo, no como color generico. Aceptación: ningun campo en rojo sin mensaje legible; el mensaje nombra campo y regla. |
+
+### 8.2 Vistas de los editores de dominio (secciones 6, 7, 8, 9 y 11)
+
+| Ítem | Definición |
+|------|------------|
+| Vistas de misión principal vs secundarias (L62) | Filtro/agrupacion por tipo (principal/secundaria) en la lista del editor de misiones. La principal se fija arriba y no se puede archivar con objetivos abiertos. Aceptación: cambiar el tipo recalcula la agrupacion y la validación de prereq sigue viendo ambas. |
+| Detección de recetas inalcanzables (L70) | Analisis estatico del grafo de recetas: una receta es inalcanzable si algun insumo no es obtenible (ninguna receta lo produce y no aparece en loot/tienda) o si la cadena tiene un ciclo. Hereda RecipeSchema y reporta el camino roto en el panel de validación. Aceptación: el reporte nombra receta e insumo sin origen; corre al guardar y desde el gate de CI (M112). |
+| Vista por categoría de crafting (L71) | Lista de recetas agrupada por categoría (herramientas, construccion, cocina, etc.) en árbol plegable; la categoría es campo obligatorio del esquema. Aceptación: receta sin categoría cae en "Sin categoría" con advertencia. |
+| Simulador de mercado rapido (L78) | Panel what-if del editor de economía: dados precios base e influencia de NPC, proyecta precios efectivos por dia y marca inflacion/deflacion fuera de umbral configurable (default +/-20 % en 7 dias). Corre en memoria sobre el dataset editado (no toca lo guardado) y exporta el resultado a CSV. Aceptación: la salida cuadra con el cálculo manual de un caso documentado. |
+| Vista por NPC/vendedor (L86) | Lista de tiendas agrupada por el NPC/vendedor dueno del stock: permite ver todo lo que un NPC vende sin abrir tienda por tienda. Aceptación: la validación "NPC refere economía existente" sigue aplicando sobre la vista agrupada. |
+| Vista de calendario anual (L100) | Línea de tiempo anual con las estaciones como franjas (duración + eventos M31); los solapamientos se marcan en rojo. Aceptación: la validación de no solapamiento se ve reflejada en la franja conflictiva. |
+
+### 8.3 Runtime tools (secciones 16, 17, 19 y 20)
+
+| Ítem | Definición |
+|------|------------|
+| Teleport con guardado del punto anterior (L137) | El teleport apila la posicion previa (pila de 1 elemento) con boton "volver"; se limpia al cambiar de escena o al morir. Aceptación: teleport -> volver deja al jugador en la posicion exacta de origen. |
+| Spawn con cantidad y densidad editable (L144) | El spawn bajo cursor acepta cantidad N (1..100) y densidad (spawns por unidad de area) en el formulario flotante del tool; N>1 reparte en radio creciente alrededor del cursor. Aceptación: el reparto cabe en el radio y respeta la validación de entidad existente. |
+| Validación de no duplicar entidades únicas (L145) | Las entidades marcadas `única` en su dataset (NPC con nombre propio, jefes) no admiten un segundo spawn: el tool lo bloquea con mensaje especifico. Aceptación: el segundo spawn de una única falla con error nombrado; las no únicas spawnean sin límite. |
+| Copia de estado al portapapeles (L165) | Boton "copiar estado" del inspector: serializa componentes + variables de la entidad inspeccionada a JSON en el portapapeles, para pegar en issues. Aceptación: el texto pegado es JSON válido con el path de la entidad y sus variables editables. |
+| Export de muestras a CSV (L171) | Las muestras de profiling (FPS, memoria, draw calls por chunk/NPC/AI) se exportan a CSV con cabecera (timestamp, métrica, valor) para análisis externo. Aceptación: el CSV se reabre y las filas cuadran con el overlay. |
+
+### 8.4 Cierre (sección 23)
+
+| Ítem | Definición |
+|------|------------|
+| Soporte de herramientas para QA (M102) (L201) | Perfil de build QA: las herramientas de debug/teleport/spawn/inspección se compilan tambien con el flag de QA (ademas del de debug) para que el equipo de QA las tenga en sus builds sin acceso de editor. Es una variante documentada del gate de exclusion de la sección 7.1. |
+| Documentación plan-actual actualizada y firmada (L202) | Convencion de cierre: cada iteración actualiza el plan-actual (05-Checklist con marcas y Totales medidos; 03-Diseno con las definiciones nuevas) y firma su bloque con autor, fecha y número de log. La iteración 7 la cumple. |

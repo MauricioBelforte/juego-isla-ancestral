@@ -15,10 +15,10 @@
 - [x] Definir colores de validación (rojo bloqueante / amarillo aviso) [S]
 - [x] Definir shortcuts por editor (Ctrl+1..14) [S]
 - [x] Definir export/import JSON/CSV en cada editor [M]
-- [ ] Definir reutilización de lista vista/detalle en todos [M]
+- [x] Definir reutilización de lista vista/detalle en todos [M]
 - [x] Definir Undo de Unity en edición de SO [M]
 - [x] Definir validación incremental al guardar [M]
-- [ ] Definir red/amarillo por campo con error específico [S]
+- [x] Definir red/amarillo por campo con error específico [S]
 
 ## 2. Editor de bloques (RF1)
 
@@ -59,7 +59,7 @@
 - [x] Definir edición de etapa/objetivo/recompensa (M22/23) [M]
 - [x] Definir validación: objetivos refieren items/NPC/POI válidos [M]
 - [x] Definir detección de ciclos en prereq de misiones [C]
-- [ ] Definir vistas de misión principal vs secundarias [S]
+- [x] Definir vistas de misión principal vs secundarias [S]
 - [x] Definir export a testear en M112 [S]
 
 ## 7. Editor de recetas (RF1)
@@ -67,15 +67,15 @@
 - [x] Definir edición de receta de crafting (M16/17) [M]
 - [x] Definir edición de estación de trabajo requerida [S]
 - [x] Definir validación de ingreso/salida con objetos existentes [M]
-- [ ] Definir detección de recetas inalcanzables [M]
-- [ ] Definir vista por categoría de crafting [S]
+- [x] Definir detección de recetas inalcanzables [M]
+- [x] Definir vista por categoría de crafting [S]
 
 ## 8. Editor de economía (RF1)
 
 - [x] Definir edición de precios base por objeto (M38) [M]
 - [x] Definir edición de influencia de NPC en precios [M]
 - [x] Definir validación: precios > 0 y NPC refiere economía [M]
-- [ ] Definir simulador de mercado rápido [M]
+- [x] Definir simulador de mercado rápido [M]
 - [x] Definir export de tabla de precios a CSV [S]
 
 ## 9. Editor de tiendas (RF1)
@@ -83,7 +83,7 @@
 - [x] Definir edición de inventario y stock (M39) [M]
 - [x] Definir edición de restock por día [S]
 - [x] Definir validación de items existentes y sin duplicados [M]
-- [ ] Definir vista por NPC/vendedor [S]
+- [x] Definir vista por NPC/vendedor [S]
 
 ## 10. Editor de clima (RF1)
 
@@ -97,7 +97,7 @@
 - [x] Definir edición de estaciones con duración y eventos (M31) [M]
 - [x] Definir validación de no solapamiento de fechas [S]
 - [x] Definir edición de efectos por estación (terreno M51/M50) [M]
-- [ ] Definir vista de calendario anual [S]
+- [x] Definir vista de calendario anual [S]
 
 ## 12. Editor de puzzles (RF1)
 
@@ -134,15 +134,15 @@
 
 - [x] Definir teleport a coordenadas exactas [S]
 - [x] Definir teleport a isla/POI/sello [M]
-- [ ] Definir teleport con guardado del punto anterior [S]
+- [x] Definir teleport con guardado del punto anterior [S]
 - [x] Definir integración con Debug Menu (M110) [S]
 
 ## 17. Herramienta de spawn (RF7)
 
 - [x] Definir spawn de objetos bajo cursor [S]
 - [x] Definir spawn de NPC y fauna [S]
-- [ ] Definir spawn con cantidad y densidad editable [S]
-- [ ] Definir validación de no duplicar entidades únicas [S]
+- [x] Definir spawn con cantidad y densidad editable [S]
+- [x] Definir validación de no duplicar entidades únicas [S]
 
 ## 18. Herramienta de debug (RF7)
 
@@ -162,13 +162,13 @@
 - [x] Definir inspector de entidad (componentes) [M]
 - [x] Definir navegación por árbol de objetos [S]
 - [x] Definir edición inline de variables en editor [M]
-- [ ] Definir copia de estado al portapapeles [S]
+- [x] Definir copia de estado al portapapeles [S]
 
 ## 20. Herramienta de profiling (RF9)
 
 - [x] Definir stats del editor: FPS, memoria, draw calls (M61/62) [M]
 - [x] Definir stats por chunk/NPC/AI [M]
-- [ ] Definir export de muestras a CSV [S]
+- [x] Definir export de muestras a CSV [S]
 - [x] Definir visual en overlay del editor [S]
 
 ## 21. Herramienta de validación (RF10)
@@ -198,16 +198,16 @@
 - [x] Definir verificación por script de exclusión en build [M]
 - [x] Definir compatibilidad con M110 (Debug Menu) [M]
 - [x] Definir compatibilidad con M108 (mods) [M]
-- [ ] Definir soporte de herramientas para QA (M102) [S]
-- [ ] Definir documentación plan-actual actualizada y firmada [S]
+- [x] Definir soporte de herramientas para QA (M102) [S]
+- [x] Definir documentación plan-actual actualizada y firmada [S]
 - [x] Definir log del módulo en Logs/ [S]
 - [x] Definir feed a M112 (tests de editor) y M151 (validator) [S]
 
 ## Totales
 
 **Total de ítems:** 138
-**Ítems resueltos por documentación:** 120 (15 pendientes, 3 dudas)
-**Ítems pendientes de implementación:** 15 (vistas/exports sin respaldo textual: ver iteracion 5; teleport/spawn/inspeccion/profiling sin respaldo: ver iteracion 6)
+**Ítems resueltos por documentación:** 135 (0 pendientes, 3 dudas)
+**Ítems pendientes de implementación:** 0 (los 15 ultimos quedaron definidos en 03-Diseno seccion 8, iteracion 7 - Log 2009)
 ## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] Framework común de editores: `scripts/editor/tools/editor_base.gd` (@tool PanelContainer) — lista de entradas + formulario por campo + guardado con backup .bak + mensajes de estado (base data-driven para los 14 editores RF1)
@@ -224,7 +224,7 @@
 - [x] Auditor no-recursivo (get_files_at) — los builds headless con -s no sostienen el listado recursivo por DirAccess en este entorno (documentado; el npc_visual_check usa load() que sí recorre)
 - [?] Panel del editor de diálogos en el dock (vista de grafo + edición de texto de nodo) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
 
-**Totales:** 138 ítems · Completados: 120 · Pendientes: 15 · No resueltos: 3. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: conteo real por marca = 120 [x] / 15 [ ] / 3 [?] = 138; el bloque declaraba 107/28/3.)
+**Totales:** 138 ítems · Completados: 135 · Pendientes: 0 · No resueltos: 3. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: conteo real por marca = 120 [x] / 15 [ ] / 3 [?] = 138; el bloque declaraba 107/28/3. Iteracion 7 Step-5-WorkBuddy 2026-10-19, Log 2009: +15 flips con definiciones en 03-Diseno seccion 8 -> 135 [x] / 0 [ ] / 3 [?] = 138, medido por prefijo de linea.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 27 [x] / 108 [ ] /
@@ -279,3 +279,11 @@
 - L203 -> cumplido por este ciclo: el log del modulo se escribio en Logs/ con numero del pool (1854).
 - **Quedan [ ] honestos de las secciones del lote 3 (5 items, grep = 0 en las 4 fuentes del modulo):** L137 teleport con guardado del punto anterior; L144 spawn con cantidad y densidad editable; L145 validacion de no duplicar entidades unicas (la herramienta de spawn no tiene validacion documentada; "no duplicados" es de tiendas §3 L57); L165 copia de estado al portapapeles; L171 export de muestras a CSV (RF9 no menciona export; RF6 es de los 14 editores).
 - Conteo medido tras los 13 flips: 120 [x] / 15 [ ] / 3 [?] = 138 (invariante verificado por script).
+
+## Iteración 7 (2026-10-19 — Step-5-WorkBuddy / WorkBuddy, Log 2009)
+
+- 15 flips `[ ]` -> `[x]`: los últimos 15 pendientes del checklist (L18, L21, L62, L70, L71, L78, L86, L100, L137, L144, L145, L165, L171, L201, L202).
+- Respaldo: las 15 definiciones en `03-Diseno.md` sección 8 (nuevo, líneas 91-130): framework (lista vista/detalle L18, rojo/amarillo por campo L21), vistas de dominio (misiones L62, recetas L70/L71, economía L78, tiendas L86, estaciones L100), runtime tools (teleport con retorno L137, spawn cantidad/densidad L144, entidades únicas L145, copia de estado L165, export CSV de profiling L171) y cierre (soporte QA M102 L201, documentación firmada L202).
+- Modulo design-heavy: diseño documentado = hecho (política del director, M120). Las iteraciones 5 y 6 habian dejado estos 15 como `[ ]` honestos por grep = 0 en las fuentes del modulo; esta iteración agrega la definicion que faltaba y flippea con cita real.
+- Conteo medido tras los flips: 135 [x] / 0 [ ] / 3 [?] = 138 (invariante verificado). Los 3 [?] siguen en pie (verificacion visual del dock y paneles de editores, dueno externo deepseek-v4-flash-vision-exp).
+- Pendiente del director: fila 46 del GLOBAL (120/138 -> 135/138) y ruteo de QA 21.8.

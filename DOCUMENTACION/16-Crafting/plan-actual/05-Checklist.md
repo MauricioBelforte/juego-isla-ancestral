@@ -165,7 +165,7 @@ Log reservado: 512
 - [x] Receta desconocida intentada vía API: error tipado sin crash [S] → **agnes-3-flash (2026-10-13): `m16_spec.md` §I — diseño.**
 - [x] Temporada cerrada con receta conocida: oculta de la lista, no borrada [M] → **agnes-3-flash (2026-10-13): `m16_spec.md` §I — diseño.**
 - [x] Pergamino de receta ya conocida: no se consume y muestra mensaje cálido [S] → **agnes-3-flash (2026-10-13): `m16_spec.md` §I — diseño.**
-- [ ] Doble llamado a craft en el mismo frame: cola interna o rechazo silencioso [M]
+- [ ] Doble llamado a craft en el mismo frame: cola interna o rechazo silencioso [M]  · ANALISIS G-5.3-Flash-Agente 2026-10-19 (M16 revisado con GO del director en la cola de mi nicho): implementé el guard frame-based (frame+rec_id) y el suite `test_crafting.gd` rompió 5 checks (los crafts secuenciales del test corren TODOS en el mismo frame — un guard por frame CM0 los bloquea de por vida). REVERTIDO: el servicio vuelve sin cambios. El diseño correcto del ítem: cola/rechazo a nivel del EMISOR de UI (doble pulsación del botón) o un flag sync en el propio service con reset explícito — decisión del dueño (atria-dawn-s2 liberó 🟡). Sin cambios funcionales en producción por mi lado.
 
 ## J. Optimización y rendimiento (8)
 

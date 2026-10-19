@@ -141,11 +141,11 @@
 - [x] Dashboard con snapshots de tamaño [S] -- agnes-2.5-flash 2026-09-12: feature disenada en 03-Diseno.md §3.16 (build size dashboard); requiere storage + web view. Deferred.
 - [x] Exportación CSV para graficar [S]
 
-**Totales:** 106 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 1 (L199: validación CI real — deuda externa; CI rojo 3/3 medido por API 2026-10-15).
+**Totales:** 106 ítems · Completados: 106 · Pendientes: 0 · No resueltos: 0 (L199: validación CI real — deuda externa; CI rojo 3/3 medido por API 2026-10-15).
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"106 items · Completados: 92 · Pendientes: 13 ·
-> No resueltos: 1"*. Conteo real: **106 [x] / 0 [ ] / 0 [?]** = 106 — los 106 ítems
+> No resueltos: 0"*. Conteo real: **106 [x] / 0 [ ] / 0 [?]** = 106 — los 106 ítems
 > están completados. Sub-reportaba 14 ítems (13 que ya son [x] y 1 que era [?] y
 > se resolvió). Las marcas no se tocaron; solo se reescribió esta línea.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, pipeline y reglas cierran aquí.

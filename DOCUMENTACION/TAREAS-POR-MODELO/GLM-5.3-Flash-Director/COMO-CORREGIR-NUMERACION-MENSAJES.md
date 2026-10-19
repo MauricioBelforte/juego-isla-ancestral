@@ -195,3 +195,20 @@ PASADA 6: las referencias antiguas (los Logs + docs) con el mapa old→new
 ---
 
 **Firma:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — la metodología aplicada en los canales DS-V4.1-Flash-Opencode (108 mensajes, `990b9c4`) y Step-5-WorkBuddy (75 archivos, `07cf51c`) el 2026-10-18.
+
+
+## ACTUALIZACIÓN 2026-10-19 02:27 — el error raíz y la regla definitiva
+
+**Error:** escribí a Step-5 en el 096 con un contador propio cuando el pool de SU carpeta
+iba por el 81 (ya agarrado por Step). El fundador aclaró: cada carpeta tiene SU
+`NUMEROS_DISPONIBLES.txt` y de ahí sacan el número TODOS los que escriben en ella
+(el agente y el director). `.ultima-revision` es solo el puntero de lectura.
+
+**Arreglos aplicados (02:20-02:30):**
+- Step-5: secuencia reparada a 001-081 consecutiva (mi 096 -> 081 tras cerrar el hueco 076
+  que yo mismo había creado renumerando de más); pool 82-181; puntero 81.
+- Barrido de los 7 canales con la regla pool = max+1, 100 números, sin BOM:
+  agnes 772-871 (BOM eliminado), Hy3 269-398, DeepSeek-WB 315-414, DS-OC 134-233,
+  Ling 179-314, G-5.3-Agente 61-160 (49 sacado del pool: hueco que jamás se reutiliza).
+- Deuda detectada: dups=2 de numeración en agnes, DS-OC y G-5.3-Agente (archivos que
+  comparten número); proximo_numero.py calcula SIEMPRE el número real.
