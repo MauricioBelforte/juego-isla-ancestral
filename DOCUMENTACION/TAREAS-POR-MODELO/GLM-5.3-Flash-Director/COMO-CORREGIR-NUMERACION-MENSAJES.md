@@ -224,3 +224,5 @@ iba por el 81 (ya agarrado por Step). El fundador aclaró: cada carpeta tiene SU
 
 - En los nombres de archivo (058-, 095-), en las lineas de NUMEROS_DISPONIBLES.txt (095 no 95) y en el puntero .ultima-revision (094).
 - Aplicado a los 7 pools: corregidos Step-5 (8 numeros 92-99) y G-5.3-Agente (5 numeros 95-99). El resto ya arrancaba >=100.
+
+- **INVARIANTE de 3 cifras (2026-10-19 07:50):** DESPUES de cada escritura propia re-verificar el padding del pool y del puntero (dos ya se rompio: mis escrituras post-barrido reintrodujeron 95 y 92 sin padding). El Cron C re-verificara ambas cosas en cada vuelta.
