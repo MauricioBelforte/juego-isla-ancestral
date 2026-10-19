@@ -645,3 +645,24 @@ Cada NPC puede tener variantes de ropa por estación:
 | Verano | Ropa ligera, sombreros grandes, sandalias |
 | Otoño | Colores cálidos, mangas largas, capas |
 | Invierno | Ropa gruesa, abrigos, bufandas, guantes |
+
+#### 9.4.1 Variantes estacionales por NPC (>= 10 documentados)
+
+Regla base: cada NPC define un **base = c1** (la paleta de `data/npc_visuals/<ISLA>/NPC-*.tres`, códigos SK/HR/EY + accesorios SubResource). Las variantes estacionales (`variantes_estacionales` en el `.tres`) re-usan MISMA malla y cambian **ropa/accesorios/tono** según la tabla de §9.4. Estas son las variantes documentadas (12 NPCs; el resto sigue el mismo patrón RF6). La MAQUINA `variantes_estacionales` queda poblada en iter 2 (RF6, dueño M45/M46/Hy4); aquí va el DISEÑO.
+
+| NPC | Rol | Base c1 | Primavera | Verano | Otoño | Invierno | Accesorio clave |
+|---|---|---|---|---|---|---|---|
+| AUR-001 | encantador | SK-01/HR-07 | capa floral clara | túnica ligera + flor | capa cálido + hierbas | abrigo tejido + bufanda | bastón (todo el año) |
+| AUR-002 | sanadora | SK-01/HR-04 | delantal floral | delantal ligero + sombrero | delantal + manta | delantal + chal | falda de hierbas |
+| AUR-005 | viajero | SK-03/HR-06 | sandalias + mochila | mochila + sombrero grande | capa de viaje | capa gruesa + botas | mochila |
+| CEN-001 | herrero | SK-05/HR-05 | (fijo: delantal) | delantal fino + mangas roll | delantal + guantes | delantal + guantes de piel | delantal (fijo) |
+| CEN-003 | cocinera | SK-02/HR-03 | delantal floral + paño | delantal + gorro de tela | delantal + bufanda | delantal + guantes | delantal (fijo) |
+| CEN-005 | guardia | SK-05/HR-05 | coraza ligera | coraza + sombrero | coraza + capa | coraza + abrigo | coraza (fijo) |
+| COR-002 | pescadora | SK-03/HR-01 | calza + sombrero | sandalias + sombrero grande | calza + capa | calza gruesa + bufanda | sombrero de pescador |
+| COR-005 | niña | SK-02/HR-08 | vestido floral | vestido corto + sandalias | vestido + chalina | abrigo + gorro | (varía por estación) |
+| RIZ-001 | mayor | SK-04/HR-08 | chal claro | chaleco + sombrero | chal + manta | abrigo largo + bufanda | bastón |
+| RIZ-002 | carpintero | SK-04/HR-06 | delantal fino | delantal + mangas roll | delantal + guantes | delantal + guantes de piel | delantal (fijo) |
+| RIZ-006 | agricultora | SK-02/HR-08 | calza + paño en cabeza | calza + sombrero | calza + capa | calza gruesa + bufanda | paño/sombrero |
+| RIZ-008 | animador | SK-03/HR-07 | túnica + instrumento | túnica ligera | túnica + capa | túnica + abrigo | instrumento |
+
+**Reglas por rol:** puestos **fijos de trabajo** (herrero/cocinera/guardia/carpintero) usan **una sola variante** con ajuste térmico (delantal/guantes) en la estación extrema; roles **exteriores** (viajero/pescadora/agricultora/niña/animador) tienen **4 variantes** (ropa + calzado + sombrero/bufanda por estación). **Límite: máx 4 variantes por NPC** (RF5 máx 6, usamos 4 por costo); exceder = deuda `[?]`.
