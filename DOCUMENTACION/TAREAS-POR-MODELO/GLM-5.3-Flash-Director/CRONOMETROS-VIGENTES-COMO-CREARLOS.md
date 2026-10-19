@@ -13,8 +13,24 @@
 |---|---|---|---|
 | **CRON A v3** | `0,20,40 * * * *` | :00, :20, :40 | Detección por SCRIPT (`scripts/verificar_mensajes_nuevos.py`) + responder pendientes + repoblar backlogs |
 | **CRON B v3** | `10,30,50 * * * *` | :10, :30, :50 | Segunda red: detección por LAG de acuses (misma lógica sin script, lógica de comparación en vivo) |
+| **CRON C v1** | `5,25,45 * * * *` | :05, :25, :45 | PRESERVACIÓN (commits agrupados por frente, NUNCA push) + INVESTIGACIÓN/repoblación inteligente por capacidad (fundador 2026-10-19 04:41) |
 
-**Regla de reparto:** cada 10 minutos hay un disparo (:00/:10/:20/:30/:40/:50) y **nunca se solapan** — la diferencia de 10 minutos entre ellos es intencional (fundador 2026-10-18 22:xx): si A falla, B cae 10 minutos después.
+**Regla de reparto:** cada 5 minutos hay un disparo en tela de juicio nula — el orden por hora queda **A (:00) → C (:05) → B (:10) → A (:20) → C (:25) → B (:30) → A (:40) → C (:45) → B (:50)** (fundador 2026-10-19 04:41: C intercalado cada 20 min desde :25 sin pisar a A ni B).
+
+---
+
+## 2bis. CRON C v1 — definición (creado 04:41, id `wku_152778f30001fWRhXBrjKMF1MZ`)
+
+**TAREA 1 — COMMITS DE PRESERVACIÓN** (NUNCA push; el push solo lo ordena el fundador):
+- `git status --short` agrupado por AUTOR/PROPÓSITO leyendo mensajes nuevos de la ventana y `Logs/` — un commit = un frente coherente, NUNCA mega-commit de todo.
+- Verificación por grupo antes de commit: encoding §28 (fix_encoding.py --dry-run si hay daño), sin secretos, sin binarios no pedidos.
+- NO TOCAR: archivos con mtime < 5 min (escritura en vuelo), módulos 🔵 de otro agente, `NUMEROS_DISPONIBLES.txt`. Prohibido push/--force/--amend.
+- Mensajes de commit en español, pasado impersonal, viñetas por archivo con atribución. Si nada: "CRON C: nada para preservar".
+
+**TAREA 2 — INVESTIGACIÓN/REPOBLACIÓN INTELIGENTE** (solo modelos activos):
+- ACTIVO = escribió en su canal en las últimas 2 horas.
+- Backlog < 100 pendientes → `scripts/repoblar_backlog.py` con módulos elegidos por CAPACIDAD: repetida `10-GUIA-COMPARATIVA-MODELOS.md` (Recom, dificultad 1-5) + historial de su canal. Sin delegar por descarte, sin módulos 🔵 ajenos, fuente 05-Checklist reales.
+- Reporte: a quién, qué módulos, por qué su capacidad.
 
 ---
 
