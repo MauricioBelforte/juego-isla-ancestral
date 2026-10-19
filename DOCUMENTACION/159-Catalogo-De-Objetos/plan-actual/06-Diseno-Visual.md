@@ -661,3 +661,31 @@
 - [ ] Optimizar para rendimiento (LOD, instancing)
 - [ ] Probar en diferentes resoluciones
 - [ ] Documentar controles de calidad visual
+
+## 21. LODs y Texturas por categoría (completa M159-datos, agnes-3-flash, 2026-10-22)
+
+Completa los items 'Definir LODs por categoría' y 'Definir texturas por material' (antes parciales en §19.3).
+
+### 21.1 LODs por categoría (MultiMesh / MeshInstance3D, §19.3)
+
+| Categoría | LOD0 | LOD1 | LOD2 | LOD3 | Distancias (m) |
+|---|---|---|---|---|---|
+| Naturaleza (árboles/rocas/plantas) | tris altos | 50% | 25% | 12% bill | 0/15/40/80 |
+| Mobiliario / Construcción | malla base | malla base | simplificada | billboard | 0/25/50/∞ |
+| Herramientas / Items / Ropa | malla base (pequeño) | — | — | — (1 solo, tris bajos) | 0 |
+| Iluminación / Decoración | malla base | simplificada | billboard | — | 0/30/60 |
+
+Regla: categorías de muchos objetos repetidos (naturaleza, M50) usan LOD4 + instancing; objetos únicos (herramienta en mano) NO usan LOD (cercanía).
+
+### 21.2 Texturas por material (atlas §19.3, tileable M47)
+
+| Material | Textura base | Atlas | Tiling | Notes |
+|---|---|---|---|---|
+| Madera (clara/oscura) | tex_madera_01/02 | atlas_madera | 2×2 | veta, M47 PBR |
+| Piedra / granito | tex_piedra_01 | atlas_piedra | 1×1 | nítida |
+| Metal (hierro/cobre/dorado) | tex_metal_01 | atlas_metal | 1×1 | spec M47 |
+| Tela / paño | tex_tela_01 | atlas_tela | 4×4 | suave |
+| Hojas / vegetación | tex_hoja_01 | atlas_vegetal | 1×1 | cutout alpha |
+| Cerámica / barro | tex_ceramica_01 | atlas_varios | 1×1 | — |
+
+Regla: 1 atlas por familia de material (≤ 4 materiales por atlas); tiling por defecto 1×1; vegetación usa alpha cutout (no blend, por rendimiento).

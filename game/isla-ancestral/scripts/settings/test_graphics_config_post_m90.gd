@@ -113,6 +113,17 @@ func _run() -> void:
 	_check("validar_slider distancia_dibujado 9999 -> 2500 (clamp max)", is_equal_approx(r.validar_slider("distancia_dibujado", 9999.0), 2500.0))
 	_check("validar_slider distancia_dibujado 10 -> 300 (clamp min)", is_equal_approx(r.validar_slider("distancia_dibujado", 10.0), 300.0))
 
+	# --- Debug / FPS cap (§1 opcional) ---
+	var d: RefCounted = _GC.new()
+	_check("mapeo_debug: todos off por defecto", d.mapeo_debug()["fps_counter"] == false and d.mapeo_debug()["profiling_gpu"] == false)
+	_check("fijar_debug fps_counter on", d.fijar_debug("fps_counter", true) and d.mapeo_debug()["fps_counter"] == true)
+	_check("fijar_debug clave inválida -> false", d.fijar_debug("no_existe", true) == false)
+	var cap_aplicado: int = d.apply_fps_cap()
+	_check("apply_fps_cap() default 60", cap_aplicado == 60)
+	d.aplicar_preset("ultra")  # fps = 0 (ilimitado)
+	_check("apply_fps_cap ultra -> 0 (ilimitado)", d.apply_fps_cap() == 0)
+	_check("recomendar_preset gana la más baja", _GC.recomendar_preset("RTX 4090", 4.0, 2) == "baja")
+
 	_fin()
 
 
