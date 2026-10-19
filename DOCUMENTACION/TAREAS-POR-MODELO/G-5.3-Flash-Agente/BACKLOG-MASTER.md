@@ -74,7 +74,7 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 ### Bloque C — La cola estrella del archivo directo (L199/CI)
 
 21. **M118 L199** — flip a [x] cuando el run de `quality.yml` dé VERDE (con `gh run list` evidencia — precondición ya en push `dfc4126...`).
-22. Si el CI sigue rojo en la capa por "test_diario_perf" u otro WIP de Step: confirmar si el commit del fix ya llegó (stress de catch-up: según Step 5).
+22. [x] Si el CI sigue rojo en la capa por "test_diario_perf" u otro WIP de Step: confirmar si el commit del fix ya llegó (stress de catch-up: según Step 5).
   · VERIFICADO 2026-10-18 01:35 UTC (G-5.3-Flash-Agente, gh run quality.yml limit 5): CI ROJO 5/5 recientes (00:24Z-01:01Z). El run 39084931328 tiene 3 capas rojas: (1) UTF-8 BOM guard — item_obj_her_017.tres con BOM, FIX 1 aplicado y PISADO por un commit UTF-16: mi fix dejó el disco UTF-8 sin BOM, pero el blob commiteado (4fa7f55 y HEAD, verificado con git cat-file binario) empieza ff fe = BOM UTF-16-LE (escritura con redirección > de PowerShell — reincidencia exacta de la prohibición §28). MI WORKING TREE ESTÁ CORRECTO (UTF-8 sin BOM, .tres intacto, M en estado git): el director solo necesita commitear ESTE archivo tal está en disco y la capa verde.; (2) M127 legal — scan_orphan_code 300 hallazgos NUEVOS (718 total, iconos assets/2d/items_m159 sin metadata legal, dueño M159/agnes); (3) M112 suite — 2 SCRIPT ERROR (size in Callable + register in NPCWatchdog). No era test_diario_perf de Step.
 23. Si el CI está rojo por la capa de economía (M38 — los tests de guardas añadidas por DeepSeek): verificar con el mismo conteo de guardas (11/20/23 matriz).
   · PUNTos FINOS M112 2026-10-18 03:40 UTC (G-5.3-Flash-Agente, run 39089280881 log-failed): los 2 SCRIPT ERROR son de TESTS STALE que llaman APIs inexistentes — (1) res://scripts/logros/test_logros.gd:291 en _test_guardado_carga_rf9_rn8: Invalid call. Nonexistent function 'size' in base 'Callable' (dueño fila M72); (2) res://scripts/ia_npc/test_rendimiento_m64.gd:64 en _bloque_a_budget: Nonexistent function 'register' in base 'Node (NPCWatchdog)' (dueño fila M64). La capa M112 falla POR ELLOS; el resto de suites del job corren. Nota: NO son economía M38.
@@ -382,3 +382,41 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 95. - [ ] [58] Planear prueba de atajo global F10 desde título, pausa y gameplay [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 96. - [ ] [58] Planear prueba de sesión larga (≥ 30 min) verificando los autosaves cada 5 minutos [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 97. - [ ] [65] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensi <!-- fuente: 65-Animales-IA/05-Checklist.md -->
+
+
+## REPOBLACION V3 (2026-10-19T01:46:07) — items REALES de 05-Checklist (fuente en comentario)
+
+1. - [ ] [65] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensi <!-- fuente: 65-Animales-IA/05-Checklist.md -->
+2. - [ ] [16] Doble llamado a craft en el mismo frame: cola interna o rechazo silencioso [M] · ANALISIS G-5.3-Flash-Agente 2026-10-19 (M16 revisado con GO del direc <!-- fuente: 16-Crafting/05-Checklist.md -->
+3. - [ ] [16] Cero cómputo de crafting cuando la UI está cerrada [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+4. - [ ] [16] Filtros de temporada recalculados solo ante season_changed [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+5. - [ ] [16] Sin asignaciones de objetos en el hot path de fabricación simple [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
+6. - [ ] [16] Texturas/iconos de recetas precargados con pool ligero [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
+7. - [ ] [16] Sin steps de física extra en estaciones (efecto interactuable básico) [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+8. - [ ] [16] Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
+9. - [ ] [16] Test unitario: registro de recetas y detección de duplicados [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
+10. - [ ] [16] Test unitario: validación de materiales y máximo fabricable [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
+11. - [ ] [16] Test: rollback exacto ante inventario lleno en ambos destinos [C] <!-- fuente: 16-Crafting/05-Checklist.md -->
+12. - [ ] [16] Recorrido manual: abrir, fabricar, fallar y cancelar en las 3 estaciones sin bugs [C] <!-- fuente: 16-Crafting/05-Checklist.md -->
+13. - [ ] [16] RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con <!-- fuente: 16-Crafting/05-Checklist.md -->
+14. - [ ] [16] RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad <!-- fuente: 16-Crafting/05-Checklist.md -->
+15. - [ ] [16] RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta <!-- fuente: 16-Crafting/05-Checklist.md -->
+16. - [ ] [16] RF-MR4: funciones de balance `durabilidad_maxima(tipo, nivel)` y <!-- fuente: 16-Crafting/05-Checklist.md -->
+17. - [ ] [16] RF-MR5: integracion con M14 — mejorar/reparar consumen materiales del inventario via <!-- fuente: 16-Crafting/05-Checklist.md -->
+18. - [ ] [16] RF-MR6: senales `herramienta_mejorada(item_id, nivel)` y <!-- fuente: 16-Crafting/05-Checklist.md -->
+19. - [ ] [16] RF-MR7: persistencia del `nivel_mejora` por item en el save de M59 (campo aditivo, <!-- fuente: 16-Crafting/05-Checklist.md -->
+20. - [ ] [16] RF-MR8: decision de estacion documentada en `03-Diseno.md` — estacion nueva <!-- fuente: 16-Crafting/05-Checklist.md -->
+21. - [ ] [16] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de <!-- fuente: 16-Crafting/05-Checklist.md -->
+22. - [ ] [16] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con <!-- fuente: 16-Crafting/05-Checklist.md -->
+23. - [ ] [16] RF-MR11: feedback cozy — el fallo por materiales **no dana** la herramienta (no es <!-- fuente: 16-Crafting/05-Checklist.md -->
+24. - [ ] [16] RF-MR12: panel de mejora en la estacion: nivel actual, coste del siguiente nivel, <!-- fuente: 16-Crafting/05-Checklist.md -->
+25. - [ ] [16] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a <!-- fuente: 16-Crafting/05-Checklist.md -->
+26. - [ ] [16] RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del modulo [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+27. - [ ] [16] RF-MR15: M13 consume `efectividad(tipo, nivel)` para el escalado de rendimiento <!-- fuente: 16-Crafting/05-Checklist.md -->
+28. - [ ] [16] RF-MR16: M13 consume `durabilidad_maxima(tipo, nivel)` como techo al aplicar la <!-- fuente: 16-Crafting/05-Checklist.md -->
+29. - [ ] [16] RF-MR17: contrato consumido documentado en el `04-Codigo.md` de M13 (firma de la API <!-- fuente: 16-Crafting/05-Checklist.md -->
+30. - [ ] [16] RF-MR18: test headless `_test_mejora_reparacion` — mejora consume materiales y sube <!-- fuente: 16-Crafting/05-Checklist.md -->
+31. - [ ] [16] RF-MR19: sonda en ROJO del umbral (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+32. - [ ] [16] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+33. - [ ] [16] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion, <!-- fuente: 16-Crafting/05-Checklist.md -->
+34. - [ ] [16] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que <!-- fuente: 16-Crafting/05-Checklist.md -->
