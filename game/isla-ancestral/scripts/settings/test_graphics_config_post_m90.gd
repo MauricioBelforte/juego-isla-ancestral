@@ -48,9 +48,9 @@ func _run() -> void:
 	_check("ultra: tonemapping on", mu["tonemapping"] == true)
 	_check("ultra: aa=TAA", mu["aa"] == "taa")
 
-	# post=true pero bloom=false -> glow off
+	# post=true pero bloom=false -> glow off (ultra tiene dof on)
 	var mix: RefCounted = _GC.new()
-	mix.aplicar_preset("alto")
+	mix.aplicar_preset("ultra")
 	mix.fijar("bloom", false)
 	var mm: Dictionary = mix.mapeo_post()
 	_check("mix: post=true + bloom=false -> glow off", mm["post"] == true and mm["glow"] == false)

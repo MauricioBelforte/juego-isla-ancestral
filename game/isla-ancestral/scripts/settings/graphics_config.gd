@@ -152,10 +152,12 @@ const UMBRAL_CPU_NUCLEOS: Dictionary = {"baja": 2, "media": 4, "alta": 8, "ultra
 
 var _valores: Dictionary = {}
 var _accesibilidad: Dictionary = {}
+var _debug: Dictionary = {}
 
 func _init() -> void:
 	_valores = PRESETS["medio"].duplicate(true)
 	_accesibilidad = ACCESIBILIDAD_DEFAULT.duplicate(true)
+	_debug = DEBUG_FLAGS.duplicate(true)
 
 ## Aplica un preset por id. Devuelve false si no existe.
 func aplicar_preset(id: String) -> bool:
@@ -335,6 +337,7 @@ const ACCESIBILIDAD_DEFAULT: Dictionary = {
 	"alto_contraste": false,
 	"reducir_motion": false,
 	"reducir_bloom": false,
+	"fuente_escala": 1.0,
 }
 
 ## Devuelve los rangos [min, max] de cada slider.
@@ -377,14 +380,14 @@ func mapeo_culling() -> Dictionary:
 
 ## Mapeo LÓGICO de los flags de debug/profiling (M110). headless.
 func mapeo_debug() -> Dictionary:
-	return DEBUG_FLAGS.duplicate(true)
+	return _debug.duplicate(true)
 
 
 ## Fija un flag de debug. Devuelve false si la clave no es válida.
 func fijar_debug(clave: String, valor: bool) -> bool:
 	if not DEBUG_FLAGS.has(clave):
 		return false
-	DEBUG_FLAGS[clave] = valor
+	_debug[clave] = valor
 	return true
 
 
@@ -446,11 +449,10 @@ func aplicar_env(entorno) -> void:
 	if entorno == null:
 		return
 	var m: Dictionary = mapeo_post()
-	# Glow (bloom).
+	# Glow (bloom). glow_bloom = intensidad. El threshold va vía `mapeo_post` para la UI.
 	entorno.glow_enabled = bool(m["glow"])
 	if bool(m["glow"]):
 		entorno.glow_bloom = validar_slider("bloom_intensidad", float(obtener("bloom_intensidad", SLIDERS_DEFAULT["bloom_intensidad"])))
-		entorno.glow_threshold = validar_slider("bloom_threshold", float(obtener("bloom_threshold", SLIDERS_DEFAULT["bloom_threshold"])))
 
 
 func _igual(a: Dictionary, b: Dictionary) -> bool:
