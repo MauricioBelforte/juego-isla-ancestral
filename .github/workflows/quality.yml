@@ -178,18 +178,55 @@ jobs:
         run: |
           cd game/isla-ancestral
           FAIL=0
+          # AVISO DE QUE SUITE FALLO (encargo del director, msg 315, 2026-10-19).
+          # GitHub Actions solo muestra el STEP, no la suite: con 93 invocaciones en
+          # un solo step, un rojo era ciego (habia que buscar el EXIT 1 en 6.000
+          # lineas de log). Ahora cada fallo emite UNA linea `::error::FALLO <script>`
+          # y al final se lista el conjunto completo. `suite` recibe los argumentos
+          # TAL CUAL de godot (mismo orden que antes, sin el prefijo `godot --headless`):
+          # el nombre del script se detecta de --script/-s solo para el mensaje.
+          N_SUITES=0
+          N_FALLIDAS=0
+          FALLIDAS=""
+          suite() {
+            local script="" prev="" a
+            for a in "$@"; do
+              case "$prev" in
+                --script|-s) script="$a" ;;
+              esac
+              prev="$a"
+            done
+            N_SUITES=$((N_SUITES + 1))
+            if ! godot --headless "$@" 2>&1; then
+              echo "::error::FALLO ${script:-$*}"
+              FALLIDAS="$FALLIDAS ${script:-$*}"
+              N_FALLIDAS=$((N_FALLIDAS + 1))
+              FAIL=1
+            fi
+          }
+          py_suite() {
+            local etiqueta="$1"
+            shift
+            N_SUITES=$((N_SUITES + 1))
+            if ! "$@" 2>&1; then
+              echo "::error::FALLO $etiqueta"
+              FALLIDAS="$FALLIDAS $etiqueta"
+              N_FALLIDAS=$((N_FALLIDAS + 1))
+              FAIL=1
+            fi
+          }
           # Run save validation test (M59): atomico, checksum, estructura,
           # corrupcion, backup y el camino feliz de carga (LoadResult.OK).
           # GATE DURO: era `|| true` (no-op, trampa 81). El bug critico de
           # M59 iter. 1 -- TODO save valido leido del disco daba CORRUPTED
           # (sin backup) o RECOVERED (con backup) -- pasaba desapercibido.
-          godot --headless --script scripts/saving/validate_save.gd 2>&1 || FAIL=1
+          suite --script scripts/saving/validate_save.gd
           # M59 iter. 1 (DeepSeek-V4.1-Flash): metadatos por slot (D) y carga
           # de version futura (V). 22 checks, piso CHECKS_MINIMOS medido en
           # verde y _summary() en call_deferred (sobrevive a un SCRIPT ERROR
           # que aborte _run()). Bug: slot_metadata() parseaba el archivo
           # entero (checksum+payload) como JSON -> devolvia {} siempre.
-          godot --headless --script scripts/saving/test_slots_m59.gd 2>&1 || FAIL=1
+          suite --script scripts/saving/test_slots_m59.gd
           # M59 iter. 2 (DeepSeek-V4.1-Flash): el CAMINO REAL de guardado
           # (SaveManager.request_save) y la rotacion de backups. 23 checks,
           # piso CHECKS_MINIMOS medido en verde. BUG CRITICO: rotate()
@@ -199,7 +236,7 @@ jobs:
           # load_slot() = NOT_FOUND. request_save() (auto-save, timer, UI)
           # nunca dejaba un save cargable. Las suites previas no lo veian
           # porque llamaban a write_atomic() directo, nunca a request_save().
-          godot --headless --script scripts/saving/test_rotate_m59.gd 2>&1 || FAIL=1
+          suite --script scripts/saving/test_rotate_m59.gd
           # M59 cola de bugs (DeepSeek-V4.1-Flash): sonda de BUG-115. El token de
           # integridad pasa a HMAC-SHA256 con clave por instalacion
           # (`hmac256:<hex>`), retrocompatible con el SHA-256 legado (los saves
@@ -208,39 +245,39 @@ jobs:
           # y tipos de campos no criticos. 38 checks, piso CHECKS_MINIMOS medido
           # en verde; guardian probado EN ROJO por inyeccion (verificar_checksum
           # siempre true -> 3 fallos; validadores de rango anulados -> 4 fallos).
-          godot --headless --script scripts/saving/test_checksum_hmac.gd 2>&1 || FAIL=1
+          suite --script scripts/saving/test_checksum_hmac.gd
           # Run time calendar tests (M29)
-          godot --headless --script scripts/time/test_calendario.gd 2>&1 || FAIL=1
+          suite --script scripts/time/test_calendario.gd
           # Run time consumers tests
-          godot --headless --script scripts/time/test_consumidores_tiempo.gd 2>&1 || FAIL=1
+          suite --script scripts/time/test_consumidores_tiempo.gd
           # Run friendship tests (M20)
-          godot --headless --script scripts/friendship/test_amistad.gd 2>&1 || FAIL=1
+          suite --script scripts/friendship/test_amistad.gd
           # Run economy tests (M38)
-          godot --headless --script scripts/economia/test_m38_economia_smoke.gd 2>&1 || FAIL=1
+          suite --script scripts/economia/test_m38_economia_smoke.gd
           # Run economy minorista/mayorista tests
-          godot --headless --script scripts/economia/test_minorista_mayorista.gd 2>&1 || FAIL=1
+          suite --script scripts/economia/test_minorista_mayorista.gd
           # Run band caps tests
-          godot --headless --script scripts/economia/test_topos_banda.gd 2>&1 || FAIL=1
+          suite --script scripts/economia/test_topos_banda.gd
           # Run lore environmental gate (M148): falla (exit 1) si hay IDs
           # duplicados, canon_ref vacío, cobertura < 12 por isla o grafo de
           # pistas roto (consumidor inexistente).
-          godot --headless --script scripts/lore/lore_gate.gd 2>&1 || FAIL=1
+          suite --script scripts/lore/lore_gate.gd
           # Run lore environmental tests (M148): catálogo, auditor adversario,
           # grafo de pistas, persistencia (30 ciclos) y migración.
-          godot --headless --script scripts/lore/test_lore_m148.gd 2>&1 || FAIL=1
+          suite --script scripts/lore/test_lore_m148.gd
           # Run VFX/particles tests (M52): catálogo, factory, director y pool
           # (pooling, precalentamiento, determinismo por semilla, límites y
           # log VFX-SKIP). El test del pool instancia nodos reales — cubre la
           # ruta de runtime que los 3 tests puros nunca ejercitaban.
-          godot --headless --script scripts/particles/test_vfx_catalog_headless.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/particles/test_vfx_factory_headless.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/particles/test_vfx_director_headless.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/particles/test_vfx_pool_m52.gd 2>&1 || FAIL=1
+          suite --script scripts/particles/test_vfx_catalog_headless.gd
+          suite --script scripts/particles/test_vfx_factory_headless.gd
+          suite --script scripts/particles/test_vfx_director_headless.gd
+          suite --script scripts/particles/test_vfx_pool_m52.gd
           # M52 iter. 6: catálogo de 31 entradas + schema con reglas
           # verificables (RF3/4/6/7/11/14/16), loops con culling y fase fija,
           # LOD 25% y trigger centralizado. Los 13 buses del catálogo se
           # verifican contra scripts/core/event_bus.gd.
-          godot --headless --script scripts/particles/test_vfx_m52_iter6.gd 2>&1 || FAIL=1
+          suite --script scripts/particles/test_vfx_m52_iter6.gd
           # M52 iter. 6: el catálogo es un dataset generado — detecta ediciones
           # a mano que no pasaron por el generador.
           python ../../tools/vfx/gen_vfx_catalog.py --check
@@ -251,21 +288,21 @@ jobs:
           # ELIMINADO por atria-dawn 2026-10-09: referencia muerta (BUG-104 movio test_localizacion_m87.gd a Obsoletos/). Las suites M87 reales son test_localizacion_iter6 + test_validador_po_m87 (cableadas mas abajo).
           # M87 núcleo (iter. 1): carga de catalogos, traduccion es/en,
           # placeholders, plurales, formatos, fallback y validar_catalogos.
-          godot --headless --script scripts/localization/test_localization.gd 2>&1 || FAIL=1
+          suite --script scripts/localization/test_localization.gd
           # M87 iter. 2-4: persistencia M60 + sugerencia de idioma del SO + contexto
           # gettext + cache; cobertura de fuentes por idioma (M88); y robustez
           # determinista (parseo .po corrupto, placeholders mal formados, estados
           # de catalogo RF21, plurales n=0/negativos y formatos edge).
-          godot --headless --script scripts/localization/test_localizacion_iter2.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/localization/test_localizacion_iter3.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/localization/test_localizacion_iter4.gd 2>&1 || FAIL=1
+          suite --script scripts/localization/test_localizacion_iter2.gd
+          suite --script scripts/localization/test_localizacion_iter3.gd
+          suite --script scripts/localization/test_localizacion_iter4.gd
           # M87 iter. 5 + bloque I de iter. 6: validador de catalogos .po (reglas
           # R1-R13 por archivo y P1-P5 por par es<->en) + auditoria de claves
           # codigo<->catalogo. Incluye la exencion P5 declarada EN EL PROPIO
           # catalogo con `#. no-traducir: <motivo>` (plantillas sin palabras,
           # codigos de divisa, unidades): la clave exenta se lista aparte en
           # `exentas_p5`, asi que la exencion es auditable y no un agujero negro.
-          godot --headless --script scripts/localization/test_validador_po_m87.gd 2>&1 || FAIL=1
+          suite --script scripts/localization/test_validador_po_m87.gd
           # M87 iter. 6: encaje de texto MEDIDO en headless (expansion es->en,
           # desborde del contenedor de referencia 220x40, palabras sin espacios y
           # truncado), glosario de terminos canonicos, re-traduccion selectiva de
@@ -273,57 +310,57 @@ jobs:
           # _fin() + guardian anti-falso-verde: un error de script aborta la funcion
           # en SILENCIO, y con extends SceneTree ademas cuelga el arbol (el watchdog
           # lo convierte en EXIT 1). 82 checks.
-          godot --headless --script scripts/localization/test_localizacion_iter6.gd 2>&1 || FAIL=1
+          suite --script scripts/localization/test_localizacion_iter6.gd
           # Run copyright test (M127): copyright.json + CopyrightValidator.
           # Mínimos en vez de números fijos + ids únicos (fix BUG-033: fijaba
           # 5 elementos / 2 políticas con el catálogo en 7 / 5 -> false-red).
-          godot --headless --script scripts/legal/test_copyright_m127.gd 2>&1 || FAIL=1
+          suite --script scripts/legal/test_copyright_m127.gd
           # M90 iter. 2: graphics_config + su suite headless (85 checks con guardian
           # anti-falso-verde). Cubre resoluciones, modos de ventana, calidades, AA,
           # upscaling, VSync, FPS, escalas, presets y deteccion automatica.
           # Agregado el 2026-10-12 por stepfun-step-5-preview (orden del director mimo, msg 221):
           # la carpeta scripts/settings/ estaba sin versionar y sin gate.
-          godot --headless --script scripts/settings/test_graphics_config.gd 2>&1 || FAIL=1
+          suite --script scripts/settings/test_graphics_config.gd
           # M40 iter. 3: contratos centralizados + control de duplicados + fix L208.
           # Cubre los 47 contratos de Contratos, el rechazo de duplicados con
           # DOM-INF-REGISTRO, el warning DOM-INF-ACCESO-TEMPRANO con anti-flood, y la
           # migracion de resource_counter.gd de nodo directo a contrato.
           # Autorizado por el director mimo (msg 232).
-          godot --headless --script scripts/core/test_m40_contratos.gd 2>&1 || FAIL=1
+          suite --script scripts/core/test_m40_contratos.gd
           # M118: cross-module linter (grafo de imports) + su test.
           # FIX 2026-10-12 (stepfun-step-5-preview): detect_broken_refs se desactivo
           # porque usaba la sintaxis de singleton de Godot 3 ($Nombre), que en Godot 4
           # es get_node(Nodo) y daba ~25 falsos positivos. El reemplazo por .new() daba
           # 749. Conserva lo que si sirve: ciclos de dependencias. Referencias rotas se
           # detectan con godot --headless --check-only.
-          python "$GITHUB_WORKSPACE/tools/ci/cross_module_linter.py" || FAIL=1
-          python "$GITHUB_WORKSPACE/tools/ci/test_cross_module_linter.py" || FAIL=1
+          py_suite tools/ci/cross_module_linter.py python "$GITHUB_WORKSPACE/tools/ci/cross_module_linter.py"
+          py_suite tools/ci/test_cross_module_linter.py python "$GITHUB_WORKSPACE/tools/ci/test_cross_module_linter.py"
           # M53 QA: test de regresion de los tipos de modalidad de las capas UI.
           # Detecta que DialogLayer quede en MODAL_SIMPLE e InventoryLayer en MODAL_FULL
           # (estaban invertidos; fix 2026-10-12, orden del director mimo msg 243).
-          godot --headless --script scripts/ui/test_layer_type_m53.gd 2>&1 || FAIL=1
+          suite --script scripts/ui/test_layer_type_m53.gd
           # Run M111 quality-utils test: Math/Validation/Format utils, constants,
           # enums, structs, patterns y components (SceneTree, sin GdUnit4).
-          godot --headless -s res://tests/test_m111_utils_headless.gd 2>&1 || FAIL=1
+          suite -s res://tests/test_m111_utils_headless.gd
           # Run temple tests (M26): gating de 7 anillos + sellos + glifos con salida
           # bloqueada, checkpoints atomicos (tmp -> bak -> cp), telemetria de puzzles
           # y 6 suites de validacion (softlock/anti-exploit/voxel/accesibilidad/
           # orientacion/checkpoints). 7 bloques con marcador _fin() anti-falso-verde.
-          godot --headless --script scripts/templos/test_templo_m26.gd 2>&1 || FAIL=1
+          suite --script scripts/templos/test_templo_m26.gd
           # Run backup tests (M107): BackupManager + rotacion/retencion de copias.
           # Cableado junto al fix de BUG-035: el autoload hacia `DirAccess.new()`
           # (clase abstracta en Godot 4) -> parse error -> el autoload no cargaba y
           # ensuciaba TODO run headless con 3 SCRIPT ERROR.
-          godot --headless --script scripts/backup/test_backup_m107.gd 2>&1 || FAIL=1
+          suite --script scripts/backup/test_backup_m107.gd
           # Run UGC tests (M124): limites de almacenamiento por item y por cuota
           # (RF13), sanitizacion del UGC (4K -> 2K, sobre sin coords del save,
           # compresion ZSTD via FileAccess.open_compressed) y telemetria sin PII.
           # El suite de iter. 2 usa marcadores _fin() por bloque + watchdog.
-          godot --headless --script scripts/ugc/test_ugc_m124.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/ugc/test_ugc_m124_iter2.gd 2>&1 || FAIL=1
+          suite --script scripts/ugc/test_ugc_m124.gd
+          suite --script scripts/ugc/test_ugc_m124_iter2.gd
           # Run transport tests (M68). iter. 1: nucleo data-driven (grafo, dijkstra,
           # costes, horarios, clima, desbloqueo, waypoints) — 177 checks.
-          godot --headless --script scripts/transporte/test_transporte_m68.gd 2>&1 || FAIL=1
+          suite --script scripts/transporte/test_transporte_m68.gd
           # iter. 2: planificador de viaje (cozy < 4 s, cargar destino ANTES de
           # mover, orientacion al destino), viajes especiales (M74/M31), viajes
           # narrativos (M22/M23), eventos de ruta sin peligro (M64), puente con
@@ -331,10 +368,10 @@ jobs:
           # (validate_transport.gd) + ciclo completo — 199 checks, 8 bloques con
           # marcador _fin() y guarda anti-falso-verde (si un bloque aborta en
           # silencio, la suite FALLA).
-          godot --headless --script scripts/transporte/test_transporte_m68_iter2.gd 2>&1 || FAIL=1
+          suite --script scripts/transporte/test_transporte_m68_iter2.gd
           # Run island tests (M27). iter. 1: nucleo data-driven del archipielago
           # 1+12 (IslandDefinition/Archipielago/IslandRegistry/IslandProps) — 171 checks.
-          godot --headless --script scripts/islas/test_islas_m27.gd 2>&1 || FAIL=1
+          suite --script scripts/islas/test_islas_m27.gd
           # iter. 2 (iter. 4 del modulo): los 9 edge cases K1-K9 como logica pura
           # (IslandOps: cola de operaciones con prioridad/etapas 60-25-10-5/idempotencia;
           # IslandTravelGuard: precarga sin congelar, viaje con descarga en curso,
@@ -344,17 +381,17 @@ jobs:
           # (el checklist decia 24: el plan tiene 26) — 238 checks, 8 bloques con
           # marcador _fin() y guarda anti-falso-verde probada en vivo (un aborto
           # silencioso en un bloque hace FALLAR la suite y nombra el bloque).
-          godot --headless --script scripts/islas/test_islas_m27_iter2.gd 2>&1 || FAIL=1
+          suite --script scripts/islas/test_islas_m27_iter2.gd
           # Coherencia Islas (islas.json) <-> Mapa (map_data.json): 4 islas + 9 POIs.
-          godot --headless --script scripts/islas/sincronizar_islas_mapa.gd 2>&1 || FAIL=1
+          suite --script scripts/islas/sincronizar_islas_mapa.gd
           # Run data/serialization tests (M60). base: serializador JSON/binario,
           # checksum CRC32, contrato v1, escritura atomica y backups rotativos
           # (94 checks, incl. la ruta asincrona por Thread de la iter. 2).
-          godot --headless --script scripts/datos/test_datos_m60.gd 2>&1 || FAIL=1
+          suite --script scripts/datos/test_datos_m60.gd
           # iter. 3: construcciones (EstructurasCodec + BuildingsSaveProvider),
           # ventana de backups, compresion ZIP_DEFLATE, catalogos perezosos y
           # progreso del guardado (132 checks).
-          godot --headless --script scripts/datos/test_datos_m60_iter3.gd 2>&1 || FAIL=1
+          suite --script scripts/datos/test_datos_m60_iter3.gd
           # iter. 4 (re-verificacion selectiva tras la auditoria del 2026-09-14):
           # motor de migracion inyectable (migrar_con_cadena) + patrones puros,
           # borrado de slot sin fugas (.deflate/.bak*), regeneracion de meta.json,
@@ -362,7 +399,7 @@ jobs:
           # y validacion temprana al guardar — 152 checks, 8 bloques con marcador
           # _fin() y guarda anti-falso-verde probada en vivo (un aborto silencioso
           # en un bloque hace FALLAR la suite y nombra el bloque).
-          godot --headless --script scripts/datos/test_datos_m60_iter4.gd 2>&1 || FAIL=1
+          suite --script scripts/datos/test_datos_m60_iter4.gd
           # M17 Construccion iter. 1 (Log 1211, DeepSeek-V4.1-Flash): nucleo de
           # validacion (ConstruccionValidator -- renombrado por colision de
           # class_name con BuildValidator de M117), zonas AABB (ZoneRegistry,
@@ -373,7 +410,7 @@ jobs:
           # "buildings"). 131 checks, 12 bloques con marcador _fin() y guarda
           # anti-falso-verde probada por INYECCION (un aborto dentro de un bloque
           # hace FALLAR la suite, nombra el bloque y sale con EXIT 1).
-          godot --headless --script scripts/construccion/test_construccion.gd 2>&1 || FAIL=1
+          suite --script scripts/construccion/test_construccion.gd
           # M17 Construccion iter. 2 (Log 1212, DeepSeek-V4.1-Flash): catalogo
           # data-driven de 12 FAMILIAS (33 recetas .tres con ids de item REALES
           # de M14 -- corrige el id invalido "madera" de la iter. 1 -> "planks"),
@@ -384,7 +421,7 @@ jobs:
           # receta techo 1x1 con soportes_minimos=2 (inconstruible por huella):
           # el techo pasa a 2x2. 99 checks, 9 bloques con marcador _fin() y
           # guarda anti-falso-verde probada por INYECCION (3 sondas en ROJO:/r/n          # asercion rota, aborto de runtime en el bloque 9 y un check menos).
-          godot --headless --script scripts/construccion/test_construccion_iter2.gd 2>&1 || FAIL=1
+          suite --script scripts/construccion/test_construccion_iter2.gd
           # M17 Construccion iter. 3 (Log 1244, DeepSeek-V4.1-Flash): HUD del modo
           # (BuildHudModel puro: filas de costo y motivos de rechazo traducidos),
           # MESH REAL de la receta en el fantasma (PlacementRule.mesh_path en 30
@@ -395,7 +432,7 @@ jobs:
           # M112 de 251 piezas (consistencia de ocupacion + undo/redo masivo con
           # tope de pila 200). 138 checks, 9 bloques con marcador _fin() y guarda
           # anti-falso-verde probada por INYECCION (4 sondas en ROJO limpio).
-          godot --headless --script scripts/construccion/test_construccion_iter3.gd 2>&1 || FAIL=1
+          suite --script scripts/construccion/test_construccion_iter3.gd
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/
@@ -404,7 +441,7 @@ jobs:
           # senal line_emitted — 131 checks, 10 bloques con marcador _fin() y
           # guarda anti-falso-verde probada por INYECCION (un aborto silencioso en
           # un bloque hace FALLAR la suite, nombra el bloque y sale con EXIT 1).
-          godot --headless --script scripts/logging/test_logging_m103_iter1.gd 2>&1 || FAIL=1
+          suite --script scripts/logging/test_logging_m103_iter1.gd
           # M103 Logging iter. 2 (Log 1109, DeepSeek-V4.1-Flash). El modulo NO
           # tenia gate para 2 de sus 3 suites, y una de ellas publicaba "14
           # checks" con 11 INALCANZABLES (trampa 46: _test_export/_test_rotation
@@ -413,14 +450,14 @@ jobs:
           # marcado con _fin(), piso de checks MEDIDO (no copiado: 14 / 25 / 131)
           # y _summary() en su propio call_deferred, asi que un aborto silencioso
           # se detecta aunque no quede ningun [FAIL]. 14 + 25 + 131 = 170 checks.
-          # Gate duro: || FAIL=1.
-          godot --headless --script scripts/logging/test_logger.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/logging/test_logging_m103.gd 2>&1 || FAIL=1
+          # Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/logging/test_logger.gd
+          suite --script scripts/logging/test_logging_m103.gd
           # Cierra el item L199 del checklist por MEDICION (no por afirmacion):
           # mide el impacto en el frame budget y ATRIBUYE el coste (99% consola
           # vs 1% disco). Hallazgo -> BUG-067. 9 checks, 0 fallos, exit 0.
-          # Gate duro: || FAIL=1.
-          godot --headless --script scripts/logging/test_m103_frame_budget.gd 2>&1 || FAIL=1
+          # Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/logging/test_m103_frame_budget.gd
           # M105 Telemetria de gameplay. iter. 7: las 3 metricas
           # `time_to_first_*` que faltaban (house/puzzle/seal — el diseno pide 5
           # y solo existian 2 + session_duration) + fix de `establecer_opt_in`
@@ -439,14 +476,14 @@ jobs:
           # 6 sondas en ROJO — A..F — y se anadio el piso a iter7, que antes
           # solo tenia el guardian de bloques. Medido: 4 suites x3, 64 checks,
           # 0 fallos, 0 SCRIPT ERROR.)
-          godot --headless --script scripts/telemetry/test_telemetry.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/telemetry/test_telemetria_iter5.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/telemetry/test_telemetria_iter6.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/telemetry/test_telemetria_iter7.gd 2>&1 || FAIL=1
+          suite --script scripts/telemetry/test_telemetry.gd
+          suite --script scripts/telemetry/test_telemetria_iter5.gd
+          suite --script scripts/telemetry/test_telemetria_iter6.gd
+          suite --script scripts/telemetry/test_telemetria_iter7.gd
           # M117 Build System (Log 946 agnes-3): test de build al gate duro.
           # Nota: --script bootea los autoloads del proyecto (58 leaks ObjectDB
           # preexistentes ajenos a M117); el exit code 0/1 sigue siendo el gate.
-          godot --headless --script scripts/build/test_build_m117.gd 2>&1 || FAIL=1
+          suite --script scripts/build/test_build_m117.gd
           # M116 validador del instalador (V3 AppVersion sync, Log 946): evita
           # que .iss y project.godot se desalineen en el futuro.
           # iter. 3 (Log 1014): GATE DURO - se quito `|| true`. El test es
@@ -459,17 +496,17 @@ jobs:
           # nuevo scanner (classificar/detectar/scan_addons). Gate duro: ambos
           # deterministas y verdes (boot-time UI errors preexistentes no afectan
           # el exit 0/1 del test).
-          godot --headless --script scripts/legal/test_licenses_m83.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/licensing/test_license_scanner_m83.gd 2>&1 || FAIL=1
+          suite --script scripts/legal/test_licenses_m83.gd
+          suite --script scripts/licensing/test_license_scanner_m83.gd
           # M126 Marketing-Legal (Log 981 agnes-3): validación de marketing_legal.json
           # (scaffold legal). Gate duro: test determinista y verde (9/0).
           # atria-dawn (Log 1027, 2026-09-18): añadido || FAIL=1 que faltaba — el gate
           # afirmaba ser "duro" pero fallaba en silencio.
-          godot --headless --script scripts/legal/test_marketing_legal_m126.gd 2>&1 || FAIL=1
+          suite --script scripts/legal/test_marketing_legal_m126.gd
           # M128 Identidad de Marca (Log 1013 agnes-3): validación de identidad_marca.json
           # (BrandValidator, scaffold legal). Gate duro: test determinista y verde (8/0).
           # atria-dawn (Log 1027): añadido || FAIL=1 que faltaba.
-          godot --headless --script scripts/legal/test_brand_m128.gd 2>&1 || FAIL=1
+          suite --script scripts/legal/test_brand_m128.gd
           # M66 Anti-Softlock (Log 1018 agnes-3): detector central + fallbacks. Gate duro:
           # test_anti_softlock_m66.gd + test_fallbacks_m66.gd (0 fallos, deterministas).
           # El core queda protegido por CI; los 7 [?] externos (M22/M26/M64/M27) no bloquean.
@@ -482,21 +519,21 @@ jobs:
           godot --headless --script scripts/logros/test_logros.gd 2>&1
           godot --headless --script scripts/logros/test_logros_m72_statids.gd 2>&1
            # M64 IA de NPC (Log 2026-09-18 mimo-v2.5): plan_stack + watchdog + FSM + needs + blackboard.
-           godot --headless --script scripts/ia_npc/test_ia_npc_m64_iterN.gd 2>&1 || FAIL=1
+           suite --script scripts/ia_npc/test_ia_npc_m64_iterN.gd
            # M64 suites nuevas (Log 1046 mimo-v2.5): navegación + social + rendimiento + persistencia.
-           godot --headless --script scripts/ia_npc/test_navegacion_m64.gd 2>&1 || FAIL=1
-           godot --headless --script scripts/ia_npc/test_social_m64.gd 2>&1 || FAIL=1
-           godot --headless --script scripts/ia_npc/test_rendimiento_m64.gd 2>&1 || FAIL=1
-           godot --headless --script scripts/ia_npc/test_persistencia_m64.gd 2>&1 || FAIL=1
+           suite --script scripts/ia_npc/test_navegacion_m64.gd
+           suite --script scripts/ia_npc/test_social_m64.gd
+           suite --script scripts/ia_npc/test_rendimiento_m64.gd
+           suite --script scripts/ia_npc/test_persistencia_m64.gd
            # M11 Personaje del Jugador (Logs 1055/1062/1064/1069, nex-n2.5-pro):
            # constantes @export, hitbox CapsuleShape3D, movimiento, equipo y API nativa Voxel Tools.
-           # 30 checks, 0 fallos, EXIT 0 y 0 SCRIPT ERROR propios. Gate duro: || FAIL=1.
-           godot --headless --script scripts/player/test_player_m11.gd 2>&1 || FAIL=1
+           # 30 checks, 0 fallos, EXIT 0 y 0 SCRIPT ERROR propios. Gate duro: suite (falla => ::error::FALLO <script>).
+           suite --script scripts/player/test_player_m11.gd
           # BUG-042: las fuentes deben ser binarios REALES y MEDIR texto.
           # `load_dynamic_font()` sobre una pagina HTML devuelve err=0 con
           # 0.0 px, asi que el gate no se conforma con que el archivo exista.
-          # Gate duro: || FAIL=1.
-          godot --headless --script scripts/fonts/test_fuentes_binarias_bug042.gd 2>&1 || FAIL=1
+          # Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/fonts/test_fuentes_binarias_bug042.gd
           # M62 Memoria (Log 1094, DeepSeek-V4.1-Flash). El modulo NO tenia
           # gate: ninguna de sus suites figuraba aca, y una de ellas estaba
           # MUERTA dando verde (una asignacion tipada RefCounted -> Node
@@ -505,17 +542,17 @@ jobs:
           # bloque marcado con _fin(), piso de checks MEDIDO (no copiado) y
           # _summary() en su propio call_deferred, asi que un aborto silencioso
           # se detecta aunque no quede ningun [FAIL].
-          # 27 + 47 + 25 + 133 = 232 checks. Gate duro: || FAIL=1.
-          godot --headless --script scripts/rendimiento/memoria/test_memoria_m62.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/rendimiento/memoria/test_enforcement_m62.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/rendimiento/memoria/test_pool_iter2.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/rendimiento/memoria/test_memoria_m62_iter3.gd 2>&1 || FAIL=1
+          # 27 + 47 + 25 + 133 = 232 checks. Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/rendimiento/memoria/test_memoria_m62.gd
+          suite --script scripts/rendimiento/memoria/test_enforcement_m62.gd
+          suite --script scripts/rendimiento/memoria/test_pool_iter2.gd
+          suite --script scripts/rendimiento/memoria/test_memoria_m62_iter3.gd
           # M62 iter. 4 (Log 1112, DeepSeek-V4.1-Flash): presupuesto de liberacion
           # por refcount MEDIDO (pico por objeto < 3 ms de L191, delta de lote
           # < 50 ms de RN2) + nodos huerfanos estables en reposo. Guardian de 3
           # capas probado por inyeccion: un aborto deja 1 check y 2 fallos, EXIT 1.
-          # 15 checks. Gate duro: || FAIL=1.
-          godot --headless --script scripts/rendimiento/memoria/test_m62_liberacion.gd 2>&1 || FAIL=1
+          # 15 checks. Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/rendimiento/memoria/test_m62_liberacion.gd
           # M62 iter. 5 (Log 1187, DeepSeek-V4.1-Flash): handshake con M63 (el 62
           # NUNCA descarga un recurso que el 63 esta cargando) + cola de transicion
           # de escena (doble cambio = 1 descarga) + cambio rapido de region que
@@ -523,22 +560,22 @@ jobs:
           # log + determinismo de la decision (RN9). Guardian de 3 capas probado EN
           # ROJO con 5 sondas (A asercion falsa, B return que aborta _run, C piso+1,
           # D bloques sin cerrar, E _fin suprimido): las 5 dan EXIT 1 y el control
-          # sin mutar da EXIT 0. 60 checks. Gate duro: || FAIL=1.
-          godot --headless --script scripts/rendimiento/memoria/test_memoria_m62_iter5.gd 2>&1 || FAIL=1
+          # sin mutar da EXIT 0. 60 checks. Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/rendimiento/memoria/test_memoria_m62_iter5.gd
           # M62 iter. 6 (Log 1196, DeepSeek-V4.1-Flash): pureza de los datos de
           # partida (item L98). El payload de los 39 proveedores ISaveProvider
           # registrados como autoload — y el payload COMPLETO de collect() — no
           # debe contener Nodos/Objects (leak + valor no serializable). El
           # escaner es recursivo y el bloque D lo prueba EN ROJO (inyecta un
           # proveedor que devuelve un Nodo -> 3 fallos, EXIT 1; el control sin
-          # mutar da EXIT 0). 58 checks. Gate duro: || FAIL=1.
-          godot --headless --script scripts/rendimiento/memoria/test_m62_pureza_save.gd 2>&1 || FAIL=1
+          # mutar da EXIT 0). 58 checks. Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/rendimiento/memoria/test_m62_pureza_save.gd
           # El dataset de presupuestos es GENERADO, no editado a mano: los 8
           # sistemas de los 3 presets habian divergido del diseno §2 (las sumas
           # daban 1664/2112/2560 en vez de 1500/2000/2500). Este gate sale 1 si
           # alguien toca budgets.json sin pasar por generar_budgets.gd.
-          # Gate duro: || FAIL=1.
-          godot --headless --script scripts/rendimiento/memoria/generar_budgets.gd -- --check 2>&1 || FAIL=1
+          # Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/rendimiento/memoria/generar_budgets.gd -- --check
           # M106 Seguridad (P-36, Log 1149, DeepSeek-V4.1-Flash). El modulo tenia
           # 8 suites y NINGUNA cableada: el job `security-scan` no es un gate real
           # (4 grep con `|| true`, trampa 81). Ademas su trabajo previo vivia SOLO
@@ -547,15 +584,15 @@ jobs:
           # headless -> null, pitfall 9.6). Las 8 suites tienen guardian de 3
           # capas (bloque `_fin()`, piso CHECKS_MINIMOS MEDIDO, `_summary()` en su
           # propio call_deferred) y la nueva esta probada EN ROJO por inyeccion.
-          # 43+25+19+20+13+24+15+78 = 237 checks. Gate duro: || FAIL=1.
-          godot --headless --script scripts/security/test_security_m106.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/security/test_security_m106_input.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/security/test_security_m106_middleware.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/security/test_security_m106_secrets.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/security/test_security_m106_env.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/security/test_security_m106_environments.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/security/test_security_m106_database.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/security/test_security_m106_services.gd 2>&1 || FAIL=1
+          # 43+25+19+20+13+24+15+78 = 237 checks. Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/security/test_security_m106.gd
+          suite --script scripts/security/test_security_m106_input.gd
+          suite --script scripts/security/test_security_m106_middleware.gd
+          suite --script scripts/security/test_security_m106_secrets.gd
+          suite --script scripts/security/test_security_m106_env.gd
+          suite --script scripts/security/test_security_m106_environments.gd
+          suite --script scripts/security/test_security_m106_database.gd
+          suite --script scripts/security/test_security_m106_services.gd
           # M122 Crash Reporting (P-36, Log 1150, DeepSeek-V4.1-Flash). Su test de
           # nucleo estaba en ROJO (12/2) y la Evidencia del checklist afirmaba
           # "12 checks, 0 fallos": el bug real era `DirAccess.open("user://...")`
@@ -563,9 +600,9 @@ jobs:
           # crash_reporter.dumps_pendientes(). Corregido -> 13/0. La suite nueva
           # cubre los 10 helpers offline (10 bloques A-J) con transporte HTTP
           # inyectado: sin red, fail-closed asertado. 13+168 = 181 checks.
-          # Gate duro: || FAIL=1.
-          godot --headless --script scripts/crash/test_crash_m122.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/crash/test_crash_m122_offline.gd 2>&1 || FAIL=1
+          # Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/crash/test_crash_m122.gd
+          suite --script scripts/crash/test_crash_m122_offline.gd
           # M63 Cargas y Streaming (Log 1192, DeepSeek-V4.1-Flash). El modulo NO
           # tenia gate: ninguna de sus suites figuraba aca, y el sello §21.8 previo
           # (Log 895) se apoyo en un "0 fallos" FALSO — test_stream_m63.gd emitia 3
@@ -583,20 +620,30 @@ jobs:
           # de mundo rotando por semilla M29 + fundido hacia la escena); la suite
           # nueva tiene el mismo guardian de 3 capas, piso 42 MEDIDO y las mismas
           # 5 sondas en rojo (5/5 EXIT 1, control EXIT 0).
-          # 21+29+9+7+7+51+42 = 166 checks. Gate duro: || FAIL=1.
-          godot --headless --script scripts/stream/test_stream.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/stream/test_stream_m63.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/stream/test_pausa_cargas.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/stream/test_pantalla_carga.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/stream/test_rf2_threaded.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/stream/test_stream_m63_iter5.gd 2>&1 || FAIL=1
-          godot --headless --script scripts/stream/test_stream_m63_iter6.gd 2>&1 || FAIL=1
+          # 21+29+9+7+7+51+42 = 166 checks. Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/stream/test_stream.gd
+          suite --script scripts/stream/test_stream_m63.gd
+          suite --script scripts/stream/test_pausa_cargas.gd
+          suite --script scripts/stream/test_pantalla_carga.gd
+          suite --script scripts/stream/test_rf2_threaded.gd
+          suite --script scripts/stream/test_stream_m63_iter5.gd
+          suite --script scripts/stream/test_stream_m63_iter6.gd
           # M29 iter.2 (DeepSeek, Log 1257): suites gdUnit4 muertas convertidas
           # a headless vivas. 74/0 y 51/0 checks (x3 ejecuciones). Gate duro.
-          godot --headless --script tests/unit/time/test_time_calendar.gd 2>&1 || FAIL=1
-          godot --headless --script tests/integration/test_time_calendar_events.gd 2>&1 || FAIL=1
+          suite --script tests/unit/time/test_time_calendar.gd
+          suite --script tests/integration/test_time_calendar_events.gd
           # M68 iter.3 (Log 1251): waypoints + edge cases de transporte. 108/0.
-          godot --headless --script scripts/transporte/test_transporte_m68_iter3.gd 2>&1 || FAIL=1
+          suite --script scripts/transporte/test_transporte_m68_iter3.gd
+          # Resumen del conjunto: GitHub recorta a 10 anotaciones ::error:: por step
+          # (limite documentado; 50 por job), asi que si fallan mas de 10 suites el
+          # listado completo queda tambien en texto plano. Los contadores son
+          # MEDIDOS en la corrida (no una cifra fija que envejezca al agregar suites).
+          if [ "$N_FALLIDAS" -gt 0 ]; then
+            echo "::error::SUITES FALLIDAS ($N_FALLIDAS de $N_SUITES):$FALLIDAS"
+            echo "Suites fallidas ($N_FALLIDAS de $N_SUITES):$FALLIDAS"
+          else
+            echo "Suites fallidas: 0 de $N_SUITES (todas salieron EXIT 0)"
+          fi
           echo "All validation tests completed"
           exit $FAIL
 
