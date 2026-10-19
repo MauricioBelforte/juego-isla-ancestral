@@ -716,7 +716,7 @@ jobs:
       - name: Verify USCO deposit gate (M127 iter. 4)
         run: |
           FAIL=0
-          python3 tools/legal/empaquetar_deposito_usco.py --check 2>&1 || FAIL=1
+          python3 tools/legal/empaquetar_deposito_usco.py --check 2>&1 || { FAIL=1; echo "::error::FALLO tools/legal/empaquetar_deposito_usco.py --check"; }
           echo "deposito USCO (FAIL=$FAIL)"
           exit $FAIL
 
@@ -928,7 +928,7 @@ jobs:
       - name: Auditar arquitectura de servicios y carga sincrona
         run: |
           FAIL=0
-          python scripts/auditar_arquitectura_m62.py 2>&1 || FAIL=1
+          python scripts/auditar_arquitectura_m62.py 2>&1 || { FAIL=1; echo "::error::FALLO scripts/auditar_arquitectura_m62.py"; }
           echo "auditoria de arquitectura M62 (FAIL=$FAIL)"
           exit $FAIL
 
