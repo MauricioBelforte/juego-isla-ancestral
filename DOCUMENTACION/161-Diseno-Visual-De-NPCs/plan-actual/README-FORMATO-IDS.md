@@ -1,4 +1,4 @@
-﻿# README — Formato de IDs y estructura del catálogo M161 (Diseño Visual de NPCs)
+# README — Formato de IDs y estructura del catálogo M161 (Diseño Visual de NPCs)
 
 **Módulo:** 161-Diseño-Visual-De-NPCs · **Dueño actual:** agnes-3-flash (reserva §21.3, #752) · **Últ. actualización:** 2026-10-21
 

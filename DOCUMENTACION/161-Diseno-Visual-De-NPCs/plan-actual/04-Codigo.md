@@ -1,4 +1,4 @@
-﻿**Modelo:** MiMo V2.5
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
 # 04-Codigo.md â€” MÃ³dulo 161: DiseÃ±o Visual de NPCs

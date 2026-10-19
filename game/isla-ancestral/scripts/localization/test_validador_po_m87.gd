@@ -30,7 +30,9 @@ extends SceneTree
 #     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
 #     iter. 8 (2026-10-09, Log 1504): +2 checks de regresion de RE_DINAMICA (bloque
 #     auditor) -> piso re-MEDIDO 82 -> 84.
-const CHECKS_MINIMOS := 84
+#     iter. 9 (2026-10-18, Log 2005): +3 checks de regresion del falso positivo de
+#     un literal de cadena (bloque auditor) -> piso re-MEDIDO 84 -> 87.
+const CHECKS_MINIMOS := 87
 var _checks: int = 0
 var _wb_cerrado: bool = false
 
@@ -281,6 +283,18 @@ func _test_auditor_claves() -> void:
 	var inf_lit: Dictionary = AuditorClaves.auditar_texto(lit, "fixture_lit.gd", "res://locales/es.po")
 	_check(not (inf_lit["usadas_sin_clave"] as Array).has("\u00bfSeguro?"), "un literal humano no se marca como clave")
 	_check((inf_lit["usadas_sin_clave"] as Array).has("DLG.OK"), "llamada mixta: la posición con clave sí se captura")
+	# Regresión (2026-10-18, Log 2005): el patrón de la llamada también matchea
+	# cuando aparece DENTRO de un literal de cadena (una aserción que comprueba que
+	# el fuente CONTIENE la llamada). Medido: `diag_ui_en.gd:299` y
+	# `test_diario_ui.gd:294` capturaban `), ` como clave de PRODUCCIÓN -> 1 clave
+	# ausente falsa, 2 fallos y EXIT 1 en el job test-suite de quality.yml.
+	# El descarte se registra en `descartadas` (auditable) y NO oculta una clave
+	# ausente real: el tercer check es el control negativo del descarte.
+	var con_literal := "func f() -> void:\n\t_check(src.contains(\"_t(\"), \"x\")\n\t_t(\"ZZ.FALTA.CLAVE\")\n"
+	var inf_cl: Dictionary = AuditorClaves.auditar_texto(con_literal, "fixture_cl.gd", "res://locales/es.po")
+	_check(not (inf_cl["usadas_sin_clave"] as Array).has("), "), "una llamada dentro de un literal NO inventa una clave")
+	_check((inf_cl["descartadas"] as Array).has("), "), "la captura descartada queda registrada (auditable)")
+	_check((inf_cl["usadas_sin_clave"] as Array).has("ZZ.FALTA.CLAVE"), "el descarte NO oculta una clave ausente real (control)")
 	# Y las claves del llamador real de M53 ya no figuran como huérfanas.
 	_check(not (real["claves_sin_uso"] as Array).has("SETTINGS.DESCARTAR_TITULO"), "la clave de título de M53 deja de ser huérfana")
 	_check(not (real["claves_sin_uso"] as Array).has("SETTINGS.DESCARTAR_MENSAJE"), "la clave de mensaje de M53 deja de ser huérfana")

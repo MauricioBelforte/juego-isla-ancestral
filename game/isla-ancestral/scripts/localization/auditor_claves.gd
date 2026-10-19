@@ -37,6 +37,23 @@ const RE_TRAD := "traducir_clave\\s*\\(\\s*\"([^\"]+)\""
 const RE_TR_KEY := "tr_key\\s*\\(\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]*)\""
 const RE_TR_CTX := "tr_ctx\\s*\\(\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\""
 
+## Charset de una CLAVE real. Los patrones de arriba buscan la forma de la llamada,
+## asi que tambien matchean cuando esa forma aparece DENTRO de un literal de cadena
+## (una asercion que comprueba que el fuente contiene la llamada). Ahi la captura no
+## es una clave: es el texto que sigue a la comilla de cierre.
+##
+## Medido 2026-10-18 (CI rojo, suite test_validador_po_m87.gd): la asercion
+## `src.contains("<llamada>")` de scripts/ui/diag_ui_en.gd:299 y de
+## scripts/ui/test_diario_ui.gd:294 hacia que el patron principal capturara la
+## cadena `), ` como clave USADA EN PRODUCCION; el catalogo no la tiene, asi que el
+## auditor publicaba 1 clave ausente y el veredicto dejaba de ser OK -> 2 fallos y
+## EXIT 1 en el job test-suite de quality.yml.
+##
+## Las 243 claves de locales/es.po cumplen este charset (medido: 0 caracteres fuera
+## de [A-Za-z0-9_.|]). Ninguna clave real lleva espacio, parentesis, coma ni comillas,
+## asi que descartar esas capturas no puede ocultar una clave ausente de verdad.
+const RE_CLAVE_VALIDA := "^[A-Za-z0-9_.|]+$"
+
 ## APIs que reciben CLAVES como argumentos string: el llamador las traduce adentro
 ## (`ConfirmPopup.configurar` hace `_t(title_key)`), así que la clave NO aparece en
 ## una llamada `_t()` y el auditor no la veía. Sin estos patrones, una clave usada
@@ -84,6 +101,7 @@ static func _nuevo_informe(ruta_catalogo: String) -> Dictionary:
 		"usadas_sin_clave": [], "usadas_sin_clave_solo_tests": [],
 		"claves_sin_uso": [], "claves_dinamicas": [], "dinamicas": {},
 		"origenes": {}, "errores": [], "usadas": {}, "claves": {},
+		"descartadas": [],
 	}
 	var cat: Dictionary = ValidadorPO.validar_archivo(ruta_catalogo)
 	if not (cat["errores"] as Array).is_empty():
@@ -117,6 +135,7 @@ static func _finalizar(inf: Dictionary) -> Dictionary:
 	inf["usadas_sin_clave_solo_tests"].sort()
 	inf["claves_sin_uso"].sort()
 	inf["claves_dinamicas"].sort()
+	(inf["descartadas"] as Array).sort()
 	inf["dinamicas"] = dinamicas
 	inf["total_usadas"] = usadas.size()
 	inf["total_claves"] = claves.size()
@@ -151,6 +170,15 @@ static func formatear_informe(inf: Dictionary) -> String:
 		for d in inf["dinamicas"]:
 			l.append("  · " + str(d) + "*")
 	_volcar(l, "ERRORES", inf["errores"], {})
+	# Trazabilidad de lo descartado: si esta lista crece, alguien esta capturando
+	# texto que no es clave (o hay un patron nuevo mal escrito). Se informa, no se calla.
+	# `get` con default: este formateador es publico y acepta informes parciales
+	# (el propio suite le pasa un Dictionary armado a mano).
+	var desc: Array = inf.get("descartadas", [])
+	if not desc.is_empty():
+		l.append("CAPTURAS DESCARTADAS (no tienen forma de clave): %d" % desc.size())
+		for d in desc:
+			l.append("  · " + str(d))
 	l.append("RESULTADO: " + ("OK" if inf["ok"] else "CLAVES SIN TRADUCCIÓN"))
 	return "\n".join(l)
 
@@ -171,35 +199,54 @@ static func _escanear(dir: String, inf: Dictionary) -> void:
 
 
 static func _escanear_texto(t: String, archivo: String, inf: Dictionary) -> void:
-	var usadas: Dictionary = inf["usadas"]
 	for m in _matches(t, RE_DINAMICA):
 		inf["dinamicas"][m.get_string(1)] = true
 	for m in _matches(t, RE_T):
-		_registrar(usadas, inf["origenes"], m.get_string(1), archivo)
+		_registrar(inf, m.get_string(1), archivo)
 	for m in _matches(t, RE_TRAD):
-		_registrar(usadas, inf["origenes"], m.get_string(1), archivo)
+		_registrar(inf, m.get_string(1), archivo)
 	for m in _matches(t, RE_TR_KEY):
 		var k: String = m.get_string(1) + "." + m.get_string(2)
 		if m.get_string(3) != "":
 			k += "." + m.get_string(3)
-		_registrar(usadas, inf["origenes"], k.to_upper(), archivo)
+		_registrar(inf, k.to_upper(), archivo)
 	for m in _matches(t, RE_TR_CTX):
 		var ctx: String = m.get_string(2) + "." + m.get_string(3) + "." + m.get_string(1) + "|" + m.get_string(4)
-		_registrar(usadas, inf["origenes"], ctx.to_upper(), archivo)
+		_registrar(inf, ctx.to_upper(), archivo)
 	for m in _matches(t, RE_CLAVE_ARG1):
-		_registrar(usadas, inf["origenes"], m.get_string(1), archivo)
+		_registrar(inf, m.get_string(1), archivo)
 	for m in _matches(t, RE_CLAVE_ARG2):
-		_registrar(usadas, inf["origenes"], m.get_string(1), archivo)
+		_registrar(inf, m.get_string(1), archivo)
 
 ## ── Utilidades ───────────────────────────────────────────
 
-static func _registrar(usadas: Dictionary, origenes: Dictionary, clave: String, archivo: String) -> void:
+## Unico punto de entrada de toda clave capturada: aca se descarta lo que NO tiene
+## forma de clave (fragmentos de un literal de cadena, texto humano, prosa).
+## Las descartadas se conservan en `inf["descartadas"]` para que la exclusion sea
+## AUDITABLE: una excepcion invisible es un agujero negro.
+static func _registrar(inf: Dictionary, clave: String, archivo: String) -> void:
+	if not _clave_valida(clave):
+		var desc: Array = inf["descartadas"]
+		if not desc.has(clave):
+			desc.append(clave)
+		return
+	var usadas: Dictionary = inf["usadas"]
+	var origenes: Dictionary = inf["origenes"]
 	usadas[clave] = true
 	if not origenes.has(clave):
 		origenes[clave] = []
 	var lista: Array = origenes[clave]
 	if not lista.has(archivo):
 		lista.append(archivo)
+
+
+## ¿La captura tiene forma de clave? Ver RE_CLAVE_VALIDA.
+static func _clave_valida(clave: String) -> bool:
+	if clave.is_empty():
+		return false
+	var re := RegEx.new()
+	re.compile(RE_CLAVE_VALIDA)
+	return re.search(clave) != null
 
 ## ¿La clave la cubre algún prefijo dinámico? ("DIARY.CAT_" cubre "DIARY.CAT_LUGARES")
 static func _cubierta(clave: String, dinamicas: Array) -> bool:
