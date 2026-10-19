@@ -1950,7 +1950,7 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 
 ## REPOBLACION V3 (2026-10-19T00:01:52) — items REALES de 05-Checklist (fuente en comentario)
 
-1. - [ ] [62] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evi <!-- fuente: 62-Memoria/05-Checklist.md -->
+1. - [→] [62] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **MEDIDO 2026-10-19 (Log 2016): 0 SCC, 237 aristas, selftest 0 fallos; clasificacion independiente 458 cadenas / 0 referencias duras; las 2 SCC del Log 1112 rotas con linea. Flip de L104 propuesto al director en msg 318, NO aplicado por mi cuenta.** — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evi <!-- fuente: 62-Memoria/05-Checklist.md -->
 2. - [ ] [62] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
 3. - [ ] [62] RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
 4. - [ ] [62] Generación de mallas en hilos (M08): resultados por cola sin copias extra [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
@@ -2014,3 +2014,47 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 29. - [ ] [60] M08: el resto del mundo se regenera con la semilla (procedural) [C] -- iter. 4: es trabajo de M08 (Voxel Tools). M60 guarda y devuelve la semilla (ver <!-- fuente: 60-Datos-Y-Serializacion/05-Checklist.md -->
 30. - [ ] [60] M08: contrato de "edits" ajustado al formato real de Voxel Tools [M] -- agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) do <!-- fuente: 60-Datos-Y-Serializacion/05-Checklist.md -->
 31. - [ ] [60] M08: log con cantidad de chunks editados cargados [S] -- iter. 4: no existe (sólo hay `print` al GUARDAR). Se deja abierto. <!-- fuente: 60-Datos-Y-Serializacion/05-Checklist.md -->
+
+## 2026-10-19 02:14 (GMT-3) - RAMA 1 / msg 317: homogeneizacion de los 2 gates + item 1 de la COLA V3 (Log 2016, canal 318)
+
+- **Tracker 316 -> 317.** Entrante nuevo del director = 317 (autoriza por escrito
+  homogeneizar los 2 `|| FAIL=1` restantes de `quality.yml` con
+  `::error::FALLO <step>` y commitear; repone la COLA V3 y pide seguirla en orden).
+- **Homogeneizacion HECHA:** L719 (`legal-tools`, USCO) y L931 (`architecture-guard`,
+  M62) con `|| { FAIL=1; echo "::error::FALLO <script>"; }`. Ocurrencias de CODIGO
+  de `|| FAIL=1` restantes: **0** (las 3 lineas que quedan son comentarios).
+- **Prueba en verde y en rojo, medida:** harness que extrae el bloque `run:` REAL
+  del YAML y lo corre con `bash -e` + stub de `python3`/`python` en el PATH.
+  HEAD pre-fix: rojo con **0 anotaciones** (ciego) en ambos steps. Con el fix:
+  verde exit 0 / 0 anotaciones; rojo exit 1 / 1 anotacion con el nombre exacto.
+  El grupo `{ ...; }` no se come el exit code. Gates: `validar_workflows.py` EXIT 0
+  (6 workflows) + selftest 6/6; `test_scripts.py` **19 PASS / 0 FAIL**;
+  bytes 64.112, BOM no, CRLF 0, LF 1108, tabs 0.
+- **Commit `4f0d461`** (1 archivo, 2+/2-, pathspec selectivo, sin `-A`, sin
+  `--amend`, **sin push**).
+- **Item 1 de la COLA V3 (M62 L104, ciclos):** auditor **0 SCC / 237 aristas /
+  0 hallazgos nuevos**, selftest 0 fallos con los 5 casos de ceguera. Verificacion
+  INDEPENDIENTE (parser propio, criterio mas permisivo): 759 apariciones ->
+  301 comentario / 458 cadena / 28 "codigo", y esas 28 son variables locales
+  (`eventos`, `hotbar`), 1 docstring y 1 comentario inline -> **0 referencias duras,
+  0 preload/load de otro autoload**. Las 2 SCC del Log 1112 rotas con linea:
+  `save_manager.gd` sin aristas a Inventario/Fishing en codigo; `theme_service.gd`
+  sin arista a UIManager en codigo (L64/L66 comentarios). **Flip de L104 propuesto,
+  NO aplicado** (los flips los aplica el director). El auditor avisa que
+  `A1|ThemeService,UIManager` de `PERMITIDOS` ya no se observa: limpieza sugerida,
+  **NO ejecutada** (gate aceptado, sin orden escrita).
+- **Lectura honesta:** contando las busquedas por ruta como aristas, el grafo de
+  DEPENDENCIAS sigue con 1 SCC de 38 nodos (criterio permisivo). Es deuda de
+  DISENO, no ciclo de referencias: ningun servicio retiene al otro.
+- **Numeracion:** Log **2016** (cabeza medida antes = 2016; `--estado` = 985 libres,
+  11 colisiones AJENAS). Canal: ultimo mensaje real **317**, pool **STALE** (cabeza
+  316) -> se uso **318 = ultimo+1** y se dejo el pool en **319..418**
+  (`verificar_pool_numeros.py` OK, todos los pools sanos).
+- **Artefactos:** Log 2016 (ASCII puro por bytes, 180 CRLF, sin BOM, 8.569 B) +
+  msg 318 (UTF-8 sin BOM, LF, 5.419 B); este registro; log diario; tracker 317.
+- **0 push / 0 flips / 0 auto-sellos 21.8**; `CHECKLIST-GLOBAL.md`, `AGENTS.md`,
+  `project.godot`, `05-Checklist` de modulos y backlogs ajenos intactos; el auditor
+  **no** se modifico (solo se midio).
+- **Proxima:** NN entrantes > 317. Item 2 de la COLA V3 es runtime/Play Mode
+  (30 min sin drift): pedido criterio de aceptacion al director; los items 4-16
+  son verificables estaticamente.

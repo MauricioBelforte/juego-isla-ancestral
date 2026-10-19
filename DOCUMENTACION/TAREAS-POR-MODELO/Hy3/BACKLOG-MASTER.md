@@ -857,9 +857,9 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 > Veredicto: `✅ Verificado por hy3 (WorkBuddy) 2026-09-20` o `🟡 Hallazgos`
 > (documenta en `## Notas del Agente` de `04-Codigo.md`, **sin borrar** notas previas).
 
-- [ ] **T-QA01:** M32 Clima (atria ya lo vio, Log 942 — confirma sello)
+- [x] **T-QA01:** M32 Clima — VERIFICADO Hy3 (Log 2014, 2026-10-19): disco 119[x]/2[?]/0[ ] = GLOBAL 119/121 🟡; sello SEALS fila 64 STALE (decia 121/0/0; DENEGADO 2026-10-15 agnes msg 483, 2 fallas L23/L26). No sello limpio; no edite SEALS/GLOBAL.
 - [x] **T-QA02:** M84 Musica-Y-Audio-Legal (✅ sellado hy3 Log 1217, test 15/0; gaps capa servicio = KnownIssues no bloqueantes)
-- [ ] **T-QA03:** M94 Retencion-Sin-FOMO (**arreglado por atria, BUG-061 Log 1083**, test 38/0)
+- [x] **T-QA03:** M94 Retencion-Sin-FOMO — VERIFICADO Hy3 (Log 2014, 2026-10-19): disco 83[x]/55[?]/0[ ] = GLOBAL 83/138 🟡 (Patrón D). Sello RETIRADO 2026-10-10 (SEALS fila 109) correcto; no re-afirmado.
 - [ ] **T-QA04:** M102 Bug-Tracking
 - [x] **T-QA05:** M112 Testing-Automatico — cerrado Hy3 (Log 2002 / msg 268, 2026-10-18, §21.8 APROBADO)
 - [ ] **T-QA06:** M153 Objetivo-Final (validate_vision.py 19/19)

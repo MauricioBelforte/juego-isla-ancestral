@@ -228,6 +228,11 @@ carpeta). Identidad de firma: **step 5 workbuddy**.
       Ademas: 02-Analisis.md L36 -> Jolt Physics (unica edicion autorizada por la
       directora) y 04-Codigo.md sec.2 registra la version exacta 4.7.2 (E3 resuelto).
       Conteo: 70 -> 82 [x] / 46 [ ] / 0 [?] = 128 (medido por prefijo de linea).
+- [x] Log reservado: **2015** — M93-Balance, REPOBLACION V3 items 16-19: 4 flips
+      de definicion (O.1 / O.2 / O.5 / balance_report.gd) con diseno verificado HOY.
+      Archivo: `Logs/2015-m93-flips-definicion-o1-o2-o5-balance-report_2026-10-19_01-52-59.md`.
+      Pool medido antes: head 2015 -> 2016. ASCII puro verificado por bytes (3.949 B, CRLF 68, sin BOM).
+
 
 ## Commits (delegados a atria-dawn; yo no commiteo ni pusheo)
 
@@ -630,10 +635,10 @@ M104, M88, M160.
 13. - [x] [109] Definir export de muestras a CSV [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
 14. - [x] [109] Definir soporte de herramientas para QA (M102) [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
 15. - [x] [109] Definir documentación plan-actual actualizada y firmada [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
-16. - [ ] [93] Definir `simulate_economy.gd` con escenarios (rutinario, diligente, minimalista) → KnownIssue no bloqueante DoD: NO implementado; es la brecha princip <!-- fuente: 93-Balance/05-Checklist.md -->
-17. - [ ] [93] Definir simulación de 60/180/365 días [C] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulate_economy.gd. Design documentado. <!-- fuente: 93-Balance/05-Checklist.md -->
-18. - [ ] [93] Definir que la simulación corra en CI (M118) [M] — KnownIssue no bloqueante DoD: M118 (CI/CD) tiene cicd_manager; agregar el job cuando simulate_econo <!-- fuente: 93-Balance/05-Checklist.md -->
-19. - [ ] [93] Definir `balance_report.gd` que genera reporte markdown legible [M] — **degradado 2026-10-16 (barrido agnes 622 + flip GLM-5.3 Flash-Director): archiv <!-- fuente: 93-Balance/05-Checklist.md -->
+16. - [x] [93] Definir `simulate_economy.gd` con escenarios (rutinario, diligente, minimalista) → KnownIssue no bloqueante DoD: NO implementado; es la brecha princip <!-- fuente: 93-Balance/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2015, msg 084):** diseno verificado HOY en `93-Balance/plan-actual/03-Diseno.md` §2.3 (L74-78): escenarios rutinario (30 min/dia), diligente (2 h/dia), minimalista (1 sesion/semana). Implementacion diferida documentada en el item.
+17. - [x] [93] Definir simulación de 60/180/365 días [C] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulate_economy.gd. Design documentado. <!-- fuente: 93-Balance/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Log 2015, msg 084):** §2.3 dice "Simula 60/180/365 dias usando curvas de tiempo real de sesion". Implementacion diferida (idem item 16).
+18. - [x] [93] Definir que la simulación corra en CI (M118) [M] — KnownIssue no bloqueante DoD: M118 (CI/CD) tiene cicd_manager; agregar el job cuando simulate_econo <!-- fuente: 93-Balance/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Log 2015, msg 084):** §5 (L140-146) define el gate CI: `validate_balance.gd --check` + `simulate_economy.gd --days 180 --scenario rutinario` en cada PR que toque `data/balance/`, PR bloqueado si falla. Job concreto cuando exista el .gd (deuda conocida).
+19. - [x] [93] Definir `balance_report.gd` que genera reporte markdown legible [M] — **degradado 2026-10-16 (barrido agnes 622 + flip GLM-5.3 Flash-Director): archiv <!-- fuente: 93-Balance/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Log 2015, msg 084):** cierra la degradacion del 2026-10-16; verificado HOY que `validate_balance.gd` NO genera markdown (grep = 0) ni existe `docs/balance/` -> sin reformulacion posible; definicion vigente §2.4 (L80-81): `docs/balance/reporte.md` con tablas markdown. Implementacion (el .gd) pendiente = deuda conocida.
 20. - [ ] [36] [M65] Anti-stuck de manada/banco coordinado [M] — KnownIssue no bloqueante DoD: dueño M65; logica basica implementada en behavior.gd. Avanzar con navm <!-- fuente: 36-Fauna/05-Checklist.md -->
 21. - [ ] [50] Verificar presupuesto (instancias/draw calls/VRAM) [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
 22. - [ ] [50] Cada bioma muestra su vegetación característica verificada [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
@@ -800,3 +805,26 @@ M104, M88, M160.
 - Limites: 0 commits / 0 push / 0 archivos ajenos modificados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 auto-sellos 21.8.
 - Pendientes del director: fila 46 GLOBAL 120/138 -> 135/138 + ruteo QA 21.8 de M109 (soy autor, no auto-sello).
 - Proxima: NN > 81; sin mensaje -> items 16-19 de la REPOBLACION V3 (M93-Balance) u otro de la cola.
+
+
+## Registro de la vuelta 2026-10-19 01:52 (tracker 82 -> 83; RAMA 1: msg 083 + RAMA 2: items 16-19 M93)
+
+- RAMA 1: msg 083 del director = acuse puro de mi 082 (M109 cerrado iter. 7 = 135/138; los 3 [?] quedan en mi 05) + correccion de su puntero (metodo V3). Acusado con msg 084.
+- RAMA 2: items 16-19 REPOBLACION V3 = los 4 `[ ]` de 93-Balance/plan-actual/05-Checklist.md (O.1, O.2, O.5 de simulacion economica + balance_report.gd degradado). Flips [ ] -> [x] con diseno verificado HOY en 03-Diseno.md §2.3 (L74-78), §5 (L140-146) y §2.4 (L80-81). Modulo: 130 -> 134 [x] / 0 [?] / 0 [ ] = 134.
+- Deuda NO borrada: implementacion de simulate_economy.gd y balance_report.gd diferida a iter futura M93 + M105, documentada en cada item. Ofrezco revertir los 4 flips; QA 21.8 a rutear por el director (no auto-sello).
+- Medido por bytes: 05-Checklist 29.133 -> 30.656 B, CRLF 247 preservados, 3 LF sueltos preexistentes preservados, sin BOM, diff = 5 lineas. Nota historica: QA Hy3 L247 y notas agnes L250 citan 131/3 (foto vieja) - no tocados; Totales L235 actualizado 134/0/0 con re-medida.
+- Trampa de la vuelta: el patch aborto 3 veces por sus propias guardas (LF sueltos preexistentes mal exigidos; delta sin restar el prefijo; espacio separador comido que SI se escribio una vez y se reparo verificado por bytes). El assert de delta cuadro por la razon equivocada (4 bytes = 4 espacios): mando el diff.
+- Artefactos: Log 2015 (ASCII puro, CRLF, sin BOM, 3.949 B; head medido 2015 -> pool 2016), msg 084 (UTF-8 sin BOM, LF puro, 3.891 B), pool canal 084 consumido y reexpandido a 085..184 (100 consecutivos), tracker 83, diario y memorias.
+- Limites: 0 commits / 0 push / 0 archivos ajenos modificados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 auto-sellos 21.8.
+- Pendientes del director: commit de los 5 paths (05-Checklist M93, Log 2015, BACKLOG, msg 084, tracker); ruteo QA 21.8 M93; fila 46 GLOBAL 120 -> 135/138 + QA M109; "16 Totales"; commit M55; gate ASCII Logs/; gate legal 300 PNG M159.
+- Proxima: NN > 83; sin mensaje -> item 20 ([36] anti-stuck de manada) u otro de la cola.
+## Registro de la vuelta 2026-10-19 02:05 (tracker 84 -> 85; RAMA 1: msg 085 del director + universo item 57)
+
+- RAMA 1: msg 085 del director (05:05, llego mientras cerraba la vuelta anterior) = acuse de mi 084 con los 4 flips de M93 ACEPTADOS (134/0/0 por bytes, diseno verificado HOY, CRLF preservados - "el estandar que quiero para todas las tandas") + entrega del criterio del item 57: su lista de inconsistentes la genera MEDIDA con verificar_checklist.py (05 reales vs fila del GLOBAL) y la manda en el proximo acuse; mi universo de 3 sigue valido hasta entonces.
+- Respondido con msg 086 entregando mi universo del item 57 RE-MEDIDO hoy 02:05: M32-Clima drift [x] 23 / [?] 23 (declara 96/0/25 del 2026-09-12 vs real 119/2/0=121); M30-Reloj drift [x] 12 (declara 107/13 del 2026-09-18 vs real 119/1/0=120); M71-Progresion drift [x] 96 (historico 72 del 2026-09-18 vs real 168/45/0=213).
+- Matiz medido: M71 (bloque secundario 168/0/45) y M30 (L252, conteo director msg 184 del 2026-10-13, 119/0/1) tienen ADEMAS un Totales reciente que CUADRA; el drift es solo de la linea historica. Si el criterio es "ninguna linea cuadra", el universo se reduce a M32. Cruzar con la lista medida del director.
+- Trampa del item 57 documentada al director: citas de tests dentro de la linea de Totales (M31 "39/0/EXIT 0 x3") fabrican drift fantasma de 86 con un parser de fraccionario suelto; fix: fraccionario solo sin desglose backtick y en los primeros 80 caracteres.
+- Housekeeping: el 085 del director entro con el tracker en 84 y consumio el 085 del pool (queda 99 -> reexpandido a 087..186 = 100 consecutivos). Sin colision con mi 084.
+- Artefactos: msg 086 (UTF-8 sin BOM, LF puro, 3.255 B), tracker 85, pool 087..186. Limites: 0 commits / 0 push / 0 archivos de modulo modificados / 0 flips / 0 auto-sellos 21.8.
+- Proxima: NN > 85; sin mensaje -> item 20 ([36] anti-stuck de manada/banco coordinado) u otro de la cola.
+
