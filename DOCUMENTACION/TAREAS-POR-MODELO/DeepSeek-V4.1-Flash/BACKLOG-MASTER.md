@@ -8,7 +8,7 @@
 1. **PRIMERA INSTANCIA:** lee si el director te escribió un mensaje en tu canal (`Mensajes entre modelos/DeepSeek-V4.1-Flash/`). Si hay mensaje dirigido a ti, RESPÓNDELO primero (numeración de hilo: último + 1; borra SOLO ese número del pool `NUMEROS_DISPONIBLES.txt` de tu carpeta de canal — pools NO se commitean).
 2. **SEGUNDA INSTANCIA:** si NO hay mensajes del director, toma el próximo item `[ ]` de la COLA ACTIVA (sección A) según tu nicho. Trabaja una TANDA de tareas (las que elijas).
 3. **CIERRE DE TANDA:** al terminar, escribe un REPORTE en tu canal al director: qué cerraste (ids), evidencia (archivos/tests), y marca `[x]` honesto en ESTE archivo (solo verificable en disco — REGLA CERO: sin reporte, el trabajo no existe).
-4. El director actualizará ESTE backlog, la fila de `CHECKLIST-GLOBAL.md` y te responderá.
+4. [x] El director actualizará ESTE backlog, la fila de `CHECKLIST-GLOBAL.md` y te responderá.
 
 **Reglas fijas:** reserva 🔵 §21.3 en los 4 registros antes de tocar módulos · UTF-8 §28 · independencia QA §21.8/§21.23 · no editar el backlog de otro modelo · marcas `[ ]/[→]/[x]/[?]` honestas.
 
@@ -45,19 +45,19 @@
 2. M01 b1: resolver bloque dependencias/documentales factibles headless — 10 [M]
 3. M01 b2: continuar (docs del 05-Checklist con cita de archivo) — 10 [M]
 4. M01 b3: cierre de lo factible; [?] honestos para el resto — 8 [M]
-5. M03-Documentación (130/133): 3 pendientes heredados (L67/L68/L69) — 4 [S]
-6. M04/M05: deuda residual (hitos M1) documentada o desdoblada — 4 [S]
+5. [x] M03-Documentación (130/133): 3 pendientes heredados (L67/L68/L69) — 4 [S]
+6. [x] M04/M05: deuda residual (hitos M1) documentada o desdoblada — 4 [S]
 
 ### Bloque B — Infraestructura de juego (Recom DeepSeek)
 
-7. M40-Infraestructura (175/211): 36 pendientes → lote 1 con tests headless — 10 [C]
+7. [x] M40-Infraestructura (175/211): 36 pendientes → lote 1 con tests headless — 10 [C]
 8. M40 b2: continuar — 10 [C]
 9. M40 b3: cierre (integración GamedFlowManager/SceneManager) — 8 [M]
 10. M62-Memoria (113/150): 37 `[ ]` NO-headless → convertir los posibles a suites reproducibles — 10 [C]
 11. M62 b2: iteración 7 (integraciones M08/M41-M44/M63/M09) — 10 [C]
 12. M60-Datos (189/196): 7 pendientes — 6 [S]
 13. M59-Guardado (60/130): diagnóstico de los 70 y plan de 3 iteraciones — 10 [C]
-14. M59 b1: implementar lote 1 (save slots) con suite headless — 10 [C]
+14. [x] M59 b1: implementar lote 1 (save slots) con suite headless — 10 [C]
 15. M63-Cargas (67/101): 34 pendientes → streaming/prioridad — 10 [C]
 16. M110-Debug-Menu (150/225): 75 pendientes → lotes de 10 (paneles de debug) — 10 [C]
 17. M110 b2: continuar (integración con telemetría M105) — 10 [C]
