@@ -209,7 +209,7 @@
 - [x] [M32] Reaccion de fauna a clima (lluvia/tormenta) [M] — KnownIssue no bloqueante DoD: dueño M32 (Clima). **⚠️ QA atria-dawn 2026-09-18 (Log 1008): NO hay hook EventBus.weather.clima_cambio preparado — 0 menciones de "clima"/"weather"/"lluvia"/"tormenta" en fauna_registry.gd ni fauna_behavior.gd.** El claim original afirmaba el hook listo — corregido a "pendiente, sin código". Avanzar cuando M32 emita seniales.
 - [x] [M45] Modelos/meshes de animales [C] — KnownIssue no bloqueante DoD: dueño M45; faunas funcionan con placeholders geometricos. Avanzar cuando M45 entregue GLBs.
 - [x] [M55/M37] UI de diario de fauna y museo [C] — KnownIssue no bloqueante DoD: dueño M55 (Diario) + M37 (Museo); datos de avistamientos existen en fauna_registry. Avanzar cuando M55/M37 existan.
-- [ ] [M65] Anti-stuck de manada/banco coordinado [M] — KnownIssue no bloqueante DoD: dueño M65; logica basica implementada en behavior.gd. Avanzar con navmesh M65.
+- [x] [M65] Anti-stuck de manada/banco coordinado [M] — KnownIssue no bloqueante DoD: dueño M65. **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2018, msg 088):** la cita original "behavior.gd" era falsa — no existe `behavior.gd` en disco (medido hoy: `find` = 0 archivos). La lógica básica vive en el autoload `m65_animal_ai.gd` (L159-168: aborta si `distancia_acumulada > 30 m` y `dist > 0.5`, con reseteo), y los miembros de manada/banco la heredan vía `solicitar_movimiento` (PackLogic/SchoolLogic, BUG-080 resuelto). El anti-stuck de grupo **coordinado** quedó **diseñado** en `65-Animales-IA/plan-actual/03-Diseno.md` (sección "Anti-stuck") y su implementación sigue diferida a navmesh M65 (deuda conocida, no bloqueante). Suites medidas hoy con binario real: `scripts/animales_ia/test_m65.gd` 24 OK / 0 fallos y `tests/test_m65.gd` 35 OK / 0 fallos.
 
 ## H. Optimización
 - [x] Muestreo ponderado O(n) lineal (aceptable para catálogo pequeño) [S]
@@ -234,8 +234,7 @@
 - [x] Fix deriva constantes en fauna_behavior.gd [S]
 - [x] Veredicto: mantiene 🟡 (resto con dueño externo) [S]
 
-**Total:** 100+ ítems (x marcados; pendientes `[ ]` son trabajo con dueño en
-otros módulos, verificados como legítimos en QA cruzado).
+**Total:** 228 ítems, todos `[x]` (el último `[ ]` —anti-stuck de grupo M65— se cerró el 2026-10-19 con diseño documentado en M65 y deuda de implementación diferida a navmesh M65; Log 2018).
 ## Verificación + dados (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] test_fauna.gd oficial: 0 fallos (FaunaManager + FaunaRegistry autoloads, 7 especies)
@@ -268,7 +267,7 @@ otros módulos, verificados como legítimos en QA cruzado).
 - [x] Proyecto corre sin errores nuevos (warnings globales preexistentes, no de M36) [S]
 - **Iter. conejo Hy4 (Logs 664-678, glm-5.3-flash/Kilo Code):** cuerpo y cabeza reconstruidos con bmesh lofting (anillos YZ variando X — metodología Hy4 de crear_jabali_lowpoly.py). 3D real logrado. Pendiente: ajuste fino de detalles (ojos/orejas dentro de cabeza), registro en FaunaManager, nutria/lechuza/abeja/pez/erizo/rana con mismo pipeline. Respaldo en Obsoletos/.
 
-**Totales:** 228 ítems · Completados: 227 · Pendientes: 1 · No resueltos: 0.
+**Totales:** 228 ítems · Completados: 228 · Pendientes: 0 · No resueltos: 0. (Re-medido 2026-10-19 por Step-5-WorkBuddy tras el flip de L212, Log 2018: 228 [x] / 0 [?] / 0 [ ] por prefijo de línea.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 228 [x] / 0 [ ] / 0 [?].
