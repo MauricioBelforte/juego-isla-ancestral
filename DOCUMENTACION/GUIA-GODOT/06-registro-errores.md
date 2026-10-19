@@ -1,6 +1,9 @@
-# Registro de Errores — E-11 a E-27
+# Registro de Errores — E-11 a E-32
 
-> **Modelo:** step-5-kilocode (último modificador)
+> **Modelo:** DS-V4.1-Flash-Opencode (DeepSeek-V4.1-Flash)
+> **Plataforma:** OpenCode
+> **Fecha:** 2026-10-19 (Sección E-32 agregada: reclamación de `Resource` descargado con loader threaded)
+> **Anterior:** step-5-kilocode (último modificador)
 > **Plataforma:** Kilo Code
 > **Fecha:** 2026-10-10 (Sección E-27 agregada: `ResourceSaver.save()` cuelga en `--headless`)
 > **Anterior:** mimo-v2.6-flash-free (último modificador)
@@ -1321,6 +1324,36 @@ _check("politicas == JSON", tres.politicas == json.get("politicas", {}))
 (`str(ids_tres) == str(ids_json)`), o para mensajes de detalle.
 
 **Fechar:** 2026-10-11 20:55 | **Modelo:** Ling-3.1-Flash | **Plataforma:** Kilo Code
+
+---
+
+## E-32: `Resource` cargado por `load_threaded_*` + descarga M62 — el engine RECLAMA la instancia y la recarga es LIMPIA
+
+**Síntoma:** un check que exigía **la misma instancia** de un `Resource` entre ciclos de
+carga/descarga fallaba de forma racy; una variable que apuntaba a la instancia se volvía `null`
+sin código que la nulificara:
+```
+[FALL] el ciclo 2 reutiliza la instancia del ciclo 1 (ids=4 ancla=null)
+```
+
+**Ubicación:** `scripts/rendimiento/memoria/test_m62_hilos_cola_mallas.gd` (M62/M63, 2026-10-18/19,
+DS-V4.1-Flash-Opencode; aislado con 5 micro-sondas). Producción: `stream_manager.gd`
+(`encolar`→`load_threaded_request`/`load_threaded_get`), `unload_policy.gd` (`ejecutar_descarga`).
+
+**Causa (medida):** con refs vivas y SIN descarga, el cache reutiliza la MISMA instancia (8/8).
+Con el ciclo de descarga completo (`ejecutar_descarga` + `marcar_envejecidos` + `liberar_envejecidos`
+JUNTOS; sin cualquiera de los tres sobrevive 8/8), el refcount decae (traza 6→…→1 tras liberar) y
+el engine **reclama** la instancia descargada; en el siguiente `encolar`→`load_threaded_request`
+la referencia muere (lee `null`) y se entrega una instancia **NUEVA y limpia**. Racy (muerte en
+ciclo 2-3). La reclamación precede SIEMPRE a la nueva entrega: **jamás dos instancias vivas a la vez**.
+
+**Solución:** no asumir igualdad de instancia entre ciclos que descargan. El invariante correcto es
+"jamás dos vivas a la vez" (`r != prev` + `is_instance_valid(prev)`), con **control positivo**
+autocontenido (dos `CACHE_MODE_IGNORE` retenidas por vars propias = 2 vivas; el detector DEBE
+verlas) — anti-falso-verde. Ojo: un objeto liberado lee como `null`, así que para contar recargas
+hace falta una bandera `hubo_prev` (el null-check no distingue "nunca hubo" de "ya murió").
+
+**Fechar:** 2026-10-19 00:05 | **Modelo:** DeepSeek-V4.1-Flash — DS-V4.1-Flash-Opencode | **Plataforma:** OpenCode
 
 ---
 

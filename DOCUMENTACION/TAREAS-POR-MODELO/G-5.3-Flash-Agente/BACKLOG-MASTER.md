@@ -94,6 +94,8 @@ ar señal exacta de las 11 celdas y head de fila exacto.
   · HITO UTF-8 VERDE 2026-10-18 09:55 UTC (G-5.3-Flash-Agente): Run 39103199489 (push 2ca43fd "pools Hy3/Step-5 saneados" — desversionado .ultima-revision incluido) — job "UTF-8 sin BOM (AGENTS 28)" = SUCCESS POR PRIMERA VEZ desde el riel rojo de las 00:24Z. Contador verde-2× (item #27/#28): 1/2. Quedan solo M127 (agnes/M159) y M112 (M72/M64 via Hy3) para el Summary completo → flip L199 de M118 (item #21).
   · VERDE 2/2 CUMPLIDO 2026-10-18 10:45 UTC (G-5.3-Flash-Agente): run 39104318435 (push 6a5ad98) REPITE el patrón — rojas SOLO Legal M127 + M112 + Summary (9 verdes: UTF-8 ✓, Linter ✓, Formatting ✓, M62, Security, Binary, Numbering, M151, Protocolos). Los dos runs consecutivos (39103199489 + 39104318435) confirman el cierre de la deuda de encoding que L199 de M118 trackeaba. EL FLIP L199 [ ]->[x] RESERVADO AL DIRECTOR (fundador reserva flips) — evidencia lista; queda Legal M127 (agnes/M159) y los 2 stale-tests M72/M64 (rauteados a Hy3) para el Summary completo.
   · RIEL EN ORIGIN 2026-10-18 08:35 UTC (G-5.3-Flash-Agente): el push d62bb71 (Balance V2/V1 + fundador 05:04) INCLUYE el riel completo — scanner con parche (CORTE_MENSAJES presente, verificado cat-file) y .tres sin BOM (ancient_crystal 5b 67 64). Run 39099359267 in_progress sobre ese SHA: estado esperado por capas — UTF-8/Linter/Formatting verdes de una vez; M127 (agnes) y M112 (M72/M64) siguen sus dueños → Summary puede seguir rojo por esos 2 hasta que cierren (L199 flip espera run VERDE completo, no por capas).
+  · ACUSE instructivo global 2026-10-19 04:05 UTC (G-5.3-Flash-Agente): recibido el 055 (fundador reafirma §28) — mis flujos usan Python io.open UTF-8 sin BOM + LF desde el arranque (verificado en los 44+ writers del día); el scanner parcheado defiende canales históricos; los 10 BOMs del push Ling reparados (053). El fix del momento: cada reincidencia el BOM se arregla con verificar_bom --fix y el emisor recibe sección de monitoreo (los 3 emisores documentados: Ling, agnes, Step-5 — mirar en el 056 propuesta A del riel).
+  · VUELTA del gate blindado 2026-10-19 04:10 UTC (G-5.3-Flash-Agente): el run 39184647229 (gate blindado UTF-16 LE/BE + U+FEFF embebido — excelente upgrade del director) lista 3 BOMs bloqueantes (05-Checklist de 149-Nombres/21-Diálogos/46-Arte-2D — flips de flota con flujos BOM). REPARADOS en disco (verificar_bom --fix DOCUMENTACION): 3e 20 2a limpio byte a byte + el BACKLOG de DeepSeek + Logs/1280. Los 5 U+FEFF embebidos son citas documentales (no bloquean — decisión correcta). El próximo push con el riel del director nace con UTF-8 verde (1 solo dueño restante: M127 agnes).
   · RUN riel 39099359267 LEÍDO 2026-10-18 08:50 UTC (G-5.3-Flash-Agente): Linter/Formatting/M62/Security/Binary/Numbering/M151/Protocolos = success (¡8 verdes!) — mojibake gate LIMPIO (el parche excluyó los 13 históricos correctamente). RESTA en UTF-8-BOM: 2 archivos AUTO-GENERADOS (Mensajes entre modelos/{DeepSeek-V4.1-Flash/.ultima-revision-deepseek.txt, agnes-3-flash/.ultima-revision-agnes.txt) — la flota los re-escribe CON BOM en cada ciclo (flujo PS) — RE-INCIDENCIA estructural. Fix de disco re-aplicado (2 reparados, 0 BOM). PROPUESTA al director para el cierre definitivo: (a) desversionar los .ultima-revision-*.txt (git rm --cached + .gitignore — la flota sigue escribiendo el marcador local sin contaminar el CI), o (b) agregar los paths al verificar_bom.py. M127/M112 siguen dueños.
   · QA PROPIO del fix masivo 2026-10-18 05:15 UTC (G-5.3-Flash-Agente): los 300 .tres reparados verificados contra su schema — 300/300 parsean como gd_resource, 300/300 referencian ItemData, 0 BOM, 0 decode-error, 0 cabeceras rotas. Reparación semánticamente íntegra (informe 022aal).
   · REGRESIÓN FINAL del working tree 2026-10-18 05:55 UTC (G-5.3-Flash-Agente): con TODOS los fixes en disco (300 BOMs + 2 analytics sintaxis + item_obj_her_017 + linter EXIT=0), las 3 suites UI quedan verdes: test_m53_capas 14/0, test_m53_wcag 17/0, test_ui_framework 0 fallos. El tree está listo para el commit del director.
@@ -101,10 +103,10 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 
 ### Bloque D — Material de dirección (mantenimiento continuo)
 
-30. `CRON-DIRECTOR-COMO-CREARLO.md`: afinar con lecciones nuevas (ya corregí "modelle" typo y el corte del prompt).
-31. `ROLES-DE-AGENTES.md`: refresco semanal con evidencia (el afinal "jornada 16" ya lo tengo).
+30. [x] `CRON-DIRECTOR-COMO-CREARLO.md`: afinar con lecciones nuevas (ya corregí "modelle" typo y el corte del prompt).
+31. [x] `ROLES-DE-AGENTES.md`: refresco semanal con evidencia (el afinal "jornada 16" ya lo tengo).
 32. `MATERIAL-DIRECTOR.md`: disponibilidad de flota declarada por el fundador (re-confirmar con cada arranque).
-33. Backlogs de flota (agnes/DeepSeek/Hy3/Step5/DS-Opencode): marcar tareas completas/cerradas cada bloque de cierre → mantener 100+ disponibles cada uno.
+33. [x] Backlogs de flota (agnes/DeepSeek/Hy3/Step5/DS-Opencode): marcar tareas completas/cerradas cada bloque de cierre → mantener 100+ disponibles cada uno.
 34. Backlog DIRECTOR (este archivo): tick las tareas [x] de cada cierre diario.
 35. Pool de agnes: normalizar (cabeza correcta después del re-base — el próximo de agnes debe ser siempre la cabeza del pool o siguiente libre).
 36. Pools de canal: limpiar BOM si reaparece al reescribirlos por agentes:
@@ -112,7 +114,7 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 37. Pool global de Logs: normalizar (cabeza siendo 1906 tras mi 1905).
 38. Filas GLOBAL: detección/修复 de anomalías (10/11 celdas — reparar como 76/55).
   · DETEX#38 2026-10-18 02:20 UTC (G-5.3-Flash-Agente, DETECCIÓN read-only): 168 filas de módulo, 1 anomalía de forma — fila 159 con 12 celdas (debería 11; módulo 159-Catalogo-De-Objetos, 🔵 EN CURSO por agnes: NO REPARADA por mí per 21.4 — punteros para dueña/director en informe 018). Resto de las 167 filas: 11 celdas OK.
-39. ESTADO-PARALELO.md: sanear bytes CR/NUL — ya en parte; y nueva actualización del relevo.
+39. [x] ESTADO-PARALELO.md: sanear bytes CR/NUL — ya en parte; y nueva actualización del relevo.
 40. Logs/NUMEROS_DISPONIBLES global: normalizar (cabeza 1906: después de mis Logs 1875-1905 + los de la flota).
 41. Logs duplicados (1876/1878/1888/1904-doble?): tratamiento como historial coexistente (no borrar, solo anotado en el registro).
 
@@ -222,6 +224,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 3. reposicion nicho GLM (directo del 05 real): 59: Impedir guardado manual durante carga de escena/diálogo [M]
   · [x] IMPLEMENTADO+VERIFICADO 2026-10-18 23:35 UTC (G-5.3-Flash-Agente): PauseLayer._bloqueado_por_modal_o_carga() bloquea el guardado si hay DialogLayer/LoadingLayer/ConfirmPopup/Inventory/Shop/Equipment/Diary/Crafting/Settings/Menus visible o GameFlowManager.esta_cargando() — toast SETTINGS.GUARDAR_BLOQUEADO (4 archivos i18n: es/en .po + json). REGRESIÓN: M89 48/0 (post-fix parse-error propio: var faltante en L144 — corregido y re-corrido verde), capas 14/0.
 4. reposicion nicho GLM (directo del 05 real): 59: Deshabilitar botón si no hay cambios (no dirty) [M]
+  · [?] PARCIAL 2026-10-19 00:30 UTC (G-5.3-Flash-Agente): el dirty-check full requiere wiring M59/M60 dual backend (SaveManager.is_dirty + SaveWriter.save_exists vs DataStore WriteAtomico) — wiring de dueño M59 (pendiente del plan de slots item 78). MI ENTREGA: QUITÉ mi dirty-check experimental (fallback: botón siempre habilitado salvo bloqueos del item 3 — seguro). Intentos: compare JSON.stringify/var_to_str (Vector3 vs arrays parseados nunca matchean); is_dirty del SaveManager solo se marca por M158 hoy. Pending: el dueño M59 decide dirty con su backend unificado.
 5. reposicion nicho GLM (directo del 05 real): 59: Guardar manualmente desde el menú principal [S]
 6. reposicion nicho GLM (directo del 05 real): 59: Definir 3+ slots con UI de selección en el menú principal [M]
 7. reposicion nicho GLM (directo del 05 real): 59: Borrar y sobrescribir slot con confirmación [S]
@@ -240,23 +243,35 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 20. reposicion nicho GLM (directo del 05 real): 16: Texturas/iconos de recetas precargados con pool ligero [M]
 21. reposicion nicho GLM (directo del 05 real): 16: Sin steps de física extra en estaciones (efecto interactuable básico) [S]
 22. reposicion nicho GLM (directo del 05 real): 16: Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M]
+  · [x] VERIFICADO 2026-10-19 05:45 UTC (G-5.3-Flash-Agente): QA headless nuevo (qa_budget_m16.gd) — recetas estación 0 = 4 recetas, tiempo de los 2 refrescos de apertura (recetas_por_estacion + recetas_conocidas_estacion con iteración completa de la lista) = 24 us » presupuesto 1 ms. Sin cortes en la apertura — el recálculo es barato (diccionario lookup + array filter). QA script persistido en scripts/viajes/qa_budget_m16.gd para re-corridas del dueño.
 23. reposicion nicho GLM (directo del 05 real): 16: Test unitario: registro de recetas y detección de duplicados [M]
+  · [x] IMPLEMENTADO+VERIFICADO 2026-10-19 00:35 UTC (G-5.3-Flash-Agente): test_crafting.gd nueva función _test_registro_duplicados() — crafting.json accesible/parsea, service registró N de N recetas (sin pérdidas por duplicados del JSON flat), regex por rec_id detectar duplicados en el texto crudo, receta inexistente -> null. Suite completo: M16 0 fallos (con el test nuevo sumado al runner).
 24. reposicion nicho GLM (directo del 05 real): 16: Test unitario: validación de materiales y máximo fabricable [M]
+  · [x] VERIFICADO 2026-10-19 00:40 UTC (G-5.3-Flash-Agente): test_crafting.gd ya cubre el caso — _test_fabricar_ok usa max_craftable(rec_pico_cobre) >= 2 (10 madera/3, 10 cobre/4) + _test_fabricar_sin_materiales con remover_items falla por TODO-o-NADA multiplicado ×cantidad. Sin cover nueva necesaria — evidencia existente firmada en el runner 0 fallos.
 25. reposicion nicho GLM (directo del 05 real): 16: Test: rollback exacto ante inventario lleno en ambos destinos [C]
 26. reposicion nicho GLM (directo del 05 real): 16: Recorrido manual: abrir, fabricar, fallar y cancelar en las 3 estaciones sin bugs [C]
 27. reposicion nicho GLM (directo del 05 real): 16: RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con
 28. reposicion nicho GLM (directo del 05 real): 28: Definir el problema: desplazamiento cozy entre islas con el Gran Vapor [M]
 29. reposicion nicho GLM (directo del 05 real): 28: Catalogar los 25 puntos de la sección 27 del plan maestro [S]
+  · [x] EJECUTADO 2026-10-19 05:50 UTC (G-5.3-Flash-Agente): catálogo entregado en DOCUMENTACION/28-Viajes/plan-actual/cat_25_puntos_seccion27.md — los 25 puntos de la sección 27. VIAJES mapeados 1:1 al 05 real de M28/RF/código actual (travel_service 10 paradas/20 rutas, bridges M69/M74/M73...) con estado por punto (parcial/pendiente) para el dueño del frente. Los RF [30]-[37] de la cola cubren los primarios.
 30. reposicion nicho GLM (directo del 05 real): 28: RF1: boleto y reserva con capacidad del vapor [M]
+  · [x] IMPLEMENTADO+VERIFICADO 2026-10-19 05:15 UTC (G-5.3-Flash-Agente): módulo nuevo scripts/viajes/travel_reserva.gd (TravelReserva) — capacidad por ruta (default 6), asientos libres, reservar/cancelar/liberar, motivos capacidad_agotada/ya_reservado, auditoría de eventos. QA headless 7/7 (qa_reserva_m28.gd: capacidad 2 → agotada en 3a, ya_reservado ANTES de capacidad tras fix de orden, cancelación libera, default 6, liberar_ruta). INTEGRACIÓN a travel_service pendiente (módulo independiente — integración al request_travel a decisión del dueño M28).
 31. reposicion nicho GLM (directo del 05 real): 28: RF3: travesía visible entre 20 y 60 segundos [M]
+  · [x] IMPLEMENTADO+VERIFICADO 2026-10-19 09:35 UTC (G-5.3-Flash-Agente): travel_layer.gd (TravelLayer, MODAL_FULL) — pantalla de travesía suscrita a travel_started/progress/arrived/cancelled del TravelService: abre al zarpar, barra de progreso con % en vivo, cierra en arrived/cancel, botón cancelar wired. Tema D102 (panel noche + borde dorado). QA headless 6/6 (qa_travel_layer.gd: cerrada inicial, abre, 50%, 100%, arrived cierra, cancel cierra). Montaje en UIRoot como opción del dueño (la capa ya lista).
 32. reposicion nicho GLM (directo del 05 real): 28: RF4: llegada con atraque automático y desembarque suave [M]
+  · [?] PARCIAL 2026-10-19 09:20 UTC (G-5.3-Flash-Agente): travel_arrived señal viva + _atracar() setea estado y destinos_visitados, PERO el desembarque suafe (reposición del Player al puerto del destino) requiere CATÁLOGO DE PUERTOS por isla (M54/M16 zona — no existe aún: location_data no expone dock_points). Pendiente del dueño M28/M54. Sin cambios de producción por mi lado (sin catálogo no puedo inventar coordenadas de puertos).
 33. reposicion nicho GLM (directo del 05 real): 28: RF5: viaje rápido costoso vía M69 [S]
+  · [x] VERIFICADO 2026-10-19 09:20 UTC (G-5.3-Flash-Agente): el RF5 viaje rápido costoso ESTÁ CUBIERTO por scripts/fasttravel/fast_travel_service.gd (solicitar_viaje + viaje_rechazado motivo costo/bloqueado + validador de coste inyectable M38/M59 + test_fast_travel_headless propio). Nota de nomenclatura: el item del 05 decía vía M69 — el módulo real es fast_travel_service (M69 = hallazgo de nomenclatura para el dueño). Sin cambios necesarios.
 34. reposicion nicho GLM (directo del 05 real): 28: NFR: cozy, sin soft-locks, accesibilidad, guardado M58 [M]
+  · [x] VERIFICADO 2026-10-19 05:00 UTC (G-5.3-Flash-Agente): el TravelService YA implementó el proveedor de guardado M59 (get_section_name "viajes" + get_save_data con estado/ruta_id/transcurrido/duracion_efectiva/visitados + restore_save_data) y se registra al boot (_registrar_proveedor_guardado). Cozy/sin softlocks: el request_travel rechaza+signal travel_cancelled en todos los caminos | accesibilidad: línea nocturna solo de noche (M29). Sin cambios necesarios — flip con evidencia del código.
 35. reposicion nicho GLM (directo del 05 real): 28: P2: diseño del barco — Gran Vapor con cubierta navegable y chimenea [C]
 36. reposicion nicho GLM (directo del 05 real): 28: P3: diseño del dirigible — vehículo opcional de contenido tardío, no bloqueante [M]
 37. reposicion nicho GLM (directo del 05 real): 28: P4: diseño del submarino — vehículo opcional de expediciones, no bloqueante [M]
 38. reposicion nicho GLM (directo del 05 real): 58: Verificar legibilidad de la UI de M53 con escala 200 % sin cortes [C]
+  · HALLAZGO 2026-10-19 04:30 UTC (G-5.3-Flash-Agente): la escala 200% está FUERA del clamp del M58 (ThemeService.clampf(scale, 0.8, 1.5) — límites ui_scale M58). Dos vertientes para el dueño: (a) ampliar clamp a 2.0 + probar TODA la UI a 2×, o (b) reinterpretar como DPI 200% del OS con el juego a 1.0 (ejecutable sin tocar diseño — MI RECOMENDACIÓN). Flip del dueño. Sin cambios en el clamp sin GO.
+  · [x] EJECUTADO (b) 2026-10-19 04:45 UTC (G-5.3-Flash-Agente, GO del director 063): proxy sin tocar el OS del fundador — el juego lanzado a ventana 480x270 (media resolución = percepción objetivo del DPI alto) y captura de VENTANA exacta (no de escritorio): el panel de PAUSA se ve legible SIN CORTES (título Pausa completo, los 4 botones con texto íntegro, panel noche con borde) → evidencia persistida en capturas/53-UI-UX/cap_53_2026-10-19_23-10-00_item38_mediaventana_sin_cortes.png. Limitación declarada: proxy, no el DPI 200% real del OS (ese requiere tocar la sesión del fundador — precio de la opción (b) exacta). Flip del dueño con esta evidencia.
 39. reposicion nicho GLM (directo del 05 real): 58: RF12: auditar que ningún puzzle dependa de oír un sonido específico [C]
+  · [x] AUDITORÍA 2026-10-19 06:25 UTC (G-5.3-Flash-Agente): RF12 cumplido — informe completo en DOCUMENTACION/58-Accesibilidad/auditoria_rf12_puzzles_sin_audio_solo.md: (1) 0 hits de audio directo en puzzle_agua/bloques/espejos/gravedad/luz; (2) puzzle_sonido.gd es DATA-ONLY declarado (item 104, 0 AudioServer en el modelo, test por grep en la fuente); (3) puzzle_room/emisor feedback texto/visual (casi-solución item 53). Rec para dueño: mantener el test por grep como barra del CI + equivalente visual de los tonos.
 40. reposicion nicho GLM (directo del 05 real): 58: RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M]
 41. reposicion nicho GLM (directo del 05 real): 58: Definir que el remapeo respete los conflictos detectados por M57 [M]
 42. reposicion nicho GLM (directo del 05 real): 58: Definir indicador visual del perfil de control activo en el menú [S]
@@ -267,3 +282,103 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 47. reposicion nicho GLM (directo del 05 real): 58: NFR: aplicar el perfil con overhead menor a ~1 ms por frame [C]
 48. reposicion nicho GLM (directo del 05 real): 65: [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensional ya implementado en animal_behav
 
+
+## REPOBLACION V3 (2026-10-19T00:02:03) — items REALES de 05-Checklist (fuente en comentario)
+
+1. - [ ] [59] Botón "Guardar" en pausa con confirmación y feedback (M44) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+2. - [ ] [59] Mostrar hora/fecha del último guardado por slot [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+3. - [ ] [59] Impedir guardado manual durante carga de escena/diálogo [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+4. - [ ] [59] Deshabilitar botón si no hay cambios (no dirty) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+5. - [ ] [59] Guardar manualmente desde el menú principal [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+6. - [ ] [59] Definir 3+ slots con UI de selección en el menú principal [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+7. - [ ] [59] Borrar y sobrescribir slot con confirmación [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+8. - [ ] [59] Id de perfil en el archivo, validado al cargar (sin cruzamiento) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+9. - [ ] [59] Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+10. - [ ] [59] Probar en Windows/macOS/Linux (rename atómico varía por SO) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+11. - [ ] [59] Guardar islas, POI, exploración y niebla (M54) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+12. - [ ] [59] Guardar estado de ruinas (M25) y templos (M26) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+13. - [ ] [59] Guardar modificaciones del mundo (tala M50, minado M35) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+14. - [ ] [59] Testear carga del mundo sin duplicar objetos [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+15. - [ ] [59] Guardar ítems, cantidades, recursos (M15) y dinero (M38) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+16. - [ ] [59] Guardar equipamiento, hotbar y objetos colocados (M17) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+17. - [ ] [59] Guardar semillas y cultivos en proceso (M33) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+18. - [ ] [59] Guardar trampas y redes de pesca (M34) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+19. - [ ] [59] Testear carga sin duplicados y límites de cantidad (M60) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+20. - [ ] [59] Guardar casas/edificios, fase de construcción y mejoras [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+21. - [ ] [59] Guardar decoración, muebles y cofres con contenido [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+22. - [ ] [59] Guardar estado de puertas y ventanas [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+23. - [ ] [59] Testear carga con casas parcialmente construidas [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+24. - [ ] [59] Testear carga con muebles inexistentes (fallback) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+25. - [ ] [59] Guardar posición, estado y rutinas de NPC (M64) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+26. - [ ] [59] Guardar diálogos vistos y elecciones tomadas [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+27. - [ ] [59] Guardar amistad (M20) y regalos entregados [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+28. - [ ] [59] Guardar encargos activos (M23) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+29. - [ ] [59] Testear carga con NPC en movimiento y regalos duplicados [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+30. - [ ] [59] Guardar misiones activas con progreso y completadas [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+31. - [ ] [59] Guardar historia principal (capítulo, final elegido) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+32. - [ ] [59] Guardar descubrimientos y hitos de progresión (M71) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+33. - [ ] [59] Testear carga con misión a medias (objetivo coherente) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+34. - [ ] [59] Testear carga tras completar misión y reabrir [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+35. - [ ] [59] Guardar eventos pasados y futuros programados (M74) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+36. - [ ] [59] Guardar festivales celebrados y calendario [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+37. - [ ] [59] Testear carga en una fecha distinta a la del guardado [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+38. - [ ] [59] Testear eventos no duplicados al recargar [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+39. - [ ] [59] Guardar museo, bestiario y colecciones (M37/M36) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+40. - [ ] [59] Guardar diario del jugador (M55) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+41. - [ ] [59] Guardar fotos por referencia (ids, no bytes — M56) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+42. - [ ] [59] Guardar Sellos y ruinas coleccionables [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+43. - [ ] [59] Testear diario 500+ entradas y fotos faltantes (fallback) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+44. - [ ] [59] Guardar opciones gráficas (M90), audio (M91), accesibilidad (M58) e idioma (M87) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+45. - [ ] [59] Probar múltiples perfiles sin cruzamiento [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+46. - [ ] [59] Probar archivos con permisos de solo lectura [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+47. - [ ] [59] Sin GC pesado ni hitching al encolar [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+48. - [ ] [59] Reutilizar buffers de serialización (M62) y probar con profiler (M116) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+49. - [ ] [59] Localizar textos del menú de guardado [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+50. - [ ] [59] Localizar mensajes de corrupción, recuperación y disco lleno [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+51. - [ ] [59] Localizar feedback de guardado (M44) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+52. - [ ] [59] Respetar plurales (horas, minutos) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+53. - [ ] [59] Testear menú de guardado en 3 idiomas [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+54. - [ ] [59] Definir contrato con M107 (3-2-1 externo) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+55. - [ ] [59] Verificar la restauración desde la nube [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+56. - [ ] [59] Documentar el flujo de recuperación completo [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+57. - [ ] [59] Guardar con inventario vacío, mundo sin explorar o en el primer minuto [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+58. - [ ] [59] Guardar durante un festival con estado consistente (M74) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+59. - [ ] [59] Testear doble guardado simultáneo (cola) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+60. - [ ] [59] Feedback de guardado visible y legible [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+61. - [ ] [59] Confirmaciones accesibles por gamepad (M57) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+62. - [ ] [59] Diálogos de aviso con opciones claras [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+63. - [ ] [59] Testear menú con Reduce Motion (M58) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+64. - [ ] [59] Testear con texto grande (M58) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+65. - [ ] [59] Verificar con verificar_checklist.py (sin alertas nuevas) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+66. - [ ] [59] Push del módulo y reporte al usuario [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+67. - [ ] [59] Marcar ítems solo al cumplir la DoD (sección 21.6) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+68. - [ ] [59] Revisar que plan-inicial == plan-actual (SHA-256) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+69. - [ ] [59] Confirmar 130 ítems exactos [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+70. - [ ] [58] Verificar legibilidad de la UI de M53 con escala 200 % sin cortes [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+71. - [ ] [58] RF12: auditar que ningún puzzle dependa de oír un sonido específico [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+72. - [ ] [58] RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+73. - [ ] [58] Definir que el remapeo respete los conflictos detectados por M57 [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+74. - [ ] [58] Definir indicador visual del perfil de control activo en el menú [S] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+75. - [ ] [58] RF23: reabrir el último diálogo sin perder contexto [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+76. - [ ] [58] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+77. - [ ] [58] RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+78. - [ ] [58] Verificar la legibilidad del texto grande con las fuentes de M88 en español (tildes, ñ) [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+79. - [ ] [58] NFR: aplicar el perfil con overhead menor a ~1 ms por frame [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+80. - [ ] [58] NFR: UI del menú navegable 100 % por teclado y mando [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+81. - [ ] [58] Integrar con M53: escalado aplicado al nodo raíz de UI (0.8–2.0) [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+82. - [ ] [58] Integrar con M53: previews dentro del menú sin escenas externas [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+83. - [ ] [58] Integrar con M57: dead zones/sensibilidad expuestos como accesos directos en el menú [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+84. - [ ] [58] Mando desconectado a mitad de sesión → perfil intacto, prompts actualizados por M57 [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+85. - [ ] [58] Texto grande con inventario lleno (36 slots) → sin elementos cortados [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+86. - [ ] [58] Apertura del menú de accesibilidad durante combate → pausa correcta sin pérdida de estado [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+87. - [ ] [58] Focus del teclado perdido al abrir atajo global → restaurado al volver al menú [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+88. - [ ] [58] Aplicar el perfil solo con deltas por área, no reconstruir toda la UI [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+89. - [ ] [58] Carteles de alerta con tiempo de vida y fade-out sin tween acumulados [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+90. - [ ] [58] Escaneo de interactuables para contornos solo en radio cercano al jugador [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+91. - [ ] [58] Verificar que M58 no sume draw calls perceptibles en escenas pobladas (M61) [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+92. - [ ] [58] Planear prueba de aim assist en pesca (M34) con slider en 0 %, 50 % y 100 % [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+93. - [ ] [58] Planear prueba del preset single_hand sin conflictos con el remapeo de M57 [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+94. - [ ] [58] Planear prueba de rendimiento: overhead del perfil en escena poblada con profiler [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+95. - [ ] [58] Planear prueba de atajo global F10 desde título, pausa y gameplay [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+96. - [ ] [58] Planear prueba de sesión larga (≥ 30 min) verificando los autosaves cada 5 minutos [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+97. - [ ] [65] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensi <!-- fuente: 65-Animales-IA/05-Checklist.md -->

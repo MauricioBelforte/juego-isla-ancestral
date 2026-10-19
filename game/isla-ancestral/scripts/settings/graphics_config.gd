@@ -72,6 +72,15 @@ const AGUA: Dictionary = {"baja": 0.25, "media": 0.5, "alta": 0.85, "ultra": 1.0
 ## Partículas por calidad (máximo por sistema, §1).
 const PARTICULAS: Dictionary = {"baja": 100, "media": 500, "alta": 1000, "ultra": 2000}
 
+## ── Culling y LOD (§1 rendimiento) ───────────────────────────────────────
+## Frustum culling + cull por distancia (desactiva objetos fuera de rango).
+const CULLING: Dictionary = {"frustum": true, "por_distancia": true}
+
+## LOD por objeto lejano (complemento al LOD de terreno de main_island).
+## La implementación del LOD por OBJETO depende de M50 (vegetación/objetos);
+## aquí se define el DISEÑO (flags + distancia + niveles) para el render.
+const LOD: Dictionary = {"habilitado": true, "distancia": 160.0, "niveles": 4}
+
 ## ── Anti-aliasing (§1) ───────────────────────────────────────────────────
 const AA_OFF := "off"
 const AA_FXAA := "fxaa"
@@ -134,9 +143,11 @@ const UMBRAL_RAM_GB: Dictionary = {"baja": 4, "media": 8, "alta": 16, "ultra": 3
 const UMBRAL_CPU_NUCLEOS: Dictionary = {"baja": 2, "media": 4, "alta": 8, "ultra": 16}
 
 var _valores: Dictionary = {}
+var _accesibilidad: Dictionary = {}
 
 func _init() -> void:
 	_valores = PRESETS["medio"].duplicate(true)
+	_accesibilidad = ACCESIBILIDAD_DEFAULT.duplicate(true)
 
 ## Aplica un preset por id. Devuelve false si no existe.
 func aplicar_preset(id: String) -> bool:
@@ -285,6 +296,131 @@ func from_json(txt: String) -> bool:
 		return false
 	from_dict(p as Dictionary)
 	return true
+
+## ── Sliders de post-processing (§1 intensidades) ─────────────────────────
+## Rango [min, max] de cada slider para clamps de la UI.
+const RANGOS_SLIDERS: Dictionary = {
+	"bloom_intensidad": [0.0, 1.0],
+	"bloom_threshold": [0.0, 1.0],
+	"bloom_radius": [0.0, 1.0],
+	"motion_blur_intensidad": [0.0, 1.0],
+	"motion_blur_sample_count": [4, 16],
+	"dof_distancia": [0.0, 100.0],
+	"dof_apertura": [0.0, 1.0],
+	"dof_intensidad": [0.0, 1.0],
+	"fuente_escala": [0.5, 2.0],
+	"distancia_dibujado": [300.0, 2500.0],
+}
+
+## Valores por defecto de cada slider (para presets que no los definen).
+const SLIDERS_DEFAULT: Dictionary = {
+	"bloom_intensidad": 0.5, "bloom_threshold": 0.7, "bloom_radius": 0.3,
+	"motion_blur_intensidad": 0.5, "motion_blur_sample_count": 8,
+	"dof_distancia": 10.0, "dof_apertura": 0.5, "dof_intensidad": 0.5,
+	"fuente_escala": 1.0, "distancia_dibujado": 600.0,
+}
+
+## ── Accesibilidad (§1 Diseño) ────────────────────────────────────────────
+## Opciones de accesibilidad (alto contraste, reducir mareo/distracción,
+## escala de fuente). Valores por defecto.
+const ACCESIBILIDAD_DEFAULT: Dictionary = {
+	"alto_contraste": false,
+	"reducir_motion": false,
+	"reducir_bloom": false,
+}
+
+## Devuelve los rangos [min, max] de cada slider.
+func rangos_sliders() -> Dictionary:
+	return RANGOS_SLIDERS
+
+
+## Clamps un valor de slider al rango válido de su clave.
+## Si la clave no existe en RANGOS_SLIDERS, usa el default.
+func validar_slider(clave: String, valor: float) -> float:
+	if RANGOS_SLIDERS.has(clave):
+		var r: Array = RANGOS_SLIDERS[clave]
+		return clampf(valor, float(r[0]), float(r[1]))
+	return float(SLIDERS_DEFAULT.get(clave, valor))
+
+
+## ── Aplicación de post-processing (M90 §1 toggles/activación) ───────────
+
+## Mapeo LÓGICO de los toggles de post-processing (headless, sin RenderingServer).
+## M90 §1: post=false apaga todo; si post=true, cada efecto se habilita solo si su
+## toggle individual está activo. Devuelve un Dictionary con el estado efectivo.
+func mapeo_post() -> Dictionary:
+	var post: bool = bool(obtener("post", false))
+	return {
+		"post": post,
+		"glow": bool(obtener("bloom", false)) and post,
+		"motion_blur": bool(obtener("motion_blur", false)) and post,
+		"dof": bool(obtener("dof", false)) and post,
+		"tonemapping": post,
+		"aa": obtener("aa", AA_OFF),
+	}
+
+## Mapeo LÓGICO de culling (frustum + por distancia). headless, sin nodos.
+func mapeo_culling() -> Dictionary:
+	return {
+		"frustum": bool(CULLING["frustum"]),
+		"por_distancia": bool(CULLING["por_distancia"]),
+		"cull_distance_metros": distancia_metros(String(obtener("distancia", "media"))),
+	}
+
+## Mapeo LÓGICO de LOD por objeto lejano. headless. La IMPL. depende de M50.
+func mapeo_lod() -> Dictionary:
+	var hab: bool = bool(LOD["habilitado"])
+	return {
+		"habilitado": hab,
+		"distancia": float(LOD["distancia"]),
+		"niveles": int(LOD["niveles"]),
+		"depende_m50": hab,  # el LOD por objeto se resuelve con M50 (vegetación/objetos)
+	}
+
+## Mapeo LÓGICO de accesibilidad (§1 Diseño): estado efectivo de las opciones de
+## accesibilidad + su interacción con post-processing. REDUCIR_MOTION/BLOOM apagan
+## el efecto aunque el preset lo tenga activo (opción anti-mareo / anti-distracción).
+func mapeo_accesibilidad() -> Dictionary:
+	var m: Dictionary = mapeo_post()
+	var alto_contraste: bool = bool(_accesibilidad.get("alto_contraste", false))
+	var reducir_motion: bool = bool(_accesibilidad.get("reducir_motion", false))
+	var reducir_bloom: bool = bool(_accesibilidad.get("reducir_bloom", false))
+	var fuente_escala: float = validar_slider("fuente_escala", float(_accesibilidad.get("fuente_escala", SLIDERS_DEFAULT["fuente_escala"])))
+	return {
+		"alto_contraste": alto_contraste,
+		"motion_blur": bool(m["motion_blur"]) and not reducir_motion,
+		"glow": bool(m["glow"]) and not reducir_bloom,
+		"fuente_escala": fuente_escala,
+	}
+
+## Devuelve una copia de los valores de accesibilidad actuales.
+func acceder_accesibilidad() -> Dictionary:
+	return _accesibilidad.duplicate(true)
+
+
+## Fija un valor de accesibilidad. Devuelve false si la clave no es válida.
+func fijar_accesibilidad(clave: String, valor) -> bool:
+	if not ACCESIBILIDAD_DEFAULT.has(clave):
+		return false
+	_accesibilidad[clave] = valor
+	return true
+
+
+## Aplica los toggles de post-processing a un Environment (del WorldEnvironment).
+## NULL-SAFE para headless: si `entorno` es null, no-op (no hay RenderingServer).
+## Aplica lo que Godot 4 permite vía propiedades de Environment (glow); el resto
+## (motion blur / DoF / tonemapping / AA) se expone vía `mapeo_post()` para la capa
+## de render/UI (M53) y el RenderingServer en runtime.
+func aplicar_env(entorno) -> void:
+	if entorno == null:
+		return
+	var m: Dictionary = mapeo_post()
+	# Glow (bloom).
+	entorno.glow_enabled = bool(m["glow"])
+	if bool(m["glow"]):
+		entorno.glow_bloom = validar_slider("bloom_intensidad", float(obtener("bloom_intensidad", SLIDERS_DEFAULT["bloom_intensidad"])))
+		entorno.glow_threshold = validar_slider("bloom_threshold", float(obtener("bloom_threshold", SLIDERS_DEFAULT["bloom_threshold"])))
+
 
 func _igual(a: Dictionary, b: Dictionary) -> bool:
 	if a.size() != b.size():

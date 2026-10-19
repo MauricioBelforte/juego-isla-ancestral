@@ -470,3 +470,45 @@ el frame equivocado. (Esa fue la 1.ª corrida en rojo: `21 checks, 1 fallo`.)
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_m62_diffs_ediciones.gd
 ```
+
+## 18. Tanda 66 (2026-10-19, DS-Opencode, Log 2012): L143 — al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L143 del checklist: "Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos".
+- **Contrato pinneado (sin cambio de producción):** el mecanismo §4 del `stream_manager.gd` (M63): borde = `distancia > r_max + 1.0` **estricto**; gracia de 2 frames (`marcar_envejecidos` ×2 antes de que `liberar_envejecidos` suelte); el contador de envejecimiento **se resetea** si el chunk vuelve al rango; liberar es idempotente y suma a `descargas_total`.
+- **Suite nueva:** `test_m62_anillo_borde.gd` (**24 checks**) con los autoloads REALES `MemoryMonitor` + `StreamManager` vía `--headless --script` (2 checks de base):
+  - **A (6):** semántica del anillo: 7 chunks (4 interior + 3 borde); 1 marca no libera (gracia); 2 marcas liberan exactamente el borde (3); frontera estricta (101.0 == r_max+1 queda, 101.5 sale); interior intacto; idempotencia; `descargas_total` +3.
+  - **B (6):** la invariante del ítem: anillo A (5 interior + 4 borde con `Resource`) + cola del 62 (9) → drena 9 → move r100→60 → libera exactamente el borde (4) → **0/4 vivos del borde y 5/5 del interior** → recién entonces cargan los 4 nuevos (9 activos, sin borde viejo activo, 4 vivos nuevos) → balance ≤ base+9 (sin convivencia).
+  - **C (3):** control anti-falso-verde: gracia (1 marca = 0); frontera estricta (61.0 queda, 61.5 sale); el chunk que sale del anillo y VUELVE no se descarga (reset §4).
+  - **D (4):** vía real 63→62 con `Resource`: activo+candidato → el 62 drena → move → el 63 cierra su libro (1) y el payload muere (0/1 vivos) → estado final limpio (0 activos, balance ≤ base).
+  - **E (3):** ciclo completo de 2 movimientos (r200→r100): cada movimiento descarga su borde (2 y 2, incluido el chunk recién cargado que quedó fuera); final 3 activos = 3 vivos (balance ≤ base+3).
+- **Resultado:** 24 checks, 0 fallos, **×3 corridas idénticas** (corridas 3/4/5, exit 0, logs normalizados idénticos). Evidencia: `out/tanda66/suite_corrida{1..5}.log` (corrida 1 de iteración halló el defecto de harness: los WeakRef wrappers cuentan en `objetos_vivos` — B faltaba drenar 13 wrappers, D 1, E 7 → `clear()` antes del balance). Diagnósticos: A `lib=3 interior=4` / B `lib=4 vivos_borde=0` / C `gracia=0 frontera=1` / D `lib=1 vivos=0` / E `lib1=2 lib2=2 final=3`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 24 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda66/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `19200978…`).
+- **Regresión:** 13 suites M62 (las 11 del set T65 + la suite T65 + la nueva) + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25/33/24/24 checks + budgets; `out/tanda66/reg_*.log`).
+- **Alcance (lo que NO prueba):** el caller de producción del movimiento del anillo (M12 zoom → M63 aplicar r_max) todavía no está cableado en el repo. Esta suite pina el mecanismo del borde del 62/63 + la secuencia canónica (marcar×2 → liberar → recién cargar nuevos).
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_anillo_borde.gd
+```
+
+## 19. Tanda 67 (2026-10-19, DS-Opencode, Log 2013): L149 — bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L149 del checklist: "Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región".
+- **Contrato pinneado (sin cambio de producción):** el ciclo de vida del banco con las APIs reales del `memory_monitor.gd`: `pedir_banco_audio` (entrar), `registrar_candidato_descarga` + `avisar_cambio_region` (salir fuerza el drenaje), veto del handshake `avisar_carga_iniciada/terminada` (un banco en carga no se descarga), y orden de drenaje por lejanía del `unload_policy.gd`.
+- **Suite nueva:** `test_m62_audio_bioma.gd` (**45 checks**) con el autoload REAL `MemoryMonitor` vía `--headless --script` (1 check de base):
+  - **A (7):** entrar al bioma: cola drenada; el aviso de región sin pendientes no fuerza; región registrada; el banco ENTRA reproducible (`pedir_banco_audio` == "reproducir"); sin descarga declarada; sin bancos diferidos; sin candidatos.
+  - **B (8):** salir de la región: el banco viejo queda encolado como candidato; el banco del bioma nuevo se reproduce; el cambio de región FUERZA la descarga; cola vacía; forzada y cambio contados; **WeakRef: el banco del bioma viejo NO sobrevive** (0 vivos); `objetos_vivos` fin ≤ base.
+  - **C (11):** banco EN CARGA: declarado en carga; encolado; el cambio de región NO lo descarga (veto) y el veto suma a `descartes_por_carga`; el candidato sigue en cola (no se pierde); el cambio se cuenta igual; terminada la carga el siguiente cambio SÍ lo descarga; cola vacía; forzada contada; WeakRef 0 vivos.
+  - **D (9):** ciclo entrar/salir ×3 (viajes entre 4 regiones): las 3 entradas reproducen, los 3 viajes fuerzan la descarga del banco anterior, cola 0, forzadas +3, cambios +4, el banco de la región actual sigue reproducible, **ningún banco de los viajes sobrevive** (WeakRef 0), `objetos_vivos` fin ≤ base.
+  - **E (9):** orden por lejanía (5,3,1) y peso en el lote: 3 bancos encolados → `previsualizar_orden` = [5,3,1] → el cambio drena los 3 en UN lote (`resumen_ultimo_lote` empieza por el de 48 MB) → UNA sola forzada por el cambio → WeakRef 0 → balance final fin ≤ base.
+- **Resultado:** 45 checks, 0 fallos, **×3 corridas idénticas** (corridas 3/4/5, exit 0, logs normalizados idénticos de 399 líneas). Evidencia: `out/tanda67/suite_corrida{1..5}.log` (corrida 1 de iteración halló los defectos de harness: snapshot `_camb_a` pre-A y refs locales retenidas por los WeakRef → soltarlas con `null`/`clear()` antes de contar).
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 45 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda67/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `e24b72b0…`).
+- **Regresión:** 14 suites M62 (las 13 del set T66 + la nueva) + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25/33/24/24/45 checks + budgets; `out/tanda67/reg_*.log`).
+- **Alcance (lo que NO prueba):** el llamador de producción (M42 avisando entrar/salir de bioma desde `set_bioma`/`ambiente_cambiado` y encolando el banco que sale) todavía no está cableado en el repo. Esta suite pina el mecanismo del 62 y el ciclo canónico que lo cumple.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_audio_bioma.gd
+```

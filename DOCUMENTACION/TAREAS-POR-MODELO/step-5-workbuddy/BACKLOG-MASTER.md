@@ -98,9 +98,9 @@
 52. Barrido siguiente de 10 ✅ — 10 [C]
 53. Barrido de módulos 🟡 con [?] sin justificación inline — 10 [C]
 54. Corrida `scripts/verificar_checklist.py` + reporte de drifts — 6 [M] — **[x] HECHO 2026-10-18 19:22 (Step-5-WorkBuddy, Log 1992, msg 78):** corrida real del verificador (EXIT 1 = 16 alertas; exit 3 seria DETECTOR CIEGO, no es el caso). Cobertura: 167 checklists plan-actual / 168 filas (faltan=0, sobran=1). Las 16 alertas clasificadas en 4 grupos con la celda exacta a aplicar (todo en CHECKLIST-GLOBAL.md, que NO toco): **A** 7 filas con [x]>0 y Estado 'Disponible' (115/127/137/138/142/143/144 - solo falla la celda Estado, el Progreso cuadra; propuesta -> 'Con dudas', ninguna habilita Completado); **B** 1 deriva de conteo real (125-Terminos-De-Servicio: GLOBAL 104/105 vs 105 [x] medidos -> 105/105 + fecha 2026-10-18); **C** 1 fila stale (157-Medios-De-Transporte: plan-actual/ VACIO, nota con barras invertidas literales); **D** 7 avisos 21.4.7 (104/139/41/45/46/48/49 - ninguno mio, decision del director). No se cruzan con la deuda de los 16 'Totales' incoherentes ni con mis 6 modulos. Detalle en informe-078-acuse-094-verificador-16-alertas-2026-10-18.md.
-55. Corrida `scripts/verificar_backlogs.py` + reporte — 6 [M]
-56. Corrida `scripts/verificar_pool_numeros.py` + saneo (respaldo director) — 4 [S]
-57. Barrido de Totales inconsistentes (drift > 5) en CHECKLIST-GLOBAL — 8 [C]
+55. Corrida `scripts/verificar_backlogs.py` + reporte — 6 [M] — **[x] HECHO 2026-10-18 21:2x (Step-5-WorkBuddy, Log 1995, msg 78):** corrida real con el Python del sistema (3.13.14); script leído completo antes (READ-ONLY por diseño). EXIT 1 = miró y encontró (exit 3 sería DETECTOR CIEGO, no es el caso). **Modelos con backlog: 27/29** (sin BACKLOG-MASTER: De-Director-V4.1 y GLM-5.3-Flash-Director); cierres afirmados con delta ≥ 5: **304**; **DRIFT INVERSO: 5**; módulos inexistentes: **0**. **Los 5 drift-inverso son MATERIALES y están verificados en disco**: los 5 ítems `[ ]` del backlog de **DeepSeek-V4.1-Flash** (L811, L812, L814, L862, L866) YA están `[x]` en `62-Memoria/plan-actual/05-Checklist.md` (L110, L111, L113, L214, L218) desde su iter. 7 / Tanda 6 del 2026-10-17 — riesgo de repetir trabajo cerrado; dueño DeepSeek, NO tocado. Los 304 "cierres afirmados" son en su inmensa mayoría **ruido del parser** (verificado en los casos grandes): familia "colisiones AJENAS 1290/1468…" (el mismo 1290 imputado a M87/M105/M11 por proximidad), conteos de módulos vecinos en líneas multi-módulo, y **mis 5 "RETROCESO" propios son falsos** — línea fuente leída una por una (L308 M109 dice "107 [x] / 28 [ ] / 3 [?] = 138"; L406 M55 imputa el "126/130" de M76). Mi backlog: drift 0, módulos inexistentes 0. **BUG del script (ajeno, NO tocado)**: en modo `--json`, `total_drift`/`total_inex` solo se definen en la rama de texto (L562-568) → `UnboundLocalError` + traceback → `--json` sale con exit 1 SIEMPRE (el exit code no distingue limpio de sucio); el JSON se imprime completo antes del crash; no está en quality.yml ni en .github/ (grep = 0). Patch propuesto (3 líneas) en Log 1995 §5 — no aplicado (herramental compartido; requiere autorización). Detalle completo en el Log 1995.
+56. Corrida `scripts/verificar_pool_numeros.py` + saneo (respaldo director) — 4 [S] — **[x] HECHO 2026-10-18 21:45 (Step-5-WorkBuddy, Log 1999, msg 79):** script leido COMPLETO antes de correr (READ-ONLY por diseno). Corrida con el Python gestionado y exit code capturado POR PROCESO (redirigido a archivo, nunca `| tail`): **EXIT 0 → OK, todos los pools sanos (LF, sin BOM), sin numeros usados disponibles**. Pool global (logs): 1002 libres (1999..3000) | 1914 logs en disco, ultimo 1998, correlativo. Canales auditados: 17 (descubiertos de disco; 10 fuera de la lista hardcodeada). Mi canal: 100 libres | 78 mensajes, max 78 | sin huecos, verificado por bytes (379 B, sin BOM, CRLF=0, LF=100, 079..178). **Saneo: NO requerido** (verde general + pool propio sano). Huecos ajenos medidos e informados al director: mimo 18, atria-dawn-s3 10, DeepSeek 9, agnes 8, DS-V4.1-Flash-Opencode 7, Hy3 6, atria-dawn-s2 5, Ling 3, step-5-kilocode 2, G-5.3-Flash-Agente/atria-dawn/space-bunny 1 c/u. **Control de ceguera hecho (no se hereda el verde):** fixture sintetico fuera del repo con copia del script -> EXIT 1 detectando las 4 inyecciones (numero usado que seguia en el pool global, pool global no correlativo, BOM en pool de canal, fuga de numero en canal) + efecto colateral medido: un pool con BOM pierde su primer numero (trampa 77). Diferencia vs. item 55: entonces el verificador fallaba en TODOS los canales (pools resucitados por checkout); hoy pasa.
+57. Barrido de Totales inconsistentes (drift > 5) en CHECKLIST-GLOBAL — 8 [C] — **[x] HECHO 2026-10-18 23:03 (Step-5-WorkBuddy, Log 2003, msg 080):** universo = 167 `05-Checklist.md` de plan-actual (los 168 de plan-inicial medidos aparte y EXCLUIDOS: foto inicial, no deuda viva). Conteo real por prefijo de línea `^- \[[x? ]]` (criterio estricto del verificador; control alternativo con sangría y bruto idéntico). Declarado parseado de la línea 'Totales' por etiquetas o desglose backtick. **DRIFT > 5: 3** — **M71-Progresion drift 96** (declara 72 [x]/141 [?] de la reconciliación 2026-09-18 hy3/WorkBuddy; disco real 168 [x]/45 [?]/0 [ ]) · **M32-Clima drift 23** (declara 96/0/25, auditoría 2026-09-12 GLM; real 119/2/0) · **M30-Reloj-En-Tiempo-Real drift 12** (declara 107/13; real 119/1/0). Drift de total-declarado: 0. ILEGIBLES: 0. NO-PARSE: 2 (M116 línea narrativa; M151 sin línea Totales). **Ninguno de los 3 es mío** (M31 cuadra exacto 125/169) → reportados al director, corrección de sus dueños. Contraste con la lista del director de '16 incoherentes': con este criterio el número de hoy es 3 → pedida la lista origen/criterio en el msg 080. Trampa propia documentada en el Log 2003 (fracción '39/0/EXIT 0' de un test dentro de la línea de Totales = drift fantasma). 0 commits / 0 push / 0 archivos de módulo tocados / 0 ediciones a CHECKLIST-GLOBAL.md.
 58. Barrido de [?] en módulos 🟡 con dependencia ya resuelta (flip-back) — 10 [C]
 59. Barrido de citas dead-links (logs/archivos inexistentes en Notas) — 10 [C]
 60. Barrido de módulos 🔴 sin actividad >24h → reclamo §21.3 documentado — 6 [M]
@@ -578,3 +578,225 @@ M104, M88, M160.
   CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 flips / 0 autosellos 21.8.
 - **Proxima:** NN > 94; sin mensaje -> item 55 (corrida verificar_backlogs.py + reporte) u otro de la
   cola.
+
+## Registro de la vuelta 2026-10-18 21:2x (RAMA 1: msg 077 del director + RAMA 2: item 55)
+
+- **RAMA 1 - mensaje nuevo del director: 077** (`077-2026-10-18_23-59-00-glm-53-flash-director-a-Step-5-WorkBuddy-instructivo-global-utf8-sin-bom.md`, mtime 20:51) = INSTRUCTIVO GLOBAL: UTF-8 SIN BOM + LF en todo archivo escrito al repo (nunca Set-Content de PS 5.1; usar Python), procedimiento `verificar_bom.py --fix`, y la regla del pool (100 numeros consecutivos SIN usados, PASO 4 del metodo de renumeracion). Respondido con msg 78 + Log 1995.
+- **Casa propia verificada por bytes (19 archivos: 10 mensajes 065-076, 5 logs del dia, BACKLOG, pool, tracker): 0 BOM, 0 UTF-16, 0 FFFD.** Mensajes/BACKLOG LF puro; logs CRLF puro + ASCII puro (convencion de Logs/ preservada - declarada al director).
+- **Colision de timing de pool (reportada, no tocada):** yo habia consumido el 077 del pool minutos antes de que el director escribiera su instructivo con el mismo 077. Acciones: removi 078 para esta respuesta (regla 1) y reeexpandi el pool a **100 consecutivos sin usados = 079-178**, LF puro, sin BOM (regla 4). Tracker en 077 (mensaje del director procesado).
+- **Nota menor:** el 077 cita "Ling 8bbb43" (commit real f8bbb43) y pierde caracteres en el cuerpo (corrupcion reparada); documentado al director sin accion pedida.
+- **RAMA 2 - item 55 HECHO:** corrida de `scripts/verificar_backlogs.py` (EXIT 1, 27/29 modelos con backlog, 304 cierres-delta, 5 drift-inverso, 0 modulos inexistentes). Los 5 drift-inverso MATERIALES verificados en disco (backlog DeepSeek L811/812/814/862/866 `[ ]` vs M62 05-Checklist L110/111/113/214/218 `[x]` desde iter. 7 / Tanda 6 2026-10-17). Los 304 = ruido del parser (familia "colisiones AJENAS 1290", conteos de modulos vecinos; mis 5 "RETROCESO" falsos con la linea fuente leida). BUG del `--json` (UnboundLocalError -> exit 1 siempre) con patch propuesto NO aplicado (herramental compartido). Evidencia completa en Log 1995.
+- **Artefactos:** msg 78 (UTF-8 sin BOM, LF puro 5.356 B, verificado por bytes), Log 1995 (ASCII puro, 8.885 B, 151 CRLF, 0 LF sueltos, sin BOM; cabeza del pool de Logs medida justo antes = 1995), item 55 -> `[x]`, este registro.
+- **Limites:** 0 commits / 0 push / 0 archivos ajenos modificados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 flips / 0 autosellos 21.8.
+- **Proxima:** NN > 77; sin mensaje -> item 56 (corrida verificar_pool_numeros.py + saneo, respaldo director) u otro de la cola.
+
+## Registro de la vuelta 2026-10-18 21:45 (RAMA 2 / item 56: pools de numeracion)
+
+- **Barrido de canal:** tracker 77; listado RECURSIVO de mi carpeta -> 78 mensajes + pool + LEEME. Ultimo del director = 077 (instructivo UTF-8 sin BOM + regla del pool). 078 es propio. **Sin mensajes nuevos** -> RAMA 2.
+- **Item 56 HECHO:** `scripts/verificar_pool_numeros.py` -> **EXIT 0** (lectura completa previa; READ-ONLY; exit code por proceso, no por pipe). Pool global: 1002 libres 1999..3000, 1914 logs, ultimo 1998, correlativo. 17 canales auditados. Mi canal: 100 libres, 78 mensajes, sin huecos.
+- **Casa propia por bytes:** pool del canal 379 B, sin BOM, CRLF=0, LF=100, 079..178 consecutivos; consumido 079 para el msg 79 (ultimo+1, cabeza coincidente) y reeexpandido a 100 consecutivos = 080..179 (regla 4 del 077). El pool del canal esta gitignore; el global de Logs NO (medido con git check-ignore).
+- **Control de ceguera:** fixture en `.workbuddy-ai/tmp/poolfix/` (borrado) -> EXIT 1 con 4 detecciones correctas -> el verificador discrimina y el verde de hoy es real.
+- **Artefactos:** Log 1999 (ASCII puro, 4.439 B, 74 CRLF, 0 LF sueltos, sin BOM; cabeza del pool de Logs medida justo antes = 1999 -> pool 2000), msg 079 (UTF-8 sin BOM, LF puro, 2.971 B), este registro, item 56 -> [x].
+- **Limites:** 0 commits / 0 push / 0 archivos de proyecto modificados / 0 pools ajenos tocados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 flips / 0 autosellos 21.8.
+- **Proxima:** NN > 77; sin mensaje -> item 57 (barrido de `**Totales:**` inconsistentes, drift > 5, en CHECKLIST-GLOBAL) u otro de la cola.
+
+
+## Registro de la vuelta 2026-10-18 23:03 (tracker 79 sin cambios, RAMA 2 / item 57: barrido de Totales inconsistentes)
+
+- Sin mensajes nuevos del director (ultimo = 077, ya procesado y acusado en mi 078; 079 propio). Tracker 79.
+- Item 57 (Bloque C) HECHO con Log 2003 + msg 080. Detalle completo en la linea 57 de la cola y en el log.
+- Universo: 167 plan-actual; plan-inicial medido aparte (36 drift) y excluido por diseno. 3 drift > 5 en plan-actual: M71 (96), M32 (23), M30 (12); todos ajenos; total-declarado 0 drift; NO-PARSE 2 (M116, M151).
+- Pedido al director: criterio/lista origen de sus '16 Totales incoherentes' para verificarlos uno por uno.
+- Trampa propia: fraccionario X/N suelto dentro de la linea de Totales (cita de test) inventaba 'completados'; corregido en v3 del medidor (fraccionario solo en los primeros 80 chars y solo si no hay desglose backtick). Segundo `·` (U+00B7) colado en el log recien escrito: normalizado a ASCII antes de publicar (trampa 125).
+- Artefactos: Log 2003 (ASCII puro por bytes, 80 CRLF, 0 LF sueltos, sin BOM, 4.180 B), msg 080 (UTF-8 sin BOM, LF puro, 3.465 B, verificado por bytes), BACKLOG item 57 [x] + este registro (LF preservado), pool canal 80 consumido y reexpandido a 81..180 (100 consecutivos sin usados), pool Logs 2003 consumido (2004 en adelante), tracker 79 sin cambios, diario y memorias.
+- Limites: 0 commits / 0 push / 0 archivos de modulo modificados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot.
+- Proxima: NN > 79; sin mensaje -> item 58 (barrido de [?] en modulos amarillos con dependencia ya resuelta) u otro de la cola.
+
+
+## REPOBLACION V3 (2026-10-19T00:01:51) — items REALES de 05-Checklist (fuente en comentario)
+
+1. - [x] [109] Definir reutilización de lista vista/detalle en todos [M] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+2. - [x] [109] Definir red/amarillo por campo con error específico [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+3. - [x] [109] Definir vistas de misión principal vs secundarias [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+4. - [x] [109] Definir detección de recetas inalcanzables [M] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+5. - [x] [109] Definir vista por categoría de crafting [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+6. - [x] [109] Definir simulador de mercado rápido [M] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+7. - [x] [109] Definir vista por NPC/vendedor [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+8. - [x] [109] Definir vista de calendario anual [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+9. - [x] [109] Definir teleport con guardado del punto anterior [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+10. - [x] [109] Definir spawn con cantidad y densidad editable [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+11. - [x] [109] Definir validación de no duplicar entidades únicas [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+12. - [x] [109] Definir copia de estado al portapapeles [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+13. - [x] [109] Definir export de muestras a CSV [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+14. - [x] [109] Definir soporte de herramientas para QA (M102) [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+15. - [x] [109] Definir documentación plan-actual actualizada y firmada [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
+16. - [ ] [93] Definir `simulate_economy.gd` con escenarios (rutinario, diligente, minimalista) → KnownIssue no bloqueante DoD: NO implementado; es la brecha princip <!-- fuente: 93-Balance/05-Checklist.md -->
+17. - [ ] [93] Definir simulación de 60/180/365 días [C] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulate_economy.gd. Design documentado. <!-- fuente: 93-Balance/05-Checklist.md -->
+18. - [ ] [93] Definir que la simulación corra en CI (M118) [M] — KnownIssue no bloqueante DoD: M118 (CI/CD) tiene cicd_manager; agregar el job cuando simulate_econo <!-- fuente: 93-Balance/05-Checklist.md -->
+19. - [ ] [93] Definir `balance_report.gd` que genera reporte markdown legible [M] — **degradado 2026-10-16 (barrido agnes 622 + flip GLM-5.3 Flash-Director): archiv <!-- fuente: 93-Balance/05-Checklist.md -->
+20. - [ ] [36] [M65] Anti-stuck de manada/banco coordinado [M] — KnownIssue no bloqueante DoD: dueño M65; logica basica implementada en behavior.gd. Avanzar con navm <!-- fuente: 36-Fauna/05-Checklist.md -->
+21. - [ ] [50] Verificar presupuesto (instancias/draw calls/VRAM) [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+22. - [ ] [50] Cada bioma muestra su vegetación característica verificada [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+23. - [ ] [50] Escena pivote sin caída de frame (M61) [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+24. - [ ] [50] Viento determinista con amplitud por bioma/clima [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+25. - [ ] [50] Estaciones cambian color visualmente en ≤ X s [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+26. - [ ] [50] Densidad respeta clamps de terreno [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+27. - [ ] [50] Costo MultiMesh dentro del presupuesto [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+28. - [ ] [50] Regeneración por eventos sin romper determinismo [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+29. - [ ] [50] escalas.json a 1.0 definitivo para los 10 tipos horneados (dejar 1.0 evita doble escala; pendiente edición fina por usuario) [S] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+30. - [ ] [50] Revisión visual final del usuario (propongo capturas verif3_*) [S] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
+31. - [ ] [119] Crear Resource GameVersion con campos major, minor, patch, build, date [M] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: `Ga <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+32. - [ ] [119] Implementar to_string() para mostrar versión [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método de `GameVersion` no cr <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+33. - [ ] [119] Implementar is_same_major_minor() para compatibilidad [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método de `GameVersi <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+34. - [ ] [119] Crear UpdateChecker con check_latest() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: `UpdateChecker` diseñado en `03-Di <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+35. - [ ] [119] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: no existe como clase en disco ni co <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+36. - [ ] [119] Crear SaveMigrator con migrate_save() — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: `SaveMigrator` diseñado en `03-Diseno.md <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+37. - [ ] [119] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: no existe como clase <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+38. - [ ] [119] T-022: diseño de UpdateDownloader — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `UpdateDownloader.new()` dentr <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+39. - [ ] [119] T-049 a T-056: diseño de RollbackManager + políticas + UI — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `Rollb <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+40. - [ ] [76] Verificar determinismo local (split no red) [M] — **[ ] honesto: requiere FASE MP implementada (split no existe)** <!-- fuente: 76-Multijugador/05-Checklist.md -->
+41. - [ ] [76] Verificar que la invitación nunca expone datos [S] — **[ ] honesto: requiere implementación de invitación (FASE MP)** <!-- fuente: 76-Multijugador/05-Checklist.md -->
+42. - [ ] [76] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] — **ESTADO-PARALELO + Log actualizados; fila GLOBAL entregada al director (msg 55) — él <!-- fuente: 76-Multijugador/05-Checklist.md -->
+43. - [ ] [76] Verificar con verificar_checklist.py (sin alertas nuevas) [S] — **Pendiente: fila GLOBAL a aplicar por el director** <!-- fuente: 76-Multijugador/05-Checklist.md -->
+44. - [ ] [55] Mantener la estética cozy del proyecto en el diario [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+45. - [ ] [55] Guardar retrato, relación (M20) y últimos diálogos del personaje [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+46. - [ ] [55] Marcar personaje completado cuando su arco termina (M22) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+47. - [ ] [55] Vincular misiones relacionadas del personaje (M23) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+48. - [ ] [55] Vincular POI del mapa (M54) con la entrada [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+49. - [ ] [55] Guardar estado de exploración del lugar [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+50. - [ ] [55] Marcar completado al 100% de exploración del lugar [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+51. - [ ] [55] Mostrar fauna/flora del lugar por avistamientos [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+52. - [ ] [55] Guardar hábitat, dieta y fotografías de la criatura (M56) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+53. - [ ] [55] Marcar completado al identificar al 100% la criatura [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+54. - [ ] [55] Mostrar rareza de la criatura y momento de avistamiento [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+55. - [ ] [55] Validar siluetas/iconos contra el bestiario (M46) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+56. - [ ] [55] Guardar estación y hábitat de la planta (M29/M33) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+57. - [ ] [55] Guardar usos en recetas conocidas (M16) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+58. - [ ] [55] Mostrar escasez/abundancia estacional [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+59. - [ ] [55] Validar iconos de hojas contra el catálogo [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+60. - [ ] [55] Guardar ubicación, usos y rareza del mineral [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+61. - [ ] [55] Vincular mineral con su región [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+62. - [ ] [55] Guardar cantidad conocida en el inventario (M14) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+63. - [ ] [55] Validar iconos de gemas contra el catálogo [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+64. - [ ] [55] Desbloquear entrada al aprender la receta [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+65. - [ ] [55] Mostrar ingredientes con cantidades y resultado [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+66. - [ ] [55] Marcar completado al fabricar el ítem [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+67. - [ ] [55] Vincular receta con su nivel de habilidad (M17) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+68. - [ ] [55] Guardar pista al leerse (releíble) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+69. - [ ] [55] Marcar pista como resuelta al resolver el puzzle [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+70. - [ ] [55] No mostrar la solución en la pista [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+71. - [ ] [55] Validar referencias de pistas a puzzles [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+72. - [ ] [55] Desbloquear entrada al obtener el Sello [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+73. - [ ] [55] Mostrar la secuencia de Sellos en orden [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+74. - [ ] [55] Mostrar lore de cada Sello al completarse [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+75. - [ ] [55] Validar iconografía de Sellos (M46) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+76. - [ ] [55] Actualizar estado de la ruina (4 estados) al progresar [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+77. - [ ] [55] Mostrar recompensas obtenidas en la entrada [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+78. - [ ] [55] Marcar completado al restaurar la ruina [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+79. - [ ] [55] Validar estados contra el catálogo de M25 [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+80. - [ ] [55] Guardar cartas del festival y del correo con fecha [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+81. - [ ] [55] Permitir releer cartas y marcarlas como leídas [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+82. - [ ] [55] Vincular cartas con eventos del calendario (M29) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+83. - [ ] [55] Validar remitentes contra NPC (M19) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+84. - [ ] [55] Desbloquear descubrimientos al completar hitos (M71) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+85. - [ ] [55] Mostrar misiones activas/completadas con progreso en vivo [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+86. - [ ] [55] Alimentar logros de colección (M72) con el total real [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+87. - [ ] [55] Definir filtro por bioma para criaturas/lugares [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+88. - [ ] [55] Diseñar contenido secreto desbloqueable por acción concreta [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+89. - [ ] [55] Mostrar "???" SOLO en secciones lore (nunca en colecciones) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+90. - [ ] [55] Permitir releer pistas, recetas y cartas desde el diario [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+91. - [ ] [55] Navegar al lugar en el mapa (M54) desde la entrada [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+92. - [ ] [55] Dar soporte a plurales [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+93. - [ ] [55] Testear el diario en 3 idiomas sin desbordes de UI [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+94. - [ ] [55] Manejar icono faltante con fallback genérico [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+95. - [ ] [55] Probar el diario con Reduce Motion activo (M58) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+96. - [ ] [55] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+97. - [ ] [90] Definir culling de objetos fuera de distancia <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+98. - [ ] [90] Definir LODs para objetos lejanos (M50) — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_ <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+99. - [ ] [90] Definir iluminación volumétrica (baja/media: off, alta: on, ultra: alta calidad) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+100. - [ ] [90] Definir animación por wind shader <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+101. - [ ] [90] Definir interacción con jugador <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+102. - [ ] [90] Definir normal map para olas <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+103. - [ ] [90] Definir parallax para profundidad <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+104. - [ ] [90] Definir caustics para ultra <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+105. - [ ] [90] Definir colisión de partículas con world <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+106. - [ ] [90] Definir toggle de bloom — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** el bloom está **activo** en la escena principal (`main_island.tscn` L4 <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+107. - [ ] [90] Definir bloom shader para glow <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+108. - [ ] [90] Definir threshold para fuentes de luz brillantes <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+109. - [ ] [90] Definir motion blur basado en velocidad de cámara <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+110. - [ ] [90] Definir más blur cuando la cámara se mueve más rápido <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+111. - [ ] [90] Definir desactivado por defecto (causa mareo) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+112. - [ ] [90] Definir depth of field basado en distancia de la cámara <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+113. - [ ] [90] Definir blur para objetos fuera de foco <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+114. - [ ] [90] Definir aperture controla cuánto blur <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+115. - [ ] [90] Definir FSR 1.0 (AMD) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+116. - [ ] [90] Definir FSR 2.0 (AMD mejorado) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+117. - [ ] [90] Definir DLSS (NVIDIA) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+118. - [ ] [90] Definir XeSS (Intel) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+119. - [ ] [90] Definir detección de GPU y habilitación correspondiente <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+120. - [ ] [90] Definir detección de RAM (OS.get_static_memory_usage()) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+121. - [ ] [90] Definir detección de CPU (OS.get_processor_name()) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+122. - [ ] [90] Diseñar tamaño de fuente (slider 0.5x a 2x) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+123. - [ ] [90] Diseñar alto contraste (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+124. - [ ] [90] Diseñar reducción de motion blur (opción para reducir mareo) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+125. - [ ] [90] Diseñar reducción de bloom (opción para reducir distracción visual) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+126. - [ ] [90] Diseñar aplicación en tiempo real <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+127. - [ ] [90] Diseñar FPS counter (opcional, en debug) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+128. - [ ] [90] Diseñar profiling de GPU (opcional, en debug) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+129. - [ ] [90] Diseñar monitoreo de uso de GPU y RAM (opcional, en debug) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+130. - [ ] [90] Diseñar FPS counter visible en debug (M110) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+131. - [ ] [90] Diseñar profiling visible en debug (M110) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+132. - [ ] [90] Diseñar monitoreo visible en debug (M110) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+133. - [ ] [90] Diseñar controles para resolución (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+134. - [ ] [90] Diseñar controles para pantalla completa (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+135. - [ ] [90] Diseñar controles para ventana (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+136. - [ ] [90] Diseñar controles para borderless (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+137. - [ ] [90] Diseñar controles para VSync (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+138. - [ ] [90] Diseñar controles para FPS cap (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+139. - [ ] [90] Diseñar controles para escala de resolución (slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+140. - [ ] [90] Diseñar controles para upscaling (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+141. - [ ] [90] Diseñar controles para calidad de sombras (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+142. - [ ] [90] Diseñar controles para calidad de texturas (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+143. - [ ] [90] Diseñar controles para distancia de dibujado (slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+144. - [ ] [90] Diseñar controles para calidad de efectos (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+145. - [ ] [90] Diseñar controles para calidad de vegetación (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+146. - [ ] [90] Diseñar controles para calidad de agua (x] Diseñar controles para calidad de partículas (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+147. - [ ] [90] Diseñar controles para anti-aliasing (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+148. - [ ] [90] Diseñar controles para anisotropic filtering (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+149. - [ ] [90] Diseñar controles para post-processing (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+150. - [ ] [90] Diseñar controles para bloom (toggle + slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+151. - [ ] [90] Diseñar controles para motion blur (toggle + slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+152. - [ ] [90] Diseñar controles para depth of field (toggle + slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+153. - [ ] [90] Diseñar botón de detección automática <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+154. - [ ] [90] Diseñar HardwareDetector <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+155. - [ ] [90] Diseñar método detect_hardware() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+156. - [ ] [90] Diseñar lógica de recomendación según GPU, RAM, CPU <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+157. - [ ] [90] Diseñar método apply_resolution() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+158. - [ ] [90] Diseñar método apply_vsync() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+159. - [ ] [90] Diseñar método apply_fps_cap() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+160. - [ ] [90] Diseñar método apply_anti_aliasing() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+161. - [ ] [90] Incluir resolución como objeto {x, y} <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+162. - [ ] [90] Diseñar pruebas de legibilidad en 720p <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+163. - [ ] [90] Diseñar pruebas de legibilidad en 1080p <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+164. - [ ] [90] Diseñar pruebas de legibilidad en 4K <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+165. - [ ] [90] Diseñar pruebas de soporte de tildes <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+166. - [ ] [90] Diseñar pruebas de soporte de ñ <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+167. - [ ] [90] Diseñar pruebas de soporte de símbolos <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+168. - [ ] [90] Diseñar pruebas de localización (español, portugués, francés, alemán, italiano, ruso) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+169. - [ ] [90] Diseñar pruebas de ajustes de accesibilidad <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+170. - [ ] [90] Diseñar pruebas de rendimiento (tiempo de carga) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+171. - [ ] [90] Diseñar 06-Plan-Testings.md (APLICA) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+172. - [ ] [90] Diseñar tests de ajustes individuales <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+173. - [ ] [90] Diseñar tests de aplicación en tiempo real <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+174. - [ ] [90] Diseñar tests de detección automática de hardware <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+
+
+## Registro de la vuelta 2026-10-19 00:40 (tracker 81 sin cambios numericos; RAMA 1: msg 081 procesado + RAMA 2: REPOBLACION V3 items 1-15)
+
+- RAMA 1: el 081 del director (acuse del 079 / item 56 pools en verde) quedo sin respuesta por la renumeracion de las 23:28 (tracker en 81, sin 082 escrito, pool intacto). Procesado y acusado con msg 082. Item 57 (Totales) ya estaba reportado (Log 2003); sigue pendiente el criterio de los '16 Totales' del director.
+- RAMA 2: items 1-15 de la REPOBLACION V3 = los 15 `[ ]` reales de 109-Herramientas-Internas/05-Checklist.md (modulo propio). Cerrados con definiciones en 03-Diseno.md seccion 8 (lineas 91-130) + 15 flips con cita real. Conteo medido por prefijo: 135 [x] / 3 [?] / 0 [ ] = 138. Verificado por bytes: 05-Checklist 21.994 B / 289 CRLF / 0 LF sueltos / sin BOM; 03-Diseno 11.625 B / LF puro / sin BOM.
+- Trampa de la vuelta: reconteo en modo texto dio 0/0/0 (la lectura con encoding='utf-8' normaliza CRLF); conteo valido por bytes.
+- Artefactos: Log 2009 (ASCII puro por bytes, CRLF, sin BOM), msg 082 (UTF-8 sin BOM, LF), pool canal 082 consumido y reexpandido a 083..182 (100 consecutivos), tracker 81, diario y memorias.
+- Limites: 0 commits / 0 push / 0 archivos ajenos modificados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 auto-sellos 21.8.
+- Pendientes del director: fila 46 GLOBAL 120/138 -> 135/138 + ruteo QA 21.8 de M109 (soy autor, no auto-sello).
+- Proxima: NN > 81; sin mensaje -> items 16-19 de la REPOBLACION V3 (M93-Balance) u otro de la cola.

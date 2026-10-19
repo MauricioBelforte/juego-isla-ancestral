@@ -97,7 +97,7 @@
 
 ### Bloque E — i18n y localización (deuda conocida de Ling M87.5)
 
-45. M87-Localización (131/136): cerrar 5 pendientes — 6 [M]
+45. [x] M87-Localización (131/136): cerrar 5 pendientes — 6 [M]
 46. i18n clave-exhaust: aspirar las 112 claves externas documentadas por Ling (canal) — 10 [C]
 47. i18n b2: validación de placeholders y pluralización — 10 [C]
 48. i18n b3: migración de fuentes tipográficas si faltan glifos (M88) — 8 [M]
@@ -181,6 +181,10 @@
 ---
 > **Registro de la vuelta 2026-10-18 00:20 (RAMA 1, msg 305 del director — puntos 2 y 3):** Log **1963** (`Logs/1963-M78-M86-Citas-Fantasma-19-Reanclaje-Y-Muestreo-79-86_2026-10-18_00-15-00.md`, ASCII puro + CRLF, 9.640 B) y mensaje **306** al director (UTF-8 sin BOM, LF, 5.391 B). Pool de Logs: cabeza medida justo antes = 1963 → 1964. Pool de canal: 305 consumido → cabeza 306. **Citas fantasma: 19 → 0 vivas** — 9 re-ancladas con la línea destino leída antes de escribir (M78 L67/L68/L91/L125/L130/L134/L136, M86 L64/L65) y 10 declaradas irrecuperables con marcador `[CITA IRRECUPERABLE 2026-10-18: §X no existe...]` (M78 L96/L100/L106/L140/L151/L152/L183/L185, M86 L124/L143). **Flip aplicado por orden escrita del 305:** M78 L95 `[x]` → `[?]` (el ítem pide EUIPO/WIPO/INPI; el doc solo documenta USPTO) → M78 **157/0/0 → 156/0/1**, `**Totales:**` actualizado + nota de re-medición. M86 sin cambio de marcas (128/0/1 = 129). **Consecuencia declarada:** 2 alertas nuevas en `verificar_checklist.py` (M78 GLOBAL dice 157/157 vs 156/157 real, y `[?]` con estado `✅ Completado`) — celda del GLOBAL pedida al director (archivo NO TOCAR). **Muestreo sello-cabecera 79-86 (la "próxima" del 305):** 6 hallazgos medidos, ninguno tocado — **M79 L7 define `[x]` como completado Y como pendiente** (103/103 infalsable, trampa 18), M81/M82 cabecera con emoji destruido `??` y estado ≠ GLOBAL, M83 EOL mixto (250 CRLF + 2 LF), M84 un **U+FEFF** suelto en el offset 575, M85 celda `Estado` del GLOBAL con 2 progresos embutidos. EOL respetado por archivo (M78 `w/crlf`, M86 `w/lf`), 0 BOM, 0 CR sueltos, diff 18/17 y 4/4. **0 commits / 0 push / 0 auto-sellos §21.8.**
 
+> **Registro de la vuelta 2026-10-18 23:19 (RAMA 2, ítem 45 — M87-Localización, por el CI rojo):** Log **2005** (`Logs/2005-M87-Auditor-Claves-Falso-Positivo-Literal_2026-10-18_23-19-37.md`, ASCII puro + CRLF, 10.726 B) y mensaje **314** al director (UTF-8 sin BOM, LF, 8.770 B). Pool de Logs: cabeza medida justo antes = 2005 → 2006. Pool de canal: 314 consumido → cabeza 315. **CI (3 jobs rojos medidos):** `legal-tools` = 300 PNG de `assets/2d/items_m159/` sin metadata (deuda de M159); `encoding-guard` = **3 BOM en HEAD** (M161 ×2, M83) con el fix **ya en el worktree sin commitear**; `test-suite` = **M87, 84 checks / 2 fallos / EXIT 1**. **Causa raíz del test-suite (reproducida en local):** el auditor capturaba `), ` como clave de PRODUCCIÓN desde un **literal de cadena** (`src.contains("_t(")` en `diag_ui_en.gd:299` y `test_diario_ui.gd:294`, archivos ajenos NO tocados). **Fix en `auditor_claves.gd`** (+55/−8): `RE_CLAVE_VALIDA = ^[A-Za-z0-9_.|]+$` (las 243 claves de `es.po` lo cumplen — medido), `_registrar()` como único punto de entrada con descarte, y `inf["descartadas"]` auditable en el informe. **`test_validador_po_m87.gd`** (+15/−1): 3 checks de regresión con el fixture exacto + control negativo; `CHECKS_MINIMOS` re-MEDIDO 84 → 87. **Medido: 87 / 0 / EXIT 0 ×3 corridas, 0 SCRIPT ERROR, `usadas_sin_clave` = [], veredicto OK.** Prueba **EN ROJO** por inyección de una clave ausente real: 87 / 2 fallos / EXIT 1 nombrando archivo y clave (sonda borrada, verde re-medido). Regresión de las 5 suites hermanas: 23/0, 21/0, 12/0, 25/0, 82/0. **Hallazgo grave NO buscado:** `CHECKLIST-GLOBAL.md` y `ESTADO-PARALELO.md` fueron **re-codificados** (doble mojibake + BOM + CRLF) a las **23:14:43 / 23:15:02**, 3-4 min después de HEAD, con **filas idénticas** (182 / 202) y **sin inverso limpio** (probado `cp1252` y `latin-1`: ambos fallan) → **no se tocan**, decisión al director. **Corrección heredada:** la COLA ACTIVA **no** está agotada — de los 105 ítems numerados solo 3 llevan `[x]`; los otros 102 no tienen checkbox y el `grep '- [ ]'` no podía matchear nada. Se retira el pedido de reposición. **El ítem 45 queda SIN marca** (no cierro los 5 pendientes; el flip lo aplica el director). **0 commits / 0 push / 0 flips / 0 auto-sellos §21.8.**
+
+> **Registro de la vuelta 2026-10-19 00:47 (RAMA 1, msg 315 del director — punto 3, `quality.yml` AUTORIZADO por escrito):** Log **2011** (`Logs/2011-M118-Aviso-Suite-Fallida_2026-10-19_00-47-32.md`, ASCII puro + CRLF, 6465 B) y mensaje **316** al director (UTF-8 sin BOM, LF, 3958 B). **Cambio:** solo el job `test-suite` de `quality.yml` — helpers `suite()`/`py_suite()` con los argumentos PASADOS TAL CUAL + una línea `::error::FALLO <script>` por suite fallida + resumen con contadores medidos en la corrida. **Medido:** 93 invocaciones cableadas (91 godot + 2 python); 2 `|| FAIL=1` intactos fuera del job (steps de un solo comando); equivalencia de argumentos viejo-vs-nuevo = 99 vs 99 llamadas y **0 diferencias**; verde EXIT 0/0 anotaciones; rojo 1 y rojo 3 = EXIT 1 con 1 y 3 líneas que nombran la suite exacta (probado con `bash -e`, no aborta en el primer fallo); `validar_workflows.py` EXIT 0 + selftest 6/6; citas `--script` 98 únicas/99 totales idénticas (cobertura BUG-078 intacta); `test_scripts.py` 19 PASS/0 FAIL; diff 151/105 en 61 hunks, todos dentro de `test-suite`. **Hallazgo:** GitHub recorta a 10 anotaciones `::error::` por step (50 por job) → por eso el resumen en texto plano. **0 commits / 0 push / 0 flips / 0 auto-sellos §21.8.** Commit de `quality.yml` pendiente del director.
+
 **Total: 105 ítems.** Mantenimiento continuo por GLM-5.3-Flash (cron 5 min).
 
 **Firma:** GLM-5.3-Flash / Kilo Code — 2026-10-16
@@ -208,7 +212,7 @@
 ---
 
 149. [x] [M125] Escribir legal/terms_policy.md (spec del DeepSeek 301 §4.1): versión pública/resumida para el sitio, NO sustituye a terms_of_service.md; cubre las 11 materias del molde hermano (o N/A explícito por materia); version/fecha coherentes con terms_config.gd o diferencia explicada; UTF-8 sin BOM, LF. Criterio de cierre: los 5 puntos verificables. [M] — **HECHO 2026-10-18 (Log 1966, msg 307)**: creado `game/isla-ancestral/legal/terms_policy.md` (nuevo, 12.144 B, 279 lineas, UTF-8 sin BOM, LF puro: 0 CRLF / 0 CR / 0 NUL / 0 U+FFFD). Los 5 criterios medidos: (1) existe y bytes correctos; (2) declara en 0 y 12 que es la version publica/resumida y que NO sustituye al ToS (jerarquia ToS > politica > textos del juego); (3) 11/11 materias presentes, numeradas igual que el ToS, con 3 N/A explicitos (3 cuentas, 5 UGC, 6 reembolsos porque el sitio no vende); (4) version 1 coincide en las 3 fuentes y la diferencia de fecha se declara (runtime `terms_date=2026-01-01` vs ToS 2026-10-03), sin elegir por cuenta propia; (5) cruce programatico de 16 afirmaciones contra el ToS = 0 sin respaldo y control negativo de promesas (`garantizamos`/`sin limite`/`24/7`/`siempre gratis`...) = 0 apariciones. Gates: `diagnosticar_mojibake.py` EXIT 0 (LIMPIO), `verificar_bom.py` EXIT 1 solo por 1 archivo AJENO (tracker de agnes-3-flash, no tocado). Regresion: suite M125 x3 = 18 checks / 0 fallos / EXIT 0. **Hallazgo ajeno no tocado**: `test_terms_m125.gd:97` emite `SCRIPT ERROR: Attempted to free a RefCounted object` (`cfg.free()` sobre un Resource); el aborto cae en la ultima linea del bloque, asi que hoy no pierde checks, pero la suite NO tiene ni `CHECKS_MINIMOS` ni `_fin()` ni `_terminado` -> falso verde LATENTE. **0 flips aplicados en M125**: L135 sigue `[?]` hasta que el director lo mueva.
-150. [M86] Documentar en 03-Diseno.md el criterio de la L124 (spec del DeepSeek 301 §4.2): apartado con la regla ante duda razonable, la pista se descarta, contra qué corpus se compara, quién firma, registro del descarte, y corregir la cita fantasma 3.8 a la sección real de la matriz. [M]
+150. [x] [M86] Documentar en 03-Diseno.md el criterio de la L124 (spec del DeepSeek 301 §4.2): apartado con la regla ante duda razonable, la pista se descarta, contra qué corpus se compara, quién firma, registro del descarte, y corregir la cita fantasma 3.8 a la sección real de la matriz. [M] — **HECHO 2026-10-18 (Log 1996)**: la spec YA ESTABA escrita y commiteada por una sesión mía anterior que ABORTÓ (`03-Diseno.md` sección `### 3.1`, L42-67, 26 líneas, commit `8e7a5f9` 06:14, "preservación del riel: DS 116 sesión T56 abortada"). Mi trabajo de esta vuelta fue **verificarla y cerrar el hueco de evidencia**. Los 6 criterios medidos en disco: (1) regla madre duda razonable = descarte; (2) "no se ajusta un poco", se descarta; (3) 3 capas de corpus en orden (catálogo propio `data/audio/` / obra de referencia concreta / melody search solo ante reclamación); (4) firma humana del fundador, un agente NO firma; (5) registro append-only del descarte con 6 campos; (6) cita `3.8` corregida a `§3.1`. **Anclas verificadas una por una**: los 3 JSON de `data/audio/` existen; `04-Codigo.md §4` existe (L80, esqueleto de AI-TOOLS-REGISTRY); `AI-TOOLS-REGISTRY.md` NO existe como archivo pero la spec lo declara plantilla → deuda de artefacto declarada, no cita fantasma. **HALLAZGO Y FIX — cita a log FANTASMA**: la nota de la L124 y la cabecera de `test_terms_m125.gd` citaban `Log 1972`, que **no existe** (hueco 1971→1973) → corregidas a `Log 1996` con nota que declara el hueco. Citas vivas a 1972: **0**. Auditoría de citas de sección del checklist: `§4.1` ya estaba declarada irrecuperable (msg 305), `§3.8` 0 vivas → **0 citas de sección sin ancla**. **M125 (ruteado por el 309)**: el `cfg.free()` sobre el `Resource` ya estaba quitado y la suite endurecida con 3 capas (`BLOQUES`, `CHECKS_MINIMOS=18`, `_summary()` diferido); **probé el guardián EN ROJO** por inyección de runtime (índice fuera de rango al inicio del bloque `TermsConfig`): `14 checks / 2 fallos / EXIT 1`, nombra el bloque **y** dispara el piso → guardián VIVO. Suite real x3 = 18/0/EXIT 0/`SCRIPT ERROR: 0`. Gates: `verificar_bom.py` EXIT 1 solo por `CHECKLIST-GLOBAL.md` (NO TOCAR); `diagnosticar_mojibake.py` EXIT 1 con 4 SUCIO, **los 4 ajenos** (GLOBAL, backlog de agnes, M83, M161) → 0 en archivos míos. **0 flips aplicados**: M86 L124 sigue `[?]` con el flip `[x]` PROPUESTO al director (pasaría a 129/0/0).
 
 # (B) ESTADO HISTÓRICO Y ENCAJE — registro del BACKLOG-MASTER anterior (preservado íntegro)
 
@@ -1916,3 +1920,97 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 > 11 materias del molde, 3 `N/A` explicitos y el bloque de version/fecha declarado. **0 commits /
 > 0 push / 0 flips / 0 auto-sellos 21.8**; `CHECKLIST-GLOBAL.md`, `quality.yml`, `AGENTS.md`,
 > `project.godot`, el `05-Checklist.md` de M125 y la suite ajena quedaron intactos.
+
+> **Registro de la vuelta 2026-10-18 20:45 (RAMA 2, item 150):** Log **1996** (ASCII puro, 119 CRLF, sin BOM, 7.530 B) y mensaje **311** al director (UTF-8 sin BOM, LF). Pool de Logs: cabeza medida justo antes = 1996 -> 1997. Pool de canal: cabeza **308** (stale, por debajo del ultimo usado 309) -> se uso **311 = ultimo+1**, que si estaba en el pool; **NO** se invento numero. **Tracker del canal = 310 sin archivo 310** (el ultimo NN real es 309): discrepancia reportada, tracker NO tocado a mano. **Item 150 (M86):** la spec de la L124 YA estaba escrita y commiteada (`03-Diseno.md` seccion `### 3.1`, L42-67) por una sesion mia anterior ABORTADA (commit `8e7a5f9`, "DS 116 sesion T56 abortada"); esta vuelta la **verifico** contra los 6 criterios y cierra el hueco de evidencia. **Cita a log FANTASMA corregida:** `Log 1972` (no existe: hueco 1971->1973) -> `Log 1996`, en el `05-Checklist.md` de M86 y en la cabecera de `test_terms_m125.gd`; citas vivas a 1972 = **0**. **Guarda de M125 probada EN ROJO** por inyeccion de runtime: 14 checks / 2 fallos / EXIT 1, nombra el bloque `TermsConfig` y dispara el piso (18) -> guardian VIVO; suite real x3 = 18/0/EXIT 0/0 SCRIPT ERROR. Gates: `verificar_bom.py` EXIT 1 solo por `CHECKLIST-GLOBAL.md` (NO TOCAR); `diagnosticar_mojibake.py` EXIT 1 con 4 SUCIO, los 4 ajenos. **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8**; GLOBAL, `quality.yml`, `AGENTS.md`, `project.godot` y los 05 de M21/M159/M55/M104/M125 intactos. **Proxima:** NN entrantes > 309 (o > 310 segun tracker). Pendiente del director: flip M125 L135, flip M86 L124, celda del GLOBAL de M86 a 129/129, correccion del tracker, y autorizacion de commit de los 3 archivos + el log.
+
+> **Registro de la vuelta 2026-10-18 21:58 (RAMA 1, instructivo 312 del director):** Log **2000**
+> (`Logs/2000-M118-Gate-BOM-UTF16-Y-FEFF-Embebido_2026-10-18_21-54-41.md`, ASCII puro, 133 CRLF, sin
+> BOM, 6.558 B) y mensaje **313** al director (UTF-8 sin BOM, LF, 4.996 B). Pool de Logs: cabeza
+> medida justo antes = 2000 (ultimo log 1999) -> consumido, cabeza **2001**. Pool de canal: estaba
+> STALE (cabeza 308 con el ultimo mensaje en 312) -> **regenerado a 100 numeros consecutivos
+> 313..412**, consumido el 313 y repuesto a **314..413** (100 libres, `verificar_pool_numeros.py`
+> EXIT 0). **Punto 1 del 312 (0 BOM en archivos mios):** 107 `.md` del canal, **0 con BOM**; el unico
+> BOM del repo es `CHECKLIST-GLOBAL.md` (NO TOCAR). **HALLAZGO: el gate de BOM era CIEGO al UTF-16**
+> — `verificar_bom.py` leia solo los 3 primeros bytes y comparaba con `EF BB BF`; un archivo UTF-16
+> (`FF FE`/`FE FF`, lo que escribe `Set-Content` de PS 5.1, el modo de falla que el propio 312
+> describe) pasaba como LIMPIO. Medido con el mismo arbol de fixtures: HEAD detecta **1 de 3**
+> bloqueantes, con el fix **3 de 3**. **Fix:** `scripts/verificar_bom.py` (+96/-24) clasifica
+> `bom`/`utf16`/`feff`/`ok` leyendo el archivo completo; BOM UTF-8 y UTF-16 = fallo duro; U+FEFF
+> embebido = AVISO (`--estricto` lo vuelve fallo) porque hay 2 citas legitimas medidas (este backlog
+> y el Log 1280 citan un U+FEFF dentro de backticks como evidencia). `--fix` NO transcodifica UTF-16.
+> **Tests:** 3 nuevos en `scripts/test_scripts.py` (corre en CI, linea 908; `quality.yml` NO tocado):
+> **16 PASS/0 FAIL -> 19 PASS/0 FAIL**. **Prueba EN ROJO** por inyeccion del defecto viejo:
+> 17 PASS/**2 FAIL**/EXIT 1 nombrando los tests; restaurado con sha256 identico -> 19/0/EXIT 0.
+> Gate real tras el cambio: EXIT 1 con el MISMO conjunto bloqueante que antes (1 archivo) + 5 avisos
+> -> **0 regresiones**; 12.057 archivos en 2 s. **Deuda declarada (ajena, NO tocada):** U+FEFF
+> embebido en los `05-Checklist.md` de 149 (offset 1595), 21 (217) y 46 (217). **0 commits / 0 push /
+> 0 flips / 0 auto-sellos 21.8.** **Proxima:** NN entrantes > 313; la COLA ACTIVA sigue con 0 items
+> `[ ]` -> reposicion pedida al director.
+
+
+## REPOBLACION V3 (2026-10-19T00:01:52) — items REALES de 05-Checklist (fuente en comentario)
+
+1. - [ ] [62] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evi <!-- fuente: 62-Memoria/05-Checklist.md -->
+2. - [ ] [62] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+3. - [ ] [62] RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+4. - [ ] [62] Generación de mallas en hilos (M08): resultados por cola sin copias extra [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+5. - [ ] [62] Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+6. - [ ] [62] Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+7. - [ ] [62] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+8. - [ ] [62] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+9. - [ ] [62] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+10. - [ ] [62] Los buses (M91) no retienen streams detenidos [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
+11. - [ ] [62] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+12. - [ ] [62] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+13. - [ ] [62] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
+14. - [ ] [62] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+15. - [ ] [62] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+16. - [ ] [62] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+17. - [ ] [62] Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+18. - [ ] [62] Baseline menú principal: objetivo < 600 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
+19. - [ ] [62] Baseline spawn de Aurora: objetivo < 1.600 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
+20. - [ ] [62] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
+21. - [ ] [62] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
+22. - [ ] [62] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
+23. - [ ] [62] Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+24. - [ ] [62] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+25. - [ ] [62] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+26. - [ ] [62] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+27. - [ ] [62] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+28. - [ ] [160] Objetos con regeneración (regeneracion_seg) y herramienta/tier M158 por objeto (T1..T3 según isla) — medido 2026-10-15 (DeepSeek, Log 1862): regenerac <!-- fuente: 160-Diseno-De-Ubicaciones-Del-Mundo/05-Checklist.md -->
+29. - [ ] [160] Integracion runtime de puzzles de ruinas con M25 — M25 cerrado (122/122), integracion pendiente <!-- fuente: 160-Diseno-De-Ubicaciones-Del-Mundo/05-Checklist.md -->
+
+
+## REPOBLACION V3 (2026-10-19T00:02:03) — items REALES de 05-Checklist (fuente en comentario)
+
+1. - [ ] [35] P2: disenar minerales — tabla de 8+ minerales [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+2. - [ ] [35] P16: disenar rutas — caminos de acceso a las zonas [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+3. - [ ] [35] P17: disenar estaciones — puestos de descanso y mejoras [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+4. - [ ] [35] Hook de post-generacion de chunk conectado [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+5. - [ ] [35] Escritura de bloques de mineral en el voxel [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+6. - [ ] [35] Remeshing diferido solo del chunk afectado [C] <!-- fuente: 35-Mineria/05-Checklist.md -->
+7. - [ ] [35] Colision por bloque de veta unificada con el voxel [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+8. - [ ] [35] Validacion de ocupacion reutilizando API de lectura M08 [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+9. - [ ] [35] Vetas en paredes y techos de cuevas [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+10. - [ ] [35] Iluminacion de brillo en vetas profundas [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+11. - [ ] [35] Compatible con el ahorro de memoria de chunks [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+12. - [ ] [35] Nodos especiales de cristal gigante sembrados por eventos de M26 [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+13. - [ ] [35] Zona ancestral accesible permanentemente tras completar el Templo [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+14. - [ ] [35] Iluminacion del Templo resalta vetas raras [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+15. - [ ] [35] Acceso a cuevas desde el interior del Templo [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+16. - [ ] [35] Evento de derrumbe decorativo en la sala del mineral ancestral [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+17. - [ ] [35] Respawn con zona ocupada: reintento diferido [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+18. - [ ] [35] Respawn con jugador dentro: desplazamiento suave [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+19. - [ ] [35] Respawn con construccion M17 encima: espera al proximo dia [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+20. - [ ] [35] Veta en borde de chunk: sin duplicacion ni perdida [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+21. - [ ] [35] Remeshing localizado y diferido por chunk [C] <!-- fuente: 35-Mineria/05-Checklist.md -->
+22. - [ ] [35] Pool de particulas de mineria [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+23. - [ ] [35] Raycast con mascara de colision exclusiva [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+24. - [ ] [35] Frame budget global respetado en remeshing masivo [C] <!-- fuente: 35-Mineria/05-Checklist.md -->
+25. - [ ] [35] Particulas de chispas al golpear [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+26. - [ ] [35] Particulas de satisfaccion al extraer [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+27. - [ ] [35] Sonido de golpe distinto por material [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+28. - [ ] [35] Sonido de extraccion gratificante [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+29. - [ ] [60] M08: el resto del mundo se regenera con la semilla (procedural) [C] -- iter. 4: es trabajo de M08 (Voxel Tools). M60 guarda y devuelve la semilla (ver <!-- fuente: 60-Datos-Y-Serializacion/05-Checklist.md -->
+30. - [ ] [60] M08: contrato de "edits" ajustado al formato real de Voxel Tools [M] -- agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) do <!-- fuente: 60-Datos-Y-Serializacion/05-Checklist.md -->
+31. - [ ] [60] M08: log con cantidad de chunks editados cargados [S] -- iter. 4: no existe (sólo hay `print` al GUARDAR). Se deja abierto. <!-- fuente: 60-Datos-Y-Serializacion/05-Checklist.md -->

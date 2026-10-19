@@ -81,13 +81,13 @@
 
 | M04 Game Engine | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | F1 | V1 | Validar la base del proyecto Godot 4.7.2 y confirmar runtime sin bloqueos | Proyecto arrancable y sin errores de motor antes de seguir con M05/M07 | `game/isla-ancestral/project.godot`, `game/isla-ancestral/scenes/main_island.tscn`, correción de Transform3D y strings |
 
-| M05 Lenguaje y Programacion | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | F1 | V0 | Convenciones GDScript aplicadas | Tipado estatico, naming correcto, anti-patrones documentados | `GUIA-GODOT/INDICE.md`, scripts varios |
+| M05 Lenguaje y Programacion | âœ… COMPLETADO | MiMo V2.5 (OpenCode) | F1 | V0 | Convenciones GDScript aplicadas | Tipado estatico, naming correcto, anti-patrones documentados | `GUIA-GODOT/INDICE.md`, scripts varios |
 
 | M08 Mundo Voxel | ✅ Completado | MiMo V2.5 (OpenCode) | F2 | V2 | Voxel Tools configurado | Terreno OK, colisión OK, WASD OK, cámara OK, edición E/Q OK | `scripts/world/flat_ground_generator.gd`, `scripts/player/player.gd`, `scripts/main_island.gd` |
 
 | M11 Personaje del Jugador | 🟡 Liberado con dudas (Log 1069, 2026-09-19 08:08) — Logs 1055/1062/1064/1069 | nex-n2.5-pro (Nex-AGI) / Kilo Code (liberado) | F3 | V2 | Diseño B–H con 73 `[?]`; código live limitado a movimiento/colisión/edición/hotbar | Suite headless 30/0 + auditoría código↔diseño + gate CI duro verificado; QA cruzado pendiente | `game/isla-ancestral/scripts/player/test_player_m11.gd`, `.github/workflows/quality.yml`, `DOCUMENTACION/11-Personaje-Del-Jugador/plan-actual/`, `CHECKLIST-GLOBAL.md`, `Mensajes entre modelos/ESTADO-PARALELO.md` |
 
-| M12 Camara | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | Camera3D + rotacion + zoom + colision + GameSettings | Rotacion mouse, zoom scroll, colision terreno, sensibilidad configurable | `scripts/follow_camera.gd` |
+| M12 Camara | âœ… Completado | MiMo V2.5 (OpenCode) | F3 | V2 | Camera3D + rotacion + zoom + colision + GameSettings | Rotacion mouse, zoom scroll, colision terreno, sensibilidad configurable | `scripts/follow_camera.gd` |
 
 | M53 UI/UX | 🟡 Liberado c/iter. 1 | MiMo V2.5 → Deepseek V4 Flash (Kilo) | F6 | V2 | Infraestructura core UI creada (MiMo) + capas modales (Deepseek, Log 265) | UIManager, UILayer, MenuNavigator, HUDScreen, TooltipService, NotificationService, ThemeUx, DialogLayer, PauseLayer, MenusLayer, ConfirmPopup | `scripts/ui/core/`, `scripts/ui/hud/`, `scripts/ui/services/`, `scripts/ui/theme/`, `scripts/ui/layers/` |
 
@@ -179,7 +179,7 @@ Ningun agente debe reservar un modulo solo porque aparezca como `🟢 Disponible
 
 - [ ] El modulo aparece en una fase habilitada de esta guia.
 
-- [ ] Todas sus dependencias tecnicas estan `✅` o tienen un contrato aprobado para el hito actual.
+- [ ] Todas sus dependencias tecnicas estan `âœ…` o tienen un contrato aprobado para el hito actual.
 
 - [ ] No existe otro agente trabajando en el modulo o en sus archivos.
 
@@ -415,7 +415,7 @@ Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante est
 
 - [ ] Un agente V0 no debe modificar escenas, materiales, layout, camara, iluminacion ni assets que otro agente V2 este revisando.
 
-- [ ] Un modulo V1 puede ser trabajado sin vision, pero queda con QA visual pendiente y no puede declararse definitivamente `✅` si su checklist exige captura.
+- [ ] Un modulo V1 puede ser trabajado sin vision, pero queda con QA visual pendiente y no puede declararse definitivamente `âœ…` si su checklist exige captura.
 
 - [ ] La vision es un recurso de validacion compartido: reservarla en `ESTADO-PARALELO.md` cuando dos tareas dependan de la misma ventana o Blender.
 
@@ -965,7 +965,7 @@ Al finalizar o liberar:
 
 - [ ] Liberar el estado `🔵`/`🔴` a `🟢`, `🟡` o `✅`.
 
-- [ ] No marcar `✅` si queda algun `[?]`.
+- [ ] No marcar `âœ…` si queda algun `[?]`.
 
 - [ ] Solicitar QA cruzado cuando corresponda.
 
@@ -1073,7 +1073,7 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 
 
 
-1. **Leer `CHECKLIST-GLOBAL.md`** → buscar tu nombre en la columna **Recom**.
+1. **Leer `CHECKLIST-GLOBAL.md`** â†’ buscar tu nombre en la columna **Recom**.
 
 2. **Elegir un módulo** `🟢 Disponible` que te corresponda por modelo.
 
@@ -1083,7 +1083,7 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 
 5. **Trabajar** → documentación primero, código, tests (AGENTS.md §13-14).
 
-6. **Liberar** → actualizar los 4 registros al mismo tiempo.
+6. **Liberar** â†’ actualizar los 4 registros al mismo tiempo.
 
 
 
@@ -1099,21 +1099,21 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 
 |---:|---|:---:|:---:|---|---|---|---|---|---|
 
-| 1 | M04 Game Engine | 5 | V1 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | Fase 0 completa | Proyecto Godot ejecutable, Godot 4.7.2, sin errores de motor | 2026-08-26 |
+| 1 | M04 Game Engine | 5 | V1 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | Fase 0 completa | Proyecto Godot ejecutable, Godot 4.7.2, sin errores de motor | 2026-08-26 |
 
-| 2 | M05 Lenguaje y Programacion | 3 | V0 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | Contrato de M04 | Convenciones GDScript aplicadas, tipado estatico | 2026-08-26 |
+| 2 | M05 Lenguaje y Programacion | 3 | V0 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | Contrato de M04 | Convenciones GDScript aplicadas, tipado estatico | 2026-08-26 |
 
-| 3 | M07 Arquitectura General | 5 | V0 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M04/M05 | EventBus(9 dominios) + ServiceRegistry + Bootstrap + test 6/6 PASS | 2026-08-26 |
+| 3 | M07 Arquitectura General | 5 | V0 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M04/M05 | EventBus(9 dominios) + ServiceRegistry + Bootstrap + test 6/6 PASS | 2026-08-26 |
 
-| 4 | M08 Mundo Voxel | 5 | V2 | ✅ Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | F1 aprobada | VoxelBoxMover + terreno OK + edicion E/Q OK | 2026-08-26 |
+| 4 | M08 Mundo Voxel | 5 | V2 | âœ… Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | F1 aprobada | VoxelBoxMover + terreno OK + edicion E/Q OK | 2026-08-26 |
 
-| 5 | M10 Generacion del Mundo | 5 | V1 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M08 | world_generator.gd + IslandGenerator + semilla 42 + 21 bloques con colores | 2026-08-26 |
+| 5 | M10 Generacion del Mundo | 5 | V1 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M08 | world_generator.gd + IslandGenerator + semilla 42 + 21 bloques con colores | 2026-08-26 |
 
-| 6 | M09 Terreno y Geografia | 4 | V2 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M08/M10 | Isla Aurora: forma definida, playa visible, biomas (beach/grass/forest/mountain/snow), spawn en playa | 2026-08-26 |
+| 6 | M09 Terreno y Geografia | 4 | V2 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M08/M10 | Isla Aurora: forma definida, playa visible, biomas (beach/grass/forest/mountain/snow), spawn en playa | 2026-08-26 |
 
 | 7 | M11 Personaje del Jugador | 4 | V2 | 🟡 Con dudas — liberado | — | nex-n2.5-pro liberó | M08 | Núcleo live: movimiento, colisión voxel, salto, edición, hotbar e integración M155; suite 30/0; 50/123, 73 `[?]`, QA §21.8 pendiente (Log 1069) | 2026-09-19 08:08 |
 
-| 8 | M12 Camara | 2 | V2 | ✅ Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | M11 | CameraFollowing: rotacion mouse + zoom scroll + colision terreno + GameSettings (sensibilidad + invert Y) | 2026-08-26 |
+| 8 | M12 Camara | 2 | V2 | âœ… Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | M11 | CameraFollowing: rotacion mouse + zoom scroll + colision terreno + GameSettings (sensibilidad + invert Y) | 2026-08-26 |
 
 | 9 | M13 Herramientas | 4 | V2 | 🟡 Liberado c/integraciones | Hy4 | Hy3 (Kilo) — relevo autorizado por el usuario | M08+M11 | Fase 3 cerrada: extracción progresiva + highlight + HUD durabilidad + sonido/partículas; 65/102; pendientes con dueño (M16/M17/M33/M35/M46/M59) | 2026-08-28 23:00 |
 
@@ -1206,3 +1206,5 @@ Al reservar un módulo, el agente debe agregar este bloque al inicio de `DOCUMEN
 
 Al liberar el módulo, el agente actualiza simultáneamente este bloque, la fila de esta sección, `CHECKLIST-GLOBAL.md` y `ESTADO-PARALELO.md`. Debe conservar el historial en las notas del agente y nunca marcar `✅` si quedan dudas `[?]`.
 
+
+> **M90 (2026-10-22):** 🔵 RESERVADO agnes-3-flash (Kilo Code) — frente COLA A repoblada #768 (aplicar_env post-processing + sliders); CERRADO tanda 1 (149→155/249).

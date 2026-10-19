@@ -1030,3 +1030,102 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 **Plataforma:** Kilo Gateway / OpenCode / Vercel AI Gateway / OpenRouter
 **Fecha de alta:** 2026-10-06 (investigación y alta por Atria-Dawn-Preview sesión s3 / Kilo Code)
 **Evidencia en este repo:** ninguna aún (sin sesiones de trabajo) — specs verificadas en fuentes externas + Kilo Gateway verificado in-house
+
+
+## REPOBLACION V3 (2026-10-19T00:01:42) — items REALES de 05-Checklist (fuente en comentario)
+
+1. - [ ] [108] Vincular el problema con la optimización obligatoria del proyecto (AGENTS.md 21.4.8) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+2. - [ ] [108] Definir el alcance: models 3D, texturas, materiales, audio, fuentes, UI y paletas voxel [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+3. - [ ] [108] Excluir del alcance: el terreno voxel generado en runtime por Voxel Tools (M08) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+4. - [ ] [108] Registrar dependencias: M45 (Arte 3D) y M78 (Legal PI), con relaciones a M04, M08, M47, M48, M61, M62, M63, M86, M107, M111, M112, M118 [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+5. - [ ] [108] Establecer que M45 puede estar sin documentar y se referencia por su catálogo de entregables [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+6. - [ ] [108] Fijar los criterios de aceptación del módulo (7 criterios del 01-Requerimientos) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+7. - [ ] [108] RF2: admitir gltf + bin en staging para edición y diffs legibles [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+8. - [ ] [108] RF2: definir PNG como textura lossless con canal alfa [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+9. - [ ] [108] RF2: definir WebP como textura lossy sin alfa dura [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+10. - [ ] [108] RF2: definir OGG Vorbis como audio estándar (música, ambiente, SFX) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+11. - [ ] [108] RF2: admitir WAV solo para loops cortos de UI/feedback ≤ 5 s [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+12. - [ ] [108] RF3: prohibir FBX como entrada directa y documentar la ruta de conversión Blender → glTF [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+13. - [ ] [108] RF3: prohibir TGA, BMP y GIF como texturas de entrada [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+14. - [ ] [108] RF3: prohibir MP3, M4A y MIDI como audio de entrada [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+15. - [ ] [108] Definir TTF/OTF con licencia libre verificada como fuente (M88: Nunito, Fredoka One) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+16. - [ ] [108] Exigir potencias de 2 en texturas para compresión VRAM eficiente [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+17. - [ ] [108] Fijar límites de resolución por tipo: props ≤ 2048², atlas ≤ 4096², iconos ≤ 256² [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+18. - [ ] [108] Definir paletas voxel como PNG atlas con mipmaps off y filtrado off (anti-bleeding M08) [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+19. - [ ] [108] RF4: definir prefijos obligatorios por tipo: mdl_, tex_, mat_, aud_, anim_, fnt_, ui_, vox_ [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+20. - [ ] [108] RF4: usar snake_case en minúsculas sin espacios, tildes, ñ ni caracteres especiales [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+21. - [ ] [108] RF4: definir la secuencia {prefijo}_{entidad}_{variante}_{sufijo} [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+22. - [ ] [108] RF4: numerar variantes en dos dígitos (_01) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+23. - [ ] [108] RF4: usar sufijos de mapa: _albedo, _normal, _roughness, _emission, _height [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+24. - [ ] [108] RF4: garantizar que el id nunca se reutiliza tras un retiro [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+25. - [ ] [108] Definir la convención opcional de respaldo _lod0/_lod1/_lod2 para LODs manuales [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+26. - [ ] [108] RF5: definir preset de textura 3D: mipmaps on, VRAM Compressed, high_quality, filter on, repeat off [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+27. - [ ] [108] RF5: definir preset de textura UI: mipmaps off, VRAM Compressed, filter off según caso [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+28. - [ ] [108] RF5: definir preset de paleta voxel: mipmaps off, filter off, repeat off [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+29. - [ ] [108] RF5: definir preset de audio OGG con calidad por uso (música alta, SFX media) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+30. - [ ] [108] RF5: definir preset de audio WAV loop con normalize, trim y bounds de loop [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+31. - [ ] [108] RF5: definir preset de fuente TTF con MSDF on, antialiasing on y subsetting [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+32. - [ ] [108] RF6: activar mipmaps en todas las texturas de runtime [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+33. - [ ] [108] RF6: usar compresión VRAM BPTC/S3TC en PC vía Godot [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+34. - [ ] [108] RF6: generar shadow mesh en meshes para sombras baratas [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+35. - [ ] [108] RF6: definir presupuesto por tipo: props ≤ 1.5k tris, NPCs ≤ 6k, fauna ≤ 4k, mobiliario ≤ 2.5k [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+36. - [ ] [108] RF6: instanciar props repetidos con MultiMesh o VoxelInstancer (M08) [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+37. - [ ] [108] RF6: usar un solo mesh con N transforms para vegetación y piedras decorativas [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+38. - [ ] [108] Usar atlas ≤ 4096² con margen de 4 px anti-bleeding para props compartidos [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+39. - [ ] [108] Preparar los presets para poder cambiar a ETC2/ASTC si hubiera mobile (M96) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+40. - [ ] [108] Verificar en review ausencia de popping visible en transición de LODs [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+41. - [ ] [108] RF9: revisar escala correcta en grilla de 1 m del mundo (M08) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+42. - [ ] [108] RF9: revisar origen y pivote del modelo en posición correcta [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+43. - [ ] [108] RF9: revisar UVs sin superposición accidental y normal maps consistentes [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+44. - [ ] [108] RF9: revisar alfa sin bordes blancos (fix_alpha_border) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+45. - [ ] [108] RF9: revisar mipmaps y filtrado visualmente sin saltos [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+46. - [ ] [108] RF9: revisar LODs a las distancias de uso y sombras sin artefactos [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+47. - [ ] [108] RF9: revisar look dev cozy coherente con la dirección de arte [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+48. - [ ] [108] RF9: revisar peso estimado en memoria contra la tabla por tipo [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+49. - [ ] [108] RF9: revisar que la ficha esté completa, incluida la licencia (M78) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+50. - [ ] [108] RN: calidad visual cozy sin texturas 4K indiscriminadas; atlas y MultiMesh para draw calls bajos [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+51. - [ ] [108] RN: binarios grandes gestionados con Git LFS (M06/M107) [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+52. - [ ] [108] Justificar WebP sobre JPG: sin artefactos de bloque en arte flat cozy [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+53. - [ ] [108] Justificar PNG sobre TGA: soporte universal y canal alfa [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+54. - [ ] [108] Justificar OGG sobre MP3: sin licencias de códec y streaming nativo [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+55. - [ ] [108] Analizar la compresión por plataforma: BPTC/S3TC PC, ETC2/ASTC futuro mobile [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+56. - [ ] [108] Analizar batching y atlasing por categorías visuales del proyecto [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+57. - [ ] [108] Documentar el riesgo de bleeding de atlas y su mitigación (margen + mipmaps off) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+58. - [ ] [108] Definir que staging/ es la única puerta de entrada (RF1) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+59. - [ ] [108] Definir que archive/ conserva retirados sin cargarse [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+60. - [ ] [108] Definir el flujo de estados: staging → validado → en_review → aprobado → retirado [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+61. - [ ] [108] M45: modelar props y NPCs respetando la metría de 1 m del mundo voxel [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+62. - [ ] [108] M47: respetar los sufijos de mapas (albedo/normal/roughness/emission) definidos en Texturas y Materiales [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+63. - [ ] [108] M48: animaciones embebidas en glb; anim_ solo para clips excepcionales [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+64. - [ ] [108] M63: ids estables = rutas estables para el caché LRU y el streaming de texturas [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+65. - [ ] [108] M08: paletas voxel en voxel_palettes/ con filtrado off y mipmaps off [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+66. - [ ] [108] M08: props del mundo instanciados con VoxelInstancer/MultiMesh compartido [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+67. - [ ] [108] M61: ejecutar los presupuestos finos de Rendimiento cuando estén publicados (en curso) [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+68. - [ ] [108] Atlas que excede 4096²: rechazo con sugerencia de dividir por categorías [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+69. - [ ] [108] Audio WAV de más de 5 s: rechazo con sugerencia de conversión a OGG [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+70. - [ ] [108] Reportes markdown con resumen ejecutivo (aprobados, errores, pendientes) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+71. - [ ] [108] El apilado de atlas se hace una sola vez por categoría y se cache a su resultado [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+72. - [ ] [108] El índice _APROBADAS.md se regenera incrementalmente, no de cero [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+73. - [ ] [108] Probar el edge case de textura sin comprimir y su corrección con presets [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+74. - [ ] [108] Probar la generación de LODs y shadow meshes en un glb de referencia [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+75. - [ ] [108] Probar el promote/retiro dejando el índice _APROBADAS.md correcto [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+76. - [ ] [91] Sonidos de interfaz — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): sus hijos L110-L114 y L116 siguen en [ ] a propósito y 03-Diseno  <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+77. - [ ] [91] Pruebas con auriculares — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): el DISEÑO está completo (L150 [x], L152 [x], L157 [x]) y L151 <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+78. - [ ] [91] Pruebas con altavoces — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): el DISEÑO está completo (L160, L161, L162, L163 y L167 todos [x <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+79. - [ ] [91] Definir accesibilidad (M58) para ajustes de tamaño y contraste <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+80. - [ ] [91] Definir toggle de sonidos de interfaz (on/off) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+81. - [ ] [91] Definir sonidos de hover (cursor sobre botón) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+82. - [ ] [91] Definir sonidos de click (click en botón) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+83. - [ ] [91] Definir sonidos de notificaciones (notificaciones de logros, misiones) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+84. - [ ] [91] Definir sonidos de errores (error en acción) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+85. - [ ] [91] Definir eventos de UI para trigger de sonidos <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+86. - [ ] [91] Definir espacial 3D (HRTF) — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): Godot 4.7.2 NO expone HRTF (sondeo T-107; ver 03-Diseno §5 <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+87. - [ ] [91] Diseñar alto contraste (toggle) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+88. - [ ] [91] Diseñar subtítulos en diferentes idiomas (español, portugués, francés, alemán, italiano, ruso) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+89. - [ ] [91] Diseñar localización de nombres de dispositivos de salida <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+90. - [ ] [91] Diseñar controles para sonidos de interfaz (toggle) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+91. - [ ] [91] Diseñar botones de prueba (auriculares, altavoces) <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+92. - [ ] [91] Diseñar método play_hover_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+93. - [ ] [91] Diseñar método play_click_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+94. - [ ] [91] Diseñar método play_notification_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+95. - [ ] [91] Diseñar método play_error_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->

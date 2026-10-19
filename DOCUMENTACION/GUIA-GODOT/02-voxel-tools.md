@@ -1,8 +1,8 @@
 # Voxel Tools — Errores Comunes y Recetas
 
-> **Modelo:** MiMo V2.5
+> **Modelo:** DeepSeek-V4.1-Flash (DS-V4.1-Flash-Opencode, modificada 2026-10-19 — §20; original: MiMo V2.5)
 > **Plataforma:** OpenCode
-> **Fecha:** 2026-09-09
+> **Fecha:** 2026-10-19
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §2 + §9.31/9.35/9.40/9.44/9.63 + §10
 > **Validado en:** Isla Ancestral — Godot 4.7.2 + zylann.voxel GDExtension
 
@@ -288,3 +288,24 @@ Ver sección "Cámara, Input y Movimiento" para:
 - Cálculo de right vector de cámara (§9.32)
 - Movimiento relativo a cámara (§9.30)
 - Cámara rota pero competía con edición de bloques (§9.25 §9.29)
+
+---
+
+## 20. VoxelToolBuffer no es instanciable desde GDScript (sonda Tanda 65, 2026-10-19)
+
+Hallazgo al pinear el ítem M62 L142 (diffs/ediciones M08 sin historial infinito): en este build
+(Godot 4.7.2 + zylann.voxel), **`VoxelToolBuffer` no se puede construir desde GDScript**.
+
+Evidencia (sondas `--headless --script`):
+- `ClassDB.class_exists("VoxelToolBuffer")` → `true`, pero `can_instantiate` → `false`.
+- `VoxelToolBuffer.new(vb)` → parse error "Too many arguments for 'new()' call. Expected at most 0 but received 1" (constructor no bindeado).
+- `ClassDB.instantiate("VoxelToolBuffer")` → `null`; `VoxelToolBuffer.new()` → `null`.
+- Su lista de 111 métodos **no incluye `set_buffer`**; `VoxelTool` no expone factory ("buffer"/"from").
+- Sí son instanciables: `VoxelTerrain`, `VoxelStreamMemory`, `VoxelBuffer`.
+
+**Implicación para tests:** para editar voxels sin un `VoxelTerrain` real, usar `VoxelBuffer`
+directo (`set_voxel`/`get_voxel` por celda) o un `VoxelTerrain` con `VoxelTool` real
+(`terrain.get_voxel_tool()`); **NO** intentar `VoxelToolBuffer.new(...)` ni `ClassDB.instantiate`.
+
+Uso real en producción: `tool_controller.gd` edita con `_get_vt()` → `do_point(...)` (una escritura
+por acción; sin `do_sphere`/`do_box`). Referencia: suite `test_m62_diffs_ediciones.gd` (Tanda 65).

@@ -82,8 +82,8 @@
 - [x] Definir cercana (50 unidades, 100m) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["baja"] = 300 m`.
 - [x] Definir media (100 unidades, 200m) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `DISTANCIA["media"] = 600 m`.
 - [x] Definir lejana (200 unidades, 400m) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). alta 1200 m / ultra 2500 m.
-- [ ] Definir culling de objetos fuera de distancia
-- [ ] Definir LODs para objetos lejanos (M50) â€” **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_island.gd` L143-154 configura `lod_split_count = 5` y `lod_distance = 160.0` (anillos 2Ã—/4Ã—/8Ã—/16Ã—/32Ã—). No se encontrÃ³ LOD ni culling por distancia para objetos individuales.
+- [x] Definir culling de objetos fuera de distancia -- agnes-3-flash 2026-10-22 (M90 t5): CULLING (frustum+por_distancia) + mapeo_culling() en graphics_config.gd + test. Cull por distancia = DISTANCIA por calidad.
+- [x] Definir LODs para objetos lejanos (M50) â€” **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_island.gd` L143-154 configura `lod_split_count = 5` y `lod_distance = 160.0` (anillos 2Ã—/4Ã—/8Ã—/16Ã—/32Ã—). No se encontrÃ³ LOD ni culling por distancia para objetos individuales. -- agnes-3-flash 2026-10-22 (M90 t5): DISENO de LOD por objeto definido: LOD (habilitado/distance=160/niveles=4) + mapeo_lod() + depende_m50. La IMPLEMENTACION del LOD por objeto = M50 (marcado).
 - [x] Definir fog para ocultar transiciÃ³n â€” implementado (step-5-kilocode, Kilo Code, 2026-10-12): `scripts/main_island.gd` L198-202, "Niebla marina: el borde del ocÃ©ano se funde con el cielo", con `env_node.environment.fog_enabled = true`.
 
 ### [S] Calidad de efectos
@@ -147,7 +147,7 @@
 - [x] Definir threshold (slider 0-1) -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
 - [x] Definir radius (slider 0-1) -- agnes-3-flash 2026-10-22 (M90 tanda 2): cubierto por RANGOS_SLIDERS + alidar_slider + mapeo_post en graphics_config.gd + 	est_graphics_config_post_m90.gd. Runtime pendiente QA.
 - [ ] Definir bloom shader para glow
-- [ ] Definir threshold para fuentes de luz brillantes
+- [x] Definir threshold para fuentes de luz brillantes -- agnes-3-flash 2026-10-22 (M90 t4): `RANGOS_SLIDERS['bloom_threshold']` + `validar_slider` en graphics_config.gd.
 
 ### [S] Motion blur
 - [x] Definir toggle de motion blur -- Motion blur toggle: mapeo_post()['motion_blur'] (post y toggle). **agnes-3-flash 2026-10-22: implementado vÃ­a plicar_env/mapeo_post + test.
@@ -203,13 +203,13 @@
 - [x] Definir GPU ultra + RAM ultra + CPU ultra Ã¢â€ â€™ preset ultra
 
 ### [S] IntegraciÃ³n con M58 (Accesibilidad)
-- [ ] DiseÃ±ar tamaÃ±o de fuente (slider 0.5x a 2x)
-- [ ] DiseÃ±ar alto contraste (toggle)
-- [ ] DiseÃ±ar reducciÃ³n de motion blur (opciÃ³n para reducir mareo)
+- [x] DiseÃ±ar tamaÃ±o de fuente (slider 0.5x a 2x) -- agnes-3-flash 2026-10-22 (M90 t4): accesibilidad en graphics_config.gd (ACCESIBILIDAD_DEFAULT + mapeo_accesibilidad + fijar/acceder_accesibilidad + validar_slider) + test_graphics_config_post_m90.gd. Runtime pendiente QA.
+- [x] DiseÃ±ar alto contraste (toggle) -- agnes-3-flash 2026-10-22 (M90 t4): accesibilidad en graphics_config.gd (ACCESIBILIDAD_DEFAULT + mapeo_accesibilidad + fijar/acceder_accesibilidad + validar_slider) + test_graphics_config_post_m90.gd. Runtime pendiente QA.
+- [x] DiseÃ±ar reducciÃ³n de motion blur (opciÃ³n para reducir mareo) -- agnes-3-flash 2026-10-22 (M90 t4): accesibilidad en graphics_config.gd (ACCESIBILIDAD_DEFAULT + mapeo_accesibilidad + fijar/acceder_accesibilidad + validar_slider) + test_graphics_config_post_m90.gd. Runtime pendiente QA.
 - [ ] DiseÃ±ar reducciÃ³n de bloom (opciÃ³n para reducir distracciÃ³n visual)
 - [x] DiseÃ±ar ajustes en menÃº de configuraciÃ³n grÃ¡fica
 - [x] DiseÃ±ar guardado en settings (M90)
-- [ ] DiseÃ±ar aplicaciÃ³n en tiempo real
+- [x] DiseÃ±ar aplicaciÃ³n en tiempo real -- agnes-3-flash 2026-10-22 (M90 t4): aplicacion en tiempo real = plicar_env() (aplica al Environment al cambiar el preset) + mapeo_accesibilidad(). Runtime pendiente.
 
 ### [S] IntegraciÃ³n con M61 (Rendimiento)
 - [ ] DiseÃ±ar FPS counter (opcional, en debug)
@@ -220,11 +220,11 @@
 - [ ] DiseÃ±ar monitoreo visible en debug (M110)
 
 ### [S] IntegraciÃ³n con M88 (Fuentes TipogrÃ¡ficas)
-- [ ] DiseÃ±ar tamaÃ±o de fuente (slider 0.5x a 2x)
-- [ ] DiseÃ±ar alto contraste (toggle)
+- [x] DiseÃ±ar tamaÃ±o de fuente (slider 0.5x a 2x) -- agnes-3-flash 2026-10-22 (M90 t4): accesibilidad en graphics_config.gd (ACCESIBILIDAD_DEFAULT + mapeo_accesibilidad + fijar/acceder_accesibilidad + validar_slider) + test_graphics_config_post_m90.gd. Runtime pendiente QA.
+- [x] DiseÃ±ar alto contraste (toggle) -- agnes-3-flash 2026-10-22 (M90 t4): accesibilidad en graphics_config.gd (ACCESIBILIDAD_DEFAULT + mapeo_accesibilidad + fijar/acceder_accesibilidad + validar_slider) + test_graphics_config_post_m90.gd. Runtime pendiente QA.
 - [x] DiseÃ±ar ajustes de fuentes en menÃº de configuraciÃ³n grÃ¡fica
 - [x] DiseÃ±ar guardado en settings (M90)
-- [ ] DiseÃ±ar aplicaciÃ³n en tiempo real
+- [x] DiseÃ±ar aplicaciÃ³n en tiempo real -- agnes-3-flash 2026-10-22 (M90 t4): aplicacion en tiempo real = plicar_env() (aplica al Environment al cambiar el preset) + mapeo_accesibilidad(). Runtime pendiente.
 
 ### [S] MenÃº de configuraciÃ³n grÃ¡fica
 - [x] DiseÃ±ar GraphicsSettingsMenu
@@ -238,7 +238,7 @@
 - [ ] DiseÃ±ar controles para upscaling (dropdown)
 - [ ] DiseÃ±ar controles para calidad de sombras (dropdown)
 - [ ] DiseÃ±ar controles para calidad de texturas (dropdown)
-- [ ] DiseÃ±ar controles para distancia de dibujado (slider)
+- [x] DiseÃ±ar controles para distancia de dibujado (slider) -- agnes-3-flash 2026-10-22 (M90 t5): slider distancia_dibujado [300,2500] en RANGOS_SLIDERS + alidar_slider + mapeo_culling()['cull_distance_metros'] = distancia_metros(calidad).
 - [ ] DiseÃ±ar controles para calidad de efectos (dropdown)
 - [ ] DiseÃ±ar controles para calidad de vegetaciÃ³n (dropdown)
 - [ ] DiseÃ±ar controles para calidad de agua (x] DiseÃ±ar controles para calidad de partÃ­culas (dropdown)
@@ -321,7 +321,7 @@
 - [ ] DiseÃ±ar 06-Plan-Testings.md (APLICA)
 - [x] DiseÃ±ar tests de presets grÃ¡ficos
 - [ ] DiseÃ±ar tests de ajustes individuales
-- [ ] DiseÃ±ar tests de aplicaciÃ³n en tiempo real
+- [x] DiseÃ±ar tests de aplicaciÃ³n en tiempo real -- agnes-3-flash 2026-10-22 (M90 t4): `test_graphics_config_post_m90.gd` cubre aplicar_env + mapeo_accesibilidad. Runtime pendiente.
 - [x] DiseÃ±ar tests de guardado y carga de configuraciÃ³n
 - [ ] DiseÃ±ar tests de detecciÃ³n automÃ¡tica de hardware
 
@@ -334,7 +334,7 @@
 ## Dependencia: VisiÃ³n del Agente (M154)
 
 - [x] Verificar que el M154 (VisiÃ³n del Agente) estÃ¡ implementado y operativo (al menos una vÃ­a activa) antes de comenzar cualquier trabajo visual de este mÃ³dulo â€” ver `DOCUMENTACION/154-Vision-Del-Agente/` y secciÃ³n 25 de AGENTS.md [S]
-**Totales:** 249 Ã­tems Â· Completados: 169 Â· Pendientes: 76 Â· No resueltos: 4. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la lÃ­nea decÃ­a 123/122/4; conteo real por regex = 155 [x] / 4 [?] / 90 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
+**Totales:** 249 Ã­tems Â· Completados: 181 Â· Pendientes: 64 Â· No resueltos: 4. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la lÃ­nea decÃ­a 123/122/4; conteo real por regex = 155 [x] / 4 [?] / 90 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
 
 > **Agregado por auditorÃ­a de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenÃ­a lÃ­nea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?].

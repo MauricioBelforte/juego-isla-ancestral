@@ -47,8 +47,8 @@
 6. M62-Memoria (113/150): QA de delta iter.6 (L98, pureza_save 58/0) — 8 [M]
 7. M108-Pipeline (127/205): QA de los lotes cerrados — 10 [M]
 8. M107-Backups (167/176): QA de cierre — 8 [M]
-9. M112-Testing (211/225): QA de los 211 [x] — 10 [M]
-10. M118-CI/CD (105/106): QA del pipeline quality.yml (4 suites cableadas) — 6 [M]
+9. M112-Testing (211/225): QA de los 211 [x] — 10 [M] — [x] cerrado Hy3 (Log 2002 / msg 268, 2026-10-18, §21.8 APROBADO)
+10. M118-CI/CD (106/106 medido): QA §21.8 re-verif — [x] Hy3 (Log 2008 / msg 270, 2026-10-19): 106/[ ]=0/[?]=0; quality.yml válido (EXIT=0, 6/6); drift Totales L144 105/0/1→106/0/0 pendiente del director (no lo edito)
 11. M117-Build (92/110): QA del sistema de builds — 8 [M]
 12. M110-Debug (150/225): QA del lote de paneles — 8 [M]
 13. M91-Config-Audio (212/239): QA de los avances de step-5-kilocode (232 archivos) — 10 [M]
@@ -861,7 +861,7 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 - [x] **T-QA02:** M84 Musica-Y-Audio-Legal (✅ sellado hy3 Log 1217, test 15/0; gaps capa servicio = KnownIssues no bloqueantes)
 - [ ] **T-QA03:** M94 Retencion-Sin-FOMO (**arreglado por atria, BUG-061 Log 1083**, test 38/0)
 - [ ] **T-QA04:** M102 Bug-Tracking
-- [ ] **T-QA05:** M112 Testing-Automatico
+- [x] **T-QA05:** M112 Testing-Automatico — cerrado Hy3 (Log 2002 / msg 268, 2026-10-18, §21.8 APROBADO)
 - [ ] **T-QA06:** M153 Objetivo-Final (validate_vision.py 19/19)
 - [x] **T-QA07:** M154 Vision-Del-Agente (✅ sellado hy3 Log 1216, 155/155, 0[?]; 2 scripts V5 auxiliares ausentes = KnownIssue)
 - [x] **T-QA08:** M167 Isla-Raiz (✅ CERRADO + sellado hy3 Log 1212, validador 27/0)
@@ -1127,3 +1127,153 @@ Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes e
 No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
 
 Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).
+
+
+## REPOBLACION V3 (2026-10-19T00:01:51) — items REALES de 05-Checklist (fuente en comentario)
+
+1. - [ ] [37] Escena museum.tscn creada con entrada, mostrador y cartel de progreso [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+2. - [ ] [37] Cuatro salas iniciales: fauna, peces, fosiles y arte [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+3. - [ ] [37] Sala de fauna con dioramas para avistamientos de M36 [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+4. - [ ] [37] Sala de peces con acuarios para capturas de M34 [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+5. - [ ] [37] Sala de fosiles con pedestales y montajes de M25 [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+6. - [ ] [37] Sala de arte con marcos y paredes de exhibicion [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+7. - [ ] [37] Curador NPC con dialogo de recepcion y agradecimientos cozy [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+8. - [ ] [37] Iluminacion interior calida y estatica (horneada) [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+9. - [ ] [37] Navegabilidad completa de salas sin colisiones molestas [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+10. - [ ] [37] Inspeccion de pieza abre panel con nombre, procedencia y curiosidad [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+11. - [ ] [37] Variante para peces: acuario con nado animado por spline [C] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+12. - [ ] [37] Variante para fosiles: montaje en pedestal con iluminacion suave [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+13. - [ ] [37] Variante para fauna: diorama estatico con el modelo avistado [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+14. - [ ] [37] Variante para arte: cuadro en marco sobre pared [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+15. - [ ] [37] Pool de slots libres con prefab ligero (sin modelos pesados) [C] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+16. - [ ] [37] Mensajes cozy del curador al aceptar cada pieza [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+17. - [ ] [37] Trofeo final por museo 100% completado [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+18. - [ ] [37] Pieza secreta opcional desbloqueable por descubrimiento (plan futuro) [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+19. - [ ] [37] Vinculo bidireccional: consultar piezas del museo desde el diario [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+20. - [ ] [37] El diario no interrumpe el flujo de donacion (receptor async) [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+21. - [ ] [37] Historial ordenado cronologicamente sin entradas duplicadas [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+22. - [ ] [37] Items donables registrados antes de restaurar el museo (cola pendiente) [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+23. - [ ] [37] Inventario vacio al abrir el panel de donacion (UI vacia elegante) [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+24. - [ ] [37] Fallo de senal de modulo origen (M36/M34/M25) sin crasheo [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+25. - [ ] [37] Cierre del juego entre consumo y escritura de guardado (rollback) [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+26. - [ ] [37] Doble interaccion simultanea sobre la misma vitrina [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+27. - [ ] [37] Recompensa otorgada con inventario lleno (cola o correo de items) [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+28. - [ ] [37] Restauracion de curaduria (nombres y descripciones) al cargar [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+29. - [ ] [37] Panel de donacion con lista filtrada de items donables [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+30. - [ ] [37] Barra de progreso por exposicion con contador de piezas [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+31. - [ ] [37] Tooltip de vitrina al pasar el cursor (nombre y estado) [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+32. - [ ] [37] Feedback visual al donar (particulas y brillo en la vitrina) [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+33. - [ ] [37] Feedback de rechazo con motivo visible [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+34. - [ ] [37] Cartel de recompensa al completar exposicion [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+35. - [ ] [37] Navegacion completa por mando y teclado en la UI [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+36. - [ ] [37] Mensajes de estado durante la carga del edificio [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+37. - [ ] [37] Botones deshabilitados durante animaciones para evitar clicks rapidos [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+38. - [ ] [37] Vitrinas instanciadas solo para piezas registradas [C] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+39. - [ ] [37] Culling de salas distantes desde el jugador [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+40. - [ ] [37] Consultas is_registered sin allocs en hot path [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+41. - [ ] [37] Modelos de piezas con LOD o mesh simplificado [C] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+42. - [ ] [37] Iluminacion estatica horneada en interiores [C] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+43. - [ ] [37] Acuarios con simulacion de nado ligera sin fisicas por pez [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+44. - [ ] [37] Carga de sala bajo 250 ms medido con Profiler [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+45. - [ ] [37] Inspeccion y UI sin micro-stutter en el frame budget [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+46. - [ ] [37] Test: vitrina ocupada nunca sobrescrita [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+47. - [ ] [37] Test: museo 100% desbloquea el trofeo final [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+48. - [ ] [37] Test: integracion de senales con M36/M34/M25/M55 [C] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+49. - [ ] [37] Test: edge cases (inventario vacio, sala incorrecta, item inexistente) [M] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+50. - [ ] [37] Recorrido manual: visitar el museo completo tres veces seguidas [C] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+51. - [ ] [37] Polish: animacion de colocacion de la pieza en la vitrina [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+52. - [ ] [37] Polish: sonido ambiente del museo (reverb suave, musica tenue) [S] <!-- fuente: 37-Museos-Y-Colecciones/05-Checklist.md -->
+53. - [ ] [140] Modelar prerequisitos con `ICondicionDeSello` persistida en save v3 [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): la interfaz `ICondicionDeSello` <!-- fuente: 140-Alpha/05-Checklist.md -->
+54. - [ ] [140] Definir 30+ misiones secundarias, con cadenas de amistad completas (M23/M20) [C] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado contra disc <!-- fuente: 140-Alpha/05-Checklist.md -->
+55. - [ ] [140] Verificar presencia de crafting y cocina completos (60+ recetas) (M16) [C] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado contra disco — da <!-- fuente: 140-Alpha/05-Checklist.md -->
+56. - [ ] [140] Verificar presencia de artefactos 6 pasivos (M13/M71) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): 0 hits de 'artefacto' y 0 de 'pasivo' en scri <!-- fuente: 140-Alpha/05-Checklist.md -->
+57. - [ ] [140] Verificar habilidades con XP y ventajas (M71) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): hay XP (4 hits) y niveles (80) pero 0 hits de 'habili <!-- fuente: 140-Alpha/05-Checklist.md -->
+58. - [ ] [140] Definir el menú de progresión con estados visibles (M53/M71) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): no hay menu de progresion en scripts/u <!-- fuente: 140-Alpha/05-Checklist.md -->
+59. - [ ] [140] Definir integración construcción→amistad (regalos fabricados +25%) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): 0 hits de regalo fabricado en sc <!-- fuente: 140-Alpha/05-Checklist.md -->
+60. - [ ] [140] Definir integración templos→artefactos→progresión [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): cadena cortada — los artefactos pasivos no existe <!-- fuente: 140-Alpha/05-Checklist.md -->
+61. - [ ] [140] Definir el servicio `Almanaque` como única fuente de tiempo/clima/eventos [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): 0 hits en scripts/. Hoy e <!-- fuente: 140-Alpha/05-Checklist.md -->
+62. - [ ] [140] Asegurar que `HistoriaMaster` no acopla misiones individuales [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): 0 hits. Contrato definido en 2.7.1 (o <!-- fuente: 140-Alpha/05-Checklist.md -->
+63. - [ ] [140] Definir balance de recetas por isla (M16/M93) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado contra disco - data/balance/crafting.json  <!-- fuente: 140-Alpha/05-Checklist.md -->
+64. - [ ] [140] Definir 24-30 NPC con rutinas en las 4 islas [C] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — scripts/npc/ tiene 9 scripts y el elenco  <!-- fuente: 140-Alpha/05-Checklist.md -->
+65. - [ ] [140] Definir 80 coleccionables de 100 (M73) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — data/coleccionables/catalog.json tiene solo 15  <!-- fuente: 140-Alpha/05-Checklist.md -->
+66. - [ ] [140] Definir museo con las categorías completas (M37) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): el modulo 37-Museo existe y M139 definio 5 seccion <!-- fuente: 140-Alpha/05-Checklist.md -->
+67. - [ ] [140] Definir 4 eventos estacionales base (M74) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): hay 30 hits de fiesta/festival y catalogo_eventos.json (a <!-- fuente: 140-Alpha/05-Checklist.md -->
+68. - [ ] [140] Definir el recetario de 60+ con ítems de todas las islas (M16) [C] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — data/balance/crafting.j <!-- fuente: 140-Alpha/05-Checklist.md -->
+69. - [ ] [140] Definir la meta de partida completa 60-100 h [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): no verificable por disco sin telemetria de sesion real <!-- fuente: 140-Alpha/05-Checklist.md -->
+70. - [ ] [140] Definir reutilización de assets vía pipeline M108 para el contenido [C] <!-- fuente: 140-Alpha/05-Checklist.md -->
+71. - [ ] [140] Definir migración versionada v3→v3.1 (sellos, colecciones, almanaque) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — el save esta en  <!-- fuente: 140-Alpha/05-Checklist.md -->
+72. - [ ] [140] Definir flags globales de historia y artefactos [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): ausentes — no hay registro de flags globales de his <!-- fuente: 140-Alpha/05-Checklist.md -->
+73. - [ ] [140] Definir modos de color para puzzles de espejos/sombras (M58) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): los modos de color existen (8 hits: ac <!-- fuente: 140-Alpha/05-Checklist.md -->
+74. - [ ] [140] Definir navegación del diario con gamepad (M57) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): 0 hits de la combinacion diario+gamepad (si hay 29  <!-- fuente: 140-Alpha/05-Checklist.md -->
+75. - [ ] [140] Definir estados vacíos de colecciones con texto claro (M53) [S] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): los 5 hits son de otros sistemas; no ha <!-- fuente: 140-Alpha/05-Checklist.md -->
+76. - [ ] [140] Definir flujo completo verificado en Play Mode en las 4 islas [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): no verificable por disco — requiere P <!-- fuente: 140-Alpha/05-Checklist.md -->
+77. - [ ] [128] Verificar disponibilidad de dominio web (islaancestral.com) → KnownIssue no bloqueante DoD: verificacion requiere accion humana (whois + purchase); po <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+78. - [ ] [128] Registrar redes sociales con nombre consistente <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+79. - [ ] [128] Diseñar logo principal del juego <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+80. - [ ] [128] Crear variante mono (B/N) del logo <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+81. - [ ] [128] Crear variante icono (app icon) 512x512 → KnownIssue no bloqueante DoD: specs documentadas en 03-Diseno.md §2.1 (512x512 PNG); creacion requiere artis <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+82. - [ ] [128] Crear variante horizontal para headers → KnownIssue no bloqueante DoD: specs documentadas en 03-Diseno.md §2.2 (horizontal lockup); creacion requiere  <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+83. - [ ] [128] Crear variante vertical para merchandise <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+84. - [ ] [128] Exportar en formatos: PNG, SVG, AI → KnownIssue no bloqueante DoD: formatos especificados en 03-Diseno.md §2.4 (PNG raster, SVG vector, AI source); ex <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+85. - [ ] [128] Crear versiones para fondo claro y oscuro → KnownIssue no bloqueante DoD: variantes documentadas en 03-Diseno.md §2.5 (light/dark mode); creacion requ <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+86. - [ ] [128] Test de legibilidad en tamanos pequenos → KnownIssue no bloqueante DoD: criterio definido en 03-Diseno.md §2.6; testing requiere assets físicos. Defer <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+87. - [ ] [128] Test de impresión en merchandise <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+88. - [ ] [128] Aprobar logo final con equipo <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+89. - [ ] [128] Distribuir logo a partners y prensa <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+90. - [ ] [128] Crear paleta en formato ASE/CLR <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+91. - [ ] [128] Distribuir paleta al equipo de diseño <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+92. - [ ] [128] Crear muestras de tipografia → KnownIssue no bloqueante DoD: samples disenadas en 03-Diseno.md §1.3 (typography swatches); creacion requiere artista M <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+93. - [ ] [128] Distribuir fuentes al equipo → KnownIssue no bloqueante DoD: politica de fuentes documentada en 03-Diseno.md §1.4 (licencias tipograficas); distribuci <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+94. - [ ] [128] Registrar dominio islaancestral.com → KnownIssue no bloqueante DoD: registro requiere accion humana (registrador); politica documentada en 03-Diseno.m <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+95. - [ ] [128] Crear sitio web con información del juego <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+96. - [ ] [128] Crear perfiles en redes sociales principales <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+97. - [ ] [128] Crear kit de prensa con assets de marca <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+98. - [ ] [128] Crear email corporativo (press@islaancestral.com) → KnownIssue no bloqueante DoD: politica de emails corporativos documentada en 03-Diseno.md §1.6; cr <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+99. - [ ] [128] Monitorear menciones de la marca <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+100. - [ ] [128] Test de logo en tamaños mínimos <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+101. - [ ] [128] Test de legibilidad de tipografia → KnownIssue no bloqueante DoD: testing criteria documentado en 03-Diseno.md §1.8; requiere assets físicos para test <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+102. - [ ] [128] Validar que UI del juego usa paleta de marca → AUDITORÍA 2026-10-11 (Ling 3.1 Flash): NO PASA — theme_ux.gd L13-20 usa paleta pastel propia (arena/ocr <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+103. - [ ] [128] Test de impresión de logo en merchandise <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+104. - [ ] [128] Auditoría visual pre-lanzamiento <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+105. - [ ] [128] Crear brand/ con todos los assets <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+106. - [ ] [128] Crear manual-de-marca.pdf <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+107. - [ ] [128] Crear press kit descargable → KnownIssue no bloqueante DoD: estructura press kit documentada en 03-Diseno.md §1.9 (logo, screenshots, factsheet); crea <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+108. - [ ] [128] Distribuir manual a todos los socios <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+109. - [ ] [128] Actualizar manual cuando cambien elementos → KnownIssue no bloqueante DoD: politica de versionado del brand guide documentada en 03-Diseno.md §1.10 (c <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+110. - [ ] [128] Mantener backups de assets de marca <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+111. - [ ] [128] Verificar que M53 (UI/UX) usa paleta y tipografía de marca → AUDITORÍA 2026-10-11 (Ling 3.1 Flash): PARCIAL — tipografía SÍ (theme_ux.gd L23-25, fuent <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+112. - [ ] [128] Verificar que M131 (Créditos) usa formato de marca → AUDITORÍA 2026-10-11 (Ling 3.1 Flash): NO PASA — plan-actual de M131 sin referencias a identidad  <!-- fuente: 128-Identidad-De-Marca/05-Checklist.md -->
+113. - [ ] [21] RF3: tipografía progresiva con velocidad configurable [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+114. - [ ] [21] RF4: salto rápido de línea y salto completo con confirmación doble [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+115. - [ ] [21] RF8: avance automático opcional con temporizador [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+116. - [ ] [21] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+117. - [ ] [21] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+118. - [ ] [21] Usar las fuentes del modulo M87 en textos y retratos [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+119. - [ ] [21] Navegar opciones con gamepad (dpad + boton A) [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+120. - [ ] [21] Perder la rama elegida en el historial de sesion para retornos [M] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+121. - [ ] [21] Condiciones sobre progreso de la historia principal [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+122. - [ ] [21] Condiciones sobre etapa de misiones M22 y sellos M23 [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+123. - [ ] [21] Condiciones sobre eventos y festivales activos (M73) [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+124. - [ ] [21] NPC se detiene y mira al jugador durante la conversacion (M64) [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+125. - [ ] [21] La rutina del NPC (M64) se bloquea mientras habla y se reanuda despues [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+126. - [ ] [21] Efectos de opcion informan al sistema de misiones M22 [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+127. - [ ] [21] Dialogos de pistas y revelaciones conectados a M23 (templos) [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+128. - [ ] [21] Dialogos especiales por festivales (M73) con ramas temporales [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+129. - [ ] [21] Reacciones a obras del jugador (M17) via banderas del mundo [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+130. - [ ] [21] Pausa del reloj M29 pausa el tipeo sin perder estado [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+131. - [ ] [21] Guerra de inputs: el dialogo activo bloquea acciones del jugador [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+132. - [ ] [21] NPC desaparece o se aleja durante el dialogo: cierre limpio sin errores [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+133. - [ ] [21] Opcion unica con condiciones falsas: rama colapsa a next_id alternativo [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+134. - [ ] [21] Nodo OPCIONES sin opciones visibles: salta a next_id sin pantalla vacia [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+135. - [ ] [21] Dialogo interrumpido por teleport del jugador (M69): se cierra y se loguea [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+136. - [ ] [21] Guardado y carga de partida a mitad de conversacion: la conversacion se reinicia [M] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+137. - [ ] [21] Tipeo con caracteres unicode y emojis neutralizados en produccion [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+138. - [ ] [21] Lineas muy cortas y muy largas se ven correctamente [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+139. - [ ] [21] Recarga del grafo con datos rotos en caliente: el cache no se corrompe [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+140. - [ ] [21] Cache de grafos cargados con descarte LRU por limite de memoria [M] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+141. - [ ] [21] Cero allocs apreciables por frame durante el tipeo (strings precalculadas) [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+142. - [ ] [21] Fuentes del modulo M87 con atlas compartido, sin reimport por nodo [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+143. - [ ] [21] Load de JSON asincrono con carga diferida por zona del mapa [M] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+144. - [ ] [21] Presupuesto: dialogo activo agrega menos de 1 ms al frame presupuestado [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+145. - [ ] [21] Plan-actual duplicado identico del plan-inicial [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+146. - [ ] [21] Verificacion de 0 errores en consola durante una partida de prueba [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->

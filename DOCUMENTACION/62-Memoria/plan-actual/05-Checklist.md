@@ -140,13 +140,13 @@
 - [x] Sin duplicación de meshes entre M63 (streaming) y el 62 (descarga) [M]
 - [x] Generación de mallas en hilos (M08): resultados por cola sin copias extra [C]
 - [x] Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM [M]
-- [ ] Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos [M]
+- [x] Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos [M]
 - [x] Teleport extremo ×10 y vuelta al spawn deja la memoria en el mismo nivel (test) [C] — **iter. 7 (Log 1325, T-D9): MEDIDO** por la misma suite: 10 ciclos con `marcar_punto_de_interes("teleport_extremo")`, la cola queda VACÍA tras cada descarga y el conteo de objetos NO crece. **Alcance headless:** el "nivel de memoria" medido es el conteo de objetos + la retención de recursos; el RSS del mundo real (M08/M63) no es medible acá.
 - [x] El pool de chunks se ajusta al presupuesto voxel declarado (800 MB Alta) [M]
 
 ## I. Integración con M41-M44 (audio)
 
-- [ ] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región [M]
+- [x] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región [M]
 - [ ] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C]
 - [x] Voces del pool M43 con tope duro: si se llena, se corta la voz más antigua (nunca crece) [S]
 - [ ] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M]
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 125 - Pendientes: 25 - No resueltos: 0.
+**Totales:** 150 items - Completados: 127 - Pendientes: 23 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -585,3 +585,74 @@ liberación por las colas del 62/63. Mismo criterio que L137/139/140/141.
 (autogenerado).
 
 **Totales tras el cierre:** 125 / 25 / 0 (150 items).
+
+## Notas del Agente — Tanda 66 (DS-V4.1-Flash-Opencode, OpenCode, 2026-10-19, Log 2012)
+
+**Estado:** L143 cerrado por MEDICIÓN (no por argumento): suite nueva `test_m62_anillo_borde.gd`
+(24 checks, 0 fallos, ×3 corridas idénticas 3/4/5) con los DOS autoloads reales. Cierra el ítem
+"Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos".
+
+**Contrato medido (mecanismo §4 del 63, sin cambio de producción):** borde = distancia > r_max+1.0
+ESTRICTO (la frontera exacta r_max+1.0 queda dentro); una sola marca NO libera (gracia de 2 frames);
+dos marcas liberan EXACTAMENTE el borde; el contador se resetea si el chunk vuelve al rango;
+`liberar_envejecidos` es idempotente y suma a `descargas_total`.
+
+**Invariante del ítem medida (borde ANTES que nuevos):** con anillo A (5 interior + 4 borde) y la
+secuencia canónica — 62 drena su cola (9) → move r100→60 (marcar×2 + liberar: 4 del borde) → el
+borde queda 0/4 vivos mientras el interior sobrevive 5/5 → RECIÉN ENTONCES se registran los 4
+nuevos (9 activos, ninguno de los ids viejos del borde activo, balance ≤ base+9). Vía mixta 63→62
+con Resource: candidato auto, el 62 drena, el 63 cierra su libro y el payload muere (0/1 vivos).
+Ciclo completo de 2 movimientos (r200→r100): cada movimiento descarga SU borde (2+2, incluido el
+chunk recién cargado que quedó fuera) y termina en 3 activos = 3 vivos (balance ≤ base+3).
+
+**Evidencia (out/tanda66):** corrida 1 de iteración halló un defecto de harness (los WeakRef wrappers
+cuentan en `objetos_vivos`: B +22 = 9 chunks + 13 wrappers; D +1; E +10 = 3 + 7) → corregido con
+`clear()` antes del balance; corrida 2 verde; corridas 3/4/5 idénticas (24/24, exit 0; logs
+normalizados idénticos). Guardián de 3 capas EN ROJO (piso 999 → `[FALL]` + exit 1; suite
+restaurada byte-idéntica sha256 `19200978…`). Regresión: 13 suites + budgets verdes.
+
+**Alcance declarado:** el caller de producción del movimiento del anillo (M12 zoom → M63 aplicar
+r_max) todavía no está cableado en el repo; esta suite pina el mecanismo de descarga del borde
+del 62/63 y la secuencia canónica que lo cumple. El cableado M12/M63 sigue siendo deuda de esos
+módulos. Mismo criterio que L137/139/140/141/142.
+
+**No toqué:** `quality.yml` (gate de CI — es de s2/director); `stream_manager.gd` (M63,
+read-only); `memory_monitor.gd`; el colector de sintaxis (autogenerado).
+
+**Totales tras el cierre:** 126 / 24 / 0 (150 items).
+
+## Notas del Agente — Tanda 67 (DS-V4.1-Flash-Opencode, OpenCode, 2026-10-19, Log 2013)
+
+**Estado:** L149 cerrado por MEDICIÓN (no por argumento): suite nueva `test_m62_audio_bioma.gd`
+(45 checks, 0 fallos, ×3 corridas idénticas 3/4/5) con el autoload real MemoryMonitor. Cierra el ítem
+"Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región".
+
+**Contrato medido (mecanismo del 62, sin cambio de producción):**
+- ENTRAR al bioma: `pedir_banco_audio` devuelve "reproducir" (el banco entra reproducible; sin
+  descargas declaradas ni diferidos).
+- SALIR de la región: el banco del bioma viejo se encola como candidato y el cambio de región
+  FUERZA su descarga (`avisar_cambio_region` == true); prueba fuerte con WeakRef: el banco NO
+  sobrevive (queda sin retención tras el drenaje).
+- Banco EN CARGA: el cambio de región lo VETA (`descartes_por_carga` +1, queda en cola, no se
+  pierde); terminada la carga, el siguiente cambio lo descarga. La salida de región no corta el
+  banco que suena.
+- CICLO ×3 (viajes): sin acumulación — la cola vuelve a 0 en cada frontera, las forzadas se
+  cuentan (+3), los viajeros mueren (WeakRef 0) y `objetos_vivos` no crece (delta 0).
+- ORDEN: drenaje por lejanía (5,3,1 estricto) y peso del banco en el lote (`resumen_ultimo_lote`
+  empieza por el banco más lejano); UNA liberación forzada por cambio aunque haya 3 bancos.
+
+**Evidencia (out/tanda67):** corrida 1 de iteración halló defectos de harness (snapshot `_camb_a`
+pre-A y refs locales retenidas en los WeakRef: banco_selva/banco_costa/array de viajes) →
+corregidos; corridas 3/4/5 idénticas (45/45, exit 0; logs normalizados de 399 líneas idénticos).
+Guardián de 3 capas EN ROJO (piso 999 → `[FALL]` + exit 1; suite restaurada byte-idéntica sha256
+`e24b72b0…`). Regresión: 14 suites + budgets verdes.
+
+**Alcance declarado:** el cableado de producción M42 (avisar entrar/salir de bioma desde
+`set_bioma`/`ambiente_cambiado` y encolar el banco que sale) todavía no existe en el repo — es
+deuda de M42 (07 §12). Esta suite pina el mecanismo del 62 y el ciclo canónico que lo cumple.
+Mismo criterio que los cierres previos (L137/139/140/141/142/143).
+
+**No toqué:** `quality.yml`; `ambient_director.gd` (M42, read-only); `memory_monitor.gd`;
+`stream_manager.gd` (M63, read-only); el colector de sintaxis (autogenerado).
+
+**Totales tras el cierre:** 127 / 23 / 0 (150 items).
