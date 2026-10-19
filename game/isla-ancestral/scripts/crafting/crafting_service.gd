@@ -29,6 +29,9 @@ var _gt: Node = null
 var _estacion_actual: int = 0
 var _estacion_cache_valida: bool = false
 
+var _cache_iconos: Dictionary = {}  # M16 item [20]: pool ligero icono de recetas (item_id -> Texture2D)
+
+
 func _ready() -> void:
 	_gt = get_node_or_null("/root/GameTime")
 	if _gt != null and _gt.has_signal("estacion_cambio"):
@@ -78,6 +81,7 @@ func _cargar_recetas() -> void:
 	for rec_id in recetas:
 		if str(recetas[rec_id].get("origen", "")) == "inicial":
 			_conocer(str(rec_id), false)
+	_precargar_iconos()
 
 func _recipe_desde_datos(rec_id: String, datos: Dictionary) -> CraftingRecipe:
 	var receta := CraftingRecipe.new()
@@ -327,3 +331,23 @@ func restore_save_data(data: Dictionary) -> void:
 	_conocidas.clear()
 	for rec_id in data.get("recetas_conocidas", []):
 		_conocidas.append(str(rec_id))
+
+## M16 item [20]: pool ligero de iconos de recetas. Key = rec_id; el icono
+## proviene del ITEM resultado (ItemData.icono vía ItemDatabase, M159).
+## El cache guarda también null (evita re-buscar items sin icono).
+func _precargar_iconos() -> void:
+	var db := get_node_or_null("/root/ItemDatabase")
+	if db == null or not db.has_method("get_item"):
+		return
+	for rec_id in _recetas:
+		if _cache_iconos.has(rec_id):
+			continue
+		var rec: CraftingRecipe = _recetas[rec_id]
+		var item = db.get_item(String(rec.resultado_id))
+		_cache_iconos[rec_id] = item.icono if item != null else null
+
+
+func icono_de_receta(rec_id: String) -> Texture2D:
+	if not _cache_iconos.has(rec_id):
+		_precargar_iconos()
+	return _cache_iconos.get(rec_id, null)

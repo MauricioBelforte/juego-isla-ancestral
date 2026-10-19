@@ -333,7 +333,7 @@ Log reservado: 512
   materiales) [M]
 - [ ] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a
   consumir antes de confirmar) [S]
-- [ ] RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del modulo [S]
+- [x] RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del módulo [S] — G-5.3-Flash-Agente 2026-10-19: DUPLICADO de RF12/L219 (ya [x] con evidencia) — el wiring YA existe: crafting_feedback.gd L114-122 (_on_crafting_completed → _notificar → NotificationService.push ToastType.ITEM). Flip del duplicado con citación de la evidencia original.
 
 ### N.4 Integracion con M13 (3)
 

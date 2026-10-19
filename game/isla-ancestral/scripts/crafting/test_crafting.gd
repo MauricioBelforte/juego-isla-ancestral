@@ -36,6 +36,7 @@ func _run() -> void:
 	_test_feedback_cargado()
 	_test_season_changed_runtime()
 	_test_registro_duplicados()
+	_test_rollback_bolsa_llena()
 	print("=== TEST M16 CRAFTING: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -263,3 +264,34 @@ func _test_registro_duplicados() -> void:
 			duplicados.append(rec_id + " x" + str(n))
 	_check(duplicados.is_empty(), "sin rec_id duplicados en el JSON (%d repetidos)" % duplicados.size())
 	_check(_cs.obtener_receta("rec_inexistente_xyz9") == null, "receta inexistente -> null (sin falsos del camino)")
+
+## M16 ítem [25] (G-5.3-Flash-Agente 2026-10-19): rollback EXACTO ante inventario lleno.
+## Lleno la BOLSILLA con filler (add_item devuelve el sobrante), remuevo 1 para dejar
+## espacio del pico, pero AUMENTO el craft a 5x → el resultado ya no entra entero →
+## chunk > 0 → ROLLBACK exacto de materiales (re-agregados; caen a la CASA por el
+## fallback bolsa->casa = "ambos destinos"). Verifico conteos EXACTOS antes/después.
+func _test_rollback_bolsa_llena() -> void:
+	var antes_madera: int = _inv.count_item("madera_roble", true)
+	var antes_cobre: int = _inv.count_item("mineral_cobre", true)
+	var antes_pico: int = _inv.count_item("pico_cobre", true)
+
+	# Lleno la BOLSILLA con filler hasta que el add_item devuelva sobrante
+	var chunks := 0
+	while chunks < 60:
+		var sobra: int = root.get_node_or_null("Inventario").add_item("filler_test", 500)
+		chunks += 1
+		if sobra > 0:
+			break
+	_check(chunks < 60, "bolsa alcanzó el límite (filler %d tandas)" % chunks)
+
+	# Craft 5x: el resultado no cabrá completo → inventario_lleno → rollback
+	var ok: bool = _cs.craft("rec_pico_cobre", 5)
+	_check(not ok, "craft 5x FALLA con inventario lleno")
+
+	# ROLLBACK EXACTO: materiales intactos (incluida la CASA) y sin pico creado
+	_check(_inv.count_item("madera_roble", true) == antes_madera,
+		"madera exacta tras rollback (%d vs %d)" % [_inv.count_item("madera_roble", true), antes_madera])
+	_check(_inv.count_item("mineral_cobre", true) == antes_cobre,
+		"cobre exacto tras rollback (%d vs %d)" % [_inv.count_item("mineral_cobre", true), antes_cobre])
+	_check(_inv.count_item("pico_cobre", true) == antes_pico,
+		"sin picos creados tras rollback (%d vs %d)" % [_inv.count_item("pico_cobre", true), antes_pico])
