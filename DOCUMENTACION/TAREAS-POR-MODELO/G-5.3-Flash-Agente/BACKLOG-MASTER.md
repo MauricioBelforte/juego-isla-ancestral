@@ -120,7 +120,7 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 
 ### Bloque E — Coordinación y ruteo del director (delegaciones puntuales)
 
-42. Delegación con puntero exacto a Step-5 para el frente activo en su cola (M55 rendimiento → M55 catálogo → M51/M50/M49...).
+42. [x] Delegación con puntero exacto a Step-5 para el frente activo en su cola (M55 rendimiento → M55 catálogo → M51/M50/M49...).
 43. [x] Delegación a DS-Opencode para el micro-lote → M112 → fix de economía → M159 (ya autorizado).
 44. Delegación a DeepSeek-WB: ruteo claro de M159 con medición L216.
 45. Delegación a agnes: continuar barrido con control de número (638+ — hay que avanzar la estructura de rangos cada ronda: 500-599 completo, 600+ en raíz mientras sea ≤100).
@@ -277,6 +277,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 40. reposicion nicho GLM (directo del 05 real): 58: RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M]
 41. reposicion nicho GLM (directo del 05 real): 58: Definir que el remapeo respete los conflictos detectados por M57 [M]
 42. reposicion nicho GLM (directo del 05 real): 58: Definir indicador visual del perfil de control activo en el menú [S]
+  · [x] IMPLEMENTADO+VERIFICADO 2026-10-19 10:40 UTC (G-5.3-Flash-Agente): MenusLayer — label PerfilLabel (FONT_SIZE_SMALL, color ACCENT_OCRE) que muestra el perfil activo leyendo AccesibilidadManager.get_perfil() + conectado a profile_changed (actualización live al cambiar preset single_hand/low_mobility/custom). Regresión M89: 48/0.
 43. reposicion nicho GLM (directo del 05 real): 58: RF23: reabrir el último diálogo sin perder contexto [M]
   · [x] IMPLEMENTADO 2026-10-19 10:15 UTC (G-5.3-Flash-Agente): dialogue_manager.gd — _rf23_ultimo_id/_rf23_ultimo_contexto guardados al arranque de CADA diálogo + método público reabrir_ultimo() (replica start_dialogue con el MISMO context; false si sin previo o activo). QA headless (qa_rf23_reabrir.gd): guard-cases OK; flujo completo con catálogo SKIP para dueño M21/M28 (requiere dialogue_ids reales del catálogo de grafos — los nodes de data/dialogos son del dueño). Flip del dueño con esta evidencia.
 44. reposicion nicho GLM (directo del 05 real): 58: RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M]

@@ -49,6 +49,15 @@ func _crear_ui() -> void:
 	var sep := HSeparator.new()
 	vbox.add_child(sep)
 
+	var perfil_label := Label.new()
+	perfil_label.name = "PerfilLabel"
+	perfil_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	perfil_label.add_theme_font_size_override("font_size", ThemeUx.FONT_SIZE_SMALL)
+	perfil_label.add_theme_color_override("font_color", ThemeUx.COLOR_ACCENT_OCRE)
+	vbox.add_child(perfil_label)
+	_actualizar_perfil_label(perfil_label)
+	_conectar_perfil(perfil_label)
+
 	_agregar_boton(vbox, "SETTINGS.JUGAR", func(): jugar_pedido.emit())
 	_agregar_boton(vbox, "SETTINGS.CONTINUAR", func(): continuar_pedido.emit())
 	_agregar_boton(vbox, "SETTINGS.AJUSTES", func(): ajustes_pedido.emit())
@@ -81,3 +90,33 @@ func focus_first() -> Control:
 	if _buttons.size() > 0:
 		return _buttons[0]
 	return null
+
+
+## M58 ítem [42]: indicador visual del perfil de control activo (AccesibilidadManager).
+func _actualizar_perfil_label(label: Label) -> void:
+	var acc := get_node_or_null("/root/AccesibilidadManager")
+	if acc == null or not acc.has_method("get_perfil"):
+		label.text = ""
+		label.visible = false
+		return
+	var perfil: Dictionary = acc.get_perfil()
+	var nombre := String(perfil.get("nombre", "custom"))
+	if nombre.is_empty():
+		nombre = "custom"
+	label.text = "Controles: " + nombre
+	label.visible = true
+
+
+func _conectar_perfil(label: Label) -> void:
+	var acc := get_node_or_null("/root/AccesibilidadManager")
+	if acc != null and acc.has_signal("profile_changed"):
+		if not acc.profile_changed.is_connected(_on_profile_changed):
+			acc.profile_changed.connect(_on_profile_changed)
+		_label_perfil_ref = label
+
+var _label_perfil_ref: Label = null
+
+
+func _on_profile_changed(profile_name: String) -> void:
+	if _label_perfil_ref != null and is_instance_valid(_label_perfil_ref):
+		_label_perfil_ref.text = "Controles: " + profile_name

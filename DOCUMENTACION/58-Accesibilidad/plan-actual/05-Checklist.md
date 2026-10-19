@@ -71,7 +71,7 @@
 - [x] Definir latencia de entrada sin degradación frente a la exigencia < 16 ms de M57 [M]
 - [x] Verificar el preset single_hand con las 9 acciones principales del juego [C]
 - [x] Verificar el preset low_mobility con retención mínima de botones [C]
-- [ ] Definir indicador visual del perfil de control activo en el menú [S]
+- [x] Definir indicador visual del perfil de control activo en el menú [S] — G-5.3-Flash-Agente 2026-10-19: MenusLayer PerfilLabel (font small + ACCENT_OCRE) con get_perfil() + profile_changed live. M89 48/0.
 
 ## E. RF — Área cognitiva (15)
 
