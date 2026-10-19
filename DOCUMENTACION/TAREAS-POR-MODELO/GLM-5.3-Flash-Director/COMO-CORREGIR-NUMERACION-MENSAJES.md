@@ -219,3 +219,8 @@ iba por el 81 (ya agarrado por Step). El fundador aclaró: cada carpeta tiene SU
 - Huecos eliminados: 49, 64, 90, 91 (autores: el agente). Duplicados 11 y 26 resueltos por orden cronologico.
 - Las referencias Responde-a de los mensajes mantienen los numeros historicos (proposito documental); el numero del archivo es la clave unica.
 - Pool 94-193, puntero 093, UTF-8 sin BOM.
+
+## CONVENCION 3 CIFRAS (fundador 2026-10-19 07:40): TODO numero de mensaje va con padding de 3 digitos
+
+- En los nombres de archivo (058-, 095-), en las lineas de NUMEROS_DISPONIBLES.txt (095 no 95) y en el puntero .ultima-revision (094).
+- Aplicado a los 7 pools: corregidos Step-5 (8 numeros 92-99) y G-5.3-Agente (5 numeros 95-99). El resto ya arrancaba >=100.
