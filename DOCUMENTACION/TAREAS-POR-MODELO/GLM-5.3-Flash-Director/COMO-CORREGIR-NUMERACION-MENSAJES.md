@@ -212,3 +212,10 @@ iba por el 81 (ya agarrado por Step). El fundador aclaró: cada carpeta tiene SU
   Ling 179-314, G-5.3-Agente 61-160 (49 sacado del pool: hueco que jamás se reutiliza).
 - Deuda detectada: dups=2 de numeración en agnes, DS-OC y G-5.3-Agente (archivos que
   comparten número); proximo_numero.py calcula SIEMPRE el número real.
+
+## APLICACION 2026-10-19 07:30 - canal G-5.3-Flash-Agente (estrategia completa)
+
+- 93 archivos renumerados 001-093 en orden cronologico por fecha de archivo, con titulos internos normalizados (68) y padding 3 digitos.
+- Huecos eliminados: 49, 64, 90, 91 (autores: el agente). Duplicados 11 y 26 resueltos por orden cronologico.
+- Las referencias Responde-a de los mensajes mantienen los numeros historicos (proposito documental); el numero del archivo es la clave unica.
+- Pool 94-193, puntero 093, UTF-8 sin BOM.
