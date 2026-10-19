@@ -119,86 +119,45 @@ func focus_first() -> Control:
 
 ## Item 1 del riel (M59/M44): Guardar con confirmación + feedback.
 ## Abre el ConfirmPopup; al aceptar, guarda por DataStore (M60) y emite toast.
-## Recalcula el dirty-check cada vez que se abre la pausa (item 4 M59).
-func open(initial_focus: Control = null) -> void:
-	super.open(initial_focus)
-	_actualizar_dirty()
-
-
-## dirty = la sección player actual difiere del último guardado del slot 1,
-## o no existe ningún guardado previo (entonces SIEMPRE se puede guardar).
-func _actualizar_dirty() -> void:
-	if _boton_guardar == null:
-		return
-	var ds := get_node_or_null("/root/DataStore")
-	var prov = load("res://scripts/saving/player_save_provider.gd").new()
-	var actual: Dictionary = prov.get_save_data()
-	var guardado: Dictionary = {}
-	var existe_slot := false
-	if ds != null and ds.has_method("cargar_partida"):
-		var res: Dictionary = ds.cargar_partida(1)
-		if bool(res.get("ok", false)):
-			existe_slot = true
-			guardado = res.get("datos", {}).get("player", {})
-	_dirty_guardado = (not existe_slot) or (actual != guardado)
-	_boton_guardar.disabled = not _dirty_guardado
-
-
 func _pedir_confirmacion_guardado() -> void:
-	if _bloqueado_por_modal_o_carga():
+	# Bloqueos de guardado (ítem 3): capas visibles, SaveManager bloqueado o carga.
+	if _modal_visible():
 		_toast_guardado(false, "SETTINGS.GUARDAR_BLOQUEADO")
 		return
-	var popup := _buscar_confirm_popup()
-	if popup == null:
-		# Sin popup disponible: guardado directo (comportamiento seguro).
-		_hacer_guardado_manual()
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm != null:
+		if sm.has_method("is_save_blocked") and sm.is_save_blocked():
+			_toast_guardado(false, "SETTINGS.GUARDAR_BLOQUEADO")
+			return
+		# Ítem 1 (M59/M44): guardado REAL vía SaveManager (cola + providers).
+		if not sm.save_completed.is_connected(_on_guardado_ok):
+			sm.save_completed.connect(_on_guardado_ok)
+		if not sm.save_failed.is_connected(_on_guardado_fail):
+			sm.save_failed.connect(_on_guardado_fail)
+		sm.request_save(1, "guardado_manual_pausa")
 		return
-	var mensaje := _t_local("SETTINGS.GUARDAR_CONFIRMA")
-	var meta := GestorSlot.leer_meta(1)
-	var iso := str(meta.get("guardado_iso", ""))
-	if iso != "":
-		mensaje += "\n" + _t_local("SETTINGS.ULTIMO_GUARDADO") + ": " + iso
-	else:
-		mensaje += "\n" + _t_local("SETTINGS.SIN_GUARDADO_PREVIO")
-	popup.configurar_texto(_t_local("SETTINGS.GUARDAR_TITULO"), mensaje, _hacer_guardado_manual)
+	_toast_guardado(false, "SETTINGS.GUARDAR_FALLO")
 
 
-## El guardado NO corre durante diálogo activo, carga de escena u otro modal.
-func _bloqueado_por_modal_o_carga() -> bool:
-	var um := get_node_or_null("/root/UIManager")
-	if um != null:
-		for capa in um._stack:
-			if capa == null or not capa.visible:
-				continue
-			var nombre := String(capa.name)
-			if nombre in ["DialogLayer", "LoadingLayer", "ConfirmPopup", "InventoryLayer", "ShopUI", "EquipmentLayer", "DiaryLayer", "CraftingUI", "SettingsAudioLayer", "MenusLayer"]:
-				return true
-	var flow := get_node_or_null("/root/GameFlowManager")
-	if flow != null and flow.has_method("esta_cargando") and flow.esta_cargando():
-		return true
-	return false
+func _on_guardado_ok(_slot: int, _reason: String) -> void:
+	_toast_guardado(true, "SETTINGS.GUARDAR_EXITO")
 
 
-func _buscar_confirm_popup() -> Node:
+func _on_guardado_fail(_slot: int, _reason: String) -> void:
+	_toast_guardado(false, "SETTINGS.GUARDAR_FALLO")
+
+
+## Capa que ya está visible y es modal (no la propia pausa).
+func _modal_visible() -> bool:
 	var um := get_node_or_null("/root/UIManager")
 	if um == null:
-		return null
+		return false
 	for capa in um._stack:
-		if capa != null and capa.name == "ConfirmPopup":
-			return capa
-	return null
-
-
-func _hacer_guardado_manual() -> void:
-	var ds := get_node_or_null("/root/DataStore")
-	if ds == null or not ds.has_method("guardar_partida"):
-		_toast_guardado(false, "SETTINGS.GUARDAR_FALLO")
-		return
-	var payload := {"player": {}}
-	var provider := PlayerSaveProvider.new()
-	payload["player"] = provider.get_save_data()
-	var res: Dictionary = ds.guardar_partida(1, payload)
-	_toast_guardado(bool(res.get("ok", false)), "SETTINGS.GUARDAR_EXITO" if bool(res.get("ok", false)) else "SETTINGS.GUARDAR_FALLO")
+		if capa == null or not capa.visible or capa == self:
+			continue
+		if String(capa.name) in ["DialogLayer", "ConfirmPopup", "InventoryLayer", "ShopUI", "EquipmentLayer", "DiaryLayer", "CraftingUI", "SettingsAudioLayer", "MenusLayer"]:
+			return true
+	return false
 
 
 func _toast_guardado(ok: bool, clave_texto: String) -> void:

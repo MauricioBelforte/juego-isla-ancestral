@@ -106,7 +106,7 @@ func _spawn_node(toast: Dictionary) -> void:
 	# Icono (placeholder)
 	var icon_label := Label.new()
 	icon_label.text = _get_type_icon(type)
-	icon_label.add_theme_color_override("font_color", Color(0.85, 0.72, 0.35))
+	icon_label.add_theme_color_override("font_color", ThemeUx.COLOR_HIGHLIGHT_GOLD)
 	hbox.add_child(icon_label)
 
 	# Texto
@@ -114,12 +114,12 @@ func _spawn_node(toast: Dictionary) -> void:
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.custom_minimum_size = Vector2(200, 0)
-	label.add_theme_color_override("font_color", Color(0.92, 0.88, 0.82))
+	label.add_theme_color_override("font_color", ThemeUx.COLOR_TEXT_DARK)
 	hbox.add_child(label)
 
 	# Estilo
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.15, 0.12, 0.10, 0.9)
+	style.bg_color = Color(ThemeUx.COLOR_BG_ARENA, 0.92)
 	style.border_color = _get_type_color(type)
 	style.set_border_width_all(2)
 	style.set_corner_radius_all(8)

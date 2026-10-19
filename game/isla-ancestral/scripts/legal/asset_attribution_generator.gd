@@ -1,4 +1,4 @@
-﻿# Modelo: agnes-3-flash (Sapiens AI)
+# Modelo: agnes-3-flash (Sapiens AI)
 # Plataforma: Kilo Code
 # Fecha: 2026-10-22
 #

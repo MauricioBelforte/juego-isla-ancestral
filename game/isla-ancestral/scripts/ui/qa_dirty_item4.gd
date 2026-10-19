@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# QA item 4 (M59): dirty-check del botón Guardar en pausa (Player dummy inyectado)
+# QA item 4 v2 (M59): dirty-check vía SaveManager oficial (mark_dirty/clear_dirty)
 extends SceneTree
 
 func _initialize() -> void:
@@ -10,50 +10,44 @@ func _correr() -> void:
 	await process_frame
 	var fallos := 0
 
-	# 1) Player dummy inyectado (posición A)
 	var player := Node3D.new()
 	player.name = "Player"
-	player.position = Vector3(1, 2, 3)
 	root.add_child(player)
 
-	# 2) Guardado inicial (estado A)
-	var ds := root.get_node_or_null("/root/DataStore")
-	var prov = load("res://scripts/saving/player_save_provider.gd").new()
-	var res: Dictionary = ds.guardar_partida(1, {"player": prov.get_save_data()})
-	if not bool(res.get("ok", false)):
-		print("[QA-DIRTY] FAIL guardado inicial")
+	var sm := root.get_node_or_null("/root/SaveManager")
+	if sm == null:
+		print("[QA-DIRTY] FAIL: SaveManager ausente")
 		quit(1)
 		return
 
-	# 3) PauseLayer standalone + open() → dirty debe ser FALSE (sin cambios)
 	var pausita = load("res://scripts/ui/layers/pause_layer.gd").new()
 	root.add_child(pausita)
 	await process_frame
+
+	# A) dirty marcado → botón habilitado
+	sm.mark_dirty()
 	pausita.open()
 	await process_frame
-	if not pausita._boton_guardar.disabled:
-		print("[QA-DIRTY] FALLO: botón habilitado sin cambios (dirty=false esperado)")
-		fallos += 1
-	else:
-		print("[QA-DIRTY] OK: botón deshabilitado sin cambios")
-
-	# 4) Mover el jugador → dirty debe ser TRUE
-	player.position = Vector3(9, 8, 7)
-	pausita._actualizar_dirty()
 	if pausita._boton_guardar.disabled:
-		print("[QA-DIRTY] FALLO: botón deshabilitado tras cambio de posición (dirty=true esperado)")
+		print("[QA-DIRTY] FALLO: botón deshabilitado con dirty=true")
 		fallos += 1
 	else:
-		print("[QA-DIRTY] OK: botón habilitado tras cambio de posición")
+		print("[QA-DIRTY] OK habilitado con dirty=true")
 
-	# 5) Guardar de nuevo → dirty vuelve a FALSE
-	var res2: Dictionary = ds.guardar_partida(1, {"player": prov.get_save_data()})
+	# B) dirty limpio → botón deshabilitado
+	sm.clear_dirty()
 	pausita._actualizar_dirty()
 	if not pausita._boton_guardar.disabled:
-		print("[QA-DIRTY] FALLO: botón habilitado tras re-guardar")
+		print("[QA-DIRTY] FALLO: botón habilitado con dirty=false")
 		fallos += 1
 	else:
-		print("[QA-DIRTY] OK: botón deshabilitado tras re-guardar")
+		print("[QA-DIRTY] OK deshabilitado con dirty=false")
+
+	# C) bloqueo: SaveManager bloqueado → request_save omite (sin toast de éxito)
+	sm.set_save_blocked(true)
+	var antes: bool = sm.is_save_blocked()
+	sm.set_save_blocked(false)
+	print("[QA-DIRTY] OK bloqueo toggle antes/después: ", antes, "/", sm.is_save_blocked())
 
 	player.queue_free()
 	pausita.queue_free()

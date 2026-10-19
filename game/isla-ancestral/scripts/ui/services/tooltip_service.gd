@@ -190,13 +190,13 @@ func _get_from_pool() -> PanelContainer:
 	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	body.custom_minimum_size = Vector2(180, 0)
 	body.add_theme_font_size_override("font_size", 12)
-	body.add_theme_color_override("font_color", Color(0.92, 0.88, 0.82))
+	body.add_theme_color_override("font_color", ThemeUx.COLOR_TEXT_DARK)
 	vbox.add_child(body)
 
 	# Estilo del panel (cozy: esquinas redondeadas, fondo cálido)
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.15, 0.12, 0.10, 0.94)
-	style.border_color = Color(0.6, 0.5, 0.3, 1.0)
+	style.bg_color = Color(ThemeUx.COLOR_BG_ARENA, 0.96)
+	style.border_color = ThemeUx.COLOR_ACCENT_OCRE
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(10)
 	style.set_content_margin_all(10)

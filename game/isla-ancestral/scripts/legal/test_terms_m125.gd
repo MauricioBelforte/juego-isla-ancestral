@@ -7,9 +7,12 @@
 #
 # Preloads §9.52: nombres SIN colisionar con class_name de los scripts.
 #
-# Iteracion 2026-10-18 (DeepSeek-V4.1-Flash, Log 1972): se quito `cfg.free()` sobre un
+# Iteracion 2026-10-18 (DeepSeek-V4.1-Flash, Log 1996): se quito `cfg.free()` sobre un
 # Resource (RefCounted) que emitia SCRIPT ERROR, y se anadio la guarda anti-falso-verde
 # de 3 capas (bloques nombrados + piso CHECKS_MINIMOS medido + _summary() diferido).
+# [CITA CORREGIDA 2026-10-18, Log 1996: la version anterior citaba "Log 1972", que NO
+#  existe en Logs/ (hueco 1971 -> 1973; sesion abortada antes de escribir su log). La
+#  guarda se verifico EN ROJO por inyeccion de runtime: 14 checks / 2 fallos / EXIT 1.]
 
 extends SceneTree
 
