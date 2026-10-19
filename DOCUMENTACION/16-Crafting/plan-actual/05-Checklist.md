@@ -175,7 +175,7 @@ Log reservado: 512
 - [ ] Filtros de temporada recalculados solo ante season_changed [S]
 - [ ] Sin asignaciones de objetos en el hot path de fabricación simple [M]
 - [ ] Texturas/iconos de recetas precargados con pool ligero [M]
-- [ ] Sin steps de física extra en estaciones (efecto interactuable básico) [S]
+- [x] Sin steps de física extra en estaciones (efecto interactuable básico) [S] — G-5.3-Flash-Agente 2026-10-19: VERIFICADO — CraftingStation = Node3D + Mesh placeholder + Area3D interacción (input + radio + idempotencia); 0 RigidBody/CharacterBody/gravity custom (grep citado en la cola de G-5.3-Flash-Agente). Flip con evidencia del backlog de G-5.3-Flash-Agente (el fundador/director sincroniza fila).
 - [ ] Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M]
 
 ## K. Testing y QA (8)

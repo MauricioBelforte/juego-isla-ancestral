@@ -787,3 +787,4 @@ MÃ©todo A (muestreo dirigido + verificaciÃ³n contra disco). Bloques de ~5. S
 103. - [ ] [90] DiseÃ±ar tests de ajustes individuales <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
 104. - [ ] [90] DiseÃ±ar tests de aplicaciÃ³n en tiempo real <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
 105. - [ ] [90] DiseÃ±ar tests de detecciÃ³n automÃ¡tica de hardware <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+| 12 | **M159** legal-tools (encargo director #784) | ✅ CERRADO (80/147) | — | agnes 2026-10-22: 	ools/legal/generate_item_attribution.py inyecta tEXt Copyright/Author en los 300 PNG de items_m159 (modelo LicenseProfile M83, idempotente) + 	est_generate_item_attribution.py (7 checks, 0 fallos, agregado a quality.yml legal-tools). alidate_asset_metadata.py --check = exit 0 (gate legal-tools VERDE). +1 [x]. Reporte #785. |

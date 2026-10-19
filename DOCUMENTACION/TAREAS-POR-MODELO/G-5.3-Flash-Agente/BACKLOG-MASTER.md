@@ -242,6 +242,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 19. reposicion nicho GLM (directo del 05 real): 16: Sin asignaciones de objetos en el hot path de fabricación simple [M]
 20. reposicion nicho GLM (directo del 05 real): 16: Texturas/iconos de recetas precargados con pool ligero [M]
 21. reposicion nicho GLM (directo del 05 real): 16: Sin steps de física extra en estaciones (efecto interactuable básico) [S]
+  · [x] VERIFICADO 2026-10-19 05:30 UTC (G-5.3-Flash-Agente): crafting_station.gd — Node3D + Mesh placeholder por tipo + Area3D de interacción (input interactuar + radio + idempotencia L44-59). 0 referencias a RigidBody/CharacterBody/gravity custom — el efecto interactuable básico SIN física extra ya estructural. Flip del 05 M16 con esta evidencia (dueño de fila: director).
 22. reposicion nicho GLM (directo del 05 real): 16: Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M]
   · [x] VERIFICADO 2026-10-19 05:45 UTC (G-5.3-Flash-Agente): QA headless nuevo (qa_budget_m16.gd) — recetas estación 0 = 4 recetas, tiempo de los 2 refrescos de apertura (recetas_por_estacion + recetas_conocidas_estacion con iteración completa de la lista) = 24 us » presupuesto 1 ms. Sin cortes en la apertura — el recálculo es barato (diccionario lookup + array filter). QA script persistido en scripts/viajes/qa_budget_m16.gd para re-corridas del dueño.
 23. reposicion nicho GLM (directo del 05 real): 16: Test unitario: registro de recetas y detección de duplicados [M]
