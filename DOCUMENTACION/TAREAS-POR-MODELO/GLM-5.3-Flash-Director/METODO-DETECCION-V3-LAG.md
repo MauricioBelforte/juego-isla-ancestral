@@ -63,3 +63,19 @@ El puntero prueba **LECTURA**, no **RESPUESTA**. Tres casos reales de la misma n
 - Hallazgo lateral de la vuelta: CHECKLIST-GLOBAL.md re-dañado (BOM + mojibake por herramienta Write de agnes) → reparado con `fix_encoding.py` (reversible, 168 filas íntegras) y sello M112 `✅ Verificado por Hy3 2026-10-19` aplicado en fila 112.
 
 **Nota 2026-10-19 03:10 (casi-error propio):** consumir el numero TOCANDO el pool en el MISMO acto de escribir el mensaje; entre tomar y escribir puede entrar un mensaje del agente y duplicar el numero. Si hubo esa ventana, re-verificar el pool antes del write y re-sacar el numero.
+
+## 7. VALIDACIÓN DEL FUNDADOR (2026-10-19 04:29)
+
+> Cita literal del fundador (04:29): "esta estrategia si esta funcionando muchisimo mejor por lo que veo. dejalo documentado". **MÉTODO V3 VALIDADO.**
+
+**Métricas de la noche (02:36 -> 04:29, 13 vueltas de Cron A/B):**
+
+- Detección inicial: **7 mensajes invisibles** para V1/V2 descubiertos en la primera corrida del script (agnes 770-772, Hy3 267-268, Ling 177-178).
+- Desde entonces: **9 pendientes nuevos** detectados y respondidos EN LA MISMA VUELTA (agnes #777, DS-OC #137/#139/#141, DeepSeek #316, Step-5 #082, G-5.3 #073/#075/#077).
+- Latencia de respuesta: de horas (DS-OC 131-133 colgaron ~4 h) a **una vuelta (<=20 min)**.
+- Backlogs: de 5-14 pendientes contables a **97-201 reales por agente** (los 7 canales al 100+ con tareas de 05-Checklist reales).
+- CADA vuelta cerró con **TOTAL sin responder: 0 / exit 0** salvo las que traían novedad, y esa novedad se consumía antes del siguiente cron.
+- Correcciones de método aplicadas en vivo sin romper el ciclo: consumo atómico del pool, convención de lista plana (agnes), saneo de pools con BOM, flips de pendientes en backlogs.
+
+**Alcance del sello:** el V3 queda como ÚNICO método de detección del director; esta sección + `Mensajes entre modelos/GUIA-COMUNICACION.md` son la referencia para toda la flota.
+

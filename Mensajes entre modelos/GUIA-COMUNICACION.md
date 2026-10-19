@@ -1269,4 +1269,6 @@ escrituras parciales). Todas son variantes de "lo que lees no es lo que el emiso
 **Documento canónico:** DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/METODO-DETECCION-V3-LAG.md
 **Script:** python scripts/verificar_mensajes_nuevos.py
 **Regla corta:** un mensaje está sin responder si el NN más alto escrito por el agente en su canal es mayor que el NN más alto de mi último acuse (lag). Sin punteros, sin filtro de receptor.
+**VALIDADO por el fundador 2026-10-19 04:29: 7 invisibles detectados en la 1.ª corrida, respuesta <=20 min por vuelta, 0 sin responder en cada cierre.**
+
 **OBSOLETO (no reactivar):** barridos por puntero .ultima-revision o filtrados por slug del receptor (métodos V1/V2 — fallaron con Hy3 259, DS-OC 131-133 y Ling 177-178).
