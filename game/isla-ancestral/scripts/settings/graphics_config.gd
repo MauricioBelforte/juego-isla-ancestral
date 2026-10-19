@@ -81,6 +81,14 @@ const CULLING: Dictionary = {"frustum": true, "por_distancia": true}
 ## aquí se define el DISEÑO (flags + distancia + niveles) para el render.
 const LOD: Dictionary = {"habilitado": true, "distancia": 160.0, "niveles": 4}
 
+## ── Debug / profiling (§1, opcional en modo debug M110) ─────────────────
+## Flags de monitoreo en debug (opcionales). El display real lo pinta M110.
+const DEBUG_FLAGS: Dictionary = {
+	"fps_counter": false,
+	"profiling_gpu": false,
+	"monitoreo_gpu_ram": false,
+}
+
 ## ── Anti-aliasing (§1) ───────────────────────────────────────────────────
 const AA_OFF := "off"
 const AA_FXAA := "fxaa"
@@ -366,6 +374,29 @@ func mapeo_culling() -> Dictionary:
 		"por_distancia": bool(CULLING["por_distancia"]),
 		"cull_distance_metros": distancia_metros(String(obtener("distancia", "media"))),
 	}
+
+## Mapeo LÓGICO de los flags de debug/profiling (M110). headless.
+func mapeo_debug() -> Dictionary:
+	return DEBUG_FLAGS.duplicate(true)
+
+
+## Fija un flag de debug. Devuelve false si la clave no es válida.
+func fijar_debug(clave: String, valor: bool) -> bool:
+	if not DEBUG_FLAGS.has(clave):
+		return false
+	DEBUG_FLAGS[clave] = valor
+	return true
+
+
+## Aplica el límite de FPS al motor (Engine.max_fps). Devuelve el cap aplicado.
+## Si el valor del config no es una opción válida de FPS_OPCIONES, usa 60.
+func apply_fps_cap() -> int:
+	var cap: int = int(obtener("fps", 60))
+	if not FPS_OPCIONES.has(cap):
+		cap = 60
+	Engine.max_fps = cap
+	return cap
+
 
 ## Mapeo LÓGICO de LOD por objeto lejano. headless. La IMPL. depende de M50.
 func mapeo_lod() -> Dictionary:
