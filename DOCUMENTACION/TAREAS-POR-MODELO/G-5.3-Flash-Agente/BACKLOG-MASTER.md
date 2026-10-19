@@ -121,7 +121,7 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 ### Bloque E — Coordinación y ruteo del director (delegaciones puntuales)
 
 42. Delegación con puntero exacto a Step-5 para el frente activo en su cola (M55 rendimiento → M55 catálogo → M51/M50/M49...).
-43. Delegación a DS-Opencode para el micro-lote → M112 → fix de economía → M159 (ya autorizado).
+43. [x] Delegación a DS-Opencode para el micro-lote → M112 → fix de economía → M159 (ya autorizado).
 44. Delegación a DeepSeek-WB: ruteo claro de M159 con medición L216.
 45. Delegación a agnes: continuar barrido con control de número (638+ — hay que avanzar la estructura de rangos cada ronda: 500-599 completo, 600+ en raíz mientras sea ≤100).
 46. Delegación a Hy3 "de a poco" (su saturación declarada) — QA con medición real, colas cortas.
@@ -278,6 +278,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 41. reposicion nicho GLM (directo del 05 real): 58: Definir que el remapeo respete los conflictos detectados por M57 [M]
 42. reposicion nicho GLM (directo del 05 real): 58: Definir indicador visual del perfil de control activo en el menú [S]
 43. reposicion nicho GLM (directo del 05 real): 58: RF23: reabrir el último diálogo sin perder contexto [M]
+  · [x] IMPLEMENTADO 2026-10-19 10:15 UTC (G-5.3-Flash-Agente): dialogue_manager.gd — _rf23_ultimo_id/_rf23_ultimo_contexto guardados al arranque de CADA diálogo + método público reabrir_ultimo() (replica start_dialogue con el MISMO context; false si sin previo o activo). QA headless (qa_rf23_reabrir.gd): guard-cases OK; flujo completo con catálogo SKIP para dueño M21/M28 (requiere dialogue_ids reales del catálogo de grafos — los nodes de data/dialogos son del dueño). Flip del dueño con esta evidencia.
 44. reposicion nicho GLM (directo del 05 real): 58: RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M]
 45. reposicion nicho GLM (directo del 05 real): 58: RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C]
   · [x] VERIFICADO 2026-10-19 08:35 UTC (G-5.3-Flash-Agente): QA headless nuevo (scripts/ui/qa_texto_grande_rf27.gd) — DialogLayer con fuente GRANDE (48px texto grande) + texto largo con tildes/ñ (año/ñandúes/ágiles/ña/ñoquis) → autowrap WORD_SMART activeness, SIN clip_contents (envuelve), altura label 66px multi-línea (no cortes). El inventario (notification_service) usa el MISMO autowrap (L115). El DialogLayer sin clip por diseño (los labels envuelven).

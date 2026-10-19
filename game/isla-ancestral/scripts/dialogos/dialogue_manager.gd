@@ -95,6 +95,11 @@ var _opciones_visibles: Array = []
 func is_dialogue_active() -> bool:
 	return _nodo_actual != null
 
+## RF23 (M58 ítem [43]): memoria del último diálogo para reabrir sin perder contexto.
+var _rf23_ultimo_id: String = ""
+var _rf23_ultimo_contexto: Dictionary = {}
+
+
 func start_dialogue(dialogue_id: String, context: Dictionary = {}) -> bool:
 	if is_dialogue_active():
 		push_warning("[M21] Dialogo ya activo: " + _dialogue_id)
@@ -107,6 +112,11 @@ func start_dialogue(dialogue_id: String, context: Dictionary = {}) -> bool:
 	# resumen "[VAL-DGT] N errores, M advertencias".
 	if not _validar_grafo_y_reportar(grafo):
 		return false
+	# RF23: guardo id+contexto del arranque para el reabrir_ultimo().
+	_rf23_ultimo_id = dialogue_id
+	_rf23_ultimo_contexto = context.duplicate(true)
+
+	# M21 (iter 8 / Hy3 WorkBuddy): validacion estatica complementaria
 	# M21 (iter 8 / Hy3 WorkBuddy): validacion estatica complementaria (nodos huerfanos,
 	# operadores de condicion y claves de mundo). Ahora SI se chequean claves desconocidas
 	# usando la allowlist canonica del validador (incluye "clima"), para detectar typos como
@@ -354,3 +364,12 @@ func skip_all() -> void:
 		advance()  # LINEA o EVENTO: avanzar (los efectos ya se aplicaron al entrar)
 	if is_dialogue_active():
 		stop_dialogue()  # salvaguarda ante grafos ciclicos sin FIN
+
+
+## RF23 (M58 ítem [43]): reabre el último diálogo con el MISMO contexto de su
+## arranque (sin perder variables de conversación). Devuelve false si nunca
+## hubo diálogo o si ya hay uno activo (el guard de start_dialogue emite).
+func reabrir_ultimo() -> bool:
+	if _rf23_ultimo_id.is_empty() or is_dialogue_active():
+		return false
+	return start_dialogue(_rf23_ultimo_id, _rf23_ultimo_contexto)
