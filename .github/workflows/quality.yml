@@ -691,6 +691,9 @@ jobs:
           # M127 iter. 4 (Log 1119): empaquetado del deposito USCO
           # (37 CFR 202.20(c)(2)(vii)). 38 checks + el --selftest del script.
           python3 tools/legal/test_empaquetar_deposito_usco.py 2>&1
+          # M159 legal-tools (encargo director #784, agnes-3-flash 2026-10-22):
+          # inyeccion de tEXt Copyright/Author en los 300 PNG de M159 (cierre del gate).
+          python3 tools/legal/test_generate_item_attribution.py 2>&1
           echo "Legal tooling tests completed"
 
       # Gates duros (M127 iter. 3). Deterministas y verdes en este commit.
