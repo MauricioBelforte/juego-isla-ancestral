@@ -35,6 +35,7 @@ func _run() -> void:
 	_test_pergamino_m14()
 	_test_feedback_cargado()
 	_test_season_changed_runtime()
+	_test_registro_duplicados()
 	print("=== TEST M16 CRAFTING: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -235,3 +236,30 @@ func _test_season_changed_runtime() -> void:
 	# Restaurar
 	gt._mes = 1
 	gt.emit_signal("estacion_cambio", 0)
+
+## M16 ítem de cola (G-5.3-Flash-Agente 2026-10-19): detección de duplicados
+## en el catálogo fuente. GDScript/JSON sobrescriben silencioso: si el JSON
+## trae un rec_id duplicado, el catálogo tendría MENOS recetas de las escritas.
+func _test_registro_duplicados() -> void:
+	var f := FileAccess.open("res://data/balance/crafting.json", FileAccess.READ)
+	_check(f != null, "crafting.json accesible")
+	if f == null:
+		return
+	var cru := f.get_as_text()
+	f.close()
+	var parsed = JSON.parse_string(cru)
+	_check(parsed != null, "crafting.json parsea")
+	if parsed == null:
+		return
+	var recetas: Dictionary = parsed.get("recetas", {})
+	_check(recetas.size() > 0, "recetas cargadas del JSON fuente")
+	_check(_cs._recetas.size() == recetas.size(),
+		"service registró %d de %d recetas (sin pérdidas por duplicados)" % [_cs._recetas.size(), recetas.size()])
+	var duplicados: Array = []
+	for rec_id in recetas:
+		var rx := RegEx.create_from_string("\"" + rec_id + "\"\\s*:\\s*\\{")
+		var n: int = rx.search_all(cru).size()
+		if n > 1:
+			duplicados.append(rec_id + " x" + str(n))
+	_check(duplicados.is_empty(), "sin rec_id duplicados en el JSON (%d repetidos)" % duplicados.size())
+	_check(_cs.obtener_receta("rec_inexistente_xyz9") == null, "receta inexistente -> null (sin falsos del camino)")

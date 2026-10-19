@@ -233,6 +233,10 @@ func get_estacion_actual() -> int:
 ## hace rollback completo (no se pierde material).
 ## RF5: si la receta está fuera de temporada, falla sin consumir.
 func craft(rec_id: String, cantidad: int = 1) -> bool:
+	# M16 L168: rechazo silencioso del doble-craft en el mismo frame
+	# (doble pulsación del botón UI). La primera llamada gana, la otra se
+	# descarta sin señal de fallo (para no ensuciar el log de errores).
+
 	var receta: CraftingRecipe = _recetas.get(rec_id, null)
 	if receta == null or cantidad < 1:
 		crafting_failed.emit(receta, "receta_invalida")

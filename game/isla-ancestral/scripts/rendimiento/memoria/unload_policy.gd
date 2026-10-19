@@ -13,6 +13,11 @@
 # conserva `MAX_POR_FRAME` como tope por defecto para las llamadas que no
 # declaran preset. Además se registra el último lote descargado, para que el
 # monitor pueda dejar la decisión en el log (M103) sin volver a recorrer nada.
+#
+# T61 (2026-10-18, DS-Opencode, Log 2001): el payload de un candidato pasa de
+# `Resource` a `RefCounted`. Los buffers de VoxelTools (VoxelBuffer, ítem L137)
+# son RefCounted, NO Resource, y deben rendir por esta cola. RefCounted es
+# superclase de Resource: el ensanche es retrocompatible (cero llamadores rotos).
 
 class_name UnloadPolicy
 extends RefCounted
@@ -28,7 +33,7 @@ var _candidatos: Array = []  # [{recurso, peso, distancia, edad}]
 var _ultimo_lote: Array = [] # [{peso, distancia, edad}] del último ejecutar_descarga()
 var _diferidos_lote: int = 0 # candidatos VETADOS por el filtro (handshake §5.3)
 
-func marcar_candidato(recurso: Resource, peso: int, distancia: float = INF) -> void:
+func marcar_candidato(recurso: RefCounted, peso: int, distancia: float = INF) -> void:
 	_candidatos.append({
 		"recurso": recurso,
 		"peso": peso,
@@ -43,7 +48,7 @@ func max_por_frame_para(preset: String) -> int:
 ## Ejecuta descargas hasta liberar `hasta_mb`, máx `max_por_frame` por llamada.
 ## Ordena por: lejanía primero, luego por edad (LRU). Devuelve MB "liberados"
 ## (peso de candidatos retirados de la cola; el drop de referencia real lo
-## hace el caller, ya que Resource es RefCounted y no admite free()).
+## hace el caller, ya que el payload es RefCounted y no admite free()).
 ##
 ## `filtro` (iter. 5, diseño §5.3): si es válido, se llama con el recurso de
 ## cada candidato y un `false` lo VETA — no se descarga y NO sale de la cola

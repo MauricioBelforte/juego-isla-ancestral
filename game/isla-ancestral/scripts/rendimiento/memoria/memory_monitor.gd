@@ -45,6 +45,14 @@
 #    los candidatos pendientes. Cierra L168.
 # 9. AUDIO PEDIDO DURANTE UNA DESCARGA: se difiere hasta que termina (nunca se
 #    reproduce a medias ni revienta). Cierra L171.
+#
+# ── T61 (Log 2001, DS-V4.1-Flash-Opencode) — payload de candidatos RefCounted ──
+# 10. BUFFERS DE VOXELTOOLS (ítem L137). `registrar_candidato_descarga()` +
+#     `esta_en_carga()` + `_puede_descargar()` pasan de `Resource` a
+#     `RefCounted`: los buffers por chunk de M08 (VoxelBuffer) son RefCounted y
+#     la firma Resource los rechazaba. Ensanche retrocompatible (Resource
+#     hereda de RefCounted). El veto del handshake sigue siendo solo para
+#     Resources (un no-Resource nunca está "en carga" por M63).
 
 extends Node
 
@@ -267,11 +275,11 @@ func avisar_carga_terminada(recurso: Resource) -> void:
 		return
 	_en_carga.erase(recurso.get_instance_id())
 
-func esta_en_carga(recurso: Resource) -> bool:
+func esta_en_carga(recurso: RefCounted) -> bool:
 	return recurso != null and _en_carga.has(recurso.get_instance_id())
 
 ## Filtro que `UnloadPolicy` consulta por candidato. Devuelve false = vetar.
-func _puede_descargar(recurso: Resource) -> bool:
+func _puede_descargar(recurso: RefCounted) -> bool:
 	if esta_en_carga(recurso):
 		_descartes_por_carga += 1
 		_log_m62("descarga DESCARTADA: recurso en carga por M63 (%s)"
@@ -526,7 +534,7 @@ func ventana_muestras() -> PackedFloat32Array:
 	return salida
 
 ## ── RF3: registro de candidatos al pool/unload por sistema ──
-func registrar_candidato_descarga(recurso: Resource, peso: int, distancia: float = INF) -> void:
+func registrar_candidato_descarga(recurso: RefCounted, peso: int, distancia: float = INF) -> void:
 	if unload != null:
 		unload.marcar_candidato(recurso, peso, distancia)
 
