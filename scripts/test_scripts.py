@@ -632,6 +632,66 @@ def test_ver_cobertura_falta_fila_es_ceguera():
 
 
 # ---------------------------------------------------------------------------
+# verificar_bom.py — cobertura de UTF-16 y U+FEFF embebido
+# ---------------------------------------------------------------------------
+# Motivo medido (2026-10-18, reincidencia 3 del BOM, msg 312 del director):
+# el escaner leia SOLO los primeros 3 bytes. Un archivo UTF-16 (lo que escribe
+# Set-Content de PowerShell 5.1) NO empieza con EF BB BF, asi que el gate lo
+# declaraba LIMPIO. Contra los fixtures de este test, la version de HEAD
+# detectaba 1 de 3 defectos bloqueantes; la version con el fix detecta 3 de 3.
+def _arbol_bom(tmp):
+    """Crea el arbol de fixtures del test y devuelve el Path."""
+    base = Path(tmp)
+    (base / "limpio.md").write_bytes("hola mundo\n".encode("utf-8"))
+    (base / "bom_utf8.md").write_bytes(b"\xef\xbb\xbf" + "hola\n".encode("utf-8"))
+    (base / "utf16le.txt").write_bytes(b"\xff\xfe" + "hola\n".encode("utf-16-le"))
+    (base / "utf16be.txt").write_bytes(b"\xfe\xff" + "hola\n".encode("utf-16-be"))
+    (base / "feff_medio.md").write_bytes("texto con \ufeff1536 adentro\n".encode("utf-8"))
+    # Extension fuera de EXT: no debe mirarse nunca.
+    (base / "ignorado.binlog").write_bytes(b"\xff\xfe basura")
+    return base
+
+
+def test_bom_detecta_utf8_y_utf16():
+    """Los 3 modos de BOM de cabecera son bloqueantes; el UTF-16 ya no es invisible."""
+    import verificar_bom as vb
+
+    with tempfile.TemporaryDirectory() as tmp:
+        base = _arbol_bom(tmp)
+        bloqueantes = vb.escanear(str(base), [])
+        assert bloqueantes == ["bom_utf8.md", "utf16be.txt", "utf16le.txt"], bloqueantes
+        # Control negativo: un archivo limpio NUNCA aparece.
+        assert "limpio.md" not in bloqueantes, bloqueantes
+        # Control: la extension fuera de EXT no se clasifica.
+        assert not any("binlog" in b for b in bloqueantes), bloqueantes
+
+
+def test_bom_utf16_es_fallo_duro():
+    """Un archivo UTF-16 solo (sin BOM UTF-8) DEBE bloquear el gate."""
+    import verificar_bom as vb
+
+    with tempfile.TemporaryDirectory() as tmp:
+        base = Path(tmp)
+        (base / "solo_utf16.txt").write_bytes(b"\xff\xfe" + "x\n".encode("utf-16-le"))
+        d = vb.escanear_detalle(str(base), [])
+        assert d["utf16"] == ["solo_utf16.txt"], d
+        assert d["bom"] == [], d
+        assert vb.escanear(str(base), []) == ["solo_utf16.txt"]
+
+
+def test_bom_feff_embebido_es_aviso_no_bloqueo():
+    """U+FEFF embebido se informa aparte: hay citas legitimas (BACKLOG-MASTER)."""
+    import verificar_bom as vb
+
+    with tempfile.TemporaryDirectory() as tmp:
+        base = _arbol_bom(tmp)
+        d = vb.escanear_detalle(str(base), [])
+        assert d["feff"] == ["feff_medio.md"], d
+        # No entra en la lista que hace fallar el gate.
+        assert "feff_medio.md" not in vb.escanear(str(base), []), d
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main():
@@ -668,6 +728,13 @@ def main():
          test_ver_detectar_totales_incoherentes)
     test("cobertura: módulo sin fila = CIEGO (trampa 91) + control",
          test_ver_cobertura_falta_fila_es_ceguera)
+
+    print()
+    print("verificar_bom.py:")
+    test("detecta BOM UTF-8 y UTF-16 LE/BE (antes el UTF-16 era invisible)",
+         test_bom_detecta_utf8_y_utf16)
+    test("UTF-16 es fallo duro del gate", test_bom_utf16_es_fallo_duro)
+    test("U+FEFF embebido = aviso, no bloqueo", test_bom_feff_embebido_es_aviso_no_bloqueo)
 
     print()
     print("=" * 60)
