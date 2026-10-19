@@ -53,3 +53,54 @@ módulos §21.3 en los 4 registros. Fundador: SOLO novedad material.
 - Si el fundador pide otra cadencia, cambiar el cron `*/5 * * * *` por la que indique.
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-17.
+
+---
+
+## LOS PROBLEMAS DOCUMENTADOS DE LA NOCHE (2026-10-17/18 — fundador 22:49-01:30)
+
+### 1. EL FILTRO DEL SLUG (el caso Hy3 259)
+
+**Problema**: el scan del cron filtraba los archivos por el slug del receptor (`-a-glm` in f or `-a-director` in f). El mensaje 259 de Hy3 tenía el slug `hy3-a-hy3-recordatorio...` (auto-dirigido) — el hash matcheó `marca but not receiver` — el director lo ignoró.
+
+**Impacto**: 8+ horas de retraso con la delegación sin responder (21:15 → 05:23).
+
+**El fix**: el scan de los mensajes deja de filtrar por el slug del receptor y toma TODO los .md de la carpeta con el prefijo NNN; el contenido interno decide el destinatario. El nuevo cron con el método mejorado (V2.2-Reboot 2026-10-18 05:23) queda con el método sin filtrar.
+
+### 2. EL MAX_PATH DE WINDOWS TRUNCA LOS RENAMES
+
+**Problema**: los renames de archivos con nombres largos (los mensajes con el slug + el nombre) + el `__tmp__` que agrega el rename en 2 pasadas supera el **MAX_PATH (261 chars) de Windows** — el `os.rename` falla `FileNotFoundError` — el riel loaca.
+
+**Broken messagess**: `item_obj_her_017.tres` (320-BOM), `informe-078-acuse-094-verificador...`, los 22 archivos de DS-OC (18-119).
+
+**El fix**: usar el long-path `\\\\?\\D:\...` en todos los os.rename/reopen del script (el método del 02:2X del riel de 03:30). Los scripts que lo manejan: `renum_v5_lp.py` (aplicado con éxito).
+
+### 3. LOS PREFIJOS MIXTOS SIN PADDING (el canal DS-OC)
+
+**Problema**: los archivos del canal DS-OC confligen los prefijos sin padding (`13-`, `16-`, `60-`, `85-`) al lado de los con padding (`023-`, `041-`, `094-`, `119-`) — el orden secuencial rompe el índice, los porcentajes ruidos, los kompares viejos/etc.
+
+**El fix**: la **renumeración secuencial por fecha** (el método del 05:1X del 03:30) — los 107 mensajes renumerados 001-107 secuenciales — con los títulos internos `# NNN` corregidos — el pool consecutivo — 0 huecos — 0 duplicados. `990b9c4` pusheado.
+
+### 4. EL POOL DEL CANAL CON NÚMEROS YA USADOS
+
+**Problema**: los pools de los canales quedaban con números ya usados por los mensajes (el 59 de Step-5, el 76 del informé del Step-5, el 125 del DS-OC, los 112/115/118 quemados del DS-OC, los 262/263 de Hy3 que eran los del director).
+
+**El fix**: la regla del fundador en el 23:03 — el pool queda revisado SIEMPRE con las 5 reglas (asignar→remover, corregir→verificar usados, prueba→devolver, pierde→agregar al final, sin BOM) — el pool queda 100 consecutivos SIN los usados.
+
+### 5. EL UTF-16-LE DEL SET-CONTENT DE PS5.1
+
+**Problema**: el `Set-Content -Encoding UTF8` de PowerShell 5.1 escribe **UTF-8 CON BOM** (o el redirect `>` escribe **UTF-16-LE** en algunos pipelines). El `item_obj_her_017.tres` quedó en UTF-16-LE y el CHECKLIST-GLOBAL con BOM (Ling 177/178 lo detectaron).
+
+**El fix**: **Python `io.open(p, "w", encoding="utf-8", newline="\n")`** es el ÚNICO método de escribir archivos del repo — NUNCA `Set-Content` de PS5.1 — el §28 quede el riel desde el instructivo 312 (DeepSeek-WB) con los 5 puntos del pool del método.
+
+### 6. EL ORDEN DEL MÉTODO (post-hoc vs guía previa)
+
+**Problema**: el archivo `COMO-CORREGIR-NUMERACION-MENSAJES.md` fue generado DESPUÉS de ejecutar la corrección (inversión del orden natural — el fundador lo reflejó).
+
+**El fix**: la **nota de transparencia agregada** al archivo (el post-hoc documentado); la próxima re-corr VA ESTE ARCHIVO COMO GUÍA PREVIA (antes de correr) — el paso 6 queda del método.
+
+### 7. EL CRON B SIN FALLBACK
+
+**Problema**: el Cron A con el scan por punteros y el filtro de receptore anclado — el fundador lo documentó el 02:10: "si ahora te digo pasa por todos y encontras mensajes vas a tener que cambiar las instrucciones del cronometro".
+
+**El fix**: el **CRON B instituido por el fundador a las :10/:30/:50** (el cron la verificación cruzada full) con la doble verificación del fundador — el 05:23 el directiva formal — el *09:10 el CRON A el 1er... — el B instituido el 22:14 — el inversionie queda del fundador.
+
