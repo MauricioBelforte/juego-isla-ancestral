@@ -1953,19 +1953,19 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 1. - [→] [62] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **MEDIDO 2026-10-19 (Log 2016): 0 SCC, 237 aristas, selftest 0 fallos; clasificacion independiente 458 cadenas / 0 referencias duras; las 2 SCC del Log 1112 rotas con linea. Flip de L104 propuesto al director en msg 318, NO aplicado por mi cuenta.** — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evi <!-- fuente: 62-Memoria/05-Checklist.md -->
 2. - [ ] [62] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
 3. - [ ] [62] RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
-4. - [ ] [62] Generación de mallas en hilos (M08): resultados por cola sin copias extra [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
-5. - [ ] [62] Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-6. - [ ] [62] Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-7. - [ ] [62] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-8. - [ ] [62] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
-9. - [ ] [62] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-10. - [ ] [62] Los buses (M91) no retienen streams detenidos [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
-11. - [ ] [62] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-12. - [ ] [62] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
-13. - [ ] [62] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
-14. - [ ] [62] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-15. - [ ] [62] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-16. - [ ] [62] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
+4. - [→] [62] Generación de mallas en hilos (M08): resultados por cola sin copias extra [C] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_hilos_cola_mallas.gd` 33 checks / 0 fallos / 3× idénticas / piso 33 / EXIT 0 / 0 SCRIPT ERROR. Identidad de instancia + control positivo de copia. `[x]` del 05 sostenido; falta la nota de evidencia (el 05 es del director).** <!-- fuente: 62-Memoria/05-Checklist.md -->
+5. - [→] [62] Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM [M] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_diffs_ediciones.gd` 24/0 / 3× / piso 24 / EXIT 0. "SIN estructuras de historial por edición (8 patrones)" sobre `tool_controller.gd` real. Guardián probado EN ROJO (EXIT 1, nombra bloque B, 20<24).** <!-- fuente: 62-Memoria/05-Checklist.md -->
+6. - [→] [62] Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos [M] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_anillo_borde.gd` 24/0 / 3× / piso 24 / EXIT 0. "el borde se descargó ANTES de cargar: 0/4 vivos del borde y 5/5 del interior", gracia de 2 frames, idempotencia.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+7. - [→] [62] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región [M] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_audio_bioma.gd` 45/0 / 3× / piso 45 / EXIT 0 (mecanismo del 62 con WeakRef + veto M63). PERO el `[x]` del 05 es de ALCANCE PARCIAL: `pedir_banco_audio()` tiene 0 llamadores de producción y M42 (`ambient_director.gd`) nunca lo llama → el feed no existe. Pedido al director en msg 320.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+8. - [ ] [62] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C] — **BLOQUEADO POR ASSETS 2026-10-19 (Log 2019): 0 `.ogg`/`.wav`/`.mp3` en todo el proyecto y 0 apariciones de `AudioStreamOggVorbis`/`load_from_file`. No hay nada que streamear ni API implementada.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+9. - [ ] [62] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M] — **BLOQUEADO POR ASSETS 2026-10-19 (Log 2019): 0 archivos `.ogg` en el repo.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+10. - [ ] [62] Los buses (M91) no retienen streams detenidos [S] — **MEDIDO 2026-10-19 (Log 2019): `audio_config_service.gd` crea buses y fija volumen/mute; no hay lógica de retención/liberación de streams detenidos.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+11. - [ ] [62] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M] — **MEDIDO 2026-10-19 (Log 2019): existe `bancos_audio_diferidos()` (difiere hasta TERMINAR la descarga), que es otro criterio; no hay diferido de 1 frame.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+12. - [ ] [62] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C] — **SALTEADO 2026-10-19 por orden escrita del director (msg 319, misma razón que el ítem 2): runtime/Play Mode exige runs que solo habilita el fundador.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+13. - [→] [62] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S] — **MEDIDO 2026-10-19 (Log 2019): M61 tiene v2 definitiva en `data/performance/budgets.json` (16.7 ms, remesh 2.0 ms, carga fría 30 s); M62 fija 1500/2000/2500 MB. Unidades distintas → sin conflicto. `remesh_bloque_ms_max` no lo consume ningún script del 62. NO existe artefacto de enlace: decisión de flip pedida en msg 320.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+14. - [→] [62] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_sin_duplicacion.gd` 33/0 / 3× / piso 33 / EXIT 0. "30 re-registros NO inflan la cola", la oferta es la MISMA instancia, 1 entrada activa por chunk_id.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+15. - [ ] [62] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M] — **MEDIDO 2026-10-19 (Log 2019): `drift_check()` existe y está probado (iter3 bloque E) pero tiene 0 llamadores de producción; `island_travel_guard.gd` tiene 0 apariciones de `drift`. Falta 1 punto de llamada post-viaje.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+16. - [ ] [62] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M] — **MEDIDO 2026-10-19 (Log 2019): 2 de 3 sub-partes existen (`island_ops.gd` cola priorizada + `debe_precargar(..., presupuesto)` por distancia); 0 apariciones de `preset` en `scripts/islas/*.gd` y no hay descarga agresiva de viajeros.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 17. - [ ] [62] Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
 18. - [ ] [62] Baseline menú principal: objetivo < 600 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
 19. - [ ] [62] Baseline spawn de Aurora: objetivo < 1.600 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
@@ -2058,3 +2058,50 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - **Proxima:** NN entrantes > 317. Item 2 de la COLA V3 es runtime/Play Mode
   (30 min sin drift): pedido criterio de aceptacion al director; los items 4-16
   son verificables estaticamente.
+
+## 2026-10-19 03:44 (GMT-3) - RAMA 1 / msg 319: COLA V3 items 4-16 auditados (Log 2019, canal 320)
+
+- **Tracker 318 -> 319.** Entrante nuevo = 319: acepta el homogeneizado, ordena
+  SALTEAR el item 2 (runtime 30 min) y seguir con los items 4-16 estaticos.
+- **Metodo:** los 13 items se midieron con tres fuentes: suites headless reales
+  (Godot 4.7.2, 3 corridas cada una), codigo de produccion de los modulos duenos
+  y los artefactos que cada item necesita para ser cierto (assets, callers).
+- **Items 4, 5, 6, 7 y 14 CONFIRMADOS** (`[x]` del 05 sostenido, con evidencia
+  nueva): hilos 33 checks, diffs 24, anillo 24, audio_bioma 45, sin_duplicacion
+  33; todos 3/3 identicas, EXIT 0, 0 SCRIPT ERROR, `CHECKS_MINIMOS` igual al
+  conteo medido, cero `_check(true`. Las cinco usan la cola REAL de M63.
+- **Guardian EN ROJO (no heredado):** inyeccion de runtime al inicio del bloque B
+  de `test_m62_diffs_ediciones.gd` sobre una COPIA temporal -> `SCRIPT ERROR`,
+  `[FALL] el bloque B NO se ejecuto`, `[FALL] solo 20 checks (minimo 24)`, EXIT 1.
+  El original conserva sha256 `0689b07d...e24e3`; la copia se borro.
+- **Hallazgo A:** 17 suites en `scripts/rendimiento/memoria/`, solo 7 en
+  `quality.yml`. **10 fuera de CI**, entre ellas las 5 que sostienen esta tanda.
+  Propuesta de cableado al director (el workflow es NO-TOCAR para mi).
+- **Hallazgo B (L149):** `pedir_banco_audio()` / `iniciar_descarga_audio()` tienen
+  **0 llamadores de produccion**; M42 (`ambient_director.gd`) nunca llama a la
+  API del 62. El `[x]` es de MECANISMO, no de punta a punta: decision pedida.
+- **Items 8, 9, 10 y 11 BLOQUEADOS POR ASSETS:** 0 `.ogg`/`.wav`/`.mp3` en todo
+  `game/isla-ancestral` y 0 apariciones de `AudioStreamOggVorbis`/`load_from_file`.
+  El presupuesto de audio de los presets (150/200/250 MB) no tiene contraparte en
+  disco. La deuda es de M41/M42/M44/M91, no del 62.
+- **Item 13:** M61 SI tiene presupuestos definitivos (v2: 16.7 ms, remesh 2.0 ms,
+  carga fria 30 s) y M62 fija 1500/2000/2500 MB. Unidades distintas -> sin
+  conflicto. `remesh_bloque_ms_max` no lo consume ningun script del 62 y no hay
+  artefacto que enlace ambos archivos: flip pedido con la tabla de correspondencia.
+- **Item 15:** `drift_check()` existe y esta probado, pero **0 llamadores de
+  produccion**; `island_travel_guard.gd` tiene 0 apariciones de `drift`. Falta 1
+  punto de llamada post-viaje.
+- **Item 16:** 2 de 3 sub-partes ya existen (`island_ops.gd` prioridad +
+  `debe_precargar(..., presupuesto)`); **0** apariciones de `preset` en
+  `scripts/islas/*.gd`.
+- **Item 12 SALTEADO** por la misma razon que el 2 (orden escrita del director).
+- **Numeracion:** Log **2019** (cabeza medida justo antes = 2019; pool en 2020).
+  Canal: ultimo real **319**, pool con cabeza **320** = ultimo+1 -> se uso **320**
+  y el pool quedo en **321..420**. `verificar_pool_numeros.py`: EXIT 0, todos los
+  pools sanos.
+- **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** Sin tocar
+  `CHECKLIST-GLOBAL.md`, `AGENTS.md`, `project.godot`, `quality.yml` ni ningun
+  `05-Checklist`.
+- **Proxima:** NN entrantes > 319. La cola de M62 queda sin items ejecutables
+  estaticamente: 8-11 esperan assets de audio, 2 y 12 esperan runs del fundador.
+  **Reposicion de cola pedida al director.**

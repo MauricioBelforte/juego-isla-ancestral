@@ -183,7 +183,7 @@ Log reservado: 512
 - [ ] Test unitario: registro de recetas y detección de duplicados [M]
 - [ ] Test unitario: validación de materiales y máximo fabricable [M]
 - [x] Test: fabricación individual y múltiple con entregas correctas [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_fabricar_ok (individual y multiple)
-- [ ] Test: rollback exacto ante inventario lleno en ambos destinos [C]
+- [x] Test: rollback exacto ante inventario lleno en ambos destinos [C] — G-5.3-Flash-Agente 2026-10-19: _test_rollback_bolsa_llena() agregado a test_crafting.gd — lleno la BOLSILLA con filler hasta el límite, craft 5x → inventario_lleno → ROLLBACK EXACTO verificado (madera/cobre/pico counts idénticos antes/después, include_house=true: los materiales devueltos caen a la CASA por el fallback bolsa->casa). Suite completa 0 fallos.
 - [x] Test: experimentación con combinación válida, inválida y límite de 3 materiales [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_experimental (combinacion valida/invalida)
 - [x] Test: persistencia del conocimiento entre sesiones de guardado [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_persistencia (conocimiento entre sesiones)
 - [x] Test: recetas estacionales ocultas y recuperadas sin pérdida [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_estacional_rf5 + _test_season_changed_runtime

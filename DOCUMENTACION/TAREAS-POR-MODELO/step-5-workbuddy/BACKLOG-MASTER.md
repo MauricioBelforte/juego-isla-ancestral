@@ -232,6 +232,10 @@ carpeta). Identidad de firma: **step 5 workbuddy**.
       de definicion (O.1 / O.2 / O.5 / balance_report.gd) con diseno verificado HOY.
       Archivo: `Logs/2015-m93-flips-definicion-o1-o2-o5-balance-report_2026-10-19_01-52-59.md`.
       Pool medido antes: head 2015 -> 2016. ASCII puro verificado por bytes (3.949 B, CRLF 68, sin BOM).
+- [x] Log reservado: **2018** — M36-Fauna / M65, REPOBLACION V3 item 20
+      (anti-stuck de manada/banco): flip L212 con cita real + diseno en M65.
+      Archivo: `Logs/2018-item20-anti-stuck-manada-banco_2026-10-19_03-20-47.md`.
+      Pool medido antes: head 2018 -> 2019. ASCII puro verificado por bytes (4.215 B, CRLF 77, sin BOM).
 
 
 ## Commits (delegados a atria-dawn; yo no commiteo ni pusheo)
@@ -639,7 +643,7 @@ M104, M88, M160.
 17. - [x] [93] Definir simulación de 60/180/365 días [C] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulate_economy.gd. Design documentado. <!-- fuente: 93-Balance/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Log 2015, msg 084):** §2.3 dice "Simula 60/180/365 dias usando curvas de tiempo real de sesion". Implementacion diferida (idem item 16).
 18. - [x] [93] Definir que la simulación corra en CI (M118) [M] — KnownIssue no bloqueante DoD: M118 (CI/CD) tiene cicd_manager; agregar el job cuando simulate_econo <!-- fuente: 93-Balance/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Log 2015, msg 084):** §5 (L140-146) define el gate CI: `validate_balance.gd --check` + `simulate_economy.gd --days 180 --scenario rutinario` en cada PR que toque `data/balance/`, PR bloqueado si falla. Job concreto cuando exista el .gd (deuda conocida).
 19. - [x] [93] Definir `balance_report.gd` que genera reporte markdown legible [M] — **degradado 2026-10-16 (barrido agnes 622 + flip GLM-5.3 Flash-Director): archiv <!-- fuente: 93-Balance/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Log 2015, msg 084):** cierra la degradacion del 2026-10-16; verificado HOY que `validate_balance.gd` NO genera markdown (grep = 0) ni existe `docs/balance/` -> sin reformulacion posible; definicion vigente §2.4 (L80-81): `docs/balance/reporte.md` con tablas markdown. Implementacion (el .gd) pendiente = deuda conocida.
-20. - [ ] [36] [M65] Anti-stuck de manada/banco coordinado [M] — KnownIssue no bloqueante DoD: dueño M65; logica basica implementada en behavior.gd. Avanzar con navm <!-- fuente: 36-Fauna/05-Checklist.md -->
+20. - [x] [36] [M65] Anti-stuck de manada/banco coordinado [M] — KnownIssue no bloqueante DoD: dueño M65; logica basica implementada en behavior.gd. Avanzar con navm <!-- fuente: 36-Fauna/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2018, msg 088):** la cita "behavior.gd" era falsa (0 archivos en disco, medido hoy); la lógica básica vive en el autoload `m65_animal_ai.gd` L159-168 (aborta si `distancia_acumulada > 30 m` y `dist > 0.5`) y los miembros de manada/banco la heredan vía `solicitar_movimiento`. Anti-stuck de grupo coordinado NO existía (lectura completa de pack_logic.gd / school_logic.gd) → **diseñado** en `65-Animales-IA/plan-actual/03-Diseno.md` (sección "Anti-stuck"), implementación diferida a navmesh M65 (KnownIssue no bloqueante). Flip L212: 36-Fauna 227 → 228 [x] / 0 [?] / 0 [ ]. Suites medidas hoy con binario real: `scripts/animales_ia/test_m65.gd` 24 OK y `tests/test_m65.gd` 35 OK, ambas 0 fallos / EXIT 0 / 0 SCRIPT ERROR.
 21. - [ ] [50] Verificar presupuesto (instancias/draw calls/VRAM) [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
 22. - [ ] [50] Cada bioma muestra su vegetación característica verificada [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
 23. - [ ] [50] Escena pivote sin caída de frame (M61) [M] <!-- fuente: 50-Vegetacion/05-Checklist.md -->
@@ -827,4 +831,14 @@ M104, M88, M160.
 - Housekeeping: el 085 del director entro con el tracker en 84 y consumio el 085 del pool (queda 99 -> reexpandido a 087..186 = 100 consecutivos). Sin colision con mi 084.
 - Artefactos: msg 086 (UTF-8 sin BOM, LF puro, 3.255 B), tracker 85, pool 087..186. Limites: 0 commits / 0 push / 0 archivos de modulo modificados / 0 flips / 0 auto-sellos 21.8.
 - Proxima: NN > 85; sin mensaje -> item 20 ([36] anti-stuck de manada/banco coordinado) u otro de la cola.
+
+## Registro de la vuelta 2026-10-19 03:20 (tracker 86 -> 87; RAMA 1: msg 087 del director + RAMA 2: item 20)
+
+- RAMA 1: unico mensaje nuevo = **087** (04:55, cruce del item 57). El director declara el item 57 CERRADO con las dos listas como evidencia (la mia: drift de deudores viejos >24 h; la de el: flips del dia post-acuse). Verificado en disco antes de acusar: las 5 filas que sincronizo cuadran hoy (M109 135/138, M125 105/105, M62 127/150, M90 181/249, M93 134/134). Acuse con msg 088.
+- RAMA 2: item 20 REPOBLACION V3 = `[36-Fauna] [M65] Anti-stuck de manada/banco coordinado`. HALLAZGO: la cita del item ("logica basica implementada en behavior.gd") era FALSA — no existe `behavior.gd` en el repo (find = 0 archivos). El anti-stuck individual SI existe en el autoload `m65_animal_ai.gd` L159-168 (>30 m acumulados con dist > 0.5 -> aborta + resetea), heredado por los miembros de pack/school via `solicitar_movimiento`. El anti-stuck de grupo coordinado NO existia (pack_logic.gd / school_logic.gd: 0 referencias) -> disenado en `65-Animales-IA/plan-actual/03-Diseno.md` (seccion "Anti-stuck": recalculo de cohesion si el lider aborta, rotacion forzada del grupo sin desplazamiento, migracion anticipada del banco), implementacion diferida a navmesh M65 (KnownIssue no bloqueante).
+- Suites medidas HOY con el binario real (no heredadas): `scripts/animales_ia/test_m65.gd` 24 OK / 0 fallos / EXIT 0 / 0 SCRIPT ERROR; `tests/test_m65.gd` (pack/school) 35 OK / 0 fallos / EXIT 0 / 0 SCRIPT ERROR.
+- Artefactos: Log 2018 (ASCII puro por bytes, 4.215 B, 77 CRLF, sin BOM; pool head medido 2018 -> 2019), msg 088 (UTF-8 sin BOM, LF puro 79, 4.193 B), 36-Fauna 05-Checklist (227 -> 228 [x] / 0 [?] / 0 [ ]; 18.182 -> 19.065 B, LF puro preservado, sin BOM, diff 3 lineas), M65 03-Diseno.md (1.110 -> 2.805 B, +30 lineas, LF preservado), tracker 87, pool canal 088 consumido y reexpandido a 089..188 (100 consecutivos verificados).
+- Limites: 0 commits / 0 push / 0 archivos ajenos modificados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 flips ajenos / 0 auto-sellos 21.8. Flip ofrecido a revertir al director.
+- Pendientes del director: commit de paths (36-Fauna 05-Checklist, M65 03-Diseno, Log 2018, msg 088, tracker, BACKLOG) + los arrastrados (M55/M93/M109, QA 21.8 M109/M93, "16 Totales", gate ASCII Logs/, gate legal 300 PNG M159).
+- Proxima: NN > 87; sin mensaje -> item 21 ([50] verificacion de presupuesto) u otro de la cola.
 

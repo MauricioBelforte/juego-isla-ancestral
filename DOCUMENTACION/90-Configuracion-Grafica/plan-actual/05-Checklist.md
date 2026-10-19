@@ -171,7 +171,8 @@
 - [x] Definir FSR 2.0 (AMD mejorado) -- agnes-3-flash 2026-10-22 (M90 t3): `UPSCALING` incluye `UP_FSR2` en `graphics_config.gd`.
 - [x] Definir DLSS (NVIDIA) -- agnes-3-flash 2026-10-22 (M90 t3): `UPSCALING` incluye `UP_DLSS` en `graphics_config.gd`.
 - [x] Definir XeSS (Intel) -- agnes-3-flash 2026-10-22 (M90 t3): `UPSCALING` incluye `UP_XESS` en `graphics_config.gd`.
-- [ ] Definir detecciÃ³n de GPU y habilitaciÃ³n correspondiente
+- [x] Definir detecciÃ³n de GPU y habilitaciÃ³n correspondiente -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA. DetecciÃ³n ya en _clasificar_gpu+
+ecomendar_preset.
 - [x] Definir recomendaciÃ³n por preset (bajo: FSR 1.0, medio: FSR 2.0, alto: DLSS, ultra: DLSS ultra)
 
 ### [S] Escala de resoluciÃ³n
@@ -212,12 +213,12 @@
 - [x] DiseÃ±ar aplicaciÃ³n en tiempo real -- agnes-3-flash 2026-10-22 (M90 t4): aplicacion en tiempo real = plicar_env() (aplica al Environment al cambiar el preset) + mapeo_accesibilidad(). Runtime pendiente.
 
 ### [S] IntegraciÃ³n con M61 (Rendimiento)
-- [ ] DiseÃ±ar FPS counter (opcional, en debug)
-- [ ] DiseÃ±ar profiling de GPU (opcional, en debug)
-- [ ] DiseÃ±ar monitoreo de uso de GPU y RAM (opcional, en debug)
-- [ ] DiseÃ±ar FPS counter visible en debug (M110)
-- [ ] DiseÃ±ar profiling visible en debug (M110)
-- [ ] DiseÃ±ar monitoreo visible en debug (M110)
+- [x] DiseÃ±ar FPS counter (opcional, en debug) -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA.
+- [x] DiseÃ±ar profiling de GPU (opcional, en debug) -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA.
+- [x] DiseÃ±ar monitoreo de uso de GPU y RAM (opcional, en debug) -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA.
+- [x] DiseÃ±ar FPS counter visible en debug (M110) -- agnes-3-flash 2026-10-22 (M90 t6): flag DEBUG_FLAGS['fps_counter'] + mapeo_debug(); el display lo pinta M110. Runtime pendiente.
+- [x] DiseÃ±ar profiling visible en debug (M110) -- agnes-3-flash 2026-10-22 (M90 t6): flag DEBUG_FLAGS['profiling_gpu']; display M110. Runtime pendiente.
+- [x] DiseÃ±ar monitoreo visible en debug (M110) -- agnes-3-flash 2026-10-22 (M90 t6): flag DEBUG_FLAGS['monitoreo_gpu_ram']; display M110. Runtime pendiente.
 
 ### [S] IntegraciÃ³n con M88 (Fuentes TipogrÃ¡ficas)
 - [x] DiseÃ±ar tamaÃ±o de fuente (slider 0.5x a 2x) -- agnes-3-flash 2026-10-22 (M90 t4): accesibilidad en graphics_config.gd (ACCESIBILIDAD_DEFAULT + mapeo_accesibilidad + fijar/acceder_accesibilidad + validar_slider) + test_graphics_config_post_m90.gd. Runtime pendiente QA.
@@ -233,7 +234,7 @@
 - [ ] DiseÃ±ar controles para ventana (toggle)
 - [ ] DiseÃ±ar controles para borderless (toggle)
 - [ ] DiseÃ±ar controles para VSync (dropdown)
-- [ ] DiseÃ±ar controles para FPS cap (dropdown)
+- [x] DiseÃ±ar controles para FPS cap (dropdown) -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA. FPS_OPCIONES (30/60/120/0) + pply_fps_cap() (Engine.max_fps).
 - [ ] DiseÃ±ar controles para escala de resoluciÃ³n (slider)
 - [ ] DiseÃ±ar controles para upscaling (dropdown)
 - [ ] DiseÃ±ar controles para calidad de sombras (dropdown)
@@ -268,13 +269,14 @@
 - [ ] DiseÃ±ar HardwareDetector
 - [ ] DiseÃ±ar mÃ©todo detect_hardware()
 - [x] DiseÃ±ar mÃ©todo recommend_preset()
-- [ ] DiseÃ±ar lÃ³gica de recomendaciÃ³n segÃºn GPU, RAM, CPU
+- [x] DiseÃ±ar lÃ³gica de recomendaciÃ³n segÃºn GPU, RAM, CPU -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA. 
+ecomendar_preset() (gana la mÃ¡s baja de GPU/RAM/CPU).
 
 ### [S] AplicaciÃ³n de configuraciÃ³n
 - [x] DiseÃ±ar GraphicsApplier
 - [ ] DiseÃ±ar mÃ©todo apply_resolution()
 - [ ] DiseÃ±ar mÃ©todo apply_vsync()
-- [ ] DiseÃ±ar mÃ©todo apply_fps_cap()
+- [x] DiseÃ±ar mÃ©todo apply_fps_cap() -- agnes-3-flash 2026-10-22 (M90 t6): pply_fps_cap() implementado (Engine.max_fps, valida contra FPS_OPCIONES). Runtime pendiente.
 - [x] DiseÃ±ar mÃ©todo apply_shadows_quality()
 - [x] DiseÃ±ar mÃ©todo apply_textures_quality()
 - [ ] DiseÃ±ar mÃ©todo apply_anti_aliasing()
@@ -334,7 +336,7 @@
 ## Dependencia: VisiÃ³n del Agente (M154)
 
 - [x] Verificar que el M154 (VisiÃ³n del Agente) estÃ¡ implementado y operativo (al menos una vÃ­a activa) antes de comenzar cualquier trabajo visual de este mÃ³dulo â€” ver `DOCUMENTACION/154-Vision-Del-Agente/` y secciÃ³n 25 de AGENTS.md [S]
-**Totales:** 249 Ã­tems Â· Completados: 181 Â· Pendientes: 64 Â· No resueltos: 4. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la lÃ­nea decÃ­a 123/122/4; conteo real por regex = 155 [x] / 4 [?] / 90 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
+**Totales:** 249 Ã­tems Â· Completados: 191 Â· Pendientes: 54 Â· No resueltos: 4. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la lÃ­nea decÃ­a 123/122/4; conteo real por regex = 155 [x] / 4 [?] / 90 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
 
 > **Agregado por auditorÃ­a de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenÃ­a lÃ­nea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?].

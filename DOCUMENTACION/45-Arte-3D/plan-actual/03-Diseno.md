@@ -166,3 +166,25 @@ Piezas estándar compatibles con construcción (M17) y templos (M24/M26), todas 
 | M63 | Activación de LODs por distancia |
 | M108 | Pipeline de importación, convenciones, optimización |
 | M06 | Git LFS para binarios |
+## 7. Convenios de carpeta, nombres y límites (doc headless — agnes-3-flash, 2026-10-22, frente COLA A V3)
+
+Cierra los 5 items documentables de M45 (COLA A V3). Los de validación de assets (escala/tris/UV/LOD) quedan bloqueados por `validate_mesh.gd` (MISS) + 0/23 GLB en disco.
+
+### 7.1 Carpeta `npc/` (aldeanos M19)
+- Ruta: `assets/models/npc/<rol>/`. Convencion: un subdirectorio por **rol** M19 (no por nombre propio).
+- Dentro: `<rol>_<var>_c<N>.<ext>` (var = pose base: idle/walk/emote).
+- Enlace M161: el `npc_id` M161 resuelve a la carpeta M45 por **rol/profesion** (campo `rol`), no por nombre propio M19.
+
+### 7.2 Regla de nombres de variantes (sufijo `_c1`, `_c2`...)
+- Sufijo `_c<N>` = variante cromatica/estacional (RF5/RF6). `c1` = base, `c2..cN` = variantes.
+- Limite: **max 6 variantes por malla** (RF5); exceder = deuda `[?]` (no se crea).
+- El sufijo NO cambia la topologia: misma malla, distinto material/textura (§4).
+
+### 7.3 Límites de assets visibles por escena
+- Presupuesto orientativo por tipo (validador de rendimiento = M61): **Pueblo** ≤ 40 assets / 300k tris; **Bosque** ≤ 120 / 500k (M50 LOD); **Templo/interior** ≤ 60 / 200k.
+- Por encima del limite: LOD0→LOD3 o culling por distancia (§ M90 CULLING).
+
+### 7.4 Compatibilidad con generación procedural (M10)
+- **M10 NO crea assets: solo los COLOCA** (instancia los GLB de M45). M45 produce, M10 instancias.
+- Cada asset M45 lleva metadata de colocacion (footprint Y=0 + colision) para colocarse en grilla voxel sin flotar (regla M167: `get_height(x,z)+1`).
+- Los assets M45 NO contienen logica de spawn/placement (eso es M10/M15).
