@@ -127,6 +127,13 @@ var _liberaciones_forzadas: int = 0
 var _audio_descargando: Dictionary = {}   # banco -> true
 var _audio_diferido: Dictionary = {}      # banco -> true
 
+## ── L154: cambio de bioma de audio con descarga diferida 1 frame ──
+var _audio_banco_actual: RefCounted = null
+var _audio_banco_pendiente: RefCounted = null
+var _audio_liberar_frame: int = 0
+var _audio_liberaciones_diferidas: int = 0
+var _audio_ultimo_liberado: String = ""
+
 ## ── Iter. 5: evicción de atlas con log (checklist §K L167) ──
 var tex: TextureMemory = null
 
@@ -159,6 +166,7 @@ func _process(delta: float) -> void:
 	if _acumulado_muestreo >= intervalo_muestreo():
 		_acumulado_muestreo = 0.0
 		muestrear_ahora()
+	_procesar_liberacion_audio()
 
 ## Intervalo vigente según haya movimiento de cámara reciente.
 func intervalo_muestreo() -> float:
@@ -408,6 +416,63 @@ func bancos_audio_diferidos() -> Array:
 
 func audio_diferido_count() -> int:
 	return _audio_diferido.size()
+
+## ── L154: cambio de bioma de audio con descarga diferida 1 frame ──────────
+## El banco anterior NO se suelta en el mismo frame del cambio: queda retenido
+## hasta el `_process` del frame siguiente para no cortar la transición. M42 es
+## el llamador de producción (deuda de cableado declarada en 07 §12): llama a
+## `avisar_cambio_bioma_audio()` desde su cambio de bioma.
+func avisar_cambio_bioma_audio(banco_nuevo: RefCounted) -> bool:
+	if banco_nuevo == _audio_banco_actual:
+		return false
+	# Dos cambios en el mismo frame: el banco intermedio nunca llegó a sonar un
+	# frame completo, se suelta YA para no acumular referencias.
+	if _audio_banco_pendiente != null:
+		_audio_ultimo_liberado = _nombre_banco(_audio_banco_pendiente)
+		_audio_banco_pendiente = null
+		_audio_liberaciones_diferidas += 1
+	_audio_banco_pendiente = _audio_banco_actual
+	_audio_banco_actual = banco_nuevo
+	_audio_liberar_frame = 1 if _audio_banco_pendiente != null else 0
+	if _audio_banco_pendiente != null:
+		_log_m62("audio: banco anterior '%s' diferido 1 frame" % _nombre_banco(_audio_banco_pendiente), 2)
+	return true
+
+## Suelta el banco pendiente con un frame completo de margen.
+func _procesar_liberacion_audio() -> void:
+	if _audio_banco_pendiente == null:
+		return
+	# Primer _process tras el cambio: se marca; el SIGUIENTE es el que suelta.
+	# Así el banco anterior sobrevive al menos un frame completo de transición.
+	if _audio_liberar_frame == 1:
+		_audio_liberar_frame = 2
+		return
+	_audio_ultimo_liberado = _nombre_banco(_audio_banco_pendiente)
+	_audio_banco_pendiente = null
+	_audio_liberar_frame = 0
+	_audio_liberaciones_diferidas += 1
+	_log_m62("audio: banco anterior '%s' liberado tras 1 frame de margen" % _audio_ultimo_liberado, 2)
+
+func audio_banco_actual() -> RefCounted:
+	return _audio_banco_actual
+
+func audio_banco_pendiente() -> RefCounted:
+	return _audio_banco_pendiente
+
+func audio_liberaciones_diferidas() -> int:
+	return _audio_liberaciones_diferidas
+
+func audio_ultimo_liberado() -> String:
+	return _audio_ultimo_liberado
+
+func _nombre_banco(banco: RefCounted) -> String:
+	if banco == null:
+		return "(sin banco)"
+	if banco is Resource:
+		var nombre := str((banco as Resource).resource_name)
+		if not nombre.is_empty():
+			return nombre
+	return "RefCounted#%d" % banco.get_instance_id()
 
 ## ── Evicción de atlas CON LOG (checklist §K L167) ───────────────────────
 ## El detector puro vive en `TextureMemory`; acá se lo conecta al log (M103) y

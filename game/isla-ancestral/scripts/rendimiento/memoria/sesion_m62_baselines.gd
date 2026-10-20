@@ -195,19 +195,58 @@ func _aplicar_escenario() -> void:
 
 
 func _aplicar_horizonte() -> void:
+	# La escena real usa `scripts/follow_camera.gd` (no CameraRig): su unico camino
+	# de zoom es el scroll (MOUSE_BUTTON_WHEEL_DOWN aleja hasta max_distance=20).
+	# Se inyecta por `_unhandled_input`, que ES el punto de entrada de produccion, y
+	# el efecto se mide sobre la Camera3D real (distancia al Player), no sobre un
+	# campo privado: asi el check no depende de como se llame la variable interna.
+	var cam: Node = _buscar_por_script(root, "scripts/follow_camera.gd")
 	var rig: Node = _buscar_por_script(root, "camera/camera_rig.gd")
-	if rig == null:
-		_no_medible = "no hay CameraRig en el arbol: no se puede otear el horizonte"
+	if cam == null and rig == null:
+		_no_medible = "no hay camara de produccion (follow_camera/CameraRig) en el arbol"
 		return
-	var antes := int(rig.call("get_zoom_level"))
-	var dist_antes := float(rig.call("get_zoom_distance_value"))
-	rig.call("set_zoom_level", 2)
-	var despues := int(rig.call("get_zoom_level"))
-	var dist_despues := float(rig.call("get_zoom_distance_value"))
-	_evidencia.append("zoom nivel %d -> %d, distancia %.1f -> %.1f" % [antes, despues, dist_antes, dist_despues])
-	_check(despues == 2, "el zoom quedo en el nivel maximo (2)")
-	if despues != 2:
-		_no_medible = "CameraRig no acepto el zoom maximo (modo actual != EXPLORE)"
+	if rig != null:
+		rig.call("set_zoom_level", 2)
+		var nivel := int(rig.call("get_zoom_level"))
+		_evidencia.append("CameraRig zoom nivel -> %d, distancia %.1f" % [nivel, float(rig.call("get_zoom_distance_value"))])
+		_check(nivel == 2, "el zoom quedo en el nivel maximo (2)")
+		if nivel != 2:
+			_no_medible = "CameraRig no acepto el zoom maximo (modo actual != EXPLORE)"
+			return
+		_aplicado = true
+		return
+
+	var jugador: Node = _raiz.find_child("Player", true, false)
+	var camara3d: Camera3D = _raiz.find_child("Camera3D", true, false) as Camera3D
+	if jugador == null or camara3d == null:
+		_no_medible = "sin Player o Camera3D: no se puede medir la distancia de oteo"
+		return
+	var objetivo: Variant = cam.get("_target")
+	var en_grupo := get_nodes_in_group("player").size()
+	_evidencia.append("camara en %s | Player en %s | _target=%s | grupo 'player': %d | frames: phys=%d proc=%d"
+		% [str(camara3d.global_position), str((jugador as Node3D).global_position),
+		("null" if objetivo == null else str(objetivo)), en_grupo,
+		Engine.get_physics_frames(), Engine.get_process_frames()])
+	if objetivo == null:
+		_no_medible = "follow_camera sin _target: la camara no sigue al Player y el zoom no aplica"
+		return
+	var antes := camara3d.global_position.distance_to((jugador as Node3D).global_position)
+	# Si la camara no esta sobre el Player, el escenario "oteo" no existe: se mide
+	# ANTES de inyectar scroll para no reportar como baseline una escena que no oteo.
+	if antes > 100.0:
+		_no_medible = "la camara de seguimiento no esta sobre el Player (%.0f m): el oteo del horizonte no se reproduce en headless" % antes
+		return
+	for i in 12:
+		var ev := InputEventMouseButton.new()
+		ev.button_index = MOUSE_BUTTON_WHEEL_DOWN
+		ev.pressed = true
+		cam.call("_unhandled_input", ev)
+	var despues := camara3d.global_position.distance_to((jugador as Node3D).global_position)
+	_evidencia.append("scroll x12: distancia camara->Player %.2f -> %.2f (max_distance=20)" % [antes, despues])
+	_check(despues > antes + 1.0, "el scroll alejo la camara (distancia crecio)")
+	_check(despues >= 19.0, "la camara quedo en el tope de oteo (>= 19 m)")
+	if despues < 19.0:
+		_no_medible = "el zoom no llego al tope (%.2f m): la camara no se deja otear" % despues
 		return
 	_aplicado = true
 
@@ -225,10 +264,17 @@ func _aplicar_subterraneo() -> void:
 	p3.global_position = Vector3(p3.global_position.x, y_antes - 40.0, p3.global_position.z)
 	_evidencia.append("Player Y %.1f -> %.1f" % [y_antes, p3.global_position.y])
 	_check(absf(p3.global_position.y - (y_antes - 40.0)) < 0.01, "el Player bajo 40 m (subterraneo)")
-	var voxels := _contar_por_script(root, "voxel_terrain")
+	# VoxelTerrain es una clase NATIVA (sin script): contar por script daba 0 y el
+	# detector era CIEGO (0 de un detector roto == 0 de un arbol limpio).
+	var voxels := _contar_voxel(root)
 	_evidencia.append("VoxelTerrain en el arbol: %d" % voxels)
+	var bloques := _bloques_voxel(root)
+	_evidencia.append("bloques actualizados por el VoxelTerrain: %d" % bloques)
 	if voxels == 0:
 		_no_medible = "0 VoxelTerrain en la escena: el subterraneo del templo no existe en este arbol"
+		return
+	if bloques <= 0:
+		_no_medible = "VoxelTerrain presente pero 0 bloques generados en headless: el subterraneo no se ejercita (medido en Log 2028)"
 		return
 	_aplicado = true
 
@@ -310,15 +356,31 @@ func _buscar_por_script(n: Node, sufijo: String) -> Node:
 	return null
 
 
-func _contar_por_script(n: Node, fragmento: String) -> int:
+## VoxelTerrain/VoxelViewer son clases NATIVAS (sin script asociado): contarlas
+## por ruta de script devuelve 0 SIEMPRE y el detector queda ciego.
+func _contar_voxel(n: Node) -> int:
 	var total := 0
-	if n.get_script() != null:
-		var ruta := (n.get_script() as Script).resource_path
-		if ruta.find(fragmento) != -1:
-			total += 1
+	if n is VoxelTerrain:
+		total += 1
 	for h in n.get_children():
-		total += _contar_por_script(h, fragmento)
+		total += _contar_voxel(h)
 	return total
+
+
+## Bloques que el VoxelTerrain dice haber actualizado (0 en headless: medido en Log 2028).
+func _bloques_voxel(n: Node) -> int:
+	if n is VoxelTerrain:
+		var vt := n as VoxelTerrain
+		if vt.has_method("get_statistics"):
+			var st: Variant = vt.call("get_statistics")
+			if typeof(st) == TYPE_DICTIONARY:
+				return int((st as Dictionary).get("updated_blocks", 0))
+		return 0
+	for h in n.get_children():
+		var r := _bloques_voxel(h)
+		if r > 0:
+			return r
+	return 0
 
 
 func _contar_audio_players(n: Node) -> int:
@@ -360,7 +422,9 @@ func _cerrar() -> void:
 	var piso := 2
 	if _escenario != "menu":
 		piso = 7 if _escenario == "spawn" else 8
-	if _checks < piso:
+	# En un escenario NO MEDIBLE el piso no aplica: el codigo de salida ya es 3 y
+	# sumar un "solo N checks" ahi confunde un bloqueo con un defecto.
+	if _no_medible == "" and _checks < piso:
 		_check(false, "solo %d checks ejecutados (minimo %d)" % [_checks, piso])
 
 	print("-- fin: %s" % Time.get_datetime_string_from_system())
