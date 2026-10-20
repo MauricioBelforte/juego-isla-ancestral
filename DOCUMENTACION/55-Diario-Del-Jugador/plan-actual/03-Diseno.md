@@ -199,3 +199,52 @@ autowrap, oculto si no hay texto) → cabecera `Referencias` + botones `Ref_*` �
 `"ui": {"filtro": <0-4>, "categoria": <slug>}`; `set_ui_prefs()` sanea valores fuera de
 rango a los defaults (0/"personajes"); al abrir la capa, `_aplicar_prefs_ui()` restaura
 el filtro y la pestaña de la sesión anterior.
+
+## 10. Filtro por bioma (definición 2026-10-20, Step-5-WorkBuddy)
+
+Definición del filtro por bioma para las categorías `criaturas` y `lugares`
+(checklist 05 L155). Estado real medido hoy: `DiaryLayer` expone 5 filtros de
+estado (`enum Filtro`: TODOS/NUEVOS/VISTOS/COMPLETADOS/FAVORITOS) + búsqueda con
+diacríticos; NO existe filtro por bioma en disco.
+
+- **Dato:** campo opcional `bioma` (slug ascii) en cada entrada de `criaturas` y
+  `lugares` del catálogo (`data/diario/diario_catalog.json`). El validador
+  (`validate_diary.gd`) debe exigir slug y valor del catálogo de biomas de M09/M54.
+- **Servicio:** `DiaryService.entradas_de(categoria)` ya devuelve las entradas
+  descubiertas; se agrega `set_filtro_bioma(slug)` / `get_filtro_bioma()` análogo
+  a `set_ui_prefs()` (se persiste con el save en `"ui"`, saneado a default).
+- **UI:** 6.ª opción de filtro + dropdown de biomas poblado con los biomas
+  presentes en las entradas descubiertas de la categoría activa (anti-spoiler:
+  la lista de biomas se calcula sobre lo descubierto, §3.2).
+- **Dependencia:** catálogo de biomas de M09/M54 (dueño externo); mientras no
+  exista, el filtro opera sobre los `bioma` que traigan las entradas.
+- Implementación diferida = KnownIssue no bloqueante (precedente M50/M119).
+
+## 11. Contenido secreto desbloqueable por acción concreta (definición 2026-10-20, Step-5-WorkBuddy)
+
+Definición del mecanismo de contenido secreto (checklist 05 L163). Base real
+medida hoy: el modelo de entrada tiene la marca `secreta`; `entradas_de()` filtra
+`registrada or secreta` y la UI muestra `DIARY.BLOQUEADO` ("???") para la secreta
+no registrada (diary_layer.gd L437-440, "solo lore §3.2"). Sin embargo, HOY
+ninguna entrada del catálogo trae la marca (medido: 0 de 44) y ninguna acción
+concreta revela una secreta.
+
+Reglas definidas:
+
+1. **Marca:** `secreta: true` solo en entradas de secciones lore (pistas, sellos,
+   ruinas, cartas); NUNCA en colecciones (criaturas, plantas, minerales, recetas)
+   — coherente con L164 y §3.2.
+2. **Visibilidad:** no registrada → "???" + título oculto; registrada → título,
+   descripción y refs normales. El mecanismo de UI ya existe (§3.2, L439-440).
+3. **Acción reveladora:** cada secreta declara en el catálogo el evento del
+   EventBus (M07) que la registra (ej: `PISTA_LEIDA` de M24, `prereq_met` de
+   M22). Los puentes vivos hoy: `prereq_met`→sellos, `npc_moved_in`→personajes,
+   `quest_completed`→misiones, `island_loaded`→lugares, `season_changed`→eventos,
+   `carta_recibida`→cartas (diary_service.gd L90-112). Los puentes que falten
+   (PISTA_LEIDA, RUIDA_PROGRESADA, DESCUBRIMIENTO) se conectan cuando el sistema
+   dueño emita la señal.
+4. **Validación:** `validate_diary.gd` extiende la regla de refs: una `secreta`
+   debe declarar `accion` (string no vacía) y ninguna ref puede apuntar a una
+   secreta no revelable por la misma acción (anti-spoiler por construcción).
+5. Poblar el catálogo con las primeras secretas es contenido de M22/M24/M25
+   (dueños externos); la definición y el mecanismo quedan cerrados acá.

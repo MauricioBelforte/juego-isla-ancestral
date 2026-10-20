@@ -31,6 +31,10 @@ var _estacion_cache_valida: bool = false
 
 var _cache_iconos: Dictionary = {}  # M16 item [20]: pool ligero icono de recetas (item_id -> Texture2D)
 
+## false = instancia de test: no registra provider (evita colisión de sección
+## "crafting" con el autoload del boot). Setear ANTES de add_child.
+var registra_en_save: bool = true
+
 
 func _ready() -> void:
 	_gt = get_node_or_null("/root/GameTime")
@@ -44,7 +48,8 @@ func _ready() -> void:
 		print("[M16] RF17: use_item de M14 conectado (pergaminos)")
 	_refrescar_estacion_actual()
 	_cargar_recetas()
-	_registrar_proveedor_guardado()
+	if registra_en_save:
+		_registrar_proveedor_guardado()
 	# Feedback procedural (SFX/VFX) como hijo del servicio (autoload)
 	var fb_script := load("res://scripts/crafting/crafting_feedback.gd")
 	if fb_script != null:
@@ -57,9 +62,11 @@ func _on_estacion_cambio(est: int) -> void:
 	_estacion_cache_valida = true
 
 func _refrescar_estacion_actual() -> void:
-	# Lee siempre de M29 (fuente de verdad). La señal estacion_cambio mantiene
-	# el cache caliente, pero cada consulta re-lee para soportar tests/manipulación
-	# directa de GameTime._mes y para correctness ante cualquier cambio externo.
+	# Lee de M29 (fuente de verdad). Desde el item 4 del plan, SOLO lo invocan el
+	# arranque y los paths de ENFORCEMENT (craft / max_craftable / get_estacion_actual):
+	# el FILTRO de recetas usa la cache mantenida por la señal estacion_cambio
+	# (cero re-lecturas por consulta). La re-lectura se conserva aquí para
+	# soportar tests/manipulación directa de GameTime._mes (correctness).
 	if _gt != null and _gt.has_method("get_estacion"):
 		_estacion_actual = int(_gt.get_estacion())
 		_estacion_cache_valida = true
@@ -112,7 +119,9 @@ func obtener_receta(rec_id: String) -> CraftingRecipe:
 
 func recetas_por_estacion(estacion: int) -> Array:
 	var out: Array = []
-	_refrescar_estacion_actual()
+	# M16 item 4: el FILTRO usa la estación cacheada que mantiene `estacion_cambio`
+	# (recalculo SOLO ante la señal — cero re-lecturas de GameTime por consulta).
+	# Los enforcement (craft / max_craftable) conservan su re-lectura propia.
 	for receta in _recetas.values():
 		if receta.estacion != estacion:
 			continue

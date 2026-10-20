@@ -554,3 +554,25 @@ el frame equivocado. (Esa fue la 1.ª corrida en rojo: `21 checks, 1 fallo`.)
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_m62_ogg_cache.gd
 ```
+
+## 22. Tanda 70 (2026-10-20, DS-Opencode, Log 2031): L153 — los buses (M91) no retienen streams detenidos
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L153 del checklist: "Los buses (M91) no retienen streams detenidos".
+- **Contrato pinneado (sin cambio de producción):** topología M91 intacta (7 buses, los 6 no-Master a Master); un stream reproducido en un bus y detenido (stop + stream=null) NO queda retenido por el bus (WeakRef muere tras el frame del playback); el ciclo ×3 no acumula; un bus con efectos (compressor de Master) tampoco retiene el stream; free() del reproductor libera el stream y no deja reproductores colgados.
+- **Suite nueva:** `test_m62_buses_m91.gd` (**40 checks**) con el AudioServer REAL vía `--headless --script`:
+  - **A (14):** topología M91: los 7 buses existen, bus_count == 7, los 6 no-Master enrutados a Master.
+  - **B (11):** stream detenido en Music: player en el bus, reproducción, stop, stream=null, WeakRef muere, bus_count 7, efectos sin cambios.
+  - **C (5):** ciclo ×3 en Music/SFX/Ambient: 3 streams muertos, bus_count constante, buses siguen existiendo.
+  - **D (6):** bus con efectos (compressor de Master): el stream detenido igual muere y el efecto sigue montado.
+  - **E (3):** free() del player reproduciendo: stream muere, bus_count 7, sin reproductores colgados en el árbol.
+  - **Base (1):** AudioServer disponible.
+- **Resultado:** 40 checks, 0 fallos, **×3 corridas idénticas** (corridas 5/6/7, exit 0, 57 líneas de test normalizadas idénticas; se filtra el ruido no determinista del arranque del mundo). Corridas 1-4 fueron construcción del harness (argumentos invertidos, espera del playback del AudioServer, OBJECT_COUNT global reemplazado por conteo local del árbol). Evidencia: `out/tanda70/suite_corrida{1..7}.log`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 40 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda70/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `dad6998a…`).
+- **Regresión:** 17 suites M62 (las 16 del set T69 + la nueva) + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25/33/24/24/45/57/46/40 checks + budgets; `out/tanda70/reg_*.log`).
+- **Alcance (lo que NO prueba):** sin assets de audio en el repo se usa `AudioStreamWAV` como stand-in DECLARADO (AudioStream real del engine, misma semántica RefCounted); se mide la retención por el bus, no el decoder.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_buses_m91.gd
+```

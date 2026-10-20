@@ -150,7 +150,7 @@
 - [x] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C]
 - [x] Voces del pool M43 con tope duro: si se llena, se corta la voz más antigua (nunca crece) [S]
 - [x] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M]
-- [ ] Los buses (M91) no retienen streams detenidos [S]
+- [x] Los buses (M91) no retienen streams detenidos [S]
 - [ ] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M]
 - [ ] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C]
 
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 129 - Pendientes: 21 - No resueltos: 0.
+**Totales:** 150 items - Completados: 130 - Pendientes: 20 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -729,3 +729,40 @@ que los cierres previos (L137/139/140/141/142/143/149/150).
 `stream_manager.gd` (M63, read-only); el colector de sintaxis (autogenerado).
 
 **Totales tras el cierre:** 129 / 21 / 0 (150 items).
+
+## Notas del Agente — Tanda 70 (DS-V4.1-Flash-Opencode, OpenCode, 2026-10-20, Log 2031)
+
+**Estado:** L153 cerrado por MEDICIÓN (no por argumento): suite nueva `test_m62_buses_m91.gd`
+(40 checks, 0 fallos, ×3 corridas idénticas 5/6/7) con el AudioServer REAL y la topología de buses
+M91 del proyecto. Cierra el ítem "Los buses (M91) no retienen streams detenidos".
+
+**Contrato medido (mecanismo del engine + topología M91, sin cambio de producción):**
+- TOPOLOGÍA M91: los 7 buses existen (Master, Music, SFX, Ambient, Voice, UI, Cinematic), bus_count
+  == 7 y los 6 no-Master siguen enrutados a Master.
+- STREAM DETENIDO: reproducir un AudioStream real en Music, stop() + stream = null → el bus no
+  retiene el stream (WeakRef muere tras el frame del playback), bus_count sigue en 7 y los efectos
+  del bus no cambian.
+- CICLO ×3 en Music/SFX/Ambient: 3 streams muertos, bus_count constante y los buses siguen existiendo.
+- BUS CON EFECTOS: con el compressor montado en Master, el stream detenido igual muere y el efecto
+  sigue montado (el efecto no guarda el stream).
+- PLAYER LIBERADO REPRODUCIENDO: free() del reproductor libera el stream, bus_count sigue en 7 y el
+  árbol no queda con reproductores colgados (conteo local, no OBJECT_COUNT global).
+
+**Evidencia (out/tanda70):** corridas 1-4 fueron construcción del harness (defectos detectados y
+corregidos: argumentos invertidos en un check, el AudioServer libera el playback en el frame
+siguiente → espera acotada por WeakRef, y OBJECT_COUNT global derivaba entre corridas → se
+sustituyó por un criterio local del árbol). Corridas 5/6/7 del archivo final: 40 checks, 0 fallos,
+exit 0, 57 líneas de test normalizadas idénticas (se filtra el ruido no determinista del arranque
+del mundo: spawner M36, impostores M09). Guardián de 3 capas EN ROJO (piso 999 → `[FALL]` + exit 1;
+suite restaurada byte-idéntica sha256 `dad6998a…`). Regresión: 17 suites + budgets verdes.
+
+**Alcance declarado:** el repo no tiene assets de audio (0 `.ogg/.wav/.mp3` en game/isla-ancestral);
+se usa AudioStreamWAV generado en memoria como stand-in DECLARADO (AudioStream REAL del engine,
+misma semántica RefCounted). Se mide la retención del stream por parte del bus, no el decoder.
+Mismo criterio que los cierres previos (L137/139/140/141/142/143/149/150/152).
+
+**No toqué:** `quality.yml`; `music_director.gd` / `feedback_director.gd` (M41/M44, read-only);
+`ambient_director.gd` (M42, read-only); `memory_monitor.gd`; `pool_factory.gd`; `unload_policy.gd`;
+`stream_manager.gd` (M63, read-only); el colector de sintaxis (autogenerado).
+
+**Totales tras el cierre:** 130 / 20 / 0 (150 items).

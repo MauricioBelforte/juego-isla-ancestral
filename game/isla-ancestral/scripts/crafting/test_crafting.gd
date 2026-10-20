@@ -157,6 +157,7 @@ func _test_estacional_rf5() -> void:
 	_check(not talisman.es_fabricable_ahora(0), "talisman NO fabricable en primavera")
 	# Filtrado por temporada actual: forzar otoño (_mes=9 -> estación 2)
 	gt._mes = 9
+	gt.emit_signal("estacion_cambio", 2)
 	var mesa: Array = _cs.recetas_por_estacion(CraftingRecipe.Estacion.MESA_TRABAJO)
 	var tiene_ensalada: bool = false
 	for r in mesa:
@@ -168,6 +169,7 @@ func _test_estacional_rf5() -> void:
 	_check(_cs.max_craftable("rec_ensalada_bayas") == 0, "max_craftable=0 fuera de temporada")
 	# Forzar verano (_mes=4 -> estación 1)
 	gt._mes = 4
+	gt.emit_signal("estacion_cambio", 1)
 	if not _cs.es_conocida("rec_ensalada_bayas"):
 		_cs.aprender_desde_pergamino("rec_ensalada_bayas")
 	var fogata: Array = _cs.recetas_por_estacion(CraftingRecipe.Estacion.FOGATA)
@@ -178,12 +180,14 @@ func _test_estacional_rf5() -> void:
 	_check(tiene_ens, "ensalada aparece en fogata en verano")
 	# craft fuera de temporada: no consume (forzar invierno _mes=11 -> estación 3)
 	gt._mes = 11
+	gt.emit_signal("estacion_cambio", 3)
 	var bayas_antes: int = _inv.count_item("baya_roja")
 	var ok: bool = _cs.craft("rec_ensalada_bayas", 1)
 	_check(not ok, "craft de ensalada en invierno falla")
 	_check(_inv.count_item("baya_roja") == bayas_antes, "sin consumo en temporada cerrada (RF5/RF11)")
 	# Reset estación
 	gt._mes = 1
+	gt.emit_signal("estacion_cambio", 0)
 
 ## Pergaminos M14: usar_pergamino(item_id) aprende la receta y emite señal.
 func _test_pergamino_m14() -> void:

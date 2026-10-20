@@ -20,6 +20,9 @@ const RADIO_INTERACCION := 2.5
 var _mesh: MeshInstance3D
 var _area: Area3D
 var _jugador: Node3D = null
+## M16 item 7: tope de reintentos de búsqueda del player (evita churn infinito
+## de call_deferred cuando la estación vive poco o el player no aparece).
+var _reintentos_jugador: int = 0
 
 func _ready() -> void:
 	_crear_presentacion()
@@ -37,8 +40,12 @@ func _buscar_jugador() -> void:
 		_buscar_jugador_deferred()
 
 func _buscar_jugador_deferred() -> void:
-	if is_inside_tree():
-		call_deferred("_buscar_jugador")
+	# Endurecido (item 7): corta si salió del árbol o agotó los reintentos —
+	# el churn de call_deferred cada frame era trabajo extra por estación.
+	if not is_inside_tree() or _reintentos_jugador >= 5:
+		return
+	_reintentos_jugador += 1
+	call_deferred("_buscar_jugador")
 
 ## Interacción (RF1): el jugador cerca + acción interactuar abre el panel.
 func _unhandled_input(event: InputEvent) -> void:
@@ -102,6 +109,15 @@ func _crear_presentacion() -> void:
 	_area = Area3D.new()
 	_area.add_child(col)
 	add_child(_area)
+	# M16 item 7: sin steps de física extra en estaciones (efecto interactuable
+	# básico). El Area es declarativo — M11 no lo consulta (grep en disco: 0
+	# referencias) y la interacción es por distancia en _unhandled_input. Con
+	# monitoring/monitorable en false y capa 0, el broadphase de física lo excluye
+	# del pipeline: cero trabajo por physics step por estación instanciada.
+	_area.monitoring = false
+	_area.monitorable = false
+	_area.collision_layer = 0
+	_area.collision_mask = 0
 
 func _material(color: Color) -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
