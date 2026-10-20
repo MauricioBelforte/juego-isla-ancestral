@@ -128,7 +128,7 @@ func _run() -> void:
 	var hd: RefCounted = _GC.new()
 	var dh: Dictionary = hd.detect_hardware()
 	_check("detect_hardware devuelve las 5 claves", dh.has("gpu") and dh.has("ram_gb") and dh.has("cpu") and dh.has("nucleos") and dh.has("recomendado"))
-	_check("detect_hardware recomendado es un preset valido", ["bajo", "medio", "alto", "ultra"].has(String(dh["recomendado"])))
+	_check("detect_hardware recomendado es una clasificacion valida", ["baja", "media", "alta", "ultra"].has(String(dh["recomendado"])))
 	_check("detect_hardware nucleos >= 0", int(dh["nucleos"]) >= 0)
 
 	# --- Upscaling (§1 aplicado a RenderingServer, mapeo headless) ---

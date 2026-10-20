@@ -789,3 +789,9 @@ msgstr "Use the arrows to move"
 msgid "TUTORIAL.VECINO"
 msgstr "Neighbor"
 
+
+msgid "M69.FEEDBACK.ARRIBADA"
+msgstr "Travel complete"
+
+msgid "M69.FEEDBACK.CANCELADO"
+msgstr "Travel cancelled"

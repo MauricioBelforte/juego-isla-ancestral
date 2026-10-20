@@ -1,6 +1,8 @@
 {
   "idioma": "en",
   "cadenas": {
+    "M69.FEEDBACK.ARRIBADA": "Travel complete",
+    "M69.FEEDBACK.CANCELADO": "Travel cancelled",
     "ui.inventario": "Inventory",
     "ui.tienda": "Shop",
     "ui.diario": "Diary",

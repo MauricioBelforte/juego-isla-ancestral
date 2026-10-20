@@ -33,7 +33,7 @@ const RUTA_NAV := "res://scripts/ui/core/menu_navigator.gd"
 const RUTA_CREDITS := "res://scripts/ui/layers/credits_layer.gd"
 const RUTA_UIROOT := "res://scripts/ui/ui_root.gd"
 const ESPERA_BOTONES_MENUS := 5  # Jugar/Continuar/Ajustes/Créditos/Salir (RF1 pide 6: falta "Cargar")
-const ESPERA_BOTONES_PAUSE := 4  # Continuar/Ajustes/Guardar/Salir
+const ESPERA_BOTONES_PAUSE := 5  # Continuar/Ajustes/Guardar/Borrar slot (M59 item 7, con confirmación)/Salir
 
 var _fallos: int = 0
 var _checks: int = 0

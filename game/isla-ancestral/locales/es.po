@@ -793,3 +793,9 @@ msgstr "Usa las flechas para moverte"
 msgid "TUTORIAL.VECINO"
 msgstr "Vecino"
 
+
+msgid "M69.FEEDBACK.ARRIBADA"
+msgstr "Viaje completado"
+
+msgid "M69.FEEDBACK.CANCELADO"
+msgstr "Viaje cancelado"

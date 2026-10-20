@@ -499,14 +499,15 @@ func mapeo_lod() -> Dictionary:
 ## Detecta el hardware (GPU/RAM/CPU) y devuelve el preset recomendado. Headless:
 ## usa las llamadas de OS (video driver, RAM, núcleos). Devuelve un Dictionary.
 func detect_hardware() -> Dictionary:
-	var gpu: String = String(OS.get_video_driver_name())  # driver; el MODELO de GPU lo resuelve M115
+	# El MODELO de GPU no lo expone OS de Godot 4; lo resuelve M115 (HardwareManager).
+	# Aquí aportamos RAM + CPU (que OS sí da) y el preset recomendado.
 	var ram_mb: int = int(OS.get_static_memory_usage())
 	var ram_gb: float = ram_mb / 1024.0  # OS.get_static_memory_usage() -> MB en Godot 4
 	var cpu: String = String(OS.get_processor_name())
 	var nucleos: int = int(OS.get_processor_count())
-	var recomendado: String = recomendar_preset(gpu, ram_gb, nucleos)
+	var recomendado: String = recomendar_preset(String(OS.get_name()), ram_gb, nucleos)
 	return {
-		"gpu": gpu,
+		"gpu": "",  # marcador: M115 rellena el modelo de GPU real
 		"ram_gb": ram_gb,
 		"cpu": cpu,
 		"nucleos": nucleos,
