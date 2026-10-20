@@ -225,8 +225,8 @@ Final: G-5.3-Flash-Agente / Kilo Code.
   · [x] IMPLEMENTADO+VERIFICADO 2026-10-18 23:35 UTC (G-5.3-Flash-Agente): PauseLayer._bloqueado_por_modal_o_carga() bloquea el guardado si hay DialogLayer/LoadingLayer/ConfirmPopup/Inventory/Shop/Equipment/Diary/Crafting/Settings/Menus visible o GameFlowManager.esta_cargando() — toast SETTINGS.GUARDAR_BLOQUEADO (4 archivos i18n: es/en .po + json). REGRESIÓN: M89 48/0 (post-fix parse-error propio: var faltante en L144 — corregido y re-corrido verde), capas 14/0.
 4. reposicion nicho GLM (directo del 05 real): 59: Deshabilitar botón si no hay cambios (no dirty) [M]
   · [?] PARCIAL 2026-10-19 00:30 UTC (G-5.3-Flash-Agente): el dirty-check full requiere wiring M59/M60 dual backend (SaveManager.is_dirty + SaveWriter.save_exists vs DataStore WriteAtomico) — wiring de dueño M59 (pendiente del plan de slots item 78). MI ENTREGA: QUITÉ mi dirty-check experimental (fallback: botón siempre habilitado salvo bloqueos del item 3 — seguro). Intentos: compare JSON.stringify/var_to_str (Vector3 vs arrays parseados nunca matchean); is_dirty del SaveManager solo se marca por M158 hoy. Pending: el dueño M59 decide dirty con su backend unificado.
-5. reposicion nicho GLM (directo del 05 real): 59: Guardar manualmente desde el menú principal [S]
-6. reposicion nicho GLM (directo del 05 real): 59: Definir 3+ slots con UI de selección en el menú principal [M]
+5. [x] reposicion nicho GLM (directo del 05 real): 59: Guardar manualmente desde el menú principal [S]
+6. [x] reposicion nicho GLM (directo del 05 real): 59: Definir 3+ slots con UI de selección en el menú principal [M]
 7. [x] reposicion nicho GLM (directo del 05 real): 59: Borrar y sobrescribir slot con confirmación [S]
 8. reposicion nicho GLM (directo del 05 real): 59: Id de perfil en el archivo, validado al cargar (sin cruzamiento) [M]
 9. reposicion nicho GLM (directo del 05 real): 59: Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C]
@@ -395,7 +395,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 ## REPOBLACION V3 (2026-10-19T01:46:07) — items REALES de 05-Checklist (fuente en comentario)
 
 1. - [ ] [65] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensi <!-- fuente: 65-Animales-IA/05-Checklist.md -->
-2. - [ ] [16] Doble llamado a craft en el mismo frame: cola interna o rechazo silencioso [M] · ANALISIS G-5.3-Flash-Agente 2026-10-19 (M16 revisado con GO del direc <!-- fuente: 16-Crafting/05-Checklist.md -->
+2. - [x] [16] Doble llamado a craft en el mismo frame: cola interna o rechazo silencioso [M] · [x] T15-M16 2026-10-19 (G-5.3-Flash-Agente): dedupe silencioso clave (frame,rec_id,cantidad) — qa_m16_doble_craft.gd 8/0 + regresión 0 fallos; flips 16-Crafting/05 (163/27/13). · ANALISIS G-5.3-Flash-Agente 2026-10-19 (M16 revisado con GO del direc <!-- fuente: 16-Crafting/05-Checklist.md -->
 3. - [x] [16] Cero cómputo de crafting cuando la UI está cerrada [S] · [x] T13-M16 2026-10-19 (G-5.3-Flash-Agente): verificado en disco+runtime (visual-free): IU/servicio/feedback sin _process, guards visible cortan refresh — qa_m16_ui_cerrada.gd 7/0; flips 16-Crafting/05 (162/28/13). <!-- fuente: 16-Crafting/05-Checklist.md -->
 4. - [x] [16] Filtros de temporada recalculados solo ante season_changed [S] · [x] T11-M16 2026-10-19 (G-5.3-Flash-Agente): recetas_por_estacion sin re-lecturas (cache por señal estacion_cambio) — qa_filtros_estacion_m16.gd 5/0 + regresión test_crafting 0 fallos; flips 16-Crafting/05 (158/32/13). <!-- fuente: 16-Crafting/05-Checklist.md -->
 5. - [ ] [16] Sin asignaciones de objetos en el hot path de fabricación simple [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
