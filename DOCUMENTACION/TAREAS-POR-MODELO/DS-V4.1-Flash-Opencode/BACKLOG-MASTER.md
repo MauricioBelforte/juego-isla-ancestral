@@ -642,7 +642,7 @@
 114. - [ ] [147] Definir revisión contra M153 (contrato O1-O19) [M] <!-- fuente: 147-World-Building/05-Checklist.md -->
 115. - [ ] [158] Definir el problema: progresion de herramientas por tier que desbloquee contenido sin copiar a Zelda [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
 116. - [ ] [158] Registrar dependencias: M13, M38, M27, M28, M71, M22 [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
-117. - [ ] [158] T1 se obtiene gratis en isla principal (auto-coleccion) [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+117. [x] - [ ] [158] T1 se obtiene gratis en isla principal (auto-coleccion) [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
 118. - [ ] [158] T2-T4 se forjan en islas distintas con profesional especializado [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
 119. - [ ] [158] Forja requiere materiales + monedas [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
 120. - [ ] [158] Precios progresivos por isla (+50% minimo entre islas) [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
