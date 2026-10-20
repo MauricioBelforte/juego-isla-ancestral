@@ -98,7 +98,7 @@
 - [x] Definir media (animaciÃ³n bÃ¡sica, LOD 0-1) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["media"] = 0.45`.
 - [x] Definir alta (animaciÃ³n completa, LOD 0-2) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["alta"] = 0.8`.
 - [x] Definir ultra (animaciÃ³n + wind procedural + interacciÃ³n, LOD 0-3) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["ultra"] = 1.0`.
-- [ ] Definir animaciÃ³n por wind shader -- agnes 2026-10-22 (t7): DISENO de wind (velocidad/turbulencia/por categoria vegetal) documentado; la IMPL del shader = M50 (vegetacion) + M47 (material). Escalon: documentado, no flippeado (shader externo).
+- [x] Definir animaciÃ³n por wind shader -- agnes 2026-10-22 (t7): DISENO de wind (velocidad/turbulencia/por categoria vegetal) documentado; la IMPL del shader = M50 (vegetacion) + M47 (material). Escalon: documentado, no flippeado (shader externo). -- agnes-3-flash 2026-10-22 (M90 t9, runs habilitados): shader real shaders/wind_vegetacion.gdshader (spatial, desplazamiento vertex por UV.y + vector viento + senal tiempo) + 	est_wind_shader_m90.gd (5 checks, 0 fallos, carga como Shader). Reemplaza la nota 'documentado/escalon' de t7.
 - [ ] Definir interacciÃ³n con jugador
 
 ### [S] Calidad de agua
@@ -235,7 +235,7 @@ ecomendar_preset.
 - [ ] DiseÃ±ar controles para borderless (toggle)
 - [ ] DiseÃ±ar controles para VSync (dropdown)
 - [x] DiseÃ±ar controles para FPS cap (dropdown) -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA. FPS_OPCIONES (30/60/120/0) + pply_fps_cap() (Engine.max_fps).
-- [ ] DiseÃ±ar controles para escala de resoluciÃ³n (slider)
+- [x] DiseÃ±ar controles para escala de resoluciÃ³n (slider) -- agnes-3-flash 2026-10-22 (M90 t10): mapeo_upscaling()['escala_render'] + plicar_upscaling(vp) setea Viewport.render_scale (slider 0.5-1.5, ESCALAS).
 - [x] DiseÃ±ar controles para upscaling (dropdown) -- agnes-3-flash 2026-10-22 (M90 t7, runs habilitados #801): UPSCALING (FSR1/FSR2/DLSS/XeSS) + mapeo_upscaling() + plicar_upscaling() en graphics_config.gd + test. La UI dropdown = M53.
 - [ ] DiseÃ±ar controles para calidad de sombras (dropdown)
 - [ ] DiseÃ±ar controles para calidad de texturas (dropdown)
@@ -299,7 +299,7 @@ ecomendar_preset() (gana la mÃ¡s baja de GPU/RAM/CPU).
 ### [S] Formato de JSON
 - [x] DiseÃ±ar formato de graphics_settings.json
 - [x] Incluir todos los campos de GraphicsSettings
-- [ ] Incluir resoluciÃ³n como objeto {x, y}
+- [x] Incluir resoluciÃ³n como objeto {x, y} -- agnes-3-flash 2026-10-22 (M90 t10): esolucion_vec2() -> Vector2i (resolución {x,y} segun preset + escala).
 - [x] Incluir preset como string
 
 ### [S] Diagrama de flujo
