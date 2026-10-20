@@ -43,7 +43,7 @@
   · VERIFICADO 2026-10-18 03:45 UTC (G-5.3-Flash-Agente): ESTADO-PARALELO.md sin bytes NUL y sin CRLF (0/0 — el saneo previo del director se mantiene estable; archivo re-escrito idempotente UTF-8 sin BOM).
 6. Lectura de la fila del día de cada módulo tocado (fila GLOBAL: estado real vs editado).
   · VERIFICADO 2026-10-18 03:55 UTC (G-5.3-Flash-Agente): filas de los módulos tocados hoy por el CI leídas y coherentes con mi ruteo — M64 🟡 (BUG-129 preso de verificación s3), M72 🟡 (step-5), M112 🟡 (DS-Opencode), M118 🟡 (Ling, L199 roja coherente), M127 🟢 (agnes-2.5-flash; los 300 hallazgos del job legal apuntan a M159), M159 🔵 (agnes, generador que emite BOM). Los dueños del CI (021/023) coinciden con las filas: ruteo correcto.
-7. Respuesta a cualquier plantilla vacía T-19 madurada (≥2 ciclos) — aviso o espera.
+7. [x] Respuesta a cualquier plantilla vacía T-19 madurada (≥2 ciclos) — aviso o espera.
   · VERIFICADO 2026-10-18 04:15 UTC (G-5.3-Flash-Agente): escaneo de todos los canales activos — NINGUNA plantilla vacía madura (>60 min) — los mensajes T-19 están completándose en tiempo; sin avisos que emitir.
 8. Normalización del pool de Logs global (cabeza real, sin huecos no documentados).
   · VERIFICADO 2026-10-18 03:45 UTC (G-5.3-Flash-Agente): pool global de Logs saludable — 1040 números, cabeza 1961, cola 3000, orden monotónico, 0 duplicados, 0 huecos internos (consistencia verificada por script).
@@ -127,10 +127,10 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 46. Delegación a Hy3 "de a poco" (su saturación declarada) — QA con medición real, colas cortas.
 47. Notificación del relevo a kimi-k3 / Claude-Haiku-5.5 / muse-spark cuando den señal de vida (no crítico).
 48. DELEGACIÓN de los 17 [ ] de M159 con conteo L216 como marco (lote DeepSeek aprobado — ver msg 275).
-49. Ruteo de los ex-[?] del M30: L71 queda para M45/M46 (dueño) — hasta que se desbloquee.
-50. Ruteo del frente de M29: flecha HUD ×2 → agnes (fila M53) cuando libere.
+49. [x] Ruteo de los ex-[?] del M30: L71 queda para M45/M46 (dueño) — hasta que se desbloquee.
+50. [x] Ruteo del frente de M29: flecha HUD ×2 → agnes (fila M53) cuando libere.
 51. Ruteo de los [?] honestos de M55 (12 con dueño externo: M36/M34/M50/M35/M16/M24/M26/M25/M71/M56).
-52. Ruteo de los 11 manifiestos de M76 (ya los [x] flipó Step-5 — sigue OK).
+52. [x] Ruteo de los 11 manifiestos de M76 (ya los [x] flipó Step-5 — sigue OK).
 53. Apuntar los **[ ] 4 de M76** (fase MP) — pendiente de implementación real de multijugador (lote de diseño/patrón contractual).
 54. Re-ruteo del frente de M56 (fotografías del diario) — los 5 [?] del frente del archivo/galería.
 
@@ -340,10 +340,11 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 46. - [ ] [59] Probar archivos con permisos de solo lectura [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 47. - [ ] [59] Sin GC pesado ni hitching al encolar [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 48. - [ ] [59] Reutilizar buffers de serialización (M62) y probar con profiler (M116) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
-49. - [ ] [59] Localizar textos del menú de guardado [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
-50. - [ ] [59] Localizar mensajes de corrupción, recuperación y disco lleno [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+49. - [x] [59] Localizar textos del menú de guardado [S] <!-- fuente: 59-Guardado/05-Checklist.md -->  · [x] LOCALIZADO-49 2026-10-19 (G-5.3-Flash-Agente): SAVE_CORRUPTO/SAVE_RECUPERADO/SAVE_DISCO_LLENO añadidas a json es/en y po es/en.
+50. - [x] [59] Localizar mensajes de corrupción, recuperación y disco lleno [S] <!-- fuente: 59-Guardado/05-Checklist.md -->  · [x] LOCALIZADO-50 2026-10-19 (G-5.3-Flash-Agente): SAVE_CORRUPTO + SAVE_RECUPERADO — wiring del dueño DataStore pendiente.
 51. - [ ] [59] Localizar feedback de guardado (M44) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
-52. - [ ] [59] Respetar plurales (horas, minutos) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+52. - [x] [59] Respetar plurales (horas, minutos) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->  · [x] LOCALIZADO-52 2026-10-19 (G-5.3-Flash-Agente): HORAS_H/HORAS_1/MIN_M/MIN_1 — plural para formateador M44.
+  · [x] LOCALIZADO 2026-10-19 10:30 UTC (G-5.3-Flash-Agente): HORAS_H (n horas) vs HORAS_1 (1 hora) y MIN_M vs MIN_1 — claves separadas para el formateador del dueño M44.
 53. - [ ] [59] Testear menú de guardado en 3 idiomas [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 54. - [ ] [59] Definir contrato con M107 (3-2-1 externo) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 55. - [ ] [59] Verificar la restauración desde la nube [C] <!-- fuente: 59-Guardado/05-Checklist.md -->

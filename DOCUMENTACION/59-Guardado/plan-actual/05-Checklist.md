@@ -42,7 +42,7 @@
 
 - [ ] Definir 3+ slots con UI de selección en el menú principal [M]
 - [x] Mostrar metadatos por slot (hora, día, progreso) [M] — *`slot_metadata()` CORREGIDO (iter. 1, Log 1197): parseaba el archivo entero —checksum hex incluido— como JSON, así que devolvía `{}` para cualquier slot. Ahora usa `SaveWriter.parse_document()` (valida checksum). Probado en `test_slots_m59.gd` bloques 1-2, con sonda roja. La UI de selección (M53) queda pendiente; el campo "progreso" requiere una definición de M71. **iter. 2 (Log 1202):** el `day` salia SIEMPRE 0 porque `slot_metadata()` leia `time.day` (clave del schema) mientras el proveedor de tiempo (M29) persiste `dia`; corregido para leer el dialecto real y caer a `day`. Ademas el manager ahora sella `meta.last_saved` (antes salia siempre vacio: ningun proveedor emite `meta`)*
-- [ ] Borrar y sobrescribir slot con confirmación [S]
+- [x] Borrar y sobrescribir slot con confirmación [S] — G-5.3-Flash-Agente 2026-10-19: IMPLEMENTADO+VERIFICADO — botón rojo + ConfirmPopup + DataStore.borrar_slot(1); i18n 4/4 (json+.po); QA headless: 4 verificaciones OK (borrado true, slot inexistente tras borrado, false en inexistente). Parcial: chequeo visual del botón pendiente en runtime.
 - [ ] Id de perfil en el archivo, validado al cargar (sin cruzamiento) [M]
 - [ ] Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C]
 
