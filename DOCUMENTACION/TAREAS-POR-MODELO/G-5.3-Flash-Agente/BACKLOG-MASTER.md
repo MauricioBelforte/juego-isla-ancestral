@@ -276,7 +276,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
   · [x] AUDITORÍA 2026-10-19 06:25 UTC (G-5.3-Flash-Agente): RF12 cumplido — informe completo en DOCUMENTACION/58-Accesibilidad/auditoria_rf12_puzzles_sin_audio_solo.md: (1) 0 hits de audio directo en puzzle_agua/bloques/espejos/gravedad/luz; (2) puzzle_sonido.gd es DATA-ONLY declarado (item 104, 0 AudioServer en el modelo, test por grep en la fuente); (3) puzzle_room/emisor feedback texto/visual (casi-solución item 53). Rec para dueño: mantener el test por grep como barra del CI + equivalente visual de los tonos.
 40. reposicion nicho GLM (directo del 05 real): 58: RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M]
 41. reposicion nicho GLM (directo del 05 real): 58: Definir que el remapeo respete los conflictos detectados por M57 [M]
-42. reposicion nicho GLM (directo del 05 real): 58: Definir indicador visual del perfil de control activo en el menú [S]
+42. [x] reposicion nicho GLM (directo del 05 real): 58: Definir indicador visual del perfil de control activo en el menú [S]
   · [x] IMPLEMENTADO+VERIFICADO 2026-10-19 10:40 UTC (G-5.3-Flash-Agente): MenusLayer — label PerfilLabel (FONT_SIZE_SMALL, color ACCENT_OCRE) que muestra el perfil activo leyendo AccesibilidadManager.get_perfil() + conectado a profile_changed (actualización live al cambiar preset single_hand/low_mobility/custom). Regresión M89: 48/0.
 43. reposicion nicho GLM (directo del 05 real): 58: RF23: reabrir el último diálogo sin perder contexto [M]
   · [x] IMPLEMENTADO 2026-10-19 10:15 UTC (G-5.3-Flash-Agente): dialogue_manager.gd — _rf23_ultimo_id/_rf23_ultimo_contexto guardados al arranque de CADA diálogo + método público reabrir_ultimo() (replica start_dialogue con el MISMO context; false si sin previo o activo). QA headless (qa_rf23_reabrir.gd): guard-cases OK; flujo completo con catálogo SKIP para dueño M21/M28 (requiere dialogue_ids reales del catálogo de grafos — los nodes de data/dialogos son del dueño). Flip del dueño con esta evidencia.
@@ -366,7 +366,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 71. - [ ] [58] RF12: auditar que ningún puzzle dependa de oír un sonido específico [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 72. - [ ] [58] RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 73. - [ ] [58] Definir que el remapeo respete los conflictos detectados por M57 [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
-74. - [ ] [58] Definir indicador visual del perfil de control activo en el menú [S] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+74. - [x] [58] Definir indicador visual del perfil de control activo en el menú [S] · [x] T31-M58 (G-5.3-Flash-Agente): FIX REAL — el indicador existente estaba roto (autoload mal nombrado → label oculto forever); arreglado + escucha control_changed + getter get_control_preset; qa_m58_indicador_perfil.gd 7/0 EXIT 0. Atribución previa corregida (otro chat). <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 75. - [ ] [58] RF23: reabrir el último diálogo sin perder contexto [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 76. - [ ] [58] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 77. - [ ] [58] RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
