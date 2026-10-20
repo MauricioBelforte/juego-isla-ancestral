@@ -91,14 +91,14 @@
 - [?] Definir media (partÃ­culas estÃ¡ndar, post-processing bÃ¡sico) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["media"] = 0.5`.
 - [?] Definir alta (partÃ­culas avanzadas, post-processing completo) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["alta"] = 0.85`.
 - [?] Definir ultra (partÃ­culas mÃ¡ximas, post-processing cinemÃ¡tico) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `EFECTOS["ultra"] = 1.0`.
-- [ ] Definir iluminaciÃ³n volumÃ©trica (baja/media: off, alta: on, ultra: alta calidad)
+- [x] Definir iluminaciÃ³n volumÃ©trica (baja/media: off, alta: on, ultra: alta calidad) -- agnes-3-flash 2026-10-22 (M90 t8, runs habilitados): VOLUMETRICO (baja/media off, alta on 0.1, ultra 0.2) + mapeo_volumetrico() + plicar_volumetrico() (volumetric_fog_enabled/density) en graphics_config.gd + test.
 
 ### [S] Calidad de vegetaciÃ³n
 - [x] Definir baja (sin animaciÃ³n, LOD 0 solo) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["baja"] = 0.2`.
 - [x] Definir media (animaciÃ³n bÃ¡sica, LOD 0-1) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["media"] = 0.45`.
 - [x] Definir alta (animaciÃ³n completa, LOD 0-2) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["alta"] = 0.8`.
 - [x] Definir ultra (animaciÃ³n + wind procedural + interacciÃ³n, LOD 0-3) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `VEGETACION["ultra"] = 1.0`.
-- [ ] Definir animaciÃ³n por wind shader
+- [ ] Definir animaciÃ³n por wind shader -- agnes 2026-10-22 (t7): DISENO de wind (velocidad/turbulencia/por categoria vegetal) documentado; la IMPL del shader = M50 (vegetacion) + M47 (material). Escalon: documentado, no flippeado (shader externo).
 - [ ] Definir interacciÃ³n con jugador
 
 ### [S] Calidad de agua
@@ -107,9 +107,9 @@
 - [x] Definir alta (reflexiones completas, textura normal + parallax) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["alta"] = 0.85`.
 - [x] Definir ultra (reflexiones + caustics, textura normal + parallax + caustics) â€” implementado (step-5-kilocode, 2026-10-12, Log 1734): `scripts/settings/graphics_config.gd` + `test_graphics_config.gd` (62 checks, 0 fallos). `AGUA["ultra"] = 1.0`.
 - [x] Definir shader de agua con reflexiones â€” implementado (step-5-kilocode, Kilo Code, 2026-10-12): `shaders/agua_olas.gdshader` (92 lÃ­neas, spatial) con olas (amplitud/velocidad/frecuencia), espuma por profundidad (`depth_texture`), `fresnel_potencia` para el reflejo y `espuma_distancia`. âš  Reflejo **simulado** por Fresnel, no por `screen_texture` en tiempo real.
-- [ ] Definir normal map para olas
-- [ ] Definir parallax para profundidad
-- [ ] Definir caustics para ultra
+- [ ] Definir normal map para olas -- agnes 2026-10-22 (t7): M51 ya tiene 'Agua animada (shader olas+fresnel)' en escena; el normal map de olas = M51/M47. Escalon: documentado, no flippeado.
+- [ ] Definir parallax para profundidad -- agnes 2026-10-22 (t7): parallax = parametrizacion de shader de material (M47) o mesh; diseno documentado, impl = M47/M45. Escalon: documentado.
+- [ ] Definir caustics para ultra -- agnes 2026-10-22 (t7): caustics = efecto shader avanzado (M47/materiales) solo en ultra; diseno documentado, impl = M47. Escalon: documentado.
 
 ### [S] Calidad de partÃ­culas
 - [x] Definir baja (100 partÃ­culas mÃ¡ximas por sistema)
@@ -236,7 +236,7 @@ ecomendar_preset.
 - [ ] DiseÃ±ar controles para VSync (dropdown)
 - [x] DiseÃ±ar controles para FPS cap (dropdown) -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA. FPS_OPCIONES (30/60/120/0) + pply_fps_cap() (Engine.max_fps).
 - [ ] DiseÃ±ar controles para escala de resoluciÃ³n (slider)
-- [ ] DiseÃ±ar controles para upscaling (dropdown)
+- [x] DiseÃ±ar controles para upscaling (dropdown) -- agnes-3-flash 2026-10-22 (M90 t7, runs habilitados #801): UPSCALING (FSR1/FSR2/DLSS/XeSS) + mapeo_upscaling() + plicar_upscaling() en graphics_config.gd + test. La UI dropdown = M53.
 - [ ] DiseÃ±ar controles para calidad de sombras (dropdown)
 - [ ] DiseÃ±ar controles para calidad de texturas (dropdown)
 - [x] DiseÃ±ar controles para distancia de dibujado (slider) -- agnes-3-flash 2026-10-22 (M90 t5): slider distancia_dibujado [300,2500] en RANGOS_SLIDERS + alidar_slider + mapeo_culling()['cull_distance_metros'] = distancia_metros(calidad).
@@ -336,7 +336,7 @@ ecomendar_preset() (gana la mÃ¡s baja de GPU/RAM/CPU).
 ## Dependencia: VisiÃ³n del Agente (M154)
 
 - [x] Verificar que el M154 (VisiÃ³n del Agente) estÃ¡ implementado y operativo (al menos una vÃ­a activa) antes de comenzar cualquier trabajo visual de este mÃ³dulo â€” ver `DOCUMENTACION/154-Vision-Del-Agente/` y secciÃ³n 25 de AGENTS.md [S]
-**Totales:** 249 Ã­tems Â· Completados: 191 Â· Pendientes: 54 Â· No resueltos: 4. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la lÃ­nea decÃ­a 123/122/4; conteo real por regex = 155 [x] / 4 [?] / 90 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
+**Totales:** 249 Ã­tems Â· Completados: 192 Â· Pendientes: 53 Â· No resueltos: 4. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la lÃ­nea decÃ­a 123/122/4; conteo real por regex = 155 [x] / 4 [?] / 90 [ ]. Drift de +26 de mis propios lotes del msg 219/220, que flippearon sin actualizar Totales.)
 
 > **Agregado por auditorÃ­a de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenÃ­a lÃ­nea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?].

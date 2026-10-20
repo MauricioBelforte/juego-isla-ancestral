@@ -428,3 +428,47 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 33. - [ ] [16] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion, <!-- fuente: 16-Crafting/05-Checklist.md -->
 34. - [ ] [16] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que <!-- fuente: 16-Crafting/05-Checklist.md -->
   · [x] SCANNER RF26 AUTOMATIZADO 2026-10-19 23:00 UTC (G-5.3-Flash-Agente): scripts/qa_textos_rf26.py — audita strings_es.json (153 textos, 158 frases) contra la guía RF26 (frases > 12 palabras, glosario sancionado, doble negación). Resultado: 1 incumplimiento (0.6%) — EQUIP.HINT 15 palabras (hallazgo para el dueño de textos: E/ESC cierra, candados se abren con capítulo o banda). Modo --detallado. UMBRAL: OK si ≥ 85% cumple.
+
+
+## REPOBLACION V3 (2026-10-19T21:25:40) — items REALES de 05-Checklist (fuente en comentario)
+
+1. - [ ] [69] Test de transición: animación sin jumps visuales [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+2. - [ ] [69] Transición de desvanecimiento con curva cozy [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+3. - [ ] [69] Efectos de partículas coherentes con M41 [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+4. - [ ] [69] Flash sutil al aparecer en destino [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+5. - [ ] [69] Indicador de carga 0.5-1.5s mínimo [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+6. - [ ] [69] Sin huecos negros en transición [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+7. - [ ] [69] Compatible con modo foto pausado [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+8. - [ ] [69] HUD visible durante toda la transición [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+9. - [ ] [69] Sin parpadeos por baja luz [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+10. - [ ] [69] Ilumincación de destino respeta hora del mundo [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+11. - [ ] [69] Transición no afecta gameplay (tablas de delta) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+12. - [ ] [69] Subtitulos de feedback de acción [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+13. - [ ] [69] Tamaño de texto escalable para menu (M62) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+14. - [ ] [69] Confirmación háptica opcional [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+15. - [ ] [69] Contraste alto para menu de selección [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+16. - [ ] [69] Iconos de apoyo visual al nombre del destino [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+17. - [ ] [69] Alt text para thumbnails de destino [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+18. - [ ] [69] Modo cronológico para historiales [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+19. - [ ] [69] Filtros por tipo de lugar (bioma, servicios) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+20. - [ ] [69] Sin dependencia solo de color para estado [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+21. - [ ] [69] M28: integración con waypoints descubiertos [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+22. - [ ] [69] M29-M31: restricción temporal (noche, tormenta) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+23. - [ ] [69] M110: debug menu con listado de anchors [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+24. - [ ] [69] M122: captura de crash si portal falla [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+25. - [ ] [69] M124: balance económico según distancia [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+26. - [ ] [69] M32: anulación del portal en clima extremo [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+27. - [ ] [69] M68: respetar desactivación de hápticos [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+28. - [ ] [69] M91: respetar volumen de feedback de viaje [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+29. - [ ] [69] Test de carga: 100 anchors en mapa [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+30. - [ ] [69] Test de coherencia: 1000 teleports consecutivos [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+31. - [ ] [69] Test de día/noche: comportamiento en diferentes horas [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+32. - [ ] [69] Test de desconexión: recuperar estado sin perder progreso [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+33. - [ ] [69] Test de stress concurrentes: 50 anchors ACTIVOS [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+34. - [ ] [69] Test de recuperación: archivo corrupto ? resync [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+35. - [ ] [69] Test de batería: consumo por viaje a larga distancia [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+36. - [ ] [69] Test multidioma: búsqueda en distintos alfabetos [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+37. - [ ] [69] Test de aceso: atajos disponibles sin teclado [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+38. - [ ] [69] Test de localización: posicionamiento visual ajustado [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+39. - [ ] [69] Test de fallback: 3 fallos seguidos ? modo seguro [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+40. - [ ] [69] Test de perfilado: sin allocs en frame [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->

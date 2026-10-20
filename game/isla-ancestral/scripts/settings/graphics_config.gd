@@ -89,6 +89,15 @@ const DEBUG_FLAGS: Dictionary = {
 	"monitoreo_gpu_ram": false,
 }
 
+## ── Iluminación volumétrica (§1, por calidad) ────────────────────────────
+## baja/media: off, alta: on (densidad media), ultra: alta calidad (densidad+alcance).
+const VOLUMETRICO: Dictionary = {
+	"baja": {"habilitado": false, "densidad": 0.0, "calidad": "baja"},
+	"medio": {"habilitado": false, "densidad": 0.0, "calidad": "baja"},
+	"alto": {"habilitado": true, "densidad": 0.1, "calidad": "media"},
+	"ultra": {"habilitado": true, "densidad": 0.2, "calidad": "alta"},
+}
+
 ## ── Anti-aliasing (§1) ───────────────────────────────────────────────────
 const AA_OFF := "off"
 const AA_FXAA := "fxaa"
@@ -153,17 +162,20 @@ const UMBRAL_CPU_NUCLEOS: Dictionary = {"baja": 2, "media": 4, "alta": 8, "ultra
 var _valores: Dictionary = {}
 var _accesibilidad: Dictionary = {}
 var _debug: Dictionary = {}
+var _calidad: String = "media"
 
 func _init() -> void:
 	_valores = PRESETS["medio"].duplicate(true)
 	_accesibilidad = ACCESIBILIDAD_DEFAULT.duplicate(true)
 	_debug = DEBUG_FLAGS.duplicate(true)
+	_calidad = "medio"
 
 ## Aplica un preset por id. Devuelve false si no existe.
 func aplicar_preset(id: String) -> bool:
 	if not PRESETS.has(id):
 		return false
 	_valores = (PRESETS[id] as Dictionary).duplicate(true)
+	_calidad = id
 	return true
 
 ## Preset activo: coincide con uno conocido o "personalizado".
@@ -422,6 +434,28 @@ func aplicar_upscaling(server) -> Dictionary:
 	# El set real de upscaler/escala depende del pipeline de M90/M53 + RenderingServer;
 	# este método expone el mapeo para que el caller lo consuma.
 	return m
+
+
+## Mapeo LÓGICO de iluminación volumétrica según la calidad actual (§1).
+## Baja/media: off; alta: on (densidad 0.1); ultra: alta calidad (densidad 0.2).
+func mapeo_volumetrico() -> Dictionary:
+	var calidad: String = _calidad
+	var v: Dictionary = VOLUMETRICO.get(calidad, VOLUMETRICO["medio"])
+	return {
+		"habilitado": bool(v["habilitado"]),
+		"densidad": float(v["densidad"]),
+		"calidad": String(v["calidad"]),
+	}
+
+## Aplica la iluminación volumétrica a un Environment (WorldEnvironment). Null-safe
+## (headless no-op si entorno==null). Usa `mapeo_volumetrico()` (lógica por calidad).
+func aplicar_volumetrico(entorno) -> void:
+	if entorno == null:
+		return
+	var v: Dictionary = mapeo_volumetrico()
+	entorno.volumetric_fog_enabled = bool(v["habilitado"])
+	if bool(v["habilitado"]):
+		entorno.volumetric_fog_density = float(v["densidad"])
 
 
 ## Mapeo LÓGICO de LOD por objeto lejano. headless. La IMPL. depende de M50.

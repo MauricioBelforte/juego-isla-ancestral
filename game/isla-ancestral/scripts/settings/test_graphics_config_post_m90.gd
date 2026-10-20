@@ -137,6 +137,23 @@ func _run() -> void:
 	u3.fijar("upscaling", "off")  # UP_OFF
 	_check("mapeo_upscaling: upscaler=off cuando se fija", u3.mapeo_upscaling()["upscaler"] == "off")
 
+	# --- Iluminación volumétrica (§1 por calidad) ---
+	var vol: RefCounted = _GC.new()
+	vol.aplicar_preset("bajo")
+	_check("volumetrico bajo: off", vol.mapeo_volumetrico()["habilitado"] == false)
+	vol.aplicar_preset("alto")
+	var vm: Dictionary = vol.mapeo_volumetrico()
+	_check("volumetrico alto: on + densidad 0.1", vm["habilitado"] == true and is_equal_approx(vm["densidad"], 0.1))
+	vol.aplicar_preset("ultra")
+	var vu: Dictionary = vol.mapeo_volumetrico()
+	_check("volumetrico ultra: alta calidad + densidad 0.2", vu["habilitado"] == true and is_equal_approx(vu["densidad"], 0.2) and vu["calidad"] == "alta")
+	var envv := Environment.new()
+	vol.aplicar_volumetrico(envv)
+	_check("aplicar_volumetrico ultra: fog enabled", envv.volumetric_fog_enabled == true)
+	vol.aplicar_preset("bajo")
+	vol.aplicar_volumetrico(envv)
+	_check("aplicar_volumetrico bajo: fog disabled", envv.volumetric_fog_enabled == false)
+
 	_fin()
 
 
