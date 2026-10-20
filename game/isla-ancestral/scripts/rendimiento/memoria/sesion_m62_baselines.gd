@@ -455,6 +455,7 @@ func _cerrar() -> void:
 		print("TEST %s [%s] FALLIDO - salida 1" % [MODULO, _escenario])
 		quit(1)
 		return
-	print("TEST %s [%s] OK - piso %.1f MB bajo el objetivo %d MB (alcance: headless, sin VRAM)"
-		% [MODULO, _escenario, _mem_final, _objetivo_mb])
+	var alcance := "headless, sin VRAM" if DisplayServer.get_name() == "headless" else "renderer real; VRAM medida aparte"
+	print("TEST %s [%s] OK - piso %.1f MB bajo el objetivo %d MB (alcance: %s)"
+		% [MODULO, _escenario, _mem_final, _objetivo_mb, alcance])
 	quit(0)

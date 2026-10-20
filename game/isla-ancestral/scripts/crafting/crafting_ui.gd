@@ -24,6 +24,9 @@ var _preview_label: Label
 var _btn_crear1: Button
 var _btn_crear_n: Button
 var _mensaje_label: Label
+var _mejora_box: VBoxContainer
+var _mejora_label: RichTextLabel
+var _btn_mejorar: Button
 
 func _ready() -> void:
 	layer_type = UILayerType.Type.MODAL_SIMPLE
@@ -122,6 +125,22 @@ func _crear_ui() -> void:
 	btn_cerrar.pressed.connect(_cerrar)
 	hbox.add_child(btn_cerrar)
 
+	# MR12/MR13 (N.3): panel de mejora — visible solo si el resultado de la
+	# receta seleccionada es una herramienta del schema MR3.
+	_mejora_box = VBoxContainer.new()
+	_mejora_box.add_theme_constant_override("separation", 4)
+	vbox.add_child(_mejora_box)
+	_mejora_label = RichTextLabel.new()
+	_mejora_label.bbcode_enabled = true
+	_mejora_label.fit_content = true
+	_mejora_label.add_theme_font_size_override("normal_font_size", ThemeUx.FONT_SIZE_SMALL)
+	_mejora_box.add_child(_mejora_label)
+	_btn_mejorar = Button.new()
+	_btn_mejorar.text = _t("SETTINGS.MEJORAR")
+	_btn_mejorar.pressed.connect(_on_mejorar)
+	_mejora_box.add_child(_btn_mejorar)
+	_mejora_box.visible = false
+
 	# Mensaje cozy de resultado
 	_mensaje_label = Label.new()
 	_mensaje_label.add_theme_font_size_override("font_size", ThemeUx.FONT_SIZE_SMALL)
@@ -206,6 +225,7 @@ func _refrescar_detalle() -> void:
 		lineas.append("[color=#8e6e1a]%s[/color]" % _t("SETTINGS.FUERA_TEMPORADA"))
 	_detalle_label.text = "\n".join(lineas)
 	_actualizar_botones(max_n)
+	_refrescar_mejora()
 
 
 ## Color del swatch de preview (RF9): hash determinista del item_id.
@@ -234,6 +254,63 @@ func _actualizar_botones(max_n: int) -> void:
 	_btn_crear_n.text = _t("SETTINGS.CREAR_N") + " (%d)" % maxi(max_n, 0)
 	_btn_crear1.disabled = not hay_receta or max_n < 1
 	_btn_crear_n.disabled = not hay_receta or max_n < 1
+
+
+
+## ── MR12/MR13: panel de mejora de herramientas ───────────
+
+func _refrescar_mejora() -> void:
+	var cs = get_node_or_null("/root/Crafting")
+	var inv = get_node_or_null("/root/Inventario")
+	_mejora_box.visible = false
+	if cs == null or inv == null or not cs.has_method("mejorar_herramienta") or _receta_seleccionada == null:
+		return
+	var resultado: String = String(_receta_seleccionada.resultado_id)
+	var tipo: String = cs._tipo_de(resultado)
+	if tipo == "":
+		return
+	var cfg: Dictionary = cs._mejora_cfg.get("tipos", {}).get(tipo, {})
+	if cfg.is_empty():
+		return
+	var nivel_actual: int = cs._nivel_de(resultado)
+	var nivel_max: int = int(cfg.get("nivel_maximo", 0))
+	var lineas: Array = [_t("SETTINGS.NIVEL_MEJORA") + "%d/%d" % [nivel_actual, nivel_max]]
+	var puede := nivel_actual < nivel_max
+	if not puede:
+		lineas.append(_t("SETTINGS.MEJORA_MAXIMA"))
+	else:
+		var coste: Dictionary = cfg.get("coste_nivel", [])[nivel_actual]
+		for it in coste:
+			var necesario: int = int(coste[it])
+			var tengo: int = int(inv.count_item(String(it), true))
+			var ok_mat := tengo >= necesario
+			puede = puede and ok_mat
+			if ok_mat:
+				lineas.append("%s: %d" % [String(it), necesario])
+			else:
+				lineas.append("[color=#c0392b]%s: %d/%d[/color]" % [String(it), tengo, necesario])
+	lineas.append(_t("SETTINGS.DURABILIDAD_NIVEL") + "%d" % cs.durabilidad_maxima(tipo, nivel_actual + 1))
+	_mejora_label.text = "\n".join(lineas)
+	_btn_mejorar.disabled = not puede
+	_btn_mejorar.visible = nivel_actual < nivel_max
+	_mejora_box.visible = true
+
+
+func _on_mejorar() -> void:
+	var cs = get_node_or_null("/root/Crafting")
+	if cs == null or _receta_seleccionada == null or not cs.has_method("mejorar_herramienta"):
+		return
+	var r: Dictionary = cs.mejorar_herramienta(String(_receta_seleccionada.resultado_id))
+	if r.get("ok") == true:
+		_mensaje_label.text = _t("SETTINGS.MEJORAR") + " OK"
+		var fb = get_node_or_null("/root/CraftingFeedback")
+		if fb != null and fb.has_method("_notificar"):
+			fb._notificar(_t("SETTINGS.MEJORAR") + " " + String(_receta_seleccionada.resultado_id), "ok")
+	else:
+		_mensaje_label.text = str(r.get("motivo", ""))
+	_refrescar_mejora()
+	_refrescar_detalle()
+
 
 ## ── Acciones de creación (RF7 / RF8) ─────────────────────
 

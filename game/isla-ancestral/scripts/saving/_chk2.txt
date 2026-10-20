@@ -1,0 +1,4 @@
+20: var _detalle_label: RichTextLabel
+85: _detalle_label = RichTextLabel.new()
+86: _detalle_label.bbcode_enabled = true
+SETTINGS.MEJORAR existe en strings_es: False

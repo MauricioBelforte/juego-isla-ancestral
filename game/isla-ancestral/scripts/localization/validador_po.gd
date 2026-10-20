@@ -64,7 +64,7 @@ const MARCADOR_NO_TRADUCIBLE := "no-traducir"
 static func validar_archivo(ruta: String, locale_esperado: String = "") -> Dictionary:
 	var r: Dictionary = {
 		"ruta": ruta, "locale": "", "entradas": 0, "claves": [], "claves_plural": [],
-		"textos": {}, "placeholders": {}, "no_traducibles": [],
+		"textos": {}, "placeholders": {}, "no_traducibles": [], "nplurals": 0,
 		"errores": [], "avisos": [], "ok": false,
 	}
 	if not FileAccess.file_exists(ruta):
@@ -198,8 +198,38 @@ static func placeholders_de(msgstr: String, plurales: Dictionary = {}) -> Dictio
 	return out
 
 
-## ¿La clave respeta MODULO.SECCION.CLAVE en UPPER_SNAKE (RF20)?
-static func clave_cumple_convencion(clave: String) -> bool:
+## Firma ORDENADA del conjunto de placeholders de un texto (sin contar ocurrencias).
+## Compara formas plurales entre sí: `placeholders_de` une todas las formas en un
+## solo conjunto, así que una forma que pierde `{n}` quedaba invisible.
+static func _firma_placeholders(t: String) -> String:
+	var ph: Dictionary = placeholders_de(t)
+	var ll: Array = (ph.get("llaves", []) as Array).duplicate()
+	var pf: Array = (ph.get("printf", []) as Array).duplicate()
+	ll.sort()
+	pf.sort()
+	return "llaves=%s printf=%s" % [_unir(ll), _unir(pf)]
+
+
+static func _unir(arr: Array) -> String:
+	var s: String = ""
+	for x in arr:
+		if s != "":
+			s += ","
+		s += str(x)
+	return s
+
+
+## Lee `nplurals=N` de la cabecera Plural-Forms. Devuelve 0 si no es legible.
+static func _nplurals_de(cabecera: String) -> int:
+	var re := RegEx.new()
+	re.compile("nplurals\\s*=\\s*(\\d+)")
+	var m := re.search(cabecera)
+	if m == null:
+		return 0
+	return int(m.get_string(1))
+
+
+## ¿La clave respeta MODULO.SECCION.CLAVE en UPPER_SNAKE (RF20)?static func clave_cumple_convencion(clave: String) -> bool:
 	if clave in EXCEPCIONES_CLAVE:
 		return true
 	var re := RegEx.new()
@@ -239,6 +269,12 @@ static func _validar_cabecera(r: Dictionary, cab: Dictionary, locale_esperado: S
 			_avs(r, "R4 Language=%s no coincide con lo esperado (%s)" % [r["locale"], locale_esperado])
 	if not ms.contains("Plural-Forms"):
 		_avs(r, "R4 cabecera sin Plural-Forms")
+	else:
+		var npl: int = _nplurals_de(ms)
+		if npl <= 0:
+			_avs(r, "R4 Plural-Forms sin nplurals legible (R14 queda sin base)")
+		else:
+			r["nplurals"] = npl
 
 ## ── Entradas (R5-R13) ────────────────────────────────────
 
@@ -265,6 +301,29 @@ static func _validar_entradas(r: Dictionary, entradas: Array) -> void:
 					_avs(r, "R6 msgstr[%d] vacío en %s" % [k, clave])
 			if not ms.strip_edges().is_empty():
 				_avs(r, "R8 entrada plural con msgstr simple además de msgstr[]: " + clave)
+			# R14: el catálogo declara nplurals=N en la cabecera; si faltan índices
+			# 0..N-1 el motor no puede elegir forma y cae a msgstr[0] SIEMPRE.
+			# R15: todas las formas deben llevar los MISMOS placeholders; si una
+			# pierde `{n}` el texto sale sin el número y no hay error en runtime.
+			var npl: int = int(r.get("nplurals", 0))
+			if npl > 0 and not plurales.is_empty():
+				for i in range(npl):
+					if not plurales.has(i):
+						_err(r, "R14 plural incompleto: falta msgstr[%d] en %s (nplurals=%d)" % [i, clave, npl])
+			if not plurales.is_empty():
+				var idx: Array = plurales.keys()
+				idx.sort()
+				for j in range(idx.size() - 1):
+					if int(idx[j + 1]) != int(idx[j]) + 1:
+						_err(r, "R14 índices de plural no contiguos en %s: %s" % [clave, str(idx)])
+						break
+				var base: String = _firma_placeholders(str(plurales[idx[0]]))
+				for j in idx:
+					var firma: String = _firma_placeholders(str(plurales[j]))
+					if firma != base:
+						_err(r, "R15 formas plurales con placeholders distintos en %s: [%d] %s vs [%d] %s" % [
+							clave, int(idx[0]), base, int(j), firma])
+						break
 			r["claves_plural"].append(clave)
 			r["textos"][clave] = " | ".join(plurales.values())
 		else:

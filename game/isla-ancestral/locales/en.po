@@ -795,3 +795,15 @@ msgstr "Travel complete"
 
 msgid "M69.FEEDBACK.CANCELADO"
 msgstr "Travel cancelled"
+
+msgid "SETTINGS.MEJORAR"
+msgstr "Upgrade"
+
+msgid "SETTINGS.NIVEL_MEJORA"
+msgstr "Upgrade level: "
+
+msgid "SETTINGS.MEJORA_MAXIMA"
+msgstr "Maximum upgrade reached."
+
+msgid "SETTINGS.DURABILIDAD_NIVEL"
+msgstr "Durability at next level: "
