@@ -115,7 +115,7 @@
 - [x] Verificar densidad real vs tabla [M] — FLIP 2026-10-15 (mimo, evidencia WB 43/Log 1864): densidades medidas hoy 1:1 con vegetacion_config.json v2 (playa 12, pradera 25, bosque 22, montana 10, ribera 15 + 25 spawn)
 - [x] Verificar instancias fuera de agua/cueva (arte sucio) [M] — iter. 6 (Log 646): BUG-022 fix (h<3 omitidas) en vegetation_spawner.gd L87, ejercido por el spawner en runtime; test_distribucion.gd es DEBUG sin aserciones, NO es evidencia de test (H5 corregido 2026-10-11), 109 instancias pobladas
 - [?] — agnes-2026-09-06: LOD no implementado; instancias simples por ahora (GLB media) Verificar LOD presente [S]
-- [ ] Verificar presupuesto (instancias/draw calls/VRAM) [M]
+- [ ] Verificar presupuesto (instancias/draw calls/VRAM) [M] — [ ] honesto 2026-10-19 (Log 2022): el spawner usa instanciación directa de GLB (no MultiMesh, ver L140). Run medido: 65 instancias vs presupuesto 8.000 del preset medio (03-Diseno.md 3.1) -> dentro por conteo; draw calls y VRAM por instancia NO medibles sin MultiMesh implementado.
 - [x] Verificar naming [S] — FLIP 2026-10-15 (mimo, evidencia WB 43/Log 1864): 45 GLB canonico 50-Vegetacion_{tipo}.glb en assets/3d/media/ existen, variante media 109 GLBs, 0 SCRIPT ERROR
 
 ## O. RF14 — Naming y organización
@@ -171,14 +171,14 @@
 
 ## U. Criterios de aceptación verificados
 
-- [ ] Cada bioma muestra su vegetación característica verificada [M]
-- [ ] Escena pivote sin caída de frame (M61) [M]
-- [ ] Viento determinista con amplitud por bioma/clima [M]
+- [ ] Cada bioma muestra su vegetación característica verificada [M] — [ ] honesto 2026-10-19 (Log 2022): run real con plan 109 items / 65 instanciadas / 44 omitidas por clamp de agua / 0 sin archivo; inventario por bioma individual no levantado del run (solo totales globales).
+- [x] Escena pivote sin caída de frame (M61) [M] — FLIP 2026-10-19 (Step-5-WorkBuddy, Log 2022, msg 096): run real del juego (binario Godot 4.7.2, ventana) con el spawner activo: 65 instancias en escena y **FPS 60 estables**, sin caída de frame. Capturas: tools/mcp/godot-mcp/capturas/50-Vegetacion/cap_50_2026-10-19_05-07-30_poblado-runtime-verificacion.png y .../cap_50_2026-10-19_05-12-10_fps-60-pivote.png. Suites headless medidas con binario real: 7/5/4 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR.
+- [ ] Viento determinista con amplitud por bioma/clima [M] — [ ] honesto 2026-10-19 (Log 2022): no existe viento_shader.gdshader ni shader de viento en disco (find = 0 archivos).
 - [x] Tala funcional (M08) y decorativo no destructible [M]
-- [ ] Estaciones cambian color visualmente en ≤ X s [M]
-- [ ] Densidad respeta clamps de terreno [M]
-- [ ] Costo MultiMesh dentro del presupuesto [M]
-- [ ] Regeneración por eventos sin romper determinismo [M]
+- [ ] Estaciones cambian color visualmente en ≤ X s [M] — [ ] honesto 2026-10-19 (Log 2022): no hay implementación de estaciones (grep estacion|season en scripts/vegetacion = 0).
+- [ ] Densidad respeta clamps de terreno [M] — [ ] honesto 2026-10-19 (Log 2022): clamp de agua verificado en run (44 omitidas por agua, 0 sin archivo); clamps de pendiente y altura no medidos por bioma en el run.
+- [ ] Costo MultiMesh dentro del presupuesto [M] — [ ] honesto 2026-10-19 (Log 2022): no existe MultiMesh en el pipeline (instanciación directa, L140); costo no medible.
+- [ ] Regeneración por eventos sin romper determinismo [M] — [ ] honesto 2026-10-19 (Log 2022): no hay regeneración ni replantado (grep regener|replant|repoblar en scripts/vegetacion = 0).
 
 ## V. Notas finales
 
@@ -253,8 +253,8 @@ Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
 - [x] Verificación visual post-horneado: arbol_frutal 6m exacto, arbusto_redondo ~1m, flor_isla ~1.2m — capturas verif3_* en capturas/50/ [M]
 - [x] FIX de pipeline: al reemplazar GLBs hay que borrar .godot/imported/*.scn + los .glb.import (hash viejo) y reimportar con --import antes de relanzar [M]
 - [x] Tests actualizados al diseño real (Log 644): plan >=45 ítems + 6 biomas (7 checks 0 fallos), plan determinista (5/0), spawner (5/0) [S]
-- [ ] escalas.json a 1.0 definitivo para los 10 tipos horneados (dejar 1.0 evita doble escala; pendiente edición fina por usuario) [S]
-- [ ] Revisión visual final del usuario (propongo capturas verif3_*) [S]
+- [x] escalas.json a 1.0 definitivo para los 10 tipos horneados (dejar 1.0 evita doble escala; pendiente edición fina por usuario) [S] — FLIP 2026-10-19 (Step-5-WorkBuddy, Log 2022, msg 096): editados los 3 multiplicadores fuera de 1.0 en data/escalas/escalas.json (palmera 4.0->1.0, arbol_frutal 3.0->1.0, hierba_alta 0.8->1.0). Verificado simulando la lógica del autoload EscalasGlobales (match por substring): los 10 tipos horneados renderizan a su altura objetivo exacta (antes arbol_frutal 18 m vs 6 m horneado, palmera 28 m vs 7 m, hierba_alta 0.48 m vs 0.6 m). El horneado reescalar_v5.py deja los GLB a su altura objetivo, así que el multiplicador era doble escala.
+- [ ] Revisión visual final del usuario (propongo capturas verif3_*) [S] — [ ] honesto 2026-10-19 (Log 2022): capturas de evidencia entregadas al director (msg 096): cap_50_2026-10-19_05-07-30_poblado-runtime-verificacion.png y cap_50_2026-10-19_05-12-10_fps-60-pivote.png; pendiente de revisión del fundador.
 
 ### Notas del Agente — iter. 10
 

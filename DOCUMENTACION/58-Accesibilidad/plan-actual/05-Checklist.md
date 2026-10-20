@@ -97,6 +97,8 @@
 - [x] RF24: definir selección de estilo de fuente legible (Nunito/Fredoka One de M88) [S]
 - [x] RF25: subtítulos con fondo opaco, tamaño grande y velocidad configurable, activos por defecto [M]
 - [ ] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M]
+- [x] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M] — G-5.3-Flash-Agente 2026-10-19: guía vigente en DOCUMENTACION/58-Accesibilidad/guia_rf26_textos_criticos.md (reglas 1.1-1.5 frases, 2.1-2.5 vocabulario, estructura de errores/éxitos/toasts, glosario canónico, checklist de 10 puntos para QA). Aplicable por los dueños de M21/M16/M56/M28/M74 al escribir textos del juego.
+  · AUTOMATIZACIÓN de la guía (G-5.3-Flash-Agente 2026-10-19): scripts/qa_textos_rf26.py — scanner de strings_es.json (153 textos, 158 frases, 1 incumplimiento 0.6%: EQUIP.HINT 15 palabras — dueño de textos). Umbral OK ≥ 85%.Modo --detallado. La sección 6 (auditoría) de la guía queda automatizada.
 - [x] RF26: definir que las instrucciones clave no exijan lectura veloz [S]
 - [x] RF27: opción "Texto grande" global que escala todos los textos de UI [M]
 - [ ] RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C]

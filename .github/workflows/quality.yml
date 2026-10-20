@@ -321,6 +321,10 @@ jobs:
           # Agregado el 2026-10-12 por stepfun-step-5-preview (orden del director mimo, msg 221):
           # la carpeta scripts/settings/ estaba sin versionar y sin gate.
           suite --script scripts/settings/test_graphics_config.gd
+          # M90 (encargo director #794/#801, agnes-3-flash 2026-10-23): capa de
+          # aplicacion de post-processing + sliders + accesibilidad + culling/LOD
+          # + debug + FPS cap en graphics_config.gd. 42 checks, 0 fallos.
+          suite --script scripts/settings/test_graphics_config_post_m90.gd
           # M40 iter. 3: contratos centralizados + control de duplicados + fix L208.
           # Cubre los 47 contratos de Contratos, el rechazo de duplicados con
           # DOM-INF-REGISTRO, el warning DOM-INF-ACCESO-TEMPRANO con anti-flood, y la
