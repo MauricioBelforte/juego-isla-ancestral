@@ -13,6 +13,7 @@ extends UILayer
 signal continuar_pedido
 signal ajustes_pedido
 var _boton_guardar: Button = null
+var _boton_borrar: Button = null
 var _dirty_guardado := false
 
 signal guardar_pedido
@@ -71,6 +72,8 @@ func _crear_ui() -> void:
 	_agregar_boton(vbox, "SETTINGS.CONTINUAR", func(): continuar_pedido.emit())
 	_agregar_boton(vbox, "SETTINGS.AJUSTES", func(): _navegar_a_ajustes())
 	_boton_guardar = _agregar_boton(vbox, "SETTINGS.GUARDAR", func(): _pedir_confirmacion_guardado())
+	_boton_borrar = _agregar_boton(vbox, "SETTINGS.BORRAR_SLOT", func(): _pedir_confirmacion_borrado())
+	_boton_borrar.add_theme_color_override("font_color", Color(0.85, 0.45, 0.35))  # rojo suave: acción destructiva
 	_agregar_boton(vbox, "SETTINGS.SALIR", func(): salir_pedido.emit())
 
 func _agregar_boton(vbox: VBoxContainer, clave: String, cb: Callable) -> Button:
@@ -137,6 +140,27 @@ func _pedir_confirmacion_guardado() -> void:
 		sm.request_save(1, "guardado_manual_pausa")
 		return
 	_toast_guardado(false, "SETTINGS.GUARDAR_FALLO")
+
+
+## Ítem 7 (M59): borrar el slot con confirmación (acción destructiva).
+func _pedir_confirmacion_borrado() -> void:
+	var popup := _buscar_confirm_popup()
+	if popup == null:
+		_hacer_borrado_slot()
+		return
+	popup.configurar_texto(
+		_t_local("SETTINGS.BORRAR_TITULO"),
+		_t_local("SETTINGS.BORRAR_CONFIRMA"),
+		_hacer_borrado_slot)
+
+
+func _hacer_borrado_slot() -> void:
+	var ds := get_node_or_null("/root/DataStore")
+	if ds == null or not ds.has_method("borrar_slot"):
+		_toast_guardado(false, "SETTINGS.GUARDAR_FALLO")
+		return
+	var ok: bool = ds.borrar_slot(1)
+	_toast_guardado(ok, "SETTINGS.BORRAR_EXITO" if ok else "SETTINGS.GUARDAR_FALLO")
 
 
 func _on_guardado_ok(_slot: int, _reason: String) -> void:
