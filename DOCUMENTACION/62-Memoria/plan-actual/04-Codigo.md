@@ -721,3 +721,29 @@ DeepSeek-V4.1-Flash (Log 2033). Se re-ejecutó y se aplicó el flip.
   evidencia descartable y no se integra al juego.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 79.
+
+## Tanda 80 — L191 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2051)
+
+**Sin código de producción nuevo; se midió el horizonte y se corrigió el arnés de test.**
+
+- `sesion_m62_baselines.gd` (test): la cámara resuelve `_target` en un `process_frame` posterior a
+  `_ready`; aplicar el escenario en el mismo frame dejaba la cámara en el origen (1136 m del Player).
+  Se agregó `_retardo_aplicar = 1.0` tras encontrar el monitor, se fuerza modo EXPLORE y se simulan
+  2 s de `_physics_process` después del scroll (el scroll solo cambia `_distance`; la posición
+  converge en física).
+- **Medición con renderer real:** 151.7 MB static, 7384 objetos, 0 huérfanos, 9/0, cámara 20.00 m.
+- **VRAM probe:** 148.0 static + 44.4 VRAM = **192.4 MB**; 7293 objetos.
+- **Regresión spawn:** 144.1 MB static, 7/0 (sin cambio de comportamiento).
+
+## Tanda 81 — L192 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2052)
+
+**Sin código de producción nuevo; el ítem quedó `[?]` por falta de templo/API.**
+
+- `sesion_m62_baselines.gd` (test): se corrigió el mensaje de NO MEDIBLE, que decía “0 bloques
+  generados en headless” incluso en renderer real; ahora dice “0 bloques actualizados: el subterráneo
+  no se ejercita”.
+- **Corrida:** el arnés solo puede bajar 40 m en el spawn (Y 6.0 → -34.0); VoxelTerrain 1,
+  **0 bloques actualizados**, 8 checks/1 fallo, EXIT 3. 155.9 MB static no es baseline del templo.
+- **Búsqueda:** 0 escenas `*templo*`/`*subterr*`/`*cueva*`; no hay entrada de producción.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tandas 80-81.

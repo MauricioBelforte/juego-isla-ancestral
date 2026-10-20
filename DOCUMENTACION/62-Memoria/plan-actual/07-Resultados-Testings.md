@@ -753,3 +753,25 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
   banco de audio completo. La medición de VRAM es del renderer, no una estimación externa.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 79.
+
+## 31. Tanda 80 (2026-10-20, DS-Opencode, Log 2051): L191 — baseline horizonte con renderer real
+
+- **Objetivo:** < 2200 MB.
+- **Arnés, sin headless:** `M62_ESCENARIO=horizonte`, `M62_ASENTAR_S=20`, renderer OpenGL 3.3:
+  **151.7 MB static**, 7384 objetos, 0 huérfanos, **9/0 EXIT 0**, cámara a **20.00 m**.
+- **VRAM:** 44.4 MB; static 148.0 MB; **total estimado 192.4 MB** (8.7% del objetivo); 7293 objetos.
+- **Fix de arnés:** espera de 1 s para que `follow_camera._ready` resuelva `_target`; modo EXPLORE;
+  2 s de `_physics_process` tras el scroll para que la posición converja. Solo test.
+- **Regresión:** spawn 144.1 MB, 7/0.
+- **Resultado:** cierra L191.
+
+## 32. Tanda 81 (2026-10-20, DS-Opencode, Log 2052): L192 — subterráneo del templo (NO MEDIBLE)
+
+- **Objetivo:** < 2000 MB.
+- **Bloqueo:** 0 escenas `*templo*`/`*subterr*`/`*cueva*`; no hay entrada/API de producción al templo.
+- **Corrida con renderer real:** el arnés baja 40 m en el spawn (Y 6.0 → -34.0); VoxelTerrain 1,
+  **0 bloques actualizados**, 8 checks / 1 fallo, EXIT 3 (detector ciego). 155.9 MB static no es un
+  baseline del templo y no se usa.
+- **Resultado:** `[?]` hasta que exista la escena/entrada de producción.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tandas 80-81.

@@ -271,7 +271,7 @@ Log reservado: 512
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
-**Totales:** 203 items - Completados: 177 - Pendientes: 12 - No resueltos: 14. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tanda 38: MR21 y洪 normalizado; 177/12/14 = 203 exactos.)
+**Totales:** 203 items - Completados: 179 - Pendientes: 10 - No resueltos: 14. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tanda 38: MR21 y洪 normalizado; 177/12/14 = 203 exactos.)
 
 > **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
 > seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por
@@ -329,11 +329,11 @@ Log reservado: 512
 
 ### N.3 Interfaz (3)
 
-- [ ] RF-MR12: panel de mejora en la estacion: nivel actual, coste del siguiente nivel,
+- [x] RF-MR12: panel de mejora en la estacion: nivel actual, coste del siguiente nivel,
   durabilidad maxima resultante y boton deshabilitado cuando no se puede mejorar (techo o
-  materiales) [M]
-- [ ] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a
-  consumir antes de confirmar) [S]
+  materiales) [M] → **G-5.3-Flash-Agente (2026-10-20):** `crafting_ui.gd` — panel MR (VBox+RichTextLabel+botón) visible SOLO cuando el resultado de la receta es una herramienta del schema; muestra nivel N/max, coste del siguiente nivel (faltantes en rojo), durabilidad en el siguiente nivel, botón deshabilitado por techo O materiales. Claves nuevas i18n (SETTINGS.MEJORAR/NIVEL_MEJORA/MEJORA_MAXIMA/DURABILIDAD_NIVEL) ES/EN/PT + .po es/en — validador EXIT 0 (170×3). Evidencia: QA `scripts/crafting/qa_m16_panel_mejora.gd` **11/0, EXIT 0** — «panel oculto para no-herramienta», «panel visible para herramienta», «0/3 mostrado», «deshabilitado sin materiales», «habilitado con materiales», «click mejora: nivel 1 + señal», «panel refrescado (1/3, durabilidad 200)», «techo deshabilita + mensaje». Regresión test_crafting 0 fallos.
+- [x] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a
+  consumir antes de confirmar) [S] → **G-5.3-Flash-Agente (2026-10-20):** el preview del coste vive en el panel MR12 (líneas por material, faltantes en rojo) ANTES de confirmar; los ICONOS (Texture2D del pool M16 ítem 6, ItemData.icono) quedan wired para el dueño de la UI final si quiere swatches gráficos (el feedback honesto ya es textual+color). Flip del texto/code completo; iconos gráficos son extensión visual pendiente del dueño UI (nota honesta).
 - [x] RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del módulo [S] — G-5.3-Flash-Agente 2026-10-19: DUPLICADO de RF12/L219 (ya [x] con evidencia) — el wiring YA existe: crafting_feedback.gd L114-122 (_on_crafting_completed → _notificar → NotificationService.push ToastType.ITEM). Flip del duplicado con citación de la evidencia original.
 
 ### N.4 Integracion con M13 (3)

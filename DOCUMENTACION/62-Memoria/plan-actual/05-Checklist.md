@@ -188,8 +188,8 @@
 
 - [?] Baseline menú principal: objetivo < 600 MB [S] — **[?] 2026-10-20 (Tanda 78, DS-Opencode): NO MEDIBLE, no hay escena de menú.** `project.godot` arranca en `res://scenes/main_island.tscn`; los 4 candidatos (`scenes/main_menu.tscn`, `ui/main_menu.tscn`, `ui/menu.tscn`, `menu.tscn`) no existen; el único `*menu*.tscn` es `scenes/debug/debug_menu.tscn` (no es el menú principal). Medir `main_island.tscn` y llamarlo “menú” sería un falso verde. Evidencia del bloqueo: Log 2033 (item 18) + glob actual. Se deja `[?]` para que el dueño del menú lo cierre cuando la escena exista; no se inventa un número. Log 2047.
 - [x] Baseline spawn de Aurora: objetivo < 1.600 MB [S] — **[x] 2026-10-20 (Tanda 79, DS-Opencode): medido con RENDERER REAL (OpenGL 3.3, AMD Radeon, ventana 640x360), no headless.** `sesion_m62_baselines.gd` spawn: **149.7 MB static, 7307 objetos, 0 huérfanos, 7/0 EXIT 0**. Probe de VRAM sobre la misma escena: **static 145.6 + VRAM 44.3 = 189.9 MB** (tex 12.2, buf 32.1), 7288 objetos. Total estimado **189.9 MB << 1600 MB** (11.9% del objetivo). Alcance: boot automatizado con renderer real y 12–15 s de asentamiento, no una sesión manual; no hay banco de audio completo. Evidencia: `out/tanda79/spawn_render.log` sha256 `b9938516…`, `out/tanda79/probe_vram.log` sha256 `7ed5c3f5…`. Log 2048.
-- [ ] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S]
-- [ ] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S]
+- [x] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S] — **[x] 2026-10-20 (Tanda 80, DS-Opencode): medido con RENDERER REAL (OpenGL 3.3, AMD Radeon), no headless.** `sesion_m62_baselines.gd` horizonte: **151.7 MB static, 7384 objetos, 0 huérfanos, 9/0 EXIT 0**; cámara a **20.00 m** del Player (tope de oteo). Probe de VRAM: **static 148.0 + VRAM 44.4 = 192.4 MB** (tex 12.2, buf 32.2), 7293 objetos. Total **192.4 MB << 2200 MB** (8.7% del objetivo). Se corrigió el arnés (cámara resuelve `_target` un frame después; el scroll solo cambia `_distance` y la posición converge en `_physics_process`), sin tocar código de producción. Evidencia: `out/tanda80/horizonte_render.log` sha256 `a714c30e…`, `out/tanda80/probe_vram_horizonte.log` sha256 `398910cc…`; regresión spawn `spawn_render_patch.log` 7/0. Log 2051.
+- [?] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S] — **[?] 2026-10-20 (Tanda 81, DS-Opencode): NO MEDIBLE, no existe templo/API de acceso.** No hay ninguna escena `*templo*` ni `*subterr*` en `scenes/` (solo scripts de puzzles en `scripts/templos/` y referencias de zonas en combate/minería). El arnés solo puede bajar al Player 40 m en el spawn (Y 6.0 → -34.0); con renderer real reporta **1 VoxelTerrain y 0 bloques actualizados**, así que el subterráneo no se ejercita: **155.9 MB static / 7354 objetos / 0 huérfanos / 8 checks, 1 fallo (sin API de producción), EXIT 3 (detector ciego)**. Ese número NO es un baseline del templo y no se usa. Se deja `[?]` hasta que exista la escena/entrada de producción. Evidencia: `out/tanda81/subterraneo_render.log` sha256 `f1ea9c77…`. Log 2052.
 - [ ] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S]
 - [x] Profiling: identificar top de allocs por frame en hot paths [M]
 - [x] Cero allocs deliberados en `_process`/`_physics_process` del gameplay [C] — Log 1094: el muestreo por frame con `_muestras.append()`+`pop_front` (un alloc deliberado por frame, justo lo prohibido) se reemplazó por muestreo por TIEMPO y ventana circular `PackedFloat32Array`
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 138 - Pendientes: 11 - No resueltos: 1.
+**Totales:** 150 items - Completados: 139 - Pendientes: 9 - No resueltos: 2.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -978,3 +978,39 @@ banco anterior muere. No toca producción.
   `out/tanda79/probe_vram.log` (sha256 `7ed5c3f5…`).
 
 **Totales tras el cierre:** 138 / 11 / 1 (150 items).
+
+## Tanda 80 — L191 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2051)
+
+**Resultado: `[x]` — baseline de horizonte oteado con renderer real.**
+
+- **Item:** “Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S]”.
+- **Arnés, sin `--headless`:** `sesion_m62_baselines.gd`, `M62_ESCENARIO=horizonte`,
+  `M62_ASENTAR_S=20`, `--rendering-driver opengl3`: **151.7 MB static**, 7384 objetos, 0 huérfanos,
+  **9 checks / 0 fallos / EXIT 0**. Cámara a **20.00 m** del Player (tope de oteo).
+- **VRAM:** probe con zoom al tope: **static 148.0 MB + VRAM 44.4 MB = 192.4 MB** (texturas 12.2,
+  buffers 32.2), 7293 objetos. **8.7% del objetivo de 2200 MB.**
+- **Fix de arnés (solo test):** la cámara resuelve `_target` un `process_frame` después de `_ready`;
+  el escenario se aplicaba en el mismo frame. Se espera 1 s antes de aplicar, se fuerza modo EXPLORE y
+  se simulan 2 s de `_physics_process` después del scroll (el scroll solo cambia `_distance`; la
+  posición converge en física). **No se tocó código de producción.**
+- **Regresión:** spawn con el arnés corregido: **144.1 MB static, 7/0 EXIT 0** (124 sigue válido).
+- **Evidencia:** `out/tanda80/horizonte_render.log` (sha256 `a714c30e…`),
+  `out/tanda80/probe_vram_horizonte.log` (sha256 `398910cc…`),
+  `out/tanda80/spawn_render_patch.log` (sha256 `e896ff9e…`).
+
+## Tanda 81 — L192 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2052)
+
+**Resultado: `[?]` — NO MEDIBLE: no existe el templo ni una API de acceso al subterráneo.**
+
+- **Item:** “Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S]”.
+- **Búsqueda:** 0 escenas `*templo*`, `*subterr*`, `*cueva*` en `scenes/`; solo scripts de puzzles en
+  `scripts/templos/` y referencias de zona (`templo`) en combate/minería. No hay escena de templo que
+  cargar ni punto de teleport de producción.
+- **Corrida con renderer real:** el arnés baja al Player 40 m en el spawn (Y 6.0 → -34.0); con
+  **1 VoxelTerrain y 0 bloques actualizados** el subterráneo no se ejercita: **155.9 MB static,
+  7354 objetos, 0 huérfanos, 8 checks / 1 fallo (el escenario no se aplicó por API de producción),
+  EXIT 3 (detector ciego)**. Ese número **no** es un baseline del templo y no se usa.
+- **Evidencia:** `out/tanda81/subterraneo_render.log` (sha256 `f1ea9c77…`).
+- **Cierre:** queda `[?]` hasta que exista la escena/entrada de producción del templo.
+
+**Totales tras Tandas 80-81:** 139 / 9 / 2 (150 items).
