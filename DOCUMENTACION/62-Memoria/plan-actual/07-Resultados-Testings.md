@@ -533,3 +533,24 @@ el frame equivocado. (Esa fue la 1.ª corrida en rojo: `21 checks, 1 fallo`.)
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_m62_pistas_streaming.gd
 ```
+
+## 21. Tanda 69 (2026-10-20, DS-Opencode, Log 2029): L152 — streams liberados de caché cuando ningún reproductor los usa
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L152 del checklist: "Streams `.ogg` liberados de caché cuando ningún reproductor los usa".
+- **Contrato pinneado (sin cambio de producción):** con reproductor, el stream en uso NO se descarga al cambiar de región y muere al soltar la última referencia + drenar; sin reproductor, la cola lo retiene mientras está encolado y `ejecutar_descarga` lo libera (WeakRef 0, lote sin refs); ciclo ×3 sin acumulación; lote mixto discrimina por uso; `PoolFactory` `audio_voz` no retiene media.
+- **Suite nueva:** `test_m62_ogg_cache.gd` (**46 checks**) con el autoload REAL `MemoryMonitor` vía `--headless --script` (1 check de base):
+  - **A (10):** stream con reproductor: sobrevive al cambio de región (en uso), sigue vivo tras drenar el lote, muere al soltar la última referencia del player y drenar; contadores forzadas/cambios.
+  - **B (10):** stream sin reproductor: encolado vivo (la cola lo retiene), no asignado a ningún player, tras `ejecutar_descarga` muere; lote y resumen de peso correctos; `objetos_vivos` ≤ base + tol.
+  - **C (8):** ciclo ×3 usar/soltar/drenar: 3 muertos, cola 0 en cada frontera, lote único, forzadas +3, cambios +3, sin acumulación.
+  - **D (10):** lote mixto (uno en uso + uno libre): ambos encolados, el libre muere y el usado sobrevive; al soltar el usado muere; contadores.
+  - **E (7):** PoolFactory `audio_voz`: el player nace estacionado SIN stream, con stream vive, `_estacionar()` lo deja sin stream, reciclar/free libera el stream.
+- **Resultado:** 46 checks, 0 fallos, **×3 corridas idénticas** (corridas 3/4/5, exit 0, logs normalizados idénticos de 399 líneas). Corridas 1-2 fueron construcción del harness (defectos detectados y corregidos: asertos antes del drenaje, ruido de `objetos_vivos`, `weakref` inferido). Evidencia: `out/tanda69/suite_corrida{1..5}.log`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 46 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda69/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `526bb017…`).
+- **Regresión:** 16 suites M62 (las 15 del set T68 + la nueva) + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25/33/24/24/45/57/46 checks + budgets; `out/tanda69/reg_*.log`).
+- **Alcance (lo que NO prueba):** el repo no tiene assets de audio (0 `.ogg/.wav/.mp3`), así que no se construye un `AudioStreamOggVorbis` real; se usa `AudioStreamWAV` como stand-in DECLARADO (misma semántica RefCounted y propiedad `stream`). Se mide la liberación, no el decoder ogg.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_ogg_cache.gd
+```

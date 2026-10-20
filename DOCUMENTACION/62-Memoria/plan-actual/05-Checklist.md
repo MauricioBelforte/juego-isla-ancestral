@@ -149,7 +149,7 @@
 - [x] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región [M]
 - [x] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C]
 - [x] Voces del pool M43 con tope duro: si se llena, se corta la voz más antigua (nunca crece) [S]
-- [ ] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M]
+- [x] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M]
 - [ ] Los buses (M91) no retienen streams detenidos [S]
 - [ ] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M]
 - [ ] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C]
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 128 - Pendientes: 22 - No resueltos: 0.
+**Totales:** 150 items - Completados: 129 - Pendientes: 21 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -694,3 +694,38 @@ ciclo canónico que lo cumple. Mismo criterio que los cierres previos (L137/139/
 el colector de sintaxis (autogenerado).
 
 **Totales tras el cierre:** 128 / 22 / 0 (150 items).
+
+## Notas del Agente — Tanda 69 (DS-V4.1-Flash-Opencode, OpenCode, 2026-10-20, Log 2029)
+
+**Estado:** L152 cerrado por MEDICIÓN (no por argumento): suite nueva `test_m62_ogg_cache.gd`
+(46 checks, 0 fallos, ×3 corridas idénticas 3/4/5) con el autoload real MemoryMonitor. Cierra el ítem
+"Streams `.ogg` liberados de caché cuando ningún reproductor los usa".
+
+**Contrato medido (mecanismo del 62, sin cambio de producción):**
+- CON reproductor: un stream asignado a un AudioStreamPlayer no se descarga al cambiar de región
+  (`avisar_cambio_region` lo saltea por estar en uso) y muere recién al soltar la última referencia
+  del reproductor y drenar la cola (WeakRef 0).
+- SIN reproductor: `marcar_candidato` RETIENE el stream mientras está encolado (correcto: no se libera
+  antes del drenaje); `ejecutar_descarga` lo libera (WeakRef 0) y el lote reporta solo {peso,dist,edad}.
+- CICLO ×3 usar/soltar/drenar: 3 streams muertos, cola 0 en cada frontera, forzadas +3, sin acumulación.
+- LOTE MIXTO: el stream con reproductor sobrevive al drenaje y el libre muere (discriminación por uso).
+- PoolFactory `audio_voz`: el player nace estacionado SIN stream; reciclar/free libera el stream (el pool
+  no retiene media).
+
+**Evidencia (out/tanda69):** corrida 1 (v1) y corrida 2 fueron construcción del harness (defectos
+detectados y corregidos: asertos de muerte antes del drenaje, `objetos_vivos` con ruido del engine y
+`weakref` inferido como Variant). Corridas 3/4/5 del archivo final: 46 checks, 0 fallos, exit 0,
+logs normalizados idénticos de 399 líneas. Guardián de 3 capas EN ROJO (piso 999 → `[FALL]` + exit 1;
+suite restaurada byte-idéntica sha256 `526bb017…`). Regresión: 16 suites + budgets verdes.
+
+**Alcance declarado:** el repo no tiene assets de audio (0 `.ogg/.wav/.mp3` en game/isla-ancestral),
+así que no se puede construir un `AudioStreamOggVorbis` real; se usa `AudioStreamWAV` como stand-in
+DECLARADO (misma semántica RefCounted y misma propiedad `stream` del reproductor). Se mide la
+LIBERACIÓN cuando ningún reproductor usa el stream, no el decoder ogg (criterio T65). Mismo criterio
+que los cierres previos (L137/139/140/141/142/143/149/150).
+
+**No toqué:** `quality.yml`; `music_director.gd` / `feedback_director.gd` (M41/M44, read-only);
+`ambient_director.gd` (M42, read-only); `memory_monitor.gd`; `pool_factory.gd`; `unload_policy.gd`;
+`stream_manager.gd` (M63, read-only); el colector de sintaxis (autogenerado).
+
+**Totales tras el cierre:** 129 / 21 / 0 (150 items).
