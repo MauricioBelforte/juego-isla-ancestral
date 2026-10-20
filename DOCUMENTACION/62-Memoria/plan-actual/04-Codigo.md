@@ -708,3 +708,16 @@ DeepSeek-V4.1-Flash (Log 2033). Se re-ejecutó y se aplicó el flip.
   M62_ESCENARIO=menu` podrá medirla. No se creó un menú postizo ni se cambió `main_scene`.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 78.
+
+## Tanda 79 — L190 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2048)
+
+**No hay código nuevo: se midió el baseline de spawn con renderer real.**
+
+- `sesion_m62_baselines.gd` (arnés de producción de DeepSeek-V4.1-Flash) corrido **sin** `--headless`,
+  con `--rendering-driver opengl3`: **149.7 MB static**, 7307 objetos, 0 huérfanos, 7/0.
+- Probe complementario de VRAM (`out/tanda79/probe_vram.gd`, one-off) sobre `main_island.tscn`:
+  **145.6 MB static + 44.3 MB VRAM = 189.9 MB**; texturas 12.2 MB, buffers 32.1 MB; 7288 objetos.
+- **Cierre:** 189.9 MB << 1600 MB (11.9% del objetivo). El arnés no se modificó; el probe es
+  evidencia descartable y no se integra al juego.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 79.

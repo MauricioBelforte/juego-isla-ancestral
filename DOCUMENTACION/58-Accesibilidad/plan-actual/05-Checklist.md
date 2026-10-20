@@ -208,14 +208,14 @@
 - [x] Planear prueba de filtros de daltonismo comparando matices críticos (SVG/colores del juego) [C]
 - [x] Planear prueba de alto contraste sobre todos los estados de UI de M53 [M]
 - [x] Planear prueba del modo reducción de movimiento en escenas de M12 (shake, parallax) [C]
-- [ ] Planear prueba de aim assist en pesca (M34) con slider en 0 %, 50 % y 100 % [C]
-- [ ] Planear prueba del preset single_hand sin conflictos con el remapeo de M57 [C]
+- [x] Planear prueba de aim assist en pesca (M34) con slider en 0 %, 50 % y 100 % [C] → **G-5.3-Flash-Agente (Kilo Code, 2026-10-20):** runbook completo en `58-Accesibilidad/plan-actual/10-plan-pruebas-pendientes-m58.md` (objetivo, precondiciones, pasos, criterios de éxito y responsable). Los 5 planes 'Planear prueba…' viven en ese documento único con matriz de responsabilidad (los ejecutores son los dueños runtime: M34/M57/M61/M53/M59).
+- [x] Planear prueba del preset single_hand sin conflictos con el remapeo de M57 [C] → **G-5.3-Flash-Agente (Kilo Code, 2026-10-20):** runbook completo en `58-Accesibilidad/plan-actual/10-plan-pruebas-pendientes-m58.md` (objetivo, precondiciones, pasos, criterios de éxito y responsable). Los 5 planes 'Planear prueba…' viven en ese documento único con matriz de responsabilidad (los ejecutores son los dueños runtime: M34/M57/M61/M53/M59).
 - [x] Planear prueba de subtítulos a velocidad 0.5x y 2x con diálogos largos [M]
 - [x] Planear prueba de persistencia: cambiar, reiniciar el juego y verificar el perfil intacto [M]
 - [x] Planear prueba de recuperación ante corrupción del JSON [M]
-- [ ] Planear prueba de rendimiento: overhead del perfil en escena poblada con profiler [C]
-- [ ] Planear prueba de atajo global F10 desde título, pausa y gameplay [M]
-- [ ] Planear prueba de sesión larga (≥ 30 min) verificando los autosaves cada 5 minutos [C]
+- [x] Planear prueba de rendimiento: overhead del perfil en escena poblada con profiler [C] → **G-5.3-Flash-Agente (Kilo Code, 2026-10-20):** runbook completo en `58-Accesibilidad/plan-actual/10-plan-pruebas-pendientes-m58.md` (objetivo, precondiciones, pasos, criterios de éxito y responsable). Los 5 planes 'Planear prueba…' viven en ese documento único con matriz de responsabilidad (los ejecutores son los dueños runtime: M34/M57/M61/M53/M59).
+- [x] Planear prueba de atajo global F10 desde título, pausa y gameplay [M] → **G-5.3-Flash-Agente (Kilo Code, 2026-10-20):** runbook completo en `58-Accesibilidad/plan-actual/10-plan-pruebas-pendientes-m58.md` (objetivo, precondiciones, pasos, criterios de éxito y responsable). Los 5 planes 'Planear prueba…' viven en ese documento único con matriz de responsabilidad (los ejecutores son los dueños runtime: M34/M57/M61/M53/M59).
+- [x] Planear prueba de sesión larga (≥ 30 min) verificando los autosaves cada 5 minutos [C] → **G-5.3-Flash-Agente (Kilo Code, 2026-10-20):** runbook completo en `58-Accesibilidad/plan-actual/10-plan-pruebas-pendientes-m58.md` (objetivo, precondiciones, pasos, criterios de éxito y responsable). Los 5 planes 'Planear prueba…' viven en ese documento único con matriz de responsabilidad (los ejecutores son los dueños runtime: M34/M57/M61/M53/M59).
 
 ## Dependencia: Visión del Agente (M154)
 
@@ -259,7 +259,7 @@
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
 
-**Totales:** 184 ítems · Completados: 158 · Pendientes: 24 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tras el flip RF26: 158/24/2 = 184. El medido manda.)
+**Totales:** 184 ítems · Completados: 163 · Pendientes: 19 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tras el paquete de runbooks MR/planear: 163/19/2 = 184. El medido manda.)
 
 > **Actualizado por atria-dawn-s2 (Atria-Dawn-Preview / Kilo Code, 2026-10-12, Log 1755):** barrido con evidencia en disco y runtime. +6 `[ ]` -> `[x]`: RF4 niveles de texto delegados a M88 (01-Requerimientos RF4); RF12 alternativa visual para pistas auditivas (`INDICADORES_SONIDO`, accesibilidad_manager.gd:353, 7 pistas con forma visual + clave de texto); presets de control persisten por jugador (`control_preset` L409 + profile.json, 03-Diseno:40/77); RF23 diálogos a ritmo del jugador sin cuenta regresiva (dialog_layer.gd:153/158/166 por input; `AutoAdvanceManager` sin cablear en escenas); letreros sustituibles por diálogo/marca visual (02-Analisis:41); flujo de arranque boot->load->apply->título (03-Diseno:98-110). No flippeados (honestidad): RF26 guía de textos no redactada (solo RF26 en requerimientos), reabrir último diálogo sin implementar (solo signal `_on_dialogue_ended`), F10 sin implementar (0 `KEY_F10`), carteles con tiempo de vida/fade-out ausentes. **HALLAZGO REGRESIÓN:** `test_perfil_m58_iter4.gd` tiene 33 llamadas `_ok()` pero `CHECKS_MINIMOS = 34` -> falla estructural "PISO NO CUMPLIDO: 33 < 34" (EXIT 1). El Log 1701 de Step 5 declaró "39 checks, 0 fallos" — inexacto. Fix mínimo: bajar `CHECKS_MINIMOS` a 33 (o agregar 1 check). Runtime 4 suites: 110 checks útiles, 0 fallos (39+13+33+25); la suite iter4 se cuenta como falla estructural, no de lógica.
 

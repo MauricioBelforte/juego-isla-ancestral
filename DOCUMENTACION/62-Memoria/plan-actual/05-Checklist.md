@@ -187,7 +187,7 @@
 ## L. Optimización y mediciones
 
 - [?] Baseline menú principal: objetivo < 600 MB [S] — **[?] 2026-10-20 (Tanda 78, DS-Opencode): NO MEDIBLE, no hay escena de menú.** `project.godot` arranca en `res://scenes/main_island.tscn`; los 4 candidatos (`scenes/main_menu.tscn`, `ui/main_menu.tscn`, `ui/menu.tscn`, `menu.tscn`) no existen; el único `*menu*.tscn` es `scenes/debug/debug_menu.tscn` (no es el menú principal). Medir `main_island.tscn` y llamarlo “menú” sería un falso verde. Evidencia del bloqueo: Log 2033 (item 18) + glob actual. Se deja `[?]` para que el dueño del menú lo cierre cuando la escena exista; no se inventa un número. Log 2047.
-- [ ] Baseline spawn de Aurora: objetivo < 1.600 MB [S]
+- [x] Baseline spawn de Aurora: objetivo < 1.600 MB [S] — **[x] 2026-10-20 (Tanda 79, DS-Opencode): medido con RENDERER REAL (OpenGL 3.3, AMD Radeon, ventana 640x360), no headless.** `sesion_m62_baselines.gd` spawn: **149.7 MB static, 7307 objetos, 0 huérfanos, 7/0 EXIT 0**. Probe de VRAM sobre la misma escena: **static 145.6 + VRAM 44.3 = 189.9 MB** (tex 12.2, buf 32.1), 7288 objetos. Total estimado **189.9 MB << 1600 MB** (11.9% del objetivo). Alcance: boot automatizado con renderer real y 12–15 s de asentamiento, no una sesión manual; no hay banco de audio completo. Evidencia: `out/tanda79/spawn_render.log` sha256 `b9938516…`, `out/tanda79/probe_vram.log` sha256 `7ed5c3f5…`. Log 2048.
 - [ ] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S]
 - [ ] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S]
 - [ ] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S]
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 137 - Pendientes: 12 - No resueltos: 1.
+**Totales:** 150 items - Completados: 138 - Pendientes: 11 - No resueltos: 1.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -956,3 +956,25 @@ banco anterior muere. No toca producción.
   No se toca `project.godot` ni se crea un menú postizo para “aprobar” el ítem.
 
 **Totales tras el cierre:** 137 / 12 / 1 (150 items).
+
+## Tanda 79 — L190 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2048)
+
+**Resultado: `[x]` — baseline de spawn medido con renderer real.**
+
+- **Item:** “Baseline spawn de Aurora: objetivo < 1.600 MB [S]”.
+- **Corrida 1 (arnés de producción, no headless):** `sesion_m62_baselines.gd` con
+  `M62_ESCENARIO=spawn`, `M62_ASENTAR_S=15`, `--rendering-driver opengl3`: **149.7 MB static**,
+  7307 objetos, 0 huérfanos, **7 checks / 0 fallos / EXIT 0**. El log confirma
+  `OpenGL API 3.3.0 Core Profile ... AMD Radeon(TM) Graphics`.
+- **Corrida 2 (VRAM):** probe sobre `main_island.tscn` en el mismo renderer, 12 s después de
+  instanciar: **static 145.6 MB + VRAM 44.3 MB = 189.9 MB** (texturas 12.2, buffers 32.1);
+  7288 objetos. **189.9 MB es el 11.9% del objetivo de 1600 MB.**
+- **Por qué cierra:** el objetivo es un techo de 1600 MB y el total estimado queda 8.4x por debajo;
+  no hay OOM, no hay huérfanos y la escena es la real (`main_island.tscn`), con el spawn de Aurora.
+- **Alcance declarado:** boot automatizado con renderer real y 12–15 s de asentamiento; **no** es una
+  sesión manual de juego ni incluye banco de audio completo. La VRAM se lee con
+  `Performance.RENDER_VIDEO_MEM_USED`, no con una fórmula paralela.
+- **Evidencia:** `out/tanda79/spawn_render.log` (sha256 `b9938516…`) y
+  `out/tanda79/probe_vram.log` (sha256 `7ed5c3f5…`).
+
+**Totales tras el cierre:** 138 / 11 / 1 (150 items).

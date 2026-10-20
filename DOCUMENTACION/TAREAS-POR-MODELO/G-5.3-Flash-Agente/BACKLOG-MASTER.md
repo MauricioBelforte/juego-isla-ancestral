@@ -384,11 +384,11 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 89. - [ ] [58] Carteles de alerta con tiempo de vida y fade-out sin tween acumulados [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 90. - [ ] [58] Escaneo de interactuables para contornos solo en radio cercano al jugador [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 91. - [ ] [58] Verificar que M58 no sume draw calls perceptibles en escenas pobladas (M61) [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
-92. - [ ] [58] Planear prueba de aim assist en pesca (M34) con slider en 0 %, 50 % y 100 % [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
-93. - [ ] [58] Planear prueba del preset single_hand sin conflictos con el remapeo de M57 [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
-94. - [ ] [58] Planear prueba de rendimiento: overhead del perfil en escena poblada con profiler [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
-95. - [ ] [58] Planear prueba de atajo global F10 desde título, pausa y gameplay [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
-96. - [ ] [58] Planear prueba de sesión larga (≥ 30 min) verificando los autosaves cada 5 minutos [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+92. - [x] [58] Planear prueba de aim assist en pesca (M34) con slider en 0 %, 50 % y 100 % [C]  · [x] T43-M58 (G-5.3): runbook 10-plan-pruebas-pendientes-m58.md (T36-M58).<!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+93. - [x] [58] Planear prueba del preset single_hand sin conflictos con el remapeo de M57 [C]  · [x] T44-M58 (G-5.3): runbook 10-plan-pruebas-pendientes-m58.md (T36-M58).<!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+94. - [x] [58] Planear prueba de rendimiento: overhead del perfil en escena poblada con profiler [C]  · [x] T45-M58 (G-5.3): runbook 10-plan-pruebas-pendientes-m58.md (T36-M58).<!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+95. - [x] [58] Planear prueba de atajo global F10 desde título, pausa y gameplay [M]  · [x] T46-M58 (G-5.3): runbook 10-plan-pruebas-pendientes-m58.md (T36-M58).<!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+96. - [x] [58] Planear prueba de sesión larga (≥ 30 min) verificando los autosaves cada 5 minutos [C]  · [x] T47-M58 (G-5.3): runbook 10-plan-pruebas-pendientes-m58.md (T36-M58).<!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 97. - [ ] [65] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensi <!-- fuente: 65-Animales-IA/05-Checklist.md -->
 
 

@@ -739,3 +739,17 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
 - **Sin gate nuevo:** no hay nada que medir todavía; un “baseline” inventado sería peor que `[?]`.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 78.
+
+## 30. Tanda 79 (2026-10-20, DS-Opencode, Log 2048): L190 — baseline spawn con renderer real
+
+- **Objetivo:** < 1600 MB.
+- **Arnés de producción, sin headless:** `sesion_m62_baselines.gd`, `M62_ESCENARIO=spawn`,
+  `M62_ASENTAR_S=15`, `--rendering-driver opengl3`: **149.7 MB static**, 7307 objetos,
+  0 huérfanos, **7 checks / 0 fallos / EXIT 0**.
+- **VRAM:** `RENDER_VIDEO_MEM_USED` 44.3 MB; texturas 12.2 MB; buffers 32.1 MB; static 145.6 MB;
+  **total estimado 189.9 MB**; 7288 objetos.
+- **Resultado:** **189.9 MB << 1600 MB** (11.9%). Cierra L190.
+- **Límite:** boot automatizado con renderer real y 12–15 s de asentamiento; no sesión manual ni
+  banco de audio completo. La medición de VRAM es del renderer, no una estimación externa.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 79.
