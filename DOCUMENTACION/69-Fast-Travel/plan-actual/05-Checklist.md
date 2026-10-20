@@ -149,11 +149,11 @@
 
 ## K. Accesibilidad ampliada (10)
 
-- [ ] Subtitulos de feedback de acción [S]
-- [ ] Tamaño de texto escalable para menu (M62) [S]
+- [x] Subtitulos de feedback de acción [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — subtítulos vía SubtitleManager real (duck typing): al llegar «M69.FEEDBACK.ARRIBADA» y al cancelar «M69.FEEDBACK.CANCELADO» (claves nuevas ES+EN+PT en strings json + .po es/en mismo commit, `validar_i18n_integridad.py` EXIT 0, 166/166/166). Evidencia QA: «OK J12 subtítulo CANCELADO mostrado y localizado» + «OK J12 subtítulo ARRIBADA mostrado y localizado» (44/0 EXIT 0).
+- [x] Tamaño de texto escalable para menu (M62) [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — el texto del panel de carga escala con `ThemeService.get_ui_scale()` (rango M58 0.8-1.5) al construirse. Evidencia QA (set_ui_scale 1.3): «OK J13 escala 1.3 capturada al nacer» + «OK J13 font escalada (31 px)».
 - [?] Lectura por screen reader de menu (verbal descriptions) [S] — **[x]→[?] barrido atria (Log 1760):** 0 hits de `screen_reader|screen reader|verbal description` en `scripts/`. Claim de accesibilidad (M53/M62) sin artefacto.
-- [ ] Confirmación háptica opcional [S]
-- [ ] Contraste alto para menu de selección [S]
+- [x] Confirmación háptica opcional [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — vibración confirmatoria al llegar via ControlInput real `vibrar(0.35, 0.20)` (duck typing, respeta `vibracion_on` e ignora sin mandos). Evidencia QA: «OK J14 háptica habilitada por defecto (vibrar respeta flag)». Límite honesto: la amplitud física exacta requiere hardware de mando (verificación no bloqueante, debida al dueño M57/M68 si estima necesario).
+- [x] Contraste alto para menu de selección [S] → **G-5.3-Flash-Agente (2026-10-19):** texto cream ThemeUx (COLOR_TEXT_DARK) sobre velo noche COLOR_VELO — ratio WCAG calculado con la misma fórmula del test_m53_wcag. Evidencia QA: «OK J15 contraste texto/velo >= 4.5 AA» (ratio real medido en runtime).
 - [ ] Iconos de apoyo visual al nombre del destino [S]
 - [ ] Alt text para thumbnails de destino [S]
 - [ ] Modo cronológico para historiales [S]
@@ -164,7 +164,7 @@
 
 - [ ] M28: integración con waypoints descubiertos [S]
 - [x] M63: consulta de logros asociados a first-travel [S]
-- [ ] M29-M31: restricción temporal (noche, tormenta) [S]
+- [x] M29-M31: restricción temporal (noche, tormenta) [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_service.gd` — `restriccion_temporal_activa()` con duck typing de autoloads reales (GameTime.es_de_dia() → noche; Weather.get_clima() == TORMENTA) + `_restriccion_temporal_fn` inyectable (mismo patrón que `puede_pagar_fn`); `solicitar_viaje()` rechaza con motivo **"horario"** y NO emite señal de viaje. Evidencia: `test_fast_travel_headless.gd` **24/0, EXIT 0, PASS** — «Horario: bloqueado (fn) -> sin viaje», «Horario: motivo 'horario'», «Horario: señal de viaje NO emitida», «Horario: sin bloqueo el viaje se concede», «Horario: GameTime real de noche restringe» (avanzar_hasta 23:30) y «de día no restringe» (10:00, restaurada). CHECKS_MINIMOS 17→23 (piso del guardián).
 - [?] M104: evento analytics fast_travel_used [S] — **[x]→[?] barrido atria (Log 1760):** grep `fast_travel_used` en `scripts/`, `tests/` y `data/` → **0 hits**. El evento de analytics no existe en runtime. **Precisión (step-5-kilocode, Kilo Code, 2026-10-12):** el grep por el nombre literal `fast_travel_used` da 0 hits, pero el evento **genérico sí existe**: `analytics_director.gd` define la constante `EV_FEATURE_USADA` y `test_analytics.gd:82` la usa con `{"feature": "fast_travel"}`. Lo que no hay es **emisión desde runtime** (grep de `EV_FEATURE_USADA` fuera de tests: solo la definición en `analytics_director.gd`). El `[?]` se mantiene, pero la nota original inducía a error al decir "el evento no existe".
 - [ ] M110: debug menu con listado de anchors [S]
 - [ ] M122: captura de crash si portal falla [S]
@@ -188,7 +188,7 @@
 - [ ] Test de fallback: 3 fallos seguidos ? modo seguro [M]
 - [ ] Test de perfilado: sin allocs en frame [M]
 
-**Totales:** 145 ítems · Completados: 109 · Pendientes: 29 · No resueltos: 7. (Corregido agnes-3-flash 2026-10-12: +50 flips con `m69_spec.md`; tanda J +7 y J completa +4 por G-5.3-Flash-Agente 2026-10-19 — sección J 10/10)
+**Totales:** 145 ítems · Completados: 114 · Pendientes: 24 · No resueltos: 7. (Corregido agnes-3-flash 2026-10-12: +50 flips con `m69_spec.md`; tandas 1-3 por G-5.3-Flash-Agente 2026-10-19 — sección J 10/10 + accesibilidad 4)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 4):** la línea decía *"143 ítems · Completados: 143 · Pendientes: 0 ·

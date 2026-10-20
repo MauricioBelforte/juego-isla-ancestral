@@ -243,7 +243,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 20. reposicion nicho GLM (directo del 05 real): 16: Texturas/iconos de recetas precargados con pool ligero [M]
 21. reposicion nicho GLM (directo del 05 real): 16: Sin steps de física extra en estaciones (efecto interactuable básico) [S]
   · [x] VERIFICADO 2026-10-19 05:30 UTC (G-5.3-Flash-Agente): crafting_station.gd — Node3D + Mesh placeholder por tipo + Area3D de interacción (input interactuar + radio + idempotencia L44-59). 0 referencias a RigidBody/CharacterBody/gravity custom — el efecto interactuable básico SIN física extra ya estructural. Flip del 05 M16 con esta evidencia (dueño de fila: director).
-22. reposicion nicho GLM (directo del 05 real): 16: Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M]
+22. [x] reposicion nicho GLM (directo del 05 real): 16: Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M]
   · [x] VERIFICADO 2026-10-19 05:45 UTC (G-5.3-Flash-Agente): QA headless nuevo (qa_budget_m16.gd) — recetas estación 0 = 4 recetas, tiempo de los 2 refrescos de apertura (recetas_por_estacion + recetas_conocidas_estacion con iteración completa de la lista) = 24 us » presupuesto 1 ms. Sin cortes en la apertura — el recálculo es barato (diccionario lookup + array filter). QA script persistido en scripts/viajes/qa_budget_m16.gd para re-corridas del dueño.
 23. reposicion nicho GLM (directo del 05 real): 16: Test unitario: registro de recetas y detección de duplicados [M]
   · [x] IMPLEMENTADO+VERIFICADO 2026-10-19 00:35 UTC (G-5.3-Flash-Agente): test_crafting.gd nueva función _test_registro_duplicados() — crafting.json accesible/parsea, service registró N de N recetas (sin pérdidas por duplicados del JSON flat), regex por rec_id detectar duplicados en el texto crudo, receta inexistente -> null. Suite completo: M16 0 fallos (con el test nuevo sumado al runner).
@@ -454,7 +454,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 19. - [ ] [69] Filtros por tipo de lugar (bioma, servicios) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 20. - [ ] [69] Sin dependencia solo de color para estado [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 21. - [ ] [69] M28: integración con waypoints descubiertos [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-22. - [ ] [69] M29-M31: restricción temporal (noche, tormenta) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+22. - [x] [69] M29-M31: restricción temporal (noche, tormenta) [S] · [x] T4-M69 2026-10-19 (G-5.3-Flash-Agente): restriccion_temporal_activa() + motivo 'horario' en fast_travel_service.gd — test 24/0 EXIT 0 PASS (GameTime real noche/día verificado); flips 05-Checklist (114/24/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 23. - [ ] [69] M110: debug menu con listado de anchors [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 24. - [ ] [69] M122: captura de crash si portal falla [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 25. - [ ] [69] M124: balance económico según distancia [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
