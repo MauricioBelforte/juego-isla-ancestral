@@ -96,6 +96,7 @@
 ### Bloque C — Verificación runtime headless (especialidad única de Hy3)
 
 51. Suite de smoke de managers core (bootstrap/eventbus/registries) — [x] Hy3 (msg 279, 2026-10-19: 15 checks/0 fallos Godot headless; guardian RED probado; scripts/core/test_smoke_core_hy3.gd sin commitear)
+   - Re-verif runtime 2026-10-20 (canal 287 / Log 2030): 15 checks/0 fallos Godot headless real (console binary), guardian anti-falso-verde cumplido (15==MIN_CHECKS), exit 0. Sigue verde.
 52. Runtime test de M59-Guardado: guardar/cargar ciclo con datos reales — 10 [C]
 53. Runtime test de M60-Datos: serialización round-trip completa — 10 [C]
 54. Runtime test de M74: disparo de eventos programados — 10 [C]

@@ -396,11 +396,11 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 
 1. - [ ] [65] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensi <!-- fuente: 65-Animales-IA/05-Checklist.md -->
 2. - [ ] [16] Doble llamado a craft en el mismo frame: cola interna o rechazo silencioso [M] · ANALISIS G-5.3-Flash-Agente 2026-10-19 (M16 revisado con GO del direc <!-- fuente: 16-Crafting/05-Checklist.md -->
-3. - [ ] [16] Cero cómputo de crafting cuando la UI está cerrada [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+3. - [x] [16] Cero cómputo de crafting cuando la UI está cerrada [S] · [x] T13-M16 2026-10-19 (G-5.3-Flash-Agente): verificado en disco+runtime (visual-free): IU/servicio/feedback sin _process, guards visible cortan refresh — qa_m16_ui_cerrada.gd 7/0; flips 16-Crafting/05 (162/28/13). <!-- fuente: 16-Crafting/05-Checklist.md -->
 4. - [x] [16] Filtros de temporada recalculados solo ante season_changed [S] · [x] T11-M16 2026-10-19 (G-5.3-Flash-Agente): recetas_por_estacion sin re-lecturas (cache por señal estacion_cambio) — qa_filtros_estacion_m16.gd 5/0 + regresión test_crafting 0 fallos; flips 16-Crafting/05 (158/32/13). <!-- fuente: 16-Crafting/05-Checklist.md -->
 5. - [ ] [16] Sin asignaciones de objetos en el hot path de fabricación simple [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
 6. - [ ] [16] Texturas/iconos de recetas precargados con pool ligero [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
-7. - [ ] [16] Sin steps de física extra en estaciones (efecto interactuable básico) [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+7. - [x] [16] Sin steps de física extra en estaciones (efecto interactuable básico) [S] · [x] T14-M16 2026-10-19 (G-5.3-Flash-Agente): Area3D con monitoring/monitorable=false (nadie lo consulta — interacción por distancia); retry del player con tope (5) — QA 8/0 EXIT 0; crash AV del churn registrado como BUG-138; extensión documentada en 16-Crafting/05 (el item ya estaba [x] por sync previa). <!-- fuente: 16-Crafting/05-Checklist.md -->
 8. - [ ] [16] Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
 9. - [ ] [16] Test unitario: registro de recetas y detección de duplicados [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
 10. - [ ] [16] Test unitario: validación de materiales y máximo fabricable [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
