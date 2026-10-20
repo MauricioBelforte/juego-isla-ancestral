@@ -188,7 +188,7 @@
 ## Notas del Agente (iter. 5 — Log 1192, DeepSeek-V4.1-Flash/WorkBuddy)
 
 ### Lo que hice
-- **Lado 63 del handshake M62↔M63 (§5.3)**: `avisar_carga_iniciada/terminada()` (contrato Resource-keyed), desacoplado vía `_mem()`; hooks en `_process` (entrega del recurso), `liberar_envejecidos()` (antes de `unreference()`) y `registrar_chunk()` (ofrece chunks nuevos a M62). Anti doble carga L158 (`_rutas_en_carga`).
+- **Lado 63 del handshake M62↔M63 (§5.3)**: `avisar_carga_iniciada/terminada()` (contrato Resource-keyed), desacoplado vía `_mem()`; hooks en `_process` (entrega del recurso), `liberar_envejecidos()` (antes de `unreference()`) y `registrar_chunk()` (ofrece chunks nuevos a M62). Anti doble carga L158 (`_rutas_en_carga`). **Tanda 74 (Log 2042):** el guard se centralizó también en `encolar()` (antes de `load_threaded_request`), no solo en `_encolar_precarga()`; suite M62 `test_m62_doble_carga_m63.gd` 20/20 y regresión M63 7/51/42, 0 fallos.
 - **Precalentamiento P9 (§7)** y **regiones P12-P14 (§5)** implementados como matemática pura + rutas de asset reales.
 - **Suite nueva `test_stream_m63_iter5.gd`**: 51 checks, 0 fallos ×3; guardián de 3 capas probado EN ROJO con 5 sondas (EXIT 1 las 5; control EXIT 0).
 - **Red de regresión ENDURECIDA**: 5 suites pasaron de "0 fallo(s)" sin contador a guardián de 3 capas. `test_stream_m63.gd` estaba MUERTA dando verde y fue reescrita contra la API real.

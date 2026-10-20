@@ -212,3 +212,20 @@ El **índice git compartido volvió a fallar**: tras `git add` de mis 6 rutas, o
 - **El contenido de `tips.txt`** es una lista semilla; redactar los consejos definitivos y su tono es de contenido (Nivel C).
 - **El arte cozy** de la pantalla (nubes/parallax/escena full-screen) sigue siendo de M53 → `[?]`.
 - **No toqué M61** ni `scripts/interacciones/` (kimi). **No sellé §21.8** (autor ≠ verificador).
+
+## Tanda 74 — hardening anti-doble en `encolar()` (M62 L163, Log 2042)
+
+**Cambio acotado en `stream_manager.gd`:** `encolar()` rechaza una segunda operación con la misma
+`ruta_recurso` mientras la primera siga en vuelo, ANTES de `ResourceLoader.load_threaded_request`.
+El guard usa `esta_cargando_ruta()` (el mismo `_rutas_en_carga` de L158) y devuelve `false` con
+warning; no altera operaciones sin ruta ni la carga de chunks.
+
+**Por qué:** `_encolar_precarga()` ya filtraba, pero la API pública `encolar()` permitía duplicar
+la operación y el callback (bug medido: cola 0→2, dos callbacks). Con el guard, una ruta = una
+request = un dueño de la carga; el `ResourceLoader` sigue entregando la MISMA instancia.
+
+**Verificación:** suite M62 `test_m62_doble_carga_m63.gd` (20 checks) en ROJO 4 fallos → VERDE
+0/20; regresión M63 `test_rf2_threaded` 7/0, `iter5` 51/0, `iter6` 42/0; M62 hilos 33/0.
+Evidencia: `out/tanda74/`. No se tocó `quality.yml`.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 74.

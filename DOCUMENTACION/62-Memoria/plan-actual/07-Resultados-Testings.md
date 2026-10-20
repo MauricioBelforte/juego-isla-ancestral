@@ -622,3 +622,38 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
 ```
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 72.
+
+## 25. Tanda 74 (2026-10-20, DS-Opencode, Log 2042): L163 — sin doble carga M63/ResourceCache
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L163 ("Sin doble carga del mismo recurso:
+  ResourceCache + cola M63 con un solo dueño").
+- **Bug reproducido EN ROJO:** `StreamManager.encolar()` aceptaba una 2.ª operación con la misma
+  `ruta_recurso` mientras la 1.ª seguía en vuelo. Resultado: `ok2=true`, cola 0→2, dos callbacks
+  (`doble_1`, `doble_2`). `_encolar_precarga()` sí filtraba; la API pública no.
+- **Fix:** guard en `encolar()` antes de `load_threaded_request`:
+  `ruta_recurso != "" and esta_cargando_ruta(ruta_recurso) → false`. Cambio acotado a
+  `scripts/stream/stream_manager.gd` (M63; sha256 `8e4188595e01…`); M62 sin cambios de producción.
+- **Suite nueva:** `test_m62_doble_carga_m63.gd` (**20 checks**, piso 18), autoloads REALES
+  `StreamManager` + `MemoryMonitor`, fixture `.tres` real:
+  - **A (1):** cola y rutas drenadas.
+  - **B (4):** 1.ª carga aceptada, ruta en vuelo, cola +1, una sola ruta.
+  - **C (5):** 2.ª carga de la misma ruta RECHAZADA, cola no crece, una ruta, `_encolar_precarga` 0,
+    cola sigue estable.
+  - **D (10):** un callback, una sola operación completada, ruta cerrada, cola a la base, M62 sin
+    cargas, MISMA instancia de `ResourceLoader`, 0 duplicados en `LeakGuard`, control positivo
+    `CACHE_MODE_IGNORE`.
+- **Rojo → verde:** `out/tanda74/red.log` 20 checks / **4 fallos** / EXIT 1 (sha256 `732b3e52…`);
+  `out/tanda74/green.log` 20 checks / **0 fallos** / EXIT 0 (sha256 `fcfcaf71…`).
+- **Regresión:** `test_rf2_threaded` 7/0, `test_stream_m63_iter5` 51/0, `test_stream_m63_iter6`
+  42/0, `test_m62_hilos_cola_mallas` 33/0 = **133 checks, 0 fallos, EXIT 0**. Logs en
+  `out/tanda74/` (sha256 `3a4650ef…`, `6478d9db…`, `daf922dd…`, `29842d42…`).
+- **Alcance:** no cubre el streaming C++ de `VoxelTerrain` (llamador real M08/M63); pina el contrato
+  de la cola/caché. No se tocó `quality.yml`.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_doble_carga_m63.gd
+```
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 74.

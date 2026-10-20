@@ -617,3 +617,26 @@ guardián de 3 capas probado EN ROJO (piso 999); regresión de 18 suites + budge
 Evidencia: `out/tanda71/`.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 71.
+
+## Tanda 74 — L163 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2042)
+
+**Integración ResourceCache + cola M63: un solo dueño de la carga.**
+
+- **Hallazgo:** `StreamManager.encolar()` (M63) llamaba a `ResourceLoader.load_threaded_request`
+  sin comprobar si la misma `ruta_recurso` ya estaba en vuelo. `_encolar_precarga()` sí lo
+  comprobaba, pero la API pública permitía duplicar la operación y el callback.
+- **Fix acotado:** guard al inicio de `encolar()`:
+  `if ruta_recurso != "" and esta_cargando_ruta(ruta_recurso): return false`.
+  Se ejecuta antes de abrir la request: no hay segunda operación, no hay segunda ruta y no hay
+  segundo callback. No cambia el comportamiento sin ruta ni la carga de chunks.
+- **Archivo:** `game/isla-ancestral/scripts/stream/stream_manager.gd` (M63; sha256
+  `8e4188595e01…`). M62 no cambió de producción.
+- **Suite:** `scripts/rendimiento/memoria/test_m62_doble_carga_m63.gd` — 20 checks, 0 fallos.
+  Mide rechazo de la 2.ª carga, cola estable, un solo callback, cierre de ruta, misma instancia
+  de `ResourceLoader`, 0 duplicados en `LeakGuard` y control positivo `CACHE_MODE_IGNORE`.
+- **Regresión:** M63 `test_rf2_threaded` 7/0, `iter5` 51/0, `iter6` 42/0; M62
+  `test_m62_hilos_cola_mallas` 33/0. Evidencia: `out/tanda74/`.
+- **Deuda:** el llamador de chunks reales sigue siendo M08/M63 (VoxelTerrain en C++); esta
+  suite pina el contrato de la cola y la caché, no el streaming del motor.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 74.

@@ -160,7 +160,7 @@
 - [x] Los topes de RAM del 62 respetan los frame budgets del 61 (deltas < 50 ms) [M]
 - [x] La cola de streaming (M63) informa cargas/descargas al MemoryMonitor [M]
 - [x] LRU compartido: el 63 decide qué cargar, el 62 decide qué liberar (handshake) [C] — **iter. 5 (Log 1187).** `MemoryMonitor.avisar_carga_iniciada()/avisar_carga_terminada()/esta_en_carga()`; el filtro `_puede_descargar()` se pasa a `UnloadPolicy.ejecutar_descarga(..., filtro)`. Bloque A de `test_memoria_m62_iter5.gd`
-- [ ] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M]
+- [x] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M] — [x] 2026-10-20 (Tanda 74, DS-Opencode): `StreamManager.encolar()` RECHAZA la 2.ª carga de una ruta ya en vuelo ANTES de `load_threaded_request` (guard central; `_encolar_precarga` ya lo hacía). Suite nueva `test_m62_doble_carga_m63.gd` **20 checks**: 1.ª carga = 1 ruta/1 op; 2.ª rechazada (la cola no crece); 1 callback; ruta cerrada; `ResourceLoader` entrega la MISMA instancia; LeakGuard 0 duplicados; control positivo `CACHE_MODE_IGNORE`. **ROJO 4 fallos → VERDE 0/20**; regresión M63 7/51/42 + M62 hilos 33, **0 fallos**. Sin cambio de M62; cambio acotado a M63 `stream_manager.gd`. Log 2042.
 - [x] La pantalla de carga (M63) precarga pools sin duplicarlos al terminar [M]
 - [x] El 62 nunca descarga un recurso que esté en la cola de carga del 63 (evento cancel) [C] — **iter. 5 (Log 1187).** El candidato vetado por el filtro **no sale de la cola** y se cuenta en `descartes_por_carga()`; probado tanto por la vía directa (bloque A) como por el enforcement nivel 3 (bloque B)
 - [ ] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M]
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 133 - Pendientes: 17 - No resueltos: 0.
+**Totales:** 150 items - Completados: 134 - Pendientes: 16 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -848,3 +848,27 @@ banco anterior muere. No toca producción.
 - **Detalle:** `02-Analisis.md` sección 5.
 
 **Totales tras el cierre:** 133 / 17 / 0 (150 items).
+
+## Tanda 74 — L163 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2042)
+
+**Cierre por medición de la frontera ResourceCache + cola M63.**
+
+- **Bug medido (ROJO):** `StreamManager.encolar()` aceptaba una 2.ª operación con la MISMA
+  `ruta_recurso` aunque la 1.ª siguiera en vuelo: `ok2=true`, cola 0→2 y dos callbacks
+  (`doble_1`, `doble_2`). `_encolar_precarga()` sí filtraba, pero la API pública no.
+  Evidencia: `out/tanda74/red.log` — 20 checks, **4 fallos**, EXIT 1.
+- **Fix (M63, acotado):** guard al inicio de `encolar()`:
+  `if ruta_recurso != "" and esta_cargando_ruta(ruta_recurso): return false`
+  (con warning), ANTES de `ResourceLoader.load_threaded_request`. Una sola ruta = una sola
+  operación = un solo dueño de la carga. `stream_manager.gd` sha256 `8e4188595e01…`.
+- **Suite nueva:** `test_m62_doble_carga_m63.gd` (20 checks; piso 18). Prueba 1.ª carga,
+  rechazo de la 2.ª, `_encolar_precarga` 0, un solo callback, ruta cerrada, M62 sin cargas,
+  MISMA instancia del `ResourceLoader`, 0 duplicados en LeakGuard y control positivo
+  `CACHE_MODE_IGNORE`.
+- **Verde:** 20/20, 0 fallos, EXIT 0 — `out/tanda74/green.log` (sha256 `fcfcaf71…`).
+- **Regresión:** `test_rf2_threaded` 7/0, `test_stream_m63_iter5` 51/0, `test_stream_m63_iter6`
+  42/0, `test_m62_hilos_cola_mallas` 33/0 = **133 checks, 0 fallos** (`out/tanda74/*.log`).
+- **Alcance:** no se tocó `quality.yml`; el llamador real de chunks sigue en M08/M63. Esta suite
+  mide el contrato de la cola y la caché, no el streaming C++ de `VoxelTerrain`.
+
+**Totales tras el cierre:** 134 / 16 / 0 (150 items).
