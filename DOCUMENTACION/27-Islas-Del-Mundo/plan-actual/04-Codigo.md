@@ -724,3 +724,20 @@ El **pintado** del mapa es de M54: M27 solo expone el estado y la senal.
 test_islas_m27.gd           171 checks, 0 fallos
 test_islas_m27_iter2.gd     238 checks, 0 fallos
 ```
+
+## Tanda 76 — Preset Baja y descarga agresiva (M62 L180, Log 2045)
+
+**Mecanismo existente (autor: DeepSeek-V4.1-Flash, Log 2021; verificación y flip:
+DS-V4.1-Flash-Opencode, Tanda 76).**
+
+`IslandTravelGuard` (`scripts/islas/island_travel_guard.gd`) expone:
+`TOPE_ISLAS_POR_PRESET` (baja=1, media=2, alta=2), `configurar(vista, {"preset": ...})`,
+`max_islas_en_memoria()`, `debe_precargar()` con tope por preset y orden por cercanía, y
+`descarga_agresiva_viajeros(isla_actual, ops)` (descarga todas las viajeras cacheadas fuera de
+actual/principal, de la más vieja a la más nueva, preservando `descubierta`/`visitada`).
+
+Gate `test_m62_preset_baja_m27.gd` 13/0 y regresiones M27 171/0 + 238/0, EXIT 0. Evidencia
+`out/tanda76/`.
+
+**Deuda de este módulo:** no hay instanciación de producción de `IslandTravelGuard` ni cableado del
+preset/descarga a un viaje real; queda para el dueño de M27.

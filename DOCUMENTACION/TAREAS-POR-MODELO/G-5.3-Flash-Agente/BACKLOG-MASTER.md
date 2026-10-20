@@ -368,11 +368,11 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 73. - [ ] [58] Definir que el remapeo respete los conflictos detectados por M57 [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 74. - [x] [58] Definir indicador visual del perfil de control activo en el menú [S] · [x] T31-M58 (G-5.3-Flash-Agente): FIX REAL — el indicador existente estaba roto (autoload mal nombrado → label oculto forever); arreglado + escucha control_changed + getter get_control_preset; qa_m58_indicador_perfil.gd 7/0 EXIT 0. Atribución previa corregida (otro chat). <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 75. - [ ] [58] RF23: reabrir el último diálogo sin perder contexto [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
-76. - [ ] [58] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+76. - [x] [58] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md --> · [x] T34-M58 (G-5.3): guía en 58-Accesibilidad/plan-actual/09-guia-textos-criticos-m87.md (7 reglas + 7 patrones + reglas M87 + antipatrones + checklist).
 77. - [ ] [58] RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 78. - [ ] [58] Verificar la legibilidad del texto grande con las fuentes de M88 en español (tildes, ñ) [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 79. - [ ] [58] NFR: aplicar el perfil con overhead menor a ~1 ms por frame [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
-80. - [ ] [58] NFR: UI del menú navegable 100 % por teclado y mando [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
+80. - [x] [58] NFR: UI del menú navegable 100 % por teclado y mando [M] · [x] T33-M58 (G-5.3): wrap_focus genérico + QA 5/0 EXIT 0 (foco real, wrap-around 5 botones); hallazgo QA de frees con foco para M53. <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 81. - [ ] [58] Integrar con M53: escalado aplicado al nodo raíz de UI (0.8–2.0) [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 82. - [ ] [58] Integrar con M53: previews dentro del menú sin escenas externas [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 83. - [ ] [58] Integrar con M57: dead zones/sensibilidad expuestos como accesos directos en el menú [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->

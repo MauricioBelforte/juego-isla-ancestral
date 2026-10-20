@@ -661,3 +661,50 @@ de llamada y aplicó el flip que faltaba en el checklist.
   sigue siendo del caller M28/M59. La suite mide el punto de llamada real de M28.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 75.
+
+## Tanda 76 — L180 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2045)
+
+**Verificación de herencia (no reimplementación):** el mecanismo “Preset Baja + descarga agresiva”
+ya estaba en M27 `scripts/islas/island_travel_guard.gd` por DeepSeek-V4.1-Flash (Log 2021).
+
+- **Preset inyectado:** `configurar(vista, {"preset": ...})`; `TOPE_ISLAS_POR_PRESET` =
+  `baja: 1`, `media: 2`, `alta: 2`; desconocido → `media`.
+- **Carga priorizada:** `debe_precargar(pos, actual, presupuesto=-1)` limita a
+  `min(IslandOps.MAX_OPS_POR_FRAME, max_islas_en_memoria())` y ordena por distancia.
+- **Descarga agresiva:** `descarga_agresiva_viajeros(isla_actual, ops)` descarga toda isla cacheada
+  fuera de actual/principal, de la más vieja a la más nueva, hasta el tope; no toca
+  `descubierta`/`visitada` (M59) y reporta `estado_preservado`.
+- **Gate:** `test_m62_preset_baja_m27.gd` 13/0, EXIT 0. **Regresiones:** M27 171/0 y 238/0.
+  Evidencia `out/tanda76/`.
+- **Deuda declarada:** no hay instanciación de producción de `IslandTravelGuard`; el preset y la
+  descarga no se disparan en un viaje real. El feed runtime pertenece a M27 (mismo criterio que L132).
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 76.
+
+## Tanda 77 — L185 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2046)
+
+**Verificación de herencia (no reimplementación):** `sesion_m62_limite.gd` ya existía por
+DeepSeek-V4.1-Flash (Log 2033). Se re-ejecutó y se aplicó el flip.
+
+- **Qué hace:** instancia la escena real, espera el `MemoryMonitor` de producción, avanza `GameTime`
+  hasta encontrar TORMENTA de M32 y fuerza el **denominador** del semáforo para caer en 85/92/97%
+  del presupuesto real (2032 MB en `media`). No reserva 1,4 GB: no arriesga el proceso.
+- **Qué mide:** `semaforo_cambiado` en 1, 2 y 3; `_ultimo_enforcement = 3`; monitor válido; Player
+  movible; restauración del snapshot exacto de topes (2032 MB) y semáforo 0.
+- **Gate:** 14 checks / 0 fallos / EXIT 0. **Regresión M32:** 29/0.
+- **Límites:** en `--script` no hay 60 Hz (8 physics frames en 10 s) → “jugable” = escena/Player
+  vivos, no fps. Sin assets de audio, “banco completo” no es medible (deuda del ítem 127).
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 77.
+
+## Tanda 78 — L189 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2047)
+
+**No hay código nuevo: el ítem queda `[?]` NO MEDIBLE.**
+
+- `project.godot` declara `run/main_scene="res://scenes/main_island.tscn"` y no existe escena de menú
+  principal (`scenes/main_menu.tscn`, `ui/main_menu.tscn`, `ui/menu.tscn`, `menu.tscn`: 0/4).
+- Medir `main_island.tscn` como “menú” sería un falso verde: es la isla, no el menú.
+- El ítem queda para el dueño de la escena de menú; cuando exista, `sesion_m62_baselines.gd
+  M62_ESCENARIO=menu` podrá medirla. No se creó un menú postizo ni se cambió `main_scene`.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 78.

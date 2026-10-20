@@ -96,7 +96,7 @@
 - [x] RF24: definir espaciado de texto 0.8–1.5 y line-height 0.9–1.6 [M]
 - [x] RF24: definir selección de estilo de fuente legible (Nunito/Fredoka One de M88) [S]
 - [x] RF25: subtítulos con fondo opaco, tamaño grande y velocidad configurable, activos por defecto [M]
-- [ ] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M]
+- [x] ] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M] → **G-5.3-Flash-Agente (Kilo Code, 2026-10-20):** `58-Accesibilidad/plan-actual/09-guia-textos-criticos-m87.md` — guía completa: 7 reglas de redacción (una idea por frase, imperativo amable, vocabulario cotidiano, sin negaciones dobles, cifras concretas, pronombres claros, tono no punitivo), 7 patrones canónicos por tipo (confirmación/éxito/fallo/fallo con remedio/bloqueo/tutorial/prompt) con ejemplos ES del catálogo real (SETTINGS.*), reglas multi-idioma M87 (placeholders inviolables, términos canónicos, regla PT §28 + validador EXIT 0, UTF-8 sin BOM), 5 antipatrones de rechazo y checklist de 6 puntos para flipar ítems de texto.
 - [x] RF26: redactar guía de textos críticos con frases cortas y vocabulario simple [M] — G-5.3-Flash-Agente 2026-10-19: guía vigente en DOCUMENTACION/58-Accesibilidad/guia_rf26_textos_criticos.md (reglas 1.1-1.5 frases, 2.1-2.5 vocabulario, estructura de errores/éxitos/toasts, glosario canónico, checklist de 10 puntos para QA). Aplicable por los dueños de M21/M16/M56/M28/M74 al escribir textos del juego.
   · AUTOMATIZACIÓN de la guía (G-5.3-Flash-Agente 2026-10-19): scripts/qa_textos_rf26.py — scanner de strings_es.json (153 textos, 158 frases, 1 incumplimiento 0.6%: EQUIP.HINT 15 palabras — dueño de textos). Umbral OK ≥ 85%.Modo --detallado. La sección 6 (auditoría) de la guía queda automatizada.
 - [x] RF26: definir que las instrucciones clave no exijan lectura veloz [S]
@@ -118,7 +118,7 @@
 - [x] NFR: cero errores de consola al entrar en Play Mode [M]
 - [x] NFR: cero advertencias de tipos GDScript en el módulo [M]
 - [x] NFR: debounce de guardado (no escribir en cada tick de slider) [M]
-- [ ] NFR: UI del menú navegable 100 % por teclado y mando [M]
+- [x] NFR: UI del menú navegable 100 % por teclado y mando [M] → **G-5.3-Flash-Agente (2026-10-20):** verificación por capas existentes: (1) `ui_manager.gd` L176 aplica `MenuNavigator.wrap_focus(top_layer, nav)` GENÉRICAMENTE a la capa superior (MenusLayer incluida); (2) `menus_layer.gd` hace `grab_focus` del primer botón en `on_layer_opened` y expone `focus_first()`; (3) foco REAL verificado en runtime: QA `scripts/accesibilidad/qa_m58_nav_menu.gd` **5/0, EXIT 0** — «focus_first → Button», «foco real del viewport en el botón» (gui_get_focus_owner), «wrap_focus mueve el foco», «wrap-around de 5 botones sin perder foco» (teclado ←→ y mando stick). Mando = mismo sistema de foco (RF2); presión de acción = botón enfocado. Hallazgo QA para M53: los `queue_free/free` con foco activo CUELGAN el proceso headless (RID corruptos) — los QAs deben quit() sin frees (lección agregada junto a la pista del BUG-138).
 - [x] NFR: textos de ayuda de una línea por opción [S]
 - [x] NFR: documentación 100 % en español y checklist completo antes de delegar [S]
 
@@ -259,7 +259,7 @@
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
 
-**Totales:** 184 ítems · Completados: 156 · Pendientes: 26 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20: el archivo tiene 184 líneas de ítems (una agregada no contabilizada) y el medido es 156/26/2 vs 154/27/2 declarados — drift +2 [x] preexistente documentado. Regla §21.8.2.b regla 5.)
+**Totales:** 184 ítems · Completados: 158 · Pendientes: 24 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tras el flip RF26: 158/24/2 = 184. El medido manda.)
 
 > **Actualizado por atria-dawn-s2 (Atria-Dawn-Preview / Kilo Code, 2026-10-12, Log 1755):** barrido con evidencia en disco y runtime. +6 `[ ]` -> `[x]`: RF4 niveles de texto delegados a M88 (01-Requerimientos RF4); RF12 alternativa visual para pistas auditivas (`INDICADORES_SONIDO`, accesibilidad_manager.gd:353, 7 pistas con forma visual + clave de texto); presets de control persisten por jugador (`control_preset` L409 + profile.json, 03-Diseno:40/77); RF23 diálogos a ritmo del jugador sin cuenta regresiva (dialog_layer.gd:153/158/166 por input; `AutoAdvanceManager` sin cablear en escenas); letreros sustituibles por diálogo/marca visual (02-Analisis:41); flujo de arranque boot->load->apply->título (03-Diseno:98-110). No flippeados (honestidad): RF26 guía de textos no redactada (solo RF26 en requerimientos), reabrir último diálogo sin implementar (solo signal `_on_dialogue_ended`), F10 sin implementar (0 `KEY_F10`), carteles con tiempo de vida/fade-out ausentes. **HALLAZGO REGRESIÓN:** `test_perfil_m58_iter4.gd` tiene 33 llamadas `_ok()` pero `CHECKS_MINIMOS = 34` -> falla estructural "PISO NO CUMPLIDO: 33 < 34" (EXIT 1). El Log 1701 de Step 5 declaró "39 checks, 0 fallos" — inexacto. Fix mínimo: bajar `CHECKS_MINIMOS` a 33 (o agregar 1 check). Runtime 4 suites: 110 checks útiles, 0 fallos (39+13+33+25); la suite iter4 se cuenta como falla estructural, no de lógica.
 

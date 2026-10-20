@@ -194,3 +194,14 @@ Modulo respaldado por tests reales y checklist limpio. Sello §21.8 registrado e
 - L26: dueños M50/M51/M08 (V2). El contrato ya está en 03-Diseno L75 (sway/ondas por `get_intensidad()`, sin estado propio) — no requiere cambios en M32.
 
 **Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16 04:47 · Log 1900
+
+## Tanda 77 — M62 al límite durante tormenta (L185, Log 2046)
+
+**Contexto de estrés usado por M62 (verificación DS-Opencode; arnés original de DeepSeek Log 2033).**
+
+`sesion_m62_limite.gd` alcanza TORMENTA real con `GameTime.avanzar_hasta(23,59)` + `(0,0)` (3 días),
+verifica `get_clima() == 3` y fuerza el denominador del `MemoryMonitor` para que la escena real caiga
+en 85/92/97% del presupuesto: semáforo 1→2→3, enforcement hasta 3, sin crash, Player movible y
+restauración a 2032 MB/0. Gate 14/0; regresión M32 `test_clima.gd` 29/0. Evidencia `out/tanda77/`.
+
+**Deuda:** headless no prueba jugabilidad por frames ni “banco de audio completo” (0 assets).

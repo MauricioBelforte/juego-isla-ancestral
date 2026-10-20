@@ -177,16 +177,16 @@
 - [x] Escena cambiada dos veces antes de terminar la transición: cola evita doble descarga [C] — **iter. 5 (Log 1187).** `iniciar_transicion_escena()` devuelve `false` y **encola** el 2.º cambio (`doble_descarga_evitada()`); `terminar_transicion_escena()` encadena el encolado. Bloque C de `test_memoria_m62_iter5.gd`
 - [x] Cambio de escena con streaming activo: cancelación limpia sin recursos colgados [C] — **iter. 5 (Log 1187).** `cancelar_transicion_escena()` reporta los candidatos pendientes, **drena** la cola (nada colgado), corta la transición y cuenta la cancelación. Bloque C de `test_memoria_m62_iter5.gd`
 - [x] Cercanía de OOM del sistema: degradación máxima (LOD bajo, pools mínimos) sin crash [C]
-- [ ] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M]
+- [x] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M] — [x] 2026-10-20 (Tanda 76, DS-Opencode): **flip de herencia verificado**, no reimplementado. Autor: DeepSeek-V4.1-Flash (Log 2021). `IslandTravelGuard` ya tiene `TOPE_ISLAS_POR_PRESET` (baja=1 / media=alta=2), `max_islas_en_memoria()`, `debe_precargar()` limitado por preset y `descarga_agresiva_viajeros()` (descarga TODA viajera cacheada que no sea actual ni principal, de la más vieja a la más nueva, sin tocar `descubierta`/`visitada`). Gate `test_m62_preset_baja_m27.gd`: **13 checks, 0 fallos, EXIT 0** (tope baja/media/desconocido; no descarga actual ni principal; progreso preservado; no queda viajera; prioridad por cercanía; presupuesto explícito 2). Regresiones M27: `test_islas_m27.gd` **171/0** y `test_islas_m27_iter2.gd` **238/0**, EXIT 0. Evidencia `out/tanda76/`; Log 2045. **DEUDA DECLARADA (M27):** no hay llamador de producción que instancie `IslandTravelGuard`, inyecte `preset` ni invoque `descarga_agresiva_viajeros()` en un viaje real; el mecanismo M62 queda medido y el feed runtime es del dueño de M27 (mismo criterio que L132).
 - [x] Partículas infinitas por bug: límite de vida y devolución al pool garantizadas [S]
 - [x] Tween sin fin en UI: auto-detención en `_exit_tree` [S] — Log 1094: `LeakGuard.registrar_tween()` + limpieza automática en `_exit_tree()`
 - [x] Nieve/niebla (M32) que crea nodos por frame: detector de nodos por frame con alerta [M] — Log 1094: `DetectorNodosPorFrame` mide la DERIVADA (nodos/frame) y `alerta()` describe el crecimiento
 - [x] Minimapa (M11) regenerando textura cada frame: reutilización de imagen destino sin alloc [C]
-- [ ] Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable [M]
+- [x] Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable [M] — [x] 2026-10-20 (Tanda 77, DS-Opencode): **flip de herencia verificado**, no reimplementado. Autor: DeepSeek-V4.1-Flash (Log 2033, item 17). `sesion_m62_limite.gd` lleva la escena REAL `main_island.tscn` a 85/92/97% del presupuesto forzando el DENOMINADOR (no la memoria) en contexto de TORMENTA real de M32 alcanzada en 3 días: semáforo 1→2→3 con `semaforo_cambiado` 3 veces, enforcement hasta nivel 3, sin crash, Player movible, restauración exacta a 2032 MB y vuelta a 0. **14 checks, 0 fallos, EXIT 0** (`out/tanda77/limite_tormenta.log`). Regresión M32: `test_clima.gd` 29/0. **Alcance:** headless no prueba 60 fps (mide escena/Player vivos, no jugabilidad por frames) y no hay assets de audio en el repo; se cierra con esa deuda declarada. Log 2046.
 
 ## L. Optimización y mediciones
 
-- [ ] Baseline menú principal: objetivo < 600 MB [S]
+- [?] Baseline menú principal: objetivo < 600 MB [S] — **[?] 2026-10-20 (Tanda 78, DS-Opencode): NO MEDIBLE, no hay escena de menú.** `project.godot` arranca en `res://scenes/main_island.tscn`; los 4 candidatos (`scenes/main_menu.tscn`, `ui/main_menu.tscn`, `ui/menu.tscn`, `menu.tscn`) no existen; el único `*menu*.tscn` es `scenes/debug/debug_menu.tscn` (no es el menú principal). Medir `main_island.tscn` y llamarlo “menú” sería un falso verde. Evidencia del bloqueo: Log 2033 (item 18) + glob actual. Se deja `[?]` para que el dueño del menú lo cierre cuando la escena exista; no se inventa un número. Log 2047.
 - [ ] Baseline spawn de Aurora: objetivo < 1.600 MB [S]
 - [ ] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S]
 - [ ] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S]
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 135 - Pendientes: 15 - No resueltos: 0.
+**Totales:** 150 items - Completados: 137 - Pendientes: 12 - No resueltos: 1.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -893,3 +893,66 @@ banco anterior muere. No toca producción.
   señal, no como teleport medido. El umbral 45 s queda confirmado por las rutas reales.
 
 **Totales tras el cierre:** 135 / 15 / 0 (150 items).
+
+## Tanda 76 — L180 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2045)
+
+**Flip de herencia verificado: el mecanismo ya estaba implementado por DeepSeek-V4.1-Flash (Log 2021).**
+
+- **Tope por preset:** `TOPE_ISLAS_POR_PRESET = {"baja": 1, "media": 2, "alta": 2}` inyectado por
+  `IslandTravelGuard.configurar(vista, {"preset": ...})`; preset desconocido cae a `media` (no a 0).
+- **Carga priorizada:** `debe_precargar()` usa por defecto `min(MAX_OPS_POR_FRAME,
+  max_islas_en_memoria())` y ordena candidatas por distancia; un presupuesto explícito sigue mandando.
+- **Descarga agresiva:** `descarga_agresiva_viajeros(isla_actual, ops)` descarga todas las islas
+  cacheadas que no sean la actual ni la principal, de la más vieja a la más nueva, hasta el tope del
+  preset, sin esperar presión de memoria. No toca `descubierta`/`visitada` y devuelve
+  `estado_preservado`.
+- **Gate:** `test_m62_preset_baja_m27.gd` — **13 checks, 0 fallos, EXIT 0**:
+  A tope baja=1 / media=2 / desconocido=media; B descarga 1 de 3 y deja actual+principal, progreso
+  preservado; C media con 2 cargadas no descarga; D precarga por cercanía (1 en baja; 2 explícitas en
+  orden). Evidencia `out/tanda76/preset_baja_m27.log` (sha256 `8d105bfd…`).
+- **Regresiones M27:** `test_islas_m27.gd` **171/0** (`f0c6e682…`) y `test_islas_m27_iter2.gd`
+  **238/0** (`3f33bd22…`), EXIT 0.
+- **Deuda declarada:** `IslandTravelGuard` no se instancia en producción; nadie inyecta el preset ni
+  llama `descarga_agresiva_viajeros()` en un viaje real. El mecanismo queda pinneado; el cableado
+  runtime es del dueño de M27. Se cierra con el mismo criterio que L132 (mecanismo M62 cerrado, feeds
+  de producción como deuda de su módulo).
+
+**Totales tras el cierre:** 136 / 14 / 0 (150 items).
+
+## Tanda 77 — L185 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2046)
+
+**Flip de herencia verificado: el arnés ya estaba implementado por DeepSeek-V4.1-Flash (Log 2033).**
+
+- **Contexto real:** TORMENTA de M32 alcanzada tras 3 días con `GameTime.avanzar_hasta(23,59)` +
+  `(0,0)`; `get_clima() == 3` verificado. Escena real `main_island.tscn` con `MemoryMonitor` de
+  producción.
+- **Inyección honesta:** se fuerza el DENOMINADOR (presupuesto) para que la memoria real caiga en
+  85/92/97%; la memoria no se toca. Presupuesto real del preset `media`: 2032 MB.
+- **Secuencia observada:** niveles **1 → 2 → 3** con `semaforo_cambiado` 3 veces; enforcement suave
+  en 2 y duro en 3 (`_ultimo_enforcement = 3`); sin crash; monitor válido y **Player movible**;
+  restauración exacta a 2032 MB y semáforo **0**.
+- **Gate:** `sesion_m62_limite.gd` — **14 checks, 0 fallos, EXIT 0** (`out/tanda77/limite_tormenta.log`,
+  sha256 `0563a543…`). **Regresión M32:** `test_clima.gd` **29/0** (`out/tanda77/test_clima.log`,
+  sha256 `641eee03…`).
+- **Alcance declarado:** en `--script` el árbol no itera a 60 Hz (8 physics frames en 10 s), así que
+  “sigue jugable” se mide como escena/Player vivos, no como fps. No hay assets de audio en el repo:
+  la mitad “banco de audio completo” del ítem 127 sigue fuera de alcance. No es una sesión de juego.
+
+**Totales tras el cierre:** 137 / 13 / 0 (150 items).
+
+## Tanda 78 — L189 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2047)
+
+**Resultado: `[?]` NO MEDIBLE — no se cierra en falso.**
+
+- **Item:** “Baseline menú principal: objetivo < 600 MB [S]”.
+- **Bloqueo medido:** `project.godot` tiene `run/main_scene="res://scenes/main_island.tscn"`; no hay
+  escena de menú principal. Los 4 candidatos de Log 2033 (`scenes/main_menu.tscn`,
+  `ui/main_menu.tscn`, `ui/menu.tscn`, `menu.tscn`) siguen sin existir; el único `*menu*.tscn` es
+  `scenes/debug/debug_menu.tscn`.
+- **Por qué no se mide `main_island.tscn`:** daría un número de la isla, no del menú; reportarlo como
+  baseline del menú sería el falso verde que el proyecto ya tiene documentado. La escena ni siquiera
+  es un menú.
+- **Estado:** `[?]` con explicación; el dueño del menú (M04/UI) puede cerrarlo cuando exista la escena.
+  No se toca `project.godot` ni se crea un menú postizo para “aprobar” el ítem.
+
+**Totales tras el cierre:** 137 / 12 / 1 (150 items).

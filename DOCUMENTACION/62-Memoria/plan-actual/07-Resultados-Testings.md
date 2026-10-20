@@ -683,3 +683,59 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
 ```
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 75.
+
+## 27. Tanda 76 (2026-10-20, DS-Opencode, Log 2045): L180 — Preset Baja en isla pequeña (M27)
+
+- **Objetivo:** cerrar `[ ]` L180 verificando el mecanismo existente (DeepSeek Log 2021), sin
+  duplicar la implementación.
+- **Gate:** `test_m62_preset_baja_m27.gd` — **13 checks, 0 fallos, EXIT 0**:
+  A `baja=1`, `media=2`, desconocido cae a media; B 3 cargadas → descarga 1 viajera, deja actual +
+  principal, progreso `descubierta/visitada` intacto, no queda viajera; C media con 2 cargadas no
+  descarga; D precarga por cercanía (1 en baja; presupuesto explícito 2 → 2 en orden).
+  Evidencia `out/tanda76/preset_baja_m27.log` (sha256
+  `8d105bfd8442460025d6157efdf4d56ee77f7026660da20f5a48f00e05d3f754`).
+- **Regresiones M27:** `test_islas_m27.gd` **171 checks, 0 fallos**, EXIT 0
+  (`out/tanda76/test_islas_m27.log`, sha256 `f0c6e682…`); `test_islas_m27_iter2.gd` **238 checks,
+  0 fallos**, EXIT 0 (`out/tanda76/test_islas_m27_iter2.log`, sha256 `3f33bd22…`).
+- **Deuda declarada:** `IslandTravelGuard` no se instancia en producción; preset y descarga no se
+  disparan en un viaje real. Es feed runtime de M27, no del mecanismo M62. Mismo criterio que L132.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_preset_baja_m27.gd
+```
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 76.
+
+## 28. Tanda 77 (2026-10-20, DS-Opencode, Log 2046): L185 — memoria al límite en tormenta
+
+- **Objetivo:** cerrar `[ ]` L185 verificando el arnés existente (DeepSeek Log 2033), sin duplicar.
+- **Gate:** `sesion_m62_limite.gd` — **14 checks, 0 fallos, EXIT 0**. TORMENTA real de M32 en 3 días
+  (`clima=3`); presupuesto forzado 146/135/128 MB → niveles 1/2/3; `semaforo_cambiado` 3 veces;
+  enforcement duro (`_ultimo_enforcement=3`); sin crash; Player movible; restauración exacta a
+  2032 MB y nivel 0. Evidencia `out/tanda77/limite_tormenta.log` (sha256 `0563a543…`).
+- **Regresión M32:** `test_clima.gd` **29 checks, 0 fallos**, EXIT 0
+  (`out/tanda77/test_clima.log`, sha256 `641eee03…`).
+- **Alcance:** headless no itera a 60 Hz; “sigue jugable” se mide como escena/Player vivos, no fps.
+  No hay assets de audio (0): la parte “banco de audio completo” del ítem 127 queda fuera.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/sesion_m62_limite.gd
+```
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 77.
+
+## 29. Tanda 78 (2026-10-20, DS-Opencode, Log 2047): L189 — baseline menú principal (NO MEDIBLE)
+
+- **Resultado:** `[?]` NO MEDIBLE. No existe escena de menú principal: `run/main_scene` apunta a
+  `res://scenes/main_island.tscn`; los 4 candidatos de Log 2033 siguen ausentes; el único
+  `*menu*.tscn` es `scenes/debug/debug_menu.tscn`.
+- **Decisión:** no se mide la isla como menú (falso verde). No se modifica `project.godot` ni se crea
+  un menú postizo. El ítem queda para el dueño de la escena de menú.
+- **Evidencia:** `project.godot` L15 + glob de `*.tscn` (0 menús principales) + Log 2033 item 18.
+- **Sin gate nuevo:** no hay nada que medir todavía; un “baseline” inventado sería peor que `[?]`.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 78.
