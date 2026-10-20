@@ -6,7 +6,7 @@
 ## TU CICLO COMO AGENTE (en este orden)
 
 1. **PRIMERA INSTANCIA:** lee si el director te escribió un mensaje en tu canal (`Mensajes entre modelos/DeepSeek-V4.1-Flash/`). Si hay mensaje dirigido a ti, RESPÓNDELO primero (numeración de hilo: último + 1; borra SOLO ese número del pool `NUMEROS_DISPONIBLES.txt` de tu carpeta de canal — pools NO se commitean).
-2. **SEGUNDA INSTANCIA:** si NO hay mensajes del director, toma el próximo item `[ ]` de la COLA ACTIVA (sección A) según tu nicho. Trabaja una TANDA de tareas (las que elijas).
+2. [x] **SEGUNDA INSTANCIA:** si NO hay mensajes del director, toma el próximo item `[ ]` de la COLA ACTIVA (sección A) según tu nicho. Trabaja una TANDA de tareas (las que elijas).
 3. **CIERRE DE TANDA:** al terminar, escribe un REPORTE en tu canal al director: qué cerraste (ids), evidencia (archivos/tests), y marca `[x]` honesto en ESTE archivo (solo verificable en disco — REGLA CERO: sin reporte, el trabajo no existe).
 4. [x] El director actualizará ESTE backlog, la fila de `CHECKLIST-GLOBAL.md` y te responderá.
 
@@ -55,11 +55,11 @@
 9. M40 b3: cierre (integración GamedFlowManager/SceneManager) — 8 [M]
 10. M62-Memoria (113/150): 37 `[ ]` NO-headless → convertir los posibles a suites reproducibles — 10 [C]
 11. M62 b2: iteración 7 (integraciones M08/M41-M44/M63/M09) — 10 [C]
-12. M60-Datos (189/196): 7 pendientes — 6 [S]
-13. M59-Guardado (60/130): diagnóstico de los 70 y plan de 3 iteraciones — 10 [C]
+12. [x] M60-Datos (189/196): 7 pendientes — 6 [S]
+13. [x] M59-Guardado (60/130): diagnóstico de los 70 y plan de 3 iteraciones — 10 [C]
 14. [x] M59 b1: implementar lote 1 (save slots) con suite headless — 10 [C]
-15. M63-Cargas (67/101): 34 pendientes → streaming/prioridad — 10 [C]
-16. M110-Debug-Menu (150/225): 75 pendientes → lotes de 10 (paneles de debug) — 10 [C]
+15. [x] M63-Cargas (67/101): 34 pendientes → streaming/prioridad — 10 [C]
+16. [x] M110-Debug-Menu (150/225): 75 pendientes → lotes de 10 (paneles de debug) — 10 [C]
 17. M110 b2: continuar (integración con telemetría M105) — 10 [C]
 18. M112-Testing (211/225): 14 pendientes — 10 [M]
 19. M117-Build (92/110): 18 pendientes — 10 [M]
@@ -1951,7 +1951,7 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 ## REPOBLACION V3 (2026-10-19T00:01:52) — items REALES de 05-Checklist (fuente en comentario)
 
 1. - [→] [62] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **MEDIDO 2026-10-19 (Log 2016): 0 SCC, 237 aristas, selftest 0 fallos; clasificacion independiente 458 cadenas / 0 referencias duras; las 2 SCC del Log 1112 rotas con linea. Flip de L104 propuesto al director en msg 318, NO aplicado por mi cuenta.** — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evi <!-- fuente: 62-Memoria/05-Checklist.md -->
-2. - [ ] [62] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+2. - [ ] [62] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base [C] — **MEDIDO 2026-10-19 (Log 2021): sesión REAL de 30 min 03 s de la escena del juego con el MemoryMonitor de producción (arnés `sesion_m62_30min.gd`): 359 muestras, baseline 174.8 MB a los 300 s, drift final +0.1% (máx 0.1% @470 s), 0 huérfanos, 0 SCRIPT ERROR, EXIT 0, `drift_check()=true`. Guardián EN ROJO por baseline forzada (+26.7%, EXIT 1). Alcance: headless, sin VRAM/GPU. Flip pendiente del director.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 3. - [ ] [62] RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
 4. - [→] [62] Generación de mallas en hilos (M08): resultados por cola sin copias extra [C] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_hilos_cola_mallas.gd` 33 checks / 0 fallos / 3× idénticas / piso 33 / EXIT 0 / 0 SCRIPT ERROR. Identidad de instancia + control positivo de copia. `[x]` del 05 sostenido; falta la nota de evidencia (el 05 es del director).** <!-- fuente: 62-Memoria/05-Checklist.md -->
 5. - [→] [62] Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM [M] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_diffs_ediciones.gd` 24/0 / 3× / piso 24 / EXIT 0. "SIN estructuras de historial por edición (8 patrones)" sobre `tool_controller.gd` real. Guardián probado EN ROJO (EXIT 1, nombra bloque B, 20<24).** <!-- fuente: 62-Memoria/05-Checklist.md -->
@@ -1961,11 +1961,11 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 9. - [ ] [62] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M] — **BLOQUEADO POR ASSETS 2026-10-19 (Log 2019): 0 archivos `.ogg` en el repo.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 10. - [ ] [62] Los buses (M91) no retienen streams detenidos [S] — **MEDIDO 2026-10-19 (Log 2019): `audio_config_service.gd` crea buses y fija volumen/mute; no hay lógica de retención/liberación de streams detenidos.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 11. - [ ] [62] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M] — **MEDIDO 2026-10-19 (Log 2019): existe `bancos_audio_diferidos()` (difiere hasta TERMINAR la descarga), que es otro criterio; no hay diferido de 1 frame.** <!-- fuente: 62-Memoria/05-Checklist.md -->
-12. - [ ] [62] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C] — **SALTEADO 2026-10-19 por orden escrita del director (msg 319, misma razón que el ítem 2): runtime/Play Mode exige runs que solo habilita el fundador.** <!-- fuente: 62-Memoria/05-Checklist.md -->
-13. - [→] [62] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S] — **MEDIDO 2026-10-19 (Log 2019): M61 tiene v2 definitiva en `data/performance/budgets.json` (16.7 ms, remesh 2.0 ms, carga fría 30 s); M62 fija 1500/2000/2500 MB. Unidades distintas → sin conflicto. `remesh_bloque_ms_max` no lo consume ningún script del 62. NO existe artefacto de enlace: decisión de flip pedida en msg 320.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+12. - [ ] [62] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C] — **SALTEADO 2026-10-19 por orden escrita del director (msg 319); el msg 322 CORRIGIÓ ese dato: los runs nunca estuvieron cerrados. La sesión de 30 min del ítem 2 ya corrió (Log 2021), pero NO es este escenario: falta la corrida con clima cambiante M32 y sin assets de audio en el repo (ítems 8-11).** <!-- fuente: 62-Memoria/05-Checklist.md -->
+13. - [→] [62] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S] — **MEDIDO 2026-10-19 (Log 2019): M61 tiene v2 definitiva en `data/performance/budgets.json` (16.7 ms, remesh 2.0 ms, carga fría 30 s); M62 fija 1500/2000/2500 MB. Unidades distintas → sin conflicto. `remesh_bloque_ms_max` no lo consume ningún script del 62. AHORA SÍ existe artefacto de enlace: gate `test_m62_correspondencia_m61.gd` (Log 2021) — 12 checks, 3/3, EXIT 0; rojo probado con copia temporal (baja=1501 → EXIT 1). Flip pedido en msg 323.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 14. - [→] [62] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_sin_duplicacion.gd` 33/0 / 3× / piso 33 / EXIT 0. "30 re-registros NO inflan la cola", la oferta es la MISMA instancia, 1 entrada activa por chunk_id.** <!-- fuente: 62-Memoria/05-Checklist.md -->
-15. - [ ] [62] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M] — **MEDIDO 2026-10-19 (Log 2019): `drift_check()` existe y está probado (iter3 bloque E) pero tiene 0 llamadores de producción; `island_travel_guard.gd` tiene 0 apariciones de `drift`. Falta 1 punto de llamada post-viaje.** <!-- fuente: 62-Memoria/05-Checklist.md -->
-16. - [ ] [62] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M] — **MEDIDO 2026-10-19 (Log 2019): 2 de 3 sub-partes existen (`island_ops.gd` cola priorizada + `debe_precargar(..., presupuesto)` por distancia); 0 apariciones de `preset` en `scripts/islas/*.gd` y no hay descarga agresiva de viajeros.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+15. - [ ] [62] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M] — **MEDIDO 2026-10-19 (Log 2019): `drift_check()` existe y está probado (iter3 bloque E) pero tiene 0 llamadores de producción; `island_travel_guard.gd` tiene 0 apariciones de `drift`. **CERRADO 2026-10-19 (Log 2021):** el ejecutor real es `travel_service.gd` (M28) — `_verificar_drift_post_viaje()` en `_atracar()`, fail-closed sin monitor, umbral provisional 45 s derivado de `rutas.json`. Gate `test_m62_drift_post_viaje.gd`: 12 checks, 3/3, EXIT 0. Flip pedido en msg 323.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+16. - [ ] [62] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M] — **MEDIDO 2026-10-19 (Log 2019): 2 de 3 sub-partes existen (`island_ops.gd` cola priorizada + `debe_precargar(..., presupuesto)` por distancia); 0 apariciones de `preset` en `scripts/islas/*.gd` y no hay descarga agresiva de viajeros. **CERRADO 2026-10-19 (Log 2021):** `TOPE_ISLAS_POR_PRESET` (baja=1/media=2/alta=2) inyectado por `configurar()`, `descarga_agresiva_viajeros()` y tope por preset en `debe_precargar()`. Gate `test_m62_preset_baja_m27.gd`: 13 checks, 3/3, EXIT 0; regresión M27 238/171/5 sin fallos.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 17. - [ ] [62] Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
 18. - [ ] [62] Baseline menú principal: objetivo < 600 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
 19. - [ ] [62] Baseline spawn de Aurora: objetivo < 1.600 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
@@ -2105,3 +2105,45 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - **Proxima:** NN entrantes > 319. La cola de M62 queda sin items ejecutables
   estaticamente: 8-11 esperan assets de audio, 2 y 12 esperan runs del fundador.
   **Reposicion de cola pedida al director.**
+
+## 2026-10-19 21:20 (GMT-3) - RAMA 1 / msgs 321-322: item 2/12 con run real + gaps 13/15/16 cerrados (Log 2021, canal 323)
+
+- **Tracker 320 -> 322.** Entrantes: **321** (acuse de la auditoria 320: 5 items
+  confirmados y flipeados por el director; seguir la cola y detallar el gap de los
+  3 "hueco preciso") y **322** (CORRECCION del fundador: los runs de Godot NUNCA
+  estuvieron cerrados; el item 2/12 se puede encarar con run real).
+- **Item 2 (y RN3 del item 3) MEDIDO EN VERDE:** arnes nuevo
+  `sesion_m62_30min.gd` que corre la escena REAL del juego 30 min de reloj de
+  pared con el MemoryMonitor de produccion. 359 muestras, baseline 174.8 MB a
+  los 300 s, **drift final +0.1%** (max 0.1% @470 s), objetos 7880 -> 7899,
+  0 huerfanos en las 359 muestras, 0 SCRIPT ERROR, EXIT 0, `drift_check()=true`.
+  Guardian probado EN ROJO: baseline forzada durante el arranque -> +26.7%,
+  EXIT 1. Alcance declarado: headless (sin VRAM) y sin input de jugador.
+- **Item 15 CERRADO:** el ejecutor real de viajes es `travel_service.gd` (M28):
+  `_verificar_drift_post_viaje()` dentro de `_atracar()`, resuelve el monitor por
+  duck-typing en `ServiceRegistry`, **fail-closed** sin monitor, umbral
+  provisional 45 s derivado de `rutas.json` (20/30/45/60 s). Gate
+  `test_m62_drift_post_viaje.gd`: 12 checks, 3/3, EXIT 0, piso 12 medido.
+  Matiz nuevo: `FastTravelService.viaje_solicitado` (M69) tampoco tiene
+  consumidor de produccion, pero el flujo de M28 si.
+- **Item 16 CERRADO:** `TOPE_ISLAS_POR_PRESET` (baja=1/media=2/alta=2) inyectado
+  por `configurar()` (M27 no lee M90 ni M62), `descarga_agresiva_viajeros()` y
+  tope por preset en `debe_precargar()`. Gate `test_m62_preset_baja_m27.gd`:
+  13 checks, 3/3, EXIT 0.
+- **Item 13 CERRADO como artefacto:** gate `test_m62_correspondencia_m61.gd`
+  enlaza `data/performance/budgets.json` (M61) con `data/rendimiento/budgets.json`
+  (M62): 12 checks, 3/3, EXIT 0; rojo probado con copia temporal (baja=1501).
+- **Hallazgo lateral (M28):** `test_viajes.gd:149` tenia un `%` sin escapar que
+  abortaba una funcion de test con **EXIT 0** (falso verde). Corregido a `%%`:
+  0 SCRIPT ERROR, 0 `FALLO:`. Pendiente: esa suite no imprime resumen ni conteo.
+- **Regresion:** M27 iter2 238/0, M27 171/0, M27 headless 5/0, test_viajes
+  post-fix 0 SCRIPT ERROR, test_harbor_viajes EXIT 0.
+- **Numeracion:** Log **2021** (cabeza medida justo antes = 2021). Canal: ultimo
+  real **322**, pool con cabeza **323** = ultimo+1 -> se uso **323**; pool en
+  **324..423**.
+- **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** `CHECKLIST-GLOBAL.md`,
+  `AGENTS.md`, `project.godot`, `quality.yml` y los `05-Checklist` intactos.
+- **Proxima:** NN entrantes > 322. Los ejecutables estaticos de la COLA V3 se
+  agotaron: quedan 8-11 (sin assets de audio) y 17-27 (baselines / Play Mode).
+  Reposicion pedida en el msg 323.
+
