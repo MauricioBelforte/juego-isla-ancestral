@@ -1966,12 +1966,12 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 14. - [→] [62] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_sin_duplicacion.gd` 33/0 / 3× / piso 33 / EXIT 0. "30 re-registros NO inflan la cola", la oferta es la MISMA instancia, 1 entrada activa por chunk_id.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 15. - [ ] [62] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M] — **MEDIDO 2026-10-19 (Log 2019): `drift_check()` existe y está probado (iter3 bloque E) pero tiene 0 llamadores de producción; `island_travel_guard.gd` tiene 0 apariciones de `drift`. **CERRADO 2026-10-19 (Log 2021):** el ejecutor real es `travel_service.gd` (M28) — `_verificar_drift_post_viaje()` en `_atracar()`, fail-closed sin monitor, umbral provisional 45 s derivado de `rutas.json`. Gate `test_m62_drift_post_viaje.gd`: 12 checks, 3/3, EXIT 0. Flip pedido en msg 323.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 16. - [ ] [62] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M] — **MEDIDO 2026-10-19 (Log 2019): 2 de 3 sub-partes existen (`island_ops.gd` cola priorizada + `debe_precargar(..., presupuesto)` por distancia); 0 apariciones de `preset` en `scripts/islas/*.gd` y no hay descarga agresiva de viajeros. **CERRADO 2026-10-19 (Log 2021):** `TOPE_ISLAS_POR_PRESET` (baja=1/media=2/alta=2) inyectado por `configurar()`, `descarga_agresiva_viajeros()` y tope por preset en `debe_precargar()`. Gate `test_m62_preset_baja_m27.gd`: 13 checks, 3/3, EXIT 0; regresión M27 238/171/5 sin fallos.** <!-- fuente: 62-Memoria/05-Checklist.md -->
-17. - [ ] [62] Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-18. - [ ] [62] Baseline menú principal: objetivo < 600 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
-19. - [ ] [62] Baseline spawn de Aurora: objetivo < 1.600 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
-20. - [ ] [62] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
-21. - [ ] [62] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
-22. - [ ] [62] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
+17. - [ ] [62] Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable [M] — **MEDIDO 2026-10-20 (Log 2033), PARCIAL: mecanismo VERDE.** Arnés `sesion_m62_limite.gd` (escena real + MemoryMonitor de producción), contexto TORMENTA real de M32 alcanzada en 3 días con `GameTime.avanzar_hasta` (API de dormir). Como no se pueden reservar 1,4 GB, se fuerza el DENOMINADOR del semáforo con `registrar_sistema()` (API de M90), no la memoria: 145 MB → nivel 1, 134 MB → nivel 2, 127 MB → nivel 3, con `semaforo_cambiado` emitida 3 veces [1,2,3], `enforcement SUAVE` (INFO) y `DURO` (WARNING), `_ultimo_enforcement=3`, monitor vivo, Player movible y semáforo de vuelta a 0 al restaurar el snapshot (2032 MB). **14 checks / 0 fallos / EXIT 0 x3 / SCRIPT ERROR 0.** NO medible: jugabilidad por frames (`--script` no itera: `physics_frames=8` en 10 s) y banco de audio (0 assets). Flip `[->]` propuesto.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+18. - [ ] [62] Baseline menú principal: objetivo < 600 MB [S] — **NO MEDIBLE 2026-10-20 (Log 2033):** no existe escena de menú principal. Las 4 candidatas (`scenes/main_menu.tscn`, `scenes/ui/main_menu.tscn`, `scenes/ui/menu.tscn`, `scenes/menu.tscn`) dan `ResourceLoader.exists()` = false; `main_scene` = `res://scenes/main_island.tscn`. El único `*menu*.tscn` del repo es `scenes/debug/debug_menu.tscn`. El arnés sale EXIT 3 (no medible).** <!-- fuente: 62-Memoria/05-Checklist.md -->
+19. - [ ] [62] Baseline spawn de Aurora: objetivo < 1.600 MB [S] — **MEDIDO 2026-10-20 (Log 2033): 174,9 / 175,1 / 174,3 MB x3** con la escena real y el monitor de producción (`M62_ESCENARIO=spawn`, 45 s de asentamiento, 9 muestras, 0 huérfanos, 7 checks / 0 fallos / EXIT 0). Alcance declarado: headless sin renderer → es un PISO de carga, no el baseline de Play Mode (la VRAM no entra en `OS.get_static_memory_usage()`). Flip `[->]` propuesto; NO `[x]`.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+20. - [ ] [62] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S] — **NO MEDIBLE 2026-10-20 (Log 2033):** la cámara de seguimiento no está sobre el Player: Camera3D en (3050.5, 13.2, 3062.5) vs Player en (3860, 8, 3860) = **1136 m**; `_target` sí está seteado y el grupo `player` tiene 1 nodo, pero 12 eventos WHEEL_DOWN por `_unhandled_input` no movieron la cámara. Sin oteo el número sería idéntico al del spawn (falso verde) → EXIT 3.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+21. - [ ] [62] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S] — **NO MEDIBLE 2026-10-20 (Log 2033):** el árbol sí tiene 1 `VoxelTerrain` (contado por clase nativa), pero `get_statistics().updated_blocks = 0`: en headless el terreno no genera bloques (coincide con el Log 2028). Bajar al Player 40 m (Y 8.0 → -32.0) no ejercita el subterráneo → EXIT 3.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+22. - [ ] [62] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S] — **MEDIDO 2026-10-20 (Log 2033), PARCIAL: 173,2 / 173,3 / 173,6 MB x3** con TORMENTA real de M32 (alcanzada en 3 días) y el monitor de producción; 7 buses de audio y 9 reproductores en el árbol. **La mitad de audio NO es medible:** 0 assets de audio en el repo (Log 2028), así que "banco de audio completo" no existe. Piso de carga headless, no baseline de Play Mode. Flip `[->]` propuesto.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 23. - [ ] [62] Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C] — **MEDIDO 2026-10-19 (Log 2025) con el arnés de clima: 30 min 00 s de reloj de pared, 359 muestras, baseline 168.4 MB, drift +0.1% <= 5%, `drift_check()=true`, 0 eventos `travel_started` (servicio presente y instrumentado), 0 huérfanos. Misma salvedad que el ítem 12: 3 SCRIPT ERROR de `pause_layer.gd:147` (regresión `2e9b8f3`) en el boot. Flip pendiente del director.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 24. - [ ] [62] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M] — **NO MEDIBLE 2026-10-20 (Log 2028):** 0 archivos `.ogg`/`.wav`/`.mp3` en `game/isla-ancestral`; `set_estado_clima()` (M42) 0 llamadores de produccion (los 3 matches son 2 del propio `test_ambient_m42.gd` y 1 comentario de mi arnes); `pedir_banco_audio`/`iniciar_descarga_audio` 0 llamadores fuera de mis suites. Sin streams no hay crecimiento de memoria de audio que medir. Deuda de M41/M42/M44/M91.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 25. [x] - [ ] [62] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C] — **MEDIDO 2026-10-20 (Log 2028) a nivel de BUFFER, con alcance declarado:** arnes `sesion_m62_voxel_500.gd` (escena real + MemoryMonitor de produccion). Buffer real de VoxelTools 16^3 con `BlockType.BEDROCK`: **500/500 excavados** leidos de vuelta como AIR, **500/500 regenerados** con el ID original, **5 buffers temporales creados / 0 vivos** (WeakRef), memoria **135.8 -> 135.8 MB (+0.0%)**, huerfanos 0. **9 checks / 0 fallos / EXIT 0 x3 / SCRIPT ERROR 0.** Sondas EN ROJO: `M62_RETENER_BUFFERS=1` (5 vivos, EXIT 1) y `M62_SIN_REGENERAR=1` (0/500, EXIT 1). **Limite medido:** el VoxelTerrain de la escena real no sirve headless (`updated_blocks=0`, `set_voxel` no persiste) y el generador invocado fuera del motor escribe 0 -> el camino Play Mode exige corrida CON renderer. Flip pendiente del director.** <!-- fuente: 62-Memoria/05-Checklist.md -->
@@ -1983,7 +1983,7 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 
 ## REPOBLACION V3 (2026-10-19T00:02:03) — items REALES de 05-Checklist (fuente en comentario)
 
-1. - [ ] [35] P2: disenar minerales — tabla de 8+ minerales [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+1. - [ ] [35] P2: disenar minerales — tabla de 8+ minerales [S] <!-- fuente: 35-Mineria/05-Checklist.md --> — **MEDIDO Y ENTREGADO 2026-10-20 (Log 2034), diseno completo; implementacion bloqueada por 1 item.** Medido antes de disenar: `data/mining/ores.json` tiene **6** vetas (objetivo 8+), `data/items/` tiene **300** `.tres` de los que solo **7** tienen forma de mineral y **2** (`gemstone`, `copper_ore`) no los usa ninguna veta; **0** items de oro. El JSON SI trae `profundidad_banda` (superficie/subterraneo_medio/profundo/ancestral) y `region` (cantera/cueva/templo) completas -> el hueco es solo el numero. Entregada la seccion `### 2.5 Catalogo de minerales - tabla de diseno (P2)` en `03-Diseno.md` (12.631 -> 16.595 B, LF preservado, sin BOM) con 8 filas: las 6 reales con valores leidos del archivo + `veta_gema` (item `gemstone`, ya existe y esta sin uso) + `veta_oro_puro` (item `gold_ore`, NO existe). Huecos destapados: `veta_oro` y `veta_polvo_estrellas` entregan el MISMO item (`ancient_crystal`) porque no hay item de oro; `copper_ore` duplica a `mineral_cobre`. **No se toco** `ores.json`, `VETAS_M35` ni las aserciones de tamano de los tests: crear la veta sin item real violaria BUG-132. Flip `[->]` propuesto; el `[x]` necesita `gold_ore` por M15/M159.
 2. - [ ] [35] P16: disenar rutas — caminos de acceso a las zonas [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
 3. - [ ] [35] P17: disenar estaciones — puestos de descanso y mejoras [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
 4. - [ ] [35] Hook de post-generacion de chunk conectado [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
@@ -2230,3 +2230,57 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
   `AGENTS.md`, `project.godot`, `11-BUGS.md` y los `05-Checklist` intactos.
 - **Próxima:** NN entrantes > 326. Pendiente del director: flips de 25 (o criterio con renderer)
   y 26 (parcial), cableado de las 2 suites a `quality.yml`, decisión sobre 24/27.
+
+
+## 2026-10-20 01:48 (GMT-3) - RAMA 1 / msg 328 + COLA V3 items 17-22 (Log 2033, canal 329)
+
+- **Tracker 327 -> 328.** Entrante unico = 328 (acuse: 25 aceptado, 26 parcial conforme, 24/27
+  bloqueo de assets, flips 25/26 ya aplicados por el director). Verificado en disco: L1977/L1978
+  empiezan con `25. [x]` / `26. [x]`. 0 flips de mi parte.
+- **Dos arneses nuevos** en `scripts/rendimiento/memoria/`: `sesion_m62_baselines.gd` (18-22, un
+  escenario por proceso) y `sesion_m62_limite.gd` (17, fuerza el denominador del semaforo).
+- **Item 17 PARCIAL con mecanismo VERDE**: 14 checks / 0 fallos / EXIT 0 x3 / SCRIPT ERROR 0.
+  Niveles 1-2-3 forzados (145/134/127 MB), `semaforo_cambiado` [1,2,3], enforcement SUAVE (INFO) y
+  DURO (WARNING), monitor vivo, Player movible, restauracion exacta a 2032 MB y nivel 0.
+- **Baselines**: spawn **174,3-175,1 MB** (x3, EXIT 0) y tormenta **173,2-173,6 MB** (x3, EXIT 0)
+  como PISO de carga headless. Menu/horizonte/subterraneo **NO MEDIBLES (EXIT 3)** con causa
+  medida: no hay escena de menu; camara a 1136 m del Player; VoxelTerrain con 0 bloques generados.
+- **Hallazgo**: el preset `media` suma **2032 MB en runtime vs 2000 MB del dataset** (+32 MB);
+  `cargar()`/`set_preset()` no restauran el estado vivo -> el arnes usa snapshot exacto por
+  `tope_de()` + `registrar_sistema()`. No se toco `budgets.json`.
+- **Defectos propios cazados por las guardas**: `call("semaforo")` sobre una propiedad (SCRIPT ERROR
+  que aborto `_ejecutar`; lo delato el piso 4<12), fraccion pasada como MB, VoxelTerrain contado por
+  ruta de script (detector ciego) y la camara equivocada (`camera_rig` vs `follow_camera`).
+- Artefactos: Log **2033** (ASCII puro/CRLF/sin BOM, 8.686 B), msg **329** (UTF-8 sin BOM/LF,
+  5.782 B), tracker 328, pool de canal 330, pool de logs 2034.
+- **0 commits / 0 push / 0 flips / 0 auto-sellos.** La COLA V3 queda sin items ejecutables headless:
+  3 (duplicado del 2), 8-12 (audio), 18/20/21/23/24/27 (Play Mode / assets / tope de RAM del SO).
+  Reposicion pedida en el canal.
+
+
+## 2026-10-20 01:55 (GMT-3) - RAMA 1 / msg 330: correccion del 329 + COLA V3 bloque 2 + item P2 (Log 2034, canal 331)
+
+- **Correccion propia:** el 329 pidio reposicion de cola porque "la COLA V3 no tiene items
+  ejecutables". **Falso.** El backlog tiene DOS bloques `## REPOBLACION V3` (L1951 y L1984, creados
+  con 11 s de diferencia); al recorrer la seccion corte en el siguiente `## ` y solo vi el bloque 1
+  (M62, 29 items, trabajado en los ciclos 2016-2033). El bloque 2 **nunca se toco**.
+- **El bloque 2 es mio y sus 31 items son reales:** M35 tiene 28 `[ ]` y M60 tiene 3 `[ ]` = 31
+  exacto (conteo por prefijo de linea sobre las checklists de origen). M35 asignado a
+  DeepSeek-V4.1-Flash (`ESTADO-PARALELO.md` L194) y fuera de la lista NO TOCAR.
+- **Item 1 (P2) medido y entregado:** `ores.json` = 6 vetas vs objetivo 8+; 300 `.tres` con 7
+  minerales y 2 sin uso (`gemstone`, `copper_ore`); 0 items de oro. Seccion `### 2.5` nueva en
+  `35-Mineria/plan-actual/03-Diseno.md` (12.631 -> 16.595 B, LF, sin BOM, 0 renumeraciones) con la
+  tabla de 8: las 6 reales + `veta_gema` (usa `gemstone`, que ya existe) + `veta_oro_puro` (necesita
+  `gold_ore`, que no existe).
+- **Huecos medidos, ninguno tocado:** `veta_oro` y `veta_polvo_estrellas` apuntan al mismo item
+  (`ancient_crystal`) porque no hay item de oro; `copper_ore` duplica a `mineral_cobre`. Crear la
+  veta 8 sin item real violaria BUG-132 -> pedido a M15/M159.
+- **Bloqueante medido para 8 de los 28 items de M35:** `grep -rln "set_block" scripts/` = **0**;
+  la API de edicion de M08 que el propio `03-Diseno.md` L226 declara **no existe en el repo**. Sondas
+  de falso negativo sobre `mining_manager.gd`: `set_voxel`/`VoxelTerrain`/`voxel_tool` 0, `remesh` 0,
+  `collision_mask`/`raycast` 0, `borde`/`chunk_size` 0 (lo unico implementado es `zone_quota`, 22
+  menciones).
+- Artefactos: Log **2034** (ASCII puro / CRLF / sin BOM, 9.419 B), msg **331** (UTF-8 sin BOM / LF,
+  5.694 B), `03-Diseno.md` de M35, tracker 328 -> **330**, pool de canal 331 consumido -> cabeza 332.
+- **0 commits / 0 push / 0 flips / 0 auto-sellos.** Proxima: bloque 2 items 2 y 3 (P16 rutas, P17
+  estaciones), diseno puro sin dependencia de M08.

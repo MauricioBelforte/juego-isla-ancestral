@@ -673,59 +673,59 @@ M104, M88, M160.
 41. - [ ] [76] Verificar que la invitación nunca expone datos [S] — **[ ] honesto: requiere implementación de invitación (FASE MP)** <!-- fuente: 76-Multijugador/05-Checklist.md -->
 42. - [ ] [76] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] — **ESTADO-PARALELO + Log actualizados; fila GLOBAL entregada al director (msg 55) — él <!-- fuente: 76-Multijugador/05-Checklist.md -->
 43. - [ ] [76] Verificar con verificar_checklist.py (sin alertas nuevas) [S] — **Pendiente: fila GLOBAL a aplicar por el director** <!-- fuente: 76-Multijugador/05-Checklist.md -->
-44. - [ ] [55] Mantener la estética cozy del proyecto en el diario [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-45. - [ ] [55] Guardar retrato, relación (M20) y últimos diálogos del personaje [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-46. - [ ] [55] Marcar personaje completado cuando su arco termina (M22) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-47. - [ ] [55] Vincular misiones relacionadas del personaje (M23) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-48. - [ ] [55] Vincular POI del mapa (M54) con la entrada [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-49. - [ ] [55] Guardar estado de exploración del lugar [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-50. - [ ] [55] Marcar completado al 100% de exploración del lugar [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-51. - [ ] [55] Mostrar fauna/flora del lugar por avistamientos [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-52. - [ ] [55] Guardar hábitat, dieta y fotografías de la criatura (M56) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-53. - [ ] [55] Marcar completado al identificar al 100% la criatura [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-54. - [ ] [55] Mostrar rareza de la criatura y momento de avistamiento [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-55. - [ ] [55] Validar siluetas/iconos contra el bestiario (M46) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-56. - [ ] [55] Guardar estación y hábitat de la planta (M29/M33) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-57. - [ ] [55] Guardar usos en recetas conocidas (M16) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-58. - [ ] [55] Mostrar escasez/abundancia estacional [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-59. - [ ] [55] Validar iconos de hojas contra el catálogo [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-60. - [ ] [55] Guardar ubicación, usos y rareza del mineral [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-61. - [ ] [55] Vincular mineral con su región [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-62. - [ ] [55] Guardar cantidad conocida en el inventario (M14) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-63. - [ ] [55] Validar iconos de gemas contra el catálogo [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-64. - [ ] [55] Desbloquear entrada al aprender la receta [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-65. - [ ] [55] Mostrar ingredientes con cantidades y resultado [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-66. - [ ] [55] Marcar completado al fabricar el ítem [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-67. - [ ] [55] Vincular receta con su nivel de habilidad (M17) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-68. - [ ] [55] Guardar pista al leerse (releíble) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-69. - [ ] [55] Marcar pista como resuelta al resolver el puzzle [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-70. - [ ] [55] No mostrar la solución en la pista [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-71. - [ ] [55] Validar referencias de pistas a puzzles [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-72. - [ ] [55] Desbloquear entrada al obtener el Sello [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-73. - [ ] [55] Mostrar la secuencia de Sellos en orden [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-74. - [ ] [55] Mostrar lore de cada Sello al completarse [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-75. - [ ] [55] Validar iconografía de Sellos (M46) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-76. - [ ] [55] Actualizar estado de la ruina (4 estados) al progresar [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-77. - [ ] [55] Mostrar recompensas obtenidas en la entrada [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-78. - [ ] [55] Marcar completado al restaurar la ruina [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-79. - [ ] [55] Validar estados contra el catálogo de M25 [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-80. - [ ] [55] Guardar cartas del festival y del correo con fecha [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-81. - [ ] [55] Permitir releer cartas y marcarlas como leídas [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-82. - [ ] [55] Vincular cartas con eventos del calendario (M29) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-83. - [ ] [55] Validar remitentes contra NPC (M19) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-84. - [ ] [55] Desbloquear descubrimientos al completar hitos (M71) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-85. - [ ] [55] Mostrar misiones activas/completadas con progreso en vivo [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-86. - [ ] [55] Alimentar logros de colección (M72) con el total real [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-87. - [ ] [55] Definir filtro por bioma para criaturas/lugares [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-88. - [ ] [55] Diseñar contenido secreto desbloqueable por acción concreta [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-89. - [ ] [55] Mostrar "???" SOLO en secciones lore (nunca en colecciones) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-90. - [ ] [55] Permitir releer pistas, recetas y cartas desde el diario [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-91. - [ ] [55] Navegar al lugar en el mapa (M54) desde la entrada [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-92. - [ ] [55] Dar soporte a plurales [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-93. - [ ] [55] Testear el diario en 3 idiomas sin desbordes de UI [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-94. - [ ] [55] Manejar icono faltante con fallback genérico [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-95. - [ ] [55] Probar el diario con Reduce Motion activo (M58) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
-96. - [ ] [55] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md -->
+44. - [ ] [55] Mantener la estética cozy del proyecto en el diario [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** UI implementada sigue 03-Diseno sec. 5.2/5.3 (diary_layer.gd, 834 lineas); verificacion visual fina = fundador.
+45. - [ ] [55] Guardar retrato, relación (M20) y últimos diálogos del personaje [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** save guarda {categoria, estado, favorito, dia} (diary_service.gd L339-348): sin retrato/relacion/dialogos.
+46. - [ ] [55] Marcar personaje completado cuando su arco termina (M22) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** marcar_completado existe (L155) pero ningun puente completa personajes; quest_completed registra en misiones (L102-103).
+47. - [ ] [55] Vincular misiones relacionadas del personaje (M23) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** mecanismo generico refs+navegacion existe (diary_layer.gd L633-661; 3 entradas con refs); falta poblar refs mision<->personaje.
+48. - [ ] [55] Vincular POI del mapa (M54) con la entrada [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** island_loaded registra lugar (L105-106) sin POI: no hay vinculo con M54.
+49. - [ ] [55] Guardar estado de exploración del lugar [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campo de exploracion en el save (L339-348).
+50. - [ ] [55] Marcar completado al 100% de exploración del lugar [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem 681: sin estado de exploracion que completar.
+51. - [ ] [55] Mostrar fauna/flora del lugar por avistamientos [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo lugar->criatura; ESPECIE_AVISTADA sin puente (L90-112).
+52. - [ ] [55] Guardar hábitat, dieta y fotografías de la criatura (M56) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** categoria fotografias = 0 entradas (aviso del validador HOY, M56); save sin habitat/dieta.
+53. - [ ] [55] Marcar completado al identificar al 100% la criatura [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin contador de identificacion por criatura.
+54. - [ ] [55] Mostrar rareza de la criatura y momento de avistamiento [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** save guarda dia (L346); NO existe campo rareza en el modelo.
+55. - [ ] [55] Validar siluetas/iconos contra el bestiario (M46) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** validate_diary.gd cubre catálogo/i18n/persistencia/rendimiento/encoding, no iconos M46.
+56. - [ ] [55] Guardar estación y hábitat de la planta (M29/M33) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campos estacion/habitat en entradas de plantas.
+57. - [ ] [55] Guardar usos en recetas conocidas (M16) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente M16->planta.
+58. - [ ] [55] Mostrar escasez/abundancia estacional [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** no existe escasez/abundancia estacional.
+59. - [ ] [55] Validar iconos de hojas contra el catálogo [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem 687: sin validacion de iconos de hojas.
+60. - [ ] [55] Guardar ubicación, usos y rareza del mineral [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campos ubicacion/usos/rareza en minerales.
+61. - [ ] [55] Vincular mineral con su región [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo mineral<->region.
+62. - [ ] [55] Guardar cantidad conocida en el inventario (M14) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con inventario M14.
+63. - [ ] [55] Validar iconos de gemas contra el catálogo [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem 687: sin validacion de iconos de gemas.
+64. - [ ] [55] Desbloquear entrada al aprender la receta [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente RECETA_DESBLOQUEADA (L90-112); registro manual/API funciona (test_diario.gd L50).
+65. - [ ] [55] Mostrar ingredientes con cantidades y resultado [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** modelo de entrada = {id, titulo, descripcion, refs} (sec. 9): sin ingredientes.
+66. - [ ] [55] Marcar completado al fabricar el ítem [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin disparador de fabricacion.
+67. - [ ] [55] Vincular receta con su nivel de habilidad (M17) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con habilidades M17.
+68. - [ ] [55] Guardar pista al leerse (releíble) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente PISTA_LEIDA (M24) en _conectar_eventos (L90-112).
+69. - [ ] [55] Marcar pista como resuelta al resolver el puzzle [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin disparador de puzzle resuelto.
+70. - [ ] [55] No mostrar la solución en la pista [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** catálogo sin campo solucion: se define cuando M24 lo pida.
+71. - [ ] [55] Validar referencias de pistas a puzzles [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** validador exige refs existentes; no valida vinculo pista->puzzle.
+72. - [x] [55] Desbloquear entrada al obtener el Sello [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[x] HECHO 2026-10-20 (Step-5-WorkBuddy, Log 2032):** puente real prereq_met -> registrar sello (diary_service.gd L96-97); test_diario.gd L64-65; suites HOY: test_diario 38/0, persist 18/0, ui 89/0, perf 26/0, validate 0 fallos; todos EXIT 0.
+73. - [ ] [55] Mostrar la secuencia de Sellos en orden [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** catálogo trae 7 sellos en orden narrativo y la UI los lista en ese orden; sin numeral/secuencia explicita.
+74. - [ ] [55] Mostrar lore de cada Sello al completarse [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sellos sin descripcion (0 de 7, medido hoy); contenido pendiente de M22/M26.
+75. - [ ] [55] Validar iconografía de Sellos (M46) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem 687: sin iconografia de Sellos validada.
+76. - [ ] [55] Actualizar estado de la ruina (4 estados) al progresar [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente RUIDA_PROGRESADA; estados VISTO/COMPLETADO, no 4 estados.
+77. - [ ] [55] Mostrar recompensas obtenidas en la entrada [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin datos de recompensas.
+78. - [ ] [55] Marcar completado al restaurar la ruina [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin disparador de restauracion.
+79. - [ ] [55] Validar estados contra el catálogo de M25 [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con catálogo M25.
+80. - [ ] [55] Guardar cartas del festival y del correo con fecha [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** puente carta_recibida existe (L111-112) + dia en save (L346); contenido depende de M74.
+81. - [ ] [55] Permitir releer cartas y marcarlas como leídas [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** releible via persistencia (test persist 18/18 HOY); leidas = VISTO al registrar.
+82. - [ ] [55] Vincular cartas con eventos del calendario (M29) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo carta<->evento de calendario.
+83. - [ ] [55] Validar remitentes contra NPC (M19) [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** npc_moved_in registra personajes; no valida remitentes contra M19.
+84. - [ ] [55] Desbloquear descubrimientos al completar hitos (M71) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente DESCUBRIMIENTO (M71); progreso se emite por registro (L289-295).
+85. - [ ] [55] Mostrar misiones activas/completadas con progreso en vivo [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** solo quest_completed (no activas); progreso en vivo via diary.progreso_cambiado (L293).
+86. - [ ] [55] Alimentar logros de colección (M72) con el total real [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sec. 3.2 documenta la regla (total real fuera de UI); no hay emision a M72.
+87. - [x] [55] Definir filtro por bioma para criaturas/lugares [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[x] HECHO 2026-10-20 (Step-5-WorkBuddy, Log 2032):** definido en 03-Diseno.md sec. 10 (nuevo, 2026-10-20): campo bioma + filtro persistido en "ui"; implementacion diferida = KnownIssue.
+88. - [x] [55] Diseñar contenido secreto desbloqueable por acción concreta [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[x] HECHO 2026-10-20 (Step-5-WorkBuddy, Log 2032):** definido en 03-Diseno.md sec. 11 (nuevo, 2026-10-20): secreta solo en lore + accion reveladora por EventBus + validacion.
+89. - [ ] [55] Mostrar "???" SOLO en secciones lore (nunca en colecciones) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** UI muestra "???" donde la entrada este marcada secreta (L437-440); hoy 0 secreta: sin efecto visible.
+90. - [x] [55] Permitir releer pistas, recetas y cartas desde el diario [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[x] HECHO 2026-10-20 (Step-5-WorkBuddy, Log 2032):** persistencia M59 round-trip (diary_service.gd L339-376, purga de huerfanas) + test_diario_persist.gd 2 procesos HOY 18/0 EXIT 0.
+91. - [ ] [55] Navegar al lugar en el mapa (M54) desde la entrada [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** navegacion interna por refs existe (L646-661); salto al mapa M54 no.
+92. - [ ] [55] Dar soporte a plurales [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** DIARY.* sin msgid_plural en es.po/en.po (los 4 son de ITEMS/M68); UI usa _t() sin plural.
+93. - [ ] [55] Testear el diario en 3 idiomas sin desbordes de UI [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** suites miden i18n es/en; sin prueba de 3 idiomas ni desbordes.
+94. - [ ] [55] Manejar icono faltante con fallback genérico [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin manejo de icono faltante medido en diary_layer.gd (filas = estrella/titulo/estado).
+95. - [ ] [55] Probar el diario con Reduce Motion activo (M58) [M] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin prueba con Reduce Motion (M58).
+96. - [ ] [55] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] <!-- fuente: 55-Diario-Del-Jugador/05-Checklist.md --> -- **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** ESTADO-PARALELO + Log 2032 actualizados esta vuelta; sin README en 55-*; fila GLOBAL (67/131) la aplica el director.
 97. - [ ] [90] Definir culling de objetos fuera de distancia <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
 98. - [ ] [90] Definir LODs para objetos lejanos (M50) — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_ <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
 99. - [ ] [90] Definir iluminación volumétrica (baja/media: off, alta: on, ultra: alta calidad) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
@@ -884,3 +884,15 @@ M104, M88, M160.
   + Log 2023 + msg 100 + BACKLOG-MASTER + tracker); ruteo QA 21.8 M119; los 3 SCRIPT
   ERROR de pause_layer.gd/ui_root.gd para la tabla de deuda ajena.
 - Proxima: NN > 100; sin mensaje -> item 40 ([76] determinismo local) u otro de la COLA ACTIVA.
+
+
+## Registro de la vuelta 2026-10-20 01:24 (tracker 101 sin cambios numericos; RAMA 1: msg 101 del director + RAMA 2: REPOBLACION V3 items 44-96 M55)
+
+- RAMA 1: unico mensaje nuevo = **101** (2026-10-20 00:15, acuse de mi 100 = tanda M119 items 31-39, GO al riel Actualizaciones). Acuse puro, sin trabajo nuevo. Respondido con msg 102 (UTF-8 sin BOM + LF, 1.191 B). Numeracion: ultimo 101 + 1 = 102, cabeza del pool coincidente; consumido y reexpandido a 103..202 (100 consecutivos verificados). Tracker -> 101.
+- RAMA 2: tanda M55-Diario-Del-Jugador items 44-96 = los 53 [ ] reales de 55-Diario-Del-Jugador/plan-actual/05-Checklist.md (medido HOY: 63 [x] / 15 [?] / 53 [ ] = 131). Universo real medido: diary_service.gd (390 lineas, 6 puentes vivos, sin PISTA_LEIDA/RUIDA/DESCUBRIMIENTO/RECETA_DESBLOQUEADA), diary_layer.gd (834 lineas, secreta->"???" L437-440, refs navegables L633-661), diario_catalog.json (14 categorias / 44 entradas / 3 con refs / 0 secreta), es.po+en.po (4 plurales ITEMS+M68, 0 DIARY).
+- 4 FLIPS con cita real + suites medidas HOY con binario real (todas 0 fallos / EXIT 0 / 0 SCRIPT ERROR): test_diario.gd 38 checks (36 + 2 sanidad; alcanzabilidad verificada por lectura del flujo L27-33, estas suites NO tienen la guardia de 3 capas), test_diario_persist.gd 18 checks (7 padre + 11 hijo, 2 procesos con SaveManager real), test_diario_ui.gd 89 checks, test_diario_perf_m55.gd 26 checks, validate_diary.gd 0 fallos / 1 aviso (fotografias depende de M56).
+- Diseno documentado: 03-Diseno.md +secc. 10 (filtro por bioma: campo bioma + filtro en "ui") y +secc. 11 (contenido secreto desbloqueable: marca secreta solo en lore + accion reveladora por EventBus + validacion), 9.599 -> 11.867 B (LF puro preservado).
+- 49 items [ ] honestos con nota medida (verbos de implementacion con funcionalidad ausente o dueno externo M14/M16/M17/M19/M20/M22-M25/M29/M33/M46/M54/M56/M58/M71/M72/M74). 05-Checklist: 54 lineas cambiadas (4 flips + 49 notas + Totales), 25.202 -> 33.426 B, CRLF 230 preservados, sin BOM; conteo final 67 [x] / 15 [?] / 49 [ ] = 131.
+- Artefactos: Log 2032 (ASCII puro por bytes, 4.285 B, 82 CRLF, 0 LF sueltos, sin BOM; cabeza del pool medida justo antes = 2032 -> pool 2033), msg 102 + msg 103 (informe de tanda al director), 05-Checklist y 03-Diseno de 55-Diario-Del-Jugador, BACKLOG items 44-96 anotados + este registro.
+- Limites: 0 commits / 0 push / 0 archivos ajenos modificados / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 auto-sellos 21.8. Flips ofrecidos a revertir; QA 21.8 a rutear por el director.
+- Pedidos al director (msg 103): commit de los 2 paths de 55-Diario-Del-Jugador + Log 2032; fila GLOBAL 55 (67/131); ruteo QA 21.8. Arrastrados: commits M119/M109/M93/M36/M50/M55 de tandas previas; gate ASCII Logs/; gate legal 300 PNG M159.

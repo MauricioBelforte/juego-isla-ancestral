@@ -86,6 +86,58 @@ Orquestador global.
 | `vein_recovered_global(vein_id: int)` | Veta regenerada en el mundo |
 | `zone_exhausted(zona: StringName)` | Límite diario suave alcanzado |
 
+### 2.5 Catálogo de minerales — tabla de diseño (P2, 2026-10-20)
+
+Estado **medido en disco** antes de diseñar (no heredado de la checklist):
+
+| Medición | Valor real | Fuente |
+|---|---|---|
+| Vetas en el catálogo | **6** (`ores.json`, 2.470 B) | `game/isla-ancestral/data/mining/ores.json` |
+| Objetivo de P2 | **8+** | `05-Checklist.md` L24 |
+| Items en el catálogo M15/M159 | **300** `.tres` | `game/isla-ancestral/data/items/` |
+| Items con forma de mineral | **7** | `ancient_crystal`, `copper_ore`, `crystal`, `fragmento_ancestral`, `gemstone`, `iron_ore`, `mineral_cobre` |
+| Items de mineral **sin uso** | **2** | `gemstone`, `copper_ore` |
+| Item de oro | **0** | no existe `gold_ore` ni `mineral_oro` |
+
+Tabla de diseño propuesta. Las 6 primeras filas son las que ya existen en `ores.json`
+(valores leídos del archivo, no inventados); las 2 últimas son las que faltan para llegar a 8.
+
+| # | id | Nombre | Rareza | Banda | Región | Golpes | Drop | Prob. | Venta | Respawn | `item_id` | Estado |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | `veta_cobre` | Veta de Cobre | COMÚN (0) | superficie | cantera | 2 | 1-2 | 1.0 | 8 | 2 d | `mineral_cobre` | existe |
+| 2 | `veta_hierro` | Veta de Hierro | COMÚN (1) | subterraneo_medio | cantera | 3 | 1-2 | 1.0 | 15 | 3 d | `iron_ore` | existe |
+| 3 | `veta_oro` | Veta de Oro | COMÚN (2) | subterraneo_medio | cantera | 4 | 1-1 | 1.0 | 30 | 4 d | `ancient_crystal` | existe, **item mal apuntado** |
+| 4 | `veta_cristal` | Veta de Cristal Estacional | RARO (2) | profundo | cueva | 4 | 1-1 | 1.0 | 45 | 4 d | `crystal` | existe |
+| 5 | `veta_ancestral` | Mineral Ancestral | RARO (3) | ancestral | templo | 6 | 1-1 | 0.3 | 80 | 5 d | `fragmento_ancestral` | existe |
+| 6 | `veta_polvo_estrellas` | Polvo de Estrellas | RARO (3) | ancestral | templo | 6 | 1-1 | 0.2 | 120 | 7 d | `ancient_crystal` | existe, **item compartido** |
+| 7 | `veta_gema` | Veta de Gema | RARO (2) | profundo | cueva | 5 | 1-1 | 0.4 | 60 | 4 d | `gemstone` | **nueva**, item ya existe y está sin uso |
+| 8 | `veta_oro_puro` | Oro Puro | RARO (3) | subterraneo_profundo | cantera | 6 | 1-1 | 0.15 | 95 | 6 d | `gold_ore` | **nueva**, requiere item nuevo |
+
+**Progresión de valor (coherencia interna):** 8 < 15 < 30 < 45 < 60 < 80 < 95 < 120.
+Cada banda tiene al menos una veta y la rareza nunca baja al subir de banda.
+Los `valor_venta` son **propuesta**: el ítem `[?]` "Precios de venta coherentes con economía M36"
+sigue pendiente de M38, así que no se fijan como definitivos.
+
+**Huecos que esta tabla destapa (medidos, ninguno tocado):**
+
+1. **`veta_oro` y `veta_polvo_estrellas` apuntan al mismo item** (`ancient_crystal`). No es un
+   descuido de datos: es el único item disponible con forma de mineral raro, porque **no existe
+   ningún item de oro** en los 300 `.tres`. La veta de oro entrega cristal ancestral.
+2. **`gemstone` y `copper_ore` están en el catálogo de items y ninguna veta los usa.** `gemstone`
+   cubre la veta 7 sin crear assets nuevos; `copper_ore` duplica funcionalmente a `mineral_cobre`
+   (dos ids para el mismo cobre) — decisión de M15, no de M35.
+3. **Falta 1 item para la veta 8** (`gold_ore`). Crearlo es trabajo de M15/M159 (pipeline de items
+   + metadata legal), no de M35; y hoy el gate `validate_asset_metadata.py --check` ya está en
+   EXIT 1 por los 300 PNG de `items_m159`, así que **no se crea desde aquí**.
+
+**Impacto declarado en código (no ejecutado):** `mining_manager.gd` L92 fija
+`const VETAS_M35 := [6 ids]`. Cuando el catálogo pase a 8, esa constante y las aserciones de
+tamaño de `test_mineria.gd` / `test_mineria_lote2.gd` tienen que subir a la vez; hacerlo antes de
+que exista `gold_ore` dejaría una veta sin drop real (violaría la regla de BUG-132).
+
+**Conclusión de P2:** la tabla de diseño de 8+ minerales queda **definida y medida**; la
+implementación de las 2 nuevas depende de 1 item (`gold_ore`) que no es de este módulo.
+
 ## 3. Flujos (texto)
 
 ### Flujo F1 — Extracción

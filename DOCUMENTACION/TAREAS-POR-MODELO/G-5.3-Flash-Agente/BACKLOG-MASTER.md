@@ -292,7 +292,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 
 ## REPOBLACION V3 (2026-10-19T00:02:03) — items REALES de 05-Checklist (fuente en comentario)
 
-1. - [ ] [59] Botón "Guardar" en pausa con confirmación y feedback (M44) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+1. - [x] [59] Botón "Guardar" en pausa con confirmación y feedback (M44) [S] · [x] T16-M59 2026-10-19 (G-5.3-Flash-Agente): popup confirmación + request_save real + toast por EventBus — qa_m59_guardar_confirmacion.gd 4/0 EXIT 0 (SaveManager/EventBus reales); regresión M89 48/0. Drift inverso: esta cola vieja de M59 quedó des-sincronizada del módulo (ítem 7 ya estaba hecho) — items 1-40 a revisar contra 59-Guardado/05. <!-- fuente: 59-Guardado/05-Checklist.md -->
 2. - [ ] [59] Mostrar hora/fecha del último guardado por slot [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 3. - [ ] [59] Impedir guardado manual durante carga de escena/diálogo [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 4. - [ ] [59] Deshabilitar botón si no hay cambios (no dirty) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
@@ -349,19 +349,19 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 54. - [ ] [59] Definir contrato con M107 (3-2-1 externo) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 55. - [ ] [59] Verificar la restauración desde la nube [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
 56. - [ ] [59] Documentar el flujo de recuperación completo [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-57. - [ ] [59] Guardar con inventario vacío, mundo sin explorar o en el primer minuto [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+57. - [x] [59] Guardar con inventario vacío, mundo sin explorar o en el primer minuto [S] · [x] T17-M59 (G-5.3): qa_m59_save_vacio.gd 3/0 (estado primer minuto, dirty limpio). <!-- fuente: 59-Guardado/05-Checklist.md -->
 58. - [ ] [59] Guardar durante un festival con estado consistente (M74) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-59. - [ ] [59] Testear doble guardado simultáneo (cola) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+59. - [x] [59] Testear doble guardado simultáneo (cola) [C] · [x] T18-M59 (G-5.3): cola FIFO determinista con 2 request_save mismo frame — qa_m59_doble_guardado.gd 3/0; flips 59-Guardado/05 (67/62/1). <!-- fuente: 59-Guardado/05-Checklist.md -->
 60. - [ ] [59] Feedback de guardado visible y legible [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
 61. - [ ] [59] Confirmaciones accesibles por gamepad (M57) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 62. - [ ] [59] Diálogos de aviso con opciones claras [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
 63. - [ ] [59] Testear menú con Reduce Motion (M58) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 64. - [ ] [59] Testear con texto grande (M58) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-65. - [ ] [59] Verificar con verificar_checklist.py (sin alertas nuevas) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+65. - [x] [59] Verificar con verificar_checklist.py (sin alertas nuevas) [S] · [x] T17-M59 (G-5.3): módulo limpio para 59 (drifts ajenos 36/50/55/58/62/90 reportados al canal). <!-- fuente: 59-Guardado/05-Checklist.md -->
 66. - [ ] [59] Push del módulo y reporte al usuario [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
 67. - [ ] [59] Marcar ítems solo al cumplir la DoD (sección 21.6) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
-68. - [ ] [59] Revisar que plan-inicial == plan-actual (SHA-256) [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
-69. - [ ] [59] Confirmar 130 ítems exactos [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+68. - [x] [59] Revisar que plan-inicial == plan-actual (SHA-256) [S] · [x] T17-M59 (G-5.3): plan-inicial intacto (git status/diff = 0 cambios). <!-- fuente: 59-Guardado/05-Checklist.md -->
+69. - [x] [59] Confirmar 130 ítems exactos [S] · [x] T17-M59 (G-5.3): 130 exactos medidos (66/63/1 post-flips, normalizado). <!-- fuente: 59-Guardado/05-Checklist.md -->
 70. - [ ] [58] Verificar legibilidad de la UI de M53 con escala 200 % sin cortes [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 71. - [ ] [58] RF12: auditar que ningún puzzle dependa de oír un sonido específico [C] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->
 72. - [ ] [58] RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M] <!-- fuente: 58-Accesibilidad/05-Checklist.md -->

@@ -591,3 +591,29 @@ el frame con render — eso sigue siendo Play Mode (**L213 no se cierra** con es
 - El autor no puede auto-verificarse (trampa 46/119). El delta de T-D9 queda para un NO-autor.
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy), 2026-10-05 — Log 1325.
+
+## Tanda 71 — L154 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2035)
+
+**Cambio de producción en `memory_monitor.gd` (M62):** se implementó el diferido de 1 frame
+para el cambio de banco de audio por bioma, sin tocar M42.
+
+- `avisar_cambio_bioma_audio(banco_nuevo: RefCounted) -> bool`: si el banco es el mismo devuelve
+  `false` (no-op); si hay un pendiente anterior lo suelta YA (dos cambios en el mismo frame no
+  acumulan); deja el banco anterior como `_audio_banco_pendiente` y el nuevo como actual; devuelve
+  `true`.
+- `_procesar_liberacion_audio()`: se llama desde `_process`; el primer `_process` tras el cambio
+  solo marca el paso, el siguiente suelta el banco pendiente. Así el banco anterior sobrevive al
+  menos un frame completo de transición y no se corta el audio.
+- Getters de medición: `audio_banco_actual()`, `audio_banco_pendiente()`,
+  `audio_liberaciones_diferidas()`, `audio_ultimo_liberado()`.
+- Acepta `Resource` y `RefCounted` puro; no exige assets de audio ni el decoder.
+
+**Alcance:** M42 (`ambient_director.gd`) sigue read-only. El cableado real
+`set_bioma() -> avisar_cambio_bioma_audio()` queda como deuda declarada de M42 en
+`07-Resultados-Testings.md` §12; esta tanda mide el contrato del mecanismo con el autoload real.
+
+**Suite:** `test_m62_bioma_audio_diferido.gd` — **47 checks, 0 fallos, ×3 idénticas**;
+guardián de 3 capas probado EN ROJO (piso 999); regresión de 18 suites + budgets.
+Evidencia: `out/tanda71/`.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 71.

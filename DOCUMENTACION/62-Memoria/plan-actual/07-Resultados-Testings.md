@@ -576,3 +576,25 @@ el frame equivocado. (Esa fue la 1.ª corrida en rojo: `21 checks, 1 fallo`.)
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_m62_buses_m91.gd
 ```
+
+## 23. Tanda 71 (2026-10-20, DS-Opencode, Log 2035): L154 — cambio de bioma con descarga diferida 1 frame
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L154: "Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones)".
+- **Cambio de producción (`memory_monitor.gd`):** `avisar_cambio_bioma_audio(banco_nuevo: RefCounted) -> bool` deja el banco anterior PENDIENTE y el nuevo ACTUAL; `_procesar_liberacion_audio()` suelta el pendiente con un frame completo de margen; mismo banco = no-op; dos cambios en el mismo frame sueltan el intermedio YA; getters de medición. Acepta `RefCounted` puro.
+- **Suite nueva:** `test_m62_bioma_audio_diferido.gd` (**47 checks**) con el autoload REAL `MemoryMonitor` vía `--headless --script`:
+  - **Base (1):** autoload disponible.
+  - **A (6):** primer banco: ACTUAL, sin PENDIENTE, sin liberaciones ni último liberado.
+  - **B (13):** cambio a→b: anterior PENDIENTE y VIVO en el frame; con el margen muere (WeakRef), se cuenta 1 y el ACTUAL es b.
+  - **C (3):** mismo banco = no-op; sin pendiente ni liberación espuria.
+  - **D (13):** dos cambios en el mismo frame: el intermedio se suelta YA (2), el segundo queda PENDIENTE y muere con el margen (3).
+  - **E (11):** `RefCounted` puro: mismo ciclo sin acumulación (4 y 5 liberaciones).
+- **Resultado:** 47 checks, 0 fallos, **×3 corridas idénticas** (corridas 1/2/3 del archivo final, exit 0, 58 líneas de test normalizadas idénticas; se filtra el ruido no determinista del arranque del mundo). La corrida de calibración inicial también midió 47 checks pero con piso 46; se elevó el piso a 47 y se repitieron las 3. Evidencia: `out/tanda71/suite_corrida{1..3}.log`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 47 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda71/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `fbe56577…`).
+- **Regresión:** 18 suites M62 (las 17 del set T70 + la nueva) + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25/33/24/24/45/57/46/40/47 checks + budgets; `out/tanda71/reg_*.log`).
+- **Alcance (lo que NO prueba):** M42 (`ambient_director.gd`) sigue read-only; el cableado `set_bioma() -> avisar_cambio_bioma_audio()` queda como deuda declarada de M42 (§12). Sin assets de audio se usan bancos `Resource`/`RefCounted` sintéticos: se mide el contrato del mecanismo, no el decoder.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_bioma_audio_diferido.gd
+```

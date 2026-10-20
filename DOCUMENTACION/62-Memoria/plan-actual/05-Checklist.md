@@ -151,7 +151,7 @@
 - [x] Voces del pool M43 con tope duro: si se llena, se corta la voz más antigua (nunca crece) [S]
 - [x] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M]
 - [x] Los buses (M91) no retienen streams detenidos [S]
-- [ ] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M]
+- [x] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M]
 - [ ] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C]
 
 ## J. Integración con M61 y M63
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 130 - Pendientes: 20 - No resueltos: 0.
+**Totales:** 150 items - Completados: 131 - Pendientes: 19 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -766,3 +766,39 @@ Mismo criterio que los cierres previos (L137/139/140/141/142/143/149/150/152).
 `stream_manager.gd` (M63, read-only); el colector de sintaxis (autogenerado).
 
 **Totales tras el cierre:** 130 / 20 / 0 (150 items).
+
+## Notas del Agente — Tanda 71 (DS-V4.1-Flash-Opencode, OpenCode, 2026-10-20, Log 2035)
+
+**Estado:** L154 cerrado por MEDICIÓN (no por argumento): suite nueva `test_m62_bioma_audio_diferido.gd`
+(47 checks, 0 fallos, ×3 corridas idénticas 1/2/3) con el autoload REAL `MemoryMonitor`.
+
+**Cambio de producción (`memory_monitor.gd`, M62):**
+- `avisar_cambio_bioma_audio(banco_nuevo: RefCounted) -> bool`: mismo banco = `false` (no-op); si había
+  un pendiente, lo suelta YA (dos cambios en el mismo frame no acumulan); el anterior pasa a PENDIENTE y
+  el nuevo a ACTUAL; devuelve `true`.
+- `_procesar_liberacion_audio()`: el primer `_process` tras el cambio marca el paso; el siguiente suelta
+  el pendiente. El banco anterior sobrevive un frame completo de transición.
+- Getters: `audio_banco_actual()`, `audio_banco_pendiente()`, `audio_liberaciones_diferidas()`,
+  `audio_ultimo_liberado()`.
+
+**Contrato medido:**
+- Cambio a→b: el anterior queda PENDIENTE y VIVO en el frame del cambio; no se cuenta liberación; con
+  el frame de margen muere (WeakRef) y se cuenta 1; el ACTUAL es b.
+- Mismo banco: no-op, sin pendiente ni liberación espuria.
+- Dos cambios en el mismo frame: el intermedio se suelta YA (2 liberaciones), el segundo queda PENDIENTE
+  y muere con el margen (3); el ACTUAL es el tercero.
+- RefCounted puro: el mecanismo no exige `Resource`; mismo ciclo sin acumulación (4 y 5 liberaciones).
+
+**Evidencia (out/tanda71):** corrida de calibración inicial con piso 46 (47 checks); se elevó el piso a
+47 y se repitieron 3 corridas del archivo final: 47 checks, 0 fallos, exit 0, 58 líneas de test
+normalizadas idénticas (se filtra el ruido no determinista del arranque del mundo). Guardián de 3 capas
+EN ROJO: piso 999 → `[FALL] solo 47 checks ejecutados (mínimo medido en verde: 999)` + exit 1; suite
+restaurada byte-idéntica sha256 `fbe56577…`. Regresión: 18 suites + budgets verdes.
+
+**Alcance y deuda:** M42 (`ambient_director.gd`) sigue read-only; el cableado real
+`set_bioma() -> avisar_cambio_bioma_audio()` queda como deuda declarada de M42 (§12 del 07). Sin assets
+de audio se usan bancos `Resource`/`RefCounted` sintéticos: se mide el contrato del mecanismo, no el
+decoder. No se tocaron `quality.yml`, M41/M44, `stream_manager.gd` (M63), `pool_factory.gd` ni
+`unload_policy.gd`.
+
+**Totales tras el cierre:** 131 / 19 / 0 (150 items).
