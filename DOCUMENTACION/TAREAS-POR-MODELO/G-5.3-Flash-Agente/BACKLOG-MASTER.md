@@ -54,9 +54,9 @@
 
 11. `test_settings_audio_roundtrip.gd` re-verificación semanal (79/0 esperado — el pie de checks fue medido).
   · VERIFICADO 2026-10-18 00:29 (G-5.3-Flash-Agente, Kilo Code): **79 checks / 0 fallos** (corrida durante la tanda #102 — evidencia en informe 007 del canal y log 1953).
-12. `test_templo_m26.gd` re-verificación (110/0 — el que double-verifiqué).
+12. [x] `test_templo_m26.gd` re-verificación (110/0 — el que double-verifiqué).
   · VERIFICADO 2026-10-18 01:00 (G-5.3-Flash-Agente, Kilo Code): **110 checks / 0 fallos** (ruta real `res://scripts/templos/test_templo_m26.gd`; el arquetipo `res://scripts/test_templo_m26.gd` de esta línea NO existe — aclarado por File not found).
-13. Run de `quality.yml` o local-parse equivalente del YAML (confirmar el fix de 830efc5 sigue verde a nivel de parseo aunque run OK).
+13. [x] Run de `quality.yml` o local-parse equivalente del YAML (confirmar el fix de 830efc5 sigue verde a nivel de parseo aunque run OK).
   · VERIFICADO 2026-10-18 01:00 (G-5.3-Flash-Agente, Kilo Code): PyYAML `safe_load` OK — dict, 12 jobs presentes (godot-lint, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, binary-guard, log-protocol, architecture-guard, checklist-orchestrator, release-gate, summary). Sin errores de parseo.
 14. Spot-check de los 5 flips de M91 en `settings_audio_layer.gd` (qué fueron flips de L201-L204 + L210).
   · VERIFICADO 2026-10-18 00:58 UTC (G-5.3-Flash-Agente): 4 sliders con buses Ambient/Voice/UI/Cinematic (L113-116, BUSES_SECCION = 7 buses exactos en L38) + dropdown dispositivo (_crear_fila_dispositivo L244, _opt_dispositivo L58/261) + claves 4/4 en es/en (strings L109-112). Notas: el claim Slider_Ambient ahora vive como dict _sliders[bus] (refactor de nombre, no regresion); drift de lineas L236-253 a L244 (benigno).
@@ -417,8 +417,8 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 21. - [ ] [16] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de <!-- fuente: 16-Crafting/05-Checklist.md -->
 22. - [ ] [16] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con <!-- fuente: 16-Crafting/05-Checklist.md -->
 23. - [ ] [16] RF-MR11: feedback cozy — el fallo por materiales **no dana** la herramienta (no es <!-- fuente: 16-Crafting/05-Checklist.md -->
-24. - [ ] [16] RF-MR12: panel de mejora en la estacion: nivel actual, coste del siguiente nivel, <!-- fuente: 16-Crafting/05-Checklist.md -->
-25. - [ ] [16] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a <!-- fuente: 16-Crafting/05-Checklist.md -->
+24. - [x] [16] RF-MR12: panel de mejora en la estacion: nivel actual, coste del siguiente nivel,  · [x] T40b-M16: panel + estados + techo — qa_m16_panel_mejora.gd 11/0.<!-- fuente: 16-Crafting/05-Checklist.md -->
+25. - [x] [16] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a  · [x] T40b-M16: preview textual en panel MR12 (iconos gráficos extensión del dueño UI).<!-- fuente: 16-Crafting/05-Checklist.md -->
 26. - [ ] [16] RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del modulo [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
 27. - [ ] [16] RF-MR15: M13 consume `efectividad(tipo, nivel)` para el escalado de rendimiento <!-- fuente: 16-Crafting/05-Checklist.md -->
 28. - [ ] [16] RF-MR16: M13 consume `durabilidad_maxima(tipo, nivel)` como techo al aplicar la <!-- fuente: 16-Crafting/05-Checklist.md -->

@@ -38,7 +38,7 @@ func _correr() -> void:
 	ui._on_seleccionar(cs.obtener_receta("rec_hacha_cobre"))
 	await process_frame
 	_check(ui._mejora_box.visible == true, "MR12 panel visible para herramienta", "oculto")
-	_check(String(ui._mejora_label.text).contains("0/3"), "nivel 0/3 mostrado", "nivel: %s" % ui._mejora_label.text)
+	_check(str(ui._mejora_label.text).contains("0/3"), "nivel 0/3 mostrado", "nivel: %s" % ui._mejora_label.text)
 
 	# (c) Sin materiales → botón deshabilitado.
 	inv.remover_items({"madera_roble": inv.count_item("madera_roble", true), "mineral_cobre": inv.count_item("mineral_cobre", true)})
@@ -53,14 +53,14 @@ func _correr() -> void:
 	cs.herramienta_mejorada.connect(func(_i, _n): mejoras[0] += 1)
 	ui._btn_mejorar.pressed.emit()
 	_check(mejoras[0] == 1 and cs._nivel_de("hacha_cobre") == 1, "click mejora: nivel 1 + señal", "mejora falló")
-	_check(String(ui._mensaje_label.text).contains("OK"), "feedback cozy en el panel", "sin mensaje")
-	_check(String(ui._mejora_label.text).contains("1/3") and String(ui._mejora_label.text).contains(String(cs.durabilidad_maxima("hacha", 2))), "panel refrescado (1/3, durabilidad 200)", "sin refresh")
+	_check(str(ui._mensaje_label.text).contains("OK"), "feedback cozy en el panel", "sin mensaje")
+	_check(str(ui._mejora_label.text).contains("1/3") and str(ui._mejora_label.text).contains(str(cs.durabilidad_maxima("hacha", 2))), "panel refrescado (1/3, durabilidad 200)", "sin refresh")
 
 	# (e) Techo → deshabilitado + mensaje MEJORA_MAXIMA.
 	cs._niveles_mejora["hacha_cobre"] = 3
 	ui._refrescar_mejora()
 	_check(ui._btn_mejorar.disabled == true, "techo deshabilita", "techo habilitado")
-	_check(String(ui._mejora_label.text).contains("Mejora máxima"), "mensaje de techo visible", "sin techo")
+	_check(str(ui._mejora_label.text).contains("Mejora máxima"), "mensaje de techo visible", "sin techo")
 
 	# (f) Limpieza del autoload.
 	cs._niveles_mejora.erase("hacha_cobre")
