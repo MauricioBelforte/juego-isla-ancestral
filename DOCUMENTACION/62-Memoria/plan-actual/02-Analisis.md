@@ -70,3 +70,29 @@
 | Presupuesto superado en preset Baja durante tormenta (clima + audio + partículas) | D10 degradación ordenada y registro en log; el juego nunca crashea por memoria |
 | Medidas muertas (monitor que avisa pero no actúa) | Enforcement duro al 95% sin excepción + tests de semáforo forzado |
 | Datos de partida (M29) que retengan Nodos del mundo | L98 verificado en runtime (39 proveedores + payload de `collect()` = 0 Objects, suite `test_m62_pureza_save.gd`) y en estatico (regla C de `auditar_arquitectura_m62.py`) |
+
+## 5. Cross-check M61 ↔ M62 (Tanda 73, 2026-10-20)
+
+**Fuente M61:** `game/isla-ancestral/data/performance/budgets.json` (version 2) + gate
+`validate_budget.gd`. **Fuente M62:** `game/isla-ancestral/data/rendimiento/budgets.json`
+(version 2) + generador validante `generar_budgets.gd -- --check`.
+
+| Eje | M61 (presupuesto base publicado) | M62 (topes duros) | Veredicto |
+|---|---|---|---|
+| Tiempo de frame | 16,7 ms totales; tolerancia CI 10%; 7 categorías que suman 16,5 ms | No fija ms; su liberación se escalona por frame (3 default; 8/12/16 por preset) | Sin conflicto: M62 no consume el frame completo; RN2 medido 2,1–5,8 ms por lote < 50 ms |
+| RAM | No fija un total de RAM; sí declara hardware mínimo/recomendado | Baja 1500 MB / Media 2000 MB / Alta 2500 MB, suma exacta de 8 sistemas | Sin conflicto: M62 aporta el total que M61 no fija |
+| Calidad | 60 FPS objetivo / 30 mínimo; 1080p; presets de dibujado 100/150/220 m; LOD 3; 20 NPCs | Presets Baja/Media/Alta alineados a M90 (1.5/2.0/2.5 GB) | Sin conflicto: ejes distintos (tiempo/cantidad vs RAM) |
+| Límites de cantidad | Partículas 500/cámara; draw calls 400; objetos de mundo 1000 | No duplica esos límites; su tabla es por sistema de memoria | Complementarios; M62 no contradice los topes de M61 |
+| Carga | Fría < 30 s, caliente < 10 s (SSD); HDD no soportado | No fija tiempos de carga; el handshake M63 decide carga y el 62 descarga | Sin conflicto |
+| Deuda M61 | VRAM por escena, instancias por chunk y draw calls siguen `[ ]` en M61 | Los topes RAM no dependen de esas tres deudas | Deuda declarada de M61; no invalida los topes del 62 |
+
+**Evidencia ejecutada (2026-10-20, Tanda 73):**
+
+- `out/tanda73/m61_validate_budget.log`: `[M61] limites: 3 ...`, `[M61] normas: 12 ...`,
+  `=== VALIDATE BUDGET M61: 0 fallo(s) ===`, rc=0.
+- `out/tanda73/m62_generar_budgets_check.log`: 3 presets × 8 sistemas, sumas 1500/2000/2500,
+  `=== Resumen generador budgets: 20 checks, 0 fallos ===`, `BUDGETS OK`, rc=0.
+
+**Conclusión:** los topes duros del 62 quedan fijados contra la tabla base de M61 disponible y
+validada; no se tocó M61 ni se introdujo código de producción. La deuda de VRAM/instancias/draw
+calls de M61 queda fuera del alcance de M62 y se registra como tal.

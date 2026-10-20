@@ -271,7 +271,7 @@ Log reservado: 512
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
-**Totales:** 203 items - Completados: 167 - Pendientes: 23 - No resueltos: 13. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-19 tras el flip del ítem 'Filtros de temporada': el conteo real era 160 [x] pre-flip vs 157 declarados — drift preexistente de +3 marcas ya-buenas que la línea anterior no contabilizaba; total 203 y [?] 13 sin cambios. Regla §21.8.2.b regla 5.) (Corregido agnes-3-flash 2026-10-14: +2 flips recitados a 02-Analisis §D3/§4, eliminado L140 duplicado per encargo mimo #392)
+**Totales:** 203 items - Completados: 176 - Pendientes: 13 - No resueltos: 14. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-19 — tanda 28 MR1-MR7 +7; el conteo de 'item 11' mantenía +1 fantasma por doble-atribución corregida. 174/16/13 = 203.)
 
 > **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
 > seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por
@@ -300,26 +300,26 @@ Log reservado: 512
 
 ### N.1 Contrato y modelo de datos (7)
 
-- [ ] RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con
-  retorno honesto `{ok, motivo, nivel_anterior, nivel_nuevo}` (sin consumir si falla) [M]
-- [ ] RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad
-  de la herramienta al maximo de su nivel actual, retorno honesto idem [M]
-- [ ] RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta
+- [x] RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con
+  retorno honesto `{ok, motivo, nivel_anterior, nivel_nuevo}` (sin consumir si falla) [M] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — «mejora 0->1 con retorno honesto» + «sin materiales: no consume ni emite» + techo «motivo nivel_maximo» + «item no-herramienta rechazado».
+- [x] RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad
+  de la herramienta al maximo de su nivel actual, retorno honesto idem [M] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — «reparar OK con señal» + «durabilidad objetivo = máximo del nivel actual» (M13 aplica el techo real en MR16).
+- [x] RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta
   (hacha/martillo/azada/machete) con `coste_nivel[N]` (materiales por nivel) y `nivel_maximo`
-  por tipo [M]
-- [ ] RF-MR4: funciones de balance `durabilidad_maxima(tipo, nivel)` y
-  `efectividad(tipo, nivel)` — curva por tipo que M13 consume para escalado [M]
-- [ ] RF-MR5: integracion con M14 — mejorar/reparar consumen materiales del inventario via
-  `InventoryService`; fallo con motivo `materiales_insuficientes` **sin consumo parcial** [M]
-- [ ] RF-MR6: senales `herramienta_mejorada(item_id, nivel)` y
-  `herramienta_reparada(item_id, durabilidad)` emitidas solo en exito [S]
-- [ ] RF-MR7: persistencia del `nivel_mejora` por item en el save de M59 (campo aditivo,
-  sin romper partidas existentes) [M]
+  por tipo [M] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — schema creado (4 tipos, 3 niveles c/u, coste_reparacion por tipo, duracion_base/por_nivel, efectividad_por_nivel); «inventario + schema MR3 cargados».
+- [x] RF-MR4: funciones de balance `durabilidad_maxima(tipo, nivel)` y
+  `efectividad(tipo, nivel)` — curva por tipo que M13 consume para escalado [M] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — «durabilidad_maxima curva nivel 3 (250)» + «efectividad nivel 2 = 1.30».
+- [x] RF-MR5: integracion con M14 — mejorar/reparar consumen materiales del inventario via
+  `InventoryService`; fallo con motivo `materiales_insuficientes` **sin consumo parcial** [M] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — «materiales descontados exactos (RF-MR5)» (coste por nivel exacto) + fallo sin consumo («sin materiales: no consume ni emite»).
+- [x] RF-MR6: senales `herramienta_mejorada(item_id, nivel)` y
+  `herramienta_reparada(item_id, durabilidad)` emitidas solo en exito [S] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — «señal herramienta_mejorada emitida 1 vez» (y 0 con fallo) + «reparar OK con señal».
+- [x] RF-MR7: persistencia del `nivel_mejora` por item en el save de M59 (campo aditivo,
+  sin romper partidas existentes) [M] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — «save contiene nivel_mejora» + «restore de save viejo (sin campo) no rompe» + «restore recupera nivel».
 
 ### N.2 Estacion (4)
 
-- [ ] RF-MR8: decision de estacion documentada en `03-Diseno.md` — estacion nueva
-  (`yunque_de_mejora`) o reutilizacion de la fogata existente, con la justificacion [S]
+- [x] RF-MR8: decision de estacion documentada en `03-Diseno.md` — estacion nueva
+  (`yunque_de_mejora`) o reutilizacion de la fogata existente, con la justificacion [S] → **G-5.3-Flash-Agente (2026-10-20):** sección 'Mejora y reparación de herramientas (bloque MR)' agregada a `16-Crafting/03-Diseno.md` — **decisión: reutilizar la MESA_TRABAJO existente** (coherencia cozy: las herramientas ya se fabrican ahí; sin mesh/objeto de mundo nuevo; una puerta única 'trabajo fino'). Descartes documentados (fogata = cocina; yunque = futuro contenido). Consecuencias: MR12/MR13 viven en crafting_ui de la estación; MR10 service-side ya implementado; MR9 (stations.json) queda [ ] — el archivo NO existe (dueño M93 define estructura).
 - [ ] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de
   mejora y reparacion por tipo de herramienta [M]
 - [ ] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con
@@ -347,9 +347,9 @@ Log reservado: 512
 
 ### N.5 Testing y QA (3)
 
-- [ ] RF-MR18: test headless `_test_mejora_reparacion` — mejora consume materiales y sube
-  nivel, reparacion restaura durabilidad, fallo por materiales no consume ni dana [C]
-- [ ] RF-MR19: sonda en ROJO del umbral (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S]
+- [x] RF-MR18: test headless `_test_mejora_reparacion` — mejora consume materiales y sube
+  nivel, reparacion restaura durabilidad, fallo por materiales no consume ni dana [C] → **G-5.3-Flash-Agente (2026-10-20):** función agregada a `test_crafting.gd` (llamada en _run tras season_changed_runtime; el caso de restore con save viejo NO corre acá para no limpiar el boot — cubierto en `qa_m16_mejora_reparacion.gd`). Suite completa **0 fallos, EXIT 0** con la sección '--- N.5 Mejora y reparación de herramientas ---' en verde: schema, fallo cozy sin consumo, descuento exacto, señales, reparar/durabilidad, MR7 save, techo. (El `[C]` bajó de peso: el caso pesado de 3-contenedores ya está en `qa_m16_rollback_lleno.gd` 8/0 del ítem 11.)
+- [?] RF-MR19: sonda en ROJO del umbral (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S] — **G-5.3-Flash-Agente (2026-10-20): NO APLICA tal como está redactado**: `test_crafting.gd` NO tiene umbral `CHECKS_MINIMOS` (grep = 0 hits); la sonda de umbral mutación-restauro vive en `test_fast_travel_headless.gd` (M69, riel propio mío, ya blindada con guard y ajustada a medido en cada tanda — 55→33→44→55 etc.). Si el dueño quiere la sonda EN ESTE suite, primerio agregar el piso (nuevo ítem); no se inventa un umbral para flipar. [?] honesto §21.3.6.
 - [ ] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S]
 
 ### N.6 Documentacion y desbloqueo (2)

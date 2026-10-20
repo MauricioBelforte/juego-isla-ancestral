@@ -19,6 +19,9 @@ signal crafting_failed(recipe: CraftingRecipe, motivo: String)
 signal experimento_fallido(estacion: int)
 signal pergamino_consumido(rec_id: String, aprendido: bool)  # false = ya conocida, no consume
 signal receta_bloqueada_estacion(rec_id: String)  # RF5: conocida pero fuera de temporada
+# RF-MR6 (N.1): señales de mejora/reparación — solo en éxito.
+signal herramienta_mejorada(item_id: String, nivel: int)
+signal herramienta_reparada(item_id: String, durabilidad: int)
 
 const SECCION_SAVE := "crafting"
 
@@ -30,6 +33,12 @@ var _estacion_actual: int = 0
 var _estacion_cache_valida: bool = false
 
 var _cache_iconos: Dictionary = {}  # M16 item [20]: pool ligero icono de recetas (item_id -> Texture2D)
+
+## RF-MR (N.1): mejora/reparación de herramientas. Schema data-driven desde
+## data/crafting/mejora_herramienta.json (tabla por tipo + curvas de balance).
+var _mejora_cfg: Dictionary = {}
+## RF-MR7: nivel de mejora por item_id (persistencia aditiva en M59).
+var _niveles_mejora: Dictionary = {}
 
 ## false = instancia de test: no registra provider (evita colisión de sección
 ## "crafting" con el autoload del boot). Setear ANTES de add_child.
@@ -48,6 +57,7 @@ func _ready() -> void:
 		print("[M16] RF17: use_item de M14 conectado (pergaminos)")
 	_refrescar_estacion_actual()
 	_cargar_recetas()
+	_cargar_mejora_cfg()
 	if registra_en_save:
 		_registrar_proveedor_guardado()
 	# Feedback procedural (SFX/VFX) como hijo del servicio (autoload)
@@ -342,6 +352,83 @@ func experimentar(estacion: int, combinacion: Dictionary) -> CraftingRecipe:
 	_experimentos_fallidos += 1
 	return null
 
+## ── RF-MR: mejora y reparación de herramientas (N.1) ─────
+
+## RF-MR3: carga el schema data/crafting/mejora_herramienta.json (data-driven).
+func _cargar_mejora_cfg() -> void:
+	var ruta := "res://data/crafting/mejora_herramienta.json"
+	if not FileAccess.file_exists(ruta):
+		push_warning("[M16] MR3: schema de mejora de herramientas ausente")
+		return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(ruta))
+	if typeof(parsed) == TYPE_DICTIONARY:
+		_mejora_cfg = parsed
+
+## Tipo de herramienta ('hacha'/'martillo'/'azada'/'machete') desde el id del
+## item (convención de prefijo; M13 define la marca definitiva — MR10 pendiente).
+func _tipo_de(item_id: String) -> String:
+	for tipo in _mejora_cfg.get("tipos", {}):
+		if String(item_id).begins_with(String(tipo) + "_"):
+			return String(tipo)
+	return ""
+
+## RF-MR4: durabilidad máxima por tipo y nivel (curva aditiva).
+func durabilidad_maxima(tipo: String, nivel: int) -> int:
+	var base: int = int(_mejora_cfg.get("duracion_base", {}).get(tipo, 0))
+	var pasos: int = int(_mejora_cfg.get("duracion_por_nivel", 0))
+	return base + pasos * maxi(0, nivel)
+
+## RF-MR4: factor de efectividad por tipo y nivel (M13 escala con esto, MR15).
+func efectividad(tipo: String, nivel: int) -> float:
+	var paso: float = float(_mejora_cfg.get("efectividad_por_nivel", 0.15))
+	return 1.0 + paso * maxi(0, nivel)
+
+func _nivel_de(item_id: String) -> int:
+	return int(_niveles_mejora.get(item_id, 0))
+
+## RF-MR1: mejorar una herramienta un nivel (consume materiales, retorno honesto).
+func mejorar_herramienta(item_id: String) -> Dictionary:
+	var tipo := _tipo_de(item_id)
+	if tipo == "" or not _mejora_cfg.get("tipos", {}).has(tipo):
+		return {"ok": false, "motivo": "no_es_herramienta", "nivel_anterior": -1, "nivel_nuevo": -1}
+	var nivel_anterior := _nivel_de(item_id)
+	var cfg: Dictionary = _mejora_cfg["tipos"][tipo]
+	if nivel_anterior >= int(cfg.get("nivel_maximo", 0)):
+		return {"ok": false, "motivo": "nivel_maximo", "nivel_anterior": nivel_anterior, "nivel_nuevo": nivel_anterior}
+	var costes: Array = cfg.get("coste_nivel", [])
+	var idx := nivel_anterior
+	if idx < 0 or idx >= costes.size():
+		return {"ok": false, "motivo": "coste_ausente", "nivel_anterior": nivel_anterior, "nivel_nuevo": nivel_anterior}
+	var coste: Dictionary = costes[idx]
+	var inv = get_node_or_null("/root/Inventario")
+	if inv == null:
+		return {"ok": false, "motivo": "sin_inventario", "nivel_anterior": nivel_anterior, "nivel_nuevo": nivel_anterior}
+	# RF-MR5: consumo todo-o-nada vía InventoryService (sin consumo parcial).
+	if not inv.remover_items(coste):
+		return {"ok": false, "motivo": "materiales_insuficientes", "nivel_anterior": nivel_anterior, "nivel_nuevo": nivel_anterior}
+	var nivel_nuevo := nivel_anterior + 1
+	_niveles_mejora[item_id] = nivel_nuevo
+	herramienta_mejorada.emit(item_id, nivel_nuevo)  # RF-MR6, solo en éxito
+	return {"ok": true, "motivo": "", "nivel_anterior": nivel_anterior, "nivel_nuevo": nivel_nuevo}
+
+## RF-MR2: reparar restaurando la durabilidad objetivo al máximo del nivel actual.
+## El estado de durabilidad actual lo aplica M13 (techo MR16); aquí se valida,
+## se consume el coste de reparación y se emite la durabilidad objetivo.
+func reparar_herramienta(item_id: String) -> Dictionary:
+	var tipo := _tipo_de(item_id)
+	if tipo == "" or not _mejora_cfg.get("tipos", {}).has(tipo):
+		return {"ok": false, "motivo": "no_es_herramienta"}
+	var cfg: Dictionary = _mejora_cfg["tipos"][tipo]
+	var coste: Dictionary = cfg.get("coste_reparacion", {})
+	var inv = get_node_or_null("/root/Inventario")
+	if inv == null or coste.is_empty():
+		return {"ok": false, "motivo": "sin_inventario"}
+	if not inv.remover_items(coste):
+		return {"ok": false, "motivo": "materiales_insuficientes"}
+	var durabilidad: int = durabilidad_maxima(tipo, _nivel_de(item_id))
+	herramienta_reparada.emit(item_id, durabilidad)  # RF-MR6, solo en éxito
+	return {"ok": true, "motivo": "", "_durabilidad": durabilidad}
+
 ## ── Persistencia (RF17 / M59) ────────────────────────────
 
 func _registrar_proveedor_guardado() -> void:
@@ -353,12 +440,16 @@ func get_section_name() -> String:
 	return SECCION_SAVE
 
 func get_save_data() -> Dictionary:
-	return {"recetas_conocidas": _conocidas.duplicate()}
+	return {"recetas_conocidas": _conocidas.duplicate(), "niveles_mejora": _niveles_mejora.duplicate()}
 
 func restore_save_data(data: Dictionary) -> void:
 	_conocidas.clear()
 	for rec_id in data.get("recetas_conocidas", []):
 		_conocidas.append(str(rec_id))
+	# RF-MR7: campo ADITIVO — saves viejos sin 'niveles_mejora' no se rompen.
+	var niveles: Variant = data.get("niveles_mejora", {})
+	if typeof(niveles) == TYPE_DICTIONARY:
+		_niveles_mejora = niveles.duplicate()
 
 ## M16 item [20]: pool ligero de iconos de recetas. Key = rec_id; el icono
 ## proviene del ITEM resultado (ItemData.icono vía ItemDatabase, M159).

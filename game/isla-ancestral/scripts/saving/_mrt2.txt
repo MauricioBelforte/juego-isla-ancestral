@@ -1,0 +1,7 @@
+== n13: RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con <!-- fuente: 16-Crafting/05-Checklist.md -->
+== n14: RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad <!-- fuente: 16-Crafting/05-Checklist.md -->
+== n15: RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta <!-- fuente: 16-Crafting/05-Checklist.md -->
+== n16: RF-MR4: funciones de balance `durabilidad_maxima(tipo, nivel)` y <!-- fuente: 16-Crafting/05-Checklist.md -->
+== n17: RF-MR5: integracion con M14 — mejorar/reparar consumen materiales del inventario via <!-- fuente: 16-Crafting/05-Checklist.md -->
+== n18: RF-MR6: senales `herramienta_mejorada(item_id, nivel)` y <!-- fuente: 16-Crafting/05-Checklist.md -->
+== n19: RF-MR7: persistencia del `nivel_mejora` por item en el save de M59 (campo aditivo, <!-- fuente: 16-Crafting/05-Checklist.md -->

@@ -35,6 +35,7 @@ func _run() -> void:
 	_test_pergamino_m14()
 	_test_feedback_cargado()
 	_test_season_changed_runtime()
+	_test_mejora_reparacion()
 	_test_registro_duplicados()
 	_test_rollback_bolsa_llena()
 	print("=== TEST M16 CRAFTING: %d fallo(s) ===" % _fallos)
@@ -299,3 +300,61 @@ func _test_rollback_bolsa_llena() -> void:
 		"cobre exacto tras rollback (%d vs %d)" % [_inv.count_item("mineral_cobre", true), antes_cobre])
 	_check(_inv.count_item("pico_cobre", true) == antes_pico,
 		"sin picos creados tras rollback (%d vs %d)" % [_inv.count_item("pico_cobre", true), antes_pico])
+
+## RF-MR18 / N.5: mejorar consume materiales y sube nivel; reparar restaura con
+## señal; fallo sin materiales no consume ni daña (cozy). USA el autoload real:
+## no llama restore_save_data (para no limpiar _conocidas del boot — ese caso
+## lo cubre qa_m16_mejora_reparacion.gd standalone).
+func _test_mejora_reparacion() -> void:
+	print("--- N.5 Mejora y reparación de herramientas (MR1/2/4/5/6) ---")
+	var item_id := "hacha_cobre"
+	var cfg: Dictionary = _cs._mejora_cfg.get("tipos", {}).get("hacha", {})
+	_check(cfg.get("nivel_maximo", -1) == 3, "schema MR3 cargado (nivel_maximo hacha = 3)")
+	_cs._niveles_mejora.erase(item_id)
+	var mejoras := [0]
+	var reparaciones := [0]
+	_cs.herramienta_mejorada.connect(func(_i, _n): mejoras[0] += 1)
+	_cs.herramienta_reparada.connect(func(_i, _d): reparaciones[0] += 1)
+
+	# Sin materiales: fallo honesto sin consumo ni señales.
+	var antes_madera: int = _inv.count_item("madera_robusta", true)
+	var r_sin: Dictionary = _cs.mejorar_herramienta(item_id)
+	_check(r_sin.get("ok") == false and r_sin.get("motivo") == "materiales_insuficientes",
+		"MR1/5 mejora sin materiales = materiales_insuficientes")
+	_check(_inv.count_item("madera_robusta", true) == antes_madera and mejoras[0] == 0,
+		"MR5/11 fallo cozy: no consume, no dana, no emite")
+
+	# Con materiales: mejora 0->1 con descuento exacto.
+	var coste: Dictionary = cfg.get("coste_nivel", [{}])[0]
+	var antes: Dictionary = {}
+	for it in coste:
+		_inv.agregar_items({String(it): int(coste[it]) + 2})
+		antes[String(it)] = _inv.count_item(String(it), true)
+	var r_ok: Dictionary = _cs.mejorar_herramienta(item_id)
+	_check(r_ok.get("ok") == true and r_ok.get("nivel_anterior") == 0 and r_ok.get("nivel_nuevo") == 1,
+		"MR1 mejora 0->1 con retorno honesto")
+	var desconto := true
+	for it in coste:
+		if _inv.count_item(String(it), true) != int(antes[String(it)]) - int(coste[it]):
+			desconto = false
+	_check(desconto, "MR5 descuento exacto de materiales")
+	_check(mejoras[0] == 1, "MR6 señal herramienta_mejorada x1 (solo exito)")
+
+	# MR2/MR4/MR6: reparar restaura y emite durabilidad objetivo del nivel actual.
+	var r_rep: Dictionary = _cs.reparar_herramienta(item_id)
+	_check(r_rep.get("ok") == true and reparaciones[0] == 1, "MR2/6 reparar OK con señal")
+	_check(int(r_rep.get("_durabilidad", -1)) == _cs.durabilidad_maxima("hacha", 1),
+		"MR4 durabilidad objetivo = durabilidad_maxima del nivel (150)")
+	_check(_cs.efectividad("hacha", 1) > 1.0, "MR4 efectividad escala con nivel")
+
+	# MR7: la sección del save contiene los niveles (restore aditivo cubierto en
+	# qa_m16_mejora_reparacion.gd para no tocar el boot aquí).
+	var data: Dictionary = _cs.get_save_data()
+	_check((data.get("niveles_mejora", {}) as Dictionary).size() >= 1, "MR7 niveles_mejora en el save")
+
+	# Techo del schema.
+	_cs._niveles_mejora[item_id] = int(cfg.get("nivel_maximo", 3))
+	var r_techo: Dictionary = _cs.mejorar_herramienta(item_id)
+	_check(r_techo.get("ok") == false and r_techo.get("motivo") == "nivel_maximo", "techo = nivel_maximo")
+	_cs._niveles_mejora.erase(item_id)
+	_cs._niveles_mejora[item_id] = 1  # deja el estado razonable

@@ -44,6 +44,19 @@ if not lineas:
     print('%s: sin items nuevos en %s (todo ya citado) | no encontrados: %s' % (carpeta, mods, no_encontrados))
     sys.exit(0)
 
+sec = []
+ancla_ult = None
+for m in re.finditer(r'(?m)^## REPOBLACION V3[^
+]*$', bl):
+    ancla_ult = m
+if ancla_ult:
+    # anexar a la ultima seccion existente
+    lineas_n = ['%d. %s' % (i, l) for i, l in enumerate(lineas, 1)]
+    t = bl[:ancla_ult.end()] + chr(10) + chr(10).join(lineas_n) + bl[ancla_ult.end():]
+    io.open(BLP, 'w', encoding='utf-8', newline='
+').write(t)
+    print('%s: +%d items anexados a la seccion REPOBLACION V3 existente' % (carpeta, len(lineas)))
+    sys.exit(0)
 sec = ['', '', '## REPOBLACION V3 (%s) — items REALES de 05-Checklist (fuente en comentario)' % __import__('datetime').datetime.now().isoformat(timespec='seconds'), '']
 for i, l in enumerate(lineas, 1):
     sec.append('%d. %s' % (i, l))

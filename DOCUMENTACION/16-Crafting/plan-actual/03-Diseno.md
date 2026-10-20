@@ -225,3 +225,27 @@ class ExperimentResult:
 ### 4.6 M20 Diálogos/NPCs y M38 Tiendas (relaciones)
 - NPCs venden pergaminos (M38) con `pergamino_receta_*`; `lear_from_item` los consume.
 - Pistas cozy de recetas por conocer se exponen a M20 para diálogos de NPC ("Dicen que con arcilla y fuego...").
+
+
+## Mejora y reparación de herramientas (bloque MR — decisión de estación)
+
+**Modelo:** G-5.3-Flash-Agente
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-20
+
+### Decisión (RF-MR8): reutilizar la estación MESA_TRABAJO existente
+
+La mejora y la reparación de herramientas se ejecutan en la **mesa de trabajo ya existente** (M16, RF1) — NO en una estación nueva (`yunque_de_mejora`) ni en la fogata.
+
+**Justificación:**
+
+1. **Coherencia semántica cozy**: las herramientas ya se fabrican en la mesa (`rec_hacha_cobre`, `rec_pico_cobre`, etc. son `MESA_TRABAJO`); mejorarlas/repararlas es un sub-flujo del mismo banco de trabajo, no un taller aparte. Un yunque añadiría un lugar más para gestionar sin valor de juego.
+2. **Coste cero**: sin mesh/nuevo objeto de mundo, sin posición en la isla (M167), sin superficie de UI adicional — el panel de mejora vive en la propia estación (MR12) del banco ya interactuable.
+3. **Red de minimalismo**: una sola puerta de entrada para todas las acciones "trabajo fino" (fabricar/mejorar/reparar) mantiene la instrucción del jugador simple (RF10).
+4. **Descartes**: la fogata quedó descartada por ser el banco de COCINA (temáticamente ajeno a herramientas); el yunque nuevo queda como posible contenido futuro si el balance lo pide.
+
+### Consecuencias operativas
+
+- MR9 (stations.json): el registro de las recetas de mejora/reparación ligadas a `mesa_trabajo` queda pendiente de la estructura final de estaciones del dueño de M93 (stations.json NO existe hoy; crafting.json es el catálogo vigente).
+- MR12/MR13 (panel y preview): viven en la UI de la estación mesa_trabajo (crafting_ui), no en una nueva capa.
+- MR10 (rechazo de no-herramientas): service-side ya implementado en `mejorar_herramienta`/`reparar_herramienta` (motivo `no_es_herramienta`); la marca definitiva de "herramienta" la define M13 (MR10 completo).

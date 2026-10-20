@@ -1,0 +1,8 @@
+n=item13: RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con
+n=item14: RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad
+n=item15: RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta
+n=item16: RF-MR4: funciones de balance `durabilidad_maxima(tipo, nivel)` y
+n=item17: RF-MR5: integracion con M14 — mejorar/reparar consumen materiales del inventario via
+n=item18: RF-MR6: senales `herramienta_mejorada(item_id, nivel)` y
+n=item19: RF-MR7: persistencia del `nivel_mejora` por item en el save de M59 (campo aditivo,
+n=item26: RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del modulo [S]

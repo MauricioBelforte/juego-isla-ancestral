@@ -156,7 +156,7 @@
 
 ## J. Integración con M61 y M63
 
-- [ ] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S]
+- [x] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S] — [x] 2026-10-20 (Tanda 73, DS-Opencode): LEÍDO `data/performance/budgets.json` v2 (16,7 ms total, tolerancia 10%, 7 categorías 16,5 ms; límites 500 partículas / 400 draw calls / 1000 objetos; 12 normas: 60/30 FPS, 1080p, presets 100/150/220 m, LOD 3, 20 NPCs) y contrastado con `data/rendimiento/budgets.json` v2 (Baja/Media/Alta 1500/2000/2500 MB; 8 sistemas; descarga 8/12/16 por frame). Gates: `validate_budget.gd` 0 fallos + `generar_budgets.gd -- --check` 20 checks/0 fallos (`out/tanda73`). Sin conflicto; deuda M61 VRAM/instancias/draw calls declarada; sin cambio de código. Log 2041.
 - [x] Los topes de RAM del 62 respetan los frame budgets del 61 (deltas < 50 ms) [M]
 - [x] La cola de streaming (M63) informa cargas/descargas al MemoryMonitor [M]
 - [x] LRU compartido: el 63 decide qué cargar, el 62 decide qué liberar (handshake) [C] — **iter. 5 (Log 1187).** `MemoryMonitor.avisar_carga_iniciada()/avisar_carga_terminada()/esta_en_carga()`; el filtro `_puede_descargar()` se pasa a `UnloadPolicy.ejecutar_descarga(..., filtro)`. Bloque A de `test_memoria_m62_iter5.gd`
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 132 - Pendientes: 18 - No resueltos: 0.
+**Totales:** 150 items - Completados: 133 - Pendientes: 17 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -828,3 +828,23 @@ banco anterior muere. No toca producción.
   `M62_BASELINE_FORZAR`; el run real usa 1800 s).
 
 **Totales tras el cierre:** 132 / 18 / 0 (150 items).
+
+## Tanda 73 — L159 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2041)
+
+**Lectura y contraste de los presupuestos M61 antes de fijar los topes duros de M62.**
+
+- **M61 leído:** `data/performance/budgets.json` version 2 — 16,7 ms totales, tolerancia CI 10%,
+  7 categorías que suman 16,5 ms; límites 500 partículas/cámara, 400 draw calls, 1000 objetos de
+  mundo; 12 normas (60/30 FPS, 1080p, presets 100/150/220 m, LOD 3, 20 NPCs, remesh 2 ms, carga
+  fría 30 s/caliente 10 s, sin HDD).
+- **M62 contrastado:** `data/rendimiento/budgets.json` version 2 — Baja 1500 MB / Media 2000 MB /
+  Alta 2500 MB, suma exacta de 8 sistemas; descarga por frame 8/12/16 (default 3).
+- **Gates:** `validate_budget.gd` → `[M61] limites: 3`, `[M61] normas: 12`, **0 fallos**, rc=0;
+  `generar_budgets.gd -- --check` → **20 checks, 0 fallos**, `BUDGETS OK`, rc=0. Evidencia:
+  `out/tanda73/m61_validate_budget.log` y `out/tanda73/m62_generar_budgets_check.log`.
+- **Veredicto:** sin conflicto; M61 gobierna tiempo/cantidad y M62 RAM. La deuda de M61
+  (VRAM por escena, instancias por chunk, draw calls) queda declarada y no invalida los topes RAM.
+  Sin cambio de código de producción.
+- **Detalle:** `02-Analisis.md` sección 5.
+
+**Totales tras el cierre:** 133 / 17 / 0 (150 items).

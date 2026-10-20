@@ -406,14 +406,14 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 10. - [x] [16] Test unitario: validación de materiales y máximo fabricable [M] · [x] T25-M16 (G-5.3): test_crafting L64-74 corrido hoy ×3 con 0 fallos; flips 16-Crafting/05 (165/25/13). <!-- fuente: 16-Crafting/05-Checklist.md -->
 11. - [ ] [16] Test: rollback exacto ante inventario lleno en ambos destinos [C] <!-- fuente: 16-Crafting/05-Checklist.md -->
 12. - [ ] [16] Recorrido manual: abrir, fabricar, fallar y cancelar en las 3 estaciones sin bugs [C] <!-- fuente: 16-Crafting/05-Checklist.md -->
-13. - [ ] [16] RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con <!-- fuente: 16-Crafting/05-Checklist.md -->
-14. - [ ] [16] RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad <!-- fuente: 16-Crafting/05-Checklist.md -->
-15. - [ ] [16] RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta <!-- fuente: 16-Crafting/05-Checklist.md -->
-16. - [ ] [16] RF-MR4: funciones de balance `durabilidad_maxima(tipo, nivel)` y <!-- fuente: 16-Crafting/05-Checklist.md -->
-17. - [ ] [16] RF-MR5: integracion con M14 — mejorar/reparar consumen materiales del inventario via <!-- fuente: 16-Crafting/05-Checklist.md -->
-18. - [ ] [16] RF-MR6: senales `herramienta_mejorada(item_id, nivel)` y <!-- fuente: 16-Crafting/05-Checklist.md -->
-19. - [ ] [16] RF-MR7: persistencia del `nivel_mejora` por item en el save de M59 (campo aditivo, <!-- fuente: 16-Crafting/05-Checklist.md -->
-20. - [ ] [16] RF-MR8: decision de estacion documentada en `03-Diseno.md` — estacion nueva <!-- fuente: 16-Crafting/05-Checklist.md -->
+13. - [x] [16] RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con <!-- fuente: 16-Crafting/05-Checklist.md --> · [x] T28-M16 (G-5.3): QA 15/0 ( retorno honesto + techo + no-herramienta) (T28).
+14. - [x] [16] RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad <!-- fuente: 16-Crafting/05-Checklist.md --> · [x] T28-M16 (G-5.3): QA 15/0 (señal + durabilidad objetivo) (T28).
+15. - [x] [16] RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta <!-- fuente: 16-Crafting/05-Checklist.md --> · [x] T28-M16 (G-5.3): schema data/crafting/mejora_herramienta.json (4 tipos × 3 niveles) (T28).
+16. - [x] [16] RF-MR4: funciones de balance `durabilidad_maxima(tipo, nivel)` y <!-- fuente: 16-Crafting/05-Checklist.md --> · [x] T28-M16 (G-5.3): QA 15/0 (curvas 250/1.30) (T28).
+17. - [x] [16] RF-MR5: integracion con M14 — mejorar/reparar consumen materiales del inventario via <!-- fuente: 16-Crafting/05-Checklist.md --> · [x] T28-M16 (G-5.3): QA 15/0 (descuento exacto RF-MR5) (T28).
+18. - [x] [16] RF-MR6: senales `herramienta_mejorada(item_id, nivel)` y <!-- fuente: 16-Crafting/05-Checklist.md --> · [x] T28-M16 (G-5.3): QA 15/0 (señales solo-éxito) (T28).
+19. - [x] [16] RF-MR7: persistencia del `nivel_mejora` por item en el save de M59 (campo aditivo, <!-- fuente: 16-Crafting/05-Checklist.md --> · [x] T28-M16 (G-5.3): QA 15/0 (persistencia aditiva: save viejo no rompe) (T28).
+20. [x] [16] RF-MR8: decision de estacion documentada en `03-Diseno.md` · [x] T29-M16 (G-5.3): decisión mesa_trabajo documentada en 03-Diseno (descartes + consecuencias). — estacion nueva <!-- fuente: 16-Crafting/05-Checklist.md -->
 21. - [ ] [16] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de <!-- fuente: 16-Crafting/05-Checklist.md -->
 22. - [ ] [16] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con <!-- fuente: 16-Crafting/05-Checklist.md -->
 23. - [ ] [16] RF-MR11: feedback cozy — el fallo por materiales **no dana** la herramienta (no es <!-- fuente: 16-Crafting/05-Checklist.md -->
@@ -423,8 +423,8 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 27. - [ ] [16] RF-MR15: M13 consume `efectividad(tipo, nivel)` para el escalado de rendimiento <!-- fuente: 16-Crafting/05-Checklist.md -->
 28. - [ ] [16] RF-MR16: M13 consume `durabilidad_maxima(tipo, nivel)` como techo al aplicar la <!-- fuente: 16-Crafting/05-Checklist.md -->
 29. - [ ] [16] RF-MR17: contrato consumido documentado en el `04-Codigo.md` de M13 (firma de la API <!-- fuente: 16-Crafting/05-Checklist.md -->
-30. - [ ] [16] RF-MR18: test headless `_test_mejora_reparacion` — mejora consume materiales y sube <!-- fuente: 16-Crafting/05-Checklist.md -->
-31. - [ ] [16] RF-MR19: sonda en ROJO del umbral (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
+30. [x] [16] RF-MR18: test headless `_test_mejora_reparacion` · [x] T29-M16 (G-5.3): función en test_crafting (0 fallos EXIT 0; N.5 verde). — mejora consume materiales y sube <!-- fuente: 16-Crafting/05-Checklist.md -->
+31. [?] [16] RF-MR19: sonda en ROJO del umbral · [?] T29-M16 (G-5.3): NO APLICA (test_crafting sin CHECKS_MINIMOS; la sonda vive en qa fast_travel M69). (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
 32. - [ ] [16] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
 33. - [ ] [16] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion, <!-- fuente: 16-Crafting/05-Checklist.md -->
 34. - [ ] [16] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que <!-- fuente: 16-Crafting/05-Checklist.md -->
