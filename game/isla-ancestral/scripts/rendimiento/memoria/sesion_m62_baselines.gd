@@ -291,7 +291,7 @@ func _aplicar_subterraneo() -> void:
 		_no_medible = "0 VoxelTerrain en la escena: el subterraneo del templo no existe en este arbol"
 		return
 	if bloques <= 0:
-		_no_medible = "VoxelTerrain presente pero 0 bloques generados en headless: el subterraneo no se ejercita (medido en Log 2028)"
+		_no_medible = "VoxelTerrain presente pero 0 bloques actualizados: el subterraneo no se ejercita"
 		return
 	_aplicado = true
 
