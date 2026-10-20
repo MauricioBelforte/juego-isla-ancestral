@@ -249,7 +249,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
   · [x] IMPLEMENTADO+VERIFICADO 2026-10-19 00:35 UTC (G-5.3-Flash-Agente): test_crafting.gd nueva función _test_registro_duplicados() — crafting.json accesible/parsea, service registró N de N recetas (sin pérdidas por duplicados del JSON flat), regex por rec_id detectar duplicados en el texto crudo, receta inexistente -> null. Suite completo: M16 0 fallos (con el test nuevo sumado al runner).
 24. reposicion nicho GLM (directo del 05 real): 16: Test unitario: validación de materiales y máximo fabricable [M]
   · [x] VERIFICADO 2026-10-19 00:40 UTC (G-5.3-Flash-Agente): test_crafting.gd ya cubre el caso — _test_fabricar_ok usa max_craftable(rec_pico_cobre) >= 2 (10 madera/3, 10 cobre/4) + _test_fabricar_sin_materiales con remover_items falla por TODO-o-NADA multiplicado ×cantidad. Sin cover nueva necesaria — evidencia existente firmada en el runner 0 fallos.
-25. reposicion nicho GLM (directo del 05 real): 16: Test: rollback exacto ante inventario lleno en ambos destinos [C]
+25. [x] reposicion nicho GLM (directo del 05 real): 16: Test: rollback exacto ante inventario lleno en ambos destinos [C]
   · [x] IMPLEMENTADO+VERIFICADO 2026-10-19 06:40 UTC (G-5.3-Flash-Agente): _test_rollback_bolsa_llena() en test_crafting.gd — llenado de BOLSILLA con filler, craft 5x falla con inventario_lleno, ROLLBACK EXACTO (madera/cobre/pico idénticos pre/post con include_house=true — refund cae a CASA por fallback bolsa->casa). Suite M16 completa 0 fallos. ítem [25] del 05 flipado con evidencia.
 26. reposicion nicho GLM (directo del 05 real): 16: Recorrido manual: abrir, fabricar, fallar y cancelar en las 3 estaciones sin bugs [C]
 27. reposicion nicho GLM (directo del 05 real): 16: RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con
@@ -457,7 +457,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 22. - [x] [69] M29-M31: restricción temporal (noche, tormenta) [S] · [x] T4-M69 2026-10-19 (G-5.3-Flash-Agente): restriccion_temporal_activa() + motivo 'horario' en fast_travel_service.gd — test 24/0 EXIT 0 PASS (GameTime real noche/día verificado); flips 05-Checklist (114/24/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 23. - [ ] [69] M110: debug menu con listado de anchors [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 24. - [ ] [69] M122: captura de crash si portal falla [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-25. - [ ] [69] M124: balance económico según distancia [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+25. - [x] [69] M124: balance económico según distancia [S] · [x] T5-M69 2026-10-19 (G-5.3-Flash-Agente): costo_viaje_de()/set_costo_distancia_fn + fórmula cozy default (MundoRaiz CENTRO, tope 1..8) — test 30/0 EXIT 0 PASS (CHECKS_MINIMOS 23→28); flips 05-Checklist (115/23/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 26. - [ ] [69] M32: anulación del portal en clima extremo [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 27. - [ ] [69] M68: respetar desactivación de hápticos [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 28. - [ ] [69] M91: respetar volumen de feedback de viaje [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
