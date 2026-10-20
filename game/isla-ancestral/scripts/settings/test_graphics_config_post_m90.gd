@@ -133,6 +133,14 @@ func _run() -> void:
 	_check("mapeo_upscaling: escala_render > 0", float(mu_up["escala_render"]) > 0.0)
 	var mu2: Dictionary = u.aplicar_upscaling(null)  # null-safe
 	_check("aplicar_upscaling(null) devuelve mapeo (no-op)", mu2.has("upscaler"))
+	# (El set real de render_scale/upscaler al Viewport lo hace el pipeline M90/M53 en
+	# runtime; aquí solo se verifica el mapeo + null-safe, ya chequeado arriba.)
+	# Resolución como objeto {x,y} (M90 t10).
+	var ur: RefCounted = _GC.new()
+	ur.aplicar_preset("alto")  # 1440p
+	var rv: Vector2i = ur.resolucion_vec2()
+	_check("resolucion_vec2 alto (1440p, escala 1.0) = 2560x1440", rv.x == 2560 and rv.y == 1440)
+	_check("resolucion_vec2 devuelve un Vector2i valido", rv.x > 0 and rv.y > 0)
 	var u3: RefCounted = _GC.new()
 	u3.fijar("upscaling", "off")  # UP_OFF
 	_check("mapeo_upscaling: upscaler=off cuando se fija", u3.mapeo_upscaling()["upscaler"] == "off")

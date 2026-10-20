@@ -414,8 +414,6 @@ func apply_fps_cap() -> int:
 
 
 ## Mapeo LÓGICO de upscaling (headless). Devuelve el upscaler efectivo + escala de
-## render + si el upscaler es válido. La aplicación al RenderingServer la hace el
-## pipeline de M90/M53; aquí queda el diseño + el mapeo (verificable).
 func mapeo_upscaling() -> Dictionary:
 	var up: String = String(obtener("upscaling", UP_OFF))
 	var escala: float = validar_slider("escala_render", float(obtener("escala", 1.0)))
@@ -425,15 +423,44 @@ func mapeo_upscaling() -> Dictionary:
 		"es_valido": UPSCALING.has(up),
 	}
 
-## Aplica el upscaler + escala de render. Null-safe: si `server` es null, no-op
-## (devuelve el mapeo para que el caller lo aplique en runtime).
-func aplicar_upscaling(server) -> Dictionary:
+## Aplica el upscaler + escala de render a un Viewport. Null-safe (no-op si vp==null).
+## Devuelve el mapeo. El set REAL de `render_scale`/upscaler depende del pipeline
+## M90/M53 en runtime (SubViewport detached no setea render_scale en headless);
+## este método expone el mapeo para el caller.
+func aplicar_upscaling(vp) -> Dictionary:
 	var m: Dictionary = mapeo_upscaling()
-	if server == null:
+	if vp == null:
 		return m
-	# El set real de upscaler/escala depende del pipeline de M90/M53 + RenderingServer;
-	# este método expone el mapeo para que el caller lo consuma.
+	# El set real (Viewport.render_scale + upscaler global) lo hace el pipeline M90/M53
+	# al arrancar; aquí solo exponemos el mapeo. _set_upscaler_proyecto setea el flag.
+	_set_upscaler_proyecto(String(m["upscaler"]))
 	return m
+
+
+## Mapea el upscaler a las ProjectSettings de upscaling de Godot 4.
+func _set_upscaler_proyecto(up: String) -> void:
+	var clave_base := "rendering/anti_aliasing/upscaling"
+	match up:
+		UP_OFF:
+			ProjectSettings.set_setting(clave_base + "/enabled", false)
+		UP_FSR1, UP_FSR2:
+			ProjectSettings.set_setting(clave_base + "/enabled", true)
+			ProjectSettings.set_setting(clave_base + "/fsr/quality", 1 if up == UP_FSR2 else 2)
+		UP_DLSS, UP_XESS:
+			# Requieren el plugin del vendor; dejo el flag on + la selección (el set real es del pipeline).
+			ProjectSettings.set_setting(clave_base + "/enabled", true)
+
+
+## Resolución como objeto {x, y} (píxeles), según el preset + escala de render.
+## Usado por "Incluir resolución como objeto {x,y}" (M90).
+func resolucion_vec2() -> Vector2i:
+	var px: Dictionary = {
+		"1080p": Vector2i(1920, 1080), "1440p": Vector2i(2560, 1440),
+		"4k": Vector2i(3840, 2160), "720p": Vector2i(1280, 720),
+	}
+	var base: Vector2i = px.get(String(obtener("resolucion", "1080p")), Vector2i(1920, 1080))
+	var escala: float = mapeo_upscaling()["escala_render"]
+	return Vector2i(int(base.x * escala), int(base.y * escala))
 
 
 ## Mapeo LÓGICO de iluminación volumétrica según la calidad actual (§1).

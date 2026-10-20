@@ -61,6 +61,41 @@ msgstr "Game saved successfully."
 msgid "SETTINGS.GUARDAR_FALLO"
 msgstr "Could not save the game."
 
+msgid "SETTINGS.BORRAR_SLOT"
+msgstr "Delete slot 1"
+
+msgid "SETTINGS.BORRAR_TITULO"
+msgstr "Delete game"
+
+msgid "SETTINGS.BORRAR_CONFIRMA"
+msgstr "Delete the game in slot 1? This action cannot be undone."
+
+msgid "SETTINGS.BORRAR_EXITO"
+msgstr "Game deleted."
+
+msgid "SETTINGS.SAVE_CORRUPTO"
+msgstr "The save file is corrupted. Attempting recovery..."
+
+msgid "SETTINGS.SAVE_RECUPERADO"
+msgstr "Save recovered from backup."
+
+msgid "SETTINGS.SAVE_DISCO_LLENO"
+msgstr "No disk space. Free space and try again."
+
+msgid "SETTINGS.HORAS_H"
+msgstr "%d hours"
+
+msgid "SETTINGS.HORAS_1"
+msgstr "1 hour"
+
+msgid "SETTINGS.MIN_M"
+msgstr "%d minutes"
+
+msgid "SETTINGS.MIN_1"
+msgstr "1 minute"
+
+
+
 msgid "SETTINGS.GUARDAR_BLOQUEADO"
 msgstr "Cannot save now (a dialog, load or panel is open)."
 
