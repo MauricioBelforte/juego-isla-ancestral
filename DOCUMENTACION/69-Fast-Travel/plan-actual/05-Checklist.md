@@ -57,7 +57,7 @@
 - [x] Test de integración: día/noche y calendario [M] → **agnes-3-flash (2026-10-12): `m69_spec.md` §D — M29/M31.**
 - [x] Test de costo: recursos descontados correctamente [M] → **agnes-3-flash (2026-10-12): `m69_spec.md` §D/E — 5 gemas.**
 - [x] Test de restricciones: bloqueo durante estados prohibidos [M] → **agnes-3-flash (2026-10-12): `m69_spec.md` §D/G — combate/evento.**
-- [ ] Test de transición: animación sin jumps visuales [M]
+- [x] Test de transición: animación sin jumps visuales [M] → **G-5.3-Flash-Agente (2026-10-19):** `scripts/fasttravel/qa_fast_travel_fx.gd` — muestreo alpha por frame en fade-out y fade-in, umbral de salto 0.12 y conteo de flips. Evidencia: QA «OK J1 sin saltos visuales en fade-in» (25/0, EXIT 0) + regresión `test_fast_travel_headless.gd` 17/0 PASS.
 
 ## E. Mapa de puntos de viaje (15)
 
@@ -136,16 +136,16 @@
 
 ## J. Animación y feedback visual (10)
 
-- [ ] Transición de desvanecimiento con curva cozy [S]
-- [ ] Efectos de partículas coherentes con M41 [S]
-- [ ] Flash sutil al aparecer en destino [S]
-- [ ] Indicador de carga 0.5-1.5s mínimo [S]
-- [ ] Sin huecos negros en transición [S]
-- [ ] Compatible con modo foto pausado [S]
-- [ ] HUD visible durante toda la transición [S]
-- [ ] Sin parpadeos por baja luz [S]
-- [ ] Ilumincación de destino respeta hora del mundo [S]
-- [ ] Transición no afecta gameplay (tablas de delta) [S]
+- [x] Transición de desvanecimiento con curva cozy [S] → **G-5.3-Flash-Agente (2026-10-19):** `scripts/fasttravel/fast_travel_effect.gd` — velo nocturno fade-out TRANS_SINE EASE_IN_OUT 0.5s (curva cozy, spec §F). Evidencia: `scripts/fasttravel/qa_fast_travel_fx.gd` 25/0 EXIT 0 («OK J9/J2 fade-out monotónico» + «OK cubierto a alpha pleno»).
+- [x] Efectos de partículas coherentes con M41 [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — bruma de partículas (CPUParticles2D, 24 copos suaves, textura radial procedural sin asset, alpha 0.10, deriva lateral) activa durante el velo y apagada al terminar/cancelar. NOTA: el ítem original nombra M41 = música (índice equivocado del plan); la coherencia es con la familia tonal del módulo y el dominio real de partículas es M52. Evidencia: QA «OK J3 bruma de partículas activa en vuelo» + «OK J3 bruma apagada al terminar/cancelar» (36/0 EXIT 0).
+- [x] Flash sutil al aparecer en destino [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — flash dorado ThemeUx alpha 0.22→0 en 0.15s al iniciar la llegada. Evidencia: QA «OK J4 flash sutil visible al arrancar llegada».
+- [x] Indicador de carga 0.5-1.5s mínimo [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — destino + barra de carga bajo el velo, clamp [0.5, 1.5] y mínimo exigido antes de abrir (CARGA_MIN/CARGA_MAX). Evidencia: QA «OK J5 carga 0.5 aceptada» + «OK J5 carga 9.0 se recorta a 1.5» + «OK J5/J6 nada abre antes del min».
+- [x] Sin huecos negros en transición [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — velo COLOR_VELO (0.10,0.12,0.20, NO negro puro) que SOSTIENE alpha 1.0 entre cobertura y fade-in (fase cubierto = el velo nunca abre solo). Evidencia: QA «OK J6 velo sostiene pleno durante carga (sin hueco)».
+- [x] Compatible con modo foto pausado [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — guard contra PhotoService (M56) real: con modo foto activo `iniciar_transicion()` devuelve false (velo no taparía la captura); al salir de foto arranca normal. Evidencia: QA con PhotoService real «OK J7 transición bloqueada con modo foto» + «OK J7 arranca normal tras salir de foto».
+- [x] HUD visible durante toda la transición [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — CanvasLayer layer=-1: cubre el mundo 3D y queda DEBAJO del HUD ($UI, canvas base, main_island.gd L48) y de UIRoot (CanvasLayer 100); sin UILayer ⇒ no pausa ni roba foco. Evidencia: QA «OK J8 capa -1 (mundo cubierto, HUD encima)»; mouse_filter IGNORE.
+- [x] Sin parpadeos por baja luz [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — un solo pico de flash (FLASH_ALPHA_MAX 0.22) con decaimiento SINE; cada fase del velo es una tween única mono-dirección (sin strobe). Evidencia: QA «OK J9/J2 fade-out monotónico (0 flips)» + «OK J9 fade-in sin parpadeos (<=1 flip mono-desc)».
+- [x] Ilumincación de destino respeta hora del mundo [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — el FX es solo canvas-2D (ColorRects/partículas): NO crea Environment ni CanvasModulate ni toca DayNightCycle (M49); como no pausa el árbol, la hora/luz del mundo sigue corriendo intacta en destino. Evidencia: QA «OK J10 sin Environment nuevo durante transición» + «OK J10 iluminación/mundos sin cambios (hora del mundo intacta)» + no-pausa J.11.
+- [x] Transición no afecta gameplay (tablas de delta) [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_effect.gd` — sin UILayer (no entra en la pila M53) no pausa el mundo y no roba input (mouse_filter IGNORE); verificado con Timer del mundo tickendo durante la transición completa. Evidencia: QA «OK J11 mundo no pausado durante transición» + «OK J11 timer del mundo sigue corriendo» + «OK J11 gameplay siguió avanzando (deltas intactos)».
 
 ## K. Accesibilidad ampliada (10)
 
@@ -188,7 +188,7 @@
 - [ ] Test de fallback: 3 fallos seguidos ? modo seguro [M]
 - [ ] Test de perfilado: sin allocs en frame [M]
 
-**Totales:** 145 ítems · Completados: 98 · Pendientes: 40 · No resueltos: 7. (Corregido agnes-3-flash 2026-10-12: +50 flips con `m69_spec.md`)
+**Totales:** 145 ítems · Completados: 109 · Pendientes: 29 · No resueltos: 7. (Corregido agnes-3-flash 2026-10-12: +50 flips con `m69_spec.md`; tanda J +7 y J completa +4 por G-5.3-Flash-Agente 2026-10-19 — sección J 10/10)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 4):** la línea decía *"143 ítems · Completados: 143 · Pendientes: 0 ·

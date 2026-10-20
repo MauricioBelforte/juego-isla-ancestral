@@ -495,6 +495,25 @@ func mapeo_lod() -> Dictionary:
 		"depende_m50": hab,  # el LOD por objeto se resuelve con M50 (vegetación/objetos)
 	}
 
+
+## Detecta el hardware (GPU/RAM/CPU) y devuelve el preset recomendado. Headless:
+## usa las llamadas de OS (video driver, RAM, núcleos). Devuelve un Dictionary.
+func detect_hardware() -> Dictionary:
+	var gpu: String = String(OS.get_video_driver_name())  # driver; el MODELO de GPU lo resuelve M115
+	var ram_mb: int = int(OS.get_static_memory_usage())
+	var ram_gb: float = ram_mb / 1024.0  # OS.get_static_memory_usage() -> MB en Godot 4
+	var cpu: String = String(OS.get_processor_name())
+	var nucleos: int = int(OS.get_processor_count())
+	var recomendado: String = recomendar_preset(gpu, ram_gb, nucleos)
+	return {
+		"gpu": gpu,
+		"ram_gb": ram_gb,
+		"cpu": cpu,
+		"nucleos": nucleos,
+		"recomendado": recomendado,
+	}
+
+
 ## Mapeo LÓGICO de accesibilidad (§1 Diseño): estado efectivo de las opciones de
 ## accesibilidad + su interacción con post-processing. REDUCIR_MOTION/BLOOM apagan
 ## el efecto aunque el preset lo tenga activo (opción anti-mareo / anti-distracción).

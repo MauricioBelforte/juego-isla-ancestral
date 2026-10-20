@@ -154,6 +154,17 @@ func _pedir_confirmacion_borrado() -> void:
 		_hacer_borrado_slot)
 
 
+## Encuentra el ConfirmPopup montado por UIRoot (duck typing: buscar_texto/configurar_texto).
+func _buscar_confirm_popup() -> Node:
+	var ur := get_parent()
+	if ur == null:
+		return null
+	for hijo in ur.get_children():
+		if hijo != null and hijo.has_method("configurar_texto"):
+			return hijo
+	return null
+
+
 func _hacer_borrado_slot() -> void:
 	var ds := get_node_or_null("/root/DataStore")
 	if ds == null or not ds.has_method("borrar_slot"):

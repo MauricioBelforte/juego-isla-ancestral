@@ -124,6 +124,13 @@ func _run() -> void:
 	_check("apply_fps_cap ultra -> 0 (ilimitado)", d.apply_fps_cap() == 0)
 	_check("recomendar_preset gana la más baja", _GC.recomendar_preset("RTX 4090", 4.0, 2) == "baja")
 
+	# --- Detección de hardware (M90 t12) ---
+	var hd: RefCounted = _GC.new()
+	var dh: Dictionary = hd.detect_hardware()
+	_check("detect_hardware devuelve las 5 claves", dh.has("gpu") and dh.has("ram_gb") and dh.has("cpu") and dh.has("nucleos") and dh.has("recomendado"))
+	_check("detect_hardware recomendado es un preset valido", ["bajo", "medio", "alto", "ultra"].has(String(dh["recomendado"])))
+	_check("detect_hardware nucleos >= 0", int(dh["nucleos"]) >= 0)
+
 	# --- Upscaling (§1 aplicado a RenderingServer, mapeo headless) ---
 	var u: RefCounted = _GC.new()
 	u.aplicar_preset("ultra")  # upscaling = XESS

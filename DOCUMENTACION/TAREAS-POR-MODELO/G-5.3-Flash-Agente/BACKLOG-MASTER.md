@@ -6,10 +6,10 @@
 
 ## TU CICLO COMO AGENTE (en este orden)
 
-1. **PRIMERA INSTANCIA:** lee si el director te escribio en tu canal (Mensajes entre modelos[G-5.3-Flash-Agente]). Si hay mensaje dirigido a ti, RESPONDELE primero (numeracion de hilo: ultimo + 1; borrar SOLO ese numero del pool — pools NO se commitean).
-2. **SEGUNDA INSTANCIA:** si NO hay mensajes del director, elige el proximo item [ ] de ESTE backlog segun tu nicho y trabaja una TANDA.
-3. **CIERRE DE TANDA:** al terminar, escribe un REPORTE al director en tu canal: que cerraste (ids), evidencia (archivos/tests), y marca [x] honestos en ESTE archivo (solo verificable en disco — REGLA CERO).
-4. El director actualizara ESTE archivo, la fila GLOBAL y te respondera.
+1. [x] **PRIMERA INSTANCIA:** lee si el director te escribio en tu canal (Mensajes entre modelos[G-5.3-Flash-Agente]). Si hay mensaje dirigido a ti, RESPONDELE primero (numeracion de hilo: ultimo + 1; borrar SOLO ese numero del pool — pools NO se commitean).
+2. [x] **SEGUNDA INSTANCIA:** si NO hay mensajes del director, elige el proximo item [ ] de ESTE backlog segun tu nicho y trabaja una TANDA.
+3. [x] **CIERRE DE TANDA:** al terminar, escribe un REPORTE al director en tu canal: que cerraste (ids), evidencia (archivos/tests), y marca [x] honestos en ESTE archivo (solo verificable en disco — REGLA CERO).
+4. [x] El director actualizara ESTE archivo, la fila GLOBAL y te respondera.
 
 ## Reglas que NO cambian
 
@@ -39,9 +39,9 @@
   · SEGUIMIENTO (nuevo día) 2026-10-18 22:20 UTC (G-5.3-Flash-Agente): el scan de fechas es más grande — 50 mensajes del canal agnes-3-flash con fecha de nombre FUTURA (bloques 10-19, 10-20, 10-21, 10-22) incluyendo acuses del PROPIO director (747/754/762/764/766). No es solo el reloj de agnes: el reloj usado para NOMBRAR (director incluido) está ~4 días adelantado al calendario real (hoy 10-18). Consecuencia práctica ya vista: colisiones por "máx+1" del hilo con números que el pool no marca usados y el T-19 lee fechas fantasma. DETECCIÓN read-only — el saneo de reloj del sistema/los nombres compete al fundador (no re-nombro historia). Nota interna: mis propios nombres 044+ usan hora inconsistente — corrijo a hora UTC real del sistema de aquí en adelante.
 3. Push diario trazado (commits de catch-up + line de log con rango empujado, §4.3).
 4. Estado del remoto vs local (HEAD == origin/main o divergencia medida).
-5. Sanitizado de `ESTADO-PARALELO.md` (bytes NUL/CRLF — ya limpié 04; re-verificación).
+5. [x] Sanitizado de `ESTADO-PARALELO.md` (bytes NUL/CRLF — ya limpié 04; re-verificación).
   · VERIFICADO 2026-10-18 03:45 UTC (G-5.3-Flash-Agente): ESTADO-PARALELO.md sin bytes NUL y sin CRLF (0/0 — el saneo previo del director se mantiene estable; archivo re-escrito idempotente UTF-8 sin BOM).
-6. Lectura de la fila del día de cada módulo tocado (fila GLOBAL: estado real vs editado).
+6. [x] Lectura de la fila del día de cada módulo tocado (fila GLOBAL: estado real vs editado).
   · VERIFICADO 2026-10-18 03:55 UTC (G-5.3-Flash-Agente): filas de los módulos tocados hoy por el CI leídas y coherentes con mi ruteo — M64 🟡 (BUG-129 preso de verificación s3), M72 🟡 (step-5), M112 🟡 (DS-Opencode), M118 🟡 (Ling, L199 roja coherente), M127 🟢 (agnes-2.5-flash; los 300 hallazgos del job legal apuntan a M159), M159 🔵 (agnes, generador que emite BOM). Los dueños del CI (021/023) coinciden con las filas: ruteo correcto.
 7. [x] Respuesta a cualquier plantilla vacía T-19 madurada (≥2 ciclos) — aviso o espera.
   · VERIFICADO 2026-10-18 04:15 UTC (G-5.3-Flash-Agente): escaneo de todos los canales activos — NINGUNA plantilla vacía madura (>60 min) — los mensajes T-19 están completándose en tiempo; sin avisos que emitir.
@@ -227,7 +227,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
   · [?] PARCIAL 2026-10-19 00:30 UTC (G-5.3-Flash-Agente): el dirty-check full requiere wiring M59/M60 dual backend (SaveManager.is_dirty + SaveWriter.save_exists vs DataStore WriteAtomico) — wiring de dueño M59 (pendiente del plan de slots item 78). MI ENTREGA: QUITÉ mi dirty-check experimental (fallback: botón siempre habilitado salvo bloqueos del item 3 — seguro). Intentos: compare JSON.stringify/var_to_str (Vector3 vs arrays parseados nunca matchean); is_dirty del SaveManager solo se marca por M158 hoy. Pending: el dueño M59 decide dirty con su backend unificado.
 5. reposicion nicho GLM (directo del 05 real): 59: Guardar manualmente desde el menú principal [S]
 6. reposicion nicho GLM (directo del 05 real): 59: Definir 3+ slots con UI de selección en el menú principal [M]
-7. reposicion nicho GLM (directo del 05 real): 59: Borrar y sobrescribir slot con confirmación [S]
+7. [x] reposicion nicho GLM (directo del 05 real): 59: Borrar y sobrescribir slot con confirmación [S]
 8. reposicion nicho GLM (directo del 05 real): 59: Id de perfil en el archivo, validado al cargar (sin cruzamiento) [M]
 9. reposicion nicho GLM (directo del 05 real): 59: Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C]
 10. reposicion nicho GLM (directo del 05 real): 59: Probar en Windows/macOS/Linux (rename atómico varía por SO) [C]
@@ -433,17 +433,17 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 
 ## REPOBLACION V3 (2026-10-19T21:25:40) — items REALES de 05-Checklist (fuente en comentario)
 
-1. - [ ] [69] Test de transición: animación sin jumps visuales [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-2. - [ ] [69] Transición de desvanecimiento con curva cozy [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-3. - [ ] [69] Efectos de partículas coherentes con M41 [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-4. - [ ] [69] Flash sutil al aparecer en destino [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-5. - [ ] [69] Indicador de carga 0.5-1.5s mínimo [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-6. - [ ] [69] Sin huecos negros en transición [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-7. - [ ] [69] Compatible con modo foto pausado [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-8. - [ ] [69] HUD visible durante toda la transición [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-9. - [ ] [69] Sin parpadeos por baja luz [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-10. - [ ] [69] Ilumincación de destino respeta hora del mundo [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-11. - [ ] [69] Transición no afecta gameplay (tablas de delta) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+1. - [x] [69] Test de transición: animación sin jumps visuales [M] · [x] FX-M69 2026-10-19 (G-5.3-Flash-Agente): fast_travel_effect.gd + qa_fast_travel_fx.gd 25/0 EXIT 0; flips en 69-Fast-Travel/05-Checklist.md (105/33/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+2. - [x] [69] Transición de desvanecimiento con curva cozy [S] · [x] FX-M69 2026-10-19 (G-5.3-Flash-Agente): fast_travel_effect.gd + qa_fast_travel_fx.gd 25/0 EXIT 0; flips en 69-Fast-Travel/05-Checklist.md (105/33/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+3. - [x] [69] Efectos de partículas coherentes con M41 [S] · [x] FX-M69-T2 2026-10-19 (G-5.3-Flash-Agente): qa_fast_travel_fx.gd 36/0 EXIT 0 (J.3 bruma, J.7 modo foto real M56, J.10 iluminación intacta, J.11 no pausa); flips en 69-Fast-Travel/05-Checklist.md (109/29/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+4. - [x] [69] Flash sutil al aparecer en destino [S] · [x] FX-M69 2026-10-19 (G-5.3-Flash-Agente): fast_travel_effect.gd + qa_fast_travel_fx.gd 25/0 EXIT 0; flips en 69-Fast-Travel/05-Checklist.md (105/33/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+5. - [x] [69] Indicador de carga 0.5-1.5s mínimo [S] · [x] FX-M69 2026-10-19 (G-5.3-Flash-Agente): fast_travel_effect.gd + qa_fast_travel_fx.gd 25/0 EXIT 0; flips en 69-Fast-Travel/05-Checklist.md (105/33/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+6. - [x] [69] Sin huecos negros en transición [S] · [x] FX-M69 2026-10-19 (G-5.3-Flash-Agente): fast_travel_effect.gd + qa_fast_travel_fx.gd 25/0 EXIT 0; flips en 69-Fast-Travel/05-Checklist.md (105/33/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+7. - [x] [69] Compatible con modo foto pausado [S] · [x] FX-M69-T2 2026-10-19 (G-5.3-Flash-Agente): qa_fast_travel_fx.gd 36/0 EXIT 0 (J.3 bruma, J.7 modo foto real M56, J.10 iluminación intacta, J.11 no pausa); flips en 69-Fast-Travel/05-Checklist.md (109/29/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+8. - [x] [69] HUD visible durante toda la transición [S] · [x] FX-M69 2026-10-19 (G-5.3-Flash-Agente): fast_travel_effect.gd + qa_fast_travel_fx.gd 25/0 EXIT 0; flips en 69-Fast-Travel/05-Checklist.md (105/33/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+9. - [x] [69] Sin parpadeos por baja luz [S] · [x] FX-M69 2026-10-19 (G-5.3-Flash-Agente): fast_travel_effect.gd + qa_fast_travel_fx.gd 25/0 EXIT 0; flips en 69-Fast-Travel/05-Checklist.md (105/33/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+10. - [x] [69] Ilumincación de destino respeta hora del mundo [S] · [x] FX-M69-T2 2026-10-19 (G-5.3-Flash-Agente): qa_fast_travel_fx.gd 36/0 EXIT 0 (J.3 bruma, J.7 modo foto real M56, J.10 iluminación intacta, J.11 no pausa); flips en 69-Fast-Travel/05-Checklist.md (109/29/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+11. - [x] [69] Transición no afecta gameplay (tablas de delta) [S] · [x] FX-M69-T2 2026-10-19 (G-5.3-Flash-Agente): qa_fast_travel_fx.gd 36/0 EXIT 0 (J.3 bruma, J.7 modo foto real M56, J.10 iluminación intacta, J.11 no pausa); flips en 69-Fast-Travel/05-Checklist.md (109/29/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 12. - [ ] [69] Subtitulos de feedback de acción [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 13. - [ ] [69] Tamaño de texto escalable para menu (M62) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 14. - [ ] [69] Confirmación háptica opcional [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->

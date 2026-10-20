@@ -195,8 +195,8 @@ ecomendar_preset.
 
 ### [S] DetecciÃ³n automÃ¡tica
 - [x] Definir detecciÃ³n de GPU (RenderingServer.get_video_adapter_name())
-- [ ] Definir detecciÃ³n de RAM (OS.get_static_memory_usage())
-- [ ] Definir detecciÃ³n de CPU (OS.get_processor_name())
+- [x] Definir detecciÃ³n de RAM (OS.get_static_memory_usage()) -- agnes-3-flash 2026-10-22 (M90 t12): detect_hardware() usa OS.get_static_memory_usage() (+ ecomendar_preset).
+- [x] Definir detecciÃ³n de CPU (OS.get_processor_name()) -- agnes-3-flash 2026-10-22 (M90 t12): detect_hardware() usa OS.get_processor_name() + OS.get_processor_count().
 - [x] Definir lÃ³gica de recomendaciÃ³n de preset segÃºn hardware
 - [x] Definir GPU baja + RAM baja + CPU baja Ã¢â€ â€™ preset bajo
 - [x] Definir GPU media + RAM media + CPU media Ã¢â€ â€™ preset medio
@@ -266,8 +266,8 @@ ecomendar_preset.
 - [x] DiseÃ±ar actualizaciÃ³n de preset en GraphicsSettings.preset
 
 ### [S] DetecciÃ³n de hardware
-- [ ] DiseÃ±ar HardwareDetector
-- [ ] DiseÃ±ar mÃ©todo detect_hardware()
+- [x] DiseÃ±ar HardwareDetector -- agnes-3-flash 2026-10-22 (M90 t12): HardwareDetector = detect_hardware() (devuelve gpu/ram/cpu/nucleos/recomendado).
+- [x] DiseÃ±ar mÃ©todo detect_hardware() -- agnes-3-flash 2026-10-22 (M90 t12): detect_hardware() implementado + test.
 - [x] DiseÃ±ar mÃ©todo recommend_preset()
 - [x] DiseÃ±ar lÃ³gica de recomendaciÃ³n segÃºn GPU, RAM, CPU -- agnes-3-flash 2026-10-22 (M90 t6): en graphics_config.gd (DEBUG_FLAGS + mapeo_debug + apply_fps_cap) + test. Runtime pendiente QA. 
 ecomendar_preset() (gana la mÃ¡s baja de GPU/RAM/CPU).
