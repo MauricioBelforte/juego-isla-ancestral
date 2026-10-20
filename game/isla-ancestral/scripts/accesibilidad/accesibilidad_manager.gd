@@ -412,6 +412,10 @@ func aplicar_perfil_control(preset: String) -> bool:
 	profile_changed.emit(String(_perfil.get("nombre", "custom")))
 	return true
 
+## M58 item 42: preset de control activo (fuente para el indicador del menú).
+func get_control_preset() -> String:
+	return String(_perfil.get("control_preset", "estandar"))
+
 ## RF13: mapeo de acciones del preset activo ({accion: tecla}).
 func get_remap_control() -> Dictionary:
 	var preset := String(_perfil.get("control_preset", "estandar"))

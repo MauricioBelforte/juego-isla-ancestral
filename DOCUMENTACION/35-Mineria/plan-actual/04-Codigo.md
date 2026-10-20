@@ -553,3 +553,68 @@ cita del doc fuente (grep accent-insensitive sobre los 4 documentos):
 - 28 flips rechazados por falta de evidencia NO se aplicaron.
 
 **Totales tras el lote 3: 101 `[x]` / 28 `[ ]` / 13 `[?]` = 142.**
+
+## Lote 4: guarda de ocupacion en el respawn (2026-10-20, DeepSeek-V4.1-Flash)
+
+Items **J2** ("Respawn con zona ocupada: reintento diferido") y **J4** ("Respawn
+con construccion M17 encima: espera al proximo dia"). Log 2043.
+
+### Por que se decide ANTES de M15
+
+`ResourceNode.evaluar_respawn()` (M15) **MUTA** el estado (`estado = INTACTO`,
+`golpes_restantes = 2`, `respawn_dia_absoluto = 0`) y **no consulta ocupacion**:
+`grep -ic "ocupad|bloqueado_por|player_encima|jugador_encima"` sobre los **11**
+`.gd` de `scripts/resources/` da **0** en los 11. Consecuencia: para diferir un
+respawn sin tocar M15 hay que decidir **antes** de llamarlo.
+
+### API nueva en `mining_manager.gd`
+
+- `barrido_regeneracion(vetas, dia_actual, estacion_actual, ocupado := Callable())`
+  -> `{evaluados, respawnados, diferidos, no_listos}`. `ocupado` recibe la
+  posicion mundial y devuelve `bool`. **Sin predicado el comportamiento es el
+  historico** (retrocompatible: el contrato conserva `evaluados`/`respawnados`).
+- `_listo_por_calendario(rn, dia, estacion)`: **espejo de solo lectura** de las 3
+  condiciones de `evaluar_respawn()`. Existe solo para poder preguntar antes de
+  mutar; el bloque F del test lo cruza contra M15 en 6 casos, asi que si M15
+  cambia su regla el test se pone rojo en vez de heredar el cambio.
+- `veta_diferida(clave)`, `diferidos()`, `diferidos_por_veta()`,
+  `limpiar_diferidos()`: telemetria. **No se serializa** (un save viejo no la
+  trae y el barrido siguiente vuelve a diferir la misma veta sin perder nada).
+- `MAX_DIFERIDOS = 64`: el mapa de diferimientos esta **acotado**; al llenarse
+  descarta la clave mas vieja. El total historico sigue contando todos los
+  diferimientos aunque el mapa este lleno.
+
+### Unidad del reintento
+
+El reintento es **por barrido**: la veta diferida se re-evalua en el siguiente
+`barrido_regeneracion`. En produccion ese barrido corre en `dia_cambio` (M29),
+asi que "espera al proximo dia" (J4) se cumple sin logica extra de fechas. Si
+otro llamador barre mas seguido, el reintento es mas frecuente pero igual
+seguro: mientras `ocupado` devuelva `true` no hay mutacion.
+
+### Evidencia medida (Log 2043)
+
+- `test_mineria_respawn_ocupado.gd`: **60 checks / 0 fallos / EXIT 0** en **3
+  corridas identicas**, `CHECKS_MINIMOS = 60` **medido en verde**, 0 `SCRIPT ERROR`.
+- Regresiones M35: `test_mineria.gd` **92/0** y `test_mineria_lote2.gd`
+  **104/0**, ambos EXIT 0 (el contrato del barrido no cambio).
+- **Sonda de FEATURE en rojo:** neutralizar el `if ocupado...` -> **EXIT 1** con
+  9 fallos en el bloque B y 3 en C. El test discrimina la feature.
+- **Sonda de GUARDIAN en rojo:** aborto de **RUNTIME** dentro de `_run()` ->
+  **EXIT 1**, nombra los 6 bloques que no corrieron y dispara el piso
+  (`solo 16 checks ejecutados (minimo 60)`).
+- Bytes: `mining_manager.gd` 33.876 B y `test_mineria_respawn_ocupado.gd`
+  12.364 B, ambos **LF puro, sin BOM, 0 U+FFFD**, tabs.
+
+### Lo que NO se entrega (medido, no supuesto)
+
+- **J3** ("Respawn con jugador dentro: desplazamiento suave"): necesita runtime
+  con fisica y una politica de desplazamiento que hoy no existe en ningun
+  modulo. No se implementa a ciegas.
+- **El predicado de produccion no esta cableado:** `barrido_regeneracion` tiene
+  **0 llamadores de produccion** (solo tests); el respawn de M15 corre por su
+  cuenta. M35 **ofrece** la guarda; quien cablee el barrido debe pasar `ocupado`.
+  Reportado al director.
+- **D9 del checklist (M15 "Validacion de ocupacion antes de reaparecer", hoy
+  `[x]`) es FALSO:** M15 no tiene esa validacion (0 apariciones medidas). No se
+  cambia la marca: la aplica el director.

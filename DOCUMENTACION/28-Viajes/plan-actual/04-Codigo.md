@@ -179,3 +179,18 @@ func restore(saved: Dictionary) -> void:
 - M27: al crear islas, registrar Harbors con island_id coherente con rutas.json y conectar HarborDock.lock/release a _atracar().
 - M53/M52: TravelUI escucha travel_started/travel_progress/travel_delayed/travel_arrived; barra de progreso obligatoria (sección 8 AGENTS.md).
 - M63: enganchar precarga de destino en request_travel tras el pago.
+
+## Tanda 75 — drift-check post-viaje (M62 L166, Log 2044)
+
+**Verificación de herencia (autor del código: DeepSeek-V4.1-Flash, Log 2021; verificación y flip:
+DS-V4.1-Flash-Opencode, Tanda 75).**
+
+`TravelService._atracar()` llama `_verificar_drift_post_viaje(ruta)` después de aterrizar y antes
+de `travel_arrived`. Solo aplica a viajes largos (`base_duration_seconds >= 45.0`, las rutas de
+45 s y 60 s de `rutas.json`). Resuelve `MemoryMonitor` por `ServiceRegistry` (contrato `memoria`);
+sin monitor o sin API de drift, cuenta `drift_no_medibles` y avisa (fail-closed). Getters:
+`drift_checks_post_viaje()`, `drift_fallos_post_viaje()`, `drift_no_medibles()`,
+`ultimo_drift_pct()`.
+
+**Gate:** `scripts/rendimiento/memoria/test_m62_drift_post_viaje.gd` 12/0, EXIT 0; regresión
+`scripts/viajes/test_viajes.gd` 0 fallos. Evidencia `out/tanda75/`.

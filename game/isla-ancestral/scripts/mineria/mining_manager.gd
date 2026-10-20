@@ -86,6 +86,9 @@ const DERRUMBE_DURACION_S := 0.8
 const HIT_BUDGET_US := 1000
 ## Lote 2 — L7: rareza a partir de la cual el anuncio de recuperacion es "dorado".
 const RAREZA_ANUNCIO_DORADO := 2
+
+## J2: tope de claves de veta con diferimiento registrado (telemetria acotada).
+const MAX_DIFERIDOS := 64
 ## Lote 2 — G5: vecinos comprobados al validar el apoyo de una veta.
 const VECINOS_SOPORTE := [Vector3(0, -1, 0), Vector3(1, 0, 0), Vector3(-1, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -1)]
 ## Lote 2 — vetas declaradas por el catalogo de M35 (I1/K7).
@@ -111,6 +114,10 @@ var _chunks_editados: Dictionary = {}
 var _coleccion: Dictionary = {}
 ## Lote 2 — L5: clave de veta -> ticks_usec de fin del derrumbe.
 var _derrumbes: Dictionary = {}
+
+## J2/J4: telemetria de respawns diferidos por ocupacion (no se serializa).
+var _diferidos: Dictionary = {}   # clave_veta -> barridos consecutivos diferido
+var _diferidos_total: int = 0
 ## Lote 2 — L9: vibracion ligera opcional (cozy: se puede apagar).
 var vibracion_habilitada: bool = true
 ## Log por golpe fuera del hot path (K3/K6). Opt-in explicito.
@@ -467,10 +474,17 @@ func seleccionar_veta_mas_cercana(origen: Vector3, candidatas: Array) -> Resourc
 ## NO instancia nodos: itera el array recibido (K5).
 ## H17: corrige el `golpes_restantes = 2` fijo de M15 con el valor real del def.
 ## L7: emite mina_veta_recuperada con el flag de anuncio dorado.
-## Devuelve {evaluados, respawnados}.
-func barrido_regeneracion(vetas: Array, dia_actual: int, estacion_actual: int) -> Dictionary:
+## J2/J4: `ocupado` es un predicado OPCIONAL `Callable(Vector3) -> bool` que dice si
+## el lugar esta ocupado (jugador, construccion M17, otra veta). Si esta ocupado, la
+## veta NO se respawnea en este barrido y se reintenta en el siguiente: ese es el
+## "reintento diferido" de J2, y como el barrido de produccion corre en `dia_cambio`,
+## el reintento cae al proximo dia (J4). Sin predicado el comportamiento es el historico.
+## Devuelve {evaluados, respawnados, diferidos, no_listos}.
+func barrido_regeneracion(vetas: Array, dia_actual: int, estacion_actual: int, ocupado: Callable = Callable()) -> Dictionary:
 	var evaluados: int = 0
 	var respawnados: int = 0
+	var diferidos: int = 0
+	var no_listos: int = 0
 	for c in vetas:
 		if c == null or not is_instance_valid(c) or not (c is ResourceNode):
 			continue
@@ -479,12 +493,65 @@ func barrido_regeneracion(vetas: Array, dia_actual: int, estacion_actual: int) -
 		var def: ResourceDefinition = _def_de_id(rn.def_id)
 		if def == null:
 			continue
+		var clave: String = clave_veta(rn)
+		# Se decide ANTES de llamar a M15: `evaluar_respawn()` MUTA el estado y no
+		# consulta ocupacion (medido: 0 apariciones de `ocupad` en scripts/resources/).
+		if not _listo_por_calendario(rn, dia_actual, estacion_actual):
+			no_listos += 1
+			continue
+		if ocupado.is_valid() and bool(ocupado.call(rn.global_position)):
+			diferidos += 1
+			_anotar_diferido(clave)
+			continue
 		if rn.evaluar_respawn(dia_actual, estacion_actual):
 			respawnados += 1
+			_diferidos.erase(clave)
 			rn.golpes_restantes = maxi(1, def.golpes_requeridos)   # H17
-			_vetas_parciales.erase(clave_veta(rn))
+			_vetas_parciales.erase(clave)
 			mina_veta_recuperada.emit(rn.def_id, rn.global_position, _anuncio_dorado(def))
-	return {"evaluados": evaluados, "respawnados": respawnados}
+	return {"evaluados": evaluados, "respawnados": respawnados, "diferidos": diferidos, "no_listos": no_listos}
+
+## ESPEJO de SOLO LECTURA de las condiciones de `ResourceNode.evaluar_respawn()`
+## (M15). No muta nada: existe porque hay que consultar ocupacion antes de que M15
+## cambie el estado. Si M15 cambia su regla, el test de consistencia de M35 se pone
+## rojo (test_mineria_respawn_ocupado.gd, bloque E) — no se hereda en silencio.
+func _listo_por_calendario(rn: ResourceNode, dia_actual: int, estacion_actual: int) -> bool:
+	if not rn.esta_listo_para_respawn():
+		return false
+	if dia_actual < rn.respawn_dia_absoluto:
+		return false
+	if rn.respawn_estacion >= 0 and rn.respawn_estacion != estacion_actual:
+		return false
+	return true
+
+## J2: registra un diferimiento por veta. El mapa esta ACOTADO (MAX_DIFERIDOS):
+## es telemetria, no estado de juego, y no se serializa (un save viejo no lo trae
+## y el proximo barrido vuelve a diferir la misma veta sin perder nada).
+func _anotar_diferido(clave: String) -> void:
+	_diferidos_total += 1
+	if _diferidos.has(clave):
+		_diferidos[clave] = int(_diferidos[clave]) + 1
+		return
+	if _diferidos.size() >= MAX_DIFERIDOS:
+		_diferidos.erase(String(_diferidos.keys()[0]))
+	_diferidos[clave] = 1
+
+## J2: barridos consecutivos que lleva diferida una veta (0 si no esta diferida).
+func veta_diferida(clave: String) -> int:
+	return int(_diferidos.get(clave, 0))
+
+## J2: total historico de diferimientos (no baja al respawnear).
+func diferidos() -> int:
+	return _diferidos_total
+
+## J2: copia del mapa clave -> barridos diferidos (para HUD/diagnostico).
+func diferidos_por_veta() -> Dictionary:
+	return _diferidos.duplicate()
+
+## J2: limpia la telemetria de diferimientos (no toca el estado de las vetas).
+func limpiar_diferidos() -> void:
+	_diferidos.clear()
+	_diferidos_total = 0
 
 ## L7: el anuncio de recuperacion es "dorado" para vetas raras (rareza >= 2).
 func _anuncio_dorado(def: ResourceDefinition) -> bool:

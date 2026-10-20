@@ -1999,9 +1999,9 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 14. - [ ] [35] Iluminacion del Templo resalta vetas raras [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
 15. - [ ] [35] Acceso a cuevas desde el interior del Templo [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
 16. - [ ] [35] Evento de derrumbe decorativo en la sala del mineral ancestral [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
-17. - [ ] [35] Respawn con zona ocupada: reintento diferido [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+17. - [ ] [35] Respawn con zona ocupada: reintento diferido [M] <!-- fuente: 35-Mineria/05-Checklist.md --> — **ENTREGADO 2026-10-20 (Log 2043), codigo + test (no solo diseno).** Guarda de ocupacion INYECTABLE en `barrido_regeneracion(vetas, dia, estacion, ocupado := Callable())`: si el lugar esta ocupado la veta NO respawnea en ese barrido y se reintenta en el siguiente (el barrido de produccion corre en `dia_cambio`, asi que el reintento cae al proximo dia). Se decide ANTES de M15 porque `evaluar_respawn()` MUTA el estado y no consulta ocupacion (medido: 0 apariciones de `ocupad|bloqueado_por|player_encima|jugador_encima` en los 11 `.gd` de `scripts/resources/`). Telemetria acotada (`MAX_DIFERIDOS=64`): `veta_diferida()`, `diferidos()`, `diferidos_por_veta()`, `limpiar_diferidos()`. Suite nueva `test_mineria_respawn_ocupado.gd` **60/0/EXIT 0 x3** (piso 60 medido en verde, 0 SCRIPT ERROR); regresiones `test_mineria` **92/0** y `test_mineria_lote2` **104/0**; sonda de FEATURE en rojo (EXIT 1, 9 fallos en B + 3 en C) y sonda de GUARDIAN en rojo (EXIT 1, nombra los 6 bloques y dispara el piso 16<60). **Caveat medido:** `barrido_regeneracion` tiene **0 llamadores de produccion** (solo tests), asi que la guarda esta disponible pero no cableada. Flip `[->]` propuesto.
 18. - [ ] [35] Respawn con jugador dentro: desplazamiento suave [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
-19. - [ ] [35] Respawn con construccion M17 encima: espera al proximo dia [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
+19. - [ ] [35] Respawn con construccion M17 encima: espera al proximo dia [M] <!-- fuente: 35-Mineria/05-Checklist.md --> — **MECANISMO ENTREGADO 2026-10-20 (Log 2043) por la misma guarda de J2.** El predicado `ocupado` es generico: una construccion de M17 se pasa como `Callable(Vector3)->bool` y la veta espera al siguiente barrido (= proximo dia en produccion). Probado con el predicado `_ocupado_x_menor_500` en el bloque D: **difiere solo la veta con construccion y respawnea la libre**. Lo que NO se entrega: el cableado real con M17 (M17 no expone hoy una consulta de ocupacion por posicion; se verifico que la guarda funciona con un predicado, no que exista el predicado de produccion). Flip `[->]` propuesto.
 20. - [ ] [35] Veta en borde de chunk: sin duplicacion ni perdida [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
 21. - [ ] [35] Remeshing localizado y diferido por chunk [C] <!-- fuente: 35-Mineria/05-Checklist.md -->
 22. - [ ] [35] Pool de particulas de mineria [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
@@ -2325,3 +2325,44 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
   (volcar `type()` antes de indexar); (3) un `git diff --numstat` 156/0 es la prueba barata de que no
   se piso trabajo previo en un archivo que otro agente ya edito; (4) un test de recetas puede estar
   verde validando ids que no existen, porque el inventario acepta cualquier String.
+
+## 2026-10-20 05:40 (GMT-3) - RAMA 1 / msg 335: COLA V3 bloque 2, items J2 + J4 (respawn con ocupacion), Log 2043 -> canal 336
+
+- **Tracker 334 -> 335.** Entrante unico = **335** (acuse del director: P16/P17 entregados, bloque
+  ejecutable cerrado; orden: "segui con P18+ si hay disponible headless o el siguiente bloque de la
+  COLA V3"). **P18-P24 ya estan `[x]`** (diseno verificado 2026-10-13) y los items 4-28 del bloque 2
+  siguen bloqueados por la API de M08 (`set_block` = 0): **no habia "P18+"**. Se tomo el primer par
+  de items del bloque 2 que NO depende de M08: **J2** y **J4**.
+- **ENTREGADO (codigo + test, no solo diseno):** guarda de ocupacion inyectable en
+  `barrido_regeneracion()`. `mining_manager.gd` 30.850 -> 33.876 B (`git diff --numstat` **71/4**),
+  `test_mineria_respawn_ocupado.gd` nuevo (12.364 B).
+- **Medido antes de implementar:** (a) `evaluar_respawn()` de M15 MUTA estado y **no** consulta
+  ocupacion (**0** apariciones de `ocupad|bloqueado_por|player_encima|jugador_encima` en los 11 `.gd`
+  de `scripts/resources/`); (b) `barrido_regeneracion` tenia **0 llamadores de produccion** (solo
+  tests); (c) `intentar_extraccion` SI es produccion (`tool_controller.gd:347`).
+- **Evidencia:** suite nueva **60 checks / 0 fallos / EXIT 0 x3**, `CHECKS_MINIMOS = 60` medido en
+  verde, **0 SCRIPT ERROR**. Regresiones `test_mineria` **92/0** y `test_mineria_lote2` **104/0**.
+  Sonda de FEATURE en rojo: neutralizar el `if ocupado` -> **EXIT 1** con 9 fallos (B) + 3 (C).
+  Sonda de GUARDIAN en rojo: aborto de RUNTIME en `_run()` -> **EXIT 1**, nombra los 6 bloques
+  faltantes y dispara el piso (`solo 16 checks ejecutados (minimo 60)`).
+- **HALLAZGO 1 (M15):** el item D9 del checklist de M35 ("Validacion de ocupacion antes de
+  reaparecer", hoy `[x]`, delegado a M15) es **FALSO**: M15 no tiene esa validacion (0 apariciones).
+  Es justo la base de J2/J3/J4, por eso la guarda se implemento del lado de M35. Flip a `[ ]`/`[?]`
+  propuesto; **no aplicado**.
+- **HALLAZGO 2 (M52, bloquea K/L):** `VfxDirector` y `VfxTrigger` tienen **0 instanciaciones de
+  produccion** (0 referencias fuera de `scripts/particles/`, ningun autoload VFX en `project.godot`).
+  El catalogo espera `bloque_roto` en el bus `world.block_removed`, pero **M35 no lo emite** y el
+  renderer no existe en produccion: cablear M35 al VFX seria cablear a un subsistema muerto (la
+  trampa del guard que nunca pasa). K ("pool de particulas"), L1 ("chispas al golpear": bus vacio,
+  dueno M13) y L2 ("satisfaccion al extraer") quedan **NO entregables** hasta que el director
+  decida dueno del runtime VFX.
+- **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.**
+- Artefactos: Log **2043** (ASCII puro / CRLF / sin BOM), msg **336** (UTF-8 sin BOM / LF), este
+  backlog (LF preservado), `04-Codigo.md` de M35 (30.094 -> 33.724 B, LF, sin BOM, 0 U+FFFD), log
+  diario. Pools: logs 2044 (otro agente consumio el 2044), canal 336 consumido -> head 337 en el momento del reporte, **338** medido al cerrar (otro agente consumio el 337).
+- **Proxima:** NN > 335. Bloque 2 sin items headless restantes: 4-16 y 20-24 dependen de la API de
+  M08 (`set_block` = 0), 22/25/26 del runtime VFX de M52 (no instanciado), 27/28 de assets de audio
+  (0 en el repo), 29-31 son de M08. Reposicion de cola pedida (4ta vez) + decision sobre D9 y sobre
+  el dueno del runtime VFX.
+
+- [x] Log reservado: **2043** - M35: guarda de ocupacion en el respawn (items J2 + J4), codigo + suite headless

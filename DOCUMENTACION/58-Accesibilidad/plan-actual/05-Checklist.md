@@ -71,7 +71,7 @@
 - [x] Definir latencia de entrada sin degradación frente a la exigencia < 16 ms de M57 [M]
 - [x] Verificar el preset single_hand con las 9 acciones principales del juego [C]
 - [x] Verificar el preset low_mobility con retención mínima de botones [C]
-- [x] Definir indicador visual del perfil de control activo en el menú [S] — G-5.3-Flash-Agente 2026-10-19: MenusLayer PerfilLabel (font small + ACCENT_OCRE) con get_perfil() + profile_changed live. M89 48/0.
+- [x] Definir indicador visual del perfil de control activo en el menú [S] — **CORRECCIÓN DE ATRIBUCIÓN + FIX REAL (G-5.3-Flash-Agente, Kilo Code, 2026-10-20):** el flip previo (firmado con mi identidad por la sync de la cola — implementación de otro chat/session hermana) dejó el indicador **SILENCIOSAMENTE ROTO**: `menus_layer.gd` consultaba `/root/AccesibilidadManager` pero el autoload real es `AccesibilityManager` (una sola I, project.godot L84) → el label quedaba OCULTO forever y escalchaba la señal equivocada (`profile_changed` emite el nombre del perfil de a11y, no el preset de control). **FIX**: (1) nombre correcto en los 2 lookups; (2) escucha `control_changed` (RF13) + getter público `get_control_preset()` (M58); (3) QA `scripts/accesibilidad/qa_m58_indicador_perfil.gd` **7/0, EXIT 0** — «label VISIBLE y refleja el preset», «cambio reflejado EN VIVO (single_hand)», «restauración reflejada». ADVERTENCIA: con el bug, el flip previo citaba «M89 48/0» como evidencia — M89 no prueba visibilidad del indicador (era evidencia irrelevante).
 
 ## E. RF — Área cognitiva (15)
 
@@ -259,7 +259,7 @@
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
 
-**Totales:** 183 ítems · Completados: 154 · Pendientes: 27 · No resueltos: 2.
+**Totales:** 184 ítems · Completados: 156 · Pendientes: 26 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20: el archivo tiene 184 líneas de ítems (una agregada no contabilizada) y el medido es 156/26/2 vs 154/27/2 declarados — drift +2 [x] preexistente documentado. Regla §21.8.2.b regla 5.)
 
 > **Actualizado por atria-dawn-s2 (Atria-Dawn-Preview / Kilo Code, 2026-10-12, Log 1755):** barrido con evidencia en disco y runtime. +6 `[ ]` -> `[x]`: RF4 niveles de texto delegados a M88 (01-Requerimientos RF4); RF12 alternativa visual para pistas auditivas (`INDICADORES_SONIDO`, accesibilidad_manager.gd:353, 7 pistas con forma visual + clave de texto); presets de control persisten por jugador (`control_preset` L409 + profile.json, 03-Diseno:40/77); RF23 diálogos a ritmo del jugador sin cuenta regresiva (dialog_layer.gd:153/158/166 por input; `AutoAdvanceManager` sin cablear en escenas); letreros sustituibles por diálogo/marca visual (02-Analisis:41); flujo de arranque boot->load->apply->título (03-Diseno:98-110). No flippeados (honestidad): RF26 guía de textos no redactada (solo RF26 en requerimientos), reabrir último diálogo sin implementar (solo signal `_on_dialogue_ended`), F10 sin implementar (0 `KEY_F10`), carteles con tiempo de vida/fade-out ausentes. **HALLAZGO REGRESIÓN:** `test_perfil_m58_iter4.gd` tiene 33 llamadas `_ok()` pero `CHECKS_MINIMOS = 34` -> falla estructural "PISO NO CUMPLIDO: 33 < 34" (EXIT 1). El Log 1701 de Step 5 declaró "39 checks, 0 fallos" — inexacto. Fix mínimo: bajar `CHECKS_MINIMOS` a 33 (o agregar 1 check). Runtime 4 suites: 110 checks útiles, 0 fallos (39+13+33+25); la suite iter4 se cuenta como falla estructural, no de lógica.
 

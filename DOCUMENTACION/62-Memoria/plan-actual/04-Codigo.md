@@ -640,3 +640,24 @@ Evidencia: `out/tanda71/`.
   suite pina el contrato de la cola y la caché, no el streaming del motor.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 74.
+
+## Tanda 75 — L166 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2044)
+
+**Verificación de herencia (no reimplementación):** el drift-check post-viaje ya estaba cableado
+en M28 `TravelService._atracar()` por DeepSeek-V4.1-Flash (Log 2021). Esta tanda comprobó el punto
+de llamada y aplicó el flip que faltaba en el checklist.
+
+- `_verificar_drift_post_viaje(ruta)` se ejecuta **después** de aterrizar y **antes** de
+  `travel_arrived`, así el listener de llegada ya puede leer el resultado.
+- `UMBRAL_VIAJE_LARGO_S = 45.0`: “largo” = rutas de 45 s y 60 s del `rutas.json` real
+  (20/30/45/60). El umbral no es arbitrario.
+- Resolución de `MemoryMonitor` por `ServiceRegistry` (contrato `memoria`); sin monitor suma
+  `drift_no_medibles` y avisa. **Fail-closed:** no se reporta verde sin medición.
+- Getters: `drift_checks_post_viaje()`, `drift_fallos_post_viaje()`, `drift_no_medibles()`,
+  `ultimo_drift_pct()`.
+- **Gate:** `test_m62_drift_post_viaje.gd` 12/0; **regresión:** `test_viajes.gd` 0 fallos.
+  Evidencia: `out/tanda75/`.
+- **M69:** el servicio de fast travel solo emite `viaje_solicitado`; la ejecución del teleport
+  sigue siendo del caller M28/M59. La suite mide el punto de llamada real de M28.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 75.

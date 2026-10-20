@@ -92,31 +92,33 @@ func focus_first() -> Control:
 	return null
 
 
-## M58 ítem [42]: indicador visual del perfil de control activo (AccesibilidadManager).
+## M58 ítem [42]: indicador visual del perfil de control activo.
+## FIX G-5.3-Flash-Agente 2026-10-20: (1) autoload correcto 'AccesibilityManager'
+## (el lookup anterior 'AccesibilidadManager' SIEMPRE fallaba → label oculto
+## forever); (2) escucha `control_changed` (signal del preset de control, RF13)
+## y muestra `get_control_preset()` — antes escuchaba profile_changed, que emite
+## el nombre del perfil de accesibilidad, no el preset de control.
 func _actualizar_perfil_label(label: Label) -> void:
-	var acc := get_node_or_null("/root/AccesibilidadManager")
-	if acc == null or not acc.has_method("get_perfil"):
+	var acc := get_node_or_null("/root/AccesibilityManager")
+	if acc == null or not acc.has_signal("control_changed") or not acc.has_method("get_control_preset"):
 		label.text = ""
 		label.visible = false
 		return
-	var perfil: Dictionary = acc.get_perfil()
-	var nombre := String(perfil.get("nombre", "custom"))
-	if nombre.is_empty():
-		nombre = "custom"
-	label.text = "Controles: " + nombre
+	label.text = "Controles: " + String(acc.get_control_preset())
 	label.visible = true
 
 
 func _conectar_perfil(label: Label) -> void:
-	var acc := get_node_or_null("/root/AccesibilidadManager")
-	if acc != null and acc.has_signal("profile_changed"):
-		if not acc.profile_changed.is_connected(_on_profile_changed):
-			acc.profile_changed.connect(_on_profile_changed)
+	var acc := get_node_or_null("/root/AccesibilityManager")
+	if acc != null and acc.has_signal("control_changed"):
+		if not acc.control_changed.is_connected(_on_control_preset_changed):
+			acc.control_changed.connect(_on_control_preset_changed)
 		_label_perfil_ref = label
+
 
 var _label_perfil_ref: Label = null
 
 
-func _on_profile_changed(profile_name: String) -> void:
+func _on_control_preset_changed(preset: String) -> void:
 	if _label_perfil_ref != null and is_instance_valid(_label_perfil_ref):
-		_label_perfil_ref.text = "Controles: " + profile_name
+		_label_perfil_ref.text = "Controles: " + String(preset)

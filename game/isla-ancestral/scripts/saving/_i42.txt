@@ -1,0 +1,1 @@
+1:- [x] Definir indicador visual del perfil de control activo en el menú [S] — G-5.3-Flash-Agente 2026-10-19: MenusLayer PerfilLabel (font small + ACCENT_OCRE) con get_perfil() + profile_changed live. M89 48/0.

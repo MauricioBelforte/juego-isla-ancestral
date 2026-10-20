@@ -163,7 +163,7 @@
 - [x] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M] — [x] 2026-10-20 (Tanda 74, DS-Opencode): `StreamManager.encolar()` RECHAZA la 2.ª carga de una ruta ya en vuelo ANTES de `load_threaded_request` (guard central; `_encolar_precarga` ya lo hacía). Suite nueva `test_m62_doble_carga_m63.gd` **20 checks**: 1.ª carga = 1 ruta/1 op; 2.ª rechazada (la cola no crece); 1 callback; ruta cerrada; `ResourceLoader` entrega la MISMA instancia; LeakGuard 0 duplicados; control positivo `CACHE_MODE_IGNORE`. **ROJO 4 fallos → VERDE 0/20**; regresión M63 7/51/42 + M62 hilos 33, **0 fallos**. Sin cambio de M62; cambio acotado a M63 `stream_manager.gd`. Log 2042.
 - [x] La pantalla de carga (M63) precarga pools sin duplicarlos al terminar [M]
 - [x] El 62 nunca descarga un recurso que esté en la cola de carga del 63 (evento cancel) [C] — **iter. 5 (Log 1187).** El candidato vetado por el filtro **no sale de la cola** y se cuenta en `descartes_por_carga()`; probado tanto por la vía directa (bloque A) como por el enforcement nivel 3 (bloque B)
-- [ ] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M]
+- [x] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M] — [x] 2026-10-20 (Tanda 75, DS-Opencode): **flip de herencia verificado**, no reimplementado. El cableado ya existía: `TravelService._atracar()` llama `_verificar_drift_post_viaje(ruta)` DESPUÉS de aterrizar y ANTES de `travel_arrived`; umbral `UMBRAL_VIAJE_LARGO_S=45.0` derivado de las 2 rutas más largas de `rutas.json` (20/30/45/60). Autor del código: DeepSeek-V4.1-Flash (Log 2021); punto de llamada en M28. Gate `test_m62_drift_post_viaje.gd`: **12 checks, 0 fallos, EXIT 0** (A corto no chequea; B largo OK; C drift forzado 100% → 1 fallo; D sin monitor → NO MEDIBLE, nunca verde; señal de llegada intacta). Regresión `test_viajes.gd`: **0 fallos, EXIT 0**. Evidencia `out/tanda75/`; Log 2044.
 - [x] NO tocar la carpeta 61 (en curso por otro agente): solo consumir sus entregables [S] — **iter. 5 (Log 1187): cumplido y verificado.** `git status` de la iter. muestra cambios SOLO en `scripts/rendimiento/memoria/` (nunca en `scripts/rendimiento/` fuera de `memoria/`). M61 no se tocó; su presupuesto definitivo sigue pendiente (ver L154)
 
 ## K. Edge cases
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 134 - Pendientes: 16 - No resueltos: 0.
+**Totales:** 150 items - Completados: 135 - Pendientes: 15 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -872,3 +872,24 @@ banco anterior muere. No toca producción.
   mide el contrato de la cola y la caché, no el streaming C++ de `VoxelTerrain`.
 
 **Totales tras el cierre:** 134 / 16 / 0 (150 items).
+
+## Tanda 75 — L166 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2044)
+
+**Flip de herencia verificado: el item ya estaba implementado por DeepSeek-V4.1-Flash (Log 2021).**
+
+- **Código existente (M28):** `TravelService._atracar()` llama `_verificar_drift_post_viaje(ruta)`
+  después de aterrizar y antes de `travel_arrived`; resuelve `MemoryMonitor` por `ServiceRegistry`
+  (contrato `memoria`), no por parseo. Umbral `UMBRAL_VIAJE_LARGO_S = 45.0` (rutas 45 s y 60 s).
+- **Fail-closed:** sin monitor o sin `drift_check`/`drift_porciento`, suma `drift_no_medibles` y
+  avisa; un viaje largo NO se reporta verde sin medición.
+- **Gate:** `test_m62_drift_post_viaje.gd` — **12 checks, 0 fallos, EXIT 0**:
+  A corto (20 s) no chequea; B largo (60 s) chequea 1 y 0 fallos; C baseline inyectada a la mitad
+  (drift 100%) → 1 fallo; D sin monitor → 1 no medible y el contador de checks no sube; 4 llegadas
+  emitidas; umbral 45 s. Evidencia `out/tanda75/drift_post_viaje.log` (sha256 `025a6ea6…`).
+- **Regresión M28:** `test_viajes.gd` → **0 fallos, EXIT 0** (`out/tanda75/test_viajes.log`,
+  sha256 `bfec4aa0…`).
+- **Alcance:** M69 no ejecuta el teleport (solo emite `viaje_solicitado`; el caller M28/M59 lo hace).
+  La medición cubre el punto de llamada real de M28; el viaje rápido M69 queda como contrato de
+  señal, no como teleport medido. El umbral 45 s queda confirmado por las rutas reales.
+
+**Totales tras el cierre:** 135 / 15 / 0 (150 items).

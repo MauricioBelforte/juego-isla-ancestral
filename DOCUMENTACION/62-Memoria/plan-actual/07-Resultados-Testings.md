@@ -657,3 +657,29 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
 ```
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 74.
+
+## 26. Tanda 75 (2026-10-20, DS-Opencode, Log 2044): L166 — drift-check post-viaje (herencia)
+
+- **Objetivo:** cerrar el ítem `[ ]` L166 verificando el cableado existente, sin duplicar la
+  implementación de DeepSeek-V4.1-Flash (Log 2021).
+- **Punto de llamada real:** `TravelService._atracar()` → `_verificar_drift_post_viaje(ruta)`
+  después de aterrizar y antes de `travel_arrived`. Umbral `UMBRAL_VIAJE_LARGO_S = 45.0`
+  (rutas 20/30/45/60 s; “largo” = 45 y 60).
+- **Gate:** `test_m62_drift_post_viaje.gd` — **12 checks, 0 fallos, EXIT 0**:
+  A corto (20 s) no chequea; B largo (60 s) chequea 1 con 0 fallos; C baseline inyectada a la mitad
+  (drift 100%) → 1 fallo y `drift_check()=false`; D sin monitor → 1 NO MEDIBLE y checks no sube;
+  4 llegadas emitidas; umbral 45 s. Evidencia `out/tanda75/drift_post_viaje.log`
+  (sha256 `025a6ea61c34ac0369655d4944f65cb03f6851ab15d6fb478c7f5ea3acb268b6`).
+- **Regresión M28:** `test_viajes.gd` → 0 fallos, EXIT 0
+  (`out/tanda75/test_viajes.log`, sha256 `bfec4aa0c5afd136186ac44b1126af67fa85f144b87cd78d82fc58fd13773221`).
+- **Alcance:** M69 no ejecuta el teleport (emite `viaje_solicitado`; el caller M28/M59 ejecuta).
+  La suite pina el punto de llamada de M28 y el contrato fail-closed; no mide el RSS de un viaje
+  real con mundo cargado (Play Mode).
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_drift_post_viaje.gd
+```
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 75.
