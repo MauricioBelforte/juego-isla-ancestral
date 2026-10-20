@@ -195,7 +195,8 @@ ecomendar_preset.
 
 ### [S] DetecciÃ³n automÃ¡tica
 - [x] Definir detecciÃ³n de GPU (RenderingServer.get_video_adapter_name())
-- [x] Definir detecciÃ³n de RAM (OS.get_static_memory_usage()) -- agnes-3-flash 2026-10-22 (M90 t12): detect_hardware() usa OS.get_static_memory_usage() (+ ecomendar_preset).
+- [x] Definir detecciÃ³n de RAM (OS.get_static_memory_usage()) -- agnes-3-flash 2026-10-22 (M90 t12): detect_hardware() usa OS.get_static_memory_usage() (+ 
+ecomendar_preset).
 - [x] Definir detecciÃ³n de CPU (OS.get_processor_name()) -- agnes-3-flash 2026-10-22 (M90 t12): detect_hardware() usa OS.get_processor_name() + OS.get_processor_count().
 - [x] Definir lÃ³gica de recomendaciÃ³n de preset segÃºn hardware
 - [x] Definir GPU baja + RAM baja + CPU baja Ã¢â€ â€™ preset bajo

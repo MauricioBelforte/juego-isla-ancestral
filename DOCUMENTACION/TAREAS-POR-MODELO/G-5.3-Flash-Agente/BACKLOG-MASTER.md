@@ -453,19 +453,19 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 18. - [ ] [69] Modo cronológico para historiales [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 19. - [ ] [69] Filtros por tipo de lugar (bioma, servicios) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 20. - [ ] [69] Sin dependencia solo de color para estado [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-21. - [ ] [69] M28: integración con waypoints descubiertos [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+21. - [x] [69] M28: integración con waypoints descubiertos [S] · [x] T6-M69 2026-10-19 (G-5.3-Flash-Agente): llegar por barco (travel_arrived M28) desbloquea anclas de esa isla (mapeo set_mapa_islas) — test 36/0 EXIT 0 PASS (CHECKS_MINIMOS 28→33); flips 05-Checklist (116/22/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 22. - [x] [69] M29-M31: restricción temporal (noche, tormenta) [S] · [x] T4-M69 2026-10-19 (G-5.3-Flash-Agente): restriccion_temporal_activa() + motivo 'horario' en fast_travel_service.gd — test 24/0 EXIT 0 PASS (GameTime real noche/día verificado); flips 05-Checklist (114/24/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 23. - [ ] [69] M110: debug menu con listado de anchors [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-24. - [ ] [69] M122: captura de crash si portal falla [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+24. - [x] [69] M122: captura de crash si portal falla [S] · [x] T8-M69 2026-10-19 (G-5.3-Flash-Agente): portal roto -> 'portal' + reportar_falla_portal (CrashReporter real, dump user://crash) — 47/0 PASS. <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 25. - [x] [69] M124: balance económico según distancia [S] · [x] T5-M69 2026-10-19 (G-5.3-Flash-Agente): costo_viaje_de()/set_costo_distancia_fn + fórmula cozy default (MundoRaiz CENTRO, tope 1..8) — test 30/0 EXIT 0 PASS (CHECKS_MINIMOS 23→28); flips 05-Checklist (115/23/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 26. - [ ] [69] M32: anulación del portal en clima extremo [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-27. - [ ] [69] M68: respetar desactivación de hápticos [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+27. - [x] [69] M68: respetar desactivación de hápticos [S] · [x] T7-M69 2026-10-19 (G-5.3-Flash-Agente): vibrar respeta vibracion_on=False (early return M57) — QA FX OK EXIT 0 (K27 x2). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 28. - [ ] [69] M91: respetar volumen de feedback de viaje [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-29. - [ ] [69] Test de carga: 100 anchors en mapa [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-30. - [ ] [69] Test de coherencia: 1000 teleports consecutivos [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-31. - [ ] [69] Test de día/noche: comportamiento en diferentes horas [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-32. - [ ] [69] Test de desconexión: recuperar estado sin perder progreso [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-33. - [ ] [69] Test de stress concurrentes: 50 anchors ACTIVOS [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+29. - [x] [69] Test de carga: 100 anchors en mapa [M] · [x] T8-M69 2026-10-19 (G-5.3-Flash-Agente): 100 anclas + 1000 lookups O(1) en 2 ms — 47/0 PASS; flips 05-Checklist (120/18/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+30. - [x] [69] Test de coherencia: 1000 teleports consecutivos [M] · [x] T9-M69 2026-10-19 (G-5.3-Flash-Agente): 1000 solicitudes en 2 ms sin drift — 51/0 PASS. <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+31. - [x] [69] Test de día/noche: comportamiento en diferentes horas [M] · [x] T9-M69 2026-10-19 (G-5.3-Flash-Agente): barrido 24 h coherente con GameTime+Weather (0 desvíos) — 51/0 PASS; flips 05-Checklist (122/16/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+32. - [x] [69] Test de desconexión: recuperar estado sin perder progreso [M] · [x] T7-M69 2026-10-19 (G-5.3-Flash-Agente): service como provider M59 (section fast_travel) + round-trip test — 37/0 EXIT 0 PASS; flips 05-Checklist (118/20/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+33. - [x] [69] Test de stress concurrentes: 50 anchors ACTIVOS [M] · [x] T10-M69 2026-10-19 (G-5.3-Flash-Agente): 50 activas + 100 ráfagas sin drift (0 ms) — 55/0 PASS; flips 05-Checklist (123/15/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 34. - [ ] [69] Test de recuperación: archivo corrupto ? resync [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 35. - [ ] [69] Test de batería: consumo por viaje a larga distancia [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 36. - [ ] [69] Test multidioma: búsqueda en distintos alfabetos [M] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->

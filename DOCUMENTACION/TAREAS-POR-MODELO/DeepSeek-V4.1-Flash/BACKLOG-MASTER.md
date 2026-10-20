@@ -1973,10 +1973,10 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 21. - [ ] [62] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
 22. - [ ] [62] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
 23. - [ ] [62] Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C] — **MEDIDO 2026-10-19 (Log 2025) con el arnés de clima: 30 min 00 s de reloj de pared, 359 muestras, baseline 168.4 MB, drift +0.1% <= 5%, `drift_check()=true`, 0 eventos `travel_started` (servicio presente y instrumentado), 0 huérfanos. Misma salvedad que el ítem 12: 3 SCRIPT ERROR de `pause_layer.gd:147` (regresión `2e9b8f3`) en el boot. Flip pendiente del director.** <!-- fuente: 62-Memoria/05-Checklist.md -->
-24. - [ ] [62] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-25. - [ ] [62] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
-26. - [ ] [62] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
-27. - [ ] [62] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+24. - [ ] [62] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M] — **NO MEDIBLE 2026-10-20 (Log 2028):** 0 archivos `.ogg`/`.wav`/`.mp3` en `game/isla-ancestral`; `set_estado_clima()` (M42) 0 llamadores de produccion (los 3 matches son 2 del propio `test_ambient_m42.gd` y 1 comentario de mi arnes); `pedir_banco_audio`/`iniciar_descarga_audio` 0 llamadores fuera de mis suites. Sin streams no hay crecimiento de memoria de audio que medir. Deuda de M41/M42/M44/M91.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+25. - [ ] [62] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C] — **MEDIDO 2026-10-20 (Log 2028) a nivel de BUFFER, con alcance declarado:** arnes `sesion_m62_voxel_500.gd` (escena real + MemoryMonitor de produccion). Buffer real de VoxelTools 16^3 con `BlockType.BEDROCK`: **500/500 excavados** leidos de vuelta como AIR, **500/500 regenerados** con el ID original, **5 buffers temporales creados / 0 vivos** (WeakRef), memoria **135.8 -> 135.8 MB (+0.0%)**, huerfanos 0. **9 checks / 0 fallos / EXIT 0 x3 / SCRIPT ERROR 0.** Sondas EN ROJO: `M62_RETENER_BUFFERS=1` (5 vivos, EXIT 1) y `M62_SIN_REGENERAR=1` (0/500, EXIT 1). **Limite medido:** el VoxelTerrain de la escena real no sirve headless (`updated_blocks=0`, `set_voxel` no persiste) y el generador invocado fuera del motor escribe 0 -> el camino Play Mode exige corrida CON renderer. Flip pendiente del director.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+26. - [ ] [62] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M] — **MEDIDO 2026-10-20 (Log 2028), PARCIAL:** `test_m62_chunks_presupuesto.gd` contra `budgets.json` real (preset media, tope voxel 650 MB) y el LRU real (StreamManager, bloque 16^3 segun `mesh_block_size=16`). Coste por chunk de **DATOS = 8.4 KB** (512 buffers, delta 4306.9 KB). Maximo por presupuesto: baja 60.952 / media 79.238 / alta 97.523 chunks. Tope LRU de produccion 4096 chunks = **34 MB = 5.2% del tope voxel** (19x de margen); el LRU respeta el tope EXACTO (20.100 registrados con tope 20.000 -> activos 20.000) y libera con 0 recursos vivos. **6 checks / 0 fallos / EXIT 0 x3 / SCRIPT ERROR 0**; sonda roja `M62_SIN_TOPE=1` -> EXIT 1. **No medible:** mallas/colliders por chunk (headless sin renderer), que es la parte que puede dominar el presupuesto -> item parcial, NO cerrado.** <!-- fuente: 62-Memoria/05-Checklist.md -->
+27. - [ ] [62] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C] — **NO MEDIBLE 2026-10-20 (Log 2028):** no hay forma de imponer un tope de 4 GB al proceso headless, y "sin OOM" no se puede afirmar sin ese tope. Lo medible queda medido: preset **baja = 1500 MB** de topes totales (voxel 500) contra 4096 MB = **36.6%**; memoria de boot real de la escena **135.8 MB**. Requiere una corrida con limite de RAM del SO.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 28. - [ ] [160] Objetos con regeneración (regeneracion_seg) y herramienta/tier M158 por objeto (T1..T3 según isla) — medido 2026-10-15 (DeepSeek, Log 1862): regenerac <!-- fuente: 160-Diseno-De-Ubicaciones-Del-Mundo/05-Checklist.md -->
 29. - [ ] [160] Integracion runtime de puzzles de ruinas con M25 — M25 cerrado (122/122), integracion pendiente <!-- fuente: 160-Diseno-De-Ubicaciones-Del-Mundo/05-Checklist.md -->
 
@@ -2191,3 +2191,42 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
   headless (topes con GPU); 24-27 son Play Mode y se pueden armar con el mismo patrón.
 
 
+
+## 2026-10-20 00:41 (GMT-3) — RAMA 1 / msg 326: ítems 25 y 26 medidos, 24/27 no medibles, tracker 800 corregido (Log 2028, canal 327)
+
+- **Tracker:** estaba en **800** (commit `1ecc611` lo pasó de 323 a 800) mientras el último NN
+  real del canal era **326** → el canal quedaba ciego a todo mensaje futuro. **Corregido a 326.**
+- **Entrante único = 326** (acuse del 325: ítem 12 aceptado con salvedad, commit del arnés de
+  clima hecho, BUG autorizado, GO a ítems 24-27, regla de flota "reportar SCRIPT ERROR").
+- **Punto 3 cumplido sin duplicar:** el BUG de `2e9b8f3` **ya estaba** registrado como
+  **BUG-137** (`DOCUMENTACION/11-BUGS.md:157`, resuelto 2026-10-19 23:25 por G-5.3-Flash-Agente,
+  con mi hallazgo atribuido). Verificado el fix en disco (`_buscar_confirm_popup()` en
+  `pause_layer.gd:158`, secuencia `2e9b8f3` → `0ecdad5`) y **medido**: boot de la escena real
+  headless con **SCRIPT ERROR = 0** en 6 corridas.
+- **Ítem 25 (500 bloques) MEDIDO a nivel de BUFFER** con arnés nuevo `sesion_m62_voxel_500.gd`:
+  500/500 excavados leídos como AIR, 500/500 regenerados, 5 buffers temporales / 0 vivos,
+  memoria 135.8 → 135.8 MB, huérfanos 0, **9 checks / 0 fallos / EXIT 0 ×3 / SCRIPT ERROR 0**.
+  Sondas EN ROJO: retención (5 vivos) y sin regenerar (0/500), ambas EXIT 1 y nombrando el check.
+  **Hallazgo del método:** con la fuga inyectada el delta de memoria es +0.0% → el check de
+  memoria NO caza fugas de 80 KB; la guarda real es el WeakRef.
+  **Límites medidos:** VoxelTerrain headless `updated_blocks=0` y `set_voxel` no persiste;
+  `_generate_block()` fuera del motor escribe 0 aunque `get_block_at()` devuelva 4.
+- **Ítem 26 PARCIAL** con arnés nuevo `test_m62_chunks_presupuesto.gd`: coste por chunk de
+  DATOS **8.4 KB** (bloque 16³, `mesh_block_size=16`); máximo por presupuesto baja 60.952 /
+  media 79.238 / alta 97.523; tope LRU de producción **4096 = 34 MB = 5.2% del tope voxel**;
+  LRU respeta el tope exacto (20.100 → 20.000) y libera con 0 recursos vivos;
+  **6 checks / 0 fallos / EXIT 0 ×3**; sonda roja `M62_SIN_TOPE=1` EXIT 1. **Mallas/colliders no
+  medibles headless** → no se cierra.
+- **Trampa nueva:** `VoxelBuffer` lleno con `fill()` de un solo valor se guarda **comprimido**
+  (0.4 KB/chunk, 20× optimista). Hay que materializar con un segundo valor distinto.
+  Otras: sonda sin watchdog se cuelga si un SCRIPT ERROR aborta `_initialize()`;
+  `StreamManager.registrar_chunk()` exige `Resource` (un `VoxelBuffer` aborta con TypeError).
+- **Ítems 24 y 27 NO MEDIBLES** con evidencia re-medida: 24 → 0 assets de audio y 0 llamadores
+  de producción de `set_estado_clima`; 27 → no se puede imponer tope de 4 GB (solo lo medible:
+  preset baja 1500 MB de topes = 36.6% de 4096 MB, boot real 135.8 MB).
+- **Numeración:** Log **2028** (cabeza medida justo antes = 2028). Canal: último real **326**,
+  pool con cabeza **327** = último+1 → se usó **327**.
+- **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** `CHECKLIST-GLOBAL.md`, `quality.yml`,
+  `AGENTS.md`, `project.godot`, `11-BUGS.md` y los `05-Checklist` intactos.
+- **Próxima:** NN entrantes > 326. Pendiente del director: flips de 25 (o criterio con renderer)
+  y 26 (parcial), cableado de las 2 suites a `quality.yml`, decisión sobre 24/27.

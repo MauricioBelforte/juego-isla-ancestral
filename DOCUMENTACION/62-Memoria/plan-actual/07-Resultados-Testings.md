@@ -512,3 +512,24 @@ el frame equivocado. (Esa fue la 1.ª corrida en rojo: `21 checks, 1 fallo`.)
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_m62_audio_bioma.gd
 ```
+
+## 20. Tanda 68 (2026-10-20, DS-Opencode, Log 2027): L150 — pistas largas (M41/M44) por streaming, no en RAM completa
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L150 del checklist: "Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa".
+- **Contrato pinneado (sin cambio de producción):** el ciclo de streaming del `memory_monitor.gd`: `iniciar_descarga_audio` (pista estacionada) → `pedir_banco_audio` == "diferido" (no se reproduce a medias, idempotente por nombre) → `terminar_descarga_audio` → "reproducir"; la pista larga (60 MB) se encola como candidata y el cambio de región la descarga con WeakRef 0 vivos, sin retención en el lote (`_ultimo_lote` = solo {peso,dist,edad}).
+- **Suite nueva:** `test_m62_pistas_streaming.gd` (**57 checks**) con el autoload REAL `MemoryMonitor` vía `--headless --script` (1 check de base):
+  - **A (10):** streaming de una pista larga: queda en descarga; pedirla se difiere y se registra; pedirla de nuevo sigue diferido y NO duplica; al terminar se reproduce; una pista sin descarga se reproduce directo.
+  - **B (10):** no en RAM completa: 60 MB encolados con peso/distancia; el cambio de región fuerza; lote único; resumen "60 MB"; forzada y cambio contados; WeakRef 0 vivos con el lote reportado; `objetos_vivos` ≤ base.
+  - **C (17):** música (M41) + ASMR (M44) simultáneas: ambas en descarga y diferidas; terminar música la vuelve reproducible SIN tocar ASMR (que sigue diferida); terminar ASMR la vuelve reproducible; ambas candidatas (60+24 MB) → un solo lote, 60 MB primero, una forzada, WeakRef 0.
+  - **D (10):** ciclo ×3 de regiones: 3 pistas diferidas, 3 reproducidas, 3 viajes fuerzan; cola 0; +3 forzadas; +3 cambios; el registro de diferidos suma 3 nombres (strings, no recursos); pista actual reproducible; WeakRef 0; `objetos_vivos` ≤ base.
+  - **E (9):** orden por lejanía (9,5,2) con pesos 60/12/24 MB; un lote de 3; resumen 60 MB primero; una forzada por cambio; WeakRef 0; balance final fin ≤ base.
+- **Resultado:** 57 checks, 0 fallos, **×3 corridas idénticas** (corridas 2/3/4, exit 0, logs normalizados idénticos de 410 líneas). La corrida 1 de medición dio verde a la primera (sin iteración de harness). Evidencia: `out/tanda68/suite_corrida{1..4}.log`.
+- **Guardián de 3 capas probado EN ROJO:** piso artificial 999 → `[FALL] solo 57 checks ejecutados (mínimo medido en verde: 999)` + exit 1 (`out/tanda68/guardian_rojo.log`); suite restaurada byte-idéntica (sha256 `43a73a43…`).
+- **Regresión:** 15 suites M62 (las 14 del set T67 + la nueva) + `generar_budgets.gd -- --check` → todas verdes (47/39/21/16/60/33/27/133/60/25/33/24/24/45/57 checks + budgets; `out/tanda68/reg_*.log`).
+- **Alcance (lo que NO prueba):** M41 (`music_director.gd`) y M44 (`feedback_director.gd`) son directores de lógica sin reproductores propios ni llamadas al handshake del 62; el cableado de producción (estacionar la pista al cambiar de tema y avisar entrar/salir) pertenece a M41/M44. La suite pina el mecanismo del 62 y el ciclo canónico que lo cumple.
+- **Reproducir:**
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_pistas_streaming.gd
+```

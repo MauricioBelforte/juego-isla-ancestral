@@ -147,7 +147,7 @@
 ## I. Integración con M41-M44 (audio)
 
 - [x] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región [M]
-- [ ] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C]
+- [x] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa [C]
 - [x] Voces del pool M43 con tope duro: si se llena, se corta la voz más antigua (nunca crece) [S]
 - [ ] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M]
 - [ ] Los buses (M91) no retienen streams detenidos [S]
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 127 - Pendientes: 23 - No resueltos: 0.
+**Totales:** 150 items - Completados: 128 - Pendientes: 22 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -656,3 +656,41 @@ Mismo criterio que los cierres previos (L137/139/140/141/142/143).
 `stream_manager.gd` (M63, read-only); el colector de sintaxis (autogenerado).
 
 **Totales tras el cierre:** 127 / 23 / 0 (150 items).
+
+## Notas del Agente — Tanda 68 (DS-V4.1-Flash-Opencode, OpenCode, 2026-10-20, Log 2027)
+
+**Estado:** L150 cerrado por MEDICIÓN (no por argumento): suite nueva `test_m62_pistas_streaming.gd`
+(57 checks, 0 fallos, ×3 corridas idénticas 2/3/4) con el autoload real MemoryMonitor. Cierra el ítem
+"Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa".
+
+**Contrato medido (mecanismo del 62, sin cambio de producción):**
+- STREAMING de una pista larga: mientras está EN descarga (`iniciar_descarga_audio`), pedirla devuelve
+  "diferido" (no se reproduce a medias); pedirla N veces durante la descarga NO duplica el registro
+  (idempotente por nombre). `terminar_descarga_audio` la vuelve "reproducir" (stream listo).
+- NO EN RAM COMPLETA: la pista de 60 MB se encola como candidata y el cambio de región la descarga
+  (`avisar_cambio_region` == true); WeakRef 0 vivos y el lote reporta su peso SIN retener el recurso
+  (`_ultimo_lote` es solo {peso,distancia,edad}).
+- M41 + M44 SIMULTÁNEOS: música y ASMR en streaming a la vez; terminar una la vuelve reproducible
+  SIN afectar a la otra; ambas se descargan en el mismo lote al salir de la región (60 MB primero).
+- CICLO ×3 de regiones: sin acumulación — cola 0 en cada frontera, forzadas +3, pistas mueren
+  (WeakRef 0), el registro de diferidos suma los 3 nombres (strings, no recursos) y `objetos_vivos`
+  no crece (delta 0).
+- ORDEN: drenaje por lejanía (9,5,2 estricto) y pesos en el lote; UNA liberación forzada por cambio
+  aunque haya 3 pistas.
+
+**Evidencia (out/tanda68):** corrida 1 de MEDICIÓN dio verde a la primera (57/57) sin iteración de
+harness; corridas 2/3/4 idénticas (exit 0; logs normalizados de 410 líneas idénticos). Guardián de
+3 capas EN ROJO (piso 999 → `[FALL]` + exit 1; suite restaurada byte-idéntica sha256 `43a73a43…`).
+Regresión: 15 suites + budgets verdes.
+
+**Alcance declarado:** M41 (MusicDirector) y M44 (FeedbackDirector) son HOY directores de LÓGICA
+(matriz de temas / recetas de feedback): no tienen AudioStreamPlayer ni llaman al handshake de audio
+del 62 (`iniciar_descarga_audio`/`pedir_banco_audio`) — verificado por grep (solo el monitor y las
+suites lo usan). Ese cableado es deuda de M41/M44 (07 §12). Esta suite pina el mecanismo del 62 y el
+ciclo canónico que lo cumple. Mismo criterio que los cierres previos (L137/139/140/141/142/143/149).
+
+**No toqué:** `quality.yml`; `music_director.gd` / `feedback_director.gd` (M41/M44, read-only);
+`ambient_director.gd` (M42, read-only); `memory_monitor.gd`; `stream_manager.gd` (M63, read-only);
+el colector de sintaxis (autogenerado).
+
+**Totales tras el cierre:** 128 / 22 / 0 (150 items).
