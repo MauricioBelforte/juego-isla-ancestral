@@ -141,12 +141,12 @@ ar señal exacta de las 11 celdas y head de fila exacto.
 57. QA §21.8 de M29 (192/195) — Hy3 apuntó el sello... (verificar la segunda firma).
 58. QA §21.8 de M30 (119/120) y M32 (119/121) — en la cola de los veredictos.
 59. QA §21.8 de M117 (94/110) y M26 (122/129) — ✅ sellados (verificar coherencia semanal).
-60. QA §21.8 de M91 (217/239) — ✅ sellado.
+60. [x] QA §21.8 de M91 (217/239) — ✅ sellado.
 61. QA §21.8 de M118 (105/106) — ✅ sellado (L199 [?] aparte).
 
 ### Bloque G — Auditoría y limpieza diaria
 
-62. Duplicados físicos de los canales activos (detección por prefijo, como el patrón agnes) — re-base diario.
+62. [x] Duplicados físicos de los canales activos (detección por prefijo, como el patrón agnes) — re-base diario.
 63. Logs que llegan con el mismo prefijo (1904 doble etc.): anotación en el pequeño registro de colisiones (coexistencia histórica).
 64. Filas GLOBAL: revisión de 10/12 celdas (reparación patrón fila 76/55).
 65. `ESTADO-PARALELO.md`: sin duplicación de cabecera (lección del relevo del director — la cabecera del relevo con título).
@@ -352,9 +352,9 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 57. - [x] [59] Guardar con inventario vacío, mundo sin explorar o en el primer minuto [S] · [x] T17-M59 (G-5.3): qa_m59_save_vacio.gd 3/0 (estado primer minuto, dirty limpio). <!-- fuente: 59-Guardado/05-Checklist.md -->
 58. - [ ] [59] Guardar durante un festival con estado consistente (M74) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 59. - [x] [59] Testear doble guardado simultáneo (cola) [C] · [x] T18-M59 (G-5.3): cola FIFO determinista con 2 request_save mismo frame — qa_m59_doble_guardado.gd 3/0; flips 59-Guardado/05 (67/62/1). <!-- fuente: 59-Guardado/05-Checklist.md -->
-60. - [ ] [59] Feedback de guardado visible y legible [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+60. - [x] [59] Feedback de guardado visible y legible [S] · [x] T19-M59 (G-5.3): toast localizado por EventBus (capturado en qa_m59_guardar) + WCAG BUG-130 — flip por evidencia. <!-- fuente: 59-Guardado/05-Checklist.md -->
 61. - [ ] [59] Confirmaciones accesibles por gamepad (M57) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-62. - [ ] [59] Diálogos de aviso con opciones claras [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+62. - [x] [59] Diálogos de aviso con opciones claras [S] · [x] T19-M59 (G-5.3): OK/Cancelar localizados + dispatch on_ok/on_cancel — qa_m59_popup_opciones.gd 5/0; flips 59-Guardado/05 (69/60/1). <!-- fuente: 59-Guardado/05-Checklist.md -->
 63. - [ ] [59] Testear menú con Reduce Motion (M58) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 64. - [ ] [59] Testear con texto grande (M58) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 65. - [x] [59] Verificar con verificar_checklist.py (sin alertas nuevas) [S] · [x] T17-M59 (G-5.3): módulo limpio para 59 (drifts ajenos 36/50/55/58/62/90 reportados al canal). <!-- fuente: 59-Guardado/05-Checklist.md -->
