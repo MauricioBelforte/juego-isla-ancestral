@@ -66,6 +66,11 @@ func is_newer_than(other: GameVersion) -> bool:
     if minor != other.minor: return minor > other.minor
     if patch != other.patch: return patch > other.patch
     return build > other.build
+
+## Compatibilidad mismo major.minor (helper pedido por el item del checklist;
+## sin consumidor aun - deuda de implementacion M59).
+func is_same_major_minor(other: GameVersion) -> bool:
+    return major == other.major and minor == other.minor
 ```
 
 ### UpdateInfo (Resource)
@@ -154,6 +159,13 @@ func check_gog() -> UpdateInfo:
 
 func check_manual(url: String) -> UpdateInfo:
     # Verificar vía URL manual
+    pass
+
+## Fachada unica pedida por el item del checklist 'Crear UpdateChecker con
+## check_latest()': despacha segun el canal de versions.json (estable/beta/dev)
+## leido por UpdateManager y devuelve el UpdateInfo del canal activo. NO crea
+## un segundo sistema de versionado.
+func check_latest() -> UpdateInfo:
     pass
 ```
 

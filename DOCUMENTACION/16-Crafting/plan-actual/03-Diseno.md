@@ -249,3 +249,66 @@ La mejora y la reparación de herramientas se ejecutan en la **mesa de trabajo y
 - MR9 (stations.json): el registro de las recetas de mejora/reparación ligadas a `mesa_trabajo` queda pendiente de la estructura final de estaciones del dueño de M93 (stations.json NO existe hoy; crafting.json es el catálogo vigente).
 - MR12/MR13 (panel y preview): viven en la UI de la estación mesa_trabajo (crafting_ui), no en una nueva capa.
 - MR10 (rechazo de no-herramientas): service-side ya implementado en `mejorar_herramienta`/`reparar_herramienta` (motivo `no_es_herramienta`); la marca definitiva de "herramienta" la define M13 (MR10 completo).
+
+## Contrato del bloque MR — Mejora y reparación de herramientas (RF-MR1..MR22)
+
+**Modelo:** G-5.3-Flash-Agente
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-20
+**Estado:** service-layer implementado (tanda 28, QA 15/0 EXIT 0); estación y UI por finalizar (MR9/MR12-13).
+
+### API pública (`CraftingService`)
+
+```gdscript
+func mejorar_herramienta(item_id: String) -> Dictionary
+# -> { ok: bool, motivo: String, nivel_anterior: int, nivel_nuevo: int }
+# Motivos: "" (ok) · "no_es_herramienta" · "nivel_maximo" · "coste_ausente" · "sin_inventario" · "materiales_insuficientes"
+
+func reparar_herramienta(item_id: String) -> Dictionary
+# -> { ok: bool, motivo: String, _durabilidad: int }
+# _durabilidad = durabilidad_maxima(tipo, nivel_actual) — el estado REAL de durabilidad
+# lo aplica M13 (techo MR16); aquí se emite el objetivo.
+
+func durabilidad_maxima(tipo: String, nivel: int) -> int
+# curva aditiva: duracion_base[tipo] + duracion_por_nivel * nivel  (n3 hacha = 250)
+
+func efectividad(tipo: String, nivel: int) -> float
+# lineal: 1.0 + efectividad_por_nivel * nivel  (paso 0.15 → n2 = 1.30)
+
+func get_control_preset() -> String        # (M58, mismo archivo de señales)
+func _tipo_de(item_id: String) -> String   # convención de prefijo: "hacha_" → "hacha"
+```
+
+### Señales (RF-MR6, solo en éxito)
+
+- `herramienta_mejorada(item_id: String, nivel: int)`
+- `herramienta_reparada(item_id: String, durabilidad: int)`
+
+### Schema (RF-MR3): `data/crafting/mejora_herramienta.json`
+
+```json
+{ "tipos": { "<tipo>": {
+      "nivel_maximo": 3,
+      "coste_nivel": [ {mat: n}, ... ],      // índice = nivel a alcanzar - 1
+      "coste_reparacion": {mat: n} }
+  ... },
+  "duracion_base": {<tipo>: n}, "duracion_por_nivel": 50,
+  "efectividad_por_nivel": 0.15 }
+```
+Tipos vigentes: hacha, martillo, azada, machete.
+
+### Balance (RF-MR4)
+
+- Durabilidad: aditiva (base + pasos × nivel). n3 hacha = 100 + 150 = 250.
+- Efectividad: lineal 1.0 → 1.45 (n3). M13 la consume como multiplicador de rendimiento (MR15) y techo de reparación (MR16).
+
+### Integración
+
+- **M14 (RF-MR5)**: consumo todo-o-nada vía `InventoryService.remover_items()` — `materiales_insuficientes` sin consumo parcial. El dict de materiales usa buffer reutilizado (ítem 5: sin asignación por llamada; M14 no retiene la referencia).
+- **M59 (RF-MR7)**: `get_save_data()` incluye `"niveles_mejora": {item_id: nivel}` — campo ADITIVO (saves viejos sin el clave no se rompen).
+- **M13 (MR15-16)**: consumo de `efectividad()` y `durabilidad_maxima()` — contrato pendiente de firma por el dueño de M13 (MR17).
+- **Estación (RF-MR8)**: mesa_trabajo reutilizada (justificación en 03-Diseno §'Mejora y reparación de herramientas'). stations.json pendiente de estructura por M93 (MR9).
+
+### Rechazos y cozy (RF-MR11)
+
+`materiales_insuficientes` NO daña la herramienta ni consume parcialmente: fallo informativo (coherente con la filosofía del módulo).

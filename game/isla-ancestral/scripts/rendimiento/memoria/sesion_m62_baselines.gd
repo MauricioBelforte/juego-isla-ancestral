@@ -81,6 +81,7 @@ var _pico := 0.0
 var _muestras := 0
 var _objetos := 0
 var _huerfanos := 0
+var _retardo_aplicar := 0.0
 
 
 func _initialize() -> void:
@@ -158,13 +159,21 @@ func _process(_delta: float) -> bool:
 			_check(_monitor != null, "MemoryMonitor de produccion presente")
 			_check(_mem_inicial > 0.0, "lectura de memoria > 0 (el medidor no esta ciego)")
 			_fin("A")
-			_aplicar_escenario()
-			_fin("B")
+			# La camara resuelve su _target en un process_frame (follow_camera._ready);
+			# aplicar el escenario en el mismo frame deja al horizonte con la camara
+			# en el origen. Se espera 1 s para que el seguimiento este asentado.
+			_retardo_aplicar = 1.0
 		elif t > 60.0:
 			print("  [FALLO] sin MemoryMonitor a los 60 s")
 			_fallos += 1
 			_cerrar()
 			return true
+
+	if _monitor != null and not _aplicado and _retardo_aplicar > 0.0:
+		_retardo_aplicar -= _delta
+		if _retardo_aplicar <= 0.0:
+			_aplicar_escenario()
+			_fin("B")
 
 	if _monitor != null and t >= _asentar_s:
 		_medir()
@@ -234,13 +243,21 @@ func _aplicar_horizonte() -> void:
 	# Si la camara no esta sobre el Player, el escenario "oteo" no existe: se mide
 	# ANTES de inyectar scroll para no reportar como baseline una escena que no oteo.
 	if antes > 100.0:
-		_no_medible = "la camara de seguimiento no esta sobre el Player (%.0f m): el oteo del horizonte no se reproduce en headless" % antes
+		_no_medible = "la camara de seguimiento no esta sobre el Player (%.0f m): la camara no siguio al Player y el oteo no se reproduce" % antes
 		return
+	var modo_antes := int(cam.call("get_mode"))
+	if modo_antes != 0:
+		cam.call("set_mode", 0)
+	_evidencia.append("modo camara: %d -> %d (0=EXPLORE)" % [modo_antes, int(cam.call("get_mode"))])
 	for i in 12:
 		var ev := InputEventMouseButton.new()
 		ev.button_index = MOUSE_BUTTON_WHEEL_DOWN
 		ev.pressed = true
 		cam.call("_unhandled_input", ev)
+	# El scroll solo cambia _distance; la posicion de la camara converge en
+	# _physics_process. Se simulan 2 s de seguimiento antes de medir la distancia.
+	for i in 20:
+		cam.call("_physics_process", 0.1)
 	var despues := camara3d.global_position.distance_to((jugador as Node3D).global_position)
 	_evidencia.append("scroll x12: distancia camara->Player %.2f -> %.2f (max_distance=20)" % [antes, despues])
 	_check(despues > antes + 1.0, "el scroll alejo la camara (distancia crecio)")

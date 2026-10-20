@@ -426,7 +426,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 30. [x] [16] RF-MR18: test headless `_test_mejora_reparacion` · [x] T29-M16 (G-5.3): función en test_crafting (0 fallos EXIT 0; N.5 verde). — mejora consume materiales y sube <!-- fuente: 16-Crafting/05-Checklist.md -->
 31. [?] [16] RF-MR19: sonda en ROJO del umbral · [?] T29-M16 (G-5.3): NO APLICA (test_crafting sin CHECKS_MINIMOS; la sonda vive en qa fast_travel M69). (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
 32. - [ ] [16] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S] <!-- fuente: 16-Crafting/05-Checklist.md -->
-33. - [ ] [16] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion, <!-- fuente: 16-Crafting/05-Checklist.md -->
+33. - [x] [16] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion,  · [x] T38-M16 (G-5.3): contrato completo en 03-Diseno (API/señales/schema/balance/integ).<!-- fuente: 16-Crafting/05-Checklist.md -->
 34. - [ ] [16] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que <!-- fuente: 16-Crafting/05-Checklist.md -->
   · [x] SCANNER RF26 AUTOMATIZADO 2026-10-19 23:00 UTC (G-5.3-Flash-Agente): scripts/qa_textos_rf26.py — audita strings_es.json (153 textos, 158 frases) contra la guía RF26 (frases > 12 palabras, glosario sancionado, doble negación). Resultado: 1 incumplimiento (0.6%) — EQUIP.HINT 15 palabras (hallazgo para el dueño de textos: E/ESC cierra, candados se abren con capítulo o banda). Modo --detallado. UMBRAL: OK si ≥ 85% cumple.
 

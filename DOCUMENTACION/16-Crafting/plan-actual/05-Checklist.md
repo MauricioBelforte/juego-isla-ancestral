@@ -271,7 +271,7 @@ Log reservado: 512
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
-**Totales:** 203 items - Completados: 176 - Pendientes: 13 - No resueltos: 14. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-19 — tanda 28 MR1-MR7 +7; el conteo de 'item 11' mantenía +1 fantasma por doble-atribución corregida. 174/16/13 = 203.)
+**Totales:** 203 items - Completados: 177 - Pendientes: 12 - No resueltos: 14. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tanda 38: MR21 y洪 normalizado; 177/12/14 = 203 exactos.)
 
 > **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
 > seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por
@@ -354,7 +354,7 @@ Log reservado: 512
 
 ### N.6 Documentacion y desbloqueo (2)
 
-- [ ] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion,
+- [x] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion, — **G-5.3-Flash-Agente (2026-10-20):** sección "Contrato del bloque MR" agregada a 03-Diseno (API con motivos, señales, schema JSON, curvas de balance, integración M14/M59/M13/M93 y política cozy de rechazos).
   balance) [S]
 - [ ] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que
   dependian de este contrato pasan a tener dueno) [S]
