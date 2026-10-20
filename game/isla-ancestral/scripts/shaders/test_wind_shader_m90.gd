@@ -43,6 +43,26 @@ func _run() -> void:
 		_check("carga como Shader", s is Shader)
 	else:
 		_check("carga Shader (o pendiente de import)", true)
+
+	# --- Caustics shader (M90 t11) ---
+	print("=== [M90 caustics] test caustics ===")
+	var rc := FileAccess.open("res://shaders/caustics.gdshader", FileAccess.READ)
+	_check("caustics.gdshader existe", rc != null)
+	if rc != null:
+		var tc: String = rc.get_as_text()
+		rc.close()
+		_check("caustics es shader_type spatial", tc.contains("shader_type spatial"))
+		var unif_c: Array = ["caustics_strength", "caustics_scale", "caustics_speed", "color_caustica"]
+		var falten: Array = []
+		for u in unif_c:
+			if not tc.contains(u):
+				falten.append(u)
+		_check("caustics trae los 4 uniforms", falten.size() == 0)
+		var sc = load("res://shaders/caustics.gdshader")
+		if sc != null:
+			_check("caustics carga como Shader", sc is Shader)
+		else:
+			_check("caustics carga Shader (o pendiente de import)", true)
 	_fin()
 
 func _fin() -> void:
