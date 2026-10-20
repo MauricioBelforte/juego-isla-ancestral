@@ -162,13 +162,13 @@
 
 ## L. Integración ecosistema (10)
 
-- [ ] M28: integración con waypoints descubiertos [S]
+- [x] M28: integración con waypoints descubiertos [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_service.gd` — al llegar por barco a una isla (viaje náutico M28, señal `travel_arrived`), se desbloquean las anclas de viaje rápido de ESA isla: `_conectar_waypoints_m28()` (duck typing, auto-montada en `_ready`, idempotente) + `_on_isla_descubierta()` con mapeo configurable id-M28→clave-de-catalogo (`set_mapa_islas`, ej `{"isla_principal": "RIZ"}`); islas desconocidas son inertes. Sin edits a módulos ajenos (M28 queda dueño — solo escucho su señal). Evidencia: `test_fast_travel_headless.gd` **36/0, EXIT 0, PASS** — «señal travel_arrived conectada» (TravelService real del boot), «llegar a la isla desbloquea su ancla» (emit isla_prueba→RIZ), «señal ancla_desbloqueada emitida», «isla desconocida es inerte», «mapa legible». CHECKS_MINIMOS 28→33 (piso del guardián).
 - [x] M63: consulta de logros asociados a first-travel [S]
 - [x] M29-M31: restricción temporal (noche, tormenta) [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_service.gd` — `restriccion_temporal_activa()` con duck typing de autoloads reales (GameTime.es_de_dia() → noche; Weather.get_clima() == TORMENTA) + `_restriccion_temporal_fn` inyectable (mismo patrón que `puede_pagar_fn`); `solicitar_viaje()` rechaza con motivo **"horario"** y NO emite señal de viaje. Evidencia: `test_fast_travel_headless.gd` **24/0, EXIT 0, PASS** — «Horario: bloqueado (fn) -> sin viaje», «Horario: motivo 'horario'», «Horario: señal de viaje NO emitida», «Horario: sin bloqueo el viaje se concede», «Horario: GameTime real de noche restringe» (avanzar_hasta 23:30) y «de día no restringe» (10:00, restaurada). CHECKS_MINIMOS 17→23 (piso del guardián).
 - [?] M104: evento analytics fast_travel_used [S] — **[x]→[?] barrido atria (Log 1760):** grep `fast_travel_used` en `scripts/`, `tests/` y `data/` → **0 hits**. El evento de analytics no existe en runtime. **Precisión (step-5-kilocode, Kilo Code, 2026-10-12):** el grep por el nombre literal `fast_travel_used` da 0 hits, pero el evento **genérico sí existe**: `analytics_director.gd` define la constante `EV_FEATURE_USADA` y `test_analytics.gd:82` la usa con `{"feature": "fast_travel"}`. Lo que no hay es **emisión desde runtime** (grep de `EV_FEATURE_USADA` fuera de tests: solo la definición en `analytics_director.gd`). El `[?]` se mantiene, pero la nota original inducía a error al decir "el evento no existe".
 - [ ] M110: debug menu con listado de anchors [S]
 - [ ] M122: captura de crash si portal falla [S]
-- [ ] M124: balance económico según distancia [S]
+- [x] M124: balance económico según distancia [S] → **G-5.3-Flash-Agente (2026-10-19):** `fast_travel_service.gd` — `costo_viaje_de(ancla_id)`/`costo_total_de()`: costo POR VIAJE con fórmula cozy default (1 moneda + 1 cada 1200 u del CENTRO de MundoRaiz, tope 1..8 — `activar_costo_distancia_default()`) y `set_costo_distancia_fn` inyectable para M124/M28 (posición real del jugador). Sin fórmula → costo global intacto (default gratuito preservado). Evidencia: `test_fast_travel_headless.gd` **30/0, EXIT 0, PASS** — «Distancia: sin fórmula usa el costo global», «fórmula default activa (MundoRaiz presente)», «costos dentro del rango cozy 1..8», «fórmula inyectable gana» (42), «ancla inexistente -> vacío», «restauración al global». CHECKS_MINIMOS 23→28 (piso del guardián). NOTA M124: la deducción del costo sigue siendo del adaptador M38/M59 via `puede_pagar_fn` — el servicio expone el dato por ancla; contrato documentado en 04-Código.
 - [ ] M32: anulación del portal en clima extremo [S]
 - [ ] M68: respetar desactivación de hápticos [S]
 - [ ] M91: respetar volumen de feedback de viaje [S]
@@ -188,7 +188,7 @@
 - [ ] Test de fallback: 3 fallos seguidos ? modo seguro [M]
 - [ ] Test de perfilado: sin allocs en frame [M]
 
-**Totales:** 145 ítems · Completados: 114 · Pendientes: 24 · No resueltos: 7. (Corregido agnes-3-flash 2026-10-12: +50 flips con `m69_spec.md`; tandas 1-3 por G-5.3-Flash-Agente 2026-10-19 — sección J 10/10 + accesibilidad 4)
+**Totales:** 145 ítems · Completados: 116 · Pendientes: 22 · No resueltos: 7. (Corregido agnes-3-flash 2026-10-12: +50 flips con `m69_spec.md`; tandas 1-3 por G-5.3-Flash-Agente 2026-10-19 — sección J 10/10 + accesibilidad 4)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 4):** la línea decía *"143 ítems · Completados: 143 · Pendientes: 0 ·
