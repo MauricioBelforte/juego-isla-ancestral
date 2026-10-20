@@ -254,6 +254,11 @@ var _frame_ultimo_ok: int = -1
 var _rec_ultimo_ok: String = ""
 var _cant_ultimo_ok: int = -1
 
+## K.5 (plan): buffer reutilizado para el hot path de fabricación — evita una
+## asignación de Dictionary por cada craft (M14 iterá el dict sincrónicamente,
+## no retiene la referencia; verificado en inventario_service.remover_items).
+var _materiales_total: Dictionary = {}
+
 func craft(rec_id: String, cantidad: int = 1) -> bool:
 	var frame_actual := Engine.get_process_frames()
 	if frame_actual == _frame_ultimo_ok and rec_id == _rec_ultimo_ok and cantidad == _cant_ultimo_ok:
@@ -286,17 +291,18 @@ func craft(rec_id: String, cantidad: int = 1) -> bool:
 			crafting_failed.emit(receta, "ao_insuficiente")
 			return false
 	# Consumo de materiales (todo-o-nada por unidad, multiplicado)
-	var materiales_total: Dictionary = {}
+	# K.5: buffer reutilizado (sin asignación nueva por llamada).
+	_materiales_total.clear()
 	for item_id in receta.materiales:
-		materiales_total[str(item_id)] = int(receta.materiales[item_id]) * cantidad
-	if not inv.remover_items(materiales_total):
+		_materiales_total[str(item_id)] = int(receta.materiales[item_id]) * cantidad
+	if not inv.remover_items(_materiales_total):
 		crafting_failed.emit(receta, "materiales_insuficientes")
 		return false
 	# Entrega del resultado (con fallback bolsa->casa en M14)
 	var sobrante: int = inv.add_item(receta.resultado_id, receta.resultado_cantidad * cantidad)
 	if sobrante > 0:
 		# ROLLBACK completo (invariante §1.3.3): reembolsar materiales
-		inv.agregar_items(materiales_total)
+		inv.agregar_items(_materiales_total)
 		crafting_failed.emit(receta, "inventario_lleno")
 		return false
 	crafting_completed.emit(receta, cantidad)
