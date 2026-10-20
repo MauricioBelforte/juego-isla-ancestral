@@ -86,6 +86,9 @@ func encolar(op_id: String, tipo: String, prioridad: int, callable: Callable, ru
 	if not PESOS.has(tipo):
 		push_warning("[M63] tipo de operación desconocido: %s" % tipo)
 		return false
+	if ruta_recurso != "" and esta_cargando_ruta(ruta_recurso):
+		push_warning("[M63] anti doble carga: la ruta ya está en vuelo: %s" % ruta_recurso)
+		return false
 	var peso := float(PESOS.get(tipo, 1.0))
 	var usa_thread := ruta_recurso != "" and ResourceLoader.exists(ruta_recurso)
 	if usa_thread:
