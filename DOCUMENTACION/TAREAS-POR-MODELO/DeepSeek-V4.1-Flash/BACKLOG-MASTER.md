@@ -1961,7 +1961,7 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 9. - [ ] [62] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M] — **BLOQUEADO POR ASSETS 2026-10-19 (Log 2019): 0 archivos `.ogg` en el repo.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 10. - [ ] [62] Los buses (M91) no retienen streams detenidos [S] — **MEDIDO 2026-10-19 (Log 2019): `audio_config_service.gd` crea buses y fija volumen/mute; no hay lógica de retención/liberación de streams detenidos.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 11. - [ ] [62] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M] — **MEDIDO 2026-10-19 (Log 2019): existe `bancos_audio_diferidos()` (difiere hasta TERMINAR la descarga), que es otro criterio; no hay diferido de 1 frame.** <!-- fuente: 62-Memoria/05-Checklist.md -->
-12. - [ ] [62] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C] — **SALTEADO 2026-10-19 por orden escrita del director (msg 319); el msg 322 CORRIGIÓ ese dato: los runs nunca estuvieron cerrados. La sesión de 30 min del ítem 2 ya corrió (Log 2021), pero NO es este escenario: falta la corrida con clima cambiante M32 y sin assets de audio en el repo (ítems 8-11).** <!-- fuente: 62-Memoria/05-Checklist.md -->
+12. - [ ] [62] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C] — **SALTEADO 2026-10-19 por orden escrita del director (msg 319); el msg 322 CORRIGIÓ ese dato: los runs nunca estuvieron cerrados. La sesión de 30 min del ítem 2 ya corrió (Log 2021), pero NO es este escenario: falta la corrida con clima cambiante M32 y sin assets de audio en el repo (ítems 8-11).** — **MEDIDO 2026-10-19 (Log 2025), PARCIAL: la mitad de CLIMA está VERDE con arnés de producción (`sesion_m62_clima_30min.gd`): 30 min 00 s de reloj de pared, 359 muestras, baseline 168.4 MB a los 300 s, drift +0.1% (delta 0.1 MB en 1491 s), `drift_check()=true`, 10/10 cambios de clima efectivos, 4 climas distintos, 0 huérfanos, 0 viajes. La mitad de AUDIO NO es medible (3 bloqueos medidos): 0 assets de audio en el repo, `set_estado_clima()` (M42) con 0 llamadores de producción y `clima_cambio` con 2 consumidores (eventos, farm) ninguno de audio; igual se midió lo observable: buses 7->7 y reproductores 9->9 constantes en 359 muestras. NO se cierra: HEAD roto en `pause_layer.gd:147` (regresión `2e9b8f3`) metió 3 SCRIPT ERROR en el boot de la escena. Flip pendiente del director.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 13. - [→] [62] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S] — **MEDIDO 2026-10-19 (Log 2019): M61 tiene v2 definitiva en `data/performance/budgets.json` (16.7 ms, remesh 2.0 ms, carga fría 30 s); M62 fija 1500/2000/2500 MB. Unidades distintas → sin conflicto. `remesh_bloque_ms_max` no lo consume ningún script del 62. AHORA SÍ existe artefacto de enlace: gate `test_m62_correspondencia_m61.gd` (Log 2021) — 12 checks, 3/3, EXIT 0; rojo probado con copia temporal (baja=1501 → EXIT 1). Flip pedido en msg 323.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 14. - [→] [62] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M] — **MEDIDO 2026-10-19 (Log 2019): `test_m62_sin_duplicacion.gd` 33/0 / 3× / piso 33 / EXIT 0. "30 re-registros NO inflan la cola", la oferta es la MISMA instancia, 1 entrada activa por chunk_id.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 15. - [ ] [62] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M] — **MEDIDO 2026-10-19 (Log 2019): `drift_check()` existe y está probado (iter3 bloque E) pero tiene 0 llamadores de producción; `island_travel_guard.gd` tiene 0 apariciones de `drift`. **CERRADO 2026-10-19 (Log 2021):** el ejecutor real es `travel_service.gd` (M28) — `_verificar_drift_post_viaje()` en `_atracar()`, fail-closed sin monitor, umbral provisional 45 s derivado de `rutas.json`. Gate `test_m62_drift_post_viaje.gd`: 12 checks, 3/3, EXIT 0. Flip pedido en msg 323.** <!-- fuente: 62-Memoria/05-Checklist.md -->
@@ -1972,7 +1972,7 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 20. - [ ] [62] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
 21. - [ ] [62] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
 22. - [ ] [62] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S] <!-- fuente: 62-Memoria/05-Checklist.md -->
-23. - [ ] [62] Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
+23. - [ ] [62] Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C] — **MEDIDO 2026-10-19 (Log 2025) con el arnés de clima: 30 min 00 s de reloj de pared, 359 muestras, baseline 168.4 MB, drift +0.1% <= 5%, `drift_check()=true`, 0 eventos `travel_started` (servicio presente y instrumentado), 0 huérfanos. Misma salvedad que el ítem 12: 3 SCRIPT ERROR de `pause_layer.gd:147` (regresión `2e9b8f3`) en el boot. Flip pendiente del director.** <!-- fuente: 62-Memoria/05-Checklist.md -->
 24. - [ ] [62] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
 25. - [ ] [62] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C] <!-- fuente: 62-Memoria/05-Checklist.md -->
 26. - [ ] [62] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M] <!-- fuente: 62-Memoria/05-Checklist.md -->
@@ -2146,4 +2146,48 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - **Proxima:** NN entrantes > 322. Los ejecutables estaticos de la COLA V3 se
   agotaron: quedan 8-11 (sin assets de audio) y 17-27 (baselines / Play Mode).
   Reposicion pedida en el msg 323.
+
+## 2026-10-19 23:16 (GMT-3) — RAMA 1 / msg 324: ítem 12 (clima 30 min) medido, audio no medible, HEAD roto (Log 2025, canal 325)
+
+- **Tracker 323 -> 324.** Entrante único = **324** (acuse del director: ítem 2/12
+  aceptado con el run real, gaps 13/15/16 cerrados, orden de seguir la COLA V3 con el
+  estándar "medido con arnés de producción").
+- **Arnés nuevo** `scripts/rendimiento/memoria/sesion_m62_clima_30min.gd` (13.836 B, LF,
+  sin BOM): escena real + MemoryMonitor de producción; cada 180 s avanza **un día** por la
+  API de producción (`GameTime.avanzar_hasta`, la de "dormir en cama") → `dia_cambio` →
+  `Weather._recalcular_dia_actual()` → `EventBus.weather.clima_cambio`. Sin climas inventados.
+- **Ítem 12, mitad de CLIMA: VERDE.** 30 min 00 s de reloj de pared (22:42:42→23:12:42),
+  **359 muestras**, baseline 168.4 MB a los 300 s, **drift +0.1%** (memoria 168.4→168.5 MB,
+  delta 0.1 MB en 1491 s), `drift_check()=true`, **10/10 cambios de clima efectivos**,
+  **4 climas distintos** (SOLEADO/NUBLADO/LLUVIA/TORMENTA), 0 huérfanos, 0 viajes.
+- **Ítem 12, mitad de AUDIO: NO MEDIBLE (3 bloqueos medidos).** (1) 0 `.ogg`/`.wav`/`.mp3`
+  en el proyecto; (2) `AmbientDirector.set_estado_clima()` (M42) con **0 llamadores de
+  producción**; (3) `clima_cambio` con 2 consumidores (`event_manager.gd:107`,
+  `farm_service.gd:55`) y **ninguno es audio**. Lo observable sí se midió: buses 7→7 y
+  reproductores 9→9 constantes en las 359 muestras.
+- **Ítem 23 (condición "sin teleport"): MEDIDO** con el mismo run: drift +0.1% ≤ 5%,
+  `drift_check()=true`, **0 eventos `travel_started`** (servicio presente e instrumentado).
+- **Arnés probado EN ROJO:** sonda A (fuga inyectada +4 MB/muestra) → +216.7%, EXIT 1 y
+  **único fallo el de drift**; sonda B (`M62_SIN_CAMBIOS=1`, 420 s, baseline de producción)
+  → drift +0.0%, `drift_check()=true` y fallan **solo** los 2 checks de escenario (0 cambios,
+  0 climas). Sonda B es además el control verde del camino de drift.
+- **HALLAZGO GRAVE (no buscado): HEAD ROTO en `pause_layer.gd:147`.** `_buscar_confirm_popup`
+  aparece **solo como llamada** (la función no existe en el repo). Worktree == HEAD (sha256
+  `426c7d58…`, `git status` vacío) → está commiteado. `--check-only` → **EXIT 1**.
+  Commit que lo introdujo: **`2e9b8f3`** (tanda M59 de G-5.3-Flash-Agente, 22:25:35), +24
+  líneas con la llamada y sin el helper. Conteo def/llamada: `0b8fa70` 1/2, `b311264` 0/0,
+  `335c1b7` 0/0, `2e9b8f3` **0/1**, `c3c95be` 0/1. Efecto: `UIRoot._build_layers()` aborta
+  → la escena real arranca **sin la capa de pausa** y con **3 SCRIPT ERROR** en el boot.
+  No se tocó (módulo ajeno); reportado en el msg 325 con el texto de BUG listo.
+- **Por eso NO se cierran 12 ni 23:** el drift no depende de una capa de UI ausente, pero en
+  este proyecto "verde sin `SCRIPT ERROR: 0` no es verde". Decisión del director: aceptar con
+  la salvedad declarada o re-run de 30 min tras el fix.
+- **Numeración:** Log **2025** (cabeza medida justo antes = 2025; queda en 2026). Canal:
+  último real **324**, cabeza del pool **325** = último+1 → se usó **325**; pool en **326**.
+- **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** `CHECKLIST-GLOBAL.md`, `AGENTS.md`,
+  `project.godot`, `quality.yml` y los `05-Checklist` intactos.
+- **Próxima:** NN entrantes > 324. Pendiente del director: commit del arnés nuevo, decisión
+  sobre el re-run del ítem 12 y dueño de la regresión `2e9b8f3`. Ítems 18-22 sin sustrato
+  headless (topes con GPU); 24-27 son Play Mode y se pueden armar con el mismo patrón.
+
 

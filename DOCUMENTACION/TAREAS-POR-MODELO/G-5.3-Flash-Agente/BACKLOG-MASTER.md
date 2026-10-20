@@ -45,10 +45,10 @@
   · VERIFICADO 2026-10-18 03:55 UTC (G-5.3-Flash-Agente): filas de los módulos tocados hoy por el CI leídas y coherentes con mi ruteo — M64 🟡 (BUG-129 preso de verificación s3), M72 🟡 (step-5), M112 🟡 (DS-Opencode), M118 🟡 (Ling, L199 roja coherente), M127 🟢 (agnes-2.5-flash; los 300 hallazgos del job legal apuntan a M159), M159 🔵 (agnes, generador que emite BOM). Los dueños del CI (021/023) coinciden con las filas: ruteo correcto.
 7. [x] Respuesta a cualquier plantilla vacía T-19 madurada (≥2 ciclos) — aviso o espera.
   · VERIFICADO 2026-10-18 04:15 UTC (G-5.3-Flash-Agente): escaneo de todos los canales activos — NINGUNA plantilla vacía madura (>60 min) — los mensajes T-19 están completándose en tiempo; sin avisos que emitir.
-8. Normalización del pool de Logs global (cabeza real, sin huecos no documentados).
+8. [x] Normalización del pool de Logs global (cabeza real, sin huecos no documentados).
   · VERIFICADO 2026-10-18 03:45 UTC (G-5.3-Flash-Agente): pool global de Logs saludable — 1040 números, cabeza 1961, cola 3000, orden monotónico, 0 duplicados, 0 huecos internos (consistencia verificada por script).
-9. Registro del día del director (log en Logs/ con número del pool global).
-10. Aplicación de fila de cierre del día (como el 1905) cuando toque.
+9. [x] Registro del día del director (log en Logs/ con número del pool global).
+10. [x] Aplicación de fila de cierre del día (como el 1905) cuando toque.
 
 ### Bloque B — Verificaciones directas con MCP (lo que solo yo validé hoy)
 
@@ -444,10 +444,10 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 9. - [x] [69] Sin parpadeos por baja luz [S] · [x] FX-M69 2026-10-19 (G-5.3-Flash-Agente): fast_travel_effect.gd + qa_fast_travel_fx.gd 25/0 EXIT 0; flips en 69-Fast-Travel/05-Checklist.md (105/33/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 10. - [x] [69] Ilumincación de destino respeta hora del mundo [S] · [x] FX-M69-T2 2026-10-19 (G-5.3-Flash-Agente): qa_fast_travel_fx.gd 36/0 EXIT 0 (J.3 bruma, J.7 modo foto real M56, J.10 iluminación intacta, J.11 no pausa); flips en 69-Fast-Travel/05-Checklist.md (109/29/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 11. - [x] [69] Transición no afecta gameplay (tablas de delta) [S] · [x] FX-M69-T2 2026-10-19 (G-5.3-Flash-Agente): qa_fast_travel_fx.gd 36/0 EXIT 0 (J.3 bruma, J.7 modo foto real M56, J.10 iluminación intacta, J.11 no pausa); flips en 69-Fast-Travel/05-Checklist.md (109/29/7). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-12. - [ ] [69] Subtitulos de feedback de acción [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-13. - [ ] [69] Tamaño de texto escalable para menu (M62) [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-14. - [ ] [69] Confirmación háptica opcional [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
-15. - [ ] [69] Contraste alto para menu de selección [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+12. - [x] [69] Subtitulos de feedback de acción [S] · [x] T3-M69 2026-10-19 (G-5.3-Flash-Agente): subtitulos i18n/escala/haptica/contraste en fast_travel_effect.gd — qa 44/0 EXIT 0; flips 05-Checklist (113/25/7); validador i18n EXIT 0 (166/166/166). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+13. - [x] [69] Tamaño de texto escalable para menu (M62) [S] · [x] T3-M69 2026-10-19 (G-5.3-Flash-Agente): subtitulos i18n/escala/haptica/contraste en fast_travel_effect.gd — qa 44/0 EXIT 0; flips 05-Checklist (113/25/7); validador i18n EXIT 0 (166/166/166). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+14. - [x] [69] Confirmación háptica opcional [S] · [x] T3-M69 2026-10-19 (G-5.3-Flash-Agente): subtitulos i18n/escala/haptica/contraste en fast_travel_effect.gd — qa 44/0 EXIT 0; flips 05-Checklist (113/25/7); validador i18n EXIT 0 (166/166/166). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
+15. - [x] [69] Contraste alto para menu de selección [S] · [x] T3-M69 2026-10-19 (G-5.3-Flash-Agente): subtitulos i18n/escala/haptica/contraste en fast_travel_effect.gd — qa 44/0 EXIT 0; flips 05-Checklist (113/25/7); validador i18n EXIT 0 (166/166/166). <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 16. - [ ] [69] Iconos de apoyo visual al nombre del destino [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 17. - [ ] [69] Alt text para thumbnails de destino [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
 18. - [ ] [69] Modo cronológico para historiales [S] <!-- fuente: 69-Fast-Travel/05-Checklist.md -->
