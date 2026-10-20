@@ -68,8 +68,8 @@
 22. M124-CGU (83/108): 25 pendientes → sandbox/validación de mods — 8 [M]
 23. M64-IA-De-NPC (102/119): 17 pendientes — 8 [M]
 24. M69-Fast-Travel (98/145): 47 pendientes → lote infra (waypoints) — 10 [C]
-25. M67-Vehiculos (19/131): plan de iteraciones y lote 1 (física/controles) — 10 [C]
-26. M68-Transporte (99/131): 32 pendientes — 8 [C]
+25. [x] M67-Vehiculos (19/131): plan de iteraciones y lote 1 (física/controles) — 10 [C]
+26. [x] M68-Transporte (99/131): 32 pendientes — 8 [C]
 
 ### Bloque C — Telemetría, logging y QA de sus sistemas (inf³ propia)
 
