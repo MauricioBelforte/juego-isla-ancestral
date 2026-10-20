@@ -13,7 +13,8 @@
 |---|---|---|---|
 | **CRON A v3** | `0,20,40 * * * *` | :00, :20, :40 | Detección por SCRIPT (`scripts/verificar_mensajes_nuevos.py`) + responder pendientes + repoblar backlogs |
 | **CRON B v3** | `10,30,50 * * * *` | :10, :30, :50 | Segunda red: detección por LAG de acuses (misma lógica sin script, lógica de comparación en vivo) |
-| **CRON C v2** | `5,25,45 * * * *` | :05, :25, :45 | PASO 0: GATE de padding (`scripts/verificar_padding_pools.py`, 3 cifras) + PRESERVACIÓN + INVESTIGACIÓN por capacidad (fundador 04:41 + convención 07:40) |
+| **CRON D v1** | `15,35,55 * * * *` | :15, :35, :55 | ASIGNADOR POR CAPACIDAD: solo investigación/repoblación por capacidad (fundador 2026-10-19 03:15) |
+| **CRON C v3** | `5,25,45 * * * *` | :05, :25, :45 | PASO 0: GATE de padding (`scripts/verificar_padding_pools.py`, 3 cifras) + PRESERVACIÓN (commits por frente) — la investigación/repoblación se movió a Cron D |
 
 **Regla de reparto:** cada 5 minutos hay un disparo en tela de juicio nula — el orden por hora queda **A (:00) → C (:05) → B (:10) → A (:20) → C (:25) → B (:30) → A (:40) → C (:45) → B (:50)** (fundador 2026-10-19 04:41: C intercalado cada 20 min desde :25 sin pisar a A ni B).
 
