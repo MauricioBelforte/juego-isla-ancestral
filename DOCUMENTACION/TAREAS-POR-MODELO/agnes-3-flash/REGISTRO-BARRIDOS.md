@@ -1,46 +1,46 @@
-﻿# REGISTRO-BARRIDOS de agnes-3-flash â€” la cuenta de los anti-drift (metodologÃ­a V2, 2026-10-17)
+# REGISTRO-BARRIDOS de agnes-3-flash — la cuenta de los anti-drift (metodología V2, 2026-10-17)
 
-**DueÃ±a del archivo:** agnes-3-flash (lo mantiene ELLO en cada barrido).
-**auditado por:** GLM-5.3-Flash-Director (consolidaciÃ³n y fila GLOBAL).
+**Dueña del archivo:** agnes-3-flash (lo mantiene ELLO en cada barrido).
+**auditado por:** GLM-5.3-Flash-Director (consolidación y fila GLOBAL).
 **Regla:** al terminar CADA barrido, agrega una fila en la tabla (formato exacto abajo). En tu
-reporte de vuelta al canal, citÃ¡ el archivo y la Ãºltima fila agregada. MÃ¡ximo cuidado with
-UTF-8 Â§28 y verificado contra disco (sin marcadores inflados).
+reporte de vuelta al canal, citá el archivo y la última fila agregada. Máximo cuidado with
+UTF-8 §28 y verificado contra disco (sin marcadores inflados).
 
 ## Formato de fila
 
-| # de barrido | Mensaje canal | MÃ³dulo | MediciÃ³n [x]/[ ]/[?] | Veredicto | Fecha | Nota |
+| # de barrido | Mensaje canal | Módulo | Medición [x]/[ ]/[?] | Veredicto | Fecha | Nota |
 
-## Serie histÃ³rica migrada (barridos #655 â†’ #696 â€” cuenta consolidada por el director)
+## Serie histórica migrada (barridos #655 → #696 — cuenta consolidada por el director)
 
 - **Serie CIERRE ORIGINAL (msgs 688-692, 2026-10-17 ~02:00-03:00):** M45 (693), M51 (694), M52 (695),
-  M93 (697), M137 (696) â€” DRIFT DETECTADO EN: M52-L144 validate_vfx.gd â†’ [?] (verificado #690,
+  M93 (697), M137 (696) — DRIFT DETECTADO EN: M52-L144 validate_vfx.gd → [?] (verificado #690,
   vfx_pool.gd existe), M93-L190 balance_report.gd â†’ [ ] (MISS coherente #687), M137-L122
   playtest_runner.gd â†’ [ ] (#691). LOS 3 DRIFTS ORIGINALES DEL #655 CONFIRMADOS RESUELTOS.
 - **Ola extendida (msgs 694-696, 2026-10-17 03:15-03:30):** M54 (699, drift 0 + micro doc-drift
   Unity-refs), M55-M65 (701: M55/M58/M61/M62/M63/M65, drift 0 en los 6).
-- **TOTAL SERIE: 21 mÃ³dulos barridos, drift 0 en todos** (los 3 drifts histÃ³ricos degradados y
-  verificados). ConsolidaciÃ³n director: `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/BARRIDO-AGNES-ACUMULADO.md`.
+- **TOTAL SERIE: 21 módulos barridos, drift 0 en todos** (los 3 drifts históricos degradados y
+  verificados). Consolidación director: `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/BARRIDO-AGNES-ACUMULADO.md`.
 - **Tramos/Cierres:** cierre de tramo = mensaje al director (hitos, no por barrido individual);
   si aparece un DRIFT â†’ aviso INMEDIATO con detalle (regla del msg 696).
 
-## Deuda documental detectada (no bloqueante â€” para saneo futuro con encargo del director)
+## Deuda documental detectada (no bloqueante — para saneo futuro con encargo del director)
 
 - M54: refs estilo Unity (`//mapa/...`) + nombres obsoletos `map_ui.gd`/`marker_pool.gd` en 04-Codigo.
-- M13/M35: refs Unity en 04-Codigo. Â· M33: `farm_clima`. Â· M42: `caso_ambiental`. Â· M51: `agua`.
+- M13/M35: refs Unity en 04-Codigo. · M33: `farm_clima`. · M42: `caso_ambiental`. · M51: `agua`.
 
-## Fila nueva (a partir de acÃ¡ AGREGA ELLA)
+## Fila nueva (a partir de acá AGREGA ELLA)
 
-| # | Msg | MÃ³dulo | MediciÃ³n | Veredicto | Fecha | Nota |
+| # | Msg | Módulo | Medición | Veredicto | Fecha | Nota |
 |---|---|---|---|---|---|---|
 | 22 | 707 | M66 Anti-Softlock | 110/2/5 = 117 | drift 0 | 2026-10-17 | refs en disco; 5 [?] = QA/perf pendientes |
-| 23 | 707 | M67 VehÃ­culos | 19/112/0 = 131 | drift 0 | 2026-10-17 | early-stage; `vehicle_manager.gd` + `event_bus.gd` en disco; 112 [ ] = implementaciÃ³n pendiente |
-| 24 | 707 | M68 Transporte-Y-NavegaciÃ³n | 99/18/14 = 131 | drift 0 | 2026-10-17 | refs OK; 14 [?] = integraciÃ³n/rutas |
+| 23 | 707 | M67 Vehículos | 19/112/0 = 131 | drift 0 | 2026-10-17 | early-stage; `vehicle_manager.gd` + `event_bus.gd` en disco; 112 [ ] = implementación pendiente |
+| 24 | 707 | M68 Transporte-Y-Navegación | 99/18/14 = 131 | drift 0 | 2026-10-17 | refs OK; 14 [?] = integración/rutas |
 | 25 | 733 | M69 Fast-Travel | 98/40/7 = 145 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 98/145 (coincide) |
-| 26 | 733 | M70 Interacciones | 109/89/0 = 198 | **DRIFT +14 (benÃ©volo)** | 2026-10-19 | 05-Checklist autoconsistente (Totales L853 = 109/198, +32 flips agnes 2026-10-14); **fila CHECKLIST-GLOBAL obsoleta 95/198** â†’ pedir al director actualizar a 109/198. No es inflaciÃ³n: las 109 [x] estÃ¡n respaldadas |
+| 26 | 733 | M70 Interacciones | 109/89/0 = 198 | **DRIFT +14 (benévolo)** | 2026-10-19 | 05-Checklist autoconsistente (Totales L853 = 109/198, +32 flips agnes 2026-10-14); **fila CHECKLIST-GLOBAL obsoleta 95/198** → pedir al director actualizar a 109/198. No es inflación: las 109 [x] están respaldadas |
 | 27 | 733 | M71 Progresion | 168/0/45 = 213 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 168/213 (coincide) |
 | 28 | 733 | M72 Sistema-De-Logros | 77/105/3 = 185 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 77/185 (coincide) |
 | 29 | 733 | M73 Coleccionables | 26/107/2 = 135 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 26/135 (coincide) |
-| 30 | 734 | M74 Eventos | 227/0/58 = 285 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 227/285 (coincide); 58 [?] = diseÃ±o pendiente |
+| 30 | 734 | M74 Eventos | 227/0/58 = 285 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 227/285 (coincide); 58 [?] = diseño pendiente |
 | 31 | 734 | M75 Postgame | 17/113/0 = 130 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 17/130 (coincide); early-stage |
 | 32 | 734 | M76 Multijugador | 126/4/0 = 130 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 126/130 (coincide); 4 [ ] restantes |
 | 33 | 734 | M77 Online-Y-Red | 82/44/4 = 130 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 82/130 (coincide); 4 [?] = red pendientes |
@@ -52,15 +52,15 @@ UTF-8 Â§28 y verificado contra disco (sin marcadores inflados).
 | 39 | 736 | M83 Licencias-De-Software | 98/1/1 = 100 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 98/100 (coincide) |
 | 40 | 736 | M84 Musica-Y-Audio-Legal | 99/0/0 = 99 | drift 0 | 2026-10-19 | âœ… 99/99 (coincide) |
 | 41 | 736 | M85 Modelos-3D-Legal | 73/25/2 = 100 | drift 0 | 2026-10-19 | fila GLOBAL 73/100 (coincide); re-audit agnes Log 1424 INFLADO (4 [x]â†’[ ], trampa 119) ya aplicado; estado real documentado en la fila |
-| 42 | 737 | M86 IA-Generativa | 128/0/1 = 129 | **DRIFT leve (DoD)** | 2026-10-19 | fila GLOBAL âœ… 129/129 pero 05-Checklist tiene **1 [?]** (128 [x] + 1 [?]) â†’ DoD Â§21.6 (un âœ… no lleva [?]); real 128/129. MÃ³dulo de agnes-2.5-flash (âœ… verif. Hy3 Log 1298). Pedir al director: re-auditar el [?] o degradar a ðŸŸ¡. No es mi mÃ³dulo â€” solo aviso |
+| 42 | 737 | M86 IA-Generativa | 128/0/1 = 129 | **DRIFT leve (DoD)** | 2026-10-19 | fila GLOBAL ✅ 129/129 pero 05-Checklist tiene **1 [?]** (128 [x] + 1 [?]) → DoD §21.6 (un ✅ no lleva [?]); real 128/129. Módulo de agnes-2.5-flash (✅ verif. Hy3 Log 1298). Pedir al director: re-auditar el [?] o degradar a 🟡. No es mi módulo — solo aviso |
 | 43 | 737 | M87 Localizacion | 131/0/5 = 136 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 131/136 (coincide) |
 | 44 | 737 | M88 Fuentes-Tipograficas | 174/0/11 = 185 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 174/185 (coincide) |
 | 45 | 737 | M89 Diseno-De-Menus | 124/0/1 = 125 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 124/125 (coincide) |
-| 46 | 737 | M90 Configuracion-Grafica | 149/96/4 = 249 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 149/249 (coincide); 96 [ ] = implementaciÃ³n pendiente |
+| 46 | 737 | M90 Configuracion-Grafica | 149/96/4 = 249 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 149/249 (coincide); 96 [ ] = implementación pendiente |
 | 47 | 738 | M91 Configuracion-De-Audio | 217/20/2 = 239 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 217/239 (coincide) |
 | 48 | 738 | M92 Tutorial | 132/51/2 = 185 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 132/185 (coincide) |
 | 49 | 738 | M93 Balance | 130/4/0 = 134 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 130/134 (coincide) |
-| 50 | 738 | M94 Retencion-Sin-FOMO | 83/0/55 = 138 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 83/138 (coincide); 55 [?] = diseÃ±o pendiente |
+| 50 | 738 | M94 Retencion-Sin-FOMO | 83/0/55 = 138 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 83/138 (coincide); 55 [?] = diseño pendiente |
 | 51 | 738 | M95 Monetizacion | 19/94/0 = 113 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 19/113 (coincide); early-stage |
 | 52 | 738 | M96 Plataformas | 105/0/1 = 106 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 105/106 (coincide) |
 | 53 | 738 | M97 Steam-Store-Page | 195/0/0 = 195 | drift 0 | 2026-10-19 | âœ… 195/195 (coincide) |
@@ -71,7 +71,7 @@ UTF-8 Â§28 y verificado contra disco (sin marcadores inflados).
 | 58 | 739 | M102 Bug-Tracking | 140/0/0 = 140 | drift 0 | 2026-10-19 | âœ… 140/140 (coincide) |
 | 59 | 739 | M103 Logging | 173/0/6 = 179 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 173/179 (coincide) |
 | 60 | 739 | M104 Analytics | 107/4/8 = 119 | **DRIFT de registro** | 2026-10-19 | **SIN FILA en CHECKLIST-GLOBAL** (el 05-Checklist existe 107/119 pero la tabla global no lo lista) â†’ pedir al director agregar la fila M104 |
-| 61 | 739 | M105 Telemetria-De-Gameplay | 129/0/33 = 162 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 129/162 (coincide); 33 [?] = telemetrÃ­a pendiente |
+| 61 | 739 | M105 Telemetria-De-Gameplay | 129/0/33 = 162 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 129/162 (coincide); 33 [?] = telemetría pendiente |
 | 62 | 740 | M106 Seguridad | 194/0/12 = 206 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 194/206 (coincide) |
 | 63 | 740 | M107 Backups | 167/0/9 = 176 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 167/176 (coincide) |
 | 64 | 740 | M108 Pipeline-De-Assets | 127/75/3 = 205 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 127/205 (coincide); 75 [ ] = pipeline pendiente |
@@ -91,7 +91,7 @@ UTF-8 Â§28 y verificado contra disco (sin marcadores inflados).
 | 78 | 743 | M122 Crash-Reporting | 254/0/10 = 264 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 254/264 (coincide) |
 | 79 | 743 | M123 Modding | 106/0/2 = 108 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 106/108 (coincide) |
 | 80 | 743 | M124 Contenido-Generado-Por-Usuarios | 83/0/25 = 108 | drift 0 | 2026-10-19 | 05-Checklist = fila GLOBAL 83/108 (coincide); 25 [?] = CGU pendiente |
-| 81 | 743 | M125 Terminos-De-Servicio | 104/0/1 = 105 | **DRIFT DoD leve** | 2026-10-19 | fila GLOBAL âœ… 105/105 pero 05-Checklist tiene **1 [?]** (104 [x] + 1 [?]) â†’ DoD Â§21.6; real 104/105. Igual que M86 |
+| 81 | 743 | M125 Terminos-De-Servicio | 104/0/1 = 105 | **DRIFT DoD leve** | 2026-10-19 | fila GLOBAL ✅ 105/105 pero 05-Checklist tiene **1 [?]** (104 [x] + 1 [?]) → DoD §21.6; real 104/105. Igual que M86 |
 | 82 | 744 | M126 Marketing-Legal | 100/0/1 = 101 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 100/101 (coincide) |
 | 83 | 744 | M127 Copyright-Del-Juego | 76/0/24 = 100 | **DRIFT de registro** | 2026-10-20 | **SIN FILA en CHECKLIST-GLOBAL** (05-Checklist existe 76/100); suma a M115/M104 â†’ pedir al director restaurar |
 | 84 | 744 | M128 Identidad-De-Marca | 60/36/4 = 100 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 60/100 (coincide) |
@@ -114,7 +114,7 @@ UTF-8 Â§28 y verificado contra disco (sin marcadores inflados).
 | 101 | 747 | M145 Diseno-De-Experiencia | 92/0/13 = 105 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 92/105 (coincide) |
 | 102 | 748 | M146 Diseno-Emocional | 91/0/9 = 100 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 91/100 (coincide) |
 | 103 | 748 | M147 World-Building | 65/68/1 = 134 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 65/134 (coincide) |
-| 104 | 748 | M148 Lore-Ambiental | 115/0/2 = 117 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 115/117 (coincide; la fila fue restaurada, ya NO estÃ¡ sin fila) |
+| 104 | 748 | M148 Lore-Ambiental | 115/0/2 = 117 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 115/117 (coincide; la fila fue restaurada, ya NO está sin fila) |
 | 105 | 748 | M149 Nombres-Y-Nomenclatura | 99/0/1 = 100 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 99/100 (coincide) |
 | 106 | 748 | M150 Diseno-Sonoro-Narrativo | 149/1/0 = 150 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 149/150 (coincide) |
 | 107 | 749 | M151 Control-Final | 94/67/6 = 167 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 94/167 (coincide) |
@@ -123,9 +123,9 @@ UTF-8 Â§28 y verificado contra disco (sin marcadores inflados).
 | 110 | 749 | M154 Vision-Del-Agente | 149/3/3 = 155 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 149/155 (coincide) |
 | 111 | 749 | M155 Vestimenta-Y-Accesorios | 105/0/3 = 108 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 105/108 (coincide) |
 | 112 | 750 | M156 Terrenos-Y-Movimiento | 202/58/47 = 307 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 202/307 (coincide) |
-| 113 | 750 | M157 Medios-De-Transporte | (sin 05-Checklist plan-actual) | **no drift** | 2026-10-20 | plan-actual sin 05-Checklist aÃºn (solo plan-inicial, 106 Ã­tems); GLOBAL 0/106 honesto (no iniciado en plan-actual) â€” no es drift, es estado early |
+| 113 | 750 | M157 Medios-De-Transporte | (sin 05-Checklist plan-actual) | **no drift** | 2026-10-20 | plan-actual sin 05-Checklist aún (solo plan-inicial, 106 ítems); GLOBAL 0/106 honesto (no iniciado en plan-actual) — no es drift, es estado early |
 | 114 | 750 | M158 Herramientas-Y-Desbloqueo | 53/87/0 = 140 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 53/140 (coincide) |
-| 115 | 750 | M159 Catalogo-De-Objetos (mÃ­o) | 79/15/52 = 146 | **drift leve -1** | 2026-10-20 | mi conteo 79 [x]; fila GLOBAL 80/146 (del director #740, cuenta el flip L235 +1). Delta 1 < umbral 5 â€” no material. Mi b2 cerrado 300/300 |
+| 115 | 750 | M159 Catalogo-De-Objetos (mío) | 79/15/52 = 146 | **drift leve -1** | 2026-10-20 | mi conteo 79 [x]; fila GLOBAL 80/146 (del director #740, cuenta el flip L235 +1). Delta 1 < umbral 5 — no material. Mi b2 cerrado 300/300 |
 | 116 | 750 | M160 Diseno-De-Ubicaciones | 145/2/8 = 155 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 145/155 (coincide) |
 | 117 | 751 | M161 Diseno-Visual-De-NPCs | 94/42/2 = 138 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 94/138 (coincide) |
 | 118 | 751 | M162 Dialogos-Contextuales | 81/3/36 = 120 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 81/120 (coincide) |
@@ -134,19 +134,19 @@ UTF-8 Â§28 y verificado contra disco (sin marcadores inflados).
 | 121 | 751 | M165 Voxel-Tools-Guia | 48/0/0 = 48 | drift 0 | 2026-10-20 | âœ… 48/48 (coincide) |
 | 122 | 751 | M166 Variantes-Perfil-Rendimiento | 112/0/0 = 112 | drift 0 | 2026-10-20 | âœ… 112/112 (coincide) |
 | 123 | 751 | M167 Isla-Raiz | 113/1/0 = 114 | drift 0 | 2026-10-20 | 05-Checklist = fila GLOBAL 113/114 (coincide) |
-| 124 | 751 | M168 Plantilla-De-Isla | 104/0/0 = 104 | drift 0 | 2026-10-20 | âœ… 104/104 (coincide) â€” **CIERRE del barrido M69-M168** |
+| 124 | 751 | M168 Plantilla-De-Isla | 104/0/0 = 104 | drift 0 | 2026-10-20 | ✅ 104/104 (coincide) — **CIERRE del barrido M69-M168** |
 
-## Re-verificaciÃ³n periÃ³dica (estado estable 2026-10-22)
+## Re-verificación periódica (estado estable 2026-10-22)
 
-| # de barrido | Mensaje canal | MÃ³dulo | MediciÃ³n [x]/[ ]/[?] | Veredicto | Fecha | Nota |
+| # de barrido | Mensaje canal | Módulo | Medición [x]/[ ]/[?] | Veredicto | Fecha | Nota |
 |---|---|---|---|---|---|---|
-| 125 | â€” (interno) | M14 Inventario | 136/0/4 = 140 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 136/140 (coincide) |
-| 126 | â€” (interno) | M16 Crafting | 157/33/13 = 203 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 157/203 (coincide) |
-| 127 | â€” (interno) | M45 Arte-3D | 150/19/2 = 171 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 150/171 (coincide) |
+| 125 | — (interno) | M14 Inventario | 136/0/4 = 140 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 136/140 (coincide) |
+| 126 | — (interno) | M16 Crafting | 157/33/13 = 203 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 157/203 (coincide) |
+| 127 | — (interno) | M45 Arte-3D | 150/19/2 = 171 | drift 0 | 2026-10-22 | 05-Checklist = fila GLOBAL 150/171 (coincide) |
 
-> Nota: re-barrido de mÃ³dulos nucleares (M14/M16/M45) en estado estable; todos coincidentes, sin drift nuevo. M01/M19 no tienen 05 plan-actual (mÃ³dulos tempranos, fuera del barrido M69-M168). Sin hallazgo material â†’ sin mensaje a canal (no-spam).
+> Nota: re-barrido de módulos nucleares (M14/M16/M45) en estado estable; todos coincidentes, sin drift nuevo. M01/M19 no tienen 05 plan-actual (módulos tempranos, fuera del barrido M69-M168). Sin hallazgo material → sin mensaje a canal (no-spam).
 >
-> **CorrecciÃ³n 2026-10-22 (re-barrido de pendientes):** **M48 ya NO es sin-fila** â€” la fila fue restaurada (msg 302, 2026-10-18: 22 [x] / 3 [?] / 98 [ ] = 123, ðŸ”µ deepseek-v4-flash-vision-exp). Por tanto el hallazgo del barrido M69-M168 "M139/M48/M148 sin-fila (lado DS-WB)" queda **actualizado a: solo M139 + M148** siguen sin fila (M48 resuelta). M125 no tiene carpeta `DOCUMENTACION/125-Sistema-De-Recoleccion` (nombre o carpeta distinta; la nota DoD "leve" es menor, no material).
+> **Corrección 2026-10-22 (re-barrido de pendientes):** **M48 ya NO es sin-fila** — la fila fue restaurada (msg 302, 2026-10-18: 22 [x] / 3 [?] / 98 [ ] = 123, 🔵 deepseek-v4-flash-vision-exp). Por tanto el hallazgo del barrido M69-M168 "M139/M48/M148 sin-fila (lado DS-WB)" queda **actualizado a: solo M139 + M148** siguen sin fila (M48 resuelta). M125 no tiene carpeta `DOCUMENTACION/125-Sistema-De-Recoleccion` (nombre o carpeta distinta; la nota DoD "leve" es menor, no material).
 >
 > **Firma:** agnes-3-flash (Sapiens AI) / Kilo Code.
 
@@ -168,3 +168,5 @@ UTF-8 Â§28 y verificado contra disco (sin marcadores inflados).
 | 139 | 2026-10-22 | Blind-spot QA lote 5 | M134 Presupuesto (100%) + M135 Riesgos (100%): M134 operativa/budget-breakdown.md + templates/registro-de-gastos.csv en disco. M135 RISK-REGISTER.md (matriz 5x5) + 01-05 + GUIA-REVISION-TRIMESTRAL. 0 inflacion. Ya 10 modulos 100% validados. Reportado #833. | agnes-3-flash (Sapiens AI) / Kilo Code |
 | 140 | 2026-10-22 | Blind-spot QA lote 6 | M165 Voxel-Tools-Guia (100%) + M166 Variantes-Perfil-Rendimiento (100%): M165 03-Diseno documenta chunk/LOD/bake (modulo de guia). M166 generar_variante.py (tools/mcp/blender-mcp) con --media/--baja + open_mainfile + PODA + material_index en disco. 0 inflacion. Ya 12 modulos 100% validados. Reportado #835. | agnes-3-flash (Sapiens AI) / Kilo Code |
 | 141 | 2026-10-22 | Blind-spot QA lote 7 (CIERRE riel 100%) | M168 Plantilla-De-Isla (100%) + M133 Gestion-Del-Proyecto (100%): M168 plan-inicial (01-05+MAPA-OBJETOS) + plan-actual + README en disco. M133 reportes/2026-08-reporte-avance.md + 01-05 + actas/adrs. 0 inflacion. RIEL 100% CERRADO: 14 modulos (M125/M116/M121/M136/M120/M152/M126/M130/M134/M135/M165/M166/M168/M133) todos genuinos. Reportado #837. | agnes-3-flash (Sapiens AI) / Kilo Code |
+| 142 | 2026-10-22 | Blind-spot QA lote 8 (riel 90-99%) | M149 Nombres-Y-Nomenclatura (99%) + M132 Produccion-De-Equipo (99%): M149 tablas nombres/lugares + guia de pronunciacion en 01-05 (pronuncia en todos). M132 P0-P3 + RACI en 03-Diseno (near-miss ya restaurado por director). 0 inflacion. Reportado #839. | agnes-3-flash (Sapiens AI) / Kilo Code |
+| 143 | 2026-10-22 | Blind-spot QA lote 9 | M141 Beta (99%) + M167 Isla-Raiz (99%): M141 m141_spec.md (64 lineas, §1-8, mi autoria 2026-10-12) con inventarios/recetas/coleccionables/eventos/misiones (items "Definir" = spec, ContentRegister = design-artifact en §1 no tool). M167 validador_isla_raiz.gd + MAPA-OBJETOS.md en disco. 0 inflacion. Reportado #841. | agnes-3-flash (Sapiens AI) / Kilo Code |

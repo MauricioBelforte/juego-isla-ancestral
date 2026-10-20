@@ -121,9 +121,22 @@ func focus_first() -> Control:
 	return null
 
 ## Item 1 del riel (M59/M44): Guardar con confirmación + feedback.
-## Abre el ConfirmPopup; al aceptar, guarda por DataStore (M60) y emite toast.
+## Abre el ConfirmPopup; al aceptar, guarda por SaveManager (M59, cola real)
+## y emite toast de feedback. Sin popup (CI/standalone), guardado directo.
 func _pedir_confirmacion_guardado() -> void:
-	# Bloqueos de guardado (ítem 3): capas visibles, SaveManager bloqueado o carga.
+	var popup := _buscar_confirm_popup()
+	if popup != null:
+		popup.configurar_texto(
+			_t_local("SETTINGS.GUARDAR_TITULO"),
+			_t_local("SETTINGS.GUARDAR_CONFIRMA"),
+			_ejecutar_guardado_manual)
+		return
+	_ejecutar_guardado_manual()
+
+
+## Cuerpo de guardado (tras confirmación). Bloqueos de guardado (ítem 3):
+## capas visibles, SaveManager bloqueado o carga de escena.
+func _ejecutar_guardado_manual() -> void:
 	if _modal_visible():
 		_toast_guardado(false, "SETTINGS.GUARDAR_BLOQUEADO")
 		return
@@ -140,7 +153,6 @@ func _pedir_confirmacion_guardado() -> void:
 		sm.request_save(1, "guardado_manual_pausa")
 		return
 	_toast_guardado(false, "SETTINGS.GUARDAR_FALLO")
-
 
 ## Ítem 7 (M59): borrar el slot con confirmación (acción destructiva).
 func _pedir_confirmacion_borrado() -> void:

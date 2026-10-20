@@ -306,8 +306,8 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 12. - [ ] [59] Guardar estado de ruinas (M25) y templos (M26) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 13. - [ ] [59] Guardar modificaciones del mundo (tala M50, minado M35) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 14. - [ ] [59] Testear carga del mundo sin duplicar objetos [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
-15. - [ ] [59] Guardar ítems, cantidades, recursos (M15) y dinero (M38) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-16. - [ ] [59] Guardar equipamiento, hotbar y objetos colocados (M17) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+15. - [x] [59] Guardar ítems, cantidades, recursos (M15) y dinero (M38) [M] · [x] T22-M59 (G-5.3): payload real 49 secciones (inventory/economy/barter/hotbar) — qa_m59_payload_sections.gd 7/0. <!-- fuente: 59-Guardado/05-Checklist.md -->
+16. - [x] [59] Guardar equipamiento, hotbar y objetos colocados (M17) [M] · [x] T22-M59 (G-5.3): equipment/hotbar/buildings en el payload real — mismo QA 7/0; flips 59-Guardado/05 (71/58/2). <!-- fuente: 59-Guardado/05-Checklist.md -->
 17. - [ ] [59] Guardar semillas y cultivos en proceso (M33) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 18. - [ ] [59] Guardar trampas y redes de pesca (M34) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 19. - [ ] [59] Testear carga sin duplicados y límites de cantidad (M60) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->

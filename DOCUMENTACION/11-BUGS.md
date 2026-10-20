@@ -204,11 +204,67 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-129 | `MenuNavigator.wrap_focus`: `wrapi` con max mal interpretado como inclusivo — el último control de toda lista era inalcanzable por navegación direccional (wrap ciclaba por [0, N−2]) | M53-UI-UX | 🟠 Mayor | [x] Resuelto 2026-10-12 (Ling 3.1 Flash, Kilo Code; test_m53_lista_larga.gd 7/0) | Ling 3.1 Flash | 2026-10-12 01:05 |
 | BUG-130 | Toasts (NotificationService) ilegibles con tema global: texto heredaba TEXT_DARK sobre panel oscuro = 1.26:1 (WCAG fail) | M53-UI-UX | 🟠 Mayor | [x] Resuelto 2026-10-12 (Ling 3.1 Flash, Kilo Code; test_m53_wcag.gd 17/0) | Ling 3.1 Flash | 2026-10-12 01:07 |
 
+| BUG-139 | Regresión M21 Lote1: rewrite Lote 2 de `dialogue_ui.gd` rompe navegación por teclado L103 (test_m21_lote1_hy3 23/3) | M21-Diálogos (`scripts/dialogos/ui/dialogue_ui.gd`) | 🟠 Mayor | [ ] Abierto (hallazgo Hy3; requiere fix del dueño M21) | Hy3 | 2026-10-20 04:50 |
+
 ## 6. Bugs Abiertos (pendientes)
 
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-139 — Regresión M21 Lote 1: rewrite Lote 2 de `dialogue_ui.gd` rompe navegación por teclado en L103 (test_m21_lote1_hy3.gd 23/3)
+
+- **Fecha de reporte:** 2026-10-20 04:50
+- **Módulo(s) afectado(s):** M21-Diálogos — `game/isla-ancestral/scripts/dialogos/ui/dialogue_ui.gd` (rewrite del path de navegación en Lote 2, commit `2e611a3`, 2026-10-17)
+- **Severidad:** 🟠 Mayor — rompe la navegación por teclado (ENTER / teclas 1-4) de las opciones de diálogo en el bloque L103; el diálogo sigue abriendo, pero el control por teclado de ese bloque está degradado.
+- **Prioridad sugerida:** Media-Alta
+- **Estado:** [ ] Abierto — hallazgo de Hy3 (test real con fallo); requiere corrección del dueño de M21 (Hy3 NO TOCA M21: es dueño-driven / flips del director). Pendiente de decisión del director: (a) Lote 2 cambió la semántica de L103 ⇒ actualizar el test, o (b) regresión real ⇒ fix en `dialogue_ui.gd`.
+
+**Descripción del problema:**
+El test `test_m21_lote1_hy3.gd` (autoría Hy3) pasaba 23/0 en el commit `b1b7648` (M21 Lote 1, 2026-10-16). Tras el Lote 2 (`2e611a3`, 2026-10-17) que reescribió `dialogue_ui.gd`, el mismo test ahora falla 3/23 en el bloque L103 (navegación por teclado): `ENTER elige resaltada (2)`, `tecla 2 elige índice 1`, `ENTER sin opciones avanza`. No es una suite muerta: corrieron los 23 checks (guarda anti-falso-verde `CHECKS_MINIMOS=23` cumplida), el rojo es real.
+
+**Pasos para reproducir:**
+1. `& "D:\ISLA ANCESTRAL\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe" --headless --path game/isla-ancestral --script res://scripts/dialogos/test_m21_lote1_hy3.gd`
+2. Observar `=== TEST M21 Lote1 Hy3: 23 checks, 3 fallos ===` + `EXIT 1`.
+
+**Comportamiento esperado:**
+23/0 (navegación por teclado de L103 selecciona y avanza como en Lote 1).
+
+**Comportamiento actual:**
+23 checks, 3 fallos (bloque L103 ENTER/KEY_2/avance); EXIT 1.
+
+**Entorno / Contexto:**
+- Versión del juego / build: Godot 4.7.2.stable (headless)
+- Plataforma: PC (Windows)
+- Seed del mundo / save afectado: N/A
+- Ocurre desde la versión / commit: `2e611a3` (M21 Lote 2, 2026-10-17) — rewrite de `dialogue_ui.gd` (path `_input()` con `if not visible: return`, resolución `_dm`, y nuevo path "opciones bloqueadas": `_opciones_activas` / `_es_opcion_bloqueada` / `_mover_seleccion_opcion(delta)` en L337 que salta opciones bloqueadas)
+- Frecuencia: Siempre (determinista, modo --script)
+
+**Evidencia:**
+- Resumen medido: `Resumen M21 Lote1 Hy3: 23 checks, 3 fallos` (EXIT 1).
+- Traza completa: `out/hy3_auto/m21_run.txt`
+- Log de Hy3: `Logs/2036-hy3-runtime-qa-standby-m21_2026-10-20_02-16-21.md`
+- Git (read-only): `b1b7648` (verde 23/0) → `2e611a3` (Lote 2 rewrite) ⇒ regresión introducida por Lote 2.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno sobre el código: M21 está en NO TOCAR para Hy3 (dueño-driven / flips del director). Esta es verificación runtime (§21.8), no cierre. Se reporta para decisión del director.
+
+**Referencias cruzadas:**
+- Log 2036 (Hy3, 2026-10-20); msgs Hy3↔Director 287/288/289/290.
+- `test_m21_lote1_hy3.gd` (autoría Hy3), `test_smoke_core_hy3.gd` (core smoke 15/0 estable).
+- Módulo relacionado: M21 (dueño), `dialogue_ui.gd`.
+
+**Firma:**
+**Modelo:** Hy3
+**Plataforma:** WorkBuddy (Tencent Hunyuan)
+**Fecha:** 2026-10-20 04:50
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió:
+- [ ] Archivos/commits modificados:
+- [ ] Log del proyecto:
+- [ ] Verificado por: pendiente (dueño M21 / director)
+
+---
 ### BUG-136 — `test_pergaminos_tienda.gd` (M16/M39): aserción de stock obsoleta post-BUG-106 (`OBJ-ART-002`) — false-red "tienda_general vende un pergamino"
 
 - **Fecha de reporte:** 2026-10-17 04:15

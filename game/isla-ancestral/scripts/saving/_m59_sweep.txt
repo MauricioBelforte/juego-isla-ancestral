@@ -1,0 +1,17 @@
+M25 ruinas (5 archivos escaneados): SIN PROVIDER DETECTADO
+M26 templos (0 archivos escaneados): SIN PROVIDER DETECTADO
+M50 tala/mundo (7 archivos escaneados): SIN PROVIDER DETECTADO
+M35 minado (4 archivos escaneados): mining_manager.gd [sin sección]
+M15 items (10 archivos escaneados): hotbar_state.gd [hotbar] | inventario_iter5.gd [inventario_iter5] | inventario_service.gd [inventory]
+M38 dinero (19 archivos escaneados): barter_system.gd [barter] | economy_manager.gd [economy]
+M17 equipamiento (0 archivos escaneados): SIN PROVIDER DETECTADO
+M33 cultivos (10 archivos escaneados): farm_service.gd [farm]
+M34 pesca (9 archivos escaneados): fishing_manager.gd [fishing]
+M54 exploracion/niebla (0 archivos escaneados): SIN PROVIDER DETECTADO
+M64 NPC (34 archivos escaneados): npc_manager.gd [npc_ai] | villager_manager.gd [npc]
+M74 eventos (15 archivos escaneados): event_manager.gd [events_m74]
+M71 progresion (5 archivos escaneados): progression_manager.gd [progresion]
+M37 museo (0 archivos escaneados): SIN PROVIDER DETECTADO
+M55 diario (4 archivos escaneados): diary_service.gd [diary]
+M58 opciones a11y (8 archivos escaneados): SIN PROVIDER DETECTADO
+M90 grafica (3 archivos escaneados): SIN PROVIDER DETECTADO
