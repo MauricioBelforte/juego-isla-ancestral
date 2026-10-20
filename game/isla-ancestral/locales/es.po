@@ -61,6 +61,41 @@ msgstr "Partida guardada correctamente."
 msgid "SETTINGS.GUARDAR_FALLO"
 msgstr "No se pudo guardar la partida."
 
+msgid "SETTINGS.BORRAR_SLOT"
+msgstr "Borrar slot 1"
+
+msgid "SETTINGS.BORRAR_TITULO"
+msgstr "Borrar partida"
+
+msgid "SETTINGS.BORRAR_CONFIRMA"
+msgstr "¿Borrar la partida del slot 1? Esta acción no se puede deshacer."
+
+msgid "SETTINGS.BORRAR_EXITO"
+msgstr "Partida borrada."
+
+msgid "SETTINGS.SAVE_CORRUPTO"
+msgstr "El archivo de guardado está dañado. Intentando recuperación..."
+
+msgid "SETTINGS.SAVE_RECUPERADO"
+msgstr "Guardado recuperado desde el respaldo."
+
+msgid "SETTINGS.SAVE_DISCO_LLENO"
+msgstr "No hay espacio en disco. Libera espacio e intenta de nuevo."
+
+msgid "SETTINGS.HORAS_H"
+msgstr "%d horas"
+
+msgid "SETTINGS.HORAS_1"
+msgstr "1 hora"
+
+msgid "SETTINGS.MIN_M"
+msgstr "%d minutos"
+
+msgid "SETTINGS.MIN_1"
+msgstr "1 minuto"
+
+
+
 msgid "SETTINGS.GUARDAR_BLOQUEADO"
 msgstr "No se puede guardar ahora (hay un diálogo, carga o panel abierto)."
 
