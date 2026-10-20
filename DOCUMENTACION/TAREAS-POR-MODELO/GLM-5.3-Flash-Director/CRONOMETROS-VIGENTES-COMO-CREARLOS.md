@@ -170,3 +170,9 @@ Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir,
 ```
 
 ---
+
+### Invariantes adicionales (fundador 2026-10-19/20 - tarde noche v2.5):
+
+- **Ticket de carrera**: las tandas de dos equipos que tiran al mismo riel pueden colisionar en el NN. Ante carrera: el director saca un ACUSE único para AMBOS; el Ticket (si quedó abierto con contenido parcial) se REMATA con mensaje único del director.
+- **Standby puntual descripto como DIRECTIVA**: el agente no espera, sino: 1) re-ejecuta su obra; 2) toma un barrido estilo anti-drift; 3) reporta su pregunta en un mensaje. NO duplicate trabajo prestado (regla de herencia).
+- **Los 4 crons + estos invariantes** corren en una sola sesion (CRON A/B/C/D = 4 ids vigentes listados arriba).
