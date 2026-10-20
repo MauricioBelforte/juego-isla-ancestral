@@ -598,3 +598,27 @@ el frame equivocado. (Esa fue la 1.ª corrida en rojo: `21 checks, 1 fallo`.)
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_m62_bioma_audio_diferido.gd
 ```
+
+## 24. Tanda 72 (2026-10-20, DS-Opencode, Log 2039): 30 min de clima cambiante con banco de audio sintético
+
+- **Objetivo:** cerrar por medición el ítem `[ ]` L155: "Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio".
+- **Harness:** `sesion_m62_clima_30min.gd` (sha256 `c2237f6802ddfe3bc1145d28918889b2c6f59e66b9484e88077990d4717cf136`; sin cambio de producción) se extendió con `M62_AUDIO_BANCO_MB`. En cada `clima_cambio` crea un `AudioStreamWAV` REAL de 3 MB (PCM 16 bits, 22050 Hz, mono; stand-in declarado porque el repo tiene 0 assets), lo entrega a `MemoryMonitor.avisar_cambio_bioma_audio()` (mecanismo L154) y verifica por `WeakRef` que el banco anterior muere. `M62_AUDIO_FUGA=1` retiene los bancos como sonda ROJA.
+- **Corrida real (30 min de reloj de pared):** 2026-10-20 02:32:16 → 03:02:16.
+  - 359 muestras (mínimo 300), 299 con baseline; baseline **178.2 MB** (incluye el banco ACTUAL).
+  - Drift final **+0.1%**, máximo absoluto **0.1%** (t=600 s); `drift_check() = true`.
+  - **10 cambios pedidos / 10 efectivos / 10 eventos `clima_cambio`**, 4 climas distintos: NUBLADO, SOLEADO, TORMENTA, LLUVIA.
+  - **10 bancos creados, 1 vivo (el ACTUAL), PENDIENTE = null**, control positivo **+3 MB**, pico 181.6 MB.
+  - Buses **7 → 7**, reproductores **9 → 9**, huérfanos **0**, viajes **0**.
+  - **0 `SCRIPT ERROR`**, EXIT 0. (1 `ERROR` de engine: `AnimationService` singleton ausente, ruido preexistente del boot headless, ajeno a M62.)
+- **Sonda ROJA:** `M62_AUDIO_FUGA=1` retuvo **7 bancos vivos**, memoria **+21 MB** (196.4 MB), y el gate falló con `[FALLO] audio sintetico: 7 bancos vivos (se espera solo el actual)` + `[FALLO] audio sintetico: quedo un banco PENDIENTE sin liberar`; EXIT 1. Prueba que el detector de fuga de audio no es decorativo.
+- **Calibración:** 5 smokes cortos con baseline forzada para validar el banco y el cierre (el drift de esos smokes no es válido: la baseline forzada al boot queda 50 MB por debajo del mundo ya cargado). El run real NO usa `M62_BASELINE_FORZAR`.
+- **Alcance (lo que NO prueba):** el banco es sintético (`AudioStreamWAV`), no un asset real ni el decoder; M42 (`ambient_director.gd`) sigue con **0 llamadores** de `set_estado_clima()`, así que el clima de M32 no selecciona el banco de audio de M42. Esa deuda es de M42 y queda declarada. No cubre VRAM (headless sin renderer) ni input de jugador.
+- **Evidencia:** `out/tanda72/sesion_audio_30min.log` (sha256 `534998dc250f325df2d890d8234d6897329b3f18a8ee2250e0601d3183ca685e`), `out/tanda72/sesion_audio_30min.csv` (359 filas, sha256 `e4909a6bb14ba69cb655e3c026f559a4350fc6991736fc947ed1f6e2eed3f202`), `out/tanda72/guardian_audio_rojo.log` (sha256 `7f5867259c6eaeb89ba3e9a5d86a97c3a7fd040969ada75b8ca812e92cb7deee`).
+- **Reproducir:**
+
+```bash
+M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/sesion_m62_clima_30min.gd
+```
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 72.

@@ -152,7 +152,7 @@
 - [x] Streams `.ogg` liberados de caché cuando ningún reproductor los usa [M]
 - [x] Los buses (M91) no retienen streams detenidos [S]
 - [x] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones) [M]
-- [ ] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C]
+- [x] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio [C] — [x] 2026-10-20 (Tanda 72, DS-Opencode): MEDIDO con `sesion_m62_clima_30min.gd` extendido con banco sintético AudioStreamWAV de 3 MB — 30 min de reloj de pared, 359 muestras, 10 cambios efectivos, 4 climas, 10 bancos creados, 1 vivo (el ACTUAL), PENDIENTE=null, control positivo +3 MB, drift +0.1%, buses 7→7, reproductores 9→9, 0 huérfanos, 0 teleport, 0 SCRIPT ERROR (1 ERROR de engine AnimationService conocido), EXIT 0; sonda roja `M62_AUDIO_FUGA=1` retiene 7 bancos (+21 MB) y falla el gate; stand-in declarado: no mide assets reales ni M42 (0 llamadores, deuda de M42); out/tanda72; Log 2039.
 
 ## J. Integración con M61 y M63
 
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 131 - Pendientes: 19 - No resueltos: 0.
+**Totales:** 150 items - Completados: 132 - Pendientes: 18 - No resueltos: 0.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -802,3 +802,29 @@ decoder. No se tocaron `quality.yml`, M41/M44, `stream_manager.gd` (M63), `pool_
 `unload_policy.gd`.
 
 **Totales tras el cierre:** 131 / 19 / 0 (150 items).
+
+## Tanda 72 — L155 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2039)
+
+**Prueba de 30 min con clima cambiante y banco de audio sintético.** Se extendió
+`sesion_m62_clima_30min.gd` con `M62_AUDIO_BANCO_MB`: en cada `clima_cambio` crea un
+`AudioStreamWAV` real de 3 MB (stand-in declarado: el repo no tiene assets), lo entrega a
+`MemoryMonitor.avisar_cambio_bioma_audio()` (mecanismo L154) y verifica por `WeakRef` que el
+banco anterior muere. No toca producción.
+
+- **Corrida real:** 2026-10-20 02:32:16 → 03:02:16 (30 min), 359 muestras, 299 con baseline
+  (178.2 MB), drift final +0.1% (máx 0.1%), `drift_check()=true`, 10 cambios de clima /
+  10 eventos / 4 climas, 10 bancos creados, **1 vivo (ACTUAL)**, **PENDIENTE=null**, control
+  positivo +3 MB, buses 7→7, reproductores 9→9, 0 huérfanos, 0 viajes, **0 SCRIPT ERROR**,
+  EXIT 0. Evidencia: `out/tanda72/sesion_audio_30min.log` y `.csv`.
+- **Sonda roja:** `M62_AUDIO_FUGA=1` retuvo 7 bancos (+21 MB) y el gate falló con
+  `[FALLO] audio sintetico: 7 bancos vivos` + `PENDIENTE sin liberar` (EXIT 1). Evidencia:
+  `out/tanda72/guardian_audio_rojo.log`.
+- **Alcance:** mide el mecanismo M62 con un `AudioStreamWAV` sintético, no assets reales ni el
+  decoder; M42 sigue con 0 llamadores (`set_estado_clima`), deuda declarada de M42. El
+  `ERROR: Failed to retrieve non-existent singleton 'AnimationService'` es ruido preexistente
+  del boot headless, ajeno a M62.
+- **Reproducir:** `M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral
+  --script res://scripts/rendimiento/memoria/sesion_m62_clima_30min.gd` (sin
+  `M62_BASELINE_FORZAR`; el run real usa 1800 s).
+
+**Totales tras el cierre:** 132 / 18 / 0 (150 items).
