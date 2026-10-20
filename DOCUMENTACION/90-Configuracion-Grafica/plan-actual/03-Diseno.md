@@ -505,3 +505,146 @@ func save_settings():
 - Tests de carga de configuración
 - Tests de aplicación de configuración
 - Tests de detección de hardware
+
+
+## 15. Cierre de diseño de los ítems abiertos (tanda 2026-10-20, Step-5-WorkBuddy)
+
+Tanda sobre la COLA ACTIVA del director (REPOBLACION V3, ítems 97-174 de este módulo).
+Estado medido antes de tocar: **201 [x] / 4 [?] / 44 [ ] = 249** en `05-Checklist.md`
+(conteo por prefijo de línea). 34 de los 78 ítems ya estaban cerrados por agnes-3-flash
+(tandas t6-t13) y step-5-kilocode; esta sección documenta los 44 que quedaban abiertos.
+
+**Evidencia de código (medida hoy, repo en HEAD):**
+- Núcleo: `scripts/settings/graphics_config.gd` (575 líneas, `extends RefCounted`, núcleo puro
+  headless). Presets SOMBRAS/TEXTURAS/DISTANCIA/EFECTOS/VEGETACION/AGUA/PARTICULAS, AA_OPCIONES,
+  UPSCALING, ESCALAS, VSYNC_OPCIONES, FPS_OPCIONES, MODOS, RESOLUCIONES, RANGOS_SLIDERS,
+  SLIDERS_DEFAULT, ACCESIBILIDAD_DEFAULT, VOLUMETRICO, CULLING, LOD, DEBUG_FLAGS.
+- Suites VERDES con binario real Godot 4.7.2 console (`--headless --script`):
+  `test_graphics_config.gd` = 85 checks / 0 fallos / 6 bloques / EXIT 0 / 0 SCRIPT ERROR;
+  `test_graphics_config_post_m90.gd` = 57 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR.
+- Shaders en disco: `shaders/agua_olas.gdshader`, `shaders/caustics.gdshader`,
+  `shaders/oceano.gdshader`, `shaders/wind_vegetacion.gdshader`.
+- Medido AUSENTE en disco: menú de UI de ajustes gráficos (`find` por *graphics*settings* = 0
+  archivos), métodos `apply_resolution()`/`apply_vsync()`/`apply_anti_aliasing()` (grep = 0),
+  colisión de partículas con world (grep = 0), parallax mapping (grep = 0), normal map de olas
+  como textura (el shader calcula la normal procedimentalmente).
+
+### 15.1 Controles del menú (ítems 133-152) — contrato núcleo ↔ UI
+
+La UI la construye M53 sobre este núcleo; cada control mapea a una clave de `GraphicsConfig`
+con sus opciones ya validadas en código. Control → clave (`graphics_config.gd`) → opciones →
+default del preset medio:
+
+| Control | Tipo | Clave | Opciones (const en código) | Default medio |
+|---|---|---|---|---|
+| Resolución | dropdown | `resolucion` | RESOLUCIONES: 720p/1080p/1440p/4k/nativa | 1080p |
+| Pantalla completa | toggle | `modo` = pantalla_completa | MODOS: ventana/pantalla_completa/borderless | ventana |
+| Ventana | toggle | `modo` = ventana | ídem (mismo matiz de `modo`, no son flags independientes) | ventana |
+| Borderless | toggle | `modo` = borderless | ídem | ventana |
+| VSync | dropdown | `vsync` | VSYNC_OPCIONES [0, 1, 2] (disabled/enabled/adaptive) | 1 |
+| FPS cap | dropdown | `fps` | FPS_OPCIONES [30, 60, 120, 0] (0 = ilimitado) | 60 |
+| Escala de resolución | slider | `escala` | ESCALAS [0.5, 0.75, 1.0, 1.25, 1.5] | 0.75 |
+| Upscaling | dropdown | `upscaling` | UPSCALING: off/fsr_1_0/fsr_2_0/dlss/xess | fsr_2_0 |
+| Calidad de sombras | dropdown | `sombras` | CALIDADES: baja/media/alta/ultra | media |
+| Calidad de texturas | dropdown | `texturas` | CALIDADES | media |
+| Distancia de dibujado | slider | `distancia` | DISTANCIA: 300/600/1200/2500 m | media (600 m) |
+| Calidad de efectos | dropdown | `efectos` | CALIDADES (multiplicador 0.25/0.5/0.85/1.0) | media |
+| Calidad de vegetación | dropdown | `vegetacion` | CALIDADES (0.2/0.45/0.8/1.0) | media |
+| Calidad de agua | dropdown | `agua` | CALIDADES (0.25/0.5/0.85/1.0) | media |
+| Calidad de partículas | dropdown | `particulas` | CALIDADES → 100/500/1000/2000 por sistema | media |
+| Anti-aliasing | dropdown | `aa` | AA_OPCIONES: off/fxaa/msaa_2x/msaa_4x/taa | fxaa |
+| Anisotropic filtering | dropdown | `aniso` | 2/4/8/16 (valores por preset; TEXTURAS.aniso) | 4 |
+| Post-processing | toggle | `post` | bool — `post=false` apaga TODO (mapeo_post) | true |
+| Bloom | toggle + slider | `bloom`, `bloom_intensidad` | bool + [0.0, 1.0] (SLIDERS_DEFAULT 0.5) | true / 0.5 |
+| Motion blur | toggle + slider | `motion_blur`, `motion_blur_intensidad` | bool + [0.0, 1.0] (default 0.5; sample_count [4,16] default 8) | false / 0.5 |
+| Depth of field | toggle + slider | `dof`, `dof_intensidad` | bool + [0.0, 1.0] (default 0.5; dof_distancia [0,100] default 10; dof_apertura [0,1] default 0.5) | false / 0.5 |
+
+Notas de aplicación: los sliders se clamplean con `validar_slider()` contra `RANGOS_SLIDERS`;
+`preset_actual()` devuelve "personalizado" si los valores no coinciden con ningún preset (regla
+de `_igual()`); `to_dict()`/`from_dict()`/`from_json()` serializan para M46/M59 (from_json
+devuelve false ante JSON inválido o array, verificado por suite).
+
+### 15.2 Agua, olas y partículas (ítems 101, 102, 103, 105)
+
+- **Normal map para olas (102):** el shader `agua_olas.gdshader` deriva la normal
+  procedimentalmente de las olas (`NORMAL = normalize(vec3(-dx, 1.0, -dz))`, L49) y el fresnel
+  (~L66). Decisión de diseño: **normales procedimentales, sin textura de normal map** (no
+  existe el uniform en disco). El slot alternativo `normal_map` + UV2 en el plano de agua
+  queda como mejora futura opcional (requiere asset). M51 ya cubre "Agua animada (shader
+  olas+fresnel)".
+- **Parallax para profundidad (103):** no hay parallax mapping en disco (grep = 0 en shaders).
+  Diseño: uniform opcional `parallax_profundidad` (altura + escala) en el shader de agua, con
+  la profundidad aparente acotada para no romper la línea de costa (la costa ya se maneja en
+  el shader vía `costa`). Implementación diferida; el contrato queda aquí.
+- **Colisión de partículas con world (105):** sin nodos de colisión ni SDF en disco
+  (grep = 0). Diseño: `GPUParticles3D` + `GPUParticlesCollisionHeightField3/SDF` atado al
+  terreno voxel; el nodo de colisión sólo se instancia con calidad >= alta (presupuesto
+  `PARTICULAS`: 100/500/1000/2000 por sistema).
+- **Interacción con jugador (101):** `scripts/world/agua_animada.gd` sólo tiene `_ready()`
+  (medido: sin lógica de jugador). Diseño: al entrar el Player al volumen de agua → emisor de
+  salpicadura en el punto de contacto + onda radial (`ripple`) de vida corta, cantidad
+  acotada por la calidad de partículas; en baja, sin emisor (sólo audio si lo hubiera).
+  Implementación diferida al módulo de movimiento del Player.
+
+### 15.3 Bloom / motion blur / depth of field (ítems 106, 107, 109, 110, 112, 113, 114, 125)
+
+- **Toggle de bloom (106):** implementado en el núcleo — `mapeo_post()` fija
+  `glow = bloom AND post`; `aplicar_env(entorno)` setea `entorno.glow_enabled` (verificado por
+  `test_graphics_config_post_m90.gd` sobre un `Environment` real y en null-safe headless).
+- **Bloom shader para glow (107):** Godot 4 usa el glow integrado del `Environment` (shader
+  propio del motor). Parámetros: `glow_enabled` + `glow_bloom` = `bloom_intensidad`
+  [0,1] default 0.5; umbrales `bloom_threshold` [0,1] default 0.7 y `bloom_radius` [0,1]
+  default 0.3 para fuentes brillantes (las constantes ya existen en RANGOS_SLIDERS /
+  SLIDERS_DEFAULT).
+- **Motion blur por velocidad de cámara (109, 110):** intensidad proporcional a la velocidad
+  lineal de la cámara (clamp [0,1]); `motion_blur_sample_count` [4,16] default 8. Apagado en
+  todos los presets salvo ultra; el toggle de accesibilidad `reducir_motion` lo apaga aunque
+  el preset lo tenga activo (`mapeo_accesibilidad()`, medido).
+- **DoF (112, 113, 114):** `dof_distancia` [0,100] m (distancia focal), `dof_apertura` [0,1]
+  (cuánto blur), `dof_intensidad` [0,1] (fuerza); defaults 10 / 0.5 / 0.5. Sólo el preset
+  ultra lo activa; `post=false` lo apaga vía `mapeo_post()`.
+- **Reducción de bloom por accesibilidad (125):** `reducir_bloom` en ACCESIBILIDAD_DEFAULT;
+  `mapeo_accesibilidad()` = `glow AND NOT reducir_bloom` → opción anti-distracción
+  implementada como lógica en el núcleo.
+
+### 15.4 Métodos de aplicación (ítems 157, 158, 160) — contratos
+
+Nombres y semántica (la capa de aplicación real va en M90/M53; el núcleo ya expone los datos):
+
+- `apply_resolution() -> Vector2i`: recibe id de RESOLUCIONES; "nativa" se resuelve con
+  `DisplayServer.screen_get_size()`; aplica el modo de MODOS con
+  `DisplayServer.window_set_mode()` + `window_set_flag(BORDERLESS)`; tamaño efectivo =
+  `resolucion_vec2()` (objeto {x, y} con la escala de render aplicada).
+- `apply_vsync() -> int`: `vsync` ∈ VSYNC_OPCIONES [0,1,2] →
+  `DisplayServer.window_set_vsync_mode(VSYNC_DISABLED/ENABLED/ADAPTIVE)`; devuelve el modo
+  aplicado.
+- `apply_anti_aliasing() -> String`: `aa` ∈ AA_OPCIONES → `Viewport.msaa_3d` (off/2x/4x) para
+  MSAA; `ProjectSettings "rendering/anti_aliasing/quality/msaa_3d"` para el proyecto; FXAA/TAA
+  por ProjectSettings. DLSS/XeSS quedan fuera (requieren plugin del vendor — ítems cerrados
+  por agnes con `_set_upscaler_proyecto()` como precedente de flags).
+- `apply_fps_cap()` **ya existe** en el núcleo (L408: `Engine.max_fps` con validación contra
+  FPS_OPCIONES; 0 = ilimitado) → el ítem 159 quedó cerrado por implementación real.
+
+### 15.5 Detección automática (ítem 153)
+
+Botón "Detección automática" → `detect_hardware()` (núcleo L501: RAM por
+`OS.get_static_memory_usage()` en MB → GB, CPU por `OS.get_processor_name()` /
+`get_processor_count()`) → `recomendar_preset(gpu, ram_gb, nucleos)` (regla MINI: gana la
+clasificación más baja de las tres — verificada por test: GPU ultra + 4 GB RAM → "baja";
+GPU débil + 32 GB → "baja") → `aplicar_preset(recomendado)`. El modelo de GPU lo resuelve
+M115 (HardwareManager); el núcleo deja el marcador `"gpu": ""` (medido L519) y
+`recomendar_preset` clasifica el nombre por palabras clave (rtx 40/50, rtx 30/20, gtx 16...).
+
+### 15.6 Pruebas (ítems 162-170, 171, 172, 174)
+
+Ver `06-Plan-Testings.md` (creado en esta tanda). Resumen: legibilidad 720p/1080p/4K
+(capturas a resolución nativa — NO headless), soporte de tildes/ñ/símbolos (barrido del
+glosario + capturas), localización 6 idiomas (es/pt/fr/de/it/ru), ajustes de accesibilidad
+(`reducir_motion` / `reducir_bloom` / `alto_contraste`), rendimiento (tiempo de carga por
+preset). Los tests de **detección automática ya existen y están verdes hoy**:
+`test_graphics_config.gd` cubre `clasificar_ram`/`clasificar_cpu`, `recomendar_preset`
+(5 casos incluida la regla MINI), `from_json` (válido / inválido / array) — 85 checks / 0
+fallos / 6 bloques / EXIT 0 con binario real. Los tests de **aplicación** (post/volumétrico/
+upscaling/resolución) cubren 57 checks en `test_graphics_config_post_m90.gd` (EXIT 0; esa
+suite no tiene guardia de 3 capas — confianza por lectura de flujo + resumen final, no fue
+modificada por mí).

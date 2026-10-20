@@ -335,7 +335,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 41. - [ ] [59] Guardar fotos por referencia (ids, no bytes — M56) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 42. - [ ] [59] Guardar Sellos y ruinas coleccionables [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 43. - [ ] [59] Testear diario 500+ entradas y fotos faltantes (fallback) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
-44. - [ ] [59] Guardar opciones gráficas (M90), audio (M91), accesibilidad (M58) e idioma (M87) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+44. - [?] [59] Guardar opciones gráficas (M90), audio (M91), accesibilidad (M58) e idioma (M87) [M] · [→] T20-M59 2026-10-19 (G-5.3-Flash-Agente): auditoría — M91/M87/M58 persisten (provider + settings.cfg + profile.json); M90 gráfica SIN persistencia a disco (dueño M90); item 59 [?] parcial documentado en 59-Guardado/05 (69/60/2). <!-- fuente: 59-Guardado/05-Checklist.md -->
 45. - [ ] [59] Probar múltiples perfiles sin cruzamiento [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
 46. - [ ] [59] Probar archivos con permisos de solo lectura [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 47. - [ ] [59] Sin GC pesado ni hitching al encolar [M] <!-- fuente: 59-Guardado/05-Checklist.md -->

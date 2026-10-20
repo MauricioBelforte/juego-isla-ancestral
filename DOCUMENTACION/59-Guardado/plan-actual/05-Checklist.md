@@ -137,7 +137,7 @@
 ## P. Configuración (M90/M91)
 
 - [x] Guardar configuración en slot separado del progreso [M]
-- [ ] Guardar opciones gráficas (M90), audio (M91), accesibilidad (M58) e idioma (M87) [M]
+- [?] Guardar opciones gráficas (M90), audio (M91), accesibilidad (M58) e idioma (M87) [M] — **G-5.3-Flash-Agente (2026-10-19, auditoría parcial): M91 ✓ (provider M59 'audio_config', BUG-092), M87 ✓ (user://settings.cfg vía GameSettings), M58 ✓ (user://accessibility_profile.json), M90 ✗ SIN persistencia a disco** (`scripts/settings/graphics_config.gd` solo to_dict/from_json en memoria; sin FileAccess ni autoload viva que la cargue al boot → los ajustes gráficos volverían a default al reiniciar). Falta: provider/wiring del dueño M90 (o autoload viva del config). No se marca [x] por honestidad §21.3.6.
 - [x] No mezclar configuración con progreso [M]
 - [x] Testear carga de configuración sin tocar el progreso [M]
 - [x] Documentar el slot de configuración en 03-Diseno.md [S]
@@ -192,9 +192,9 @@
 
 ## W. Accesibilidad (M58)
 
-- [ ] Feedback de guardado visible y legible [S]
+- [x] Feedback de guardado visible y legible [S] → **G-5.3-Flash-Agente (2026-10-19):** el feedback visual existe y es legible: `pause_layer._toast_guardado(ok, clave)` emite por `EventBus.ui.notify` el toast `guardado_manual` con texto LOCALIZADO (`SETTINGS.GUARDAR_EXITO/FALLO` via Localization) — capturado en runtime en `qa_m59_guardar_confirmacion.gd` (4/0 EXIT 0, «toast GUARDAR_EXITO» dos veces). Legibilidad: toasts `NotificationService` con contraste WCAG corregido por BUG-130 (`test_m53_wcag.gd` 17/0, Ling 3.1).
 - [ ] Confirmaciones accesibles por gamepad (M57) [M]
-- [ ] Diálogos de aviso con opciones claras [S]
+- [x] Diálogos de aviso con opciones claras [S] → **G-5.3-Flash-Agente (2026-10-19):** `confirm_popup.gd` — botones OK/Cancelar con textos LOCALIZADOS (`SETTINGS.CONFIRMAR`; `SETTINGS.CANCELAR`), dispatch limpio `_cerrar(aceptar)` → on_ok / on_cancel, y cancel sin callback definido = no-op seguro (cozy). QA `scripts/saving/qa_m59_popup_opciones.gd` **5/0, EXIT 0** — «botón OK localizado», «botón Cancelar localizado», «cancelar ejecuta la rama de cancelación», «aceptar ejecuta on_ok», «cancel sin on_cancel definido es no-op seguro». El popup real está plateado en el flujo Guardar/Borrar del pause_layer (ítems 1/7).
 - [ ] Testear menú con Reduce Motion (M58) [M]
 - [ ] Testear con texto grande (M58) [M]
 
@@ -221,7 +221,7 @@
 - [ ] Marcar ítems solo al cumplir la DoD (sección 21.6) [S]
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 ítems – Completados: 67 – Pendientes: 62 – No resueltos: 1. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-19: drift +1 preexistente + 4 flips del paquete de verificación — 62/67/1 tras 'Guardar en pausa' → 66/63/1). Total 130 y sin cambios.
+**Totales:** 130 ítems – Completados: 69 – Pendientes: 60 – No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-19: drift +1 preexistente + 4 flips del paquete de verificación — 62/67/1 tras 'Guardar en pausa' → 66/63/1). Total 130 y sin cambios.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].
