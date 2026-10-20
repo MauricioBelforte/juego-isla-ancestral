@@ -1984,8 +1984,8 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 ## REPOBLACION V3 (2026-10-19T00:02:03) — items REALES de 05-Checklist (fuente en comentario)
 
 1. - [ ] [35] P2: disenar minerales — tabla de 8+ minerales [S] <!-- fuente: 35-Mineria/05-Checklist.md --> — **MEDIDO Y ENTREGADO 2026-10-20 (Log 2034), diseno completo; implementacion bloqueada por 1 item.** Medido antes de disenar: `data/mining/ores.json` tiene **6** vetas (objetivo 8+), `data/items/` tiene **300** `.tres` de los que solo **7** tienen forma de mineral y **2** (`gemstone`, `copper_ore`) no los usa ninguna veta; **0** items de oro. El JSON SI trae `profundidad_banda` (superficie/subterraneo_medio/profundo/ancestral) y `region` (cantera/cueva/templo) completas -> el hueco es solo el numero. Entregada la seccion `### 2.5 Catalogo de minerales - tabla de diseno (P2)` en `03-Diseno.md` (12.631 -> 16.595 B, LF preservado, sin BOM) con 8 filas: las 6 reales con valores leidos del archivo + `veta_gema` (item `gemstone`, ya existe y esta sin uso) + `veta_oro_puro` (item `gold_ore`, NO existe). Huecos destapados: `veta_oro` y `veta_polvo_estrellas` entregan el MISMO item (`ancient_crystal`) porque no hay item de oro; `copper_ore` duplica a `mineral_cobre`. **No se toco** `ores.json`, `VETAS_M35` ni las aserciones de tamano de los tests: crear la veta sin item real violaria BUG-132. Flip `[->]` propuesto; el `[x]` necesita `gold_ore` por M15/M159.
-2. - [ ] [35] P16: disenar rutas — caminos de acceso a las zonas [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
-3. - [ ] [35] P17: disenar estaciones — puestos de descanso y mejoras [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
+2. - [ ] [35] P16: disenar rutas — caminos de acceso a las zonas [S] <!-- fuente: 35-Mineria/05-Checklist.md --> — **ENTREGADO 2026-10-20 (Log 2038), diseno completo; implementacion bloqueada por M08.** Seccion nueva `### 2.6 Rutas de acceso a las zonas` en `03-Diseno.md` (16.595 -> 29.859 B, LF preservado, sin BOM, `git diff --numstat` 156/0, 6 tablas y 0 desalineadas): 5 rutas (R1 sendero de cantera sin gate, R2 rampa de descenso, R3 galeria de cueva, R4 sello del templo, R5 acceso ancestral permanente) con ids REALES de piezas (`camino_cesped`, `camino_piedra`, `escalera_recta`, `escalera_doble`, `puente_1`..`puente_4`, `farol_piso`, `antorcha_ancestral`, `cerca_piedra`, `monolito_glifos`, `farol_colgante`) + 4 reglas de ruta + matriz de progresion T1-T4. **Medido antes de disenar:** 6 `zone_id` de gates; **0 llamadores de produccion de `can_access_zone()`**; **0 apariciones** de `gate_muro_piedra`/`gate_sello_ancestral`/`gate_cristal_bloqueado` en `scripts/`; 10 `ubic_*` con **0** para cantera/cueva (hueco ya declarado por M160 en `huecos_de_mapeo`); 46 piezas de construccion; `familia = camino` con **0 efectos de gameplay**. **Hallazgo: ciclo de progresion cerrado** — `gate_muro_piedra` exige T2_HIERRO y el hierro que paga T2 esta dentro de la cantera; `gate_cristal_bloqueado` exige T4_CRISTAL y el cristal que paga T4 esta dentro de la cueva. Hoy latente porque el gate no se consulta en ningun lado. Propuestas P16-D1/D2/D3 entregadas al director; **NO aplicadas** (son datos de M158). Flip `[->]` propuesto.
+3. - [ ] [35] P17: disenar estaciones — puestos de descanso y mejoras [S] <!-- fuente: 35-Mineria/05-Checklist.md --> — **ENTREGADO 2026-10-20 (Log 2038), diseno completo sobre piezas y modelos que ya existen.** Seccion nueva `### 2.7 Estaciones: puestos de descanso y mejoras` (mismo archivo, misma escritura): 5 estaciones E0-E4 con ids reales (`cama`, `farol_piso`, `cofre_ancestral`, `mesa`, `antorcha_ancestral`, `lingote_metal`, `farol_colgante`, `monolito_glifos`); 5 reglas de descanso ancladas al modelo real (`PlayerEnergy`: dormir 100% via `recargar_dormir()`, descanso +30% via `recargar_descanso()`, fatiga 30% informativa y no bloqueante); puente `tool_power` 1-3 (contrato §4) <-> tiers de M158 resuelto **derivando `tool_power` del tier** (T1..T3 = 1..3) y usando el `area` de M158 en T4. **Medido:** 4 forjas y 4 cursos; **0 llamadores de produccion de `forjar()`**; **0 apariciones de `tool_power`** (`MiningTool` no implementado); **no existe sistema de descanso del jugador** (los hits de `descanso`/`dormir` son necesidades de NPC M64/M65 y el estado suspendido de `interaction_manager.gd`). **Hallazgo: los materiales de las forjas usan ids inexistentes** — `hierro`/`oro`/`cristal` no existen en los 300 items (los reales son `iron_ore`/`ancient_crystal`/`crystal`; 0 items de oro), el defecto esta duplicado en `data/m158/catalogo_herramientas.json` L160/L169, y `test_tiers.gd` queda **VERDE (0 fallos, EXIT 0 medido)** porque inyecta esos ids falsos en el inventario. Flip `[->]` propuesto.
 4. - [ ] [35] Hook de post-generacion de chunk conectado [S] <!-- fuente: 35-Mineria/05-Checklist.md -->
 5. - [ ] [35] Escritura de bloques de mineral en el voxel [M] <!-- fuente: 35-Mineria/05-Checklist.md -->
 6. - [ ] [35] Remeshing diferido solo del chunk afectado [C] <!-- fuente: 35-Mineria/05-Checklist.md -->
@@ -2284,3 +2284,44 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
   5.694 B), `03-Diseno.md` de M35, tracker 328 -> **330**, pool de canal 331 consumido -> cabeza 332.
 - **0 commits / 0 push / 0 flips / 0 auto-sellos.** Proxima: bloque 2 items 2 y 3 (P16 rutas, P17
   estaciones), diseno puro sin dependencia de M08.
+
+## 2026-10-20 03:02 (GMT-3) - RAMA 1 / msg 333: COLA V3 bloque 2 items 2-3 (P16 rutas + P17 estaciones), Log 2038 -> canal 334
+
+- **Tracker 332 -> 333.** Unico entrante = **333** (acuse del director: bloque 2 + P2 tomados con
+  flips aplicados por el; M14 verificado sin items de localizacion; instruccion "segui COLA V3,
+  siguiente bloque"). **0 flips mios.**
+- **Items 2 (P16) y 3 (P17) ENTREGADOS** como diseno puro en `03-Diseno.md`: secciones nuevas
+  `### 2.6` y `### 2.7`. Archivo 16.595 -> **29.859 B**, `git diff --numstat` **156/0** (no se toco
+  ninguna linea previa, incluida la §2.5 del ciclo anterior), LF puro, sin BOM, 0 U+FFFD,
+  **6 tablas y 0 desalineadas**.
+- **P16 (5 rutas)**: R1 sendero de cantera (sin gate), R2 rampa de descenso (`gate_muro_piedra`),
+  R3 galeria de cueva, R4 sello del templo (`gate_sello_ancestral`, `blocks_story`), R5 acceso
+  ancestral permanente. Todas con **ids reales** de `data/construccion/piezas/`. 4 reglas: ninguna
+  ruta es obligatoria para volver; el camino no da ventaja mecanica (medido: 0 efectos); el gate vive
+  en el tramo y no en la zona (un solo sitio que cablear); se respeta la cuota de 12/dia.
+- **P17 (5 estaciones)**: E0 cama, E1 puesto de avanzada, E2 forja de campo (repara, no sube tier),
+  E3 forja de isla (la `forjas` de M158), E4 mirador/atajo. Reglas ancladas a `PlayerEnergy`
+  (dormir 100%, descanso +30%, fatiga 30% informativa). Puente `tool_power` <-> tiers resuelto
+  derivando `tool_power` del tier.
+- **HALLAZGO 1 (medido, no corregido):** `forjas` pide `hierro`/`oro`/`cristal` x10/x20/x5 y **esos
+  ids no existen** en los 300 items (`iron_ore`/`ancient_crystal`/`crystal`; 0 items de oro).
+  `forjar()` devuelve "faltan materiales" **siempre**. Prueba de que `hierro` es etiqueta:
+  `build_hud.gd:33` traduce `"iron_ore": "hierro"`. Defecto **duplicado** en
+  `data/m158/catalogo_herramientas.json` L160/L169.
+- **HALLAZGO 2:** `test_tiers.gd` queda **VERDE (EXIT 0, 0 fallos, 0 SCRIPT ERROR, corrida real)**
+  porque inyecta `{"hierro": 10}` y `{"oro": 20}` en el inventario. El test consagra el defecto.
+- **HALLAZGO 3 (latente):** ciclo de progresion cerrado: `gate_muro_piedra` exige T2 y el hierro de
+  T2 esta dentro de la cantera; `gate_cristal_bloqueado` exige T4 y el cristal de T4 esta dentro de
+  la cueva. Hoy no duele: `can_access_zone()` tiene **0 llamadores de produccion** y los 3 gate_id
+  aparecen **0 veces** en `scripts/`.
+- Artefactos: Log **2038** (ASCII puro / CRLF / sin BOM, 12.257 B, 241 lineas), msg **334**
+  (UTF-8 sin BOM / LF, 5.780 B), backlog anotado (2 notas + esta seccion, LF preservado), tracker
+  **333**, pool de canal 334 consumido -> cabeza 335, pool de logs 2038 consumido -> cabeza 2039.
+- **0 commits / 0 push / 0 flips / 0 auto-sellos.** El bloque 2 queda **sin items de diseno
+  ejecutables**: 4-27 dependen de la API de M08 (`set_block` = 0) y 28-31 son de M08. Pedido al
+  director: decision sobre P16-D1/D2/D3 o reposicion de cola sin M08.
+- **Trampas nuevas:** (1) `estacion` en este repo es casi siempre "estacion del ano" (136 archivos,
+  homonimo): desambiguar antes de contar; (2) `ores.json` es un ARRAY, no un dict con clave `vetas`
+  (volcar `type()` antes de indexar); (3) un `git diff --numstat` 156/0 es la prueba barata de que no
+  se piso trabajo previo en un archivo que otro agente ya edito; (4) un test de recetas puede estar
+  verde validando ids que no existen, porque el inventario acepta cualquier String.

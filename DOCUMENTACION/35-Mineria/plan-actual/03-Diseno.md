@@ -138,6 +138,162 @@ que exista `gold_ore` dejaría una veta sin drop real (violaría la regla de BUG
 **Conclusión de P2:** la tabla de diseño de 8+ minerales queda **definida y medida**; la
 implementación de las 2 nuevas depende de 1 item (`gold_ore`) que no es de este módulo.
 
+### 2.6 Rutas de acceso a las zonas — tabla de diseño (P16, 2026-10-20)
+
+Estado **medido en disco** antes de diseñar (ninguna cifra heredada de la checklist):
+
+| Medición | Valor real | Fuente |
+|---|---|---|
+| Regiones de minería | **3** — `cantera` (3 vetas), `cueva` (1), `templo` (2) | `data/mining/ores.json` |
+| `zone_id` declarados en gates | **6** — `zona_bosque_denso`, `zona_cantera`, `zona_raices`, `zona_templo_ceniza`, `zona_cueva_cristal`, `zona_tumba_ancestral` | `data/herramientas/tiers_config.json` |
+| Llamadores de producción de `can_access_zone()` | **0** (sólo la definición, un comentario y `test_tiers.gd`) | `grep` sobre `scripts/` |
+| Apariciones de `gate_muro_piedra` / `gate_sello_ancestral` / `gate_cristal_bloqueado` en código | **0** | `grep` sobre `scripts/` |
+| Ubicaciones del mundo | **10** (`ubic_*`); **ninguna** para cantera ni cueva | `data/ubicaciones/ubicaciones.json` |
+| Hueco declarado por M160 | cantera/cueva sin ubicación y `zone_id` sin mapeo a `ubic_*` | `data/m160/catalogo_ubicaciones.json` → `huecos_de_mapeo` |
+| Islas y geometría | RIZ `[256,256]` r256 · COR `[1024,256]` r220 · CEN `[256,1024]` r220 · AUR `[1024,1024]` r200 | `catalogo_ubicaciones.json` → `islas` |
+| Piezas de construcción | **46**, familias: `camino` 3, `escalera` 2, `puente` 5, `iluminacion` 3, `mueble` 4 | `data/construccion/piezas/*.tres` |
+| Piezas de camino disponibles | `camino_arena`, `camino_cesped`, `camino_piedra` (esta última: `stone` 2, `altura` 0.1, `superficie_ok` = terreno) | `camino_piedra.tres` |
+| Límite blando por zona | **12** extracciones/día (`DEFAULT_ZONE_QUOTA`) | `mining_manager.gd:81` |
+| Efecto de gameplay de `familia = camino` | **0** — el camino es decorativo: ninguna pieza altera velocidad ni acceso | `grep` en `scripts/construccion/` |
+
+**Lectura de esas mediciones:** las zonas de minería existen como **datos** (región + banda) y
+como **gates declarados**, pero no existen como **geografía**: no hay ubicación, no hay puerta y
+nadie consulta el gate. Por eso P16 no es "dibujar un camino sobre un mapa que ya está": es fijar
+la geografía mínima que hoy falta, usando ids que ya existen.
+
+Tabla de rutas propuesta. Las columnas "Piezas" usan **ids reales** de
+`data/construccion/piezas/`; las longitudes son **propuesta** (no hay dato previo).
+
+| # | Ruta | Zona / banda | Entrada | Piezas (ids reales) | Gate | Largo | Estación |
+|---|---|---|---|---|---|---|---|
+| R1 | Sendero de la Cantera | `zona_cantera` / superficie | `ubic_spawn_riz` → borde norte de la cantera | `camino_cesped` (tramo blando), `camino_piedra` (tramo rocoso), `farol_piso` cada 12 bloques | **ninguno** | 60 bloques | E1 en la boca |
+| R2 | Rampa de descenso | `zona_cantera` / subterraneo_medio | boca de R1 | `escalera_recta` + `escalera_doble` (tramos de 4), `farol_piso`, `cerca_piedra` como baranda | `gate_muro_piedra` | 24 bloques verticales | E2 a media rampa |
+| R3 | Galería de la cueva | `zona_cueva_cristal` / profundo | pared este de la cantera | `camino_piedra`, `puente_1`..`puente_4` sobre huecos, `antorcha_ancestral` | boca **abierta**; `gate_cristal_bloqueado` en el ramal profundo | 90 bloques | E1 a 30 bloques de la boca |
+| R4 | Sello del Templo | `zona_templo_ceniza` / ancestral | `ubic_templo_ceniza` (isla CEN) | `camino_piedra`, `monolito_glifos` como hitos de progreso | `gate_sello_ancestral` (`blocks_story: true`) | 40 bloques | E3 (forja de isla CEN) |
+| R5 | Acceso ancestral permanente | `zona_tumba_ancestral` / ancestral | tras completar M26 | `camino_piedra`, `puente_2`, `farol_colgante` | `gate_tumba_ancestral` | 50 bloques | E4 (mirador/atajo) |
+
+**Reglas de ruta (propuesta, coherentes con el resto del diseño):**
+
+1. **Una ruta nunca es obligatoria para volver.** Todo tramo con `escalera_*` lleva un descenso
+   alternativo (`escalera_recta` en paralelo) para que el jugador no quede encerrado si agota
+   herramientas — misma filosofía que el respawn con desplazamiento suave de §6.
+2. **El camino no da ventaja mecánica** (medido: 0 efectos hoy). Se propone que `camino_piedra`
+   sólo evite el crecimiento de vegetación decorativa; **no** velocidad ni acceso. Cambiar eso
+   sería una decisión de M17, no de M35.
+3. **Los gates viven en la ruta, no en la zona.** El gate se coloca en el tramo (R2, R3-ramal,
+   R4, R5) y se consulta al cruzarlo, no al entrar a la región. Motivo medido: `can_access_zone()`
+   tiene 0 llamadores, así que hoy no hay ningún punto de control; ponerlo en el cruce del tramo
+   es un único sitio que cablear en vez de un volumen que vigilar.
+4. **Las rutas respetan el límite blando de 12/día** (no lo eluden): llegar por R2 a la banda
+   media no recarga la cuota de `zona_cantera`.
+
+**Matriz de progresión — el hueco que P16 destapa (medido, no corregido):**
+
+| Tier | Forja (isla) | Material que pide `forjas` | Id real en el catálogo de 300 items | Veta que lo da | Zona / banda | Gate de esa zona | ¿Ciclo cerrado? |
+|---|---|---|---|---|---|---|---|
+| T1 | RIZ (gratis, carpintero) | — | — | — | — | — | no |
+| T2 | CEN (`herrero`) | `hierro` x10 + 500 AO | **`hierro` NO existe** (el real es `iron_ore`) | `veta_hierro` | cantera / subterraneo_medio | `gate_muro_piedra` **exige T2_HIERRO** | **SÍ** |
+| T3 | COR (`orfebre`) | `oro` x20 + 2.000 AO | **`oro` NO existe** (no hay item de oro: `gold_ore` tampoco) | `veta_oro` | cantera / subterraneo_medio | `gate_muro_piedra` | **SÍ** (arrastra) |
+| T4 | AUR (`cristalero`) | `cristal` x5 + 5.000 AO | **`cristal` NO existe** (el real es `crystal`) | `veta_cristal` | cueva / profundo | `gate_cristal_bloqueado` **exige T4_CRISTAL** | **SÍ** |
+
+Son **dos defectos independientes** y hay que nombrarlos por separado:
+
+1. **Ids de material inexistentes.** `forjar()` valida con `count_item("hierro") < 10`; como ese
+   id no existe en los 300 `.tres`, el conteo es 0 y la forja devuelve
+   `{"ok": false, "motivo": "faltan materiales: hierro x10"}` **siempre**. La prueba de que
+   `hierro` es una **etiqueta** y no un id está en el propio repo: `build_hud.gd:33` traduce
+   `"iron_ore": "hierro"` para mostrar el nombre. Y el defecto está **duplicado**: M158 lo repite
+   en su propio catálogo (`data/m158/catalogo_herramientas.json` L160 `"hierro": 10`, L169
+   `"oro": 20`), así que corregir sólo `tiers_config.json` dejaría la otra copia mintiendo.
+   Lo que lo tapa es el
+   propio test: `test_tiers.gd` inyecta `_inv.agregar_items({"hierro": 10})` y `{"oro": 20}`
+   directamente en el inventario, así que la suite queda **verde (0 fallos, EXIT 0, medido)** con
+   ids que ningún sistema de producción puede generar. Es la familia "el test consagra el defecto".
+2. **Ciclo de progresión.** El gate de la cantera exige el tier que sólo se consigue con material
+   de dentro de la cantera. Hoy no duele porque **el gate no se consulta en ningún lado**
+   (0 llamadores); duele el día que se cablee, que es exactamente lo que P16 propone.
+
+**Resoluciones propuestas (NO aplicadas — tocan datos de M158):**
+
+- **P16-D1:** `gate_muro_piedra.required_tier` → `T1_COBRE`. Un muro de piedra se rompe con pico
+  de cobre; el ramal profundo (donde vive el oro) pasa a un segundo gate `T2_HIERRO`. Así el
+  hierro que paga T2 queda **fuera** de lo que el muro cierra.
+- **P16-D2:** la boca de `zona_cueva_cristal` queda **abierta**; `gate_cristal_bloqueado` se mueve
+  al ramal de la banda profunda, por el mismo motivo (el cristal que paga T4 está adentro).
+- **P16-D3:** `forjas[].materiales` debe usar ids del catálogo (`iron_ore`, `ancient_crystal`,
+  `crystal`). Es dato de **M158** y se reporta; no se edita desde M35.
+
+**Conclusión de P16:** las 5 rutas quedan definidas con piezas e ids reales, y queda medido que
+la progresión de tiers **no es recorrible** tal como está declarada. La implementación sigue
+bloqueada por el hook de post-generación de M08 (ítem 4 de la checklist: `set_block` = 0
+apariciones en `scripts/`), pero el diseño ya no depende de esa API.
+
+### 2.7 Estaciones: puestos de descanso y mejoras (P17, 2026-10-20)
+
+Estado **medido en disco** antes de diseñar:
+
+| Medición | Valor real | Fuente |
+|---|---|---|
+| Forjas de isla | **4** — RIZ `T1_COBRE` gratis (carpintero) · CEN `T2_HIERRO` hierro 10 + 500 AO (herrero) · COR `T3_ORO` oro 20 + 2.000 AO (orfebre) · AUR `T4_CRISTAL` cristal 5 + 5.000 AO (cristalero) | `tiers_config.json` → `forjas` |
+| Cursos de profesión | **4** (300 / 1.500 / 5.000 / 10.000 AO) | `tiers_config.json` → `cursos` |
+| API de forja | `forjar(isla, tool_type) -> Dictionary` (valida tier previo, materiales y monedas; anti-doble-forja cozy) | `tool_tier_system.gd` |
+| Llamadores de producción de `forjar()` | **0** (sólo `test_tiers.gd`) | `grep` sobre `scripts/` |
+| Modelo de energía del jugador | `PlayerEnergy`: máx 100, fatiga avisada al **30%**, `recargar_dormir()` = 100%, `recargar_descanso()` = **+30%**, regen 1/min, correr 1/min | `scripts/player/player_energy.gd` |
+| Coste de herramienta | **2-8** de energía por uso (M13) — el único drenaje real | `player_energy.gd` (docstring) |
+| Sistema de descanso del jugador | **no existe**: `descanso`/`dormir` en `scripts/` son necesidades de **NPC** (M64/M65) y el "dormir" de `interaction_manager.gd` es el estado suspendido del gestor, no dormir del jugador | `grep` sobre `scripts/` |
+| `cama` como pieza | existe (`familia = mueble`, `es_mueble`, `grass` 2 + `planks` 4) **sin efecto de gameplay** medido | `data/construccion/piezas/cama.tres` |
+| `tool_power` (M35 §4) | **0 apariciones** en `scripts/`: `MiningTool` no está implementado | `grep` sobre `scripts/` |
+
+**Consecuencia de diseño:** "puesto de descanso" no hay que inventarlo de cero — hay **modelo de
+energía con las dos recargas exactas** (`dormir` 100%, `descanso` +30%) y hay **piezas** para
+construirlo. Lo que falta es el **objeto de mundo** que conecte pieza con modelo, y la regla de
+dónde puede existir.
+
+Tabla de estaciones propuesta. Costes con **ids reales** del catálogo; los importes son propuesta.
+
+| id | Nombre | Función | Piezas (ids reales) | Coste propuesto | Requisito |
+|---|---|---|---|---|---|
+| E0 | Cama (hogar) | dormir → `recargar_dormir()` (100%) | `cama` | `grass` 2 + `planks` 4 (ya existe) | dentro de construcción M17 |
+| E1 | Puesto de avanzada | descanso (+30%), guardar, fijar respawn | `cama`, `farol_piso`, `cofre_ancestral` | `planks` 6 + `stone` 4 + `grass` 2 | ruta con acceso (R1/R3) |
+| E2 | Forja de campo | **reparar** durabilidad (½ del coste de fabricación, M13 §4); **no** sube tier | `mesa`, `antorcha_ancestral`, `lingote_metal` | `planks` 4 + `stone` 6 + `iron_ore` 2 | T1 forjado |
+| E3 | Forja de isla | **subir tier** — es la `forjas` de M158, no una estación nueva | (estructura fija de la isla) | la de `tiers_config.json` | isla correspondiente |
+| E4 | Mirador / atajo | desbloquea el atajo permanente de la ruta al limpiarla | `farol_colgante`, `monolito_glifos` | `planks` 4 + `stone` 8 | ruta completa recorrida |
+
+**Reglas de descanso (propuesta):**
+
+1. **Dormir sólo en E0/E1** y siempre avanza el reloj al amanecer siguiente con la API de dormir
+   de M30 (`GameTime.avanzar_hasta`, medida y usada en el arnés de límite de memoria de M62).
+   Dormir es la única acción que recarga al 100%.
+2. **Descansar (sentarse) en E1/E4** da `recargar_descanso()` (+30%). Sin límite diario: la regla
+   cozy del modelo es que la energía **nunca** llega a cero por caminar o correr, así que el
+   descanso es una comodidad, no un peaje.
+3. **Ninguna estación cobra energía ni monedas por usarse.** El coste está en construirla y en el
+   material de la forja; cobrar por dormir contradice el tono cozy del módulo.
+4. **La fatiga al 30% es informativa, no bloqueante** (así está en el modelo desde el msg 135 del
+   director). Un puesto de descanso **no** debe convertirla en un bloqueo.
+5. **Respawn:** dormir en un E1 lo fija como punto de reaparición. Si la zona está ocupada al
+   regenerar (§6), se aplica el desplazamiento suave ya diseñado, no un teletransporte.
+
+**Puente entre mejoras y `tool_power` (decisión que P17 tiene que cerrar):**
+
+`03-Diseno.md` §4 declara `tool_power` 1-3 en `MiningTool`, y M158 declara 4 tiers con
+`dano` 1.0 / 2.0 / 3.5 / 5.0 y `area` 1 / 1 / 2 / 2. Como `tool_power` **no existe en código**
+(0 apariciones), la propuesta es **derivar `tool_power` del tier** en vez de duplicar la escala:
+
+| Tier | `tool_power` propuesto | Efecto en `OreVein.hit()` |
+|---|---|---|
+| T1_COBRE | 1 | 1 golpe descontado por golpe |
+| T2_HIERRO | 2 | 2 golpes descontados |
+| T3_ORO | 3 | 3 golpes descontados (tope del contrato §4) |
+| T4_CRISTAL | 3 + `area` 2 | mismo poder, pero golpea 2 bloques contiguos (el `area` de M158) |
+
+Así el contrato de §4 (1-3) se respeta y el `area` de T3/T4 no queda huérfano.
+
+**Conclusión de P17:** las estaciones quedan definidas sobre piezas y modelos que **ya existen**
+(`cama`, `farol_piso`, `cofre_ancestral`, `mesa`, `PlayerEnergy`, `forjas`), sin crear sistemas
+nuevos. Queda medido que la cadena de mejora **no es ejecutable hoy** por los ids de material
+(P16-D3) y que `tool_power` es una pieza de contrato sin implementación.
+
 ## 3. Flujos (texto)
 
 ### Flujo F1 — Extracción

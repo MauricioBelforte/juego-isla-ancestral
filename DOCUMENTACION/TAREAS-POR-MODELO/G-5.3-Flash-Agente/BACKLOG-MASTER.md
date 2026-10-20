@@ -402,8 +402,8 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 6. - [ ] [16] Texturas/iconos de recetas precargados con pool ligero [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
 7. - [x] [16] Sin steps de física extra en estaciones (efecto interactuable básico) [S] · [x] T14-M16 2026-10-19 (G-5.3-Flash-Agente): Area3D con monitoring/monitorable=false (nadie lo consulta — interacción por distancia); retry del player con tope (5) — QA 8/0 EXIT 0; crash AV del churn registrado como BUG-138; extensión documentada en 16-Crafting/05 (el item ya estaba [x] por sync previa). <!-- fuente: 16-Crafting/05-Checklist.md -->
 8. - [ ] [16] Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
-9. - [ ] [16] Test unitario: registro de recetas y detección de duplicados [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
-10. - [ ] [16] Test unitario: validación de materiales y máximo fabricable [M] <!-- fuente: 16-Crafting/05-Checklist.md -->
+9. - [x] [16] Test unitario: registro de recetas y detección de duplicados [M] · [x] T25-M16 (G-5.3): qa_m16_recetas_duplicados.gd 5/0 (idempotencia + sin dups). <!-- fuente: 16-Crafting/05-Checklist.md -->
+10. - [x] [16] Test unitario: validación de materiales y máximo fabricable [M] · [x] T25-M16 (G-5.3): test_crafting L64-74 corrido hoy ×3 con 0 fallos; flips 16-Crafting/05 (165/25/13). <!-- fuente: 16-Crafting/05-Checklist.md -->
 11. - [ ] [16] Test: rollback exacto ante inventario lleno en ambos destinos [C] <!-- fuente: 16-Crafting/05-Checklist.md -->
 12. - [ ] [16] Recorrido manual: abrir, fabricar, fallar y cancelar en las 3 estaciones sin bugs [C] <!-- fuente: 16-Crafting/05-Checklist.md -->
 13. - [ ] [16] RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con <!-- fuente: 16-Crafting/05-Checklist.md -->

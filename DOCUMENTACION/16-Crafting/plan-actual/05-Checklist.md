@@ -181,8 +181,8 @@ Log reservado: 512
 
 ## K. Testing y QA (8)
 
-- [ ] Test unitario: registro de recetas y detección de duplicados [M]
-- [ ] Test unitario: validación de materiales y máximo fabricable [M]
+- [x] Test unitario: registro de recetas y detección de duplicados [M] → **G-5.3-Flash-Agente (2026-10-19):** QA `scripts/crafting/qa_m16_recetas_duplicados.gd` **5/0, EXIT 0** — «0 ids duplicados en 7 recetas» (catálogo M93 via Balance), «recarga idempotente (mismo tamaño)» (_cargar_recetas ×2), «conocidas sin duplicados (4)», «recarga no dispara señales de aprendizaje» (RF4: carga inicial sin emitir).
+- [x] Test unitario: validación de materiales y máximo fabricable [M] → **G-5.3-Flash-Agente (2026-10-19):** cobertura existente y corrida HOY en esta sesión ×3 (todas 0 fallos, EXIT 0): `test_crafting.gd` L64-74 — «puede fabricar pico con materiales», «max_craftable >= 2 (10 madera/3, 10 cobre/4)», «max_craftable recalculado = 1 (6/4)» (recalcula ante consumo), «max_craftable=0 fuera de temporada» (RF5) + rollback de materiales verificado en el propio suite. Nota: `qa_m16_doble_craft.gd` añade la verificación de entrega exacta (resultado×1).
 - [x] Test: fabricación individual y múltiple con entregas correctas [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_fabricar_ok (individual y multiple)
 - [x] Test: rollback exacto ante inventario lleno en ambos destinos [C] — G-5.3-Flash-Agente 2026-10-19: _test_rollback_bolsa_llena() agregado a test_crafting.gd — lleno la BOLSILLA con filler hasta el límite, craft 5x → inventario_lleno → ROLLBACK EXACTO verificado (madera/cobre/pico counts idénticos antes/después, include_house=true: los materiales devueltos caen a la CASA por el fallback bolsa->casa). Suite completa 0 fallos.
 - [x] Test: experimentación con combinación válida, inválida y límite de 3 materiales [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_experimental (combinacion valida/invalida)
@@ -271,7 +271,7 @@ Log reservado: 512
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
-**Totales:** 203 items - Completados: 163 - Pendientes: 27 - No resueltos: 13. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-19 tras el flip del ítem 'Filtros de temporada': el conteo real era 160 [x] pre-flip vs 157 declarados — drift preexistente de +3 marcas ya-buenas que la línea anterior no contabilizaba; total 203 y [?] 13 sin cambios. Regla §21.8.2.b regla 5.) (Corregido agnes-3-flash 2026-10-14: +2 flips recitados a 02-Analisis §D3/§4, eliminado L140 duplicado per encargo mimo #392)
+**Totales:** 203 items - Completados: 165 - Pendientes: 25 - No resueltos: 13. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-19 tras el flip del ítem 'Filtros de temporada': el conteo real era 160 [x] pre-flip vs 157 declarados — drift preexistente de +3 marcas ya-buenas que la línea anterior no contabilizaba; total 203 y [?] 13 sin cambios. Regla §21.8.2.b regla 5.) (Corregido agnes-3-flash 2026-10-14: +2 flips recitados a 02-Analisis §D3/§4, eliminado L140 duplicado per encargo mimo #392)
 
 > **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
 > seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por
