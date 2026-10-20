@@ -100,4 +100,46 @@ Reglas: numeración via NUMEROS_DISPONIBLES.txt del canal (consumir), UTF-8 §28
 3. **Escritura SIEMPRE Python UTF-8 sin BOM LF** — prohibido `>`, `Set-Content` (escribe UTF-16/BOM) y herramienta que corrompa UTF-8.
 4. **REGLA CERO**: el cron reporta solo novedad material; si todo está al día, una línea y cerrar.
 5. **Firma**: `GLM-5.3 Flash-Director / Kilo Code` (para crons del director) o la firma propia del agente (para crons de flota).
-6. **Respuesta SIEMPRE en español.**
+6. **Respuesta SIEMPRE en español.**## 2ter. CRON C v3 — VIGENTE (gate + preservación; la investigación migró al Cron D)
+
+- Schedule `5,25,45 * * * *` (:05/:25/:45). id vigente: `wku_15328f93e001PhUjkn0a77455W`.
+- PROMPT EXACTO para cron_create:
+
+```
+CRON C v3 — GATE DE PADDING + PRESERVACIÓN (fundador 2026-10-19 07:40-07:50; corre a :05/:25/:45 — entre A (:00/:20/:40) y B (:10/:30/:50), sin solaparse; SIN tarea de investigación — esa migra al Cron D).
+
+PASO 0 — GATE DE PADDING (SIEMPRE primero): `python scripts/verificar_padding_pools.py` — normaliza a 3 cifras los NUMEROS_DISPONIBLES.txt y los .ultima-revision de TODOS los canales (exit 1 = corrigió algo → reporta qué corrigió en 1 línea).
+
+TAREA 1 — COMMITS DE PRESERVACIÓN (NUNCA push; push solo fundador):
+1. `git status --short` y agrupá por AUTOR/PROPÓSITO (atribución leyendo mensajes nuevos de la ventana y Logs/). Un commit = un frente coherente, NUNCA mega-commit de todo lo que falta.
+2. Verificá cada grupo antes de commit: encoding §28 (fix_encoding.py --dry-run si hay daño), sin secretos, sin binarios/capturas no pedidos.
+3. NO TOCAR: archivos con mtime < 5 min (escritura en vuelo), módulos 🔵 de otro agente, NUMEROS_DISPONIBLES.txt.
+4. Commits en español, pasado impersonal, viñetas con atribución. Prohibido push/--force/--amend/commits ajenos sin revisar.
+5. Nada nuevo: 1 línea 'CRON C: nada para preservar'.
+
+Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir, UTF-8 Python sin BOM LF (NUNCA PowerShell), firma GLM-5.3 Flash-Director, español, pathspec explícito, independencia §21.8.
+```
+
+---
+## 2quinquies. CRON D v2 — VIGENTE (asignador al detalle por capacidad; fundador 2026-10-20 03:16)
+
+- Schedule `15,35,55 * * * *` (:15/:35/:55). id vigente: `wku_1575031d0001gKzQE637LDS2WQ`.
+- PROMPT EXACTO para cron_create:
+
+```
+CRON D v2 — ASIGNADOR AL DETALLE POR CAPACIDAD (fundador 2026-10-20 03:16: "la investigación tiene que ser al detalle, no es delegar por delegar sino analizar las capacidades y el trabajo que hay disponible para hacer, para que siempre tengan los modelos 100 tareas disponibles limpias"; corre a :15/:35/:55 — entre B (:10/:30/:50) y A (:20/:40/:00), sin solaparse).
+
+UNA SOLA TAREA — ANÁLISIS EN DOS DIRECCIONES Y ASIGNACIÓN:
+1. ACTIVO = agente que escribió en su canal en las últimas 2 h (corroborá con `python scripts/verificar_mensajes_nuevos.py`). Para cada activo cuyo backlog tenga menos de 100 pendientes contables, ANÁLISIS EN DOS DIRECCIONES:
+   a) CAPACIDAD DEL AGENTE: repasá `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` (Recom + dificultad 1-5) y el HISTORIAL DE SU CANAL: qué frentes cerró bien, qué nichos demostró con QA/medición, qué le bloqueó. Su historial de tandas exitosas define su asignación.
+   b) TRABAJO REAL DISPONIBLE: los 05-Checklists de los módulos candidatos y VERIFICÁ que los ítems [ ] sigan accionables HOY (no cerrados ya por otra tanda, no bloqueados por assets/vision/dueños ausentes, no [?]). Un ítem obsoleto NO es tarea limpia.
+2. ASIGNÁ solo el cruce: nicho demostrado + trabajo disponible. Ejecutá con `python scripts/repoblar_backlog.py <carpeta> <módulos>` (fuente: solo 05-Checklist reales). Objetivo: 100 pendientes LIMPIAS (auditables, con fuente comentada). Si el mejor match requiere módulos 🔵 ajenos, saltalo y documentalo.
+3. Si el agente activo ya está 100+ y productivo: NO toques nada — 'Nombre: al día (N pendientes), sin repoblación'.
+4. Reporte 1-3 líneas por agente: a quién, qué módulos, POR QUÉ encaja.
+5. PULIDO: si detectás ítems sucios en un backlog ya existente (cerrados en el 05 pero marcados [ ]; obsoletos; duplicados), limpiálos.
+
+Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir, UTF-8 Python sin BOM LF (NUNCA PowerShell), firma GLM-5.3 Flash-Director, español, pathspec explícito, independencia §21.8, NUNCA push.
+```
+
+---
+
