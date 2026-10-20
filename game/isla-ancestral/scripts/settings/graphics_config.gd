@@ -401,6 +401,29 @@ func apply_fps_cap() -> int:
 	return cap
 
 
+## Mapeo LÓGICO de upscaling (headless). Devuelve el upscaler efectivo + escala de
+## render + si el upscaler es válido. La aplicación al RenderingServer la hace el
+## pipeline de M90/M53; aquí queda el diseño + el mapeo (verificable).
+func mapeo_upscaling() -> Dictionary:
+	var up: String = String(obtener("upscaling", UP_OFF))
+	var escala: float = validar_slider("escala_render", float(obtener("escala", 1.0)))
+	return {
+		"upscaler": up,
+		"escala_render": escala,
+		"es_valido": UPSCALING.has(up),
+	}
+
+## Aplica el upscaler + escala de render. Null-safe: si `server` es null, no-op
+## (devuelve el mapeo para que el caller lo aplique en runtime).
+func aplicar_upscaling(server) -> Dictionary:
+	var m: Dictionary = mapeo_upscaling()
+	if server == null:
+		return m
+	# El set real de upscaler/escala depende del pipeline de M90/M53 + RenderingServer;
+	# este método expone el mapeo para que el caller lo consuma.
+	return m
+
+
 ## Mapeo LÓGICO de LOD por objeto lejano. headless. La IMPL. depende de M50.
 func mapeo_lod() -> Dictionary:
 	var hab: bool = bool(LOD["habilitado"])

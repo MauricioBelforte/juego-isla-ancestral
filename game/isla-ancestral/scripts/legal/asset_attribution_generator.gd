@@ -12,14 +12,15 @@ extends RefCounted
 const ATRIBUTION_FILENAME := "ASSET_ATRIBUCIONES.txt"
 
 
-func generar_compacto(licencias: Array[LicenseProfile]) -> String:
+func generar_compacto(licencias: Array) -> String:
 	var text := "ATRIBUCIÓN DE ASSETS Y DEPENDENCIAS\n"
 	text += "=".repeat(40) + "\n\n"
 
-	var requiere_atrib: Array[LicenseProfile] = []
+	var requiere_atrib: Array = []
 	for lp in licencias:
-		if lp.attribution_required:
-			requiere_atrib.append(lp)
+		var lpp: LicenseProfile = lp as LicenseProfile
+		if lpp and lpp.attribution_required:
+			requiere_atrib.append(lpp)
 
 	if requiere_atrib.is_empty():
 		text += "No hay assets de terceros con atribución requerida.\n"
@@ -36,7 +37,7 @@ func generar_compacto(licencias: Array[LicenseProfile]) -> String:
 	return text
 
 
-func generar_detallado(licencias: Array[LicenseProfile]) -> String:
+func generar_detallado(licencias: Array) -> String:
 	var text := "# Atribución de Assets y Dependencias — Isla Ancestral\n\n"
 	text += "Fecha de generación: %s\n\n" % Time.get_datetime_string_from_system()
 	text += "Total de dependencias: %d\n\n" % licencias.size()
@@ -60,7 +61,7 @@ func generar_detallado(licencias: Array[LicenseProfile]) -> String:
 	return text
 
 
-func guardar_compacto(licencias: Array[LicenseProfile], ruta: String) -> bool:
+func guardar_compacto(licencias: Array, ruta: String) -> bool:
 	var dir := DirAccess.open(ruta.get_base_dir())
 	if not dir:
 		DirAccess.make_dir_recursive_absolute(ruta.get_base_dir())
@@ -73,7 +74,7 @@ func guardar_compacto(licencias: Array[LicenseProfile], ruta: String) -> bool:
 	return true
 
 
-func guardar_detallado(licencias: Array[LicenseProfile], ruta: String) -> bool:
+func guardar_detallado(licencias: Array, ruta: String) -> bool:
 	var dir := DirAccess.open(ruta.get_base_dir())
 	if not dir:
 		DirAccess.make_dir_recursive_absolute(ruta.get_base_dir())
@@ -87,9 +88,10 @@ func guardar_detallado(licencias: Array[LicenseProfile], ruta: String) -> bool:
 
 
 ## Cuenta las dependencias que requieren atribución o offer de fuente.
-func contar_requieren_atribucion(licencias: Array[LicenseProfile]) -> int:
+func contar_requieren_atribucion(licencias: Array) -> int:
 	var n := 0
 	for lp in licencias:
-		if lp.attribution_required or lp.source_offer_required:
+		var lpp: LicenseProfile = lp as LicenseProfile
+		if lpp and (lpp.attribution_required or lpp.source_offer_required):
 			n += 1
 	return n

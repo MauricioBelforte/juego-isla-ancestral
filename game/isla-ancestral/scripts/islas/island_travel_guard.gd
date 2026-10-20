@@ -39,6 +39,14 @@ const TOPE_MEMORIA_MB := 2048.0
 const COSTE_MB_POR_ISLA := 320.0
 const MAX_ISLAS_EN_MEMORIA := 2
 
+## ── Preset de calidad (COLA V3, item "Preset Baja en isla pequeña (M27)") ──
+## `baja` = 1 isla en memoria: es la premisa del item ("isla pequeña", 4 GB).
+## `media`/`alta` conservan el tope de diseño (2 islas completas en memoria).
+## El preset se INYECTA (`configurar(..., {"preset": "baja"})`): M27 no depende
+## de M90 ni de M62 en tiempo de parseo.
+const TOPE_ISLAS_POR_PRESET := {"baja": 1, "media": MAX_ISLAS_EN_MEMORIA, "alta": MAX_ISLAS_EN_MEMORIA}
+const PRESET_POR_DEFECTO := "media"
+
 var _vista: Dictionary = {}
 var _id_principal: String = ID_PRINCIPAL
 var _nivel_mar: float = NIVEL_MAR
@@ -46,6 +54,7 @@ var _radio_seguridad: float = RADIO_SEGURIDAD_M
 var _tope_memoria: float = TOPE_MEMORIA_MB
 var _coste_mb: float = COSTE_MB_POR_ISLA
 var _margen_borde: float = MARGEN_BORDE_M
+var _preset: String = PRESET_POR_DEFECTO
 
 
 # ── Construcción de la vista ──────────────────────────────────────────────
@@ -58,6 +67,17 @@ func configurar(vista: Dictionary, opciones: Dictionary = {}) -> void:
 	_tope_memoria = float(opciones.get("tope_memoria_mb", TOPE_MEMORIA_MB))
 	_coste_mb = float(opciones.get("coste_mb_por_isla", COSTE_MB_POR_ISLA))
 	_margen_borde = float(opciones.get("margen_borde_m", MARGEN_BORDE_M))
+	var p := str(opciones.get("preset", PRESET_POR_DEFECTO))
+	_preset = p if TOPE_ISLAS_POR_PRESET.has(p) else PRESET_POR_DEFECTO
+
+
+## Tope de islas simultáneas en memoria según el preset inyectado.
+func max_islas_en_memoria() -> int:
+	return int(TOPE_ISLAS_POR_PRESET.get(_preset, MAX_ISLAS_EN_MEMORIA))
+
+
+func preset() -> String:
+	return _preset
 
 
 ## Construye la vista desde el autoload `IslandRegistry` real.
@@ -235,7 +255,7 @@ func es_playa(pos: Vector3) -> bool:
 ## por cercanía: la cola nunca monopoliza el frame.
 func debe_precargar(pos_jugador: Vector3, isla_actual: String, presupuesto: int = -1) -> Array[String]:
 	var out: Array[String] = []
-	var tope: int = presupuesto if presupuesto >= 0 else IslandOps.MAX_OPS_POR_FRAME
+	var tope: int = presupuesto if presupuesto >= 0 else mini(IslandOps.MAX_OPS_POR_FRAME, max_islas_en_memoria())
 	if tope <= 0:
 		return out
 	var actual: Dictionary = _ref(isla_actual)
@@ -539,8 +559,74 @@ func descarga_forzada(memoria_mb: float, ops: IslandOps, isla_actual: String, to
 	}
 
 
-# ── Estado de partida (para verificar K9 desde fuera) ─────────────────────
+# ── Preset Baja: descarga agresiva de islas viajeras ──────────────────────
 
+## Descarga TODA isla cacheada que no sea la actual ni la principal, sin esperar
+## presión de memoria, hasta quedar dentro del tope del preset. Es la parte
+## "descarga agresiva de viajeros" del item: en Baja no se conserva la isla de
+## la que el jugador viene.
+##
+## No toca `descubierta`/`visitada` (viven en M59): el progreso se preserva y se
+## verifica con `estado_preservado`.
+func descarga_agresiva_viajeros(isla_actual: String, ops: IslandOps) -> Dictionary:
+	var intocables: Array[String] = [_id_principal, isla_actual]
+	var tope: int = max_islas_en_memoria()
+	var cargadas: Array[String] = islas_cargadas()
+	var conservables: int = 0
+	for id in cargadas:
+		if intocables.has(id):
+			conservables += 1
+	var cupo: int = maxi(0, tope - conservables)
+
+	# Candidatas: cacheadas, no intocables, de la más vieja a la más nueva.
+	var candidatas: Array[Dictionary] = []
+	for id in cargadas:
+		if intocables.has(id):
+			continue
+		var r: Dictionary = _ref(id)
+		candidatas.append({"id": id, "uso": int(r["ultimo_uso"])})
+	candidatas.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		if int(a["uso"]) != int(b["uso"]):
+			return int(a["uso"]) < int(b["uso"])
+		return str(a["id"]) < str(b["id"]))
+
+	var previo: Dictionary = {}
+	for c in candidatas:
+		var r: Dictionary = _ref(str(c["id"]))
+		previo[str(c["id"])] = [bool(r["descubierta"]), bool(r["visitada"])]
+
+	var descargadas: Array[String] = []
+	var a_descargar: int = maxi(0, candidatas.size() - cupo)
+	for c in candidatas:
+		if descargadas.size() >= a_descargar:
+			break
+		var id: String = str(c["id"])
+		if ops != null:
+			var sid: StringName = _sid(id)
+			if sid != &"":
+				ops.encolar(IslandOps.TIPO_DESCARGA, sid, IslandOps.PRIORIDAD_DESCARGA)
+		var r: Dictionary = _ref(id)
+		r["cargada"] = false
+		descargadas.append(id)
+
+	var preservado: bool = true
+	for id in descargadas:
+		var r: Dictionary = _ref(id)
+		var p: Array = previo[id]
+		if bool(r["descubierta"]) != bool(p[0]) or bool(r["visitada"]) != bool(p[1]):
+			preservado = false
+
+	return {
+		"descargadas": descargadas,
+		"preset": _preset,
+		"tope_islas": tope,
+		"intocables": intocables,
+		"estado_preservado": preservado,
+		"motivo": "preset_baja" if _preset == "baja" else "sin_necesidad",
+	}
+
+
+# ── Estado de partida (para verificar K9 desde fuera) ─────────────────────
 ## Snapshot de descubrimiento/visita. El test lo compara antes y después de una
 ## descarga forzada: es la prueba de que la descarga NO pierde progreso.
 func snapshot_estado() -> Dictionary:
@@ -612,7 +698,8 @@ func informe() -> Dictionary:
 		"cargadas": islas_cargadas(),
 		"tope_memoria_mb": _tope_memoria,
 		"coste_mb_por_isla": _coste_mb,
-		"max_islas_en_memoria": MAX_ISLAS_EN_MEMORIA,
+		"max_islas_en_memoria": max_islas_en_memoria(),
+		"preset": _preset,
 		"radio_seguridad_m": _radio_seguridad,
 		"margen_borde_m": _margen_borde,
 		"coste_por_frame": coste_por_frame(),

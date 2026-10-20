@@ -146,7 +146,7 @@ func _test_clima_retraso_sin_bloqueo() -> void:
 	if delays.size() == 1:
 		_check(float(delays[0][0]) >= 5.0 and float(delays[0][0]) <= 15.0,
 			"retraso 5-15 s (%.1f s)" % float(delays[0][0]))
-	_check(_ts._duracion_efectiva > 20.0, "duración +25% por tormenta (%.1f s)" % _ts._duracion_efectiva)
+	_check(_ts._duracion_efectiva > 20.0, "duración +25%% por tormenta (%.1f s)" % _ts._duracion_efectiva)
 	# Esperar el delay y travesía: llega igual (sin bloqueo)
 	_drenar()
 	_check(not _ts.is_traveling(), "llegó pese al retraso (sin soft-lock)")

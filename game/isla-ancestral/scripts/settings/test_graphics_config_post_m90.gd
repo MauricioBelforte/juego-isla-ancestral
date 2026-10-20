@@ -124,6 +124,19 @@ func _run() -> void:
 	_check("apply_fps_cap ultra -> 0 (ilimitado)", d.apply_fps_cap() == 0)
 	_check("recomendar_preset gana la más baja", _GC.recomendar_preset("RTX 4090", 4.0, 2) == "baja")
 
+	# --- Upscaling (§1 aplicado a RenderingServer, mapeo headless) ---
+	var u: RefCounted = _GC.new()
+	u.aplicar_preset("ultra")  # upscaling = XESS
+	var mu_up: Dictionary = u.mapeo_upscaling()
+	_check("mapeo_upscaling ultra: upscaler=xess", mu_up["upscaler"] == "xess")
+	_check("mapeo_upscaling: es_valido (xess en UPSCALING)", mu_up["es_valido"] == true)
+	_check("mapeo_upscaling: escala_render > 0", float(mu_up["escala_render"]) > 0.0)
+	var mu2: Dictionary = u.aplicar_upscaling(null)  # null-safe
+	_check("aplicar_upscaling(null) devuelve mapeo (no-op)", mu2.has("upscaler"))
+	var u3: RefCounted = _GC.new()
+	u3.fijar("upscaling", "off")  # UP_OFF
+	_check("mapeo_upscaling: upscaler=off cuando se fija", u3.mapeo_upscaling()["upscaler"] == "off")
+
 	_fin()
 
 

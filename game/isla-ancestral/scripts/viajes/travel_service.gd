@@ -45,6 +45,16 @@ var _transcurrido: float = 0.0
 var _destinos_visitados: Array[String] = []
 var _delay_pendiente: float = 0.0
 
+## ── M62 (COLA V3, item "Teleport (M69/M28): drift-check tras viaje largo") ──
+## Umbral PROVISIONAL, medido sobre `data/viajes/rutas.json` (20/30/45/60 s):
+## "largo" = las dos rutas más largas (45 s y 60 s). Queda a confirmación del
+## director; el número no sale de la nada, sale del archivo de rutas real.
+const UMBRAL_VIAJE_LARGO_S: float = 45.0
+var _drift_checks: int = 0
+var _drift_fallos: int = 0
+var _drift_no_medibles: int = 0
+var _ultimo_drift_pct: float = 0.0
+
 
 func _ready() -> void:
 	_cargar_rutas()
@@ -271,8 +281,65 @@ func _atracar() -> void:
 	_transcurrido = 0.0
 	var ruta := _ruta_actual
 	_ruta_actual = null
+	# M62: el drift se mide DESPUÉS de aterrizar y ANTES de avisar la llegada,
+	# así quien escuche `travel_arrived` ya puede leer el resultado.
+	_verificar_drift_post_viaje(ruta)
 	travel_arrived.emit(destino)
 	print("[M28] Llegada a %s (ruta %s)" % [destino, ruta.route_id])
+
+
+## ── M62: drift-check post-viaje ──────────────────────────
+## Resuelve el MemoryMonitor por duck-typing en `ServiceRegistry` (contrato
+## "memoria"), sin dependencia de parseo M28 -> M62: mismo patrón que usa M27
+## con `IslandRegistry`. Si no hay monitor, el chequeo queda NO MEDIBLE y se
+## contabiliza: un viaje largo sin verificar NO se reporta como verde.
+func _monitor_memoria() -> Object:
+	var sr := get_node_or_null("/root/ServiceRegistry")
+	if sr == null or not sr.has_method("has") or not sr.has_method("get_service"):
+		return null
+	if not bool(sr.call("has", "memoria")):
+		return null
+	var m: Variant = sr.call("get_service", "memoria")
+	if typeof(m) != TYPE_OBJECT or m == null:
+		return null
+	return m as Object
+
+
+func _verificar_drift_post_viaje(ruta: BoatRoute) -> void:
+	if ruta == null:
+		return
+	if ruta.base_duration_seconds < UMBRAL_VIAJE_LARGO_S:
+		return
+	var m := _monitor_memoria()
+	if m == null or not m.has_method("drift_check") or not m.has_method("drift_porciento"):
+		_drift_no_medibles += 1
+		push_warning("[M28] viaje largo a %s sin MemoryMonitor: drift NO verificado"
+			% ruta.destination_island_id)
+		return
+	_drift_checks += 1
+	_ultimo_drift_pct = float(m.call("drift_porciento"))
+	if bool(m.call("drift_check")):
+		print("[M28] drift post-viaje OK (%+.1f%%, ruta %s)" % [_ultimo_drift_pct, ruta.route_id])
+	else:
+		_drift_fallos += 1
+		push_warning("[M28] drift post-viaje FUERA DE LIMITE: %+.1f%% (ruta %s)"
+			% [_ultimo_drift_pct, ruta.route_id])
+
+
+func drift_checks_post_viaje() -> int:
+	return _drift_checks
+
+
+func drift_fallos_post_viaje() -> int:
+	return _drift_fallos
+
+
+func drift_no_medibles() -> int:
+	return _drift_no_medibles
+
+
+func ultimo_drift_pct() -> float:
+	return _ultimo_drift_pct
 
 
 func _reembolsar(monto: int) -> void:
