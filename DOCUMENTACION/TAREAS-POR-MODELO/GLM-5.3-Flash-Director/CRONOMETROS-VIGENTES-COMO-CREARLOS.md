@@ -1,5 +1,9 @@
 # CRONÓMETROS VIGENTES — DEFINICIÓN EXACTA Y CÓMO LLENARLOS
 
+
+> **VIGENTES (crear siempre ESTAS versiones): A v3, B v3, C v3 y D v2.**
+> Las versiones anteriores (A/B v1-v2, C v1-v2, D v1) quedan SOLO como HISTORIAL documentado al final — no crearlas más.
+
 **Modelo:** GLM-5.3 Flash-Director
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-19 04:32
@@ -20,7 +24,9 @@
 
 ---
 
-## 2bis. CRON C v2 — definición (creado 04:41, id `wku_152778f30001fWRhXBrjKMF1MZ`)
+## 2bis. CRON C v2 — ⚠️ HISTORIAL (SUPERSEDED por C v3: la Tarea 2 migró al Cron D v2)
+
+Definición original (creado 04:41, id `wku_152778f30001fWRhXBrjKMF1MZ`) — **ya no crear:**
 
 **TAREA 1 — COMMITS DE PRESERVACIÓN** (NUNCA push; el push solo lo ordena el fundador):
 - `git status --short` agrupado por AUTOR/PROPÓSITO leyendo mensajes nuevos de la ventana y `Logs/` — un commit = un frente coherente, NUNCA mega-commit de todo.
