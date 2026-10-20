@@ -372,6 +372,7 @@ func cargar_partida(slot: int) -> Dictionary:
 	if _regenerar_meta_si_falta(slot):
 		_log_m60("info", "meta.json regenerada en el slot %d" % slot)
 
+
 	# mundo voxel adjunto (RF4) si el save lo referencia
 	datos["_voxel_payload"] = cargar_mundo_voxel(slot)
 	emit_signal("cargado_slot", slot, true, "")
@@ -386,22 +387,6 @@ func migrar(datos: Dictionary) -> Dictionary:
 ## ── Slots ──────────────────────────────────────────────
 
 ## Borrado seguro de un slot (con confirmación del llamador).
-## ── Ítem [8] M59: perfil_id sin cruzamiento ─────────────
-## El id del perfil activo se recuerda al guardar y se valida al cargar.
-## El per-switch UI real es del dueño M59 — la inyección es para QA.
-const PERFIL_ACTIVO_ID := "perfil_default"
-var _perfil_override_id: String = ""
-
-
-## Permite al dueño M59 (o QA) fijar el id del perfil activo.
-func set_perfil_activo(nuevo_id: String) -> void:
-	_perfil_override_id = nuevo_id
-
-
-func perfil_activo() -> String:
-	return _perfil_override_id if not _perfil_override_id.is_empty() else PERFIL_ACTIVO_ID
-
-
 func borrar_slot(slot: int) -> bool:
 	return GestorSlot.borrar_slot(slot)
 
@@ -582,7 +567,6 @@ func _escribir_save(slot: int, datos_sistemas: Dictionary) -> bool:
 func _escribir_meta(slot: int) -> Error:
 	var meta := GestorSlot.meta_default(slot)
 	meta["guardado_iso"] = Time.get_datetime_string_from_system(true)
-	meta["perfil_id"] = perfil_activo()
 	return GestorSlot.escribir_meta(slot, meta)
 
 ## Guarda / reenvía el binario voxel si el payload lo incluye.

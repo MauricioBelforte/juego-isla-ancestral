@@ -236,6 +236,12 @@ carpeta). Identidad de firma: **step 5 workbuddy**.
       (anti-stuck de manada/banco): flip L212 con cita real + diseno en M65.
       Archivo: `Logs/2018-item20-anti-stuck-manada-banco_2026-10-19_03-20-47.md`.
       Pool medido antes: head 2018 -> 2019. ASCII puro verificado por bytes (4.215 B, CRLF 77, sin BOM).
+- [x] Log reservado: **2023** — M119-Actualizaciones, REPOBLACION V3 items 31-39:
+      diseno de UpdateDownloader (T-022) y RollbackManager (T-049..T-056) + veredicto
+      honesto de los 7 [ ] de implementacion. Archivo:
+      `Logs/2023-m119-diseno-updatedownloader-rollbackmanager_2026-10-19_22-05-40.md`.
+      Pool medido antes: head 2023 -> 2024. ASCII puro verificado por bytes
+      (5.213 B, CRLF 89, sin BOM).
 
 
 ## Commits (delegados a atria-dawn; yo no commiteo ni pusheo)
@@ -654,15 +660,15 @@ M104, M88, M160.
 28. - [ ] [50] Regeneración por eventos sin romper determinismo [M] <!-- fuente: 50-Vegetacion/05-Checklist.md --> — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2022, msg 096):** no hay regeneracion ni replantado (grep regener|replant|repoblar en scripts/vegetacion = 0).
 29. - [x] [50] escalas.json a 1.0 definitivo para los 10 tipos horneados (dejar 1.0 evita doble escala; pendiente edición fina por usuario) [S] <!-- fuente: 50-Vegetacion/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2022, msg 096):** editados los 3 multiplicadores fuera de 1.0 en game/isla-ancestral/data/escalas/escalas.json (palmera 4.0->1.0, arbol_frutal 3.0->1.0, hierba_alta 0.8->1.0). Verificado simulando el autoload EscalasGlobales: los 10 tipos horneados renderizan a su altura objetivo exacta (el horneado reescalar_v5.py deja los GLB a su altura final; el multiplicador era doble escala).
 30. - [ ] [50] Revisión visual final del usuario (propongo capturas verif3_*) [S] <!-- fuente: 50-Vegetacion/05-Checklist.md --> — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2022, msg 096):** capturas de evidencia entregadas al director (msg 096): cap_50_2026-10-19_05-07-30_poblado-runtime-verificacion.png y cap_50_2026-10-19_05-12-10_fps-60-pivote.png; pendiente de revision del fundador.
-31. - [ ] [119] Crear Resource GameVersion con campos major, minor, patch, build, date [M] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: `Ga <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
-32. - [ ] [119] Implementar to_string() para mostrar versión [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método de `GameVersion` no cr <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
-33. - [ ] [119] Implementar is_same_major_minor() para compatibilidad [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método de `GameVersi <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
-34. - [ ] [119] Crear UpdateChecker con check_latest() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: `UpdateChecker` diseñado en `03-Di <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
-35. - [ ] [119] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: no existe como clase en disco ni co <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
-36. - [ ] [119] Crear SaveMigrator con migrate_save() — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: `SaveMigrator` diseñado en `03-Diseno.md <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
-37. - [ ] [119] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: no existe como clase <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
-38. - [ ] [119] T-022: diseño de UpdateDownloader — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `UpdateDownloader.new()` dentr <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
-39. - [ ] [119] T-049 a T-056: diseño de RollbackManager + políticas + UI — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `Rollb <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+31. - [ ] [119] Crear Resource GameVersion con campos major, minor, patch, build, date [M] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: `Ga — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2023):** verbo de implementacion ("Crear Resource") con funcionalidad AUSENTE en disco (medido hoy: `find game -name game_version.gd` = 0 archivos, 0 `class_name`; `update_manager.gd` = 92 lineas / 10 funciones, sin descarga ni rollback); revertido por Familia A de BUG-070 (P-41, Log 1157); dueno externo M59. NO se re-flippea sin codigo (precedente M50: feature inexistente en disco = [ ]). <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+32. - [ ] [119] Implementar to_string() para mostrar versión [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método de `GameVersion` no cr — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2023):** verbo de implementacion ("Implementar metodo") con funcionalidad AUSENTE en disco (medido hoy: `find game -name game_version.gd` = 0 archivos, 0 `class_name`; `update_manager.gd` = 92 lineas / 10 funciones, sin descarga ni rollback); revertido por Familia A de BUG-070 (P-41, Log 1157); dueno externo M59. NO se re-flippea sin codigo (precedente M50: feature inexistente en disco = [ ]). <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+33. - [ ] [119] Implementar is_same_major_minor() para compatibilidad [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método de `GameVersi — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2023):** verbo de implementacion ("Implementar metodo") con funcionalidad AUSENTE en disco (medido hoy: `find game -name game_version.gd` = 0 archivos, 0 `class_name`; `update_manager.gd` = 92 lineas / 10 funciones, sin descarga ni rollback); revertido por Familia A de BUG-070 (P-41, Log 1157); dueno externo M59. NO se re-flippea sin codigo (precedente M50: feature inexistente en disco = [ ]). <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+34. - [ ] [119] Crear UpdateChecker con check_latest() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: `UpdateChecker` diseñado en `03-Di — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2023):** verbo de implementacion ("Crear clase") con funcionalidad AUSENTE en disco (medido hoy: `find game -name update_checker.gd` = 0 archivos, 0 `class_name`; `update_manager.gd` = 92 lineas / 10 funciones, sin descarga ni rollback); revertido por Familia A de BUG-070 (P-41, Log 1157); dueno externo M96/M118. NO se re-flippea sin codigo (precedente M50: feature inexistente en disco = [ ]). <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+35. - [ ] [119] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: no existe como clase en disco ni co — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2023):** verbo de implementacion ("Crear clase") con funcionalidad AUSENTE en disco (medido hoy: `find game -name update_downloader.gd` = 0 archivos, 0 `class_name`; `update_manager.gd` = 92 lineas / 10 funciones, sin descarga ni rollback); revertido por Familia A de BUG-070 (P-41, Log 1157); dueno externo M96/M118. NO se re-flippea sin codigo (precedente M50: feature inexistente en disco = [ ]). <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+36. - [ ] [119] Crear SaveMigrator con migrate_save() — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: `SaveMigrator` diseñado en `03-Diseno.md — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2023):** verbo de implementacion ("Crear clase") con funcionalidad AUSENTE en disco (medido hoy: `find game -name save_migrator.gd` = 0 archivos, 0 `class_name`; `update_manager.gd` = 92 lineas / 10 funciones, sin descarga ni rollback); revertido por Familia A de BUG-070 (P-41, Log 1157); dueno externo M59. NO se re-flippea sin codigo (precedente M50: feature inexistente en disco = [ ]). <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+37. - [ ] [119] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: no existe como clase — **[ ] honesto 2026-10-19 (Step-5-WorkBuddy, Log 2023):** verbo de implementacion ("Crear clase") con funcionalidad AUSENTE en disco (medido hoy: `find game -name rollback_manager.gd` = 0 archivos, 0 `class_name`; `update_manager.gd` = 92 lineas / 10 funciones, sin descarga ni rollback); revertido por Familia A de BUG-070 (P-41, Log 1157); dueno externo M107/M59. NO se re-flippea sin codigo (precedente M50: feature inexistente en disco = [ ]). <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+38. - [x] [119] T-022: diseño de UpdateDownloader — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `UpdateDownloader.new()` dentr — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2023):** seccion de diseno `### UpdateDownloader (Node)` documentada en `119-Actualizaciones/plan-actual/03-Diseno.md` sec. 3 (L183-225): `download()` / `cancelar()` / `verificar_integridad()`, `DIR_TMP user://updates/tmp/`, resume por `Range`, SHA-256 contra `UpdateInfo.sha256`, 3 reintentos backoff 1/5/15 s, espacio con `DirAccess.get_space_left()`, cancelacion y un download a la vez. Flip L146 del 05-Checklist aplicado con cita real; implementacion de la clase diferida = KnownIssue no bloqueante (dueno M96/M118). Cerraba lo que pedia el QA de atria-dawn-s2 (msg 193): "diseno antes que codigo". <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
+39. - [x] [119] T-049 a T-056: diseño de RollbackManager + políticas + UI — **no documentado** en `04-Codigo.md` ni en `03-Diseno.md` (solo quedaba una llamada `Rollb — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2023):** seccion de diseno `### RollbackManager (Node)` documentada en `119-Actualizaciones/plan-actual/03-Diseno.md` sec. 3 (L227-268) con las 8 reglas T-049 a T-056 (backup por version, retencion `min_versiones_atras`, disparo automatico/manual, fail-closed por hash, restauracion del save, UI popup+settings, notificacion/registro, re-verificacion post-rollback). Flip L150 del 05-Checklist aplicado con cita real; implementacion de la clase diferida = KnownIssue no bloqueante (dueno M107/M59). <!-- fuente: 119-Actualizaciones/05-Checklist.md -->
 40. - [ ] [76] Verificar determinismo local (split no red) [M] — **[ ] honesto: requiere FASE MP implementada (split no existe)** <!-- fuente: 76-Multijugador/05-Checklist.md -->
 41. - [ ] [76] Verificar que la invitación nunca expone datos [S] — **[ ] honesto: requiere implementación de invitación (FASE MP)** <!-- fuente: 76-Multijugador/05-Checklist.md -->
 42. - [ ] [76] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] — **ESTADO-PARALELO + Log actualizados; fila GLOBAL entregada al director (msg 55) — él <!-- fuente: 76-Multijugador/05-Checklist.md -->
@@ -842,3 +848,39 @@ M104, M88, M160.
 - Pendientes del director: commit de paths (36-Fauna 05-Checklist, M65 03-Diseno, Log 2018, msg 088, tracker, BACKLOG) + los arrastrados (M55/M93/M109, QA 21.8 M109/M93, "16 Totales", gate ASCII Logs/, gate legal 300 PNG M159).
 - Proxima: NN > 87; sin mensaje -> item 21 ([50] verificacion de presupuesto) u otro de la cola.
 
+## Registro de la vuelta 2026-10-19 22:06 (tracker 99 -> 100; RAMA 1: msg 099 + RAMA 2: REPOBLACION V3 items 31-39 M119)
+
+- RAMA 1: el 099 del director llego con el tracker YA en 99 (actualizado por el a las
+  21:02) y sin respuesta mia — patron del caso 081 (tracker adelantado). Procesado y
+  acusado con msg 100. Contenido: correccion de su tercer incidente de padding
+  (renumerrado a 097-PADDED, mi 098 intacto, gate de padding en cada Cron C); tanda M50
+  ABIERTA con los 8 [ ] honestos como deuda conocida con dueno/definicion; orden item 31
+  (M119) o COLA ACTIVA — GO; commits en la ronda proxima Cron C.
+- RAMA 2: items 31-39 REPOBLACION V3 = los 9 [ ] de
+  119-Actualizaciones/plan-actual/05-Checklist.md (medido hoy: 109 [x] / 0 [?] / 9 [ ] =
+  118, cuadra con la auditoria del 2026-10-15 y con la fila GLOBAL 109/118).
+- 2 flips con cita real (L146 T-022 y L150 T-049..T-056): diseno de UpdateDownloader y
+  RollbackManager documentado HOY en 03-Diseno.md sec. 3 (secciones nuevas
+  `### UpdateDownloader (Node)` L183-225 y `### RollbackManager (Node)` L227-268).
+  M119: 109 -> **111 [x] / 0 [?] / 7 [ ] = 118** (Totales L163 actualizados).
+- Los 7 [ ] de implementacion (L24/L25/L27/L35/L48/L61/L87) quedan [ ] honestos:
+  verbos "Crear/Implementar" con clases AUSENTES en disco (hoy: find = 0 archivos,
+  0 class_name, update_manager.gd 92 lineas / 10 funciones sin descarga ni rollback) y
+  revertidos por Familia A de BUG-070 (P-41, Log 1157) — no se re-flippean. Duenos
+  externos M59/M96/M118/M107.
+- Suite test_updates_m119.gd corrida HOY con binario real: 15 checks / 0 fallos /
+  EXIT 0, 15 [OK] nominales en la salida. Hallazgo ajeno reportado al director: 3
+  SCRIPT ERROR de pause_layer.gd / ui_root.gd al construir la UI al arrancar la escena.
+- Medido por bytes: 03-Diseno.md 5.664 -> 9.621 B (LF puro preservado); 04-Codigo.md
+  12.245 -> 12.717 B (4 referencias "sin diseno" actualizadas, 0 restantes);
+  05-Checklist.md 15.559 -> 18.263 B (CRLF 171 -> 173, 21 LF sueltos preservados, sin BOM).
+- Artefactos: Log 2023 (ASCII puro, CRLF, sin BOM), msg 100 (UTF-8 sin BOM, LF puro,
+  4.981 B), pool canal 100 consumido y reexpandido a 101..200 (100 consecutivos, 400 B,
+  sin BOM), BACKLOG actualizado, tracker 100, diario y memorias.
+- Limites: 0 commits / 0 push / 0 archivos ajenos modificados / 0 ediciones a
+  CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot / 0 auto-sellos 21.8. Los 2
+  flips son de MI modulo (M119) y se ofrecen a revertir.
+- Pedidos al director (msg 100): commit de la tanda M119 (3 paths de 119-Actualizaciones
+  + Log 2023 + msg 100 + BACKLOG-MASTER + tracker); ruteo QA 21.8 M119; los 3 SCRIPT
+  ERROR de pause_layer.gd/ui_root.gd para la tabla de deuda ajena.
+- Proxima: NN > 100; sin mensaje -> item 40 ([76] determinismo local) u otro de la COLA ACTIVA.

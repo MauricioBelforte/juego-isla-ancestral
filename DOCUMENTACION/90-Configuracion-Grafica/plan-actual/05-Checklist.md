@@ -109,7 +109,7 @@
 - [x] Definir shader de agua con reflexiones â€” implementado (step-5-kilocode, Kilo Code, 2026-10-12): `shaders/agua_olas.gdshader` (92 lÃ­neas, spatial) con olas (amplitud/velocidad/frecuencia), espuma por profundidad (`depth_texture`), `fresnel_potencia` para el reflejo y `espuma_distancia`. âš  Reflejo **simulado** por Fresnel, no por `screen_texture` en tiempo real.
 - [ ] Definir normal map para olas -- agnes 2026-10-22 (t7): M51 ya tiene 'Agua animada (shader olas+fresnel)' en escena; el normal map de olas = M51/M47. Escalon: documentado, no flippeado.
 - [ ] Definir parallax para profundidad -- agnes 2026-10-22 (t7): parallax = parametrizacion de shader de material (M47) o mesh; diseno documentado, impl = M47/M45. Escalon: documentado.
-- [ ] Definir caustics para ultra -- agnes 2026-10-22 (t7): caustics = efecto shader avanzado (M47/materiales) solo en ultra; diseno documentado, impl = M47. Escalon: documentado.
+- [x] Definir caustics para ultra -- agnes-3-flash 2026-10-22 (M90 t11, runs habilitados): shader real shaders/caustics.gdshader (patrón procedural de caustics, solo ultra, 4 uniforms) + test (carga como Shader). Reemplaza el escalon de t7.
 
 ### [S] Calidad de partÃ­culas
 - [x] Definir baja (100 partÃ­culas mÃ¡ximas por sistema)
@@ -299,7 +299,8 @@ ecomendar_preset() (gana la mÃ¡s baja de GPU/RAM/CPU).
 ### [S] Formato de JSON
 - [x] DiseÃ±ar formato de graphics_settings.json
 - [x] Incluir todos los campos de GraphicsSettings
-- [x] Incluir resoluciÃ³n como objeto {x, y} -- agnes-3-flash 2026-10-22 (M90 t10): esolucion_vec2() -> Vector2i (resolución {x,y} segun preset + escala).
+- [x] Incluir resoluciÃ³n como objeto {x, y} -- agnes-3-flash 2026-10-22 (M90 t10): 
+esolucion_vec2() -> Vector2i (resolución {x,y} segun preset + escala).
 - [x] Incluir preset como string
 
 ### [S] Diagrama de flujo

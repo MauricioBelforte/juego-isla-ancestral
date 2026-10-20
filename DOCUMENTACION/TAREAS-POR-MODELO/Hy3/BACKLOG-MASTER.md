@@ -865,7 +865,7 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 - [x] **T-QA06:** M153 Objetivo-Final — VERIFICADO Hy3 (Log 2020, 2026-10-19): disco 123[x]/7[ ]/0[?]=130; guardian validate_vision.py 19/19 EXIT 0 re-corrido hoy; drift L9/L295 (120/10) vs real 123/7 (coincide GLOBAL 123/130); 0[?]; modulo Con dudas (revertido DoD sec21.6 estricta: 7[ ] KnownIssue no bloqueante); no sello (director aplica)
 - [x] **T-QA07:** M154 Vision-Del-Agente (✅ sellado hy3 Log 1216, 155/155, 0[?]; 2 scripts V5 auxiliares ausentes = KnownIssue)
 - [x] **T-QA08:** M167 Isla-Raiz (✅ CERRADO + sellado hy3 Log 1212, validador 27/0)
-- [ ] **T-QA09:** M78 Legal-Propiedad-Intelectual
+- [x] **T-QA09:** M78 Legal-Propiedad-Intelectual — VERIFICADO Hy3 (Log 2024, msg 281, 2026-10-19): test_legal_m78_v2.gd re-corrido headless 60/0 EXIT 0 (verde genuino); disco 156[x]/0[ ]/1[?]=157 🟡; 1[?]=L95 doc gap (solo USPTO; EUIPO/WIPO/INPI sin sustancia); drift (a) nota audit L251 dice 0[?] obsoleta, (b) GLOBAL 156/157 🟡 vs SEALS ✅157/157 contradictorio, (c) caveat familia §21.23 resuelto por asignacion Hy3 explicita. No edite GLOBAL/SEALS/05-Checklist (regla NO TOCAR).
 - [x] **T-QA10:** M93 Balance (✅ sellado hy3 Log 1218, 131/134, 3[ ] simulate_economy = KnownIssues; drift-audit "134/0" era FALSO)
 
 
