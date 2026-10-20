@@ -217,8 +217,9 @@ Auditoria de los 9 `[ ]` restantes (encargo del director msg 185), verificados
 contra disco (Log 1552): **9/9 son `[ ]` legitimos** — ninguna de las 5 clases
 existe en disco (`grep class_name` sobre `scripts/` = 0 hits). El diseno de
 3 esta en `03-Diseno.md` (GameVersion L49-69, UpdateChecker L139-158,
-SaveMigrator L160-183); UpdateDownloader y RollbackManager **no tienen ni
-seccion de diseno**. Equivalente funcional actual: `dlc_manager.gd::
+SaveMigrator L160-183); UpdateDownloader y RollbackManager quedaban **sin seccion de
+diseno** en esa fecha — ambas fueron documentadas el 2026-10-20 (Step-5-WorkBuddy,
+Log 2023) en `03-Diseno.md` §3 (ver nota de cierre al final de este archivo). Equivalente funcional actual: `dlc_manager.gd::
 comparar_versiones()` (semantica, no lexicografica).
 
 ### Reasignacion de deuda (aceptada por el director, msg 193)
@@ -228,8 +229,8 @@ comparar_versiones()` (semantica, no lexicografica).
 | L24/L25/L27 GameVersion (Resource, to_string, is_same_major_minor) | clase + metodos (diseno L49-69 listo) | M59 (Save/Load) |
 | L61 SaveMigrator + migrate_save() | clase (diseno L160-183 listo) | M59 |
 | L35 UpdateChecker + check_latest() | clase (diseno L139-158 listo) | M96/M118 (CI/CD) |
-| L48 UpdateDownloader + download() | clase (**sin diseno**) | M96/M118 |
-| L87 RollbackManager + restore_previous_version() | clase (**sin diseno**) | M107 (Backup) o M59 |
+| L48 UpdateDownloader + download() | clase (**sin diseno** al 2026-10-10; **diseno documentado 2026-10-20** en `03-Diseno.md` §3, Log 2023) | M96/M118 |
+| L87 RollbackManager + restore_previous_version() | clase (**sin diseno** al 2026-10-10; **diseno documentado 2026-10-20** en `03-Diseno.md` §3, Log 2023) | M107 (Backup) o M59 |
 | L146 T-022, L150 T-049..T-056 | documentar diseno primero | cualquier modelo |
 
 ### Recomendaciones para el proximo agente
@@ -238,6 +239,8 @@ comparar_versiones()` (semantica, no lexicografica).
 - **Empezar por GameVersion**: es la base de las otras 4 y su diseno ya esta
   completo en `03-Diseno.md` L49-69.
 - **UpdateDownloader y RollbackManager necesitan diseno antes que codigo** —
-  T-022 y T-049..T-056 son exactamente eso.
+  T-022 y T-049..T-056 son exactamente eso. → **CUMPLIDO 2026-10-20 (Log 2023):**
+  las dos secciones de diseño ya están en `03-Diseno.md` §3 (Step-5-WorkBuddy);
+  queda solo la implementación.
 - **No duplicar `comparar_versiones()`:** `dlc_manager.gd` ya lo resuelve;
   GameVersion debe envolverlo, no reemplazarlo.

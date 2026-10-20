@@ -180,6 +180,93 @@ func restore_save(backup_path: String) -> bool:
     pass
 ```
 
+### UpdateDownloader (Node)
+
+```gdscript
+class_name UpdateDownloader
+extends Node
+
+## Descarga paquetes de actualizacion. Seccion disenada el 2026-10-20
+## (Step-5-WorkBuddy, Log 2023) para cerrar T-022. NO implementado aún:
+## KnownIssue no bloqueante DoD, duenio deimplementacion M96/M118.
+
+signal download_started(url: String)
+signal download_progress(recibido: int, total: int)
+signal download_completed(ruta: String, sha256: String)
+signal download_failed(motivo: String)
+
+const DIR_TMP := "user://updates/tmp/"
+
+func download(info: UpdateInfo) -> void:
+    # 1. Verificar espacio antes de empezar (ver reglas)
+    # 2. HTTPRequest al info.download_url
+    # 3. Progreso por download_chunk_size
+    # 4. Renombrar .tmp al completar
+    pass
+
+func cancelar() -> void:
+    # HTTPRequest.cancel_request() + borrar el .tmp parcial
+    pass
+
+func verificar_integridad(ruta: String, sha256_esperado: String) -> bool:
+    # SHA-256 del paquete vs UpdateInfo.sha256
+    pass
+```
+
+Reglas de diseno:
+
+- Descarga a `user://updates/tmp/<version>.pck.tmp`; al completar se renombra a `<version>.pck`.
+- Progreso: senial cada ~5 % o 250 KB (lo que ocurra primero), para no spamear la UI.
+- Resume: cabecera `Range: bytes=<inicio>-` sobre el `.tmp` existente; si el servidor no acepta rangos, se reinicia la descarga.
+- Integridad: SHA-256 del paquete comparado con el campo `sha256` a agregar en `UpdateInfo` (Resource de §2) ANTES de aplicar.
+- Errores de red: 3 reintentos con backoff 1 s / 5 s / 15 s; sin spinner infinito.
+- Espacio insuficiente: `DirAccess.get_space_left()` sobre `user://` (no `OS.get_static_memory_usage()`, que mide RAM); si `tamano + 10 % > libre`, abortar con aviso al jugador.
+- Cancelacion: `HTTPRequest.cancel_request()` + borrado del `.tmp` parcial; el jugador puede reintentar.
+- Un solo download a la vez (mutex interno). NO crea un segundo sistema de versionado: se apoya en `versions.json` (canales/politica) y `UpdateManager` (autoload); `comparar_versiones()` sigue siendo la comparacion canonica.
+
+### RollbackManager (Node)
+
+```gdscript
+class_name RollbackManager
+extends Node
+
+## Restaura la version anterior + su save.Seccion disenada el 2026-10-20
+## (Step-5-WorkBuddy, Log 2023) para cerrar T-049 a T-056. NO implementado
+## aún: KnownIssue no bloqueante DoD, duenio deimplementacion M107/M59.
+
+signal rollback_iniciado(desde: String, hacia: String)
+signal rollback_completado()
+signal rollback_fallido(motivo: String)
+
+const DIR_VERSIONES := "user://updates/versiones/"
+
+func restore_previous_version() -> bool:
+    # 1. Elegir la version anterior inmediata
+    # 2. Verificar integridad del backup (fail-closed)
+    # 3. Restaurar .pck + save del backup
+    # 4. Verificar y reiniciar el juego
+    pass
+
+func listar_versiones() -> Array:
+    # Versiones con backup disponible en DIR_VERSIONES
+    pass
+
+func verificar_integridad(directorio: String) -> bool:
+    # Hash del backup vs manifiesto; si falla, NO restaurar
+    pass
+```
+
+Reglas de diseno (T-049 a T-056):
+
+- T-049 backup por version: `user://updates/versiones/<X.Y.Z>/` con el `.pck` aplicado y su save.
+- T-050 politica de retencion: `min_versiones_atras` de `versions.json` (hoy 2) define cuantas versiones anteriores se conservan; las mas viejas se borran.
+- T-051 disparo: automatico si `apply_update()` falla o el juego cae 2 veces seguidas tras el update; manual desde settings.
+- T-052 verificacion fail-closed: hash del backup contra su manifiesto ANTES de restaurar; si no cuadra, abortar sin tocar el juego.
+- T-053 save: restaura `save_001_backup_v<X.Y.Z>.tres` (hoy copia manual; con SaveMigrator implementado §5).
+- T-054 UI: popup "Hubo un problema con la actualizacion. Restaurar version anterior?" + entrada en settings con la lista de versiones disponibles.
+- T-055 notificacion post-rollback + registro con fecha, version desde/hacia y motivo.
+- T-056 integridad post-rollback: re-verificar `.pck` restaurado y save antes de arrancar.
+
 ## 4. Integración con Plataformas
 
 ### Steam (Steamworks)
