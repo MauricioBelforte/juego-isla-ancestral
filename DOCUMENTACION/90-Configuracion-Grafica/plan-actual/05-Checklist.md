@@ -338,7 +338,7 @@ esolucion_vec2() -> Vector2i (resolución {x,y} segun preset + escala).
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 249 lineas-item - Completados: 245 - Pendientes: 0 - No resueltos: 4. (Corregido por Step-5-WorkBuddy 2026-10-20: medido por prefijo de linea tras la tanda M90; la linea 246 fusiona 2 items por corrupcion de salto de linea -> 246 [x] / 250 items contando por item; reportado al director, NO reparado)
+**Totales:** 249 lineas-item - Completados: 249 - Pendientes: 0 - No resueltos: 0. (Sync final 2026-10-20: el director aplico los ultimos 4 flips [?]->[x] de la tanda Log 2040 -> 249 [x] / 0 [?] / 0 [ ] = 249, medido por prefijo de linea HOY 2026-10-20 Log 2049; linea vigente aca.) (Corregido por Step-5-WorkBuddy 2026-10-20: medido por prefijo de linea tras la tanda M90; la linea 246 fusiona 2 items por corrupcion de salto de linea -> 246 [x] / 250 items contando por item; reportado al director, NO reparado)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?].

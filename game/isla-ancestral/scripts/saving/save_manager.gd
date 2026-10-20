@@ -201,6 +201,10 @@ func _payload_para_slot(slot: int) -> Dictionary:
 	var payload := snapshot.collect("slot_%d" % slot)
 	if typeof(payload.get("meta")) == TYPE_DICTIONARY:
 		payload["meta"]["last_saved"] = Time.get_datetime_string_from_system()
+		# M59 ítem 8 (G-5.3): sello del perfil activo (validado al cargar).
+		var ds := get_node_or_null("/root/DataStore")
+		if ds != null and ds.has_method("get_perfil_activo"):
+			payload["meta"]["profile_id"] = String(ds.get_perfil_activo())
 	return payload
 
 ## Procesa la cola de guardados (uno a la vez, sin bloquear el frame).
@@ -246,13 +250,40 @@ func _process_queue() -> void:
 
 ## Carga un slot de forma síncrona y restaura los sistemas.
 ## Devuelve el LoadResult (int).
+## M59 ítem 8 (G-5.3): lee el profile_id sellado en el save SIN restaurar nada
+## (mismo patrón que slot_metadata). "" = save legacy sin sello (permitido).
+func _perfil_de_slot(slot: int) -> String:
+	if not SaveWriter.save_exists(slot):
+		return ""
+	var content: String = SaveWriter.read_document(SaveWriter.path_for(slot))
+	var doc: Dictionary = SaveWriter.parse_document(content)
+	if not doc.get("ok", false):
+		return ""
+	var payload: Variant = doc.get("payload", null)
+	if typeof(payload) != TYPE_DICTIONARY:
+		return ""
+	return String(payload.get("meta", {}).get("profile_id", ""))
+
 func load_slot(slot: int) -> int:
 	if slot < 1 or slot > SLOT_COUNT:
 		return SaveLoader.LoadResult.NOT_FOUND
+	# M59 ítem 8 (G-5.3): anti-cruzamiento de perfiles. Un slot sellado con un
+	# perfil distinto al activo se RECHAZA sin restaurar nada. Saves legacy
+	# (sin sello) o sin perfil activo cargan sin restricción.
+	var ds := get_node_or_null("/root/DataStore")
+	var perfil_actual: String = String(ds.get_perfil_activo()) if ds != null and ds.has_method("get_perfil_activo") else ""
+	var perfil_guardado := _perfil_de_slot(slot)
+	if perfil_guardado != "" and perfil_actual != "" and perfil_guardado != perfil_actual:
+		push_warning("[SAVE] Slot %d pertenece al perfil '%s' y el activo es '%s' — carga rechazada" % [slot, perfil_guardado, perfil_actual])
+		emit_signal("slot_loaded", slot, SaveLoader.LoadResult.PROFILE_MISMATCH)
+		return SaveLoader.LoadResult.PROFILE_MISMATCH
 	var result := loader.load(slot)
 	var code := int(result["result"])
 	if code == SaveLoader.LoadResult.OK or code == SaveLoader.LoadResult.RECOVERED:
 		current_slot = slot
+		# El perfil del slot cargado pasa a ser el activo (consistencia).
+		if perfil_guardado != "" and ds != null and ds.has_method("set_perfil_activo"):
+			ds.set_perfil_activo(perfil_guardado)
 	emit_signal("slot_loaded", slot, code)
 	return code
 

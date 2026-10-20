@@ -1,0 +1,32 @@
+##  2. Verificar checksum (SHA-256 del payload)
+enum LoadResult {
+## Carga un slot. Devuelve { result: LoadResult, payload: Dictionary, version: int }.
+func load(slot: int) -> Dictionary:
+		return {"result": LoadResult.NOT_FOUND, "payload": {}, "version": 0}
+	var payload: Dictionary = parsed["payload"]
+	# Lo normalizamos al tipo del contrato para que el payload cargado sea
+	# consistente con default_payload() y la comparación de versión sea exacta.
+	payload["schema_version"] = int(payload.get("schema_version", 0))
+	payload = SaveSchema.completar(payload)
+	var errors: Array[String] = SaveSchema.validate(payload)
+	var version := int(payload.get("schema_version", 0))
+		return {"result": LoadResult.FUTURE_VERSION, "payload": {}, "version": version}
+		payload = _migrate(payload, version)
+		snapshot.restore(payload)
+		"result": LoadResult.OK,
+		"payload": payload,
+## corrupto. Devuelve LoadResult.RECOVERED si se pudo.
+		var payload: Dictionary = parsed["payload"]
+		# Antes _try_recover() restauraba el payload SIN normalizar ni validar, así
+		payload["schema_version"] = int(payload.get("schema_version", 0))
+		payload = SaveSchema.completar(payload)
+		var errors: Array[String] = SaveSchema.validate(payload)
+		var version := int(payload.get("schema_version", 0))
+			return {"result": LoadResult.FUTURE_VERSION, "payload": {}, "version": version}
+			snapshot.restore(payload)
+			"result": LoadResult.RECOVERED,
+			"payload": payload,
+	return {"result": LoadResult.CORRUPTED, "payload": {}, "version": 0}
+func _migrate(payload: Dictionary, _from_version: int) -> Dictionary:
+	payload["schema_version"] = SaveSchema.SCHEMA_VERSION
+	return payload

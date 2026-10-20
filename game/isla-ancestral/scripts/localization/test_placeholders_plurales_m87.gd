@@ -27,7 +27,7 @@
 extends SceneTree
 
 # --- Guardia anti-falso-verde (3 capas) -------------------------------------
-const CHECKS_MINIMOS := 34
+const CHECKS_MINIMOS := 46
 var _checks: int = 0
 var _fallos: int = 0
 var _wb_cerrado: bool = false
@@ -272,10 +272,17 @@ func _test_resolucion_plural() -> void:
 	_check(src.contains("func _buscar_texto"), "existe _buscar_texto (resolucion por n)")
 	_check(src.contains("if n != -1"), "la rama plural se activa por n != -1")
 	# Medido: el proyecto NO usa tr_n() del motor; pluraliza por su cuenta.
+	# ⚠️ Se excluyen los `test_*.gd`: este mismo archivo nombra `tr_n(` 3 veces
+	# (comentario + print + asercion) y se contaba a si mismo -> 3 en vez de 0.
 	var tr_n: int = 0
+	var archivos_prod: int = 0
 	for f in _gd_files("res://scripts"):
+		if f.get_file().begins_with("test_"):
+			continue
+		archivos_prod += 1
 		tr_n += FileAccess.get_file_as_string(f).count("tr_n(")
-	print("[info] llamadas a tr_n() del motor en scripts/: %d (el proyecto pluraliza via _plural_forms)" % tr_n)
+	print("[info] .gd de produccion escaneados: %d | llamadas a tr_n(): %d (el proyecto pluraliza via _plural_forms)" % [archivos_prod, tr_n])
+	_check(archivos_prod > 50, "se escanearon %d .gd de produccion (guardia anti-vacio)" % archivos_prod)
 	_check(tr_n == 0, "el catalogo plural se sirve por _plural_forms, no por tr_n (medido %d)" % tr_n)
 	_fin("resolucion_plural")
 

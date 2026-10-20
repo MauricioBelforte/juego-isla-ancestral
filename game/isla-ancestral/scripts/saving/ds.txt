@@ -1,0 +1,130 @@
+var _config_estatica: Dictionary = {}
+var _hilo_guardado: Thread = null
+var _guardado_en_curso: bool = false
+var _slot_en_curso: int = -1
+var _cola_guardado: Dictionary = {}
+var _ultimo_resultado_async: Dictionary = {}
+var _progreso_hilo: float = 0.0
+var _ultimo_progreso_emitido: float = -1.0
+var _provider_buildings: BuildingsSaveProvider = null
+func _ready() -> void:
+func _registrar_provider_buildings() -> void:
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm == null or not sm.has_method("register_provider"):
+	if sm.register_provider(_provider_buildings):
+func _exit_tree() -> void:
+func _registrar_servicio() -> void:
+	var sr := get_node_or_null("/root/ServiceRegistry")
+func guardar_partida(slot: int, datos_sistemas: Dictionary) -> Dictionary:
+	var inicio := Time.get_ticks_msec()
+	var ok := false
+	var error_final := ""
+		var err_dir := GestorSlot.asegurar_directorio(slot)
+				var err_meta := _escribir_meta(slot)
+		var chunks: int = int(datos_sistemas.get("mundo_voxel", {}).get("chunks_editados", 0))
+	var duracion := Time.get_ticks_msec() - inicio
+	var bytes := _bytes_write(slot)
+	var meta := {
+		var logger := get_node_or_null("/root/GameLogger")
+func guardado_en_curso() -> bool:
+func slot_en_curso() -> int:
+func progreso_guardado() -> float:
+func ultimo_resultado_async() -> Dictionary:
+func guardar_partida_async(slot: int, datos_sistemas: Dictionary) -> Dictionary:
+		var reemplazo: bool = not _cola_guardado.is_empty()
+func _arrancar_hilo_guardado(slot: int, datos: Dictionary) -> void:
+	var err := _hilo_guardado.start(_tarea_guardado.bind(slot, datos))
+func _tarea_guardado(slot: int, datos: Dictionary) -> Dictionary:
+	var inicio := Time.get_ticks_msec()
+	var ok := false
+	var error_final := ""
+	var payload_str := ""
+	var err_dir := GestorSlot.asegurar_directorio(slot)
+		var escritura := _escribir_save_con_payload(slot, datos)
+			var err_meta := _escribir_meta(slot)
+		var chunks: int = int(datos.get("mundo_voxel", {}).get("chunks_editados", 0))
+func _process(_delta: float) -> void:
+func _finalizar_hilo_guardado() -> void:
+	var crudo: Variant = _hilo_guardado.wait_to_finish()
+	var resultado: Dictionary = crudo if typeof(crudo) == TYPE_DICTIONARY else {}
+	var slot: int = int(resultado.get("slot", -1))
+	var ok: bool = bool(resultado.get("ok", false))
+	var duracion: int = int(resultado.get("duracion_ms", 0))
+	var bytes: int = int(resultado.get("bytes", 0))
+		var siguiente: Dictionary = _cola_guardado
+func cargar_partida(slot: int) -> Dictionary:
+	var r := GestorSlot.rutas_slot(slot)
+	var doc := WriterAtomico.parsear_documento(FileAccess.get_file_as_string(r["save"]))
+		var restaurado := _intentar_restauracion(slot)
+	var datos: Dictionary = doc["payload"]
+	var version_origen: int = int(datos.get("version", 0))
+	var migrado := Versionador.migrar(datos)
+	var version_destino: int = int(datos.get("version", version_origen))
+	var errores := Validador.validar_contrato(datos, int(datos.get("version", 0)))
+func migrar(datos: Dictionary) -> Dictionary:
+func borrar_slot(slot: int) -> bool:
+func listar_slots() -> Array:
+	var slots: Array = []
+		var meta := GestorSlot.leer_meta(i)
+func guardar_config(datos: Dictionary) -> Error:
+	var err := GestorConfig.guardar_config(datos)
+func cargar_config() -> Dictionary:
+func config_actual() -> Dictionary:
+func cargar_mundo_voxel(slot: int) -> PackedByteArray:
+	var r := GestorSlot.rutas_slot(slot)
+	var comprimido: String = String(r["voxel"]) + SUFIJO_DEFLATE
+		var f := FileAccess.open_compressed(comprimido, FileAccess.READ, FileAccess.COMPRESSION_DEFLATE)
+			var largo := f.get_length()
+			var buf := f.get_buffer(largo)
+func comprimir_mundo_voxel(slot: int) -> Dictionary:
+	var r := GestorSlot.rutas_slot(slot)
+	var plano: String = String(r["voxel"])
+	var comprimido := plano + SUFIJO_DEFLATE
+		var antes_estimado := 0
+		var f0 := FileAccess.open_compressed(comprimido, FileAccess.READ, FileAccess.COMPRESSION_DEFLATE)
+	var crudo := FileAccess.get_file_as_bytes(plano)
+	var antes := crudo.size()
+	var f := FileAccess.open_compressed(comprimido, FileAccess.WRITE, FileAccess.COMPRESSION_DEFLATE)
+	var en_disco := FileAccess.get_file_as_bytes(comprimido).size()
+func descomprimir_mundo_voxel(slot: int) -> Dictionary:
+	var r := GestorSlot.rutas_slot(slot)
+	var plano: String = String(r["voxel"])
+	var comprimido := plano + SUFIJO_DEFLATE
+	var datos := cargar_mundo_voxel(slot)
+	var f := FileAccess.open(plano, FileAccess.WRITE)
+func copias_backup(slot: int) -> Array[String]:
+func restaurar_backup(slot: int, indice: int = 0) -> Error:
+func mantener_backups(slot: int) -> Dictionary:
+func _payload_final(slot: int) -> Dictionary:
+	var meta_cache: Dictionary = {}
+	var m := GestorSlot.rutas_slot(slot)
+	var doc := WriterAtomico.parsear_documento(FileAccess.get_file_as_string(m["save"]))
+	var p: Dictionary = doc["payload"]
+func _escribir_save_con_payload(slot: int, datos_sistemas: Dictionary) -> Dictionary:
+	var plano := Serializer.a_plano(datos_sistemas)
+		var errores := Validador.validar_contrato(plano, VERSION_ACTUAL)
+	var payload_str := Serializer.a_json(plano)
+	var contenido := WriterAtomico.construir_con_checksum(payload_str)
+	var r := GestorSlot.rutas_slot(slot)
+	var err := WriterAtomico.escribir_atomicamente(r["save"], contenido)
+func _escribir_save(slot: int, datos_sistemas: Dictionary) -> bool:
+func _escribir_meta(slot: int) -> Error:
+	var meta := GestorSlot.meta_default(slot)
+func _guardar_voxel_binario(slot: int, voxel_config: Dictionary) -> void:
+	var chunks: Array = voxel_config.get("chunks", [])
+	var r := GestorSlot.rutas_slot(slot)
+	var err_dir := GestorSlot.asegurar_directorio(slot)
+	var bin := Serializer.a_binario_voxel(chunks)
+	var archivo := FileAccess.open(r["voxel"], FileAccess.WRITE)
+func _intentar_restauracion(slot: int) -> bool:
+	var r := GestorSlot.rutas_slot(slot)
+	var err := WriterAtomico.restaurar_backup(r["save"])
+func _log_m60(nivel: String, mensaje: String) -> void:
+	var logger := get_node_or_null("/root/GameLogger")
+func _regenerar_meta_si_falta(slot: int) -> bool:
+	var r := GestorSlot.rutas_slot(slot)
+	var meta := GestorSlot.meta_default(slot)
+func _bytes_write(slot: int) -> int:
+	var r := GestorSlot.rutas_slot(slot)
+	var total := 0
+		var p: String = r[clave]

@@ -18,6 +18,7 @@ enum LoadResult {
 	CORRUPTED,   # Checksum/estructura inválidos y sin backup válido
 	RECOVERED,   # Se recuperó desde backup
 	FUTURE_VERSION, # El save es de una versión más nueva que la soportada
+	PROFILE_MISMATCH, # M59 ítem 8: el slot pertenece a otro perfil activo (anti-cruzamiento)
 	EMPTY_SLOT,  # Slot existe pero está vacío/inválido
 }
 

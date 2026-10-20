@@ -124,6 +124,22 @@ func _registrar_servicio() -> void:
 ## `datos_sistemas` = bloques aportados por los sistemas: jugador, inventario,
 ## tiempo, mundo_voxel, progresion, meta. El DataStore agrega version + checksum.
 ## Devuelve metadata del guardado (para el menú M59/M53).
+## M59 ítem 8 (G-5.3-Flash-Agente): perfil activo de la sesión. Viaja en el
+## save como meta.profile_id (lo estampa SaveManager) y se valida al cargar
+## para evitar cruzamiento de perfiles entre slots.
+var perfil_activo: String = ""
+
+
+## Setea el perfil activo ("" = sin perfil explícito).
+func set_perfil_activo(id: String) -> void:
+	perfil_activo = id
+
+
+## Devuelve el perfil activo ("" si no hay).
+func get_perfil_activo() -> String:
+	return perfil_activo
+
+
 func guardar_partida(slot: int, datos_sistemas: Dictionary) -> Dictionary:
 	var inicio := Time.get_ticks_msec()
 	var ok := false

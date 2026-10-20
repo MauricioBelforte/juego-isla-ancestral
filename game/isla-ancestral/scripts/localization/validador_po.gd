@@ -229,7 +229,8 @@ static func _nplurals_de(cabecera: String) -> int:
 	return int(m.get_string(1))
 
 
-## ¿La clave respeta MODULO.SECCION.CLAVE en UPPER_SNAKE (RF20)?static func clave_cumple_convencion(clave: String) -> bool:
+## ¿La clave respeta MODULO.SECCION.CLAVE en UPPER_SNAKE (RF20)?
+static func clave_cumple_convencion(clave: String) -> bool:
 	if clave in EXCEPCIONES_CLAVE:
 		return true
 	var re := RegEx.new()
