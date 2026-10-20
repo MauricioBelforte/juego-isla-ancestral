@@ -21,6 +21,7 @@ func _ready():
 	_poblar_recursos()
 	_crear_estaciones_crafting()
 	_crear_farm_controller()
+	_crear_fast_travel_service()
 	_crear_shaman()
 	_crear_incense_spawner()
 	_registrar_hud()
@@ -56,6 +57,17 @@ func _crear_farm_controller() -> void:
 		ctrl.name = "FarmToolController"
 		add_child(ctrl)
 		print("[M33] FarmToolController montado")
+
+## M69: monta el FastTravelService (anclas del catálogo + provider de guardado
+## K.32 con sección 'fast_travel'). Duck-safe: si el script falta, no rompe.
+func _crear_fast_travel_service() -> void:
+	var service_script := load("res://scripts/fasttravel/fast_travel_service.gd")
+	if service_script == null:
+		return
+	var service = service_script.new()
+	service.name = "FastTravelService"
+	add_child(service)
+	print("[M69] FastTravelService montado (anclas + provider fast_travel)")
 
 ## M53: instala el framework de capas (DialogLayer, PauseLayer, MenusLayer, ConfirmPopup)
 func _crear_ui_root() -> void:

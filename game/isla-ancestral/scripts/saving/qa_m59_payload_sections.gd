@@ -30,7 +30,9 @@ func _correr() -> void:
 		claves.append(String(k))
 	_check(payload.size() >= 8, "payload con %d secciones de proveedores reales" % payload.size(), "payload chico")
 
-	for esperada in ["inventory", "economy", "hotbar", "audio_config", "crafting"]:
+	# M69: con el FastTravelService montado en main_island, su sección DEBE
+	# estar en el payload del boot (provider K.32).
+	for esperada in ["inventory", "economy", "hotbar", "audio_config", "crafting", "fast_travel"]:
 		_check(esperada in claves, "sección '%s' presente en el payload" % esperada, "FALTA '%s': %s" % [esperada, str(claves)])
 	# Dato de integración (M69): 'fast_travel' AÚN no está en el boot — el servicio
 	# K.32 existe pero nadie lo monta en la escena real. Gape documentado, no es fallo
