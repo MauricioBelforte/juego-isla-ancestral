@@ -1,0 +1,26 @@
+--- 142: static func serialize_payload(payload: Dictionary) -> String:
+	return JSON.stringify(payload)
+
+## Construye el contenido completo del archivo: token\npayload
+## El token es el HMAC-SHA256 (BUG-115), retrocompatible en lectura.
+static func build_file_content(payload_str: String) -> String:
+	return firmar_payload(payload_str) + "\n" + payload_str
+
+## Verifica y parsea el contenido de un archivo de save.
+## Devuelve { ok: bool, reason: String, checksum: String, payload_str: String,
+##           payload: Variant, legacy: bool }
+##
+## `legacy == true` significa que el token era un SHA-256 en claro (save previo
+## al fix BUG-115). Se acepta por RETROCOMPATIBILIDAD — regla dura del proyecto
+## "nunca degradar/inutilizar un save". LIMITACIÓN CONOCIDA Y DELIBERADA: como el
+## token legado se sigue aceptando, un atacante con acceso al sistema de archivos
+## puede reemplazar la línea 1 por `sha256(payload)` y el documento verifica. Es
+## decir: el HMAC NO convierte el save en a prueba de manipulación local — la
+## clave vive en `user://` junto a los saves y es legible. Lo que sí aporta el
+## fix es (a) detectar corrupción/tampering no reproducido por el algoritmo
+## público en los saves NUEVOS y (b) exponer el caso legado vía este flag.
+static func parse_document(content: String) -> Dictionary:
+	if content.is_empty():
+		return {"ok": false, "reason": "contenido vacío", "checksum": "", "payload_str": "", "payload": null, "legacy": false}
+	var newline := content.find("\n")
+	if newline <= 0:

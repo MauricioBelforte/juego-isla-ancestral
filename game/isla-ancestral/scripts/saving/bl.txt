@@ -1,0 +1,3 @@
+302: 8. - [ ] [59] Id de perfil en el archivo, validado al cargar (sin cruzamiento) [M] <!-- fuente: 59-Guardado/05-Checklist
+303: 9. - [ ] [59] Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C] <!-- fuente: 59-Guardado/05-Checklist.md
+339: 45. - [ ] [59] Probar múltiples perfiles sin cruzamiento [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
