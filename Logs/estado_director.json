@@ -1,0 +1,61 @@
+{
+  "ultimo_update": "2026-10-21T04:23:28",
+  "fundador_ultimo_mensaje": "ademas el cronometro no lee lo que estamos haciendo en el chat - crons sin contexto",
+  "fundador_critica": "cron no analiza lo que ya venimos haciendo; lanzado sin contexto",
+  "agnes": {
+    "estado": "standby pido nuevo frente",
+    "pendientes_real": 337,
+    "nuevo_frente_asignado": true,
+    "modulos_asignados": [
+      "73-Coleccionables",
+      "72-Logros",
+      "20-Amistad",
+      "158-Herramientas",
+      "70-Interacciones"
+    ],
+    "acuse_enviado": 889
+  },
+  "g_5_3": {
+    "estado": "activo - tanda 40 cicla MR completo + tanda 41 navegacion",
+    "pendientes_real": 222,
+    "acuse_enviado": 187,
+    "ultima_tanda": 40
+  },
+  "deepseek": {
+    "estado": "activo - ciclos 64-80 M62 y cursos i18n",
+    "pendientes_real": 170,
+    "acuse_enviado": 344
+  },
+  "step_5": {
+    "estado": "standby - cola a 165 tras bloque W",
+    "pendientes_real": 165,
+    "acuse_enviado": 134
+  },
+  "ds_oc": {
+    "estado": "activo - ciclos 64-81 M62 y cursos",
+    "pendientes_real": 357,
+    "acuse_enviado": 168
+  },
+  "hy3": {
+    "estado": "standby - QA pendiente por dueno",
+    "pendientes_real": 257,
+    "acuse_enviado": 300
+  },
+  "ling": {
+    "estado": "activo - tandas 15-19 riel i18n M87",
+    "pendientes_real": 176,
+    "acuse_enviado": 197
+  },
+  "crons_vigentes": {
+    "A_v3": ":00/:20/:40 (deteccion + responder)",
+    "C_v3": ":05/:25/:45 (gate padding + preservacion)",
+    "B_v3": ":10/:30/:50 (doble red deteccion)",
+    "D_v2": ":15/:35/:55 (asignador al detalle)"
+  },
+  "trampas_registradas": [
+    "agente dice 'no tengo nada' -> escanear TODOS los 05 (2545+ [ ] en modulos no-bloqueados) antes de aceptar standby",
+    "T-19 falso positivo x3 (165, 293, 173): releer con mtime+bytes + retry antes de aviso",
+    "mi sync de fila GLOBAL no aterriza si replace() falla silenciosamente: verificar con grep acuse commit",
+    "puede haber dos sesiones GLM-5.3 en paralelo de sesiones hermanas: firma cruzada attribucion"
+  ]
+}
