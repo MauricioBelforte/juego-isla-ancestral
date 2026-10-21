@@ -816,3 +816,17 @@ las constantes reales de M63 (`PISO_PROGRESO` 0.02, `TOPE_PROGRESO` 0.98, `PRESU
 **DIAGNOSTICO P1 (2026-10-21 21:20, Log 2086):** el costo de las 5 suites lentas de M112 NO son las esperas de frames sino la SALIDA FINAL DEL MOTOR (2.8 s sin escena vs 101.9 s con escena; el script termina en 1.3 s). Causa: el guardado asincrono incluye el mundo voxel en binario (DataStore._guardar_voxel_binario) y al salir se hace wait_to_finish() -> ~60 s. Es bug de producto (cerrar el juego con el mundo voxel cargado tarda ~1 min). Fix: no guardar el mundo voxel en tests (o flag --no-save) + paralelizar las 4 carpetas GdUnit4 -> 897 s -> ~300 s. El fix 'topes 30 frames' aprobado queda documentado como NO recuperador de tiempo.
 **P1 CERRADO (Log 2090, 2026-10-21 22:55):** pool paralelo de 6 workers + **aislamiento de `user://` por worker** en `tests/run_tests.gd` -> tiempo total de suite **897.0 s -> 545.3 s (9.09 min)**, presupuesto 600 s CUMPLE; cobertura sin perdida (2441 -> 2462 tests) y contrato de salida del runner intacto (CI sin tocar). Hallazgo: el rojo de `integration/test_crafting_inventory.gd` (3 checks) era contaminacion del `user://` compartido, no un bug de crafting (con aislamiento la suite pasa); el unico rojo que queda es `tests/test_iconos_m159.gd` (TIMEOUT, preexistente, riel M159).
 **P2 (QA de M90, Log 2091, 2026-10-21 23:35):** verificador EXTERNO. Muestreo 13/13 items respaldados contra disco (verificacion a nivel de VALOR: cascadas=1, res=512, escala=0.5, mipmap=0, aniso 2/4/8/16, FPS 30/60/120/0, VSync 0/1/2, 720p=1280x720, 4k=3840x2160) + 2 suites en VERDE (85/0 y 57/0) -> **VEREDICTO: SELLO VALIDO** (0 fallas materiales; el sello es del director, yo no me auto-sello). 1 NOTA para el dueno de M90: el item L82-L84 cita distancias pre-rework 10x (50/100 m) y la implementacion vigente es DISTANCIA por calidad 300/600/1200/2500 m -> deriva de TEXTO, no de codigo. Leccion propia: 2 corridas de mi checker dieron falsos positivos (buscaba comillas en numeros y `:=` en consts tipados) -> un verificador debe re-verificar sus propias fallas contra el artefacto.
+
+## M17-Construccion (encargo directo del director msg 8/13/17 — frente P3, 2026-10-21)
+
+**Fuente:** `DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md` (93 [ ] accionables, sin dueno habilitado; solo lo headless-verificable, assets/3D fuera de alcance).
+
+- [x] RF2: rejilla voxel de 1 m alineada al mundo con snapping de 90 grados [S] — LOG 2092: suite `tests/test_m17_construccion_validacion.gd`
+- [x] RF8: validacion de ocupacion, soporte y reglas por pieza [S] — LOG 2092: las 8 reglas del validador con su motivo
+- [x] P3: grid — rejilla voxel de 1 m alineada al origen global de M08 [S] — LOG 2092: celda (0,0,0) -> (0.5,0.5,0.5)
+- [x] P4: snapping — ajuste de posicion y rotacion (90) a la celda mas cercana [S] — LOG 2092: floor + 4 rotaciones
+- [x] P14: objetos invalidos — toda regla fallida bloquea la colocacion con motivo [S] — LOG 2092: ok=false + motivos[]
+- [x] Las piezas de NxN celdas ocupan exactamente su area completa en la rejilla [M] — LOG 2092: pieza 2x2 = 4 celdas
+- [x] Limites de mundo: la colocacion se rechaza fuera del AABB jugable de M08 [M] — LOG 2092: FUERA_DEL_MUNDO
+
+**Tanda P3 (Log 2092):** suite nueva en el runner central (**44 checks, 0 fallos**) + fix del suite rojo de M17 (piso 24 vs 22 -> se agregan 2 checks reales). M17 pasa de 81/175 a 88/175. Pendientes: 86 [ ] (los que exigen mundo, assets/3D o UI con viewport quedan fuera de mi alcance headless).
