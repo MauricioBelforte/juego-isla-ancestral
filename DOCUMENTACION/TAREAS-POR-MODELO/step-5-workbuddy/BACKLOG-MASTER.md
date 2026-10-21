@@ -964,3 +964,12 @@ M104, M88, M160.
 - **Limites:** 0 commits / 0 push / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot ni 05-Checklist ajenos. Los 2 archivos .gd/.tscn son NUEVOS (preview temporal), no tocan logica de produccion.
 - **Pedidos al director (msg 129):** visto bueno de los flips 4/10 (ofrecidos a revertir); autorizacion de commit de 6 paths de esta tanda + los 8 del 2026-10-20; **REPOSICION DE COLA (la seccion A quedo sin pendientes salvo el item 9, que depende de tu commit)**.
 - **Proxima:** NN > 128; sin mensaje nuevo la cola activa queda vacia -> hace falta reponerla o asignar modulo.
+
+## Registro de la vuelta 2026-10-21 03:50 (tracker 132 -> 132; RAMA 1 acuse 132 + verificacion de casa propia)
+
+- Unico mensaje nuevo = **132** del director (acuse puro de 131: drift M55 "corregido", cola se repone en el ciclo D con GO cuando llegue, trampa del prefijo de linea documentada como metodo estandar). Sin orden de trabajo nueva -> RAMA 2 = verificacion de casa propia con la cola vacia (0 `[ ]` en la seccion de tareas, re-medido).
+- HALLAZGO DE LA VUELTA: **el sync de la fila 55 NO aterrizo**. El director anuncia en su 132 "Sincronizado a 67/131"; medido: fila 55 = **63/131** en worktree Y en HEAD; el ultimo commit que toco CHECKLIST-GLOBAL.md es `11e77f3` del 2026-10-20 06:45 (sincronia de la fila 90), ninguno posterior. M55 en disco (conteo por prefijo de linea): 67 [x] / 15 [?] / 49 [ ] = 131. Segunda ocurrencia de la familia "el commit que anuncia el sync no contiene el archivo" (fila 90, 2026-10-20). Reportado al director con el comando de verificacion (`git show HEAD:CHECKLIST-GLOBAL.md | grep -a "^| 55 |"`, el `-a` obligatorio por el byte NUL del archivo).
+- Casa propia (6 modulos, disco vs GLOBAL): OK M109 135/138, M31 125/169, M76 126/130, M94 83/138, M140 100/124; DRIFT M55 67/131 vs 63/131 (el de arriba).
+- Pendientes re-verificados: CONVENCIONES-CODIGO.md (fila M111) sigue ausente en el arbol y en HEAD (decision del director); las 2 capturas de M76 existen en disco con hash verificado pero `tools/mcp/godot-mcp/` esta cubierto por `.gitignore:109` -> no committeables sin negacion o `add -f`.
+- Artefactos: msg **133** (2.985 B, UTF-8 sin BOM, LF puro 43, sin FFFD). Numeracion: 133 = max(archivos)+1 = cabeza del pool; consumido y re-expandido a 134..233 (100 consecutivos verificados, sin huecos; sin BOM).
+- Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot. Tracker -> 132.
