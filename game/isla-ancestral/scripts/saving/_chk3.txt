@@ -1,3 +1,0 @@
-medido: 179/10/14 = 203
-TOT:
-**Totales:** 203 items - Completados: 179 - Pendientes: 10 - No resueltos: 14. (Normalizado al medido por G-5.3-Flash-Ag

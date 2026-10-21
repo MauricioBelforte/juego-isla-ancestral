@@ -1,3 +1,0 @@
-game\isla-ancestral\data\balance\crafting.json (2223 bytes)
-game\isla-ancestral\data\diario\diario_catalog.json (4676 bytes)
-game\isla-ancestral\data\m158\catalogo_herramientas.json (6994 bytes)

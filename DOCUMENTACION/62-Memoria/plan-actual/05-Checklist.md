@@ -190,7 +190,7 @@
 - [x] Baseline spawn de Aurora: objetivo < 1.600 MB [S] — **[x] 2026-10-20 (Tanda 79, DS-Opencode): medido con RENDERER REAL (OpenGL 3.3, AMD Radeon, ventana 640x360), no headless.** `sesion_m62_baselines.gd` spawn: **149.7 MB static, 7307 objetos, 0 huérfanos, 7/0 EXIT 0**. Probe de VRAM sobre la misma escena: **static 145.6 + VRAM 44.3 = 189.9 MB** (tex 12.2, buf 32.1), 7288 objetos. Total estimado **189.9 MB << 1600 MB** (11.9% del objetivo). Alcance: boot automatizado con renderer real y 12–15 s de asentamiento, no una sesión manual; no hay banco de audio completo. Evidencia: `out/tanda79/spawn_render.log` sha256 `b9938516…`, `out/tanda79/probe_vram.log` sha256 `7ed5c3f5…`. Log 2048.
 - [x] Baseline horizonte terrestre oteado: objetivo < 2.200 MB [S] — **[x] 2026-10-20 (Tanda 80, DS-Opencode): medido con RENDERER REAL (OpenGL 3.3, AMD Radeon), no headless.** `sesion_m62_baselines.gd` horizonte: **151.7 MB static, 7384 objetos, 0 huérfanos, 9/0 EXIT 0**; cámara a **20.00 m** del Player (tope de oteo). Probe de VRAM: **static 148.0 + VRAM 44.4 = 192.4 MB** (tex 12.2, buf 32.2), 7293 objetos. Total **192.4 MB << 2200 MB** (8.7% del objetivo). Se corrigió el arnés (cámara resuelve `_target` un frame después; el scroll solo cambia `_distance` y la posición converge en `_physics_process`), sin tocar código de producción. Evidencia: `out/tanda80/horizonte_render.log` sha256 `a714c30e…`, `out/tanda80/probe_vram_horizonte.log` sha256 `398910cc…`; regresión spawn `spawn_render_patch.log` 7/0. Log 2051.
 - [?] Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S] — **[?] 2026-10-20 (Tanda 81, DS-Opencode): NO MEDIBLE, no existe templo/API de acceso.** No hay ninguna escena `*templo*` ni `*subterr*` en `scenes/` (solo scripts de puzzles en `scripts/templos/` y referencias de zonas en combate/minería). El arnés solo puede bajar al Player 40 m en el spawn (Y 6.0 → -34.0); con renderer real reporta **1 VoxelTerrain y 0 bloques actualizados**, así que el subterráneo no se ejercita: **155.9 MB static / 7354 objetos / 0 huérfanos / 8 checks, 1 fallo (sin API de producción), EXIT 3 (detector ciego)**. Ese número NO es un baseline del templo y no se usa. Se deja `[?]` hasta que exista la escena/entrada de producción. Evidencia: `out/tanda81/subterraneo_render.log` sha256 `f1ea9c77…`. Log 2052.
-- [ ] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S]
+- [?] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta) [S] — **[?] 2026-10-20 (Tanda 82, DS-Opencode): memoria MEDIDA, banco completo NO medible.** Renderer real OpenGL 3.3, TORMENTA determinística tras 3 días: **157.9 MB static / 7412 objetos / 0 huérfanos / 8 checks 0 fallos / EXIT 0**, 7 buses y 9 reproductores; banco `AudioStreamWAV` sintético de 3 MB (151.9 → 157.9 MB). Probe: **static 152.0 + VRAM 44.7 = 196.7 MB** (7.9% del objetivo de 2500 MB), 7322 objetos. Pero **0 assets de audio** en el repo y `AmbientDirector.set_estado_clima()` (M42) sigue con 0 llamadores: el “banco completo” no existe; el sintético es un stand-in y no prueba assets ni decoder. Queda `[?]` hasta que exista el banco real (M42/assets), no se marca un verde que no se midió. Evidencia: `out/tanda82/tormenta_audio3_render.log` sha256 `dd47de0f…`, `out/tanda82/probe_vram_tormenta.log` sha256 `70f7f327…`. Log 2053.
 - [x] Profiling: identificar top de allocs por frame en hot paths [M]
 - [x] Cero allocs deliberados en `_process`/`_physics_process` del gameplay [C] — Log 1094: el muestreo por frame con `_muestras.append()`+`pop_front` (un alloc deliberado por frame, justo lo prohibido) se reemplazó por muestreo por TIEMPO y ventana circular `PackedFloat32Array`
 - [x] Uso de arrays tipados y `Packed*Array` donde el tamaño es fijo [M] — Log 1094: ventana de 600 muestras en `PackedFloat32Array` pre-dimensionado (0 allocs por frame)
@@ -210,10 +210,10 @@
 - [x] Test BudgetRegistry: carga, verificación, topes, total_consumo (test_memoria_m62.gd) [M]
 - [x] Test GlobalPool: obtener/devolver/precalentar/límite/liberar_todo (test_memoria_m62.gd) [M]
 - [x] Test UnloadPolicy: LRU/distancia, descarga escalonada (test_memoria_m62.gd) [C]
-- [ ] Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C]
+- [x] Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C] — **[x] 2026-10-20 (Tanda 83, DS-Opencode): cubierto por la corrida real de 30 min de T72/L155.** `sesion_m62_clima_30min.gd` sobre `main_island.tscn`: **359 muestras** (mínimo 300), baseline 178.2 MB, **drift final +0.1% (máx 0.1%)**, `drift_check()=true`, **0 viajes/teleports**, 0 huérfanos, 10 cambios de clima, **EXIT 0**. La corrida incluye clima cambiante (estrés adicional), así que cubre el caso sin teleport. **Alcance:** el arnés es `SceneTree --script` (no el Play Mode del editor), sin input de jugador; se declara la diferencia y no se inventa una sesión manual. Evidencia: `out/tanda72/sesion_audio_30min.log` y `.csv` (sha256 del log en el Log 2039). Log 2054.
 - [x] Test Play Mode: teleport extremo ×10 con memoria estable y sin picos [C] — iter. 7 (2026-10-17, Tanda 6, DS-Opencode): suite test_m62_leaks_teleport.gd: "los 10 ciclos de teleport se ejecutaron completos" + "objetos_vivos() NO crece tras 10 teleports (fin <= base; medido delta=0)" + cola vacia tras cada descarga; rc=0, 21 checks 0 fallos.
-- [ ] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M]
-- [ ] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C]
+- [x] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M] — **[x] 2026-10-20 (Tanda 84, DS-Opencode): suite directa + 30 min de T72.** `test_m62_audio_bioma.gd` (headless, autoload real): **45 checks, 0 fallos, EXIT 0**; entrar/salir de bioma encola y descarga el banco, 3 ciclos de viaje, **0 bancos sobrevivientes (WeakRef)**, `objetos_vivos()` **4477 → 4477 (delta 0)**, cola vacía y lote de drenaje único. La corrida de 30 min de T72 con 10 bancos sintéticos mantiene la memoria plana (178.2 → 178.4 MB, drift +0.1%, 1 banco vivo). **Alcance:** el arnés es `SceneTree --script`, no el Play Mode del editor; la suite mide retención/objetos y T72 aporta la memoria de 30 min. Evidencia: `out/tanda84/audio_bioma.log` sha256 `E54AB45D…`. Log 2055.
+- [x] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C] — **[x] 2026-10-20 (Tanda 85, DS-Opencode): 500 ops reales sobre VoxelBuffer.** `sesion_m62_voxel_500.gd`: **9 checks, 0 fallos, EXIT 0**; 500 posiciones sólidas, **500/500 excavadas leídas como AIRE**, **500/500 regeneradas** con el ID original; **5 buffers creados, 0 vivos**; memoria 137.3 → 137.3 MB (delta +0.0%); objetos +5; 0 huérfanos. **Sonda roja:** `M62_RETENER_BUFFERS=1` retuvo 5 buffers y el gate falló (`[FALLO] 0 buffers...`, EXIT 1), así que el test detecta la fuga. **Alcance:** el VoxelTerrain headless reporta 0 bloques actualizados, por lo que se ejercita el VoxelBuffer real (mismo tipo/API que farm_service) y no el terreno renderizado; no es el Play Mode del editor. Evidencia: `out/tanda85/voxel_500.log` sha256 `A9C2…` y `voxel_500_rojo.log`. Log 2056.
 - [ ] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M]
 - [x] Test Play Mode: textura gigante forzada degrada sin crash [M] — iter. 7 (2026-10-17, Tanda 6, DS-Opencode): suite test_memoria_m62_iter3.gd: "con umbral 64 sí es gigante" + "requiere_degradacion() true" + "la politica se aplico" + "la textura degradada mide la mitad / y ahora tiene mips / ocupa menos"; rc=0, 133 checks 0 fallos.
 - [x] Test de semáforos: forzar 90% y verificar descargas automáticas y registro en log [C] — Log 1094: bloques B y C de `test_memoria_m62_iter3.gd` (1599/1600/1799/1800/1899/1900/2000 MB) + bloque C de `test_enforcement_m62.gd`
@@ -221,7 +221,7 @@
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 139 - Pendientes: 9 - No resueltos: 2.
+**Totales:** 150 items - Completados: 142 - Pendientes: 5 - No resueltos: 3.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -1014,3 +1014,68 @@ banco anterior muere. No toca producción.
 - **Cierre:** queda `[?]` hasta que exista la escena/entrada de producción del templo.
 
 **Totales tras Tandas 80-81:** 139 / 9 / 2 (150 items).
+
+## Tanda 82 — L193 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2053)
+
+**Resultado: `[?]` — memoria de tormenta medida; “banco de audio completo” no existe.**
+
+- **Item:** “Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta)”.
+- **Tormenta real, renderer OpenGL 3.3:** clima 3 tras 3 días; **157.9 MB static, 7412 objetos,
+  0 huérfanos, 8/0 EXIT 0**; 7 buses de audio y 9 reproductores.
+- **Banco sintético:** `AudioStreamWAV` de 3 MB (stand-in de T72): memoria 151.9 → **157.9 MB**.
+- **VRAM:** probe con tormenta y banco de 3 MB: **static 152.0 + VRAM 44.7 = 196.7 MB**
+  (7.9% de 2500 MB), 7322 objetos.
+- **Por qué `[?]`:** 0 assets de audio en el repo; `AmbientDirector.set_estado_clima()` (M42) tiene
+  0 llamadores, así que el clima no llega al banco de audio real. El sintético mide el mecanismo y el
+  techo, **no** el banco completo ni el decoder. Se reabre cuando existan assets/M42.
+- **Evidencia:** `out/tanda82/tormenta_audio3_render.log` (sha256 `dd47de0f…`),
+  `out/tanda82/probe_vram_tormenta.log` (sha256 `70f7f327…`).
+
+**Totales tras Tanda 82:** 139 / 8 / 3 (150 items).
+
+## Tanda 83 — L213 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2054)
+
+**Resultado: `[x]` por herencia medida de T72 — 30 min sin teleport, drift +0.1%.**
+
+- **Item:** “Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5% [C]”.
+- **Corrida real (T72/L155):** 2026-10-20 02:32:16 → 03:02:16; `main_island.tscn`; **359 muestras**,
+  baseline 178.2 MB, **drift +0.1% (máx 0.1%)**, `drift_check()=true`, **0 viajes/teleports**,
+  0 huérfanos, 10 cambios de clima, 10 bancos sintéticos (1 vivo), **EXIT 0**.
+- **Evidencia:** `out/tanda72/sesion_audio_30min.log` (231 KB) y `.csv` (12.6 KB).
+- **Alcance:** es un arnés `SceneTree --script`, no el Play Mode del editor, y no hay input de jugador.
+  La corrida es de reloj de pared (30 min reales) y agrega clima cambiante; el caso “sin teleport” está
+  cubierto (0 viajes). No se re-ejecutan 30 min para no duplicar una corrida ya válida.
+
+**Totales tras Tanda 83:** 140 / 7 / 3 (150 items).
+
+## Tanda 84 — L215 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2055)
+
+**Resultado: `[x]` — cambio de bioma de audio sin crecimiento.**
+
+- **Suite directa:** `test_m62_audio_bioma.gd` con el autoload real `MemoryMonitor`: **45 checks, 0 fallos,
+  EXIT 0**. Entrar/salir de bioma pide y descarga el banco; el cambio de región fuerza la descarga; el
+  banco EN CARGA se veta y no se pierde; 3 ciclos de viaje sin acumulación; **0 bancos sobrevivientes
+  (WeakRef)**; `objetos_vivos()` **4477 → 4477 (delta 0)**; cola vacía y drenaje final en un lote.
+- **Corrida de 30 min (T72):** 10 bancos sintéticos creados, **1 vivo**, memoria 178.2 → 178.4 MB,
+  drift +0.1%, EXIT 0. Aporta la estabilidad de memoria que la suite corta no mide en MB.
+- **Evidencia:** `out/tanda84/audio_bioma.log` (sha256 `E54AB45D52A3B095FD8E3C27F7CB578FED2EF21BC7AAE5CCA658BE6DAE3598A5`).
+- **Alcance:** `SceneTree --script`, no editor Play Mode; no hay assets reales (bancos `Resource` sintéticos).
+  M42 sigue con 0 llamadores de `set_estado_clima`; el cableado de producción es deuda de M42.
+
+**Totales tras Tanda 84:** 141 / 6 / 3 (150 items).
+
+## Tanda 85 — L216 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2056)
+
+**Resultado: `[x]` — 500 excavaciones + 500 regeneraciones sin buffers retenidos.**
+
+- **Corrida verde:** `sesion_m62_voxel_500.gd` sobre `main_island.tscn` (headless, autoload real):
+  **9 checks, 0 fallos, EXIT 0**; 500 posiciones sólidas; **500/500 excavadas leídas como AIRE**;
+  **500/500 regeneradas** con el ID original; **5 buffers creados, 0 vivos**; memoria **137.3 → 137.3 MB
+  (delta +0.0%)**; objetos **7408 → 7413 (+5)**; **0 huérfanos**.
+- **Sonda roja:** `M62_RETENER_BUFFERS=1` → 5 buffers vivos y `[FALLO] 0 buffers temporales retenidos`,
+  **EXIT 1**. El gate no es decorativo: detecta la fuga deliberada.
+- **Evidencia:** `out/tanda85/voxel_500.log` y `out/tanda85/voxel_500_rojo.log`.
+- **Alcance:** el VoxelTerrain headless reporta 0 bloques actualizados; el arnés ejercita `VoxelBuffer` real
+  (mismo tipo/API que `farm_service.gd`), no el terreno renderizado ni el Play Mode del editor.
+
+**Totales tras Tanda 85:** 142 / 5 / 3 (150 items).

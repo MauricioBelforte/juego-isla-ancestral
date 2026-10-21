@@ -747,3 +747,55 @@ DeepSeek-V4.1-Flash (Log 2033). Se re-ejecutó y se aplicó el flip.
 - **Búsqueda:** 0 escenas `*templo*`/`*subterr*`/`*cueva*`; no hay entrada de producción.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tandas 80-81.
+
+## Tanda 82 — L193 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2053)
+
+**Sin código de producción nuevo; se midió el techo de tormenta y se agregó un stand-in de audio al arnés.**
+
+- `sesion_m62_baselines.gd` (test): nueva variable `M62_AUDIO_BANCO_MB` (default 0 = off). Si es > 0,
+  crea un `AudioStreamWAV` sintético del tamaño pedido y lo retiene durante la medición; reporta el
+  delta de memoria. Se usó **3 MB** (mismo stand-in de T72) para no inventar el tamaño de un banco real.
+- **Tormenta real:** clima 3 tras 3 días; **157.9 MB static**, 7412 objetos, 0 huérfanos, 8/0; 7 buses,
+  9 reproductores; banco 151.9 → 157.9 MB.
+- **VRAM:** `probe_vram_tormenta.gd` (test) con tormenta + banco 3 MB: **static 152.0 + VRAM 44.7 =
+  196.7 MB**, 7322 objetos.
+- **Deuda:** 0 assets de audio y M42 `set_estado_clima()` con 0 llamadores; el banco completo no existe.
+  El sintético mide el mecanismo, no el asset ni el decoder.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 82.
+
+## Tanda 83 — L213 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2054)
+
+**Sin código nuevo; verificación por herencia de la corrida de 30 min de T72.**
+
+- `sesion_m62_clima_30min.gd` corre `main_island.tscn` 30 min de reloj de pared, sin teleport
+  (`GameTime.avanzar_hasta` es la API de dormir), y usa `drift_check()` de producción.
+- **Corrida T72:** 359 muestras, baseline 178.2 MB, drift +0.1% (máx 0.1%), 0 viajes, 0 huérfanos,
+  10 cambios de clima, 10 bancos sintéticos (1 vivo), EXIT 0.
+- **Alcance:** arnés `SceneTree --script`, no el Play Mode del editor; sin input de jugador.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 83.
+
+## Tanda 84 — L215 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2055)
+
+**Sin código nuevo; verificación directa del contrato de audio por bioma.**
+
+- `test_m62_audio_bioma.gd` sobre el autoload real: **45 checks, 0 fallos, EXIT 0**.
+- Entrar/salir de bioma encola/descarga el banco; 3 ciclos de viaje; **0 bancos sobrevivientes (WeakRef)**;
+  `objetos_vivos()` 4477 → 4477; cola vacía; lote de drenaje único.
+- **Memoria de 30 min:** T72, 10 bancos sintéticos, 1 vivo, 178.2 → 178.4 MB, drift +0.1%, EXIT 0.
+- **Alcance:** `SceneTree --script`, no editor Play Mode; bancos sintéticos, M42 sin cableado de producción.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 84.
+
+## Tanda 85 — L216 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2056)
+
+**Sin código nuevo; corrida del arnés de 500 bloques.**
+
+- `sesion_m62_voxel_500.gd`: 500 posiciones sólidas, 500 excavadas (AIRE), 500 regeneradas (ID original),
+  5 buffers creados / 0 vivos, memoria 137.3 → 137.3 MB (+0.0%), objetos +5, 0 huérfanos, EXIT 0.
+- **Sonda roja** `M62_RETENER_BUFFERS=1`: 5 buffers vivos, `[FALLO]`, EXIT 1.
+- **Alcance:** VoxelBuffer real (mismo tipo/API que `farm_service.gd`), no VoxelTerrain renderizado;
+  el terreno headless reporta 0 bloques actualizados. No es el Play Mode del editor.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 85.

@@ -775,3 +775,51 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
 - **Resultado:** `[?]` hasta que exista la escena/entrada de producción.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tandas 80-81.
+
+## 33. Tanda 82 (2026-10-20, DS-Opencode, Log 2053): L193 — tormenta + audio (memoria medida, banco completo NO MEDIBLE)
+
+- **Objetivo:** ≤ 2500 MB.
+- **Tormenta real, renderer OpenGL 3.3:** clima 3 tras 3 días; **157.9 MB static**, 7412 objetos,
+  0 huérfanos, 8/0 EXIT 0; 7 buses y 9 reproductores.
+- **Banco sintético:** 3 MB `AudioStreamWAV`; memoria 151.9 → 157.9 MB.
+- **VRAM:** 44.7 MB; static 152.0; **total 196.7 MB** (7.9% del objetivo); 7322 objetos.
+- **Bloqueo:** 0 assets de audio y M42 `set_estado_clima()` con 0 llamadores; el banco completo no
+  existe. El sintético es un stand-in y no prueba assets/decoder.
+- **Resultado:** `[?]` hasta que exista el banco real.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 82.
+
+## 34. Tanda 83 (2026-10-20, DS-Opencode, Log 2054): L213 — 30 min sin teleport (herencia T72)
+
+- **Item:** drift-check de 30 min sin teleport, drift ≤ 5%.
+- **Corrida T72:** 30 min reales, 359 muestras, baseline 178.2 MB, **drift +0.1% (máx 0.1%)**,
+  `drift_check()=true`, **0 viajes/teleports**, 0 huérfanos, 10 climas, EXIT 0.
+- **Evidencia:** `out/tanda72/sesion_audio_30min.log` y `.csv`.
+- **Alcance:** `SceneTree --script`, no editor Play Mode; sin input. La corrida incluye clima
+  cambiante (estrés extra) y no usa teleport.
+- **Resultado:** `[x]` por herencia; no se re-ejecutan 30 min.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 83.
+
+## 35. Tanda 84 (2026-10-20, DS-Opencode, Log 2055): L215 — audio por bioma sin crecimiento
+
+- **Suite:** `test_m62_audio_bioma.gd`, autoload real, **45 checks / 0 fallos / EXIT 0**.
+- **Ciclos:** entrar, salir, banco en carga (veto), 3 viajes y drenaje final en un lote.
+- **Retención:** **0 bancos sobrevivientes (WeakRef)**; `objetos_vivos()` **4477 → 4477 (delta 0)**;
+  cola vacía en cada cierre.
+- **Memoria 30 min (T72):** 10 bancos, 1 vivo, 178.2 → 178.4 MB, drift +0.1%, EXIT 0.
+- **Evidencia:** `out/tanda84/audio_bioma.log` sha256 `E54AB45D…`.
+- **Alcance:** `SceneTree --script`, no editor Play Mode; bancos sintéticos; M42 sin llamadores.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 84.
+
+## 36. Tanda 85 (2026-10-20, DS-Opencode, Log 2056): L216 — 500 bloques sin leaks
+
+- **Verde:** 9 checks / 0 fallos / EXIT 0; 500/500 excavadas y 500/500 regeneradas; 5 buffers / 0 vivos;
+  memoria 137.3 → 137.3 MB (+0.0%); objetos 7408 → 7413 (+5); 0 huérfanos.
+- **Rojo:** `M62_RETENER_BUFFERS=1` → 5 buffers vivos, `[FALLO]`, EXIT 1.
+- **Evidencia:** `out/tanda85/voxel_500.log`, `out/tanda85/voxel_500_rojo.log`.
+- **Alcance:** VoxelBuffer real, no VoxelTerrain renderizado; headless reporta 0 bloques actualizados.
+  No es el Play Mode del editor.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 85.

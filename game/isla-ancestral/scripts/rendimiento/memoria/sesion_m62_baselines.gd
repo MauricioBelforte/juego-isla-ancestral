@@ -82,6 +82,8 @@ var _muestras := 0
 var _objetos := 0
 var _huerfanos := 0
 var _retardo_aplicar := 0.0
+var _audio_banco_mb := 0.0
+var _audio_banco: AudioStreamWAV = null
 
 
 func _initialize() -> void:
@@ -91,6 +93,9 @@ func _initialize() -> void:
 	var env_as := OS.get_environment("M62_ASENTAR_S")
 	if env_as != "":
 		_asentar_s = float(env_as)
+	var env_audio := OS.get_environment("M62_AUDIO_BANCO_MB")
+	if env_audio != "":
+		_audio_banco_mb = maxf(0.0, float(env_audio))
 	_objetivo_mb = int(OBJETIVOS.get(_escenario, 0))
 	_t0_ms = Time.get_ticks_msec()
 
@@ -322,6 +327,18 @@ func _aplicar_tormenta() -> void:
 
 
 func _medir() -> void:
+	var mem_antes_audio := _leer_memoria()
+	if _audio_banco_mb > 0.0 and _audio_banco == null:
+		_audio_banco = AudioStreamWAV.new()
+		_audio_banco.format = AudioStreamWAV.FORMAT_16_BITS
+		_audio_banco.mix_rate = 44100
+		_audio_banco.stereo = false
+		var datos := PackedByteArray()
+		datos.resize(int(_audio_banco_mb * 1024.0 * 1024.0))
+		_audio_banco.data = datos
+		var mem_despues_audio := _leer_memoria()
+		_evidencia.append("banco de audio sintetico: %.1f MB (mem %.1f -> %.1f MB)"
+			% [_audio_banco_mb, mem_antes_audio, mem_despues_audio])
 	# Se fuerza una muestra ANTES de leer: `memoria_pico_mb()` solo se actualiza en
 	# `muestrear_ahora()` (cada 5 s en calma), asi que sin esto el pico puede quedar
 	# por detras de la lectura final y la comparacion mediria el lag del muestreo.

@@ -1,5 +1,0 @@
-92 | 92. - [x] [58] Planear prueba de aim assist en pesca (M34) con slider en 0 %, 50
-93 | 93. - [x] [58] Planear prueba del preset single_hand sin conflictos con el remap
-94 | 94. - [x] [58] Planear prueba de rendimiento: overhead del perfil en escena pobl
-95 | 95. - [x] [58] Planear prueba de atajo global F10 desde título, pausa y gameplay
-96 | 96. - [x] [58] Planear prueba de sesión larga (≥ 30 min) verificando los autosav
