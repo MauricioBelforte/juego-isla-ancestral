@@ -1,0 +1,4 @@
+M17 equipo/hotbar: hotbar_state.gd [hotbar], equipment_manager.gd [equipment], player.gd [?]
+M30 misiones: quest_chain_service.gd [?]
+M71 progresion: progression_manager.gd [progresion]
+M74 eventos: event_manager.gd [events_m74]

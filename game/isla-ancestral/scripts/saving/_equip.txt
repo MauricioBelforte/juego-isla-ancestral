@@ -1,0 +1,1 @@
+92: - [x] Guardar equipamiento, hotbar y objetos colocados (M17) [M] → **G-5.3-Flash-Agente (2026-10-19):** mismo 

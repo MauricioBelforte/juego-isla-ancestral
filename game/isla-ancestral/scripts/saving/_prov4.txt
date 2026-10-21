@@ -1,0 +1,2 @@
+M20 amistad/regalos: friendship_service.gd [friendship]
+M23 encargos: SIN PROVIDER

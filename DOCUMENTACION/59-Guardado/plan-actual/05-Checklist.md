@@ -129,7 +129,7 @@
 ## O. Guardado de Colecciones (M37/M55/M56)
 
 - [ ] Guardar museo, bestiario y colecciones (M37/M36) [M]
-- [ ] Guardar diario del jugador (M55) [M]
+- [x] Guardar diario del jugador (M55) [M] — **G-5.3-Flash-Agente (2026-10-21):** flip por evidencia: `diary_service.gd` ya es provider del riel M59 (`register_provider` L84-85, `get_section_name()='diary'` L335, `get_save_data/restore_save_data` L339/351) — confirmado por sweep en disco y por `qa_m59_payload_sections.gd` (payload real con ~50 secciones incl. diary; EXIT 0 repeatedly).
 - [ ] Guardar fotos por referencia (ids, no bytes — M56) [M]
 - [ ] Guardar Sellos y ruinas coleccionables [M]
 - [ ] Testear diario 500+ entradas y fotos faltantes (fallback) [C]
@@ -221,7 +221,7 @@
 - [ ] Marcar ítems solo al cumplir la DoD (sección 21.6) [S]
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 ítems · Completados: 73 · Pendientes: 54 · No resueltos: 3. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-21 tras ítem 4 flip: 73/54/3 = 130. El medido manda.)
+**Totales:** 130 ítems · Completados: 74 · Pendientes: 53 · No resueltos: 3. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-21: 74/53/3 = 130 exactos [diario +1; mi Totales anterior 81/46 era un error de aritmética del script, corregido]. El medido manda.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].

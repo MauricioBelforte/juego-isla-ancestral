@@ -318,20 +318,20 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 24. - [ ] [59] Testear carga con muebles inexistentes (fallback) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 25. - [ ] [59] Guardar posición, estado y rutinas de NPC (M64) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 26. - [ ] [59] Guardar diálogos vistos y elecciones tomadas [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-27. - [ ] [59] Guardar amistad (M20) y regalos entregados [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+27. - [x] [59] Guardar amistad (M20) y regalos entregados [M] · [x] friendship [friendship] en disco; regalos de npc_ai con su provider (nota) (T45). <!-- fuente: 59-Guardado/05-Checklist.md -->
 28. - [ ] [59] Guardar encargos activos (M23) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 29. - [ ] [59] Testear carga con NPC en movimiento y regalos duplicados [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
 30. - [ ] [59] Guardar misiones activas con progreso y completadas [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 31. - [ ] [59] Guardar historia principal (capítulo, final elegido) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-32. - [ ] [59] Guardar descubrimientos y hitos de progresión (M71) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+32. - [x] [59] Guardar descubrimientos y hitos de progresión (M71) [M] · [x] progression [progresion] en disco (T45). <!-- fuente: 59-Guardado/05-Checklist.md -->
 33. - [ ] [59] Testear carga con misión a medias (objetivo coherente) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
 34. - [ ] [59] Testear carga tras completar misión y reabrir [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
-35. - [ ] [59] Guardar eventos pasados y futuros programados (M74) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+35. - [x] [59] Guardar eventos pasados y futuros programados (M74) [M] · [x] events_m74 en disco (T45). <!-- fuente: 59-Guardado/05-Checklist.md -->
 36. - [ ] [59] Guardar festivales celebrados y calendario [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 37. - [ ] [59] Testear carga en una fecha distinta a la del guardado [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
 38. - [ ] [59] Testear eventos no duplicados al recargar [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
 39. - [ ] [59] Guardar museo, bestiario y colecciones (M37/M36) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-40. - [ ] [59] Guardar diario del jugador (M55) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+40. - [x] [59] Guardar diario del jugador (M55) [M] · [x] T43-M59 (G-5.3): provider diary_service existente (sección diary) verificado en payload real; flips 59-Guardado/05 (74/53/3). <!-- fuente: 59-Guardado/05-Checklist.md -->
 41. - [ ] [59] Guardar fotos por referencia (ids, no bytes — M56) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 42. - [ ] [59] Guardar Sellos y ruinas coleccionables [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 43. - [ ] [59] Testear diario 500+ entradas y fotos faltantes (fallback) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
