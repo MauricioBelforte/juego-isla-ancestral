@@ -1,0 +1,17 @@
+desglose disco: 178/10/15 total 203
+--- ítems [?] ---
+36: - [?] Definir recetas regionales: materiales regionales M15 habilitan variantes [M] - **QA s2 2026-1
+48: - [?] Evitar cientos de recetas redundantes: validación automática de duplicados funcional [M] - **Q
+49: - [?] Balancear materiales: costes proporcionales a rareza M15 y nivel [C] - **QA s2 2026-10-12 (Log
+54: - [?] Campos: id, nombre, descripcion, categoria, nivel [S] - **QA s2 2026-10-12 (Log 1789): concept
+168: - [?] Doble llamado a craft en el mismo frame: cola interna o rechazo silencioso [M] — **G-5.3-Flash
+234: - [?] RF9: preview 3D real con modelo del resultado (M45 sin implementar) [C]
+235: - [?] RF12: SFX master bus + librería SFX (M91 sin núcleo) [M]
+236: - [?] RF12: VFX avanzados (M52 sin núcleo) [C]
+238: - [?] RF3: recetas secretas/ancestrales con feedback dorado adicional (parcial: partículas en descub
+265: - [?] RF9: preview 3D real con modelo del resultado (M45 sin implementar) [C]
+266: - [?] RF12: SFX master bus + librería SFX (M91 sin núcleo) [M]
+267: - [?] RF12: VFX avanzados (M52 sin núcleo) [C]
+268: - [?] RF14: más pergaminos en tiendas (M38, solo `pergamino_rec_tela_lino` implementado) [M]
+269: - [?] M14 `use_item` → emisión desde UI de compra/tienda para consumir pergamino automáticamente (M5
+352: - [?] RF-MR19: sonda en ROJO del umbral (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S] — 

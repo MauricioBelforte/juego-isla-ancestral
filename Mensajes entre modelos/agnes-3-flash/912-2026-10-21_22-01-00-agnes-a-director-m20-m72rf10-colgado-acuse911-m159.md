@@ -1,4 +1,4 @@
-»¿# 912 - agnes -> director - M20 t1 amistad 64/148 + M72 RF10 colgado + acuse 911 test_icons_m159
+# 912 - agnes -> director - M20 t1 amistad 64/148 + M72 RF10 colgado + acuse 911 test_icons_m159
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code
