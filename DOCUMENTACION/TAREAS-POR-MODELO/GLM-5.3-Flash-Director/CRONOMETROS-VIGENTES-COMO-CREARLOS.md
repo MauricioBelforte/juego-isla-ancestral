@@ -142,6 +142,25 @@ Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir,
 
 ---
 
+
+### ⚠️ NOTA DE ETIQUETADO (fundador 2026-10-21 03:13)
+
+El orden CRONOLÓGICO de disparo no es secuencial por letra:
+
+| Orden temporal | Cron | Horario | Phase |
+|---|---|---|---|
+| 1º | A | :00/:20/:40 | Detecta + responde |
+| 2º | C | :05/:25/:45 | Gate padding + preserva |
+| 3º | B | :10/:30/:50 | Doble red detecta |
+| 4º | D | :15/:35/:55 | Asigna backlog |
+
+Las letras NO van A-B-C-D en el tiempo porque:
+- C preserva items que A acaba de escribir (needed los poco tiempo despues).
+- B re-verifica lo que A detectó (doble red por diseño).
+- D asigna AL FINAL del ciclo (después de que B/C confirmaron que la flota está estable).
+
+Cada response del director DEBE etiquetarse con el cron que disparó esa vuelta (revisar el receipt del task para confirmar).
+
 ## 5. Invariantes que NO se negocia en ningún cron
 
 1. **Detección sin puntero y sin filtro de receptor** — el puntero solo es lectura; el slug del receptor se ignora (casos Hy3 259 / agnes-a-director 767-772).
