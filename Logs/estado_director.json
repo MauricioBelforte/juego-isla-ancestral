@@ -47,15 +47,21 @@
     "acuse_enviado": 197
   },
   "crons_vigentes": {
-    "A_v3": ":00/:20/:40 (deteccion + responder)",
-    "C_v3": ":05/:25/:45 (gate padding + preservacion)",
-    "B_v3": ":10/:30/:50 (doble red deteccion)",
-    "D_v2": ":15/:35/:55 (asignador al detalle)"
+    "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
+    "C_v4": ":05/:25/:45 gate + preservación + Lee contexto",
+    "B_v4": ":10/:30/:50 doble red + Lee contexto",
+    "D_v3": ":15/:35/:55 asignador + Lee contexto"
   },
   "trampas_registradas": [
     "agente dice 'no tengo nada' -> escanear TODOS los 05 (2545+ [ ] en modulos no-bloqueados) antes de aceptar standby",
     "T-19 falso positivo x3 (165, 293, 173): releer con mtime+bytes + retry antes de aviso",
     "mi sync de fila GLOBAL no aterriza si replace() falla silenciosamente: verificar con grep acuse commit",
     "puede haber dos sesiones GLM-5.3 en paralelo de sesiones hermanas: firma cruzada attribucion"
-  ]
+  ],
+  "minimax_m3_1_flash": {
+    "estado": "activo - M61 t1-t2 entregadas, M73/etc asignadas",
+    "pendientes_real": 766,
+    "acuse_enviado": 4,
+    "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
+  }
 }
