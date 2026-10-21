@@ -7387,3 +7387,7 @@ Retorna `true` incondicionalmente. El caso "casa fuera de toda ubicación conoci
 - [ ] Verificado por:
 
 ---
+
+## Bugs abiertos
+
+| BUG-141 | [x] Resuelto (diagnosticado 2026-10-21, fix pendiente en producto) | Evidence: salida del juego/game lenta ~60 s con mundo voxel cargado: guardado asincrono incluye voxel binario (DataStore._guardar_voxel_binario, scripts/datos/data_store.gd L589) y DataStore._hilo_guardado.wait_to_finish() (L100-104) bloquea el quit; sondas de MiniMax: boot 2.8 s vs boot+escena 101.9 s; quitar VoxelTerrain/vistas = sin efecto; SaveManager bloqueado = sin efecto. Reportado por minimax-m3-1-flash (msg 012, Log 2086). Fix de producto -> dueno M59 data_store (DeepSeek-V4.1-Flash); fix de test -> flag --no-save/SaveManager bloqueado autorizado a MiniMax (quirurgico). **Reportado por:** minimax-m3-1-flash | **Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-21 21:45 |
