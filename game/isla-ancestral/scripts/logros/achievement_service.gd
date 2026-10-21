@@ -106,7 +106,7 @@ func _registrar_proveedor_guardado() -> void:
 ## re-evalúan los logros aún no desbloqueados. NUNCA por frame.
 var _conexiones: Array = []
 var _toast_buffer: Array = []  # RF6: toasts del frame
-var _toast_flush_pendiente: bool = False
+var _toast_flush_pendiente: bool = false
 
 ## BUG-015/018 (2026-09-02): conexiones guardadas para desconectar en _exit_tree
 func _conectar(src: Signal, callable: Callable) -> void:
@@ -279,11 +279,11 @@ func _emitir_toast(logro_id: String, nombre: String) -> void:
 	# (1 -> texto del logro; N>1 -> "N nuevos logros desbloqueados").
 	_toast_buffer.append({"id": logro_id, "nombre": nombre, "oculto": bool(_logros.get(logro_id, {}).get("oculto", false))})
 	if not _toast_flush_pendiente:
-		_toast_flush_pendiente = True
+		_toast_flush_pendiente = true
 		call_deferred("_flush_toasts")
 
 func _flush_toasts() -> void:
-	_toast_flush_pendiente = False
+	_toast_flush_pendiente = false
 	if _toast_buffer.is_empty():
 		return
 	var bus := get_node_or_null("/root/EventBus")
