@@ -1,0 +1,107 @@
+# M63: Cargas y Streaming — StreamManager (autoload "StreamManager")
+#    presente (tests sueltos, orden de autoloads), todo es no-op.
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
+signal progreso_cambiado(porcentaje: float)
+signal operacion_completada(op_id: String, tipo: String)
+signal chunk_listo(chunk_id: String)
+signal banco_listo(banco_id: String)
+signal shader_listo(shader_id: String)
+const PESOS: Dictionary = {
+const PISO_PROGRESO: float = 0.02
+const TOPE_PROGRESO: float = 0.98
+const PRESUPUESTO_MS: float = 40.0
+const MAX_CHUNKS_DEFAULT: int = 4096
+const FRAMES_ENVEJECIDO: int = 2
+var _cola: Array = []
+var _pesos_encolados: float = 0.0
+var _chunks: Dictionary = {}
+var _max_chunks: int = MAX_CHUNKS_DEFAULT
+var _descargas_total: int = 0
+var _cargas_pausadas: bool = false
+var _en_carga: Dictionary = {}
+var _rutas_en_carga: Dictionary = {}
+var _avisos_m62: int = 0
+func _ready() -> void:
+func encolar(op_id: String, tipo: String, prioridad: int, callable: Callable, ruta_recurso: String = "") -> bool:
+var peso := float(PESOS.get(tipo, 1.0))
+var usa_thread := ruta_recurso != "" and ResourceLoader.exists(ruta_recurso)
+var err := ResourceLoader.load_threaded_request(ruta_recurso)
+func _ordenar_cola() -> void:
+func cola_size() -> int:
+func pausar_cargas() -> void:
+func reanudar_cargas() -> void:
+func cargas_pausadas() -> bool:
+func pesos_encolados() -> float:
+## DESACOPLAMIENTO: todo pasa por `_mem()`, que devuelve el autoload o null.
+## El autoload de M62, o null si no está presente.
+func _mem() -> Node:
+func avisar_carga_iniciada(recurso: Resource) -> void:
+var mem := _mem()
+func avisar_carga_terminada(recurso: Resource) -> void:
+var mem := _mem()
+func recursos_en_carga_63() -> int:
+func esta_en_carga_63(recurso: Resource) -> bool:
+func avisos_m62() -> int:
+func esta_cargando_ruta(ruta: String) -> bool:
+func rutas_en_carga() -> int:
+func _abrir_ruta(ruta: String) -> void:
+func _cerrar_ruta(ruta: String) -> void:
+var n := int(_rutas_en_carga.get(ruta, 0)) - 1
+func progreso() -> float:
+var restante := 0.0
+var fraccion := 1.0 - (restante / _pesos_encolados)
+func _process(delta: float) -> void:
+var inicio := Time.get_ticks_usec()
+var op: Dictionary = _cola.pop_front()
+var callable: Callable = op.get("callable", Callable())
+var ruta := String(op.get("ruta", ""))
+var estado := ResourceLoader.load_threaded_get_status(ruta)
+var rec: Resource = ResourceLoader.load_threaded_get(ruta)
+var op_id := String(op.get("op_id", ""))
+var tipo := String(op.get("tipo", ""))
+func registrar_chunk(chunk_id: String, distancia: float, recurso: Resource = null) -> void:
+var es_nuevo := not _chunks.has(chunk_id)
+var mem := _mem()
+func chunk_activo(chunk_id: String) -> bool:
+func chunks_activos() -> int:
+func marcar_envejecidos(r_max: float) -> void:
+var c: Dictionary = _chunks[chunk_id]
+func liberar_envejecidos() -> int:
+var candidatos: Array = []
+var c: Dictionary = _chunks[chunk_id]
+var liberados := 0
+var cid := String(cand.get("id", ""))
+var c: Dictionary = _chunks.get(cid, {})
+var rec = c.get("recurso", null)
+func aplicar_tope() -> int:
+var liberados := 0
+var mas_lejano := ""
+var max_dist: float = -1.0
+var dist: float = float(_chunks[chunk_id].get("distancia", 0.0))
+func set_max_chunks(n: int) -> void:
+func descargas_total() -> int:
+const SHADERS_MUNDO: Array[String] = [
+const BANCO_BIOMA: String = "res://data/audio/ambient_biome_bank.json"
+const ANILLOS_SPAWN: int = 3
+const OPERACIONES_CONTINUAR_MAX: int = 30
+var _precalentado: bool = false
+func precalentar_mundo(opciones: Dictionary = {}) -> int:
+var n := 0
+var anillos := int(opciones.get("anillos", ANILLOS_SPAWN))
+func _encolar_precarga(ruta: String, tipo: String, prioridad: int) -> int:
+func operaciones_restantes() -> int:
+func precalentado() -> bool:
+const CORONAS_OCEANO: int = 3
+const PISOS_SUBTERRANEO: int = 3
+const RADIO_STREAMABLE_BOX: float = 10.0
+const FRACCION_PRECARGA_RUTA: float = 0.6
+func corona_oceano(distancia: float) -> int:
+func piso_subterraneo(profundidad: float) -> int:
+func dentro_streamable_box(pos_jugador: Vector3, centro_isla: Vector3) -> bool:
+func toca_precargar_destino(progreso_ruta: float) -> bool:
+func piso_liberable(piso_actual: int, destino_lod0_listo: bool) -> int:
+func _registrar_proveedor_guardado() -> void:
+var sm := get_node_or_null("/root/SaveManager")
+func get_section_name() -> String:
+func get_save_data() -> Dictionary:
+func restore_save_data(data: Dictionary) -> void:

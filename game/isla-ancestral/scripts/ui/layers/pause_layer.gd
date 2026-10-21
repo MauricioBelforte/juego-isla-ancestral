@@ -145,6 +145,15 @@ func _ejecutar_guardado_manual() -> void:
 		if sm.has_method("is_save_blocked") and sm.is_save_blocked():
 			_toast_guardado(false, "SETTINGS.GUARDAR_BLOQUEADO")
 			return
+		# M59 ítem 3 (G-5.3-Flash-Agente, 2026-10-21): impedir el guardado manual
+		# durante una CARGA DE ESCENA en curso (StreamManager M63, autoload real).
+		# Gate conservador: cualquier carga de recursos en vuelo (incluida la
+		# precarga M63) bloquea el guardado manual — el dueño M63/M40 puede afinar
+		# el umbral (p. ej. solo transición de escena) con el mismo patrón.
+		var stm := get_node_or_null("/root/StreamManager")
+		if stm != null and stm.has_method("rutas_en_carga") and int(stm.rutas_en_carga()) > 0:
+			_toast_guardado(false, "SETTINGS.GUARDAR_BLOQUEADO")
+			return
 		# Ítem 1 (M59/M44): guardado REAL vía SaveManager (cola + providers).
 		if not sm.save_completed.is_connected(_on_guardado_ok):
 			sm.save_completed.connect(_on_guardado_ok)

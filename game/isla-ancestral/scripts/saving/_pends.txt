@@ -1,0 +1,31 @@
+TOTAL 100
+2. - [ ] [59] Mostrar hora/fecha del último guardado por slot [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+3. - [ ] [59] Impedir guardado manual durante carga de escena/diálogo [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+4. - [ ] [59] Deshabilitar botón si no hay cambios (no dirty) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+7. - [ ] [59] Borrar y sobrescribir slot con confirmación [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+9. - [ ] [59] Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+10. - [ ] [59] Probar en Windows/macOS/Linux (rename atómico varía por SO) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+11. - [ ] [59] Guardar islas, POI, exploración y niebla (M54) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+12. - [ ] [59] Guardar estado de ruinas (M25) y templos (M26) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+13. - [ ] [59] Guardar modificaciones del mundo (tala M50, minado M35) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+14. - [ ] [59] Testear carga del mundo sin duplicar objetos [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+17. - [ ] [59] Guardar semillas y cultivos en proceso (M33) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+18. - [ ] [59] Guardar trampas y redes de pesca (M34) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+19. - [ ] [59] Testear carga sin duplicados y límites de cantidad (M60) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+20. - [ ] [59] Guardar casas/edificios, fase de construcción y mejoras [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+21. - [ ] [59] Guardar decoración, muebles y cofres con contenido [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+22. - [ ] [59] Guardar estado de puertas y ventanas [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
+23. - [ ] [59] Testear carga con casas parcialmente construidas [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+24. - [ ] [59] Testear carga con muebles inexistentes (fallback) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+25. - [ ] [59] Guardar posición, estado y rutinas de NPC (M64) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+26. - [ ] [59] Guardar diálogos vistos y elecciones tomadas [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+27. - [ ] [59] Guardar amistad (M20) y regalos entregados [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+28. - [ ] [59] Guardar encargos activos (M23) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+29. - [ ] [59] Testear carga con NPC en movimiento y regalos duplicados [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+30. - [ ] [59] Guardar misiones activas con progreso y completadas [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+31. - [ ] [59] Guardar historia principal (capítulo, final elegido) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+32. - [ ] [59] Guardar descubrimientos y hitos de progresión (M71) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+33. - [ ] [59] Testear carga con misión a medias (objetivo coherente) [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+34. - [ ] [59] Testear carga tras completar misión y reabrir [C] <!-- fuente: 59-Guardado/05-Checklist.md -->
+35. - [ ] [59] Guardar eventos pasados y futuros programados (M74) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+36. - [ ] [59] Guardar festivales celebrados y calendario [M] <!-- fuente: 59-Guardado/05-Checklist.md -->

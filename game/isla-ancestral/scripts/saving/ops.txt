@@ -1,0 +1,74 @@
+static func suma_pesos() -> float:
+static func progreso_hasta(indice: int) -> float:
+static func etapa_nombre(indice: int) -> String:
+static func es_tipo_valido(tipo: StringName) -> bool:
+static func es_estado_cerrado(estado: StringName) -> bool:
+static func prioridad_por_defecto(tipo: StringName) -> int:
+func encolar(tipo: StringName, isla_id: StringName, prioridad: int = -1) -> int:
+func _ordenar() -> void:
+func iniciar() -> int:
+func avanzar_etapa() -> Dictionary:
+func completar_actual() -> Dictionary:
+func fallar(motivo: String = "") -> bool:
+func cancelar(op_id: int) -> bool:
+func cancelar_por_isla(isla_id: StringName) -> int:
+func en_curso_id() -> int:
+func esta_ocupada() -> bool:
+func hay_ops_vivas() -> bool:
+func contar_vivas() -> int:
+func pendientes() -> Array[Dictionary]:
+func vivas() -> Array[Dictionary]:
+func historial() -> Array[Dictionary]:
+func estado(op_id: int) -> StringName:
+func info(op_id: int) -> Dictionary:
+func progreso(op_id: int) -> float:
+func op_en_curso() -> Dictionary:
+func islas_con_ops_vivas() -> Array[StringName]:
+func islas_con_tipo(tipo: StringName) -> Array[StringName]:
+func primera_de_tipo(tipo: StringName) -> int:
+func contar_por_estado() -> Dictionary:
+func limpiar() -> void:
+func validar() -> Array[String]:
+func es_valida() -> bool:
+func informe() -> Dictionary:
+func resumen() -> String:
+func _buscar(op_id: int) -> Dictionary:
+func _copiar(op: Dictionary) -> Dictionary:
+func _cerrar(op: Dictionary) -> void:
+GUARD: func configurar(vista: Dictionary, opciones: Dictionary = {}) -> void:
+GUARD: func max_islas_en_memoria() -> int:
+GUARD: func preset() -> String:
+GUARD: static func vista_desde_registry(reg: Node) -> Dictionary:
+GUARD: func sincronizar_estado_partida(reg: Node) -> int:
+GUARD: static func registro_desde_definicion(id: StringName, d: IslandDefinition) -> Dictionary:
+GUARD: func islas() -> Array[String]:
+GUARD: func registro(id: String) -> Dictionary:
+GUARD: func existe(id: String) -> bool:
+GUARD: func contar() -> int:
+GUARD: static func distancia_xz(a: Vector3, b: Vector3) -> float:
+GUARD: func isla_en(pos: Vector3) -> String:
+GUARD: func mas_cercana(pos: Vector3) -> Dictionary:
+GUARD: func es_tierra_firme(pos: Vector3) -> bool:
+GUARD: func es_agua(pos: Vector3) -> bool:
+GUARD: func es_playa(pos: Vector3) -> bool:
+GUARD: func debe_precargar(pos_jugador: Vector3, isla_actual: String, presupuesto: int = -1) -> Array[String]:
+GUARD: func coste_por_frame() -> Dictionary:
+GUARD: func estado_destino(destino: String) -> Dictionary:
+GUARD: func evaluar_viaje(destino: String, isla_actual: String, ops: IslandOps) -> Dictionary:
+GUARD: func evaluar_naufrago(pos: Vector3, en_barco: bool = false) -> Dictionary:
+GUARD: func respawn_cozy(pos: Vector3) -> Dictionary:
+GUARD: func punto_seguro(destino: String, pos_deseada: Vector3) -> Dictionary:
+GUARD: func cancelar_viaje(destino: String, ops: IslandOps) -> Dictionary:
+GUARD: func evaluar_guardado(ops: IslandOps) -> Dictionary:
+GUARD: func descarga_forzada(memoria_mb: float, ops: IslandOps, isla_actual: String, tope_mb: float = -1.0) -> Dictionary:
+GUARD: func descarga_agresiva_viajeros(isla_actual: String, ops: IslandOps) -> Dictionary:
+GUARD: func snapshot_estado() -> Dictionary:
+GUARD: func islas_cargadas() -> Array[String]:
+GUARD: func validar() -> Array[String]:
+GUARD: func es_valida() -> bool:
+GUARD: func informe() -> Dictionary:
+GUARD: func resumen() -> String:
+GUARD: func _ref(id: String) -> Dictionary:
+GUARD: func _sid(id: String) -> StringName:
+GUARD: func _es_punto_firme(destino: String, pos: Vector3, interior: float) -> bool:
+GUARD: func _ids_de(ops: IslandOps, tipo: StringName) -> Array[String]:

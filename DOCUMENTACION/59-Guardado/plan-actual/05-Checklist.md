@@ -34,7 +34,7 @@
 
 - [x] Botón "Guardar" en pausa con confirmación y feedback (M44) [S] → **G-5.3-Flash-Agente (2026-10-19):** `pause_layer.gd` — flujo completo: botón (L74) → ConfirmPopup con SETTINGS.GUARDAR_TITULO/GUARDAR_CONFIRMA (claves ya existentes; duck typing igual que borrar, fallback directo sin popup) → bloqueos (ítem 3) → `SaveManager.request_save(1, "guardado_manual_pausa")` REAL → feedback por EventBus.ui.notify (toast guardado_manual EXITO/FALLO). Canal de audio M44 pendiente del dueño (FeedbackDirector.sensacion es data-driven; receta "guardar" no definida aún). Evidencia: QA `scripts/saving/qa_m59_guardar_confirmacion.gd` **4/0, EXIT 0** (SaveManager + EventBus reales) — fallback sin popup, popup con textos localizados, aceptar guarda y notifica. Regresión test_m89 48/0 EXIT 0.
 - [ ] Mostrar hora/fecha del último guardado por slot [M]
-- [ ] Impedir guardado manual durante carga de escena/diálogo [M]
+- [x] Impedir guardado manual durante carga de escena/diálogo [M] — **G-5.3-Flash-Agente (2026-10-21):** doble evidencia. (1) DIÁLOGO ya ENFORZADO: `save_manager.gd` L104-105 conecta `bus.ui.dialog_requested/finished` → `set_save_blocked(true/false)` y `request_save` L183-186 OMITE el guardado bloqueado (emite `auto_save_skipped`). (2) CARGA DE ESCENA: gate NUEVO en `pause_layer._ejecutar_guardado_manual()` contra `StreamManager` (M63, autoload real): `rutas_en_carga() > 0` → toast GUARDAR_BLOQUEADO sin encolar (política conservadora documentada in situ; el dueño M63/M40 puede afinar el umbral con el mismo patrón). Queda también el guard K7 de M27 (`evaluar_guardado(ops)` → carga_en_curso) disponible para cuando la del (ops) viva en producción. Evidencia: QA `scripts/saving/qa_m59_bloqueo_manual.gd` **5/0, EXIT 0** — «diálogo activo: bloqueado (toast o skip)», «idle: completa con toast de éxito» (sin falso positivo), «StreamManager drena después»; regresiones M89 48/0 y qa_m59_guardar_confirmacion OK tras el gate.
 - [ ] Deshabilitar botón si no hay cambios (no dirty) [M]
 - [ ] Guardar manualmente desde el menú principal [S]
 
@@ -221,7 +221,7 @@
 - [ ] Marcar ítems solo al cumplir la DoD (sección 21.6) [S]
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 ítems · Completados: 71 · Pendientes: 56 · No resueltos: 3. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tras 'Id de perfil'→[?]: 71/56/3 = 130 exactos. NOTA: en mi tanda 17 escribí aquí «184 ítems» por copia del patrón de M58 — error propio corregido ahora; el módulo SIEMPRE fue 130 exactos.)
+**Totales:** 130 ítems · Completados: 72 · Pendientes: 55 · No resueltos: 3. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-21: 'Impedir guardado manual' flip → 72/55/3 = 130 exactos. El medido manda.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].
