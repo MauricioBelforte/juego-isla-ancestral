@@ -105,6 +105,8 @@ func _registrar_proveedor_guardado() -> void:
 ## Evaluación event-driven (§7 estilo M71): señales de progreso y EventBus
 ## re-evalúan los logros aún no desbloqueados. NUNCA por frame.
 var _conexiones: Array = []
+var _toast_buffer: Array = []  # RF6: toasts del frame
+var _toast_flush_pendiente: bool = False
 
 ## BUG-015/018 (2026-09-02): conexiones guardadas para desconectar en _exit_tree
 func _conectar(src: Signal, callable: Callable) -> void:
@@ -270,26 +272,41 @@ func _fecha_actual() -> Dictionary:
 
 
 func _emitir_toast(logro_id: String, nombre: String) -> void:
-	# RN7: respetar configuración de accesibilidad (M58)
+	# RN7: respetar configuracion de accesibilidad (M58)
 	if _toasts_disabled:
 		return
-	var bus := get_node_or_null("/root/EventBus")
-	# La señal notify vive en el dominio interno UIEvents (bus.ui), no en la raíz
-	if bus == null or bus.ui == null or not bus.ui.has_signal("notify"):
-		return
-	var oculto := bool(_logros.get(logro_id, {}).get("oculto", false))
-	var texto := "Logro desbloqueado"
-	if not oculto:
-		texto = String(_logros[logro_id].get("descripcion", "Logro desbloqueado"))
-	bus.ui.notify.emit({
-		"tipo": "logro",
-		"id": logro_id,
-		"titulo": nombre,
-		"texto": texto,
-	})
-	# RF7: emitir señal pública para que UI de M53/M71 pueda abrir el panel
-	panel_solicitado.emit("logros")
+	# RF6: bufferiza los toasts del frame; _flush_toasts() emite UN solo toast
+	# (1 -> texto del logro; N>1 -> "N nuevos logros desbloqueados").
+	_toast_buffer.append({"id": logro_id, "nombre": nombre, "oculto": bool(_logros.get(logro_id, {}).get("oculto", false))})
+	if not _toast_flush_pendiente:
+		_toast_flush_pendiente = True
+		call_deferred("_flush_toasts")
 
+func _flush_toasts() -> void:
+	_toast_flush_pendiente = False
+	if _toast_buffer.is_empty():
+		return
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null or bus.ui == null or not bus.ui.has_signal("notify"):
+		_toast_buffer.clear()
+		return
+	var n := _toast_buffer.size()
+	var titulo := "Logro desbloqueado"
+	var texto := ""
+	var id_primary := String((_toast_buffer[0].get("id", "")))
+	if n == 1:
+		var e: Dictionary = _toast_buffer[0]
+		if bool(e.get("oculto", false)):
+			texto = "Logro desbloqueado"
+		else:
+			texto = String(_logros.get(id_primary, {}).get("descripcion", "Logro desbloqueado"))
+	else:
+		titulo = "Logros"
+		texto = "%d nuevos logros desbloqueados" % n
+	bus.ui.notify.emit({"tipo": "logro", "id": id_primary, "titulo": titulo, "texto": texto, "count": n})
+	# RF7: emitir senal publica para que la UI (M53/M71) pueda abrir el panel
+	panel_solicitado.emit("logros")
+	_toast_buffer.clear()
 
 func esta_desbloqueado(logro_id: String) -> bool:
 	return logro_id in _desbloqueados
