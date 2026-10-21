@@ -76,7 +76,7 @@ func _crear_ui() -> void:
 	# M59 ítem 4: botón Guardar deshabilitado si no hay cambios (is_dirty). El
 	# refresh corre al abrir la pausa (on_layer_opened) y tras guardar.
 	_boton_guardar.disabled = true
-	_conectar_dirty_guardar()
+	_conectar_guardar_dirty()
 	_boton_borrar.add_theme_color_override("font_color", Color(0.85, 0.45, 0.35))  # rojo suave: acción destructiva
 	_agregar_boton(vbox, "SETTINGS.SALIR", func(): salir_pedido.emit())
 

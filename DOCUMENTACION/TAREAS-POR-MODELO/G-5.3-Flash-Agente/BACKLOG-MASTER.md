@@ -295,7 +295,7 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 1. - [x] [59] Botón "Guardar" en pausa con confirmación y feedback (M44) [S] · [x] T16-M59 2026-10-19 (G-5.3-Flash-Agente): popup confirmación + request_save real + toast por EventBus — qa_m59_guardar_confirmacion.gd 4/0 EXIT 0 (SaveManager/EventBus reales); regresión M89 48/0. Drift inverso: esta cola vieja de M59 quedó des-sincronizada del módulo (ítem 7 ya estaba hecho) — items 1-40 a revisar contra 59-Guardado/05. <!-- fuente: 59-Guardado/05-Checklist.md -->
 2. - [ ] [59] Mostrar hora/fecha del último guardado por slot [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 3. - [x] [59] Impedir guardado manual durante carga de escena/diálogo [M] · [x] T41-M59 (G-5.3): diálogo enfocado + gate StreamManager en pause_layer; qa_m59_bloqueo_manual.gd 5/0 EXIT 0 + regresiones M89/guardar confirmación verdes; flips 59-Guardado/05 (72/55/3). <!-- fuente: 59-Guardado/05-Checklist.md -->
-4. - [ ] [59] Deshabilitar botón si no hay cambios (no dirty) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
+4. - [x] [59] Deshabilitar botón si no hay cambios (no dirty) [M] · [x] T42-M59 (G-5.3): refresh is_dirty en pause_layer + QA 3/0 (fix mismatch call). <!-- fuente: 59-Guardado/05-Checklist.md -->
 5. [x] - [ ] [59] Guardar manualmente desde el menú principal [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
 6. [x] - [ ] [59] Definir 3+ slots con UI de selección en el menú principal [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 7. - [ ] [59] Borrar y sobrescribir slot con confirmación [S] <!-- fuente: 59-Guardado/05-Checklist.md -->
