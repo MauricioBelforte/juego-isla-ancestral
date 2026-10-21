@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T23:25:30",
+ "ultimo_update": "2026-10-21T23:29:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -151,8 +151,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T10 sellada 023: dirty-flags M72 verificado en disco (barrido O(n) L207-220 invocado por 9 eventos + _compuesta_cache muerta L50) derivado a agnes; 4 ciclos de re-verificador = 4 hallazgos reales; doble tanda programada",
-  "acuse_enviado": 23
+  "estado": "T11 sellada 025: ROI herramientas verificado (0.12->0.28->0.38) + dualidad A documentar (recom. director) / B sub-lineal (decision dueno M16 G-5.3) presentada al fundador; 5 ciclos re-verificador al dia",
+  "acuse_enviado": 25
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -177,5 +177,8 @@
  },
  "deriva_documental_m90": {
   "estado": "L82-84 distancias de dibujo obsoletas (50/100/200/400 vs 300/600/1200/2500 reales) - fix de texto pendiente dueno M90 (Step-5) - hallazgo QA MiniMax 018"
+ },
+ "decision_pendiente_roi_herramientas": {
+  "estado": "M16 herramientas: A documentar ROI decreciente como premium (recom. director) / B ajustar coste sub-lineal (cozy estricto) - dueno M16 G-5.3 + fundador deciden; propuesta Beam T11"
  }
 }
