@@ -436,7 +436,7 @@ El archivo de datos quedo **byte-identico** al original tras la prueba (verifica
 > archivo). Re-saneado y fila 61 reescrita completa; la leccion operativa (el `replace()` con patron
 > literal falla en silencio sobre un archivo ya corrupto) queda en el Log 2068.
 
-### 7. Tanda 2 (Log 2071) — carga (RF9) + chunks (RF10) + destruccion (RF11)
+### 7. Tanda 2 (Log 2073) — carga (RF9) + chunks (RF10) + destruccion (RF11)
 
 Mismo patron, con el grounding tomado de las **constantes reales del dueno M63**
 (`scripts/stream/stream_manager.gd`), no de estimaciones:
@@ -468,6 +468,70 @@ La suite `tests/test_m61_normas_performance.gd` paso de **39 a 58 checks** (prel
 === VALIDATE BUDGET M61: 0 fallo(s) ===   EXIT=0
 === Resumen M61 normas de rendimiento: 58 checks, 0 fallos ===   EXIT=0
 ```
+
+### 8. Tanda 3 (Log 2073) — 13 bloques de tecnicas (RF12..RF26) + probe de allocations
+
+Baja de M61 de **76/148 a 118/148** con 42 flips. Patron identico: cada umbral vive en
+`data/performance/budgets.json`, el gate lo congela (tabla canonica) y la suite lo contrasta contra
+el **runtime real del dueno**.
+
+| Bloque | Umbrales | Grounding real (verificado en disco) |
+|---|---|---|
+| `npcs` | burbujas [30,60,100] m · ticks [0.5,1.0,5.0] s · max IA completa 60 · pooling de instancias | M64 `npc_manager.gd`: `BUBBLE_FULL/MEDIUM/LIGHT`, `TICK_*_INTERVAL`, `MAX_AGMPS_FULL`; pool por familias de M62 |
+| `particulas` | 32 emisores · 1200 particulas · precalentamiento 8 · 1 emisor por evento · GPU para larga vida | M52 `vfx_pool.gd`: `MAX_EMISORES_DEF`, `MAX_PARTICULAS_DEF`; `VfxDirector._por_evento`; `vfx_factory` construye `GPUParticles3D` |
+| `sombras` | 6 luces con sombra · 20 dinamicas · cascadas [1,2,4,4] · res [512..4096] · estaticas sin sombra dinamica · costo <= 0.5 del render | M49 `light_pool.gd`: `MAX_CONT_SOMBRA`, `MAX_DINAMICAS`; M90 `SOMBRAS.cascadas` / `.res` |
+| `iluminacion` | GI suave sin bounce · "1 directional + sky" · 20 luces realtime · volumetrico {0,0,0.1,0.2} · lightmap en interiores | M49 `MAX_DINAMICAS`; M90 `VOLUMETRICO.densidad`; `day_night_cycle.gd` (sol+luna) |
+| `agua` | plano unico 4096 m · normales en shader · reflejos solo superficie (2 probes) · transparencia ordenada · 2000 verts/chunk · 3 fases de onda | M51 `validate_water.gd`: `VERTS_PER_CHUNK_MAX`, `REFLECTION_PROBES_MAX`, `WAVE_PHASES`; `main_island._crear_oceano` (un `PlaneMesh` 4096) |
+| `vegetacion` | GPU instancing obligatorio · viento en vertex shader · culling por viento · multiplicador {0.2,0.45,0.8,1.0} · 30 inst/bioma · 124 inst/chunk | M90 `VEGETACION`; `data/vegetacion/vegetacion_config.json` (densidades 12/25/22/10/15/10/30 = 124) |
+| `culling` | frustum del engine · por chunks · por distancia · de particulas | M90 `CULLING`; M63 (LRU de chunks); M52 (reciclado por presupuesto de particulas) |
+| `occlusion` | por celdas de chunks · solo cuevas/templos · sin occlusion global en terreno abierto · GPU queries acotadas | politica de RF20 (M24/M25/M07) |
+| `lod` | impostor lejano 2700 m (paso 64) · LOD de objeto 160 m / 4 niveles · escalonado | `terreno_horizonte.gd`: `RADIO_CUBIERTO`, `PASO`; M90 `LOD` |
+| `batching` | estaticos por bioma · <= 32 materiales por batch · UI por atlas | derivacion desde 400 draw calls/escena; M46 (5 atlas 2048) |
+| `instancing` | peces · vegetacion · rocas/fragmentos · particulas de larga vida | requisito de RF23 (duenos M34/M50/M08) |
+| `pooling` | particulas · fauna y peces · efectos de herramienta · buffers de remesh | M52 (VfxPool) · M62 (GlobalPool) · `destruccion.pooling_buffers_mesh` |
+| `allocations` | reuso de arrays/variants · GC en pausas seguras | fix RF25 de atria (`_has_ore`); M63 (`_cargas_pausadas`, iter. 2 Log 603) |
+
+**Gate:** `_validar_tecnicas()` + la tabla `TECNICAS_CANONICAS` (congela los 64 umbrales: cambiar
+uno en el JSON pone el gate en ROJO y obliga a actualizar la tabla a proposito).
+
+**Suite:** `tests/test_m61_normas_performance.gd` paso de **58 a 88 checks** (preloadea
+`vfx_pool.gd` (M52), `light_pool.gd` (M49), `npc_manager.gd` (M64), `validate_water.gd` (M51),
+`terreno_horizonte.gd` (M09/M167) y lee `vegetacion_config.json` (M50)).
+
+**Probe nuevo:** `tests/test_m61_allocations_hotloop.gd` (**8 checks, 0 fallos, EXIT=0**) para el item
+X390. Godot 4 no expone contador de allocations, asi que valida lo determinista: el cuerpo de
+`_has_ore`/`get_block_at` no construye objetos (`.new(` = 0), el ruido se preconstruye una sola vez,
+el detector **ve** una regresion sintetica (anti-falso-verde) y el lazo real hace trabajo de verdad.
+
+**Evidencia (Godot 4.7.2 headless, 2026-10-21 06:20-06:40):**
+```
+[M61] npcs: 5 umbral(es) tecnicos validados      [M61] iluminacion: 5 ...
+[M61] particulas: 6 ...                          [M61] agua: 8 ...
+[M61] sombras: 7 ...                              [M61] vegetacion: 6 ...
+[M61] culling: 4 ...                              [M61] occlusion: 4 ...
+[M61] lod: 6 ...                                  [M61] batching: 3 ...
+[M61] instancing: 4 ...                           [M61] pooling: 4 ...
+[M61] allocations: 2 ...
+=== VALIDATE BUDGET M61: 0 fallo(s) ===   EXIT=0
+=== Resumen M61 normas de rendimiento: 88 checks, 0 fallos ===   EXIT=0
+=== Resumen M61 allocations en lazo caliente: 8 checks, 0 fallos ===   EXIT=0
+```
+
+**HALLAZGOS honestos de esta tanda:**
+1. El material actual del oceano es un `StandardMaterial3D` plano (albedo 0.08/0.35/0.62,
+   roughness 0.5, sin shader): `agua.normales_animadas_en_shader` es NORMA pendiente de
+   implementacion en M47/M51, no un hecho del runtime.
+2. M50 no tiene codigo de instancing ni de viento en vertex shader (solo plan/spawner/manager):
+   los tres items de vegetation son requisitos que define M61, no hechos.
+3. `M90.VOLUMETRICO` usa las claves "medio"/"alto" mientras el resto de M90 usa "media"/"alta":
+   inconsistencia interna de M90 (no de M61); la suite compara contra las claves reales de M90.
+4. El comentario de `M64.MAX_AGMPS_FULL` dice "presupuesto M61", pero su valor (60) NO es el tope de
+   M61 (20 = NPCs activos visibles): son dos metricas distintas (IA vs render). La norma lo deja
+   explicito y la suite verifica la invariante `60 >= 20`.
+5. El control temporal del probe de allocations **no era valido** (comparar el lazo real del
+   generador contra un lazo que solo asigna un ruido: trabajo distinto por iteracion). Se
+   rediseño el probe como guarda estructural con anti-falso-verde sintetico; el tiempo se
+   imprime como dato, no como aserto.
 
 ## Notas del Agente
 
@@ -544,4 +608,43 @@ La suite `tests/test_m61_normas_performance.gd` paso de **39 a 58 checks** (prel
   **implementacion del dueno** y no deben flipearse desde M61 sin codigo real en su modulo.
 - El item X259 ("Validar cero allocations en lazo caliente") **si** es medible en headless con un
   probe de `Performance.get_monitor(Performance.OBJECT_COUNT)` antes/despues del lazo caliente.
+
+## Notas del Agente (tanda 3)
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 06:40
+**Estado:** Tandas 1-3 cerradas — **118/148** (42 de los 89 pendientes originales cerrados en esta tanda)
+
+### Lo que hice
+- 13 bloques de norma nuevos (64 umbrales) para las secciones L..Y (RF12..RF26), con el grounding
+  tomado de las constantes reales de M52/M49/M64/M51/M50/M90/M63/M62/M09.
+- Gate: `_validar_tecnicas()` + tabla `TECNICAS_CANONICAS` (congela los 64 umbrales).
+- Suite: 58 -> 88 checks (preloadea los duenos y compara en runtime).
+- Probe nuevo `tests/test_m61_allocations_hotloop.gd` (8 checks) para X390, con anti-falso-verde.
+- 42 flips [x] con cita (dato + gate + suite) + Totales + `## Reserva actual` + notas.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Los **8 `[ ]` restantes son implementacion de otros modulos** (M07 meshes combinados por chunk,
+  M50 instancing de vegetacion, M08 rocas/fragmentos, M52/M35/M34 pooling e instancing): la norma
+  ya esta definida y verificada; el codigo es de cada dueno (§15). No los flipeo desde M61.
+- 3 items de vegetation (instancing, viento en vertex shader, culling por viento) y 1 de agua
+  (normales animadas en shader) son **REQUISITOS sin implementacion actual**: asi estan anotados
+  en la cita de cada flip, no como hechos.
+- `agua.transparencia_ordenada` y `sombras.estaticas_sin_sombra_dinamica` son politicas de norma
+  sin codigo que las ejecute todavia.
+- Los 22 `[?]` (16 mios + 6 previos) siguen como deudas: 16 no son medibles en headless (renderer
+  + GPU real) y 6 son de otros duenos (bench JSON inexistente, capturas, CI de M118, profiler).
+
+### Recomendaciones para el siguiente agente
+1. **Cerrar los 8 `[ ]` con el codigo de los duenos**, no desde M61: M50 (instancing + viento en
+   vertex shader, que es lo que haria verdad `vegetacion.gpu_instancing_obligatorio`), M47/M51
+   (shader de agua con normales animadas), M07 (meshes combinados por chunk), M08 (rocas/fragmentos
+   instanciados), M52/M35/M34 (pooling e instancing de fauna y peces).
+2. Si un dueno cambia una constante que la norma congela (M90 `SOMBRAS`, M49 `MAX_CONT_SOMBRA`,
+   M52 `MAX_EMISORES_DEF`, M64 `BUBBLE_*`, M51 `VERTS_PER_CHUNK_MAX`...), la suite de M61 se pondra
+   **ROJA** y habra que actualizar la norma a proposito (no al reves).
+3. Quedan 27 `[?]` en el proyecto que son de otros modulos; los de M61 que dependen de GPU real
+   (60 FPS, overdraw real, pop, VRAM) solo se cierran con un agente con ventana (V2) o con un bench
+   scene con renderer.
 

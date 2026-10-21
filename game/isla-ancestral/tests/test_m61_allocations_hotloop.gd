@@ -115,7 +115,12 @@ func _correr() -> void:
 	var suma := 0
 	var t0 := Time.get_ticks_usec()
 	for i in ITERACIONES:
-		suma += gen.get_block_at((i * 7) % 512 - 256, 4, (i * 13) % 512 - 256)
+		var x := (i * 7) % 512 - 256
+		var z := (i * 13) % 512 - 256
+		# y = -1 es roca madre (id 4) segun el analisis de M62; se barre un pequeño
+		# rango de alturas para que el lazo toque aire, suelo y subsuelo.
+		for y in [-1, 0, 1, 2, 3, 4]:
+			suma += gen.get_block_at(x, y, z)
 	var t_real := Time.get_ticks_usec() - t0
 	print("   lazo real: %d us / %d iteraciones (%.2f us/llamada) — DATO, no aserto"
 		% [t_real, ITERACIONES, float(t_real) / float(ITERACIONES)])

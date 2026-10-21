@@ -229,6 +229,11 @@ func re_evaluar_todo() -> int:
 func desbloquear(logro_id: String) -> bool:
 	if not _logros.has(logro_id) or logro_id in _desbloqueados:
 		return false
+	# RF2: gate de dependencias (depende_de): solo si todas las deps ya estan desbloqueadas
+	var deps: Array = _logros[logro_id].get("depende_de", [])
+	for dep in deps:
+		if String(dep) not in _desbloqueados:
+			return false  # falta una dependencia
 	_desbloqueados.append(logro_id)
 	_fechas[logro_id] = _fecha_actual()
 	var nombre := String(_logros[logro_id].get("nombre", logro_id))

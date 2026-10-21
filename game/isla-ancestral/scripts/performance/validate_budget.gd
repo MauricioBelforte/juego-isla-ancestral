@@ -72,7 +72,7 @@ func _cargar_y_validar_tabla() -> void:
 	_validar_memoria(data)
 	_validar_objetivo_por_preset(data)
 	_validar_paquete_datos()
-	# iter. minimax-m3-1-flash (Log 2071): carga (RF9) + chunks (RF10) + destruccion (RF11)
+	# iter. minimax-m3-1-flash (Log 2073): carga (RF9) + chunks (RF10) + destruccion (RF11)
 	_validar_carga(data)
 	_validar_chunks(data)
 	_validar_destruccion(data)
@@ -387,7 +387,7 @@ func _validar_paquete_datos() -> void:
 	])
 
 
-## iter. minimax-m3-1-flash (Log 2071): dimension CARGA (RF9). Tolera su ausencia.
+## iter. minimax-m3-1-flash (Log 2073): dimension CARGA (RF9). Tolera su ausencia.
 func _validar_carga(data: Dictionary) -> void:
 	if not data.has("carga"):
 		return
@@ -424,7 +424,7 @@ func _validar_carga(data: Dictionary) -> void:
 	])
 
 
-## iter. minimax-m3-1-flash (Log 2071): dimension CHUNKS (RF10). Tolera su ausencia.
+## iter. minimax-m3-1-flash (Log 2073): dimension CHUNKS (RF10). Tolera su ausencia.
 func _validar_chunks(data: Dictionary) -> void:
 	if not data.has("chunks"):
 		return
@@ -451,7 +451,7 @@ func _validar_chunks(data: Dictionary) -> void:
 	])
 
 
-## iter. minimax-m3-1-flash (Log 2071): dimension DESTRUCCION (RF11). Tolera su ausencia.
+## iter. minimax-m3-1-flash (Log 2073): dimension DESTRUCCION (RF11). Tolera su ausencia.
 func _validar_destruccion(data: Dictionary) -> void:
 	if not data.has("destruccion"):
 		return

@@ -118,3 +118,17 @@ Diseñar el sistema de logros de la isla Aurora: un **catálogo data-driven** de
 |--------|----------|
 | **M071** — Progresión | Depende de este módulo |
 
+## Criterios de Aceptacion Verificables (10)
+
+(agnes-3-flash, M72 #889, 2026-10-24) -- 10 criterios medibles para cerrar M72:
+
+1. **Id + i18n unicos:** cada logro tiene `id` unico y claves `nombre_i18n`/`descripcion_i18n` resueltas (sin clave vacia).
+2. **Condicion indexable:** cada `condicion.tipo` existe en el indice de eventos (tipo_evento) -- ningun logro con tipo inexistente.
+3. **Desbloqueo idempotente:** re-disparar el evento ya cumplido NO re-notifica ni re-cuenta (un logro se desbloquea 1 vez).
+4. **Persistencia M59:** el estado desbloqueado sobrevive save/load con `schema_version` (carga segura de version vieja).
+5. **Toast agrupa (RF6):** N desbloqueos en el mismo frame -> un unico toast "N nuevos logros", no N toasts.
+6. **Trazabilidad (RF13):** cada desbloqueo se loguea (M103) y emite evento de analytics (M104) con el id del logro.
+7. **Catalogo acotado:** el catalogo carga en < 50 ms y ningun logro exige numeros abusivos (umbrales sanos, cozy).
+8. **Dependencias (RF2):** un logro con `depende_de` solo se desbloquea cuando su dependencia ya esta desbloqueada.
+9. **Agrupacion por categoria (UI M53/M58):** los logros se agrupan por `categoria` para la vista (no un lista plana gigante).
+10. **Determinismo testable:** todos los criterios 1-9 se verifican headless (sin render), con un test que cubre cada criterio.
