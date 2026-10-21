@@ -11,7 +11,7 @@
 
 ---
 
-## 1. Los dos cronómetros del director (reparto de minutos)
+## 1. Los cuatro cronómetros del director (reparto de minutos cada 5 min)
 
 | Cron | Expresión cron | Dispara a las | Función |
 |---|---|---|---|
@@ -99,9 +99,10 @@ TAREA 1 — COMMITS DE PRESERVACIÓN (NUNCA push; push solo fundador):
 Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir, UTF-8 Python sin BOM LF (NUNCA PowerShell), firma GLM-5.3 Flash-Director, español, pathspec explícito, independencia §21.8.
 ```
 
-## 3bisbis. CRON D v2 — VIGENTE (asignador al detalle por capacidad)
+## 3bisbis. CRON D v3 — VIGENTE (asignador al detalle + contexto persistente)
 
-- Schedule `15,35,55 * * * *` (:15/:35/:55). id vigente: `wku_1575031d0001gKzQE637LDS2WQ`.
+- **PASO 0 (SIEMPRE primero)**: LEE `Logs/estado_director.json` — qué agente dijo qué, qué frentes agotados, qué trampas registradas, qué dijo el fundador. Sin esto está ciego.
+- Schedule `15,35,55 * * * *` (:15/:35/:55). id vigente: `wku_15d5883b5001RKmh5bAfpNPvdw`.
 - PROMPT EXACTO para cron_create:
 
 ```
@@ -126,7 +127,7 @@ Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir,
 | A v3 | `wku_152079e32001aIFieBPmxEo5Cx` |
 | B v3 | `wku_15205e605001qmvl2IMi30Iwoi` |
 | C v3 | `wku_15758095e001JRCRSJoQc4m5xZ` |
-| D v2 | `wku_1575031d0001gKzQE637LDS2WQ` |
+| D v2 | `wku_15d5883b5001RKmh5bAfpNPvdw` |
 
 ## 4. Cómo crearlos (receta de relleno)
 
