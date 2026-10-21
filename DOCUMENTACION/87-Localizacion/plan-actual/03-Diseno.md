@@ -132,6 +132,46 @@ SETTINGS.IDIOMA_DESC          -> "Idioma de los textos del juego"
 - Un término se declara una sola vez y se reutiliza (glosario); si el mismo texto necesita traducciones distintas según contexto, se desambigua con el campo `#... context` de gettext o con una sección distinta.
 - Prohibido repetir el texto visible en código: siempre por clave.
 
+#### 2.4.1 Inventario de prefijos vigentes (auditado TANDA 16, 2026-10-21 — msg 189)
+
+**Catálogos JSON** (`data/localizacion/strings_{es,en,pt}.json` — 170 claves, 14 prefijos):
+
+| Prefijo | Claves | Dominio | Case |
+|---|---|---|---|
+| SETTINGS | 74 | Configuración + UI de ajustes/crafting/tiendas (M53/M59/M91) | UPPER_SNAKE |
+| DIARY | 23 | Diario del jugador (M12) | UPPER_SNAKE |
+| TIENDAS | 20 | Tiendas (M16) — prefijo en español | UPPER_SNAKE |
+| eventos | 14 | Eventos narrativos — legado runtime M60 | minúscula snake_case |
+| EQUIP | 13 | Equipamiento | UPPER_SNAKE |
+| TUTORIAL | 7 | Tutorial | UPPER_SNAKE |
+| ui | 6 | Etiquetas de UI base — legado M60 | minúscula snake_case |
+| msg | 3 | Mensajes de sistema — legado M60 | minúscula snake_case |
+| LOADING | 3 | Pantallas de carga | UPPER_SNAKE |
+| M69 | 2 | Prefijo por ID de módulo (excepción) | UPPER_SNAKE |
+| npc | 2 | Diálogos NPC base — legado M60 | minúscula snake_case |
+| HUD | 1 | HUD | UPPER_SNAKE |
+| ITEMS | 1 | Ítems | UPPER_SNAKE |
+| MAIN_MENU | 1 | Menú principal | UPPER_SNAKE |
+
+**Catálogos .po** (`locales/*.po`): el validador reporta 260 claves (145 comunes + 115 solo-.po: narrativa DIARY extendida, CLOCK.*, etc.). Sobre msgid de línea simple (165) los prefijos son: SETTINGS 75, DIARY 37, TIENDAS 20, EQUIP 13, TUTORIAL 7, ITEMS 3, LOADING 3, MAIN_MENU 2, HUD 2, DIALOGOS 1, npc 1, UI 1.
+
+**Tres convenciones conviven** (hallazgo de la auditoría):
+1. **Canónica (§2.4):** `MODULO.SECCION_CLAVE` UPPER_SNAKE — UI de jugador.
+2. **Legado M60 (minúscula snake_case):** `ui.*`, `msg.*`, `npc.*`, `eventos.*` — mensajes de runtime del sistema; se conservan por compatibilidad, **no crear claves nuevas en minúscula**.
+3. **Prefijo numérico:** `M69.*` — excepción por módulo; preferir el nombre semántico.
+
+**Idioma del prefijo:** la flota mezcla ES (TIENDAS, DIALOGOS, eventos) y EN (SETTINGS, HUD, ITEMS...). El estándar no lo fija: para claves nuevas usar el nombre del sistema tal como figura en CHECKLIST-GLOBAL y mantener coherencia dentro del dominio.
+
+#### 2.4.2 Reglas de creación de claves (vigentes)
+
+1. **UPPER_SNAKE** con separadores `.` y `_` (salvo legado M60 minúscula — no nuevas).
+2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext.
+3. **Placeholders:** `%s`/`%d`/`%f` se resuelven en el llamador: `_t("CLAVE") % args` (ej: `SETTINGS.DESCARTAR_MENSAJE`).
+4. **Plurales:** `Localization.tr_key("ITEMS", "SE_OFRECEN", "", {}, n)` con formas por `Plural-Forms` del `.po`.
+5. **Toda clave nueva ES+EN+PT en el mismo commit** (JSON + `.po` de los 3 idiomas) — regla del director (msg 186); condición de aceptación: `scripts/validar_i18n_integridad.py` EXIT 0.
+6. **Prohibido texto visible en código:** siempre por clave (verificado por `scripts/localization/auditor_claves.gd`).
+7. Menús data-driven (ej: `data/debug/debug_menu_config.json`) pueden llevar etiquetas literales si son **solo de desarrollo**; migrar a claves `DEBUG.*` si se exponen al jugador (hallazgo TANDA 15, tarea 100).
+
 ### 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).

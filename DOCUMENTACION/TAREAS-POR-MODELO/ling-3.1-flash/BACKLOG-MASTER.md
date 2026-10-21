@@ -122,7 +122,7 @@
 
 63. Localizador M12/60: el mapa de claves del código (los nombres de ítems instrumento — el catálogo interno).
 64. El ID del grupo de localización (los prefijos `tools.*`, `eventos.*` — un estándar de nombres).
-65. Documentación de los prefijos de claves (estándar del proyecto — documentar en M87).
+65. Documentación de los prefijos de claves (estándar del proyecto — documentar en M87). — **TANDA 16 (msg 190, 2026-10-21): DOCUMENTADO** en `DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md` §2.4.1 (inventario: JSON 170 claves/14 prefijos — SETTINGS 74, DIARY 23, TIENDAS 20, eventos 14, EQUIP 13, TUTORIAL 7, ui 6, msg 3, LOADING 3, M69 2, npc 2, HUD 1, ITEMS 1, MAIN_MENU 1; .po 260 claves según validador, 165 msgid de línea simple/12 prefijos) y §2.4.2 (7 reglas de creación: UPPER_SNAKE, glosario, placeholders en llamador, plurales tr_key+Plural-Forms, ES+EN+PT mismo commit regla msg 186, texto por clave, menús data-driven de dev con literales). Hallazgo: 3 convenciones conviven (canónica UPPER_SNAKE / legado M60 minúscula ui.*/msg.*/npc.*/eventos.* / prefijo numérico M69.*). Documentación pura, sin cambios en código.
 
 ### Bloque L — QA integridad de los strings con expresiones (el flujo del gameplay)
 
