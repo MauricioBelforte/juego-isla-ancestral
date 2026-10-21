@@ -21,32 +21,32 @@
 - [ ] Definir el problema: construcción cozy sobre mundo voxel con rejilla de 1 m alineada a M08 [S]
 - [ ] Registrar dependencias: M08 (Mundo Voxel), M14 (Inventario) y relaciones M18, M25, M64, M58, M31, M32, M73, M92, M93, M71 [S]
 - [ ] RF1: modo construcción y modo decoración con entrada/salida rápida [S]
-- [ ] RF2: rejilla voxel de 1 m alineada al mundo con snapping de 90° [S]
-- [ ] RF3: previsualización fantasma con estado válido/inválido [S]
-- [ ] RF4: rotación de piezas en pasos de 90° [S]
+- [x] RF2: rejilla voxel de 1 m alineada al mundo con snapping de 90° [S] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: rejilla de 1 m verificada por el round-trip celda<->mundo con `OFFSET_MEDIO_VOXEL = 0.5`, el floor hacia abajo y la huella que intercambia ancho/fondo en las rotaciones 1 y 3 (`PlacementRule.celdas`)
+- [x] RF3: previsualización fantasma con estado válido/inválido [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): iter2: "el fantasma arranca oculto" / "tras aplicar, el fantasma esta visible" / "devolver_al_pool() deja el fantasma oculto" + "mgr.preview() devuelve color y celdas" (el color ES el estado valido/invalido). Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
+- [x] RF4: rotación de piezas en pasos de 90° [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): "3x1 en rot 0 -> 3 celdas hacia +x" / "3x1 en rot 90 -> 3 celdas hacia +z (rotacion real)" (rotacion REAL, no solo metadata) + iter7 "rotacion puesta a 1 (90 grados)". Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
 - [ ] RF5: elevación por plantas con revalidación en cada nivel [S]
-- [ ] RF6: permisos de zona (edificable, protegida, narrativa, agua) [S]
-- [ ] RF7: costo de recursos con verificación y descuento en M14 [S]
-- [ ] RF8: validación de ocupación, soporte y reglas por pieza [S]
+- [x] RF6: permisos de zona (edificable, protegida, narrativa, agua) [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): los 4 permisos con control positivo y negativo: "sin zonas -> EDIFICABLE por defecto" / "zona PROTEGIDA -> ZONA_PROTEGIDA" / "zona NARRATIVA -> ZONA_NARRATIVA" / "AGUA sin sobre_agua -> AGUA_NO_PERMITIDA" / "puente sobre AGUA con sobre_agua -> ok (control positivo)". Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
+- [x] RF7: costo de recursos con verificación y descuento en M14 [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): "costo descontado: 10-2=8 (dio 8)" (el descuento real en M14) + iter2 "todo item_id del costo existe en data/items/ (malos: [])" (la verificacion). Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
+- [x] RF8: validación de ocupación, soporte y reglas por pieza [S] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: las 8 reglas de `ConstruccionValidator.validar()` con su motivo propio (ZONA_PROTEGIDA / ZONA_NARRATIVA / AGUA_NO_PERMITIDA / CELDA_OCUPADA / SIN_SOPORTE / REQUIERE_PARED / NPC_EN_CELDA / FUERA_DEL_MUNDO / LIMITE_DE_ZONA / RECURSOS_INSUFICIENTES) y su ORDEN documentado (`ConstruccionValidator.ORDEN`)
 - [ ] RF9-RF11: colocación con undo, copiar/mover/almacenar, demolición con devolución [S]
-- [ ] RF12-RF14: catálogo de 12 familias de piezas, integración M18/M25/M64 y persistencia M58 [S]
+- [x] RF12-RF14: catálogo de 12 familias de piezas, integración M18/M25/M64 y persistencia M58 [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): iter2 "las 12 familias estan presentes (dio 12)" + "FAMILIAS tiene 12 entradas" + iter5 "la estructura trae las 6 claves canonicas del codec" / "el save no tiene ninguna clave de fantasma" (persistencia) + iter6 "integraciones". Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
 
 ## B. Resolución de los 28 puntos de la sección 16 del plan maestro (28)
 
 - [x] P1: modo construcción — estado de jugador + BuildManager, mundo vivo sin pausa dura [S]
 - [x] P2: modo decoración — mismo sistema con catálogo filtrado a muebles y decoración [S]
-- [ ] P3: grid — rejilla voxel de 1 m alineada al origen global de M08 [S]
-- [ ] P4: snapping — ajuste de posición y rotación (90°) a la celda más cercana [S]
+- [x] P3: grid — rejilla voxel de 1 m alineada al origen global de M08 [S] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: el origen de la rejilla de construccion coincide con el origen global del mundo voxel: celda (0,0,0) -> centro (0.5,0.5,0.5), sin desplazamiento ni offset extra
+- [x] P4: snapping — ajuste de posición y rotación (90°) a la celda más cercana [S] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: `celda_desde_mundo` (floor = celda mas cercana, con negativos correctos) + `celdas(celda, rotacion)` con las 4 rotaciones de 90 grados (posmod)
 - [x] P5: rotación — pasos de 90° en Y persistidos como entero 0-3 [S]
 - [ ] P6: elevación — planta base y subir/bajar con altura máxima por zona [S]
 - [ ] P7: copia — tomar pieza existente como plantilla del fantasma [S]
 - [x] P8: mover objetos — desocupar celdas originales y revalidar destino [S]
-- [ ] P9: recolocar — redondeo a rejilla y undo que devuelve la pieza a su celda [S]
+- [x] P9: recolocar — redondeo a rejilla y undo que devuelve la pieza a su celda [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): "recolocar en la misma celda -> rechazado" + "undo_ultimo devuelve la ultima (LIFO)" + "redo_siguiente devuelve la deshecha" + el redondeo a rejilla verificado en la suite nueva (floor hacia abajo). Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
 - [ ] P10: almacenamiento — devolver piezas al inventario M14 sin pérdidas [S]
 - [ ] P11: demolición — confirmación suave y retiro de la pieza del mundo [S]
 - [x] P12: devolución de materiales — fracción configurable por receta (default 50%) [S]
 - [x] P13: vista previa — BuildGhost con color de estado, costo y motivos de error en HUD [S]
-- [ ] P14: objetos inválidos — toda regla fallida bloquea la colocación con motivo [S]
+- [x] P14: objetos inválidos — toda regla fallida bloquea la colocación con motivo [S] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: cada regla fallida produce su motivo y bloquea (`ok == false` + `motivos[]` + `detalle[]` + texto legible); tambien se distingue motivo TEMPORAL (NPC/recursos, reintentable) vs PERMANENTE (zona/soporte)
 - [ ] P15: colisiones — piezas con colisión estática real; puertas con hueco navegable [S]
 - [ ] P16: restricciones — reglas por pieza, topes por zona, alturas y parcelas ajenas [S]
 - [x] P17: paredes — bloques 1x1x1 con variantes de esquina y pilar [S]
@@ -79,10 +79,10 @@
 
 - [ ] Paso de rejilla fijo de 1 m derivado del tamaño de voxel de M08 [C]
 - [ ] Origen de la rejilla idéntico al origen global del mundo voxel [C]
-- [ ] Las piezas de NxN celdas ocupan exactamente su área completa en la rejilla [M]
+- [x] Las piezas de NxN celdas ocupan exactamente su área completa en la rejilla [M] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: una pieza 2x2 ocupa exactamente sus 4 celdas (huela verificada celda a celda, no solo el conteo)
 - [x] Compensación de medio voxel (offset 0.5 m) aplicada de forma consistente en preview y datos [C] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `OFFSET_MEDIO_VOXEL = 0.5` usado por `mundo_desde_celda()`; el centro de (4,2,6) es (4.5,2.5,6.5).
 - [ ] Altura de planta: 1 m por nivel de bloque; habitaciones de 3 m en M18 [M]
-- [ ] Límites de mundo: la colocación se rechaza fuera del AABB jugable de M08 [M]
+- [x] Límites de mundo: la colocación se rechaza fuera del AABB jugable de M08 [M] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: FUERA_DEL_MUNDO cuando la huella sale del AABB jugable (el mismo AABB que entrega `set_limite_mundo`), y sin motivo cuando esta dentro
 - [x] Conversión celda voxel ↔ posición mundial en una única utilidad compartida [M] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `ConstruccionMundo.mundo_desde_celda()` / `celda_desde_mundo()` / `esquina_desde_celda()`, estáticas y verificadas por round-trip en 5 casos.
 - [ ] La rejilla solo se calcula sobre terreno cargado (nunca sobre chunks vacíos) [M]
 - [x] El snap se redondea hacia abajo (floor) en dirección positiva del mundo [S] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `celda_desde_mundo()` aplica `floor` en los 3 ejes, incluidos negativos (-0.1 -> -1, no 0).
@@ -241,7 +241,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 175 ítems · Completados: 81 · Pendientes: 93 · No resueltos: 1. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la línea decía 80/94/1; conteo real por regex = 81 [x] / 1 [?] / 93 [ ]. Drift de 1.)
+**Totales:** 175 items · Completados: 94 · Pendientes: 80 · No resueltos: 1. (Recontado el 2026-10-21 por minimax-m3-1-flash, Log 2093: 81 [x] + 7 [x] (tanda P3-1) + 6 [x] (tanda P3-2) = 94 [x]; pendientes 80; sin resueltos 1.)
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1732):** +4 [ ] -> [x] con utilidades de rejilla y `copiar_pieza` (msg 179).
 > **Nuevo:** `ConstruccionMundo.mundo_desde_celda/celda_desde_mundo/esquina_desde_celda` (estáticas, única utilidad compartida del módulo) y `BuildManager.copiar_pieza()` + `BuildHistory.TIPO_COPIAR`.

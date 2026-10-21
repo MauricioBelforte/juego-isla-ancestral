@@ -253,6 +253,21 @@ func _correr() -> void:
 		MUNDO.esquina_desde_celda(Vector3i(2, 1, 3)) == Vector3(2, 1, 3))
 	_check("celda_desde_mundo hace floor (no redondea)",
 		MUNDO.celda_desde_mundo(Vector3(4.9, 0.1, 6.99)) == Vector3i(4, 0, 6))
+	# El origen de la rejilla de construccion coincide con el origen global del mundo
+	# voxel (celda (0,0,0) -> centro (0.5,0.5,0.5)): sin displacement ni offset extra.
+	_check("el origen de la rejilla coincide con el origen global del mundo voxel",
+		MUNDO.mundo_desde_celda(Vector3i.ZERO) == Vector3(0.5, 0.5, 0.5),
+		str(MUNDO.mundo_desde_celda(Vector3i.ZERO)))
+	# Una pieza de 2x2 ocupa EXACTAMENTE su area completa en la rejilla.
+	var r_area := _receta()
+	r_area.id = &"placa_2x2"
+	r_area.tamano = Vector2i(2, 2)
+	var huella := r_area.celdas(Vector3i(3, 1, 4), 0)
+	var area_ok := (huella as Array).size() == 4
+	for c in [Vector3i(3, 1, 4), Vector3i(4, 1, 4), Vector3i(3, 1, 5), Vector3i(4, 1, 5)]:
+		if not (huella as Array).has(c):
+			area_ok = false
+	_check("una pieza de 2x2 ocupa exactamente su area completa en la rejilla", area_ok, str(huella))
 
 	# ── N. ROTACION en pasos de 90 grados ──
 	var r2 := _receta()

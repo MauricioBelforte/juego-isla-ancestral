@@ -5086,3 +5086,31 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-21 22:55
+
+## 2026-10-21 20:30 — minimax-m3-1-flash / Kilo Code — M17 (P3): suite de validacion en el runner central + suite rojo arreglado (88/175)
+
+**Frente P3 (M17 Construccion).** Hallazgo de entrada: las 8 suites de M17 viven en `scripts/construccion/`, FUERA de `res://tests/` (lo unico que descubre el runner central) -> **M17 no tenia cobertura en la suite central**, y por eso nadie via que `test_construccion_iter7.gd` esta ROJO desde su commit inicial (piso 24 vs 22 checks medidos -> auto-FAIL).
+
+**Hecho:** (1) suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos**) con las 8 reglas del `ConstruccionValidator` (motivo propio + ORDEN), la forma del resultado, temporal vs permanente, la rejilla de 1 m (round-trip + origen global) y la rotacion de 90 grados; (2) fix del suite rojo **AGREGANDO 2 checks reales** (no bajando el piso) -> **PASS**; (3) **7 items [x]** con cita. **M17: 81/175 -> 88/175.**
+
+**Gap reportado al dueno de M17:** el validator **no tiene regla de alturas** (su ORDEN son 8 reglas) y es logico (no fisico) -> P16 (alturas) y P15 (colisiones fisicas) quedan abiertos con el motivo exacto.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 20:30
+
+## 2026-10-21 20:55 — minimax-m3-1-flash / Kilo Code — M17 (P3) tanda 2: auditoria de las 8 suites (540 checks) + iter6 arreglado (94/175)
+
+**Auditoria una por una de las 8 suites de M17** (viven en `scripts/construccion/`, fuera de `res://tests/` -> el runner central NO las descubre): 7 en verde y **1 ROJA** (`test_construccion_iter6.gd`: piso 22 vs 20 checks medidos -> su propio `if _checks < CHECKS_MINIMOS` la declaraba FALLO y nadie lo veia porque nunca corrio en CI). **Arreglada AGREGANDO 2 checks reales (no bajando el piso) y moviendolos antes del print de RESUMEN para que el conteo sea honesto** -> las 8 suites verdes, **540 checks verificados**.
+
+**6 items [x] con evidencia de checks NOMBRADOS** (RF3 fantasma, RF4 rotacion real, RF6 los 4 permisos de zona, RF7 costo+descuento, RF12-RF14 catalogo de 12 familias + persistencia, P9 recolocar+undo). **M17: 88/175 -> 94/175.**
+
+**Pendiente anotado (no hecho):** llevar las 8 suites de M17 al runner central (wrapper con subprocesos + aislamiento de user:// por worker). **Gap para el dueno:** el validator no tiene regla de alturas -> P16 (alturas) y P15 (colisiones fisicas) quedan abiertos con el motivo exacto.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 20:55

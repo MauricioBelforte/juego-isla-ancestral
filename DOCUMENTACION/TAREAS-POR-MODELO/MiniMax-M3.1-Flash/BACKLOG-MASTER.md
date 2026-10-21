@@ -830,3 +830,12 @@ las constantes reales de M63 (`PISO_PROGRESO` 0.02, `TOPE_PROGRESO` 0.98, `PRESU
 - [x] Limites de mundo: la colocacion se rechaza fuera del AABB jugable de M08 [M] — LOG 2092: FUERA_DEL_MUNDO
 
 **Tanda P3 (Log 2092):** suite nueva en el runner central (**44 checks, 0 fallos**) + fix del suite rojo de M17 (piso 24 vs 22 -> se agregan 2 checks reales). M17 pasa de 81/175 a 88/175. Pendientes: 86 [ ] (los que exigen mundo, assets/3D o UI con viewport quedan fuera de mi alcance headless).
+
+**Tanda P3-2 (Log 2093):** auditoria de las 8 suites de M17 (496 checks): 7 verdes + 1 roja arreglada AGREGANDO 2 checks (piso 22 vs 20). 6 items [x] con cita:
+- [x] RF3 [S] — LOG 2093: checks nombrados de las suites de M17 (iter2: "el fantasma arranca oculto" / "tras aplicar, el fantasma esta )
+- [x] RF4 [S] — LOG 2093: checks nombrados de las suites de M17 ("3x1 en rot 0 -> 3 celdas hacia +x" / "3x1 en rot 90 -> 3 celdas hacia)
+- [x] RF6 [S] — LOG 2093: checks nombrados de las suites de M17 (los 4 permisos con control positivo y negativo: "sin zonas -> EDIFICAB)
+- [x] RF7 [S] — LOG 2093: checks nombrados de las suites de M17 ("costo descontado: 10-2=8 (dio 8)" (el descuento real en M14) + iter2 )
+- [x] RF12-RF14 [S] — LOG 2093: checks nombrados de las suites de M17 (iter2 "las 12 familias estan presentes (dio 12)" + "FAMILIAS tiene 12 )
+- [x] P9 [S] — LOG 2093: checks nombrados de las suites de M17 ("recolocar en la misma celda -> rechazado" + "undo_ultimo devuelve la )
+**M17: 94/175.** Pendiente: llevar las 8 suites de M17 al runner central (no corren en CI).

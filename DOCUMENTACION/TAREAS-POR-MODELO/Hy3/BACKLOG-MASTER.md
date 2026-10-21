@@ -99,7 +99,7 @@
    - Re-verif runtime 2026-10-20 (canal 287 / Log 2030): 15 checks/0 fallos Godot headless real (console binary), guardian anti-falso-verde cumplido (15==MIN_CHECKS), exit 0. Sigue verde.
 52. Runtime test de M59-Guardado: smoke del SaveManager (state-machine dirty/blocked + API pública) — [x] Hy3 (2026-10-21: 18 checks/0 fallos Godot headless real, EXIT 0; test_smoke_persistencia_hy3.gd sin commitear; RATIFICADA por director msg 310 2026-10-21: round-trip de disco diferido con run controlado, OK)
 53. Runtime test de M60-Datos: serialización round-trip completa — [x] Hy3 (msg 311, 2026-10-21: 47 checks/0 fallos Godot headless real, EXIT 0; test_serializacion_roundtrip_m60_hy3.gd sin commitear; guardian anti-falso-verde RED probado; Log 2087)
-54. Runtime test de M74: disparo de eventos programados — 10 [C]
+54. Runtime test de M74: disparo de eventos programados — [x] Hy3 (msg 313, 2026-10-21: 119 checks/0 fallos reales en 3 suites Godot 4.7.2 headless; red probe 58/1 EXIT1 anti-falso-verde; Log 2095; hallazgos 21.8: suite NO hermética + piso CHECKS_MINIMOS=58 desalineado con 57 reales)
 55. Runtime test de M71: flujo XP/recompensa — 10 [C]
 56. Runtime test de M20: ciclo completo de amistad (levels/regalos) — 10 [C]
 57. Runtime test de M21/M162: selección contextual por hora/clima — 10 [C]

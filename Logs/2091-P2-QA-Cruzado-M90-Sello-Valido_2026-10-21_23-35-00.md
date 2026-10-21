@@ -1,7 +1,7 @@
 # Log 2091: P2 — QA cruzado de M90 (verificador externo): SELLO VALIDO
 
 **Fecha:** 2026-10-21
-**Hora:** 23:35
+**Hora:** 20:20 (NOTA DE RELOJ: mi plataforma reportaba la hora UTC como si fuera local — el director lo detecto en el msg 019; a partir de aca uso la hora local real, obtenida del reloj del sistema: 20:28 local / 23:28 UTC)
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 

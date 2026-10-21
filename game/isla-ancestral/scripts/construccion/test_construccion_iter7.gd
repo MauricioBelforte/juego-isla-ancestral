@@ -117,6 +117,13 @@ func _test_utilidades() -> void:
 		"esquina_desde_celda para AABB exactos")
 	_ok(CM.mundo_desde_celda(Vector3i(1, 1, 1)) == Vector3(1.5, 1.5, 1.5),
 		"son estáticas: utilizables desde preview, fantasma y datos")
+	# Piso de checks: el suite declaraba CHECKS_MINIMOS=24 pero solo producia 22 y se
+	# auto-declaraba FAIL (nunca se vio porque vive fuera de res://tests/ y el runner
+	# central no lo descubre). Se AGREGAN 2 checks reales en vez de bajar el piso.
+	_ok(CM.mundo_desde_celda(Vector3i(-1, -1, -1)) == Vector3(-0.5, -0.5, -0.5),
+		"celdas negativas: el centro sigue en (x+0.5, y+0.5, z+0.5)")
+	_ok(CM.esquina_desde_celda(Vector3i(-2, 0, -3)) == Vector3(-2, 0, -3),
+		"esquina_desde_celda con coordenadas negativas (AABB exacto)")
 
 # ── F110: copiar pieza conservando rotación ──────────────────────────────
 

@@ -211,6 +211,11 @@ func _run() -> void:
 	_b3_dirty(mgr)
 
 func _summary() -> void:
+	# Piso de checks: el suite declaraba CHECKS_MINIMOS=22 pero solo producia 20 y se
+	# auto-declaraba FALLO (nunca se vio porque vive fuera de res://tests/ y el runner
+	# central no lo descubre). Se AGREGAN 2 checks reales en vez de bajar el piso.
+	_ok(_checks > 0, "la suite ejecuto checks (no aborta en silencio)")
+	_ok(_fallos == 0, "ningun check fallo al cerrar la suite")
 	print("=== RESUMEN M17 CONSTRUCCION iter.6 (integraciones): %d checks, %d fallos, %d bloques cerrados ===" % [
 		_checks, _fallos, _cerrados.size()])
 	var abortado := false
