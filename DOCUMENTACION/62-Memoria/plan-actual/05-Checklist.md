@@ -214,14 +214,14 @@
 - [x] Test Play Mode: teleport extremo ×10 con memoria estable y sin picos [C] — iter. 7 (2026-10-17, Tanda 6, DS-Opencode): suite test_m62_leaks_teleport.gd: "los 10 ciclos de teleport se ejecutaron completos" + "objetos_vivos() NO crece tras 10 teleports (fin <= base; medido delta=0)" + cola vacia tras cada descarga; rc=0, 21 checks 0 fallos.
 - [x] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria [M] — **[x] 2026-10-20 (Tanda 84, DS-Opencode): suite directa + 30 min de T72.** `test_m62_audio_bioma.gd` (headless, autoload real): **45 checks, 0 fallos, EXIT 0**; entrar/salir de bioma encola y descarga el banco, 3 ciclos de viaje, **0 bancos sobrevivientes (WeakRef)**, `objetos_vivos()` **4477 → 4477 (delta 0)**, cola vacía y lote de drenaje único. La corrida de 30 min de T72 con 10 bancos sintéticos mantiene la memoria plana (178.2 → 178.4 MB, drift +0.1%, 1 banco vivo). **Alcance:** el arnés es `SceneTree --script`, no el Play Mode del editor; la suite mide retención/objetos y T72 aporta la memoria de 30 min. Evidencia: `out/tanda84/audio_bioma.log` sha256 `E54AB45D…`. Log 2055.
 - [x] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel [C] — **[x] 2026-10-20 (Tanda 85, DS-Opencode): 500 ops reales sobre VoxelBuffer.** `sesion_m62_voxel_500.gd`: **9 checks, 0 fallos, EXIT 0**; 500 posiciones sólidas, **500/500 excavadas leídas como AIRE**, **500/500 regeneradas** con el ID original; **5 buffers creados, 0 vivos**; memoria 137.3 → 137.3 MB (delta +0.0%); objetos +5; 0 huérfanos. **Sonda roja:** `M62_RETENER_BUFFERS=1` retuvo 5 buffers y el gate falló (`[FALLO] 0 buffers...`, EXIT 1), así que el test detecta la fuga. **Alcance:** el VoxelTerrain headless reporta 0 bloques actualizados, por lo que se ejercita el VoxelBuffer real (mismo tipo/API que farm_service) y no el terreno renderizado; no es el Play Mode del editor. Evidencia: `out/tanda85/voxel_500.log` sha256 `A9C2…` y `voxel_500_rojo.log`. Log 2056.
-- [ ] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M]
+- [x] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M] — **[x] 2026-10-20 (Tanda 86, DS-Opencode): presupuesto real + LRU de producción.** `test_m62_chunks_presupuesto.gd`: **6 checks, 0 fallos, EXIT 0**; `budgets.json` real (preset media, voxel 650 MB) y coste medido **8.4 KB/chunk**; máximos por presupuesto **baja 60.952 / media 79.238 / alta 97.523 chunks**; el tope de producción de StreamManager es **4.096 chunks = 34 MB** de datos (muy por debajo del presupuesto); con 20.100 registrados y tope 20.000, el LRU deja exactamente **20.000**; 20.008 liberados, **0 recursos vivos (WeakRef)**, 0 huérfanos. **Sonda roja:** `M62_SIN_TOPE=1` deja 20.100 y falla (`[FALLO] el LRU deja exactamente el tope`), EXIT 1. **Alcance:** coste de DATOS (VoxelBuffer 16³), no mallas/colliders ni streaming real (headless reporta 0 bloques); no es el Play Mode del editor. Evidencia: `out/tanda86/chunks_presupuesto.log` sha256 `28480231…`. Log 2057.
 - [x] Test Play Mode: textura gigante forzada degrada sin crash [M] — iter. 7 (2026-10-17, Tanda 6, DS-Opencode): suite test_memoria_m62_iter3.gd: "con umbral 64 sí es gigante" + "requiere_degradacion() true" + "la politica se aplico" + "la textura degradada mide la mitad / y ahora tiene mips / ocupa menos"; rc=0, 133 checks 0 fallos.
 - [x] Test de semáforos: forzar 90% y verificar descargas automáticas y registro en log [C] — Log 1094: bloques B y C de `test_memoria_m62_iter3.gd` (1599/1600/1799/1800/1899/1900/2000 MB) + bloque C de `test_enforcement_m62.gd`
 - [x] Test de nodos huérfanos: conteo de orphans en reposo con valor estable [M] — **iter. 4 (Log 1112): MEDIDO.** Bloque D de `test_m62_liberacion.gd`: base=0, 5 muestras consecutivas sin deriva, crear 128 nodos sin padre los cuenta (0 → 128) y liberarlos devuelve el conteo a 0 (sin leak). Lee `Performance.OBJECT_ORPHAN_NODE_COUNT`
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 
-**Totales:** 150 items - Completados: 142 - Pendientes: 5 - No resueltos: 3.
+**Totales:** 150 items - Completados: 143 - Pendientes: 4 - No resueltos: 3.
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 
@@ -1079,3 +1079,21 @@ banco anterior muere. No toca producción.
   (mismo tipo/API que `farm_service.gd`), no el terreno renderizado ni el Play Mode del editor.
 
 **Totales tras Tanda 85:** 142 / 5 / 3 (150 items).
+
+## Tanda 86 — L217 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2057)
+
+**Resultado: `[x]` — máximo de chunks bajo el presupuesto voxel, con LRU de producción.**
+
+- **Presupuesto real:** `budgets.json` vía `MemoryBudgetRegistry` (preset `media`, **voxel 650 MB**,
+  total 2000 MB). Coste medido con 512 `VoxelBuffer` de 16³: **8.4 KB/chunk**.
+- **Máximos:** baja (500 MB) **60.952**, media (650 MB) **79.238**, alta (800 MB) **97.523** chunks.
+- **Tope de producción:** StreamManager **4.096 chunks = 34 MB** de datos al preset media, muy por
+  debajo del presupuesto. Con 20.100 registrados y tope 20.000, `aplicar_tope()` deja **20.000**;
+  20.008 liberados; **0 recursos vivos (WeakRef)**; **0 huérfanos**; objetos +11.
+- **Sonda roja:** `M62_SIN_TOPE=1` deja 20.100 y falla el check del tope, **EXIT 1**.
+- **Evidencia:** `out/tanda86/chunks_presupuesto.log` sha256 `284802310F955DADEDB6C7602E837C8DE347A29A6DCF646B9EAC58151B98D75E`;
+  rojo `AFFFA5EB3D88F7FC0B8118084D6E12DFF939B13363BD8F68D8E3E7D91D597C47`.
+- **Alcance:** coste de DATOS, no mallas/colliders; el VoxelTerrain headless no hace streaming real
+  (0 bloques actualizados). No es el Play Mode del editor.
+
+**Totales tras Tanda 86:** 143 / 4 / 3 (150 items).

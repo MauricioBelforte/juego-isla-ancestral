@@ -823,3 +823,15 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
   No es el Play Mode del editor.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 85.
+
+## 37. Tanda 86 (2026-10-20, DS-Opencode, Log 2057): L217 — chunks vs presupuesto voxel
+
+- **Verde:** 6 checks / 0 fallos / EXIT 0; budget real media 650 MB; coste 8.4 KB/chunk; máximos
+  60.952/79.238/97.523; tope StreamManager 4.096 chunks = 34 MB; 20.100 → 20.000; 20.008 liberados;
+  0 vivos (WeakRef); 0 huérfanos.
+- **Rojo:** `M62_SIN_TOPE=1` → 20.100 activos, `[FALLO] el LRU deja exactamente el tope`, EXIT 1.
+- **Evidencia:** `out/tanda86/chunks_presupuesto.log` sha256 `28480231…`; rojo `AFFFA5EB…`.
+- **Alcance:** coste de datos (VoxelBuffer 16³), no mallas/colliders; headless sin streaming real.
+  No es el Play Mode del editor.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 86.

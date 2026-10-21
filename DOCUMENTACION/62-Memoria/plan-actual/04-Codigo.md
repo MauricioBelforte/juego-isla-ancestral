@@ -799,3 +799,16 @@ DeepSeek-V4.1-Flash (Log 2033). Se re-ejecutó y se aplicó el flip.
   el terreno headless reporta 0 bloques actualizados. No es el Play Mode del editor.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 85.
+
+## Tanda 86 — L217 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2057)
+
+**Sin código nuevo; corrida del arnés de chunks vs presupuesto.**
+
+- Presupuesto real `budgets.json` (media, voxel 650 MB); coste **8.4 KB/chunk** (512 buffers 16³).
+- Máximos por presupuesto: baja 60.952 / media 79.238 / alta 97.523 chunks.
+- StreamManager: tope **4.096 chunks = 34 MB** de datos; 20.100 registrados → **20.000** tras `aplicar_tope()`;
+  20.008 liberados; **0 vivos (WeakRef)**; 0 huérfanos.
+- **Sonda roja** `M62_SIN_TOPE=1`: 20.100 activos, check del tope FALLA, EXIT 1.
+- **Alcance:** datos, no mallas/colliders; sin streaming real headless; no es el Play Mode del editor.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 86.
