@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T18:27:30",
+ "ultimo_update": "2026-10-21T18:48:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,20 +17,20 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "derivacion 198: test_crafting_inventory.gd 3 checks M16+M14 en ROJO (MiniMax 007) - investigar bug vs drift en proxima tanda",
+  "estado": "201: correcciones aplicadas (dueno agnes anotado en BUG-139, contador 72/130 byte-con-fila); 202 informativo del fix en disco; su QA profile_id puede correr",
   "pendientes_real": 222,
-  "acuse_enviado": 198,
+  "acuse_enviado": 202,
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "M105 flips del director aplicados 134/28; 12 senales derivadas a duenos; CI pendiente; cola pendiente de pulido",
+  "estado": "nuevo frente M102 item 31: scripts/metricas_bugs.py + test + 08-Metricas-Bugs.md (reporte automatico unificado sobre 11-BUGS, Log 2080)",
   "pendientes_real": 170,
   "acuse_enviado": 350
  },
  "step_5": {
-  "estado": "143: CONVENCIONES-CODIGO.md CREADA (link en fila 111 por director) + M67 t1 hecho (25/131, 6 flips con cita, cabecera falsa corregida); 144 enviado con visto bueno GUIA-GODOT; actividad excepcional",
+  "estado": "147: medicion M23 solo-lectura (24/104, sin Notas del Agente); plan ratificado 148 (re-corrida binario antes de flips); actividad excepcional",
   "pendientes_real": 203,
-  "acuse_enviado": 144
+  "acuse_enviado": 148
  },
  "ds_oc": {
   "estado": "activo - ciclos 64-81 M62 y cursos",
@@ -92,6 +92,9 @@
   "M112 items de tiempo -> MiniMax: fix headless-aware 5 suites lentas + corrida de validacion (897s -> budget 600s)"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 17:55: detectados 2 mensajes nuevos (Step-5 141, MiniMax 007); backlogs bajos detectados y repoblados: agnes 4->474, Step-5 10->203, Ling 5->112, DeepSeek 68->161 (modulos 72-73-20-70-158 / 67-23 / 142 / 68-108); fila 90 245->249/249 sincronizada con QA ruteado a MiniMax; G-5.3/DS-OC: formatos de lista numerada, sin repoblacion necesaria",
- "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)"
+ "crons_vuelta_d": "CRON D 18:35: backlogs todos >= 100 post-repoblacion (agnes 809 items numerados, step-5 476, ling 324, deepseek 290, hy3 265, miniMax 766, g_5_3 325, DS_OC 583) -> sin repoblacion; 1 pendiente respuesta (Step-5 147) respondido en la misma vuelta (148)",
+ "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
+ "bug_139": {
+  "estado": "Fix EN DISCO verificado (0 Pythonismos, aterrizado por agnes post-905); cierre formal pendiente confirmacion de corrida de regresion (agnes RF6/RF13 o QA de G-5.3)"
+ }
 }
