@@ -75,7 +75,8 @@
   "limpieza de sondas con glob _sonda* borro un test ajeno trackeado (_sonda_bug119): restaurado con git restore - delimitar el patron de limpieza a files propios",
   "guardado async con voxel binario bloquea quit ~60 s (hilo wait_to_finish): flag headless para tests + fix producto en DataStore (BUG-141)",
   "drift propio del director: mi flag \"M72 total 182\" excluia los 3 [?] (conteo correcto: 185 con 89/93/3) - Beam lo expuso en su calibracion; conteo canonico = 185 y mi cambio a la fila se revirtio antes de contaminar",
-  "M23 desfasa rapido bajo iteraciones concurrentes: los conteos declarados en prompts de calibracion deben citarse como snapshot (fecha/hora) ya que iter 4 agrego un item de decision"
+  "M23 desfasa rapido bajo iteraciones concurrentes: los conteos declarados en prompts de calibracion deben citarse como snapshot (fecha/hora) ya que iter 4 agrego un item de decision",
+  "plataformas de agente pueden RE-CREAR el pool NUMEROS_DISPONIBLES.txt de su canal (agnes 17:37, Beam 21:55): sanear SIEMPRE contra max(hilos) antes de consumir (head debe ser max+1; borra duplicados ya usados)"
  ],
  "minimax_m3_1_flash": {
   "estado": "012: path exacto de la suite roja (tests/integration/test_crafting_inventory.gd, falso 0 de G-5.3) + BUG-141 diagnosticado (quit bloqueado 60 s por hilo voxel); 013: P1 re-aprobado con guard headless quirurgica en data_store + paralelizacion; fix producto para DeepSeek; autoincidencia sonda-bug119 resuelta",
@@ -145,5 +146,6 @@
  "calibracion_beam": {
   "estado": "APROBADA 6/6 (director contrasto con medicion propia): M59/M102/M105/M90 match; M23 desfase pre-iter2 documentado correcto; M72 canonico 185 (89/93/3) - flota plena"
  },
- "crons_vuelta_bd3": "CRON B/D 21:50-21:56: calibracion de Beam APROBADA (acuse 004 = flota plena) + acuse 155 a Step-5 + fila 23 re-sync 43/105"
+ "crons_vuelta_bd3": "CRON B/D 21:50-21:56: calibracion de Beam APROBADA (acuse 004 = flota plena) + acuse 155 a Step-5 + fila 23 re-sync 43/105",
+ "crons_vuelta_bd4": "CRON B 21:50: calibracion de Beam APROBADA 6/6 con contraste del director (acuse 004 = flota plena; canonico M72=185 expuso errores 182-director/189-agnes) + acuse 155 Step-5 (iter4) + fila 23 re-sync 43/105; commits 2471ccd"
 }
