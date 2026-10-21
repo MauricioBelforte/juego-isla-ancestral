@@ -1,0 +1,1210 @@
+﻿# 08 - Guia Maestra de Orden de Implementacion
+
+
+
+**Modelo:** DS-V4.1-Flash-Opencode (OpenCode; Ãºltima modificaciÃ³n 2026-10-16)
+
+**Plataforma:** OpenCode
+
+**Fecha:** 2026-10-16
+
+**Estado:** M117 Build-System ðŸŸ¡ Con dudas 94/110 (iter. 4 cerrada 2026-10-16 por DS-V4.1-Flash-Opencode/OpenCode, Log 1888 â€” encargo del director `GLM-5.3 Flash-Director`: T-029/T-030 cerrados con export real Ã—3 + fuga `res://Godot/` al artifact corregida + `bump_version.py` sincroniza `export_presets.cfg`; restan 16 `[?]` externos). Previo: M91 ConfiguraciÃ³n de Audio ðŸŸ¡ 217 [x]/20 [ ]/2 [?] (cierre heredado por GLM-5.3-Flash 2026-10-16); M105 auditada (Log 1808)
+
+
+
+> Esta guia define el orden real de construccion del proyecto. El numero del modulo identifica el dominio, pero **no define el orden de implementacion**.
+
+>
+
+> **Fuente de orden:** este archivo.
+
+> **Fuente de estado, propietario y progreso:** `CHECKLIST-GLOBAL.md`.
+
+> **Fuente de coordinacion entre agentes:** `Mensajes entre modelos/ESTADO-PARALELO.md`.
+
+
+
+> **Regla de sincronizacion:** al reservar un modulo, el agente debe marcar la reserva en esta guia 08, en el `05-Checklist.md` del modulo, en `CHECKLIST-GLOBAL.md` y en `ESTADO-PARALELO.md`. Los cuatro registros deben coincidir.
+
+
+
+## Reserva actual
+
+
+
+| MÃ³dulo | Estado | Agente | Fase | VisiÃ³n | Entrada | Salida | Archivos afectados |
+| M41 MÃºsica (Tarea 2 cola N650 del director) | ðŸ”µ En curso (reclamo 2026-10-16 19:55) | agnes-3-flash (Sapiens AI) / Kilo Code | F4 (contenido audio) | V0 | 58/110 (50 [ ] + 2 [?] = 52 pendientes); MusicDirector data-driven ya implementado (27/0 test) | Lote 1: 5 stems (franja dÃ­a/noche/estaciÃ³n) + 1 integraciÃ³n de bus M91. ComposiciÃ³n de los 51 temas P1-P51. | `DOCUMENTACION/41-Musica/plan-actual/`, `data/audio/music_context_matrix.json`, `scripts/audio/` |
+| M46 Arte-2D (Tarea 3 cola N650 del director) | ðŸ”µ En curso (reclamo 2026-10-16 21:15) | agnes-3-flash (Sapiens AI) / Kilo Code | F5 (arte 2D) | V1 | RECONCILIACIÃ“N: 05-Checklist stale 0/110 pero diseÃ±o+tooling HECHOS (`ART_STYLE_2D.md` 10 Â§ + `inventario_2d.json` 48 + `validar_arte_2d.gd` headless 0 fallos). Post-lote 1: 13/110. | Lote 1 = 13 Ã­tems diseÃ±o flippeados con evidencia a Â§1-4. Resto de diseÃ±o/espec por lotes; assets 0/48 = `#esperando:assets-2d` (dep M45/M108/art) + `pack_atlas.gd` ausente. | `DOCUMENTACION/46-Arte-2D/plan-actual/`, `data/arte2d/inventario_2d.json`, `scripts/arte2d/validar_arte_2d.gd` |
+| M13 Herramientas (doc refresh, N680 del director) | ðŸ”µ En curso (reclamo 2026-10-16 23:20) | agnes-3-flash (Sapiens AI) / Kilo Code | F3 (gameplay) | V0 | 84/120 drift 0 (funcionalidad en tool_data/tool_controller/tool_feedback/tools_save_provider) | Doc refresh: 04-Codigo Â§2 corregido (4 archivos obsoletos consolidados). 34 [ ] con dueÃ±o externo. | `DOCUMENTACION/13-Herramientas/plan-actual/04-Codigo.md`, `scripts/tools/` |
+| M45 Arte-3D (b1 mediciÃ³n, N708) | ðŸ”µ En curso (reclamo 2026-10-17 07:25) | agnes-3-flash (Sapiens AI) / Kilo Code | F5 (arte 3D) | V1 | 150/171 (19 [ ] + 2 [?]); drift 0 (verif. D10 Hya/s2) | b1 = mediciÃ³n PatrÃ³n D + inventario de los 19 [ ] (11 validaciÃ³n needs `validate_mesh.gd`[MISS]+GLB, 5 doc, 3 integraciÃ³n-dep). No flip en b1. | `DOCUMENTACION/45-Arte-3D/plan-actual/`, `data/items/` (300 GLB) |
+| M49 IluminaciÃ³n (QA visual, cola N650 del director) | ðŸ”µ En curso (reclamo 2026-10-16 18:30) | agnes-3-flash (Sapiens AI) / Kilo Code | F6 (polish visual) | V2 | 105/143 (38 `[?]`); director N650 cola M49â†’M41â†’M46 | Lote 1: 5 `[?]` priorizados (correcciÃ³n a valor real de cÃ³digo: shadow_max_distance=120, view_distance=1024, lod_split=5; + artefacto `lighting_budget.json` ausente). Capturas antes/despuÃ©s. | `DOCUMENTACION/49-Iluminacion/plan-actual/`, `game/isla-ancestral/scripts/world/day_night_cycle.gd`, `data/light/` |
+
+|---|---|---|---|---|---|---|---|
+| M87 LocalizaciÃ³n (encargo 146 del director: mediciÃ³n + lote i18n) | ðŸŸ¡ Liberado 2026-10-16 19:41 (131/136; 5 [?] con dueÃ±o delegados por el director) | Ling-3.1-Flash (Kilo Code) â€” liberado | F8 (calidad/localizaciÃ³n) | V0 (datos) | M87 ðŸŸ¡ 131/136 (5 `[?]` con dueÃ±o); 2 sistemas de catÃ¡logo medidos: autoload `.po` 225 msgids + JSON 143/143/144; 118 solo-.po / 36 solo-JSON | Lote 1 EJECUTADO: +11 claves al `.po` ES/EN (4 SETTINGS + 7 TUTORIAL ausentes del autoload, consumidas por `settings_audio_layer.gd` L113-116 y `tutorial_manager.gd` L131-142/L469 vÃ­a `_t`â†’`/root/Localization.traducir_clave`) + 3 claves `_1` espejo a JSON ES/EN/PT (no eran bug: ya existÃ­an en .po). Validado: conjuntos es==en .po True, JSON 146/146/147, esâˆ’pt=0, 0 placeholders nuevos, UTF-8/BOM/U+FFFD/CRLF limpio Ã—5. Propuesta lotes 2-5 al director (M53 layouts, M29/M30 fechas, M14-M39 contenido, usuario revisiÃ³n). **Sin flips** â€” los 5 `[?]` siguen con dueÃ±o. | `game/isla-ancestral/locales/{es,en}.po`, `game/isla-ancestral/data/localizacion/strings_{es,en,pt}.json`, `DOCUMENTACION/87-Localizacion/plan-actual/` |
+| M112 Testing AutomÃ¡tico (encargo tras micro-lote) | ðŸŸ¡ Liberado 2026-10-16 05:50 (216/225; 9 [?] con dueÃ±o; QA Â§21.8 pendiente) | DS-V4.1-Flash-Opencode (OpenCode) | F0/transversal | V0 | M111 âœ… | CERRADO: 5 [ ] â†’ [x] con artefactos reales (farming 33/0, autoload_overrides, fixtures Ã—3 â†’ smoke 20/0) + H123 M29 (39/0); CI del encargo clasificado (fallos ajenos documentados, Log 1903) | DOCUMENTACION/112-Testing-Automatico/plan-actual/, game/isla-ancestral/tests/ (fixtures/, helpers/), Logs/1903-* |
+| M32 Clima (micro-lote del director) | ðŸŸ¡ Liberado 2026-10-16 04:48 (119/121; 2 [?] con dueÃ±o corregido â€” M52 / M50-M51-M08) | DS-V4.1-Flash-Opencode (OpenCode) | F5 (base de producciÃ³n) | V0 | M29 âœ… | Veredicto: SIN flips â€” L23 infra GPU real en M52 (no M49/M51; M52 ðŸŸ¡ abierto); L26 no implementado (M50/M51/M08); suites test_clima 29/0 + M34 0 fallos + M33 20/0 EXIT 0Ã—3; conteo 119/0/2 sin drift | DOCUMENTACION/32-Clima/plan-actual/, Logs/1900-* |
+| M30 Reloj-En-Tiempo-Real (micro-lote del director) | ðŸŸ¡ Liberado 2026-10-16 04:38 (119/120; 1 [?] con dueÃ±o M45/M46) | DS-V4.1-Flash-Opencode (OpenCode) | F1 (core) | V0 | C56 29/0 tras fix (1068 archivos); test_reloj_hud 14/0; localizaciÃ³n 6/0 â€” EXIT 0 Ã—3 | Fix C56 4.Âª pasada + verificaciÃ³n (encargo msg 09, `GLM-5.3 Flash-Director`): 11 violaciones clasificadas â€” whitelist Ã—6 carpetas infra/metadata (backup/foto/licensing/security/support/mapa) + fixes gameplay M58/M18 a ticks Â§9.64; mediciÃ³n del `[?]` L71 (0 iconos en disco â†’ dueÃ±o M45/M46, no flipeable); conteo 119/0/1=120 sin drift. Log 1898 | `game/isla-ancestral/scripts/clock/`, `scripts/accesibilidad/`, `scripts/houses/`, `DOCUMENTACION/30-Reloj-En-Tiempo-Real/plan-actual/`, `Logs/1898-*` |
+| M29 Tiempo-Y-Calendario (micro-lote del director) | ðŸŸ¡ Liberado 2026-10-16 04:15 (192/195; 3 [?] con dueÃ±o) | DS-V4.1-Flash-Opencode (OpenCode) | F1 (core) | V0 | M07 âœ…; 4 suites re-corridas 163/0 EXIT 0 Ã—4 (74/51/13/25) | CERRADA pasada de verificaciÃ³n (encargo msg 04, `GLM-5.3 Flash-Director`): conteo estricto 192/0/3=195 sin drift; 3 `[?]` con dueÃ±o (flecha HUD Ã—2 = M53 â€” grep 0 flechas HUD; H123 = M112 â€” el mismo agente lo implementa; al pasar el test de ciclos se flipea); "CERRADO âœ…" de agnes acotado (DoD Â§21.6). Log 1896 | `DOCUMENTACION/29-Tiempo-Y-Calendario/plan-actual/`, `game/isla-ancestral/scripts/time/`, `Logs/1896-*` |
+| M56 FotografÃ­a (iter. 3: foto del jugador) | ðŸŸ¡ Liberada 2026-10-09 22:15 (iter. 3 completa) | mimo-v2.6-flash-free (opencode) | F7 (producciÃ³n de contenido) | V4 (capturas directas no-headless) | M53 HUD real registrado (BUG-128 âœ… Log 1516) + PhotoService autoload (iter. 1/2) + InputMap tecla P libre (physical 80 verificado) | âœ… CERRADA: `tomar_foto()` â€” input `tomar_foto` (P) â†’ `UIManager.set_hud_visible(false)` â†’ 2 frames â†’ `save_png(user://fotos/)` â†’ restaurar exacto; guard `_en_captura`; foto_tomada; G61. Suite 26/0 headless + 31/0 render; evidencia sin HUD en bucket; +5 [x] â†’ 26/137; lecciones E-24/E-25 guÃ­a 06 | `game/isla-ancestral/scripts/foto/photo_service.gd`, `game/isla-ancestral/project.godot` (input), `game/isla-ancestral/tests/test_m56_tomar_foto.gd`, `DOCUMENTACION/56-Fotografia/plan-actual/` |
+| M64 IA de NPC (BUG-129 causa raÃ­z: estados huÃ©rfanos) | ðŸŸ¡ Liberada 2026-10-09 22:35 (fix entregado, aguarda verificaciÃ³n s3/director) | mimo-v2.6-flash-free (opencode) | F3 (sistemas estables) | V0 | M64 ðŸŸ¡ (mÃ³dulo propio) + causa raÃ­z aislada por director (msg 89: 56 orphans Node = 7 NPCs Ã— 8 estados) | âœ… FIX ENTREGADO: `state_machine.register_state()` ahora parentea los estados (`add_child` si `get_parent()==null`). A/B boot real: states orphans 56â†’0 (total 257â†’201); regresiÃ³n M64 82/0 exit 0. Harness `test_bug129_estados_orphan.gd`. Restos 201 strays = **M50**: `_poblar()` `continue` (en agua) tras `instantiate()` SIN `free()` â†’ 44 raÃ­ces + 157 mallas (sonda v2: contenedor con 65 in-tree OK). Patch `inst.free()` pedido al director (autorizaciÃ³n M50 pendiente). Suite debug revertida a HEAD por director. Sin flips: director/s3 verifican | `game/isla-ancestral/scripts/ia_npc/state_machine.gd`, `game/isla-ancestral/scripts/ia_npc/test_bug129_estados_orphan.gd`, `DOCUMENTACION/64-IA-De-NPC/plan-actual/` |
+| M17 ConstrucciÃ³n | ðŸ”µ En curso (iter. 1: reserva 2026-10-03 00:05) | DeepSeek-V4.1-Flash (WorkBuddy) | F5 (base de producciÃ³n) | V2 | M08 âœ… (mundo voxel) + M14 âœ… (Inventario) + M16 ðŸŸ¡ (crafting) | Reserva iter. 1: nÃºcleo de validaciÃ³n (`ConstruccionValidator` â€” renombrado por colisiÃ³n de `class_name` con `BuildValidator` de M117) + `BuildManager` (autoload) + `PlacementRule` + `ZoneRegistry`, con suites headless. Contrato de persistencia ya listo por duck-typing en M60/M59 (`obtener_estructuras`/`restaurar_estructuras`); resuelve BUG-057 cuando el nÃºcleo exista. | `game/isla-ancestral/scripts/construccion/` (a crear), `DOCUMENTACION/17-Construccion/plan-actual/`, `Logs/1211-*` |
+| M91 Configuracion de Audio | ðŸŸ¡ Con dudas (217/239, 91%) â€” cierre heredado de step-5-kilocode por GLM-5.3-Flash 2026-10-16 (encargo del director): +5 flips con UI real implementada (L201-L204 sliders 7 buses + L210 dropdown), test roundtrip 79/0, regresiones 136/0+82/0; liberado ðŸŸ¡ (deudas externas: assets audio M43, hardware real, i18n pt, M58, HRTF motor) | mimo-v2.6-flash-free (opencode) â†’ step-5-kilocode (heredado) â†’ GLM-5.3-Flash (Kilo Code, 2026-10-16) | F8 (arte y calidad final) | V2 | Lock de atria-dawn (commit `24ddc7e`, 2026-10-02) | 9 lotes: 92/239 â†’ **206/239 [x]**, 32 `[ ]` con dueÃ±o, **1 `[?]` = L88 HRTF** (Godot 4.7.2 no expone HRTF). Suites **9 OK / 0 FAIL** (`--module audio` 8 + `--module subtitle` 1). API de Godot 3 corregida en 5 documentos (`get_device_list()` â†’ `get_output_device_list()`). ValidaciÃ³n headless + sondeo de API, sin captura visual. QA cruzado Â§21.8 **PENDIENTE** (requiere segundo modelo) | `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md`, `game/isla-ancestral/scripts/audio/`, `game/isla-ancestral/tests/test_audio_config.gd`, `Logs/1208-*` |
+| M43 Efectos de Sonido | ðŸ”µ En curso (reserva {ts}, 61/100) | {mi} ({pl}) | F6 (vertical slice) | V0 | SFXManager ya en runtime (agnes-2.5-flash, suite `test_sfx_m43.gd` 15/0) + M41/M42 en runtime; **0 dependencias bloqueantes** (la columna `Dependencias` de la fila CHECKLIST-GLOBAL era espuria) | Reserva iter. 1: 39 `Ã­tems` `[S]` del catÃ¡logo de efectos â†’ suites headless con `godot472.exe` + gate `quality.yml` demostrado en rojo; al cerrar desbloquea M41, M42 y M44 | `game/isla-ancestral/scripts/audio/` (`sfx_manager.gd` y efectos), `game/isla-ancestral/scripts/audio/test_sfx_m43.gd`, `DOCUMENTACION/43-Efectos-De-Sonido/plan-actual/` |
+| 39-Tiendas | ðŸŸ¢ Disponible (162/181) â€” liberado glm-5.3-flash | â€” | F5 | V0 | M38 EconomÃ­a (nÃºcleo + iter. glm) | Iter GLM completada (Log 1017 + cierre Log 1120, 2026-09-19): 162/181 [x], 0 [?], 19 [ ] pendientes (UI M53, ferias M73, semillas/pescaderÃ­a, BUG-046). Reserva liberada 2026-09-20. | DOCUMENTACION/39-Tiendas/plan-actual/05-Checklist.md, game/isla-ancestral/scripts/shops/, Logs/1017-* |
+| M66 Anti-Softlock (QA cruzado Â§21.8) | ðŸ”µ En curso (reserva 2026-10-10 21:35) | Ling 3.1 Flash (Kilo Code) | F0/transversal (QA) | V0 | M66 ðŸŸ¡ 109/117 (8 `[?]` bloquean: 1 flip Log 1029 + 7 externos M22/M26/M27/M64/M59) + BUG-123 fix 5f457af (softlock_guard.gd:133 get 1-arg) + test falso-verde ya reparado por agnes 2026-10-08 (M66InvRuta + M66HandlerRegistro) | QA cruzado Â§21.8 (encargo msg 12, verificador â‰  agnes â‰  hy3): conteo estricto vs Totales vs GLOBAL; muestreo Â§21.8.2.b mÃ­n 5 `[x]`; re-corrida headless de la cascada de recovery rota; verificaciÃ³n guardiÃ¡n anti-falso-verde (CHECKS_MINIMOS=19). READ-ONLY â€” flips al director | `DOCUMENTACION/66-Anti-Softlock/plan-actual/`, `game/isla-ancestral/scripts/core/softlock_guard.gd`, `game/isla-ancestral/scripts/core/test_anti_softlock_m66.gd`, `game/isla-ancestral/scripts/core/test_m66_inv_ruta.gd`, `game/isla-ancestral/scripts/core/test_m66_handler.gd` |
+| M116 Instalador (QA cruzado Â§21.8) | ðŸ”µ En curso (reserva 2026-10-10 22:05) | Ling 3.1 Flash (Kilo Code) | F8 (calidad) | V0 | M116 ðŸŸ¡ 169/192 (23 `[?]` = PatrÃ³n D degradados por el director 2026-10-10, QA agnes msg 200) + QA previa atria Log 1019 (2026-09-18, 0 flips) | QA cruzado Â§21.8 (encargo msg 14, verificador â‰  agnes â‰  Step 5): conteo estricto (169/0/23=192 âœ“ GLOBAL; **drift hallado: totales L268-269/L285/L287-291 stale en 192/0/0**), muestreo 10+ Ã­tems, PatrÃ³n D con contexto de secciÃ³n (confirma Step 5 msg 57: doble indexaciÃ³n estructural), runners re-corridos headless. READ-ONLY â€” flips al director | `DOCUMENTACION/116-Instalador/plan-actual/`, `game/isla-ancestral/scripts/build/`, `game/isla-ancestral/data/installer/`, `game/isla-ancestral/tests/run_tests.gd` |
+| M89 Diseno-De-Menus (QA cruzado Â§21.8) | âœ… Completado (sello 2026-10-10 23:05) | Ling 3.1 Flash (Kilo Code) | F0/transversal (QA) | V0 | M89 ðŸŸ¡â†’âœ… 124/125 (1 `[?]` = M154 caÃ­do, dueÃ±o externo M154 visiÃ³n) + QA cruzado agnes-3-flash 2026-10-06 (checklist L328-339, nunca registrada en GLOBAL/SEALS) + sello hy3 Log 1351 caducado (estado T-M2 93/2) | QA cruzado Â§21.8 (encargo msg 16, verificador â‰  mimo â‰  agnes): conteo estricto 124/1/0=125 âœ“ Totales+GLOBAL; muestreo 10/10 (Â§9 del 03-Diseno sustantivo + citas de cÃ³digo); suites re-corridas 48/0 + 51/0 EXIT 0; `[?]` M154 verificado como deuda externa real (no M114). **Veredicto: SUBE A âœ…** â€” sello aplicado en GLOBAL fila 89 + CHECKLIST-QA-SEALS (Ling#17) | `DOCUMENTACION/89-Diseno-De-Menus/plan-actual/`, `game/isla-ancestral/scripts/ui/test_m89_menus.gd`, `game/isla-ancestral/scripts/ui/test_settings_audio_roundtrip.gd`, `game/isla-ancestral/scripts/ui/layers/`, `game/isla-ancestral/scripts/time/game_clock.gd`, `game/isla-ancestral/scripts/clock/caso_reloj_tests.gd` |
+| M88 Fuentes-Tipograficas (auditorÃ­a de sello) | ðŸŸ¡ Con dudas (sello agnes MANTIENE âœ…) | Ling 3.1 Flash (Kilo Code) | F0/transversal (QA) | V0 | M88 ðŸŸ¡ 174/185 (11 `[?]` externos) + sello agnes-3-flash 2026-10-06 (Kilo Code) | AuditorÃ­a de sello (encargo msg 16, segunda verificaciÃ³n independiente â‰  agnes â‰  mimo): conteo estricto 174/11/0=185 âœ“ Totales+GLOBAL (0 drift); muestreo 10/10 VÃLIDO; 3 suites re-corridas 11/0 + 22/0 + 43/0 EXIT 0 (76 checks â€” rÃ©plica exacta del reporte de agnes); 11 `[?]` = deudas externas reales con dueÃ±o (M154 Ã—5, diseÃ±ador Ã—2, M90, M58/M53, M88 pipeline, Nunito-Variable). **Veredicto: MANTIENE âœ…** â€” sin flips; mÃ³dulo permanece ðŸŸ¡ (DoD Â§21.6) | `DOCUMENTACION/88-Fuentes-Tipograficas/plan-actual/`, `game/isla-ancestral/scripts/fonts/`, `game/isla-ancestral/scripts/ui/theme/theme_ux.gd`, `game/isla-ancestral/data/fonts/fonts.json`, `game/isla-ancestral/assets/fonts/` |
+
+| M117 Build System | ðŸŸ¡ Con dudas (iter. 4 cerrada 2026-10-16 â€” 94/110; 16 [?] externos) | â€” | F8 (calidad) | V0 | M116 âœ… (192/192; V3 desync `.iss` corregido en Log 946), M118 nÃºcleo âœ… | AuditorÃ­a de los 53 `[ ]` contra cÃ³digo/config real â†’ **33 `[x]` con evidencia + 20 `[?]` con dueÃ±o**. Checklist del mÃ³dulo (110 Ã­tems reales): `59 [x]`/`51 [ ]` â†’ **`92 [x]`/`0 [ ]`/`18 [?]`**. 18 `[?]` con dueÃ±o (M118 smoke/nightly/permisos/keystore, M96+infra macOS/Linux presets+firmado, M116 signtool, M113 stress, build real mediciÃ³n). `test_build_m117.gd` no corre aislado (bootea escena principal) â†’ `[?]` M118; cierre parcial iter. 3 vÃ­a gate duro `quality.yml`. Pendiente QA cruzado Â§21.8 (posterior â†’ Hy3/agnes/s2, independencia familia DeepSeek). **Reserva 2026-10-16 â€” DS-V4.1-Flash-Opencode (OpenCode), encargo del director `GLM-5.3 Flash-Director` (msg 02):** clasificaciÃ³n de los 18 `[?]` (cerrables con cÃ³digo/config CI vs externos con dueÃ±o) + cierre Â§13/Â§14 (MCP Godot + suites headless); reporte al canal al cierre. Iter. 3 agnes (Log 946, 2026-09-17): sync `#define AppVersion` de `installer/*.iss` en `bump_version.py` + gate duro `test_build_m117`/`test_instalador_m116`; `test_bump_version.py` 14/14, `run_tests.py --module build` 2 OK. **Iter. 4 DS-V4.1-Flash-Opencode (OpenCode, encargo GLM-5.3 Flash-Director msg 02, Log 1888):** T-029/T-030 cerrados con export real Ã—3 (Windows 125.98 MB total; Linux/SteamOS 96.58 MB c/u); fuga `Godot/` al artifact cerrada (`exclude_filter="Godot/*"` en 4 presets + `.gdignore` local; 0 hits verificado); `bump_version.py` sincroniza `export_presets.cfg` (desync 0.0.2â†’0.0.6 realineado) + tests 18/18; 16 `[?]` externos restantes. | `DOCUMENTACION/117-Build-System/plan-actual/`, `tools/ci/`, `game/isla-ancestral/scripts/build/`, `Logs/946-*` |
+
+| M38 EconomÃ­a | ðŸŸ¡ QA atria-dawn (Log 982, 2026-09-18): âœ…â†’ðŸŸ¡, 6 flips | GLM-5.3 (Kilo Code) + QA atria-dawn | F5 | V0 | Secciones J-N (Log 844) + cierre 5b (Log 823) | CERRADO TOTAL: 6 iteraciones (base ox-alpha â†’ iter2 glm-5.3-flash â†’ iter3 Hy3 â†’ iter4/5/5b GLM-5.3). Cierre 5b: T7 amistad 3 niveles reales (12/12) + T9 rendimiento 5000 tx (6/6) + M.8 hash + M.6 conteo. 14 suites 0 fallos. **QA Log 982: 11/12 suites 0 fallos; BUG-047 (items solo-vendibles con venta anulada a 0 â€” 5 items del catÃ¡logo) + BUG-028 causa raÃ­z encontrada (item_id inexistente) + BUG-048 (UI no compila, M53). NÃºcleo robusto y honesto; los 6 flips son todos de BUG-047/048.** Verificador sugerido: Hy3 | game/isla-ancestral/scripts/economia/*.gd + shops/test_tiendas.gd + DOCUMENTACION/38-Economia/plan-actual/ |
+
+| M166 Variantes (parte copyright) | ðŸŸ¢ Liberada 2026-09-18 20:55 (Log 1035) â€” mÃ³dulo vuelve a ðŸ”µ H12 (mimo-v2.5) | agnes-3-flash (Sapiens AI) / Kilo Code | F8 (calidad/pipeline) | V0 | Claim M127 Log 1022: 434 .glb sin copyright (techo `asset_metadata_scope.json` 418 excedido â†’ +16); dueÃ±o pipeline M166/M09 | VerificaciÃ³n empÃ­rica .glb por .glb (sidecars, extras GLB, catÃ¡logos M166/M09/data/legal): **0 CON / 694 SIN / 0 AMBIGUO; claim 434 = 418 activos + 16 respaldos media/Obsoletos; origen propio**. BUG-052 + fix de pipeline propuesto. NO tocÃ³ H12 (mimo-v2.5/Hy4) ni scripts de variantes | `scripts/auditar_copyright_glb.py` (nuevo), `tools/legal/auditoria_copyright_glb.json` (nuevo), `DOCUMENTACION/11-BUGS.md`, `DOCUMENTACION/09-Terreno-Y-Geografia/plan-actual/05-Checklist.md`, `DOCUMENTACION/166-Variantes-Y-Perfil-De-Rendimiento/plan-actual/05-Checklist.md`, `Logs/1035-*` |
+
+| M09 Terreno-Y-Geografia (parte copyright) | ðŸŸ¢ Liberada 2026-09-18 20:55 (Log 1035) â€” mÃ³dulo vuelve a ðŸŸ¡ 98/105 (estado previo) | agnes-3-flash (Sapiens AI) / Kilo Code | F8 (calidad/pipeline) | V0 | Mismo claim M127/1022 â€” co-dueÃ±o del pipeline de exportaciÃ³n junto a M166 | Resultado de la auditorÃ­a registrado en plan-actual M09 + 11-BUGS.md (BUG-052, ampliaciÃ³n del hallazgo M127). Resto del mÃ³dulo intacto | `DOCUMENTACION/09-Terreno-Y-Geografia/plan-actual/05-Checklist.md`, `DOCUMENTACION/11-BUGS.md`, `Logs/1035-*` |
+| M161 Diseno-Visual-De-NPCs | ðŸ”µ En curso (reserva agnes-3-flash 2026-10-21, frente N650 #752, permiso visiÃ³n/captura) | agnes-3-flash (Sapiens AI) / Kilo Code | F4/Vertical slice | V1 (VISIÃ“N) | M19ðŸŸ¡ M159ðŸŸ¢(300/300 cerrado agnes) M155ðŸŸ¢ | Frente N650 asignado por el director (#752). B1 mediciÃ³n agnes: 23 diseÃ±os NPC (AURÃ—5, CENÃ—5, CORÃ—5, RIZÃ—8) en `data/npc_visuals/`, 7/7 refs herramientaâ†’M159 vÃ¡lidas (art_005, her_001/004/006, tal_002), 42 `[ ]` + 2 `[?]` (M45/M46 assets + RF6 iter 2, owner externo). 94/138. Tandas: b1 mediciÃ³n (hecha) â†’ producciÃ³n visual/validaciÃ³n por isla â†’ tests + docs. Reserva Â§21.3 en los 4 registros | `DOCUMENTACION/161-Diseno-Visual-De-NPCs/plan-actual/`, `game/isla-ancestral/data/npc_visuals/`, `game/isla-ancestral/scripts/data/npc_visual_database.gd`, `game/isla-ancestral/tests/unit/data/test_npc_visual_database.gd` |
+
+| M19/M25 QA V2 (V-3 antorcha_pared) | ðŸŸ¢ Liberada 2026-09-19 03:19 (Log 1049) â€” fila 19 vuelve a estado previo | agnes-3-flash (Sapiens AI) / Kilo Code | V2 (asistencia) | V2 | Triage de V-1..V-7 (Log 1035): V-3 = bug de posicionamiento latente (antorcha no instanciada hoy; M25=13/105) | V-3 RESUELTO: regla E-80 `scripts/ruinas/colocar_props_m25.gd` (get_height+1) + test headless 11/11 + captura antes/despuÃ©s en `capturas/19-Muelle/`. V-2/V-4 [?] Hy4 (mallas). NO toquÃ© scripts/ia_npc/ ni mallas | `game/isla-ancestral/scripts/ruinas/colocar_props_m25.gd`, `test_colocar_props_m25.gd`, `preview_antorcha_m25.gd`, `scenes/preview_antorcha_m25.tscn`, `tools/mcp/godot-mcp/capturas/19-Muelle/`, `DOCUMENTACION/19-NPC-Y-Vecinos/plan-actual/05-Checklist.md`, `Logs/1049-*` |
+
+| M31 QA visual K.2 | ðŸŸ¢ Liberada 2026-09-19 03:19 (Log 1050) â€” M31 vuelve a ðŸŸ¡ 115/169 + nota | agnes-3-flash (Sapiens AI) / Kilo Code | V2 (asistencia) | V2 | VerificaciÃ³n de los [?] K.2 con evidencias (catÃ¡logos M49/M52, ausencia de captura V4 de M31) | 0 flips (no hay captura V4 de M31; escÃ©nicos ausentes confirman [?]); 2 [?] precisados con evidencia; M31â†”M49 y M58/M114 siguen con sus dueÃ±os | `DOCUMENTACION/31-Ciclo-Dia-Noche/plan-actual/05-Checklist.md`, `Logs/1050-*` |
+
+| M51 triage V-6/V-7 | ðŸŸ¢ Liberada 2026-09-19 03:19 (Log 1051) â€” M51 vuelve a su estado previo + nota | agnes-3-flash (Sapiens AI) / Kilo Code | V2 (asistencia) | V0 | V-6/V-7 (Log 1035) contra issues documentados de M51 iter. 5 + KnownIssues M167 | Duplicado (no se abre bug nuevo): V-6 = KnownIssue M167 + `[ ]` "ConfirmaciÃ³n estÃ©tica final del usuario" (M51 Log 750); V-7 = capturas pre-iter. 5 + tinte somero declarado. Nota en M51 05-Checklist | `DOCUMENTACION/51-Agua/plan-actual/05-Checklist.md`, `Logs/1051-*` |
+
+| M52 QA visual calibraciÃ³n | ðŸŸ¢ Liberada 2026-09-19 03:19 (Log 1052) â€” M52 vuelve a su estado previo + nota | agnes-3-flash (Sapiens AI) / Kilo Code | V2 (asistencia) | V2 | Cierre del pendiente "calibraciÃ³n visual no verificada" (Log 882) | Preview in-engine `scenes/preview_vfx_m52.tscn` (6/6 disparos OK; hallazgo: VfxDirector keya por campo `evento`); captura V4; emisiÃ³n sutil/clean (densidad = decisiÃ³n M154); Totales del 05-Checklist reparados (137/10/1/1) | `game/isla-ancestral/scenes/preview_vfx_m52.tscn`, `game/isla-ancestral/scripts/particles/preview_vfx_m52.gd`, `tools/mcp/godot-mcp/capturas/52-Particulas-Y-VFX/`, `DOCUMENTACION/52-Particulas-Y-VFX/plan-actual/05-Checklist.md`, `Logs/1052-*` |
+
+| M15 Recursos | ðŸŸ¡ Liberado (iter 5: handler estacion_cambio âœ…) | GLM-5.3 (Kilo Code) | F4 | V0 | [?] P.2/L.1 + L.2 | CERRADO: persistencia ResourceSpawner (secciÃ³n M59, Log 813) + test respawn vÃ­a seÃ±al REAL dia_cambio + iter 5 (Log 843): `ResourceManager._conectar_estacion_cambio()` idempotente â†’ `_on_estacion_cambio_m29` dispara `_evaluar_respawn_global` + aviso suave con conteo. test_estacion_iter5 0 fallos (seÃ±al REAL del motor) + 6 regresiones 0 fallos (M15 iter1-4, M16, M35). Solo 2 [?] externos: meshes M45/M47, Ã¡rea 3Ã—3 M13 | `game/isla-ancestral/scripts/resources/{resource_spawner,resource_manager,test_recursos_spawner_runtime,test_estacion_iter5}.gd`, `DOCUMENTACION/15-Recursos/plan-actual/` |
+
+| M105 TelemetrÃ­a de Gameplay | ðŸ”µ En curso (iter. 6: auditorÃ­a 33 `[ ]` + fix `zone_ignored`) | DeepSeek-V4.1-Flash (WorkBuddy) | F0/transversal | V0 | M104 (Analytics) âœ… 2026-08-29 | 33 `[ ]` auditados contra el cÃ³digo real + fix del bug de integraciÃ³n de `zone_ignored` (timer detenido al salir de la Ãºltima zona) + test headless. Log 826 | `game/isla-ancestral/scripts/telemetry/{telemetry_director,test_telemetry,test_telemetria_iter5}.gd` |
+
+| M60 Datos y SerializaciÃ³n | ðŸŸ¡ Liberado (iter. 2: RF10 guardado asincrÃ³nico âœ…) | DeepSeek-V4.1-Flash (WorkBuddy) | F4/F5 | V0 | M59 ðŸŸ¡ (nÃºcleo OK, rutas `user://saves` compatibles) | CERRADO: IO de guardado fuera del hilo principal (RF10, `Thread`) + cola anti-doble-guardado (profundidad 1) + fallback sincrÃ³nico + test headless de hilo 94/0 (28 nuevos). Log 825. Pendientes no bloqueantes: ZIP voxel, UI de progreso (M53/M59), contrato edits M08, rotaciÃ³n .bak (M107) | `game/isla-ancestral/scripts/datos/{data_store,test_datos_m60}.gd` |
+
+| M04 Game Engine | âœ… COMPLETADO | MiMo V2.5 (OpenCode) | F1 | V1 | Validar la base del proyecto Godot 4.7.2 y confirmar runtime sin bloqueos | Proyecto arrancable y sin errores de motor antes de seguir con M05/M07 | `game/isla-ancestral/project.godot`, `game/isla-ancestral/scenes/main_island.tscn`, correciÃ³n de Transform3D y strings |
+
+| M05 Lenguaje y Programacion | âœ… COMPLETADO | MiMo V2.5 (OpenCode) | F1 | V0 | Convenciones GDScript aplicadas | Tipado estatico, naming correcto, anti-patrones documentados | `GUIA-GODOT/INDICE.md`, scripts varios |
+
+| M08 Mundo Voxel | âœ… Completado | MiMo V2.5 (OpenCode) | F2 | V2 | Voxel Tools configurado | Terreno OK, colisiÃ³n OK, WASD OK, cÃ¡mara OK, ediciÃ³n E/Q OK | `scripts/world/flat_ground_generator.gd`, `scripts/player/player.gd`, `scripts/main_island.gd` |
+
+| M11 Personaje del Jugador | ðŸŸ¡ Liberado con dudas (Log 1069, 2026-09-19 08:08) â€” Logs 1055/1062/1064/1069 | nex-n2.5-pro (Nex-AGI) / Kilo Code (liberado) | F3 | V2 | DiseÃ±o Bâ€“H con 73 `[?]`; cÃ³digo live limitado a movimiento/colisiÃ³n/ediciÃ³n/hotbar | Suite headless 30/0 + auditorÃ­a cÃ³digoâ†”diseÃ±o + gate CI duro verificado; QA cruzado pendiente | `game/isla-ancestral/scripts/player/test_player_m11.gd`, `.github/workflows/quality.yml`, `DOCUMENTACION/11-Personaje-Del-Jugador/plan-actual/`, `CHECKLIST-GLOBAL.md`, `Mensajes entre modelos/ESTADO-PARALELO.md` |
+
+| M12 Camara | âœ… Completado | MiMo V2.5 (OpenCode) | F3 | V2 | Camera3D + rotacion + zoom + colision + GameSettings | Rotacion mouse, zoom scroll, colision terreno, sensibilidad configurable | `scripts/follow_camera.gd` |
+
+| M53 UI/UX | ðŸŸ¡ Liberado c/iter. 1 | MiMo V2.5 â†’ Deepseek V4 Flash (Kilo) | F6 | V2 | Infraestructura core UI creada (MiMo) + capas modales (Deepseek, Log 265) | UIManager, UILayer, MenuNavigator, HUDScreen, TooltipService, NotificationService, ThemeUx, DialogLayer, PauseLayer, MenusLayer, ConfirmPopup | `scripts/ui/core/`, `scripts/ui/hud/`, `scripts/ui/services/`, `scripts/ui/theme/`, `scripts/ui/layers/` |
+
+| M112 Testing AutomÃ¡tico | âœ… Completado | ox-alpha (Cline) | F0/transversal | V0 | M111 âœ… | Framework GdUnit4 v6.2.1 + 14 test files (187 tests), cobertura, CI, test_runner.tscn | `res://tests/`, `res://addons/gdunit4/`, `.github/workflows/testing.yml`, `tests/gdunit_coverage.json`, `scenes/test_runner.tscn` | 2026-08-29
+
+| M133 GestiÃ³n del Proyecto | âœ… COMPLETADO | GLM (Kilo) | F0/transversal | V0 | Protocolo Â§21 operativo + scripts Â§21.9 disponibles | Entregables operativos de gestiÃ³n (README, guia-hitos, guia-sprints, flujo-multiagente, ADRs, actas, reportes) verificados con scripts; 127/127; log 219. âœ… Verificado por Hy3 2026-08-28 (QA cruzado Â§21.8) | `DOCUMENTACION/133-Gestion-Del-Proyecto/` |
+
+| M134 Presupuesto | âœ… COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 âœ… (gestiÃ³n operativa); polÃ­tica de costo cero | Presupuesto operativo implementado en `operativa/` (desglose, control, proyecciones, dashboard, plantillas); 100/100; log 221. âœ… Verificado por Hy3 2026-08-28 (QA cruzado Â§21.8) | `DOCUMENTACION/134-Presupuesto/` |
+
+| M135 Riesgos del Proyecto | âœ… COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 âœ… + M134 âœ… | RISK-REGISTER.md (16 entradas + matriz 5Ã—5) + GUIA-REVISION-TRIMESTRAL.md; 134/134; log 197. âœ… Verificado por Hy3 2026-08-28 (QA cruzado Â§21.8). Pendiente 1Âª revisiÃ³n formal (fundador) | `DOCUMENTACION/135-Riesgos-Del-Proyecto/` |
+
+| M136 Roadmap | âœ… COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 âœ… + M135 âœ… | ROADMAP.md ejecutivo + 7 checklists de hito (hitos/137-143) con estados reales; 199/199; log 198. âœ… Verificado por Hy3 2026-08-28 (QA cruzado Â§21.8). Pendiente MoSCoW definitivo (fundador) | `DOCUMENTACION/136-Roadmap/` |
+
+| M145 DiseÃ±o de Experiencia | ðŸŸ¡ Liberado c/programados | GLM (Kilo) | F0/transversal | V0 | M01 âœ…; dueÃ±os M53/M58/M89/M92/M105/M114 | operativa/ con 7 docs (journey, onboarding, menÃºs, feedback, accesibilidad, mÃ©tricas, plan testing); 90/105 + 15 [?] de fase jugable; log 199. ðŸ”µ QA Hy3 2026-08-28: mantiene ðŸŸ¡, 15 [?] justificados | `DOCUMENTACION/145-Diseno-De-Experiencia/` |
+
+| M146 DiseÃ±o Emocional | ðŸŸ¡ Liberado c/programados | GLM (Kilo) | F0/transversal | V0 | M145 ðŸŸ¡; M152 âœ… | operativa/ con 5 docs (paleta, mapeo, wow moments, playtesting emocional, cozy checklist); 90/100 + 10 [?] de fase jugable; log 200. ðŸ”µ QA Hy3 2026-08-28: mantiene ðŸŸ¡, 10 [?] justificados | `DOCUMENTACION/146-Diseno-Emocional/` |
+
+| M149 Nombres y Nomenclatura | âœ… Cerrado (QA cruzado hy3, Log 1092, 2026-09-19) | GLM (Kilo) | F0/transversal | V0 | M05/M147; canon real verificable | operativa/ con 5 docs + validador ejecutable de naming + hook pre-commit; 100/100 + 0 [?] (3 [?] cerrados con evidencia: A.13/E.15/G.10, BUG-058 fix). ðŸ”µ QA Hy3 2026-09-19: âœ… 100/100, 0 [?] ocultos, cumple Â§24 | `DOCUMENTACION/149-Nombres-Y-Nomenclatura/` |
+
+| M153 Objetivo Final | ðŸŸ¡ Liberado c/programados | GLM (Kilo) | F0/gobernanza | V0 | Contrato O1-O19 documentado; dueÃ±os reales | vision_contract.json v1.1 + validate_vision.py (guardiÃ¡n en verde) + prueba_vision.md; 120/130 + 10 [?] telemetrÃ­a/juego; log 202. ðŸ”µ QA Hy3 2026-08-28: mantiene ðŸŸ¡, 10 [?] justificados | `DOCUMENTACION/153-Objetivo-Final/` |
+
+| M32 Clima | ðŸŸ¡ Con dudas â€” iter. 6 verificaciÃ³n RF5/RF8 cerrada 2026-10-16 (119/121; 2 [?] con dueÃ±o) | DS-V4.1-Flash-Opencode + GLM-5.3 | F5 | V0 | M29 âœ… + M31 nÃºcleo runtime cerrado | AuditorÃ­a grep REAL: 5 consumidores E ya implementados por dueÃ±os sin marcar â†’ [x] con evidencia (M33/M34/M41/M42/M28). 96 [x] / 0 [ ] / 25 [?] con dueÃ±o V2. Suites 0 fallos. Log 830 | 2026-09-12 03:25 |
+
+| M59 Guardado | ðŸŸ¡ Liberado c/auto-save | glm-5.3-flash (Kilo Code) | F4/F5 | V0 | NÃºcleo ox-alpha âœ… (scripts/saving/ + validate_save 13/13); EventBus M07 operativo | Dirty tracking vÃ­a EventBus + auto-save (dÃ­a/misiÃ³n/cierre) + bloqueo en diÃ¡logo + PlayerSaveProvider + 2 fix latentes (seÃ±al no declarada, typing Node-providers) + test headless 0 fallos (Log 368) | `game/isla-ancestral/scripts/saving/` (save_manager.gd, save_snapshot.gd, player_save_provider.gd, test_autosave_m59.gd) |
+
+| M22 Historia Principal | ðŸŸ¡ Liberado c/nÃºcleo | glm-5.3-flash (Kilo Code) | F5 | V0/V1 | M21 ðŸŸ¡ (nÃºcleo robusto, contrato aprobado); M28 ðŸŸ¢ no bloquea el grafo | historia_principal.json (12 nodos, 7 sellos, 4 finales) + HistoriaService autoload + validador de grafo + test headless 0 fallos + regresiÃ³n M21 OK (Log 369); contenido narrativo jugable con dueÃ±o | `game/isla-ancestral/data/historia/`, `game/isla-ancestral/scripts/historia/`, `project.godot` |
+
+| M33 Agricultura | ðŸŸ¡ Liberado c/lluvia | glm-5.3-flash (Kilo Code) | F7/Actividades | V0 | NÃºcleo Deepseek âœ… (Log 296); M32 nÃºcleo âœ… (EventBus.weather) | Puente M32â†’M33: FarmService consume clima_cambio (LLUVIA/TORMENTA/TROPICAL), apply_rain idempotente, hook _tile_expuesto, test_farm_clima 0 fallos (Log 309) | `game/isla-ancestral/scripts/farm/` (farm_service.gd, test_farm_clima.gd) |
+
+| M34 Pesca | ðŸŸ¡ Liberado (iter. 2: auditorÃ­a + brechas V0 cerradas) | GLM-5.3 (Kilo Code) | F7/Actividades | V0 | NÃºcleo Deepseek âœ… (Log 297); M32 âœ… (Log 310) | CERRADO iter. 2: auditorÃ­a 4â†’84 [x] + fix bug estaciones "todas"â†’vacÃ­as (filtro ROTO antes) + fix horas 2 valores + PRNG â†’ semilla de partida M29 (rng_diario). test_fishing 0 fallos (4 bloques nuevos) + 5 regresiones 0 fallos. 69 [?] con dueÃ±o (M93 data, M52/M53 visual, M51 voxels). Log 833 | `game/isla-ancestral/scripts/fishing/` (fishing_manager.gd, test_fishing.gd) |
+
+| M93 Balance | ðŸŸ¡ Liberado (iter. 4 relevo Â§21.4.7: auditorÃ­a + brechas data) | GLM-5.3 (Kilo Code) | F5/Base de producciÃ³n | V0 | Iters. 1-2 Deepseek âœ… (Logs 258/263); iter. 3 glm-5.3-flash materializada sin log (asimilada) | CERRADO iter. 4: relevo legÃ­timo (11 dÃ­as sin actividad flash). Hallazgo: iter. 3 fantasma asimilada. AuditorÃ­a 66â†’112 [x] + 5 brechas data (mining v2 D.4, progression v2 L curvas, meta v3 M/N anti-grind/anti-exploit, timing v2 K rutinas) + test_iter4 NUEVO 0 fallos + 9 regresiones 0 fallos. Version 1.2.0. Brecha restante: simulaciÃ³n econÃ³mica (O) = prÃ³xima iter natural. Log 836 | `game/isla-ancestral/scripts/balance/`, `game/isla-ancestral/data/balance/` |
+
+| M38 EconomÃ­a | ðŸŸ¡ Liberado c/trueque | glm-5.3-flash (Kilo Code) | F5/EconomÃ­a | V0 | NÃºcleo âœ… (logs 171-235); M14 âœ… M20 âœ… M29 âœ… | BarterSystem trueque: BarterOffer + autoload (propuestas con amistad/temporada, ejecuciÃ³n atÃ³mica con rollback, lÃ­mites diarios, salvavidas RF12, persistencia M59) + 3 ofertas .tres + test 0 fallos (Log 311) | `game/isla-ancestral/scripts/economia/` (barter_*.gd, test_barter.gd), `data/economia/barter/`, `project.godot` |
+
+| M19 NPC y Vecinos | ðŸ”µ En curso | glm-5.3-flash (Kilo Code) | F4 | V0/V1 | Base snap+interacciÃ³n F âœ… (auditorÃ­a 2026-08-30); M29 âœ…; M20 ðŸŸ¡ nÃºcleo âœ… | Mudanzas (propuesta/aprobaciÃ³n/llegada 08:00 dÃ­a siguiente/partida con enfriamiento 30d) + catÃ¡logo data/villagers/ (5 perfiles) + raycast lÃ­nea de visiÃ³n F + persistencia M59 "npc" + test headless | `game/isla-ancestral/scripts/npc/` (villager_manager.gd, test_mudanzas.gd), `data/villagers/` |
+
+| M35 MinerÃ­a (iter. 1) | ðŸŸ¡ Liberado 2026-08-31 | minimax-m3-free (Kilo Code) | F4 (prototipo jugable) | V0 | M08âœ… M13âœ… M15ðŸŸ¡ nÃºcleo OK M26ðŸŸ¢ | OpciÃ³n B aplicada (no duplica M15). 3 archivos nuevos + 1 JSON + autoload `mineria` + test 42 OK/0 fallos. `MiningVeinCatalog` (data/mining/ores.json: 6 vetas cobre/hierro/oro/cristal/ancestral/polvo_estrellas). `MiningManager` (autoload) expone `intentar_extraccion(nodo, tool)` con RF6 doble drop T3+ y RF10 lÃ­mite suave 12/dÃ­a por zona + persistencia M59. Pendientes [?] honestos: visuales (M45/M52/M43), UI (M53), cableado M13â†’M35, profiler M61, recorrido E2E M138, opciÃ³n A indestructible (subsistema M08). Listo para QA cruzado (Hy3 en WorkBuddy) | `game/isla-ancestral/scripts/mineria/{mining_manager,mining_vein_catalog,test_mineria}.gd`, `game/isla-ancestral/data/mining/ores.json`, `project.godot` ([autoload] mineria) |
+
+| M70 Interacciones (iter. 1) | ðŸ”µ En curso 2026-09-01 | minimax-m3-free (Kilo Code) | F4 (prototipo jugable) | V0/V1 | M11âœ… M13âœ… | InteractionManager (autoload) orquesta raycast/Ã¡rea + dispatch a IInteractable + prioridad/prompt/cooldown + persistencia M59 + tests headless. Reutiliza `IInteractable.gd` ya existente (scripts/interfaces/). Perfil minimax-m3-free segÃºn guÃ­a 10 Â§6 (tarea agentic larga, complejidad 3, V0) | `game/isla-ancestral/scripts/interacciones/{interaction_manager,interaction_target,interaction_prompt}.gd`, `tests/test_interacciones.gd` (a crear) |
+
+| M30 Reloj en Tiempo Real (iter. 4) | ðŸŸ¡ Liberado (fix C56 whitelist ci/ âœ… 29/29) | GLM-5.3 (Kilo Code) | F7 (producciÃ³n de contenido) | V0 | M29 âœ… (GameClock autoload); M53 ðŸŸ¡ (TooltipService operativo) | CERRADO: tercera pasada de vigilancia continua C56 â€” bug registrado por esta lÃ­nea en 11-BUGS.md con A/B (Log 824) resuelto: `scripts/ci/cicd_manager.gd` (M117/M118, retenciÃ³n de artefactos = metadata de archivos, infra) â†’ whitelist `res://scripts/ci/` con criterio. caso_reloj **29/29** (685 archivos, 0 violaciones) + 6 regresiones 0 fallos (calendario/consumidores/semilla/localizaciÃ³n/fauna/inventario). BOM preexistente saneado de caso_reloj_tests.gd. SeÃ±al de regresiÃ³n C56 restaurada para todo el proyecto. Log 845. Pendientes con dueÃ±o externo: D67 M45/M46, D74 M64, C58/G113 M74/M28/M36, F105/F106 M59/M57 | `game/isla-ancestral/scripts/clock/caso_reloj_tests.gd`, `DOCUMENTACION/30-Reloj-En-Tiempo-Real/plan-actual/` |
+
+| M16 Crafting | ðŸŸ¡ Liberado c/brecha parcial 2026-09-02 | step-3.7-flash (Kilo Code) | F5 | V0 | M14 âœ… + M15 ðŸŸ¡ nÃºcleo | Cierre parcial de brecha M16: test headless 0 fallos + RF3 feedback dorado diferenciado por tags (`ancestral`/`secreta`). Pendientes 5 [?] con dueÃ±o (RF9 M45, RF12 M91/M52, RF14 M38, integraciÃ³n M14 UI emisiÃ³n M53/M39). Log 513 | `game/isla-ancestral/scripts/crafting/`, `game/isla-ancestral/data/crafting/`, `project.godot` |
+
+| M28 Viajes (iter. 2) | ðŸ“¡ Liberado 2026-09-02 | glm-5.3-flash (Kilo Code) | F7 (produccin de contenido) | V0 | TravelService âœ” (iter. 1) + HarborDock/Harbor/EmbarkTrigger/TravelUI (iter. 2) | HarborDock + Harbor + EmbarkTrigger + TravelUI capa presentacin + test_harbor_viajes 26/0 OK. Log 517. Pendientes: integracin M27, UI completa M53, Boat escena V2. | game/isla-ancestral/scripts/viajes/{travel_service,boat_route,harbor_dock,harbor,embark_trigger,travel_ui,test_viajes,test_harbor_viajes}.gd, data/viajes/rutas.json |
+
+| M71 Progresion (iter. 3) | ðŸ“¡ Liberado 2026-09-02 | glm-5.3-flash (Kilo Code) | F7 (produccion de contenido) | V0 | ProgressionManager âœ… (iter. 2 minimax) + RF12 titulos + RF10 gating | Titulos sociales (RF12): senal progreso_titulo_obtenido, persistencia v2, otorgamiento desde recompensas hito. Gating suave (RF10): validar_imposibles() + reporte a M66. Test 0 fallos. Pendientes: RF8 logros, RF16 validacion editor. Log 518. | game/isla-ancestral/scripts/progresion/progression_manager.gd (modificado) |
+
+| M72 Logros (iter. 3) | ðŸ“¡ Liberado 2026-09-02 | glm-5.3-flash (Kilo Code) | F7 (produccion de contenido) | V0 | M71 âœ… (evaluador delegado) + M59 âœ… | RF4 fechas M29 + RF5 retroactividad + RF3 EventBus event-driven + RF8 progreso humano + RF10 API consulta + RF6 toasts EventBus + RF14 validar_catalogo + persistencia v2 migracion v1. test_logros 0 fallos; regresiones M71/M28 0 fallos. Pendientes: ToastUI M53, RF2 pesca/amistad, Steam M97. Log 527. | game/isla-ancestral/scripts/logros/{achievement_service,test_logros}.gd (modificados) |
+
+| M67 VehÃ­culos (iter. 1) | ðŸ“¡ Liberado 2026-09-02 | glm-5.3-flash (Kilo Code) | F7 (producciÃ³n de contenido) | V0 | M28 âœ” (Log 517) | VehicleManager autoload (enter/exit/atracar/zarpar, validaciÃ³n docked, ISaveProvider M59) + VehiclePreset data-driven (vehicles.json 4 presets, locomotora condicional M68) + VehicleController lÃ³gico puro (fÃ­sica acotada testeable) + EventBus.vehicle aditivo. test_vehiculos 0 fallos; regresiones M28/M71/M72 0 fallos. Pendientes: nodos 3D, HUD M53, baÃºul M14, controles M57 (iter. 2). Log 528. | game/isla-ancestral/scripts/vehiculos/{vehicle_manager,vehicle_preset,vehicle_controller,test_vehiculos}.gd, data/vehiculos/vehicles.json, scripts/core/event_bus.gd (aditivo), project.godot |
+
+| M75 Postgame (iter. 1) | ðŸŸ¡ Liberado 2026-09-02 | glm-5.3-flash (Kilo Code) | F7 (producciÃ³n de contenido) | V0 | M22 âœ” (sellos) | PostgameManager autoload: activaciÃ³n vÃ­a M22 (7 sellos/final, event-driven, idempotente) + catÃ¡logo 7 actividades data-driven con dueÃ±os + sugerencias Â¿QuÃ© sigue? rotativas deterministas M29 (sin FOMO M94) + epÃ­logo + persistencia M59 + registrar_actividad() API. test_postgame 0 fallos; regresiones 0 fallos. Log 534. | `game/isla-ancestral/scripts/postgame/{postgame_manager,test_postgame}.gd`, `data/postgame/actividades.json`, `project.godot` |
+
+| M117 Build-System | ðŸŸ¡ Con dudas 2026-09-02 | step-3.7-flash (Kilo Code) | F8 (calidad) | V0 | BuildConfigManager + BuildValidator + build_targets.json + build_info.gd cerrados (test 14/0 Log 515) | Packaging/firmado/smoke/stress delegados a M96/M116/M11/M18/M118/M113. Entrada: nÃºcleo cerrado. Salida: gates de build documentados para CI/CD. | `tools/build/`, `data/build/`, `scripts/core/build_info.gd` |
+
+| M119 Actualizaciones | âœ… Completado 2026-09-02 | step-3.7-flash (Kilo Code) | F8 (calidad) | V0 | 100/100 en 05-Checklist: diseÃ±o y policy de updates cerrados (tipo/frecuencia/QA/comms/roadmap, UpdateDownloader, SaveMigrator, notificaciones UI, rollback, integraciones plataforma, testing, release/FAQ/seguridad, persistencia `user://version.tres`, hotfix/SLA, certificaciÃ³n consolas, beta testing). Test headless 15/0 Log 517. | Pendientes externos delegados: Steam/GOG/HTTP M96/M118, build/descarga real M59/M96, rollback completo M107/M59. Salida: canales y semver operativos para M142/M143. | `scripts/updates/`, `data/updates/` |
+
+| M122 Crash-Reporting | ðŸŸ¡ Con dudas 2026-09-02 | step-3.7-flash (Kilo Code) | F8 (calidad) | V0 | CrashReporter autoload + dump JSON user://crash/ + test 12/0 Log 518 | EnvÃ­o real, dashboard, metadata avanzada y sanitizaciÃ³n delegados a M104/M118/M76/M103/M102/M110/M61/M114. Entrada: nÃºcleo cerrado. Salida: captura y cola offline operativas para M142/M143. | `scripts/crash/`, `user://crash/` |
+
+| M108 Pipeline-De-Assets | ðŸŸ¡ Con dudas 2026-09-02 | step-3.7-flash (Kilo Code) | F8 (calidad) | V0 | 12 scripts creados: asset_validator/apply_import_presets/promote_asset/retire_asset/atlas_builder/asset_memory_reporter (cada uno con `_logic.gd` + wrapper) + runner `run_m108_test.gd` + escena `test_m108.tscn` | Pruebas headless bloqueadas en esta sesiÃ³n: Godot 4.7.2 headless no genera salida ni `user://test_m108_log.txt`; proyecto base arranca. Entrada: nÃºcleo V0 creado. Salida: gate headless verde + scripts operativos para M45/M46/M47/M48/M49/M50/M51/M52. | `tools/asset_pipeline/`, `assets/` |
+
+| **M15 Recursos (iter. 6)** | ðŸ”µ En curso 2026-09-16 | **atria-dawn (Kilo Code)** | **F4 (prototipo mÃ­nimo divertido) â€” FASE HABILITADA** | V0 (numÃ©rico) | M14 âœ… (Log 305 completado) | **Iter 6 COMPLETADA (Log 940):** 2 fixes reales â€” doble entrega de drops en spawner (fibra delta=6, mÃ¡x simple 4; tests previos usaban `>=1` sin cota) + stub `cantidad_de()` (devolvÃ­a 0 â†’ `Inventario.count_item()`). Suite nueva 3 fallosâ†’0; 7 suites regresiÃ³n 0 fallos. Flip 75/222 â†’ 99/222. Quedan 115 [ ] (action-real: drops fÃ­sicos, pooling, impostores) + 8 [?] con dueÃ±o. | `game/isla-ancestral/scripts/resources/{resource_manager,resource_spawner,resource_node,resource_definition,resource_drop_entry,test_m15_iter6_atria}.gd`, tests M16/M35, `DOCUMENTACION/15-Recursos/plan-actual/` |
+| M155 Vestimenta-Y-Accesorios | ðŸ”µ En curso (reserva 2026-10-11, 101/108) | DeepSeek-V4.1-Flash (WorkBuddy) | F5 | V0 | M11 âœ… + M14 âœ… + M156 ðŸŸ¢ + M59 âœ… | Reserva: cerrar los 6 `[ ]` reales (L54 documentar serializacion, L110 tabla de bonos, L123 highlight visual de slots por terreno actual, L160 test de combate con equipo, L166 actualizar 04-Codigo.md, L173 verificacion M154) -> implementar + documentar; L160/L173 quedan `[?]` con dueno externo (M164 / M154-vision). NO tocar marcas: flips al director. | `DOCUMENTACION/155-Vestimenta-Y-Accesorios/plan-actual/`, `game/isla-ancestral/scripts/player/equipment_manager.gd`, `game/isla-ancestral/scripts/ui/layers/equipment_layer.gd`, `game/isla-ancestral/scripts/player/test_equipment_m155.gd` |
+
+
+
+
+---
+
+
+
+| M73 Coleccionables (iter. 2 cierre) | ðŸŸ¡ Liberado 2026-09-02 | minimax-m3 (Kilo Code) | F8 (desbloqueo) | V0/V1 | M71ðŸŸ¡, M36ðŸŸ¡ Liberado | Iter 2: catalogo JSON completo (37 items / 12 cats). test_coleccionables 44/44 OK (Log 408). Listo para QA cruzado (Hy3 en WorkBuddy) | game/isla-ancestral/scripts/coleccionables/{coleccionable_item,coleccionables_catalog,coleccionables_manager,test_coleccionables}.gd, game/isla-ancestral/data/coleccionables/catalog.json (nuevo, 37 items) |
+
+| M96 Plataformas (iter. 2 cierre) | ðŸŸ¡ Liberado 2026-09-02 | minimax-m3 (Kilo Code) | F8 (lanzamiento) | V0/V1 | M04âœ… | Iter 2: auto-deteccion via OS.get_name() + factory bridges con Callable + senales plataforma_cambiada/no_soportada. test_plataformas_m96 34/34 OK (Log 415). Listo para QA cruzado (Hy3 en WorkBuddy) | game/isla-ancestral/scripts/plataformas/{iplatform_bridge,null_bridge,steam_bridge,platform_manager,test_plataformas_m96}.gd, game/isla-ancestral/data/plataformas/plataformas.json (10 plataformas) |
+
+| M115 Hardware (iter. 2 cierre) | ðŸŸ¡ Liberado 2026-09-02 | minimax-m3 (Kilo Code) | F8 (calidad) | V0/V1 | M04âœ…, M61ðŸŸ¡ | Iter 2: 5 campos nuevos en HardwareProfile + senal preset_changed + tabla 11 plataformas en data/hardware/platforms.json. test_hardware_iter2 44/44 OK (Log 414). Listo para QA cruzado (Hy3 en WorkBuddy) | game/isla-ancestral/scripts/hardware/{hardware_profile,hardware_detector,hardware_manager,test_hardware_iter2}.gd, game/isla-ancestral/data/hardware/platforms.json (nuevo) |
+
+| M94 RetenciÃ³n sin FOMO (iter. 1) | ðŸ”µ En curso 2026-09-02 | minimax-m3-free (Kilo Code) | F8 (retenciÃ³n) | V0/V1 | M93ðŸŸ¡ OK | Sistema anti-FOMO data-driven: regeneracion natural, eventos de retorno progresivos, regalos de bienvenida, tasa de retorno. Perfil minimax-m3-free segÃºn guÃ­a 10 Â§6 | game/isla-ancestral/scripts/retencion/ (a crear) |
+
+## 1. Regla principal
+
+
+
+Ningun agente debe reservar un modulo solo porque aparezca como `ðŸŸ¢ Disponible`. Antes debe comprobar que:
+
+
+
+- [ ] El modulo aparece en una fase habilitada de esta guia.
+
+- [ ] Todas sus dependencias tecnicas estan `âœ…` o tienen un contrato aprobado para el hito actual.
+
+- [ ] No existe otro agente trabajando en el modulo o en sus archivos.
+
+- [ ] El agente puede cumplir la complejidad, el presupuesto de rendimiento y los requisitos de vision del modulo.
+
+- [ ] El agente leyo el `plan-actual/` completo del modulo.
+
+- [ ] El agente registro la reserva en `CHECKLIST-GLOBAL.md` y `ESTADO-PARALELO.md`.
+
+- [ ] El agente marco el punto de entrada y la salida esperada en esta guia.
+
+
+
+Un modulo puede investigarse antes de estar habilitado, pero debe marcarse como **investigacion previa**, no como implementacion reservada.
+
+
+
+---
+
+
+
+## 2. Principio de construccion
+
+
+
+El proyecto se implementa de abajo hacia arriba:
+
+
+
+```text
+
+Contrato de producto
+
+  -> Motor y arquitectura
+
+  -> Mundo minimo
+
+  -> Jugador y camara
+
+  -> Interaccion y herramientas
+
+  -> Prototipo jugable
+
+  -> Sistemas de soporte
+
+  -> Contenido
+
+  -> Pulido visual y produccion
+
+  -> QA, rendimiento y lanzamiento
+
+```
+
+
+
+La primera meta no es completar muchos modulos. La primera meta es obtener un **M1 jugable, visible y medible**.
+
+
+
+---
+
+
+
+## 3. Mapa de fases y puertas
+
+
+
+| Fase | Objetivo | Modulos principales | Puerta de salida |
+
+|---|---|---|---|
+
+| 0 | Reglas y contratos | M01, M02, M03, M06, M152, M153, M154 | Alcance, vision y proceso congelados |
+
+| 1 | Fundacion ejecutable | M04, M05, M07 | Proyecto Godot arranca con arquitectura base |
+
+| 2 | Mundo minimo | M08, M09, M10 | Isla pequena determinista, editable y visible |
+
+| 3 | Primer control jugable | M11, M12, M13 | Jugador se mueve, mira y usa una herramienta |
+
+| 4 | Prototipo minimo divertido | M14, M15, M19, M21, M24, M25, M59, M137 | Bucle jugable completo y decision GO/NO-GO |
+
+| 5 | Base de produccion | M16, M17, M18, M20, M22, M29, M31, M32, M38, M40, M61, M63 | Sistemas conectados con contratos y presupuestos |
+
+| 6 | Vertical slice | M26, M41-M52, M53, M57, M58, M70, M89, M114, M138 | Una experiencia pequena pulida de principio a fin |
+
+| 7 | Produccion de contenido | M23, M27, M28, M30, M33-M37, M39, M54-M56, M64-M75 | Contenido escalable sobre sistemas estables |
+
+| 8 | Arte y calidad final | M45-M50, M87-M91, M101-M113, M115, M122, M130-M136 | Assets, accesibilidad, QA y rendimiento aprobados |
+
+| 9 | Release | M76-M86, M95-M100, M116-M121, M123-M129, M139-M153 | Build certificada y lanzamiento preparado |
+
+
+
+Los rangos son orientativos; la puerta y las dependencias mandan. Un modulo de una fase posterior puede investigarse, pero no debe introducir runtime que dependa de una puerta aun cerrada.
+
+
+
+### 3.1 Escala de dificultad y vision
+
+
+
+| Dificultad | Significado | Perfil recomendado |
+
+|---|---|---|
+
+| 1 | Documentacion, datos simples o ajuste aislado | Agente rapido o de investigacion |
+
+| 2 | Sistema pequeno con pocas dependencias | Agente generalista |
+
+| 3 | Sistema integrado con pruebas y persistencia | Agente con experiencia en Godot |
+
+| 4 | Sistema transversal, visual o con varias integraciones | Agente robusto con validacion MCP |
+
+| 5 | Riesgo tecnico alto, rendimiento o integracion critica | Agente senior, pruebas y QA cruzado |
+
+
+
+| Vision | Significado | Regla de reserva |
+
+|---|---|---|
+
+| V0 | No necesita observar pixeles | Puede asignarse a un agente sin vision |
+
+| V1 | Vision recomendable para QA o pulido | Preferir agente con vision; puede avanzar sin ella |
+
+| V2 | Vision necesaria para validar el resultado | Solo reservar con MCP/capturas operativas |
+
+
+
+La dificultad describe el riesgo del modulo, no la cantidad de archivos. La marca de vision describe si el resultado puede darse por terminado sin observar el juego, el editor o el asset.
+
+
+
+### 3.2 Matriz de la ruta critica
+
+
+
+| Orden | Modulo | Dificultad | Vision | Trabajo principal | Puede ir en paralelo |
+
+|---:|---|:---:|:---:|---|---|
+
+| 1 | M04 Game Engine | 5 | V1 | Proyecto, renderer, input, build | No |
+
+| 2 | M05 Lenguaje y Programacion | 3 | V0 | Convenciones y utilidades | Con M04, sin pisar archivos |
+
+| 3 | M07 Arquitectura General | 5 | V0 | Servicios, eventos, contratos | Despues del contrato de M04 |
+
+| 4 | M08 Mundo Voxel | 5 | V2 | Chunks, Voxel Tools, edicion | No; bloquea M09/M10 |
+
+| 5 | M10 Generacion del Mundo | 5 | V1 | Seed y generacion determinista | Con M09 solo en investigacion |
+
+| 6 | M09 Terreno y Geografia | 4 | V2 | Aurora, alturas, costa y POI | Con M10 despues del contrato |
+
+| 7 | M11 Personaje del Jugador | 4 | V2 | Movimiento, colision, pivot | Despues de M07; requiere M08 para prueba |
+
+| 8 | M12 Camara | 2 | V2 | Seguimiento, zoom y encuadre | Despues de M11 |
+
+| 9 | M13 Herramientas | 4 | V2 | Raycast, extraccion y colocacion | Despues de M08 y M11 |
+
+| 10 | M14 Inventario | 3 | V1 | Slots y estado minimo | Con M15, sin depender de UI final |
+
+| 11 | M15 Recursos | 3 | V1 | Recoleccion y drops | Con M14 |
+
+| 12 | M59 Guardado | 5 | V0 | Serializacion, slots y migraciones | Con M14/M15, sin UI final |
+
+| 13 | M19 NPC y Vecinos | 4 | V2 | NPC de prueba y presencia visual | Despues de M11 |
+
+| 14 | M21 Dialogos | 4 | V1 | Conversacion y datos | Despues de M19 |
+
+| M23 Historias Secundarias (iter. 1) | ðŸŸ¡ Liberado 2026-09-02 | step-3.7-flash (Kilo Code) | F7 (producciÃ³n de contenido) | V0 | M22âœ… | NÃºcleo data-driven de cadenas de misiones secundarias + validaciÃ³n anti-repeticiÃ³n + test headless 0 fallos (Log 510). Contenido/producto pendiente: 60 cadenas, diÃ¡logos M21, cosmÃ©ticos M53/M45, integraciones M68/M36/M37/M32, E2E. | `game/isla-ancestral/data/historias/` (a crear), `game/isla-ancestral/scripts/historias/` (a crear), `project.godot` |
+
+| M24 Templos y Puzzles | 5 | V2 | Puzzle observable y verificable | Despues de M13 |
+
+| 16 | M25 Ruinas | 3 | V2 | Estructura pequena y legibilidad | Despues de M24 |
+
+| 17 | M137 Prototipo | 5 | V2 | Integracion y GO/NO-GO | No; es la puerta F4 |
+
+| 18 | M61 Rendimiento | 5 | V0 | Presupuesto, profiling y gates | Desde M08; cierre despues de M137 |
+
+| 21 | M24 Templos y Puzzles | 5 | V2 | ðŸŸ¡ Liberado (nucleo framework) | Hy3 (Kilo) | M13 âœ… | Framework emisor-receptor + validacion de no-arbitrariedad + test 0 fallos; puzzles jugables/familias/ayuda pendientes | 2026-08-29 02:20 |
+
+| 22 | M25 Ruinas | 3 | V2 | ðŸŸ¡ Liberado (nucleo + validacion visual) | Hy3 (Kilo) | M24 âœ… | Ruina chocavil legible con _buscar_altura + escena preview + captura oficial; pulido M45/M65 pendiente | 2026-08-29 01:35 |
+
+| 20 | M04+M05+M07 Cierre Fase 1 | 3-5 | V0/V1 | ðŸŸ¡ Liberado (nÃºcleo F1 verificado) | Hy3 (Kilo) | â€” | Puerta F1 cerrada: Input Map/capas fÃ­sica + registro.gd + verificar_arquitectura.gd + prueba_arquitectura.tscn SMOKE OK; auditorÃ­a completa de los 3 checklists pendiente | 2026-08-29 01:20 |
+
+| 19 | M138 Vertical Slice | 5 | V2 | Recorrido visual completo | No; requiere F4 |
+
+
+
+### 3.3 Matriz de lineas paralelas
+
+
+
+Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante este abierta**. Un agente con vision debe preferir una fila V2; un agente sin vision debe preferir una fila V0.
+
+
+
+| Linea | Modulos | Dificultad | Vision | Condicion para reservar |
+
+|---|---|:---:|:---:|---|
+
+| Datos y tiempo | M16, M29, M30, M32, M38, M40 | 2-4 | V0/V1 | F1 y contratos de M07 |
+
+| Construccion | M17, M18 | 4/3 | V2 | M08 + M14 + M16 |
+
+| Relaciones y narrativa | M20, M22, M23 | 3-4 | V1 | M19 + M21 |
+
+| Viajes e islas | M27, M28 | 4/3 | V2 | M10 + M22 + M63 |
+
+| Actividades | M33-M37 | 2-3 | V1 | M08/M14/M29 segun sistema |
+
+| Economia y tiendas | M39, M93, M95 | 3-4 | V1 | M15 + M16 + M20 + M38 |
+
+| Arte 3D y materiales | M45-M50 | 3-5 | V2 | M04 + escala de M08 + M61 |
+
+| Agua y VFX | M51, M52 | 4/3 | V2 | M08 + M45 + presupuesto M61 |
+
+| UI y accesibilidad | M53, M57, M58, M87-M91 | 2-4 | V2 | M11/M14 y F4 para polish |
+
+| IA y fauna | M64, M65 | 4/3 | V1/V2 | M19 + M61 |
+
+| QA y operacion | M101-M113, M115, M122 | 1-5 | V0/V1 | Prototipo ejecutable |
+
+
+
+### 3.4 Regla de no interferencia visual
+
+
+
+- [ ] Si un agente reserva un modulo V2, otro agente puede reservar simultaneamente un modulo V0 habilitado.
+
+- [ ] Dos agentes no deben reservar a la vez dos modulos V2 que necesiten la misma escena, captura o sesion de Godot.
+
+- [ ] Un agente V0 no debe modificar escenas, materiales, layout, camara, iluminacion ni assets que otro agente V2 este revisando.
+
+- [ ] Un modulo V1 puede ser trabajado sin vision, pero queda con QA visual pendiente y no puede declararse definitivamente `âœ…` si su checklist exige captura.
+
+- [ ] La vision es un recurso de validacion compartido: reservarla en `ESTADO-PARALELO.md` cuando dos tareas dependan de la misma ventana o Blender.
+
+
+
+---
+
+
+
+## 4. Fase 0 - Contratos y preparacion
+
+
+
+**Proposito:** impedir que la implementacion contradiga la vision o que varios agentes creen contratos incompatibles.
+
+
+
+- [x] Confirmar el alcance v1.0 y los pilares de diseno en M02.
+
+- [x] Confirmar la estructura documental y el protocolo multiagente en M03.
+
+- [x] Confirmar Git, ramas, logs y reglas de no pisado en M06.
+
+- [x] Confirmar principios cozy, cero violencia y criterios de calidad en M152.
+
+- [x] Confirmar el objetivo final verificable en M153.
+
+- [x] Leer `06-GUIA-DE-CONEXION-VISION.md` antes de cualquier tarea visual.
+
+- [x] Verificar al menos una via MCP operativa para tareas visuales.
+
+- [x] Leer `GUIA-GODOT/INDICE.md` antes de modificar GDScript.
+
+- [x] Registrar toda reserva futura en `CHECKLIST-GLOBAL.md`.
+
+- [x] Registrar toda reserva futura en `ESTADO-PARALELO.md`.
+
+
+
+**Salida:** los agentes conocen el producto, las reglas y las herramientas. Esta fase no produce gameplay.
+
+
+
+---
+
+
+
+## 5. Fase 1 - Fundacion ejecutable
+
+
+
+**Orden obligatorio:** `M04 -> M05 -> M07`.
+
+
+
+### M04 - Game Engine
+
+
+
+- [x] Fijar Godot `4.7.2` y documentar la version.
+
+- [x] Crear o validar el proyecto Godot base.
+
+- [x] Configurar renderer, resolucion y objetivo de 60 FPS.
+
+- [x] Crear estructura de carpetas runtime.
+
+- [x] Configurar capas de fisica e Input Map inicial.
+
+- [x] Crear `Bootstrap` y `Main` vacios pero ejecutables.
+
+- [x] Verificar build debug y salida de errores.
+
+
+
+### M05 - Lenguaje y Programacion
+
+
+
+- [x] Aplicar convenciones GDScript del proyecto.
+
+- [x] Definir tipado, nombres y limites de complejidad.
+
+- [x] Confirmar patrones permitidos y anti-patrones.
+
+- [x] Preparar utilidades basicas de validacion y logging.
+
+
+
+### M07 - Arquitectura General
+
+
+
+- [x] Implementar registro de servicios minimo.
+
+- [x] Implementar contratos de `GameState` y `EventBus`.
+
+- [x] Definir orden de inicializacion de autoloads.
+
+- [x] Verificar dependencias unidireccionales.
+
+- [x] Ejecutar una escena vacia usando la arquitectura base.
+
+
+
+**Puerta F1:** Godot arranca, los servicios se registran y no hay errores de arquitectura. Sin esta puerta no se reservan M08, M11, M29 ni M59 como implementacion runtime.
+
+
+
+---
+
+
+
+## 6. Fase 2 - Mundo minimo
+
+
+
+**Orden recomendado:** `M08 -> M10 -> M09`.
+
+
+
+### M08 - Mundo Voxel
+
+
+
+- [x] Configurar Voxel Tools compatible con Godot fijado.
+
+- [x] Crear terreno de prueba de un chunk `16^3`.
+
+- [x] Implementar catalogo minimo: aire, tierra, piedra y madera.
+
+- [x] Validar generacion, colision y remallado.
+
+- [x] Probar extraccion y colocacion con coordenadas voxel.
+
+- [x] Medir el costo de editar bloques.
+
+
+
+### M10 - Generacion del Mundo
+
+
+
+- [x] Integrar semilla fija de desarrollo.
+
+- [x] Generar siempre el mismo chunk con la misma entrada.
+
+- [x] Separar generacion de contenido y decoracion.
+
+- [x] Evitar dependencias del orden de iteracion.
+
+
+
+### M09 - Terreno y Geografia
+
+
+
+- [x] Definir la forma minima de Aurora.
+
+- [x] Aplicar alturas, costa y zona segura de inicio.
+
+- [x] Reservar POI solo despues de validar el terreno base.
+
+- [x] Capturar la isla con `screen.capture_window`.
+
+- [x] Revisar escala, legibilidad y navegacion con vision.
+
+
+
+**Puerta F2:** existe una isla pequena determinista, con colision y edicion, que se ve correctamente y mantiene el objetivo de rendimiento inicial.
+
+
+
+---
+
+
+
+## 7. Fase 3 - Primer control jugable
+
+
+
+**Orden obligatorio:** `M11 -> M12 -> M13`.
+
+
+
+### M11 - Personaje del Jugador
+
+
+
+- [x] Implementar `CharacterBody3D` y colision.
+
+- [x] Implementar movimiento basico y gravedad.
+
+- [x] Implementar pivot para la camara.
+
+- [x] Implementar interaccion basica.
+
+- [x] Verificar escala del personaje frente al voxel de 1 m.
+
+
+
+### M12 - Camara
+
+
+
+- [x] Implementar seguimiento en tercera persona.
+
+- [x] Implementar rotacion y zoom.
+
+- [x] Verificar limites, suavizado y colision de camara.
+
+- [x] Capturar una vista de juego y revisar encuadre.
+
+
+
+### M13 - Herramientas
+
+
+
+- [x] Conectar el nucleo existente al mundo voxel real.
+
+- [x] Validar raycast, alcance y tipo de bloque permitido.
+
+- [x] Verificar feedback visual sin iluminar objetivos invalidos.
+
+- [x] Mantener el contrato `try_extract` / `try_place`.
+
+- [x] Dejar durabilidad, HUD y sonido desacoplados para fases posteriores.
+
+
+
+**Puerta F3:** el jugador puede moverse, mirar, apuntar y usar una herramienta sobre un bloque valido. Esta es la primera sesion donde la vision de Copilot aporta valor directo.
+
+
+
+---
+
+
+
+## 8. Fase 4 - Prototipo minimo divertido
+
+
+
+**El modulo coordinador es M137, pero solo se implementa despues de sus dependencias.**
+
+
+
+Orden de integracion:
+
+
+
+1. `M14 Inventario` minimo.
+
+2. `M15 Recursos` con un recurso recolectable.
+
+3. `M19 NPC` con una entidad simple.
+
+4. `M21 Dialogos` con una conversacion minima.
+
+5. `M24 Templos y Puzzles` con un puzzle elemental.
+
+6. `M25 Ruinas` con una ruina pequena.
+
+7. `M59 Guardado` con un save/load del estado minimo.
+
+8. `M137 Prototipo` como integrador y gate GO/NO-GO.
+
+
+
+Checklist de la fase:
+
+
+
+- [ ] Recoger un recurso y verlo en inventario.
+
+- [ ] Guardar y cargar la posicion del jugador.
+
+- [ ] Hablar con un NPC.
+
+- [ ] Resolver una interaccion de puzzle.
+
+- [ ] Explorar una zona pequena con objetivo comprensible.
+
+- [ ] Capturar una sesion completa con MCP.
+
+- [ ] Ejecutar playtest de M114.
+
+- [ ] Medir si el bucle invita a repetir la accion.
+
+- [ ] Validar que la experiencia respeta M152/M153.
+
+- [ ] Registrar decision GO/NO-GO.
+
+
+
+**Puerta F4:** el prototipo es jugable y evaluable. Si falla, se corrigen fundamentos; no se agregan islas, tiendas ni decenas de assets.
+
+
+
+---
+
+
+
+## 9. Fase 5 - Base de produccion
+
+
+
+Solo se habilita despues de F4.
+
+
+
+- [ ] M16 Crafting consume datos reales de M14/M15.
+
+- [ ] M17 Construccion consume M08 y M14.
+
+- [ ] M18 Casas usa las reglas de construccion.
+
+- [ ] M20 Amistad consume eventos de M19.
+
+- [ ] M22 Historia consume M21 y M28 solo mediante contratos.
+
+- [x] M29 Tiempo y Calendario se implementa como servicio puro.
+
+- [ ] M31 Dia/Noche consume M29 y alimenta M49.
+
+- [ ] M32 Clima consume seed y dia, sin bloquear progreso.
+
+- [ ] M38 Economia consume recursos, crafting y amistad.
+
+- [ ] M40 Infraestructura registra los servicios reales.
+
+- [ ] M61 Rendimiento define presupuestos antes de escalar contenido.
+
+- [ ] M63 Streaming se implementa despues de medir M08/M10.
+
+
+
+**Puerta F5:** los sistemas persistentes tienen contratos, eventos, pruebas y presupuestos; ningun agente agrega contenido sobre APIs inestables.
+
+
+
+---
+
+
+
+## 10. Fase 6 - Vertical slice visual
+
+
+
+Esta es la fase donde la vision se usa de forma intensiva y repetible.
+
+
+
+- [ ] Crear una zona pequena de Aurora con identidad visual.
+
+- [ ] Crear un NPC con silueta, material y animacion legibles.
+
+- [ ] Crear una ruina y un puzzle con lectura visual inmediata.
+
+- [ ] Integrar iluminacion, particulas, audio y UI minima.
+
+- [ ] Capturar antes y despues de cada ajuste visual.
+
+- [ ] Revisar capturas con M154: capturar -> analizar -> ajustar.
+
+- [ ] Limitar a cinco iteraciones autonomas por bloque visual.
+
+- [ ] Ejecutar playtest real con M114.
+
+- [ ] Corregir primero jerarquia, legibilidad, escala y rendimiento.
+
+- [ ] Marcar M138 solo cuando la experiencia sea recorrible de inicio a fin.
+
+
+
+**Puerta F6:** vertical slice aprobado tecnica y visualmente. A partir de aqui se puede delegar contenido en paralelo.
+
+
+
+---
+
+
+
+## 11. Fase 7 - Delegacion paralela de contenido
+
+
+
+Cuando F6 esta abierta, los agentes pueden reservar modulos en paralelo, siempre que cada uno cumpla dependencias y no comparta archivos de runtime sin contrato.
+
+
+
+- [ ] Reservar M23/M27/M28 para narrativa, islas y viajes.
+
+- [ ] Reservar M33-M37 para actividades y vida del mundo.
+
+- [ ] Reservar M39/M54-M56 para tiendas, mapa, diario y fotografia.
+
+- [ ] Reservar M64/M65 para IA de NPC y animales.
+
+- [ ] Reservar M66/M67-M75 para anti-softlock, transporte, coleccionables y postgame.
+
+- [ ] Mantener una semilla y un entorno de prueba comunes.
+
+- [ ] Exigir fixtures y escenas de prueba por cada sistema nuevo.
+
+- [ ] Exigir captura visual cuando el modulo cambie pixels del juego.
+
+- [ ] No permitir que un agente cambie contratos base sin actualizar el modulo dueÃ±o.
+
+
+
+---
+
+
+
+## 12. Fase 8 - Arte, accesibilidad y calidad
+
+
+
+- [ ] M45 define el kit visual antes de producir grandes lotes.
+
+- [ ] M47 fija materiales y atlas antes de decorar todas las islas.
+
+- [ ] M48 fija el contrato de animacion antes de crear NPCs masivos.
+
+- [ ] M49 fija presets de iluminacion y limites de luces.
+
+- [ ] M50 produce vegetacion con LOD y pooling.
+
+- [ ] M51 integra agua despues de estabilizar chunks y rendimiento.
+
+- [ ] M52 integra VFX con presupuesto por escena.
+
+- [ ] M53/M57/M58 validan UI, controles y accesibilidad junto a capturas.
+
+- [ ] M87-M91 validan localizacion, tipografias, grafica y audio.
+
+- [ ] M101-M113 ejecutan QA, bugs, logging, testing y stress.
+
+- [ ] M115 valida hardware y perfiles reales.
+
+- [ ] M122 valida crash reporting sin filtrar datos sensibles.
+
+
+
+**Puerta F8:** el juego conserva legibilidad y rendimiento al agregar contenido, no solo belleza en una escena aislada.
+
+
+
+---
+
+
+
+## 13. Fase 9 - Release y operacion
+
+
+
+- [ ] Congelar features segun M142.
+
+- [ ] Validar licencias y modelos 3D con M83-M85.
+
+- [ ] Validar legal, privacidad y clasificacion con M78-M82.
+
+- [ ] Preparar builds y firmas con M116-M119.
+
+- [ ] Preparar store, trailer y comunidad con M97-M100.
+
+- [ ] Verificar actualizaciones, backups y compatibilidad de saves.
+
+- [ ] Ejecutar smoke test de instalacion limpia.
+
+- [ ] Ejecutar regresion visual y funcional.
+
+- [ ] Obtener aprobacion de M151 antes de lanzamiento.
+
+- [ ] Reservar M144 y M145 solo despues del release candidate.
+
+
+
+---
+
+
+
+## 14. Procedimiento de reserva para todos los agentes
+
+
+
+Antes de reservar:
+
+
+
+- [ ] Leer esta guia completa o la fase aplicable.
+
+- [ ] Leer `CHECKLIST-GLOBAL.md`.
+
+- [ ] Leer `ESTADO-PARALELO.md`.
+
+- [ ] Revisar dependencias del modulo.
+
+- [ ] Revisar si el modulo toca vision, Godot o archivos compartidos.
+
+- [ ] Comprobar que el modulo esta habilitado por la puerta actual.
+
+- [ ] Confirmar en el registro de reservas de la seccion 17 que el modulo no este `ðŸ”µ` o `ðŸ”´`.
+
+
+
+Al reservar:
+
+
+
+- [ ] Cambiar el estado global a `ðŸ”µ En curso`.
+
+- [ ] Escribir el agente y timestamp.
+
+- [ ] Cambiar el estado del modulo a `ðŸ”µ En curso` en la seccion 17 de esta guia.
+
+- [ ] Agregar el bloque `Reserva actual` al inicio del `05-Checklist.md` del modulo.
+
+- [ ] Escribir en notas: `Fase X, entrada Y, salida Z`.
+
+- [ ] Registrar la reserva en `ESTADO-PARALELO.md`.
+
+- [ ] Declarar archivos que se van a modificar.
+
+- [ ] Declarar la herramienta de validacion que se usara.
+
+
+
+Al finalizar o liberar:
+
+
+
+- [ ] Ejecutar tests y validacion visual si corresponde.
+
+- [ ] Actualizar el `05-Checklist.md` del modulo.
+
+- [ ] Actualizar la fila de `CHECKLIST-GLOBAL.md`.
+
+- [ ] Actualizar el estado del modulo en la seccion 17 de esta guia.
+
+- [ ] Cerrar o reemplazar el bloque `Reserva actual` del `05-Checklist.md`.
+
+- [ ] Agregar notas honestas al `04-Codigo.md`.
+
+- [ ] Crear log numerado.
+
+- [ ] Liberar el estado `ðŸ”µ`/`ðŸ”´` a `ðŸŸ¢`, `ðŸŸ¡` o `âœ…`.
+
+- [ ] No marcar `âœ…` si queda algun `[?]`.
+
+- [ ] Solicitar QA cruzado cuando corresponda.
+
+
+
+Formato recomendado para una reserva:
+
+
+
+```text
+
+RESERVA: M08 - Mundo Voxel
+
+AGENTE: [modelo / plataforma]
+
+FASE: 2 - Mundo minimo
+
+ENTRADA: F1 aprobada; M07 disponible
+
+SALIDA: chunk 16^3 editable, determinista y medido
+
+ARCHIVOS: [lista]
+
+VALIDACION: Godot MCP + captura screen + test headless
+
+FECHA: YYYY-MM-DD HH:MM:SS
+
+```
+
+
+
+---
+
+
+
+## 15. Regla para agentes de investigacion
+
+
+
+Un agente puede investigar cualquier modulo futuro si no modifica runtime ni pisa el trabajo de otro agente.
+
+
+
+- [ ] Marcar la tarea como `INVESTIGACION PREVIA`.
+
+- [ ] No cambiar el modulo a `ðŸ”µ En curso` salvo que vaya a implementar.
+
+- [ ] Entregar decisiones, riesgos, APIs y dependencias.
+
+- [ ] No inventar que una integracion esta hecha.
+
+- [ ] Devolver el modulo a estado disponible al terminar.
+
+- [ ] Agregar hallazgos al `plan-actual/02-Analisis.md` o al documento dueÃ±o.
+
+
+
+Esto permite investigar M45, M64 o M97 con anticipacion sin desordenar el orden de codificacion.
+
+
+
+---
+
+
+
+## 16. Estado inicial recomendado - 2026-08-26
+
+
+
+- [x] MCP de GitHub Copilot verificado con `screen` y `godot`.
+
+- [x] M13 tiene nucleo y preview visual implementados.
+
+- [x] Completar la puerta F1 de M04/M07 sobre el proyecto runtime actual.
+
+- [ ] Integrar M08 con el mundo voxel real.
+
+- [x] Integrar M11 y M12 con la escena jugable.
+
+- [ ] Cerrar F3 con M13 conectado a bloques reales.
+
+- [ ] Continuar hacia M14/M15/M59 y luego M137.
+
+- [ ] Delegar contenido masivo solo despues de F4 o de una excepcion documentada.
+
+
+
+**Regla final:** si hay duda sobre que modulo tomar, no se elige por numero ni por facilidad. Se elige el primer modulo pendiente de la primera fase cuya puerta y dependencias esten satisfechas.
+
+
+
+---
+
+
+
+## 17. Registro de reservas de la ruta critica
+
+
+
+Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado. `CHECKLIST-GLOBAL.md` continua siendo la fuente detallada de progreso; esta tabla es la vista de coordinacion del orden.
+
+
+
+### Flujo para modelos nuevos (SIEMPRE empezar en CHECKLIST-GLOBAL.md)
+
+
+
+1. **Leer `CHECKLIST-GLOBAL.md`** â†’ buscar tu nombre en la columna **Recom**.
+
+2. **Elegir un mÃ³dulo** `ðŸŸ¢ Disponible` que te corresponda por modelo.
+
+3. **Verificar acÃ¡** (tabla 17) que el mÃ³dulo estÃ© habilitado (fase, dependencias resueltas, visiÃ³n si aplica).
+
+4. **Reservar** â†’ actualizar: `CHECKLIST-GLOBAL.md` (`Agente actual` + `Estado`), `05-Checklist.md` del mÃ³dulo, esta tabla, y `Mensajes entre modelos/ESTADO-PARALELO.md`.
+
+5. **Trabajar** â†’ documentaciÃ³n primero, cÃ³digo, tests (AGENTS.md Â§13-14).
+
+6. **Liberar** â†’ actualizar los 4 registros al mismo tiempo.
+
+
+
+> âš ï¸ **No empezar acÃ¡.** Esta tabla es para verificar orden y dependencias, NO para elegir mÃ³dulo. La fuente de quÃ© mÃ³dulo te corresponde es `CHECKLIST-GLOBAL.md` (columna Recom). Si trabajÃ¡s un mÃ³dulo que no te corresponde, otro modelo que sÃ­ puede hacerlo bien se queda sin tarea.
+
+
+
+> **Columna "Recomendado":** indica quÃ© modelo es mejor candidato para trabajar cada mÃ³dulo, basÃ¡ndose en sus fortalezas comprobadas. No es obligatorio seguirla, pero sirve de guÃ­a cuando un modelo se incorpora y busca tarea.
+
+
+
+| Orden | Modulo | Dificultad | Vision | Estado | Recomendado | Agente | Entrada | Salida | Ultima actividad |
+
+|---:|---|:---:|:---:|---|---|---|---|---|---|
+
+| 1 | M04 Game Engine | 5 | V1 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | Fase 0 completa | Proyecto Godot ejecutable, Godot 4.7.2, sin errores de motor | 2026-08-26 |
+
+| 2 | M05 Lenguaje y Programacion | 3 | V0 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | Contrato de M04 | Convenciones GDScript aplicadas, tipado estatico | 2026-08-26 |
+
+| 3 | M07 Arquitectura General | 5 | V0 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M04/M05 | EventBus(9 dominios) + ServiceRegistry + Bootstrap + test 6/6 PASS | 2026-08-26 |
+
+| 4 | M08 Mundo Voxel | 5 | V2 | âœ… Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | F1 aprobada | VoxelBoxMover + terreno OK + edicion E/Q OK | 2026-08-26 |
+
+| 5 | M10 Generacion del Mundo | 5 | V1 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M08 | world_generator.gd + IslandGenerator + semilla 42 + 21 bloques con colores | 2026-08-26 |
+
+| 6 | M09 Terreno y Geografia | 4 | V2 | âœ… COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M08/M10 | Isla Aurora: forma definida, playa visible, biomas (beach/grass/forest/mountain/snow), spawn en playa | 2026-08-26 |
+
+| 7 | M11 Personaje del Jugador | 4 | V2 | ðŸŸ¡ Con dudas â€” liberado | â€” | nex-n2.5-pro liberÃ³ | M08 | NÃºcleo live: movimiento, colisiÃ³n voxel, salto, ediciÃ³n, hotbar e integraciÃ³n M155; suite 30/0; 50/123, 73 `[?]`, QA Â§21.8 pendiente (Log 1069) | 2026-09-19 08:08 |
+
+| 8 | M12 Camara | 2 | V2 | âœ… Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | M11 | CameraFollowing: rotacion mouse + zoom scroll + colision terreno + GameSettings (sensibilidad + invert Y) | 2026-08-26 |
+
+| 9 | M13 Herramientas | 4 | V2 | ðŸŸ¡ Liberado c/integraciones | Hy4 | Hy3 (Kilo) â€” relevo autorizado por el usuario | M08+M11 | Fase 3 cerrada: extracciÃ³n progresiva + highlight + HUD durabilidad + sonido/partÃ­culas; 65/102; pendientes con dueÃ±o (M16/M17/M33/M35/M46/M59) | 2026-08-28 23:00 |
+
+| 10 | M14 Inventario | 3 | V1 | ðŸ”µ Reservado - nucleo de datos | GLM 5.3 | ox-alpha (Cline) | F3 parcial / hallazgos H1-H8 (log 210) | Autoload Inventario + ISaveProvider | 2026-08-26 |
+
+| 11 | M15 Recursos | 3 | V1 | ðŸŸ¢ Bloqueado por M14 | GLM 5.3 | â€” | M14 | Recurso recolectable | â€” |
+
+| 12 | M59 Guardado | 5 | V0 | ðŸŸ¢ Bloqueado por M07/M14 | GLM 5.3 | â€” | Estado minimo | Save/load validado | â€” |
+
+| â€” | M105 TelemetrÃ­a de Gameplay | 2 | V0 | ðŸŸ¡ Liberado â€” iter. 6 (157/163, fix `zone_ignored` âœ…) | deepseek-v4-flash | DeepSeek-V4.1-Flash (WorkBuddy) | M104 (Analytics) âœ… | 33 `[ ]` auditados (27 `[x]` + 6 `[?]`) + fix de integraciÃ³n de `zone_ignored` + test iter6 11/11. Log 826 | 2026-09-11 20:10 |
+
+| â€” | M60 Datos y SerializaciÃ³n | 3 | V0 | ðŸŸ¡ Liberado â€” iter. 2 (RF10 âœ…) | DeepSeek-V4.1-Flash | DeepSeek-V4.1-Flash (WorkBuddy) | M59 ðŸŸ¡ (nÃºcleo OK, rutas compatibles) | Guardado asincrÃ³nico real (RF10) con cola anti-doble-guardado + test de hilo 94/0. Log 825 | 2026-09-11 20:01 |
+
+| 13 | M137 Prototipo | 5 | V2 | ðŸŸ¢ Bloqueado por dependencias | Hy4 + MiMo V2.5 | â€” | F3 + M14/M15/M59 | GO/NO-GO | â€” |
+
+| 14 | M61 Rendimiento | 5 | V0 | ðŸŸ¡ Liberado â€” nÃºcleo de presupuestos | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M08 | BudgetProfile + budgets.json (16,7 ms, 7 categorÃ­as) + ValidateBudget (gate CI, tol 10 %) + tests 0 fallos (Log 255). Pendiente: bench_scene_a.tscn (V2), gate CI M116, integraciÃ³n categorÃ­as en mÃ³dulos | 2026-08-30 02:35 |
+
+| 15 | M138 Vertical Slice | 5 | V2 | ðŸŸ¢ Bloqueado por M137 | Hy4 | â€” | F4 | Slice aprobado | â€” |
+
+| â€” | M111 CÃ³digo de Calidad | 2 | V0 | âœ… COMPLETADO | Deepseek V4 Flash | muse-spark-1.3-contributor (Cline) | M04 âœ… | Herramientas estÃ¡ticas, CI gates, plantillas, 209/209 (Log 891: test headless 62/0 + FIX Factory) | 2026-09-14 |
+
+| â€” | M21 DiÃ¡logos | 4 | V1 | ðŸŸ¡ Liberado â€” nÃºcleo + WorldState | Hy3 | Deepseek V4 Flash (Kilo) â€” relevo de Hy3 (Kilo) | M19 âœ…, M21 nÃºcleo implementado por Hy3 | Checklist relevado 59/133 + 14 [?]; WorldStateService (RF5) + condiciones/efectos + tests 0 fallos (Log 253). IntegraciÃ³n M53/M87, condiciones M22/M23/M32 pendientes | 2026-08-30 01:50 |
+
+| â€” | M57 Interfaz de Control | 2 | V0/V1 | ðŸŸ¡ Liberado â€” nÃºcleo implementado | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M04 âœ… | ControlInput autoload (capa acciones, detecciÃ³n dispositivo + seÃ±al, remapeo con conflictos, dead zones/sensibilidad/inversiÃ³n/vibraciÃ³n, persistencia JSON atÃ³mica) + test 0 fallos (Log 254). Checklist 86/119 + 1 [?]. Pendientes: iconografÃ­a (arte), PromptButton M53, menÃº remapeo M46, migraciÃ³n gameplay M06/M13 | 2026-08-30 02:30 |
+
+| â€” | M92 Tutorial | 3 | V0/V2 | ðŸŸ¡ Liberado ? nÃºcleo lÃ³gico | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M53 (UI, ðŸ”µ en curso) | TutorialManager autoload (4 capÃ­tulos, triggers de seÃ±al, revalidaciÃ³n, estados, persistencia M59) + test 0 fallos (Log 259). Pendiente: UI burbujas/marcadores (M53, V2), triggers mundo/acciÃ³n, consejos, watchdog | 2026-08-30 03:10 |
+
+| â€” | M31 Ciclo DÃ­a/Noche | 3 | V0 (auditorÃ­a) | ðŸŸ¡ Liberado â€” iter 3 auditorÃ­a cerrada | GLM-5.3 | Kilo Code | M29 âœ… | AuditorÃ­a A-J con evidencia (16â†’115 [x], gap tipo M29) + test del CONTRATO EventBus.time.fase_cambio (16/16) + cÃ³digo muerto activado. 54 [?] con dueÃ±o (escÃ©nicos V2, contenido, cables M41/M42 ðŸ”µ). 7 suites 0 fallos. Log 829 | 2026-09-12 02:45 |
+
+| â€” | M16 Crafting | 3 | V0/V1 | ðŸŸ¡ Liberado â€” iter 3 cerrada | GLM 5.3 | GLM (Kilo) | M14 âœ… M15 âœ… M29 âœ… M93 âœ… | NÃºcleo iter 1-2 (Deepseek) + iter 3 (GLM, Logs 303/304): RF5 estacional, pergaminos M14, SFX/VFX procedural, preview RF9, test season_changed. Test 0 fallos. 6 [?] con dueÃ±o cross-module | 2026-08-31 07:55 |
+
+| â€” | M15 Recursos | 3 | V1 | ðŸŸ¡ Liberado â€” iter 3 cerrada | GLM 5.3 | GLM (Kilo) | M14 âœ… M11 âœ… M13 âœ… M29 âœ… | NÃºcleo iter 1-2 (Deepseek) + iter 3 (GLM, Log 305): persistencia ISaveProvider, respawn con M29, helper `recibir_golpe_en_nodo`. Test 0 fallos. 5 [?] con dueÃ±o (cableado M13â†’M15, meshes, Ã¡rea, persistencia spawner, test dia_cambio) | 2026-08-31 08:25 |
+
+| â€” | M112 Testing AutomÃ¡tico | 3 | V0 | âœ… COMPLETADO | Deepseek V4 Flash | ox-alpha (Cline) | M111 âœ… | GdUnit4 v6.2.1, 187 tests headless (3 runs 0 flaky), CI testing.yml | 2026-08-28 20:30 |
+
+| â€” | M102 Bug Tracking | 1 | V0 | âœ… COMPLETADO | Deepseek V4 Flash | ox-alpha (Cline) | M101 doc âœ… | GitHub Issues: plantilla, labels script, workflow mÃ©tricas, guÃ­a, dashboard; 140/140 items | 2026-08-29 02:30 |
+
+| â€” | M103 Logging | 2 | V0 | ðŸŸ¡ Liberado â€” nÃºcleo implementado | Deepseek V4 Flash | ox-alpha (Cline) | M04/M07 âœ… | Logger autoload GameLogger + LogRotator + Sanitizer + LogExporter + logging_config.tres, verificado headless Godot 4.7.2 (14/14). Pendiente: M110/M122. Log 236 | 2026-08-29 |
+
+| â€” | M104 Analytics | 2 | V0 | ðŸŸ¡ Liberado â€” nÃºcleo implementado | Deepseek V4 Flash | ox-alpha (Cline) | M103 âœ… | AnalyticsDirector autoload + RF1-RF7 + opt-out + batch JSON offline + agregado histÃ³rico; test 18/18, regresiÃ³n 8/8. Pendiente: M91/M110/M76. Log 237 | 2026-08-29 |
+
+| â€” | M105 TelemetrÃ­a de Gameplay | 2 | V0 | ðŸŸ¡ Liberado â€” nÃºcleo implementado | Deepseek V4 Flash | ox-alpha (Cline) | M104 âœ… | TelemetryDirector (sin class_name) + opt-in GDPR + 17 eventos + mÃ©tricas + abandono/zonas; test 16/16, regresiÃ³n M103 14/14 + M104 18/18. Reescrito sobre arquitectura real. Pendiente: hooks gameplay, UI M91/M53, envÃ­o remoto M76. Log 243 | M104 âœ… | 2026-08-29 |
+
+| â€” | M107 Backups | 1 | V0 | ðŸ”µ En curso â€” reservado | Deepseek V4 Flash | ox-alpha (Cline) | M59 ðŸŸ¡ (nÃºcleo OK) | Scripts PS backup/verify/restore/registro de tarea + backup.yml (guard secrets) + docs retenciÃ³n/restauraciÃ³n/desastres. AdaptaciÃ³n a rutas reales (sin disco E:, destino D:\Backups) | 2026-08-31 |
+
+| â€” | M63 Cargas y Streaming | 2 | V1 | ðŸŸ¡ Liberado â€” iter. 4 (Log 746) | GLM 5.3 Flash | glm-5.3-flash (Cline) | M08 âœ… M61 ðŸŸ¡ (nÃºcleo) | P1 pantalla de carga hecha (Log 746, 16/101); pendiente arte cozy M53, P9, P12-14 | 2026-09-06 03:35 |
+| â€” | M92 Tutorial | 3 | V0/V2 | ðŸŸ¡ Liberado â€” iter. 3 lÃ³gica completa (Log 914) | Deepseek V4 Flash | glm-5.3-flash (Cline) | M53 ðŸŸ¡ (core UI), M70 mockeable | Interruptores RF9 + consejos RF6 + contexto T-016 + P4/P5/P6/P7 + skip/re-play RF7-RF8 (S5/S6) + feedback RF24/P15 + pistas mÃ¡x.2 (P2/P13/P14) + P8/P9. test_tutorial_iter3 nuevo 103 checks; 3 suites 0 fallos (196). 90/185 | 2026-09-17 02:43 |
+| â€” | M92 Tutorial | 2 | V0 | ðŸŸ¢ Liberado â€” iter. 4 data-driven (Log 987) | Deepseek V4 Flash | glm-5.3-flash (Cline) | M53 ðŸŸ¡ (core UI) | Q5 guiones .tres (TutorialGuiones + guiones_base.tres, fallback por cÃ³digo) + Q2/Q7 early-return de proximidad + R1/R3/R5/R6 espejo (03-Diseno Â§6). test_tutorial_iter4 21 checks; 4 suites 0 fallos (217). 97/185 | 2026-09-17 03:05 |
+
+| â€” | M26 Templo SubterrÃ¡neo | 4 | V2 | ðŸ”µ En curso (reserva 2026-10-16 â€” encargo del director `GLM-5.3 Flash-Director`, msg 269) | DeepSeek-V4.1-Flash | DeepSeek-V4.1-Flash (WorkBuddy) | M24 Templos y Puzzles (avanzado) + M25 Ruinas (avanzado) | iter. 3 entregada: **122/129 `[x]`**, 7 `[?]` con dueÃ±o externo, 0 `[ ]`; `test_templo_m26.gd` **110/0 EXIT 0 Ã—3**, gate `test_regresion_templos.gd` **106/0 EXIT 0** (piso M26 92â†’110 medido); glifos (8 = 4+4), presupuesto por regiÃ³n e instancing documentados y validados. Aguarda QA Â§21.8 (Hy3/agnes/s2) | 2026-10-16 |
+| â€” | M53 UI/UX (rediseÃ±o visual paneles D102) | 3 | V2 | ðŸŸ¡ Liberada 2026-10-18 00:40 (entregada y verificada: suites 17/0 + 0 + 79/0; QA 21.8 pendiente Hy3/agnes) | â€” | G-5.3-Flash-Agente (Kilo Code) | M88 âœ… (fuentes), M90 âœ… (resoluciÃ³n) | Paleta profesional legible + fix ensure_contrast() (asume tema claro) + capturas antes/despuÃ©s en capturas/53-UI-UX/ + suites test_ui_framework / test_m53_wcag verdes | 2026-10-17 23:52 |
+
+
+
+### Bloque `Reserva actual` obligatorio en cada checklist de mÃ³dulo
+
+
+
+Al reservar un mÃ³dulo, el agente debe agregar este bloque al inicio de `DOCUMENTACION/{ID}-Modulo/plan-actual/05-Checklist.md` y cambiar su estado a `ðŸ”µ En curso`:
+
+
+
+```markdown
+
+## Reserva actual
+
+
+
+- Estado: ðŸ”µ En curso
+
+- Agente: [modelo / plataforma]
+
+- Fase: [Fase X]
+
+- Dificultad: [1-5]
+
+- Vision: [V0 / V1 / V2]
+
+- Entrada: [puerta o dependencia cumplida]
+
+- Salida: [resultado verificable]
+
+- Archivos: [rutas previstas]
+
+- Fecha: YYYY-MM-DD HH:MM:SS
+
+```
+
+
+
+Al liberar el mÃ³dulo, el agente actualiza simultÃ¡neamente este bloque, la fila de esta secciÃ³n, `CHECKLIST-GLOBAL.md` y `ESTADO-PARALELO.md`. Debe conservar el historial en las notas del agente y nunca marcar `âœ…` si quedan dudas `[?]`.
+
+
+> **M90 (2026-10-22):** 🔵 RESERVADO agnes-3-flash (Kilo Code) — frente COLA A repoblada #768 (aplicar_env post-processing + sliders); CERRADO tanda 1 (149→155/249).
