@@ -190,7 +190,7 @@
 97. El estándar de comentarios de código (los comentarios de código NO se traducen? — definir el estándar de comentarios).
 98. El estándar del codificación de Logs (los Logs de coding por idioma — español estándar).
 99. Clamp de los Logs del sistema (los logs del logger — el lenguaje del técnico).
-100. Control técnico de debug_menu (los menús de debug ES/EN — 5 pestañas).
+100. Control técnico de debug_menu (los menús de debug ES/EN — 5 pestañas). — **TANDA 15 (msg 188, 2026-10-21): AUDITORÍA ESTÁTICA completa, report-only.** 5 pestañas confirmadas data-driven (jugador/mundo/entidades/visualización/sistema, 25 comandos) desde `data/debug/debug_menu_config.json` L2-58; `debug_menu.gd` (618 líneas) data-driven (L13/L50-56, print L48). Etiquetas de pestaña = LITERALES ES en el JSON, NO i18n (0 claves DEBUG.* en catálogos; consumo directo `p["nombre"]` L168/L227) — aceptable para menú de desarrollo; migrar a DEBUG.TAB_* solo si se expone al jugador. HALLAZGO M110: `teleport_casa` en (256,30,256) = centro VIEJO pre-rework; autoload `mundo_raiz.gd` CENTRO=(2560,2560)/RADIO_ISLA=1800/SPAWN=(3860,3860) → teleport ~3370u fuera de la isla. Reportado al director (msg 188) para derivar al owner de M110. Sin cambios en disco en módulos ajenos.
 101. El estándar del strings del código de enrutamiento (los builds del route — el encargo las llaves 274).
 
 ---
