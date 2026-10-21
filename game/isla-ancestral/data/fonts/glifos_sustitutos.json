@@ -1,0 +1,17 @@
+{
+  "_nota": "M88/M87 (i18n b3, 2026-10-21). Tabla de sustitucion de glifos que NINGUNA fuente del repo tiene. Es un DATO: cambiarla no exige tocar codigo. Medido con Font.has_char() en las 3 fuentes de produccion del tema (Nunito-Regular, Nunito-Bold, FredokaOne-Regular). NO esta cableada a ningun consumidor: el cableado (texto del jugador) es decision del director.",
+  "_medicion": {
+    "fecha": "2026-10-21",
+    "metodo": "Font.has_char(codepoint) sobre los .ttf reales de assets/fonts (el ancho NO sirve: un glifo ausente dibuja .notdef con avance 14.0 px)",
+    "catalogo": "locales/es.po + locales/en.po (275 entradas, 278 formas)"
+  },
+  "sustitutos": [
+    {
+      "codepoint": "U+2192",
+      "sustituto": "\u00bb",
+      "nombre": "flecha derecha",
+      "motivo": "Ninguna de las 4 fuentes del repo tiene el glifo; 31 claves x 2 idiomas del catalogo (M68.SIGN.*, M68.ROUTE.*) y 3 sitios de produccion lo emiten. U+00BB se dibuja en las 3 fuentes del tema (8.0 px en Nunito, 11.0 px en FredokaOne).",
+      "alternativas": ["U+203A (chevron simple, tambien cubierto)", "U+003E (ASCII '>', cubierto)", "adquirir una fuente con flechas (requiere licencia, M46/M88)"]
+    }
+  ]
+}

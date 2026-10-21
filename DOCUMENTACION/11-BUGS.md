@@ -3019,6 +3019,41 @@ Añadida la excepción `!addons/gdUnit4/bin/` en `game/isla-ancestral/.gitignore
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-11 02:30
 
+### BUG-140 — `test_logros.gd:294` asigna Array sin tipar a propiedad `Array[String]` -> SCRIPT ERROR que aborta 6 aserciones de persistencia (falso verde en QA §21.8 de M72)
+
+- **Fecha de reporte:** 2026-10-21 03:56 (re-check headless; hallazgo original 2026-10-21 02:08, Log 2061)
+- **Módulo(s) afectado(s):** M72-Sistema-De-Logros — `scripts/logros/test_logros.gd:294` (`_test_guardado_carga_rf9_rn8`), vía `achievement_service.gd:44` (`var _desbloqueados: Array[String] = []`).
+- **Severidad:** 🟠 Mayor — falso verde en el gate duro: la suite de M72 reporta "0 fallos / EXIT 0" pero **6 aserciones de persistencia (RF9/RN8) nunca se ejecutan**. Invalida la certificación §21.8 de M72 (bajada de sello a 🟡 Con dudas, fila GLOBAL 72 = 77/185).
+- **Prioridad sugerida:** Alta.
+- **Estado:** [?] Delegado — dueño **M72 (step-5-kilocode, autor del módulo y del test)**. Verificador != autor: hy3 no fixea el test (regla §21.8).
+- **Comportamiento esperado:** el suite debería fallar (o al menos no imprimir "0 fallos") cuando una aserción no se ejecuta por un SCRIPT ERROR en medio de `_test_guardado_carga_rf9_rn8`.
+- **Comportamiento observado (medido, no supuesto):** al correr el suite headless:
+  ```
+  SCRIPT ERROR: Invalid assignment of property or key '_desbloqueados' with value of type 'Array' on a base object of type 'Node (achievement_service.gd)'.
+     at: _test_guardado_carga_rf9_rn8 (res://scripts/logros/test_logros.gd:294)
+  ...
+  === TEST M72 LOGROS: 0 fallo(s) ===
+  ```
+  El `SCRIPT ERROR` aborta la función `_test_guardado_carga_rf9_rn8` ANTES de las 6 aserciones de persistencia (lines 298-305 del test: `get_save_data()` devuelve Dictionary, snapshot tiene "version"/"desbloqueados", version positiva, `desbloqueados` es Dictionary, `esta_desbloqueado("logro_primer_sello")` tras `restore_save_data`). El resumen del suite NO contabiliza el error y publica "0 fallos, EXIT 0".
+- **Causa raíz:** asignación white-box sin tipar a propiedad tipada:
+  ```gdscript
+  # achievement_service.gd:44
+  var _desbloqueados: Array[String] = []
+  # test_logros.gd:294
+  _ach._desbloqueados = ["logro_primer_sello"]   # Array literal SIN tipo -> GDScript 4.7.2 rechaza y LANZA SCRIPT ERROR
+  ```
+  (También `test_logros.gd:295` `_ach._fechas = {...}` es asignación white-box tipada, sin ejercitar.)
+- **Cómo reproducir:**
+  ```
+  Godot_v4.7.2-stable_win64_console.exe --headless --path game/isla-ancestral --script res://scripts/logros/test_logros.gd
+  # -> SCRIPT ERROR en :294 (aborta _test_guardado_carga_rf9_rn8)
+  # -> resumen "=== TEST M72 LOGROS: 0 fallo(s) ==="  (FALSO VERDE)
+  ```
+- **Evidencia:** Log 2061 (hy3, 2026-10-21 02:08) + re-check 2026-10-21 03:56 (`out/hy3_auto/m72_run_recheck_035622.txt`, SCRIPT ERROR en línea 157, resumen "0 fallo(s)" en línea 162). GLOBAL fila 72 ya en 🟡 Con dudas 77/185 (sin cambio por este bug).
+- **Fix sugerido (dueño M72):** reemplazar la asignación white-box tipada por la API pública `_ach.desbloquear("logro_primer_sello")` (o `Array[String](["logro_primer_sello"])` / `_ach._fechas = Dictionary({...})`), y que el resumen del suite cuente `SCRIPT ERROR` como fallo (guarda anti-falso-verde de 3 capas: `_fin`/`_WB_BLOQUES`, `CHECKS_MINIMOS` medido, `_summary()` en `call_deferred`). Re-correr y certificar §21.8 solo entonces.
+- **Referencias cruzadas:** BUG-055 (issue DISTINTO en `test_logros.gd:291`, `.size()` sobre Callable, 2026-09-18); mensaje canal 299 (hy3, QA M72 falso verde) y 300 (director: TOMADO, registra en 11-BUGS + flip GLOBAL a Con dudas). No confundir con BUG-055.
+- **Reportado por:** Hy3 (WorkBuddy / Hunyuan) — verificación cruzada §21.8 (verificador != autor).
+- **Firma:** Hy3 (WorkBuddy / Hunyuan) — 2026-10-21 03:56 GMT-3.
 ---
 
 ## 7. Bugs Resueltos (historial)## BUG-119: IncenseSpawner genera 0 puntos por race con la generacion del terreno voxel (M163)

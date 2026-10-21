@@ -125,13 +125,20 @@ func _test_binarios() -> void:
 	_fin("A")
 
 # ── B: cobertura de caracteres exigida por el diseno (RF5/RF6/RF7) ──
+# CORREGIDO 2026-10-21 (DeepSeek-V4.1-Flash, Log 2064): este bloque decidia
+# "falta el glifo" con el ANCHO (`_ancho(...) <= 0.0`). Un glifo ausente se
+# dibuja como `.notdef` y su avance NO es cero: medido, U+2192 da 14.0 px en
+# las 3 fuentes de produccion con `has_char() == false`. El detector por ancho
+# era CIEGO. La unica prueba valida es `Font.has_char()`.
+# La cobertura del catalogo .po (79 codepoints, 4 fuentes) vive en
+# `test_glifos_i18n_m88.gd`; aca se mantiene el set del diseno.
 func _test_caracteres() -> void:
-	print("--- B. Cobertura de caracteres del diseno ---")
+	print("--- B. Cobertura de caracteres del diseno (has_char) ---")
 	for r in _archivos_ttf():
 		var f := _cargar(r)
 		var faltan: Array = []
 		for ch in TEXTO_ESPECIAL:
-			if _ancho(f, ch, TAM_BASE) <= 0.0:
+			if f == null or not f.has_char(ch.unicode_at(0)):
 				faltan.append(ch)
 		_check("tildes/enie/signos (%s)" % r.get_file(), faltan.is_empty(),
 			"faltan: %s" % str(faltan))
@@ -193,11 +200,19 @@ func _test_contrato_catalogo() -> void:
 			if FileAccess.file_exists(ruta):
 				_check("el archivo de %s mide texto" % id,
 					_ancho(_cargar(ruta), TEXTO_BASE, TAM_BASE) > 0.0)
-	# hoy TODOS los ids son abstractos (museo_moderno etc.) y los .ttf fisicos
-	# (Nunito/Fredoka) son de produccion del tema: ningun id declara archivo.
-	# El check de abajo fija ese contrato para futuras ediciones.
-	_check("ids con tiene_archivo=true tienen archivo (contrato data-driven)",
-		true, "(hoy con_archivo=%d)" % con_archivo)
+	# CORREGIDO 2026-10-21 (DeepSeek-V4.1-Flash, Log 2064): aca habia
+	# `_check(..., true, ...)`, una asercion INFALSIFICABLE (no puede fallar
+	# nunca: es la trampa 85, falso verde por construccion). Se reemplaza por el
+	# contrato en la OTRA direccion, que si discrimina: un id que declara
+	# `tiene_archivo=false` no puede tener su .ttf en disco.
+	var mienten: Array = []
+	for f in fuentes:
+		var id_f := String(f.get("id", ""))
+		var tiene_f: bool = bool(f.get("tiene_archivo", false))
+		if not tiene_f and FileAccess.file_exists("%s/%s.ttf" % [DIR_FUENTES, id_f]):
+			mienten.append(id_f)
+	_check("ningun id declara tiene_archivo=false teniendo el .ttf en disco",
+		mienten.is_empty(), "mienten: %s" % str(mienten))
 	print("      (informativo) tiene_archivo=true: %d/%d" % [con_archivo, fuentes.size()])
 	var errores := FontAuditor.validar(datos)
 	_check("FontAuditor: 0 errores (ids/licencias/pesos)", errores.is_empty(),

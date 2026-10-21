@@ -7,6 +7,38 @@ Uso: python repoblar_backlog.py <carpeta-modelo> M87,M91,M114 [--cota 100]
 import io, os, re, sys
 from glob import glob
 
+
+def escanear_disponibles(skip_kw=None):
+    import glob as _glob
+    if skip_kw is None:
+        skip_kw = ['arte', 'visual', 'vision', 'monetizaci', 'lanzamien', 'postgame', 'prototipo', 'vertical-slice', 'fundamentos', 'creditos', 'lorem']
+    resultado = []
+    for g in sorted(_glob.glob('DOCUMENTACION/*-*/plan-actual/05-Checklist.md')):
+        mod = g.replace('\', '/').split('/')[1]
+        skip = any(kw.lower() in mod.lower() for kw in skip_kw)
+        if skip:
+            continue
+        try:
+            t = io.open(g, encoding='utf-8-sig', errors='replace').read()
+            libres = len(re.findall(r'(?m)^- \[ \]', t))
+            if libres > 0:
+                resultado.append((mod, g, libres))
+        except Exception:
+            pass
+    resultado.sort(key=lambda x: -x[2])
+    return resultado
+
+def asignar_mejor_match(carpeta, min_pendientes=100):
+    blp = os.path.join('DOCUMENTACION', 'TAREAS-POR-MODELO', carpeta, 'BACKLOG-MASTER.md')
+    usados = set()
+    if os.path.isfile(blp):
+        blt = io.open(blp, encoding='utf-8-sig').read()
+        usados = set(re.findall(r'<!-- fuente: (\S+)/05-Checklist', blt))
+    disponible = escanear_disponibles()
+    disponible = [(m, g, c) for m, g, c in disponible if m.split('-')[0] not in usados]
+    return [m for m, g, c in disponible[:10]]
+
+
 carpeta = sys.argv[1].strip()
 mods = [m.strip() for m in sys.argv[2].split(',')]
 cota = int(sys.argv[sys.argv.index('--cota') + 1]) if '--cota' in sys.argv else 100

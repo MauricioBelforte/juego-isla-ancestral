@@ -498,3 +498,51 @@ func apply_high_contrast():
 - QA §21.8: re-correr 3 suites + sonda (whitelist intacta) + muestrear marcas por sección.
 - Si el director quiere ✅ directo: recordar que §21.6/21.8 piden QA con verificador ≠ mimo.
 - Coordinar con M89 (familia de UI): mismo criterio de cierre, sin tocar M53.
+
+
+## Cobertura de glifos del catalogo i18n (i18n b3, 2026-10-21 - DeepSeek-V4.1-Flash, Log 2064)
+
+Artefactos NUEVOS (no existian antes; el modulo solo medía tildes/enie de un set fijo):
+
+| Archivo | Rol |
+|---------|-----|
+| `scripts/fonts/auditar_glifos.gd` | API pura: parsea los `.po` y mide la cobertura por fuente con `Font.has_char()` |
+| `scripts/fonts/test_glifos_i18n_m88.gd` | Suite headless: 6 bloques, **50 checks**, piso medido, guardian probado en rojo |
+| `data/fonts/glifos_sustitutos.json` | Tabla de sustitucion como DATO (hoy: U+2192 -> U+00BB). **No cableada** |
+
+### Por que `has_char` y no el ancho
+
+El unico chequeo de cobertura previo (bloque B de `test_fuentes_reales_m88.gd`) decidia
+"falta el glifo" con `get_string_size(ch).x <= 0.0`. **Eso no prueba nada**: un glifo
+ausente se dibuja como `.notdef` y su avance NO es cero. Medido en este proyecto:
+`U+2192` da **14.0 px** en las 3 fuentes de produccion con `has_char() == false`.
+
+Medicion comparada con el MISMO input (`TEXTO_ESPECIAL` con la flecha):
+
+| Detector | Resultado | Veredicto |
+|----------|-----------|-----------|
+| por ancho (el viejo) | 43 checks, 0 fallos, EXIT 0 | **falso verde** |
+| por `has_char` (el nuevo) | 4 fallos, EXIT 1 nombrando `["→"]` | correcto |
+
+### Estado medido del catalogo (2026-10-21)
+
+- `locales/es.po` + `locales/en.po`: **275 entradas** y **278 formas** cada uno (548 entradas
+  con texto, la cabecera `msgid ""` queda fuera).
+- Codepoints requeridos por el texto mostrable: **79** (74 en `es.po`, 69 en `en.po`, union).
+- **Un solo glifo ausente en las 4 fuentes del repo: `U+2192` (flecha derecha)**.
+  Lo usan **31 claves** (`M68.SIGN.*` y `M68.ROUTE.*`, presentes en los 2 idiomas) y **3
+  sitios de produccion**: `crafting_ui.gd:209`, `diary_layer.gd:634` y
+  `transport_localizer.gd:327/400`.
+- El guion de caja `U+2500` que aparece en el `.po` **solo vive en comentarios**: contar los
+  caracteres del archivo por bytes da 16 no-ASCII; el texto mostrable tiene 14. El parser
+  descarta comentarios y cabecera.
+
+### Decisiones pendientes del director (no aplicadas)
+
+1. **Contenido:** sustituir `U+2192` por `U+00BB` en 62 entradas del `.po` (medido: las 3
+   fuentes del tema dibujan `U+00BB`), o por `U+003E`, o adquirir una fuente con flechas
+   (licencia, M46/M88). La tabla de datos ya trae la propuesta.
+2. **Cableado:** aplicar la tabla en el punto de traduccion (afecta texto del jugador) o en
+   los 3 sitios de produccion. Hoy la tabla **no tiene consumidores**: es dato + funcion pura
+   probada, no una mitigacion activa.
+3. **CI:** cablear `test_glifos_i18n_m88.gd` en `quality.yml` (archivo del director).
