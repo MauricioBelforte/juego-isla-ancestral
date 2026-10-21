@@ -5025,3 +5025,29 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 > el cambio. El fondo sigue abierto: el founder hace push desde el worktree, asi que cada push puede
 > llevar la version corrupta al remoto. Propuesta al director: gate de `diagnosticar_mojibake.py` en el
 > flujo de push, o saneado automatico en el paso de commit.
+
+## 2026-10-21 05:50 — minimax-m3-1-flash / Kilo Code — M61-Rendimiento REABIERTO (tanda 3, Log 2073)
+
+**Encargo del director (msg 4 del canal):** "[x] TANDA 1 ACEPTADA / [x] TANDA 2 ACEPTADA ... Segui M61 tanda 3 o M112 Testing". Tanda 3 = las secciones L..Y (RF12..RF26), 28 items "Definir/Documentar" mas 1 verificacion medible (allocations en el lazo caliente) y el cierre del modulo (Z393).
+
+**Que se hizo:** 13 bloques de norma nuevos (64 umbrales) para RF12..RF26 con grounding en las constantes reales de M52 (`MAX_EMISORES_DEF` 32, `MAX_PARTICULAS_DEF` 1200), M49 (`MAX_CONT_SOMBRA` 6, `MAX_DINAMICAS` 20), M64 (`BUBBLE_*` 30/60/100 m, `TICK_*_INTERVAL` 0.5/1/5 s, `MAX_AGMPS_FULL` 60), M51 (`VERTS_PER_CHUNK_MAX` 2000, `REFLECTION_PROBES_MAX` 2, `WAVE_PHASES` 3), M50 (densidades 12/25/22/10/15/10/30 = 124 inst/chunk), M90 (`SOMBRAS`, `VOLUMETRICO`, `VEGETACION`, `CULLING`, `LOD`), M63 (LRU de chunks), M62 (GlobalPool), M09/M167 (impostor: `RADIO_CUBIERTO` 2700, `PASO` 64) y M46 (atlas de UI). Gate: `_validar_tecnicas()` + tabla `TECNICAS_CANONICAS` (congela los 64 umbrales). Suite 58 -> **88 checks** (0 fallos, EXIT=0). Probe NUEVO `tests/test_m61_allocations_hotloop.gd` (8 checks, 0 fallos).
+
+**42 flips [x]** con cita. M61: **53/148 -> 118/148**.
+
+**Los 8 [ ] que quedan NO son de M61:** son implementacion de otros modulos (M07 meshes combinados por chunk, M50 instancing + viento en vertex shader, M08 rocas/fragmentos instanciados, M52/M35/M34 pooling e instancing de fauna y peces). La norma ya esta definida y verificada; el codigo es de cada dueno (§15).
+
+**HALLAZGOS honestos (para los duenos):** (1) el material del oceano es un `StandardMaterial3D` plano, sin shader: las normales animadas en shader son NORMA pendiente de M47/M51; (2) M50 no tiene instancing ni viento todavia; (3) `M90.VOLUMETRICO` usa las claves "medio"/"alto" mientras el resto de M90 usa "media"/"alta"; (4) el comentario de `M64.MAX_AGMPS_FULL` dice "presupuesto M61" pero 60 NO es el tope de M61 (20 = NPCs activos visibles): son metricas distintas (IA vs render) y la suite verifica `60 >= 20`.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 05:50
+
+## 2026-10-21 06:40 — minimax-m3-1-flash / Kilo Code — M61-Rendimiento LIBERADO (3 tandas, Logs 2068/2071/2073)
+
+**Liberacion §21.4.5:** el modulo vuelve a 🟡 Con dudas con **118/148** (era 53/148 al tomar la reserva). 3 tandas: 65 flips [x] con evidencia headless (gate 0 fallos, suite 88 checks 0 fallos, probe 8 checks 0 fallos) y 16 degradaciones honestas a [?] (los `[C] Validar ... 60 FPS`, no medibles en headless). **19 bloques data-driven** de norma en `data/performance/budgets.json` + 9 validadores del gate + 2 suites nuevas. Quedan 8 [ ] de implementacion de duenos y 22 [?] (16 mios + 6 previos).
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 06:40

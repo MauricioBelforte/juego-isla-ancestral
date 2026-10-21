@@ -352,9 +352,9 @@ Final: G-5.3-Flash-Agente / Kilo Code.
 57. - [x] [59] Guardar con inventario vacío, mundo sin explorar o en el primer minuto [S] · [x] T17-M59 (G-5.3): qa_m59_save_vacio.gd 3/0 (estado primer minuto, dirty limpio). <!-- fuente: 59-Guardado/05-Checklist.md -->
 58. - [ ] [59] Guardar durante un festival con estado consistente (M74) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 59. - [x] [59] Testear doble guardado simultáneo (cola) [C] · [x] T18-M59 (G-5.3): cola FIFO determinista con 2 request_save mismo frame — qa_m59_doble_guardado.gd 3/0; flips 59-Guardado/05 (67/62/1). <!-- fuente: 59-Guardado/05-Checklist.md -->
-60. - [x] [59] Feedback de guardado visible y legible [S] · [x] T19-M59 (G-5.3): toast localizado por EventBus (capturado en qa_m59_guardar) + WCAG BUG-130 — flip por evidencia. <!-- fuente: 59-Guardado/05-Checklist.md -->
+60. [x] - [x] [59] Feedback de guardado visible y legible [S] · [x] T19-M59 (G-5.3): toast localizado por EventBus (capturado en qa_m59_guardar) + WCAG BUG-130 — flip por evidencia. <!-- fuente: 59-Guardado/05-Checklist.md -->
 61. - [ ] [59] Confirmaciones accesibles por gamepad (M57) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
-62. - [x] [59] Diálogos de aviso con opciones claras [S] · [x] T19-M59 (G-5.3): OK/Cancelar localizados + dispatch on_ok/on_cancel — qa_m59_popup_opciones.gd 5/0; flips 59-Guardado/05 (69/60/1). <!-- fuente: 59-Guardado/05-Checklist.md -->
+62. [x] - [x] [59] Diálogos de aviso con opciones claras [S] · [x] T19-M59 (G-5.3): OK/Cancelar localizados + dispatch on_ok/on_cancel — qa_m59_popup_opciones.gd 5/0; flips 59-Guardado/05 (69/60/1). <!-- fuente: 59-Guardado/05-Checklist.md -->
 63. - [ ] [59] Testear menú con Reduce Motion (M58) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 64. - [ ] [59] Testear con texto grande (M58) [M] <!-- fuente: 59-Guardado/05-Checklist.md -->
 65. - [x] [59] Verificar con verificar_checklist.py (sin alertas nuevas) [S] · [x] T17-M59 (G-5.3): módulo limpio para 59 (drifts ajenos 36/50/55/58/62/90 reportados al canal). <!-- fuente: 59-Guardado/05-Checklist.md -->
