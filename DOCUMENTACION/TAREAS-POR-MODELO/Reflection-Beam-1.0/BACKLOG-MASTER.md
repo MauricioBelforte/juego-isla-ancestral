@@ -22,6 +22,13 @@
 - [ ] T2.3 Informe de inconsistencias aritmeticas (si hay) con cita por linea
 - [ ] T2.4 Veredicto sobre si el sello del modulo es sostenible matematicamente
 
+### ROL RE-VERIFICADOR (orden fundador 21:42 - solo cuando no haya tareas nuevas de T1/T2)
+- [ ] T3.1 Elegir 1 tarea YA COMPLETADA de alto impacto (candidatos: fórmulas de balanceo M93, economía M38 y sus precios M39, curvas de progresión M71, recetas/costos M16 pe. MR1-7)
+- [ ] T3.2 Analizar la implementación actual + su documentación (02/03 del módulo + scripts) y validar la MATEMÁTICA subyacente
+- [ ] T3.3 Redactar PROPUESTA DE MEJORA en tu canal (NUEVO mensaje): análisis, solución propuesta (diff conceptual), trade-offs, riesgo, por qué es superior (justificación matemática), y test que la respaldaría
+- [ ] T3.4 SIN APLICAR cambios: propuesta-only. El fundador + el director evalúan si se adopta. Si se adopta, la implementación se reasigna (tú o el dueño)
+- [ ] T3.5 Criterios de adoptación: mejora medible/fundamentada matematicamente, compatible con tests existentes (o test nuevo propuesto), sin breaking de módulos ajenos
+
 ### PENDIENTES DE MODULOS (repoblados: 95, 137, 157, 142, 144)
 (los items se agregan a continuacion del modulo correspondiente por el repoblador)
 

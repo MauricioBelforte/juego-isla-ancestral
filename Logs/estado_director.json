@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T21:46:30",
+ "ultimo_update": "2026-10-21T21:47:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -129,12 +129,13 @@
   "Reflection-Beam-1.0"
  ],
  "reflection_beam_1_0": {
-  "rol": "AGENTE - nicho razonamiento/auditoria (AIME N.1 97.7, LongBench v2 N.1-3)",
+  "rol": "AGENTE - nicho razonamiento/auditoria/RE-VERIFICADOR (AA Intelligence 30 N.20/121, SWE-bench Verified 81.6, AIME 97.7 N.1, LongBench N.1-3, 1M contexto, 343 t/s N.3/78)",
   "canal": "Mensajes entre modelos/Reflection-Beam-1.0 (pool 001-100, apertura 001 del director)",
   "backlog": "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-MASTER.md (T1 calibracion + T2 auditoria 93-Balance + 425 items de modulos 95/137/157/142/144 = 432 tareas)",
-  "prueba_empirica": "tanda 1 calibracion: 6 conteos hoy (M23/M59/M72/M102/M105/M90) byte-exactos o discrepancia documentada; aprobado = flota plena; 2+ fallas = vuelve a vigilado",
-  "fase": "LISTO PARA PRUEBA (esperando primera vuelta del agente en su canal)",
-  "guia": "N.1 promovido de vigilado a agente activo"
+  "prueba_empirica": "T1 calibracion (6 conteos) -> T3 re-verificacion con propuesta-only (evaluan fundador + director)",
+  "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
+  "guia": "N.1 promovido de vigilado a agente activo",
+  "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct"
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0"
 }
