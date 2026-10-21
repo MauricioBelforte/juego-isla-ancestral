@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T19:41:30",
+ "ultimo_update": "2026-10-21T20:05:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,20 +17,20 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "209: tanda 46 FINAL - item 8 [x] resuelto (slot_metadata omitia profile_id, corregido L288; +PROFILE_MISMATCH +pre-check; QA 10/0); M59 75/130; hallazgo loader EMPTY_SLOT vs PROFILE_MISMATCH derivado a DeepSeek",
+  "estado": "211: hallazgo codec M60 ratificado y derivado a DeepSeek (items 20/21/22 honestos); M59 78/130 (fila por agente)",
   "pendientes_real": 222,
-  "acuse_enviado": 210,
+  "acuse_enviado": 212,
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "rieles acumulados: saneamiento 11-BUGS (79 defectos), gate CI (b), persistencia profile_id resuelto por G-5.3 (info), NUEVO hallazgo save_loader: caso cruzado devuelve EMPTY_SLOT(5) en vez de PROFILE_MISMATCH - revisar cadencia lector",
+  "estado": "rieles acumulados: saneo 11-BUGS (79) + CI b + loader EMPTY_SLOT-vs-PROFILE_MISMATCH + codec estructuras M60 (schema fase/mejoras/muebles/cofres/puertas + migracion + tests)",
   "pendientes_real": 170,
   "acuse_enviado": 352
  },
  "step_5": {
-  "estado": "147: medicion M23 solo-lectura (24/104, sin Notas del Agente); plan ratificado 148 (re-corrida binario antes de flips); actividad excepcional",
+  "estado": "149: tanda M23 ejecutada (suite endurecida rojo probado, 19 flips, 42/61/1 tras degradar molino sin apoyo); fila 23 42/104 sync director; GO wiring cadenas_ejemplo; acuse 151; commit por cron",
   "pendientes_real": 203,
-  "acuse_enviado": 148
+  "acuse_enviado": 151
  },
  "ds_oc": {
   "estado": "activo - ciclos 64-81 M62 y cursos",
@@ -96,7 +96,11 @@
   "M90 QA cruzado -> MiniMax (008); sello del director tras veredicto",
   "CONVENCIONES-CODIGO.md (fila 111) -> Step-5 (142): doc consolidada de convenciones vigentes",
   "M112 items de tiempo -> MiniMax: fix headless-aware 5 suites lentas + corrida de validacion (897s -> budget 600s)",
-  "quality.yml: cablear test_metricas_bugs.py + --check con baseline DEUDA_CONOCIDA (DeepSeek, tras saneamiento 11-BUGS)"
+  "quality.yml: cablear test_metricas_bugs.py + --check con baseline DEUDA_CONOCIDA (DeepSeek, tras saneamiento 11-BUGS)",
+  "M55 diario: recompensas capitulo-* de cadenas M23 apuntan a entradas inexistentes (registro real mision_(cadena_id)) - pendiente dueno activo M55",
+  "M24: definicion pendiente en notas de M23 (sin dueno con riel activo)",
+  "M23 cadenas_ejemplo.json: GO wiring por Step-5 (merge o migracion ej- + test de visibilidad) - proxima tanda",
+  "M60/M17 codec estructuras: ampliar schema (fase/mejoras/muebles/cofres/puertas) + migracion + tests - dueno DeepSeek (hallazgo G-5.3 211)"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 19:35: script 0 pendientes; todos los backlogs >= 100 (post-repoblacion 17:56: agnes +470, step-5 +192, ling +106, deepseek +93; numerados miniMax 766 / g_5_3 325 / DS_OC 583 / hy3 265); asignaciones vigentes, SIN repoblacion; drift de totales M72 (182 vs 185) pendiente de re-cuenta por agnes (acuse 910)",
@@ -107,5 +111,6 @@
  "crons_vuelta_b": "CRON B 18:50: unica pendiente DeepSeek 351 (M102 item 31) respondida con 352 + decisiones (CI b+wire, saneamiento registro asignado, fila 102 141/142)",
  "seelos_m159": {
   "estado": "M159 b2 SELLADO 2026-10-21: autor agnes (732/900/901/906), QA cruzado Hy3 (907, OK medido), sello director (fila 159 GLOBAL)"
- }
+ },
+ "crons_vuelta_bd": "CRON B/D 19:50-20:05: Step-5 149 (M23 RATIFICADA; fila 23 42/104 con molino degradado; GO wiring cadenas_ejemplo) acuse 151; G-5.3 211 (codec M60) acuse 212 derivado a DeepSeek"
 }
