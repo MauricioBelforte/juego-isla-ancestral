@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T21:47:00",
+ "ultimo_update": "2026-10-21T21:56:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 352
  },
  "step_5": {
-  "estado": "152: M23 iter3 RATIFICADA (merge cadenas_ejemplo: +1 biblioteca end-to-end, cadena-postgame-plaza RECHAZADA por tipo construir sin diseno -> decision NO agregar tipo hoy, item [?] nuevo pendiente diseno M22/M17); normalizacion claves GO; commit proximo cron C",
+  "estado": "154 acused 155: iter 4 ratificada; anomalias de tracker explicadas desde director",
   "pendientes_real": 203,
-  "acuse_enviado": 153
+  "acuse_enviado": 155
  },
  "ds_oc": {
   "estado": "activo - ciclos 64-81 M62 y cursos",
@@ -73,7 +73,9 @@
   "reporte de RED de un archivo que no existe en el tree = referencia fantasma (worktree local sin commit o path inexistente) - pedir path exacto antes de derivar un bug",
   "falso 0 de glob: pattern sin ** no cubre subcarpetas (integration/) - verificacion de existencia usar os.walk o **/",
   "limpieza de sondas con glob _sonda* borro un test ajeno trackeado (_sonda_bug119): restaurado con git restore - delimitar el patron de limpieza a files propios",
-  "guardado async con voxel binario bloquea quit ~60 s (hilo wait_to_finish): flag headless para tests + fix producto en DataStore (BUG-141)"
+  "guardado async con voxel binario bloquea quit ~60 s (hilo wait_to_finish): flag headless para tests + fix producto en DataStore (BUG-141)",
+  "drift propio del director: mi flag \"M72 total 182\" excluia los 3 [?] (conteo correcto: 185 con 89/93/3) - Beam lo expuso en su calibracion; conteo canonico = 185 y mi cambio a la fila se revirtio antes de contaminar",
+  "M23 desfasa rapido bajo iteraciones concurrentes: los conteos declarados en prompts de calibracion deben citarse como snapshot (fecha/hora) ya que iter 4 agrego un item de decision"
  ],
  "minimax_m3_1_flash": {
   "estado": "012: path exacto de la suite roja (tests/integration/test_crafting_inventory.gd, falso 0 de G-5.3) + BUG-141 diagnosticado (quit bloqueado 60 s por hilo voxel); 013: P1 re-aprobado con guard headless quirurgica en data_store + paralelizacion; fix producto para DeepSeek; autoincidencia sonda-bug119 resuelta",
@@ -135,7 +137,13 @@
   "prueba_empirica": "T1 calibracion (6 conteos) -> T3 re-verificacion con propuesta-only (evaluan fundador + director)",
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
-  "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct"
+  "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
+  "estado": "T1 CALIBRACION APROBADA 6/6 con contraste del director (M23 desfase documentado correcto; M72 veredicto 185 canonico - expuso el error de conteo 182 del director); flota plena; proximo T2 = auditoria sello 93-Balance",
+  "acuse_enviado": 4
  },
- "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0"
+ "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
+ "calibracion_beam": {
+  "estado": "APROBADA 6/6 (director contrasto con medicion propia): M59/M102/M105/M90 match; M23 desfase pre-iter2 documentado correcto; M72 canonico 185 (89/93/3) - flota plena"
+ },
+ "crons_vuelta_bd3": "CRON B/D 21:50-21:56: calibracion de Beam APROBADA (acuse 004 = flota plena) + acuse 155 a Step-5 + fila 23 re-sync 43/105"
 }
