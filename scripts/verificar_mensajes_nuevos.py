@@ -15,7 +15,7 @@ import io, os, re, sys
 
 RAIZ = 'Mensajes entre modelos'
 CANALES = ['agnes-3-flash', 'DS-V4.1-Flash-Opencode', 'Hy3', 'DeepSeek-V4.1-Flash',
-           'Step-5-WorkBuddy', 'Ling-3.1-Flash', 'G-5.3-Flash-Agente']
+           'Step-5-WorkBuddy', 'Ling-3.1-Flash', 'G-5.3-Flash-Agente', 'MiniMax-M3.1-Flash']
 MIO = 'glm-5.3-flash-director-a-'
 
 def es_mio(f):

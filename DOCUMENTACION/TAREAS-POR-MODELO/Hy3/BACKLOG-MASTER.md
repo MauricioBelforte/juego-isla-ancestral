@@ -43,7 +43,7 @@
 2. M10-Generación (88/106): QA de degradaciones 2026-10-15 (L26/L52) y del BUG-043 snow — 10 [M]
 3. M103-Logging (173/179): QA del estado 🟡 (6 [?], suites 131/0) — 8 [M] — [x] Hy3 (Log 2058, 2026-10-21: 131 checks/0 fallos ejecutados bajo Godot real; 4 suites + 5 .gd + config.tres en disco; §21.8 PASS, sello GLOBAL pendiente director)
 4. M105-Telemetría (129/162): QA del estado 🟡 tras corrección del director (33 [?]) — 10 [M] — [x] Hy3 (Log 2065, 2026-10-21: 81 checks/0 fallos en 5 suites bajo Godot real; 0 SCRIPT ERROR; guarda anti-falso-verde verificada por inyeccion roja; 21.8 PASS, estado Con dudas honesto)
-5. M104-Analytics (107/119): QA de los 26 flips de agnes A3 — 8 [M]
+5. M104-Analytics (107/119): QA §21.8 cruzado (integridad PASS: 107[x]/4[ ]/8[?]=119 sin drift vs GLOBAL; test_analytics.gd 24/0/EXIT0 real, red 1/0→EXIT1; verificador≠autor; modulo queda Con dudas por deuda M90/M91) — 8 [M] — [x] Hy3 (Log 2074 / msg 303, 2026-10-21)
 6. M62-Memoria (113/150): QA de delta iter.6 (L98, pureza_save 58/0) — 8 [M]
 7. M108-Pipeline (127/205): QA de los lotes cerrados — 10 [M]
 8. M107-Backups (167/176): QA de cierre — 8 [M]

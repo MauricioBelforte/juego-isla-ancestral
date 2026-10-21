@@ -86,6 +86,8 @@ func _cargar_catalogo() -> void:
 			"oculto": bool(logro.get("oculto", false)),
 			"progreso_parcial": bool(logro.get("progreso_parcial", false)),
 			"orden": int(logro.get("orden", 999)),
+			# RF2: dependencias (logros que deben estar desbloqueados antes)
+			"depende_de": logro.get("depende_de", []),
 		}
 	print("[M72] Logros cargados: %d" % _logros.size())
 	# RF14: validación accionable en arranque (headless-friendly)
