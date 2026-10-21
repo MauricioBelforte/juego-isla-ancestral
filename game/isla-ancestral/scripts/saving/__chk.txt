@@ -1,0 +1,76 @@
+== farm_service
+14: signal crop_planted(crop_id: StringName, voxel_pos: Vector3i)
+15: signal crop_stage_changed(voxel_pos: Vector3i, stage: int)
+16: signal crop_ready(voxel_pos: Vector3i)
+17: signal crop_harvested(voxel_pos: Vector3i, items: Array)
+18: signal crop_harvest_blocked(voxel_pos: Vector3i, items: Array)  # inventario lleno (K)
+25: var _tiles: Dictionary = {}       # Vector3i -> CropTile
+26: var _visuales: Dictionary = {}    # Vector3i -> CropTileVisual
+27: var _definiciones: Dictionary = {}  # crop_id -> CropDefinition
+43: ## riega los cultivos expuestos (checklist G: "lluvia rellena cultivos
+72: push_warning("[M33] BalanceService no disponible; sin cultivos")
+74: var cultivos: Dictionary = bal.get_farming().get("cultivos", {})
+75: for crop_id in cultivos:
+76: var d: Dictionary = cultivos[crop_id]
+77: var def := CropDefinition.new()
+78: def.crop_id = StringName(String(crop_id))
+79: def.display_name = String(crop_id).capitalize()
+80: def.description = "Cultivo de temporada: " + str(d.get("temporada", "todas"))
+85: def.yield_item_id = def.crop_id
+86: def.yield_seed_id = def.crop_id
+87: def.yield_seed_amount = 1
+88: _definiciones[def.crop_id] = def
+99: func obtener_def(crop_id: StringName) -> CropDefinition:
+100: return _definiciones.get(crop_id, null)
+125: return false  # ya arada/con cultivo
+199: ## si el cultivo tiene agua, seca si no. Regla legible y determinista (sin RNG).
+201: func _actualizar_voxel_suelo(tile: CropTile) -> void:
+206: ## Plantar una semilla (consume 1 del inventario M14). Requiere tierra arada.
+207: func plant(crop: CropDefinition, voxel_pos: Vector3i) -> bool:
+208: if crop == null or _tiles.has(voxel_pos):
+217: # Consume la semilla (mismo id del cultivo por defecto)
+218: var semilla := str(crop.yield_seed_id) if crop.yield_seed_id != &"" else str(crop.crop_id)
+219: if not inv.remover_items({semilla: 1}):
+222: var tile := CropTile.new()
+224: tile.crop_def = crop
+225: tile.stage = CropTile.GrowthStage.SEMILLA
+229: crop_planted.emit(crop.crop_id, voxel_pos)
+230: crop_stage_changed.emit(voxel_pos, tile.stage)
+235: var tile: CropTile = _tiles.get(voxel_pos, null)
+244: ## Lluvia (M32): rellena agua de todos los cultivos expuestos.
+246: ## cultivos listos (ya no consumen agua) y no emite señal redundante si el
+250: var tile: CropTile = _tiles[voxel_pos]
+259: var tile: CropTile = _tiles.get(voxel_pos, null)
+262: ## ¿Se puede plantar en esta posición (tierra arada sin cultivo)?
+275: var tile: CropTile = _tiles.get(voxel_pos, null)
+285: # El cultivo NO se pierde (regla cozy M152): el tile se conserva en
+286: # LISTA y se emite crop_harvest_blocked con el sobrante para que la UI
+289: crop_harvest_blocked.emit(voxel_pos, items)
+291: crop_harvested.emit(voxel_pos, items)
+293: if tile.crop_def != null and tile.crop_def.is_tree:
+295: tile.stage = CropTile.GrowthStage.MADURA
+297: tile.grown_days = int(tile.crop_def.grow_days) - 1
+301: # arada y reutilizable; solo se va el cultivo (y el agua con él).
+307: func get_tile(voxel_pos: Vector3i) -> CropTile:
+312: var tile: CropTile = _tiles.get(voxel_pos, null)
+313: if tile == null or tile.crop_def == null:
+316: CropTile.GrowthStage.LISTA:
+318: CropTile.GrowthStage.DORMANTE:
+320: CropTile.GrowthStage.SIN_AGUA:
+322: CropTile.GrowthStage.SEMILLA:
+324: var dias_faltan: int = maxi(0, tile.crop_def.grow_days - tile.grown_days)
+329: ## avance + recarga), no se reaplica el tick — jamás doble avance de cultivos.
+340: var tile: CropTile = _tiles[voxel_pos]
+345: crop_ready.emit(voxel_pos)
+347: crop_stage_changed.emit(voxel_pos, tile.stage)
+359: ## Fertilizante (M13/M15, bono benigno): marca el cultivo como fertilizado.
+363: var tile: CropTile = _tiles.get(voxel_pos, null)
+375: var tile: CropTile = _tiles[voxel_pos]
+384: func _crear_visual(tile: CropTile) -> void:
+385: var vis_script := load("res://scripts/farm/crop_tile_visual.gd")
+389: visual.name = "Crop_" + str(tile.voxel_pos.x) + "_" + str(tile.voxel_pos.z)
+399: func _actualizar_visual(tile: CropTile) -> void:
+429: func get_save_data() -> Dictionary:
+435: func restore_save_data(data: Dictionary) -> void:
+442: var tiles = _store.from_save_dict(data, func(crop_id): return _definiciones.get(StringName(crop_id), null))
+== data_store buildings

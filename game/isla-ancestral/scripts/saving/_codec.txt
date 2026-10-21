@@ -1,0 +1,10 @@
+== game\isla-ancestral\scripts\datos\estructuras_codec.gd
+   #   "buildings": { "structures": [ { id, tipo, pos, rot_y, planta, variante } ] }
+   # no conoce nodos, escenas ni el sistema de construcción.
+   const SECCION: String = "buildings"
+   ## Tope defensivo: un save con más estructuras que esto se considera corrupto
+   const MAX_ESTRUCTURAS: int = 20000
+   ## Claves exactas de una estructura normalizada, en orden.
+   ## Normaliza una lista cruda de estructuras a la forma canónica del save.
+   ## Cantidad de estructuras de una lista cruda (para logs/diagnóstico).
+   var normal := normalizar(estructuras)

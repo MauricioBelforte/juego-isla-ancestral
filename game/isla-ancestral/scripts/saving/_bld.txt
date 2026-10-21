@@ -1,0 +1,3 @@
+game\isla-ancestral\scripts\datos\buildings_save_provider.gd
+   func get_section_name() -> String:
+   func get_save_data() -> Dictionary:
