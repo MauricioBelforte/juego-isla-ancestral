@@ -1033,6 +1033,112 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 
 
 ## REPOBLACION V3 (2026-10-19T00:01:42) — items REALES de 05-Checklist (fuente en comentario)
+1. - [ ] [142] Definir minutas firmadas de cada decisión del comité [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+2. - [ ] [142] Definir freeze firmado de features al inicio de RC [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+3. - [ ] [142] Definir política: solo hotfixes P0/P1 aprobados entran al RC [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+4. - [ ] [142] Definir rama de hotfix `hotfix/rc-N` con test de regresión obligatorio (M112) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+5. - [ ] [142] Definir re-etiquetado `rc-2`, `rc-3` ante cada hotfix [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+6. - [ ] [142] Definir DiffAudit en CI (contra `beta-rc-candidate`) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+7. - [ ] [142] Definir fallo de CI si hay diffs no autorizados [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+8. - [ ] [142] Definir ventana de 4 semanas máx. para la fase [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+9. - [ ] [142] Definir manifest de contenido inamovible (hash del inventario Beta) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+10. - [ ] [142] Definir prohibición de nuevo contenido (misiones, ítems, eventos) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+11. - [ ] [142] Definir excepción de contenido solo si es bug crítico de progresión [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+12. - [ ] [142] Definir registro de cambios de contenido en el manifest [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+13. - [ ] [142] Definir verificación semanal del estado del freeze [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+14. - [ ] [142] Definir definición de crash/bloqueo (P0) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+15. - [ ] [142] Definir definición de pérdida de progreso (P1) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+16. - [ ] [142] Definir definición de P2 (menor, con workaround) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+17. - [ ] [142] Definir flujo de ticket P0/P1 → comité → hotfix [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+18. - [ ] [142] Definir hotfix con test de regresión previo al merge (M112) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+19. - [ ] [142] Definir postmortem obligatorio por hotfix [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+20. - [ ] [142] Definir cola de P2 documentada para la primera actualización post-lanzamiento [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+21. - [ ] [142] Definir métrica de hotfixes por semana [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+22. - [ ] [142] Definir símbolos de crash accesibles al handler (M105) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+23. - [ ] [142] Definir comprobación de assets de desarrollo (texturas/audio placeholder) fuera [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+24. - [ ] [142] Definir prueba de instalación desde cero en cada plataforma (VM limpia) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+25. - [ ] [142] Definir verificación de arranque sin errores tras instalación limpia [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+26. - [ ] [142] Definir prueba de desinstalación/reinstalación sin residuos [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+27. - [ ] [142] Definir verificación de carpetas de datos correctas por plataforma [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+28. - [ ] [142] Definir prueba de instalación en disco con sín caracteres especiales [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+29. - [ ] [142] Definir prueba de actualización Beta → RC sin pérdida de datos [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+30. - [ ] [142] Definir prueba de actualización de RC-1 a RC-2 (delta) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+31. - [ ] [142] Definir verificación de versión de save reportada como compatible [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+32. - [ ] [142] Definir registro de logs de actualización (éxito/fallo) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+33. - [ ] [142] Definir rollback seguro si la actualización falla [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+34. - [ ] [142] Definir prueba de actualización con red cortada a mitad [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+35. - [ ] [142] Definir migración de save v3.x a versión RC sin pérdidas [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+36. - [ ] [142] Definir carga de saves de todas las fases previas (pre-Alpha a Beta) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+37. - [ ] [142] Definir prueba de save corrupto → backup y recuperación (M66) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+38. - [ ] [142] Definir reporte de versión de save en el manifiesto del usuario [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+39. - [ ] [142] Definir verificación de que no hay saves con flags de dev activos [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+40. - [ ] [142] Definir métrica de errores de save en piloto [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+41. - [ ] [142] Definir 30 ciclos de sincronización con latencia simulada [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+42. - [ ] [142] Definir resolución de conflicto "último ganador + backup" [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+43. - [ ] [142] Definir validación de integridad antes de aplicar el save cloud [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+44. - [ ] [142] Definir desconexión/reconexión de red durante sincronización [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+45. - [ ] [142] Definir batalla de saves entre dos dispositivos (prueba) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+46. - [ ] [142] Definir reporte de errores de cloud sin reviente de UI [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+47. - [ ] [142] Definir telemetría de tamaño y frecuencia de sync [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+48. - [ ] [142] Definir matriz completa hitos → logros [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+49. - [ ] [142] Definir desbloqueo local de logros sin dependencia de red [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+50. - [ ] [142] Definir verificación de persistencia de logros tras reinicio [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+51. - [ ] [142] Definir verificación de notificación de logro visible [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+52. - [ ] [142] Definir logros retroactivos para saves Beta [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+53. - [ ] [142] Definir prueba de plataforma sin login (sin cuenta) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+54. - [ ] [142] Definir 100% de logros alcanzables en juego limpio [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+55. - [ ] [142] Definir matriz de 6 idiomas × pantallas clave [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+56. - [ ] [142] Definir verificación de desbordes de texto por idioma (UI) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+57. - [ ] [142] Definir verificación de traducción de logros y store (M149) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+58. - [ ] [142] Definir verificación de fechas/números por idioma [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+59. - [ ] [142] Definir fallback a EN sin claves rotas [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+60. - [ ] [142] Definir perf de ruta fija 20 min en hardware mínimo [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+61. - [ ] [142] Definir perf de ruta fija 20 min en recomendado [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+62. - [ ] [142] Definir memoria dentro de M62 en las 6 islas [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+63. - [ ] [142] Definir tiempos de carga/streaming dentro de M63 [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+64. - [ ] [142] Definir FPS p99 ≥ objetivo en sesiones largas (60+ min) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+65. - [ ] [142] Definir batching/draw calls finales por zona [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+66. - [ ] [142] Definir informe de rendimiento del piloto (percentiles reales) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+67. - [ ] [142] Definir comparativa final mínima vs recomendada [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+68. - [ ] [142] Definir objetivo crash rate < 0.5% de sesiones [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+69. - [ ] [142] Definir piloto de 1000 sesiones con invitados [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+70. - [ ] [142] Definir handler de crashes con stacktrace y símbolos (M105) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+71. - [ ] [142] Definir triaje de crash stacks conocidos vs nuevos [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+72. - [ ] [142] Definir hotfix dirigido si crash rate no baja a objetivo [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+73. - [ ] [142] Definir reporte final de crash rate del piloto [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+74. - [ ] [142] Definir verificación de que los crashes no bloquean saves/cloud [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+75. - [ ] [142] Definir revisión de políticas de contenido (violencia/edad) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+76. - [ ] [142] Definir prueba de certificación: instalación, actualización, saves [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+77. - [ ] [142] Definir aprobación firmada por responsable de plataforma [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+78. - [ ] [142] Definir registro de desvíos y excepciones aprobadas [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+79. - [ ] [142] Definir preparación de los paquetes de certificación (textos, archivos) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+80. - [ ] [142] Definir términos de servicio final [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+81. - [ ] [142] Definir política de privacidad final (cloud, telemetría) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+82. - [ ] [142] Definir atribuciones de assets de terceros completas [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+83. - [ ] [142] Definir clasificación etaria (ESRB/PEGI) con documentos [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+84. - [ ] [142] Definir contratos de voz/música con derechos despejados (M41-M44) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+85. - [ ] [142] Definir revisión legal firmada [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+86. - [ ] [142] Definir verificación de no contenido ofensivo por región (M147) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+87. - [ ] [142] Definir store page publicada-ready (textos, capturas, tags) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+88. - [ ] [142] Definir tráiler final montado y aprobado [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+89. - [ ] [142] Definir comunicado de prensa final en 2 idiomas [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+90. - [ ] [142] Definir kit de medios (capturas HQ, logos, b-roll) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+91. - [ ] [142] Definir plan de contenido de redes para día 0 y semana 1 [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+92. - [ ] [142] Definir lista de reviewers/streamers contactados [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+93. - [ ] [142] Definir verificación de disponibilidad de la página (fecha oculta hasta día 0) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+94. - [ ] [142] Definir canales de soporte (foros, Discord, correo) activos [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+95. - [ ] [142] Definir FAQ publicada (instalación, saves, plataformas, idiomas) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+96. - [ ] [142] Definir SLA de respuesta definido (24 h hábiles) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+97. - [ ] [142] Definir triaje diario de soporte en lanzamiento [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+98. - [ ] [142] Definir camino de escalado de bugs de soporte a tracker [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+99. - [ ] [142] Definir backup de canales (quién cubre a quién) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+100. - [ ] [142] Definir cronograma día 0 con horas locales por región [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+101. - [ ] [142] Definir responsables de cada tarea del día 0 [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+102. - [ ] [142] Definir runbook de incidentes (crash masivo, store caída, cloud) [M] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+103. - [ ] [142] Definir holgura de 48 h ante imprevistos [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+104. - [ ] [142] Definir aprobación final del plan por el equipo [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+105. - [ ] [142] Definir verificación de accesos de plataforma (quién puede publicar) [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
+106. - [ ] [142] Definir respaldo de credenciales sin compartir secretos en repo [S] <!-- fuente: 142-Release-Candidate/05-Checklist.md -->
 
 1. - [ ] [108] Vincular el problema con la optimización obligatoria del proyecto (AGENTS.md 21.4.8) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
 2. - [ ] [108] Definir el alcance: models 3D, texturas, materiales, audio, fuentes, UI y paletas voxel [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->

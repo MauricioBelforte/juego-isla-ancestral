@@ -1990,6 +1990,99 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 
 
 ## REPOBLACION V3 (2026-10-19T00:02:03) — items REALES de 05-Checklist (fuente en comentario)
+1. - [ ] [68] Puertas/gangways animados en paradas (M48) [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+2. - [ ] [68] Bandera del barco con viento (M50) en paradas [S] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+3. - [ ] [68] NPC pasajeros en paradas (M64) [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+4. - [ ] [68] NPC abordando el vehículo (M67) [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+5. - [ ] [68] Testear animaciones con LOD (M61) [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+6. - [ ] [68] HUD del viaje legible con alto contraste [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+7. - [ ] [68] Reduce Motion: transiciones cortas sin zoom [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+8. - [ ] [68] Subtítulos en mensajes de viaje [S] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+9. - [ ] [68] Panel de transporte accesible con gamepad (M57) [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+10. - [ ] [68] Señalización batchable (M46, ≤ 4 carteles por escena) [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+11. - [ ] [68] Capa de mapa sin draw calls nuevos [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+12. - [ ] [68] Transición reutilizable (SceneTransition M61) [M] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+13. - [ ] [68] Probar con profiler (M116) [C] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+14. - [ ] [68] Documentar el estado condicional de la estación de tren [S] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+15. - [ ] [68] Actualizar DOCUMENTACION/README.md con el módulo 68 [S] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+16. - [ ] [68] Verificar con verificar_checklist.py (sin alertas nuevas) [S] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+17. - [ ] [68] Push del módulo y reporte al usuario [S] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+18. - [ ] [68] Revisar que plan-inicial == plan-actual (SHA-256) [S] <!-- fuente: 68-Transporte-Y-Navegacion/05-Checklist.md -->
+19. - [ ] [108] Vincular el problema con la optimización obligatoria del proyecto (AGENTS.md 21.4.8) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+20. - [ ] [108] Definir el alcance: models 3D, texturas, materiales, audio, fuentes, UI y paletas voxel [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+21. - [ ] [108] Excluir del alcance: el terreno voxel generado en runtime por Voxel Tools (M08) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+22. - [ ] [108] Registrar dependencias: M45 (Arte 3D) y M78 (Legal PI), con relaciones a M04, M08, M47, M48, M61, M62, M63, M86, M107, M111, M112, M118 [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+23. - [ ] [108] Establecer que M45 puede estar sin documentar y se referencia por su catálogo de entregables [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+24. - [ ] [108] Fijar los criterios de aceptación del módulo (7 criterios del 01-Requerimientos) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+25. - [ ] [108] RF2: admitir gltf + bin en staging para edición y diffs legibles [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+26. - [ ] [108] RF2: definir PNG como textura lossless con canal alfa [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+27. - [ ] [108] RF2: definir WebP como textura lossy sin alfa dura [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+28. - [ ] [108] RF2: definir OGG Vorbis como audio estándar (música, ambiente, SFX) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+29. - [ ] [108] RF2: admitir WAV solo para loops cortos de UI/feedback ≤ 5 s [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+30. - [ ] [108] RF3: prohibir FBX como entrada directa y documentar la ruta de conversión Blender → glTF [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+31. - [ ] [108] RF3: prohibir TGA, BMP y GIF como texturas de entrada [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+32. - [ ] [108] RF3: prohibir MP3, M4A y MIDI como audio de entrada [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+33. - [ ] [108] Definir TTF/OTF con licencia libre verificada como fuente (M88: Nunito, Fredoka One) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+34. - [ ] [108] Exigir potencias de 2 en texturas para compresión VRAM eficiente [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+35. - [ ] [108] Fijar límites de resolución por tipo: props ≤ 2048², atlas ≤ 4096², iconos ≤ 256² [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+36. - [ ] [108] Definir paletas voxel como PNG atlas con mipmaps off y filtrado off (anti-bleeding M08) [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+37. - [ ] [108] RF4: definir prefijos obligatorios por tipo: mdl_, tex_, mat_, aud_, anim_, fnt_, ui_, vox_ [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+38. - [ ] [108] RF4: usar snake_case en minúsculas sin espacios, tildes, ñ ni caracteres especiales [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+39. - [ ] [108] RF4: definir la secuencia {prefijo}_{entidad}_{variante}_{sufijo} [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+40. - [ ] [108] RF4: numerar variantes en dos dígitos (_01) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+41. - [ ] [108] RF4: usar sufijos de mapa: _albedo, _normal, _roughness, _emission, _height [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+42. - [ ] [108] RF4: garantizar que el id nunca se reutiliza tras un retiro [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+43. - [ ] [108] Definir la convención opcional de respaldo _lod0/_lod1/_lod2 para LODs manuales [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+44. - [ ] [108] RF5: definir preset de textura 3D: mipmaps on, VRAM Compressed, high_quality, filter on, repeat off [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+45. - [ ] [108] RF5: definir preset de textura UI: mipmaps off, VRAM Compressed, filter off según caso [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+46. - [ ] [108] RF5: definir preset de paleta voxel: mipmaps off, filter off, repeat off [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+47. - [ ] [108] RF5: definir preset de audio OGG con calidad por uso (música alta, SFX media) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+48. - [ ] [108] RF5: definir preset de audio WAV loop con normalize, trim y bounds de loop [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+49. - [ ] [108] RF5: definir preset de fuente TTF con MSDF on, antialiasing on y subsetting [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+50. - [ ] [108] RF6: activar mipmaps en todas las texturas de runtime [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+51. - [ ] [108] RF6: usar compresión VRAM BPTC/S3TC en PC vía Godot [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+52. - [ ] [108] RF6: generar shadow mesh en meshes para sombras baratas [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+53. - [ ] [108] RF6: definir presupuesto por tipo: props ≤ 1.5k tris, NPCs ≤ 6k, fauna ≤ 4k, mobiliario ≤ 2.5k [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+54. - [ ] [108] RF6: instanciar props repetidos con MultiMesh o VoxelInstancer (M08) [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+55. - [ ] [108] RF6: usar un solo mesh con N transforms para vegetación y piedras decorativas [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+56. - [ ] [108] Usar atlas ≤ 4096² con margen de 4 px anti-bleeding para props compartidos [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+57. - [ ] [108] Preparar los presets para poder cambiar a ETC2/ASTC si hubiera mobile (M96) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+58. - [ ] [108] Verificar en review ausencia de popping visible en transición de LODs [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+59. - [ ] [108] RF9: revisar escala correcta en grilla de 1 m del mundo (M08) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+60. - [ ] [108] RF9: revisar origen y pivote del modelo en posición correcta [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+61. - [ ] [108] RF9: revisar UVs sin superposición accidental y normal maps consistentes [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+62. - [ ] [108] RF9: revisar alfa sin bordes blancos (fix_alpha_border) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+63. - [ ] [108] RF9: revisar mipmaps y filtrado visualmente sin saltos [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+64. - [ ] [108] RF9: revisar LODs a las distancias de uso y sombras sin artefactos [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+65. - [ ] [108] RF9: revisar look dev cozy coherente con la dirección de arte [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+66. - [ ] [108] RF9: revisar peso estimado en memoria contra la tabla por tipo [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+67. - [ ] [108] RF9: revisar que la ficha esté completa, incluida la licencia (M78) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+68. - [ ] [108] RN: calidad visual cozy sin texturas 4K indiscriminadas; atlas y MultiMesh para draw calls bajos [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+69. - [ ] [108] RN: binarios grandes gestionados con Git LFS (M06/M107) [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+70. - [ ] [108] Justificar WebP sobre JPG: sin artefactos de bloque en arte flat cozy [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+71. - [ ] [108] Justificar PNG sobre TGA: soporte universal y canal alfa [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+72. - [ ] [108] Justificar OGG sobre MP3: sin licencias de códec y streaming nativo [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+73. - [ ] [108] Analizar la compresión por plataforma: BPTC/S3TC PC, ETC2/ASTC futuro mobile [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+74. - [ ] [108] Analizar batching y atlasing por categorías visuales del proyecto [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+75. - [ ] [108] Documentar el riesgo de bleeding de atlas y su mitigación (margen + mipmaps off) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+76. - [ ] [108] Definir que staging/ es la única puerta de entrada (RF1) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+77. - [ ] [108] Definir que archive/ conserva retirados sin cargarse [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+78. - [ ] [108] Definir el flujo de estados: staging → validado → en_review → aprobado → retirado [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+79. - [ ] [108] M45: modelar props y NPCs respetando la metría de 1 m del mundo voxel [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+80. - [ ] [108] M47: respetar los sufijos de mapas (albedo/normal/roughness/emission) definidos en Texturas y Materiales [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+81. - [ ] [108] M48: animaciones embebidas en glb; anim_ solo para clips excepcionales [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+82. - [ ] [108] M63: ids estables = rutas estables para el caché LRU y el streaming de texturas [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+83. - [ ] [108] M08: paletas voxel en voxel_palettes/ con filtrado off y mipmaps off [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+84. - [ ] [108] M08: props del mundo instanciados con VoxelInstancer/MultiMesh compartido [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+85. - [ ] [108] M61: ejecutar los presupuestos finos de Rendimiento cuando estén publicados (en curso) [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+86. - [ ] [108] Atlas que excede 4096²: rechazo con sugerencia de dividir por categorías [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+87. - [ ] [108] Audio WAV de más de 5 s: rechazo con sugerencia de conversión a OGG [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+88. - [ ] [108] Reportes markdown con resumen ejecutivo (aprobados, errores, pendientes) [S] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+89. - [ ] [108] El apilado de atlas se hace una sola vez por categoría y se cache a su resultado [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+90. - [ ] [108] El índice _APROBADAS.md se regenera incrementalmente, no de cero [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+91. - [ ] [108] Probar el edge case de textura sin comprimir y su corrección con presets [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+92. - [ ] [108] Probar la generación de LODs y shadow meshes en un glb de referencia [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
+93. - [ ] [108] Probar el promote/retiro dejando el índice _APROBADAS.md correcto [M] <!-- fuente: 108-Pipeline-De-Assets/05-Checklist.md -->
 
 1. - [ ] [35] P2: disenar minerales — tabla de 8+ minerales [S] <!-- fuente: 35-Mineria/05-Checklist.md --> — **MEDIDO Y ENTREGADO 2026-10-20 (Log 2034), diseno completo; implementacion bloqueada por 1 item.** Medido antes de disenar: `data/mining/ores.json` tiene **6** vetas (objetivo 8+), `data/items/` tiene **300** `.tres` de los que solo **7** tienen forma de mineral y **2** (`gemstone`, `copper_ore`) no los usa ninguna veta; **0** items de oro. El JSON SI trae `profundidad_banda` (superficie/subterraneo_medio/profundo/ancestral) y `region` (cantera/cueva/templo) completas -> el hueco es solo el numero. Entregada la seccion `### 2.5 Catalogo de minerales - tabla de diseno (P2)` en `03-Diseno.md` (12.631 -> 16.595 B, LF preservado, sin BOM) con 8 filas: las 6 reales con valores leidos del archivo + `veta_gema` (item `gemstone`, ya existe y esta sin uso) + `veta_oro_puro` (item `gold_ore`, NO existe). Huecos destapados: `veta_oro` y `veta_polvo_estrellas` entregan el MISMO item (`ancient_crystal`) porque no hay item de oro; `copper_ore` duplica a `mineral_cobre`. **No se toco** `ores.json`, `VETAS_M35` ni las aserciones de tamano de los tests: crear la veta sin item real violaria BUG-132. Flip `[->]` propuesto; el `[x]` necesita `gold_ore` por M15/M159.
 2. - [ ] [35] P16: disenar rutas — caminos de acceso a las zonas [S] <!-- fuente: 35-Mineria/05-Checklist.md --> — **ENTREGADO 2026-10-20 (Log 2038), diseno completo; implementacion bloqueada por M08.** Seccion nueva `### 2.6 Rutas de acceso a las zonas` en `03-Diseno.md` (16.595 -> 29.859 B, LF preservado, sin BOM, `git diff --numstat` 156/0, 6 tablas y 0 desalineadas): 5 rutas (R1 sendero de cantera sin gate, R2 rampa de descenso, R3 galeria de cueva, R4 sello del templo, R5 acceso ancestral permanente) con ids REALES de piezas (`camino_cesped`, `camino_piedra`, `escalera_recta`, `escalera_doble`, `puente_1`..`puente_4`, `farol_piso`, `antorcha_ancestral`, `cerca_piedra`, `monolito_glifos`, `farol_colgante`) + 4 reglas de ruta + matriz de progresion T1-T4. **Medido antes de disenar:** 6 `zone_id` de gates; **0 llamadores de produccion de `can_access_zone()`**; **0 apariciones** de `gate_muro_piedra`/`gate_sello_ancestral`/`gate_cristal_bloqueado` en `scripts/`; 10 `ubic_*` con **0** para cantera/cueva (hueco ya declarado por M160 en `huecos_de_mapeo`); 46 piezas de construccion; `familia = camino` con **0 efectos de gameplay**. **Hallazgo: ciclo de progresion cerrado** — `gate_muro_piedra` exige T2_HIERRO y el hierro que paga T2 esta dentro de la cantera; `gate_cristal_bloqueado` exige T4_CRISTAL y el cristal que paga T4 esta dentro de la cueva. Hoy latente porque el gate no se consulta en ningun lado. Propuestas P16-D1/D2/D3 entregadas al director; **NO aplicadas** (son datos de M158). Flip `[->]` propuesto.

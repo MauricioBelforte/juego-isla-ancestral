@@ -1,10 +1,10 @@
 {
- "ultimo_update": "2026-10-21T17:38:30",
+ "ultimo_update": "2026-10-21T17:58:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "M159 b2 cerrado por autor 300/300 + her_017; QA cruzado encargado a Hy3 (306)",
-  "pendientes_real": 337,
+  "estado": "M72 t3 RF13 cerrada (81/185); sigue autonomia backlog 337; reloj plataforma ADELANTADO ~3 dias (avisar corregir)",
+  "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
    "73-Coleccionables",
@@ -13,13 +13,13 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 902,
+  "acuse_enviado": 904,
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "M59 item3: registry ubicado (autoload /root/IslandRegistry) + hallazgo sin IslandOps holder en prod -> bloqueado por wiring; puede entregar null-safe + test",
+  "estado": "derivacion 198: test_crafting_inventory.gd 3 checks M16+M14 en ROJO (MiniMax 007) - investigar bug vs drift en proxima tanda",
   "pendientes_real": 222,
-  "acuse_enviado": 195,
+  "acuse_enviado": 198,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 350
  },
  "step_5": {
-  "estado": "standby - cola a 165 tras bloque W",
-  "pendientes_real": 165,
-  "acuse_enviado": 134
+  "estado": "acuse 141: medido M90 249/249 + suites 85/0 y 57/0; fila 90 syncada por director; CONVENCIONES-CODIGO.md encargada; cola nueva 67+23 (commit paths via Cron C)",
+  "pendientes_real": 203,
+  "acuse_enviado": 142
  },
  "ds_oc": {
   "estado": "activo - ciclos 64-81 M62 y cursos",
@@ -38,14 +38,14 @@
   "acuse_enviado": 168
  },
  "hy3": {
-  "estado": "encargo QA cruzado M159 b2 (306); su 305 llego EN PLANTILLA VACIA (T-19, mensaje caido 3h) - si reescribe, acuse pendiente",
+  "estado": "encargo QA M159 b2 (306) pendiente de respuesta; su 305 sigue caida (T-19); sin repoblacion: riel QA por encargo directo",
   "pendientes_real": 257,
   "acuse_enviado": 306
  },
  "ling": {
-  "estado": "activo - tandas 15-19 riel i18n M87",
-  "pendientes_real": 176,
-  "acuse_enviado": 197
+  "estado": "cola nueva 142-Release-Candidate (106 items) - riel RC/docs + i18n",
+  "pendientes_real": 112,
+  "acuse_enviado": 201
  },
  "crons_vigentes": {
   "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
@@ -62,9 +62,9 @@
   "T-19 materializado: Hy3 305 paso >3h en plantilla vacia - releer con mtime+bytes + retry cubre solo 5min; caida >1h = aviso directo emisor"
  ],
  "minimax_m3_1_flash": {
-  "estado": "activo - M61 t1-t2 entregadas, M73/etc asignadas",
-  "pendientes_real": 766,
-  "acuse_enviado": 4,
+  "estado": "007 validado: M112 3 suites cerradas (219/225) + cronometro runner 897s; APROBADO fix headless-aware + QA cruzado M90 encargado (008) + nuevo frente M17; crafting RED derivado a G-5.3",
+  "pendientes_real": 685,
+  "acuse_enviado": 8,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -83,7 +83,12 @@
   "M105 senales sin productor -> duenos: M14 item_added, M15 recurso, M16/M17 casa, M21 dialog_finished+npc_first_interaction, M24 puzzle, M37 museo, M74 festival, M38 proyecto, M68 island_loaded+travel_started, M84 purchase_done, M92 tutorial",
   "quality.yml: cablear test_telemetry_bridge_m105.gd (CI, director/QA)",
   "M159 b2 QA cruzado -> Hy3 (306 enviado); sello del director tras veredicto",
-  "M59 item3 wiring: IslandOps holder de produccion ausente -> dueno M27/M28/M60"
+  "M59 item3 wiring: IslandOps holder de produccion ausente -> dueno M27/M28/M60",
+  "M16/M14 crafting: test_crafting_inventory.gd 3 checks ROJO reproducible (MiniMax 007 -> G-5.3 198): bug real o drift de test, decidir con run",
+  "M90 QA cruzado -> MiniMax (008); sello del director tras veredicto",
+  "CONVENCIONES-CODIGO.md (fila 111) -> Step-5 (142): doc consolidada de convenciones vigentes",
+  "M112 items de tiempo -> MiniMax: fix headless-aware 5 suites lentas + corrida de validacion (897s -> budget 600s)"
  ],
- "crons_vuelta_b_d": "CRON B respondio 4 pendientes (agnes 900+901 -> 902; DeepSeek 349 -> 350; G-5.3 194 -> 195) + Hy3 305 detectado en plantilla vacia (T-19 caido, avisado en 306); CRON D: activos 2h = DeepSeek (170) y G-5.3 (222) ambos >100 y agnes 337 -> SIN repoblacion; ningun backlog < 100"
+ "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
+ "crons_vuelta_d": "CRON D 17:55: detectados 2 mensajes nuevos (Step-5 141, MiniMax 007); backlogs bajos detectados y repoblados: agnes 4->474, Step-5 10->203, Ling 5->112, DeepSeek 68->161 (modulos 72-73-20-70-158 / 67-23 / 142 / 68-108); fila 90 245->249/249 sincronizada con QA ruteado a MiniMax; G-5.3/DS-OC: formatos de lista numerada, sin repoblacion necesaria"
 }
