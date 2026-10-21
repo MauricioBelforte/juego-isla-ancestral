@@ -1,5 +1,5 @@
-**Modelo:** DeepSeek-V4.1-Flash (último modificador, iter. 6; núcleo/iter. 1 por Deepseek V4 Flash, iters 2-4 por glm-5.3-flash y deepseek-v4-flash)
-**Plataforma:** WorkBuddy
+**Modelo:** Ling-3.1-Flash (último modificador — tandas 17-21; núcleo/iter. 1 por Deepseek V4 Flash, iters 2-4 por glm-5.3-flash y deepseek-v4-flash, iter. 6 por DeepSeek-V4.1-Flash / WorkBuddy)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 87: Localización
 
@@ -245,6 +245,8 @@ msgstr[1] "Se ofrecen {n} objetos"
 **Verificación:** `python scripts/validar_i18n_integridad.py` EXIT 0 — 170/170/170, paridad 0/0/0.
 
 > **Actualización TANDA 18 (2026-10-21, msg 194):** el cruzado JSON↔.po pasó de 145/25/115 a **159/11/115** — el riel de la flota migró las 14 `eventos.historia_c*` al `.po` (commit `3b43f64`, conciliación por lotes del msg 153). Las **11 solo-JSON** restantes son `ui.*` (6), `msg.*` (3), `npc.*` (2) — el legado M60 sigue siendo la deuda. `eventos.*` deja de ser hallazgo y pasa a ser el patrón de éxito (§2.4.3 de 03-Diseno).
+
+> **Actualización TANDA 21 (2026-10-21, msg 200):** deuda M06 documentada en §2.4.6 de 03-Diseno (tarea 71) — `scripts/player/player.gd` (panel de inventario del jugador) tiene **13 literales ES** (11 traducibles + 2 no: `"X"` L644, `"x%d"` L794). **8 cubiertos por claves EXISTENTES** (`SETTINGS.INVENTARIO`, `DIARY.FILTRO_TODOS`, `SETTINGS.BUSCAR`, `SETTINGS.ORDENAR`, `SETTINGS.APLICAR`, `SETTINGS.CERRAR`, `SETTINGS.DESCARTAR`, `DIARY.FAVORITO`) y **4 nuevas propuestas** `ITEMS.USAR` / `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` / `ITEMS.SIN_HERRAMIENTA` (ES/EN/PT listos — crear en el mismo commit que el consumo, política anti-huérfanas). Al aplicarse, `SETTINGS.DESCARTAR` (huérfana potencial de la tabla L237) gana su consumidor de producción #1. Pendiente de asignación al owner de M06. Evaluación tarea 71: login NO aplica (v1 single local, contrato MP RF24); nombre del jugador = dato de usuario (RF13, futuro M77); placeholders de búsqueda SÍ aplican (2 de 3 ya traducidos).
 
 ## 9. Notas del Agente
 

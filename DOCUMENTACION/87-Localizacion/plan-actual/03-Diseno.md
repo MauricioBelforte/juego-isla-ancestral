@@ -1,6 +1,6 @@
-**Modelo:** DeepSeek-V4.1-Flash
-**Plataforma:** WorkBuddy
-**Fecha:** 2026-09-13 (correcciones doc↔código de la iter. 5; texto original: Deepseek V4 Flash / OpenCode, 2026-08-26)
+**Modelo:** Ling-3.1-Flash (último modificador — tandas 16-21; previo: DeepSeek-V4.1-Flash / WorkBuddy, iter. 5, 2026-09-13; texto original: Deepseek V4 Flash / OpenCode, 2026-08-26)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-13 (correcciones doc↔código de la iter. 5; tandas 16-21 de 2026-10-21)
 
 # 03-Diseno.md — Módulo 87: Localización
 
@@ -225,6 +225,54 @@ label.text = _t("SETTINGS.CONTROLES") % nombre
   - `dialogos/dialogue_manager.gd` L127 (M21): tag `[VAL-DGV]` en inglés.
   - (nombres propios aceptables: `Bootstrap:` de `core/bootstrap.gd`, `asset_preview:` de M108).
 - **Deuda documentada (dueños M48/M60/M31/M21):** renombrar los 4 tags al formato `[MNN]` del estándar. No es bloqueante (consola de dev); no ejecutado por M87 (módulos ajenos).
+
+#### 2.4.6 Strings del jugador (logins, nombre, búsqueda) — evaluación de aplicabilidad (TANDA 21, 2026-10-21 — msg 200, tarea 71)
+
+**Pregunta de la tarea 71:** ¿aplica el language a los "strings del jugador (los logins)"? **Respuesta: al login NO (no existe en v1); al nombre del jugador NO (dato del usuario); al UI estático del jugador SÍ (y hay deuda en M06).**
+
+**1. Login / autenticación — NO APLICA (no existe en v1).**
+- El juego v1 es single-player local. Contrato multijugador (`scripts/multijugador/validate_mp_contract.gd`): bloque B L126-128 exige **cero archivos `mp_*.gd` y cero refs de red** (ENet/multiplayer_peer) en scripts v1; bloque C L148-149: `mp_v1 == "single"`, `servidores_v1 == false`, `coste_estimado_mensual == 0` (RF24).
+- No hay pantalla de login, cuentas ni autenticación → **no hay strings de login que traducir**. El MP (y sus strings de login) es futuro (invitaciones delegadas a M77, L141-142).
+
+**2. Nombre del jugador — DATO DEL USUARIO, no se traduce.**
+- RF13 (`identidad.nombre_jugador_editable == true`, L144) existe en el contrato, pero su UI está delegada al futuro (lista_amigos M77).
+- Un nombre propio es dato del usuario: no pasa por el language (igual que los nombres de NPC, que conservan la ortografía del idioma fuente — §2.4).
+
+**3. Texto que el jugador ESCRIBE (búsquedas) — no se traduce; su PLACEHOLDER SÍ (UI estático).**
+- Auditados los 3 LineEdit de búsqueda de producción:
+  - `ui/layers/diary_layer.gd` L211: `_t("DIARY.BUSCAR")` ✓ (es.po L710 "Buscar en el diario…")
+  - `ui/layers/inventory_layer.gd` L147: `_t("SETTINGS.BUSCAR")` ✓ (es.po L177 "Buscar")
+  - `player/player.gd` L637: `"Buscar ítem..."` — **literal ES (deuda, ver punto 4)**.
+
+**4. DEUDA M06 (Jugador): 13 literales ES en `scripts/player/player.gd` (panel de inventario del jugador).**
+Auditoría (L598-L1117): 11 traducibles + 2 no (`"X"` L644 y `"x%d"` L794 — símbolo y formato numérico).
+
+| Línea | Literal | Clave | Estado |
+|---|---|---|---|
+| L598 | `Inventario` | `SETTINGS.INVENTARIO` | existe (JSON + .po ES/EN) |
+| L616 | `Todos` | `DIARY.FILTRO_TODOS` | existe ("Todos"/"All") |
+| L637 | `Buscar ítem...` | `SETTINGS.BUSCAR` | existe ("Buscar"/"Search") |
+| L661 | `Ordenar:` | `SETTINGS.ORDENAR` | existe (usada por inventory_layer L158) |
+| L672 | `Aplicar` | `SETTINGS.APLICAR` | existe (JSON + .po ES/EN) |
+| L726 | `Cerrar (B)` | `SETTINGS.CERRAR` + `" (B)"` | existe; `(B)` = acelerador de teclado, se concatena |
+| L945 | `Usar` | `ITEMS.USAR` | **NUEVA** (ES/EN/PT listos) |
+| L952 | `Favorito`/`Desfavorecer` | `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` | **NUEVAS** (par) |
+| L960 | `Descartar` | `SETTINGS.DESCARTAR` | existe — **resuelve la huérfana de tanda 17** (04-Codigo §8b) |
+| L1117 | `Sin herramienta` | `ITEMS.SIN_HERRAMIENTA` | **NUEVA** (ES/EN/PT listos) |
+
+**Claves nuevas propuestas (ES/EN/PT — regla §2.4.2 regla 5):**
+
+| Clave | ES | EN | PT |
+|---|---|---|---|
+| `ITEMS.USAR` | `Usar` | `Use` | `Usar` |
+| `ITEMS.FAVORITO` | `Favorito` | `Favorite` | `Favorito` |
+| `ITEMS.DESFAVORECER` | `Desfavorecer` | `Unfavorite` | `Desfavoritar` |
+| `ITEMS.SIN_HERRAMIENTA` | `Sin herramienta` | `No tool` | `Sem ferramenta` |
+
+**Consumo (para el owner de M06 — NO ejecutado por M87, módulo ajeno):** reemplazar cada literal por `_t("CLAVE")` (ej: `title.text = _t("SETTINGS.INVENTARIO")`; `search_line.placeholder_text = _t("SETTINGS.BUSCAR")`; `fav_btn.text = _t(s.favorito ? "ITEMS.DESFAVORECER" : "ITEMS.FAVORITO")`). Las 4 claves nuevas se crean **en el mismo commit** que el consumo (evitar huérfanas — política §2.4.4), con ES+EN+PT en JSON + es.po + en.po.
+- Nota: `DIARY.FILTRO_TODOS` ("Todos") viene del dominio del diario; si el owner de M06 prefiere desacoplamiento, alternativa `ITEMS.TODOS` (mismo texto — el glosario §2.4 "un término, una clave" favorece el reuso).
+
+**Regla derivada (estándar M87):** el language aplica al **UI estático** y al **contenido del juego**; NO aplica a (a) login/autenticación (inexistente en v1), (b) nombre del jugador (dato de usuario, RF13 futuro), (c) el texto que el jugador escribe (búsquedas, chat futuro).
 
 ### 2.5 Flujo de agregar un idioma nuevo
 
