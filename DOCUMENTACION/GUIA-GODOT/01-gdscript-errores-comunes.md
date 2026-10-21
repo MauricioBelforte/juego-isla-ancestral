@@ -335,6 +335,31 @@ print("[X] listo (%d DLC, %d bundles)" % a.size(), b.size())
 print("[X] listo (%d DLC, %d bundles)" % [a.size(), b.size()])
 ```
 
+### 19.1 `%` literal dentro del string de formato (variante agregada 2026-10-21)
+
+**Error:** `ERROR: String formatting error: unsupported format character.`
+(at: `validated_evaluate`). A diferencia de §19 (dos argumentos con un solo format,
+que SÍ aborta), esta variante **no aborta la función**: el check corre igual y la
+suite puede dar verde con el mensaje de fallo roto — si el check falla, el
+`print("FALLO: " + msg)` del camino de fallo queda ilegible.
+
+```gdscript
+# ❌ Incorrecto — el % literal de "40%" se come el formato
+_check(vel <= 12.0 * 0.4 + 0.01, "reversa clamp a 40% vel max: %.2f" % vel)
+
+# ✅ Correcto — % literal escapado como %%
+_check(vel <= 12.0 * 0.4 + 0.01, "reversa clamp a 40%% vel max: %.2f" % vel)
+```
+
+Caso real: `game/isla-ancestral/scripts/vehiculos/test_vehiculos.gd:146` (M67),
+detectado y corregido el 2026-10-21 (Log 2079). Verificado pos-fix: 0 errores de
+formateo, suite 40 checks / 0 fallos / EXIT 0.
+
+> **Modelo:** Step-5-WorkBuddy
+> **Plataforma:** WorkBuddy
+> **Fecha:** 2026-10-21
+> **Origen:** msg 144 del director (visto bueno para edición directa aditiva)
+
 ---
 
 ## 20. `Object.has()` no existe en Godot 4 (§9.49)
