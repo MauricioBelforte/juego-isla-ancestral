@@ -1,0 +1,6 @@
+game\isla-ancestral\scripts\inventario\inventory_slot.gd
+game\isla-ancestral\scripts\stress\escenarios\inventory_stress.gd
+game\isla-ancestral\scripts\ui\layers\inventory_layer.gd
+game\isla-ancestral\scripts\utils\components\inventory_component.gd
+game\isla-ancestral\scripts\crafting\test_crafting.gd
+game\isla-ancestral\scripts\crafting\test_m16_crafting_toast.gd
