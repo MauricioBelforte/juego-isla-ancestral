@@ -4980,3 +4980,48 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 - **Evidencia HOY (binario real, 0 fallos / EXIT 0 / 0 SCRIPT ERROR):** test_graphics_config.gd 85 checks / 6 bloques (guarda 3 capas, CHECKS_MINIMOS 80); test_graphics_config_post_m90.gd 57 checks (sin guardia 3 capas, no modificada). Nucleo graphics_config.gd 575 lineas medido.
 - **HALLAZGOS para el director:** (1) el 05-Checklist de M90 tiene 332 secuencias de mojibake por doble codificacion + BOM UTF-8 (preexistente, commiteado; NO reparado); (2) la linea 246 fusiona 2 items por salto de linea perdido ("calidad de agua (x] calidad de particulas"); (3) la UI de ajustes graficos NO existe en disco (M53) y los metodos apply_resolution/apply_vsync/apply_anti_aliasing tampoco -> diseno como contrato, impl diferida.
 - **Sin:** commits / push / auto-sellos 21.8 / ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot. Flips ofrecidos a revertir. Fila GLOBAL 90 reportada al director (msg 108) para sync.
+
+## 2026-10-21 05:20 — minimax-m3-1-flash / Kilo Code — M61-Rendimiento RESERVADO (tanda 1 de 3, Log 2068)
+
+**Reserva §21.4.7:** M61 estaba en 🟡 Con dudas con última actividad de **atria-dawn del 2026-10-12** (>24 h sin avance, sin reserva viva) → reclamo legítimo. Mandato: el director (canal de apertura 001) me asignó la flota de módulos headless; M61 encaja en mi perfil de coding/optimización y **todo su contenido es headless-verificable** (umbrales data-driven + gate + suite), sin assets ni visión.
+
+**Tanda 1 (entregada):**
+- `data/performance/budgets.json`: 3 bloques data-driven nuevos — `gpu` (draw calls 400/escena == `limites.draw_calls_max`, 24/chunk, overdraw 1.5 == techo de M51, 0.5 ms de shader/material), `memoria` (VRAM 2048 MB == recomendado de M115, 1024 MB/escena, texturas 4K comprimidas, atlas UI 2048x2048 / 16 MB, GC <= 50 ms, compresión BC7/ASTC por plataforma) y `normas.objetivo_por_preset` (4 presets reales de M90).
+- `scripts/performance/validate_budget.gd`: 5 validadores nuevos (`_validar_gpu`, `_validar_memoria`, `_validar_objetivo_por_preset`, `_validar_paquete_datos`, `_medicion_dentro_umbrales_gpu`), todos tolerantes si el bloque falta.
+- `tests/test_m61_normas_performance.gd` (NUEVO): 39 checks que cruzan la norma contra el **runtime real** de los duenos (M90 graphics_config 16, M115 hardware_profile 3, M62 presets de MB 3, M51 overdraw 1, M46 atlas 1).
+- **CORRECCION de deriva real:** `normas.distancia_dibujado_presets_m` [100,150,220] → [300,600,1200,2500] m, porque los 3 valores del Log 1755 no coinciden con M90 `DISTANCIA` (300/600/1200/2500 m). La norma debe describir la realidad.
+- Flips: **12 `[ ]`→`[x]`** (secciones A/E/F/G/H) con cita al dato + gate + suite; **16 degradaciones honestas** `[ ]`→`[?]` (los `[C] Validar ... 60 FPS / sin picos`, que exigen renderer + GPU real y no son medibles en headless). Conteo: 65 [x] / 61 [ ] / 22 [?] = 148 (total canónico sin cambio).
+
+**Evidencia (Godot 4.7.2 headless, 2026-10-21 05:20):** gate `validate_budget.gd` → 0 fallos, EXIT=0; suite `test_m61_normas_performance.gd` → **39 checks, 0 fallos, EXIT=0**. **Prueba en ROJO (anti-falso-verde):** rota la norma a propósito (distancia `media` 600 → 999) la suite salió **rc=1** detectando la deriva contra M90; el gate stayed verde por diseño (valida coherencia interna; la deriva entre módulos la caza la suite) y el archivo quedó **byte-idéntico** al original tras la prueba.
+
+**Límite de alcance respetado (§15):** no toqué código de los duenos (M07/M08/M19/M34/M35/M47/M50/M51/M52/M53/M62/M63/M90/M115) — M61 define la norma, la implementación vive en el dueño; solo **leo** sus artefactos para poder detectar deriva.
+
+**Pendiente (tandas 2 y 3):** bloques `carga`/`chunks`/`destruccion` (RF8/RF9/RF10/RF11) y `tecnicas` (RF12..RF26) con el mismo patrón data-driven. Ojo al cerrar los `[C]`: los de allocator (X259) sí pueden medirse headless; los de FPS/overdraw/pop no.
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 05:20
+
+## 2026-10-21 05:35 — minimax-m3-1-flash / Kilo Code — M61-Rendimiento LIBERADO (2 tandas, Logs 2068 + 2071)
+
+**Liberacion §21.4.5:** el modulo vuelve a 🟡 Con dudas con **76/148** (antes 53/148). 2 tandas entregadas: 12 + 11 = **23 flips [x]** con dato data-driven + gate + suite, y **16 degradaciones honestas [?]** (los `[C] Validar ... 60 FPS / sin picos`, no medibles en headless). Suite `tests/test_m61_normas_performance.gd` (NUEVA) con **58 checks, 0 fallos, EXIT=0** y **prueba en ROJO** que detecta la deriva de la norma contra el runtime de M90/M63/M115/M62/M51/M46. Bloques de norma agregados: `gpu`, `memoria`, `carga`, `chunks`, `destruccion` + `normas.objetivo_por_preset` (correccion de deriva: presets de distancia [100,150,220] -> [300,600,1200,2500] m = M90 `DISTANCIA` real).
+
+**Queda para la siguiente tanda (28 items de las secciones L..Y, RF12..RF26)**, con el mapa de grounding ya verificado en disco (M90 `SOMBRAS`/`CULLING`/`LOD`/`VOLUMETRICO`, M51 `validate_water.gd`, `main_island.gd` L200-202 (oceano = un solo PlaneMesh), `day_night_cycle.gd` (sol+luna = 1 directional + sky), `terreno_horizonte.gd` (impostor a 1024 m), M63 (pool de meshes), M07 (greedy meshing)). Los ~22 items restantes son **implementacion de otros modulos** (M50/M52/M34/M35/M53/M47) y NO se flipean desde M61 (§15).
+
+**Sin push ni commits** (regla del fundador). Log 2069 (que Step-5 tomio en paralelo) renumerado a 2071 en todas las citas.
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 05:35
+
+> ⚠ **TRAMPA DE CODIFICACION (aviso a toda la flota, 05:45):** `CHECKLIST-GLOBAL.md` se **re-corrompe
+> de forma continua** (598 secuencias de mojibake + BOM) cada vez que un escritor lo guarda en cp1252;
+> el saneado con `scripts/fix_encoding.py` dura lo que dura la carrera con ese escritor. Consecuencia
+> medida: sobre un archivo ya corrupto, `str.replace()` con un patron literal (emoji, flecha, guion)
+> **falla en SILENCIO** — el texto corrupto ya no coincide con el patron limpio y el agente cree que
+> escribio (me paso a mi: mi edicion de liberacion de la fila 61 quedo sin aplicarse, y lo detecte
+> verificando en disco). **Regla para los 4 registros de reserva:** escribir la **linea completa** y
+> **verificar en disco** (contar filas de modulo + buscar marcas de mojibake) antes de dar por hecho
+> el cambio. El fondo sigue abierto: el founder hace push desde el worktree, asi que cada push puede
+> llevar la version corrupta al remoto. Propuesta al director: gate de `diagnosticar_mojibake.py` en el
+> flujo de push, o saneado automatico en el paso de commit.

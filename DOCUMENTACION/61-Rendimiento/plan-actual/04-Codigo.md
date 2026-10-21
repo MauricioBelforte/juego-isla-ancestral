@@ -431,6 +431,44 @@ ambos artefactos:
 
 El archivo de datos quedo **byte-identico** al original tras la prueba (verificado con `bytes`).
 
+> **CORRECCION (2026-10-21 05:45):** el saneamiento de encoding de `CHECKLIST-GLOBAL.md` descrito en el
+> punto 6 de la bitacora quedo **invalidado a las ~2 h** (otro escritor con cp1252 volvio a corromper el
+> archivo). Re-saneado y fila 61 reescrita completa; la leccion operativa (el `replace()` con patron
+> literal falla en silencio sobre un archivo ya corrupto) queda en el Log 2068.
+
+### 7. Tanda 2 (Log 2071) — carga (RF9) + chunks (RF10) + destruccion (RF11)
+
+Mismo patron, con el grounding tomado de las **constantes reales del dueno M63**
+(`scripts/stream/stream_manager.gd`), no de estimaciones:
+
+| Bloque | Claves | Origen del valor |
+|---|---|---|
+| `carga` | `carga_asincrona_obligatoria` true | M63 usa `ResourceLoader.load_threaded_request` (RF2 iter. 3, Log 622); nunca `load()` sincrono en gameplay |
+| | `progreso_minimo_pct` 0.02 / `progreso_maximo_pct` 0.98 | = `PISO_PROGRESO` / `TOPE_PROGRESO` de M63 (la barra no miente) |
+| | `bloqueo_main_thread_max_ms` 0 | RF9 literal (jamás bloquear el hilo principal) |
+| | `presupuesto_streaming_ms_por_frame` 40 | = `PRESUPUESTO_MS` de M63 (delta < 50 ms por frame de cola) |
+| | `precarga_escena_siguiente` true | M63 expone `precalentar_mundo()` + `operaciones_restantes()` (iter. 5, Log 1192) |
+| | `cola_prioridad_tipos` 7 | = `const PESOS` de M63 (7 tipos de operacion con peso) |
+| `chunks` | `generacion_en_background_thread` true / `trabajo_voxel_en_main_thread` false | RF10 literal |
+| | `generacion_ms_por_frame_max` 5.0 | RF10 literal ("< 5 ms/frame") |
+| | `chunks_activos_max` 4096 / `frames_envejecido` 2 | = `MAX_CHUNKS_DEFAULT` / `FRAMES_ENVEJECIDO` de M63 (LRU §4) |
+| `destruccion` | `gc_en_bucle_interaccion` false | RF11 literal (sin GC en el bucle del jugador) |
+| | `pooling_buffers_mesh` true | pool de meshes reutilizado que M63 ya declara en su LRU (§4) |
+| | `remesh_en_background` true | RF11/M07; el techo por bloque (2 ms) vive en `normas`, no se duplica |
+
+Validadores nuevos del gate: `_validar_carga()`, `_validar_chunks()`, `_validar_destruccion()`.
+La suite `tests/test_m61_normas_performance.gd` paso de **39 a 58 checks** (preload de
+`stream_manager.gd` y comparacion de sus constantes en runtime).
+
+**Evidencia (Godot 4.7.2 headless, 2026-10-21 05:35):**
+```
+[M61] carga: 7 umbral(es) validados (progreso 0.02..0.98, presupuesto 40 ms/frame, 7 tipos de cola)
+[M61] chunks: 6 umbral(es) validados (generacion <= 5.0 ms/frame, 4096 chunks activos, 7 tipos de cola)
+[M61] destruccion: 3 umbral(es) validados (sin GC en el bucle, pooling de buffers, remesh en background)
+=== VALIDATE BUDGET M61: 0 fallo(s) ===   EXIT=0
+=== Resumen M61 normas de rendimiento: 58 checks, 0 fallos ===   EXIT=0
+```
+
 ## Notas del Agente
 
 **Modelo:** minimax-m3-1-flash
@@ -477,4 +515,33 @@ El archivo de datos quedo **byte-identico** al original tras la prueba (verifica
    `test_m62_correspondencia_m61.gd` ya tiene el patron de gate en rojo que se puede reutilizar.
 4. La suite nueva se autodescubre en el runner de M112 (`res://tests`, `extends SceneTree`): agregarla
    suma ~10 s al tiempo total de suite, que hoy ya excede el limite de 10 min (deuda M112, no M61).
+
+## Notas del Agente (tanda 2)
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 05:35
+**Estado:** Parcial (tanda 2 de 3) — 23 de 89 pendientes cerrados con evidencia headless
+
+### Lo que hice (tanda 2)
+- 3 bloques data-driven nuevos (`carga`, `chunks`, `destruccion`) con el grounding tomado de las
+  constantes reales de M63, no de estimaciones propias.
+- 3 validadores nuevos del gate + 19 checks nuevos en la suite (39 -> 58), que ahora **preloadea**
+  `stream_manager.gd` y compara sus constantes en runtime.
+- 11 flips `[ ]`->`[x]` en las secciones I/J/K (tiempos de carga, generación de chunks, destrucción
+  de bloques).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- La implementacion del background thread de chunks, el pool de buffers de mesh y el remesh en
+  background son **codigo de los duenos** (M07 / M63). M61 declara la norma; la verificacion de que
+  el dueno la cumpla es suya (y la suite ya falla en rojo si el dueno cambia sus constantes).
+- El item "Validar generacion con stream continuo (M63)" y "Validar destruccion masiva sin picos"
+  siguen en `[?]`: requieren renderer + medicion de frame time real.
+
+### Recomendaciones para el siguiente agente
+- Tanda 3: bloque `tecnicas` para las secciones L..Y (RF12..RF26). Recordar que varios de esos
+  items ("Aplicar GPU instancing a vegetacion (M50)", "Pooling de fauna y peces (M35/M34)") son
+  **implementacion del dueno** y no deben flipearse desde M61 sin codigo real en su modulo.
+- El item X259 ("Validar cero allocations en lazo caliente") **si** es medible en headless con un
+  probe de `Performance.get_monitor(Performance.OBJECT_COUNT)` antes/despues del lazo caliente.
 

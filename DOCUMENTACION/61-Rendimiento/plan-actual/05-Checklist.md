@@ -29,6 +29,10 @@
   no son medibles en headless (exigen renderer + `bench_scene_a` + GPU real)
 ▸ Prueba en ROJO (anti-falso-verde): rota la norma a proposito (distancia `media` 600 -> 999),
   la suite salio con rc=1 detectando la deriva contra M90; archivo restaurado byte-identico
+▸ Tanda 2 (Log 2071): 3 bloques data-driven nuevos (`carga` RF9, `chunks` RF10, `destruccion` RF11)
+  con grounding en las constantes reales de M63 (`PISO_PROGRESO` 0.02, `TOPE_PROGRESO` 0.98,
+  `PRESUPUESTO_MS` 40, `PESOS` 7 tipos, `MAX_CHUNKS_DEFAULT` 4096, `FRAMES_ENVEJECIDO` 2) + 3
+  validadores nuevos del gate + 19 checks mas en la suite (39 -> 58) + 11 flips
 ▸ Nota de conteo: este bloque de bitacora usa el marcador `▸` a proposito, para que las marcas de
   este relato NO cuenten como items del checklist (el total canonico del modulo es 148 y no cambia).
 
@@ -61,9 +65,10 @@ estática hecha: JSON parsea (python json), indentación a tabs y paréntesis ba
 
 ## Reserva actual
 
-- Estado: 🔵 En curso (iter. minimax-m3-1-flash, tanda 1 de 3) — 2026-10-21 05:20
-- Agente: minimax-m3-1-flash (MiniMax API) / Kilo Code — relevo §21.4.7 (el modulo estaba en 🟡 con
-  ultima actividad de atria-dawn del 2026-10-12, >24 h sin avance)
+- Estado: 🟡 Liberado (iter. minimax-m3-1-flash, 2 de 3 tandas) — 2026-10-21 05:35
+- Agente: — (liberado por minimax-m3-1-flash, MiniMax API / Kilo Code — relevo §21.4.7 del estado
+  atria-dawn del 2026-10-12). **Reclamable de nuevo**; la tanda 3 (secciones L..Y) queda encuadrada
+  con su mapa de grounding en `04-Codigo.md` (Notas del Agente, tanda 2).
 - Log reservado: 2068 (`Logs/2068-minimax-m3-1-flash-m61-normas-gpu-memoria.md`)
 - Alcance tanda 1: 3 bloques data-driven nuevos (`gpu`, `memoria`, `normas.objetivo_por_preset`) +
   5 validadores en el gate + suite de coherencia contra los duenos (M90/M115/M62/M51/M46) + correccion
@@ -172,26 +177,26 @@ estática hecha: JSON parsea (python json), indentación a tabs y paréntesis ba
 
 ## I. Tiempos de Carga (RF9)
 
-- [ ] Definir carga asíncrona obligatoria (M63) [S]
-- [ ] Definir progreso real con mensajes de estado (AGENTS §8) [S]
-- [ ] Definir bloqueo cero del hilo principal [M]
-- [ ] Documentar precarga de escena siguiente [M]
+- [x] Definir carga asíncrona obligatoria (M63) [S] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `carga.carga_asincrona_obligatoria = true`; el runtime ya lo cumple — M63 `scripts/stream/stream_manager.gd` usa `ResourceLoader.load_threaded_request` (RF2 iter. 3, Log 622) y nunca `load()` síncrono en gameplay. Gate: `_validar_carga()`; la suite verifica el `load_threaded_request` real en el archivo de M63.
+- [x] Definir progreso real con mensajes de estado (AGENTS §8) [S] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `carga.progreso_minimo_pct = 0.02` y `carga.progreso_maximo_pct = 0.98`, que son **exactamente** `PISO_PROGRESO`/`TOPE_PROGRESO` de M63 (la barra no arranca en 0 ni se pega en 100 antes de terminar). Gate: `_validar_carga()`; la suite compara los 2 valores contra M63 en runtime.
+- [x] Definir bloqueo cero del hilo principal [M] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `carga.bloqueo_main_thread_max_ms = 0` (RF9 literal) + `carga.presupuesto_streaming_ms_por_frame = 40` (= `PRESUPUESTO_MS` de M63, delta < 50 ms por frame de cola). Gate: `_validar_carga()`; suite: 2 checks contra M63.
+- [x] Documentar precarga de escena siguiente [M] → **umbral data-driven + documentado** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `carga.precarga_escena_siguiente = true`; la capacidad ya existe — M63 expone `precalentar_mundo()` + `operaciones_restantes()` (iter. 5, Log 1192). Documentado en `04-Codigo.md` §Iteracion minimax-m3-1-flash §1.
 - [?]Validar pantalla de carga sin frames congelados [C] → **no medible en headless** (Log 2068): exige renderizar frames reales de la escena de carga; headless no produce frames. La NORMA de carga (asincronia obligatoria, progreso real, bloqueo cero del hilo principal) se define como umbrales data-driven en la tanda 2 de este modulo; la validacion visual queda para un agente con ventana (V2).
 
 ## J. Generación de Chunks (RF10)
 
-- [ ] Definir generación en background thread (M07) [M]
-- [ ] Definir <5 ms/frame consumido por generación [M]
-- [ ] Definir sin trabajo voxel en main thread [S]
-- [ ] Documentar cola de chunks con prioridad [M]
+- [x] Definir generación en background thread (M07) [M] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `chunks.generacion_en_background_thread = true` (RF10 literal). Gate: `_validar_chunks()`.
+- [x] Definir <5 ms/frame consumido por generación [M] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `chunks.generacion_ms_por_frame_max = 5.0` (RF10 literal, "< 5 ms/frame"). Gate: `_validar_chunks()` (verifica <= 5.0).
+- [x] Definir sin trabajo voxel en main thread [S] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `chunks.trabajo_voxel_en_main_thread = false` (RF10 literal: sin trabajo voxel en main thread). Gate: `_validar_chunks()`.
+- [x] Documentar cola de chunks con prioridad [M] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `chunks.cola_prioridad_tipos = 7` = la cantidad real de tipos de operacion con peso de M63 (`const PESOS`: chunk_lod0, chunk_lod1, banco_audio, textura_atlas, shader, npc_instancia, malla_region) — la cola priorizada por pesos ya es el runtime de M63. Gate: `_validar_chunks()`; suite: compara contra `SM.PESOS.size()` en runtime.
 - [?]Validar generación con stream continuo (M63) [C] → **no medible en headless** (Log 2068): el streaming continuo se mide sobre frames reales con chunks entrando; headless no renderiza ni mide frame time. Queda para agente con renderer (V2) + M63 como dueno del runtime.
 
 ## K. Destrucción de Bloques (RF11)
 
 - [x] Definir remesh difuso <2 ms por bloque [M] → **normas.remesh_bloque_ms_max = 2.0** (Log 1755, iter. atria): bloque `normas` en `budgets.json`; el gate valida 0 < remesh_bloque_ms_max <= 2.0
-- [ ] Definir sin GC en el bucle de interacción [M]
-- [ ] Definir pooling de buffers de mesh [M]
-- [ ] Documentar remesh en background (M07) [S]
+- [x] Definir sin GC en el bucle de interacción [M] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `destruccion.gc_en_bucle_interaccion = false` (RF11 literal: sin GC en el bucle del jugador) y el techo de remesh por bloque vive en `normas.remesh_bloque_ms_max` (2.0 ms, ya en la norma). Gate: `_validar_destruccion()`.
+- [x] Definir pooling de buffers de mesh [M] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `destruccion.pooling_buffers_mesh = true`; el pool de meshes reutilizado ya lo declara M63 en su LRU (§4: "pool de meshes reutilizado (M61)") — la norma cierra el lazo con el dueno. Gate: `_validar_destruccion()`.
+- [x] Documentar remesh en background (M07) [S] → **umbral data-driven** (Log 2071, iter. minimax-m3-1-flash (2026-10-21)): `destruccion.remesh_en_background = true` (RF11/M07: el remesh sale del hilo principal) + techo por bloque de 2 ms en `normas.remesh_bloque_ms_max`. Gate: `_validar_destruccion()`.
 - [?]Validar destrucción masiva sin picos [C] → **no medible en headless** (Log 2068): "sin picos" es una medida de frame time (picos) que exige renderer. El umbral de remesh (< 2 ms por bloque) si esta definido y verificado por el gate (`normas.remesh_bloque_ms_max`).
 
 ## L. Medir NPC (RF12)
@@ -323,7 +328,7 @@ estática hecha: JSON parsea (python json), indentación a tabs y paréntesis ba
 - [x] Medición real del bench (Log 386) validada contra el presupuesto manualmente: frame 16.35 ms <= 16.7 ms total (dentro de tolerancia) — punto de partida del gate CI
 - [?] Cableado del gate a GitHub Actions (job que corra validate_budget + bench en CI) — pertenece al módulo M118 (CI-CD, 0/100, 🟢 disponible); el runner necesita GPU/Windows para el bench y el workflow actual usa Godot 4.3 (el proyecto es 4.7.2) — actualizarlo es tarea de M118
 
-**Totales:** 148 items · Completados: 65 · Pendientes: 61 · No resueltos: 22. (Conteo real por regex = 65 [x] / 22 [?] / 61 [ ], verificado el 2026-10-21 por minimax-m3-1-flash: 53 [x] + 12 flips de la tanda 1 (Log 2068) = 65 [x]; 89 [ ] − 12 flips − 16 degradaciones honestas = 61 [ ]; 6 [?] + 16 degradaciones = 22 [?]. Las 16 degradaciones son los items `[C] Validar ... 60 FPS / sin picos`, que exigen renderer + GPU real y no son medibles en headless.)
+**Totales:** 148 items · Completados: 76 · Pendientes: 50 · No resueltos: 22. (Conteo real por regex = 76 [x] / 22 [?] / 50 [ ], verificado el 2026-10-21 por minimax-m3-1-flash: 53 [x] + 12 flips de la tanda 1 (Log 2068) + 11 flips de la tanda 2 (Log 2071) = 76 [x]; 89 [ ] − 23 flips − 16 degradaciones honestas = 50 [ ]; 6 [?] + 16 degradaciones = 22 [?]. Las 16 degradaciones son los items `[C] Validar ... 60 FPS / sin picos`, que exigen renderer + GPU real y no son medibles en headless.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 39 [x] / 101 [ ] /

@@ -43,6 +43,31 @@
 		},
 		"nota": "Norma de memoria M61 (RF6/RF7 + coordinacion con M62). vram_presupuesto_mb = 2048 = recommended_gpu_vram_mb de M114 (scripts/hardware/hardware_profile.gd L31). vram_por_escena_mb = 1024 (mitad del presupuesto total). textura_max_resolucion = 4K comprimida (RF7 literal). ui_atlas_textura 2048x2048 = limite de atlas M46 (scripts/arte2d/pack_atlas.gd) y ui_atlas_max_mb = 16 = 2048*2048*4 bytes RGBA8. gc_pausa_max_ms = 50 = criterio de aceptacion 6 de M61 (sin pausas GC > 50 ms) y se coordina con M62. Agregado por minimax-m3-1-flash (2026-10-21, Log 2068)."
 	},
+	"carga": {
+		"carga_asincrona_obligatoria": true,
+		"progreso_minimo_pct": 0.02,
+		"progreso_maximo_pct": 0.98,
+		"bloqueo_main_thread_max_ms": 0.0,
+		"presupuesto_streaming_ms_por_frame": 40.0,
+		"precarga_escena_siguiente": true,
+		"cola_prioridad_tipos": 7,
+		"nota": "Norma de carga M61 (RF9) + streaming. carga_asincrona_obligatoria: M63 usa ResourceLoader.load_threaded_request (scripts/stream/stream_manager.gd, RF2 iter. 3 Log 622) y nunca load() sincrono en gameplay. progreso_minimo_pct 0.02 / progreso_maximo_pct 0.98 = PISO_PROGRESO / TOPE_PROGRESO de M63 (la barra nunca miente: no arranca en 0 ni se queda en 100 antes de terminar). bloqueo_main_thread_max_ms 0 = RF9 literal (jamás bloquear el hilo principal). presupuesto_streaming_ms_por_frame 40 = PRESUPUESTO_MS de M63 (delta < 50 ms). precarga_escena_siguiente: M63 expone precalentar_mundo() (iter. 5, Log 1192). cola_prioridad_tipos 7 = cantidad de tipos de operacion con peso en M63 (const PESOS). Agregado por minimax-m3-1-flash (2026-10-21, Log 2071)."
+	},
+	"chunks": {
+		"generacion_en_background_thread": true,
+		"generacion_ms_por_frame_max": 5.0,
+		"trabajo_voxel_en_main_thread": false,
+		"cola_prioridad_tipos": 7,
+		"chunks_activos_max": 4096,
+		"frames_envejecido": 2,
+		"nota": "Norma de chunks M61 (RF10). generacion_en_background_thread + trabajo_voxel_en_main_thread false = RF10 literal (generacion en background thread, sin trabajo voxel en main thread). generacion_ms_por_frame_max 5.0 = RF10 literal (<5 ms/frame consumidos por generacion). cola_prioridad_tipos 7 = const PESOS de M63 (chunk_lod0/lod1/banco_audio/textura_atlas/shader/npc_instancia/malla_region). chunks_activos_max 4096 = MAX_CHUNKS_DEFAULT de M63 (LRU, §4) y frames_envejecido 2 = FRAMES_ENVEJECIDO de M63. Agregado por minimax-m3-1-flash (2026-10-21, Log 2071)."
+	},
+	"destruccion": {
+		"gc_en_bucle_interaccion": false,
+		"pooling_buffers_mesh": true,
+		"remesh_en_background": true,
+		"nota": "Norma de destruccion de bloques M61 (RF11). gc_en_bucle_interaccion false = RF11 literal (sin GC en el bucle del jugador); el techo de remesh por bloque ya vive en normas.remesh_bloque_ms_max (2.0 ms) y no se duplica aqui. pooling_buffers_mesh = pool de meshes reutilizado que M63 ya declara en su LRU (§4: 'pool de meshes reutilizado (M61)'). remesh_en_background = remesh fuera del hilo principal (dueno M07). Agregado por minimax-m3-1-flash (2026-10-21, Log 2071)."
+	},
 	"normas": {
 		"vsync": true,
 		"fps_objetivo": 60,

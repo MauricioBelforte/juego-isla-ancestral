@@ -38,6 +38,8 @@ func _run() -> void:
 	_test_senales()
 	_test_persistencia()
 	_test_integracion_fauna_registry()
+	_test_reliquia_duplicada_idempotente()
+	_test_fragmento_dedupe()
 	print("=== TEST M73 COLECCIONABLES: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -181,3 +183,17 @@ func _test_integracion_fauna_registry() -> void:
 	# Emitir otra especie
 	_fauna_reg.especie_avistada.emit(&"salamandra_ancestral", {"instancia_id": "test_fauna_002", "distancia": 5.0, "tiempo_pantalla_s": 1.0})
 	_check(_mgr.es_collected(&"animales_004"), "fauna salamandra_ancestral -> animales_004 collected")
+
+func _test_reliquia_duplicada_idempotente() -> void:
+	_reset_mgr()
+	var r1: bool = _mgr.registrar(&"reliquias_001")
+	var r2: bool = _mgr.registrar(&"reliquias_001")
+	_check(r1 and not r2, "reliquia duplicada es idempotente (1ro true, 2do false)")
+	_check(_mgr.collected_count(&"reliquias") == 1, "reliquia duplicada no infla el conteo de categoria (=1)")
+
+func _test_fragmento_dedupe() -> void:
+	_reset_mgr()
+	var f1: bool = _mgr.registrar(&"fragmentos_001")
+	var f2: bool = _mgr.registrar(&"fragmentos_001")
+	_check(f1 and not f2, "fragmento dedupe: registrar 2 veces el mismo = idempotente")
+	_check(_mgr.collected_count(&"fragmentos") == 1, "fragmento dedupe no infla el conteo (=1)")

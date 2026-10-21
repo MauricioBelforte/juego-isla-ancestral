@@ -32,8 +32,10 @@ const RUTA_M61 := "res://data/performance/budgets.json"
 const RUTA_M62 := "res://data/rendimiento/budgets.json"
 const GC := preload("res://scripts/settings/graphics_config.gd")
 const HP := preload("res://scripts/hardware/hardware_profile.gd")
+const SM := preload("res://scripts/stream/stream_manager.gd")
 const RUTA_ATLAS := "res://scripts/arte2d/pack_atlas.gd"
 const RUTA_AGUA := "res://scripts/world/validate_water.gd"
+const RUTA_STREAM := "res://scripts/stream/stream_manager.gd"
 ## Checks minimos MEDIDOS en verde (no estimados): el suite corre con
 ## CHECKS_MINIMOS = 30 y el minimo declarado es 24 para dejar margen.
 const CHECKS_MINIMOS := 24
@@ -185,6 +187,58 @@ func _correr() -> void:
 	var comp: Dictionary = mem.get("compresion_por_plataforma", {})
 	_check("M61 compresion_por_plataforma cubre windows/android/ios",
 		comp.has("windows") and comp.has("android") and comp.has("ios"), str(comp.keys()))
+
+	# ── M61 <-> M63: carga (RF9) + chunks (RF10) + destruccion (RF11) ──
+	var carga: Dictionary = m61.get("carga", {})
+	var chunks: Dictionary = m61.get("chunks", {})
+	var destr: Dictionary = m61.get("destruccion", {})
+	_check("M61 declara bloque carga", not carga.is_empty())
+	_check("M61 declara bloque chunks", not chunks.is_empty())
+	_check("M61 declara bloque destruccion", not destr.is_empty())
+	if not carga.is_empty():
+		_check("carga: progreso_minimo_pct == M63 PISO_PROGRESO",
+			is_equal_approx(float(carga.get("progreso_minimo_pct", 0.0)), float(SM.PISO_PROGRESO)),
+			"M61=%s / M63=%s" % [str(carga.get("progreso_minimo_pct")), str(SM.PISO_PROGRESO)])
+		_check("carga: progreso_maximo_pct == M63 TOPE_PROGRESO",
+			is_equal_approx(float(carga.get("progreso_maximo_pct", 0.0)), float(SM.TOPE_PROGRESO)),
+			"M61=%s / M63=%s" % [str(carga.get("progreso_maximo_pct")), str(SM.TOPE_PROGRESO)])
+		_check("carga: presupuesto_streaming_ms_por_frame == M63 PRESUPUESTO_MS",
+			is_equal_approx(float(carga.get("presupuesto_streaming_ms_por_frame", 0.0)), float(SM.PRESUPUESTO_MS)),
+			"M61=%s / M63=%s" % [str(carga.get("presupuesto_streaming_ms_por_frame")), str(SM.PRESUPUESTO_MS)])
+		_check("carga: cola_prioridad_tipos == cantidad de tipos de operacion de M63",
+			int(carga.get("cola_prioridad_tipos", 0)) == SM.PESOS.size(),
+			"M61=%d / M63=%d" % [int(carga.get("cola_prioridad_tipos", 0)), SM.PESOS.size()])
+		_check("carga: M63 carga en background (load_threaded_request)",
+			_file_contains(RUTA_STREAM, "load_threaded_request")
+			and bool(carga.get("carga_asincrona_obligatoria", false)))
+		_check("carga: bloqueo_main_thread_max_ms == 0 (RF9)",
+			float(carga.get("bloqueo_main_thread_max_ms", 1.0)) == 0.0)
+		_check("carga: precarga_escena_siguiente == true",
+			bool(carga.get("precarga_escena_siguiente", false)))
+	if not chunks.is_empty():
+		_check("chunks: cola_prioridad_tipos == M63 PESOS.size()",
+			int(chunks.get("cola_prioridad_tipos", 0)) == SM.PESOS.size(),
+			"M61=%d / M63=%d" % [int(chunks.get("cola_prioridad_tipos", 0)), SM.PESOS.size()])
+		_check("chunks: chunks_activos_max == M63 MAX_CHUNKS_DEFAULT",
+			int(chunks.get("chunks_activos_max", 0)) == int(SM.MAX_CHUNKS_DEFAULT),
+			"M61=%d / M63=%d" % [int(chunks.get("chunks_activos_max", 0)), int(SM.MAX_CHUNKS_DEFAULT)])
+		_check("chunks: frames_envejecido == M63 FRAMES_ENVEJECIDO",
+			int(chunks.get("frames_envejecido", 0)) == int(SM.FRAMES_ENVEJECIDO),
+			"M61=%d / M63=%d" % [int(chunks.get("frames_envejecido", 0)), int(SM.FRAMES_ENVEJECIDO)])
+		_check("chunks: generacion_ms_por_frame_max <= 5.0 (RF10)",
+			float(chunks.get("generacion_ms_por_frame_max", 99.0)) <= 5.0)
+		_check("chunks: generacion en background thread y sin voxel en main thread (RF10)",
+			bool(chunks.get("generacion_en_background_thread", false))
+			and not bool(chunks.get("trabajo_voxel_en_main_thread", true)))
+	if not destr.is_empty():
+		_check("destruccion: sin GC en el bucle de interaccion (RF11)",
+			not bool(destr.get("gc_en_bucle_interaccion", true)))
+		_check("destruccion: pooling de buffers de mesh (RF11)",
+			bool(destr.get("pooling_buffers_mesh", false)))
+		_check("destruccion: remesh en background (RF11/M07)",
+			bool(destr.get("remesh_en_background", false)))
+		_check("destruccion: el techo de remesh vive en `normas` (<= 2 ms)",
+			float(normas.get("remesh_bloque_ms_max", 99.0)) <= 2.0)
 
 	_cerrar()
 

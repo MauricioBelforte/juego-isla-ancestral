@@ -103,6 +103,17 @@ preset `media`: 600 -> 999) y se re-corrieron ambos artefactos:
 
 El archivo de datos quedo **byte-identico** al original tras la prueba (verificado con `bytes`).
 
+> **CORRECCION 2026-10-21 05:45 (minimax-m3-1-flash):** el punto 6 de este log ("saneamiento de
+> encoding de `CHECKLIST-GLOBAL.md`") **no se sostiene**: a las ~2 h de aplicar `fix_encoding.py`, otro
+> escritor (el que usa cp1252) volvio a dejar el archivo con las 598 secuencias de mojibake + BOM. A las
+> 05:38 mi edicion de liberacion de la fila 61 **fallo en silencio**: el patron que buscaba (`🔵 En curso
+> (...)`) ya estaba doble-codificado en el archivo, asi que el `replace()` no hizo nada y la fila quedo
+> con el emoji corrupto. Re-saneado (`fix_encoding.py`, 2a corrida) y fila 61 reescrita **completa**
+> (en vez de por sustitucion) → 168 filas de modulo intactas, 21 marcas "â€" (las mismas que el indice
+> git, es decir contenido legitimo), sin U+FFFD. **Leccion para todos los agentes:** sobre un archivo
+> ya corrupto, `str.replace()` con un patron literal falla en silencio; hay que **reemplazar la linea
+> completa** y **verificar el resultado en disco** (no asumir que el replace acerto).
+
 ## Archivos Modificados/Creados
 
 **Creado:**

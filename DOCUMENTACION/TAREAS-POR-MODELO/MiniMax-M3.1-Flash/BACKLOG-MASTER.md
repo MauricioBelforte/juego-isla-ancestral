@@ -314,87 +314,87 @@
 302. - [ ] [17-Construccion] Playtest de construcción (M113) con teclado y mando: flujo completo sin fricción [C] <!-- fuente: 17-Construccion/05-Checklist.md -->
 303. - [ ] [17-Construccion] Recorrido M114: construir y decorar la casa del jugador (M18) sin errores de consola [C] <!-- fuente: 17-Construccion/05-Checklist.md -->
 304. - [ ] [17-Construccion] QA final: 0 errores en Play Mode, 0 excepciones al entrar/salir del modo repetidamente [M] <!-- fuente: 17-Construccion/05-Checklist.md -->
-305. - [ ] [61-Rendimiento] Documentar objetivo por preset de calidad (M91) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-306. - [ ] [61-Rendimiento] Definir draw calls por escena objetivo [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-307. - [ ] [61-Rendimiento] Definir control de overdraw (vegetación/sombras) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-308. - [ ] [61-Rendimiento] Documentar coste de shaders por material [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-309. - [ ] [61-Rendimiento] Definir límite de draw calls por chunk [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-310. - [ ] [61-Rendimiento] Coordinar pausas de GC con M62 [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-311. - [ ] [61-Rendimiento] Documentar presupuesto de VRAM en bench [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-312. - [ ] [61-Rendimiento] Definir texturas 4K comprimidas máx (M47) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-313. - [ ] [61-Rendimiento] Definir presupuesto de VRAM por escena [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-314. - [ ] [61-Rendimiento] Definir atlas de UI (M53) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-315. - [ ] [61-Rendimiento] Documentar compresión BC/ASTC por plataforma [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-316. - [ ] [61-Rendimiento] Validar VRAM < presupuesto en GPU mínima [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-317. - [ ] [61-Rendimiento] Documentar tamaño máximo de paquete de datos [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-318. - [ ] [61-Rendimiento] Definir carga asíncrona obligatoria (M63) [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-319. - [ ] [61-Rendimiento] Definir progreso real con mensajes de estado (AGENTS §8) [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-320. - [ ] [61-Rendimiento] Definir bloqueo cero del hilo principal [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-321. - [ ] [61-Rendimiento] Documentar precarga de escena siguiente [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-322. - [ ] [61-Rendimiento] Validar pantalla de carga sin frames congelados [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-323. - [ ] [61-Rendimiento] Definir generación en background thread (M07) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-324. - [ ] [61-Rendimiento] Definir <5 ms/frame consumido por generación [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-325. - [ ] [61-Rendimiento] Definir sin trabajo voxel en main thread [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-326. - [ ] [61-Rendimiento] Documentar cola de chunks con prioridad [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-327. - [ ] [61-Rendimiento] Validar generación con stream continuo (M63) [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-328. - [ ] [61-Rendimiento] Definir sin GC en el bucle de interacción [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-329. - [ ] [61-Rendimiento] Definir pooling de buffers de mesh [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-330. - [ ] [61-Rendimiento] Documentar remesh en background (M07) [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-331. - [ ] [61-Rendimiento] Validar destrucción masiva sin picos [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+305. - [x] [61-Rendimiento] Documentar objetivo por preset de calidad (M91) [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+306. - [x] [61-Rendimiento] Definir draw calls por escena objetivo [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+307. - [x] [61-Rendimiento] Definir control de overdraw (vegetación/sombras) [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+308. - [x] [61-Rendimiento] Documentar coste de shaders por material [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+309. - [x] [61-Rendimiento] Definir límite de draw calls por chunk [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+310. - [x] [61-Rendimiento] Coordinar pausas de GC con M62 [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+311. - [x] [61-Rendimiento] Documentar presupuesto de VRAM en bench [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+312. - [x] [61-Rendimiento] Definir texturas 4K comprimidas máx (M47) [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+313. - [x] [61-Rendimiento] Definir presupuesto de VRAM por escena [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+314. - [x] [61-Rendimiento] Definir atlas de UI (M53) [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+315. - [x] [61-Rendimiento] Documentar compresión BC/ASTC por plataforma [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+316. - [?] [61-Rendimiento] Validar VRAM < presupuesto en GPU mínima [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+317. - [x] [61-Rendimiento] Documentar tamaño máximo de paquete de datos [M] — LOG 2068 (M61 tanda 1): cerrado con dato data-driven en `data/performance/budgets.json` + gate `validate_budget.gd` + suite `tests/test_m61_normas_performance.gd` (39 checks, 0 fallos, EXIT=0) <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+318. - [x] [61-Rendimiento] Definir carga asíncrona obligatoria (M63) [S] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+319. - [x] [61-Rendimiento] Definir progreso real con mensajes de estado (AGENTS §8) [S] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+320. - [x] [61-Rendimiento] Definir bloqueo cero del hilo principal [M] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+321. - [x] [61-Rendimiento] Documentar precarga de escena siguiente [M] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+322. - [?] [61-Rendimiento] Validar pantalla de carga sin frames congelados [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+323. - [x] [61-Rendimiento] Definir generación en background thread (M07) [M] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+324. - [x] [61-Rendimiento] Definir <5 ms/frame consumido por generación [M] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+325. - [x] [61-Rendimiento] Definir sin trabajo voxel en main thread [S] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+326. - [x] [61-Rendimiento] Documentar cola de chunks con prioridad [M] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+327. - [?] [61-Rendimiento] Validar generación con stream continuo (M63) [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+328. - [x] [61-Rendimiento] Definir sin GC en el bucle de interacción [M] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+329. - [x] [61-Rendimiento] Definir pooling de buffers de mesh [M] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+330. - [x] [61-Rendimiento] Documentar remesh en background (M07) [S] — LOG 2071 (M61 tanda 2): cerrado con dato data-driven (`carga`/`chunks`/`destruccion`) + gate + suite (58 checks, 0 fallos, EXIT=0), con grounding en las constantes reales de M63 <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+331. - [?] [61-Rendimiento] Validar destrucción masiva sin picos [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 332. - [ ] [61-Rendimiento] Definir LOD de actualización por distancia (M19/M64) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 333. - [ ] [61-Rendimiento] Documentar pooling de instancias NPC [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-334. - [ ] [61-Rendimiento] Validar pueblo completo 60 FPS [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+334. - [?] [61-Rendimiento] Validar pueblo completo 60 FPS [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 335. - [ ] [61-Rendimiento] Definir pooling de partículas (M52) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 336. - [ ] [61-Rendimiento] Definir GPUParticles para larga vida (fuego/lava) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 337. - [ ] [61-Rendimiento] Documentar límite por evento [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-338. - [ ] [61-Rendimiento] Validar festival (M74) sin picos [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+338. - [?] [61-Rendimiento] Validar festival (M74) sin picos [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 339. - [ ] [61-Rendimiento] Definir sombras dinámicas solo personajes y objetos clave [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 340. - [ ] [61-Rendimiento] Definir sombras blended para estáticos [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 341. - [ ] [61-Rendimiento] Definir rango de cascada limitado [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 342. - [ ] [61-Rendimiento] Documentar costo de sombras por material [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-343. - [ ] [61-Rendimiento] Validar noche con faroles (M49) 60 FPS [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+343. - [?] [61-Rendimiento] Validar noche con faroles (M49) 60 FPS [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 344. - [ ] [61-Rendimiento] Definir GI suave sin bounce caro (M49) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 345. - [ ] [61-Rendimiento] Definir luz horaria barata (1 directional + sky) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 346. - [ ] [61-Rendimiento] Definir luces real-time minimizadas [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 347. - [ ] [61-Rendimiento] Documentar lightmap/baked para interiores (M17) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-348. - [ ] [61-Rendimiento] Validar ciclo día/noche sin drop [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+348. - [?] [61-Rendimiento] Validar ciclo día/noche sin drop [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 349. - [ ] [61-Rendimiento] Definir plano único de agua (M51) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 350. - [ ] [61-Rendimiento] Definir normales animadas en shader (no CPU) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 351. - [ ] [61-Rendimiento] Definir reflejos solo superficie [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 352. - [ ] [61-Rendimiento] Documentar transparencia ordenada [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-353. - [ ] [61-Rendimiento] Validar mar visible sin overdraw [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+353. - [?] [61-Rendimiento] Validar mar visible sin overdraw [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 354. - [ ] [61-Rendimiento] Definir GPU instancing obligatorio (M50) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 355. - [ ] [61-Rendimiento] Definir viento en vertex shader (no CPU) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 356. - [ ] [61-Rendimiento] Definir culling de vegetación por viento oclusivo [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 357. - [ ] [61-Rendimiento] Documentar presupuesto de instancias por chunk [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-358. - [ ] [61-Rendimiento] Validar bosque denso 60 FPS [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+358. - [?] [61-Rendimiento] Validar bosque denso 60 FPS [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 359. - [ ] [61-Rendimiento] Definir LOD escalonado por distancia [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 360. - [ ] [61-Rendimiento] Definir que el mar siempre se ve (cozy) [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 361. - [ ] [61-Rendimiento] Documentar memoria de chunks por distancia (M62) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-362. - [ ] [61-Rendimiento] Validar preset mínimo 30 FPS [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+362. - [?] [61-Rendimiento] Validar preset mínimo 30 FPS [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 363. - [ ] [61-Rendimiento] Usar frustum del engine por defecto [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 364. - [ ] [61-Rendimiento] Definir culling por chunks (M07) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 365. - [ ] [61-Rendimiento] Definir culling de NPC/objetos por distancia [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 366. - [ ] [61-Rendimiento] Documentar culling de partículas [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-367. - [ ] [61-Rendimiento] Validar culling eficaz en bench [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+367. - [?] [61-Rendimiento] Validar culling eficaz en bench [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 368. - [ ] [61-Rendimiento] Definir occlusion por celdas de chunks [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 369. - [ ] [61-Rendimiento] Aplicar solo en cuevas y templos (M24/M25) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 370. - [ ] [61-Rendimiento] Descartar occlusion global en terreno abierto [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 371. - [ ] [61-Rendimiento] Documentar coste de GPU queries acotado [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-372. - [ ] [61-Rendimiento] Validar templo subterráneo (M25) 60 FPS [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+372. - [?] [61-Rendimiento] Validar templo subterráneo (M25) 60 FPS [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 373. - [ ] [61-Rendimiento] Definir impostor lejano (malla simpl. + textura) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 374. - [ ] [61-Rendimiento] Definir LOD de NPC/fauna por distancia [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-375. - [ ] [61-Rendimiento] Validar ausencia de pop en cámara principal [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+375. - [?] [61-Rendimiento] Validar ausencia de pop en cámara principal [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 376. - [ ] [61-Rendimiento] Usar meshes combinados por chunk (M07) [S] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 377. - [ ] [61-Rendimiento] Definir batching de estáticos por bioma [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 378. - [ ] [61-Rendimiento] Definir límite de materiales por batch [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 379. - [ ] [61-Rendimiento] Documentar batching de UI (M53) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-380. - [ ] [61-Rendimiento] Validar draw calls dentro de presupuesto [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+380. - [?] [61-Rendimiento] Validar draw calls dentro de presupuesto [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 381. - [ ] [61-Rendimiento] Aplicar a vegetación (M50) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 382. - [ ] [61-Rendimiento] Aplicar a rocas y fragmentos (M08) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 383. - [ ] [61-Rendimiento] Aplicar a partículas de larga vida [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 384. - [ ] [61-Rendimiento] Documentar instancing de peces (M34) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
-385. - [ ] [61-Rendimiento] Validar instancing con multimesh de Voxel Tools [C] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
+385. - [?] [61-Rendimiento] Validar instancing con multimesh de Voxel Tools [C] — LOG 2068 (M61 tanda 1): degradado a [?] HONESTO — no medible en headless (exige renderer + GPU real / bench scene); ver el motivo por item en `DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md` <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 386. - [ ] [61-Rendimiento] Pooling de partículas (M52) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 387. - [ ] [61-Rendimiento] Pooling de fauna y peces (M35/M34) [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
 388. - [ ] [61-Rendimiento] Pooling de efectos de herramientas [M] <!-- fuente: 61-Rendimiento/05-Checklist.md -->
@@ -776,3 +776,28 @@
 764. - [ ] [28-Viajes] Faroles y luces cálidas en línea nocturna [M] <!-- fuente: 28-Viajes/05-Checklist.md -->
 765. - [ ] [28-Viajes] Confirmación visual de llegada con banner del nombre de la isla [S] <!-- fuente: 28-Viajes/05-Checklist.md -->
 766. - [ ] [28-Viajes] Diálogo amable del capitán al retrasar por clima [S] <!-- fuente: 28-Viajes/05-Checklist.md -->
+
+## Progreso (actualizado 2026-10-21 05:20 — minimax-m3-1-flash)
+
+| Modulo | Pendientes antes | Hechos ([x]) | Degradados ([?]) | Pendientes ahora |
+|---|---|---|---|---|
+| 73-Coleccionables | 106 | 0 | 0 | 106 |
+| 142-Release-Candidate | 106 | 0 | 0 | 106 |
+| 72-Sistema-De-Logros | 105 | 0 | 0 | 105 |
+| 20-Sistema-De-Amistad | 98 | 0 | 0 | 98 |
+| 17-Construccion | 93 | 0 | 0 | 93 |
+| 61-Rendimiento | 89 | **23** | **16** | 50 |
+| 70-Interacciones | 89 | 0 | 0 | 89 |
+| 28-Viajes | 80 | 0 | 0 | 80 |
+| **TOTAL** | **766** | **23** | **16** | **727** |
+
+**Tanda 1+2 (Logs 2068 / 2071, 2026-10-21 05:20-05:35) — M61 Rendimiento:** 12 items cerrados con dato data-driven
+(`gpu` / `memoria` / `normas.objetivo_por_preset` en `data/performance/budgets.json`), 5 validadores
+nuevos en `validate_budget.gd` y suite nueva `tests/test_m61_normas_performance.gd` (**39 checks, 0
+fallos, EXIT=0**, con prueba en ROJO que detecta la deriva contra M90). Los 16 items `[C] Validar
+... 60 FPS / sin picos` quedaron degradados a `[?]` con motivo explicito (no son medibles en headless).
+Conteo del modulo: 76 [x] / 50 [ ] / 22 [?] = 148 (total canonico del modulo, sin cambio).
+**Tanda 2 (Log 2071):** bloques `carga` (RF9) / `chunks` (RF10) / `destruccion` (RF11) con grounding en
+las constantes reales de M63 (`PISO_PROGRESO` 0.02, `TOPE_PROGRESO` 0.98, `PRESUPUESTO_MS` 40,
+`PESOS` 7 tipos, `MAX_CHUNKS_DEFAULT` 4096, `FRAMES_ENVEJECIDO` 2) + 3 validadores del gate + suite
+**39 -> 58 checks** (0 fallos, EXIT=0) + 11 flips.

@@ -985,3 +985,23 @@ M104, M88, M160.
 - Cola activa: **VACIA** - 11/12 items del Bloque W en `[x]`; el unico sin marca es el item 9 (commit/push de la proxima tanda, requiere autorizacion expresa del director). REPOBLACION V3: 174 items con marca, 0 sin marca. Pedida reposicion / bloque del ciclo D.
 - Artefactos: Log **2067** (reservado con head del pool medido JUSTO antes: 2067 = max 2066 + 1; ASCII puro por bytes, CRLF 75, sin BOM, 4.701 B), msg **135** (3.880 B, UTF-8 sin BOM, LF puro 46, sin FFFD), tracker -> 134, pool del canal 135 consumido (quedan 136..233).
 - Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot ni 05-Checklist ajenos. El log 2067 queda untracked hasta que el director lo preserve (trampa 64).
+
+## Registro de la vuelta 2026-10-21 05:20 (tracker 134 -> 136; RAMA 1 acuse 136 + barrido de Totales)
+- [x] Mensaje 136 del director contestado con el **137** (canal): confirmado el estándar "yo escribo, vos medís"; el director aplicará fix_encoding al GLOBAL; "Seguí riel".
+- [x] Barrido de Totales (pendiente del director "16 incoherentes"): **1 deriva real** = M73-Coleccionables (declara 26/107/2 vs disco 32/2/101). 42 checklists no parseables por la heurística estricta, explicitamente NO contados como limpios.
+- [x] Trampa propia documentada: la inversión de etiquetas (Pendientes = `[ ]` vs No-resueltos = `[?]`) estuvo a punto de fabricar 144 derivas falsas; corregido el mapeo antes de publicar.
+- [x] Cautelas medidas sobre `fix_encoding.py` entregadas al director: no quita el BOM (usar `verificar_bom.py --fix`); aplicar sobre el worktree para no destruir la fila 73 de agnes.
+- [x] Log 2067 extendido con §6 (7.060 B, 0 no-ASCII, CRLF, sin BOM). Consumido el número de canal 137 (head del pool verificado antes).
+- Nota de cierre: la inscripción de este registro falló a nivel de shell (heredoc, exit 2) sin daño en los archivos; se re-emite aquí, junto con el registro de las 05:31.
+
+## Registro de la vuelta 2026-10-21 05:31 (tracker 137 -> 138; RAMA 1 acuse 138 + corrección de target)
+- [x] Mensaje 138 del director contestado con el **139** (canal).
+- [x] Log reservado: **2069** — acuse 138, verificación en disco del GLOBAL y corrección del target post-fix.
+- [x] Log reservado: **2070** — cierre de libro: re-emisión de este registro y regularización del consumo 2070.
+- [x] Verificado en disco (05:31): worktree GLOBAL 211.433 B / BOM / CRLF 225 / C3 83 = 1.591 / emoji 0 → el doble encoding sigue ÍNTEGRO, nada limpiado aún. HEAD: 199.083 B / sin BOM / LF / C3 83 = 148 / emoji 367. Diff real = 2 filas: **61** (minimax-m3-1-flash, M61 tanda 1, Log 2068) y **73** (agnes-3-flash #889). Fila 55: 67/131.
+- [x] **TRAMPA PROPIA corregida**: el target "C3 83 = 0" que di en el mensaje 137 era FALSO. HEAD tiene 148 marcadores preexistentes de mojibake multinivel (45-Arte-3D: 81, 159: 33, 161: 22, 90: 8, 86: 3, 83: 1). Target correcto: C3 83 = 148, emoji F0 9F = 367, sin BOM, LF. Prueba de aceptación: post-fix, diferir de HEAD SOLO en las filas 61 y 73.
+- [x] Herramientas inexistentes reportadas al director: "thyroidal" (0 apariciones en el repo salvo su propio mensaje 138) y "verificar_padding.py" (el real es `verificar_padding_pools.py`, que verifica el padding de 3 cifras de los pools de números de todos los canales, NO encoding). El que quita el BOM reescribiendo es `verificar_bom.py --fix`; `fix_encoding_dirigido.py` tiene lista blanca fija de 2 archivos y el GLOBAL no está.
+- [x] Numeración: 2068 estaba reclamado por minimax-m3-1-flash en las docs de M61 (reserva 05:20, sin archivo en disco); al reservar ya lo había consumido él por la vía canónica → SIN colisión. Error de procedimiento propio: ejecuté la reserva dos veces esperando que el pool ofreciera 2068 como fugado; consumí 2069 y 2070, ambos con archivo real, nada se quema.
+- [x] Tracker dejado en **138** (el commit 3abf415 del director lo había dejado en 137, número de mi propio mensaje; 138 = último mensaje del director procesado). Consumido el 139 del pool de canal (head 140).
+- [x] Pendientes: (1) fix del GLOBAL con el target corregido; (2) CONVENCIONES-CODIGO.md (fila M111) ausente del árbol y de HEAD; (3) cola activa vacía, el ítem 9 del Bloque W espera orden de commit del director.
+- Límites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot ni 05-Checklist ajenos.

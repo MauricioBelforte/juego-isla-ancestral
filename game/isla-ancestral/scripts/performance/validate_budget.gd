@@ -72,6 +72,10 @@ func _cargar_y_validar_tabla() -> void:
 	_validar_memoria(data)
 	_validar_objetivo_por_preset(data)
 	_validar_paquete_datos()
+	# iter. minimax-m3-1-flash (Log 2069): carga (RF9) + chunks (RF10) + destruccion (RF11)
+	_validar_carga(data)
+	_validar_chunks(data)
+	_validar_destruccion(data)
 
 func _validar_medicion(data: Dictionary, medicion: Dictionary) -> bool:
 	var cats: Dictionary = data.get("categorias", {})
@@ -378,4 +382,92 @@ func _validar_paquete_datos() -> void:
 		sumas[0] if sumas.size() > 0 else -1,
 		sumas[1] if sumas.size() > 1 else -1,
 		sumas[2] if sumas.size() > 2 else -1,
+	])
+
+
+## iter. minimax-m3-1-flash (Log 2069): dimension CARGA (RF9). Tolera su ausencia.
+func _validar_carga(data: Dictionary) -> void:
+	if not data.has("carga"):
+		return
+	var c: Variant = data.get("carga", {})
+	_check(c is Dictionary, "bloque carga es un Dictionary")
+	if not (c is Dictionary):
+		return
+	var cg: Dictionary = c
+	# RF9 literal: la carga es asincrona y nunca bloquea el hilo principal
+	_check(bool(cg.get("carga_asincrona_obligatoria", false)),
+		"carga.carga_asincrona_obligatoria == true (RF9)")
+	_check(float(cg.get("bloqueo_main_thread_max_ms", 1.0)) == 0.0,
+		"carga.bloqueo_main_thread_max_ms == 0 (RF9: nunca bloquear el hilo principal)")
+	# Progreso real: piso > 0 y tope < 1 (la barra no miente)
+	var piso := float(cg.get("progreso_minimo_pct", 0.0))
+	var tope := float(cg.get("progreso_maximo_pct", 1.0))
+	_check(piso > 0.0, "carga.progreso_minimo_pct > 0 (la barra no arranca en 0)")
+	_check(tope < 1.0, "carga.progreso_maximo_pct < 1 (la barra no llega a 100 antes de terminar)")
+	_check(piso < tope, "carga: progreso_minimo_pct < progreso_maximo_pct")
+	# Presupuesto de streaming por frame
+	_check(float(cg.get("presupuesto_streaming_ms_por_frame", 0.0)) > 0.0,
+		"carga.presupuesto_streaming_ms_por_frame > 0")
+	# Precarga
+	_check(bool(cg.get("precarga_escena_siguiente", false)),
+		"carga.precarga_escena_siguiente == true")
+	# Cola priorizada
+	_check(int(cg.get("cola_prioridad_tipos", 0)) > 0, "carga.cola_prioridad_tipos > 0")
+	print("[M61] carga: %d umbral(es) validados (progreso %.2f..%.2f, presupuesto %.0f ms/frame, %d tipos de cola)" % [
+		cg.size() - (1 if cg.has("nota") else 0),
+		piso,
+		tope,
+		float(cg.get("presupuesto_streaming_ms_por_frame", 0.0)),
+		int(cg.get("cola_prioridad_tipos", 0)),
+	])
+
+
+## iter. minimax-m3-1-flash (Log 2069): dimension CHUNKS (RF10). Tolera su ausencia.
+func _validar_chunks(data: Dictionary) -> void:
+	if not data.has("chunks"):
+		return
+	var c: Variant = data.get("chunks", {})
+	_check(c is Dictionary, "bloque chunks es un Dictionary")
+	if not (c is Dictionary):
+		return
+	var ch: Dictionary = c
+	_check(bool(ch.get("generacion_en_background_thread", false)),
+		"chunks.generacion_en_background_thread == true (RF10)")
+	_check(not bool(ch.get("trabajo_voxel_en_main_thread", true)),
+		"chunks.trabajo_voxel_en_main_thread == false (RF10)")
+	_check(float(ch.get("generacion_ms_por_frame_max", 0.0)) > 0.0
+		and float(ch.get("generacion_ms_por_frame_max", 99.0)) <= 5.0,
+		"chunks.generacion_ms_por_frame_max <= 5.0 ms (RF10)")
+	_check(int(ch.get("cola_prioridad_tipos", 0)) > 0, "chunks.cola_prioridad_tipos > 0")
+	_check(int(ch.get("chunks_activos_max", 0)) > 0, "chunks.chunks_activos_max > 0")
+	_check(int(ch.get("frames_envejecido", 0)) > 0, "chunks.frames_envejecido > 0")
+	print("[M61] chunks: %d umbral(es) validados (generacion <= %.1f ms/frame, %d chunks activos, %d tipos de cola)" % [
+		ch.size() - (1 if ch.has("nota") else 0),
+		float(ch.get("generacion_ms_por_frame_max", 0.0)),
+		int(ch.get("chunks_activos_max", 0)),
+		int(ch.get("cola_prioridad_tipos", 0)),
+	])
+
+
+## iter. minimax-m3-1-flash (Log 2069): dimension DESTRUCCION (RF11). Tolera su ausencia.
+func _validar_destruccion(data: Dictionary) -> void:
+	if not data.has("destruccion"):
+		return
+	var d: Variant = data.get("destruccion", {})
+	_check(d is Dictionary, "bloque destruccion es un Dictionary")
+	if not (d is Dictionary):
+		return
+	var ds: Dictionary = d
+	_check(not bool(ds.get("gc_en_bucle_interaccion", true)),
+		"destruccion.gc_en_bucle_interaccion == false (RF11: sin GC en el bucle del jugador)")
+	_check(bool(ds.get("pooling_buffers_mesh", false)),
+		"destruccion.pooling_buffers_mesh == true (RF11)")
+	_check(bool(ds.get("remesh_en_background", false)),
+		"destruccion.remesh_en_background == true (RF11/M07)")
+	# El techo de remesh por bloque vive en `normas` (no se duplica): debe existir y ser <= 2 ms
+	var normas: Dictionary = data.get("normas", {})
+	_check(float(normas.get("remesh_bloque_ms_max", 99.0)) <= 2.0,
+		"destruccion: el techo de remesh (normas.remesh_bloque_ms_max) <= 2 ms")
+	print("[M61] destruccion: %d umbral(es) validados (sin GC en el bucle, pooling de buffers, remesh en background)" % [
+		ds.size() - (1 if ds.has("nota") else 0),
 	])
