@@ -24,6 +24,14 @@ const TESTS_DIR := "res://tests"
 const IGNORAR_DIRS: Array[String] = ["helpers"]
 const GDUNIT_TOOL := "res://addons/gdUnit4/bin/GdUnitCmdTool.gd"
 const TIMEOUT_MS := 180000
+## Pool de suites en paralelo (M112, Log 2088). El cuello de las 5 suites lentas NO eran
+## las esperas de frames sino la SALIDA FINAL DEL MOTOR (deinit del GDExtension de Voxel
+## Tools, ~35-100 s por suite). Como es una ESPERA de threads, paralelizar las suites
+## solapa esas esperas: 897 s -> ~250-350 s. Regla conservadora (ratificada por el
+## director): solo se paralelizan suites cuyo codigo NO escribe en `user://` ni lanza
+## `OS.execute` (deteccion estatica por fuente) -> sin colisiones de archivos ni de procesos.
+const POOL_MAX := 6
+const POOL_ESPERA := 0.2
 
 ## Suites documentadamente excluidas (motivo honesto, no silencio).
 ## Vacío desde 2026-10-08 (T-M112 extra, frente A del msg 65): la única
@@ -43,6 +51,8 @@ var _duracion_suites: Array = []   ## [{ruta, segundos, ok}]
 var _checks_total := 0
 var _tests_gdunit := 0
 var _gdunit_ok := false
+var _pool_en_curso := 0
+var _seq_tmp := 0
 
 
 func _initialize() -> void:
@@ -58,10 +68,19 @@ func _initialize() -> void:
 		quit(2)
 		return
 
+	var rutas_pool: Array[String] = []
+	var rutas_seriales: Array[String] = []
 	for ruta in _scenetree:
 		if EXCLUIR.has(ruta):
 			print("\n[SUITE EXCLUIDA] %s\n  motivo: %s" % [ruta, EXCLUIR[ruta]])
 			continue
+		if _es_segura_para_pool(ruta):
+			rutas_pool.append(ruta)
+		else:
+			rutas_seriales.append(ruta)
+	if rutas_pool.size() > 0:
+		await _correr_pool(rutas_pool)
+	for ruta in rutas_seriales:
 		await _correr_scenetree(ruta)
 	if _gdunit_dirs.size() > 0:
 		await _correr_gdunit()
@@ -122,7 +141,8 @@ func _exe_console() -> String:
 ## main loop (polling con timeout). Devuelve {rc, salida, timeout}.
 func _ejecutar_con_redirect(args: Array, timeout_ms: int = TIMEOUT_MS) -> Dictionary:
 	var exe := _exe_console()
-	var tmp := OS.get_temp_dir().path_join("m112_rt_%d.txt" % Time.get_ticks_usec())
+	_seq_tmp += 1
+	var tmp := OS.get_temp_dir().path_join("m112_rt_%d_%d.txt" % [Time.get_ticks_usec(), _seq_tmp])
 	var partes: Array[String] = ["\"" + exe + "\""]
 	for a in args:
 		if str(a).begins_with("res://"):
@@ -132,7 +152,7 @@ func _ejecutar_con_redirect(args: Array, timeout_ms: int = TIMEOUT_MS) -> Dictio
 	var cmd := " ( " + " ".join(partes) + " > \"" + tmp + "\" 2>&1 )"
 	var shell := "cmd.exe"
 	var shell_args: Array
-	var rc_tmp := OS.get_temp_dir().path_join("m112_rc_%d.txt" % Time.get_ticks_usec())
+	var rc_tmp := OS.get_temp_dir().path_join("m112_rc_%d_%d.txt" % [Time.get_ticks_usec(), _seq_tmp])
 	if OS.get_name() == "Windows":
 		cmd += " & echo !errorlevel! > \"" + rc_tmp + "\""
 		shell_args = ["/V:ON", "/C", cmd]
@@ -169,6 +189,41 @@ func _ejecutar_con_redirect(args: Array, timeout_ms: int = TIMEOUT_MS) -> Dictio
 		salida = FileAccess.get_file_as_string(tmp)
 		DirAccess.remove_absolute(tmp)
 	return {"rc": rc, "salida": salida, "timeout": timed_out}
+
+
+## ¿Se puede paralelizar esta suite? Criterio conservador: NO si su codigo escribe en
+## `user://` (colision de archivos entre procesos) ni lanza `OS.execute` (procesos anidados).
+func _es_segura_para_pool(ruta: String) -> bool:
+	var abs := ProjectSettings.globalize_path(ruta)
+	if not FileAccess.file_exists(abs):
+		return false
+	var txt := FileAccess.get_file_as_string(abs)
+	if txt.contains("user://"):
+		return false
+	if txt.contains("OS.execute"):
+		return false
+	return true
+
+
+## Corre un conjunto de suites con N workers. No saltea ninguna suite: solo cambia el
+## orden de ejecucion. El resumen y los codigos de salida no cambian.
+func _correr_pool(rutas: Array[String]) -> void:
+	print("\n[POOL] %d suite(s) en paralelo (max %d workers) — motivo: el costo de las suites
+## lentas es la salida final del motor (deinit del GDExtension de Voxel Tools), que es una
+## espera de threads: en paralelo esas esperas se solapan." % [rutas.size(), POOL_MAX])
+	var i := 0
+	while i < rutas.size() or _pool_en_curso > 0:
+		while _pool_en_curso < POOL_MAX and i < rutas.size():
+			_worker_suite(rutas[i])
+			i += 1
+		if _pool_en_curso > 0:
+			await create_timer(POOL_ESPERA).timeout
+
+
+func _worker_suite(ruta: String) -> void:
+	_pool_en_curso += 1
+	await _correr_scenetree(ruta)
+	_pool_en_curso -= 1
 
 
 func _correr_scenetree(ruta: String) -> void:

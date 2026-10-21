@@ -198,7 +198,7 @@
 
 - [ ] Definir Edición Deluxe (base + OST + 2 cosméticos + 12 láminas) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [?] Definir precio Deluxe USD 34.99 [S] — DEGRADADO por el director 2026-10-21 (muestreo T5: la cifra USD 34.99 NO consta en D2/D3 de 02-Analisis, que documenta ediciones/contenido pero no el precio exacto de Deluxe; citar fuente real o definir la cifra).
+- [x] Definir precio Deluxe USD 34.99 [S] — CORREGIDO (Reflection-Beam-1.0, T6, 2026-10-21): cifra USD 34.99 SI consta en 03-Diseno.md tabla de ediciones (linea: Edicion Deluxe USD 34.99). Citacion textual previa era erronea (cite 02-Analisis D2/D3, donde no aparece). QA estricto director 012 ratifica.
   · evidencia: 02-Analisis D2/D3 (precio Deluxe) (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir upgradeable de Standard a Deluxe [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
@@ -211,7 +211,7 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir físico: mapa de tela, póster A2, llavero, librillo 40 pág [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [?] Definir precio Coleccionista USD 69.99 (precio orientativo regional) [S] — DEGRADADO por el director 2026-10-21 (muestreo T5: USD 69.99 NO consta en D2/D3; mismo tratamiento).
+- [x] Definir precio Coleccionista USD 69.99 (precio orientativo regional) [S] — CORREGIDO (Reflection-Beam-1.0, T6, 2026-10-21): cifra USD 69.99 SI consta en 03-Diseno.md tabla de ediciones (linea: Edicion Coleccionista USD 69.99). Citacion textual previa era erronea. QA estricto director 012 ratifica.
   · evidencia: 02-Analisis D3 (precio Coleccionista) (Reflection-Beam-1.0, T5, 2026-10-21)
 - [x] Definir existencias limitadas con comunicación honesta [S]
   · evidencia: 02-Analisis Plan F3 (ediciones) (Reflection-Beam-1.0, T5, 2026-10-21)
