@@ -242,7 +242,9 @@ msgstr[1] "Se ofrecen {n} objetos"
 - **F2 — Case normalizado:** `tr_key` SIEMPRE mayúsculas (el patrón `"clock"` minúscula de `w_reloj.gd` es correcto e intencional); solo `traducir_clave`/`_t` con clave literal respeta el case exacto (por eso `interact_prompt.gd` usa `"UI.INTERACTUAR"` mayúscula exacta).
 - **F3 — Duplicado huérfano:** `scripts/localizacion/localization_manager.gd` (carga JSON) sigue preloadeado por `_colector_sintaxis.gd` L541 — candidato a eliminación (hallazgo msg 183, pendiente de decisión del usuario, tabla L216).
 
-**Verificación:** `python scripts/validar_i18n_integridad.py` EXIT 0 — 170/170/170, paridad 0/0/0, cruzado 145/25/115.
+**Verificación:** `python scripts/validar_i18n_integridad.py` EXIT 0 — 170/170/170, paridad 0/0/0.
+
+> **Actualización TANDA 18 (2026-10-21, msg 194):** el cruzado JSON↔.po pasó de 145/25/115 a **159/11/115** — el riel de la flota migró las 14 `eventos.historia_c*` al `.po` (commit `3b43f64`, conciliación por lotes del msg 153). Las **11 solo-JSON** restantes son `ui.*` (6), `msg.*` (3), `npc.*` (2) — el legado M60 sigue siendo la deuda. `eventos.*` deja de ser hallazgo y pasa a ser el patrón de éxito (§2.4.3 de 03-Diseno).
 
 ## 9. Notas del Agente
 

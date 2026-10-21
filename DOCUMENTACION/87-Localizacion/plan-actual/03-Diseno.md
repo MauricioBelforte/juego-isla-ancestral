@@ -172,6 +172,20 @@ SETTINGS.IDIOMA_DESC          -> "Idioma de los textos del juego"
 6. **Prohibido texto visible en código:** siempre por clave (verificado por `scripts/localization/auditor_claves.gd`).
 7. Menús data-driven (ej: `data/debug/debug_menu_config.json`) pueden llevar etiquetas literales si son **solo de desarrollo**; migrar a claves `DEBUG.*` si se exponen al jugador (hallazgo TANDA 15, tarea 100).
 
+#### 2.4.3 ID del grupo de localización — estándar de nombres (TANDA 18, 2026-10-21 — msg 194)
+
+**Regla:** un **grupo** = un dominio funcional del juego. El ID del grupo es el prefijo de la clave (`GRUPO.seccion_clave`). Nuevo grupo solo si hay un dominio funcional nuevo; se registra en el inventario §2.4.1 y se crea con la regla ES+EN+PT (§2.4.2 regla 5).
+
+**Los dos grupos en discusión (tarea 64):**
+1. **`eventos.*` — grupo de eventos narrativos (M74): ESTÁNDAR VIGENTE Y MIGRADO.** 14 claves `eventos.historia_c{1-7}_{nombre,desc}` en **los tres catálogos** (JSON ES/EN/PT + `es.po` "Las Cenizas Futuras" + `en.po` "The Ashes to Come") — migradas al .po por el riel de la flota (commit `3b43f64`) vía conciliación por lotes (modelo del msg 153). Es el **patrón de éxito** para unificar un grupo: lote → JSON + .po ES/EN → validador EXIT 0.
+2. **`tools.*` — grupo de herramientas de desarrollo: NO CREAR.** No existe en ningún catálogo ni código (auditado). Los strings de herramientas de desarrollo **no son jugador-visible** → no requieren i18n (el estándar M87 aplica a texto de jugador, §2.4 regla "prohibido texto visible en código" es para UI). Si el día de mañana hay texto de herramienta jugador-visible (ej: log de diagnóstico que ve el jugador), se crea como `tools.*` con regla ES+EN+PT y registro en §2.4.1.
+
+**Convención de IDs de grupo (resumen):**
+- Jugador-visible: UPPER_SNAKE del nombre del sistema (SETTINGS, DIARY, TIENDAS, EQUIP, TUTORIAL, LOADING, HUD, ITEMS, MAIN_MENU, DIALOGOS).
+- Legado M60 (no nuevas): minúscula snake_case (`ui.*`, `msg.*`, `npc.*`) — deuda de migración (11 claves solo-JSON, §8b de 04-Codigo).
+- Prefijo numérico (`M69.*`): excepción por módulo; preferir nombre semántico.
+- Un grupo por dominio; no agrupar dominios distintos bajo un mismo prefijo; no crear prefijos "de reserva" sin consumidor.
+
 ### 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).
