@@ -76,7 +76,7 @@
 - [x] RF5: usar la fecha de la carga para logros retroactivos [S] â€” iter. 3: fecha = dÃ­a absoluto M29 al momento del desbloqueo retroactivo (determinista) â€” verificado (step-5-kilocode, 2026-10-12, Log 1735): las 3 suites de M72 en verde (20+6+1 = 27 tests, 0 fallos). fecha = dÃ­a absoluto M29 al momento del desbloqueo retroactivo.
 - [x] RF8: calcular y exponer progreso parcial 0..1 en logros acumulativos [M] â€” progreso_de() stat_min con clamp anti-redondeo (logrado nunca supera requerido; testeado) â€” verificado (step-5-kilocode, 2026-10-12, Log 1735): las 3 suites de M72 en verde (20+6+1 = 27 tests, 0 fallos). `progreso_de()` con clamp anti-redondeo; `_test_porcentaje_real`.
 - [x] RF8: exponer get_progreso_humano(id) con formato "37 de 50" [M] â€” iter. 3: 'X de Y' testeado en logro_viajero â€” verificado (step-5-kilocode, 2026-10-12, Log 1735): las 3 suites de M72 en verde (20+6+1 = 27 tests, 0 fallos). formato "X de Y"; `_test_progreso_humano_rf8`.
-- [ ] RF13: registrar cada desbloqueo en logs (M103) y analytics (M104) con id, fecha y origen [S] â€” [DOM-LOGRO] id+nombre+dÃ­a (fecha M29); M104 con dueÃ±o (integrador analytics)
+- [x] (agnes M72 t3: desbloquear() emite M104 registrar_evento + M103 log; test 3/0) RF13: registrar cada desbloqueo en logs (M103) y analytics (M104) con id, fecha y origen [S] â€” [DOM-LOGRO] id+nombre+dÃ­a (fecha M29); M104 con dueÃ±o (integrador analytics)
 
 ## D. RF â€” NotificaciÃ³n UI
 

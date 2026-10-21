@@ -245,6 +245,13 @@ func desbloquear(logro_id: String) -> bool:
 	var sm := get_node_or_null("/root/SaveManager")
 	if sm != null and sm.has_method("mark_dirty"):
 		sm.mark_dirty()
+	# RF13: trazabilidad del desbloqueo -- analytics (M104) + log (M103)
+	var an := get_node_or_null("/root/AnalyticsDirector")
+	if an != null and an.has_method("registrar_evento"):
+		an.registrar_evento("logro_desbloqueado", {"logro_id": logro_id, "categoria": String(_logros[logro_id].get("categoria", "")), "dia": int(_fechas[logro_id].get("dia", 0))})
+	var lg := get_node_or_null("/root/GameLogger")
+	if lg != null and lg.has_method("info"):
+		lg.info("[M72] logro desbloqueado: " + logro_id)
 	# RF6: toast no bloqueante (no roba input; cola dueño M53)
 	_emitir_toast(logro_id, nombre)
 	return true
