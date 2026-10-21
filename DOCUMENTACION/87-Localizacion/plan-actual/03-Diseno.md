@@ -186,6 +186,31 @@ SETTINGS.IDIOMA_DESC          -> "Idioma de los textos del juego"
 - Prefijo numérico (`M69.*`): excepción por módulo; preferir nombre semántico.
 - Un grupo por dominio; no agrupar dominios distintos bajo un mismo prefijo; no crear prefijos "de reserva" sin consumidor.
 
+#### 2.4.4 Texto de presets de control — "Controles:" del HUD (TANDA 19, 2026-10-21 — msg 196, tarea 72)
+
+**Deuda auditada (hallazgo TANDA 17, §8b de 04-Codigo):**
+- `scripts/ui/layers/menus_layer.gd` L107/L124: `"Controles: " + String(acc.get_control_preset())` — literal ES + **ID técnico crudo** jugador-visible. Presets (`accesibilidad_manager.gd` `PERFILES_CONTROL` L152-175): `estandar`, `single_hand`, `low_mobility`. El jugador ve "Controles: single_hand" en cualquier idioma.
+- Tests `qa_m58_indicador_perfil.gd` L37/44/49 validan el formato literal (deuda: al traducir, los tests esperan el literal ES).
+- **Ninguna clave `CONTROL*`/`PRESET*` existe** en los catálogos (auditado; solo `SETTINGS.RANGO_DINAMICO_PRESET`, ajena a esto).
+
+**Propuesta llave-en-mano (claves + traducciones ES/EN/PT listas para aplicar):**
+
+| Clave | ES | EN | PT |
+|---|---|---|---|
+| `SETTINGS.CONTROLES` | `Controles: %s` | `Controls: %s` | `Controles: %s` |
+| `SETTINGS.PRESET_ESTANDAR` | `Estándar` | `Standard` | `Padrão` |
+| `SETTINGS.PRESET_SINGLE_HAND` | `Una mano` | `One hand` | `Uma mão` |
+| `SETTINGS.PRESET_LOW_MOBILITY` | `Movilidad reducida` | `Low mobility` | `Mobilidade reduzida` |
+
+**Consumo (para el owner de `menus_layer.gd` — M53/M89, NO ejecutado por M87):**
+```gdscript
+var preset := String(acc.get_control_preset())
+var nombre := _t("SETTINGS.PRESET_" + preset.to_upper())   # estandar -> PRESET_ESTANDAR
+label.text = _t("SETTINGS.CONTROLES") % nombre
+```
+- Las claves **no se crean sin consumidor** (evitar huérfanas del catálogo — el caso `SETTINGS.DESCARTAR*` del 04-Codigo L428): se aplican en el **mismo commit** que el consumo de `menus_layer.gd`, con la regla ES+EN+PT (§2.4.2 regla 5) y los tests M58 actualizados al nuevo formato.
+- El preset es un ID técnico: el mapeo a nombre amigable es por clave (no string-literal), coherente con el estándar "un término, una clave" (§2.4.2 regla 2).
+
 ### 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).

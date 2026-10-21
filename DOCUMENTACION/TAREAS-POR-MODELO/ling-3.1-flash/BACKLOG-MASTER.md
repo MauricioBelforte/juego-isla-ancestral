@@ -135,7 +135,7 @@
 ### Bloque M — Control técnico (los strings del sistema).
 
 71. Strings del jugador (los logins)... evaluación: si aplica el language.
-72. El texto "Controles:" del HUD — los shortcuts por idioma (WASD etc: el estándar de teclado físico).
+72. El texto "Controles:" del HUD — los shortcuts por idioma (WASD etc: el estándar de teclado físico). — **TANDA 19 (msg 196, 2026-10-21): AUDITORÍA + PROPUESTA LLAVE-EN-MANO** en `DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md` §2.4.4. Deuda: `menus_layer.gd` L107/L124 = `"Controles: " + get_control_preset()` — literal ES + ID técnico crudo jugador-visible (presets `PERFILES_CONTROL` L152-175: estandar/single_hand/low_mobility). Tests `qa_m58_indicador_perfil.gd` L37/44/49 validan el literal. 0 claves CONTROL*/PRESET* en catálogos. Propuesta: `SETTINGS.CONTROLES` ("Controles: %s"/"Controls: %s"/"Controles: %s") + `SETTINGS.PRESET_ESTANDAR/SINGLE_HAND/LOW_MOBILITY` (Estándar/Standard/Padrão; Una mano/One hand/Uma mão; Movilidad reducida/Low mobility/Mobilidade reduzida). CONSUMO PENDIENTE: el owner de menus_layer.gd (M53/M89) aplica clave+consumo en el mismo commit (regla ES+EN+PT) y actualiza tests M58 — las claves NO se crean sin consumidor (evitar huérfanas, caso SETTINGS.DESCARTAR* 04-Codigo L428). Pedido al director: encargo al owner M53/M89.
 73. El texto de errores del sistema (los logs por idioma — los spans estándar).
 74. El texto del_BOOT por idioma (el flujo de arranque — el fondo del boot strings desync).
 
