@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T22:40:30",
+ "ultimo_update": "2026-10-21T23:00:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -121,10 +121,11 @@
   "M16/M14 crafting: derivacion REABIRO con path exacto + 3 checks reproducibles -> G-5.3 (219)",
   "M159: test_icons_m159.gd TIMEOUT >180 s -> agnes (911)",
   "BUG-141 fix de producto (latencia salida voxel) -> DeepSeek (fila 59)",
-  "M93/M34: decision de diseno sobre margen de los 7 peces raros (>0.70 hasta 0.769, fishing.json) - documentar excepcion (<=0.77) o normalizar a <=0.70; validate_balance.gd no cubre fishing.json (hallazgo Beam T2, verificado por director)"
+  "M93/M34: decision de diseno sobre margen de los 7 peces raros (>0.70 hasta 0.769, fishing.json) - documentar excepcion (<=0.77) o normalizar a <=0.70; validate_balance.gd no cubre fishing.json (hallazgo Beam T2, verificado por director)",
+  "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 22:35: script 0 pendientes; backlogs >= 100 todos; Beam ESCALADO a doble tanda (013) con regla de freno; propuesta economia en decision del fundador; SIN repoblacion",
+ "crons_vuelta_d": "CRON D 22:55: script 0 pendientes; backlogs >= 100 todos; decision del fundador pendiente sobre proPECTiva economia de Beam (P1 single-pass recom. adopcion); SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
@@ -147,8 +148,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T6 DOBLE TANDA ratificada 015: (A) re-flip verificado con cita textual 03-Diseno (fila 95 56/113); (B) farming H1/H2 verificados por director - P2 precios ADOPTADA (implementa Beam), P1 yield condicional al precio",
-  "acuse_enviado": 15
+  "estado": "T8 SELLADA 019: hallazgo cache stale CONFIRMADO (0 .erase() en _reevaluar) -> BUG-142 abierto con fix propuesto; re-verificador produce hallazgos reales; 7 tandas totales",
+  "acuse_enviado": 19
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -163,5 +164,8 @@
  "crons_vuelta_a": "CRON A 22:20: Hy3 311 respondido (312) - #53 ratificado",
  "crons_vuelta_c": "CRON C 22:25: gate 4 correcciones; Hy3 backlog+Log 2087+limpieza sondas preservados; Beam T5 muestreo estricto 20/24 (2 degradados, fila 95 54/113)",
  "crons_vuelta_extra": "EXTRA del fundador 22:30: escalado de Beam a doble tanda con regla de freno por muestreo (013)",
- "crons_vuelta_bd9": "CRON D 22:35-22:40: MiniMax 014 correccion BUG-141 aceptada (015, plan pool sin guards aprobado); Beam 014 T6 ratificada (015: re-flip 03-Diseno verificado + farming P2 adoptada, P1 condicional)"
+ "crons_vuelta_bd9": "CRON D 22:35-22:40: MiniMax 014 correccion BUG-141 aceptada (015, plan pool sin guards aprobado); Beam 014 T6 ratificada (015: re-flip 03-Diseno verificado + farming P2 adoptada, P1 condicional)",
+ "bug_142": {
+  "estado": "Abierto - M71 ProgresionManager stale-read en evaluar_condicion_id (cache FIFO sin invalidacion en _reevaluar); fix 2-3 lineas propuesto por Beam; duenos M71 (step-5-kilocode histórico) a notificar"
+ }
 }
