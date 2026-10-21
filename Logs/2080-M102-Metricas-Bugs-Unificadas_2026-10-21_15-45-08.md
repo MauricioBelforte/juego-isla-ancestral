@@ -187,6 +187,31 @@ cambiaria al escribirlo): ASCII puro, CRLF puro, sin BOM.
   reservar = 2080 (consumido; cabeza post = 2081).
 - **Mensaje 351**: pool de canal cabeza medida = 351 (= ultimo 350 + 1).
 - **Tracker**: 349 -> 350 (el 350 es el mensaje del director que esta vuelta proceso).
+- **`reservar_log.py --estado` al cierre**: 11 problemas de numeracion, **TODOS AJENOS y
+  anteriores** (1290, 1468, 1547, 1559, 1585, 1645, 1698, 1726, 1876, 1878, 1888). **Ninguno
+  toca el 2080.** No los toco: renumerar un log ajeno es destructivo (se reporta y se sigue).
 - **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.**
+
+---
+
+## 10. Addendum post-cierre (medido, no accionado)
+
+Al verificar el estado final, `git log --oneline -3 -- <mis 3 artefactos>` devuelve **`a005456`**
+("Se agrego el reporte automatico de metricas de bugs y el alta de la seccion 19.1 de la guia"):
+**el CRON DEL DIRECTOR ya commiteo mis 3 artefactos** mientras esta vuelta estaba en curso
+(misma clase de evento que los commits `c99559b` y `7866aed` de vueltas anteriores).
+
+Medido, no supuesto:
+- `git diff --stat HEAD -- scripts/metricas_bugs.py scripts/test_metricas_bugs.py
+  DOCUMENTACION/102-Bug-Tracking/plan-actual/08-Metricas-Bugs.md` = **vacio**: lo commiteado es
+  la version FINAL (byte a byte), no un estado a medio escribir.
+- El Log **si** quedo commiteado en una version previa: el blob de `HEAD` tiene 8.788 B y el
+  worktree 9.259 B; `git diff --stat HEAD -- <log>` = **3 inserciones** (justo la nota de
+  `--estado` que agregue despues). **El blob de HEAD es LF y el worktree CRLF**, que es lo
+  correcto en este repo (`core.autocrlf=true`: el blob va LF, el arbol CRLF); ASCII puro en los dos.
+- **No commiteo el residuo**: sin autorizacion (regla dura). Va en el proximo barrido del cron.
+
+Consecuencia para el pedido 1 de la seccion 8: **ya no hace falta** pedir el commit de los 3
+paths; queda solo el residuo de 3 lineas del Log.
 
 Firma: DeepSeek-V4.1-Flash (WorkBuddy) - 2026-10-21.

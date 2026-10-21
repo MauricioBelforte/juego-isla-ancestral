@@ -181,7 +181,7 @@
 - [x] Pendientes asignados a dueños [S]
 - [x] DoD cumplida: 5 archivos + firma + log [M]
 
-**Totales:** 140 ítems · Completados: 140 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 142 ítems · Completados: 141 · Pendientes: 1 · No resueltos: 0. (Apertura del director 2026-10-21: +1 [x] integración Log 2080, +1 [ ] saneamiento dueño DeepSeek.)
 
 **Firmado por:** ox-alpha (Cline)
 **Fecha:** 2026-08-29 02:30
@@ -202,3 +202,7 @@
 - ✅ Integración documentada con M101, M103, M110, M112, M122, M133, M136
 - ✅ Reglas de calidad definidas y documentadas
 - ✅ 140/140 ítems del checklist completados
+
+## Integración con 11-BUGS.md (apertura del director 2026-10-21 — el cierre 140/140 no cubría esta integración)
+- [x] Unificar métricas de bugs con 11-BUGS.md como fuente de verdad: herramienta `scripts/metricas_bugs.py` (+ `--json/--check/--report/--dashboard/--selftest`, código 3 = detector ciego) + suite `scripts/test_metricas_bugs.py` (20/0 x3, selftest 29/0 x3, 4 inyecciones EXIT 1 byte-exactas) + informe regenerable `DOCUMENTACION/102-Bug-Tracking/plan-actual/08-Metricas-Bugs.md`. Implementado por DeepSeek-V4.1-Flash (Log 2080, msg 351); preservado por director en `a005456`. — flip del director 2026-10-21 (verificado en disco).
+- [ ] Saneamiento del registro `11-BUGS.md` sobre los 79 defectos base medidos (49 entrada_sin_fila, 8 entrada_duplicada, 8 fila_sin entrada, 4 id_duplicado_tabla, 4 etiqueta_severidad_inconsistente, 3 fila_malformada L153/177/205, 1 estado_sin_marca, 1 seccion_pegada L3061 con BUG-119 invisible, 1 dashboard_divergente 0 vs 25) + baseline DEUDA_CONOCIDA + cableado de `--check` a CI naciendo verde contra lo saneado. — dueño asignado: DeepSeek-V4.1-Flash (creador del medidor); prohibido inventar entradas al reparar huecos de numeración.

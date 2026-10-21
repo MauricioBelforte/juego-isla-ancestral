@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-21T18:48:30",
+ "ultimo_update": "2026-10-21T19:02:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "derivacion URGENTE 905: 3 Pythonismos (True/False) en achievement_service.gd L109/282/286 = boot roto (reporte Step-5) - fix minimo + regresion RF6/RF13; M72 RF6 test copreservado",
+  "estado": "906/907: M72 t4 86/185 + fix boot; M159 b2 SELLADO (QA Hy3 OK 907); pool saneado 908",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,19 +13,19 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 905,
+  "acuse_enviado": 908,
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "201: correcciones aplicadas (dueno agnes anotado en BUG-139, contador 72/130 byte-con-fila); 202 informativo del fix en disco; su QA profile_id puede correr",
+  "estado": "203: tanda 42 ratificada 204 (item 4 + fix mismatch); item 8 derivado DeepSeek; M59 73/130 fila synceada",
   "pendientes_real": 222,
-  "acuse_enviado": 202,
+  "acuse_enviado": 204,
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "nuevo frente M102 item 31: scripts/metricas_bugs.py + test + 08-Metricas-Bugs.md (reporte automatico unificado sobre 11-BUGS, Log 2080)",
+  "estado": "351 entregado (M102 item 31: medidor+suite+informe, ya en a005456); 352: asignado saneamiento 11-BUGS (79 defectos base) + gate CI b; fila 102 reabierta 141/142",
   "pendientes_real": 170,
-  "acuse_enviado": 350
+  "acuse_enviado": 352
  },
  "step_5": {
   "estado": "147: medicion M23 solo-lectura (24/104, sin Notas del Agente); plan ratificado 148 (re-corrida binario antes de flips); actividad excepcional",
@@ -38,9 +38,9 @@
   "acuse_enviado": 168
  },
  "hy3": {
-  "estado": "encargo QA M159 b2 (306) pendiente de respuesta; su 305 sigue caida (T-19); sin repoblacion: riel QA por encargo directo",
+  "estado": "QA M159 b2 OK (907, respondio directo en canal de agnes); sello director aplicado; canal anoto regla aviso 1-linea; cola 9 items + riel QA on-demand",
   "pendientes_real": 257,
-  "acuse_enviado": 306
+  "acuse_enviado": 307
  },
  "ling": {
   "estado": "cola nueva 142-Release-Candidate (106 items) - riel RC/docs + i18n",
@@ -61,7 +61,9 @@
   "M59 item3: guard K7 existe pero en produccion NADIE sostiene IslandOps vivo (grep sin test_ = 0 holders) - bloquear guardado manual por carga de escena NO cableable sin holder",
   "T-19 materializado: Hy3 305 paso >3h en plantilla vacia - releer con mtime+bytes + retry cubre solo 5min; caida >1h = aviso directo emisor",
   "Pythonismos bool (True/False) en GDScript: 3 SCRIPT ERROR de parse al boot + autoload no instanciase - detectar con grep (?<![A-Za-z_])(True|False) antes de commitear codigo ajeno",
-  "Step-5 expansion de pool operativa: al colisionar (7ma familia), expande el pool a 100 verificado - validar offsets del gate"
+  "Step-5 expansion de pool operativa: al colisionar (7ma familia), expande el pool a 100 verificado - validar offsets del gate",
+  "pool re-expansión de agente puede dejar duplicados usados (906/907 en pool con archivos existentes): sanear SIEMPRE vs max(hilos) al detectar",
+  "aviso de QA de Hy3 llego solo via canal de agnes: la doble red por lag需要进行 aviso 1-linea en canal propio (recordado en 307)"
  ],
  "minimax_m3_1_flash": {
   "estado": "007 validado: M112 3 suites cerradas (219/225) + cronometro runner 897s; APROBADO fix headless-aware + QA cruzado M90 encargado (008) + nuevo frente M17; crafting RED derivado a G-5.3",
@@ -83,18 +85,22 @@
  },
  "derivaciones_pendientes": [
   "M105 senales sin productor -> duenos: M14 item_added, M15 recurso, M16/M17 casa, M21 dialog_finished+npc_first_interaction, M24 puzzle, M37 museo, M74 festival, M38 proyecto, M68 island_loaded+travel_started, M84 purchase_done, M92 tutorial",
-  "quality.yml: cablear test_telemetry_bridge_m105.gd (CI, director/QA)",
   "M159 b2 QA cruzado -> Hy3 (306 enviado); sello del director tras veredicto",
   "M59 item3 wiring: IslandOps holder de produccion ausente -> dueno M27/M28/M60",
   "M16/M14 crafting: test_crafting_inventory.gd 3 checks ROJO reproducible (MiniMax 007 -> G-5.3 198): bug real o drift de test, decidir con run",
   "M90 QA cruzado -> MiniMax (008); sello del director tras veredicto",
   "CONVENCIONES-CODIGO.md (fila 111) -> Step-5 (142): doc consolidada de convenciones vigentes",
-  "M112 items de tiempo -> MiniMax: fix headless-aware 5 suites lentas + corrida de validacion (897s -> budget 600s)"
+  "M112 items de tiempo -> MiniMax: fix headless-aware 5 suites lentas + corrida de validacion (897s -> budget 600s)",
+  "quality.yml: cablear test_metricas_bugs.py + --check con baseline DEUDA_CONOCIDA (DeepSeek, tras saneamiento 11-BUGS)"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 18:35: backlogs todos >= 100 post-repoblacion (agnes 809 items numerados, step-5 476, ling 324, deepseek 290, hy3 265, miniMax 766, g_5_3 325, DS_OC 583) -> sin repoblacion; 1 pendiente respuesta (Step-5 147) respondido en la misma vuelta (148)",
+ "crons_vuelta_d": "CRON D 18:55: script 0 pendientes; backlogs todos >= 100; asignaciones vigentes sin cambios: agnes (fix parse urgente + rieles), step-5 (M23), deepseek (saneamiento 11-BUGS + CI b, 352), g_5_3 (tanda 42 + QA profile_id tras fix), minimax (M112 fix + QA M90 + M17), Hy3 (QA M159 306); SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
-  "estado": "Fix EN DISCO verificado (0 Pythonismos, aterrizado por agnes post-905); cierre formal pendiente confirmacion de corrida de regresion (agnes RF6/RF13 o QA de G-5.3)"
+  "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
+ },
+ "crons_vuelta_b": "CRON B 18:50: unica pendiente DeepSeek 351 (M102 item 31) respondida con 352 + decisiones (CI b+wire, saneamiento registro asignado, fila 102 141/142)",
+ "seelos_m159": {
+  "estado": "M159 b2 SELLADO 2026-10-21: autor agnes (732/900/901/906), QA cruzado Hy3 (907, OK medido), sello director (fila 159 GLOBAL)"
  }
 }
