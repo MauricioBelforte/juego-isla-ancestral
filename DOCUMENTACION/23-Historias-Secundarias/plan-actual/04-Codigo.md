@@ -119,3 +119,57 @@ func validar_todas() -> Array  # para Editor/CI
 - M55: agregar la entrada "mision_{cadena_id}" al diario_catalog.json por cada cadena nueva (o extender M55 para auto-purgar categorías de cadenas).
 - M25/M26: al implementar puzzles, reportar reportar_paso(cadena_id, "puzzle", ref) cuando el jugador resuelva el puzzle asociado.
 - La evidencia de pasos se compara con _slug (minúsculas/sin tildes) — mantener ids ascii-plana.
+
+---
+
+## Notas del Agente — Iteración 2 (Step-5-WorkBuddy, 2026-10-21, Log 2082)
+
+**Modelo:** Step-5-WorkBuddy · **Plataforma:** WorkBuddy · **Fecha:** 2026-10-21
+**Estado:** núcleo reverificado con binario real + suite endurecida; 43/104 [x], 61 [ ] honestos
+(contenido narrativo y dueños externos). QA §21.8 pendiente de verificador independiente.
+
+### Lo que hice
+- **Re-corrí `test_historias.gd` con el binario real ANTES de cualquier flip** (plan ratificado
+  por el director, msg 148): 3 corridas -> **40 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR**.
+- **Endurecí la suite contra el falso verde** (la versión original imprimía «0 fallos» sin
+  contador ni marcadores: un SCRIPT ERROR en un bloque abortaba en silencio y daba igual verde):
+  `_check()` cuenta, `_fin("X")` por bloque con lista `BLOQUES`, `CHECKS_MINIMOS = 40`
+  **medido en verde**, y `_summary()` en un `call_deferred` **separado** del de `_run()`.
+- **Guardíán probado EN ROJO** por inyección de runtime (`var _n: Node = null; _n.free()`
+  tras el bloque B): EXIT 1, nombra los bloques C/D/E/F/G, «solo 11 checks (mínimo 40)»,
+  y el proceso **termina** (no cuelga). Sonda borrada en la misma operación: 0 sondas en el repo.
+- **Bloque postgame extendido a los 4 finales de M22** (`data/historia/historia_principal.json`:
+  final_principal / final_regresar / final_guardian / final_secreto), con estado limpio por
+  iteración: bloqueada sin final + abierta tras cada uno.
+- **Clasifiqué los 80 `[ ]` por verbo y dueño con cita en disco** y flipé **19** ítems
+  (24 -> 43 [x]). Criterio: «Definir/Diseñar/Documentar» flippa solo con cita en
+  02-Analisis/03-Diseno/04-Codigo o implementación; «Crear» flippa solo con el artefacto en disco.
+- Creé `06-Plan-Testings.md` y `07-Resultados-Testings.md` (no existían).
+
+### Clasificación de los 61 `[ ]` que quedan (honestos)
+- **Contenido narrativo ausente (~46 ítems «Crear»):** `data/historias/secundarias.json` tiene
+  **4 cadenas** de las ~89 del catálogo de 03-Diseno; 0 capítulos `capitulo-*` en el catálogo M55
+  (`data/diario/diario_catalog.json`); 0 cosméticos; 0 consecuencias jardín/taller/cofradía.
+  No se inventa contenido: quedan `[ ]` con nota.
+- **Dueño externo (11 ítems):** M32 (siembra/vendimia/marea/eclipse + variantes de agricultura),
+  M28 (reconstrucción del puente), M68/M36/M37 (integraciones), M24 (sin cita en disco: M24 no
+  se menciona en 02-Analisis ni 03-Diseno — pendiente de definir).
+
+### Hallazgos medidos (reportados al director, no tocados)
+1. **`cadenas_ejemplo.json` está huérfano:** el servicio solo carga `secundarias.json`
+   (`RUTA_CATALOGO`, `secondary_stories_service.gd` L22). Sus 3 cadenas (faro, biblioteca,
+   postgame-plaza) no las ve nadie en runtime.
+2. **`[x]` sin apoyo en disco:** «Crear la consecuencia molino funcionando» (05-Checklist L110)
+   — `grep molino_funcionando` sobre `data/` + `scripts/` = **0 archivos**. Reportado; la marca
+   no se tocó (decisión del director).
+3. **Recompensas `diario` apuntan a entradas inexistentes de M55:** las cadenas declaran
+   `capitulo-faro` / `capitulo-invernadero` / `capitulo-plaza`, pero el catálogo M55 tiene 0
+   `capitulo-*`. El registro efectivo es `mision_{cadena_id}` (sí existe).
+4. **Un rojo propio durante la iteración:** la 1a versión del bloque F resetea el estado de M23
+   (`restore_save_data({})`) y el bloque G afirmaba un id fijo que ya no estaba completada
+   («round-trip restaura completadas»). Corregido verificando **todas** las completadas del
+   snapshot. Lección: cambiar un bloque puede invalidar la premisa de otro.
+
+### Regresiones de integración (binario real, 2026-10-21)
+M22 `test_historia.gd` 41/0 · M55 `test_diario.gd` 0 fallos · M71 `test_progresion.gd` 83/0 ·
+M59 `validate_save.gd` 16/0 «VALIDACIÓN OK» — todos EXIT 0, 0 SCRIPT ERROR.

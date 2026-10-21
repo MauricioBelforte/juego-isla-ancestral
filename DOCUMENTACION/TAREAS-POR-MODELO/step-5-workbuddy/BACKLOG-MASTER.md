@@ -754,7 +754,7 @@ M104, M88, M160.
 111. - [ ] [67] Revisar que plan-inicial == plan-actual (SHA-256) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
 112. - [ ] [67] Confirmar 130 ítems exactos [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
 113. - [ ] [23] Crear la historia de la panadera (2-4 pasos) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-114. - [ ] [23] Crear la historia del farero [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+114. - [x] [23] Crear la historia del farero [M] — cadena-faro en data/historias/secundarias.json (4 pasos, consecuencia faro_encendido; test bloque C, Log 2082) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 115. - [ ] [23] Crear la historia de la doctora [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 116. - [ ] [23] Crear la historia del carpintero [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 117. - [ ] [23] Crear la historia de la tejedora [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
@@ -781,10 +781,10 @@ M104, M88, M160.
 138. - [ ] [23] Crear el evento de marea [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 139. - [ ] [23] Crear el evento de eclipse [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 140. - [ ] [23] Crear 5 cadenas secretas ocultas [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-141. - [ ] [23] Definir el descubrimiento de las ocultas por el mundo [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+141. - [x] [23] Definir el descubrimiento de las ocultas por el mundo [M] — 03-Diseno L58 + ocultas invisibles hasta iniciarse (servicio L71; test bloque E) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 142. - [ ] [23] Documentar historias estacionales y secretas [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-143. - [ ] [23] Definir 40+ cadenas de 3-5 pasos con contexto [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-144. - [ ] [23] Definir el schema de cadena (pasos, recompensa, consecuencia, oculta, postgame) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+143. - [x] [23] Definir 40+ cadenas de 3-5 pasos con contexto [M] — 03-Diseno catalogo (60 cadenas / 89 slots) + schema contexto>=10 y pasos>=3 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+144. - [x] [23] Definir el schema de cadena (pasos, recompensa, consecuencia, oculta, postgame) [M] — 03-Diseno esquema + quest_chain.gd + validador <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 145. - [ ] [23] Crear 8 misiones de exploración (brújula, fauna, cronitado) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 146. - [ ] [23] Documentar cadenas y misiones de exploración [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 147. - [ ] [23] Crear 6 misiones de construcción (puentes, cofradía, plaza, senderos, kiosko, jardín) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
@@ -794,11 +794,11 @@ M104, M88, M160.
 151. - [ ] [23] Documentar misiones de construcción y agricultura [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 152. - [ ] [23] Crear 4 misiones de pesca (peces-trofeo, documentación y suelta) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 153. - [ ] [23] Crear 6 misiones de colección (murales, glifos, sellos, minerales, peces, plantas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-154. - [ ] [23] Definir la integración con M36 (museo) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+154. - [x] [23] Definir la integración con M36 (museo) [M] — 03-Diseno L71 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 155. - [ ] [23] Documentar misiones de pesca y colección [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 156. - [ ] [23] Crear 6 misiones de amistad (regalo, pesca, paseos, ficción) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 157. - [ ] [23] Crear 5 misiones de investigación (faro, biblioteca, geodesia, mapas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-158. - [ ] [23] Definir la integración con M36 (mapas) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+158. - [x] [23] Definir la integración con M36 (mapas) [S] — 02-Analisis L26 + 03-Diseno L45 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 159. - [ ] [23] Documentar misiones de amistad e investigación [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 160. - [ ] [23] Crear 6 misiones de puzzles (templos 24/25/26, ruinas ocultas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 161. - [ ] [23] Definir la integración con el framework M24 [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
@@ -806,19 +806,19 @@ M104, M88, M160.
 163. - [ ] [23] Crear 20 capítulos de diario (recompensa narrativa) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 164. - [ ] [23] Crear recetas de conversación desbloqueables [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 165. - [ ] [23] Crear 10+ cosméticos (disfraces, sombreros, paletas de casa) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-166. - [ ] [23] Definir cero stats en recompensas (cozy) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-167. - [ ] [23] Definir recompensas únicas no duplicables (M66 cofre) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+166. - [x] [23] Definir cero stats en recompensas (cozy) [S] — 03-Diseno L52; schema sin campo stats <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+167. - [x] [23] Definir recompensas únicas no duplicables (M66 cofre) [M] — 03-Diseno L25/L72; validador recompensa presente + titulo unico <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 168. - [ ] [23] Documentar recompensas en el plan-actual [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-169. - [ ] [23] Definir las 12 consecuencias persistentes [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+169. - [x] [23] Definir las 12 consecuencias persistentes [M] — 03-Diseno L53 (las 12 listadas) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 170. - [ ] [23] Crear la consecuencia "jardín florecido" [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 171. - [ ] [23] Crear la consecuencia "taller abierto" [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 172. - [ ] [23] Crear la consecuencia "cofradía activa" [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-173. - [ ] [23] Definir el cambio visual del mundo por consecuencia [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-174. - [ ] [23] Definir diálogos posteriores por estado de mundo [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+173. - [x] [23] Definir el cambio visual del mundo por consecuencia [M] — 03-Diseno L54 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+174. - [x] [23] Definir diálogos posteriores por estado de mundo [M] — 03-Diseno L54 + campo dialogo_posterior del schema <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 175. - [ ] [23] Documentar consecuencias y diálogos posteriores [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-176. - [ ] [23] Definir la activación por pistas del mundo (M22) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+176. - [x] [23] Definir la activación por pistas del mundo (M22) [S] — 03-Diseno L58 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 177. - [ ] [23] Crear 4 cadenas de postgame [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-178. - [ ] [23] Definir la variación del postgame según el final de M22 [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+178. - [x] [23] Definir la variación del postgame según el final de M22 [M] — 03-Diseno L59; gate final_elegido!="" (servicio L103-106) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 179. - [ ] [23] Crear el memorial del Sello post-final [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 180. - [ ] [23] Crear el epílogo de la aldea [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 181. - [ ] [23] Crear el epílogo del guardián (final secreto) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
@@ -826,13 +826,13 @@ M104, M88, M160.
 183. - [ ] [23] Integrar con M32 (estacionales) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 184. - [ ] [23] Integrar con M36 (museo y colección) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 185. - [ ] [23] Integrar con M37 (comerciantes) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-186. - [ ] [23] Documentar la integración en el plan-actual [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+186. - [x] [23] Documentar la integración en el plan-actual [M] — 03-Diseno integracion + 04-Codigo reglas 3/6 + Notas <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 187. - [ ] [23] Diseñar test E2E de 10 cadenas completas [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-188. - [ ] [23] Diseñar test de postgame tras cada final (4 variaciones) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-189. - [ ] [23] Diseñar 06-Plan-Testings.md (unitarias + integración) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-190. - [ ] [23] Crear 07-Resultados-Testings.md [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-191. - [ ] [23] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-192. - [ ] [23] Actualizar plan-actual como espejo del estado real [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+188. - [x] [23] Diseñar test de postgame tras cada final (4 variaciones) [M] — test_historias.gd bloque F, 4 finales M22; 40 checks/0 fallos x3 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+189. - [x] [23] Diseñar 06-Plan-Testings.md (unitarias + integración) [M] — creado iter. 2 (2026-10-21) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+190. - [x] [23] Crear 07-Resultados-Testings.md [S] — creado iter. 2 (2026-10-21) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+191. - [x] [23] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M] — 02-Analisis 49 lin + 03-Diseno 76 lin <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+192. - [x] [23] Actualizar plan-actual como espejo del estado real [M] — iter. 2: checklist + 04-Codigo + 06/07 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 
 1. - [x] [109] Definir reutilización de lista vista/detalle en todos [M] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
 2. - [x] [109] Definir red/amarillo por campo con error específico [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
@@ -1238,3 +1238,16 @@ M104, M88, M160.
 - [x] Medicion M23 (solo lectura): 24 [x] / 80 [ ] / 0 [?] = 104 (cuadra GLOBAL fila 23 = 24/104 y Totales L199; 11.564 B, CRLF puro 203, sin BOM). Regla 21.5: SIN seccion "Notas del Agente"; el registro vigente es la QA cruzado de Hy3 (2026-09-02, L176-199), leida completa. Veredicto heredado 🟡: nucleo data-driven cumplido (servicio + validador + 4 cadenas + test 0 fallos); los 80 [ ] son de producto/contenido (60 cadenas, dialogos M21, cosmeticos, integraciones, E2E). OK NO heredado: la proxima tanda re-corre la suite con binario real.
 - [x] Numeracion: 9na colision familia 092/097/103/106/124 (director tomo el 146); mi 147 = max+1 = head. Pool consumido 147, re-expandido a 148..247 (100 verificados). Tracker -> 146.
 - Limites: 0 commits / 0 push / 0 auto-sellos / 0 protegidos. Proxima: tanda M23 (re-run de test_historias.gd + clasificacion de los 80 [ ]).
+
+## Registro de la vuelta 2026-10-21 16:35 (tracker 147 -> 148; RAMA 1: msg 148 = plan M23 ratificado -> tanda M23 ejecutada, Log 2082)
+- [x] Mensaje 148 del director (acuse de mi 147): plan M23 RATIFICADO tal cual — (1) re-correr test_historias.gd con binario real ANTES de cualquier flip, (2) clasificar los 80 [ ] por verbo y dueno con cita en disco, (3) [ ] honestos donde el dueno sea externo. Contestado con el mensaje 149 (acuse + informe).
+- [x] **Re-corrida con binario real (Godot 4.7.2 console, headless):** 3 corridas -> 40 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR. La suite original imprimia "0 fallos" SIN contador: la endureci con la guarda de 3 capas (_check contador, _fin(bloque) + BLOQUES, CHECKS_MINIMOS=40 MEDIDO en verde, _summary en call_deferred SEPARADO). Guardian probado EN ROJO por inyeccion de runtime: EXIT 1 nombrando C/D/E/F/G + "solo 11 checks (minimo 40)", proceso TERMINA (no cuelga); sonda borrada en la misma operacion (0 sondas en el repo).
+- [x] **Bloque postgame extendido a los 4 finales de M22** (principal/regresar/guardian/secreto, data/historia/historia_principal.json): bloqueada sin final + abierta tras cada uno, con estado limpio por iteracion.
+- [x] **19 flips con cita en disco** (24 -> 43 [x]; 61 [ ] / 0 [?] = 104): 1 "Crear" (cadena-faro) + 18 "Definir/Disenar/Documentar" con cita en 02-Analisis/03-Diseno/implementacion. Criterio aplicado y documentado en 04-Codigo.md (Notas iter. 2). Los 61 [ ] restantes: ~46 de contenido narrativo ausente (secundarias.json = 4 de ~89 cadenas; 0 capitulo-* en M55; 0 cosmeticos) + 11 con dueno externo (M32 x5, M28, M68, M36, M37, M24).
+- [x] **Creados** 06-Plan-Testings.md y 07-Resultados-Testings.md (no existian; LF puro, sin BOM, convencion de hermanos).
+- [x] **Regresiones de integracion (binario real):** M22 test_historia 41/0, M55 test_diario 0 fallos, M71 test_progresion 83/0, M59 validate_save 16/0 "VALIDACION OK" — todos EXIT 0, 0 SCRIPT ERROR.
+- [x] **Hallazgos reportados al director (no tocados):** (1) cadenas_ejemplo.json huerfano (el servicio solo carga secundarias.json); (2) [x] "molino funcionando" SIN apoyo en disco (grep = 0 archivos) — marca no tocada, decision del director; (3) recompensas diario de las cadenas apuntan a capitulo-* inexistentes en el catalogo M55; (4) M24 no se menciona en 02/03 -> su item queda [ ] honesto.
+- [x] **Rojo propio corregido:** la 1a version del bloque F resetea el estado de M23 y el bloque G afirmaba un id fijo ya no completada ("round-trip restaura completadas") -> G reescrito para verificar TODAS las completadas del snapshot.
+- [x] Numeracion: 149 = max(archivos)+1 = cabeza del pool (148 lo consumio el director); consumido 149, pool re-expandido a 150..249 (100 verificados). Tracker -> 148.
+- [x] Artefactos: Log 2082 (ASCII puro por bytes, CRLF, sin BOM), msg 149 (UTF-8 sin BOM, LF), 05-Checklist M23 (43/61/0 = 104, CRLF puro preservado, diff 33/32), 04-Codigo +Notas iter. 2 (8.706 -> 12.630 B), 06/07 nuevos, test_historias.gd endurecido (LF puro), 19 flips espejo en esta cola.
+- Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot. Pedidos al director: sync fila 23 del GLOBAL a 43/104, decision sobre el [x] "molino funcionando", commit de los paths por CRON C, reposicion de cola.
