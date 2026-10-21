@@ -294,3 +294,102 @@ asuntos quedan para el director (los flips de marca son suyos).
   correr `verificar_hooks_m105.py` y adjuntar la salida al informe como evidencia.
 - No duplicar el verificador: si se necesita un gate en CI (exit 1 cuando H3
   siga en 0 tras autorizarse el cableado), agregar un flag, no un script nuevo.
+## Notas del Agente — iter. 9 (2026-10-21)
+
+**Item del backlog:** 27 — "M105-Telemetria (129/162): resolver/degradar los 45 [?] con
+justificacion o fix". **Medido antes de escribir:** el checklist tiene **33 `[?]`**, no 45
+(`129 [x] / 33 [?] / 0 [ ] = 162`, contado por prefijo de linea). La cifra del backlog estaba
+vencida.
+
+### Hallazgo principal: las 13 `track_*` estaban MUERTAS en produccion
+
+Medido con `grep -rn "\.track_X(" --include=*.gd scripts/` excluyendo `test_*`:
+**0 llamadores de produccion en las 13 funciones** (`track_tutorial_first_completed`,
+`track_resource_first_collected`, `track_house_first_built`, `track_npc_first_interaction`,
+`track_puzzle_first_completed`, `track_seal_first_obtained`, `track_travel_first_completed`,
+`track_island_first_discovered`, `track_museum_first_visited`,
+`track_festival_first_participated`, `track_community_project_first_completed`,
+`track_chapter_completed`, `track_difficulty_perceived`). La unica emision de produccion era
+`session_started` / `session_ended`, que sale del propio director.
+
+Consecuencia: el item del checklist que afirma *"M105 ya emite los 11 eventos first"* era un
+**falso verde**. La API existia y la suite la ejercitaba; en una partida real no se emitia nada.
+Las 11 funciones `track_*_first_*` **si existen** (la parte "existe la API" de la cita era
+correcta): lo que faltaba era el consumidor.
+
+### Premisa vencida del item 228 (integracion M22)
+
+El item decia que el hook de M22 *"requiere senyal `prereq_met` -> m105; ... requiere M22
+iteracion adicional"*. **Esa senal ya existe y ya se emite**: `EventBus.quest.prereq_met`
+(`scripts/core/event_bus.gd`) y `scripts/historia/story_manager.gd:187`
+(`marcar_sello()` la emite, comentario propio: *"Emite EventBus.quest.prereq_met (M07) para
+M21/M71/M38"* — M105 no figuraba entre los consumidores). Lo que faltaba era **este lado**.
+
+### Lo que se implemento
+
+1. **`scripts/telemetry/telemetry_bridge.gd`** (nuevo, ~200 lineas, `RefCounted`): puente
+   declarativo `EventBus -> track_*`.
+   - Tabla `ENTRADAS` con **una** fila verificada: `quest.prereq_met -> track_seal_first_obtained`.
+   - `conectar(director, bus)`: solo conecta si **ambos extremos existen de verdad** (senal en el
+     bus + metodo en el director). Fail-closed: director o bus nulos => 0 conexiones + motivo.
+   - Idempotente (registra el `Callable` por clave) y con `desconectar()` simetrico.
+   - `verificar(director, bus)` audita la tabla sin conectar nada (para que la suite pruebe que
+     no se podra en silencio).
+   - `cobertura()` expone `declaradas / conectadas / claves / despachos / descartes / motivos`.
+   - **Sin `class_name`** a proposito: un `class_name` nuevo no existe para `--script` hasta
+     regenerar la cache de clases (trampa 123). Se instancia con `load(...).new()`.
+   - **No saltea la privacidad:** llama a `track_*`, que filtran por `opt_in`.
+2. **`telemetry_director.gd`**: `_ready()` agrega `call_deferred("_conectar_bridge")` y se
+   agregan `_conectar_bridge()` (idempotente, nunca lanza) y `bridge_cobertura()`. **No se toco
+   ningun archivo de M22 ni del EventBus** (la dependencia es M105 -> M22, no al reves).
+
+### Filas de la tabla que se RECHAZARON por medicion (no por comodidad)
+
+Emisores de produccion medidos (`.X.emit(` sobre `scripts/`, excluyendo `test_*`):
+
+| Senal | Emisores prod. | Decision |
+|---|---|---|
+| `quest.prereq_met` | 1 (`story_manager.gd:187`) | **MAPEADA** a `track_seal_first_obtained` |
+| `quest.quest_completed` | 1 (`secondary_stories_service.gd`) | **NO**: es una mision secundaria (M23), no un capitulo; mapearla a `track_chapter_completed` inventaria ids de capitulo |
+| `diary.entrada_nueva` | 2 (`diary_service`, `museum/donation_service`) | **NO**: `track_museum_first_visited` espera un `museo_id`, no una entrada de diario |
+| `progresion.categoria_completa` | 1 (`diary_service`) | **NO**: no hay tracker equivalente |
+| `item_added`, `island_loaded`, `travel_started`, `dialog_finished`, `purchase_done` | **0** | **NO**: cablearlas seria una arista MUERTA en runtime |
+
+Es decir: de 13 trackers hoy solo **1** tiene un productor real medible. El resto sigue sin
+fuente de datos; **eso es lo que hay que decidir**, no cablear a ciegas.
+
+### Verificacion (medida)
+
+- Suite nueva **`scripts/telemetry/test_telemetry_bridge_m105.gd`** (9 bloques):
+  **38 checks / 0 fallos / EXIT 0 x3 corridas / 0 SCRIPT ERROR**. Piso `CHECKS_MINIMOS = 38`
+  **medido** (la primera version puso 40 de memoria y el propio piso la delato con 38 reales).
+- Guardian probado **EN ROJO** con 3 inyecciones (sondas temporales, borradas; 0 residuales):
+  - A) aborto de **runtime** dentro de un helper (`null.free()`): `[FAIL] bloques NO completados:
+    ["despacho"]` + `[FAIL] solo N checks` + **EXIT 1**.
+  - B) supresion del `_fin()` que **cierra** el bloque: `[FAIL] bloques NO completados:
+    ["despacho"]` + **EXIT 1**.
+  - C) piso a 99: `[FAIL] solo 38 checks ejecutados (minimo 99)` + **EXIT 1**.
+  - Las 3 **terminan** (no se cuelgan): el resumen va en un `call_deferred` SEPARADO del de
+    `_ejecutar` (trampa 61/2066).
+- Regresion de las 5 suites del modulo: `test_telemetry` 16, `iter5` 10, `iter6` 11, `iter7` 27,
+  `iter8` 17 => **81 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR**.
+
+### Dos defectos PROPIOS corregidos durante la iteracion (no eran bugs ajenos)
+
+1. **Dos aserciones mias estaban mal y el contrato era otro.** `track_seal_first_obtained` usa la
+   clave de tracker `&"sello"`, **no el id**: el evento es "el PRIMER sello" y se emite **una vez
+   por sesion**, sea cual sea el id. Yo habia asertado "un sello distinto si emite" — fijaba lo
+   contrario del diseno (familia de la trampa 88). Se corrigio **la asercion**, no el codigo, y
+   ahora se afirma el contrato real (1 evento + el puente despachando en cada emit).
+2. **La sonda B original era un Parse Error.** El `replace` usaba `\t_fin("despacho")` y el
+   archivo tiene **dos** apariciones con **dos tabs** de indentacion: comio un tab y dejo
+   `Expected statement, found "Indent"`. Un rojo por parseo **no prueba el guardian** (trampa
+   27/62): se rehizo quitando la aparicion **de cierre** (`rfind`) y entonces si nombro el bloque.
+
+### Lo que NO se hizo (honestidad)
+
+- **No se flipeo ninguna marca.** Las propuestas al director estan en el reporte del canal.
+- **No se toco** `05-Checklist.md` (lista NO TOCAR), ni `CHECKLIST-GLOBAL.md`, ni `quality.yml`,
+  ni ningun archivo de M22/M23/M37/M53/M71/M91/M104.
+- **No se invento contenido ni ids** para las 12 senales sin productor medible.
+- **0 commits / 0 push.**

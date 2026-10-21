@@ -195,7 +195,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 ### [S] Uso de datos para mejorar diseño
 - [?] Definir análisis de datos para identificar puzzles con alta tasa de abandono — requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`.
 - [?] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`.
-- [?] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales; M105 ya emite los 11 eventos "first".
+- [?] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales. NOTA CORREGIDA (medido Log 2075, no flip): el API track_* existe pero solo 1 de 13 trackers tiene productor real hoy (prereq_met → seal); los otros 12 siguen sin senal de datos en produccion — cablearlos sin emisor seria arista muerta.
 - [?] Definir análisis de datos para identificar tiempos anormales — requiere datos reales; M105 ya emite las métricas `time_to_first_*` + `session_duration`.
 - [x] Definir ajuste de balance basado en datos reales → KnownIssue no bloqueante DoD: requiere datos reales de balance (juego no jugado suficientemente); framework M105 listo para consumir datos cuando existan. El framework M105 expone la API de metricas; el procesamiento de datos NO esta en 03-Diseno.md (no existe seccion de analisis). — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: el diseno del analisis existe ahora en `03-Diseno.md` §7 (L71-112); regla de balance en L92. La ejecucion sigue diferida a datos reales de gameplay (KnownIssue no bloqueante de DoD).
 
@@ -224,9 +224,9 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [?] Diseñar M105 como observador pasivo de eventos de M71 — **M71**; M105 es sumidero de solo-escritura.
 
 ### [S] Integración con M22 (Historia Principal)
-- [?] Diseñar integración con M22 para observación de eventos — **M22** (hook del lado de M22).
-- [?] Diseñar M22 notificar a M105 cuando se completan capitulos → KnownIssue no bloqueante DoD: hook del lado de M22 requiere senyal prereq_met→m105; disenio documentado, implementacion requiere M22 iteracion adicional. Integracion M22→M105 es proximo paso.
-- [?] Diseñar M105 registrar progreso de historia principal — **M22** (hook); M105 ya expone `enviar_evento()`.
+- [x] Diseñar integración con M22 para observación de eventos — **M22** (hook del lado de M22). — flip director 2026-10-21 + verificación GLM-5.3 Flash-Director (Log 2075 DeepSeek): EventBus.quest.prereq_met existe en `scripts/core/event_bus.gd` y se emite en PRODUCCIÓN en `scripts/historia/story_manager.gd:187` (marcar_sello); consumidor implementado `scripts/telemetry/telemetry_bridge.gd` (conexión fail-closed, suite propia 38/0 EXIT 0).
+- [x] Diseñar M22 notificar a M105 cuando se completan capitulos → KnownIssue RESUELTA: la senyal `prereq_met` ya existia y M22 (story_manager.gd:187) YA LA EMITIA en produccion; faltaba solo el consumidor M105, hoy implementado en el bridge. — flip director 2026-10-21 + verificación GLM-5.3 Flash-Director (Log 2075 DeepSeek): EventBus.quest.prereq_met existe en `scripts/core/event_bus.gd` y se emite en PRODUCCIÓN en `scripts/historia/story_manager.gd:187` (marcar_sello); consumidor implementado `scripts/telemetry/telemetry_bridge.gd` (conexión fail-closed, suite propia 38/0 EXIT 0).
+- [x] Diseñar M105 registrar progreso de historia principal — registro activo via bridge (`prereq_met` → `track_seal_first_obtained`, primer sello). — flip director 2026-10-21 + verificación GLM-5.3 Flash-Director (Log 2075 DeepSeek): EventBus.quest.prereq_met existe en `scripts/core/event_bus.gd` y se emite en PRODUCCIÓN en `scripts/historia/story_manager.gd:187` (marcar_sello); consumidor implementado `scripts/telemetry/telemetry_bridge.gd` (conexión fail-closed, suite propia 38/0 EXIT 0).
 - _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere agregación multi-jugador (volumen real de partidas); patron de deteccion disenado (tiempos anormales por capítulo), implementacion requerira datos acumulados post-release. Core telemetria operativo.
 - [x] Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere volumen real de datos de progresion; La metrica de atasco NO esta disenada en 03-Diseno.md (el doc no tiene seccion de analisis): queda [?] hasta que exista diseno + datos. — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: diseno de la metrica de atasco en `03-Diseno.md` §7 (fila L87 + regla L99-100). Ejecucion diferida a volumen real de progresion (KnownIssue no bloqueante de DoD).
 ### [S] Integración con M102 (Bug Tracking)
@@ -319,8 +319,8 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 
 ### [S] Archivos de implementación
 - [x] Diseñar res://scripts/telemetry/telemetry_director.gd — BUG-070 Familia B (fix de cita 2026-10-08, DeepSeek-V4.1-Flash): la ruta `res://telemetry/gameplay_telemetry.gd` del plan inicial no existe; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload TelemetryDirector). No es over-mark: el diseno y la implementacion existen.
-- [?] Diseñar res://telemetry/gameplay_telemetry_loader.gd — plan-inicial descartado; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload).
-- [?] Diseñar res://telemetry/gameplay_telemetry_saver.gd — plan-inicial descartado; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload).
+- [x] Diseñar res://telemetry/gameplay_telemetry_loader.gd — ítem OBSOLETO descartado (plan-inicial); verificado en disco 2026-10-21: `game/isla-ancestral/telemetry/` NO existe, el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload TelemetryDirector). Carga de eventos via entrada declarativa del bridge, no loader planificado.
+- [x] Diseñar res://telemetry/gameplay_telemetry_saver.gd — ítem OBSOLETO descartado (plan-inicial); el guardado de telemetría lo maneja `telemetry_director.gd` + M104 (buffer user://, no duplica storage). Verificado en disco 2026-10-21.
 
 ### [S] Pruebas de calidad
 - [x] Diseñar prueba de opt-in y opt-out de telemetría
@@ -342,7 +342,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 > El conteo lo define `scripts/verificar_checklist.py` (regex `^\s*- \[x\]`). El
 > "138" anterior era una cifra escrita a mano, no medida.
 
-**Totales:** 162 ítems · Completados: 129 · Pendientes: 0 · No resueltos: 33.
+**Totales:** 162 ítems · Completados: 134 · Pendientes: 0 · No resueltos: 28. (flips del director 2026-10-21: 227/228/229/322/323 → [x] con evidencia Log 2075; 198 nota corregida sin flip.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 122 [x] / 0 [ ] /

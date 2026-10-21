@@ -174,6 +174,9 @@ func _ready() -> void:
 	_configurar_timers()
 	_cargar_opt_in()
 	_registrar_servicio()
+	# iter. 9 — puente EventBus -> track_*. Se difiere para no depender del orden
+	# de autoloads y para que un fallo del puente no aborte `_ready()`.
+	call_deferred("_conectar_bridge")
 	var logger := get_node_or_null("/root/GameLogger")
 	if opt_in:
 		_iniciar_sesion()
@@ -181,6 +184,33 @@ func _ready() -> void:
 			logger.info("Telemetry: servicio inicializado (opt-in ON)", GAMELOGGER.Category.ANALYTICS)
 	elif logger != null:
 		logger.info("Telemetry: servicio inicializado (opt-in OFF — sin captura)", GAMELOGGER.Category.ANALYTICS)
+
+## ─── Puente EventBus -> track_* (iter. 9) ────────────────
+
+## Instancia del puente. `null` si no se pudo construir (fail-closed).
+var bridge = null
+
+## Conecta el puente contra el EventBus real. Idempotente: si ya esta conectado
+## no hace nada. Nunca lanza: sin bus, el director sigue funcionando igual.
+func _conectar_bridge() -> void:
+	if bridge != null:
+		return
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null:
+		return
+	var script_puente = load("res://scripts/telemetry/telemetry_bridge.gd")
+	if script_puente == null:
+		return
+	bridge = script_puente.new()
+	bridge.conectar(self, bus)
+
+## Estado auditable del puente (para la suite y para el debug menu).
+func bridge_cobertura() -> Dictionary:
+	if bridge == null:
+		return {"conectado": false, "declaradas": 0, "conectadas": 0, "claves": [], "despachos": 0, "descartes": 0, "motivos": ["puente no instanciado"]}
+	var c: Dictionary = bridge.cobertura()
+	c["conectado"] = true
+	return c
 
 ## ─── Service Registry (M07) ───────────────────
 
