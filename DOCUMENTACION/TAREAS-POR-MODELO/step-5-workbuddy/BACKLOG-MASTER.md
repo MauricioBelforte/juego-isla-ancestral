@@ -641,6 +641,198 @@ M104, M88, M160.
 
 
 ## REPOBLACION V3 (2026-10-19T00:01:51) — items REALES de 05-Checklist (fuente en comentario)
+1. - [ ] [67] Navegar por agua leyendo la superficie (M51, sin fluidos) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+2. - [ ] [67] Velocidad de crucero/rápida, timón suave y reversa [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+3. - [ ] [67] Colisiones con islas, rocas y vegetación (M50) sin atravesar [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+4. - [ ] [67] No atascarse en aguas poco profundas (aviso) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+5. - [ ] [67] Vela desplegable (M48) y estela por evento (M52) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+6. - [ ] [67] Vuelo con altitud/descenso y aterrizaje suave en plataformas [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+7. - [ ] [67] Altitud máxima 60 m (mejorable a 90 m) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+8. - [ ] [67] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+9. - [ ] [67] No colisionar con vegetación alta (paso por encima) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+10. - [ ] [67] Viento lateral (M32) y farol nocturno (M49) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+11. - [ ] [67] Buceo/emersión con límite −40 m y flotabilidad mínima [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+12. - [ ] [67] Visibilidad y luces bajo el agua (M49) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+13. - [ ] [67] Explorar cuevas subacuáticas (M25) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+14. - [ ] [67] Burbujas por evento (M52) y audio amortiguado (M43) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+15. - [ ] [67] Cámara estable bajo el agua (sin mareo) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+16. - [ ] [67] Velocidad sobre riel fija (20 m/s) y sin giro libre [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+17. - [ ] [67] Vagón de carga (16 slots, M14) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+18. - [ ] [67] Documentar el estado condicional en 01-Requerimientos.md [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+19. - [ ] [67] Controles con WASD y gamepad (palanca/gatillos) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+20. - [ ] [67] Testear física en 30/60 FPS (delta correcto) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+21. - [ ] [67] Volver chunk_target = jugador al salir [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+22. - [ ] [67] LOD de chunks por altitud del dirigible [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+23. - [ ] [67] Cargar islas cercanas (M27) antes que el terreno lejano [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+24. - [ ] [67] Testear barco/dirigible/submarino sin popping de terreno [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+25. - [ ] [67] Colisiones suaves con islas, rocas y vegetación (M50) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+26. - [ ] [67] Barco no puede ir a tierra; submarino no emerge en tierra [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+27. - [ ] [67] Dirigible con techo de altitud [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+28. - [ ] [67] Vehículos no atraviesan puentes (M11) ni ruinas (M25) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+29. - [ ] [67] No atropellar animales (M36) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+30. - [ ] [67] Interacción para entrar/salir del vehículo [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+31. - [ ] [67] Entrada solo si está docked o en superficie [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+32. - [ ] [67] Al salir: restaurar cámara, HUD y sonidos (sin fugas) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+33. - [ ] [67] No quedar atascado cerca de muros al entrar/salir [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+34. - [ ] [67] Testear entrada/salida con gamepad y durante eventos (M74) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+35. - [ ] [67] Atraque con magnetismo suave en muelles [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+36. - [ ] [67] Ajustar posición y rotación; ángulo inválido → reintento [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+37. - [ ] [67] Docking de barco y dirigible en plataformas [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+38. - [ ] [67] Indicador visual de zona de atraque (M53) y sonido (M43) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+39. - [ ] [67] Testear docking en muelles angostos y con olas (M51) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+40. - [ ] [67] Baúl integrado con slots por tipo (barco 12, dirigible 8, submarino 10) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+41. - [ ] [67] Abrir el baúl desde el HUD y mover ítems [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+42. - [ ] [67] Límite de slots respetado y apilables [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+43. - [ ] [67] Mejora de baúl persistente (M59) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+44. - [ ] [67] Testear baúl con inventario lleno [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+45. - [ ] [67] Definir mejoras por vehículo (velocidad, giro, faroles, baúl) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+46. - [ ] [67] Mejoras de velocidad/giro (niveles) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+47. - [ ] [67] Mejoras de faroles (M49) y baúl [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+48. - [ ] [67] Comprar en tienda (M39) o artesanales (M16) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+49. - [ ] [67] Persistencia y visualización de nivel en el HUD [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+50. - [ ] [67] Pintura del vehículo (paleta cozy, M46) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+51. - [ ] [67] Banderas personalizables con viento (M50/M48) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+52. - [ ] [67] Nombre del vehículo editable y localizable (M87) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+53. - [ ] [67] Materiales de pintura del pool (M45/M49) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+54. - [ ] [67] Persistencia de personalización (M59) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+55. - [ ] [67] Sonidos de motor/agua/viento por vehículo [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+56. - [ ] [67] LOD de audio: atenuar > 40 m, silenciar > 80 m [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+57. - [ ] [67] Sin fugas de audio al salir [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+58. - [ ] [67] Sonidos de docking/salida y balance con M91 [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+59. - [ ] [67] Testear audio 3D y bajo el agua (amortiguado) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+60. - [ ] [67] Timón al girar, olas/estela y hélices del dirigible [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+61. - [ ] [67] Pasajeros a bordo y banderas con viento [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+62. - [ ] [67] Detener animaciones al salir (sin fuga) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+63. - [ ] [67] LOD de animaciones en distancia [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+64. - [ ] [67] Testear animaciones con Reduce Motion (M58) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+65. - [ ] [67] Cámara 3ª persona con zoom de cámara [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+66. - [ ] [67] Seguimiento suave sin mareo (M57) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+67. - [ ] [67] Reducir movimiento con Reduce Motion (M58) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+68. - [ ] [67] Cámara del submarino estable y sin clipping del dirigible [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+69. - [ ] [67] Testear cámara en 16:9 y 4:3 (M08) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+70. - [ ] [67] Presupuesto por vehículo ≤ 30 draw calls (pooling M62) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+71. - [ ] [67] Luces de faroles en pool (M49, máx 2 por vehículo) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+72. - [ ] [67] VFX solo por eventos (M52) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+73. - [ ] [67] Sin GC pesado durante la conducción [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+74. - [ ] [67] Probar con profiler (M116) y baja calidad (M90) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+75. - [ ] [67] Entrar con inventario abierto (M14) o durante diálogo (M21, bloqueado) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+76. - [ ] [67] Salir con el vehículo en movimiento rápido [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+77. - [ ] [67] Vehículo atascado en roca (desatascado manual) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+78. - [ ] [67] Barco en agua congelada (hielo M51) y dirigible con viento fuerte (M32) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+79. - [ ] [67] Carga de guardado con vehículo en el agua o a 60 m (M59) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+80. - [ ] [67] Localizar HUD del vehículo (velocidad, dirección) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+81. - [ ] [67] Localizar menús de personalización y avisos de docking [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+82. - [ ] [67] Localizar nombres de vehículos [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+83. - [ ] [67] Testear HUD en 3 idiomas sin desbordes [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+84. - [ ] [67] Localizar mensajes de límites (profundidad, altitud) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+85. - [ ] [67] HUD legible con alto contraste opcional [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+86. - [ ] [67] Reduce Motion: cámara y animaciones reducidas [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+87. - [ ] [67] Subtítulos en avisos del vehículo [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+88. - [ ] [67] Controles completos con gamepad (sin mouse) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+89. - [ ] [67] Crear validate_vehicles.gd (física, streaming, colisiones, presupuestos) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+90. - [ ] [67] Probar ciclo barco: dock → entrar → navegar → atracar → salir [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+91. - [ ] [67] Probar ciclo dirigible: despegar → volar → aterrizar [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+92. - [ ] [67] Probar ciclo submarino: sumergir → explorar → emerger [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+93. - [ ] [67] Revisar logs VEH-* en consola sin errores [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+94. - [ ] [67] Documentar los presets en 04-Codigo.md [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+95. - [ ] [67] Documentar el flujo de streaming (chunk_target) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+96. - [ ] [67] Documentar la condición de la locomotora [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+97. - [ ] [67] Agregar notas del agente al 04-Codigo.md (honestidad) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+98. - [ ] [67] Alimentar logros de exploración (M72) por viajes [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+99. - [ ] [67] Registrar fotos del vehículo (M56, PHOTO_POSE_REQUEST) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+100. - [ ] [67] Guardar estado del vehículo en el mundo (M59) [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+101. - [ ] [67] Coordinar con M68 la navegación asistida [M] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+102. - [ ] [67] Testear integración con M28 (viajes entre islas) [C] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+103. - [ ] [67] Firmar los documentos del módulo (modelo y plataforma) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+104. - [ ] [67] Actualizar CHECKLIST-GLOBAL con el progreso real [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+105. - [ ] [67] Actualizar DOCUMENTACION/README.md con el módulo 67 [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+106. - [ ] [67] Actualizar ESTADO-PARALELO.md [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+107. - [ ] [67] Generar el log 63 en Logs/ [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+108. - [ ] [67] Verificar con verificar_checklist.py (sin alertas nuevas) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+109. - [ ] [67] Push del módulo y reporte al usuario [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+110. - [ ] [67] Marcar ítems solo al cumplir la DoD (sección 21.6) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+111. - [ ] [67] Revisar que plan-inicial == plan-actual (SHA-256) [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+112. - [ ] [67] Confirmar 130 ítems exactos [S] <!-- fuente: 67-Vehiculos/05-Checklist.md -->
+113. - [ ] [23] Crear la historia de la panadera (2-4 pasos) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+114. - [ ] [23] Crear la historia del farero [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+115. - [ ] [23] Crear la historia de la doctora [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+116. - [ ] [23] Crear la historia del carpintero [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+117. - [ ] [23] Crear la historia de la tejedora [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+118. - [ ] [23] Crear la historia del pescador [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+119. - [ ] [23] Crear la historia del guarda [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+120. - [ ] [23] Crear la historia de la alquimista [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+121. - [ ] [23] Documentar las historias de vecinos en el plan-actual [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+122. - [ ] [23] Crear la historia del faro (lugar) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+123. - [ ] [23] Crear la historia de la biblioteca [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+124. - [ ] [23] Crear la historia de los jardines [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+125. - [ ] [23] Crear la historia de la plaza [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+126. - [ ] [23] Crear la historia del molino [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+127. - [ ] [23] Crear la historia de la cofradía [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+128. - [ ] [23] Crear historias de 4 ruinas (biblioteca quemada, observatorio, estación, puente) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+129. - [ ] [23] Crear las historias de 6 objetos legendarios (relicto, gema, carta, llave, farol, brújula) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+130. - [ ] [23] Documentar historias de lugares, ruinas y objetos [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+131. - [ ] [23] Crear la historia de la familia molinera [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+132. - [ ] [23] Crear la historia de la familia pescadores [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+133. - [ ] [23] Crear la historia de la familia guardas [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+134. - [ ] [23] Crear las historias de 3 comerciantes (rutas y secretos) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+135. - [ ] [23] Documentar historias de familias y comerciantes [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+136. - [ ] [23] Crear el evento de siembra (M32) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+137. - [ ] [23] Crear el evento de vendimia [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+138. - [ ] [23] Crear el evento de marea [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+139. - [ ] [23] Crear el evento de eclipse [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+140. - [ ] [23] Crear 5 cadenas secretas ocultas [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+141. - [ ] [23] Definir el descubrimiento de las ocultas por el mundo [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+142. - [ ] [23] Documentar historias estacionales y secretas [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+143. - [ ] [23] Definir 40+ cadenas de 3-5 pasos con contexto [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+144. - [ ] [23] Definir el schema de cadena (pasos, recompensa, consecuencia, oculta, postgame) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+145. - [ ] [23] Crear 8 misiones de exploración (brújula, fauna, cronitado) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+146. - [ ] [23] Documentar cadenas y misiones de exploración [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+147. - [ ] [23] Crear 6 misiones de construcción (puentes, cofradía, plaza, senderos, kiosko, jardín) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+148. - [ ] [23] Definir la reconstrucción del puente (M28) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+149. - [ ] [23] Crear 5 misiones de agricultura (invernadero, cruces, variantes) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+150. - [ ] [23] Definir variantes estacionales de agricultura (M32) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+151. - [ ] [23] Documentar misiones de construcción y agricultura [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+152. - [ ] [23] Crear 4 misiones de pesca (peces-trofeo, documentación y suelta) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+153. - [ ] [23] Crear 6 misiones de colección (murales, glifos, sellos, minerales, peces, plantas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+154. - [ ] [23] Definir la integración con M36 (museo) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+155. - [ ] [23] Documentar misiones de pesca y colección [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+156. - [ ] [23] Crear 6 misiones de amistad (regalo, pesca, paseos, ficción) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+157. - [ ] [23] Crear 5 misiones de investigación (faro, biblioteca, geodesia, mapas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+158. - [ ] [23] Definir la integración con M36 (mapas) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+159. - [ ] [23] Documentar misiones de amistad e investigación [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+160. - [ ] [23] Crear 6 misiones de puzzles (templos 24/25/26, ruinas ocultas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+161. - [ ] [23] Definir la integración con el framework M24 [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+162. - [ ] [23] Documentar misiones de puzzles [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+163. - [ ] [23] Crear 20 capítulos de diario (recompensa narrativa) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+164. - [ ] [23] Crear recetas de conversación desbloqueables [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+165. - [ ] [23] Crear 10+ cosméticos (disfraces, sombreros, paletas de casa) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+166. - [ ] [23] Definir cero stats en recompensas (cozy) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+167. - [ ] [23] Definir recompensas únicas no duplicables (M66 cofre) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+168. - [ ] [23] Documentar recompensas en el plan-actual [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+169. - [ ] [23] Definir las 12 consecuencias persistentes [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+170. - [ ] [23] Crear la consecuencia "jardín florecido" [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+171. - [ ] [23] Crear la consecuencia "taller abierto" [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+172. - [ ] [23] Crear la consecuencia "cofradía activa" [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+173. - [ ] [23] Definir el cambio visual del mundo por consecuencia [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+174. - [ ] [23] Definir diálogos posteriores por estado de mundo [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+175. - [ ] [23] Documentar consecuencias y diálogos posteriores [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+176. - [ ] [23] Definir la activación por pistas del mundo (M22) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+177. - [ ] [23] Crear 4 cadenas de postgame [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+178. - [ ] [23] Definir la variación del postgame según el final de M22 [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+179. - [ ] [23] Crear el memorial del Sello post-final [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+180. - [ ] [23] Crear el epílogo de la aldea [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+181. - [ ] [23] Crear el epílogo del guardián (final secreto) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+182. - [ ] [23] Integrar con M68 (objetivos y evaluación) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+183. - [ ] [23] Integrar con M32 (estacionales) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+184. - [ ] [23] Integrar con M36 (museo y colección) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+185. - [ ] [23] Integrar con M37 (comerciantes) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+186. - [ ] [23] Documentar la integración en el plan-actual [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+187. - [ ] [23] Diseñar test E2E de 10 cadenas completas [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+188. - [ ] [23] Diseñar test de postgame tras cada final (4 variaciones) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+189. - [ ] [23] Diseñar 06-Plan-Testings.md (unitarias + integración) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+190. - [ ] [23] Crear 07-Resultados-Testings.md [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+191. - [ ] [23] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+192. - [ ] [23] Actualizar plan-actual como espejo del estado real [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 
 1. - [x] [109] Definir reutilización de lista vista/detalle en todos [M] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
 2. - [x] [109] Definir red/amarillo por campo con error específico [S] <!-- fuente: 109-Herramientas-Internas/05-Checklist.md --> — **[x] HECHO 2026-10-19 (Step-5-WorkBuddy, Log 2009, msg 082):** definido en `109-Herramientas-Internas/03-Diseno.md` §8 (nuevo, líneas 91-130) y flippeado en su `05-Checklist.md` (120 -> 135/138, conteo por prefijo verificado).
@@ -1005,3 +1197,15 @@ M104, M88, M160.
 - [x] Tracker dejado en **138** (el commit 3abf415 del director lo había dejado en 137, número de mi propio mensaje; 138 = último mensaje del director procesado). Consumido el 139 del pool de canal (head 140).
 - [x] Pendientes: (1) fix del GLOBAL con el target corregido; (2) CONVENCIONES-CODIGO.md (fila M111) ausente del árbol y de HEAD; (3) cola activa vacía, el ítem 9 del Bloque W espera orden de commit del director.
 - Límites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot ni 05-Checklist ajenos.
+
+## Registro de la vuelta 2026-10-21 14:49 (tracker 139 -> 140; RAMA 1: msg 140 = GO a fila 90)
+- [x] Mensaje 140 del director contestado con el **141** (canal): acuse del target C3 83 = 148 + GO a fila 90 (245/249) tomado como reposición de cola.
+- [x] Fila 90 medida: GLOBAL = 245/249 en worktree Y HEAD (path limpio; el cron commiteó el worktree en ce23231). El "201/249" del director es histórico (f5ea88f); el vigente llegó con 11e77f3.
+- [x] M90 medido por prefijo de línea: 250 líneas-ítem, **249 [x] / 0 [?] / 0 [ ]** (L359 = nota con marca `[→]`; línea 246 fusionada = 246 [x] / 250 ítems). Totales L352 en sync; `git diff` vs HEAD vacío.
+- [x] DRIFT = 4 = mis flips [?] -> [x] de L90-93 (Log 2040, ítem 58), reconocidos por el director en la nota de Totales y ausentes de la fila. Reverificados: `graphics_config.gd` L68 EFECTOS {0.25/0.5/0.85/1.0} + presets L131-153.
+- [x] Suites frescas HOY (binario real Godot 4.7.2 console, headless): `test_graphics_config.gd` 85 checks / 0 fallos / 6 bloques / EXIT 0; `test_graphics_config_post_m90.gd` 57 checks / 0 fallos / EXIT 0. 0 SCRIPT ERROR.
+- [x] Muestreo 21.8.2.b: mínimo 13 (5% de 249); muestra de 18 = **0 fallas** (17 por resolución automática de artefactos + L158 a mano). NO es sello: M90 lo implementó un frente Step 5 y 21.8.4/21.23 me inhabilitan como verificador propio.
+- [x] TRAMPA PROPIA: el 1er muestreador publicaba 17 FALLAS falsas (no resolvía archivos citados sin ruta ni accesos a diccionario tipo `SOMBRAS["alta"]`); corregido el resolver antes de reportar.
+- [x] Log **2077** (head del pool medido justo antes = 2077; ASCII puro por bytes, CRLF 94, 0 LF sueltos, sin BOM, 5.853 B). Tracker -> 140. Pool del canal: consumido 141 (head verificado antes = 141 = último+1); quedan 142..240.
+- Pedidos al director (msg 141): sync fila 90 a 249/249 + ruteo QA 21.8 externo; autorización de commit de 4 paths; decisión CONVENCIONES-CODIGO.md (fila M111); tanda nueva de cola (el ítem 9 del Bloque W sigue esperando orden de commit).
+- Límites: 0 commits / 0 push / 0 flips / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot ni 05-Checklist ajenos.
