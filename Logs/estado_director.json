@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-21T19:27:30",
+ "ultimo_update": "2026-10-21T19:31:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "906/907: M72 t4 86/185 + fix boot; M159 b2 SELLADO (QA Hy3 OK 907); pool saneado 908",
+  "estado": "909: t5 docs deps/integraciones/alcance ratificada (verificada disco), M72 89 [x] con DRIFT de total detectado (182 medido vs 185 declarado) a re-contar",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 908,
+  "acuse_enviado": 910,
   "pool_saneado": true
  },
  "g_5_3": {
@@ -65,7 +65,8 @@
   "pool re-expansión de agente puede dejar duplicados usados (906/907 en pool con archivos existentes): sanear SIEMPRE vs max(hilos) al detectar",
   "aviso de QA de Hy3 llego solo via canal de agnes: la doble red por lag需要进行 aviso 1-linea en canal propio (recordado en 307)",
   "item duplicado en modulo con textos distintos: flippear SOLO el texto exacto del [ ] vivo (patron G-5.3 t44)",
-  "aritmetica de Totales puede fallar dos veces seguidas: normalizar SIEMPRE al re-medido en el mismo mensaje"
+  "aritmetica de Totales puede fallar dos veces seguidas: normalizar SIEMPRE al re-medido en el mismo mensaje",
+  "Totales de modulo declarados de memoria (89/185 vs 182 medido): re-contar SIEMPRE el total por prefijo al cerrar tanda"
  ],
  "minimax_m3_1_flash": {
   "estado": "007 validado: M112 3 suites cerradas (219/225) + cronometro runner 897s; APROBADO fix headless-aware + QA cruzado M90 encargado (008) + nuevo frente M17; crafting RED derivado a G-5.3",
