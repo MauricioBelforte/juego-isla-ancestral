@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-21T17:58:30",
+ "ultimo_update": "2026-10-21T18:27:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "M72 t3 RF13 cerrada (81/185); sigue autonomia backlog 337; reloj plataforma ADELANTADO ~3 dias (avisar corregir)",
+  "estado": "derivacion URGENTE 905: 3 Pythonismos (True/False) en achievement_service.gd L109/282/286 = boot roto (reporte Step-5) - fix minimo + regresion RF6/RF13; M72 RF6 test copreservado",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 904,
+  "acuse_enviado": 905,
   "pool_saneado": true
  },
  "g_5_3": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 350
  },
  "step_5": {
-  "estado": "acuse 141: medido M90 249/249 + suites 85/0 y 57/0; fila 90 syncada por director; CONVENCIONES-CODIGO.md encargada; cola nueva 67+23 (commit paths via Cron C)",
+  "estado": "143: CONVENCIONES-CODIGO.md CREADA (link en fila 111 por director) + M67 t1 hecho (25/131, 6 flips con cita, cabecera falsa corregida); 144 enviado con visto bueno GUIA-GODOT; actividad excepcional",
   "pendientes_real": 203,
-  "acuse_enviado": 142
+  "acuse_enviado": 144
  },
  "ds_oc": {
   "estado": "activo - ciclos 64-81 M62 y cursos",
@@ -59,7 +59,9 @@
   "mi sync de fila GLOBAL no aterriza si replace() falla silenciosamente: verificar con grep acuse commit",
   "puede haber dos sesiones GLM-5.3 en paralelo de sesiones hermanas: firma cruzada attribucion",
   "M59 item3: guard K7 existe pero en produccion NADIE sostiene IslandOps vivo (grep sin test_ = 0 holders) - bloquear guardado manual por carga de escena NO cableable sin holder",
-  "T-19 materializado: Hy3 305 paso >3h en plantilla vacia - releer con mtime+bytes + retry cubre solo 5min; caida >1h = aviso directo emisor"
+  "T-19 materializado: Hy3 305 paso >3h en plantilla vacia - releer con mtime+bytes + retry cubre solo 5min; caida >1h = aviso directo emisor",
+  "Pythonismos bool (True/False) en GDScript: 3 SCRIPT ERROR de parse al boot + autoload no instanciase - detectar con grep (?<![A-Za-z_])(True|False) antes de commitear codigo ajeno",
+  "Step-5 expansion de pool operativa: al colisionar (7ma familia), expande el pool a 100 verificado - validar offsets del gate"
  ],
  "minimax_m3_1_flash": {
   "estado": "007 validado: M112 3 suites cerradas (219/225) + cronometro runner 897s; APROBADO fix headless-aware + QA cruzado M90 encargado (008) + nuevo frente M17; crafting RED derivado a G-5.3",
@@ -90,5 +92,6 @@
   "M112 items de tiempo -> MiniMax: fix headless-aware 5 suites lentas + corrida de validacion (897s -> budget 600s)"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 17:55: detectados 2 mensajes nuevos (Step-5 141, MiniMax 007); backlogs bajos detectados y repoblados: agnes 4->474, Step-5 10->203, Ling 5->112, DeepSeek 68->161 (modulos 72-73-20-70-158 / 67-23 / 142 / 68-108); fila 90 245->249/249 sincronizada con QA ruteado a MiniMax; G-5.3/DS-OC: formatos de lista numerada, sin repoblacion necesaria"
+ "crons_vuelta_d": "CRON D 17:55: detectados 2 mensajes nuevos (Step-5 141, MiniMax 007); backlogs bajos detectados y repoblados: agnes 4->474, Step-5 10->203, Ling 5->112, DeepSeek 68->161 (modulos 72-73-20-70-158 / 67-23 / 142 / 68-108); fila 90 245->249/249 sincronizada con QA ruteado a MiniMax; G-5.3/DS-OC: formatos de lista numerada, sin repoblacion necesaria",
+ "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)"
 }
