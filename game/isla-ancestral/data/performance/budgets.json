@@ -21,12 +21,40 @@
 		"objetos_mundo_max": 1000,
 		"nota": "Limites de CANTIDAD (complemento a los presupuestos de tiempo 'categorias'). particulas_simultaneas_max <=500/camara = spec M61 sec.M (RF13) + flag M52 turbulencia 24 FPS. Fuente de diseño: 03-Diseno.md M61. Agregado por agnes-3-flash (Kilo Code, 2026-09-16, Log 943)."
 	},
+	"gpu": {
+		"draw_calls_escena_objetivo": 400,
+		"draw_calls_por_chunk_max": 24,
+		"overdraw_max": 1.5,
+		"shader_coste_material_max_ms": 0.5,
+		"nota": "Norma GPU M61 (RF5: draw calls, overdraw, coste de shaders). draw_calls_escena_objetivo = 400 = limites.draw_calls_max (Log 943) -> una sola fuente de verdad. draw_calls_por_chunk_max = 24 = 400 draw calls / ~16 chunks visibles (derivacion explicita). overdraw_max = 1.5 = mismo techo que el gate de agua M51 (scripts/world/validate_water.gd: 'overdraw<=1.5'). shader_coste_material_max_ms = 0.5 = render_ms 5.0 / ~10 materiales. Agregado por minimax-m3-1-flash (2026-10-21, Log 2068)."
+	},
+	"memoria": {
+		"vram_presupuesto_mb": 2048,
+		"vram_por_escena_mb": 1024,
+		"textura_max_resolucion": "4K",
+		"texturas_comprimidas": true,
+		"ui_atlas_textura": "2048x2048",
+		"ui_atlas_max_mb": 16,
+		"gc_pausa_max_ms": 50.0,
+		"compresion_por_plataforma": {
+			"windows": "BC7",
+			"android": "ASTC 6x6",
+			"ios": "ASTC 4x4"
+		},
+		"nota": "Norma de memoria M61 (RF6/RF7 + coordinacion con M62). vram_presupuesto_mb = 2048 = recommended_gpu_vram_mb de M114 (scripts/hardware/hardware_profile.gd L31). vram_por_escena_mb = 1024 (mitad del presupuesto total). textura_max_resolucion = 4K comprimida (RF7 literal). ui_atlas_textura 2048x2048 = limite de atlas M46 (scripts/arte2d/pack_atlas.gd) y ui_atlas_max_mb = 16 = 2048*2048*4 bytes RGBA8. gc_pausa_max_ms = 50 = criterio de aceptacion 6 de M61 (sin pausas GC > 50 ms) y se coordina con M62. Agregado por minimax-m3-1-flash (2026-10-21, Log 2068)."
+	},
 	"normas": {
 		"vsync": true,
 		"fps_objetivo": 60,
 		"fps_minimo": 30,
 		"resolucion_base": "1080p",
-		"distancia_dibujado_presets_m": [100, 150, 220],
+		"distancia_dibujado_presets_m": [300, 600, 1200, 2500],
+		"objetivo_por_preset": {
+			"baja": {"fps_garantizado": 30, "fps_tope": 30, "distancia_dibujado_m": 300, "particulas_max": 100, "sombras_cascadas": 1},
+			"media": {"fps_garantizado": 60, "fps_tope": 60, "distancia_dibujado_m": 600, "particulas_max": 500, "sombras_cascadas": 2},
+			"alta": {"fps_garantizado": 60, "fps_tope": 120, "distancia_dibujado_m": 1200, "particulas_max": 1000, "sombras_cascadas": 4},
+			"ultra": {"fps_garantizado": 60, "fps_tope": 0, "distancia_dibujado_m": 2500, "particulas_max": 2000, "sombras_cascadas": 4}
+		},
 		"lod_niveles": 3,
 		"lod_transicion_sin_pop_m": 2,
 		"npcs_activos_max": 20,
@@ -34,6 +62,6 @@
 		"carga_fria_s_max": 30,
 		"carga_caliente_s_max": 10,
 		"almacenamiento_hdd_soportado": false,
-		"nota": "Norma transversal M61 (RF1/RF2/RF3/RF9/RF11/RF12/RF18/RF21): umbrales data-driven que el gate validate_budget.gd verifica. vsync on sin tearing (RF1); presets de distancia de dibujado por calidad M91 (RF18); 3 niveles LOD + transicion sin pop a 2 m (RF21); <=20 NPCs activos visibles (RF12); remesh <2 ms por bloque destruido (RF11); carga fria <30 s / caliente <10 s en SSD (RF8/RF9); HDD no soportado (RF8). Agregado por atria (Atria-Dawn-Preview) / Kilo Code, 2026-10-12 (Log 1755, encargo director msg 36)."
+		"nota": "Norma transversal M61 (RF1/RF2/RF3/RF9/RF11/RF12/RF18/RF21): umbrales data-driven que el gate validate_budget.gd verifica. vsync on sin tearing (RF1); presets de distancia de dibujado por calidad M91 (RF18); 3 niveles LOD + transicion sin pop a 2 m (RF21); <=20 NPCs activos visibles (RF12); remesh <2 ms por bloque destruido (RF11); carga fria <30 s / caliente <10 s en SSD (RF8/RF9); HDD no soportado (RF8). Agregado por atria (Atria-Dawn-Preview) / Kilo Code, 2026-10-12 (Log 1755, encargo director msg 36). CORRECCION 2026-10-21 (minimax-m3-1-flash, Log 2068): distancia_dibujado_presets_m paso de [100,150,220] a [300,600,1200,2500] m porque los 3 valores anteriores NO coincidian con el runtime real (M90 scripts/settings/graphics_config.gd const DISTANCIA = 300/600/1200/2500 m); la norma debe describir la realidad, no al reves. Se agrega objetivo_por_preset con los 4 presets reales de M90 (baja/media/alta/ultra): fps_garantizado = fps_minimo (30) en preset baja y fps_objetivo (60) en los demas, y fps_tope = tope real de M90 (0 = ilimitado)."
 	}
 }

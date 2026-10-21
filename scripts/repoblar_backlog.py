@@ -1,22 +1,16 @@
 # -*- coding: utf-8 -*-
 """repoblar_backlog.py — repuebla el BACKLOG-MASTER de un agente con items REALES
-de los 05-Checklist de sus modulos (nunca inventadas). Fundador 2026-10-19: 100 disponibles por agente.
+de los 05-Checklist de sus modulos + escaneo de trabajo disponible en TODA la flota."""
+import io, os, re
+import glob as _globmod
 
-Uso: python repoblar_backlog.py <carpeta-modelo> M87,M91,M114 [--cota 100]
-"""
-import io, os, re, sys
-from glob import glob
+SKIP_KW = ['arte', 'visual', 'vision', 'monetiza', 'lanzamie', 'postgame', 'prototipo', 'vertical-slice', 'fundamentos', 'creditos', 'islas']
 
-
-def escanear_disponibles(skip_kw=None):
-    import glob as _glob
-    if skip_kw is None:
-        skip_kw = ['arte', 'visual', 'vision', 'monetizaci', 'lanzamien', 'postgame', 'prototipo', 'vertical-slice', 'fundamentos', 'creditos', 'lorem']
+def escanear_disponibles():
     resultado = []
-    for g in sorted(_glob.glob('DOCUMENTACION/*-*/plan-actual/05-Checklist.md')):
-        mod = g.replace('\', '/').split('/')[1]
-        skip = any(kw.lower() in mod.lower() for kw in skip_kw)
-        if skip:
+    for g in sorted(_globmod.glob('DOCUMENTACION/*-*/plan-actual/05-Checklist.md')):
+        mod = g.replace(os.sep, '/').split('/')[1]
+        if any(kw.lower() in mod.lower() for kw in SKIP_KW):
             continue
         try:
             t = io.open(g, encoding='utf-8-sig', errors='replace').read()
@@ -28,73 +22,76 @@ def escanear_disponibles(skip_kw=None):
     resultado.sort(key=lambda x: -x[2])
     return resultado
 
-def asignar_mejor_match(carpeta, min_pendientes=100):
+def asignar_mejor_match(carpeta, min_pend=100):
     blp = os.path.join('DOCUMENTACION', 'TAREAS-POR-MODELO', carpeta, 'BACKLOG-MASTER.md')
     usados = set()
     if os.path.isfile(blp):
         blt = io.open(blp, encoding='utf-8-sig').read()
         usados = set(re.findall(r'<!-- fuente: (\S+)/05-Checklist', blt))
-    disponible = escanear_disponibles()
-    disponible = [(m, g, c) for m, g, c in disponible if m.split('-')[0] not in usados]
-    return [m for m, g, c in disponible[:10]]
+    disponibles = [x for x in escanear_disponibles() if x[0].split('-')[0] not in usados]
+    return [x[0] for x in disponibles[:10]]
 
-
-carpeta = sys.argv[1].strip()
-mods = [m.strip() for m in sys.argv[2].split(',')]
-cota = int(sys.argv[sys.argv.index('--cota') + 1]) if '--cota' in sys.argv else 100
+# --- FLUJO PRINCIPAL ---
+carpeta = os.sys.argv[1].strip()
+mods_arg = os.sys.argv[2].split(',') if len(os.sys.argv) > 2 else []
+cota = int(os.sys.argv[os.sys.argv.index('--cota') + 1]) if '--cota' in os.sys.argv else 100
 
 BLP = os.path.join('DOCUMENTACION', 'TAREAS-POR-MODELO', carpeta, 'BACKLOG-MASTER.md')
 bl = io.open(BLP, encoding='utf-8-sig', errors='replace').read()
 
-def norm(s):
-    return re.sub(r'\W+', '', s.lower())[:80]
-
-tenidos = set(norm(l) for l in bl.splitlines() if len(l.strip()) > 10)
-pend_act = len(re.findall(r'(?m)^\s*-?\s*\[ \]', bl))
+tenidos = set(re.sub(r'\W+', '', l.lower())[:80] for l in bl.splitlines() if len(l.strip()) > 10)
+pend_act = len(re.findall(r'(?m)^-?\s*\[ \]', bl))
 
 lineas = []
 no_encontrados = []
-for mod in mods:
-    g = (glob(os.path.join('DOCUMENTACION', mod + '-*', 'plan-actual', '05-Checklist.md')) or
-         glob(os.path.join('DOCUMENTACION', mod + ' *', 'plan-actual', '05-Checklist.md')) or
-         glob(os.path.join('DOCUMENTACION', mod + '-*', '05-Checklist.md')))
+mods_limpios = []
+for mod in mods_arg:
+    g = (_globmod.glob('DOCUMENTACION/' + mod + '-*/plan-actual/05-Checklist.md') or
+         _globmod._globmod.glob('DOCUMENTACION/' + mod + '-*/05-Checklist.md'))
     if not g:
         no_encontrados.append(mod)
         continue
-    p = g[0]
-    tt = io.open(p, encoding='utf-8', errors='replace').read()
-    for it in re.finditer(r'(?m)^\s*-?\s*\[ \]\s*(.+)$', tt):
+    pp = g[0]
+    tt = io.open(pp, encoding='utf-8-sig', errors='replace').read()
+    found = 0
+    for it in re.finditer(r'(?m)^- \[ \]\s*(.+)$', tt):
         txt = re.sub(r'\s+', ' ', it.group(1)).strip()[:150]
-        clave = norm(txt)
+        clave = re.sub(r'\W+', '', txt.lower())[:80]
         if clave in tenidos:
             continue
         tenidos.add(clave)
-        fuente = os.path.basename(os.path.dirname(os.path.dirname(p)))
+        fuente = os.path.basename(os.path.dirname(os.path.dirname(pp)))
         lineas.append('- [ ] [%s] %s <!-- fuente: %s/05-Checklist.md -->' % (mod, txt, fuente))
+        found += 1
+    if found > 0:
+        mods_limpios.append('%s(%d)' % (mod, found))
 
 if not lineas:
-    print('%s: sin items nuevos en %s (todo ya citado) | no encontrados: %s' % (carpeta, mods, no_encontrados))
-    sys.exit(0)
+    print('Sin items nuevos. no_encontrados:', no_encontrados)
+else:
+    pend_post = pend_act + len(lineas)
+    if pend_post >= cota:
+        print('OK: %s queda con %d pendientes (>= %d)' % (carpeta, pend_post, cota))
+    else:
+        print('AVISO: %s queda con %d pendientes (< %d)' % (carpeta, pend_post, cota))
 
-sec = []
-ancla_ult = None
-for m in re.finditer(r'(?m)^## REPOBLACION V3[^
-]*$', bl):
-    ancla_ult = m
-if ancla_ult:
-    # anexar a la ultima seccion existente
-    lineas_n = ['%d. %s' % (i, l) for i, l in enumerate(lineas, 1)]
-    t = bl[:ancla_ult.end()] + chr(10) + chr(10).join(lineas_n) + bl[ancla_ult.end():]
-    io.open(BLP, 'w', encoding='utf-8', newline='
-').write(t)
-    print('%s: +%d items anexados a la seccion REPOBLACION V3 existente' % (carpeta, len(lineas)))
-    sys.exit(0)
-sec = ['', '', '## REPOBLACION V3 (%s) — items REALES de 05-Checklist (fuente en comentario)' % __import__('datetime').datetime.now().isoformat(timespec='seconds'), '']
-for i, l in enumerate(lineas, 1):
-    sec.append('%d. %s' % (i, l))
-sec.append('')
+    # Detectar si ya existe una seccion REPOBLACION V3 — anexar a la ultima
+    m_ol = list(re.finditer(r'(?m)^## REPOBLACION V3[^\n]*$', bl))
+    if m_ol:
+        ancla = m_ol[-1]
+        elemento_n = [str(i) + '. ' + l for i, l in enumerate(lineas, 1)]
+        t = bl[:ancla.end()] + '\n' + '\n'.join(elemento_n) + bl[ancla.end():]
+    else:
+        sec_header = '\n\n## REPOBLACION V3 (' + __import__('datetime').datetime.now().isoformat(timespec='seconds') + ')'
+        sec = [sec_header, '']
+        for i, l in enumerate(lineas, 1):
+            sec.append(str(i) + '. ' + l)
+        sec.append('')
+        t = bl.rstrip() + '\n' + '\n'.join(sec)
 
-io.open(BLP, 'w', encoding='utf-8', newline='\n').write(bl.rstrip() + '\n' + '\n'.join(sec))
-raw = io.open(BLP, 'rb').read()
-print('%s: agregados %d items reales (tenia %d marcados) | no encontrados: %s | sin BOM: %s' % (
-    carpeta, len(lineas), pend_act, no_encontrados, not raw.startswith(b'\xef\xbb\xbf')))
+    io.open(BLP, 'w', encoding='utf-8', newline='\n').write(t)
+    raw = io.open(BLP, 'rb').read()
+    raw.decode('utf-8', errors='strict')
+    print('%s: +%d items | mods: %s | no_encontrados: %s | sin BOM: %s' % (
+        carpeta, len(lineas), set(l.split(']')[0] + ']' for l in lineas),
+        no_encontrados, not raw.startswith(b'\xef\xbb\xbf')))

@@ -66,5 +66,21 @@ func _init() -> void:
 	else:
 		_check(false, "catalog.json existe")
 
-	print("=== M73: %d checks, %d fallos ===" % [8, _fallos])
+	# 7. Recompensa de coleccion definida: TODO item tiene recompensa_item + cantidad >= 0
+	if FileAccess.file_exists(fpath):
+		var contenido2 := FileAccess.get_file_as_string(fpath)
+		var parsed2: Variant = JSON.parse_string(contenido2)
+		if typeof(parsed2) == TYPE_ARRAY:
+			var arr2: Array = parsed2
+			var sin_rec := 0
+			for e2 in arr2:
+				if e2 is Dictionary:
+					var d2: Dictionary = e2
+					if String(d2.get("recompensa_item", "")).is_empty() or int(d2.get("recompensa_cantidad", -1)) < 0:
+						sin_rec += 1
+			_check(sin_rec == 0, "recompensa de coleccion definida en todos los items (%d sin recompensa)" % sin_rec)
+		else:
+			_check(false, "catalog parsea (recompensa)")
+
+	print("=== M73: %d checks, %d fallos ===" % [9, _fallos])
 	quit(_fallos)

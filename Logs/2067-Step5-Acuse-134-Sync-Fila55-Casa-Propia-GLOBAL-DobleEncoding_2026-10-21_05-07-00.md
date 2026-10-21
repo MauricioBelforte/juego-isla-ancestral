@@ -73,3 +73,34 @@ project.godot ni 05-Checklist ajenos. Este log queda untracked hasta que el dire
 Artefactos: Log 2067 (ASCII puro por bytes / CRLF / sin BOM), msg 135 (UTF-8 sin BOM / LF),
 registro de vuelta en el BACKLOG-MASTER (LF preservado), tracker -> 134, pool del canal: 135
 consumido (quedan 136..233).
+## 6. 2da tanda (05:20) - mensaje 136 del director + barrido de Totales
+
+Mensaje 136 = acuse de mi 135: el sync de la fila 55 queda verificado 'por vos como testigo', el
+director limpia el doble encoding con fix_encoding.py, 'segui riel'. Acusado con mi msg 137.
+
+Cautelas medidas sobre la limpieza (leido scripts/fix_encoding.py antes de opinar):
+- fix_encoding.py NO quita el BOM (lo detecta y lo descarta): hace falta verificar_bom.py --fix.
+  Verificacion objetivo despues del fix: bom=False, emojis (F0 9F) = 367, doble-UTF-8 (C3 83) = 0.
+- El worktree tiene UNA diferencia de contenido real vs HEAD: la fila 73 (de agnes, sin commitear).
+  Restaurar desde HEAD la perderia. Orden seguro: aplicar el fix SOBRE el worktree y commitear eso.
+  Chequeo exacto: diff con todo no-ASCII eliminado de ambos lados -> deben quedar 2 lineas distintas
+  de HEAD (la 73 y ninguna mas), no 207.
+
+Barrido de Totales (pendiente del director: '16 incoherentes'):
+- Criterio: linea Totales del 05-Checklist de plan-actual vs conteo por prefijo de linea; etiquetas
+  Completados = [x], Pendientes = [ ], No resueltos = [?]; universo 167 checklists.
+- DRIFT > 5 = 1: M73-Coleccionables declara 26 [x] / 107 [ ] / 2 [?] (=135); disco 32 [x] / 101 [ ] /
+  2 [?] (=135) -> deriva de 6 items, coherente con el reencargue de agnes. Dueno agnes-3-flash.
+- 42 checklists NO parseables con esta heuristica (usan '## Totales' con tabla o las etiquetas en otra
+  linea: M30/M31/M32/M34/M49/M64/M71/M88-M91/M94/M96/M98/M99/M100/M105/M109/M111/M113/
+  M115-M117/M120-M121/M123-M125/M127-M128/M139-M144/M150-M153). NO cuentan como limpios.
+- Los otros 125 parseados cuadran (drift <= 5), incluidos mis 6 modulos.
+
+TRAMPA PROPIA (descartada antes de reportar, familia trampa 31): mi 1er comparador asignaba las
+etiquetas en el orden de aparicion (Completados/Pendientes/No resueltos) contra el disco en el orden
+[x]/[?]/[ ] -> INTERCAMBIABA [?] y [ ]. Publico 144 modulos con 'drift' y cifras absurdas
+(103-Logging 'declara 2/1109/103'). Con el mapeo corregido el numero real es 1. Un comparador con
+el mapeo invertido fabrica deuda donde no la hay.
+
+Artefactos 2da tanda: msg 137 (4.315 B, UTF-8 sin BOM, LF 41), tracker 134 -> 136, pool del canal:
+137 consumido (quedan 138..233, 97 numeros). Limites: 0 commits / 0 push / 0 auto-sellos / 0 protecciones.

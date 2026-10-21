@@ -13,6 +13,8 @@
 extends SceneTree
 
 const RUTA_BUDGETS := "res://data/performance/budgets.json"
+## Tabla de MB por preset: la dueño M62 (memoria). M61 solo la LEE para validar RF8.
+const RUTA_PRESETS := "res://data/rendimiento/budgets.json"
 
 var _fallos: int = 0
 
@@ -64,6 +66,12 @@ func _cargar_y_validar_tabla() -> void:
 	_validar_limites(data)
 	# iter. atria (Log 1755): dimension de NORMAS transversales (RF1/RF2/RF3/RF8/RF9/RF11/RF12/RF18/RF21)
 	_validar_normas(data)
+	# iter. minimax-m3-1-flash (Log 2068): dimensiones GPU (RF5) + MEMORIA (RF6/RF7)
+	# + objetivo por preset de calidad (RF1/RF18) y paquete de datos (RF8).
+	_validar_gpu(data)
+	_validar_memoria(data)
+	_validar_objetivo_por_preset(data)
+	_validar_paquete_datos()
 
 func _validar_medicion(data: Dictionary, medicion: Dictionary) -> bool:
 	var cats: Dictionary = data.get("categorias", {})
@@ -146,14 +154,19 @@ func _validar_normas(data: Dictionary) -> void:
 	_check(int(n.get("fps_minimo", 0)) == 30, "fps_minimo == 30 (RF1)")
 	_check(int(n.get("fps_minimo", 0)) < int(n.get("fps_objetivo", 0)), "fps_minimo < fps_objetivo")
 	_check(String(n.get("resolucion_base", "")) == "1080p", "resolucion_base 1080p (RF2)")
-	# Distancia de dibujado: 3 presets ascendentes 100/150/220 m (RF18, presets M91)
+	# Distancia de dibujado: 4 presets ascendentes 300/600/1200/2500 m (RF18, presets M90)
+	# CORRECCION 2026-10-21 (minimax-m3-1-flash, Log 2068): antes 3 presets 100/150/220 m,
+	# que NO coincidian con el runtime real (M90 graphics_config.gd const DISTANCIA).
 	var presets: Variant = n.get("distancia_dibujado_presets_m", [])
-	_check(presets is Array and (presets as Array).size() == 3,
-		"distancia_dibujado_presets_m: 3 presets (RF18)")
-	if presets is Array and (presets as Array).size() == 3:
+	_check(presets is Array and (presets as Array).size() == 4,
+		"distancia_dibujado_presets_m: 4 presets (RF18)")
+	if presets is Array and (presets as Array).size() == 4:
 		var arr: Array = presets
-		var ok_valores: bool = int(arr[0]) == 100 and int(arr[1]) == 150 and int(arr[2]) == 220
-		_check(ok_valores, "presets == 100/150/220 m (RF18)")
+		var ok_valores: bool = int(arr[0]) == 300 and int(arr[1]) == 600 \
+			and int(arr[2]) == 1200 and int(arr[3]) == 2500
+		_check(ok_valores, "presets == 300/600/1200/2500 m (RF18, = M90 DISTANCIA)")
+		_check(int(arr[0]) < int(arr[1]) and int(arr[1]) < int(arr[2]) and int(arr[2]) < int(arr[3]),
+			"presets de distancia ascendentes")
 	# LOD: 3 niveles + transicion sin pop (RF21)
 	_check(int(n.get("lod_niveles", 0)) == 3, "lod_niveles == 3 (RF21)")
 	_check(float(n.get("lod_transicion_sin_pop_m", 0.0)) > 0.0, "lod_transicion_sin_pop_m > 0 (RF21)")
@@ -176,4 +189,193 @@ func _validar_normas(data: Dictionary) -> void:
 		str(n.get("distancia_dibujado_presets_m", [])),
 		int(n.get("lod_niveles", 0)),
 		int(n.get("npcs_activos_max", 0)),
+	])
+
+
+## iter. minimax-m3-1-flash (Log 2068): dimension GPU (RF5) — draw calls, overdraw y
+## coste de shaders. Tolera su ausencia (no rompe el gate de ramas anteriores);
+## si esta, exige bien formado + coherencia con `limites.draw_calls_max`.
+func _validar_gpu(data: Dictionary) -> void:
+	if not data.has("gpu"):
+		return
+	var gpu: Variant = data.get("gpu", {})
+	_check(gpu is Dictionary, "bloque gpu es un Dictionary")
+	if not (gpu is Dictionary):
+		return
+	var g: Dictionary = gpu
+	# Draw calls por escena: debe COINCIDIR con el limite de cantidad (una sola verdad)
+	var objetivo := int(g.get("draw_calls_escena_objetivo", 0))
+	_check(objetivo > 0, "gpu.draw_calls_escena_objetivo > 0 (RF5)")
+	var limites: Dictionary = data.get("limites", {})
+	if limites.has("draw_calls_max"):
+		_check(objetivo == int(limites["draw_calls_max"]),
+			"gpu.draw_calls_escena_objetivo == limites.draw_calls_max (%d)" % objetivo)
+	# Limite por chunk
+	_check(int(g.get("draw_calls_por_chunk_max", 0)) > 0, "gpu.draw_calls_por_chunk_max > 0 (RF5)")
+	# Overdraw
+	_check(float(g.get("overdraw_max", 0.0)) > 0.0, "gpu.overdraw_max > 0 (RF5)")
+	# Coste de shader por material
+	_check(float(g.get("shader_coste_material_max_ms", 0.0)) > 0.0,
+		"gpu.shader_coste_material_max_ms > 0 (RF5)")
+	# Medicion dentro de presupuesto -> OK; excedida -> debe detectarse
+	var dentro := {
+		"draw_calls": int(g.get("draw_calls_escena_objetivo", 400)) - 10,
+		"overdraw": float(g.get("overdraw_max", 1.5)) - 0.1,
+		"shader_coste_material_ms": float(g.get("shader_coste_material_max_ms", 0.5)) - 0.1,
+	}
+	_check(_medicion_dentro_umbrales_gpu(g, dentro), "medicion GPU dentro de umbrales OK")
+	var excedida := {
+		"draw_calls": int(g.get("draw_calls_escena_objetivo", 400)) + 1,
+		"overdraw": float(g.get("overdraw_max", 1.5)) + 0.1,
+		"shader_coste_material_ms": float(g.get("shader_coste_material_max_ms", 0.5)) + 0.1,
+	}
+	_check(not _medicion_dentro_umbrales_gpu(g, excedida), "medicion GPU excedida detectada")
+	print("[M61] gpu: %d umbral(es) validados (draw calls %d/escena, %d/chunk, overdraw %.1f, shader %.2f ms)" % [
+		g.size() - (1 if g.has("nota") else 0),
+		objetivo,
+		int(g.get("draw_calls_por_chunk_max", 0)),
+		float(g.get("overdraw_max", 0.0)),
+		float(g.get("shader_coste_material_max_ms", 0.0)),
+	])
+
+
+## Devuelve true si cada clave de la medicion respeta su umbral del bloque gpu.
+func _medicion_dentro_umbrales_gpu(g: Dictionary, medicion: Dictionary) -> bool:
+	var mapa := {
+		"draw_calls": "draw_calls_escena_objetivo",
+		"overdraw": "overdraw_max",
+		"shader_coste_material_ms": "shader_coste_material_max_ms",
+	}
+	for clave in medicion:
+		var umbral: String = String(mapa.get(clave, ""))
+		if umbral == "" or not g.has(umbral):
+			continue
+		if float(medicion[clave]) > float(g[umbral]):
+			return false
+	return true
+
+
+## iter. minimax-m3-1-flash (Log 2068): dimension MEMORIA (RF6/RF7) + coordinacion
+## de pausas de GC con M62. Tolera su ausencia; si esta, exige bien formado.
+func _validar_memoria(data: Dictionary) -> void:
+	if not data.has("memoria"):
+		return
+	var mem: Variant = data.get("memoria", {})
+	_check(mem is Dictionary, "bloque memoria es un Dictionary")
+	if not (mem is Dictionary):
+		return
+	var m: Dictionary = mem
+	# VRAM: presupuesto total >= presupuesto por escena
+	var total := int(m.get("vram_presupuesto_mb", 0))
+	var escena := int(m.get("vram_por_escena_mb", 0))
+	_check(total > 0, "memoria.vram_presupuesto_mb > 0 (RF7)")
+	_check(escena > 0, "memoria.vram_por_escena_mb > 0 (RF7)")
+	_check(escena <= total, "vram_por_escena_mb <= vram_presupuesto_mb (%d <= %d)" % [escena, total])
+	# Texturas: 4K comprimidas (RF7 literal)
+	_check(String(m.get("textura_max_resolucion", "")) == "4K",
+		"memoria.textura_max_resolucion == 4K (RF7)")
+	_check(bool(m.get("texturas_comprimidas", false)),
+		"memoria.texturas_comprimidas == true (RF7: texturas 4K COMPRIMIDAS)")
+	# Atlas de UI (M53/M46): 2048x2048 y 16 MB por atlas
+	_check(String(m.get("ui_atlas_textura", "")) == "2048x2048",
+		"memoria.ui_atlas_textura == 2048x2048 (M53/M46)")
+	_check(int(m.get("ui_atlas_max_mb", 0)) == 16,
+		"memoria.ui_atlas_max_mb == 16 (2048*2048*4 bytes RGBA8)")
+	# GC: pausa maxima por debajo del criterio de aceptacion 6 (50 ms), coordinado con M62
+	_check(float(m.get("gc_pausa_max_ms", 0.0)) > 0.0 and float(m.get("gc_pausa_max_ms", 99.0)) <= 50.0,
+		"memoria.gc_pausa_max_ms <= 50 (criterio de aceptacion 6, coordinado con M62)")
+	# Compresion por plataforma: BC7 en escritorio, ASTC en movil
+	var comp: Variant = m.get("compresion_por_plataforma", {})
+	_check(comp is Dictionary, "memoria.compresion_por_plataforma es un Dictionary")
+	if comp is Dictionary:
+		var c: Dictionary = comp
+		_check(c.has("windows") and c.has("android") and c.has("ios"),
+			"compresion declarada para windows/android/ios")
+		_check(String(c.get("windows", "")) == "BC7", "windows usa BC7")
+		_check(String(c.get("android", "")).begins_with("ASTC"), "android usa ASTC")
+		_check(String(c.get("ios", "")).begins_with("ASTC"), "ios usa ASTC")
+	print("[M61] memoria: %d umbral(es) validados (VRAM %d MB total / %d MB por escena, atlas 16 MB, GC <= 50 ms)" % [
+		m.size() - (1 if m.has("nota") else 0),
+		total,
+		escena,
+	])
+
+
+## iter. minimax-m3-1-flash (Log 2068): objetivo por preset de calidad (RF1/RF18).
+## La norma declara el objetivo POR PRESET; el test M61 <-> M90 verifica ademas que
+## estos valores coinciden con el runtime real de M90 (graphics_config.gd).
+func _validar_objetivo_por_preset(data: Dictionary) -> void:
+	var normas: Dictionary = data.get("normas", {})
+	if not normas.has("objetivo_por_preset"):
+		return
+	var op: Variant = normas.get("objetivo_por_preset", {})
+	_check(op is Dictionary, "normas.objetivo_por_preset es un Dictionary")
+	if not (op is Dictionary):
+		return
+	var o: Dictionary = op
+	var esperados: Array[String] = ["baja", "media", "alta", "ultra"]
+	for nombre in esperados:
+		_check(o.has(nombre), "preset %s declarado" % nombre)
+	_check(o.size() == esperados.size(), "4 presets de calidad declarados (%d)" % o.size())
+	var fps_min := int(normas.get("fps_minimo", 30))
+	var fps_obj := int(normas.get("fps_objetivo", 60))
+	var dist_previas := -1.0
+	var part_previas := -1
+	for nombre in esperados:
+		if not o.has(nombre):
+			continue
+		var p: Dictionary = o[nombre]
+		var fg := int(p.get("fps_garantizado", 0))
+		_check(fg == fps_min or fg == fps_obj,
+			"preset %s: fps_garantizado (%d) es el minimo (%d) o el objetivo (%d)" % [nombre, fg, fps_min, fps_obj])
+		# fps_tope = 0 significa "ilimitado" (convencion de M90 FPS_OPCIONES)
+		var tope := int(p.get("fps_tope", -1))
+		_check(tope == 0 or tope >= fg, "preset %s: fps_tope >= fps_garantizado (0 = ilimitado)" % nombre)
+		var dist := float(p.get("distancia_dibujado_m", 0.0))
+		_check(dist > 0.0, "preset %s: distancia_dibujado_m > 0" % nombre)
+		_check(dist > dist_previas, "preset %s: distancia ascendente" % nombre)
+		dist_previas = dist
+		var part := int(p.get("particulas_max", 0))
+		_check(part > 0, "preset %s: particulas_max > 0" % nombre)
+		_check(part > part_previas, "preset %s: particulas ascendente" % nombre)
+		part_previas = part
+		_check(int(p.get("sombras_cascadas", 0)) >= 1, "preset %s: sombras_cascadas >= 1" % nombre)
+	print("[M61] objetivo_por_preset: %d preset(s) validados" % o.size())
+
+
+## iter. minimax-m3-1-flash (Log 2068): RF8 — tamaño maximo del paquete de datos.
+## La tabla de MB por preset la dueño M62 (data/rendimiento/budgets.json): este gate
+## la LEE (no la modifica) y verifica que siga siendo coherente y ascendente.
+func _validar_paquete_datos() -> void:
+	var f := FileAccess.open(RUTA_PRESETS, FileAccess.READ)
+	_check(f != null, "%s abierto" % RUTA_PRESETS)
+	if f == null:
+		return
+	var parsed = JSON.parse_string(f.get_as_text())
+	_check(parsed is Dictionary, "%s es JSON valido" % RUTA_PRESETS)
+	if not (parsed is Dictionary):
+		return
+	var datos: Dictionary = parsed
+	var presets: Dictionary = datos.get("presets", {})
+	_check(presets.has("baja") and presets.has("media") and presets.has("alta"),
+		"paquete de datos: 3 presets declarados")
+	var sumas: Array[int] = []
+	for nombre in ["baja", "media", "alta"]:
+		if not presets.has(nombre):
+			continue
+		var sistemas: Dictionary = presets[nombre]
+		var s := 0
+		for k in sistemas.keys():
+			s += int(sistemas[k])
+		sumas.append(s)
+	_check(sumas.size() == 3, "paquete de datos: 3 sumas calculadas")
+	if sumas.size() == 3:
+		_check(sumas[0] < sumas[1] and sumas[1] < sumas[2],
+			"paquete de datos: sizes ascendentes (baja %d < media %d < alta %d MB)" % [sumas[0], sumas[1], sumas[2]])
+		_check(sumas[2] <= 3000,
+			"paquete de datos: maximo por preset <= 3000 MB (medido %d MB)" % sumas[2])
+	print("[M61] paquete de datos (M62): %d MB / %d MB / %d MB por preset" % [
+		sumas[0] if sumas.size() > 0 else -1,
+		sumas[1] if sumas.size() > 1 else -1,
+		sumas[2] if sumas.size() > 2 else -1,
 	])

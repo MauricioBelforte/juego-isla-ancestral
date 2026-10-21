@@ -341,3 +341,140 @@ inalterado**; el test de determinismo del M10 sigue válido).
    el camino caliente (grep de `FastNoiseLite.new()` / `.new()` dentro de funciones llamadas por
    `get_block_at`).
 
+---
+
+## Iteración minimax-m3-1-flash — norma GPU + memoria + objetivo por preset (2026-10-21, Log 2068)
+
+**Modelo:** minimax-m3-1-flash · **Plataforma:** MiniMax API (Kilo Code) · **Fecha:** 2026-10-21 05:25
+
+Tanda 1 del modulo. Misma linea data-driven que las iteraciones de agnes (Log 943, bloque `limites`) y
+atria (Log 1755, bloque `normas`): **cada umbral de la norma vive en `data/performance/budgets.json` y
+lo verifica el gate**; ademas se agrega una suite que cruza la norma contra el **runtime real** de los
+modulos duenos, que es lo que faltaba (una norma que no coincide con el codigo es ficcion).
+
+### 1. Bloques nuevos en `game/isla-ancestral/data/performance/budgets.json`
+
+| Bloque | Claves | Origen del valor (no inventado) |
+|---|---|---|
+| `gpu` | `draw_calls_escena_objetivo` 400 | = `limites.draw_calls_max` (Log 943) — una sola fuente de verdad |
+| | `draw_calls_por_chunk_max` 24 | derivacion: 400 draw calls / ~16 chunks visibles |
+| | `overdraw_max` 1.5 | mismo techo que el gate de agua M51 (`scripts/world/validate_water.gd`: `overdraw<=1.5`) |
+| | `shader_coste_material_max_ms` 0.5 | derivacion: `render_ms` 5.0 / ~10 materiales |
+| `memoria` | `vram_presupuesto_mb` 2048 | = `recommended_gpu_vram_mb` de M115 (`scripts/hardware/hardware_profile.gd` L31) |
+| | `vram_por_escena_mb` 1024 | mitad del presupuesto total de VRAM |
+| | `textura_max_resolucion` "4K" + `texturas_comprimidas` true | RF7 literal ("Texturas M47 maxima 4K comprimidas") |
+| | `ui_atlas_textura` "2048x2048" + `ui_atlas_max_mb` 16 | limite de atlas de M46 (`scripts/arte2d/pack_atlas.gd`); 16 MB = 2048*2048*4 bytes RGBA8 |
+| | `gc_pausa_max_ms` 50 | criterio de aceptacion 6 de M61 (sin pausas GC > 50 ms), coordinacion con M62 |
+| | `compresion_por_plataforma` BC7 / ASTC 6x6 / ASTC 4x4 | VRAM Compressed de Godot 4: BC7 en escritorio, ASTC en movil |
+| `normas.objetivo_por_preset` | 4 presets (baja/media/alta/ultra) con `fps_garantizado`, `fps_tope`, `distancia_dibujado_m`, `particulas_max`, `sombras_cascadas` | espejo de M90 `graphics_config.gd` (DISTANCIA / PARTICULAS / SOMBRAS / PRESETS.fps) |
+
+### 2. CORRECCION de la norma (deriva detectada contra el runtime)
+
+`normas.distancia_dibujado_presets_m` paso de `[100, 150, 220]` a `[300, 600, 1200, 2500]` m.
+Motivo: los 3 valores del Log 1755 **no coinciden** con el runtime real — M90
+(`scripts/settings/graphics_config.gd`, `const DISTANCIA`) declara 300/600/1200/2500 m para
+baja/media/alta/ultra. La norma debe describir la realidad; se actualizo tambien
+`_validar_normas()` del gate para que verifique los 4 valores reales.
+
+### 3. Funciones nuevas del gate `scripts/performance/validate_budget.gd`
+
+| Funcion | Valida |
+|---|---|
+| `_validar_gpu(data)` | bloque `gpu` + coherencia con `limites.draw_calls_max` + medicion dentro/excedida |
+| `_medicion_dentro_umbrales_gpu(g, medicion)` | helper de umbrales GPU |
+| `_validar_memoria(data)` | bloque `memoria`: VRAM total >= por escena, 4K comprimido, atlas 16 MB, GC <= 50 ms, compresion por plataforma |
+| `_validar_objetivo_por_preset(data)` | `normas.objetivo_por_preset`: 4 presets, fps garantizado = minimo u objetivo, fps_tope (0 = ilimitado), distancias y particulas ascendentes |
+| `_validar_paquete_datos()` | RF8: lee (no modifica) la tabla de MB por preset de M62 y verifica que siga siendo coherente y ascendente |
+
+Todas son **tolerantes si el bloque falta** (no rompen el gate de ramas anteriores), igual que
+`_validar_limites()` y `_validar_normas()`.
+
+### 4. Suite nueva `game/isla-ancestral/tests/test_m61_normas_performance.gd` (39 checks)
+
+Cruza la norma contra los duenos, leyendo su codigo real en runtime (no texto):
+
+| Dueno | Artefacto leido | Checks |
+|---|---|---|
+| M90 Configuración Gráfica | `scripts/settings/graphics_config.gd` (consts `CALIDADES`, `DISTANCIA`, `PARTICULAS`, `SOMBRAS`, `PRESETS`) | 4 presets x 4 ejes (distancia, particulas, cascadas, tope de FPS) = 16 |
+| M115 Hardware | `scripts/hardware/hardware_profile.gd` (`recommended_gpu_vram_mb`, `recommended_disk_mb`) | 3 (VRAM = recomendada, VRAM por escena <= total, paquete <= disco recomendado) |
+| M62 Memoria | `data/rendimiento/budgets.json` (MB por preset) | 3 (3 presets, ascendente, maximo <= disco recomendado) |
+| M51 Agua | `scripts/world/validate_water.gd` | 1 (techo de overdraw compartido) |
+| M46 Arte 2D | `scripts/arte2d/pack_atlas.gd` | 1 (limite de atlas 2048x2048) |
+| M61 interno | `budgets.json` | el resto (single source of verdad de draw calls, 4K comprimido, compresion por plataforma, fps garantizado) |
+
+### 5. Evidencia de ejecucion (Godot 4.7.2 headless, 2026-10-21 05:20)
+
+```
+godot --headless --path game/isla-ancestral --script res://scripts/performance/validate_budget.gd
+  [M61] limites: 3 limit(es) de cantidad validados (particulas_simultaneas_max=500.0)
+  [M61] normas: 13 umbral(es) transversales validados (fps 60/30, presets [300.0, 600.0, 1200.0, 2500.0], LOD 3, NPCs 20)
+  [M61] gpu: 4 umbral(es) validados (draw calls 400/escena, 24/chunk, overdraw 1.5, shader 0.50 ms)
+  [M61] memoria: 8 umbral(es) validados (VRAM 2048 MB total / 1024 MB por escena, atlas 16 MB, GC <= 50 ms)
+  [M61] objetivo_por_preset: 4 preset(s) validados
+  [M61] paquete de datos (M62): 1500 MB / 2000 MB / 2500 MB por preset
+  === VALIDATE BUDGET M61: 0 fallo(s) ===   EXIT=0
+
+godot --headless --path game/isla-ancestral --script res://tests/test_m61_normas_performance.gd
+  === Resumen M61 normas de rendimiento: 39 checks, 0 fallos ===
+  TEST M61 normas de rendimiento OK — la norma coincide con el runtime real   EXIT=0
+```
+
+### 6. Prueba en rojo (anti-falso-verde)
+
+Se rompio la norma a proposito (`distancia_dibujado_m` del preset `media`: 600 -> 999) y se re-corrieron
+ambos artefactos:
+
+| Artefacto | Resultado con la norma rota | Interpretacion |
+|---|---|---|
+| suite `test_m61_normas_performance.gd` | **rc=1** — `[FALL] media: distancia de dibujado M61 == M90 — M61=999.0 m / M90=600.0 m` | la suite **detecta la deriva** contra el runtime |
+| gate `validate_budget.gd` | rc=0 (0 fallos) | por diseno: el gate valida la coherencia **interna** de la tabla; la deriva entre modulos la caza la suite |
+
+El archivo de datos quedo **byte-identico** al original tras la prueba (verificado con `bytes`).
+
+## Notas del Agente
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 05:25
+**Estado:** Parcial (tanda 1 de 3) — 12 de 89 pendientes cerrados con evidencia headless
+
+### Lo que hice
+- Reclame M61 (estaba en 🟡 con ultima actividad de atria-dawn del 2026-10-12, >24 h, regla 21.4.7) y lo
+  reserve en los 4 registros (CHECKLIST-GLOBAL, 05-Checklist, GUIA-ORDEN 08, ESTADO-PARALELO).
+- Agregue 2 bloques data-driven (`gpu`, `memoria`) + `normas.objetivo_por_preset` a
+  `data/performance/budgets.json` (12 umbrales nuevos), 5 funciones nuevas al gate y 1 suite nueva
+  (`tests/test_m61_normas_performance.gd`, 39 checks) que cruza la norma contra M90/M115/M62/M51/M46.
+- Corregi una deriva real: `distancia_dibujado_presets_m` [100,150,220] -> [300,600,1200,2500] m, que no
+  coincidia con M90 `DISTANCIA` (el runtime real).
+- Cierre los 12 items de las secciones A/E/F/G/H de `05-Checklist.md` con la evidencia de arriba.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Los 13 items `[C] Validar ... 60 FPS / sin picos` de las secciones E..X **no son medibles en headless**:
+  exigen GPU real, `bench_scene_a` y medicion de frame. No los flipeo: quedan `[?]` con el motivo
+  explicito (mismo criterio que la QA E-12a de atria-dawn sobre el JSON del bench inexistente).
+- No toco codigo de los modulos duenos (M07/M08/M19/M34/M35/M47/M50/M51/M52/M53/M62/M63/M90/M115): M61
+  define la norma, la implementacion vive en el dueno (§15, nota de 03-Diseno §1). Solo **leo** sus
+  artefactos para que la suite pueda detectar deriva.
+- La correccion de `distancia_dibujado_presets_m` toca un `[x]` de atria (Log 1755): quedo documentada en
+  el mismo item y en el `nota` del bloque `normas`, sin borrar su contenido.
+- No cierro los 6 `[?]` previos del modulo (JSON del bench inexistente, capturas sin versionar, CI de
+  M118, metodologia de profiler): siguen sin artefacto y son de otros duenos.
+
+### Intentos fallidos / decisiones
+- El primer run del gate dio **1 fallo**: `fps_tope >= fps_garantizado` con `fps_tope = 0` (que en M90
+  significa "ilimitado"). Se corrigio la regla, no el dato: `tope == 0 or tope >= fg`.
+- Se descarto usar `data/rendimiento/budgets.json` (M62) como destino de las cifras de M61: lo escribe
+  `generar_budgets.gd` (M62) y M61 solo lo **lee** (`_validar_paquete_datos`).
+
+### Recomendaciones para el siguiente agente
+1. Tanda 2: bloques `carga` (RF8/RF9) + `chunks` (RF10) + `destruccion` (RF11) — los 12 items
+   "Definir ..." de las secciones I/J/K siguen data-driven y headless-verificables con el mismo patron.
+2. Tanda 3: bloque `tecnicas` para las secciones L..Y (RF12..RF26). Ojo: varios items son
+   *implementacion* del dueno (M50 instancing, M52 pooling, M34/M35 instancing de fauna) y NO deben
+   flipearse desde M61 sin codigo real en su modulo.
+3. Para cerrar los `[C] Validar ... 60 FPS` hace falta una corrida de `bench_scene_a` con renderer real
+   (no headless) + el JSON `user://logs/bench/bench_*.json` versionado; el gate de la suite
+   `test_m62_correspondencia_m61.gd` ya tiene el patron de gate en rojo que se puede reutilizar.
+4. La suite nueva se autodescubre en el runner de M112 (`res://tests`, `extends SceneTree`): agregarla
+   suma ~10 s al tiempo total de suite, que hoy ya excede el limite de 10 min (deuda M112, no M61).
+
