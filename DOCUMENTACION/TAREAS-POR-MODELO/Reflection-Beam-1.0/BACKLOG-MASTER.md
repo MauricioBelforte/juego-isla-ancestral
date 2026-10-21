@@ -8,26 +8,26 @@
 ## A - COLA ACTIVA
 
 ### TANDA 1 - CALIBRACION EMPIRICA (obligatoria antes que nada)
-- [ ] T1.1 Verificar conteo M23 (decl. 42/61/1=104) - citas archivo+linea
-- [ ] T1.2 Verificar conteo M59 (decl. 75/53/2=130)
-- [ ] T1.3 Verificar conteo M72 y dar veredicto del TOTAL disputado (182 vs 185)
-- [ ] T1.4 Verificar conteo M102 (decl. 141/142)
-- [ ] T1.5 Verificar conteo M105 (decl. 134/28=162)
-- [ ] T1.6 Verificar conteo M90 (decl. 249/0/0=249)
-- [ ] T1.7 Reporte de calibracion con tu firma y metodo de conteo definido
+- [x] T1.1 Verificar conteo M23 (decl. 42/61/1=104) - citas archivo+linea
+- [x] T1.2 Verificar conteo M59 (decl. 75/53/2=130)
+- [x] T1.3 Verificar conteo M72 y dar veredicto del TOTAL disputado (182 vs 185)
+- [x] T1.4 Verificar conteo M102 (decl. 141/142)
+- [x] T1.5 Verificar conteo M105 (decl. 134/28=162)
+- [x] T1.6 Verificar conteo M90 (decl. 249/0/0=249)
+- [x] T1.7 Reporte de calibracion con tu firma y metodo de conteo definido
 
 ### TANDA 2 - AUDITORIA DE SELLO 93-Balance (134/134 con dudas: verificar la matematica del balanceo en 02/03 del modulo y de los scripts de datos)
-- [ ] T2.1 Inventario de formulas de balanceo documentadas en 02-Analisis.md / 03-Diseno.md
-- [ ] T2.2 Cross-check de cada formula contra los datos reales en scripts (valores finales)
-- [ ] T2.3 Informe de inconsistencias aritmeticas (si hay) con cita por linea
-- [ ] T2.4 Veredicto sobre si el sello del modulo es sostenible matematicamente
+- [x] T2.1 Inventario de formulas de balanceo documentadas en 02-Analisis.md / 03-Diseno.md
+- [x] T2.2 Cross-check de cada formula contra los datos reales en scripts (valores finales)
+- [x] T2.3 Informe de inconsistencias aritmeticas (si hay) con cita por linea
+- [x] T2.4 Veredicto sobre si el sello del modulo es sostenible matematicamente
 
 ### ROL RE-VERIFICADOR (orden fundador 21:42 - solo cuando no haya tareas nuevas de T1/T2)
-- [ ] T3.1 Elegir 1 tarea YA COMPLETADA de alto impacto (candidatos: fórmulas de balanceo M93, economía M38 y sus precios M39, curvas de progresión M71, recetas/costos M16 pe. MR1-7)
-- [ ] T3.2 Analizar la implementación actual + su documentación (02/03 del módulo + scripts) y validar la MATEMÁTICA subyacente
-- [ ] T3.3 Redactar PROPUESTA DE MEJORA en tu canal (NUEVO mensaje): análisis, solución propuesta (diff conceptual), trade-offs, riesgo, por qué es superior (justificación matemática), y test que la respaldaría
-- [ ] T3.4 SIN APLICAR cambios: propuesta-only. El fundador + el director evalúan si se adopta. Si se adopta, la implementación se reasigna (tú o el dueño)
-- [ ] T3.5 Criterios de adoptación: mejora medible/fundamentada matematicamente, compatible con tests existentes (o test nuevo propuesto), sin breaking de módulos ajenos
+- [x] T3.1 Elegir 1 tarea YA COMPLETADA de alto impacto (candidatos: fórmulas de balanceo M93, economía M38 y sus precios M39, curvas de progresión M71, recetas/costos M16 pe. MR1-7)
+- [x] T3.2 Analizar la implementación actual + su documentación (02/03 del módulo + scripts) y validar la MATEMÁTICA subyacente
+- [x] T3.3 Redactar PROPUESTA DE MEJORA en tu canal (NUEVO mensaje): análisis, solución propuesta (diff conceptual), trade-offs, riesgo, por qué es superior (justificación matemática), y test que la respaldaría
+- [x] T3.4 SIN APLICAR cambios: propuesta-only. El fundador + el director evalúan si se adopta. Si se adopta, la implementación se reasigna (tú o el dueño)
+- [x] T3.5 Criterios de adoptación: mejora medible/fundamentada matematicamente, compatible con tests existentes (o test nuevo propuesto), sin breaking de módulos ajenos
 
 ### PENDIENTES DE MODULOS (repoblados: 95, 137, 157, 142, 144)
 (los items se agregan a continuacion del modulo correspondiente por el repoblador)

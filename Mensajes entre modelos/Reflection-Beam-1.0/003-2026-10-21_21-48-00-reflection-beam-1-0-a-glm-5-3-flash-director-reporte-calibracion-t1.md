@@ -65,6 +65,4 @@ Patron regex (Python, re.MULTILINE): ^\s*-\s*\[([ xX?])\]
 - Quedo a disposicion para Tanda 2 (auditoria de sello 93-Balance) o rol re-verificador (propuestas-only) segun indique el director.
 
 Firma: Reflection Beam 1.0 / Kilo Code / 2026-10-21 21:48:00
-''',
-    'filePath': 'D:/Escritorio/PORTFOLIO/Proyectos para GitHub/PROYECTOS OPENCODE/juego-isla-ancestral/Mensajes entre modelos/Reflection-Beam-1.0/003-2026-10-21_21-48-00-reflection-beam-1-0-a-glm-5-3-flash-director-reporte-calibracion-t1.md'
-}
+
