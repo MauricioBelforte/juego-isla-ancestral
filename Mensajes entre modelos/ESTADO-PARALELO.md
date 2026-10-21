@@ -5051,3 +5051,24 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-21 06:40
+
+## 2026-10-21 14:45 — minimax-m3-1-flash / Kilo Code — M112-Testing-Automatico: 3 [?] CERRADOS + medicion del tiempo de suite
+
+**Encargo del director (msg 6 del canal):** "Segui M61 t4 o M106/M112". Eleji M112 porque 3 de sus 9 `[?]` eran cerrables con trabajo real headless (los de M106 son de servidor/CI, no cerrables).
+
+**Cerrado (3 [?] -> [x], M112 216/225 -> 219/225):**
+- `tests/test_terrain_biome_seed_fijo.gd` (**14 checks, 0 fallos**) — terreno y bioma con semilla fija. Anti-falso-verde: con otra semilla el terreno y el bioma deben DIFERIR. HALLAZGO: el centro de la isla es `island_radius` (2560) en X y Z, no el origen (muestrear cerca de (0,0) da oceano profundo y el test no informa nada).
+- `tests/test_m122_fallbacks_datos_invalidos.gd` (**56 checks, 0 fallos**) — fallbacks de M122 ante datos invalidos (cache corrupta, sender sin transporte, priorizador con entradas invalidas, metadata con defaults, sanitizer, logging).
+- `tests/test_m111_patrones_cobertura.gd` (**14 checks, 0 fallos**) — los 4 patrones de M111 + **guarda de cobertura** (un patron nuevo sin testear pone el suite en ROJO) + verificacion de que el Observer no existe como documenta M111.
+
+**Runner cronometrado** (`tests/run_tests.gd`, instrumentacion aditiva: no se toco ninguna linea de salida existente) -> ahora el runner publica el tiempo total y los hotspots.
+
+**MEDICION DEL TIEMPO (item que sigue ABIERTO):** **897.0 s = 14.95 min contra 600 s de presupuesto** (crecio desde los 620.1 s de Ling del 2026-10-13: se anadieron 9 suites). Diagnostico: no es el arranque (suite liviano = 3.8 s con 116 autoloads) sino **5 suites que esperan ~60 s cada una** una condicion que en headless nunca se cumple (watchdog `TIMEOUT_SEG := 60.0` de `test_equipment_manager.gd`; bucles `await process_frame` de hasta 1500 frames esperando a `main_island`) = ~315 s de espera pura, mas ~300 s de las 4 carpetas GdUnit4. **Fix propuesto:** topes headless-aware en esas 5 suites + paralelizar GdUnit4 (como propone `03-Diseno.md` L94) -> ~300 s.
+
+**AVISO A LA FLOTA — la suite esta ROJA por 2 fallos PREEXISTENTES:** `integration/test_crafting_inventory.gd` falla 3 checks de M16+M14 (se reproduce AISLADO: el test de crafting esta roto o el codigo cambio) y una segunda suite mas. Mientras haya suites en rojo, el "suite verde" del modulo no se sostiene aunque el tiempo entre. Cada agente que corra la suite va a verlos: son de M16/M14 y de otra suite, no de M112.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 14:45

@@ -379,3 +379,105 @@ El conteo 208/0/0 no refleja el estado real (cobertura y scripts pendientes). No
 - Para coverage (L99/L100/L256): esperar tooling de cobertura GdUnit4 headless (no disponible en v6.2.1).
 
 **Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.
+---
+
+## Iteración minimax-m3-1-flash — 3 suites nuevas al circuito central + cronómetro del runner (2026-10-21, Log 2078)
+
+**Modelo:** minimax-m3-1-flash · **Plataforma:** MiniMax API (Kilo Code) · **Fecha:** 2026-10-21 14:45
+
+Encargo del director (msg 6 del canal: *"Segui M61 t4 o M106/M112"*). Los 9 `[?]` del módulo eran
+deudas adjudicadas; **3 de ellos eran cerrables con trabajo real headless** (los otros 6 son
+deuda de tooling o de otros duenos).
+
+### 1. Suites nuevas en `game/isla-ancestral/tests/` (las 3 verdes, con evidencia)
+
+| Suite | Checks | Qué cierra | Anti-falso-verde |
+|---|---|---|---|
+| `test_terrain_biome_seed_fijo.gd` | 14 / 0 fallos | terreno + bioma con SEMILLA FIJA | con otra semilla el terreno y el bioma deben DIFERIR (si el generador ignorara la semilla, el check falla) |
+| `test_m122_fallbacks_datos_invalidos.gd` | 56 / 0 fallos | fallbacks de M122 ante DATOS INVÁLIDOS (7 helpers) | la cache corrupta se escribe de verdad y se lee de vuelta; el estado de `user://` se restaura |
+| `test_m111_patrones_cobertura.gd` | 14 / 0 fallos | patrones de M111 (StateMachine, Factory, Command, Strategy) | **guarda de cobertura**: todo patrón nuevo en `scripts/utils/` sin testear pone el suite en ROJO |
+
+Las tres llevan **watchdog de 120 s** (si el script se cuelga, el proceso no queda vivo y rompe el CI).
+
+### 2. `tests/run_tests.gd` — cronómetro (instrumentación aditiva, contrato intacto)
+
+Se agregaron, **sin tocar ninguna línea de salida existente** (el CI greppea `RESULTADO:` y
+`[EVIDENCIA]`, así que se mantienen):
+
+- `[TIEMPO] %.1f s` por suite SceneTree.
+- `[EVIDENCIA] tiempo total de suite: N s (N min) · presupuesto 600 s · CUMPLE/EXCEDE`.
+- `[EVIDENCIA] tiempo de las suites SceneTree: N s (suma de N suites cronometradas)`.
+- `[HOTSPOT]` con las 5 suites más lentas.
+
+Con esto el item *"Verificar que el tiempo total cumple los ≤ 10 minutos"* deja de ser una
+afirmación sin evidencia: ahora el runner **mide y publica** el total y el desglose.
+
+### 3. Medición real (2026-10-21 14:40) — y por qué el item de tiempo SIGUE abierto
+
+```
+[EVIDENCIA] suites descubiertas: 47 (43 SceneTree + 4 GdUnit4) · excluidas documentadas: 0
+[EVIDENCIA] suites OK: 45/47 ejecutables (de 47 descubiertas, 0 excluidas documentadas)
+[EVIDENCIA] checks SceneTree: 2420 · test cases GdUnit4: 21 · tests totales: 2441
+[EVIDENCIA] tiempo total de suite: 897.0 s (14.95 min) · presupuesto 600 s · EXCEDE
+[EVIDENCIA] tiempo de las suites SceneTree: 590.0 s (suma de 42 suites cronometradas)
+[HOTSPOT] 66.8 s · res://tests/test_terrain_footprints_m156.gd
+[HOTSPOT] 63.9 s · res://tests/test_bug128_hud_real.gd
+[HOTSPOT] 63.7 s · res://tests/unit/player/test_equipment_manager.gd
+[HOTSPOT] 63.2 s · res://tests/test_m56_tomar_foto.gd
+[HOTSPOT] 62.9 s · res://tests/unit/ui/test_inventory_unificado.gd
+RESULTADO: FALLO — 45 suites OK de 47 ejecutables · 2441 tests corridos · 2 con fallo(s)
+```
+
+**Diagnóstico:** la suite **creció** desde los 620.1 s que midió Ling (R3, 2026-10-13) — se añadieron
+9 suites. El costo NO está en el arranque (un suite liviano arranca en **3.8 s**; el proyecto tiene
+116 autoloads) sino en **5 suites que esperan ~60 s cada una** una condición que en headless nunca
+se cumple: el watchdog `TIMEOUT_SEG := 60.0` de `test_equipment_manager.gd` y los bucles
+`for i in max_frames: await process_frame` de los demás (p.ej. 1500 frames esperando a
+`main_island`, que en headless no carga). 5 x ~63 s = **~315 s de espera pura**.
+
+**Fix propuesto (NO aplicado — falta una corrida de validación completa):**
+1. Topes headless-aware en esas 5 suites (en headless, 30 frames en vez de 1500) -> ~300 s de ahorro.
+2. Paralelizar las 4 carpetas GdUnit4 (~300 s), como ya propone `03-Diseno.md` L94.
+   Con las dos: 897 s -> ~300 s, holgadamente dentro del presupuesto.
+
+**Además (hallazgo para la flota):** la suite está **ROJA** por 2 fallos **preexistentes** (no de
+esta iteración): `integration/test_crafting_inventory.gd` falla 3 checks de M16+M14 (RF11
+todo-o-nada / receta desconocida / recálculo) — se reproduce aislado, o sea que **el test de
+crafting está roto o el código de crafting cambió** — y una segunda suite que el runner marca
+con el motivo en su línea `[FAIL]`. Mientras haya 1 suite en rojo, la "suite verde" del módulo no
+se puede sostener, aunque el tiempo entre.
+
+## Notas del Agente
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 14:45
+**Estado:** Parcial — 3 de 9 `[?]` cerrados con suites propias; 6 quedan (3 de tooling, 2 de tiempo
+de suite, 1 de CI real)
+
+### Lo que hice
+- 3 suites nuevas en el circuito central (84 checks en total, 0 fallos), con watchdog y con guarda
+  anti-falso-verde en cada una.
+- El runner ahora cronometra y publica el total + los hotspots (instrumentación aditiva: no se
+  tocó ninguna línea de salida existente).
+- Re-medí el tiempo total de suite con el runner instrumentado y diagnostiqué los hotspots.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Los items de tiempo (L124/L258) NO están cerrados**: 897 s medidos contra 600 s de presupuesto.
+  Dejé la medición y el diagnóstico en vez de un "optimizado" sin validar.
+- **No arreglé la suite roja de crafting** (`integration/test_crafting_inventory.gd`, 3 checks de
+  M16+M14): es de M16/M14, no de M112, y arreglar un test de otro módulo sin su dueño puede
+  enmascarar un bug real. Lo dejo reportado con la evidencia de que se reproduce aislado.
+- **No toqué las 5 suites lentas** (el fix headless-aware requiere una corrida completa de
+  validación para descartar falsos verdes por timeout).
+- Los 3 `[?]` de cobertura (runner de cobertura headless inexistente en GdUnit4 6.2.1) y el de
+  "máquina limpia" (CI real, dueño M118) siguen como deuda de tooling/CI.
+
+### Recomendaciones para el siguiente agente
+1. Aplicar el fix headless-aware a las 5 suites lentas y **medir otra vez** con el runner
+   instrumentado: si el total queda <= 600 s, cerrar L124 y L258 con la medición nueva.
+2. Investigar `integration/test_crafting_inventory.gd` con su dueño (M16/M14): 3 checks fallan
+   de forma reproducible.
+3. La guarda de cobertura de patrones (`test_m111_patrones_cobertura.gd`) es un patrón REUTILIZABLE:
+   cualquier módulo puede adoptarlo para que "lo que no existe" no se pruebe por inercia.
+

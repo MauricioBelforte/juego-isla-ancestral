@@ -803,3 +803,12 @@ las constantes reales de M63 (`PISO_PROGRESO` 0.02, `TOPE_PROGRESO` 0.98, `PRESU
 **39 -> 58 checks** (0 fallos, EXIT=0) + 11 flips.
 
 **Tanda 3 (Log 2073):** 13 bloques de norma nuevos (64 umbrales) para las secciones L..Y (RF12..RF26) con grounding en las constantes reales de M52/M49/M64/M51/M50/M90/M63/M62/M09; gate `_validar_tecnicas()` + tabla canonica que congela los 64 umbrales; suite 58 -> **88 checks** (0 fallos, EXIT=0) + probe propio `test_m61_allocations_hotloop.gd` (8 checks, 0 fallos) para el item de allocations en el lazo caliente. **42 flips.** M61 queda en **118/148** (65 [x] hechos, 16 [?] degradados honestos, 8 [ ] que son implementacion de otros modulos: M07/M50/M08/M52/M35/M34).
+
+## M112-Testing-Automatico (encargo directo del director, msg 6 del canal — 2026-10-21)
+
+- [x] Testear patrones de M111 (state machine, observer, factory) [M] — LOG 2078: suite `tests/test_m111_patrones_cobertura.gd` (14 checks, 0 fallos) + guarda de cobertura
+- [x] Testear biome y terreno con seed fijo [C] — LOG 2078: suite `tests/test_terrain_biome_seed_fijo.gd` (14 checks, 0 fallos)
+- [x] Testear que fallbacks de M122 responden ante datos invalidos [M] — LOG 2078: suite `tests/test_m122_fallbacks_datos_invalidos.gd` (56 checks, 0 fallos)
+- [?] Cumplir tiempo total de suite <= 10 minutos [C] — LOG 2078: MEDIDO 897.0 s vs 600 s; 5 suites esperan ~60 s en headless; fix propuesto (topes headless-aware + paralelizar GdUnit4)
+
+**M112: 216/225 -> 219/225.** Los 6 [?] restantes: 3 de cobertura (sin runner headless en GdUnit4 6.2.1 — deuda de tooling), 2 de tiempo de suite (1 aqui + el item espejo), 1 de maquina limpia (CI real, dueno M118).
