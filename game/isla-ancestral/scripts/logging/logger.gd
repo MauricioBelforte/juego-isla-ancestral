@@ -28,6 +28,10 @@
 
 extends Node
 
+## RF18 (2026-10-21, DeepSeek-V4.1-Flash): puente al crash reporting (M122).
+## Preload (no `class_name`) para no depender de la caché de clases globales.
+const CrashLogBridge = preload("res://scripts/logging/crash_log_bridge.gd")
+
 ## Niveles de log (mayor = más severo)
 enum Level { DEBUG, INFO, WARNING, ERROR, CRITICAL }
 
@@ -69,6 +73,10 @@ var _log_path: String = "user://logs/game.log"
 ## Directorio y archivo creados en _ready (FileAccess abierto)
 var _file: FileAccess = null
 
+## RF18: puente de crash log (M122). Null si M122 no está cargado.
+var _crash_bridge: RefCounted = null
+var _crash_conectado: bool = false
+
 func _ready() -> void:
 	_load_config()
 	_open_log_file()
@@ -77,6 +85,29 @@ func _ready() -> void:
 	if reg != null and reg.has_method("register"):
 		reg.register("logger", self)
 	info("Logger inicializado", Category.BOOT)
+	# RF18 (03-Diseno.md sección 8): puente al crash reporting de M122.
+	# `CrashReporter` se declara DESPUÉS de `GameLogger` en project.godot, así que
+	# en este punto todavía no existe en el árbol → se conecta en diferido.
+	call_deferred("_conectar_crash_bridge")
+
+## RF18: engancha la señal pública `crash_reportado` de M122 al volcado del buffer.
+## Fail-open: si M122 no está cargado, el logger funciona exactamente igual.
+func _conectar_crash_bridge() -> void:
+	var cr = get_node_or_null("/root/CrashReporter")
+	if cr == null or not cr.has_signal("crash_reportado"):
+		return
+	_crash_bridge = CrashLogBridge.new()
+	_crash_conectado = bool(_crash_bridge.call("conectar", cr, self))
+
+## ¿El puente de crash log quedó conectado? (observabilidad para la suite y QA)
+func crash_bridge_conectado() -> bool:
+	return _crash_conectado
+
+## Ruta del último crash log escrito por el puente ("" si no hubo).
+func ultimo_crash_log() -> String:
+	if _crash_bridge == null:
+		return ""
+	return str(_crash_bridge.get("ultima_ruta"))
 
 ## ── Carga de configuración ──────────────────────────────
 func _load_config() -> void:
