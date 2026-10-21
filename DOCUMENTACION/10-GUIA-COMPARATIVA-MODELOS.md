@@ -313,6 +313,21 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 * **En el proyecto:** El modelo específico en uso es **`minimax-m3-free`** sobre **Kilo Code** (ver §6 — autoevaluación honesta del agente). Se usa para: documentación masiva, scripting, análisis de video/audio, tareas agentic largas, batch de tareas V0, refactors 5-15 archivos.
 * **Fuerza principal:** Long-horizon agentic workflows, costo bajo, multimodal (video)
 
+### H-bis. MiniMax M3.1 Flash (MiniMax AI) — 🆕 2026-10-19
+* **Especificaciones:** Variante Flash de M3 — ~3x más rápido, 70% más barato. Disponible: API, M Plan, MiniMax Code. Pesos open-weights aún no liberados.
+* **Precio:** .15/1M input · .60/1M output · .015/1M cached input
+* **Velocidad:** 200+ TPS output, P50 170+ TPS
+* **Capacidades (benchmarks):**
+  - DeepSWE v1.1: 73.7% (coding, junto a modelos top)
+  - OSWorld V2: 61.7 (Computer Use — #1 entre modelos chinos)
+  - Agents' Last Exam (ALE): 29.6
+  - CyberGym: 82% (ciberseguridad, auditoría + pentesting)
+  - AutomationBench-AA: top performer (workflows enterprise multi-SaaS)
+  - BankerToolBench: 76.2 (planificación multi-step, consistencia documental)
+* **Fuerza principal:** Agentic tasks a bajo costo extremo, Computer Use (interactúa GUIs reales), ciberseguridad, coding con larga secuencia de pasos
+* **Compara vs M3 (hermano grande):** M3 tiene 1M contexto + multimodal video + Agent Team; M3.1 Flash gana en velocidad (3x) y costo (70% menos), pierde multimodal video
+* **Nota:** Space Bunny 🐰 (200T tokens procesados anónimamente) era una versión early de M3.1 Flash
+
 ### I. SenseNova 6.8 Flash Lite (SenseTime)
 * **Especificaciones:** Liviano, multimodal nativo (texto+imagen), contexto 262K, SenseNova Token Plan (gratis preview)
 * **Modelos disponibles:**
