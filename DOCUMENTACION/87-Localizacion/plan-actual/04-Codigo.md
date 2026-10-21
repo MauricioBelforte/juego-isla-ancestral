@@ -217,6 +217,33 @@ msgstr[1] "Se ofrecen {n} objetos"
 | Auto-escaneo del auditor (`auditor_claves.gd` aplica los patrones al TEXTO crudo, comentarios incluidos) | M87 | **Deuda conocida, no bloqueante** (hallazgo H1 de la iter. 8, Log 1504). Un COMENTARIO que contenga el patrón literal de llamada dinámica registra un prefijo **fantasma**, y toda clave real que empiece con ese prefijo queda excluida del veredicto. Medido con sonda aislada: `# _t("ZZFANTASMA." + x)` -> `dinamicas = ["ZZFANTASMA."]`. Hoy es inofensivo: los únicos comentarios así en `scripts/` son `validate_diary.gd:186/190`, y nombran `DIARY.CAT_`, que ya es un prefijo dinámico real. No se corrige ahora (efecto cosmético); el fix futuro sería descartar las líneas de comentario antes de aplicar los patrones. |
 | `06-Plan-Testings.md` / `07-Resultados-Testings.md` | M87 | **Ejecutados** (6 suites, 0 fallos) |
 
+## 8b. Mapa de claves del código (auditado TANDA 17, 2026-10-21 — msg 192)
+
+**Arquitectura de catálogos (dos catálogos, dos roles):**
+1. **Runtime M87** (autoload `Localization` = `scripts/localization/localization_manager.gd`, 377 líneas): carga **exclusivamente `.po`** de `res://locales/` (L15-17: `LOCALES_SOPORTADOS=["es","en"]`, `LOCALE_DEFECTO="es"`, `RUTA_CATALOGOS="res://locales/"`; `_cargar_catalogos` L35-39 → `_parse_po` L276+ → `_catalogs`). **PT no es locale de runtime** (no existe `pt.po`; el JSON PT es para paridad de catálogos, regla msg 186). `tr_key` **normaliza a MAYÚSCULAS** (L137-139): `tr_key("clock","estaciones","0")` → `CLOCK.ESTACIONES.0`. `_buscar_texto` (L163-188): activo → fallback ES → clave cruda + `_avisar_faltante`.
+2. **JSON `data/localizacion/strings_{es,en,pt}.json`** (170 claves): catálogo **base/maestro — NO cargado por el runtime M87**. Consumido por: `scripts/validar_i18n_integridad.py` (watchdog de paridad), `test_capitulos_m74.gd` (verifica 14 claves `eventos.*`), y el duplicado huérfano `scripts/localizacion/localization_manager.gd` (81 líneas, carga JSON — hallazgo msg 183; preloadeado solo por `_colector_sintaxis.gd` L541, herramienta de análisis).
+
+**Matriz de consumo en producción** (vía `_t()`/`tr_key`/`tr_ctx`/`UiI18n.meta_texto` → `.po`):
+
+| Prefijo | Claves .po | Usos prod. | Consumidores |
+|---|---|---|---|
+| DIARY (M12) | 37 | 47 | `diary_layer.gd` 45, `validate_diary.gd` 2 |
+| SETTINGS | 75 | 41 | `crafting_ui` 14, `inventory_layer` 8, `settings_audio_layer` 8, `confirm_popup` 4, `dialog_layer` 2, `diary_layer` 2, `menus_layer` 1 (`SETTINGS.TITULO`), +3 |
+| TIENDAS (M16) | 20 | 17 | `shop_ui.gd` |
+| LOADING | 3 | 5 | `loading_layer.gd` |
+| EQUIP | 13 | 3 | `equipment_layer.gd` (`UiI18n.meta_texto`) |
+| `UI.INTERACTUAR` | es.po L668 + en.po | 1 | `interact_prompt.gd` L91 — **existe en .po** ✓ ("Interactuar"/"Interact") |
+| `CLOCK.ESTACIONES.0-3` | es.po + en.po | 1 | `w_reloj.gd` L194 — `tr_key` normaliza minúscula→mayúscula ✓ (el guard L195 detecta la clave cruda y hace fallback a constantes ES) |
+| ITEMS / MAIN_MENU / HUD | 3 / 2 / 2 | **0** (solo tests) | huérfanas potenciales — confirmar con `auditor_claves.gd` en editor |
+| Legado M60 `ui.*`/`msg.*`/`npc.*`/`eventos.*` (25 solo-JSON) | **0 en .po** | 0 producción | **NO traducibles en runtime** (no están en .po); `eventos.historia_c*` verificadas por `test_capitulos_m74.gd`; deuda: migrar a .po o declarar huérfanas |
+
+**Hallazgos (3):**
+- **F1 — Doble catálogo, dos roles:** el JSON es maestro/validación, el `.po` es runtime. Las **25 solo-JSON** son el riesgo: una clave nueva creada solo en JSON **no se traduce en runtime**. El validador cruzado (145 comunes / 25 solo-JSON / 115 solo-.po) es el watchdog de este riesgo. Las 115 solo-.po SÍ funcionan en runtime (el runtime usa .po).
+- **F2 — Case normalizado:** `tr_key` SIEMPRE mayúsculas (el patrón `"clock"` minúscula de `w_reloj.gd` es correcto e intencional); solo `traducir_clave`/`_t` con clave literal respeta el case exacto (por eso `interact_prompt.gd` usa `"UI.INTERACTUAR"` mayúscula exacta).
+- **F3 — Duplicado huérfano:** `scripts/localizacion/localization_manager.gd` (carga JSON) sigue preloadeado por `_colector_sintaxis.gd` L541 — candidato a eliminación (hallazgo msg 183, pendiente de decisión del usuario, tabla L216).
+
+**Verificación:** `python scripts/validar_i18n_integridad.py` EXIT 0 — 170/170/170, paridad 0/0/0, cruzado 145/25/115.
+
 ## 9. Notas del Agente
 
 **Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
