@@ -1,0 +1,1 @@
+75: 	_boton_borrar = _agregar_boton(vbox, "SETTINGS.BORRAR_SLOT", func(): _pedir_confirmacion_borrado())

@@ -73,6 +73,10 @@ func _crear_ui() -> void:
 	_agregar_boton(vbox, "SETTINGS.AJUSTES", func(): _navegar_a_ajustes())
 	_boton_guardar = _agregar_boton(vbox, "SETTINGS.GUARDAR", func(): _pedir_confirmacion_guardado())
 	_boton_borrar = _agregar_boton(vbox, "SETTINGS.BORRAR_SLOT", func(): _pedir_confirmacion_borrado())
+	# M59 ítem 4: botón Guardar deshabilitado si no hay cambios (is_dirty). El
+	# refresh corre al abrir la pausa (on_layer_opened) y tras guardar.
+	_boton_guardar.disabled = true
+	_conectar_dirty_guardar()
 	_boton_borrar.add_theme_color_override("font_color", Color(0.85, 0.45, 0.35))  # rojo suave: acción destructiva
 	_agregar_boton(vbox, "SETTINGS.SALIR", func(): salir_pedido.emit())
 
@@ -109,6 +113,8 @@ func restaurar_desde_ajustes() -> void:
 ## ── UILayer virtual ──────────────────────────────────────
 
 func on_layer_opened() -> void:
+	if _boton_guardar != null:
+		_conectar_guardar_dirty()
 	if _buttons.size() > 0:
 		_buttons[0].grab_focus()
 
@@ -121,6 +127,30 @@ func focus_first() -> Control:
 	return null
 
 ## Item 1 del riel (M59/M44): Guardar con confirmación + feedback.
+## ── M59 ítem 4 (G-5.3-Flash-Agente, 2026-10-21): guardado manual solo con cambios ──
+## El botón Guardar se deshabilita cuando la sesión no registra cambios
+## (is_dirty false) y se re-habilita con cualquier evento que marque dirty.
+## Refresco: al abrir la pausa y tras cada guardado.
+
+func _conectar_guardar_dirty() -> void:
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm == null:
+		_boton_guardar.disabled = false
+		return
+	if sm.has_signal("save_completed") and not sm.save_completed.is_connected(_on_guardado_ok):
+		sm.save_completed.connect(_on_guardado_ok)
+	if sm.has_signal("save_failed") and not sm.save_failed.is_connected(_on_guardado_fail):
+		sm.save_failed.connect(_on_guardado_fail)
+	_refrescar_guardar_dirty()
+
+
+func _refrescar_guardar_dirty() -> void:
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm == null or not sm.has_method("is_dirty"):
+		return
+	_boton_guardar.disabled = not sm.is_dirty()
+
+
 ## Abre el ConfirmPopup; al aceptar, guarda por SaveManager (M59, cola real)
 ## y emite toast de feedback. Sin popup (CI/standalone), guardado directo.
 func _pedir_confirmacion_guardado() -> void:

@@ -1,0 +1,4 @@
+148: # M59 ítem 3 (G-5.3-Flash-Agente, 2026-10-21): impedir el guardado manual
+149: # durante una CARGA DE ESCENA en curso (StreamManager M63, autoload real).
+153: var stm := get_node_or_null("/root/StreamManager")
+154: if stm != null and stm.has_method("rutas_en_carga") and int(stm.rutas_en_carga()) > 0:
