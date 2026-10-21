@@ -481,3 +481,35 @@ de suite, 1 de CI real)
 3. La guarda de cobertura de patrones (`test_m111_patrones_cobertura.gd`) es un patrón REUTILIZABLE:
    cualquier módulo puede adoptarlo para que "lo que no existe" no se pruebe por inercia.
 
+### 4. Diagnostico de la causa (2026-10-21 21:20) — el fix aprobado "topes 30 frames" NO recupera el tiempo
+
+El director aprueba (msg 8) "topes 30 frames + paralelizar GdUnit4". Con sondas propias se midio que **la primera
+parte no recupera tiempo**: el costo de las 5 suites lentas NO esta en las esperas de frames sino en la **salida
+final del motor**.
+
+| Sonda (propia, `tests/_sonda*.gd`, ya borradas) | Resultado |
+|---|---|
+| boot + `quit()` SIN escena | **2.8 s** |
+| boot + `load()` + `instantiate()` + `add_child()` + `quit()` | **101.9 s** |
+| idem, pero cronometrando el script: escena montada / `remove_child` / `free()` / `quit()` | 1.3 s / 1.3 s / 1.32 s / 1.32 s → **el 100% del costo es DESPUES de `quit()`** |
+| `terreno.streaming_enabled = false` | la property **no existe** (props reales: `stream`, `process_thread_group`, `run_stream_in_editor`) |
+| `VoxelViewer.view_distance = 32` antes de salir | 96.9 s (sin efecto) |
+| quitar `VoxelTerrain` + `VoxelViewer` antes de salir | 66.7 s (sin efecto) |
+| `SaveManager.current_slot = 0` + `_blocked = true` | 62.2 s (sin efecto; el `current_slot` ya venia en -1) |
+
+**Cadena real:** al montar la escena se dispara un guardado asincrono cuyo payload incluye el **mundo voxel en
+binario** (`DataStore._guardar_voxel_binario`, `scripts/datos/data_store.gd` L589); el hilo tarda ~60 s; y al salir
+`DataStore` hace `_hilo_guardado.wait_to_finish()` (L100-104, con el comentario "Thread queda como objeto filtrado
+al salir") → **la salida del proceso se queda esperando**.
+
+**Es un bug de PRODUCTO, no solo de tests:** cerrar el juego con el mundo voxel cargado tarda ~1 minuto.
+
+**Fix propuesto (NO aplicado, falta la corrida de validacion):**
+1. Que el guardado asincrono no incluya el mundo voxel en procesos de test (o un flag `--no-save` que `DataStore`
+   respete) → libera ~60 s por suite que monta la escena (5 suites ≈ 300 s).
+2. En paralelo: paralelizar las 4 carpetas GdUnit4 (~300 s), que es una ganancia **independiente** de esta causa.
+3. Con 1+2: 897 s → ~300 s, dentro del presupuesto de 600 s.
+
+**El fix "topes 30 frames" queda documentado como无效**: los topes de espera de esas suites no son el cuello de
+botella (el teardown del motor lo es), asi que bajarlos no cambia el total. Se reporta medido en vez de
+aplicar un cambio que no recupera nada.

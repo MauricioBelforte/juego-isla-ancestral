@@ -812,3 +812,5 @@ las constantes reales de M63 (`PISO_PROGRESO` 0.02, `TOPE_PROGRESO` 0.98, `PRESU
 - [?] Cumplir tiempo total de suite <= 10 minutos [C] — LOG 2078: MEDIDO 897.0 s vs 600 s; 5 suites esperan ~60 s en headless; fix propuesto (topes headless-aware + paralelizar GdUnit4)
 
 **M112: 216/225 -> 219/225.** Los 6 [?] restantes: 3 de cobertura (sin runner headless en GdUnit4 6.2.1 — deuda de tooling), 2 de tiempo de suite (1 aqui + el item espejo), 1 de maquina limpia (CI real, dueno M118).
+
+**DIAGNOSTICO P1 (2026-10-21 21:20, Log 2086):** el costo de las 5 suites lentas de M112 NO son las esperas de frames sino la SALIDA FINAL DEL MOTOR (2.8 s sin escena vs 101.9 s con escena; el script termina en 1.3 s). Causa: el guardado asincrono incluye el mundo voxel en binario (DataStore._guardar_voxel_binario) y al salir se hace wait_to_finish() -> ~60 s. Es bug de producto (cerrar el juego con el mundo voxel cargado tarda ~1 min). Fix: no guardar el mundo voxel en tests (o flag --no-save) + paralelizar las 4 carpetas GdUnit4 -> 897 s -> ~300 s. El fix 'topes 30 frames' aprobado queda documentado como NO recuperador de tiempo.
