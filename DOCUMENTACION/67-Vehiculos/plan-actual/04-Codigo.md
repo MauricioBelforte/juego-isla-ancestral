@@ -107,3 +107,72 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[VEH]` en 
 - Al implementar: coordinar con M68 el contrato de la locomotora (si el ferrocarril existe) y con M51 la API de la superficie del agua.
 - Probar a fondo: dirigible a 60 m sobre terreno no generado (LOD), barco contra rompeolas, submarino en cuevas subacuáticas (M25).
 - Probar la cámara con Reduce Motion (M58) — el mareo es el riesgo #1 de los vehículos.
+
+## 6. Estadio real del codigo (medido 2026-10-21, Step-5-WorkBuddy)
+
+> Las secciones 1-5 documentan prototipos de diseno (2026-08-17) con rutas Unity
+> (`Assets/_Project/Vehicles/`). El codigo REAL vive en el proyecto Godot y se midio
+> en disco el 2026-10-21:
+
+| Archivo real | Ruta real | Rol |
+|---|---|---|
+| `vehicle_manager.gd` | `game/isla-ancestral/scripts/vehiculos/` | Autoload "Vehiculos" (`project.godot:81`): estado, vehiculo activo, enter/exit, dock |
+| `vehicle_preset.gd` | `game/isla-ancestral/scripts/vehiculos/` | Resource con `class_name`: tipo, fisica, capacidades, condicional |
+| `vehicle_controller.gd` | `game/isla-ancestral/scripts/vehiculos/` | RefCounted puro: fisica acotada (velocidad/giro/frenado/reversa) |
+| `vehicles.json` | `game/isla-ancestral/data/vehiculos/` | Catalogo data-driven (4 entradas; locomotora condicional) |
+| `test_vehiculos.gd` | `game/isla-ancestral/scripts/vehiculos/` | Suite headless con guardia anti-falso-verde de 3 capas |
+
+### 6.1 Presets reales (vehicles.json, medido 2026-10-21)
+
+| id | tipo | vel_max / crucero (m/s) | giro (rad/s) | frenado | altitud/profundidad max (m) | baul (slots) | reversa | condicional |
+|---|---|---|---|---|---|---|---|---|
+| barco | agua | 12 / 6 | 1.6 | 4.0 | - | 12 | si | - |
+| dirigible | aire | 15 / 8 | 1.0 | 3.0 | 60 | 8 | si | - |
+| submarino | subagua | 8 / 4 | 1.2 | 3.5 | -40 | 10 | si | - |
+| locomotora | riel | 20 / 20 | 0.0 | 6.0 | - | 16 | no | "M68" |
+
+### 6.2 API real de VehicleManager (medido 2026-10-21)
+
+- Estado: `preset_activo`, `controller`, `vehicle_id_activo`, `docked`.
+- Catalogo: `presets_count()`, `get_preset(id)`.
+- Ciclo: `enter(vehicle_id)` / `exit()` / `atracar(dock)` / `zarpar()` / `avisar(mensaje)` - todos devuelven `{ok, motivo}`.
+- Conduccion (tests/integradores): `tick_conduccion(delta, acelerar, girar, frenar)` -> `{ok, velocidad, rumbo}`.
+- Controller (RefCounted puro): `aplicar(delta, acelerar, girar, frenar)`, `desplazamiento(delta) -> Vector3`, `velocidad_crucero()`.
+- Persistencia (M59): `get_section_name()` = "vehiculos", `get_save_data()`, `restore_save_data(data)` (cozy: restaura docked y a 0).
+- Eventos (EventBus.vehicle): `vehicle_entered`, `vehicle_exited`, `vehicle_docked`, `vehicle_aviso`.
+- Logs: `[VEH-ENTER]`, `[VEH-EXIT]`, `[VEH-DOCK]`, `[M67][AVISO]`.
+
+### 6.3 Flujo de streaming (chunk_target) - estadio real
+
+- Diseno (03-Diseno.md sec. 3.2): chunk_target = vehiculo al conducir; LOD por altitud; islas cercanas antes que terreno lejano.
+- Real (iter. 1): `vehicle_controller.gd` expone `aplicar()` / `desplazamiento()` como CONTRATO para que el integrador de nodos 3D mueva el Node3D. El chunk_target real con M10/M61 y el LOD por altitud quedan para la iter. 2 (V1/V2, dueno visual).
+- Medido: `vehicle_streaming.gd`, `vehicle_cargo.gd`, `vehicle_dock.gd` y `vehicle_hud.gd` NO existen en disco (find = 0).
+
+### 6.4 Condicion de la locomotora (real, testeado)
+
+- `vehicles.json` trae la entrada `locomotora` con `"condicional": "M68"`.
+- `_cargar_catalogo()` borra la locomotora del catalogo activo si no existe el autoload `/root/Transporte` (M68). Medido: no hay autoload Transporte en project.godot.
+- Verificado en la suite de hoy: `presets_count() == 3` (locomotora omitida; M68 ausente).
+
+### 6.5 Suite (medido 2026-10-21, binario real Godot 4.7.2 headless)
+
+- `test_vehiculos.gd`: **40 checks / 0 fallos / EXIT 0** (0 SCRIPT ERROR propios; los 2 del boot son ajenos: `pause_layer.gd:79` -> `ui_root.gd:50`).
+- Guardia anti-falso-verde de 3 capas: `CHECKS_MINIMOS = 40` medido, 8 bloques con `_fin()`, `_summary()` en `call_deferred` aparte (no cuelga).
+- Fix aplicado en esta tanda: L146 tenia un `%` literal dentro del string de formato ("40% vel max") que rompia el `%.2f` (`ERROR: String formatting error: unsupported format character`). El check corria igual (error no fatal) pero el mensaje de fallo salia roto. Escapado a `40%%`; verificado pos-fix: el error desaparece y la suite sigue 40/0.
+
+## 7. Notas del Agente (Step-5-WorkBuddy, 2026-10-21)
+
+**Modelo:** Step-5-WorkBuddy
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-21
+**Estado:** tanda de documentacion sobre la iter. 1 (nucleo V0); 0 implementaciones nuevas.
+
+### Lo que hice
+- Medi el universo real en disco (codigo, catalogo, suite con binario real) y documente el estadio real en la seccion 6 (las secciones 1-5 son prototipos de diseno de 2026-08-17 con rutas Unity).
+- Corregi el `%` literal de `test_vehiculos.gd:146` (trampa de formateo; detalles en 6.5).
+- Cierre con cita real los items de documentacion/diseno del checklist (W, F.4, M.1) que ya tenian su definicion en disco.
+
+### Lo que NO esta resuelto (honestidad)
+- Los 106 `[ ]` restantes son verbos de implementacion (navegar, volar, sumergir, colisiones, HUD, camara, audio, mejoras, personalizacion) con duenos externos (M51/M50/M32/M49/M52/M43/M53/M14/M59/M57/M12/M70). Sin corrida no se flippean.
+- No hay nodos 3D de vehiculos en el repo: la iter. 2 (V1/V2) sigue pendiente con dueno visual.
+- No toque `achievement_service.gd` (M72): otro agente lo esta editando en el worktree compartido (mtime 15:13 de hoy, +31/-14 sin commitear) y quedo con Python-ismos `False`/`True` que rompen el autoload al boot. Reportado al director.

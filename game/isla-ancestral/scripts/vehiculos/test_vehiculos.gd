@@ -143,7 +143,7 @@ func _test_reversa() -> void:
 	for i in range(100):
 		_vm.tick_conduccion(0.1, false, 0, false)
 	_check(float(ctrl.velocidad) < 0.0, "barco tiene reversa: %.2f" % float(ctrl.velocidad))
-	_check(absf(float(ctrl.velocidad)) <= 12.0 * 0.4 + 0.01, "reversa clamp a 40% vel max: %.2f" % float(ctrl.velocidad))
+	_check(absf(float(ctrl.velocidad)) <= 12.0 * 0.4 + 0.01, "reversa clamp a 40%% vel max: %.2f" % float(ctrl.velocidad))
 	_vm.exit()
 	# Dirigible también reversa; locomotora no existe (condicional)
 	_vm.enter("dirigible")

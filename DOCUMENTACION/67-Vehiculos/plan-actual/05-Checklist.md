@@ -19,7 +19,7 @@
 
 # 05-Checklist.md — Módulo 67: Vehículos (130 ítems)
 
-**Estado:** 130/130 completados. [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 25/131 completados (medido 2026-10-21 por prefijo de linea; la cabecera original decia 130/130, falsa — familia M79-L7). [S]=Simple [M]=Medio [C]=Complejo.
 
 ## A. VehicleManager (autoload)
 
@@ -66,7 +66,7 @@
 - [x] Plantilla de locomotora SOLO si M68 exige ferrocarril [M] — iter. 1: preset con condicional="M68"; _cargar_catalogo la omite si autoload Transporte no existe (testeado)
 - [ ] Velocidad sobre riel fija (20 m/s) y sin giro libre [M]
 - [ ] Vagón de carga (16 slots, M14) [M]
-- [ ] Documentar el estado condicional en 01-Requerimientos.md [S]
+- [x] Documentar el estado condicional en 01-Requerimientos.md [S] — Step-5 2026-10-21: 01-Requerimientos.md §3.1 (L26) + RF4 (L69) documentan la condicion; mecanismo real (JSON "condicional": "M68" + omision si no existe autoload Transporte) en 04-Codigo.md §6.4
 - [x] Definir contrato de integración con M68 [M] — iter. 1: si M68 registra autoload "Transporte", la locomotora entra al catálogo automáticamente (condicional en JSON)
 
 ## G. Física y Control (M57)
@@ -119,7 +119,7 @@
 
 ## M. Mejoras
 
-- [ ] Definir mejoras por vehículo (velocidad, giro, faroles, baúl) [M]
+- [x] Definir mejoras por vehículo (velocidad, giro, faroles, baúl) [M] — Step-5 2026-10-21: definicion en 03-Diseno.md §3.1 columna Mejoras (barco vel/giro/faroles/baul 20; dirigible vel/altitud 90/faroles; submarino vel/luces M49/baul 16; locomotora vel/vagon). Implementacion (L123-125) sigue [ ]: vehicle_preset.gd NO tiene campo de mejoras (medido en disco)
 - [ ] Mejoras de velocidad/giro (niveles) [M]
 - [ ] Mejoras de faroles (M49) y baúl [M]
 - [ ] Comprar en tienda (M39) o artesanales (M16) [M]
@@ -200,10 +200,10 @@
 ## W. Documentación
 
 - [x] Documentar la API de VehicleManager [M]
-- [ ] Documentar los presets en 04-Codigo.md [M]
-- [ ] Documentar el flujo de streaming (chunk_target) [M]
-- [ ] Documentar la condición de la locomotora [S]
-- [ ] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
+- [x] Documentar los presets en 04-Codigo.md [M] — Step-5 2026-10-21: 04-Codigo.md §6.1 con los valores REALES de vehicles.json medidos en disco (barco 12/6 m/s, dirigible 15/8 alt 60, submarino 8/4 prof -40, locomotora 20/20 condicional M68)
+- [x] Documentar el flujo de streaming (chunk_target) [M] — Step-5 2026-10-21: diseno en 03-Diseno.md §3.2 + estadio real en 04-Codigo.md §6.3 (contrato desplazamiento() del controller; chunk_target real con M10/M61 pendiente iter. 2)
+- [x] Documentar la condición de la locomotora [S] — Step-5 2026-10-21: 04-Codigo.md §6.4 (condicional en JSON + omision testeada: presets_count()==3 sin M68) + 01-Requerimientos.md §3.1
+- [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S] — Step-5 2026-10-21: 04-Codigo.md §7 Notas del Agente (lo hecho / lo NO resuelto)
 
 ## X. Integraciones Finales
 
@@ -278,7 +278,7 @@
 - El controller ya expone rumbo (rad) y velocidad (m/s con signo) — el HUD M53 puede leerlos directo vía Vehiculos.controller.
 - Para aguas poco profundas: consultar M51/mesh de agua y emitir Vehiculos.avisar("...") (la señal ya existe).
 - Al integrar M57: el enter/exit actual es programático; conectar a InteractionManager (M70) con área de proximidad.
-**Totales:** 131 ítems · Completados: 19 · Pendientes: 112 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 25 · Pendientes: 106 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 112 [ ] / 0 [?].
