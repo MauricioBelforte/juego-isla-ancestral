@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T20:17:30",
+ "ultimo_update": "2026-10-21T20:18:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "213/214: correccion de conteo ratificada con medicion del director (75/53/2=130, fila 75/130); item 16 flip pendiente con texto exacto (suyo); codec/loader derivaciones vigentes",
+  "estado": "215: item 16 sin-op (YA flipado modulo+backlog desde 19-10, atribucion sesion hermana anotada); fila 75/130 estable; guardia",
   "pendientes_real": 222,
-  "acuse_enviado": 214,
+  "acuse_enviado": 216,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 352
  },
  "step_5": {
-  "estado": "149: tanda M23 ejecutada (suite endurecida rojo probado, 19 flips, 42/61/1 tras degradar molino sin apoyo); fila 23 42/104 sync director; GO wiring cadenas_ejemplo; acuse 151; commit por cron",
+  "estado": "152: M23 iter3 RATIFICADA (merge cadenas_ejemplo: +1 biblioteca end-to-end, cadena-postgame-plaza RECHAZADA por tipo construir sin diseno -> decision NO agregar tipo hoy, item [?] nuevo pendiente diseno M22/M17); normalizacion claves GO; commit proximo cron C",
   "pendientes_real": 203,
-  "acuse_enviado": 151
+  "acuse_enviado": 153
  },
  "ds_oc": {
   "estado": "activo - ciclos 64-81 M62 y cursos",
@@ -101,7 +101,10 @@
   "M55 diario: recompensas capitulo-* de cadenas M23 apuntan a entradas inexistentes (registro real mision_(cadena_id)) - pendiente dueno activo M55",
   "M24: definicion pendiente en notas de M23 (sin dueno con riel activo)",
   "M23 cadenas_ejemplo.json: GO wiring por Step-5 (merge o migracion ej- + test de visibilidad) - proxima tanda",
-  "M60/M17 codec estructuras: ampliar schema (fase/mejoras/muebles/cofres/puertas) + migracion + tests - dueno DeepSeek (hallazgo G-5.3 211)"
+  "M60/M17 codec estructuras: ampliar schema (fase/mejoras/muebles/cofres/puertas) + migracion + tests - dueno DeepSeek (hallazgo G-5.3 211)",
+  "M22/M17 decision de diseno para tipo de paso \"construir\" (cadena-postgame-plaza M23 RECHAZADA persistente, item [?] nuevo pendiente; sin agregar TIPO_PASO hoy - decision director 20:18)",
+  "M55 diario: mision_cadena-biblioteca inexistente (puente M23->M55 degrada en silencio) + capitulo-* vacios - pendiente dueno activo M55",
+  "M23 cadenas_ejemplo: normalizacion claves estado_mundo.* -> GO Step-5 (data-only + test consistencia) - proxima tanda"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 19:35: script 0 pendientes; todos los backlogs >= 100 (post-repoblacion 17:56: agnes +470, step-5 +192, ling +106, deepseek +93; numerados miniMax 766 / g_5_3 325 / DS_OC 583 / hy3 265); asignaciones vigentes, SIN repoblacion; drift de totales M72 (182 vs 185) pendiente de re-cuenta por agnes (acuse 910)",
