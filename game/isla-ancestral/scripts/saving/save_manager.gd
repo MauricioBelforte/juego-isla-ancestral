@@ -316,6 +316,7 @@ func slot_metadata(slot: int) -> Dictionary:
 		"day": dia,
 		"version": int(payload.get("schema_version", 0)),
 		"last_saved": String(payload.get("meta", {}).get("last_saved", "")),
+		"profile_id": String(payload.get("meta", {}).get("profile_id", "")),  # M59 ítem 8: expone el sello
 	}
 
 ## Devuelve si un slot tiene save y backups (para la UI de recuperación).
