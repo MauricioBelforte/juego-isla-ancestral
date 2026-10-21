@@ -807,3 +807,48 @@ msgstr "Maximum upgrade reached."
 
 msgid "SETTINGS.DURABILIDAD_NIVEL"
 msgstr "Durability at next level: "
+
+# M87: capitulos M149 (14 claves aspiradas del catalogo decoy
+# data/localizacion/strings_*.json, 2026-10-21, item 46).
+# Consumidor real: scripts/eventos/data/capitulos/*.tres (nombre_clave/descripcion_clave).
+msgid "eventos.historia_c1_nombre"
+msgstr "The Ashes to Come"
+
+msgid "eventos.historia_c1_desc"
+msgstr "The mural of the burned library reveals the first twist."
+
+msgid "eventos.historia_c2_nombre"
+msgstr "The Bridge of Memories"
+
+msgid "eventos.historia_c2_desc"
+msgstr "The temple tool opens the bridge to Mar island."
+
+msgid "eventos.historia_c3_nombre"
+msgstr "The Drowned Garden"
+
+msgid "eventos.historia_c3_desc"
+msgstr "The blind lighthouse guards the entrance to the garden waters."
+
+msgid "eventos.historia_c4_nombre"
+msgstr "The Valley of Winds"
+
+msgid "eventos.historia_c4_desc"
+msgstr "The Temple of the Breeze demands the seven seals to open."
+
+msgid "eventos.historia_c5_nombre"
+msgstr "The Eternal Night"
+
+msgid "eventos.historia_c5_desc"
+msgstr "The temple eclipse lights the Breeze theme."
+
+msgid "eventos.historia_c6_nombre"
+msgstr "The Heart of the World"
+
+msgid "eventos.historia_c6_desc"
+msgstr "The volcanic geode confirms who hid the Seal."
+
+msgid "eventos.historia_c7_nombre"
+msgstr "The Seal Chamber"
+
+msgid "eventos.historia_c7_desc"
+msgstr "The chamber beneath the Temple of the Breeze awaits the choice."

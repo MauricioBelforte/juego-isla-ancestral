@@ -70,6 +70,17 @@ const RE_CLAVE_VALIDA := "^[A-Za-z0-9_.|]+$"
 const RE_CLAVE_ARG1 := "open_confirm\\s*\\(\\s*\"([A-Z][A-Z0-9_]*(?:\\.[A-Z0-9_]+)+)\""
 const RE_CLAVE_ARG2 := "open_confirm\\s*\\(\\s*\"[^\"]*\"\\s*,\\s*\"([A-Z][A-Z0-9_]*(?:\\.[A-Z0-9_]+)+)\""
 
+## Claves i18n declaradas en RECURSOS de datos (`*.tres`: `nombre_clave`,
+## `descripcion_clave`, `nombre_clave_i18n`...). El auditor solo miraba texto
+## `.gd`, asi que una clave que vive en un `.tres` y falta del catalogo era
+## INVISIBLE: el barrido de codigo no la ve (no hay llamada `_t()`) y el catalogo
+## no la tiene. Medido 2026-10-21: 44 claves declaradas en 25 `.tres` de
+## `scripts/`, 30 ausentes de `es.po`/`en.po` sin que ninguna suite lo viera.
+##
+## `(?m)` es OBLIGATORIO: sin el flag, `^` ancla solo al inicio del archivo y el
+## barrido devuelve 0 EN SILENCIO (trampa documentada, Log 1968).
+const RE_CLAVE_RECURSO := "(?m)^\\s*[A-Za-z0-9_]*clave[A-Za-z0-9_]*\\s*=\\s*&?\"([^\"]+)\""
+
 ## Prefijos de claves que solo existen en tests negativos (fallback / clave literal).
 const PREFIJOS_TEST: Array[String] = ["NOPE.", "TEST."]
 
@@ -102,6 +113,9 @@ static func _nuevo_informe(ruta_catalogo: String) -> Dictionary:
 		"claves_sin_uso": [], "claves_dinamicas": [], "dinamicas": {},
 		"origenes": {}, "errores": [], "usadas": {}, "claves": {},
 		"descartadas": [],
+		# Recursos de datos (*.tres): claves declaradas fuera del codigo.
+		"recursos": 0, "claves_recurso": {}, "origenes_recurso": {},
+		"claves_recurso_sin_catalogo": [],
 	}
 	var cat: Dictionary = ValidadorPO.validar_archivo(ruta_catalogo)
 	if not (cat["errores"] as Array).is_empty():
@@ -136,6 +150,22 @@ static func _finalizar(inf: Dictionary) -> Dictionary:
 	inf["claves_sin_uso"].sort()
 	inf["claves_dinamicas"].sort()
 	(inf["descartadas"] as Array).sort()
+	# Claves declaradas en RECURSOS (*.tres) que el catalogo no tiene. NO entran
+	# en `ok`: el arreglo es de CONTENIDO (traducir/aspirar), no de codigo, y
+	# convertirlo en rojo dejaria el CI en rojo por deuda de otro modulo. Se
+	# reportan para que dejen de ser invisibles (ver RE_CLAVE_RECURSO).
+	var recurso: Dictionary = inf["claves_recurso"]
+	var faltan_rec: Array = []
+	for k in recurso.keys():
+		if claves.has(k) or _es_test(k) or _cubierta(k, dinamicas):
+			continue
+		faltan_rec.append(k)
+	faltan_rec.sort()
+	inf["claves_recurso_sin_catalogo"] = faltan_rec
+	# Total declarado: sin esto el informe publica la deuda pero no el universo,
+	# y "30 de 30" no se distingue de "30 de 400".
+	inf["claves_recurso_total"] = recurso.size()
+	inf.erase("claves_recurso")
 	inf["dinamicas"] = dinamicas
 	inf["total_usadas"] = usadas.size()
 	inf["total_claves"] = claves.size()
@@ -161,10 +191,22 @@ static func formatear_informe(inf: Dictionary) -> String:
 	var l: Array[String] = []
 	l.append("── AuditorClaves: %d archivo(s), %d clave(s) usadas, %d en catálogo" % [
 		inf["archivos"], inf["total_usadas"], inf["total_claves"]])
-	_volcar(l, "USADAS EN CÓDIGO PERO AUSENTES DEL CATÁLOGO", inf["usadas_sin_clave"], inf["origenes"])
-	_volcar(l, "AUSENTES PERO SOLO USADAS POR TESTS (probes)", inf["usadas_sin_clave_solo_tests"], inf["origenes"])
+	# `get` con default: formatear_informe es publico y acepta informes parciales
+	# (el suite le pasa Dictionary armados a mano). Indexar `inf["origenes"]`
+	# revienta con un dict sin esa clave y aborta el formateo entero.
+	var org: Dictionary = inf.get("origenes", {})
+	_volcar(l, "USADAS EN CÓDIGO PERO AUSENTES DEL CATÁLOGO", inf["usadas_sin_clave"], org)
+	_volcar(l, "AUSENTES PERO SOLO USADAS POR TESTS (probes)", inf["usadas_sin_clave_solo_tests"], org)
 	_volcar(l, "EN EL CATÁLOGO SIN USO LITERAL NI DINÁMICO", inf["claves_sin_uso"], {})
 	_volcar(l, "EN EL CATÁLOGO, USADAS POR PREFIJO DINÁMICO", inf["claves_dinamicas"], {})
+	# Recursos: `get` con default para aceptar informes parciales (mismo motivo
+	# que `descartadas`). Se informa SIEMPRE el conteo, aunque sea 0: un cero
+	# medido es distinto de un cero por no haber mirado.
+	var rec: Array = inf.get("claves_recurso_sin_catalogo", [])
+	l.append("RECURSOS (*.tres) ESCANEADOS: %d — claves declaradas: %d — sin entrada en el catálogo: %d" % [
+		int(inf.get("recursos", 0)), int(inf.get("claves_recurso_total", 0)), rec.size()])
+	if not rec.is_empty():
+		_volcar(l, "DECLARADAS EN *.tres PERO AUSENTES DEL CATÁLOGO", rec, inf.get("origenes_recurso", {}))
 	if not (inf["dinamicas"] as Array).is_empty():
 		l.append("Prefijos dinámicos detectados (%d):" % (inf["dinamicas"] as Array).size())
 		for d in inf["dinamicas"]:
@@ -190,12 +232,33 @@ static func _escanear(dir: String, inf: Dictionary) -> void:
 		(inf["errores"] as Array).append("directorio inaccesible: " + dir)
 		return
 	for f in d.get_files():
+		if f.ends_with(".tres"):
+			_escanear_recurso(FileAccess.get_file_as_string(dir.path_join(f)), f, inf)
+			continue
 		if not f.ends_with(".gd"):
 			continue
 		inf["archivos"] += 1
 		_escanear_texto(FileAccess.get_file_as_string(dir.path_join(f)), f, inf)
 	for sub in d.get_directories():
 		_escanear(dir.path_join(sub), inf)
+
+
+## Claves i18n declaradas en un recurso de datos (`*.tres`). No pasan por
+## `_registrar()` porque NO son "usadas en codigo": son datos que el codigo
+## consumira despues. Mezclarlas con `usadas` falsearia el veredicto.
+static func _escanear_recurso(t: String, archivo: String, inf: Dictionary) -> void:
+	inf["recursos"] += 1
+	for m in _matches(t, RE_CLAVE_RECURSO):
+		var clave: String = m.get_string(1)
+		if not _clave_valida(clave):
+			continue
+		(inf["claves_recurso"] as Dictionary)[clave] = true
+		var org: Dictionary = inf["origenes_recurso"]
+		if not org.has(clave):
+			org[clave] = []
+		var lista: Array = org[clave]
+		if not lista.has(archivo):
+			lista.append(archivo)
 
 
 static func _escanear_texto(t: String, archivo: String, inf: Dictionary) -> void:

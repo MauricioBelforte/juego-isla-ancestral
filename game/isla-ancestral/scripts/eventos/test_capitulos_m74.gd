@@ -72,17 +72,25 @@ func _run() -> void:
 			if cap_n >= 1 and cap_n <= 7 and not caps_historia.has(cap_n):
 				caps_historia.append(cap_n)
 		_check("historia tiene 7 capítulos únicos (1-7)", caps_historia.size() == 7)
-	# Las claves i18n existen en strings_es.json
-	var strings: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/localizacion/strings_es.json"))
-	if typeof(strings) == TYPE_DICTIONARY:
-		var cadenas: Dictionary = strings.get("cadenas", {})
-		var claves_ok := true
+	# Las claves i18n de los capítulos viven en el CATÁLOGO RUNTIME (locales/*.po).
+	# Hasta 2026-10-21 esta aserción miraba `data/localizacion/strings_es.json`,
+	# que el autoload `Localization` NO lee (carga `res://locales/*.po`): el test
+	# pasaba VERDE con las 14 claves ausentes del catálogo real. Falso verde
+	# medido y corregido en el ítem 46 de M87 (Log 2065).
+	var claves_ok := true
+	var faltantes: Array[String] = []
+	for locale in ["es", "en"]:
+		var catalogo: Dictionary = ValidadorPO.validar_archivo("res://locales/%s.po" % locale)
+		var presentes: Array = catalogo["claves"]
 		for i in range(1, 8):
-			if not cadenas.has("eventos.historia_c%d_nombre" % i):
-				claves_ok = false
-			if not cadenas.has("eventos.historia_c%d_desc" % i):
-				claves_ok = false
-		_check("14 claves i18n de capítulos en strings_es.json", claves_ok)
+			for sufijo in ["nombre", "desc"]:
+				var clave := "eventos.historia_c%d_%s" % [i, sufijo]
+				if not presentes.has(clave):
+					claves_ok = false
+					faltantes.append("%s:%s" % [locale, clave])
+	_check("14 claves i18n de capítulos en el catálogo runtime (es.po/en.po)", claves_ok)
+	if not faltantes.is_empty():
+		print("  claves faltantes: %s" % str(faltantes))
 	# Regresión: los 15 eventos base siguen cargados
 	var base_ids: Array[String] = ["festival_verano", "festival_luces", "feria_colmena",
 		"concurso_minero", "torneo_pesca", "ceremonia_templos", "niebla_faro", "visita_sorpresa"]

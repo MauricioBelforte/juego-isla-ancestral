@@ -811,3 +811,48 @@ msgstr "Mejora máxima alcanzada."
 
 msgid "SETTINGS.DURABILIDAD_NIVEL"
 msgstr "Durabilidad en el siguiente nivel: "
+
+# M87: capitulos M149 (14 claves aspiradas del catalogo decoy
+# data/localizacion/strings_*.json, 2026-10-21, item 46).
+# Consumidor real: scripts/eventos/data/capitulos/*.tres (nombre_clave/descripcion_clave).
+msgid "eventos.historia_c1_nombre"
+msgstr "Las Cenizas Futuras"
+
+msgid "eventos.historia_c1_desc"
+msgstr "El mural de la biblioteca quemada revela el primer giro."
+
+msgid "eventos.historia_c2_nombre"
+msgstr "El Puente de las Memorias"
+
+msgid "eventos.historia_c2_desc"
+msgstr "La herramienta del templo abre el puente hacia la isla Mar."
+
+msgid "eventos.historia_c3_nombre"
+msgstr "El Jardín Ahogado"
+
+msgid "eventos.historia_c3_desc"
+msgstr "El faro ciego guarda la entrada al agua del jardín."
+
+msgid "eventos.historia_c4_nombre"
+msgstr "El Valle de los Vientos"
+
+msgid "eventos.historia_c4_desc"
+msgstr "El Templo de la Brisa exige los siete sellos para abrirse."
+
+msgid "eventos.historia_c5_nombre"
+msgstr "La Noche Eterna"
+
+msgid "eventos.historia_c5_desc"
+msgstr "El eclipse del Templo enciende el tema de la Brisa."
+
+msgid "eventos.historia_c6_nombre"
+msgstr "El Corazón del Mundo"
+
+msgid "eventos.historia_c6_desc"
+msgstr "La geoda volcánica confirma quién escondió el Sello."
+
+msgid "eventos.historia_c7_nombre"
+msgstr "La Cámara del Sello"
+
+msgid "eventos.historia_c7_desc"
+msgstr "La Cámara bajo el Templo de la Brisa espera la elección."
