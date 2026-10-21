@@ -211,6 +211,21 @@ label.text = _t("SETTINGS.CONTROLES") % nombre
 - Las claves **no se crean sin consumidor** (evitar huérfanas del catálogo — el caso `SETTINGS.DESCARTAR*` del 04-Codigo L428): se aplican en el **mismo commit** que el consumo de `menus_layer.gd`, con la regla ES+EN+PT (§2.4.2 regla 5) y los tests M58 actualizados al nuevo formato.
 - El preset es un ID técnico: el mapeo a nombre amigable es por clave (no string-literal), coherente con el estándar "un término, una clave" (§2.4.2 regla 2).
 
+#### 2.4.5 Logs y errores del sistema — spans estándar (TANDA 20, 2026-10-21 — msg 198, tarea 73)
+
+**Estándar vigente (auditado):** los mensajes de sistema (`push_error`/`push_warning`) son **de consola (desarrollador), NO jugador-visible** → **no requieren i18n** (coherente con §2.4.3: texto de herramientas de dev). Sí aplican: (a) **idioma español** y (b) **formato `[MNN] mensaje`** con prefijo de módulo.
+
+**Auditoría (388 warning + 109 error en producción, sin tests/qa/Obsoletos):**
+- **Estándar cumplido (~98%):** `[MNN] Mensaje en español` — ej: `[M60] Guardado slot %d falló`, `[M87] Clave sin traducción: %s`, `[M42] Bioma desconocido: %s`.
+- **Errores jugador-visibles:** van por clave i18n, no por push_error — `SETTINGS.SAVE_CORRUPTO/_RECUPERADO/_DISCO_LLENO` y `SETTINGS.BORRAR_*` (JSON + .po ES/EN, tanda 14) son las claves de fallback de guardado; `data_store.gd`/`writer_atomico.gd` emiten el detalle técnico a consola y la UI muestra la clave.
+- **Inconsistencias menores de formato (4 tags fuera de `[MNN]`, del dueño de cada módulo):**
+  - `animacion/animation_service.gd` L118/L125 (M48): tag `ANIM-MISSING:` en inglés.
+  - `saving/save_manager.gd` L246 (M60/M11): tag `[SAVE]` en inglés.
+  - `clima/weather_service.gd` L48 (M31): tag `[Weather]` en inglés.
+  - `dialogos/dialogue_manager.gd` L127 (M21): tag `[VAL-DGV]` en inglés.
+  - (nombres propios aceptables: `Bootstrap:` de `core/bootstrap.gd`, `asset_preview:` de M108).
+- **Deuda documentada (dueños M48/M60/M31/M21):** renombrar los 4 tags al formato `[MNN]` del estándar. No es bloqueante (consola de dev); no ejecutado por M87 (módulos ajenos).
+
 ### 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).
