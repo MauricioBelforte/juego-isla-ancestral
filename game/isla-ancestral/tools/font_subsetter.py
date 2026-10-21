@@ -491,7 +491,11 @@ def codepoints_de_po(dirs):
                 else:
                     campo = None
                     continue
-                if cabecera:
+                if cabecera or campo != "str":
+                    # Solo `msgstr`/`msgstr[n]` es texto que se dibuja. Los
+                    # `msgid` de este proyecto son CLAVES (`SETTINGS.CRAFT_OK`,
+                    # `CLOCK.ESTACIONES.0`): contarlas metia 11 ASCII que nadie
+                    # ve (K, X, _, 0-9) y rompia la comparacion con el auditor.
                     continue
                 valor = valor.strip()
                 if valor.startswith('"') and valor.endswith('"') and len(valor) >= 2:

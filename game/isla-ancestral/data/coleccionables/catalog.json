@@ -120,6 +120,26 @@
     "puntos": 30
   },
   {
+    "categoria": "conchas",
+    "id_local": "004",
+    "display_name": "Concha de Marea",
+    "rareza": 1,
+    "fuente": "playa",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 10
+  },
+  {
+    "categoria": "conchas",
+    "id_local": "005",
+    "display_name": "Concha del Festival",
+    "rareza": 2,
+    "fuente": "playa_evento",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 40
+  },
+  {
     "categoria": "reliquias",
     "id_local": "001",
     "display_name": "Mascara de Ancestro",
@@ -127,7 +147,8 @@
     "fuente": "ruinas",
     "recompensa_item": "gema_ancestral",
     "recompensa_cantidad": 1,
-    "puntos": 200
+    "puntos": 200,
+    "descripcion": "Mascara ceramica de los primeros guardianes de la raiz; su bocal guarda la memoria de la cosecha perdida."
   },
   {
     "categoria": "reliquias",
@@ -137,7 +158,8 @@
     "fuente": "ruinas",
     "recompensa_item": "moneda_ancestral",
     "recompensa_cantidad": 300,
-    "puntos": 80
+    "puntos": 80,
+    "descripcion": "Vasija que alimentaba a los templos en el equinoccio; al romperla se suelta su polvo dorado."
   },
   {
     "categoria": "reliquias",
@@ -147,6 +169,73 @@
     "fuente": "templo",
     "recompensa_item": "gema_ancestral",
     "recompensa_cantidad": 1,
-    "puntos": 200
+    "puntos": 200,
+    "descripcion": "Idolo de basalto del templo central; marca el eje de la luz que abrio los primeros sellos."
+  },
+  {
+    "categoria": "reliquias",
+    "id_local": "004",
+    "display_name": "Campana de Templo",
+    "rareza": 3,
+    "fuente": "templo",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 2,
+    "puntos": 300,
+    "descripcion": "Campana que convocaba a la isla en las noches de luna nueva; su eco ancla el ritual del faro."
+  },
+  {
+    "categoria": "reliquias",
+    "id_local": "005",
+    "display_name": "Sello de Ancestro",
+    "rareza": 3,
+    "fuente": "ruinas",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 2,
+    "puntos": 300,
+    "descripcion": "Sello de obsidiana que sellaba el pacto original; excavarlo despierta el recuerdo del primer alba."
+  },
+  {
+    "categoria": "fragmentos",
+    "id_local": "001",
+    "display_name": "Fragmento de Vasija",
+    "rareza": 1,
+    "fuente": "excavar",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 15,
+    "descripcion": "Trocito de la Vasija Ancestral; al reunir 3 fragmentos, se restaura."
+  },
+  {
+    "categoria": "fragmentos",
+    "id_local": "002",
+    "display_name": "Fragmento de Idolo",
+    "rareza": 2,
+    "fuente": "excavar",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 80,
+    "puntos": 30,
+    "descripcion": "Base del Idolo de Piedra; las grietas conservan el calor del ritual."
+  },
+  {
+    "categoria": "fragmentos",
+    "id_local": "003",
+    "display_name": "Fragmento de Campana",
+    "rareza": 2,
+    "fuente": "excavar",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 80,
+    "puntos": 30,
+    "descripcion": "Trozo de bronce de la Campana de Templo; suena solo bajo la lluvia."
+  },
+  {
+    "categoria": "fragmentos",
+    "id_local": "004",
+    "display_name": "Fragmento de Sello",
+    "rareza": 3,
+    "fuente": "excavar",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 60,
+    "descripcion": "Astilla del Sello de Ancestro; excavar despacio para no borrar su runa."
   }
 ]
