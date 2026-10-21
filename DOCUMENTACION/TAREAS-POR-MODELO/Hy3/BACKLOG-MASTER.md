@@ -58,7 +58,7 @@
 17. M74-Eventos (227/285): QA del scheduler — 8 [M]
 18. M71-Progresión (168/213): QA de lotes XP — 8 [M]
 19. M66-Anti-Softlock (110/117): QA del sistema (7 pendientes) — 8 [M]
-20. M72-Logros (77/185): QA de lo hecho — 8 [M]
+20. M72-Logros (77/185): QA de lo hecho — 8 [M] — [->] Hy3 (Log 2061, 2026-10-21: falso verde en test_logros.gd; SCRIPT ERROR :294 aborta _test_guardado_carga_rf9_rn8, 6 aserciones RF9/RN8 persistencia no ejecutadas; M72 NO certificado Sec.21.8, Con dudas 77/185; fix del test pendiente del dueno step-5-kilocode)
 21. M87-Localización (131/136): QA de claves y de la deuda i18n de Ling (112 claves) — 8 [M]
 22. M97-Steam (195/195): QA de refresco — 6 [S]
 23. M98-Trailer (102/102): QA de refresco — 4 [S]
