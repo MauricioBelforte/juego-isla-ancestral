@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T20:05:30",
+ "ultimo_update": "2026-10-21T20:17:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,13 +17,13 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "211: hallazgo codec M60 ratificado y derivado a DeepSeek (items 20/21/22 honestos); M59 78/130 (fila por agente)",
+  "estado": "213/214: correccion de conteo ratificada con medicion del director (75/53/2=130, fila 75/130); item 16 flip pendiente con texto exacto (suyo); codec/loader derivaciones vigentes",
   "pendientes_real": 222,
-  "acuse_enviado": 212,
+  "acuse_enviado": 214,
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "rieles acumulados: saneo 11-BUGS (79) + CI b + loader EMPTY_SLOT-vs-PROFILE_MISMATCH + codec estructuras M60 (schema fase/mejoras/muebles/cofres/puertas + migracion + tests)",
+  "estado": "rieles backend acumulados: saneo 11-BUGS (79) + CI b + loader EMPTY_SLOT-vs-PROFILE_MISMATCH + codec estructuras M60 (schema + migracion + tests)",
   "pendientes_real": 170,
   "acuse_enviado": 352
  },
@@ -68,7 +68,8 @@
   "aritmetica de Totales puede fallar dos veces seguidas: normalizar SIEMPRE al re-medido en el mismo mensaje",
   "Totales de modulo declarados de memoria (89/185 vs 182 medido): re-contar SIEMPRE el total por prefijo al cerrar tanda",
   "slot_metadata() que omite campos del dict puede simular NO-persistencia: diagnosticar leyendo el archivo directo (G-5.3 t46)",
-  "loader que devuelve EMPTY_SLOT donde corresponde PROFILE_MISMATCH: discrepancia de cadencia lector (derivado DeepSeek)"
+  "loader que devuelve EMPTY_SLOT donde corresponde PROFILE_MISMATCH: discrepancia de cadencia lector (derivado DeepSeek)",
+  "DIRECTOR ratifico 78/130 citando el 211 del agente sin medir disco: el \"pos-sync\" del agente NO es evidencia - SIEMPRE medicion propia antes de ratificar contadores (corregido en 214, caso fila 59 75/130)"
  ],
  "minimax_m3_1_flash": {
   "estado": "007 validado: M112 3 suites cerradas (219/225) + cronometro runner 897s; APROBADO fix headless-aware + QA cruzado M90 encargado (008) + nuevo frente M17; crafting RED derivado a G-5.3",
