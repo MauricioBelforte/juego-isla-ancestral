@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T19:02:30",
+ "ultimo_update": "2026-10-21T19:27:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "203: tanda 42 ratificada 204 (item 4 + fix mismatch); item 8 derivado DeepSeek; M59 73/130 fila synceada",
+  "estado": "207: tanda 44 (4 flips M59 providers M17/M20/M71/M74 verificados en disco por director 3/3 sample); pool saneado con 208; barrido 8",
   "pendientes_real": 222,
-  "acuse_enviado": 204,
+  "acuse_enviado": 208,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -63,7 +63,9 @@
   "Pythonismos bool (True/False) en GDScript: 3 SCRIPT ERROR de parse al boot + autoload no instanciase - detectar con grep (?<![A-Za-z_])(True|False) antes de commitear codigo ajeno",
   "Step-5 expansion de pool operativa: al colisionar (7ma familia), expande el pool a 100 verificado - validar offsets del gate",
   "pool re-expansión de agente puede dejar duplicados usados (906/907 en pool con archivos existentes): sanear SIEMPRE vs max(hilos) al detectar",
-  "aviso de QA de Hy3 llego solo via canal de agnes: la doble red por lag需要进行 aviso 1-linea en canal propio (recordado en 307)"
+  "aviso de QA de Hy3 llego solo via canal de agnes: la doble red por lag需要进行 aviso 1-linea en canal propio (recordado en 307)",
+  "item duplicado en modulo con textos distintos: flippear SOLO el texto exacto del [ ] vivo (patron G-5.3 t44)",
+  "aritmetica de Totales puede fallar dos veces seguidas: normalizar SIEMPRE al re-medido en el mismo mensaje"
  ],
  "minimax_m3_1_flash": {
   "estado": "007 validado: M112 3 suites cerradas (219/225) + cronometro runner 897s; APROBADO fix headless-aware + QA cruzado M90 encargado (008) + nuevo frente M17; crafting RED derivado a G-5.3",
@@ -94,7 +96,7 @@
   "quality.yml: cablear test_metricas_bugs.py + --check con baseline DEUDA_CONOCIDA (DeepSeek, tras saneamiento 11-BUGS)"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 18:55: script 0 pendientes; backlogs todos >= 100; asignaciones vigentes sin cambios: agnes (fix parse urgente + rieles), step-5 (M23), deepseek (saneamiento 11-BUGS + CI b, 352), g_5_3 (tanda 42 + QA profile_id tras fix), minimax (M112 fix + QA M90 + M17), Hy3 (QA M159 306); SIN repoblacion",
+ "crons_vuelta_d": "CRON D 19:15: unica pendiente G-5.3 205 respondida (206); fila 59 verificaciones confirman que el AGENTE hace sync directo de su fila (no duplicarlo); backlogs >= 100 -> sin repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
