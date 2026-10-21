@@ -1,0 +1,1 @@
+310: 16. - [x] [59] Guardar equipamiento, hotbar y objetos colocados (M17) [M] · [x] T22-M59 (G-5.3): equipment/hotbar/buildings en el 
