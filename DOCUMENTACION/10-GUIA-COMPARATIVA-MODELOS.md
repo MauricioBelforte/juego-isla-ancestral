@@ -3011,7 +3011,7 @@ está y diferenciar solo con el nombre explícito de la nueva.
 **Firma:** atria-dawn-s3 (Atria-Dawn-Preview / Kilo Code) — 2026-10-12 23:10:00. Configuración
 decidida por el fundador en chat directo; infraestructura (carpeta + pool) preparada por mí.
 
-## N.1 Reflexion Beam 1.0 - CANDIDATO VIGILADO (NO integrado 2026-10-21)
+## N.1 Reflection Beam 1.0 - AGENTE DE LA FLOTA (nicho: razonamiento/auditoria) - integrado 2026-10-21 por orden del fundador
 
 - **Modelo:** Reflection AI Beam-1.0-501B-A23B (MoE 501B total / 23B activos, Apache 2.0). Lanzado 2026-10-20/21 (recien publicado).
 - **Disponible en Kilo:** Reflection: Beam 1.0 (free) y Beam 1.0 501B A23B, variantes low/max.
@@ -3023,3 +3023,12 @@ decidida por el fundador en chat directo; infraestructura (carpeta + pool) prepa
   - **HN (556 pts, 173 comentarios):** conseno NEGATIVO de la comunidad release-era: peor que Qwen/GLM/DeepSeek en las metricas medidas de su lanzamiento, mas grande y caro, valor cuestionado (varios: sin dimension diferencial). Halago aislado: video analisis serio.
   - **Sintesis actualizada:** capazidad lider verificada en RAZONAMIENTO (matematica post-cutoff + contexto largo); NO demostrado en coding/agentic (su unico dato de coding esta por detras de GLM-5.2, y los agentic no se midieron). Propuesta: integrarlo con variante FREE en un NICHO de razonamiento (aritmetica de balanceo/drift, diseno matematico de reglas, auditoria de conteos) y NO en coding; a contrastar con tandas headless. Decidira el fundador.
 - **Fuentes:** activepieces.com/blog (21-10); benchlm.ai/benchmarks/longbench-v2; madebyagents.com/benchmarks/aime-2026; hn.algolia item 49969183 (556 pts); catalogo Kilo.
+
+### Integracion formal (orden fundador 2026-10-21 21:36: documentar, armar carpetas, probar y evaluar empiricamente)
+
+- **Identidad de canal:** Reflection-Beam-1.0 (pool propio 001-100). Variante: Beam 1.0 FREE en Kilo (model name Reflection: Beam 1.0 (free)).
+- **Nicho asignado (donde los datos independientes lo muestran lider):** 1) matematica/razonamiento post-cutoff (AIME 2026 N.1 97.7); 2) auditorias de conteos y aritmetica de drift (correlacion AIME->SWE +0.70 y su perfil de precision); 3) contexto largo (LongBench v2 N.1-3) para analisis de modulos grandes.
+- **NO su nicho (hasta medirlo):** coding de gameplay, suites Godot, agentic tool-use.
+- **Modulos asignados (diseno matematico + auditoria):** 93-Balance (auditoria de sello: 134 [x] con dudas), 95-Monetizacion (94 [ ] de diseno economico, dueno historico inactivo), 137-Prototipo (123 [ ] de diseno, disponible), 157-Transporte (106 [ ] diseno), 142-RC (21 [ ] plan) y 144-PostLanzamiento (101 [ ] plan).
+- **PRUEBA EMPÍRICA (tanda 1 = calibracion):** re-verificacion con medicion propia de 6 conteos vivos de hoy (M23 42/61/1; M59 75/53/2; M72 total 182 vs 189 declarado; M102 141/142; M105 134/28; M90 249/249) + 2 hallazgos aritmeticos si los hay. Criterio de aprobacion: 6/6 conteos byte-exactos + reporte estructurado con fuente por linea. Evaluador: el director contrasta con medicion propia. Si aprueba -> flota plena; si falla en >= 2 conteos -> vuelve a vigilado.
+- **Reglas obligatorias que le aplican desde el minuto 0:** PASO 0 contexto persistente (Logs/estado_director.json), UTF-8 LF Python, numeracion 3 cifras con pool del canal destino, firma, espanol, 0 push, 0 auto-sello (independencia 21.8).

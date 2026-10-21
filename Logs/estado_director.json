@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T21:07:30",
+ "ultimo_update": "2026-10-21T21:52:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "215: item 16 sin-op (YA flipado modulo+backlog desde 19-10, atribucion sesion hermana anotada); fila 75/130 estable; guardia",
+  "estado": "217: derivacion crafting RED cerrada como drift de referencia (archivo inexistente, 3 tests reales verdes); CRONOMETRO-ACTIVO.md con PASO 0 adoptado; acuse 218",
   "pendientes_real": 222,
-  "acuse_enviado": 216,
+  "acuse_enviado": 218,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -69,12 +69,13 @@
   "Totales de modulo declarados de memoria (89/185 vs 182 medido): re-contar SIEMPRE el total por prefijo al cerrar tanda",
   "slot_metadata() que omite campos del dict puede simular NO-persistencia: diagnosticar leyendo el archivo directo (G-5.3 t46)",
   "loader que devuelve EMPTY_SLOT donde corresponde PROFILE_MISMATCH: discrepancia de cadencia lector (derivado DeepSeek)",
-  "DIRECTOR ratifico 78/130 citando el 211 del agente sin medir disco: el \"pos-sync\" del agente NO es evidencia - SIEMPRE medicion propia antes de ratificar contadores (corregido en 214, caso fila 59 75/130)"
+  "DIRECTOR ratifico 78/130 citando el 211 del agente sin medir disco: el \"pos-sync\" del agente NO es evidencia - SIEMPRE medicion propia antes de ratificar contadores (corregido en 214, caso fila 59 75/130)",
+  "reporte de RED de un archivo que no existe en el tree = referencia fantasma (worktree local sin commit o path inexistente) - pedir path exacto antes de derivar un bug"
  ],
  "minimax_m3_1_flash": {
-  "estado": "009: ACEPTO P1/P2/P3 con reglas del proyecto; 010 ratificado con aclaracion critica (rojos post-corte = HALLAZGOS que se derivan, no regresiones); P1 en curso",
+  "estado": "011: pedido path exacto del rojo crafting (no-bloqueante para P1/P2/P3 aprobados y en curso P1)",
   "pendientes_real": 685,
-  "acuse_enviado": 10,
+  "acuse_enviado": 11,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -93,7 +94,6 @@
   "M105 senales sin productor -> duenos: M14 item_added, M15 recurso, M16/M17 casa, M21 dialog_finished+npc_first_interaction, M24 puzzle, M37 museo, M74 festival, M38 proyecto, M68 island_loaded+travel_started, M84 purchase_done, M92 tutorial",
   "M159 b2 QA cruzado -> Hy3 (306 enviado); sello del director tras veredicto",
   "M59 item3 wiring: IslandOps holder de produccion ausente -> dueno M27/M28/M60",
-  "M16/M14 crafting: test_crafting_inventory.gd 3 checks ROJO reproducible (MiniMax 007 -> G-5.3 198): bug real o drift de test, decidir con run",
   "M90 QA cruzado -> MiniMax (008); sello del director tras veredicto",
   "CONVENCIONES-CODIGO.md (fila 111) -> Step-5 (142): doc consolidada de convenciones vigentes",
   "M112 items de tiempo -> MiniMax: fix headless-aware 5 suites lentas + corrida de validacion (897s -> budget 600s)",
@@ -104,10 +104,11 @@
   "M60/M17 codec estructuras: ampliar schema (fase/mejoras/muebles/cofres/puertas) + migracion + tests - dueno DeepSeek (hallazgo G-5.3 211)",
   "M22/M17 decision de diseno para tipo de paso \"construir\" (cadena-postgame-plaza M23 RECHAZADA persistente, item [?] nuevo pendiente; sin agregar TIPO_PASO hoy - decision director 20:18)",
   "M55 diario: mision_cadena-biblioteca inexistente (puente M23->M55 degrada en silencio) + capitulo-* vacios - pendiente dueno activo M55",
-  "M23 cadenas_ejemplo: normalizacion claves estado_mundo.* -> GO Step-5 (data-only + test consistencia) - proxima tanda"
+  "M23 cadenas_ejemplo: normalizacion claves estado_mundo.* -> GO Step-5 (data-only + test consistencia) - proxima tanda",
+  "M16/M14 crafting RED (MiniMax 007): derivacion cerrada como drift de referencia (G-5.3 217, run + glob=0); esperar respuesta de MiniMax en 011 para archivar definitivo"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 20:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios (agnes M72-t6 + recontar total, step-5 wiring cadenas_ejemplo + normalizacion claves GO, deepseek 4 rieles backend, g_5_3 guardia/barrido, minimax prolifico M112-fix+QA-M90+M17, hy3 Bloque C #53/#54); SIN repoblacion",
+ "crons_vuelta_d": "CRON D 21:35: script 0 pendientes; backlogs >= 100 todos; lectura pendiente del fundador: decision sobre integrar Reflection Beam 1.0 variante FREE en nicho de razonamiento (ficha N.1 de la guia comparativa actualizada con BenchLM LongBench N.1-3 y AIME 2026 N.1 97.7); SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
@@ -117,5 +118,17 @@
   "estado": "M159 b2 SELLADO 2026-10-21: autor agnes (732/900/901/906), QA cruzado Hy3 (907, OK medido), sello director (fila 159 GLOBAL)"
  },
  "crons_vuelta_bd": "CRON B/D 19:50-20:05: Step-5 149 (M23 RATIFICADA; fila 23 42/104 con molino degradado; GO wiring cadenas_ejemplo) acuse 151; G-5.3 211 (codec M60) acuse 212 derivado a DeepSeek",
- "crons_vuelta_ac": "CRON A/C 21:00-21:07: script al dia; MiniMax 009 acuses 010; preservacion: 009/010/estado + CHECKLIST diff chequeado"
+ "crons_vuelta_ac": "CRON A 21:20 sin pendientes; CRON C 21:25 gate 1 correccion; MiniMax 009 ratificado con 010 (plan P1/P2/P3 + aclaracion de rojos honestos post-corte); G-5.3 217 deriva crafting cerrada (218) + pedido 011 a MiniMax",
+ "regla_crons_fundador": "DIRECTIVA FUNDADOR 2026-10-21 21:28: cada cron hace su tarea principal; si en la misma vuelta detecta otras cosas utiles (pendientes de responder, derivaciones, preservaciones extra), TAMBIEN las hace perfectamente - combinacion permitida, etiquetandola en el reporte (ej: C+B+D combinados)",
+ "flota_agentes": [
+  "Reflection-Beam-1.0"
+ ],
+ "reflection_beam_1_0": {
+  "rol": "AGENTE - nicho razonamiento/auditoria (AIME N.1 97.7, LongBench v2 N.1-3)",
+  "canal": "Mensajes entre modelos/Reflection-Beam-1.0 (pool 001-100, apertura 001 del director)",
+  "backlog": "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-MASTER.md (T1 calibracion + T2 auditoria 93-Balance + 425 items de modulos 95/137/157/142/144 = 432 tareas)",
+  "prueba_empirica": "tanda 1 calibracion: 6 conteos hoy (M23/M59/M72/M102/M105/M90) byte-exactos o discrepancia documentada; aprobado = flota plena; 2+ fallas = vuelve a vigilado",
+  "fase": "LISTO PARA PRUEBA (esperando primera vuelta del agente en su canal)",
+  "guia": "N.1 promovido de vigilado a agente activo"
+ }
 }
