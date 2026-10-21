@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T22:32:30",
+ "ultimo_update": "2026-10-21T22:40:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -81,12 +81,14 @@
   "desglose [ ]/[?] puede diferir entre agente y director con TOTAL correcto (M16 178/12/13 vs 178/10/15): re-alinear con medicion por prefijo",
   "plataformas re-crean pools con duplicados (agnes 912, G-5.3 220-221, Beam 001-003): sanear SIEMPRE contra max(hilos)",
   "flips documentales deben citar LINEA TEXTUAL (copia literal), no parafisis: los precios 34.99/69.99 citados como D2/D3 no constaban (caso Beam T5, 2 degradados)",
-  "velocidad alta de un agente nuevo NO es sospecha por si sola si cada tanda lleva muestreo del director: trazabilidad por tanda (sustentacion %) convierte la velocidad en throughput auditado (caso Beam: doble tanda escalada)"
+  "velocidad alta de un agente nuevo NO es sospecha por si sola si cada tanda lleva muestreo del director: trazabilidad por tanda (sustentacion %) convierte la velocidad en throughput auditado (caso Beam: doble tanda escalada)",
+  "hipotesis de causa sin sonda directa puede equivocar el FIX derivado (BUG-141: hilo de guardado era deinit GDExtension voxel) - corregir el DERIVADO cuando el diagnostico evoluciona, antes de que el dueno gaste un ciclo",
+  "update-line en 11-BUGS/11-subs: anclar SIEMPRE al prefijo de la fila del bug (BUG-NN |) para no tocar Evidence: de otras entradas"
  ],
  "minimax_m3_1_flash": {
-  "estado": "012: path exacto de la suite roja (tests/integration/test_crafting_inventory.gd, falso 0 de G-5.3) + BUG-141 diagnosticado (quit bloqueado 60 s por hilo voxel); 013: P1 re-aprobado con guard headless quirurgica en data_store + paralelizacion; fix producto para DeepSeek; autoincidencia sonda-bug119 resuelta",
+  "estado": "014: CORRECCION material aceptada - causa BUG-141 = deinit GDExtension voxel (no el hilo de guardado); BUG-141 re-anotado; plan pool+paralelizacion APROBADO sin guards (015); P1 en implementacion",
   "pendientes_real": 685,
-  "acuse_enviado": 13,
+  "acuse_enviado": 15,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -122,7 +124,7 @@
   "M93/M34: decision de diseno sobre margen de los 7 peces raros (>0.70 hasta 0.769, fishing.json) - documentar excepcion (<=0.77) o normalizar a <=0.70; validate_balance.gd no cubre fishing.json (hallazgo Beam T2, verificado por director)"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 22:15: script 0 pendientes; backlogs >= 100 todos (Beam 432+T3 cerrada); propuesta economia Beam en decision del fundador; SIN repoblacion",
+ "crons_vuelta_d": "CRON D 22:35: script 0 pendientes; backlogs >= 100 todos; Beam ESCALADO a doble tanda (013) con regla de freno; propuesta economia en decision del fundador; SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
@@ -145,8 +147,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "ESCALADO por orden implícito del fundador (observo ritmo rapido): doble tanda por vuelta con muestreo estricto por tanda; regla de freno <90% sustentacion x2; trazabilidad 95% sobre 44 flips + 6 conteos; propuesta economia en evaluacion del fundador",
-  "acuse_enviado": 13
+  "estado": "T6 DOBLE TANDA ratificada 015: (A) re-flip verificado con cita textual 03-Diseno (fila 95 56/113); (B) farming H1/H2 verificados por director - P2 precios ADOPTADA (implementa Beam), P1 yield condicional al precio",
+  "acuse_enviado": 15
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -160,5 +162,6 @@
  "crons_vuelta_bd7": "CRON B/D 22:15-22:21: 3 tandas ratificadas (agnes M20 64/148 + colgados unified; G-5.3 auto-correcion dedupe cierra crafting causa raiz; Beam T4 13 [S] documentales M95 32/113) + fila 95 sync + 3 saneos de pools",
  "crons_vuelta_a": "CRON A 22:20: Hy3 311 respondido (312) - #53 ratificado",
  "crons_vuelta_c": "CRON C 22:25: gate 4 correcciones; Hy3 backlog+Log 2087+limpieza sondas preservados; Beam T5 muestreo estricto 20/24 (2 degradados, fila 95 54/113)",
- "crons_vuelta_extra": "EXTRA del fundador 22:30: escalado de Beam a doble tanda con regla de freno por muestreo (013)"
+ "crons_vuelta_extra": "EXTRA del fundador 22:30: escalado de Beam a doble tanda con regla de freno por muestreo (013)",
+ "crons_vuelta_bd9": "CRON D 22:35-22:40: MiniMax 014 correccion BUG-141 aceptada (015, plan pool sin guards aprobado); Beam 014 T6 ratificada (015: re-flip 03-Diseno verificado + farming P2 adoptada, P1 condicional)"
 }
