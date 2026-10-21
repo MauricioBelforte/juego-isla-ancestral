@@ -399,3 +399,83 @@ del logger. El gate `console_echo` (BUG-067) ya existe y es correcto.
 cierra ningún `[?]`** porque los 6 que quedan son **dependencias externas reales** (RF18→M122;
 `bug_*.log`→M102; búsqueda/scroll/coloreado→M110; criterio de aceptación nº4→M102), no huecos de M103.
 No se fuerza ningún cierre.
+
+## RF18 - Integracion con Crash Reporting (M122) - 2026-10-21 (Log 2072)
+
+**Estado:** implementado y verificado. Cierra el item `RF18` del checklist, que estaba
+`[?]` con la nota *"integracion con M122 NO implementada: el modulo consumidor no existe
+todavia"*.
+
+**La premisa estaba vencida (medido).** M122 existe desde el 2026-09-01: 12 scripts en
+`scripts/crash/`, autoload `CrashReporter` en `project.godot:106` y `crash_logging.gd` con
+la integracion DISENADA. Lo que faltaba no era el consumidor: era que **nadie llamaba** a
+`Logger.flush()` ni exportaba el buffer al detectarse un crash. El helper de M122 solo lo
+usaba su propia suite (`test_crash_m122_offline.gd` bloque E) -> **codigo muerto en
+produccion** (la familia de la "arista muerta": existe, esta testeada, nadie la invoca).
+
+**Diseno implementado (03-Diseno.md seccion 8), los 4 pasos:**
+
+| Paso del diseno | Donde vive |
+|---|---|
+| 1. `Logger.flush()` al detectar el crash | `crash_log_bridge.exportar()` lo llama ANTES de leer |
+| 2. exportar el buffer a `crash_{timestamp}.log` | `exportar()` escribe en `user://logs/` (junto a `game.log`) |
+| 3. adjuntarlo al reporte de crash | enganche sobre la senal publica `crash_reportado` de M122 |
+| 4. metadata (version, plataforma, specs, 1000 lineas) | `metadata()` + `encabezado()` |
+
+**Direccion de la dependencia: M103 -> M122.** M103 es el proveedor del log; M122 el
+consumidor. Por eso el puente vive en `scripts/logging/` y **no se toco ningun archivo de
+`scripts/crash/`**: el enganche es la senal publica que M122 ya emitia.
+
+**Archivos:**
+
+- `scripts/logging/crash_log_bridge.gd` (NUEVO, ~190 lineas, `RefCounted` sin
+  `class_name`, se usa por `preload`):
+  - `nombre_archivo(ts)` / `ruta_crash(ts, dir)` - `:` -> `-` (valido en Windows).
+  - `metadata(dump, n)` - version (`application/config/version`), plataforma, CPU,
+    nucleos, sesion, motivo, lineas, timestamp.
+  - `encabezado(meta)` - 5 lineas **ASCII puro** (un crash log se lee con herramientas
+    que no siempre asumen UTF-8).
+  - `exportar(dump, logger, dir)` - **fail-closed**: sin logger, sin
+    `export_last_lines` o con buffer vacio devuelve `""` y **no escribe nada**.
+  - `conectar(emisor, logger, dir)` / `esta_conectado` / `desconectar` - idempotente:
+    dos llamadas dejan **una** conexion.
+  - `ultima_ruta`, `volcados` - observabilidad para la suite y el QA.
+- `scripts/logging/logger.gd` (+34 lineas): `const CrashLogBridge = preload(...)`,
+  `_crash_bridge`/`_crash_conectado`, `call_deferred("_conectar_crash_bridge")` en
+  `_ready()` (el autoload `CrashReporter` se declara DESPUES de `GameLogger` en
+  `project.godot`, asi que en `_ready()` todavia no existe), y los getters
+  `crash_bridge_conectado()` / `ultimo_crash_log()`.
+- `scripts/logging/test_crash_bridge_m103.gd` (NUEVO, 5 bloques A-E).
+
+**Medido (no estimado):**
+
+- Suite nueva: **49 checks / 0 fallos / EXIT 0 x3**, `0 SCRIPT ERROR`, piso
+  `CHECKS_MINIMOS = 49` **medido en verde**.
+- **Guardián probado EN ROJO con 4 inyecciones** (todas EXIT 1):
+  1. aborto de RUNTIME al inicio del bloque D (via intermedio sin tipo) ->
+     `bloques que NO se ejecutaron: ["D","E"]` + `solo 22 checks (minimo 49)`, **sin colgarse**;
+  2. piso 49 -> 99 -> `solo 49 checks (minimo 99)`;
+  3. `_fin("E")` -> `pass` -> `bloques que NO se ejecutaron: ["E"]`;
+  4. fallo FUNCIONAL en el puente (no escribe las lineas del buffer) -> `[FALLO] B4
+     vuelca exactamente 1000 lineas (medido: 0)`.
+  Los 4 archivos se restauraron byte-exacto (`cmp` OK).
+- **Cableado de PRODUCCION verificado con una sonda de arranque** (efimera, borrada):
+  `GameLogger=true CrashReporter=true`, `conectado=true`,
+  `senal=true conexiones=1`. No es una promesa: es la senal con una conexion viva en un
+  boot real del proyecto.
+- **Regresiones:** `test_logger` 14/0, `test_logging_m103` 25/0,
+  `test_logging_m103_iter1` 131/0, `test_m103_frame_budget` 14/0 (M103: 184 checks);
+  `test_crash_m122` 13/0 y `test_crash_m122_offline` 168/0 (M122: 181 checks).
+  **365 checks de regresion, 0 fallos, EXIT 0, 0 SCRIPT ERROR.**
+
+**Lo que NO cierra (honesto):**
+
+- El criterio de aceptacion 4 ("M102 adjunta logs a los issues") **sigue abierto**:
+  `crash_bug_tracking.formatear_cuerpo()` de M122 arma stack + metadata + contexto y
+  **no cita el crash log** (0 menciones). Las dos mitades existen y no estan unidas;
+  unirlas es de M122.
+- `bug_{timestamp}.log` no existe en ningun modulo (0 apariciones): M102 publica por
+  GitHub Issues, no por archivo local.
+- Busqueda de texto / coloreado por nivel en la consola: **0** en
+  `debug_console.gd` (M110). El scroll si existe, a nivel widget
+  (`scroll_following = true`, L24).

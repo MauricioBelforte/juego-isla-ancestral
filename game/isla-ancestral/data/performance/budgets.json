@@ -68,6 +68,110 @@
 		"remesh_en_background": true,
 		"nota": "Norma de destruccion de bloques M61 (RF11). gc_en_bucle_interaccion false = RF11 literal (sin GC en el bucle del jugador); el techo de remesh por bloque ya vive en normas.remesh_bloque_ms_max (2.0 ms) y no se duplica aqui. pooling_buffers_mesh = pool de meshes reutilizado que M63 ya declara en su LRU (§4: 'pool de meshes reutilizado (M61)'). remesh_en_background = remesh fuera del hilo principal (dueno M07). Agregado por minimax-m3-1-flash (2026-10-21, Log 2071)."
 	},
+	"npcs": {
+		"burbujas_distancia_m": [30, 60, 100],
+		"tick_interval_por_burbuja_s": [0.5, 1.0, 5.0],
+		"max_con_ia_completa": 60,
+		"pooling_instancias": true,
+		"lod_niveles": 3,
+		"nota": "Norma de NPC M61 (RF12) + culling/LOD de NPC. burbujas_distancia_m [30, 60, 100] = BUBBLE_FULL / BUBBLE_MEDIUM / BUBBLE_LIGHT de M64 (scripts/ia_npc/npc_manager.gd L27-29); tick_interval_por_burbuja_s [0.5, 1.0, 5.0] = TICK_FULL/MEDIUM/LIGHT_INTERVAL de M64 (L41-43); max_con_ia_completa 60 = MAX_AGMPS_FULL de M64 (L30, cuyo comentario dice 'presupuesto M61'). NOTA DE ALCANCE: el tope de 20 NPCs activos visibles vive en normas.npcs_activos_max (RF12) y es OTRO metrico (render) — el runtime debe poder cubrirlo (60 >= 20), y eso verifica la suite. pooling_instancias: el pool por familias es de M62 (GlobalPool) y el pool de meshes reutilizado de M63. Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"particulas": {
+		"pooling_emisores": true,
+		"max_emisores_pool": 32,
+		"max_particulas_pool": 1200,
+		"precalentamiento_emisores": 8,
+		"gpu_particles_larga_vida": true,
+		"max_emisores_por_evento": 1,
+		"nota": "Norma de particulas M61 (RF13). max_emisores_pool 32 = MAX_EMISORES_DEF y max_particulas_pool 1200 = MAX_PARTICULAS_DEF de M52 (scripts/particles/vfx_pool.gd L37-38); precalentamiento_emisores 8 = el precalentamiento del pool que M52 ya documenta (T-029). gpu_particles_larga_vida: M52 construye emisores GPUParticles3D (vfx_factory.nuevo_emisor) — el fuego/lava (vida larga) debe usar GPUParticles3D y no CPUParticles. max_emisores_por_evento 1 = el registro _por_evento de M52 (VfxDirector, un VFX por tipo de evento). El tope por camara (500) vive en limites.particulas_simultaneas_max. Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"sombras": {
+		"dinamicas_solo_personajes_y_clave": true,
+		"max_luces_con_sombra": 6,
+		"max_luces_dinamicas": 20,
+		"cascadas_por_preset": [1, 2, 4, 4],
+		"res_sombra_por_preset": [512, 1024, 2048, 4096],
+		"rango_cascada_limitado": true,
+		"costo_sombra_max_fraccion_render": 0.5,
+		"estaticas_sin_sombra_dinamica": true,
+		"nota": "Norma de sombras M61 (RF14). max_luces_con_sombra 6 = MAX_CONT_SOMBRA y max_luces_dinamicas 20 = MAX_DINAMICAS de M49 (scripts/world/light_pool.gd L21-23) — de ahi sale 'sombras dinamicas solo para personajes y objetos clave' (el pool descarta por distancia: RADIO_DESCARTE 30 m). cascadas_por_preset [1,2,4,4] y res_sombra_por_preset [512,1024,2048,4096] = M90 SOMBRAS (const cascadas / const res). costo_sombra_max_fraccion_render 0.5 = derivacion explicita: las sombras no pueden pasar la mitad del presupuesto de render de 5 ms (categorias.render_ms) = 2.5 ms. estaticas_sin_sombra_dinamica = los estaticos (terreno, rocas) NO proyectan sombra dinamica: la recibe del camino horneado/lightmap (norma iluminacion.lightmap_baked_interiores) — evita que cada chunk dispare una sombra dinamica. Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"iluminacion": {
+		"gi_suave_sin_bounce_caro": true,
+		"luz_horaria": "1 directional + sky",
+		"max_luces_realtime": 20,
+		"volumetrico_densidad_por_preset": {"baja": 0.0, "medio": 0.0, "alto": 0.1, "ultra": 0.2},
+		"lightmap_baked_interiores": true,
+		"nota": "Norma de iluminacion M61 (RF15). max_luces_realtime 20 = MAX_DINAMICAS de M49 (pool de luces dinamicas): las luces real-time se minimizan. volumetrico_densidad_por_preset = M90 VOLUMETRICO (const densidad) — GI suave sin rebote caro: el volumetrico solo se enciende en alta/ultra y con densidad baja. luz_horaria '1 directional + sky': el ciclo dia/noche usa una direccional (scripts/world/day_night_cycle.gd L15) + la luz del cielo. lightmap_baked_interiores: los interiores se hornean (M17 es el dueno del interior). OJO: M90 usa las claves 'medio'/'alto' en VOLUMETRICO (inconsistencia interna de M90, ajena a M61). Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"agua": {
+		"plano_unico": true,
+		"plano_lado_m": 4096,
+		"normales_animadas_en_shader": true,
+		"reflejos_solo_superficie": true,
+		"probes_reflejos_max": 2,
+		"transparencia_ordenada": true,
+		"verts_por_chunk_max": 2000,
+		"fases_onda": 3,
+		"nota": "Norma de agua M61 (RF16). plano_unico + plano_lado_m 4096 = el oceano es UN solo PlaneMesh de 4096x4096 (scripts/main_island.gd _crear_oceano L200-205). verts_por_chunk_max 2000 = VERTS_PER_CHUNK_MAX, probes_reflejos_max 2 = REFLECTION_PROBES_MAX y fases_onda 3 = WAVE_PHASES de M51 (scripts/world/validate_water.gd L13-16); reflejos_solo_superficie se sigue de que las probes son 2 y de que el overdraw esta topado en 1.5 (gpu.overdraw_max, mismo techo que M51). transparencia_ordenada: el techo de overdraw 1.5 exige orden de transparencia. HALLAZGO 2026-10-21: el material actual del oceano es un StandardMaterial3D plano (albedo 0.08/0.35/0.62, roughness 0.5, sin shader): 'normales_animadas_en_shader' es NORMA pendiente de implementacion en M47/M51 (duenos del shader), no un hecho del runtime. Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"vegetacion": {
+		"gpu_instancing_obligatorio": true,
+		"viento_en_vertex_shader": true,
+		"culling_por_viento_occlusivo": true,
+		"multiplicador_por_preset": {"baja": 0.2, "media": 0.45, "alta": 0.8, "ultra": 1.0},
+		"densidad_max_por_bioma": 30,
+		"instancias_por_chunk_max": 124,
+		"nota": "Norma de vegetacion M61 (RF17). multiplicador_por_preset = M90 VEGETACION (const multiplicador por calidad: 0.2/0.45/0.8/1.0). densidad_max_por_bioma 30 = la mayor densidad de data/vegetacion/vegetacion_config.json (cercanias=30; pradera 25, bosque 22, ribera 15, playa 12, montana 10, humedal 10) e instancias_por_chunk_max 124 = la SUMA de las densidades de los 7 biomas (peor caso: un chunk con un spawn de cada bioma). gpu_instancing_obligatorio / viento_en_vertex_shader / culling_por_viento_occlusivo son REQUISITOS que define M61; a hoy NO hay codigo de instancing ni de viento en M50 (scripts/vegetacion/ solo tiene plan/spawner/manager sin multimesh ni shader de viento) — la implementacion es de M50/M47. Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"culling": {
+		"usar_frustum_del_engine": true,
+		"por_chunks": true,
+		"por_distancia": true,
+		"de_particulas": true,
+		"nota": "Norma de culling M61 (RF19/RF20). usar_frustum_del_engine: Godot 4 hace frustum culling por defecto y M90 lo declara (CULLING.frustum = true) — la norma es no duplicarlo. por_distancia = M90 CULLING.por_distancia. por_chunks: M63 ya libera chunks por LRU con MAX_CHUNKS_DEFAULT 4096 (chunks.chunks_activos_max) y marca envejecido a los 2 frames (chunks.frames_envejecido). de_particulas: M52 recicla el emisor mas antiguo cuando se pasa el presupuesto de particulas (VfxPool, MOTIVO_PARTICULAS). Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"occlusion": {
+		"por_celdas_de_chunks": true,
+		"solo_en_cuevas_y_templos": true,
+		"sin_occlusion_global_en_terreno_abierto": true,
+		"coste_gpu_queries_acotado": true,
+		"nota": "Norma de occlusion M61 (RF20). por_celdas_de_chunks: la granularidad de la occlusion es la celda del chunk (no el chunk entero). solo_en_cuevas_y_templos: en terreno abierto la occlusion global se descarta (sin_occlusion_global_en_terreno_abierto = true) porque el terreno abierto no la gana; solo aplica en interiores (M25 templos, M24 cuevas). coste_gpu_queries_acotado: las GPU queries entran en el presupuesto de render de 5 ms (categorias.render_ms) — la capacidad real la implementan M07/M25. Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"lod": {
+		"impostor_lejano": true,
+		"radio_impostor_m": 2700.0,
+		"paso_impostor_m": 64.0,
+		"distancia_lod_objeto_m": 160.0,
+		"niveles_lod": 4,
+		"escalonado_por_distancia": true,
+		"nota": "Norma de LOD M61 (RF21). impostor_lejano + radio_impostor_m 2700 = RADIO_CUBIERTO y paso_impostor_m 64 = PASO del impostor de horizonte (scripts/world/terreno_horizonte.gd L21-25) — UN SOLO impostor para todo el horizonte. distancia_lod_objeto_m 160 = M90 LOD.distancia y niveles_lod 4 = M90 LOD.niveles (LOD por OBJETO, distinto del LOD de terreno de main_island). escalonado_por_distancia: el paso entre niveles no puede producir pop (normas.lod_transicion_sin_pop_m = 2). OJO: RF21 nombra 3 niveles para malla voxel/vegetacion y M90 usa 4 para el LOD por objeto — alcances distintos, no es contradiccion (lo verifica la suite por separado). Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"batching": {
+		"estaticos_por_bioma": true,
+		"max_materiales_por_batch": 32,
+		"ui_por_atlas": true,
+		"nota": "Norma de batching M61 (RF22). estaticos_por_bioma: los estaticos se batchean por bioma (el terreno voxel ya es por chunks: M07). max_materiales_por_batch 32 = derivacion explicita: con 400 draw calls por escena (gpu.draw_calls_escena_objetivo) y 32 materiales por batch quedan <= 13 batches por escena, compatible con el presupuesto de render de 5 ms. ui_por_atlas: la UI se batchea por atlas (M46/M53: 5 atlas de 2048x2048, ui_atlas_textura en el bloque memoria). Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"instancing": {
+		"peces": true,
+		"vegetacion": true,
+		"rocas_y_fragmentos": true,
+		"particulas_larga_vida": true,
+		"nota": "Norma de instancing M61 (RF23). La instancing por GPU es obligatoria en: peces (M34, bancos instanciados), vegetacion (M50), rocas y fragmentos (M08) y particulas de larga vida. Es un REQUISITO que define M61; a hoy no hay codigo de instancing en esos modulos (implementacion de los duenos), la norma deja el contrato y la suite lo puede contrastar cuando exista. Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"pooling": {
+		"particulas": true,
+		"fauna_y_peces": true,
+		"efectos_de_herramientas": true,
+		"buffers_de_remesh": true,
+		"nota": "Norma de pooling M61 (RF24). particulas: M52 ya tiene VfxPool (emisores GPUParticles3D reutilizables, precalentamiento de 8). fauna_y_peces: el pool global por familias es de M62 (GlobalPool). efectos_de_herramientas: los VFX de herramienta se toman del pool de particulas, no se crean. buffers_de_remesh: reutilizar buffers de mesh en el remesh (mismo requisito que destruccion.pooling_buffers_mesh, que se mantiene como la fuente de ese valor). Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
+	"allocations": {
+		"reuso_de_arrays_y_variants": true,
+		"gc_en_pausas_seguras": true,
+		"nota": "Norma de allocations M61 (RF25/RF26). reuso_de_arrays_y_variants: reutilizar buffers/arrays en vez de reasignarlos en el camino caliente (la asignacion por bloque del ruido ya se elimino en el fix RF25 de atria, Log 1755: island_generator._has_ore). gc_en_pausas_seguras: el GC solo en transiciones (M63 ya tiene el mecanismo de pausa de la cola de carga, _cargas_pausadas, iter. 2 Log 603: mundo congelado / menus / pantallas modales no consumen presupuesto). Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+	},
 	"normas": {
 		"vsync": true,
 		"fps_objetivo": 60,

@@ -72,10 +72,12 @@ func _cargar_y_validar_tabla() -> void:
 	_validar_memoria(data)
 	_validar_objetivo_por_preset(data)
 	_validar_paquete_datos()
-	# iter. minimax-m3-1-flash (Log 2069): carga (RF9) + chunks (RF10) + destruccion (RF11)
+	# iter. minimax-m3-1-flash (Log 2071): carga (RF9) + chunks (RF10) + destruccion (RF11)
 	_validar_carga(data)
 	_validar_chunks(data)
 	_validar_destruccion(data)
+	# iter. minimax-m3-1-flash (Log 2073): tecnicas (RF12..RF26) — 13 bloques de norma
+	_validar_tecnicas(data)
 
 func _validar_medicion(data: Dictionary, medicion: Dictionary) -> bool:
 	var cats: Dictionary = data.get("categorias", {})
@@ -385,7 +387,7 @@ func _validar_paquete_datos() -> void:
 	])
 
 
-## iter. minimax-m3-1-flash (Log 2069): dimension CARGA (RF9). Tolera su ausencia.
+## iter. minimax-m3-1-flash (Log 2071): dimension CARGA (RF9). Tolera su ausencia.
 func _validar_carga(data: Dictionary) -> void:
 	if not data.has("carga"):
 		return
@@ -422,7 +424,7 @@ func _validar_carga(data: Dictionary) -> void:
 	])
 
 
-## iter. minimax-m3-1-flash (Log 2069): dimension CHUNKS (RF10). Tolera su ausencia.
+## iter. minimax-m3-1-flash (Log 2071): dimension CHUNKS (RF10). Tolera su ausencia.
 func _validar_chunks(data: Dictionary) -> void:
 	if not data.has("chunks"):
 		return
@@ -449,7 +451,7 @@ func _validar_chunks(data: Dictionary) -> void:
 	])
 
 
-## iter. minimax-m3-1-flash (Log 2069): dimension DESTRUCCION (RF11). Tolera su ausencia.
+## iter. minimax-m3-1-flash (Log 2071): dimension DESTRUCCION (RF11). Tolera su ausencia.
 func _validar_destruccion(data: Dictionary) -> void:
 	if not data.has("destruccion"):
 		return
@@ -471,3 +473,178 @@ func _validar_destruccion(data: Dictionary) -> void:
 	print("[M61] destruccion: %d umbral(es) validados (sin GC en el bucle, pooling de buffers, remesh en background)" % [
 		ds.size() - (1 if ds.has("nota") else 0),
 	])
+
+## ── Tecnicas (RF12..RF26) — tabla canonica de la norma ──
+## Log 2073 (minimax-m3-1-flash, 2026-10-21). Congela los umbrales de los 13
+## bloques de tecnicas: si alguien cambia un valor en budgets.json, el gate se
+## pone en ROJO y hay que actualizar la tabla a proposito (y el log).
+const TECNICAS_CANONICAS: Dictionary = {
+	"npcs": {
+		"burbujas_distancia_m": [30, 60, 100],
+		"tick_interval_por_burbuja_s": [0.5, 1.0, 5.0],
+		"max_con_ia_completa": 60,
+		"pooling_instancias": true,
+		"lod_niveles": 3,
+	},
+	"particulas": {
+		"pooling_emisores": true,
+		"max_emisores_pool": 32,
+		"max_particulas_pool": 1200,
+		"precalentamiento_emisores": 8,
+		"gpu_particles_larga_vida": true,
+		"max_emisores_por_evento": 1,
+	},
+	"sombras": {
+		"dinamicas_solo_personajes_y_clave": true,
+		"max_luces_con_sombra": 6,
+		"max_luces_dinamicas": 20,
+		"cascadas_por_preset": [1, 2, 4, 4],
+		"res_sombra_por_preset": [512, 1024, 2048, 4096],
+		"rango_cascada_limitado": true,
+		"costo_sombra_max_fraccion_render": 0.5,
+		"estaticas_sin_sombra_dinamica": true,
+	},
+	"iluminacion": {
+		"gi_suave_sin_bounce_caro": true,
+		"luz_horaria": "1 directional + sky",
+		"max_luces_realtime": 20,
+		"volumetrico_densidad_por_preset": {"baja": 0.0, "medio": 0.0, "alto": 0.1, "ultra": 0.2},
+		"lightmap_baked_interiores": true,
+	},
+	"agua": {
+		"plano_unico": true,
+		"plano_lado_m": 4096,
+		"normales_animadas_en_shader": true,
+		"reflejos_solo_superficie": true,
+		"probes_reflejos_max": 2,
+		"transparencia_ordenada": true,
+		"verts_por_chunk_max": 2000,
+		"fases_onda": 3,
+	},
+	"vegetacion": {
+		"gpu_instancing_obligatorio": true,
+		"viento_en_vertex_shader": true,
+		"culling_por_viento_occlusivo": true,
+		"multiplicador_por_preset": {"baja": 0.2, "media": 0.45, "alta": 0.8, "ultra": 1.0},
+		"densidad_max_por_bioma": 30,
+		"instancias_por_chunk_max": 124,
+	},
+	"culling": {
+		"usar_frustum_del_engine": true,
+		"por_chunks": true,
+		"por_distancia": true,
+		"de_particulas": true,
+	},
+	"occlusion": {
+		"por_celdas_de_chunks": true,
+		"solo_en_cuevas_y_templos": true,
+		"sin_occlusion_global_en_terreno_abierto": true,
+		"coste_gpu_queries_acotado": true,
+	},
+	"lod": {
+		"impostor_lejano": true,
+		"radio_impostor_m": 2700.0,
+		"paso_impostor_m": 64.0,
+		"distancia_lod_objeto_m": 160.0,
+		"niveles_lod": 4,
+		"escalonado_por_distancia": true,
+	},
+	"batching": {
+		"estaticos_por_bioma": true,
+		"max_materiales_por_batch": 32,
+		"ui_por_atlas": true,
+	},
+	"instancing": {
+		"peces": true,
+		"vegetacion": true,
+		"rocas_y_fragmentos": true,
+		"particulas_larga_vida": true,
+	},
+	"pooling": {
+		"particulas": true,
+		"fauna_y_peces": true,
+		"efectos_de_herramientas": true,
+		"buffers_de_remesh": true,
+	},
+	"allocations": {
+		"reuso_de_arrays_y_variants": true,
+		"gc_en_pausas_seguras": true,
+	},
+}
+
+
+## Compara dos valores del JSON (numeros con tolerancia, arrays y dicts elemento a elemento).
+func _mismo_valor(a: Variant, b: Variant) -> bool:
+	if a is Array and b is Array:
+		var aa: Array = a
+		var bb: Array = b
+		if aa.size() != bb.size():
+			return false
+		for i in aa.size():
+			if not _mismo_valor(aa[i], bb[i]):
+				return false
+		return true
+	if a is Dictionary and b is Dictionary:
+		var ad: Dictionary = a
+		var bd: Dictionary = b
+		if ad.size() != bd.size():
+			return false
+		for k in ad.keys():
+			if not bd.has(k) or not _mismo_valor(ad[k], bd[k]):
+				return false
+		return true
+	if (a is float or a is int) and (b is float or b is int):
+		return is_equal_approx(float(a), float(b))
+	if a is bool or b is bool:
+		return bool(a) == bool(b)
+	return str(a) == str(b)
+
+
+## Valida los 13 bloques de tecnicas contra la tabla canonica + las invariantes
+## que los relacionan con el resto de la norma. Tolera si un bloque falta.
+func _validar_tecnicas(data: Dictionary) -> void:
+	var norma: Dictionary = data.get("normas", {})
+	var limites: Dictionary = data.get("limites", {})
+	for nombre in TECNICAS_CANONICAS.keys():
+		if not data.has(nombre):
+			continue
+		var bloque: Variant = data.get(nombre, {})
+		_check(bloque is Dictionary, "bloque %s es un Dictionary" % nombre)
+		if not (bloque is Dictionary):
+			continue
+		var b: Dictionary = bloque
+		var esperado: Dictionary = TECNICAS_CANONICAS[nombre]
+		for clave in esperado.keys():
+			_check(b.has(clave), "%s.%s declarado" % [nombre, clave])
+			if not b.has(clave):
+				continue
+			_check(_mismo_valor(b[clave], esperado[clave]),
+				"%s.%s == canonico" % [nombre, clave])
+		# ── invariantes entre bloques ──
+		if nombre == "npcs":
+			_check(int(b.get("max_con_ia_completa", 0)) >= int(norma.get("npcs_activos_max", 0)),
+				"npcs.max_con_ia_completa >= normas.npcs_activos_max (el runtime debe cubrir el tope de render)")
+			_check((b.get("burbujas_distancia_m", []) as Array).size() == 3
+				and (b.get("tick_interval_por_burbuja_s", []) as Array).size() == 3,
+				"npcs: 3 burbujas de distancia con 3 intervalos de tick")
+		if nombre == "particulas":
+			_check(int(b.get("max_particulas_pool", 0)) >= int(limites.get("particulas_simultaneas_max", 0)),
+				"particulas.max_particulas_pool >= limites.particulas_simultaneas_max")
+		if nombre == "sombras":
+			_check(int(b.get("max_luces_con_sombra", 0)) <= int(b.get("max_luces_dinamicas", 0)),
+				"sombras: las luces con sombra son un subconjunto de las dinamicas")
+		if nombre == "agua":
+			_check(int(b.get("verts_por_chunk_max", 9999)) <= 2000, "agua.verts_por_chunk_max <= 2000 (M51)")
+			_check(int(b.get("probes_reflejos_max", 99)) <= 2, "agua.probes_reflejos_max <= 2 (M51)")
+		if nombre == "vegetacion":
+			_check(int(b.get("densidad_max_por_bioma", 0)) <= int(b.get("instancias_por_chunk_max", 0)),
+				"vegetacion: la densidad maxima por bioma cabe en el presupuesto de instancias por chunk")
+		if nombre == "lod":
+			_check(float(b.get("radio_impostor_m", 0.0)) > 1024.0,
+				"lod.radio_impostor_m > 1024 m (debe cubrir la view distance del mundo)")
+		if nombre == "batching":
+			_check(int(b.get("max_materiales_por_batch", 0)) > 0
+				and int(b.get("max_materiales_por_batch", 0)) <= 64,
+				"batching.max_materiales_por_batch en 1..64")
+		print("[M61] %s: %d umbral(es) tecnicos validados" % [nombre, b.size() - (1 if b.has("nota") else 0)])
+

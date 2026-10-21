@@ -36,6 +36,15 @@ const SM := preload("res://scripts/stream/stream_manager.gd")
 const RUTA_ATLAS := "res://scripts/arte2d/pack_atlas.gd"
 const RUTA_AGUA := "res://scripts/world/validate_water.gd"
 const RUTA_STREAM := "res://scripts/stream/stream_manager.gd"
+const VP := preload("res://scripts/particles/vfx_pool.gd")
+const LP := preload("res://scripts/world/light_pool.gd")
+const NM := preload("res://scripts/ia_npc/npc_manager.gd")
+const VW := preload("res://scripts/world/validate_water.gd")
+const TH := preload("res://scripts/world/terreno_horizonte.gd")
+const RUTA_ISLA := "res://scripts/main_island.gd"
+const RUTA_FABRICA := "res://scripts/particles/vfx_factory.gd"
+const RUTA_POOL_M62 := "res://scripts/rendimiento/memoria/global_pool.gd"
+const RUTA_VEG := "res://data/vegetacion/vegetacion_config.json"
 ## Checks minimos MEDIDOS en verde (no estimados): el suite corre con
 ## CHECKS_MINIMOS = 30 y el minimo declarado es 24 para dejar margen.
 const CHECKS_MINIMOS := 24
@@ -188,6 +197,141 @@ func _correr() -> void:
 	_check("M61 compresion_por_plataforma cubre windows/android/ios",
 		comp.has("windows") and comp.has("android") and comp.has("ios"), str(comp.keys()))
 
+	# ── M61 <-> duenos de TECNICAS (RF12..RF26) ──
+	var npcs: Dictionary = m61.get("npcs", {})
+	var part: Dictionary = m61.get("particulas", {})
+	var somb: Dictionary = m61.get("sombras", {})
+	var ilu: Dictionary = m61.get("iluminacion", {})
+	var agua: Dictionary = m61.get("agua", {})
+	var veg: Dictionary = m61.get("vegetacion", {})
+	var cul: Dictionary = m61.get("culling", {})
+	var lod: Dictionary = m61.get("lod", {})
+	var bat: Dictionary = m61.get("batching", {})
+	var alloc: Dictionary = m61.get("allocations", {})
+
+	# M64 — burbujas de distancia y intervalos de tick de los NPC
+	var bub_m64: Array = [NM.BUBBLE_FULL, NM.BUBBLE_MEDIUM, NM.BUBBLE_LIGHT]
+	_check("npcs: burbujas_distancia_m == M64 (BUBBLE_FULL/MEDIUM/LIGHT)",
+		_arr_igual(npcs.get("burbujas_distancia_m", []), bub_m64),
+		"M61=%s / M64=%s" % [str(npcs.get("burbujas_distancia_m")), str(bub_m64)])
+	var tick_m64: Array = [NM.TICK_FULL_INTERVAL, NM.TICK_MEDIUM_INTERVAL, NM.TICK_LIGHT_INTERVAL]
+	_check("npcs: tick_interval_por_burbuja_s == M64 (TICK_*_INTERVAL)",
+		_arr_igual(npcs.get("tick_interval_por_burbuja_s", []), tick_m64),
+		"M61=%s / M64=%s" % [str(npcs.get("tick_interval_por_burbuja_s")), str(tick_m64)])
+	_check("npcs: max_con_ia_completa == M64 MAX_AGMPS_FULL",
+		int(npcs.get("max_con_ia_completa", 0)) == int(NM.MAX_AGMPS_FULL),
+		"M61=%d / M64=%d" % [int(npcs.get("max_con_ia_completa", 0)), int(NM.MAX_AGMPS_FULL)])
+	_check("npcs: max_con_ia_completa >= normas.npcs_activos_max (el runtime cubre el tope de render)",
+		int(npcs.get("max_con_ia_completa", 0)) >= int(normas.get("npcs_activos_max", 0)),
+		"%d >= %d" % [int(npcs.get("max_con_ia_completa", 0)), int(normas.get("npcs_activos_max", 0))])
+	_check("npcs: pooling de instancias respaldado por el pool por familias de M62",
+		bool(npcs.get("pooling_instancias", false)) and _file_contains(RUTA_POOL_M62, "familia"))
+
+	# M52 — pool de emisores de particulas
+	_check("particulas: max_emisores_pool == M52 MAX_EMISORES_DEF",
+		int(part.get("max_emisores_pool", 0)) == int(VP.MAX_EMISORES_DEF),
+		"M61=%d / M52=%d" % [int(part.get("max_emisores_pool", 0)), int(VP.MAX_EMISORES_DEF)])
+	_check("particulas: max_particulas_pool == M52 MAX_PARTICULAS_DEF",
+		int(part.get("max_particulas_pool", 0)) == int(VP.MAX_PARTICULAS_DEF),
+		"M61=%d / M52=%d" % [int(part.get("max_particulas_pool", 0)), int(VP.MAX_PARTICULAS_DEF)])
+	_check("particulas: M52 construye emisores GPUParticles3D (larga vida)",
+		bool(part.get("gpu_particles_larga_vida", false)) and _file_contains(RUTA_FABRICA, "GPUParticles3D.new()"))
+	_check("culling: de_particulas respaldado por el reciclado de M52 (MOTIVO_PARTICULAS)",
+		bool(cul.get("de_particulas", false)) and _file_contains("res://scripts/particles/vfx_pool.gd", "MOTIVO_PARTICULAS"))
+
+	# M49 — pool de luces (sombras e iluminacion)
+	_check("sombras: max_luces_con_sombra == M49 MAX_CONT_SOMBRA",
+		int(somb.get("max_luces_con_sombra", 0)) == int(LP.MAX_CONT_SOMBRA),
+		"M61=%d / M49=%d" % [int(somb.get("max_luces_con_sombra", 0)), int(LP.MAX_CONT_SOMBRA)])
+	_check("sombras: max_luces_dinamicas == M49 MAX_DINAMICAS",
+		int(somb.get("max_luces_dinamicas", 0)) == int(LP.MAX_DINAMICAS),
+		"M61=%d / M49=%d" % [int(somb.get("max_luces_dinamicas", 0)), int(LP.MAX_DINAMICAS)])
+	_check("iluminacion: max_luces_realtime == M49 MAX_DINAMICAS (las luces real-time se minimizan)",
+		int(ilu.get("max_luces_realtime", 0)) == int(LP.MAX_DINAMICAS),
+		"M61=%d / M49=%d" % [int(ilu.get("max_luces_realtime", 0)), int(LP.MAX_DINAMICAS)])
+
+	# M90 — sombras por preset y volumetrico
+	var casc_m90: Array = [int(GC.SOMBRAS["baja"]["cascadas"]), int(GC.SOMBRAS["media"]["cascadas"]),
+		int(GC.SOMBRAS["alta"]["cascadas"]), int(GC.SOMBRAS["ultra"]["cascadas"])]
+	_check("sombras: cascadas_por_preset == M90 SOMBRAS",
+		_arr_igual(somb.get("cascadas_por_preset", []), casc_m90),
+		"M61=%s / M90=%s" % [str(somb.get("cascadas_por_preset")), str(casc_m90)])
+	var res_m90: Array = [int(GC.SOMBRAS["baja"]["res"]), int(GC.SOMBRAS["media"]["res"]),
+		int(GC.SOMBRAS["alta"]["res"]), int(GC.SOMBRAS["ultra"]["res"])]
+	_check("sombras: res_sombra_por_preset == M90 SOMBRAS",
+		_arr_igual(somb.get("res_sombra_por_preset", []), res_m90),
+		"M61=%s / M90=%s" % [str(somb.get("res_sombra_por_preset")), str(res_m90)])
+	var vol_m61: Dictionary = ilu.get("volumetrico_densidad_por_preset", {})
+	var vol_ok := true
+	for k in vol_m61.keys():
+		if not GC.VOLUMETRICO.has(k) or not is_equal_approx(float(vol_m61[k]), float(GC.VOLUMETRICO[k]["densidad"])):
+			vol_ok = false
+	_check("iluminacion: volumetrico_densidad_por_preset == M90 VOLUMETRICO",
+		vol_ok and vol_m61.size() == GC.VOLUMETRICO.size(), str(vol_m61))
+
+	# M51 — presupuesto de agua
+	_check("agua: verts_por_chunk_max == M51 VERTS_PER_CHUNK_MAX",
+		int(agua.get("verts_por_chunk_max", 0)) == int(VW.VERTS_PER_CHUNK_MAX),
+		"M61=%d / M51=%d" % [int(agua.get("verts_por_chunk_max", 0)), int(VW.VERTS_PER_CHUNK_MAX)])
+	_check("agua: probes_reflejos_max == M51 REFLECTION_PROBES_MAX",
+		int(agua.get("probes_reflejos_max", 0)) == int(VW.REFLECTION_PROBES_MAX),
+		"M61=%d / M51=%d" % [int(agua.get("probes_reflejos_max", 0)), int(VW.REFLECTION_PROBES_MAX)])
+	_check("agua: fases_onda == M51 WAVE_PHASES",
+		int(agua.get("fases_onda", 0)) == int(VW.WAVE_PHASES),
+		"M61=%d / M51=%d" % [int(agua.get("fases_onda", 0)), int(VW.WAVE_PHASES)])
+	_check("agua: el oceano es UN solo plano de 4096 m (main_island._crear_oceano)",
+		bool(agua.get("plano_unico", false))
+		and _file_contains(RUTA_ISLA, "Vector2(4096, 4096)")
+		and int(agua.get("plano_lado_m", 0)) == 4096)
+
+	# M50 — densidades de vegetacion
+	var cfg := _leer(RUTA_VEG)
+	var dens_max := 0
+	var dens_suma := 0
+	if cfg.has("biomas"):
+		for k in (cfg["biomas"] as Dictionary).keys():
+			var dens := int((cfg["biomas"] as Dictionary)[k].get("densidad", 0))
+			dens_max = maxi(dens_max, dens)
+			dens_suma += dens
+	_check("vegetacion: densidad_max_por_bioma == la mayor densidad de M50",
+		int(veg.get("densidad_max_por_bioma", 0)) == dens_max,
+		"M61=%d / M50=%d" % [int(veg.get("densidad_max_por_bioma", 0)), dens_max])
+	_check("vegetacion: instancias_por_chunk_max == la suma de densidades de M50",
+		int(veg.get("instancias_por_chunk_max", 0)) == dens_suma,
+		"M61=%d / M50=%d" % [int(veg.get("instancias_por_chunk_max", 0)), dens_suma])
+	var mult_m61: Dictionary = veg.get("multiplicador_por_preset", {})
+	var mult_ok := mult_m61.size() == GC.VEGETACION.size()
+	for k in mult_m61.keys():
+		if not GC.VEGETACION.has(k) or not is_equal_approx(float(mult_m61[k]), float(GC.VEGETACION[k])):
+			mult_ok = false
+	_check("vegetacion: multiplicador_por_preset == M90 VEGETACION", mult_ok, str(mult_m61))
+
+	# M90 — culling y LOD
+	_check("culling: usar_frustum_del_engine == M90 CULLING.frustum",
+		bool(cul.get("usar_frustum_del_engine", false)) == bool(GC.CULLING["frustum"]))
+	_check("culling: por_distancia == M90 CULLING.por_distancia",
+		bool(cul.get("por_distancia", false)) == bool(GC.CULLING["por_distancia"]))
+	_check("lod: distancia_lod_objeto_m == M90 LOD.distancia",
+		is_equal_approx(float(lod.get("distancia_lod_objeto_m", 0.0)), float(GC.LOD["distancia"])),
+		"M61=%s / M90=%s" % [str(lod.get("distancia_lod_objeto_m")), str(GC.LOD["distancia"])])
+	_check("lod: niveles_lod == M90 LOD.niveles",
+		int(lod.get("niveles_lod", 0)) == int(GC.LOD["niveles"]),
+		"M61=%d / M90=%d" % [int(lod.get("niveles_lod", 0)), int(GC.LOD["niveles"])])
+
+	# impostor de horizonte (M09/M167) — el LOD lejano
+	_check("lod: radio_impostor_m == RADIO_CUBIERTO del impostor de horizonte",
+		is_equal_approx(float(lod.get("radio_impostor_m", 0.0)), float(TH.RADIO_CUBIERTO)),
+		"M61=%s / terreno_horizonte=%s" % [str(lod.get("radio_impostor_m")), str(TH.RADIO_CUBIERTO)])
+	_check("lod: paso_impostor_m == PASO del impostor de horizonte",
+		is_equal_approx(float(lod.get("paso_impostor_m", 0.0)), float(TH.PASO)),
+		"M61=%s / terreno_horizonte=%s" % [str(lod.get("paso_impostor_m")), str(TH.PASO)])
+
+	# batching de UI (M46/M53) y pausa de la cola (M63)
+	_check("batching: ui_por_atlas respaldado por los atlas de M46 (ui_atlas 2048)",
+		bool(bat.get("ui_por_atlas", false)) and _file_contains(RUTA_ATLAS, "ui_atlas"))
+	_check("allocations: gc_en_pausas_seguras respaldado por la pausa de cola de M63",
+		bool(alloc.get("gc_en_pausas_seguras", false)) and _file_contains(RUTA_STREAM, "_cargas_pausadas"))
+
 	# ── M61 <-> M63: carga (RF9) + chunks (RF10) + destruccion (RF11) ──
 	var carga: Dictionary = m61.get("carga", {})
 	var chunks: Dictionary = m61.get("chunks", {})
@@ -241,6 +385,16 @@ func _correr() -> void:
 			float(normas.get("remesh_bloque_ms_max", 99.0)) <= 2.0)
 
 	_cerrar()
+
+
+## Compara dos arrays de numeros con tolerancia (para los arrays de la norma).
+func _arr_igual(a: Array, b: Array) -> bool:
+	if a.size() != b.size():
+		return false
+	for i in a.size():
+		if not is_equal_approx(float(a[i]), float(b[i])):
+			return false
+	return true
 
 
 func _file_contains(ruta: String, aguja: String) -> bool:
