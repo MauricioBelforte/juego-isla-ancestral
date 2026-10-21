@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T19:31:30",
+ "ultimo_update": "2026-10-21T19:41:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,13 +17,13 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "207: tanda 44 (4 flips M59 providers M17/M20/M71/M74 verificados en disco por director 3/3 sample); pool saneado con 208; barrido 8",
+  "estado": "209: tanda 46 FINAL - item 8 [x] resuelto (slot_metadata omitia profile_id, corregido L288; +PROFILE_MISMATCH +pre-check; QA 10/0); M59 75/130; hallazgo loader EMPTY_SLOT vs PROFILE_MISMATCH derivado a DeepSeek",
   "pendientes_real": 222,
-  "acuse_enviado": 208,
+  "acuse_enviado": 210,
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "351 entregado (M102 item 31: medidor+suite+informe, ya en a005456); 352: asignado saneamiento 11-BUGS (79 defectos base) + gate CI b; fila 102 reabierta 141/142",
+  "estado": "rieles acumulados: saneamiento 11-BUGS (79 defectos), gate CI (b), persistencia profile_id resuelto por G-5.3 (info), NUEVO hallazgo save_loader: caso cruzado devuelve EMPTY_SLOT(5) en vez de PROFILE_MISMATCH - revisar cadencia lector",
   "pendientes_real": 170,
   "acuse_enviado": 352
  },
@@ -66,7 +66,9 @@
   "aviso de QA de Hy3 llego solo via canal de agnes: la doble red por lag需要进行 aviso 1-linea en canal propio (recordado en 307)",
   "item duplicado en modulo con textos distintos: flippear SOLO el texto exacto del [ ] vivo (patron G-5.3 t44)",
   "aritmetica de Totales puede fallar dos veces seguidas: normalizar SIEMPRE al re-medido en el mismo mensaje",
-  "Totales de modulo declarados de memoria (89/185 vs 182 medido): re-contar SIEMPRE el total por prefijo al cerrar tanda"
+  "Totales de modulo declarados de memoria (89/185 vs 182 medido): re-contar SIEMPRE el total por prefijo al cerrar tanda",
+  "slot_metadata() que omite campos del dict puede simular NO-persistencia: diagnosticar leyendo el archivo directo (G-5.3 t46)",
+  "loader que devuelve EMPTY_SLOT donde corresponde PROFILE_MISMATCH: discrepancia de cadencia lector (derivado DeepSeek)"
  ],
  "minimax_m3_1_flash": {
   "estado": "007 validado: M112 3 suites cerradas (219/225) + cronometro runner 897s; APROBADO fix headless-aware + QA cruzado M90 encargado (008) + nuevo frente M17; crafting RED derivado a G-5.3",
@@ -97,7 +99,7 @@
   "quality.yml: cablear test_metricas_bugs.py + --check con baseline DEUDA_CONOCIDA (DeepSeek, tras saneamiento 11-BUGS)"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 19:15: unica pendiente G-5.3 205 respondida (206); fila 59 verificaciones confirman que el AGENTE hace sync directo de su fila (no duplicarlo); backlogs >= 100 -> sin repoblacion",
+ "crons_vuelta_d": "CRON D 19:35: script 0 pendientes; todos los backlogs >= 100 (post-repoblacion 17:56: agnes +470, step-5 +192, ling +106, deepseek +93; numerados miniMax 766 / g_5_3 325 / DS_OC 583 / hy3 265); asignaciones vigentes, SIN repoblacion; drift de totales M72 (182 vs 185) pendiente de re-cuenta por agnes (acuse 910)",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
