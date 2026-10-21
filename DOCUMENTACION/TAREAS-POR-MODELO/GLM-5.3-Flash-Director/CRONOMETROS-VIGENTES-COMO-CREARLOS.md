@@ -15,10 +15,10 @@
 
 | Cron | Expresión cron | Dispara a las | Función |
 |---|---|---|---|
-| **CRON A v3** | `0,20,40 * * * *` | :00, :20, :40 | Detección por SCRIPT (`scripts/verificar_mensajes_nuevos.py`) + responder pendientes + repoblar backlogs |
-| **CRON B v3** | `10,30,50 * * * *` | :10, :30, :50 | Segunda red: detección por LAG de acuses (misma lógica sin script, lógica de comparación en vivo) |
+| **CRON A v4** | `0,20,40 * * * *` | :00, :20, :40 | Detección por SCRIPT (`scripts/verificar_mensajes_nuevos.py`) + responder pendientes + repoblar backlogs |
+| **CRON B v4** | `10,30,50 * * * *` | :10, :30, :50 | Segunda red: detección por LAG de acuses (misma lógica sin script, lógica de comparación en vivo) |
 | **CRON D v1** | `15,35,55 * * * *` | :15, :35, :55 | ASIGNADOR POR CAPACIDAD: solo investigación/repoblación por capacidad (fundador 2026-10-19 03:15) |
-| **CRON C v3** | `5,25,45 * * * *` | :05, :25, :45 | PASO 0: GATE de padding (`scripts/verificar_padding_pools.py`, 3 cifras) + PRESERVACIÓN (commits por frente) — la investigación/repoblación se movió a Cron D |
+| **CRON C v4** | `5,25,45 * * * *` | :05, :25, :45 | PASO 0: GATE de padding (`scripts/verificar_padding_pools.py`, 3 cifras) + PRESERVACIÓN (commits por frente) — la investigación/repoblación se movió a Cron D |
 
 **Regla de reparto:** cada 5 minutos hay un disparo en tela de juicio nula — el orden por hora queda **A (:00) → C (:05) → B (:10) → A (:20) → C (:25) → B (:30) → A (:40) → C (:45) → B (:50)** (fundador 2026-10-19 04:41: C intercalado cada 20 min desde :25 sin pisar a A ni B).
 
@@ -41,10 +41,10 @@ Definición original (creado 04:41, id `wku_152778f30001fWRhXBrjKMF1MZ`) — **y
 
 ---
 
-## 2. CRON A v3 — prompt EXACTO (copiar tal cual en cron_create)
+## 2. CRON A v4 — prompt EXACTO (copiar tal cual en cron_create)
 
 ```
-CRON A v3 — DETECCIÓN POR SCRIPT (fundador 2026-10-19 02:38: "podes ejecutar un script que detecte si hay nuevos archivos — es porque hay mensajes que leer — tenes que corregir"):
+CRON A v4 — DETECCIÓN POR SCRIPT (fundador 2026-10-19 02:38: "podes ejecutar un script que detecte si hay nuevos archivos — es porque hay mensajes que leer — tenes que corregir"):
 
 1. EJECUTÁ PRIMERO: `python scripts/verificar_mensajes_nuevos.py` (exit 0 = al día; exit 1 = hay pendientes listados por canal). El script compara mi último acuse (slug `glm-5.3-flash-director-a-`) contra los mensajes de cada agente — sin punteros y sin filtro de receptor. NO LO IGNORES: su salida es la tarea de esta vuelta.
 2. Si exit 1: para CADA pendiente listado, leé el archivo COMPLETO y RESPONDE, sacando el número del `NUMEROS_DISPONIBLES.txt` DE ESA CARPETA y borrando el número del pool (el pool lo comparten el agente y yo — regla fundador 02:27). NUNCA inventar números.
@@ -59,10 +59,10 @@ Reglas: firma GLM-5.3 Flash-Director, español, independencia §21.8, pathspec e
 
 ---
 
-## 3. CRON B v3 — prompt EXACTO (copiar tal cual en cron_create)
+## 3. CRON B v4 — prompt EXACTO (copiar tal cual en cron_create)
 
 ```
-CRON B v3 — DETECCIÓN POR LAG DE RESPUESTA (fallo corregido 2026-10-19 02:36: el puntero mintió y las vueltas 131-133 de DS-OC quedaron horas sin acuse):
+CRON B v4 — DETECCIÓN POR LAG DE RESPUESTA (fallo corregido 2026-10-19 02:36: el puntero mintió y las vueltas 131-133 de DS-OC quedaron horas sin acuse):
 
 Para CADA canal de 'Mensajes entre modelos/' (agnes-3-flash, DS-V4.1-Flash-Opencode, Hy3, DeepSeek-V4.1-Flash, Step-5-WorkBuddy, Ling-3.1-Flash, G-5.3-Flash-Agente):
 1. NN_MAX_DE_ÉL = el número más alto de archivo con mensaje cuyo emisor NO soy yo (todo slug que no empiece por `glm-5.3-flash-director-a-`). Sin filtro de receptor: si el emisor no soy yo, es mensaje de él.
@@ -79,13 +79,13 @@ Reglas: numeración via NUMEROS_DISPONIBLES.txt del canal (consumir), UTF-8 §28
 
 ---
 
-## 3bis. CRON C v3 — VIGENTE (gate + preservación; sin investigación)
+## 3bis. CRON C v4 — VIGENTE (gate + preservación; sin investigación)
 
 - Schedule `5,25,45 * * * *` (:05/:25/:45). id vigente: `wku_15758095e001JRCRSJoQc4m5xZ`.
 - PROMPT EXACTO para cron_create:
 
 ```
-CRON C v3 — GATE DE PADDING + PRESERVACIÓN (fundador 2026-10-19 07:40-07:50; corre a :05/:25/:45 — entre A (:00/:20/:40) y B (:10/:30/:50), sin solaparse; SIN tarea de investigación — esa es del Cron D v2 (:15/:35/:55)).
+CRON C v4 — GATE DE PADDING + PRESERVACIÓN (fundador 2026-10-19 07:40-07:50; corre a :05/:25/:45 — entre A (:00/:20/:40) y B (:10/:30/:50), sin solaparse; SIN tarea de investigación — esa es del Cron D v2 (:15/:35/:55)).
 
 PASO 0 — GATE DE PADDING (SIEMPRE primero): `python scripts/verificar_padding_pools.py` — normaliza a 3 cifras los NUMEROS_DISPONIBLES.txt y los .ultima-revision de TODOS los canales (exit 1 = corrigió algo → reporta qué corrigió en 1 línea).
 
@@ -143,6 +143,14 @@ Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir,
 ---
 
 
+
+### ⚠️ CONTEXTO PERSISTENTE (fundador 2026-10-21 07:26):
+
+TODOS los cronómetros (A v4, B v4, C v4, D v3) leen `Logs/estado_director.json` como paso 0.
+Este archivo guarda: qué agente dijo qué, qué frentes están agotados, qué trampas registradas, qué acuses mandé.
+Sin esto, los crons están ciegos al contexto de la sesión y repiten errores o aceptan standbys falsos.
+
+ACCION: después de cualquier interacción con un agente o el fundador, actualizar `Logs/estado_director.json`.
 ### ⚠️ NOTA DE ETIQUETADO (fundador 2026-10-21 03:13)
 
 El orden CRONOLÓGICO de disparo no es secuencial por letra:
@@ -168,13 +176,13 @@ Cada response del director DEBE etiquetarse con el cron que disparó esa vuelta 
 3. **Escritura SIEMPRE Python UTF-8 sin BOM LF** — prohibido `>`, `Set-Content` (escribe UTF-16/BOM) y herramienta que corrompa UTF-8.
 4. **REGLA CERO**: el cron reporta solo novedad material; si todo está al día, una línea y cerrar.
 5. **Firma**: `GLM-5.3 Flash-Director / Kilo Code` (para crons del director) o la firma propia del agente (para crons de flota).
-6. **Respuesta SIEMPRE en español.**## 2ter. CRON C v3 — VIGENTE (gate + preservación; la investigación migró al Cron D)
+6. **Respuesta SIEMPRE en español.**## 2ter. CRON C v4 — VIGENTE (gate + preservación; la investigación migró al Cron D)
 
 - Schedule `5,25,45 * * * *` (:05/:25/:45). id vigente: `wku_15328f93e001PhUjkn0a77455W`.
 - PROMPT EXACTO para cron_create:
 
 ```
-CRON C v3 — GATE DE PADDING + PRESERVACIÓN (fundador 2026-10-19 07:40-07:50; corre a :05/:25/:45 — entre A (:00/:20/:40) y B (:10/:30/:50), sin solaparse; SIN tarea de investigación — esa migra al Cron D).
+CRON C v4 — GATE DE PADDING + PRESERVACIÓN (fundador 2026-10-19 07:40-07:50; corre a :05/:25/:45 — entre A (:00/:20/:40) y B (:10/:30/:50), sin solaparse; SIN tarea de investigación — esa migra al Cron D).
 
 PASO 0 — GATE DE PADDING (SIEMPRE primero): `python scripts/verificar_padding_pools.py` — normaliza a 3 cifras los NUMEROS_DISPONIBLES.txt y los .ultima-revision de TODOS los canales (exit 1 = corrigió algo → reporta qué corrigió en 1 línea).
 
