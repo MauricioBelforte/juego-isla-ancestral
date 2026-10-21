@@ -328,6 +328,7 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 * **Compara vs M3 (hermano grande):** M3 tiene 1M contexto + multimodal video + Agent Team; M3.1 Flash gana en velocidad (3x) y costo (70% menos), pierde multimodal video
 * **Nota:** Space Bunny 🐰 (200T tokens procesados anónimamente) era una versión early de M3.1 Flash
 
+> **💎 BASE EMPÍRICA PROPIA:** Space Bunny 🐰 (200T tokens, anónima) era una versión early de M3.1 Flash. El fundador la ejecutó como **space-bunny-alpha** en este proyecto — hay historia de resolución de este modelo sobre este codebase. Consultar canal space-bunny-alpha/ para evidencia de qué hizo bien.
 ### I. SenseNova 6.8 Flash Lite (SenseTime)
 * **Especificaciones:** Liviano, multimodal nativo (texto+imagen), contexto 262K, SenseNova Token Plan (gratis preview)
 * **Modelos disponibles:**
