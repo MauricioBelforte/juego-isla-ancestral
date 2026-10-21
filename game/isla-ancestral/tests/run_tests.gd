@@ -37,12 +37,16 @@ var _scenetree: Array[String] = []
 var _gdunit_dirs: Array[String] = []
 var _suites_ok := 0
 var _fallos: Array[String] = []
+## Tiempo total de la suite (segundos) — item M112 "[?] Cumplir tiempo total de suite <= 10 minutos".
+var _t_inicio_ms := 0
+var _duracion_suites: Array = []   ## [{ruta, segundos, ok}]
 var _checks_total := 0
 var _tests_gdunit := 0
 var _gdunit_ok := false
 
 
 func _initialize() -> void:
+	_t_inicio_ms = Time.get_ticks_msec()
 	_descubrir()
 	print("=== Isla Ancestral - Test Suite Runner (M112/BUG-120 v2c) ===")
 	var descubiertas := _scenetree.size() + _gdunit_dirs.size()
@@ -169,7 +173,9 @@ func _ejecutar_con_redirect(args: Array, timeout_ms: int = TIMEOUT_MS) -> Dictio
 
 func _correr_scenetree(ruta: String) -> void:
 	print("\n[SUITE SceneTree] %s" % ruta)
+	var t0 := Time.get_ticks_msec()
 	var r := await _ejecutar_con_redirect(["--headless", "--path", "res://", "--script", ruta])
+	var dt := (Time.get_ticks_msec() - t0) / 1000.0
 	var texto: String = r["salida"]
 	var exit := int(r["rc"])
 	var an := _analizar_salida(texto, exit)
@@ -180,10 +186,14 @@ func _correr_scenetree(ruta: String) -> void:
 	if an["ok"]:
 		_suites_ok += 1
 		_checks_total += int(an["checks"])
+		_duracion_suites.append({"ruta": ruta, "segundos": dt, "ok": true})
 		print("  [OK] rc=%d checks=%d" % [exit, int(an["checks"])])
+		print("  [TIEMPO] %.1f s" % dt)
 	else:
 		_fallos.append("%s (rc=%d, %s)" % [ruta, exit, an["motivo"]])
+		_duracion_suites.append({"ruta": ruta, "segundos": dt, "ok": false})
 		print("  [FAIL] rc=%d %s" % [exit, an["motivo"]])
+		print("  [TIEMPO] %.1f s" % dt)
 
 
 func _analizar_salida(texto: String, exit: int) -> Dictionary:
@@ -289,6 +299,7 @@ func _correr_gdunit() -> void:
 
 
 func _resumen() -> void:
+	var total_s := (Time.get_ticks_msec() - _t_inicio_ms) / 1000.0
 	var descubiertas := _scenetree.size() + _gdunit_dirs.size()
 	var ejecutables := descubiertas - EXCLUIR.size()
 	var tests_total := _checks_total + _tests_gdunit
@@ -299,6 +310,20 @@ func _resumen() -> void:
 	print("[EVIDENCIA] checks SceneTree: %d · test cases GdUnit4: %d · tests totales: %d" % [
 		_checks_total, _tests_gdunit, tests_total
 	])
+	# Presupuesto de tiempo (item M112: suite <= 10 min) — evidencia medible + hotspots.
+	var suma_suites := 0.0
+	for d in _duracion_suites:
+		suma_suites += float(d["segundos"])
+	var lentas := _duracion_suites.duplicate()
+	lentas.sort_custom(func(a, b): return float(a["segundos"]) > float(b["segundos"]))
+	print("[EVIDENCIA] tiempo total de suite: %.1f s (%.2f min) · presupuesto 600 s · %s" % [
+		total_s, total_s / 60.0, "CUMPLE" if total_s <= 600.0 else "EXCEDE"
+	])
+	print("[EVIDENCIA] tiempo de las suites SceneTree: %.1f s (suma de %d suites cronometradas)" % [
+		suma_suites, _duracion_suites.size()
+	])
+	for i in mini(5, lentas.size()):
+		print("  [HOTSPOT] %.1f s · %s" % [float(lentas[i]["segundos"]), String(lentas[i]["ruta"])])
 	for f in _fallos:
 		print("  [FALLO] %s" % f)
 	print("=".repeat(72))
