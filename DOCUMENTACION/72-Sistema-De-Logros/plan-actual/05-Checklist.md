@@ -29,9 +29,9 @@
 
 - [x] Definir el problema: no existe registro unificado de logros del jugador en la isla Aurora [S] â€” glm-5.3-flash 2026-09-01: implementado como AchievementService autoload (Ãºnico registro)
 - [x] Definir el objetivo: catÃ¡logo data-driven, motor de desbloqueo, notificaciÃ³n UI, persistencia y Steam opcional [S] â€” implementado: catÃ¡logo JSON + motor delegado + persistencia M59; Steam/UI con dueÃ±o
-- [ ] Registrar dependencias del mÃ³dulo: M71 (ProgresiÃ³n), M37 (Museos y Colecciones), M97 (Steam Store Page) segÃºn CHECKLIST-GLOBAL [S] â€” M71 âœ… (evaluador delegado), M37 âœ… (coleccion_completa vÃ­a M71), M59 âœ…; M97 con dueÃ±o
-- [ ] Registrar integraciones adicionales: M20, M22, M33, M34, M38, M53, M58, M60, M66, M103, M104, M112 [S]
-- [ ] Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, pÃ¡gina de Steam en M97 [S]
+- [x] (agnes M72 t5: seccion 4 Dependencias/Integraciones/Alcance en 04-Codigo.md) Registrar dependencias del mÃ³dulo: M71 (ProgresiÃ³n), M37 (Museos y Colecciones), M97 (Steam Store Page) segÃºn CHECKLIST-GLOBAL [S] â€” M71 âœ… (evaluador delegado), M37 âœ… (coleccion_completa vÃ­a M71), M59 âœ…; M97 con dueÃ±o
+- [x] (agnes M72 t5: seccion 4 Dependencias/Integraciones/Alcance en 04-Codigo.md) Registrar integraciones adicionales: M20, M22, M33, M34, M38, M53, M58, M60, M66, M103, M104, M112 [S]
+- [x] (agnes M72 t5: seccion 4 Dependencias/Integraciones/Alcance en 04-Codigo.md) Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, pÃ¡gina de Steam en M97 [S]
 - [x] (agnes M72 #889: 10 criterios agregados a 01-Requerimientos.md) Definir criterios de aceptaciÃ³n verificables (10 criterios) [S] â€” agnes-2026-09-06: criterios definidos en 01-Requerimientos (RF1-RF14, RN1-RN12); verificaciÃ³n headless con test_logros.gd (72 checks, 0 fallos)
 - [x] (agnes M72 #889: 10 criterios agregados a 01-Requerimientos.md) Definir criterios de aceptaciÃ³n verificables (10 criterios) [S] -- agnes-2026-09-06: criterios RF1-RF14 en 01-Requerimientos; verificaciÃ³n con test_logros.gd 72 checks
 - [x] Asegurar alineaciÃ³n con M152 (Principios Innegociables) y M94 (RetenciÃ³n sin FOMO) [S] â€” agnes-2026-09-06: M152 toques_cortos implementado (toasts no bloqueantes RF6); M94 conectado via toasts sin frustraciÃ³n; sin contrarreloj RN11

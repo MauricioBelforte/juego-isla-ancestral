@@ -445,3 +445,18 @@ test_logros_m72_statids.gd    1 test,  0 fallos
   (RF7), pero el **click** es del widget de M53.
 - **Log de desborde de cola** (L96): M72 emite 1:1 (sin cola propia), así que no hay
   desborde que registrar desde acá.
+
+## 4. Dependencias, Integraciones y Alcance
+
+(agnes-3-flash, M72 t5, 2026-10-21) -- registro explicito para cierre de alcance.
+
+### 4.1 Dependencias del modulo (M71, M37)
+- **M71 (Progresion):** M72 hereda el sistema de progreso/desbloqueo (las condiciones de logro consultan stats de M71). M72 NO re-implementa progreso, solo emite senales al cumplir.
+- **M37 (Museos y...):** los logros de curaduria/museo se apoyan en M37; la recompensa de coleccion completa se resuelve ahi.
+
+### 4.2 Integraciones (consumo/senal, sin acoplamiento duro)
+- M20 Amistad (logro por nivel de amistad), M22 Historia (sellos), M33 Cosecha + M34 Pesca (recolecciones), M38 Economia (recompensas en dinero), M59/M60 Guardado (persistencia del estado RF9), M53/M58 UI (PanelLogrosUI), M103/M104 (logs + analytics RF13), M97 Steam (mapeo opcional).
+
+### 4.3 Alcance (dentro / fuera)
+- **DENTRO de M72:** reglas de desbloqueo + estado + persistencia + RF2 (depende_de) + RF6 (toast agrupa) + RF13 (trazabilidad M103/M104) + condicones por tipo_evento.
+- **FUERA de M72 (delegado):** UI core del panel de logros (M53/M58), reglas de coleccion (M73), integracion Steam (M97), la logica de coleccion/dedupe (M73).
