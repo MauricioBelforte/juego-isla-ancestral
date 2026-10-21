@@ -40,8 +40,8 @@
 - [ ] Definir premium como compra única sin suscripción [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [x] Verificar que la historia completa esté incluida en todas las ediciones (contiene_historia_completa) [S]
-- [ ] Definir actualizaciones gratuitas de parches (M143/M144) [S]
-  · espera: depende de M143/M144 (coordinar con su dueno)
+- [x] Definir actualizaciones gratuitas de parches (M143/M144) [S]
+  · evidencia: 02-Analisis Plan F5 (ops: parches/reembolsos) + D5 (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir comunicación honesta del modelo en la tienda (M149) [M]
   · espera: depende de M149 (coordinar con su dueno)
 
@@ -51,8 +51,8 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir decisión ética: F2P entra en conflicto con M94 (sin FOMO) [M]
   · espera: depende de M94 (coordinar con su dueno)
-- [ ] Definir documento de la decisión para el equipo [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir documento de la decisión para el equipo [S]
+  · evidencia: 02-Analisis secc.5 metrica #1 (modelo premium firmado) (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 4. DLC si corresponde (P4/R1-R3)
 
@@ -78,12 +78,12 @@
 
 - [ ] Definir OST vendible en tienda digital (24 pistas, M41) [M]
   · espera: depende de M41 (coordinar con su dueno)
-- [ ] Definir OST incluida en Deluxe/Coleccionista [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir OST incluida en Deluxe/Coleccionista [S]
+  · evidencia: 02-Analisis D3 (Deluxe = OST + 2 cosmeticos + arte digital) (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir OST con derechos despejados (M41-M44) [M]
   · espera: depende de M41/M44 (coordinar con su dueno)
-- [ ] Definir OST física opcional (CD/vinilo) post-lanzamiento [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir OST física opcional (CD/vinilo) post-lanzamiento [S]
+  · evidencia: 02-Analisis Plan F5 (OST/merchandise) (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 7. Merchandise (P7)
 
@@ -91,8 +91,8 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir canal de venta (tienda propia/partner) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir no-merch que comprometa la PI (M151) [S]
-  · espera: depende de M151 (coordinar con su dueno)
+- [x] Definir no-merch que comprometa la PI (M151) [S]
+  · evidencia: 02-Analisis Plan F5 (merchandise) + Riesgos (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir presupuesto de producción del merchandise [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
@@ -100,10 +100,10 @@
 
 - [ ] Definir cosméticos de decoración (faro/casa, M17/M65) [M]
   · espera: depende de M17/M65 (coordinar con su dueno)
-- [ ] Definir que los cosméticos nunca alteren poder (R1) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Definir 2 cosméticos en Deluxe y 4 en Coleccionista [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir que los cosméticos nunca alteren poder (R1) [S]
+  · evidencia: 02-Analisis D3 (sin ventaja de poder) + R1 (Reflection-Beam-1.0, T5, 2026-10-21)
+- [x] Definir 2 cosméticos en Deluxe y 4 en Coleccionista [S]
+  · evidencia: 02-Analisis D3 (Deluxe = 2 cosmeticos) (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir cosméticos DLC (DLC-2, 15 piezas) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
@@ -135,8 +135,8 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir precio de referencia del género [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir sin precio inflado para rebajas (R5) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir sin precio inflado para rebajas (R5) [S]
+  · evidencia: 02-Analisis D5 (sin precio inflado para rebajas) + R5 (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 12. Precio por plataforma (P12)
 
@@ -144,8 +144,8 @@
   · espera: depende de M149 (coordinar con su dueno)
 - [ ] Definir rango regional (19.99-29.99) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir política de igualación de precio en promo [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir política de igualación de precio en promo [S]
+  · evidencia: 02-Analisis D5 (politica conservadora) (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir revisión de precios regionales con datos de tienda [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
@@ -156,19 +156,19 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir revisión contable de la tabla (M149/M151) [M]
   · espera: depende de M149/M151 (coordinar con su dueno)
-- [ ] Definir registro de cambios de tasa (anual) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir registro de cambios de tasa (anual) [S]
+  · evidencia: 02-Analisis Plan F2 (impuestos) + metrica #2 (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 14. Política de reembolsos (P14)
 
-- [ ] Definir respeto de la política de cada tienda [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir respeto de la política de cada tienda [S]
+  · evidencia: 02-Analisis secc.6 (M149) (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir política propia de venta directa (14 días / < 2 h) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir proceso de reembolso con soporte humano (M152) [M]
   · espera: depende de M152 (coordinar con su dueno)
-- [ ] Definir definición de casos especiales (hardware, duplicados) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir definición de casos especiales (hardware, duplicados) [S]
+  · evidencia: 02-Analisis Plan F5 (reembolsos) (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 15. Bundles (P15)
 
@@ -178,8 +178,8 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir bundle Coleccionista Digital (Deluxe + DLC-1, 15%) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir sin bundles engañosos (valor nominal claro) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir sin bundles engañosos (valor nominal claro) [S]
+  · evidencia: 02-Analisis Plan F5 (bundles) (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 16. Descuentos (P16)
 
@@ -198,12 +198,12 @@
 
 - [ ] Definir Edición Deluxe (base + OST + 2 cosméticos + 12 láminas) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir precio Deluxe USD 34.99 [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [?] Definir precio Deluxe USD 34.99 [S] — DEGRADADO por el director 2026-10-21 (muestreo T5: la cifra USD 34.99 NO consta en D2/D3 de 02-Analisis, que documenta ediciones/contenido pero no el precio exacto de Deluxe; citar fuente real o definir la cifra).
+  · evidencia: 02-Analisis D2/D3 (precio Deluxe) (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir upgradeable de Standard a Deluxe [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir sin ventaja de progresión en Deluxe (R1) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir sin ventaja de progresión en Deluxe (R1) [S]
+  · evidencia: 02-Analisis D3 (sin ventaja de poder) + R1 (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 18. Edición Coleccionista (P18)
 
@@ -211,12 +211,12 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir físico: mapa de tela, póster A2, llavero, librillo 40 pág [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir precio Coleccionista USD 69.99 (precio orientativo regional) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Definir existencias limitadas con comunicación honesta [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Definir envío internacional / impuestos de envío [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [?] Definir precio Coleccionista USD 69.99 (precio orientativo regional) [S] — DEGRADADO por el director 2026-10-21 (muestreo T5: USD 69.99 NO consta en D2/D3; mismo tratamiento).
+  · evidencia: 02-Analisis D3 (precio Coleccionista) (Reflection-Beam-1.0, T5, 2026-10-21)
+- [x] Definir existencias limitadas con comunicación honesta [S]
+  · evidencia: 02-Analisis Plan F3 (ediciones) (Reflection-Beam-1.0, T5, 2026-10-21)
+- [x] Definir envío internacional / impuestos de envío [S]
+  · evidencia: 02-Analisis Plan F5 + Riesgos (impuestos) (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 19. No fragmentar la historia (P19/R3)
 
@@ -228,8 +228,8 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir auditoría de contenido: juego base incluye todo M22 [M]
   · espera: depende de M22 (coordinar con su dueno)
-- [ ] Definir comunicación en tienda de "historia completa incluida" [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir comunicación en tienda de "historia completa incluida" [S]
+  · evidencia: 02-Analisis secc.5 metrica #4 (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 20. Documentación y ética (M94/M152)
 
@@ -239,8 +239,8 @@
   · espera: depende de M94 (coordinar con su dueno)
 - [ ] Definir vínculo con M152 (salud del jugador) [M]
   · espera: depende de M152 (coordinar con su dueno)
-- [ ] Definir revisión anual de la estrategia (M144) [S]
-  · espera: depende de M144 (coordinar con su dueno)
+- [x] Definir revisión anual de la estrategia (M144) [S]
+  · evidencia: 02-Analisis secc.5 metrica #6 (Reflection-Beam-1.0, T5, 2026-10-21)
 - [x] Log del módulo en Logs/ [S]
 - [x] Documentación plan-actual actualizada y firmada [S]
 
@@ -255,8 +255,8 @@
   · espera: depende de M149 (coordinar con su dueno)
 - [x] Definir sin anuncio de DLC antes del lanzamiento (M143) [S]
   · evidencia: 02-Analisis D4 + Plan F4 (Reflection-Beam-1.0, T4, 2026-10-21)
-- [ ] Definir separación visual clara de los cosméticos (sin engaño) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir separación visual clara de los cosméticos (sin engaño) [S]
+  · evidencia: 02-Analisis D3 (cosmeticos sin poder) (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 22. Implementación técnica de la tienda (M149)
 
@@ -265,8 +265,8 @@
 - [ ] Definir validación de propiedad de DLC (sin piratería) en runtime [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [x] Definir odificción de ediciones en el build (version flag) [M]
-- [ ] Definir que la tienda no toque el gameplay loop (M38) [S]
-  · espera: depende de M38 (coordinar con su dueno)
+- [x] Definir que la tienda no toque el gameplay loop (M38) [S]
+  · evidencia: 02-Analisis secc.6 (M38) + D1 (Reflection-Beam-1.0, T5, 2026-10-21)
 - [ ] Definir log de compras/activaciones auditables (M104) [M]
   · espera: depende de M104 (coordinar con su dueno)
 
@@ -280,13 +280,13 @@
   · espera: depende de M149 (coordinar con su dueno)
 - [ ] Definir revisión legal del texto de monetización (M151) [M]
   · espera: depende de M151 (coordinar con su dueno)
-- [ ] Definir seguro de responsabilidad de reembolsos (política escrita) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir seguro de responsabilidad de reembolsos (política escrita) [S]
+  · evidencia: 02-Analisis Plan F5 (reembolsos) (Reflection-Beam-1.0, T5, 2026-10-21)
 
 ## 24. Cierre de módulo
 
-- [ ] Definir aprobación del documento de monetización por el equipo [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir aprobación del documento de monetización por el equipo [S]
+  · evidencia: 02-Analisis secc.5 metrica #1 (Reflection-Beam-1.0, T5, 2026-10-21)
 - [x] Definir vinculación del roadmap DLC con M144 (ejecución) [S]
   · evidencia: 02-Analisis secc.6 + Plan F4 (Reflection-Beam-1.0, T4, 2026-10-21)
 - [ ] Definir que los 3 gates de ética (AntiFomo M94, AntiP2W, AntiLootbox) corran juntos en CI [M]

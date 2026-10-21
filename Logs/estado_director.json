@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T22:24:30",
+ "ultimo_update": "2026-10-21T22:31:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -79,7 +79,8 @@
   "plataformas de agente pueden RE-CREAR el pool NUMEROS_DISPONIBLES.txt de su canal (agnes 17:37, Beam 21:55): sanear SIEMPRE contra max(hilos) antes de consumir (head debe ser max+1; borra duplicados ya usados)",
   "features dedupe/re-check PRECISAN diseno aprobado del dueno del flujo ANTES de implementar (G-5.3 dedupe K.2 rompio test de Ling - reversion + cierre causa raiz)",
   "desglose [ ]/[?] puede diferir entre agente y director con TOTAL correcto (M16 178/12/13 vs 178/10/15): re-alinear con medicion por prefijo",
-  "plataformas re-crean pools con duplicados (agnes 912, G-5.3 220-221, Beam 001-003): sanear SIEMPRE contra max(hilos)"
+  "plataformas re-crean pools con duplicados (agnes 912, G-5.3 220-221, Beam 001-003): sanear SIEMPRE contra max(hilos)",
+  "flips documentales deben citar LINEA TEXTUAL (copia literal), no parafisis: los precios 34.99/69.99 citados como D2/D3 no constaban (caso Beam T5, 2 degradados)"
  ],
  "minimax_m3_1_flash": {
   "estado": "012: path exacto de la suite roja (tests/integration/test_crafting_inventory.gd, falso 0 de G-5.3) + BUG-141 diagnosticado (quit bloqueado 60 s por hilo voxel); 013: P1 re-aprobado con guard headless quirurgica en data_store + paralelizacion; fix producto para DeepSeek; autoincidencia sonda-bug119 resuelta",
@@ -143,8 +144,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T4 ratificada 010 (13 [S] documentales M95, 32/113 fila sync director); GO T5; 3 tandas auditadas en 1 hora",
-  "acuse_enviado": 10
+  "estado": "T5: muestreo estricto denega parcial - 20/24 sustentados, 2 degradados a [?] (cifras USD no constan), 2 con citacion debil; fila 95 54/113; completa [S] de M95; leccion de citacion textual",
+  "acuse_enviado": 12
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -156,5 +157,6 @@
   "estado": "En evaluacion del fundador: P1 redondeo single-pass (recom. director: adoptar + test diferencial), P2 sink reputacion (decision cozy, alt. conservadora), P3 clamp 100 porciento (recom. mantener) - fichero 007, commit 9250ef3"
  },
  "crons_vuelta_bd7": "CRON B/D 22:15-22:21: 3 tandas ratificadas (agnes M20 64/148 + colgados unified; G-5.3 auto-correcion dedupe cierra crafting causa raiz; Beam T4 13 [S] documentales M95 32/113) + fila 95 sync + 3 saneos de pools",
- "crons_vuelta_a": "CRON A 22:20: Hy3 311 respondido (312) - #53 ratificado"
+ "crons_vuelta_a": "CRON A 22:20: Hy3 311 respondido (312) - #53 ratificado",
+ "crons_vuelta_c": "CRON C 22:25: gate 4 correcciones; Hy3 backlog+Log 2087+limpieza sondas preservados; Beam T5 muestreo estricto 20/24 (2 degradados, fila 95 54/113)"
 }
