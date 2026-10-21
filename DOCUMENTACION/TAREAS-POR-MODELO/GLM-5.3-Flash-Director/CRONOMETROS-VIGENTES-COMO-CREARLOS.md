@@ -6,7 +6,7 @@
 
 **Modelo:** GLM-5.3 Flash-Director
 **Plataforma:** Kilo Code
-**Fecha:** 2026-10-19 04:32
+**Fecha:** 2026-10-21 17:30 (ids recreados; contenido de prompts vigente sin cambios)
 **Estado:** VIGENTE — estos son los 2 cronómetros del director, validados por el fundador 04:29. Copiar la definición EXACTA (expresión cron + prompt) para recrearlos.
 
 ---
@@ -122,12 +122,14 @@ Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir,
 
 ### Ids actuales verificados (para borrar si se recrea desde cero)
 
-| Cron | id |
+| Cron | id (vigente desde 2026-10-21 17:28, recreados tras truncado de mensajes) |
 |---|---|
-| A v3 | `wku_152079e32001aIFieBPmxEo5Cx` |
-| B v3 | `wku_15205e605001qmvl2IMi30Iwoi` |
-| C v3 | `wku_15758095e001JRCRSJoQc4m5xZ` |
-| D v2 | `wku_15d5883b5001RKmh5bAfpNPvdw` |
+| A v4 | `wku_15f8212f4001Zv9L8njuCCakhl` |
+| C v4 | `wku_15f822a60001ZFhLlGmbYa47DI` |
+| B v4 | `wku_15f824660001nilBMVsndFrWLJ` |
+| D v3 | `wku_15f8264bf001vXjxuqDtReCHyL` |
+
+Historial de ids anteriores (apagados 2026-10-21 17:24 por orden del fundador y recreados 17:28 tras truncado): A v4 `wku_15d5ab6a9001p20ji1BJIp9D2F`, C v4 `wku_15d60a8e1001rg814LLmNSZVQn`, B v4 `wku_15d60e50f001Nr5BslLXZji6sM`, D v3 `wku_15d5883b5001RKmh5bAfpNPvdw`.
 
 ## 4. Cómo crearlos (receta de relleno)
 

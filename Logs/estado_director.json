@@ -1,67 +1,89 @@
 {
-  "ultimo_update": "2026-10-21T04:23:28",
-  "fundador_ultimo_mensaje": "ademas el cronometro no lee lo que estamos haciendo en el chat - crons sin contexto",
-  "fundador_critica": "cron no analiza lo que ya venimos haciendo; lanzado sin contexto",
-  "agnes": {
-    "estado": "standby pido nuevo frente",
-    "pendientes_real": 337,
-    "nuevo_frente_asignado": true,
-    "modulos_asignados": [
-      "73-Coleccionables",
-      "72-Logros",
-      "20-Amistad",
-      "158-Herramientas",
-      "70-Interacciones"
-    ],
-    "acuse_enviado": 889
-  },
-  "g_5_3": {
-    "estado": "activo - tanda 40 cicla MR completo + tanda 41 navegacion",
-    "pendientes_real": 222,
-    "acuse_enviado": 187,
-    "ultima_tanda": 40
-  },
-  "deepseek": {
-    "estado": "activo - ciclos 64-80 M62 y cursos i18n",
-    "pendientes_real": 170,
-    "acuse_enviado": 344
-  },
-  "step_5": {
-    "estado": "standby - cola a 165 tras bloque W",
-    "pendientes_real": 165,
-    "acuse_enviado": 134
-  },
-  "ds_oc": {
-    "estado": "activo - ciclos 64-81 M62 y cursos",
-    "pendientes_real": 357,
-    "acuse_enviado": 168
-  },
-  "hy3": {
-    "estado": "standby - QA pendiente por dueno",
-    "pendientes_real": 257,
-    "acuse_enviado": 300
-  },
-  "ling": {
-    "estado": "activo - tandas 15-19 riel i18n M87",
-    "pendientes_real": 176,
-    "acuse_enviado": 197
-  },
-  "crons_vigentes": {
-    "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
-    "C_v4": ":05/:25/:45 gate + preservación + Lee contexto",
-    "B_v4": ":10/:30/:50 doble red + Lee contexto",
-    "D_v3": ":15/:35/:55 asignador + Lee contexto"
-  },
-  "trampas_registradas": [
-    "agente dice 'no tengo nada' -> escanear TODOS los 05 (2545+ [ ] en modulos no-bloqueados) antes de aceptar standby",
-    "T-19 falso positivo x3 (165, 293, 173): releer con mtime+bytes + retry antes de aviso",
-    "mi sync de fila GLOBAL no aterriza si replace() falla silenciosamente: verificar con grep acuse commit",
-    "puede haber dos sesiones GLM-5.3 en paralelo de sesiones hermanas: firma cruzada attribucion"
+ "ultimo_update": "2026-10-21T17:38:30",
+ "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
+ "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
+ "agnes": {
+  "estado": "M159 b2 cerrado por autor 300/300 + her_017; QA cruzado encargado a Hy3 (306)",
+  "pendientes_real": 337,
+  "nuevo_frente_asignado": true,
+  "modulos_asignados": [
+   "73-Coleccionables",
+   "72-Logros",
+   "20-Amistad",
+   "158-Herramientas",
+   "70-Interacciones"
   ],
-  "minimax_m3_1_flash": {
-    "estado": "activo - M61 t1-t2 entregadas, M73/etc asignadas",
-    "pendientes_real": 766,
-    "acuse_enviado": 4,
-    "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
-  }
+  "acuse_enviado": 902,
+  "pool_saneado": true
+ },
+ "g_5_3": {
+  "estado": "M59 item3: registry ubicado (autoload /root/IslandRegistry) + hallazgo sin IslandOps holder en prod -> bloqueado por wiring; puede entregar null-safe + test",
+  "pendientes_real": 222,
+  "acuse_enviado": 195,
+  "ultima_tanda": 40
+ },
+ "deepseek": {
+  "estado": "M105 flips del director aplicados 134/28; 12 senales derivadas a duenos; CI pendiente; cola pendiente de pulido",
+  "pendientes_real": 170,
+  "acuse_enviado": 350
+ },
+ "step_5": {
+  "estado": "standby - cola a 165 tras bloque W",
+  "pendientes_real": 165,
+  "acuse_enviado": 134
+ },
+ "ds_oc": {
+  "estado": "activo - ciclos 64-81 M62 y cursos",
+  "pendientes_real": 357,
+  "acuse_enviado": 168
+ },
+ "hy3": {
+  "estado": "encargo QA cruzado M159 b2 (306); su 305 llego EN PLANTILLA VACIA (T-19, mensaje caido 3h) - si reescribe, acuse pendiente",
+  "pendientes_real": 257,
+  "acuse_enviado": 306
+ },
+ "ling": {
+  "estado": "activo - tandas 15-19 riel i18n M87",
+  "pendientes_real": 176,
+  "acuse_enviado": 197
+ },
+ "crons_vigentes": {
+  "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
+  "C_v4": ":05/:25/:45 gate + preservación + Lee contexto",
+  "B_v4": ":10/:30/:50 doble red + Lee contexto",
+  "D_v3": ":15/:35/:55 asignador + Lee contexto"
+ },
+ "trampas_registradas": [
+  "agente dice 'no tengo nada' -> escanear TODOS los 05 (2545+ [ ] en modulos no-bloqueados) antes de aceptar standby",
+  "T-19 falso positivo x3 (165, 293, 173): releer con mtime+bytes + retry antes de aviso",
+  "mi sync de fila GLOBAL no aterriza si replace() falla silenciosamente: verificar con grep acuse commit",
+  "puede haber dos sesiones GLM-5.3 en paralelo de sesiones hermanas: firma cruzada attribucion",
+  "M59 item3: guard K7 existe pero en produccion NADIE sostiene IslandOps vivo (grep sin test_ = 0 holders) - bloquear guardado manual por carga de escena NO cableable sin holder",
+  "T-19 materializado: Hy3 305 paso >3h en plantilla vacia - releer con mtime+bytes + retry cubre solo 5min; caida >1h = aviso directo emisor"
+ ],
+ "minimax_m3_1_flash": {
+  "estado": "activo - M61 t1-t2 entregadas, M73/etc asignadas",
+  "pendientes_real": 766,
+  "acuse_enviado": 4,
+  "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
+ },
+ "crons_ids_vigentes": {
+  "A_v4": "wku_15f8212f4001Zv9L8njuCCakhl",
+  "C_v4": "wku_15f822a60001ZFhLlGmbYa47DI",
+  "B_v4": "wku_15f824660001nilBMVsndFrWLJ",
+  "D_v3": "wku_15f8264bf001vXjxuqDtReCHyL"
+ },
+ "crons_apagados_historico": {
+  "A_v4_anterior": "wku_15d5ab6a9001p20ji1BJIp9D2F",
+  "C_v4_anterior": "wku_15d60a8e1001rg814LLmNSZVQn",
+  "B_v4_anterior": "wku_15d60e50f001Nr5BslLXZji6sM",
+  "D_v3_anterior": "wku_15d5883b5001RKmh5bAfpNPvdw"
+ },
+ "derivaciones_pendientes": [
+  "M105 senales sin productor -> duenos: M14 item_added, M15 recurso, M16/M17 casa, M21 dialog_finished+npc_first_interaction, M24 puzzle, M37 museo, M74 festival, M38 proyecto, M68 island_loaded+travel_started, M84 purchase_done, M92 tutorial",
+  "quality.yml: cablear test_telemetry_bridge_m105.gd (CI, director/QA)",
+  "M159 b2 QA cruzado -> Hy3 (306 enviado); sello del director tras veredicto",
+  "M59 item3 wiring: IslandOps holder de produccion ausente -> dueno M27/M28/M60"
+ ],
+ "crons_vuelta_b_d": "CRON B respondio 4 pendientes (agnes 900+901 -> 902; DeepSeek 349 -> 350; G-5.3 194 -> 195) + Hy3 305 detectado en plantilla vacia (T-19 caido, avisado en 306); CRON D: activos 2h = DeepSeek (170) y G-5.3 (222) ambos >100 y agnes 337 -> SIN repoblacion; ningun backlog < 100"
 }
