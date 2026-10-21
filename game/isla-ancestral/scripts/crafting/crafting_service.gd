@@ -255,14 +255,6 @@ func get_estacion_actual() -> int:
 ## RF11: consume SOLO si todo puede completarse; si el resultado no entra,
 ## hace rollback completo (no se pierde material).
 ## RF5: si la receta está fuera de temporada, falla sin consumir.
-## K.2 (plan): dobles llamados en el MISMO frame (doble pulsación del botón)
-## se rechazan en silencio — clave (frame, rec_id, cantidad), la primera llamada
-## gana; las siguientes devuelven false SIN señal de fallo (log limpio).
-## Solo cuenta el ÚLTIMO CRAFT EXITOSO: si el primero falló, un reintento en el
-## mismo frame pasa por las validaciones normales.
-var _frame_ultimo_ok: int = -1
-var _rec_ultimo_ok: String = ""
-var _cant_ultimo_ok: int = -1
 
 ## K.5 (plan): buffer reutilizado para el hot path de fabricación — evita una
 ## asignación de Dictionary por cada craft (M14 iterá el dict sincrónicamente,
@@ -270,9 +262,6 @@ var _cant_ultimo_ok: int = -1
 var _materiales_total: Dictionary = {}
 
 func craft(rec_id: String, cantidad: int = 1) -> bool:
-	var frame_actual := Engine.get_process_frames()
-	if frame_actual == _frame_ultimo_ok and rec_id == _rec_ultimo_ok and cantidad == _cant_ultimo_ok:
-		return false  # doble pulsación: rechazo silencioso (sin señal)
 
 	var receta: CraftingRecipe = _recetas.get(rec_id, null)
 	if receta == null or cantidad < 1:
@@ -316,10 +305,6 @@ func craft(rec_id: String, cantidad: int = 1) -> bool:
 		crafting_failed.emit(receta, "inventario_lleno")
 		return false
 	crafting_completed.emit(receta, cantidad)
-	# K.2: marco el éxito para el rechazo silencioso de dobles en este frame.
-	_frame_ultimo_ok = frame_actual
-	_rec_ultimo_ok = rec_id
-	_cant_ultimo_ok = cantidad
 	return true
 
 ## ── Experimentación (invariante §1.3.2: nunca consume) ───

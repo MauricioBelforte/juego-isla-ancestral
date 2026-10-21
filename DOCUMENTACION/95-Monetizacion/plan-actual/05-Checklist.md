@@ -28,10 +28,10 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir comparativa de ventajas/desventajas F2P vs premium [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir 0 microtransacciones en el juego base [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Definir sin divisa premium ni cajas [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir 0 microtransacciones en el juego base [S]
+  · evidencia: 02-Analisis D1 (A2 premium) + metricas #3 (0 pay-to-win) (Reflection-Beam-1.0, T4, 2026-10-21)
+- [x] Definir sin divisa premium ni cajas [S]
+  · evidencia: 02-Analisis D1 (sin divisa dual) (Reflection-Beam-1.0, T4, 2026-10-21)
 - [ ] Definir soporte a largo plazo con DLC opcionales (no GaaS) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
@@ -109,23 +109,23 @@
 
 ## 9. Evitar pay-to-win (P9)
 
-- [ ] Definir cláusula formal anti-P2W en el documento [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir cláusula formal anti-P2W en el documento [S]
+  · evidencia: 05-Checklist L114 scanner_antip2w [x] + metricas #3 (Reflection-Beam-1.0, T4, 2026-10-21)
 - [x] Implementar scanner AntiP2W (scanner_antip2w.gd: detecta ítems que alteran progresión M38/M71) [M]
 - [x] Test AntiP2W: detecta ítem acelerador/ventaja, cosmético OK (test_monetizacion_m95.gd) [M]
 - [ ] Definir revisión de cada contenido de pago contra M38/M71 [M]
   · espera: depende de M38/M71 (coordinar con su dueno)
-- [ ] Definir 0 ítems de pago que den ventaja competitiva [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir 0 ítems de pago que den ventaja competitiva [S]
+  · evidencia: 05-Checklist L114/L115 + metricas #3 (Reflection-Beam-1.0, T4, 2026-10-21)
 
 ## 10. Evitar loot boxes (P10)
 
-- [ ] Definir cláusula formal anti-lootbox en el documento [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir cláusula formal anti-lootbox en el documento [S]
+  · evidencia: 05-Checklist L125 scanner_antilootbox [x] + metricas #3 (Reflection-Beam-1.0, T4, 2026-10-21)
 - [x] Implementar scanner AntiLootbox (scanner_antilootbox.gd: detecta cajas de azar) [M]
 - [x] Test AntiLootbox: detecta caja de azar con pago, azar sin pago OK (test_monetizacion_m95.gd) [M]
-- [ ] Definir que todo contenido de pago sea directo y claro [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir que todo contenido de pago sea directo y claro [S]
+  · evidencia: 02-Analisis secc.1 (honestidad) + metricas #3 (Reflection-Beam-1.0, T4, 2026-10-21)
 
 ## 11. Precio base (P11)
 
@@ -187,10 +187,10 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir máximo 25% en rebajas [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir máximo 2 rebajas anuales [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Definir prohibición de precio original falsificado (R5) [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir máximo 2 rebajas anuales [S]
+  · evidencia: 02-Analisis D5 (max 2 rebajas anuales) (Reflection-Beam-1.0, T4, 2026-10-21)
+- [x] Definir prohibición de precio original falsificado (R5) [S]
+  · evidencia: 02-Analisis D5 (sin precio inflado para rebajas) (Reflection-Beam-1.0, T4, 2026-10-21)
 - [ ] Definir política de descuentos para acceso anticipado (pre-orden con bonus, sin rebaja de precio) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
@@ -220,10 +220,10 @@
 
 ## 19. No fragmentar la historia (P19/R3)
 
-- [ ] Definir cláusula: historia principal 100% en el juego base [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Definir que los sellos/actos/epílogo nunca sean DLC [S]
-  · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
+- [x] Definir cláusula: historia principal 100% en el juego base [S]
+  · evidencia: 02-Analisis secc.5 metrica #4 (Reflection-Beam-1.0, T4, 2026-10-21)
+- [x] Definir que los sellos/actos/epílogo nunca sean DLC [S]
+  · evidencia: 02-Analisis D4 (DLC paralelo post-epilogo) (Reflection-Beam-1.0, T4, 2026-10-21)
 - [ ] Definir que el DLC-1 sea paralelo (post-epílogo) no intermedio [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir auditoría de contenido: juego base incluye todo M22 [M]
@@ -253,8 +253,8 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir que el juego base anuncie el roadmap DLC publicado (M149) [M]
   · espera: depende de M149 (coordinar con su dueno)
-- [ ] Definir sin anuncio de DLC antes del lanzamiento (M143) [S]
-  · espera: depende de M143 (coordinar con su dueno)
+- [x] Definir sin anuncio de DLC antes del lanzamiento (M143) [S]
+  · evidencia: 02-Analisis D4 + Plan F4 (Reflection-Beam-1.0, T4, 2026-10-21)
 - [ ] Definir separación visual clara de los cosméticos (sin engaño) [S]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 
@@ -287,12 +287,12 @@
 
 - [ ] Definir aprobación del documento de monetización por el equipo [S]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Definir vinculación del roadmap DLC con M144 (ejecución) [S]
-  · espera: depende de M144 (coordinar con su dueno)
+- [x] Definir vinculación del roadmap DLC con M144 (ejecución) [S]
+  · evidencia: 02-Analisis secc.6 + Plan F4 (Reflection-Beam-1.0, T4, 2026-10-21)
 - [ ] Definir que los 3 gates de ética (AntiFomo M94, AntiP2W, AntiLootbox) corran juntos en CI [M]
   · espera: depende de M94 (coordinar con su dueno)
 - [x] Test de que la historia principal siga completa (ediciones + DLC, test_monetizacion_m95.gd) [M]
-- [ ] Definir revisión de la estrategia a los 12 meses (M144) [S]
+- [x] Definir revisión de la estrategia a los 12 meses (M144) [S]
 \n## Totales
   · espera: depende de M144 (coordinar con su dueno)
 

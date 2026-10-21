@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-21T22:11:30",
+ "ultimo_update": "2026-10-21T22:21:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "911: derivacion test_icons_m159.gd TIMEOUT >180 s (corrida MiniMax); funciones vigentes M72-t6 + reconteo total 182/185",
+  "estado": "913: M20 t1 14 flips por test (64/148) ratificada; diagnostico colgados SceneTree/await GO aislamiento; cron */40 pedido usuario",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,13 +13,13 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 911,
+  "acuse_enviado": 913,
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "218 corregido por 219: crafting REABIRO con path exacto (falso 0 de glob) - 3 checks son su riel; leccion glob con **/",
+  "estado": "221/222: auto-correcion ratificada (dedupe K.2 invadía test de Ling -> reversion completa, 21/0 x2; M16 178/10/15=203); crafting CERRADO causa raiz; leccion dedupe-pide-diseno",
   "pendientes_real": 222,
-  "acuse_enviado": 218,
+  "acuse_enviado": 222,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -76,7 +76,10 @@
   "guardado async con voxel binario bloquea quit ~60 s (hilo wait_to_finish): flag headless para tests + fix producto en DataStore (BUG-141)",
   "drift propio del director: mi flag \"M72 total 182\" excluia los 3 [?] (conteo correcto: 185 con 89/93/3) - Beam lo expuso en su calibracion; conteo canonico = 185 y mi cambio a la fila se revirtio antes de contaminar",
   "M23 desfasa rapido bajo iteraciones concurrentes: los conteos declarados en prompts de calibracion deben citarse como snapshot (fecha/hora) ya que iter 4 agrego un item de decision",
-  "plataformas de agente pueden RE-CREAR el pool NUMEROS_DISPONIBLES.txt de su canal (agnes 17:37, Beam 21:55): sanear SIEMPRE contra max(hilos) antes de consumir (head debe ser max+1; borra duplicados ya usados)"
+  "plataformas de agente pueden RE-CREAR el pool NUMEROS_DISPONIBLES.txt de su canal (agnes 17:37, Beam 21:55): sanear SIEMPRE contra max(hilos) antes de consumir (head debe ser max+1; borra duplicados ya usados)",
+  "features dedupe/re-check PRECISAN diseno aprobado del dueno del flujo ANTES de implementar (G-5.3 dedupe K.2 rompio test de Ling - reversion + cierre causa raiz)",
+  "desglose [ ]/[?] puede diferir entre agente y director con TOTAL correcto (M16 178/12/13 vs 178/10/15): re-alinear con medicion por prefijo",
+  "plataformas re-crean pools con duplicados (agnes 912, G-5.3 220-221, Beam 001-003): sanear SIEMPRE contra max(hilos)"
  ],
  "minimax_m3_1_flash": {
   "estado": "012: path exacto de la suite roja (tests/integration/test_crafting_inventory.gd, falso 0 de G-5.3) + BUG-141 diagnosticado (quit bloqueado 60 s por hilo voxel); 013: P1 re-aprobado con guard headless quirurgica en data_store + paralelizacion; fix producto para DeepSeek; autoincidencia sonda-bug119 resuelta",
@@ -117,7 +120,7 @@
   "M93/M34: decision de diseno sobre margen de los 7 peces raros (>0.70 hasta 0.769, fishing.json) - documentar excepcion (<=0.77) o normalizar a <=0.70; validate_balance.gd no cubre fishing.json (hallazgo Beam T2, verificado por director)"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 21:55: script 0 pendientes en los 9 canales (calibracion Beam sellada 004); backlogs >= 100 todos (Beam 432); rieles vigentes sin cambios; SIN repoblacion",
+ "crons_vuelta_d": "CRON D 22:15: script 0 pendientes; backlogs >= 100 todos (Beam 432+T3 cerrada); propuesta economia Beam en decision del fundador; SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
@@ -140,8 +143,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T3 propuesta economia RECIBIDA y en evaluacion del fundador (P1 single-pass recomendada adopcion; P2/P3 a decision cozy); 008 enviado con proxima tarea autonoma (re-ver M93 o item [S])",
-  "acuse_enviado": 8
+  "estado": "T4 ratificada 010 (13 [S] documentales M95, 32/113 fila sync director); GO T5; 3 tandas auditadas en 1 hora",
+  "acuse_enviado": 10
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -151,5 +154,6 @@
  "crons_vuelta_bd4": "CRON B 21:50: calibracion de Beam APROBADA 6/6 con contraste del director (acuse 004 = flota plena; canonico M72=185 expuso errores 182-director/189-agnes) + acuse 155 Step-5 (iter4) + fila 23 re-sync 43/105; commits 2471ccd",
  "propuesta_beam_economia": {
   "estado": "En evaluacion del fundador: P1 redondeo single-pass (recom. director: adoptar + test diferencial), P2 sink reputacion (decision cozy, alt. conservadora), P3 clamp 100 porciento (recom. mantener) - fichero 007, commit 9250ef3"
- }
+ },
+ "crons_vuelta_bd7": "CRON B/D 22:15-22:21: 3 tandas ratificadas (agnes M20 64/148 + colgados unified; G-5.3 auto-correcion dedupe cierra crafting causa raiz; Beam T4 13 [S] documentales M95 32/113) + fila 95 sync + 3 saneos de pools"
 }

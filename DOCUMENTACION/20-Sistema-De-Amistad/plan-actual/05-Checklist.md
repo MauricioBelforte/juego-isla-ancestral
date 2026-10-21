@@ -9,18 +9,18 @@
 - [ ] Registrar dependencias: M19, M14, M29; relaciones M21, M23, M26, M31, M32, M73 [S]
 - [ ] Catalogar los 26 puntos de la seccion 19 del plan maestro [S]
 - [x] Stack confirmado: Godot 4.x (>= 4.4.1) + Voxel Tools + GDScript [S]
-- [ ] RF1: niveles de amistad 0-10 con umbrales [S]
-- [ ] RF2: puntos de amistad acumulativos sin fuente de decaimiento [S]
-- [ ] RF3: limite de un regalo efectivo por vecino y dia [S]
+- [x] RF1: niveles de amistad 0-10 con umbrales [S]
+- [x] RF2: puntos de amistad acumulativos sin fuente de decaimiento [S]
+- [x] RF3: limite de un regalo efectivo por vecino y dia [S]
 - [ ] RF4-RF8: preferencias, charlas, cartas, recompensas y eventos definidos [S]
 
 ## B. Puntos y progresion (8)
 
-- [ ] Curva de umbrales por nivel definida (20, 40, 70, 100, 140, 190, 250, 320, 400, 500) [S]
-- [ ] Regalo amado 20 puntos [S]
-- [ ] Regalo que gusta 10 puntos [S]
-- [ ] Regalo neutral 5 puntos [S]
-- [ ] Regalo duplicado 2 puntos (cortesia, nunca 0) [S]
+- [x] Curva de umbrales por nivel definida (20, 40, 70, 100, 140, 190, 250, 320, 400, 500) [S]
+- [x] Regalo amado 20 puntos [S]
+- [x] Regalo que gusta 10 puntos [S]
+- [x] Regalo neutral 5 puntos [S]
+- [x] Regalo duplicado 2 puntos (cortesia, nunca 0) [S]
 - [ ] Charla diaria 5 + 1 por nivel (max +10) [S]
 - [ ] Carta respondida 8 puntos [S]
 - [ ] Evento como participante 15 puntos [S]
@@ -31,9 +31,9 @@
 - [x] Recompensas por nivel configuradas en data (objetos, recetas, frases) [S]
 - [ ] Acceso a eventos por nivel minimo [S]
 - [ ] Desbloqueo de historias de amistad al nivel requerido (M23) [S]
-- [ ] Excedente de puntos conservado al subir de nivel [S]
+- [x] Excedente de puntos conservado al subir de nivel [S]
 - [ ] Bandeja de recompensas pendientes sin expiracion [S]
-- [ ] Recompensas reclamables en cualquier momento posterior (sin FOMO) [S]
+- [x] Recompensas reclamables en cualquier momento posterior (sin FOMO) [S]
 - [ ] Progress visible: barra de progreso dentro del nivel actual [S]
 - [ ] Feedback de nivel subido con animacion y lista de desbloqueos [M]
 
@@ -156,7 +156,7 @@
 
 ## O. Edge cases (9)
 
-- [ ] Regalo duplicado con puntos minimos y mensaje amable [S]
+- [x] Regalo duplicado con puntos minimos y mensaje amable [S]
 - [ ] Vecino ausente de la isla (viaje, M69): regalo rechazado con aviso [S]
 - [ ] Vecino que se muda: historial archivado, sistema no falla [M]
 - [ ] Inventario vacio: opcion regalar deshabilitada con tooltip [S]
@@ -195,10 +195,10 @@
 
 ## S. Testings y QA (7)
 
-- [ ] Test: regalo amado/gusta/neutral/duplicado devuelve puntos esperados [M]
+- [x] Test: regalo amado/gusta/neutral/duplicado devuelve puntos esperados [M]
 - [ ] Test: limite diario respetado para regalo, charla y carta [M]
-- [ ] Test: excedente conservado al subir de nivel [M]
-- [ ] Test: ausencia de 30 dias no reduce puntos (sin FOMO) [M]
+- [x] Test: excedente conservado al subir de nivel [M]
+- [x] Test: ausencia de 30 dias no reduce puntos (sin FOMO) [M]
 - [ ] Test: guardar/cargar a mitad de nivel restaura exacto [M]
 - [ ] Test: reclamar recompensa idempotente [S]
 - [ ] Recorrido M114: 10 vecinos a nivel 5+ en sesiones simuladas sin fallos [C]
