@@ -1,5 +1,5 @@
 > **Estado:** 🟡 Liberado — iter. 2 (2026-10-21, Log 2082): núcleo reverificado con binario real (suite endurecida, 40 checks/0 fallos x3, guardián probado en rojo); 43/104 [x]; 61 [ ] de contenido/dueños externos.
-> **Clasificación de los [ ] (iter. 2, Step-5-WorkBuddy, 2026-10-21, Log 2082):** por verbo — «Crear» = artefacto ausente en disco (data/historias/secundarias.json tiene 4 cadenas de ~89; 0 capítulos capitulo-* en el catálogo M55; 0 cosméticos; 0 registros de jardín/taller/cofradía) → [ ] honesto, no se inventa contenido; «Definir/Diseñar/Documentar» = flip sólo con cita en 02/03/04 o implementación; por dueño — externos M22/M24/M28/M32/M36/M37/M68 marcados en el ítem. Conteo por prefijo de línea: 43 [x] / 61 [ ] / 0 [?] = 104.
+> **Clasificación de los [ ] (iter. 2, Step-5-WorkBuddy, 2026-10-21, Log 2082):** por verbo — «Crear» = artefacto ausente en disco (data/historias/secundarias.json tiene 4 cadenas de ~89; 0 capítulos capitulo-* en el catálogo M55; 0 cosméticos; 0 registros de jardín/taller/cofradía) → [ ] honesto, no se inventa contenido; «Definir/Diseñar/Documentar» = flip sólo con cita en 02/03/04 o implementación; por dueño — externos M22/M24/M28/M32/M36/M37/M68 marcados en el ítem. Conteo por prefijo de línea: 43 [x] / 60 [ ] / 1 [?] = 104 (iter. 3, Log 2083: el director degradó el [x] «molino funcionando» a [?] el 2026-10-21, msg 151; el merge de ejemplos sumó el [x] de la biblioteca).
 
 ## Reserva actual
 
@@ -29,9 +29,9 @@
 ## Historias de lugares, ruinas y objetos
 
 - [ ] Crear la historia del faro (lugar) [M]
-- [ ] Crear la historia de la biblioteca [M]
+- [x] Crear la historia de la biblioteca [M] — cadena-biblioteca mergeada desde data/historias/cadenas_ejemplo.json vía RUTA_CATALOGO_EJEMPLOS (merge por id, fuente "ejemplos", secundarias.json no la tenía); corre end-to-end en test_historias.gd bloque H (hablar bibliotecaria / explorar biblioteca / entregar tomo_antiguo / completada, Log 2083). Nota: la recompensa de diario depende de la entrada mision_cadena-biblioteca en el catálogo de M55 (ausente hoy, dueño M55).
 - [ ] Crear la historia de los jardines [M]
-- [ ] Crear la historia de la plaza [M]
+- [ ] Crear la historia de la plaza [M] — la variante cadena-postgame-plaza de cadenas_ejemplo.json fue RECHAZADA por el validador en el merge (tipo de paso "construir" desconocido: 03-Diseno y TIPOS_PASO solo conocen hablar/explorar/puzzle/entregar; 0 usos del token en scripts/); cadena-epilogo-plaza del principal ya cubre la plaza post-final (L130). Sigue [ ] hasta decidir si se agrega el tipo o se migra el dato (Log 2083).
 - [ ] Crear la historia del molino [M]
 - [ ] Crear la historia de la cofradía [M]
 - [ ] Crear historias de 4 ruinas (biblioteca quemada, observatorio, estación, puente) [M]
@@ -48,7 +48,7 @@
 
 ## Historias estacionales y secretas
 
-- [ ] Crear el evento de siembra (M32) [M] — **Dueño M32:** evento estacional; 0 cadenas estacionales en data/historias/secundarias.json (4 cadenas: faro, invernadero, epilogo-plaza, luciernagas).
+- [ ] Crear el evento de siembra (M32) [M] — **Dueño M32:** evento estacional; 0 cadenas estacionales en data/historias/secundarias.json (4 cadenas del principal: faro, invernadero, epilogo-plaza, luciernagas; 5 tras el merge de ejemplos, Log 2083).
 - [ ] Crear el evento de vendimia [M] — **Dueño M32:** evento estacional; 0 en disco.
 - [ ] Crear el evento de marea [M] — **Dueño M32:** evento estacional; 0 en disco.
 - [ ] Crear el evento de eclipse [M] — **Dueño M32:** evento estacional; 0 en disco (el eclipse de cadena-faro es contexto narrativo, no el evento de M32).
@@ -166,7 +166,7 @@
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — Log 447 (renumeración pendiente, protocolo v2: reservado al bloquear)
 - [x] Actualizar fila 23 en CHECKLIST-GLOBAL al implementar [S] — hecho (reserva + liberación)
 
-**Total:** 42/104 [x] · 61/104 [ ] · 1 [?] (iter. 2 Step-5-WorkBuddy 2026-10-21, Log 2082: 19 flips con cita en disco — ver 04-Codigo.md §Notas del Agente iter. 2; los 61 [ ] son contenido narrativo ausente (data/historias/secundarias.json: 4 de las ~89 cadenas del catálogo de 03-Diseno) o ítems con dueño externo M22/M24/M28/M32/M36/M37/M68). Nota: el [x] «molino funcionando» (L110) no tiene apoyo en disco (grep molino_funcionando = 0 archivos) — reportado al director, marca no tocada.)
+**Total:** 43/104 [x] · 60/104 [ ] · 1 [?] (iter. 2 Step-5-WorkBuddy 2026-10-21, Log 2082: 19 flips con cita en disco — ver 04-Codigo.md §Notas del Agente iter. 2; iter. 3 Step-5-WorkBuddy 2026-10-21, Log 2083: merge de cadenas_ejemplo.json con +1 [x] (biblioteca, L32) y el rechazo validado de cadena-postgame-plaza; el director degradó el [x] «molino funcionando» (L111) a [?] el 2026-10-21, msg 151, por grep molino_funcionando = 0 archivos; los 60 [ ] son contenido narrativo ausente o ítems con dueño externo M22/M24/M28/M32/M36/M37/M68).
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
 
 **Modelo:** Hy3

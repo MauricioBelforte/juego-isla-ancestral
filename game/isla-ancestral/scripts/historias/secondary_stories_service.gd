@@ -16,16 +16,29 @@
 #  - Validador anti-repetición (§regla dura): contexto no vacío, pasos >= 3,
 #    ids únicos, recompensa/consecuencia presentes, tipos conocidos.
 #  - Persistencia ISaveProvider M59: sección "secondary_stories".
+# Iter. 3 (Step-5-WorkBuddy, 2026-10-21, Log 2083; GO del director, msg 151):
+# catálogo secundario data/historias/cadenas_ejemplo.json cableado por
+# RUTA_CATALOGO_EJEMPLOS con merge por id sobre el principal: el principal gana
+# los conflictos (no se sobrescribe), las cadenas nuevas que no pasan el
+# validador se rechazan con sus errores, y el resultado queda consultable en
+# merge_ejemplos_reporte() {anadidas, conflictos, rechazadas}.
 # ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 const RUTA_CATALOGO: String = "res://data/historias/secundarias.json"
+const RUTA_CATALOGO_EJEMPLOS: String = "res://data/historias/cadenas_ejemplo.json"
+const FUENTE_PRINCIPAL := "secundarias"
+const FUENTE_EJEMPLOS := "ejemplos"
 const TIPOS_PASO: Array[String] = ["hablar", "explorar", "puzzle", "entregar"]
 
 ## cadena_id -> {titulo, contexto, pasos[], recompensa, consecuencia, oculta, postgame}
 var _cadenas: Dictionary = {}
 ## estado: cadena_id -> {paso_actual: int, activa: bool, completada: bool}
 var _estado: Dictionary = {}
+## cadena_id -> "secundarias" | "ejemplos" (de qué archivo vino cada cadena)
+var _fuente: Dictionary = {}
+## Reporte del merge de ejemplos: {anadidas: [], conflictos: [], rechazadas: [{id, errores}]}
+var _merge_ejemplos: Dictionary = {"anadidas": [], "conflictos": [], "rechazadas": []}
 
 
 func _ready() -> void:
@@ -35,17 +48,61 @@ func _ready() -> void:
 
 func _cargar_cadenas() -> void:
 	_cadenas.clear()
-	var texto := FileAccess.get_file_as_string(RUTA_CATALOGO)
-	var parseado: Variant = JSON.parse_string(texto)
-	if typeof(parseado) != TYPE_DICTIONARY:
-		push_error("[M23] secundarias.json inválido")
-		return
-	for cadena in parseado.get("cadenas", []):
+	_fuente.clear()
+	_merge_ejemplos = {"anadidas": [], "conflictos": [], "rechazadas": []}
+	for cadena in _leer_catalogo(RUTA_CATALOGO):
 		var id := String(cadena.get("id", ""))
 		if id.is_empty():
 			continue
 		_cadenas[id] = cadena
-	print("[M23] Cadenas cargadas: %d" % _cadenas.size())
+		_fuente[id] = FUENTE_PRINCIPAL
+	_mergear_ejemplos()
+	var rep: Dictionary = _merge_ejemplos
+	print("[M23] Cadenas cargadas: %d (ejemplos: añadidas %d, conflictos %d, rechazadas %d)" % [
+		_cadenas.size(), (rep.anadidas as Array).size(),
+		(rep.conflictos as Array).size(), (rep.rechazadas as Array).size()])
+
+
+## Lee un catálogo JSON y devuelve su lista de cadenas (vacía si el archivo
+## falta o no parsea: el merge degrada, no aborta la carga del principal).
+func _leer_catalogo(ruta: String) -> Array:
+	if not FileAccess.file_exists(ruta):
+		push_warning("[M23] catálogo ausente: %s" % ruta)
+		return []
+	var texto := FileAccess.get_file_as_string(ruta)
+	var parseado: Variant = JSON.parse_string(texto)
+	if typeof(parseado) != TYPE_DICTIONARY:
+		push_error("[M23] catálogo inválido: %s" % ruta)
+		return []
+	var lista: Variant = parseado.get("cadenas", [])
+	if typeof(lista) != TYPE_ARRAY:
+		push_error("[M23] catálogo sin lista 'cadenas': %s" % ruta)
+		return []
+	return lista
+
+
+## Merge del catálogo de ejemplos sobre el principal (§GO director, msg 151):
+##  - id ya presente -> conflicto: gana el principal (no se sobrescribe);
+##  - cadena nueva que no pasa el validador -> rechazada con sus errores;
+##  - cadena nueva válida -> añadida con fuente "ejemplos".
+func _mergear_ejemplos() -> void:
+	var titulos := {}
+	for cid in _cadenas:
+		titulos[String(_cadenas[cid].get("titulo", ""))] = true
+	for cadena in _leer_catalogo(RUTA_CATALOGO_EJEMPLOS):
+		var id := String(cadena.get("id", ""))
+		if id.is_empty():
+			continue
+		if _cadenas.has(id):
+			(_merge_ejemplos.conflictos as Array).append(id)
+			continue
+		var errores := _errores_de_cadena(id, cadena, titulos)
+		if not errores.is_empty():
+			(_merge_ejemplos.rechazadas as Array).append({"id": id, "errores": errores})
+			continue
+		_cadenas[id] = cadena
+		_fuente[id] = FUENTE_EJEMPLOS
+		(_merge_ejemplos.anadidas as Array).append(id)
 
 
 func _registrar_proveedor_guardado() -> void:
@@ -58,6 +115,16 @@ func _registrar_proveedor_guardado() -> void:
 
 func cadenas_count() -> int:
 	return _cadenas.size()
+
+
+## De qué archivo vino la cadena: "secundarias", "ejemplos" o "" si no existe.
+func fuente_cadena(cadena_id: String) -> String:
+	return String(_fuente.get(cadena_id, ""))
+
+
+## Copia del reporte del merge de ejemplos: {anadidas, conflictos, rechazadas}.
+func merge_ejemplos_reporte() -> Dictionary:
+	return _merge_ejemplos.duplicate(true)
 
 
 ## Cadenas visibles: ocultas solo si ya iniciadas; postgame solo con final M22
@@ -190,35 +257,43 @@ func validar_cadenas() -> Array[String]:
 	var errores: Array[String] = []
 	var titulos_vistos := {}
 	for cid in _cadenas:
-		var c: Dictionary = _cadenas[cid]
-		var contexto := String(c.get("contexto", ""))
-		# Regla dura: contexto narrativo no vacío (anti "recoge N" genéricos)
-		if contexto.strip_edges().length() < 10:
-			errores.append("%s: contexto ausente o muy corto" % cid)
-		var pasos: Array = c.get("pasos", [])
-		# Esquema: pasos >= 3
-		if pasos.size() < 3:
-			errores.append("%s: menos de 3 pasos" % cid)
-		# Tipos conocidos + ids de paso únicos dentro de la cadena
-		var ids_paso := {}
-		for p in pasos:
-			var tipo := String(p.get("tipo", ""))
-			if not (tipo in TIPOS_PASO):
-				errores.append("%s/%s: tipo desconocido '%s'" % [cid, String(p.get("id", "")), tipo])
-			var pid := String(p.get("id", ""))
-			if ids_paso.has(pid):
-				errores.append("%s: id de paso duplicado '%s'" % [cid, pid])
-			ids_paso[pid] = true
-		# Recompensa y consecuencia presentes (única por cadena)
-		if c.get("recompensa", {}).is_empty():
-			errores.append("%s: sin recompensa" % cid)
-		if c.get("consecuencia", {}).is_empty():
-			errores.append("%s: sin consecuencia" % cid)
-		# Anti-repetición: título único
-		var titulo := String(c.get("titulo", ""))
-		if titulos_vistos.has(titulo):
-			errores.append("%s: título duplicado '%s'" % [cid, titulo])
-		titulos_vistos[titulo] = true
+		errores.append_array(_errores_de_cadena(String(cid), _cadenas[cid], titulos_vistos))
+	return errores
+
+
+## Errores de UNA cadena contra el esquema. titulos_vistos se actualiza con el
+## título (anti-repetición); pasar un diccionario fresco limita la regla al
+## alcance de quien llama (p. ej. el merge de ejemplos sobre los títulos ya vistos).
+func _errores_de_cadena(cid: String, c: Dictionary, titulos_vistos: Dictionary) -> Array[String]:
+	var errores: Array[String] = []
+	var contexto := String(c.get("contexto", ""))
+	# Regla dura: contexto narrativo no vacío (anti "recoge N" genéricos)
+	if contexto.strip_edges().length() < 10:
+		errores.append("%s: contexto ausente o muy corto" % cid)
+	var pasos: Array = c.get("pasos", [])
+	# Esquema: pasos >= 3
+	if pasos.size() < 3:
+		errores.append("%s: menos de 3 pasos" % cid)
+	# Tipos conocidos + ids de paso únicos dentro de la cadena
+	var ids_paso := {}
+	for p in pasos:
+		var tipo := String(p.get("tipo", ""))
+		if not (tipo in TIPOS_PASO):
+			errores.append("%s/%s: tipo desconocido '%s'" % [cid, String(p.get("id", "")), tipo])
+		var pid := String(p.get("id", ""))
+		if ids_paso.has(pid):
+			errores.append("%s: id de paso duplicado '%s'" % [cid, pid])
+		ids_paso[pid] = true
+	# Recompensa y consecuencia presentes (única por cadena)
+	if c.get("recompensa", {}).is_empty():
+		errores.append("%s: sin recompensa" % cid)
+	if c.get("consecuencia", {}).is_empty():
+		errores.append("%s: sin consecuencia" % cid)
+	# Anti-repetición: título único
+	var titulo := String(c.get("titulo", ""))
+	if titulos_vistos.has(titulo):
+		errores.append("%s: título duplicado '%s'" % [cid, titulo])
+	titulos_vistos[titulo] = true
 	return errores
 
 

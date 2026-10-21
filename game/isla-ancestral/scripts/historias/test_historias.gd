@@ -13,11 +13,14 @@
 # en un call_deferred SEPARADO (si _run() aborta, el resumen corre igual y sale EXIT 1).
 # El bloque postgame se extendió a los 4 finales de M22 (data/historia/historia_principal.json:
 # final_principal/final_regresar/final_guardian/final_secreto).
+# Iter. 3 (Step-5-WorkBuddy, 2026-10-21, Log 2083): merge de cadenas_ejemplo.json
+# (GO del director, msg 151). Bloque A mide el catálogo mergeado (5 cadenas) y el
+# bloque H afirma el reporte del merge + corrida end-to-end de la cadena añadida.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -25,8 +28,9 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 2): corrida real del 2026-10-21, no estimado.
-const CHECKS_MINIMOS := 40
+# Piso MEDIDO en verde (iter. 3, 2026-10-21): 59 checks con los bloques A-H
+# (iter. 2 tenía 40 con A-G; el merge de ejemplos sumó el bloque H).
+const CHECKS_MINIMOS := 59
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -55,6 +59,7 @@ func _run() -> void:
 	_test_ocultas()
 	_test_postgame()
 	_test_persistencia()
+	_test_merge_ejemplos()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -82,9 +87,19 @@ func _summary() -> void:
 
 
 func _test_carga() -> void:
-	_check(_h.cadenas_count() == 4, "4 cadenas cargadas: %d" % _h.cadenas_count())
+	# Iter. 3: 4 del principal + 1 mergeada de ejemplos (cadena-biblioteca).
+	_check(_h.cadenas_count() == 5, "5 cadenas cargadas tras el merge (4 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
+	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
+	var faro: Dictionary = _h.get_cadena("cadena-faro")
+	_check(String(faro.get("contexto", "")).contains("quiere encender el faro"), "conflicto resuelto a favor del principal (contexto de producción)")
+	_check(not String(faro.get("contexto", "")).contains("barcos perdidos"), "la variante de ejemplos NO sobrescribe al principal")
+	_check(_h.fuente_cadena("cadena-faro") == "secundarias", "fuente de cadena-faro = principal")
+	# Mergeada y rechazada
+	_check(_h.fuente_cadena("cadena-biblioteca") == "ejemplos", "fuente de cadena-biblioteca = ejemplos")
+	_check(not _h.get_cadena("cadena-biblioteca").is_empty(), "cadena-biblioteca accesible tras el merge")
+	_check(_h.get_cadena("cadena-postgame-plaza").is_empty(), "cadena-postgame-plaza rechazada (tipo 'construir' desconocido), no cargada")
 	_fin("A")
 
 
@@ -235,3 +250,57 @@ func _test_persistencia() -> void:
 	_h.restore_save_data(con_huerfana)
 	_check(not _h.esta_completada("cadena_vieja"), "huérfana purgada")
 	_fin("G")
+
+
+func _test_merge_ejemplos() -> void:
+	# Iter. 3 (Log 2083): el reporte del merge afirma qué se añadió, qué
+	# colisionó y qué se rechazó — y la cadena añadida corre end-to-end.
+	var rep: Dictionary = _h.merge_ejemplos_reporte()
+	_check(rep.has("anadidas") and rep.has("conflictos") and rep.has("rechazadas"),
+		"reporte de merge con las 3 listas")
+	var anadidas: Array = rep.get("anadidas", [])
+	var conflictos: Array = rep.get("conflictos", [])
+	var rechazadas: Array = rep.get("rechazadas", [])
+	_check(anadidas.size() == 1 and String(anadidas[0]) == "cadena-biblioteca",
+		"merge añade solo cadena-biblioteca (%s)" % str(anadidas))
+	_check(conflictos.size() == 1 and String(conflictos[0]) == "cadena-faro",
+		"conflicto único resuelto a favor del principal: cadena-faro (%s)" % str(conflictos))
+	_check(rechazadas.size() == 1, "1 cadena rechazada por esquema inválido: %d" % rechazadas.size())
+	var rech := {}
+	for r in rechazadas:
+		if String((r as Dictionary).get("id", "")) == "cadena-postgame-plaza":
+			rech = r
+	_check(not rech.is_empty(), "cadena-postgame-plaza figura en rechazadas")
+	var errs: Array = rech.get("errores", [])
+	var menciona := false
+	for e in errs:
+		if String(e).contains("construir"):
+			menciona = true
+	_check(menciona, "rechazo nombra el tipo desconocido 'construir' (%s)" % str(errs))
+	# La cadena añadida corre end-to-end en el motor (no solo "existe en el diccionario")
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"tomo_antiguo": 1})
+	var res: Dictionary = _h.iniciar_cadena("cadena-biblioteca")
+	_check(bool(res.ok), "iniciar cadena-biblioteca (mergeada) OK")
+	res = _h.reportar_paso("cadena-biblioteca", "hablar", "bibliotecaria")
+	_check(bool(res.ok), "paso 1 hablar bibliotecaria OK")
+	res = _h.reportar_paso("cadena-biblioteca", "explorar", "biblioteca")
+	_check(bool(res.ok), "paso 2 explorar biblioteca OK")
+	res = _h.reportar_entrega("cadena-biblioteca")
+	_check(bool(res.ok), "paso 3 entregar tomo_antiguo OK (inventario)")
+	_check(_h.esta_completada("cadena-biblioteca"), "cadena-biblioteca completada end-to-end")
+	# Consecuencia: clave LITERAL del ejemplo, con prefijo 'estado_mundo.'
+	# (diferencia de esquema vs el principal, que usa flags pelados — reportada
+	# al director en el Log 2083; el test documenta el comportamiento medido).
+	_check(ws_has("estado_mundo.biblioteca_iluminada"), "consecuencia aplicada con la clave literal del ejemplo")
+	# Recompensa de diario: el puente M23→M55 exige la entrada en el catálogo
+	# de M55 (diary_service.registrar valida contra _catalogo). MEDIDO (Log 2083):
+	# el catálogo tiene mision_cadena-faro y mision_cadena-invernadero, NO
+	# mision_cadena-biblioteca -> el puente degrada en silencio (retorna false).
+	# Finding reportado al director: la entrada es contenido de M55 (dueño).
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-biblioteca"),
+			"puente diario degrada sin entrada en catálogo M55 (finding medido, no se inventa contenido)")
+	_fin("H")

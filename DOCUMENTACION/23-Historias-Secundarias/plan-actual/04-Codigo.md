@@ -173,3 +173,15 @@ func validar_todas() -> Array  # para Editor/CI
 ### Regresiones de integración (binario real, 2026-10-21)
 M22 `test_historia.gd` 41/0 · M55 `test_diario.gd` 0 fallos · M71 `test_progresion.gd` 83/0 ·
 M59 `validate_save.gd` 16/0 «VALIDACIÓN OK» — todos EXIT 0, 0 SCRIPT ERROR.
+
+## Notas del Agente — Iteración 3 (Step-5-WorkBuddy, 2026-10-21, Log 2083)
+
+- **Merge de `cadenas_ejemplo.json`** (GO del director, msg 151): `RUTA_CATALOGO_EJEMPLOS` cableada en `secondary_stories_service.gd` con merge por id sobre el principal (`_leer_catalogo()` + `_mergear_ejemplos()`). El principal gana los conflictos; las cadenas nuevas que no pasan el validador se rechazan con sus errores; las válidas se añaden con fuente "ejemplos". MEDIDO en carga: 5 cadenas (+1 añadida, 1 conflicto, 1 rechazada).
+- **Validador refactorizado**: `_errores_de_cadena()` extraído — UNA implementación para el merge gate y `validar_cadenas()` (semántica y mensajes idénticos).
+- **Consultas nuevas**: `fuente_cadena()` y `merge_ejemplos_reporte()` ({anadidas, conflictos, rechazadas}).
+- **Rechazo medido**: `cadena-postgame-plaza` usa el tipo de paso "construir", ausente de `TIPOS_PASO` y de 03-Diseno (solo hablar/explorar/puzzle/entregar; 0 usos del token en scripts/). No se integró sin respaldo de diseño; el merge la rechaza con el error nombrado y el reporte la expone.
+- **Conflicto medido**: `cadena-faro` existe en ambos archivos con distinto contenido (la de ejemplos trae `ref: M25-faro-linterna` y consecuencia `estado_mundo.faro_encendido`). Ganó la variante del principal (`faro-linterna`, `faro_encendido`), que es la que ya testeaba el bloque C.
+- **Suite iter. 3**: bloque A actualizado (5 cadenas + conflicto + mergeada + rechazada) y bloque H nuevo (reporte del merge + corrida end-to-end de `cadena-biblioteca`: hablar bibliotecaria / explorar biblioteca / entregar tomo_antiguo / completada). 3× verde con binario real: 59 checks / 0 fallos / EXIT 0. Piso `CHECKS_MINIMOS` 40 → 59 MEDIDO. Guardia probada EN ROJO por inyección de abort en el bloque H (EXIT 1, bloque H nombrado, "solo 47 checks (mínimo 59)"; sonda borrada en la misma operación).
+- **Regresiones medidas**: M55 diario 0 fallos, M55 persistencia 0 fallos, M59 payload sections RESULTADO=OK.
+- **Hallazgos**: (1) el puente M23→M55 degrada en silencio — `diary_service.registrar()` exige la entrada en el catálogo de M55 y solo existen `mision_cadena-faro` / `mision_cadena-invernadero` (no `mision_cadena-biblioteca`): la recompensa de diario de la mergeada no aterriza (contenido de M55); (2) el archivo de ejemplos usa claves de consecuencia `estado_mundo.*` vs flags pelados del principal — la mergeada aplica `flag_estado_mundo.biblioteca_iluminada`; no normalicé datos sin orden.
+- **Flips**: 05 L32 (biblioteca) → [x]; L34 (plaza) sigue [ ] con nota del rechazo. Refresco de mis anotaciones: conteo del bloque de clasificación y nota del Total (el director ya había degradado el molino a [?] y ajustado el Total a 42/61/1).
