@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T20:37:30",
+ "ultimo_update": "2026-10-21T21:07:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -72,9 +72,9 @@
   "DIRECTOR ratifico 78/130 citando el 211 del agente sin medir disco: el \"pos-sync\" del agente NO es evidencia - SIEMPRE medicion propia antes de ratificar contadores (corregido en 214, caso fila 59 75/130)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "007 validado: M112 3 suites cerradas (219/225) + cronometro runner 897s; APROBADO fix headless-aware + QA cruzado M90 encargado (008) + nuevo frente M17; crafting RED derivado a G-5.3",
+  "estado": "009: ACEPTO P1/P2/P3 con reglas del proyecto; 010 ratificado con aclaracion critica (rojos post-corte = HALLAZGOS que se derivan, no regresiones); P1 en curso",
   "pendientes_real": 685,
-  "acuse_enviado": 8,
+  "acuse_enviado": 10,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -107,7 +107,7 @@
   "M23 cadenas_ejemplo: normalizacion claves estado_mundo.* -> GO Step-5 (data-only + test consistencia) - proxima tanda"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 20:35: unico pendiente Hy3 309 respondido (310) + preservacion de su smoke test en commit",
+ "crons_vuelta_d": "CRON D 20:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios (agnes M72-t6 + recontar total, step-5 wiring cadenas_ejemplo + normalizacion claves GO, deepseek 4 rieles backend, g_5_3 guardia/barrido, minimax prolifico M112-fix+QA-M90+M17, hy3 Bloque C #53/#54); SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
@@ -116,5 +116,6 @@
  "seelos_m159": {
   "estado": "M159 b2 SELLADO 2026-10-21: autor agnes (732/900/901/906), QA cruzado Hy3 (907, OK medido), sello director (fila 159 GLOBAL)"
  },
- "crons_vuelta_bd": "CRON B/D 19:50-20:05: Step-5 149 (M23 RATIFICADA; fila 23 42/104 con molino degradado; GO wiring cadenas_ejemplo) acuse 151; G-5.3 211 (codec M60) acuse 212 derivado a DeepSeek"
+ "crons_vuelta_bd": "CRON B/D 19:50-20:05: Step-5 149 (M23 RATIFICADA; fila 23 42/104 con molino degradado; GO wiring cadenas_ejemplo) acuse 151; G-5.3 211 (codec M60) acuse 212 derivado a DeepSeek",
+ "crons_vuelta_ac": "CRON A/C 21:00-21:07: script al dia; MiniMax 009 acuses 010; preservacion: 009/010/estado + CHECKLIST diff chequeado"
 }
