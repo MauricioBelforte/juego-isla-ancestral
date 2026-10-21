@@ -16,7 +16,7 @@ class_name QuestChain
 @export var contexto: String = ""          # Anti-repetición: por qué existe esta cadena
 @export var pasos: Array[Dictionary] = []  # Cada paso: {id, tipo, npc/lugar/objeto, condicion, requisito}
 @export var recompensa: Dictionary = {}    # {diario, cosmetico, ...}
-@export var consecuencia: Dictionary = {}  # {estado_mundo.xxx = true/false}
+@export var consecuencia: Dictionary = {}  # {flag = true/false} — clave PELADA: se aplica literal a WorldState (M21). Esquema canónico (iter. 4, Log 2085): los dos catálogos usan flags pelados (faro_encendido, plaza_decorada...); el prefijo "estado_mundo." quedó normalizado fuera de los datos.
 @export var dialogo_posterior: String = "" # ID de diálogo posterior
 @export var oculta: bool = false
 @export var postgame: bool = false

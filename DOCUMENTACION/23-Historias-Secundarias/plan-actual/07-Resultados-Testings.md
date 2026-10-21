@@ -112,15 +112,25 @@ Iter. 3 (Log 2083, mismo binario):
   `luciernagas_vueltas` existen; `molino_funcionando` **no** (el `[x]` del checklist
   fue degradado a `[?]` por el director el 2026-10-21, msg 151);
   `jardin_florecido` / `taller_abierto` / `cofradia_activa` no existen.
-- Diferencia de esquema medida: el archivo de ejemplos usa claves de consecuencia
-  `estado_mundo.*` (la mergeada aplica `flag_estado_mundo.biblioteca_iluminada`)
-  vs flags pelados del principal. Reportado; no normalizado sin orden.
+- Diferencia de esquema: **RESUELTA en iter. 4** (Log 2085, GO del director msg 153). El
+  archivo de ejemplos usaba claves `estado_mundo.*` mientras el motor aplica la clave de
+  `consecuencia` LITERAL a WorldState y el principal usaba flags pelados. Normalizado
+  data-only en `cadenas_ejemplo.json` (5 claves peladas: `faro_apagado`,
+  `biblioteca_abierta`, `faro_encendido`, `biblioteca_iluminada`, `plaza_decorada`).
+  Bloque I de `test_historias.gd` afirma ahora que AMBAS cargas (crudas y mergeadas)
+  quedan en el mismo esquema y que los flags compartidos tienen el mismo deletreo.
+  Residual fuera del GO: la `condicion` de `cadena-faro` p1 en el principal
+  (`secundarias.json`) sigue con prefijo; es declarativa (0 consumidores) y se reportó.
 
 ## 6. Veredicto
 
 Núcleo de M23 **verificado** con binario real y guarda anti-falso-verde demostrada en
-rojo (dos inyecciones: iter. 2 y iter. 3). Iter. 3: catálogo de ejemplos integrado con
-merge por id, validado y corrido end-to-end; pendientes = contenido narrativo y dueños
-externos (M22/M24/M28/M32/M36/M37/M68), documentados como `[ ]` honestos en
-`05-Checklist.md`. Decisiones abiertas para el director: tipo de paso `"construir"`,
-entrada `mision_cadena-biblioteca` en M55, normalización de claves `estado_mundo.*`.
+rojo (cuatro inyecciones: iter. 2, iter. 3 y las dos de iter. 4 — aborto de runtime en
+el bloque I y regresión de datos con prefijo re-inyectado; todas EXIT 1 nombrando el
+bloque/la clave). Iter. 4: esquema normalizado a flags pelados en el fichero de
+ejemplos, con suite en 70 checks / 0 fallos x3 y regresiones M22/M55/M59/M71 verdes.
+Pendientes = contenido narrativo y dueños externos (M22/M17/M24/M28/M32/M36/M37/M68),
+documentados como `[ ]` honestos en `05-Checklist.md`. Decisiones abiertas para el
+director: tipo de paso `"construir"` (rechazo PERSISTENTE por msg 153; dueños M22/M17),
+entrada `mision_cadena-biblioteca` en M55, y la `condicion` prefijada del principal si
+quiere extenderse el GO de normalización.

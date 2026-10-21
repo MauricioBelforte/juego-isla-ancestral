@@ -16,11 +16,18 @@
 # Iter. 3 (Step-5-WorkBuddy, 2026-10-21, Log 2083): merge de cadenas_ejemplo.json
 # (GO del director, msg 151). Bloque A mide el catálogo mergeado (5 cadenas) y el
 # bloque H afirma el reporte del merge + corrida end-to-end de la cadena añadida.
+# Iter. 4 (Step-5-WorkBuddy, 2026-10-21, Log 2085): normalización de claves
+# estado_mundo.* -> flags pelados (GO del director, msg 153), data-only en
+# cadenas_ejemplo.json. Bloque H afirma la clave pelada en WorldState y el bloque
+# I afirma que AMBAS cargas (principal y ejemplos, crudas y mergeadas) quedan en
+# el mismo esquema. El principal mantiene UNA condicion con prefijo
+# (secundarias.json, cadena-faro p1: 'estado_mundo.faro_apagado'): es declarativa
+# (ningún consumidor en scripts/) y quedó fuera del GO — reportada al director.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -28,9 +35,10 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 3, 2026-10-21): 59 checks con los bloques A-H
-# (iter. 2 tenía 40 con A-G; el merge de ejemplos sumó el bloque H).
-const CHECKS_MINIMOS := 59
+# Piso MEDIDO en verde (iter. 4, 2026-10-21): 70 checks con los bloques A-I
+# (iter. 3 tenía 59 con A-H; la normalización de esquema sumó el bloque I y
+# una afirmación en H). Medido 3x: 70/0/EXIT 0.
+const CHECKS_MINIMOS := 70
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -60,6 +68,7 @@ func _run() -> void:
 	_test_postgame()
 	_test_persistencia()
 	_test_merge_ejemplos()
+	_test_esquema_consistente()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -290,10 +299,11 @@ func _test_merge_ejemplos() -> void:
 	res = _h.reportar_entrega("cadena-biblioteca")
 	_check(bool(res.ok), "paso 3 entregar tomo_antiguo OK (inventario)")
 	_check(_h.esta_completada("cadena-biblioteca"), "cadena-biblioteca completada end-to-end")
-	# Consecuencia: clave LITERAL del ejemplo, con prefijo 'estado_mundo.'
-	# (diferencia de esquema vs el principal, que usa flags pelados — reportada
-	# al director en el Log 2083; el test documenta el comportamiento medido).
-	_check(ws_has("estado_mundo.biblioteca_iluminada"), "consecuencia aplicada con la clave literal del ejemplo")
+	# Consecuencia: clave PELADA tras la normalización (iter. 4, Log 2085). Antes
+	# se aplicaba la clave literal 'estado_mundo.biblioteca_iluminada', que nadie
+	# leía en producción (WorldState usa flags pelados: faro_encendido, etc.).
+	_check(ws_has("biblioteca_iluminada"), "consecuencia biblioteca_iluminada aplicada con clave pelada (esquema canónico)")
+	_check(not ws_has("estado_mundo.biblioteca_iluminada"), "NO se aplica la clave con prefijo estado_mundo.*")
 	# Recompensa de diario: el puente M23→M55 exige la entrada en el catálogo
 	# de M55 (diary_service.registrar valida contra _catalogo). MEDIDO (Log 2083):
 	# el catálogo tiene mision_cadena-faro y mision_cadena-invernadero, NO
@@ -304,3 +314,84 @@ func _test_merge_ejemplos() -> void:
 		_check(not diary.esta_registrada("mision_cadena-biblioteca"),
 			"puente diario degrada sin entrada en catálogo M55 (finding medido, no se inventa contenido)")
 	_fin("H")
+
+
+func _test_esquema_consistente() -> void:
+	# Iter. 4 (Log 2085): normalización estado_mundo.* -> flags pelados (GO del
+	# director, msg 153; data-only en cadenas_ejemplo.json). El bloque afirma que
+	# AMBAS cargas —principal y ejemplos, crudas y mergeadas— quedan en el mismo
+	# esquema: consecuencia = clave pelada que se aplica literal a WorldState.
+	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
+	var principal := _leer_json("res://data/historias/secundarias.json")
+	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
+	_check(principal.size() == 4, "catálogo principal con 4 cadenas (crudo): %d" % principal.size())
+	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
+	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
+	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
+	# 2) Principal: 0 claves de CONSECUENCIA con prefijo (esquema funcional pelado).
+	#    La condicion con prefijo del principal queda fuera del GO (ver cabecera).
+	var prefijos_princ := _prefijos_estado_mundo(principal, true)
+	_check(prefijos_princ.is_empty(), "principal sin claves de consecuencia estado_mundo.* (%s)" % str(prefijos_princ))
+	# 3) Carga mergeada en runtime: las cadenas cargadas no exponen el prefijo
+	#    (ids únicos: cadena-faro está en AMBOS catálogos y gana el principal)
+	var ids := {}
+	for c in ejemplos + principal:
+		ids[String((c as Dictionary).get("id", ""))] = true
+	var cargadas := 0
+	var prefijos_rt: Array = []
+	for cid in ids:
+		var cad: Dictionary = _h.get_cadena(cid)
+		if cad.is_empty():
+			continue
+		cargadas += 1
+		for flag in (cad.get("consecuencia", {}) as Dictionary):
+			if String(flag).begins_with("estado_mundo."):
+				prefijos_rt.append("%s/%s" % [cid, String(flag)])
+	_check(cargadas == 5, "5 cadenas cargadas en runtime (4 principal + biblioteca): %d" % cargadas)
+	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
+	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
+	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
+		"principal: cadena-faro -> faro_encendido (pelado)")
+	_check(_tiene_consecuencia(ejemplos, "cadena-faro", "faro_encendido"),
+		"ejemplos: cadena-faro -> faro_encendido (pelado, mismo deletreo)")
+	_check(_tiene_consecuencia(principal, "cadena-epilogo-plaza", "plaza_decorada"),
+		"principal: cadena-epilogo-plaza -> plaza_decorada (pelado)")
+	_check(_tiene_consecuencia(ejemplos, "cadena-postgame-plaza", "plaza_decorada"),
+		"ejemplos: cadena-postgame-plaza -> plaza_decorada (pelado, mismo deletreo)")
+	_fin("I")
+
+
+func _leer_json(ruta: String) -> Array:
+	if not FileAccess.file_exists(ruta):
+		return []
+	var p: Variant = JSON.parse_string(FileAccess.get_file_as_string(ruta))
+	if typeof(p) != TYPE_DICTIONARY:
+		return []
+	var lista: Variant = (p as Dictionary).get("cadenas", [])
+	return lista if typeof(lista) == TYPE_ARRAY else []
+
+
+## Claves con prefijo 'estado_mundo.' en un catálogo crudo. Con
+## solo_consecuencia=true mira únicamente las claves de consecuencia (las que se
+## aplican a WorldState); si no, también las 'condicion' declarativas de los pasos.
+func _prefijos_estado_mundo(cadenas: Array, solo_consecuencia: bool = false) -> Array:
+	var encontrados: Array = []
+	for c in cadenas:
+		var cid := String((c as Dictionary).get("id", ""))
+		for flag in ((c as Dictionary).get("consecuencia", {}) as Dictionary):
+			if String(flag).begins_with("estado_mundo."):
+				encontrados.append("%s/consecuencia/%s" % [cid, String(flag)])
+		if solo_consecuencia:
+			continue
+		for p in ((c as Dictionary).get("pasos", []) as Array):
+			var cond := String((p as Dictionary).get("condicion", ""))
+			if cond.begins_with("estado_mundo."):
+				encontrados.append("%s/%s/condicion/%s" % [cid, String((p as Dictionary).get("id", "")), cond])
+	return encontrados
+
+
+func _tiene_consecuencia(cadenas: Array, cid: String, flag: String) -> bool:
+	for c in cadenas:
+		if String((c as Dictionary).get("id", "")) == cid:
+			return ((c as Dictionary).get("consecuencia", {}) as Dictionary).has(flag)
+	return false

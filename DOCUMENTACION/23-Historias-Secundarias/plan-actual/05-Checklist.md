@@ -1,5 +1,5 @@
-> **Estado:** 🟡 Liberado — iter. 2 (2026-10-21, Log 2082): núcleo reverificado con binario real (suite endurecida, 40 checks/0 fallos x3, guardián probado en rojo); 43/104 [x]; 61 [ ] de contenido/dueños externos.
-> **Clasificación de los [ ] (iter. 2, Step-5-WorkBuddy, 2026-10-21, Log 2082):** por verbo — «Crear» = artefacto ausente en disco (data/historias/secundarias.json tiene 4 cadenas de ~89; 0 capítulos capitulo-* en el catálogo M55; 0 cosméticos; 0 registros de jardín/taller/cofradía) → [ ] honesto, no se inventa contenido; «Definir/Diseñar/Documentar» = flip sólo con cita en 02/03/04 o implementación; por dueño — externos M22/M24/M28/M32/M36/M37/M68 marcados en el ítem. Conteo por prefijo de línea: 43 [x] / 60 [ ] / 1 [?] = 104 (iter. 3, Log 2083: el director degradó el [x] «molino funcionando» a [?] el 2026-10-21, msg 151; el merge de ejemplos sumó el [x] de la biblioteca).
+> **Estado:** 🟡 Liberado — iter. 4 (2026-10-21, Log 2085): esquema normalizado (claves `estado_mundo.*` → flags pelados, data-only en `cadenas_ejemplo.json`, GO del director msg 153) con suite 70 checks/0 fallos x3 y guardián probado en rojo por 2 inyecciones; 43/105 [x]; 60 [ ] de contenido/dueños externos + 2 [?].
+> **Clasificación de los [ ] (iter. 2, Step-5-WorkBuddy, 2026-10-21, Log 2082):** por verbo — «Crear» = artefacto ausente en disco (data/historias/secundarias.json tiene 4 cadenas de ~89; 0 capítulos capitulo-* en el catálogo M55; 0 cosméticos; 0 registros de jardín/taller/cofradía) → [ ] honesto, no se inventa contenido; «Definir/Diseñar/Documentar» = flip sólo con cita en 02/03/04 o implementación; por dueño — externos M22/M24/M28/M32/M36/M37/M68 marcados en el ítem. Conteo por prefijo de línea: 43 [x] / 60 [ ] / 2 [?] = 105 (iter. 3, Log 2083: el director degradó el [x] «molino funcionando» a [?] el 2026-10-21, msg 151; el merge de ejemplos sumó el [x] de la biblioteca. Iter. 4, Log 2085: +1 [?] nuevo — «Definir el tipo de paso construir», contenido con tipo no soportado, dueños M22/M17).
 
 ## Reserva actual
 
@@ -31,7 +31,8 @@
 - [ ] Crear la historia del faro (lugar) [M]
 - [x] Crear la historia de la biblioteca [M] — cadena-biblioteca mergeada desde data/historias/cadenas_ejemplo.json vía RUTA_CATALOGO_EJEMPLOS (merge por id, fuente "ejemplos", secundarias.json no la tenía); corre end-to-end en test_historias.gd bloque H (hablar bibliotecaria / explorar biblioteca / entregar tomo_antiguo / completada, Log 2083). Nota: la recompensa de diario depende de la entrada mision_cadena-biblioteca en el catálogo de M55 (ausente hoy, dueño M55).
 - [ ] Crear la historia de los jardines [M]
-- [ ] Crear la historia de la plaza [M] — la variante cadena-postgame-plaza de cadenas_ejemplo.json fue RECHAZADA por el validador en el merge (tipo de paso "construir" desconocido: 03-Diseno y TIPOS_PASO solo conocen hablar/explorar/puzzle/entregar; 0 usos del token en scripts/); cadena-epilogo-plaza del principal ya cubre la plaza post-final (L130). Sigue [ ] hasta decidir si se agrega el tipo o se migra el dato (Log 2083).
+- [ ] Crear la historia de la plaza [M] — la variante cadena-postgame-plaza de cadenas_ejemplo.json fue RECHAZADA por el validador en el merge (tipo de paso "construir" desconocido: 03-Diseno y TIPOS_PASO solo conocen hablar/explorar/puzzle/entregar; 0 usos del token en scripts/); cadena-epilogo-plaza del principal ya cubre la plaza post-final (L130). DECISION DEL DIRECTOR (msg 153, 2026-10-21): el rechazo es PERSISTENTE — no se agrega el tipo "construir" hoy (sin respaldo de diseño, mismo patrón que el rechazo de prereq_quest en M105) y el dato NO se migra sin orden. El flip de este ítem se otorga solo cuando el tipo exista o el dato se migre (ver ítem [?] siguiente). Log 2083 + Log 2085.
+- [?] Definir el tipo de paso "construir" para cadenas de construcción [M] — **Dueños M22/M17 (decisión de diseño pendiente):** el CONTENIDO YA EXISTE (cadena-postgame-plaza en data/historias/cadenas_ejemplo.json: hablar alcalde / construir plaza / entregar plaza_reconstruida, postgame:true) pero su paso p2 usa el tipo "construir", ausente de TIPOS_PASO -> el merge lo rechaza por esquema inválido. No es un [ ] honesto de "crear": el dato está escrito; lo que falta es la decisión de esquema. Decisión del director (msg 153): rechazo persistente hasta que M22/M17 definan; cuando el tipo exista, el flip de «Crear la historia de la plaza» procede con el dato ya normalizado a flags pelados (plaza_decorada). Log 2083 + Log 2085.
 - [ ] Crear la historia del molino [M]
 - [ ] Crear la historia de la cofradía [M]
 - [ ] Crear historias de 4 ruinas (biblioteca quemada, observatorio, estación, puente) [M]
@@ -166,7 +167,7 @@
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — Log 447 (renumeración pendiente, protocolo v2: reservado al bloquear)
 - [x] Actualizar fila 23 en CHECKLIST-GLOBAL al implementar [S] — hecho (reserva + liberación)
 
-**Total:** 43/104 [x] · 60/104 [ ] · 1 [?] (iter. 2 Step-5-WorkBuddy 2026-10-21, Log 2082: 19 flips con cita en disco — ver 04-Codigo.md §Notas del Agente iter. 2; iter. 3 Step-5-WorkBuddy 2026-10-21, Log 2083: merge de cadenas_ejemplo.json con +1 [x] (biblioteca, L32) y el rechazo validado de cadena-postgame-plaza; el director degradó el [x] «molino funcionando» (L111) a [?] el 2026-10-21, msg 151, por grep molino_funcionando = 0 archivos; los 60 [ ] son contenido narrativo ausente o ítems con dueño externo M22/M24/M28/M32/M36/M37/M68).
+**Total:** 43/105 [x] · 60/105 [ ] · 2 [?] (iter. 2 Step-5-WorkBuddy 2026-10-21, Log 2082: 19 flips con cita en disco — ver 04-Codigo.md §Notas del Agente iter. 2; iter. 3 Step-5-WorkBuddy 2026-10-21, Log 2083: merge de cadenas_ejemplo.json con +1 [x] (biblioteca, L32) y el rechazo validado de cadena-postgame-plaza; el director degradó el [x] «molino funcionando» (L111) a [?] el 2026-10-21, msg 151, por grep molino_funcionando = 0 archivos; iter. 4 Step-5-WorkBuddy 2026-10-21, Log 2085: normalización estado_mundo.* → flags pelados en cadenas_ejemplo.json (GO msg 153) y +1 [?] «Definir el tipo de paso construir» con dueños M22/M17; los 60 [ ] son contenido narrativo ausente o ítems con dueño externo M22/M24/M28/M32/M36/M37/M68).
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
 
 **Modelo:** Hy3
@@ -197,7 +198,7 @@ A diferencia de los clusters legales/store (que solo tenían JSON+Validator+Test
 - Estado: **🟡 Con dudas** (núcleo verificado; contenido pendiente).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 104 ítems · Completados: 24 · Pendientes: 80 · No resueltos: 0.
+**Totales:** 105 ítems · Completados: 43 · Pendientes: 60 · No resueltos: 2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 24 [x] / 80 [ ] / 0 [?].

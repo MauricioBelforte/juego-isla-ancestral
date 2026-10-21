@@ -185,3 +185,56 @@ M59 `validate_save.gd` 16/0 «VALIDACIÓN OK» — todos EXIT 0, 0 SCRIPT ERROR.
 - **Regresiones medidas**: M55 diario 0 fallos, M55 persistencia 0 fallos, M59 payload sections RESULTADO=OK.
 - **Hallazgos**: (1) el puente M23→M55 degrada en silencio — `diary_service.registrar()` exige la entrada en el catálogo de M55 y solo existen `mision_cadena-faro` / `mision_cadena-invernadero` (no `mision_cadena-biblioteca`): la recompensa de diario de la mergeada no aterriza (contenido de M55); (2) el archivo de ejemplos usa claves de consecuencia `estado_mundo.*` vs flags pelados del principal — la mergeada aplica `flag_estado_mundo.biblioteca_iluminada`; no normalicé datos sin orden.
 - **Flips**: 05 L32 (biblioteca) → [x]; L34 (plaza) sigue [ ] con nota del rechazo. Refresco de mis anotaciones: conteo del bloque de clasificación y nota del Total (el director ya había degradado el molino a [?] y ajustado el Total a 42/61/1).
+
+## Notas del Agente — Iteración 4 (Step-5-WorkBuddy, 2026-10-21, Log 2085)
+
+- **Normalización de claves `estado_mundo.*` → flags pelados** (GO del director, msg 153,
+  decisión 4): data-only en `data/historias/cadenas_ejemplo.json`. Las 5 claves con prefijo
+  (`condicion` de faro/biblioteca y `consecuencia` de faro/biblioteca/plaza) quedaron peladas:
+  `faro_apagado`, `biblioteca_abierta`, `faro_encendido`, `biblioteca_iluminada`,
+  `plaza_decorada`. Dirección medida, no elegida: el motor aplica la clave de `consecuencia`
+  LITERAL a WorldState (`ws.set_flag(String(flag), ...)`, secondary_stories_service.gd) y el
+  catálogo de producción (`secundarias.json`) ya usaba flags pelados (`faro_encendido`,
+  `plaza_decorada`...), que es lo que consume el resto del juego. El prefijo habría creado
+  flags que nadie lee.
+- **`quest_chain.gd` L19**: el comentario del esquema decía `{estado_mundo.xxx = true/false}`,
+  que NO coincidía con el motor ni con producción. Actualizado al esquema canónico
+  (clave pelada, aplicada literal a WorldState). Solo comentario, 0 cambio de comportamiento.
+- **Suite iter. 4**: bloque H ahora afirma la clave PELADA (`biblioteca_iluminada`) y que la
+  prefija NO se aplica; bloque I nuevo (`_test_esquema_consistente`) afirma que AMBAS cargas
+  quedan en el mismo esquema — ejemplos crudo sin prefijos (condicion + consecuencia),
+  principal sin consecuencia prefijada, carga mergeada en runtime sin prefijos, y los flags
+  compartidos con el MISMO deletreo en los dos catálogos (`faro_encendido`, `plaza_decorada`).
+  3x verde con binario real: 70 checks / 0 fallos / EXIT 0. Piso `CHECKS_MINIMOS` 59 → 70
+  MEDIDO.
+- **Guardián probado EN ROJO por 2 inyecciones** (terminan, no cuelgan):
+  (1) aborto de runtime en el bloque I (copia-sonda con llamada sobre instancia null) →
+  EXIT 1 nombrando «el bloque I NO se ejecuto» + «solo 61 checks (minimo 70)»;
+  (2) regresión de datos — prefijo `estado_mundo.` re-inyectado en una clave del fichero de
+  ejemplos → EXIT 1 con 4 fallos que nombran la clave («cadena-biblioteca/consecuencia/
+  estado_mundo.biblioteca_iluminada» en bloque I; las 2 afirmaciones de H). Fichero
+  restaurado y verificado por sha256 (0 prefijos).
+  TRAMPA propia durante la inyección 1: la primera corrida usó `--path` relativo equivocado
+  (`game/` en vez de `game/isla-ancestral/`) y dio EXIT 1 por «script not found» — un rojo
+  FALSO que se parecía al guardián. Corregido el path y rehecho: la evidencia válida es la
+  que NOMBRA el bloque.
+- **Trampa propia en el bloque I**: la primera versión contaba las cadenas cargadas
+  recorriendo `ejemplos + principal`, donde `cadena-faro` está en los DOS catálogos → contó 6
+  y publicó un falso rojo («5 cadenas cargadas: 6»). Corregido a ids únicos (diccionario).
+  Lección: un conflicto de merge es una cadena en dos catálogos; concatenar listas la duplica.
+- **Regresiones medidas** (binario real, mismo run): M22 `test_historia.gd` 41/0 ·
+  M55 `test_diario.gd` 0 fallos · M55 `test_diario_persist.gd` 0 fallos · M59
+  `validate_save.gd` 16/0 · M71 `test_progresion.gd` 83/0 — todos EXIT 0, 0 SCRIPT ERROR.
+- **Decisión 1 del director (msg 153) ejecutada**: rechazo de `cadena-postgame-plaza`
+  PERSISTENTE (no se agrega el tipo "construir" sin respaldo de diseño; el dato no se migra
+  sin orden). En 05-Checklist: L34 documenta la decisión y el flip sigue [ ]; nuevo ítem [?]
+  «Definir el tipo de paso "construir"» con dueños M22/M17 (el contenido ya existe escrito).
+  M23 = 43 [x] / 60 [ ] / 2 [?] = 105; la línea «Totales» (L200) estaba desactualizada desde
+  iter. 2 (decía 24/80/0) y quedó sincronizada con las marcas.
+- **Residual reportado, NO tocado**: `secundarias.json` (principal) mantiene UNA `condicion`
+  con prefijo (`cadena-faro` p1: `estado_mundo.faro_apagado`). Es declarativa — 0 consumidores
+  de `condicion` en `scripts/` (grep: solo el comentario de esquema y la declaración del
+  campo) — y el GO del director era data-only en el fichero de ejemplos. Si el director
+  extiende el GO, se normaliza en una línea.
+- **Hallazgo que sigue abierto**: el puente M23→M55 degrada en silencio para la entrada
+  `mision_cadena-biblioteca` (ausente del catálogo de M55; contenido de M55, dueño).
