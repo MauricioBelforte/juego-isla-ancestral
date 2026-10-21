@@ -206,3 +206,7 @@ Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir,
 - **Ticket de carrera**: las tandas de dos equipos que tiran al mismo riel pueden colisionar en el NN. Ante carrera: el director saca un ACUSE único para AMBOS; el Ticket (si quedó abierto con contenido parcial) se REMATA con mensaje único del director.
 - **Standby puntual descripto como DIRECTIVA**: el agente no espera, sino: 1) re-ejecuta su obra; 2) toma un barrido estilo anti-drift; 3) reporta su pregunta en un mensaje. NO duplicate trabajo prestado (regla de herencia).
 - **Los 4 crons + estos invariantes** corren en una sola sesion (CRON A/B/C/D = 4 ids vigentes listados arriba).
+
+## Regla de combinacion entre crons (fundador 2026-10-21 21:28)
+
+Cada cron hace su TAREA PRINCIPAL siempre. SI en la misma vuelta el director detecta OTRAS cosas utiles (un pendiente por responder, una preservacion urgente, una derivacion que necesita decision), TAMBIEN las hace en esa vuelta y etiqueta el reporte indicando que combin. Ejemplo real: 21:25 C hizo gate+preservacion y ademas cerro la derivacion de crafting respondiendo a G-5.3/MiniMax (etiquetado C+B+D combinados). La trazabilidad se mantiene ESCRIBIENDO en el reporte que crons se combinaron.
