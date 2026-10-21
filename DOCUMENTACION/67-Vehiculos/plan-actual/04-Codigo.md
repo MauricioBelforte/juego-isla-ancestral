@@ -160,19 +160,32 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[VEH]` en 
 - Guardia anti-falso-verde de 3 capas: `CHECKS_MINIMOS = 40` medido, 8 bloques con `_fin()`, `_summary()` en `call_deferred` aparte (no cuelga).
 - Fix aplicado en esta tanda: L146 tenia un `%` literal dentro del string de formato ("40% vel max") que rompia el `%.2f` (`ERROR: String formatting error: unsupported format character`). El check corria igual (error no fatal) pero el mensaje de fallo salia roto. Escapado a `40%%`; verificado pos-fix: el error desaparece y la suite sigue 40/0.
 
+#### 6.5.1 Tanda 2 Step-5-WorkBuddy (2026-10-21, Log 2089) — suite endurecida y validador
+
+- `test_vehiculos.gd` tras la tanda 2: **53 checks / 0 fallos / EXIT 0 x3** (piso `CHECKS_MINIMOS` actualizado de 40 a **53 MEDIDO**). Bloques nuevos:
+  - `_test_delta_frameindependiente` (6 checks, checklist G4): 2 s simulados a 30 FPS (60 ticks de 1/30 s) vs 60 FPS (120 ticks de 1/60 s) -> misma velocidad **6.000000** en ambas (medido por sonda temporal borrada); desplazamiento acumulado 6.100000 vs 6.050001 m (valor analitico 6 m; la diferencia es discretizacion Euler, no bug); `delta <= 0` es no-op; `rumbo` con `wrapf` en [0, TAU) tras 20 s de giro.
+  - `_test_salida_velocidad` (5 checks, checklist S2): `exit()` rechaza salir sin dockear a 12 m/s con motivo nombrado, conserva el vehiculo activo y permite salir tras frenar.
+  - `_test_dock_zarpar` (+2 checks): se agrego el camino real `enter -> zarpar -> atracar` porque el `atracar(null)` previo salia por el early return "ya docked" y **el log `[VEH-DOCK]` nunca se ejercitaba**.
+- **Guardián probado EN ROJO** (inyeccion de aborto de runtime en una copia-sonda, borrada en la misma operacion): EXIT 1 con "solo 47 checks ejecutados (minimo 53)". **Hallazgo de la guarda (Godot 4.7.2):** el `SCRIPT ERROR` mata SOLO la funcion del bloque; `_run()` sigue y llama `_fin()` igual, asi que la capa de bloques NO nombra el bloque abortado — lo detecta el **piso medido** (47 < 53). La capa `_fin` sirve para abortos de `_run()` mismo. Documentado para no sobre-stimar la capa de bloques en otras suites.
+- **Validador nuevo** `scripts/vehiculos/validate_vehicles.gd` (diseno §1 "validators/validate_vehicles.gd"): **40 checks / 0 fallos / EXIT 0 x3**. Cubre catalogo (esquema/ids/tipos/condicional M68), presets contra la tabla 03-Diseno §3.1 (12/6/12 slots, 15/60/8, 8/-40/10, 20/giro 0/16) e invariantes de fisica del controller. **Probado en rojo por tamper** del catalogo (12.0 -> 13.0): EXIT 1 con `[FAIL] barco vel max 12 (§3.1)`; restaurado y verificado por sha256. El validador **reporta sus PENDIENTES** (streaming, colisiones, HUD, camara, audio, mejoras, personalizacion, baul real) en vez de validarlos: el item V1 del checklist queda `[ ]` con nota de entregable parcial.
+- Logs VEH-* de la corrida real: `[VEH-ENTER]` x14, `[VEH-EXIT]` x14, `[VEH-DOCK]` x1; unico ERROR del boot ajeno (singleton `AnimationService`).
+
 ## 7. Notas del Agente (Step-5-WorkBuddy, 2026-10-21)
 
 **Modelo:** Step-5-WorkBuddy
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-10-21
-**Estado:** tanda de documentacion sobre la iter. 1 (nucleo V0); 0 implementaciones nuevas.
+**Estado:** tanda 2 sobre la iter. 1 (nucleo V0): suite endurecida (+13 checks, 2 bloques nuevos) + validador del modulo; 3 flips con cita. M67 = 28 [x] / 103 [ ] / 0 [?] = 131.
 
-### Lo que hice
-- Medi el universo real en disco (codigo, catalogo, suite con binario real) y documente el estadio real en la seccion 6 (las secciones 1-5 son prototipos de diseno de 2026-08-17 con rutas Unity).
-- Corregi el `%` literal de `test_vehiculos.gd:146` (trampa de formateo; detalles en 6.5).
-- Cierre con cita real los items de documentacion/diseno del checklist (W, F.4, M.1) que ya tenian su definicion en disco.
+### Lo que hice en la tanda 2 (Log 2089)
+- Endureci `test_vehiculos.gd`: bloques `_test_delta_frameindependiente` (G4) y `_test_salida_velocidad` (S2) + el camino real de `atracar()` en `_test_dock_zarpar` (el log `[VEH-DOCK]` no se ejercitaba). Piso 40 -> **53 MEDIDO** en verde (3x).
+- Guardián en rojo por inyeccion de aborto de runtime: EXIT 1, "solo 47 checks (minimo 53)". Hallazgo: en 4.7.2 el aborto mata solo la funcion del bloque y `_run()` sigue llamando `_fin()`, asi que detecta el **piso**, no la capa de bloques.
+- Cree `validate_vehicles.gd` (40 checks, EXIT 0 x3; probado en rojo por tamper del catalogo con restauracion por sha256). Reporta sus areas PENDIENTES en vez de validarlas.
+- 3 flips con cita: G4 (L78), S2 (L171), V4/logs (L198). 4 notas honestas en `[ ]` que siguen: D2/I3 (techo de altitud, sin fisica vertical), J2 (entrada "en superficie"), T5 (avisos sin localizar).
+- Sonda temporal de valores (v30/v60/desplazamiento) borrada en la misma operacion: 0 probes en el arbol.
 
 ### Lo que NO esta resuelto (honestidad)
-- Los 106 `[ ]` restantes son verbos de implementacion (navegar, volar, sumergir, colisiones, HUD, camara, audio, mejoras, personalizacion) con duenos externos (M51/M50/M32/M49/M52/M43/M53/M14/M59/M57/M12/M70). Sin corrida no se flippean.
-- No hay nodos 3D de vehiculos en el repo: la iter. 2 (V1/V2) sigue pendiente con dueno visual.
+- Los 103 `[ ]` restantes son verbos de implementacion (navegar, volar, sumergir, colisiones, HUD, camara, audio, mejoras, personalizacion, baul real) con duenos externos (M51/M50/M32/M49/M52/M43/M53/M14/M59/M57/M12/M70). Sin corrida no se flippean.
+- No hay nodos 3D de vehiculos en el repo: la iter. 2 (V1/V2) sigue pendiente con dueno visual. El controller sigue siendo logico puro (plano XZ, sin altitud/profundidad).
+- V1 (`validate_vehicles.gd`) quedo `[ ]` a proposito: el archivo existe y valida fisica + catalogo + presupuestos, pero streaming y colisiones no se pueden validar hasta la iter. 2. Entregable parcial documentado, no inflado.
 - No toque `achievement_service.gd` (M72): otro agente lo esta editando en el worktree compartido (mtime 15:13 de hoy, +31/-14 sin commitear) y quedo con Python-ismos `False`/`True` que rompen el autoload al boot. Reportado al director.

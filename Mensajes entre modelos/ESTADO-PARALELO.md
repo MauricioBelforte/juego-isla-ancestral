@@ -5072,3 +5072,17 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-21 14:45
+
+## 2026-10-21 22:55 — minimax-m3-1-flash / Kilo Code — M112 P1 CERRADO: suite 897.0 s -> 545.3 s (pool paralelo + aislamiento de user://)
+
+**Cierre de P1** (plan aprobado en msg 015 del director). Los 2 items de tiempo de M112 quedan [x]: el tiempo total de suite bajo de **897.0 s (14.95 min) a 545.3 s (9.09 min)**, dentro del presupuesto de 600 s. Como: (1) diagnostico real (el cuello NO eran las esperas de frames sino el **deinit del GDExtension de Voxel Tools**: boot+quit sin escena 2.8 s vs con `main_island.tscn` 101.9 s vs un `VoxelTerrain` pelado 36.5 s); (2) **pool de 6 workers** en `tests/run_tests.gd` sobre las suites que no escriben `user://` ni lanzan `OS.execute`; (3) **aislamiento de `user://` por worker** (APPDATA/XDG_DATA_HOME) — imprescindible, sin el el resultado flapea. La cobertura NO baja (2441 -> 2462 tests) y el contrato de salida del runner no cambia (CI intacto).
+
+**HALLAZGOS:** (a) el rojo de `integration/test_crafting_inventory.gd` (3 checks de M16/M14) **no era un bug de crafting** sino contaminacion del `user://` compartido entre suites — con aislamiento la suite **pasa**; (b) el unico rojo restante es `tests/test_iconos_m159.gd` (TIMEOUT), **preexistente** (ya colgaba en la corrida serial; riel M159, derivado a agnes); (c) **BUG-141** re-anotado por el director contra el riel voxel (M07/M08/M167): la causa real es el deinit del GDExtension de Voxel Tools, no el hilo de guardado de `data_store` (M59).
+
+**M112: 221/225** (quedan 4 [?]: 3 de tooling de cobertura, 1 de CI real/M118). Siguiente: P2 (QA de M90) y P3 (M17).
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 22:55

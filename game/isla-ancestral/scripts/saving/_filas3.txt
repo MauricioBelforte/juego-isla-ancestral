@@ -1,0 +1,4 @@
+16: DIFIERE — esperaba 179/203 | fila empieza: | 16 | 16-Crafting | 🟡 Con dudas | 178/203 | Media | 3 | 14, 15 | — | atria-dawn-s2 | 2026-10-13 07:30 | Recitado a 02-Analisis/03-Diseno por agnes; L
+58: OK (163/184 presente, fila ≥ 280 chars)
+59: OK (75/130 presente, fila ≥ 280 chars)
+69: OK (123/145 presente, fila ≥ 280 chars)

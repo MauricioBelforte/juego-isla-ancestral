@@ -513,3 +513,40 @@ al salir") → **la salida del proceso se queda esperando**.
 **El fix "topes 30 frames" queda documentado como无效**: los topes de espera de esas suites no son el cuello de
 botella (el teardown del motor lo es), asi que bajarlos no cambia el total. Se reporta medido en vez de
 aplicar un cambio que no recupera nada.
+
+### 5. POOL PARALELO en el runner (Log 2093) — 897.0 s -> 545.3 s
+
+El cuello de las 5 suites lentas **no eran las esperas de frames** (fix "topes 30 frames" aprobado por el
+director: no recuperaba tiempo) sino la **salida final del motor**: el deinit del **GDExtension de Voxel Tools**
+(`addons/zylann.voxel`, nativo) cuando el proceso llego a instanciar un `VoxelTerrain`. Medido con sondas
+propias: boot+quit sin escena **2.8 s** vs con `main_island.tscn` **101.9 s**; un `VoxelTerrain` **pelado** (sin
+escena, sin guardado) **36.5 s**; quitar los nodos voxel antes de salir **no** libera (66.7 s) porque el modulo ya
+se inicializo; y `DataStore.guardado_en_curso()` **nunca** estuvo en curso durante 120 s -> **la hipotesis del
+hilo de guardado quedo desmentida** (correccion comunicada al director en su msg 014, y BUG-141 necesita
+reasignarse al dueno del modulo voxel, no al de `data_store`).
+
+Como el costo es una **espera de threads**, la solucion es **solaparla**: pool de suites en paralelo.
+
+| Pieza | Implementacion |
+|---|---|
+| Pool | `POOL_MAX = 6` workers sobre las 41 suites SceneTree que **no** escriben `user://` ni lanzan `OS.execute` (deteccion estatica por fuente, `_es_segura_para_pool()`); las demas quedan seriales |
+| Aislamiento | cada worker hijo corre con su propio `user://` (`APPDATA` en Windows / `XDG_DATA_HOME` en Linux) -> sin colisiones de slots de guardado, config ni caches |
+| Timeout | `POOL_TIMEOUT_MS = 300000` en el pool (con 6 workers la CPU se comparte); el serial sigue en 180 s |
+| Temp files | los archivos de redirect y de rc llevan contador (`_seq_tmp`) -> unicos con ejecucion concurrente |
+| GdUnit4 | sigue secuencial (4 carpetas, ~300 s) |
+
+**Mediciones (mismo hardware, mismo runner instrumentado):**
+
+| Corrida | Tiempo total | Suites OK | Tests | Fallos |
+|---|---|---|---|---|
+| SERIAL (Log 2086) | **897.0 s (14.95 min)** | 45/47 | 2441 | `test_crafting_inventory.gd` (3 checks) + `test_iconos_m159.gd` (TIMEOUT 180 s) |
+| POOL sin aislamiento | 422-426 s | 46/47 | 2411-2462 | 1-2 TIMEOUT, **flapping** entre corridas |
+| **POOL + aislamiento** | **545.3 s (9.09 min) — CUMPLE 600 s** | 46/47 | 2462 | `test_iconos_m159.gd` (TIMEOUT 300 s, **preexistente**: ya colgaba en la corrida serial) |
+
+**La cobertura NO baja** (el pool no saltea ninguna suite; los tests ejecutados suben de 2441 a 2462) y el runner
+conserva su contrato: mismas lineas `RESULTADO:` / `[EVIDENCIA]`, mismos codigos de salida.
+
+**HALLAZGO IMPORTANTE:** el rojo de `integration/test_crafting_inventory.gd` (3 checks de M16+M14) **era un
+artefacto del `user://` compartido** entre suites del runner (no un bug de crafting): con aislamiento por worker
+la suite **pasa**. El unico rojo que queda, `tests/test_iconos_m159.gd`, ya colgaba en la corrida serial
+(preexistente, riel M159, ya derivado a agnes).

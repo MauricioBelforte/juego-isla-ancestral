@@ -32,6 +32,9 @@ const TIMEOUT_MS := 180000
 ## `OS.execute` (deteccion estatica por fuente) -> sin colisiones de archivos ni de procesos.
 const POOL_MAX := 6
 const POOL_ESPERA := 0.2
+## Timeout por suite dentro del pool: con N workers la CPU se comparte y una suite que
+## tardaba 40 s en serie puede tardar 3-4x mas. 300 s (el mismo que usa GdUnit4).
+const POOL_TIMEOUT_MS := 300000
 
 ## Suites documentadamente excluidas (motivo honesto, no silencio).
 ## Vacío desde 2026-10-08 (T-M112 extra, frente A del msg 65): la única
@@ -139,7 +142,13 @@ func _exe_console() -> String:
 
 ## Corre args de Godot con stdout+stderr redirigidos a archivo, SIN bloquear el
 ## main loop (polling con timeout). Devuelve {rc, salida, timeout}.
-func _ejecutar_con_redirect(args: Array, timeout_ms: int = TIMEOUT_MS) -> Dictionary:
+## `aislar_user`: aisla el `user://` del proceso hijo (APPDATA en Windows / XDG_DATA_HOME
+## en Linux) para que dos suites en paralelo NO compartan slots de guardado, config ni
+## caches. Sin esto, suites que escriben user:// de forma INDIRECTA (via autoloads como
+## SaveManager/DataStore/GameSettings) se pisan entre workers y una se queda colgada
+## (medido: test_time_calendar_events.gd -> TIMEOUT 180 s SOLO en paralelo; y el rojo
+## preexistente de test_crafting_inventory.gd alterna entre rojo y verde segun el orden).
+func _ejecutar_con_redirect(args: Array, timeout_ms: int = TIMEOUT_MS, aislar_user: bool = false) -> Dictionary:
 	var exe := _exe_console()
 	_seq_tmp += 1
 	var tmp := OS.get_temp_dir().path_join("m112_rt_%d_%d.txt" % [Time.get_ticks_usec(), _seq_tmp])
@@ -149,7 +158,16 @@ func _ejecutar_con_redirect(args: Array, timeout_ms: int = TIMEOUT_MS) -> Dictio
 			partes.append("\"" + ProjectSettings.globalize_path(str(a)) + "\"")
 		else:
 			partes.append("\"" + str(a) + "\"")
-	var cmd := " ( " + " ".join(partes) + " > \"" + tmp + "\" 2>&1 )"
+	var env_prefix := ""
+	if aislar_user:
+		_seq_tmp += 1
+		var user_dir := OS.get_temp_dir().path_join("m112_user_%d" % _seq_tmp)
+		DirAccess.make_dir_recursive_absolute(user_dir)
+		if OS.get_name() == "Windows":
+			env_prefix = "set \"APPDATA=%s\" && " % user_dir
+		else:
+			env_prefix = "export XDG_DATA_HOME=\"%s\"; " % user_dir
+	var cmd := env_prefix + " ( " + " ".join(partes) + " > \"" + tmp + "\" 2>&1 )"
 	var shell := "cmd.exe"
 	var shell_args: Array
 	var rc_tmp := OS.get_temp_dir().path_join("m112_rc_%d_%d.txt" % [Time.get_ticks_usec(), _seq_tmp])
@@ -222,21 +240,22 @@ func _correr_pool(rutas: Array[String]) -> void:
 
 func _worker_suite(ruta: String) -> void:
 	_pool_en_curso += 1
-	await _correr_scenetree(ruta)
+	await _correr_scenetree(ruta, true)
 	_pool_en_curso -= 1
 
 
-func _correr_scenetree(ruta: String) -> void:
+func _correr_scenetree(ruta: String, en_pool: bool = false) -> void:
 	print("\n[SUITE SceneTree] %s" % ruta)
 	var t0 := Time.get_ticks_msec()
-	var r := await _ejecutar_con_redirect(["--headless", "--path", "res://", "--script", ruta])
+	var timeout_ms := POOL_TIMEOUT_MS if en_pool else TIMEOUT_MS
+	var r := await _ejecutar_con_redirect(["--headless", "--path", "res://", "--script", ruta], timeout_ms, en_pool)
 	var dt := (Time.get_ticks_msec() - t0) / 1000.0
 	var texto: String = r["salida"]
 	var exit := int(r["rc"])
 	var an := _analizar_salida(texto, exit)
 	if r["timeout"]:
-		_fallos.append("%s (TIMEOUT %ds — suite colgada)" % [ruta, TIMEOUT_MS / 1000])
-		print("  [FAIL] TIMEOUT — suite colgada >%ds" % [TIMEOUT_MS / 1000])
+		_fallos.append("%s (TIMEOUT %ds — suite colgada)" % [ruta, timeout_ms / 1000])
+		print("  [FAIL] TIMEOUT — suite colgada >%ds" % [timeout_ms / 1000])
 		return
 	if an["ok"]:
 		_suites_ok += 1

@@ -7,6 +7,8 @@
 #
 # Cubre: catálogo presets, enter/exit validación, física acotada (vel máx,
 # giro, frenado, reversa), dock/zarpar, eventos EventBus.vehicle, persistencia.
+# Tanda 2 Step-5-WorkBuddy 2026-10-21 (Log 2088): bloques de independencia de
+# delta 30/60 FPS (checklist G4) y salida a alta velocidad (checklist S2).
 
 extends SceneTree
 
@@ -14,8 +16,9 @@ extends SceneTree
 #     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
 #     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
 #     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
-const CHECKS_MINIMOS := 40
-const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_enter_exit", "_test_fisica_acotada", "_test_reversa", "_test_giro_riel", "_test_dock_zarpar", "_test_eventos", "_test_persistencia"]
+#     Piso actualizado a 53 por la tanda 2 (Step-5, 2026-10-21): 40 medidos + 13 nuevos.
+const CHECKS_MINIMOS := 53
+const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_enter_exit", "_test_fisica_acotada", "_test_reversa", "_test_giro_riel", "_test_dock_zarpar", "_test_eventos", "_test_persistencia", "_test_delta_frameindependiente", "_test_salida_velocidad"]
 var _checks: int = 0
 var _wb_vistos: Dictionary = {}
 var _wb_cerrado: bool = false
@@ -73,6 +76,10 @@ func _run() -> void:
 	_fin("_test_eventos")
 	_test_persistencia()
 	_fin("_test_persistencia")
+	_test_delta_frameindependiente()
+	_fin("_test_delta_frameindependiente")
+	_test_salida_velocidad()
+	_fin("_test_salida_velocidad")
 	_summary()
 
 
@@ -188,6 +195,17 @@ func _test_dock_zarpar() -> void:
 	# Restaurar estado limpio para los tests siguientes (cozy: docked)
 	if not _vm.docked and not _vm.esta_en_vehiculo():
 		_vm.docked = true
+	# Camino real de atracar (log VEH-DOCK): entrar -> zparar -> atracar
+	# (tanda 2 Step-5 2026-10-21: el atracar(null) de arriba salia por el early
+	# return "ya docked" y NUNCA imprimia [VEH-DOCK]; la suite no lo ejercitaba)
+	_vm.enter("barco")
+	_vm.zarpar()
+	var res_dock: Dictionary = _vm.atracar(null)
+	_check(bool(res_dock.ok), "atracar tras zarpar OK (camino real, antes no ejercitado)")
+	_check(bool(_vm.docked), "atracar deja docked")
+	_vm.exit()
+	if not _vm.docked:
+		_vm.docked = true
 
 
 func _test_eventos() -> void:
@@ -223,3 +241,62 @@ func _test_persistencia() -> void:
 	_check(absf(float(_vm.controller.velocidad)) < 0.01, "restore a velocidad 0 (cozy)")
 	# Limpieza final
 	_vm.exit()
+
+
+func _test_delta_frameindependiente() -> void:
+	# Checklist G4: física correcta a 30 y 60 FPS (delta correcto).
+	# Mismo tiempo simulado (2 s acelerando) con distinto delta -> mismo estado.
+	_vm.enter("barco")
+	var c30: RefCounted = _vm.controller
+	var p30 := Vector3.ZERO
+	for i in range(60):
+		c30.aplicar(1.0 / 30.0, true, 0, false)
+		p30 += c30.desplazamiento(1.0 / 30.0)
+	var v30: float = float(c30.velocidad)
+	_vm.exit()
+	_vm.enter("barco")
+	var c60: RefCounted = _vm.controller
+	var p60 := Vector3.ZERO
+	for i in range(120):
+		c60.aplicar(1.0 / 60.0, true, 0, false)
+		p60 += c60.desplazamiento(1.0 / 60.0)
+	var v60: float = float(c60.velocidad)
+	_check(absf(v30 - v60) < 0.01, "30 vs 60 FPS: misma velocidad tras 2 s (%.4f vs %.4f)" % [v30, v60])
+	_check(absf(v30 - 6.0) < 0.01, "2 s de aceleracion (3 m/s2) dan 6 m/s: %.4f" % v30)
+	# Desplazamiento acumulado: igual salvo error de discretizacion Euler
+	# (60 ticks de 1/30 s = 6.10 m; 120 ticks de 1/60 s = 6.05 m; integral = 6 m)
+	_check(absf(p30.length() - p60.length()) < 0.1, "desplazamiento acumulado igual a 30 y 60 FPS: %.3f vs %.3f" % [p30.length(), p60.length()])
+	_check(absf(p30.length() - 6.0) < 0.15 and absf(p60.length() - 6.0) < 0.15, "desplazamiento cerca del valor analitico 6 m: %.3f / %.3f" % [p30.length(), p60.length()])
+	# delta <= 0 es no-op (no avanza, no divide por cero)
+	var v_antes: float = float(c60.velocidad)
+	c60.aplicar(0.0, true, 0, false)
+	c60.aplicar(-1.0, true, 0, false)
+	_check(absf(float(c60.velocidad) - v_antes) < 0.001, "delta <= 0 no avanza la fisica")
+	# rumbo con wrapf permanece en [0, TAU) tras girar de mas
+	for i in range(200):
+		c60.aplicar(0.1, false, 1, false)
+	_check(float(c60.rumbo) >= 0.0 and float(c60.rumbo) < TAU, "rumbo en [0, TAU) tras girar 20 s: %.3f" % float(c60.rumbo))
+	_vm.exit()
+	if not _vm.docked:
+		_vm.docked = true
+
+
+func _test_salida_velocidad() -> void:
+	# Checklist S2: salir con el vehículo en movimiento rápido (rechazo cozy).
+	_vm.enter("barco")
+	_vm.zarpar()
+	for i in range(50):
+		_vm.tick_conduccion(0.1, true, 0, false)
+	var vel: float = float(_vm.controller.velocidad)
+	var res: Dictionary = _vm.exit()
+	_check(not bool(res.ok), "salir a %.1f m/s sin dockear rechazado" % vel)
+	_check(String(res.motivo).contains("velocidad"), "motivo de rechazo nombra la velocidad: %s" % String(res.motivo))
+	_check(_vm.esta_en_vehiculo(), "el rechazo conserva el vehiculo activo")
+	# Frenar hasta detenerse y salir OK
+	for i in range(100):
+		_vm.tick_conduccion(0.1, false, 0, true)
+	res = _vm.exit()
+	_check(bool(res.ok), "salir tras frenar OK")
+	_check(not _vm.esta_en_vehiculo(), "estado a pie tras salir")
+	if not _vm.docked:
+		_vm.docked = true

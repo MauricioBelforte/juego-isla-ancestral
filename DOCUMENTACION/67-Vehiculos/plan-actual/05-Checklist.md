@@ -19,7 +19,7 @@
 
 # 05-Checklist.md — Módulo 67: Vehículos (130 ítems)
 
-**Estado:** 25/131 completados (medido 2026-10-21 por prefijo de linea; la cabecera original decia 130/130, falsa — familia M79-L7). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 28/131 completados (medido 2026-10-21 por prefijo de linea; la cabecera original decia 130/130, falsa — familia M79-L7). [S]=Simple [M]=Medio [C]=Complejo.
 
 ## A. VehicleManager (autoload)
 
@@ -48,7 +48,7 @@
 ## D. Dirigible
 
 - [ ] Vuelo con altitud/descenso y aterrizaje suave en plataformas [M]
-- [ ] Altitud máxima 60 m (mejorable a 90 m) [S]
+- [ ] Altitud máxima 60 m (mejorable a 90 m) [S] — Step-5 2026-10-21: el preset declara altitud_max 60 (vehicles.json, testeado) pero el controller no tiene eje vertical (plano XZ); el techo de vuelo efectivo es iter. 2 con nodos 3D. La mejora a 90 m pertenece a la seccion M (mejoras), no implementada.
 - [ ] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C]
 - [ ] No colisionar con vegetación alta (paso por encima) [M]
 - [ ] Viento lateral (M32) y farol nocturno (M49) [M]
@@ -75,7 +75,7 @@
 - [ ] Controles con WASD y gamepad (palanca/gatillos) [M]
 - [x] Reversa para barco [S] — iter. 1: tiene_reversa por preset; reversa clamp a -40% vel_max (testeado barco+dirigible)
 - [x] Velocidad limitada por tipo (nunca romper streaming) [M] — iter. 1: clamp por preset (12/15/8/20 m/s del diseño §3.1; testeado)
-- [ ] Testear física en 30/60 FPS (delta correcto) [C]
+- [x] Testear física en 30/60 FPS (delta correcto) [C] [C] — Step-5 2026-10-21 (Log 2089): bloque _test_delta_frameindependiente (6 checks): 2 s simulados a 30 FPS (60 ticks de 1/30 s) vs 60 FPS (120 ticks de 1/60 s) dan la MISMA velocidad 6.000000 (medido por sonda); desplazamiento acumulado 6.100000 vs 6.050001 m (valor analitico 6 m; diferencia = discretizacion Euler); delta <= 0 es no-op; rumbo con wrapf en [0, TAU) tras 20 s de giro. Suite completa 53 checks / 0 fallos / EXIT 0 x3.
 
 ## H. Streaming (M10/M61)
 
@@ -89,14 +89,14 @@
 
 - [ ] Colisiones suaves con islas, rocas y vegetación (M50) [C]
 - [ ] Barco no puede ir a tierra; submarino no emerge en tierra [M]
-- [ ] Dirigible con techo de altitud [S]
+- [ ] Dirigible con techo de altitud [S] — Step-5 2026-10-21: sin fisica vertical en el controller (plano XZ); pendiente iter. 2 con nodos 3D.
 - [ ] Vehículos no atraviesan puentes (M11) ni ruinas (M25) [M]
 - [ ] No atropellar animales (M36) [M]
 
 ## J. Entrada/Salida (M70)
 
 - [ ] Interacción para entrar/salir del vehículo [S]
-- [ ] Entrada solo si está docked o en superficie [M]
+- [ ] Entrada solo si está docked o en superficie [M] — Step-5 2026-10-21: enter() valida docked (vehicle_manager.gd L83-84, testeado); "en superficie" no existe sin nodos 3D. La interaccion para entrar (J1) sigue pendiente.
 - [ ] Al salir: restaurar cámara, HUD y sonidos (sin fugas) [M]
 - [ ] No quedar atascado cerca de muros al entrar/salir [M]
 - [ ] Testear entrada/salida con gamepad y durante eventos (M74) [M]
@@ -168,7 +168,7 @@
 ## S. Edge Cases
 
 - [ ] Entrar con inventario abierto (M14) o durante diálogo (M21, bloqueado) [M]
-- [ ] Salir con el vehículo en movimiento rápido [M]
+- [x] Salir con el vehículo en movimiento rápido [M] [M] — Step-5 2026-10-21 (Log 2089): vehicle_manager.gd L102-104 rechaza exit() si no esta docked y velocidad > 2.0 m/s (motivo "velocidad alta: frena o atracá antes de salir"); bloque _test_salida_velocidad (5 checks): rechazo a 12 m/s nombrando el motivo, vehiculo conservado activo tras el rechazo, salida OK tras frenar.
 - [ ] Vehículo atascado en roca (desatascado manual) [M]
 - [ ] Barco en agua congelada (hielo M51) y dirigible con viento fuerte (M32) [M]
 - [ ] Carga de guardado con vehículo en el agua o a 60 m (M59) [C]
@@ -179,7 +179,7 @@
 - [ ] Localizar menús de personalización y avisos de docking [S]
 - [ ] Localizar nombres de vehículos [S]
 - [ ] Testear HUD en 3 idiomas sin desbordes [M]
-- [ ] Localizar mensajes de límites (profundidad, altitud) [S]
+- [ ] Localizar mensajes de límites (profundidad, altitud) [S] — Step-5 2026-10-21: los avisos de avisar() son strings hardcodeados en espanol; no hay claves M87 para los mensajes de limites. Pendiente de contenido i18n.
 
 ## U. Accesibilidad (M58)
 
@@ -195,7 +195,7 @@
 - [ ] Probar ciclo barco: dock → entrar → navegar → atracar → salir [C]
 - [ ] Probar ciclo dirigible: despegar → volar → aterrizar [C]
 - [ ] Probar ciclo submarino: sumergir → explorar → emerger [C]
-- [ ] Revisar logs VEH-* en consola sin errores [S]
+- [x] Revisar logs VEH-* en consola sin errores [S] [S] — Step-5 2026-10-21 (Log 2089): corrida headless real (binario Godot 4.7.2): [VEH-ENTER] x14 / [VEH-EXIT] x14 / [VEH-DOCK] x1, 0 errores propios (el unico ERROR del boot es ajeno: singleton 'AnimationService'). Hallazgo: el camino real de atracar() (log VEH-DOCK) NO estaba ejercitado por la suite (el early return "ya docked" lo esquivaba); agregado al bloque dock en esta tanda.
 
 ## W. Documentación
 
@@ -278,7 +278,7 @@
 - El controller ya expone rumbo (rad) y velocidad (m/s con signo) — el HUD M53 puede leerlos directo vía Vehiculos.controller.
 - Para aguas poco profundas: consultar M51/mesh de agua y emitir Vehiculos.avisar("...") (la señal ya existe).
 - Al integrar M57: el enter/exit actual es programático; conectar a InteractionManager (M70) con área de proximidad.
-**Totales:** 131 ítems · Completados: 25 · Pendientes: 106 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 28 · Pendientes: 103 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 112 [ ] / 0 [?].

@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-21T23:00:30",
+ "ultimo_update": "2026-10-21T23:12:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 352
  },
  "step_5": {
-  "estado": "154 acused 155: iter 4 ratificada; anomalias de tracker explicadas desde director",
+  "estado": "157: M67 t2 ratificada (suite 53/0 endurecida + validador 40/0 con rojo honesto + hallazgo atracar); fila 67 28/131; V1 parcial [ ] honesto; 2 trampas confesadas aceptadas; GO t3",
   "pendientes_real": 203,
-  "acuse_enviado": 155
+  "acuse_enviado": 157
  },
  "ds_oc": {
   "estado": "activo - ciclos 64-81 M62 y cursos",
@@ -83,12 +83,14 @@
   "flips documentales deben citar LINEA TEXTUAL (copia literal), no parafisis: los precios 34.99/69.99 citados como D2/D3 no constaban (caso Beam T5, 2 degradados)",
   "velocidad alta de un agente nuevo NO es sospecha por si sola si cada tanda lleva muestreo del director: trazabilidad por tanda (sustentacion %) convierte la velocidad en throughput auditado (caso Beam: doble tanda escalada)",
   "hipotesis de causa sin sonda directa puede equivocar el FIX derivado (BUG-141: hilo de guardado era deinit GDExtension voxel) - corregir el DERIVADO cuando el diagnostico evoluciona, antes de que el dueno gaste un ciclo",
-  "update-line en 11-BUGS/11-subs: anclar SIEMPRE al prefijo de la fila del bug (BUG-NN |) para no tocar Evidence: de otras entradas"
+  "update-line en 11-BUGS/11-subs: anclar SIEMPRE al prefijo de la fila del bug (BUG-NN |) para no tocar Evidence: de otras entradas",
+  "contaminacion de user:// compartido entre suites del runner genera rojos fantasma en suites ajenas (caso crafting): aislar user:// por worker OBLIGATORIO en pools",
+  "SCRIPT ERROR en Godot 4.7.2 mata solo la funcion del bloque, no aborta _run: el piso de checks medido es la unica red confiable contra verdes parciales (nota Step-5 M67)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "014: CORRECCION material aceptada - causa BUG-141 = deinit GDExtension voxel (no el hilo de guardado); BUG-141 re-anotado; plan pool+paralelizacion APROBADO sin guards (015); P1 en implementacion",
+  "estado": "P1 SELLADO 017: 897->545.3 s con pool+aislamiento user:// (su adicion imprescindible), cobertura sube 2441->2462, CI intacto; crafting rojos cerrados como contaminacion de infraestructura; M112 221/225; cola P2/P3",
   "pendientes_real": 685,
-  "acuse_enviado": 15,
+  "acuse_enviado": 17,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -148,8 +150,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T8 SELLADA 019: hallazgo cache stale CONFIRMADO (0 .erase() en _reevaluar) -> BUG-142 abierto con fix propuesto; re-verificador produce hallazgos reales; 7 tandas totales",
-  "acuse_enviado": 19
+  "estado": "T9 sellada 021 (3er hallazgo real: max_craftable sin clamp D8=30, derivado dueno M16); re-verificador permanente; doble tanda programada",
+  "acuse_enviado": 21
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -167,5 +169,6 @@
  "crons_vuelta_bd9": "CRON D 22:35-22:40: MiniMax 014 correccion BUG-141 aceptada (015, plan pool sin guards aprobado); Beam 014 T6 ratificada (015: re-flip 03-Diseno verificado + farming P2 adoptada, P1 condicional)",
  "bug_142": {
   "estado": "Abierto - M71 ProgresionManager stale-read en evaluar_condicion_id (cache FIFO sin invalidacion en _reevaluar); fix 2-3 lineas propuesto por Beam; duenos M71 (step-5-kilocode histórico) a notificar"
- }
+ },
+ "crons_vuelta_c2": "CRON C 23:12: acuses 017/021/157 emitidos; filas 67 (28/131) y 95 (56/113) sync; crafting cerrado como contaminacion de user://; pool paralelo de MiniMax aprobado sin guards"
 }

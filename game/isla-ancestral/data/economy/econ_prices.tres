@@ -98,6 +98,25 @@ precio_venta = 0
 rareza = "epico"
 revendible = false
 
+
+[sub_resource type="Resource" id="Resource_precio_tomate"]
+script = ExtResource("1_0bb7j")
+item_id = "tomate"
+precio_compra = 8
+precio_venta = 5
+
+[sub_resource type="Resource" id="Resource_precio_zanahoria"]
+script = ExtResource("1_0bb7j")
+item_id = "zanahoria"
+precio_compra = 6
+precio_venta = 4
+
+[sub_resource type="Resource" id="Resource_precio_calabaza"]
+script = ExtResource("1_0bb7j")
+item_id = "calabaza"
+precio_compra = 20
+precio_venta = 12
+
 [resource]
 script = ExtResource("2_en4hq")
-price_overrides = [SubResource("Resource_precio_madera"), SubResource("Resource_precio_piedra"), SubResource("Resource_precio_fibra"), SubResource("Resource_precio_baya"), SubResource("Resource_precio_cobre"), SubResource("Resource_precio_fragmento"), SubResource("Resource_precio_herramienta"), SubResource("Resource_precio_talisman"), SubResource("Resource_precio_pico_cobre"), SubResource("Resource_precio_hacha_cobre"), SubResource("Resource_precio_caja"), SubResource("Resource_precio_tela"), SubResource("Resource_precio_ensalada"), SubResource("Resource_precio_sardina"), SubResource("Resource_precio_reliquia")]
+price_overrides = [SubResource("Resource_precio_madera"), SubResource("Resource_precio_piedra"), SubResource("Resource_precio_fibra"), SubResource("Resource_precio_baya"), SubResource("Resource_precio_cobre"), SubResource("Resource_precio_fragmento"), SubResource("Resource_precio_herramienta"), SubResource("Resource_precio_talisman"), SubResource("Resource_precio_pico_cobre"), SubResource("Resource_precio_hacha_cobre"), SubResource("Resource_precio_caja"), SubResource("Resource_precio_tela"), SubResource("Resource_precio_ensalada"), SubResource("Resource_precio_sardina"), SubResource("Resource_precio_reliquia"), SubResource("Resource_precio_tomate"), SubResource("Resource_precio_zanahoria"), SubResource("Resource_precio_calabaza")]
