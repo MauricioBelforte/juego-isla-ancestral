@@ -835,3 +835,15 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
   No es el Play Mode del editor.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 86.
+
+## 38. Tanda 87 (2026-10-20, DS-Opencode, Log 2059): L221 — Baja 4 GB, NO MEDIBLE
+
+- **Parcial medido:** preset Baja 1.500 MB; `test_m62_preset_baja_m27.gd` **13/0**; T72 30 min con pico
+  **178.2 MB static (T72) y 44.7 MB VRAM (probe T82, corrida separada)**; 0 OOM.
+- **No medible:** no hay hardware de 4 GB ni límite de proceso; headless no impone OOM y no itera a 60 Hz
+  (8 physics frames en 10 s); “jugable” requiere input/Play Mode real.
+- **Falta:** playtest del usuario en 4 GB o Job Object `ProcessMemoryLimit=4GB` + input.
+- **Resultado:** `[?]` honesto; no se marca `[x]`.
+- **Evidencia parcial:** `out/tanda72/sesion_audio_30min.log`, `out/tanda76/preset_baja_m27.log`.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 87.

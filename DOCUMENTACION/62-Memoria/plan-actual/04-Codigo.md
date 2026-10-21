@@ -812,3 +812,15 @@ DeepSeek-V4.1-Flash (Log 2033). Se re-ejecutó y se aplicó el flip.
 - **Alcance:** datos, no mallas/colliders; sin streaming real headless; no es el Play Mode del editor.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 86.
+
+## Tanda 87 — L221 (2026-10-20, DS-V4.1-Flash-Opencode / OpenCode, Log 2059)
+
+**Sin código nuevo; el ítem queda `[?]` por límite de entorno, no por falta de mecanismo.**
+
+- Preset Baja: **1.500 MB** (8 sistemas); gate M27 `test_m62_preset_baja_m27.gd` **13/0**.
+- Sesión de 30 min T72: **178.2 MB static (T72) y 44.7 MB VRAM (probe T82, corrida separada)**, 0 OOM; 26× por debajo de 4 GB.
+- **No hay hardware de 4 GB ni cap de proceso**; headless no itera a 60 Hz (8 physics frames en 10 s) y no
+  prueba “jugable”. No se marca `[x]` sin esa evidencia.
+- **Falta:** playtest del usuario en 4 GB, o Job Object `ProcessMemoryLimit=4GB` + escena con input.
+
+**Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 87.
