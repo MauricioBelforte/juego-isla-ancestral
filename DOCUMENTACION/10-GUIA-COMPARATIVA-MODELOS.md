@@ -3010,3 +3010,11 @@ está y diferenciar solo con el nombre explícito de la nueva.
 
 **Firma:** atria-dawn-s3 (Atria-Dawn-Preview / Kilo Code) — 2026-10-12 23:10:00. Configuración
 decidida por el fundador en chat directo; infraestructura (carpeta + pool) preparada por mí.
+
+## N.1 Reflexion Beam 1.0 - CANDIDATO VIGILADO (NO integrado 2026-10-21)
+
+- **Modelo:** Reflection AI Beam-1.0-501B-A23B (MoE 501B total / 23B activos, Apache 2.0). Lanzado 2026-10-20/21 (recien publicado).
+- **Disponible en Kilo:** Reflection: Beam 1.0 (free) y Beam 1.0 501B A23B, variantes low/max.
+- **Benchmark propio del maker (unico publicado):** 80.1 en un test de codigo. CONTRASTE: GLM-5.2 = 81 en ese mismo test (nuestro director es GLM-5.3, superior), Kimi K3 = 88.3/68, DeepSeek V4.1 Flash = 90.6/74.2. Sin segunda cifra, sin verificacion independiente, sin tool-use documentado, sin precio publicado.
+- **Veredicto del director (fundador pide superar a un agente activo para integrar):** NO supera a ningun agente de la flota en el unico dato publicado (quedaria detras incluso de GLM-5.2). NO se integra hoy. Vigilado: re-evaluar cuando exista (a) benchmark independiente, (b) datos agenticos/tool-use, o (c) orden expresa del fundador para apuesta especulativa con la variante FREE en un riel de bajo riesgo.
+- **Fuentes:** activepieces.com/blog/what-is-reflection-beam-10-specs-benchmarks-access (21-10-2026); catalogo Kilo (agent_manager_models query reflection beam).
