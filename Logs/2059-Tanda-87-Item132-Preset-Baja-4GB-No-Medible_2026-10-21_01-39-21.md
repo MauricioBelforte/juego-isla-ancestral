@@ -34,7 +34,7 @@ prueba el allocator; ademas "jugable" exige input/Play Mode real, y el arnes `--
 - `04-Codigo.md` M62: seccion Tanda 87.
 - `07-Resultados-Testings.md` M62: seccion 38.
 - BACKLOG: 132 `[?]` y duplicado 27 `[?]`.
-- Log 2059; informe 184; cron fila 81; tracker 184.
+- Log 2059; informe 185; cron fila 81; tracker 187 (incluye acuse 186 y corrección 187).
 
 ## Archivos Modificados/Creados
 
