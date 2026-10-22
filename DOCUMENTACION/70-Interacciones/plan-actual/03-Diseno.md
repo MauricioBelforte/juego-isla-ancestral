@@ -285,3 +285,44 @@ Presupuesto total objetivo: < 0.5 ms/frame en escena densa (40 interactuables), 
 ### M11: rango base de interaccion 4m
 - Rango base de deteccion: 4 metros desde el jugador.
 - Configurable por objeto (override).
+
+## Contratos y alcance verificados (S53b — G-5.3-Flash-Agente, 2026-10-23)
+
+**Consumidores del modulo (L30):** identificados en disco por las senales y
+llamadas reales: M19 (NPC pose/interaccion), M21 (dialogue_manager via
+senales), M33/M35 (recursos talables/minables), M36 (fauna), M65 (catalogos de coleccionables), M18 (casas/puertas), M14 (items del jugador), M17 (puertas de construccion), M22/M24/M26 (objetos
+de templario/sellos). Cada consumo usa la senal `interaccion_iniciada` o
+`presionar_interact` del manager — SIN llamadas directas cruzadas (regla
+M07/M9 desacoplamiento).
+
+**Fuera de alcance (L41):** explicito: el modulo NO define mecanicas de los
+consumidores (inventario M14, dialogos M21, IA M36, misiones M101): solo
+DETECTA el interactuable y EMITE. Cualquier logica post-interaccion vive en
+el sistema dueño.
+
+**Presupuesto de deteccion (L51):** el throttle `FRAMES_ENTRE_EVALUACIONES`
+(S20 RF4) re-selecciona objetivo cada N frames (4) – el costo por
+evaluacion es dibujar N candidatos con distancia cuadrada (sin sqrt). NFR
+MEDIBLE headless con qa_m70_raycast_fade (8/0 vigente): verificacion de
+que el frame con evaluacion no excede el presupuesto; el valor 0.5 ms por
+frame se audita con x_1.000 run headless iterando evaluaciones (test de
+perf del manager, futura tanda TC).
+
+**RF2 categorias con prioridad base (L71):** el manager expone
+`prioridad` por interactuable (campo del candidato en `_comparar_candidatos`);
+el orden canonico de categorias base (M19 NPC > item M14 > recurso
+M33/M35 > puerta M17 > zona M65) queda como orden por defecto de prioridad
+(si el diseno no setea la prioridad). La renumeracion es data
+(inventariable por JSON) sin tocar el manager.
+
+**Icon/sonido/etiqueta default (L75):** cada categoria define sus defaults
+al interactuar (icono M46, sonido M43, etiqueta M88) por id de categoria —
+via accion de etiqueta world-space RF6 (L181). El manager emite el DICT del
+candidato con categoria+id, la capa UI resuelve icono/sonido/etiqueta por
+esa clave (diccionario de defaults en el prompt_db de M57).
+
+**RF6 indicador world-space (L181):** etiqueta "E + icono de categoria"
+sobre el objetivo activo (RF6): posicion = punto de hit del raycast; fade
+de 0.1 s heredado (S20 RF5) + throttle heredado (RF4). El indicador usa el
+mismo candidate dict (categoria + accion) — sin queries extra por frame.
+

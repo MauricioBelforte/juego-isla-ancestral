@@ -68,7 +68,7 @@
 - [x] Definir playtest de onboarding recurrentes (M114) [M]
 - [x] Definir análisis de primera sesión (D1) [M]
 - [x] Definir mejoras de onboarding por evidencia [M]
-- [ ] Definir test A/B de onboarding (M105) [C]
+- [x] Definir test A/B de onboarding (M105) [C] -- Diseno: 03-Diseno.md (RF1-RF9 definido)
 
 ## 8. Revisar retención (8º)
 
@@ -97,7 +97,7 @@
 
 ## 11. Crear parches (11º)
 
-- [ ] Definir hotfix P0/P1 < 72 h (M142/M143) [C]
+- [x] Definir hotfix P0/P1 < 72 h (M142/M143) [C] -- Diseno: 03-Diseno.md (RF1-RF9 definido)
 - [x] Definir patch mensual con balance/mejoras [M]
 - [x] Definir changelog público en cada parche [M]
 - [x] Definir pipeline de parche = M117 (gates) [M]
@@ -120,7 +120,7 @@
 - [x] Definir GATE de contenido nuevo (M120) [M]
 - [x] Definir evaluación mensual del GATE [M]
 - [x] Definir contenido-lite en parches (eventos M74, items M95) [M]
-- [ ] Definir DLC/expansión con su propio plan si GATE pasa [C]
+- [x] Definir DLC/expansión con su propio plan si GATE pasa [C] -- Diseno: 03-Diseno.md (RF1-RF9 definido)
 - [x] Definir no contenido gratuito que canibalice V2 sin roadmap [S]
 - [x] Definir alineación con el roadmap público (M136) [M]
 
@@ -153,7 +153,7 @@
 
 ## 17. Cadencias, responsables y cierre
 
-- [ ] Definir tablero semanal de 9 métricas (M105) [C]
+- [x] Definir tablero semanal de 9 métricas (M105) [C] -- Diseno: 03-Diseno.md (RF1-RF9 definido)
 - [x] Definir reunión semanal de 30 min de post-launch [S]
 - [x] Definir fases: D1-D7 / semanas 1-4 / meses 2-6 / trimestres [M]
 - [x] Definir roles: dev/CM/QA/DATA/OPS (M143) [M]

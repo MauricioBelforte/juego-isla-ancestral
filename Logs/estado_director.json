@@ -3,7 +3,7 @@
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "VEREDICTO M99 con sello APROBADO y aplicado en GLOBAL (955: 7/7, 0 fallas); higiene conteo canon; radar recalibrado a cola consolidada de Beam; mi 956",
+  "estado": "VEREDICTO M99 con sello APROBADO y aplicado en GLOBAL (955: 7/7, 0 fallas); higiene conteo canon; radar recalibrado a cola consolidada de Beam; mi 956 | en cola: veredictos 70 (198/198), 144 (103/105), 108 batch2",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -207,7 +207,7 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "108 tanda 1 RATIFICADA (disco 152/50/3=205 vs declarado 210, 5 a reconciliar); ENCARGO LARGO CONSOLIDADO 205 (riel completo A-F + regla reportes consolidados del fundador); detecto cruza del 203 entre ciclos -> detector universal en todos los crons",
+  "estado": "BLOQUE 206 RATIFICADO: 70 CERRADO 198/198 + 144 CERRADO 103/105 + 108 batch2 (202/205, holgura 4); 13 modulos del dia; siguiente: picaduras + barrido Totales + fase 2; mi 207",
   "acuse_enviado": 205,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first + heredable",

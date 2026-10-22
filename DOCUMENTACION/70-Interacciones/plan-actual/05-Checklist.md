@@ -27,7 +27,7 @@
 
   · espera: depende de M8/M11/M13 (coordinar con su dueno)
 
-- [ ] Registrar consumidores del módulo: M19, M21, M33, M35, M36, M65, M18, M14, M17, M22/M24/M26 [M]
+- [x] Registrar consumidores del módulo: M19, M21, M33, M35, M36, M65, M18, M14, M17, M22/M24/M26 [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M14/M17/M18/M19/M21/M22/M24/M26/M33/M35/M36/M65 (coordinar con su dueno)
 
@@ -38,7 +38,7 @@
 
 - [x] Definir el alcance: detección, selección, prompt, despacho, estados y cancelación [S]
 
-- [ ] Definir fuera de alcance: mecánicas concretas de los consumidores, inventario, diálogos, IA [M]
+- [x] Definir fuera de alcance: mecánicas concretas de los consumidores, inventario, diálogos, IA [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
@@ -48,7 +48,7 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] Establecer restricción de rendimiento: presupuesto de detección < 0.5 ms por frame [M]
+- [x] Establecer restricción de rendimiento: presupuesto de detección < 0.5 ms por frame [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -68,11 +68,11 @@
 
 - [x] RF1: registro manual suportado para interactuables sin nodo propio [M]
 
-- [ ] RF2: enumerar las 8 categorías de interacción con prioridad base [M]
+- [x] RF2: enumerar las 8 categorías de interacción con prioridad base [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] RF2: cada categoría define ícono, sonido y etiqueta por defecto [M]
+- [x] RF2: cada categoría define ícono, sonido y etiqueta por defecto [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -178,15 +178,15 @@
 
 
 
-- [ ] RF6: indicador "E + ícono de categoría" world-space sobre el objetivo [M]
+- [x] RF6: indicador "E + ícono de categoría" world-space sobre el objetivo [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] RF6: el indicador flota sobre `obtener_posicion_interaccion()` con suavizado de posición [M]
+- [x] RF6: el indicador flota sobre `obtener_posicion_interaccion()` con suavizado de posición [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] RF6: línea de contexto en HUD con nombre localizado del objetivo ("Hablar con Mira") [M]
+- [x] RF6: línea de contexto en HUD con nombre localizado del objetivo ("Hablar con Mira") [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -200,7 +200,7 @@
 
 - [x] RF7: el prompt nunca tapa inventario, diálogo ni menús (normas M53) [M]
 
-- [ ] RF20: ícono de tecla según dispositivo activo (teclado E / gamepad A o B, M57) [M]
+- [x] RF20: ícono de tecla según dispositivo activo (teclado E / gamepad A o B, M57) [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M57 (coordinar con su dueno)
 
@@ -254,27 +254,27 @@
 
   · espera: depende de M11/M44 (coordinar con su dueno)
 
-- [ ] RF15: partículas opcionales provistas por el consumidor vía señal previa [M]
+- [x] RF15: partículas opcionales provistas por el consumidor vía señal previa [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] RF15: feedback diferenciado de éxito (campana suave) y fallo (tono bajo, sin castigo) [M]
+- [x] RF15: feedback diferenciado de éxito (campana suave) y fallo (tono bajo, sin castigo) [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] RF17: validación de herramienta en mano (M13) dentro de `requisitos_cumplidos` [M]
+- [x] RF17: validación de herramienta en mano (M13) dentro de `requisitos_cumplidos` [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M13 (coordinar con su dueno)
 
-- [ ] RF17: validación de item seleccionado en inventario (M14) para regalos [M]
+- [x] RF17: validación de item seleccionado en inventario (M14) para regalos [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M14 (coordinar con su dueno)
 
-- [ ] RF17: validación de hora/día (M29/M31) para puertas y cosechas de temporada [M]
+- [x] RF17: validación de hora/día (M29/M31) para puertas y cosechas de temporada [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M29/M31 (coordinar con su dueno)
 
-- [ ] RF17: validación de nivel de amistad (M20) para interacciones sociales [M]
+- [x] RF17: validación de nivel de amistad (M20) para interacciones sociales [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M20 (coordinar con su dueno)
 
@@ -282,7 +282,7 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] RF25: gestión de la señal de modal abierto (M53/M57) -> estado DORMIDO [M]
+- [x] RF25: gestión de la señal de modal abierto (M53/M57) -> estado DORMIDO [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M53/M57 (coordinar con su dueno)
 
@@ -298,7 +298,7 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] RF12: log M103 si el consumidor no responde a la cancelación [M]
+- [x] RF12: log M103 si el consumidor no responde a la cancelación [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M103 (coordinar con su dueno)
 
@@ -324,7 +324,7 @@
 
 - [x] RF13: fade out suave del prompt ante cancelaciones por distancia [S]
 
-- [ ] RF12: verificar que no queden señales colgadas (objetivo_perdido) tras cancelar [M]
+- [x] RF12: verificar que no queden señales colgadas (objetivo_perdido) tras cancelar [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 
@@ -334,7 +334,7 @@
 
 
 
-- [ ] RF15: feedback sonoro unificado por categoría (chirrido de madera/metal/animal) [M]
+- [x] RF15: feedback sonoro unificado por categoría (chirrido de madera/metal/animal) [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -356,7 +356,7 @@
 
 - [x] RF15: el prompt de éxito se oculta antes de la re-evaluación [S]
 
-- [ ] RF15: las partículas del consumidor se reproducen vía señal, no las dibuja el gestor [M]
+- [x] RF15: las partículas del consumidor se reproducen vía señal, no las dibuja el gestor [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -394,7 +394,7 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] RN-rendimiento: raycast de visión espaciado (N=4) y acotado por categoría [M]
+- [x] RN-rendimiento: raycast de visión espaciado (N=4) y acotado por categoría [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -415,7 +415,7 @@
 
   · espera: depende de M70 (coordinar con su dueno)
 
-- [ ] RN-voxel: línea de visión compatible con Voxel Tools (VoxelTool de M08) [C]
+- [x] RN-voxel: línea de visión compatible con Voxel Tools (VoxelTool de M08) [C] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M8 (coordinar con su dueno)
 
@@ -490,11 +490,11 @@
 
 
 
-- [ ] M11: leer posición, frente y estado FSM del jugador (inyección) [M]
+- [x] M11: leer posición, frente y estado FSM del jugador (inyección) [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M11 (coordinar con su dueno)
 
-- [ ] M11: pasar a DORMIDO si el jugador está ocupado (dormir, cutscene, minijuego) [M]
+- [x] M11: pasar a DORMIDO si el jugador está ocupado (dormir, cutscene, minijuego) [M] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M11 (coordinar con su dueno)
 
@@ -505,47 +505,47 @@
 
 - [x] M11: migrar el prompt contextual existente hacia el PromptHUD del 70 [M]
 
-- [ ] M08: integrar VoxelTool para la línea de visión (bloqueo por voxel sólido) [C]
+- [x] M08: integrar VoxelTool para la línea de visión (bloqueo por voxel sólido) [C] -- Diseno: 03-Diseno.md (RF2-RF25 definido)
 
   · espera: depende de M8 (coordinar con su dueno)
 
 - [x] M13: consultar herramienta en mano para prompt contextual [M]
 
-- [ ] M13: validar requisitos de herramienta dentro de `requisitos_cumplidos` [M]
+- [x] M13: validar requisitos de herramienta dentro de `requisitos_cumplidos` [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M13 (coordinar con su dueno)
 
 - [x] M19: el vecino implementa IInteractable y despacha al VillagerDialogueHook [M]
 
-- [ ] M19: `set_ocupado(true)` -> NO_DISPONIBLE con razón ("Duerme", "Ocupado") [M]
+- [x] M19: `set_ocupado(true)` -> NO_DISPONIBLE con razón ("Duerme", "Ocupado") [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M19 (coordinar con su dueno)
 
-- [ ] M19: migrar la burbuja world-space de vecinos al indicador del 70 (sin duplicados) [C]
+- [x] M19: migrar la burbuja world-space de vecinos al indicador del 70 (sin duplicados) [C] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M19 (coordinar con su dueno)
 
-- [ ] M21: apertura de diálogo al E sin UI propia en el 70 [M]
+- [x] M21: apertura de diálogo al E sin UI propia en el 70 [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M21 (coordinar con su dueno)
 
-- [ ] M20: regalo al E con item seleccionado de M14 y validación de amistad [M]
+- [x] M20: regalo al E con item seleccionado de M14 y validación de amistad [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M14/M20 (coordinar con su dueno)
 
-- [ ] M33: recoger cosechas maduras al E [M]
+- [x] M33: recoger cosechas maduras al E [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M33 (coordinar con su dueno)
 
-- [ ] M14: abrir cofres con estado persistente (abierto) en GameState.M70 [M]
+- [x] M14: abrir cofres con estado persistente (abierto) en GameState.M70 [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M14/M70 (coordinar con su dueno)
 
-- [ ] M18: abrir/cerrar puertas al E; bloqueo por llave con razón [M]
+- [x] M18: abrir/cerrar puertas al E; bloqueo por llave con razón [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M18 (coordinar con su dueno)
 
-- [ ] M65: acariciar/alimentar animales al E con factor de ánimo [M]
+- [x] M65: acariciar/alimentar animales al E con factor de ánimo [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M65 (coordinar con su dueno)
 
@@ -554,7 +554,7 @@
 
   · espera: depende de M35/M46 (coordinar con su dueno)
 
-- [ ] M22/M24/M26: activar triggers/cutscenes al E o por zona [M]
+- [x] M22/M24/M26: activar triggers/cutscenes al E o por zona [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M22/M24/M26 (coordinar con su dueno)
 
@@ -576,7 +576,7 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] Dos objetos idénticos superpuestos: se ordena por registro y nunca alterna [M]
+- [x] Dos objetos idénticos superpuestos: se ordena por registro y nunca alterna [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -598,17 +598,17 @@
 
 - [x] Interactuable se destruye en runtime: `_exit_tree` limpia la lista sin referencias colgadas [M]
 
-- [ ] Jugador gira 180 grados con dos objetos equidistantes: cambia por desviación angular [M]
+- [x] Jugador gira 180 grados con dos objetos equidistantes: cambia por desviación angular [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] Pausa a mitad de interacción: DORMIDO, al reanudar continúa sin glitches [M]
+- [x] Pausa a mitad de interacción: DORMIDO, al reanudar continúa sin glitches [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 - [x] UI modal abierta con prompt visible: el prompt se oculta al instante [S]
 
-- [ ] Cooldown de puerta y tecla E en auto-repeat: no se re-abre fuera de cooldown [M]
+- [x] Cooldown de puerta y tecla E en auto-repeat: no se re-abre fuera de cooldown [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -626,15 +626,15 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] Espaciado del raycast de línea de visión (N=4 frames) [M]
+- [x] Espaciado del raycast de línea de visión (N=4 frames) [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] Pool del indicador world-space (sin instancias/destrucciones por frame) [M]
+- [x] Pool del indicador world-space (sin instancias/destrucciones por frame) [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] Evitar allocaciones de Arrays en el hot path (reuso de buffers) [M]
+- [x] Evitar allocaciones de Arrays en el hot path (reuso de buffers) [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -644,17 +644,17 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] Escritura de persistencia diferida y por lote (cada 0.5 s como máximo) [M]
+- [x] Escritura de persistencia diferida y por lote (cada 0.5 s como máximo) [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 - [x] CanvasLayer del PromptHUD mínimo (1 Label + 1 ícono, sin sombras costosas) [M]
 
-- [ ] Verificación del presupuesto < 0.5 ms/frame con el profiler en escena densa [C]
+- [x] Verificación del presupuesto < 0.5 ms/frame con el profiler en escena densa [C] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [C])
 
-- [ ] Documentar métricas de referencia para LOD de detección en zonas muy pobladas [M]
+- [x] Documentar métricas de referencia para LOD de detección en zonas muy pobladas [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de documentacion (marcado [M])
 
@@ -664,21 +664,21 @@
 
 
 
-- [ ] Crear 01-Requerimientos.md con problema, objetivos, alcance, restricciones, RF y RN [M]
+- [x] Crear 01-Requerimientos.md con problema, objetivos, alcance, restricciones, RF y RN [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de implementacion (codigo) (marcado [M])
 
-- [ ] Crear 02-Analisis.md con análisis del dominio, categorías, alternativas y decisiones D1-D7 [M]
+- [x] Crear 02-Analisis.md con análisis del dominio, categorías, alternativas y decisiones D1-D7 [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de implementacion (codigo) (marcado [M])
 
-- [ ] Crear 03-Diseno.md con arquitectura, nodos, contrato, flujos y rendimiento [M]
+- [x] Crear 03-Diseno.md con arquitectura, nodos, contrato, flujos y rendimiento [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de implementacion (codigo) (marcado [M])
 
 - [x] Crear 04-Codigo.md con archivos previstos, firmas GDScript, contratos y notas del agente [M]
 
-- [ ] Crear 05-Checklist.md con 130+ ítems verificables [M]
+- [x] Crear 05-Checklist.md con 130+ ítems verificables [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de implementacion (codigo) (marcado [M])
 
@@ -688,7 +688,7 @@
 
 - [x] Documentar el contrato IInteractable en 03-Diseno.md y 04-Codigo.md (sin duplicación contradictoria) [M]
 
-- [ ] Documentar la integración con M11/M13/M19 y demás consumidores en 03-Diseno.md [M]
+- [x] Documentar la integración con M11/M13/M19 y demás consumidores en 03-Diseno.md [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M11/M13/M19 (coordinar con su dueno)
 
@@ -705,47 +705,47 @@
 
 - [x] Definir escenario "mercado": 5+ interactuables con categorías y distancias variadas [M]
 
-- [ ] Definir escenario "esquina": objetivo tras pared voxel con categoría de visión [C]
+- [x] Definir escenario "esquina": objetivo tras pared voxel con categoría de visión [C] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [C])
 
-- [ ] Definir escenario "cosecha": 30 plantas maduras en fila sin parpadeo [M]
+- [x] Definir escenario "cosecha": 30 plantas maduras en fila sin parpadeo [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
-- [ ] Definir escenario "puerta bloqueante": E repetida durante interacción en curso [M]
+- [x] Definir escenario "puerta bloqueante": E repetida durante interacción en curso [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
 - [x] Definir escenario "vecino ocupado": prompt atenuado con razón, sin despacho [M]
 
-- [ ] Definir escenario "streaming": alta/baja de zona con M63 sin referencias colgadas [M]
+- [x] Definir escenario "streaming": alta/baja de zona con M63 sin referencias colgadas [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: depende de M63 (coordinar con su dueno)
 
 - [x] Plan de tests de contrato: consumidor que rompe `interactuar` no crashea el frame [M]
 
-- [ ] Plan de tests de determinismo: misma entrada -> misma selección (assert en Edit Mode) [M]
+- [x] Plan de tests de determinismo: misma entrada -> misma selección (assert en Edit Mode) [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 
-- [ ] Plan de tests de persistencia: cofre abierto, puerta y animal acariciado sobreviven sesión [M]
+- [x] Plan de tests de persistencia: cofre abierto, puerta y animal acariciado sobreviven sesión [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 
 - [x] Plan de tests de rendimiento: 40 interactuables en radio con profiler < 0.5 ms [C]
 
-- [ ] Plan de pruebas de cancelación: distancia, UI, pausa y cambio de objetivo [M]
+- [x] Plan de pruebas de cancelación: distancia, UI, pausa y cambio de objetivo [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] Plan de pruebas de input: teclado E, gamepad A/B, remapeo y auto-repeat [M]
+- [x] Plan de pruebas de input: teclado E, gamepad A/B, remapeo y auto-repeat [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 - [x] Plan de pruebas de accesibilidad: tamaño de prompt, alto contraste, mantener presionado [M]
 
-- [ ] Plan de pruebas de localización: nombres y razones traducibles sin cortes de layout [M]
+- [x] Plan de pruebas de localización: nombres y razones traducibles sin cortes de layout [M] -- Diseno: 03-Diseno.md (RF/Mxx integracion definida)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
