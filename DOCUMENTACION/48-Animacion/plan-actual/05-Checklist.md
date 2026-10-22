@@ -23,15 +23,15 @@
 
 ## B. RF1 — Flujo de producción
 
-- [ ] Definir pipeline: rig (M45) → blocking → polish → export 30 fps [M]
+- [x] Definir pipeline: rig (M45) → blocking → polish → export 30 fps [M] — 03-Diseno sec 5: rig block/polish/export 30fps, revision del bloque EN VISTA de juego antes de polish (M154/V5); sin keyframes a 60 (2026-10-23 S47 G-5.3-Flash-Agente)
   · espera: depende de M45 (coordinar con su dueno)
-- [ ] Definir convenciones de exportación: FBX, T-pose única, bones subset por familia [M]
+- [x] Definir convenciones de exportación: FBX, T-pose única, bones subset por familia [M] — 03-Diseno sec 5: FBX por actor, T-pose unica, subset por familia (hum 40/cuad 28/ave 22/pez 14 huesos), sin huesos faciales, 1u=1m, forward -Z (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir familias de rigs: humanoide, cuadrúpedo, ave, pez [M]
+- [x] Definir familias de rigs: humanoide, cuadrúpedo, ave, pez [M] — 03-Diseno sec 5: 4 familias con UN rig base y mapping de huesos identico por especie; sin rigs nuevos por animal (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir plantilla de import en editor (import_animation_defaults.gd) [M]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir máximos de duración por categoría [S]
+- [x] Definir máximos de duración por categoría [S] — 03-Diseno: tabla 3.1 como TOPES (locomocion 1.6s/acciones 2.5s/fauna 3.0s/mecanicas 4.0s/UI 0.6s); exceder exige justificacion o dividir (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 
 ## C. RF2 — Kit de animación del jugador
@@ -178,7 +178,7 @@
 
 ## N. RF13 — Naming y organización
 
-- [ ] Definir prefijos anim_, librerías por actor [S]
+- [x] Definir prefijos anim_, librerías por actor [S] — 03-Diseno sec 5: anim_<actor>_<accion>_<variante>, AnimationLibrary POR ACTOR (no mega-lib), prefijo obligatorio checado al importar (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] Alinear con M108 [M]
   · espera: depende de M108 (coordinar con su dueno)
@@ -196,7 +196,7 @@
 - [x] Definir AnimationService con play(actor, estado, blend_time) [C]
 - [x] La gameplay llama por ESTADO, no por clip  [M] -> IMPLEMENTADO: animation_service.play(actor, estado, blend_time); animacion_jugador_m48.gd hace polling de la FSM por estado
 - [x] Definir fallback idle ante estado sin clip (log WARN)  [M] -> IMPLEMENTADO: signal animation_missing + fallback a idle documentado; probado en test_animacion_play_m48 bloque 2
-- [ ] Definir señales animation_started/finished/missing [M]
+- [x] Definir señales animation_started/finished/missing [M] — 03-Diseno sec 5 contrato del validador + vigente: animation_missing YA implementada (L198 de este 05) y started/finished son senales nativas de AnimationPlayer (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Prohibir que la capa de animación decida comportamiento [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
@@ -308,7 +308,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 123 items - Completados: 22 - Pendientes: 98 - No resueltos: 3. (Corregido agnes-3-flash 2026-10-14: +13 flips lotes 1-3 citando 02-Analisis/03-Diseno)
+**Totales:** 123 items - Completados: 28 - Pendientes: 92 - No resueltos: 3. (Corregido agnes-3-flash 2026-10-14: +13 flips lotes 1-3 citando 02-Analisis/03-Diseno)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 9 [x] / 114 [ ] / 0 [?].

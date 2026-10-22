@@ -145,3 +145,43 @@ al importar clip (M108):
 | M61/M62 | Presupuesto de animación, pooling, registro |
 | M74 | Animaciones de festivales y eventos |
 | M108/M118 | Importación con plantilla + validación en CI |
+
+## 5. Convenciones de produccion y contratos (S47 — G-5.3-Flash-Agente, 2026-10-23)
+
+**Pipeline de produccion (L26):** rig (M45, huesos subset por familia) →
+blocking (poses clave, cuadros 1/25/50/75/100%) → polish (curvas, easing,
+solape de extremidades) → export 30 fps (cada pose un frame; NINGUN clip
+con keyframes a 60 fps: el proyecto exporta a 30 y el engine interpola).
+El bloque aprobado se revisa EN VISTA de juego (no en Blender) antes de
+polish — M154/V5.
+
+**Formato de export (L28):** FBX por actor, T-pose UNICA como bind pose
+(sin A-pose ni variantes), bones subset por familia (humanoide ~40 huesos,
+cuadrupedo ~28, ave ~22, pez ~14; sin huesos faciales en el slice: la voz
+es texto, no lip-sync). Escala metrica 1 unidad = 1 m; forward = -Z
+(convencion Godot).
+
+**Familias de rigs (L30):** 4 familias canonicas — HUMANOIDE (jugador, NPCs
+aldea, Finneas), CUADRUPEDO (ciervo, jabali, zorro), AVE (gaviota, pajaro
+del prado), PEZ (fauna submarina). Cada familia tiene UN rig base y las
+variantes por especie reutilizan el mapping de huesos (nombres identicos);
+NO se crean rigs nuevos por animal.
+
+**Maximos de duracion (L34):** hereda la tabla 3.1 como TOPES (no tips):
+locomocion 1.6 s, acciones 2.5 s, fauna 3.0 s, mecanicas 4.0 s, UI 0.6 s.
+Un clip que excede el tope de su categoria exige justificacion en el 03
+(ie. cinematica) o se divide.
+
+**Nombres y librerias (L181):** clip = `anim_<actor>_<accion>_<variante>`
+(anim_finneas_idle_a1, anim_jugador_talar_g3); librerias POR ACTOR (una
+AnimationLibrary por actor/sfamilia, no un mega-lib); prefijo `anim_`
+obligatorio en todos los clips (el validador lo checara al importar).
+
+**Senales del validador (L199, contrato para validate_animation.gd):**
+cuando exista el tool de importacion, identificara 3 condiciones y EMITIRA
+senales por cada una: `animation_started` (clip valido montado en el
+actor), `animation_finished` (el loop termino o el one-shot completo) y
+`animation_missing` (un actor referencia un clip que no esta en su
+libreria — error de integracion visible en consola). MIENTRAS el tool no
+existe, este item queda como CONTRATO (el flip es de definicion, no de
+implementacion).
