@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T23:46:00",
+ "ultimo_update": "2026-10-22T23:56:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -28,9 +28,9 @@
   "backlog_pendientes": 54
  },
  "deepseek": {
-  "estado": "365 PROCESADO: P4 commit hecho; P2 aplicado (M147 sync_world_data.gd [x]->[?], fila 147 reconstruida al canon 11 con conteo disco 132/0/2 = 134 - la previa estaba en 65/134 desde SEPTIEMBRE, olvido de sincronizar tras el cierre de ayer); P3 ratificadas; P4 opcion (a) GO; P5 48=mayor; mi 366",
+  "estado": "ITEM 35 RATIFICADO COMPLETO (detector 3 metodos + suite 29/0 + unificacion SUPERSEDED + baseline); P1 commit 48c022c; P2 quality.yml en cola; P3/P4 escalados a fundador/duenos; P5 ratificado; su head de pool encolado a saneo; mi 367",
   "pendientes_real": 170,
-  "acuse_enviado": 366
+  "acuse_enviado": 367
  },
  "step_5": {
   "estado": "iter12 Comerciantes RATIFICADA (65/38/2 exacto; 40 cadenas; suite 379/0 bloque Q; trampas auto-corregidas en vivo con conteo rigido); fila 23 en DOS celdas ajustada; GO bloque final Puzzles+Investigacion CONSOLIDADO; mi 183",
@@ -377,6 +377,23 @@
    ],
    "origen": "auditoria aritmetica de Beam (218) + verificacion director en disco",
    "fecha": "2026-10-22 23:42"
+  },
+  {
+   "modulo": "M18-BIS/CASA assets",
+   "flags": [
+    "CASA_02 usa script de CASA_01 sin adaptar (trazabilidad defecto) - adaptar o declarar deuda",
+    "36-Fauna/scripts-blender: retirar o documentar"
+   ],
+   "origen": "DS-WB 366 item 35",
+   "fecha": "2026-10-22 23:56"
+  },
+  {
+   "modulo": "assets-Blender",
+   "flags": [
+    "81 funciones de boilerplate Blender duplicadas (crear_mat en 42 archivos) - helper comun o deuda declarada"
+   ],
+   "origen": "DS-WB 366",
+   "fecha": "2026-10-22 23:56"
   }
  ]
 }
