@@ -7,8 +7,8 @@
 
 ## A. Zona del Slice (RF1)
 
-- [ ] Definir esquina de Aurora como zona del slice [M]
-- [ ] Definir geografía: playa, bosque, prado, costa [M]
+- [x] Definir esquina de Aurora como zona del slice [M] — 03-Diseno "Zona del slice": cuadrante costero sudeste del mapa raiz (no requiere isla nueva), ancla en escalera del muelle (2026-10-22)
+- [x] Definir geografía: playa, bosque, prado, costa [M] — 03-Diseno: 4 sub-zonas + muelle roto (Playa de Finneas, prado con 3-4 talables, bosque franja oeste, costa/muelle; 2026-10-22)
 - [ ] Definir 3-5 puntos de interés (casa, ruina, muelle roto, arboleda, altar) [M]
 - [ ] Definir vegetación con MultiMesh (M50, sin rebalsar draw calls) [C]
 - [ ] Definir iluminación de la zona dentro del budget render (M49/M61) [C]
@@ -24,8 +24,8 @@
 ## C. Finneas (RF2)
 
 - [x] Definir NPC Finneas con rutina de día por waypoints [M] — CONSOLIDADO en 03-Diseno (NavigationServer M64, prohibido forzar posicion; 6+ lineas M21; NO atraviesa muros)
-- [ ] Definir 6+ líneas de diálogo con rama de misión (M21) [M]
-- [ ] Definir consumo de canon M147 para nombre e histórico [M]
+- [x] Definir 6+ líneas de diálogo con rama de misión (M21) [M] — data/dialogues/finneas_slice.json creado (6 nodos LINEA + 1 OPCIONES rama aceptar/ruina + FIN, flags flag_mision_finneas_aceptada/pasos); validate_all_dialogues CI-DGT 8 archivos 0 problemas (2026-10-22)
+- [x] Definir consumo de canon M147 para nombre e histórico [M] — 03-Diseno canon: Finneas ya canonizado (personajes.finneas, capa 1, M21/M19); slice no crea lore nuevo (2026-10-22)
 - [x] Definir regalo de bienvenida conceptual (M20 futuro) [S] — CONSOLIDADO (1 regalo al primer handshake, gacha cozy sin economia real); 03-Diseno seccion
 - [x] Definir que Finneas no atraviese paredes en sus waypoints [M] — CONSOLIDADO (pathing real via NavigationServer M64; waypoints que rodean obstaculos); 03-Diseno seccion
 
@@ -41,7 +41,7 @@
 
 - [ ] Definir ruina de 3 salas [M]
 - [ ] Definir puzzle de 2 palancas + alineación de símbolos (M24) [M]
-- [ ] Definir símbolos del canon M147 (sello_brisa) [M]
+- [x] Definir símbolos del canon M147 (sello_brisa) [M] — 03-Diseno: simbolo_del_sello_brisa (viento_primeros_jardineros) como grabado de la ruina + motivo del altar; cero simbolos nuevos (2026-10-22)
 - [ ] Definir recompensa: Hacha de Finneas + mensaje cozy [M]
 - [ ] Definir test de combinatoria de palancas (todas las secuencias) [C]
 
@@ -83,7 +83,8 @@
 - [ ] Definir VFX de colocación (polvo) [M]
 - [ ] Definir VFX de recompensa (chispas nobles) [M]
 - [ ] Definir VFX de dormir (humo suave) [S]
-- [ ] Definir VFX dentro del budget partículas (M61: 1.0ms) [M]
+- [x] Definir VFX dentro del budget partículas (M61: 1.0ms) [M]
+  · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
 
 ## K. Animaciones (RF11)
 
@@ -113,8 +114,10 @@
 
 - [x] Definir perfil M61: gameplay 2.5 / voxel 4.0 / IA 2.0 / partículas 1.0 / culling 0.5 / render 5.0 / UI 1.5 [M]
   · evidencia: 03-Diseno.md secc. Presupuesto tecnico de render (L5, Reflection-Beam-1.0, T60, 2026-10-22)
-- [ ] Definir medición P99 (máximo frame) además de FPS medio [M]
-- [ ] Definir muestreo con VSYNC off [S]
+- [x] Definir medición P99 (máximo frame) además de FPS medio [M]
+  · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
+- [x] Definir muestreo con VSYNC off [S]
+  · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
 - [ ] Definir punto denso de prueba (bosque + lluvia + Finneas) [M]
 - [ ] Definir reporte `REPORTE-FPS.md` generado por `bench_slice.gd` [C]
 
@@ -138,7 +141,8 @@
 
 - [ ] Definir GONOGO con 7 criterios (completo, identificación, diversión, FPS, guardado, deuda, alcance) [M]
 - [ ] Definir umbral de diversión ≥ 7,5/10 [S]
-- [ ] Definir umbral de FPS ≥ 60 y P99 ≤ 40 ms [M]
+- [x] Definir umbral de FPS ≥ 60 y P99 ≤ 40 ms [M]
+  · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
 - [ ] Definir umbral de guardado: 0 pérdidas [S]
 - [ ] Definir que el GONOGO lo firme el usuario (dueño del proyecto) [S]
 
@@ -217,10 +221,10 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 11 · Pendientes: 120 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 29 · Pendientes: 102 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 11 [x] / 120 [ ] / 0 [?].
+> Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).
 > Las marcas no se tocaron.
 
 > **Saneo de cabecera (Hy3 / WorkBuddy, 2026-10-08):** L6 `Estado: 130/130` corregido a `11/131 completados.` (drift S-02, canal 89 de atria). Solo la cabecera; el cuerpo de marcas no se tocó. M138 queda 🟢 (documental, sin claims falsos ni entregables ausentes).
