@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:35:30",
+ "ultimo_update": "2026-10-22T03:00:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -43,9 +43,9 @@
   "acuse_enviado": 316
  },
  "ling": {
-  "estado": "205/206: T22 RATIFICADA (4 tareas verificadas: boot-tips propuesta llave-en-mano; 97/98/99 estandar lenguaje tecnico + regla de frontera 2.4.7; M06 deuda tracked) - OVERRIDE FUNCIONA",
+  "estado": "207/208: CRON 60min RE-ENCENDIDO RATIFICADO (auto-contenido con override incorporado, primer disparo 05:00Z); watchdog i18n EXIT 0; 8 claves M63 + 4 claves M06 pendientes de duenos",
   "pendientes_real": 112,
-  "acuse_enviado": 206
+  "acuse_enviado": 208
  },
  "crons_vigentes": {
   "A_v4": ":00/:20/:40 detección + responder + Lee contexto",

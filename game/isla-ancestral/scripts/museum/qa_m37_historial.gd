@@ -96,7 +96,7 @@ func _run() -> void:
 		var r1: DonationResult = svc.donate("exposicion_inexistente", "item_inexistente")
 		_check(r1.accepted == false and r1.reason != "", "robustez: exposicion inexistente -> rechazo estructurado")
 		var r2: DonationResult = svc.donate("flora", "item_inexistente")
-		_check(r2.accepted == false and String(r2.reason) == "not_owned", "robustez: item inexistente -> not_owned (inventario intacto)")
+		_check(r2.accepted == false and String(r2.reason) == "invalid_item", "robustez: item inexistente -> invalid_item (guardia de catalogo 4.3; orden validate: catalogo->duplicado->inventario)")
 		_check(rechazos.size() >= 2, "robustez: senal donation_rejected emitida por cada rechazo")
 		svc.donation_rejected.disconnect(cb)
 	else:
