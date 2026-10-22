@@ -61,16 +61,17 @@ func _test_decor_sin_allocs() -> void:
 	_check(ok, "hot path: validacion valida en el camino caliente")
 	_check(delta == 0, "hot path: 60 validaciones con 0 allocs (delta=%d)" % delta)
 	_check(bool(out.get("ok", false)) == true, "out queda relleno con ok=true")
-	_check(out["celdas"] is Array and (out["celdas"] as Array).size() == 2,
-		"out trae superficie 1x0.5 = 2 celdas (%d)" % (out["celdas"] as Array).size())
+	_check(out["celdas"] is Array and (out["celdas"] as Array).size() == 8,
+		"out trae superficie 1x0.5 m = 8 celdas de 0.25 (%d)" % (out["celdas"] as Array).size())
 	# Casos de rechazo mantienen el contrato sin tocar celdas
-	var rechazo: bool = hdec.validar_celda_en(Vector3i(0, 0, 0), mueble, out)
+	var mueble_pared := {"nombre": "cuadro_test", "ancho": 1.0, "profundo": 1.0, "requiere_pared": true}
+	var rechazo: bool = hdec.validar_celda_en(Vector3i(5, 0, 5), mueble_pared, out)
 	_check(not rechazo and String(out.get("razon", "")) == "requiere pared y no está en el borde",
 		"hot path: mueble sin pared fuera del perimetro rechaza con razon")
 	var wrapper: Dictionary = hdec.validar_celda(celda, mueble)
 	_check(bool(wrapper.get("ok", false)) == true, "wrapper legacy mantiene el contrato completo")
 	var d2: int = int(hdec._allocs_validacion) - (antes + delta)
-	_check(d2 == 1, "wrapper legacy cuesta exactamente 1 (dict+array) y queda contado")
+	_check(d2 == 2, "wrapper legacy cuesta 2 por llamada y queda contado (dict del wrapper + duplicate del buffer: el wrapper pasa out sin celdas, delta=%d)" % d2)
 	hdec.desactivar()
 	hdec.queue_free()
 

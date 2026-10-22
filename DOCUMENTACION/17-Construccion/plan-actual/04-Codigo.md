@@ -336,3 +336,22 @@ test_construccion_iter2.gd    99 checks, 0 fallos
 test_construccion_iter6.gd    22 checks, 0 fallos
 test_construccion_iter7.gd    25 checks, 0 fallos
 ```
+
+## LO QUE QUEDA ABIERTO (y por que) — Log 2109, 2026-07-22
+
+Con los checks **nombrados** de las 7 suites de M17 (496 checks, auditables uno a uno) se cerraron 2 items mas
+(P7 copia, P11 demolicion). Los que siguen abiertos NO se cierran porque **falta una parte concreta**, no
+porque no se haya buscado:
+
+| Item | Parte que falta | Por que no se cierra |
+|---|---|---|
+| P6 elevacion | "altura maxima por zona" | hay planta (set_planta/planta_actual, la clave "planta" del codec, "refleja la elevacion: y = celda.y + altura/2") pero **no hay check de altura maxima por zona** |
+| P16 restricciones | "alturas" | hay topes por zona ("3/3 piezas -> LIMITE_DE_ZONA") y parcelas ajenas ("parcela NPC -> PROTEGIDA", "dentro de la parcela NPC: NO edificable") pero **el validador no tiene regla de alturas** (`ConstruccionValidator.ORDEN` son 8 reglas y ninguna es de altura) |
+| P10 almacenamiento | "sin perdidas" | el contrato real es devolucion 50% ("devolucion 50% redondea hacia abajo (madera 5->2, piedra 3->1)") con re-cobro en undo ("undo re-cobro la devolucion: 8-2=6"): el item dice "sin perdidas" y eso **no** es lo que hace el codigo |
+| P21 ventanas | "transparentes a la luz (M48)" | solo hay "toda puerta/ventana exige pared contigua": la transparencia a la luz es de M48 (no M17) |
+| P22 escaleras | todo | 0 checks con "escalera": la escalera no tiene suite |
+| P23 puentes | "losa 1-4 celdas" | hay "puente sobre AGUA con sobre_agua -> ok" / "puente sobre tierra firme -> FUERA_DE_ZONA" / "todo puente: sobre_agua + superficie 'agua' + 0 soportes" / "familia 'puente' tiene 5 recetas" pero **no se pudo verificar el rango de tamanos 1-4**: el catalogo no esta en `data/construccion/piezas/` (la ruta que citan los tests no existe en disco) |
+| P27 muebles | "interaccion M18" | hay "modo DECORACION ve 21 muebles" / "todo lo del modo decoracion es es_mueble" / "refleja las 2 celdas de la cama" pero la interaccion con M18 no tiene check |
+| P15 colisiones | "colision estatica real" | el validator es **logico**, no fisico: no hay colisiones reales |
+| A. Requisitos (12) | redaccion | son items de documentacion del modulo (problema, dependencias, RF1..RF14): son del dueno del modulo, no se autocierran |
+| C. Modo construccion | UI + mundo | requieren HUD y viewport: fuera del riel headless |

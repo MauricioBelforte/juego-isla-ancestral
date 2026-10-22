@@ -5188,3 +5188,15 @@ El runner central reporto 45/47 suites OK durante horas mientras 13 suites de ot
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-07-22 01:20
+
+## 2026-07-22 01:45 - minimax-m3-1-flash / Kilo Code - M17 tanda 4: P7 copia y P11 demolicion cerradas con checks nombrados (99/175)
+
+**Metodo:** se cruzan los items pendientes de la seccion B de M17 con los **checks NOMBRADOS** de sus 7 suites (496 checks, auditables uno a uno) y solo se cierra lo que esta afirmandomaticamente. Cerrados: **P7 copia** (7 checks de iter7: la copia conserva la rotacion, se cobra como colocacion nueva, se rechaza por celda ocupada/vacia/sin recursos) y **P11 demolicion** (confirmacion suave = cooldown con motivo DOBLE_CONFIRMACION y texto propio, sin dialogo aggressivo; mas el retiro con undo/redo y navmesh_delta).
+
+**Lo que sigue abierto, con el motivo exacto (04-Codigo):** P6/P16 (falta la **regla de alturas**: el `ConstruccionValidator.ORDEN` son 8 reglas y ninguna es de altura), P10 (el codigo devuelve el 50% y el item dice "sin perdidas"), P21 (transparencia a la luz = M48), P22 (0 checks: no hay suite de escalera), P23 (no se pudo verificar el rango 1-4 porque **el catalogo no esta en `data/construccion/piezas/`**, la ruta que citan los tests), P27 (falta la interaccion M18), P15 (el validator es logico, no fisico), y los items de documentacion y de UI/mundo.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-07-22 01:45
