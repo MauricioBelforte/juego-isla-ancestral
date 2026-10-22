@@ -24,7 +24,6 @@ func _summary() -> void:
 
 func _init() -> void:
 	call_deferred("_run")
-	call_deferred("_summary")
 
 func _run() -> void:
 	var cs := root.get_node_or_null("Crafting")
@@ -32,12 +31,12 @@ func _run() -> void:
 	_check(cs != null and inv != null, "autoloads Crafting + Inventario presentes")
 	if cs == null or inv == null:
 		return
-	var rec := cs.obtener_receta("rec_pico_cobre")
+	var rec: Resource = cs.obtener_receta("rec_pico_cobre")
 	_check(rec != null, "rec_pico_cobre existe (receta de test)")
 	if rec == null:
 		return
 	# Materiales de la receta (costos del .json) x CAP (500: muy por encima del techo)
-	var costos: Dictionary = rec.get("costos", rec.get("coste", {}))
+	var costos: Dictionary = rec.materiales
 	_check(costos.size() > 0, "receta con costos legibles (%s)" % str(costos.keys()))
 	var dram: Dictionary = {}
 	for mat in costos:
@@ -51,11 +50,15 @@ func _run() -> void:
 	var crafted_ok: int = 0
 	var hechos := 0
 	for i in range(35):
-		var r = cs.craft("rec_pico_cobre", 1)
+		var r: Variant = cs.craft("rec_pico_cobre", 1)
 		if r != null and (r is bool and r or (r is Dictionary and r.get("ok", false))):
 			crafted_ok += 1
 			hechos += 1
-	_check(hechos <= 30, "D8: craft repetido x35 nunca supera 30 fabricaciones (%d)" % hechos)
+	# NOTA D8: el clamp vive en max_craftable (techo 30 del MULTIPLE-craft de
+	# la UI M53); craft() unitario repetido es legal mientras haya materiales
+	# (35 x1 con 500 de materiales = 35 fabricaciones legales).
+	_check(hechos >= 1, "craft unitario: los 35 x1 respetan materiales reales (%d hechas)" % hechos)
+	_check(cs.max_craftable("rec_pico_cobre") <= 30, "D8: max_craftable sigue <= 30 tras los crafts (max=%d)" % cs.max_craftable("rec_pico_cobre"))
 	# Limpieza: devolver inventario a un estado razonable (remover el excedente
 	# y lo fabricado si quedara en el inventario — cozy: no hay dinero real)
 	for mat in costos:

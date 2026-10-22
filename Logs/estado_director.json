@@ -19,7 +19,7 @@
  "g_5_3": {
   "estado": "239/240/241: S6 M40 SELLADA honestamente (degradada a [?] con 10 duelos RM) y S7 M37 RATIFICADA (registry v2 + VERSION_GUARDADO 1->2 + QA 20/0; M37 98/50/0=148); saneo colision 238/239 por regla de hilo aceptado; GO proximo modulo",
   "pendientes_real": 222,
-  "acuse_enviado": 241,
+  "acuse_enviado": 244,
   "ultima_tanda": 40
  },
  "deepseek": {
