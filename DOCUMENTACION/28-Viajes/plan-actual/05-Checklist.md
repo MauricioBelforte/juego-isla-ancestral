@@ -157,7 +157,7 @@
 
 - [x] Coste en monedas y campo required_quest para desbloqueos [S]
 
-- [ ] Bandera is_secret y is_night_line para líneas especiales [S]
+- [x] Bandera is_secret y is_night_line para líneas especiales [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: boat_route.gd L22/L24 flags @export + travel_service.gd L79-80 (carga desde datos) y L103 (flujo secreta); qa_m28_ui_travel.gd 7/0 EXIT 0
 
 - [x] Resources .tres versionables en res://_Project/data/routes/ [S]
 
@@ -227,9 +227,9 @@
 
 - [ ] Confirmación explícita del coste del viaje rápido (M69) [S] — dueño M69
 
-- [ ] Notificación de devolución tras cancelar [S] — iter. 2: show_refund_notice(coins) con auto-cerrar 2s
+- [x] Notificación de devolución tras cancelar [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: travel_ui.gd L82 show_refund_notice(coins) existe en disco (iteración 2 ya la había implementado); qa_m28_ui_travel.gd 7/0 EXIT 0 (llamada headless sin crash)
 
-- [ ] set_interactive(false) durante transiciones (sección 8 AGENTS.md) [S] — iter. 2: _set_interactivo disponible; M53 consumirá
+- [x] set_interactive(false) durante transiciones (sección 8 AGENTS.md) [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: travel_ui.gd L96 _set_interactivo + llamadas L57 (restaurar), L73 (deshabilitar en travesía), L105 (restauración final); qa_m28_ui_travel.gd 7/0 EXIT 0 (off/on headless sin crash)
 
 
 
@@ -425,3 +425,4 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 80 [ ] / 0 [?].
 > Las marcas no se tocaron.
+**Totales:** 130 items · Completados: 53 · Pendientes: 77 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 53 [x] / 77 [ ] / 0 [?] tras tanda UI-travel+banderas; qa_m28_ui_travel.gd 7/0.)

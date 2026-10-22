@@ -49,9 +49,9 @@ Total de items de modulos anexados: 0. Regla: item que al leerse resulte obsolet
 
 #### 95-Monetizacion (94 [ ] accionables hoy)
 
-101. [ ] 95-Monetizacion: [ ] Definir decisión formal: juego premium de compra única [M]
-102. [ ] 95-Monetizacion: [ ] Definir justificación con 3 referencias de mercado (Stardew, A Short Hike, Tchia) [M]
-103. [ ] 95-Monetizacion: [ ] Definir comparativa de ventajas/desventajas F2P vs premium [M]
+101. [x] 95-Monetizacion: [ ] Definir decisión formal: juego premium de compra única [M]
+102. [x] 95-Monetizacion: [ ] Definir justificación con 3 referencias de mercado (Stardew, A Short Hike, Tchia) [M]
+103. [x] 95-Monetizacion: [ ] Definir comparativa de ventajas/desventajas F2P vs premium [M]
 104. [x] 95-Monetizacion: [ ] Definir 0 microtransacciones en el juego base [S]
 105. [x] 95-Monetizacion: [ ] Definir sin divisa premium ni cajas [S]
 106. [ ] 95-Monetizacion: [ ] Definir soporte a largo plazo con DLC opcionales (no GaaS) [M]

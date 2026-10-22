@@ -8,8 +8,9 @@
 ## Veredicto
 
 Muestra de **2112 items** (minimo 5% de 88 [x] = 5) por verbos de creacion, verificados contra disco:
-**1 fallas materiales** (umbral de denegacion >= 2) -> la MUESTRA esta respaldada. Pero la **suite del
-modulo esta ROJA (rc=1)** por un fallo real y reproducible: el bioma `beach` sale **0 muestras** en el
+**1 falla material** (L66: el boton debug "Regenerar mundo" NO tiene implementacion — 149 hits de "regenerar" en scripts/ y ninguno es ese boton; el umbral de denegacion es >= 2, asi que NO se denega el sello). Pero la **suite del modulo esta ROJA (rc=1)**
+"regenerar" en scripts/ y ninguno es ese boton; umbral de denegacion >= 2, asi que NO se denega). Pero la **suite
+del modulo esta ROJA (rc=1)** por un fallo real y reproducible: el bioma `beach` sale **0 muestras** en el
 muestreo determinista (espiral aurea, sin RNG -> no es flapping). El generador SI define `beach`
 (island_generator.gd L173/L188/L211) pero las posiciones muestreadas no lo alcanzan.
 
@@ -22,9 +23,9 @@ Ademas: `AnimationService` ya no existe en Godot 4.7 -> hay una referencia a un 
 
 ## Muestra verificada
 
-L10 (generador determinista por semilla) · L13 (03-Diseno + 04-Codigo con criterios) · L66 (boton debug
-Regenerar mundo) · L138 (guia de vision M154) · L46 (`_get_ore_type`) · L47 (catalogo de vegetacion por
-bioma) -> todos OK contra disco.
+L10 (generador determinista por semilla) · L13 (03-Diseno + 04-Codigo con criterios) · L138 (guia de vision M154) · L46 (`_get_ore_type`) · L47 (catalogo de vegetacion por bioma) -> OK contra disco.
+**L66 (boton debug "Regenerar mundo") -> NO respaldado**: no hay implementacion (los 149 hits de "regenerar" en
+scripts/ son de atlas, build ids, ubicaciones, clima y mesh de construccion).
 
 ## Archivos
 

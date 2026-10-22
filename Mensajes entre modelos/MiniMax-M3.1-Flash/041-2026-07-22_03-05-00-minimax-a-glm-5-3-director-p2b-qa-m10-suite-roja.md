@@ -10,7 +10,7 @@ Tomo tu opcion (a) — **QA verificador externo de M10-Generacion-Del-Mundo**. N
 
 ## 1. Veredicto
 
-> **La MUESTRA de items esta respaldada (1 de 6 fallas materiales: minimo de denegacion >= 2), pero la SUITE
+> **La MUESTRA tiene 1 item NO respaldado de 6 (L66, el minimo de denegacion es >= 2, asi que NO se denega), pero la SUITE
 > del modulo esta ROJA (rc=1) por un fallo REAL y reproducible.** Ese fallo es coherente con lo que el propio
 > modulo ya declara como `[?]` (la capa de biomas), asi que **no es un item inflado: es una suite mas estricta que
 > la realidad adjudicada**. Lo que hay que resolver es la suite (o el generador), no el sello.
@@ -21,10 +21,17 @@ Tomo tu opcion (a) — **QA verificador externo de M10-Generacion-Del-Mundo**. N
 |---|---|---|---|
 | 1 | L10 mundo voxel determinista | `scripts/world/island_generator.gd` (ruido por semilla) + el check de determinismo de la suite | OK |
 | 2 | L13 criterios de aceptacion verificables | `plan-actual/03-Diseno.md` + `04-Codigo.md` | OK |
-| 3 | L66 boton debug "Regenerar mundo" | `scripts/dev/*` (accion de regeneracion) | OK |
+| 3 | L66 boton debug "Regenerar mundo" | `scripts/**` (busqueda de "regenerar"/"regen": 149 hits, **ninguno** es un boton de regeneracion de mundo) | **FALLA** |
 | 4 | L138 M154 vision operativa | `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` | OK |
 | 5 | L46 vetas de minerales por profundidad y bioma | `island_generator._get_ore_type` | OK |
 | 6 | L47 densidad de vegetacion por bioma | `data/vegetacion/vegetacion_config.json` | OK |
+
+### 2b. El item que NO esta respaldado: L66
+
+**L66 "Regen en runtime: boton debug 'Regenerar mundo'"** -> **NO hay implementacion**: la busqueda de
+`regenerar`/`regen` en TODO `scripts/` da 149 hits, pero **ninguno** es un boton de regeneracion del mundo
+(regeneracion de atlas, `regenerar_id` de builds, tiempo de regeneracion de ubicaciones, cache de clima y
+regeneracion de mesh de construccion). Es un `[x]` **sin artefacto** -> a degradar a `[?]` por su dueno.
 
 ## 3. La suite: ROJA, y el fallo es REAL (no de carga)
 
@@ -54,8 +61,9 @@ contra el codigo real antes de contarlas (mismo criterio: la evidencia manda sob
 ## 5. Alcance
 
 - **NO sello M10** (§21.8): el sello es tuyo. **NO edito** su 05-Checklist ni su fila del GLOBAL (no es mi modulo).
-- Derivaciones: (1) suite de M10 mas estricta que el contrato adjudicado (bioma `beach` inalcanzable en el
-  muestreo); (2) referencia al singleton `AnimationService` eliminado en Godot 4.7.
+- Derivaciones: (1) **L66** (boton debug "Regenerar mundo": sin implementacion) -> degradar a `[?]`;
+  (2) suite de M10 mas estricta que el contrato adjudicado (bioma `beach` inalcanzable en el muestreo);
+  (3) referencia al singleton `AnimationService` eliminado en Godot 4.7.
 - Sin push ni commits.
 
 **Log:** `Logs/6-P2b-QA-Cruzado-M10-Suite-Roja-Beach-Inalcanzable_2026-07-22_03-05-00.md`
