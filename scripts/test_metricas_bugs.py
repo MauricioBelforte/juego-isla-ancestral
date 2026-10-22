@@ -31,6 +31,7 @@
 #
 # AGENTS.md 28: UTF-8 sin BOM, LF.
 
+import ast
 import io
 import json
 import os
@@ -47,7 +48,8 @@ PASS = 0
 FAIL = 0
 
 # Piso MEDIDO en verde (no estimado): se re-mide cada vez que crece la suite.
-CHECKS_MINIMOS = 20
+# 2026-10-22 (Log 2120): 30 checks tras agregar los 10 del gate de deuda.
+CHECKS_MINIMOS = 30
 
 REGISTRO_REAL = RAIZ / "DOCUMENTACION" / "11-BUGS.md"
 
@@ -324,6 +326,129 @@ def test_inyeccion_roja_detecta():
         "el tipo detectado es estado_desconocido, medido %s" % d1["defectos"][0]["tipo"]
 
 
+# --- gate de CI: deuda conocida ------------------------------------------
+
+def test_gate_verde_sin_defectos():
+    """Control negativo: registro limpio -> gate verde, exit 0."""
+    tmp = tempfile.mkdtemp(prefix="t_metricas_")
+    d = mod.leer_registro(_escribir(tmp, "limpio.md", FIXTURE_LIMPIO), None)
+    codigo, lineas = mod._gate(d, {})
+    assert codigo == 0, "limpio -> exit 0, medido %d (%s)" % (codigo, lineas)
+    assert any("GATE VERDE" in l for l in lineas), "el veredicto verde se declara: %s" % lineas
+
+
+def test_gate_rojo_nombra_el_defecto():
+    """El gate discrimina y NOMBRA: tipo + firma + linea del defecto nuevo."""
+    tmp = tempfile.mkdtemp(prefix="t_metricas_")
+    roto = _escribir(tmp, "roto.md", FIXTURE_LIMPIO.replace("[?] Delegado", "sin estado"))
+    d = mod.leer_registro(roto, None)
+    codigo, lineas = mod._gate(d, {})
+    texto = "\n".join(lineas)
+    assert codigo == 1, "con 1 defecto nuevo -> exit 1, medido %d" % codigo
+    assert "GATE ROJO" in texto, "el veredicto rojo se declara"
+    assert "estado_desconocido" in texto, "nombra el TIPO del defecto nuevo: %s" % texto
+    assert "estado_desconocido:BUG-003" in texto, "nombra la FIRMA del defecto nuevo"
+    assert "L" in texto, "nombra la LINEA del defecto nuevo"
+
+
+def test_gate_verde_con_deuda_conocida():
+    """El baseline conocido NO bloquea: es el punto del patron (b)."""
+    tmp = tempfile.mkdtemp(prefix="t_metricas_")
+    roto = _escribir(tmp, "roto.md", FIXTURE_LIMPIO.replace("[?] Delegado", "sin estado"))
+    d = mod.leer_registro(roto, None)
+    deuda = {x["firma"]: "fixture" for x in d["defectos"]}
+    codigo, lineas = mod._gate(d, deuda)
+    assert codigo == 0, "defecto ya conocido -> exit 0, medido %d" % codigo
+
+
+def test_gate_rojo_si_se_repite_una_firma_conocida():
+    """Agujero del multiset: 2 defectos con la MISMA firma, 1 en el baseline.
+
+    Si el gate comparase CONJUNTOS en vez de multiset, la repeticion pasaria
+    invisible y el baseline se volveria una amnistia.
+    """
+    tmp = tempfile.mkdtemp(prefix="t_metricas_")
+    fila = "| BUG-002 | Dos | M20 | \U0001F7E1 Menor | [ ] Abierto | beta | 2026-01-02 |"
+    doble = FIXTURE_LIMPIO.replace(
+        fila, fila.replace("| beta |", "| be|ta |") + "\n" + fila.replace("| beta |", "| be|ta |"))
+    d = mod.leer_registro(_escribir(tmp, "doble.md", doble), None)
+    malformadas = [x for x in d["defectos"] if x["firma"] == "fila_malformada:BUG-002"]
+    assert len(malformadas) == 2, "2 defectos con la misma firma, medido %d" % len(malformadas)
+    codigo, lineas = mod._gate(d, {"fila_malformada:BUG-002": "fixture"})
+    assert codigo == 1, "la 2a ocurrencia es NUEVA -> exit 1, medido %d" % codigo
+
+
+def test_gate_avisa_deuda_obsoleta():
+    """Una firma de deuda que ya no aparece se declara, pero NO rompe el gate."""
+    tmp = tempfile.mkdtemp(prefix="t_metricas_")
+    d = mod.leer_registro(_escribir(tmp, "limpio.md", FIXTURE_LIMPIO), None)
+    codigo, lineas = mod._gate(d, {"fila_sin_entrada:BUG-999": "ya reparado"})
+    texto = "\n".join(lineas)
+    assert codigo == 0, "la deuda resuelta NO es un fallo, medido %d" % codigo
+    assert "AVISO" in texto and "fila_sin_entrada:BUG-999" in texto, \
+        "declara la firma obsoleta: %s" % texto
+
+
+def test_firma_estable_ante_corrimiento_de_lineas():
+    """La firma no depende del numero de linea (si no, cada fix vecino da rojo)."""
+    tmp = tempfile.mkdtemp(prefix="t_metricas_")
+    roto = FIXTURE_LIMPIO.replace("[?] Delegado", "sin estado")
+    a = [x for x in mod.leer_registro(_escribir(tmp, "a.md", roto), None)["defectos"]]
+    corrido = "linea nueva al principio\n\n" + roto
+    b = [x for x in mod.leer_registro(_escribir(tmp, "b.md", corrido), None)["defectos"]]
+    assert len(a) == len(b) == 1, "1 defecto en los dos, medido %d/%d" % (len(a), len(b))
+    assert a[0]["firma"] == b[0]["firma"], "firma estable: %s vs %s" % (a[0]["firma"], b[0]["firma"])
+    assert a[0]["linea"] != b[0]["linea"], "y las lineas SI cambian (control positivo)"
+
+
+def test_literal_deuda_es_pegable():
+    """`--deuda` imprime un dict Python valido, con una entrada por firma."""
+    d = mod.leer_registro(str(REGISTRO_REAL), None)
+    literal = mod.literal_deuda(d)
+    arbol = ast.parse(literal)   # si el literal no es Python valido, esto lanza
+    assert isinstance(arbol.body[0], ast.Assign), "el literal es una ASIGNACION"
+    obj = ast.literal_eval(arbol.body[0].value)
+    assert isinstance(obj, dict), "el literal evalua a dict, dio %r" % type(obj)
+    assert set(obj) == {x["firma"] for x in d["defectos"]}, \
+        "una entrada por firma medida (%d vs %d)" % (
+            len(obj), len({x["firma"] for x in d["defectos"]}))
+    assert all(v.strip() for v in obj.values()), "ninguna firma sin motivo"
+
+
+def test_deuda_real_tiene_formato():
+    """Cada clave del baseline es `tipo:identidad`, y cada valor nombra un dueno."""
+    assert mod.DEUDA_CONOCIDA, "el baseline no puede estar vacio (seria un gate ciego)"
+    for firma, motivo in mod.DEUDA_CONOCIDA.items():
+        assert firma.count(":") == 1, "firma mal formada: %r" % firma
+        assert motivo.strip(), "firma sin motivo: %r" % firma
+
+
+def test_gate_verde_sobre_el_registro_real():
+    """Invariante de CI: el baseline de hoy cubre el registro de hoy.
+
+    Se lee CON el dashboard por defecto, igual que el workflow: si esto falla,
+    el gate del CI nace ROJO y el CI se apaga solo.
+
+    La obsolescencia de una firma NO se congela aca a proposito: el dashboard de
+    GitHub Issues puede cambiar de estado sin que el registro tenga un defecto
+    nuevo, y convertir ese aviso en fallo pondria en rojo el trabajo de otro
+    agente. El gate lo declara como AVISO; limpiarlo es higiene, no invariante.
+    """
+    d = mod.leer_registro(str(REGISTRO_REAL))
+    codigo, lineas = mod._gate(d)
+    texto = "\n".join(lineas)
+    assert codigo == 0, "gate real -> exit 0, medido %d: %s" % (codigo, "\n".join(lineas[:6]))
+    assert "GATE ROJO" not in texto, "hay defectos NUEVOS sin declarar: %s" % texto
+
+
+def test_check_json_no_contamina_stdout():
+    """--json --check: el stdout sigue siendo SOLO JSON; el veredicto va a stderr."""
+    rc, salida = _correr(["--json", "--check"])
+    assert rc == 0, "gate real verde -> 0, medido %d" % rc
+    obj = json.loads(salida)
+    assert obj["metricas"]["defectos_por_tipo"], "el JSON trae los defectos medidos"
+
+
 def test_piso_de_checks():
     """El piso se verifica a si mismo: si la suite se recorta, esto falla.
 
@@ -360,6 +485,18 @@ def main():
     test("registro real: ningun defecto mudo", test_registro_real_defectos_no_mudos)
     test("registro real: dos lecturas dan lo mismo", test_registro_real_es_estable)
     test("INYECCION EN ROJO: el detector discrimina", test_inyeccion_roja_detecta)
+    test("gate: registro limpio -> verde", test_gate_verde_sin_defectos)
+    test("gate: defecto nuevo -> ROJO nombrando tipo+linea", test_gate_rojo_nombra_el_defecto)
+    test("gate: la deuda conocida no bloquea", test_gate_verde_con_deuda_conocida)
+    test("gate: una 2a ocurrencia de la misma firma SI bloquea",
+         test_gate_rojo_si_se_repite_una_firma_conocida)
+    test("gate: deuda obsoleta se avisa sin romper", test_gate_avisa_deuda_obsoleta)
+    test("firma estable ante corrimiento de lineas", test_firma_estable_ante_corrimiento_de_lineas)
+    test("--deuda imprime un literal pegable", test_literal_deuda_es_pegable)
+    test("DEUDA_CONOCIDA: formato y motivo", test_deuda_real_tiene_formato)
+    test("gate VERDE sobre el registro real (invariante de CI)",
+         test_gate_verde_sobre_el_registro_real)
+    test("--json --check no contamina stdout", test_check_json_no_contamina_stdout)
     test("piso de checks ejecutados", test_piso_de_checks)
     print()
     print("=" * 68)

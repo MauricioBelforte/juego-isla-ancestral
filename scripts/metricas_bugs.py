@@ -96,6 +96,97 @@ ESTADOS_CANONICOS = {
     " ": "abierto",
 }
 
+# --- Deuda conocida (baseline del gate de CI) -----------------------------
+#
+# El gate `--check` NO puede nacer rojo sobre un registro que ya arrastra
+# decenas de defectos heredados: un gate rojo el primer dia se desactiva el
+# segundo. `DEUDA_CONOCIDA` es el baseline — lo listado aca NO bloquea, lo que
+# NO esta, bloquea. Es el mismo patron de `scripts/validar_workflows.py`
+# (BUG-078: deuda con dueno declarado en vez de gate apagado).
+#
+# La clave es la FIRMA del defecto, no su numero de linea: al reparar una fila
+# las lineas de abajo se corren, y una clave por linea convertiria cada
+# saneamiento en un falso rojo. `firma_de()` usa el id del bug, que es la
+# identidad estable del defecto.
+#
+# Higiene: al reparar un defecto su firma queda OBSOLETA. El gate lo declara
+# con las lineas exactas a borrar (una lista de deuda que no se limpia deja de
+# informar) pero NO se pone rojo por eso: castigar una mejora es la forma mas
+# rapida de que nadie limpie la lista.
+DEUDA_CONOCIDA = {
+    "dashboard_divergente:dashboard": "M102: dashboard de GitHub Issues vs registro local",
+    "entrada_duplicada:BUG-047": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "entrada_duplicada:BUG-051": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "entrada_duplicada:BUG-052": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "entrada_duplicada:BUG-058": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "entrada_duplicada:BUG-061": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "entrada_duplicada:BUG-062": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "entrada_duplicada:BUG-089": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "entrada_duplicada:BUG-120": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "entrada_sin_fila:BUG-024": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-026": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-027": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-028": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-029": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-030": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-031": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-032": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-033": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-034": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-036": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-037": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-038": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-043": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-044": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-046": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-047": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-048": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-049": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-050": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-061": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-062": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-063": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-064": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-065": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-066": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-070": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-072": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-073": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-074": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-075": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-079": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-080": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-082": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-083": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-084": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-085": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-086": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-099": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-100": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-119": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-120": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-121": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-122": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-123": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-134": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-135": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "entrada_sin_fila:BUG-140": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "etiqueta_severidad_inconsistente:baja": "M102: dos escalas de severidad conviviendo (nomenclatura del registro)",
+    "etiqueta_severidad_inconsistente:trivial": "M102: dos escalas de severidad conviviendo (nomenclatura del registro)",
+    "fila_sin_entrada:BUG-095": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "fila_sin_entrada:BUG-106": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "fila_sin_entrada:BUG-107": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "fila_sin_entrada:BUG-118": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "fila_sin_entrada:BUG-131": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "fila_sin_entrada:BUG-132": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "fila_sin_entrada:BUG-137": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "fila_sin_entrada:BUG-138": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "id_duplicado_tabla:BUG-071": "director: colision de id entre bugs DISTINTOS (renumerar cambia identidad)",
+    "id_duplicado_tabla:BUG-129": "director: colision de id entre bugs DISTINTOS (renumerar cambia identidad)",
+    "id_duplicado_tabla:BUG-130": "director: colision de id entre bugs DISTINTOS (renumerar cambia identidad)",
+    "id_duplicado_tabla:BUG-139": "director: colision de id entre bugs DISTINTOS (renumerar cambia identidad)",
+}
+
 
 def _limpiar_markdown(texto):
     """Quita el enfasis de markdown para poder leer la celda."""
@@ -163,6 +254,30 @@ def _mencionado(texto, numero):
     """True si el registro menciona ese numero de bug con cualquier formato."""
     patron = r"\b(?:BUG|Bug|bug)[-_ ]?0*%d\b" % numero
     return re.search(patron, texto) is not None
+
+
+RE_BUG_EN_DETALLE = re.compile(r"\bBUG-(\d{3})\b")
+RE_SEV_EN_DETALLE = re.compile(r"severidad '([^']+)'")
+
+
+def firma_de(defecto):
+    """Identidad ESTABLE de un defecto: tipo + id, sin linea ni detalle.
+
+    Las lineas se corren al reparar filas vecinas y el detalle cambia al
+    reescribir una fila; el id del bug no. Ejemplos:
+        fila_sin_entrada:BUG-095
+        etiqueta_severidad_inconsistente:critica   (el defecto es por NIVEL)
+        dashboard_divergente:dashboard
+    """
+    tipo = defecto.get("tipo", "?")
+    detalle = defecto.get("detalle", "")
+    if tipo == "etiqueta_severidad_inconsistente":
+        m = RE_SEV_EN_DETALLE.search(detalle)
+        return "%s:%s" % (tipo, m.group(1) if m else "?")
+    if tipo == "dashboard_divergente":
+        return "%s:dashboard" % tipo
+    m = RE_BUG_EN_DETALLE.search(detalle)
+    return "%s:%s" % (tipo, ("BUG-%s" % m.group(1)) if m else "?")
 
 
 def leer_dashboard(ruta=RUTA_DASHBOARD):
@@ -439,6 +554,12 @@ def leer_registro(ruta=RUTA_POR_DEFECTO, ruta_dashboard=RUTA_DASHBOARD):
         "defectos_por_tipo": dict(sorted(collections.Counter(
             d["tipo"] for d in defectos).items())),
     }
+
+    # La firma se calcula al final, en un solo sitio: los sitios que crean
+    # defectos no tienen que acordarse de rellenarla (un defecto sin firma
+    # seria invisible para el gate, que es la peor clase de defecto).
+    for d in defectos:
+        d["firma"] = firma_de(d)
 
     return {
         "archivo": ruta,
@@ -780,6 +901,82 @@ def _correr(argv):
     return rc, buf.getvalue()
 
 
+# --- Gate de CI (deuda conocida) ------------------------------------------
+
+# Motivo por familia, para que la entrada del baseline diga POR QUE sigue ahi
+# y quien la debe. Una firma sin motivo es deuda sin dueno.
+MOTIVO_POR_TIPO = {
+    "entrada_sin_fila": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
+    "fila_sin_entrada": "M102: la fila resumen existe y la entrada falta (escribirla es contenido, no mecanica)",
+    "entrada_duplicada": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
+    "id_duplicado_tabla": "director: colision de id entre bugs DISTINTOS (renumerar cambia identidad)",
+    "etiqueta_severidad_inconsistente": "M102: dos escalas de severidad conviviendo (nomenclatura del registro)",
+    "seccion_pegada": "M102: encabezado embebido en otro encabezado",
+    "estado_sin_marca": "M102: estado escrito con palabra en vez de [x]/[ ]/[?]/[->]",
+    "fila_malformada": "M102: fila con numero de celdas distinto de 7",
+    "dashboard_divergente": "M102: dashboard de GitHub Issues vs registro local",
+    "estado_desconocido": "M102: estado no reconocido",
+}
+
+
+def literal_deuda(datos):
+    """Devuelve el literal `DEUDA_CONOCIDA` medido, listo para pegar.
+
+    Imprime, NO escribe: bendecir el estado actual tiene que ser un acto
+    deliberado con diff visible, no un efecto colateral de correr un flag.
+    """
+    firmas = sorted({d["firma"] for d in datos["defectos"]})
+    out = ["DEUDA_CONOCIDA = {"]
+    for firma in firmas:
+        tipo = firma.split(":", 1)[0]
+        motivo = MOTIVO_POR_TIPO.get(tipo, "M102: sin motivo declarado")
+        out.append('    "%s": "%s",' % (firma, motivo))
+    out.append("}")
+    return "\n".join(out)
+
+
+def _gate(datos, deuda=None):
+    """Gate de CI. Devuelve (codigo, [lineas]) — exit 1 solo con defectos NUEVOS.
+
+    Compara la MULTISET de firmas contra el baseline: un segundo defecto con la
+    misma firma que el baseline tambien es NUEVO (si no, el gate tendria un
+    agujero del tamano de una repeticion).
+    """
+    deuda = DEUDA_CONOCIDA if deuda is None else deuda
+    por_firma = collections.defaultdict(list)
+    for d in datos["defectos"]:
+        por_firma[d["firma"]].append(d)
+
+    nuevos = []
+    for firma in sorted(por_firma):
+        tope = 1 if firma in deuda else 0
+        if len(por_firma[firma]) > tope:
+            nuevos.extend(por_firma[firma][tope:])
+
+    obsoletas = sorted(f for f in deuda if f not in por_firma)
+    total = len(datos["defectos"])
+    out = []
+
+    if nuevos:
+        out.append("GATE ROJO: %d defecto(s) NUEVO(S) fuera de DEUDA_CONOCIDA "
+                   "(%d defectos, %d ya conocidos)."
+                   % (len(nuevos), total, total - len(nuevos)))
+        for d in nuevos:
+            out.append("  NUEVO  %-32s L%-6d %s" % (d["tipo"], d["linea"], d["detalle"]))
+            out.append("         firma: %s" % d["firma"])
+        out.append("  Reparar el registro. Si el defecto es heredado y tiene dueno, "
+                   "agregarlo a DEUDA_CONOCIDA con su motivo (diff visible).")
+        return 1, out
+
+    out.append("GATE VERDE: 0 defectos nuevos; %d deuda conocida vigente." % total)
+    if obsoletas:
+        out.append("AVISO: %d firma(s) de DEUDA_CONOCIDA ya no aparecen (deuda "
+                   "RESUELTA). Borrar estas lineas del dict:" % len(obsoletas))
+        for firma in obsoletas:
+            out.append('    "%s": ...' % firma)
+    return 0, out
+
+
 # --- main -----------------------------------------------------------------
 
 def main(argv=None):
@@ -789,7 +986,10 @@ def main(argv=None):
     ap.add_argument("--dashboard", default=RUTA_DASHBOARD,
                     help="dashboard de GitHub Issues a comparar ('' lo desactiva)")
     ap.add_argument("--json", action="store_true", help="imprime SOLO JSON")
-    ap.add_argument("--check", action="store_true", help="exit 1 si hay defectos")
+    ap.add_argument("--check", action="store_true",
+                    help="gate: exit 1 solo con defectos NUEVOS fuera de DEUDA_CONOCIDA")
+    ap.add_argument("--deuda", action="store_true",
+                    help="imprime el literal DEUDA_CONOCIDA medido (no escribe nada)")
     ap.add_argument("--report", metavar="RUTA", help="escribe el informe markdown")
     ap.add_argument("--selftest", action="store_true")
     try:
@@ -820,6 +1020,10 @@ def main(argv=None):
                              ensure_ascii=False, indent=2))
         return 3
 
+    if args.deuda:
+        print(literal_deuda(datos))
+        return 0
+
     if args.report:
         with io.open(args.report, "w", encoding="utf-8", newline="\n") as f:
             f.write(informe_markdown(datos) + "\n")
@@ -831,8 +1035,13 @@ def main(argv=None):
         if args.report:
             print("Informe markdown escrito en: %s" % args.report)
 
-    if args.check and datos["defectos"]:
-        return 1
+    if args.check:
+        codigo, lineas = _gate(datos)
+        # Con --json el stdout es SOLO JSON: el veredicto se va a stderr.
+        destino = sys.stderr if args.json else sys.stdout
+        for l in lineas:
+            destino.write(l + "\n")
+        return codigo
     return 0
 
 

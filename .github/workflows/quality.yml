@@ -910,6 +910,46 @@ jobs:
         run: |
           python3 scripts/reservar_log.py --estado
 
+  # Registro de bugs unificado (M102). `scripts/metricas_bugs.py` ya era la
+  # fuente de las metricas; desde el Log 2120 tambien es un GATE, con baseline.
+  # El registro arrastra decenas de defectos heredados, asi que el gate no puede
+  # nacer rojo (un gate rojo el primer dia se desactiva el segundo):
+  # `DEUDA_CONOCIDA`, dentro del script, lista las firmas ya conocidas y SOLO
+  # bloquea un defecto NUEVO. La clave es la firma `tipo:BUG-NNN`, no la linea:
+  # reparar una fila corre las de abajo y una clave por linea convertiria cada
+  # saneamiento en un falso rojo.
+  bug-registry:
+    name: Bug registry gate (M102, deuda conocida)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Gate duro. Piso declarado de 30 checks (medido en verde, Log 2120), no
+      # estimado: si la suite se recorta, el check de piso falla.
+      - name: Bug metrics suite
+        run: python3 scripts/test_metricas_bugs.py
+
+      # Gate duro, y el mas fuerte: inyecta UNA fila nueva en una COPIA del
+      # registro y exige que el gate se ponga ROJO nombrando ese defecto. Si el
+      # detector estuviera muerto, el verde del paso siguiente no valdria nada.
+      # La copia es deliberada (worktree compartido: no se escribe el registro
+      # real) y el sha256 del original se compara antes/despues.
+      - name: Prove the gate by injection
+        run: python3 scripts/probar_gate_metricas.py
+
+      # Veredicto: exit 1 solo con defectos NUEVOS fuera de DEUDA_CONOCIDA. Los
+      # heredados se imprimen igual (informe humano) para que se vean.
+      - name: Bug registry gate
+        run: python3 scripts/metricas_bugs.py --check
+
   architecture-guard:
     name: "Architecture Guard (M62: servicios y carga sincrona)"
     runs-on: ubuntu-latest
@@ -1090,7 +1130,7 @@ jobs:
 
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, architecture-guard, checklist-orchestrator, release-gate]
+    needs: [godot-lint, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, bug-registry, architecture-guard, checklist-orchestrator, release-gate]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -1105,10 +1145,11 @@ jobs:
           echo "encoding-guard: ${{ needs.encoding-guard.result }}"
           echo "log-protocol: ${{ needs.log-protocol.result }}"
           echo "binary-guard: ${{ needs.binary-guard.result }}"
+          echo "bug-registry: ${{ needs.bug-registry.result }}"
           echo "architecture-guard: ${{ needs.architecture-guard.result }}"
           echo "checklist-orchestrator: ${{ needs.checklist-orchestrator.result }}"
           echo "release-gate: ${{ needs.release-gate.result }}"
-          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]] || [[ "${{ needs.architecture-guard.result }}" != "success" ]] || [[ "${{ needs.checklist-orchestrator.result }}" != "success" ]]; then
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]] || [[ "${{ needs.bug-registry.result }}" != "success" ]] || [[ "${{ needs.architecture-guard.result }}" != "success" ]] || [[ "${{ needs.checklist-orchestrator.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1
           fi
