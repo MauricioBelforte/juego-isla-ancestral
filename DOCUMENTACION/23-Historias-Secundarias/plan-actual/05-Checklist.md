@@ -18,7 +18,7 @@
 
 - [x] Crear la historia de la panadera (2-4 pasos) [M] — cadena-panadera en data/historias/secundarias.json; npc catalina_oso (cocinera, villager medido: no existe rol "panadera" en disco). Log 2107.
 - [x] Crear la historia del farero [M] — cadena-faro en data/historias/secundarias.json (4 pasos: hablar farero/explorar faro/puzzle/entregar; contexto narrativo; consecuencia faro_encendido en WorldState M21; testeada en test_historias.gd bloque C, Log 2082). 1 de 8 vecinos del catálogo.
-- [?] Crear la historia de la doctora [M] — 0 NPC médicos en data/villagers/ (15 villagers medidos 2026-10-22: trovadora, carpintero, cocinera, pescador, artesana, granjero, mercader, guardabosques, sastra, ceramista, herrero, bibliotecaria, herbolario, farera). NO se inventa el personaje: crear un villager es contenido de otro dueño. El flip se otorga cuando el asset exista. Log 2107.
+- [?] Crear la historia de la doctora [M] — 0 NPC médicos en data/villagers/ (14 villagers medidos 2026-10-22: trovadora, carpintero, cocinera, pescador, artesana, granjero, mercader, guardabosques, sastra, ceramista, herrero, bibliotecaria, herbolario, farera). NO se inventa el personaje: crear un villager es contenido de otro dueño. El flip se otorga cuando el asset exista. Log 2107.
 - [x] Crear la historia del carpintero [M] — cadena-carpintero en data/historias/secundarias.json; npc bruno_sapo (carpintero, villager medido). Log 2107.
 - [x] Crear la historia de la tejedora [M] — cadena-tejedora en data/historias/secundarias.json; npc olivia_nutria (sastra, villager medido: no existe rol "tejedora" en disco). Log 2107.
 - [x] Crear la historia del pescador [M] — cadena-pescador en data/historias/secundarias.json; npc finneas_zorro (pescador, villager medido). Log 2107.

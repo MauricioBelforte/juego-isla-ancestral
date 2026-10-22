@@ -295,6 +295,45 @@ Auditoría (L598-L1117): 11 traducibles + 2 no (`"X"` L644 y `"x%d"` L794 — s�
 4. `TranslationServer.set_locale(idioma)` se aplica antes de instanciar la UI principal.
 5. Las escenas construyen sus textos con `tr_key(...)`.
 
+**Auditoría TANDA 22 (2026-10-22, tarea 74 — "el texto del BOOT por idioma"):**
+- **Texto jugador-visible del boot:** la pantalla de carga (`ui/layers/loading_layer.gd`, M63) es el único texto jugador-visible del flujo de arranque. El `bootstrap.gd` solo imprime a consola ("=== Bootstrap Iniciando ===" L40/L52) — logs de dev, no i18n (§2.4.5).
+- **Traducido (3 claves LOADING vigentes):** `LOADING.TITULO` "Isla Ancestral" (L98), `LOADING.CARGANDO` "Cargando..." (L114/L134), `LOADING.TIP` "Consejo:" (L140) — todas en es.po/en.po/JSON ✓.
+- **DEUDA (el "boot strings desync"):** los **8 consejos cozy** (`const TIPS`, L17-26) son **literales ES** jugador-visible — el prefijo "Consejo:" se traduce pero el contenido no:
+  1. `"Recuerda regar tus plantas cada día..."` (L18)
+  2. `"Los vecinos aprecian los regalos..."` (L19)
+  3. `"Explora las ruinas antiguas con cuidado..."` (L20)
+  4. `"El comercio justo es la clave..."` (L21)
+  5. `"Las estaciones cambian la vida de la isla..."` (L22)
+  6. `" fotografía puede capturar momentos únicos..."` (L23) — **ANOMALÍA: espacio inicial** (truncamiento de "Una"; confirmar con el owner de M63)
+  7. `"El diario registra tus descubrimientos..."` (L24)
+  8. `"Respeta la naturaleza de la isla..."` (L25)
+
+**Propuesta llave-en-mano:** 8 claves nuevas `LOADING.TIP_01`..`LOADING.TIP_08` (ES/EN/PT, regla §2.4.2-5):
+
+| Clave | ES | EN | PT |
+|---|---|---|---|
+| `LOADING.TIP_01` | `Recuerda regar tus plantas cada día...` | `Remember to water your plants every day...` | `Lembre-se de regar suas plantas todos os dias...` |
+| `LOADING.TIP_02` | `Los vecinos aprecian los regalos...` | `Neighbors appreciate gifts...` | `Os vizinhos apreciam presentes...` |
+| `LOADING.TIP_03` | `Explora las ruinas antiguas con cuidado...` | `Explore the ancient ruins carefully...` | `Explore as ruínas antigas com cuidado...` |
+| `LOADING.TIP_04` | `El comercio justo es la clave...` | `Fair trade is the key...` | `O comércio justo é a chave...` |
+| `LOADING.TIP_05` | `Las estaciones cambian la vida de la isla...` | `The seasons change island life...` | `As estações mudam a vida na ilha...` |
+| `LOADING.TIP_06` | `Una fotografía puede capturar momentos únicos...` (¿"Una" truncado en el literal?) | `A photograph can capture unique moments...` | `Uma fotografia pode capturar momentos únicos...` |
+| `LOADING.TIP_07` | `El diario registra tus descubrimientos...` | `The diary records your discoveries...` | `O diário registra suas descobertas...` |
+| `LOADING.TIP_08` | `Respeta la naturaleza de la isla...` | `Respect the nature of the island...` | `Respeite a natureza da ilha...` |
+
+**Consumo (para el owner de M63 — NO ejecutado por M87, módulo ajeno):**
+```gdscript
+const TIP_CLAVES := ["LOADING.TIP_01", "LOADING.TIP_02", "LOADING.TIP_03", "LOADING.TIP_04", "LOADING.TIP_05", "LOADING.TIP_06", "LOADING.TIP_07", "LOADING.TIP_08"]
+
+func _mostrar_tip_aleatorio() -> void:
+	if _tip_label and TIP_CLAVES.size() > 0:
+		var idx := randi() % TIP_CLAVES.size()
+		_tip_label.text = _t("LOADING.TIP") + " " + _t(TIP_CLAVES[idx])
+```
+Las 8 claves se crean en el **mismo commit** que el consumo (política anti-huérfanas §2.4.4). **Encargo:** asignar al owner de M63.
+
+**Hallazgo de orden de arranque (riesgo de desync):** si la pantalla de carga se instanciara ANTES de que `Localization` cargue los .po, `_t()` devuelve la clave cruda (fallback L143-149). El autoload `Localization` corre antes que los nodos de escena (orden de autoload de Godot) — riesgo bajo — pero el tip literal **no depende del catálogo** (por eso el desync es invisible en runtime: siempre muestra ES). Al migrar a claves, verificar que el tip se muestre después de la carga de catálogos.
+
 ### 3.2 Cambio de idioma en vivo
 
 1. El jugador selecciona otro idioma en configuración.

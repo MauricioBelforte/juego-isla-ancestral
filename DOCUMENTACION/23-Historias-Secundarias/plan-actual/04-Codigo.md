@@ -258,7 +258,7 @@ objetos narrativos salvo los que existen en `data/items/`):
 | `cadena-alquimista` | El Jarabe de la Luna | `teo_conejo` (herbolario) | hablar/explorar/puzzle/entregar | `jarabe_lunar` (narrativo) |
 
 - **Mapeo honesto de roles**: el diseño pide "panadera/doctora/tejedora/guarda/alquimista";
-  en disco NO existen esos roles — los 15 villagers medidos son trovadora, carpintero,
+  en disco NO existen esos roles — los 14 villagers medidos son trovadora, carpintero,
   cocinera, pescador, artesana, granjero, mercader, guardabosques, sastra, ceramista,
   herrero, bibliotecaria, herbolario y farera. Se usó el villager de rol más cercano
   (cocinera→panadera, sastra→tejedora, guardabosques→guarda, herbolario→alquimista).

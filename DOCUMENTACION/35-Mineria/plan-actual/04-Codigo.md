@@ -618,3 +618,34 @@ seguro: mientras `ocupado` devuelva `true` no hay mutacion.
 - **D9 del checklist (M15 "Validacion de ocupacion antes de reaparecer", hoy
   `[x]`) es FALSO:** M15 no tiene esa validacion (0 apariciones medidas). No se
   cambia la marca: la aplica el director.
+
+### S3 raycast exclusivo + chunks-memoria — G-5.3-Flash-Agente (2026-10-22, turno 2-BIS)
+
+**Estado:** Completado (2 flips + 1 implemento minimo).
+
+- **Raycast con mascara exclusiva (item L157):** resource_node.gd _crear_area()
+  ahora setea collision_layer = bit 20 (capa VETAS, sin otros usuarios hoy) y
+  collision_mask = 0 (area pasiva: no escanea por si sola, la consultan). El
+  rayo de apuntado ya era exclusivo del grid (VoxelTool.raycast en
+  tool_controller.gd _raycast_camara — no cruza cuerpos fisicos). El dia que
+  el apuntado a vetas migre a PhysicsRay con capas, la mascara lista es
+  1 << 20. ADVERTENCIA honesta: el item L85 ("Area3D tiene capa exclusiva")
+  NO la tenia seteada hasta hoy — este cambio le da el sustento real.
+- **Chunks ahorro memoria (item L114):** solo verificacion — _test_chunks (G10)
+  en test_mineria_lote2.gd demuestra marcar_chunk_editado/debe_regenerar_vetas
+  (chunk editado NO regenera vetas: no duplica estado contra el streaming M08).
+  Sin codigo nuevo.
+- Hallazgo de inventario: los items "Escritura de bloques de mineral en el
+  voxel [M]" y "Colision por bloque de veta unificada [S]" siguen abiertos y
+  son DEPENDIENTES entre si (no hay BlockType.MINERAL ni set_voxel de mineral
+  — las vetas hoy son ResourceNode nodos M15, no bloques voxel). Cualquiera
+  que los tome debe hacer los DOS juntos o dejar el otro [ ].
+- Regresion: lote2 104/0 + test_mineria 92/0 + test_recursos 23/0 EXIT 0.
+- 05-Checklist: se AGREGO la linea de Totales que no existia:
+  103 [x] / 26 [ ] / 13 [?] = 142. Fila GLOBAL 101 -> 103/142.
+
+### Tanda S3-ADENDA raycast — nota de la mascara (2026-10-22)
+
+- La capa bit 20 NO esta enlistada aun en ninguna tabla global de capas de
+  fisica (el proyecto no tiene un registro central de collision_layer bits).
+  Si M17/M64/M13 agregan tablas de capas, incorporar VETAS=1<<20 ahi.

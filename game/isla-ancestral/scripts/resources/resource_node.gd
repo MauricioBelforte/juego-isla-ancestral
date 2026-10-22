@@ -165,6 +165,11 @@ func _crear_area() -> void:
 	shape.radius = 1.4
 	col.shape = shape
 	_area.add_child(col)
+	# M35: mascara de colision exclusiva de vetas (bit 20). Ninguna otra
+	# fisica consulta esta capa: un raycast/overlap con esta mascara solo
+	# ve vetas. mask=0: el area es pasiva (no escanea cuerpos por si sola).
+	_area.collision_layer = 1 << 20
+	_area.collision_mask = 0
 	add_child(_area)
 
 func _actualizar_mesh() -> void:

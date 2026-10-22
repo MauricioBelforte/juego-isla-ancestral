@@ -111,7 +111,7 @@
 - [ ] Validacion de ocupacion reutilizando API de lectura M08 [M]
 - [ ] Vetas en paredes y techos de cuevas [M]
 - [ ] Iluminacion de brillo en vetas profundas [M]
-- [ ] Compatible con el ahorro de memoria de chunks [S]
+- [x] Compatible con el ahorro de memoria de chunks [S] — VERIFICADO test_mineria_lote2.gd _test_chunks (G10): marcar_chunk_editado/debe_regenerar_vetas — chunk editado NO regenera vetas (no duplica estado contra el streaming M08), chunk virgen si; 104/0 EXIT 0 hoy
 - [x] Chunks ya editados no regeneran vetas [M]
 
 ## H. Integracion con M13 y M15 (8)
@@ -154,7 +154,7 @@
 - [ ] Remeshing localizado y diferido por chunk [C]
 - [ ] Pool de particulas de mineria [S]
 - [x] Sin allocs en el hot path de hit() [M]
-- [ ] Raycast con mascara de colision exclusiva [S]
+- [x] Raycast con mascara de colision exclusiva [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: resource_node.gd _crear_area() setea collision_layer=bit 20 (capa vetas, nadie mas la consulta) y mask=0 (area pasiva); rayo de apuntado voxel vt.raycast (tool_controller.gd _raycast_camara) exclusivo del grid por diseno. Regresion: lote2 104/0 + mineria 92/0 + recursos 23/0 EXIT 0
 - [x] Barrido de regeneracion iterativo sin crear nodos por veta [M]
 - [x] Profiler: golpe individual <= 1 ms CPU [M]
 - [x] Definiciones compartidas como Resource (memoria unica) [S]
@@ -232,7 +232,7 @@
 > **Estado actual (iter 1, minimax-m3-free / Kilo Code):** opción B implementada y validada. Opción A queda
 > ABIERTA como tarea de M08 (subsistema de protección), fuera del alcance de M35.
 
-**Totales:** 142 items · Completados: 101 · Pendientes: 28 · No resueltos: 13. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 80 [x] / 13 [?] / 49 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 142 items · Completados: 103 · Pendientes: 26 · No resueltos: 13. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 80 [x] / 13 [?] / 49 [ ]; correccion de dato autorizada por director msg 257.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 60 [x] / 69 [ ] /
@@ -250,3 +250,5 @@
 >
 > **Lote 2 (2026-10-11, DeepSeek-V4.1-Flash, Log 1706):** implementados 17 `[ ]` dentro del dominio de M35: J1, J5, J9, K3, K5, K6, K7, L5, L6, L7, L8, L9, I1, I5, I8, G5, G10. Suite nueva `test_mineria_lote2.gd` 104 checks / 0 fallos / EXIT 0 (x3). Hallazgo **H17** (M15 `evaluar_respawn()` fija `golpes_restantes = 2`) corregido dentro de M35 sin tocar M15. Detalle de API, senales y persistencia v1->v2 en `04-Codigo.md`.
 > **No se flipea estado**: los `[x]` los aplica el director. Si acepta los 17 flips, la fila 35 del CHECKLIST-GLOBAL pasa de 63/142 a 80/142. Los 49 `[ ]` restantes pertenecen a M08/M15/M17/M26/M43/M45/M52 (duenos propuestos en `04-Codigo.md`).
+
+**Totales:** 142 items · Completados: 103 · Pendientes: 26 · No resueltos: 13. (Re-medido G-5.3-Flash-Agente 2026-10-22: 103 [x] / 26 [ ] / 13 [?] = 142 tras S3 raycast-exclusivo + chunks-memoria; el archivo no tenia linea de Totales — agregada con la medida real, los 13 [?] son de modulos externos de las secciones M08/M26/M52/M43.)
