@@ -176,3 +176,18 @@ PlacementRule (Resource):
 - Una pieza de tamano (w,d,h) celdas ocupa w*d*h celdas.
 - Colision: verificar que todas las celdas esten libres (no ocupadas por otra pieza ni por terreno solido).
 - Altura maxima por zona: configurable (default 4 plantas = 4 m).
+## Especificacion de problema y dependencias (P-30 L4-P23/P24)
+
+### Problema
+- Construccion cozy sobre mundo voxel: el jugador coloca piezas en rejilla 1m para crear estructuras.
+- Objetivo: permitir expresion creativa sin romper la coherencia del mundo voxel.
+
+### Dependencias
+- M08 (Mundo Voxel): provee el terreno y la rejilla de referencia.
+- M14 (Inventario): provee las piezas y gestiona el consumo/devolucion.
+- M58 (Guardado): persiste las construcciones.
+
+## Ventanas (P-30 L4-P25)
+- Ventana 1x1 en pared, transparente a la luz (M48).
+- No bloquea la navegacion del jugador (colision solo en marco).
+- Permite paso de luz para iluminacion interior (M49).

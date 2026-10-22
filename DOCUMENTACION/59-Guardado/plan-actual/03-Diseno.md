@@ -134,3 +134,23 @@ save_writer.write_atomic() falla por disco lleno
 ### Verificacion
 - Probar en Windows/macOS/Linux: rename atomico varia por SO.
 - Test de crash durante guardado: archivo anterior debe quedar intacto.
+## Guardado manual y slots (P-30 L4-P1/P2)
+
+### Guardado manual
+- Trigger: boton en menu principal + atajo de teclado (F5 default).
+- Feedback: toast Guardado + timestamp del slot.
+- No interrumpe gameplay: ejecuta en background thread (M61).
+
+### Slots
+- Minimo 3 slots por perfil de jugador.
+- UI de seleccion: lista con nombre, fecha, hora, screenshot thumbnail.
+- Cambio de slot en plena sesion: confirmacion + guardado del slot actual antes de cargar.
+## Guardado de mundo (P-30 L4-P3/P4)
+
+### Islas, POI, exploracion, niebla (M54)
+- Guardar: lista de islas descubiertas, POI visitados, estado de niebla de guerra.
+- Formato: array de IDs + coordenadas + timestamp de descubrimiento.
+
+### Ruinas (M25) y templos (M26)
+- Guardar: estado de cada ruina/templo (visitado, puzzle resuelto, cofres abiertos).
+- Formato: map de id -> estado (enum: no_visitado, visitado, completado).

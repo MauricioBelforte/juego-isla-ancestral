@@ -64,7 +64,7 @@
 ## F. Locomotora (condicional M68)
 
 - [x] Plantilla de locomotora SOLO si M68 exige ferrocarril [M] — iter. 1: preset con condicional="M68"; _cargar_catalogo la omite si autoload Transporte no existe (testeado)
-- [ ] Velocidad sobre riel fija (20 m/s) y sin giro libre [M]
+- [x] Velocidad sobre riel fija (20 m/s) y sin giro libre [M] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: data/vehiculos/vehicles.json preset locomotora declara velocidad_max 20.0 y giro 0.0 (riel fijo sin giro libre); vehicle_controller.gd respeta el preset en runtime: if girar != 0 and giro_efectivo() > 0.0 — con giro 0.0 la rotación nunca se aplica; regresión test_vehiculos 99/0. Matiz: el movimiento visual del riel (Node3D) queda para la iter. 2 — la lógica preset+controller ya acota velocidad y giro
 - [ ] Vagón de carga (16 slots, M14) [M]
 - [x] Documentar el estado condicional en 01-Requerimientos.md [S] — Step-5 2026-10-21: 01-Requerimientos.md §3.1 (L26) + RF4 (L69) documentan la condicion; mecanismo real (JSON "condicional": "M68" + omision si no existe autoload Transporte) en 04-Codigo.md §6.4
 - [x] Definir contrato de integración con M68 [M] — iter. 1: si M68 registra autoload "Transporte", la locomotora entra al catálogo automáticamente (condicional en JSON)
@@ -284,3 +284,4 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 112 [ ] / 0 [?].
 > Las marcas no se tocaron.
 **Totales:** 131 items · Completados: 34 · Pendientes: 97 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 34 [x] / 97 [ ] / 0 [?] tras tanda techo-altitud dirigible; qa_m67_altitud.gd 6/0 + regresión test_vehiculos 99/0.)
+**Totales:** 131 items · Completados: 35 · Pendientes: 96 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 35 [x] / 96 [ ] / 0 [?] tras tanda locomotora riel; test_vehiculos 99/0.)

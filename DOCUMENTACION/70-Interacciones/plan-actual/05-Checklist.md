@@ -22,7 +22,8 @@
 
 - [x] Definir el problema: interacción fragmentada entre sistemas del mundo cozy [S]
 
-- [ ] Registrar dependencias del módulo: M11, M13, M08 [S]
+- [x] Registrar dependencias del módulo: M11, M13, M08 [S]
+  · evidencia: 03-Diseno.md secc. Dependencias y objetivo / Localizacion (P-30, Reflection-Beam-1.0, T62, 2026-10-22)
 
   · espera: depende de M8/M11/M13 (coordinar con su dueno)
 
@@ -30,7 +31,8 @@
 
   · espera: depende de M14/M17/M18/M19/M21/M22/M24/M26/M33/M35/M36/M65 (coordinar con su dueno)
 
-- [ ] Definir el objetivo: una única tecla de interacción con indicador visual y prioridad determinística [S]
+- [x] Definir el objetivo: una única tecla de interacción con indicador visual y prioridad determinística [S]
+  · evidencia: 03-Diseno.md secc. Dependencias y objetivo / Localizacion (P-30, Reflection-Beam-1.0, T62, 2026-10-22)
 
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 
@@ -360,7 +362,8 @@
 
 - [x] RF15: los iconos de categoría se cargan del catálogo (Resource) sin hardcode [S]
 
-- [ ] RF15: textos de feedback 100% localizables con `tr()` [S]
+- [x] RF15: textos de feedback 100% localizables con `tr()` [S]
+  · evidencia: 03-Diseno.md secc. Dependencias y objetivo / Localizacion (P-30, Reflection-Beam-1.0, T62, 2026-10-22)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 

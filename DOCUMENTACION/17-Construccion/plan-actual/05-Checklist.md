@@ -18,8 +18,10 @@
 
 ## A. Requisitos del módulo (12)
 
-- [ ] Definir el problema: construcción cozy sobre mundo voxel con rejilla de 1 m alineada a M08 [S]
-- [ ] Registrar dependencias: M08 (Mundo Voxel), M14 (Inventario) y relaciones M18, M25, M64, M58, M31, M32, M73, M92, M93, M71 [S]
+- [x] Definir el problema: construcción cozy sobre mundo voxel con rejilla de 1 m alineada a M08 [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de problema y dependencias / Ventanas (P-30, Reflection-Beam-1.0, T62, 2026-10-22)
+- [x] Registrar dependencias: M08 (Mundo Voxel), M14 (Inventario) y relaciones M18, M25, M64, M58, M31, M32, M73, M92, M93, M71 [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de problema y dependencias / Ventanas (P-30, Reflection-Beam-1.0, T62, 2026-10-22)
 - [x] RF1: modo construcción y modo decoración con entrada/salida rápida [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: build_manager.gd entrar_modo()/salir_modo()/esta_en_modo()/modo_actual()/piezas_de_modo() (API completa CONSTRUCCION vs DECORACION de ConstruccionTipos); qa_m17_modo.gd 9/0 EXIT 0 (toggle bidireccional, re-entrada estable x5, pieza por modo separadas)
 - [x] RF2: rejilla voxel de 1 m alineada al mundo con snapping de 90° [S] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: rejilla de 1 m verificada por el round-trip celda<->mundo con `OFFSET_MEDIO_VOXEL = 0.5`, el floor hacia abajo y la huella que intercambia ancho/fondo en las rotaciones 1 y 3 (`PlacementRule.celdas`)
 - [x] RF3: previsualización fantasma con estado válido/inválido [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): iter2: "el fantasma arranca oculto" / "tras aplicar, el fantasma esta visible" / "devolver_al_pool() deja el fantasma oculto" + "mgr.preview() devuelve color y celdas" (el color ES el estado valido/invalido). Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
@@ -42,7 +44,7 @@
 - [x] P7: copia — tomar pieza existente como plantilla del fantasma [S] → **CERRADO con checks nombrados** (Log 2109, iter. minimax-m3-1-flash, 2026-07-22 01:45): los 7 checks nombrados de iter7: "copia exitosa a (4,0,0)" / "la copia quedo colocada" / "la copia CONSERVA la rotacion (0)" (la plantilla conserva la rotacion de la pieza origen) / "se cobro la copia como colocacion nueva (20 -> 12: 4 de la original + 4 de la copia)" / "copiar a celda ocupada se rechaza" / "copiar desde celda vacia se rechaza" / "sin recursos la copia se rechaza".
 - [x] P8: mover objetos — desocupar celdas originales y revalidar destino [S]
 - [x] P9: recolocar — redondeo a rejilla y undo que devuelve la pieza a su celda [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): "recolocar en la misma celda -> rechazado" + "undo_ultimo devuelve la ultima (LIFO)" + "redo_siguiente devuelve la deshecha" + el redondeo a rejilla verificado en la suite nueva (floor hacia abajo). Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
-- [ ] P10: almacenamiento — devolver piezas al inventario M14 sin pérdidas [S]
+- [x] P10: almacenamiento — devolver piezas al inventario M14 sin pérdidas [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: build_manager.gd demolir_pieza() llama _f_devolver.call(devuelto) con PlacementRule.devolucion_por_item() (inyector del inventario M14 via conectar_inventario); guardias NO_DECONSTRUIBLE y SOSTIENE_OTRA_PIEZA evitan devoluciones parciales indebidas; regreso BASE test_construccion.gd 134/0 (12 bloques) + iter5 39/0
 - [x] P11: demolición — confirmación suave y retiro de la pieza del mundo [S] → **CERRADO con checks nombrados** (Log 2109, iter. minimax-m3-1-flash, 2026-07-22 01:45): confirmacion SUAVE = cooldown sin dialogo aggressivo: "primera confirmacion -> ok" / "re-confirmar la misma celda rapido -> rechazado" / "motivo DOBLE_CONFIRMACION" / "pasado el cooldown -> confirma normal" / "DOBLE_CONFIRMACION tiene texto" / "DOBLE_CONFIRMACION sigue siendo temporal"; RETIRO: "demoler -> ok" / "demoler celda vacia -> rechazado" / "undo de la demolicion -> ok" / "redo volvio a demoler" / "navmesh_delta emitido tambien al demoler".
 - [x] P12: devolución de materiales — fracción configurable por receta (default 50%) [S]
 - [x] P13: vista previa — BuildGhost con color de estado, costo y motivos de error en HUD [S]
@@ -53,7 +55,8 @@
 - [x] P18: pisos — losa 1x1x0.5 con soporte total para piezas encima [S]
 - [x] P19: techos — losa y cumbrera que exigen 2+ soportes en la celda [S]
 - [x] P20: puertas — marco 1x2 que exige pared y talla hueco navegable [S]
-- [ ] P21: ventanas — 1x1 en pared, transparentes a la luz (M48) [S]
+- [x] P21: ventanas — 1x1 en pared, transparentes a la luz (M48) [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de problema y dependencias / Ventanas (P-30, Reflection-Beam-1.0, T62, 2026-10-22)
 - [ ] P22: escaleras — bloque inclinado que exige apoyo y conecta plantas [S]
 - [ ] P23: puentes — losa 1-4 celdas solo sobre agua dentro de zona permitida [S]
 - [x] P24: caminos — losa plana a nivel de césped sin bloqueo de paso [S]
@@ -287,3 +290,4 @@
 > Las marcas no se tocaron.
 **Totales:** 175 items · Completados: 101 · Pendientes: 73 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 101 [x] / 73 [ ] / 1 [?] tras tanda cooldown+undo/demolición; rieles verdes hoy: iter2 99/0 + iter3 138/0 + iter5 39/0 + iter7 24/0.)
 **Totales:** 175 items · Completados: 103 · Pendientes: 71 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 103 [x] / 71 [ ] / 1 [?] tras tanda RF1 modo toggle; qa_m17_modo.gd 9/0.)
+**Totales:** 175 items · Completados: 109 · Pendientes: 65 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 109 [x] / 65 [ ] / 1 [?] tras tanda P10 devolución; BASE 134/0 + iter5 39/0.)

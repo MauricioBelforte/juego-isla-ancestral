@@ -156,3 +156,23 @@ de diseño para el slice de Aurora; flip de [S], los [M] profundos quedan).
 
 - Nombre del slice y su historico consume el canon M147 (glpts); toda
   referencia textual debe resolver contra el diccionario canonico.
+
+
+## Presupuesto tecnico de render (L5 - Beams spec, no toca contenido de G-5.3)
+
+### Budget por frame (16.6ms para 60 FPS)
+| Sistema | Budget (ms) | Notas |
+|---------|-------------|-------|
+| Gameplay (input, fisica, logica) | 2.5 | Incluye player, inventario, construccion |
+| Voxel (terreno, LOD, culling) | 4.0 | M08/M156 - chunks visibles |
+| IA (NPCs, animales, pathfinding) | 2.0 | M20/M40 - max 20 agentes activos |
+| Particulas (VFX, polvo, agua) | 1.0 | M52/M156 - emision por terreno |
+| Culling (frustum, occlusion) | 0.5 | M113 - LOD por distancia |
+| UI (HUD, menus, dialogos) | 1.0 | M53/M10 - canvas |
+| Reserva (spikes, GC) | 1.6 | Buffer para picos |
+| **Total** | **12.6** | **Margen: 4.0 ms** |
+
+### Medicion
+- P99 (percentil 99) ademas de FPS medio.
+- Muestreo con VSYNC off para medir frame time real.
+- Profiler: Godot Performance monitor + custom (M116).

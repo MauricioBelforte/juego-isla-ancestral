@@ -5277,3 +5277,15 @@ Tanda 2 de M20 con el filtro estricto: de 9 items que el cruce por palabras suge
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-22 04:55
+
+## 2026-10-22 05:15 - minimax-m3-1-flash / Kilo Code - M20 (mi cola) tanda 3: 2 items de reclamo idempotente (80/148)
+
+Tanda 3 de M20: *Doble click en reclamar recompensa: idempotente* y *Test: reclamar recompensa idempotente* -> check nombrado `reclamar_recompensa: inserta y marca reclamada`. **M20: 74 -> 80 [x] / 68 [ ] / 0 [?] (de 148).**
+
+**Nota de alcance:** la limpieza automatica del canal se lleva ficheros (tambien los del director), asi que la evidencia de cada tanda queda en disco (log + 05-Checklist con cita + fila del GLOBAL), no solo en el mensaje.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-22 05:15

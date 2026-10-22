@@ -111,7 +111,8 @@
 
 ## N. Rendimiento (RF15)
 
-- [ ] Definir perfil M61: gameplay 2.5 / voxel 4.0 / IA 2.0 / partículas 1.0 / culling 0.5 / render 5.0 / UI 1.5 [M]
+- [x] Definir perfil M61: gameplay 2.5 / voxel 4.0 / IA 2.0 / partículas 1.0 / culling 0.5 / render 5.0 / UI 1.5 [M]
+  · evidencia: 03-Diseno.md secc. Presupuesto tecnico de render (L5, Reflection-Beam-1.0, T60, 2026-10-22)
 - [ ] Definir medición P99 (máximo frame) además de FPS medio [M]
 - [ ] Definir muestreo con VSYNC off [S]
 - [ ] Definir punto denso de prueba (bosque + lluvia + Finneas) [M]

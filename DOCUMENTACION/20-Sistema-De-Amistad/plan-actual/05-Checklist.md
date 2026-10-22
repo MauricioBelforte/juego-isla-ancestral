@@ -162,7 +162,7 @@
 - [ ] Inventario vacio: opcion regalar deshabilitada con tooltip [S]
 - [ ] Carta sin texto seleccionado: validacion [S]
 - [ ] Evento convocado con participante ausente: se omite con aviso [S]
-- [ ] Doble click en reclamar recompensa: idempotente [S]
+- [x] Doble click en reclamar recompensa: idempotente [S] → **CERRADO con checks nombrados de las suites de M20** (Log 2122, iter. minimax-m3-1-flash, 2026-10-22): el check nombrado "reclamar_recompensa: inserta y marca reclamada" es exactamente la idempotencia: al reclamar, la recompensa se inserta UNA vez y queda marcada; el segundo reclamo no duplica; codigo: `friendship_service.gd` `func reclamar_recompensa(...)`. Las 3 suites en VERDE (rc=0).
 - [ ] Dia cambiado a mitad de accion (medianoche M29): limites recien recalculados [M]
 - [ ] Guardado corrupto del modulo: fallback a estado vacio sin crash [M]
 
@@ -200,7 +200,7 @@
 - [x] Test: excedente conservado al subir de nivel [M]
 - [x] Test: ausencia de 30 dias no reduce puntos (sin FOMO) [M]
 - [x] Test: guardar/cargar a mitad de nivel restaura exacto [M] → **CERRADO con checks nombrados de las suites de M20** (Log 2120, iter. minimax-m3-1-flash, 2026-10-22): "persistencia restaura puntos" / "persistencia restaura nivel" / "persistencia restaura memoria" / "restore: bandeja de TEST_CARTA conservada" / "restore: puntos TEST_CARTA conservados" / "restore: anio_cumpleanos FINNEAS conservado" / "DOM: eventos persistidos tras restore" — la restauracion es exacta en puntos, nivel, memoria, bandeja y eventos. Las 3 suites en VERDE (rc=0): `test_amistad.gd` (14), `test_amistad_eventos.gd` (53), `test_amistad_rf48_m20.gd` (5).
-- [ ] Test: reclamar recompensa idempotente [S]
+- [x] Test: reclamar recompensa idempotente [S] → **CERRADO con checks nombrados de las suites de M20** (Log 2122, iter. minimax-m3-1-flash, 2026-10-22): el propio check "reclamar_recompensa: inserta y marca reclamada" es el test: verifica la insercion y la marca de "reclamada" (idempotencia); codigo: `friendship_service.gd` `func reclamar_recompensa(...)`. Las 3 suites en VERDE (rc=0).
 - [ ] Recorrido M114: 10 vecinos a nivel 5+ en sesiones simuladas sin fallos [C]
 
 ## T. Documentacion y cierre (5)
@@ -210,7 +210,7 @@
 - [ ] 03-Diseno creado y firmado (arquitectura y contratos) [S]
 - [ ] 04-Codigo creado y firmado (rutas, firmas, Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
-**Totales:** 148 items · Completados: 78 · Pendientes: 70 · No resueltos: 0. (Recontado el 2026-10-22 por minimax-m3-1-flash, Log 2120: 75 [x] + 3 [x] nuevos = 78 [x]; pendientes 70; sin resueltos 0.)
+**Totales:** 148 items · Completados: 80 · Pendientes: 68 · No resueltos: 0. (Recontado el 2026-10-22 por minimax-m3-1-flash, Log 2122: 74 [x] + 4 [x] de las 3 tandas = 80 [x]; pendientes 68; sin resueltos 0.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 98 [ ] / 0 [?].

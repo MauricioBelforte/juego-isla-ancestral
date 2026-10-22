@@ -558,7 +558,7 @@
 546. - [ ] [20-Sistema-De-Amistad] Inventario vacio: opcion regalar deshabilitada con tooltip [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 547. - [ ] [20-Sistema-De-Amistad] Carta sin texto seleccionado: validacion [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 548. - [ ] [20-Sistema-De-Amistad] Evento convocado con participante ausente: se omite con aviso [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
-549. - [ ] [20-Sistema-De-Amistad] Doble click en reclamar recompensa: idempotente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+549. - [x] [20-Sistema-De-Amistad] Doble click en reclamar recompensa: idempotente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md --> — LOG 3001: check "reclamar_recompensa: inserta y marca reclamada"
 550. - [ ] [20-Sistema-De-Amistad] Dia cambiado a mitad de accion (medianoche M29): limites recien recalculados [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 551. - [ ] [20-Sistema-De-Amistad] Guardado corrupto del modulo: fallback a estado vacio sin crash [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 552. - [ ] [20-Sistema-De-Amistad] Evaluador sin allocations relevantes (diccionarios reutilizados) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
@@ -583,7 +583,7 @@
 571. - [ ] [20-Sistema-De-Amistad] Test: excedente conservado al subir de nivel [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 572. - [ ] [20-Sistema-De-Amistad] Test: ausencia de 30 dias no reduce puntos (sin FOMO) [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 573. - [x] [20-Sistema-De-Amistad] Test: guardar/cargar a mitad de nivel restaura exacto [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md --> — LOG 2120: cerrado con checks nombrados
-574. - [ ] [20-Sistema-De-Amistad] Test: reclamar recompensa idempotente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+574. - [x] [20-Sistema-De-Amistad] Test: reclamar recompensa idempotente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md --> — LOG 3001: check "reclamar_recompensa: inserta y marca reclamada"
 575. - [ ] [20-Sistema-De-Amistad] Recorrido M114: 10 vecinos a nivel 5+ en sesiones simuladas sin fallos [C] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 576. - [ ] [20-Sistema-De-Amistad] 01-Requerimientos creado y firmado [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 577. - [ ] [20-Sistema-De-Amistad] 02-Analisis creado y firmado (alternativas y decision) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->

@@ -223,3 +223,18 @@ Presupuesto total objetivo: < 0.5 ms/frame en escena densa (40 interactuables), 
 4. Escenario "puerta bloqueante": interacción en curso + tecla E repetida → bloqueada hasta terminar.
 5. Escenario "vecino ocupado": NPC dormido → prompt atenuado con razón, no despacha.
 6. Escenario "streaming": entrar/salir de zona con M63 → registro/desregistro sin objetivo perdido erróneo.
+## Dependencias y objetivo (P-30 L4-P27/P28)
+
+### Dependencias
+- M11 (Player): provee el personaje que interactua.
+- M13 (Input): provee la tecla de interaccion (E por defecto).
+- M08 (Mundo Voxel): provee los objetos interactuables en el mundo.
+
+### Objetivo
+- Una unica tecla de interaccion (E) con indicador world-space sobre el objeto.
+- El indicador muestra icono de categoria + etiqueta.
+- Re-evaluacion automatica al cerrar UI.
+
+### Localizacion (P-30 L4-P30)
+- Textos de feedback 100% localizables con tr().
+- Claves en locales/*.po con fallback a ingles.
