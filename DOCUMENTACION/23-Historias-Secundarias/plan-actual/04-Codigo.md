@@ -278,3 +278,52 @@ objetos narrativos salvo los que existen en `data/items/`):
 - Los objetos narrativos (`pan_fiesta`, `carrete_nuevo`, `jarabe_lunar`) siguen el patrón
   de producción de `farol_cargado`/`semilla_antigua`/`tomo_antiguo`: el motor solo exige
   que el objeto esté en el Inventario al reportar la entrega, no que exista `.tres`.
+
+
+## Iter. 6 — Historias de lugares (Log 2117, 2026-10-22, Step-5-WorkBuddy)
+
+Tanda del 03-Diseno L31 (cluster Lugares). De los lugares con cadena propia del diseno,
+faro (`cadena-faro`, iter. 3) y biblioteca (`cadenas_ejemplo.json`, iter. 4) ya estaban
+cubiertos; plaza e invernadero tenian las suyas desde el lanzamiento. Se agregaron al
+catalogo principal (`game/isla-ancestral/data/historias/secundarias.json`, 10 -> 13
+cadenas) las 3 que faltaban, con el patron de produccion (npc = id de `data/villagers/`,
+objetos e items REALES de `data/items/`):
+
+| id | titulo | npc (villager medido) | pasos | entrega | puzzle |
+|---|---|---|---|---|---|
+| `cadena-jardines` | Los Jardines de la Niebla | `mateo_mapache` (granjero) | hablar/explorar/entregar/puzzle | `baya_roja` (REAL) | `semillas-perdidas` |
+| `cadena-cofradia` | Los Sellos de la Cofradia | `mercedes_lince` (mercader) | hablar/explorar/entregar/puzzle | `fragmento_ancestral` (REAL) | `sellos-antiguos` |
+| `cadena-molino` | El Molino que Canta | `aria_ciervo` (trovadora) | hablar/explorar/entregar/puzzle | `fibra_algodon` (REAL) | `melodia-del-molino` |
+
+- **NPCs e items REALES verificados en disco**: `aria_ciervo.tres`, `mateo_mapache.tres`,
+  `mercedes_lince.tres` (`data/villagers/`) y `baya_roja.tres`, `fibra_algodon.tres`,
+  `fragmento_ancestral.tres` (`data/items/`). Los refs de puzzle (`semillas-perdidas`,
+  `sellos-antiguos`, `melodia-del-molino`) son ids narrativos, mismo patron que
+  `faro-linterna` / `destilacion-lunar`: el motor exige el puzzle resuelto, no un archivo.
+- **Consecuencias con clave PELADA y unica** (anti-repeticion): `jardin_florecido`,
+  `cofradia_activa`, `molino_funcionando`. 13 consecuencias unicas sobre 13 cadenas.
+- **`molino_funcionando` re respaldada**: el flag figuraba en el checklist (L112) pero
+  tenia 0 cadenas que lo aplicaran desde el Log 2082 (degradado a `[?]` por el director
+  en su msg 151). `cadena-molino` lo aplica de punta a punta: el bloque K mide
+  `ws_has("molino_funcionando")` tras la corrida end-to-end. Flip ofrecido a revertir.
+- **Hallazgo (dueno M55)**: el puente M23->M55 degrada en silencio tambien para las 3
+  nuevas — `diary_service` exige la entrada en el catalogo de M55 y
+  `not diary.esta_registrada("mision_cadena-jardines")` (idem cofradia/molino). Las
+  recompensas `diario` apuntan a `capitulo-jardines` / `capitulo-cofradia` /
+  `capitulo-molino`, que tampoco existen en el catalogo de M55. Es el mismo residual
+  medido en iter. 3 para `cadena-biblioteca`; NO se toca (contenido de M55).
+- Suite `test_historias.gd`: bloque K nuevo (`_test_lugares`) al FINAL de `_run()`
+  (trampa M23: no alterar la premisa de otros bloques) con `restore_save_data({})`,
+  carga y fuente del principal, unicidad de las 3 consecuencias vs las 11 preexistentes,
+  3 capitulos de diario unicos y corrida end-to-end de las 3 cadenas con siembra del
+  item REAL y el puzzle. **31 checks ejecutados (delta medido 98 -> 129)**.
+  Piso 98 -> **129 MEDIDO en verde**: 129/0/EXIT 0 x4 con binario real.
+- Guardian probado EN ROJO por inyeccion de runtime en el bloque K
+  (`var _sonda_v: Variant = _h.cadenas_disponibles()` seguido de
+  `var _sonda_boom: Dictionary = _sonda_v`, abort real de GDScript): EXIT 1 nombrando
+  «el bloque K NO se ejecuto» + «solo 99 checks (minimo 129)». Inyeccion revertida y
+  verde restaurado verificado (129/0/EXIT 0); sha256 del original comprobado; sonda
+  borrada (0 sondas en el repo).
+- Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0, M71
+  `test_progresion.gd` 83/0, M71 `test_flujo_xp_recompensa_m71_hy3.gd` 37/0, M59
+  rotacion 43/0, M55 `test_diario.gd` 26/0.

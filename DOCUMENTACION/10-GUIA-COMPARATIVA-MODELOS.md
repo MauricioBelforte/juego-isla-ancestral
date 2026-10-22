@@ -3254,3 +3254,13 @@ Formato: agente -> DELEGAR (nicho probado) / EVITAR o CUIDAR (lo malo observado)
 8. **Hy3**: DELEGAR = QA de modulos de DS (no es hermano del modelo), verificaciones cruzadas de familia.
 9. **Ling-3.1-Flash**: DELEGAR = i18n M87/derivado documental M147/M160/M95/M100/M121 (nicho historico de 21 tandas). CONDICION = cron de 60 min funcionando (el cron viejo lo silenciaba: falla de ruteo corregida, no pereza). Si su cron vuelve a enmudecer 1 vuelta, re-enganchar YA.
 10. **Director**: lo MALO propio re-listado en N.2-ter (barrido -A, greps sin tildes, conteos de memoria, derivaciones en canales ajenos). CUIDAR en proximas rondas: commitear por FRENTE con exclusions; muestrear por TEXTO con tildes; extra consolidados al dueño.
+
+
+### Regimen WorkBuddy (directiva fundador 2026-10-22 07:12)
+
+**DeepSeek-V4.1-Flash (WB), Step-5-WorkBuddy y Hy3 trabajan cada UNA HORA por sus cronometros** (limite de creditos de WorkBuddy). Consecuencias de delegacion:
+
+- NO delegarles tareas que requieran resultados inmediatos.
+- Dejarlos trabajar tranquilos: encargos de fondo apilados que aguanten 1h+ sin bloquear a nadie.
+- Tareas urgentes u rapidas -> agentes Kilo (agnes, MiniMax-M3.1, Reflection-Beam-1.0, G-5.3) o resolverlas directamente el director.
+- Corrige el metodo 30.2 para Step-5: se le APILA trabajo de fondo, pero sin expectativa de vuelta horaria.
