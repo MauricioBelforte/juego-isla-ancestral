@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T23:36:00",
+ "ultimo_update": "2026-10-22T23:42:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -368,6 +368,14 @@
    ],
    "origen": "hallazgo cross-verificador DS-WB",
    "fecha": "2026-10-22 22:50"
+  },
+  {
+   "modulo": "95-Monetizacion (hallazgo H16 de Beam, confirmado por director)",
+   "flags": [
+    "PRECIO EDITOR COLECCIONISTA: 03-Diseno dice USD 69.99 (+45 sobre Deluxe) pero 04-Codigo y data/monetizacion/ediciones.json dicen 59.99 (y Deluxe 34.99 vs 49.99 en JSON) - DECIDIR el precio real y alinear 03 vs JSON"
+   ],
+   "origen": "auditoria aritmetica de Beam (218) + verificacion director en disco",
+   "fecha": "2026-10-22 23:42"
   }
  ]
 }
