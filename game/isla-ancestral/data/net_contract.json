@@ -1,0 +1,17 @@
+{
+  "topologia": "cliente-servidor-dedicado",
+  "p2p": false,
+  "autoridad": "servidor",
+  "snapshot_hz": 10,
+  "buffer_interpolacion_ms": 150,
+  "prediccion": true,
+  "presupuesto_kbps_por_jugador": 64,
+  "token_jwt_min": 15,
+  "reconexion_segundos": 10,
+  "tls": "1.3",
+  "ccu_por_instancia": 200,
+  "rpo_min": 15,
+  "rto_horas": 2,
+  "chat_texto_libre": false,
+  "hit_apertura_downloads": 10000
+}

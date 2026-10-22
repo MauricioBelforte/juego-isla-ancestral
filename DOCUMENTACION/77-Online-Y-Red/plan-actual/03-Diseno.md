@@ -122,3 +122,33 @@ Frecuencias: snapshots de entidades 10 Hz; estado crítico bajo demanda + confir
 
 - v1: **cero** (sin red).
 - FASE ONLINE: presupuesto <64 kbps por jugador; memoria del buffer de interpolación acotada (M62); snapshots solo del área visible (grid M61); NPCs solo visibles (M35). Frame budget intacto (la red nunca corre en el hilo de render — Godot `MultiplayerAPI` async).
+
+## 7. Lote de definiciones — M77 Online y Red (Reflection-Beam-1.0, 2026-10-22)
+
+**L44 sin NPCs siempre activos (M49 durmientes):** QUE: NPCs fuera de área entran en estado durmiente (sin tick de IA). COMO: documentar en 03-Diseno la regla: NPC fuera del área de interés (grid M61) se pausa (process_mode = DISABLED) y se reactiva al entrar; solo NPCs visibles (M35) tick. UMBRAL: 0 NPCs activos fuera del área visible.
+
+**L50 permisos por diseño (M76 RF10):** QUE: el servidor valida permisos por diseño (qué acciones puede hacer cada rol). COMO: documentar en 03-Diseno la matriz de permisos (jugador/invitado/moderador) y que el servidor rechaza acciones no permitidas (anti-trampa). UMBRAL: 100% de acciones con permiso definido.
+
+**L51 undo/redo validado del invitado:** QUE: el invitado (modo multijugador futuro) puede deshacer/rehacer construcción con validación del servidor. COMO: documentar regla: undo/redo solo sobre construcciones propias del invitado, validado server-side (anti-trampa). UMBRAL: 0 undo sobre construcciones ajenas.
+
+**L52 servidor valida catálogos (M18):** QUE: el servidor valida los catálogos de construcción (items válidos). COMO: documentar en 03-Diseno: el servidor rechaza items no presentes en el catálogo M18; cliente solo envía ids. UMBRAL: 0 items inválidos aceptados.
+
+**L67 ítems de historia jamás transferibles (M76):** QUE: los ítems de historia (quest items) no son transferibles entre jugadores. COMO: documentar regla en 03-Diseno: ítems con flag historia=true no entran en trade/inventario compartido. UMBRAL: 0 transferencias de ítems de historia.
+
+**L75 cola de eventos fuera de línea (reconexión):** QUE: eventos ocurridos durante desconexión se encolan y se aplican al reconectar. COMO: documentar en 03-Diseno: cola FIFO por jugador, idempotencia por event_id, aplicar al reconectar (<10s). UMBRAL: 0 eventos perdidos en reconexión.
+
+**L76 sin eventos duplicados (idempotencia):** QUE: los eventos no se duplican (idempotencia por id). COMO: documentar regla: cada evento lleva id único; el servidor ignora ids ya procesados. UMBRAL: 0 duplicados.
+
+**L91 sesión única por jugador:** QUE: un jugador tiene una sola sesión activa (no multi-login). COMO: documentar en 03-Diseno: el servidor invalida sesiones previas al abrir una nueva (logout forzado). UMBRAL: 0 sesiones paralelas por cuenta.
+
+**L107 manejo de paquetes duplicados (ids):** QUE: paquetes duplicados se descartan por id. COMO: documentar regla: cada paquete lleva seq_id; el receptor descarta seq_id ya visto. UMBRAL: 0 procesamiento de duplicados.
+
+**L108 pérdida tolerable (snapshots):** QUE: pérdida de paquetes unreliable (snapshots) es tolerable (no rompe estado). COMO: documentar en 03-Diseno: snapshots son unreliable; el cliente interpola y el siguiente snapshot corrige. UMBRAL: estado consistente tras 3 snapshots consecutivos.
+
+**L148 rotación de logs (sección 18 AGENTS):** QUE: los logs del servidor rotan por tamaño. COMO: documentar en 03-Diseno: rotación por tamaño (MAX_LOG_SIZE) con backups en logs/rotated/, formato NN-nombre-YYYY-MM-DD.log. UMBRAL: 0 logs sin rotar > umbral.
+
+**L156 métricas de sesión por región:** QUE: métricas de sesión agregadas por región (latencia, CCU). COMO: documentar en 03-Diseno: métricas por región (p50/p99 latencia, CCU) en dashboard; sin PII. UMBRAL: 100% de regiones con métricas.
+
+**L164 balanceo de conexiones:** QUE: el servidor balancea conexiones entre instancias. COMO: documentar en 03-Diseno: balanceo round-robin por instancia (~200 CCU); sin cambio de código (contrato). UMBRAL: 0 instancias > 200 CCU.
+
+**L170 bucket de backups cifrado:** QUE: los backups se guardan en bucket cifrado. COMO: documentar en 03-Diseno: bucket de backups con cifrado at-rest (AES-256) y acceso por IAM. UMBRAL: 100% de backups cifrados.

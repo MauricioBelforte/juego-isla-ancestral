@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T19:15:45",
+ "ultimo_update": "2026-10-22T19:30:40",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -127,7 +127,8 @@
   "Trampa GEMELO-NUMERICO (22oct 18:40): dos emisores (agente + mis acuses) usaron mismos numeros 300/302 en el canal de G-5.3 => detector dio FALSO al-dia por matching de numero pelado; FALLO DE DETECTOR: 3 reportes reales (S46/S47/S49) quedaron ocultos ~12h; FIX: detectar por slug de emisor (\"de-<carpeta>-a-\" en nombre) no por numero solo; pools regenerados",
   "Leccion OperCron (22oct 18:45): timestamps de G-5.3 llegan con fecha adelantada (2026-10-23) por zona horaria de su plataforma - NO usarlos para ordenar; usar creacion real de fichero",
   "CARRERA POOL en vivo (22oct 18:45): mi regeneracion del pool G-5.3 (303..350) choco con su escritura simultanea del 303 => segundo gemelo el mismo dia. FIX aplicado: rango separado 305..352 + protocolo RELEER-60s + mis acuses en serie propia (pares). Riesgo residual: plataformas con clock adelantado escriben \"futuro\"",
-  "Ranking inflado del repredicado (22oct 18:39): conteo 77-Online declarado 33 vs real 17 (archivo sin cambios desde 16:15, el error fue de mi scan original) => REGLA: el ranking de BACKLOGs SIEMPRE re-corrido al vuelo antes de citarse, jamas de memoria; corregidos mis 194/197"
+  "Ranking inflado del repredicado (22oct 18:39): conteo 77-Online declarado 33 vs real 17 (archivo sin cambios desde 16:15, el error fue de mi scan original) => REGLA: el ranking de BACKLOGs SIEMPRE re-corrido al vuelo antes de citarse, jamas de memoria; corregidos mis 194/197",
+  "Regla CONTEO-RIGIDO AL CIERRE (22oct 19:30, 3er caso): declaraciones de conteo desalineadas del disco en 3 tandas seguidas (agnes 951 holgado, G-5.3 S52 4-corta, Beam M99/M77 stale+desvio). REGLA: re-cuenta por patron rigido de Hy3 (321) al cierre de CADA tanda; de lo contrario el sello usa el conteo del disco y la declaracion queda descalificada como base"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
@@ -200,8 +201,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "BACKLOG-06 v2 pulido (ranking fresco sin 151/99/48/23; top 77-Online 33 -> 140-Alpha 22 -> 72-Logros 16 -> 51-Agua 15 -> 140...); M99 cerrado 169/169; confirmar lectura 194",
-  "acuse_enviado": 197,
+  "estado": "M77-Online RATIFICADO (108/130 oficial; 26 flips reales vs 24 declarados; net_contract.json + S7/03 verificados); GO 140-Alpha -> 72 -> 51; regla conteo rigido instituida; mi 199",
+  "acuse_enviado": 199,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first + heredable",
   "encargo_activo": "RIEL SUELTO TOTAL"

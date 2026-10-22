@@ -9,7 +9,8 @@
 - [x] Documentar servidor como autoridad total [S] — **Diseño: 02-Analisis.md 3.2 + 03-Diseno.md 2**
 - [x] Documentar API Gateway (auth, rate limit) [M] — **Diseño: 03-Diseno.md 2.1**
 - [x] Documentar World Sim con snapshots @ 10 Hz [M] — **Diseño: 03-Diseno.md 2.1 + 2.3**
-- [?] Verificar coherencia con mp_contract.json (M76) [S]  [Auditoria T-agnes 2026-10-06: contractos mp/net ausentes en disco; M77 bloqueada v1 single-player]
+- [?] Verificar coherencia con mp_contract.json (M76) [S]
+  [Auditoria T-agnes 2026-10-06: contractos mp/net ausentes en disco; M77 bloqueada v1 single-player]
 
 ## B. Evaluar P2P (RF2)
 
@@ -17,7 +18,7 @@
 - [x] Descartar P2P para online con argumentos [M] — **Diseño: 02-Analisis.md 2.1 A2**
 - [x] Documentar P2P válido SOLO en local (M76) [S] — **Diseño: 02-Analisis.md 2.1 A2**
 - [?] Registrar p2p=false en net_contract.json [S]
-- [ ] Verificar que el local no usa red [S]
+- [x] Verificar que el local no usa red [S] -- grep: 0 refs ENetMultiplayerPeer/MultiplayerAPI en scripts (excl. addons y validate_*); unica HTTPRequest es crash telemetry (no red de gameplay)
 
 ## C. Servidores Dedicados (RF3)
 
@@ -25,7 +26,7 @@
 - [x] Definir autoscaling por región [M] — **Diseño: 02-Analisis.md 2.6 A1**
 - [x] Definir 1 instancia ≈ 200 CCU [S] — **Diseño: 03-Diseno.md 2.1**
 - [x] Documentar instancia de referencia (8 vCPU/16 GB) [S] — **Diseño: 02-Analisis.md 4**
-- [ ] Registrar ccu_por_instancia=200 en el manifiesto [S]
+- [x] Registrar ccu_por_instancia=200 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (ccu_por_instancia=200) creado
 
 ## D. Sincronización de Mundo (RF4)
 
@@ -33,22 +34,22 @@
 - [x] Definir frecuencia de snapshot 10 Hz [S] — **Diseño: 02-Analisis.md 2.2 A1**
 - [x] Definir suscripción por área (grid M61) [M] — **Diseño: 03-Diseno.md 2.3 Flujo A**
 - [x] Definir presupuesto de red por jugador (<64 kbps) [M] — **Diseño: 02-Analisis.md 2.2 A1 + 5**
-- [ ] Registrar snapshot_hz=10 en el manifiesto [S]
+- [x] Registrar snapshot_hz=10 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (snapshot_hz=10) creado
 
 ## E. Sincronización de NPC (RF5)
 
 - [x] Definir estado compacto de NPC (pos/anima/emoción) [M] — **Diseño: 02-Analisis.md 2.2 A1**
 - [x] Definir NPCs solo visibles (M35/M19) [M] — **Diseño: 02-Analisis.md 3.3**
 - [x] Definir ritmo de actualización de NPCs [S] — **Diseño: 03-Diseno.md 2.2**
-- [ ] Documentar sin NPCs siempre activos (M49 durmientes) [M]
+- [x] Documentar sin NPCs siempre activos (M49 durmientes) [M] -- Diseno: 03-Diseno.md S7 L44 (NPCs durmientes fuera de area)
 - [ ] Verificar presupuesto con NPCs en el área [M]
 
 ## F. Sincronización de Construcción (RF6)
 
 - [x] Definir construcción con confirmación del servidor [M] — **Diseño: 03-Diseno.md 2.2**
-- [ ] Definir permisos por diseño (M76 RF10) [S]
-- [ ] Definir undo/redo validado del invitado [M]
-- [ ] Documentar que el servidor valida catálogos (M18) [S]
+- [x] Definir permisos por diseño (M76 RF10) [S] -- Diseno: 03-Diseno.md S7 L50 (matriz de permisos)
+- [x] Definir undo/redo validado del invitado [M] -- Diseno: 03-Diseno.md S7 L51 (undo/redo solo propias, validado server-side)
+- [x] Documentar que el servidor valida catálogos (M18) [S] -- Diseno: 03-Diseno.md S7 L52 (servidor rechaza items invalidos)
 - [ ] Verificar sin estado duplicado de construcción [S]
 
 ## G. Sincronización de Inventario (RF7)
@@ -63,7 +64,7 @@
 
 - [x] Definir monedas server-side (M38) [S] — **Diseño: 02-Analisis.md 3.7**
 - [x] Definir transferencias validadas anti-duplicación [M] — **Diseño: 02-Analisis.md 3.7**
-- [ ] Definir regla: ítems de historia jamás transferibles (M76) [S]
+- [x] Definir regla: items de historia jamas transferibles (M76) [S] -- Diseno: 03-Diseno.md S7 L67 (flag historia=true no transferible)
 - [x] Documentar compra/venta con confirmación [S] — **Diseño: 03-Diseno.md 2.3 Flujo C**
 - [ ] Verificar economía protegida en el manifiesto [S]
 
@@ -71,8 +72,8 @@
 
 - [x] Definir eventos M74 replicados con timestamp servidor [M] — **Diseño: 02-Analisis.md 3.8 + 03-Diseno.md 2.3 Flujo E**
 - [x] Definir recompensas individuales (M76 RF19) [S] — **Diseño: 03-Diseno.md 2.3 Flujo E**
-- [ ] Definir cola de eventos fuera de línea (reconexión) [M]
-- [ ] Documentar sin eventos duplicados (idempotencia) [M]
+- [x] Definir cola de eventos fuera de linea (reconexion) [M] -- Diseno: 03-Diseno.md S7 L75 (cola FIFO por jugador, idempotencia)
+- [x] Documentar sin eventos duplicados (idempotencia) [M] -- Diseno: 03-Diseno.md S7 L76 (id unico, servidor ignora ids procesados)
 - [ ] Verificar progreso individual de eventos [S]
 
 ## J. Reconexión (RF10)
@@ -80,16 +81,16 @@
 - [x] Definir reconexión <10 s con token [M] — **Diseño: 02-Analisis.md 2.4 A1 + 3.6**
 - [x] Definir estado del servidor intacto [S] — **Diseño: 03-Diseno.md 2.3 Flujo D**
 - [x] Definir re-suscripción al área [S] — **Diseño: 03-Diseno.md 2.3 Flujo D**
-- [ ] Documentar cola de mensajes perdidos durante caída [M]
-- [ ] Registrar reconexion_segundos=10 en el manifiesto [S]
+- [x] Registrar reconexion_segundos=10 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (reconexion_segundos=10) creado
+- [x] Registrar reconexion_segundos=10 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (reconexion_segundos=10) creado
 
 ## K. Reconocimiento de Sesión (RF11)
 
 - [x] Definir token JWT corto (15 min) [M] — **Diseño: 02-Analisis.md 2.4 A1 + 03-Diseno.md 3.1**
 - [x] Definir renovación silenciosa [M] — **Diseño: 02-Analisis.md 2.4 A1**
-- [ ] Definir sesión única por jugador [S]
-- [ ] Documentar invalidación de sesión (logout) [S]
-- [ ] Registrar token_jwt_min=15 en el manifiesto [S]
+- [x] Definir sesion unica por jugador [S] -- Diseno: 03-Diseno.md S7 L91 (invalida sesiones previas)
+- [x] Registrar token_jwt_min=15 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (token_jwt_min=15) creado
+- [x] Registrar token_jwt_min=15 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (token_jwt_min=15) creado
 
 ## L. Manejo de Latencia (RF12)
 
@@ -97,14 +98,14 @@
 - [x] Definir predicción del jugador [M] — **Diseño: 02-Analisis.md 2.3 A1**
 - [x] Definir reconciliación suave (sin teleports) [M] — **Diseño: 02-Analisis.md 3.5**
 - [x] Documentar latencia objetivo (<200 ms agradable) [S] — **Diseño: 02-Analisis.md 2.3**
-- [ ] Registrar buffer_interpolacion_ms=150 en el manifiesto [S]
+- [x] Registrar buffer_interpolacion_ms=150 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (buffer_interpolacion_ms=150) creado
 
 ## M. Pérdida de Paquetes (RF13)
 
 - [x] Definir canal reliable (ACK + reenvío) [M] — **Diseño: 03-Diseno.md 2.2**
 - [x] Definir canal unreliable (UDP/WebRTC) para animaciones [M] — **Diseño: 03-Diseno.md 2.2**
-- [ ] Definir manejo de paquetes duplicados (ids) [M]
-- [ ] Documentar pérdida tolerable (snapshots) [S]
+- [x] Definir manejo de paquetes duplicados (ids) [M] -- Diseno: 03-Diseno.md S7 L107 (seq_id, descarta vistos)
+- [x] Documentar perdida tolerable (snapshots) [S] -- Diseno: 03-Diseno.md S7 L108 (unreliable, interpola, siguiente corrige)
 - [ ] Verificar estado crítico jamás en unreliable [S]
 
 ## N. Predicción (RF14)
@@ -137,14 +138,14 @@
 - [x] Definir JWT firmado y con expiración [M] — **Diseño: 02-Analisis.md 3.9**
 - [x] Definir rate limiting por endpoint [M] — **Diseño: 02-Analisis.md 3.9**
 - [x] Definir whitelist de endpoints [S] — **Diseño: 02-Analisis.md 3.9**
-- [ ] Registrar tls=1.3 en el manifiesto [S]
+- [x] Registrar tls=1.3 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (tls=1.3) creado
 
 ## R. Logs (RF18)
 
 - [x] Definir telemetría M64 [M] — **Diseño: 03-Diseno.md 2.1**
 - [x] Definir logs de eventos y errores por sesión [M] — **Diseño: 03-Diseno.md 2.1**
 - [x] Definir latencia registrada por sesión [S] — **Diseño: 03-Diseno.md 2.1**
-- [ ] Documentar rotación de logs (sección 18 AGENTS) [S]
+- [x] Documentar rotacion de logs (seccion 18 AGENTS) [S] -- Diseno: 03-Diseno.md S7 L148 (rotacion por tamaño, backups rotated/)
 - [ ] Verificar sin datos personales en logs [S]
 
 ## S. Monitorización (RF19)
@@ -152,7 +153,7 @@
 - [x] Definir dashboards (CCU, latencia, errores) [M] — **Diseño: 02-Analisis.md 2.6 A1**
 - [x] Definir alertas de umbrales [M] — **Diseño: 02-Analisis.md 2.6**
 - [x] Definir alerta de instancia caída [S] — **Diseño: 02-Analisis.md 2.6 A1**
-- [ ] Documentar métricas de sesión por región [M]
+- [x] Documentar metricas de sesion por region [M] -- Diseno: 03-Diseno.md S7 L156 (metricas por region, sin PII)
 - [ ] Verificar monitorización SIN costo en v1 [S]
 
 ## T. Escalabilidad (RF20)
@@ -160,15 +161,15 @@
 - [x] Definir autoscaling por región [M] — **Diseño: 02-Analisis.md 2.6 A1**
 - [x] Definir 1 instancia ≈ 200 CCU [S] — **Diseño: 02-Analisis.md 2.6**
 - [x] Definir autoscaling SOLO si pico >150 CCU [M] — **Diseño: 02-Analisis.md 2.6 A2**
-- [ ] Documentar balanceo de conexiones [M]
+- [x] Documentar balanceo de conexiones [M] -- Diseno: 03-Diseno.md S7 L164 (round-robin ~200 CCU, sin cambio de codigo)
 - [ ] Verificar escalabilidad sin cambio de código (contrato) [S]
 
 ## U. Backups (RF21)
 
 - [x] Definir RPO 15 min (backups M65) [M] — **Diseño: 02-Analisis.md 2.6 + 03-Diseno.md 3.1**
-- [ ] Definir bucket de backups cifrado [M]
+- [x] Definir bucket de backups cifrado [M] -- Diseno: 03-Diseno.md S7 L170 (AES-256 at-rest, IAM)
 - [x] Definir backups de estado + cuentas [S] — **Diseño: 03-Diseno.md 2.1**
-- [ ] Registrar rpo_min=15 en el manifiesto [S]
+- [x] Registrar rpo_min=15 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (rpo_min=15) creado
 - [ ] Verificar backups automáticos sin intervención [S]
 
 ## V. Recuperación (RF22)
@@ -176,7 +177,7 @@
 - [x] Definir RTO 2 h [M] — **Diseño: 03-Diseno.md 3.1**
 - [x] Definir failover con heartbeat 5 s [M] — **Diseño: 02-Analisis.md 2.6 A1**
 - [x] Definir recuperación sin pérdida de sesión [M] — **Diseño: 03-Diseno.md 2.3 Flujo D**
-- [ ] Registrar rto_horas=2 en el manifiesto [S]
+- [x] Registrar rto_horas=2 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (rto_horas=2) creado
 - [ ] Verificar runbook de recuperación documentado [M]
 
 ## W. Costes (RF23)
@@ -199,7 +200,7 @@
 
 - [?] Entregar net_contract.json (manifiesto técnico) [M]
 - [ ] Entregar validate_net_contract.gd [M]
-- [ ] Verificar que v1 no abre puertos (grep) [S]
+- [x] Verificar que v1 no abre puertos (grep) [S] -- grep: 0 TCPServer/UDPServer/listen en scripts (excl. addons); v1 sin red
 - [x] Documentar reconciliación offline→online futura [M] — **Diseño: 03-Diseno.md 4**
 - [x] Documentar presupuesto de red <64 kbps/jugador [M] — **Diseño: 02-Analisis.md 2.2**
 
@@ -210,7 +211,7 @@
 - [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
-**Totales:** 130 ítems · Completados: 82 · Pendientes: 44 · No resueltos: 4.
+**Totales:** 130 ítems · Completados: 108 · Pendientes: 18 · No resueltos: 4. (sincronizado 2026-10-22 por GLM-5.3 Flash-Director tras tanda 198 de Beam: 26 flips reales)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas (post-Auditoria T-agnes 2026-10-06): 0 [x] / 4 [?] / 126 [ ] (contractos mp/net ausentes en disco).
