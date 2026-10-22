@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:30:30",
+ "ultimo_update": "2026-10-22T02:45:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "245/246: S10 M56 RATIFICADA (PHOTO_POSE_REQUEST verificado; 2 flips; DRIFT 10 de fila corregido por el agente + fila rota reconstruida); trampa lambdas-GDScript archivada; M48 descartado; GO S11",
+  "estado": "247/248: S11 M28 RATIFICADA (3 flips de drift de codigo ya implementado + QA UI 7/0; fila 130 agregada con 53/77); nota helper-hueco confirmada; GO S12 o M21",
   "pendientes_real": 222,
-  "acuse_enviado": 246,
+  "acuse_enviado": 248,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -111,7 +111,8 @@
   "dos agentes en el mismo modulo (dueño activo + contribuidor aditivo): cambios aditivos verificados OK pero el CONTRIBUIDOR debe reportar al director (que coordina con el dueno) y pausar si el dueno pide ajustes (caso Beam T36/T37 en M17 de G-5.3)",
   "renumerar respuestas ya escritas cuando un pool regenerado desalinea la secuencia: renombrar el fichero a max+1 y corregir el encabezado interno (caso 083->088)",
   "lambdas de GDScript capturan por VALOR: contadores por closure no funcionan - usar array-por-referencia (caso G-5.3 S10, segunda correccion de su propio QA)",
-  "filas del GLOBAL desalineadas por flips concurrentes sin sync: los duenos de fila sync al cerrar tanda y los muestreos del director re-verifican el drift (caso M56 33->43 detectado por G-5.3)"
+  "filas del GLOBAL desalineadas por flips concurrentes sin sync: los duenos de fila sync al cerrar tanda y los muestreos del director re-verifican el drift (caso M56 33->43 detectado por G-5.3)",
+  "helper proximo_numero cuenta huecos antiguos como existentes: si el numero ofrecido NO es ultimo+1, aplic下游 el 232 del pool y usar ultimo+1 (caso G-5.3 231/232 - el hueco 220 confunde al conteo)"
  ],
  "minimax_m3_1_flash": {
   "estado": "039/034: P2b QA M16 SELLADO VALIDO con 1 item degradado (L44 animacion breve sin implementar) derivado a G-5.3; ciclos P1/P2/P3 completos y sellados",
