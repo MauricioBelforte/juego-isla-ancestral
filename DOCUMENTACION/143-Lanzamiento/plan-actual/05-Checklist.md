@@ -9,20 +9,28 @@
 
 ## 1. Publicar página (RF1/RF2/M149)
 
-- [ ] Definir página visible en Steam (y plataformas objetivo) el día 0 [M]
-- [ ] Definir verificación de disponibilidad de la página (visible) [S]
-- [ ] Definir captura de confirmación de publicación [S]
-- [ ] Definir ventana de publicación < 30 min entre plataformas [S]
-- [ ] Definir detener publicación si una plataforma falla (runbook) [S]
-- [ ] Definir página con requisitos, FAQ y descripciones sin errores [M]
+- [x] Definir página visible en Steam (y plataformas objetivo) el día 0 [M]
+  · evidencia: 03-Diseno.md secc. Pagina visible en Steam (cola total, Reflection-Beam-1.0, T81, 2026-10-22)
+- [x] Definir verificación de disponibilidad de la página (visible) [S]
+  · evidencia: 03-Diseno.md secc. Pagina visible en Steam (cola total, Reflection-Beam-1.0, T81, 2026-10-22)
+- [x] Definir captura de confirmación de publicación [S]
+  · evidencia: 03-Diseno.md secc. Publicacion y trailer (cola total, Reflection-Beam-1.0, T83, 2026-10-22)
+- [x] Definir ventana de publicación < 30 min entre plataformas [S]
+  · evidencia: 03-Diseno.md secc. Pagina visible en Steam (cola total, Reflection-Beam-1.0, T81, 2026-10-22)
+- [x] Definir detener publicación si una plataforma falla (runbook) [S]
+  · evidencia: 03-Diseno.md secc. Pagina visible en Steam (cola total, Reflection-Beam-1.0, T81, 2026-10-22)
+- [x] Definir página con requisitos, FAQ y descripciones sin errores [M]
+  · evidencia: 03-Diseno.md secc. Publicacion y trailer (cola total, Reflection-Beam-1.0, T83, 2026-10-22)
 - [x] Definir página con configuración de idiomas completa (M87/M149) [M]
-- [ ] Definir verificación de fecha de lanzamiento correcta por región [S]
+- [x] Definir verificación de fecha de lanzamiento correcta por región [S]
+  · evidencia: 03-Diseno.md secc. Publicacion y trailer (cola total, Reflection-Beam-1.0, T83, 2026-10-22)
 
 ## 2. Publicar build (RF1/RF2/M142)
 
 - [x] Definir liberación de la build `rc-final` en las plataformas [M]
 - [x] Definir verificación de hash de build = manifest RC [S]
-- [ ] Definir confirmación de "visible para descarga" tras publicar [S]
+- [x] Definir confirmación de "visible para descarga" tras publicar [S]
+  · evidencia: 03-Diseno.md secc. Publicacion y trailer (cola total, Reflection-Beam-1.0, T83, 2026-10-22)
 - [x] Definir prueba de descarga/instalación de la build publicada (1 dispositivo) [M]
 - [x] Definir registro del buildId publicado en la bitácora [S]
 - [x] Definir no cambiar la build salvo hotfix aprobado [S]
@@ -31,10 +39,14 @@
 
 ## 3. Publicar tráiler (RF1/M149)
 
-- [ ] Definir publicación del tráiler final en canales oficiales [S]
-- [ ] Definir publicación con subtítulos por idioma (M87) [M]
-- [ ] Definir variante corta 15s en redes [S]
-- [ ] Definir enlace del tráiler en la store page [S]
+- [x] Definir publicación del tráiler final en canales oficiales [S]
+  · evidencia: 03-Diseno.md secc. Trailer y comunicacion (cola total, Reflection-Beam-1.0, T85, 2026-10-22)
+- [x] Definir publicación con subtítulos por idioma (M87) [M]
+  · evidencia: 03-Diseno.md secc. Trailer y comunicacion (cola total, Reflection-Beam-1.0, T85, 2026-10-22)
+- [x] Definir variante corta 15s en redes [S]
+  · evidencia: 03-Diseno.md secc. Trailer y comunicacion (cola total, Reflection-Beam-1.0, T85, 2026-10-22)
+- [x] Definir enlace del tráiler en la store page [S]
+  · evidencia: 03-Diseno.md secc. Trailer y comunicacion (cola total, Reflection-Beam-1.0, T85, 2026-10-22)
 - [ ] Definir programación de publicación horaria sincronizada [S]
 
 ## 4. Publicar comunicado (RF1/M149)

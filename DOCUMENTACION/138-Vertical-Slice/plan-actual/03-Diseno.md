@@ -133,12 +133,33 @@ de diseño para el slice de Aurora; flip de [S], los [M] profundos quedan).
 
 ## Mision del slice (3 pasos)
 
+**UX de mision / indicador de objetivo (input M53, G-5.3-Flash-Agente
+2026-10-22):** panel de mision activa en la esquina superior derecha del HUD
+(capas M53 ya montadas: DOM-UI dialogo/pausa/menus): 1 linea de objetivo
+actual ("Madera: 2/5" / "Afilar hacha en la ruina" / "Volver a Finneas"),
+color canonico sello brisa para el destacado del paso completado (check corto,
+sin animacion costosa). Sin minimapa ni flecha 3D (budget de render del slice;
+la flecha es sustituida por el texto de POI en la linea 2). El panel se
+oculta en dialogo activo (cede lugar al submenu M21) y reaparece al cerrarlo.
+Contrato: señal mision_paso_actualizada(dict) desde el sistema de mision ->
+UI escucha y re-pinta; sin polling por frame.
+
 1. Conversacion con Finneas:	dialogo con 6+ lineas y rama de mision (M21).
 2. Recolectar madera:	derribar arboles (5 bloques por arbol con la Hacha
    de 15 usos).
 3. Entrega: llevar la madera a la ruina del slice -> recompensa.
 
 ## Recompensa (input M93 margen 5-15%)
+
+**Anclaje canonico del margen (G-5.3-Flash-Agente, 2026-10-22):** regla M93
+(05-Checklist M93: "recompensa por mision secundaria entre 5-15% del siguiente
+desbloqueo") ejercida desde data: `unlocks.json` -> taller_crafting = 150 AO
+(orden 1, condicion "mision_secundaria_inicial": el slice ES esa mision).
+Banda valida: 5-15% de 150 = 7.5-22.5 -> canon redondea [8, 22]
+(quests.json reglas.recompensa_secundaria_ao). Recompensa del slice: 20 AO =
+13.3% de 150 -> DENTRO del margen (7 AO bajo el tope, holgura de balance para
+el QA de economia). La semilla de jardin no computa AO (insumo de progreso,
+items_exclusivos_no_monetizables).
 
 - 20 AO + semilla de jardin (la semilla habilita el garden plant bed del
   slice; el AO fijo 20 se mantiene dentro del margen 5-15% de la economia
@@ -172,6 +193,50 @@ costero sudeste del mapa raiz (M167/MundoRaiz RADIO_ISLA), delimitado por:
 POI total del slice: 5 (casa de Finneas, prado talable, muelle roto, ruina del
 atalaya, altar menor de la arboleda). Toda posicion de NPC se resuelve con
 get_height + posicionar_sobre_terreno (M64 NavigationServer; prohibido forzar).
+
+## Ruina del atalaya (3 salas + puzzle - G-5.3-Flash-Agente, S27 2026-10-22)
+
+**Layout de 3 salas (interior compacto, 1 escena):**
+
+1. **Sala de entrada "El Vestibulo del Viento"**: derrumbe parcial con la
+   puerta sellada por el grabado repetido de `simbolo_del_sello_brisa`
+   (canon M147). Entrada libre; pausa de lectura (Placa derruida: "los
+   primeros jardineros cantaban con el viento"). El jugador ve las 2 palancas
+   al fondo reja de por medio.
+2. **Sala central "La Camara de las Palancas"**: puzzle de 2 palancas
+   (detalle abajo). Al resolver: la reja abre y el viento ambiental sube de
+   volumen (cuelgue auditive intencional, M42).
+3. **Santuario "El Cantico"**: inscripcion final (La inscripcion guarda un
+   canto sobre el viento - gancho M148) y el pedestal del **Hacha de Finneas**
+   (recompensa de la sala, entrega en mano). Guardado por hito (autosave
+   "puzzle_resuelto").
+
+**Puzzle de 2 palancas + alineacion de simbolos (input M24):**
+
+- 2 palancas (izquierda = disco del SOL, derecha = disco de la BRISA del sello); cada palanca tiene 3 posiciones (alba/mediodia/ocaso).
+- Objetivo: alinear el disco del SOL en OCASO y el disco de la BRISA en ALBA
+  (pista de la placa: "el viento nace cuando el sol muere; busca el espejo
+  del horizonte" - la BRISA queda en el valor espejo del SOL).
+- Interaccion M24 (interact 1 boton por palanca, cicla posicion); feedback:
+  trinquete SFX + click del disco (M43); posiciones invalidas NO castigan
+  (sin reset ni tiempo: cozy; la reja solo mirar cerrada).
+- Solucion canonica: (palanca_SOL=ocaso, palanca_BRISA=alba) - 9 estados
+  posibles, 1 valido, 8 invalidos benignos. Sin orden secuencial (los
+  cambios son simultaneos: combinacion, no secuencia).
+- Codigo de gancho: senal puzzle_sala_resuelta (identificador "ruina_sello")
+  para autosave/verificacion (M60).
+
+**Recompensa de la ruina: Hacha de Finneas + mensaje cozy:**
+
+- **Hacha de Finneas** (id `hacha_finneas`): herramienta unica del slice,
+  duracion compartida con el Hacha comun (M138: 15 usos; la de Finneas arranca
+  a 30 usos), desbloquea talado de la ARBOLEDA (los arboles del prado ya
+  talables con hacha comun; los 2 arboles viejos de la arboleda exigen
+  hacha_finneas: contenido post-puzzle para pacing 20-30 min).
+- **Mensaje cozy** (placa del santuario, al retirar el Hacha): "Quien guarda
+  el viento guarda la mano que tala. - F." (texto final del grafo
+  finneas_slice v2: node `recompensa_cozy` pendiente de v2 del JSON, no
+  bloquea el slice).
 
 ## Canon y estilo (M147)
 

@@ -74,3 +74,55 @@ Reporte (telemetría/review/soporte) → ticket M101 con buildId
 - No se promete contenido futuro sin fecha (M144).
 - No se revelan datos internos de métricas a la comunidad.
 - No se responde a trolls: solo se da respuesta oficial a quejas legítimas.
+## Pagina visible en Steam (P-100 riel M143 batch)
+
+### Pagina visible en Steam (y plataformas objetivo) el dia 0
+- La pagina de tienda debe estar visible y publica el dia de lanzamiento.
+- Plataformas objetivo: Steam (PC), itch.io (opcional), Epic (futuro).
+
+### Verificacion de disponibilidad de la pagina
+- Checklist pre-publicacion: screenshots, descripcion, trailer, tags, precio.
+- Verificacion manual + automatizada (curl a la URL de la tienda).
+
+### Ventana de publicacion < 30 min entre plataformas
+- Publicar en todas las plataformas en < 30 min para evitar desincronizacion.
+- Runbook: pasos ordenados con tiempos estimados.
+
+### Detener publicacion si una plataforma falla
+- Si una plataforma falla, detener el proceso y reportar.
+- Runbook de rollback por plataforma.
+## Publicacion y trailer (cola total M143 batch 2)
+
+### Captura de confirmacion de publicacion
+- Screenshot de la pagina visible en cada plataforma.
+- Archivar como evidencia de lanzamiento.
+
+### Pagina con requisitos, FAQ y descripciones
+- Requisitos minimos/recomendados del sistema.
+- FAQ con preguntas frecuentes.
+- Descripciones sin errores (revision de texto).
+
+### Verificacion de fecha de lanzamiento por region
+- Confirmar que la fecha es correcta en cada region (UTC).
+- Ajustar si hay desfase por zona horaria.
+
+### Confirmacion de visible para descarga
+- Verificar que el juego es descargable tras publicar.
+- Test de descarga en cada plataforma.
+## Trailer y comunicacion (cola total M143 batch 4)
+
+### Publicacion del trailer final en canales oficiales
+- Trailer final publicado en YouTube, Twitter/X, Discord.
+- Coordinar fecha/hora de publicacion.
+
+### Publicacion con subtitulos por idioma (M87)
+- Subtitulos en espanol, ingles, portugues.
+- Sincronizados con el audio.
+
+### Variante corta 15s en redes
+- Version de 15 segundos para TikTok/Reels/Shorts.
+- Highlights del gameplay.
+
+### Enlace del trailer en la store page
+- Embed del trailer en la pagina de Steam.
+- Verificar reproduccion automatica.

@@ -9,7 +9,7 @@
 
 - [x] Definir esquina de Aurora como zona del slice [M] — 03-Diseno "Zona del slice": cuadrante costero sudeste del mapa raiz (no requiere isla nueva), ancla en escalera del muelle (2026-10-22)
 - [x] Definir geografía: playa, bosque, prado, costa [M] — 03-Diseno: 4 sub-zonas + muelle roto (Playa de Finneas, prado con 3-4 talables, bosque franja oeste, costa/muelle; 2026-10-22)
-- [ ] Definir 3-5 puntos de interés (casa, ruina, muelle roto, arboleda, altar) [M]
+- [x] Definir 3-5 puntos de interés (casa, ruina, muelle roto, arboleda, altar) [M] — 03-Diseno "Zona del slice": 5 POI canon (casa de Finneas, prado talable, muelle roto, ruina del atalaya, altar menor) (2026-10-22 S26: los definidos en S24 cubren el item literal)
 - [ ] Definir vegetación con MultiMesh (M50, sin rebalsar draw calls) [C]
 - [ ] Definir iluminación de la zona dentro del budget render (M49/M61) [C]
 
@@ -33,16 +33,16 @@
 
 - [x] Definir misión de 3 pasos (madera → hacha en ruina → entrega) [M] — CONSOLIDADO en 03-Diseno (dialogo Finneas 6+ lineas M21 -> recolectar 5 bloques -> entrega en la ruina; recompensa 20 AO + semilla jardin)
 - [x] Definir recompensa: 20 AO + semilla de jardín [M] — CONSOLIDADO (20 AO dentro del margen 5-15% de M93 + semilla que habilita el garden bed del slice); 03-Diseno seccion
-- [ ] Definir margen de recompensa según M93 (5-15%) [M]
-- [ ] Definir UX de misión: indicador de objetivo (M53) [S]
+- [x] Definir margen de recompensa según M93 (5-15%) [M] — 03-Diseno Recompensa: anclaje canonico unlocks.json taller_crafting=150 AO (orden 1, cond mision_secundaria_inicial) -> banda [8,22] (quests.json reglas); 20 AO = 13.3% DENTRO; semilla no computa AO (2026-10-22 S26)
+- [x] Definir UX de misión: indicador de objetivo (M53) [S] — 03-Diseno seccion UX: panel esquina sup. derecha, 1 linea de objetivo con contador, oculto en dialogo, senal mision_paso_actualizada (sin polling), sin minimapa por budget render (2026-10-22 S26)
 - [ ] Definir test: la misión no se rompe si se entrega la madera antes del diálogo [M]
 
 ## E. Ruina y Puzzle (RF5)
 
-- [ ] Definir ruina de 3 salas [M]
-- [ ] Definir puzzle de 2 palancas + alineación de símbolos (M24) [M]
+- [x] Definir ruina de 3 salas [M] — 03-Diseno "Ruina del atalaya": Vestibulo del Viento (reja+placa), Camara de las Palancas (puzzle), Santuario del Cantico (inscripcion m148 + pedestal) (2026-10-22 S27)
+- [x] Definir puzzle de 2 palancas + alineación de símbolos (M24) [M] — 03-Diseno: discos SOL/BRISA x 3 posiciones, solucion canonica (SOL=ocaso, BRISA=alba, valor espejo), 9 estados/1 valido/8 benignos, interact cicla posicion, sin castigo (cozy), senal puzzle_sala_resuelta (2026-10-22 S27)
 - [x] Definir símbolos del canon M147 (sello_brisa) [M] — 03-Diseno: simbolo_del_sello_brisa (viento_primeros_jardineros) como grabado de la ruina + motivo del altar; cero simbolos nuevos (2026-10-22)
-- [ ] Definir recompensa: Hacha de Finneas + mensaje cozy [M]
+- [x] Definir recompensa: Hacha de Finneas + mensaje cozy [M] — 03-Diseno: hacha_finneas 30 usos desbloquea arboleda (pacing 20-30 min) + placa "Quien guarda el viento guarda la mano que tala. - F." (2026-10-22 S27; grafo v2 con node recompensa_cozy queda anotado, no bloquea)
 - [ ] Definir test de combinatoria de palancas (todas las secuencias) [C]
 
 ## F. Casa y Autosave (RF4/RF9)
@@ -222,7 +222,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 29 · Pendientes: 102 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 36 · Pendientes: 95 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).
