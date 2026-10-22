@@ -45,6 +45,12 @@ var _navigator: Camera3D = null
 
 func _ready() -> void:
 	_cargar_presets()
+	# Navigator: réplica lógica de la cámara real (M56 [C] item 24).
+	var nav_script := load("res://scripts/foto/navigator.gd")
+	if nav_script != null:
+		_navigator = nav_script.new()
+		_navigator.name = "Navigator"
+		add_child(_navigator)
 
 func _cargar_presets() -> void:
 	if not FileAccess.file_exists(RUTA_PRESETS):
@@ -75,6 +81,9 @@ func _entrar_modo_foto() -> void:
 		_clock_pausado_antes = bool(clock._pausado) if "_pausado" in clock else false
 		clock.pausa()
 	_camara_previa = get_viewport().get_camera_3d()
+	# Navigator: activar réplica de la cámara real (sin duplicar render).
+	if _navigator != null:
+		_navigator.activar(_camara_previa)
 	# Iter. 3 (G61/RF11): en modo foto el HUD queda oculto; se restaura exacto al salir.
 	var hud := _hud_registrado()
 	if hud != null:
@@ -88,6 +97,9 @@ func _salir_modo_foto() -> void:
 	var clock := get_node_or_null("/root/GameClock")
 	if clock != null and clock.has_method("resume") and not _clock_pausado_antes:
 		clock.resume()
+	# Navigator: desactivar réplica (restaura cámara real).
+	if _navigator != null:
+		_navigator.desactivar()
 	_camara_previa = null
 	# Iter. 3 (G61): restaura el HUD al estado exacto previo a entrar.
 	if _hud_registrado() != null:

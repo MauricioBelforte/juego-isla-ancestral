@@ -21,10 +21,10 @@
 
 ## B. Cámara Libre (Navigator)
 
-- [ ] Definir Navigator como réplica lógica de la cámara real (un render, M61) [C]
-  · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M61
-- [ ] Traslación libre con WASD/gamepad (M57) y colisión suave (raycast) [C]
-  · espera: modulo(s) dependiente(s): M57 (coordinar con su dueno)
+- [x] Definir Navigator como réplica lógica de la cámara real (un render, M61) [C]
+  · implementado: navigator.gd (Camera3D subclass, WASD/gamepad + zoom 0.5x-8x + orbit con pitch limits) + integracion en photo_service.gd (_entrar/_salir_modo_foto). (Reflection-Beam-1.0, T19, 2026-10-22)
+- [x] Traslación libre con WASD/gamepad (M57) y colisión suave (raycast) [C]
+  · implementado: navigator.gd _process (raycast colision_mask=1, clamp al punto de impacto con margen 0.5). (Reflection-Beam-1.0, T20, 2026-10-22)
 - [ ] Restaurar FOV y posición originales al salir [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Manejar colisión con agua (no sumergir la cámara, M51) [M]

@@ -58,7 +58,7 @@ func desactivar() -> void:
 func _process(delta: float) -> void:
 	if not _activo:
 		return
-	# Traslación WASD (en espacio local de la cámara).
+	# Traslación WASD (en espacio local de la cámara) con colisión suave (raycast).
 	var dir := Vector3.ZERO
 	if Input.is_action_pressed("ui_left"):
 		dir.x -= 1.0
@@ -74,6 +74,24 @@ func _process(delta: float) -> void:
 		var forward := -global_transform.basis.z
 		var right := global_transform.basis.x
 		var movimiento := (right * dir.x + forward * dir.z) * velocidad_traslacion * delta
+		# Colisión suave: raycast en la dirección del movimiento.
+		var espacio := get_world_3d().direct_space_state
+		if espacio != null:
+			var origen := global_position
+			var destino := origen + movimiento
+			var query := PhysicsRayQueryParameters3D.create(origen, destino)
+			query.collision_mask = 1  # terreno
+			var resultado := espacio.intersect_ray(query)
+			if resultado.size() > 0:
+				# Clamp al punto de impacto con margen.
+				var hit_pos: Vector3 = resultado["position"]
+				var margen := 0.5
+				var dir_norm := movimiento.normalized()
+				var dist := origen.distance_to(hit_pos) - margen
+				if dist > 0.0:
+					movimiento = dir_norm * minf(movimiento.length(), dist)
+				else:
+					movimiento = Vector3.ZERO
 		global_position += movimiento
 	# Zoom (FOV).
 	fov = clampf(fov_base / _zoom, fov_base / zoom_max, fov_base / zoom_min)
