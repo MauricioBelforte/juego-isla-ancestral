@@ -109,3 +109,50 @@ Spawn en la playa de Aurora
 3. GONOGO-M139.md firmado.
 4. Retrospectiva: qué escalar, qué cortar, qué deuda queda.
 5. Presupuesto ajustado con los datos reales del slice (M134).
+
+## Definiciones del slice — turno 2-BIS (G-5.3-Flash-Agente, 2026-10-22)
+
+
+Definiciones consolidadas de los items [S] "Definir X" del 05-Checklist
+(los numeros vienen del propio 05; esta seccion los consolida como decision
+de diseño para el slice de Aurora; flip de [S], los [M] profundos quedan).
+
+## Input M02 — recursos y herramientas del slice
+
+- **M madera como recurso clave del slice**: fuente = arboles de la zona
+  (Aurora bosque/prado). Cada arbol derriba entrega 5 bloques de madera
+  (input del 05) con la Hacha; la madera alimenta la mision principal del
+  slice (3 pasos) y el crafting minimo de muebles del slice de M16/M17.
+- **Arbol con 5 bloques de madera**: el derribo completo consume la
+  durabilidad de la Hacha proporcional al swing por bloque (Hacha = 15
+  usos de durabilidad modelo: cada swing gasta 1; derribar un arbol entero
+  gasta ~5 usos, dejando 10 usos para el resto del slice).
+- **Hacha con 15 usos de durabilidad**: herramienta del slice definida en
+  el catalogo M12/M13; al llegar a 0 se rompe (feedback de ruptura por
+  M43/M52 en el itemifct [M] profundo no cubierto aquí).
+
+## Mision del slice (3 pasos)
+
+1. Conversacion con Finneas:	dialogo con 6+ lineas y rama de mision (M21).
+2. Recolectar madera:	derribar arboles (5 bloques por arbol con la Hacha
+   de 15 usos).
+3. Entrega: llevar la madera a la ruina del slice -> recompensa.
+
+## Recompensa (input M93 margen 5-15%)
+
+- 20 AO + semilla de jardin (la semilla habilita el garden plant bed del
+  slice; el AO fijo 20 se mantiene dentro del margen 5-15% de la economia
+  M93 de la etapa incial).
+
+## Finneas (NPC guia del slice)
+
+- Rutina por waypoints (M64) con validacion de NO atravesar muros/obstaculos
+  (el pathing real usa el NavigationServer M64 — prohibido forzar posición).
+- 6+ lineas de dialogo con rama de mision (M21 grafo; localizacion es/es).
+- Regalo de bienvenida conceptual (M20 futuro): 1 regalito al primer
+  handshake con el jugador (gacha cozy, sin economia real).
+
+## Canon y estilo (M147)
+
+- Nombre del slice y su historico consume el canon M147 (glpts); toda
+  referencia textual debe resolver contra el diccionario canonico.

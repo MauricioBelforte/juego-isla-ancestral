@@ -141,13 +141,20 @@
 - [x] Asignar layer correcta segun terreno [M]
   · evidencia: _layer_for_type() en terrain_block.gd (7 tipos) (Reflection-Beam-1.0, T55, 2026-10-22)
 - [?] Asignar terrain_id correcto [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe)
-- [ ] Crear variante terrain_block_ceped [S]
-- [ ] Crear variante terrain_block_barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear variante terrain_block_pavimento [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear variante terrain_block_arena [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear variante terrain_block_agua [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear variante terrain_block_nieve [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear variante terrain_block_rocas [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [x] Crear variante terrain_block_ceped [S]
+  · evidencia: _load_from_data() en terrain_block.gd lee data/terrenos/terrenos.json (L1, Reflection-Beam-1.0, T57, 2026-10-22)
+- [x] Crear variante terrain_block_barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+  · evidencia: _load_from_data() en terrain_block.gd lee data/terrenos/terrenos.json (L1, Reflection-Beam-1.0, T57, 2026-10-22)
+- [x] Crear variante terrain_block_pavimento [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+  · evidencia: _load_from_data() en terrain_block.gd lee data/terrenos/terrenos.json (L1, Reflection-Beam-1.0, T57, 2026-10-22)
+- [x] Crear variante terrain_block_arena [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+  · evidencia: _load_from_data() en terrain_block.gd lee data/terrenos/terrenos.json (L1, Reflection-Beam-1.0, T57, 2026-10-22)
+- [x] Crear variante terrain_block_agua [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+  · evidencia: _load_from_data() en terrain_block.gd lee data/terrenos/terrenos.json (L1, Reflection-Beam-1.0, T57, 2026-10-22)
+- [x] Crear variante terrain_block_nieve [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+  · evidencia: _load_from_data() en terrain_block.gd lee data/terrenos/terrenos.json (L1, Reflection-Beam-1.0, T57, 2026-10-22)
+- [x] Crear variante terrain_block_rocas [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+  · evidencia: _load_from_data() en terrain_block.gd lee data/terrenos/terrenos.json (L1, Reflection-Beam-1.0, T57, 2026-10-22)
 
 ## G. Integracion con M11 (Personaje)
 

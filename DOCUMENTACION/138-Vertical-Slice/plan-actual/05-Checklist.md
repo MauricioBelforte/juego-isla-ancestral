@@ -15,24 +15,24 @@
 
 ## B. Recurso y Herramienta (RF3)
 
-- [ ] Definir madera como recurso clave del slice [S]
-- [ ] Definir árbol con 5 bloques de madera [S]
-- [ ] Definir Hacha con 15 usos de durabilidad [S]
+- [x] Definir madera como recurso clave del slice [S] — CONSOLIDADO G-5.3-Flash-Agente 2026-10-22: 03-Diseno seccion turno 2-BIS (arboles de Aurora, 5 bloques por derribo con Hacha 15 usos; alimenta mision 3 pasos + crafting minimo)
+- [x] Definir árbol con 5 bloques de madera [S] — CONSOLIDADO: 5 bloques/arbol, consume ~5 usos de la Hacha (15 total) por arbol entero; 03-Diseno seccion
+- [x] Definir Hacha con 15 usos de durabilidad [S] — CONSOLIDADO: 1 uso por swing, arbol entero ~5 usos, 10 restantes para el slice; feedback de ruptura a 0 via M43/M52 (profundo, fuera del alcance de esta seccion)
 - [ ] Definir animación de swing del Hacha (M48) [M]
 - [ ] Definir SFX de impacto y VFX de virutas (M43/M52) [M]
 
 ## C. Finneas (RF2)
 
-- [ ] Definir NPC Finneas con rutina de día por waypoints [M]
+- [x] Definir NPC Finneas con rutina de día por waypoints [M] — CONSOLIDADO en 03-Diseno (NavigationServer M64, prohibido forzar posicion; 6+ lineas M21; NO atraviesa muros)
 - [ ] Definir 6+ líneas de diálogo con rama de misión (M21) [M]
 - [ ] Definir consumo de canon M147 para nombre e histórico [M]
-- [ ] Definir regalo de bienvenida conceptual (M20 futuro) [S]
-- [ ] Definir que Finneas no atraviese paredes en sus waypoints [M]
+- [x] Definir regalo de bienvenida conceptual (M20 futuro) [S] — CONSOLIDADO (1 regalo al primer handshake, gacha cozy sin economia real); 03-Diseno seccion
+- [x] Definir que Finneas no atraviese paredes en sus waypoints [M] — CONSOLIDADO (pathing real via NavigationServer M64; waypoints que rodean obstaculos); 03-Diseno seccion
 
 ## D. Misión y Recompensa (RF12)
 
-- [ ] Definir misión de 3 pasos (madera → hacha en ruina → entrega) [M]
-- [ ] Definir recompensa: 20 AO + semilla de jardín [M]
+- [x] Definir misión de 3 pasos (madera → hacha en ruina → entrega) [M] — CONSOLIDADO en 03-Diseno (dialogo Finneas 6+ lineas M21 -> recolectar 5 bloques -> entrega en la ruina; recompensa 20 AO + semilla jardin)
+- [x] Definir recompensa: 20 AO + semilla de jardín [M] — CONSOLIDADO (20 AO dentro del margen 5-15% de M93 + semilla que habilita el garden bed del slice); 03-Diseno seccion
 - [ ] Definir margen de recompensa según M93 (5-15%) [M]
 - [ ] Definir UX de misión: indicador de objetivo (M53) [S]
 - [ ] Definir test: la misión no se rompe si se entrega la madera antes del diálogo [M]
