@@ -94,7 +94,6 @@ func _entrar_modo_foto() -> void:
 		clock.pausa()
 	_camara_previa = get_viewport().get_camera_3d()
 	# Hora fijada (M31, item 69): si _hora_fijada >= 0, fijar la hora del juego.
-	var clock := get_node_or_null("/root/GameClock")
 	if clock != null and clock.has_method("get_hora"):
 		_hora_previa = int(clock.get_hora())
 	if _hora_fijada >= 0 and clock != null and clock.has_method("set_hora"):
@@ -116,7 +115,6 @@ func _salir_modo_foto() -> void:
 	if clock != null and clock.has_method("resume") and not _clock_pausado_antes:
 		clock.resume()
 	# Hora fijada (M31, item 69): restaurar la hora previa.
-	var clock := get_node_or_null("/root/GameClock")
 	if _hora_previa >= 0 and clock != null and clock.has_method("set_hora"):
 		clock.set_hora(_hora_previa)
 	_hora_previa = -1

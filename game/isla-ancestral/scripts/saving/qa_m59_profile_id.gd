@@ -61,21 +61,22 @@ func _correr() -> void:
 	var codes := []
 	sm.slot_loaded.connect(func(_s, code): codes.append(code))
 	var r1: int = sm.load_slot(1)
-	# LoadResult.PROFILE_MISMATCH = 6 (agregado al enum de save_loader.gd).
-	# HALLAZGO (dueño M59): con el sello pendiente de persistir en disco, el flujo
-	# cae al loader que devuelve EMPTY_SLOT (5) para un slot que slot_metadata SÍ
-	# parsea (discrepancia de cadencia lector preexistente) — el caso PROFILE_MISMATCH
-	# se activará cuando el sello persista. assert informativo:
-	if r1 != 6:
-		print("[QA-M59-PID] HALLAZGO r1=%d (sin sello en disco → sin mismatch posible)" % r1)
+	# LoadResult: OK=0, NOT_FOUND=1, CORRUPTED=2, RECOVERED=3, FUTURE=4,
+	# PROFILE_MISMATCH=5, EMPTY_SLOT=6. El pre-check de perfil vive en
+	# SaveManager.load_slot y devuelve PROFILE_MISMATCH sin tocar el snapshot.
+	_check(SaveLoader.LoadResult.PROFILE_MISMATCH == 5,
+		"enum: PROFILE_MISMATCH = 5", "enum inesperado: %d" % SaveLoader.LoadResult.PROFILE_MISMATCH)
+	_check(r1 == SaveLoader.LoadResult.PROFILE_MISMATCH,
+		"cruzamiento devuelve PROFILE_MISMATCH (r1=%d)" % r1,
+		"cruzamiento devolvió %d (esperado %d)" % [r1, SaveLoader.LoadResult.PROFILE_MISMATCH])
 	_check(inv.count_item("junk_marker_pid", true) == marcador[0],
 		"cruzamiento: SIN restauración (marcador intacto)", "restauró igual")
 
 	# (c) Perfil correcto → carga OK y el perfil del slot pasa a activo.
 	ds.set_perfil_activo("perfil_A")
 	var r2: int = sm.load_slot(1)
-	# OK=0, RECOVERED=3
-	_check(r2 == 0 or r2 == 3, "perfil correcto → carga OK/RECOVERED (código %d)" % r2, "código r2: %d" % r2)
+	_check(r2 == SaveLoader.LoadResult.OK or r2 == SaveLoader.LoadResult.RECOVERED,
+		"perfil correcto → carga OK/RECOVERED (código %d)" % r2, "código r2: %d" % r2)
 	_check(String(ds.get_perfil_activo()) == "perfil_A", "perfil activo consistente tras cargar", "perfil: %s" % ds.get_perfil_activo())
 	_check(inv.count_item("junk_marker_pid", true) != marcador[0] or true, "restauración real ejecutada (o estado compatible)", "")
 
@@ -90,12 +91,15 @@ func _correr() -> void:
 			break
 	_check(guardado2, "slot 2 guardado (señal)", "sin señal slot 2")
 	var r3: int = sm.load_slot(2)
-	_check(r3 == 0 or r3 == 3, "slot propio carga OK/RECOVERED (código %d)" % r3, "código r3: %d" % r3)
+	_check(r3 == SaveLoader.LoadResult.OK or r3 == SaveLoader.LoadResult.RECOVERED,
+		"slot propio carga OK/RECOVERED (código %d)" % r3, "código r3: %d" % r3)
 
 	# (e) Perfil vacío (sin perfil activo) → cualquier slot carga (primera sesión).
 	ds.set_perfil_activo("")
 	var r4: int = sm.load_slot(1)
-	_check(r4 == 0 or r4 == 4 or r4 == 6, "sin perfil activo no bloquea (código %d)" % r4, "bloqueó indebidamente")
+	_check(r4 == SaveLoader.LoadResult.OK or r4 == SaveLoader.LoadResult.RECOVERED
+		or r4 == SaveLoader.LoadResult.FUTURE_VERSION,
+		"sin perfil activo no bloquea (código %d)" % r4, "bloqueó indebidamente")
 
 	print("[QA-M59-PID] RESULTADO=", "OK" if _fallos == 0 else "FAIL(%d/%d)" % [_fallos, _checks])
 	quit(0 if _fallos == 0 else 1)
