@@ -5126,3 +5126,15 @@ El runner central reporto 45/47 suites OK durante horas mientras 13 suites de ot
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-21 21:10
+
+## 2026-10-21 21:25 — minimax-m3-1-flash / Kilo Code — M17 entra al circuito central: wrapper integrador (498 checks)
+
+**GO del director (msg 022) ejecutado:** `tests/test_m17_suites_integracion.gd` (NUEVO, en `res://tests/` -> el runner central lo descubre solo) ejecuta las **7 suites de `scripts/construccion/`** como subprocesos y agrega su resultado: **17 checks, 0 fallos, rc=0** con **498 checks de M17 verificados**. Detalles utiles para la flota: (1) `OS.execute()` **no captura la salida de un hijo consola en Windows** — el patron que funciona es `cmd.exe /V:ON /C` + redirect a archivo + `OS.create_process` + polling (el del runner central); (2) los **umbrales se calibran con lo MEDIDO** (el total real de esas 7 suites es 498, no 540: el piso va POR DEBAJO de lo medido, nunca por encima para forzar el verde).
+
+**Pendiente honesto:** el wrapper corre sus hijos en serie (73.3 s); falta re-medir la corrida completa del runner con el wrapper dentro para confirmar que el total sigue <= 600 s (si no, paralelizar los hijos dentro del wrapper).
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 21:25

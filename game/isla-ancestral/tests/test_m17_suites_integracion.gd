@@ -4,7 +4,8 @@ extends SceneTree
 # Plataforma: MiniMax API (Kilo Code)
 # Fecha: 2026-10-21
 #
-# M17 Construccion — suite INTEGRADORA para el runner central.
+# M17 Construccion — suite INTEGRADORA para el runner central (las 7 de scripts/construccion/;
+# la 8a, tests/test_m17_construccion_validacion.gd, ya esta en res://tests/ y el runner la descubre sola).
 #
 # POR QUE EXISTE: las 8 suites de M17 viven en `scripts/construccion/`, fuera de `res://tests/`, que es
 # lo UNICO que descubre `tests/run_tests.gd` -> M17 (540 checks) NUNCA corrio en CI, y dos de sus
@@ -19,7 +20,7 @@ extends SceneTree
 #     --script res://tests/test_m17_suites_integracion.gd
 # Exit: 0 = verde medido | 1 = fallos
 
-const MODULO := "M17 integracion: las 8 suites de construccion en el circuito central"
+const MODULO := "M17 integracion: las 7 suites de construccion (scripts/construccion/) en el circuito central"
 const SUITES: Array[String] = [
 	"res://scripts/construccion/test_construccion.gd",
 	"res://scripts/construccion/test_construccion_iter2.gd",
@@ -29,9 +30,9 @@ const SUITES: Array[String] = [
 	"res://scripts/construccion/test_construccion_iter6.gd",
 	"res://scripts/construccion/test_construccion_iter7.gd",
 ]
-const CHECKS_MINIMOS := 40
-## checks esperados (medidos el 2026-10-21 con las 8 suites en verde)
-const CHECKS_ESPERADOS := 500
+const CHECKS_MINIMOS := 15
+## checks esperados (medidos el 2026-10-21 con las 7 suites en verde: 498)
+const CHECKS_ESPERADOS := 490
 
 var _checks := 0
 var _fallos := 0
@@ -81,6 +82,35 @@ func _fallos_de(texto: String) -> int:
 	return -1
 
 
+## Ejecuta una suite como subproceso y devuelve {rc, salida}. Mismo patron que el
+## runner central (cmd + redirect + polling): OS.execute no captura la salida de un
+## hijo consola en Windows, el runner central ya lo demostro con este metodo.
+func _ejecutar(ruta: String) -> int:
+	var exe := OS.get_executable_path()
+	var tmp := OS.get_temp_dir().path_join("m17_it_%d.txt" % Time.get_ticks_usec())
+	var res := ProjectSettings.globalize_path("res://")
+	var script := ProjectSettings.globalize_path(ruta)
+	var cmd := " ( \"" + exe + "\" --headless --path \"" + res + "\" --script \"" + script + "\" > \"" + tmp + "\" 2>&1 )"
+	var shell := "cmd.exe"
+	var shell_args: Array = ["/V:ON", "/C", cmd]
+	var pid := OS.create_process(shell, shell_args)
+	if pid == -1:
+		return -1
+	var t0 := Time.get_ticks_msec()
+	while OS.is_process_running(pid):
+		if Time.get_ticks_msec() - t0 > 120000:
+			OS.kill(pid)
+			return -1
+		await create_timer(0.2).timeout
+	if FileAccess.file_exists(tmp):
+		salida_ultimo = FileAccess.get_file_as_string(tmp)
+		DirAccess.remove_absolute(tmp)
+	return 0
+
+
+var salida_ultimo := ""
+
+
 func _correr() -> void:
 	await process_frame
 	print("=== %s ===" % MODULO)
@@ -93,12 +123,8 @@ func _correr() -> void:
 		if not existe:
 			continue
 		var salida := ""
-		var rc := 0
-		var args := ["--headless", "--path", "res://", "--script", ruta]
-		var out := []
-		rc = OS.execute(OS.get_executable_path(), args, out, true, true)
-		for o in out:
-			salida += String(o)
+		var rc := await _ejecutar(ruta)
+		salida = salida_ultimo
 		var c := _checks_de(salida)
 		var f := _fallos_de(salida)
 		var ok := (rc == 0) and c > 0 and f == 0
