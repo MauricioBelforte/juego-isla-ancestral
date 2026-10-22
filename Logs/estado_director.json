@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T21:10:50",
+ "ultimo_update": "2026-10-22T21:16:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -187,7 +187,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "20:55 - asignaciones vigentes y completas: Step-5 = bloque final M23 Puzzles+Investigacion (consolidado); DS-WB = P4 normalizacion 141-148 + P5 lote verificador M91/M147/M24 + item34 M113 (todos GO en el 364); G-5.3 = guardia + proxies (S48 hecha); agnes = espera lotes; Beam = jornada cerrada sin pendientes; Hy3/Ling/DS-OC/MiniMax sin senal (estado fundador). No hay trabajo nuevo asignable sin: decisiones fundador (5 flags M151 + cozy + etiqueta Alta literal), GO slice, o regreso de MiniMax. Modo guardia vigente.",
+ "nota_cron_d": "21:15 - dia sellado y flota en guardia. Sellos del dia con QA agnes: M99 (169/169), M70 (198/198 con deuda perf). Cerrados Block-consolidados de Beam (70/144/108/77/99/16/M16). Baterias M151 1-5 completas (155/167, 5 flags fundador). M23 65/105 (iter11+12 Step-5, bloque final GO). DS-WB: BUG-149 + normalizacion 141-148 + lote verificador M91/M147/M24 GO. Hy3 encuesta M77/M151 autorizada. SIN nuevas asignaciones sin fundador: 5 flags M151, etiqueta Alta literal, batching M53, puente M55, deuda profiler M70; GO slice / regreso MiniMax / Godot-MCP abren los proximos frentes.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
