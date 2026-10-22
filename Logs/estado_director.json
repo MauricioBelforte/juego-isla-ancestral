@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T01:02:30",
+ "ultimo_update": "2026-10-22T02:10:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "920/921: M158 t1 RATIFICADA (10 flips, test_tiers 60-checks usos, 63/140 fila sync propia verificada por director); 77 [ ] honestos; t2/t2-next GO",
+  "estado": "922/923: M158 t2 RATIFICADA (6 flips, test_iter2 0 fallos shop+jar round-trip, 69/140 fila sync propia verificada); 71 [ ] honestos con dueños externos correctos",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 921,
+  "acuse_enviado": 923,
   "pool_saneado": true
  },
  "g_5_3": {

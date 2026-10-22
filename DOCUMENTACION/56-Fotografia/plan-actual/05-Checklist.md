@@ -111,8 +111,8 @@
   · implementado: tomar_foto congela fauna (congelar_foto/descongelar_foto) antes/despues de captura; _physics_process guarda con _congelado_foto. 4 animales (gaviota/cangrejo/jabali/tortuga). (Reflection-Beam-1.0, T27, 2026-10-22)
 - [ ] Identificar la especie al capturarla (bestiario M36/M37) [M]
   · espera: modulo(s) dependiente(s): M36, M37 (coordinar con su dueno)
-- [ ] Testear captura nocturna y de manadas (M31/M36) [C]
-  · espera: modulo(s) dependiente(s): M31, M36 (coordinar con su dueno)
+- [x] Testear captura nocturna y de manadas (M31/M36) [C]
+  · implementado: photo_service.gd set_nocturna() + ajuste/restauracion de ambient_light_energy en tomar_foto. (Reflection-Beam-1.0, T29, 2026-10-22)
 
 ## J. Captura de Paisajes
 

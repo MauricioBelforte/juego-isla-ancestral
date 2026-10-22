@@ -65,6 +65,7 @@ func _run() -> void:
 	_check(not _pm.hito_alcanzado("hito_items_50"), "aislamiento: hito_items_50 limpio tras restore")
 	_check(not _pm.hito_alcanzado("hito_coleccion_flora"), "aislamiento: hito_coleccion_flora limpio tras restore")
 	_check(int(_pm.titulo_count()) == 0, "aislamiento: sin titulos tras restore")
+	print("[DBG2] count=%d marcar_coleccion_flora=%s marcar_inexistente=%s" % [_pm.hitos_count(), _pm.marcar_hito("hito_coleccion_flora"), _pm.marcar_hito("zzz_noexiste")])
 	_test_catalogo()
 	_fin("_test_catalogo")
 	_test_flujo_evento_items()

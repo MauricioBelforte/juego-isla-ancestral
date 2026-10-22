@@ -45,6 +45,10 @@ var _viewport_captura: SubViewport = null
 ## -1 = sin hora fija (usa la hora actual del juego). 0-23 = hora fijada.
 var _hora_fijada: int = -1
 var _hora_previa: int = -1
+## Modo nocturno para captura (M31/M36, item 114): ajusta la exposicion
+## para condiciones de baja luz. -1 = auto (usa hora fijada), true = forzar noche.
+var _nocturna: bool = false
+var _env_ambient_previo: float = -1.0
 
 ## ── Iter. 2 PhotoMode: estado de retorno ────────────────
 ## Cámara y contexto capturados al entrar para restaurarlos al salir.
@@ -215,6 +219,11 @@ func tomar_foto() -> Dictionary:
 	if hud != null:
 		ui.set_hud_visible(false)
 
+	# Ajuste nocturno (item 114): si _nocturna, bajar exposicion ambiental.
+	var env := get_viewport().world_3d.environment if get_viewport().world_3d != null else null
+	if _nocturna and env != null:
+		_env_ambient_previo = env.ambient_light_energy
+		env.ambient_light_energy = _env_ambient_previo * 0.3
 	# Congelar fauna (voladores/acuaticos) para captura sin romper trayectoria (item 110).
 	var fauna_congelada: Array[Node] = []
 	for n in get_tree().get_nodes_in_group("fauna"):
@@ -261,6 +270,12 @@ func tomar_foto() -> Dictionary:
 		else:
 			motivo = "error_guardado_%d" % err
 
+	# Restaurar exposicion ambiental (nocturna).
+	if _nocturna and _env_ambient_previo >= 0.0:
+		var env := get_viewport().world_3d.environment if get_viewport().world_3d != null else null
+		if env != null:
+			env.ambient_light_energy = _env_ambient_previo
+		_env_ambient_previo = -1.0
 	# Restaurar fauna congelada (voladores/acuaticos).
 	for n in fauna_congelada:
 		if is_instance_valid(n) and n.has_method("descongelar_foto"):
@@ -289,6 +304,13 @@ func tomar_foto() -> Dictionary:
 		print("[PHOTO-MISS] captura no produjo archivo (%s, %d ms)" % [motivo, ms])
 	return res
 
+
+
+## Activa/desactiva el modo nocturno para la captura (M31/M36, item 114).
+## Cuando activo, baja la exposicion ambiental para simular noche.
+func set_nocturna(activo: bool) -> void:
+	_nocturna = activo
+	print("[PHOTO-NOCTURNA] %s" % ("activa" if activo else "desactiva"))
 
 
 ## Fija la hora del dia para la foto (M31, item 69). hora in [0,23]; -1 = sin fijar.
