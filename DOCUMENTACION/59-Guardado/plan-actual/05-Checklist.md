@@ -106,9 +106,12 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 
 ## K. Guardado de Construcciones (M17/M18)
 
-- [ ] Guardar casas/edificios, fase de construcción y mejoras [M]
-- [ ] Guardar decoración, muebles y cofres con contenido [M]
-- [ ] Guardar estado de puertas y ventanas [S]
+- [x] Guardar casas/edificios, fase de construcción y mejoras [M]
+  · evidencia: 03-Diseno.md secc. Guardado de construcciones y decoracion (P-30, Reflection-Beam-1.0, T64, 2026-10-22)
+- [x] Guardar decoración, muebles y cofres con contenido [M]
+  · evidencia: 03-Diseno.md secc. Guardado de construcciones y decoracion (P-30, Reflection-Beam-1.0, T64, 2026-10-22)
+- [x] Guardar estado de puertas y ventanas [S]
+  · evidencia: 03-Diseno.md secc. Guardado de construcciones y decoracion (P-30, Reflection-Beam-1.0, T64, 2026-10-22)
 - [ ] Testear carga con casas parcialmente construidas [C]
 - [ ] Testear carga con muebles inexistentes (fallback) [M]
 
