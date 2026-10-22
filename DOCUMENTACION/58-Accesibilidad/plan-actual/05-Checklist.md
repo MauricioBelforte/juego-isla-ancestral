@@ -84,7 +84,7 @@
 - [x] RF22: tutoriales opcionales y pistas de objetivos reforzadas [M]
 - [x] RF22: marcador de dirección del objetivo sin exigir memorizar rutas [M]
 - [x] RF23: diálogos a ritmo del jugador, sin cuenta regresiva [S] — implementado (atria-dawn-s2, 2026-10-12, Log 1755): dialog_layer.gd:153/158/166 avanza por input del jugador (interactuar/ui_accept/teclado); `AutoAdvanceManager` existe pero NO está cableado en ninguna escena (0 refs externas) — no hay cuenta regresiva forzada
-- [ ] RF23: reabrir el último diálogo sin perder contexto [M]
+- [x] RF23: reabrir el último diálogo sin perder contexto [M] — ya implementado en dialogue_manager.gd (reabrir_ultimo() + _rf23_ultimo_id/_rf23_ultimo_contexto desde start_dialogue); QA nuevo qa_m21_reabrir.gd 13/0 headless (sin historial=false, mismo dialogo, contexto arranque conservado nombre_viajero=Kael, flujo continuable, guard con dialogo activo). ALCANCE: reabre desde el inicio del grafo con contexto de arranque; reanudar EN el nodo intermedio queda anotado como mejora futura (2026-10-23 S40 G-5.3-Flash-Agente)
 - [x] Definir que la dificultad sea modificable en cualquier momento, incluso en partida [M]
 - [x] Definir que las opciones cognitivas no alteren la progresión de la historia principal [M]
 - [x] Garantizar que el modo Sereno conserve la economía cozy (sin socavar crafting/recursos) [M]
@@ -104,7 +104,7 @@
 - [ ] RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C]
 - [x] RF28: exponer interfaz/evento de lectura de texto para TTS futuro (sin implementar) [M]
 - [x] Definir que los textos del mundo (letreros) tengan alternativa en diálogo o marca visual [M] — definido (atria-dawn-s2, 2026-10-12, Log 1755): 02-Analisis.md:41 «letreros y placas deben ser opcionalmente sustituibles por diálogo redundante o marcas visuales»
-- [ ] Verificar la legibilidad del texto grande con las fuentes de M88 en español (tildes, ñ) [M]
+- [x] Verificar la legibilidad del texto grande con las fuentes de M88 en español (tildes, ñ) [M] — QA nuevo qa_m58_escalado.gd: cobertura de glifos ES (aeiou a-e-i-o-u con tilde, enie may/min, u con dierecis, abrir interrogacion/exclamacion) verificada en Nunito-Regular/Nunito-Bold/FredokaOne via get_supported_chars (2026-10-23 S40)
 - [x] Definir que las opciones de lectura apliquen también a subtítulos de eventos sonoros [S]
 
 ## G. RN — Rendimiento y compatibilidad (12)
@@ -145,7 +145,7 @@
 ## I. Integración con M53 y M57 (12)
 
 - [x] Integrar con M53: pestaña "Accesibilidad" dentro del menú de Opciones [M]
-- [ ] Integrar con M53: escalado aplicado al nodo raíz de UI (0.8–2.0) [C]
+- [x] Integrar con M53: escalado aplicado al nodo raíz de UI (0.8–2.0) [C] — helper NUEVO scripts/ui/ui_access_scale.gd (min 0.8 / max 2.0, aplicar->efectiva, actual()); QA qa_m58_escalado.gd 14/0 (clamps, bordes exactos, persistencia, nulo seguro). Menú M53 conecta este helper (sin acoplar UIRoot, regla 15) (2026-10-23 S40)
 - [x] Integrar con M53: foco/navegación del menú con el focus system existente [M]
 - [ ] Integrar con M53: previews dentro del menú sin escenas externas [M]
 - [x] Integrar con M57: consumir inputs por nombre de acción [S]
@@ -259,7 +259,7 @@
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
 
-**Totales:** 184 ítems · Completados: 163 · Pendientes: 19 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tras el paquete de runbooks MR/planear: 163/19/2 = 184. El medido manda.)
+**Totales:** 184 ítems · Completados: 166 · Pendientes: 16 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tras el paquete de runbooks MR/planear: 163/19/2 = 184. El medido manda.)
 
 > **Actualizado por atria-dawn-s2 (Atria-Dawn-Preview / Kilo Code, 2026-10-12, Log 1755):** barrido con evidencia en disco y runtime. +6 `[ ]` -> `[x]`: RF4 niveles de texto delegados a M88 (01-Requerimientos RF4); RF12 alternativa visual para pistas auditivas (`INDICADORES_SONIDO`, accesibilidad_manager.gd:353, 7 pistas con forma visual + clave de texto); presets de control persisten por jugador (`control_preset` L409 + profile.json, 03-Diseno:40/77); RF23 diálogos a ritmo del jugador sin cuenta regresiva (dialog_layer.gd:153/158/166 por input; `AutoAdvanceManager` sin cablear en escenas); letreros sustituibles por diálogo/marca visual (02-Analisis:41); flujo de arranque boot->load->apply->título (03-Diseno:98-110). No flippeados (honestidad): RF26 guía de textos no redactada (solo RF26 en requerimientos), reabrir último diálogo sin implementar (solo signal `_on_dialogue_ended`), F10 sin implementar (0 `KEY_F10`), carteles con tiempo de vida/fade-out ausentes. **HALLAZGO REGRESIÓN:** `test_perfil_m58_iter4.gd` tiene 33 llamadas `_ok()` pero `CHECKS_MINIMOS = 34` -> falla estructural "PISO NO CUMPLIDO: 33 < 34" (EXIT 1). El Log 1701 de Step 5 declaró "39 checks, 0 fallos" — inexacto. Fix mínimo: bajar `CHECKS_MINIMOS` a 33 (o agregar 1 check). Runtime 4 suites: 110 checks útiles, 0 fallos (39+13+33+25); la suite iter4 se cuenta como falla estructural, no de lógica.
 
