@@ -39,6 +39,9 @@ var _hud_visible_antes_modo: bool = true
 ## Cámara y contexto capturados al entrar para restaurarlos al salir.
 var _camara_previa: Camera3D = null
 var _clock_pausado_antes: bool = false
+## ── Navigator (M56 [C] item 24): réplica lógica de la cámara real ──
+## Mueve la cámara real (sin duplicar render) con WASD/gamepad + zoom + orbit.
+var _navigator: Camera3D = null
 
 func _ready() -> void:
 	_cargar_presets()
