@@ -91,7 +91,7 @@
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -99,13 +99,14 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 11, 2026-10-22, Log 2134): 351 checks con los
-# bloques A-P (iter. 10 tenia 316 con A-O; el bloque P del cluster Secretas sumo
-# 35: 15 carga/fuente/oculta + 2 ocultamiento + 1 visibilidad + 2 unicidad +
-# 1 diarios + 2x7 end-to-end + 1 reset + 1 puente diario + 1 de cierre).
-# Medido: 351/0/EXIT 0 x3. El guardian se probo EN ROJO por inyeccion de
-# runtime sobre el bloque P (ver Log 2134).
-const CHECKS_MINIMOS := 379
+# Piso MEDIDO en verde (iter. 13, 2026-10-22, Log 2137): 456 checks con los
+# bloques A-R (iter. 12 tenia 379 con A-Q; el bloque R de los clusters
+# Puzzles + Investigacion sumo 77: 33 carga/fuente/no-oculta + 1 expuestas +
+# 2 unicidad global + 7 NPC reales + 11 objetos reales + 2 diarios + 3x7
+# end-to-end + 1 puente diario).
+# Medido: 456/0/EXIT 0. El guardian se probo EN ROJO por inyeccion de runtime
+# sobre el bloque R (ver Log 2137).
+const CHECKS_MINIMOS := 456
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -144,6 +145,7 @@ func _run() -> void:
 	_test_amistad()
 	_test_secretas()
 	_test_comerciantes()
+	_test_puzzles_investigacion()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -178,7 +180,8 @@ func _test_carga() -> void:
 	# Iter. 10 (Log 2131): +6 del cluster Amistad -> 32 + 1 = 33.
 	# Iter. 11 (Log 2134): +5 del cluster Secretas -> 37 + 1 = 38.
 	# Iter. 12 (Log 2135): +3 del cluster Comerciantes -> 40 + 1 = 41.
-	_check(_h.cadenas_count() == 41, "41 cadenas cargadas tras el merge (40 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 13 (Log 2137): +11 de los clusters Puzzles + Investigacion -> 51 + 1 = 52.
+	_check(_h.cadenas_count() == 52, "52 cadenas cargadas tras el merge (51 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -405,7 +408,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 40, "catálogo principal con 40 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes): %d" % principal.size())
+	_check(principal.size() == 51, "catálogo principal con 51 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes + 5 investigacion + 6 puzzles): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -428,7 +431,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 41, "41 cadenas cargadas en runtime (40 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 52, "52 cadenas cargadas en runtime (51 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -1340,3 +1343,167 @@ func _test_comerciantes() -> void:
 		_check(not diary.esta_registrada("mision_cadena-ruta-del-mercader"),
 			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
 	_fin("Q")
+
+
+func _test_puzzles_investigacion() -> void:
+	# Iter. 13 (Log 2137): clusters Puzzles (6, 03-Diseno L46: templos 24/25/26
+	# + ruinas con puzzles ocultos) e Investigacion (5, L45: faro, biblioteca,
+	# geodesia, mapas + cartas estelares) consolidados en UN bloque (regla del
+	# fundador, msg 183 del director). NPC REALES de data/villagers/
+	# (vera_ardilla farera, sofia_buho bibliotecaria, pablo_pato ceramista,
+	# teo_conejo herbolario, bruno_sapo carpintero, luna_zorra artesana,
+	# catalina_oso cocinera) y objetos REALES de data/items/ por campo id
+	# (OBJ-LUZ-012 "Linterna", OBJ-EST-006 "Vitrina", OBJ-REL-002 "Reloj de
+	# pendulo", OBJ-HER-015 "Lupa", OBJ-LUZ-008 "Lampara de cristal",
+	# OBJ-TAL-004 "Rueda de alfarero", OBJ-HER-018 "Sierra", OBJ-PLA-004
+	# "Orquidea", OBJ-ITE-021 "Pan", OBJ-NAT-024 "Seta", OBJ-LUZ-004
+	# "Veladora"). A diferencia de las secretas (bloque P), las 11 nacen
+	# visibles: se descubren hablando.
+	_h.restore_save_data({})
+	var investigacion := ["cadena-registro-del-faro", "cadena-catalogo-perdido",
+		"cadena-mediciones-de-la-isla", "cadena-mapa-de-las-plantas",
+		"cadena-cartas-estelares"]
+	var puzzles := ["cadena-templo-de-las-24-marcas", "cadena-templo-de-los-25-engranajes",
+		"cadena-templo-de-las-26-mareas", "cadena-ruinas-del-barrizal",
+		"cadena-ruinas-del-manantial", "cadena-ruinas-del-acantilado"]
+	var nuevas := investigacion + puzzles
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+		_check(not bool((_h.get_cadena(cid).get("oculta", false))), "%s NO es oculta (se descubre hablando)" % cid)
+	# Visibles en disponibles desde el inicio
+	var disponibles: Array = _h.cadenas_disponibles()
+	var expuestas := 0
+	for cid in nuevas:
+		for d in disponibles:
+			if String(d) == cid:
+				expuestas += 1
+	_check(expuestas == 11, "las 11 puzzles+investigacion figuran en disponibles desde el inicio (%d expuestas)" % expuestas)
+	# Unicidad GLOBAL de consecuencias medida sobre la carga real (52 cadenas ->
+	# 52 flags, 1 por cadena): reemplaza la lista transcrita a mano, que podia
+	# omitir un flag y dar un falso verde de unicidad.
+	var principal := _leer_json("res://data/historias/secundarias.json")
+	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
+	var flags := {}
+	var multi := []
+	for c in principal + ejemplos:
+		var cid := String((c as Dictionary).get("id", ""))
+		var cad: Dictionary = _h.get_cadena(cid)
+		if cad.is_empty():
+			continue
+		var cons: Dictionary = cad.get("consecuencia", {})
+		if cons.size() != 1:
+			multi.append(cid)
+		for flag in cons:
+			flags[flag] = true
+	_check(flags.size() == 52, "52 consecuencias distintas sobre 52 cadenas cargadas (unicidad global): %d" % flags.size())
+	_check(multi.is_empty(), "cada cadena aporta exactamente 1 flag de consecuencia (%s)" % str(multi))
+	# NPCs REALES: cada npc de las 11 cadenas existe como recurso en data/villagers/
+	var npcs := {}
+	for cid in nuevas:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var npc := String((p as Dictionary).get("npc", ""))
+			if npc != "":
+				npcs[npc] = true
+	for npc in npcs:
+		_check(FileAccess.file_exists("res://data/villagers/%s.tres" % npc),
+			"NPC REAL %s existe en data/villagers/" % npc)
+	# Objetos REALES: cada objeto existe en data/items/ por campo id (efecto,
+	# no nombre de archivo)
+	var objetos := {}
+	for cid in nuevas:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var obj := String((p as Dictionary).get("objeto", ""))
+			if obj != "":
+				objetos[obj] = true
+	var ids_items := _ids_items_reales()
+	for obj in objetos:
+		_check(ids_items.has(obj), "objeto REAL %s existe en data/items/ (por campo id)" % obj)
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 11, "11 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# End-to-end 1: registro del faro (vera_ardilla REAL; OBJ-LUZ-012 "Linterna" REAL)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"OBJ-LUZ-012": 1})
+	var res1: Dictionary = _h.iniciar_cadena("cadena-registro-del-faro")
+	_check(bool(res1.ok), "iniciar cadena-registro-del-faro OK")
+	res1 = _h.reportar_paso("cadena-registro-del-faro", "hablar", "vera_ardilla")
+	_check(bool(res1.ok), "faro p1 hablar vera_ardilla OK")
+	res1 = _h.reportar_paso("cadena-registro-del-faro", "explorar", "faro")
+	_check(bool(res1.ok), "faro p2 explorar faro OK")
+	res1 = _h.reportar_paso("cadena-registro-del-faro", "puzzle", "alturas-de-la-luz")
+	_check(bool(res1.ok), "faro p3 puzzle OK")
+	res1 = _h.reportar_entrega("cadena-registro-del-faro")
+	_check(bool(res1.ok), "faro p4 entregar OBJ-LUZ-012 OK (inventario)")
+	_check(_h.esta_completada("cadena-registro-del-faro"), "cadena-registro-del-faro completada end-to-end")
+	_check(ws_has("registro_del_faro_recuperado"), "consecuencia registro_del_faro_recuperado aplicada (M21)")
+	# End-to-end 2: templo de las 24 marcas (pablo_pato REAL; OBJ-TAL-004 "Rueda de alfarero" REAL)
+	if inv != null:
+		inv.agregar_items({"OBJ-TAL-004": 1})
+	var res2: Dictionary = _h.iniciar_cadena("cadena-templo-de-las-24-marcas")
+	_check(bool(res2.ok), "iniciar cadena-templo-de-las-24-marcas OK")
+	res2 = _h.reportar_paso("cadena-templo-de-las-24-marcas", "hablar", "pablo_pato")
+	_check(bool(res2.ok), "templo p1 hablar pablo_pato OK")
+	res2 = _h.reportar_paso("cadena-templo-de-las-24-marcas", "explorar", "templo_24")
+	_check(bool(res2.ok), "templo p2 explorar templo_24 OK")
+	res2 = _h.reportar_entrega("cadena-templo-de-las-24-marcas")
+	_check(bool(res2.ok), "templo p3 entregar OBJ-TAL-004 OK (inventario)")
+	res2 = _h.reportar_paso("cadena-templo-de-las-24-marcas", "puzzle", "sellos-de-arcilla")
+	_check(bool(res2.ok), "templo p4 puzzle OK")
+	_check(_h.esta_completada("cadena-templo-de-las-24-marcas"), "cadena-templo-de-las-24-marcas completada end-to-end")
+	_check(ws_has("templo_de_las_24_marcas_abierto"), "consecuencia templo_de_las_24_marcas_abierto aplicada (M21)")
+	# End-to-end 3: ruinas del barrizal (catalina_oso REAL; OBJ-ITE-021 "Pan" REAL)
+	if inv != null:
+		inv.agregar_items({"OBJ-ITE-021": 1})
+	var res3: Dictionary = _h.iniciar_cadena("cadena-ruinas-del-barrizal")
+	_check(bool(res3.ok), "iniciar cadena-ruinas-del-barrizal OK")
+	res3 = _h.reportar_paso("cadena-ruinas-del-barrizal", "hablar", "catalina_oso")
+	_check(bool(res3.ok), "ruinas p1 hablar catalina_oso OK")
+	res3 = _h.reportar_paso("cadena-ruinas-del-barrizal", "explorar", "barrizal")
+	_check(bool(res3.ok), "ruinas p2 explorar barrizal OK")
+	res3 = _h.reportar_entrega("cadena-ruinas-del-barrizal")
+	_check(bool(res3.ok), "ruinas p3 entregar OBJ-ITE-021 OK (inventario)")
+	res3 = _h.reportar_paso("cadena-ruinas-del-barrizal", "puzzle", "ofrenda-de-la-ruina")
+	_check(bool(res3.ok), "ruinas p4 puzzle OK")
+	_check(_h.esta_completada("cadena-ruinas-del-barrizal"), "cadena-ruinas-del-barrizal completada end-to-end")
+	_check(ws_has("ruinas_del_barrizal_leidas"), "consecuencia ruinas_del_barrizal_leidas aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# los bloques H/K/L/M/N/O/P/Q). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-registro-del-faro"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	_fin("R")
+
+
+## Escanea res://data/items/*.tres y devuelve {id: archivo} leyendo el campo id
+## de cada recurso. Verificacion por EFECTO (campo real), no por nombre de
+## archivo: el mapeo id -> archivo no es derivable del id.
+func _ids_items_reales() -> Dictionary:
+	var out := {}
+	var dir := DirAccess.open("res://data/items")
+	if dir == null:
+		return out
+	for fn in dir.get_files():
+		if not fn.ends_with(".tres"):
+			continue
+		var f := FileAccess.open("res://data/items/" + fn, FileAccess.READ)
+		if f == null:
+			continue
+		var texto := f.get_as_text()
+		f.close()
+		for linea in texto.split("\n"):
+			if linea.begins_with('id = "'):
+				var partes := linea.split('"')
+				if partes.size() >= 2:
+					out[partes[1]] = fn
+				break
+	return out

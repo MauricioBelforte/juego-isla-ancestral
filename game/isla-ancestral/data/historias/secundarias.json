@@ -598,6 +598,402 @@
 			"consecuencia": { "tecnica_del_yunque_recuperada": true },
 			"oculta": false,
 			"postgame": false
+		},
+		{
+			"id": "cadena-registro-del-faro",
+			"titulo": "El Registro del Faro",
+			"contexto": "Vera guarda el cuaderno de bitacora de sus antepasados fareros y quiere saber que luces se encendian antes de que el faro actual existiera",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "vera_ardilla"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "faro"
+				},
+				{
+					"id": "p3",
+					"tipo": "puzzle",
+					"ref": "alturas-de-la-luz"
+				},
+				{
+					"id": "p4",
+					"tipo": "entregar",
+					"objeto": "OBJ-LUZ-012"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-registro-del-faro",
+				"cosmetico": "lente de farero"
+			},
+			"consecuencia": {
+				"registro_del_faro_recuperado": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-catalogo-perdido",
+			"titulo": "El Catálogo Perdido",
+			"contexto": "Sofia encontro una ficha de catalogo sin numero y sospecha que el cuaderno completo sigue en los estantes altos de la biblioteca",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "sofia_buho"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "biblioteca"
+				},
+				{
+					"id": "p3",
+					"tipo": "puzzle",
+					"ref": "signos-en-los-margenes"
+				},
+				{
+					"id": "p4",
+					"tipo": "entregar",
+					"objeto": "OBJ-EST-006"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-catalogo-perdido",
+				"cosmetico": "exlibris de la isla"
+			},
+			"consecuencia": {
+				"catalogo_perdido_devuelto": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-mediciones-de-la-isla",
+			"titulo": "Las Medidas de la Isla",
+			"contexto": "Pablo heredo unas anotaciones geodesicas incompletas y quiere completarlas midiendo la sombra del mediodia desde el observatorio",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "pablo_pato"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "observatorio"
+				},
+				{
+					"id": "p3",
+					"tipo": "puzzle",
+					"ref": "sombras-del-mediodia"
+				},
+				{
+					"id": "p4",
+					"tipo": "entregar",
+					"objeto": "OBJ-REL-002"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-mediciones-de-la-isla",
+				"cosmetico": "cinta de medir de cuero"
+			},
+			"consecuencia": {
+				"mediciones_de_la_isla_recuperadas": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-mapa-de-las-plantas",
+			"titulo": "El Mapa de las Plantas",
+			"contexto": "Teo dibuja un mapa de las hierbas de la isla pero le faltan las marcas del sector oeste y nadie mas conoce esos senderos",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "teo_conejo"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "jardines"
+				},
+				{
+					"id": "p3",
+					"tipo": "puzzle",
+					"ref": "tinta-de-hojas"
+				},
+				{
+					"id": "p4",
+					"tipo": "entregar",
+					"objeto": "OBJ-HER-015"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-mapa-de-las-plantas",
+				"cosmetico": "lamina botanica"
+			},
+			"consecuencia": {
+				"mapa_de_plantas_dibujado": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-cartas-estelares",
+			"titulo": "Las Cartas Estelares",
+			"contexto": "Sofia encontro cartas de navegacion dibujadas sobre las estrellas y quiere verificar si el cielo de la isla sigue coincidiendo con ellas",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "sofia_buho"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "observatorio"
+				},
+				{
+					"id": "p3",
+					"tipo": "puzzle",
+					"ref": "reloj-de-estrellas"
+				},
+				{
+					"id": "p4",
+					"tipo": "entregar",
+					"objeto": "OBJ-LUZ-008"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-cartas-estelares",
+				"cosmetico": "planisferio de bolsillo"
+			},
+			"consecuencia": {
+				"cartas_estelares_descifradas": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-templo-de-las-24-marcas",
+			"titulo": "El Templo de las 24 Marcas",
+			"contexto": "Pablo encontro fragmentos de arcilla con 24 marcas distintas y cree que pertenecen a la puerta de un templo anterior a la isla",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "pablo_pato"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "templo_24"
+				},
+				{
+					"id": "p3",
+					"tipo": "entregar",
+					"objeto": "OBJ-TAL-004"
+				},
+				{
+					"id": "p4",
+					"tipo": "puzzle",
+					"ref": "sellos-de-arcilla"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-templo-de-las-24-marcas",
+				"cosmetico": "sello de arcilla"
+			},
+			"consecuencia": {
+				"templo_de_las_24_marcas_abierto": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-templo-de-los-25-engranajes",
+			"titulo": "El Templo de los 25 Engranajes",
+			"contexto": "Bruno escucho un tic-tac bajo el suelo del taller y encontro un plano con 25 engranajes que nadie supo explicar",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "bruno_sapo"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "templo_25"
+				},
+				{
+					"id": "p3",
+					"tipo": "entregar",
+					"objeto": "OBJ-HER-018"
+				},
+				{
+					"id": "p4",
+					"tipo": "puzzle",
+					"ref": "mecanismo-escondido"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-templo-de-los-25-engranajes",
+				"cosmetico": "engranaje de bolsillo"
+			},
+			"consecuencia": {
+				"templo_de_los_25_engranajes_abierto": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-templo-de-las-26-mareas",
+			"titulo": "El Templo de las 26 Mareas",
+			"contexto": "Luna descubrio que 26 tintes distintos se reparten igual que las mareas del ano y sospecha de un templo que marcaba las estaciones",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "luna_zorra"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "templo_26"
+				},
+				{
+					"id": "p3",
+					"tipo": "entregar",
+					"objeto": "OBJ-PLA-004"
+				},
+				{
+					"id": "p4",
+					"tipo": "puzzle",
+					"ref": "tintes-del-templo"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-templo-de-las-26-mareas",
+				"cosmetico": "paleta de 26 tintes"
+			},
+			"consecuencia": {
+				"templo_de_las_26_mareas_abierto": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-ruinas-del-barrizal",
+			"titulo": "Las Ruinas del Barrizal",
+			"contexto": "Catalina encontro piedras labradas entre el barrizal y cree que las ruinas escondidas piden una ofrenda para mostrar su escalon",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "catalina_oso"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "barrizal"
+				},
+				{
+					"id": "p3",
+					"tipo": "entregar",
+					"objeto": "OBJ-ITE-021"
+				},
+				{
+					"id": "p4",
+					"tipo": "puzzle",
+					"ref": "ofrenda-de-la-ruina"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-ruinas-del-barrizal",
+				"cosmetico": "cuchara de ofrenda"
+			},
+			"consecuencia": {
+				"ruinas_del_barrizal_leidas": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-ruinas-del-manantial",
+			"titulo": "Las Ruinas del Manantial",
+			"contexto": "Teo vio raices que crecen sobre piedras rectas y intuye que debajo del manantial hay ruinas que el agua mantuvo ocultas",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "teo_conejo"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "manantial"
+				},
+				{
+					"id": "p3",
+					"tipo": "entregar",
+					"objeto": "OBJ-NAT-024"
+				},
+				{
+					"id": "p4",
+					"tipo": "puzzle",
+					"ref": "raices-en-la-piedra"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-ruinas-del-manantial",
+				"cosmetico": "lampara de raiz"
+			},
+			"consecuencia": {
+				"ruinas_del_manantial_leidas": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-ruinas-del-acantilado",
+			"titulo": "Las Ruinas del Acantilado",
+			"contexto": "Vera noto que el viento del acantilado repite un sonido hueco y cree que unas ruinas enterradas responden con un eco",
+			"pasos": [
+				{
+					"id": "p1",
+					"tipo": "hablar",
+					"npc": "vera_ardilla"
+				},
+				{
+					"id": "p2",
+					"tipo": "explorar",
+					"lugar": "acantilado"
+				},
+				{
+					"id": "p3",
+					"tipo": "entregar",
+					"objeto": "OBJ-LUZ-004"
+				},
+				{
+					"id": "p4",
+					"tipo": "puzzle",
+					"ref": "eco-de-las-ruinas"
+				}
+			],
+			"recompensa": {
+				"diario": "capitulo-ruinas-del-acantilado",
+				"cosmetico": "caracola del acantilado"
+			},
+			"consecuencia": {
+				"ruinas_del_acantilado_leidas": true
+			},
+			"oculta": false,
+			"postgame": false
 		}
 	]
 }
