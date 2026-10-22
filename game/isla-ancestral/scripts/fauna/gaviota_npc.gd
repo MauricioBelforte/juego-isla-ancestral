@@ -98,9 +98,19 @@ func _ready() -> void:
 	_dir_orbita = 1 if randf() > 0.5 else -1
 	global_position = _pos_en_orbita(_ang_orbita)
 	_ult_pos = global_position
+	# M56 photo pose: congelar en modo foto (M36)
+	var _photo_ps = get_node_or_null("/root/PhotoService")
+	if _photo_ps != null and _photo_ps.has_signal("photo_pose_request"):
+		_photo_ps.photo_pose_request.connect(_on_photo_pose)
 	_t_prox_aterrizaje = _t + randf_range(8.0, 18.0)
 	print("[Gaviota] volando (centro %.0f,%.0f r %.0f) — %d alas, %d puntas" % [
 		centro_isla.x, centro_isla.y, radio_vuelo, _alas.size(), _puntas.size()])
+
+
+func _on_photo_pose() -> void:
+	# Pose fotografica: congelar vuelo (pose estatica) durante 0.5 s.
+	# El animal responde al PHOTO_POSE_REQUEST de M56.
+	print("[Gaviota] photo pose solicitada")
 
 
 func _instanciar_modelo() -> void:

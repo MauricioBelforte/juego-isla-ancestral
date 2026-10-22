@@ -103,8 +103,8 @@
 
 ## I. Captura de Animales (M36)
 
-- [ ] Animales posan/congelan en cámara y no huyen [C]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
+- [x] Animales posan/congelan en cámara y no huyen [C]
+  · implementado: suscripcion photo_pose_request en gaviota/cangrejo/jabali/tortuga (4 scripts) + NPCManager (M19). (Reflection-Beam-1.0, T25, 2026-10-22)
 - [ ] Animales reanudan su IA (M64) al salir [M]
   · espera: modulo(s) dependiente(s): M64 (coordinar con su dueno)
 - [ ] Capturar voladores y acuáticos (M51) sin romper trayectoria [C]

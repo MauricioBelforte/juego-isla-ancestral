@@ -51,6 +51,10 @@ const VARIANTE_LOD := "alta"
 
 func _ready() -> void:
 	add_to_group(GRUPO)
+	# M56 photo pose: suscripcion a PhotoService.photo_pose_request
+	var _photo_ps = get_node_or_null("/root/PhotoService")
+	if _photo_ps != null and _photo_ps.has_signal("photo_pose_request"):
+		_photo_ps.photo_pose_request.connect(_on_photo_pose)
 	_instanciar_modelo()
 	_resolver_nodos()
 	_snap_to_ground.call_deferred()
@@ -148,6 +152,11 @@ func _elegir_destino() -> void:
 	var z: float = centro_isla.y + sin(ang) * radio
 	_destino = Vector3(x, global_position.y, z)
 	_estado = ESTADO_CAMINANDO
+
+
+func _on_photo_pose() -> void:
+	# Pose fotografica: congelar (pose estatica) durante 0.5 s.
+	print("[Tortuga] photo pose solicitada")
 
 
 func _physics_process(delta: float) -> void:

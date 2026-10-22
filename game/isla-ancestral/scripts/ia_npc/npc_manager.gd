@@ -51,6 +51,7 @@ func _ready() -> void:
 	_suscribir_villager_manager()
 	_init_budget_registry()
 	_init_watchdog()
+	_suscribir_photo_service()
 
 
 func _process(delta: float) -> void:
@@ -61,6 +62,14 @@ func _process(delta: float) -> void:
 	if _tick_accumulator >= 5.0:
 		_tick_accumulator = 0.0
 		_report_budget()
+
+
+func _suscribir_photo_service() -> void:
+	"""Suscribirse a PhotoService.photo_pose_request para poses en modo foto (M56)."""
+	var ps = get_node_or_null("/root/PhotoService")
+	if ps != null and ps.has_signal("photo_pose_request"):
+		ps.photo_pose_request.connect(_on_photo_pose_request)
+		print("[NPCManager] Suscrito a PhotoService.photo_pose_request")
 
 
 func _suscribir_villager_manager() -> void:
@@ -113,6 +122,19 @@ func _on_poblacion_cambio(activos: Array) -> void:
 		var npc_id = v.name
 		if not _agents.has(npc_id):
 			_add_agent(npc_id, v)
+
+
+func _on_photo_pose_request() -> void:
+	"""Callback de PhotoService.photo_pose_request: solicita pose a todos los NPC activos."""
+	for npc_id in _agents.keys():
+		var agent = _agents[npc_id]
+		if agent == null or not is_instance_valid(agent):
+			continue
+		if agent.has_method("pose_foto"):
+			agent.pose_foto()
+		else:
+			print("[NPCManager] %s: sin metodo pose_foto() (M19 pendiente)" % npc_id)
+	print("[NPCManager] photo_pose_request recibido (%d agentes)" % _agents.size())
 
 
 ## M64 iter.N: Watchdog — NPC atascado detectado
