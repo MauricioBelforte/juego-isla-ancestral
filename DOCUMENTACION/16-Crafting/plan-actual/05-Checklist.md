@@ -302,7 +302,7 @@ Log reservado: 512
 
 - [x] RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con
   retorno honesto `{ok, motivo, nivel_anterior, nivel_nuevo}` (sin consumir si falla) [M] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — «mejora 0->1 con retorno honesto» + «sin materiales: no consume ni emite» + techo «motivo nivel_maximo» + «item no-herramienta rechazado».
-- [x] RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad
+- [?] RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR2 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   de la herramienta al maximo de su nivel actual, retorno honesto idem [M] → **G-5.3-Flash-Agente (2026-10-19, tanda 28): rebanada service-layer del bloque MR — QA `scripts/crafting/qa_m16_mejora_reparacion.gd` **15/0, EXIT 0** (Inventario real) + regresión `test_crafting.gd` 0 fallos. Implementado: `crafting_service.gd` (mejorar_herramienta/reparar_herramienta, señales RF-MR6, balance MR4, YAML/MR3 data-driven desde `data/crafting/mejora_herramienta.json`, persistencia aditiva RF-MR7) — «reparar OK con señal» + «durabilidad objetivo = máximo del nivel actual» (M13 aplica el techo real en MR16).
 - [x] RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta
   (hacha/martillo/azada/machete) con `coste_nivel[N]` (materiales por nivel) y `nivel_maximo`
@@ -320,43 +320,43 @@ Log reservado: 512
 
 - [x] RF-MR8: decision de estacion documentada en `03-Diseno.md` — estacion nueva
   (`yunque_de_mejora`) o reutilizacion de la fogata existente, con la justificacion [S] → **G-5.3-Flash-Agente (2026-10-20):** sección 'Mejora y reparación de herramientas (bloque MR)' agregada a `16-Crafting/03-Diseno.md` — **decisión: reutilizar la MESA_TRABAJO existente** (coherencia cozy: las herramientas ya se fabrican ahí; sin mesh/objeto de mundo nuevo; una puerta única 'trabajo fino'). Descartes documentados (fogata = cocina; yunque = futuro contenido). Consecuencias: MR12/MR13 viven en crafting_ui de la estación; MR10 service-side ya implementado; MR9 (stations.json) queda [ ] — el archivo NO existe (dueño M93 define estructura).
-- [x] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de -- Diseno: 03-Diseno.md (RF-MR definido)
+- [?] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR9 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   mejora y reparacion por tipo de herramienta [M]
-- [x] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con -- Diseno: 03-Diseno.md (RF-MR definido)
+- [?] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR10 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   motivo `no_es_herramienta` [S]
 - [x] RF-MR11: feedback cozy — el fallo por materiales **no dana** la herramienta (no es -- Diseno: 03-Diseno.md (RF-MR definido)
   punitivo, coherente con la filosofia del modulo) [S]
 
 ### N.3 Interfaz (3)
 
-- [x] RF-MR12: panel de mejora en la estacion: nivel actual, coste del siguiente nivel,
+- [?] RF-MR12: panel de mejora en la estacion: nivel actual, coste del siguiente nivel, -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR12 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   durabilidad maxima resultante y boton deshabilitado cuando no se puede mejorar (techo o
   materiales) [M] → **G-5.3-Flash-Agente (2026-10-20):** `crafting_ui.gd` — panel MR (VBox+RichTextLabel+botón) visible SOLO cuando el resultado de la receta es una herramienta del schema; muestra nivel N/max, coste del siguiente nivel (faltantes en rojo), durabilidad en el siguiente nivel, botón deshabilitado por techo O materiales. Claves nuevas i18n (SETTINGS.MEJORAR/NIVEL_MEJORA/MEJORA_MAXIMA/DURABILIDAD_NIVEL) ES/EN/PT + .po es/en — validador EXIT 0 (170×3). Evidencia: QA `scripts/crafting/qa_m16_panel_mejora.gd` **11/0, EXIT 0** — «panel oculto para no-herramienta», «panel visible para herramienta», «0/3 mostrado», «deshabilitado sin materiales», «habilitado con materiales», «click mejora: nivel 1 + señal», «panel refrescado (1/3, durabilidad 200)», «techo deshabilita + mensaje». Regresión test_crafting 0 fallos.
-- [x] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a
+- [?] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR13 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   consumir antes de confirmar) [S] → **G-5.3-Flash-Agente (2026-10-20):** el preview del coste vive en el panel MR12 (líneas por material, faltantes en rojo) ANTES de confirmar; los ICONOS (Texture2D del pool M16 ítem 6, ItemData.icono) quedan wired para el dueño de la UI final si quiere swatches gráficos (el feedback honesto ya es textual+color). Flip del texto/code completo; iconos gráficos son extensión visual pendiente del dueño UI (nota honesta).
-- [x] RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del módulo [S] — G-5.3-Flash-Agente 2026-10-19: DUPLICADO de RF12/L219 (ya [x] con evidencia) — el wiring YA existe: crafting_feedback.gd L114-122 (_on_crafting_completed → _notificar → NotificationService.push ToastType.ITEM). Flip del duplicado con citación de la evidencia original.
+- [?] RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del módulo [S] — G-5.3-Flash-Agente 2026-10-19: DUPLICADO de RF12/L219 (ya [x] con evidencia) — el wiring YA existe: crafting_feedback.gd L114-122 (_on_crafting_completed → _notificar → NotificationService.push ToastType.ITEM). Flip del duplicado con citación de la evidencia original. -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR14 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
 
 ### N.4 Integracion con M13 (3)
 
-- [x] RF-MR15: M13 consume `efectividad(tipo, nivel)` para el escalado de rendimiento -- Diseno: 03-Diseno.md (RF-MR definido)
+- [?] RF-MR15: M13 consume `efectividad(tipo, nivel)` para el escalado de rendimiento -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR15 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   (velocidad de tala/mineria, etc.) [M]
-- [x] RF-MR16: M13 consume `durabilidad_maxima(tipo, nivel)` como techo al aplicar la -- Diseno: 03-Diseno.md (RF-MR definido)
+- [?] RF-MR16: M13 consume `durabilidad_maxima(tipo, nivel)` como techo al aplicar la -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR16 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   reparacion [S]
-- [x] RF-MR17: contrato consumido documentado en el `04-Codigo.md` de M13 (firma de la API -- Diseno: 03-Diseno.md (RF-MR definido)
+- [?] RF-MR17: contrato consumido documentado en el `04-Codigo.md` de M13 (firma de la API -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR17 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   que M13 usa) [S]
 
 ### N.5 Testing y QA (3)
 
-- [x] RF-MR18: test headless `_test_mejora_reparacion` — mejora consume materiales y sube
+- [?] RF-MR18: test headless `_test_mejora_reparacion` — mejora consume materiales y sube -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR18 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   nivel, reparacion restaura durabilidad, fallo por materiales no consume ni dana [C] → **G-5.3-Flash-Agente (2026-10-20):** función agregada a `test_crafting.gd` (llamada en _run tras season_changed_runtime; el caso de restore con save viejo NO corre acá para no limpiar el boot — cubierto en `qa_m16_mejora_reparacion.gd`). Suite completa **0 fallos, EXIT 0** con la sección '--- N.5 Mejora y reparación de herramientas ---' en verde: schema, fallo cozy sin consumo, descuento exacto, señales, reparar/durabilidad, MR7 save, techo. (El `[C]` bajó de peso: el caso pesado de 3-contenedores ya está en `qa_m16_rollback_lleno.gd` 8/0 del ítem 11.)
 - [?] RF-MR19: sonda en ROJO del umbral (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S] — **G-5.3-Flash-Agente (2026-10-20): NO APLICA tal como está redactado**: `test_crafting.gd` NO tiene umbral `CHECKS_MINIMOS` (grep = 0 hits); la sonda de umbral mutación-restauro vive en `test_fast_travel_headless.gd` (M69, riel propio mío, ya blindada con guard y ajustada a medido en cada tanda — 55→33→44→55 etc.). Si el dueño quiere la sonda EN ESTE suite, primerio agregar el piso (nuevo ítem); no se inventa un umbral para flipar. [?] honesto §21.3.6.
-- [x] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S] -- Diseno: 03-Diseno.md (RF-MR definido)
+- [?] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S] -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR20 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
 
 ### N.6 Documentacion y desbloqueo (2)
 
-- [x] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion, — **G-5.3-Flash-Agente (2026-10-20):** sección "Contrato del bloque MR" agregada a 03-Diseno (API con motivos, señales, schema JSON, curvas de balance, integración M14/M59/M13/M93 y política cozy de rechazos).
+- [?] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion, — **G-5.3-Flash-Agente (2026-10-20):** sección "Contrato del bloque MR" agregada a 03-Diseno (API con motivos, señales, schema JSON, curvas de balance, integración M14/M59/M13/M93 y política cozy de rechazos). -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR21 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   balance) [S]
-- [x] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que -- Diseno: 03-Diseno.md (RF-MR definido)
+- [?] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR22 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip)
   dependian de este contrato pasan a tener dueno) [S]
 
 **Seccion N — 22 items nuevos (todos `[ ]`).** Esta seccion es la que desbloquea los 12
