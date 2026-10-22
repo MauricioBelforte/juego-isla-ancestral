@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T22:36:30",
+ "ultimo_update": "2026-10-22T22:55:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -44,9 +44,9 @@
   "disponible_desde": "2026-10-23"
  },
  "hy3": {
-  "estado": "acuse 323 verificado en disco (sin edicion) + standby confirmada; AUTORIZADO anticipo de encuesta M77/M151 (punto 4); mi 324",
+  "estado": "encuesta 325 reconocida como artefacto oficial (auto-dirigida, metodo punto 4); mi acuse 326 alinea serie; en stand-by para veredicto-muestra",
   "pendientes_real": 257,
-  "acuse_enviado": 324
+  "acuse_enviado": 326
  },
  "ling": {
   "estado": "219/220: T28 RATIFICADA (Bloques P/Q/R multi: M59 limpio; deuda festivals.tres M74 derivada); GO T29 multi-bloques",
