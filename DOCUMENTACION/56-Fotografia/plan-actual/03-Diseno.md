@@ -116,3 +116,38 @@ abrir álbum (photo_hud o diario M55)
 | M97 | Exportación local (Steam/OS) |
 | M58 | Reduce Motion: sin zoom automático en modo reduce |
 | M108/M118 | Importación y validación en CI |
+
+## 5. Definiciones de contenido del modo foto (S43 — G-5.3-Flash-Agente, 2026-10-23)
+
+**Presets (L50):** CUBIERTO en disco: `data/foto/foto_presets.json` con 6
+presets canon (natural, calido_playa, verde_selva, crepusculo_rojo,
+niebla_costera, pintura_retro) data-driven validados por FotoSchema. ACLARACION
+honesto: el item pedía `photo_presets.tres` pero la implementación real de
+M56 es JSON data-driven (foto_service.gd = RF5); el medio .tres no existe y
+no hace falta. QA nuevo `qa_m56_presets.gd`: 11/0 (carga, rango 6-8, 6 ids
+canonicos, validacion FotoSchema 0 errores).
+
+**Atajos del modo foto (L206, contrato M57):** P = entrar/salir del modo
+(tomar_foto ya usa P por canón M56 iter 3); ESPACIO = capturar la foto;
+RUEDA del mouse = zoom de lente (pasos 0.1, 30-120 mm); F1-F6 = aplicar
+preset 1-6 directo; Q/E = ciclo de filtro; GAMEPAD: Start = modo, A =
+capturar, gatillos = zoom. Sin atajos duplicados de accesibilidad M58 (los
+remaps del jugador mandan: los atajos del modo foto leen el remap M57).
+
+**Rejilla de tercios (L283):** overlay de encuadre con 2 líneas verticales
+y 2 horizontales al tercio (color blanco 40%, 1 px), más cruz en el centro;
+TOGGLE por tecla G dentro del modo foto (default OFF; recordado por preset si se pide en iter futura)
+. Solo dibujo UI, sin efecto en la foto capturada.
+
+**Sonido de obturador + vibracion (L287, M43/M57):**
+- SFX: `obturador_foto` -- click corto de camara (una capa mecanica + una de
+  cortina), -4 dB sobre el ambiente; se emite en la senal de captura
+  (PHOTO_TAKEN matchea el mismo instante).
+- Vibracion (M57): sutil 60 ms de intensidad baja en el gamepad al
+  capturar (solo si hay gamepad activo; tolerante a ausencia).
+
+**Icono de camara en la bar (L289, M53/M46):** icono de camara lineicon (M46) en la barra de accesos como boton que abre/cierra el
+modo foto; estado activo con borde del color sello brisa; tooltip
+"Modo foto (P)". Icono sin color de fondo (solo silueta) para no pisar el
+HUD reloj/estado.
+
