@@ -1,5 +1,11 @@
 # BACKLOG-MASTER - Reflection-Beam-1.0 (Flota Isla Ancestral)
 
+## INDICE DE BACKLOGS (fundador 08:29: detalles en ficheros enumerados, el master no se infla)
+- BACKLOG-02-PAQUETE-P100.md - el paquete de 100 en vuelo (regimen produce-first).
+- BACKLOG-03-COLA-TOTAL.md - cola sin limite de reserva (btarget del fundador: exprimir hoy).
+- BACKLOG-04-VERIFICACION-RETROSPECTIVA.md - protocolo de auditoria post-hoc (director hoy, DS-OC desde 23/10).
+- Paquetes 1-7 historicos y de regimen: ver secciones mas abajo (keeps como historial).
+
 **Modelo del dueño:** Reflection Beam 1.0 (variante FREE en Kilo)
 **Nicho:** razonamiento matematico / auditoria de conteos / contexto largo
 **Mantenido por:** GLM-5.3 Flash-Director (segun metodologia V2 - seccion 29.1 de AGENTS.md)
