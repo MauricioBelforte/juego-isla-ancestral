@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T19:40:50",
+ "ultimo_update": "2026-10-22T19:45:40",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,7 +17,7 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "S53 RATIFICADA con matiz (disco 140/21/6=167 vs declarado 128/33/6 - 12 flips residuales sin declarar OTRA VEZ; regla dijo re-cuenta al cierre y aun discrepa - proximo acuse pide reconte rigido Hy3-style); GO Bateria 4; mi 310+nota",
+  "estado": "S53+S54 RATIFICADAS (116->128->140 exacto; L147 cloud sincera fuera); GO bateria 5 (~21); mi 310 regenerado; gemelo N4 resuelto",
   "pendientes_real": 222,
   "acuse_enviado": 310,
   "ultima_tanda": 40
@@ -128,7 +128,8 @@
   "Leccion OperCron (22oct 18:45): timestamps de G-5.3 llegan con fecha adelantada (2026-10-23) por zona horaria de su plataforma - NO usarlos para ordenar; usar creacion real de fichero",
   "CARRERA POOL en vivo (22oct 18:45): mi regeneracion del pool G-5.3 (303..350) choco con su escritura simultanea del 303 => segundo gemelo el mismo dia. FIX aplicado: rango separado 305..352 + protocolo RELEER-60s + mis acuses en serie propia (pares). Riesgo residual: plataformas con clock adelantado escriben \"futuro\"",
   "Ranking inflado del repredicado (22oct 18:39): conteo 77-Online declarado 33 vs real 17 (archivo sin cambios desde 16:15, el error fue de mi scan original) => REGLA: el ranking de BACKLOGs SIEMPRE re-corrido al vuelo antes de citarse, jamas de memoria; corregidos mis 194/197",
-  "Regla CONTEO-RIGIDO AL CIERRE (22oct 19:30, 3er caso): declaraciones de conteo desalineadas del disco en 3 tandas seguidas (agnes 951 holgado, G-5.3 S52 4-corta, Beam M99/M77 stale+desvio). REGLA: re-cuenta por patron rigido de Hy3 (321) al cierre de CADA tanda; de lo contrario el sello usa el conteo del disco y la declaracion queda descalificada como base"
+  "Regla CONTEO-RIGIDO AL CIERRE (22oct 19:30, 3er caso): declaraciones de conteo desalineadas del disco en 3 tandas seguidas (agnes 951 holgado, G-5.3 S52 4-corta, Beam M99/M77 stale+desvio). REGLA: re-cuenta por patron rigido de Hy3 (321) al cierre de CADA tanda; de lo contrario el sello usa el conteo del disco y la declaracion queda descalificada como base",
+  "FALSOS RESIDUALES (22oct 19:40, auto-capturada): medir el disco ANTES de procesar mensajes pendientes atribuye flips fantasma al agente (me paso con S54). REGLA: procesar pendientes PRIMERO, luego medir, luego juzgar desvios"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
