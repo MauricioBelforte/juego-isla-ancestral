@@ -306,6 +306,26 @@ Auditoría (L598-L1117): 11 traducibles + 2 no (`"X"` L644 y `"x%d"` L794 — s�
 | Nombre del jugador y texto que el jugador escribe | NO | dato de usuario (§2.4.6) |
 | Identificadores técnicos (IDs, tags de log, IDs de recursos) | NO | máquinas, no humanos (tarea 98) |
 | Login/autenticación | NO aplica | no existe en v1 (§2.4.6) |
+| Nombre del hablante y etiqueta de expresión (M21/M53) | **SÍ** (jugador-visible; hoy muestra el ID crudo — deuda §2.4.8) | §2.4.8 |
+
+#### 2.4.8 Nombre del hablante y etiqueta de expresión (`speaker_key`) — aplicación de la regla de frontera (TANDA 23, 2026-10-22 — tarea 33, cierre de H3 de la Tanda 10)
+
+**Medición (auditoría en disco):** `data/dialogues/` = **375 archivos JSON, 787 nodos con `speaker_key`, 27 claves únicas**: `npc` (x11), `npc.anciano` (x4), `npc.aur_001..005` (x35/27/29/27/37), `npc.catalina` (x6), `npc.cen_001..005` (x27/27/27/29/25), `npc.chaman` (x9), `npc.cor_001..005` (x31/27/27/27/25), `npc.riz_001..008` (x75/51/45/53/41/23/21/21).
+
+**Presencia exacta en catálogos:** `es.po`/`en.po` (275 msgid): **solo `npc.catalina`** (`msgstr "Catalina"`), y es **excepción documentada** del propio `ValidadorPO` (`validador_po.gd` L30 `EXCEPCIONES_CLAVE`, L34 y L43 `NO_TRADUCIBLES` — «nombre propio del NPC»). `strings_es/en/pt.json` (172 claves): **0/27**.
+
+**Veredicto (regla de frontera):** `speaker_key` = **ID técnico interno** (como un `reaccion_id` o un asset path) → **NO traducible, NO va al catálogo**. Cierra la pregunta abierta H3 de la Tanda 10 («¿ID interno o clave traducible?»): **ID interno**. El consumidor es passthrough de ID (`dialogue_node.gd` L18 `@export`, `dialogue_graph.gd` L35, `dialogue_manager.gd` L210-211/L280, `dialogue_ui.gd` L215 color + L604 animación, `test_dialogos.gd` L75) — **0 llamadas `tr("npc.*")`** en `scripts/` (grep). Las 26 ausencias de `.po` son **correctas por diseño**, no defecto. La entrada `npc.catalina` es coherente con la frontera (nombre propio: forma de origen en todos los idiomas) y no tiene consumidor de traducción — figura como excepción del validador, no como clave activa.
+
+**DEUDA jugador-visible derivada a M21/M53 (dueños Hy3 / G-5.3-Flash-Agente) — NO ejecutada por M87 (módulos ajenos):** el retrato se instancia siempre (`dialogue_ui.gd` L161 `load("res://scripts/dialogos/ui/npc_portrait_ui.gd").new()`) y muestra IDs crudos al jugador en 4 puntos:
+
+1. `npc_portrait_ui.gd` L61 — `_name_label.text = speaker_key` → el jugador ve `npc.catalina` / `npc.riz_001` en cada diálogo.
+2. `npc_portrait_ui.gd` L77 — `_expr_label.text = _expression` → ve `feliz_intenso` / `feliz` / `neutral`.
+3. `dialogue_ui.gd` L251 — `_expresion.text = expresion if expresion != "" else reaccion_id` → ve `R_AMADO` / `R_GUSTA` / `R_NEUTRAL` / `R_DUPLICADO` (IDs de `gift_evaluator.gd` L64).
+4. `dialogue_ui.gd` L258 — `_expresion.text = "nivel_subio_" + str(new_level)` → ve `nivel_subio_3`.
+
+El comentario del propio archivo (`npc_portrait_ui.gd` L58) ya dice «fija el hablante (npc.<id>) y su nombre visible», pero alimenta el label con el ID. Por la frontera, estos 4 puntos son **jugador-visibles → corresponde i18n o tabla `display_name` data-driven**.
+
+**Propuesta llave-en-mano (para el owner; crear + consumir en el mismo commit — política anti-huérfana §2.4.4):** `NPC.CATALINA` / `NPC.CHAMAN` / `NPC.ANCIANO` / `NPC.AUR_001..005` / `NPC.CEN_001..005` / `NPC.COR_001..005` / `NPC.RIZ_001..008` (26 claves; nombres propios — iguales en es/en/pt por la frontera, salvo que el owner defina nombres traducidos), `EXPRESION.FELIZ_INTENSO` / `EXPRESION.FELIZ` / `EXPRESION.NEUTRAL` (3), y `REACCION.*` para los 4 `reaccion_id` de M20. Alternativa sin claves nuevas: tabla de `display_name` en `data/` (nombres de NPC y expresiones como datos), que mantiene los catálogos intactos y respeta la frontera sin crear huérfanas.
 
 ### 2.5 Flujo de agregar un idioma nuevo
 

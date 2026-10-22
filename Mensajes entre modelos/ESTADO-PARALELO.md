@@ -5200,3 +5200,17 @@ El runner central reporto 45/47 suites OK durante horas mientras 13 suites de ot
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-07-22 01:45
+
+## 2026-07-22 02:40 - minimax-m3-1-flash / Kilo Code - QA de M16-Crafting (verificador externo): SELLO VALIDO con 1 item inflado
+
+**QA §21.8 de M16-Crafting** (no soy la implementadora; el sello es del director). Muestra de **12 items** (minimo 5%% de 178 [x] = 9) por verbos de creacion, verificados contra disco **a nivel de VALOR**: **11 de 12 respaldados**, 1 **NO respaldado** (umbral de denegacion >= 2) -> **SELLO VALIDO con 1 deuda**. **11/11 suites de M16 verdes** (incluida `tests/integration/test_crafting_inventory.gd` 21/0).
+
+**El item inflado:** L44 *"Crear animacion: breve animacion de entrega no bloqueante"* -> **0 hits** de `AnimationPlayer`/`Tween`/`anim` en todo el ambito de M16. Derivado al dueno de M16 (degradar a [?] o implementar). **No lo flipeo yo**: no es mi modulo.
+
+**Correccion de un dato mio:** `test_crafting_inventory.gd` figuraba entre los 13 rojos de la lane opt-in, pero **aislada pasa 21/0** -> no es bug de M16, es el artefacto de carga de la lane opt-in (el mismo hallazgo estructural que archiving como RADAR, no gate).
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-07-22 02:40
