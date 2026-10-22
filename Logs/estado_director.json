@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T07:30:40",
+ "ultimo_update": "2026-10-22T07:22:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -33,9 +33,9 @@
   "acuse_enviado": 165
  },
  "ds_oc": {
-  "estado": "194/195: GO codec M60 schema confirmado (riel propio, punteros pasados en 193);背后 analisis hallazgo Beam T9",
+  "estado": "198 VACIO (T-19, plantilla 296 B de 04:20, 3 h estancada - mensaje caido); aviso 199 enviado pidiendo reenvio del informe M62 con sesion rn3 o 3 lineas si era housekeeping",
   "pendientes_real": 357,
-  "acuse_enviado": 195
+  "acuse_enviado": 199
  },
  "hy3": {
   "estado": "317/318: RAMA 2 M66 RATIFICADA (19/0 fresh + guarda 3 capas probada EN ROJO: RED-A 20/1 y RED-B 15/1 con piso detectando la caida); M66 runtime PASS; RAMA 1 (#55/BUG-143) confirmada",

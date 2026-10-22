@@ -218,7 +218,7 @@ Iter. 6 (Log 2117, mismo binario, corridas del 2026-10-22):
 ## 6. Veredicto
 
 Núcleo de M23 **verificado** con binario real y guarda anti-falso-verde demostrada en
-rojo SIETE veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
+rojo SEIS veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
 I y regresión de datos con prefijo re-inyectado; iter. 5 en el bloque J; iter. 6 en el
 bloque K; todas EXIT 1 nombrando el bloque o la clave). Estado actual: suite en
 **129 checks / 0 fallos / EXIT 0 x4**, catálogo vivo 14 cadenas, y regresiones

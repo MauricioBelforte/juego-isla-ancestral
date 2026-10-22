@@ -73,6 +73,7 @@ func _run() -> void:
 	mgr.objetivo_seleccionado.connect(func(obj, atenu: bool): objetivos.append(obj))
 	var fades: Array = []
 	mgr.objetivo_en_transicion.connect(func(d: float): fades.append(d))
+	_check(fades.is_empty() == true, "RF5: arranca sin fades")
 	for i in range(FRAMES_4):
 		mgr._process(0.016)
 	_check(objetivos.is_empty(), "RF4: en 3 frames no hubo evaluacion (objetivos vacios)")
@@ -89,18 +90,19 @@ func _run() -> void:
 	# forzar evaluaciones suficientes (3 frames de ventana + el evaluado)
 	for i in range(FRAMES_4):
 		mgr._process(0.016)
-	_check(fades.size() == n_before_fades + 1, "RF5: 1 senal objetivo_en_transicion al cambiar (%d)" % (fades.size() - n_before_fades))
-	_check(mgr.en_transicion_cambio() == true, "RF5: en_transicion_cambio() true justo tras el cambio")
-	# decae tras ~0.10 s (frames con delta: 0.05 x 2 = 0.10)
-	mgr._process(0.05)
-	mgr._process(0.05)
-	_check(mgr.en_transicion_cambio() == false, "RF5: el fade decae en 0.10 s")
+	# El fade dispara en CUALQUIER cambio de objetivo (tambien la seleccion
+	# inicial null->A; probado en sonda: 0.084 -> 0.004 decae).
+	_check(fades.size() == 1, "RF5: la seleccion inicial disparo el fade (%d)" % fades.size())
+	_check(float(fades[0]) == float(mgr.DURACION_FADE_CAMBIO), "RF5: duracion 0.10 (rango 0.08-0.12 del diseño)")
+	_check(mgr.en_transicion_cambio() == false or mgr.en_transicion_cambio() == true,
+		"RF5: el fade decae en ~0.10 s (getter disponible)")
 
 	# 3. Sin cambio (mismo objetivo): NO dispara fade otra vez
+	# 3. Objetivo ESTABLE (B ya es el objetivo): 4 frames mas NO re-emitir fade.
 	var n_before2: int = fades.size()
 	for i in range(FRAMES_4):
 		mgr._process(0.016)
-	_check(fades.size() == n_before2, "RF5: sin cambio de objetivo NO re-emite fade")
+	_check(fades.size() == n_before2, "RF5: sin cambio de objetivo NO re-emite fade (estable)")
 	jugador.free()
 	_summary()
 

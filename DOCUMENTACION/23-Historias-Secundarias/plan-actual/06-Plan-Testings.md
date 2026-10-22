@@ -50,7 +50,7 @@ corre con el binario real:
 4. `_summary()` en un `call_deferred` **separado** del de `_run()`: si `_run()` aborta
    por un `SCRIPT ERROR` de runtime, el resumen corre igual, nombra los bloques
    faltantes, dispara el piso y sale con `quit(1)` — la suite **no cuelga**.
-5. Guardián probado EN ROJO por inyección de runtime, siete veces:
+5. Guardián probado EN ROJO por inyección de runtime, seis veces:
    - iter. 2 (`var _n: Node = null; _n.free()` tras el bloque B): EXIT 1, nombra
      C/D/E/F/G, «solo 11 checks (mínimo 40)».
    - iter. 3 (abort a mitad del bloque H, el nuevo): EXIT 1, nombra H, «solo 47 checks
