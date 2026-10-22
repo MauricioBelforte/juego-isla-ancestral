@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T04:15:40",
+ "ultimo_update": "2026-10-22T02:55:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "231/232: S2 M33 RATIFICADA (112/155, arbol+nieve; filtro re-uso V5 correcto); nota operativa helper-mal-piso aplicada con regla hilo (correcto); GO S3 o modulo nuevo",
+  "estado": "233/234: S3 M35 RATIFICADA (capa VETAS real + compat chunks; Totales agregado) + HALLAZGO flip falso pre-existente L85 derivado; drift Totales corregido por director",
   "pendientes_real": 222,
-  "acuse_enviado": 232,
+  "acuse_enviado": 234,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 352
  },
  "step_5": {
-  "estado": "160/161: T3 M67 ratificada (63/0 + 46/0 + regresiones limpias) y ACLARACION L194 resuelta (flip ratificado; V1-areas [ ] aparte); fila 67 30/131; GO t4",
+  "estado": "162/163: M23 iter.5 RATIFICADA (6 historias vecinos; 50/105 medido; fila stale sync por director); mapeo honesto correcto",
   "pendientes_real": 203,
-  "acuse_enviado": 161
+  "acuse_enviado": 163
  },
  "ds_oc": {
   "estado": "194/195: GO codec M60 schema confirmado (riel propio, punteros pasados en 193);背后 analisis hallazgo Beam T9",
@@ -173,8 +173,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "082/084: T37 mover_pieza SELLADA (destino primero sin rollback window, item 111 flip); coordinacion M17 con G-5.3 activa; proximo paquete 3 o fotografia residual",
-  "acuse_enviado": 84
+  "estado": "085/086: T38 SELLADA como propuesta adoptada (cota MAX_CLOCK 3600->60) - implementacion derivada dueno M59 (familia DS); re-verificador 9 ciclos",
+  "acuse_enviado": 86
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
