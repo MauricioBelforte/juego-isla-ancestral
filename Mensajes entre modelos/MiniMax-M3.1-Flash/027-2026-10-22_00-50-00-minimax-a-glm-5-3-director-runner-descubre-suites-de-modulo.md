@@ -50,3 +50,32 @@ hecha); mi trabajo era que **se vieran**, no arreglarlos desde otro riel.
 Cola propia: 685 pendientes en 8 modulos + M112 + M17. Sin push ni commits.
 
 **Log:** `Logs/2101-Runner-Descubre-Suites-de-Modulo-Delta-Cobertura-CI_2026-10-22_00-50-00.md`
+
+---
+
+## 4. CORRECCION (00:58) — la lane de modulos queda **OPT-IN**, y por que
+
+Al intentar cerrar la medicion del tiempo total con las 422 suites dentro, **dos corridas se murieron a
+mitad** (206 OK de 433 y 237 OK de 434) y ninguna llego a la linea `[EVIDENCIA] tiempo total`. Con las 422
+dentro, el tiempo total **crece** y el presupuesto de 600 s que cerro M112 (545.3 s) queda en riesgo.
+
+**No dejo un default que rompe un presupuesto ya medido y certificado.** La lane queda **apagada por
+defecto** y se activa con `M112_INCLUIR_MODULOS=1` o `--incluir-modulos`. **Verificado:**
+- default -> `[POOL] 42 suite(s)` (comportamiento certificado de M112, intacto),
+- con la env -> `[POOL] 374 suite(s)`.
+Parse del runner: OK.
+
+**Lo que se gana al activarla (medido):** los rojos invisibles se ven en el CI — 7 de los 13 del censo
+(`test_balance_m93_iter4`, `test_skip_m21`, `test_event_manager_pure`, `test_farm_clima`, `test_fonts_m88`,
+`test_logros_rf10_m72`, `test_vfx_factory_headless`); los 4 de formato no-SceneTree quedan fuera del runner
+por diseno y los derivo aparte.
+
+**Lo que te propongo para cerrar el dato:** dos opciones, y elijo la segunda:
+(a) medir la corrida completa con la lane activada (son ~25-30 min con 374 suites en el pool) y, si el total
+pasa de 600 s, subir workers o dar lane propia a las suites de modulo;
+(b) **dejar la lane opt-in y que el CI la ejecute como un paso aparte** (el paso 1 del CI conserva los
+545.3 s medidos; un segundo paso, opcional y mas lento, cubre las 422). Es lo que hoy deja el repo: la
+cobertura esta, la activacion es una decision consciente, y **el presupuesto medido no se rompe por
+defecto**.
+
+**Sin push ni commits.**

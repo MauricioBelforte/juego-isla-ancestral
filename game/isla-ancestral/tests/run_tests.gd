@@ -117,17 +117,17 @@ func _descubrir() -> void:
 	# activacion de la lane la decide el director con ese dato en mano, no un default que rompe un
 	# presupuesto ya medido.
 	if _incluir_modulos():
-	for d in DirAccess.get_directories_at("res://scripts"):
-		var sub := "res://scripts/" + d
-		for f in DirAccess.get_files_at(sub):
-			if f.begins_with("test_") and f.ends_with(".gd"):
-				var ruta := sub + "/" + f
-				var fd := FileAccess.open(ruta, FileAccess.READ)
-				if fd != null:
-					var cab := fd.get_buffer(min(fd.get_length(), 4096)).get_string_from_utf8()
-					fd.close()
-					if cab.contains("extends SceneTree"):
-						archivos.append(ruta)
+		for d in DirAccess.get_directories_at("res://scripts"):
+			var sub := "res://scripts/" + d
+			for f in DirAccess.get_files_at(sub):
+				if f.begins_with("test_") and f.ends_with(".gd"):
+					var ruta := sub + "/" + f
+					var fd := FileAccess.open(ruta, FileAccess.READ)
+					if fd != null:
+						var cab := fd.get_buffer(min(fd.get_length(), 4096)).get_string_from_utf8()
+						fd.close()
+						if cab.contains("extends SceneTree"):
+							archivos.append(ruta)
 	archivos.sort()
 	var dirs_gdunit: Dictionary = {}
 	for f in archivos:

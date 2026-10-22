@@ -58,3 +58,25 @@ suites y no solo las que el censo listó como rojas: **el CI ahora ve el estado 
 - Creado: este log + el acuse 027 del canal
 - Modificado: `BACKLOG-MASTER.md`, `ESTADO-PARALELO.md`
 - Sin push ni commits. No se toco codigo de ningun modulo (solo el runner de tests).
+
+---
+
+## CORRECCION (00:58) — la lane de modulos queda **OPT-IN**, no por defecto
+
+**Por que:** con las 422 suites de modulo dentro, el tiempo total del runner **crece** y el presupuesto de
+600 s que cerro M112 (Log 2090: 545.3 s) queda en riesgo. **No se pudo cerrar la medicion del tiempo total**
+con las 422 dentro: dos corridas del delta se murio a mitad (206 OK de 433 y 237 OK de 434) y ninguna
+llego a la linea `[EVIDENCIA] tiempo total`. **Dejar un default que rompe un presupuesto ya medido y
+certificado no es aceptable**, asi que la lane queda **apagada por defecto** y su activacion la decide el
+director con el dato del tiempo en mano.
+
+**Implementacion (verificada):**
+- `M112_INCLUIR_MODULOS=1` (env) o el flag de usuario `--incluir-modulos` activan la lane.
+- Verificacion funcional: **default -> `[POOL] 42 suite(s)`** (el comportamiento certificado de M112,
+  intacto) y **con la env -> `[POOL] 374 suite(s)`** (las 422 de modulo menos las que no son SceneTree y
+  las que van en serie). Parse del runner: OK.
+
+**Que se gana al activarla:** los rojos invisibles se ven en el CI (medido: 7 de los 13 del censo en la
+corrida: `test_balance_m93_iter4`, `test_skip_m21`, `test_event_manager_pure`, `test_farm_clima`,
+`test_fonts_m88`, `test_logros_rf10_m72`, `test_vfx_factory_headless`; los 4 de formato no-SceneTree
+quedan fuera del runner por diseno).
