@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T03:02:30",
+ "ultimo_update": "2026-10-22T04:28:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "229: AUTONOMIA PLENA por orden del fundador (mismo modelo): se busca tareas solo (2-BIS.2), llena su backlog solo <100, cerrado el ciclo silencioso (write real o nada), reporta al cerrar tanda; director muestrea tandas",
+  "estado": "230/231: M33 RATIFICADA (qa_farm_pausas 4 pruebas + fix deuda test del 17-10; 110/155 medido; fila sync propia); regimen 229 en su primer ciclo autonomo cerrado completo; GO siguiente (M35/cluster)",
   "pendientes_real": 222,
-  "acuse_enviado": 229,
+  "acuse_enviado": 231,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -171,8 +171,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T35 sellada 080: pose_foto() NPCAgent implementada (residuo end-to-end cerrado; AnimationPlayer queda follow); paquete fotografia completo end-to-end; PAQUETE 1 agotado",
-  "acuse_enviado": 80
+  "estado": "081: T36 M17 sellada (animar_colocacion hammer bounce verificado; item 221 flip); aditivo en modulo con dueno activo sin conflicto",
+  "acuse_enviado": 82
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {

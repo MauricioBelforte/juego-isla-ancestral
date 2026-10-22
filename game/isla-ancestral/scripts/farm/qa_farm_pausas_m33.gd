@@ -13,11 +13,14 @@
 #        calidad COMUN (A7), riego reanuda.
 #   3. "P25: agricultura decorativa — helecho ornamental sin rendimiento"
 #      - decorative_only=true -> calcular_rendimiento() devuelve [] siempre.
+#   4. "Arbol frutal en invierno: entra en DORMANTE y conserva cooldown"
+#      - is_tree con fruit_cooldown: estacion no apta -> DORMANTE con
+#        cooldown INTACTO; estacion apta -> retoma y cuenta dias de fruta.
 
 extends SceneTree
 
-const CHECKS_MINIMOS := 14
-const _WB_BLOQUES: Array[String] = ["_test_dormante_retoma", "_test_doble_pausa", "_test_sequia_sin_muerte", "_test_decorative_only"]
+const CHECKS_MINIMOS := 17
+const _WB_BLOQUES: Array[String] = ["_test_dormante_retoma", "_test_doble_pausa", "_test_sequia_sin_muerte", "_test_decorative_only", "_test_arbol_invierno"]
 var _checks: int = 0
 var _fallos: int = 0
 var _wb_vistos: Dictionary = {}
@@ -61,6 +64,8 @@ func _run() -> void:
 	_wb_vistos["_test_sequia_sin_muerte"] = true
 	_test_decorative_only()
 	_wb_vistos["_test_decorative_only"] = true
+	_test_arbol_invierno()
+	_wb_vistos["_test_arbol_invierno"] = true
 
 ## 1. DORMANTE retoma sin perdida (datos medibles sobre grown_days).
 func _test_dormante_retoma() -> void:
@@ -185,3 +190,33 @@ func _test_decorative_only() -> void:
 	t2.apply_daily_tick(0, false)
 	var r2: Array = t2.calcular_rendimiento()
 	_check(not r2.is_empty(), "control: sin decorative_only si rinde (%s)" % str(r2))
+
+## 4. Arbol frutal en invierno: DORMANTE conserva cooldown (item [S] K).
+func _test_arbol_invierno() -> void:
+	var def := CropDefinition.new()
+	def.crop_id = &"manzano_test"
+	def.seasons = [0, 1, 2]  # todo menos invierno (3)
+	def.grow_days = 4
+	def.stage_count = 3
+	def.water_need = 1
+	def.is_tree = true
+	def.yield_item_id = &"manzana"
+	var tile := CropTile.new()
+	tile.crop_def = def
+	tile.fruit_cooldown = 2  # en periodo frutal (simula cosecha previa)
+	var inv_antes: int = tile.fruit_cooldown
+	# Invierno (3): no apto -> DORMANTE y cooldown INTACTO
+	tile.water_level = 2
+	var cambio: bool = tile.apply_daily_tick(3, false)
+	_check(tile.stage == CropTile.GrowthStage.DORMANTE, "arbol: invierno -> DORMANTE")
+	_check(tile.fruit_cooldown == inv_antes, "arbol: DORMANTE conserva cooldown | %d" % tile.fruit_cooldown)
+	_check(not cambio, "arbol: pausa por estacion no cuenta como cambio de etapa")
+	# Primavera (0) apta con agua: retoma y cuenta dias de fruta
+	tile.apply_daily_tick(0, false)
+	_check(not tile.is_paused(), "arbol: retoma en primavera")
+	_check(tile.fruit_cooldown == inv_antes - 1, "arbol: cooldown decrementa en tick activo | %d" % tile.fruit_cooldown)
+	_check(tile.grown_days == 0, "arbol: en cooldown NO avanza grown_days | %d" % tile.grown_days)
+	# Otra vez invierno: DORMANTE de nuevo, cooldown preservado
+	var c1: int = tile.fruit_cooldown
+	tile.apply_daily_tick(3, false)
+	_check(tile.stage == CropTile.GrowthStage.DORMANTE and tile.fruit_cooldown == c1, "arbol: re-pausa conserva cooldown")

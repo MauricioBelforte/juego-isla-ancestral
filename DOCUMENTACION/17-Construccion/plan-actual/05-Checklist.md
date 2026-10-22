@@ -108,7 +108,7 @@
 - [ ] Subir/bajar la pieza una planta por pulsación con límite de altura [S]
 - [ ] El fantasma muestra la pieza en el nivel elevado sin flotar visualmente mal [M]
 - [x] Copiar una pieza colocada a la rejilla conserva su rotación [S] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `BuildManager.copiar_pieza(origen, destino)` copia conservando `rot` y cobra como colocación nueva; rechaza destino ocupado, origen vacío y sin recursos.
-- [ ] Mover una pieza desocupa las celdas originales solo al confirmar [C]
+- [x] Mover una pieza desocupa las celdas originales solo al confirmar [C]
 - [ ] Al mover, los recursos no se re-cobran (solo se reubican) [M]
 - [ ] Almacenar requiere inventario con espacio libre (M14) [M]
 - [ ] Demolición con ventana de confirmación y preview de lo que se devuelve [M]

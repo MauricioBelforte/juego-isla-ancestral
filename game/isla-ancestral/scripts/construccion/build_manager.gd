@@ -565,17 +565,16 @@ func mover_pieza(origen: Vector3i, destino: Vector3i) -> Dictionary:
 	var paso: int = _rotacion_de_estructura(e)
 	var c_ancla: Vector3i = ConstruccionTipos.celda_de_clave(ancla)
 
-	# 1) desocupar el origen para que la validacion del destino no se autobloquee
-	var celdas_viejas: Array = _celdas_de_estructura(e, r)
-	_baja_estructura(ancla)
-	# 2) validar el destino
+	# Item 111: validar el destino PRIMERO (sin desocupar el origen).
+	# Solo si la validacion pasa, se desocupan las celdas originales y se
+	# reubica la pieza. Asi el origen permanece ocupado hasta la confirmacion.
 	var res: Dictionary = validar_receta(r, destino, paso)
 	if not bool(res.get("ok", false)):
-		# rollback: volver a ocupar el origen
-		_alta_estructura(c_ancla, r, paso, e)
 		zona_rechazada.emit(destino, String(res.get("texto", "invalido")))
 		return res
-	# 3) reubicar
+	# Destino valido: ahora si desocupar origen y reubicar.
+	var celdas_viejas: Array = _celdas_de_estructura(e, r)
+	_baja_estructura(ancla)
 	var celdas_nuevas: Array[Vector3i] = r.celdas(destino, paso)
 	_mundo.borrar_voxel(celdas_viejas)
 	_mundo.escribir_voxel(celdas_nuevas, r.bloque)

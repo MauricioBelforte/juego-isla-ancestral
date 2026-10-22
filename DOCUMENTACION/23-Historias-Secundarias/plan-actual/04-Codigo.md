@@ -238,3 +238,42 @@ M59 `validate_save.gd` 16/0 «VALIDACIÓN OK» — todos EXIT 0, 0 SCRIPT ERROR.
   extiende el GO, se normaliza en una línea.
 - **Hallazgo que sigue abierto**: el puente M23→M55 degrada en silencio para la entrada
   `mision_cadena-biblioteca` (ausente del catálogo de M55; contenido de M55, dueño).
+
+## Iter. 5 — Historias de vecinos (Log 2107, 2026-10-22, Step-5-WorkBuddy)
+
+Tanda del 03-Diseno L31: de los 8 vecinos del diseño, el farero ya estaba cubierto por
+`cadena-faro` (iter. 3). Se agregaron al catálogo principal
+(`game/isla-ancestral/data/historias/secundarias.json`, 4 → 10 cadenas) las 6 que faltaban,
+una por vecino, con el patrón de producción (npc = id de `data/villagers/`, lugares y
+objetos narrativos salvo los que existen en `data/items/`):
+
+| id | título | npc (villager medido) | pasos | entrega |
+|---|---|---|---|---|
+| `cadena-panadera` | El Pan de la Abuela | `catalina_oso` (cocinera) | hablar/explorar/puzzle/entregar | `pan_fiesta` (narrativo) |
+| `cadena-carpintero` | El Banco Roto | `bruno_sapo` (carpintero) | hablar/explorar/entregar/puzzle | `madera_roble` (item REAL) |
+| `cadena-tejedora` | El Manto de la Niebla | `olivia_nutria` (sastra) | hablar/explorar/entregar/puzzle | `fibra_algodon` (item REAL) |
+| `cadena-pescador` | La Red del Viejo | `finneas_zorro` (pescador) | hablar/explorar/puzzle/entregar | `carrete_nuevo` (narrativo) |
+| `cadena-guarda` | El Sendero Cuidado | `nico_gato` (guardabosques) | hablar/explorar/entregar/puzzle | `madera_roble` (item REAL) |
+| `cadena-alquimista` | El Jarabe de la Luna | `teo_conejo` (herbolario) | hablar/explorar/puzzle/entregar | `jarabe_lunar` (narrativo) |
+
+- **Mapeo honesto de roles**: el diseño pide "panadera/doctora/tejedora/guarda/alquimista";
+  en disco NO existen esos roles — los 15 villagers medidos son trovadora, carpintero,
+  cocinera, pescador, artesana, granjero, mercader, guardabosques, sastra, ceramista,
+  herrero, bibliotecaria, herbolario y farera. Se usó el villager de rol más cercano
+  (cocinera→panadera, sastra→tejedora, guardabosques→guarda, herbolario→alquimista).
+- **La doctora queda `[?]`**: 0 NPC médicos en `data/villagers/`. NO se inventa el personaje
+  (crear un villager es contenido de otro dueño); el flip se otorga cuando el asset exista.
+- Consecuencias con clave PELADA y única (anti-repetición): `pan_fiesta_horneado`,
+  `banco_plaza_reparado`, `manto_niebla_terminado`, `red_pescador_reparada`,
+  `sendero_bosque_senalado`, `jarabe_lunar_listo`.
+- Suite `test_historias.gd`: bloque J nuevo (28 checks) con carga, fuente del principal,
+  unicidad de consecuencias y corrida end-to-end de DOS (`cadena-carpintero` con
+  `madera_roble` real del inventario y `cadena-alquimista` con objeto narrativo sembrado).
+  Piso 70 → **98 medido en verde** (98/0/EXIT 0, binario real).
+- Guardián probado EN ROJO por inyección de runtime en el bloque J
+  (`root.call("probe_inyeccion_rojo")`, aborta la función): EXIT 1 nombrando
+  «el bloque J NO se ejecuto» + «solo 71 checks (mínimo 98)». Inyección revertida y
+  verde restaurado verificado (98/0/EXIT 0).
+- Los objetos narrativos (`pan_fiesta`, `carrete_nuevo`, `jarabe_lunar`) siguen el patrón
+  de producción de `farol_cargado`/`semilla_antigua`/`tomo_antiguo`: el motor solo exige
+  que el objeto esté en el Inventario al reportar la entrega, no que exista `.tres`.
