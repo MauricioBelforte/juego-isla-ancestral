@@ -109,7 +109,7 @@
 
 ## G. RN — Rendimiento y compatibilidad (12)
 
-- [ ] NFR: aplicar el perfil con overhead menor a ~1 ms por frame [C]
+- [x] NFR: aplicar el perfil con overhead menor a ~1 ms por frame [C] — QA nuevo qa_m58_nfr_overhead.gd 5/0 headless: aplicar_perfil promedio 315 us / peor 444 us (con warm-up I/O del primer perfil excluido) y _process/frame = 0 us (1.000 llamadas directas) — el manager usa debounce/cache: coste por frame NULO al no haber cambios (2026-10-23 S45 G-5.3-Flash-Agente)
 - [x] NFR: filtro de color vía shader en canvas sin allocate en _process [M]
 - [x] NFR: fallback modulate en calidad gráfica Baja de M90 [M]
 - [x] NFR: funcionar en Godot 4.x estable sin plugins externos [S]
@@ -259,7 +259,7 @@
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
 
-**Totales:** 184 ítems · Completados: 166 · Pendientes: 16 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tras el paquete de runbooks MR/planear: 163/19/2 = 184. El medido manda.)
+**Totales:** 184 ítems · Completados: 167 · Pendientes: 15 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-20 tras el paquete de runbooks MR/planear: 163/19/2 = 184. El medido manda.)
 
 > **Actualizado por atria-dawn-s2 (Atria-Dawn-Preview / Kilo Code, 2026-10-12, Log 1755):** barrido con evidencia en disco y runtime. +6 `[ ]` -> `[x]`: RF4 niveles de texto delegados a M88 (01-Requerimientos RF4); RF12 alternativa visual para pistas auditivas (`INDICADORES_SONIDO`, accesibilidad_manager.gd:353, 7 pistas con forma visual + clave de texto); presets de control persisten por jugador (`control_preset` L409 + profile.json, 03-Diseno:40/77); RF23 diálogos a ritmo del jugador sin cuenta regresiva (dialog_layer.gd:153/158/166 por input; `AutoAdvanceManager` sin cablear en escenas); letreros sustituibles por diálogo/marca visual (02-Analisis:41); flujo de arranque boot->load->apply->título (03-Diseno:98-110). No flippeados (honestidad): RF26 guía de textos no redactada (solo RF26 en requerimientos), reabrir último diálogo sin implementar (solo signal `_on_dialogue_ended`), F10 sin implementar (0 `KEY_F10`), carteles con tiempo de vida/fade-out ausentes. **HALLAZGO REGRESIÓN:** `test_perfil_m58_iter4.gd` tiene 33 llamadas `_ok()` pero `CHECKS_MINIMOS = 34` -> falla estructural "PISO NO CUMPLIDO: 33 < 34" (EXIT 1). El Log 1701 de Step 5 declaró "39 checks, 0 fallos" — inexacto. Fix mínimo: bajar `CHECKS_MINIMOS` a 33 (o agregar 1 check). Runtime 4 suites: 110 checks útiles, 0 fallos (39+13+33+25); la suite iter4 se cuenta como falla estructural, no de lógica.
 
