@@ -3036,3 +3036,68 @@ decidida por el fundador en chat directo; infraestructura (carpeta + pool) prepa
 - **Modulos asignados (diseno matematico + auditoria):** 93-Balance (auditoria de sello: 134 [x] con dudas), 95-Monetizacion (94 [ ] de diseno economico, dueno historico inactivo), 137-Prototipo (123 [ ] de diseno, disponible), 157-Transporte (106 [ ] diseno), 142-RC (21 [ ] plan) y 144-PostLanzamiento (101 [ ] plan).
 - **PRUEBA EMPÍRICA (tanda 1 = calibracion):** re-verificacion con medicion propia de 6 conteos vivos de hoy (M23 42/61/1; M59 75/53/2; M72 total 182 vs 189 declarado; M102 141/142; M105 134/28; M90 249/249) + 2 hallazgos aritmeticos si los hay. Criterio de aprobacion: 6/6 conteos byte-exactos + reporte estructurado con fuente por linea. Evaluador: el director contrasta con medicion propia. Si aprueba -> flota plena; si falla en >= 2 conteos -> vuelve a vigilado.
 - **Reglas obligatorias que le aplican desde el minuto 0:** PASO 0 contexto persistente (Logs/estado_director.json), UTF-8 LF Python, numeracion 3 cifras con pool del canal destino, firma, espanol, 0 push, 0 auto-sello (independencia 21.8).
+
+## N.2 DATOS EMPIRICOS DE LA NOCHE 21-22 OCT 2026 (tandas reales verificadas por el director)
+
+Fuente: ~40 tandas ejecutadas y verificadas con muestreo del director en una noche (incluye T1-T35 de Beam,
+P1/P2/P3 + censo + lanes de MiniMax, tandas 48-55 de G-5.3). Cada afirmacion cita el mensaje y la verificacion en disco.
+
+### Beam 1.0 (Reflection-Beam-1.0) - throughput altisimo con calidad alta
+
+HIZO BIEN:
+- 35 tandas en ~4 h (calibracion 6/6 exacta incluida); re-verificador con 6 hallazgos reales (BUG-142, cap D8 M16, dirty flags M72, economias single-pass, puzzles D.13, tools D.14).
+- Paquete de fotografia COMPLETO end-to-end en una noche: Navigator + colision raycast + hora fijada + SubViewport 1080p + validador dedicado + poses signal + suscripciones M19/M36 + galeria LazyLoad + album versionado (~34 items + 2 tareas de dias).
+- Reportes SIEMPRE con limitaciones honestas (sin maquillar rojos) y NO auto-sello (pide QA cruzado).
+- Fix del parse error SUPERIOR a la sugerencia del director (elimina dup y reutiliza en vez de renombrar).
+- Aprende en 1 ciclo: un error de citación (D2/02 vs D3/03) se corrigio solo la vuelta siguiente.
+
+HIZO MAL:
+- Ediciones rapidas de funciones existentes SIN releer scope: introdujo clock duplicado (T21 parse error) y registros de flip ausentes (251/313 sin constar en el 05).
+- Conteo sesgado: declaro 78/53 cuando eran 76/51 (aritmetica por memoria, no por prefijo).
+- Fecha JULIO en nombre de archivo (su plataforma, mismo fallo de MiniMax).
+- Un reporte con basura JSON al final (artefacto de plataforma).
+- Flips documentales con parafrasis en vez de linea textual (2/28 degradados en T13, 3/50 en T14 corregibles).
+
+QUE DELEGAR PREDOMINANTEMENTE: picking documental por seccion [S]/[M], auditorias de balance con analisis matematico,
+implementacion de features bien espeficicadas en modulos sin dueño, verificaciones repetitivas. NO delegar: ediciones de
+funciones ajenas complejas (necesita releer scope), aritmetica de contadores sin prefijo (sesgo confirmado 3 veces).
+
+### MiniMax M3.1 Flash - infraestructura CI y honestidad material de elite
+
+HIZO BIEN:
+- P1 pool paralelo: 897 -> 545.3 s CON mas cobertura (2462 tests) y sin tocar CI; lane voxel serial -> 49/49 VERDE en 530.6 s (mitigacion BUG-141 completa a nivel CI).
+- CENSO MAYOR del proyecto: 471 suites totales, solo 49 en CI, 422 invisibilizadas, 13+2 rojos detectados y derivados a duenos (hallazgo de calibre estructural).
+- Wrapper integrador M17 en res://tests/ (498 checks en CI) y lane serie explicita MEDIDA (no heuristica).
+- HALLAZGO GRAVE con 2 fixes quirurgicos verificados: mi barrido havia commiteado photo_service roto bloqueando el CI entero. Lo reporto aunque no era su encargo.
+- Doble autocorrecion material en 24h con sondas (path real de la suite roja; causa real BUG-141 = deinit GDExtension, no el hilo de guardado).
+- Muestreo de valor (13/13 a nivel de datos): metodologia mas estricta del proyecto hasta hoy (canonico 21.8.2.b).
+
+HIZO MAL:
+- Fechas JULIO en nombre de archivo y firma (dos veces).
+- Pools auto-regenerados con duplicados (027/028, 033-105) que obligan saneo constante.
+- Diagnostico inicial de BUG-141 equivocado (hilo de guardado) por falta de sonda directa: lo corrigio el mismo, pero el fix derivado a,data_store fue un gasto evitable.
+
+QUE DELEGAR PREDOMINANTEMENTE: infraestructura CI/testing de elite, auditorias de cobertura, optimizador de pipelines,
+hallazgos de causas-raiz con sondas. NO delegar: nombres de archivo/fechas (descuido sistemico), ni diagnostico de causa
+sin sonda directa (exige sonda antes de la primera hipotesis).
+
+### G-5.3-Flash-Agente (mismo modelo del director) - escaneo metodologico y ejecucion de encargos
+
+HIZO BIEN:
+- Escaneo 2-BIS.2 autonoma: descubrio solo la trampa del mapa (28 modulos, ~1350 [ ] sin dueño) y corrigio su habito de standby.
+- Tanda 48: los 4 encargos consolidados ejecutados con decisiones de dueno documentadas (clamp D8, ROI doc, propuesta coste_ao A/B).
+- Reportes de guardia con medidas (filas y sondas) tras correccion del cron v6.
+
+HIZO MAL:
+- 4+ vueltas en "ciclo silencioso" esperando derivaciones en vez de ejecutar el escaneo (corregido con la autonomia plena del fundador 229).
+
+QUE DELEGAR PREDOMINANTEMENTE: encargos CONSOLIDADOS en un mensaje (4 en uno funciono mejor que 4 separados), escaneos
+deterministicos, tandas de implementacion con decision de dueño documentada. NO delegar sin: indicacion de autonomia
+explicita para que no espere derivaciones.
+
+### Regla empirica de delegacion (resumen del director)
+
+- Beam: ritmo y volumen (picking + modulo completo + propuestas). Control: muestreo por tanda.
+- MiniMax: las piezas que hacen que el CI mida TODO (infraestructura). Control: exigir sonda antes de hipotesis.
+- G-5.3: encargos consolidados + autonomia plena (mismo modelo que el director: gene facilities). Control: conteo por prefijo.
+
