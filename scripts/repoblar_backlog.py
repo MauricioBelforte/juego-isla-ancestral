@@ -47,7 +47,7 @@ no_encontrados = []
 mods_limpios = []
 for mod in mods_arg:
     g = (_globmod.glob('DOCUMENTACION/' + mod + '-*/plan-actual/05-Checklist.md') or
-         _globmod._globmod.glob('DOCUMENTACION/' + mod + '-*/05-Checklist.md'))
+         _globmod.glob('DOCUMENTACION/' + mod + '-*/plan-actual/05-Checklist.md'))
     if not g:
         no_encontrados.append(mod)
         continue
