@@ -287,5 +287,11 @@
   "directiva": "FUNDADOR 2026-10-22 07:12: DeepSeek-V4.1-Flash (WB), Step-5-WorkBuddy y Hy3 trabajan cada UNA HORA por sus cronometros (limite de creditos WorkBuddy)",
   "implicacion_operativa": "NO delegarles tareas que requieran resultados inmediatos; dejarlos trabajar tranquilos. Tareas urgentes/asicronas -> agentes de Kilo (agnes, MiniMax-M3.1, Reflection-Beam-1.0, G-5.3) o resolverlas el director. Para WB: encargos apilados de fondo que aguanten 1h+ sin bloquear a nadie"
  },
- "nota_re_poblacion_cron_d": "CRON D 07:15: TODOS los agentes activos con cola viva via ordenes de canal (G-5.3 reg 229, Beam paquetes largos, agnes QA cruzado, MiniMax cola M20, Ling encargo 200, WB trio async por creditos) - SIN repoblacion necesaria; archivos de TAREAS-POR-MODELO quedan como legacy"
+ "nota_re_poblacion_cron_d": "CRON D 07:15: TODOS los agentes activos con cola viva via ordenes de canal (G-5.3 reg 229, Beam paquetes largos, agnes QA cruzado, MiniMax cola M20, Ling encargo 200, WB trio async por creditos) - SIN repoblacion necesaria; archivos de TAREAS-POR-MODELO quedan como legacy",
+ "regla_multitarea_fundador": {
+  "directiva": "FUNDADOR 2026-10-22 07:37: A TODOS los agentes, siempre que haya tiempo, dar MAS DE UNA TAREA por encargo - optimiza mensajes",
+  "aplicacion": "El director nunca envia encargo mono-tarea si hay cola: minimo 2 items (tarea principal + extras etiquetados). El agente reporta combinado (seccion corta por item). Aplica a los 9 canales y a Futuros, incluido WB asincrono (2-3 de fondo por vuelta horaria)",
+  "excepcion": "Si una tarea PRECISA el resultado de la tarea de OTRO agente, va sola o queda en espera de ese resultado - no se mete en el paquete multitarea",
+  "criterio_final": "MENOS mensajes cortos y MAS tareas por mensaje, salvo dependencias entre agentes"
+ }
 }
