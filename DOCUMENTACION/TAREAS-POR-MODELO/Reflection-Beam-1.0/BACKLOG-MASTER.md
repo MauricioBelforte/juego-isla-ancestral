@@ -531,3 +531,19 @@ Regimen: UNA o DOS tareas [C] por ciclo (son tareas de DIAS). Formato de entrega
 - Nicho: terrenos/movimiento fisica+geometria - es TU matematica. Reclamo del modulo: DIRECTIVA FUNDADOR 2026-10-22 07:17 (doble tarea larga + backlog >100).
 - Work flow: igual que paquetes 1-7 - picking documental con linea textual, doble tanda por vuelta, reporte T- con evidencia.
 - ADVERTENCIA: NO tocar los items de escena que requieren editor Godot (clasificalos [ ] honestos como hiciste con 195/210/211/214).
+
+
+### PAQUETE P-100 (preparado por el director 2026-10-22 08:02 - EN ESPERA del resultado del P-30; benchmark del fundador)
+- Origen: barrido de [ ] disponibles hoy (501 en 9 modulos nicho-suyo, verificado por prefijo). Multi-mcontenido, SIN pisar dueños: M138 contenido = G-5.3; M17 codigo = MiniMax; M75 SOLO diseño en papel.
+- Reglas de cierre: linea textual obligatoria por flip (su estandar T59); editor/hardware-locked -> [ ] honesto con motivo 1 linea; reporte en UN mensaje al terminar (o por tandas si prefiere).
+- **M59-Guardado (12):** resto de verificaciones/documentacion [ ] (tras las 12 del P-30).
+- **M156-Terrenos (8):** items accionables por script/data (tras las 6 del P-30).
+- **M138-Vertical Slice (8):** SOLO mediciones/presupuestos tecnicos (subseccion Presupuesto tecnico de render (Beam)).
+- **M17-Construccion (10):** specs matematicas/docs (constantes, invariantes, conversiones) - SIN codigo.
+- **M70-Interacciones (15):** picking documental de items que pidan DEFINIR/DOCUMENTAR.
+- **M91-Configuracion-De-Audio (12):** items de configuracion con checks nombrados (su 05 tiene 20 [ ] rapidos).
+- **M75-Postgame (10):** SOLO diseño en papel de las 10 mas autonomicas (marcar si propuesta-papel; la implementacion depende del arranque del final - alerta de G-5.3).
+- **M137 (8) + M144 (4):** items documentales de fases que queden.
+- **Re-verificador (8):** muestreos de tandas recientes sin verificar: M73 agnes, M20 t2 MiniMax, M23 Step-5, M102 DS, S20-S22 G-5.3.
+- **Reserva (5):** escaneo propio - si su picking detecta agujeros documentales, propone items con fuente.
+- Total: 100. Si cierra todo, el fundador decide el siguiente lote (P-100 v2 u otro nicho).
