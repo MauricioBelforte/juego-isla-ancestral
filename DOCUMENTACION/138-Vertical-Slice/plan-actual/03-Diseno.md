@@ -264,6 +264,27 @@ intermedios invalidos: NO dormir durante dialogo activo.
 - Contrato: senal `guardado(slice_dict, motivo)` del sistema M60; la UI
   escucha y pinta; sin polling.
 
+## Contratos de animacion y SFX del talado (S30 2026-10-22)
+
+**Animacion de swing del Hacha (L21, input M48):** clip `hacha_swing`
+(AnimationPlayer del herramienta-node, contrato M48): duracion 0.35 s a
+30 fps (11 frames), evento de señal de impacto en el frame 8 (~0.27 s del
+corte, ventana de hit), raiz del personaje NO se mueve (solo brazos/herramienta);
+transicion de retorno via reset del nodo (sin blend_segundo). Coyote: un solo
+swing por click (no loop); can-busy durante la animacion (no talable otra vez
+hasta frame 10).
+
+**SFX de impacto + VFX de virutas (L22, inputs M43/M52):**
+- SFX `impacto_madera` (M43): un disparo por swing con hit acertado; volumen
+  -6 dB por debajo del ambiente (mezcla equilibrada M44); variante tonal por
+  arbol (2 pitches pregrabados, sin pitch-shifter runtime).
+- VFX `virutas_madera` (M52): 6-8 particulas cuadritas color madera clara
+  (emitter por hit point, contrato M52), vida media 0.4 s, gravedad
+  del proyecto; un burst por impacto; pool de 3 emitters reciclabes (sin
+  instanciar en runtime).
+- Contrato comun: senal `sen_impacto(pos)` del nodo herramienta; M43 (sfx)
+  y M52 (vfx) escuchan por senal, sin conexiones duras.
+
 ## Canon y estilo (M147)
 
 - Nombre del slice y su historico consume el canon M147 (glpts); toda

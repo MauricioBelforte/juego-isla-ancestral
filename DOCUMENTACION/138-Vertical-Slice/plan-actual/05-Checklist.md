@@ -18,8 +18,8 @@
 - [x] Definir madera como recurso clave del slice [S] — CONSOLIDADO G-5.3-Flash-Agente 2026-10-22: 03-Diseno seccion turno 2-BIS (arboles de Aurora, 5 bloques por derribo con Hacha 15 usos; alimenta mision 3 pasos + crafting minimo)
 - [x] Definir árbol con 5 bloques de madera [S] — CONSOLIDADO: 5 bloques/arbol, consume ~5 usos de la Hacha (15 total) por arbol entero; 03-Diseno seccion
 - [x] Definir Hacha con 15 usos de durabilidad [S] — CONSOLIDADO: 1 uso por swing, arbol entero ~5 usos, 10 restantes para el slice; feedback de ruptura a 0 via M43/M52 (profundo, fuera del alcance de esta seccion)
-- [ ] Definir animación de swing del Hacha (M48) [M]
-- [ ] Definir SFX de impacto y VFX de virutas (M43/M52) [M]
+- [x] Definir animación de swing del Hacha (M48) [M] — 03-Diseno contratos: clip hacha_swing 0.35 s/30 fps (11 frames), senal de impacto en frame 8 (~0.27 s), raiz sin mover, un swing por click, re-arm en frame 10 (2026-10-22 S30)
+- [x] Definir SFX de impacto y VFX de virutas (M43/M52) [M] — 03-Diseno contratos: sfx impacto_madera -6 dB bajo ambiente con 2 pitches pregrabados; VFX virutas 6-8 particulas 0.4 s con pool de 3 emitters (sin instanciar runtime); senal comun sen_impacto(pos) (2026-10-22 S30)
 
 ## C. Finneas (RF2)
 
@@ -222,7 +222,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 43 · Pendientes: 88 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 45 · Pendientes: 86 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).

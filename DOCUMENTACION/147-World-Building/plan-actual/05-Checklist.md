@@ -187,16 +187,20 @@
 
 ## Q. Economía Antigua (RF21)
 
-- [ ] Definir intercambio en la era antigua (trueque + AO origen) [M]
+- [x] Definir intercambio en la era antigua (trueque + AO origen) [M]
+  · evidencia: 03-Diseno.md secc. Economia y mapas (cola total, Reflection-Beam-1.0, T102, 2026-10-22)
 - [x] Definir derivación de la moneda AO moderna (M38) [M]
-- [ ] Definir qué valoraban los Arquitectos vs. los Jardineros [M]
-- [ ] Definir ruinas de mercados antiguos como lugares (M25) [M]
+- [x] Definir qué valoraban los Arquitectos vs. los Jardineros [M]
+  · evidencia: 03-Diseno.md secc. Economia y mapas (cola total, Reflection-Beam-1.0, T102, 2026-10-22)
+- [x] Definir ruinas de mercados antiguos como lugares (M25) [M]
+  · evidencia: 03-Diseno.md secc. Economia y mapas (cola total, Reflection-Beam-1.0, T102, 2026-10-22)
 - [x] Definir que la economía antigua explique el comercio actual [M]
 
 ## R. Mapas Antiguos (RF22)
 
 - [x] Definir mapas antiguos como coleccionables (M73) [M]
-- [ ] Definir mapas con rutas de islas ya hundidas [M]
+- [x] Definir mapas con rutas de islas ya hundidas [M]
+  · evidencia: 03-Diseno.md secc. Economia y mapas (cola total, Reflection-Beam-1.0, T102, 2026-10-22)
 - [ ] Definir mapas como pistas de puzzles (M24) [M]
 - [ ] Definir estilo visual de mapas antiguos (M46/M47) [M]
 - [ ] Definir que los mapas marquen lugares de la capa 4 sin revelarla [C]

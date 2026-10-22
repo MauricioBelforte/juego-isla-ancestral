@@ -326,3 +326,20 @@ Jugador obtiene Sello Brisa
 ### Limite: nada anacronico en manos del jugador
 - El jugador no obtiene tecnologia anacronica.
 - Coherente con el tono cozy.
+## Economia y mapas (cola total M147 batch 12)
+
+### Intercambio en la era antigua (trueque + AO origen)
+- Trueque como sistema de intercambio antiguo.
+- AO como moneda derivada del trueque.
+
+### Que valoraban los Arquitectos vs. los Jardineros
+- Arquitectos valoraban conocimiento y construccion.
+- Jardineros valoraban naturaleza y armonia.
+
+### Ruinas de mercados antiguos como lugares (M25)
+- Ruinas de mercados como lugares explorables.
+- Pistas de la economia antigua.
+
+### Mapas con rutas de islas ya hundidas
+- Mapas que muestran rutas de islas hundidas.
+- Pistas de exploracion.
