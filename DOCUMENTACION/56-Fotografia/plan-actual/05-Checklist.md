@@ -98,8 +98,8 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] No posar NPC en medio de diálogo (M21) [M]
   · espera: modulo(s) dependiente(s): M21 (coordinar con su dueno)
-- [ ] Restaurar animación del NPC al salir; testear poses en grupo (M19) [C]
-  · espera: modulo(s) dependiente(s): M19 (coordinar con su dueno)
+- [x] Restaurar animación del NPC al salir; testear poses en grupo (M19) [C]
+  · implementado: photo_service.gd photo_pose_request signal + posar() (emite signal, espera 0.8s, captura). M19 integra via signal. (Reflection-Beam-1.0, T24, 2026-10-22)
 
 ## I. Captura de Animales (M36)
 

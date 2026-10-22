@@ -1,11 +1,21 @@
 > **AUDITORÍA 2026-09-14 → RE-VERIFICADO 2026-09-15 (Log 916):** `agnes-2.5-flash` había marcado este módulo como completado sin verificación real; la auditoría revirtió **todo** a `[ ]`. Esa reversión se llevó también la iter. 2/3 del propio autor, que **sí** tenía test headless. En la iter. 4 se re-verificó con **3 suites (94 + 132 + 152 = 378 checks, 0 fallos ×3, 0 `SCRIPT ERROR`)** y se re-marcó **selectivamente**: sólo queda `[ ]` lo que no existe y `[?]` lo que no es verificable headless.
 
-**Modelo:** DeepSeek-V4.1-Flash
-**Plataforma:** WorkBuddy
-**Fecha:** 2026-09-15 (último modificador)
-**Historial:** documentación completa por Deepseek V4 Flash (OpenCode, 2026-08-17) · núcleo iter. 1 por deepseek-v4-flash (Kilo Code, 2026-09-01) · guardado asincrónico iter. 2 por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-11) · construcciones/backups/compresión/catálogos perezosos iter. 3 por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-11) · **re-verificación selectiva + cierre de huecos reales iter. 4 por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-15, Log 916)**
+**Modelo:** DS-V4.1-Flash-Opencode
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-21 (último modificador)
+**Historial:** documentación completa por Deepseek V4 Flash (OpenCode, 2026-08-17) · núcleo iter. 1 por deepseek-v4-flash (Kilo Code, 2026-09-01) · guardado asincrónico iter. 2 por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-11) · construcciones/backups/compresión/catálogos perezosos iter. 3 por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-11) · **re-verificación selectiva + cierre de huecos reales iter. 4 por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-15, Log 916)** · **schema v2 aditivo M18 (iter. 5) por DS-V4.1-Flash-Opencode (OpenCode, 2026-10-21)**
 
 # 05-Checklist.md — Módulo 60: Datos y Serialización
+
+## Adenda iter. 5 — schema v2 M18 (2026-10-21)
+
+- Estado: 🟡 Liberado (solo codec; no se reclama el módulo completo).
+- Agente: DS-V4.1-Flash-Opencode (OpenCode).
+- Alcance: `EstructurasCodec` acepta `fase/mejora/muebles/cofre/puertas` de forma aditiva, sin cambiar `CLAVES` ni `a_seccion()`; `BuildManager` preserva esos campos en restore/alta.
+- Salida: **sin cambio de conteo** (`188 [x] · 4 [ ] · 4 [?]`, 196). Suites: iter. 3 **147/0 ×3** (antes 132), base **94/0**, iter. 4 **152/0**, `test_construccion` **134/0 ×3**.
+- Deuda: cableado real `HouseManager` (M18) → provider y cierre de los ítems 20-22 de M59; no se marcan `[x]` sin prueba end-to-end.
+- Archivos: `scripts/datos/estructuras_codec.gd`, `scripts/datos/test_datos_m60_iter3.gd`, `scripts/construccion/build_manager.gd`, `scripts/construccion/test_construccion.gd`.
+- Log: pendiente (~2060).
 
 ## Reserva actual (iter. 4 — cerrada 2026-09-15)
 

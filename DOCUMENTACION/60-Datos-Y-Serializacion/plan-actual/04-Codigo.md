@@ -5,6 +5,8 @@
 # 04-Codigo.md — Módulo 60: Datos y Serialización
 
 > ⚠️ **ESTADO 2026-09-11: iter. 3 IMPLEMENTADA** por DeepSeek-V4.1-Flash (WorkBuddy). Núcleo iter. 1 por deepseek-v4-flash (Kilo Code, 2026-09-01) · guardado asincrónico iter. 2 (2026-09-11) · construcciones/backups/compresión/catálogos perezosos iter. 3 (2026-09-11). La estructura de archivos real difiere de la prevista (res://datos/ → res://scripts/datos/ por convención del proyecto); las firmas públicas se respetan con nombres reales.
+>
+> **Adenda 2026-10-21 (iter. 5, DS-V4.1-Flash-Opencode):** `estructuras_codec.gd` extendido con schema v2 aditivo (fase/mejora/muebles/cofre/puertas) y `BuildManager` preserva esos campos al restaurar/mover. Suites: iter. 3 **147/0 ×3**, base **94/0**, iter. 4 **152/0**; `test_construccion` **134/0 ×3**. No cambia el contrato base de `a_seccion()` ni `schema_version`.
 
 ## 1. Ubicación de archivos (REAL, implementado)
 
@@ -22,7 +24,7 @@ game/isla-ancestral/scripts/datos/
 ├── buildings_save_provider.gd  ← class_name BuildingsSaveProvider (ISaveProvider "buildings") — iter. 3
 ├── gestor_backups.gd           ← class_name GestorBackups (ventana de 3 copias .bak) — iter. 3
 ├── test_datos_m60.gd           ← Test headless de regresión (94 checks, 0 fallos)
-├── test_datos_m60_iter3.gd     ← Test headless iter. 3 (134 checks, 0 fallos)
+├── test_datos_m60_iter3.gd     ← Test headless iter. 3 + schema v2 (147 checks, 0 fallos)
 └── test_datos_m60_iter4.gd     ← Test headless iter. 4 (152 checks, 0 fallos)
 ```
 
@@ -101,6 +103,13 @@ Codec puro de la sección `buildings` (construcciones/casas, RF3 M17/M18). No co
 - `validar(estructuras) -> Array[String]` (vacío = OK): tipos, ids duplicados, límite.
 - `a_seccion(estructuras) -> Dictionary` / `desde_seccion(seccion) -> Array` — ida y vuelta tolerante.
 - `contar(estructuras) -> int`, `huella(estructuras) -> String` (CRC32 hex del JSON canónico, para diagnóstico).
+
+**Adenda iter. 5 — schema v2 aditivo para M18 (2026-10-21, DS-V4.1-Flash-Opencode):**
+
+- `CLAVES_OPCIONALES = ["fase","mejora","muebles","cofre","puertas"]`; `MAX_MUEBLES=512`, `MAX_SLOTS_COFRE=64`, `MAX_PUERTAS=64`, `MAX_CANTIDAD=999999`. `CLAVES` (base de 6) NO cambia y `a_seccion()` sigue devolviendo solo `{"structures":[...]}`: los campos nuevos son aditivos, sin bump de `schema_version` (migración implícita; ausente = default de M17/M18).
+- `normalizar()` copia los opcionales presentes y saneados; un campo ausente/vacío NO se agrega. Acepta alias `mejoras`→`mejora`, `pos`→`celda`, `id`→`mueble`, `slots`→`cofre.contenido` y grados→pasos de rotación.
+- `normalizar_muebles(v)` → `[{celda:[x,y,z], mueble:String, rotacion:0..3}]` (ordena por celda+mueble); `normalizar_cofre(v)` → `{contenido:[{item_id,cantidad}]}` (suma duplicados por `item_id`, ordena, cap); `normalizar_puertas(v)` → `[{celda,abierta}]` (deduplica por celda, última gana, ordena, cap); `celda_a_int32(v)` devuelve `[]` si la celda no es válida (no inventa `[0,0,0]`).
+- `validar()` extiende los chequeos a los opcionales (tipos, límites, celdas, rotación, cantidades) y mantiene los errores base. El detalle de la integración real M18 (HouseManager/HouseDecor/HouseStorage) queda fuera de esta adenda: el codec ya soporta el estado, pero el cableado al provider se valida por separado.
 
 ### 3.10 `buildings_save_provider.gd` — BuildingsSaveProvider (ISaveProvider) — iter. 3
 

@@ -18,6 +18,10 @@ signal preset_aplicado(preset_id: String)
 ## Contrato M56/04-Codigo §3 (evento PHOTO_TAKEN): emisor = captura.
 ## Suscriptor pendiente: diario M55 / logros M72.
 signal foto_tomada(ruta: String, resultado: Dictionary)
+## Contrato M56/M19 (RF4): emitido al activar posar. NPC (M19) y animales (M36)
+## responden con una pose fotografica (0.5 s). La captura se hace 0.8 s despues
+## para no capturar el tween de pose.
+signal photo_pose_request()
 
 const RUTA_PRESETS := "res://data/foto/foto_presets.json"
 ## Carpeta de fotos del jugador. user:// (read-only en res:// para builds).
@@ -165,9 +169,25 @@ func _hud_registrado() -> Node:
 ## Atajo `tomar_foto` (tecla P). Se consume por _unhandled_input para no pisar
 ## capas de UI que manejen su propio teclado (patrón de ui_manager.gd).
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("posar") and not _en_captura:
+		# Llamada sin await deliberada (patron tomar_foto).
+		posar()
+		return
 	if event.is_action_pressed("tomar_foto") and not _en_captura:
 		# Llamada sin await deliberada: _en_captura protege la ventana async y
 		# el resultado queda en foto_tomada()/return de tomar_foto().
+		tomar_foto()
+
+
+## Posar: emite PHOTO_POSE_REQUEST, espera 0.8 s (pose de NPC/animales),
+## luego captura. Si no hay NPC/animales, captura inmediata tras 0.8 s.
+func posar() -> void:
+	if not _activo or _en_captura:
+		return
+	photo_pose_request.emit()
+	print("[PHOTO-POSE] pose solicitada; captura en 0.8 s")
+	await get_tree().create_timer(0.8).timeout
+	if _activo and not _en_captura:
 		tomar_foto()
 
 

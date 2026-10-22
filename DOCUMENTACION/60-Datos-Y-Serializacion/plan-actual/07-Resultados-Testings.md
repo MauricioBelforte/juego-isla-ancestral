@@ -8,9 +8,9 @@
 | Suite | Checks | Fallos | Corridas | `SCRIPT ERROR` | Exit |
 |---|---|---|---|---|---|
 | `test_datos_m60.gd` | **94** | **0** | ×3 | 0 | 0 |
-| `test_datos_m60_iter3.gd` | **134** | **0** | ×3 | 0 | 0 |
+| `test_datos_m60_iter3.gd` | **147** | **0** | ×3 | 0 | 0 |
 | `test_datos_m60_iter4.gd` | **152** | **0** | ×3 | 0 | 0 |
-| **TOTAL** | **380** | **0** | 9 corridas | **0** | **0** |
+| **TOTAL** | **393** | **0** | 9 corridas | **0** | **0** |
 
 > **Nota (2026-10-05, T-018):** `iter3` pasó de **132** a **134** checks. El bloque
 > `BuildingsSaveProvider` daba **6 fallos + 1 aborto silencioso** (ver §1-bis): medía el
@@ -18,6 +18,11 @@
 > `fake.restauradas` vacío abortaba en `fake.restauradas[0]` (`SCRIPT ERROR: Out of bounds`),
 > descartando 2 checks sin contarlos. Corregido inyectando la fuente + **piso de checks
 > medido** (`CHECKS_MINIMOS := 134`).
+>
+> **Actualización 2026-10-21 (iter. 5, schema v2 M18):** `test_datos_m60_iter3.gd` pasó a
+> **147 checks / 0 fallos ×3** (el piso `CHECKS_MINIMOS := 134` se mantiene; 13 checks nuevos de
+> fase/mejora/muebles/cofre/puertas, alias, límites y validación). Regresión: base **94/0**,
+> iter. 4 **152/0**, `test_construccion` **134/0 ×3**. Total M60: **393/0**.
 
 Binario: `D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe`
 Invocación: `--headless --path game/isla-ancestral --script res://scripts/datos/<suite>.gd`
@@ -55,6 +60,28 @@ del código de producción**:
 | 3 | Aborto retirado | `134 checks, 0 fallos` · `OK` | **0** |
 
 Medición ×3 tras el fix: **134 checks, 0 fallos, 0 `SCRIPT ERROR`, exit 0** en las tres.
+
+## 1-ter. Verificación schema v2 M18 (2026-10-21, iter. 5)
+
+**Modelo:** DS-V4.1-Flash-Opencode · **Plataforma:** OpenCode · **Log:** pendiente (reserva ~2060)
+
+| Suite | Comando | Resultado | Exit |
+|---|---|---|---|
+| `test_datos_m60_iter3.gd` ×3 | `--headless --path game/isla-ancestral --script res://scripts/datos/test_datos_m60_iter3.gd` | **147 checks / 0 fallos** cada corrida | 0 |
+| `test_datos_m60.gd` | idem, `res://scripts/datos/test_datos_m60.gd` | **94 / 0** | 0 |
+| `test_datos_m60_iter4.gd` | idem, `res://scripts/datos/test_datos_m60_iter4.gd` | **152 / 0** | 0 |
+| `test_construccion.gd` ×3 | `--headless --path game/isla-ancestral --script res://scripts/construccion/test_construccion.gd` | **134 / 0**, 12 bloques cerrados | 0 |
+| `qa_m59_profile_id.gd` | `--headless --path game/isla-ancestral --script res://scripts/saving/qa_m59_profile_id.gd` | **11 checks / 0 fallos**, `r1=5=PROFILE_MISMATCH` | 0 |
+
+**Cobertura nueva (13 checks):** roundtrip de `fase/mejora/muebles/cofre/puertas`; alias
+(`mejoras`, `pos`, `slots`, grados); dedupe/suma de cofre; dedupe de puertas por celda; caps
+(512/64/64/999999); `celda_a_int32` inválida; `validar` de opcionales; no-aliasing; y
+preservación de opcionales en `BuildManager.restaurar_estructuras()`/`_alta_estructura()`.
+
+**No cubierto / deuda:** el cableado real `HouseManager` (M18) → `BuildingsSaveProvider` sigue
+siendo un `[?]` separado: `HouseManager.obtener_estructuras()` hoy emite solo `planta` y descarta
+`muebles`; el codec ya acepta el estado, pero el provider debe elegir fuente M17 vs M18 y
+transportar esos campos antes de cerrar los ítems 20-22 de M59.
 
 ## 2. Desglose de la suite iter. 4 (152 checks)
 

@@ -14,6 +14,8 @@
 
 **Reglas fijas:** reserva 🔵 §21.3 en los 4 registros antes de tocar módulos · UTF-8 §28 · independencia QA §21.8/§21.23 · no editar el backlog de otro modelo · marcas `[ ]/[→]/[x]/[?]` honestas.
 
+- [x] Log creado: **2099** — codec M60 schema v2 M18 + corrección del falso hallazgo `EMPTY_SLOT`/`PROFILE_MISMATCH` (QA M59) — 2026-10-21.
+
 ---
 
 # (A) COLA ACTIVA — 100+ TAREAS (tandas curadas por el director)
