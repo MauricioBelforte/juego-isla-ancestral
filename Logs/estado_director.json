@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T04:55:10",
+ "ultimo_update": "2026-10-22T07:20:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -43,9 +43,9 @@
   "acuse_enviado": 318
  },
  "ling": {
-  "estado": "209/210: T23 RATIFICADA (speaker_key NO-traducible, H3 cerrada con verificacion 4/4); deuda jugador-visible derivada M21/M53; T24 libre",
+  "estado": "213/214: T25 RATIFICADA (Bloque L report-only, censo medido); deuda T67 anotada para M39/M53/M37; GO T26",
   "pendientes_real": 112,
-  "acuse_enviado": 210
+  "acuse_enviado": 214
  },
  "crons_vigentes": {
   "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
@@ -152,7 +152,8 @@
   "M159: test_icons_m159.gd TIMEOUT >180 s -> agnes (911)",
   "BUG-141 fix de producto (latencia salida voxel) -> DeepSeek (fila 59)",
   "M93/M34: decision de diseno sobre margen de los 7 peces raros (>0.70 hasta 0.769, fishing.json) - documentar excepcion (<=0.77) o normalizar a <=0.70; validate_balance.gd no cubre fishing.json (hallazgo Beam T2, verificado por director)",
-  "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados"
+  "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados",
+  "T67 (Ling T25 22oct): LocaleUtils.format_number solo tiene 1 consumidor (transport_localizer M16); separador de miles sin adoptar en shop_ui.gd L183/L202 y museo_sign.gd L76 - duenos M39/M53/M37"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
