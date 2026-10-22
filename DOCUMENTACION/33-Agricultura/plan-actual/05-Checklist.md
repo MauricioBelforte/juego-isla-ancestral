@@ -61,8 +61,8 @@
 - [x] Definir water_need (1 o 2) por cultivo [S]
 - [x] Definir yields y yield_seeds como diccionarios de ítems [S] — crop_definition.gd yield_item_id/yield_amount_min/max + yield_seed_id/yield_seed_amount; calcular_rendimiento() los usa
 - [x] Definir flags is_tree, is_flower, is_ancestral, decorative_only [S] — crop_definition.gd @export vars (is_tree, is_flower, is_ancestral, decorative_only, fertilizer_bonus)
-- [?] Crear catálogo base de 16 .tres en res://data/farm/crops [S]
-- [?] Implementar CropCatalog.load_all con validación de IDs duplicados [M]
+- [x] Data-driven de cultivos via data/balance/farming.json (baya_roja, calabaza, fibra_algodon, tomate, zanahoria): BalanceService.get_farming() -> farm_service._cargar_definiciones L69-88 arma CropDefinition runtime (grow_days, rendimientos, temporada->seasons) [S] — REESCRITO 2026-10-22 (G-5.3-Flash-Agente, orden director msg 272): el item original (16 .tres en data/farm/crops + CropCatalog) no matcheaba ninguna implementacion (QA agnes 940 degradó a [?]); QA pausas M33 sobre el pipeline real: 35 checks, 0 fallos
+- [x] Unicidad de definiciones de cultivo garantizada por diseño: JSON no admite claves duplicadas y _definiciones[def.crop_id] (Dictionary) hace idempotente la carga (obtener_def por crop_id); no existe CropCatalog ni hace falta: la carga vive en farm_service [M] — REESCRITO 2026-10-22 (G-5.3-Flash-Agente, ord del director 272) con la misma evidencia del QA pausas (35/0)
 - [x] Implementar is_season_allowed y get_stage_visual_key [S]
 
 ## D. CropTile y estados (9)

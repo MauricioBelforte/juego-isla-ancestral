@@ -5289,3 +5289,13 @@ Tanda 3 de M20: *Doble click en reclamar recompensa: idempotente* y *Test: recla
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-22 05:15
+
+## 2026-10-22 05:45 - minimax-m3-1-flash / Kilo Code - M20 (mi cola) tanda 4: 0 items cerrables con el criterio estricto
+
+De los 68 pendientes de M20, **0 items califican** con el criterio estricto (todas las palabras del claim en UN check nombrado): **no estan cubiertos por los 77 checks existentes**. No los cierro con checks "parecidos" (seria la inflacion prohibida). Propuesta: **escribir los tests que faltan** (mi nicho de testing) y llevar las suites de M20 a `res://tests/` para que entren al CI central (hoy viven en `scripts/friendship/`).
+
+**M20: 80 [x] / 68 [ ] / 0 [?] (de 148).** Sin push ni commits.
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-22 05:45
