@@ -87,16 +87,33 @@ func _cargar_album_index() -> void:
 		return
 	var parsed = JSON.parse_string(f.get_as_text())
 	f.close()
+	# Compatibilidad con guardados antiguos (M60, item 313): si el indice es un
+	# Array plano (formato v0), migrar a {"version": 1, "fotos": [...]}.
+	if parsed is Array:
+		var arr: Array = parsed
+		_album_index = {"version": 1, "fotos": arr}
+		print("[M56] album index migrado de formato v0 (Array) a v1")
+		_guardar_album_index()
+		return
 	if not (parsed is Dictionary):
 		print("[M56] album index corrupto (no es Dictionary); usando defaults")
 		return
 	var d: Dictionary = parsed
-	if not d.has("version") or not d.has("fotos"):
-		print("[M56] album index corrupto (falta version/fotos); usando defaults")
+	if not d.has("fotos"):
+		# Formato intermedio: clave "photos" en vez de "fotos"
+		if d.has("photos") and d["photos"] is Array:
+			_album_index = {"version": 1, "fotos": d["photos"]}
+			print("[M56] album index migrado de clave photos a fotos")
+			_guardar_album_index()
+			return
+		print("[M56] album index corrupto (falta fotos); usando defaults")
 		return
 	if not (d["fotos"] is Array):
 		print("[M56] album index corrupto (fotos no es Array); usando defaults")
 		return
+	# Normalizar version (default 1 si falta)
+	if not d.has("version"):
+		d["version"] = 1
 	_album_index = d
 	print("[M56] album index cargado: %d fotos" % _album_index["fotos"].size())
 

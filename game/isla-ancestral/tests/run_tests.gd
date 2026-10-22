@@ -35,6 +35,16 @@ const POOL_ESPERA := 0.2
 ## Timeout por suite dentro del pool: con N workers la CPU se comparte y una suite que
 ## tardaba 40 s en serie puede tardar 3-4x mas. 300 s (el mismo que usa GdUnit4).
 const POOL_TIMEOUT_MS := 300000
+## Suites que dan TIMEOUT dentro del POOL y van a la lane SERIE (medido el 2026-10-22, lane opt-in
+## de modulos: 1787.2 s, 13 rojos + 2 timeouts). Motivo: son suites con esperas BASADAS EN FRAMES
+## (for i in range(N): await process_frame): en serie los frames van a velocidad normal y terminan en
+## ~60 s, pero con 6 workers compitiendo por la CPU la tasa de frames se desploma y el tope de 300 s
+## se agota. No son suites voxel (no pagan el deinit del GDExtension): son frame-heavy.
+## Como extenderla: cuando una suite del pool dé timeout, medirla en serie y añadirla aquí con el motivo.
+const LANE_SERIE_EXPLICITA: Array[String] = [
+	"res://scripts/vehiculos/test_vehiculos.gd",
+	"res://tests/unit/ui/test_inventory_unificado.gd",
+]
 
 ## Suites documentadamente excluidas (motivo honesto, no silencio).
 ## Vacío desde 2026-10-08 (T-M112 extra, frente A del msg 65): la única
@@ -83,12 +93,17 @@ func _initialize() -> void:
 			# VoxelTerrain/VoxelViewer pagan el deinit del GDExtension nativo (35-100 s medidas)
 			# y compiten entre si por los hilos -> van de UNA en UNA.
 			rutas_voxel.append(ruta)
+		elif LANE_SERIE_EXPLICITA.has(ruta):
+			# LANE SERIE EXPLICITA: suites frame-heavy que dan timeout dentro del pool (medido).
+			rutas_seriales.append(ruta)
 		elif _es_segura_para_pool(ruta):
 			rutas_pool.append(ruta)
 		else:
 			rutas_seriales.append(ruta)
 	if rutas_pool.size() > 0:
 		await _correr_pool(rutas_pool)
+	if LANE_SERIE_EXPLICITA.size() > 0:
+		print("\n[LANE SERIE EXPLICITA] %d suite(s) frame-heavy fuera del pool (daban TIMEOUT bajo carga)" % LANE_SERIE_EXPLICITA.size())
 	if rutas_voxel.size() > 0:
 		print("\n[LANE VOXEL] %d suite(s) EN SERIE (instancian VoxelTerrain/VoxelViewer: pagan el deinit del GDExtension, BUG-141)" % rutas_voxel.size())
 		for ruta in rutas_voxel:

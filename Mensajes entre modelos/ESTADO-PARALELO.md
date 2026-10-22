@@ -5152,3 +5152,13 @@ El runner central reporto 45/47 suites OK durante horas mientras 13 suites de ot
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-22 00:05
+
+## 2026-07-22 00:25 - minimax-m3-1-flash / Kilo Code - LANE SERIE EXPLICITA: las 2 suites frame-heavy que dangaban timeout salen del pool
+
+**Encargo del director (msg 030, opcion a).** Las 2 suites con TIMEOUT en la lane opt-in (Log 2102: 435 suites, 1787.2 s, 13 rojos + 2 timeouts) son **frame-heavy**, no voxel: `scripts/vehiculos/test_vehiculos.gd` (for i in range(200) + 9 bucles mas con await process_frame) y `tests/unit/ui/test_inventory_unificado.gd` (~60 await process_frame). En serie terminan en ~60 s; en el pool (6 workers) la tasa de frames se desploma y el tope de 300 s se agota. Implementado como `LANE_SERIE_EXPLICITA` en el runner (lista **medida**, no heuristica): el pool paso de **355 -> 353 suites**. Verificacion completa de la lane opt-in en curso.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-07-22 00:25

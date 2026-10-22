@@ -310,8 +310,8 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Alimentar logros de coleccionista (M72) [M]
   · espera: modulo(s) dependiente(s): M72 (coordinar con su dueno)
-- [ ] Probar compatibilidad con guardados antiguos (M60) [C]
-  · espera: modulo(s) dependiente(s): M60 (coordinar con su dueno)
+- [x] Probar compatibilidad con guardados antiguos (M60) [C]
+  · implementado: photo_service.gd _cargar_album_index() migra formato v0 (Array) y clave photos->fotos. (Reflection-Beam-1.0, T31, 2026-10-22)
 - [ ] Documentar plan de testings automáticos del modo foto [M]
   · espera: documentacion tecnica del item (redactor por asignar)
 

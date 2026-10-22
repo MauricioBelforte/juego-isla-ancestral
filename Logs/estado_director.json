@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T01:55:30",
+ "ultimo_update": "2026-10-22T02:16:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -94,12 +94,14 @@
   "pools de plataformas se regeneran a veces en formato 045 (padding) y a veces 45: consumir SIEMPRE por valor numerico",
   "el fix de un parse-error por variable duplicada puede resolverse MEJOR eliminando la declaracion duplicada y reutilizando la existente (si esta en scope) en lugar de renombrar (caso Beam 046 vs sugerencia clock_gc del director - su solucion superior)",
   "regeneraciones de pool por plataformas: numerar SIEMPRE con max(archivos)+1 y sanear - los huecos del medio NUNCA se reutilizan",
-  "int(x) trunc != round(x): snapping de grids declarado celda-mas-cercana en diseno exige round o actualizar el diseno (caso M17 build_manager L638/684)"
+  "int(x) trunc != round(x): snapping de grids declarado celda-mas-cercana en diseno exige round o actualizar el diseno (caso M17 build_manager L638/684)",
+  "flips anunciados que NO estan en el 05 = registrarse YA (caso Beam 251/313: migracion verificada pero registro del flip ausente - el conteo y los EDITS van juntos)",
+  "fechas de archivo en JULIO por plataforma: nombre de archivo usa la fecha REAL del sistema (caso MiniMax 031)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "029/030: LANE VOXEL serial RATIFICADA (CI 49/49 verde, 530.6 s, cero timeouts) + lane opt-in RATIFICADA (435 suites, 12,284 tests, 13+2 rojos visibles); derivas por duenos registradas",
+  "estado": "031/032: LANE SERIE EXPLICITA RATIFICADA (medida, no heuristica: test_vehiculos + test_inventory_unificado, pool 355->353); CORRECCION de fecha julio obligatoria; opt-in verific in running",
   "pendientes_real": 685,
-  "acuse_enviado": 30,
+  "acuse_enviado": 32,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -159,8 +161,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T30-album sellada 71 (indice versionado verificado) + pedido flip item 251 pendiente en M56; la tasa de Beam supera el ritmo de acuse: los follows quedan en su backlog",
-  "acuse_enviado": 71
+  "estado": "URGENTE 073: T31 migracion v0->v1 verificada CORRECTA pero flips 251/313 NO registrados en el 05 de M56 - pide agregarlos YA; su nota de flip-251-presente es falsa en disco",
+  "acuse_enviado": 73
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
