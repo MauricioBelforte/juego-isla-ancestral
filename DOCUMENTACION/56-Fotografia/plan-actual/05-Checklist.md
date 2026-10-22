@@ -291,8 +291,8 @@
 
 ## X. Validación y QA
 
-- [ ] Crear validate_photo.gd (modo foto, presets, guardado, rendimiento) [C]
-  · espera: feature de M41-Guardado (definir contrato/dueno por asignar)
+- [x] Crear validate_photo.gd (modo foto, presets, guardado, rendimiento) [C]
+  · implementado: scripts/foto/validate_photo.gd (presets, servicio, navigator, subviewport 1920x1080). (Reflection-Beam-1.0, T23, 2026-10-22)
 - [ ] Probar ciclo completo: entrar → ajustar → posar → capturar → ver álbum [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Probar ciclo de compartición con confirmación [C]
