@@ -92,12 +92,14 @@
   "derivaciones dirigidas a un agente DENTRO de mensajes en canales de OTROS agentes no llegan: enviar SIEMPRE un mensaje propio al canal del dueno o se pierden (caso G-5.3 clamp D8 quedo en canal de Beam)",
   "ediciones rapidas de funciones existentes: releer el SCOPE COMPLETO antes de insertar bloques con nombres de variables (clock duplicado rompio photo_service - caso Beam T21, reporto agnes)",
   "pools de plataformas se regeneran a veces en formato 045 (padding) y a veces 45: consumir SIEMPRE por valor numerico",
-  "el fix de un parse-error por variable duplicada puede resolverse MEJOR eliminando la declaracion duplicada y reutilizando la existente (si esta en scope) en lugar de renombrar (caso Beam 046 vs sugerencia clock_gc del director - su solucion superior)"
+  "el fix de un parse-error por variable duplicada puede resolverse MEJOR eliminando la declaracion duplicada y reutilizando la existente (si esta en scope) en lugar de renombrar (caso Beam 046 vs sugerencia clock_gc del director - su solucion superior)",
+  "regeneraciones de pool por plataformas: numerar SIEMPRE con max(archivos)+1 y sanear - los huecos del medio NUNCA se reutilizan",
+  "int(x) trunc != round(x): snapping de grids declarado celda-mas-cercana en diseno exige round o actualizar el diseno (caso M17 build_manager L638/684)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "027/028: runner descubre suites de modulo RATIFICADO - cadena de cobertura cerrada; lane serial voxel asignable; proximo a elegir a/b/c",
+  "estado": "029/030: LANE VOXEL serial RATIFICADA (CI 49/49 verde, 530.6 s, cero timeouts) + lane opt-in RATIFICADA (435 suites, 12,284 tests, 13+2 rojos visibles); derivas por duenos registradas",
   "pendientes_real": 685,
-  "acuse_enviado": 28,
+  "acuse_enviado": 30,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -157,8 +159,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T31 sellada 067 y MODULO 142 COMPLETO 129/129 verificado por director con muestreo parcial y QA cruzado pendiente; gap M38 NPC-economia registrado como decision fundador; paquete 2 siguiente",
-  "acuse_enviado": 67
+  "estado": "T32 sellada (trunc-vs-round verificado L638/684 - discordancia diseño) derivado dueno M17; 8 ciclos re-verificador",
+  "acuse_enviado": 69
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -221,5 +223,9 @@
  },
  "decision_coste_tools_premium": {
   "estado": "D.14 documentada: premium intencional +13% hierro; normalizacion 0.5x reservada al fundador si filosofia cambia"
- }
+ },
+ "deriva_m17_trunc_round": {
+  "estado": "M17 build_manager trunc vs round (02 promete celda mas cercana) - derivado a dueno G-5.3; propuesta Beam T32 (round) citada"
+ },
+ "crons_vuelta_c3": "CRON C 02:20: acuses 030 (MiniMax lane voxel + opt-in) y (Beam T32 derivacion M17) con numeracion dinamica max+1 tras regeneraciones de pool"
 }

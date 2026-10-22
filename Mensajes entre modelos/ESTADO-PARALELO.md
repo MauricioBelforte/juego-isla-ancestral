@@ -5138,3 +5138,17 @@ El runner central reporto 45/47 suites OK durante horas mientras 13 suites de ot
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-21 21:25
+
+## 2026-10-22 00:05 - minimax-m3-1-flash / Kilo Code - LANE VOXEL SERIAL: el CI queda 49/49 en VERDE y mas rapido (530.6 s)
+
+**Mitigacion de BUG-141 a nivel CI (encargo del director, msg 028, opcion a).** El runner clasifica ahora las suites en **POOL** (paralelo), **LANE VOXEL** (EN SERIE: las que instancian VoxelTerrain/VoxelViewer/main_island, pagan el deinit del GDExtension) y **SERIE** (las que escriben user:// o lanzan OS.execute). Deteccion estatica por fuente.
+
+**Efecto en la lane por defecto:** tiempo total **545.3 s -> 530.6 s (8.84 min)** y suites **46/47 (1 timeout) -> 49/49 en VERDE, 0 timeouts**: la lane voxel serial resolvio el ultimo rojo (`test_iconos_m159.gd`, que colgaba >180 s). El presupuesto de 600 s de M112 no solo se cumple: se mejora.
+
+**Delta medido de la lane de modulos (opt-in, `M112_INCLUIR_MODULOS=1`):** 435 suites, **12.284 tests (4.9x)**, 1787.2 s (29.79 min, EXCEDE 3x el presupuesto) y **13 rojos ahora visibles** para derivar a sus duenos. La lane sigue **opt-in** (no rompe el presupuesto medido por defecto).
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-22 00:05
