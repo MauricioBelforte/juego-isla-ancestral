@@ -1,0 +1,6 @@
+{
+  "firmas": {
+    "tools/mcp/blender-mcp/18-BIS-Casas-Grandes/CASA_01_CHOZA/BAJA/crear_casa_01_choza.py + tools/mcp/blender-mcp/18-BIS-Casas-Grandes/CASA_02_CASA_MEDIANA/BAJA/crear_casa_01_choza.py|31166": "MEDIDO 2026-10-22 (Log 2141): byte-identico (sha256 6b02317ff9f0, 31166 B). CASA_02_CASA_MEDIANA/BAJA tiene su PROPIO .blend/.glb (SM_CASA_02_CASA_MEDIANA_BAJA, 1608028/65936 B) pero su script fuente es el de la CHOZA sin adaptar: defecto de TRAZABILIDAD del asset, no copia redundante. NO se borra: es la unica fuente declarada de ese .glb. Dueno = M18-BIS (assets). Decision del director.",
+    "tools/mcp/blender-mcp/36-Fauna/nutria_ribera_alta.py + tools/mcp/blender-mcp/36-Fauna/scripts-blender/nutria_ribera_alta.py|16214": "MEDIDO 2026-10-22 (Log 2141): byte-identico (sha256 7977eee01f11, 16214 B). 36-Fauna/scripts-blender/ contiene UN SOLO archivo y es copia del de 36-Fauna/: subcarpeta creada por copia, no por migracion. Candidato a unificar (conservar el de la raiz, retirar el subdirectorio), pero toca el arbol de assets de otro modulo. Decision del director."
+  }
+}

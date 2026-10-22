@@ -80,7 +80,7 @@ DOCUMENTACION/TAREAS-POR-MODELO/
 ## Cómo usa otro modelo esta metodología (pasos)
 
 1. Crear su carpeta `<MODELO>/` con la identidad real (modelo + plataforma).
-2. Ejecutar/adaptar el extractor (patrón: `scripts-reutilizables/generar_tareas_modelo.py` o el script equivalente) sobre los módulos donde la columna **Recom** de CHECKLIST-GLOBAL lo nombre.
+2. Ejecutar el extractor **`scripts/generar_tareas_modelo.py`** (`python scripts/generar_tareas_modelo.py --modelo <X> --recom "<Recom>" --dry-run` para ver el plan sin escribir) sobre los módulos donde la columna **Recom** de CHECKLIST-GLOBAL lo nombre. ⚠️ `scripts-reutilizables/generar_tareas_modelo.py` está **SUPERSEDED**: es un one-off de 80 líneas con el modelo y los módulos de deepseek-v4-flash hardcodeados y sin CLI — no copiarlo (medido en el Log 2141).
 3. Generar `BACKLOG-MASTER.md` + subcarpetas `checklist.md` por módulo. **Verificar que el total de tareas asignadas sea ≥ 100**; si es menor, ampliar a más módulos con su Recom (o a los disponibles del proyecto).
 4. Trabajar en bucle con el protocolo estándar (AGENTS.md §6/§21).
 

@@ -1,3 +1,13 @@
+# ---------------------------------------------------------------------------
+# SUPERSEDED (2026-10-22, Log 2141). NO COPIAR ESTE ARCHIVO COMO PATRON.
+#
+# Este es un one-off de 80 lineas: tiene `modelo = 'deepseek-v4-flash'` y la
+# lista de modulos HARDCODEADA, no acepta argumentos y no define __main__.
+# El extractor reutilizable es scripts/generar_tareas_modelo.py (220 lineas,
+# 8 funciones, CLI --modelo/--recom/--plataforma/--dry-run).
+#
+# Se conserva como registro historico: es la primera version del extractor.
+# ---------------------------------------------------------------------------
 import os, re, glob
 
 base = r'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral'
