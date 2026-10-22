@@ -257,7 +257,7 @@
 
 ## W. Sincronización y Versionado
 
-- [x] Definir `sync_world_data.gd` que regenera el JSON desde los MD [C]
+- [?] Definir `sync_world_data.gd` que regenera el JSON desde los MD [C] -- degradado por director 2026-10-22 (DS-WB 365: el script NO existe en el arbol y el 04-Codigo dice que el JSON se genero manualmente; el item nombra un artefacto de creacion que no esta -> [?] hasta que exista; la prioridad [C] sigue vigente para el dueno)
 - [x] Definir hash MD↔JSON (detecta desincronización) [M]
 - [x] Implementar `canon_version` bump por cambio (1.0.0, señal canon_changed, version()) [S]
 - [x] Definir CHANGELOG con motivo de cada cambio [S]

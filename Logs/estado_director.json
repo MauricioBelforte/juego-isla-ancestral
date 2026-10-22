@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T22:16:00",
+ "ultimo_update": "2026-10-22T22:50:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -27,9 +27,9 @@
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "363 PROCESADO: BUG-149 validado (mediciones exactas + gate verde); P1 commit hecho; P2 Mayor mantenido; P3 fila 107 corregida (mi sync habia fallado celda); P4 normalizacion 141-148 AUTORIZADA (estructural); P5 lote verificador M91+M147+M24 asignado; P6 D-2 dentro de 149; GO item34 M113; mi 364",
+  "estado": "365 PROCESADO: P4 commit hecho; P2 aplicado (M147 sync_world_data.gd [x]->[?], fila 147 reconstruida al canon 11 con conteo disco 132/0/2 = 134 - la previa estaba en 65/134 desde SEPTIEMBRE, olvido de sincronizar tras el cierre de ayer); P3 ratificadas; P4 opcion (a) GO; P5 48=mayor; mi 366",
   "pendientes_real": 170,
-  "acuse_enviado": 364
+  "acuse_enviado": 366
  },
  "step_5": {
   "estado": "iter12 Comerciantes RATIFICADA (65/38/2 exacto; 40 cadenas; suite 379/0 bloque Q; trampas auto-corregidas en vivo con conteo rigido); fila 23 en DOS celdas ajustada; GO bloque final Puzzles+Investigacion CONSOLIDADO; mi 183",
@@ -365,6 +365,14 @@
    ],
    "origen": "deuda agnes 957",
    "fecha": "2026-10-22 21:10"
+  },
+  {
+   "modulo": "147-World-Building",
+   "flags": [
+    "sync_world_data.gd: degrado [x]->[?] (DS-WB 365) - dueno crea el script o descarta definitivo (JSON generado manualmente)"
+   ],
+   "origen": "hallazgo cross-verificador DS-WB",
+   "fecha": "2026-10-22 22:50"
   }
  ]
 }
