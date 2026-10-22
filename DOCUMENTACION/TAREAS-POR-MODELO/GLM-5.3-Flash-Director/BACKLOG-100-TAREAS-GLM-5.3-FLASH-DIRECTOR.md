@@ -146,3 +146,12 @@
 
 --- 
 **Log reservado:** **1906** - check de la fila de archivos BACKLOG-100-TAREAS (2 de 6 flota, validate ondisk=checked) - [S]
+
+## DEUDA DE VERIFICACION: REVISAR TODO LO DE BEAM (fundador 08:31 - obligatoria en cuanto haya tiempo)
+**Estado:** [ ] PENDIENTE (regimen produce-first: el hace sin frenos, la verificacion llega despues)
+**Alcance:** TODO lo producido por Reflection-Beam-1.0 - esta ENTERO en sus 2 carpetas:
+- Mensajes entre modelos/Reflection-Beam-1.0/ (reportes con citas y batches del P-30/P-100)
+- DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/ (BACKLOG-MASTER + 02 P-100 + 03 COLA-TOTAL + 04 protocolo)
+**Metodo:** DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-04-VERIFICACION-RETROSPECTIVA.md (conteo por prefijo por modulo; muestreo 21.8.2.b con variantes de tildes/simbolos; editor-locked NO se degradan; REVISAR = 2+ fallas de muestra).
+**Quien:** DS-OC (23/10) + director (muestreo ya hecho: batch1 4/4, batch2 4/4, batch3 6/6 - todo real hasta ahora).
+**Cierre:** filas sync + sello en la guia.
