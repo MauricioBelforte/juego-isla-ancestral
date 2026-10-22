@@ -85,6 +85,12 @@ func _entrar_modo_foto() -> void:
 		_clock_pausado_antes = bool(clock._pausado) if "_pausado" in clock else false
 		clock.pausa()
 	_camara_previa = get_viewport().get_camera_3d()
+	# Hora fijada (M31, item 69): si _hora_fijada >= 0, fijar la hora del juego.
+	var clock := get_node_or_null("/root/GameClock")
+	if clock != null and clock.has_method("get_hora"):
+		_hora_previa = int(clock.get_hora())
+	if _hora_fijada >= 0 and clock != null and clock.has_method("set_hora"):
+		clock.set_hora(_hora_fijada)
 	# Navigator: activar réplica de la cámara real (sin duplicar render).
 	if _navigator != null:
 		_navigator.activar(_camara_previa)
@@ -101,6 +107,11 @@ func _salir_modo_foto() -> void:
 	var clock := get_node_or_null("/root/GameClock")
 	if clock != null and clock.has_method("resume") and not _clock_pausado_antes:
 		clock.resume()
+	# Hora fijada (M31, item 69): restaurar la hora previa.
+	var clock := get_node_or_null("/root/GameClock")
+	if _hora_previa >= 0 and clock != null and clock.has_method("set_hora"):
+		clock.set_hora(_hora_previa)
+	_hora_previa = -1
 	# Navigator: desactivar réplica (restaura cámara real).
 	if _navigator != null:
 		_navigator.desactivar()
@@ -227,6 +238,16 @@ func tomar_foto() -> Dictionary:
 	else:
 		print("[PHOTO-MISS] captura no produjo archivo (%s, %d ms)" % [motivo, ms])
 	return res
+
+
+
+## Fija la hora del dia para la foto (M31, item 69). hora in [0,23]; -1 = sin fijar.
+func fijar_hora(hora: int) -> void:
+	if hora < 0:
+		_hora_fijada = -1
+	else:
+		_hora_fijada = clampi(hora, 0, 23)
+	print("[PHOTO-HORA] hora fijada: %d" % _hora_fijada)
 
 
 ## Nombre único con timestamp (L99): foto_<AAAA-MM-DD_HH-MM-SS>[_N].png.

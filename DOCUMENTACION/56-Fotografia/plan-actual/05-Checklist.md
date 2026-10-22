@@ -66,8 +66,8 @@
 
 ## F. Hora del Día y Clima
 
-- [ ] Permitir fijar la hora del día para la foto (M31) [C]
-  · espera: modulo(s) dependiente(s): M31 (coordinar con su dueno)
+- [x] Permitir fijar la hora del día para la foto (M31) [C]
+  · implementado: photo_service.gd fijar_hora(hora) + _hora_fijada/_hora_previa; _entrar/_salir fijan/restauran hora del GameClock. (Reflection-Beam-1.0, T21, 2026-10-22)
 - [ ] Mostrar preview del sol/luna y del clima con la hora fijada [M]
   · espera: feature de sistema de clima (definir contrato/dueno por asignar)
 - [ ] Restaurar hora/clima reales al salir [M]

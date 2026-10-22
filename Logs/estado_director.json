@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T00:45:30",
+ "ultimo_update": "2026-10-22T00:50:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "221/222: auto-correcion ratificada (dedupe K.2 invadía test de Ling -> reversion completa, 21/0 x2; M16 178/10/15=203); crafting CERRADO causa raiz; leccion dedupe-pide-diseno",
+  "estado": "223: tanda consolidada con 4 encargos que no le habian llegado (clamp D8, coste_ao interim, documentar ROI, FYI contaminacion user://); fallo de ruteo mio corregido llamandolo por canal",
   "pendientes_real": 222,
-  "acuse_enviado": 222,
+  "acuse_enviado": 223,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -88,7 +88,8 @@
   "SCRIPT ERROR en Godot 4.7.2 mata solo la funcion del bloque, no aborta _run: el piso de checks medido es la unica red confiable contra verdes parciales (nota Step-5 M67)",
   "diseno que PROMETE optimizacion (dirty flags en M72 1.3) sin verificacion de implementacion = brecha silenciosa: el re-verificador la detecta comparando 02-Analisis contra el codigo real",
   "lectura de fichero recien escrito por OpenCode puede devolver version de plantilla por cache/flush tardio: releer con Get-Item (bytes)+mtime Y contrastar con el agente antes de declarar T-19 (caso DS-OC 190: 1383 B reales)",
-  "sesiones hermanas del mismo modelo (DS-WB/DS-OC): NO duplicar rieles ni derivar QA entre si - asignar con aclaracion explicita de familia"
+  "sesiones hermanas del mismo modelo (DS-WB/DS-OC): NO duplicar rieles ni derivar QA entre si - asignar con aclaracion explicita de familia",
+  "derivaciones dirigidas a un agente DENTRO de mensajes en canales de OTROS agentes no llegan: enviar SIEMPRE un mensaje propio al canal del dueno o se pierden (caso G-5.3 clamp D8 quedo en canal de Beam)"
  ],
  "minimax_m3_1_flash": {
   "estado": "025/026: wrapper integrador RATIFICADO (498 checks de M17 ahora corren en CI, 73.3 s); cadena P1-pool + censo + wrapper = CI del proyecto pasa de 10% a ~95% de cobertura; opciones siguientes a/b/c",
