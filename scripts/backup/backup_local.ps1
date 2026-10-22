@@ -89,6 +89,19 @@ function Remove-OldChecksumEntry {
     }
 }
 
+function Resolve-TarExe {
+    # Resuelve el bsdtar de Windows de forma EXPLICITA.
+    # Trampa medida 2026-10-22: si el PATH trae un GNU tar delante (Git/MSYS),
+    # `-C 'C:\...'` se interpreta como host:ruta remota y falla con
+    # "tar (child): cannot connect to c: resolve failed" (exit 2). El bsdtar de
+    # System32 no tiene ese comportamiento.
+    $cand = Join-Path $env:SystemRoot 'System32\tar.exe'
+    if (Test-Path $cand) { return $cand }
+    $cmd = Get-Command tar.exe -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+    throw 'tar.exe no está disponible en el sistema (requerido para compresión).'
+}
+
 try {
     # ── Resolución de rutas ─────────────────────────────────────────────
     if ([string]::IsNullOrWhiteSpace($SourcePath)) {
@@ -130,9 +143,8 @@ try {
     if (-not (Test-Path $script:LogsDir)) { New-Item -ItemType Directory -Path $script:LogsDir -Force | Out-Null }
     $logsDir = $script:LogsDir
 
-    if (-not (Get-Command tar.exe -ErrorAction SilentlyContinue)) {
-        throw 'tar.exe no está disponible en el sistema (requerido para compresión).'
-    }
+    $tarExe = Resolve-TarExe
+    Write-Log "tar.exe resuelto: $tarExe"
 
     # ── Saves del juego ────────────────────────────────────────────────
     $savesDir = $null
@@ -166,7 +178,7 @@ try {
         $savesParent = Split-Path $savesDir -Parent
         $tarArgs += @('-C', $savesParent, $savesBase)
     }
-    & tar.exe @tarArgs
+    & $tarExe @tarArgs
     if ($LASTEXITCODE -ne 0) { throw "tar.exe falló con código $LASTEXITCODE." }
 
     $sizeMB = [math]::Round((Get-Item $outFile).Length / 1MB, 1)
@@ -181,8 +193,11 @@ try {
     # checksums.txt central (junto a los backups de ese Kind)
     $checksumsFile = Join-Path $DestinationPath 'checksums.txt'
     if (Test-Path $checksumsFile) {
-        $existing = Get-Content $checksumsFile | Where-Object { $_ -notmatch [regex]::Escape($fileName) }
-        $existing + "$hash  $fileName" | Set-Content -Path $checksumsFile -Encoding ASCII
+        # @() OBLIGATORIO: con una sola entrada, Get-Content devuelve un ESCALAR y
+        # `$existing + "..."` concatena strings sin salto de linea -> linea corrupta
+        # que verify_backups.ps1 no puede parsear (medido 2026-10-22).
+        $existing = @(Get-Content $checksumsFile | Where-Object { $_ -notmatch [regex]::Escape($fileName) })
+        @($existing) + "$hash  $fileName" | Set-Content -Path $checksumsFile -Encoding ASCII
     } else {
         "$hash  $fileName" | Set-Content -Path $checksumsFile -Encoding ASCII
     }

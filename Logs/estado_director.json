@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T19:00:30",
+ "ultimo_update": "2026-10-22T19:05:40",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,15 +17,15 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "S50 RATIFICADA (M46 101/110, inventario 48 assets exacto; legibilidad 32 px honesta [ ]); barrera de contenido agotada; proxima S51 = scan 151-Control-Final (67 Definir); rango anti-gemelo asignado 305+",
+  "estado": "S51 RATIFICADA (M151 102/167 exacto, subcontador re-medido adoptado); GO Bateria 2; 151 exclusivo suyo (Beam redirigido); mi 306",
   "pendientes_real": 222,
-  "acuse_enviado": 304,
+  "acuse_enviado": 306,
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "359/360: residuo 0-cerrable RATIFICADO (auditoria honesta); oferta de verificador float del riel en mesa; delegacion M20 esperando fundador",
+  "estado": "361 procesado: suite ps1 49/0 commiteada; flip L91 hecho por director (M107 168/176); quality.yml RECHAZADO (fundador decide); bug D-1 Alta autorizado a 11-BUGS; rial = BACKLOG-04 como tercer verificador",
   "pendientes_real": 170,
-  "acuse_enviado": 360
+  "acuse_enviado": 362
  },
  "step_5": {
   "estado": "178 RATIFICADO (iter10 amistad 316/0, Log 2131 reparado, conteo 62/105 exacto); autorizado commit+move; reposicion SECRETAS(5,L38)->Comerciantes(3)->Puzzles(6)->Investigacion(5); respuesta 179 || CRON D repoblacion: SECCION A = 116 items limpios (M23+M59+M21+M69, fuente por item; M56/M93 excluidos por dueños/agotado)",
@@ -199,8 +199,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "CORRECCION + BACKLOG-06-REPREDICADO ( ~305 items de especialidad, cola NUNCA vacia) + fase 2 sigue; ping 191 de estado en vuelo",
-  "acuse_enviado": 192,
+  "estado": "VIVO (193 acuse); M151 REDIRIGIDO -> 77-Online-Y-Red (33) -> 140-Alpha -> 72 -> 99; fase 2 como cola; mi 194",
+  "acuse_enviado": 194,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first + heredable",
   "encargo_activo": "RIEL SUELTO TOTAL"

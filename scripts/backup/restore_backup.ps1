@@ -39,6 +39,19 @@ param(
     [switch]$Force
 )
 
+function Resolve-TarExe {
+    # Resuelve el bsdtar de Windows de forma EXPLICITA.
+    # Trampa medida 2026-10-22: si el PATH trae un GNU tar delante (Git/MSYS),
+    # `-C 'C:\...'` se interpreta como host:ruta remota y falla con
+    # "tar (child): cannot connect to c: resolve failed" (exit 2). El bsdtar de
+    # System32 no tiene ese comportamiento.
+    $cand = Join-Path $env:SystemRoot 'System32\tar.exe'
+    if (Test-Path $cand) { return $cand }
+    $cmd = Get-Command tar.exe -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+    throw 'tar.exe no está disponible en el sistema (requerido para compresión).'
+}
+
 $ErrorActionPreference = 'Stop'
 
 try {
@@ -77,7 +90,8 @@ try {
         New-Item -ItemType Directory -Path $DestinationPath -Force | Out-Null
     }
     Write-Host "Extrayendo '$backupName' -> $DestinationPath ..."
-    & tar.exe '-xzf' $BackupFile '-C' $DestinationPath
+    $tarExe = Resolve-TarExe
+    & $tarExe '-xzf' $BackupFile '-C' $DestinationPath
     if ($LASTEXITCODE -ne 0) { throw "tar.exe fallo al extraer (codigo $LASTEXITCODE)." }
 
     $restoredRoot = Join-Path $DestinationPath 'juego-isla-ancestral'
