@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T03:50:30",
+ "ultimo_update": "2026-10-22T03:40:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -38,9 +38,9 @@
   "acuse_enviado": 195
  },
  "hy3": {
-  "estado": "315/316: #55 M71 RATIFICADO (10 bloques, red probe, cross con test propio); FINDING F1 ARCHIVADO como BUG-143 (recompensas multiples en _reevaluar) con fix citado; verificador doble: BUG-142 Beam + BUG-143 Hy3 misma noche",
+  "estado": "317/318: RAMA 2 M66 RATIFICADA (19/0 fresh + guarda 3 capas probada EN ROJO: RED-A 20/1 y RED-B 15/1 con piso detectando la caida); M66 runtime PASS; RAMA 1 (#55/BUG-143) confirmada",
   "pendientes_real": 257,
-  "acuse_enviado": 316
+  "acuse_enviado": 318
  },
  "ling": {
   "estado": "209/210: T23 RATIFICADA (speaker_key NO-traducible, H3 cerrada con verificacion 4/4); deuda jugador-visible derivada M21/M53; T24 libre",

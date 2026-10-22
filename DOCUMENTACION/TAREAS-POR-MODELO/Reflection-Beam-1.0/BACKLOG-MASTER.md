@@ -151,10 +151,10 @@ Total de items de modulos anexados: 0. Regla: item que al leerse resulte obsolet
 197. [x] 137-Prototipo: [ ] Definir autoload `game_state_proto.gd` (M59) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `game_state_proto.gd` (hay `GameSt...
 198. [x] 137-Prototipo: [ ] Definir autoload `world_seed.gd` con seed fija 20260819 [S] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `world_seed.gd` y hay 0...
 199. [x] 137-Prototipo: [ ] Definir carpeta `docs/prototipo/` para los reportes del hito [S] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — la carpeta `game/isla-ancest...
-200. [ ] 137-Prototipo: [ ] Definir `player_proto.gd` (CharacterBody3D) [M]
-201. [ ] 137-Prototipo: [ ] Definir movimiento 8 direcciones con velocidad 5.0 [S]
-202. [ ] 137-Prototipo: [ ] Definir salto con `JUMP_VELOCITY = 4.5` [S]
-203. [ ] 137-Prototipo: [ ] Definir `move_and_slide()` con colisiones voxel [M]
+200. [x] 137-Prototipo: [ ] Definir `player_proto.gd` (CharacterBody3D) [M]
+201. [x] 137-Prototipo: [ ] Definir movimiento 8 direcciones con velocidad 5.0 [S]
+202. [x] 137-Prototipo: [ ] Definir salto con `JUMP_VELOCITY = 4.5` [S]
+203. [x] 137-Prototipo: [ ] Definir `move_and_slide()` con colisiones voxel [M]
 204. [ ] 137-Prototipo: [ ] Definir que el jugador camine sobre escaleras de 1 bloque [M]
 205. [ ] 137-Prototipo: [ ] Definir SpringArm3D en tercera persona [M]
 206. [ ] 137-Prototipo: [ ] Definir distancia cámara 2-8 m (sin clip) [M]
