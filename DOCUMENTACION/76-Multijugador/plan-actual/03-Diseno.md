@@ -199,3 +199,32 @@ decision de producto y la referencia, no la implementacion.
 > (tick real, NAT traversal, reconciliacion, cifrado, reconexion, cuentas,
 > amigos online) pertenece a M77. M76 define la decision de producto y
 > este contrato; el manifiesto mp_contract.json es la fuente compartida.
+
+## Protocolos de determinismo y privacidad (S56b — G-5.3-Flash-Agente, 2026-10-23; definicion en papel — la EJECUCION queda para la fase MP implementada)
+
+**PR1 — determinismo local (L61, split-screen sin red):** QUE: misma semilla +
+misma secuencia de input = misma simulacion (world/RNG/physics) en 2 runs.
+HERRAMIENTA: run doble con semilla fija (RNG sembrado M29) + snapshot compare
+de estado al tick 300/3000/30000 (hash de posiciones/velocidades/inventario).
+PREPARACION: 2 instancias locales sin red (split), input scriptado (mismos
+eventos por tick). UMBRAL: hash de estado IDENTICO en los 3 snapshots y 0
+divergencia de ticks (determinismo 100%). Si difiere: el modulo culpable
+sale en el primer tick de divergencia (bisecar).
+
+**PR2 — invitaciones sin exponer datos (L93):** QUE: el payload de
+invitacion a sesion NO revela datos del jugador anfitrion (id real, IP,
+saves, ubicacion de partida). HERRAMIENTA: inspector de payload (dump del
+objeto invitacion serializado antes de emitir) + checklist de campos
+prohibidos (whitelist: solo token de sesion generado + nombre-publico +
+slot). PREPARACION: crear invitacion de prueba y dump. UMBRAL: 0 campos
+prohibidos presentes y 0 PII en el payload (el token expira y es
+un-mapeable sin registro del backend).
+
+**PR3 — verificacion del checklist del proyecto (L212, M143/M59):** QUE:
+`verificar_checklist.py` corre SIN alertas nuevas respecto del baseline
+firmado. HERRAMIENTA: scripts/verificar_checklist.py (--json) + diff contra
+el baseline de alertas firmado en Logs (cada alerta nueva = item a triar o
+fix). PREPARACION: correr tras el cierre de cada lote (no en vivo).
+UMBRAL: 0 alertas NUEVAS no documentadas (las alertas conocidas quedan
+listadas como baseline con firma de quien las acepto).
+

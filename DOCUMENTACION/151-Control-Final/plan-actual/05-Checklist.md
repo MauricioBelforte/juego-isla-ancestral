@@ -144,7 +144,7 @@
 
 - [x] Definir re-verificación de 30 ciclos de guardar/cargar [M] — **Diseño: 03-Diseno.md 2 #16**
 - [x] Definir verificación de 0 reportes de save perdido en 72 h (M143) [M] — **Diseño: 03-Diseno.md 2 #16**
-- [ ] Definir verificación de backup/reintento de cloud (M60) [M]
+- [ ] Definir verificación de backup/reintento de cloud (M60) [M] — **FLAG TECNICO (M60/S56):** backend cloud inexistente en headless; la verificacion es del dueno de M60 con build integrado. (S56-G-5.3-Flash-Agente 2026-10-23)
 - [x] Definir verificación de migración de versiones sin pérdida [M] — qa headless save v1 sintetico -> migracion -> comparacion de campos core; 0 perdidas en los 3 pares — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 - [x] Definir verificación de anti-softlock con ítems clave (M66) [M] — tirar/regalar cada item de mision y verificar via de re-obtencion; 100% con salida (2026-10-23 S54)
 
@@ -192,8 +192,8 @@
 
 - [x] Definir registro de marca (nombre del juego) [S] — **Diseño: 03-Diseno.md 2 #22**
 - [x] Definir registro de logo y elementos de marca [S] — **Diseño: 03-Diseno.md 2 #22**
-- [ ] Definir verificación de disponibilidad de nombre en plataformas [S]
-- [ ] Definir política de uso de la marca para la comunidad [S]
+- [ ] Definir verificación de disponibilidad de nombre en plataformas [S] — **FLAG FUNDADOR (decision de nombre final):** la verificacion tecnica de stores es post-decision. (S56-G-5.3-Flash-Agente 2026-10-23)
+- [ ] Definir política de uso de la marca para la comunidad [S] — **FLAG FUNDADOR (decision editorial de marca):** esbozo en 03 Bateria 5. (S56-G-5.3-Flash-Agente 2026-10-23)
 - [x] Definir indexado de PI en el acta [S] — **Diseño: 01-Requerimientos.md 8.4**
 
 ## 24. Página de tienda preparada (P23)
@@ -222,9 +222,9 @@
 
 - [x] Definir hoja de ruta M144 aprobada (contenido, bugs, comunidad) [M] — **Diseño: 03-Diseno.md 2 #26**
 - [x] Definir cola de hotfix 2.0.x documentada (M143) [S] — criterio entrada/salida (crash/softlock/economico vs cosmetico) + 1 ejemplo real por clase (2026-10-23 S54b) — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
-- [ ] Definir lista de mejoras de comunidad priorizada (5-FUTURAS-MEJORAS) [S]
-- [ ] Definir dueño por función del post-lanzamiento [S]
-- [ ] Definir fecha de revisión del plan (M144) [S]
+- [ ] Definir lista de mejoras de comunidad priorizada (5-FUTURAS-MEJORAS) [S] — **FLAG FUNDADOR:** 5-FUTURAS-MEJORAS es anotador del USUARIO (solo directivas del usuario) (S56-G-5.3-Flash-Agente 2026-10-23)
+- [ ] Definir dueño por función del post-lanzamiento [S] — **FLAG FUNDADOR (staffing del post-lanzamiento)** (S56-G-5.3-Flash-Agente 2026-10-23)
+- [ ] Definir fecha de revisión del plan (M144) [S] — **FLAG FUNDADOR (agenda M144)** (S56-G-5.3-Flash-Agente 2026-10-23)
 
 ## 28. Acta y cierre
 

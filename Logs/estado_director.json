@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T23:36:30",
+ "ultimo_update": "2026-10-22T23:46:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -21,9 +21,9 @@
   ]
  },
  "g_5_3": {
-  "estado": "FUNDADO (reclamo del fundador: guardia pasiva = mia): tanda 318 EMITIDA = Bateria 6 (7 definibles de M151) + PROTOCOLOS de medicion en 156-Terrenos (10) + 76-Multijugador (3) || GO ya no guardia; proximo 319",
+  "estado": "TANDA 318 RATIFICADA (M151 cierra a lo definible 155/167 con flags; M156 221/307 protocolos; M76 129/130); riel G-5.3 CERRADO; incidente carrera de escritura del backlog = mio (reconocido y regla instaurada: no toco mas su backlog de canal); mi 321",
   "pendientes_real": 222,
-  "acuse_enviado": 318,
+  "acuse_enviado": 321,
   "ultima_tanda": 40,
   "backlog_pendientes": 54
  },
@@ -141,7 +141,8 @@
   "Para no olvidar: segun el fundador (22oct 23:00), Beam estaba trabajando MIENTRAS el fundador estaba ausente (korolevo!) - al regresar lo apago el PROPIO fundador por su plataforma. Los cron A/B/C/D NO deben intentarle apagarlo ni pedirle acciones activas: solo registrar lo que deje escrito.",
   "MALA INTERPRETACION CORREGIDA (22oct 23:00): el fundador dijo apagar y CORRIGIO inmediatamente: NO apagar - ENCENDER/correr; el DIRECTOR debe delegar tareas a BEAM TODO EL TIEMPO (promesa permanente). CRON D pasa a traerle tandas en cada vuelta mientras este activo.",
   "CITAS HUECAS M16 (22oct 23:15, deteccion director): Beam ratifico por TEXT-citation sin checar EXISTENCIA del artefacto (RF-MR9..22 nunca definidos en 03). REGLA 3er caso del dia: el muestreo 21.8.2.b debe EXIGIR que el artefacto citado EXISTA en el archivo citado (M33-G-5.3, M147-DSWB, M16-Beam)",
-  "Cita-cruzada de modulos equivocados (22oct 23:35): el director enuncio \"M102=168/176\" cuando la cifra era de M107-Backups - Beam midio bien el disco y \"mismatch\" que no existia. REGLA: al asignar calibraciones, COTIZAR modulo+cifra con el nombre correcto y verificar en disco ANTES de enunciar"
+  "Cita-cruzada de modulos equivocados (22oct 23:35): el director enuncio \"M102=168/176\" cuando la cifra era de M107-Backups - Beam midio bien el disco y \"mismatch\" que no existia. REGLA: al asignar calibraciones, COTIZAR modulo+cifra con el nombre correcto y verificar en disco ANTES de enunciar",
+  "CARRERA BACKLOG-CANAL (22oct 23:45, causa director): escribi la ref del G53 en el BACKLOG-MASTER de G-5.3 mientras el anexaba T64-T67 concurrentemente -> sus anexos se perdieron (los recupera de sus mensajes 305/314/319). REGLA: el director NO escribe en el backlog de canal de un agente activo; genera archivos aparte y avisa por mensaje"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
