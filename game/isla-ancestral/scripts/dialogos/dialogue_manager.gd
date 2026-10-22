@@ -129,6 +129,18 @@ func start_dialogue(dialogue_id: String, context: Dictionary = {}) -> bool:
 	_dialogue_id = dialogue_id
 	_grafo_actual = grafo
 	_session_vars = context.duplicate()
+	# M21 (G-5.3-Flash-Agente 2026-10-22, auto-snapshot aditivo): las condiciones
+	# de historia/misiones/sellos/festivales se evaluan sobre banderas del mundo
+	# (WorldStateService M59). Se inyectan al contexto SIN sobreescribir el
+	# contexto explicito del llamador (context manda). Aditivo y retrocompatible:
+	# los grafos sin condiciones de mundo no cambian; el validador estatico sigue
+	# evaluando claves del GRAFO, no el contexto.
+	var ws: Node = get_node_or_null("/root/WorldState")
+	if ws != null and ws.has_method("get_all_flags"):
+		var flags: Dictionary = ws.get_all_flags()
+		for clave in flags:
+			if not _session_vars.has(clave):
+				_session_vars[clave] = flags[clave]
 	dialogue_started.emit(dialogue_id)
 	_entrar_nodo(grafo.get_start_node())
 	return true
