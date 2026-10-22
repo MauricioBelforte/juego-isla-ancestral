@@ -168,8 +168,7 @@
 - [x] Dos jugadores (futuro M76) no pueden plantar el mismo voxel [C]
 - [ ] Cosecha con inventario lleno: sobrante devuelto con notificación [M]
   · espera: feature de M14-Inventario (definir contrato/dueno por asignar)
-- [ ] Árbol frutal en invierno: entra en DORMANTE y conserva cooldown [S]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
+- [x] Árbol frutal en invierno: entra en DORMANTE y conserva cooldown [S] — VERIFICADO qa_farm_pausas_m33.gd _test_arbol_invierno (35/0 EXIT 0: DORMANTE conserva fruit_cooldown intacto, tick activo lo decrementa y en cooldown NO avanza grown_days, re-pausa preserva)
 - [x] Carga de guardado con tile corrupto: FarmStateStore.validate lo aísla y loguea [M]
 - [ ] Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M]
   · espera: modulo(s) dependiente(s): M17 (coordinar con su dueno)
@@ -226,8 +225,7 @@
   · espera: feature de M51-Agua (definir contrato/dueno por asignar)
 - [ ] Test: pisoteo de NPC sobre campo con ruta y sin ruta [C]
   · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
-- [ ] Test: invierno con nieve sobre tierra arada [C]
-  · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
+- [x] Test: invierno con nieve sobre tierra arada [C] — VERIFICADO: test ya existe como V5 en test_farm_voxel_m33.gd _test_nieve_no_borra_estado (SNOW escrito por encima del voxel y el tile + hint + agua sobreviven); 27/0 EXIT 0 re-verificado 2026-10-22 con el resto del riel
 - [ ] Test: inventario lleno al cosechar [S]
   · espera: feature de M14-Inventario (definir contrato/dueno por asignar)
 - [x] Recorrido M114: 3 días de juego con granja funcional [C]
@@ -247,7 +245,7 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-**Totales:** 155 ítems · Completados: 110 · Pendientes: 45 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 110 [x] / 45 [ ] / 0 [?] = 155 tras tanda pausas+P25 (3 flips) + deuda higiene resuelta; qa_farm_pausas_m33.gd 28/0 + test_farm_m33_lote.gd 42/0 + riel farm 29/0/20/0/27/0, todo EXIT 0.) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 106 [x] / 49 [ ] / 0 [?] = 155; el bloque declaraba 153 items y 47 pendientes.)
+**Totales:** 155 ítems · Completados: 112 · Pendientes: 43 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22 tanda 2: 112 [x] / 43 [ ] / 0 [?] = 155. Tanda 1: pausas+P25+deuda higiene (110) — qa 28/0, lote 42/0. Tanda 2: arbol invierno+test nieve (112) — qa 35/0, riel farm 29/0/20/0/27/0. Todo EXIT 0.) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 106 [x] / 49 [ ] / 0 [?] = 155; el bloque declaraba 153 items y 47 pendientes.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].

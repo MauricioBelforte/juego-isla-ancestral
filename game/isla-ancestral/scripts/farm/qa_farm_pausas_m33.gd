@@ -210,7 +210,7 @@ func _test_arbol_invierno() -> void:
 	var cambio: bool = tile.apply_daily_tick(3, false)
 	_check(tile.stage == CropTile.GrowthStage.DORMANTE, "arbol: invierno -> DORMANTE")
 	_check(tile.fruit_cooldown == inv_antes, "arbol: DORMANTE conserva cooldown | %d" % tile.fruit_cooldown)
-	_check(not cambio, "arbol: pausa por estacion no cuenta como cambio de etapa")
+	_check(cambio, "arbol: entrar en DORMANTE es cambio de etapa (evento/senal legible)")
 	# Primavera (0) apta con agua: retoma y cuenta dias de fruta
 	tile.apply_daily_tick(0, false)
 	_check(not tile.is_paused(), "arbol: retoma en primavera")

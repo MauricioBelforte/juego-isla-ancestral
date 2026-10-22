@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T04:28:00",
+ "ultimo_update": "2026-10-22T04:43:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "230/231: M33 RATIFICADA (qa_farm_pausas 4 pruebas + fix deuda test del 17-10; 110/155 medido; fila sync propia); regimen 229 en su primer ciclo autonomo cerrado completo; GO siguiente (M35/cluster)",
+  "estado": "231/232: S2 M33 RATIFICADA (112/155, arbol+nieve; filtro re-uso V5 correcto); nota operativa helper-mal-piso aplicada con regla hilo (correcto); GO S3 o modulo nuevo",
   "pendientes_real": 222,
-  "acuse_enviado": 231,
+  "acuse_enviado": 232,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -106,7 +106,9 @@
   "REORGANIZACIONES de flota: avisar y re-enganchar a TODOS los agentes del riel anterior (Ling quedo 19 h detenido sin mensaje - fallo de ruteo del director, corregido con 202) - checklist al reorganizar: cada agente histórico recibe mensaje de nuevo regimen o confirmacion de baja",
   "cronts de plataforma NO-modificables con prompt viejo (caso Ling): el director entrega PROMPT SUSTITUTO para ejecutar en cada disparo, o saca al agente del cron y asigna riel manual por mensaje",
   "problema informado por el fundador: Ling reportaba que su cron era imposible de modificar - verificacion necesaria con el agente antes de suponer flojera",
-  "PROMPTS VIEJOS en crons de plataforma con reglas contrarias (\"si no hay encargo no respondas nada\") causan SILENCIO OBEDECIDO: el director debe emitir OVERRIDE escrito cuando cambia el regimen, o el fundador borra el cron desde la interfaz"
+  "PROMPTS VIEJOS en crons de plataforma con reglas contrarias (\"si no hay encargo no respondas nada\") causan SILENCIO OBEDECIDO: el director debe emitir OVERRIDE escrito cuando cambia el regimen, o el fundador borra el cron desde la interfaz",
+  "helper proximo_numero que cuenta huecos de mensajes antiguos (caso 220) puede equivocar la numeracion: la regla del fundador (manda el hilo, ultimo+1) SIEMPRE prevalece + reporte la anomalia y devuelve el numero al pool (modelo aplicado por G-5.3 231)",
+  "dos agentes en el mismo modulo (dueño activo + contribuidor aditivo): cambios aditivos verificados OK pero el CONTRIBUIDOR debe reportar al director (que coordina con el dueno) y pausar si el dueno pide ajustes (caso Beam T36/T37 en M17 de G-5.3)"
  ],
  "minimax_m3_1_flash": {
   "estado": "032/035: LANE SERIE SELLADA + HALLAZGO GRAVE RATIFICADO Y VERIFICADO (mi barrido commiteo photo_service en vuelo; sus 2 fixes quirurgicos en disco y CI verde 26 checks rc=0); opt-in re-measure corriendo",
@@ -171,8 +173,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "081: T36 M17 sellada (animar_colocacion hammer bounce verificado; item 221 flip); aditivo en modulo con dueno activo sin conflicto",
-  "acuse_enviado": 82
+  "estado": "082/084: T37 mover_pieza SELLADA (destino primero sin rollback window, item 111 flip); coordinacion M17 con G-5.3 activa; proximo paquete 3 o fotografia residual",
+  "acuse_enviado": 84
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {

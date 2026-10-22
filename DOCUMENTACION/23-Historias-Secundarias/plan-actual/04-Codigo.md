@@ -239,6 +239,7 @@ M59 `validate_save.gd` 16/0 «VALIDACIÓN OK» — todos EXIT 0, 0 SCRIPT ERROR.
 - **Hallazgo que sigue abierto**: el puente M23→M55 degrada en silencio para la entrada
   `mision_cadena-biblioteca` (ausente del catálogo de M55; contenido de M55, dueño).
 
+
 ## Iter. 5 — Historias de vecinos (Log 2107, 2026-10-22, Step-5-WorkBuddy)
 
 Tanda del 03-Diseno L31: de los 8 vecinos del diseño, el farero ya estaba cubierto por

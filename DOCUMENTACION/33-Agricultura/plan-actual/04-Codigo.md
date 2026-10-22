@@ -442,3 +442,15 @@ if WeatherService.is_raining_today():
 visuales Node2D + escritura voxel por cultivo. Sugerencia para quien la tome:
 diferir visuales/voxel fuera de advance_day (cola de refresco consumida por
 frame o por chunk_cam_changed), no tocar el modelo.
+### Tanda 2 arbol+nieve — G-5.3-Flash-Agente (2026-10-22, mismo turno 2-BIS)
+
+**Estado:** Completado (2 flips).
+
+- qa_farm_pausas_m33.gd extendido con _test_arbol_invierno: 35 checks, 0
+  fallos, EXIT 0. Hallazgo de diseno: _entrar_pausa devuelve true (entrar en
+  DORMANTE/SIN_AGUA ES un cambio de etapa para las senales crop_stage_changed
+  — contrato intencional, documentado aca para el proximo agente).
+- Test invierno con nieve: ya existia como V5 (_test_nieve_no_borra_estado en
+  test_farm_voxel_m33.gd, 27/0). Item N era duplicado del I6: flipado con cita
+  al V5 en vez de duplicar tests.
+- 05-Checklist: 112 [x] / 43 [ ] / 0 [?]. Fila GLOBAL 112/155.

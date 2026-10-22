@@ -16,15 +16,15 @@
 
 ## Historias de vecinos
 
-- [ ] Crear la historia de la panadera (2-4 pasos) [M]
+- [x] Crear la historia de la panadera (2-4 pasos) [M] — cadena-panadera en data/historias/secundarias.json; npc catalina_oso (cocinera, villager medido: no existe rol "panadera" en disco). Log 2107.
 - [x] Crear la historia del farero [M] — cadena-faro en data/historias/secundarias.json (4 pasos: hablar farero/explorar faro/puzzle/entregar; contexto narrativo; consecuencia faro_encendido en WorldState M21; testeada en test_historias.gd bloque C, Log 2082). 1 de 8 vecinos del catálogo.
-- [ ] Crear la historia de la doctora [M]
-- [ ] Crear la historia del carpintero [M]
-- [ ] Crear la historia de la tejedora [M]
-- [ ] Crear la historia del pescador [M]
-- [ ] Crear la historia del guarda [M]
-- [ ] Crear la historia de la alquimista [M]
-- [ ] Documentar las historias de vecinos en el plan-actual [S]
+- [?] Crear la historia de la doctora [M] — 0 NPC médicos en data/villagers/ (15 villagers medidos 2026-10-22: trovadora, carpintero, cocinera, pescador, artesana, granjero, mercader, guardabosques, sastra, ceramista, herrero, bibliotecaria, herbolario, farera). NO se inventa el personaje: crear un villager es contenido de otro dueño. El flip se otorga cuando el asset exista. Log 2107.
+- [x] Crear la historia del carpintero [M] — cadena-carpintero en data/historias/secundarias.json; npc bruno_sapo (carpintero, villager medido). Log 2107.
+- [x] Crear la historia de la tejedora [M] — cadena-tejedora en data/historias/secundarias.json; npc olivia_nutria (sastra, villager medido: no existe rol "tejedora" en disco). Log 2107.
+- [x] Crear la historia del pescador [M] — cadena-pescador en data/historias/secundarias.json; npc finneas_zorro (pescador, villager medido). Log 2107.
+- [x] Crear la historia del guarda [M] — cadena-guarda en data/historias/secundarias.json; npc nico_gato (guardabosques, villager medido: no existe rol "guarda" en disco). Log 2107.
+- [x] Crear la historia del alquimista [M] — cadena-alquimista en data/historias/secundarias.json; npc teo_conejo (herbolario, villager medido: no existe rol "alquimista" en disco). Log 2107.
+- [x] Documentar las historias de vecinos en el plan-actual [S] — 04-Codigo.md seccion "Iter. 5 - Historias de vecinos" (Log 2107): tabla de las 6 cadenas, mapeo honesto de roles vs villagers medidos, doctora [?] con evidencia, consecuencias peladas unicas, bloque J de la suite con 98 checks.
 
 ## Historias de lugares, ruinas y objetos
 
@@ -198,7 +198,7 @@ A diferencia de los clusters legales/store (que solo tenían JSON+Validator+Test
 - Estado: **🟡 Con dudas** (núcleo verificado; contenido pendiente).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 105 ítems · Completados: 43 · Pendientes: 60 · No resueltos: 2.
+**Totales:** 105 ítems · Completados: 50 · Pendientes: 52 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 24 [x] / 80 [ ] / 0 [?].
