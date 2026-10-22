@@ -221,6 +221,8 @@ func descongelar_foto() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if _congelado_foto:
+		return
 	_t += delta
 	match _estado:
 		ESTADO_VUELO:

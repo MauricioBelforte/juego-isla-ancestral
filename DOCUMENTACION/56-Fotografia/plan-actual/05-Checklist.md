@@ -107,8 +107,8 @@
   · implementado: suscripcion photo_pose_request en gaviota/cangrejo/jabali/tortuga (4 scripts) + NPCManager (M19). (Reflection-Beam-1.0, T25, 2026-10-22)
 - [ ] Animales reanudan su IA (M64) al salir [M]
   · espera: modulo(s) dependiente(s): M64 (coordinar con su dueno)
-- [ ] Capturar voladores y acuáticos (M51) sin romper trayectoria [C]
-  · espera: modulo(s) dependiente(s): M51 (coordinar con su dueno)
+- [x] Capturar voladores y acuáticos (M51) sin romper trayectoria [C]
+  · implementado: tomar_foto congela fauna (congelar_foto/descongelar_foto) antes/despues de captura; _physics_process guarda con _congelado_foto. 4 animales (gaviota/cangrejo/jabali/tortuga). (Reflection-Beam-1.0, T27, 2026-10-22)
 - [ ] Identificar la especie al capturarla (bestiario M36/M37) [M]
   · espera: modulo(s) dependiente(s): M36, M37 (coordinar con su dueno)
 - [ ] Testear captura nocturna y de manadas (M31/M36) [C]
