@@ -150,4 +150,13 @@ TOGGLE por tecla G dentro del modo foto (default OFF; recordado por preset si se
 modo foto; estado activo con borde del color sello brisa; tooltip
 "Modo foto (P)". Icono sin color de fondo (solo silueta) para no pisar el
 HUD reloj/estado.
+**Compartir = exportacion local (L180, input M97/M53):** el boton "Compartir"
+de la galeria NO usa red: exporta una COPIA de la foto a
+`user://photos/export/` (nombre con timestamp, resolucion original) via
+FileAccess (patron writer atomico M60 si aplica). Antes de exportar: popup de
+confirmacion M53 (ConfirmPopup ya montado) con texto "Guardar foto fuera del
+album?" y A/CANCELAR; tras exportar: toast "Exportada" con la ruta relativa.
+Sin funciones de red/social (M97 las definira si el juego las quiere; el
+slice solo cumple "compartir" local). Sin accesos a carpetas del sistema fue
+del user:// del proyecto.
 

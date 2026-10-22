@@ -47,7 +47,7 @@
 
 ## D. Presets de Filtros
 
-- [ ] Definir 6-8 presets en `photo_presets.tres` [M]
+- [x] Definir 6-8 presets en `photo_presets.tres` [M] — CUBIERTO YA DEL OTRO MODO: data/foto/foto_presets.json con 6 presets canon data-driven (natural/calido_playa/verde_selva/crepusculo_rojo/niebla_costera/pintura_retro) validados por FotoSchema; ACLARACION honesto: medio real JSON, no .tres (2026-10-23 S43 + QA qa_m56_presets.gd 11/0)
   · espera: definicion de alcance/contrato del item (ver 03-Diseno.md; dueno por asignar)
 - [x] Definir preset default "Natural" y aplicar preview en vivo [C] — iter. 1: preset natural en foto_presets.json + aplicar_preset() con fallback (testeado); preview visual en vivo dueño M49/cámara
 - [ ] No modificar la paleta global del juego (M49) [M]
@@ -164,7 +164,7 @@
 
 ## N. Galería y Diario (M55)
 
-- [ ] Definir interface IDiaryPhotoProvider (desacople M55) [M]
+- [x] Definir interface IDiaryPhotoProvider (desacople M55) [M] — NUEVO scripts/foto/i_diary_photo_provider.gd (patron i_saveable): obtener_fotos_diario(), obtener_fotos_visibles(dia), conectar_foto_tomada(); duck-typing sin importar PhotoService (senal foto_tomada); QA nuevo qa_m56_diary_provider.gd 10/0 (default seguro, implementador dummy cumple, senal canonica existe) (2026-10-23 S44)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M55
 - [ ] Mostrar galería del álbum en el diario [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -177,7 +177,7 @@
 
 ## O. Compartir Imágenes
 
-- [ ] Definir "compartir" como exportación local (M97) con confirmación (M53) [M]
+- [x] Definir "compartir" como exportación local (M97) con confirmación (M53) [M] — 03-Diseno sec 5: copia a user://photos/export/ con timestamp; ConfirmPopup M53 antes; toast ruta relativa despues; SIN red/social (M97 define lo web si quiere) (2026-10-23 S44)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M97, M53
 - [ ] Explicar en el diálogo qué se exporta y adónde [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -203,7 +203,7 @@
 
 ## Q. Control de Entradas (M57)
 
-- [ ] Definir atajos de teclado y gamepad del modo foto [S]
+- [x] Definir atajos de teclado y gamepad del modo foto [S] — 03-Diseno sec 5: P modo, ESPACIO captura, rueda zoom 30-120 mm, F1-F6 presets, Q/E filtro; gamepad Start/A/gatillos; respeta remap M57 (2026-10-23 S43)
   · espera: definicion de alcance/contrato del item (ver 03-Diseno.md; dueno por asignar)
 - [ ] Bloquear atajos de juego durante el modo foto y viceversa [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -280,13 +280,13 @@
 
 - [ ] Definir iconos de controles del modo foto (M46) [M]
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M46
-- [ ] Definir marcadores de encuadre (rejilla de tercios) con toggle [M]
+- [x] Definir marcadores de encuadre (rejilla de tercios) con toggle [M] — 03-Diseno sec 5: 2+2 lineas al tercio blanco 40% + cruz centro; toggle G, defecto OFF por preset, solo UI (2026-10-23 S43)
   · espera: definicion de alcance/contrato del item (ver 03-Diseno.md; dueno por asignar)
 - [ ] Añadir guía de horizonte opcional [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Definir sonido de obturador (M43) y vibración sutil (M57) [S]
+- [x] Definir sonido de obturador (M43) y vibración sutil (M57) [S] — 03-Diseno sec 5: obturador_foto -4 dB sincrono con PHOTO_TAKEN; vibracion gamepad 60 ms suave, tolerante a ausencia (2026-10-23 S43)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M43, M57
-- [ ] Definir el ícono de la cámara en la barra de accesos (M53) [S]
+- [x] Definir el ícono de la cámara en la barra de accesos (M53) [S] — 03-Diseno sec 5: lineicons (M46) boton abre/cierra modo, borde sello brisa activo, tooltip "Modo foto (P)", silueta sin fondo (2026-10-23 S43)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M53
 
 ## X. Validación y QA
@@ -415,4 +415,4 @@
   y ajeno**: parse error en `tests/unit/debug/test_debug_menu.gd` (`_limpiar_huerfanos_boot`,
   M110, WIP sin commitear de otro agente) que revienta toda la suite GdUnit4 (rc=105).
   No se tocó ese archivo (perteneciente a otro módulo en vuelo).
-**Totales:** 137 items · Completados: 43 · Pendientes: 92 · No resueltos: 2. (Re-medido G-5.3-Flash-Agente 2026-10-22: 43 [x] / 92 [ ] / 2 [?] tras tanda photopose+restaurar; qa_m56_photopose.gd 13/0.)
+**Totales:** 137 items · Completados: 50 · Pendientes: 85 · No resueltos: 2. (Re-medido G-5.3-Flash-Agente 2026-10-23 S43: 48 [x] / 87 [ ] / 2 [?] (tras tanda photopose+restaurar; qa_m56_photopose.gd 13/0.)
