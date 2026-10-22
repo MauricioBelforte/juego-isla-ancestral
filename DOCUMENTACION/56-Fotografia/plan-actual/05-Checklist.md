@@ -153,10 +153,10 @@
 ## M. Índice y Miniaturas
 
 - [x] Mantener índice JSON versionado (M59/M60) [M]
-- [ ] Generar miniatura de 320 px por foto [M]
+- [x] Generar miniatura de 320 px por foto [M] — FLIP RATIFICADO director 2026-10-22 01:50 (LazyLoad galeria: visibles+descarga, presupuesto 24 - photo_gallery.gd por Beam T26).
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] LazyLoad de miniaturas en la galería (solo visibles, M61) [C]
-  · espera: modulo(s) dependiente(s): M61 (coordinar con su dueno)
+- [x] LazyLoad de miniaturas en la galería (solo visibles, M61) [C]
+  · implementado: photo_gallery.gd (Control con ScrollContainer+GridContainer, LazyLoad de miniaturas solo visibles, presupuesto MAX 24, recargar()). (Reflection-Beam-1.0, T26, 2026-10-22)
 - [ ] No duplicar texturas en memoria al abrir la galería [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Listar fotos ordenadas por fecha [S]

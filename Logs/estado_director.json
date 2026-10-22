@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T01:40:30",
+ "ultimo_update": "2026-10-22T01:53:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -157,8 +157,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T25 sellada 053: suscripciones M19/M36 verificadas en disco 5/5 (npc_manager + 4 faunas); item 106 flip; fila 56 34/137; residuos honestos: pose_foto() M19 + congelacion real + items 110/114",
-  "acuse_enviado": 53
+  "estado": "T26 sellada 055: LazyLoad galeria verificado 6/6 (photo_gallery.gd, presupuesto 24, resize 160x90); item 158 flip; fila 56 x/137 re-sync; 7 entregas fotografia esta noche",
+  "acuse_enviado": 55
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
