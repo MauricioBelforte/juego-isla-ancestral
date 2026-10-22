@@ -209,6 +209,17 @@ func _pos_en_orbita(ang: float) -> Vector3:
 	return p
 
 
+var _congelado_foto: bool = false
+
+func congelar_foto() -> void:
+	_congelado_foto = true
+	print("[Gaviota] congelado para foto")
+
+
+func descongelar_foto() -> void:
+	_congelado_foto = false
+
+
 func _physics_process(delta: float) -> void:
 	_t += delta
 	match _estado:

@@ -135,6 +135,17 @@ func _on_photo_pose() -> void:
 	print("[Cangrejo] photo pose solicitada")
 
 
+var _congelado_foto: bool = false
+
+func congelar_foto() -> void:
+	_congelado_foto = true
+	print("[Cangrejo] congelado para foto")
+
+
+func descongelar_foto() -> void:
+	_congelado_foto = false
+
+
 func _physics_process(delta: float) -> void:
 	if _estado == ESTADO_CAMINANDO:
 		_paso_caminando(delta)

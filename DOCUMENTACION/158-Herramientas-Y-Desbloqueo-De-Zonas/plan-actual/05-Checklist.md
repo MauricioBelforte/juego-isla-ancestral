@@ -24,13 +24,13 @@
 ## A. Requisitos del modulo (15)
 
 - [ ] Definir el problema: progresion de herramientas por tier que desbloquee contenido sin copiar a Zelda [S]
-- [ ] Registrar dependencias: M13, M38, M27, M28, M71, M22 [S]
+- [x] Registrar dependencias: M13, M38, M27, M28, M71, M22 [S]
 - [x] Definir 4 tiers: Cobre(T1), Hierro(T2), Oro(T3), Cristal(T4) [S] — iter. 1: data/herramientas/tiers_config.json con 4 tiers (test: 4 cargados)
-- [ ] T1 se obtiene gratis en isla principal (auto-coleccion) [S]
-- [ ] T2-T4 se forjan en islas distintas con profesional especializado [M]
-- [ ] Forja requiere materiales + monedas [M]
+- [x] T1 se obtiene gratis en isla principal (auto-coleccion) [S]
+- [x] T2-T4 se forjan en islas distintas con profesional especializado [M]
+- [x] Forja requiere materiales + monedas [M]
 - [ ] Precios progresivos por isla (+50% minimo entre islas) [M]
-- [ ] Cursos de oficio por isla (carpinteria, herreria, encantamiento) [M]
+- [x] Cursos de oficio por isla (carpinteria, herreria, encantamiento) [M]
 - [ ] Cursos permiten vender herramientas en tienda del jugador [M]
 - [ ] Historia principal requiere T4 para completarse [C]
 - [ ] Progresion no lineal (jugador elige orden de islas) [M]
@@ -42,12 +42,12 @@
 ## B. Sistema de Tiers (12)
 
 - [x] Enum ToolTier definido (T1_COBRE, T2_HIERRO, T3_ORO, T4_CRISTAL) [S] — iter. 1: ids string del JSON con get_tier_nivel() comparable (testeado T2 > T1)
-- [ ] ToolTierDefinition como Resource con propiedades por tier [M]
+- [x] ToolTierDefinition como Resource con propiedades por tier [M]
 - [x] T1: dano 1.0, velocidad 1.0, area 1x1 [S] — testeado get_tier(T1_COBRE)
 - [x] T2: dano 2.0, velocidad 1.5, area 1x1 [S] — en JSON (test carga 4/4)
 - [x] T3: dano 3.5, velocidad 2.0, area 2x2 [S] — testeado get_tier(T3_ORO)
 - [x] T4: dano 5.0, velocidad 3.0, area 2x2 [S] — testeado get_tier(T4_CRISTAL)
-- [ ] Cada tier tiene color visual distintivo [S]
+- [x] Cada tier tiene color visual distintivo [S]
 - [ ] Cada tier tiene sonido de uso diferenciado [S]
 - [ ] Cada tier tiene particulas diferenciadas [S]
 - [ ] La herramienta mejorada reemplaza visualmente a la anterior [M]
@@ -68,7 +68,7 @@
 - [x] Verificacion de tier: can_access_zone() retorna bool [M] — testeado: gates cerrados sin tier, zona sin gate libre
 - [ ] Feedback visual al no tener tier (brillo rojo suave) [S]
 - [x] Tooltip informativo cuando el jugador no tiene tier [S] — iter. 1: info_gate(zone_id) devuelve required_tier/required_tool/abierto/blocks_story para M53 (testeado)
-- [ ] Gate desaparece permanentemente al desbloquearlo [M]
+- [x] Gate desaparece permanentemente al desbloquearlo [M]
 - [x] Se registra en PlayerToolProgress cada gate desbloqueado [M] — iter. 1: _gates_abiertos persistidos en "tool_tiers" (round-trip testeado)
 - [x] Se emite signal gate_unlocked(zone_id, gate_id) [S] — testeado; restore NO re-emite (§2.3, testeado)
 - [x] Gates que bloquean historia marcados con blocks_story=true [M] — iter. 1: 3 gates con blocks_story + zona_bloquea_historia() consultable por M22 (testeado)
@@ -174,7 +174,7 @@
 - [ ] PlayerToolProgress serializado en GameState.M158 [M]
 - [ ] Tiers maximos alcanzados persistidos [M]
 - [ ] Cursos aprendidos persistidos [M]
-- [ ] Gates desbloqueados persistidos [M]
+- [x] Gates desbloqueados persistidos [M]
 - [ ] Conteo de forjas persistido [M]
 - [ ] Ventas a NPCs visitantes persistidas [M]
 - [ ] Estado de jarrones (ultima reposicion) persistido [M]
@@ -182,7 +182,7 @@
 
 ## K. Verificacion Final (8)
 
-- [ ] El jugador obtiene T1 gratis en isla principal [S]
+- [x] El jugador obtiene T1 gratis en isla principal [S]
 - [ ] El jugador puede viajar a isla 2 y forjar T2 [M]
 - [ ] Cada isla subsiguiente tiene precios +50% minimo [M]
 - [ ] Templos de historia no se completan sin T3/T4 [M]

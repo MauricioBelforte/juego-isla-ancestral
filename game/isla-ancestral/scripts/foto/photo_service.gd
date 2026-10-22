@@ -215,6 +215,17 @@ func tomar_foto() -> Dictionary:
 	if hud != null:
 		ui.set_hud_visible(false)
 
+	# Congelar fauna (voladores/acuaticos) para captura sin romper trayectoria (item 110).
+	var fauna_congelada: Array[Node] = []
+	for n in get_tree().get_nodes_in_group("fauna"):
+		if is_instance_valid(n) and n.has_method("congelar_foto"):
+			n.congelar_foto()
+			fauna_congelada.append(n)
+	for n in get_tree().get_nodes_in_group("npcs"):
+		if is_instance_valid(n) and n.has_method("congelar_foto"):
+			n.congelar_foto()
+			fauna_congelada.append(n)
+
 	await get_tree().process_frame
 	await get_tree().process_frame
 
@@ -249,6 +260,11 @@ func tomar_foto() -> Dictionary:
 			motivo = ""
 		else:
 			motivo = "error_guardado_%d" % err
+
+	# Restaurar fauna congelada (voladores/acuaticos).
+	for n in fauna_congelada:
+		if is_instance_valid(n) and n.has_method("descongelar_foto"):
+			n.descongelar_foto()
 
 	if hud != null:
 		ui.set_hud_visible(visible_antes)
