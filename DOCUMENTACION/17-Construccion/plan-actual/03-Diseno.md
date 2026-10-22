@@ -158,3 +158,21 @@ PlacementRule (Resource):
 - Integración: colocar→guardar→cargar→restaurar idéntico; undo de demolir devuelve recursos exactos.
 - Stress M112: 200+ piezas en una zona con profiler (frame time y memoria).
 - Recorrido M114: construir una casa completa (M18) sin errores de consola, sin NPC atrapados.
+
+
+## 9. Especificacion de rejilla (L3 - specs matematicas)
+
+### 9.1 Paso de rejilla
+- Paso fijo: 1 m, derivado del tamano de voxel de M08 (voxel size = 1.0 m).
+- Toda pieza se alinea a multiplos de 1 m en X/Z; altura en multiplos de 1 m en Y.
+- Rotacion: 0, 90, 180, 270 grados (4 orientaciones cardinales).
+
+### 9.2 Origen de la rejilla
+- Origen identico al origen global del mundo voxel (0,0,0).
+- Celda (i,j,k) cubre el volumen [i, i+1) x [k, k+1) x [j, j+1).
+- Conversion mundo->rejilla: floor(pos / 1.0). Conversion rejilla->mundo: cell * 1.0 + 0.5 (centro).
+
+### 9.3 Validacion matematica
+- Una pieza de tamano (w,d,h) celdas ocupa w*d*h celdas.
+- Colision: verificar que todas las celdas esten libres (no ocupadas por otra pieza ni por terreno solido).
+- Altura maxima por zona: configurable (default 4 plantas = 4 m).

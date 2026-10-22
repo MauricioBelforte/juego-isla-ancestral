@@ -77,8 +77,10 @@
 
 ## D. Rejilla voxel de 1 m y alineación con M08 (10)
 
-- [ ] Paso de rejilla fijo de 1 m derivado del tamaño de voxel de M08 [C]
-- [ ] Origen de la rejilla idéntico al origen global del mundo voxel [C]
+- [x] Paso de rejilla fijo de 1 m derivado del tamaño de voxel de M08 [C]
+  · evidencia: 03-Diseno.md secc. 9.1 (paso 1m, 4 rotaciones) (Reflection-Beam-1.0, T58, 2026-10-22)
+- [x] Origen de la rejilla idéntico al origen global del mundo voxel [C]
+  · evidencia: 03-Diseno.md secc. 9.2 (origen global, conversion mundo<->rejilla) (Reflection-Beam-1.0, T58, 2026-10-22)
 - [x] Las piezas de NxN celdas ocupan exactamente su área completa en la rejilla [M] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: una pieza 2x2 ocupa exactamente sus 4 celdas (huela verificada celda a celda, no solo el conteo)
 - [x] Compensación de medio voxel (offset 0.5 m) aplicada de forma consistente en preview y datos [C] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `OFFSET_MEDIO_VOXEL = 0.5` usado por `mundo_desde_celda()`; el centro de (4,2,6) es (4.5,2.5,6.5).
 - [ ] Altura de planta: 1 m por nivel de bloque; habitaciones de 3 m en M18 [M]

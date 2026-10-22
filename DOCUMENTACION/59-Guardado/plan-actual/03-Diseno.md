@@ -117,3 +117,20 @@ save_writer.write_atomic() falla por disco lleno
 | M61 | Guardado en background thread |
 | M102 | Bug-Tracking de fallos de guardado |
 | M108/M118 | Importación y validación en CI |
+
+
+## Atomicidad y multiplataforma (L4 - specs)
+
+### Guardado atomico
+- Escribir en archivo temporal (.tmp) y luego rename atomico al archivo final.
+- Si el rename falla (permisos, disco lleno), mantener el archivo anterior intacto.
+- Checksum (SHA-256) del archivo final para detectar corrupcion.
+
+### Multiplataforma
+- Windows: MoveFileEx con MOVEFILE_REPLACE_EXISTING (atomico en NTFS).
+- macOS/Linux: rename() es atomico en POSIX (mismo filesystem).
+- Fallback: si rename atomico no disponible, copiar + verificar + borrar original.
+
+### Verificacion
+- Probar en Windows/macOS/Linux: rename atomico varia por SO.
+- Test de crash durante guardado: archivo anterior debe quedar intacto.
