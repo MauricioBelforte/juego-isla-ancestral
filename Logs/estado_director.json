@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:55:00",
+ "ultimo_update": "2026-10-22T02:20:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "233/234: S3 M35 RATIFICADA (capa VETAS real + compat chunks; Totales agregado) + HALLAZGO flip falso pre-existente L85 derivado; drift Totales corregido por director",
+  "estado": "235/236: S4 M57 RATIFICADA (PromptDB + sugerir_atajo_libre + QA 18/0 verificado en disco; 3 flips; M57 94/119); fecha julio renombrada por director en su 031; GO S5",
   "pendientes_real": 222,
-  "acuse_enviado": 234,
+  "acuse_enviado": 236,
   "ultima_tanda": 40
  },
  "deepseek": {

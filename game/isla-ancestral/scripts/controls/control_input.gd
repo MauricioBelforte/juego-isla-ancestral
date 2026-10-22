@@ -194,6 +194,51 @@ func _eventos_equivalentes(a: InputEvent, b: InputEvent) -> bool:
 		return a.axis == b.axis
 	return false
 
+## ── Sugerencia de tecla/boton libre ante conflicto (RF5) ──
+## (item [S] del 05-Checklist; G-5.3-Flash-Agente 2026-10-22)
+
+## Candidatos de tecla ante conflicto, en orden de preferencia (F1..F12:
+## lejos del gameplay y de las teclas del sistema). Cte simbolicas KEY_*.
+const CANDIDATOS_TECLA: Array = [
+	KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6,
+	KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12,
+]
+const CANDIDATOS_BOTON: Array = [
+	JOY_BUTTON_BACK, JOY_BUTTON_START,
+	JOY_BUTTON_DPAD_UP, JOY_BUTTON_DPAD_DOWN,
+	JOY_BUTTON_DPAD_LEFT, JOY_BUTTON_DPAD_RIGHT,
+]
+const CANDIDATOS_MOUSE: Array = [
+	MOUSE_BUTTON_XBUTTON1, MOUSE_BUTTON_XBUTTON2,
+]
+
+## Devuelve un evento equivalente al deseado pero SIN conflicto, para
+## ofrecer al jugador un atajo libre de una pulsacion (UX: sugerencia
+## ante conflicto). El deseado se devuelve si ya estaba libre.
+## null solo si el tipo no es soportado o no quedan candidatos.
+func sugerir_atajo_libre(accion: String, evento_deseado: InputEvent) -> InputEvent:
+	if not hay_conflicto(accion, evento_deseado):
+		return evento_deseado
+	if evento_deseado is InputEventKey:
+		for kc in CANDIDATOS_TECLA:
+			var ev := InputEventKey.new()
+			ev.physical_keycode = kc
+			if not hay_conflicto(accion, ev):
+				return ev
+	elif evento_deseado is InputEventJoypadButton:
+		for bi in CANDIDATOS_BOTON:
+			var ev := InputEventJoypadButton.new()
+			ev.button_index = bi
+			if not hay_conflicto(accion, ev):
+				return ev
+	elif evento_deseado is InputEventMouseButton:
+		for bi in CANDIDATOS_MOUSE:
+			var ev := InputEventMouseButton.new()
+			ev.button_index = bi
+			if not hay_conflicto(accion, ev):
+				return ev
+	return null
+
 ## Restaura los defaults de todas las acciones (borra remapeos de usuario).
 func restaurar_defaults() -> void:
 	for accion in ACCIONES_CATALOGO:

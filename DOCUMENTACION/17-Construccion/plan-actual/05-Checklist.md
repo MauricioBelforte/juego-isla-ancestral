@@ -125,7 +125,7 @@
 - [ ] Puente solo sobre agua (laguna/mar interior) y dentro de alcance de zona [C]
 - [ ] Camino solo sobre césped/arena (nunca sobre roca o pendiente fuerte) [M]
 - [x] Techos exigen 2+ soportes (paredes o pilares) en las celdas de cobertura [C]
-- [ ] Ninguna celda de la pieza puede solapar un NPC activo (consulta M64) [C]
+- [x] Ninguna celda de la pieza puede solapar un NPC activo (consulta M64) [C]
 - [ ] Las piezas no pueden bloquear la única salida de la zona de construcción [C]
 - [ ] Las piezas de ruina M25 y parcelas de NPC son siempre no colocables ni demolidas [M]
 
