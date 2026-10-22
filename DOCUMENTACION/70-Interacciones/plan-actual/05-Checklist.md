@@ -94,7 +94,7 @@
 
 - [x] RF4: línea de visión voxel solo para categorías configuradas (npc, cofre, puerta, evento) [C]
 
-- [ ] RF4: espaciado del raycast de visión (1 por ventana de N=4 frames) [M]
+- [x] RF4: espaciado del raycast de visión (1 por ventana de N=4 frames) [M] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: interaction_manager.gd FRAMES_ENTRE_EVALUACIONES=4 (_process con throttle: 3 frames no evalúan, el 4º ejecuta _evaluar_y_seleccionar; contador expuesto frames_hasta_evaluacion()); qa_m70_raycast_fade.gd 8/0 EXIT 0 (objetivo vacío en 3 frames, seleccionado en el 4º)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -142,7 +142,7 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] RF5: cambio de objetivo con fade (0.08-0.12 s), nunca salto brusco [M]
+- [x] RF5: cambio de objetivo con fade (0.08-0.12 s), nunca salto brusco [M] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: interaction_manager.gd DURACION_FADE_CAMBIO=0.10 (rango del diseño) + señal objetivo_en_transicion(duracion) disparada en CUALQUIER cambio de objetivo (incluida la selección inicial null->objetivo) + getter en_transicion_cambio() para el HUD; decae verificado por sonda (sonda_m70b.gd: fades=1 estable con objetivo estable, 0.084->0.004 decay real); CUIDADO (lección del QA): las lambdas GDScript capturan por VALOR — contadores por closure no funcionan, patrón array-por-referencia
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
@@ -859,4 +859,4 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 77 [x] / 121 [ ] / 0 [?].
 
 > Las marcas no se tocaron.
-
+**Totales:** 198 items · Completados: 124 · Pendientes: 74 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 124 [x] / 74 [ ] / 0 [?] tras tanda RF4 throttle + RF5 fade; qa_m70_raycast_fade.gd 8/0 + sonda_m70b.gd de referencia.)

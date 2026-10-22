@@ -130,14 +130,16 @@
   `terrain_modifiers`. Suplantado, no creado → `[?]`.
 - [x] Implementar property terrain_id: int [S]
 - [?] Implementar get_terrain_id() [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112, verificada por el director): func get_terrain_id = 0 definiciones en scripts/ (existe get_current_terrain_id en terrain_detector.gd, nombre distinto)
-- [ ] Heredar de StaticBody3D [S]
+- [x] Heredar de StaticBody3D [S]
+  · evidencia: scripts/terrenos/terrain_block.gd creado (extends StaticBody3D) (Reflection-Beam-1.0, T55, 2026-10-22)
 - [?] Requerir CollisionShape3D hijo [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe)
 - [x] Documentar uso por bloques de terreno [S]
 - [?] Crear escena base terrain_block.tscn [M] — **Auditoría A (agnes-3-flash, 2026-10-06):**
   `.tscn` no existe; la escena base quedó suplanteda por los datos en `terrenos.json` +
   `terrain_data` (Resource). → `[?]`.
 - [?] Configurar CollisionShape3D con BoxShape3D [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe)
-- [ ] Asignar layer correcta segun terreno [M]
+- [x] Asignar layer correcta segun terreno [M]
+  · evidencia: _layer_for_type() en terrain_block.gd (7 tipos) (Reflection-Beam-1.0, T55, 2026-10-22)
 - [?] Asignar terrain_id correcto [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe)
 - [ ] Crear variante terrain_block_ceped [S]
 - [ ] Crear variante terrain_block_barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
