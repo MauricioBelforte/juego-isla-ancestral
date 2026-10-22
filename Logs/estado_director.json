@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T19:45:50",
+ "ultimo_update": "2026-10-22T19:55:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "Aclaracion M91 ACEPTADA (239/2 oficial); GO veredictora lote M99 (169/169 cerrado); proxima 77-Online; mi 954",
+  "estado": "VEREDICTO M99 con sello APROBADO y aplicado en GLOBAL (955: 7/7, 0 fallas); higiene conteo canon; radar recalibrado a cola consolidada de Beam; mi 956",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,13 +13,16 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 954,
-  "pool_saneado": true
+  "acuse_enviado": 956,
+  "pool_saneado": true,
+  "sellos_emitidos": [
+   "M99 169/169 (955)"
+  ]
  },
  "g_5_3": {
-  "estado": "S53+S54 RATIFICADAS (116->128->140 exacto; L147 cloud sincera fuera); GO bateria 5 (~21); mi 310 regenerado; gemelo N4 resuelto",
+  "estado": "guardia 312 ACEPTADA (honestidad sin flips); gemelo 310/311 sanado; GO Bateria 5 re-confirmado con regla flags-usuario; NUEVA REGLA consolidada comunicada; integracion slice = fundador; mi 313",
   "pendientes_real": 222,
-  "acuse_enviado": 310,
+  "acuse_enviado": 313,
   "ultima_tanda": 40
  },
  "deepseek": {
