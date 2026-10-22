@@ -547,3 +547,10 @@ Regimen: UNA o DOS tareas [C] por ciclo (son tareas de DIAS). Formato de entrega
 - **Re-verificador (8):** muestreos de tandas recientes sin verificar: M73 agnes, M20 t2 MiniMax, M23 Step-5, M102 DS, S20-S22 G-5.3.
 - **Reserva (5):** escaneo propio - si su picking detecta agujeros documentales, propone items con fuente.
 - Total: 100. Si cierra todo, el fundador decide el siguiente lote (P-100 v2 u otro nicho).
+
+
+### COLA TOTAL SIN LIMITE - EXPRIMIR (directiva fundador 08:28: caso especial, quizas manana ya no esta)
+- Luego del P-100, SIGUE automaticamente con esta cola (mismo regimen produce-first, reporte minimo):
+- M59 resto de [ ] (41 despues de P-30/P-100) | M156 resto por script (~35 tras P-100) | M70 picking documental resto (~55) | M17 resto de specs/docs (~53) | M91 config (20) | M138 solo mediciones tecnicas (el resto de las que piden Definir MEDIDA - contenido NO) | M75 papel (+20) | M62 items sin hardware (los que se puedan por doc) | M117-Build-System doc items solo documentacion (16 minus editor).
+- Sin limite superior: cuando agote un modulo, sigue con el siguiente. El fundador decide cuando frena.
+- INDEPENDENCIA: nada de contenido M138 (G-5.3), nada de codigo M17 (MiniMax), editor-locked [ ] honesto siempre.

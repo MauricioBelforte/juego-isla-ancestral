@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T08:30:40",
+ "ultimo_update": "2026-10-22T08:35:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -118,7 +118,8 @@
   "Limpieza automatica del canal MiniMax borra ficheros viejos (perdidos: mi 047, sus 034/035/038) - estado_director.json es la unica memoria del hilo para ese canal; numerar por pool en todo caso (07:42)",
   "Colision de numeracion por pool compartido al ritmo multitarea de Beam (07:52: DOS ficheros 121 — el acuse mio y su t58) - en adelante cada acuse del director verifica que el head del pool no tenga fichero ya existente con ese numero antes de escribir",
   "QA cruzado efectivo primera degradacion (08:22): M33 [x] escritos por el mejor productor (G-5.3) NO eran reales (catalogo .tres nunca creado; implementacion real era BalanceService) - ningun agente escapa del muestreo; agnes con poder de degradar demostrado",
-  "Citas de Beam con tildes o simbolos distintos del texto plano (>= vs >=, elevacion vs elevacion) - el muestreo SIEMPRE prueba variantes antes de negar (3ra vez: 073, batch2, batch3)"
+  "Citas de Beam con tildes o simbolos distintos del texto plano (>= vs >=, elevacion vs elevacion) - el muestreo SIEMPRE prueba variantes antes de negar (3ra vez: 073, batch2, batch3)",
+  "Nuevo regimen produce-first para Beam (fundador 08:28, por disponibilidad incierta): reportes minimos de items, verificacion DIFERIDA grande - riesgo: volumen sin verificacion en vivo; mitigado por su historial limpio y backfill tomorrow"
  ],
  "minimax_m3_1_flash": {
   "estado": "050/051: M20 tanda 3 RATIFICADA (idempotencia, 80/148); sigue cola",
@@ -186,10 +187,10 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "ajuste de ritmo: batches de 20-25 items por mensaje (misma cita textual); P-100 en vuelo ~33 items cerrados combinados a las 08:30; si 2 batches perfectos -> prueba 100/vuelta",
-  "acuse_enviado": 134,
+  "estado": "COLA TOTAL SIN LIMITE abierta (fundador: casoo especial, quizas manana no esta): P-100 -> cola reserva ~250 items de nicho -> picking propio; sin consultas de permiso; verificacion retrospectiva",
+  "acuse_enviado": 136,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
-  "regimen": "multitarea L1-L6, 2-4 por vuelta",
+  "regimen": "produce-first ilimitado hoy",
   "encargo_activo": "P-100 batches 4+ en vuelo"
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
