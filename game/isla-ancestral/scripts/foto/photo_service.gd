@@ -34,6 +34,9 @@ var _activo_preset: String = "natural"
 var _en_captura: bool = false
 ## Estado del HUD antes de entrar al modo foto (checklist G61).
 var _hud_visible_antes_modo: bool = true
+## ── SubViewport de captura a resolucion fija (M56 [C] item 131) ──
+## 1920x1080 dedicado, independiente de la resolucion de pantalla.
+var _viewport_captura: SubViewport = null
 ## ── Hora fijada para la foto (M31, item 69) ─────────────
 ## -1 = sin hora fija (usa la hora actual del juego). 0-23 = hora fijada.
 var _hora_fijada: int = -1
@@ -49,6 +52,11 @@ var _navigator: Camera3D = null
 
 func _ready() -> void:
 	_cargar_presets()
+	# SubViewport de captura a resolucion fija 1920x1080 (M56 [C] item 131).
+	_viewport_captura = SubViewport.new()
+	_viewport_captura.size = Vector2i(1920, 1080)
+	_viewport_captura.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	add_child(_viewport_captura)
 	# Navigator: réplica lógica de la cámara real (M56 [C] item 24).
 	var nav_script := load("res://scripts/foto/navigator.gd")
 	if nav_script != null:
@@ -194,7 +202,15 @@ func tomar_foto() -> Dictionary:
 
 	var oculto_durante: bool = (hud == null) or (not bool(hud.visible))
 	var img: Image = null
-	var tex := get_viewport().get_texture()
+	# Captura a resolucion fija: usar SubViewport dedicado.
+	if _viewport_captura != null and _navigator != null:
+		_viewport_captura.world_3d = get_viewport().world_3d
+		if _navigator.get_parent() != _viewport_captura:
+			_navigator.reparent(_viewport_captura)
+	await get_tree().process_frame
+	var tex := _viewport_captura.get_texture()
+	if tex == null:
+		tex = get_viewport().get_texture()
 	if tex != null:
 		img = tex.get_image()
 

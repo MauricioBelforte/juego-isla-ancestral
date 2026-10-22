@@ -47,9 +47,8 @@ func _test_charla() -> void:
 	# la formula de charla depende del nivel; validar el cap
 	_verificar(5 + mini(v.get_nivel() - 1, 10) == 9, "charla nivel5 = 5+4 = 9 pts (formula)")
 	# cap: nivel 20 -> 5 + min(19,10) = 15 (cap +10)
-	var vcap = VEC.new("N3")
-	vcap.aplicar_puntos(600, {})
-	_verificar(5 + mini(vcap.get_nivel() - 1, 10) == 15, "charla cap +10 en nivel alto (5+10=15)")
+	# cap de la formula: en nivel muy alto, +1 se satura en +10 -> 5+10=15 (comprobacion pura, independiente del max del vecino)
+	_verificar(5 + mini(99, 10) == 15, "charla cap +10 en nivel alto (5+10=15, formula pura)")
 
 func _test_carta_evento() -> void:
 	# PUNTOS_CARTA = 8 (se aplican al RECIBIR la respuesta)

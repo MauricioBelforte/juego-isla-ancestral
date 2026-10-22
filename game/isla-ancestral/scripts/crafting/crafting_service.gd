@@ -233,6 +233,8 @@ func max_craftable(rec_id: String) -> int:
 	var inv = get_node_or_null("/root/Inventario")
 	if inv == null:
 		return 0
+	# D8 (decisión de dueño, G-5.3-Flash-Agente 2026-10-21): tope QoL de lote por craft.
+	# Evita accidentes de UI de múltiple-craft masivos (clamps el resultado a 30 máximo).
 	var max_n: int = 9999
 	for item_id in receta.materiales:
 		var necesario: int = int(receta.materiales[item_id])
@@ -240,7 +242,7 @@ func max_craftable(rec_id: String) -> int:
 		if disponible < necesario:
 			return 0
 		max_n = mini(max_n, int(disponible / maxf(float(necesario), 1.0)))
-	return maxi(0, max_n)
+	return maxi(0, mini(max_n, 30))
 
 ## ¿Se puede fabricar 1 unidad?
 func puede_craft(rec_id: String) -> bool:

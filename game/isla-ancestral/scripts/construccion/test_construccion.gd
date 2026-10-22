@@ -470,6 +470,28 @@ func _b11_persistencia(mgr) -> void:
 	mgr.confirmar_colocacion(Vector3i(0, 0, 0))
 	var e0: Dictionary = mgr.obtener_estructuras()[0]
 	_ok(int(e0["rot_y"]) == 90, "rot_y guardado como grados (90): %d" % int(e0["rot_y"]))
+
+	# M60 schema v2: M17 conserva los campos opcionales de M18 al restaurar.
+	mgr.limpiar_estructuras()
+	mgr.restaurar_estructuras([{
+		"id": "casa_estado", "tipo": "pared_madera", "pos": [0, 0, 0],
+		"rot_y": 0, "planta": 0, "variante": "",
+		"fase": 2, "mejora": 3,
+		"muebles": [{"celda": [1, 0, 1], "mueble": "mesa", "rotacion": 1}],
+		"cofre": {"contenido": [{"item_id": "madera", "cantidad": 4}]},
+		"puertas": [{"celda": [0, 0, 1], "abierta": true}],
+	}])
+	var rest: Dictionary = mgr.obtener_estructuras()[0]
+	_ok(int(rest.get("fase", -1)) == 2 and int(rest.get("mejora", -1)) == 3,
+		"restaurar conserva fase/mejora: %s" % str(rest))
+	_ok((rest.get("muebles", []) as Array).size() == 1
+		and (rest.get("cofre", {}) as Dictionary).get("contenido", []).size() == 1
+		and (rest.get("puertas", []) as Array).size() == 1,
+		"restaurar conserva muebles/cofre/puertas: %s" % str(rest.keys()))
+	var norm_opt := EstructurasCodec.desde_seccion(
+		EstructurasCodec.a_seccion(mgr.obtener_estructuras()))
+	_ok(norm_opt.size() == 1 and norm_opt[0].has("fase") and norm_opt[0].has("cofre"),
+		"codec v2 roundtrip conserva opcionales: %s" % str(norm_opt[0].keys() if norm_opt.size() > 0 else []))
 	_fin("11")
 
 func _b12_catalogo_tres() -> void:

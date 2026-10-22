@@ -135,8 +135,73 @@ func _test_estructuras_codec() -> void:
 	_check("rot_y -90 -> 270", int(norm[1]["rot_y"]) == 270, str(norm[1]["rot_y"]))
 	_check("rot_y 95 -> 90 (múltiplo más cercano)", int(norm[2]["rot_y"]) == 90, str(norm[2]["rot_y"]))
 	_check("planta negativa -> 0", int(norm[1]["planta"]) == 0, str(norm[1]["planta"]))
-	_check("claves exactas de la estructura",
+	_check("claves exactas de la estructura base",
 		norm[0].keys() == EstructurasCodec.CLAVES, str(norm[0].keys()))
+
+	# M60 schema v2: campos opcionales aditivos (M18/M17)
+	var crudo_v2: Array = [{
+		"id": "casa_estado", "tipo": "casa", "pos": [10, 0, -4],
+		"fase": 2, "mejora": 3,
+		"muebles": [
+			{"celda": [2, 0, 1], "mueble": "silla", "rotacion": 5},
+			{"celda": [1, 0, 1], "mueble": "mesa", "rotacion": 90},
+			{"celda": "basura", "mueble": "roto", "rotacion": 0},
+		],
+		"cofre": {"contenido": [
+			{"item_id": "madera", "cantidad": 5},
+			{"item_id": "madera", "cantidad": 3},
+			{"item_id": "piedra", "cantidad": 2},
+			{"item_id": "", "cantidad": 9},
+		]},
+		"puertas": [
+			{"celda": [3, 0, 1], "abierta": true},
+			{"celda": [1, 0, 1], "abierta": false},
+			{"abierta": true},
+		],
+	}]
+	var con_estado: Array = EstructurasCodec.normalizar(crudo_v2)
+	_check("schema v2: 1 estructura", con_estado.size() == 1, str(con_estado.size()))
+	var ce: Dictionary = con_estado[0]
+	_check("schema v2: fase/mejora", int(ce.get("fase", -1)) == 2 and int(ce.get("mejora", -1)) == 3, str(ce))
+	_check("schema v2: muebles normalizados y ordenados",
+		(ce.get("muebles", []) as Array).size() == 2
+		and String((ce["muebles"] as Array)[0]["mueble"]) == "mesa"
+		and int((ce["muebles"] as Array)[0]["rotacion"]) == 1
+		and int((ce["muebles"] as Array)[1]["rotacion"]) == 1,
+		str(ce.get("muebles", [])))
+	_check("schema v2: cofre suma duplicados",
+		(ce.get("cofre", {}) as Dictionary).get("contenido", []) == [
+			{"item_id": "madera", "cantidad": 8},
+			{"item_id": "piedra", "cantidad": 2},
+		], str(ce.get("cofre", {})))
+	_check("schema v2: puertas ordenadas y sin basura",
+		(ce.get("puertas", []) as Array).size() == 2
+		and (ce["puertas"] as Array)[0]["celda"] == [1, 0, 1]
+		and bool((ce["puertas"] as Array)[1]["abierta"]),
+		str(ce.get("puertas", [])))
+	_check("schema v2: validar acepta el estado nuevo",
+		EstructurasCodec.validar(con_estado).is_empty(), str(EstructurasCodec.validar(con_estado)))
+	var seccion_v2 := EstructurasCodec.a_seccion([ce])
+	var vuelta_v2 := EstructurasCodec.desde_seccion(seccion_v2)
+	_check("schema v2: roundtrip conserva opcionales",
+		int(vuelta_v2[0].get("fase", -1)) == 2
+		and (vuelta_v2[0].get("muebles", []) as Array).size() == 2
+		and (vuelta_v2[0].get("cofre", {}) as Dictionary).get("contenido", []).size() == 2,
+		str(vuelta_v2[0]))
+	(crudo_v2[0]["muebles"] as Array)[0]["celda"][0] = 99
+	_check("schema v2: sin aliasing en muebles",
+		int((con_estado[0]["muebles"] as Array)[0]["celda"][0]) == 1,
+		str(con_estado[0]["muebles"]))
+	_check("schema v2: opcionales inválidos se omiten",
+		not EstructurasCodec.normalizar([{
+			"id": "x", "muebles": "no", "cofre": {"contenido": []}, "puertas": [{"abierta": true}],
+		}])[0].has("muebles")
+		and not EstructurasCodec.normalizar([{
+			"id": "x", "muebles": "no", "cofre": {"contenido": []}, "puertas": [{"abierta": true}],
+		}])[0].has("cofre")
+		and not EstructurasCodec.normalizar([{
+			"id": "x", "muebles": "no", "cofre": {"contenido": []}, "puertas": [{"abierta": true}],
+		}])[0].has("puertas"))
 
 	# Tolerancia a basura
 	var sucio: Array = [42, "texto", {"sin_id": true}, {"id": "  "}, {"id": "ok", "pos": "basura"}]
@@ -185,6 +250,13 @@ func _test_estructuras_validar() -> void:
 	_check("pos con float -> error", not EstructurasCodec.validar([{"id": "x", "pos": [1.5, 0, 0]}]).is_empty())
 	_check("planta negativa -> error", not EstructurasCodec.validar([{"id": "x", "pos": [0, 0, 0], "planta": -1}]).is_empty())
 	_check("entrada no-Dictionary -> error", not EstructurasCodec.validar([7]).is_empty())
+	_check("fase negativa -> error", not EstructurasCodec.validar([{"id": "x", "pos": [0, 0, 0], "fase": -1}]).is_empty())
+	_check("mueble sin celda -> error",
+		not EstructurasCodec.validar([{"id": "x", "pos": [0, 0, 0], "muebles": [{"mueble": "silla", "rotacion": 0}]}]).is_empty())
+	_check("slot de cofre sin cantidad -> error",
+		not EstructurasCodec.validar([{"id": "x", "pos": [0, 0, 0], "cofre": {"contenido": [{"item_id": "madera", "cantidad": 0}]}}]).is_empty())
+	_check("puerta con abierta no-bool -> error",
+		not EstructurasCodec.validar([{"id": "x", "pos": [0, 0, 0], "puertas": [{"celda": [0, 0, 0], "abierta": 1}]}]).is_empty())
 
 
 ## ── T-018: BuildingsSaveProvider ────────────────────────

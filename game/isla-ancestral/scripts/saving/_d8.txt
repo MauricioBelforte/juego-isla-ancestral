@@ -1,0 +1,2 @@
+276: # lineal: 1.0 + efectividad_por_nivel * nivel  (paso 0.15 → n2 = 1.30)
+303: - Efectividad: lineal 1.0 → 1.45 (n3). M13 la consume como multiplicador de rendimiento (MR15) y techo de reparación (MR

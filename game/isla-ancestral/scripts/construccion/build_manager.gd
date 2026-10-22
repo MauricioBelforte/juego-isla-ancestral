@@ -647,6 +647,7 @@ func restaurar_estructuras(lista: Array) -> void:
 			"planta": maxi(0, int(e.get("planta", 0))),
 			"variante": String(e.get("variante", "")),
 		}
+		_copiar_opcionales(canon, e)
 		_alta_estructura(celda, r, posmod(paso, 4), canon, tipo)
 		n += 1
 	estructuras_restauradas.emit(n)
@@ -708,10 +709,25 @@ func _alta_estructura(celda: Vector3i, r: PlacementRule, rotacion: int,
 		"planta": maxi(0, planta),
 		"variante": variante,
 	}
+	_copiar_opcionales(canon, e)
 	var ancla: String = ConstruccionTipos.clave(celda)
 	_estructuras[ancla] = canon
 	for c in _celdas_de_estructura(canon, r):
 		_ocupacion[ConstruccionTipos.clave(c)] = ancla
+
+## Conserva los campos opcionales de M18/M17 (fase/mejora/muebles/cofre/puertas)
+## al restaurar o mover una estructura. Copia profunda para no aliasear el save.
+func _copiar_opcionales(dest: Dictionary, src: Dictionary) -> void:
+	for clave in ["fase", "mejora", "muebles", "cofre", "puertas"]:
+		if not src.has(clave):
+			continue
+		var valor: Variant = src[clave]
+		if typeof(valor) == TYPE_ARRAY:
+			dest[clave] = (valor as Array).duplicate(true)
+		elif typeof(valor) == TYPE_DICTIONARY:
+			dest[clave] = (valor as Dictionary).duplicate(true)
+		else:
+			dest[clave] = valor
 
 ## Da de baja una estructura y libera su ocupacion.
 func _baja_estructura(ancla: String) -> void:

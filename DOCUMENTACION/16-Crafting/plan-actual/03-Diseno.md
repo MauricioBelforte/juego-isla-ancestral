@@ -312,3 +312,14 @@ Tipos vigentes: hacha, martillo, azada, machete.
 ### Rechazos y cozy (RF-MR11)
 
 `materiales_insuficientes` NO daña la herramienta ni consume parcialmente: fallo informativo (coherente con la filosofía del módulo).
+
+## D8 — Tope QoL de lote por craft (RF8, multi-craft)
+
+**Modelo:** G-5.3-Flash-Agente
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-21
+**Decisión de dueño (G-5.3-Flash-Agente):** max_craftable() clamps su resultado a **30 máximo** por llamada (maxi(0, mini(max_n, 30))).
+
+**Por qué:** evita accidentes de UI de múltiple-craft masivos (un slider/drag que pida 999 unidades de golpe). Para lotes mayores queda la vía del dueño de la UI (llamar craft N veces o un batch explícito diseñado).
+
+**Propuesta original:** Beam (re-verificador t9) — adoptada por dueño G-5.3-Flash-Agente con test.

@@ -1,0 +1,17 @@
+# Modelo: Deepseek V4 Flash
+# Plataforma: Kilo
+# Fecha: 2026-08-30
+#
+# M16: Test de CraftingService (recetas, conocimiento, fabricación, experimentación).
+# Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/crafting/test_crafting.gd
+
+extends SceneTree
+
+var _fallos: int = 0
+var _cs: Node = null
+var _inv: Node = null
+
+func _init() -> void:
+	call_deferred("_run")
+
+func _run

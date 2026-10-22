@@ -12,7 +12,7 @@
 - [x] RF1: niveles de amistad 0-10 con umbrales [S]
 - [x] RF2: puntos de amistad acumulativos sin fuente de decaimiento [S]
 - [x] RF3: limite de un regalo efectivo por vecino y dia [S]
-- [ ] RF4-RF8: preferencias, charlas, cartas, recompensas y eventos definidos [S]
+- [x] RF4-RF8: preferencias, charlas, cartas, recompensas y eventos definidos [S]
 
 ## B. Puntos y progresion (8)
 
@@ -21,9 +21,9 @@
 - [x] Regalo que gusta 10 puntos [S]
 - [x] Regalo neutral 5 puntos [S]
 - [x] Regalo duplicado 2 puntos (cortesia, nunca 0) [S]
-- [ ] Charla diaria 5 + 1 por nivel (max +10) [S]
-- [ ] Carta respondida 8 puntos [S]
-- [ ] Evento como participante 15 puntos [S]
+- [x] Charla diaria 5 + 1 por nivel (max +10) [S]
+- [x] Carta respondida 8 puntos [S]
+- [x] Evento como participante 15 puntos [S]
 
 ## C. Niveles y desbloqueos (9)
 
@@ -32,7 +32,7 @@
 - [ ] Acceso a eventos por nivel minimo [S]
 - [ ] Desbloqueo de historias de amistad al nivel requerido (M23) [S]
 - [x] Excedente de puntos conservado al subir de nivel [S]
-- [ ] Bandeja de recompensas pendientes sin expiracion [S]
+- [x] Bandeja de recompensas pendientes sin expiracion [S]
 - [x] Recompensas reclamables en cualquier momento posterior (sin FOMO) [S]
 - [ ] Progress visible: barra de progreso dentro del nivel actual [S]
 - [ ] Feedback de nivel subido con animacion y lista de desbloqueos [M]
@@ -53,12 +53,12 @@
 
 ## E. Charlas (7)
 
-- [ ] Registro de 1 charla efectiva por vecino y dia [S]
+- [x] Registro de 1 charla efectiva por vecino y dia [S]
 - [ ] Puntos base + bonus por nivel de confianza [S]
 - [x] Variantes de dialogo por nivel de amistad (M21) [M]
 - [ ] El vecino menciona recuerdos (primer regalo, cumpleanos celebrado) [M]
-- [ ] Charla no consume regalo diario (independiente) [S]
-- [ ] Sin charla repetida con los mismos puntos en el mismo dia [S]
+- [x] Charla no consume regalo diario (independiente) [S]
+- [x] Sin charla repetida con los mismos puntos en el mismo dia [S]
 - [ ] Mensaje discreto de UI cuando la charla del dia ya se realizo [S]
 
 ## F. Cartas (7)
@@ -80,7 +80,7 @@
 - [ ] Lugar validado contra POI del mundo (M19/M08) [S]
 - [ ] Puntos otorgados a todos los participantes [S]
 - [x] Escenas breves de evento con dialogos de los vecinos (M21) [C]
-- [ ] Registro del evento en la memoria del vecino (recuerdo) [S]
+- [x] Registro del evento en la memoria del vecino (recuerdo) [S]
 - [ ] Eventos sin obligacion: el jugador puede declinar sin penalizacion [S]
 
 ## H. Sin decaimiento y sin FOMO (8)
@@ -131,7 +131,7 @@
 
 - [ ] Metadatos de item consultados sin modificar M14 [S]
 - [ ] Extraccion del item al regalar integrada [S]
-- [ ] Insercion de objetos de recompensa al reclamar [S]
+- [x] Insercion de objetos de recompensa al reclamar [S]
 - [ ] Recetas desbloqueadas por nivel van a la tabla de crafting [S]
 - [ ] Adjuntos de carta usados y recibidos correctamente [S]
 - [ ] Items decorativos de recompensa marcados como regalo valido [S]

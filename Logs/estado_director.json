@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T00:50:30",
+ "ultimo_update": "2026-10-22T00:30:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -89,7 +89,9 @@
   "diseno que PROMETE optimizacion (dirty flags en M72 1.3) sin verificacion de implementacion = brecha silenciosa: el re-verificador la detecta comparando 02-Analisis contra el codigo real",
   "lectura de fichero recien escrito por OpenCode puede devolver version de plantilla por cache/flush tardio: releer con Get-Item (bytes)+mtime Y contrastar con el agente antes de declarar T-19 (caso DS-OC 190: 1383 B reales)",
   "sesiones hermanas del mismo modelo (DS-WB/DS-OC): NO duplicar rieles ni derivar QA entre si - asignar con aclaracion explicita de familia",
-  "derivaciones dirigidas a un agente DENTRO de mensajes en canales de OTROS agentes no llegan: enviar SIEMPRE un mensaje propio al canal del dueno o se pierden (caso G-5.3 clamp D8 quedo en canal de Beam)"
+  "derivaciones dirigidas a un agente DENTRO de mensajes en canales de OTROS agentes no llegan: enviar SIEMPRE un mensaje propio al canal del dueno o se pierden (caso G-5.3 clamp D8 quedo en canal de Beam)",
+  "ediciones rapidas de funciones existentes: releer el SCOPE COMPLETO antes de insertar bloques con nombres de variables (clock duplicado rompio photo_service - caso Beam T21, reporto agnes)",
+  "pools de plataformas se regeneran a veces en formato 045 (padding) y a veces 45: consumir SIEMPRE por valor numerico"
  ],
  "minimax_m3_1_flash": {
   "estado": "025/026: wrapper integrador RATIFICADO (498 checks de M17 ahora corren en CI, 73.3 s); cadena P1-pool + censo + wrapper = CI del proyecto pasa de 10% a ~95% de cobertura; opciones siguientes a/b/c",
@@ -154,8 +156,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T19+T20 SELLADAS 042 (Navigator + colision raycast verificados en disco 12/12 checks); regimen tareas largas VALIDADO empiricamente; sigue paquete Fotografia o proximo paquete",
-  "acuse_enviado": 42
+  "estado": "URGENTE 045: T21 parse error clock-duplicado rompe photo_service (agnes 916) - fix 2 min YA; su 044 T22 subviewport ya recibido (acuse en 046 con el fix); pool normalizado",
+  "acuse_enviado": 45
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {

@@ -120,3 +120,11 @@ Botón "Crear xN": calcula el máximo `floor(disponibles / coste)` considerando 
 ## 5. Conclusiones
 
 El sistema combina: estaciones físicas con identidad (mesa/fogata/telar), recetas basadas en datos editables, desbloqueo híbrido (experimentación + compra), fabricación instantánea con feedback rico, consumo honesto (solo en éxito) y una regla anti-redundancia que protege el catálogo. Esto cumple los 25 puntos del plan maestro y los requisitos cozy del usuario.
+
+## Nota de balance — ROI decreciente de herramientas MR (intención documental)
+
+**Modelo:** G-5.3-Flash-Agente
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-21
+
+El coste de mejora de herramientas crece por nivel (MR3: coste_nivel[N] creciente) mientras el beneficio (efectividad, MR4: +0.15 lineal por nivel) es constante — es decir, el ROI es DECRECIENTE por diseño. **Intención (propuesta del re-verificador Beam T11, ratificada por el director 223):** es un PREMIUM intencional de late-game — las herramientas de nivel alto son lujo progresivo, no obligación. Pendiente: el fundador ratifica o ajusta la curva (opción B: feedback creciente) — mientras tanto el schema MR3 queda como está.

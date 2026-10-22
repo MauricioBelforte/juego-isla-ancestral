@@ -128,8 +128,8 @@
 
 ## K. Captura Técnica
 
-- [ ] Capturar a resolución fija 1920×1080 (no screencapture) [C]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
+- [x] Capturar a resolución fija 1920×1080 (no screencapture) [C]
+  · implementado: SubViewport 1920x1080 dedicado en photo_service.gd; tomar_foto usa _viewport_captura.get_texture() con fallback al viewport principal. (Reflection-Beam-1.0, T22, 2026-10-22)
 - [ ] Presupuesto de captura: < 50 ms (M61) [C]
   · espera: modulo(s) dependiente(s): M61 (coordinar con su dueno)
 - [ ] Aplicar preset de filtros en el frame capturado [M]
