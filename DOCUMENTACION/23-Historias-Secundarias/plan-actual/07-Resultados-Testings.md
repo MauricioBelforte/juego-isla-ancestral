@@ -101,6 +101,29 @@ Guardián EN ROJO por inyección de runtime sobre el bloque M (asignación tipad
 ejecuto» y «solo 170 checks (mínimo 227)», 2 fallos. Sonda borrada; sha256 del
 original verificado; 0 sondas residuales.
 
+### Iter. 9 (Log 2129) — 3 historias de familias + bloque N
+
+| Corrida | Checks | Fallos | EXIT | SCRIPT ERROR |
+|---|---|---|---|---|
+| 1 | 258 | 0 | 0 | 0 |
+| 2 | 258 | 0 | 0 | 0 |
+| 3 | 258 | 0 | 0 | 0 |
+
+Salida: `=== TEST M23 HISTORIAS: 0 fallo(s) (258 checks) ===`
+
+Carga medida: catálogo vivo **27** (26 del principal + 1 de ejemplos). El bloque N corre
+las 3 cadenas nuevas end-to-end (hablar con npc REAL / explorar lugar / entregar item
+REAL / puzzle) y mide las consecuencias `molienda_familiar_restaurada`,
+`red_del_abuelo_reparada` y `vigilia_de_los_guardas` aplicadas a WorldState (M21).
+
+Asserts existentes actualizados por el contenido nuevo (A: merge 24 -> 27 y principal
+23 -> 26; I: principal 23 -> 26, cargadas 24 -> 27).
+
+Guardián EN ROJO por inyección de runtime sobre el bloque N (asignación tipada
+`Variant` con `Array` -> `Dictionary`): EXIT 1 con «el bloque N NO se ejecuto» y «solo
+228 checks (mínimo 258)», 2 fallos. Sonda borrada; sha256 del original verificado;
+0 sondas residuales.
+
 ## 2. Guardián anti-falso-verde probado EN ROJO
 
 Inyección de runtime (`var _n: Node = null; _n.free()` tras el bloque B), sonda
@@ -272,13 +295,13 @@ Iter. 8 (Log 2127, mismo binario, corridas del 2026-10-22):
 ## 6. Veredicto
 
 Núcleo de M23 **verificado** con binario real y guarda anti-falso-verde demostrada en
-rojo OCHO veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
+rojo NUEVE veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
 I y regresión de datos con prefijo re-inyectado; iter. 5 en el bloque J; iter. 6 en el
-bloque K; iter. 7 en el bloque L; iter. 8 en el bloque M; todas EXIT 1 nombrando el
-bloque o la clave). Estado actual: suite en **227 checks / 0 fallos / EXIT 0 x3**,
-catálogo vivo 24 cadenas, y regresiones M22 (41/0) · M71 (83/0) · M59 (43/0 con 9
-bloques, 4/0 en backup-rotate-return y 7/0 en backup-rotations) · M55 (0 fallos)
-medidas el 2026-10-22 en la iter. 8.
+bloque K; iter. 7 en el bloque L; iter. 8 en el bloque M; iter. 9 en el bloque N;
+todas EXIT 1 nombrando el bloque o la clave). Estado actual: suite en **258 checks /
+0 fallos / EXIT 0 x3**, catálogo vivo 27 cadenas, y regresiones M22 (41/0) · M71
+(83/0 y 37/0 en flujo-XP) · M59 (43/0 con 9 bloques, 4/0 en backup-rotate-return y
+7/0 en backup-rotations) · M55 (0 fallos) medidas el 2026-10-22 en las iters. 8 y 9.
 Pendientes = contenido narrativo y dueños externos (M22/M17/M24/M28/M32/M36/M37/M68),
 documentados como `[ ]` honestos en `05-Checklist.md`. Decisiones abiertas para el
 director: tipo de paso `"construir"` (rechazo PERSISTENTE por msg 153; dueños M22/M17),

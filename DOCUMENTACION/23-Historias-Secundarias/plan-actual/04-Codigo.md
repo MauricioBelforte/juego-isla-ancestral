@@ -422,3 +422,47 @@ brujula). 6 cadenas nuevas en `data/historias/secundarias.json` (17 -> 23; 10850
   [ ] -> [x] y «Documentar historias de lugares, ruinas y objetos» [ ] -> [x]
   (compuesta: con iter. 8 los tres clusters tienen contenido y documentacion).
   M23 = 58 [x] / 45 [ ] / 2 [?] = 105 (verificado por prefijo de linea).
+
+## Iter. 9 — Historias de familias (Step-5-WorkBuddy, 2026-10-22, Log 2129)
+
+Cluster **Familias** del 03-Diseno L35 (molinera, pescadores, guardas): 3 cadenas
+nuevas en `data/historias/secundarias.json` (23 -> 26).
+
+- `cadena-molinera` — NPC REAL `mateo_mapache` (granjero, `data/villagers/`), lugar
+  `molino`, objeto REAL `OBJ-REL-003` «Reloj de arena» (`data/items/`, verificado por
+  campo id dentro del .tres — `item_database.gd` indexa por ese id), puzzle
+  `piedras-de-molienda`. Consecuencia pelada `molienda_familiar_restaurada`.
+- `cadena-pescadores` — NPC REAL `finneas_zorro` (pescador), lugar `muelle_viejo`,
+  objeto REAL `OBJ-HER-014` «Red de captura», puzzle `nudo-del-abuelo`. Consecuencia
+  pelada `red_del_abuelo_reparada` (distinta de `red_pescador_reparada` de iter. 5).
+- `cadena-guardas` — NPC REAL `nico_gato` (guardabosques), lugar `bosque_nocturno`,
+  objeto REAL `OBJ-LUZ-011` «Candil», puzzle `ronda-de-los-guardas`. Consecuencia
+  pelada `vigilia_de_los_guardas` (distinta de `patrulla_nocturna` de iter. 8).
+
+Anti-repetición: 3 consecuencias peladas nuevas sin colisión con las 24 previas
+(23 en datos + `biblioteca_iluminada` de ejemplos) y 3 capítulos `capitulo-*` de diario
+nuevos sin colisión; contextos narrativos >= 10 caracteres, 4 pasos cada una
+(hablar/explorar/entregar/puzzle), validados por el validador del servicio.
+
+- Suite `scripts/historias/test_historias.gd`: bloque N `_test_familias()` (31 checks:
+  6 carga/fuente + 2 unicidad de flags + 1 diarios + 7x3 end-to-end + 1 puente diario)
+  al FINAL de `_run()`. Piso 227 -> **258 checks / 0 fallos / EXIT 0 x3** (binario real).
+  Conteos de los bloques A e I actualizados 24/23 -> 27/26 (medidos; la 1a corrida dio
+  3 fallos de conteo, corregidos). Guardián EN ROJO por inyección de runtime
+  (Variant con Array -> Dictionary tipado) sobre el bloque N: EXIT 1, «el bloque N NO
+  se ejecuto» + «solo 228 checks ejecutados (minimo 258)»; sonda borrada, sha256 del
+  original verificado.
+- Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0, M71
+  `test_progresion.gd` 83/0 + `test_flujo_xp_recompensa_m71_hy3.gd` 37/0, M59
+  `test_rotate_m59.gd` 43/0 (9 bloques) + `test_backup_rotate_return.gd` 4/0 +
+  `test_backup_rotations.gd` 7/0 y M55 `test_diario.gd` 0 fallos. Todas EXIT 0 con el
+  binario real, 0 SCRIPT ERROR.
+- Hallazgo (dueno M55, no tocado): el puente M23->M55 degrada en silencio tambien para
+  las 3 nuevas (`mision_cadena-guardas` ausente del catalogo de M55; mismo patron que
+  cadena-biblioteca en H, cadena-jardines en K, cadena-puente en L y cadena-brujula
+  en M).
+- Flips del 05-Checklist con cita: «Crear la historia de la familia molinera»,
+  «...pescadores» y «...guardas» [ ] -> [x] (L44-L46). M23 = 61 [x] / 42 [ ] / 2 [?]
+  = 105 (verificado por prefijo de línea). Las DOS líneas de totales estaban
+  desincronizadas (L170 mentía 55/48/2: los flips de iter. 7 y iter. 8 no se habían
+  volcado): ambas sincronizadas a 61/42/2.

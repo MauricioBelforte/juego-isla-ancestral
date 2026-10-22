@@ -398,3 +398,37 @@ Reporte (telemetría/review/soporte) → ticket M101 con buildId
 ### Newsletter/comunicado de primeras 72 h
 - Newsletter de las primeras 72 h.
 - Comunicado multi-idioma.
+## Agradecimiento y hotfixes (cola total M143 batch 20)
+
+### Publicacion del agradecimiento a las 72-96 h
+- Publicar agradecimiento a las 72-96 h post-lanzamiento.
+- Multi-idioma (M87).
+
+### Firma del agradecimiento (equipo)
+- Firma del equipo en el agradecimiento.
+- Personal y calido.
+
+### Enlace a canales de soporte y comunidad
+- Enlaces a Discord, foros, soporte.
+- Visibles desde el agradecimiento.
+
+### Mencion a los pilotos/QA como agradecimiento (M152)
+- Mencion a los pilotos y QA en el agradecimiento.
+- Reconocimiento publico.
+## Agradecimiento y cierre (cola total M143 batch 21)
+
+### Agradecimiento multi-idioma (M87)
+- Agradecimiento en multiples idiomas.
+- Integracion con M87 (localizacion).
+
+### Intencion abierta de continuar escuchando (M144)
+- Intencion de continuar escuchando a la comunidad.
+- Vinculo con M144 (post-lanzamiento).
+
+### Acta de cierre del lanzamiento firmada
+- Acta de cierre firmada por el equipo.
+- Documento oficial.
+
+### Entrega del informe 72 h a M144
+- Entrega del informe 72h a M144.
+- Integracion con post-lanzamiento.
