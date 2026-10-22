@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T20:55:50",
+ "ultimo_update": "2026-10-22T20:56:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -186,7 +186,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "20:15 - scan global post-jornada: 1877 [ ] en 58 modulos PERO la mayoria son ejecutables-gated (Godot/build), de dueños ausentes (MiniMax M16/M17/M56...), de decisiones del fundador (5 flags M151 + cozy + staffing + M55 puente) o de contenido con GO. El documental puro flipable SIN acceso esta agotado. PROXIMAS ASIGNACIONES REALES dependen de: (1) decisiones fundador [flags_fundador_pendientes], (2) GO de integracion slice, (3) regreso de MiniMax con codigo, (4) Godot-MCP activo para tandas de ejecucion. Flota en modo guardia/consolidacion: Beam fuera, G-5.3 en re-verificacion, Step-5 cola Comerciantes->Puzzles->Investigacion vigente, agnes sin lotes nuevos.",
+ "nota_cron_d": "20:55 - asignaciones vigentes y completas: Step-5 = bloque final M23 Puzzles+Investigacion (consolidado); DS-WB = P4 normalizacion 141-148 + P5 lote verificador M91/M147/M24 + item34 M113 (todos GO en el 364); G-5.3 = guardia + proxies (S48 hecha); agnes = espera lotes; Beam = jornada cerrada sin pendientes; Hy3/Ling/DS-OC/MiniMax sin senal (estado fundador). No hay trabajo nuevo asignable sin: decisiones fundador (5 flags M151 + cozy + etiqueta Alta literal), GO slice, o regreso de MiniMax. Modo guardia vigente.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
