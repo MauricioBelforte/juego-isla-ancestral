@@ -28,12 +28,13 @@ signal exhibition_completed(exhibition_id: String)
 ## §8: versión del bloque de guardado (sección "collections"). v0 = bloque legado
 ## (sin campo "version"); v1 = esquema con "version" (mismo payload). Agregar
 ## exposiciones nuevas al catálogo NO requiere subir la versión (data-driven).
-const VERSION_GUARDADO := 1
+const VERSION_GUARDADO := 2  # v2: agrega historial cronologico de donaciones
 
 ## id_exposicion -> {nombre, categoria, items: Array[String], recompensa_item_id, recompensa_nombre}
 var _exposiciones: Dictionary = {}
 ## id_exposicion -> Array[String] de items registrados
 var _registradas: Dictionary = {}
+var _historial: Array = []  # [{exhibition_id, item_id, dia}] en orden de inscripcion (item historial, G-5.3-Flash-Agente 2026-10-22)
 ## id_exposicion -> true si la recompensa ya se otorgó (idempotencia §4.2)
 var _recompensas: Dictionary = {}
 
@@ -99,6 +100,9 @@ func register_item(exhibition_id: String, item_id: String) -> bool:
 	if not _registradas.has(exhibition_id):
 		_registradas[exhibition_id] = []
 	_registradas[exhibition_id].append(String(item_id))
+	# Historial cronologico (item [S] del 05): una entrada por donacion real;
+# re-registros idempotentes jamas crean entrada nueva (guardia de arriba).
+	_historial.append({"exhibition_id": String(exhibition_id), "item_id": String(item_id), "dia": _dia_absoluto()})
 	item_registered.emit(exhibition_id, String(item_id))
 	# §4.2: exposición completa → una sola vez (marca guardada)
 	if is_exhibition_completed(exhibition_id) and not is_reward_claimed(exhibition_id):
@@ -275,6 +279,28 @@ func get_section_name() -> String:
 	return "collections"
 
 
+## Historial cronologico de donaciones (item [S] del 05): orden estable por
+## dia de inscripcion (append) y por dia de calendario; sin duplicados (el
+## registro es idempotente por (exhibition_id, item_id)). Copia read-only.
+func get_historial_donaciones() -> Array:
+	var visto: Dictionary = {}
+	var out: Array = []
+	for e in _historial:
+		var clave := String(e.get("exhibition_id", "")) + "::" + String(e.get("item_id", ""))
+		if visto.has(clave):
+			continue
+		out.append(e.duplicate(true))
+		visto[clave] = true
+	out.sort_custom(func(a, b): return int(a.get("dia", 0)) < int(b.get("dia", 0)))
+	return out
+
+## Dia absoluto del calendario M29 (fallback 0 headless, mismo patron M18).
+func _dia_absoluto() -> int:
+	var cal = get_node_or_null("/root/TimeCalendar")
+	if cal != null and cal.has_method("get_dia_absoluto"):
+		return int(cal.get_dia_absoluto())
+	return 0
+
 func get_save_data() -> Dictionary:
 	var piezas := {}
 	for id in _registradas:
@@ -283,6 +309,7 @@ func get_save_data() -> Dictionary:
 		"version": VERSION_GUARDADO,
 		"piezas": piezas,
 		"recompensas": _recompensas.keys(),
+		"historial": get_historial_donaciones(),
 	}
 
 
@@ -300,6 +327,10 @@ func migrar_bloque(datos: Dictionary, desde: int) -> Dictionary:
 					d["piezas"] = {}
 				if typeof(d.get("recompensas")) != TYPE_ARRAY:
 					d["recompensas"] = []
+			1:
+				# v1 -> v2: historial nuevo; saves legados migran con historial vacio
+				if typeof(d.get("historial")) != TYPE_ARRAY:
+					d["historial"] = []
 			_:
 				pass  # sin pasos definidos para esta versión
 		v += 1
@@ -327,3 +358,7 @@ func restore_save_data(data: Dictionary) -> void:
 	_recompensas.clear()
 	for r in datos.get("recompensas", []):
 		_recompensas[String(r)] = true
+	_historial.clear()
+	for e in datos.get("historial", []):
+		if typeof(e) == TYPE_DICTIONARY:
+			_historial.append(e.duplicate(true))

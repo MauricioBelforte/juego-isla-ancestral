@@ -1,4 +1,4 @@
-# 206 — Cronómetro re-encendido: intervalo 60 min (ord. director 2026-10-22)
+# 207 — Cronómetro re-encendido: intervalo 60 min (ord. director 2026-10-22)
 
 **Modelo:** Ling-3.1-Flash
 **Plataforma:** Kilo Code

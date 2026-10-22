@@ -48,18 +48,18 @@
 
 ## F. Categoría Peces
 
-- [ ] Registrar peces pescados (M34) [M]
+- [x] Registrar peces pescados (M34) [M]
 - [ ] Peces de temporada (M29) y hora (M31) [M]
 - [ ] Trofeo de pesca como recompensa (M18) [M]
-- [ ] Registrar al atrapar (FISH_CAUGHT) [M]
+- [x] Registrar al atrapar (FISH_CAUGHT) [M]
 - [ ] Testear peces raros (solo lluvia M32) [M]
 
 ## G. Categoría Plantas
 
-- [ ] Registrar plantas cosechadas (M33) y forrajeadas (M50) [M]
+- [x] Registrar plantas cosechadas (M33) y forrajeadas (M50) [M]
 - [ ] Semillas de temporada [M]
 - [ ] Recompensa de colección (semilla rara M33) [M]
-- [ ] Registrar con CROP_HARVESTED [M]
+- [x] Registrar con CROP_HARVESTED [M]
 - [ ] Testear plantas de las 4 estaciones (M29) [M]
 
 ## H. Categoría Insectos

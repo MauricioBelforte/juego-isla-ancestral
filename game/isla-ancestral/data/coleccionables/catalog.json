@@ -237,5 +237,105 @@
     "recompensa_cantidad": 1,
     "puntos": 60,
     "descripcion": "Astilla del Sello de Ancestro; excavar despacio para no borrar su runa."
+  },
+  {
+    "categoria": "peces",
+    "id_local": "001",
+    "display_name": "Pez Comun",
+    "rareza": 0,
+    "fuente": "pesca",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 20,
+    "puntos": 5
+  },
+  {
+    "categoria": "peces",
+    "id_local": "002",
+    "display_name": "Pez Plateado",
+    "rareza": 1,
+    "fuente": "pesca",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 10
+  },
+  {
+    "categoria": "peces",
+    "id_local": "003",
+    "display_name": "Pez Nocturno",
+    "rareza": 1,
+    "fuente": "pesca",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 50,
+    "puntos": 10
+  },
+  {
+    "categoria": "peces",
+    "id_local": "004",
+    "display_name": "Pez Dorado",
+    "rareza": 2,
+    "fuente": "pesca",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 100,
+    "puntos": 25
+  },
+  {
+    "categoria": "peces",
+    "id_local": "005",
+    "display_name": "Pez Ancestral Estacional",
+    "rareza": 3,
+    "fuente": "pesca",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "plantas",
+    "id_local": "001",
+    "display_name": "Planta Comun",
+    "rareza": 0,
+    "fuente": "cosecha",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 15,
+    "puntos": 5
+  },
+  {
+    "categoria": "plantas",
+    "id_local": "002",
+    "display_name": "Flor de Coral",
+    "rareza": 1,
+    "fuente": "cosecha",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 45,
+    "puntos": 15
+  },
+  {
+    "categoria": "plantas",
+    "id_local": "003",
+    "display_name": "Planta Medicinal",
+    "rareza": 1,
+    "fuente": "cosecha",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 35,
+    "puntos": 10
+  },
+  {
+    "categoria": "plantas",
+    "id_local": "004",
+    "display_name": "Fruto Raro",
+    "rareza": 2,
+    "fuente": "cosecha",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 90,
+    "puntos": 25
+  },
+  {
+    "categoria": "plantas",
+    "id_local": "005",
+    "display_name": "Semilla Ancestral",
+    "rareza": 3,
+    "fuente": "cosecha",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
   }
 ]
