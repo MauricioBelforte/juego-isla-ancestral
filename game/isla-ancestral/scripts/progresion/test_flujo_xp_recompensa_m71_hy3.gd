@@ -6,6 +6,8 @@
 # flujo XP/recompensa: acumulacion de estadisticas (XP) -> reevaluacion
 # de hitos -> entrega de recompensas (info/unlock/titulo) -> persistencia.
 # Verificacion runtime headless INDEPENDIENTE del test_progresion.gd (agnes).
+# La integridad de umbral del camino de eventos (_reevaluar) se aisla en
+# test_bug_reevaluar_m71_hy3.gd (FINDING F1, se documenta aparte).
 #
 # Ejecutar:
 #   Godot --headless --path game/isla-ancestral \
@@ -111,6 +113,11 @@ func _test_flujo_evento_items() -> void:
 	var pp: Dictionary = _pm.progreso_parcial("hito_items_10")
 	_check(float(pp.logrado) >= 10.0, "progreso parcial >= 10 (UI lazy-eval): %s" % pp.logrado)
 	_pm.progreso_hito_alcanzado.disconnect(cb)
+	# NOTA (F1, no fatal): el camino de eventos marca hito_items_50 sin validar
+	# el umbral (defecto en _reevaluar). Reproducido aislado en
+	# test_bug_reevaluar_m71_hy3.gd. Aqui solo se verifica el hito correcto.
+	if _pm.hito_alcanzado("hito_items_50"):
+		print("  [NOTA] F1: hito_items_50 marcado prematuramente (defecto _reevaluar)")
 
 func _test_flujo_evento_misiones() -> void:
 	var alcanzados: Array = []
@@ -123,18 +130,19 @@ func _test_flujo_evento_misiones() -> void:
 	_pm.progreso_hito_alcanzado.disconnect(cb)
 
 func _test_marcar_hito_senal() -> void:
-	# Aislamiento de bloque: este bloque prueba el CONTRATO de marcar_hito()
-	# (senal + entrega de recompensa) sobre un hito FRESCO, independiente del
-	# camino de eventos. Restaura antes para no heredar marcas de bloques previos.
-	_pm.restore_save_data({})
+	# Contrato de marcar_hito(): la senal entrega (id, nombre, recompensas) y la
+	# recompensa tipo 'info' se incluye. Se usa hito_dias_7 (no perturbado por el
+	# camino de eventos) para aislar este contrato del defecto F1 de _reevaluar.
 	var senal: Dictionary = {}
 	var cb := func(id: String, _n: String, recs: Array) -> void:
-		senal = {"id": id, "recs": recs}
+		senal.clear()
+		senal["id"] = id
+		senal["recs"] = recs
 	_pm.progreso_hito_alcanzado.connect(cb)
-	var ok: bool = _pm.marcar_hito("hito_items_50")
+	var ok: bool = _pm.marcar_hito("hito_dias_7")
 	_pm.progreso_hito_alcanzado.disconnect(cb)
-	_check(ok, "marcar_hito('hito_items_50') retorna true")
-	_check(senal.get("id", "") == "hito_items_50", "senal entrega id del hito")
+	_check(ok, "marcar_hito('hito_dias_7') retorna true")
+	_check(senal.get("id", "") == "hito_dias_7", "senal entrega id del hito")
 	var recs: Array = senal.get("recs", [])
 	_check(recs.size() >= 1, "senal entrega recompensas (info): %d" % recs.size())
 	var hay_info: bool = false
@@ -144,12 +152,16 @@ func _test_marcar_hito_senal() -> void:
 	_check(hay_info, "recompensa tipo 'info' presente en la entrega")
 
 func _test_recompensa_unlock() -> void:
-	# Aislamiento de bloque: hito FRESCO para probar el CONTRATO unlock.
-	_pm.restore_save_data({})
+	# Contrato unlock: hito_coleccion_flora (recompensa 'unlock') entrega la
+	# senal progreso_desbloqueado con su valor. No perturbado por el camino de
+	# eventos, asi que no requiere restore.
 	# hito_coleccion_flora tiene recompensa tipo 'unlock' -> se entrega via senal.
 	var desb: Dictionary = {}
 	var cb := func(id: String, tipo: String, valor: String) -> void:
-		desb = {"id": id, "tipo": tipo, "valor": valor}
+		desb.clear()
+		desb["id"] = id
+		desb["tipo"] = tipo
+		desb["valor"] = valor
 	_pm.progreso_desbloqueado.connect(cb)
 	_pm.marcar_hito("hito_coleccion_flora")
 	_pm.progreso_desbloqueado.disconnect(cb)
@@ -163,8 +175,8 @@ func _test_recompensa_unlock() -> void:
 	_check(_pm.desbloqueo_activo("unlock_test_hy3"), "desbloqueo manual activo (idempotente)")
 
 func _test_recompensa_titulo() -> void:
-	# Aislamiento de bloque: hito FRESCO para probar el CONTRATO de titulo.
-	_pm.restore_save_data({})
+	# Contrato de titulo RF12: hito_amistades_5 otorga 'Amigo del Pueblo' via
+	# senal progreso_titulo_obtenido, idempotente. No perturbado por eventos.
 	# RF12: hito_amistades_5 otorga titulo social 'Amigo del Pueblo'.
 	var senales: Array = [0]
 	var cb := func(_t_id: String, _nombre: String) -> void:
@@ -179,8 +191,8 @@ func _test_recompensa_titulo() -> void:
 	_check(int(_pm.titulo_count()) == 1, "titulo idempotente (sin duplicado)")
 
 func _test_idempotencia() -> void:
-	# Aislamiento de bloque: hito FRESCO para probar idempotencia de marcar_hito.
-	_pm.restore_save_data({})
+	# Idempotencia de marcar_hito sobre hito FRESCO (no perturbado por eventos):
+	# 1er true, 2do false, una sola senal.
 	# marcar dos veces un hito no-auto-disparado -> 1 sola senal, 1 entrada.
 	var senales: Array = [0]
 	var cb := func(_id: String, _n: String, _r: Array) -> void:

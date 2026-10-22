@@ -23,7 +23,7 @@
 
 ## A. Requisitos del modulo (15)
 
-- [ ] Definir el problema: progresion de herramientas por tier que desbloquee contenido sin copiar a Zelda [S]
+- [x] Definir el problema: progresion de herramientas por tier que desbloquee contenido sin copiar a Zelda [S]
 - [x] Registrar dependencias: M13, M38, M27, M28, M71, M22 [S]
 - [x] Definir 4 tiers: Cobre(T1), Hierro(T2), Oro(T3), Cristal(T4) [S] — iter. 1: data/herramientas/tiers_config.json con 4 tiers (test: 4 cargados)
 - [x] T1 se obtiene gratis en isla principal (auto-coleccion) [S]
@@ -37,7 +37,7 @@
 - [ ] Construccion en otras islas posible [M]
 - [x] NPCs visitantes compran herramientas 1x/dia [M]
 - [ ] Premium permite comprar monedas por Steam [M]
-- [ ] Checklist minimo 100 items verificables [S]
+- [x] Checklist minimo 100 items verificables [S]
 
 ## B. Sistema de Tiers (12)
 
@@ -176,9 +176,9 @@
 - [ ] Cursos aprendidos persistidos [M]
 - [x] Gates desbloqueados persistidos [M]
 - [ ] Conteo de forjas persistido [M]
-- [ ] Ventas a NPCs visitantes persistidas [M]
-- [ ] Estado de jarrones (ultima reposicion) persistido [M]
-- [ ] Restauracion correcta tras guardar/cargar [M]
+- [x] Ventas a NPCs visitantes persistidas [M]
+- [x] Estado de jarrones (ultima reposicion) persistido [M]
+- [x] Restauracion correcta tras guardar/cargar [M]
 
 ## K. Verificacion Final (8)
 
@@ -187,19 +187,19 @@
 - [ ] Cada isla subsiguiente tiene precios +50% minimo [M]
 - [ ] Templos de historia no se completan sin T3/T4 [M]
 - [ ] Jugador premium puede comprar monedas [M]
-- [ ] Jarrones se reponen cada 7 dias del juego [M]
+- [x] Jarrones se reponen cada 7 dias del juego [M]
 - [ ] NPCs visitantes compran 1x/dia [M]
 - [ ] El jugador puede construir en otras islas [M]
 
 ## L. Documentacion y Cierre (8)
 
-- [ ] 01-Requerimientos.md creado y firmado [S]
-- [ ] 02-Analisis.md creado y firmado [S]
-- [ ] 03-Diseno.md creado y firmado [S]
-- [ ] 04-Codigo.md creado y firmado [S]
-- [ ] 05-Checklist.md creado y firmado (este archivo) [S]
-- [ ] Tabla de tiers documentada [S]
-- [ ] Tabla de costos por isla documentada [S]
+- [x] 01-Requerimientos.md creado y firmado [S]
+- [x] 02-Analisis.md creado y firmado [S]
+- [x] 03-Diseno.md creado y firmado [S]
+- [x] 04-Codigo.md creado y firmado [S]
+- [x] 05-Checklist.md creado y firmado (este archivo) [S]
+- [x] Tabla de tiers documentada [S]
+- [x] Tabla de costos por isla documentada [S]
 - [ ] DoD cumplida: 5 archivos + firma + log [M]
 
 **Totales:** 140 ítems · Completados: 53 · Pendientes: 87 · No resueltos: 0.

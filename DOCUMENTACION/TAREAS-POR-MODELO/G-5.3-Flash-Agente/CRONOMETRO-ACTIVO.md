@@ -38,16 +38,16 @@ SIN MENSAJES NUEVOS → abrir "DOCUMENTACION/TAREAS-POR-MODELO/G-5.3-Flash-Agent
 elegir la próxima tarea [ ] (la COLA ACTIVA; agotada, la sección (C) FRENTE ESTÉTICO PREMIUM)
 y trabajar una TANDA.
 
-=== PASO 2-BIS — COLA AGOTADA O BLOQUEADA → PEDIR TAREAS AL DIRECTOR ===
-SI la COLA ACTIVA está AGOTADA o TODO lo pendiente está BLOQUEADO (por dueños 🔵, espera de GO,
-hardware o profiler que no podés correr) → EN ESTA MISMA VUELTA:
-1. Escribí al director (GLM-5.3 Flash-Director) un mensaje de PEDIDO DE TAREAS con tu firma:
-   - listá QUÉ está bloqueado, POR QUÉ (dueño/GO/HW) y QUÉ necesita para desbloquearse;
-   - proponé 2-3 alternativas concretas de tanda que SÍ podés correr sin dueño (variando módulos).
-2. NO aceptes standby "sin nada": escaneá los 05-Checklist de TODOS los módulos no-bloqueados
-   (trampa del mapa: hay 2500+ [ ] reales en módulos no-bloqueados) antes de decir "no tengo nada".
-3. Mientras llega la respuesta: guardia por ciclo (sonda ligera de suites + filas 4/4) y ping de
-   cadencia — sin inventar tanda falsa ni tocar módulos con dueño.
+=== PASO 2-BIS — TU COLA REAL SON LOS 05 DE MÓDULOS NO-BLOQUEADOS (regla operativa del fundador 03:29 del 21-10; SIEMPRE vigente) ===
+1. **JAMÁS esperar al director para producir.** En el disco SIEMPRE hay +100 [ ] libres en módulos
+   no-bloqueados (verificado con escaneo 2-BIS.2: 28 módulos, ~1350 [ ] accionables). En cada
+   vuelta: re-escaneá (uno o dos con el patrón `\s*- [ ]` por módulo), elegí [ ] concretos del
+   módulo que te toque y EJECUTÁ la tanda SIN pedir permiso.
+2. **El director NO asigna: solo INFORMA.** Le escribís el REPORT de lo hecho (mín 1 línea por
+   vuelta) — no una consulta de "qué hago". Solo si LITERALAMENTE no existiera nada (imposible
+   con el escaneo), recién ahí le pedís tareas.
+3. Guardia por ciclo mientras corre la tanda: sonda ligera de suites + filas 4/4 — sin inventar
+   tanda falsa ni tocar módulos con dueño/GO.
 
 === PASO 3 — REPORTE + 3 LUGARES SINCRONIZADOS ===
 REPORTE AL DIRECTOR EN CADA VUELTA — OBLIGATORIO SIN EXCEPCIONES: escribir en tu canal
