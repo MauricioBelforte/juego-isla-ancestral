@@ -142,7 +142,7 @@
 - [ ] Vinculo bidireccional: consultar piezas del museo desde el diario [M]
 - [x] Emision de senales tipadas sin acoplarse a la UI del diario [S] — M37 emite señales; el diario no interrumpe el flujo (receptor async duck-typed)
 - [ ] El diario no interrumpe el flujo de donacion (receptor async) [S]
-- [ ] Historial ordenado cronologicamente sin entradas duplicadas [S]
+- [x] Historial ordenado cronologicamente sin entradas duplicadas [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: collection_registry.gd v2 (_historial con dia absoluto M29 en register_item; get_historial_donaciones() orden estable + guardia anti-duplicado por clave exp::item; persiste en el bloque v2 con migracion v1->v2 = historial vacio para saves legados); qa_m37_historial.gd 20/0 EXIT 0
 
 ## J. Edge cases y manejo de errores (12)
 
@@ -150,7 +150,7 @@
 - [x] Vitrina ocupada nunca sobrescrita con otra pieza [S]
 - [ ] Items donables registrados antes de restaurar el museo (cola pendiente) [M]
 - [ ] Inventario vacio al abrir el panel de donacion (UI vacia elegante) [S]
-- [ ] Fallo de senal de modulo origen (M36/M34/M25) sin crasheo [M]
+- [x] Fallo de senal de modulo origen (M36/M34/M25) sin crasheo [M] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: DonationService real (autoload) con entradas invalidas no crashea: exposicion inexistente -> rechazo estructurado; item inexistente -> invalid_item (guardia de catalogo 4.3, orden validate: catalogo->duplicado->inventario) y senal donation_rejected emitida por cada rechazo; parte del qa_m37_historial.gd 20/0 EXIT 0
 - [x] Carga de partida con vitrinas parcialmente pobladas [M] (RF2c: solo lo guardado, test RF3 b2, agnes)
 - [ ] Cierre del juego entre consumo y escritura de guardado (rollback) [M]
 - [ ] Doble interaccion simultanea sobre la misma vitrina [M]
@@ -280,3 +280,5 @@ logica verificada, no el 3D/UI.
 - Persistencia: CollectionRegistry (ISaveProvider 'collections') ya tenia get_save_data/restore_save_data + register_provider; el Museo se sincroniza via refresh_from_registry (ahora delega a reconstruir_desde_guardado). No invente un save nuevo.
 - test_museo_rf3.gd 0/0 EXIT 0 (save->load->reconstruir + idempotencia + expo huorfana + pieza inexistente + parcial). RF1/RF2 siguen 0/0.
 - L111 (Registro persistente) queda cubierto por el ISaveProvider del registry; lo dejo para que el director lo confirme en su flip.
+
+**Totales:** 148 items · Completados: 98 · Pendientes: 50 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: tras tanda historial+robustez; qa_m37_historial.gd 20/0; riel verde hoy: museo 0 fallos + persistencia 35/0 + rf1 0 + rf2d 28/0 + rf3 12/0.)

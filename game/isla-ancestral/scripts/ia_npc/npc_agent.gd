@@ -421,16 +421,38 @@ func resume_ai() -> void:
 ## Congela la IA y las necesidades, luego restaura.
 var _posando_foto: bool = false
 
+## M56/M19: pose fotografica. Deuda 229 resuelta (G-5.3-Flash-Agente
+## 2026-10-22): si el asset trae un AnimationPlayer hijo (contrato M48/M44:
+## animacion "pose_foto"), se reproduce; si no, placeholder de 0.5 s
+## (headless-safe). En ambos casos congela la IA y las necesidades y
+## restaura al terminar. La firma sin args es contrato del NPCManager.
 func pose_foto() -> void:
+	await pose_foto_en(0.5)
+
+
+func pose_foto_en(duracion: float) -> void:
 	if _posando_foto:
 		return
 	_posando_foto = true
 	pause_ai()
 	print("[NPCAgent] pose_foto iniciada")
-	await get_tree().create_timer(0.5).timeout
+	var anim: Object = _animacion_de_pose()
+	if anim != null:
+		anim.play("pose_foto")
+	await get_tree().create_timer(maxf(0.05, duracion)).timeout
+	if anim != null:
+		anim.stop()
 	_posando_foto = false
 	resume_ai()
 	print("[NPCAgent] pose_foto terminada")
+
+
+## AnimationPlayer de la pose (M48/M44) con duck-typing para mocks de test.
+func _animacion_de_pose() -> Object:
+	var anim := get_node_or_null("AnimationPlayer")
+	if anim != null and anim.has_method("play") and anim.has_method("stop"):
+		return anim
+	return null
 
 
 func is_paused() -> bool:
