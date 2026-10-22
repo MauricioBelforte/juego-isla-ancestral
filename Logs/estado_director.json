@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T18:38:50",
+ "ultimo_update": "2026-10-22T18:40:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -121,7 +121,8 @@
   "Citas de Beam con tildes o simbolos distintos del texto plano (>= vs >=, elevacion vs elevacion) - el muestreo SIEMPRE prueba variantes antes de negar (3ra vez: 073, batch2, batch3)",
   "Nuevo regimen produce-first para Beam (fundador 08:28, por disponibilidad incierta): reportes minimos de items, verificacion DIFERIDA grande - riesgo: volumen sin verificacion en vivo; mitigado por su historial limpio y backfill tomorrow",
   "LECCION DE DISPONIBILIDAD (fundador 15:17): los free-tier mueren sin aviso (MiniMax duro 2 dias) - prioridad maxima a agitadores productivos mientras existan y su salida DEJA HEREDABLE (razonamiento en docs, citas al pie) para que la partida no cueste nada",
-  "Pool desalineado post-consumo del agente (16:12): G-5.3 consumio 287 y el NUMEROS quedo con 287 al frente - sanear el pool ANTES de numerar acuses si el max de archivos ya supera el head (verificar existencia del fichero del numero)"
+  "Pool desalineado post-consumo del agente (16:12): G-5.3 consumio 287 y el NUMEROS quedo con 287 al frente - sanear el pool ANTES de numerar acuses si el max de archivos ya supera el head (verificar existencia del fichero del numero)",
+  "Trampa del director corregida (fundador 18:37): al agotarse un riel NO basta asignar fase-2 - REPREDICAR el backlog INMEDIATAMENTE con barrido fresco (la cola nunca se vacia)"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
@@ -194,8 +195,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "189+190 fase2: riel agotado; fase 2 en curso probable (M58 mvto 31 min); ping de estado 191 enviado - si sesion muerta, retrospectiva cubre",
-  "acuse_enviado": 191,
+  "estado": "CORRECCION + BACKLOG-06-REPREDICADO ( ~305 items de especialidad, cola NUNCA vacia) + fase 2 sigue; ping 191 de estado en vuelo",
+  "acuse_enviado": 192,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first + heredable",
   "encargo_activo": "RIEL SUELTO TOTAL"
