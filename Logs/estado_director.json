@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T21:30:40",
+ "ultimo_update": "2026-10-22T21:56:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "TIEBREAKER M108 confirmado por SU re-escan (205 = mi rigido); jornada cerrada mutuamente; en espera de lotes; mi 961",
+  "estado": "CIERRE MUTUO CONFIRMADO (962/963); criterio de radar instaurado (5-10%/prefijo/RATIFICADO-REVISAR); dia lacrado; en standby hasta GO o decision del fundador",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 961,
+  "acuse_enviado": 963,
   "pool_saneado": true,
   "sellos_emitidos": [
    "M99 169/169 (955)",
