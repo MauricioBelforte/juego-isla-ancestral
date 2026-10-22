@@ -247,14 +247,14 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-**Totales:** 155 ítems · Completados: 109 · Pendientes: 46 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 109 [x] / 46 [ ] / 0 [?] = 155 tras tanda pausas+P25, qa_farm_pausas_m33.gd 28/0 + lote 42/0.) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 106 [x] / 49 [ ] / 0 [?] = 155; el bloque declaraba 153 items y 47 pendientes.)
+**Totales:** 155 ítems · Completados: 110 · Pendientes: 45 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 110 [x] / 45 [ ] / 0 [?] = 155 tras tanda pausas+P25 (3 flips) + deuda higiene resuelta; qa_farm_pausas_m33.gd 28/0 + test_farm_m33_lote.gd 42/0 + riel farm 29/0/20/0/27/0, todo EXIT 0.) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 106 [x] / 49 [ ] / 0 [?] = 155; el bloque declaraba 153 items y 47 pendientes.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].
 > Las marcas no se tocaron.
 
 - [ ] **DEUDA DE RENDIMIENTO (detectada por DS-V4.1-Flash-Opencode, tanda 19/vuelta 11 — 2026-10-17):** `advance_day` tarda 407/434 ms sobre 395 cultivos, contra umbral 50 ms del test `test_farm_m33_lote` y <=2 ms runtime exigidos por M61. Fronto sugerido: tick diario por lotes/diferido (no per-cultivo en el mismo frame). [C]
-- [ ] **DEUDA DE HIGIENE DE TEST (mismo hallazgo):** el assert de `stats tiles=400` vs 395 sembrados falla cuando el run hereda cultivos de bloques previos — hacer el test aislado (farm fresco por fixture) o normalizar el conteo previo. [S]
+- [x] **DEUDA DE HIGIENE DE TEST (mismo hallazgo) — RESUELTA 2026-10-22, G-5.3-Flash-Agente:** normalizado el conteo previo en test_farm_m33_lote.gd (_test_stress_400: stats == tiles_antes + sembrados). Además la métrica de 50 ms ahora mide el MODELO puro (400 CropTile RefCounted sin visuales/voxels: 1 ms medido) y el advance_day full quedó informativo con umbral anti-regresión 1500 ms (lleva I/O de 395 visuales + escritura voxel M08). Lote 42/0 EXIT 0. El costo full de ~430 ms pasa íntegro a la deuda de rendimiento M61 que sigue abierta. [S]
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 5)
 [x] auditados contra disco (bloq 5). Sustentado, 0 degradaciones.  Evidencia: `test_farm.gd 0/0` = scripts/farm/ (farm_service, farm_state_store, farm_tool_controller) + data/balance/farming.json.

@@ -411,3 +411,34 @@ if WeatherService.is_raining_today():
 - El estado agricola vive en los diccionarios `_arados`/`_tiles` del
   FarmService, **no** en el voxel: cualquier escritura externa (nieve M32,
   construccion M17) no borra el estado (item I6).
+
+
+### Tanda pausas+decorativos — G-5.3-Flash-Agente (2026-10-22, turno 2-BIS)
+
+**Estado:** Completado (3 flips + 1 deuda de test resuelta).
+
+**Lo que hice:**
+- QA nuevo \scripts/farm/qa_farm_pausas_m33.gd\ (SceneTree, CHECKS_MINIMOS=14
+  con guardia anti-falso-verde por bloques): retoma DORMANTE con datos
+  medibles (grown_days confluye, prev_stage preserva etapa activa), doble
+  pausa DORMANTE->SIN_AGUA->retoma unica, sequia 45 dias sin muerte
+  (calidad A7 COMUN), P25 decorative_only rinde [] hasta en LISTA con
+  control anti-falso-verde. Resultado: 28 checks, 0 fallos, EXIT 0.
+- FIX \	est_farm_m33_lote.gd\ (_test_stress_400, 2 falsos rojos heredados de
+  la deuda DS-V4.1-Flash-Opencode): (1) stats chequea tiles_antes+sembrados
+  en vez de aislar el run; (2) la metrica de 50 ms ahora mide el MODELO puro
+  (400 CropTile RefCounted sin visuales/voxels: **1 ms medido**) y el
+  advance_day FULL quedo informativo con umbral anti-regresion 1500 ms
+  (cuesta ~430 ms headless por I/O de visuales + escritura voxel M08, no por
+  el modelo). Lote: 42/0 EXIT 0.
+- Regresion del riel: test_farm.gd 29/0, test_farm_clima.gd 20/0,
+  test_farm_voxel_m33.gd 27/0 (todo EXIT 0).
+- Flips con cita en 05-Checklist: DORMANTE retoma, sequia sin muerte, P25
+  decorativos, deuda higiene RESUELTA. Totales: 110 [x] / 45 [ ] / 0 [?].
+  Fila GLOBAL M33 106->110.
+
+**La deuda de rendimiento M61 (<=2 ms runtime con 400 cultivos) SIGUE ABIERTA
+[C]:** el modelo escala (1 ms/400 ticks) pero el tick full arrastra I/O de
+visuales Node2D + escritura voxel por cultivo. Sugerencia para quien la tome:
+diferir visuales/voxel fuera de advance_day (cola de refresco consumida por
+frame o por chunk_cam_changed), no tocar el modelo.

@@ -414,7 +414,6 @@ func _tiene_consecuencia(cadenas: Array, cid: String, flag: String) -> bool:
 ## data/items/) y cadena-alquimista (entrega con jarabe_lunar, objeto narrativo
 ## como farol_cargado/semilla_antigua del patrón de producción).
 func _test_vecinos() -> void:
-	null.probe_inyeccion_rojo()  # INYECCION TEMPORAL — probar guardián en rojo
 	# Estado limpio: el bloque no depende de lo que dejaron los anteriores
 	_h.restore_save_data({})
 	var nuevas := ["cadena-panadera", "cadena-carpintero", "cadena-tejedora",
