@@ -343,5 +343,51 @@
 			"consecuencia": { "brujula_calibrada": true },
 			"oculta": false,
 			"postgame": false
-		}	]
+		},
+		{
+			"id": "cadena-molinera",
+			"titulo": "La Familia de la Molinera",
+			"contexto": "La familia que muele el grano desde antes del faro guarda su reloj de arena en el molino; sin el no se turna la molienda y el pueblo espera la harina",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "mateo_mapache" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "molino" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-REL-003" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "piedras-de-molienda" }
+			],
+			"recompensa": { "diario": "capitulo-molinera", "cosmetico": "delantal de la molinera" },
+			"consecuencia": { "molienda_familiar_restaurada": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-pescadores",
+			"titulo": "La Familia de los Pescadores",
+			"contexto": "El abuelo de Finneas reparo la red de la familia con un nudo que ya nadie sabe hacer; la red se solto en el muelle viejo y la familia no puede salir a pescar",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "finneas_zorro" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle_viejo" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-HER-014" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "nudo-del-abuelo" }
+			],
+			"recompensa": { "diario": "capitulo-pescadores", "cosmetico": "flotador de corcho" },
+			"consecuencia": { "red_del_abuelo_reparada": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-guardas",
+			"titulo": "La Familia de los Guardas",
+			"contexto": "Los guardas del bosque se turnan la noche con un candil que pasa de padres a hijos; el candil se apago en la ronda y la familia quiere devolverle la luz",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "nico_gato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "bosque_nocturno" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-LUZ-011" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "ronda-de-los-guardas" }
+			],
+			"recompensa": { "diario": "capitulo-guardas", "cosmetico": "capa de guarda" },
+			"consecuencia": { "vigilia_de_los_guardas": true },
+			"oculta": false,
+			"postgame": false
+		}
+	]
 }

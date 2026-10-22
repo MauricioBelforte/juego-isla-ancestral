@@ -373,3 +373,54 @@ Jugador obtiene Sello Brisa
 ### Ruinas como resultado de catastrofes (M25)
 - Las ruinas son resultado de catastrofes.
 - Pistas de la historia en las ruinas.
+## Catastrofes y asentamientos (cola total M147 batch 15)
+
+### Catastrofes nunca castigos divinos (cozy)
+- Las catastrofes no son castigos divinos.
+- Coherente con el tono cozy.
+
+### Por que existen los asentamientos actuales
+- Los asentamientos existen por razones historicas.
+- Pistas de la historia en la arquitectura.
+
+### Llegada del Gran Vapor y su rol (M28)
+- El Gran Vapor: evento historico.
+- Rol en la historia del mundo.
+
+### Leyenda del Viento que Canta
+- Leyenda del Viento que Canta.
+- Vinculo con M148 (pistas ambientales).
+## Leyendas y consumo (cola total M147 batch 16)
+
+### Leyenda del Corazon de la Isla
+- Leyenda central del mundo.
+- Vinculo con la Gran Quietud.
+
+### Regla: toda leyenda es 70% verdad distorsionada
+- Las leyendas son 70% verdad, 30% distorsion.
+- Coherente con el tono cozy (no verdad absoluta).
+
+### Vehiculo: libros, murales, cuentos de NPC (M148/M21)
+- Las leyendas se transmiten por libros, murales y cuentos.
+- Vinculo con M148 (pistas ambientales) y M21 (dialogos).
+
+### Consumo por M25 (ruinas) y M24/M26 (templos)
+- Las leyendas se consumen en ruinas y templos.
+- Integracion con M25/M24/M26.
+## Consumo y NPCs (cola total M147 batch 17)
+
+### Consumo por M27 (islas)
+- Los modulos M27 consumen las leyendas.
+- Integracion con islas.
+
+### Consumo por M150 (sonido narrativo)
+- El sonido narrativo consume las leyendas.
+- Integracion con M150.
+
+### Jugador no lector pierde max 10% de la historia
+- El jugador no lector pierde max 10% de la historia.
+- Coherente con accesibilidad.
+
+### NPC conocen solo sus capas (M64)
+- Los NPC solo conocen sus capas narrativas.
+- Integracion con M64 (NPC).

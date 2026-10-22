@@ -218,23 +218,30 @@
   · evidencia: 03-Diseno.md secc. Catastrofes y quietud (cola total, Reflection-Beam-1.0, T106, 2026-10-22)
 - [x] Definir ruinas como resultado de catástrofes (M25) [M]
   · evidencia: 03-Diseno.md secc. Catastrofes y quietud (cola total, Reflection-Beam-1.0, T106, 2026-10-22)
-- [ ] Definir que las catástrofes nunca sean "castigos divinos" (cozy) [S]
+- [x] Definir que las catástrofes nunca sean "castigos divinos" (cozy) [S]
+  · evidencia: 03-Diseno.md secc. Catastrofes y asentamientos (cola total, Reflection-Beam-1.0, T108, 2026-10-22)
 
 ## T. Migraciones (RF24)
 
-- [ ] Definir por qué existen los asentamientos actuales [M]
+- [x] Definir por qué existen los asentamientos actuales [M]
+  · evidencia: 03-Diseno.md secc. Catastrofes y asentamientos (cola total, Reflection-Beam-1.0, T108, 2026-10-22)
 - [x] Definir migración de los Jardineros y su regreso tímido [M]
-- [ ] Definir llegada del Gran Vapor y su rol (M28) [M]
+- [x] Definir llegada del Gran Vapor y su rol (M28) [M]
+  · evidencia: 03-Diseno.md secc. Catastrofes y asentamientos (cola total, Reflection-Beam-1.0, T108, 2026-10-22)
 - [x] Definir población actual de Aurora (M19) [M]
 - [x] Definir que las migraciones expliquen variedad de NPC [M]
 
 ## U. Leyendas (RF25)
 
 - [x] Definir leyenda de la Semilla (verdad parcial) [M]
-- [ ] Definir leyenda del Viento que Canta [M]
-- [ ] Definir leyenda del Corazón de la Isla [M]
-- [ ] Definir regla: toda leyenda es 70% verdad distorsionada [M]
-- [ ] Definir vehículo: libros, murales, cuentos de NPC (M148/M21) [M]
+- [x] Definir leyenda del Viento que Canta [M]
+  · evidencia: 03-Diseno.md secc. Catastrofes y asentamientos (cola total, Reflection-Beam-1.0, T108, 2026-10-22)
+- [x] Definir leyenda del Corazón de la Isla [M]
+  · evidencia: 03-Diseno.md secc. Leyendas y consumo (cola total, Reflection-Beam-1.0, T110, 2026-10-22)
+- [x] Definir regla: toda leyenda es 70% verdad distorsionada [M]
+  · evidencia: 03-Diseno.md secc. Leyendas y consumo (cola total, Reflection-Beam-1.0, T110, 2026-10-22)
+- [x] Definir vehículo: libros, murales, cuentos de NPC (M148/M21) [M]
+  · evidencia: 03-Diseno.md secc. Leyendas y consumo (cola total, Reflection-Beam-1.0, T110, 2026-10-22)
 
 ## V. Datos Validables (RF26)
 
@@ -255,16 +262,21 @@
 ## X. Integración con Módulos
 
 - [x] Definir consumo de `world_data.json` por M21 (diálogos) [M]
-- [ ] Definir consumo por M25 (ruinas) y M24/M26 (templos) [M]
-- [ ] Definir consumo por M27 (islas) [M]
+- [x] Definir consumo por M25 (ruinas) y M24/M26 (templos) [M]
+  · evidencia: 03-Diseno.md secc. Leyendas y consumo (cola total, Reflection-Beam-1.0, T110, 2026-10-22)
+- [x] Definir consumo por M27 (islas) [M]
+  · evidencia: 03-Diseno.md secc. Consumo y NPCs (cola total, Reflection-Beam-1.0, T112, 2026-10-22)
 - [x] Definir consumo por M73 (coleccionables canónicos) [M]
-- [ ] Definir consumo por M150 (sonido narrativo) al quedar definido [M]
+- [x] Definir consumo por M150 (sonido narrativo) al quedar definido [M]
+  · evidencia: 03-Diseno.md secc. Consumo y NPCs (cola total, Reflection-Beam-1.0, T112, 2026-10-22)
 
 ## Y. Calidad y Coherencia
 
-- [ ] Definir que el jugador no lector pierda máx 10% de la historia [M]
+- [x] Definir que el jugador no lector pierda máx 10% de la historia [M]
+  · evidencia: 03-Diseno.md secc. Consumo y NPCs (cola total, Reflection-Beam-1.0, T112, 2026-10-22)
 - [x] Definir que ningún diálogo explique más del 30% del canon [M]
-- [ ] Definir que los NPC conozcan solo sus capas (M64) [M]
+- [x] Definir que los NPC conozcan solo sus capas (M64) [M]
+  · evidencia: 03-Diseno.md secc. Consumo y NPCs (cola total, Reflection-Beam-1.0, T112, 2026-10-22)
 - [x] Definir prueba de consistencia durante playtest (M114) [M]
 - [x] Definir que el canon no contradiga mecánicas (regla mar/pesca) [M]
 
