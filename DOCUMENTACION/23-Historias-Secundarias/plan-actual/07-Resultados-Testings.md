@@ -261,14 +261,15 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
 
 ## 5. Estado del catálogo (medido, no estimado)
 
-- `data/historias/secundarias.json`: **32 cadenas** (faro, invernadero, epilogo-plaza,
+- `data/historias/secundarias.json`: **40 cadenas** (faro, invernadero, epilogo-plaza,
   secretta-luciernagas, panadera, carpintero, tejedora, pescador, guarda, alquimista,
   jardines, cofradia, molino, biblioteca-quemada, observatorio, estacion, puente,
   relicto, gema, carta, llave, farol, brujula, molinera, pescadores, guardas,
   regalo-favorito, sentadilla-pesca, paseos, ficcion, ayuda-vecino,
   cartas-amistad) de las ~89 slots del catálogo de 03-Diseno. Creció 4 -> 10
   (iter. 5, vecinos) -> 13 (iter. 6, lugares) -> 17 (iter. 7, ruinas) -> 23
-  (iter. 8, objetos) -> 26 (iter. 9, familias) -> 32 (iter. 10, amistad). `cadena-biblioteca` vive en el
+  (iter. 8, objetos) -> 26 (iter. 9, familias) -> 32 (iter. 10, amistad) -> 37
+  (iter. 11, secretas) -> 40 (iter. 12, comerciantes). `cadena-biblioteca` vive en el
   fichero de ejemplos (merge por id).
 - `data/historias/cadenas_ejemplo.json` (3 cadenas: faro, biblioteca, postgame-plaza):
   **INTEGRADO** en la iter. 3 (Log 2083) vía `RUTA_CATALOGO_EJEMPLOS` con merge por id
@@ -277,7 +278,8 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
   (`cadena-postgame-plaza`, tipo de paso `"construir"` desconocido). Catálogo vivo: 5
   en iter. 3 -> **14** en iter. 6 (13 del principal + 1 de ejemplos) -> **18** en
   iter. 7 (17 del principal + 1 de ejemplos) -> **24** en iter. 8 (23 del principal
-  + 1 de ejemplos) -> **27** en iter. 9 (26 + 1) -> **33** en iter. 10 (32 + 1).
+  + 1 de ejemplos) -> **27** en iter. 9 (26 + 1) -> **33** en iter. 10 (32 + 1) ->
+  **38** en iter. 11 (37 + 1) -> **41** en iter. 12 (40 + 1).
 - Capítulos `capitulo-*` en el catálogo M55 (`data/diario/diario_catalog.json`): **0**
   → las recompensas `diario` de las cadenas apuntan a entradas inexistentes (el
   registro efectivo es `mision_{cadena_id}`). MEDIDO iter. 3: existen
@@ -308,7 +310,17 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
   `capitulo-sentadilla-pesca` / `capitulo-paseos` / `capitulo-ficcion` /
   `capitulo-ayuda-vecino` / `capitulo-cartas-amistad`, ausentes del catálogo M55.
   Reportado en ambas; dueño M55 (mismo patrón desde cadena-biblioteca en H).
-- Consecuencias aplicadas por cadenas del principal (32 únicas sobre 32 cadenas):
+  **Iter. 11**: degrada IGUAL para las 5 secretas —
+  `not diary.esta_registrada("mision_cadena-mapa-secreto")` (idem cristal-oculto /
+  diario-antiguo / pergamino-mistico / mascara-ceremonial) y las recompensas apuntan a
+  `capitulo-mapa-secreto` / `capitulo-cristal-oculto` / `capitulo-diario-antiguo` /
+  `capitulo-pergamino-mistico` / `capitulo-mascara-ceremonial`, ausentes del catálogo M55.
+  **Iter. 12**: degrada IGUAL para las 3 de comerciantes —
+  `not diary.esta_registrada("mision_cadena-ruta-del-mercader")` (idem
+  cargamento-de-telas / secreto-del-yunque) y las recompensas apuntan a
+  `capitulo-ruta-del-mercader` / `capitulo-cargamento-de-telas` /
+  `capitulo-secreto-del-yunque`, ausentes del catálogo M55. Reportado; dueño M55.
+- Consecuencias aplicadas por cadenas del principal (40 únicas sobre 40 cadenas):
   `faro_encendido`, `invernadero_abierto`, `plaza_decorada`, `luciernagas_vueltas`,
   `pan_fiesta_horneado`, `banco_plaza_reparado`, `manto_niebla_terminado`,
   `red_pescador_reparada`, `sendero_bosque_senalado`, `jarabe_lunar_listo`,
@@ -320,7 +332,11 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
   `vigilia_de_los_guardas`, `regalo_favorito_entregado`,
   `sentadilla_de_pesca_amistosa`, `paseo_con_amiga`,
   `historia_de_ficcion_escrita`, `puesto_de_mercedes_ordenado`,
-  `correspondencia_retomada`. (Corrección de decreto: el flag real en datos es
+  `correspondencia_retomada`, `sendero_secreto_revelado`,
+  `cristal_oculto_recuperado`, `autor_del_diario_identificado`,
+  `versos_antiguos_descifrados`, `mascara_ceremonial_restaurada`,
+  `ruta_comercial_reabierta`, `telas_reunidas`,
+  `tecnica_del_yunque_recuperada`. (Corrección de decreto: el flag real en datos es
   `sendero_bosque_senalado`, sin z; la lista previa de este documento y del bloque K
   de la suite decía `senalizado`.)
   **`molino_funcionando` RE RESPALDADA en iter. 6**: tenía 0 cadenas que la aplicaran
@@ -339,11 +355,13 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
 ## 6. Veredicto
 
 Núcleo de M23 **verificado** con binario real y guarda anti-falso-verde demostrada en
-rojo DIEZ veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
+rojo DOCE veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
 I y regresión de datos con prefijo re-inyectado; iter. 5 en el bloque J; iter. 6 en el
 bloque K; iter. 7 en el bloque L; iter. 8 en el bloque M; iter. 9 en el bloque N;
-iter. 10 en el bloque O; todas EXIT 1 nombrando el bloque o la clave). Estado actual:
-suite en **316 checks / 0 fallos / EXIT 0 x3**, catálogo vivo 32 cadenas, y
+iter. 10 en el bloque O; iter. 11 en el bloque P; iter. 12 en el bloque Q; todas EXIT 1
+nombrando el bloque o la clave). Estado actual:
+suite en **379 checks / 0 fallos / EXIT 0 x3**, catálogo vivo 40 cadenas (41 con el
+merge de ejemplos), y
 regresiones M22 (41/0) · M71 (83/0 y 37/0 en flujo-XP) · M59 (43/0 con 9 bloques,
 4/0 en backup-rotate-return y 7/0 en backup-rotations) · M55 (0 fallos) medidas el
 2026-10-22 en las iters. 8, 9 y 10.
@@ -400,3 +418,34 @@ quiere extenderse el GO de normalización.
 - Hallazgo (dueno M55): el puente M23->M55 degrada en silencio para las 5 nuevas
   (`mision_cadena-*` ausentes del catálogo M55; `capitulo-*` también). No se inventa
   contenido de M55.
+
+## 9. Iter. 12 — historias de comerciantes (Log 2135, 2026-10-22)
+
+- 3 cadenas nuevas en `data/historias/secundarias.json` (37 -> 40) del cluster
+  Comerciantes del 03-Diseno L36: ruta del mercader, cargamento de telas y secreto
+  del yunque. NPC REALES de data/villagers/ (mercedes_lince **mercader** — el rol
+  real del dato en disco —, olivia_nutria sastra, ramon_tejon herrero) y objetos
+  REALES de data/items/ (OBJ-ITE-052 «Moneda de oro», OBJ-ITE-010 «Tela»,
+  OBJ-TAL-002 «Yunque»), verificados por campo id dentro del .tres. Integración
+  con M37 excluida por orden del director (msg 181). Las 3 nacen visibles
+  (`oculta:false`): rutas de trueque que se descubren hablando, a diferencia de
+  las secretas del bloque P. Verificación de colisiones antes de escribir:
+  ids/consecuencias/diarios/refs/lugares = 0 sobre las 37 previas.
+- Suite: bloque Q (28 checks) al FINAL de `_run()`; piso 351 -> **379 checks /
+  0 fallos / EXIT 0 x3** con el binario real. Guardián EN ROJO por inyección de
+  runtime sobre el bloque Q: EXIT 1, «el bloque Q NO se ejecuto» + «solo 352
+  checks (minimo 379)», 2 fallos; sonda borrada y sha256 restaurado byte-exacto.
+- Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0 · M71 83/0 ·
+  M59 rotate 43/0 (9 bloques) + backup_rotate_return 4/0 + backup_rotations 7/0 ·
+  M55 diario 0 fallos + persistencia 0 fallos. Todas EXIT 0, 0 SCRIPT ERROR.
+- Flips con cita: «Crear las historias de 3 comerciantes» (L47) y «Documentar
+  historias de familias y comerciantes» (L48, compuesta: §Iter. 9 + §Iter. 12)
+  [ ] -> [x]. M23 = 65 [x] / 38 [ ] / 2 [?] = 105 por prefijo de línea. Las DOS
+  líneas de totales sincronizadas. «Integrar con M37 (comerciantes)» (L152) sigue
+  [ ] con su dueño externo.
+- Hallazgo (dueno M55): el puente M23->M55 degrada en silencio para las 3 nuevas
+  (`mision_cadena-*` ausentes del catálogo M55; `capitulo-*` también). No se
+  inventa contenido de M55.
+- Reparación de deriva documental de la iter. 11: la sec. 5 de este documento y el
+  veredicto seguían en 32 cadenas / 316 checks / DIEZ rojos; sincronizados a
+  40 (41 vivo) / 379 / DOCE con las notas de puente de iters. 11 y 12.

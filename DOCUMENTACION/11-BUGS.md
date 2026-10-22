@@ -259,6 +259,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-134 | DialogLayer e InventoryLayer tenían el layer_type intercambiado | M053 | 🟠 Mayor | [x] Resuelto |  | 2026-10-12 22:46 |
 | BUG-135 | La integración M18 -> M160 está MUERTA: house_manager.gd llama a WorldLocations.buscar_cerca(), método que no existe | M018/M160 | 🟡 Menor | [?] Delegado — dueño M18/M160; decide el agente que tome ese frente | minimax-m3-1-flash | 2026-10-15 02:51 |
 | BUG-140 | test_logros.gd:294 asigna Array sin tipar a propiedad Array[String] -> SCRIPT ERROR que aborta 6 aserciones de persistencia (falso verde en QA §21.8 de M72) | M072 | 🟠 Mayor | [?] Delegado — dueño M72 (step-5-kilocode, autor del módulo y del test). Verificador != autor: hy3 no fixea… | Hy3 (WorkBuddy / Hunyuan) — verificación cruzada §21.8… | 2026-10-21 03:56 |
+| BUG-149 | backup_local.ps1 corrompe checksums.txt en la 2a corrida ($existing + linea = concatenacion de STRINGS cuando Get-Content devuelve un escalar) -> verify_backups.ps1 reporta FALTANTE un backup que EXISTE y restore_backup.ps1 extrae SIN verificar checksum, con el script saliendo exit 0 (falla en silencio) | M107 | 🟠 Mayor | [x] Resuelto 2026-10-22 (fix en HEAD, commit 0dbe925 del director; suite 49/0 re-corrida sobre HEAD) | DeepSeek-V4.1-Flash (WorkBuddy) | 2026-10-22 15:52 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -4313,6 +4314,47 @@ Texto del toast legible (WCAG AA ≥ 4.5:1) sobre su panel oscuro, como el toolt
 - **Plataforma:** Kilo Code
 - **Fecha:** 2026-10-12 01:10
 
+### BUG-149 — `backup_local.ps1` corrompe `checksums.txt` en la 2a corrida: `$existing + "..."` concatena STRINGS cuando `Get-Content` devuelve un escalar
+
+- **Fecha de reporte:** 2026-10-22 15:52 GMT-3 (Log 2133; mensaje de canal 361; autorizacion del director en el mensaje 362).
+- **Modulo(s) afectado(s):** M107-Backups — `scripts/backup/backup_local.ps1` (bloque de registro de `checksums.txt`, L193-204 en HEAD); consumidores afectados: `scripts/backup/verify_backups.ps1` y `scripts/backup/restore_backup.ps1`.
+- **Severidad:** 🟠 Mayor — rompe la garantia central del subsistema de backups (integridad verificable) y lo hace **en silencio**, con exit 0. *Nota de nomenclatura:* el director (mensaje 362) la nombra "Alta"; la tabla resumen solo tiene una etiqueta vigente para el nivel 🟠 ("Mayor", 43/43 filas), asi que se registra con esa etiqueta para no abrir un defecto NUEVO de `etiqueta_severidad_inconsistente` (el gate `--check` lo bloquearia). El nivel semantico es el pedido: alta.
+- **Prioridad sugerida:** Alta.
+- **Estado:** [x] Resuelto — fix aplicado y commiteado por el director en `0dbe925` (2026-10-22 16:01); verificado presente en HEAD. Suite de regresion re-corrida sobre HEAD: **49 checks / 0 fallos / EXIT 0**.
+- **Comportamiento esperado:** en cada corrida, `checksums.txt` acumula **una linea por backup** (`<sha256>  <nombre>`), con salto de linea entre entradas. `verify_backups.ps1` puede parsear cada linea (regex `^[A-Fa-f0-9]{64}\s+`) y `restore_backup.ps1` verifica el checksum antes de extraer.
+- **Comportamiento observado (medido, no supuesto):** a partir de la **segunda** corrida sobre un destino con una entrada previa, la linea nueva se **pega** a la anterior:
+
+  ```
+  backup_2026-10-22_15-50-17.tar.gzEFD4406DC880A1D7068FC3501D1771CE9E...  backup_...
+  ```
+
+  Consecuencias medidas: (1) el `.tar.gz` se crea bien y el script sale **exit 0** (falla en silencio); (2) `verify_backups.ps1` no puede parsear la linea -> reporta **FALTANTE** un backup que existe; (3) `restore_backup.ps1` no encuentra el registro -> cae al `[AVISO]` y **extrae sin verificar el checksum**, que es justo la garantia que el script promete.
+- **Causa raiz:** PowerShell devuelve **escalar** en vez de array cuando `Get-Content` produce **una sola** linea, y `+` sobre dos strings **concatena** en vez de agregar un elemento:
+
+  ```powershell
+  # antes (backup_local.ps1)
+  $existing = Get-Content $checksumsFile | Where-Object { $_ -notmatch ... }
+  $existing + "$hash  $fileName" | Set-Content ...
+  ```
+
+  Con 2+ lineas sobrevivientes el pipeline devuelve array y funciona; con **una** devuelve `[string]` y el `+` concatena. Por eso el defecto es de **segunda corrida** y no aparece en el camino feliz.
+- **Como reproducir:**
+  ```
+  powershell -ExecutionPolicy Bypass -File scripts/backup/backup_local.ps1 -Destination <destino nuevo>
+  powershell -ExecutionPolicy Bypass -File scripts/backup/backup_local.ps1 -Destination <mismo destino>
+  powershell -ExecutionPolicy Bypass -File scripts/backup/verify_backups.ps1 -BackupDir <mismo destino>
+  # -> la 2a corrida deja la linea pegada; verify reporta FALTANTE el backup nuevo
+  # -> y backup_local.ps1 sale EXIT 0 igual
+  ```
+  En la suite: `python scripts/test_backup_ps1.py` (bloque B, retencion/poda de `checksums.txt`). Revertir el `@()` reproduce el defecto: **6 fallos / EXIT 1**, nombrando `checksums.txt se poda a 2 entradas -> entradas=1` y la linea pegada (guardian probado EN ROJO por inyeccion, Log 2133 §3.1).
+- **Fix aplicado (en HEAD, commit `0dbe925`):** forzar array en la asignacion y en la concatenacion — `$existing = @(Get-Content ...)` y `@($existing) + "$hash  $fileName"` (L199-200 de `backup_local.ps1`), mas `Remove-OldChecksumEntry` para la poda (L213). Diff del fix: `backup_local.ps1` +27/-6.
+- **Evidencia:** Log 2133 (`Logs/2133-M107-Suite-PS1-Backups_2026-10-22_15-51-21.md`, §2.2 D-1 y §3.1 R1); mensaje de canal 361 (reporte); mensaje 362 (autorizacion con severidad Alta); commit `0dbe925` (2026-10-22 16:01, "se integra la suite de backups ps1 de DeepSeek con sus dos fixes reales"); re-verificacion sobre HEAD en esta vuelta: `python scripts/test_backup_ps1.py` -> 49/0/EXIT 0.
+- **Alcance / latencia:** se dispara en la **segunda** corrida sobre cualquier destino nuevo (1 entrada previa que no matchea el nombre nuevo). No habia rastro en `D:\Backups\juego-isla-ancestral` porque ese destino **no existe** todavia en esta maquina: el defecto era **latente**, no historico. Cualquier backup real en produccion lo habria activado en la 2a corrida.
+- **Referencias cruzadas:** el hermano **D-2** (mismo Log 2133) — `& tar.exe` hereda el PATH y con un GNU tar delante (PortableGit) `-C 'C:\...'` se interpreta como host remoto (`cannot connect to c:`, exit 2); fix `Resolve-TarExe` a `%SystemRoot%\System32\tar.exe` en `backup_local.ps1` (L92, L146) y `restore_backup.ps1` (L42, L93). D-2 quedo corregido en el mismo commit pero **NO esta registrado como bug propio**: el director solo autorizo el registro de D-1, y abrir un ID sin autorizacion no es potestad del agente (pedido P4 del reporte de esta vuelta).
+- **Reportado por:** DeepSeek-V4.1-Flash (WorkBuddy) — hallazgo propio en la tanda del item 33 de la COLA ACTIVA (M107: 4 `.ps1` sin ninguna prueba).
+- **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — 2026-10-22 17:43 GMT-3.
+---
+
 ## 8. Bugs Delegados a Otros Agentes
 
 > ⚠️ **Regla de delegación:** si un modelo LLM **no puede resolver** un bug (le faltan capacidades: visión, contexto, complejidad, herramientas), lo agrega **aquí al final del archivo**, respetando la plantilla de la sección 4 con estado `[?] Delegado`, y **firma con su nombre de modelo, plataforma, fecha y hora**. Otro agente más capacitado podrá tomarlo marcando `[→] En progreso` y, al resolverlo, moverlo a la sección 7.
@@ -4726,6 +4768,8 @@ silenciosa de todos los guardados futuros).
 
 
 ## 9. Historial de Modificaciones de Este Archivo
+
+- **2026-10-22 17:43** — **BUG-149 [x] Resuelto (DeepSeek-V4.1-Flash / WorkBuddy, Log 2133, canal 361 -> autorizacion 362):** registrado el defecto **D-1** de M107 (corrupcion silenciosa de `checksums.txt` en la 2a corrida por concatenacion escalar-vs-array en `backup_local.ps1`). Fix en HEAD (`0dbe925`, aplicado por el director): `@(...)` en la asignacion y `@($existing) + ...` al concatenar. Evidencia: suite `scripts/test_backup_ps1.py` **49/0/EXIT 0** re-corrida sobre HEAD; guardian en rojo por inyeccion (revertir el `@()` = 6 fallos / EXIT 1). Tabla §5 (fila BUG-149) + entrada en §7. El hermano D-2 (tar del PATH) queda mencionado en la entrada pero sin ID propio, a la espera de decision del director.
 
 - **2026-10-08 21:22** — **BUG-104 [x] Resuelto (mimo-v2.6-flash-free, opencode, encargo msg 76, Log 1492):** los dos autoloads NO eran capas legítimas — eran dos implementaciones distintas del mismo M87 (merge descuidado). `Localization` (correcto, 15 192 B, API `traducir_clave`/`get_locale`/señal `locale_changed`, 19 referencias) vs `LocalizationManager` (duplicado viejo, 2 729 B, API `get_texto`, 2 referencias **ambas rotas desde su origen**: `inventario_iter4.gd` llamaba `get_string` que ningún script expone → siempre fallback; `credits_manager.gd` conectaba la señal `idioma_cambiado` que el duplicado ni tiene → no-op). Fix: línea de autoload duplicada eliminada de `project.godot` (solo queda `Localization` L59); las 2 referencias corregidas al correcto; test viejo del duplicado movido a `scripts/localizacion/Obsoletos/`; `LocalizationManager.gd` NO tocado (restricción del director — queda huérfano inofensivo). Verificación: runtime 0 apariciones del mensaje viejo + 0 SCRIPT ERROR + presencia positiva vía `test_ui_i18n_m53` (36/3 idéntico al baseline); `test_localizacion_iter6` 82/1 (I9 preexistente probado contra baseline con `git stash`); runner 21/25/1188/1 (quirk GdUnit rc=101, baseline evolucionó 780→1188 por sweeps de otros agentes); gate 76/0.
 

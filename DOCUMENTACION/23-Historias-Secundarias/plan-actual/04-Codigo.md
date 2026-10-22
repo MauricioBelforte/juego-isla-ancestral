@@ -546,3 +546,57 @@ LF puro sin BOM verificado por bytes).
   DOS líneas de totales sincronizadas a 63/40/2. El ítem «Documentar historias
   estacionales y secretas» (L58) sigue [ ]: es compuesto y las estacionales son de
   M32 (0 en disco) — no se flippa por la mitad (patrón anti-inflación de iter. 6).
+
+## Iter. 12 — Historias de comerciantes (Step-5-WorkBuddy, 2026-10-22, Log 2135)
+
+Cluster Comerciantes del 03-Diseno L36 («3 cadenas de rutas y secretos»). La
+integración con M37 (ítem L152 del checklist) queda EXCLUIDA por orden del
+director (msg 181, 2026-10-22): la tanda cubre solo las cadenas M23. 3 cadenas
+nuevas en `data/historias/secundarias.json` (37 -> 40) con NPC REALES de
+data/villagers/ (mercedes_lince **mercader** — el rol real del dato en disco —,
+olivia_nutria sastra, ramon_tejon herrero) y objetos REALES de data/items/
+verificados por campo id dentro del .tres (OBJ-ITE-052 «Moneda de oro»,
+OBJ-ITE-010 «Tela», OBJ-TAL-002 «Yunque»). Contextos narrativos >= 10 caracteres,
+4 pasos cada una (hablar/explorar/entregar/puzzle) y lugares de exploración
+nuevos sin colisión (ruta_comercial, almacen_del_camino, taller_viejo). A
+diferencia de las secretas de iter. 11, las 3 nacen visibles (`oculta:false`):
+son rutas de trueque que se descubren hablando, no secretos de mundo. 3
+consecuencias peladas únicas (40/40 sobre el catálogo) y 3 capítulos de diario
+únicos (39/39: una cadena preexistente no declara diario). Verificación de
+colisiones ANTES de escribir: ids, consecuencias, diarios, refs de puzzle y
+lugares = 0 colisiones con las 37 previas. Edición puramente aditiva sobre el
+JSON (+45 líneas, formato Godot preservado, LF puro sin BOM verificado por
+bytes).
+
+- Suite `scripts/historias/test_historias.gd`: bloque Q `_test_comerciantes()`
+  (28 checks: 9 carga/fuente/no-oculta + 1 visibilidad en disponibles + 2
+  unicidad de flags + 1 diarios + 2x7 end-to-end + 1 puente diario) al FINAL de
+  `_run()`; BLOQUES A-Q y conteos de A/I actualizados (38 -> 41 cargadas,
+  principal 37 -> 40). Piso 351 -> **379 checks / 0 fallos / EXIT 0 x3**
+  (binario real, 0 SCRIPT ERROR).
+- Guardián EN ROJO por inyección de runtime (`Variant` con `Array` ->
+  `Dictionary`) al inicio del bloque Q: EXIT 1, «el bloque Q NO se ejecuto» +
+  «solo 352 checks ejecutados (minimo 379)»; sonda borrada en la misma
+  operación y sha256 del archivo restaurado byte-exacto
+  (56f5878ba31bb4e1c68478a7613355543624864a5428c898a3ca2b83647ebfe6).
+- Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0, M71
+  `test_progresion.gd` 83/0, M59 `test_rotate_m59.gd` 43/0 (9 bloques) +
+  `test_backup_rotate_return.gd` 4/0 + `test_backup_rotations.gd` 7/0 y M55
+  `test_diario.gd` + `test_diario_persist.gd` 0 fallos. Todas EXIT 0 con el
+  binario real, 0 SCRIPT ERROR.
+- Hallazgo (dueno M55, no tocado): el puente M23->M55 degrada en silencio
+  tambien para las 3 nuevas (`mision_cadena-ruta-del-mercader` ausente del
+  catálogo de M55; mismo patrón que cadena-biblioteca en H, cadena-jardines en
+  K, cadena-puente en L, cadena-brujula en M, cadena-guardas en N,
+  cadena-regalo-favorito en O y cadena-mapa-secreto en P). No se inventa
+  contenido de M55.
+- Flips del 05-Checklist con cita: «Crear las historias de 3 comerciantes» [ ]
+  -> [x] (L47) y «Documentar historias de familias y comerciantes» [ ] -> [x]
+  (L48, compuesta: §Iter. 9 + §Iter. 12). M23 = 65 [x] / 38 [ ] / 2 [?] = 105
+  (verificado por prefijo de línea). Las DOS líneas de totales sincronizadas a
+  65/38/2. El ítem «Integrar con M37 (comerciantes)» (L152) sigue [ ] con su
+  dueño externo.
+- Autocorrección de la corrida: el primer cálculo de totales del script de
+  flip dio 66/37/2 (3 cadenas contadas como 3 flips); la verificación por
+  prefijo integrada al script lo detectó ANTES de escribir — son 2 flips
+  (L47 + L48) -> 65/38/2. El archivo nunca se escribió con la cifra falsa.

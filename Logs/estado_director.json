@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T20:45:50",
+ "ultimo_update": "2026-10-22T20:55:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -26,9 +26,9 @@
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "361 procesado: suite ps1 49/0 commiteada; flip L91 hecho por director (M107 168/176); quality.yml RECHAZADO (fundador decide); bug D-1 Alta autorizado a 11-BUGS; rial = BACKLOG-04 como tercer verificador",
+  "estado": "363 PROCESADO: BUG-149 validado (mediciones exactas + gate verde); P1 commit hecho; P2 Mayor mantenido; P3 fila 107 corregida (mi sync habia fallado celda); P4 normalizacion 141-148 AUTORIZADA (estructural); P5 lote verificador M91+M147+M24 asignado; P6 D-2 dentro de 149; GO item34 M113; mi 364",
   "pendientes_real": 170,
-  "acuse_enviado": 362
+  "acuse_enviado": 364
  },
  "step_5": {
   "estado": "iter12 Comerciantes RATIFICADA (65/38/2 exacto; 40 cadenas; suite 379/0 bloque Q; trampas auto-corregidas en vivo con conteo rigido); fila 23 en DOS celdas ajustada; GO bloque final Puzzles+Investigacion CONSOLIDADO; mi 183",
@@ -134,7 +134,8 @@
   "Regla CONTEO-RIGIDO AL CIERRE (22oct 19:30, 3er caso): declaraciones de conteo desalineadas del disco en 3 tandas seguidas (agnes 951 holgado, G-5.3 S52 4-corta, Beam M99/M77 stale+desvio). REGLA: re-cuenta por patron rigido de Hy3 (321) al cierre de CADA tanda; de lo contrario el sello usa el conteo del disco y la declaracion queda descalificada como base",
   "FALSOS RESIDUALES (22oct 19:40, auto-capturada): medir el disco ANTES de procesar mensajes pendientes atribuye flips fantasma al agente (me paso con S54). REGLA: procesar pendientes PRIMERO, luego medir, luego juzgar desvios",
   "LAG ARTIFICIAL post-restauracion (22oct 19:50): mi acuse 310-regenerado numerado DEBAJO del 311 suyo => detector cuenta lag=1 eternamente hasta mi proximo acuse. Contenido CUBIERTO (S54 ratificada + GO bateria 5 en el 310). NO doble-responder; proximo acuse natural (Bateria 5 o su S55) realinea la serie",
-  "CRUCE ENTRE CICLOS (22oct 19:38, fundador): el 203 de Beam llego 2 min despues del CRON B y el CRON D no corre detector => mensaje sin detectar 12+ min. FIX ESTRUCTURAL en cronometros: TODOS los crons corren el detector como PASO 0-bis"
+  "CRUCE ENTRE CICLOS (22oct 19:38, fundador): el 203 de Beam llego 2 min despues del CRON B y el CRON D no corre detector => mensaje sin detectar 12+ min. FIX ESTRUCTURAL en cronometros: TODOS los crons corren el detector como PASO 0-bis",
+  "SYNC-COLUMNA-EQUIVOCADA (22oct, detectada por DS-WB 363): mi sync de fila 107 toco parts[3] cuando el layout real tiene Estado en 3 y Progreso en 4 (varia por fila segun canon 11-col con Recom) => syncs de fila del GLOBAL DEBEN inspeccionar el header/celdas ANTES de escribir; validado con fila 107 (quedo stale y DS-WB lo midio)"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
