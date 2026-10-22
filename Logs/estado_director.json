@@ -184,7 +184,7 @@
  "seelos_m159": {
   "estado": "M159 b2 SELLADO 2026-10-21: autor agnes (732/900/901/906), QA cruzado Hy3 (907, OK medido), sello director (fila 159 GLOBAL)"
  },
- "crons_vuelta_bd": "CRON B/D 19:50-20:05: Step-5 149 (M23 RATIFICADA; fila 23 42/104 con molino degradado; GO wiring cadenas_ejemplo) acuse 151; G-5.3 211 (codec M60) acuse 212 derivado a DeepSeek",
+ "crons_vuelta_bd": "CRON B/D 19:50-20:05: Step-5 149 (M23 RATIFICADA; fila 23 42/104 con molino degradado; GO wiring cadenas_ejemplo) acuse 151; G-5.3 211 (codec M60) acuse 212 derivado a DeepSeek | CRON B 18:50: detector corregido (contencion, no startswith); agnes 951 respondida (952); resto al dia",
  "crons_vuelta_ac": "CRON A 21:20 sin pendientes; CRON C 21:25 gate 1 correccion; MiniMax 009 ratificado con 010 (plan P1/P2/P3 + aclaracion de rojos honestos post-corte); G-5.3 217 deriva crafting cerrada (218) + pedido 011 a MiniMax",
  "regla_crons_fundador": "DIRECTIVA FUNDADOR 2026-10-21 21:28: cada cron hace su tarea principal; si en la misma vuelta detecta otras cosas utiles (pendientes de responder, derivaciones, preservaciones extra), TAMBIEN las hace perfectamente - combinacion permitida, etiquetandola en el reporte (ej: C+B+D combinados)",
  "flota_agentes": [
