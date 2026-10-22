@@ -25,7 +25,7 @@
   · implementado: navigator.gd (Camera3D subclass, WASD/gamepad + zoom 0.5x-8x + orbit con pitch limits) + integracion en photo_service.gd (_entrar/_salir_modo_foto). (Reflection-Beam-1.0, T19, 2026-10-22)
 - [x] Traslación libre con WASD/gamepad (M57) y colisión suave (raycast) [C]
   · implementado: navigator.gd _process (raycast colision_mask=1, clamp al punto de impacto con margen 0.5). (Reflection-Beam-1.0, T20, 2026-10-22)
-- [ ] Restaurar FOV y posición originales al salir [S]
+- [x] Restaurar FOV y posición originales al salir [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: photo_service.gd _salir_modo_foto L181-196 (hora previa restaurada, camara real via Navigator.desactivar, HUD exacto previo via UIManager.set_hud_visible, salida redundante idempotente); qa_m56_photopose.gd 13/0 EXIT 0 (entrar/salir headless sin crash)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Manejar colisión con agua (no sumergir la cámara, M51) [M]
   · espera: modulo(s) dependiente(s): M51 (coordinar con su dueno)
@@ -90,7 +90,7 @@
 
 ## H. Poses de NPC (M19)
 
-- [ ] Emitir PHOTO_POSE_REQUEST (M07) al entrar al modo foto [S]
+- [x] Emitir PHOTO_POSE_REQUEST (M07) al entrar al modo foto [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: photo_service.gd L251 photo_pose_request.emit() en posar() (confirmacion del disparo, flujo del 03-Diseno: confirmar -> 4) emitir -> NPC/animales posan) + receptor _on_photo_pose_request conectado en npc_manager.gd (agentes pose_foto); matiz documentado: la senal dispara al CONFIRMAR (posar), no al entrar; qa_m56_photopose.gd 13/0 EXIT 0
   · espera: modulo(s) dependiente(s): M7 (coordinar con su dueno)
 - [ ] NPC posa 0.5 s con animación M48 sin bugs [M]
   · espera: modulo(s) dependiente(s): M48 (coordinar con su dueno)
@@ -415,3 +415,4 @@
   y ajeno**: parse error en `tests/unit/debug/test_debug_menu.gd` (`_limpiar_huerfanos_boot`,
   M110, WIP sin commitear de otro agente) que revienta toda la suite GdUnit4 (rc=105).
   No se tocó ese archivo (perteneciente a otro módulo en vuelo).
+**Totales:** 137 items · Completados: 43 · Pendientes: 92 · No resueltos: 2. (Re-medido G-5.3-Flash-Agente 2026-10-22: 43 [x] / 92 [ ] / 2 [?] tras tanda photopose+restaurar; qa_m56_photopose.gd 13/0.)

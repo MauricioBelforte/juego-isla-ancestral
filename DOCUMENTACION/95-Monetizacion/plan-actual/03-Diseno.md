@@ -63,3 +63,29 @@
 
 ## 8. Lo que NO se hace
 - No F2P, no suscripción, no GaaS (se documenta), no divisa premium, no cajas, no "paywall" en progresión, no contenido de historia de pago.
+
+
+## 9. Definicion de DLC-1 Mareas del Olvido (expansion post-historia)
+
+### 9.1 Isla nueva: Isla Marea
+- Bioma: costa rocosa + bosque tropical denso (M50/M51 reutilizados).
+- Tamano: 1/3 de la isla principal; acceso por barco post-epilogo.
+- Terreno: perfil en capas igual que Isla Raiz (167) con paleta Maldivas oscuro.
+
+### 9.2 Dos templos nuevos
+| Templo | Tema | Mecanica nueva | Duracion |
+|--------|------|----------------|----------|
+| Templo de la Marea | agua/flujo | acertijos de corrientes (valvulas) | 3-4 h |
+| Templo del Eco | sonido/resonancia | acertijos de eco (M41 audio) | 3-4 h |
+
+### 9.3 Tres NPC nuevos
+| NPC | Rol | Vinculo M20 | Recompensa |
+|-----|-----|-------------|------------|
+| Navegante Marea | guia, da misiones | amistad max 5 niveles | mapa de la isla |
+| Guardiana del Eco | guardiana, da acertijos | amistad max 3 niveles | fragmento de melodia (M41) |
+| Ermitano de la Roca | recolector, da items | amistad max 4 niveles | receta de crafteo exclusiva |
+
+### 9.4 Contenido adicional
+- 20 coleccionables nuevos (M73).
+- Arco de 8-10 h totales.
+- Sin ventaja de progresion (R1): items cosmeticos o de coleccion.

@@ -67,7 +67,8 @@
 
 - [x] Definir roadmap de expansiones post-lanzamiento (M144) [M]
   · evidencia: 02-Analisis (secc. 1-6, D1-D5, Plan F1-F5) (Reflection-Beam-1.0, T16, 2026-10-22)
-- [ ] Definir expansión con 2 templos nuevos y 3 NPC [C]
+- [x] Definir expansión con 2 templos nuevos y 3 NPC [C]
+  · evidencia: 03-Diseno.md secc. 9 (Isla Marea, 2 templos, 3 NPC, 20 coleccionables) (Reflection-Beam-1.0, T43, 2026-10-22)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [C])
 - [x] Definir expansión ubicada post-epílogo (sin fragmentación) [M]
   · evidencia: 02-Analisis (secc. 1-6, D1-D5, Plan F1-F5) (Reflection-Beam-1.0, T16, 2026-10-22)

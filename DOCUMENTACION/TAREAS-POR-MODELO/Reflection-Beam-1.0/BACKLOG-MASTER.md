@@ -63,7 +63,7 @@ Total de items de modulos anexados: 0. Regla: item que al leerse resulte obsolet
 112. [x] 95-Monetizacion: [ ] Definir documento de la decisión para el equipo [S]
 113. [ ] 95-Monetizacion: [ ] Definir DLC aprobados por canon (M147) [M]
 114. [ ] 95-Monetizacion: [ ] Definir roadmap de expansiones post-lanzamiento (M144) [M]
-115. [ ] 95-Monetizacion: [ ] Definir expansión con 2 templos nuevos y 3 NPC [C]
+115. [x] 95-Monetizacion: [ ] Definir expansión con 2 templos nuevos y 3 NPC [C]
 116. [ ] 95-Monetizacion: [ ] Definir expansión ubicada post-epílogo (sin fragmentación) [M]
 117. [ ] 95-Monetizacion: [ ] Definir defensa de canon de la expansión [M]
 118. [ ] 95-Monetizacion: [ ] Definir OST vendible en tienda digital (24 pistas, M41) [M]
