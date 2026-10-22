@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T08:46:50",
+ "ultimo_update": "2026-10-22T15:16:40",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "940/941: QA CRUZADO RATIFICADO (M21/M56/M20 ok; M40 deuda; M33 2/5 degradado a [?] - doble verificacion director+agnes); poder de degradar COMPROBADO",
+  "estado": "945/946: veredicto batches 3-6 (0/10) doble-fuente RATIFICADO; veredictora al ritmo",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,13 +13,13 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 941,
+  "acuse_enviado": 946,
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "276: S24+S25 RATIFICADAS (citas L10-L44; S25 re-escribe los 2 [?] a la realidad BalanceService - M33 116/143 firme); regimen de citas de G-5.3 validado",
+  "estado": "279/280: S28 RATIFICADA (06-Plan-Testings nuevo M138); pedir lista TC1-13 en proximo",
   "pendientes_real": 222,
-  "acuse_enviado": 276,
+  "acuse_enviado": 280,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 354
  },
  "step_5": {
-  "estado": "168/169: M23 iter.6 RATIFICADA (55/105, 3 historias lugares, oferta de revert sin necesidad - evidencia sostiene); siguiente cluster 03-Diseno L31 o M67#4",
+  "estado": "172/173: M23 iter.8 (Objetos) RATIFICADA (58/105); next cluster + re-verif muestras riel; asincrono",
   "pendientes_real": 203,
-  "acuse_enviado": 169
+  "acuse_enviado": 173
  },
  "ds_oc": {
   "estado": "OFFLINE hoy (fundador: disponible manana 2026-10-23); su rol de verificador oficial de Beam queda programado para entonces; HOY la verificacion del P-100 la hace el director por muestreo ~10% por batch",
@@ -44,9 +44,9 @@
   "acuse_enviado": 318
  },
  "ling": {
-  "estado": "215/216: T26 RATIFICADA (Bloque N tooltips, deuda 13 literales ES con lineas); GO T27",
+  "estado": "217/218: T27 RATIFICADA (2.4.12 catalogo M159 verificado); GO T28",
   "pendientes_real": 112,
-  "acuse_enviado": 216
+  "acuse_enviado": 218
  },
  "crons_vigentes": {
   "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
@@ -122,10 +122,11 @@
   "Nuevo regimen produce-first para Beam (fundador 08:28, por disponibilidad incierta): reportes minimos de items, verificacion DIFERIDA grande - riesgo: volumen sin verificacion en vivo; mitigado por su historial limpio y backfill tomorrow"
  ],
  "minimax_m3_1_flash": {
-  "estado": "052/053: t4 RATIFICADA por no-cierre honesto; GO: suites que faltan en res://tests/ + migracion de suites a CI (sin gate hasta verde)",
+  "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
   "pendientes_real": 685,
-  "acuse_enviado": 53,
-  "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
+  "acuse_enviado": 55,
+  "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/",
+  "disponible": false
  },
  "crons_ids_vigentes": {
   "A_v4": "wku_15f8212f4001Zv9L8njuCCakhl",
@@ -190,8 +191,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "riel CURADO por especialidad (fundador 08:40): solo definir/diseno/verificar/calcular - BACKLOG-05 re-escrito (465 items en 20 modulos); implementacion/activos excluidos",
-  "acuse_enviado": 144,
+  "estado": "155/156: COLA batch 10 RATIFICADO (M143 60/111, M147 100/133); riel sigue",
+  "acuse_enviado": 156,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first ilimitado hoy",
   "encargo_activo": "RIEL SUELTO TOTAL"
@@ -312,5 +313,6 @@
   "plan_T1": "consigna agéntica simple al candidato ganador -> onboarding (canal+pool+prompt+ficha N.3) -> T1 calibracion picking documental con verificador externo -> recien ahi modulos",
   "slot_destino": "reemplazaria DS-OC cuando termine verificador de paquete 8 (consolidando DeepSeek a UNA instancia DS-WB)"
  },
- "deriva_m138_reparto": "M138 Vertical-Slice COMPARTIDO 07:52: G-5.3 = definiciones de contenido (03-Diseno turno 2-BIS); Beam = presupuesto tecnico de render (subseccion Presupuesto tecnico de render (Beam)) - secciones separadas"
+ "deriva_m138_reparto": "M138 Vertical-Slice COMPARTIDO 07:52: G-5.3 = definiciones de contenido (03-Diseno turno 2-BIS); Beam = presupuesto tecnico de render (subseccion Presupuesto tecnico de render (Beam)) - secciones separadas",
+ "nota_despertar": "Gap de 6h (maquina dormida 09:20-15:10): sin produccion nueva durante el lapso salvo Step-5 172 (escrito 06:56 UTC real); Beam/otros quietos - el riel de Beam quedo pausado con su sesion"
 }
