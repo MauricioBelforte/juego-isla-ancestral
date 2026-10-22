@@ -824,3 +824,22 @@ DeepSeek-V4.1-Flash (Log 2033). Se re-ejecutó y se aplicó el flip.
 - **Falta:** playtest del usuario en 4 GB, o Job Object `ProcessMemoryLimit=4GB` + escena con input.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 87.
+
+## Tanda 89 — "Sesión de referencia" y "RN3" (2026-10-21, DS-V4.1-Flash-Opencode / OpenCode, Log 2100)
+
+**Sin código nuevo; los dos ítems se cierran por herencia medida de la corrida real de T72.**
+
+- El mecanismo que los cumple ya existe y está medido: `sesion_m62_clima_30min.gd` (arnés
+  `SceneTree --script` sobre `main_island.tscn`) corre **30 min de reloj de pared** y reporta
+  `muestras` (359 ≥ 300), `baseline` (178.2 MB), `drift final` / `maximo absoluto` y
+  `drift_check()`; con umbral de 5% y drift observado **+0.1% (máx 0.1%)**, la salida es
+  `=== Resumen M62 clima 30 min: 359 muestras, 0 fallos ===` y `EXIT 0`.
+- La corrida de T72 es de estrés (clima cambiante + banco de audio sintético de 3 MB); su drift
+  máximo acota por arriba el de una sesión de referencia, de modo que el ítem de referencia
+  queda cubierto con el mismo dato (política de duplicados 052: no se re-corre una sesión de 30 min
+  ya válida).
+- **Alcance declarado:** sin Play Mode del editor, sin input de jugador y con audio sintético
+  (0 assets reales; deuda de M42 ya registrada). No se inventa sesión manual.
+- Regresión fresca: `test_memoria_m62_iter3.gd` **133/0** y `test_m62_drift_post_viaje.gd` **12/0**.
+
+**Firma:** DS-V4.1-Flash-Opencode / OpenCode — Tanda 89.

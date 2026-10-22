@@ -22,6 +22,8 @@
 extends Node
 
 signal objetivo_seleccionado(objetivo, atenuado: bool)
+
+signal objetivo_en_transicion(duracion: float)
 signal objetivo_perdido()
 signal interaccion_iniciada(objetivo, categoria: StringName)
 signal interaccion_terminada(objetivo, ok: bool)
@@ -58,6 +60,15 @@ var _estado_anterior: int = -1
 # Persistencia: estado por interactuable (instance_id -> dict).
 var _estado_guardado: Dictionary = {}
 
+## M70 (G-5.3-Flash-Agente 2026-10-22): RF4 — raycast de vision espaciado:
+## 1 evaluacion por ventana de N frames (presupuesto < 0.5 ms/frame).
+const FRAMES_ENTRE_EVALUACIONES: int = 4
+var _frames_desde_eval: int = 0
+## M70 RF5 — cambio de objetivo con FADE (nunca salto brusco):
+## duracion dentro del rango 0.08-0.12 s del diseño; la UI consume la señal.
+const DURACION_FADE_CAMBIO: float = 0.10
+var _fade_restante: float = 0.0
+
 func _ready() -> void:
 	# Persistencia
 	var sm := _get_save_manager()
@@ -74,6 +85,14 @@ func _process(_delta: float) -> void:
 	if _estado == InteractionState.INACTIVO:
 		_estado = InteractionState.SELECCIONANDO
 		estado_cambiado.emit(_estado)
+	# RF5: el fade corre CADA frame (independiente del throttle de evaluacion).
+	if _fade_restante > 0.0:
+		_fade_restante = maxf(_fade_restante - _delta, 0.0)
+	# RF4: 1 evaluacion de vision por ventana de N=4 frames.
+	_frames_desde_eval += 1
+	if _frames_desde_eval < FRAMES_ENTRE_EVALUACIONES:
+		return
+	_frames_desde_eval = 0
 	_evaluar_y_seleccionar()
 
 # API publica ---------------------------------------------------------------
@@ -168,6 +187,14 @@ func set_estado_dormido(dormido: bool) -> void:
 			estado_cambiado.emit(_estado)
 
 # Devuelve el objetivo actualmente seleccionado (o null).
+## RF5: true mientras el objetivo esta en transicion de fade (UI lo consume).
+func en_transicion_cambio() -> bool:
+	return _fade_restante > 0.0
+
+## RF4: frames restantes para la proxima evaluacion de vision.
+func frames_hasta_evaluacion() -> int:
+	return maxf(0.0, float(FRAMES_ENTRE_EVALUACIONES - _frames_desde_eval)) as int
+
 func obtener_objetivo_actual():
 	return _objetivo_actual
 
@@ -228,9 +255,14 @@ func _evaluar_y_seleccionar() -> void:
 		if dist_actual - mejor.dist <= HISTERESIS_M * HISTERESIS_M:
 			return  # mantener
 	_perder_objetivo_si_corresponde()
+	var hubo_cambio: bool = _objetivo_actual != mejor.obj
 	_objetivo_actual = mejor.obj
 	var atenuado: bool = not bool(mejor.get("valido", true))
 	objetivo_seleccionado.emit(_objetivo_actual, atenuado)
+	if hubo_cambio:
+		# RF5: fade del cambio (0.10 s, rango 0.08-0.12 del diseño).
+		_fade_restante = DURACION_FADE_CAMBIO
+		objetivo_en_transicion.emit(DURACION_FADE_CAMBIO)
 
 func _comparar_candidatos(a: Dictionary, b: Dictionary) -> bool:
 	# prioridad desc

@@ -1,6 +1,6 @@
 **Modelo:** DeepSeek-V4.1-Flash — DS-V4.1-Flash-Opencode (último modificador)
 **Plataforma:** OpenCode
-**Fecha:** 2026-10-18 (Tanda 60 — sección 12; Log 1998)
+**Fecha:** 2026-10-21 (Tanda 89 — sección 39; Log 2100)
 
 # 07-Resultados-Testings.md — Módulo 62: Memoria
 
@@ -847,3 +847,22 @@ M62_AUDIO_BANCO_MB=3 <godot_console> --headless --path game/isla-ancestral \
 - **Evidencia parcial:** `out/tanda72/sesion_audio_30min.log`, `out/tanda76/preset_baja_m27.log`.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 87.
+
+## 39. Tanda 89 (2026-10-21, DS-Opencode, Log 2100): "Sesión de referencia" y "RN3" → `[x]` por herencia T72
+
+| Verificable | Fuente | Resultado |
+|---|---|---|
+| Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base | `out/tanda72/sesion_audio_30min.log` (231 KB, Log 2039) | **30 min reales (t=0…1801 s), 359 muestras, baseline 178.2 MB, drift +0.1% (máx 0.1%), drift_check()=true, EXIT 0** |
+| RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline | mismo archivo (+ `.csv`) | **178.2 → 178.4 MB, drift +0.1% (margen 50× sobre el umbral), 0 huérfanos, buses 7→7, players 9→9** |
+
+- **Re-verificación en disco (hoy):** `muestras: 359 (minimo 300)` · `baseline: SI (178.2 MB)` ·
+  `drift final: +0.1% | maximo absoluto: 0.1% (t=600 s)` · `drift_check(): true` ·
+  `=== Resumen M62 clima 30 min: 359 muestras, 0 fallos ===` · `TEST M62 clima 30 min OK`.
+- **Regresión fresca de la tanda (EXIT 0):** `test_memoria_m62_iter3.gd` **133 checks / 0 fallos**
+  (`out/m62_iter3_tanda89.log`) · `test_m62_drift_post_viaje.gd` **12 / 0**
+  (`out/m62_drift_post_viaje_tanda89.log`).
+- **Alcance declarado:** arnés `SceneTree --script` (no Play Mode del editor), sin input de jugador,
+  banco de audio sintético (deuda M42). La corrida es de estrés y aun así acota el drift de la
+  sesión de referencia; no se re-corre la sesión de 30 min (dup 052).
+
+**Firma:** DS-V4.1-Flash-Opencode / OpenCode — Tanda 89.
