@@ -3101,3 +3101,25 @@ explicita para que no espere derivaciones.
 - MiniMax: las piezas que hacen que el CI mida TODO (infraestructura). Control: exigir sonda antes de hipotesis.
 - G-5.3: encargos consolidados + autonomia plena (mismo modelo que el director: gene facilities). Control: conteo por prefijo.
 
+## N.2-bis MATRIZ EMPÍRICA DE VERIFICADORES (quién verifica a quién, según lo observado esta noche)
+
+Con la misma noche de datos: sabemos ademas QUIEN DETECTA BIEN QUE CLASE DE DEFECTO (y quién pasó por alto).
+Regla para elegir verificador por TIPO de defecto esperado (cite el mensaje empírico en cada fila):
+
+| Tipo de defecto a verificar | Verificador empíricamente mejor | Evidencia de la noche |
+|---|---|---|
+| Parse errors / boot roto (var duplicadas, tipos contra String) | **agnes** (halló clock-dup y Texture2D-vs-String leyendo LOGS de boot ajenos) | 916: detecto en boot del test de OTRO agente y derivo |
+| CI bloqueado / infraestructura del runner | **MiniMax M3.1 Flash** (hiso el censo 471 suites y hallo que MI barrido commiteo un parse error bloqueando TODAS las corrudas) | 029/032: opt-in + hallazgo grave + fixes verificados |
+| Descripción de diseño vs código (round/trunc, caps documentados no implementados, dirty flags) | **Reflection Beam 1.0** (T9 cap D8 M16, T18 dirty flags M72, T32 trunc M17 - todos confirmados por el director en disco) | 064/068/022: re-verificador con lectura de 02 vs código |
+| QA cruzado de estados/data con rigor de piso | **Hy3** (M60 47/0 con red-probe y oráculo; M74 119/0 con red probe EXIT 1 validada; piso honesto conocido) | 311/313: verificación cruzada con red tests |
+| Muestreo de VALOR (datos, no rutas) | **MiniMax** (13/13 M90 a nivel de valor - canonico 21.8.2.b) | 018: muestreo que el director adoptó como canonico |
+| Inconsistencias aritmeticas en modulo propio IA (margen, ROI, yields) | **Reflection Beam 1.0** (economia single-pass, farming outliers, tools +13% - 6 ciclos) | T2/T3/T12/T30: analisis matematico byte-exacto |
+| Registro/Contadores/filas del GLOBAL | **El director** (medicion por prefijo) PERO con fallo propio documentado (grep sin tildes declaro falsa URGENTE 073) - usar SIEMPRE grep con tildes/rango de lineas | leccion registrada en trampas |
+
+**QUIEN NO DEBE VERIFICAR A QUIÉN (independencia 21.8 así como familiar):**
+- DS-WB y DS-OC NO se verifican mutuamente (sesiones hermanas del mismo modelo DeepSeek V4.1).
+- G-5.3-Flash-Agente NO verifica módulos del director ni viceversa cuando el director fue el que aprobó la decisión como dueño (M93 D.13/D.14 hechas por el director mismo: el QA cruzado debe ser Hy3/agnes/MiniMax).
+- Beam NO sella su propia fotografia/galeria aunque verifique: QA cruzado externo AGOTADO (marcar como pendiente en la fila).
+
+Fuentes de cada fila: mensajes citados en N.2 y las tandas nocturnas 21-22 oct (vérificadas con muestreo del director).
+
