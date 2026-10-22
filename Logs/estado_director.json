@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T08:19:00",
+ "ultimo_update": "2026-10-22T08:30:40",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "939: GO QA cruzado de tandas recientes (M21 M33 M40 G-5.3 / M56 Beam / item M20 MiniMax)",
+  "estado": "940/941: QA CRUZADO RATIFICADO (M21/M56/M20 ok; M40 deuda; M33 2/5 degradado a [?] - doble verificacion director+agnes); poder de degradar COMPROBADO",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,13 +13,13 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 939,
+  "acuse_enviado": 941,
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "270/271: S23 MULTITAREA RATIFICADA (M17 P10 doc + M67 locomotora 35/131); regimen multitarea aplicado; GO S24",
+  "estado": "272: aviso degradacion M33 (2 [x]->[?], data/farm y CropCatalog inexistentes - verificado doble); cierra los [?] re-escribiendo items a la realidad BalanceService o creando el catalogo",
   "pendientes_real": 222,
-  "acuse_enviado": 271,
+  "acuse_enviado": 272,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -116,7 +116,9 @@
   "helper proximo_numero cuenta huecos antiguos como existentes: si el numero ofrecido NO es ultimo+1, aplic下游 el 232 del pool y usar ultimo+1 (caso G-5.3 231/232 - el hueco 220 confunde al conteo)",
   "allowlist del validador usa prefijo canonico (flag_): keys sin prefijo se rechazan por diseño - los NUEVOS tests deben usar el prefijo canonico, no tocar el validador (evitado por G-5.3 S14)",
   "Limpieza automatica del canal MiniMax borra ficheros viejos (perdidos: mi 047, sus 034/035/038) - estado_director.json es la unica memoria del hilo para ese canal; numerar por pool en todo caso (07:42)",
-  "Colision de numeracion por pool compartido al ritmo multitarea de Beam (07:52: DOS ficheros 121 — el acuse mio y su t58) - en adelante cada acuse del director verifica que el head del pool no tenga fichero ya existente con ese numero antes de escribir"
+  "Colision de numeracion por pool compartido al ritmo multitarea de Beam (07:52: DOS ficheros 121 — el acuse mio y su t58) - en adelante cada acuse del director verifica que el head del pool no tenga fichero ya existente con ese numero antes de escribir",
+  "QA cruzado efectivo primera degradacion (08:22): M33 [x] escritos por el mejor productor (G-5.3) NO eran reales (catalogo .tres nunca creado; implementacion real era BalanceService) - ningun agente escapa del muestreo; agnes con poder de degradar demostrado",
+  "Citas de Beam con tildes o simbolos distintos del texto plano (>= vs >=, elevacion vs elevacion) - el muestreo SIEMPRE prueba variantes antes de negar (3ra vez: 073, batch2, batch3)"
  ],
  "minimax_m3_1_flash": {
   "estado": "050/051: M20 tanda 3 RATIFICADA (idempotencia, 80/148); sigue cola",
@@ -157,7 +159,8 @@
   "M93/M34: decision de diseno sobre margen de los 7 peces raros (>0.70 hasta 0.769, fishing.json) - documentar excepcion (<=0.77) o normalizar a <=0.70; validate_balance.gd no cubre fishing.json (hallazgo Beam T2, verificado por director)",
   "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados",
   "T67 (Ling T25 22oct): LocaleUtils.format_number solo tiene 1 consumidor (transport_localizer M16); separador de miles sin adoptar en shop_ui.gd L183/L202 y museo_sign.gd L76 - duenos M39/M53/M37",
-  "Tooltips ES hardcodeados (Ling T26 22oct): full_map_layer.gd M68 L75/L76 + credits_layer.gd M129 x11 - la via M87 (tooltip_text_key + RetraductorUI) existe y no fue adoptada - duenos M68/M129"
+  "Tooltips ES hardcodeados (Ling T26 22oct): full_map_layer.gd M68 L75/L76 + credits_layer.gd M129 x11 - la via M87 (tooltip_text_key + RetraductorUI) existe y no fue adoptada - duenos M68/M129",
+  "M40 deuda (agnes QA 22oct): limpiar_receptor(nodo) nunca se implemento (0 hits scripts) - dueno step-5 cuando vuelva"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
@@ -183,11 +186,11 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "P-30 batch1-2 RATIFICADOS (18 items, M59 87/130 y M156 211/307 y M138 20/131 y M17 105/175 syncs); P-100 en vuelo con verificacion del HOY = director; manana backfill de verificacion = DS-OC",
-  "acuse_enviado": 131,
+  "estado": "ajuste de ritmo: batches de 20-25 items por mensaje (misma cita textual); P-100 en vuelo ~33 items cerrados combinados a las 08:30; si 2 batches perfectos -> prueba 100/vuelta",
+  "acuse_enviado": 134,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "multitarea L1-L6, 2-4 por vuelta",
-  "encargo_activo": "P-100"
+  "encargo_activo": "P-100 batches 4+ en vuelo"
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
