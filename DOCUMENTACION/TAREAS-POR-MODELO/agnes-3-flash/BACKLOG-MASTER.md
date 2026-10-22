@@ -1268,3 +1268,4 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 | 21 | **M90** t10 resolucion {x,y} + upscaler mapping | 🟡 Cerrada t10 (194→196/249) | — | agnes 2026-10-22: resolucion_vec2() (Vector2i {x,y}) + aplicar_upscaling (mapeo null-safe, set real M90/M53) + test 54/0. Bugs corregidos: Viewport abstracto→SubViewport→mapeo. Reporte #810. Obs. preexistente M110: pause_layer.gd:147 _buscar_confirm_popup (no lo toco). |
 | 22 | **M90** t11 caustics shader real (runs habilitados) | 🟡 Cerrada t11 (196→197/249) | — | agnes 2026-10-22: shaders/caustics.gdshader (procedural, 4 uniforms, ultra) + test shaders 9/0. Reporte #812. |
 | 23 | **M90** t12 detect_hardware real (runs habilitados) | 🟡 Cerrada t12 (197→201/249) | — | agnes 2026-10-22: detect_hardware() (OS RAM/CPU + recomendacion, GPU marcador M115) + test 57/0. 4 flips. Reporte #814. |
+- **BACKLOG-AGNES.md** - cola investigada por capacidades (ver GUIA-BACKLOGS-POR-MODELO.md)

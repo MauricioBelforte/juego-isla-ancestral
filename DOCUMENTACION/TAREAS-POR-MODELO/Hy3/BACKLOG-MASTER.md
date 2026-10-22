@@ -1283,3 +1283,4 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - [x] Verificacion cruzada de lectura M77 (108/130) y M151 (155/167) autorizada por director msg 324 (punto 4).
 - Conteos top-level rigidos reproducidos exactamente desde disco (no heredados). M77: 0 deudas de archivo. M151: 4 deudas declaradas (honestas) + 1 evidencia no declarada (docs/identidad-benchmark.md) como hallazgo menor.
 - Logs reservados 2139 (M77) / 2140 (M151). Tracker 323->324. Sin commit/push. Sin lote de ejecucion asignado (RAMA-2 en espera por V2).
+- **BACKLOG-HY3.md** - cola investigada por capacidades (ver GUIA-BACKLOGS-POR-MODELO.md)

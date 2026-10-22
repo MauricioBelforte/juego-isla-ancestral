@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T23:26:00",
+ "ultimo_update": "2026-10-22T23:40:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -191,7 +191,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "23:40 - FIX CRON D (fundador): backlog por nicho G-5.3 = 54 items en 8 modulos; >= 20 minimo de cola por agente activo; el ciclo repuebla ANTES de declarar guardia. Los demas: Step-5 cola viva, DS-WB lote GO, agnes radar, Beam re-routed 213/212.",
+ "nota_cron_d": "23:40 - GUIA-BACKLOGS-POR-MODELO.md creada (fundador 23:25: una guia por modelo con varios backlogs, referenciada en el backlog master). Escaneos por nicho: agnes (68 modulos sin sello -> 12 primeros en BACKLOG-AGNES), Hy3 (encuestas de 5 modulos cerrados + 3 reproducibles + tiebreakers -> BACKLOG-HY3), Ling (21 items i18n -> BACKLOG-LING). Beam/G-5.3/Step-5/DS-WB ya tenian colas investigadas. Todos referenciados en sus BACKLOG-MASTER. La regla: cola >= 20 por nicho.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },

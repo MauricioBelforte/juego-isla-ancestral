@@ -1235,3 +1235,4 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 93. - [ ] [91] Diseñar método play_click_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
 94. - [ ] [91] Diseñar método play_notification_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
 95. - [ ] [91] Diseñar método play_error_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
+- **BACKLOG-LING.md** - cola investigada por capacidades (ver GUIA-BACKLOGS-POR-MODELO.md)
