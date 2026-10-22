@@ -260,12 +260,101 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-135 | La integración M18 -> M160 está MUERTA: house_manager.gd llama a WorldLocations.buscar_cerca(), método que no existe | M018/M160 | 🟡 Menor | [?] Delegado — dueño M18/M160; decide el agente que tome ese frente | minimax-m3-1-flash | 2026-10-15 02:51 |
 | BUG-140 | test_logros.gd:294 asigna Array sin tipar a propiedad Array[String] -> SCRIPT ERROR que aborta 6 aserciones de persistencia (falso verde en QA §21.8 de M72) | M072 | 🟠 Mayor | [?] Delegado — dueño M72 (step-5-kilocode, autor del módulo y del test). Verificador != autor: hy3 no fixea… | Hy3 (WorkBuddy / Hunyuan) — verificación cruzada §21.8… | 2026-10-21 03:56 |
 | BUG-149 | backup_local.ps1 corrompe checksums.txt en la 2a corrida ($existing + linea = concatenacion de STRINGS cuando Get-Content devuelve un escalar) -> verify_backups.ps1 reporta FALTANTE un backup que EXISTE y restore_backup.ps1 extrae SIN verificar checksum, con el script saliendo exit 0 (falla en silencio) | M107 | 🟠 Mayor | [x] Resuelto 2026-10-22 (fix en HEAD, commit 0dbe925 del director; suite 49/0 re-corrida sobre HEAD) | DeepSeek-V4.1-Flash (WorkBuddy) | 2026-10-22 15:52 |
+| BUG-141 | Salida del juego lenta ~60 s con mundo voxel cargado (causa real: deinit del GDExtension de Voxel Tools) | M07/M08/M167 | 🟠 Mayor (derivada del texto: 60 s de espera al salir) | [x] Resuelto (diagnosticado 2026-10-21, fix pendiente en producto) | minimax-m3-1-flash | 2026-10-21 21:45 |
+| BUG-142 | M71 ProgresionManager: stale-read en evaluar_condicion_id() — _evaluacion_cache nunca se invalida en _reevaluar() | M71 | 🟠 Mayor (derivada del texto: API publica devuelve estado congelado) | [ ] Abierto (fix 2-3 lineas propuesto, propuesta-only de Reflection Beam 1.0) | Reflection Beam 1.0 | 2026-10-21 22:59 |
+| BUG-143 | M71 progression_manager.gd L248-253: _reevaluar() marca TODOS los hitos del stat (recompensas duplicadas/anticipadas) | M71 | 🟠 Mayor (derivada del texto: recompensas duplicadas en runtime) | [ ] Abierto (fix propuesto por Hy3, derivado a duena M71) | Hy3 (QA §21.8 #55) | 2026-10-22 02:35 |
+| BUG-144 | ACCESS VIOLATION (rc=-1073741795) en tests/integration/test_fixtures_smoke.gd: crash C++ nativo, no flapping | Tests (integration/fixtures) | 🟠 Mayor (derivada del texto: crash nativo que bloquea la lane opt-in) | [ ] Abierto (crash nativo C++, derivado al area de fixtures) | minimax-m3-1-flash (msg 036) | 2026-10-22 02:45 |
+| BUG-145 | test_m18_m17_conflicto.gd cuelga headless (60 s sin salida ni quit), reproducido 2x | M18/M17 | 🟡 Menor (derivada del texto: 1 suite colgada, no bloquea el riel de QA) | [ ] Abierto (cuelgue headless no bloquea el riel de QA) | G-5.3-Flash-Agente | 2026-10-22 05:20 |
+| BUG-146 | TypewriterEffect: start() emitia typing_complete() inmediato y update() re-emitia la senal en cada llamada | M21 | 🟡 Menor (derivada del texto: senal de UI duplicada) | [x] Resuelto en la misma tanda (fix + QA de guardia) | G-5.3-Flash-Agente | 2026-10-22 09:50 |
+| BUG-147 | AutoAdvanceManager.validate_config(): Array generico asignado a Array[String] lanza SCRIPT ERROR (validacion inutilizable) | M21 | 🟡 Menor (derivada del texto: validacion de config rota, ya resuelta) | [x] Resuelto en la misma tanda (fix en line 55 del manager) | G-5.3-Flash-Agente | 2026-10-22 10:45 |
+| BUG-148 | Cobre de bioma beach: la cobertura reporta beach con 0 muestras (test_generacion_m10_atria.gd rc=1, deterministico) | M10 | 🟡 Menor (derivada del texto: reporte de cobertura de bioma, 1 suite) | [ ] Abierto (generacion M10, derivado al dueno de world-gen) | minimax-m3-1-flash | 2026-10-22 02:50 |
 
 ## 6. Bugs Abiertos (pendientes)
 
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+
+### BUG-142 — M71 ProgresionManager: stale-read en evaluar_condicion_id() — _evaluacion_cache nunca se invalida en _reevaluar()
+
+- **Fecha de reporte:** 2026-10-21 22:59
+- **Módulo(s) afectado(s):** M71
+- **Severidad:** 🟠 Mayor (derivada del texto: API publica devuelve estado congelado)
+- **Estado:** [ ] Abierto (fix 2-3 lineas propuesto, propuesta-only de Reflection Beam 1.0)
+- **Reportado por:** Reflection Beam 1.0
+
+**Descripción (texto original PRESERVADO verbatim; normalización ESTRUCTURAL 2026-10-22, canal 364 P4 — no se cambió contenido, estado ni dueño):**
+
+Stale-read en M71 ProgresionManager: evaluar_condicion_id() (L383-405) devuelve valor congelado de _evaluacion_cache (FIFO max 64) y _reevaluar() NO invalida entradas cuando un stat cambia -> callers externos (M53 UI, M72) reciben false stale hasta eviction (duracion indeterminada). Hallazgo+propuesta: Reflection Beam 1.0 (msg 018, T8, verificado por director: 0 .erase() en _reevaluar). Fix propuesto: borrar entrada del cache por cada hito re-evaluado (2-3 lineas). afecta API publica. **Reportado por:** Reflection Beam 1.0 | **Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-21 22:59
+
+**Firma:** Reflection Beam 1.0 (reporte) · normalización estructural: DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-22 (Log 2138)
+
+---
+
+### BUG-143 — M71 progression_manager.gd L248-253: _reevaluar() marca TODOS los hitos del stat (recompensas duplicadas/anticipadas)
+
+- **Fecha de reporte:** 2026-10-22 02:35
+- **Módulo(s) afectado(s):** M71
+- **Severidad:** 🟠 Mayor (derivada del texto: recompensas duplicadas en runtime)
+- **Estado:** [ ] Abierto (fix propuesto por Hy3, derivado a duena M71)
+- **Reportado por:** Hy3 (QA §21.8 #55)
+
+**Descripción (texto original PRESERVADO verbatim; normalización ESTRUCTURAL 2026-10-22, canal 364 P4 — no se cambió contenido, estado ni dueño):**
+
+Defecto en _reevaluar() de progression_manager.gd L248-253: al cruzar el umbral de un stat, marca TODOS los hitos indexados bajo ese stat_id (recompensas duplicadas/anticipadas de hitos no alcanzados). Reproducido aislado deterministico: test_bug_reevaluar_m71_hy3.gd 8 checks 2 fallos EXIT 1 (Hy3, msg 315, out/m71_bug_reevaluar_hy3.log). Fix propuesto (citado en el informe): for hito_id in _condiciones_por_hito[stat_id]: if not hito_alcanzado(hito_id) and evaluar: marcar - o indexar por (stat_id, umbral). **Reportado por:** Hy3 (QA §21.8 #55) | **Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 02:35
+
+**Firma:** Hy3 (QA §21.8 #55) (reporte) · normalización estructural: DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-22 (Log 2138)
+
+---
+
+### BUG-144 — ACCESS VIOLATION (rc=-1073741795) en tests/integration/test_fixtures_smoke.gd: crash C++ nativo, no flapping
+
+- **Fecha de reporte:** 2026-10-22 02:45
+- **Módulo(s) afectado(s):** Tests (integration/fixtures)
+- **Severidad:** 🟠 Mayor (derivada del texto: crash nativo que bloquea la lane opt-in)
+- **Estado:** [ ] Abierto (crash nativo C++, derivado al area de fixtures)
+- **Reportado por:** minimax-m3-1-flash (msg 036)
+
+**Descripción (texto original PRESERVADO verbatim; normalización ESTRUCTURAL 2026-10-22, canal 364 P4 — no se cambió contenido, estado ni dueño):**
+
+ACCESS VIOLATION (rc=-1073741795) en tests/integration/test_fixtures_smoke.gd durante la corrida opt-in: crash C++ real, no flapping ni timeout. Aparecio solo cuando el pool alivio la contencion (las otras suites ya no caen). **Reportado por:** minimax-m3-1-flash (msg 036, Log de su corrida) | **Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 02:45
+
+**Firma:** minimax-m3-1-flash (msg 036) (reporte) · normalización estructural: DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-22 (Log 2138)
+
+---
+
+### BUG-145 — test_m18_m17_conflicto.gd cuelga headless (60 s sin salida ni quit), reproducido 2x
+
+- **Fecha de reporte:** 2026-10-22 05:20
+- **Módulo(s) afectado(s):** M18/M17
+- **Severidad:** 🟡 Menor (derivada del texto: 1 suite colgada, no bloquea el riel de QA)
+- **Estado:** [ ] Abierto (cuelgue headless no bloquea el riel de QA)
+- **Reportado por:** G-5.3-Flash-Agente
+
+**Descripción (texto original PRESERVADO verbatim; normalización ESTRUCTURAL 2026-10-22, canal 364 P4 — no se cambió contenido, estado ni dueño):**
+
+test_m18_m17_conflicto.gd cuelga headless (--script SceneTree): 60 s sin salida ni quit, reproducido 2x (batch y solo). create_timer(0.3) fue reemplazado por call_deferred(_fin) y el cuelgue PERSISTE — causa root mas profunda (bootstrap de autoloads: HouseManager/Construccion/BuildingsSaveProvider o su interaccion en modo --script; el print de apertura no llega a stdout por buffering, no se localizo el bloque). test_m18_m60_integration.gd probable igual (mismo patron create_timer + misma sesion de origen). VERIFICACIONES VERDES en el mismo riel: test_m18_casas 53/0, test_m18_catalogo_muebles 26/0, test_m18_interior 21/0, test_m18_sistemas_s2 79/0 (corrido solo), qa_m18_decor_visit 15/0 (nuevo, G-5.3-Flash-Agente). Hallazgo y diagnostico parcial: G-5.3-Flash-Agente 2026-10-22 (tanda S5 M18 turno 2-BIS). Sugerido: correccion con --verbose + bisect por bloques; el test es de agnes-3-flash (09-10). | **Modelo:** GLM-5.3-Flash (G-5.3-Flash-Agente) | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 05:20
+
+**Firma:** G-5.3-Flash-Agente (reporte) · normalización estructural: DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-22 (Log 2138)
+
+---
+
+### BUG-148 — Cobre de bioma beach: la cobertura reporta beach con 0 muestras (test_generacion_m10_atria.gd rc=1, deterministico)
+
+- **Fecha de reporte:** 2026-10-22 02:50
+- **Módulo(s) afectado(s):** M10
+- **Severidad:** 🟡 Menor (derivada del texto: reporte de cobertura de bioma, 1 suite)
+- **Estado:** [ ] Abierto (generacion M10, derivado al dueno de world-gen)
+- **Reportado por:** minimax-m3-1-flash
+
+**Descripción (texto original PRESERVADO verbatim; normalización ESTRUCTURAL 2026-10-22, canal 364 P4 — no se cambió contenido, estado ni dueño):**
+
+Cobre de bioma beach: la cobertura de bioma reporta beach con 0 muestras (test_generacion_m10_atria.gd rc=1, deterministico: el muestreo es espiral aurea sin RNG). La lane opt-in lo hizo VISIBLE con el censo/hallazgo de MiniMax 044. **Reportado por:** minimax-m3-1-flash | **Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 02:50
+
+**Firma:** minimax-m3-1-flash (reporte) · normalización estructural: DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-22 (Log 2138)
+
+---
+
 ### BUG-139 — Regresión M21 Lote 1: rewrite Lote 2 de `dialogue_ui.gd` rompe navegación por teclado en L103 (test_m21_lote1_hy3.gd 23/3)
 
 - **Fecha de reporte:** 2026-10-20 04:50
@@ -3112,6 +3201,55 @@ Añadida la excepción `!addons/gdUnit4/bin/` en `game/isla-ancestral/.gitignore
 ---
 
 ## 7. Bugs Resueltos (historial)
+
+### BUG-141 — Salida del juego lenta ~60 s con mundo voxel cargado (causa real: deinit del GDExtension de Voxel Tools)
+
+- **Fecha de reporte:** 2026-10-21 21:45
+- **Módulo(s) afectado(s):** M07/M08/M167
+- **Severidad:** 🟠 Mayor (derivada del texto: 60 s de espera al salir)
+- **Estado:** [x] Resuelto (diagnosticado 2026-10-21, fix pendiente en producto)
+- **Reportado por:** minimax-m3-1-flash
+
+**Descripción (texto original PRESERVADO verbatim; normalización ESTRUCTURAL 2026-10-22, canal 364 P4 — no se cambió contenido, estado ni dueño):**
+
+Evidence: salida del juego/game lenta ~60 s con mundo voxel cargado: guardado asincrono incluye voxel binario (DataStore._guardar_voxel_binario, scripts/datos/data_store.gd L589) y DataStore._hilo_guardado.wait_to_finish() (L100-104) bloquea el quit; sondas de MiniMax: boot 2.8 s vs boot+escena 101.9 s; quitar VoxelTerrain/vistas = sin efecto; SaveManager bloqueado = sin efecto. Reportado por minimax-m3-1-flash (msg 012, Log 2086). Fix de producto -> dueno M59 data_store (DeepSeek-V4.1-Flash); fix de test -> flag --no-save/SaveManager bloqueado autorizado a MiniMax (quirurgico). **Reportado por:** minimax-m3-1-flash | **Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-21 21:45 | Causa REAL (corregida por minimax-m3-1-flash, msg 014, sondas 120 s): deinit del GDExtension de Voxel Tools (solo instanciar VoxelTerrain = 36.5 s vs 2.8 s control; guardado en curso NUNCA detectado) - NO el hilo de guardado; fix TEST = pool/paralelizacion aprobado (autor MiniMax); fix PRODUCTO = dueño riel voxel M07/M08/M167 (modulo nativo).
+
+**Firma:** minimax-m3-1-flash (reporte) · normalización estructural: DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-22 (Log 2138)
+
+---
+
+### BUG-146 — TypewriterEffect: start() emitia typing_complete() inmediato y update() re-emitia la senal en cada llamada
+
+- **Fecha de reporte:** 2026-10-22 09:50
+- **Módulo(s) afectado(s):** M21
+- **Severidad:** 🟡 Menor (derivada del texto: senal de UI duplicada)
+- **Estado:** [x] Resuelto en la misma tanda (fix + QA de guardia)
+- **Reportado por:** G-5.3-Flash-Agente
+
+**Descripción (texto original PRESERVADO verbatim; normalización ESTRUCTURAL 2026-10-22, canal 364 P4 — no se cambió contenido, estado ni dueño):**
+
+TypewriterEffect: start() emitia typing_complete() INMEDIATAMENTE al reiniciar estado (la UI creeria el texto ya completo y saltaria el tipeo); y update() re-emitia typing_complete en CADA llamada posterior al completado (senal duplicada para consumidores). FIX dual: start() solo reinicia (sin emit); update() con guard solo-emite-si-no-estaba-completo + clamp mini(chars_to_show, len). Verificaciones: qa_m21_typewriter.gd 11/0 EXIT 0 (BUG-146 guard + RF3 velocidad configurable + skip + validate_config) + regresion test_typewriter_m21 19/0 + test_skip_m21 13/0. **Reportado por:** G-5.3-Flash-Agente (hallazgo por lectura de codigo M21 turno 2-BIS) | **Modelo:** GLM-5.3-Flash (G-5.3-Flash-Agente) | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 09:50
+
+**Firma:** G-5.3-Flash-Agente (reporte) · normalización estructural: DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-22 (Log 2138)
+
+---
+
+### BUG-147 — AutoAdvanceManager.validate_config(): Array generico asignado a Array[String] lanza SCRIPT ERROR (validacion inutilizable)
+
+- **Fecha de reporte:** 2026-10-22 10:45
+- **Módulo(s) afectado(s):** M21
+- **Severidad:** 🟡 Menor (derivada del texto: validacion de config rota, ya resuelta)
+- **Estado:** [x] Resuelto en la misma tanda (fix en line 55 del manager)
+- **Reportado por:** G-5.3-Flash-Agente
+
+**Descripción (texto original PRESERVADO verbatim; normalización ESTRUCTURAL 2026-10-22, canal 364 P4 — no se cambió contenido, estado ni dueño):**
+
+AutoAdvanceManager.validate_config() usaba var errors: Array[String] = Array() — asignar un Array generico a un tipo Array[String] LANZA SCRIPT ERROR en Godot 4 (la validacion de config era INUTILIZABLE en runtime). FIX: inicializacion tipada vacia Array[String] = [] (mismo patron correcto que ya usa TypewriterEffect.validate_config). Verificaciones: qa_m21_auto_advance.gd 14/0 EXIT 0 (ciclo completo + pausa en opciones + skip + stop + validate + create_default). **Reportado por:** G-5.3-Flash-Agente (hallazgo por QA del riel M21 turno 2-BIS) | **Modelo:** GLM-5.3-Flash (G-5.3-Flash-Agente) | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 10:45
+
+**Firma:** G-5.3-Flash-Agente (reporte) · normalización estructural: DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-22 (Log 2138)
+
+---
+
 ## BUG-119: IncenseSpawner genera 0 puntos por race con la generacion del terreno voxel (M163)
 
 - **Modelo (entrada original):** atria-dawn / Plataforma: Kilo Code — 2026-10-07 20:52
@@ -4768,6 +4906,9 @@ silenciosa de todos los guardados futuros).
 
 
 ## 9. Historial de Modificaciones de Este Archivo
+
+- **2026-10-22 19:18** — **Normalización ESTRUCTURAL de BUG-141..BUG-148 (DeepSeek-V4.1-Flash / WorkBuddy, Log 2138, canal 364 P4, autorizada por el director):** los 8 IDs vivían solo en la lista informal `## Bugs abiertos` del final (sin fila §5, sin entrada §6/§7, sin historial). Se transcribieron a la estructura canónica **preservando texto, estado y dueño verbatim**. Estados preservados tal cual: [x] 141, 146, 147 · [ ] 142, 143, 144, 145, 148. La **severidad no existía** en la lista informal: se DERIVÓ del texto y se declara `(derivada del texto: …)` en la celda, con etiqueta medida `Mayor`/`Menor` (sin abrir vocabulario nuevo). Tabla §5 140→148 filas · entradas 133→141 · defectos estructurales 18→18 (gate verde).
+
 
 - **2026-10-22 17:43** — **BUG-149 [x] Resuelto (DeepSeek-V4.1-Flash / WorkBuddy, Log 2133, canal 361 -> autorizacion 362):** registrado el defecto **D-1** de M107 (corrupcion silenciosa de `checksums.txt` en la 2a corrida por concatenacion escalar-vs-array en `backup_local.ps1`). Fix en HEAD (`0dbe925`, aplicado por el director): `@(...)` en la asignacion y `@($existing) + ...` al concatenar. Evidencia: suite `scripts/test_backup_ps1.py` **49/0/EXIT 0** re-corrida sobre HEAD; guardian en rojo por inyeccion (revertir el `@()` = 6 fallos / EXIT 1). Tabla §5 (fila BUG-149) + entrada en §7. El hermano D-2 (tar del PATH) queda mencionado en la entrada pero sin ID propio, a la espera de decision del director.
 
