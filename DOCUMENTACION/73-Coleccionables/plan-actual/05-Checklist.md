@@ -72,26 +72,26 @@
 
 ## I. Categoría Fósiles
 
-- [ ] Registrar fósiles excavados (M25) [M]
+- [x] Registrar fósiles excavados (M25) [M]
 - [ ] Esqueleto completo como recompensa (M37) [M]
 - [ ] Excavación con huevos (2 bloques) [M]
-- [ ] Registrar con FOSSIL_DUG [M]
+- [x] Registrar con FOSSIL_DUG [M]
 - [ ] Testear fósiles en ruinas y montañas [M]
 
 ## J. Categoría Cartas
 
-- [ ] Registrar cartas de festival (M74) y correo [M]
+- [x] Registrar cartas de festival (M74) y correo [M]
 - [ ] Cartas de NPC (M19) [M]
 - [ ] Sobre de regalo como recompensa (M20) [M]
-- [ ] Registrar al recibir (CARTA_RECIBIDA) [M]
+- [x] Registrar al recibir (CARTA_RECIBIDA) [M]
 - [ ] Testear cartas de temporada [M]
 
 ## K. Categoría Fotografías
 
-- [ ] Registrar fotografías tomadas (M56) [M]
+- [x] Registrar fotografías tomadas (M56) [M]
 - [ ] Fotos de criaturas y lugares [M]
 - [ ] Álbum premium como recompensa (M55) [M]
-- [ ] Registrar con PHOTO_TAKEN [M]
+- [x] Registrar con PHOTO_TAKEN [M]
 - [ ] Testear fotos especiales (festival M74) [M]
 
 ## L. Categoría Muebles
@@ -112,10 +112,10 @@
 
 ## N. Categoría Herramientas Especiales
 
-- [ ] Registrar herramientas de misiones (M22/M23) [M]
+- [x] Registrar herramientas de misiones (M22/M23) [M]
 - [ ] Herramientas de crafting avanzado (M16) [M]
 - [ ] Mejora de herramienta como recompensa [M]
-- [ ] Registrar al fabricar [M]
+- [x] Registrar al fabricar [M]
 - [ ] Testear herramientas únicas (1 por partida) [M]
 
 ## O. Categoría Documentos
@@ -128,10 +128,10 @@
 
 ## P. Categoría Mapas
 
-- [ ] Registrar mapas de tesoro (M54/M71) [M]
+- [x] Registrar mapas de tesoro (M54/M71) [M]
 - [ ] Mapas de exploración [M]
 - [ ] Tesoro oculto como recompensa (M71) [M]
-- [ ] Registrar al encontrar [M]
+- [x] Registrar al encontrar [M]
 - [ ] Testear mapas con coordenadas correctas [M]
 
 ## Q. Categoría Símbolos

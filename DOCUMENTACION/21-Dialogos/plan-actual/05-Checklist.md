@@ -29,12 +29,12 @@
 - [x] Registrar dependencias: M19 (amistad); relaciones M22, M23, M87, M29/M31, M64, M73, M17 [S] — barrido R1 (encargo msg 107): 01-Requerimientos.md L9-10 (Dependencias: M19; Relaciones: M22, M23, M87, M29/M31, M64, M73, M17) + §Módulos Relacionados L88-113
 - [x] RF1: motor de diálogo nodo a nodo [S] — barrido M21 R1 (Ling-3.1-Flash/Kilo, 2026-10-12, encargo msg 107): dialogue_manager.gd advance() L134-147 (next_id L141 / goto_id L143 / _entrar_nodo L145) + _entrar_nodo() L212-239; test_dialogos.gd 19 checks 0 fallos
 - [x] RF2: opciones ramificadas con condiciones y efectos [S] — barrido M21 R1: choose_option() L149-163 (apply_effects del nodo L156 + de la opción L157-158, option_selected.emit L159, entra opcion.next_id L160-161); dialogue_option.gd L11-15 (text_key/next_id/conditions/blocked_text_key/effect); test_eventos_dialogo_m21.gd 35 checks 0 fallos
-- [ ] RF3: tipografía progresiva con velocidad configurable [S]
+- [x] RF3: tipografía progresiva con velocidad configurable [S] — VERIFICADO+FIX G-5.3-Flash-Agente 2026-10-22: typewriter_effect.gd chars_per_second @export (configurable, validate_config estatica); FIX BUG-146 dual (start() emitia typing_complete inmediato + update() re-emitia post-completado — 11-BUGS); qa_m21_typewriter.gd 11/0 EXIT 0 + regresion typewriter 19/0 skip 13/0
 - [ ] RF4: salto rápido de línea y salto completo con confirmación doble [S]
 - [x] RF5: variables de estado del mundo como condición de ramas [S] — barrido M21 R1: _entrar_nodo() evalúa nodo.evaluate_conditions(_combinar_estado(nodo)) L217-218; _combinar_estado() L241-275 (sesión + WorldStateService.get_snapshot en lote, iter 9); test_condiciones_mundo.gd 8 checks 0 fallos
 - [x] RF6: textos dinámicos con placeholders resueltos en runtime [S] — barrido M21 R1: resolve_text() L174-188 (marcadores {clave} → _session_vars[clave] L184-185, fallback a placeholders[clave] L187); test_localizacion_dialogos.gd 4 checks 0 fallos (placeholders)
 - [x] RF7: diálogos contextuales por estación, hora, clima y progreso — clima resuelto en iter 8 (Hy3/WorkBuddy): WorldStateService.get_value("clima") delega en WeatherService.get_nombre_clima() (M32); validador acepta "clima" y rechaza typos. test_clima_dialogo_m21.gd 0 fallos [S]
-- [ ] RF8: avance automático opcional con temporizador [S]
+- [x] RF8: avance automático opcional con temporizador [S] — VERIFICADO+FIX G-5.3-Flash-Agente 2026-10-22: auto_advance_manager.gd completo (delay configurable via start(1.0), pausa con opciones visibles, skip manual con señales skipped/complete, stop, validate_config — FIX BUG-147: Array() generico no castea a Array[String], inicializacion tipada) + create_default cozy; qa_m21_auto_advance.gd 14/0 EXIT 0
 - [x] RF9: señales de eventos de conversación (inicio, fin, nodo, opción) [S] — barrido M21 R1: señales declaradas L11-15 y emitidas — dialogue_started L114 (inicio), dialogue_ended L124 (fin), node_entered L229 (nodo, con speaker/texto/tipo/opciones), line_complete L235, option_selected L159 (opción); contrato documentado en 03-Diseno.md §3
 - [?] RF10-RF12: traducción con claves, base de diálogos con IDs únicos y triggers [S]
 
@@ -337,3 +337,4 @@ Alcance verificado por el director (msg 255): 12/12 suites M21 en verde, 0 fallo
 
 ### CHECKLIST-GLOBAL.md (fila 21) - NO editado
 Por directiva de la automatizacion (nunca editar CHECKLIST-GLOBAL.md ni quality.yml) y porque es archivo protegido/degradado (ver MEMORY), NO aplique el conteo a la fila 21 del GLOBAL. Conteo real para que el director lo aplique: **M21 = 105/34/4 (143)**.
+**Totales:** 143 items · Completados: 107 · Pendientes: 32 · No resueltos: 4. (Re-medido G-5.3-Flash-Agente 2026-10-22: 107 [x] / 32 [ ] / 4 [?] tras tanda RF8 auto-advance + FIX BUG-147 validate_config; qa_m21_auto_advance.gd 14/0.) (Re-medido G-5.3-Flash-Agente 2026-10-22: 106 [x] / 33 [ ] / 4 [?] tras tanda RF3 typewriter+BUG-146; qa_m21_typewriter.gd 11/0; riel typewriter/skip verde 19/0 + 13/0.)

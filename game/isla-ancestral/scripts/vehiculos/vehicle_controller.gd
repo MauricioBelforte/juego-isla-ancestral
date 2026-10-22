@@ -17,14 +17,18 @@ var velocidad: float = 0.0
 var rumbo: float = 0.0
 ## Aceleración por tick hasta velocidad_max (m/s²) — cozy, sin arranques bruscos
 const ACELERACION: float = 3.0
+## Modo rápida (checklist C2): true (DEFAULT, comportamiento histórico) =
+## acelerar hasta velocidad_max_efectiva (mejoras M incluidas); false =
+## limitar a velocidad_crucero (navegación tranquila).
+var rapida: bool = true
 
 
 func aplicar(delta: float, acelerar: bool, girar: int, frenar: bool) -> void:
 	if preset == null or delta <= 0.0:
 		return
-	# 1) Giro (riel: giro=0 → sin rotación libre, checklist F2)
-	if girar != 0 and preset.giro > 0.0:
-		rumbo += float(girar) * preset.giro * delta
+	# 1) Giro (riel: giro=0 → sin rotación libre, checklist F2; respeta mejoras)
+	if girar != 0 and preset.giro_efectivo() > 0.0:
+		rumbo += float(girar) * preset.giro_efectivo() * delta
 		rumbo = wrapf(rumbo, 0.0, TAU)
 	# 2) Frenado
 	if frenar:
@@ -36,9 +40,10 @@ func aplicar(delta: float, acelerar: bool, girar: int, frenar: bool) -> void:
 		return
 	# 3) Aceleración / crucero / reversa (§3.1: barco con reversa)
 	if acelerar:
-		velocidad = minf(velocidad + ACELERACION * delta, preset.velocidad_max)
+		var techo := preset.velocidad_crucero if not rapida else preset.velocidad_max_efectiva()
+		velocidad = minf(velocidad + ACELERACION * delta, techo)
 	elif preset.tiene_reversa:
-		velocidad = maxf(velocidad - ACELERACION * delta, -preset.velocidad_max * 0.4)
+		velocidad = maxf(velocidad - ACELERACION * delta, -preset.velocidad_max_efectiva() * 0.4)
 	else:
 		velocidad = maxf(velocidad - ACELERACION * delta, 0.0)
 

@@ -19,7 +19,7 @@
 
 # 05-Checklist.md — Módulo 67: Vehículos (130 ítems)
 
-**Estado:** 29/131 completados (medido 2026-10-21 por prefijo de linea; la cabecera original decia 130/130, falsa — familia M79-L7). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 32/131 completados (medido 2026-10-22 por prefijo de linea; la cabecera original decia 130/130, falsa — familia M79-L7). [S]=Simple [M]=Medio [C]=Complejo.
 
 ## A. VehicleManager (autoload)
 
@@ -40,7 +40,7 @@
 ## C. Barco
 
 - [ ] Navegar por agua leyendo la superficie (M51, sin fluidos) [C]
-- [ ] Velocidad de crucero/rápida, timón suave y reversa [M]
+- [x] Velocidad de crucero/rápida, timón suave y reversa [M] — Step-5 2026-10-22 (tanda 4): crucero = velocidad_crucero por preset + modo crucero nuevo (controller.rapida=false limita el techo a velocidad_crucero; default true = comportamiento historico hasta vel_max); rápida = flag rapida (acelera hasta velocidad_max_efectiva, mejoras incluidas); timón = giro por preset con mejoras (giro_efectivo); reversa = clamp -40% de vel_max_efectiva. Bloque _test_mejoras (36 checks) + validate_vehicles +44 checks, todo 0 fallos/EXIT 0 x3 con binario real.
 - [ ] Colisiones con islas, rocas y vegetación (M50) sin atravesar [C]
 - [ ] No atascarse en aguas poco profundas (aviso) [M]
 - [ ] Vela desplegable (M48) y estela por evento (M52) [M]
@@ -119,9 +119,9 @@
 
 ## M. Mejoras
 
-- [x] Definir mejoras por vehículo (velocidad, giro, faroles, baúl) [M] — Step-5 2026-10-21: definicion en 03-Diseno.md §3.1 columna Mejoras (barco vel/giro/faroles/baul 20; dirigible vel/altitud 90/faroles; submarino vel/luces M49/baul 16; locomotora vel/vagon). Implementacion (L123-125) sigue [ ]: vehicle_preset.gd NO tiene campo de mejoras (medido en disco)
-- [ ] Mejoras de velocidad/giro (niveles) [M]
-- [ ] Mejoras de faroles (M49) y baúl [M]
+- [x] Definir mejoras por vehículo (velocidad, giro, faroles, baúl) [M] — Step-5 2026-10-21: definicion en 03-Diseno.md §3.1 columna Mejoras (barco vel/giro/faroles/baul 20; dirigible vel/altitud 90/faroles; submarino vel/luces M49/baul 16; locomotora vel/vagon). Tanda 4 (Step-5 2026-10-22): L123 [x] (velocidad/giro por nivel) y la parte de baúl de L124 implementadas con mejoras: Dictionary + nivel en vehicle_preset.gd; L124 sigue [ ] por los faroles (M49)
+- [x] Mejoras de velocidad/giro (niveles) [M] — Step-5 2026-10-22 (tanda 4): implementadas data-driven en vehicle_preset.gd (velocidad_max_efectivo/giro_efectivo + subir_nivel/bajar_nivel, nivel 0 = base) con incrementos y topes en vehicles.json (barco vel 12->15 tope, giro 1.6->2.2; locomotora 20->26 sin habilitar giro). Evidencia: suite 63->99 checks/0 fallos/EXIT 0 x3 + guardián EN ROJO por inyeccion de runtime (63<99, EXIT 1); validador 46->90/0/EXIT 0.
+- [ ] Mejoras de faroles (M49) y baúl [M] — Step-5 2026-10-22 (tanda 4): baúl SÍ implementado (baul_slots_efectivo por nivel, techo 20 barco / 16 submarino = §3.1, testeado); faroles/luces = M49, dueno externo, sin integracion. Item compuesto: NO se flippea (anti-inflacion).
 - [ ] Comprar en tienda (M39) o artesanales (M16) [M]
 - [ ] Persistencia y visualización de nivel en el HUD [M]
 
@@ -278,7 +278,7 @@
 - El controller ya expone rumbo (rad) y velocidad (m/s con signo) — el HUD M53 puede leerlos directo vía Vehiculos.controller.
 - Para aguas poco profundas: consultar M51/mesh de agua y emitir Vehiculos.avisar("...") (la señal ya existe).
 - Al integrar M57: el enter/exit actual es programático; conectar a InteractionManager (M70) con área de proximidad.
-**Totales:** 131 ítems · Completados: 29 · Pendientes: 102 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 32 · Pendientes: 99 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 112 [ ] / 0 [?].

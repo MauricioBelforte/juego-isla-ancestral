@@ -24,10 +24,13 @@ signal character_shown(character: String, index: int)
 
 ## Inicia el efecto typewriter con un texto
 func start(text: String) -> void:
+	# BUG-146 fix (G-5.3-Flash-Agente 2026-10-22): start() emitia
+	# typing_complete() inmediatamente (la UI creeria el texto completo y
+	# saltaria el tipeo). El emit correcto vive en update() al completar y
+	# en skip(); start() solo reinicia el estado.
 	_full_text = text
 	_current_index = 0
 	_timer = 0.0
-	typing_complete.emit()
 
 
 ## Actualiza el progreso (llamar desde _process o tween)
@@ -39,9 +42,12 @@ func update(delta: float) -> String:
 	var chars_to_show: int = int(_timer * chars_per_second)
 	
 	if chars_to_show > _current_index:
-		_current_index = chars_to_show
-		if _current_index >= _full_text.length():
-			_typing_complete()
+		# BUG-146b fix (G-5.3-Flash-Agente 2026-10-22): solo avanza y emite si
+		# no estaba completo ( updates post-completado re-emitian la senal).
+		if _current_index < _full_text.length():
+			_current_index = mini(chars_to_show, _full_text.length())
+			if _current_index >= _full_text.length():
+				_typing_complete()
 	
 	return _full_text.substr(0, _current_index)
 

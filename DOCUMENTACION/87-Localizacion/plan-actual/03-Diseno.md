@@ -327,6 +327,46 @@ El comentario del propio archivo (`npc_portrait_ui.gd` L58) ya dice «fija el ha
 
 **Propuesta llave-en-mano (para el owner; crear + consumir en el mismo commit — política anti-huérfana §2.4.4):** `NPC.CATALINA` / `NPC.CHAMAN` / `NPC.ANCIANO` / `NPC.AUR_001..005` / `NPC.CEN_001..005` / `NPC.COR_001..005` / `NPC.RIZ_001..008` (26 claves; nombres propios — iguales en es/en/pt por la frontera, salvo que el owner defina nombres traducidos), `EXPRESION.FELIZ_INTENSO` / `EXPRESION.FELIZ` / `EXPRESION.NEUTRAL` (3), y `REACCION.*` para los 4 `reaccion_id` de M20. Alternativa sin claves nuevas: tabla de `display_name` en `data/` (nombres de NPC y expresiones como datos), que mantiene los catálogos intactos y respeta la frontera sin crear huérfanas.
 
+#### 2.4.9 Auditoría de coherencia de strings por módulo — bloque G (TANDA 24, 2026-10-22 — tareas 41/42/43/44/45)
+
+Auditoría estática report-only de los datos de string de M147/M160/M95/M100/M121 (el catálogo central no los cubre: son datos data-driven). Medida en disco 2026-10-22:
+
+**T41 — M147 WorldBible canon 1.0.0 (`data/world_data.json`, autoload `WorldBible` = `scripts/world/world_bible.gd`, getters `get_personaje/get_lugar/get_simbolo` L46-53):**
+
+- canon_version 1.0.0 presente. **6 personajes: Finneas (guía, Raíz), Lía (curandera, Raíz), Bruno (constructor, Coral), Nilo (pescador, Coral), Vera (herrera, Ceniza), Orión (navegante, Aurora)**.
+- **Corrección de dato de la tarea 41:** el backlog citaba «(Catalina, Bruno...)» — **Catalina NO es personaje del canon 1.0.0**; es NPC de diálogo M21 (`villagers/catalina_oso.tres`, `speaker_key` `npc.catalina`). El canon no la incluye.
+- Coherencia cruzada Bruno: canon + `amistad/cumpleanos.json` (BRUNO) + `villagers/bruno_sapo.tres` («Bruno») — 3/3 coherente.
+- **0/6 personajes y 0/8 lugares en `es.po`/`en.po`/`strings_*.json` — CORRECTO**: nombres propios y lugares data-driven; por la frontera §2.4.8 los nombres propios conservan su forma en es/en/pt.
+- **DEUDA (owner M147, deepseek):** `bios` (6), `lugares` (8 nombre+descripcion), `simbolos` (4), `linea_tiempo` (5 épocas) = literales ES accesibles por getters runtime → en locale EN/PT el jugador los vería en ES (clase data-driven, igual que los diálogos H1 Tanda 10). Propuesta: `M147.*` ES/EN/PT o campos por locale; crear+consumir mismo commit.
+
+**T42 — M160 ubicaciones (`data/ubicaciones/ubicaciones.json`, 10 entradas; `data/m160/catalogo_ubicaciones.json`, índice):**
+
+- **Ambos archivos con 0 consumidores de producción** (grep: solo `test_ubicaciones_headless.gd` lee `ubicaciones.json`; el índice no lo lee nadie) → datos/documentación, no runtime.
+- **Coordenadas en escala VIEJA (pre-rework):** `ubicaciones.json` x/z en rango 200-1200 (isla 512×512 vieja; «Punto de partida» en 256,256 = centro viejo). El mundo vigente es 5120×5120, centro (2560,2560), radio 1800 (autoload `mundo_raiz.gd`, AGENTS.md §26). El índice repite el stale: Isla Raíz «centro» [256,256] / «radio» 256. **Deuda documental/data para el owner M160 (mimo):** re-escalar coordenadas a la escala 10× o declararlas obsoletas.
+- **Divergencia de nombres canon↔catálogo (6/8 lugares):** canon `world_data.json` vs `ubicaciones.json` — «Templo de los Orígenes» vs «Templo de la Raíz»; «Laguna de Coral» vs «Laguna Coral»; «Templo de las Profundidades» vs «Templo Coral»; «Templo de la Forja» vs «Templo de la Ceniza»; «Cúpula de Aurora» vs «Cielo de la Aurora»; «Templo del Cazador» vs «Templo de la Aurora». El jugador vería nombres distintos del mismo lugar según la superficie. **Deuda de coherencia derivada a owners M147/M160** (alinear a una fuente canónica).
+- 0/10 nombres en catálogos — correcto (data-driven).
+
+**T43 — M95 ediciones/DLC (`data/monetizacion/ediciones.json` + `dlc.json`; consumidores `edicion_catalogo.gd`, `dlc_catalogo.gd`, `sincronizar_dlc.gd`):**
+
+- 3 ediciones: Standard $24.99 / Deluxe $34.99 / Coleccionista $59.99 (física); 2 DLC: «Expansión: Isla de los Cielos» $14.99 / «Pack Decoración Aurora» $4.99.
+- `obtener(id)` devuelve el dict completo → la UI lee `nombre`/`descripcion` tal cual: **ES-only en data, 0/5 en catálogos, 0 traducciones EN/PT** → en locale EN/PT la tienda mostraría textos ES (deuda data-driven).
+- **Propuesta llave-en-mano (owner M95):** `M95.EDICION.STANDARD/DELUXE/COLECCIONISTA` + `M95.DLC.ISLA_CIELOS/DECORACION_AURORA` (+ `_DESC`), ES/EN/PT en el mismo commit que el consumo; alternativa sin claves: campo `nombre` por locale `{"es":…,"en":…,"pt":…}`. Precios: formattación por idioma vía LocaleUtils (tarea 67, bloque L).
+
+**T44 — M100 community (`data/community/faq.json`):**
+
+- 15 FAQs; **declara `"idiomas": ["es","en"]` pero el contenido es 100% ES** — incoherencia declarado vs materializado.
+- **Voseo argentino mezclado con tuteo** (6 instancias: «Verificá» ×5, «Seguí», «Usá» frente a «¿Puedo…?», «Sí.») — inconsistencia de registro ES.
+- `canales_oficiales.steam` = `steam://store/1XXXXXX` (placeholder sin resolver).
+- **Deuda para owner M100:** traducciones EN (o ajustar `idiomas` a `["es"]`) + uniformizar registro (tuteo o voseo) + resolver placeholder steam.
+
+**T45 — M121 support (`data/support/faq.json`; consumidores `support_manager.gd` + `faq_manager.gd` FAQManager data-driven):**
+
+- 15 FAQs; `politica_respuesta.idiomas: ["es","en"]` con **contenido 100% ES** — misma incoherencia T44.
+- Categorías: 10 declaradas = 10 usadas (coherentes).
+- **Deuda para owner M121:** traducciones EN (FAQManager busca por texto ES — en locale EN el search operaría sobre texto ES) o declarar ES-only.
+
+**Síntesis bloque G:** los 5 módulos tienen strings jugador-visibles (o potencialmente visibles vía getters/consumidores) como literales ES en datos data-driven, fuera del catálogo central — la misma clase de deuda que los diálogos (H1 Tanda 10). La frontera §2.4.8 aplica: nombres propios/lugares NO se traducen (forma de origen), pero bios/descripciones/FAQs/ediciones SÍ son contenido jugador-visible → corresponde i18n data-driven (claves o campos por locale), decisión y ejecución de cada owner (módulos ajenos, no ejecutados por M87).
+
 ### 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).

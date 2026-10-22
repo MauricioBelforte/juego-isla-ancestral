@@ -12,7 +12,20 @@
 			"altitud_max": 0.0,
 			"profundidad_max": 0.0,
 			"baul_slots": 12,
-			"tiene_reversa": true
+			"tiene_reversa": true,
+			"mejoras": {
+				"nivel_max": 3,
+				"por_nivel": {
+					"velocidad": 1.0,
+					"giro": 0.2,
+					"baul": 2
+				},
+				"topes": {
+					"velocidad": 15.0,
+					"giro": 2.4,
+					"baul": 20
+				}
+			}
 		},
 		{
 			"id": "dirigible",
@@ -25,7 +38,18 @@
 			"altitud_max": 60.0,
 			"profundidad_max": 0.0,
 			"baul_slots": 8,
-			"tiene_reversa": true
+			"tiene_reversa": true,
+			"mejoras": {
+				"nivel_max": 3,
+				"por_nivel": {
+					"velocidad": 1.0,
+					"altitud": 15.0
+				},
+				"topes": {
+					"velocidad": 18.0,
+					"altitud": 90.0
+				}
+			}
 		},
 		{
 			"id": "submarino",
@@ -38,7 +62,18 @@
 			"altitud_max": 0.0,
 			"profundidad_max": -40.0,
 			"baul_slots": 10,
-			"tiene_reversa": true
+			"tiene_reversa": true,
+			"mejoras": {
+				"nivel_max": 3,
+				"por_nivel": {
+					"velocidad": 0.8,
+					"baul": 2
+				},
+				"topes": {
+					"velocidad": 10.0,
+					"baul": 16
+				}
+			}
 		},
 		{
 			"id": "locomotora",
@@ -52,7 +87,16 @@
 			"profundidad_max": 0.0,
 			"baul_slots": 16,
 			"tiene_reversa": false,
-			"condicional": "M68"
+			"condicional": "M68",
+			"mejoras": {
+				"nivel_max": 3,
+				"por_nivel": {
+					"velocidad": 2.0
+				},
+				"topes": {
+					"velocidad": 26.0
+				}
+			}
 		}
 	]
 }

@@ -79,7 +79,7 @@ func _complete() -> void:
 ## Valida la configuración
 static func validate_config(config: Dictionary) -> Array[String]:
 	"""Retorna errores de configuración."""
-	var errors: Array[String] = Array()
+	var errors: Array[String] = []  # BUG-147 fix: Array() generico no castea a Array[String] (rompia validate_config)
 	var delay: float = float(config.get("auto_advance_delay", 3.0))
 	if delay < 0.5:
 		errors.append("auto_advance_delay demasiado bajo (<0.5s)")

@@ -213,3 +213,45 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[VEH]` en 
 - V1 sigue `[ ]` por decision explicita del director (msg 157): el validador existe (46 checks) pero reporta PENDIENTES (streaming, colisiones, HUD, camara, audio, animaciones, mejoras, personalizacion, baul real, controles) y eso no consume el item.
 - Los 102 `[ ]` restantes siguen con duenos externos; sin corrida no se flippean.
 - 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos tocados. Flip ofrecido a revertir.
+
+### Tanda 4 (Step-5-WorkBuddy, 2026-10-22, Log 2112) - mejoras por nivel data-driven
+
+- **Alcance:** opcion 1 del ruteo del director (msg 165, tras cola activa vacia):
+  "M67 #4 (areas V1 pendientes...): implementacion de las areas con los datos de
+  configuracion". Se implementaron las areas que dependen SOLO de datos de
+  configuracion; las que exigen duenos externos (M10/M61 streaming, M50
+  colisiones, M49 faroles, M53 HUD) siguen `[ ]` con nota medida.
+- **`vehicle_preset.gd`:** campos nuevos `mejoras: Dictionary` (nivel_max,
+  por_nivel, topes) y `nivel: int`; API `velocidad_max_efectiva()`,
+  `giro_efectivo()`, `baul_slots_efectivo()`, `altitud_max_efectiva()`,
+  `subir_nivel()`, `bajar_nivel()`. Nivel 0 = valores base (comportamiento
+  historico intacto, verificado por las 3 corridas verdes de la suite).
+- **`vehicle_controller.gd`:** `aplicar()` consume los valores EFECTIVOS
+  (mejoras incluidas) y agrega `rapida: bool` (default TRUE = comportamiento
+  historico hasta vel_max; false = techo velocidad_crucero, checklist C2).
+  TRAMPA evitada: la 1ra version puso `rapida=false` por default, lo que
+  cambiaba el techo historico de vel_max a crucero y rompia los checks de
+  clamp existentes; se invirtio la semantica antes de correr nada.
+- **`vehicles.json`:** bloque `mejoras` por vehiculo con topes que coinciden con
+  la columna Mejoras de 03-Diseno §3.1 (dirigible altitud 90, submarino baul 16).
+  Nivel 3 medido: barco vel 15 (tope) / giro 2.2 / baul 18; dirigible vel 18
+  (tope) / altitud 90 (tope §3.1); submarino vel 10 (tope) / baul 16 (tope
+  §3.1); locomotora vel 26 (tope) con giro SIEMPRE 0 (riel).
+- **Suite `test_vehiculos.gd`:** bloque nuevo `_test_mejoras` (36 checks) al
+  final de `_run()` (no altera la premisa de los bloques previos, leccion M23):
+  carga del JSON real por `FileAccess`, nivel 0 = base, subir/bajar con topes,
+  techos §3.1, locomotora directo del JSON (riel sin giro con mejoras),
+  controller clampeando a 15 con mejoras, modo crucero a 6, reversa a 40% del
+  efectivo. Piso 63 -> **99 MEDIDO en verde** (99/0/EXIT 0 x3, binario real).
+  Guardian EN ROJO por inyeccion de RUNTIME (`Variant = null`, no parse error):
+  "solo 63 checks (minimo 99)", EXIT 1; sonda borrada y sha256 restaurado.
+- **Validador `validate_vehicles.gd`:** `_validar_mejoras()` (44 checks):
+  niveles 0..3 de cada clave declarada contra la formula base+inc*nivel con
+  tope, topes §3.1 como evidencia externa, locomotora sin giro. 46 -> **90
+  checks / 0 fallos / EXIT 0**.
+- **Regresiones medidas HOY (no heredadas):** M28 test_viajes 0 fallos/EXIT 0;
+  M71 test_progresion 83/0/EXIT 0.
+- **Flips con cita:** L43 (crucero/rapida/timon/reversa) y L123 (mejoras de
+  velocidad/giro por nivel) -> `[x]`. L124 NO flippeada (compuesta: baúl sí,
+  faroles = M49 dueno externo). M67 = **32 [x] / 0 [?] / 99 [ ] = 131**
+  (prefijo de linea; cabecera y Totales sincronizados; LF puro preservado).

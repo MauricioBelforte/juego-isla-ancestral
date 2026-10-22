@@ -1332,3 +1332,21 @@ M104, M88, M160.
 - **Trampa de alcance:** los msgs del canal citados por numero (msg 27 de iter 10) NO son verificables por nombre: el numero fue reciclado por otro mensaje. Se cerro con nota honesta de 5/6 paths verificados.
 - **Pedidos al director (msg 164):** REPOSICION DE COLA ACTIVA (bloqueante de RAMA 2); autorizacion de commit de los paths de M23 iter. 5 (secundarias.json ya commiteado por CRON ae96f66); visto bueno de los flips de iter. 5 (ofrecidos a revertir).
 - Limites: 0 commits mios / 0 push / 0 auto-sellos 21.8 / 0 protegidos (CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot intactos).
+
+
+## Vuelta 2026-10-22 03:0x (tracker 163 -> 165) - RAMA 1 msg 165 (ruteo) + RAMA 2 M67 tanda 4: mejoras por nivel (Log 2114, canal 166)
+
+- **RAMA 1:** entro **165** del director DURANTE la corrida (ratifica mi 164: fila 23 con LF puro y sin BOM correcta, re-expansion del pool correcta; ruteo tras cola vacia con 3 opciones: M67 #4 areas V1 / M23 clusters / nicho propio). Eleccion declarada: **opcion 1 = M67 #4** (default de automatizacion sin atencion; encadena con mi validador 46/0). Consumio el 165 de MI pool; mi 166 = max(archivos)+1. Pool: 165 (director) + 166 (yo) consumidos; reeexpandido a 167..266. Tracker -> 165.
+- **Tanda M67 #4 (areas V1 con datos de configuracion, Log 2114):**
+  - `vehicle_preset.gd`: +`mejoras` (Dictionary: nivel_max/por_nivel/topes) + `nivel` + API efectiva (velocidad/giro/baul/altitud) + subir_nivel/bajar_nivel. Nivel 0 = base.
+  - `vehicle_controller.gd`: `aplicar()` consume valores EFECTIVOS; +flag `rapida` (default TRUE = historico hasta vel_max; false = techo crucero).
+  - `vehicles.json`: +bloque mejoras por vehiculo; topes = columna Mejoras de 03-Diseno sec. 3.1 (dirigible altitud 90, submarino baul 16). Nivel 3 medido: barco 15/2.2/18, dirigible 18/90, submarino 10/16, locomotora 26 con giro 0.
+  - Suite: +`_test_mejoras` (36 checks) al final de `_run()`. **63 -> 99 checks / 0 fallos / EXIT 0 x3** (binario real). Piso 99 MEDIDO. Guardian EN ROJO por inyeccion de RUNTIME (`Variant = null`): "solo 63 checks (minimo 99)" EXIT 1; sonda borrada, sha256 restaurado (7477acd546dc).
+  - Validador: +`_validar_mejoras` (44 checks). **46 -> 90 / 0 fallos / EXIT 0**.
+  - Regresiones medidas HOY: M28 test_viajes 0 fallos; M71 test_progresion 83/0.
+  - **2 flips con cita:** L43 (crucero/rapida/timon/reversa) y L123 (mejoras velocidad/giro). L124 NO flippeada (compuesta: baul si, faroles M49 externo). M67 = **32 [x] / 0 [?] / 99 [ ] = 131** (prefijo; cabecera y Totales sincronizados; LF puro preservado).
+  - 04-Codigo sec. Tanda 4 documentado.
+- **TRAMPA NUEVA:** mi 1ra version ponia `rapida=false` por default = cambiaba el techo historico de vel_max a crucero y rompia los checks de clamp existentes. Semantica invertida antes de correr nada. Regla: un flag nuevo que altere un limite existente debe nacer con el default del comportamiento viejo.
+- **TRAMPA reconfirmada:** el `encode('ascii')` de un log con `sec.` escrito como U+00A7 falla ANTES de escribir (fallo seguro, 0 bytes a medias); sanitizar a ASCII puro de entrada.
+- Pedidos al director (msg 166): sync fila 67 del GLOBAL a 32/131 + visto bueno de los 2 flips; autorizacion de commit (8 paths de la tanda, pools excluidos).
+- Limites: 0 commits mios / 0 push / 0 auto-sellos 21.8 / 0 protegidos.

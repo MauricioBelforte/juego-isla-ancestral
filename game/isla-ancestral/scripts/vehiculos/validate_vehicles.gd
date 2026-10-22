@@ -34,6 +34,7 @@ func _run() -> void:
 	_validar_catalogo()
 	_validar_presets_diseno()
 	_validar_fisica()
+	_validar_mejoras()
 	_validar_manager()
 	_validar_ciclo_barco()
 	_reportar_pendientes()
@@ -131,6 +132,58 @@ func _validar_presets_diseno() -> void:
 	_check(not bool(loco.get("tiene_reversa", true)), "locomotora sin reversa (§3.1)")
 
 
+func _validar_mejoras() -> void:
+	# Tanda 4 Step-5 2026-10-22: mejoras por nivel data-driven contra la
+	# columna Mejoras de 03-Diseno §3.1 (topes: dirigible altitud 90,
+	# submarino baul 16; el resto, topes declarados en vehicles.json).
+	var ruta := "res://data/vehiculos/vehicles.json"
+	if not FileAccess.file_exists(ruta):
+		return
+	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(ruta))
+	var por_id: Dictionary = {}
+	for v in doc.get("vehiculos", []):
+		if typeof(v) == TYPE_DICTIONARY:
+			por_id[String(v.get("id", ""))] = v
+	var bases := {"velocidad": "velocidad_max", "giro": "giro", "baul": "baul_slots", "altitud": "altitud_max"}
+	for id in por_id.keys():
+		var v: Dictionary = por_id[id]
+		var m = v.get("mejoras", {})
+		_check(m is Dictionary, "%s declara bloque mejoras" % id)
+		if not (m is Dictionary):
+			continue
+		_check(int(m.get("nivel_max", 0)) == 3, "%s mejoras nivel_max 3" % id)
+		var p := VehiclePreset.desde_datos(v)
+		var pn: Dictionary = m.get("por_nivel", {})
+		var tops: Dictionary = m.get("topes", {})
+		for clave in pn.keys():
+			var base: float = float(v.get(bases.get(clave, ""), 0.0))
+			var tope: float = float(tops.get(clave, base))
+			var inc: float = float(pn[clave])
+			for nivel in range(4):
+				p.nivel = nivel
+				var esp: float = minf(base + inc * nivel, tope)
+				var obt: float = 0.0
+				match clave:
+					"velocidad": obt = float(p.velocidad_max_efectiva())
+					"giro": obt = float(p.giro_efectivo())
+					"baul": obt = float(p.baul_slots_efectivo())
+					"altitud": obt = float(p.altitud_max_efectiva())
+				_check(absf(obt - esp) < 0.001, "%s %s nivel %d: esperado %.1f, obtenido %.1f" % [id, clave, nivel, esp, obt])
+			p.nivel = 0
+	# Topes que coinciden con el diseno §3.1 (evidencia externa al JSON)
+	var diri: Dictionary = por_id.get("dirigible", {})
+	_check(float(diri.get("mejoras", {}).get("topes", {}).get("altitud", 0.0)) == 90.0, "dirigible techo de mejora de altitud 90 (§3.1)")
+	var sub: Dictionary = por_id.get("submarino", {})
+	_check(int(sub.get("mejoras", {}).get("topes", {}).get("baul", 0)) == 16, "submarino techo de mejora de baul 16 (§3.1)")
+	# Locomotora: la mejora de velocidad NO habilita giro (riel fijo)
+	var loco: Dictionary = por_id.get("locomotora", {})
+	var pl := VehiclePreset.desde_datos(loco)
+	for i in range(3):
+		pl.subir_nivel()
+	_check(absf(float(pl.giro_efectivo())) < 0.001, "locomotora con mejoras: giro sigue 0")
+	_check(float(pl.velocidad_max_efectiva()) > 20.0, "locomotora con mejoras supera la base 20 m/s")
+
+
 func _validar_fisica() -> void:
 	# Invariantes del controller lógico (sin autoload: instancia directa).
 	var ScriptCtrl: GDScript = load("res://scripts/vehiculos/vehicle_controller.gd")
@@ -211,7 +264,7 @@ func _reportar_pendientes() -> void:
 	print("[PEND] streaming chunk_target/LOD (M10/M61): vehicle_streaming.gd no existe en disco")
 	print("[PEND] colisiones islas/rocas/vegetacion (M50): sin nodos 3D")
 	print("[PEND] HUD (M53), camara (M12/M57), audio (M43), animaciones (M48)")
-	print("[PEND] mejoras, personalizacion, baul real (M14), controles (M57)")
+	print("[PEND] mejoras de faroles/luces (M49) y vagon (M68): solo data-driven implementado; personalizacion, baul real (M14), controles (M57)")
 
 
 func _resumen() -> void:

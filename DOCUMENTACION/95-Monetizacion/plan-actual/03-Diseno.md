@@ -89,3 +89,23 @@
 - 20 coleccionables nuevos (M73).
 - Arco de 8-10 h totales.
 - Sin ventaja de progresion (R1): items cosmeticos o de coleccion.
+
+
+## 10. Asesoria fiscal por region objetivo
+
+### 10.1 Regiones y obligaciones
+| Region | Impuesto aplicable | Obligacion del estudio | Asesor recomendado |
+|--------|-------------------|------------------------|-------------------|
+| UE (Steam/Epic) | IVA (MOSS/OSS) | registro VAT OSS, facturacion electronica | asesor fiscal UE |
+| LATAM (Argentina/Brasil/Mexico) | IVA local + retenciones | registro local, facturacion por tienda | asesor LATAM |
+| USA (Steam/consolas) | sales tax por estado | nexus economico, W-9/W-8BEN | CPA USA |
+| Resto del mundo | sin retencion local | declaracion de ingresos extranjeros | asesor internacional |
+
+### 10.2 Proceso
+1. Pre-lanzamiento: consultar asesor por region antes de fijar precios (M149).
+2. En cada venta: la tienda retiene y remite; el estudio declara ingresos netos.
+3. Anual: revision de tasas y cambios de politica (M144/M151).
+4. Documentar en tabla-impuestos.md (95-Monetizacion/plan-actual/).
+
+### 10.3 Nota
+Esta definicion es orientativa; la validacion final la hace el asesor fiscal contratado.

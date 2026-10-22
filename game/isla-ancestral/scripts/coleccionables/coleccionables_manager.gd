@@ -213,6 +213,12 @@ func _categoria_para_fuente(fuente: StringName) -> StringName:
 		&"ruinas", &"templo": return &"reliquias"
 		&"cosecha", &"agricultura": return &"plantas"
 		&"pesca": return &"peces"
+		&"captura_insecto": return &"insectos"
+		&"excavacion_fosil": return &"fosiles"
+		&"carta": return &"cartas"
+		&"foto": return &"fotos"
+		&"mapa": return &"mapas"
+		&"herramienta": return &"herramientas"
 		_: return &""
 
 func _get_fauna_registry() -> Node:

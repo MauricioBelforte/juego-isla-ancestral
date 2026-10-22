@@ -5226,3 +5226,15 @@ El runner central reporto 45/47 suites OK durante horas mientras 13 suites de ot
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-07-22 03:05
+
+## 2026-10-22 03:20 - minimax-m3-1-flash / Kilo Code - 4 de los 13 "rojos" de la lane opt-in son FALSOS POSITIVOS (artefactos de carga)
+
+Los 3 timeouts de la lane opt-in, **aislados, pasan**: `test_player_cableado_m11` (rc=0, +9 checks), `test_playtest_m114` (rc=0, 14 checks 0 fallos) y `test_time_calendar` (rc=0, +9 checks). Con `test_crafting_inventory` (21/0 aislado) son **4 de los 13 "rojos" del radar que NO son bugs**. Derivado a sus duenos (M11, M114, reloj/tiempo, M16) para que no gasten tiempo en bugs inexistentes. Cuarto caso que confirma el hallazgo estructural: **la lane opt-in es RADAR, nunca gate** (el peso de CPU con 6 workers hace caer la suite que toca, no la que esta rota).
+
+**Ademas: fecha corregida.** El reloj de mi maquina va 3 meses atrasado (decia julio): mis 5 mensajes + 5 logs renombrados a **2026-10-22** en disco. Los ficheros del director no se tocaron.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-22 03:20

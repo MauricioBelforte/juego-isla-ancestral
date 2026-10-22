@@ -337,5 +337,245 @@
     "recompensa_item": "gema_ancestral",
     "recompensa_cantidad": 1,
     "puntos": 100
+  },
+  {
+    "categoria": "insectos",
+    "id_local": "001",
+    "display_name": "Polilla de Jardín",
+    "rareza": 0,
+    "fuente": "captura_insecto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 10,
+    "puntos": 5
+  },
+  {
+    "categoria": "insectos",
+    "id_local": "002",
+    "display_name": "Escarabajo Luminoso",
+    "rareza": 1,
+    "fuente": "captura_insecto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 30,
+    "puntos": 10
+  },
+  {
+    "categoria": "insectos",
+    "id_local": "003",
+    "display_name": "Libélula Ancestral",
+    "rareza": 2,
+    "fuente": "captura_insecto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 60,
+    "puntos": 20
+  },
+  {
+    "categoria": "insectos",
+    "id_local": "004",
+    "display_name": "Ala de Cuervo Nocturno",
+    "rareza": 3,
+    "fuente": "captura_insecto",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "fosiles",
+    "id_local": "001",
+    "display_name": "Concha Fósil",
+    "rareza": 0,
+    "fuente": "excavacion_fosil",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 15,
+    "puntos": 5
+  },
+  {
+    "categoria": "fosiles",
+    "id_local": "002",
+    "display_name": "Hueso de Saurio",
+    "rareza": 1,
+    "fuente": "excavacion_fosil",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 15
+  },
+  {
+    "categoria": "fosiles",
+    "id_local": "003",
+    "display_name": "Piedra Rúnica",
+    "rareza": 2,
+    "fuente": "excavacion_fosil",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 90,
+    "puntos": 25
+  },
+  {
+    "categoria": "fosiles",
+    "id_local": "004",
+    "display_name": "Esqueleto Ancestral",
+    "rareza": 3,
+    "fuente": "excavacion_fosil",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "cartas",
+    "id_local": "001",
+    "display_name": "Carta de Vecino",
+    "rareza": 0,
+    "fuente": "carta",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 10,
+    "puntos": 5
+  },
+  {
+    "categoria": "cartas",
+    "id_local": "002",
+    "display_name": "Carta del Festival",
+    "rareza": 1,
+    "fuente": "carta",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 35,
+    "puntos": 15
+  },
+  {
+    "categoria": "cartas",
+    "id_local": "003",
+    "display_name": "Carta de Correo Remoto",
+    "rareza": 2,
+    "fuente": "carta",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 70,
+    "puntos": 25
+  },
+  {
+    "categoria": "cartas",
+    "id_local": "004",
+    "display_name": "Sobre de Regalo Raro",
+    "rareza": 3,
+    "fuente": "carta",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "fotos",
+    "id_local": "001",
+    "display_name": "Foto de Paisaje",
+    "rareza": 0,
+    "fuente": "foto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 10,
+    "puntos": 5
+  },
+  {
+    "categoria": "fotos",
+    "id_local": "002",
+    "display_name": "Foto de Criatura",
+    "rareza": 1,
+    "fuente": "foto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 30,
+    "puntos": 15
+  },
+  {
+    "categoria": "fotos",
+    "id_local": "003",
+    "display_name": "Foto del Festival",
+    "rareza": 2,
+    "fuente": "foto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 60,
+    "puntos": 25
+  },
+  {
+    "categoria": "fotos",
+    "id_local": "004",
+    "display_name": "Retrato de Ancestro",
+    "rareza": 3,
+    "fuente": "foto",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "mapas",
+    "id_local": "001",
+    "display_name": "Mapa de Senderos",
+    "rareza": 0,
+    "fuente": "mapa",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 15,
+    "puntos": 5
+  },
+  {
+    "categoria": "mapas",
+    "id_local": "002",
+    "display_name": "Mapa de la Isla Perdida",
+    "rareza": 1,
+    "fuente": "mapa",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 15
+  },
+  {
+    "categoria": "mapas",
+    "id_local": "003",
+    "display_name": "Mapa del Tesoro",
+    "rareza": 2,
+    "fuente": "mapa",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 100,
+    "puntos": 30
+  },
+  {
+    "categoria": "mapas",
+    "id_local": "004",
+    "display_name": "Cartografía Ancestral",
+    "rareza": 3,
+    "fuente": "mapa",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "herramientas",
+    "id_local": "001",
+    "display_name": "Tiza de Encendedor",
+    "rareza": 0,
+    "fuente": "herramienta",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 15,
+    "puntos": 5
+  },
+  {
+    "categoria": "herramientas",
+    "id_local": "002",
+    "display_name": "Cizalla de Misiones",
+    "rareza": 1,
+    "fuente": "herramienta",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 15
+  },
+  {
+    "categoria": "herramientas",
+    "id_local": "003",
+    "display_name": "Llave Arcana",
+    "rareza": 2,
+    "fuente": "herramienta",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 90,
+    "puntos": 30
+  },
+  {
+    "categoria": "herramientas",
+    "id_local": "004",
+    "display_name": "Herramienta Única Ancestral",
+    "rareza": 3,
+    "fuente": "herramienta",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
   }
 ]

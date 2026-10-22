@@ -16,9 +16,9 @@ extends SceneTree
 #     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
 #     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
 #     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
-#     Piso actualizado a 63 por la tanda 3 (Step-5, 2026-10-21): 53 medidos + 10 del ciclo barco end-to-end.
-const CHECKS_MINIMOS := 63
-const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_enter_exit", "_test_fisica_acotada", "_test_reversa", "_test_giro_riel", "_test_dock_zarpar", "_test_eventos", "_test_persistencia", "_test_delta_frameindependiente", "_test_salida_velocidad", "_test_ciclo_barco"]
+#     Piso actualizado a 99 por la tanda 4 (Step-5, 2026-10-22): 63 medidos + 36 del bloque de mejoras por nivel (mejoras data-driven 03-Diseno §3.1 + modo crucero).
+const CHECKS_MINIMOS := 99
+const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_enter_exit", "_test_fisica_acotada", "_test_reversa", "_test_giro_riel", "_test_dock_zarpar", "_test_eventos", "_test_persistencia", "_test_delta_frameindependiente", "_test_salida_velocidad", "_test_ciclo_barco", "_test_mejoras"]
 var _checks: int = 0
 var _wb_vistos: Dictionary = {}
 var _wb_cerrado: bool = false
@@ -82,6 +82,8 @@ func _run() -> void:
 	_fin("_test_salida_velocidad")
 	_test_ciclo_barco()
 	_fin("_test_ciclo_barco")
+	_test_mejoras()
+	_fin("_test_mejoras")
 	_summary()
 
 
@@ -329,5 +331,93 @@ func _test_ciclo_barco() -> void:
 	res = _vm.exit()
 	_check(bool(res.ok) and not _vm.esta_en_vehiculo(), "ciclo barco: salir OK tras atracar")
 	_check(_vm.controller == null, "ciclo barco: controller liberado tras salir")
+	if not _vm.docked:
+		_vm.docked = true
+
+
+func _test_mejoras() -> void:
+	# Tanda 4 Step-5-WorkBuddy 2026-10-22 (Log 2112): mejoras por nivel
+	# data-driven (03-Diseno §3.1 columna Mejoras). Va al FINAL de _run():
+	# no altera la premisa de los bloques previos (leccion M23).
+	var txt := FileAccess.open("res://data/vehiculos/vehicles.json", FileAccess.READ).get_as_text()
+	_check(txt != "", "vehicles.json legible desde res://")
+	var datos = JSON.parse_string(txt)
+	_check(datos is Dictionary, "vehicles.json parseado a Dictionary")
+	var por_id := {}
+	if datos is Dictionary:
+		for v in datos.get("vehiculos", []):
+			por_id[String(v.get("id", ""))] = v
+	_check(por_id.size() == 4, "4 vehiculos en el JSON: %d" % por_id.size())
+	for id in ["barco", "dirigible", "submarino", "locomotora"]:
+		var m = por_id.get(id, {}).get("mejoras", {}) if por_id.has(id) else {}
+		_check(m is Dictionary and int(m.get("nivel_max", 0)) == 3, "%s declara mejoras con nivel_max 3" % id)
+	# Nivel 0 = valores base (comportamiento historico intacto)
+	var barco: Resource = _vm.get_preset("barco")
+	_check(barco != null, "preset barco disponible")
+	if barco != null:
+		_check(int(barco.nivel) == 0, "barco arranca en nivel 0")
+		_check(absf(float(barco.velocidad_max_efectiva()) - 12.0) < 0.001, "nivel 0: vel efectiva = base 12")
+		_check(absf(float(barco.giro_efectivo()) - 1.6) < 0.001, "nivel 0: giro efectivo = base 1.6")
+		_check(int(barco.baul_slots_efectivo()) == 12, "nivel 0: baul efectivo = base 12")
+		# Subir un nivel: 12 -> 13 m/s, giro 1.6 -> 1.8, baul 12 -> 14
+		_check(bool(barco.subir_nivel()), "barco subir_nivel() OK en nivel 0")
+		_check(int(barco.nivel) == 1, "barco queda en nivel 1")
+		_check(absf(float(barco.velocidad_max_efectiva()) - 13.0) < 0.001, "nivel 1: vel 13: %.2f" % float(barco.velocidad_max_efectiva()))
+		_check(absf(float(barco.giro_efectivo()) - 1.8) < 0.001, "nivel 1: giro 1.8: %.2f" % float(barco.giro_efectivo()))
+		_check(int(barco.baul_slots_efectivo()) == 14, "nivel 1: baul 14: %d" % int(barco.baul_slots_efectivo()))
+		# Nivel maximo (3): topes del JSON (vel 15, giro < 2.4, baul < 20)
+		_check(bool(barco.subir_nivel()) and bool(barco.subir_nivel()), "barco llega a nivel 3")
+		_check(int(barco.nivel) == 3, "barco en nivel 3")
+		_check(absf(float(barco.velocidad_max_efectiva()) - 15.0) < 0.001, "nivel 3: vel tope 15: %.2f" % float(barco.velocidad_max_efectiva()))
+		_check(absf(float(barco.giro_efectivo()) - 2.2) < 0.001, "nivel 3: giro 2.2 (tope 2.4 no alcanzado): %.2f" % float(barco.giro_efectivo()))
+		_check(int(barco.baul_slots_efectivo()) == 18, "nivel 3: baul 18 (tope 20 no alcanzado): %d" % int(barco.baul_slots_efectivo()))
+		_check(not bool(barco.subir_nivel()), "subir_nivel en el maximo rechazado")
+		# Bajar vuelve a los valores base
+		_check(bool(barco.bajar_nivel()) and bool(barco.bajar_nivel()) and bool(barco.bajar_nivel()), "barco baja 3 niveles")
+		_check(int(barco.nivel) == 0 and absf(float(barco.velocidad_max_efectiva()) - 12.0) < 0.001, "nivel 0 restaurado tras bajar")
+		_check(not bool(barco.bajar_nivel()), "bajar_nivel en la base rechazado")
+	# Techos del diseno §3.1: dirigible altitud 90, submarino baul 16
+	var diri: Resource = _vm.get_preset("dirigible")
+	if diri != null:
+		for i in range(3):
+			diri.subir_nivel()
+		_check(absf(float(diri.altitud_max_efectiva()) - 90.0) < 0.001, "dirigible nivel 3: altitud tope 90 (§3.1): %.1f" % float(diri.altitud_max_efectiva()))
+		_check(absf(float(diri.velocidad_max_efectiva()) - 18.0) < 0.001, "dirigible nivel 3: vel tope 18: %.1f" % float(diri.velocidad_max_efectiva()))
+	var sub: Resource = _vm.get_preset("submarino")
+	if sub != null:
+		for i in range(3):
+			sub.subir_nivel()
+		_check(int(sub.baul_slots_efectivo()) == 16, "submarino nivel 3: baul tope 16 (§3.1): %d" % int(sub.baul_slots_efectivo()))
+		_check(absf(float(sub.velocidad_max_efectiva()) - 10.0) < 0.001, "submarino nivel 3: vel tope 10: %.1f" % float(sub.velocidad_max_efectiva()))
+	# Locomotora (condicional M68, no activa): preset directo desde el JSON
+	var loco = VehiclePreset.desde_datos(por_id.get("locomotora", {}))
+	_check(loco != null and String(loco.id) == "locomotora", "preset locomotora cargado directo del JSON")
+	if loco != null:
+		for i in range(3):
+			loco.subir_nivel()
+		_check(absf(float(loco.velocidad_max_efectiva()) - 26.0) < 0.001, "locomotora nivel 3: vel tope 26: %.1f" % float(loco.velocidad_max_efectiva()))
+		_check(absf(float(loco.giro_efectivo())) < 0.001, "locomotora: giro sigue 0 con mejoras (riel fijo)")
+	# El controller consume los valores efectivos (mejoras incluidas)
+	_vm.enter("barco")
+	_vm.zarpar()
+	var ctrl: RefCounted = _vm.controller
+	for i in range(3):
+		barco.subir_nivel()
+	for i in range(200):
+		_vm.tick_conduccion(0.1, true, 0, false)
+	_check(absf(float(ctrl.velocidad) - 15.0) < 0.01, "controller clampea a vel efectiva 15 con mejoras: %.2f" % float(ctrl.velocidad))
+	# Modo crucero (rapida=false): el techo pasa a velocidad_crucero
+	ctrl.rapida = false
+	for i in range(200):
+		_vm.tick_conduccion(0.1, true, 0, false)
+	_check(absf(float(ctrl.velocidad) - 6.0) < 0.01, "modo crucero (rapida=false) limita a 6 m/s: %.2f" % float(ctrl.velocidad))
+	ctrl.rapida = true
+	# Reversa tambien respeta la mejora (40% de 15 = 6)
+	for i in range(200):
+		_vm.tick_conduccion(0.1, false, 0, false)
+	_check(absf(float(ctrl.velocidad) + 6.0) < 0.01, "reversa clamp a 40%% de vel efectiva (6): %.2f" % float(ctrl.velocidad))
+	for i in range(100):
+		_vm.tick_conduccion(0.1, false, 0, true)
+	_vm.exit()
 	if not _vm.docked:
 		_vm.docked = true

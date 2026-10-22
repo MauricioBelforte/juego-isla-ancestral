@@ -273,7 +273,8 @@
 
 ## 23. Fiscal y legal
 
-- [ ] Definir asesoría fiscal por región objetivo [C]
+- [x] Definir asesoría fiscal por región objetivo [C]
+  · evidencia: 03-Diseno.md secc. 10 (4 regiones, proceso 4 pasos) (Reflection-Beam-1.0, T45, 2026-10-22)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [C])
 - [x] Definir registros de ventas y facturación archivados (M151) [M]
   · evidencia: 02-Analisis (secc. 1-6, D1-D5, Plan F1-F5) (Reflection-Beam-1.0, T16, 2026-10-22)
