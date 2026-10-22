@@ -3264,3 +3264,8 @@ Formato: agente -> DELEGAR (nicho probado) / EVITAR o CUIDAR (lo malo observado)
 - Dejarlos trabajar tranquilos: encargos de fondo apilados que aguanten 1h+ sin bloquear a nadie.
 - Tareas urgentes u rapidas -> agentes Kilo (agnes, MiniMax-M3.1, Reflection-Beam-1.0, G-5.3) o resolverlas directamente el director.
 - Corrige el metodo 30.2 para Step-5: se le APILA trabajo de fondo, pero sin expectativa de vuelta horaria.
+
+
+### Regla multitarea para toda la flota (directiva fundador 2026-10-22 07:37)
+
+Todo encargo del director lleva 2+ tareas quando haya cola (main + extras etiquetados); agente responde COMBINADO (seccion 3-5 lineas por item, evidencia en disco). Optimiza: menos mensajes, mas densidad por ciclo. Ya en vigencia con Beam (L1-L6) y extendido a los 9 canales.
