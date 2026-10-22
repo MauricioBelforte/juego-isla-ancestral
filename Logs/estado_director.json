@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T23:16:00",
+ "ultimo_update": "2026-10-22T23:28:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -21,9 +21,9 @@
   ]
  },
  "g_5_3": {
-  "estado": "S48 ratificada formalmente (317); fila 58 sync done prev; guardia + proxies vigentes",
+  "estado": "FUNDADO (reclamo del fundador: guardia pasiva = mia): tanda 318 EMITIDA = Bateria 6 (7 definibles de M151) + PROTOCOLOS de medicion en 156-Terrenos (10) + 76-Multijugador (3) || GO ya no guardia; proximo 319",
   "pendientes_real": 222,
-  "acuse_enviado": 317,
+  "acuse_enviado": 318,
   "ultima_tanda": 40
  },
  "deepseek": {
