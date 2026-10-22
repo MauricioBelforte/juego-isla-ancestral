@@ -210,7 +210,8 @@
 
 - [x] RF23: triggers de evento involuntarios sin prompt visible (activación por zona) [M]
 
-- [ ] RF6: línea de contexto oculta durante la micro-animación de interacción [S]
+- [x] RF6: línea de contexto oculta durante la micro-animación de interacción [S]
+  · evidencia: 03-Diseno.md secc. RF6/RF14/localizacion/senales (P-100, Reflection-Beam-1.0, T66, 2026-10-22)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -308,7 +309,8 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] RF14: re-evaluar automáticamente al cerrar la UI en el siguiente frame [S]
+- [x] RF14: re-evaluar automáticamente al cerrar la UI en el siguiente frame [S]
+  · evidencia: 03-Diseno.md secc. RF6/RF14/localizacion/senales (P-100, Reflection-Beam-1.0, T66, 2026-10-22)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -399,7 +401,8 @@
 
 - [x] RN-desacople: comunicación exclusiva por interfaz IInteractable y señales [S]
 
-- [ ] RN-localización: todo texto visible pasa por `tr()` [S]
+- [x] RN-localización: todo texto visible pasa por `tr()` [S]
+  · evidencia: 03-Diseno.md secc. RF6/RF14/localizacion/senales (P-100, Reflection-Beam-1.0, T66, 2026-10-22)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -465,7 +468,8 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] Diseñar las 6 señales de salida del módulo [S]
+- [x] Diseñar las 6 señales de salida del módulo [S]
+  · evidencia: 03-Diseno.md secc. RF6/RF14/localizacion/senales (P-100, Reflection-Beam-1.0, T66, 2026-10-22)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 

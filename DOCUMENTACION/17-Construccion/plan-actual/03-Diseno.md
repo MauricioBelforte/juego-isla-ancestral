@@ -191,3 +191,17 @@ PlacementRule (Resource):
 - Ventana 1x1 en pared, transparente a la luz (M48).
 - No bloquea la navegacion del jugador (colision solo en marco).
 - Permite paso de luz para iluminacion interior (M49).
+## Especificacion de elevacion y colisiones (P-100 L3 batch)
+
+### Elevacion por plantas (RF5)
+- Planta base en Y=0; subir/bajar con altura maxima por zona (default 4 plantas).
+- Revalidacion en cada nivel: verificar que la celda este libre en el nuevo nivel.
+
+### Colisiones (P15)
+- Piezas con colision estatica real (StaticBody3D + CollisionShape3D).
+- Puertas con colision de trigger (Area3D) para interaccion.
+
+### Restricciones (P16)
+- Reglas por pieza: tamano min/max, rotacion permitida, zonas validas.
+- Topes por zona: maximo de piezas por zona configurable.
+- Alturas: limite de plantas por zona (default 4).

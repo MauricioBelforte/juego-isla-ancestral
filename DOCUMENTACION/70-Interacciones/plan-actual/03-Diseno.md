@@ -238,3 +238,24 @@ Presupuesto total objetivo: < 0.5 ms/frame en escena densa (40 interactuables), 
 ### Localizacion (P-30 L4-P30)
 - Textos de feedback 100% localizables con tr().
 - Claves en locales/*.po con fallback a ingles.
+## RF6, RF14, localizacion y senales (P-100 L3 batch 2)
+
+### RF6: linea de contexto
+- La linea de contexto se oculta durante la micro-animacion de interaccion.
+- Reaparece al finalizar la animacion si el objeto sigue siendo el mas cercano.
+
+### RF14: re-evaluacion automatica
+- Al cerrar la UI, re-evaluar el objeto mas cercano en el siguiente frame.
+- Evita que quede seleccionado un objeto que ya no esta en rango.
+
+### Localizacion (RN-localizacion)
+- Todo texto visible pasa por tr().
+- Claves en locales/*.po con fallback a ingles.
+
+### Senales de salida (6)
+- interaccion_iniciada(obj, categoria)
+- interaccion_completada(obj, categoria)
+- interaccion_cancelada(obj, motivo)
+- objeto_cercano_cambiado(nuevo, anterior)
+- rango_alcanzado(obj)
+- rango_perdido(obj)

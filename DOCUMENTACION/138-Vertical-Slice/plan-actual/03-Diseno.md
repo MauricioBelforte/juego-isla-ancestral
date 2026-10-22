@@ -152,11 +152,42 @@ de diseño para el slice de Aurora; flip de [S], los [M] profundos quedan).
 - Regalo de bienvenida conceptual (M20 futuro): 1 regalito al primer
   handshake con el jugador (gacha cozy, sin economia real).
 
+## Zona del slice: esquina de Aurora (definicion de contenido - G-5.3-Flash-Agente, 2026-10-22)
+
+La slice vive en UNA esquina de Aurora (no requiere isla nueva): el cuadrante
+costero sudeste del mapa raiz (M167/MundoRaiz RADIO_ISLA), delimitado por:
+
+- **Playa de Finneas**: franja arenosa sur, spawn del slice (escalera del muelle
+  como ancla de misión paso 3).
+- **Prado interior**: pasto bajo con 3-4 arboles talables (fuente de los 5
+  bloques de madera del paso 1; respeta madera=5 bloques/arbol de M138).
+- **Bosque en franja**: borde oeste denso (pared natural del slice, no navegable
+  a fondo; deliberado para acotar el area).
+- **Costa abierta / muelle roto**: enlace visual con el mar (POI cuando el
+  jugador mira hacia fuera; sin gameplay M-desbloqueado).
+- **Ruina del atalaya**: acantilado este. POI de misión paso 2 (afilar el
+  Hacha), decorada con el simbolo canonico del sello brisa (ver canon abajo).
+  La inscripcion final guarda "un canto sobre el viento" (gancho hacia M148).
+
+POI total del slice: 5 (casa de Finneas, prado talable, muelle roto, ruina del
+atalaya, altar menor de la arboleda). Toda posicion de NPC se resuelve con
+get_height + posicionar_sobre_terreno (M64 NavigationServer; prohibido forzar).
+
 ## Canon y estilo (M147)
 
 - Nombre del slice y su historico consume el canon M147 (glpts); toda
   referencia textual debe resolver contra el diccionario canonico.
-
+- **Simbolo canonico del slice: `simbolo_del_sello_brisa`** (M147: significado
+  "viento_primeros_jardineros", consumido tambien por M24/M148). En el slice se
+  usa como grabado repetido en la ruina del atalaya (inscripcion del paso 2) y
+  como motivo del altar menor: el mismo icono, dos usos, cero simbolos nuevos.
+- **NPC**: Finneas ya existe en el canon M147 (`personajes.finneas`, rol guia,
+  capa_conocida 1, consumido por M21/M19): el slice NO crea lore nuevo, solo
+ consume lo canonizado (voz practica, no mistica).
+- **Dialogo**: el grafo `data/dialogues/finneas_slice.json` implementa las
+  lineas de guia del slice (rama de mision con flags M21
+  `flag_mision_finneas_aceptada` / `flag_mision_finneas_pasos`); validado con
+  validate_all_dialogues.gd (CI-DGT: 8 archivos, 0 problemas, 2026-10-22).
 
 ## Presupuesto tecnico de render (L5 - Beams spec, no toca contenido de G-5.3)
 
@@ -176,3 +207,17 @@ de diseño para el slice de Aurora; flip de [S], los [M] profundos quedan).
 - P99 (percentil 99) ademas de FPS medio.
 - Muestreo con VSYNC off para medir frame time real.
 - Profiler: Godot Performance monitor + custom (M116).
+### Mediciones de render (P-100 L5 batch)
+
+### VFX dentro del budget particulas (M61: 1.0ms)
+- Maximo de particulas simultaneas: 500 (polvo + agua + virutas).
+- Emision por terreno: frecuencia * intensidad del data/terrenos/terrenos.json.
+- LOD de particulas por distancia: < 20m full, 20-50m half, > 50m off.
+
+### P99 y muestreo
+- P99: percentil 99 del frame time (no solo media).
+- Muestreo con VSYNC off para medir frame time real.
+- Umbral: FPS >= 60 (media), P99 <= 40 ms (max frame).
+
+### GONOGO
+- 7 criterios: completo, identificacion, FPS, P99, sin crash, sin softlock, playtest OK.
