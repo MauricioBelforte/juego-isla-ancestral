@@ -20,7 +20,7 @@
 
 - [ ] Definir el problema: construcción cozy sobre mundo voxel con rejilla de 1 m alineada a M08 [S]
 - [ ] Registrar dependencias: M08 (Mundo Voxel), M14 (Inventario) y relaciones M18, M25, M64, M58, M31, M32, M73, M92, M93, M71 [S]
-- [ ] RF1: modo construcción y modo decoración con entrada/salida rápida [S]
+- [x] RF1: modo construcción y modo decoración con entrada/salida rápida [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: build_manager.gd entrar_modo()/salir_modo()/esta_en_modo()/modo_actual()/piezas_de_modo() (API completa CONSTRUCCION vs DECORACION de ConstruccionTipos); qa_m17_modo.gd 9/0 EXIT 0 (toggle bidireccional, re-entrada estable x5, pieza por modo separadas)
 - [x] RF2: rejilla voxel de 1 m alineada al mundo con snapping de 90° [S] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: rejilla de 1 m verificada por el round-trip celda<->mundo con `OFFSET_MEDIO_VOXEL = 0.5`, el floor hacia abajo y la huella que intercambia ancho/fondo en las rotaciones 1 y 3 (`PlacementRule.celdas`)
 - [x] RF3: previsualización fantasma con estado válido/inválido [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): iter2: "el fantasma arranca oculto" / "tras aplicar, el fantasma esta visible" / "devolver_al_pool() deja el fantasma oculto" + "mgr.preview() devuelve color y celdas" (el color ES el estado valido/invalido). Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
 - [x] RF4: rotación de piezas en pasos de 90° [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): "3x1 en rot 0 -> 3 celdas hacia +x" / "3x1 en rot 90 -> 3 celdas hacia +z (rotacion real)" (rotacion REAL, no solo metadata) + iter7 "rotacion puesta a 1 (90 grados)". Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
@@ -65,7 +65,7 @@
 ## C. Modo construcción: entrada, salida y UX (10)
 
 - [ ] Abrir modo con herramienta de construcción (M13) o tecla asignada [M]
-- [ ] Cerrar modo con la misma acción sin confirmación agresiva [S]
+- [x] Cerrar modo con la misma acción sin confirmación agresiva [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: salir_modo() sin confirmación + doble salida idempotente (sin crash ni estado residual); qa_m17_modo.gd 9/0 EXIT 0; la misma acción de la UI M13 hace toggle via esta_en_modo() (contrato que el service brinda)
 - [ ] HUD de modo con categorías del catálogo y costo de la pieza activa [M]
 - [ ] El movimiento del jugador se suspende solo durante la colocación [M]
 - [ ] El mundo continúa activo (NPC, clima, tiempo) mientras se construye [M]
@@ -284,3 +284,4 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 11 [x] / 164 [ ] / 0 [?].
 > Las marcas no se tocaron.
 **Totales:** 175 items · Completados: 101 · Pendientes: 73 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 101 [x] / 73 [ ] / 1 [?] tras tanda cooldown+undo/demolición; rieles verdes hoy: iter2 99/0 + iter3 138/0 + iter5 39/0 + iter7 24/0.)
+**Totales:** 175 items · Completados: 103 · Pendientes: 71 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 103 [x] / 71 [ ] / 1 [?] tras tanda RF1 modo toggle; qa_m17_modo.gd 9/0.)

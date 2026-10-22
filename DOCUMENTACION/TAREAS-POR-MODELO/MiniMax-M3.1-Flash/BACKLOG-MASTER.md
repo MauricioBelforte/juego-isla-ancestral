@@ -534,7 +534,7 @@
 522. - [ ] [20-Sistema-De-Amistad] Decision documentada: Alternativa B (acumulativa) en 02-Analisis.md [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 523. - [ ] [20-Sistema-De-Amistad] Los vecinos no registrados no existen en el servicio [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 524. - [ ] [20-Sistema-De-Amistad] Alta desregistro de vecino: al mudarse se conserva el historial para futuro reencuentro [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
-525. - [ ] [20-Sistema-De-Amistad] Memoria del vecino alimentada por interacciones destacadas [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+525. - [x] [20-Sistema-De-Amistad] Memoria del vecino alimentada por interacciones destacadas [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md --> — LOG 2120: cerrado con checks nombrados
 526. - [ ] [20-Sistema-De-Amistad] Rutinas y horarios de M19 intactos (M20 no modifica IA) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 527. - [ ] [20-Sistema-De-Amistad] Cambios de rutina sociales (visitar al mejor amigo) habilitados por data [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 528. - [ ] [20-Sistema-De-Amistad] Sin acoplamiento con componentes de navegacion ni FSM [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
@@ -579,10 +579,10 @@
 567. - [ ] [20-Sistema-De-Amistad] Coherencia de tono: el NPC nunca rechaza con dureza [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 568. - [ ] [20-Sistema-De-Amistad] Eventos con ambiente acogedor (sonido ambiente, luz calida) [C] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 569. - [ ] [20-Sistema-De-Amistad] Test: regalo amado/gusta/neutral/duplicado devuelve puntos esperados [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
-570. - [ ] [20-Sistema-De-Amistad] Test: limite diario respetado para regalo, charla y carta [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+570. - [x] [20-Sistema-De-Amistad] Test: limite diario respetado para regalo, charla y carta [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md --> — LOG 2120: cerrado con checks nombrados
 571. - [ ] [20-Sistema-De-Amistad] Test: excedente conservado al subir de nivel [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 572. - [ ] [20-Sistema-De-Amistad] Test: ausencia de 30 dias no reduce puntos (sin FOMO) [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
-573. - [ ] [20-Sistema-De-Amistad] Test: guardar/cargar a mitad de nivel restaura exacto [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+573. - [x] [20-Sistema-De-Amistad] Test: guardar/cargar a mitad de nivel restaura exacto [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md --> — LOG 2120: cerrado con checks nombrados
 574. - [ ] [20-Sistema-De-Amistad] Test: reclamar recompensa idempotente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 575. - [ ] [20-Sistema-De-Amistad] Recorrido M114: 10 vecinos a nivel 5+ en sesiones simuladas sin fallos [C] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 576. - [ ] [20-Sistema-De-Amistad] 01-Requerimientos creado y firmado [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->

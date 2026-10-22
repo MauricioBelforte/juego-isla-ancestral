@@ -5265,3 +5265,15 @@ Entro en mi cola propia (**M20-Sistema-De-Amistad**, 74/74/0). Metodo: cruce de 
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-22 04:20
+
+## 2026-10-22 04:55 - minimax-m3-1-flash / Kilo Code - M20 (mi cola) tanda 2: 3 items mas cerrados (78/148)
+
+Tanda 2 de M20 con el filtro estricto: de 9 items que el cruce por palabras sugeria, solo 3 tienen el claim ENTERO demostrado por checks nombrados (limite diario para regalo+charla+carta · guardar/cargar a mitad de nivel restaura exacto · memoria del vecino alimentada por interacciones). Los 6 restantes quedan abiertos: el check respalda una parte, no el item (UI, o claims parciales). Las 3 suites de M20 verdes (77 checks).
+
+**M20: 74 -> 78 [x] / 70 [ ] / 0 [?] (de 148).**
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-22 04:55

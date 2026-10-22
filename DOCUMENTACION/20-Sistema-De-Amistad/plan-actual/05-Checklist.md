@@ -122,7 +122,7 @@
 - [x] VecinoData consumido de M19: gustos y disgustos reales (lectura de VillagerProfile; amados/personalidad pendientes como campos en M19) [S]
 - [ ] Los vecinos no registrados no existen en el servicio [S]
 - [ ] Alta desregistro de vecino: al mudarse se conserva el historial para futuro reencuentro [S]
-- [ ] Memoria del vecino alimentada por interacciones destacadas [S]
+- [x] Memoria del vecino alimentada por interacciones destacadas [S] → **CERRADO con checks nombrados de las suites de M20** (Log 2120, iter. minimax-m3-1-flash, 2026-10-22): "memoria: recuerdo registrado en vecino" (el recuerdo se registra al interactuar) + "persistencia restaura memoria" (la memoria sobrevive al guardado/cargado). Las 3 suites en VERDE (rc=0): `test_amistad.gd` (14), `test_amistad_eventos.gd` (53), `test_amistad_rf48_m20.gd` (5).
 - [ ] Rutinas y horarios de M19 intactos (M20 no modifica IA) [S]
 - [ ] Cambios de rutina sociales (visitar al mejor amigo) habilitados por data [M]
 - [ ] Sin acoplamiento con componentes de navegacion ni FSM [S]
@@ -196,10 +196,10 @@
 ## S. Testings y QA (7)
 
 - [x] Test: regalo amado/gusta/neutral/duplicado devuelve puntos esperados [M]
-- [ ] Test: limite diario respetado para regalo, charla y carta [M]
+- [x] Test: limite diario respetado para regalo, charla y carta [M] → **CERRADO con checks nombrados de las suites de M20** (Log 2120, iter. minimax-m3-1-flash, 2026-10-22): los 3 limites con checks nombrados: regalo ("limite 1 regalo dia 1" / "2do regalo mismo dia rechazado" / "dia nuevo resetea limite"), charla ("2da charla mismo dia rechazada (limite_diario)" / "dia nuevo: charla permitida de nuevo") y carta ("2da carta mismo dia => limite_diario" / "limite cumpleanos dia 1 libre" / "limite regalo dia 1 sigue libre (separado)") — el limite de cumpleanos va aparte del de regalo. Las 3 suites en VERDE (rc=0): `test_amistad.gd` (14), `test_amistad_eventos.gd` (53), `test_amistad_rf48_m20.gd` (5).
 - [x] Test: excedente conservado al subir de nivel [M]
 - [x] Test: ausencia de 30 dias no reduce puntos (sin FOMO) [M]
-- [ ] Test: guardar/cargar a mitad de nivel restaura exacto [M]
+- [x] Test: guardar/cargar a mitad de nivel restaura exacto [M] → **CERRADO con checks nombrados de las suites de M20** (Log 2120, iter. minimax-m3-1-flash, 2026-10-22): "persistencia restaura puntos" / "persistencia restaura nivel" / "persistencia restaura memoria" / "restore: bandeja de TEST_CARTA conservada" / "restore: puntos TEST_CARTA conservados" / "restore: anio_cumpleanos FINNEAS conservado" / "DOM: eventos persistidos tras restore" — la restauracion es exacta en puntos, nivel, memoria, bandeja y eventos. Las 3 suites en VERDE (rc=0): `test_amistad.gd` (14), `test_amistad_eventos.gd` (53), `test_amistad_rf48_m20.gd` (5).
 - [ ] Test: reclamar recompensa idempotente [S]
 - [ ] Recorrido M114: 10 vecinos a nivel 5+ en sesiones simuladas sin fallos [C]
 
@@ -210,7 +210,7 @@
 - [ ] 03-Diseno creado y firmado (arquitectura y contratos) [S]
 - [ ] 04-Codigo creado y firmado (rutas, firmas, Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
-**Totales:** 148 items · Completados: 75 · Pendientes: 73 · No resueltos: 0. (Recontado el 2026-10-22 por minimax-m3-1-flash, Log 2117: 74 [x] + 1 [x] - 2 revertidos = 75 [x]; pendientes 73; sin resueltos 0. Los 1 flips de la tanda: 1 con evidencia completa (checks nombrados + linea de codigo) y 2 revertidos porque la busqueda en codigo no los confirma.)
+**Totales:** 148 items · Completados: 78 · Pendientes: 70 · No resueltos: 0. (Recontado el 2026-10-22 por minimax-m3-1-flash, Log 2120: 75 [x] + 3 [x] nuevos = 78 [x]; pendientes 70; sin resueltos 0.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 98 [ ] / 0 [?].
