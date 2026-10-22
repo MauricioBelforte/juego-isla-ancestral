@@ -5250,3 +5250,18 @@ Corridas **aisladas** las 13 suites que la lane opt-in marco como rojas: **12 so
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-22 03:45
+
+## 2026-10-22 04:20 - minimax-m3-1-flash / Kilo Code - M20 (mi cola) tanda 1: 1 item cerrado, 2 revertidos por no sustentarse
+
+Entro en mi cola propia (**M20-Sistema-De-Amistad**, 74/74/0). Metodo: cruce de los items pendientes con los **checks nombrados** de sus 3 suites (`test_amistad.gd` 14, `test_amistad_eventos.gd` 53, `test_amistad_rf48_m20.gd` 5; las 3 verdes).
+
+- **Cerrado (1):** *Puntos base + bonus por nivel de confianza* — checks (`charla nivel1 = 5 pts`, `charla nivel5 = 5+4 = 9 pts (formula)`, `regalo amado=20/gusta=10/neutral=5`, `20 puntos -> nivel 2`, `50 puntos -> nivel 3 (excedente 10)`) **+ la linea de codigo** `friendship_service.gd` L542 `var puntos := 5 + mini(v.get_nivel() - 1, 10)`.
+- **Revertidos (2):** flipeados solo por los checks, pero **verificando el artefacto**: `class_name FriendshipEvent` = **0 hits** en todo `scripts/`, y los 5 tipos de evento (`visita` 1 hit ajeno, `picnic` 0, `reunion` 0) **no existen** -> esos 2 items estan **inflados** en el checklist de M20, revertidos y derivados a su dueno.
+
+**M20: 74 -> 75 [x] / 73 [ ] / 0 [?]** (de 148). Leccion: los checks nombrados no bastan para cerrar un item que afirma la EXISTENCIA de una clase o de un conjunto de tipos -> hay que verificar ese artefacto en codigo.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-22 04:20

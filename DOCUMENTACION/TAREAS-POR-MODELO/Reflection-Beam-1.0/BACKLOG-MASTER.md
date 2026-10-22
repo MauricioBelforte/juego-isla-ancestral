@@ -166,7 +166,7 @@ Total de items de modulos anexados: 0. Regla: item que al leerse resulte obsolet
 212. [x] 137-Prototipo: [ ] Definir extracción por raycast con radio máx 3 [M]
 213. [x] 137-Prototipo: [ ] Definir colocación de bloques en cara apuntada [M]
 214. [ ] 137-Prototipo: [ ] Definir test de bordes de chunk sin crash [C]
-215. [ ] 137-Prototipo: [ ] Definir árbol de madera (bloques referenciados) [M]
+215. [x] 137-Prototipo: [ ] Definir árbol de madera (bloques referenciados) [M]
 216. [ ] 137-Prototipo: [ ] Definir obtención de madera al extraer árbol [M]
 217. [ ] 137-Prototipo: [ ] Definir crafting esbozo: 2 maderas → herramienta (M16) [M]
 218. [ ] 137-Prototipo: [ ] Definir herramienta con durabilidad infinita en prototipo [S]

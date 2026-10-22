@@ -517,7 +517,7 @@
 505. - [ ] [20-Sistema-De-Amistad] Feedback de nivel subido con animacion y lista de desbloqueos [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 506. - [ ] [20-Sistema-De-Amistad] Coste de evaluacion menor a 1 ms por regalo [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 507. - [ ] [20-Sistema-De-Amistad] Registro de 1 charla efectiva por vecino y dia [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
-508. - [ ] [20-Sistema-De-Amistad] Puntos base + bonus por nivel de confianza [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+508. - [x] [20-Sistema-De-Amistad] Puntos base + bonus por nivel de confianza [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md --> — LOG 2118: cerrado con checks nombrados (charla nivel1 = 5 pts / nivel5 = 5+4) + codigo (friendship_service.gd L542: puntos := 5 + mini(nivel-1, 10))
 509. - [ ] [20-Sistema-De-Amistad] El vecino menciona recuerdos (primer regalo, cumpleanos celebrado) [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 510. - [ ] [20-Sistema-De-Amistad] Charla no consume regalo diario (independiente) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
 511. - [ ] [20-Sistema-De-Amistad] Sin charla repetida con los mismos puntos en el mismo dia [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->

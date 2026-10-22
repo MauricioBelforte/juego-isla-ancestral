@@ -50,11 +50,11 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 5, 2026-10-22): 98 checks con los bloques A-J
-# (iter. 4 tenía 70 con A-I; el bloque J de las 6 historias de vecinos sumó 28).
-# Medido: 98/0/EXIT 0. El guardián se probó EN ROJO por inyección de runtime
-# sobre el bloque J (ver Log 2107).
-const CHECKS_MINIMOS := 98
+# Piso MEDIDO en verde (iter. 6, 2026-10-22): 129 checks con los bloques A-K
+# (iter. 5 tenía 98 con A-J; el bloque K del cluster Lugares sumó 31).
+# Medido: 129/0/EXIT 0 x3. El guardián se probó EN ROJO por inyección de runtime
+# sobre el bloque K (ver Log 2117).
+const CHECKS_MINIMOS := 129
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]

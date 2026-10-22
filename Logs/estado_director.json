@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T02:50:30",
+ "ultimo_update": "2026-10-22T04:55:10",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "936/937: M73 lote4 RATIFICADA (63/135 verificado en disco; catalogo agotado de data — restantes con dueños externos); siguiente #889 o M73",
+  "estado": "939: GO QA cruzado de tandas recientes (M21 M33 M40 G-5.3 / M56 Beam / item M20 MiniMax)",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,13 +13,13 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 937,
+  "acuse_enviado": 939,
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "261/262: S18 M67 RATIFICADA (altitud max por nivel con topes de 03-Diseno §3.1; M67 34/131 fila sync verificada); GO S19",
+  "estado": "263/264: S19 RATIFICADA (M75 NO accionable self-contained); M20 = de MiniMax NO tocar; GO S20",
   "pendientes_real": 222,
-  "acuse_enviado": 262,
+  "acuse_enviado": 264,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -116,9 +116,9 @@
   "allowlist del validador usa prefijo canonico (flag_): keys sin prefijo se rechazan por diseño - los NUEVOS tests deben usar el prefijo canonico, no tocar el validador (evitado por G-5.3 S14)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "044/045: CIERRE OPT-IN RATIFICADO (12 artefactos + 1 bug real; AV fixtures abierto en pool); tercera entrega del frente",
+  "estado": "046/047: M20 tanda1 RATIFICADA (1 cerrado + 2 revertidos honestos); M20 = cola exclusiva suya; sigue cola u opciones a/b/c",
   "pendientes_real": 685,
-  "acuse_enviado": 45,
+  "acuse_enviado": 47,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -178,8 +178,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T51/T52 (backlog M137 200-213 sync + extraccion/colocacion) ratificadas por acuse combinado 110; isla.tscn/VoxelTerrain/generador [ ] honestos de editor",
-  "acuse_enviado": 110
+  "estado": "111/112: T53 RATIFICADA (sync 215 + 4 [ ] honestos editor); T54/55 o paquete largo",
+  "acuse_enviado": 112
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
