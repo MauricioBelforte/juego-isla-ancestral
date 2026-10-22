@@ -159,41 +159,65 @@
 
 - [x] Definir triaje diario de todos los reportes (telemetría/reviews/soporte) [M]
   · evidencia: 03-Diseno.md secc. Backup y triaje (cola total, Reflection-Beam-1.0, T105, 2026-10-22)
-- [ ] Definir severidad P0/P1/P2 en < 24 h [M]
+- [x] Definir severidad P0/P1/P2 en < 24 h [M]
+  · evidencia: 03-Diseno.md secc. Hotfix y severidad (cola total, Reflection-Beam-1.0, T107, 2026-10-22)
 - [x] Definir P0/P1 → comité de release en < 12 h [S]
-- [ ] Definir trabajo sobre P0/P1 sin reintroducir regresiones (M112) [M]
-- [ ] Definir respuesta pública cuando el bug afecta a muchos usuarios [S]
+- [x] Definir trabajo sobre P0/P1 sin reintroducir regresiones (M112) [M]
+  · evidencia: 03-Diseno.md secc. Hotfix y severidad (cola total, Reflection-Beam-1.0, T107, 2026-10-22)
+- [x] Definir respuesta pública cuando el bug afecta a muchos usuarios [S]
+  · evidencia: 03-Diseno.md secc. Hotfix y severidad (cola total, Reflection-Beam-1.0, T107, 2026-10-22)
 - [x] Definir registro de todo bug con buildId y reproducción [S]
 
 ## 12. Preparar hotfix (RF10/M142)
 
-- [ ] Definir cola de hotfix 2.0.x con prioridades y propietarios [M]
-- [ ] Definir hotfix listo en < 72 h si hay P0/P1 [M]
-- [ ] Definir hotfix con test de regresión y pasada por checklist RC (M142) [M]
-- [ ] Definir proceso de aprobación del comité para el hotfix [S]
-- [ ] Definir ventana de aplicación del hotfix (horario de baja afluencia) [S]
-- [ ] Definir comunicado de la actualización con notas [S]
-- [ ] Definir P2 fuera del hotfix → cola de actualización M144 [S]
+- [x] Definir cola de hotfix 2.0.x con prioridades y propietarios [M]
+  · evidencia: 03-Diseno.md secc. Hotfix y severidad (cola total, Reflection-Beam-1.0, T107, 2026-10-22)
+- [x] Definir hotfix listo en < 72 h si hay P0/P1 [M]
+  · evidencia: 03-Diseno.md secc. Hotfix y actualizacion (cola total, Reflection-Beam-1.0, T109, 2026-10-22)
+- [x] Definir hotfix con test de regresión y pasada por checklist RC (M142) [M]
+  · evidencia: 03-Diseno.md secc. Hotfix y actualizacion (cola total, Reflection-Beam-1.0, T109, 2026-10-22)
+- [x] Definir proceso de aprobación del comité para el hotfix [S]
+  · evidencia: 03-Diseno.md secc. Hotfix y actualizacion (cola total, Reflection-Beam-1.0, T109, 2026-10-22)
+- [x] Definir ventana de aplicación del hotfix (horario de baja afluencia) [S]
+  · evidencia: 03-Diseno.md secc. Hotfix y actualizacion (cola total, Reflection-Beam-1.0, T109, 2026-10-22)
+- [x] Definir comunicado de la actualización con notas [S]
+  · evidencia: 03-Diseno.md secc. Comunicado y metricas 72h (cola total, Reflection-Beam-1.0, T111, 2026-10-22)
+- [x] Definir P2 fuera del hotfix → cola de actualización M144 [S]
+  · evidencia: 03-Diseno.md secc. Comunicado y metricas 72h (cola total, Reflection-Beam-1.0, T111, 2026-10-22)
 
 ## 13. Revisar métricas iniciales (RF11/M104/M106)
 
-- [ ] Definir informe 72 h con 4 ejes: estabilidad, comunidad, adopción, ventas [M]
-- [ ] Definir métricas de estabilidad: crash rate, errores de save, backend [M]
-- [ ] Definir métricas de comunidad: reviews, respuestas, canales activos [M]
-- [ ] Definir métricas de adopción: instalaciones, sesiones, conversión de tutorial [M]
-- [ ] Definir métricas de ventas (si aplica) [S]
-- [ ] Definir revisión del informe por el equipo y aprendizajes [S]
-- [ ] Definir entrega del informe a M144 [S]
+- [x] Definir informe 72 h con 4 ejes: estabilidad, comunidad, adopción, ventas [M]
+  · evidencia: 03-Diseno.md secc. Comunicado y metricas 72h (cola total, Reflection-Beam-1.0, T111, 2026-10-22)
+- [x] Definir métricas de estabilidad: crash rate, errores de save, backend [M]
+  · evidencia: 03-Diseno.md secc. Comunicado y metricas 72h (cola total, Reflection-Beam-1.0, T111, 2026-10-22)
+- [x] Definir métricas de comunidad: reviews, respuestas, canales activos [M]
+  · evidencia: 03-Diseno.md secc. Metricas y respuestas (cola total, Reflection-Beam-1.0, T113, 2026-10-22)
+- [x] Definir métricas de adopción: instalaciones, sesiones, conversión de tutorial [M]
+  · evidencia: 03-Diseno.md secc. Metricas y respuestas (cola total, Reflection-Beam-1.0, T113, 2026-10-22)
+- [x] Definir métricas de ventas (si aplica) [S]
+  · evidencia: 03-Diseno.md secc. Respuestas y metricas (cola total, Reflection-Beam-1.0, T115, 2026-10-22)
+- [x] Definir revisión del informe por el equipo y aprendizajes [S]
+  · evidencia: 03-Diseno.md secc. Metricas y respuestas (cola total, Reflection-Beam-1.0, T113, 2026-10-22)
+- [x] Definir entrega del informe a M144 [S]
+  · evidencia: 03-Diseno.md secc. Metricas y respuestas (cola total, Reflection-Beam-1.0, T113, 2026-10-22)
 
 ## 14. Responder comunidad (RF12/M149/M152)
 
-- [ ] Definir respuestas a todas las reviews (positivas/negativas) [M]
-- [ ] Definir respuestas en foros/Discord/redes con tiempo documentado [M]
-- [ ] Definir hilo oficial de bugs conocido y feedback [M]
-- [ ] Definir moderación activa (sin trolls destructivos) [S]
-- [ ] Definir informe de "temas recurrentes" de la comunidad [S]
-- [ ] Definir encuesta rápida de 72 h (diversión, dificultad, bugs) [M]
-- [ ] Definir newsletter/comunicado de "primeras 72 h" [S]
+- [x] Definir respuestas a todas las reviews (positivas/negativas) [M]
+  · evidencia: 03-Diseno.md secc. Respuestas y metricas (cola total, Reflection-Beam-1.0, T115, 2026-10-22)
+- [x] Definir respuestas en foros/Discord/redes con tiempo documentado [M]
+  · evidencia: 03-Diseno.md secc. Respuestas y metricas (cola total, Reflection-Beam-1.0, T115, 2026-10-22)
+- [x] Definir hilo oficial de bugs conocido y feedback [M]
+  · evidencia: 03-Diseno.md secc. Respuestas y metricas (cola total, Reflection-Beam-1.0, T115, 2026-10-22)
+- [x] Definir moderación activa (sin trolls destructivos) [S]
+  · evidencia: 03-Diseno.md secc. Moderacion y agradecimiento (cola total, Reflection-Beam-1.0, T116, 2026-10-22)
+- [x] Definir informe de "temas recurrentes" de la comunidad [S]
+  · evidencia: 03-Diseno.md secc. Moderacion y agradecimiento (cola total, Reflection-Beam-1.0, T116, 2026-10-22)
+- [x] Definir encuesta rápida de 72 h (diversión, dificultad, bugs) [M]
+  · evidencia: 03-Diseno.md secc. Moderacion y agradecimiento (cola total, Reflection-Beam-1.0, T116, 2026-10-22)
+- [x] Definir newsletter/comunicado de "primeras 72 h" [S]
+  · evidencia: 03-Diseno.md secc. Moderacion y agradecimiento (cola total, Reflection-Beam-1.0, T116, 2026-10-22)
 
 ## 15. Publicar agradecimiento (RF13)
 

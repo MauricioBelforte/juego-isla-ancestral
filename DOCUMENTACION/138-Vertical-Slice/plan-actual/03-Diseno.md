@@ -285,6 +285,81 @@ hasta frame 10).
 - Contrato comun: senal `sen_impacto(pos)` del nodo herramienta; M43 (sfx)
   y M52 (vfx) escuchan por senal, sin conexiones duras.
 
+## Audio del slice: musica y SFX (S31 2026-10-22)
+
+**Musica (L58, inputs M41/M44/M84):**
+- 2 stems de Aurora: TEMA DIURNO (mayor, Do, 80 bpm, flauta de madera +
+  arpa; bucle 64 compases) y TEMA NOCTURNO (menor, La, mismo tempo y
+  armonicos, pads suaves; bucle 64 compases comparte el pulso para
+  crossfade sin boton de tempo).
+- Player PROPIO de musica: AudioStreamPlayer dedicado (no el bus de SFX),
+  crossfade 1.0 s entre stems en la transicion al dormir (L59: el mismo
+  crossfade definido en el bloque del dormir; sin detener el stream, solo
+  ganancias).
+- MEZCLA: musica -10 dB vs SFX base (L61, M44: el SFX manda; el impacto de
+  talado ya definido a -6 dB sobre ambiente queda 4 dB encima de la musica).
+  Ninguna pista> -3 dB pico.
+- LICENCIA (L62, chequeo M84): todo stem del slice CC0 o propio (sin
+  sampling de bibliotecas con copyright); registro de fuente por stem en el
+  04-Codigo al importarlos. Sin musica con claims.
+
+**SFX restantes del slice (L66/L67/L68, M43; L69 ambiente M42):**
+- L66 extraccion/colocacion: `extraccion_recurso` (talado/mineria, pitch por
+  material: madera/mineral) y `colocacion_bloque` (construir M17, mismo
+ bus sen_impacto).
+- L67 swing/moneda: `swing_herramienta` (whoosh corto 0.15 s, la senal del
+  frame 8 del hacha_swing si NO hubo hit) y `moneda_ao` (pickup AO, blip
+  doble 12 ms).
+- L68 puerta/puzzle: `reja_abre` (madera+piedra, 0.8 s) y `palanca_click`
+  (mecanico corto; el exito usa `puzzle_resuelto_chime` 3 notas del sello).
+- L69 AMBIENTE (M42): capa continua por zona: viento (todo el slice),
+  mar (playa/muelle, volumen bajo por distancia al agua) y pajaros
+  (prado/arboleda, solo de dia; callen -out con el tema nocturno). Un
+  AudioStreamPlayer por capa con volumen por posicion (sin 3D emitters por
+  arbol: budget).
+
+## UI del slice + serializacion + convenciones (S32 2026-10-22)
+
+**HUD slice (L74, input M53):** inventario visible = 1 fila de hotbar (6
+slots: hacha, madera, semilla, AO y 2 libres) en la franja inferior; un solo
+icono por recurso con contador; el slot activo de herramienta se marca con
+el borde del color sello brisa. Sin sub-inventarios ni drag&drop (scope).
+
+**Caja de dialogo (L75, input M88):** caja inferior centrada al 78% del
+ancho, fondo semi-opaco oscuro, tipografia canonica del proyecto; texto con
+el typewriter M21 ya resuelto (velocidad configurable en ajustes); nombre
+del hablante en cabina pequena arriba-izquierda de la caja. Replay con click
+(sin saltar lineas de mision).
+
+**Indicador de interactivo (L76):** etiqueta flotante screen-space
+"Interactuar [E]" sobre el objetivo activo del raycast M70 (enchufado al
+fade 0.10 s ya definido: la etiqueta hereda el mismo fade, sin polling
+propio). Un solo indicador por vez (el objetivo mas cercano).
+
+**Menu de pausa (L77):** capa pausa ya montada por M53: CONTINUAR / SALIR /
+AJUSTES MINIMOS (volumen musica y SFX -2 sliders con los buses ya definidos
+en S31- L70-; calidad grafica alta/baja) + version del slice. Pausa real
+(get_tree().paused, los NPC quedan congelados por el puente M21->M64 ya
+resuelto). Salir = volver al menu principal (sin confirmacion doble).
+
+**Serializacion del slice (L109/L110, base save v2 S28):**
+- Puzzle: el par `estado_discos` (2 ints de posicion) + `puzzle_resuelto`
+  (bool) ya viven en las claves del slice del save v2; al cargar, si
+  puzzle_resuelto la reja arranca abierta y los discos en la solucion canonica
+  (SOL=ocaso, BRISA=alba) (idempotente).
+- schema_version: el save v2 lleva VERSION 2 explicita; al cargar: version
+  < 2 -> migracion v1 (mapa M60); version > 2 -> RECHAZO con aviso legible
+  (sin crash); version == 2 -> carga directa. La migracion futura (v3) agrega
+  claves nuevas sin renombrar las viejas (solo additivo).
+- La validacion de schema vive en el loader M60 (un unico punto), no en cada
+  sistema del slice.
+
+**Convenciones de nombres del slice (L171):** scripts del slice prefijo
+`vslice_` (vslice_mision.gd, vslice_puzzle.gd...), QAs `qa_vslice_*`,
+escenas `vslice_*.tscn`, datos bajo data/vslice/; el sufijo `*_vs.gd` queda
+RESERVADO para variantes de prueba del slice (no production). Nada del slice
+sin prefijo: el barrido de alcance del M139 lo exigira.
+
 ## Canon y estilo (M147)
 
 - Nombre del slice y su historico consume el canon M147 (glpts); toda

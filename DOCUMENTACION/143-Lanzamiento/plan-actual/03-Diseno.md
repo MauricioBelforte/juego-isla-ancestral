@@ -296,3 +296,105 @@ Reporte (telemetría/review/soporte) → ticket M101 con buildId
 ### Triaje diario de todos los reportes
 - Triaje diario de telemetria/reviews/crashes.
 - Priorizacion por severidad.
+## Hotfix y severidad (cola total M143 batch 15)
+
+### Severidad P0/P1/P2 en < 24 h
+- Clasificacion de severidad en < 24 h.
+- P0: bloqueante, P1: mayor, P2: menor.
+
+### Trabajo sobre P0/P1 sin reintroducir regresiones (M102)
+- Fix de P0/P1 sin reintroducir regresiones.
+- Test de regresion obligatorio.
+
+### Respuesta publica cuando el bug afecta a muchos usuarios
+- Comunicacion publica ante bugs masivos.
+- Plan de accion y seguimiento.
+
+### Cola de hotfix 2.0.x con prioridades y propietarios
+- Cola de hotfix con prioridades y propietarios.
+- Runbook de hotfix.
+## Hotfix y actualizacion (cola total M143 batch 16)
+
+### Hotfix listo en < 72 h si hay P0/P1
+- Hotfix listo en < 72 h si hay P0/P1.
+- Prioridad maxima.
+
+### Hotfix con test de regresion y pasada por checklist
+- Hotfix con test de regresion obligatorio.
+- Pasada por checklist antes de publicar.
+
+### Proceso de aprobacion del comite para el hotfix
+- Aprobacion del comite para el hotfix.
+- Runbook de aprobacion.
+
+### Ventana de aplicacion del hotfix
+- Ventana de aplicacion (horario de baja actividad).
+- Minimizar impacto en jugadores.
+## Comunicado y metricas 72h (cola total M143 batch 17)
+
+### Comunicado de la actualizacion con notas
+- Comunicado de la actualizacion con notas de version.
+- Publicar en canales oficiales.
+
+### P2 fuera del hotfix a cola de actualizacion M144
+- P2 fuera del hotfix va a la cola de actualizacion M144.
+- No bloquea el hotfix.
+
+### Informe 72 h con 4 ejes
+- Informe de las primeras 72 h con 4 ejes: estabilidad, comunidad, adopcion, ventas.
+- Revision por el equipo.
+
+### Metricas de estabilidad
+- Crash rate, errores de save, latencia.
+- Dashboard de estabilidad.
+## Metricas y respuestas (cola total M143 batch 18)
+
+### Metricas de comunidad
+- Reviews, respuestas, canales.
+- Dashboard de comunidad.
+
+### Metricas de adopcion
+- Instalaciones, sesiones, conversion.
+- Dashboard de adopcion.
+
+### Revision del informe por el equipo
+- Revision del informe 72h por el equipo.
+- Aprendizajes documentados.
+
+### Entrega del informe a M144
+- Entrega del informe a M144 (post-lanzamiento).
+- Integracion con el plan post-lanzamiento.
+## Respuestas y metricas (cola total M143 batch 19)
+
+### Metricas de ventas (si aplica)
+- Metricas de ventas por dia.
+- Dashboard de ventas.
+
+### Respuestas a todas las reviews (positivas/negativas)
+- Responder a todas las reviews.
+- Priorizar negativas.
+
+### Respuestas en foros/Discord/redes con tiempo documentado
+- Respuestas en foros/Discord/redes.
+- Tiempo de respuesta documentado.
+
+### Hilo oficial de bugs conocido y feedback
+- Hilo oficial de bugs conocidos.
+- Feedback de la comunidad.
+## Moderacion y agradecimiento (cola total M143 batch 20)
+
+### Moderacion activa (sin trolls destructivos)
+- Moderacion activa en foros y Discord.
+- Sin trolls destructivos.
+
+### Informe de temas recurrentes de la comunidad
+- Informe de temas recurrentes.
+- Alimentar M144.
+
+### Encuesta rapida de 72 h
+- Encuesta rapida de 72 h: diversion, dificultad, bugs.
+- Recoger feedback temprano.
+
+### Newsletter/comunicado de primeras 72 h
+- Newsletter de las primeras 72 h.
+- Comunicado multi-idioma.

@@ -55,26 +55,26 @@
 
 ## G. Música (RF6)
 
-- [ ] Definir tema diurno y nocturno de Aurora (2 stems) [C]
-- [ ] Definir transición suave al dormir [M]
-- [ ] Definir que la música use AudioStreamPlayer separado (M41) [S]
-- [ ] Definir volumen equilibrado con SFX (M44) [S]
-- [ ] Definir música sin copyright conflictivo (M84 Chequeado) [S]
+- [x] Definir tema diurno y nocturno de Aurora (2 stems) [C] — 03-Diseno Audio: diurno Do mayor 80 bpm flauta+arpa / nocturno La menor mismo pulso, bucles 64 compases, crossfade 1.0 s (2026-10-22 S31)
+- [x] Definir transición suave al dormir [M] — 03-Diseno (S29 bloque Dormir + Audio S31): fade 1.2 s + crossfade musical 1.0 s sin detener stream (2026-10-22 S31)
+- [x] Definir que la música use AudioStreamPlayer separado (M41) [S] — 03-Diseno Audio: player propio fuera del bus SFX, solo ganancias (2026-10-22 S31)
+- [x] Definir volumen equilibrado con SFX (M44) [S] — 03-Diseno Audio: musica -10 dB vs SFX base; impacto talado -6 dB sobre ambiente; ningun pico > -3 dB (2026-10-22 S31)
+- [x] Definir música sin copyright conflictivo (M84 Chequeado) [S] — 03-Diseno Audio: stems CC0 o propios, fuente por stem registrada en 04 al importar (2026-10-22 S31)
 
 ## H. Sonidos (RF7)
 
-- [ ] Definir SFX de extracción y colocación [M]
-- [ ] Definir SFX de swing y moneda [S]
-- [ ] Definir SFX de puerta y puzzle [S]
-- [ ] Definir ambiente: viento, mar, pájaros (M42) [M]
-- [ ] Definir mezcla con AudioMixer y buses (M42) [M]
+- [x] Definir SFX de extracción y colocación [M] — 03-Diseno Audio: extraito_recurso con pitch por material + colocacion_bloque (bus sen_impacto) (2026-10-22 S31)
+- [x] Definir SFX de swing y moneda [S] — 03-Diseno Audio: swing_herramienta whoosh 0.15 s (frame 8 sin hit) + moneda_ao blip doble 12 ms (2026-10-22 S31)
+- [x] Definir SFX de puerta y puzzle [S] — 03-Diseno Audio: reja_abre 0.8 s + palanca_click mecanico + puzzle_resuelto_chime 3 notas del sello (2026-10-22 S31)
+- [x] Definir ambiente: viento, mar, pájaros (M42) [M] — 03-Diseno Audio: 3 capas continuas por zona, volumen por distancia, pajaros solo de dia; sin 3D emitters por arbol (budget) (2026-10-22 S31)
+- [x] Definir mezcla con AudioMixer y buses (M42) [M] — 03-Diseno Audio S31 + sliders del menu de pausa S32: musica -10 dB / SFX base, pico max -3 dB, buses separados musica/SFX/ambiente (2026-10-22 S32)
 
 ## I. UI Funcional (RF8)
 
-- [ ] Definir IV inventario (1 fila visible) [S]
-- [ ] Definir caja de diálogo tipográfica (M88) [S]
-- [ ] Definir indicador de interactivo sobre el objetivo [S]
-- [ ] Definir menú de pausa básico (continuar, salir, ajustes mínimos) [S]
+- [x] Definir IV inventario (1 fila visible) [S] — 03-Diseno UI: hotbar 6 slots (hacha/madera/semilla/AO + 2 libres), contador por icono, borde sello brisa en slot activo; sin drag&drop (2026-10-22 S32)
+- [x] Definir caja de diálogo tipográfica (M88) [S] — 03-Diseno UI: caja inferior 78% ancho semi-opaca, tipografia canonica, typewriter M21, cabina de hablante, replay sin saltar mision (2026-10-22 S32)
+- [x] Definir indicador de interactivo sobre el objetivo [S] — 03-Diseno UI: etiqueta "Interactuar [E]" screen-space sobre el raycast M70, hereda fade 0.10 s, un solo indicador (2026-10-22 S32)
+- [x] Definir menú de pausa básico (continuar, salir, ajustes mínimos) [S] — 03-Diseno UI: capa M53 ya montada; pausa real get_tree().paused (NPC congelados via puente M21->M64); 2 sliders volumen + calidad alta/baja (2026-10-22 S32)
 - [ ] Definir UI sin acoplar gameplay (M07) [M]
 
 ## J. VFX (RF10)
@@ -106,8 +106,8 @@
 
 - [ ] Definir serialización completa de la zona (chunks modificados) [C]
 - [ ] Definir serialización de NPC (posición + estado de misión) [M]
-- [ ] Definir serialización de puzzle (flags) [S]
-- [ ] Definir validación de schema_version con migración futura [M]
+- [x] Definir serialización de puzzle (flags) [S] — 03-Diseno: estado_discos (2 ints) + puzzle_resuelto (bool) en save v2; al cargar resuelto = reja abierta + discos en solucion canonica (idempotente) (2026-10-22 S32)
+- [x] Definir validación de schema_version con migración futura [M] — 03-Diseno: version 2 explicita; <2 migracion v1 (M60), >2 rechazo legible sin crash, ==2 directa; migracion futura solo aditiva; validacion en el loader unico M60 (2026-10-22 S32; base S28)
 - [ ] Definir test de 10 ciclos guardar→cargar con 0 pérdidas [C]
 
 ## N. Rendimiento (RF15)
@@ -168,7 +168,7 @@
 - [x] Definir que el slice use autoloads centrales (game_state_vs, save_v2, audio_manager) [M]
 - [x] Definir separación de scripts UI / gameplay [M]
 - [x] Definir que los sistemas del slice sean enmarcables al juego completo [C]
-- [ ] Definir convenciones de nombres (`*_vs.gd`, `vslice_*`) [S]
+- [x] Definir convenciones de nombres (`*_vs.gd`, `vslice_*`) [S] — 03-Diseno: prefijo vslice_ para scripts/QAs/escenas del slice + data/vslice/; sufijo *_vs.gd reservado a variantes de prueba (2026-10-22 S32)
 - [ ] Definir que la deuda técnica se registre sin silenciarla [S]
 
 ## U. Pipeline de Assets (M108/M46/M47)
@@ -222,7 +222,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 45 · Pendientes: 86 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 62 · Pendientes: 69 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).

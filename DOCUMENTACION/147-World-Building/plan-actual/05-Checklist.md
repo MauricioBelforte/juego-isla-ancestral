@@ -63,7 +63,8 @@
 - [x] Definir origen de los Jardineros [M]
   · evidencia: 03-Diseno.md secc. Historia de las islas y Arquitectos (cola total, Reflection-Beam-1.0, T84, 2026-10-22)
 - [x] Definir su relación con cultivos y bosques (M33/M50) [M]
-- [ ] Definir el "idioma del viento" (pistas ambientales, M148) [C]
+- [x] Definir el "idioma del viento" (pistas ambientales, M148) [C]
+  · evidencia: 03-Diseno.md (cola total, Reflection-Beam-1.0, T114, 2026-10-22)
 - [x] Definir su dispersión (no murieron: se dispersaron) [M]
   · evidencia: 03-Diseno.md secc. Legado y conexiones (cola total, Reflection-Beam-1.0, T86, 2026-10-22)
 - [x] Definir legado jugable: semillas sagradas, festivales de siembra [M]
@@ -148,9 +149,12 @@
 
 - [x] Definir sistema de símbolos de los Arquitectos [M]
 - [x] Definir sistema de símbolos de los Jardineros [M]
-- [ ] Definir un símbolo por Sello (M153) [M]
-- [ ] Definir símbolos en reliquias y murales (M73/M148) [M]
-- [ ] Definir que los símbolos se decodifiquen por progresión, no por texto [C]
+- [x] Definir un símbolo por Sello (M153) [M]
+  · evidencia: 03-Diseno.md (cola total, Reflection-Beam-1.0, T114, 2026-10-22)
+- [x] Definir símbolos en reliquias y murales (M73/M148) [M]
+  · evidencia: 03-Diseno.md (cola total, Reflection-Beam-1.0, T114, 2026-10-22)
+- [x] Definir que los símbolos se decodifiquen por progresión, no por texto [C]
+  · evidencia: 03-Diseno.md (cola total, Reflection-Beam-1.0, T114, 2026-10-22)
 
 ## N. Lenguaje Antiguo (RF18)
 
@@ -282,9 +286,11 @@
 
 ## Z. Cierre y Trazabilidad
 
-- [ ] Definir trazabilidad bloque de lore → módulos consumidores [M]
+- [x] Definir trazabilidad bloque de lore → módulos consumidores [M]
+  · evidencia: 03-Diseno.md (cola total, Reflection-Beam-1.0, T114, 2026-10-22)
 - [x] Definir revisión del canon contra M152 (principios) [M]
-- [ ] Definir revisión contra M153 (contrato O1-O19) [M]
+- [x] Definir revisión contra M153 (contrato O1-O19) [M]
+  · evidencia: 03-Diseno.md (cola total, Reflection-Beam-1.0, T114, 2026-10-22)
 - [x] Definir coordinación con M149 (nomenclatura) para ids definitivos [M]
 - [x] Definir revisión periódica de la biblia con el usuario (dueño del canon) [S]
 ## Verificación (2026-09-02 05:30 — deepseek-v4-flash-vision-exp / Kilo Code)
