@@ -189,3 +189,27 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[VEH]` en 
 - No hay nodos 3D de vehiculos en el repo: la iter. 2 (V1/V2) sigue pendiente con dueno visual. El controller sigue siendo logico puro (plano XZ, sin altitud/profundidad).
 - V1 (`validate_vehicles.gd`) quedo `[ ]` a proposito: el archivo existe y valida fisica + catalogo + presupuestos, pero streaming y colisiones no se pueden validar hasta la iter. 2. Entregable parcial documentado, no inflado.
 - No toque `achievement_service.gd` (M72): otro agente lo esta editando en el worktree compartido (mtime 15:13 de hoy, +31/-14 sin commitear) y quedo con Python-ismos `False`/`True` que rompen el autoload al boot. Reportado al director.
+
+## 8. Notas del Agente — tanda 3 (Step-5-WorkBuddy, 2026-10-21, Log 2098)
+
+**Modelo:** Step-5-WorkBuddy
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-21
+**Estado:** tanda 3 sobre las areas V1 pendientes (GO del director, msg 157): ciclo barco end-to-end + validador ampliado + medicion de dependencias. M67 = 29 [x] / 102 [ ] / 0 [?] = 131.
+
+### Lo que hice en la tanda 3 (Log 2098)
+- Bloque NUEVO `_test_ciclo_barco` en `test_vehiculos.gd` (10 checks, va al final de `_run()` para no alterar la premisa de los bloques previos — trampa M23): a pie/docked -> enter -> zarpar -> 2 s acelerando (crucero 6 m/s, desplazamiento medido por Vector3) -> atracar camino real `[VEH-DOCK]` -> salir -> controller liberado. Suite 53 -> **63 checks / 0 fallos / EXIT 0 x3**; piso 53 -> **63 MEDIDO**.
+- Guardián en rojo por inyeccion de RUNTIME (variable `Variant = null`, no parse error): "solo 53 checks (minimo 63)", EXIT 1. Reconfirma el hallazgo de t2: el aborto intra-funcion no lo nombra `_fin`, lo detecta el piso. Sonda borrada en la misma operacion (0 probes en el arbol).
+- `validate_vehicles.gd` +bloque `_validar_ciclo_barco` (6 checks): 40 -> **46 checks / 0 fallos / EXIT 0 x3**.
+- Regresiones medidas HOY (no heredadas): M28 `test_viajes.gd` EXIT 0 / 0 SCRIPT ERROR; M71 `test_progresion.gd` 83/0/EXIT 0.
+- Flip V2 (L195) con cita real. Notas medidas en L52 (streaming), L53 (colisiones), L194 (validador), V3/V4 (eje vertical ausente).
+
+### Medicion de dependencias de las areas V1 (hoy)
+- `chunk_target`: 0 archivos fuera de `validate_vehicles.gd` -> M10/M61 NO exponen la API. `vehicle_streaming.gd`: no existe. Streaming queda con dueno externo M10/M61.
+- Colisiones de vegetacion: `grep colision` en `scripts/` solo da camera/construccion/animales_ia; ninguno es colision de terreno para vehiculos. Dueno externo M50.
+- Sin nodos 3D de vehiculos: el controller sigue plano XZ. Despegar/aterrizar/sumergir/emerger (V3/V4) requieren iter. 2 visual.
+
+### Lo que NO esta resuelto (honestidad)
+- V1 sigue `[ ]` por decision explicita del director (msg 157): el validador existe (46 checks) pero reporta PENDIENTES (streaming, colisiones, HUD, camara, audio, animaciones, mejoras, personalizacion, baul real, controles) y eso no consume el item.
+- Los 102 `[ ]` restantes siguen con duenos externos; sin corrida no se flippean.
+- 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos tocados. Flip ofrecido a revertir.

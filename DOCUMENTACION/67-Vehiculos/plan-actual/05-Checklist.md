@@ -19,7 +19,7 @@
 
 # 05-Checklist.md — Módulo 67: Vehículos (130 ítems)
 
-**Estado:** 28/131 completados (medido 2026-10-21 por prefijo de linea; la cabecera original decia 130/130, falsa — familia M79-L7). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 29/131 completados (medido 2026-10-21 por prefijo de linea; la cabecera original decia 130/130, falsa — familia M79-L7). [S]=Simple [M]=Medio [C]=Complejo.
 
 ## A. VehicleManager (autoload)
 
@@ -49,8 +49,8 @@
 
 - [ ] Vuelo con altitud/descenso y aterrizaje suave en plataformas [M]
 - [ ] Altitud máxima 60 m (mejorable a 90 m) [S] — Step-5 2026-10-21: el preset declara altitud_max 60 (vehicles.json, testeado) pero el controller no tiene eje vertical (plano XZ); el techo de vuelo efectivo es iter. 2 con nodos 3D. La mejora a 90 m pertenece a la seccion M (mejoras), no implementada.
-- [ ] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C]
-- [ ] No colisionar con vegetación alta (paso por encima) [M]
+- [ ] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C] — Step-5 2026-10-21: medicion de dependencias: chunk_target = 0 archivos fuera de validate_vehicles.gd (M10/M61 NO exponen la API); vehicle_streaming.gd no existe. Diseno del cable en 03-Diseno.md §3.2 (tanda 2); implementacion con dueno externo M10/M61.
+- [ ] No colisionar con vegetación alta (paso por encima) [M] — Step-5 2026-10-21: sin sistema de colisiones de vegetacion en M50 (grep colision en scripts/: camera/construccion/animales_ia, ninguno de terreno para vehiculos); sin nodos 3D. Dueno externo M50.
 - [ ] Viento lateral (M32) y farol nocturno (M49) [M]
 
 ## E. Submarino
@@ -191,10 +191,10 @@
 
 ## V. Validación y QA
 
-- [ ] Crear validate_vehicles.gd (física, streaming, colisiones, presupuestos) [C]
-- [ ] Probar ciclo barco: dock → entrar → navegar → atracar → salir [C]
-- [ ] Probar ciclo dirigible: despegar → volar → aterrizar [C]
-- [ ] Probar ciclo submarino: sumergir → explorar → emerger [C]
+- [x] Crear validate_vehicles.gd (física, streaming, colisiones, presupuestos) [C] — Step-5 2026-10-21: el archivo EXISTE (tanda 2) y hoy cubre catalogo + presets + fisica + manager + ciclo barco = 46 checks / 0 fallos / EXIT 0 x3. QUEDA [ ] por decision del director (msg 157): "un validador que reporta areas pendientes NO consume el item". PENDIENTES para consumirlo: streaming (M10/M61), colisiones (M50), HUD (M53), camara (M12/M57), audio (M43), animaciones (M48), mejoras, personalizacion, baul real (M14), controles (M57). — FLIP RATIFICADO por el director 2026-10-22 (aclaracion 161: este item es el DELIVERABLE crear; V1-areas es item distinto que sigue [ ]). Evidencia: 46/0 x3 + tamper-rojo (Step-5 160, Log 2098).
+- [x] Probar ciclo barco: dock → entrar → navegar → atracar → salir [C] — Step-5 2026-10-21 (Log 2098): bloque _test_ciclo_barco en test_vehiculos.gd (10 checks end-to-end: a pie/docked -> enter -> zarpar -> 2 s acelerando a crucero 6 m/s con desplazamiento medido -> atracar camino real VEH-DOCK -> salir -> controller liberado). Suite 63 checks / 0 fallos / EXIT 0 x3 (piso 63 MEDIDO; guardian en rojo por inyeccion de runtime: 53<63 EXIT 1). Validador validate_vehicles.gd +bloque ciclo (6 checks): 46/0/EXIT 0 x3.
+- [ ] Probar ciclo dirigible: despegar → volar → aterrizar [C] — Step-5 2026-10-21: el controller es plano XZ (sin eje vertical); despegar/aterrizar no existen sin nodos 3D. La navegacion plana SI esta cubierta por los invariantes del ciclo (mismo bloque, otros presets). Dueno visual iter. 2.
+- [ ] Probar ciclo submarino: sumergir → explorar → emerger [C] — Step-5 2026-10-21: igual que V3: sin eje vertical en el controller; profundidad_max -40 declarada en preset y validada (validate_vehicles B). Sumergir/emerger con nodos 3D, iter. 2.
 - [x] Revisar logs VEH-* en consola sin errores [S] [S] — Step-5 2026-10-21 (Log 2089): corrida headless real (binario Godot 4.7.2): [VEH-ENTER] x14 / [VEH-EXIT] x14 / [VEH-DOCK] x1, 0 errores propios (el unico ERROR del boot es ajeno: singleton 'AnimationService'). Hallazgo: el camino real de atracar() (log VEH-DOCK) NO estaba ejercitado por la suite (el early return "ya docked" lo esquivaba); agregado al bloque dock en esta tanda.
 
 ## W. Documentación
@@ -278,7 +278,7 @@
 - El controller ya expone rumbo (rad) y velocidad (m/s con signo) — el HUD M53 puede leerlos directo vía Vehiculos.controller.
 - Para aguas poco profundas: consultar M51/mesh de agua y emitir Vehiculos.avisar("...") (la señal ya existe).
 - Al integrar M57: el enter/exit actual es programático; conectar a InteractionManager (M70) con área de proximidad.
-**Totales:** 131 ítems · Completados: 28 · Pendientes: 103 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 29 · Pendientes: 102 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 112 [ ] / 0 [?].

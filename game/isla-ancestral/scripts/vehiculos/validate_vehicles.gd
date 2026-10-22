@@ -12,6 +12,7 @@
 #   C) invariantes de física del controller (clamp, frenado, reversa, delta,
 #      wrap de rumbo, independencia 30/60 FPS)
 #   D) integración con el autoload VehicleManager (si está presente)
+#   E) ciclo barco end-to-end (tanda 3, checklist V2)
 # NO cubre (reportado como PENDIENTE, no como fallo): streaming (M10/M61),
 # colisiones (M50), HUD (M53), cámara (M12/M57), audio (M43), mejoras,
 # personalización, baúl real (M14) — verbos de la iter. 2 con dueños externos.
@@ -34,6 +35,7 @@ func _run() -> void:
 	_validar_presets_diseno()
 	_validar_fisica()
 	_validar_manager()
+	_validar_ciclo_barco()
 	_reportar_pendientes()
 	_resumen()
 
@@ -176,6 +178,32 @@ func _validar_manager() -> void:
 	_check(not bool(res2.ok), "segundo enter rechazado (uno a la vez)")
 	var res3: Dictionary = vm.exit()
 	_check(bool(res3.ok), "exit OK")
+
+
+func _validar_ciclo_barco() -> void:
+	# Tanda 3 Step-5 2026-10-21 (checklist V2): ciclo end-to-end
+	# dock -> entrar -> navegar -> atracar -> salir sobre el autoload real.
+	var vm := root.get_node_or_null("Vehiculos")
+	if vm == null:
+		_ok("VehicleManager no presente: se omite ciclo barco")
+		return
+	var res: Dictionary = vm.enter("barco")
+	_check(bool(res.ok), "ciclo barco: entrar OK")
+	res = vm.zarpar()
+	_check(bool(res.ok) and not bool(vm.docked), "ciclo barco: zarpar OK, navegando")
+	var ctrl: RefCounted = vm.controller
+	var dist_v := Vector3.ZERO
+	for i in range(20):
+		vm.tick_conduccion(0.1, true, 0, false)
+		dist_v += ctrl.desplazamiento(0.1)
+	_check(absf(float(ctrl.velocidad) - 6.0) < 0.01, "ciclo barco: crucero 6 m/s en 2 s: %.2f" % float(ctrl.velocidad))
+	_check(dist_v.length() > 1.0, "ciclo barco: se desplaza al navegar: %.2f m" % dist_v.length())
+	res = vm.atracar(null)
+	_check(bool(res.ok) and bool(vm.docked), "ciclo barco: atracar OK (VEH-DOCK)")
+	res = vm.exit()
+	_check(bool(res.ok) and not vm.esta_en_vehiculo() and vm.controller == null, "ciclo barco: salir OK y controller liberado")
+	if not vm.docked:
+		vm.docked = true
 
 
 func _reportar_pendientes() -> void:

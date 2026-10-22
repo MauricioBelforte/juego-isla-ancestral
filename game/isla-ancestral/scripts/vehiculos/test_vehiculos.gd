@@ -16,8 +16,8 @@ extends SceneTree
 #     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
 #     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
 #     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
-#     Piso actualizado a 61 por la tanda 3 (Step-5, 2026-10-21): 53 medidos + 8 del ciclo barco end-to-end.
-const CHECKS_MINIMOS := 61
+#     Piso actualizado a 63 por la tanda 3 (Step-5, 2026-10-21): 53 medidos + 10 del ciclo barco end-to-end.
+const CHECKS_MINIMOS := 63
 const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_enter_exit", "_test_fisica_acotada", "_test_reversa", "_test_giro_riel", "_test_dock_zarpar", "_test_eventos", "_test_persistencia", "_test_delta_frameindependiente", "_test_salida_velocidad", "_test_ciclo_barco"]
 var _checks: int = 0
 var _wb_vistos: Dictionary = {}
@@ -317,13 +317,13 @@ func _test_ciclo_barco() -> void:
 	res = _vm.zarpar()
 	_check(bool(res.ok) and not bool(_vm.docked), "ciclo barco: zarpar OK, navegando")
 	var ctrl: RefCounted = _vm.controller
-	var dist: float = 0.0
+	var dist_v := Vector3.ZERO
 	for i in range(20):
 		_vm.tick_conduccion(0.1, true, 0, false)
-		dist += float(ctrl.desplazamiento(0.1))
+		dist_v += ctrl.desplazamiento(0.1)
 	var vel: float = float(ctrl.velocidad)
 	_check(absf(vel - 6.0) < 0.01, "ciclo barco: acelera a crucero 6 m/s en 2 s: %.2f" % vel)
-	_check(dist > 1.0, "ciclo barco: el vehículo se desplaza al navegar: %.2f m" % dist)
+	_check(dist_v.length() > 1.0, "ciclo barco: el vehículo se desplaza al navegar: %.2f m" % dist_v.length())
 	res = _vm.atracar(null)
 	_check(bool(res.ok) and bool(_vm.docked), "ciclo barco: atracar OK (camino real VEH-DOCK)")
 	res = _vm.exit()

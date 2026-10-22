@@ -1289,3 +1289,20 @@ M104, M88, M160.
   - TRAMPA propia: el 1er intento de rojo del validador uso `sed` con sintaxis GNU no soportada -> no tampeo nada y el "ROJO" salio EXIT 0; detectado por el exit code antes de publicar (el sha256 antes/despues coincidia). Rehecho con sustitucion simple.
 - **Pendientes director:** sync fila 67 del GLOBAL a 28/131; commit de los paths de la tanda por CRON C; flip visto bueno de los 3 flips (ofrecidos a revertir); veredicto sobre V1 parcial; tanda siguiente (M67 tanda 3 o alternar).
 - Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 ediciones a CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot ni 05-Checklist ajenos. EOL preservado por archivo (05 M67 CRLF; 04 M67 y este backlog LF).
+
+---
+
+## Vuelta 2026-10-21 21:2x (tracker 159) - RAMA 1 msgs 157/159 + RAMA 2 M67 tanda 3 (Log 2098, canal 160)
+
+- **RAMA 1:** dos entrantes del director. **157** (23:12): M67 t2 RATIFICADA (3 flips visto bueno; fila 67 sync 28/131 verificada en disco; CRON C commiteo la tanda; GO tanda M67 #3 areas V1 o alternar M23). **159** (00:15 del 22, llego durante mi tanda): confirma el GO "con tu plan tal cual" — pero CONTRADICE al 157 sobre L194 (alla "V1 queda [ ]", aca "flip L194"). Mi 158 anuncio el flip L194 cuando el 157 ya lo habia dejado [ ] (inconsistencia mia confesada); mi ejecucion siguio el 157 (no inflar) y pedi decision explicita en el informe. Acuse+informe en msg **160**.
+- Numeracion: el director tomo el 159 de mi pool (13ra colision familia 092/097/103/106/124); mi 160 = max(archivos)+1 = cabeza. Pool consumido 160, re-expandido a 161..252 (92 numeros).
+- **RAMA 2 — M67 tanda 3** (areas V1, GO 157/159):
+  - `test_vehiculos.gd` 53 -> **63 checks / 0 fallos / EXIT 0 x3**: bloque NUEVO `_test_ciclo_barco` (10 checks) end-to-end a pie/docked -> enter -> zarpar -> 2 s a crucero 6 m/s con desplazamiento medido (Vector3) -> atracar camino real [VEH-DOCK] -> salir -> controller liberado. Va al FINAL de `_run()` (trampa M23: no alterar la premisa de otros bloques). Piso 53 -> **63 MEDIDO**.
+  - **Guardián EN ROJO por inyeccion de RUNTIME** (`Variant = null`, no parse error): "solo 53 checks (minimo 63)", EXIT 1. Reconfirma: el aborto intra-funcion no lo nombra `_fin`, lo detecta el piso. La 1ra inyeccion (`null.get_name()` directo) fue PARSE ERROR estatico = no probaba el guardian (trampa 27), rehecha. Sonda borrada en la misma operacion (0 probes).
+  - Trampa propia nueva: `float(Vector3)` no existe en GDScript -> "Nonexistent 'float' constructor" abortaba mi bloque (58<61, el piso la detecto); corregido acumulando Vector3 como el bloque de delta.
+  - `validate_vehicles.gd` 40 -> **46 checks / 0 fallos / EXIT 0 x3** (+bloque ciclo 6 checks).
+  - Regresiones HOY (no heredadas): M28 test_viajes.gd EXIT 0 / 0 SCRIPT ERROR; M71 test_progresion.gd 83/0/EXIT 0.
+  - **1 FLIP con cita real: L195 (V2 ciclo barco) -> [x].** M67 = **29 [x] / 0 [?] / 102 [ ] = 131** (prefijo; 05 verificado por bytes: 285 CRLF preservados, sin BOM, 0 FFFD, diff 8/8).
+  - Notas medidas sin flip: L52 streaming (chunk_target = 0 archivos fuera del validador; M10/M61 no exponen API; vehicle_streaming.gd ausente), L53 colisiones (grep colision: camera/construccion/animales_ia, ninguno de terreno), L194 (decision 157 citada), L196/L197 (eje vertical ausente, iter. 2 visual).
+  - 04-Codigo §8 notas tanda 3 + medicion de dependencias. Log **2098** (ASCII puro/CRLF 72/sin BOM, 3.896 B; cabeza del pool medida justo antes = 2098 -> pool 2099).
+- Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos. Flip ofrecido a revertir. Pendientes director: decision L194 (157 vs 159), sync fila 67 a 29/131, commit CRON C de 5 paths, visto bueno V2, tanda siguiente (M23 residual o mas M67).

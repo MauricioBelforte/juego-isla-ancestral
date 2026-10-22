@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T00:20:30",
+ "ultimo_update": "2026-10-22T00:50:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 352
  },
  "step_5": {
-  "estado": "157: M67 t2 ratificada (suite 53/0 endurecida + validador 40/0 con rojo honesto + hallazgo atracar); fila 67 28/131; V1 parcial [ ] honesto; 2 trampas confesadas aceptadas; GO t3",
+  "estado": "160/161: T3 M67 ratificada (63/0 + 46/0 + regresiones limpias) y ACLARACION L194 resuelta (flip ratificado; V1-areas [ ] aparte); fila 67 30/131; GO t4",
   "pendientes_real": 203,
-  "acuse_enviado": 157
+  "acuse_enviado": 161
  },
  "ds_oc": {
   "estado": "activo - ciclos 64-81 M62 y cursos",
@@ -128,7 +128,7 @@
   "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 23:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes (step-5 M67 t3/alternar, beam doble tanda T14, minimax suites-M17-al-runner GO, agnes aislamiento colgados, hy3 #55, deepseek 5 rieles backend); SIN repoblacion",
+ "crons_vuelta_d": "CRON D 00:15: script 0 pendientes; backlogs >= 100 todos; rieles vigentes (beam doble tanda T16 sellada, step-5 M67 t3 GO, minimax multiplicar wrapper, agnes M20-M72 rieles, hy3 #55, deepseek backend, ds-oc T-19 reescribir 190); decision cozy del fundador pendiente: coste_ao crafting (recom. alinear a 0) + ROI herramientas (recom. A documentar) + economia P1 single-pass (recom. adoptar); SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
@@ -151,8 +151,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T16 sellada 035: coste_ao inconsistente VERIFICADO (6 recetas 0 vs talisman 10) - derivado a dueno M16 + fundador (recom: alinear a 0, cozy recursos-como-costo); 5 ciclos re-verificador 5 hallazgos",
-  "acuse_enviado": 35
+  "estado": "T17 sellada 037: 69 [M] M144 cerrados con citacion por seccion; muestreo 1 degradado (retencion 90d sin fuente); 15 tandas consolidadas; M144 99/105 (4 [C] restan)",
+  "acuse_enviado": 37
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {

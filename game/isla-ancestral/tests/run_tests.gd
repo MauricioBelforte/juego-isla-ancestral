@@ -94,6 +94,22 @@ func _initialize() -> void:
 func _descubrir() -> void:
 	var archivos: Array[String] = []
 	_barrer(TESTS_DIR, archivos)
+	# Suites de MODULO (scripts/<modulo>/test_*.gd): hasta ahora NUNCA se descubrian (el runner
+	# solo recorria res://tests/) -> 422 suites invisibles, 13 en rojo que nadie veia (censo
+	# ratificado por el director, msg 025). Ahora se descubren y pasan por la MISMA regla:
+	# las SceneTree van al POOL (paralelo) si no escriben user:// ni lanzan OS.execute; las demas,
+	# en serie. Las que no son SceneTree se ignoran aqui (son GdUnit4 y viven en sus modulos).
+	for d in DirAccess.get_directories_at("res://scripts"):
+		var sub := "res://scripts/" + d
+		for f in DirAccess.get_files_at(sub):
+			if f.begins_with("test_") and f.ends_with(".gd"):
+				var ruta := sub + "/" + f
+				var fd := FileAccess.open(ruta, FileAccess.READ)
+				if fd != null:
+					var cab := fd.get_buffer(min(fd.get_length(), 4096)).get_string_from_utf8()
+					fd.close()
+					if cab.contains("extends SceneTree"):
+						archivos.append(ruta)
 	archivos.sort()
 	var dirs_gdunit: Dictionary = {}
 	for f in archivos:
