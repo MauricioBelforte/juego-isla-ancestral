@@ -67,11 +67,22 @@
 # luminiscente", OBJ-ITE-035 "Miel", OBJ-NAT-004 "Flor silvestre"). Bloque O
 # afirma carga, fuente, unicidad de consecuencias/diarios y corrida end-to-end
 # de las 6.
+# Iter. 11 (Step-5-WorkBuddy, 2026-10-22, Log 2134): cluster Secretas del
+# 03-Diseno L38 (5 cadenas ocultas desbloqueadas por mundo: mapa secreto,
+# cristal oculto, diario antiguo, pergamino mistico, mascara ceremonial).
+# NPC REALES de data/villagers/ (nico_gato, vera_ardilla, sofia_buho,
+# teo_conejo, luna_zorra) y objetos REALES de data/items/ por campo id
+# (OBJ-SEC-002 "Mapa secreto", OBJ-SEC-003 "Cristal oculto", OBJ-SEC-005
+# "Diario antiguo", OBJ-ART-002 "Pergamino mistico", OBJ-ART-004 "Mascara
+# ceremonial"). Las 5 nacen oculta:true -> invisibles en
+# cadenas_disponibles() hasta iniciarse (misma regla que
+# cadena-secretta-luciernagas, bloque E). Bloque P afirma carga, fuente,
+# ocultamiento, unicidad de consecuencias/diarios y corrida end-to-end de 2.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -79,12 +90,13 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 10, 2026-10-22, Log 2131): 316 checks con los
-# bloques A-O (iter. 9 tenia 258 con A-N; el bloque O del cluster Amistad sumo
-# 58: 12 carga/fuente + 2 unicidad de flags + 1 diarios + 7x6 end-to-end + 1
-# puente diario). Medido: 316/0/EXIT 0 x3. El guardian se probo EN ROJO por
-# inyeccion de runtime sobre el bloque O (ver Log 2131).
-const CHECKS_MINIMOS := 316
+# Piso MEDIDO en verde (iter. 11, 2026-10-22, Log 2134): 351 checks con los
+# bloques A-P (iter. 10 tenia 316 con A-O; el bloque P del cluster Secretas sumo
+# 35: 15 carga/fuente/oculta + 2 ocultamiento + 1 visibilidad + 2 unicidad +
+# 1 diarios + 2x7 end-to-end + 1 reset + 1 puente diario + 1 de cierre).
+# Medido: 351/0/EXIT 0 x3. El guardian se probo EN ROJO por inyeccion de
+# runtime sobre el bloque P (ver Log 2134).
+const CHECKS_MINIMOS := 351
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -121,6 +133,7 @@ func _run() -> void:
 	_test_objetos()
 	_test_familias()
 	_test_amistad()
+	_test_secretas()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -153,7 +166,8 @@ func _test_carga() -> void:
 	# Iter. 6 (Log 2117): +3 del cluster Lugares -> 13 + 1 = 14.
 	# Iter. 7 (Log 2125): +4 del cluster Ruinas -> 17 + 1 = 18.
 	# Iter. 10 (Log 2131): +6 del cluster Amistad -> 32 + 1 = 33.
-	_check(_h.cadenas_count() == 33, "33 cadenas cargadas tras el merge (32 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 11 (Log 2134): +5 del cluster Secretas -> 37 + 1 = 38.
+	_check(_h.cadenas_count() == 38, "38 cadenas cargadas tras el merge (37 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -380,7 +394,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 32, "catálogo principal con 32 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad): %d" % principal.size())
+	_check(principal.size() == 37, "catálogo principal con 37 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -403,7 +417,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 33, "33 cadenas cargadas en runtime (32 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 38, "38 cadenas cargadas en runtime (37 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -1108,3 +1122,109 @@ func _test_amistad() -> void:
 		_check(not diary.esta_registrada("mision_cadena-regalo-favorito"),
 			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
 	_fin("O")
+
+func _test_secretas() -> void:
+	# Iter. 11 (Log 2134): cluster Secretas del 03-Diseno L38 — 5 cadenas ocultas
+	# "desbloqueadas por mundo". Misma regla de ocultamiento que
+	# cadena-secretta-luciernagas (bloque E): oculta:true -> no figuran en
+	# cadenas_disponibles() hasta iniciarse.
+	_h.restore_save_data({})
+	var nuevas := ["cadena-mapa-secreto", "cadena-cristal-oculto", "cadena-diario-antiguo",
+		"cadena-pergamino-mistico", "cadena-mascara-ceremonial"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+		_check(bool((_h.get_cadena(cid).get("oculta", false))), "%s es oculta" % cid)
+	# Ocultamiento: ninguna figura en disponibles antes de iniciarse
+	var disponibles: Array = _h.cadenas_disponibles()
+	var expuestas := 0
+	for cid in nuevas:
+		for d in disponibles:
+			if String(d) == cid:
+				expuestas += 1
+	_check(expuestas == 0, "las 5 secretas NO estan en disponibles antes de iniciar (%d expuestas)" % expuestas)
+	# Al iniciar una, pasa a ser visible (regla de descubrimiento por mundo)
+	_h.iniciar_cadena("cadena-mapa-secreto")
+	disponibles = _h.cadenas_disponibles()
+	var visible := false
+	for d in disponibles:
+		if String(d) == "cadena-mapa-secreto":
+			visible = true
+	_check(visible, "cadena-mapa-secreto visible tras iniciarse")
+	# Estado limpio para los end-to-end: la cadena ya quedo iniciada por el check
+	# de visibilidad y no se puede iniciar dos veces (misma regla que el resto).
+	_h.restore_save_data({})
+	# Anti-repeticion: 5 flags de consecuencia nuevos, sin colision con los 33 previos
+	# (27 previos a amistad + 6 de amistad)
+	var existentes := ["faro_encendido", "invernadero_abierto", "plaza_decorada",
+		"luciernagas_vueltas", "biblioteca_iluminada", "pan_fiesta_horneado",
+		"banco_plaza_reparado", "manto_niebla_terminado", "red_pescador_reparada",
+		"sendero_bosque_senalado", "jarabe_lunar_listo", "jardin_florecido",
+		"cofradia_activa", "molino_funcionando", "biblioteca_quemada_rescatada",
+		"observatorio_alineado", "estacion_reparada", "puente_cruzable",
+		"relicto_devuelto", "gema_devuelta", "receta_heredada", "llave_encontrada",
+		"patrulla_nocturna", "brujula_calibrada", "molienda_familiar_restaurada",
+		"red_del_abuelo_reparada", "vigilia_de_los_guardas",
+		"regalo_favorito_entregado", "sentadilla_de_pesca_amistosa", "paseo_con_amiga",
+		"historia_de_ficcion_escrita", "puesto_de_mercedes_ordenado",
+		"correspondencia_retomada"]
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag) or existentes.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 5, "5 consecuencias distintas en las cadenas secretas: %d" % flags.size())
+	_check(unicos, "consecuencias secretas sin colision con las previas (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 5, "5 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# End-to-end 1: mapa secreto (nico_gato REAL; OBJ-SEC-002 "Mapa secreto" REAL de data/items/)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"OBJ-SEC-002": 1})
+	var res1: Dictionary = _h.iniciar_cadena("cadena-mapa-secreto")
+	_check(bool(res1.ok), "iniciar cadena-mapa-secreto OK")
+	res1 = _h.reportar_paso("cadena-mapa-secreto", "hablar", "nico_gato")
+	_check(bool(res1.ok), "mapa p1 hablar nico_gato OK")
+	res1 = _h.reportar_paso("cadena-mapa-secreto", "explorar", "sendero_secreto")
+	_check(bool(res1.ok), "mapa p2 explorar sendero_secreto OK")
+	res1 = _h.reportar_entrega("cadena-mapa-secreto")
+	_check(bool(res1.ok), "mapa p3 entregar OBJ-SEC-002 OK (inventario)")
+	res1 = _h.reportar_paso("cadena-mapa-secreto", "puzzle", "marcas-en-la-corteza")
+	_check(bool(res1.ok), "mapa p4 puzzle OK")
+	_check(_h.esta_completada("cadena-mapa-secreto"), "cadena-mapa-secreto completada end-to-end")
+	_check(ws_has("sendero_secreto_revelado"), "consecuencia sendero_secreto_revelado aplicada (M21)")
+	# End-to-end 2: mascara ceremonial (luna_zorra REAL; OBJ-ART-004 "Mascara ceremonial" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-ART-004": 1})
+	var res2: Dictionary = _h.iniciar_cadena("cadena-mascara-ceremonial")
+	_check(bool(res2.ok), "iniciar cadena-mascara-ceremonial OK")
+	res2 = _h.reportar_paso("cadena-mascara-ceremonial", "hablar", "luna_zorra")
+	_check(bool(res2.ok), "mascara p1 hablar luna_zorra OK")
+	res2 = _h.reportar_paso("cadena-mascara-ceremonial", "explorar", "bosque_nocturno")
+	_check(bool(res2.ok), "mascara p2 explorar bosque_nocturno OK")
+	res2 = _h.reportar_entrega("cadena-mascara-ceremonial")
+	_check(bool(res2.ok), "mascara p3 entregar OBJ-ART-004 OK (inventario)")
+	res2 = _h.reportar_paso("cadena-mascara-ceremonial", "puzzle", "rostro-de-corteza")
+	_check(bool(res2.ok), "mascara p4 puzzle OK")
+	_check(_h.esta_completada("cadena-mascara-ceremonial"), "cadena-mascara-ceremonial completada end-to-end")
+	_check(ws_has("mascara_ceremonial_restaurada"), "consecuencia mascara_ceremonial_restaurada aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# cadena-biblioteca en H, cadena-jardines en K, cadena-puente en L,
+	# cadena-brujula en M, cadena-guardas en N y cadena-regalo-favorito en O).
+	# No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-mapa-secreto"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	_fin("P")

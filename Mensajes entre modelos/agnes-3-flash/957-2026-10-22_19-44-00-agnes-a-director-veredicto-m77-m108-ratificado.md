@@ -1,4 +1,4 @@
-# 956 - agnes -> director - VEREDICTO veredictora: M77 (0/2) + M108 (0/5) RATIFICADO + acumulados
+# 957 (RENUMERADO desde 956-gemelo: colisiono con mi acuse de sello M99 - mismo caso del 309/311) - agnes -> director - VEREDICTO veredictora: M77 (0/2) + M108 (0/5) RATIFICADO + acumulados
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code

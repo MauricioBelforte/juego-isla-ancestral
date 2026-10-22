@@ -1440,7 +1440,7 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - [ ] (23-Historias-Secundarias) - [ ] Crear el evento de vendimia [M] — **Dueño M32:** evento estacional; 0 en disco.
 - [ ] (23-Historias-Secundarias) - [ ] Crear el evento de marea [M] — **Dueño M32:** evento estacional; 0 en disco.
 - [ ] (23-Historias-Secundarias) - [ ] Crear el evento de eclipse [M] — **Dueño M32:** evento estacional; 0 en disco (el eclipse de cadena-faro es contexto narrativo, no el evento de M32).
-- [ ] (23-Historias-Secundarias) - [ ] Crear 5 cadenas secretas ocultas [M]
+- [x] (23-Historias-Secundarias) - [x] Crear 5 cadenas secretas ocultas [M] — Step-5-WorkBuddy 2026-10-22 (iter. 11, Log 2134): 5 cadenas en data/historias/secundarias.json (32 -> 37) con NPC REALES de data/villagers/ (nico_gato, vera_ardilla, sofia_buho, teo_conejo, luna_zorra) y objetos REALES de data/items/ por campo id (OBJ-SEC-002 «Mapa secreto», OBJ-SEC-003 «Cristal oculto», OBJ-SEC-005 «Diario antiguo», OBJ-ART-002 «Pergamino mistico», OBJ-ART-004 «Mascara ceremonial»); las 5 nacen oculta:true (invisibles en cadenas_disponibles hasta iniciarse); consecuencias peladas unicas 37/37 y capitulos de diario unicos 37/37. Suite test_historias.gd bloque P: 351 checks/0 fallos/EXIT 0 x3 + guardian EN ROJO por inyeccion de runtime (317<351). Regresiones M22 41/0, M71 83/0, M59 43/0+4/0+7/0, M55 0 fallos. M23 = 63 [x] / 40 [ ] / 2 [?] = 105.
 - [ ] (23-Historias-Secundarias) - [ ] Documentar historias estacionales y secretas [S]
 - [ ] (23-Historias-Secundarias) - [ ] Crear 8 misiones de exploración (brújula, fauna, cronitado) [M]
 - [ ] (23-Historias-Secundarias) - [ ] Documentar cadenas y misiones de exploración [S]
@@ -1549,3 +1549,52 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - [ ] (69-Fast-Travel) - [ ] Test de localización: posicionamiento visual ajustado [M]
 - [ ] (69-Fast-Travel) - [ ] Test de fallback: 3 fallos seguidos ? modo seguro [M]
 - [ ] (69-Fast-Travel) - [ ] Test de perfilado: sin allocs en frame [M]
+
+## Vuelta 2026-10-22 17:0x (tracker 179) - Step-5-WorkBuddy
+
+- RAMA 1: unico entrante 179 del director (acuse de mi 178: commit autorizado para su ronda,
+  flip L84 ratificado, move de los 3 scripts-prueba_tmp_familias_*.py autorizado, REPOSICION con
+  orden explicito: Secretas L38 -> Comerciantes-cadenas L36 (integracion M37 afuera) -> Puzzles
+  L46 -> Investigacion L45). Acusado con mi 180 (5.239 B, UTF-8 sin BOM + LF, verificado por
+  bytes). Numeracion: 180 = head del pool medido (coincide con ultimo+1); consumido,
+  reeexpandido mental: quedan 88 numeros con head 181. Tracker -> 179.
+- RAMA 2 (tanda ordenada): M23 iter. 11 = cluster Secretas del 03-Diseno L38. 5 cadenas ocultas
+  nuevas en secundarias.json (32 -> 37): cadena-mapa-secreto (nico_gato + OBJ-SEC-002),
+  cadena-cristal-oculto (vera_ardilla + OBJ-SEC-003), cadena-diario-antiguo (sofia_buho +
+  OBJ-SEC-005), cadena-pergamino-mistico (teo_conejo + OBJ-ART-002), cadena-mascara-ceremonial
+  (luna_zorra + OBJ-ART-004). NPC y objetos REALES verificados en disco (campo id dentro del
+  .tres / archivo en data/villagers/). Consecuencias peladas unicas 37/37; capitulos de diario
+  unicos 37/37. Edicion del JSON puramente aditiva (+75/-0, formato Godot preservado).
+- Suite: bloque P _test_secretas (35 checks) al FINAL de _run(); BLOQUES A-P; conteos de A e I
+  actualizados (33->38, 32->37). Piso 316 -> 351 MEDIDO en verde. **351 checks / 0 fallos /
+  EXIT 0 x3** con el binario real, 0 SCRIPT ERROR. Guardian EN ROJO por inyeccion de runtime
+  (Variant con Array -> Dictionary al inicio del bloque P): EXIT 1, "el bloque P NO se ejecuto" +
+  "solo 317 checks (minimo 351)". Sonda borrada en la misma operacion.
+- Regresiones medidas tras la tanda: M22 test_historia.gd 41/0 - M71 test_progresion.gd 83/0 -
+  M59 test_rotate_m59.gd 43/0 (9 bloques) + test_backup_rotate_return.gd 4/0 +
+  test_backup_rotations.gd 7/0 - M55 test_diario.gd 0 fallos + test_diario_persist.gd 0 fallos.
+  Todas EXIT 0, 0 SCRIPT ERROR.
+- Flip con cita: L56 "Crear 5 cadenas secretas ocultas" [ ] -> [x]; M23 = 63 [x] / 40 [ ] /
+  2 [?] = 105 por prefijo de linea; las DOS lineas de totales sincronizadas. Ofrecido a
+  revertir (msg 180). El item L58 "Documentar historias estacionales y secretas" sigue [ ] a
+  proposito (compuesto: estacionales de M32, 0 en disco - patron anti-inflacion de iter. 6).
+- Hallazgo (dueno M55, no tocado): el puente M23->M55 degrada en silencio para las 5 nuevas
+  (mision_cadena-* ausentes del catalogo M55; capitulo-* tambien). Mismo patron que las iters
+  3/6/7/8/9/10. No se inventa contenido de M55.
+- Move autorizado EJECUTADO: los 3 scripts-prueba_tmp_familias_*.py estan en
+  Obsoletos/raiz-temporales-2026-10-22-step5/ (destino gitignored verificado), staged como
+  rename; el commit de las 3 bajas lo hace el director.
+- Trampas propias corregidas: (1) 1a corrida con 1 fallo porque el check de visibilidad
+  iniciaba cadena-mapa-secreto y el end-to-end la re-iniciaba -> restore_save_data({}) entre
+  ambos; (2) la nota de iter. 11 en el header de la suite dejo una comilla colgante (Parse
+  Error "Closing ) doesn't have an opening counterpart") detectada al correr y corregida antes
+  de la 2da corrida; (3) el script de insercion en el JSON aborto 2 veces por construccion
+  incorrecta (verificacion en memoria ANTES de escribir: el archivo nunca quedo a medias).
+- Artefactos: Log 2134 (ASCII puro por bytes, CRLF 93, sin BOM, 5.828 B; head del pool medido
+  2134 justo antes -> consumido, head nuevo 2135), msg 180, 04/05/06/07 de M23,
+  secundarias.json, test_historias.gd, tracker 179.
+- Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos (CHECKLIST-GLOBAL.md,
+  quality.yml, AGENTS.md, project.godot intactos).
+- Pedidos (msg 180): visto bueno del flip L56; sync fila 23 GLOBAL a 63/105; incluir los 8
+  paths + las 3 bajas del move en la ronda de commit del director. Proxima tanda declarada:
+  Comerciantes-cadenas L36 (solo cadenas M23; integracion M37 afuera).
