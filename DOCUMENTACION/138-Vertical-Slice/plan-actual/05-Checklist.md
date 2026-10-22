@@ -75,7 +75,7 @@
 - [x] Definir caja de diálogo tipográfica (M88) [S] — 03-Diseno UI: caja inferior 78% ancho semi-opaca, tipografia canonica, typewriter M21, cabina de hablante, replay sin saltar mision (2026-10-22 S32)
 - [x] Definir indicador de interactivo sobre el objetivo [S] — 03-Diseno UI: etiqueta "Interactuar [E]" screen-space sobre el raycast M70, hereda fade 0.10 s, un solo indicador (2026-10-22 S32)
 - [x] Definir menú de pausa básico (continuar, salir, ajustes mínimos) [S] — 03-Diseno UI: capa M53 ya montada; pausa real get_tree().paused (NPC congelados via puente M21->M64); 2 sliders volumen + calidad alta/baja (2026-10-22 S32)
-- [ ] Definir UI sin acoplar gameplay (M07) [M]
+- [x] Definir UI sin acoplar gameplay (M07) [M] — 03-Diseno Gestion: UI escucha senales (mision_paso_actualizada/guardado/PHOTO_TAKEN); gameplay emite y olvida; cero get_node a sistemas desde Controls (2026-10-23 S46)
 
 ## J. VFX (RF10)
 
@@ -105,7 +105,7 @@
 ## M. Guardado Full (RF9)
 
 - [ ] Definir serialización completa de la zona (chunks modificados) [C]
-- [ ] Definir serialización de NPC (posición + estado de misión) [M]
+- [x] Definir serialización de NPC (posición + estado de misión) [M] — 03-Diseno: npc_manager YA es provider registrado (verificado disco S46); usa su seccion; flags M21 van por save v2 S28 (2026-10-23 S46)
 - [x] Definir serialización de puzzle (flags) [S] — 03-Diseno: estado_discos (2 ints) + puzzle_resuelto (bool) en save v2; al cargar resuelto = reja abierta + discos en solucion canonica (idempotente) (2026-10-22 S32)
 - [x] Definir validación de schema_version con migración futura [M] — 03-Diseno: version 2 explicita; <2 migracion v1 (M60), >2 rechazo legible sin crash, ==2 directa; migracion futura solo aditiva; validacion en el loader unico M60 (2026-10-22 S32; base S28)
 - [ ] Definir test de 10 ciclos guardar→cargar con 0 pérdidas [C]
@@ -141,18 +141,18 @@
 
 - [x] Definir GONOGO con 7 criterios (completo, identificación, diversión, FPS, guardado, deuda, alcance) [M]
   · evidencia: 03-Diseno.md secc. GONOGO con 7 criterios (P-100, Reflection-Beam-1.0, T74, 2026-10-22)
-- [ ] Definir umbral de diversión ≥ 7,5/10 [S]
+- [x] Definir umbral de diversión ≥ 7,5/10 [S] — 03-Diseno: P7 de la encuesta S35 (1-10), umbral GONOGO >= 7.5 promedio con 5+ muestras (2026-10-23 S46)
 - [x] Definir umbral de FPS ≥ 60 y P99 ≤ 40 ms [M]
   · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
 - [x] Definir umbral de guardado: 0 pérdidas [S] — 03-Diseno: tras cada autosave lectura de schema_version 2 y claves no-nulas; una falla = perdida contada (2026-10-22 S34, alineado TC7/S28)
-- [ ] Definir que el GONOGO lo firme el usuario (dueño del proyecto) [S]
+- [x] Definir que el GONOGO lo firme el usuario (dueño del proyecto) [S] — 03-Diseno: agentes presentan evidencia (PLAYTEST+REPORTE-FPS+05 al 100%); el usuario firma GO/NO-GO (2026-10-23 S46)
 
 ## R. Congelación de Alcance
 
-- [ ] Definir `IDEAS-DESCARTADAS.md` para lo que no entra [S]
+- [x] Definir `IDEAS-DESCARTADAS.md` para lo que no entra [S] — 03-Diseno: 1 linea por idea (fecha/proponente/idea/motivo enlazado a regla); alimenta 5-FUTURAS-MEJORAS si es buena (2026-10-23 S46)
 - [x] Definir regla: nada nuevo sin pasar por el documento [S] — 03-Diseno Reglas de alcance: pedidos nuevos -> IDEAS-DESCARTADAS, decide el director (2026-10-22 S34)
-- [ ] Definir revisión semanal de alcance contra RF1-RF17 [M]
-- [ ] Definir que el creep de scope bloquee el GONOGO [M]
+- [x] Definir revisión semanal de alcance contra RF1-RF17 [M] — 03-Diseno: ritual semanal re-lee el 05 item por item; nota de revision con fecha/firma al final del 05 (2026-10-23 S46)
+- [x] Definir que el creep de scope bloquee el GONOGO [M] — 03-Diseno: cambio sin pasar por el 03 (regla L153) BLOQUEA GONOGO hasta revertir o documentar con impacto (2026-10-23 S46)
 - [x] Definir que el alcance del slice sea 100% reproducible [S] — 03-Diseno: cada item del 05 con definicion cerrada en 03/06 (2026-10-22 S34)
 
 ## S. Integración de Sistemas
@@ -173,11 +173,11 @@
 
 ## U. Pipeline de Assets (M108/M46/M47)
 
-- [ ] Definir que los modelos del slice pasen el pipeline estándar [M]
+- [x] Definir que los modelos del slice pasen el pipeline estándar [M] — 03-Diseno: mismos presets/tamanos del pipeline M47, sin formato especial del slice (referencia al plan-actual de M47) (2026-10-23 S46)
 - [ ] Definir texturas con los tamaños del preset (M47) [M]
 - [ ] Definir animaciones importadas con el formato del proyecto [M]
 - [ ] Definir audio importado con compresión del proyecto [M]
-- [ ] Definir que los VFX usen el pool de materiales (M47) [S]
+- [x] Definir que los VFX usen el pool de materiales (M47) [S] — ya definido S30 (pool 3 emitters reciclabes); flip de consistencia con cita (2026-10-23 S46)
 
 ## V. Feedback de la Dema (feedback externo)
 
@@ -185,7 +185,7 @@
 - [x] Definir guía de feedback para testers externos [S] — 03-Diseno Protocolo: guia de 1 pagina, no guiar, no explicar, pregunta "cuentame que hiciste y por que" (2026-10-22 S35)
 - [x] Definir registro de primeras reacciones (video) [S] — 03-Diseno Protocolo: grabar primeros 5 min (opcional camara), ahi viven las confusiones del arranque (2026-10-22 S35)
 - [x] Definir recolectar métricas opcionales de la demo (M105 esbozo) [M] — 03-Diseno Protocolo: telemetria OPT-IN (tiempo, pasos, saves); sin telemetria = el tester suma igual; sin datos personales (2026-10-22 S35)
-- [ ] Definir que el feedback externo alimente GONOGO-M139 [M]
+- [x] Definir que el feedback externo alimente GONOGO-M139 [M] — 03-Diseno: PLAYTEST.md y REPORTE-FPS.md son las UNICAS fuentes del GONOGO; sin playtest no hay decision (2026-10-23 S46)
 
 ## W. Edge Cases
 
@@ -198,7 +198,7 @@
 ## X. Calidad de Código (M111)
 
 - [x] Definir que los scripts pasen análisis estático [M]
-- [ ] Definir const/export para valores repetidos [S]
+- [x] Definir const/export para valores repetidos [S] — ya definido S34 (claves save v2 como const; prohibido literal duplicado de flags); flip de consistencia (2026-10-23 S46)
 - [x] Definir comentarios XML de clases públicas [S]
 - [x] Definir sin warnings de GDScript en el slice [M]
 - [x] Definir revisión de código del slice (code review M111) [M]
@@ -222,7 +222,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 109 · Pendientes: 22 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 120 · Pendientes: 11 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).

@@ -603,6 +603,64 @@ licencias de assets (CC0/propio, L62), y la placa final del sello brisa con
   el agente NO hace push ni tag por si mismo; deja el comando listo en el
   log de cierre para el usuario.
 
+## Gestion de alcance y cierre del slice (S46 2026-10-23)
+
+**UI sin acoplar gameplay (L78, regla M07):** la UI del slice NO guarda
+referencias a sistemas: escucha senales (mision_paso_actualizada -> panel de
+mision S32; guardado() -> toast S29; PHOTO_TAKEN -> galeria). El gameplay
+emite y olvida. Ningun `get_node("/root/...Sistema")` dentro de un Control
+del slice (patron ya usado en S32/S37/QAs).
+
+**Serializacion de NPC (L108):** npc_manager ya es provider registrado
+(chequeado en disco S46): su get_save_data/restore cubre posicion y estado
+de los agentes (finneas_zorro inclu ido). El slice NO agrega serializacion
+propia: usa la seccion del manager (el grafo de dialogo/flags M21 va por el
+bloc de flags ya definido en save v2 S28).
+
+**Umbral de diversion (L144):** en la encuesta S35 se agrega la P7
+"Que tan divertida fue del 1 al 10?" — umbral de GONOGO-M139: >= 7.5
+promedio entre testers con 5+ muestras; entre 6 y 7.5: iterar contenido;
+< 6: re-diseno del loop (proceso L154).
+
+**GONOGO firmado por el usuario (L148):** el GONOGO-M139.md (L208) es una
+DECISION del usuario (dueño del proyecto): los agentes presentan la
+evidencia (PLAYTEST.md + REPORTE-FPS.md + este 05 al 100%) y el usuario
+ firma GO o NO-GO. Ningun agente firma el GONOGO por el usuario.
+
+**IDEAS-DESCARTADAS.md (L152):** archivo del directorio docs/vslice/ (L208):
+una linea por idea rechazada: fecha, proponente, idea en 1 linea, motivo del
+descarte apuntando a la regla (scope/budget/canon). alimenta el archivo 5-FUTURAS-MEJORAS cuando la idea sea buena pero fuera de alcance.
+
+**Revision semanal de alcance (L154):** ritual contra RF1-RF17 del 05: cada
+semana se re-lee el 05 de M138 y se marca item por item si la definicion
+sigue vigente (sin creep silencioso); salida: nota de revision al final del
+05 con fecha/firma del que reviso. El creep detectado activa L155.
+
+**Creep de scope bloquea GONOGO (L155):** si hubo ANY cambio de alcance sin
+pasar por el 03 (regla L153), el GONOGO-M139 queda BLOQUEADO hasta
+normalizar: o se revierte el cambio o se documenta en el 03 con su impacto
+en budget. Sin excepciones (niBeans ni urgentes).
+
+**Pipeline estandar de assets (L176, M47):** los assets del slice (modelos,
+texturas, animaciones, audio) pasan por el MISMO pipeline de M47 ( presets y
+tamaños estándar del proyecto): sin formato especial del slice. La referencia
+es el plan-actual de M47; el slice solo exige cumplirlo (no re-define nada).
+
+**VFX via pool de materiales (L180, M47):** ya definido en S30: pool de 3
+emitters reciclabes + pipeline M47 — flip de consistencia.
+
+**Recompensa sin romper economia (L196):** ya cerrado (S36): 20 AO = 13.3%
+dentro de banda [8, 22] canon M93.
+
+**const/export para valores repetidos (L201):** ya definido S34 (claves del
+save v2 como const; prohibido literal duplicado de flags). Flip de
+consistencia.
+
+**Feedback externo alimenta GONOGO (L188):** el PLAYTEST.md (S35) y el
+REPORTE-FPS.md (S38) son las UNICAS fuentes de la decision GONOGO-M139
+(prompt del feedback externo L185/L185 registrado en el mismo PLAYTEST.md).
+Sin playtest, no hay GONOGO (decision sin marketing preachy)..
+
 ## Canon y estilo (M147)
 
 - Nombre del slice y su historico consume el canon M147 (glpts); toda
