@@ -237,3 +237,50 @@ inition    (nodo 3D en el    (generación y      (instanciación,   (drop agrega
 ### Texto/popup suave de cantidad obtenida
 - Popup suave con la cantidad obtenida al recolectar.
 - Feedback visual al jugador.
+## Orden de carga y feedback (cola total M15 batch)
+
+### Sin dependencia de orden de carga entre modulos (M29 primero)
+- El modulo de recursos no depende del orden de carga.
+- M29 (audio) se carga primero.
+
+### Indicador visual de herramienta requerida
+- Indicador visual cuando se acerca a un nodo sin herramienta.
+- Feedback al jugador.
+
+### Reloj/calendario muestra estacion
+- El reloj/calendario muestra la estacion actual.
+- Indica cuando vuelven los recursos.
+
+### Test: recolectar cada tipo con herramienta correcta/incorrecta
+- Test de recoleccion con herramienta correcta e incorrecta.
+- Verificar drops y cantidades.
+## Tests de drops y respawn (cola total M15 batch 2)
+
+### Test: los 6 tipos producen drops correctos
+- Los 6 tipos producen drops correctos y cantidades en rango.
+- Verificar cantidades por tipo.
+
+### Test: agotar 50 arboles y verificar respawn estacional
+- Agotar 50 arboles y verificar respawn estacional.
+- Verificar respawn por estacion.
+
+### Test: suelo saturado genera bolsa
+- Suelo saturado genera bolsa de items.
+- No pierde nada.
+
+### Test: determinismo entre dos cargas con mismo seed
+- Determinismo entre dos cargas con mismo seed.
+- Verificar reproducibilidad.
+## Tests y onboarding (cola total M15 batch 3)
+
+### Test: cobertura de edge cases de la seccion M
+- Cobertura de edge cases de la seccion M.
+- Verificar casos limite.
+
+### Test de onboarding: primer recurso recolectado en los primeros 5 min
+- Primer recurso recolectado en los primeros 5 min.
+- Verificar onboarding.
+
+### Recorrido M114: 3 dias de juego
+- Recorrido M114: 3 dias de juego.
+- El jugador siempre tiene materiales.

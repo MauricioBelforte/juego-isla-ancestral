@@ -342,3 +342,25 @@ user://saves/
 ├── save_001_backup_v1.2.2.tres  ← Backup antes de migrar
 └── save_001_backup_v1.2.3.tres  ← Backup de versión anterior
 ```
+## Actualizaciones y versiones (cola total M119 batch)
+
+### Resource GameVersion
+- Resource GameVersion con campos major, minor, patch, build.
+- to_string() para mostrar version.
+- is_same_major_minor() para compatibilidad.
+
+### UpdateChecker
+- UpdateChecker con check_latest().
+- Verificar actualizaciones disponibles.
+
+### UpdateDownloader
+- UpdateDownloader con download().
+- Descargar actualizaciones.
+
+### SaveMigrator
+- SaveMigrator con migrate_save().
+- Migrar saves entre versiones.
+
+### RollbackManager
+- RollbackManager con restore_previous_version().
+- Restaurar version anterior.

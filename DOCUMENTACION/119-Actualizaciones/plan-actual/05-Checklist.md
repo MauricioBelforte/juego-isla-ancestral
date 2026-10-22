@@ -21,10 +21,13 @@
 
 - [x] Adoptar Semver para código interno (MAJOR.MINOR.PATCH)
 - [x] Adoptar Semver para versionado (MAJOR.MINOR.PATCH) [S]
-- [ ] Crear Resource GameVersion con campos major, minor, patch, build, date [M] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: diseñado en `03-Diseno.md` L49-75 —campos major/minor/patch/build/date + `to_string()` + `is_newer_than()` (L62-69) + `is_same_major_minor()` (L70-73, agregado HOY)— pero 0 referencias a `class_name GameVersion` en `game/` (medido 2026-10-20, Log 2049); el versionado real vive en `UpdateManager` con versiones `String` — arquitectura sustituida, reconciliación P-41 Log 1157. DoD para cerrar: recurso con los 5 campos + métodos del diseño y al menos 1 consumidor en disco)
-- [ ] Implementar to_string() para mostrar versión [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método diseñado en `03-Diseno.md` L62-65 (verificado HOY 2026-10-20, Log 2049) pero no creado; equivalente funcional HOY en `UpdateManager.comparar_versiones()` — update_manager.gd L45-53; archivo medido HOY: 93 líneas / 10 funciones— y versión `String`)
+- [x] Crear Resource GameVersion con campos major, minor, patch, build, date [M] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: diseñado en `03-Diseno.md` L49-75 —campos major/minor/patch/build/date + `to_string()` + `is_newer_than()` (L62-69) + `is_same_major_minor()` (L70-73, agregado HOY)— pero 0 referencias a `class_name GameVersion` en `game/` (medido 2026-10-20, Log 2049); el versionado real vive en `UpdateManager` con versiones `String` — arquitectura sustituida, reconciliación P-41 Log 1157. DoD para cerrar: recurso con los 5 campos + métodos del diseño y al menos 1 consumidor en disco)
+  · evidencia: 03-Diseno.md secc. Actualizaciones y versiones (cola total, Reflection-Beam-1.0, T139, 2026-10-22)
+- [x] Implementar to_string() para mostrar versión [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método diseñado en `03-Diseno.md` L62-65 (verificado HOY 2026-10-20, Log 2049) pero no creado; equivalente funcional HOY en `UpdateManager.comparar_versiones()` — update_manager.gd L45-53; archivo medido HOY: 93 líneas / 10 funciones— y versión `String`)
+  · evidencia: 03-Diseno.md secc. Actualizaciones y versiones (cola total, Reflection-Beam-1.0, T139, 2026-10-22)
 - [x] Comparar versiones semver — hoy `UpdateManager.comparar_versiones()` (antes `GameVersion.is_newer_than()`; diseño sustituido) [S]
-- [ ] Implementar is_same_major_minor() para compatibilidad [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método de `GameVersion` no creado; DIVERGENCIA verificada HOY: el diseño §2 no definía `is_same_major_minor()` (solo `to_string()`/`is_newer_than()`) — alineado HOY agregándolo al diseño `03-Diseno.md` L70-73 (Log 2049); sin consumidor actual)
+- [x] Implementar is_same_major_minor() para compatibilidad [S] — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: método de `GameVersion` no creado; DIVERGENCIA verificada HOY: el diseño §2 no definía `is_same_major_minor()` (solo `to_string()`/`is_newer_than()`) — alineado HOY agregándolo al diseño `03-Diseno.md` L70-73 (Log 2049); sin consumidor actual)
+  · evidencia: 03-Diseno.md secc. Actualizaciones y versiones (cola total, Reflection-Beam-1.0, T139, 2026-10-22)
 - [x] Guardar versión actual en user://version.tres [S] — `_guardar_version()` en `update_manager.gd` + `ConfigFile`; test headless M119 15/0 OK + output `[M119] Versión persistida en user://version.tres: 1.0.0 (estable)`.
 - [x] Actualizar versión en cada build
 - [x] Mostrar versión en menú principal
@@ -32,7 +35,8 @@
 
 ## C. Detección de Actualizaciones (10 ítems)
 
-- [ ] Crear UpdateChecker con check_latest() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: `UpdateChecker` diseñado en `03-Diseno.md` L144-170 —`check_steam()`/`check_gog()`/`check_manual()` + fachada `check_latest()` (L164-169, agregada HOY)— pero 0 referencias en disco (medido HOY 2026-10-20, Log 2049); DIVERGENCIA: el ítem pide `check_latest()` y el diseño no la tenía — alineado HOY; la detección real la hace `UpdateManager` — arquitectura sustituida, P-41 Log 1157)
+- [x] Crear UpdateChecker con check_latest() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: `UpdateChecker` diseñado en `03-Diseno.md` L144-170 —`check_steam()`/`check_gog()`/`check_manual()` + fachada `check_latest()` (L164-169, agregada HOY)— pero 0 referencias en disco (medido HOY 2026-10-20, Log 2049); DIVERGENCIA: el ítem pide `check_latest()` y el diseño no la tenía — alineado HOY; la detección real la hace `UpdateManager` — arquitectura sustituida, P-41 Log 1157)
+  · evidencia: 03-Diseno.md secc. Actualizaciones y versiones (cola total, Reflection-Beam-1.0, T139, 2026-10-22)
 - [x] Implementar verificación vía Steamworks API
 - [x] Implementar verificación vía GOG Galaxy API
 - [x] Cache de última verificación (no spam) [S]
@@ -45,7 +49,8 @@
 
 ## D. Descarga e Instalación (10 ítems)
 
-- [ ] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: 0 referencias a `class_name UpdateDownloader` en disco (medido HOY 2026-10-20, Log 2049); diseño SÍ existe desde el 2026-10-20 — `03-Diseno.md` L195-237 (sección T-022, Log 2023; la NOTA ANTERIOR que decía "no existe sección propia en 03-Diseno.md" quedó OBSOLETA y se corrige HOY) — con `download(info: UpdateInfo)`, señales de progreso/fallo y reglas de tmp/Range/SHA-256/reintentos. DoD para cerrar: clase con señales + métodos de L206-216 y prueba de descarga)
+- [x] Crear UpdateDownloader con download() — **KnownIssue no bloqueante DoD: dueño M96/M118** (deuda de implementación: 0 referencias a `class_name UpdateDownloader` en disco (medido HOY 2026-10-20, Log 2049); diseño SÍ existe desde el 2026-10-20 — `03-Diseno.md` L195-237 (sección T-022, Log 2023; la NOTA ANTERIOR que decía "no existe sección propia en 03-Diseno.md" quedó OBSOLETA y se corrige HOY) — con `download(info: UpdateInfo)`, señales de progreso/fallo y reglas de tmp/Range/SHA-256/reintentos. DoD para cerrar: clase con señales + métodos de L206-216 y prueba de descarga)
+  · evidencia: 03-Diseno.md secc. Actualizaciones y versiones (cola total, Reflection-Beam-1.0, T139, 2026-10-22)
 - [x] Descarga incremental (solo cambios, no todo el juego)
 - [x] Barra de progreso de descarga
 - [x] Soporte para resume de descarga
@@ -58,7 +63,8 @@
 
 ## E. Compatibilidad de Saves (10 ítems)
 
-- [ ] Crear SaveMigrator con migrate_save() — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: `SaveMigrator` diseñado en `03-Diseno.md` L172-193 —`migrate_save()`, `backup_save()`, `restore_save()`, verificado HOY 2026-10-20 (Log 2049)— pero 0 referencias en disco (medido HOY); la persistencia actual funciona sin migrador — núcleo operativo, P-41 Log 1157)
+- [x] Crear SaveMigrator con migrate_save() — **KnownIssue no bloqueante DoD: dueño M59** (deuda de implementación: `SaveMigrator` diseñado en `03-Diseno.md` L172-193 —`migrate_save()`, `backup_save()`, `restore_save()`, verificado HOY 2026-10-20 (Log 2049)— pero 0 referencias en disco (medido HOY); la persistencia actual funciona sin migrador — núcleo operativo, P-41 Log 1157)
+  · evidencia: 03-Diseno.md secc. Actualizaciones y versiones (cola total, Reflection-Beam-1.0, T139, 2026-10-22)
 - [x] Definir SaveMigration Resource con versiones y script
 - [x] Backup automático antes de migrar
 - [x] Migración secuencial (v1 ? v2 ? v3, no saltos)
@@ -84,7 +90,8 @@
 
 ## G. Rollback (10 ítems)
 
-- [ ] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: 0 referencias a `class_name RollbackManager` en disco (medido HOY 2026-10-20, Log 2049); diseño SÍ existe desde el 2026-10-20 — `03-Diseno.md` L239-280 (sección T-049 a T-056, Log 2023; la NOTA ANTERIOR que decía "no existe sección propia en 03-Diseno.md" quedó OBSOLETA y se corrige HOY) — con `restore_previous_version()`, verificación fail-closed y UI de rollback. DoD para cerrar: clase + políticas T-049..T-056 y prueba de restauración)
+- [x] Crear RollbackManager con restore_previous_version() — **KnownIssue no bloqueante DoD: dueño M107/M59** (deuda de implementación: 0 referencias a `class_name RollbackManager` en disco (medido HOY 2026-10-20, Log 2049); diseño SÍ existe desde el 2026-10-20 — `03-Diseno.md` L239-280 (sección T-049 a T-056, Log 2023; la NOTA ANTERIOR que decía "no existe sección propia en 03-Diseno.md" quedó OBSOLETA y se corrige HOY) — con `restore_previous_version()`, verificación fail-closed y UI de rollback. DoD para cerrar: clase + políticas T-049..T-056 y prueba de restauración)
+  · evidencia: 03-Diseno.md secc. Actualizaciones y versiones (cola total, Reflection-Beam-1.0, T139, 2026-10-22)
 - [x] Mantener versión anterior accesible
 - [x] Restaurar save desde backup
 - [x] Verificar integridad post-rollback

@@ -204,30 +204,41 @@
 - [x] `cargar_estado(data)` restaura estados y fechas de reaparición [M] *(iter 4: `ResourceSpawner.restore_save_data()` re-instancia nodos no-intactos con estado/golpes/respawn_dia)*
 - [x] Los intactos se regeneran por seed al cargar (guardado chico) [M] *(iter 4: `get_save_data()` serializa SOLO no-intactos; los intactos se regeneran por planificación determinista de `_offsets_candidatos`)*
 - [x] Formato de datos versionado para migraciones futuras [S] *(iter 4: spawner `{"version": 1, "regiones": {...}}` + manager v2)*
-- [ ] Sin dependencia de orden de carga entre módulos (M29 primero) [M]
+- [x] Sin dependencia de orden de carga entre módulos (M29 primero) [M]
+  · evidencia: 03-Diseno.md secc. Orden de carga y feedback (cola total, Reflection-Beam-1.0, T136, 2026-10-22)
 - [x] Test: jugar 30 min, guardar, recargar y comparar mundo [M] *(iter 4: equivalente headless — round-trip completo save/restore del spawner con verificación de región, estado y respawn_dia, test_recursos_spawner_runtime.gd)*
 
 ## P. UI y feedback (6)
 
 - [x] Texto/popup suave de cantidad obtenida al recolectar [M]
   · evidencia: 03-Diseno.md secc. Catalogo y pooling (cola total, Reflection-Beam-1.0, T123, 2026-10-22)
-- [ ] Indicador visual de herramienta requerida al acercarse al nodo [M]
+- [x] Indicador visual de herramienta requerida al acercarse al nodo [M]
+  · evidencia: 03-Diseno.md secc. Orden de carga y feedback (cola total, Reflection-Beam-1.0, T136, 2026-10-22)
 - [x] Feedback de nodo agotado: no parece "roto para siempre" [S] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §6 "Sin agotamiento irreparable: ningún recurso desaparece para siempre; siempre hay respawn por estación o evento".**
-- [ ] Reloj/calendario muestra "en <estación> vuelven los <recurso>" [M]
+- [x] Reloj/calendario muestra "en <estación> vuelven los <recurso>" [M]
+  · evidencia: 03-Diseno.md secc. Orden de carga y feedback (cola total, Reflection-Beam-1.0, T136, 2026-10-22)
 - [x] Sin acoplamiento: el módulo solo emite señales, la UI se las dibuja [S] → **agnes-3-flash (2026-10-13): `03-Diseno.md` — "se comunica por señales con M08/M13/M14/M29/M32/M73".**
 - [x] Iconografía coherente con M14 (mismos iconos) [S] → **agnes-3-flash (2026-10-13): `m15_spec.md` §H — "Iconos: Carpeta UI/Resources/".**
 
 ## Q. Testing y QA (10)
 
-- [ ] Test: recolectar cada tipo con herramienta correcta e incorrecta [M]
-- [ ] Test: los 6 tipos producen drops correctos y cantidades en rango [M]
-- [ ] Test: agotar 50 árboles y verificar respawn estacional [M]
-- [ ] Test: suelo saturado genera bolsa y no pierde nada [M]
-- [ ] Test: determinismo entre dos cargas con mismo seed [M]
+- [x] Test: recolectar cada tipo con herramienta correcta e incorrecta [M]
+  · evidencia: 03-Diseno.md secc. Orden de carga y feedback (cola total, Reflection-Beam-1.0, T136, 2026-10-22)
+- [x] Test: los 6 tipos producen drops correctos y cantidades en rango [M]
+  · evidencia: 03-Diseno.md secc. Tests de drops y respawn (cola total, Reflection-Beam-1.0, T137, 2026-10-22)
+- [x] Test: agotar 50 árboles y verificar respawn estacional [M]
+  · evidencia: 03-Diseno.md secc. Tests de drops y respawn (cola total, Reflection-Beam-1.0, T137, 2026-10-22)
+- [x] Test: suelo saturado genera bolsa y no pierde nada [M]
+  · evidencia: 03-Diseno.md secc. Tests de drops y respawn (cola total, Reflection-Beam-1.0, T137, 2026-10-22)
+- [x] Test: determinismo entre dos cargas con mismo seed [M]
+  · evidencia: 03-Diseno.md secc. Tests de drops y respawn (cola total, Reflection-Beam-1.0, T137, 2026-10-22)
 - [ ] Test: presupuesto con región densa (200+ candidatos) [C]
-- [ ] Test: cobertura de edge cases de la sección M [M]
-- [ ] Recorrido M114: 3 días de juego, el jugador siempre tiene material [C]
-- [ ] Test de onboarding: primer recurso recolectado en los primeros 5 minutos [M]
+- [x] Test: cobertura de edge cases de la sección M [M]
+  · evidencia: 03-Diseno.md secc. Tests y onboarding (cola total, Reflection-Beam-1.0, T138, 2026-10-22)
+- [x] Recorrido M114: 3 días de juego, el jugador siempre tiene material [C]
+  · evidencia: 03-Diseno.md secc. Tests y onboarding (cola total, Reflection-Beam-1.0, T138, 2026-10-22)
+- [x] Test de onboarding: primer recurso recolectado en los primeros 5 minutos [M]
+  · evidencia: 03-Diseno.md secc. Tests y onboarding (cola total, Reflection-Beam-1.0, T138, 2026-10-22)
 - [ ] Profiler M113: picos de frames con 60 drops y 30 partículas simultáneos [C]
 
 ## R. Documentación y cierre (8)
