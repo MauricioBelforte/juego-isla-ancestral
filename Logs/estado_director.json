@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:15:45",
+ "ultimo_update": "2026-10-22T01:58:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -157,8 +157,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T29 sellada 063 (nocturna/manadas flip, verificacion subset diferida a la ronda de muestra con 064); 10 tandas fotografia; informe consolidado al cerrar paquete",
-  "acuse_enviado": 63
+  "estado": "T30 sellada 065: tools byte-exactos (+13% premium verificado); D.14 documentada (normalizacion reservada fundador); 6 ciclos re-verificador 6 hallazgos",
+  "acuse_enviado": 65
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -218,5 +218,8 @@
  },
  "decision_pendiente_puzzles_b": {
   "estado": "Si la filosofia cozy cambia: reducir tiempo templos a 30 min (Opcion B de Beam T28) - reservado al fundador"
+ },
+ "decision_coste_tools_premium": {
+  "estado": "D.14 documentada: premium intencional +13% hierro; normalizacion 0.5x reservada al fundador si filosofia cambia"
  }
 }
