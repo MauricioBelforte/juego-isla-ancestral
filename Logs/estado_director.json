@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T02:50:30",
+ "ultimo_update": "2026-10-22T02:35:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "924/925: M158 t3 RATIFICADA (82/140, doc+persistencia; techo scope correct); log formal pendiente; resto cross-module",
+  "estado": "926/927: log 2106 verificado (DoD flip ratificado, fila 83/140); M158 en espera de ruteo; nota: isla 156 disponible",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 925,
+  "acuse_enviado": 927,
   "pool_saneado": true
  },
  "g_5_3": {
@@ -38,9 +38,9 @@
   "acuse_enviado": 195
  },
  "hy3": {
-  "estado": "313/314: Bloque C #54 M74 RATIFICADO (119/0 fresh + red probe + 2 hallazgos derivados dueno M74); GO #55",
+  "estado": "315/316: #55 M71 RATIFICADO (10 bloques, red probe, cross con test propio); FINDING F1 ARCHIVADO como BUG-143 (recompensas multiples en _reevaluar) con fix citado; verificador doble: BUG-142 Beam + BUG-143 Hy3 misma noche",
   "pendientes_real": 257,
-  "acuse_enviado": 314
+  "acuse_enviado": 316
  },
  "ling": {
   "estado": "cola nueva 142-Release-Candidate (106 items) - riel RC/docs + i18n",
@@ -183,7 +183,7 @@
  "crons_vuelta_a": "CRON A 23:00: unico pendiente Beam 022 (T10) sellado y derivado a agnes (023); verificado en disco por director",
  "crons_vuelta_c": "CRON C 22:25: gate 4 correcciones; Hy3 backlog+Log 2087+limpieza sondas preservados; Beam T5 muestreo estricto 20/24 (2 degradados, fila 95 54/113)",
  "crons_vuelta_extra": "EXTRA del fundador 22:30: escalado de Beam a doble tanda con regla de freno por muestreo (013)",
- "crons_vuelta_bd9": "CRON D 22:35-22:40: MiniMax 014 correccion BUG-141 aceptada (015, plan pool sin guards aprobado); Beam 014 T6 ratificada (015: re-flip 03-Diseno verificado + farming P2 adoptada, P1 condicional)",
+ "crons_vuelta_bd9": "CRON B/D 02:30: agnes 926 ratificado (log 2106 compos); Hy3 315 ratificado con F1 archivado BUG-143",
  "bug_142": {
   "estado": "Abierto - M71 ProgresionManager stale-read en evaluar_condicion_id (cache FIFO sin invalidacion en _reevaluar); fix 2-3 lineas propuesto por Beam; duenos M71 (step-5-kilocode histórico) a notificar"
  },
@@ -241,5 +241,8 @@
  },
  "regla_autonomia_g53": {
   "estado": "VIGENTE (fundador): autonomia plena de busqueda y backlog; ciclo silencioso prohibido; reportes de cierre de tanda; muestreo del director como unico control de calidad"
+ },
+ "bug_143": {
+  "estado": "Abierto - _reevaluar marca TODOS los hitos del stat (recompensas multiples) - fix minimo propuesto por Hy3; derivado a duena M71 (agnes activa) + log 11-BUGS"
  }
 }

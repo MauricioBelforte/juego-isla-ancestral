@@ -58,6 +58,96 @@
 			"consecuencia": { "luciernagas_vueltas": true },
 			"oculta": true,
 			"postgame": false
+		},
+		{
+			"id": "cadena-panadera",
+			"titulo": "El Pan de la Abuela",
+			"contexto": "Catalina quiere recuperar la receta del pan de fiesta que su abuela horneaba para toda la plaza",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "catalina_oso" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "receta-pan-fiesta" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "pan_fiesta" }
+			],
+			"recompensa": { "diario": "capitulo-panadera", "cosmetico": "delantal de fiesta" },
+			"consecuencia": { "pan_fiesta_horneado": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-carpintero",
+			"titulo": "El Banco Roto",
+			"contexto": "Bruno quiere reparar el banco de la plaza, pero la madera de roble necesita curarse en el bosque",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "bruno_sapo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "bosque" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "madera_roble" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "ensamblado-banco" }
+			],
+			"recompensa": { "diario": "capitulo-carpintero", "cosmetico": "banco tallado" },
+			"consecuencia": { "banco_plaza_reparado": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-tejedora",
+			"titulo": "El Manto de la Niebla",
+			"contexto": "Olivia necesita fibra de algodón teñida para terminar el manto que estrenará el pueblo en el festival",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "olivia_nutria" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "jardin" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "fibra_algodon" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "tinte-niebla" }
+			],
+			"recompensa": { "diario": "capitulo-tejedora", "cosmetico": "manto de niebla" },
+			"consecuencia": { "manto_niebla_terminado": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-pescador",
+			"titulo": "La Red del Viejo",
+			"contexto": "Finneas quiere reparar su red de pesca, pero el carrete se perdió en el muelle durante la tormenta",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "finneas_zorro" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "nudos-red" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "carrete_nuevo" }
+			],
+			"recompensa": { "diario": "capitulo-pescador", "cosmetico": "red decorativa" },
+			"consecuencia": { "red_pescador_reparada": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-guarda",
+			"titulo": "El Sendero Cuidado",
+			"contexto": "Nico vigila el bosque y quiere reponer las señales del sendero para que nadie se pierda entre los árboles",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "nico_gato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "bosque" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "madera_roble" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "sendero-marcas" }
+			],
+			"recompensa": { "diario": "capitulo-guarda", "cosmetico": "silbato de guarda" },
+			"consecuencia": { "sendero_bosque_senalado": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-alquimista",
+			"titulo": "El Jarabe de la Luna",
+			"contexto": "Teo prepara un jarabe curativo con bayas de luna, pero le falta el agua fresca del manantial del bosque",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "teo_conejo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "manantial" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "destilacion-lunar" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "jarabe_lunar" }
+			],
+			"recompensa": { "diario": "capitulo-alquimista", "cosmetico": "frasco de luna" },
+			"consecuencia": { "jarabe_lunar_listo": true },
+			"oculta": false,
+			"postgame": false
 		}
 	]
 }
