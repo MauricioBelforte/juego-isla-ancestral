@@ -3213,3 +3213,28 @@ HIZO MAL (sustraído de los hallazgos de los agentes - honestidad):
 
 LECCION DEL DIRECTOR: el muestreo estricto se aplica AL DIRECTOR TAMBIEN (los hallazgos de otros agentes encontraron mis errores). Sin excepciones.
 
+
+
+## N.2-quater DATOS EMPIRICOS DE LA MADRUGADA 2026-10-22 (04:00-07:05, verificada por el director en disco)
+
+**Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 07:10
+Alcance: barrido real de los 9 agentes activos; cada dato fue verificado contra disco antes de ratificar (acuses 937/939/047/112/264 y previos).
+
+### Agente por agente (verificado)
+
+1. **agnes-3-flash (Kilo Code)** - M73 lote 4: 63/135 con catalogo COMPLETO (19 categorias / 81 items, 4 lotes: base+peces/plantas/lote3/lote4). Honestidad: reporto catalogo agotado, classifico los 72 restantes como cross-module con duenos, y PIDIO GO en vez de inventar trabajo. Redirigida a QA cruzado (GO 939). Metrica: 0Items inflados; pregunta antes que pisar.
+2. **MiniMax-M3.1-Flash (MiniMax API/Kilo Code)** - CI de elite mantenido (pool 530.6 s, lane voxel serial, opt-in RADAR 471 suites, wrapper 498 checks). M20 tanda 1: 1 item cerrado con checks nombrados + linea de codigo, y **2 items REVERTIDOS por no sustentarse** - la practica modelo (revertir sin sustento > dejar [x] falso). M20 = su cola exclusiva confirmada por G-5.3.
+3. **Reflection-Beam-1.0 (Kilo Code)** - 50+ tandas T-series manteniendo doble tanda/vuelta y picking documental por linea textual. T53: sync M137 item 215 (arbol madera) verificado; 195/210/211/214 quedaron [ ] honestos (requieren editor Godot - clasificacion correcta). Propuestas de economia P1-P3 en mesa del fundador.
+4. **G-5.3-Flash-Agente (Kilo Code)** - regimen 229 de autonomia: S1-S19. S18 altitud M67 con topes exactos de 03-Diseno 3.1 (34/131, fila sync). S19: declaro M75-Postgame NO accionable self-contained (integra arranque del final ya hecho: M22/M92/M27/M10/M19/M64) - clasificacion honesta. Prudencia: NO toco M20 sin confirmar el dueno (correcto: es de MiniMax).
+5. **DeepSeek-V4.1-Flash (WorkBuddy)** - sin tanda nueva esta madrugada. El saneo de 11-BUGS (79 defectos) sigue PENDIENTE de arranque: reasignable si no arranca (condicion registrada en estado_director.json).
+6. **DS-V4.1-Flash-Opencode (OpenCode)** - codec M60 v2 sellado + loader. Su falso T-19 (mensaje 190 con 1383 B reales) quedo como trampa canonica de cache/flush, no como descuido. Dejo sobre la mesa items M17/M18 fuente unica para decision del fundador.
+7. **Step-5-WorkBuddy** - ruteo post-cola-vacia (M67 #4 / M23 / nicho), acuse 167. Sin tanda esta madrugada: cola ligera, NORMAL despues de sus tandas previas.
+8. **Hy3** - QA #55/#56 ejecutadas (verificaciones de la familia DS). Verificador VALIDO para modulos DeepSeek (no es hermano del mismo modelo).
+9. **Ling-3.1-Flash** - REENGANCHADO: cron nuevo de 60 min (wku_161f747b...) tras override del cron viejo de era mimo que lo silenciaba. T22 verificada (2.4.7: flips 97-99, watchdog EXIT 0); T23 en curso. La interrupcion de 19 h fue fallo de ruteo, no pereza (ficha N.2-ter corregida).
+
+### Patrones verificables nuevos (2026-10-22)
+
+- Dos formas correctas de no inflar: REVERTIR sin sustento (MiniMax) y CLASIFICAR como no accionable (G-5.3 y Beam con editor). Ambas documentadas y ratificadas.
+- Prudencia de dueno funciono: G-5.3 pregunto antes de tocar M20; MiniMax reclamo su cola exclusiva; CERO pisados esta madrugada.
+- El QA cruzado paso a agnes (verificadora probada con BUG-142/143) mientras su modulo M73 esta en techo.
+- El director volvio a rozar el riesgo del barrido -A (mitigado: exclude NUMEROS + commits por frente; trampa ya canonica en estado_director.json).
