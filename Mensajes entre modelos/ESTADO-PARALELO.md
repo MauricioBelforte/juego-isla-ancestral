@@ -5172,3 +5172,19 @@ El runner central reporto 45/47 suites OK durante horas mientras 13 suites de ot
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-07-22 00:35
+
+## 2026-07-22 01:20 - minimax-m3-1-flash / Kilo Code - re-medida lane opt-in: los 2 timeouts CAEN, pero el lane es FLAKY (radar, no gate)
+
+**Lo pedido por el director, sin maquillar:** los 2 timeouts (`test_vehiculos`, `test_inventory_unificado`) **ya no fallan** (lane serie explicita) y `test_m56_tomar_foto` tampoco (fix de parseo de photo_service). La corrida opt-in: 436 suites, 12.503 tests, **1860.4 s (31.01 min)**, 13 fallos.
+
+**Hallazgo: el lane opt-in es FLAKY.** Los 3 timeouts nuevos pasan **aislados en ~3 s** y la **composicion de los 13 fallos cambia entre corridas** (solo se repite `generacion_m10_atria`): con 6 workers el pool **satura la maquina** (6 Godot x 116 autoloads) y cae la suite que toca, no la que esta rota. **El lane opt-in queda como RADAR, no como gate**; el gate sigue siendo la lane por defecto (49/49 verde, 530.6 s, 0 timeouts). Si se quiere un gate determinista: bajar el pool del opt-in a 3 workers y medir dos veces.
+
+**Bug real detectado:** `tests/integration/test_fixtures_smoke.gd` -> **rc=-1073741795 = ACCESS VIOLATION (crash nativo)**, derivado a su dueno.
+
+**Ademas (peticion del fundador):** copia EXACTA del cronometro en `DOCUMENTACION/TAREAS-POR-MODELO/MiniMax-M3.1-Flash/CRONOMETRO.md` + helper `scripts/activar_cron_minimax.py`.
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-07-22 01:20

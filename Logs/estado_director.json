@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:20:30",
+ "ultimo_update": "2026-10-22T04:35:40",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -108,7 +108,8 @@
   "problema informado por el fundador: Ling reportaba que su cron era imposible de modificar - verificacion necesaria con el agente antes de suponer flojera",
   "PROMPTS VIEJOS en crons de plataforma con reglas contrarias (\"si no hay encargo no respondas nada\") causan SILENCIO OBEDECIDO: el director debe emitir OVERRIDE escrito cuando cambia el regimen, o el fundador borra el cron desde la interfaz",
   "helper proximo_numero que cuenta huecos de mensajes antiguos (caso 220) puede equivocar la numeracion: la regla del fundador (manda el hilo, ultimo+1) SIEMPRE prevalece + reporte la anomalia y devuelve el numero al pool (modelo aplicado por G-5.3 231)",
-  "dos agentes en el mismo modulo (dueño activo + contribuidor aditivo): cambios aditivos verificados OK pero el CONTRIBUIDOR debe reportar al director (que coordina con el dueno) y pausar si el dueno pide ajustes (caso Beam T36/T37 en M17 de G-5.3)"
+  "dos agentes en el mismo modulo (dueño activo + contribuidor aditivo): cambios aditivos verificados OK pero el CONTRIBUIDOR debe reportar al director (que coordina con el dueno) y pausar si el dueno pide ajustes (caso Beam T36/T37 en M17 de G-5.3)",
+  "renumerar respuestas ya escritas cuando un pool regenerado desalinea la secuencia: renombrar el fichero a max+1 y corregir el encabezado interno (caso 083->088)"
  ],
  "minimax_m3_1_flash": {
   "estado": "032/035: LANE SERIE SELLADA + HALLAZGO GRAVE RATIFICADO Y VERIFICADO (mi barrido commiteo photo_service en vuelo; sus 2 fixes quirurgicos en disco y CI verde 26 checks rc=0); opt-in re-measure corriendo",
@@ -150,7 +151,7 @@
   "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 04:15: script 0 pendientes; cron de MiniMax auto-actualizado por su dueno (coherente, verificado por director); SIN repoblacion",
+ "crons_vuelta_d": "CRON D 04:35: script 0 pendientes; backlogs >= 100 todos; rieles vigentes; SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
@@ -174,7 +175,7 @@
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
   "estado": "085/086: T38 SELLADA como propuesta adoptada (cota MAX_CLOCK 3600->60) - implementacion derivada dueno M59 (familia DS); re-verificador 9 ciclos",
-  "acuse_enviado": 86
+  "acuse_enviado": 88
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {

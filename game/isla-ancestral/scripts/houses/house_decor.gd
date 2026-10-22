@@ -15,6 +15,12 @@ var _grid: Dictionary = {}       # Vector3i -> {mueble: String, rotacion: int}
 var _habitacion_act: String = ""
 var _activado: bool = false
 
+## Instrumentación M61 (G-5.3-Flash-Agente 2026-10-22): cuenta arrays/dicts
+## temporales creados por la rama de validación. La variante rápida
+## validar_celda_en() NO incrementa (reusa el buffer del caller); el wrapper
+## legacy validar_celda() sí (crea 1 dict + 1 array por llamada).
+var _allocs_validacion: int = 0
+
 ## Activa el modo decoración.
 func activar() -> void:
 	_activado = true
@@ -46,26 +52,61 @@ func celda_a_mundo(celda: Vector3i) -> Vector3:
 ## Valida si un mueble puede colocarse en una celda.
 ## Requiere datos de mueble (FurnitureData o Dictionary con los campos).
 func validar_celda(celda: Vector3i, mueble: Variant) -> Dictionary:
+	_allocs_validacion += 1  # wrapper legacy: 1 dict + 1 array nuevos
+	var out: Dictionary = {}
+	validar_celda_en(celda, mueble, out)
+	return out
+
+## Variante SIN allocs para el bucle de validación por frame (M61):
+## rellena el dict `out` del caller y su array `out["celdas"]` (clear +
+## reutilización). Devuelve true si la colocación es válida. El hot path
+## no crea NINGÚN Array/Dictionary nuevo (verificado en qa_m18_decor_visit.gd).
+func validar_celda_en(celda: Vector3i, mueble: Variant, out: Dictionary) -> bool:
+	celdas_buffer.clear()
+	out.clear()
 	if not _activado:
-		return {"ok": false, "razon": "modo decoración inactivo"}
+		out["ok"] = false
+		out["razon"] = "modo decoración inactivo"
+		return false
 	if mueble == null:
-		return {"ok": false, "razon": "mueble nulo"}
+		out["ok"] = false
+		out["razon"] = "mueble nulo"
+		return false
 	if _grid.has(celda):
-		return {"ok": false, "razon": "celda ocupada"}
+		out["ok"] = false
+		out["razon"] = "celda ocupada"
+		return false
 	var ancho: float = float(mueble.get("ancho", 1.0))
 	var profundo: float = float(mueble.get("profundo", 1.0))
 	if ancho <= 0.0 or profundo <= 0.0:
-		return {"ok": false, "razon": "dimensiones inválidas"}
-	# Superficie que ocupa (celdas)
-	var celdas: Array = _celdas_ocupadas(celda, ancho, profundo, 0)
-	for c in celdas:
+		out["ok"] = false
+		out["razon"] = "dimensiones inválidas"
+		return false
+	# Superficie que ocupa (celdas) — array reutilizado del caller.
+	var ok := true
+	for c in celdas_buffer:
 		if _grid.has(c):
-			return {"ok": false, "razon": "solapa otro mueble"}
+			ok = false
+			break
+	if not ok:
+		out["ok"] = false
+		out["razon"] = "solapa otro mueble"
+		return false
 	# Restricción de pared: solo en el perímetro de la habitación.
 	var requiere_pared: bool = bool(mueble.get("requiere_pared", false))
 	if requiere_pared and not _en_borde_habitacion(celda):
-		return {"ok": false, "razon": "requiere pared y no está en el borde"}
-	return {"ok": true, "celdas": celdas}
+		out["ok"] = false
+		out["razon"] = "requiere pared y no está en el borde"
+		return false
+	out["ok"] = true
+	if out.has("celdas") and out["celdas"] is Array:
+		_celdas_ocupadas_en(celda, ancho, profundo, 0, out["celdas"])
+	else:
+		var arr: Array = []
+		_celdas_ocupadas_en(celda, ancho, profundo, 0, arr)
+		out["celdas"] = arr
+		_allocs_validacion += 1  # solo el PRIMER call crea el buffer del caller
+	return true
 
 ## Coloca un mueble en una celda con una rotación (pasos de 90°).
 ## Devuelve true si se colocó.
