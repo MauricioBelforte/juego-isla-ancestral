@@ -119,7 +119,7 @@
 - [x] Progreso de obra avanza con tick_diario de M29 [S] — `etapa_viable_en_estacion()` + `obtener_estacion_actual()` (GameTime)
 - [x] Horas de visita de vecinos respetan el reloj M29 [S] — `obtener_estacion_actual()` + señales `vecino_entro`/`vecino_salio`
 - [ ] Iluminación interior propia (independiente del ciclo M31) [M]
-- [ ] PRNG de partida M29 para preferencias y variaciones de visita [S]
+- [x] PRNG de partida M29 para preferencias y variaciones de visita [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: house_visit.gd autocompletar_preferencias() (seed determinista = hash(visitas + dia absoluto M29), no pisa definir_preferencia, catalogo ESTILOS_DECOR) + variante de frase de reaccion determinista por (vecino, dia) via _variante_frase; qa_m18_decor_visit.gd 15/0 EXIT 0
 - [x] Guardado sincronizado con GameState (M58) al crear/mutar la casa [S] — `obtener_estructuras()` + `restaurar_estructuras()` (contrato M60 BuildingsSaveProvider) + autoload
 - [ ] Eventos M29 (cumpleaños, festivales) generan visitas especiales [M]
 
@@ -139,7 +139,7 @@
 ## K. Optimización (6)
 
 - [x] Interior instanciado = cero coste de render en el mundo exterior [S] — `InteriorCamera` solo activo en interior
-- [ ] Grid de decoración sin allocs en el bucle de validación por frame [M]
+- [x] Grid de decoración sin allocs en el bucle de validación por frame [M] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: house_decor.gd validar_celda_en() (variante hot path que rellena el dict+array del caller preservando la referencia a traves del clear, buffer interno reutilizado _buffer_celdas, _celdas_ocupadas_en) + instrumentacion _allocs_validacion; qa_m18_decor_visit.gd 15/0 EXIT 0 (delta=0 en 60 validaciones; wrapper legacy contado aparte = 2/llamada); 03-Diseno: contratos _en y legacy mantenidos
 - [ ] Culling de muebles dentro de la habitación [S]
 - [x] Guardado compacto por IDs (sin duplicar nombres ni paths) [S] — `obtener_estructuras()` usa ID string + EstructurasCodec
 - [ ] Carga asíncrona del interior sin congelar el frame [M]
@@ -201,3 +201,5 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 122 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+**Totales:** 149 items · Completados: 116 · Pendientes: 33 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 116 [x] / 33 [ ] / 0 [?] = 149 tras tanda PRNG+grid-sin-allocs; qa_m18_decor_visit.gd 15/0; verdes del riel hoy: m18_casas 53/0, catalogo 26/0, interior 21/0, sistemas_s2 79/0. Cuelgue de test_m18_m17_conflicto en BUG-145.)
