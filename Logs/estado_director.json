@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T08:13:40",
+ "ultimo_update": "2026-10-22T08:19:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -33,9 +33,10 @@
   "acuse_enviado": 169
  },
  "ds_oc": {
-  "estado": "202: VERIFICADOR OFICIAL CONTINUO de Beam (leitmotiv: cada_batch, muestreo 21.8.2.b, citas sin tildes OK, desacoplado); saneo 11-BUGS pausado mientras dure el rol",
+  "estado": "OFFLINE hoy (fundador: disponible manana 2026-10-23); su rol de verificador oficial de Beam queda programado para entonces; HOY la verificacion del P-100 la hace el director por muestreo ~10% por batch",
   "pendientes_real": 357,
-  "acuse_enviado": 202
+  "acuse_enviado": 202,
+  "disponible_desde": "2026-10-23"
  },
  "hy3": {
   "estado": "317/318: RAMA 2 M66 RATIFICADA (19/0 fresh + guarda 3 capas probada EN ROJO: RED-A 20/1 y RED-B 15/1 con piso detectando la caida); M66 runtime PASS; RAMA 1 (#55/BUG-143) confirmada",
@@ -182,11 +183,11 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "P-100 FORMAL emitido ( regimen fundador: 100 por mensaje desde ya); P-30 sigue en paralelo (batch1 10/30); verificador DS-OC desacoplado",
-  "acuse_enviado": 129,
+  "estado": "P-30 batch1-2 RATIFICADOS (18 items, M59 87/130 y M156 211/307 y M138 20/131 y M17 105/175 syncs); P-100 en vuelo con verificacion del HOY = director; manana backfill de verificacion = DS-OC",
+  "acuse_enviado": 131,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "multitarea L1-L6, 2-4 por vuelta",
-  "encargo_activo": "P-30+P-100 combinados"
+  "encargo_activo": "P-100"
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
