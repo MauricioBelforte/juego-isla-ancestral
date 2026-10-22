@@ -24,7 +24,8 @@
   "estado": "FUNDADO (reclamo del fundador: guardia pasiva = mia): tanda 318 EMITIDA = Bateria 6 (7 definibles de M151) + PROTOCOLOS de medicion en 156-Terrenos (10) + 76-Multijugador (3) || GO ya no guardia; proximo 319",
   "pendientes_real": 222,
   "acuse_enviado": 318,
-  "ultima_tanda": 40
+  "ultima_tanda": 40,
+  "backlog_pendientes": 54
  },
  "deepseek": {
   "estado": "365 PROCESADO: P4 commit hecho; P2 aplicado (M147 sync_world_data.gd [x]->[?], fila 147 reconstruida al canon 11 con conteo disco 132/0/2 = 134 - la previa estaba en 65/134 desde SEPTIEMBRE, olvido de sincronizar tras el cierre de ayer); P3 ratificadas; P4 opcion (a) GO; P5 48=mayor; mi 366",
@@ -190,7 +191,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "23:28 - REGLA DEL FUNDADOR POR DOBLE - NO HAY GUARDIA PASIVA SIN TANDA: si un agente se vacia (Beam pasaba, G-5.3 pasaba), el director le BUSCA tanda concreta ANTES de dejarlo en guardia (protocolos de medicion, re-verificaciones cruzadas con artefactos, baterias finales de definibles, picaduras de otros). Asignaciones vivas: Beam = re-verificacion 13 modulos + fase 2 + picaduras (mi 212/213); G-5.3 = bateria 6 + protocolos 156/76 (mi 318); Step-5 = bloque final M23; DS-WB = P4-hecho + auditoria M113 (a) + item 34 + lote 91/147/24 (mi 366); agnes = radar (trabaja cuando caen lotes); Hy3 = encuesta lista.",
+ "nota_cron_d": "23:40 - FIX CRON D (fundador): backlog por nicho G-5.3 = 54 items en 8 modulos; >= 20 minimo de cola por agente activo; el ciclo repuebla ANTES de declarar guardia. Los demas: Step-5 cola viva, DS-WB lote GO, agnes radar, Beam re-routed 213/212.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
