@@ -217,3 +217,18 @@ Cada cron hace su TAREA PRINCIPAL siempre. SI en la misma vuelta el director det
 2. **Beam: paquetes de 100 por ciclo** (P-100 en su BACKLOG-MASTER, montado sobre 9 modulos nicho suyo con 501 [ ] disponibles); benchmark P-30 confirmo ~30 tareas en 4-10 min con citas al pie; cuando cierre 30 pasa al P-100 con GO adelantado.
 3. **Anti-colision numerica:** antes de escribir el acuse, verificar que el head del pool no tenga ya fichero con ese numero (pool compartido con el agente a alta velocidad).
 4. Citas textuales de los agentes pueden venir SIN tildes: el director compara con variantes (menú/menu) antes de declarar fallo - leccion re-aplicada del hallazgo 073.
+## REGLAS TRANSVERSALES DE LOS CRONS (fundador 2026-10-22 19:40)
+
+### REGLA MULTITAREA (directiva del fundador, reforzada 22oct tras el dia de ~190 mensajes de Beam)
+- **MENSAJES LARGOS CON TRABAJO LARGO, POCOS MENSAJES**: es mejor 1 mensaje con 2+ tareas y tanda extendida que 10 mensajes de 1 tarea.
+- Todo encargo del director lleva MINIMO 2 tareas (salvo dependencia dura entre agentes).
+- Todo reporte del agente: consolidado, con secciones cortas POR ITEM - JAMAS un mensaje por tanda/chisme/ping.
+- Meta operativa: la capacidad de escritura va al TRABAJO, no a la mensajeria. Menos mensajes => menos carreras de pool
+  (4 gemelos el 22oct), menos T-19 (plantillas vacias), menos overhead de numeracion y sanacion.
+
+### FIRMA DEL DIRECTOR EN ESTE ARCHIVO
+
+**Modelo:** GLM-5.3 Flash-Director
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-22 19:40 (refuerzo directiva multitarea/mensajes-consolidados)
+

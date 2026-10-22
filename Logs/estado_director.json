@@ -312,12 +312,7 @@
   "implicacion_operativa": "NO delegarles tareas que requieran resultados inmediatos; dejarlos trabajar tranquilos. Tareas urgentes/asicronas -> agentes de Kilo (agnes, MiniMax-M3.1, Reflection-Beam-1.0, G-5.3) o resolverlas el director. Para WB: encargos apilados de fondo que aguanten 1h+ sin bloquear a nadie"
  },
  "nota_re_poblacion_cron_d": "BUG de scripts/repoblar_backlog.py linea 50 (AttributeError: glob._globmod) - repoblacion hecha MANUAL this vuelta; arreglar script antes del proximo CRON D (fix trivial: import glob sano)",
- "regla_multitarea_fundador": {
-  "directiva": "FUNDADOR 2026-10-22 07:37: A TODOS los agentes, siempre que haya tiempo, dar MAS DE UNA TAREA por encargo - optimiza mensajes",
-  "aplicacion": "El director nunca envia encargo mono-tarea si hay cola: minimo 2 items (tarea principal + extras etiquetados). El agente reporta combinado (seccion corta por item). Aplica a los 9 canales y a Futuros, incluido WB asincrono (2-3 de fondo por vuelta horaria)",
-  "excepcion": "Si una tarea PRECISA el resultado de la tarea de OTRO agente, va sola o queda en espera de ese resultado - no se mete en el paquete multitarea",
-  "criterio_final": "MENOS mensajes cortos y MAS tareas por mensaje, salvo dependencias entre agentes"
- },
+ "regla_multitarea_fundador": "REFORZADA 22oct 19:40 por el fundador: mensajes LARGOS con trabajo LARGO y consolidados > cantidad de mensajes. Encargos: 2+ tareas por mensaje (excepcion solo dependencia dura). Reportes: consolidados por secciones, JAMAS un mensaje por tanda/ping. Evidencia del dia: ~190 mensajes de Beam => 4 gemelos de pool + T-19 + overhead de sanacion; la capacidad debe ir al trabajo.",
  "decision_pendiente_flint_flota": {
   "estado": "PRUEBA APLAZADA AL 2026-10-23 (fundador: quizas esta saturado hoy)",
   "hecho_hoy": "Flint recursivo/flint-v1.0:free NO funciono en OpenCode - causa probable: tool-calls XML estilo GLM-4.7 no estandar + modelo recien nacido/free inestable",
