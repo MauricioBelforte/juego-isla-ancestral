@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T08:02:40",
+ "ultimo_update": "2026-10-22T08:06:40",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "268/269: S22 RATIFICADA (M138 19/131 contenido, turno 2-BIS); reparticion M138 (definiciones contenido suyas); regla multitarea aplicada en S23",
+  "estado": "270/271: S23 MULTITAREA RATIFICADA (M17 P10 doc + M67 locomotora 35/131); regimen multitarea aplicado; GO S24",
   "pendientes_real": 222,
-  "acuse_enviado": 269,
+  "acuse_enviado": 271,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -118,9 +118,9 @@
   "Colision de numeracion por pool compartido al ritmo multitarea de Beam (07:52: DOS ficheros 121 — el acuse mio y su t58) - en adelante cada acuse del director verifica que el head del pool no tenga fichero ya existente con ese numero antes de escribir"
  ],
  "minimax_m3_1_flash": {
-  "estado": "048/049: M20 tanda 2 RATIFICADA (78/148); trampa limpieza automatica de canal registrada; M17 implementacion sigue suya",
+  "estado": "050/051: M20 tanda 3 RATIFICADA (idempotencia, 80/148); sigue cola",
   "pendientes_real": 685,
-  "acuse_enviado": 49,
+  "acuse_enviado": 51,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -181,11 +181,11 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "P-30 en vuelo (lanzada 07:58); P-100 PREPARADO y anexado a su BACKLOG-MASTER (9 modulos, 100 items regla citas/editor-locked/sin pisar dueños) - se anuncia el patron cuando cierre el P-30",
-  "acuse_enviado": 125,
+  "estado": "126/127: P-30 batch1 RATIFICADO (10 items en ~4 min, muestreo 4/4); P-100 con GO adelantado (100/ciclo, enmienda cron D v4 del fundador)",
+  "acuse_enviado": 127,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "multitarea L1-L6, 2-4 por vuelta",
-  "encargo_activo": "P-30; P-100 listo en cola"
+  "encargo_activo": "P-30 batch2 + GO adelantado P-100"
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {

@@ -210,3 +210,10 @@ Reglas: numeración por pool del canal destino (3 cifras) consumida al escribir,
 ## Regla de combinacion entre crons (fundador 2026-10-21 21:28)
 
 Cada cron hace su TAREA PRINCIPAL siempre. SI en la misma vuelta el director detecta OTRAS cosas utiles (un pendiente por responder, una preservacion urgente, una derivacion que necesita decision), TAMBIEN las hace en esa vuelta y etiqueta el reporte indicando que combin. Ejemplo real: 21:25 C hizo gate+preservacion y ademas cerro la derivacion de crafting respondiendo a G-5.3/MiniMax (etiquetado C+B+D combinados). La trazabilidad se mantiene ESCRIBIENDO en el reporte que crons se combinaron.
+
+
+## CRON D v4 (enmienda 2026-10-22 08:06, directivas del fundador 07:37/07:55/08:03)
+1. **Cada ciclo investiga tareas para TODOS** (multi-tarea: 2+ items por encargo, salvo dependencias entre agentes) - no solo los agentes con backlog corto.
+2. **Beam: paquetes de 100 por ciclo** (P-100 en su BACKLOG-MASTER, montado sobre 9 modulos nicho suyo con 501 [ ] disponibles); benchmark P-30 confirmo ~30 tareas en 4-10 min con citas al pie; cuando cierre 30 pasa al P-100 con GO adelantado.
+3. **Anti-colision numerica:** antes de escribir el acuse, verificar que el head del pool no tenga ya fichero con ese numero (pool compartido con el agente a alta velocidad).
+4. Citas textuales de los agentes pueden venir SIN tildes: el director compara con variantes (menú/menu) antes de declarar fallo - leccion re-aplicada del hallazgo 073.
