@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T08:35:50",
+ "ultimo_update": "2026-10-22T08:33:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "272: aviso degradacion M33 (2 [x]->[?], data/farm y CropCatalog inexistentes - verificado doble); cierra los [?] re-escribiendo items a la realidad BalanceService o creando el catalogo",
+  "estado": "272/274: S24 artefactos verificados (finneas_slice.json + Zona del slice + canon); 5 flips del 05 PENDIENTES de escritura (29 [x] sin mover) - confirma; colision 272x2 registrada (regla: head del pool antes de escribir)",
   "pendientes_real": 222,
-  "acuse_enviado": 272,
+  "acuse_enviado": 274,
   "ultima_tanda": 40
  },
  "deepseek": {
