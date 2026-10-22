@@ -16,9 +16,9 @@ extends SceneTree
 #     + _summary() diferido. Instrumentacion LOTE 1 (suites SIN-DUENO), 2026-10-08,
 #     DeepSeek-V4.1-Flash (msg 98). Piso = checks reales MEDIDOS (Log 1490).
 #     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
-#     Piso actualizado a 53 por la tanda 2 (Step-5, 2026-10-21): 40 medidos + 13 nuevos.
-const CHECKS_MINIMOS := 53
-const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_enter_exit", "_test_fisica_acotada", "_test_reversa", "_test_giro_riel", "_test_dock_zarpar", "_test_eventos", "_test_persistencia", "_test_delta_frameindependiente", "_test_salida_velocidad"]
+#     Piso actualizado a 61 por la tanda 3 (Step-5, 2026-10-21): 53 medidos + 8 del ciclo barco end-to-end.
+const CHECKS_MINIMOS := 61
+const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_enter_exit", "_test_fisica_acotada", "_test_reversa", "_test_giro_riel", "_test_dock_zarpar", "_test_eventos", "_test_persistencia", "_test_delta_frameindependiente", "_test_salida_velocidad", "_test_ciclo_barco"]
 var _checks: int = 0
 var _wb_vistos: Dictionary = {}
 var _wb_cerrado: bool = false
@@ -80,6 +80,8 @@ func _run() -> void:
 	_fin("_test_delta_frameindependiente")
 	_test_salida_velocidad()
 	_fin("_test_salida_velocidad")
+	_test_ciclo_barco()
+	_fin("_test_ciclo_barco")
 	_summary()
 
 
@@ -298,5 +300,34 @@ func _test_salida_velocidad() -> void:
 	res = _vm.exit()
 	_check(bool(res.ok), "salir tras frenar OK")
 	_check(not _vm.esta_en_vehiculo(), "estado a pie tras salir")
+	if not _vm.docked:
+		_vm.docked = true
+
+
+func _test_ciclo_barco() -> void:
+	# Checklist V2: ciclo barco end-to-end dock -> entrar -> navegar -> atracar -> salir.
+	# Tanda 3 Step-5 2026-10-21: los bloques previos cubren las piezas por separado;
+	# este bloque las ejecuta EN SECUENCIA sobre un mismo vehículo (un solo ciclo).
+	# Va al final de _run(): no altera la premisa de los bloques previos.
+	_check(not _vm.esta_en_vehiculo(), "ciclo barco: empieza a pie")
+	_check(bool(_vm.docked), "ciclo barco: empieza docked")
+	var res: Dictionary = _vm.enter("barco")
+	_check(bool(res.ok), "ciclo barco: entrar OK")
+	_check(_vm.esta_en_vehiculo(), "ciclo barco: en vehículo tras entrar")
+	res = _vm.zarpar()
+	_check(bool(res.ok) and not bool(_vm.docked), "ciclo barco: zarpar OK, navegando")
+	var ctrl: RefCounted = _vm.controller
+	var dist: float = 0.0
+	for i in range(20):
+		_vm.tick_conduccion(0.1, true, 0, false)
+		dist += float(ctrl.desplazamiento(0.1))
+	var vel: float = float(ctrl.velocidad)
+	_check(absf(vel - 6.0) < 0.01, "ciclo barco: acelera a crucero 6 m/s en 2 s: %.2f" % vel)
+	_check(dist > 1.0, "ciclo barco: el vehículo se desplaza al navegar: %.2f m" % dist)
+	res = _vm.atracar(null)
+	_check(bool(res.ok) and bool(_vm.docked), "ciclo barco: atracar OK (camino real VEH-DOCK)")
+	res = _vm.exit()
+	_check(bool(res.ok) and not _vm.esta_en_vehiculo(), "ciclo barco: salir OK tras atracar")
+	_check(_vm.controller == null, "ciclo barco: controller liberado tras salir")
 	if not _vm.docked:
 		_vm.docked = true

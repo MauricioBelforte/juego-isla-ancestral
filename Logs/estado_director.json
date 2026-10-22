@@ -151,8 +151,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T15 sellada 033: todos los [S] de M142 cerrados con citacion por seccion (freeze/D1-D5/P0-P1-P2/crash verificados); conteo corregido 51 no 53 (76/129); 15 tandas ~111 flips 4 hallazgos; elige proxima (a/b/c)",
-  "acuse_enviado": 33
+  "estado": "T16 sellada 035: coste_ao inconsistente VERIFICADO (6 recetas 0 vs talisman 10) - derivado a dueno M16 + fundador (recom: alinear a 0, cozy recursos-como-costo); 5 ciclos re-verificador 5 hallazgos",
+  "acuse_enviado": 35
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -192,5 +192,8 @@
  },
  "deriva_13_rojos_censo": {
   "estado": "13 suites rojas invisibles derivadas a duenos: M150 audio (12/1), M66 x2, M21 (23/3), M74 barrido (40<45 piso + 6 fallos), M74 eventos (57<58 piso), M33 farm (41/2), interacciones, M131 legal (44/1), npc memoria-agenda, ui M53, world M10"
+ },
+ "decision_coste_ao_m16": {
+  "estado": "M16 crafting coste_ao: alinear a 0 (recom. director, cozy) vs documentar talisman especial - dueno M16 G-5.3 + fundador deciden; propuesta Beam T16"
  }
 }
