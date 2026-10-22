@@ -30,11 +30,19 @@
 # no se inventa el personaje). Bloque J afirma carga, fuente, unicidad de
 # consecuencias y corrida end-to-end de DOS de las nuevas (carpintero con
 # madera_roble real de data/items/ y alquimista con objeto narrativo).
+# Iter. 6 (Step-5-WorkBuddy, 2026-10-22, Log 2117): cluster Lugares del 03-Diseno
+# (biblioteca ya cubierta en iter. 3; faro por cadena-faro de las 4 previas).
+# 3 cadenas nuevas —jardines, cofradía, molino— con NPC REALES de data/villagers/
+# (mateo_mapache granjero, mercedes_lince mercader, aria_ciervo trovadora) y
+# objetos REALES de data/items/ (baya_roja, fragmento_ancestral, fibra_algodon).
+# Bloque K afirma carga, fuente, unicidad de consecuencias/diarios y corrida
+# end-to-end de las 3. molino_funcionando era flag HUERFANO (0 archivos, Log 2082):
+# la cadena-molino le da respaldo en datos.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -78,6 +86,7 @@ func _run() -> void:
 	_test_merge_ejemplos()
 	_test_esquema_consistente()
 	_test_vecinos()
+	_test_lugares()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -107,7 +116,8 @@ func _summary() -> void:
 func _test_carga() -> void:
 	# Iter. 3: 4 del principal + 1 mergeada de ejemplos (cadena-biblioteca).
 	# Iter. 5 (Log 2107): +6 historias de vecinos en el principal -> 10 + 1 = 11.
-	_check(_h.cadenas_count() == 11, "11 cadenas cargadas tras el merge (10 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 6 (Log 2117): +3 del cluster Lugares -> 13 + 1 = 14.
+	_check(_h.cadenas_count() == 14, "14 cadenas cargadas tras el merge (13 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -334,7 +344,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 10, "catálogo principal con 10 cadenas (crudo, 4 + 6 vecinos): %d" % principal.size())
+	_check(principal.size() == 13, "catálogo principal con 13 cadenas (crudo, 4 + 6 vecinos + 3 lugares): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -357,7 +367,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 11, "11 cadenas cargadas en runtime (10 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 14, "14 cadenas cargadas en runtime (13 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -467,3 +477,98 @@ func _test_vecinos() -> void:
 	_check(_h.esta_completada("cadena-alquimista"), "cadena-alquimista completada end-to-end")
 	_check(ws_has("jarabe_lunar_listo"), "consecuencia jarabe_lunar_listo aplicada (M21)")
 	_fin("J")
+
+
+## Iter. 6 (Log 2117): cluster Lugares del 03-Diseno — biblioteca ya cubierta
+## (iter. 3) y faro por cadena-faro (4 previas). Las 3 cadenas nuevas usan NPC
+## REALES de data/villagers/ (mateo_mapache granjero, mercedes_lince mercader,
+## aria_ciervo trovadora) y objetos REALES de data/items/ (baya_roja,
+## fragmento_ancestral, fibra_algodon). Afirma carga, fuente del principal,
+## unicidad anti-repeticion de consecuencias y diarios, y corrida end-to-end
+## de las 3. molino_funcionando era flag huerfano (0 archivos, Log 2082).
+func _test_lugares() -> void:
+	# Estado limpio: el bloque no depende de lo que dejaron los anteriores
+	_h.restore_save_data({})
+	var nuevas := ["cadena-jardines", "cadena-cofradia", "cadena-molino"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+	# Anti-repeticion: 3 flags de consecuencia nuevos, sin colision con los 11 previos
+	var existentes := ["faro_encendido", "invernadero_abierto", "plaza_decorada",
+		"luciernagas_vueltas", "biblioteca_iluminada", "pan_fiesta_horneado",
+		"banco_plaza_reparado", "manto_niebla_terminado", "red_pescador_reparada",
+		"sendero_bosque_senalizado", "jarabe_lunar_listo"]
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag) or existentes.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 3, "3 consecuencias distintas en las cadenas de lugares: %d" % flags.size())
+	_check(unicos, "consecuencias de lugares sin colision con las previas (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 3, "3 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# End-to-end 1: jardines (baya_roja REAL de data/items/)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"baya_roja": 1})
+	var res: Dictionary = _h.iniciar_cadena("cadena-jardines")
+	_check(bool(res.ok), "iniciar cadena-jardines OK")
+	res = _h.reportar_paso("cadena-jardines", "hablar", "mateo_mapache")
+	_check(bool(res.ok), "jardines p1 hablar mateo_mapache OK")
+	res = _h.reportar_paso("cadena-jardines", "explorar", "jardines")
+	_check(bool(res.ok), "jardines p2 explorar jardines OK")
+	res = _h.reportar_entrega("cadena-jardines")
+	_check(bool(res.ok), "jardines p3 entregar baya_roja OK (inventario)")
+	res = _h.reportar_paso("cadena-jardines", "puzzle", "semillas-perdidas")
+	_check(bool(res.ok), "jardines p4 puzzle OK")
+	_check(_h.esta_completada("cadena-jardines"), "cadena-jardines completada end-to-end")
+	_check(ws_has("jardin_florecido"), "consecuencia jardin_florecido aplicada (M21)")
+	# End-to-end 2: cofradia (fragmento_ancestral REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"fragmento_ancestral": 1})
+	res = _h.iniciar_cadena("cadena-cofradia")
+	_check(bool(res.ok), "iniciar cadena-cofradia OK")
+	res = _h.reportar_paso("cadena-cofradia", "hablar", "mercedes_lince")
+	_check(bool(res.ok), "cofradia p1 hablar mercedes_lince OK")
+	res = _h.reportar_paso("cadena-cofradia", "explorar", "cofradia")
+	_check(bool(res.ok), "cofradia p2 explorar cofradia OK")
+	res = _h.reportar_entrega("cadena-cofradia")
+	_check(bool(res.ok), "cofradia p3 entregar fragmento_ancestral OK (inventario)")
+	res = _h.reportar_paso("cadena-cofradia", "puzzle", "sellos-antiguos")
+	_check(bool(res.ok), "cofradia p4 puzzle OK")
+	_check(_h.esta_completada("cadena-cofradia"), "cadena-cofradia completada end-to-end")
+	_check(ws_has("cofradia_activa"), "consecuencia cofradia_activa aplicada (M21)")
+	# End-to-end 3: molino (fibra_algodon REAL). Ademas respalda el flag
+	# molino_funcionando, huerfano desde el relevamiento del Log 2082.
+	if inv != null:
+		inv.agregar_items({"fibra_algodon": 1})
+	res = _h.iniciar_cadena("cadena-molino")
+	_check(bool(res.ok), "iniciar cadena-molino OK")
+	res = _h.reportar_paso("cadena-molino", "hablar", "aria_ciervo")
+	_check(bool(res.ok), "molino p1 hablar aria_ciervo OK")
+	res = _h.reportar_paso("cadena-molino", "explorar", "molino")
+	_check(bool(res.ok), "molino p2 explorar molino OK")
+	res = _h.reportar_entrega("cadena-molino")
+	_check(bool(res.ok), "molino p3 entregar fibra_algodon OK (inventario)")
+	res = _h.reportar_paso("cadena-molino", "puzzle", "melodia-del-molino")
+	_check(bool(res.ok), "molino p4 puzzle OK")
+	_check(_h.esta_completada("cadena-molino"), "cadena-molino completada end-to-end")
+	_check(ws_has("molino_funcionando"), "consecuencia molino_funcionando aplicada (M21) - flag huerfano respaldado")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# cadena-biblioteca en el bloque H). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-jardines"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	_fin("K")

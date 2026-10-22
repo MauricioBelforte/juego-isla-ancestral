@@ -148,6 +148,51 @@
 			"consecuencia": { "jarabe_lunar_listo": true },
 			"oculta": false,
 			"postgame": false
+		},
+		{
+			"id": "cadena-jardines",
+			"titulo": "Los Jardines de la Niebla",
+			"contexto": "Mateo quiere recuperar los jardines que su madre cuidaba antes de que la niebla los cubriera",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "mateo_mapache" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "jardines" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "baya_roja" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "semillas-perdidas" }
+			],
+			"recompensa": { "diario": "capitulo-jardines", "cosmetico": "sombrero de paja" },
+			"consecuencia": { "jardin_florecido": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-cofradia",
+			"titulo": "Los Sellos de la Cofradia",
+			"contexto": "Mercedes busca los sellos antiguos de la cofradia para reabrir el gremio del puerto",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "mercedes_lince" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "cofradia" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "fragmento_ancestral" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "sellos-antiguos" }
+			],
+			"recompensa": { "diario": "capitulo-cofradia", "cosmetico": "capa del gremio" },
+			"consecuencia": { "cofradia_activa": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-molino",
+			"titulo": "El Molino que Canta",
+			"contexto": "Aria escucho de nina la cancion del molino y quiere volver a oirla antes de la vendimia",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "aria_ciervo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "molino" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "fibra_algodon" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "melodia-del-molino" }
+			],
+			"recompensa": { "diario": "capitulo-molino", "cosmetico": "pandereta de madera" },
+			"consecuencia": { "molino_funcionando": true },
+			"oculta": false,
+			"postgame": false
 		}
 	]
 }

@@ -48,7 +48,7 @@
 ## D. Dirigible
 
 - [ ] Vuelo con altitud/descenso y aterrizaje suave en plataformas [M]
-- [ ] Altitud máxima 60 m (mejorable a 90 m) [S] — Step-5 2026-10-21: el preset declara altitud_max 60 (vehicles.json, testeado) pero el controller no tiene eje vertical (plano XZ); el techo de vuelo efectivo es iter. 2 con nodos 3D. La mejora a 90 m pertenece a la seccion M (mejoras), no implementada.
+- [x] Altitud máxima 60 m (mejorable a 90 m) [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: vehicle_controller.gd dimensión vertical LÓGICA (var altitud + VELOCIDAD_VERTICAL 2 m/s; aplicar() con args subir/bajar DEFAULTS retrocompatibles — los tests de 4 args intactos 99/0). Techo EXACTO del preset: clamp mini(altitud, altitud_max_efectiva()) — dirigible 60 de base, 90 con el nivel máximo de mejoras (_por_nivel altitud 30 + tope 90); qa_m67_altitud.gd 6/0 EXIT 0 (techo 60, piso 0, barco no vuela, retrocompatible, techo mejorado 90). El Node3D de la iter. 2 consume ctrl.altitud — Step-5 2026-10-21: el preset declara altitud_max 60 (vehicles.json, testeado) pero el controller no tiene eje vertical (plano XZ); el techo de vuelo efectivo es iter. 2 con nodos 3D. La mejora a 90 m pertenece a la seccion M (mejoras), no implementada.
 - [ ] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C] — Step-5 2026-10-21: medicion de dependencias: chunk_target = 0 archivos fuera de validate_vehicles.gd (M10/M61 NO exponen la API); vehicle_streaming.gd no existe. Diseno del cable en 03-Diseno.md §3.2 (tanda 2); implementacion con dueno externo M10/M61.
 - [ ] No colisionar con vegetación alta (paso por encima) [M] — Step-5 2026-10-21: sin sistema de colisiones de vegetacion en M50 (grep colision en scripts/: camera/construccion/animales_ia, ninguno de terreno para vehiculos); sin nodos 3D. Dueno externo M50.
 - [ ] Viento lateral (M32) y farol nocturno (M49) [M]
@@ -89,7 +89,7 @@
 
 - [ ] Colisiones suaves con islas, rocas y vegetación (M50) [C]
 - [ ] Barco no puede ir a tierra; submarino no emerge en tierra [M]
-- [ ] Dirigible con techo de altitud [S] — Step-5 2026-10-21: sin fisica vertical en el controller (plano XZ); pendiente iter. 2 con nodos 3D.
+- [x] Dirigible con techo de altitud [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: mismo fix del controller (techo = altitud_max_efectiva() del preset: 60 base / 90 mejorado; barco/submarino con altitud_max=0 no vuelan). Regresión test_vehiculos.gd 99/0 EXIT 0 (firma de 4 args retrocompatible). La física real de ascenso/descenso visual del Node3D es iter. 2 (la lógica está medida) — Step-5 2026-10-21: sin fisica vertical en el controller (plano XZ); pendiente iter. 2 con nodos 3D.
 - [ ] Vehículos no atraviesan puentes (M11) ni ruinas (M25) [M]
 - [ ] No atropellar animales (M36) [M]
 
@@ -283,3 +283,4 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 112 [ ] / 0 [?].
 > Las marcas no se tocaron.
+**Totales:** 131 items · Completados: 34 · Pendientes: 97 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 34 [x] / 97 [ ] / 0 [?] tras tanda techo-altitud dirigible; qa_m67_altitud.gd 6/0 + regresión test_vehiculos 99/0.)

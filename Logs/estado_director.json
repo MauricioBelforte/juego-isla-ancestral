@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T03:30:00",
+ "ultimo_update": "2026-10-22T02:50:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "M73 en curso: lote 4 posible en vuelo (05 M marcado sin nuevo mensaje); proximo acuse pendiente de leer",
+  "estado": "936/937: M73 lote4 RATIFICADA (63/135 verificado en disco; catalogo agotado de data — restantes con dueños externos); siguiente #889 o M73",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,13 +13,13 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 933,
+  "acuse_enviado": 937,
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "256/257: S16 RATIFICADA (barrido global 14 suites, cero regresiones; M143/M151 bien despachados); GUARDIA VALIDADA",
+  "estado": "261/262: S18 M67 RATIFICADA (altitud max por nivel con topes de 03-Diseno §3.1; M67 34/131 fila sync verificada); GO S19",
   "pendientes_real": 222,
-  "acuse_enviado": 255,
+  "acuse_enviado": 262,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -155,7 +155,7 @@
   "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 06:15: script 0 pendientes; backlogs >= 100 todos; rieles vigentes; SIN repoblacion",
+ "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
