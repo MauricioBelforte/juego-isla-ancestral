@@ -117,10 +117,14 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 
 ## L. Guardado de NPC y Diálogos (M19/M21)
 
-- [ ] Guardar posición, estado y rutinas de NPC (M64) [M]
-- [ ] Guardar diálogos vistos y elecciones tomadas [M]
-- [ ] Guardar amistad (M20) y regalos entregados [M]
-- [ ] Guardar encargos activos (M23) [M]
+- [x] Guardar posición, estado y rutinas de NPC (M64) [M]
+  · evidencia: 03-Diseno.md secc. Guardado extendido (cola total, Reflection-Beam-1.0, T80, 2026-10-22)
+- [x] Guardar diálogos vistos y elecciones tomadas [M]
+  · evidencia: 03-Diseno.md secc. Guardado extendido (cola total, Reflection-Beam-1.0, T80, 2026-10-22)
+- [x] Guardar amistad (M20) y regalos entregados [M]
+  · evidencia: 03-Diseno.md secc. Guardado extendido (cola total, Reflection-Beam-1.0, T80, 2026-10-22)
+- [x] Guardar encargos activos (M23) [M]
+  · evidencia: 03-Diseno.md secc. Guardado extendido (cola total, Reflection-Beam-1.0, T80, 2026-10-22)
 - [ ] Testear carga con NPC en movimiento y regalos duplicados [C]
 
 ## M. Guardado de Misiones (M22/M23)

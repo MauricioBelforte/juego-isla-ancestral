@@ -184,3 +184,20 @@ save_writer.write_atomic() falla por disco lleno
 ### Guardar estado de puertas y ventanas
 - Guardar: estado abierto/cerrado/bloqueado por puerta/ventana.
 - Formato: map de door_id -> {estado, bloqueada}.
+## Guardado extendido (cola total M59 batch)
+
+### Guardar posicion, estado y rutinas de NPC (M64)
+- Guardar: posicion, estado actual, rutina diaria, inventario NPC.
+- Formato: map de npc_id -> {pos, estado, rutina, inventario}.
+
+### Guardar dialogos vistos y elecciones tomadas
+- Guardar: set de dialogos vistos + elecciones tomadas por NPC.
+- Formato: map de npc_id -> {dialogos_vistos[], elecciones[]}.
+
+### Guardar amistad (M20) y regalos entregados
+- Guardar: nivel de amistad + lista de regalos entregados por NPC.
+- Formato: map de npc_id -> {amistad, regalos[]}.
+
+### Guardar encargos activos (M23)
+- Guardar: encargos activos con progreso.
+- Formato: array de {encargo_id, progreso, timestamp}.
