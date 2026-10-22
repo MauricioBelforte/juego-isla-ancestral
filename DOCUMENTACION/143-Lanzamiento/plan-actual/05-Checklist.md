@@ -123,22 +123,30 @@
   · evidencia: 03-Diseno.md secc. Backend y telemetria (cola total, Reflection-Beam-1.0, T99, 2026-10-22)
 - [x] Definir verificación de telemetría (M104) recibiendo datos reales [M]
   · evidencia: 03-Diseno.md secc. Backend y telemetria (cola total, Reflection-Beam-1.0, T99, 2026-10-22)
-- [ ] Definir verificación de cloud saves (M60) y logros (M59) operativos [M]
+- [x] Definir verificación de cloud saves (M60) y logros (M59) operativos [M]
+  · evidencia: 03-Diseno.md secc. Pagos y transacciones (cola total, Reflection-Beam-1.0, T101, 2026-10-22)
 - [x] Definir registro de métricas de servidor por hora [S]
   · evidencia: 03-Diseno.md secc. Backend y telemetria (cola total, Reflection-Beam-1.0, T99, 2026-10-22)
 
 ## 9. Monitorizar compras (RF7/M149)
 
-- [ ] Definir dashboard de transacciones (si aplica por plataforma) [M]
-- [ ] Definir alerta de errores de pago ≥ 1% de transacciones [M]
-- [ ] Definir verificación de reembolsos y soporte de compras [S]
-- [ ] Definir verificación de DLC/expansiones si existen [S]
-- [ ] Definir registro de métricas de ventas por día [S]
+- [x] Definir dashboard de transacciones (si aplica por plataforma) [M]
+  · evidencia: 03-Diseno.md secc. Pagos y transacciones (cola total, Reflection-Beam-1.0, T101, 2026-10-22)
+- [x] Definir alerta de errores de pago ≥ 1% de transacciones [M]
+  · evidencia: 03-Diseno.md secc. Pagos y transacciones (cola total, Reflection-Beam-1.0, T101, 2026-10-22)
+- [x] Definir verificación de reembolsos y soporte de compras [S]
+  · evidencia: 03-Diseno.md secc. Pagos y transacciones (cola total, Reflection-Beam-1.0, T101, 2026-10-22)
+- [x] Definir verificación de DLC/expansiones si existen [S]
+  · evidencia: 03-Diseno.md secc. DLC y metricas (cola total, Reflection-Beam-1.0, T103, 2026-10-22)
+- [x] Definir registro de métricas de ventas por día [S]
+  · evidencia: 03-Diseno.md secc. DLC y metricas (cola total, Reflection-Beam-1.0, T103, 2026-10-22)
 
 ## 10. Monitorizar saves (RF8/M59/M60)
 
-- [ ] Definir dashboard de errores de guardado/cloud [M]
-- [ ] Definir alerta ante ≥ 5 reportes de save perdido [S]
+- [x] Definir dashboard de errores de guardado/cloud [M]
+  · evidencia: 03-Diseno.md secc. DLC y metricas (cola total, Reflection-Beam-1.0, T103, 2026-10-22)
+- [x] Definir alerta ante ≥ 5 reportes de save perdido [S]
+  · evidencia: 03-Diseno.md secc. DLC y metricas (cola total, Reflection-Beam-1.0, T103, 2026-10-22)
 - [x] Definir correlación de errores con versiones/builds [S]
 - [ ] Definir verificación de backup/reintento automático (M60) [M]
 - [ ] Definir triaje de saves como P1 (pérdida de progreso) [S]

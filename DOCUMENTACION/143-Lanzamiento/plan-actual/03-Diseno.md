@@ -245,3 +245,37 @@ Reporte (telemetría/review/soporte) → ticket M101 con buildId
 ### Registro de metricas de servidor por hora
 - Registro de metricas por hora.
 - Almacenamiento historico.
+## Pagos y transacciones (cola total M143 batch 12)
+
+### Verificacion de cloud saves (M60) y logros (M59) operativos
+- Verificar que cloud saves y logros funcionan post-lanzamiento.
+- Test de sincronizacion.
+
+### Dashboard de transacciones (si aplica por plataforma)
+- Dashboard de transacciones por plataforma.
+- Monitoreo de ventas.
+
+### Alerta de errores de pago >= 1% de transacciones
+- Alerta si errores de pago superan 1%.
+- Escalamiento automatico.
+
+### Verificacion de reembolsos y soporte de compras
+- Verificar proceso de reembolsos.
+- Soporte de compras operativo.
+## DLC y metricas (cola total M143 batch 13)
+
+### Verificacion de DLC/expansiones si existen
+- Verificar que DLCs funcionan post-lanzamiento.
+- Test de compatibilidad.
+
+### Registro de metricas de ventas por dia
+- Registro de ventas diarias por plataforma.
+- Dashboard de ventas.
+
+### Dashboard de errores de guardado/cloud
+- Dashboard de errores de guardado y cloud.
+- Monitoreo de sync.
+
+### Alerta ante >= 5 reportes de save perdido
+- Alerta si hay >= 5 reportes de save perdido.
+- Escalamiento automatico.
