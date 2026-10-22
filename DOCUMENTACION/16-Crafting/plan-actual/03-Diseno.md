@@ -323,3 +323,43 @@ Tipos vigentes: hacha, martillo, azada, machete.
 **Por qué:** evita accidentes de UI de múltiple-craft masivos (un slider/drag que pida 999 unidades de golpe). Para lotes mayores queda la vía del dueño de la UI (llamar craft N veces o un batch explícito diseñado).
 
 **Propuesta original:** Beam (re-verificador t9) — adoptada por dueño G-5.3-Flash-Agente con test.
+
+
+### RF-MR2 — `reparar_herramienta(item_id) -> Dictionary`
+Restaura la durabilidad de la herramienta al máximo de su nivel actual (techo MR16). Retorno honesto `{ok, motivo, _durabilidad}`. Motivos: "" (ok) · "no_es_herramienta" · "coste_ausente" · "sin_inventario" · "materiales_insuficientes". Solo emite `herramienta_reparada` en éxito. M13 aplica el techo real de durabilidad.
+
+### RF-MR9 — Estación elegida registrada en `stations.json`
+La estación de mejora/reparación se registra en `data/crafting/stations.json` con las recetas disponibles por estación (mesa_trabajo, telar, etc.). Permite que el crafting service filtre recetas por estación (`get_recipes_for_station`).
+
+### RF-MR10 — Rechazo de items no-herramienta
+La estación rechaza items que no son herramientas (M13 define la marca `es_herramienta`). Motivo de rechazo: "no_es_herramienta". Sin consumo de materiales ni emisión de señal.
+
+### RF-MR12 — Panel de mejora en la estación
+UI de mejora en la estación: nivel actual, coste del siguiente nivel, preview de durabilidad/efectividad post-mejora. Reutiliza `CraftingUI` con datos de `mejora_herramienta.json`.
+
+### RF-MR13 — Preview del coste con iconos de M14
+Preview del coste de mejora/reparación con iconos de M14 (inventario). Feedback honesto de lo que se va a consumir antes de confirmar. Sin consumo hasta confirmación.
+
+### RF-MR14 — Notificación cozy en éxito
+Notificación cozy en éxito de mejora/reparación reutilizando `NotificationService` (ToastType.ITEM). Solo en éxito. Sin notificación en fallo (solo motivo en UI).
+
+### RF-MR15 — M13 consume `efectividad(tipo, nivel)`
+M13 (Herramientas) consume `efectividad(tipo, nivel)` de MR4 para el escalado de rendimiento (velocidad de minado/tala). Curva lineal: 1.0 + 0.15 * nivel.
+
+### RF-MR16 — M13 consume `durabilidad_maxima(tipo, nivel)`
+M13 consume `durabilidad_maxima(tipo, nivel)` de MR4 como techo al aplicar la reparación. La durabilidad real no supera el máximo del nivel actual.
+
+### RF-MR17 — Contrato consumido documentado
+El contrato consumido (API, curvas, estación, señales) está documentado en `04-Codigo.md` de M13 (firma de la API `efectividad`/`durabilidad_maxima`) y en este `03-Diseno.md` (sección Contrato del bloque MR).
+
+### RF-MR18 — Test headless `_test_mejora_reparacion`
+Test headless que verifica: mejora consume materiales y sube nivel; reparar restaura durabilidad; fallo sin consumo; señales solo en éxito; persistencia aditiva. Ejecutable con `godot --headless --script`.
+
+### RF-MR20 — Verificación §21.8 por modelo distinto
+Verificación cruzada (QA) por un modelo distinto al implementador (G-5.3-Flash-Agente implementó; verificación por otro modelo). Independencia §21.8/§21.23.
+
+### RF-MR21 — `03-Diseno.md` actualizado con contrato completo
+Este `03-Diseno.md` actualizado con el contrato completo del bloque MR (API, curvas, estación, señales, schema JSON, integración M14/M59/M13/M93, política cozy de rechazos). Sección "Contrato del bloque MR" agregada (línea 12558+).
+
+### RF-MR22 — Desbloqueo de M158 registrado en CHECKLIST-GLOBAL
+Los 12 `[ ]` de M13 que dependían del bloque MR quedan desbloqueados al cerrar MR. Registrado en CHECKLIST-GLOBAL (fila M13 actualizada). M158 (desbloqueos) consume el contrato MR.
