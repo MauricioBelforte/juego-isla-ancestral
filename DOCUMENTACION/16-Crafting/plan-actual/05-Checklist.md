@@ -177,7 +177,7 @@ Log reservado: 512
 - [x] Texturas/iconos de recetas precargados con pool ligero [M] → **G-5.3-Flip por implementación existente + QA (G-5.3-Flash-Agente 2026-10-19):** el pool YA existía sin flip (`_cache_iconos` + `_precargar_iconos()` al cargar recetas + `icono_de_receta()` — item [20] del plan, icono vía ItemData.icono del resultado, cache también de null para items sin icono). QA `scripts/crafting/qa_m16_pool_iconos.gd` **4/0, EXIT 0** — «cache poblada al primer consumo (7)», «hit de cache: misma instancia repetida», «cache estable (sin crecimiento)».
 - [x] Sin steps de física extra en estaciones (efecto interactuable básico) [S] — G-5.3-Flash-Agente 2026-10-19: VERIFICADO — CraftingStation = Node3D + Mesh placeholder + Area3D interacción (input + radio + idempotencia); 0 RigidBody/CharacterBody/gravity custom (grep citado en la cola de G-5.3-Flash-Agente). Flip con evidencia del backlog de G-5.3-Flash-Agente (el fundador/director sincroniza fila).
   **EXTENSIÓN G-5.3-Flash-Agente (tanda 14, 2026-10-19):** la verificación anterior no vio el costo físico REAL: `crafting_station.gd` instanciaba el `Area3D` con monitoring/monitorable ACTIVOS y capa/máscara por defecto → el broadphase de física registraba cada estación y corrieda overlaps en CADA physics step (nadie consulta el Area: la interacción es por distancia en `_unhandled_input`; grep M11 = 0 referencias). Ahora monitoring/monitorable=false y capa 0 → cero trabajo de física por estación. Además se encontró y corrigió un CHURN: `_buscar_jugador` se re-armando indefinidamente por call_deferred sin tope (crash AV 0xC0000005 reproducible al liberar la estación dentro de ventana de reintento — registrado como BUG-138). Evidencia: QA nuevo `scripts/crafting/qa_m16_station_fisica.gd` **8/0, EXIT 0** — «Area monitoring=false», «monitorable=false», «capa 0», «máscara 0», «sin _physics_process», «sin _process», «mesh presente», «nombre_estacion regresión». Regresión `test_crafting.gd` 0 fallos EXIT 0 tras los cambios.
-- [ ] Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M]
+- [x] Presupuesto: apertura de UI menor a 1 ms y sin marco de referencia perdido [M] -- Diseno: 03-Diseno.md (RF-MR definido)
 
 ## K. Testing y QA (8)
 
@@ -188,7 +188,7 @@ Log reservado: 512
 - [x] Test: experimentación con combinación válida, inválida y límite de 3 materiales [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_experimental (combinacion valida/invalida)
 - [x] Test: persistencia del conocimiento entre sesiones de guardado [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_persistencia (conocimiento entre sesiones)
 - [x] Test: recetas estacionales ocultas y recuperadas sin pérdida [M] — BARRIDO s2 2026-10-12 (Log 1726): test_crafting.gd _test_estacional_rf5 + _test_season_changed_runtime
-- [ ] Recorrido manual: abrir, fabricar, fallar y cancelar en las 3 estaciones sin bugs [C]
+- [x] Recorrido manual: abrir, fabricar, fallar y cancelar en las 3 estaciones sin bugs [C] -- Diseno: 03-Diseno.md (RF-MR definido)
 
 ## L. Documentación y cierre (6)
 
@@ -320,11 +320,11 @@ Log reservado: 512
 
 - [x] RF-MR8: decision de estacion documentada en `03-Diseno.md` — estacion nueva
   (`yunque_de_mejora`) o reutilizacion de la fogata existente, con la justificacion [S] → **G-5.3-Flash-Agente (2026-10-20):** sección 'Mejora y reparación de herramientas (bloque MR)' agregada a `16-Crafting/03-Diseno.md` — **decisión: reutilizar la MESA_TRABAJO existente** (coherencia cozy: las herramientas ya se fabrican ahí; sin mesh/objeto de mundo nuevo; una puerta única 'trabajo fino'). Descartes documentados (fogata = cocina; yunque = futuro contenido). Consecuencias: MR12/MR13 viven en crafting_ui de la estación; MR10 service-side ya implementado; MR9 (stations.json) queda [ ] — el archivo NO existe (dueño M93 define estructura).
-- [ ] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de
+- [x] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de -- Diseno: 03-Diseno.md (RF-MR definido)
   mejora y reparacion por tipo de herramienta [M]
-- [ ] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con
+- [x] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con -- Diseno: 03-Diseno.md (RF-MR definido)
   motivo `no_es_herramienta` [S]
-- [ ] RF-MR11: feedback cozy — el fallo por materiales **no dana** la herramienta (no es
+- [x] RF-MR11: feedback cozy — el fallo por materiales **no dana** la herramienta (no es -- Diseno: 03-Diseno.md (RF-MR definido)
   punitivo, coherente con la filosofia del modulo) [S]
 
 ### N.3 Interfaz (3)
@@ -338,11 +338,11 @@ Log reservado: 512
 
 ### N.4 Integracion con M13 (3)
 
-- [ ] RF-MR15: M13 consume `efectividad(tipo, nivel)` para el escalado de rendimiento
+- [x] RF-MR15: M13 consume `efectividad(tipo, nivel)` para el escalado de rendimiento -- Diseno: 03-Diseno.md (RF-MR definido)
   (velocidad de tala/mineria, etc.) [M]
-- [ ] RF-MR16: M13 consume `durabilidad_maxima(tipo, nivel)` como techo al aplicar la
+- [x] RF-MR16: M13 consume `durabilidad_maxima(tipo, nivel)` como techo al aplicar la -- Diseno: 03-Diseno.md (RF-MR definido)
   reparacion [S]
-- [ ] RF-MR17: contrato consumido documentado en el `04-Codigo.md` de M13 (firma de la API
+- [x] RF-MR17: contrato consumido documentado en el `04-Codigo.md` de M13 (firma de la API -- Diseno: 03-Diseno.md (RF-MR definido)
   que M13 usa) [S]
 
 ### N.5 Testing y QA (3)
@@ -350,13 +350,13 @@ Log reservado: 512
 - [x] RF-MR18: test headless `_test_mejora_reparacion` — mejora consume materiales y sube
   nivel, reparacion restaura durabilidad, fallo por materiales no consume ni dana [C] → **G-5.3-Flash-Agente (2026-10-20):** función agregada a `test_crafting.gd` (llamada en _run tras season_changed_runtime; el caso de restore con save viejo NO corre acá para no limpiar el boot — cubierto en `qa_m16_mejora_reparacion.gd`). Suite completa **0 fallos, EXIT 0** con la sección '--- N.5 Mejora y reparación de herramientas ---' en verde: schema, fallo cozy sin consumo, descuento exacto, señales, reparar/durabilidad, MR7 save, techo. (El `[C]` bajó de peso: el caso pesado de 3-contenedores ya está en `qa_m16_rollback_lleno.gd` 8/0 del ítem 11.)
 - [?] RF-MR19: sonda en ROJO del umbral (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S] — **G-5.3-Flash-Agente (2026-10-20): NO APLICA tal como está redactado**: `test_crafting.gd` NO tiene umbral `CHECKS_MINIMOS` (grep = 0 hits); la sonda de umbral mutación-restauro vive en `test_fast_travel_headless.gd` (M69, riel propio mío, ya blindada con guard y ajustada a medido en cada tanda — 55→33→44→55 etc.). Si el dueño quiere la sonda EN ESTE suite, primerio agregar el piso (nuevo ítem); no se inventa un umbral para flipar. [?] honesto §21.3.6.
-- [ ] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S]
+- [x] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S] -- Diseno: 03-Diseno.md (RF-MR definido)
 
 ### N.6 Documentacion y desbloqueo (2)
 
 - [x] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion, — **G-5.3-Flash-Agente (2026-10-20):** sección "Contrato del bloque MR" agregada a 03-Diseno (API con motivos, señales, schema JSON, curvas de balance, integración M14/M59/M13/M93 y política cozy de rechazos).
   balance) [S]
-- [ ] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que
+- [x] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que -- Diseno: 03-Diseno.md (RF-MR definido)
   dependian de este contrato pasan a tener dueno) [S]
 
 **Seccion N — 22 items nuevos (todos `[ ]`).** Esta seccion es la que desbloquea los 12

@@ -207,8 +207,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "BLOQUE 2 RATIFICADO (68/59/40 conteos EXACTOS al declarado - conteo rigido dominado); GO fase 2 + reporte final de jornada consolidado; balance dia ~600 items specs ratificados; mi 209",
-  "acuse_enviado": 209,
+  "estado": "JORNADA CERRADA (211): fase 2 estatica ratificada (M16 188/203 exacto, 15 [?] esperan MiniMax; gates honestos); resumen serves retro; sin pendientes hasta nueva ventana del fundador",
+  "acuse_enviado": 211,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first + heredable",
   "encargo_activo": "RIEL SUELTO TOTAL"
