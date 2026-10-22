@@ -524,3 +524,10 @@ Regimen: UNA o DOS tareas [C] por ciclo (son tareas de DIAS). Formato de entrega
 
 - Total del paquete: ~86 tareas [C] (dias de trabajo cada una). NOTA: 67-Vehiculos [C] EXCLUIDO (dueno activo Step-5).
 - Orden sugerido por el director: PAQUETE 1 (Fotografia, 23 items, tu nicho geometrico) PRIMERO.
+
+
+### PAQUETE 8 - 156-Terrenos-Y-Movimiento (asignacion director 2026-10-22 07:30, ORDEN FUNDADOR: mas tareas largas >100 backlog)
+- Fuente: DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md (202/307; ~105 [ ] accionables; dueño anterior atria FUERA de la flota - modulo liberado).
+- Nicho: terrenos/movimiento fisica+geometria - es TU matematica. Reclamo del modulo: DIRECTIVA FUNDADOR 2026-10-22 07:17 (doble tarea larga + backlog >100).
+- Work flow: igual que paquetes 1-7 - picking documental con linea textual, doble tanda por vuelta, reporte T- con evidencia.
+- ADVERTENCIA: NO tocar los items de escena que requieren editor Godot (clasificalos [ ] honestos como hiciste con 195/210/211/214).

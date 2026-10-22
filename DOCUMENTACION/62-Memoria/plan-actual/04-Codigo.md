@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash — DS-V4.1-Flash-Opencode (último modificador)
 **Plataforma:** OpenCode
 
 # 04-Codigo.md — Módulo 62: Memoria
@@ -825,7 +825,7 @@ DeepSeek-V4.1-Flash (Log 2033). Se re-ejecutó y se aplicó el flip.
 
 **Firma:** DeepSeek-V4.1-Flash / OpenCode — Tanda 87.
 
-## Tanda 89 — "Sesión de referencia" y "RN3" (2026-10-21, DS-V4.1-Flash-Opencode / OpenCode, Log 2100)
+## Tanda 89 — "Sesión de referencia" y "RN3" (2026-10-21, DS-V4.1-Flash-Opencode / OpenCode, Log 2119)
 
 **Sin código nuevo; los dos ítems se cierran por herencia medida de la corrida real de T72.**
 

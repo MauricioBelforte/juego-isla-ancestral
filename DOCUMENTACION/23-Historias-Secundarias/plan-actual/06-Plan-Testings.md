@@ -2,7 +2,7 @@
 
 **Modelo:** Step-5-WorkBuddy
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-10-21 (iter. 2 y iter. 3)
+**Fecha:** 2026-10-21 a 2026-10-22 (iter. 2 a iter. 6)
 **Módulo:** M23 Historias Secundarias — `scripts/historias/`, `data/historias/`
 
 ## Alcance
@@ -24,7 +24,7 @@ corre con el binario real:
   --headless --path game/isla-ancestral --script res://scripts/historias/test_historias.gd
 ```
 
-### Bloques (8)
+### Bloques (11)
 
 | Bloque | Contenido | Integraciones ejercitadas |
 |---|---|---|
@@ -36,22 +36,35 @@ corre con el binario real:
 | F | Postgame: bloqueada sin final de M22 y abierta tras **cada uno de los 4 finales** (principal/regresar/guardian/secreto), con estado limpio por iteración | M22 |
 | G | Persistencia: snapshot `activas`+`completadas`, round-trip, purga de huérfanas | M59 |
 | H | Merge de `cadenas_ejemplo.json`: reporte {anadidas, conflictos, rechazadas} + corrida end-to-end de `cadena-biblioteca` (hablar/explorar/entregar → completada) | M14, M21, M55 |
+| I | Esquema de consecuencias: AMBAS cargas (crudas y mergeadas) con flags pelados y flags compartidos con el mismo deletreo (regresión de datos con prefijo re-inyectado = rojo) | M21 |
+| J | Las 6 historias de vecinos: carga, fuente del principal, unicidad de consecuencias y corrida end-to-end de DOS (`cadena-carpintero` con `madera_roble` real + `cadena-alquimista` con objeto narrativo sembrado) | M14, M21, M55 |
+| K | Las 3 historias de lugares: carga, fuente del principal, unicidad de las 3 consecuencias nuevas vs las 11 preexistentes, 3 capitulos de diario unicos y corrida end-to-end de las 3 (npc REAL de `data/villagers/`, item REAL de `data/items/`, puzzle) con `ws_has()` de `jardin_florecido` / `cofradia_activa` / `molino_funcionando` | M14, M21, M55 |
 
 ### Guarda anti-falso-verde (obligatoria, iter. 2)
 
 1. `_check()` cuenta cada verificación (`_checks`).
 2. `_fin("X")` por bloque + lista `BLOQUES`: el resumen nombra el bloque que no corrió.
-3. `CHECKS_MINIMOS` = **59** desde la iter. 3 (MEDIDO en verde el 2026-10-21 con 8
-   bloques; la iter. 2 medía 40 con 7). No estimado.
+3. `CHECKS_MINIMOS` = **129** desde la iter. 6 (MEDIDO en verde el 2026-10-22 con 11
+   bloques; la cadena fue 40 con 7 -> 59 con 8 -> 70 con 9 -> 98 con 10 -> 129 con 11).
+   No estimado.
 4. `_summary()` en un `call_deferred` **separado** del de `_run()`: si `_run()` aborta
    por un `SCRIPT ERROR` de runtime, el resumen corre igual, nombra los bloques
    faltantes, dispara el piso y sale con `quit(1)` — la suite **no cuelga**.
-5. Guardián probado EN ROJO por inyección de runtime, dos veces:
+5. Guardián probado EN ROJO por inyección de runtime, siete veces:
    - iter. 2 (`var _n: Node = null; _n.free()` tras el bloque B): EXIT 1, nombra
      C/D/E/F/G, «solo 11 checks (mínimo 40)».
    - iter. 3 (abort a mitad del bloque H, el nuevo): EXIT 1, nombra H, «solo 47 checks
      (mínimo 59)».
-   Sonda borrada en la misma operación; 0 sondas en el repo.
+   - iter. 4, dos inyecciones: abort de runtime en el bloque I y regresión de datos con
+     el prefijo `estado_mundo.` re-inyectado (ambas EXIT 1 nombrando bloque/clave).
+   - iter. 5 (abort de runtime al inicio del bloque J): EXIT 1, «el bloque J NO se
+     ejecuto» + «solo 71 checks (mínimo 98)». La PRIMERA versión (`null.metodo()`) fue
+     PARSE ERROR estático y no probaba nada: rehecha como abort real.
+   - iter. 6 (abort de runtime al inicio del bloque K, asignación tipada
+     `Variant` -> `Dictionary`): EXIT 1, «el bloque K NO se ejecuto» + «solo 99 checks
+     (mínimo 129)», 2 fallos.
+   Sonda borrada en la misma operación; sha256 del original verificado; 0 sondas en el
+   repo.
 
 ## Regresiones de integración (módulos que M23 toca)
 
@@ -64,7 +77,9 @@ corre con el binario real:
 
 ## Casos que quedan fuera (honestidad)
 
-- E2E de 10 cadenas completas: el catálogo vivo tiene 5 (ítem de checklist `[ ]` honesto).
+- E2E de 10 cadenas completas como test diseñado (ítem de checklist `[ ]` honesto): el
+  catálogo vivo tiene 14 y varios bloques corren cadenas end-to-end individuales, pero
+  el test E2E de 10 encadenadas no está diseñado ni corrido.
 - Contenido narrativo, capítulos de diario (`capitulo-*` no existen en el catálogo
   M55), cosméticos y consecuencias visuales: dueños de contenido/M53/M45/M17/M18/M27.
 - Variaciones de postgame *por tipo de final* (variantes narrativas): el gate

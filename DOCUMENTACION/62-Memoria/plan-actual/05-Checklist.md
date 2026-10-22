@@ -1,6 +1,6 @@
 **Modelo:** DeepSeek-V4.1-Flash — DS-V4.1-Flash-Opencode (último modificador)
 **Plataforma:** OpenCode
-**Fecha:** 2026-10-21 (Tanda 89 — "Sesión de referencia" y "RN3" por herencia T72; Log 2100)
+**Fecha:** 2026-10-21 (Tanda 89 — "Sesión de referencia" y "RN3" por herencia T72; Log 2119)
 
 # 05-Checklist.md — Módulo 62: Memoria
 
@@ -17,7 +17,7 @@
   - **iter. 5 (Log 1187):** **handshake con M63** (el 62 nunca descarga lo que el 63 está cargando) + cola de transición de escena + región rápida → fuerza liberación + banco de audio diferido + atlas LRU con log + determinismo (RN9). Suite nueva `test_memoria_m62_iter5.gd` (**60 checks**, guardián probado con **5 sondas en rojo**, exit real verificado) + gate de CI. **9 ítems** de §K/§J/§F pasan a `[x]`. Total M62 = **307 checks**.
   - **iter. 6 (Log 1196):** **pureza de los datos de partida** (item L98): los 39 proveedores `ISaveProvider` registrados devuelven solo datos (0 Nodos) y el payload COMPLETO de `collect()` tambien. Suite `test_m62_pureza_save.gd` (58 checks) con escaner recursivo probado EN ROJO. Complemento estatico: **regla C** en `auditar_arquitectura_m62.py` (56 scripts con `get_save_data`, 0 hallazgos).
   - **iter. 7 (Log 1325, T-D9):** **test de leaks con teleport x10** (items **L105** y **L143**). Suite nueva `test_m62_leaks_teleport.gd` (**21 checks**, guardián de 3 capas probado EN ROJO con 2 inyecciones). Mide que la cola de descarga (`UnloadPolicy`) **no retiene** los `Resource` de los chunks que el teleport deja atras: 10 ciclos, 0 retenidos, `objetos_vivos` delta **0**. **PENDIENTE de cablear a `quality.yml`** (no lo toqué: es de s2/director). Total M62 = **387 checks**.
-  - **Tanda 89 (2026-10-21, Log 2100):** "Sesión de referencia: 30 min de juego sin drift > 5%" y "RN3: memoria estable: sesión de 30 min con drift < 5%" pasan a `[x]` **por herencia medida de T72** (30 min reales, 359 muestras, baseline 178.2 MB, **drift +0.1% / máx 0.1%**, `drift_check()=true`, EXIT 0; evidencia `out/tanda72/sesion_audio_30min.log` re-verificada en disco). Regresión fresca: `test_memoria_m62_iter3.gd` **133/0** + `test_m62_drift_post_viaje.gd` **12/0**. Alcance declarado: arnés `SceneTree --script`, sin input de jugador, audio sintético (deuda M42). Totales **145 / 1 / 4**.
+  - **Tanda 89 (2026-10-21, Log 2119):** "Sesión de referencia: 30 min de juego sin drift > 5%" y "RN3: memoria estable: sesión de 30 min con drift < 5%" pasan a `[x]` **por herencia medida de T72** (30 min reales, 359 muestras, baseline 178.2 MB, **drift +0.1% / máx 0.1%**, `drift_check()=true`, EXIT 0; evidencia `out/tanda72/sesion_audio_30min.log` re-verificada en disco). Regresión fresca: `test_memoria_m62_iter3.gd` **133/0** + `test_m62_drift_post_viaje.gd` **12/0**. Alcance declarado: arnés `SceneTree --script`, sin input de jugador, audio sintético (deuda M42). Totales **145 / 1 / 4**.
 - Archivos: `game/isla-ancestral/scripts/rendimiento/memoria/` + `data/rendimiento/budgets.json` + `scripts/auditar_arquitectura_m62.py`
 - Fecha cierre: (pendiente — al cerrar con `--estado`)
 
@@ -1114,7 +1114,7 @@ banco anterior muere. No toca producción.
 
 **Totales tras Tanda 87:** 143 / 3 / 4 (150 items).
 
-## Tanda 89 — "Sesión de referencia" y "RN3" (2026-10-21, DS-V4.1-Flash-Opencode / OpenCode, Log 2100)
+## Tanda 89 — "Sesión de referencia" y "RN3" (2026-10-21, DS-V4.1-Flash-Opencode / OpenCode, Log 2119)
 
 **Resultado: `[x]` por herencia medida de T72 — 30 min reales con drift +0.1% (umbral 5%).**
 
