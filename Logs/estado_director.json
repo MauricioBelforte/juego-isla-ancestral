@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:30:30",
+ "ultimo_update": "2026-10-22T02:45:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "226/227/228: guardia restablecida (cron v6 sin excepciones); escaneo 2-BIS.2 ejecutado (28 modulos, ~1350 [ ]); GO CONFIRMADO M33-Agricultura (49 [ ]) con agricultura/mineria ocasional",
+  "estado": "229: AUTONOMIA PLENA por orden del fundador (mismo modelo): se busca tareas solo (2-BIS.2), llena su backlog solo <100, cerrado el ciclo silencioso (write real o nada), reporta al cerrar tanda; director muestrea tandas",
   "pendientes_real": 222,
-  "acuse_enviado": 228,
+  "acuse_enviado": 229,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -238,5 +238,8 @@
  "crons_vuelta_c3": "CRON C 02:20: acuses 030 (MiniMax lane voxel + opt-in) y (Beam T32 derivacion M17) con numeracion dinamica max+1 tras regeneraciones de pool",
  "urgente_073_retract": {
   "estado": "RETIRADA POR COMPLETO: 251 y 313 SI flipados (a-carecto el grep sin tilde era el defectuoso); mis disculpas registradas al agente"
+ },
+ "regla_autonomia_g53": {
+  "estado": "VIGENTE (fundador): autonomia plena de busqueda y backlog; ciclo silencioso prohibido; reportes de cierre de tanda; muestreo del director como unico control de calidad"
  }
 }
