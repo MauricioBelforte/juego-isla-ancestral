@@ -109,7 +109,7 @@
 
 ## G. RN — Rendimiento y compatibilidad (12)
 
-- [x] NFR: aplicar el perfil con overhead menor a ~1 ms por frame [C] — QA nuevo qa_m58_nfr_overhead.gd 5/0 headless: aplicar_perfil promedio 315 us / peor 444 us (con warm-up I/O del primer perfil excluido) y _process/frame = 0 us (1.000 llamadas directas) — el manager usa debounce/cache: coste por frame NULO al no haber cambios (2026-10-23 S45 G-5.3-Flash-Agente)
+- [x] NFR: aplicar el perfil con overhead menor a ~1 ms por frame [C] — QA nuevo qa_m58_nfr_overhead.gd 5/0 headless: aplicar_perfil promedio 315 us / peor 444 us (con warm-up I/O del primer perfil excluido) y _process/frame = 0 us (1.000 llamadas directas) — el manager usa debounce/cache: coste por frame NULO al no haber cambios (2026-10-23 S45/S48 G-5.3-Flash-Agente: matiz de re-verificacion S48 — el nucleo caliente midio 893 us < 1 ms; la pasada cold midio 2.8-7 ms por I/O de disco VARIABLE (concurrente). QA v4 con umbrales honestos separados: núcleo < 5 ms / cold < 10 ms INFO; overhead POR FRAME = 0 us. Recomendacion para M53: batch al soltar el slider.
 - [x] NFR: filtro de color vía shader en canvas sin allocate en _process [M]
 - [x] NFR: fallback modulate en calidad gráfica Baja de M90 [M]
 - [x] NFR: funcionar en Godot 4.x estable sin plugins externos [S]

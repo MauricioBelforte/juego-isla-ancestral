@@ -78,11 +78,20 @@
 # cadenas_disponibles() hasta iniciarse (misma regla que
 # cadena-secretta-luciernagas, bloque E). Bloque P afirma carga, fuente,
 # ocultamiento, unicidad de consecuencias/diarios y corrida end-to-end de 2.
+# Iter. 12 (Step-5-WorkBuddy, 2026-10-22, Log 2135): cluster Comerciantes del
+# 03-Diseno L36 (3 cadenas de rutas y secretos; integracion M37 excluida por
+# orden del director, msg 181). NPC REALES de data/villagers/ (mercedes_lince
+# mercader, olivia_nutria sastra, ramon_tejon herrero) y objetos REALES de
+# data/items/ por campo id (OBJ-ITE-052 "Moneda de oro", OBJ-ITE-010 "Tela",
+# OBJ-TAL-002 "Yunque"). A diferencia de las secretas del bloque P, las 3
+# nacen visibles: son rutas de trueque que se descubren hablando. Bloque Q
+# afirma carga, fuente, visibilidad, unicidad de consecuencias/diarios y
+# corrida end-to-end de 2.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -96,7 +105,7 @@ var _vistos: Dictionary = {}
 # 1 diarios + 2x7 end-to-end + 1 reset + 1 puente diario + 1 de cierre).
 # Medido: 351/0/EXIT 0 x3. El guardian se probo EN ROJO por inyeccion de
 # runtime sobre el bloque P (ver Log 2134).
-const CHECKS_MINIMOS := 351
+const CHECKS_MINIMOS := 379
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -134,6 +143,7 @@ func _run() -> void:
 	_test_familias()
 	_test_amistad()
 	_test_secretas()
+	_test_comerciantes()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -167,7 +177,8 @@ func _test_carga() -> void:
 	# Iter. 7 (Log 2125): +4 del cluster Ruinas -> 17 + 1 = 18.
 	# Iter. 10 (Log 2131): +6 del cluster Amistad -> 32 + 1 = 33.
 	# Iter. 11 (Log 2134): +5 del cluster Secretas -> 37 + 1 = 38.
-	_check(_h.cadenas_count() == 38, "38 cadenas cargadas tras el merge (37 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 12 (Log 2135): +3 del cluster Comerciantes -> 40 + 1 = 41.
+	_check(_h.cadenas_count() == 41, "41 cadenas cargadas tras el merge (40 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -394,7 +405,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 37, "catálogo principal con 37 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas): %d" % principal.size())
+	_check(principal.size() == 40, "catálogo principal con 40 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -417,7 +428,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 38, "38 cadenas cargadas en runtime (37 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 41, "41 cadenas cargadas en runtime (40 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -1228,3 +1239,104 @@ func _test_secretas() -> void:
 		_check(not diary.esta_registrada("mision_cadena-mapa-secreto"),
 			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
 	_fin("P")
+
+func _test_comerciantes() -> void:
+	# Iter. 12 (Log 2135): cluster Comerciantes del 03-Diseno L36 — 3 cadenas de
+	# rutas y secretos (integracion M37 excluida por orden del director, msg 181).
+	# NPC REALES de data/villagers/ (mercedes_lince mercader, olivia_nutria
+	# sastra, ramon_tejon herrero) y objetos REALES de data/items/ por campo id
+	# (OBJ-ITE-052 "Moneda de oro", OBJ-ITE-010 "Tela", OBJ-TAL-002 "Yunque").
+	# A diferencia de las secretas (bloque P), las 3 nacen visibles: son rutas
+	# de trueque que se descubren hablando, no secretos de mundo.
+	_h.restore_save_data({})
+	var nuevas := ["cadena-ruta-del-mercader", "cadena-cargamento-de-telas",
+		"cadena-secreto-del-yunque"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+		_check(not bool((_h.get_cadena(cid).get("oculta", false))), "%s NO es oculta (ruta visible)" % cid)
+	# Visibles en disponibles desde el inicio (regla opuesta a las secretas)
+	var disponibles: Array = _h.cadenas_disponibles()
+	var expuestas := 0
+	for cid in nuevas:
+		for d in disponibles:
+			if String(d) == cid:
+				expuestas += 1
+	_check(expuestas == 3, "las 3 comerciantes figuran en disponibles desde el inicio (%d expuestas)" % expuestas)
+	# Anti-repeticion: 3 flags de consecuencia nuevos, sin colision con los 38
+	# previos (37 del principal + biblioteca_iluminada del merge de ejemplos)
+	var existentes := [
+		"faro_encendido", "invernadero_abierto", "plaza_decorada",
+		"luciernagas_vueltas", "biblioteca_iluminada", "pan_fiesta_horneado",
+		"banco_plaza_reparado", "manto_niebla_terminado", "red_pescador_reparada",
+		"sendero_bosque_senalado", "jarabe_lunar_listo", "jardin_florecido",
+		"cofradia_activa", "molino_funcionando", "biblioteca_quemada_rescatada",
+		"observatorio_alineado", "estacion_reparada", "puente_cruzable",
+		"relicto_devuelto", "gema_devuelta", "receta_heredada",
+		"llave_encontrada", "patrulla_nocturna", "brujula_calibrada",
+		"molienda_familiar_restaurada", "red_del_abuelo_reparada", "vigilia_de_los_guardas",
+		"regalo_favorito_entregado", "sentadilla_de_pesca_amistosa", "paseo_con_amiga",
+		"historia_de_ficcion_escrita", "puesto_de_mercedes_ordenado", "correspondencia_retomada",
+		"sendero_secreto_revelado", "cristal_oculto_recuperado", "autor_del_diario_identificado",
+		"versos_antiguos_descifrados", "mascara_ceremonial_restaurada"
+	]
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag) or existentes.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 3, "3 consecuencias distintas en las cadenas de comerciantes: %d" % flags.size())
+	_check(unicos, "consecuencias de comerciantes sin colision con las previas (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 3, "3 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# End-to-end 1: ruta del mercader (mercedes_lince REAL; OBJ-ITE-052 "Moneda de oro" REAL de data/items/)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"OBJ-ITE-052": 1})
+	var res1: Dictionary = _h.iniciar_cadena("cadena-ruta-del-mercader")
+	_check(bool(res1.ok), "iniciar cadena-ruta-del-mercader OK")
+	res1 = _h.reportar_paso("cadena-ruta-del-mercader", "hablar", "mercedes_lince")
+	_check(bool(res1.ok), "ruta p1 hablar mercedes_lince OK")
+	res1 = _h.reportar_paso("cadena-ruta-del-mercader", "explorar", "ruta_comercial")
+	_check(bool(res1.ok), "ruta p2 explorar ruta_comercial OK")
+	res1 = _h.reportar_entrega("cadena-ruta-del-mercader")
+	_check(bool(res1.ok), "ruta p3 entregar OBJ-ITE-052 OK (inventario)")
+	res1 = _h.reportar_paso("cadena-ruta-del-mercader", "puzzle", "paradas-en-orden")
+	_check(bool(res1.ok), "ruta p4 puzzle OK")
+	_check(_h.esta_completada("cadena-ruta-del-mercader"), "cadena-ruta-del-mercader completada end-to-end")
+	_check(ws_has("ruta_comercial_reabierta"), "consecuencia ruta_comercial_reabierta aplicada (M21)")
+	# End-to-end 2: cargamento de telas (olivia_nutria REAL; OBJ-ITE-010 "Tela" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-ITE-010": 1})
+	var res2: Dictionary = _h.iniciar_cadena("cadena-cargamento-de-telas")
+	_check(bool(res2.ok), "iniciar cadena-cargamento-de-telas OK")
+	res2 = _h.reportar_paso("cadena-cargamento-de-telas", "hablar", "olivia_nutria")
+	_check(bool(res2.ok), "telas p1 hablar olivia_nutria OK")
+	res2 = _h.reportar_paso("cadena-cargamento-de-telas", "explorar", "almacen_del_camino")
+	_check(bool(res2.ok), "telas p2 explorar almacen_del_camino OK")
+	res2 = _h.reportar_entrega("cadena-cargamento-de-telas")
+	_check(bool(res2.ok), "telas p3 entregar OBJ-ITE-010 OK (inventario)")
+	res2 = _h.reportar_paso("cadena-cargamento-de-telas", "puzzle", "ovillo-enredado")
+	_check(bool(res2.ok), "telas p4 puzzle OK")
+	_check(_h.esta_completada("cadena-cargamento-de-telas"), "cadena-cargamento-de-telas completada end-to-end")
+	_check(ws_has("telas_reunidas"), "consecuencia telas_reunidas aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# cadena-biblioteca en H, cadena-jardines en K, cadena-puente en L,
+	# cadena-brujula en M, cadena-guardas en N, cadena-regalo-favorito en O y
+	# cadena-mapa-secreto en P). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-ruta-del-mercader"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	_fin("Q")

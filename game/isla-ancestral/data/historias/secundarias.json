@@ -553,6 +553,51 @@
 			"consecuencia": { "mascara_ceremonial_restaurada": true },
 			"oculta": true,
 			"postgame": false
+		},
+		{
+			"id": "cadena-ruta-del-mercader",
+			"titulo": "La Ruta de la Mercader",
+			"contexto": "Mercedes quiere reabrir la ruta comercial que recorria su abuela, pero los puestos del camino estan vacios y nadie recuerda el orden de las paradas",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "mercedes_lince" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "ruta_comercial" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-052" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "paradas-en-orden" }
+			],
+			"recompensa": { "diario": "capitulo-ruta-del-mercader", "cosmetico": "balanza de viaje" },
+			"consecuencia": { "ruta_comercial_reabierta": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-cargamento-de-telas",
+			"titulo": "El Cargamento de Telas",
+			"contexto": "Un cargamento de telas quedo detenido en el camino y Olivia necesita reunir las piezas antes de la temporada de trueque",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "olivia_nutria" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "almacen_del_camino" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-010" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "ovillo-enredado" }
+			],
+			"recompensa": { "diario": "capitulo-cargamento-de-telas", "cosmetico": "carrete de viaje" },
+			"consecuencia": { "telas_reunidas": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-secreto-del-yunque",
+			"titulo": "El Secreto del Yunque",
+			"contexto": "Ramon heredo un yunque viajero que, segun su padre, esconde la tecnica de forjado que mantuvo unidas las rutas de trueque",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "ramon_tejon" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "taller_viejo" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-TAL-002" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "marca-del-herrero" }
+			],
+			"recompensa": { "diario": "capitulo-secreto-del-yunque", "cosmetico": "martillo de bolsillo" },
+			"consecuencia": { "tecnica_del_yunque_recuperada": true },
+			"oculta": false,
+			"postgame": false
 		}
 	]
 }

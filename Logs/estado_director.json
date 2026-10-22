@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T20:20:30",
+ "ultimo_update": "2026-10-22T20:30:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -20,7 +20,7 @@
   ]
  },
  "g_5_3": {
-  "estado": "CONSOLIDADO baterias 1-5 RATIFICADO (M151 155/6/6 = 167 exacto, 43 flips criterios); 5 FLAGS escalados al fundador (L195 nombre, L196 marca, L225 comunidad, L226 staffing, L227 calendario); riel QA agotado - cola re-verificacion + esperando decisiones; mi 315",
+  "estado": "S48 re-verificacion RATIFICADA (5 suites, hallazgo NFR M58 honesto: variabilidad I/O, QA v4 frame 0us/hot<5ms/cold<10ms; recomendacion batching M53); gemelo renumerado 316; riel agotado, en guardia; sin mi respuesta nueva necesaria (todo GO vigente)",
   "pendientes_real": 222,
   "acuse_enviado": 315,
   "ultima_tanda": 40
@@ -347,6 +347,14 @@
    ],
    "origen": "hallazgo Step-5 iter3-11",
    "fecha": "2026-10-22 20:15"
+  },
+  {
+   "modulo": "58->53",
+   "flags": [
+    "aplicar_perfil escribe a disco por CADA cambio de slider - G-5.3 recomienda batch al SOLTAR (N writes -> 1)"
+   ],
+   "origen": "hallazgo NFR S48",
+   "fecha": "2026-10-22 20:30"
   }
  ]
 }
