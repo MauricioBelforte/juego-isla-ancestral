@@ -238,6 +238,32 @@ get_height + posicionar_sobre_terreno (M64 NavigationServer; prohibido forzar).
   finneas_slice v2: node `recompensa_cozy` pendiente de v2 del JSON, no
   bloquea el slice).
 
+## Casa de Finneas y el ciclo del dia (dormir + autosave - S29 2026-10-22)
+
+**Casa (L50):** cabin de una pieza en la playa, a 8 m de la escalera del
+muelle. Interior: entrada libre (colision servida por muros M08), CAMA
+(single) contra la pared norte y MESA con una vela y la carta del slice
+(relee la mision: interaccion M24 reabre el panel de objetivo sin volver al
+NPC). Sin tesoros ni cofres (scope acotado).
+
+**Dormir (L51):** interact con la cama de noche (o en cualquier hora si el
+jugador completo el paso 1 de la mision) dispara: fade a negro 1.2 s
+(CanvasLayer UI, opacidad del negro) -> salto del reloj del mundo al alba
+(M29 partida/definicion de dia) -> fade in 0.8 s. La musica sale con
+crossfade 1.0 s (tema diurno surge de nuevo; M41/L60-L59). Estados
+intermedios invalidos: NO dormir durante dialogo activo.
+
+**Autosave (L52/L53, anclado al save v2 de S28):**
+- Al dormir: snapshot completo del save v2 (schema_version 2; claves del
+  slice: mision_paso, hacha_finneas_duracion, estado_discos,
+  puzzle_resuelto, flags M21).
+- En hitos (sin dormir): entregas de la mision (paso 2->3) y
+  `puzzle_sala_resuelta("ruina_sello")` disparan autosave puntual con las
+  mismas claves; marca de humo "Guardando..." 0.6 s en la esquina (UI M53,
+  sin bloquear input).
+- Contrato: senal `guardado(slice_dict, motivo)` del sistema M60; la UI
+  escucha y pinta; sin polling.
+
 ## Canon y estilo (M147)
 
 - Nombre del slice y su historico consume el canon M147 (glpts); toda

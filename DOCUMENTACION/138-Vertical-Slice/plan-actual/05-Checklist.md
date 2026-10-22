@@ -35,7 +35,7 @@
 - [x] Definir recompensa: 20 AO + semilla de jardín [M] — CONSOLIDADO (20 AO dentro del margen 5-15% de M93 + semilla que habilita el garden bed del slice); 03-Diseno seccion
 - [x] Definir margen de recompensa según M93 (5-15%) [M] — 03-Diseno Recompensa: anclaje canonico unlocks.json taller_crafting=150 AO (orden 1, cond mision_secundaria_inicial) -> banda [8,22] (quests.json reglas); 20 AO = 13.3% DENTRO; semilla no computa AO (2026-10-22 S26)
 - [x] Definir UX de misión: indicador de objetivo (M53) [S] — 03-Diseno seccion UX: panel esquina sup. derecha, 1 linea de objetivo con contador, oculto en dialogo, senal mision_paso_actualizada (sin polling), sin minimapa por budget render (2026-10-22 S26)
-- [ ] Definir test: la misión no se rompe si se entrega la madera antes del diálogo [M]
+- [x] Definir test: la misión no se rompe si se entrega la madera antes del diálogo [M] — 06-Plan-Testings caso E-01 (orden inverso scriptado: flag_mision_finneas_aceptada false -> la entrega no marca paso 1; mensaje de Finneas cubre el atajo) (2026-10-22 S29, definido en S28)
 
 ## E. Ruina y Puzzle (RF5)
 
@@ -43,15 +43,15 @@
 - [x] Definir puzzle de 2 palancas + alineación de símbolos (M24) [M] — 03-Diseno: discos SOL/BRISA x 3 posiciones, solucion canonica (SOL=ocaso, BRISA=alba, valor espejo), 9 estados/1 valido/8 benignos, interact cicla posicion, sin castigo (cozy), senal puzzle_sala_resuelta (2026-10-22 S27)
 - [x] Definir símbolos del canon M147 (sello_brisa) [M] — 03-Diseno: simbolo_del_sello_brisa (viento_primeros_jardineros) como grabado de la ruina + motivo del altar; cero simbolos nuevos (2026-10-22)
 - [x] Definir recompensa: Hacha de Finneas + mensaje cozy [M] — 03-Diseno: hacha_finneas 30 usos desbloquea arboleda (pacing 20-30 min) + placa "Quien guarda el viento guarda la mano que tala. - F." (2026-10-22 S27; grafo v2 con node recompensa_cozy queda anotado, no bloquea)
-- [ ] Definir test de combinatoria de palancas (todas las secuencias) [C]
+- [x] Definir test de combinatoria de palancas (todas las secuencias) [C] — 06-Plan-Testings.md nuevo: matriz I-02 con las 9 combinaciones SOLxBRISA, unica apertura (ocaso,alba), anti-or aperturas==1/9, 8 estados benignos sin reset (2026-10-22 S28)
 
 ## F. Casa y Autosave (RF4/RF9)
 
-- [ ] Definir casa con entrada, cama y mesa [S]
-- [ ] Definir dormir: fade a negro + pasar el día [M]
-- [ ] Definir autosave al dormir [M]
-- [ ] Definir autosave en hitos (entrega, puzzle resuelto) [M]
-- [ ] Definir save v2 con schema_version (M60) [M]
+- [x] Definir casa con entrada, cama y mesa [S] — 03-Diseno "Casa de Finneas": cabin una pieza 8 m del muelle, cama norte + mesa con carta (relee la mision, M24) (2026-10-22 S29)
+- [x] Definir dormir: fade a negro + pasar el día [M] — 03-Diseno: fade out 1.2 s -> salto de reloj al alba (M29) -> fade in 0.8 s; NO se duerme durante dialogo activo (2026-10-22 S29)
+- [x] Definir autosave al dormir [M] — 03-Diseno: snapshot save v2 (claves del slice, S28) al dormir; senal guardado(slice_dict, motivo) M60 (2026-10-22 S29)
+- [x] Definir autosave en hitos (entrega, puzzle resuelto) [M] — 03-Diseno: hitos paso 2->3 y puzzle_sala_resuelta("ruina_sello") autoguardan con save v2 + marca "Guardando..." 0.6 s no bloqueante (M53) (2026-10-22 S29; base en santuario S27 + I-03/S28)
+- [x] Definir save v2 con schema_version (M60) [M] — 06-Plan-Testings sec 3 + 03-Diseno (autosave hitos): claves del slice (mision_paso, hacha_finneas_duracion, estado_discos, puzzle_resuelto, flags M21); version 2 con migracion v1 mapa M60 (2026-10-22 S28)
 
 ## G. Música (RF6)
 
@@ -222,7 +222,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 36 · Pendientes: 95 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 43 · Pendientes: 88 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).

@@ -84,38 +84,52 @@
 
 - [x] Definir qué es Elysia para el jugador al inicio (capa 1) [M]
 - [x] Definir capas de revelación de Elysia por Sello [C]
-- [ ] Definir la verdad de Elysia (capa 4) sin spoilers tempranos [C]
-- [ ] Definir su rol en la Era del Alba (post-final) [C]
+- [x] Definir la verdad de Elysia (capa 4) sin spoilers tempranos [C]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas de detalle (cola total, Reflection-Beam-1.0, T90, 2026-10-22)
+- [x] Definir su rol en la Era del Alba (post-final) [C]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas de detalle (cola total, Reflection-Beam-1.0, T90, 2026-10-22)
 - [x] Definir qué NO es Elysia (evita derivas de canon) [S]
 
 ## H. Personajes Principales (RF8-RF12)
 
-- [ ] Definir biografía de Finneas (guía, capa 1) [M]
+- [x] Definir biografía de Finneas (guía, capa 1) [M]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas de detalle (cola total, Reflection-Beam-1.0, T90, 2026-10-22)
 - [x] Definir biografía de Lía (arco emocional, capa 2) [M]
-- [ ] Definir biografía de Bruno (arco, capa 2) [M]
-- [ ] Definir biografía de Nilo (arco, capa 2) [M]
-- [ ] Definir biografía de Vera (arco, capa 2) [M]
+- [x] Definir biografía de Bruno (arco, capa 2) [M]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas (cola total, Reflection-Beam-1.0, T92, 2026-10-22)
+- [x] Definir biografía de Nilo (arco, capa 2) [M]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas (cola total, Reflection-Beam-1.0, T92, 2026-10-22)
+- [x] Definir biografía de Vera (arco, capa 2) [M]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas (cola total, Reflection-Beam-1.0, T92, 2026-10-22)
 
 ## I. Otros NPC (RF13)
 
-- [ ] Definir regla 1-5-25 de detalle por personaje [S]
+- [x] Definir regla 1-5-25 de detalle por personaje [S]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas de detalle (cola total, Reflection-Beam-1.0, T90, 2026-10-22)
 - [x] Definir personajes de fondo con 1 párrafo de canon [S]
-- [ ] Definir secundarios con misión (M23) con 5 párrafos [M]
+- [x] Definir secundarios con misión (M23) con 5 párrafos [M]
+  · evidencia: 03-Diseno.md secc. Reglas de traduccion y nombres (cola total, Reflection-Beam-1.0, T98, 2026-10-22)
 - [x] Definir comerciantes con historia ligada a M39 [M]
-- [ ] Definir niños NPC con capa 0 (nunca spoilers) [S]
+- [x] Definir niños NPC con capa 0 (nunca spoilers) [S]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas (cola total, Reflection-Beam-1.0, T92, 2026-10-22)
 
 ## J. Religiones Antiguas (RF14)
 
 - [x] Definir creencias de los Arquitectos (el Orden del Alba) [M]
 - [x] Definir creencias de los Jardineros (la Madre Semilla) [M]
-- [ ] Definir estado actual de las religiones (restos, festivales) [M]
-- [ ] Definir símbolos religiosos reutilizados en puzzles (M24) [M]
-- [ ] Definir que ninguna religión sea siniestra (cozy, M152) [S]
+- [x] Definir estado actual de las religiones (restos, festivales) [M]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas (cola total, Reflection-Beam-1.0, T92, 2026-10-22)
+- [x] Definir símbolos religiosos reutilizados en puzzles (M24) [M]
+  · evidencia: 03-Diseno.md secc. Biografias y reglas (cola total, Reflection-Beam-1.0, T92, 2026-10-22)
+- [x] Definir que ninguna religión sea siniestra (cozy, M152) [S]
+  · evidencia: 03-Diseno.md secc. Detalles culturales y arquitectonicos (cola total, Reflection-Beam-1.0, T94, 2026-10-22)
 
 ## K. Costumbres (RF15)
 
-- [ ] Definir festivales anuales con origen histórico (M74) [M]
-- [ ] Definir costumbres de saludo/despedida (diálogos M21) [S]
+- [x] Definir festivales anuales con origen histórico (M74) [M]
+  · evidencia: 03-Diseno.md secc. Detalles culturales y arquitectonicos (cola total, Reflection-Beam-1.0, T94, 2026-10-22)
+- [x] Definir costumbres de saludo/despedida (diálogos M21) [S]
+  · evidencia: 03-Diseno.md secc. Detalles culturales y arquitectonicos (cola total, Reflection-Beam-1.0, T94, 2026-10-22)
 - [x] Definir tradición de donación al museo (M37) [S]
 - [x] Definir tradición de plantar un árbol por evento (M33) [S]
 - [x] Definir derivación de cada costumbre desde la historia [M]
@@ -124,9 +138,11 @@
 
 - [x] Definir estilos arquitectónicos por civilización [M]
 - [x] Definir huella de cada estilo en construcciones actuales (M17/M18) [M]
-- [ ] Definir detalles arquitectónicos que narran (M148) [M]
+- [x] Definir detalles arquitectónicos que narran (M148) [M]
+  · evidencia: 03-Diseno.md secc. Detalles culturales y arquitectonicos (cola total, Reflection-Beam-1.0, T94, 2026-10-22)
 - [x] Definir ornamentación de templos según Sello [M]
-- [ ] Definir estilo de Elysia (distinto, capa 4) [M]
+- [x] Definir estilo de Elysia (distinto, capa 4) [M]
+  · evidencia: 03-Diseno.md secc. Estilo y simbodo (cola total, Reflection-Beam-1.0, T96, 2026-10-22)
 
 ## M. Símbolos (RF17)
 
@@ -138,11 +154,15 @@
 
 ## N. Lenguaje Antiguo (RF18)
 
-- [ ] Definir glosario mínimo del lenguaje antiguo [M]
-- [ ] Definir frases cortas de uso en puzzles (M24) [M]
-- [ ] Definir regla: el jugador nunca traduce el idioma completo [M]
+- [x] Definir glosario mínimo del lenguaje antiguo [M]
+  · evidencia: 03-Diseno.md secc. Estilo y simbodo (cola total, Reflection-Beam-1.0, T96, 2026-10-22)
+- [x] Definir frases cortas de uso en puzzles (M24) [M]
+  · evidencia: 03-Diseno.md secc. Estilo y simbodo (cola total, Reflection-Beam-1.0, T96, 2026-10-22)
+- [x] Definir regla: el jugador nunca traduce el idioma completo [M]
+  · evidencia: 03-Diseno.md secc. Reglas de traduccion y nombres (cola total, Reflection-Beam-1.0, T98, 2026-10-22)
 - [x] Definir inscripciones de templos con texto coherente [C]
-- [ ] Definir nombres derivados del lenguaje antiguo (para M149) [M]
+- [x] Definir nombres derivados del lenguaje antiguo (para M149) [M]
+  · evidencia: 03-Diseno.md secc. Reglas de traduccion y nombres (cola total, Reflection-Beam-1.0, T98, 2026-10-22)
 
 ## O. Calendario Antiguo (RF19)
 
@@ -150,7 +170,8 @@
 - [x] Definir equivalencia con el calendario de juego (M29) [M]
 - [x] Definir festivales antiguos y su versión moderna [M]
 - [x] Definir ciclo de Sellos en el calendario (M153) [M]
-- [ ] Definir numerales antiguos (relojes/reliquias) [M]
+- [x] Definir numerales antiguos (relojes/reliquias) [M]
+  · evidencia: 03-Diseno.md secc. Reglas de traduccion y nombres (cola total, Reflection-Beam-1.0, T98, 2026-10-22)
 
 ## P. Tecnología Antigua (RF20)
 
