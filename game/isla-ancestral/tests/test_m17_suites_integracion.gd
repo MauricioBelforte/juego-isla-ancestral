@@ -96,7 +96,7 @@ func _correr() -> void:
 		var rc := 0
 		var args := ["--headless", "--path", "res://", "--script", ruta]
 		var out := []
-		rc = OS.execute(OS.get_executable_path(), args, out, true, false)
+		rc = OS.execute(OS.get_executable_path(), args, out, true, true)
 		for o in out:
 			salida += String(o)
 		var c := _checks_de(salida)
