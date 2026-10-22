@@ -118,24 +118,24 @@
   · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
 - [x] Definir muestreo con VSYNC off [S]
   · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
-- [ ] Definir punto denso de prueba (bosque + lluvia + Finneas) [M]
-- [ ] Definir reporte `REPORTE-FPS.md` generado por `bench_slice.gd` [C]
+- [x] Definir punto denso de prueba (bosque + lluvia + Finneas) [M] — 03-Diseno Cierre: escena de estres (bosque oeste + lluvia M50 + rutina M64 en el mismo cuadro), observacion con monitor, no shipping (2026-10-23 S38)
+- [x] Definir reporte `REPORTE-FPS.md` generado por `bench_slice.gd` [C] — 03-Diseno Cierre: tool 60 s sobre la escena de estres; FPS prom/min, draw calls, particulas, VRAM; veredicto de Beam con presupuesto L5 (2026-10-23 S38)
 
 ## O. Experiencia Completa (RF14)
 
-- [ ] Definir loop de 20-30 min de principio a fin [M]
-- [ ] Definir créditos de demo al final del slice [S]
-- [ ] Definir encuesta post-slice (5+ testers) [M]
-- [ ] Definir que el 90% de testers termine el slice [M]
-- [ ] Definir que el 90% identifique el juego como "cozy/hechizante" [M]
+- [x] Definir loop de 20-30 min de principio a fin [M] — 03-Diseno Cierre: recorrido 10 pasos spawn->creditos, 2-4 min por segmento (14-26 min), holgura para TC12 (2026-10-23 S38)
+- [x] Definir créditos de demo al final del slice [S] — 03-Diseno Cierre: titulo canonico + sistemas + licencias L62 + placa sello brisa "los primeros jardineros" + VOLVER AL MENU (2026-10-23 S38)
+- [x] Definir encuesta post-slice (5+ testers) [M] — 03-Diseno Protocolo: 6 preguntas cerradas + 1 abierta (P2 cozy alimenta L130) (2026-10-22 S35)
+- [x] Definir que el 90% de testers termine el slice [M] — 03-Diseno Protocolo: umbral APROBADO >= 90% completan (tabla por tester en PLAYTEST.md) (2026-10-22 S35)
+- [x] Definir que el 90% identifique el juego como "cozy/hechizante" [M] — 03-Diseno Protocolo: P2 de la encuesta, opciones cerradas, >= 90% (2026-10-22 S35)
 
 ## P. Playtest (RF16)
 
-- [ ] Definir mínimo 5 testers (3 nuevos al juego) [M]
-- [ ] Definir sesión de 40 min máx por tester [S]
-- [ ] Definir observación de momentos de aburrimiento/frustración [M]
-- [ ] Definir registro de bugs por tester [S]
-- [ ] Definir análisis de encuesta en `PLAYTEST.md` [M]
+- [x] Definir mínimo 5 testers (3 nuevos al juego) [M] — 03-Diseno Protocolo: panel minimo 5, 3 virginos para validar el guiado L192 (2026-10-22 S35)
+- [x] Definir sesión de 40 min máx por tester [S] — 03-Diseno Protocolo: timer visible para el observador; feedback inmediato post-sesion (2026-10-22 S35)
+- [x] Definir observación de momentos de aburrimiento/frustración [M] — 03-Diseno Protocolo: plantilla minuto/que/severidad sin intervenir; severidad alta bloquea sello (2026-10-22 S35)
+- [x] Definir registro de bugs por tester [S] — 03-Diseno Protocolo: plantilla min/pasos/expectativa/resultado -> 11-BUGS.md con firma (2026-10-22 S35)
+- [x] Definir análisis de encuesta en `PLAYTEST.md` [M] — 03-Diseno Protocolo: tabla por tester + veredicto de umbrales L129/L130 (2026-10-22 S35; archivo en docs/vslice/ L208)
 
 ## Q. Decisión de Escala a Pre-Alpha (RFCierre)
 
@@ -157,11 +157,11 @@
 
 ## S. Integración de Sistemas
 
-- [ ] Definir integración jugador+voxel desde el prototipo (M137) [M]
-- [ ] Definir integración NPC+diálogo+misón [M]
-- [ ] Definir integración audio+acción (SFX en eventos) [M]
-- [ ] Definir integración VFX+acción [M]
-- [ ] Definir integración autosave en todos los hitos [M]
+- [x] Definir integración jugador+voxel desde el prototipo (M137) [M] — 03-Diseno Integraciones S37: talado/arado/colocacion via voxel_tools M137, sen_impacto(pos) mismo canal, dominio solo del cuadrante slice (2026-10-23 S37)
+- [x] Definir integración NPC+diálogo+misón [M] — 03-Diseno Integraciones: viable con vigente (M64 + M21 + flags finneas en world state + contador S36 + autosave S29); solo conectar el agente finneas_zorro existente al grafo (2026-10-23 S37)
+- [x] Definir integración audio+acción (SFX en eventos) [M] — 03-Diseno Integraciones: eventos emiten senal (sen_impacto etc.) y M43 escucha; 1 player musica + 3 ambiente S31 (2026-10-23 S37)
+- [x] Definir integración VFX+acción [M] — 03-Diseno Integraciones: sen_impacto -> fragmentos M52 con payload dict {tipo,pos}; chispas en entrega/hacha; humo al dormir; pool 3 emitters (2026-10-23 S37)
+- [x] Definir integración autosave en todos los hitos [M] — 03-Diseno Integraciones: UNICO escritor M60 (schema v2); hitos dormir/entrega/puzzle/hacha S29+S36; ningun sistema escribe saves propio (2026-10-23 S37)
 
 ## T. Arquitectura y Modularidad (M07)
 
@@ -182,18 +182,18 @@
 ## V. Feedback de la Dema (feedback externo)
 
 - [x] Definir demo interna (Steam/itch/build M116) [M]
-- [ ] Definir guía de feedback para testers externos [S]
-- [ ] Definir registro de primeras reacciones (video) [S]
-- [ ] Definir recolectar métricas opcionales de la demo (M105 esbozo) [M]
+- [x] Definir guía de feedback para testers externos [S] — 03-Diseno Protocolo: guia de 1 pagina, no guiar, no explicar, pregunta "cuentame que hiciste y por que" (2026-10-22 S35)
+- [x] Definir registro de primeras reacciones (video) [S] — 03-Diseno Protocolo: grabar primeros 5 min (opcional camara), ahi viven las confusiones del arranque (2026-10-22 S35)
+- [x] Definir recolectar métricas opcionales de la demo (M105 esbozo) [M] — 03-Diseno Protocolo: telemetria OPT-IN (tiempo, pasos, saves); sin telemetria = el tester suma igual; sin datos personales (2026-10-22 S35)
 - [ ] Definir que el feedback externo alimente GONOGO-M139 [M]
 
 ## W. Edge Cases
 
-- [ ] Definir tester que nunca jugó voxel (¿el guiado basta?) [C]
-- [ ] Definir save con zona a medio modificar [M]
-- [ ] Definir dormir con el puzzle sin resolver (flags) [S]
-- [ ] Definir Finneas repetiendo líneas tras la misión (flags M21) [M]
-- [ ] Definir recompensa que no rompe la economía de prueba (M93) [M]
+- [x] Definir tester que nunca jugó voxel (¿el guiado basta?) [C] — 03-Diseno: criterio 2/3 virgen localiza POI en <= 90 s; falla -> refuerzo por linea de Finneas + TC14 propuesto al 06 (2026-10-23 S36)
+- [x] Definir save con zona a medio modificar [M] — 03-Diseno: claves v2 arboles/parcelas/cultivo por lista explicita (~50 entradas budget); no-listado vuelve a canonico (2026-10-23 S36)
+- [x] Definir dormir con el puzzle sin resolver (flags) [S] — 03-Diseno: discos/flags persisten al dormir; sin penalizacion, dormir siempre seguro (2026-10-23 S36)
+- [x] Definir Finneas repetiendo líneas tras la misión (flags M21) [M] — 03-Diseno: nodo post-mision con flag_mision_finneas_complete (evaluate_conditions M21 existente); sin re-oferta + loop corto cozy; grafo v2 anotado (2026-10-23 S36)
+- [x] Definir recompensa que no rompe la economía de prueba (M93) [M] — 03-Diseno: cierra con anclaje canonico S26 (20 AO = 13.3% de 150, banda [8,22]; semilla fuera de AO) (2026-10-23 S36)
 
 ## X. Calidad de Código (M111)
 
@@ -205,15 +205,15 @@
 
 ## Y. Documentación del Slice
 
-- [ ] Definir `docs/vslice/` con PLAYTEST, REPORTE-FPS, GONOGO-M139, IDEAS-DESCARTADAS [S]
+- [x] Definir `docs/vslice/` con PLAYTEST, REPORTE-FPS, GONOGO-M139, IDEAS-DESCARTADAS [S] — 03-Diseno Cierre: 4 artefactos creados AL CIERRE del hito, no antes (2026-10-23 S38)
 - [x] Definir actualización del 04-Codigo.md del módulo tras implementar [M]
-- [ ] Definir actualización de CHECKLIST-GLOBAL al cerrar [S]
-- [ ] Definir log de cierre del hito en Logs/ [S]
-- [ ] Definir firma de cierre por todos los agentes que intervinieron [S]
+- [x] Definir actualización de CHECKLIST-GLOBAL al cerrar [S] — 03-Diseno Cierre: fila 138 con conteo final + sello verificador 21.8 (proceso ya activo por tanda, ratificado en 282/288/290) (2026-10-23 S38)
+- [x] Definir log de cierre del hito en Logs/ [S] — 03-Diseno Cierre: log con numeracion del pool global, protocolo seccion 6 (2026-10-23 S38)
+- [x] Definir firma de cierre por todos los agentes que intervinieron [S] — 03-Diseno Cierre: bloque firmas modelo/plataforma/fecha al pie del log (trazabilidad 21.8) (2026-10-23 S38)
 
 ## Z. Cierre y Transición a Pre-Alpha (M139)
 
-- [ ] Definir tag git `vslice-v1` [S]
+- [x] Definir tag git `vslice-v1` [S] — 03-Diseno Cierre: tag anotado SOLO tras GONOGO del usuario (L148); el agente deja el comando en el log, NUNCA push/tag propio (2026-10-23 S38)
 - [ ] Definir empaquetado de la demo (M116/M117) [M]
 - [ ] Definir actualización del presupuesto con datos reales (M134) [M]
 - [x] Definir lista de sistemas a escalar en Pre-Alpha (M139) [M]
@@ -222,7 +222,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 81 · Pendientes: 50 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 109 · Pendientes: 22 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).

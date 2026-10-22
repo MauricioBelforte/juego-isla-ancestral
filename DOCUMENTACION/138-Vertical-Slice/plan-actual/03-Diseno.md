@@ -434,6 +434,175 @@ schema_version 2 y las claves del slice PRESENTES y no-nulas; mientras una
 sola lectura falle, el guardado se cuenta como PERDIDO en el conteo de
 GONOGO-M139 (no hay zona gris).
 
+## Protocolo de playtest del slice (S35 2026-10-22)
+
+**Panel de testers (L134/L135):** minimo 5 testers, de los cuales 3 NUNCA
+jugaron el proyecto (tester virgen manda para el guiado L192); sesion de
+40 min MAXIMO por tester (timer visible para el observador, no para el
+tester); feedback ni bien corta la sesion (memoria fresca), nunca al dia
+siguiente.
+
+**Encuesta post-slice (L128; 6 preguntas cerradas + 1 abierta):**
+1. Terminaste la mision de Finneas? (si/no/en que paso quedaste)
+2. Como describirias la sesion en UNA palabra? (opciones: cozy/
+   hechizante/aburrida/confusa/otra: ___) -> alimenta la meta 90% (L130).
+3. Entendiste que hacer en todo momento? (sientre 1-5)
+4. Algo te frustro? (si/no + que) -> alimenta L136.
+5. La musica/ambiente te parecio adecuada? (si/no + comentario)
+6. Recomendarias seguir jugando si hubiera mas contenido? (si/no)
++ Abierta: "cambiaria una sola cosa" (campo libre; oro para M152).
+
+**Observacion en vivo (L136):** el observador anota TIMESTAMP de cada
+momento de aburrimiento/frustracion (silencio, repetir acciones sin
+avance, golpe de mouse); plantilla de 3 columnas: minuto / que paso /
+severidad (baja/media/alta). Sin intervenir durante la sesion (salvo crash).
+
+**Registro de bugs por tester (L137):** plantilla bug_posta: minuto, pasos
+para reproducir, que esperaba vs que paso, screenshot si aplica. Cada bug
+entra a DOCUMENTACION/11-BUGS.md con firma del tester (anonimizado) y del
+agente que lo traspasa.
+
+**Metricas opcionales de la demo (L187, esbozo M105):** si el build lleva
+telemetria opt-in: tiempo total, pasos de mision completados, muertes/caidas
+del mundo (0 esperado), saves escritos. SIN datos personales; sin telemetria
+= tester igualmente valido.
+
+**Guia de feedback para testers externos (L185):** guia de 1 pagina:
+no guie al tester, no explique sistemas, anote minutos y deje hablar; la
+pregunta exacta es "cuentame que hiciste y por que" (no "te gusto?").
+
+**Primeras reacciones (L186):** grabacion de pantalla (o camara si cede,
+opcional) de los PRIMEROS 5 MINUTOS — ahi vive la reaccion espontanea al
+arranque y el doble de confusions que la encuesta.
+
+**Analisis (L138):** todo lo anterior cae en `PLAYTEST.md` (donde
+`docs/vslice/`, seccion definida en L208): tabla por tester (id, duracion,
+paso alcanzado, palabras cozy?, friccion top 3) + veredicto de umbral
+(L129): se considera APROBADO el bloque cozy si >= 90% de los testers
+completa el slice y >= 90% elige cozy/hechizante en la P2; cualquier
+friccion de severidad alta bloquea el sello hasta correccion.
+
+## Edge cases y hooks de post-mision (S36 2026-10-23)
+
+**Tester virgen y el guiado (L192, [C]):** criterio de validacion del guiado
+con los 3 testers virginos del panel (S35): si al menos 2 de 3 localizan el
+POI objetivo de la mision en <= 90 s sin preguntar, el guiado y se quedo
+podio; si fallan 2 de 3, el guiado NO para el slice: se refuerza con la
+linea inicial de Finneas ("seguia las estrella del panel de arriba a la
+derecha") y se sube al 06 como caso TC14 propuesto al 06 (caso SP-Virgo: auto-falla si el tester virgen pasa > 90 s sin interactuar NADA; el
+observador lo anota en la plantilla, sin tocar el guiado en vivo).
+
+**Save con zona a medio modificar (L193):** el save v2 agrega las claves de
+estado del mundo DEL SLICE: arboles talados (lista de voxel_pos ya
+despejados), parcelas aradas (lista) y cultivo en crecimiento (par
+voxel/dias). Al cargar: los chunks modificados del slice se restauran por
+lista explicita (no re-escaneo global); lo que no esta en la lista vuelve a
+estado canonico del mapa raiz. El limite de tamano: la lista por tester no
+supera ~50 entradas de slice (budget conocido).
+
+**Dormir con el puzzle sin resolver (L194):** los discos y puzzle_resuelto
+PERSISTEN intactos al dormir (el fade NO toca la ruina); Finneas NO pregunta
+por el puzzle de nuevo (el guiado vuelve a apuntar la ruina recien cuando el
+paso 2 este activo). Sin penalizacion: dormir es siempre seguro.
+
+**Finneas despues de la mision (L195, flags M21):** el grafo
+finneas_slice.json v2 agrega nodo post-mision: si
+flag_mision_finneas_complete == true (condicion M21), el saludo cambia un
+comentario amistoso ("el viento te reconoce") y NO se re-ofrece la mision;
+los nodos mision/ruina_hint quedan inaccesibles (branch de condicional M21,
+ya existe el mecanismo evaluate_conditions del manager). La conversacion
+cozy sigue disponible (loop corto de 2 lineas).
+
+**Recompensa que no rompe la economia (L196, M93):** ese item cierra con el
+anclaje canonico ya hecho (S26): 20 AO = 13.3% de 150 (taller_crafting,
+unlocks.json) DENTRO de la banda [8, 22] de quests.json; semilla fuera del
+conteo AO. Referencia: seccion Recompensa del 03 + verificacion de quest
+de 15 AO = 10% en M93.
+
+## Integraciones del slice (S37 2026-10-23) — wiring samemente con modulos vigentes
+
+**L160 jugador+voxel (M137):** el jugador del prototipo es el actor del slice:
+talado/arado/colocacion pasan por voxel_tools de M137 (raycast de bloque +
+evento de voxel modificado -> dominio del slice). El hacha del slice usa el
+mismo canal de interaccion del jugador (sin pipeline paralelo): senal
+`sen_impacto(pos)` (S30) sale del punto de impacto del voxel_tool. Al caer el
+arbol (contrato pendiente M33), el dominio de voxel notifica `caida(pos)`.
+El jugador SOLO interactua dentro del cuadrante del slice (los demas
+dominios no estan enchufados al prototipo del vertical).
+
+**L161 NPC+dialogo+mision:** YA VIABLE con lo vigente — Finneas (M64,
+NavigationServer + posicionamiento por get_height) abre el grafo
+`finneas_slice.json` con el manager M21; los flags
+`flag_mision_finneas_aceptada/pasos/complete` (destino world state) son los
+que consume el contador de pasos de la mision (S36: nodo post-mision via
+evaluate_conditions) y el autosave de hitos (S29). Sin wiring nuevo: solo
+conectar el NPC-finneas_zorro existente en la escena del slice al grafo.
+
+**L162 audio+accion:** S30/S31 dejaron las senales y buses: sen_impacto ->
+sfx impacto_madera / swing (frame 8 sin hit), extraccion_recurso con pitch
+por material, colocacion_bloque en bus comun; moneda_ao al pickup AO. Un
+solo AudioStreamPlayer de musica (M41) + 3 de ambiente (M42, S31). Los
+eventos de accion NO llaman a audio directo: emiten senal y el M43 escucha
+(desacoplar ui/logica regla AGENTS 9).
+
+**L163 VFX+accion:** idem senal (sin llamada directa): sen_impacto -> burst
+de fragmentos M52 (S30/S33); entrega de mision y toma del Hacha -> chispas
+nobles (S33); dormir -> humo (S33). Pool de 3 emitters reciclabes ya
+definido; el M52 pone el material segun el tipo de accion (madera/piedra/
+polvo/oro) desde el payload de la senal (dict {tipo, pos}).
+
+**L164 autosave en todos los hitos:** contrato cerrado en S29/S36: dormir
+(snapshot completo), entrega de la mision (paso 2->3), puzzle_sala_resuelta
+y toma del Hacha -> guardado(slice_dict, motivo) al loader M60 (schema v2,
+claves del slice definidas S28, validacion de version en el loader unico).
+Ningun sistema del slice escribe saves por su cuenta (unico escritor M60).
+
+## Cierre de la demo: estres, benchmark, loop y creditos (S38 2026-10-23)
+
+**L121 punto denso de prueba:** el test de estres del slice es UNA escena de
+verificacion (no shipping): bosque denso del borde oeste + lluvia simultanea
+(M50) + Finneas caminando su rutina (M64) en el mismo cuadro. Objetivo: medir
+el peor caso de render/particulas del cuadrante. No se juega: se observa con
+el monitor de Godot.
+
+**L122 bench_slice.gd -> REPORTE-FPS.md:** script tool headless-adjunto que
+corre la escena de estres (L121) 60 segundos y escribe `REPORTE-FPS.md` con:
+FPS promedio / minimo (1% low), draw calls, objetos renderizados, particulas
+activas, VRAM estimada y la fila con la version del engine. Salida al raiz
+del module 138. UBICACION del script: scripts/vslice/bench_slice.gd (tool).
+Umbral de aprobacion: lo fija Beam con el presupuesto L5 (el bench
+SOLO mide; el veredicto es de Beam).
+
+**L126 loop de 20-30 min (principio a fin):** el recorrido completo del
+slice queda definido como: spawn en la escalera del muelle -> dialogo inicial
+con Finneas (racio por TC5) -> talo del prado (5 bloques) -> entrega paso ->
+hacia la ruina (guiado L99) -> puzzle SOL/BRISA (TC6) -> Hacha de Finneas ->
+tala de la arboleda con el hacha nueva -> dormir (autosave) -> vuelta con
+Finneas (nodo post-mision S36) -> creditos (L127). Estimador por segmento:
+2-4 min por paso (14-26 min total), holgura para el test R-01/TC12.
+
+**L127 creditos de demo:** al terminar la mision (post-mision loop), panel
+de creditos simple: TITULO del slice, "Un vertical slice de Isla Aurora"
+(canon M147), lista de sistemas usados (M02-M137, sin nombres de agentes),
+licencias de assets (CC0/propio, L62), y la placa final del sello brisa con
+"los primeros jardineros" como cierre canonico. Boton VOLVER AL MENU.
+
+**Gestion de cierre de la demo (L208/L210/L211/L212/L216):**
+- L208: el directorio `docs/vslice/` contendra 4 artefactos: PLAYTEST.md
+  (L138), REPORTE-FPS.md (L122), GONOGO-M139.md (decision del usuario,
+  L148) e IDEAS-DESCARTADAS.md (L152). Creacion al cierre del hito, no
+  antes (evita documentos fantasma).
+- L210: al cerrar, la fila 138 de CHECKLIST-GLOBAL se actualiza con el
+  conteo final y el sello del verificador §21.8 (proceso ya en marcha en
+  cada tanda mia).
+- L211: log de cierre del hito en Logs/ con la numeracion del pool global
+  (mismo protocolo de esta tanda).
+- L212: bloque de firmas al pie del log de cierre: cada agente que toco el
+  slice firma (modelo/plataforma/fecha) — trazabilidad §21.8.
+- L216: tag git `vslice-v1` annotado SOLO tras el GONOGO del usuario (L148):
+  el agente NO hace push ni tag por si mismo; deja el comando listo en el
+  log de cierre para el usuario.
+
 ## Canon y estilo (M147)
 
 - Nombre del slice y su historico consume el canon M147 (glpts); toda
