@@ -50,9 +50,11 @@ hardware o profiler que no podés correr) → EN ESTA MISMA VUELTA:
    cadencia — sin inventar tanda falsa ni tocar módulos con dueño.
 
 === PASO 3 — REPORTE + 3 LUGARES SINCRONIZADOS ===
-REPORTE AL DIRECTOR EN CADA VUELTA: escribir en tu canal qué hiciste (tarea(s), estado,
-evidencia — aunque no cierres todo) + marca [x] honesta en el BACKLOG (solo verificable en
-disco) + fila de CHECKLIST-GLOBAL si el módulo aplica. Y AL CERRAR la vuelta: si el director
+REPORTE AL DIRECTOR EN CADA VUELTA — OBLIGATORIO SIN EXCEPCIONES: escribir en tu canal
+MÍNIMO 1 LÍNEA aunque no haya tanda ni novedad (guardia: suites + filas en estado). Si no
+escribís, el fundador/director te ven INACTIVO (lección ping 226). La directiva “solo novedad
+material” NO anula este piso por ciclo. Además: (tarea/estado/evidencia) + marca [x] honesta
+en el BACKLOG + fila de CHECKLIST-GLOBAL si el módulo aplica. Y AL CERRAR la vuelta: si el director
 te dio una orden o cerraste algo material, así deben quedar los 3 lugares sincronizados:
 1) tu mensaje en tu canal (firma + acuse),
 2) el 05-Checklist del módulo que tocaste (flips con cita en disco),

@@ -1,26 +1,24 @@
 # -*- coding: utf-8 -*-
-# Refuerzo del PASO 2-BIS + entrada de historial (directiva del fundador 2026-10-22)
 import io
 
 P = r"DOCUMENTACION\TAREAS-POR-MODELO\G-5.3-Flash-Agente\CRONOMETRO-ACTIVO.md"
 s = io.open(P, encoding="utf-8").read()
 
-old = ("3. Mientras llega la respuesta: guardia por ciclo (sonda ligera de suites + filas 4/4) y ping de\n"
-       "   cadencia — sin inventar tanda falsa ni tocar módulos con dueño.")
-new = ("3. Mientras llega la respuesta: guardia por ciclo (sonda ligera de suites + filas 4/4) y ping de\n"
-       "   cadencia — sin inventar tanda falsa ni tocar módulos con dueño.\n"
-       "4. **RAZÓN DE FONDO (directiva del fundador 2026-10-22):** el fundador y el director detectan tu\n"
-       "   actividad SOLO por lo que escribís en tu canal — si no escribís, te ven INACTIVO aunque hayas\n"
-       "   trabajado. Por eso EN CADA VUELTA hay mínimo 1 línea de reporte, y cuando todo está bloqueado\n"
-       "   el PEDIDO DE TAREAS de este paso es OBLIGATORIO (no opcional).")
-assert old in s
+old = ("REPORTE AL DIRECTOR EN CADA VUELTA: escribir en tu canal qu\u00e9 hiciste (tarea(s), estado,\n"
+       "evidencia \u2014 aunque no cierres todo) + marca [x] honesta en el BACKLOG (solo verificable en\n"
+       "disco) + fila de CHECKLIST-GLOBAL si el m\u00f3dulo aplica.")
+assert old in s, "ancla vieja no"
+new = ("REPORTE AL DIRECTOR EN CADA VUELTA \u2014 OBLIGATORIO SIN EXCEPCIONES: escribir en tu canal\n"
+       "M\u00cdNIMO 1 L\u00cdNEA aunque no haya tanda ni novedad (guardia: suites + filas en estado). Si no\n"
+       "escrib\u00eds, el fundador/director te ven INACTIVO (lecci\u00f3n ping 226). La directiva \u201csolo novedad\n"
+       "material\u201d NO anula este piso por ciclo. Adem\u00e1s: (tarea/estado/evidencia) + marca [x] honesta\n"
+       "en el BACKLOG + fila de CHECKLIST-GLOBAL si el m\u00f3dulo aplica.")
 s = s.replace(old, new)
 
-# Entrada de historial
-h_ant = "| 2026-10-21 21:24 | **Esta versión**: + PASO 0 (contexto persistente `Logs/estado_director.json`) + **PASO 2-BIS** (cola agotada/bloqueada → pedir tareas concretas al director, con escaneo de 05s y alternativas; prohibido aceptar standby sin escaneo) | orden del fundador (\"agregalo… documentes siempre el último cronometro\") |"
-assert h_ant in s
-s = s.replace(h_ant, h_ant + "\n" +
-    "| 2026-10-22 01:41 | **Refuerzo del PASO 2-BIS**: motivo de fondo explícito — el fundador/director detectan actividad SOLO por escritura en el canal; sin write te ven inactivo. Reporte de mínimo 1 línea EN CADA VUELTA y pedido de tareas obligatorio cuando todo está bloqueado | orden del fundador (\"si no le escribís no te ve activo\") |")
+h_old = "| 2026-10-22 01:41 | **Refuerzo del PASO 2-BIS**: motivo de fondo expl\u00edcito \u2014 el fundador/director detectan actividad SOLO por escritura en el canal; sin write te ven inactivo. Reporte de m\u00ednimo 1 l\u00ednea EN CADA VUELTA y pedido de tareas obligatorio cuando todo est\u00e1 bloqueado | orden del fundador (\"si no le escrib\u00eds no te ve activo\") |"
+h_add = "| 2026-10-22 03:28 | **PISO de reporte SIN EXCEPCIONES**: m\u00edn 1 l\u00ednea por vuelta aunque no haya novedad (lecci\u00f3n: 4 vueltas sin ping que el fundador detect\u00f3; \"solo novedad material\" NO anula el piso) | orden del fundador |"
+if h_old in s and h_add not in s:
+    s = s.replace(h_old, h_old + "\n" + h_add)
 
 io.open(P, "w", encoding="utf-8", newline="\n").write(s)
-print("refuerzo ok")
+print("doc reforzada ok")

@@ -29,6 +29,7 @@ var _fallos: int = 0
 var _wb_vistos: Dictionary = {}
 var _wb_cerrado: bool = false
 var _pm: Node = null
+var _pp: Node = null
 var _bus: Node = null
 
 func _init() -> void:
@@ -41,10 +42,12 @@ func _fin(nombre: String) -> void:
 func _run() -> void:
 	print("=== [HY3][F1] Repro _reevaluar sin validar umbral (M71) ===")
 	_pm = root.get_node_or_null("ProgressionManager")
+	_pp = root.get_node_or_null("PlayerProfile")
 	_bus = root.get_node_or_null("EventBus")
 	_check(_pm != null, "ProgressionManager autoload presente")
+	_check(_pp != null, "PlayerProfile autoload presente")
 	_check(_bus != null, "EventBus autoload presente")
-	if _pm == null or _bus == null:
+	if _pm == null or _pp == null or _bus == null:
 		return
 	_pm.restore_save_data({})
 	_check(not _pm.hito_alcanzado("hito_items_50"),
@@ -60,8 +63,8 @@ func _run() -> void:
 	# --- Comportamiento CORRECTO (debe pasar) ---
 	_check(alcanzados.has("hito_items_10"),
 		"hito_items_10 alcanzado con 10 items (umbral 10): OK")
-	_check(float(_pm.get_stat_safe("items_recolectados")) >= 10.0,
-		"items_recolectados acumulados = 10: %s" % _pm.get_stat_safe("items_recolectados"))
+	_check(float(_pp.get_stat("items_recolectados")) >= 10.0,
+		"items_recolectados acumulados = 10: %s" % _pp.get_stat("items_recolectados"))
 	# --- INTEGRIDAD DE UMBRAL (debe pasar PERO FALLA => defecto) ---
 	_check(not _pm.hito_alcanzado("hito_items_50"),
 		"INTEGRIDAD: hito_items_50 NO alcanzado con solo 10 items (umbral 50)")

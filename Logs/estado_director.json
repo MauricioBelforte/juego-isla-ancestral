@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:20:30",
+ "ultimo_update": "2026-10-22T02:25:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "223: tanda consolidada con 4 encargos que no le habian llegado (clamp D8, coste_ao interim, documentar ROI, FYI contaminacion user://); fallo de ruteo mio corregido llamandolo por canal",
+  "estado": "226/227/228: guardia restablecida (cron v6 sin excepciones); escaneo 2-BIS.2 ejecutado (28 modulos, ~1350 [ ]); GO CONFIRMADO M33-Agricultura (49 [ ]) con agricultura/mineria ocasional",
   "pendientes_real": 222,
-  "acuse_enviado": 223,
+  "acuse_enviado": 228,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -100,7 +100,8 @@
   "verificar flips por TEXTO del item, no por numero de identificador: el numero puede ser la linea o el id del item y el grep falla (caso falsa URGENTE 073 sobre 313 de Beam)",
   "flip 251 (album corrupto M56) sigue sin registrar: pedida su incorporacion (Beam 075)",
   "BARRIDO git add -A con trabajo EN VUELO de un agente commitea ficheros parciales y bloquea el CI entero (caso photo_service parse-eado roto por 452809f): el barrido del director debe EXCLUIR explicitamente ficheros con mtime < X min, no solo NUMEROS",
-  "parse errors en cascada por merges de misma funcion: clock/env/ms - releer scope completo Y nombres de variables existentes antes de insertar"
+  "parse errors en cascada por merges de misma funcion: clock/env/ms - releer scope completo Y nombres de variables existentes antes de insertar",
+  "\"no tengo nada\" por dueño-bloqueo SIN escanear los 05 no-bloqueados es la trampa canonica 2-BIS.2: el escaneo deterministicocorrectivo la materializo G-5.3 (28 modulos ~1350 [ ] sin dueño)"
  ],
  "minimax_m3_1_flash": {
   "estado": "032/035: LANE SERIE SELLADA + HALLAZGO GRAVE RATIFICADO Y VERIFICADO (mi barrido commiteo photo_service en vuelo; sus 2 fixes quirurgicos en disco y CI verde 26 checks rc=0); opt-in re-measure corriendo",
