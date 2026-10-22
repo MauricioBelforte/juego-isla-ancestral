@@ -1278,3 +1278,8 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 144. - [ ] [21] Presupuesto: dialogo activo agrega menos de 1 ms al frame presupuestado [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
 145. - [ ] [21] Plan-actual duplicado identico del plan-inicial [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
 146. - [ ] [21] Verificacion de 0 errores en consola durante una partida de prueba [S] <!-- fuente: 21-Dialogos/05-Checklist.md -->
+
+## Anticipo de encuesta §21.8 (msg 325, 2026-10-22) — M77 + M151 (read-only)
+- [x] Verificacion cruzada de lectura M77 (108/130) y M151 (155/167) autorizada por director msg 324 (punto 4).
+- Conteos top-level rigidos reproducidos exactamente desde disco (no heredados). M77: 0 deudas de archivo. M151: 4 deudas declaradas (honestas) + 1 evidencia no declarada (docs/identidad-benchmark.md) como hallazgo menor.
+- Logs reservados 2139 (M77) / 2140 (M151). Tracker 323->324. Sin commit/push. Sin lote de ejecucion asignado (RAMA-2 en espera por V2).
