@@ -41,6 +41,10 @@ var _hud_visible_antes_modo: bool = true
 ## ── SubViewport de captura a resolucion fija (M56 [C] item 131) ──
 ## 1920x1080 dedicado, independiente de la resolucion de pantalla.
 var _viewport_captura: SubViewport = null
+## Indice del album (M60): lista versionada de fotos. Si esta corrupto,
+## se usa un indice vacio (defaults) sin perder las fotos en disco.
+var _album_index: Dictionary = {"version": 1, "fotos": []}
+const RUTA_ALBUM_INDEX := "user://fotos/index.json"
 ## ── Hora fijada para la foto (M31, item 69) ─────────────
 ## -1 = sin hora fija (usa la hora actual del juego). 0-23 = hora fijada.
 var _hora_fijada: int = -1
@@ -60,6 +64,7 @@ var _navigator: Camera3D = null
 
 func _ready() -> void:
 	_cargar_presets()
+	_cargar_album_index()
 	# SubViewport de captura a resolucion fija 1920x1080 (M56 [C] item 131).
 	_viewport_captura = SubViewport.new()
 	_viewport_captura.size = Vector2i(1920, 1080)
@@ -72,6 +77,30 @@ func _ready() -> void:
 		_navigator.name = "Navigator"
 		add_child(_navigator)
 
+func _cargar_album_index() -> void:
+	"""Carga el indice del album. Si esta corrupto o no existe, usa defaults."""
+	if not FileAccess.file_exists(RUTA_ALBUM_INDEX):
+		return
+	var f := FileAccess.open(RUTA_ALBUM_INDEX, FileAccess.READ)
+	if f == null:
+		print("[M56] album index no legible; usando defaults")
+		return
+	var parsed = JSON.parse_string(f.get_as_text())
+	f.close()
+	if not (parsed is Dictionary):
+		print("[M56] album index corrupto (no es Dictionary); usando defaults")
+		return
+	var d: Dictionary = parsed
+	if not d.has("version") or not d.has("fotos"):
+		print("[M56] album index corrupto (falta version/fotos); usando defaults")
+		return
+	if not (d["fotos"] is Array):
+		print("[M56] album index corrupto (fotos no es Array); usando defaults")
+		return
+	_album_index = d
+	print("[M56] album index cargado: %d fotos" % _album_index["fotos"].size())
+
+
 func _cargar_presets() -> void:
 	if not FileAccess.file_exists(RUTA_PRESETS):
 		push_warning("[M56] foto_presets.json no encontrado")
@@ -80,6 +109,18 @@ func _cargar_presets() -> void:
 	if typeof(parsed) == TYPE_DICTIONARY:
 		_presets = parsed.get("presets", {})
 	print("[M56] PhotoService listo (%d presets fotográficos)" % _presets.size())
+
+
+func _guardar_album_index() -> void:
+	"""Guarda el indice del album. Si falla, loguea y no rompe."""
+	var ruta_abs := ProjectSettings.globalize_path(RUTA_ALBUM_INDEX)
+	DirAccess.make_dir_recursive_absolute(ruta_abs.get_base_dir())
+	var f := FileAccess.open(ruta_abs, FileAccess.WRITE)
+	if f == null:
+		print("[M56] no se pudo guardar album index")
+		return
+	f.store_string(JSON.stringify(_album_index))
+	f.close()
 
 func set_modo_foto(activo: bool) -> void:
 	if _activo == activo:
@@ -262,6 +303,8 @@ func tomar_foto() -> Dictionary:
 		DirAccess.make_dir_recursive_absolute(ruta_abs.get_base_dir())
 		err = img.save_png(ruta_abs)
 		if err == OK:
+			_album_index["fotos"].append({"ruta": ruta, "bytes": bytes, "ms": ms})
+			_guardar_album_index()
 			var f := FileAccess.open(ruta_abs, FileAccess.READ)
 			if f != null:
 				bytes = f.get_length()

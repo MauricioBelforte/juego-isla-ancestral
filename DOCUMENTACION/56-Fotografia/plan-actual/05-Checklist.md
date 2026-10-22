@@ -248,8 +248,8 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Manejar cámara en agua profunda (M51) [M]
   · espera: modulo(s) dependiente(s): M51 (coordinar con su dueno)
-- [ ] Manejar álbum corrupto con defaults (M60) [C]
-  · espera: modulo(s) dependiente(s): M60 (coordinar con su dueno)
+- [x] Manejar álbum corrupto con defaults (M60) [C]
+  · implementado: photo_service.gd _cargar_album_index() con validacion de corrupcion (defaults si corrupto) + _guardar_album_index(). (Reflection-Beam-1.0, T30, 2026-10-22)
 
 ## U. Localización (M87/M88)
 
