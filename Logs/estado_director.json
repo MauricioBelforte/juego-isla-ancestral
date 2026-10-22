@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T21:56:00",
+ "ultimo_update": "2026-10-22T22:16:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -187,7 +187,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "21:15 - dia sellado y flota en guardia. Sellos del dia con QA agnes: M99 (169/169), M70 (198/198 con deuda perf). Cerrados Block-consolidados de Beam (70/144/108/77/99/16/M16). Baterias M151 1-5 completas (155/167, 5 flags fundador). M23 65/105 (iter11+12 Step-5, bloque final GO). DS-WB: BUG-149 + normalizacion 141-148 + lote verificador M91/M147/M24 GO. Hy3 encuesta M77/M151 autorizada. SIN nuevas asignaciones sin fundador: 5 flags M151, etiqueta Alta literal, batching M53, puente M55, deuda profiler M70; GO slice / regreso MiniMax / Godot-MCP abren los proximos frentes.",
+ "nota_cron_d": "22:15 - sin cambios de asignacion. Step-5 con bloque Puzzles de M23 en vuelo (preservado 22:10; espera SU reporte consolidado final). Resto de la flota en guardia cerrada (dia 22oct lacrado). Lo unico pendiente de asignacion real sigue siendo: decisiones del fundador (flags M151, cozy, etiqueta Alta, batching M53, puente M55, GO slice, quality.yml) o regreso MiniMax. Sin ruido.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
