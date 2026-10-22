@@ -219,6 +219,12 @@ func _categoria_para_fuente(fuente: StringName) -> StringName:
 		&"foto": return &"fotos"
 		&"mapa": return &"mapas"
 		&"herramienta": return &"herramientas"
+		&"vestuario": return &"ropa"
+		&"simbolo": return &"simbolos"
+		&"mensaje": return &"mensajes"
+		&"secreto": return &"secretos"
+		&"mueble": return &"muebles"
+		&"mision": return &"objetos_historia"
 		_: return &""
 
 func _get_fauna_registry() -> Node:

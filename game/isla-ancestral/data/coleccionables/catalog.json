@@ -577,5 +577,245 @@
     "recompensa_item": "gema_ancestral",
     "recompensa_cantidad": 1,
     "puntos": 100
+  },
+  {
+    "categoria": "ropa",
+    "id_local": "001",
+    "display_name": "Tunica de Lino",
+    "rareza": 0,
+    "fuente": "vestuario",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 15,
+    "puntos": 5
+  },
+  {
+    "categoria": "ropa",
+    "id_local": "002",
+    "display_name": "Manto de Ancestro",
+    "rareza": 1,
+    "fuente": "vestuario",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 45,
+    "puntos": 15
+  },
+  {
+    "categoria": "ropa",
+    "id_local": "003",
+    "display_name": "Atuendo de Festival",
+    "rareza": 2,
+    "fuente": "vestuario",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 100,
+    "puntos": 30
+  },
+  {
+    "categoria": "ropa",
+    "id_local": "004",
+    "display_name": "Atuendo Exclusivo Raro",
+    "rareza": 3,
+    "fuente": "vestuario",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "simbolos",
+    "id_local": "001",
+    "display_name": "Runa de Piedra",
+    "rareza": 0,
+    "fuente": "simbolo",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 15,
+    "puntos": 5
+  },
+  {
+    "categoria": "simbolos",
+    "id_local": "002",
+    "display_name": "Simbolo del Anillo",
+    "rareza": 1,
+    "fuente": "simbolo",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 15
+  },
+  {
+    "categoria": "simbolos",
+    "id_local": "003",
+    "display_name": "Runa del Templo",
+    "rareza": 2,
+    "fuente": "simbolo",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 90,
+    "puntos": 30
+  },
+  {
+    "categoria": "simbolos",
+    "id_local": "004",
+    "display_name": "Sello Runico Ancestral",
+    "rareza": 3,
+    "fuente": "simbolo",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "mensajes",
+    "id_local": "001",
+    "display_name": "Botella de Carta",
+    "rareza": 0,
+    "fuente": "mensaje",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 10,
+    "puntos": 5
+  },
+  {
+    "categoria": "mensajes",
+    "id_local": "002",
+    "display_name": "Mensaje de Correo",
+    "rareza": 1,
+    "fuente": "mensaje",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 30,
+    "puntos": 10
+  },
+  {
+    "categoria": "mensajes",
+    "id_local": "003",
+    "display_name": "Nota de Vecino",
+    "rareza": 2,
+    "fuente": "mensaje",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 60,
+    "puntos": 25
+  },
+  {
+    "categoria": "mensajes",
+    "id_local": "004",
+    "display_name": "Mensaje Ancestral",
+    "rareza": 3,
+    "fuente": "mensaje",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "secretos",
+    "id_local": "001",
+    "display_name": "Secreto de Cueva",
+    "rareza": 0,
+    "fuente": "secreto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 20,
+    "puntos": 10
+  },
+  {
+    "categoria": "secretos",
+    "id_local": "002",
+    "display_name": "Accion Oculta del Faro",
+    "rareza": 1,
+    "fuente": "secreto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 50,
+    "puntos": 20
+  },
+  {
+    "categoria": "secretos",
+    "id_local": "003",
+    "display_name": "Secreto del Bosque Profundo",
+    "rareza": 2,
+    "fuente": "secreto",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 120,
+    "puntos": 40
+  },
+  {
+    "categoria": "secretos",
+    "id_local": "004",
+    "display_name": "Contenido Oculto Ancestral",
+    "rareza": 3,
+    "fuente": "secreto",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "muebles",
+    "id_local": "001",
+    "display_name": "Mesa de Roble",
+    "rareza": 0,
+    "fuente": "mueble",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 15,
+    "puntos": 5
+  },
+  {
+    "categoria": "muebles",
+    "id_local": "002",
+    "display_name": "Lampara de Festival",
+    "rareza": 1,
+    "fuente": "mueble",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 15
+  },
+  {
+    "categoria": "muebles",
+    "id_local": "003",
+    "display_name": "Estatua de Ancestro",
+    "rareza": 2,
+    "fuente": "mueble",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 100,
+    "puntos": 30
+  },
+  {
+    "categoria": "muebles",
+    "id_local": "004",
+    "display_name": "Mueble Exclusivo Raro",
+    "rareza": 3,
+    "fuente": "mueble",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "objetos_historia",
+    "id_local": "001",
+    "display_name": "Cartilla del Capitulo",
+    "rareza": 0,
+    "fuente": "mision",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 15,
+    "puntos": 5
+  },
+  {
+    "categoria": "objetos_historia",
+    "id_local": "002",
+    "display_name": "Reliquia del Capitulo",
+    "rareza": 1,
+    "fuente": "mision",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 40,
+    "puntos": 15
+  },
+  {
+    "categoria": "objetos_historia",
+    "id_local": "003",
+    "display_name": "Objeto del Final Alterno",
+    "rareza": 2,
+    "fuente": "mision",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 100,
+    "puntos": 30
+  },
+  {
+    "categoria": "objetos_historia",
+    "id_local": "004",
+    "display_name": "Objeto Historico Ancestral",
+    "rareza": 3,
+    "fuente": "mision",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
   }
 ]

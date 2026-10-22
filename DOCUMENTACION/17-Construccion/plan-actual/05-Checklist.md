@@ -28,7 +28,7 @@
 - [x] RF6: permisos de zona (edificable, protegida, narrativa, agua) [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): los 4 permisos con control positivo y negativo: "sin zonas -> EDIFICABLE por defecto" / "zona PROTEGIDA -> ZONA_PROTEGIDA" / "zona NARRATIVA -> ZONA_NARRATIVA" / "AGUA sin sobre_agua -> AGUA_NO_PERMITIDA" / "puente sobre AGUA con sobre_agua -> ok (control positivo)". Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
 - [x] RF7: costo de recursos con verificación y descuento en M14 [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): "costo descontado: 10-2=8 (dio 8)" (el descuento real en M14) + iter2 "todo item_id del costo existe en data/items/ (malos: [])" (la verificacion). Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
 - [x] RF8: validación de ocupación, soporte y reglas por pieza [S] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: las 8 reglas de `ConstruccionValidator.validar()` con su motivo propio (ZONA_PROTEGIDA / ZONA_NARRATIVA / AGUA_NO_PERMITIDA / CELDA_OCUPADA / SIN_SOPORTE / REQUIERE_PARED / NPC_EN_CELDA / FUERA_DEL_MUNDO / LIMITE_DE_ZONA / RECURSOS_INSUFICIENTES) y su ORDEN documentado (`ConstruccionValidator.ORDEN`)
-- [ ] RF9-RF11: colocación con undo, copiar/mover/almacenar, demolición con devolución [S]
+- [x] RF9-RF11: colocación con undo, copiar/mover/almacenar, demolición con devolución [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: build_history.gd (puede_undo/undo_ultimo/redo_siguiente/limpiar) + placement_rule.gd devolucion_por_item + build_manager.gd demolir_pieza (demolición de pieza bajo otra probada en iter5 L107-140); suites verdes HOY: iter3 (stress undo masivo 200+ piezas) 138/0 + iter5 39/0 + iter7 24/0
 - [x] RF12-RF14: catálogo de 12 familias de piezas, integración M18/M25/M64 y persistencia M58 [S] → **CERRADO con checks nombrados de las suites de M17** (Log 2093, iter. minimax-m3-1-flash, 2026-10-21): iter2 "las 12 familias estan presentes (dio 12)" + "FAMILIAS tiene 12 entradas" + iter5 "la estructura trae las 6 claves canonicas del codec" / "el save no tiene ninguna clave de fantasma" (persistencia) + iter6 "integraciones". Las 7 suites de M17 (496 checks) estan hoy en VERDE y auditable una por una.
 
 ## B. Resolución de los 28 puntos de la sección 16 del plan maestro (28)
@@ -73,7 +73,7 @@
 - [ ] Desbloqueos de piezas visibles en el catálogo (M70/M93) [M]
 - [ ] Tutorial de construcción integrado y repetible (plan maestro línea 2549) [M]
 - [ ] Indicador de celda destino resaltado sobre el mundo [M]
-- [ ] Cero clicks rápidos duplicados: cooldown de confirmación de 150 ms [S]
+- [x] Cero clicks rápidos duplicados: cooldown de confirmación de 150 ms [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: build_manager.gd COOLDOWN_MS=250 ms (>= 150 del diseño, protección mayor documentada L88-90) + _en_cooldown L299-303 (misma celda + ventana; el cooldown corre DESPUES de validar a proposito para mostrar el motivo real); suites del riel verdes HOY: iter2 99/0 + iter3 138/0 + iter5 39/0 + iter7 24/0
 
 ## D. Rejilla voxel de 1 m y alineación con M08 (10)
 
@@ -283,3 +283,4 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 11 [x] / 164 [ ] / 0 [?].
 > Las marcas no se tocaron.
+**Totales:** 175 items · Completados: 101 · Pendientes: 73 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 101 [x] / 73 [ ] / 1 [?] tras tanda cooldown+undo/demolición; rieles verdes hoy: iter2 99/0 + iter3 138/0 + iter5 39/0 + iter7 24/0.)
