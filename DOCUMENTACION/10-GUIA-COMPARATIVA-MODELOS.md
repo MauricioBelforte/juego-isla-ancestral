@@ -3269,3 +3269,47 @@ Formato: agente -> DELEGAR (nicho probado) / EVITAR o CUIDAR (lo malo observado)
 ### Regla multitarea para toda la flota (directiva fundador 2026-10-22 07:37)
 
 Todo encargo del director lleva 2+ tareas quando haya cola (main + extras etiquetados); agente responde COMBINADO (seccion 3-5 lineas por item, evidencia en disco). Optimiza: menos mensajes, mas densidad por ciclo. Ya en vigencia con Beam (L1-L6) y extendido a los 9 canales.
+
+
+## N.3-N.5 CANDIDATOS A FLOTA INVESTIGADOS AL DETALLE (2026-10-22 07:55, orden fundador: traer a trabajar)
+
+**Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 07:55
+Fuente: catalogo oficial de OpenRouter (468 modelos, volcado 2026-10-22) + guia de API de OpenRouter por modelo. Los tres son FREE en OpenRouter y con tool-calls ESTANDAR (ninguno repite el fallo de Flint, cuyo tool-call era XML no estandar).
+
+### N.3 NVIDIA Nemotron 3 Ultra - id: nvidia/nemotron-3-ultra-550b-a55b:free
+
+- Spec: MoE hibrido Transformer-Mamba, **550B totales / 55B activos**. FREE ctx = **1.000.000 tokens** (de pago: 262k).
+- Rol publicado por NVIDIA: **frontier-reasoning AND orchestration** - razonamiento de frontera + orquestacion de agentes.
+- API confirmada (guia OpenRouter oficial): tools, tool_choice, response_format, **reasoning_effort** (niveles de razonamiento seleccionables), stream. Todo estandar OpenAI-compatible: entra directo en cualquier agente.
+- **Capacidad diferencial vs flota:** es el RAZONADOR PESADO que nadie tiene - analisis multi-archivo de alta profundidad y calculo matematico de balanceo (M93-style) - y el ctx de 1M le permite cargar DOCUMENTACION/ entera en una pasada.
+- Nicho propuesto: **razonador de arquitectura/balance + orquestador de analisis largo**. Verificador de segunda linea (validacion con otro modelo: debe ser 3ro de confianza, no gemelo de nadie).
+- Riesgo: free tier sin SLA (rate limit desconocido); Mamba-hibrido nuevo, sin benchmarks publicos citados en el catalogo.
+- T1: consigna de picking documental + 1 calculo de balance con verificacion externa del director.
+
+### N.4 Thinking Machines Inkling - id: thinkingmachines/inkling:free
+
+- Spec: MoE multimodal, **975B totales / 41B activos** (el mayor activo disponible). FREE ctx = **1.048.576 tokens** (de pago: 524k).
+- Rol publicado: general-purpose **reasoning, coding, agentic y tool-use**; multimodal (incluye imagen: abre via vision local si se necesita).
+- Desc de catalogo y de la propia lab: primera generacion, mas generalista que especialista.
+- **Capacidad diferencial vs flota:** combinacion de activos (41B) + contexto (1M) + MULTIMODAL - unica candidata con capacidad visual nativa por API, relevante para lineas visuales futuras sin depender del PC.
+- Nicho propuesto: **segundo razonador + candidato a vision-by-API** cuando quepa probar multimodal.
+- Riesgo: modelo estrenisimo, free tier, benchmarks no publicados; multimodal sin testear en nuestro flujo.
+- T1: mismo picking documental que Nemotron; comparar ambas respuestas.
+
+### N.5 Poolside Laguna S 2.1 - id: poolside/laguna-s-2.1:free
+
+- Spec: MoE de **CODING AGENT puro**: 118B totales / 8B activos. **Terminal-Bench 2.1 = 70.2%** (benchmark publico de terminal-agentic - referencia a comparar con el OSWorld 61.7 de MiniMax-M3.1; benchmarks distintos). FREE ctx = 262k (de pago: 1M).
+- Casa especializada: Poolside entrena solo con codigo - precision de edicion y pruebas.
+- **Capacidad diferencial vs flota:** especialista terminal/codigo con MEDICION PUBLICA (70.2%) - el unico candidato con numero de agentic-coding citado. Complemento directo: ediciones quirurgicas de GDScript y debugging de suites (donde el historial muestra errores puntuales: falso T-19, parse errors).
+- Nicho propuesto: **edicion quirurgica de codigo + debugging de suites** (no reemplaza a MiniMax en CI: lo complementa).
+- Riesgo: 8B activos = menos profundidad de razonamiento largo que N.3/N.4; 262k ctx en free.
+- T1: 1 edicion real pequena con test + 1 picking documental.
+
+### Regimen de onboarding comun (cuando el fundador cargue el modelo en su plataforma)
+
+1. El fundador agrega el modelo por OpenRouter en su plataforma (misma via que MiniMax-M3.1).
+2. Director crea canal + pool 3 cifras + prompt de bienvenida (identidad, numeracion, firma, REGLA CERO, multitarea).
+3. **T1 OBLIGATORIA de calibracion** (picking documental con linea textual; sin modulos hasta aprobar; verificador el director).
+4. Ficha se actualiza con resultados empiricos de T1 (los datos de arriba son teoricos - marcar el limite).
+5. Reglas ya vigentes: multitarea (2+ items por encargo, salvo dependencias), sin push, sinonimos del cron.
+Independencia 21.8: los tres son modelos DISTINTOS de los 9 actuales - pueden verificar a cualquiera de la flota y verificarse entre ellos.
