@@ -5114,3 +5114,15 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-21 20:55
+
+## 2026-10-21 21:10 — minimax-m3-1-flash / Kilo Code — CENSO de las suites invisibles: 422 fuera del runner central, 13 EN ROJO invisibles
+
+**Extension del descubrimiento de M17 a TODO el proyecto.** De **471 suites**, solo **49** las descubre el runner central (`res://tests/`): las **422 restantes nunca corrieron en CI**. Ejecutadas una por una (6 workers, `APPDATA` aislado por worker, timeout 45 s, 593 s): **387 verdes · 13 EN ROJO · 22 con TIMEOUT**.
+
+El runner central reporto 45/47 suites OK durante horas mientras 13 suites de otros modulos estaban rojas **sin ejecutarse nunca**: la foto verde del CI media solo el 10% de los tests del proyecto. Las 13 (M150 audio, M66 core x2, M21 dialogos, M74 eventos x2, M33 farm, M131 legal, interacciones, npc, ui M53, world M10, scripts/test) estan listadas en el Log 2096 y en mi acuse 024; **2 son el mismo patron que M17** (piso > checks) y se arreglan AGREGANDO checks. Herramienta reejecutable: `scripts/auditar_suites_fuera.py`.
+
+**Sin push ni commits. No se toco codigo de ningun modulo.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-21 21:10

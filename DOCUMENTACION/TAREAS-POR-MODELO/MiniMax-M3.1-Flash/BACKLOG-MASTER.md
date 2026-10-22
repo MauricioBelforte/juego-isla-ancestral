@@ -839,3 +839,5 @@ las constantes reales de M63 (`PISO_PROGRESO` 0.02, `TOPE_PROGRESO` 0.98, `PRESU
 - [x] RF12-RF14 [S] — LOG 2093: checks nombrados de las suites de M17 (iter2 "las 12 familias estan presentes (dio 12)" + "FAMILIAS tiene 12 )
 - [x] P9 [S] — LOG 2093: checks nombrados de las suites de M17 ("recolocar en la misma celda -> rechazado" + "undo_ultimo devuelve la )
 **M17: 94/175.** Pendiente: llevar las 8 suites de M17 al runner central (no corren en CI).
+
+**CENSO (Log 2096, 2026-10-21 21:10):** extendi el descubrimiento de M17 a TODO el proyecto: de 471 suites, solo **49** las descubre el runner central (`res://tests/`); las **422** restantes nunca corrieron en CI. Ejecutadas una por una (6 workers, APPDATA aislado, timeout 45 s): **387 verdes · 13 EN ROJO · 22 TIMEOUT**. Las 13 rojas invisibles estan listadas en el log y en mi acuse 024 (derivan a sus duenos; 2 son el patron "piso > checks" de M17 y se arreglan AGREGANDO checks). Herramienta reejecutable en `scripts/auditar_suites_fuera.py`. Proximo paso: que el runner central tambien ejecute `scripts/<modulo>/test_*.gd` (con la deteccion estatica conservadora del pool).

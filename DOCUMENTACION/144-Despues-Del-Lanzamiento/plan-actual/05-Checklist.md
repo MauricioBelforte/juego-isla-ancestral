@@ -14,7 +14,7 @@
 - [ ] Definir respuesta a reviews < 48 h (M100) [M]
 - [x] Definir seguimiento de la evolución de rating semanal [S]
 - [x] Definir pull de reviews al tablero de M144 [S]
-- [?] Definir detección de review bombing [S] — DEGRADADO por el director 2026-10-21 (muestreo T13: la deteccion de review bombing NO consta en 02-Analisis en ninguna variante; definir el mecanismo o citar fuente real).
+- [?] Definir detección de review bombing [S] — DEGRADADO por el director 2026-10-21 (muestreo T13: la deteccion de review bombing NO consta en 02-Analisis en ninguna variante; definir el mecanismo o citar fuente real). — DEGRADADO por director 2029 (muestreo T13: review bombing ni en ingles ni bombeo de resenas no consta en 02-Analisis)
 - [x] Definir plantillas de respuesta revisadas (M126) [S]
 - [ ] Definir escalamiento de reviews críticas a hotfix [M]
 
