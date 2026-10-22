@@ -221,3 +221,12 @@ get_height + posicionar_sobre_terreno (M64 NavigationServer; prohibido forzar).
 
 ### GONOGO
 - 7 criterios: completo, identificacion, FPS, P99, sin crash, sin softlock, playtest OK.
+### GONOGO con 7 criterios (P-100 M138 batch 2)
+
+### Criterios GONOGO
+- 7 criterios: completo, identificacion, FPS>=60, P99<=40ms, sin crash, sin softlock, playtest OK.
+- Todos deben cumplirse para GO.
+
+### docs/vslice/
+- Carpeta docs/vslice/ con PLAYTEST, REPORTE-FPS, GONOGO-M138.
+- Documentacion del vertical slice.

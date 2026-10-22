@@ -205,3 +205,32 @@ PlacementRule (Resource):
 - Reglas por pieza: tamano min/max, rotacion permitida, zonas validas.
 - Topes por zona: maximo de piezas por zona configurable.
 - Alturas: limite de plantas por zona (default 4).
+## Especificacion de escaleras, puentes, iluminacion y muebles (P-100 M17 batch 2)
+
+### Escaleras (P22)
+- Bloque inclinado que exige apoyo y conecta plantas.
+- Requiere superficie de apoyo en la planta inferior.
+
+### Puentes (P23)
+- Losa 1-4 celdas solo sobre agua dentro de zona permitida.
+- Requiere apoyo en ambos extremos.
+
+### Iluminacion (P26)
+- Faroles con SpotLight/OmniLight ligados a piezas.
+- Encendido/apagado por interaccion.
+
+### Muebles (P27)
+- Camas, mesas, sillas, estanterias con interaccion.
+- Interaccion: sentarse, usar, almacenar.
+
+### Rotacion y elevacion
+- Rotar pieza en 4 pasos de 90 grados.
+- Subir/bajar una planta por pulsacion con limite de altura.
+## Aviso y stacks (P-100 M17 batch 3)
+
+### Aviso claro con motivo al colocar fuera de zona
+- Feedback visual: motivo del rechazo (fuera de zona, ocupado, altura maxima).
+
+### Stacks de M14
+- Los stacks de M14 se agrupan al devolver materiales sobrantes.
+- Sin perdida de materiales.

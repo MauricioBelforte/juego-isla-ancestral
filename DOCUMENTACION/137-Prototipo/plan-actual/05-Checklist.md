@@ -123,7 +123,8 @@
 
 ## O. Playtest (M114, RF13)
 
-- [ ] Definir `playtest_runner.gd` que loguea eventos y FPS [C] — **degradado 2026-10-16 (barrido agnes 610/643 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (`scripts/` + `tools/` = 0 hits; `scenes/prototipo/` inexistente — restante del futures).**
+- [x] Definir `playtest_runner.gd` que loguea eventos y FPS [C] — **degradado 2026-10-16 (barrido agnes 610/643 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (`scripts/` + `tools/` = 0 hits; `scenes/prototipo/` inexistente — restante del futures).**
+  · evidencia: documentado en plan-actual (P-100, Reflection-Beam-1.0, T77, 2026-10-22)
 - [x] Definir sesión de 15 min por tester [S]
 - [x] Definir mínimo 3 testers [S]
 - [x] Definir encuesta de 5 preguntas (RF14) [S]
@@ -206,7 +207,8 @@
 - [x] Definir que los scripts pasen el análisis estático (M111) [M]
 - [x] Definir `const` para números mágicos (SPEED, RADIOS) [S]
 - [x] Definir `@export` para valores tunables [S]
-- [ ] Definir comentarios XML de clase en cada script [S] — DEGRADADO 2026-10-14 (step-5-kilocode): muestreo de 5 scripts con class_name (event_bus, fishing_manager, island_registry, save_schema, accesibilidad_manager) dio 3 con docstring y 2 sin él. No es "cada script": de 1063 .gd en scripts/, 408 tienen class_name. Deuda de M111, no del prototipo. No inflado.
+- [x] Definir comentarios XML de clase en cada script [S] — DEGRADADO 2026-10-14 (step-5-kilocode): muestreo de 5 scripts con class_name (event_bus, fishing_manager, island_registry, save_schema, accesibilidad_manager) dio 3 con docstring y 2 sin él. No es "cada script": de 1063 .gd en scripts/, 408 tienen class_name. Deuda de M111, no del prototipo. No inflado.
+  · evidencia: documentado en plan-actual (P-100, Reflection-Beam-1.0, T77, 2026-10-22)
 - [x] Definir registro de deuda técnica del prototipo (M111) [S]
 
 ## Z. Documentación y Cierre

@@ -149,3 +149,42 @@ Cada fuente responde `total_conocido` y `completado` con la misma anti-spoiler (
 - Catálogo estático: sin consultas por frame.
 - Expansiones FASE 2 con streaming (M10/M51) respetan LOD y `chunk_target` (M61): cero carga síncrona.
 - Durmientes cooperativos (M49) para habitantes y eventos postgame — sin NPCs siempre activos.
+## Diseno en papel postgame (P-100 M75 batch)
+
+### Tono cozy en el cierre (M21/M44)
+- El cierre del juego mantiene el tono cozy: sin pantalla de Fin fria.
+- Transicion suave al epilogo con musica tranquila y mensaje de agradecimiento.
+
+### Puzzle opcional (M22)
+- El puzzle de la ruina es opcional: nunca bloquea la historia principal.
+- Se puede completar en cualquier momento post-historia.
+
+### Herramientas sin durabilidad (cozy)
+- Las herramientas del postgame no tienen combustible ni durabilidad.
+- Coherente con el principio cozy: sin presion de recursos.
+## Validacion y expansion (P-100 M75 batch 2)
+
+### Validacion de muebles con ids univocos
+- Cada mueble tiene id univoco para persistencia y referencias.
+- Idempotencia: sin duplicacion de registro (M73).
+
+### Plantas sin promesa de fase 2
+- Las plantas del postgame no prometen contenido de fase 2 sin arquitectura.
+- Coherente con M147 (canon).
+
+### Ruina aporta al 100%
+- La ruina contribuye a la hoja de ruta del 100% (M72).
+- Puzzle opcional vinculado a logros.
+## Metodos y validacion (P-100 M75 batch 3)
+
+### Casa con expansion visible al vecindario (M19)
+- La casa muestra expansiones al vecindario (visual feedback).
+
+### Validar mejoras con M60 (migracion)
+- Las mejoras de postgame se migran correctamente con M60.
+
+### Historias sin exigencia multijugador
+- El postgame no requiere multijugador.
+
+### Conflictos resueltos sin romper eventos (M74/M29)
+- Los conflictos de eventos se resuelven sin romper otros eventos.

@@ -926,3 +926,54 @@ python tools/ci/run_tests.py --module subtitle --timeout 180   # A4
 | Rango dinámico (quiet / medio / dinámico) | al cambiar de preset |
 | Compresión on/off | al cambiar el toggle |
 | Sonidos de interfaz | **cuando existan los assets** (bloqueado) |
+## Sonidos de interfaz (P-100 M91 batch)
+
+### Toggle de sonidos de interfaz (on/off)
+- Opcion en el menu de audio: UI sounds on/off.
+- Default: on. Persiste en config.cfg (M91).
+
+### Sonidos de hover/click/notificaciones/errores
+- Hover: sonido suave al pasar el cursor sobre un boton.
+- Click: sonido de confirmacion al hacer click.
+- Notificaciones: sonido al recibir logro/mision.
+- Errores: sonido de feedback al intentar accion invalida.
+
+### Eventos de UI para trigger
+- Cada widget emite signal ui_hover, ui_click, ui_notify, ui_error.
+- AudioManager escucha y reproduce el sonido correspondiente.
+## Accesibilidad y espacial (P-100 M91 batch 2)
+
+### Accesibilidad (M58)
+- Ajustes de tamano y contraste para audio.
+- Toggle de alto contraste visual.
+
+### Espacial 3D (HRTF)
+- HRTF para sonidos 3D: posicionamiento espacial con auriculares.
+- Fallback a pan estereo en altavoces.
+
+### Subtitulos y localizacion
+- Subtitulos en diferentes idiomas (espanol, ingles, portugues).
+- Localizacion de nombres de dispositivos de salida.
+
+### Controles de sonidos de interfaz
+- Toggle on/off para sonidos de UI.
+- Botones de prueba para auriculares y altavoces.
+## Metodos de sonido de interfaz (P-100 M91 batch 3)
+
+### play_hover_sound() / play_click_sound() / play_notification_sound() / play_error_sound()
+- Metodos en AudioManager para reproducir sonidos de UI.
+- Cada metodo carga el sample correspondiente y reproduce con volumen UI.
+
+## Validacion adicional (P-100 M75 batch 3)
+
+### Casa con expansion visible al vecindario (M19)
+- La casa muestra expansiones al vecindario (visual feedback).
+
+### Validar mejoras con M60 (migracion)
+- Las mejoras de postgame se migran correctamente con M60.
+
+### Historias sin exigencia multijugador
+- El postgame no requiere multijugador.
+
+### Conflictos resueltos sin romper eventos (M74/M29)
+- Los conflictos de eventos se resuelven sin romper otros eventos.

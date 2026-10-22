@@ -259,3 +259,29 @@ Presupuesto total objetivo: < 0.5 ms/frame en escena densa (40 interactuables), 
 - objeto_cercano_cambiado(nuevo, anterior)
 - rango_alcanzado(obj)
 - rango_perdido(obj)
+## Senales y rangos (P-100 M70 batch 2)
+
+### RF15: chirrido de interaccion por categoria
+- Base de sonido por categoria (8 categorias).
+- Chirrido suave al iniciar interaccion.
+
+### RF23: cancelacion de zona de trigger
+- Si el jugador sale del rango antes de completar, cancelar.
+- Limpiar estado de interaccion.
+
+### RF15: sonido nadie cerca (opcional)
+- Sonido minimo y amable cuando no hay objetos interactuables.
+- Volumen bajo, no intrusivo.
+
+### M11: rango base de interaccion 4m
+- Rango base de deteccion: 4 metros desde el jugador.
+- Configurable por objeto (override).
+## Metodos de sonido (P-100 M70 batch 3)
+
+### RF15: sonido nadie cerca (opcional)
+- Sonido minimo y amable cuando no hay objetos interactuables.
+- Volumen bajo, no intrusivo.
+
+### M11: rango base de interaccion 4m
+- Rango base de deteccion: 4 metros desde el jugador.
+- Configurable por objeto (override).

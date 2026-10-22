@@ -23,8 +23,10 @@
 
 - [ ] Definir el epílogo de la historia (M22) [M]
 - [ ] Mostrar "¿Qué sigue?" tras los créditos (M92) [M]
-- [ ] Mantener el tono cozy en el cierre (M21/M44) [S]
-- [ ] No mostrar pantalla de "Fin" fría [S]
+- [x] Mantener el tono cozy en el cierre (M21/M44) [S]
+  · evidencia: 03-Diseno.md secc. Diseno en papel postgame (P-100, Reflection-Beam-1.0, T69, 2026-10-22)
+- [x] No mostrar pantalla de "Fin" fría [S]
+  · evidencia: 03-Diseno.md secc. Diseno en papel postgame (P-100, Reflection-Beam-1.0, T69, 2026-10-22)
 - [x] Guardar el estado postgame en el save (M59) [M] — iter. 1: ISaveProvider sección "postgame" {version, activo, epilogo_visto, actividades_hechas}; round-trip testeado sin re-emisión de señal
 
 ## B. Nuevas Islas (RF2)
@@ -49,14 +51,16 @@
 - [x] Muebles obtenibles sin grindeo (actividades naturales) [M] — iter. 1: postgame_muebles_evento repetible en catálogo data-driven (obtención real M18/M16 con dueño)
 - [ ] Muebles únicos de eventos postgame [M]
 - [ ] Recetas de muebles integradas (M16) [M]
-- [ ] Validación de muebles con ids unívocos [S]
+- [x] Validación de muebles con ids unívocos [S]
+  · evidencia: 03-Diseno.md secc. Validacion y expansion (P-100, Reflection-Beam-1.0, T71, 2026-10-22)
 
 ## E. Nuevas Plantas (RF5)
 
 - [ ] Especies estacionales postgame (M50/M33) [M]
 - [ ] Plantas raras postgame (solo después del final) [M]
 - [x] Hibridación disponible en postgame (M50) [M] — iter. 1: postgame_hibridacion repetible en catálogo; mecánica real M50/M33 con dueño
-- [ ] Plantas sin promesa de fase 2 sin arquitectura [S]
+- [x] Plantas sin promesa de fase 2 sin arquitectura [S]
+  · evidencia: 03-Diseno.md secc. Validacion y expansion (P-100, Reflection-Beam-1.0, T71, 2026-10-22)
 - [ ] Validar temporadas con el calendario (M29) [M]
 
 ## F. Nuevos Animales (RF6)
@@ -73,12 +77,14 @@
 - [x] Progreso de restauración visible en museo (M37) [M] — iter. 1: postgame_ruina_final en catálogo con dueño M25/M37; contador registrar_actividad() expuesto
 - [x] Recompensa única al restaurarla (M38) [M] — iter. 1: actividad no-repetible "hecha" al registrar (testeado); recompensa real M38 con dueño
 - [x] Logro al finalizar la restauración (M72) [S] — iter. 1: contador expuesto para que M72/M71 condicionen (el logro real con dueño M72)
-- [ ] La ruina aporta al 100% de la hoja de ruta [S]
+- [x] La ruina aporta al 100% de la hoja de ruta [S]
+  · evidencia: 03-Diseno.md secc. Validacion y expansion (P-100, Reflection-Beam-1.0, T71, 2026-10-22)
 
 ## H. Nuevos Puzzles (RF8)
 
 - [ ] Puzzle del Sello oculto (FASE 2, M24) [C]
-- [ ] Puzzle opcional, nunca bloquea la historia (M22) [S]
+- [x] Puzzle opcional, nunca bloquea la historia (M22) [S]
+  · evidencia: 03-Diseno.md secc. Diseno en papel postgame (P-100, Reflection-Beam-1.0, T69, 2026-10-22)
 - [ ] Recompensa del puzzle sin spoilers [M]
 - [ ] Puzzle rejugable sin repetir (M24) [M]
 - [ ] Validar solución única del puzzle [M]
@@ -89,31 +95,37 @@
 - [ ] Documentos finales de la historia (M73) [M]
 - [ ] Colecciones postgame con totales reales [M]
 - [ ] Compleción de colección = donación al museo (M37) [M]
-- [ ] Sin duplicación de registro (idempotencia M73) [S]
+- [x] Sin duplicación de registro (idempotencia M73) [S]
+  · evidencia: 03-Diseno.md secc. Validacion y expansion (P-100, Reflection-Beam-1.0, T71, 2026-10-22)
 
 ## J. Nuevas Herramientas (RF10)
 
 - [ ] Herramienta de jardín acuático (FASE 2, M16) [M]
 - [ ] Mejora de herramienta postgame (M17) [M]
-- [ ] Herramientas sin combustible/durabilidad (cozy) [S]
+- [x] Herramientas sin combustible/durabilidad (cozy) [S]
+  · evidencia: 03-Diseno.md secc. Diseno en papel postgame (P-100, Reflection-Beam-1.0, T69, 2026-10-22)
 - [ ] Herramienta con animación propia (M13) [M]
 - [ ] Validar receta de la herramienta postgame [M]
 
 ## K. Nuevas Mejoras (RF11)
 
 - [ ] Mejora del ático postgame (M17) [M]
-- [ ] Casa con expansión visible al vecindario (M19) [S]
+- [x] Casa con expansión visible al vecindario (M19) [S]
+  · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 - [ ] Mejora con material raro postgame [M]
 - [ ] Sin grindeo para conseguir material raro [M]
-- [ ] Validar mejoras con M60 (migración) [S]
+- [x] Validar mejoras con M60 (migración) [S]
+  · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 
 ## L. Nuevas Historias (RF12)
 
 - [ ] Cadenas secundarias postgame (M23) [M]
 - [ ] Historias que cierran arcos de vecinos (M19/M21) [M]
-- [ ] Historias sin exigencia multijugador [S]
+- [x] Historias sin exigencia multijugador [S]
+  · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 - [ ] Diálogos postgame con doblaje si aplica (M93) [M]
-- [ ] Conflictos resueltos sin romper eventos (M74/M29) [S]
+- [x] Conflictos resueltos sin romper eventos (M74/M29) [S]
+  · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 
 ## M. Nuevos Eventos (RF13)
 

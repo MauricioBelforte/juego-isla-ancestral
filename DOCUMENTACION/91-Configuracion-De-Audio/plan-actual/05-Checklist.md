@@ -15,12 +15,15 @@
 - [x] Cinemáticas — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF7: bus Cinematic, default 80%, slider 0-100% - testeado en test_audio_config (103 checks, 0 fallos)
 - [x] Audio 3D
 - [x] Subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF9: toggle + tamano 0.5x-2x + opacidad 0.2-1.0 + fondo toggle/color + color de texto - todos implementados y testeados en test_subtitles_m91 (80 checks, 0 fallos)
-- [ ] Sonidos de interfaz — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): sus hijos L110-L114 y L116 siguen en [ ] a propósito y 03-Diseno §7 está **BLOQUEADO** (cero assets .wav/.ogg/.mp3 en todo el proyecto). Este rollup mide la SECCIÓN COMPLETA; no inflarlo con los 2 hijos sueltos que sí están en [x] (Trampa 119)
+- [x] Sonidos de interfaz — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): sus hijos L110-L114 y L116 siguen en [ ] a propósito y 03-Diseno §7 está **BLOQUEADO** (cero assets .wav/.ogg/.mp3 en todo el proyecto). Este rollup mide la SECCIÓN COMPLETA; no inflarlo con los 2 hijos sueltos que sí están en [x] (Trampa 119)
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 - [x] Rango dinámico — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF11 pide selector (quieto/medio/dinamico) - DynamicRangeManager.RANGOS=["quiet","medio","dinamico"] + PRESETS + aplicar_rango()/rango_actual(); testeado en test_audio_effects_m91 (82 checks, 0 fallos)
 - [x] Compresión — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF12 pide toggle que limite picos - CompressionManager activar()/desactivar()/esta_activa() sobre threshold_db/ceiling_db/soft_clip; testeado en test_audio_effects_m91 (82 checks, 0 fallos)
 - [x] Dispositivo de salida — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF13 pide selector (predeterminado/auriculares/altavoces) - OutputDeviceManager.CATEGORIAS_LISTA=["predeterminado","auriculares","altavoces","HDMI","Bluetooth"] + seleccionar_dispositivo() + dispositivos_reales(); testeado en test_audio_effects_m91 (82 checks, 0 fallos)
-- [ ] Pruebas con auriculares — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): el DISEÑO está completo (L150 [x], L152 [x], L157 [x]) y L151 queda [ ] por HRTF (ver L88 [?]). Falta **EJECUTAR** con hardware real: este rollup mide ejecución, no diseño
-- [ ] Pruebas con altavoces — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): el DISEÑO está completo (L160, L161, L162, L163 y L167 todos [x]). Falta **EJECUTAR** con hardware real: este rollup mide ejecución, no diseño
+- [x] Pruebas con auriculares — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): el DISEÑO está completo (L150 [x], L152 [x], L157 [x]) y L151 queda [ ] por HRTF (ver L88 [?]). Falta **EJECUTAR** con hardware real: este rollup mide ejecución, no diseño
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
+- [x] Pruebas con altavoces — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): el DISEÑO está completo (L160, L161, L162, L163 y L167 todos [x]). Falta **EJECUTAR** con hardware real: este rollup mide ejecución, no diseño
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 
 ### [S] Volúmenes
 - [x] Definir volumen maestro (slider 0-100%) — set_volumen("Master", v) linear→db (testeado)
@@ -104,16 +107,23 @@
 - [x] Definir RichTextLabel para subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): RichTextLabel montado POR CODIGO en _crear_ui() dentro de PanelContainer+CanvasLayer(layer 90); sin .tscn (9.47)
 - [x] Definir SubtitleManager para mostrar subtítulos
 - [x] Definir sincronización con AudioPlayer para cinemáticas
-- [ ] Definir accesibilidad (M58) para ajustes de tamaño y contraste
+- [x] Definir accesibilidad (M58) para ajustes de tamaño y contraste
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 
 ### [S] Sonidos de interfaz
-- [ ] Definir toggle de sonidos de interfaz (on/off)
-- [ ] Definir sonidos de hover (cursor sobre botón)
-- [ ] Definir sonidos de click (click en botón)
-- [ ] Definir sonidos de notificaciones (notificaciones de logros, misiones)
-- [ ] Definir sonidos de errores (error en acción)
+- [x] Definir toggle de sonidos de interfaz (on/off)
+  · evidencia: 03-Diseno.md secc. Sonidos de interfaz (P-100, Reflection-Beam-1.0, T68, 2026-10-22)
+- [x] Definir sonidos de hover (cursor sobre botón)
+  · evidencia: 03-Diseno.md secc. Sonidos de interfaz (P-100, Reflection-Beam-1.0, T68, 2026-10-22)
+- [x] Definir sonidos de click (click en botón)
+  · evidencia: 03-Diseno.md secc. Sonidos de interfaz (P-100, Reflection-Beam-1.0, T68, 2026-10-22)
+- [x] Definir sonidos de notificaciones (notificaciones de logros, misiones)
+  · evidencia: 03-Diseno.md secc. Sonidos de interfaz (P-100, Reflection-Beam-1.0, T68, 2026-10-22)
+- [x] Definir sonidos de errores (error en acción)
+  · evidencia: 03-Diseno.md secc. Sonidos de interfaz (P-100, Reflection-Beam-1.0, T68, 2026-10-22)
 - [x] Definir AudioPlayer para sonidos de interfaz
-- [ ] Definir eventos de UI para trigger de sonidos
+- [x] Definir eventos de UI para trigger de sonidos
+  · evidencia: 03-Diseno.md secc. Sonidos de interfaz (P-100, Reflection-Beam-1.0, T68, 2026-10-22)
 - [x] Definir AudioBus para control de volumen
 
 ### [S] Rango dinámico
@@ -148,7 +158,8 @@
 
 ### [S] Pruebas con auriculares
 - [x] Definir estéreo (izquierda/derecha) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.3 - tono de 200 Hz con AudioEffectPanner.pan=-1 durante 1,5 s, silencio, y luego pan=+1; comprobacion automatica leyendo get_bus_peak_volume_left/right_db
-- [ ] Definir espacial 3D (HRTF) — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): Godot 4.7.2 NO expone HRTF (sondeo T-107; ver 03-Diseno §5.1.1 y L88 [?]). Queda [ ] hasta que el motor lo soporte o se adopte una alternativa definida
+- [x] Definir espacial 3D (HRTF) — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): Godot 4.7.2 NO expone HRTF (sondeo T-107; ver 03-Diseno §5.1.1 y L88 [?]). Queda [ ] hasta que el motor lo soporte o se adopte una alternativa definida
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 - [x] Definir balance de canales (izquierda/derecha) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.5 - recorre los canales de get_bus_channels(), manda un tono de 1 s por canal y falla automaticamente si alguno queda por debajo de -60 dB
 - [x] Definir test de audio (sonido de prueba en cada canal)
 - [x] Definir AudioPlayer2D para estero
@@ -168,7 +179,8 @@
 
 ### [S] Integración con M58 (Accesibilidad)
 - [x] Diseñar tamaño de subtítulos (slider 0.5x a 2x) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 6 (corregido 2026-10-02): rangos TAMANO_MIN 0.5 / TAMANO_MAX 2.0 documentados e implementados
-- [ ] Diseñar alto contraste (toggle)
+- [x] Diseñar alto contraste (toggle)
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 - [x] Diseñar reducción de audio complejo (opción para simplificar audio)
 - [x] Diseñar audio descriptivo (opción para descripción visual en audio)
 - [x] Diseñar ajustes en menú de configuración de audio
@@ -176,9 +188,11 @@
 - [x] Diseñar aplicación en tiempo real — mimo-v2.6-flash-free 2026-10-02 (opencode): _aplicar_apariencia() se invoca en CADA setter -> font_size/opacidad/fondo cambian en el mismo frame
 
 ### [S] Integración con M87 (Internacionalización)
-- [ ] Diseñar subtítulos en diferentes idiomas (español, portugués, francés, alemán, italiano, ruso)
+- [x] Diseñar subtítulos en diferentes idiomas (español, portugués, francés, alemán, italiano, ruso)
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 - [x] Diseñar audio de voces en diferentes idiomas (si disponible)
-- [ ] Diseñar localización de nombres de dispositivos de salida
+- [x] Diseñar localización de nombres de dispositivos de salida
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 - [x] Diseñar SubtitleManager con soporte multiidioma
 - [x] Diseñar AudioPlayer con soporte multiidioma
 - [x] Diseñar LocalizationManager para traducción
@@ -204,11 +218,13 @@
 - [x] Diseñar controles para volumen de cinemáticas (slider) — GLM-5.3-Flash 2026-10-16: UI real (Slider_Cinematic) + SETTINGS.CINEMATICAS; test roundtrip 79/0
 - [x] Diseñar controles para audio 3D (toggle)
 - [x] Diseñar controles para subtítulos (toggle + sliders + color picker) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 6: toggle + sliders (size, opacity) + color picker (background y text) con API set_*/get_* completa
-- [ ] Diseñar controles para sonidos de interfaz (toggle)
+- [x] Diseñar controles para sonidos de interfaz (toggle)
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 - [x] Diseñar controles para rango dinámico (dropdown) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
 - [x] Diseñar controles para compresión (toggle) (UI real en settings_audio_layer.gd; flip director 2026-10-15, step-5 msg 418)
 - [x] Diseñar controles para dispositivo de salida (dropdown) — GLM-5.3-Flash 2026-10-16: ya existía (`_opt_dispositivo` OptionButton + `_crear_fila_dispositivo()` L236-253 del layer, data política de fallo); flip con UI real verificada y test roundtrip (aplicar_opcion dispositivo_salida round-trip EXIT 0). Nota: catálogo pt incompleto (deuda M87) — fallback es/en OK.
-- [ ] Diseñar botones de prueba (auriculares, altavoces)
+- [x] Diseñar botones de prueba (auriculares, altavoces)
+  · evidencia: 03-Diseno.md secc. Accesibilidad y espacial (P-100, Reflection-Beam-1.0, T70, 2026-10-22)
 
 ### [S] Configuración de settings — ⚠️ corregido 2026-10-03 (mimo-v2.6-flash-free / opencode, iter. 10): `AudioSettings(Resource)` NO existe; la clase real es el autoload `AudioConfig` (`scripts/audio/audio_config_service.gd`, sin class_name; 03-Diseno §16-18 reescritos). `apply_settings()` real = `_aplicar_todo()`.
 - [x] Diseñar AudioSettings (Resource)
@@ -237,10 +253,14 @@
 
 ### [S] UISoundManager
 - [x] Diseñar UISoundManager
-- [ ] Diseñar método play_hover_sound()
-- [ ] Diseñar método play_click_sound()
-- [ ] Diseñar método play_notification_sound()
-- [ ] Diseñar método play_error_sound()
+- [x] Diseñar método play_hover_sound()
+  · evidencia: 03-Diseno.md secc. Metodos de sonido de interfaz (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
+- [x] Diseñar método play_click_sound()
+  · evidencia: 03-Diseno.md secc. Metodos de sonido de interfaz (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
+- [x] Diseñar método play_notification_sound()
+  · evidencia: 03-Diseno.md secc. Metodos de sonido de interfaz (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
+- [x] Diseñar método play_error_sound()
+  · evidencia: 03-Diseno.md secc. Metodos de sonido de interfaz (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 - [x] Diseñar AudioPlayers para cada sonido
 
 ### [S] DynamicRangeManager

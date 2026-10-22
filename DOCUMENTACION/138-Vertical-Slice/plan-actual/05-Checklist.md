@@ -139,7 +139,8 @@
 
 ## Q. Decisión de Escala a Pre-Alpha (RFCierre)
 
-- [ ] Definir GONOGO con 7 criterios (completo, identificación, diversión, FPS, guardado, deuda, alcance) [M]
+- [x] Definir GONOGO con 7 criterios (completo, identificación, diversión, FPS, guardado, deuda, alcance) [M]
+  · evidencia: 03-Diseno.md secc. GONOGO con 7 criterios (P-100, Reflection-Beam-1.0, T74, 2026-10-22)
 - [ ] Definir umbral de diversión ≥ 7,5/10 [S]
 - [x] Definir umbral de FPS ≥ 60 y P99 ≤ 40 ms [M]
   · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
