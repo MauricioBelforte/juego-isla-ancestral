@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T03:35:40",
+ "ultimo_update": "2026-10-22T02:30:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "922/923: M158 t2 RATIFICADA (6 flips, test_iter2 0 fallos shop+jar round-trip, 69/140 fila sync propia verificada); 71 [ ] honestos con dueños externos correctos",
+  "estado": "924/925: M158 t3 RATIFICADA (82/140, doc+persistencia; techo scope correct); log formal pendiente; resto cross-module",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 923,
+  "acuse_enviado": 925,
   "pool_saneado": true
  },
  "g_5_3": {
@@ -101,7 +101,8 @@
   "flip 251 (album corrupto M56) sigue sin registrar: pedida su incorporacion (Beam 075)",
   "BARRIDO git add -A con trabajo EN VUELO de un agente commitea ficheros parciales y bloquea el CI entero (caso photo_service parse-eado roto por 452809f): el barrido del director debe EXCLUIR explicitamente ficheros con mtime < X min, no solo NUMEROS",
   "parse errors en cascada por merges de misma funcion: clock/env/ms - releer scope completo Y nombres de variables existentes antes de insertar",
-  "\"no tengo nada\" por dueño-bloqueo SIN escanear los 05 no-bloqueados es la trampa canonica 2-BIS.2: el escaneo deterministicocorrectivo la materializo G-5.3 (28 modulos ~1350 [ ] sin dueño)"
+  "\"no tengo nada\" por dueño-bloqueo SIN escanear los 05 no-bloqueados es la trampa canonica 2-BIS.2: el escaneo deterministicocorrectivo la materializo G-5.3 (28 modulos ~1350 [ ] sin dueño)",
+  "grep de flips SIN TILDES inutil (al-bum vs album): verificar por TEXTO REAL con tildes/variantes O por rango de lineas (caso falsa URGENTE 073 vs Beam)"
  ],
  "minimax_m3_1_flash": {
   "estado": "032/035: LANE SERIE SELLADA + HALLAZGO GRAVE RATIFICADO Y VERIFICADO (mi barrido commiteo photo_service en vuelo; sus 2 fixes quirurgicos en disco y CI verde 26 checks rc=0); opt-in re-measure corriendo",
@@ -166,8 +167,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "AVISO 045-b: photo_service barrido a medias por mi CRON C y reparado por MiniMax (env_restore + ms) - Beam debe re-sincronizar su T21 hora-fijada sobre el reparado",
-  "acuse_enviado": 45
+  "estado": "T32 presupuesto SELLADO 078 (_ultimo_tiempo_captura_ms + validar_presupuesto verificados; item 133 flip); MIS URGENTE 073 RETIRADA (flips 251/313 confirmadosen disco por grep con acentos)",
+  "acuse_enviado": 78
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -234,5 +235,8 @@
  "deriva_m17_trunc_round": {
   "estado": "M17 build_manager trunc vs round (02 promete celda mas cercana) - derivado a dueno G-5.3; propuesta Beam T32 (round) citada"
  },
- "crons_vuelta_c3": "CRON C 02:20: acuses 030 (MiniMax lane voxel + opt-in) y (Beam T32 derivacion M17) con numeracion dinamica max+1 tras regeneraciones de pool"
+ "crons_vuelta_c3": "CRON C 02:20: acuses 030 (MiniMax lane voxel + opt-in) y (Beam T32 derivacion M17) con numeracion dinamica max+1 tras regeneraciones de pool",
+ "urgente_073_retract": {
+  "estado": "RETIRADA POR COMPLETO: 251 y 313 SI flipados (a-carecto el grep sin tilde era el defectuoso); mis disculpas registradas al agente"
+ }
 }
