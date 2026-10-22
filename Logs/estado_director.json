@@ -190,7 +190,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "23:15 - CORRECCION DE CAPACIDAD: Beam re-ruteado de re-verificacion auto-referente a AUDITORIA ARITMETICA de 93/95/142 (su nicho AIME/conteos por la guia 10-GUIA). CRON D desde ahora: cada vuelta evalua capacidades x trabajo disponible POR AGENTE con la guia, no con colas genericas. Resto de la flota igual de estable (guardia).",
+ "nota_cron_d": "23:28 - REGLA DEL FUNDADOR POR DOBLE - NO HAY GUARDIA PASIVA SIN TANDA: si un agente se vacia (Beam pasaba, G-5.3 pasaba), el director le BUSCA tanda concreta ANTES de dejarlo en guardia (protocolos de medicion, re-verificaciones cruzadas con artefactos, baterias finales de definibles, picaduras de otros). Asignaciones vivas: Beam = re-verificacion 13 modulos + fase 2 + picaduras (mi 212/213); G-5.3 = bateria 6 + protocolos 156/76 (mi 318); Step-5 = bloque final M23; DS-WB = P4-hecho + auditoria M113 (a) + item 34 + lote 91/147/24 (mi 366); agnes = radar (trabaja cuando caen lotes); Hy3 = encuesta lista.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
