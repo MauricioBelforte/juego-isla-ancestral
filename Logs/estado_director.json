@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T18:45:50",
+ "ultimo_update": "2026-10-22T18:50:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "S46+S47+S49 RATIFICADAS (M138 120/131 contenido definible CERRADO; M48 36/123 Definir agotados); proxima: multiScan 151 (67 Definir, clasificar nicho); acuse 303",
+  "estado": "S50 RATIFICADA (M46 101/110, inventario 48 assets exacto; legibilidad 32 px honesta [ ]); barrera de contenido agotada; proxima S51 = scan 151-Control-Final (67 Definir); rango anti-gemelo asignado 305+",
   "pendientes_real": 222,
-  "acuse_enviado": 303,
+  "acuse_enviado": 304,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -124,7 +124,8 @@
   "Pool desalineado post-consumo del agente (16:12): G-5.3 consumio 287 y el NUMEROS quedo con 287 al frente - sanear el pool ANTES de numerar acuses si el max de archivos ya supera el head (verificar existencia del fichero del numero)",
   "Trampa del director corregida (fundador 18:37): al agotarse un riel NO basta asignar fase-2 - REPREDICAR el backlog INMEDIATAMENTE con barrido fresco (la cola nunca se vacia)",
   "Trampa GEMELO-NUMERICO (22oct 18:40): dos emisores (agente + mis acuses) usaron mismos numeros 300/302 en el canal de G-5.3 => detector dio FALSO al-dia por matching de numero pelado; FALLO DE DETECTOR: 3 reportes reales (S46/S47/S49) quedaron ocultos ~12h; FIX: detectar por slug de emisor (\"de-<carpeta>-a-\" en nombre) no por numero solo; pools regenerados",
-  "Leccion OperCron (22oct 18:45): timestamps de G-5.3 llegan con fecha adelantada (2026-10-23) por zona horaria de su plataforma - NO usarlos para ordenar; usar creacion real de fichero"
+  "Leccion OperCron (22oct 18:45): timestamps de G-5.3 llegan con fecha adelantada (2026-10-23) por zona horaria de su plataforma - NO usarlos para ordenar; usar creacion real de fichero",
+  "CARRERA POOL en vivo (22oct 18:45): mi regeneracion del pool G-5.3 (303..350) choco con su escritura simultanea del 303 => segundo gemelo el mismo dia. FIX aplicado: rango separado 305..352 + protocolo RELEER-60s + mis acuses en serie propia (pares). Riesgo residual: plataformas con clock adelantado escriben \"futuro\""
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",

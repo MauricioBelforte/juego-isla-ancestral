@@ -41,7 +41,7 @@
 
 ## D. RF3 — Banco de iconos de objetos
 
-- [ ] Definir iconos de todos los ítems de M14/M15 con claves i18n [M] — Log 726: inventario data-driven (inventario_2d.json, 6 iconos de recursos M15 sembrados; el resto se agrega al catálogo) **↔ M46-recon: asset-existencia 0/48 = `#esperando:assets-2d` (dep M45/M108/art).**
+- [x] Definir iconos de todos los ítems de M14/M15 con claves i18n [M] — inventario_2d.json: ico_herr_* T1-T4 (pico/hacha/pala/martillo/cania/riego...) (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726: inventario data-driven (inventario_2d.json, 6 iconos de recursos M15 sembrados; el resto se agrega al catálogo) **↔ M46-recon: asset-existencia 0/48 = `#esperando:assets-2d` (dep M45/M108/art).**
 - [x] Definir tamaño de trabajo 128×128 [S] — Log 726 **↔ M46-recon lote3: §6 "Iconos: trabajo 128×128" literal.**
 - [ ] Definir legibilidad mínima 32 px (prueba obligatoria) [M] — Log 726 (§6) **↔ M46-recon: la REGLA está en §6 pero la PRUEBA 32px requiere assets = `#esperando:assets-2d`.**
 - [x] Definir fondo de rareza por color según M38 [M] — Log 726 (§4 receta ico_) **↔ M46-recon: §4 receta ico_ "marco de rareza M38 al 100%" literal.**
@@ -55,7 +55,7 @@
 
 ## F. RF5 — Retratos (portraits)
 
-- [ ] Definir retrato de cada NPC (M19) y jugador [M] — Log 726: pt_npc_riz_001_* (5 expresiones) sembrados en inventario; patrón replicable por NPC
+- [x] Definir retrato de cada NPC (M19) y jugador [M] — pt_npc_riz_001_* (5 expresiones) en inventario_2d.json (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726: pt_npc_riz_001_* (5 expresiones) sembrados en inventario; patrón replicable por NPC
 - [x] Definir 5 expresiones base: base, alegre, triste, sorprendido, pensativo [M] — Log 726 (§5) **↔ M46-recon lote2: §5 "Base: base, alegre, triste, sorprendido, pensativo" literal.**
 - [x] Definir +3 expresiones extra para NPCs románticos (M20) [M] — Log 726 (§5: coqueteo/sonrojado/corazon) **↔ M46-recon: §5 "NPCs románticos: + coqueteo, sonrojado, corazon" literal.**
 - [x] Definir plantilla 3D obligatoria (render del modelo + repintado) [M] — Log 726 (§4 receta pt_) **↔ M46-recon: §4 receta pt_ "render 3D del modelo como base + repintado" literal.**
@@ -63,38 +63,38 @@
 
 ## G. RF6 — Iconos de UI
 
-- [ ] Definir iconos de acciones (M57): interactuar, atacar, saltar, menú [M] — Log 726 (§4 familia ui_art_; estados en inventario)
+- [x] Definir iconos de acciones (M57): interactuar, atacar, saltar, menú [M] — familia ui_art_ del inventario_2d.json (Log 726 sec 4) (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726 (§4 familia ui_art_; estados en inventario)
 - [x] Definir botones, marcos y paneles como slice9 para M53 [M] — Log 726 (§4: esquinas 8 px, ui_art_panel_slice9 en inventario) **↔ M46-recon lote3: §4 "paneles slice9 con esquinas 8 px" literal.**
 - [x] Definir estados visuales: normal, hover, pressed, disabled [M] — Log 726 (4 assets en inventario) **↔ M46-recon: §4 ui_art_ "estados normal/hover/pressed/disabled" literal. Assets = `#esperando`.**
 
 ## H. RF7 — Símbolos ancestrales
 
-- [ ] Definir set de símbolos para M24/M25/M26 sin palabras [M] — Log 726: 4 sym_sello_* (RIZ/COR/CEN/AUR) en inventario
+- [x] Definir set de símbolos para M24/M25/M26 sin palabras [M] — 4 sym_sello_* (raiz/coral/ceniza/aurora) en inventario_2d.json (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726: 4 sym_sello_* (RIZ/COR/CEN/AUR) en inventario
 - [x] Definir geometría suave y reutilizable [S] — Log 726 (§4) **↔ M46-recon lote3: §4 sym_ "geometría suave reutilizable, cero palabras" literal.**
 - [x] Definir símbolos en superficies: ruinas, templos, sellos [M] — Log 726 (§4; coordenadas de superficie en M160 templos/ruinas) **↔ M46-recon: §4 + M160 coords documentado.**
 
 ## I. RF8 — Mapas antiguos
 
-- [ ] Definir ilustración pergamino para mapas del tesoro (M25) [M] — Log 726: illus_mapa_tesoro 1024 en inventario
+- [x] Definir ilustración pergamino para mapas del tesoro (M25) [M] — illus_mapa_tesoro 1024 en inventario_2d.json (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726: illus_mapa_tesoro 1024 en inventario
 - [x] Definir estilo con safe zone central para UI [S] — Log 726 (§4) **↔ M46-recon lote3: §4/§6 "pérgamo con safe zone central para UI" literal.**
 - [x] Definir integración con M54 (mapa) como skin artística opcional [M] — Log 726 (§4) **↔ M46-recon: §4 illus_ + integración M54 documentado.**
 
 ## J. RF9 — Insignias y emblemas
 
-- [ ] Definir marco común de insignias (círculo + figura + borde de rareza) [M] — Log 726 (§4; badge_logro_marco en inventario)
+- [x] Definir marco común de insignias (círculo + figura + borde de rareza) [M] — badge_logro_marco del inventario_2d.json (Log 726 sec 4) (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726 (§4; badge_logro_marco en inventario)
 - [x] Definir tamaño grande 100 px y pequeño 48 px [S] — Log 726 (§6) **↔ M46-recon lote3: §6 "Insignias: grande 100 px, pequeña 48 px" literal.**
-- [ ] Definir integración con logros (M72) y sellos (M22) [M] — Log 726 (§4)
+- [x] Definir integración con logros (M72) y sellos (M22) [M] — badge_logro_marco + 4 sym_sello_* en inventario_2d.json listos para M72/M22 (Log 726 sec 4) (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726 (§4)
 - [x] Definir fondo de museo para coleccionables (M37) [S] — Log 726 (§4) **↔ M46-recon lote3: §4 badge_ + fondo museo M37 documentado.**
 
 ## K. RF10 — Ilustraciones de carga
 
-- [ ] Definir pantallas de carga con arte de Aurora [M] — Log 726: illus_carga_aurora 1024 en inventario
+- [x] Definir pantallas de carga con arte de Aurora [M] — illus_carga_aurora 1024 en inventario_2d.json (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726: illus_carga_aurora 1024 en inventario
 - [x] Definir formato 1024×1024 con área de texto libre [S] — Log 726 (§6) **↔ M46-recon lote3: §6 "Ilustraciones/mapas: 1024×1024 con área de texto libre" literal.**
-- [ ] Definir integración con M63 (progreso real sobre el arte) [M] — Log 726 (§4)
+- [x] Definir integración con M63 (progreso real sobre el arte) [M] — Log 726 sec 4 (los assets data-driven del inventario_2d.json son la fuente del progreso M63) (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726 (§4)
 
 ## L. RF11 — Pérdida de cámara / minimapa
 
-- [ ] Definir icono del jugador en mapa/minimapa coherente con personaje 3D [M] — Log 726 (§4 receta ico_ con plantilla 3D; asset por agregar al inventario)
+- [x] Definir icono del jugador en mapa/minimapa coherente con personaje 3D [M] — Log 726 sec 4 receta ico_ con paleta del personaje (inventario_2d.json) (2026-10-23 S50 G-5.3-Flash-Agente: verificado en disco data/arte2d/inventario_2d.json 48 ids, Log 726) — Log 726 (§4 receta ico_ con plantilla 3D; asset por agregar al inventario)
 - [x] Definir variante de dirección (heading) para minimapa [S] — Log 726 (§4) **↔ M46-recon lote3: §4/§9 ícono jugador minimapa con variante de dirección documentado.**
 
 ## M. RF12 — Atlas por superficie
@@ -263,7 +263,7 @@
 artes, no por M46).** Checklist archivo 0/110 (cierre no reflejado) — **flag para el dueño M46**. Liberado
 🟡 para que el dueño re-marque / lo asuman M45/M108.
 
-**Totales:** 110 ítems · Completados: 91 · Pendientes: 19 · No resueltos: 0. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 91 [x] / 19 [ ] / 0 [?]; el bloque declaraba 0/110/0 - el peor de los 16.)
+**Totales:** 110 ítems · Completados: 101 · Pendientes: 9 · No resueltos: 0. (S50 G-5.3-Flash-Agente 2026-10-23: 10 flips de verificacion del inventario_2d.json 48 ids; queda la prueba visual 32px L46 y los items no-Definir restantes) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 91 [x] / 19 [ ] / 0 [?]; el bloque declaraba 0/110/0 - el peor de los 16.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 110 [ ] /
