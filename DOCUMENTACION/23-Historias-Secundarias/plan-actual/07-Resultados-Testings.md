@@ -378,3 +378,25 @@ quiere extenderse el GO de normalización.
   Log 2131 y el reporte al director; la corrida de cierre del mismo día re-verificó la
   suite (x3), el guardián (en rojo) y las regresiones, y escribió lo faltante. Las
   cifras de esta sección están medidas, no heredadas.
+
+## 8. Iter. 11 — cadenas secretas ocultas (Log 2134, 2026-10-22)
+
+- 5 cadenas nuevas en `data/historias/secundarias.json` (32 -> 37) del cluster Secretas
+  del 03-Diseno L38: mapa secreto, cristal oculto, diario antiguo, pergamino mistico y
+  mascara ceremonial. NPC REALES de data/villagers/ (nico_gato, vera_ardilla, sofia_buho,
+  teo_conejo, luna_zorra) y objetos REALES de data/items/ (OBJ-SEC-002, OBJ-SEC-003,
+  OBJ-SEC-005, OBJ-ART-002, OBJ-ART-004), verificados por campo id dentro del .tres.
+  Las 5 nacen `oculta:true` (misma regla que cadena-secretta-luciernagas).
+- Suite: bloque P (35 checks) al FINAL de `_run()`; piso 316 -> **351 checks / 0 fallos /
+  EXIT 0 x3** con el binario real. Guardián EN ROJO por inyección de runtime sobre el
+  bloque P: EXIT 1, «el bloque P NO se ejecuto» + «solo 317 checks (minimo 351)», 2 fallos.
+- Regresiones medidas tras la tanda: M22 41/0 · M71 83/0 · M59 rotate 43/0 (9 bloques) +
+  backup_rotate_return 4/0 + backup_rotations 7/0 · M55 diario 0 fallos + persistencia 0
+  fallos. Todas EXIT 0, 0 SCRIPT ERROR.
+- Flip con cita: «Crear 5 cadenas secretas ocultas» (L56) [ ] -> [x]. M23 = 63 [x] /
+  40 [ ] / 2 [?] = 105 por prefijo de línea. Las DOS líneas de totales sincronizadas.
+  El ítem «Documentar historias estacionales y secretas» (L58) sigue [ ] (compuesto:
+  las estacionales son de M32, 0 en disco).
+- Hallazgo (dueno M55): el puente M23->M55 degrada en silencio para las 5 nuevas
+  (`mision_cadena-*` ausentes del catálogo M55; `capitulo-*` también). No se inventa
+  contenido de M55.

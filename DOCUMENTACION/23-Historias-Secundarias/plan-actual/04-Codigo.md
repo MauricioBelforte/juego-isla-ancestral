@@ -505,3 +505,44 @@ diario únicos (31/31).
   y el reporte al director. La verificación (suite x3, guardián en rojo, regresiones)
   se rehizo íntegra en la corrida de cierre del mismo día: los números de este apartado
   son MEDIDOS, no heredados.
+
+## Iter. 11 — Cadenas secretas ocultas (Step-5-WorkBuddy, 2026-10-22, Log 2134)
+
+Cluster Secretas (ocultas) del 03-Diseno L38 («5 cadenas desbloqueadas por mundo»;
+regla de descubrimiento ya implementada y verificada en el bloque E:
+`oculta:true` -> invisibles en `cadenas_disponibles()` hasta iniciarse,
+`secondary_stories_service.gd` L71). 5 cadenas nuevas en
+`data/historias/secundarias.json` (32 -> 37) con NPC REALES de data/villagers/
+(nico_gato guardabosques, vera_ardilla farera, sofia_buho bibliotecaria, teo_conejo
+herbolario, luna_zorra artesana) y objetos REALES de data/items/ verificados por
+campo id dentro del .tres (OBJ-SEC-002 «Mapa secreto», OBJ-SEC-003 «Cristal oculto»,
+OBJ-SEC-005 «Diario antiguo», OBJ-ART-002 «Pergamino místico», OBJ-ART-004 «Máscara
+ceremonial»). Contextos narrativos >= 10 caracteres, 4 pasos cada una
+(hablar/explorar/entregar/puzzle), 5 consecuencias peladas únicas (37/37 sobre el
+catálogo, sin colisión con las 33 previas) y 5 capítulos de diario únicos (37/37).
+Edición puramente aditiva sobre el JSON (+75/-0 líneas, formato Godot preservado,
+LF puro sin BOM verificado por bytes).
+
+- Suite `scripts/historias/test_historias.gd`: bloque P `_test_secretas()` (35 checks:
+  15 carga/fuente/oculta + 2 ocultamiento + 1 visibilidad + 2 unicidad de flags +
+  1 diarios + 2x7 end-to-end + 1 reset de estado + 1 puente diario) al FINAL de
+  `_run()`. Piso 316 -> **351 checks / 0 fallos / EXIT 0 x3** (binario real).
+  Guardián EN ROJO por inyección de runtime (`Variant` con `Array` -> `Dictionary`)
+  al inicio del bloque P: EXIT 1, «el bloque P NO se ejecuto» + «solo 317 checks
+  ejecutados (minimo 351)»; sonda borrada en la misma operación, git status del
+  directorio verificado vacío salvo la suite.
+- Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0, M71
+  `test_progresion.gd` 83/0, M59 `test_rotate_m59.gd` 43/0 (9 bloques) +
+  `test_backup_rotate_return.gd` 4/0 + `test_backup_rotations.gd` 7/0 y M55
+  `test_diario.gd` + `test_diario_persist.gd` 0 fallos. Todas EXIT 0 con el binario
+  real, 0 SCRIPT ERROR.
+- Hallazgo (dueno M55, no tocado): el puente M23->M55 degrada en silencio tambien
+  para las 5 nuevas (`mision_cadena-mapa-secreto` ausente del catalogo de M55; mismo
+  patron que cadena-biblioteca en H, cadena-jardines en K, cadena-puente en L,
+  cadena-brujula en M, cadena-guardas en N y cadena-regalo-favorito en O). No se
+  inventa contenido de M55.
+- Flip del 05-Checklist con cita: «Crear 5 cadenas secretas ocultas» [ ] -> [x]
+  (L56). M23 = 63 [x] / 40 [ ] / 2 [?] = 105 (verificado por prefijo de línea). Las
+  DOS líneas de totales sincronizadas a 63/40/2. El ítem «Documentar historias
+  estacionales y secretas» (L58) sigue [ ]: es compuesto y las estacionales son de
+  M32 (0 en disco) — no se flippa por la mitad (patrón anti-inflación de iter. 6).

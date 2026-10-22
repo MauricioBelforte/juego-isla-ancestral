@@ -478,6 +478,81 @@
 			"consecuencia": { "correspondencia_retomada": true },
 			"oculta": false,
 			"postgame": false
+		},
+		{
+			"id": "cadena-mapa-secreto",
+			"titulo": "El Mapa Secreto",
+			"contexto": "El guardabosques encontro un mapa que no figura en los planos del pueblo y marca un sendero que nadie recuerda haber caminado",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "nico_gato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "sendero_secreto" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-002" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "marcas-en-la-corteza" }
+			],
+			"recompensa": { "diario": "capitulo-mapa-secreto", "cosmetico": "mapa de bolsillo" },
+			"consecuencia": { "sendero_secreto_revelado": true },
+			"oculta": true,
+			"postgame": false
+		},
+		{
+			"id": "cadena-cristal-oculto",
+			"titulo": "El Cristal Oculto",
+			"contexto": "La farera vio un destello verde bajo la escalera del acantilado que solo aparece cuando la niebla baja del mar a media tarde",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "vera_ardilla" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "acantilado" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-003" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "destello-verde" }
+			],
+			"recompensa": { "diario": "capitulo-cristal-oculto", "cosmetico": "cristal de destello" },
+			"consecuencia": { "cristal_oculto_recuperado": true },
+			"oculta": true,
+			"postgame": false
+		},
+		{
+			"id": "cadena-diario-antiguo",
+			"titulo": "El Diario Antiguo",
+			"contexto": "La bibliotecaria heredo un diario cuyas ultimas paginas huelen a marea y quiere saber quien escribio la entrada final antes de que el barco desapareciera",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "sofia_buho" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle_viejo" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-005" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "tinta-de-marea" }
+			],
+			"recompensa": { "diario": "capitulo-diario-antiguo", "cosmetico": "marcador de pagina de algas" },
+			"consecuencia": { "autor_del_diario_identificado": true },
+			"oculta": true,
+			"postgame": false
+		},
+		{
+			"id": "cadena-pergamino-mistico",
+			"titulo": "El Pergamino Mistico",
+			"contexto": "El herbolario guarda un pergamino que su abuelo leyo una sola vez, la noche en que las luciernagas volvieron a la playa del sur",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "teo_conejo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "clara_del_bosque" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ART-002" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "versos-del-pergamino" }
+			],
+			"recompensa": { "diario": "capitulo-pergamino-mistico", "cosmetico": "pergamino enmarcado" },
+			"consecuencia": { "versos_antiguos_descifrados": true },
+			"oculta": true,
+			"postgame": false
+		},
+		{
+			"id": "cadena-mascara-ceremonial",
+			"titulo": "La Mascara Ceremonial",
+			"contexto": "La artesana encontro una mascara de ceremonias dentro del tronco de un arbol caido en el bosque nocturno y quiere devolverle su rostro",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "luna_zorra" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "bosque_nocturno" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ART-004" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "rostro-de-corteza" }
+			],
+			"recompensa": { "diario": "capitulo-mascara-ceremonial", "cosmetico": "mascara de pared" },
+			"consecuencia": { "mascara_ceremonial_restaurada": true },
+			"oculta": true,
+			"postgame": false
 		}
 	]
 }
