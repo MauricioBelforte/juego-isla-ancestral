@@ -107,3 +107,9 @@ Se elige **simulación offline en editor** (`simulate_economy.gd`): escenarios d
 Los tiempos maximos de los templos (agua: 45 min sin ayuda; fuego: 35 min sin ayuda) EXCEDEN la rutina diaria de 30 min (timing.sesion_rutina_total_min) POR DISEÑO: los templos son contenido especial de sesion unica o multi-visita, no parte de la rutina cotidiana. La recompensa (100-120 AO, ~1.25-1.5x la rutina) es proporcional a esa expectativa. El jugador cozy recomendado puede dividir el templo en visitas (el progreso del puzzle persiste).
 
 Fuentes: hallazgo y analisis de Reflection Beam 1.0 (T28, msg 060); decision de aplicacion: director (dueno M93). Alternativa B (reducir a 30 min) reservada para el fundador si la filosofia cambia.
+
+### D.14 — Coste de mejora de herramientas sub-lineal en tiers: premium intencional (documentado por el director 2026-10-22)
+
+El coste_mejora por unidad de durabilidad crece con el tier (cobre 0.53 -> hierro 0.60, +13%) mientras la durabilidad duplica (150 -> 300). Es PREMIUM INTENCIONAL (mismo patron que el ROI de herramientas MR documentado en D-ROI de M16): el tier superior paga mas por unidad, la progresion cozy premia quedarse mas tiempo con la herramienta inferior. La herramienta basica (60/0) no tiene camino de upgrade: reemplazo directo por compra.
+
+Fuentes: analisis byte-exacto de Reflection Beam 1.0 (T30, msg 064) que detecto el +13%; decision de documentar (no normalizar) reservando la normalizacion a 0.5x al fundador.
