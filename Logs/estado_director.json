@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T08:44:50",
+ "ultimo_update": "2026-10-22T08:46:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -190,8 +190,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "RIENDA SUELTA ABSOLUTA (fundador 08:39): BACKLOG-05-RIEL-SUELTO-TOTAL generado (barrido 26 modulos, ~2.500-2.600 [ ] libres); hace TODO y despues verificacion distribuida (DS-OC+agnes+Hy3+director)",
-  "acuse_enviado": 143,
+  "estado": "riel CURADO por especialidad (fundador 08:40): solo definir/diseno/verificar/calcular - BACKLOG-05 re-escrito (465 items en 20 modulos); implementacion/activos excluidos",
+  "acuse_enviado": 144,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first ilimitado hoy",
   "encargo_activo": "RIEL SUELTO TOTAL"
