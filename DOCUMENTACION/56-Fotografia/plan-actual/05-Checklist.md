@@ -130,8 +130,8 @@
 
 - [x] Capturar a resolución fija 1920×1080 (no screencapture) [C]
   · implementado: SubViewport 1920x1080 dedicado en photo_service.gd; tomar_foto usa _viewport_captura.get_texture() con fallback al viewport principal. (Reflection-Beam-1.0, T22, 2026-10-22)
-- [ ] Presupuesto de captura: < 50 ms (M61) [C]
-  · espera: modulo(s) dependiente(s): M61 (coordinar con su dueno)
+- [x] Presupuesto de captura: < 50 ms (M61) [C]
+  · implementado: photo_service.gd _ultimo_tiempo_captura_ms + validate_photo.gd _validar_presupuesto(). (Reflection-Beam-1.0, T32, 2026-10-22)
 - [ ] Aplicar preset de filtros en el frame capturado [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Esperar 0.8 s tras la pose con indicador visual [M]

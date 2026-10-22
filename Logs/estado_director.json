@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:30:30",
+ "ultimo_update": "2026-10-22T02:20:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -98,12 +98,14 @@
   "flips anunciados que NO estan en el 05 = registrarse YA (caso Beam 251/313: migracion verificada pero registro del flip ausente - el conteo y los EDITS van juntos)",
   "fechas de archivo en JULIO por plataforma: nombre de archivo usa la fecha REAL del sistema (caso MiniMax 031)",
   "verificar flips por TEXTO del item, no por numero de identificador: el numero puede ser la linea o el id del item y el grep falla (caso falsa URGENTE 073 sobre 313 de Beam)",
-  "flip 251 (album corrupto M56) sigue sin registrar: pedida su incorporacion (Beam 075)"
+  "flip 251 (album corrupto M56) sigue sin registrar: pedida su incorporacion (Beam 075)",
+  "BARRIDO git add -A con trabajo EN VUELO de un agente commitea ficheros parciales y bloquea el CI entero (caso photo_service parse-eado roto por 452809f): el barrido del director debe EXCLUIR explicitamente ficheros con mtime < X min, no solo NUMEROS",
+  "parse errors en cascada por merges de misma funcion: clock/env/ms - releer scope completo Y nombres de variables existentes antes de insertar"
  ],
  "minimax_m3_1_flash": {
-  "estado": "031/032: LANE SERIE EXPLICITA RATIFICADA (medida, no heuristica: test_vehiculos + test_inventory_unificado, pool 355->353); CORRECCION de fecha julio obligatoria; opt-in verific in running",
+  "estado": "032/035: LANE SERIE SELLADA + HALLAZGO GRAVE RATIFICADO Y VERIFICADO (mi barrido commiteo photo_service en vuelo; sus 2 fixes quirurgicos en disco y CI verde 26 checks rc=0); opt-in re-measure corriendo",
   "pendientes_real": 685,
-  "acuse_enviado": 32,
+  "acuse_enviado": 35,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -163,8 +165,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T33 sellada 075 + D.15 aplicada (peces raros margen>70% excepcion); ACLARACION: flip 313 SI estaba (mi grep por numero era defectuoso), 251 sigue SIN flip pidiendo registro; trampa flip-por-texto registrada",
-  "acuse_enviado": 75
+  "estado": "AVISO 045-b: photo_service barrido a medias por mi CRON C y reparado por MiniMax (env_restore + ms) - Beam debe re-sincronizar su T21 hora-fijada sobre el reparado",
+  "acuse_enviado": 45
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {

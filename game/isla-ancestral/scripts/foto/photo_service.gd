@@ -44,6 +44,8 @@ var _viewport_captura: SubViewport = null
 ## Indice del album (M60): lista versionada de fotos. Si esta corrupto,
 ## se usa un indice vacio (defaults) sin perder las fotos en disco.
 var _album_index: Dictionary = {"version": 1, "fotos": []}
+## Tiempo de la ultima captura en ms (presupuesto M61 < 50 ms, item 133).
+var _ultimo_tiempo_captura_ms: int = 0
 const RUTA_ALBUM_INDEX := "user://fotos/index.json"
 ## ── Hora fijada para la foto (M31, item 69) ─────────────
 ## -1 = sin hora fija (usa la hora actual del juego). 0-23 = hora fijada.
@@ -320,7 +322,10 @@ func tomar_foto() -> Dictionary:
 		DirAccess.make_dir_recursive_absolute(ruta_abs.get_base_dir())
 		err = img.save_png(ruta_abs)
 		if err == OK:
-			_album_index["fotos"].append({"ruta": ruta, "bytes": bytes, "ms": ms})
+			# FIX (minimax-m3-1-flash, Log 2104): `ms` se usaba aqui pero se declaraba mas abajo
+			# (L350) -> "Identifier ms not declared" y el script no parseaba (el error salia en
+			# CADA corrida del CI). Se calcula el elapsed en el punto de uso.
+			_album_index["fotos"].append({"ruta": ruta, "bytes": bytes, "ms": Time.get_ticks_msec() - t0})
 			_guardar_album_index()
 			var f := FileAccess.open(ruta_abs, FileAccess.READ)
 			if f != null:
@@ -332,9 +337,12 @@ func tomar_foto() -> Dictionary:
 
 	# Restaurar exposicion ambiental (nocturna).
 	if _nocturna and _env_ambient_previo >= 0.0:
-		var env := get_viewport().world_3d.environment if get_viewport().world_3d != null else null
-		if env != null:
-			env.ambient_light_energy = _env_ambient_previo
+		# FIX (minimax-m3-1-flash, Log 2104): la segunda declaracion de `env` de `tomar_foto()`
+		# chocaba con la primera (L281) y rompia el PARSEO del script entero -> el error salia en
+		# CADA corrida del CI y hacia fallar test_m56_tomar_foto. Se renombra a `env_restore`.
+		var env_restore := get_viewport().world_3d.environment if get_viewport().world_3d != null else null
+		if env_restore != null:
+			env_restore.ambient_light_energy = _env_ambient_previo
 		_env_ambient_previo = -1.0
 	# Restaurar fauna congelada (voladores/acuaticos).
 	for n in fauna_congelada:
@@ -357,6 +365,7 @@ func tomar_foto() -> Dictionary:
 		"motivo": motivo,
 	}
 	if res["ok"]:
+		_ultimo_tiempo_captura_ms = ms
 		foto_tomada.emit(ruta, res)
 		print("[PHOTO-SHOT] %s (%d bytes, %d ms, HUD oculto durante captura: %s)" % [
 			ruta, bytes, ms, str(oculto_durante)])

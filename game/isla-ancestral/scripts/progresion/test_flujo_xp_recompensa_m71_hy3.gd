@@ -123,8 +123,10 @@ func _test_flujo_evento_misiones() -> void:
 	_pm.progreso_hito_alcanzado.disconnect(cb)
 
 func _test_marcar_hito_senal() -> void:
-	# Marcar hito con recompensa info -> la senal entrega las recompensas.
-	print("[DBG] antes marcar hito_items_50: alcanzado=%s items=%s" % [_pm.hito_alcanzado("hito_items_50"), _pp.get_stat("items_recolectados")])
+	# Aislamiento de bloque: este bloque prueba el CONTRATO de marcar_hito()
+	# (senal + entrega de recompensa) sobre un hito FRESCO, independiente del
+	# camino de eventos. Restaura antes para no heredar marcas de bloques previos.
+	_pm.restore_save_data({})
 	var senal: Dictionary = {}
 	var cb := func(id: String, _n: String, recs: Array) -> void:
 		senal = {"id": id, "recs": recs}
@@ -142,8 +144,9 @@ func _test_marcar_hito_senal() -> void:
 	_check(hay_info, "recompensa tipo 'info' presente en la entrega")
 
 func _test_recompensa_unlock() -> void:
+	# Aislamiento de bloque: hito FRESCO para probar el CONTRATO unlock.
+	_pm.restore_save_data({})
 	# hito_coleccion_flora tiene recompensa tipo 'unlock' -> se entrega via senal.
-	print("[DBG] antes marcar hito_coleccion_flora: alcanzado=%s desb('')=%s" % [_pm.hito_alcanzado("hito_coleccion_flora"), _pm.desbloqueo_activo("")])
 	var desb: Dictionary = {}
 	var cb := func(id: String, tipo: String, valor: String) -> void:
 		desb = {"id": id, "tipo": tipo, "valor": valor}
@@ -160,6 +163,8 @@ func _test_recompensa_unlock() -> void:
 	_check(_pm.desbloqueo_activo("unlock_test_hy3"), "desbloqueo manual activo (idempotente)")
 
 func _test_recompensa_titulo() -> void:
+	# Aislamiento de bloque: hito FRESCO para probar el CONTRATO de titulo.
+	_pm.restore_save_data({})
 	# RF12: hito_amistades_5 otorga titulo social 'Amigo del Pueblo'.
 	var senales: Array = [0]
 	var cb := func(_t_id: String, _nombre: String) -> void:
@@ -174,6 +179,8 @@ func _test_recompensa_titulo() -> void:
 	_check(int(_pm.titulo_count()) == 1, "titulo idempotente (sin duplicado)")
 
 func _test_idempotencia() -> void:
+	# Aislamiento de bloque: hito FRESCO para probar idempotencia de marcar_hito.
+	_pm.restore_save_data({})
 	# marcar dos veces un hito no-auto-disparado -> 1 sola senal, 1 entrada.
 	var senales: Array = [0]
 	var cb := func(_id: String, _n: String, _r: Array) -> void:

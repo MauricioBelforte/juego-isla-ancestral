@@ -21,11 +21,24 @@ var _fallos: int = 0
 func _init() -> void:
 	call_deferred("_run")
 
+func _validar_presupuesto() -> void:
+	var svc := get_node_or_null("/root/PhotoService")
+	if svc == null:
+		return
+	var ms: int = int(svc.get("_ultimo_tiempo_captura_ms"))
+	if ms <= 0:
+		print("[M56] presupuesto: sin captura previa (ms=0), skip")
+		return
+	_check(ms < 50, "presupuesto de captura < 50 ms (M61, item 133): %d ms" % ms)
+	print("[M56] presupuesto: %d ms" % ms)
+
+
 func _run() -> void:
 	_cargar_y_validar_presets()
 	_validar_servicio()
 	_validar_navigator()
 	_validar_subviewport()
+	_validar_presupuesto()
 	print("=== VALIDATE PHOTO M56: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 

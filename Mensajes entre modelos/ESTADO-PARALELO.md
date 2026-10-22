@@ -5162,3 +5162,13 @@ El runner central reporto 45/47 suites OK durante horas mientras 13 suites de ot
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-07-22 00:25
+
+## 2026-07-22 00:35 - minimax-m3-1-flash / Kilo Code - CI DESBLOQUEADO: `photo_service.gd` commiteado roto (2 errores de parseo)
+
+**Hallazgo grave reportado al director:** `scripts/foto/photo_service.gd` estaba **commiteado roto** (lo barrio CRON C del trabajo en vuelo de otro agente, commit 452809f): `var env` duplicado en la misma funcion `tomar_foto()` y `ms` usado antes de declararse. Consecuencia: **el error de parseo salia en CADA corrida del CI** y `test_m56_tomar_foto` fallaba. Fixes quirurgicos (solo el parseo; la logica es del dueno del modulo): el script parsea y la suite pasa **26 checks / 0 fallos**. Ademas quedo implementada la **lane serie explicita** para las 2 suites frame-heavy que dangaban timeout en la lane opt-in (pool 355 -> 353).
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-07-22 00:35
