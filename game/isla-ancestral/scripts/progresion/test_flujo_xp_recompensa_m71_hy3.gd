@@ -124,6 +124,7 @@ func _test_flujo_evento_misiones() -> void:
 
 func _test_marcar_hito_senal() -> void:
 	# Marcar hito con recompensa info -> la senal entrega las recompensas.
+	print("[DBG] antes marcar hito_items_50: alcanzado=%s items=%s" % [_pm.hito_alcanzado("hito_items_50"), _pp.get_stat("items_recolectados")])
 	var senal: Dictionary = {}
 	var cb := func(id: String, _n: String, recs: Array) -> void:
 		senal = {"id": id, "recs": recs}
@@ -142,6 +143,7 @@ func _test_marcar_hito_senal() -> void:
 
 func _test_recompensa_unlock() -> void:
 	# hito_coleccion_flora tiene recompensa tipo 'unlock' -> se entrega via senal.
+	print("[DBG] antes marcar hito_coleccion_flora: alcanzado=%s desb('')=%s" % [_pm.hito_alcanzado("hito_coleccion_flora"), _pm.desbloqueo_activo("")])
 	var desb: Dictionary = {}
 	var cb := func(id: String, tipo: String, valor: String) -> void:
 		desb = {"id": id, "tipo": tipo, "valor": valor}

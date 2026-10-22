@@ -31,11 +31,11 @@
 - [x] Forja requiere materiales + monedas [M]
 - [ ] Precios progresivos por isla (+50% minimo entre islas) [M]
 - [x] Cursos de oficio por isla (carpinteria, herreria, encantamiento) [M]
-- [ ] Cursos permiten vender herramientas en tienda del jugador [M]
+- [x] Cursos permiten vender herramientas en tienda del jugador [M]
 - [ ] Historia principal requiere T4 para completarse [C]
 - [ ] Progresion no lineal (jugador elige orden de islas) [M]
 - [ ] Construccion en otras islas posible [M]
-- [ ] NPCs visitantes compran herramientas 1x/dia [M]
+- [x] NPCs visitantes compran herramientas 1x/dia [M]
 - [ ] Premium permite comprar monedas por Steam [M]
 - [ ] Checklist minimo 100 items verificables [S]
 
@@ -113,12 +113,12 @@
 ## F. NPCs Visitantes (12)
 
 - [x] ShopVisitorManager como Node interno del autoload "Tiers" [M] — iter. 2 (Log 610): shop_visitor.gd instanciado por ToolTierSystem (evita autoload extra; mismo proceso, hooks directos)
-- [ ] 1 NPC por dia maximo como visitante [S]
+- [x] 1 NPC por dia maximo como visitante [S]
 - [x] Pool de NPCs visitantes configurable [M] — iter. 2: VISITANTES constante con 3 NPC data-driven (carpintería/herrería/encantamiento); extensible sin tocar código
-- [ ] NPC visita la tienda del jugador [M]
+- [x] NPC visita la tienda del jugador [M]
 - [x] Compra 1-3 items del stock del jugador [M] — iter. 2: intentar_compra(item_id) con transferencia atómica (inventario -1, AO +precio); testeado
 - [x] Paga precio de venta de M38 [M] — iter. 2: PriceManager.obtener_precio_venta duck-typed con fallback 5 AO; testeado con EconomyManager real
-- [ ] Prefiere items de la profesion del NPC [M]
+- [x] Prefiere items de la profesion del NPC [M]
 - [x] Si no hay tienda abierta, no vienen [S] — iter. 2: solo visita si puede_vender_tier() es true para ALGÚN tier (curso tomado); testeado sin curso = sin visita
 - [x] NPC trae monedas propias (no infinito) [M] — iter. 2: _monedas_visitante por visitante (300-1500 según profesión), compra descuenta; testeado
 - [ ] Se registra transaccion en log [S]
@@ -137,7 +137,7 @@
 - [ ] Cada fruto: 2-8 monedas al vender [S]
 - [ ] Puzzles: 50-200 monedas por puzzle resuelto [M]
 - [ ] Total estimado puzzles: ~3000 monedas [S]
-- [ ] JarSpawner como Node3D con logica de reposicion [M]
+- [x] JarSpawner como Node3D con logica de reposicion [M]
 - [ ] GoldFishSpawner como Node3D [M]
 - [ ] GoldTreeSpawner como Node3D [M]
 - [ ] Integracion con GameClock para reposicion [M]

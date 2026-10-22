@@ -101,3 +101,9 @@ Se elige **simulación offline en editor** (`simulate_economy.gd`): escenarios d
 4. **Multi-jugador de un save** — single-player; ausencia irrelevante.
 5. **Creación de ítems raros** — probabilidades nunca caen bajo 0.5% y se garantizan por "pity" (cada X intentos sin éxito, sube la chance).
 6. **Diferencia de habilidad** — puzzles con ayudas (M58/M24) que nivelan el tiempo de resolución sin dar la solución gratis.
+
+### D.13 — Templos como contenido especial exento de la rutina diaria (aplicado por el director 2026-10-22)
+
+Los tiempos maximos de los templos (agua: 45 min sin ayuda; fuego: 35 min sin ayuda) EXCEDEN la rutina diaria de 30 min (timing.sesion_rutina_total_min) POR DISEÑO: los templos son contenido especial de sesion unica o multi-visita, no parte de la rutina cotidiana. La recompensa (100-120 AO, ~1.25-1.5x la rutina) es proporcional a esa expectativa. El jugador cozy recomendado puede dividir el templo en visitas (el progreso del puzzle persiste).
+
+Fuentes: hallazgo y analisis de Reflection Beam 1.0 (T28, msg 060); decision de aplicacion: director (dueno M93). Alternativa B (reducir a 30 min) reservada para el fundador si la filosofia cambia.

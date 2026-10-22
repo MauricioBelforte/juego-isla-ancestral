@@ -73,16 +73,26 @@ func _initialize() -> void:
 
 	var rutas_pool: Array[String] = []
 	var rutas_seriales: Array[String] = []
+	var rutas_voxel: Array[String] = []
 	for ruta in _scenetree:
 		if EXCLUIR.has(ruta):
 			print("\n[SUITE EXCLUIDA] %s\n  motivo: %s" % [ruta, EXCLUIR[ruta]])
 			continue
-		if _es_segura_para_pool(ruta):
+		if _instancia_voxel(ruta):
+			# LANE VOXEL (serial, mitigacion de BUG-141 a nivel CI): las suites que instancian
+			# VoxelTerrain/VoxelViewer pagan el deinit del GDExtension nativo (35-100 s medidas)
+			# y compiten entre si por los hilos -> van de UNA en UNA.
+			rutas_voxel.append(ruta)
+		elif _es_segura_para_pool(ruta):
 			rutas_pool.append(ruta)
 		else:
 			rutas_seriales.append(ruta)
 	if rutas_pool.size() > 0:
 		await _correr_pool(rutas_pool)
+	if rutas_voxel.size() > 0:
+		print("\n[LANE VOXEL] %d suite(s) EN SERIE (instancian VoxelTerrain/VoxelViewer: pagan el deinit del GDExtension, BUG-141)" % rutas_voxel.size())
+		for ruta in rutas_voxel:
+			await _correr_scenetree(ruta)
 	for ruta in rutas_seriales:
 		await _correr_scenetree(ruta)
 	if _gdunit_dirs.size() > 0:
@@ -242,6 +252,16 @@ func _ejecutar_con_redirect(args: Array, timeout_ms: int = TIMEOUT_MS, aislar_us
 		DirAccess.remove_absolute(tmp)
 	return {"rc": rc, "salida": salida, "timeout": timed_out}
 
+
+
+## ¿La suite instancia el terreno voxel? (BUG-141: el deinit del GDExtension nativo cuesta
+## 35-100 s por proceso). Deteccion ESTATICA por fuente: VoxelTerrain / VoxelViewer / main_island.
+func _instancia_voxel(ruta: String) -> bool:
+	var abs := ProjectSettings.globalize_path(ruta)
+	if not FileAccess.file_exists(abs):
+		return false
+	var txt := FileAccess.get_file_as_string(abs)
+	return txt.contains("VoxelTerrain") or txt.contains("VoxelViewer") or txt.contains("main_island")
 
 ## ¿Se puede paralelizar esta suite? Criterio conservador: NO si su codigo escribe en
 ## `user://` (colision de archivos entre procesos) ni lanza `OS.execute` (procesos anidados).
