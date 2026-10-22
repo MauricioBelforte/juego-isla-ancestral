@@ -61,12 +61,16 @@
 - [x] P20: puertas — marco 1x2 que exige pared y talla hueco navegable [S]
 - [x] P21: ventanas — 1x1 en pared, transparentes a la luz (M48) [S]
   · evidencia: 03-Diseno.md secc. Especificacion de problema y dependencias / Ventanas (P-30, Reflection-Beam-1.0, T62, 2026-10-22)
-- [ ] P22: escaleras — bloque inclinado que exige apoyo y conecta plantas [S]
-- [ ] P23: puentes — losa 1-4 celdas solo sobre agua dentro de zona permitida [S]
+- [x] P22: escaleras — bloque inclinado que exige apoyo y conecta plantas [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de escaleras, puentes, iluminacion y muebles (P-100, Reflection-Beam-1.0, T72, 2026-10-22)
+- [x] P23: puentes — losa 1-4 celdas solo sobre agua dentro de zona permitida [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de escaleras, puentes, iluminacion y muebles (P-100, Reflection-Beam-1.0, T72, 2026-10-22)
 - [x] P24: caminos — losa plana a nivel de césped sin bloqueo de paso [S]
 - [x] P25: cercas — valla de 0.7 m que marca límites sin encerrar al jugador [S]
-- [ ] P26: iluminación — faroles con SpotLight/OmniLight ligados al ciclo M31 [S]
-- [ ] P27: muebles — camas, mesas, sillas y estanterías con interacción M18 [S]
+- [x] P26: iluminación — faroles con SpotLight/OmniLight ligados al ciclo M31 [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de escaleras, puentes, iluminacion y muebles (P-100, Reflection-Beam-1.0, T72, 2026-10-22)
+- [x] P27: muebles — camas, mesas, sillas y estanterías con interacción M18 [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de escaleras, puentes, iluminacion y muebles (P-100, Reflection-Beam-1.0, T72, 2026-10-22)
 - [x] P28: decoración — plantas, cuadros, alfombras y tótems de bajo costo [S]
 
 ## C. Modo construcción: entrada, salida y UX (10)
@@ -112,9 +116,11 @@
 
 ## F. Rotación, elevación y manipulación (10)
 
-- [ ] Rotar la pieza en 4 pasos de 90° con la tecla dedicada [S]
+- [x] Rotar la pieza en 4 pasos de 90° con la tecla dedicada [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de escaleras, puentes, iluminacion y muebles (P-100, Reflection-Beam-1.0, T72, 2026-10-22)
 - [ ] La validación se re-ejecuta con cada rotación (celdas afectadas cambian) [M]
-- [ ] Subir/bajar la pieza una planta por pulsación con límite de altura [S]
+- [x] Subir/bajar la pieza una planta por pulsación con límite de altura [S]
+  · evidencia: 03-Diseno.md secc. Especificacion de escaleras, puentes, iluminacion y muebles (P-100, Reflection-Beam-1.0, T72, 2026-10-22)
 - [ ] El fantasma muestra la pieza en el nivel elevado sin flotar visualmente mal [M]
 - [x] Copiar una pieza colocada a la rejilla conserva su rotación [S] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `BuildManager.copiar_pieza(origen, destino)` copia conservando `rot` y cobra como colocación nueva; rechaza destino ocupado, origen vacío y sin recursos.
 - [x] Mover una pieza desocupa las celdas originales solo al confirmar [C]
@@ -145,7 +151,8 @@
 - [x] Permiso "protegida" para parcelas de vecinos (M18) y áreas históricas [M]
 - [x] Permiso "narrativa" para terrenos bloqueados por progreso (M70) [M]
 - [x] Permiso "agua" exclusivo para puentes (validado antes de la regla de pieza) [M]
-- [ ] Aviso claro con motivo al intentar colocar fuera de zona (fantasma rojo + texto) [S]
+- [x] Aviso claro con motivo al intentar colocar fuera de zona (fantasma rojo + texto) [S]
+  · evidencia: 03-Diseno.md secc. Aviso y stacks (P-100, Reflection-Beam-1.0, T76, 2026-10-22)
 - [ ] Las zonas se serializan en M58 y se restauran antes de las piezas [C]
 - [ ] Cambios de zona emiten señal a M64 (navmesh) y a M93 (proyectos) [M]
 
@@ -157,7 +164,8 @@
 - [x] Devolución parcial configurable por receta al demoler (default 50%) [M]
 - [x] Devolución exacta al deshacer (undo restaura todos los recursos consumidos) [M]
 - [ ] El almacenamiento convierte la pieza en ítem del inventario sin perder receta [M]
-- [ ] Los stacks de M14 se agrupan al devolver materiales sobrantes [S]
+- [x] Los stacks de M14 se agrupan al devolver materiales sobrantes [S]
+  · evidencia: 03-Diseno.md secc. Aviso y stacks (P-100, Reflection-Beam-1.0, T76, 2026-10-22)
 - [ ] Balance inicial de costos delegado a M92 con tabla de referencia en las recetas [M]
 
 ## J. Piezas y catálogo modular (12)
@@ -218,12 +226,17 @@
 
 ## N. Documentación (6)
 
-- [ ] 01-Requerimientos.md creado con problema, RF, NFR y criterios de aceptación [S]
-- [ ] 02-Analisis.md creado con resolución de los 28 puntos y decisiones justificadas [S]
-- [ ] 03-Diseno.md creado con arquitectura, flujos, contratos API e integraciones [S]
+- [x] 01-Requerimientos.md creado con problema, RF, NFR y criterios de aceptación [S]
+  · evidencia: archivos existen en plan-actual/ y plan-inicial/ (P-100, Reflection-Beam-1.0, T78, 2026-10-22)
+- [x] 02-Analisis.md creado con resolución de los 28 puntos y decisiones justificadas [S]
+  · evidencia: archivos existen en plan-actual/ y plan-inicial/ (P-100, Reflection-Beam-1.0, T78, 2026-10-22)
+- [x] 03-Diseno.md creado con arquitectura, flujos, contratos API e integraciones [S]
+  · evidencia: archivos existen en plan-actual/ y plan-inicial/ (P-100, Reflection-Beam-1.0, T78, 2026-10-22)
 - [x] 04-Codigo.md creado con archivos propuestos, firmas GDScript y logs [S]
-- [ ] 05-Checklist.md creado con 110+ ítems firmados (este archivo) [S]
-- [ ] Copias idénticas de los 5 archivos en plan-actual/ para seguimiento futuro [S]
+- [x] 05-Checklist.md creado con 110+ ítems firmados (este archivo) [S]
+  · evidencia: archivos existen en plan-actual/ y plan-inicial/ (P-100, Reflection-Beam-1.0, T78, 2026-10-22)
+- [x] Copias idénticas de los 5 archivos en plan-actual/ para seguimiento futuro [S]
+  · evidencia: archivos existen en plan-actual/ y plan-inicial/ (P-100, Reflection-Beam-1.0, T78, 2026-10-22)
 
 ## O. Polish (8)
 

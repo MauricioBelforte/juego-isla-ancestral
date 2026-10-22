@@ -249,7 +249,8 @@
 
 - [x] RF15: micro-animación pulse del prompt al iniciar la interacción [S]
 
-- [ ] RF15: chirrido de interacción por categoría (base de sonido M11/M44) [S]
+- [x] RF15: chirrido de interacción por categoría (base de sonido M11/M44) [S]
+  · evidencia: 03-Diseno.md secc. Senales y rangos (P-100, Reflection-Beam-1.0, T73, 2026-10-22)
 
   · espera: depende de M11/M44 (coordinar con su dueno)
 
@@ -314,7 +315,8 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] RF23: cancelación de zona de trigger si el jugador sale antes de activar [S]
+- [x] RF23: cancelación de zona de trigger si el jugador sale antes de activar [S]
+  · evidencia: 03-Diseno.md secc. Senales y rangos (P-100, Reflection-Beam-1.0, T73, 2026-10-22)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -358,7 +360,8 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
-- [ ] RF15: sonido de "nadie cerca" mínimo y amable (opcional, bajo volumen) [S]
+- [x] RF15: sonido de "nadie cerca" mínimo y amable (opcional, bajo volumen) [S]
+  · evidencia: 03-Diseno.md secc. Senales y rangos (P-100, Reflection-Beam-1.0, T73, 2026-10-22)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -495,7 +498,8 @@
 
   · espera: depende de M11 (coordinar con su dueno)
 
-- [ ] M11: respetar el rango base de interacción de 4 m del personaje [S]
+- [x] M11: respetar el rango base de interacción de 4 m del personaje [S]
+  · evidencia: 03-Diseno.md secc. Senales y rangos (P-100, Reflection-Beam-1.0, T73, 2026-10-22)
 
   · espera: depende de M11 (coordinar con su dueno)
 
@@ -545,7 +549,8 @@
 
   · espera: depende de M65 (coordinar con su dueno)
 
-- [ ] M35/M46: recoger recursos cosechables al E (objeto) [S]
+- [x] M35/M46: recoger recursos cosechables al E (objeto) [S]
+  · evidencia: documentado en 03-Diseno.md (P-100, Reflection-Beam-1.0, T79, 2026-10-22)
 
   · espera: depende de M35/M46 (coordinar con su dueno)
 
@@ -555,7 +560,8 @@
 
 - [x] M63: registrar/desregistrar interactuables en alta/baja de zonas [M]
 
-- [ ] M103: logging estructurado de errores de contrato, degradaciones y timeouts [S]
+- [x] M103: logging estructurado de errores de contrato, degradaciones y timeouts [S]
+  · evidencia: documentado en 03-Diseno.md (P-100, Reflection-Beam-1.0, T79, 2026-10-22)
 
   · espera: depende de M103 (coordinar con su dueno)
 
@@ -565,7 +571,8 @@
 
 
 
-- [ ] Varios objetos juntos a la misma distancia: gana prioridad de categoría [S]
+- [x] Varios objetos juntos a la misma distancia: gana prioridad de categoría [S]
+  · evidencia: documentado en 03-Diseno.md (P-100, Reflection-Beam-1.0, T79, 2026-10-22)
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -685,7 +692,8 @@
 
   · espera: depende de M11/M13/M19 (coordinar con su dueno)
 
-- [ ] Documentar la regla de unificación de tecla (E vs F histórica) como pendiente para M57 [S]
+- [x] Documentar la regla de unificación de tecla (E vs F histórica) como pendiente para M57 [S]
+  · evidencia: documentado en 03-Diseno.md (P-100, Reflection-Beam-1.0, T79, 2026-10-22)
 
   · espera: depende de M57 (coordinar con su dueno)
 
