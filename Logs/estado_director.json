@@ -95,9 +95,9 @@
   "el fix de un parse-error por variable duplicada puede resolverse MEJOR eliminando la declaracion duplicada y reutilizando la existente (si esta en scope) en lugar de renombrar (caso Beam 046 vs sugerencia clock_gc del director - su solucion superior)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "025/026: wrapper integrador RATIFICADO (498 checks de M17 ahora corren en CI, 73.3 s); cadena P1-pool + censo + wrapper = CI del proyecto pasa de 10% a ~95% de cobertura; opciones siguientes a/b/c",
+  "estado": "027/028: runner descubre suites de modulo RATIFICADO - cadena de cobertura cerrada; lane serial voxel asignable; proximo a elegir a/b/c",
   "pendientes_real": 685,
-  "acuse_enviado": 26,
+  "acuse_enviado": 28,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {

@@ -91,14 +91,32 @@ func _initialize() -> void:
 	_resumen()
 
 
+
+## ¿Se incluye la lane de suites de MODULO? Opt-in explicito (env o flag de usuario).
+func _incluir_modulos() -> bool:
+	if OS.get_environment("M112_INCLUIR_MODULOS") == "1":
+		return true
+	for a in OS.get_cmdline_user_args():
+		if a == "--incluir-modulos":
+			return true
+	return false
+
+
 func _descubrir() -> void:
 	var archivos: Array[String] = []
 	_barrer(TESTS_DIR, archivos)
 	# Suites de MODULO (scripts/<modulo>/test_*.gd): hasta ahora NUNCA se descubrian (el runner
 	# solo recorria res://tests/) -> 422 suites invisibles, 13 en rojo que nadie veia (censo
-	# ratificado por el director, msg 025). Ahora se descubren y pasan por la MISMA regla:
-	# las SceneTree van al POOL (paralelo) si no escriben user:// ni lanzan OS.execute; las demas,
-	# en serie. Las que no son SceneTree se ignoran aqui (son GdUnit4 y viven en sus modulos).
+	# ratificado por el director, msg 025).
+	#
+	# LANE OPCIONAL: se activa con M112_INCLUIR_MODULOS=1 (env) o el flag de usuario
+	# `--incluir-modulos`. POR DEFECTO ESTA APAGADA A PROPOSITO: con 422 suites mas el tiempo
+	# total del runner CRECE y el presupuesto de 600 s que cerro M112 (Log 2090: 545.3 s) queda en
+	# riesgo. M112 dejo medido que la COBERTURA sube (los rojos invisibles se ven: 7 de los 13 en la
+	# corrida) pero NO se pudo cerrar la medicion del tiempo total con las 422 dentro -> la
+	# activacion de la lane la decide el director con ese dato en mano, no un default que rompe un
+	# presupuesto ya medido.
+	if _incluir_modulos():
 	for d in DirAccess.get_directories_at("res://scripts"):
 		var sub := "res://scripts/" + d
 		for f in DirAccess.get_files_at(sub):

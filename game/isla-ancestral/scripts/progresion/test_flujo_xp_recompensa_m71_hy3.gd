@@ -19,7 +19,7 @@
 extends SceneTree
 
 # Piso MEDIDO en verde (ver Log). Ajustar al medir.
-const CHECKS_MINIMOS := 20
+const CHECKS_MINIMOS := 37
 const _WB_BLOQUES: Array[String] = [
 	"_test_catalogo",
 	"_test_flujo_evento_items",
@@ -58,6 +58,13 @@ func _run() -> void:
 	_check(_bus != null, "EventBus autoload presente")
 	if _pm == null or _pp == null or _bus == null:
 		return  # _summary (diferido) reporta el fallo
+	# Aislamiento (trampa M23): limpiar progresion persistida en user:// para que
+	# los flujos de recompensa sean deterministicos y no hereden hitos marcados
+	# por un save previo ni por otro bloque.
+	_pm.restore_save_data({})
+	_check(not _pm.hito_alcanzado("hito_items_50"), "aislamiento: hito_items_50 limpio tras restore")
+	_check(not _pm.hito_alcanzado("hito_coleccion_flora"), "aislamiento: hito_coleccion_flora limpio tras restore")
+	_check(int(_pm.titulo_count()) == 0, "aislamiento: sin titulos tras restore")
 	_test_catalogo()
 	_fin("_test_catalogo")
 	_test_flujo_evento_items()
