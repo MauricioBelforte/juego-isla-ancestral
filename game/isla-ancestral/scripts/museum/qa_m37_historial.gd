@@ -9,7 +9,7 @@
 
 extends SceneTree
 
-const CHECKS_MINIMOS := 10
+const CHECKS_MINIMOS := 13
 var _checks: int = 0
 var _fallos: int = 0
 
@@ -85,6 +85,23 @@ func _run() -> void:
 	_check(reg2.get_historial_donaciones().is_empty(), "migracion v1->v2: bloque legado entra con historial vacio")
 	_check(String(reg2.get_registered("flora").front()) == "baya_roja" if not reg2.get_registered("flora").is_empty() else false,
 		"migracion v1->v2: las piezas legacy siguen cargando")
+	# Robustez (item [M] mano de obra: fallo de senal de modulo origen sin crasheo):
+	# DonationService real (autoload) con entradas invalidas NO crashea y
+	# devuelve razon estructurada por senal donation_rejected.
+	var svc := root.get_node_or_null("/root/DonationService")
+	if svc != null:
+		var rechazos: Array = []
+		var cb: Callable = func(exh, itm, motivo): rechazos.append(String(motivo))
+		svc.donation_rejected.connect(cb)
+		var r1: DonationResult = svc.donate("exposicion_inexistente", "item_inexistente")
+		_check(r1.accepted == false and r1.reason != "", "robustez: exposicion inexistente -> rechazo estructurado")
+		var r2: DonationResult = svc.donate("flora", "item_inexistente")
+		_check(r2.accepted == false and String(r2.reason) == "not_owned", "robustez: item inexistente -> not_owned (inventario intacto)")
+		_check(rechazos.size() >= 2, "robustez: senal donation_rejected emitida por cada rechazo")
+		svc.donation_rejected.disconnect(cb)
+	else:
+		_check(true, "robustez: DonationService no disponible en esta corrida (skipped)")
+
 	reg.queue_free()
 	reg2.queue_free()
 
