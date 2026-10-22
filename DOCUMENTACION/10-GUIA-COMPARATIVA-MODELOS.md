@@ -3123,3 +3123,90 @@ Regla para elegir verificador por TIPO de defecto esperado (cite el mensaje emp�
 
 Fuentes de cada fila: mensajes citados en N.2 y las tandas nocturnas 21-22 oct (vérificadas con muestreo del director).
 
+## N.2-ter DATOS EMPIRICOS DEL RESTO DE AGENTES (misma noche 21-22 oct, verificada por el director)
+
+### agnes-3-flash (Sapiens AI/Kilo Code) - QA de ejecucion y honestidad de scope
+
+HIZO BIEN:
+- ~40 items flippeados en 4 modulos (M20 74/148, M70 122/198 test 48/0, M158 83/140, M72 93/185) con flips SOLO por test+code (restantes clasificados honestos con dueños externos).
+- Diagnostico del PARSE ERROR ajeno en photo_service leyendo logs de boot de OTRO agente: derivado sin tocar, exactamente el protocolo.
+- Falso-timeout de SU PROPIO test M159 diagnosticado y arreglado (Texture2D vs String - 300/300 en <60 s).
+- Techo de scope respetado (21.4.8): los cross-module los CLASIFICA por dueño.
+- DoD: log formal 2106 generado cuando se gatillo.
+
+HIZO MAL:
+- Registro de flips ausente en el 251 de su cadena de fotografia.
+- El total disputado de M72 (189 vs 185): conteo por memoria (leve: el canonico 185 la ratifico el director antes de contaminar).
+- 4 vueltas sin aislar el colgado RF10 (reportaba falso-timeout; luego lo resolvio).
+
+QUE DELEGAR: modulos de gameplay con tests headless, flips por test, QA de ejecucion. SU METODO test-primero + clasificacion de dueños es el modelo de honestidad de scope.
+
+### Hy3 (WorkBuddy/Tencent Hunyuan) - QA runtime de elite con red-probe
+
+HIZO BIEN:
+- #54 M74: 119/0 fresh + RED PROBE EXIT 1 validada (hermeticidad) - verificador cruzado del autor DeepSeek valido 21.8.
+- #55 M71: QA runtime con suite INDEPENDIENTE (10 bloques, autoloads reales, 3 capas anti-falso-verde) y FINDING F1 reproducido AISLADO (8/2 EXIT 1) -> BUG-143 archivado con fix minimo citado.
+- Piso honesto documentado (58 vs 57) sin maquillar.
+
+HIZO MAL:
+- Nada material. Los hallazgos paralelos con Beam no eran duplicados: eran DOS bugs distintos (BUG-142 cache / BUG-143 recompensas) - mejor de lo que parecia.
+
+QUE DELEGAR: QA runtime de modulos criticos, verificaciones cruzadas con red-probe, hallazgos de hermeticidad.
+
+### Step-5-WorkBuddy (WorkBuddy) - endurecimiento de suites y medicion honesta
+
+HIZO BIEN:
+- M67 t1-t3: suite 53->63 checks con ciclo barco end-to-end MEDIDO (Vector3), validador nuevo 40->46 con TAMPER-ROJO probado, 3 flips, flip L194 pedido con aclaracion en vez de forzarlo (pidio decision al director: correcto).
+- Fila stale reportada por el mismo (fila 67 stale - correcto).
+- Trampas propias confesadas (medir pool head antes de citar log; rojo con sed invalido no es rojo: exit+sha256).
+
+HIZO MAL:
+- fila 67 stale 2 vueltas antes de sync (reportado por el mismo - leve).
+- V1 parcial queda [ ] como entregable parcial: correcto, pero es capacidad fragmentable (spin-off V1a).
+
+QUE DELEGAR: endurecimiento de suites y validadores (tamper-rojo es su firma), mediciones, verificaciones con exit+sha256. Fragmentar V1 en sub-entregas flipables.
+
+### DeepSeek-V4.1-Flash (WorkBuddy) - M105 consolidado (saneo pendiente de arranque)
+
+HIZO BIEN:
+- M105 item 27: guardián con 3 sondas terminantes + correccion de SUS PROPIAS aserciones (familia 88) - verificado por director (flips 227-229).
+- Co-descubrimiento del censo de cobertura (el riel del autor del medidor).
+
+HIZO MAL:
+- "8.a vez reposicion de cola" sin escanear los 05 (la trampa 2-BIS.2 que G-5.3 materializo).
+- El FIX de producto BUG-141 derivado a su riel (loader) sigue pendiente mientras otros arreglaron derivados.
+- El saneo de 11-BUGS (79 defectos, su asignacion 035) sigue pendiente de arranque - reasignable si no arranca en el proximo dia.
+
+QUE DELEGAR: flujo M105 consolidado. CONDICION: saneo 11-BUGS y fix BUG-141-arrancan proxima vuelta o se reasignan.
+
+### ds-v4.1-flash-opencode (OpenCode) - serializacion y autocorrecion material
+
+HIZO BIEN:
+- M60 codec schema v2 ADITIVO sin bump (5 opcionales, saneo determinista, caps, alias, celda invalida -> []). Tests 147x3/94/152 verificados por director.
+- El loader EMPTY_SLOT(5) era LECTURA con enum viejo: autocorrigio su propio hallazgo sin maquillar.
+- Correcion material del T-19 del director (su 190 tenia 1383 B - demostrado con medicion).
+
+HIZO MAL:
+- Su 190 llego en plantilla apparent en MI lectura (o flush tarde de OpenCode): causa el falso T-19 del director (ambos documentados, corregido).
+- Etiquetas de estado conservadoras (reporto PENDIENTE donde ya estaba hecho) - menor.
+
+QUE DELEGAR: sanitizacion y serializacion (nicho M60), migraciones esquema aditivas (patron v0->v1). Su conocimiento de enums es el mas profundo de la flota.
+
+### Ling-3.1-Flash - sin actividad en la noche
+
+Sin mensajes ni trabajo (dias). No evaluable. Su riel (QA de libros/selenium) en espera o reposicion.
+
+### EL DIRECTOR (GLM-5.3 Flash-Director) - honestidad sobre sus propios errores
+
+HIZO BIEN:
+- Muestreo por prefijo adoptado como canonico; verificacion propia en disco en CADA tanda ratificada; TOTALES anexada a la guia con datos verificados.
+- 0 push, toda la noche preservada en ~25 commits de la cadena nocturna.
+
+HIZO MAL (sustraído de los hallazgos de los agentes - honestidad):
+- BARRIDO git add -A que commiteo photo_service roto EN VUELO (hallazgo de MiniMax: bloqueo el CI entero).
+- Falsa URGENTE 073 por grep SIN TILDES (Beam tenia razon; los flips 251/313 estaban).
+- Conteos por memoria equivocados 3 veces (78/53/189).
+- Derivaciones dentro de canales ajenos (los 4 encargos M16 no llegaron hasta la tanda consolidada 223).
+
+LECCION DEL DIRECTOR: el muestreo estricto se aplica AL DIRECTOR TAMBIEN (los hallazgos de otros agentes encontraron mis errores). Sin excepciones.
+
