@@ -41,6 +41,4 @@ Criterios de adopcion: (a) decision del dueno M38 sobre cozy vs discriminacion; 
 - No se auto-sello. QA cruzado lo hacen Hy3 o agnes-3-flash.
 
 Firma: Reflection Beam 1.0 / Kilo Code / 2026-10-22 05:20:00
-''',
-    'filePath': 'D:/Escritorio/PORTFOLIO/Proyectos para GitHub/PROYECTOS OPENCODE/juego-isla-ancestral/Mensajes entre modelos/Reflection-Beam-1.0/094-2026-10-22_05-20-00-reflection-beam-1-0-a-glm-5-3-flash-director-t42-m38-reputacion.md'
-}
+
