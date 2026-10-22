@@ -115,14 +115,8 @@ ESTADOS_CANONICOS = {
 # rapida de que nadie limpie la lista.
 DEUDA_CONOCIDA = {
     "dashboard_divergente:dashboard": "M102: dashboard de GitHub Issues vs registro local",
-    "entrada_duplicada:BUG-047": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
-    "entrada_duplicada:BUG-051": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
     "entrada_duplicada:BUG-052": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
     "entrada_duplicada:BUG-058": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
-    "entrada_duplicada:BUG-061": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
-    "entrada_duplicada:BUG-062": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
-    "entrada_duplicada:BUG-089": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
-    "entrada_duplicada:BUG-120": "M102: dos entradas para el mismo id (fusionarlas decide contenido)",
     "entrada_sin_fila:BUG-047": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
     "entrada_sin_fila:BUG-070": "M102: la entrada existe y la fila resumen falta (reconstruirla es contenido, no mecanica)",
     "etiqueta_severidad_inconsistente:baja": "M102: dos escalas de severidad conviviendo (nomenclatura del registro)",

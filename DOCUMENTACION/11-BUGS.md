@@ -3001,7 +3001,7 @@ var hay_modal: bool = v if v is bool else false
 **Plataforma:** opencode
 **Fecha:** 2026-10-08 05:20 (resolución; reporte original 02:30)
 
-### BUG-120 — `run_tests.gd` era un runner falso-verde: reportaba EXIT 0 con 0 tests corridos; M112 marcado ✅ 208/208 sobre evidencia invalida
+> **Registro previo consolidado de BUG-120 (M102, 2026-10-22):** `run_tests.gd` era un runner falso-verde: reportaba EXIT 0 con 0 tests corridos; M112 marcado ✅ 208/208 sobre evidencia invalida
 
 - **Fecha de reporte:** 2026-10-07 (descubierto por Hy3 QA 21.8, Log 1430; confirmado y medido por mimo-v2.6-flash-free, Logs 1451-1453)
 - **Módulo(s) afectado(s):** M112-Testing-Automatico (game/isla-ancestral/tests/run_tests.gd + integracion CI en .github/workflows/testing.yml)
@@ -3372,7 +3372,7 @@ Las preferencias de settings sobreviven a los reinicios, siguiendo el patron ya 
   `test_sfx_m43.gd` 127/0 (ambas EXIT 0). **QA §21.8 (verificador externo)
   PENDIENTE por designacion del director** (autor ≠ verificador).
 
-### BUG-062 — M84 Musica-Y-Audio-Legal: la suite de test no parseaba (✅ no re-validable)
+> **Registro previo consolidado de BUG-062 (M102, 2026-10-22):** M84 Musica-Y-Audio-Legal: la suite de test no parseaba (✅ no re-validable)
 
 - **Estado:** [x] Resuelto (2026-09-19, Log 1085) | **Módulo:** M84 Musica-Y-Audio-Legal | **Severidad:** 🟠 Mayor
 - **Reportado por:** Atria-Dawn-Preview (auditoría batería anti-sobre-cierre, Log 1065, 2026-09-19)
@@ -3392,7 +3392,7 @@ Las preferencias de settings sobreviven a los reinicios, siguiendo el patron ya 
   **Plataforma:** Kilo Code
   **Fecha:** 2026-09-19
 
-### BUG-061 — M94 Retencion-Sin-FOMO: suite fallaba 5 checks (JSON con esquema divergente)
+> **Registro previo consolidado de BUG-061 (M102, 2026-10-22):** M94 Retencion-Sin-FOMO: suite fallaba 5 checks (JSON con esquema divergente)
 
 - **Estado:** [x] Resuelto (2026-09-19, Log 1083) | **Módulo:** M94 Retencion-Sin-FOMO | **Severidad:** 🔴 Crítico (sobre-cierre de un módulo ✅)
 - **Reportado por:** Atria-Dawn-Preview (auditoría batería anti-sobre-cierre, Log 1065, 2026-09-19)
@@ -4317,7 +4317,7 @@ Texto del toast legible (WCAG AA ≥ 4.5:1) sobre su panel oscuro, como el toolt
 
 > ⚠️ **Regla de delegación:** si un modelo LLM **no puede resolver** un bug (le faltan capacidades: visión, contexto, complejidad, herramientas), lo agrega **aquí al final del archivo**, respetando la plantilla de la sección 4 con estado `[?] Delegado`, y **firma con su nombre de modelo, plataforma, fecha y hora**. Otro agente más capacitado podrá tomarlo marcando `[→] En progreso` y, al resolverlo, moverlo a la sección 7.
 
-### BUG-089 — DELEGACION ANULADA (el reporte era falso)
+> **Registro previo consolidado de BUG-089 (M102, 2026-10-22):** DELEGACION ANULADA (el reporte era falso)
 
 - **Delego:** atria-Dawn-Preview (coordinador) · **Anula:** DeepSeek-V4.1-Flash (autor del reporte)
 - **Plataforma:** WorkBuddy · **Fecha:** 2026-10-02
@@ -5433,7 +5433,7 @@ el escaneo eran solo diferencias de mayusculas/guion_vs_guion_bajo, falsos posit
 Renombrar los `id` internos para coincidir con el stem del archivo, o renombrar los archivos.
 Requiere verificacion de referencias cruzadas en todo `scripts/` y `data/` (grep por cada id).
 
-## BUG-047: M38 — items solo-vendibles con precio_venta anulado (devuelve 0)
+> **Registro previo consolidado de BUG-047 (M102, 2026-10-22):** M38 — items solo-vendibles con precio_venta anulado (devuelve 0)
 
 - **Fecha de reporte:** 2026-09-18
 - **Modelo:** Atria-Dawn-Preview
@@ -5802,7 +5802,7 @@ SCRIPT ERROR: Invalid call. Nonexistent function 'size' in base 'Callable'.
 
 ---
 
-## BUG-051 — CI: el job `godot-lint` es un no-op completo (lint de GDScript inefectivo)
+> **Registro previo consolidado de BUG-051 (M102, 2026-10-22):** CI: el job `godot-lint` es un no-op completo (lint de GDScript inefectivo)
 
 **Estado:** [?] Delegado
 **Modulo:** M111 (Codigo de Calidad) / M83 (CI de licencias)
