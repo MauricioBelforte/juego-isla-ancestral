@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T16:53:50",
+ "ultimo_update": "2026-10-22T17:12:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "291/292: S38 RATIFICADA (cierre demo, M138 109/131); GO S39 multi; Hy3 arbitro pendiente de responder",
+  "estado": "293/294: S40 RATIFICADA (RF23 ya-implementado+QA 13/0; escalado 0.8-2.0; glifos M88); GO S41 multi",
   "pendientes_real": 222,
-  "acuse_enviado": 292,
+  "acuse_enviado": 294,
   "ultima_tanda": 40
  },
  "deepseek": {

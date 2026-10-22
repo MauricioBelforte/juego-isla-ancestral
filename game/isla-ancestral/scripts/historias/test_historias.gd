@@ -57,11 +57,21 @@
 # narrativos (0 items de carta/brujula en data/items/, mismo patron que
 # tomo_carbonizado). Bloque M afirma carga, fuente, unicidad de consecuencias y
 # diarios y corrida end-to-end de las 6.
+# Iter. 10 (Step-5-WorkBuddy, 2026-10-22, Log 2131): cluster Amistad del 03-Diseno
+# L44 (regalo favorito, sentadilla de pesca, paseos, ficcion + ayuda a un vecino y
+# cartas de amistad como 6.a mision: el 02-Analisis L25 nombra 5 temas para 6
+# misiones). NPC REALES de data/villagers/ (olivia_nutria tejedora, finneas_zorro
+# pescador, sofia_buho bibliotecaria, aria_ciervo trovadora, mercedes_lince
+# mercader, luna_zorra artesana) y objetos REALES de data/items/ (OBJ-ROP-005
+# "Bufanda", OBJ-ITE-036 "Te", OBJ-NAT-022 "Flor rara", OBJ-NAT-023 "Flor
+# luminiscente", OBJ-ITE-035 "Miel", OBJ-NAT-004 "Flor silvestre"). Bloque O
+# afirma carga, fuente, unicidad de consecuencias/diarios y corrida end-to-end
+# de las 6.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -69,12 +79,12 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 9, 2026-10-22, Log 2129): 258 checks con los
-# bloques A-N (iter. 8 tenia 227 con A-M; el bloque N del cluster Familias sumo
-# 31: 6 carga/fuente + 2 unicidad de flags + 1 diarios + 7x3 end-to-end + 1
-# puente diario). Medido: 258/0/EXIT 0 x3. El guardian se probo EN ROJO por
-# inyeccion de runtime sobre el bloque N (ver Log 2129).
-const CHECKS_MINIMOS := 258
+# Piso MEDIDO en verde (iter. 10, 2026-10-22, Log 2131): 316 checks con los
+# bloques A-O (iter. 9 tenia 258 con A-N; el bloque O del cluster Amistad sumo
+# 58: 12 carga/fuente + 2 unicidad de flags + 1 diarios + 7x6 end-to-end + 1
+# puente diario). Medido: 316/0/EXIT 0 x3. El guardian se probo EN ROJO por
+# inyeccion de runtime sobre el bloque O (ver Log 2131).
+const CHECKS_MINIMOS := 316
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -110,6 +120,7 @@ func _run() -> void:
 	_test_ruinas()
 	_test_objetos()
 	_test_familias()
+	_test_amistad()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -141,7 +152,8 @@ func _test_carga() -> void:
 	# Iter. 5 (Log 2107): +6 historias de vecinos en el principal -> 10 + 1 = 11.
 	# Iter. 6 (Log 2117): +3 del cluster Lugares -> 13 + 1 = 14.
 	# Iter. 7 (Log 2125): +4 del cluster Ruinas -> 17 + 1 = 18.
-	_check(_h.cadenas_count() == 27, "27 cadenas cargadas tras el merge (26 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 10 (Log 2131): +6 del cluster Amistad -> 32 + 1 = 33.
+	_check(_h.cadenas_count() == 33, "33 cadenas cargadas tras el merge (32 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -368,7 +380,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 26, "catálogo principal con 26 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias): %d" % principal.size())
+	_check(principal.size() == 32, "catálogo principal con 32 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -391,7 +403,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 27, "27 cadenas cargadas en runtime (26 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 33, "33 cadenas cargadas en runtime (32 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -950,3 +962,149 @@ func _test_familias() -> void:
 		_check(not diary.esta_registrada("mision_cadena-guardas"),
 			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
 	_fin("N")
+
+## Iter. 10 (Step-5-WorkBuddy, 2026-10-22, Log 2131): cluster Amistad del 03-Diseno
+## L44 (regalo favorito, sentadilla de pesca, paseos, ficcion, ayuda a un vecino,
+## cartas de amistad). NPC REALES de data/villagers/ (olivia_nutria, finneas_zorro,
+## sofia_buho, aria_ciervo, mercedes_lince, luna_zorra) y objetos REALES de
+## data/items/ (OBJ-ROP-005 "Bufanda", OBJ-ITE-036 "Te", OBJ-NAT-022 "Flor rara",
+## OBJ-NAT-023 "Flor luminiscente", OBJ-ITE-035 "Miel", OBJ-NAT-004 "Flor
+## silvestre"). Afirma carga, fuente, unicidad de consecuencias/diarios y corrida
+## end-to-end de las 6.
+func _test_amistad() -> void:
+	# Estado limpio: el bloque no depende de lo que dejaron los anteriores
+	_h.restore_save_data({})
+	var nuevas := ["cadena-regalo-favorito", "cadena-sentadilla-pesca", "cadena-paseos",
+		"cadena-ficcion", "cadena-ayuda-vecino", "cadena-cartas-amistad"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+	# Anti-repeticion: 6 flags de consecuencia nuevos, sin colision con los 27 previos
+	var existentes := ["faro_encendido", "invernadero_abierto", "plaza_decorada",
+		"luciernagas_vueltas", "biblioteca_iluminada", "pan_fiesta_horneado",
+		"banco_plaza_reparado", "manto_niebla_terminado", "red_pescador_reparada",
+		"sendero_bosque_senalado", "jarabe_lunar_listo", "jardin_florecido",
+		"cofradia_activa", "molino_funcionando", "biblioteca_quemada_rescatada",
+		"observatorio_alineado", "estacion_reparada", "puente_cruzable",
+		"relicto_devuelto", "gema_devuelta", "receta_heredada", "llave_encontrada",
+		"patrulla_nocturna", "brujula_calibrada", "molienda_familiar_restaurada",
+		"red_del_abuelo_reparada", "vigilia_de_los_guardas"]
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag) or existentes.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 6, "6 consecuencias distintas en las cadenas de amistad: %d" % flags.size())
+	_check(unicos, "consecuencias de amistad sin colision con las previas (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 6, "6 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# End-to-end 1: regalo favorito (olivia_nutria REAL; OBJ-ROP-005 "Bufanda" REAL de data/items/)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"OBJ-ROP-005": 1})
+	var res1: Dictionary = _h.iniciar_cadena("cadena-regalo-favorito")
+	_check(bool(res1.ok), "iniciar cadena-regalo-favorito OK")
+	res1 = _h.reportar_paso("cadena-regalo-favorito", "hablar", "olivia_nutria")
+	_check(bool(res1.ok), "regalo p1 hablar olivia_nutria OK")
+	res1 = _h.reportar_paso("cadena-regalo-favorito", "explorar", "plaza")
+	_check(bool(res1.ok), "regalo p2 explorar plaza OK")
+	res1 = _h.reportar_entrega("cadena-regalo-favorito")
+	_check(bool(res1.ok), "regalo p3 entregar OBJ-ROP-005 OK (inventario)")
+	res1 = _h.reportar_paso("cadena-regalo-favorito", "puzzle", "envoltorio-sin-cinta")
+	_check(bool(res1.ok), "regalo p4 puzzle OK")
+	_check(_h.esta_completada("cadena-regalo-favorito"), "cadena-regalo-favorito completada end-to-end")
+	_check(ws_has("regalo_favorito_entregado"), "consecuencia regalo_favorito_entregado aplicada (M21)")
+	# End-to-end 2: sentadilla de pesca (finneas_zorro REAL; OBJ-ITE-036 "Te" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-ITE-036": 1})
+	var res2: Dictionary = _h.iniciar_cadena("cadena-sentadilla-pesca")
+	_check(bool(res2.ok), "iniciar cadena-sentadilla-pesca OK")
+	res2 = _h.reportar_paso("cadena-sentadilla-pesca", "hablar", "finneas_zorro")
+	_check(bool(res2.ok), "sentadilla p1 hablar finneas_zorro OK")
+	res2 = _h.reportar_paso("cadena-sentadilla-pesca", "explorar", "muelle")
+	_check(bool(res2.ok), "sentadilla p2 explorar muelle OK")
+	res2 = _h.reportar_entrega("cadena-sentadilla-pesca")
+	_check(bool(res2.ok), "sentadilla p3 entregar OBJ-ITE-036 OK (inventario)")
+	res2 = _h.reportar_paso("cadena-sentadilla-pesca", "puzzle", "sedal-silencioso")
+	_check(bool(res2.ok), "sentadilla p4 puzzle OK")
+	_check(_h.esta_completada("cadena-sentadilla-pesca"), "cadena-sentadilla-pesca completada end-to-end")
+	_check(ws_has("sentadilla_de_pesca_amistosa"), "consecuencia sentadilla_de_pesca_amistosa aplicada (M21)")
+	# End-to-end 3: paseos (sofia_buho REAL; OBJ-NAT-022 "Flor rara" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-NAT-022": 1})
+	var res3: Dictionary = _h.iniciar_cadena("cadena-paseos")
+	_check(bool(res3.ok), "iniciar cadena-paseos OK")
+	res3 = _h.reportar_paso("cadena-paseos", "hablar", "sofia_buho")
+	_check(bool(res3.ok), "paseos p1 hablar sofia_buho OK")
+	res3 = _h.reportar_paso("cadena-paseos", "explorar", "jardin")
+	_check(bool(res3.ok), "paseos p2 explorar jardin OK")
+	res3 = _h.reportar_entrega("cadena-paseos")
+	_check(bool(res3.ok), "paseos p3 entregar OBJ-NAT-022 OK (inventario)")
+	res3 = _h.reportar_paso("cadena-paseos", "puzzle", "rutas-del-atardecer")
+	_check(bool(res3.ok), "paseos p4 puzzle OK")
+	_check(_h.esta_completada("cadena-paseos"), "cadena-paseos completada end-to-end")
+	_check(ws_has("paseo_con_amiga"), "consecuencia paseo_con_amiga aplicada (M21)")
+	# End-to-end 4: ficcion (aria_ciervo REAL; OBJ-NAT-023 "Flor luminiscente" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-NAT-023": 1})
+	var res4: Dictionary = _h.iniciar_cadena("cadena-ficcion")
+	_check(bool(res4.ok), "iniciar cadena-ficcion OK")
+	res4 = _h.reportar_paso("cadena-ficcion", "hablar", "aria_ciervo")
+	_check(bool(res4.ok), "ficcion p1 hablar aria_ciervo OK")
+	res4 = _h.reportar_paso("cadena-ficcion", "explorar", "plaza")
+	_check(bool(res4.ok), "ficcion p2 explorar plaza OK")
+	res4 = _h.reportar_entrega("cadena-ficcion")
+	_check(bool(res4.ok), "ficcion p3 entregar OBJ-NAT-023 OK (inventario)")
+	res4 = _h.reportar_paso("cadena-ficcion", "puzzle", "final-inventado")
+	_check(bool(res4.ok), "ficcion p4 puzzle OK")
+	_check(_h.esta_completada("cadena-ficcion"), "cadena-ficcion completada end-to-end")
+	_check(ws_has("historia_de_ficcion_escrita"), "consecuencia historia_de_ficcion_escrita aplicada (M21)")
+	# End-to-end 5: ayuda a un vecino (mercedes_lince REAL; OBJ-ITE-035 "Miel" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-ITE-035": 1})
+	var res5: Dictionary = _h.iniciar_cadena("cadena-ayuda-vecino")
+	_check(bool(res5.ok), "iniciar cadena-ayuda-vecino OK")
+	res5 = _h.reportar_paso("cadena-ayuda-vecino", "hablar", "mercedes_lince")
+	_check(bool(res5.ok), "ayuda p1 hablar mercedes_lince OK")
+	res5 = _h.reportar_paso("cadena-ayuda-vecino", "explorar", "plaza")
+	_check(bool(res5.ok), "ayuda p2 explorar plaza OK")
+	res5 = _h.reportar_entrega("cadena-ayuda-vecino")
+	_check(bool(res5.ok), "ayuda p3 entregar OBJ-ITE-035 OK (inventario)")
+	res5 = _h.reportar_paso("cadena-ayuda-vecino", "puzzle", "recuento-de-la-pila")
+	_check(bool(res5.ok), "ayuda p4 puzzle OK")
+	_check(_h.esta_completada("cadena-ayuda-vecino"), "cadena-ayuda-vecino completada end-to-end")
+	_check(ws_has("puesto_de_mercedes_ordenado"), "consecuencia puesto_de_mercedes_ordenado aplicada (M21)")
+	# End-to-end 6: cartas de amistad (luna_zorra REAL; OBJ-NAT-004 "Flor silvestre" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-NAT-004": 1})
+	var res6: Dictionary = _h.iniciar_cadena("cadena-cartas-amistad")
+	_check(bool(res6.ok), "iniciar cadena-cartas-amistad OK")
+	res6 = _h.reportar_paso("cadena-cartas-amistad", "hablar", "luna_zorra")
+	_check(bool(res6.ok), "cartas p1 hablar luna_zorra OK")
+	res6 = _h.reportar_paso("cadena-cartas-amistad", "explorar", "muelle_viejo")
+	_check(bool(res6.ok), "cartas p2 explorar muelle_viejo OK")
+	res6 = _h.reportar_entrega("cadena-cartas-amistad")
+	_check(bool(res6.ok), "cartas p3 entregar OBJ-NAT-004 OK (inventario)")
+	res6 = _h.reportar_paso("cadena-cartas-amistad", "puzzle", "sello-de-cera")
+	_check(bool(res6.ok), "cartas p4 puzzle OK")
+	_check(_h.esta_completada("cadena-cartas-amistad"), "cadena-cartas-amistad completada end-to-end")
+	_check(ws_has("correspondencia_retomada"), "consecuencia correspondencia_retomada aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# cadena-biblioteca en H, cadena-jardines en K, cadena-puente en L,
+	# cadena-brujula en M y cadena-guardas en N). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-regalo-favorito"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	_fin("O")

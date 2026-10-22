@@ -81,7 +81,7 @@
 
 ## Misiones de amistad e investigación
 
-- [ ] Crear 6 misiones de amistad (regalo, pesca, paseos, ficción) [M]
+- [x] Crear 6 misiones de amistad (regalo, pesca, paseos, ficción) [M] — Step-5 2026-10-22: cluster Amistad del 03-Diseno L44 en 04-Codigo.md §Iter. 10 (Log 2131). 6 cadenas nuevas en `data/historias/secundarias.json` (26 -> 32): regalo favorito (olivia_nutria + OBJ-ROP-005 "Bufanda"), sentadilla de pesca (finneas_zorro + OBJ-ITE-036 "Té"), paseos (sofia_buho + OBJ-NAT-022 "Flor rara"), ficcion (aria_ciervo + OBJ-NAT-023 "Flor luminiscente"), ayuda a un vecino (mercedes_lince + OBJ-ITE-035 "Miel") y cartas de amistad (luna_zorra + OBJ-NAT-004 "Flor silvestre"). NPC y objetos REALES verificados en disco (data/villagers/, data/items/ por campo id); 6 consecuencias peladas únicas (32/32) y 6 capítulos de diario únicos. Suite `test_historias.gd`: bloque O (58 checks) al FINAL de `_run()`; piso 258 -> **316 checks / 0 fallos / EXIT 0 x3** (binario real); guardián EN ROJO por inyección de runtime (Variant -> Dictionary): EXIT 1, «el bloque O NO se ejecuto» + «solo 259 checks (minimo 316)»; sonda borrada, sha256 verificado. Nota de alcance: el 03-Diseno L44 nombra 4 temas y el 02-Analisis L25 pide 6 misiones con 5 temas nombrados — la 6.a (cartas de amistad) es extensión declarada del cluster, sin dueno externo.
 - [ ] Crear 5 misiones de investigación (faro, biblioteca, geodesia, mapas) [M]
 - [x] Definir la integración con M36 (mapas) [S] — 02-Analisis L26 (misiones de investigación: «faro, biblioteca, geodesia, mapas M36») + 03-Diseno L45. Implementación: dueño M36.
 - [ ] Documentar misiones de amistad e investigación [S]
@@ -198,7 +198,7 @@ A diferencia de los clusters legales/store (que solo tenían JSON+Validator+Test
 - Estado: **🟡 Con dudas** (núcleo verificado; contenido pendiente).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 105 ítems · Completados: 61 · Pendientes: 42 · No resueltos: 2.
+**Totales:** 105 ítems · Completados: 62 · Pendientes: 41 · No resueltos: 2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 24 [x] / 80 [ ] / 0 [?].

@@ -388,6 +388,96 @@
 			"consecuencia": { "vigilia_de_los_guardas": true },
 			"oculta": false,
 			"postgame": false
+		},
+		{
+			"id": "cadena-regalo-favorito",
+			"titulo": "El Regalo Favorito",
+			"contexto": "La tejedora quiere regalarle su bufanda favorita a una amiga que parte en el barco del mediodia y no sabe como envolverla sin arruinar el lazo",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "olivia_nutria" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ROP-005" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "envoltorio-sin-cinta" }
+			],
+			"recompensa": { "diario": "capitulo-regalo-favorito", "cosmetico": "bufanda de olivia" },
+			"consecuencia": { "regalo_favorito_entregado": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-sentadilla-pesca",
+			"titulo": "La Sentadilla de Pesca",
+			"contexto": "El pescador propone una sentadilla de pesca al atardecer con su mejor amigo; hay que llevar el termo con te caliente y no espantar a los peces",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "finneas_zorro" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-036" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "sedal-silencioso" }
+			],
+			"recompensa": { "diario": "capitulo-sentadilla-pesca", "cosmetico": "termo de la sentadilla" },
+			"consecuencia": { "sentadilla_de_pesca_amistosa": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-paseos",
+			"titulo": "Los Paseos de la Biblioteca",
+			"contexto": "La bibliotecaria sale de la biblioteca por primera vez en meses; la acompanamos a caminar por el jardin y ella quiere guardar una flor rara entre las paginas",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "sofia_buho" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "jardin" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-NAT-022" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "rutas-del-atardecer" }
+			],
+			"recompensa": { "diario": "capitulo-paseos", "cosmetico": "flor prensada" },
+			"consecuencia": { "paseo_con_amiga": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-ficcion",
+			"titulo": "La Historia de Ficcion",
+			"contexto": "La trovadora esta escribiendo una historia de ficcion y necesita material del mundo para inventar el final; la flor luminiscente del jardin es la ultima pista",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "aria_ciervo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-NAT-023" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "final-inventado" }
+			],
+			"recompensa": { "diario": "capitulo-ficcion", "cosmetico": "libro de aria" },
+			"consecuencia": { "historia_de_ficcion_escrita": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-ayuda-vecino",
+			"titulo": "Manos Amigas en el Puesto",
+			"contexto": "La mercader se tuerce un tobillo antes de la feria y su puesto de la plaza queda sin ordenar; la ayudamos a recuperar el dia y ella comparte su miel",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "mercedes_lince" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-035" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "recuento-de-la-pila" }
+			],
+			"recompensa": { "diario": "capitulo-ayuda-vecino", "cosmetico": "delantal de mercedes" },
+			"consecuencia": { "puesto_de_mercedes_ordenado": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-cartas-amistad",
+			"titulo": "Cartas de Amistad",
+			"contexto": "La artesana retoma la correspondencia con una amiga de la infancia; la carta con una flor silvestre debe salir en el barco del muelle viejo antes del anochecer",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "luna_zorra" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle_viejo" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-NAT-004" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "sello-de-cera" }
+			],
+			"recompensa": { "diario": "capitulo-cartas-amistad", "cosmetico": "sello de cera" },
+			"consecuencia": { "correspondencia_retomada": true },
+			"oculta": false,
+			"postgame": false
 		}
 	]
 }

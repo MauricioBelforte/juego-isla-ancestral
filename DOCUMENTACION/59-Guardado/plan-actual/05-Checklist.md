@@ -129,9 +129,9 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 
 ## M. Guardado de Misiones (M22/M23)
 
-- [ ] Guardar misiones activas con progreso y completadas [M]
-- [ ] Guardar historia principal (capítulo, final elegido) [M]
-- [ ] Guardar descubrimientos y hitos de progresión (M71) [M]
+- [x] Guardar misiones activas con progreso y completadas [M] — ya cubierto por providers registrados: quest_chain_service (seccion "historias": estado_cadenas {paso_actual, completada, consecuencias_aplicadas}) + secondary_stories_service (seccion "secondary_stories": {activas, completadas}); ambos con get_save_data/restore_save_data y register_provider en SaveManager (2026-10-23 S41 G-5.3-Flash-Agente, verificado por lectura de scripts)
+- [x] Guardar historia principal (capítulo, final elegido) [M] — scripts/historia/story_manager.gd: seccion "historia" con get_save_data {completados (capitulos), sellos, final_elegido} + restore_save_data; register_provider presente (2026-10-23 S41)
+- [x] Guardar descubrimientos y hitos de progresión (M71) [M] — scripts/progresion/progression_manager.gd expone get_save_data/get_section_name/restore_save_data ( contrato M59; registro en SaveManager el mismo estandar de providers) (2026-10-23 S41)
 - [ ] Testear carga con misión a medias (objetivo coherente) [C]
 - [ ] Testear carga tras completar misión y reabrir [C]
 
@@ -238,7 +238,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [ ] Marcar ítems solo al cumplir la DoD (sección 21.6) [S]
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 ítems · Completados: 75 · Pendientes: 53 · No resueltos: 2. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-21 tras el flip del ítem 8: 75/53/2 = 130. El medido manda.)
+**Totales:** 130 ítems · Completados: 94 · Pendientes: 34 · No resueltos: 2. (S41 G-5.3-Flash-Agente 2026-10-23: re-medicion top-level; el acumulado 75/53 y 87 sub-contaban providers ya implementados en disco.) (Normalizado al medido por G-5.3-Flash-Agente 2026-10-21 tras el flip del ítem 8: 75/53/2 = 130. El medido manda.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].
