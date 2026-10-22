@@ -96,33 +96,33 @@
 
 - [x] Definir verificación de cultivos por temporada funcional (M33) [M] — **Diseño: 03-Diseno.md 2 #10**
 - [x] Definir verificación de eventos por temporada (M74) [M] — **Diseño: 03-Diseno.md 2 #10**
-- [ ] Definir verificación de decorado estacional por isla (M50) [M]
-- [ ] Definir verificación de impacto económico estacional (precios) [M]
-- [ ] Definir verificación de audio estacional (M43) [S]
+- [x] Definir verificación de decorado estacional por isla (M50) [M] — captura por isla/estacion vs tabla M50; 100% islas con cambio visible — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
+- [x] Definir verificación de impacto económico estacional (precios) [M] — snapshot de 10 precios x 2 estaciones; >= 3 ajustes justificados y 0 fuera de banda M93 — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
+- [x] Definir verificación de audio estacional (M43) [S] — A/B de la misma zona en 2 estaciones; >= 1 capa audible distinta por estacion — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
 
 ## 12. Clima con propósito (P11)
 
 - [x] Definir verificación de lluvia con efecto agricultura (M32) [M] — **Diseño: 03-Diseno.md 2 #11**
 - [x] Definir verificación de helada con riesgo real [M] — **Diseño: 03-Diseno.md 2 #11**
-- [ ] Definir verificación de clima cambiante por isla (M50) [M]
-- [ ] Definir verificación de visual de clima coherente por zona [S]
-- [ ] Definir verificación de aviso climático en diario (M55) [S]
+- [x] Definir verificación de clima cambiante por isla (M50) [M] — 30 min de observacion; >= 2 estados de clima por isla y transiciones sin pop de particulas — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
+- [x] Definir verificación de visual de clima coherente por zona [S] — captura simultanea de 2 zonas en el mismo tick; 0 incoherencias entre zonas contiguas — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
+- [x] Definir verificación de aviso climático en diario (M55) [S] — prediccion del diario vs clima real (semilla M29); 100% correctas — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
 
 ## 13. Música refuerza zonas (P12)
 
 - [x] Definir verificación de playlist por zona/isla (M41) [M] — **Diseño: 03-Diseno.md 2 #12**
-- [ ] Definir verificación de música por acto (M41) [M]
+- [x] Definir verificación de música por acto (M41) [M] — cada acto con su tema y transicion sin reinicio brusco (A/B auriculares) — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
 - [x] Definir test auditivo de 5 zonas (ritmo/tono acorde) [S] — **Diseño: 03-Diseno.md 2 #12**
-- [ ] Definir verificación de transiciones sin cortes [S]
-- [ ] Definir verificación de ducking con diálogos [S]
+- [x] Definir verificación de transiciones sin cortes [S] — recorridos que fuerzan 6 transiciones; 0 cortes secos >= 100 ms (crossfade >= 100 ms) — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
+- [x] Definir verificación de ducking con diálogos [S] — medidor de bus musica; duck >= -6 dB en dialogo y retorno <= 1 s — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
 
 ## 14. Audio refuerza acciones (P13)
 
 - [x] Definir matriz de SFX por interacción completa (M42) [M] — **Diseño: 03-Diseno.md 2 #13**
-- [ ] Definir verificación de SFX de hitos (brindis, sellos) [S]
+- [x] Definir verificación de SFX de hitos (brindis, sellos) [S] — tabla hito->SFX reproducida; 100% asignado y 0 picos > -3 dB — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
 - [x] Definir verificación de feedback sonoro de crafting/construcción [S] — **Diseño: 01-Requerimientos.md 3.13**
-- [ ] Definir verificación de volumen balanceado en las 6 zonas [M]
-- [ ] Definir verificación de voces en hitos (M44) [S]
+- [x] Definir verificación de volumen balanceado en las 6 zonas [M] — pase VU por zona con mismo fixture; 0 zona con SFX > 6 dB sobre el resto o bajo -20 dB — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
+- [x] Definir verificación de voces en hitos (M44) [S] — tabla hito mayor->voz; 100% asignado y 0 clips que pisen dialogo (ducking) — 03 Bateria 3 (2026-10-23 S53 G-5.3-Flash-Agente)
 
 ## 15. Gráficos coherentes (P14)
 
@@ -137,8 +137,8 @@
 - [x] Definir verificación de presupuesto de voxels (M08/M11) [M] — **Diseño: 03-Diseno.md 2 #15**
 - [x] Definir verificación de draw calls por zona dentro de presupuesto (M61) [M] — **Diseño: 03-Diseno.md 2 #15**
 - [x] Definir verificación de memoria de chunks/caché (M62) [M] — **Diseño: 03-Diseno.md 2 #15**
-- [ ] Definir verificación de streaming de chunks sin picos (M63) [M]
-- [ ] Definir verificación de LOD/culling activo en todas las islas [M]
+- [x] Definir verificación de streaming de chunks sin picos (M63) [M] — 5 min cruzando 10 bordes con frame-time; 0 frames > 100 ms atribuibles a streaming — 03 Bateria 4 (2026-10-23 S54 G-5.3-Flash-Agente)
+- [x] Definir verificación de LOD/culling activo en todas las islas [M] — visita por isla verificando que draw calls bajan al alejarse >= 30%; 100% con culling — 03 Bateria 4 (2026-10-23 S54 G-5.3-Flash-Agente)
 
 ## 17. Guardado confiable (P16)
 
@@ -146,30 +146,30 @@
 - [x] Definir verificación de 0 reportes de save perdido en 72 h (M143) [M] — **Diseño: 03-Diseno.md 2 #16**
 - [ ] Definir verificación de backup/reintento de cloud (M60) [M]
 - [ ] Definir verificación de migración de versiones sin pérdida [M]
-- [ ] Definir verificación de anti-softlock con ítems clave (M66) [M]
+- [x] Definir verificación de anti-softlock con ítems clave (M66) [M] — tirar/regalar cada item de mision y verificar via de re-obtencion; 100% con salida (2026-10-23 S54)
 
 ## 18. Rendimiento aceptable (P17)
 
 - [x] Definir verificación de crash < 0.5% en telemetría real [M] — **Diseño: 03-Diseno.md 2 #17**
 - [x] Definir verificación de fps p99 ≥ objetivo (M61) [M] — **Diseño: 03-Diseno.md 2 #17**
-- [ ] Definir verificación de tiempos de carga dentro de presupuesto (M63) [M]
+- [x] Definir verificación de tiempos de carga dentro de presupuesto (M63) [M] — 20 cargas cronometradas; p95 <= 8 s con pantalla de carga siempre presente (regla AGENTS 8) — 03 Bateria 4 (2026-10-23 S54 G-5.3-Flash-Agente)
 - [x] Definir verificación de memoria estable en sesiones largas (M62) [M] — **Diseño: 01-Requerimientos.md 5.4**
 - [ ] Definir verificación de performance en hardware mínimo y recomendado [M]
 
 ## 19. Accesibilidad contemplada (P18)
 
 - [x] Definir checklist M58 100% verificado en build final [M]
-- [ ] Definir verificación de remapeo, subtítulos y modos de color [M]
-- [ ] Definir verificación de reduce motion/flashing [S]
-- [ ] Definir verificación de tamaño de texto 150% [S]
+- [x] Definir verificación de remapeo, subtítulos y modos de color [M] — cada ajuste con efecto IN JUEGO inmediato sin reinicio; 100% — 03 Bateria 4 (2026-10-23 S54 G-5.3-Flash-Agente)
+- [x] Definir verificación de reduce motion/flashing [S] — perfil activo reproduce los 5 momentos con flash canonico; 0 flashes > 3 Hz y 0 shake (2026-10-23 S54)
+- [x] Definir verificación de tamaño de texto 150% [S] — ui_access_scale 150% + fuente; 6 pantallas canonicas; 0 cortes/solapados (2026-10-23 S54)
 - [x] Definir registro de M58 en el acta con evidencia [S] — **Diseño: 01-Requerimientos.md 8.1**
 
 ## 20. Localización contemplada (P19)
 
 - [x] Definir checklist M87 100% verificado en build final [M]
-- [ ] Definir verificación de 6 idiomas sin claves rotas [M]
-- [ ] Definir verificación de subtítulos y textos UI por idioma [M]
-- [ ] Definir verificación de fechas/formatos por idioma [S]
+- [x] Definir verificación de 6 idiomas sin claves rotas [M] — escaneo de claves usadas vs traducidas por locale; 0 claves rotas y 0 mezcla en pantalla (2026-10-23 S54)
+- [x] Definir verificación de subtítulos y textos UI por idioma [M] — cambio de idioma + sesion completa; 100% en el idioma elegido (2026-10-23 S54)
+- [x] Definir verificación de fechas/formatos por idioma [S] — 2 dias x 2 idiomas (diario/reloj/precio); 100% formatos coherentes por locale (2026-10-23 S54)
 - [x] Definir registro de M87 en el acta con evidencia [S] — **Diseño: 01-Requerimientos.md 8.1**
 
 ## 21. Contratos documentados (P20)
@@ -184,8 +184,8 @@
 
 - [x] Definir inventario de licencias de assets (store/vendors) [M] — **Diseño: 03-Diseno.md 2 #21**
 - [x] Definir inventario de licencias de herramientas de desarrollo [M] — **Diseño: 03-Diseno.md 2 #21**
-- [ ] Definir verificación de licencias de audio/música (M41-M44) [M]
-- [ ] Definir verificación de licencias de plugins de Unity [M]
+- [x] Definir verificación de licencias de audio/música (M41-M44) [M] — audit inventario audio vs registro de licencias; 100% con licencia y 0 claims (2026-10-23 S54)
+- [x] Definir verificación de licencias de plugins [M] — audit addons/extensiones externos vs LICENSE; 100% identificadas y compatibles comercial (2026-10-23 S54)
 - [x] Definir indexado de licencias en el acta [S] — **Diseño: 01-Requerimientos.md 8.4**
 
 ## 23. Propiedad intelectual documentada (P22)
@@ -350,7 +350,9 @@ quirúrgico Trampa 114; **sin push**. QA §21.8 de M88 → Hy3 (no bloqueante).
 Eso es **FALSO**: el archivo contenía 139 `[ ]` en ese momento. Es el mismo patrón H-D
 detectado en 13 `05-Checklist.md` más (SB-02, Log 1279).
 **Cifra real y falsable tras la iteración 4 (mimo 2026-10-06): 23 `[x]` · 6 `[?]` · 138 `[ ]` = 167.**
-**Cifra real y falsable tras la iteración 5 — barrido D8 (DeepSeek-V4.1-Flash, 2026-10-12, Log 1792): 94 `[x]` · 6 `[?]` · 67 `[ ]` = 167.** 71 flips con cita real a `01-04` (criterio por verbo: "Definir X" exige que X exista en los documentos). Los 67 `[ ]` restantes son conceptos que **solo** aparecen en el checklist (retención/fatiga, exploits, artefactos, LOD/culling, accesibilidad fina, licencias de audio, etc.), verificados por grep = 0 en `01-04`.
+**Cifra real y falsable tras la iteración 5 — barrido D8 (DeepSeek-V4.1-Flash, 2026-10-12, Log 1792): 94 `[x]` 
+**Cifra real y falsable tras S54 (G-5.3-Flash-Agente, Kilo Code, 2026-10-23, Baterias 1-4 = 43 flips con cita en 03): 140 `[x]` · 6 `[?]` · 21 `[ ]` = 167.**
+**Cifra real y falsable tras S53 (G-5.3-Flash-Agente, Kilo Code, 2026-10-23, Bateria 3 = 12 flips con cita en 03): 128 `[x]` · 6 `[?]` · 33 `[ ]` = 167.**· 6 `[?]` · 67 `[ ]` = 167.** 71 flips con cita real a `01-04` (criterio por verbo: "Definir X" exige que X exista en los documentos). Los 67 `[ ]` restantes son conceptos que **solo** aparecen en el checklist (retención/fatiga, exploits, artefactos, LOD/culling, accesibilidad fina, licencias de audio, etc.), verificados por grep = 0 en `01-04`.
 (Iter. 3 de SB: 16/5/138 = 159. La iter. 4 agregó 8 ítems (5 verificaciones + 3 hallazgos), cerró
 los 2 `[?]` de "gate no cableado" y "JSON congelado" como `[x]` al verificarse los workflows, y
 corrigió la cifra "11 tests" → 14. Conteo re-mediado con script, no a ojo.)

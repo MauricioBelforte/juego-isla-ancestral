@@ -261,3 +261,131 @@ es proporcional. COMO: tabla esfuerzo (tiempo/pasos) vs recompensa AO/valor
 recompensa > 2x o < 0.5x de su promedio esperado (desviacion > 2x = feature
 a rebalancear).
 
+## Criterios de verificacion — BATERIA 3 (S53 — G-5.3-Flash-Agente, 2026-10-23)
+
+**L99 decorado estacional por isla (M50):** QUE: cada isla refleja la
+estacion (foliage/props). COMO: captura por isla y estacion vs tabla de
+estaciones del M50; checklist visual con 3 puntos de referencia por isla.
+UMBRAL: 100% de islas con cambio estacional visible (0 islas iguales entre
+verano e invierno).
+
+**L100 impacto economico estacional (precios):** QUE: los precios reaccionan
+a la estacion/evento (M74). COMO: snapshot de 10 precios en 2 estaciones
+distintas + validar en M93 (banda 5-15%); el delta estacional documentado.
+UMBRAL: >= 3 precios con ajuste estacional justificado y 0 fuera de banda.
+
+**L101 audio estacional (M43):** QUE: el ambiente sonoro cambia con la
+estacion. COMO: par de capturas de audio de la misma zona en 2 estaciones
+(espectro o A/B de oido por 2 oyentes). UMBRAL: >= 1 capa audible distinta
+por estacion (pajaros/crickets/viento) en todas las zonas con estaciones.
+
+**L107 clima cambiante por isla (M50):** QUE: el clima cambia por isla y
+avanza en ciclos (M32). COMO: observacion de 30 min por isla con registro de
+transiciones (soleado nublado lluvia); determinismo por semilla M29
+documentado. UMBRAL: >= 2 estados de clima por isla y transiciones sin
+pop de particulas.
+
+**L108 visual de clima coherente por zona:** QUE: el clima se ve igual de
+coherente en cada zona (el sol de la playa no llueve con sol en el prado).
+COMO: captura simultanea de 2 zonas en el mismo tick del calendario.
+UMBRAL: 0 incoherencias de clima visible entre zonas contiguas.
+
+**L109 aviso climatico en diario (M55):** QUE: el diario anticipa el clima
+(M55) con la hora/estacion correcta. COMO: comparar la prediccion del
+diario contra el clima real del dia siguiente (semilla M29). UMBRAL: 100% de predicciones correctas (el determinismo lo garantiza).
+
+**L114 musica por acto (M41):** QUE: la musica acompana el acto/avance de la
+historia. COMO: auriculares A/B en momentos de acto + verificacion del
+reproductor (cue por acto). UMBRAL: cada acto tiene su tema y la transicion
+de acto cambia la musica sin reinicio brusco.
+
+**L116 transiciones sin cortes de audio:** QUE: la musica no corta seco en
+transiciones (viaje/menus/clima). COMO: recorridos que fuerzan las 6
+transiciones; decibelmetros o oido con atencion al corte. UMBRAL: 0 cortes
+secos >= 100 ms (siempre crossfade >= 100 ms o nota de diseno).
+
+**L117 ducking con dialogos (M41):** QUE: la musica baja su volumen cuando
+habla un NPC (ducking) y vuelve al cerrar. COMO: conversacion con musica
+activa; medidor de ganancia del bus musica. UMBRAL: duck >= -6 dB durante
+dialogo y retorno <= 1 s tras cerrarlo.
+
+**L122 SFX de hitos (brindis, sellos):** QUE: los hitos tienen su SFX de
+celebracion. COMO: tabla hito->SFX (del M43) reproducida una por una.
+UMBRAL: 100% de hitos con SFX asignado y 0 volumen > -3 dB de pico.
+
+**L124 volumen balanceado en las 6 zonas:** QUE: SFX/ambiente/USO del jugador
+se escuchan equilibrados en todas las zonas. COMO: pase de volumen por zona
+(VU en el mezclador M41, zona por zona) con el mismo fixture de acciones.
+UMBRAL: 0 zona con SFX > 6 dB sobre el resto o bajo -20 dB.
+
+**L125 voces en hitos (M44):** QUE: los hitos mayores tienen voz/grito
+locutado (M44). COMO: tabla hito mayor -> clip de voz; reproduccion en
+contexto. UMBRAL: 100% de hitos mayores con voz asignada y 0 clipes que
+pisen el dialogo (ducking aplicado).
+
+## Criterios de verificacion — BATERIA 4 (S54 — G-5.3-Flash-Agente, 2026-10-23)
+
+**L140 streaming de chunks sin picos (M63):** QUE: el streaming no genera
+hitches al cruzar chunks. COMO: recorridp de 5 min cruzando 10 bordes de
+chunk con frame-time monitorizado (qa headless o captura); pico = frame >
+100 ms. UMBRAL: 0 frames > 100 ms atribuibles a streaming (los frames pesados
+de GPU cuentan aparte en TC13/REPORTE-FPS).
+
+**L141 LOD/culling activo en todas las islas (M50):** QUE: la LOD y culling
+estan activos en TODAS las islas (no solo la raiz). COMO: visitar cada isla
+y verificar que los objetos lejanos desaparecen/migram a LOD (monitor Godot:
+draw calls bajan). UMBRAL: 100% de islas con culling operando (los draw
+calls bajan al alejarse >= 30%).
+
+**L155 tiempos de carga en presupuesto (M63):** QUE: la carga de la isla
+(viaje rapido/arranque) cabe en presupuesto. COMO: cronometrar 20 cargas
+(10 primeras + 10 con save pesado). UMBRAL: p95 <= 8 s (pantalla de carga
+siempre presente regla AGENTS 8; 0 cargas congeladas).
+
+**L149 anti-softlock con items clave (M66):** QUE: perder un item clave no
+softloquea. COMO: guardar TODO elitu de la mision, tirarlo/regalarlo, y
+tratar de terminar la mision; el sistema debe ofrecer re-obtencion (tienda,
+respawn, NPC repite tarea). UMBRAL: 100% de items de mision con via de
+re-obtencion y 0 estados sin salida.
+
+**L162 remapeo/subtitulos/modos de color (M57/M58):** QUE: los ajustes de
+accesibilidad funcionan end-to-end. COMO: cambiar cada ajuste en el menu y
+verificar el efecto EN JUEGO (tecla remapeada hace la accion; subtitulos
+aparecen; filtro daltonismo cambia la paleta). UMBRAL: 100% de ajustes con
+efecto visible inmediato (sin reinicio).
+
+**L163 reduce motion / flashing (M58):** QUE: el perfil reduce-motion
+elimina flashes y Shake. COMO: activar perfil y reproducir los 5 momentos
+con flash/shake canonico (impacto, fast travel, rayo, logro, muerte).
+UMBRAL: 0 flashes > 3 Hz y 0 screen-shake con el perfil activo.
+
+**L164 tamano de texto 150% (M58):** QUE: la UI a texto 150% sigue legible
+y no se corta. COMO: menuset/etc. capturas con escala 150% aplicada
+(ui_access_scale + fuente); revisar 6 pantallas canonicas. UMBRAL: 0 textos
+cortados y 0 solapados en las pantallas canonicas.
+
+**L170 6 idiomas sin claves rotas (M21/M55):** QUE: los 6 idiomas no tienen
+claves faltantes. COMO: script de escaneo de claves usadas vs traducidas
+por locale; log de claves rotas por idioma. UMBRAL: 0 claves rotas y 0
+lineas mezclando idiomas en la misma pantalla.
+
+**L171 subtitulos y textos UI por idioma (M55):** QUE: subtitulos y UI
+siguen el idioma elegido (no mezclado). COMO: cambiar idioma y recorrer
+dialogo+lados UI; captura each subsystema. UMBRAL: 100% de textos en el
+idioma elegido en la sesion completa.
+
+**L172 fechas/formatos por idioma (M29/M55):** QUE: las fechas y formatos
+_numericos_ del juego siguen el locale. COMO: jugar 2 dias en 2 idiomas y
+verificar fecha de diario/reloj/precio formateados. UMBRAL: 100% de
+formatos coherentes por locale (0 formatos mezclados).
+
+**L187 licencias de audio/musica (M41-M44):** QUE: TODOS los audios tienen
+licencia documentada. COMO: auditar el inventario audio (M41 directorio) vs
+registro de licencias (CC0/propio); sin registro = pendiente. UMBRAL: 100%
+de archivos con licencia registrada y 0 con claims conocidos.
+
+**L188 licencias de plugins (M60/engine):** QUE: los plugins/gd_extensions
+del proyecto tienen licencia verificada. COMO: auditar directorio addons y
+componentes externos vs LICENSE. UMBRAL: 100% de plugins con licencia
+identificada y compatible con uso comercial.
+
