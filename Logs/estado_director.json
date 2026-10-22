@@ -293,5 +293,12 @@
   "aplicacion": "El director nunca envia encargo mono-tarea si hay cola: minimo 2 items (tarea principal + extras etiquetados). El agente reporta combinado (seccion corta por item). Aplica a los 9 canales y a Futuros, incluido WB asincrono (2-3 de fondo por vuelta horaria)",
   "excepcion": "Si una tarea PRECISA el resultado de la tarea de OTRO agente, va sola o queda en espera de ese resultado - no se mete en el paquete multitarea",
   "criterio_final": "MENOS mensajes cortos y MAS tareas por mensaje, salvo dependencias entre agentes"
+ },
+ "decision_pendiente_flint_flota": {
+  "estado": "PRUEBA APLAZADA AL 2026-10-23 (fundador: quizas esta saturado hoy)",
+  "hecho_hoy": "Flint recursivo/flint-v1.0:free NO funciono en OpenCode - causa probable: tool-calls XML estilo GLM-4.7 no estandar + modelo recien nacido/free inestable",
+  "candidatos_alternativos_free": "poolside/laguna-s-2.1:free (coding agents), nvidia/nemotron-3-ultra-550b-a55b:free (razonador pesado), thinkingmachines/inkling:free (1M ctx), cohere/north-mini-code:free",
+  "plan_T1": "consigna agéntica simple al candidato ganador -> onboarding (canal+pool+prompt+ficha N.3) -> T1 calibracion picking documental con verificador externo -> recien ahi modulos",
+  "slot_destino": "reemplazaria DS-OC cuando termine verificador de paquete 8 (consolidando DeepSeek a UNA instancia DS-WB)"
  }
 }
