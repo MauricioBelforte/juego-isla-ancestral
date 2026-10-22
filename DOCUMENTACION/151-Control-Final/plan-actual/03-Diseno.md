@@ -389,3 +389,105 @@ del proyecto tienen licencia verificada. COMO: auditar directorio addons y
 componentes externos vs LICENSE. UMBRAL: 100% de plugins con licencia
 identificada y compatible con uso comercial.
 
+## Criterios de verificacion — BATERIA 5 (S54b — G-5.3-Flash-Agente, 2026-10-23)
+
+**L132 contraste de UI coherente (M58):** QUE: el texto de la UI cumple
+contraste minimo en todas las escenas. COMO: captura de las 6 pantallas
+canonicas + verificaciones de contraste (texto vs fondo) 4.5:1 minimo
+(wcag AA basico). UMBRAL: 100% de pantallas con contraste >= 4.5:1 en el
+texto principal.
+
+**L148 migracion de versiones sin perdida:** QUE: pasar de version n-1 a n
+del save MIGRA sin perder datos. COMO: qa headless: save v1 sintetico ->
+migracion -> comparar campos core (inventario/reloj/posicion) uno a uno.
+UMBRAL: 0 campos perdidos y 0 crashes en 3 pares de versiones (v1->v2,
+v2->v3 mock, rollback).
+
+**L157 performance en hardware minimo/recomendado:** QUE: el juego corre en
+2 perfiles (minimo: integrada 4 GB; recomendado: dedicada). COMO:
+REPORTE-FPS.md con las 2 configuraciones (TC13 extendido); benchmark por
+escena canonica. UMBRAL: >= 30 fps promedio en minimo y >= 60 fps en
+recomendado, sin streaming-pico > 100 ms.
+
+**L180 vigencia de contratos clave [legal/negocio]:** QUE: los contratos de
+distribucion/licencias estan vigentes al lanzamiento. COMO: checklist con
+fecha de vencimiento del contrato y 90 dias de aviso previo. DEPENDE: lista
+de contratos reales del editor (decision del fundador) — el criterio
+tecnico queda listo.
+
+**L181 copia de respaldo de contratos [S]:** QUE: los contratos firmados
+tienen copia de respaldo fuera del repo. COMO: bucket/config local cifrar
+(el fundador decide el lugar); checklist entra como item del cierre.
+UMBALNCE: 100% de contratos con copia verificada (checksum).
+
+**L195 nombre disponible en plataformas [S] — FLAG FUNDADOR:** la
+verificacion tecnica (API de stores) se puede hacer, pero la DECISION de
+nombre final del juego es del fundador. Flag sin flip.
+
+**L196 politica de uso de la marca [S] — FLAG FUNDADOR:** redactar la
+politica de marca para comunidad (fan-art/videos monetizados/mods) es
+decision editorial del fundador. Flag con esbozo para su revision.
+
+**L202 capturas finales cargadas [S]:** QUE: las capturas de la pagina de
+tienda estan cargadas y actualizadas con el build final. COMO: checklist
+de mkt: 6 capturas (mundo/player/construccion/foto/misiones/credits) del
+build final vs version previa. UMBRAL: 6/6 con build final y 0 capturas
+antiguas con arte descontinuado.
+
+**L203 requisitos correctos [S]:** QUE: la pagina lista requisitos MIN/REC
+que matchean el REPORTE-FPS (L157). COMO: diff requisitos publicados vs
+medicion L157. UMBRAL: 0 discrepancias entre lo publicado y lo medido.
+
+**L204 enlaces de soporte en la pagina [S]:** QUE: los enlaces de soporte
+(discord/email/FAQ/canales) funcionan. COMO: curl/click en cada link al
+lanzar. UMBRAL: 100% de enlaces responden 200 y apuntan al contenido
+correcto.
+
+**L211 FAQ con bugs reales (M143):** QUE: la FAQ documenta los bugs/
+limitaciones conocidos del lanzamiento. COMO: FAQ aggiornada con la lista
+final del 11-BUGS.md (los conocidos-no-bloqueantes). UMBRAL: 100% de bugs
+conocidos users-facing listados con workaround.
+
+**L212 triaje de soporte en produccion [S]:** QUE: hay proceso definido
+para los tickets del launch window. COMO: 1 pagina de flujo (canal ->
+replico -> clasifico [bug/pregunta/crash] -> escalado a 11-BUGS/M143).
+UMBRAL: flujo documentado y probado con 3 tickets mock.
+
+**L217 actualizacion in-place sin perdida de saves [M]:** QUE: actualizar
+el juego NO borra los saves. COMO: instalar version N-1, jugar (crear
+saves), actualizar a N, verificar los saves sobreviven (conteo + campos
+core). UMBRAL: 100% de saves intactos y 0 resets de perfil M58.
+
+**L218 notas de parche listas (plantilla) [S]:** QUE: existe plantilla de
+notas de parche rellenable. COMO: plantilla .md en docs/vslice/ con
+secciones corregido/cambio-conocido/saltando-version. UMBRAL: plantilla
+versionada y 1 ejemplo relleno con datos reales del slice.
+
+**L219 rollback disponible si falla un parche [M]:** QUE: hay rollback
+tecnico si el parche rompe. COMO: guardar el build anterior + script de
+re-instalacion; probar rollback en maquina de prueba. UMBRAL: rollback
+funcional documentado (1 prueba) + decide el fundador si hay rollback
+automatico (infra).
+
+**L224 cola de hotfix 2.0.x documentada (M143) [S]:** QUE: el canal de
+hotfix tiene criterio de entrada/salida. COMO: el flujo de M143 define que
+califica (crash/softlock/economico) y que no (cosmetico) — documentado en
+el 03 del hotfix pipeline. UMBRAL: criterio documentado + 1 ejemplo real
+por clasificacion.
+
+**L236 log de cierre del modulo en Logs/[S]:** QUE: el hito tiene su log de
+cierre en Logs/ (mismo protocolo sec 6). UMBRAL: log creado con numeracion
+del pool y firmas multiples (ya definido en M138 S38 L211/212 — mismo
+protocolo).
+
+## Decisiones pendientes del FUNDADOR (flag sin flip — L195/L196/L225/L226/L227)
+
+- L195 nombre final del juego en stores (verificacion tecnica lista).
+- L196 politica de uso de marca para comunidad (esbozo pendiente de
+  revision editorial).
+- L225 lista de mejoras de comunidad priorizada — 5-FUTURAS-MEJORAS es el
+  anotador del USUARIO: solo directivas del usuario, no propuestas de
+  agentes.
+- L226 dueño por funcion del post-lanzamiento ( staffing).
+- L227 fecha de revision del plan (M144) — la agenda la fija el fundador.
+

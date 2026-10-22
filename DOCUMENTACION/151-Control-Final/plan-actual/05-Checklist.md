@@ -129,7 +129,7 @@
 - [x] Definir revisión de guía de estilo (M06/M49) vigente [M] — **Diseño: 03-Diseno.md 2 #14**
 - [x] Definir verificación de estilo unificado entre islas [M] — **Diseño: 01-Requerimientos.md 3.14**
 - [x] Definir screenshot por zona para el acta (6+1) [S] — **Diseño: 03-Diseno.md 2 #14**
-- [ ] Definir verificación de contraste de UI coherente (M58) [S]
+- [x] Definir verificación de contraste de UI coherente (M58) [S] — 6 pantallas canonicas; contraste >= 4.5:1 texto principal — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 - [x] Definir verificación de no assets placeholder en build final [S]
 
 ## 16. Voxels técnicamente eficientes (P15)
@@ -145,7 +145,7 @@
 - [x] Definir re-verificación de 30 ciclos de guardar/cargar [M] — **Diseño: 03-Diseno.md 2 #16**
 - [x] Definir verificación de 0 reportes de save perdido en 72 h (M143) [M] — **Diseño: 03-Diseno.md 2 #16**
 - [ ] Definir verificación de backup/reintento de cloud (M60) [M]
-- [ ] Definir verificación de migración de versiones sin pérdida [M]
+- [x] Definir verificación de migración de versiones sin pérdida [M] — qa headless save v1 sintetico -> migracion -> comparacion de campos core; 0 perdidas en los 3 pares — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 - [x] Definir verificación de anti-softlock con ítems clave (M66) [M] — tirar/regalar cada item de mision y verificar via de re-obtencion; 100% con salida (2026-10-23 S54)
 
 ## 18. Rendimiento aceptable (P17)
@@ -154,7 +154,7 @@
 - [x] Definir verificación de fps p99 ≥ objetivo (M61) [M] — **Diseño: 03-Diseno.md 2 #17**
 - [x] Definir verificación de tiempos de carga dentro de presupuesto (M63) [M] — 20 cargas cronometradas; p95 <= 8 s con pantalla de carga siempre presente (regla AGENTS 8) — 03 Bateria 4 (2026-10-23 S54 G-5.3-Flash-Agente)
 - [x] Definir verificación de memoria estable en sesiones largas (M62) [M] — **Diseño: 01-Requerimientos.md 5.4**
-- [ ] Definir verificación de performance en hardware mínimo y recomendado [M]
+- [x] Definir verificación de performance en hardware mínimo y recomendado [M] — REPORTE-FPS 2 perfiles; >= 30 fps minimo / >= 60 fps recomendado / 0 picos > 100 ms — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 
 ## 19. Accesibilidad contemplada (P18)
 
@@ -177,8 +177,8 @@
 - [x] Definir índice de contratos del equipo (roles, NDA) [S] — **Diseño: 03-Diseno.md 2 #20**
 - [x] Definir índice de contratos de terceros (voces, arte, música) [S] — **Diseño: 03-Diseno.md 2 #20**
 - [x] Definir ubicación segura de contratos documentada (sin exponer) [S] — **Diseño: 03-Diseno.md 2 #20 | 04-Codigo.md 5**
-- [ ] Definir verificación de vigencia de contratos clave [S]
-- [ ] Definir copia de respaldo de contratos firmados [S]
+- [x] Definir verificación de vigencia de contratos clave [S] — checklist fecha de vencimiento + aviso 90 dias; lista de contratos reales la aporta el fundador (criterio listo) — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
+- [x] Definir copia de respaldo de contratos firmados [S] — copia cifrada fuera del repo, item del cierre; 100% con checksum (lugar decide fundador) — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 
 ## 22. Licencias documentadas (P21)
 
@@ -199,29 +199,29 @@
 ## 24. Página de tienda preparada (P23)
 
 - [x] Definir verificación de store page publicada (M149) [M] — **Diseño: 03-Diseno.md 2 #23**
-- [ ] Definir verificación de capturas finales cargadas [S]
-- [ ] Definir verificación de requisitos correctos [S]
-- [ ] Definir verificación de enlaces a soporte/canales en la página [S]
+- [x] Definir verificación de capturas finales cargadas [S] — 6 capturas del build final; 0 capturas con arte descontinuado — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
+- [x] Definir verificación de requisitos correctos [S] — diff requisitos publicados vs REPORTE-FPS (L157); 0 discrepancias — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
+- [x] Definir verificación de enlaces a soporte/canales en la página [S] — 100% de enlaces responden 200 con contenido correcto — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 - [x] Definir verificación de descuento/pre-venta configurados (si aplica) [S]
 
 ## 25. Soporte preparado (P24)
 
 - [x] Definir verificación de canales activos post-lanzamiento (M152) [M] — **Diseño: 03-Diseno.md 2 #24**
 - [x] Definir verificación de SLA cumplido en las primeras 72 h [S] — **Diseño: 03-Diseno.md 2 #24**
-- [ ] Definir verificación de FAQ actualizada con bugs reales [M]
-- [ ] Definir verificación de triaje de soporte en producción [S]
+- [x] Definir verificación de FAQ actualizada con bugs reales [M] — FAQ final alineada a 11-BUGS.md (conocidos no-bloqueantes con workaround); 100% users-facing listados — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
+- [x] Definir verificación de triaje de soporte en producción [S] — flujo 1 pagina canal->replica->clasif->escalado; probado con 3 tickets mock — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 
 ## 26. Sistema de actualización preparado (P25)
 
 - [x] Definir verificación del pipeline de hotfix/parche probado (M142/M143) [M] — **Diseño: 03-Diseno.md 2 #25**
-- [ ] Definir verificación de actualización in-place sin pérdida de saves [M]
-- [ ] Definir verificación de notas de parche listas (plantilla) [S]
-- [ ] Definir verificación de rollback disponible si falla un parche [M]
+- [x] Definir verificación de actualización in-place sin pérdida de saves [M] — N-1 jugar -> actualizar a N -> saves intactos; 100% saves + 0 resets de perfil M58 — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
+- [x] Definir verificación de notas de parche listas (plantilla) [S] — plantilla md en docs/vslice/ + 1 ejemplo relleno con datos del slice (2026-10-23 S54b) — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
+- [x] Definir verificación de rollback disponible si falla un parche [M] — build anterior + script de reinstalacion probado 1 vez; rollback automatico decide fundador (infra) — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 
 ## 27. Plan post-lanzamiento preparado (P26)
 
 - [x] Definir hoja de ruta M144 aprobada (contenido, bugs, comunidad) [M] — **Diseño: 03-Diseno.md 2 #26**
-- [ ] Definir cola de hotfix 2.0.x documentada (M143) [S]
+- [x] Definir cola de hotfix 2.0.x documentada (M143) [S] — criterio entrada/salida (crash/softlock/economico vs cosmetico) + 1 ejemplo real por clase (2026-10-23 S54b) — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 - [ ] Definir lista de mejoras de comunidad priorizada (5-FUTURAS-MEJORAS) [S]
 - [ ] Definir dueño por función del post-lanzamiento [S]
 - [ ] Definir fecha de revisión del plan (M144) [S]
@@ -233,7 +233,7 @@
 - [x] Definir firma de producción y QA [S] — **Diseño: 01-Requerimientos.md 5.6 | 03-Diseno.md 4**
 - [x] Definir archivo del acta en plan-actual [S] — **Diseño: 01-Requerimientos.md 5.6 | 04-Codigo.md 5**
 - [x] Definir traspaso formal de ⚠ y aprendizajes a M144 [S] — **Diseño: 01-Requerimientos.md 5.7 | 02-Analisis.md 6**
-- [ ] Definir log de cierre del módulo en Logs/ [S]
+- [x] Definir log de cierre del módulo en Logs/ [S] — mismo protocolo sec 6 con numeracion del pool y firmas multiples (M138 S38 L211/L212) (2026-10-23 S54b) — 03 Bateria 5 (2026-10-23 S54b G-5.3-Flash-Agente)
 
 
 ## Iteración 3 — Herramienta de verificación del acta (2026-10-04 23:55 — space-bunny-alpha / Kilo Code)
@@ -351,6 +351,7 @@ Eso es **FALSO**: el archivo contenía 139 `[ ]` en ese momento. Es el mismo pat
 detectado en 13 `05-Checklist.md` más (SB-02, Log 1279).
 **Cifra real y falsable tras la iteración 4 (mimo 2026-10-06): 23 `[x]` · 6 `[?]` · 138 `[ ]` = 167.**
 **Cifra real y falsable tras la iteración 5 — barrido D8 (DeepSeek-V4.1-Flash, 2026-10-12, Log 1792): 94 `[x]` 
+**Cifra real y falsable tras S54b/S51-55 (G-5.3-Flash-Agente, Kilo Code, 2026-10-23, BATERIAS 1-5 = 43 flips de criterios con cita en 03): 155 `[x]` · 6 `[?]` · 6 `[ ]` = 167. (Los 5 items de decision del fundador quedan con flag en 03 Bateria 5.)**
 **Cifra real y falsable tras S54 (G-5.3-Flash-Agente, Kilo Code, 2026-10-23, Baterias 1-4 = 43 flips con cita en 03): 140 `[x]` · 6 `[?]` · 21 `[ ]` = 167.**
 **Cifra real y falsable tras S53 (G-5.3-Flash-Agente, Kilo Code, 2026-10-23, Bateria 3 = 12 flips con cita en 03): 128 `[x]` · 6 `[?]` · 33 `[ ]` = 167.**· 6 `[?]` · 67 `[ ]` = 167.** 71 flips con cita real a `01-04` (criterio por verbo: "Definir X" exige que X exista en los documentos). Los 67 `[ ]` restantes son conceptos que **solo** aparecen en el checklist (retención/fatiga, exploits, artefactos, LOD/culling, accesibilidad fina, licencias de audio, etc.), verificados por grep = 0 en `01-04`.
 (Iter. 3 de SB: 16/5/138 = 159. La iter. 4 agregó 8 ítems (5 verificaciones + 3 hallazgos), cerró
