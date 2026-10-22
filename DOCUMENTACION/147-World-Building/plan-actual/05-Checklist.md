@@ -22,49 +22,63 @@
 
 - [x] Definir índice de la biblia (`00-indice.md`) con reglas editoriales [S]
 - [x] Definir línea de tiempo canónica (`01-linea-de-tiempo.md`) [M]
-- [ ] Definir reglas de formato de datos `## DATA { }` [M]
+- [x] Definir reglas de formato de datos `## DATA { }` [M]
+  · evidencia: 03-Diseno.md secc. Reglas de formato y origen de Aurora (cola total, Reflection-Beam-1.0, T82, 2026-10-22)
 - [x] Definir `world_data.json` generado desde los MD [M]
 - [x] Definir `world_bible/CHANGELOG.md` para cambios de canon [S]
 
 ## B. Historia de Aurora (RF2)
 
-- [ ] Definir origen de Aurora y su nombre previo [M]
+- [x] Definir origen de Aurora y su nombre previo [M]
+  · evidencia: 03-Diseno.md secc. Reglas de formato y origen de Aurora (cola total, Reflection-Beam-1.0, T82, 2026-10-22)
 - [x] Definir relación de Aurora con los Arquitectos del Alba [M]
 - [x] Definir relación de Aurora con los Primeros Jardineros [M]
 - [x] Definir la "voz" de Aurora (sensación al recorrerla: hogar/misterio) [M]
-- [ ] Definir qué sabe el jugador nuevo de Aurora (capa 0-1) [M]
+- [x] Definir qué sabe el jugador nuevo de Aurora (capa 0-1) [M]
+  · evidencia: 03-Diseno.md secc. Reglas de formato y origen de Aurora (cola total, Reflection-Beam-1.0, T82, 2026-10-22)
 
 ## C. Historia de las Islas (RF3)
 
 - [x] Definir historia de la Isla Coral (arrecife, Gran Vapor) [M]
-- [ ] Definir historia de la Isla Verde (cultivos, jardineros) [M]
-- [ ] Definir historia de la Isla de las Cenizas (catástrofe) [M]
+- [x] Definir historia de la Isla Verde (cultivos, jardineros) [M]
+  · evidencia: 03-Diseno.md secc. Reglas de formato y origen de Aurora (cola total, Reflection-Beam-1.0, T82, 2026-10-22)
+- [x] Definir historia de la Isla de las Cenizas (catástrofe) [M]
+  · evidencia: 03-Diseno.md secc. Historia de las islas y Arquitectos (cola total, Reflection-Beam-1.0, T84, 2026-10-22)
 - [x] Definir historia de las Islas del Cielo (misterio, cielo) [C]
 - [x] Definir relación de cada isla con la Resonancia [C]
 
 ## D. Arquitectos del Alba (RF4)
 
-- [ ] Definir origen de los Arquitectos [M]
-- [ ] Definir tecnología que construyó templos y Sellos [M]
+- [x] Definir origen de los Arquitectos [M]
+  · evidencia: 03-Diseno.md secc. Historia de las islas y Arquitectos (cola total, Reflection-Beam-1.0, T84, 2026-10-22)
+- [x] Definir tecnología que construyó templos y Sellos [M]
+  · evidencia: 03-Diseno.md secc. Historia de las islas y Arquitectos (cola total, Reflection-Beam-1.0, T84, 2026-10-22)
 - [x] Definir su sistema de 1 símbolo por Sello [M]
 - [x] Definir su desaparición (relación con la Gran Quietud) [M]
-- [ ] Definir legado jugable: templos (M24/M26), drones, herramientas únicas (M13) [C]
+- [x] Definir legado jugable: templos (M24/M26), drones, herramientas únicas (M13) [C]
+  · evidencia: 03-Diseno.md secc. Legado y conexiones (cola total, Reflection-Beam-1.0, T86, 2026-10-22)
 
 ## E. Primeros Jardineros (RF5)
 
-- [ ] Definir origen de los Jardineros [M]
+- [x] Definir origen de los Jardineros [M]
+  · evidencia: 03-Diseno.md secc. Historia de las islas y Arquitectos (cola total, Reflection-Beam-1.0, T84, 2026-10-22)
 - [x] Definir su relación con cultivos y bosques (M33/M50) [M]
 - [ ] Definir el "idioma del viento" (pistas ambientales, M148) [C]
-- [ ] Definir su dispersión (no murieron: se dispersaron) [M]
-- [ ] Definir legado jugable: semillas sagradas, festivales de siembra [M]
+- [x] Definir su dispersión (no murieron: se dispersaron) [M]
+  · evidencia: 03-Diseno.md secc. Legado y conexiones (cola total, Reflection-Beam-1.0, T86, 2026-10-22)
+- [x] Definir legado jugable: semillas sagradas, festivales de siembra [M]
+  · evidencia: 03-Diseno.md secc. Legado jugable y conexiones (cola total, Reflection-Beam-1.0, T88, 2026-10-22)
 
 ## F. La Resonancia (RF6)
 
 - [x] Definir qué es la Resonancia (fenómeno) [C]
 - [x] Definir reglas de la Resonancia (qué puede y qué no) [C]
-- [ ] Definir conexión con el terreno voxel y sismos (M09/M12) [M]
-- [ ] Definir conexión con las herramientas únicas (M13/M26) [M]
-- [ ] Definir conexión con los Sellos (M153) [M]
+- [x] Definir conexión con el terreno voxel y sismos (M09/M12) [M]
+  · evidencia: 03-Diseno.md secc. Legado y conexiones (cola total, Reflection-Beam-1.0, T86, 2026-10-22)
+- [x] Definir conexión con las herramientas únicas (M13/M26) [M]
+  · evidencia: 03-Diseno.md secc. Legado jugable y conexiones (cola total, Reflection-Beam-1.0, T88, 2026-10-22)
+- [x] Definir conexión con los Sellos (M153) [M]
+  · evidencia: 03-Diseno.md secc. Legado jugable y conexiones (cola total, Reflection-Beam-1.0, T88, 2026-10-22)
 
 ## G. Elysia (RF7)
 

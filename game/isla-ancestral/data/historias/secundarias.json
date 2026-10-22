@@ -193,6 +193,65 @@
 			"consecuencia": { "molino_funcionando": true },
 			"oculta": false,
 			"postgame": false
-		}
-	]
+		},
+		{
+			"id": "cadena-biblioteca-quemada",
+			"titulo": "La Biblioteca Quemada",
+			"contexto": "Sofia encontro entre las cenizas un tomo que sobrevivio al incendio y quiere saber por que se salvo solo ese",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "sofia_buho" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "biblioteca_quemada" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "tomo_carbonizado" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "cenizas-legibles" }
+			],
+			"recompensa": { "diario": "capitulo-biblioteca-quemada", "cosmetico": "lampara de lectura" },
+			"consecuencia": { "biblioteca_quemada_rescatada": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-observatorio",
+			"titulo": "El Observatorio Ciego",
+			"contexto": "Vera cuida el faro, pero desde que fallo la lente del observatorio ya no puede anunciar las tormentas a los pescadores",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "vera_ardilla" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "observatorio" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "ancient_crystal" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "alineacion-estelar" }
+			],
+			"recompensa": { "diario": "capitulo-observatorio", "cosmetico": "catalejo de bolsillo" },
+			"consecuencia": { "observatorio_alineado": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-estacion",
+			"titulo": "La Estacion Silenciosa",
+			"contexto": "Ramon encontro la estacion cerrada con sus engranajes oxidados y quiere devolverle el silbato de la vendimia",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "ramon_tejon" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "estacion" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "iron_ore" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "engranajes-oxidados" }
+			],
+			"recompensa": { "diario": "capitulo-estacion", "cosmetico": "gorra de maquinista" },
+			"consecuencia": { "estacion_reparada": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-puente",
+			"titulo": "El Puente de Piedra",
+			"contexto": "Luna quiere cruzar el puente derrumbado para visitar a su abuela cada domingo y suena con repararlo con sus manos de artesana",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "luna_zorra" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "puente" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "piedra_caliza" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "arco-de-piedra" }
+			],
+			"recompensa": { "diario": "capitulo-puente", "cosmetico": "bufanda de viaje" },
+			"consecuencia": { "puente_cruzable": true },
+			"oculta": false,
+			"postgame": false
+		}	]
 }

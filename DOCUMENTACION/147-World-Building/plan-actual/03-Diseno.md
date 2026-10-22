@@ -154,3 +154,72 @@ Jugador obtiene Sello Brisa
 | `WORLD_REFERENCIA_ROTA` | id roto | M103 (logging) |
 | `WORLD_CAPA_EXPUESTA` | capa y origen | M104/M105 (debug) |
 | `WORLD_VALIDATE_FALLIDO` | lista de errores | M118 (CI) |
+## Reglas de formato y origen de Aurora (cola total M147 batch)
+
+### Reglas de formato de datos ## DATA { }
+- Formato estandar para datos de world-building en markdown.
+- Seccion ## DATA { } con campos estructurados.
+
+### Origen de Aurora y su nombre previo
+- Aurora: nombre actual de la isla principal.
+- Nombre previo: Isla del Alba (historico).
+
+### Capa 0-1: lo que sabe el jugador nuevo
+- Capa 0: solo el nombre y ubicacion.
+- Capa 1: rumores basicos de los NPC.
+
+### Historia de la Isla Verde
+- Isla de cultivos y jardineros.
+- Bioma: prado fértil con granjas.
+## Historia de las islas y Arquitectos (cola total M147 batch 2)
+
+### Historia de la Isla de las Cenizas (catastrofe)
+- Isla de cenizas: catastrofe volcánica que destruyo la civilización.
+- Legado: ruinas, cenizas, ecos de la tragedia.
+
+### Origen de los Arquitectos
+- Los Arquitectos: civilización avanzada que construyó templos y Sellos.
+- Tecnología: mecanismos de piedra, canales de agua, sellos mágicos.
+
+### Legado jugable de los Arquitectos
+- Templos (M24/M26), drones, herramientas ancestrales.
+- El jugador descubre su legado explorando.
+
+### Origen de los Jardineros
+- Los Jardineros: civilización pacífica de la Isla Verde.
+- Se dispersaron, no murieron.
+## Legado y conexiones (cola total M147 batch 4)
+
+### Legado jugable: templos (M24/M26), drones, herramientas
+- Templos como dungeons explorables.
+- Drones de los Arquitectos (reliquias).
+- Herramientas ancestrales como equipo.
+
+### Idioma del viento (M148)
+- Pistas ambientales: sonido del viento indica direccion.
+- Sistema de pistas no verbales.
+
+### Dispersion de los Jardineros
+- No murieron: se dispersaron por el mundo.
+- Pistas de su presencia en islas remotas.
+
+### Conexion con el terreno voxel y sismos (M09/M12)
+- Sismos como evento del terreno voxel.
+- Afecta la generacion del terreno.
+## Legado jugable y conexiones (cola total M147 batch 5)
+
+### Legado jugable: semillas sagradas, festivales de siembra
+- Semillas sagradas como coleccionables del postgame.
+- Festivales de siembra como evento recurrente.
+
+### Conexion con las herramientas unicas (M13/M26)
+- Las herramientas unicas se vinculan con la historia de los Arquitectos.
+- Desbloqueo progresivo.
+
+### Conexion con los Sellos (M153)
+- Los Sellos son artefactos de los Arquitectos.
+- Vinculo con la narrativa del final.
+
+### Idioma del viento (M148)
+- Pistas ambientales: sonido del viento indica direccion.
+- Sistema de pistas no verbales.
