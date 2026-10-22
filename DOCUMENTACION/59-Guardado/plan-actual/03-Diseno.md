@@ -154,3 +154,33 @@ save_writer.write_atomic() falla por disco lleno
 ### Ruinas (M25) y templos (M26)
 - Guardar: estado de cada ruina/templo (visitado, puzzle resuelto, cofres abiertos).
 - Formato: map de id -> estado (enum: no_visitado, visitado, completado).
+## Guardado de mundo extendido (P-30 L4-P5/P6/P7/P8)
+
+### Mostrar hora/fecha del ultimo guardado por slot
+- UI: timestamp formateado (dd/mm/yyyy HH:MM) en la tarjeta de cada slot.
+- Fuente: metadata del archivo de guardado (mtime o campo guardado_en).
+
+### Guardar modificaciones del mundo (tala M50, minado M35)
+- Guardar: lista de bloques modificados (posicion + nuevo tipo).
+- Formato: array de {pos: [x,y,z], tipo: int, timestamp}.
+
+### Guardar semillas y cultivos en proceso (M33)
+- Guardar: estado de cada cultivo (semilla, etapa de crecimiento, agua, fertilizante).
+- Formato: map de posicion -> {semilla_id, etapa, agua, fertilizante, timestamp}.
+
+### Guardar trampas y redes de pesca (M34)
+- Guardar: estado de cada trampa/red (activa, capturas, tiempo restante).
+- Formato: array de {pos, tipo, activa, capturas, tiempo_restante}.
+## Guardado de construcciones y decoracion (P-30 L4-P9/P10/P11/P12)
+
+### Guardar casas/edificios
+- Guardar: fase de construccion, mejoras aplicadas, materiales usados.
+- Formato: map de building_id -> {fase, mejoras[], materiales_usados}.
+
+### Guardar decoracion, muebles y cofres
+- Guardar: items colocados (posicion, rotacion, item_id) + contenido de cofres.
+- Formato: array de {pos, rot, item_id, cofre_contenido[]}.
+
+### Guardar estado de puertas y ventanas
+- Guardar: estado abierto/cerrado/bloqueado por puerta/ventana.
+- Formato: map de door_id -> {estado, bloqueada}.

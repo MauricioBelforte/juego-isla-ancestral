@@ -61,8 +61,8 @@
 - [x] Definir water_need (1 o 2) por cultivo [S]
 - [x] Definir yields y yield_seeds como diccionarios de ítems [S] — crop_definition.gd yield_item_id/yield_amount_min/max + yield_seed_id/yield_seed_amount; calcular_rendimiento() los usa
 - [x] Definir flags is_tree, is_flower, is_ancestral, decorative_only [S] — crop_definition.gd @export vars (is_tree, is_flower, is_ancestral, decorative_only, fertilizer_bonus)
-- [x] Crear catálogo base de 16 .tres en res://data/farm/crops [S]
-- [x] Implementar CropCatalog.load_all con validación de IDs duplicados [M]
+- [?] Crear catálogo base de 16 .tres en res://data/farm/crops [S]
+- [?] Implementar CropCatalog.load_all con validación de IDs duplicados [M]
 - [x] Implementar is_season_allowed y get_stage_visual_key [S]
 
 ## D. CropTile y estados (9)

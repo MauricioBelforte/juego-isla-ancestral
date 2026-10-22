@@ -383,6 +383,24 @@ Auditoría estática report-only del bloque L (strings con expresiones/formato).
 
 **Síntesis bloque L:** sin defectos de traducción bloqueantes. Las deudas son de **adopción** (formateo numérico por idioma, T67) y **condicionales** (emotes MP futuro, T70); los contenidos de comunidad (T68) quedan fuera del runtime de M87 por la frontera; los wrap (T66/T69) pasan el proxy estático con verificación de píxeles pendiente Godot.
 
+#### 2.4.11 QA del spillover de la interfaz — bloque N (TANDA 26, 2026-10-22 — tareas 75/76/77/78)
+
+Auditoría estática report-only del bloque N (spillover de UI: tooltips, títulos, botones). Medida en disco 2026-10-22:
+
+**T75 — Tooltips por idioma: DEUDA HALLADA (8 tooltips + 5 textos de botón literales ES).** La vía correcta existe y funciona: metadato `tooltip_text_key` + `RetraductorUI` (`retraductor_ui.gd` L28, `PROPS_TEXTO` incluye `tooltip_text`) + `TooltipService.show_tooltip_key` (`ui_manager.gd` L94-106, Log 1118) — adoptada en producción por `diary_layer.gd` L154/L161/L371 (`DIARY.PROGRESO_CAT` ×3). Pero 2 capas usan literales ES jugador-visibles:
+- `full_map_layer.gd` (M68): L75 `center_btn.text = "Jugador"` + L76 `tooltip_text = "Volver al jugador (map_center_player)"`.
+- `credits_layer.gd` (M129): tooltips L152 «Tiempo de visualización», L294 «Detener o reanudar el desplazamiento automático», L297 «Tamaño de letra (S / M / L)», L300 «Velocidad del desplazamiento», L303 «Modo de alto contraste», L309 «Cambiar idioma de los créditos», L311 «Cerrar créditos (ESC)»; y botones L296 «Tamaño: %s», L299 «Velocidad: %s», L302 «Contraste: %s», L308 «Idioma: %s». El layer SÍ tiene el helper `_tl(clave, defecto)` y lo usa en L100/L140/L293 — el patrón está aplicado a medias.
+- Deuda menor: `inventory_layer.gd` L205 `tooltip = item_id` (el tooltip del slot muestra el ID técnico, no el nombre canónico).
+**DEUDA owners M68/M129/M06:** migrar los 13 literales a `text_key`/`tooltip_text_key` (claves nuevas con consumo en el mismo commit, regla anti-huérfanas §2.4.2).
+
+**T76 — Títulos de menú por idioma: CORRECTO.** `pause_layer.gd`: título `_t("SETTINGS.PAUSA")` L60 + botones `SETTINGS.CONTINUAR/AJUSTES/GUARDAR/BORRAR_SLOT/SALIR` L72-81 (todos por clave). `settings_audio_layer.gd`: `_t("SETTINGS.AUDIO_TITULO")` L102 + `SETTINGS.MAESTRO/MUSICA/EFECTOS` L109-111 + `CLAVES_RANGO` (SETTINGS.RANGO_*) L44-48. `inventory_layer.gd`: `_t("SETTINGS.INVENTARIO")` L89. `credits_layer.gd`: `_tl("SETTINGS.CREDITOS", "Créditos")` L100. `confirm_popup.gd`: título y mensaje por clave (`configurar(title_key, message_key)` L69-71). Única deuda de título: `menus_layer.gd` L107/L124 «Controles: » + preset técnico — **ya documentada en §2.4.4 (tarea 72)** con propuesta llave-en-mano pendiente del owner M53/M89.
+
+**T77 — Botones de diálogo (Sí/No/Espera): CORRECTO.** `confirm_popup.gd`: `_t("SETTINGS.CONFIRMAR")` / `_t("SETTINGS.CANCELAR")` en ambas variantes (L72-73/L84-85). `dialog_layer.gd`: `SETTINGS.ELEGIR_OPCION` L294 / `SETTINGS.ADVANCED` L296. `pause_layer.gd`: botones por clave. Los literales «Sí»/«No» hallados están SOLO en generators legales dev-side (`audio_credits_generator.gd` L109, `asset_attribution_generator.gd` L51-54 — generan archivos de atribución, no UI runtime → no jugador-visible). «Espera»: 0 ocurrencias en UI de producción.
+
+**T78 — Fondos genéricos vs texto (contraste D102): LÍMITE HONESTO.** Requiere captura en Godot en ejecución (visión) — no disponible en sesión headless; pendiente para sesión con Godot (igual que Tandas 11/25). El tema base (`theme_ux.gd` `_setup_button_styles` L290-298: `COLOR_BTN_ELEVADO` + borde `COLOR_ACCENT_OCRE`) existe y es centralizado — la verificación de contraste real es visual.
+
+**HALLAZGO CROSS-BLOQUE (M159/M39/M53) — resolución de nombres de ítem inconsistente:** `inventory_layer.gd` `_nombre_item` L249-254 SÍ consume el `.tres nombre` canónico (ES, data-driven) con fallback ID maquillado; pero `shop_ui.gd` `_nombre_item` L342-345 y `hotbar_widget.gd` `_friendly_name` L164-165 muestran SOLO el item_id maquillado (`item_id.replace("_", " ")`). El jugador ve nombres DIFERENTES del mismo ítem según la superficie (inventario: «Pergamino: Rec. Tela de Lino»; tienda/hotbar: «Pergamino rec tela lino»). **DEUDA owners M39/M53/M159:** unificar la resolución de nombres (canónico en todas las superficies) como prerequisito del i18n data-driven de M159. Adicional: `CATEGORY_NAMES` (inventory_layer L16-22) = 16 categorías de inventario ES literales jugador-visibles (tabs) — data-driven pendiente de claves i18n (owner M06/M14).
+
 ### 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).

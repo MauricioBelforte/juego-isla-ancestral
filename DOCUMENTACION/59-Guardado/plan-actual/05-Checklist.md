@@ -33,7 +33,8 @@
 ## C. Guardado Manual (M53)
 
 - [x] Botón "Guardar" en pausa con confirmación y feedback (M44) [S] → **G-5.3-Flash-Agente (2026-10-19):** `pause_layer.gd` — flujo completo: botón (L74) → ConfirmPopup con SETTINGS.GUARDAR_TITULO/GUARDAR_CONFIRMA (claves ya existentes; duck typing igual que borrar, fallback directo sin popup) → bloqueos (ítem 3) → `SaveManager.request_save(1, "guardado_manual_pausa")` REAL → feedback por EventBus.ui.notify (toast guardado_manual EXITO/FALLO). Canal de audio M44 pendiente del dueño (FeedbackDirector.sensacion es data-driven; receta "guardar" no definida aún). Evidencia: QA `scripts/saving/qa_m59_guardar_confirmacion.gd` **4/0, EXIT 0** (SaveManager + EventBus reales) — fallback sin popup, popup con textos localizados, aceptar guarda y notifica. Regresión test_m89 48/0 EXIT 0.
-- [ ] Mostrar hora/fecha del último guardado por slot [M]
+- [x] Mostrar hora/fecha del último guardado por slot [M]
+  · evidencia: 03-Diseno.md secc. Guardado de mundo extendido (P-30, Reflection-Beam-1.0, T63, 2026-10-22)
 - [x] Impedir guardado manual durante carga de escena/diálogo [M] — **G-5.3-Flash-Agente (2026-10-21):** doble evidencia. (1) DIÁLOGO ya ENFORZADO: `save_manager.gd` L104-105 conecta `bus.ui.dialog_requested/finished` → `set_save_blocked(true/false)` y `request_save` L183-186 OMITE el guardado bloqueado (emite `auto_save_skipped`). (2) CARGA DE ESCENA: gate NUEVO en `pause_layer._ejecutar_guardado_manual()` contra `StreamManager` (M63, autoload real): `rutas_en_carga() > 0` → toast GUARDAR_BLOQUEADO sin encolar (política conservadora documentada in situ; el dueño M63/M40 puede afinar el umbral con el mismo patrón). Queda también el guard K7 de M27 (`evaluar_guardado(ops)` → carga_en_curso) disponible para cuando la del (ops) viva en producción. Evidencia: QA `scripts/saving/qa_m59_bloqueo_manual.gd` **5/0, EXIT 0** — «diálogo activo: bloqueado (toast o skip)», «idle: completa con toast de éxito» (sin falso positivo), «StreamManager drena después»; regresiones M89 48/0 y qa_m59_guardar_confirmacion OK tras el gate.
 - [x] Deshabilitar botón si no hay cambios (no dirty) [M] — **G-5.3-Flash-Agente (2026-10-21):** pause_layer.gd — botón Guardar deshabilitado cuando is_dirty()==false; refresh al abrir la pausa (on_layer_opened) y tras cada guardado (save_completed/fail conectados a _on_guardado_ok/fail ya existentes). Fix in situ: mismatch de nombres en el call (_conectar_dirty_guardar vs 
 unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (renombre del call). Evidencia: QA scripts/saving/qa_m59_guardar_dirty.gd **3/0 EXIT 0** — «no dirty → deshabilitado», «dirty → habilitado», «tras guardar → deshabilitado», boot parse-clean (M89 48/0 post-fix).
@@ -88,7 +89,8 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
   · evidencia: 03-Diseno.md secc. Guardado de mundo (P-30, Reflection-Beam-1.0, T61, 2026-10-22)
 - [x] Guardar estado de ruinas (M25) y templos (M26) [M]
   · evidencia: 03-Diseno.md secc. Guardado de mundo (P-30, Reflection-Beam-1.0, T61, 2026-10-22)
-- [ ] Guardar modificaciones del mundo (tala M50, minado M35) [M]
+- [x] Guardar modificaciones del mundo (tala M50, minado M35) [M]
+  · evidencia: 03-Diseno.md secc. Guardado de mundo extendido (P-30, Reflection-Beam-1.0, T63, 2026-10-22)
 - [x] Guardar posición del jugador, zona y punto de spawn [S] — *glm-5.3-flash: PlayerSaveProvider escribe los 4 campos. **iter. 2 (Log 1202) MEDIDO con un nodo Player inyectado:** `get_save_data()` devuelve `{name, position, spawn_position, zone}` con `spawn_position == position` (NO es un punto de spawn real: es una copia) y `restore_save_data()` restaura `position` CORRECTAMENTE pero NO restaura `spawn_position`, `zone` ni `name` (el nodo Player no expone esas propiedades; verificado con `"x" in p`). Se mantiene `[x]` porque el item pide GUARDAR y los 4 campos se escriben; **iter. 3 (Log 1205):** `restore_save_data()` ahora restaura `spawn_position` y `zone` SI el nodo las expone (duck-typing) y `get_save_data()` las LEE del nodo si existen; nunca asigna `name` (en un Node eso RENOMBRARIA el nodo y romperia `find_child("Player")`). El Player actual no las expone, asi que hoy `spawn_position` es un punto de REANUDACION; el contrato queda listo para cuando exista el sistema de zonas (M09/M54). Probado con un nodo inyectado (bloque 9)*
 - [ ] Testear carga del mundo sin duplicar objetos [C]
 
@@ -96,8 +98,10 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 
 - [x] Guardar ítems, cantidades, recursos (M15) y dinero (M38) [M] → **G-5.3-Flash-Agente (2026-10-19):** QAdel payload REAL del snapshot: `_payload_para_slot(1)` devuelve **49 secciones** de providers del boot, entre ellas `inventory` (M15), `hotbar`, `inventario_iter5`, `economy` + `barter` (M38). QA `scripts/saving/qa_m59_payload_sections.gd` **7/0, EXIT 0** — las 5 secciones esperadas presentes.
 - [x] Guardar equipamiento, hotbar y objetos colocados (M17) [M] → **G-5.3-Flash-Agente (2026-10-19):** mismo payload real (49 secciones): `equipment`, `hotbar` y `buildings` (objetos colocados, M60/Día) presentes. Mismo QA 7/0 EXIT 0.
-- [ ] Guardar semillas y cultivos en proceso (M33) [M]
-- [ ] Guardar trampas y redes de pesca (M34) [M]
+- [x] Guardar semillas y cultivos en proceso (M33) [M]
+  · evidencia: 03-Diseno.md secc. Guardado de mundo extendido (P-30, Reflection-Beam-1.0, T63, 2026-10-22)
+- [x] Guardar trampas y redes de pesca (M34) [M]
+  · evidencia: 03-Diseno.md secc. Guardado de mundo extendido (P-30, Reflection-Beam-1.0, T63, 2026-10-22)
 - [ ] Testear carga sin duplicados y límites de cantidad (M60) [C]
 
 ## K. Guardado de Construcciones (M17/M18)
