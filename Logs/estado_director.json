@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T01:18:30",
+ "ultimo_update": "2026-10-22T01:26:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -157,8 +157,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T23 sellada 049: validate_photo.gd verificado (4 bloques, flip 294 presente); GO item 101/158 a eleccion; fila 56 pendiente sync mio proximo ciclo",
-  "acuse_enviado": 49
+  "estado": "T24 sellada 051 (photo_pose_request + posar 0.8s verificados; item 101 flip); fila 56 33/137; ASIGNACION a Beam: suscribir M19/M36 al signal (cierra end-to-end); luego item 158",
+  "acuse_enviado": 51
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -209,5 +209,8 @@
   "DeepSeek-V4.1-Flash-WB": "saneo 11-BUGS 79 defectos + CI metricas (metricas_bugs.py autor) + BUG-141 fix producto/loader",
   "DS-V4.1-Flash-Opencode": "loader EMPTY_SLOT vs PROFILE_MISMATCH (esperando tanda) + codec M60 schema",
   "regla": "derivar siempre con aclaracion de sesion para no pisar"
+ },
+ "deriva_suscripcion_m19_m36": {
+  "estado": "M19/M36 deben suscribirse a photo_pose_request (pose 0.5s) - ASIGNADO A Reflection Beam 1.0 (051) porque los modulos no tienen dueño activo; cierra el caso end-to-end de poses"
  }
 }
