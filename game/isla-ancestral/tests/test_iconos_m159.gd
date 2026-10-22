@@ -6,7 +6,7 @@
 #
 # **Modelo:** agnes-3-flash (Sapiens AI)
 # **Plataforma:** Kilo Code
-# **Fecha:** 2026-10-20
+# **Fecha:** 2026-10-20 (fix Texture2D agnes 2026-10-22)
 
 extends SceneTree
 
@@ -37,10 +37,13 @@ func _run() -> void:
 				print("  [FALLO .tres] " + f + " no carga")
 			else:
 				var ico: Variant = tres_obj.get("icono")
-				if ico == null or ico == "":
+				if ico == null:
 					sin_icono += 1
 					print("  [SIN_ICONO] " + f)
+				elif ico is Texture2D:
+					pass  # Texture2D cargada via ExtResource: icono valido
 				else:
+					# compat: "icono" como path String
 					var im := Image.new()
 					if im.load(ProjectSettings.globalize_path(String(ico))) != OK:
 						png_no_cargan += 1
