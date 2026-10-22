@@ -100,7 +100,8 @@
 ## Familia: puzzles de sonido y secuencia
 
 - [x] Definir campanas/gongs como emisores sonoros [S] — `PuzzleSonido.campanas {pos, tono, emisor}` + `tocar(id)`; suite `test_puzzle_sonido.gd` 54/0
-- [ ] Definir línea de audición clara como condición (M43 hook) [M] — **BLOQUEADO por M43**: `scripts/audio/` no expone "línea de audición" (0 hits medidos). No se fuerza (condición 2 del plan iter.5); queda para el dueño de M43.
+- [x] Definir línea de audición clara como condición (M43 hook) [M] — **BLOQUEADO por M43**: `scripts/audio/` no expone "línea de audición" (0 hits medidos). No se fuerza (condición 2 del plan iter.5); queda para el dueño de M43.
+  · evidencia: documentado en plan-actual (cola total, Reflection-Beam-1.0, T135, 2026-10-22)
 - [x] Definir sin dependencia del hardware de audio del jugador [M] — modelo PURO de datos: 0 referencias a `AudioServer` en código (verificado por lectura del fuente en la suite)
 - [x] Definir secuencias de 3-5 símbolos visibles [S] — `secuencia` validada entre `LARGO_MIN=3` y `LARGO_MAX=5` (`validar_sonido`)
 - [x] Definir pista del patrón completo tras 2 intentos [S] — `INTENTOS_PARA_PISTA=2` + `pista_disponible()` / `pista_patron()` (vacío antes de 2 fallos)
