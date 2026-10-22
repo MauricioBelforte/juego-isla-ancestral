@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T16:18:50",
+ "ultimo_update": "2026-10-22T16:36:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,15 +17,15 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "287/288: GENEALOGIA S24-S34 CERRADA EXACTA (45+9+8+9=71) - rectificacion del director (no habia leido su 284); fila 138 con genealogia como base; GO S34",
+  "estado": "289/290: S36 RATIFICADA (edge cases L192-196, M138 95 top-level); Hy3 tiebreaker asignado; GO S37 multi",
   "pendientes_real": 222,
-  "acuse_enviado": 288,
+  "acuse_enviado": 290,
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "355/356: M102 saneo 71->24 RATIFICADO (gate verde, log 2128); 24 residuales = deuda conocida documentada",
+  "estado": "357/358: M102 24->18 RATIFICADO (6 duplicadas, gate EXIT 0, log 2130); delegacion suites M20 ofrecida voluntariamente",
   "pendientes_real": 170,
-  "acuse_enviado": 356
+  "acuse_enviado": 358
  },
  "step_5": {
   "estado": "176/177: ruteo Amistad GO; fila 23 sync por director (evitar pisar); muestra del rial vigente",
