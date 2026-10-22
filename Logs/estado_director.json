@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T03:00:30",
+ "ultimo_update": "2026-10-22T02:40:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "249/250/251: S12+S13 RATIFICADAS (BUG-146 dual fix TypewriterEffect verificado + RF8 QA nuevo 14/0 + BUG-147 autocorregido con init tipado y firma en 11-BUGS; M21 107/143); GO S14 world_state o nuevo cluster",
+  "estado": "252/253: S14 M21 RATIFICADA (4 flips condiciones mundo via auto-snapshot aditivo retrocompatible; QA 8/0; M21 111/143) + trampa allowlist flag_ registrada; GO S15",
   "pendientes_real": 222,
-  "acuse_enviado": 251,
+  "acuse_enviado": 253,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -112,7 +112,8 @@
   "renumerar respuestas ya escritas cuando un pool regenerado desalinea la secuencia: renombrar el fichero a max+1 y corregir el encabezado interno (caso 083->088)",
   "lambdas de GDScript capturan por VALOR: contadores por closure no funcionan - usar array-por-referencia (caso G-5.3 S10, segunda correccion de su propio QA)",
   "filas del GLOBAL desalineadas por flips concurrentes sin sync: los duenos de fila sync al cerrar tanda y los muestreos del director re-verifican el drift (caso M56 33->43 detectado por G-5.3)",
-  "helper proximo_numero cuenta huecos antiguos como existentes: si el numero ofrecido NO es ultimo+1, aplic下游 el 232 del pool y usar ultimo+1 (caso G-5.3 231/232 - el hueco 220 confunde al conteo)"
+  "helper proximo_numero cuenta huecos antiguos como existentes: si el numero ofrecido NO es ultimo+1, aplic下游 el 232 del pool y usar ultimo+1 (caso G-5.3 231/232 - el hueco 220 confunde al conteo)",
+  "allowlist del validador usa prefijo canonico (flag_): keys sin prefijo se rechazan por diseño - los NUEVOS tests deben usar el prefijo canonico, no tocar el validador (evitado por G-5.3 S14)"
  ],
  "minimax_m3_1_flash": {
   "estado": "039/034: P2b QA M16 SELLADO VALIDO con 1 item degradado (L44 animacion breve sin implementar) derivado a G-5.3; ciclos P1/P2/P3 completos y sellados",
@@ -154,7 +155,7 @@
   "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados"
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
- "crons_vuelta_d": "CRON D 05:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
+ "crons_vuelta_d": "CRON D 06:15: script 0 pendientes; backlogs >= 100 todos; rieles vigentes; SIN repoblacion",
  "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"

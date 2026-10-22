@@ -32,7 +32,7 @@ func _grafo_cond() -> DialogueGraph:
 	var s := DialogueNode.new()
 	s.id = "s"
 	s.tipo = DialogueNode.TIPO_LINEA
-	s.conditions = [{"clave": "historia_stage", "operador": ">=", "valor": 2}]
+	s.conditions = [{"clave": "flag_historia_stage", "operador": ">=", "valor": 2}]
 	s.next_id = "fin"
 	g.nodes["s"] = s
 	var fin := DialogueNode.new()
@@ -49,34 +49,34 @@ func _run() -> void:
 	dm._grafos_cache["ctx_mundo"] = _grafo_cond()
 
 	# 1. Auto-snapshot: flag del mundo visible en session_vars sin context explicito
-	ws.set_flag("historia_stage", 2)
+	ws.set_flag("flag_historia_stage", 2)
 	var ok: bool = dm.start_dialogue("ctx_mundo")
 	_check(ok, "arranque con condicion de mundo OK")
 	var sv: Dictionary = dm.get_session_vars()
-	_check(int(sv.get("historia_stage", -1)) == 2, "auto-snapshot: historia_stage del mundo visible en session_vars (=%s)" % str(sv.get("historia_stage")))
+	_check(int(sv.get("flag_historia_stage", -1)) == 2, "auto-snapshot: historia_stage del mundo visible en session_vars (=%s)" % str(sv.get("flag_historia_stage")))
 	dm.stop_dialogue()
 
 	# 2. El contexto explicito del llamador MANDA (no lo pisa el mundo)
-	ws.set_flag("historia_stage", 1)  # mundo en etapa anterior
-	ok = dm.start_dialogue("ctx_mundo", {"historia_stage": 9})
+	ws.set_flag("flag_historia_stage", 1)  # mundo en etapa anterior
+	ok = dm.start_dialogue("ctx_mundo", {"flag_historia_stage": 9})
 	sv = dm.get_session_vars()
-	_check(ok and int(sv.get("historia_stage", -1)) == 9, "contexto explicito manda sobre el mundo (9 vs 1)")
+	_check(ok and int(sv.get("flag_historia_stage", -1)) == 9, "contexto explicito manda sobre el mundo (9 vs 1)")
 	dm.stop_dialogue()
 
 	# 3. El nodo con condicion de mundo evoluciona (gate responde al snapshot)
 	#    cond >= 2 con mundo en stage 2 -> el grafo entra al nodo "s" sin bloqueo
-	ws.set_flag("historia_stage", 2)
+	ws.set_flag("flag_historia_stage", 2)
 	ok = dm.start_dialogue("ctx_mundo")
 	_check(ok, "gate: cond >= 2 con stage 2 permitio el arranque")
 	dm.stop_dialogue()
 
 	# 4. Nombre de flag tipico de misiones/sellos/festivales (paridad M22/M23/M73)
-	ws.set_flag("mision_etapa_cocina", 3)
-	ws.set_flag("sello_templo", "obtenido")
-	ws.set_flag("festival_activo", "solsticio")
-	ok = dm.start_dialogue("ctx_mundo", {"historia_stage": 0})  # context evita gate
+	ws.set_flag("flag_mision_etapa_cocina", 3)
+	ws.set_flag("flag_sello_templo", "obtenido")
+	ws.set_flag("flag_festival_activo", "solsticio")
+	ok = dm.start_dialogue("ctx_mundo", {"flag_historia_stage": 0})  # context evita gate
 	sv = dm.get_session_vars()
-	_check(int(sv.get("mision_etapa_cocina", 0)) == 3 and String(sv.get("sello_templo", "")) == "obtenido" and String(sv.get("festival_activo", "")) == "solsticio",
+	_check(int(sv.get("flag_mision_etapa_cocina", 0)) == 3 and String(sv.get("flag_sello_templo", "")) == "obtenido" and String(sv.get("flag_festival_activo", "")) == "solsticio",
 		"paridad: flags de misiones/sellos/festivales entran al snapshot")
 	dm.stop_dialogue()
 
