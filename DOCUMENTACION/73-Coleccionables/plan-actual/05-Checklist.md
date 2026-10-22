@@ -25,7 +25,7 @@
 ## C. Categoría Fragmentos
 
 - [x] (agnes M73 #889: catalog.json 23 items + validate_collectibles.gd + test 8/0) Registrar fragmentos de reliquias rotas (M25) [M]
-- [ ] Descripción que narra la reliquia original [M]
+- [x] Descripción que narra la reliquia original [M]
 - [x] (agnes M73 t2 #889: test 9/0, recompensa_item+cantidad definida en todos los items) Recompensa de colección definida [M]
 - [x] (agnes M73 #889: catalog.json 23 items + validate_collectibles.gd + test 8/0) Registrar al excavar [M]
 - [x] (agnes M73 t3 #889: _test_reliquia_duplicada_idempotente + _test_fragmento_dedupe en test_coleccionables.gd, 0 fallos) Testear fragmentos de la misma reliquia (dedupe) [M]
@@ -40,7 +40,7 @@
 
 ## E. Categoría Minerales
 
-- [ ] Registrar minerales minados (M35) [M]
+- [x] Registrar minerales minados (M35) [M]
 - [ ] Gema rara como ítem especial [M]
 - [x] (agnes M73 t2 #889: test 9/0, recompensa_item+cantidad definida en todos los items) Recompensa de colección (gema M35) [M]
 - [x] Registrar al enviar al museo (M37) [M]
@@ -67,7 +67,7 @@
 - [x] Registrar insectos capturados (M33/M36) [M]
 - [ ] Insectos nocturnos y diurnos (M31) [M]
 - [ ] Jaula decorativa como recompensa (M18) [M]
-- [ ] Registrar al capturar [M]
+- [x] Registrar al capturar [M]
 - [ ] Testear insectos en biomas distintos [M]
 
 ## I. Categoría Fósiles

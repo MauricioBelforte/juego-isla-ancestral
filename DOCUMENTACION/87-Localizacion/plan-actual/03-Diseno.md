@@ -1,6 +1,6 @@
-**Modelo:** Ling-3.1-Flash (último modificador — tandas 16-21; previo: DeepSeek-V4.1-Flash / WorkBuddy, iter. 5, 2026-09-13; texto original: Deepseek V4 Flash / OpenCode, 2026-08-26)
+**Modelo:** Ling-3.1-Flash (último modificador — tandas 16-22; previo: DeepSeek-V4.1-Flash / WorkBuddy, iter. 5, 2026-09-13; texto original: Deepseek V4 Flash / OpenCode, 2026-08-26)
 **Plataforma:** Kilo Code
-**Fecha:** 2026-09-13 (correcciones doc↔código de la iter. 5; tandas 16-21 de 2026-10-21)
+**Fecha:** 2026-09-13 (correcciones doc↔código de la iter. 5; tandas 16-22 de 2026-10-21/22)
 
 # 03-Diseno.md — Módulo 87: Localización
 
@@ -273,6 +273,39 @@ Auditoría (L598-L1117): 11 traducibles + 2 no (`"X"` L644 y `"x%d"` L794 — s�
 - Nota: `DIARY.FILTRO_TODOS` ("Todos") viene del dominio del diario; si el owner de M06 prefiere desacoplamiento, alternativa `ITEMS.TODOS` (mismo texto — el glosario §2.4 "un término, una clave" favorece el reuso).
 
 **Regla derivada (estándar M87):** el language aplica al **UI estático** y al **contenido del juego**; NO aplica a (a) login/autenticación (inexistente en v1), (b) nombre del jugador (dato de usuario, RF13 futuro), (c) el texto que el jugador escribe (búsquedas, chat futuro).
+
+**Seguimiento de la deuda M06 (cierre de tanda 22, 2026-10-22):** `scripts/player/player.gd` **sin cambios** desde su último commit `1e62132` (2026-10-16, «D102 ajuste fino: paneles aclarados...») — las 4 claves propuestas `ITEMS.USAR` / `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` / `ITEMS.SIN_HERRAMIENTA` **siguen ausentes de los catálogos** (grep: 0 hits en `data/localizacion/` y `locales/`; solo figuran en esta documentación). La deuda queda **pendiente de encargo al owner de M06** (clave + consumo en el mismo commit — política §2.4.4).
+
+#### 2.4.7 Estándar de lenguaje técnico del repositorio — comentarios, logs y la regla de frontera (TANDA 22, 2026-10-22 — tareas 97/98/99)
+
+**Las tres preguntas de las tareas 97-99, respondidas con auditoría en disco:**
+
+**1. Tarea 97 — Comentarios de código: NO se traducen (no son contenido del juego).**
+- Auditoría (`core/bootstrap.gd` L2-22, `logging/logger.gd` L1-27): los comentarios son **100% en español** (idioma del equipo — AGENTS.md §1: «Todas las comunicaciones deben realizarse estrictamente en español»; commits en español, §4.1).
+- Estándar: comentarios en **español** con **terminología técnica canónica en inglés** cuando el término de plataforma lo es (`autoload`, `headless`, `frame budget`, `stdout`, `crash-proof`, `fallback`) — no se traducen términos del stack Godot/.NET (el inglés técnico es el idioma franco de la plataforma).
+- **Nunca pasan por M87**: el jugador no ve comentarios; traducirlos sería ruido de proceso (el repositorio es monolingüe de trabajo).
+
+**2. Tarea 98 — Logs de sistema: mensaje en español, etiquetas técnicas canónicas en inglés.**
+- El servicio central es `GameLogger` (autoload `scripts/logging/logger.gd`, M103): `info("Logger inicializado", Category.BOOT)` L87 — **mensaje ES**; sus metadatos son **tags canónicos EN** (`Level`: DEBUG/INFO/WARNING/ERROR/CRITICAL L45; `Category`: BOOT/SYSTEM/GAMEPLAY/WORLD/NETWORKING/ANALYTICS/CRASH L46) — vocabulario estándar de logging (Godot, Python `logging`, .NET `ILogger`).
+- Los `print`/`push_warning`/`push_error` de producción siguen §2.4.5 (`[MNN] mensaje en español`, ~98% cumplido).
+- Estándar derivado: **«mensaje en español para humanos, etiqueta canónica EN para máquinas»** — la etiqueta se parsea y se filtra (`set_category_enabled`, API L9), no se traduce; el mensaje se lee, va en el idioma del equipo.
+
+**3. Tarea 99 — El logger no clampea idioma: los logs NO se traducen porque no son jugador-visible.**
+- Superficies del logger: (a) stdout (consola de dev), (b) `user://logs/game.log` (archivo de diagnóstico), (c) señal `line_emitted` → consola in-game de **M110** (`debug/debug_menu.gd` L621-627 conecta `GameLogger.line_emitted`) — menú de **desarrollo**, no funcionalidad de juego (§2.4.3: herramientas de dev).
+- Decisión: las tres superficies permanecen en **español** sin pasar por M87 — verificado: `logger.gd` tiene **0 consumos** de `_t()`/`tr()`/`TranslationServer` (grep). Si algún día la consola de M110 se expone al jugador final (hoy es development-only), ahí sí correspondería i18n — registrado como deuda condicional, no como bug.
+
+**La regla de frontera (síntesis de las tandas 20-22 — qué se traduce y qué no):**
+
+| Superficie | ¿i18n? | Base |
+|---|---|---|
+| UI estática (labels, botones, placeholders, tooltips) | **SÍ** | jugador-visible |
+| Contenido del juego (diálogos, historia, items, tips de carga) | **SÍ** | jugador-visible |
+| Errores jugador-visibles | **SÍ** (por clave; el detalle técnico va a consola) | §2.4.5 |
+| Logs de consola / archivo de log / consola de debug (M110) | NO | consola de dev (§2.4.5, tarea 99) |
+| Comentarios de código | NO | documentación de repo (tarea 97) |
+| Nombre del jugador y texto que el jugador escribe | NO | dato de usuario (§2.4.6) |
+| Identificadores técnicos (IDs, tags de log, IDs de recursos) | NO | máquinas, no humanos (tarea 98) |
+| Login/autenticación | NO aplica | no existe en v1 (§2.4.6) |
 
 ### 2.5 Flujo de agregar un idioma nuevo
 
