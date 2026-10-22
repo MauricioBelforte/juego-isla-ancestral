@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T19:25:40",
+ "ultimo_update": "2026-10-22T19:15:45",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -126,7 +126,8 @@
   "Trampa del director corregida (fundador 18:37): al agotarse un riel NO basta asignar fase-2 - REPREDICAR el backlog INMEDIATAMENTE con barrido fresco (la cola nunca se vacia)",
   "Trampa GEMELO-NUMERICO (22oct 18:40): dos emisores (agente + mis acuses) usaron mismos numeros 300/302 en el canal de G-5.3 => detector dio FALSO al-dia por matching de numero pelado; FALLO DE DETECTOR: 3 reportes reales (S46/S47/S49) quedaron ocultos ~12h; FIX: detectar por slug de emisor (\"de-<carpeta>-a-\" en nombre) no por numero solo; pools regenerados",
   "Leccion OperCron (22oct 18:45): timestamps de G-5.3 llegan con fecha adelantada (2026-10-23) por zona horaria de su plataforma - NO usarlos para ordenar; usar creacion real de fichero",
-  "CARRERA POOL en vivo (22oct 18:45): mi regeneracion del pool G-5.3 (303..350) choco con su escritura simultanea del 303 => segundo gemelo el mismo dia. FIX aplicado: rango separado 305..352 + protocolo RELEER-60s + mis acuses en serie propia (pares). Riesgo residual: plataformas con clock adelantado escriben \"futuro\""
+  "CARRERA POOL en vivo (22oct 18:45): mi regeneracion del pool G-5.3 (303..350) choco con su escritura simultanea del 303 => segundo gemelo el mismo dia. FIX aplicado: rango separado 305..352 + protocolo RELEER-60s + mis acuses en serie propia (pares). Riesgo residual: plataformas con clock adelantado escriben \"futuro\"",
+  "Ranking inflado del repredicado (22oct 18:39): conteo 77-Online declarado 33 vs real 17 (archivo sin cambios desde 16:15, el error fue de mi scan original) => REGLA: el ranking de BACKLOGs SIEMPRE re-corrido al vuelo antes de citarse, jamas de memoria; corregidos mis 194/197"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
@@ -177,7 +178,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "vuelta 18:15: corroborado post-repoblacion - formatos numerados (NN. item [Esfuerzo] -- fuente), conteos vigentes: agnes ~612 marcas [ ] (470 nuevas), step-5 ~203, ling ~112, deepseek ~161, miniMax 766, g_5_3/DS_OC numerados; TODOS >= 100 -> sin repoblacion; Hy3 QA por encargo (306 vigente)",
+ "nota_cron_d": "19:15: activos Beam/agnes/G-5.3 cubiertos por trabajo vigente (77-Online GO, veredictora M99, Bateria 3); Step-5 cola 116 vigente; UNICa accion = pulido BACKLOG-06 v2. Sin mensajes nuevos (194/197 ya dirigen).",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
@@ -199,7 +200,7 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "M99-Marketing CERRADO 169/169 (14 flips verificados; su aritmetica declaro 8[ ]/5[?] erroneo); 9 modulos del dia; GO 77-Online-Y-Red; confirmar lectura de 194; mi 197",
+  "estado": "BACKLOG-06 v2 pulido (ranking fresco sin 151/99/48/23; top 77-Online 33 -> 140-Alpha 22 -> 72-Logros 16 -> 51-Agua 15 -> 140...); M99 cerrado 169/169; confirmar lectura 194",
   "acuse_enviado": 197,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first + heredable",
