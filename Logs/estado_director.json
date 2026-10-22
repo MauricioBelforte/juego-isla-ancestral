@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T19:50:30",
+ "ultimo_update": "2026-10-22T19:40:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -181,7 +181,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "19:15: activos Beam/agnes/G-5.3 cubiertos por trabajo vigente (77-Online GO, veredictora M99, Bateria 3); Step-5 cola 116 vigente; UNICa accion = pulido BACKLOG-06 v2. Sin mensajes nuevos (194/197 ya dirigen).",
+ "nota_cron_d": "19:40: riel documental AGOTANDOSE (48) - fase 2 tipo 190 vuelve a ser la cola real de Beam tras los 48. G-5.3 bateria 5 GO. agnes veredictora M99. Step-5 cola 116 vigente (sin senal 4h - vigilar).",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
@@ -203,7 +203,7 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "S53-ratio: informe estado ACEPTADO (140 gated, 72=agnes); M77 +2 flips (fila 108/130); riel documental NUEVO enviado (8 items/1 modulos); 44 alertas drift pendientes CRON C",
+  "estado": "BACKLOG-06 v3: cola documental CORTA (48 items reales) + FASE 2 oficial como reserva; 9 modulos day; 77 en 110/130; go 140 cancelado (gated)",
   "acuse_enviado": 202,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first + heredable",
