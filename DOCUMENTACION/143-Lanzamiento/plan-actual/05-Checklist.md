@@ -148,13 +148,17 @@
 - [x] Definir alerta ante ≥ 5 reportes de save perdido [S]
   · evidencia: 03-Diseno.md secc. DLC y metricas (cola total, Reflection-Beam-1.0, T103, 2026-10-22)
 - [x] Definir correlación de errores con versiones/builds [S]
-- [ ] Definir verificación de backup/reintento automático (M60) [M]
-- [ ] Definir triaje de saves como P1 (pérdida de progreso) [S]
-- [ ] Definir registro diario de métricas de save [S]
+- [x] Definir verificación de backup/reintento automático (M60) [M]
+  · evidencia: 03-Diseno.md secc. Backup y triaje (cola total, Reflection-Beam-1.0, T105, 2026-10-22)
+- [x] Definir triaje de saves como P1 (pérdida de progreso) [S]
+  · evidencia: 03-Diseno.md secc. Backup y triaje (cola total, Reflection-Beam-1.0, T105, 2026-10-22)
+- [x] Definir registro diario de métricas de save [S]
+  · evidencia: 03-Diseno.md secc. Backup y triaje (cola total, Reflection-Beam-1.0, T105, 2026-10-22)
 
 ## 11. Revisar bugs críticos (RF9/M101)
 
-- [ ] Definir triaje diario de todos los reportes (telemetría/reviews/soporte) [M]
+- [x] Definir triaje diario de todos los reportes (telemetría/reviews/soporte) [M]
+  · evidencia: 03-Diseno.md secc. Backup y triaje (cola total, Reflection-Beam-1.0, T105, 2026-10-22)
 - [ ] Definir severidad P0/P1/P2 en < 24 h [M]
 - [x] Definir P0/P1 → comité de release en < 12 h [S]
 - [ ] Definir trabajo sobre P0/P1 sin reintroducir regresiones (M112) [M]

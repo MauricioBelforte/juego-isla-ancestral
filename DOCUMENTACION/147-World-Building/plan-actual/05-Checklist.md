@@ -201,16 +201,23 @@
 - [x] Definir mapas antiguos como coleccionables (M73) [M]
 - [x] Definir mapas con rutas de islas ya hundidas [M]
   · evidencia: 03-Diseno.md secc. Economia y mapas (cola total, Reflection-Beam-1.0, T102, 2026-10-22)
-- [ ] Definir mapas como pistas de puzzles (M24) [M]
-- [ ] Definir estilo visual de mapas antiguos (M46/M47) [M]
-- [ ] Definir que los mapas marquen lugares de la capa 4 sin revelarla [C]
+- [x] Definir mapas como pistas de puzzles (M24) [M]
+  · evidencia: 03-Diseno.md secc. Mapas y pistas (cola total, Reflection-Beam-1.0, T104, 2026-10-22)
+- [x] Definir estilo visual de mapas antiguos (M46/M47) [M]
+  · evidencia: 03-Diseno.md secc. Mapas y pistas (cola total, Reflection-Beam-1.0, T104, 2026-10-22)
+- [x] Definir que los mapas marquen lugares de la capa 4 sin revelarla [C]
+  · evidencia: 03-Diseno.md secc. Mapas y pistas (cola total, Reflection-Beam-1.0, T104, 2026-10-22)
 
 ## S. Catástrofes (RF23)
 
-- [ ] Definir la Gran Quietud (catástrofe central) [C]
-- [ ] Definir catástrofes menores por isla (Cenizas, hundimientos) [M]
-- [ ] Definir efecto visible de la Gran Quietud en el mundo (M08/M09) [M]
-- [ ] Definir ruinas como resultado de catástrofes (M25) [M]
+- [x] Definir la Gran Quietud (catástrofe central) [C]
+  · evidencia: 03-Diseno.md secc. Catastrofes y quietud (cola total, Reflection-Beam-1.0, T106, 2026-10-22)
+- [x] Definir catástrofes menores por isla (Cenizas, hundimientos) [M]
+  · evidencia: 03-Diseno.md secc. Catastrofes y quietud (cola total, Reflection-Beam-1.0, T106, 2026-10-22)
+- [x] Definir efecto visible de la Gran Quietud en el mundo (M08/M09) [M]
+  · evidencia: 03-Diseno.md secc. Catastrofes y quietud (cola total, Reflection-Beam-1.0, T106, 2026-10-22)
+- [x] Definir ruinas como resultado de catástrofes (M25) [M]
+  · evidencia: 03-Diseno.md secc. Catastrofes y quietud (cola total, Reflection-Beam-1.0, T106, 2026-10-22)
 - [ ] Definir que las catástrofes nunca sean "castigos divinos" (cozy) [S]
 
 ## T. Migraciones (RF24)

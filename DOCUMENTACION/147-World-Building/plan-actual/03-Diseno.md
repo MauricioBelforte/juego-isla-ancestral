@@ -343,3 +343,33 @@ Jugador obtiene Sello Brisa
 ### Mapas con rutas de islas ya hundidas
 - Mapas que muestran rutas de islas hundidas.
 - Pistas de exploracion.
+## Mapas y pistas (cola total M147 batch 13)
+
+### Mapas como pistas de puzzles (M24)
+- Los mapas antiguos son pistas de puzzles.
+- Integracion con M24 (puzzles).
+
+### Estilo visual de mapas antiguos (M46/M47)
+- Estilo visual antiguo para los mapas.
+- Coherente con la estetica del mundo.
+
+### Mapas marcan lugares de la capa 4 sin revelar
+- Los mapas marcan lugares de capa 4.
+- Sin revelar la verdad (spoilers).
+## Catastrofes y quietud (cola total M147 batch 14)
+
+### La Gran Quietud (catastrofe central)
+- La Gran Quietud: catastrofe central del mundo.
+- Efecto visible en el terreno voxel.
+
+### Catastrofes menores por isla
+- Cenizas, hundimientos, erupciones por isla.
+- Cada isla tiene su catastrofe menor.
+
+### Efecto visible de la Gran Quietud (M08/M12)
+- Efecto visible en el terreno voxel.
+- Modificacion del terreno por la quietud.
+
+### Ruinas como resultado de catastrofes (M25)
+- Las ruinas son resultado de catastrofes.
+- Pistas de la historia en las ruinas.

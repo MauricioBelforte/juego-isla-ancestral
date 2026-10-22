@@ -279,3 +279,20 @@ Reporte (telemetría/review/soporte) → ticket M101 con buildId
 ### Alerta ante >= 5 reportes de save perdido
 - Alerta si hay >= 5 reportes de save perdido.
 - Escalamiento automatico.
+## Backup y triaje de saves (cola total M143 batch 14)
+
+### Verificacion de backup/reintento automatico (M60)
+- Verificar que el backup se crea correctamente.
+- Reintento automatico si falla.
+
+### Triaje de saves como P1 (perdida de progreso)
+- Los saves con perdida de progreso son P1.
+- Prioridad maxima en el triaje.
+
+### Registro diario de metricas de save
+- Registro diario de metricas de save.
+- Almacenamiento historico.
+
+### Triaje diario de todos los reportes
+- Triaje diario de telemetria/reviews/crashes.
+- Priorizacion por severidad.

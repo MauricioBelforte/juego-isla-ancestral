@@ -155,18 +155,18 @@
 
 ### Bloque P — Los trabajos del autosave / guardado (los strings del flujo guardado).
 
-83. M59-Guardado: strings de autosave (los autosave mensajes por idioma).
-84. M59: strings de load/save UI (los menús del guardado).
+83. [x] M59-Guardado: strings de autosave (los autosave mensajes por idioma). — **TANDA 28 (msg 219): CORRECTO** en `03-Diseno.md` §2.4.13. 0 literales ES jugador-visibles de guardado en producción: motivos de autosave internos (`request_save(slot, "auto_dia")` — dato de auditoría); log data_store.gd L231 = consola de dev (§2.4.5); «GUARDADO:» solo en scripts Blender dev-side (conejo_v*.py/lechuza_v1.py — no runtime).
+84. [x] M59: strings de load/save UI (los menús del guardado). — **TANDA 28 (msg 219): CORRECTO** en `03-Diseno.md` §2.4.13. UI de guardado 100% por clave: pause_layer.gd SETTINGS.GUARDAR L74 / SETTINGS.BORRAR_SLOT L75 → ConfirmPopup.configurar/configurar_texto con SETTINGS.CONFIRMAR/CANCELAR (L72-73/L84-85); fecha del último guardado via configurar_texto (item 2 M59 — texto ya traducido, no clave).
 
 ### Bloque Q — Los mensajes del día (los eventos M74)
 
-85. M74: los 22 eventos del festival con los strings ES/EN (los nombres del catálogo).
-86. M74: los strings PT de los 22 eventos (cuando el LOTE B llegue).
+85. [x] M74: los 22 eventos del festival con los strings ES/EN (los nombres del catálogo). — **TANDA 28 (msg 219): DEUDA i18n DATA-DRIVEN** en `03-Diseno.md` §2.4.13. festivals.tres (FestivalData, M29/M74) = 11 entradas (4 estacionales + 1 anual + 1 plantilla cumpleaños NPC + 2 visitas + 2 mensuales + 1 cumpleaños jugador; el «22» del backlog stale → 10 eventos + 1 plantilla), todas nombre+descripcion ES-only, 0 campos EN/PT. Consumidor event_manager.gd _on_festival_data_event L292-295. En locale EN/PT se ven en ES. Deuda owners M74/M29: claves EVENTOS.FESTIVAL_* ES/EN/PT o campos por locale (crear+consumir mismo commit).
+86. [x] M74: los strings PT de los 22 eventos (cuando el LOTE B llegue). — **TANDA 28 (msg 219): MISMA DEUDA T85, CONDICIONAL** en `03-Diseno.md` §2.4.13. PT de los eventos = misma migración que EN (claves EVENTOS.FESTIVAL_* ES/EN/PT o campos por locale) — condicional a habilitar PT como locale de runtime (decisión director/fundador, conciliación .po↔JSON msg 153 pendiente).
 
 ### Bloque R — El flujo del collectible (los strings del collectible).
 
-87. M73-Coleccionables: los strings colección ES/EN (los 15 items 4 categorías).
-88. M73: el detalle por ítem (las descripciones de cada coleccionable).
+87. [x] M73-Coleccionables: los strings colección ES/EN (los 15 items 4 categorías). — **TANDA 28 (msg 219): DEUDA i18n DATA-DRIVEN** en `03-Diseno.md` §2.4.13. catalog.json = 81 items / 19 categorías (el «15 items 4 categorías» del backlog stale), display_name ES-only (máx 27 chars «Herramienta Única Ancestral»), 0 campos EN. El código RECONOCE la deuda: collectible_category.gd L15-16 `nombre_es` = «i18n placeholder — usar key para localización». Categorías (CollectibleCategory.nombre_es/descripcion) también ES-only. Deuda owner M73 (agnes): claves COLECCION.* ES/EN/PT o campos por locale.
+88. [x] M73: el detalle por ítem (las descripciones de cada coleccionable). — **TANDA 28 (msg 219): DEUDA = DESCRIPCIONES DE CATEGORÍA** en `03-Diseno.md` §2.4.13. El catálogo no tiene descripción por ítem (el detalle son datos: rareza/fuente/recompensa); la deuda de descripción cubre las 19 categorías (CollectibleCategory.nombre_es/descripcion ES-only). Mismo owner/vía que T87.
 
 ### Bloque S — El flujo de merchandising (los strings del M95/M129).
 
