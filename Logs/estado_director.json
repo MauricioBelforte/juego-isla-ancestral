@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T20:30:50",
+ "ultimo_update": "2026-10-22T20:45:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -20,9 +20,9 @@
   ]
  },
  "g_5_3": {
-  "estado": "S48 re-verificacion RATIFICADA (5 suites, hallazgo NFR M58 honesto: variabilidad I/O, QA v4 frame 0us/hot<5ms/cold<10ms; recomendacion batching M53); gemelo renumerado 316; riel agotado, en guardia; sin mi respuesta nueva necesaria (todo GO vigente)",
+  "estado": "S48 ratificada formalmente (317); fila 58 sync done prev; guardia + proxies vigentes",
   "pendientes_real": 222,
-  "acuse_enviado": 315,
+  "acuse_enviado": 317,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -31,9 +31,9 @@
   "acuse_enviado": 362
  },
  "step_5": {
-  "estado": "iter11 Secretas RATIFICADA (63/40/2=105 exacto; 37 cadenas; suite 351/0 bloque P; tmp movidos) - commit ronda hecho; fila 23 -> 63/105; GO Comerciantes->Puzzles->Investigacion con reporte consolidado; hallazgo M55 escalado; mi 181",
+  "estado": "iter12 Comerciantes RATIFICADA (65/38/2 exacto; 40 cadenas; suite 379/0 bloque Q; trampas auto-corregidas en vivo con conteo rigido); fila 23 en DOS celdas ajustada; GO bloque final Puzzles+Investigacion CONSOLIDADO; mi 183",
   "pendientes_real": 203,
-  "acuse_enviado": 181,
+  "acuse_enviado": 183,
   "backlog_pendientes": 116
  },
  "ds_oc": {
