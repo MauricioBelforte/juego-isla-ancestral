@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T07:43:20",
+ "ultimo_update": "2026-10-22T07:57:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "265/266/267: S20 RATIFICADA (M70 124/198) + S21 RATIFICADA con matiz (M17 solo QA/picking, implementacion de MiniMax); GO S22",
+  "estado": "268/269: S22 RATIFICADA (M138 19/131 contenido, turno 2-BIS); reparticion M138 (definiciones contenido suyas); regla multitarea aplicada en S23",
   "pendientes_real": 222,
-  "acuse_enviado": 267,
+  "acuse_enviado": 269,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -114,7 +114,8 @@
   "filas del GLOBAL desalineadas por flips concurrentes sin sync: los duenos de fila sync al cerrar tanda y los muestreos del director re-verifican el drift (caso M56 33->43 detectado por G-5.3)",
   "helper proximo_numero cuenta huecos antiguos como existentes: si el numero ofrecido NO es ultimo+1, aplic下游 el 232 del pool y usar ultimo+1 (caso G-5.3 231/232 - el hueco 220 confunde al conteo)",
   "allowlist del validador usa prefijo canonico (flag_): keys sin prefijo se rechazan por diseño - los NUEVOS tests deben usar el prefijo canonico, no tocar el validador (evitado por G-5.3 S14)",
-  "Limpieza automatica del canal MiniMax borra ficheros viejos (perdidos: mi 047, sus 034/035/038) - estado_director.json es la unica memoria del hilo para ese canal; numerar por pool en todo caso (07:42)"
+  "Limpieza automatica del canal MiniMax borra ficheros viejos (perdidos: mi 047, sus 034/035/038) - estado_director.json es la unica memoria del hilo para ese canal; numerar por pool en todo caso (07:42)",
+  "Colision de numeracion por pool compartido al ritmo multitarea de Beam (07:52: DOS ficheros 121 — el acuse mio y su t58) - en adelante cada acuse del director verifica que el head del pool no tenga fichero ya existente con ese numero antes de escribir"
  ],
  "minimax_m3_1_flash": {
   "estado": "048/049: M20 tanda 2 RATIFICADA (78/148); trampa limpieza automatica de canal registrada; M17 implementacion sigue suya",
@@ -180,8 +181,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "ORDEN FUNDADOR multi-tarea: por vuelta ejecuta 2-4 de L1-L6 (M156 variantes-script, M156 particulas, M17 specs, M59, M138, re-verificador) y reporta COMBINADO en un mensaje",
-  "acuse_enviado": 118,
+  "estado": "121 t58 T58 PARCIAL: seccion 9 (specs rejilla M17) verificada OK; flips 80-81 sin localizar por patron textual - pide citas; NEXT L4 M59 + L5 presupuesto render; velocidad: tandas L1+L3 en ~10 min",
+  "acuse_enviado": 122,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "multitarea L1-L6, 2-4 por vuelta"
  },
@@ -300,5 +301,6 @@
   "candidatos_alternativos_free": "poolside/laguna-s-2.1:free (coding agents), nvidia/nemotron-3-ultra-550b-a55b:free (razonador pesado), thinkingmachines/inkling:free (1M ctx), cohere/north-mini-code:free",
   "plan_T1": "consigna agéntica simple al candidato ganador -> onboarding (canal+pool+prompt+ficha N.3) -> T1 calibracion picking documental con verificador externo -> recien ahi modulos",
   "slot_destino": "reemplazaria DS-OC cuando termine verificador de paquete 8 (consolidando DeepSeek a UNA instancia DS-WB)"
- }
+ },
+ "deriva_m138_reparto": "M138 Vertical-Slice COMPARTIDO 07:52: G-5.3 = definiciones de contenido (03-Diseno turno 2-BIS); Beam = presupuesto tecnico de render (subseccion Presupuesto tecnico de render (Beam)) - secciones separadas"
 }
