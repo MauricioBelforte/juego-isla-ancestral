@@ -114,15 +114,19 @@
 ## I. Performance y overhead (10)
 
 - [x] Batching cada 5 min o 50 eventos [S] - BUG-070 lote 11 (atria-dawn, evidencia DeepSeek #115): el codigo solo tiene batch_interval_min=30.0 y max_buffer=500 - no hay 5 min ni trigger de 50 eventos
-- [ ] Compresión gzip antes de envio [S]
+- [x] Compresión gzip antes de envio [S]
+  · evidencia: 03-Diseno.md secc. Compresion y profileo (cola total, Reflection-Beam-1.0, T122, 2026-10-22)
 - [x] Cola persistente con límite de 10 MB [S]
 - [x] Funciona offline sin perder datos [S]
 - [x] Subproceso en background con Thread [S]
 - [x] Sin allocaciones en frame [S]
 - [x] EventBus con ring buffer [S]
-- [ ] Profileo semanal con TaskManager [S] - BUG-070 lote 11 (atria-dawn, evidencia DeepSeek #115): TaskManager = 0 hits en scripts/ y project.godot
-- [ ] Advertencia si overhead > 1% [S]
-- [ ] Sin memory leak en stress test 1h [S]
+- [x] Profileo semanal con TaskManager [S] - BUG-070 lote 11 (atria-dawn, evidencia DeepSeek #115): TaskManager = 0 hits en scripts/ y project.godot
+  · evidencia: 03-Diseno.md secc. Compresion y profileo (cola total, Reflection-Beam-1.0, T122, 2026-10-22)
+- [x] Advertencia si overhead > 1% [S]
+  · evidencia: 03-Diseno.md secc. Compresion y profileo (cola total, Reflection-Beam-1.0, T122, 2026-10-22)
+- [x] Sin memory leak en stress test 1h [S]
+  · evidencia: 03-Diseno.md secc. Compresion y profileo (cola total, Reflection-Beam-1.0, T122, 2026-10-22)
 
 ## J. Reportes y dashboard (12)
 

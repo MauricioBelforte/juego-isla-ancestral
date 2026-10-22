@@ -58,3 +58,20 @@ M103 (Logging) ──► Logger Service (niveles, categorías, rotación)
 - Test de rendimiento: overhead < 1% en pruebas de profiling extendidas
 - Test de opt-out: toggle M91 detiene toda captura inmediatamente
 - Test de agregación: datos exportados son solo JSON agregado sin identificadores
+## Compresion y profileo (cola total M104 batch)
+
+### Compresion gzip antes de envio
+- Comprimir datos con gzip antes de enviar.
+- Reducir tamano de payload.
+
+### Profileo semanal con TaskManager
+- Profileo semanal del rendimiento.
+- Deteccion de regresiones.
+
+### Advertencia si overhead > 1%
+- Advertir si el overhead de analytics supera 1%.
+- Proteger el rendimiento del juego.
+
+### Sin memory leak en stress test 1h
+- Verificar sin memory leak en stress test de 1h.
+- Estabilidad a largo plazo.

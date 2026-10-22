@@ -221,31 +221,46 @@
 
 ## 15. Publicar agradecimiento (RF13)
 
-- [ ] Definir publicación del agradecimiento a las 72-96 h [S]
-- [ ] Definir agradecimiento multi-idioma (M87) [M]
-- [ ] Definir firma del agradecimiento (equipo) [S]
-- [ ] Definir enlace a canales de soporte y comunidad [S]
-- [ ] Definir mención a los pilotos/QA como agradecimiento (M152) [S]
-- [ ] Definir intención abierta de continuar escuchando (M144) [S]
+- [x] Definir publicación del agradecimiento a las 72-96 h [S]
+  · evidencia: 03-Diseno.md secc. Agradecimiento y hotfixes (cola total, Reflection-Beam-1.0, T117, 2026-10-22)
+- [x] Definir agradecimiento multi-idioma (M87) [M]
+  · evidencia: 03-Diseno.md secc. Agradecimiento y cierre (cola total, Reflection-Beam-1.0, T118, 2026-10-22)
+- [x] Definir firma del agradecimiento (equipo) [S]
+  · evidencia: 03-Diseno.md secc. Agradecimiento y hotfixes (cola total, Reflection-Beam-1.0, T117, 2026-10-22)
+- [x] Definir enlace a canales de soporte y comunidad [S]
+  · evidencia: 03-Diseno.md secc. Agradecimiento y hotfixes (cola total, Reflection-Beam-1.0, T117, 2026-10-22)
+- [x] Definir mención a los pilotos/QA como agradecimiento (M152) [S]
+  · evidencia: 03-Diseno.md secc. Agradecimiento y hotfixes (cola total, Reflection-Beam-1.0, T117, 2026-10-22)
+- [x] Definir intención abierta de continuar escuchando (M144) [S]
+  · evidencia: 03-Diseno.md secc. Agradecimiento y cierre (cola total, Reflection-Beam-1.0, T118, 2026-10-22)
 
 ## 16. Preservar builds (RF14/M142)
 
 - [x] Definir archivo de la build RC final con manifest en backup [M]
-- [ ] Definir archivo de hotfixes publicados con manifests [M]
-- [ ] Definir bucket/carpeta de backups con accesos documentados [S]
+- [x] Definir archivo de hotfixes publicados con manifests [M]
+  · evidencia: 03-Diseno.md secc. Hotfixes y cierre (cola total, Reflection-Beam-1.0, T119, 2026-10-22)
+- [x] Definir bucket/carpeta de backups con accesos documentados [S]
+  · evidencia: 03-Diseno.md secc. Hotfixes y cierre (cola total, Reflection-Beam-1.0, T119, 2026-10-22)
 - [x] Definir prueba de recuperación de una build archivada [M]
-- [ ] Definir registro de credenciales de recuperación (sin secretos en repo) [S]
+- [x] Definir registro de credenciales de recuperación (sin secretos en repo) [S]
+  · evidencia: 03-Diseno.md secc. Hotfixes y cierre (cola total, Reflection-Beam-1.0, T119, 2026-10-22)
 - [x] Definir histórico de versiones publicadas (tabla buildId→fecha→hash) [S]
 
 ## 17. Cierre de fase y traspaso a M144
 
-- [ ] Definir acta de cierre del lanzamiento firmada [S]
-- [ ] Definir entrega del informe 72 h a M144 [S]
-- [ ] Definir entrega de la cola de bugs/hotfix a M144 [S]
-- [ ] Definir entrega de la cola de contenido de comunidad a M144 [S]
+- [x] Definir acta de cierre del lanzamiento firmada [S]
+  · evidencia: 03-Diseno.md secc. Agradecimiento y cierre (cola total, Reflection-Beam-1.0, T118, 2026-10-22)
+- [x] Definir entrega del informe 72 h a M144 [S]
+  · evidencia: 03-Diseno.md secc. Agradecimiento y cierre (cola total, Reflection-Beam-1.0, T118, 2026-10-22)
+- [x] Definir entrega de la cola de bugs/hotfix a M144 [S]
+  · evidencia: 03-Diseno.md secc. Hotfixes y cierre (cola total, Reflection-Beam-1.0, T119, 2026-10-22)
+- [x] Definir entrega de la cola de contenido de comunidad a M144 [S]
+  · evidencia: 03-Diseno.md secc. Hotfixes y cierre (cola total, Reflection-Beam-1.0, T119, 2026-10-22)
 - [x] Definir estado de builds preservadas documentado [S]
-- [ ] Definir lecciones aprendidas registradas (M101/M102) [S]
-- [ ] Definir responsabilidades de guardia post-lanzamiento (M144) [S]
+- [x] Definir lecciones aprendidas registradas (M101/M102) [S]
+  · evidencia: 03-Diseno.md secc. Hotfixes y cierre (cola total, Reflection-Beam-1.0, T119, 2026-10-22)
+- [x] Definir responsabilidades de guardia post-lanzamiento (M144) [S]
+  · evidencia: 03-Diseno.md secc. Hotfixes y cierre (cola total, Reflection-Beam-1.0, T119, 2026-10-22)
 
 ## Totales
 

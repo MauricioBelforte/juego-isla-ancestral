@@ -804,3 +804,20 @@ quedan en los logs 1819-1824 con fecha y hora).
 
 **Inventario de bugs conocidos:** `DOCUMENTACION/11-BUGS.md` es el registro canónico (existe); los
 bugs de fase se clasifican por severidad ahi y se referencian desde M101/M102.
+## SesionMaster y flora/clima (cola total M139 batch)
+
+### SesionMaster como unico orquestador de arranque
+- SesionMaster orquesta el arranque del juego.
+- Unico punto de entrada para boot.
+
+### Flora transmisora de estado (M09)
+- Flora que transmite estado del mundo.
+- Integracion con M09 (terreno).
+
+### Clima base del bioma (tropical suave) (M32)
+- Clima base: tropical suave.
+- Integracion con M32 (clima).
+
+### 0 errores en consola al entrar en Play Mode
+- Asegurar 0 errores en consola.
+- Regla de la seccion 12.

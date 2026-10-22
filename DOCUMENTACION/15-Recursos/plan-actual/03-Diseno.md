@@ -220,3 +220,20 @@ inition    (nodo 3D en el    (generación y      (instanciación,   (drop agrega
 3. **Generosidad en cantidades:** los drops básicos se sobredimensionan un 20% respecto al consumo mínimo razonable de M16.
 4. **Sin atascos:** si falta un material, el juego sugiere (interfaz M16/UI) una fuente alternativa registrada en `fuentes_alternativas`.
 5. **Tiempos de espera amables:** máximo 1 estación de juego para materiales comunes; los raros se garantizan una vez por estación en su región.
+## Catalogo y pooling (cola total M15 batch)
+
+### Catalogo con def_id duplicado: error claro en editor
+- Si hay def_id duplicado, error claro en el editor.
+- Validacion al cargar el catalogo.
+
+### Modulo marcado delegable (tras M08/M13)
+- El modulo de recursos es delegable tras M08/M13.
+- Independiente del terreno y del jugador.
+
+### Pooling de particulas de recoleccion
+- Pooling de particulas de recoleccion (una rafaga por evento).
+- Reutilizar particulas para rendimiento.
+
+### Texto/popup suave de cantidad obtenida
+- Popup suave con la cantidad obtenida al recolectar.
+- Feedback visual al jugador.

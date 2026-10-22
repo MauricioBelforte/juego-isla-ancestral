@@ -432,3 +432,20 @@ Reporte (telemetría/review/soporte) → ticket M101 con buildId
 ### Entrega del informe 72 h a M144
 - Entrega del informe 72h a M144.
 - Integracion con post-lanzamiento.
+## Hotfixes y cierre (cola total M143 batch 22)
+
+### Archivo de hotfixes publicados con manifests
+- Archivo de hotfixes publicados con manifests.
+- Trazabilidad de hotfixes.
+
+### Bucket/carpeta de backups con accesos documentados
+- Bucket/carpeta de backups.
+- Accesos documentados.
+
+### Registro de credenciales de recuperacion (sin secretos)
+- Registro de credenciales de recuperacion.
+- Sin secretos en el registro.
+
+### Entrega de la cola de bugs/hotfix a M144
+- Entrega de la cola de bugs/hotfix a M144.
+- Integracion con post-lanzamiento.

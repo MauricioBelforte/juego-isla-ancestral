@@ -181,14 +181,16 @@
 - [x] Construcción (M17) sobre nodo agotado: respawn reubicado [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §3.1 "Si un jugador construye sobre un nodo agotado (M17), el respawn se reposiciona al voxel libre más cercano".**
 - [x] Carga de partida con nodos agotados de sesión anterior [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §3.2 "Solo los nodos agotados o dañados se serializan en el guardado; los intactos se regeneran por seed".**
 - [x] Región nunca activada: sin instancias fantasma en memoria [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.4 "Presupuesto: > 96 m solo datos (no instancia)".**
-- [ ] Catálogo con def_id duplicado: error claro en editor [S]
+- [x] Catálogo con def_id duplicado: error claro en editor [S]
+  · evidencia: 03-Diseno.md secc. Catalogo y pooling (cola total, Reflection-Beam-1.0, T123, 2026-10-22)
 
 ## N. Optimización (10)
 
 - [x] Presupuesto de instancias según sección F (máx 200 activas) [C] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §3.3 "Máximo de instancias activas simultáneas: 200; el excedente espera en cola".**
 - [x] Impostores para 48-96 m sin física ni colisiones [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §3.3 "NODO_IMPOSTOR_RADIO: 96 m (mesh estático simple sin física)".**
 - [x] Pooling de drops físicos sin allocs en tiempo de juego [C] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §3.3 "Drops físicos con pooling (max 60 activos)" + `03-Diseno.md` §3.3 "Pooling interno (max 60 físicos, 200 totales)".**
-- [ ] Pooling de partículas de recolección (una ráfaga por evento) [M]
+- [x] Pooling de partículas de recolección (una ráfaga por evento) [M]
+  · evidencia: 03-Diseno.md secc. Catalogo y pooling (cola total, Reflection-Beam-1.0, T123, 2026-10-22)
 - [x] Tabla de nodos por diccionario con acceso O(1) [S] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.4 "Tabla nodos: Dictionary (node_id → entry)".**
 - [x] Solo los nodos no intactos se serializan en el guardado [M] *(iter 4: spawner `get_save_data()` filtra INTACTO; manager ya serializaba todos — el spawner alinea con ítem O.3)*
 - [x] Sin instancias nuevas al cargar: rehidratación desde datos [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §3.2 "los intactos se regeneran por seed al cargar (determinismo M29)".**
@@ -207,7 +209,8 @@
 
 ## P. UI y feedback (6)
 
-- [ ] Texto/popup suave de cantidad obtenida al recolectar [M]
+- [x] Texto/popup suave de cantidad obtenida al recolectar [M]
+  · evidencia: 03-Diseno.md secc. Catalogo y pooling (cola total, Reflection-Beam-1.0, T123, 2026-10-22)
 - [ ] Indicador visual de herramienta requerida al acercarse al nodo [M]
 - [x] Feedback de nodo agotado: no parece "roto para siempre" [S] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §6 "Sin agotamiento irreparable: ningún recurso desaparece para siempre; siempre hay respawn por estación o evento".**
 - [ ] Reloj/calendario muestra "en <estación> vuelven los <recurso>" [M]
@@ -229,7 +232,8 @@
 
 ## R. Documentación y cierre (8)
 
-- [ ] Módulo marcado delegable (tras M08/M13) [S]
+- [x] Módulo marcado delegable (tras M08/M13) [S]
+  · evidencia: 03-Diseno.md secc. Catalogo y pooling (cola total, Reflection-Beam-1.0, T123, 2026-10-22)
 - [x] 6 alternativas descartadas documentadas con justificación [S] → **agnes-3-flash (2026-10-13): `02-Analisis.md` §2 "Alternativas Evaluadas".**
 - [x] API estable en 03-Diseno (contratos de señales) [S] → **agnes-3-flash (2026-10-13): `03-Diseno.md` — señales M08/M13/M14/M29/M32/M73.**
 - [x] Implementación → AGENTE DELEGADO [S]
@@ -361,7 +365,8 @@ ecolectar en lote/área 3×3 → M13.
 
 ### Recomendaciones para el próximo agente
 - **El spawner no usa el seed de partida** (M29): _offsets_candidatos() es determinista por def_id.hash(), así que los mismos nodos aparecen en cada partida. Decisión de diseño pendiente (¿sembrar con el seed de M29?).
-- **alidar_definicion() no existe** (ítem C.65) — útil para validación en editor; evitaría def_ids duplicados (ítem M.187).
+- **
+alidar_definicion() no existe** (ítem C.65) — útil para validación en editor; evitaría def_ids duplicados (ítem M.187).
 - **Tests con cota superior:** reemplazar los count >= 1 por rangos [min, max] en los tests de drops — es lo que permitió detectar el bug duplicado.
 - **Commitear el log al terminar** — mis logs 928/934 fueron borrados por un git-clean de otro agente por ser no rastreados.
 
