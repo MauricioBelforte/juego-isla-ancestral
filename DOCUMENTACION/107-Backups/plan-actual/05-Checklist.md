@@ -88,7 +88,7 @@
 
 - [x] Crear scripts/backup/backup_local.ps1 [S] -- QA log 934: existe, 222 lineas, SHA256+compresion+log+retention verificados
 - [x] Definir parámetros (SourcePath, DestinationPath, RetentionDays) [S] *(backup_local.ps1 tiene parámetros)*
-- [?] Implementar verificación de disco externo conectado [S] → **usuario** (no hay disco externo)
+- [x] Implementar verificación de disco externo conectado [S] — flip director 2026-10-22 (DS-WB 361/Log 2133: verificación implementada y probada contra unidad ausente y presente, exit 1 con disco desconectado; la copia física real del usuario queda cubierta por L51/L55 como [?])
 - [x] Implementar verificación de espacio disponible [S] *(backup_local.ps1 verifica espacio)*
 - [x] Implementar compresión del directorio del proyecto [S] *(backup_local.ps1: Compress-Archive)*
 - [x] Implementar cálculo de checksum SHA-256 [S] *(backup_local.ps1: Get-FileHash)*
