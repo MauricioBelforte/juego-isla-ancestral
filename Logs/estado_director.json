@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T04:35:40",
+ "ultimo_update": "2026-10-22T02:50:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -112,9 +112,9 @@
   "renumerar respuestas ya escritas cuando un pool regenerado desalinea la secuencia: renombrar el fichero a max+1 y corregir el encabezado interno (caso 083->088)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "032/035: LANE SERIE SELLADA + HALLAZGO GRAVE RATIFICADO Y VERIFICADO (mi barrido commiteo photo_service en vuelo; sus 2 fixes quirurgicos en disco y CI verde 26 checks rc=0); opt-in re-measure corriendo",
+  "estado": "036/033: re-medida lane opt-in SELLADA (2 timeouts caen + test_m56 rc=0); RADAR nunca gate (flaky verificado); AV nativo BUG-144 archivado; fecha julio corregida en disco",
   "pendientes_real": 685,
-  "acuse_enviado": 35,
+  "acuse_enviado": 33,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -251,5 +251,8 @@
  },
  "bug_143": {
   "estado": "Abierto - _reevaluar marca TODOS los hitos del stat (recompensas multiples) - fix minimo propuesto por Hy3; derivado a duena M71 (agnes activa) + log 11-BUGS"
+ },
+ "bug_144": {
+  "estado": "Abierto - ACCESS VIOLATION nativo (rc=-1073741795) test_fixtures_smoke - crash C++ real (MiniMax 036)"
  }
 }

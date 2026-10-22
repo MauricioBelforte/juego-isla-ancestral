@@ -12,6 +12,10 @@ signal visita_terminada(vecino_id: String, house_id: String)
 
 const FRANJAS_HORARIAS := {"manana": 9, "mediodia": 12, "tarde": 16, "noche": 20}
 
+## Estilos del catalogo de decoracion (P25 de M18). El PRNG de partida
+## reparte preferencias entre estos estilos.
+const ESTILOS_DECOR := ["ancestral", "floral", "oceanico", "cenit"]
+
 var _visitas_hoy: Dictionary = {}  # vecino_id -> bool
 var _agenda: Dictionary = {}       # franja -> Array[vecino_id]
 var _preferencias: Dictionary = {} # vecino_id -> String (estilo preferido)
@@ -65,7 +69,9 @@ func terminar_visita(vecino_id: String, house_id: String, manager: Node) -> void
 	visita_terminada.emit(vecino_id, house_id)
 
 ## Reacción del vecino a la decoración de la casa (comentario M21).
-## El comentario depende de si el estilo coincide con su preferencia.
+## El comentario de mismatch VARÍA por partida/día con PRNG determinista:
+## la variante sale de _variante_frase(vecino, dia) — misma partida + mismo
+## día = mismo comentario; nuevo día o partida = variación (item [S] PRNG M29).
 func reaccion_decoracion(vecino_id: String, estilo_casa: String) -> Dictionary:
 	var pref: String = String(_preferencias.get(vecino_id, ""))
 	if pref.is_empty():
@@ -75,10 +81,54 @@ func reaccion_decoracion(vecino_id: String, estilo_casa: String) -> Dictionary:
 			"reacciona": true,
 			"comentario": "¡Adoro este estilo %s! Has captado mi gusto." % estilo_casa.to_lower()
 		}
+	var dia: int = _dia_absoluto()
+	var v: int = _variante_frase(vecino_id, dia)
+	if v == 0:
+		return {
+			"reacciona": true,
+			"comentario": "Interesante decoración... yo habría elegido el estilo %s." % pref.to_lower()
+		}
+	if v == 1:
+		return {
+			"reacciona": true,
+			"comentario": "No es mi estilo %s favorito, pero se ve cuidada." % pref.to_lower()
+		}
 	return {
 		"reacciona": true,
-		"comentario": "Interesante decoración... yo habría elegido el estilo %s." % pref.to_lower()
+		"comentario": "Hmm, yo soy más de estilo %s, pero ¡buen trabajo!" % pref.to_lower()
 	}
+
+## Autocompleta preferencias de estilo con PRNG determinista por partida
+## (M29): la seed deriva del día absoluto del calendario — la misma partida
+## y día produce SIEMPRE los mismos gustos (sin RNG oculto, regla §3).
+## No pisa preferencias ya definidas (definir_preferencia manda).
+## Devuelve cuántas preferencias nuevas asignó.
+func autocompletar_preferencias(vecinos: Array) -> int:
+	var dia: int = _dia_absoluto()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash("m18_visitas_%d" % dia)
+	var asignados: int = 0
+	for vid in vecinos:
+		var v := String(vid)
+		if v.is_empty() or _preferencias.has(v):
+			continue
+		_preferencias[v] = ESTILOS_DECOR[rng.randi_range(0, ESTILOS_DECOR.size() - 1)]
+		asignados += 1
+	return asignados
+
+## Día absoluto del calendario M29 (0 si no está disponible: fallback
+## determinista estable para pruebas headless sin autoload).
+func _dia_absoluto() -> int:
+	var cal = get_node_or_null("/root/TimeCalendar")
+	if cal != null and cal.has_method("get_dia_absoluto"):
+		return int(cal.get_dia_absoluto())
+	return 0
+
+## Variante de frase determinista por (vecino, dia). 0..2.
+func _variante_frase(vecino_id: String, dia: int) -> int:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash("m18_frase_%s_%d" % [vecino_id, dia])
+	return rng.randi_range(0, 2)
 
 ## El vecino usa un mueble apto (sentarse en una silla, admirar un cuadro).
 ## Requiere `mueble` con categoría (FurnitureData o Dictionary).
