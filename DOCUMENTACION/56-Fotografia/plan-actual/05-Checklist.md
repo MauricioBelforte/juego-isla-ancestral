@@ -216,8 +216,8 @@
 
 ## R. Rendimiento y Memoria (M61/M62)
 
-- [ ] Mover la cámara real (réplica) en lugar de render extra [C]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
+- [x] Mover la cámara real (réplica) en lugar de render extra [C]
+  · implementado: navigator.gd activa la camara real (current=true) sin render extra. (Reflection-Beam-1.0, T21, 2026-10-22)
 - [ ] Presupuesto del álbum: ≤ 150 MB con aviso PHOTO-WARN [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Implementar utilidades de medición de memoria del álbum [M]

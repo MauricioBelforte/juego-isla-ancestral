@@ -34,6 +34,10 @@ var _activo_preset: String = "natural"
 var _en_captura: bool = false
 ## Estado del HUD antes de entrar al modo foto (checklist G61).
 var _hud_visible_antes_modo: bool = true
+## ── Hora fijada para la foto (M31, item 69) ─────────────
+## -1 = sin hora fija (usa la hora actual del juego). 0-23 = hora fijada.
+var _hora_fijada: int = -1
+var _hora_previa: int = -1
 
 ## ── Iter. 2 PhotoMode: estado de retorno ────────────────
 ## Cámara y contexto capturados al entrar para restaurarlos al salir.

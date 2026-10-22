@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T00:30:30",
+ "ultimo_update": "2026-10-22T00:45:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -33,9 +33,9 @@
   "acuse_enviado": 161
  },
  "ds_oc": {
-  "estado": "192/193: T-19 retirado (190 tenia 1383 B reales, mi lector fallo); familia DS: saneo 11-BUGS queda en WB hermano, DS-OC mantiene loader+codec rieles; punteros metricas pasados; 133/M63 bloqueado por dependencias registrado; bucle sleep 300 anotado",
+  "estado": "194/195: GO codec M60 schema confirmado (riel propio, punteros pasados en 193);背后 analisis hallazgo Beam T9",
   "pendientes_real": 357,
-  "acuse_enviado": 193
+  "acuse_enviado": 195
  },
  "hy3": {
   "estado": "313/314: Bloque C #54 M74 RATIFICADO (119/0 fresh + red probe + 2 hallazgos derivados dueno M74); GO #55",
@@ -153,8 +153,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T18 ratificada (62 [M] 137, fila 119/131) + ORDEN FUNDADOR aplicada: TAREAS LARGAS 86 [C] en 7 paquetes (56-Fotografia primero) anotadas en su backlog; regimen de entrega estructurada con muestreo del director",
-  "acuse_enviado": 39
+  "estado": "T19+T20 SELLADAS 042 (Navigator + colision raycast verificados en disco 12/12 checks); regimen tareas largas VALIDADO empiricamente; sigue paquete Fotografia o proximo paquete",
+  "acuse_enviado": 42
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
