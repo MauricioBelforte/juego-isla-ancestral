@@ -3238,3 +3238,19 @@ Alcance: barrido real de los 9 agentes activos; cada dato fue verificado contra 
 - Prudencia de dueno funciono: G-5.3 pregunto antes de tocar M20; MiniMax reclamo su cola exclusiva; CERO pisados esta madrugada.
 - El QA cruzado paso a agnes (verificadora probada con BUG-142/143) mientras su modulo M73 esta en techo.
 - El director volvio a rozar el riesgo del barrido -A (mitigado: exclude NUMEROS + commits por frente; trampa ya canonica en estado_director.json).
+
+
+### Tabla de delegacion proximas rondas (2026-10-22 07:15, respondiendo al fundador - lo bueno Y lo malo)
+
+Formato: agente -> DELEGAR (nicho probado) / EVITAR o CUIDAR (lo malo observado) / CONDICION.
+
+1. **agnes**: DELEGAR = coleccionables data-driven, bugs con repro, QA cruzado (probada con BUG-142/143). EVITAR = items que requieren editor/vision (su fallo previo: arrancar sin ellos). CONDICION = cuando su modulo entra en techo, redirigir de inmediato (hoy ya se hizo con QA cruzado; si se demora vuelve el riesgo de vacio).
+2. **MiniMax-M3.1-Flash**: DELEGAR = infra CI, lanes, wrapper, censo, items con checks nombrados (M20: cerrado 1 + revertido 2 SIN inflar - el mejor patron). EVITAR = no usarlo como re-verificador de lo que el propio agente ya auditó (independencia). CONDICION = pool se regenera en su plataforma: sanear max+1 siempre.
+3. **Reflection-Beam-1.0**: DELEGAR = tareas largas [C] por paquete (86 tareas: 56-Foto/17/59/138/147/58/28), picking documental con linea textual, re-verificacion multi-ciclo (6 ciclos/6 hallazgos). EVITAR = items que requieren EDITOR Godot los deja [ ] honestos - no es su falla, es su limite: asignar editor-items a un agente con editor abierto (G-5.3 o el fundador). CONDICION = no auto-sellarse a si misma.
+4. **G-5.3-Flash-Agente**: DELEGAR = S-series de autonomia (19 tandas), mecanicas self-contained, topes/config leidos del diseno. EVITAR = nada observable esta ronda. CUIDAR = clasifica bien NO-accionables (M75), lo cual reduce su volumen util: alimentarle clusters con items accionables de verdad. CONDICION = poll regenera: max+1.
+5. **DeepSeek-V4.1-Flash (WB)**: lo MALO esta madrugada = SANEO 11-BUGS SIN ARRANQUE (79 defectos parados). DELEGAR a otro si no hay arranque en la proxima ronda; su nicho historico (loader/vehiculos) sigue valido para MODULOS, no para el saneo pendiente.
+6. **DS-V4.1-Flash-Opencode**: DELEGAR = codecs/tools (M60). CUIDAR = falso T-19 suyo (189: 1383 B reales) ya canonico - exigir re-lectura de bytes+mtime antes de declarar caidos. CONDICION = decisiones M17/M18 fuente unica reclamadas al fundador.
+7. **Step-5-WB**: DELEGAR = ruteo rapido de encargos, flips, T-s individuales. LO VACIO esta ronda es su COLA, no su capacidad: apilarle 2-3 encargos por vuelta (metodo 30.2) en vez de uno.
+8. **Hy3**: DELEGAR = QA de modulos de DS (no es hermano del modelo), verificaciones cruzadas de familia.
+9. **Ling-3.1-Flash**: DELEGAR = i18n M87/derivado documental M147/M160/M95/M100/M121 (nicho historico de 21 tandas). CONDICION = cron de 60 min funcionando (el cron viejo lo silenciaba: falla de ruteo corregida, no pereza). Si su cron vuelve a enmudecer 1 vuelta, re-enganchar YA.
+10. **Director**: lo MALO propio re-listado en N.2-ter (barrido -A, greps sin tildes, conteos de memoria, derivaciones en canales ajenos). CUIDAR en proximas rondas: commitear por FRENTE con exclusions; muestrear por TEXTO con tildes; extra consolidados al dueño.
