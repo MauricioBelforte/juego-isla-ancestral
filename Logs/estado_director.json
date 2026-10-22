@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T18:50:30",
+ "ultimo_update": "2026-10-22T19:00:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -28,9 +28,10 @@
   "acuse_enviado": 360
  },
  "step_5": {
-  "estado": "178 RATIFICADO (iter10 amistad 316/0, Log 2131 reparado, conteo 62/105 exacto); autorizado commit+move; reposicion SECRETAS(5,L38)->Comerciantes(3)->Puzzles(6)->Investigacion(5); respuesta 179",
+  "estado": "178 RATIFICADO (iter10 amistad 316/0, Log 2131 reparado, conteo 62/105 exacto); autorizado commit+move; reposicion SECRETAS(5,L38)->Comerciantes(3)->Puzzles(6)->Investigacion(5); respuesta 179 || CRON D repoblacion: SECCION A = 116 items limpios (M23+M59+M21+M69, fuente por item; M56/M93 excluidos por dueños/agotado)",
   "pendientes_real": 203,
-  "acuse_enviado": 179
+  "acuse_enviado": 179,
+  "backlog_pendientes": 116
  },
  "ds_oc": {
   "estado": "OFFLINE hoy (fundador: disponible manana 2026-10-23); su rol de verificador oficial de Beam queda programado para entonces; HOY la verificacion del P-100 la hace el director por muestreo ~10% por batch",
@@ -306,7 +307,7 @@
   "directiva": "FUNDADOR 2026-10-22 07:12: DeepSeek-V4.1-Flash (WB), Step-5-WorkBuddy y Hy3 trabajan cada UNA HORA por sus cronometros (limite de creditos WorkBuddy)",
   "implicacion_operativa": "NO delegarles tareas que requieran resultados inmediatos; dejarlos trabajar tranquilos. Tareas urgentes/asicronas -> agentes de Kilo (agnes, MiniMax-M3.1, Reflection-Beam-1.0, G-5.3) o resolverlas el director. Para WB: encargos apilados de fondo que aguanten 1h+ sin bloquear a nadie"
  },
- "nota_re_poblacion_cron_d": "CRON D 07:15: TODOS los agentes activos con cola viva via ordenes de canal (G-5.3 reg 229, Beam paquetes largos, agnes QA cruzado, MiniMax cola M20, Ling encargo 200, WB trio async por creditos) - SIN repoblacion necesaria; archivos de TAREAS-POR-MODELO quedan como legacy",
+ "nota_re_poblacion_cron_d": "BUG de scripts/repoblar_backlog.py linea 50 (AttributeError: glob._globmod) - repoblacion hecha MANUAL this vuelta; arreglar script antes del proximo CRON D (fix trivial: import glob sano)",
  "regla_multitarea_fundador": {
   "directiva": "FUNDADOR 2026-10-22 07:37: A TODOS los agentes, siempre que haya tiempo, dar MAS DE UNA TAREA por encargo - optimiza mensajes",
   "aplicacion": "El director nunca envia encargo mono-tarea si hay cola: minimo 2 items (tarea principal + extras etiquetados). El agente reporta combinado (seccion corta por item). Aplica a los 9 canales y a Futuros, incluido WB asincrono (2-3 de fondo por vuelta horaria)",
