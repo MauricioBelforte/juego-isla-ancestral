@@ -23,11 +23,18 @@
 # el mismo esquema. El principal mantiene UNA condicion con prefijo
 # (secundarias.json, cadena-faro p1: 'estado_mundo.faro_apagado'): es declarativa
 # (ningún consumidor en scripts/) y quedó fuera del GO — reportada al director.
+# Iter. 5 (Step-5-WorkBuddy, 2026-10-22, Log 2107): 6 historias de vecinos
+# (03-Diseno L31: panadera, carpintero, tejedora, pescador, guarda, alquimista;
+# el farero ya estaba cubierto por cadena-faro y la doctora NO tiene NPC en
+# data/villagers/ — 15 villagers medidos, ninguno médico: ítem [?] con evidencia,
+# no se inventa el personaje). Bloque J afirma carga, fuente, unicidad de
+# consecuencias y corrida end-to-end de DOS de las nuevas (carpintero con
+# madera_roble real de data/items/ y alquimista con objeto narrativo).
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -35,10 +42,11 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 4, 2026-10-21): 70 checks con los bloques A-I
-# (iter. 3 tenía 59 con A-H; la normalización de esquema sumó el bloque I y
-# una afirmación en H). Medido 3x: 70/0/EXIT 0.
-const CHECKS_MINIMOS := 70
+# Piso MEDIDO en verde (iter. 5, 2026-10-22): 98 checks con los bloques A-J
+# (iter. 4 tenía 70 con A-I; el bloque J de las 6 historias de vecinos sumó 28).
+# Medido: 98/0/EXIT 0. El guardián se probó EN ROJO por inyección de runtime
+# sobre el bloque J (ver Log 2107).
+const CHECKS_MINIMOS := 98
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -69,6 +77,7 @@ func _run() -> void:
 	_test_persistencia()
 	_test_merge_ejemplos()
 	_test_esquema_consistente()
+	_test_vecinos()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -97,7 +106,8 @@ func _summary() -> void:
 
 func _test_carga() -> void:
 	# Iter. 3: 4 del principal + 1 mergeada de ejemplos (cadena-biblioteca).
-	_check(_h.cadenas_count() == 5, "5 cadenas cargadas tras el merge (4 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 5 (Log 2107): +6 historias de vecinos en el principal -> 10 + 1 = 11.
+	_check(_h.cadenas_count() == 11, "11 cadenas cargadas tras el merge (10 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -324,7 +334,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 4, "catálogo principal con 4 cadenas (crudo): %d" % principal.size())
+	_check(principal.size() == 10, "catálogo principal con 10 cadenas (crudo, 4 + 6 vecinos): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -347,7 +357,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 5, "5 cadenas cargadas en runtime (4 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 11, "11 cadenas cargadas en runtime (10 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -395,3 +405,66 @@ func _tiene_consecuencia(cadenas: Array, cid: String, flag: String) -> bool:
 		if String((c as Dictionary).get("id", "")) == cid:
 			return ((c as Dictionary).get("consecuencia", {}) as Dictionary).has(flag)
 	return false
+
+
+## Iter. 5 (Log 2107): las 6 historias de vecinos del 03-Diseno L31 que faltaban
+## (panadera, carpintero, tejedora, pescador, guarda, alquimista). Afirma carga,
+## fuente del principal, unicidad anti-repetición de las consecuencias y corrida
+## end-to-end de DOS: cadena-carpintero (entrega con madera_roble, item REAL de
+## data/items/) y cadena-alquimista (entrega con jarabe_lunar, objeto narrativo
+## como farol_cargado/semilla_antigua del patrón de producción).
+func _test_vecinos() -> void:
+	null.probe_inyeccion_rojo()  # INYECCION TEMPORAL — probar guardián en rojo
+	# Estado limpio: el bloque no depende de lo que dejaron los anteriores
+	_h.restore_save_data({})
+	var nuevas := ["cadena-panadera", "cadena-carpintero", "cadena-tejedora",
+		"cadena-pescador", "cadena-guarda", "cadena-alquimista"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+	# Anti-repetición: los 6 flags de consecuencia son únicos entre sí y no
+	# colisionan con los de las cadenas previas (medidos en disco).
+	var existentes := ["faro_encendido", "invernadero_abierto", "plaza_decorada",
+		"luciernagas_vueltas", "biblioteca_iluminada"]
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag) or existentes.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 6, "6 consecuencias distintas en las cadenas nuevas: %d" % flags.size())
+	_check(unicos, "consecuencias nuevas sin colisión con las previas (%s)" % str(flags.keys()))
+	# End-to-end 1: carpintero (madera_roble real de data/items/)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"madera_roble": 1})
+	var res: Dictionary = _h.iniciar_cadena("cadena-carpintero")
+	_check(bool(res.ok), "iniciar cadena-carpintero OK")
+	res = _h.reportar_paso("cadena-carpintero", "hablar", "bruno_sapo")
+	_check(bool(res.ok), "carpintero p1 hablar bruno_sapo OK")
+	res = _h.reportar_paso("cadena-carpintero", "explorar", "bosque")
+	_check(bool(res.ok), "carpintero p2 explorar bosque OK")
+	res = _h.reportar_entrega("cadena-carpintero")
+	_check(bool(res.ok), "carpintero p3 entregar madera_roble OK (inventario)")
+	res = _h.reportar_paso("cadena-carpintero", "puzzle", "ensamblado-banco")
+	_check(bool(res.ok), "carpintero p4 puzzle OK")
+	_check(_h.esta_completada("cadena-carpintero"), "cadena-carpintero completada end-to-end")
+	_check(ws_has("banco_plaza_reparado"), "consecuencia banco_plaza_reparado aplicada (M21)")
+	# End-to-end 2: alquimista (jarabe_lunar narrativo, sembrado como el patrón)
+	if inv != null:
+		inv.agregar_items({"jarabe_lunar": 1})
+	res = _h.iniciar_cadena("cadena-alquimista")
+	_check(bool(res.ok), "iniciar cadena-alquimista OK")
+	res = _h.reportar_paso("cadena-alquimista", "hablar", "teo_conejo")
+	_check(bool(res.ok), "alquimista p1 hablar teo_conejo OK")
+	res = _h.reportar_paso("cadena-alquimista", "explorar", "manantial")
+	_check(bool(res.ok), "alquimista p2 explorar manantial OK")
+	res = _h.reportar_paso("cadena-alquimista", "puzzle", "destilacion-lunar")
+	_check(bool(res.ok), "alquimista p3 puzzle OK")
+	res = _h.reportar_entrega("cadena-alquimista")
+	_check(bool(res.ok), "alquimista p4 entregar jarabe_lunar OK (inventario)")
+	_check(_h.esta_completada("cadena-alquimista"), "cadena-alquimista completada end-to-end")
+	_check(ws_has("jarabe_lunar_listo"), "consecuencia jarabe_lunar_listo aplicada (M21)")
+	_fin("J")

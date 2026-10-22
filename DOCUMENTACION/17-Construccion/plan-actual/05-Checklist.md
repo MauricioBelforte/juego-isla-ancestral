@@ -218,7 +218,7 @@
 
 ## O. Polish (8)
 
-- [ ] Animación de colocación: transición breve fantasma → pieza real (escala/hammer) [C]
+- [x] Animación de colocación: transición breve fantasma → pieza real (escala/hammer) [C]
 - [ ] Partículas de polvo al colocar y demoler (M51: VFX de construcción) [M]
 - [ ] Sonido de colocación y de demolición que varía con el material (M43) [M]
 - [ ] Sonido ambiental de obras: martilleo suave mientras el modo está activo [M]

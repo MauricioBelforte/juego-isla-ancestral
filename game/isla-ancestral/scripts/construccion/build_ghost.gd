@@ -45,6 +45,10 @@ var _color: Color = BuildPreview.COLOR_INVALIDO
 var _celdas: Array[Vector3i] = []
 var _receta_id: StringName = &""
 var _lod: bool = false
+## Animacion de colocacion (item 221): escala 0->1 con hammer bounce.
+var _animando: bool = false
+var _anim_timer: float = 0.0
+const ANIM_DURACION: float = 0.3
 ## Malla REAL en uso (null si se usa la caja de respaldo).
 var _malla_real: Mesh = null
 ## Cache ruta -> Mesh (o null si la ruta no resuelve). Evita recargar por frame.
@@ -199,8 +203,37 @@ func aplicar_resultado(res: Dictionary, receta: PlacementRule) -> void:
 		float(celda.z) + dim.z * 0.5)
 	_mesh.visible = true
 	_visible_logico = true
+	# Animacion de colocacion (item 221): si ok, escalar de 0 a 1.
+	if ok:
+		animar_colocacion()
 
 ## Oculta el fantasma (sin destruir la malla -> pooling).
+## Inicia la animacion de colocacion: escala de 0 a 1 con hammer bounce.
+func animar_colocacion() -> void:
+	_asegurar_nodos()
+	_animando = true
+	_anim_timer = 0.0
+	if _mesh != null:
+		_mesh.scale = Vector3.ZERO
+
+
+func _process(delta: float) -> void:
+	if not _animando or _mesh == null:
+		return
+	_anim_timer += delta
+	var t := clampf(_anim_timer / ANIM_DURACION, 0.0, 1.0)
+	# Hammer bounce: 0 -> 1.2 -> 1.0
+	var scale_val := 0.0
+	if t < 0.6:
+		scale_val = (t / 0.6) * 1.2
+	else:
+		scale_val = 1.2 - ((t - 0.6) / 0.4) * 0.2
+	_mesh.scale = Vector3.ONE * scale_val
+	if t >= 1.0:
+		_animando = false
+		_mesh.scale = Vector3.ONE
+
+
 func ocultar() -> void:
 	_visible_logico = false
 	_celdas.clear()

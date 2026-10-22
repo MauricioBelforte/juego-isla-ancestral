@@ -49,7 +49,7 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] P24: cultivos de isla — palma de coco y flor de coral exclusivas [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] P25: agricultura decorativa — helecho ornamental sin rendimiento [S] — crop_definition.gd decorative_only; calcular_rendimiento() devuelve [] si decorative_only
+- [x] P25: agricultura decorativa — helecho ornamental sin rendimiento [S] — crop_definition.gd decorative_only; calcular_rendimiento() devuelve [] — VERIFICADO qa_farm_pausas_m33.gd _test_decorative_only (28/0 EXIT 0: rinde [] hasta en LISTA + control anti-falso-verde sin flag sí rinde)
   · espera: feature de M33-Agricultura (definir contrato/dueno por asignar)
 
 ## C. CropDefinition y catálogo (10)
@@ -157,9 +157,9 @@
 ## K. Edge cases (12)
 
 - [x] Cultivo plantado el último día de la estación apta [S]
-- [ ] Cultivo en DORMANTE al pasar a estación apta: retoma sin pérdida [S]
+- [x] Cultivo en DORMANTE al pasar a estación apta: retoma sin pérdida [S] — VERIFICADO qa_farm_pausas_m33.gd _test_dormante_retoma (28/0 EXIT 0: grown_days confluye, prev_stage preserva etapa activa)
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Sequía prolongada: pausa indefinida sin muerte [S]
+- [x] Sequía prolongada: pausa indefinida sin muerte [S] — VERIFICADO qa_farm_pausas_m33.gd _test_sequia_sin_muerte (28/0 EXIT 0: 45 días SIN_AGUA, días congelados, tile vivo, calidad A7, riego reanuda)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Pisoteo de NPC: agitación visual sin pérdida de progreso [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -247,7 +247,7 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-**Totales:** 155 ítems · Completados: 106 · Pendientes: 49 · No resueltos: 0. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 106 [x] / 49 [ ] / 0 [?] = 155; el bloque declaraba 153 items y 47 pendientes.)
+**Totales:** 155 ítems · Completados: 109 · Pendientes: 46 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 109 [x] / 46 [ ] / 0 [?] = 155 tras tanda pausas+P25, qa_farm_pausas_m33.gd 28/0 + lote 42/0.) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 106 [x] / 49 [ ] / 0 [?] = 155; el bloque declaraba 153 items y 47 pendientes.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].
