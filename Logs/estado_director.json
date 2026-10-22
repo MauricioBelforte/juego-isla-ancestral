@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T21:05:50",
+ "ultimo_update": "2026-10-22T21:10:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "veredicto M77/M108 ACEPTADO (957-renumerada); conciliacion M77=108/130 oficial / M108 202/205 con tiebreaker opcional; consolidado proximo paquete; mi 958",
+  "estado": "M70 sellado con deuda (957: 0/4 alto-riesgo, 1 deuda perf->DS-OC); concepto sello-con-deuda instaurado; M108 conciliado (205 oficial); veredictora 100% dia sin fallas; mi 959",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,10 +13,11 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 958,
+  "acuse_enviado": 959,
   "pool_saneado": true,
   "sellos_emitidos": [
-   "M99 169/169 (955)"
+   "M99 169/169 (955)",
+   "M70 198/198 con deuda perf (957)"
   ]
  },
  "g_5_3": {
@@ -356,6 +357,14 @@
    ],
    "origen": "hallazgo NFR S48",
    "fecha": "2026-10-22 20:30"
+  },
+  {
+   "modulo": "70->profiler",
+   "flags": [
+    "presupuesto <0.5 ms/frame de interacciones es META de diseno: requiere medicion profiler real antes del sello perf (deuda M70)"
+   ],
+   "origen": "deuda agnes 957",
+   "fecha": "2026-10-22 21:10"
   }
  ]
 }
