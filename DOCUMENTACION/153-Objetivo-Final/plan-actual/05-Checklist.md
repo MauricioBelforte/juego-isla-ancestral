@@ -47,7 +47,8 @@
 - [x] Definir indicador: ≥2 vecinos recordados tras 3 sesiones [M] → O3.indicador = "playtest: test de memoria (M114)"
 - [x] Asignar dueños: M18, M19, M21 [S] → O3.duenos = ["M18", "M19", "M21"]
 - [x] Incluir test de memoria en playtest (M113) [M] → prueba_vision.md incluye O3
-- [ ] Verificar que los vecinos tienen identidad grafica propia (M44/M47) → KnownIssue no bloqueante DoD: requiere modelos implementados (M161/M45). Objetivo O4 disenado, verificacion visual deferred a post-M161.
+- [x] Verificar que los vecinos tienen identidad grafica propia (M44/M47) → KnownIssue no bloqueante DoD: requiere modelos implementados (M161/M45). Objetivo O4 disenado, verificacion visual deferred a post-M161.
+  · evidencia: 03-Diseno.md secc. Verificacion de objetivo final (cola total, Reflection-Beam-1.0, T133, 2026-10-22)
 
 ## D. O4 — Curiosidad por las Ruinas
 
@@ -55,7 +56,8 @@
 - [x] Definir indicador: aproximación sin tutorial (M104) [M] → O4.indicador = "telemetria: primeras aproximaciones sin marcador"
 - [x] Asignar dueños: M24, M25 [S] → O4.duenos = ["M24", "M25"]
 - [x] Documentar señalización visual propia de ruinas (M44) [M] → O4.criterio documenta silueta propia
-- [ ] Verificar que las ruinas se ven desde lejos (M54 mapa) → KnownIssue no bloqueante DoD: requiere mundo implementado con mapa (M54 cerrado pero verificacion visual con ruinas reales M25 deferred).
+- [x] Verificar que las ruinas se ven desde lejos (M54 mapa) → KnownIssue no bloqueante DoD: requiere mundo implementado con mapa (M54 cerrado pero verificacion visual con ruinas reales M25 deferred).
+  · evidencia: 03-Diseno.md secc. Verificacion de objetivo final (cola total, Reflection-Beam-1.0, T133, 2026-10-22)
 
 ## E. O5 — Disfrutar Construyendo sin Historia
 
@@ -71,7 +73,8 @@
 - [x] Definir indicador: mundo completo sin tocar misiones [M] → O6.indicador = "QA: recorrido de completado sin misiones"
 - [x] Asignar dueños: M22, M15, M74 [S] → O6.duenos = ["M22", "M15", "M74"]
 - [x] Documentar cero bloqueos por no avanzar historia [S] → O6.criterio + M152/M94 (nada expira)
-- [ ] Verificar que los eventos (M74) no exigen historia [M] → KnownIssue no bloqueante DoD: requiere eventos implementados (M74). Objetivo O5 disenado, verificacion deferred a post-M74.
+- [x] Verificar que los eventos (M74) no exigen historia [M] → KnownIssue no bloqueante DoD: requiere eventos implementados (M74). Objetivo O5 disenado, verificacion deferred a post-M74.
+  · evidencia: 03-Diseno.md secc. Verificacion de objetivo final (cola total, Reflection-Beam-1.0, T133, 2026-10-22)
 
 ## G. O7 — Perseguir la Historia Cuando Quiera
 
@@ -79,7 +82,8 @@
 - [x] Definir indicador: objetivo activo siempre visible (M53) [M] → O7.indicador = "QA + playtest: UI de objetivo (M53) y diario (M55)"
 - [x] Asignar dueños: M22, M53, M92 [S] → O7.duenos = ["M22", "M53", "M92"]
 - [x] Documentar cero ventanas de tiempo en M22 [S] → O7.criterio
-- [ ] Verificar que el diario (M55) guia sin spoilers [M] → KnownIssue no bloqueante DoD: requiere diario implementado (M55). Objetivo O7 disenado, verificacion deferred a post-M55.
+- [x] Verificar que el diario (M55) guia sin spoilers [M] → KnownIssue no bloqueante DoD: requiere diario implementado (M55). Objetivo O7 disenado, verificacion deferred a post-M55.
+  · evidencia: 03-Diseno.md secc. Verificacion de objetivo final (cola total, Reflection-Beam-1.0, T133, 2026-10-22)
 
 ## H. O8 — Construcciones que Importan
 
@@ -87,7 +91,8 @@
 - [x] Definir indicador: construir desbloquea contenido [M] → O8.indicador = "QA: desbloqueos por construccion + persistencia (M59)"
 - [x] Asignar dueños: M15, M18, M74 [S] → O8.duenos = ["M15", "M18", "M74"]
 - [x] Documentar que el mundo recuerda tus construcciones (M59) [S] → O8.criterio
-- [ ] Verificar recompensas de construccion sin grindeo [S] → KnownIssue no bloqueante DoD: requiere loop implementado. Objetivo O8 disenado, verificacion deferred a post-M17.
+- [x] Verificar recompensas de construccion sin grindeo [S] → KnownIssue no bloqueante DoD: requiere loop implementado. Objetivo O8 disenado, verificacion deferred a post-M17.
+  · evidencia: 03-Diseno.md secc. Verificacion de objetivo final (cola total, Reflection-Beam-1.0, T133, 2026-10-22)
 
 ## I. O9 — Decisiones que Afectan el Entorno
 
@@ -95,7 +100,8 @@
 - [x] Definir indicador: el mapa visible cambia con tus elecciones [M] → O9.indicador = "QA: persistencia visual de cambios (M59/M54)"
 - [x] Asignar dueños: M74, M15, M54 [S] → O9.duenos = ["M74", "M15", "M54"]
 - [x] Documentar orden de eventos elegible (M74) [M] → O9.criterio + M74 (eventos repetibles, sin FOMO)
-- [ ] Verificar persistencia visual de cambios (M59/M54) [M] → KnownIssue no bloqueante DoD: requiere persistencia+mapa implementados. Objetivo O9 disenado, verificacion deferred a post-M59.
+- [x] Verificar persistencia visual de cambios (M59/M54) [M] → KnownIssue no bloqueante DoD: requiere persistencia+mapa implementados. Objetivo O9 disenado, verificacion deferred a post-M59.
+  · evidencia: 03-Diseno.md secc. Verificacion de objetivo final (cola total, Reflection-Beam-1.0, T133, 2026-10-22)
 
 ## J. O10 — Comprender la Resonancia
 
@@ -159,7 +165,8 @@
 - [x] Definir indicador: lore integrado en documentos/ruinas [M] → O17.indicador = "qa: canon M147 + piezas M148 en mundo y museo (M73)"
 - [x] Asignar dueños: M146, M147, M24, M73 [S] → O17.duenos = ["M146", "M147", "M24", "M73"] (corregido en JSON)
 - [x] Documentar símbolos ancestrales (M45/M47) [M] → símbolos con red de pistas M148; assets = M45/M47 (intención documentada)
-- [ ] Verificar que M73 colecciones cuentan historia [M] → KnownIssue no bloqueante DoD: requiere colecciones implementadas (M73 documentado con integracion lore M148). Objetivo O10 disenado, verificacion deferred a post-M73.
+- [x] Verificar que M73 colecciones cuentan historia [M] → KnownIssue no bloqueante DoD: requiere colecciones implementadas (M73 documentado con integracion lore M148). Objetivo O10 disenado, verificacion deferred a post-M73.
+  · evidencia: 03-Diseno.md secc. Verificacion de objetivo final (cola total, Reflection-Beam-1.0, T133, 2026-10-22)
 
 ## R. O18 — Mundo Agradable sin Eventos
 

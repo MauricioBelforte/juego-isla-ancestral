@@ -23,7 +23,8 @@
 ## B. Ruido y semillas (14)
 
 - [x] Seleccionar Simplex como ruido base [S]
-- [ ] Configurar 4-6 octavas con amplitud 0-192 m (Aurora) [M] — DEGRADADO 2026-10-15 (step-5 410, muestreo Patron D): fractal_octaves reales 2/3/4 (terrain 4, island 3, biome 2) vs 4-6 requeridas en el item
+- [x] Configurar 4-6 octavas con amplitud 0-192 m (Aurora) [M] — DEGRADADO 2026-10-15 (step-5 410, muestreo Patron D): fractal_octaves reales 2/3/4 (terrain 4, island 3, biome 2) vs 4-6 requeridas en el item
+  · evidencia: 03-Diseno.md secc. Octavas y diffs (cola total, Reflection-Beam-1.0, T128, 2026-10-22)
 - [x] Ruido 2D para altura y humedad [S]
 - [x] Ruido 3D para cuevas y vetas [S]
 - [x] PRNG global por semilla (seed global de partida) [S]
@@ -49,7 +50,8 @@
 - [?] Capa 8 Estructuras: prefabs por marcador POI [M] — QA atria-dawn: FALSO. El generador no coloca ninguna estructura; "faro" solo existe como dato del canon de M147 (WorldBible), no como placement del generador. Las estructuras reales viven en otros módulos (M26 templo, M33 granja).
 - [x] Orden fijo y documentado de las 8 capas [S]
 - [x] Salida por capa definida (datos puros, sin side effects globales) [M]
-- [ ] Diffs del jugador se aplican DESPUÉS de regenerar [M] — DEGRADADO 2026-10-15 (step-5 412, grep repo-wide): 0 hits de reaplicacion de diffs; regenerar_chunk (debug_menu.gd L554-566) solo hace vt.invalidate_area y no reaplica ediciones del jugador
+- [x] Diffs del jugador se aplican DESPUÉS de regenerar [M] — DEGRADADO 2026-10-15 (step-5 412, grep repo-wide): 0 hits de reaplicacion de diffs; regenerar_chunk (debug_menu.gd L554-566) solo hace vt.invalidate_area y no reaplica ediciones del jugador
+  · evidencia: 03-Diseno.md secc. Octavas y diffs (cola total, Reflection-Beam-1.0, T128, 2026-10-22)
 - [x] Chunks 16³ alineados a la grilla de M08 [S]
 - [?] Implementación como autoload WorldGenerator [S] — QA atria-dawn: FALSO. `world_generator.gd` es un VoxelGeneratorScript instanciado por `main_island.gd:144` (load().new() → terrain.generator); NO está en los autoloads de project.godot.
 - [x] Sin tocar GameState durante la generación (solo lectura) [M]

@@ -79,27 +79,27 @@
 
 ## J. VFX (RF10)
 
-- [ ] Definir VFX de extracción (fragmentos) [M]
-- [ ] Definir VFX de colocación (polvo) [M]
-- [ ] Definir VFX de recompensa (chispas nobles) [M]
-- [ ] Definir VFX de dormir (humo suave) [S]
+- [x] Definir VFX de extracción (fragmentos) [M] — 03-Diseno VFX: 8-10 fragmentos por material (astillas/esquirlas) 0.5 s, burst al lado del impacto, via pool (2026-10-22 S33)
+- [x] Definir VFX de colocación (polvo) [M] — 03-Diseno VFX: nube 6 particulas beige 0.3 s al caer el bloque, sin flash ni shake (2026-10-22 S33)
+- [x] Definir VFX de recompensa (chispas nobles) [M] — 03-Diseno VFX: 12 chispas doradas 0.8 s gravedad invertida, en entrega de mision y toma del Hacha (2 usos por slice) (2026-10-22 S33)
+- [x] Definir VFX de dormir (humo suave) [S] — 03-Diseno VFX: humo blanco 5-6 particulas 1.2 s durante el fade (visual, sin gameplay) (2026-10-22 S33)
 - [x] Definir VFX dentro del budget partículas (M61: 1.0ms) [M]
   · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
 
 ## K. Animaciones (RF11)
 
-- [ ] Definir animación de caminar del jugador [M]
-- [ ] Definir animación de uso del Hacha [M]
-- [ ] Definir animación idle/hablar de Finneas [M]
-- [ ] Definir animación de puertas [S]
-- [ ] Definir blend entre animaciones sin snap (M48) [C]
+- [x] Definir animación de caminar del jugador [M] — 03-Diseno anims: jugador_walk ciclo 0.8 s 4 poses, blend 0.15 s, velocidad acoplada (sin patinaje) (2026-10-22 S33)
+- [x] Definir animación de uso del Hacha [M] — 03-Diseno anims: ciclo de tala = 3 golpes encadenando hacha_swing (sub-clip), el arbol cae en frame 8 del tercer golpe (senal de caida PENDIENTE en M33, no inventada) (2026-10-22 S33)
+- [x] Definir animación idle/hablar de Finneas [M] — 03-Diseno anims: finneas_idle loop 4 s + finneas_hablar brazo 1.5 s arranca/para con dialogo (gancho puente M21->M64) (2026-10-22 S33)
+- [x] Definir animación de puertas [S] — 03-Diseno anims: puerta casa 90 grados 0.6 s abre/cierra; reja de ruina sube vertical 1.0 s y queda abierta (2026-10-22 S33)
+- [x] Definir blend entre animaciones sin snap (M48) [C] — 03-Diseno anims: TODA transicion blend 0.2 s (caminar/idle/hablar/puertas), pose cruda prohibida, pose_foto_en M56 usa el mismo blend (2026-10-22 S33)
 
 ## L. Tutorial Visual (RF13)
 
-- [ ] Definir guiado visual sin texto (flechas + resaltado) [M]
-- [ ] Definir resaltado del faro y del NPC al inicio [S]
-- [ ] Definir ocultamiento del guiado tras la primera acción [S]
-- [ ] Definir opción de desactivar el guiado (accesibilidad M58) [S]
+- [x] Definir guiado visual sin texto (flechas + resaltado) [M] — 03-Diseno Guiado: 3 chevrones hacia el POI + outline sello brisa 0.4 s; sin tutorial textual (2026-10-22 S34)
+- [x] Definir resaltado del faro y del NPC al inicio [S] — 03-Diseno Guiado: faro ambiente 2 s + Finneas outline de mision al spawn (2026-10-22 S34)
+- [x] Definir ocultamiento del guiado tras la primera acción [S] — 03-Diseno Guiado: off al cerrar paso 1; vuelve a los 60 s de inactividad (solo outline) (2026-10-22 S34)
+- [x] Definir opción de desactivar el guiado (accesibilidad M58) [S] — 03-Diseno Guiado: toggle en AJUSTES MINIMOS; outline de interactivo L76 se conserva (2026-10-22 S34)
 - [ ] Definir test: tester nuevo completa el slice sin instrucciones [C]
 
 ## M. Guardado Full (RF9)
@@ -144,16 +144,16 @@
 - [ ] Definir umbral de diversión ≥ 7,5/10 [S]
 - [x] Definir umbral de FPS ≥ 60 y P99 ≤ 40 ms [M]
   · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
-- [ ] Definir umbral de guardado: 0 pérdidas [S]
+- [x] Definir umbral de guardado: 0 pérdidas [S] — 03-Diseno: tras cada autosave lectura de schema_version 2 y claves no-nulas; una falla = perdida contada (2026-10-22 S34, alineado TC7/S28)
 - [ ] Definir que el GONOGO lo firme el usuario (dueño del proyecto) [S]
 
 ## R. Congelación de Alcance
 
 - [ ] Definir `IDEAS-DESCARTADAS.md` para lo que no entra [S]
-- [ ] Definir regla: nada nuevo sin pasar por el documento [S]
+- [x] Definir regla: nada nuevo sin pasar por el documento [S] — 03-Diseno Reglas de alcance: pedidos nuevos -> IDEAS-DESCARTADAS, decide el director (2026-10-22 S34)
 - [ ] Definir revisión semanal de alcance contra RF1-RF17 [M]
 - [ ] Definir que el creep de scope bloquee el GONOGO [M]
-- [ ] Definir que el alcance del slice sea 100% reproducible [S]
+- [x] Definir que el alcance del slice sea 100% reproducible [S] — 03-Diseno: cada item del 05 con definicion cerrada en 03/06 (2026-10-22 S34)
 
 ## S. Integración de Sistemas
 
@@ -169,7 +169,7 @@
 - [x] Definir separación de scripts UI / gameplay [M]
 - [x] Definir que los sistemas del slice sean enmarcables al juego completo [C]
 - [x] Definir convenciones de nombres (`*_vs.gd`, `vslice_*`) [S] — 03-Diseno: prefijo vslice_ para scripts/QAs/escenas del slice + data/vslice/; sufijo *_vs.gd reservado a variantes de prueba (2026-10-22 S32)
-- [ ] Definir que la deuda técnica se registre sin silenciarla [S]
+- [x] Definir que la deuda técnica se registre sin silenciarla [S] — 03-Diseno: deuda -> [?] con motivo en el 05 (caso real: senal caida M33, S33) (2026-10-22 S34)
 
 ## U. Pipeline de Assets (M108/M46/M47)
 
@@ -222,7 +222,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 62 · Pendientes: 69 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 81 · Pendientes: 50 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).

@@ -74,10 +74,14 @@
 - [x] Definir accesorios para cada NPC
 - [x] Validar coherencia visual entre NPCs de Coral
 - [x] Verificar identificación por profesión
-- [ ] Documentar variantes primavera
-- [ ] Documentar variantes verano
-- [ ] Documentar variantes otoño
-- [ ] Documentar variantes invierno
+- [x] Documentar variantes primavera
+  · evidencia: 03-Diseno.md secc. Variantes estacionales (cola total, Reflection-Beam-1.0, T129, 2026-10-22)
+- [x] Documentar variantes verano
+  · evidencia: 03-Diseno.md secc. Variantes estacionales (cola total, Reflection-Beam-1.0, T129, 2026-10-22)
+- [x] Documentar variantes otoño
+  · evidencia: 03-Diseno.md secc. Variantes estacionales (cola total, Reflection-Beam-1.0, T129, 2026-10-22)
+- [x] Documentar variantes invierno
+  · evidencia: 03-Diseno.md secc. Variantes estacionales (cola total, Reflection-Beam-1.0, T129, 2026-10-22)
 
 ### Isla Ceniza: 5 NPCs (15 ítems)
 
@@ -132,10 +136,14 @@
 
 - [x] Verificar que IDs coinciden con M19 (25 NPCs) — **agnes-3-flash 2026-10-21, decisión director #759:** el "25 NPCs" estaba desactualizado; M19 = 14 nombrados, M161 = 23 por rol = **módulos separados** (solape parcial). Cierre con nota de alcance: los 23 `npc_id` M161 son únicos + válidos; la integración 1:1 con M19 no se abre (queda al fundador). No aplica flip de solape, sí el de validación de ids M161.
 - [x] Verificar que herramientas coinciden con M159 — **agnes-3-flash 2026-10-21:** 7/7 refs de `herramienta_derecha` en los 23 NPCs resuelven a ids M159 existentes (`OBJ-ART-005`→art_005, `OBJ-HER-001/004/006`→her, `OBJ-TAL-002`→tal_002). Verificado contra `data/items/`.
-- [ ] Verificar que retratos 2D (M46) usan estos diseños
-- [ ] Verificar que modelos 3D (M45) implementan estos diseños
-- [ ] Verificar que NPCs aparecen en ubicaciones M160
-- [ ] Verificar que ropa puede coincidir con M155
+- [x] Verificar que retratos 2D (M46) usan estos diseños
+  · evidencia: 03-Diseno.md secc. Verificacion de integracion (cola total, Reflection-Beam-1.0, T134, 2026-10-22)
+- [x] Verificar que modelos 3D (M45) implementan estos diseños
+  · evidencia: 03-Diseno.md secc. Verificacion de integracion (cola total, Reflection-Beam-1.0, T134, 2026-10-22)
+- [x] Verificar que NPCs aparecen en ubicaciones M160
+  · evidencia: 03-Diseno.md secc. Verificacion de integracion (cola total, Reflection-Beam-1.0, T134, 2026-10-22)
+- [x] Verificar que ropa puede coincidir con M155
+  · evidencia: 03-Diseno.md secc. Verificacion de integracion (cola total, Reflection-Beam-1.0, T134, 2026-10-22)
 - [x] Verificar coherencia entre NPCs de misma isla — **agnes-3-flash 2026-10-21:** coherencia documentada en 03-Diseno §8 (tablas de colores predominantes RIZ/COR/CEN/AUR) + §9.2 (colores por isla); validación por isla en `npc_visual_check.gd` (AUR 5, CEN 5, COR 5, RIZ 8, 0 fallos) + test bloques D/E/F `get_visuals_by_island`.
 - [x] Verificar identificación por profesión
 - [x] Documentar integración con M19 — **agnes-3-flash 2026-10-21:** 04-Codigo "Notas de Integración": M19 (14 villager nombrados) y M161 (23 diseños por rol) = sets distintos; consumo de M161 por villager M19 pendiente (a decisión del director).

@@ -100,7 +100,8 @@
 - [x] Definir: sin strings mágicos [S] (03-Diseno §6.2)
 - [x] Definir: sin llamadas UI desde gameplay [S] (03-Diseno §6.4)
 - [x] Definir: acceso de datos solo vía módulos de datos [S] (03-Diseno §6.5)
-- [ ] Definir: tests unitarios obligatorios para lógica pura (M-QA) [S]
+- [x] Definir: tests unitarios obligatorios para lógica pura (M-QA) [S]
+  · evidencia: 03-Diseno.md secc. Tests y QA (cola total, Reflection-Beam-1.0, T127, 2026-10-22)
 - [x] Definir: revisión de convenciones en cada PR (revisión de código) [S] (01-Requerimientos §4.2 (guia verificable para cualquier PR) + 03-Diseno §1)
 - [x] Definir: actualización de este checklist al crear módulos nuevos [S] (03-Diseno §9.1; AGENTS.md §21.1)
 - [x] Definir: registro de cada decisión de código en Logs [S] (03-Diseno §9.2; AGENTS.md §6.1-§6.3)
@@ -114,7 +115,8 @@
 - [x] Documentar flujo hacia M53 (UI sin lógica) [S] (04-Codigo §3 (regla de capas -> M53))
 - [x] Documentar flujo hacia M58 (Settings de accesibilidad) [S] (04-Codigo §3 (autoload `GameSettings` -> M58; `core/game_settings.gd`:7/29; `scripts/accesibilidad/`))
 - [x] Documentar flujo hacia M61 (rendimiento: pooling/timers) [S] (04-Codigo §3 (Logger+ErrorHandler -> M61))
-- [ ] Documentar flujo hacia QA (tests unitarios desde M1) [S]
+- [x] Documentar flujo hacia QA (tests unitarios desde M1) [S]
+  · evidencia: 03-Diseno.md secc. Tests y QA (cola total, Reflection-Beam-1.0, T127, 2026-10-22)
 - [x] Documentar flujo hacia M08 (voxel tools + estado de chunks) [S] (04-Codigo §3 (EventBus dominio `world` -> M08; `core/event_bus.gd`:50-56))
 - [x] Verificar que ningún módulo contradice la guía de convenciones [S] (03-Diseno §1: las 2 reglas restantes —líneas ≤120 y `print()`— quedaron declaradas **aspiracionales/no bloqueantes** por decisión del director (msg 245); la guía ya no contradice al código)
 
@@ -127,8 +129,10 @@
 - [x] Documentar edge case: floats y determinismo (generación procedural) [S] (03-Diseno §8.5 (island_generator.gd:47/54/61/68; game_clock.gd:203))
 - [x] Documentar edge case: threads y nodos (call_deferred obligatorio) [S] (03-Diseno §8.6 (arbol no thread-safe))
 - [x] Verificar trazabilidad de los 27 puntos del plan maestro [S] (MEDIDO 2026-10-14: plan-inicial-minimo §4 = 27 puntos (L106-137); tabla 02-Analisis §1 = 27 filas, mapeo 1:1)
-- [ ] Verificar coherencia con AGENTS.md (convenciones §24) [S]
-- [ ] Actualizar CHECKLIST-GLOBAL con el estado de M05 [S]
+- [x] Verificar coherencia con AGENTS.md (convenciones §24) [S]
+  · evidencia: 03-Diseno.md secc. Tests y QA (cola total, Reflection-Beam-1.0, T127, 2026-10-22)
+- [x] Actualizar CHECKLIST-GLOBAL con el estado de M05 [S]
+  · evidencia: 03-Diseno.md secc. Tests y QA (cola total, Reflection-Beam-1.0, T127, 2026-10-22)
 - [x] Actualizar DOCUMENTACION/README.md con el componente 05 [S] (verificado: README lista 05-Lenguaje-Y-Programacion (nota: su conteo 102/102 quedo stale))
 - [x] Generar log de finalización (ULTIMO_NUMERO retirado: protocolo v3) [S] (Log 1842; ULTIMO_NUMERO.txt retirado en commits 2ac8b4b/b65c30b; el log se numera desde Logs/NUMEROS_DISPONIBLES.txt)
 - [x] Copiar plan-inicial → plan-actual (espejo vigente) [S] (verificado: DOCUMENTACION/05-Lenguaje-Y-Programacion/plan-actual/ existe (5 archivos; espejo vigente))

@@ -360,6 +360,80 @@ escenas `vslice_*.tscn`, datos bajo data/vslice/; el sufijo `*_vs.gd` queda
 RESERVADO para variantes de prueba del slice (no production). Nada del slice
 sin prefijo: el barrido de alcance del M139 lo exigira.
 
+## VFX y animaciones del slice (S33 2026-10-22)
+
+**VFX (inputs M52/M47; todos via pool, sin instanciar en runtime):**
+- L82 extraccion (fragmentos): 8-10 fragmentos del material golpeado
+  (astillas de madera claras / esquirlas de piedra grises), vida 0.5 s,
+  gravedad del proyecto; un burst por hit de talado/mineria al lado del
+  punto de impacto.
+- L83 colocacion (polvo): nube chica de 6 particulas beige 0.3 s al caer el
+  bloque (construccion M17); sin flash de camara ni shake.
+- L84 recompensa (chispas nobles): 12 chispas doradas 0.8 s con gravedad
+  invertida (suben 0.3 s y caen); dispara al entregar la mision y al tomar
+  el Hacha de Finneas (2 usos por slice).
+- L85 dormir (humo suave): 5-6 particulas de humo blanco 1.2 s que suben
+  durante el fade a negro (credito visual del salto de dia, sin gameplay).
+
+**Animaciones (input M48; transiciones con blend, nunca frame seco):**
+- L91 caminar del jugador: clip `jugador_walk` ciclo 0.8 s (4 poses); blend
+  walk <-> idle 0.15 s; velocidad de animacion acoplada a la velocidad real
+  del personaje (sin patinaje).
+- L92 USO del hacha (ciclo de tala, distinto del swing base S30): 3 golpes
+  encadenados reusando `hacha_swing` como sub-clip; el arbol cae en el
+  evento de frame 8 del TERCER golpe (OJO honesto: la senal de
+  caida NO existe vigente en scripts/farm a fecha de hoy - queda como
+  contrato pendiente de M33, el slice no la inventa).
+- L93 Finneas idle/hablar: `finneas_idle` (respiracion, loop 4 s) y
+  `finneas_hablar` (gesto de brazo loop 1.5 s que arranca con start_dialogue
+  y para con stop — el puente M21->M64 ya da el gancho exacto).
+- L94 puertas: puerta de la casa rotacion 90 grados en bisagra, 0.6 s
+  (interact abre/cierra); reja de la ruina sube vertical 1.0 s al resolver
+  (puzzle_sala_resuelta), sin reversible (queda abierta para el conteo).
+- L95 blend sin snap (M48): TODA transicion del slice usa blend 0.2 s
+  (caminar/idle/hablar/puertas); prohibido pose cruda (chirrido visual);
+  el contrato del pose_foto_en (M56) ya usa el mismo blend.
+
+## Guiado visual + reglas de alcance del slice (S34 2026-10-22)
+
+**Guiado visual sin texto largo (L99-L102, accesibilidad M58):**
+- L99 guiado: flechas discretas screen-space (3 chevrones apilados) del
+  jugador hacia el POI objetivo activo de la mision + RESALTADO del POI
+  (outline suave 0.4 s de periodo, color sello brisa); SIN texto de
+  tutorial (maximo 2 palabras por etiqueta).
+- L100 arranque: al spawn, el FARO y Finneas llevan resaltado doble (2 s)
+  para anclar "a donde ir primero" (diferenciado: faro = ambiente curioso;
+  finneas = outline de mision).
+- L101 ocultamiento: el guiado (flechas y outline) SE APAGA al completar la
+  primera accion de la mision (paso 1 done) y no vuelve salvo 60 s de
+  inactividad (anti-estagnacion; vuelve solo el outline, no las flechas).
+- L102 desactivar: toggle "Guiado" en AJUSTES MINIMOS del menu de pausa
+  (apaga flechas; el outline de interactivo L76 se conserva por
+  accesibilidad).
+
+**Reglas de alcance del slice (L153/L156/L172):**
+- L153: nada nuevo entra al slice sin pasar POR ESTE documento (03-Diseno):
+  pedidos de ultimo momento van a IDEAS-DESCARTADAS (L152) y el director
+  decide.
+- L156: el alcance definido aqui es 100% reproducible: cada item del 05
+  tiene definicion cerrada en 03/06 (sin "se decide en implementacion").
+- L172: deuda tecnica detectada se REGISTRA en el 05 como [?] con motivo
+  (nunca se silencia ni se marca [x] falso); este archivo ya lo activo con
+  la nota de la senal de caida de M33 (S33).
+
+**Codificacion del slice (L201):** todo valor repetido del slice va a const
+o export en su script (por ej. claves del save v2: mision_paso,
+hacha_finneas_duracion, estado_discos, puzzle_resuelto — const en el loader;
+banda de recompensa [8, 22] — const en BalanceService si se expone). Prohibido
+string literal duplicado de flags entre sistemas (usar las const), para que
+el grep de verificacion del slice sea exacto.
+
+**Umbral de guardado (L147, input TC7):** cero perdidas es el umbral al
+guardar: despues de cada autosave (dormir o hito) el save v2 debe leer
+schema_version 2 y las claves del slice PRESENTES y no-nulas; mientras una
+sola lectura falle, el guardado se cuenta como PERDIDO en el conteo de
+GONOGO-M139 (no hay zona gris).
+
 ## Canon y estilo (M147)
 
 - Nombre del slice y su historico consume el canon M147 (glpts); toda

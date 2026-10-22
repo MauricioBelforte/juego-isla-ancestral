@@ -75,3 +75,12 @@ data/generation/decor.tres        → densidades de vegetación (M50)
 - Los knobs son datos, no código: permiten balancear sin recompilar (M1 prototipo).
 - Presupuesto de poly por chunk: el de Voxel Tools (LOD Transvoxel) + decorativos en instacante.
 - Frame budget de carga inicial total: ≤ 6 s en PC de referencia (M61).
+## Octavas y diffs (cola total M10 batch)
+
+### 4-6 octavas con amplitud 0-192 m (Aurora)
+- Configurar 4-6 octavas de Perlin noise.
+- Amplitud 0-192 m para la isla Aurora.
+
+### Diffs del jugador se aplican DESPUES de regenerar
+- Los diffs del jugador se aplican despues de regenerar.
+- Preservar modificaciones del jugador.

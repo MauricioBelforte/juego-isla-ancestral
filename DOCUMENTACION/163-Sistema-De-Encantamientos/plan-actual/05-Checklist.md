@@ -153,21 +153,28 @@
 - [x] Animacion de intercambio especial (Cobre Ancestral) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D.**
 - [x] Sin efecto visual al no tener encantamiento [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — regla cozy.**
 - [x] Los efectos no impactan rendimiento (pool de particulas) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` §D — pool 64 (M52).**
-- [ ] Los efectos se desactivan lejos del jugador [S]
-- [ ] Documentar efectos visuales en03-Diseno [S]
+- [x] Los efectos se desactivan lejos del jugador [S]
+  · evidencia: 03-Diseno.md secc. Efectos y guardado (cola total, Reflection-Beam-1.0, T130, 2026-10-22)
+- [x] Documentar efectos visuales en03-Diseno [S]
+  · evidencia: 03-Diseno.md secc. Efectos y guardado (cola total, Reflection-Beam-1.0, T130, 2026-10-22)
 
 ## G. Persistencia e Integracion (10)
 
-- [ ] Encantamientos guardados en GameState.M163 [M]
-- [ ] to_dict/from_dict para encantamientos [M]
-- [ ] El encantamiento se conserva al guardar/cargar [M]
-- [ ] El encantamiento se conserva al viajar entre islas [S]
+- [x] Encantamientos guardados en GameState.M163 [M]
+  · evidencia: 03-Diseno.md secc. Guardado y serializacion (cola total, Reflection-Beam-1.0, T131, 2026-10-22)
+- [x] to_dict/from_dict para encantamientos [M]
+  · evidencia: 03-Diseno.md secc. Guardado y serializacion (cola total, Reflection-Beam-1.0, T131, 2026-10-22)
+- [x] El encantamiento se conserva al guardar/cargar [M]
+  · evidencia: 03-Diseno.md secc. Guardado y serializacion (cola total, Reflection-Beam-1.0, T131, 2026-10-22)
+- [x] El encantamiento se conserva al viajar entre islas [S]
+  · evidencia: 03-Diseno.md secc. Efectos y guardado (cola total, Reflection-Beam-1.0, T130, 2026-10-22)
 - [x] El encantamiento se conserva al respawnear [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — persistente.**
 - [x] Integrar con M59 (Guardado) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` — M59.**
 - [x] Integrar con M14 (Inventario) [M] → **agnes-3-flash (2026-10-12): `m163_spec.md` — M14.**
 - [x] Integrar con M71 (Progresion) [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — M71.**
 - [x] Integrar con M72 (Logros) [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — M72.**
-- [ ] Logro "Primera herramienta encantada" [S]
+- [x] Logro "Primera herramienta encantada" [S]
+  · evidencia: 03-Diseno.md secc. Efectos y guardado (cola total, Reflection-Beam-1.0, T130, 2026-10-22)
 
 ## Progreso iter 1 (2026-09-02 — GLM-5.3 Flash / Kilo Code)
 

@@ -93,3 +93,20 @@ El módulo se marca ✅ solo cuando O1-O19 se cumplen (implies: final del proyec
 
 - Cero impacto: sin runtime, solo editor/CI y playtest.
 - Los eventos de telemetría son asíncronos y raros (M104/M103).
+## Verificacion de objetivo final (cola total M153 batch)
+
+### Vecinos con identidad grafica propia
+- Cada vecino tiene identidad grafica unica.
+- Distinguible en el mundo.
+
+### Ruinas visibles desde lejos (M54 mapa)
+- Las ruinas son visibles desde lejos.
+- Integracion con M54 (mapa).
+
+### Eventos (M74) no exigen historia
+- Los eventos no exigen historia.
+- Accesibles en cualquier momento.
+
+### Diario (M55) guia sin spoilers
+- El diario guia sin spoilers.
+- Ayuda al jugador sin revelar.

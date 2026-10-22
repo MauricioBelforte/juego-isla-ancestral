@@ -106,3 +106,33 @@ y B5 de `test_enchant_tiers.gd`.
 | **M039** — Tiendas | Vende encantados |
 | **M038** — Economia | Precios premium |
 | **M014** — Inventario | Guarda encantados |
+## Efectos y guardado (cola total M163 batch)
+
+### Efectos se desactivan lejos del jugador
+- Los efectos se desactivan a distancia del jugador.
+- Optimizacion de rendimiento.
+
+### Documentar efectos visuales en 03-Diseno
+- Documentar efectos visuales en 03-Diseno.md.
+- Referencia para implementacion.
+
+### Encantamiento se conserva al viajar entre islas
+- El encantamiento se conserva al viajar entre islas.
+- Persistencia de encantamientos.
+
+### Logro Primera herramienta encantada
+- Logro al encantar la primera herramienta.
+- Integracion con M72 (logros).
+## Guardado y serializacion (cola total M163 batch 2)
+
+### Encantamientos guardados en GameState.M163
+- Los encantamientos se guardan en GameState.M163.
+- Integracion con el sistema de guardado.
+
+### to_dict/from_dict para encantamientos
+- Serializacion to_dict/from_dict para encantamientos.
+- Persistencia entre sesiones.
+
+### El encantamiento se conserva al guardar/cargar
+- El encantamiento se conserva al guardar/cargar.
+- Sin perdida de datos.

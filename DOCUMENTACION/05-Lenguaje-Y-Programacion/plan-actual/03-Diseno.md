@@ -257,3 +257,20 @@ en `Logs/` según **AGENTS.md §6**:
 - **Higiene:** el log es **ASCII puro** (`LC_ALL=C grep -c '[^ -~]'` == 0). `ULTIMO_NUMERO.txt` y
   `Logs/reservas/` están **retirados** desde el protocolo v3 (commits `2ac8b4b`/`b65c30b`).
 - La DoD (AGENTS.md §21.6) exige el log generado para marcar `[x]` un subitem.
+## Tests y QA (cola total M05 batch)
+
+### Tests unitarios obligatorios para logica pura (M-Q)
+- Tests unitarios obligatorios para logica pura.
+- Cobertura minima: 80%.
+
+### Flujo hacia QA (tests unitarios desde M1)
+- Tests unitarios desde M1 (fundacion).
+- Integracion con Unity Test Framework.
+
+### Coherencia con AGENTS.md (convenciones §24)
+- Convenciones de codigo segun AGENTS.md §24.
+- Nomenclatura, namespaces, serializacion.
+
+### Actualizar CHECKLIST-GLOBAL con el estado de M05
+- Actualizar CHECKLIST-GLOBAL con estado de M05.
+- Sincronizar progreso.

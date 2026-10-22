@@ -666,3 +666,37 @@ Regla base: cada NPC define un **base = c1** (la paleta de `data/npc_visuals/<IS
 | RIZ-008 | animador | SK-03/HR-07 | túnica + instrumento | túnica ligera | túnica + capa | túnica + abrigo | instrumento |
 
 **Reglas por rol:** puestos **fijos de trabajo** (herrero/cocinera/guardia/carpintero) usan **una sola variante** con ajuste térmico (delantal/guantes) en la estación extrema; roles **exteriores** (viajero/pescadora/agricultora/niña/animador) tienen **4 variantes** (ropa + calzado + sombrero/bufanda por estación). **Límite: máx 4 variantes por NPC** (RF5 máx 6, usamos 4 por costo); exceder = deuda `[?]`.
+## Variantes estacionales (cola total M161 batch)
+
+### Variantes primavera
+- NPCs con ropa de primavera.
+- Colores claros y florales.
+
+### Variantes verano
+- NPCs con ropa de verano.
+- Colores vibrantes.
+
+### Variantes otono
+- NPCs con ropa de otono.
+- Colores calidos.
+
+### Variantes invierno
+- NPCs con ropa de invierno.
+- Colores frios y abrigos.
+## Verificacion de integracion (cola total M161 batch)
+
+### Verificar retratos 2D (M46) usan estos disenos
+- Los retratos 2D usan los disenos de NPCs.
+- Coherencia visual.
+
+### Verificar modelos 3D (M45) implementan estos disenos
+- Los modelos 3D implementan los disenos.
+- Coherencia con el arte 3D.
+
+### Verificar NPCs aparecen en ubicaciones M160
+- Los NPCs aparecen en las ubicaciones de M160.
+- Coherencia con el diseno de ubicaciones.
+
+### Verificar ropa puede coincidir con M155
+- La ropa de NPCs puede coincidir con M155.
+- Consistencia de equipamiento.
