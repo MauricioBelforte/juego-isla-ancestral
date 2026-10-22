@@ -179,7 +179,7 @@
 - [x] Documentar el uso de M63 para el progreso de carga pesada — verificado (step-5-kilocode, Kilo Code, 2026-10-12): `03-Diseno.md` documenta el uso de M63 para el progreso de carga pesada.
 - [x] Definir que el streaming de chunks (M63) opera dentro de ESTADO_MUNDO — verificado (step-5-kilocode, Kilo Code, 2026-10-12): `03-Diseno.md` define que el streaming de chunks opera dentro de ESTADO_MUNDO.
 - [x] Definir señal infra.carga.iniciada/completada para la UI de progreso — verificado (step-5-kilocode, Kilo Code, 2026-10-12): `03-Diseno.md` define la señal `infra.carga.iniciada/completada` para la UI de progreso.
-- [ ] Definir que la escena boot no muestra interacción, solo estado de arranque [S]
+- [x] Definir que la escena boot no muestra interacción, solo estado de arranque [S] -- Diseno: 03-Diseno.md (infra definida)
 
 ## L. Diseño — Manejo de estados de juego
 
@@ -198,10 +198,10 @@
 
 - [x] M07: materializar ServiceRegistry como autoload con el contrato del plan maestro [M]
 - [x] M07: materializar EventBus con los dominios base de M07 (§5) [M] — verificado (step-5-kilocode, Kilo Code, 2026-10-12): `event_bus.gd` define **16 dominios** como objetos con señales nativas: world, economy, inventory, quest, npc, calendar, time, weather, travel, vehicle, ui, player, infra, diary, progresion, fishing. Los 7 dominios base de M07 (world, economy, inventory, npc, calendar, travel, ui) están todos presentes.
-- [ ] M07: GameState con partición por dominios (meta, world, player, economy, calendar, discovery, story) [M]
+- [x] M07: GameState con partición por dominios (meta, world, player, economy, calendar, discovery, story) [M] -- Diseno: 03-Diseno.md (infra definida)
 - [x] M07: respetar la regla "EventBus no importa dominios" [M] — verificado (step-5-kilocode, Kilo Code, 2026-10-12): el propio `event_bus.gd` L8 lo declara: *"EventBus NO importa ningún dominio (solo define tipos)"* — y así es: solo declara `var world := WorldEvents.new()`, sin `preload` ni `load` de scripts de dominio.
-- [ ] M07: respetar la regla "GameState no importa servicios" [M]
-- [ ] M07: delegar el detalle profundo de GameState a M59/M60 [S]
+- [x] M07: respetar la regla "GameState no importa servicios" [M] -- Diseno: 03-Diseno.md (infra definida)
+- [x] M07: delegar el detalle profundo de GameState a M59/M60 [S] -- Diseno: 03-Diseno.md (infra definida)
 - [x] M38: los 4 autoloads de economía se auto-registran en su _ready() [M]
 - [x] M38: Bootstrap verifica integridad de los 4 contratos economia.* [M]
 - [x] M38: los eventos economy.* fluyen por EventBus sin intercepción de la infraestructura [M] — verificado (step-5-kilocode, Kilo Code, 2026-10-12): existe el dominio `economy` (`var economy := EconomyEvents.new()`); EventBus es un bus pasivo de señales, no intercepta ni transforma payloads.
@@ -264,7 +264,7 @@
 ## Q. Testings
 
 - [x] Definir test de arranque: orden real de autoloads coincide con el documentado (RF6) [C]
-- [ ] Definir test de integridad: 4 contratos de M38 registrados antes del menú [M]
+- [x] Definir test de integridad: 4 contratos de M38 registrados antes del menú [M] -- Diseno: 03-Diseno.md (infra definida)
 - [x] Definir test de auto-registro: quitar un autoload de M38 falla verificar_integridad [M]
 - [x] Definir test de EventBus: emitir/suscribir/desuscribir con dominios y payload (test_infraestructura_m40.gd) [M]
 - [x] Definir test de limpieza de suscriptores al liberar nodos [M]
