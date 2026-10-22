@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:55:00",
+ "ultimo_update": "2026-10-22T02:35:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -43,9 +43,9 @@
   "acuse_enviado": 316
  },
  "ling": {
-  "estado": "205: OVERRIDE DEFINITIVO entregado - el prompt real de su cron (era mimo, 1/hora, regla NO-RESPONDAS-SIN-ENCARGO) lo silenciaba por OBEDIENCIA; en cada disparo ejecuta el bloque nuevo (riel i18n + modo nocturno); el fundador puede borrar el cron desde su interfaz de Kilo",
+  "estado": "205/206: T22 RATIFICADA (4 tareas verificadas: boot-tips propuesta llave-en-mano; 97/98/99 estandar lenguaje tecnico + regla de frontera 2.4.7; M06 deuda tracked) - OVERRIDE FUNCIONA",
   "pendientes_real": 112,
-  "acuse_enviado": 205
+  "acuse_enviado": 206
  },
  "crons_vigentes": {
   "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
@@ -254,5 +254,11 @@
  },
  "bug_144": {
   "estado": "Abierto - ACCESS VIOLATION nativo (rc=-1073741795) test_fixtures_smoke - crash C++ real (MiniMax 036)"
+ },
+ "deriva_m63_boot_tips": {
+  "estado": "M63 loading layer: 8 claves LOADING.TIP_01..08 ES/EN/PT + anomalia espacio inicial L23 - pendiente encargo al dueno M63 (propuesta Ling T22 llave-en-mano)"
+ },
+ "deriva_m06_claves_items": {
+  "estado": "M06 player: 4 claves ITEMS.USAR/FAVORITO/DESFAVORECER/SIN_HERRAMIENTA ausentes de catalogos (seguimiento Ling tarea 71/22 - pendiente owner M06)"
  }
 }

@@ -56,7 +56,7 @@
 - [x] D5: EventBus no importa dominios (regla anti-circular de M07) [M]
 - [x] Implementar limpiar_receptor(nodo) para podar Callables al liberar nodos [M]
 - [x] Evitar suscripciones duplicadas del mismo Callable al mismo evento [S]
-- [ ] Soporte de espía de eventos para el Debug Menu (M110) [S]
+- [x] Soporte de espía de eventos para el Debug Menu (M110) [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: scripts/core/event_bus_spy.gd (attach/detach/capturadas/cuenta/limpiar; anillo de 256; resuelve los dominios del EventBus por propiedad con bus.get() — son clases internas RefCounted, NO Nodes niños, hallazgo documentado; arity 0..5 via lambdas); qa_m40_spy.gd 18/0 EXIT 0 (emisiones reales arity 1/2/3, doble attach rechazado, detach deja el bus limpio)
 - [x] Documentar convención de payloads livianos (referencias, no copias pesadas) [S]
 
 ## D. Requisitos funcionales — Bootstrap y arranque
@@ -78,7 +78,7 @@
 
 ## E. Requisitos funcionales — Estados de juego
 
-- [x] RF8: enum Estado con BOOT, MENU, CARGANDO, MUNDO, PAUSA, TRANSICION, ERROR [M]
+- [?] RF8: enum Estado con BOOT, MENU, CARGANDO, MUNDO, PAUSA, TRANSICION, ERROR [M] — **DEGRADADO G-5.3-Flash-Agente 2026-10-22 (muestreo anti-inflación §21.8.2.b, 2)indexo:** game_flow_manager.gd enum Estado = BOOT, MENU, CARGANDO, MUNDO, PAUSA, ERROR — TRANSICION NO EXISTE en el disco (flip de presunción previo). Consecuencia en cascada: D8 "TRANSICION solo deriva a CARGANDO o ERROR" no es verificable hasta que el estado exista o el ítem se reinterprete para el flujo CARGANDO real. El resto del enum y las transiciones SÍ están (RF9 verificado aparte). Requiere decisión del dueño: agregar TRANSICION a la enum o reescribir RF8/D8. NUEVO: el patrón coincide con el flip falso L85 de M35 derivado en el 234 del director.
 - [x] RF9: cambiar_estado(estado) valida la transición contra la tabla permitida [M]
 - [x] RF9: transición ilegal produce warning DOM-INF-ESTADO y rechazo sin cambio [M]
 - [?] D8: BOOT deriva a MENU/CARGANDO/MUNDO/ERROR (mi GFM agrega CARGANDO y MUNDO para prototipo sin menú) [S] **Tabla de divergencias (step-5-kilocode, Kilo Code, 2026-10-12):** el [?] se mantiene porque hay 5 diferencias reales entre 03-Diseno.md seccion 4 y game_flow_manager.gd: el diseno declara el estado TRANSICION (que el codigo no tiene) y restringe BOOT a [MENU, ERROR], CARGANDO a [MUNDO, ERROR], MUNDO a [PAUSA, TRANSICION, ERROR] y ERROR a [BOOT]; el codigo en cambio permite BOOT a [MENU, CARGANDO, MUNDO, ERROR], CARGANDO a [MUNDO, MENU, ERROR], MUNDO a [PAUSA, CARGANDO, MENU, ERROR] y ERROR a [BOOT, MENU]. Hay que decidir si manda el diseno o el codigo.
@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 175 · Pendientes: 33 · No resueltos: 3. — actualizado por step-5-kilocode (Kilo Code, 2026-10-12): 95→171 [x] en 13 lotes; +8 del frente 1 implementado (contratos.gd, DOM-INF-REGISTRO, DOM-INF-ACCESO-TEMPRANO y fix de L208). — actualizado por step-5-kilocode (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
+**Totales:** 211 ítems · Completados: 175 · Pendientes: 32 · No resueltos: 4. (Re-medido G-5.3-Flash-Agente 2026-10-22: 175 [x] / 32 [ ] / 4 [?] = 211; +espía implementado 18/0; RF8 degradado a [?] por flip de presunción — enum sin TRANSICION, ver BUG en cascada con D8.) — actualizado por step-5-kilocode (Kilo Code, 2026-10-12): 95→171 [x] en 13 lotes; +8 del frente 1 implementado (contratos.gd, DOM-INF-REGISTRO, DOM-INF-ACCESO-TEMPRANO y fix de L208). — actualizado por step-5-kilocode (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /

@@ -16,6 +16,14 @@ extends RefCounted
 
 const MAX_CAPTURADAS := 256
 
+## Dominios del EventBus (event_bus.gd, 2026-10-22). Son clases internas
+## (RefCounted, NO Nodes hijos): se resuelven por nombre con bus.get().
+const DOMINIOS: Array[String] = [
+	"world", "economy", "inventory", "quest", "npc", "calendar", "time",
+	"weather", "travel", "vehicle", "ui", "player", "infra", "diary",
+	"progresion", "fishing",
+]
+
 var _bus: Node = null
 var _conexiones: Array = []          # [{dominio, senal, callable, arity}]
 var _anillo: Array = []              # [{dominio, evento, args, t_usec}]
@@ -32,16 +40,17 @@ func attach(bus: Node) -> int:
 	_bus = bus
 	_activa = true
 	var conectadas: int = 0
-	for dominio in bus.get_children():
-		if not (dominio is Node):
+	for nombre_dominio in DOMINIOS:
+		var dominio: Variant = bus.get(nombre_dominio)
+		if dominio == null or not (dominio is Object):
 			continue
-		var nombre_dominio: String = String(dominio.name)
-		for si in dominio.get_signal_list():
+		var dom_obj: Object = dominio
+		var dom_snapshot := String(nombre_dominio)
+		for si in dom_obj.get_signal_list():
 			var senal: String = String(si.name)
 			var arity: int = si.args.size()
 			if arity > 5:
 				continue
-			var dom_snapshot := nombre_dominio
 			var sen_snapshot := senal
 			var c: Callable
 			match arity:
@@ -51,15 +60,18 @@ func attach(bus: Node) -> int:
 				3: c = func(a, b, d) -> void: _reg(dom_snapshot, sen_snapshot, [a, b, d])
 				4: c = func(a, b, d, e) -> void: _reg(dom_snapshot, sen_snapshot, [a, b, d, e])
 				5: c = func(a, b, d, e, f) -> void: _reg(dom_snapshot, sen_snapshot, [a, b, d, e, f])
-			dominio.connect(senal, c)
-			_conexiones.append({"dominio": nombre_dominio, "senal": senal, "callable": c, "nodo": dominio})
+			# RefCounted no tiene is_connected? Sí lo tiene (Object). disconnect
+			# seguro con Callable.identity.
+			dom_obj.connect(senal, c)
+			_conexiones.append({"dominio": dom_snapshot, "senal": senal, "callable": c, "nodo": dom_obj})
 			conectadas += 1
 	return conectadas
 
 ## Desconecta todo (deja el bus como estaba).
 func detach() -> void:
 	for c in _conexiones:
-		var nodo: Node = c["nodo"]
+		# Los dominios son clases internas (RefCounted), NO Nodes: tipar Object.
+		var nodo: Object = c["nodo"]
 		if is_instance_valid(nodo):
 			if nodo.is_connected(String(c["senal"]), c["callable"]):
 				nodo.disconnect(String(c["senal"]), c["callable"])

@@ -41,12 +41,10 @@ func _run() -> void:
 	var n2: int = spy.attach(bus)
 	_check(n2 == -1, "spy: doble attach rechazado (-1)")
 	# Emitir senales reales del dominio world (arity 2) e inventory (arity 2)
-	var world = bus.get_node("world") if bus.has_node("world") else null
-	_check(world != null, "dominio world presente")
-	# El bus expone dominios como PROPIEDADES (var world := WorldEvents.new())
-	# que NO son hijos del arbol por defecto: obtenemos el objeto real por get().
-	if world == null:
-		world = bus.get("world")
+	# El bus expone dominios como CLASES INTERNAS (RefCounted, NO Nodes):
+	# se resuelven por propiedad con bus.get() (hallazgo del propio QA).
+	var world: Variant = bus.get("world")
+	_check(world != null and world is Object, "dominio world resuelto via bus.get")
 	_check(world != null, "dominio world resuelto (propiedad del bus)")
 	world.block_placed.emit(Vector3i(1, 2, 3), 5)
 	world.block_placed.emit(Vector3i(4, 5, 6), 7)
