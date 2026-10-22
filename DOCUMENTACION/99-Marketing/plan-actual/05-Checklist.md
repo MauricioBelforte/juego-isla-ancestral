@@ -229,30 +229,30 @@
 - [x] Definir criterios de selección (audiencia cosy/exploración/voxel) [M]
 - [x] Definir candidatura a 3+ festivales [M]
 - [x] Definir fechas alineadas con disponibilidad de demo [M]
-- [ ] Definir participación en Steam Next Fest si aplica [M]
+- [x] Definir participacion en Steam Next Fest si aplica [M] -- Diseno: 03-Diseno.md S6 (festivales incl. Steam Next Fest)
 - [x] Definir métrica por festival (wishlists y conversión) [M]
-- [ ] Definir presupuesto de festivales (0 o mínimo) [S]
+- [x] Definir presupuesto de festivales (0 o minimo) [S] -- Diseno: 03-Diseno.md S11 (presupuesto max 200 USD, aprobacion produccion)
 
 ## 25. Preparar lanzamiento (RF13)
 
-- [ ] Definir runbook de día 0 (acciones, responsables, holguras) [C]
-- [ ] Definir freeze de materiales a T-30 [M]
-- [ ] Definir envío de notas de prensa y claves a T-14 [M]
-- [ ] Definir avisos finales a newsletter/Discord/redes a T-7 [M]
-- [ ] Definir anuncio simultáneo el día 0 en todos los canales [M]
-- [ ] Definir live stream opcional de lanzamiento [S]
-- [ ] Definir monitorización D+1 a D+7 (reviews, feedback — M100/M143) [M]
+- [x] Definir runbook de dia 0 (acciones, responsables, holguras) [C] -- Diseno: 03-Diseno.md S7 (runbook con responsables y holguras)
+- [x] Definir freeze de materiales a T-30 [M] -- Diseno: 03-Diseno.md S7 (T-30 freeze de materiales)
+- [x] Definir envio de notas de prensa y claves a T-14 [M] -- Diseno: 03-Diseno.md S7 (T-14 envio de notas de prensa y claves)
+- [x] Definir avisos finales a newsletter/Discord/redes a T-7 [M] -- Diseno: 03-Diseno.md S7 (T-7 aviso final a newsletter + Discord + redes)
+- [x] Definir anuncio simultaneo el dia 0 en todos los canales [M] -- Diseno: 03-Diseno.md S7 (dia 0 anuncio simultaneo en todos los canales)
+- [x] Definir live stream opcional de lanzamiento [S] -- Diseno: 03-Diseno.md S7 (live stream opcional dia 0)
+- [x] Definir monitorizacion D+1 a D+7 (reviews, feedback - M100/M143) [M] -- Diseno: 03-Diseno.md S7 (D+1 a D+7 monitorizacion)
 - [x] Definir informe de día 1 (wishlist, ventas, conversión) [M]
 - [x] Definir plan post-lanzamiento con M100/M143 (retroalimentación) [M]
 
 ## 26. Calidad y cierre
 
-- [ ] Definir revisión legal de materiales (M126/M127) [M]
-- [ ] Definir coherencia de identidad en todos los canales [S]
+- [x] Definir revision legal de materiales (M126/M127) [M] -- Diseno: 03-Diseno.md S11 (checklist 8 puntos, dueño legal+M127)
+- [x] Definir coherencia de identidad en todos los canales [S] -- Diseno: 03-Diseno.md S11 (checklist de coherencia + auditoria previa al dia 0)
 - [x] Definir test de enlaces de la web [S]
-- [ ] Definir documentación plan-actual actualizada y firmada [S]
-- [ ] Definir log del módulo en Logs/ [S]
-- [ ] Definir feed del módulo a M97/M100/M143 [S]
+- [x] Definir documentacion plan-actual actualizada y firmada [S] -- Diseno: 03-Diseno.md S11 (firmas + verificacion por grep)
+- [x] Definir log del modulo en Logs/ [S] -- Diseno: 03-Diseno.md S11 (log estandar, numero del pool)
+- [x] Definir feed del modulo a M97/M100/M143 [S] -- Diseno: 03-Diseno.md S11 (M97 assets finales, M100 calendario, M143 runbook)
 
 ## Totales
 
@@ -286,7 +286,7 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 169 ítems · Completados: 155 · Pendientes: 14 · No resueltos: 0.
+**Totales:** 169 ítems · Completados: 169 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 7 [x] / 162 [ ] / 0 [?].

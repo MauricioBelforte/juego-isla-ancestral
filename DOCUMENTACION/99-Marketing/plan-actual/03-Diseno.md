@@ -215,3 +215,17 @@
 **Pitch personalizado (ítem 21.2):** plantilla de 3 líneas — one-liner ("un juego de exploración voxel cozy en una isla ancestral"), 2 diferenciales (terreno 5120×5120 generado; animales bimodo), y el ask (clave de demo / cobertura); + 1 línea de personalización por creador (por qué le interesa según su contenido).
 
 **Límite de contenido de la demo (ítem 23.4):** la demo incluye la Isla Raíz completa y 1 bioma adicional; excluye: los 6 sellos (spoilers del final), contenido post-game y el final. Aviso "work in progress" en el arranque (ítem 23.2) y en la página de la demo.
+
+## 11. Lote de definiciones bloque 4 — lanzamiento día 0 (Reflection-Beam-1.0, 2026-10-22)
+
+**Presupuesto de festivales (ítem 234):** 0 USD base (candidaturas gratuitas); presupuesto máximo 200 USD para materiales de demo (capturas impresas, merch mínimo) si el festival lo exige; aprobación de producción (M144). Cualquier gasto mayor requiere decisión del fundador.
+
+**Revisión legal de materiales (ítem 250, M126/M127):** revisión legal de todos los materiales publicados (press kit, capturas, clips, newsletter) contra M126 (legal) y M127 (PI) antes de T-14; checklist de 8 puntos (derechos de imagen, música con licencia, logos de terceros, RGPD, claims de performance, edad, spoilers, atribución). Dueño: legal + M127.
+
+**Coherencia de identidad en todos los canales (ítem 251):** checklist de coherencia: logo (3 variantes + favicon), paleta (5 roles), tipografías (Display/Texto/Mono), estilo de piezas (borde 12px, papel antiguo 8%, sombra), naming unificado y bio ≤ 150 chars; auditoría previa al día 0 por el dueño de M99; registro en el acta de M151.
+
+**Documentación plan-actual actualizada y firmada (ítem 253):** todos los archivos de plan-actual de M99 firmados por el último agente que los modificó (Modelo/Plataforma/Fecha) y actualizados con el estado real del módulo; verificación por grep de firma en cada archivo antes del día 0.
+
+**Log del módulo en Logs/ (ítem 254):** generar log en Logs/ con el formato estándar (número, descripción, fecha, modelo, plataforma, resumen, cambios, archivos) al cerrar el módulo; número consumido del pool NUMEROS_DISPONIBLES.txt.
+
+**Feed del módulo a M97/M100/M143 (ítem 255):** M97 (Steam) recibe assets finales (capturas, trailer, descripción); M100 (comunidad) recibe el calendario de publicación y reglas de Discord; M143 (lanzamiento) recibe el runbook día 0 y el feed de monitorización D+1 a D+7.
