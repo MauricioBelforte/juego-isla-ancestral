@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T18:40:50",
+ "ultimo_update": "2026-10-22T18:45:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,9 +17,9 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "301/302: S47 RATIFICADO (convenciones animacion doc-only); GO S48 multi",
+  "estado": "S46+S47+S49 RATIFICADAS (M138 120/131 contenido definible CERRADO; M48 36/123 Definir agotados); proxima: multiScan 151 (67 Definir, clasificar nicho); acuse 303",
   "pendientes_real": 222,
-  "acuse_enviado": 302,
+  "acuse_enviado": 303,
   "ultima_tanda": 40
  },
  "deepseek": {
@@ -28,9 +28,9 @@
   "acuse_enviado": 360
  },
  "step_5": {
-  "estado": "176/177: ruteo Amistad GO; fila 23 sync por director (evitar pisar); muestra del rial vigente",
+  "estado": "178 RATIFICADO (iter10 amistad 316/0, Log 2131 reparado, conteo 62/105 exacto); autorizado commit+move; reposicion SECRETAS(5,L38)->Comerciantes(3)->Puzzles(6)->Investigacion(5); respuesta 179",
   "pendientes_real": 203,
-  "acuse_enviado": 177
+  "acuse_enviado": 179
  },
  "ds_oc": {
   "estado": "OFFLINE hoy (fundador: disponible manana 2026-10-23); su rol de verificador oficial de Beam queda programado para entonces; HOY la verificacion del P-100 la hace el director por muestreo ~10% por batch",
@@ -122,7 +122,9 @@
   "Nuevo regimen produce-first para Beam (fundador 08:28, por disponibilidad incierta): reportes minimos de items, verificacion DIFERIDA grande - riesgo: volumen sin verificacion en vivo; mitigado por su historial limpio y backfill tomorrow",
   "LECCION DE DISPONIBILIDAD (fundador 15:17): los free-tier mueren sin aviso (MiniMax duro 2 dias) - prioridad maxima a agitadores productivos mientras existan y su salida DEJA HEREDABLE (razonamiento en docs, citas al pie) para que la partida no cueste nada",
   "Pool desalineado post-consumo del agente (16:12): G-5.3 consumio 287 y el NUMEROS quedo con 287 al frente - sanear el pool ANTES de numerar acuses si el max de archivos ya supera el head (verificar existencia del fichero del numero)",
-  "Trampa del director corregida (fundador 18:37): al agotarse un riel NO basta asignar fase-2 - REPREDICAR el backlog INMEDIATAMENTE con barrido fresco (la cola nunca se vacia)"
+  "Trampa del director corregida (fundador 18:37): al agotarse un riel NO basta asignar fase-2 - REPREDICAR el backlog INMEDIATAMENTE con barrido fresco (la cola nunca se vacia)",
+  "Trampa GEMELO-NUMERICO (22oct 18:40): dos emisores (agente + mis acuses) usaron mismos numeros 300/302 en el canal de G-5.3 => detector dio FALSO al-dia por matching de numero pelado; FALLO DE DETECTOR: 3 reportes reales (S46/S47/S49) quedaron ocultos ~12h; FIX: detectar por slug de emisor (\"de-<carpeta>-a-\" en nombre) no por numero solo; pools regenerados",
+  "Leccion OperCron (22oct 18:45): timestamps de G-5.3 llegan con fecha adelantada (2026-10-23) por zona horaria de su plataforma - NO usarlos para ordenar; usar creacion real de fichero"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",

@@ -173,6 +173,21 @@ Iter. 6 — aborto de runtime al inicio del bloque K, con asignación tipada
 Sonda borrada en la misma operación; sha256 del original verificado; 0 sondas
 residuales.
 
+Iter. 10 (Log 2131) — aborto de runtime al inicio del bloque O, con asignación tipada
+`Variant` con `Array` -> `Dictionary`:
+
+```
+[FAIL] el bloque O NO se ejecuto (posible SCRIPT ERROR que aborto la funcion)
+[FAIL] solo 259 checks ejecutados (minimo 316): posible aborto silencioso
+=== TEST M23 HISTORIAS: 2 fallo(s) (259 checks) ===   -> EXIT 1
+```
+
+Sonda borrada en la misma operación; sha256 del original verificado; 0 sondas
+residuales. Las inyecciones de iter. 7 (bloque L, «solo 130 checks (mínimo 169)»),
+iter. 8 (bloque M, «solo 170 checks (mínimo 227)») e iter. 9 (bloque N, «solo 228
+checks (mínimo 258)») están registradas en `06-Plan-Testings.md` y en los Logs
+2125/2127/2129.
+
 ## 3. Un rojo propio encontrado por el endurecimiento (y corregido)
 
 La primera versión del bloque F (postgame x4) resetea el estado de M23 con
@@ -233,14 +248,27 @@ Iter. 8 (Log 2127, mismo binario, corridas del 2026-10-22):
 | `scripts/saving/test_backup_rotations.gd` (M59) | 7 checks / 0 fallos / EXIT 0 |
 | `scripts/diario/test_diario.gd` (M55) | 0 fallos / EXIT 0 |
 
+Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
+
+| Suite | Resultado |
+|---|---|
+| `scripts/historia/test_historia.gd` (M22) | 41 checks / 0 fallos / EXIT 0 |
+| `scripts/progresion/test_progresion.gd` (M71) | 83 checks / 0 fallos / EXIT 0 |
+| `scripts/saving/test_rotate_m59.gd` (M59) | 43 checks / 0 fallos / 9 bloques cerrados / EXIT 0 |
+| `scripts/saving/test_backup_rotate_return.gd` (M59) | 4 checks / 0 fallos / EXIT 0 |
+| `scripts/saving/test_backup_rotations.gd` (M59) | 7 checks / 0 fallos / EXIT 0 |
+| `scripts/diario/test_diario.gd` (M55) | 0 fallos / EXIT 0 |
+
 ## 5. Estado del catálogo (medido, no estimado)
 
-- `data/historias/secundarias.json`: **23 cadenas** (faro, invernadero, epilogo-plaza,
+- `data/historias/secundarias.json`: **32 cadenas** (faro, invernadero, epilogo-plaza,
   secretta-luciernagas, panadera, carpintero, tejedora, pescador, guarda, alquimista,
   jardines, cofradia, molino, biblioteca-quemada, observatorio, estacion, puente,
-  relicto, gema, carta, llave, farol, brujula) de las ~89 slots del catálogo de
-  03-Diseno. Creció 4 -> 10 (iter. 5, vecinos) -> 13 (iter. 6, lugares) -> 17
-  (iter. 7, ruinas) -> 23 (iter. 8, objetos). `cadena-biblioteca` vive en el
+  relicto, gema, carta, llave, farol, brujula, molinera, pescadores, guardas,
+  regalo-favorito, sentadilla-pesca, paseos, ficcion, ayuda-vecino,
+  cartas-amistad) de las ~89 slots del catálogo de 03-Diseno. Creció 4 -> 10
+  (iter. 5, vecinos) -> 13 (iter. 6, lugares) -> 17 (iter. 7, ruinas) -> 23
+  (iter. 8, objetos) -> 26 (iter. 9, familias) -> 32 (iter. 10, amistad). `cadena-biblioteca` vive en el
   fichero de ejemplos (merge por id).
 - `data/historias/cadenas_ejemplo.json` (3 cadenas: faro, biblioteca, postgame-plaza):
   **INTEGRADO** en la iter. 3 (Log 2083) vía `RUTA_CATALOGO_EJEMPLOS` con merge por id
@@ -249,7 +277,7 @@ Iter. 8 (Log 2127, mismo binario, corridas del 2026-10-22):
   (`cadena-postgame-plaza`, tipo de paso `"construir"` desconocido). Catálogo vivo: 5
   en iter. 3 -> **14** en iter. 6 (13 del principal + 1 de ejemplos) -> **18** en
   iter. 7 (17 del principal + 1 de ejemplos) -> **24** en iter. 8 (23 del principal
-  + 1 de ejemplos).
+  + 1 de ejemplos) -> **27** en iter. 9 (26 + 1) -> **33** en iter. 10 (32 + 1).
 - Capítulos `capitulo-*` en el catálogo M55 (`data/diario/diario_catalog.json`): **0**
   → las recompensas `diario` de las cadenas apuntan a entradas inexistentes (el
   registro efectivo es `mision_{cadena_id}`). MEDIDO iter. 3: existen
@@ -269,14 +297,30 @@ Iter. 8 (Log 2127, mismo binario, corridas del 2026-10-22):
   carta / llave / farol), y las recompensas apuntan a `capitulo-relicto` /
   `capitulo-gema` / `capitulo-carta` / `capitulo-llave` / `capitulo-farol` /
   `capitulo-brujula`, también ausentes del catálogo M55. Reportado; dueño M55.
-- Consecuencias aplicadas por cadenas del principal (23 únicas sobre 23 cadenas):
+  **Iter. 9**: degrada IGUAL para las 3 de familias —
+  `not diary.esta_registrada("mision_cadena-guardas")` (idem molinera /
+  pescadores) y las recompensas apuntan a `capitulo-molinera` /
+  `capitulo-pescadores` / `capitulo-guardas`, ausentes del catálogo M55.
+  **Iter. 10**: degrada IGUAL para las 6 de amistad —
+  `not diary.esta_registrada("mision_cadena-regalo-favorito")` (idem
+  sentadilla-pesca / paseos / ficcion / ayuda-vecino / cartas-amistad) y las
+  recompensas apuntan a `capitulo-regalo-favorito` /
+  `capitulo-sentadilla-pesca` / `capitulo-paseos` / `capitulo-ficcion` /
+  `capitulo-ayuda-vecino` / `capitulo-cartas-amistad`, ausentes del catálogo M55.
+  Reportado en ambas; dueño M55 (mismo patrón desde cadena-biblioteca en H).
+- Consecuencias aplicadas por cadenas del principal (32 únicas sobre 32 cadenas):
   `faro_encendido`, `invernadero_abierto`, `plaza_decorada`, `luciernagas_vueltas`,
   `pan_fiesta_horneado`, `banco_plaza_reparado`, `manto_niebla_terminado`,
   `red_pescador_reparada`, `sendero_bosque_senalado`, `jarabe_lunar_listo`,
   `jardin_florecido`, `cofradia_activa`, `molino_funcionando`,
   `biblioteca_quemada_rescatada`, `observatorio_alineado`, `estacion_reparada`,
   `puente_cruzable`, `relicto_devuelto`, `gema_devuelta`, `receta_heredada`,
-  `llave_encontrada`, `patrulla_nocturna`, `brujula_calibrada`. (Corrección de decreto: el flag real en datos es
+  `llave_encontrada`, `patrulla_nocturna`, `brujula_calibrada`,
+  `molienda_familiar_restaurada`, `red_del_abuelo_reparada`,
+  `vigilia_de_los_guardas`, `regalo_favorito_entregado`,
+  `sentadilla_de_pesca_amistosa`, `paseo_con_amiga`,
+  `historia_de_ficcion_escrita`, `puesto_de_mercedes_ordenado`,
+  `correspondencia_retomada`. (Corrección de decreto: el flag real en datos es
   `sendero_bosque_senalado`, sin z; la lista previa de este documento y del bloque K
   de la suite decía `senalizado`.)
   **`molino_funcionando` RE RESPALDADA en iter. 6**: tenía 0 cadenas que la aplicaran
@@ -295,15 +339,42 @@ Iter. 8 (Log 2127, mismo binario, corridas del 2026-10-22):
 ## 6. Veredicto
 
 Núcleo de M23 **verificado** con binario real y guarda anti-falso-verde demostrada en
-rojo NUEVE veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
+rojo DIEZ veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
 I y regresión de datos con prefijo re-inyectado; iter. 5 en el bloque J; iter. 6 en el
 bloque K; iter. 7 en el bloque L; iter. 8 en el bloque M; iter. 9 en el bloque N;
-todas EXIT 1 nombrando el bloque o la clave). Estado actual: suite en **258 checks /
-0 fallos / EXIT 0 x3**, catálogo vivo 27 cadenas, y regresiones M22 (41/0) · M71
-(83/0 y 37/0 en flujo-XP) · M59 (43/0 con 9 bloques, 4/0 en backup-rotate-return y
-7/0 en backup-rotations) · M55 (0 fallos) medidas el 2026-10-22 en las iters. 8 y 9.
+iter. 10 en el bloque O; todas EXIT 1 nombrando el bloque o la clave). Estado actual:
+suite en **316 checks / 0 fallos / EXIT 0 x3**, catálogo vivo 32 cadenas, y
+regresiones M22 (41/0) · M71 (83/0 y 37/0 en flujo-XP) · M59 (43/0 con 9 bloques,
+4/0 en backup-rotate-return y 7/0 en backup-rotations) · M55 (0 fallos) medidas el
+2026-10-22 en las iters. 8, 9 y 10.
 Pendientes = contenido narrativo y dueños externos (M22/M17/M24/M28/M32/M36/M37/M68),
 documentados como `[ ]` honestos en `05-Checklist.md`. Decisiones abiertas para el
 director: tipo de paso `"construir"` (rechazo PERSISTENTE por msg 153; dueños M22/M17),
 entrada `mision_cadena-biblioteca` en M55, y la `condicion` prefijada del principal si
 quiere extenderse el GO de normalización.
+
+
+## 7. Iter. 10 — cluster Amistad (Log 2131, 2026-10-22)
+
+- 6 cadenas nuevas en `data/historias/secundarias.json` (26 -> 32) del cluster Amistad
+  del 03-Diseno L44: regalo favorito, sentadilla de pesca, paseos, ficción, ayuda a un
+  vecino y cartas de amistad (la 6.a es extensión declarada del cluster: el 02-Analisis
+  L25 nombra 5 temas y pide 6 misiones). NPC REALES de data/villagers/ (olivia_nutria,
+  finneas_zorro, sofia_buho, aria_ciervo, mercedes_lince, luna_zorra) y objetos REALES
+  de data/items/ (OBJ-ROP-005, OBJ-ITE-036, OBJ-NAT-022, OBJ-NAT-023, OBJ-ITE-035,
+  OBJ-NAT-004), verificados por campo id dentro del .tres.
+- Suite: bloque O (58 checks) al FINAL de `_run()`; piso 258 -> **316 checks / 0 fallos /
+  EXIT 0 x3** con el binario real. Guardián EN ROJO por inyección de runtime sobre el
+  bloque O: EXIT 1, «el bloque O NO se ejecuto» + «solo 259 checks (minimo 316)».
+- Regresiones medidas en la corrida de cierre (mismo binario): M22 41/0 · M71 83/0 ·
+  M59 rotate 43/0 (9 bloques) + backup_rotate_return 4/0 + backup_rotations 7/0 ·
+  M55 0 fallos. Todas EXIT 0, 0 SCRIPT ERROR.
+- Flip con cita: «Crear 6 misiones de amistad (regalo, pesca, paseos, ficción)» (L84)
+  [ ] -> [x]. M23 = 62 [x] / 41 [ ] / 2 [?] = 105 por prefijo de línea.
+- Hallazgo (dueno M55): el puente M23->M55 degrada en silencio para las 6 nuevas
+  (`mision_cadena-*` ausentes del catálogo M55; `capitulo-*` también). No se inventa
+  contenido de M55.
+- Nota: la corrida que ejecutó la tanda se cortó antes de escribir este registro, el
+  Log 2131 y el reporte al director; la corrida de cierre del mismo día re-verificó la
+  suite (x3), el guardián (en rojo) y las regresiones, y escribió lo faltante. Las
+  cifras de esta sección están medidas, no heredadas.

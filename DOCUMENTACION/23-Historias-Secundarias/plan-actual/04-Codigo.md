@@ -466,3 +466,42 @@ nuevos sin colisión; contextos narrativos >= 10 caracteres, 4 pasos cada una
   = 105 (verificado por prefijo de línea). Las DOS líneas de totales estaban
   desincronizadas (L170 mentía 55/48/2: los flips de iter. 7 y iter. 8 no se habían
   volcado): ambas sincronizadas a 61/42/2.
+
+
+## Iter. 10 — Historias de amistad (Step-5-WorkBuddy, 2026-10-22, Log 2131)
+
+Cluster Amistad del 03-Diseno L44 («regalo favorito, sentadilla de pesca, paseos,
+ficción»; el 02-Analisis L25 pide 6 misiones con 5 temas nombrados — la 6.a, «cartas
+de amistad», es extensión declarada del cluster, sin dueño externo). 6 cadenas nuevas
+en `data/historias/secundarias.json` (26 -> 32) con NPC REALES de data/villagers/
+(olivia_nutria tejedora, finneas_zorro pescador, sofia_buho bibliotecaria, aria_ciervo
+trovadora, mercedes_lince mercader, luna_zorra artesana) y objetos REALES de
+data/items/ (OBJ-ROP-005 «Bufanda», OBJ-ITE-036 «Té», OBJ-NAT-022 «Flor rara»,
+OBJ-NAT-023 «Flor luminiscente», OBJ-ITE-035 «Miel», OBJ-NAT-004 «Flor silvestre»,
+verificados por campo id dentro del .tres, que es el índice de item_database.gd).
+Contextos narrativos >= 10 caracteres, 4 pasos cada una (hablar/explorar/entregar/
+puzzle), 6 consecuencias peladas únicas (32/32 sobre el catálogo) y 6 capítulos de
+diario únicos (31/31).
+
+- Suite `scripts/historias/test_historias.gd`: bloque O `_test_amistad()` (58 checks:
+  12 carga/fuente + 2 unicidad de flags + 1 diarios + 7x6 end-to-end + 1 puente diario)
+  al FINAL de `_run()`. Piso 258 -> **316 checks / 0 fallos / EXIT 0 x3** (binario real).
+  Guardián EN ROJO por inyección de runtime (`Variant` con `Array` -> `Dictionary`) al
+  inicio del bloque O: EXIT 1, «el bloque O NO se ejecuto» + «solo 259 checks ejecutados
+  (minimo 316)»; sonda borrada en la misma operación, sha256 del original verificado.
+- Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0, M71
+  `test_progresion.gd` 83/0, M59 `test_rotate_m59.gd` 43/0 (9 bloques) +
+  `test_backup_rotate_return.gd` 4/0 + `test_backup_rotations.gd` 7/0 y M55
+  `test_diario.gd` 0 fallos. Todas EXIT 0 con el binario real, 0 SCRIPT ERROR.
+- Hallazgo (dueno M55, no tocado): el puente M23->M55 degrada en silencio tambien para
+  las 6 nuevas (`mision_cadena-regalo-favorito` ausente del catalogo de M55; mismo
+  patron que cadena-biblioteca en H, cadena-jardines en K, cadena-puente en L,
+  cadena-brujula en M y cadena-guardas en N).
+- Flips del 05-Checklist con cita: «Crear 6 misiones de amistad (regalo, pesca,
+  paseos, ficción)» [ ] -> [x] (L84). M23 = 62 [x] / 41 [ ] / 2 [?] = 105 (verificado
+  por prefijo de línea). Las DOS líneas de totales sincronizadas a 62/41/2.
+- Nota de cierre: la corrida que ejecutó la tanda dejó la marca y los datos en disco
+  (committeados por el CRON) pero se cortó antes de escribir esta sección, el Log 2131
+  y el reporte al director. La verificación (suite x3, guardián en rojo, regresiones)
+  se rehizo íntegra en la corrida de cierre del mismo día: los números de este apartado
+  son MEDIDOS, no heredados.

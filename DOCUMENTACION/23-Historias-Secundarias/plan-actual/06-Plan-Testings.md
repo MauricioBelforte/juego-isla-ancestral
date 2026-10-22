@@ -2,7 +2,7 @@
 
 **Modelo:** Step-5-WorkBuddy
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-10-21 a 2026-10-22 (iter. 2 a iter. 7)
+**Fecha:** 2026-10-21 a 2026-10-22 (iter. 2 a iter. 10)
 **Módulo:** M23 Historias Secundarias — `scripts/historias/`, `data/historias/`
 
 ## Alcance
@@ -24,7 +24,7 @@ corre con el binario real:
   --headless --path game/isla-ancestral --script res://scripts/historias/test_historias.gd
 ```
 
-### Bloques (14)
+### Bloques (15)
 
 | Bloque | Contenido | Integraciones ejercitadas |
 |---|---|---|
@@ -42,18 +42,19 @@ corre con el binario real:
 | L | Las 4 historias de ruinas (iter. 7): carga, fuente del principal, unicidad de las 4 consecuencias nuevas vs las 14 preexistentes, 4 capitulos de diario unicos y corrida end-to-end de las 4 (npc REAL de `data/villagers/`, item REAL de `data/items/` salvo `tomo_carbonizado` narrativo, puzzle) con `ws_has()` de `biblioteca_quemada_rescatada` / `observatorio_alineado` / `estacion_reparada` / `puente_cruzable` | M14, M21, M55 |
 | M | Las 6 historias de objetos legendarios (iter. 8): carga, fuente del principal, unicidad de las 6 consecuencias nuevas vs las 18 preexistentes, 6 capitulos de diario unicos y corrida end-to-end de las 6 (npc REAL de `data/villagers/`; `gemstone`, `OBJ-SEC-004`, `OBJ-SEC-001` y `OBJ-LUZ-005` REALES de `data/items/`, `carta_sellada` y `brujula_desorientada` narrativos; puzzle) con `ws_has()` de `relicto_devuelto` / `gema_devuelta` / `receta_heredada` / `llave_encontrada` / `patrulla_nocturna` / `brujula_calibrada` | M14, M21, M55 |
 | N | Las 3 historias de familias (iter. 9): carga, fuente del principal, unicidad de las 3 consecuencias nuevas vs las 24 preexistentes, 3 capitulos de diario unicos y corrida end-to-end de las 3 (npc REAL de `data/villagers/`; `OBJ-REL-003`, `OBJ-HER-014` y `OBJ-LUZ-011` REALES de `data/items/`; puzzle) con `ws_has()` de `molienda_familiar_restaurada` / `red_del_abuelo_reparada` / `vigilia_de_los_guardas` | M14, M21, M55 |
+| O | Las 6 historias de amistad (iter. 10): carga, fuente del principal, unicidad de las 6 consecuencias nuevas vs las 27 preexistentes, 6 capitulos de diario unicos y corrida end-to-end de las 6 (npc REAL de `data/villagers/`; `OBJ-ROP-005`, `OBJ-ITE-036`, `OBJ-NAT-022`, `OBJ-NAT-023`, `OBJ-ITE-035` y `OBJ-NAT-004` REALES de `data/items/`; puzzle) con `ws_has()` de `regalo_favorito_entregado` / `sentadilla_de_pesca_amistosa` / `paseo_con_amiga` / `historia_de_ficcion_escrita` / `puesto_de_mercedes_ordenado` / `correspondencia_retomada` | M14, M21, M55 |
 
 ### Guarda anti-falso-verde (obligatoria, iter. 2)
 
 1. `_check()` cuenta cada verificación (`_checks`).
 2. `_fin("X")` por bloque + lista `BLOQUES`: el resumen nombra el bloque que no corrió.
-3. `CHECKS_MINIMOS` = **258** desde la iter. 9 (MEDIDO en verde el 2026-10-22 con 14
+3. `CHECKS_MINIMOS` = **316** desde la iter. 10 (MEDIDO en verde el 2026-10-22 con 15
    bloques; la cadena fue 40 con 7 -> 59 con 8 -> 70 con 9 -> 98 con 10 -> 129 con 11
-   -> 169 con 12 -> 227 con 13 -> 258 con 14). No estimado.
+   -> 169 con 12 -> 227 con 13 -> 258 con 14 -> 316 con 15). No estimado.
 4. `_summary()` en un `call_deferred` **separado** del de `_run()`: si `_run()` aborta
    por un `SCRIPT ERROR` de runtime, el resumen corre igual, nombra los bloques
    faltantes, dispara el piso y sale con `quit(1)` — la suite **no cuelga**.
-5. Guardián probado EN ROJO por inyección de runtime, nueve veces:
+5. Guardián probado EN ROJO por inyección de runtime, diez veces:
    - iter. 2 (`var _n: Node = null; _n.free()` tras el bloque B): EXIT 1, nombra
      C/D/E/F/G, «solo 11 checks (mínimo 40)».
    - iter. 3 (abort a mitad del bloque H, el nuevo): EXIT 1, nombra H, «solo 47 checks
@@ -75,6 +76,11 @@ corre con el binario real:
    - iter. 9 (abort de runtime al inicio del bloque N, asignación tipada
      `Variant` con `Array` -> `Dictionary`): EXIT 1, «el bloque N NO se ejecuto» +
      «solo 228 checks (mínimo 258)», 2 fallos.
+   - iter. 10 (abort de runtime al inicio del bloque O, asignación tipada
+     `Variant` con `Array` -> `Dictionary`): EXIT 1, «el bloque O NO se ejecuto» +
+     «solo 259 checks (mínimo 316)», 2 fallos. Re-ejecutada en la corrida de cierre
+     del mismo día (la nota del checklist afirmaba la inyección, pero la corrida
+     original no dejó registro en la memoria del agente): mismo resultado.
    Sonda borrada en la misma operación; sha256 del original verificado; 0 sondas en el
    repo.
 
@@ -90,7 +96,7 @@ corre con el binario real:
 ## Casos que quedan fuera (honestidad)
 
 - E2E de 10 cadenas completas como test diseñado (ítem de checklist `[ ]` honesto): el
-  catálogo vivo tiene 24 y varios bloques corren cadenas end-to-end individuales, pero
+  catálogo vivo tiene 32 y varios bloques corren cadenas end-to-end individuales, pero
   el test E2E de 10 encadenadas no está diseñado ni corrido.
 - Contenido narrativo, capítulos de diario (`capitulo-*` no existen en el catálogo
   M55), cosméticos y consecuencias visuales: dueños de contenido/M53/M45/M17/M18/M27.

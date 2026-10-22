@@ -6,7 +6,7 @@
 ## A. Problema y objetivos
 
 - [x] Definir el problema: sin sistema de animación los actores se ven robóticos o sin animación [S]
-- [ ] Definir el objetivo: kit de animación central con producción coherente, FSM espejo y presupuesto verificado [S]
+- [x] Definir el objetivo: kit de animación central con producción coherente, FSM espejo y presupuesto verificado — 03-Diseno sec 6: 4 familias comparten FSM espejo M11, poster noretouch: folder de clips + mapping + FSM = actor animable sin codigo nuevo de animacion (2026-10-23 S49) [S]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] Registrar dependencias: M45 (rigs), M11/M19/M36 (FSM), M64/M65 (IA), M04 (Godot), M61/M62 (presupuestos), M43/M44/M52 (eventos) [M]
   · espera: depende de M4/M11/M19/M36/M43/M44/M45/M52/M61/M62/M64/M65 (coordinar con su dueno)
@@ -16,7 +16,7 @@
   · espera: depende de M11/M43/M45/M52/M64/M65 (coordinar con su dueno)
 - [ ] Documentar restricciones: Godot 4.x, FPS 30 base (UI 60), determinismo de mundo, sin RNG, sincronía en timelines [M]
   · espera: pendiente de documentacion (marcado [M])
-- [ ] Definir criterios de aceptación verificables (8 criterios) [S]
+- [x] Definir criterios de aceptación verificables (8 criterios) [S] — 03-Diseno sec 6: (1) prefijo/categorias, (2) T-pose unica, (3) duracion bajo tope, (4) blend <=300ms, (5) FSM M11 sin estado sin clip (fallback WARN), (6) presupuesto M61, (7) LOD fauna, (8) senales L199 (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [ ] Incluir contexto del plan de producción §4 (rigs por familia, coherencia) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
@@ -29,7 +29,7 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [x] Definir familias de rigs: humanoide, cuadrúpedo, ave, pez [M] — 03-Diseno sec 5: 4 familias con UN rig base y mapping de huesos identico por especie; sin rigs nuevos por animal (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir plantilla de import en editor (import_animation_defaults.gd) [M]
+- [x] Definir plantilla de import en editor (import_animation_defaults.gd) [M] — 03-Diseno sec 6 CONTRATO del tool futuro (fps 30, loop por sufijo _loop, remapeo por familia, senales L199); mientras no exista: defaults manuales + checklist L173 (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [x] Definir máximos de duración por categoría [S] — 03-Diseno: tabla 3.1 como TOPES (locomocion 1.6s/acciones 2.5s/fauna 3.0s/mecanicas 4.0s/UI 0.6s); exceder exige justificacion o dividir (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
@@ -45,7 +45,7 @@
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Cosecha, regado, diálogo, dormir del jugador [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Definir blend space 2D de locomoción (dirección × velocidad) [M]
+- [x] Definir blend space 2D de locomoción (dirección × velocidad) [M] — 03-Diseno sec 6: eje X velocidad (0/0.5/1.0), eje Y direccion relativa 4 muestreos, blend 250 ms (tabla 3.1), UN blend space por familia (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [ ] Definir sockets de herramientas (grip) con M45 [M]
   · espera: depende de M45 (coordinar con su dueno)
@@ -60,7 +60,7 @@
   · espera: depende de M20 (coordinar con su dueno)
 - [ ] Animaciones festivas (M74) [M]
   · espera: depende de M74 (coordinar con su dueno)
-- [ ] Definir variantes por personalidad (≤3 por gesto) [M]
+- [x] Definir variantes por personalidad (≤3 por gesto) [M] — 03-Diseno sec 6: a1/a2/a3 con pesos 80/15/5; compartan huesos y duracion +-10% para no romper FSM espejo ni presupuesto (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
 ## E. RF4 — Animaciones de fauna
@@ -69,7 +69,7 @@
   · espera: depende de M36/M65 (coordinar con su dueno)
 - [ ] Variantes de fase en manadas/bancos (fases escalonadas) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Definir LOD de animación de fauna (distancia) [M]
+- [x] Definir LOD de animación de fauna (distancia) [M] — 03-Diseno sec 6: <=25m clip completo, 25-50m idle+locomocion sin gestos, >50m pose congelada; cada actor elige LOD por distancia PROPIA, no por manada (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 
 ## F. RF5 — Animaciones de herramientas
@@ -186,9 +186,9 @@
 ## O. RF14 — Registro de presupuesto
 
 - [?] Definir animation_budget.json por actor/animación [C]
-- [ ] Definir suma por escena pivote contra presupuesto M61 [M]
+- [x] Definir suma por escena pivote contra presupuesto M61 [M] — 03-Diseno sec 6: <=60 actores animando (burbuja M61); registro 3.2 con presupuestos POR escena del slice (playa/prado/ruina); actor nuevo que exceda pide revision del 03 (2026-10-23 S49)
   · espera: depende de M61 (coordinar con su dueno)
-- [ ] Definir alerta de excedente en editor [S]
+- [x] Definir alerta de excedente en editor [S] — 03-Diseno sec 6: warning del validador futuro (L199) al exceder 3.2 con lista de actores, sin bloquear; conteo manual mientras el tool no exista (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 
 ## P. RF15 — API de reproducción
@@ -308,7 +308,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 123 items - Completados: 28 - Pendientes: 92 - No resueltos: 3. (Corregido agnes-3-flash 2026-10-14: +13 flips lotes 1-3 citando 02-Analisis/03-Diseno)
+**Totales:** 123 items - Completados: 36 - Pendientes: 84 - No resueltos: 3. (Corregido agnes-3-flash 2026-10-14: +13 flips lotes 1-3 citando 02-Analisis/03-Diseno)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 9 [x] / 114 [ ] / 0 [?].

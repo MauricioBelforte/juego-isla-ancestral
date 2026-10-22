@@ -185,3 +185,55 @@ actor), `animation_finished` (el loop termino o el one-shot completo) y
 libreria — error de integracion visible en consola). MIENTRAS el tool no
 existe, este item queda como CONTRATO (el flip es de definicion, no de
 implementacion).
+
+## 6. Kit de animacion: import, variantes, LOD y presupuesto (S49 — G-5.3-Flash-Agente, 2026-10-23)
+
+**Objetivo del kit (L9):** UN kit central de animación con producción
+coherente: las 4 familias (sec 5) comparten FSM espejo del M11 (estados
+iguales, clips distintos por actor), presupuesto verificado por la tabla
+3.2 y contratos de import de esta seccion. Todo actor animable debe poder
+montarse SIN codigo nuevo de animacion: solo folder de clips + mapping de
+huesos + FSM espejo.
+
+**Criterios de aceptacion (L19, 8 criterios):** (1) todo clip cumple el
+prefijo/categories de sec 5; (2) T-pose unica en el FBX; (3) duracion bajo
+tope de tabla 3.1; (4) blend a FSM espejo <= 300 ms; (5) NINGUN estado de la
+FSM M11 queda sin clip (el fallback idle WARN del L198 cubre lo temporal);
+(6) presupuesto M61 respetado al suma N actores por escena; (7) LOD de fauna
+activo por distancia (sec 6 abajo); (8) senales started/finished/missing
+operativas (L199). Un kit que falla cualquier criterio vuelve a blocking.
+
+**Plantilla de import (L32):** `import_animation_defaults.gd` (tool, cuando
+exista): aplica por DROP de FBX — fps 30, loop on/off por sufijo del clip
+(`_loop`), compresion activada como el resto del proyecto, remapeo de huesos por familia (tabla
+sec 5) y emision de las senales L199. Mientras el tool no exista: defaults
+manuales documentados aqui y checados por el checklist L173 (T-pose/bones
+subset).
+
+**Blend space 2D de locomocion (L48):** eje X = velocidad (idle 0 ->
+walk 0.5 -> run 1.0), eje Y = direccion relativa (frente/derecha/atras/
+izquierda, 4 muestreos); blend suave 250 ms (tabla 3.1); el FSM espejo M11
+alimenta ambos ejes; un SOLO blend space por familia (compartido por
+especies del mismo rig).
+
+**Variantes por personalidad (L63):** maximo 3 variantes por gesto canonico
+(a1/a2/a3) — el sistema elige aleatorio con peso (80/15/5) para no
+repetir la misma variante; las variantes comparten los MISMO huesos y
+duracion +-10% (para no romper el FSM espejo ni el presupuesto).
+
+**LOD de fauna (L72):** por distancia al camara: <= 25 m el clip completo;
+25-50 m una variante simplificada (idle + locomocion solamente, SIN gestos);
+> 50 m pose congelada con billboard/flip de sprite (sin AnimationPlayer
+corriendo). Cada actor elige su LOD por distancia PROPIA (no por manada: los
+miembros lejanos apagan su AnimationPlayer de forma independiente).
+
+**Presupuesto por escena (L189, M61):** la suma de actores animando por
+escena <= 60 (burbuja M61 ya valida); el registro 3.2 del 03 lleva los
+presupuestos POR escena del slice (playa/prado/ruina) — cualquier actor
+nuevo que exceda la suma pide revision del 03 antes de montar.
+
+**Alerta de excedente en editor (L191):** cuando exista el tool del
+validador (L199), al exceder el presupuesto 3.2 EMITIRA un warning en el
+editor con la lista de actores que pisa el tope (sin bloquear; el de
+revision L154 decide). Mientras tanto, el conteo es manual en el 3.2.
+
