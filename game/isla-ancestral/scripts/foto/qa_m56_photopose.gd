@@ -36,12 +36,12 @@ func _run() -> void:
 	for sen in ["photo_pose_request", "preset_aplicado", "foto_tomada", "modo_foto_cambiado"]:
 		_check(ps.has_signal(sen), "senal presente: %s" % sen)
 	# Emision real del poze request y captura por un oyente
-	var capturadas: int = 0
-	var cb: Callable = func(): capturadas += 1
+	var hits: Array = []  # array por REFERENCIA: las lambdas capturan por valor (lecci GDScript)
+	var cb: Callable = func(): hits.append(1)
 	ps.photo_pose_request.connect(cb)
 	ps.photo_pose_request.emit()
 	ps.photo_pose_request.emit()
-	_check(capturadas == 2, "poze request: 2 emisiones capturadas por oyente (%d)" % capturadas)
+	_check(hits.size() == 2, "poze request: 2 emisiones capturadas por oyente")
 	ps.photo_pose_request.disconnect(cb)
 	# El NPCManager tiene el receptor conectado (fila del 05: M07 -> M19)
 	var mgr := root.get_node_or_null("/root/NPCManager")
