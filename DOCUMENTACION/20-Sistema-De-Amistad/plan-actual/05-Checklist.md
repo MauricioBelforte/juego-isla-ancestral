@@ -210,7 +210,7 @@
 - [ ] 03-Diseno creado y firmado (arquitectura y contratos) [S]
 - [ ] 04-Codigo creado y firmado (rutas, firmas, Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
-**Totales:** 148 items · Completados: 80 · Pendientes: 68 · No resueltos: 0. (Recontado el 2026-10-22 por minimax-m3-1-flash, Log 2124: 74 [x] + 74 [x] de las 4 tandas = 80 [x]; pendientes 68; sin resueltos 0.)
+**Totales:** 148 items · Completados: 80 · Pendientes: 68 · No resueltos: 0. (Recontado el 2026-10-22 por minimax-m3-1-flash, Log 2124: 74 [x] + 74 [x] de las 4 tandas = 80 [x]; pendientes 68; sin resueltos 0.. **Nota (Log 2126, iter. minimax-m3-1-flash, 2026-10-22):** las 3 suites de M20 (79 checks) **entran al CI central** con el wrapper nuevo `tests/test_m20_amistad_suites.gd` (8 checks, 0 fallos, rc=0) — antes vivian en `scripts/friendship/`, fuera de `res://tests/`, y no se ejecutaban en ningun gate.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 98 [ ] / 0 [?].

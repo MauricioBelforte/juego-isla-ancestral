@@ -327,3 +327,51 @@ objetos e items REALES de `data/items/`):
 - Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0, M71
   `test_progresion.gd` 83/0, M71 `test_flujo_xp_recompensa_m71_hy3.gd` 37/0, M59
   rotacion 43/0, M55 `test_diario.gd` 26/0.
+
+## Iter. 7 — Historias de ruinas (Log 2125, 2026-10-22, Step-5-WorkBuddy)
+
+Tanda del 03-Diseno L33 (cluster Ruinas: biblioteca quemada, observatorio, estacion,
+puente). Se agregaron al catalogo principal (`game/isla-ancestral/data/historias/secundarias.json`,
+13 -> 17 cadenas) con el patron de produccion (npc = id de `data/villagers/`, objetos REALES
+de `data/items/` donde existen):
+
+| id | titulo | npc (villager medido) | pasos | entrega | puzzle |
+|---|---|---|---|---|---|
+| `cadena-biblioteca-quemada` | La Biblioteca Quemada | `sofia_buho` (bibliotecaria) | hablar/explorar/entregar/puzzle | `tomo_carbonizado` (narrativo) | `cenizas-legibles` |
+| `cadena-observatorio` | El Observatorio Ciego | `vera_ardilla` (farera) | hablar/explorar/entregar/puzzle | `ancient_crystal` (REAL) | `alineacion-estelar` |
+| `cadena-estacion` | La Estacion Silenciosa | `ramon_tejon` (herrero) | hablar/explorar/entregar/puzzle | `iron_ore` (REAL) | `engranajes-oxidados` |
+| `cadena-puente` | El Puente de Piedra | `luna_zorra` (artesana) | hablar/explorar/entregar/puzzle | `piedra_caliza` (REAL) | `arco-de-piedra` |
+
+- **NPCs REALES verificados en disco**: `sofia_buho.tres` (bibliotecaria — unico match de
+  rol real del cluster), `vera_ardilla.tres` (farera), `ramon_tejon.tres` (herrero) y
+  `luna_zorra.tres` (artesana) en `data/villagers/` (14 villagers medidos). Los 4 quedaban
+  sin cadena propia tras las iters. 5-6 (mapeo honesto por rol, mismo criterio que iter. 5).
+- **Items REALES**: `ancient_crystal.tres`, `iron_ore.tres` y `piedra_caliza.tres` en
+  `data/items/`. `tomo_carbonizado` es narrativo: 0 items de tipo libro/tomo en
+  `data/items/` (medido), mismo patron que `farol_cargado` / `jarabe_lunar` /
+  `semilla_antigua`.
+- **Consecuencias con clave PELADA y unica** (anti-repeticion):
+  `biblioteca_quemada_rescatada`, `observatorio_alineado`, `estacion_reparada` y
+  `puente_cruzable` — 17 consecuencias unicas sobre 17 cadenas. `estacion_reparada` y
+  `puente_cruzable` son consecuencias del listado del 03-Diseno L53.
+- **Hallazgo (dueno M55)**: el puente M23->M55 degrada en silencio tambien para las 4
+  nuevas (`not diary.esta_registrada("mision_cadena-puente")` medido en el bloque L).
+  Mismo residual de las iters. 3 y 6; NO se toca (contenido de M55).
+- Suite `test_historias.gd`: bloque L nuevo (`_test_ruinas`) al FINAL de `_run()` con
+  `restore_save_data({})`, carga y fuente del principal, unicidad de las 4 consecuencias
+  vs las 14 preexistentes, 4 capitulos de diario unicos y corrida end-to-end de las 4
+  con siembra del item y el puzzle. **40 checks ejecutados (delta medido 129 -> 169)**.
+  Piso 129 -> **169 MEDIDO en verde**: 169/0/EXIT 0 x3 con el binario real.
+- Guardian probado EN ROJO por inyeccion de runtime en el bloque L
+  (`var _v: Variant = _h.cadenas_count()` + `var _boom: Dictionary = _v`): EXIT 1
+  nombrando «el bloque L NO se ejecuto» + «solo 130 checks (minimo 169)». Inyeccion
+  revertida y verde restaurado (169/0/EXIT 0); sha256 del original comprobado; sonda
+  borrada (0 sondas en el repo).
+- Correccion propia en la suite: la lista `existentes` del bloque K decia
+  `sendero_bosque_senalizado` (con z) pero el flag real en datos es
+  `sendero_bosque_senalado` — la lista no habria detectado una colision con el flag real.
+- Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0, M71 `test_progresion.gd`
+  83/0, M59 `test_rotate_m59.gd` 43/0 (9 bloques) + `test_backup_rotate_return.gd` 4/0 y
+  M55 `test_diario.gd` 0 fallos. Todas EXIT 0 con el binario real, 0 SCRIPT ERROR.
+- Flip del 05-Checklist con cita: «Crear historias de 4 ruinas» [ ] -> [x] (Log 2125).
+  M23 = 56 [x] / 47 [ ] / 2 [?] = 105.

@@ -401,6 +401,24 @@ Auditoría estática report-only del bloque N (spillover de UI: tooltips, títul
 
 **HALLAZGO CROSS-BLOQUE (M159/M39/M53) — resolución de nombres de ítem inconsistente:** `inventory_layer.gd` `_nombre_item` L249-254 SÍ consume el `.tres nombre` canónico (ES, data-driven) con fallback ID maquillado; pero `shop_ui.gd` `_nombre_item` L342-345 y `hotbar_widget.gd` `_friendly_name` L164-165 muestran SOLO el item_id maquillado (`item_id.replace("_", " ")`). El jugador ve nombres DIFERENTES del mismo ítem según la superficie (inventario: «Pergamino: Rec. Tela de Lino»; tienda/hotbar: «Pergamino rec tela lino»). **DEUDA owners M39/M53/M159:** unificar la resolución de nombres (canónico en todas las superficies) como prerequisito del i18n data-driven de M159. Adicional: `CATEGORY_NAMES` (inventory_layer L16-22) = 16 categorías de inventario ES literales jugador-visibles (tabs) — data-driven pendiente de claves i18n (owner M06/M14).
 
+#### 2.4.12 QA del catálogo M159 de ítems — bloque O (TANDA 27, 2026-10-22 — tareas 79/80/81/82)
+
+Auditoría estática report-only del bloque O (catálogo de 300 `.tres` en `data/items/`). Medida en disco 2026-10-22:
+
+**T79 — Nombres ES de los `.tres`: CORRECTO.** 300/300 `.tres` tienen `nombre` ES (máximo 28 chars, «Pergamino: Rec. Tela de Lino») + `descripcion` ES (máximo 81 chars). Todos los campos son strings ES data-driven (sin claves de catálogo M87 — el nombre/descripcion viajan en el Resource `ItemData`).
+
+**T80 — Nombres EN: DEUDA i18n data-driven (0/300 campos EN).** 0 `.tres` tienen campos `nombre_en`/`descripcion_en` (grep de `_en`/`name_en`: 0 hits). En locale EN el jugador ve nombres y descripciones ES. **DEUDA owner M159 (módulo sellado 2026-10-21):** propuesta llave-en-mano — (A) campos `nombre_en`/`descripcion_en` en `ItemData` + resolución por locale en `_nombre_item`/detalle, o (B) claves `ITEMS.*` ES/EN/PT con `nombre_key` en el `.tres` (crear+consumir en el mismo commit, regla anti-huérfanas §2.4.2). Prerrequisito: resolver primero la deuda de nombres duplicados (T81).
+
+**T81 — Catálogo con el inventario dos veces: HALLAZGO MAYOR (2 generaciones coexistiendo).** `ItemDatabase._load_all_items` (`item_database.gd` L32-59) carga TODOS los `.tres` de `data/items/` al diccionario `_items` keyed por `item.id` — el catálogo runtime tiene **300 ítems de 2 generaciones**:
+- **Legacy (28 archivos):** ids snake_case (`clay`, `iron_ore`, `ancient_crystal`...), descripciones completas («Arcilla» = «Barro arcilloso. Moldeable cuando está húmedo.»).
+- **Moderna (272 archivos `item_obj_*`):** ids `OBJ-XXX-NNN` (`OBJ-ITE-003`), campos extra (tamano, interactivo, interacciones, material, color, variante, modelo_3d).
+- **27 nombres duplicados** entre generaciones («Arcilla» = `clay` + `OBJ-ITE-003`; «Hierro» = `iron_ore` + `OBJ-ITE-004` + `OBJ-ITE-006`; «Cama simple» = `item_obj_cam_001` + `item_obj_mes_009` — duplicado DENTRO de la moderna). El jugador ve el mismo nombre para ítems distintos. `ItemDatabase` protege contra **id** duplicado (L65-67) pero **no contra nombre duplicado**.
+- **244/272 modernos (90%) con `descripcion = ""`** (vacía) vs legacy con descripciones completas.
+- **24/28 ids legacy SÍ se usan fuera de `items/`** (arte3d/materiales_recursos.json, ubicaciones_loc.json, mining/ores.json, historias/secundarias.json, templos/puzzles/recompensas, construccion/piezas) — la generación legacy está VIVA en el ecosistema (no es deuda muerta).
+**DEUDA owner M159 (agnes):** consolidar generaciones (dedupe de nombres o fusión de ids legacy↔modernos) + completar las 244 descripciones vacías. Hallazgo cross-bloque (T26): `inventory_layer._nombre_item` L249-254 muestra el `.tres nombre` canónico, pero `shop_ui._nombre_item` L342-345 y `hotbar_widget._friendly_name` L164-165 muestran el item_id maquillado — con 2 generaciones, la divergencia de nombres se amplifica.
+
+**T82 — Iconos: CORRECTO (300/300 synced).** 300/300 `.tres` tienen `icono = ExtResource(CompressedTexture2D)` → `res://assets/2d/items_m159/ico_*.png`; **300 PNGs existen en disco, 0 referenciados sin archivo** (el «0/121» del backlog estaba stale — hoy 300/300). El arte es el frente de agnes/M45 (no es mío el asset); la verificación de consistencia referencia↔archivo es de este nicho.
+
 ### 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).

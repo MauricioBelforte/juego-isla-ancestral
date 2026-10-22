@@ -2,7 +2,7 @@
 
 **Modelo:** Step-5-WorkBuddy
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-10-21 a 2026-10-22 (iter. 2, Log 2082; iter. 3, Log 2083; iter. 4, Log 2085; iter. 5, Log 2107; iter. 6, Log 2117)
+**Fecha:** 2026-10-21 a 2026-10-22 (iter. 2, Log 2082; iter. 3, Log 2083; iter. 4, Log 2085; iter. 5, Log 2107; iter. 6, Log 2117; iter. 7, Log 2125)
 
 Binario real: `D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe`
 (`--headless --path game/isla-ancestral --script res://...`). Ninguna cifra de este
@@ -177,17 +177,19 @@ Iter. 6 (Log 2117, mismo binario, corridas del 2026-10-22):
 
 ## 5. Estado del catálogo (medido, no estimado)
 
-- `data/historias/secundarias.json`: **13 cadenas** (faro, invernadero, epilogo-plaza,
+- `data/historias/secundarias.json`: **17 cadenas** (faro, invernadero, epilogo-plaza,
   secretta-luciernagas, panadera, carpintero, tejedora, pescador, guarda, alquimista,
-  jardines, cofradia, molino) de las ~89 slots del catálogo de 03-Diseno. Creció
-  4 -> 10 (iter. 5, vecinos) -> 13 (iter. 6, lugares). `cadena-biblioteca` vive en el
+  jardines, cofradia, molino, biblioteca-quemada, observatorio, estacion, puente) de
+  las ~89 slots del catálogo de 03-Diseno. Creció 4 -> 10 (iter. 5, vecinos) -> 13
+  (iter. 6, lugares) -> 17 (iter. 7, ruinas). `cadena-biblioteca` vive en el
   fichero de ejemplos (merge por id).
 - `data/historias/cadenas_ejemplo.json` (3 cadenas: faro, biblioteca, postgame-plaza):
   **INTEGRADO** en la iter. 3 (Log 2083) vía `RUTA_CATALOGO_EJEMPLOS` con merge por id
   (GO del director, msg 151). Resultado medido: +1 añadida (`cadena-biblioteca`),
   1 conflicto (`cadena-faro`, gana la variante del principal), 1 rechazada
   (`cadena-postgame-plaza`, tipo de paso `"construir"` desconocido). Catálogo vivo: 5
-  en iter. 3 -> **14** en iter. 6 (13 del principal + 1 de ejemplos).
+  en iter. 3 -> **14** en iter. 6 (13 del principal + 1 de ejemplos) -> **18** en
+  iter. 7 (17 del principal + 1 de ejemplos).
 - Capítulos `capitulo-*` en el catálogo M55 (`data/diario/diario_catalog.json`): **0**
   → las recompensas `diario` de las cadenas apuntan a entradas inexistentes (el
   registro efectivo es `mision_{cadena_id}`). MEDIDO iter. 3: existen
@@ -197,11 +199,20 @@ Iter. 6 (Log 2117, mismo binario, corridas del 2026-10-22):
   `not diary.esta_registrada("mision_cadena-jardines")` (idem cofradia/molino), y las
   recompensas apuntan a `capitulo-jardines` / `capitulo-cofradia` / `capitulo-molino`,
   ausentes del catálogo M55 (0 entradas `capitulo-*`). Reportado; dueño M55.
-- Consecuencias aplicadas por cadenas del principal (13 únicas sobre 13 cadenas):
+  **Iter. 7**: degrada IGUAL para las 4 de ruinas —
+  `not diary.esta_registrada("mision_cadena-puente")` (idem biblioteca-quemada /
+  observatorio / estacion), y las recompensas apuntan a `capitulo-biblioteca-quemada` /
+  `capitulo-observatorio` / `capitulo-estacion` / `capitulo-puente`, también ausentes
+  del catálogo M55. Reportado; dueño M55.
+- Consecuencias aplicadas por cadenas del principal (17 únicas sobre 17 cadenas):
   `faro_encendido`, `invernadero_abierto`, `plaza_decorada`, `luciernagas_vueltas`,
   `pan_fiesta_horneado`, `banco_plaza_reparado`, `manto_niebla_terminado`,
-  `red_pescador_reparada`, `sendero_bosque_senalizado`, `jarabe_lunar_listo`,
-  `jardin_florecido`, `cofradia_activa`, `molino_funcionando`.
+  `red_pescador_reparada`, `sendero_bosque_senalado`, `jarabe_lunar_listo`,
+  `jardin_florecido`, `cofradia_activa`, `molino_funcionando`,
+  `biblioteca_quemada_rescatada`, `observatorio_alineado`, `estacion_reparada`,
+  `puente_cruzable`. (Corrección de decreto: el flag real en datos es
+  `sendero_bosque_senalado`, sin z; la lista previa de este documento y del bloque K
+  de la suite decía `senalizado`.)
   **`molino_funcionando` RE RESPALDADA en iter. 6**: tenía 0 cadenas que la aplicaran
   desde el Log 2082 (degradada a `[?]` por el director, msg 151); `cadena-molino` la
   aplica de punta a punta (bloque K mide `ws_has("molino_funcionando")`).
@@ -218,12 +229,12 @@ Iter. 6 (Log 2117, mismo binario, corridas del 2026-10-22):
 ## 6. Veredicto
 
 Núcleo de M23 **verificado** con binario real y guarda anti-falso-verde demostrada en
-rojo SEIS veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
+rojo SIETE veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
 I y regresión de datos con prefijo re-inyectado; iter. 5 en el bloque J; iter. 6 en el
-bloque K; todas EXIT 1 nombrando el bloque o la clave). Estado actual: suite en
-**129 checks / 0 fallos / EXIT 0 x4**, catálogo vivo 14 cadenas, y regresiones
-M22 (41/0) · M71 (83/0 y 37/0) · M59 (43/0 y 7/0) · M55 (0 fallos) medidas el
-2026-10-22.
+bloque K; iter. 7 en el bloque L; todas EXIT 1 nombrando el bloque o la clave). Estado
+actual: suite en **169 checks / 0 fallos / EXIT 0 x3**, catálogo vivo 18 cadenas, y
+regresiones M22 (41/0) · M71 (83/0) · M59 (43/0 con 9 bloques y 4/0 en
+backup-rotate-return) · M55 (0 fallos) medidas el 2026-10-22 en la iter. 7.
 Pendientes = contenido narrativo y dueños externos (M22/M17/M24/M28/M32/M36/M37/M68),
 documentados como `[ ]` honestos en `05-Checklist.md`. Decisiones abiertas para el
 director: tipo de paso `"construir"` (rechazo PERSISTENTE por msg 153; dueños M22/M17),

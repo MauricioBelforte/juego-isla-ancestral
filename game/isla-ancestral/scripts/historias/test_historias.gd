@@ -38,11 +38,21 @@
 # Bloque K afirma carga, fuente, unicidad de consecuencias/diarios y corrida
 # end-to-end de las 3. molino_funcionando era flag HUERFANO (0 archivos, Log 2082):
 # la cadena-molino le da respaldo en datos.
+# Iter. 7 (Step-5-WorkBuddy, 2026-10-22, Log 2125): cluster Ruinas del 03-Diseno
+# L33 (biblioteca quemada, observatorio, estacion, puente). NPC REALES de
+# data/villagers/ (sofia_buho bibliotecaria, vera_ardilla farera, ramon_tejon
+# herrero, luna_zorra artesana) y objetos REALES de data/items/ (ancient_crystal,
+# iron_ore, piedra_caliza); tomo_carbonizado es narrativo (0 items de libro en
+# data/items/, mismo patron que farol_cargado/jarabe_lunar). Bloque L afirma
+# carga, fuente, unicidad de consecuencias/diarios y corrida end-to-end de las 4.
+# Correccion propia: la lista `existentes` del bloque K decia
+# "sendero_bosque_senalizado" (con z) pero el flag real en datos es
+# "sendero_bosque_senalado" -> la lista no detectaria colision con el flag real.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -50,11 +60,12 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 6, 2026-10-22): 129 checks con los bloques A-K
-# (iter. 5 tenía 98 con A-J; el bloque K del cluster Lugares sumó 31).
-# Medido: 129/0/EXIT 0 x3. El guardián se probó EN ROJO por inyección de runtime
-# sobre el bloque K (ver Log 2117).
-const CHECKS_MINIMOS := 129
+# Piso MEDIDO en verde (iter. 7, 2026-10-22, Log 2125): 169 checks con los
+# bloques A-L (iter. 6 tenia 129 con A-K; el bloque L del cluster Ruinas sumo
+# 40: 8 carga/fuente + 2 unicidad de flags + 1 diarios + 7x4 end-to-end + 1
+# puente diario). Medido: 169/0/EXIT 0 x3. El guardian se probo EN ROJO por
+# inyeccion de runtime sobre el bloque L (ver Log 2125).
+const CHECKS_MINIMOS := 169
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -87,6 +98,7 @@ func _run() -> void:
 	_test_esquema_consistente()
 	_test_vecinos()
 	_test_lugares()
+	_test_ruinas()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -117,7 +129,8 @@ func _test_carga() -> void:
 	# Iter. 3: 4 del principal + 1 mergeada de ejemplos (cadena-biblioteca).
 	# Iter. 5 (Log 2107): +6 historias de vecinos en el principal -> 10 + 1 = 11.
 	# Iter. 6 (Log 2117): +3 del cluster Lugares -> 13 + 1 = 14.
-	_check(_h.cadenas_count() == 14, "14 cadenas cargadas tras el merge (13 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 7 (Log 2125): +4 del cluster Ruinas -> 17 + 1 = 18.
+	_check(_h.cadenas_count() == 18, "18 cadenas cargadas tras el merge (17 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -344,7 +357,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 13, "catálogo principal con 13 cadenas (crudo, 4 + 6 vecinos + 3 lugares): %d" % principal.size())
+	_check(principal.size() == 17, "catálogo principal con 17 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -367,7 +380,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 14, "14 cadenas cargadas en runtime (13 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 18, "18 cadenas cargadas en runtime (17 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -497,7 +510,7 @@ func _test_lugares() -> void:
 	var existentes := ["faro_encendido", "invernadero_abierto", "plaza_decorada",
 		"luciernagas_vueltas", "biblioteca_iluminada", "pan_fiesta_horneado",
 		"banco_plaza_reparado", "manto_niebla_terminado", "red_pescador_reparada",
-		"sendero_bosque_senalizado", "jarabe_lunar_listo"]
+		"sendero_bosque_senalado", "jarabe_lunar_listo"]
 	var flags := {}
 	var unicos := true
 	for cid in nuevas:
@@ -572,3 +585,114 @@ func _test_lugares() -> void:
 		_check(not diary.esta_registrada("mision_cadena-jardines"),
 			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
 	_fin("K")
+
+
+## Iter. 7 (Log 2125): cluster Ruinas del 03-Diseno L33 (biblioteca quemada,
+## observatorio, estacion, puente). NPC REALES de data/villagers/ (sofia_buho
+## bibliotecaria, vera_ardilla farera, ramon_tejon herrero, luna_zorra artesana)
+## y objetos REALES de data/items/ (ancient_crystal, iron_ore, piedra_caliza);
+## tomo_carbonizado es narrativo (0 items de libro en data/items/). Afirma carga,
+## fuente del principal, unicidad anti-repeticion de consecuencias y diarios, y
+## corrida end-to-end de las 4.
+func _test_ruinas() -> void:
+	# Estado limpio: el bloque no depende de lo que dejaron los anteriores
+	_h.restore_save_data({})
+	var nuevas := ["cadena-biblioteca-quemada", "cadena-observatorio",
+		"cadena-estacion", "cadena-puente"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+	# Anti-repeticion: 4 flags de consecuencia nuevos, sin colision con los 14 previos
+	var existentes := ["faro_encendido", "invernadero_abierto", "plaza_decorada",
+		"luciernagas_vueltas", "biblioteca_iluminada", "pan_fiesta_horneado",
+		"banco_plaza_reparado", "manto_niebla_terminado", "red_pescador_reparada",
+		"sendero_bosque_senalado", "jarabe_lunar_listo", "jardin_florecido",
+		"cofradia_activa", "molino_funcionando"]
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag) or existentes.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 4, "4 consecuencias distintas en las cadenas de ruinas: %d" % flags.size())
+	_check(unicos, "consecuencias de ruinas sin colision con las previas (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 4, "4 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# End-to-end 1: biblioteca quemada (sofia_buho REAL; tomo_carbonizado narrativo)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"tomo_carbonizado": 1})
+	var res: Dictionary = _h.iniciar_cadena("cadena-biblioteca-quemada")
+	_check(bool(res.ok), "iniciar cadena-biblioteca-quemada OK")
+	res = _h.reportar_paso("cadena-biblioteca-quemada", "hablar", "sofia_buho")
+	_check(bool(res.ok), "biblioteca quemada p1 hablar sofia_buho OK")
+	res = _h.reportar_paso("cadena-biblioteca-quemada", "explorar", "biblioteca_quemada")
+	_check(bool(res.ok), "biblioteca quemada p2 explorar biblioteca_quemada OK")
+	res = _h.reportar_entrega("cadena-biblioteca-quemada")
+	_check(bool(res.ok), "biblioteca quemada p3 entregar tomo_carbonizado OK (inventario)")
+	res = _h.reportar_paso("cadena-biblioteca-quemada", "puzzle", "cenizas-legibles")
+	_check(bool(res.ok), "biblioteca quemada p4 puzzle OK")
+	_check(_h.esta_completada("cadena-biblioteca-quemada"), "cadena-biblioteca-quemada completada end-to-end")
+	_check(ws_has("biblioteca_quemada_rescatada"), "consecuencia biblioteca_quemada_rescatada aplicada (M21)")
+	# End-to-end 2: observatorio (ancient_crystal REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"ancient_crystal": 1})
+	res = _h.iniciar_cadena("cadena-observatorio")
+	_check(bool(res.ok), "iniciar cadena-observatorio OK")
+	res = _h.reportar_paso("cadena-observatorio", "hablar", "vera_ardilla")
+	_check(bool(res.ok), "observatorio p1 hablar vera_ardilla OK")
+	res = _h.reportar_paso("cadena-observatorio", "explorar", "observatorio")
+	_check(bool(res.ok), "observatorio p2 explorar observatorio OK")
+	res = _h.reportar_entrega("cadena-observatorio")
+	_check(bool(res.ok), "observatorio p3 entregar ancient_crystal OK (inventario)")
+	res = _h.reportar_paso("cadena-observatorio", "puzzle", "alineacion-estelar")
+	_check(bool(res.ok), "observatorio p4 puzzle OK")
+	_check(_h.esta_completada("cadena-observatorio"), "cadena-observatorio completada end-to-end")
+	_check(ws_has("observatorio_alineado"), "consecuencia observatorio_alineado aplicada (M21)")
+	# End-to-end 3: estacion (iron_ore REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"iron_ore": 1})
+	res = _h.iniciar_cadena("cadena-estacion")
+	_check(bool(res.ok), "iniciar cadena-estacion OK")
+	res = _h.reportar_paso("cadena-estacion", "hablar", "ramon_tejon")
+	_check(bool(res.ok), "estacion p1 hablar ramon_tejon OK")
+	res = _h.reportar_paso("cadena-estacion", "explorar", "estacion")
+	_check(bool(res.ok), "estacion p2 explorar estacion OK")
+	res = _h.reportar_entrega("cadena-estacion")
+	_check(bool(res.ok), "estacion p3 entregar iron_ore OK (inventario)")
+	res = _h.reportar_paso("cadena-estacion", "puzzle", "engranajes-oxidados")
+	_check(bool(res.ok), "estacion p4 puzzle OK")
+	_check(_h.esta_completada("cadena-estacion"), "cadena-estacion completada end-to-end")
+	_check(ws_has("estacion_reparada"), "consecuencia estacion_reparada aplicada (M21)")
+	# End-to-end 4: puente (piedra_caliza REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"piedra_caliza": 1})
+	res = _h.iniciar_cadena("cadena-puente")
+	_check(bool(res.ok), "iniciar cadena-puente OK")
+	res = _h.reportar_paso("cadena-puente", "hablar", "luna_zorra")
+	_check(bool(res.ok), "puente p1 hablar luna_zorra OK")
+	res = _h.reportar_paso("cadena-puente", "explorar", "puente")
+	_check(bool(res.ok), "puente p2 explorar puente OK")
+	res = _h.reportar_entrega("cadena-puente")
+	_check(bool(res.ok), "puente p3 entregar piedra_caliza OK (inventario)")
+	res = _h.reportar_paso("cadena-puente", "puzzle", "arco-de-piedra")
+	_check(bool(res.ok), "puente p4 puzzle OK")
+	_check(_h.esta_completada("cadena-puente"), "cadena-puente completada end-to-end")
+	_check(ws_has("puente_cruzable"), "consecuencia puente_cruzable aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# cadena-biblioteca en H y cadena-jardines en K). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-puente"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	_fin("L")

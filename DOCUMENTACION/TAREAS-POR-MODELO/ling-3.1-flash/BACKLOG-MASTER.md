@@ -148,10 +148,10 @@
 
 ### Bloque O — Lotes del catálogo M159 (el 300/300 del L216 — ES/EN presentes? control)
 
-79. M159: el control de nombres ES de los 179 .tres creados (los ítems .tres tienen nombre ES en el catálogo).
-80. M159: los nombres EN de los 179 .tres (el strings EN con el nombre de cada .tres).
-81. M159: el catálogo ES `.tres` items con el inventario dos veces (p.ej. item name ES = el display name no el técnico).
-82. M159: los iconos (0/121 — synced con M45 el frente AGNES/arte — no es mío el assets).
+79. [x] M159: el control de nombres ES de los 179 .tres creados (los ítems .tres tienen nombre ES en el catálogo). — **TANDA 27 (msg 217): CORRECTO** en `03-Diseno.md` §2.4.12. Censo 300/300 .tres con nombre ES (máx 28 chars «Pergamino: Rec. Tela de Lino») + descripcion ES (máx 81 chars). Strings data-driven en el Resource ItemData (sin claves M87).
+80. [x] M159: los nombres EN de los 179 .tres (el strings EN con el nombre de cada .tres). — **TANDA 27 (msg 217): DEUDA i18n DATA-DRIVEN** en `03-Diseno.md` §2.4.12. 0/300 .tres con campos nombre_en/descripcion_en (grep _en/name_en: 0 hits) — en locale EN el jugador ve nombres/descripciones ES. Propuesta llave-en-mano para owner M159: (A) campos nombre_en/descripcion_en en ItemData + resolución por locale, o (B) claves ITEMS.* ES/EN/PT con nombre_key (crear+consumir mismo commit, regla anti-huérfanas). Prerrequisito: resolver nombres duplicados (T81).
+81. [x] M159: el catálogo ES `.tres` items con el inventario dos veces (p.ej. item name ES = el display name no el técnico). — **TANDA 27 (msg 217): HALLAZGO MAYOR** en `03-Diseno.md` §2.4.12. ItemDatabase._load_all_items (item_database.gd L32-59) carga los 300 .tres por id único → el catálogo runtime tiene 2 GENERACIONES coexistiendo: 28 legacy (ids snake_case, descripciones completas) + 272 modernos item_obj_* (ids OBJ-XXX-NNN). **27 nombres duplicados** entre generaciones («Arcilla» clay+OBJ-ITE-003; «Hierro» ×3; «Cama simple» ×2 dentro de la moderna) — ItemDatabase protege id duplicado (L65-67) pero NO nombre duplicado; el jugador ve el mismo nombre para ítems distintos. **244/272 modernos (90%) con descripcion vacía**. 24/28 ids legacy VIVOS fuera de items/ (recetas, mining, ubicaciones, historias, construcciones). Deuda owner M159 (agnes): consolidar generaciones + completar descripciones.
+82. [x] M159: los iconos (0/121 — synced con M45 el frente AGNES/arte — no es mío el assets). — **TANDA 27 (msg 217): CORRECTO 300/300** en `03-Diseno.md` §2.4.12. 300/300 .tres con icono = ExtResource(CompressedTexture2D) → res://assets/2d/items_m159/ico_*.png; 300 PNGs existen, 0 referenciados sin archivo (el «0/121» del backlog estaba stale). Arte = frente de agnes/M45; verificación referencia↔archivo de este nicho.
 
 ### Bloque P — Los trabajos del autosave / guardado (los strings del flujo guardado).
 

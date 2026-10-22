@@ -5299,3 +5299,13 @@ De los 68 pendientes de M20, **0 items califican** con el criterio estricto (tod
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-22 05:45
+
+## 2026-10-22 06:10 - minimax-m3-1-flash / Kilo Code - M20 entra al CI central (wrapper integrador, 79 checks)
+
+Las 3 suites de M20 vivian en `scripts/friendship/`, fuera de `res://tests/` (lo unico que descubre el runner central) -> **M20 no corria en el CI**. Wrapper nuevo `tests/test_m20_amistad_suites.gd`: las ejecuta como subprocesos y agrega su resultado. **Verificado: 8 checks, 0 fallos, rc=0, 79 checks de M20 verificados** (14 + 53 + 12). Pisos calibrados con lo MEDIDO. Hallazgo lateral: `AnimationService` **ya no existe en Godot 4.7** (lo reporta `test_amistad_rf48_m20.gd`).
+
+**M20: 80 [x] / 68 [ ] / 0 [?] (de 148).** Sin push ni commits.
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-22 06:10
