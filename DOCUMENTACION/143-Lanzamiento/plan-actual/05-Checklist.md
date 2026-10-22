@@ -47,55 +47,85 @@
   · evidencia: 03-Diseno.md secc. Trailer y comunicacion (cola total, Reflection-Beam-1.0, T85, 2026-10-22)
 - [x] Definir enlace del tráiler en la store page [S]
   · evidencia: 03-Diseno.md secc. Trailer y comunicacion (cola total, Reflection-Beam-1.0, T85, 2026-10-22)
-- [ ] Definir programación de publicación horaria sincronizada [S]
+- [x] Definir programación de publicación horaria sincronizada [S]
+  · evidencia: 03-Diseno.md secc. Comunicacion y soporte (cola total, Reflection-Beam-1.0, T87, 2026-10-22)
 
 ## 4. Publicar comunicado (RF1/M149)
 
-- [ ] Definir comunicado de prensa en 2+ idiomas publicado [M]
-- [ ] Definir comunicado de comunidad publicado en canals oficiales [M]
-- [ ] Definir mensaje multi-idioma de bienvenida al juego [M]
-- [ ] Definir enlaces a canales de soporte y redes en el comunicado [S]
-- [ ] Definir kit de medios actualizado con el comunicado [S]
+- [x] Definir comunicado de prensa en 2+ idiomas publicado [M]
+  · evidencia: 03-Diseno.md secc. Comunicacion y soporte (cola total, Reflection-Beam-1.0, T87, 2026-10-22)
+- [x] Definir comunicado de comunidad publicado en canals oficiales [M]
+  · evidencia: 03-Diseno.md secc. Comunicacion y soporte (cola total, Reflection-Beam-1.0, T87, 2026-10-22)
+- [x] Definir mensaje multi-idioma de bienvenida al juego [M]
+  · evidencia: 03-Diseno.md secc. Comunicacion y soporte (cola total, Reflection-Beam-1.0, T87, 2026-10-22)
+- [x] Definir enlaces a canales de soporte y redes en el comunicado [S]
+  · evidencia: 03-Diseno.md secc. Comunicacion y soporte (cola total, Reflection-Beam-1.0, T87, 2026-10-22)
+- [x] Definir kit de medios actualizado con el comunicado [S]
+  · evidencia: 03-Diseno.md secc. Comunicacion y soporte (cola total, Reflection-Beam-1.0, T87, 2026-10-22)
 
 ## 5. Activar soporte (RF3/M152)
 
-- [ ] Definir canales de soporte abiertos y visibles desde la hora 0 [M]
-- [ ] Definir FAQ publicada y enlazada (instalación/saves/plataformas) [M]
-- [ ] Definir SLA de respuesta ≤ 24 h hábiles activo [S]
-- [ ] Definir guardias de soporte por turnos (runbook M142) [S]
-- [ ] Definir plantillas de respuesta (comunes, bugs, reembolsos) [M]
-- [ ] Definir canal de estado (incidentes) para comunicación oficial [S]
+- [x] Definir canales de soporte abiertos y visibles desde la hora 0 [M]
+  · evidencia: 03-Diseno.md secc. Soporte post-lanzamiento (cola total, Reflection-Beam-1.0, T89, 2026-10-22)
+- [x] Definir FAQ publicada y enlazada (instalación/saves/plataformas) [M]
+  · evidencia: 03-Diseno.md secc. Soporte post-lanzamiento (cola total, Reflection-Beam-1.0, T89, 2026-10-22)
+- [x] Definir SLA de respuesta ≤ 24 h hábiles activo [S]
+  · evidencia: 03-Diseno.md secc. Soporte post-lanzamiento (cola total, Reflection-Beam-1.0, T89, 2026-10-22)
+- [x] Definir guardias de soporte por turnos (runbook M142) [S]
+  · evidencia: 03-Diseno.md secc. Guardias y metricas de soporte (cola total, Reflection-Beam-1.0, T91, 2026-10-22)
+- [x] Definir plantillas de respuesta (comunes, bugs, reembolsos) [M]
+  · evidencia: 03-Diseno.md secc. Soporte post-lanzamiento (cola total, Reflection-Beam-1.0, T89, 2026-10-22)
+- [x] Definir canal de estado (incidentes) para comunicación oficial [S]
+  · evidencia: 03-Diseno.md secc. Guardias y metricas de soporte (cola total, Reflection-Beam-1.0, T91, 2026-10-22)
 - [x] Definir triaje de soporte → tickets M101 con buildId [M]
-- [ ] Definir métrica de tiempo de respuesta por día [S]
+- [x] Definir métrica de tiempo de respuesta por día [S]
+  · evidencia: 03-Diseno.md secc. Guardias y metricas de soporte (cola total, Reflection-Beam-1.0, T91, 2026-10-22)
 
 ## 6. Monitorizar crashes (RF4/M105)
 
-- [ ] Definir dashboard de crashes activo desde T0 [M]
-- [ ] Definir alerta automática al cruzar 0.5% de crash rate [M]
-- [ ] Definir agrupación de stacktraces por zona [M]
-- [ ] Definir triaje de crashes conocidos vs nuevos [S]
-- [ ] Definir plan de comité < 4 h ante alerta [S]
-- [ ] Definir registro diario de crash rate [S]
+- [x] Definir dashboard de crashes activo desde T0 [M]
+  · evidencia: 03-Diseno.md secc. Guardias y metricas de soporte (cola total, Reflection-Beam-1.0, T91, 2026-10-22)
+- [x] Definir alerta automática al cruzar 0.5% de crash rate [M]
+  · evidencia: 03-Diseno.md secc. Alertas y crashes (cola total, Reflection-Beam-1.0, T93, 2026-10-22)
+- [x] Definir agrupación de stacktraces por zona [M]
+  · evidencia: 03-Diseno.md secc. Alertas y crashes (cola total, Reflection-Beam-1.0, T93, 2026-10-22)
+- [x] Definir triaje de crashes conocidos vs nuevos [S]
+  · evidencia: 03-Diseno.md secc. Alertas y crashes (cola total, Reflection-Beam-1.0, T93, 2026-10-22)
+- [x] Definir plan de comité < 4 h ante alerta [S]
+  · evidencia: 03-Diseno.md secc. Alertas y crashes (cola total, Reflection-Beam-1.0, T93, 2026-10-22)
+- [x] Definir registro diario de crash rate [S]
+  · evidencia: 03-Diseno.md secc. Reviews y backend (cola total, Reflection-Beam-1.0, T95, 2026-10-22)
 - [x] Definir correlación de crashes con versión de build [S]
 
 ## 7. Monitorizar reviews (RF5/M106)
 
-- [ ] Definir ingesta de reviews de todas las plataformas [M]
-- [ ] Definir triaje diario: positivas (resp. 48 h), negativas (24 h), urgentes (P0/P1) [M]
-- [ ] Definir respuesta pública a negativas con plan de acción [M]
+- [x] Definir ingesta de reviews de todas las plataformas [M]
+  · evidencia: 03-Diseno.md secc. Reviews y backend (cola total, Reflection-Beam-1.0, T95, 2026-10-22)
+- [x] Definir triaje diario: positivas (resp. 48 h), negativas (24 h), urgentes (P0/P1) [M]
+  · evidencia: 03-Diseno.md secc. Reviews y backend (cola total, Reflection-Beam-1.0, T95, 2026-10-22)
+- [x] Definir respuesta pública a negativas con plan de acción [M]
+  · evidencia: 03-Diseno.md secc. Reviews y backend (cola total, Reflection-Beam-1.0, T95, 2026-10-22)
 - [x] Definir escalado de reviews urgentes al comité de release [S]
-- [ ] Definir métrica de reviews por día y por plataforma [S]
-- [ ] Definir registro de temas recurrentes (para M144) [S]
+- [x] Definir métrica de reviews por día y por plataforma [S]
+  · evidencia: 03-Diseno.md secc. Metricas y disponibilidad (cola total, Reflection-Beam-1.0, T97, 2026-10-22)
+- [x] Definir registro de temas recurrentes (para M144) [S]
+  · evidencia: 03-Diseno.md secc. Metricas y disponibilidad (cola total, Reflection-Beam-1.0, T97, 2026-10-22)
 
 ## 8. Monitorizar servidores (RF6/M104)
 
-- [ ] Definir dashboard de backend: latencia y errores 4xx/5xx [M]
-- [ ] Definir objetivo de disponibilidad 99.9% en las 72 h [S]
-- [ ] Definir alerta de caída > 15 min con escalado técnico [S]
-- [ ] Definir comunicación de estado oficial ante incidentes [S]
-- [ ] Definir verificación de telemetría (M104) recibiendo datos reales [M]
+- [x] Definir dashboard de backend: latencia y errores 4xx/5xx [M]
+  · evidencia: 03-Diseno.md secc. Backend y telemetria (cola total, Reflection-Beam-1.0, T99, 2026-10-22)
+- [x] Definir objetivo de disponibilidad 99.9% en las 72 h [S]
+  · evidencia: 03-Diseno.md secc. Metricas y disponibilidad (cola total, Reflection-Beam-1.0, T97, 2026-10-22)
+- [x] Definir alerta de caída > 15 min con escalado técnico [S]
+  · evidencia: 03-Diseno.md secc. Metricas y disponibilidad (cola total, Reflection-Beam-1.0, T97, 2026-10-22)
+- [x] Definir comunicación de estado oficial ante incidentes [S]
+  · evidencia: 03-Diseno.md secc. Backend y telemetria (cola total, Reflection-Beam-1.0, T99, 2026-10-22)
+- [x] Definir verificación de telemetría (M104) recibiendo datos reales [M]
+  · evidencia: 03-Diseno.md secc. Backend y telemetria (cola total, Reflection-Beam-1.0, T99, 2026-10-22)
 - [ ] Definir verificación de cloud saves (M60) y logros (M59) operativos [M]
-- [ ] Definir registro de métricas de servidor por hora [S]
+- [x] Definir registro de métricas de servidor por hora [S]
+  · evidencia: 03-Diseno.md secc. Backend y telemetria (cola total, Reflection-Beam-1.0, T99, 2026-10-22)
 
 ## 9. Monitorizar compras (RF7/M149)
 

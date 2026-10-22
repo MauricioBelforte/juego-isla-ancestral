@@ -48,11 +48,20 @@
 # Correccion propia: la lista `existentes` del bloque K decia
 # "sendero_bosque_senalizado" (con z) pero el flag real en datos es
 # "sendero_bosque_senalado" -> la lista no detectaria colision con el flag real.
+# Iter. 8 (Step-5-WorkBuddy, 2026-10-22, Log 2127): cluster Objetos del 03-Diseno
+# L34 (relicto, gema, carta, llave, farol, brujula). NPC REALES de data/villagers/
+# (teo_conejo herbolario, pablo_pato ceramista, catalina_oso cocinera, bruno_sapo
+# carpintero, nico_gato guardabosques, finneas_zorro pescador) y objetos REALES de
+# data/items/ (gemstone, OBJ-SEC-001 "Llave oculta", OBJ-LUZ-005 "Farol",
+# OBJ-SEC-004 "Reliquia oculta"); carta_sellada y brujula_desorientada son
+# narrativos (0 items de carta/brujula en data/items/, mismo patron que
+# tomo_carbonizado). Bloque M afirma carga, fuente, unicidad de consecuencias y
+# diarios y corrida end-to-end de las 6.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -60,12 +69,12 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 7, 2026-10-22, Log 2125): 169 checks con los
-# bloques A-L (iter. 6 tenia 129 con A-K; el bloque L del cluster Ruinas sumo
-# 40: 8 carga/fuente + 2 unicidad de flags + 1 diarios + 7x4 end-to-end + 1
-# puente diario). Medido: 169/0/EXIT 0 x3. El guardian se probo EN ROJO por
-# inyeccion de runtime sobre el bloque L (ver Log 2125).
-const CHECKS_MINIMOS := 169
+# Piso MEDIDO en verde (iter. 8, 2026-10-22, Log 2127): 227 checks con los
+# bloques A-M (iter. 7 tenia 169 con A-L; el bloque M del cluster Objetos sumo
+# 58: 12 carga/fuente + 2 unicidad de flags + 1 diarios + 7x6 end-to-end + 1
+# puente diario). Medido: 227/0/EXIT 0 x3. El guardian se probo EN ROJO por
+# inyeccion de runtime sobre el bloque M (ver Log 2127).
+const CHECKS_MINIMOS := 227
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -99,6 +108,7 @@ func _run() -> void:
 	_test_vecinos()
 	_test_lugares()
 	_test_ruinas()
+	_test_objetos()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -130,7 +140,7 @@ func _test_carga() -> void:
 	# Iter. 5 (Log 2107): +6 historias de vecinos en el principal -> 10 + 1 = 11.
 	# Iter. 6 (Log 2117): +3 del cluster Lugares -> 13 + 1 = 14.
 	# Iter. 7 (Log 2125): +4 del cluster Ruinas -> 17 + 1 = 18.
-	_check(_h.cadenas_count() == 18, "18 cadenas cargadas tras el merge (17 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	_check(_h.cadenas_count() == 24, "24 cadenas cargadas tras el merge (23 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -357,7 +367,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 17, "catálogo principal con 17 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas): %d" % principal.size())
+	_check(principal.size() == 23, "catálogo principal con 23 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -380,7 +390,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 18, "18 cadenas cargadas en runtime (17 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 24, "24 cadenas cargadas en runtime (23 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -696,3 +706,147 @@ func _test_ruinas() -> void:
 		_check(not diary.esta_registrada("mision_cadena-puente"),
 			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
 	_fin("L")
+
+
+## Iter. 8: cluster Objetos del 03-Diseno L34 (relicto, gema, carta, llave,
+## farol, brujula). NPC REALES de data/villagers/ (teo_conejo herbolario,
+## pablo_pato ceramista, catalina_oso cocinera, bruno_sapo carpintero,
+## nico_gato guardabosques, finneas_zorro pescador) y objetos REALES de
+## data/items/ (gemstone, OBJ-SEC-001 "Llave oculta", OBJ-LUZ-005 "Farol",
+## OBJ-SEC-004 "Reliquia oculta"); carta_sellada y brujula_desorientada son
+## narrativos (0 items de carta/brujula en data/items/). Afirma carga,
+## fuente del principal, unicidad anti-repeticion de consecuencias y diarios,
+## y corrida end-to-end de las 6.
+func _test_objetos() -> void:
+	# Estado limpio: el bloque no depende de lo que dejaron los anteriores
+	_h.restore_save_data({})
+	var nuevas := ["cadena-relicto", "cadena-gema", "cadena-carta",
+		"cadena-llave", "cadena-farol", "cadena-brujula"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+	# Anti-repeticion: 6 flags de consecuencia nuevos, sin colision con los 18 previos
+	var existentes := ["faro_encendido", "invernadero_abierto", "plaza_decorada",
+		"luciernagas_vueltas", "biblioteca_iluminada", "pan_fiesta_horneado",
+		"banco_plaza_reparado", "manto_niebla_terminado", "red_pescador_reparada",
+		"sendero_bosque_senalado", "jarabe_lunar_listo", "jardin_florecido",
+		"cofradia_activa", "molino_funcionando", "biblioteca_quemada_rescatada",
+		"observatorio_alineado", "estacion_reparada", "puente_cruzable"]
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag) or existentes.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 6, "6 consecuencias distintas en las cadenas de objetos: %d" % flags.size())
+	_check(unicos, "consecuencias de objetos sin colision con las previas (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 6, "6 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# End-to-end 1: relicto (teo_conejo REAL; OBJ-SEC-004 "Reliquia oculta" REAL de data/items/)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"OBJ-SEC-004": 1})
+	var res1: Dictionary = _h.iniciar_cadena("cadena-relicto")
+	_check(bool(res1.ok), "iniciar cadena-relicto OK")
+	res1 = _h.reportar_paso("cadena-relicto", "hablar", "teo_conejo")
+	_check(bool(res1.ok), "relicto p1 hablar teo_conejo OK")
+	res1 = _h.reportar_paso("cadena-relicto", "explorar", "guardarropa")
+	_check(bool(res1.ok), "relicto p2 explorar guardarropa OK")
+	res1 = _h.reportar_entrega("cadena-relicto")
+	_check(bool(res1.ok), "relicto p3 entregar OBJ-SEC-004 OK (inventario)")
+	res1 = _h.reportar_paso("cadena-relicto", "puzzle", "sellos-del-relicto")
+	_check(bool(res1.ok), "relicto p4 puzzle OK")
+	_check(_h.esta_completada("cadena-relicto"), "cadena-relicto completada end-to-end")
+	_check(ws_has("relicto_devuelto"), "consecuencia relicto_devuelto aplicada (M21)")
+	# End-to-end 2: gema (pablo_pato REAL; gemstone REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"gemstone": 1})
+	var res2: Dictionary = _h.iniciar_cadena("cadena-gema")
+	_check(bool(res2.ok), "iniciar cadena-gema OK")
+	res2 = _h.reportar_paso("cadena-gema", "hablar", "pablo_pato")
+	_check(bool(res2.ok), "gema p1 hablar pablo_pato OK")
+	res2 = _h.reportar_paso("cadena-gema", "explorar", "barrizal")
+	_check(bool(res2.ok), "gema p2 explorar barrizal OK")
+	res2 = _h.reportar_entrega("cadena-gema")
+	_check(bool(res2.ok), "gema p3 entregar gemstone OK (inventario)")
+	res2 = _h.reportar_paso("cadena-gema", "puzzle", "gema-encastrada")
+	_check(bool(res2.ok), "gema p4 puzzle OK")
+	_check(_h.esta_completada("cadena-gema"), "cadena-gema completada end-to-end")
+	_check(ws_has("gema_devuelta"), "consecuencia gema_devuelta aplicada (M21)")
+	# End-to-end 3: carta (catalina_oso REAL; carta_sellada narrativo, 0 items de carta)
+	if inv != null:
+		inv.agregar_items({"carta_sellada": 1})
+	var res3: Dictionary = _h.iniciar_cadena("cadena-carta")
+	_check(bool(res3.ok), "iniciar cadena-carta OK")
+	res3 = _h.reportar_paso("cadena-carta", "hablar", "catalina_oso")
+	_check(bool(res3.ok), "carta p1 hablar catalina_oso OK")
+	res3 = _h.reportar_paso("cadena-carta", "explorar", "arca_de_recetas")
+	_check(bool(res3.ok), "carta p2 explorar arca_de_recetas OK")
+	res3 = _h.reportar_entrega("cadena-carta")
+	_check(bool(res3.ok), "carta p3 entregar carta_sellada OK (inventario)")
+	res3 = _h.reportar_paso("cadena-carta", "puzzle", "tinta-borrada")
+	_check(bool(res3.ok), "carta p4 puzzle OK")
+	_check(_h.esta_completada("cadena-carta"), "cadena-carta completada end-to-end")
+	_check(ws_has("receta_heredada"), "consecuencia receta_heredada aplicada (M21)")
+	# End-to-end 4: llave (bruno_sapo REAL; OBJ-SEC-001 "Llave oculta" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-SEC-001": 1})
+	var res4: Dictionary = _h.iniciar_cadena("cadena-llave")
+	_check(bool(res4.ok), "iniciar cadena-llave OK")
+	res4 = _h.reportar_paso("cadena-llave", "hablar", "bruno_sapo")
+	_check(bool(res4.ok), "llave p1 hablar bruno_sapo OK")
+	res4 = _h.reportar_paso("cadena-llave", "explorar", "armario_restaurado")
+	_check(bool(res4.ok), "llave p2 explorar armario_restaurado OK")
+	res4 = _h.reportar_entrega("cadena-llave")
+	_check(bool(res4.ok), "llave p3 entregar OBJ-SEC-001 OK (inventario)")
+	res4 = _h.reportar_paso("cadena-llave", "puzzle", "cerradura-oxidada")
+	_check(bool(res4.ok), "llave p4 puzzle OK")
+	_check(_h.esta_completada("cadena-llave"), "cadena-llave completada end-to-end")
+	_check(ws_has("llave_encontrada"), "consecuencia llave_encontrada aplicada (M21)")
+	# End-to-end 5: farol (nico_gato REAL; OBJ-LUZ-005 "Farol" REAL de data/items/)
+	if inv != null:
+		inv.agregar_items({"OBJ-LUZ-005": 1})
+	var res5: Dictionary = _h.iniciar_cadena("cadena-farol")
+	_check(bool(res5.ok), "iniciar cadena-farol OK")
+	res5 = _h.reportar_paso("cadena-farol", "hablar", "nico_gato")
+	_check(bool(res5.ok), "farol p1 hablar nico_gato OK")
+	res5 = _h.reportar_paso("cadena-farol", "explorar", "bosque_nocturno")
+	_check(bool(res5.ok), "farol p2 explorar bosque_nocturno OK")
+	res5 = _h.reportar_entrega("cadena-farol")
+	_check(bool(res5.ok), "farol p3 entregar OBJ-LUZ-005 OK (inventario)")
+	res5 = _h.reportar_paso("cadena-farol", "puzzle", "mecanismo-del-farol")
+	_check(bool(res5.ok), "farol p4 puzzle OK")
+	_check(_h.esta_completada("cadena-farol"), "cadena-farol completada end-to-end")
+	_check(ws_has("patrulla_nocturna"), "consecuencia patrulla_nocturna aplicada (M21)")
+	# End-to-end 6: brujula (finneas_zorro REAL; brujula_desorientada narrativo, 0 items de brujula)
+	if inv != null:
+		inv.agregar_items({"brujula_desorientada": 1})
+	var res6: Dictionary = _h.iniciar_cadena("cadena-brujula")
+	_check(bool(res6.ok), "iniciar cadena-brujula OK")
+	res6 = _h.reportar_paso("cadena-brujula", "hablar", "finneas_zorro")
+	_check(bool(res6.ok), "brujula p1 hablar finneas_zorro OK")
+	res6 = _h.reportar_paso("cadena-brujula", "explorar", "muelle_viejo")
+	_check(bool(res6.ok), "brujula p2 explorar muelle_viejo OK")
+	res6 = _h.reportar_entrega("cadena-brujula")
+	_check(bool(res6.ok), "brujula p3 entregar brujula_desorientada OK (inventario)")
+	res6 = _h.reportar_paso("cadena-brujula", "puzzle", "aguja-imantada")
+	_check(bool(res6.ok), "brujula p4 puzzle OK")
+	_check(_h.esta_completada("cadena-brujula"), "cadena-brujula completada end-to-end")
+	_check(ws_has("brujula_calibrada"), "consecuencia brujula_calibrada aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# cadena-biblioteca en H, cadena-jardines en K y cadena-puente en L).
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-brujula"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	_fin("M")

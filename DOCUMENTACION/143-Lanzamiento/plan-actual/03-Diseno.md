@@ -126,3 +126,122 @@ Reporte (telemetría/review/soporte) → ticket M101 con buildId
 ### Enlace del trailer en la store page
 - Embed del trailer en la pagina de Steam.
 - Verificar reproduccion automatica.
+## Comunicacion y soporte (cola total M143 batch 5)
+
+### Programacion de publicacion horaria sincronizada
+- Coordinar hora de publicacion en todas las plataformas.
+- Sincronizar con zona horaria objetivo (UTC).
+
+### Comunicado de prensa en 2+ idiomas
+- Comunicado de prensa en espanol e ingles.
+- Publicar en canales oficiales y medios.
+
+### Comunicado de comunidad
+- Mensaje de bienvenida multi-idioma en Discord/Twitter.
+- Enlaces a canales de soporte y redes.
+
+### Kit de medios actualizado
+- Kit de medios con screenshots, trailer, logo.
+- Actualizado con el comunicado.
+## Soporte post-lanzamiento (cola total M143 batch 6)
+
+### Canales de soporte abiertos y visibles
+- Canales de soporte (Discord, email, Steam) visibles desde la hora 0.
+- Enlaces en la store page y en el menu del juego.
+
+### FAQ publicada y enlazada
+- FAQ con instalacion, saves, plataformas, problemas comunes.
+- Enlazada desde la store page y el juego.
+
+### SLA de respuesta <= 24 h habiles
+- Tiempo de respuesta maximo: 24 horas habiles.
+- Runbook de escalamiento si se supera.
+
+### Plantillas de respuesta
+- Plantillas para bugs, reembolsos, consultas comunes.
+- Estandarizar respuestas del equipo de soporte.
+## Guardias y metricas de soporte (cola total M143 batch 7)
+
+### Guardias de soporte por turnos (runbook M142)
+- Runbook de guardias por turnos para soporte 24/7.
+- Rotacion de turnos documentada.
+
+### Canal de estado (incidentes)
+- Canal de estado para comunicar incidentes a los jugadores.
+- Actualizacion automatica desde el sistema de monitoreo.
+
+### Metrica de tiempo de respuesta por dia
+- Medir tiempo de respuesta promedio por dia.
+- Dashboard de metricas de soporte.
+
+### Dashboard de crashes activo desde T0
+- Dashboard de crashes desde el lanzamiento.
+- Integracion con el sistema de crash reporting (M122).
+## Alertas y crashes (cola total M143 batch 8)
+
+### Alerta automatica al cruzar 0.5% de crash rate
+- Alerta cuando el crash rate supera 0.5%.
+- Notificacion al equipo de soporte.
+
+### Agrupacion de stacktraces por zona
+- Agrupar stacktraces por zona del codigo.
+- Facilitar triaje de crashes.
+
+### Triaje de crashes conocidos vs nuevos
+- Clasificar crashes como conocidos o nuevos.
+- Priorizar crashes nuevos.
+
+### Plan de comite < 4 h ante alerta
+- Comite de respuesta en < 4 horas ante alerta.
+- Runbook de escalamiento.
+## Reviews y backend (cola total M143 batch 9)
+
+### Registro diario de crash rate
+- Registro diario del crash rate por plataforma.
+- Almacenamiento en dashboard.
+
+### Ingesta de reviews de todas las plataformas
+- Ingestar reviews de Steam, Epic, itch.io.
+- Centralizar en un solo dashboard.
+
+### Triaje diario de reviews
+- Triaje diario: positivas (resp. 48h), negativas (24h).
+- Priorizar reviews negativas para respuesta rapida.
+
+### Respuesta publica a negativas con plan de accion
+- Responder publicamente a reviews negativas.
+- Incluir plan de accion y seguimiento.
+## Metricas y disponibilidad (cola total M143 batch 10)
+
+### Metrica de reviews por dia y por plataforma
+- Medir reviews por dia en cada plataforma.
+- Dashboard de metricas de reviews.
+
+### Registro de temas recurrentes (para M144)
+- Registrar temas recurrentes de soporte.
+- Alimentar M144 con datos de soporte.
+
+### Objetivo de disponibilidad 99.9% en las 72 h
+- Objetivo de disponibilidad: 99.9% en las primeras 72 h.
+- Monitoreo continuo.
+
+### Alerta de caida > 15 min con escalado tecnico
+- Alerta si el servicio cae > 15 min.
+- Escalado tecnico automatico.
+## Backend y telemetria (cola total M143 batch 11)
+
+### Dashboard de backend: latencia y errores 4xx/5xx
+- Dashboard de latencia y errores HTTP.
+- Monitoreo en tiempo real.
+
+### Comunicacion de estado oficial ante incidentes
+- Comunicacion oficial de estado ante incidentes.
+- Canal de estado publico.
+
+### Verificacion de telemetria (M104) recibiendo datos
+- Verificar que la telemetria recibe datos correctamente.
+- Validar eventos.
+
+### Registro de metricas de servidor por hora
+- Registro de metricas por hora.
+- Almacenamiento historico.

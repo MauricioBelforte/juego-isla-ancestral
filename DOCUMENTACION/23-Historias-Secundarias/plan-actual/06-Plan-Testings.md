@@ -24,7 +24,7 @@ corre con el binario real:
   --headless --path game/isla-ancestral --script res://scripts/historias/test_historias.gd
 ```
 
-### Bloques (12)
+### Bloques (13)
 
 | Bloque | Contenido | Integraciones ejercitadas |
 |---|---|---|
@@ -40,18 +40,19 @@ corre con el binario real:
 | J | Las 6 historias de vecinos: carga, fuente del principal, unicidad de consecuencias y corrida end-to-end de DOS (`cadena-carpintero` con `madera_roble` real + `cadena-alquimista` con objeto narrativo sembrado) | M14, M21, M55 |
 | K | Las 3 historias de lugares: carga, fuente del principal, unicidad de las 3 consecuencias nuevas vs las 11 preexistentes, 3 capitulos de diario unicos y corrida end-to-end de las 3 (npc REAL de `data/villagers/`, item REAL de `data/items/`, puzzle) con `ws_has()` de `jardin_florecido` / `cofradia_activa` / `molino_funcionando` | M14, M21, M55 |
 | L | Las 4 historias de ruinas (iter. 7): carga, fuente del principal, unicidad de las 4 consecuencias nuevas vs las 14 preexistentes, 4 capitulos de diario unicos y corrida end-to-end de las 4 (npc REAL de `data/villagers/`, item REAL de `data/items/` salvo `tomo_carbonizado` narrativo, puzzle) con `ws_has()` de `biblioteca_quemada_rescatada` / `observatorio_alineado` / `estacion_reparada` / `puente_cruzable` | M14, M21, M55 |
+| M | Las 6 historias de objetos legendarios (iter. 8): carga, fuente del principal, unicidad de las 6 consecuencias nuevas vs las 18 preexistentes, 6 capitulos de diario unicos y corrida end-to-end de las 6 (npc REAL de `data/villagers/`; `gemstone`, `OBJ-SEC-004`, `OBJ-SEC-001` y `OBJ-LUZ-005` REALES de `data/items/`, `carta_sellada` y `brujula_desorientada` narrativos; puzzle) con `ws_has()` de `relicto_devuelto` / `gema_devuelta` / `receta_heredada` / `llave_encontrada` / `patrulla_nocturna` / `brujula_calibrada` | M14, M21, M55 |
 
 ### Guarda anti-falso-verde (obligatoria, iter. 2)
 
 1. `_check()` cuenta cada verificación (`_checks`).
 2. `_fin("X")` por bloque + lista `BLOQUES`: el resumen nombra el bloque que no corrió.
-3. `CHECKS_MINIMOS` = **169** desde la iter. 7 (MEDIDO en verde el 2026-10-22 con 12
+3. `CHECKS_MINIMOS` = **227** desde la iter. 8 (MEDIDO en verde el 2026-10-22 con 13
    bloques; la cadena fue 40 con 7 -> 59 con 8 -> 70 con 9 -> 98 con 10 -> 129 con 11
-   -> 169 con 12). No estimado.
+   -> 169 con 12 -> 227 con 13). No estimado.
 4. `_summary()` en un `call_deferred` **separado** del de `_run()`: si `_run()` aborta
    por un `SCRIPT ERROR` de runtime, el resumen corre igual, nombra los bloques
    faltantes, dispara el piso y sale con `quit(1)` — la suite **no cuelga**.
-5. Guardián probado EN ROJO por inyección de runtime, siete veces:
+5. Guardián probado EN ROJO por inyección de runtime, ocho veces:
    - iter. 2 (`var _n: Node = null; _n.free()` tras el bloque B): EXIT 1, nombra
      C/D/E/F/G, «solo 11 checks (mínimo 40)».
    - iter. 3 (abort a mitad del bloque H, el nuevo): EXIT 1, nombra H, «solo 47 checks
@@ -67,6 +68,9 @@ corre con el binario real:
    - iter. 7 (abort de runtime al inicio del bloque L, asignación tipada
      `Variant` -> `Dictionary` sobre `cadenas_count()`): EXIT 1, «el bloque L NO se
      ejecuto» + «solo 130 checks (mínimo 169)», 2 fallos.
+   - iter. 8 (abort de runtime al inicio del bloque M, asignación tipada
+     `Variant` -> `Dictionary` sobre `cadenas_count()`): EXIT 1, «el bloque M NO se
+     ejecuto» + «solo 170 checks (mínimo 227)», 2 fallos.
    Sonda borrada en la misma operación; sha256 del original verificado; 0 sondas en el
    repo.
 
@@ -82,7 +86,7 @@ corre con el binario real:
 ## Casos que quedan fuera (honestidad)
 
 - E2E de 10 cadenas completas como test diseñado (ítem de checklist `[ ]` honesto): el
-  catálogo vivo tiene 18 y varios bloques corren cadenas end-to-end individuales, pero
+  catálogo vivo tiene 24 y varios bloques corren cadenas end-to-end individuales, pero
   el test E2E de 10 encadenadas no está diseñado ni corrido.
 - Contenido narrativo, capítulos de diario (`capitulo-*` no existen en el catálogo
   M55), cosméticos y consecuencias visuales: dueños de contenido/M53/M45/M17/M18/M27.

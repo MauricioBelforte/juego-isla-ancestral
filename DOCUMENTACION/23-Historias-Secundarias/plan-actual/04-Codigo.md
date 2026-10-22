@@ -375,3 +375,50 @@ de `data/items/` donde existen):
   M55 `test_diario.gd` 0 fallos. Todas EXIT 0 con el binario real, 0 SCRIPT ERROR.
 - Flip del 05-Checklist con cita: «Crear historias de 4 ruinas» [ ] -> [x] (Log 2125).
   M23 = 56 [x] / 47 [ ] / 2 [?] = 105.
+
+## Iter. 8 — Historias de objetos legendarios (Step-5-WorkBuddy, 2026-10-22, Log 2127)
+
+Cluster **Objetos** del 03-Diseno (catalogo L34: relicto, gema, carta, llave, farol,
+brujula). 6 cadenas nuevas en `data/historias/secundarias.json` (17 -> 23; 10850 ->
+14768 bytes, LF puro sin BOM, diff puramente aditivo verificado por re-parseo):
+
+| Cadena | NPC (REAL, data/villagers/) | Objeto (p3 entregar) | Puzzle (p4) | Consecuencia |
+|---|---|---|---|---|
+| cadena-relicto «La Reliquia Oculta» | teo_conejo (herbolario) | OBJ-SEC-004 «Reliquia oculta» (REAL) | sellos-del-relicto | relicto_devuelto |
+| cadena-gema «La Gema del Barro» | pablo_pato (ceramista) | gemstone «Gema» (REAL) | gema-encastrada | gema_devuelta |
+| cadena-carta «La Carta de la Abuela» | catalina_oso (cocinera) | carta_sellada (narrativo) | tinta-borrada | receta_heredada |
+| cadena-llave «La Llave del Armario» | bruno_sapo (carpintero) | OBJ-SEC-001 «Llave oculta» (REAL) | cerradura-oxidada | llave_encontrada |
+| cadena-farol «El Farol del Guardabosques» | nico_gato (guardabosques) | OBJ-LUZ-005 «Farol» (REAL) | mecanismo-del-farol | patrulla_nocturna |
+| cadena-brujula «La Brujula del Pescador» | finneas_zorro (pescador) | brujula_desorientada (narrativo) | aguja-imantada | brujula_calibrada |
+
+- Mapeo honesto medido en disco: los 6 NPC son `.tres` reales de `data/villagers/`
+  (pablo_pato era el unico villager sin cadena; los demas ya tenian 1-2, patron de
+  reuse existente). Los 4 objetos reales se verificaron por el campo `id` dentro del
+  `.tres` (item_database.gd indexa por ese id: OBJ-SEC-001/004 y OBJ-LUZ-005 son
+  items de data/items/, gemstone es id simple). carta_sellada y
+  brujula_desorientada son narrativos con justificacion medida: 0 items de carta y
+  0 de brujula en data/items/ (barrido grep sobre los 250+ .tres), mismo patron que
+  tomo_carbonizado en iter. 7.
+- Anti-repeticion: 6 consecuencias peladas nuevas sin colision con las 18 previas
+  (17 en datos + biblioteca_iluminada de diseno) y 6 capitulos-* de diario nuevos
+  sin colision con los 16 existentes; puzzles nuevos sin colision con los 15 previos.
+- Suite `scripts/historias/test_historias.gd`: bloque M `_test_objetos()` (58 checks:
+  12 carga/fuente + 2 unicidad de flags + 1 diarios + 7x6 end-to-end + 1 puente
+  diario) al FINAL de `_run()`. Piso 169 -> **227 checks / 0 fallos / EXIT 0 x3**
+  (binario real). Conteos de los bloques A e I actualizados 17/18 -> 23/24 (medidos).
+  Guardian EN ROJO por inyeccion de runtime (Variant con int -> Dictionary tipado)
+  sobre el bloque M: EXIT 1, «el bloque M NO se ejecuto» + «solo 170 checks
+  ejecutados (minimo 227)»; sonda borrada, sha256 del original verificado.
+- Regresiones medidas tras la tanda: M22 `test_historia.gd` 41/0, M71
+  `test_progresion.gd` 83/0, M59 `test_rotate_m59.gd` 43/0 (9 bloques) +
+  `test_backup_rotate_return.gd` 4/0 + `test_backup_rotations.gd` 7/0 y M55
+  `test_diario.gd` 0 fallos. Todas EXIT 0 con el binario real, 0 SCRIPT ERROR.
+  (Los tres .gd de M59 viven en `scripts/saving/`: las rutas `scripts/rotate/` y
+  `scripts/backup/` usadas en logs anteriores NO existen — name-drift corregido.)
+- Hallazgo (dueno M55, no tocado): el puente M23->M55 degrada en silencio tambien
+  para las 6 nuevas (`mision_cadena-brujula` ausente del catalogo de M55; mismo
+  patron que cadena-biblioteca en H, cadena-jardines en K y cadena-puente en L).
+- Flips del 05-Checklist con cita: «Crear las historias de 6 objetos legendarios»
+  [ ] -> [x] y «Documentar historias de lugares, ruinas y objetos» [ ] -> [x]
+  (compuesta: con iter. 8 los tres clusters tienen contenido y documentacion).
+  M23 = 58 [x] / 45 [ ] / 2 [?] = 105 (verificado por prefijo de linea).

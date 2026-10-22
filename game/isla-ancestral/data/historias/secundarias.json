@@ -253,5 +253,95 @@
 			"consecuencia": { "puente_cruzable": true },
 			"oculta": false,
 			"postgame": false
+		},
+		{
+			"id": "cadena-relicto",
+			"titulo": "La Reliquia Oculta",
+			"contexto": "Teo encontro una reliquia oculta entre las raices del arbol viejo y quiere saber que sello guarda antes de seguir vendando con ella",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "teo_conejo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "guardarropa" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-004" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "sellos-del-relicto" }
+			],
+			"recompensa": { "diario": "capitulo-relicto", "cosmetico": "guardapelo de hilo" },
+			"consecuencia": { "relicto_devuelto": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-gema",
+			"titulo": "La Gema del Barro",
+			"contexto": "Pablo encontro una gema en el barro del rio y quiere saber si es de la isla antes de montarla en su proximo cuenco",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "pablo_pato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "barrizal" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "gemstone" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "gema-encastrada" }
+			],
+			"recompensa": { "diario": "capitulo-gema", "cosmetico": "anillo de arcilla" },
+			"consecuencia": { "gema_devuelta": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-carta",
+			"titulo": "La Carta de la Abuela",
+			"contexto": "Catalina encontro una carta sellada de su abuela con una receta que nadie en la isla sabe leer completo",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "catalina_oso" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "arca_de_recetas" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "carta_sellada" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "tinta-borrada" }
+			],
+			"recompensa": { "diario": "capitulo-carta", "cosmetico": "delantal de la abuela" },
+			"consecuencia": { "receta_heredada": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-llave",
+			"titulo": "La Llave del Armario",
+			"contexto": "Bruno restauro un armario viejo y encontro una llave oculta que no abre ninguna puerta de su taller",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "bruno_sapo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "armario_restaurado" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-001" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "cerradura-oxidada" }
+			],
+			"recompensa": { "diario": "capitulo-llave", "cosmetico": "llavero de madera" },
+			"consecuencia": { "llave_encontrada": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-farol",
+			"titulo": "El Farol del Guardabosques",
+			"contexto": "Nico perdio su farol en la patrulla nocturna y sin luz no puede recorrer el sendero del bosque hasta el amanecer",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "nico_gato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "bosque_nocturno" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-LUZ-005" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "mecanismo-del-farol" }
+			],
+			"recompensa": { "diario": "capitulo-farol", "cosmetico": "farol de mano" },
+			"consecuencia": { "patrulla_nocturna": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-brujula",
+			"titulo": "La Brujula del Pescador",
+			"contexto": "Finneas salio a pescar con una brujula desorientada que marca al norte cuando el norte queda al este",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "finneas_zorro" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle_viejo" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "brujula_desorientada" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "aguja-imantada" }
+			],
+			"recompensa": { "diario": "capitulo-brujula", "cosmetico": "rosa de los vientos de bolsillo" },
+			"consecuencia": { "brujula_calibrada": true },
+			"oculta": false,
+			"postgame": false
 		}	]
 }

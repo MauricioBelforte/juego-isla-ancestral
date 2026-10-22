@@ -2,7 +2,7 @@
 
 **Modelo:** Step-5-WorkBuddy
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-10-21 a 2026-10-22 (iter. 2, Log 2082; iter. 3, Log 2083; iter. 4, Log 2085; iter. 5, Log 2107; iter. 6, Log 2117; iter. 7, Log 2125)
+**Fecha:** 2026-10-21 a 2026-10-22 (iter. 2, Log 2082; iter. 3, Log 2083; iter. 4, Log 2085; iter. 5, Log 2107; iter. 6, Log 2117; iter. 7, Log 2125); iter. 8, Log 2127)
 
 Binario real: `D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe`
 (`--headless --path game/isla-ancestral --script res://...`). Ninguna cifra de este
@@ -76,6 +76,30 @@ Carga medida: catálogo vivo **14** (13 del principal + 1 de ejemplos). El bloqu
 las 3 cadenas nuevas end-to-end (hablar con npc REAL / explorar lugar / entregar item
 REAL / puzzle) y mide las consecuencias `jardin_florecido`, `cofradia_activa` y
 `molino_funcionando` aplicadas a WorldState (M21).
+
+### Iter. 8 (Log 2127) — 6 historias de objetos legendarios + bloque M
+
+| Corrida | Checks | Fallos | EXIT | SCRIPT ERROR |
+|---|---|---|---|---|
+| 1 | 227 | 0 | 0 | 0 |
+| 2 | 227 | 0 | 0 | 0 |
+| 3 | 227 | 0 | 0 | 0 |
+
+Salida: `=== TEST M23 HISTORIAS: 0 fallo(s) (227 checks) ===`
+
+Carga medida: catálogo vivo **24** (23 del principal + 1 de ejemplos). El bloque M corre
+las 6 cadenas nuevas end-to-end (hablar con npc REAL / explorar lugar / entregar item
+REAL o narrativo sembrado / puzzle) y mide las consecuencias `relicto_devuelto`,
+`gema_devuelta`, `receta_heredada`, `llave_encontrada`, `patrulla_nocturna` y
+`brujula_calibrada` aplicadas a WorldState (M21).
+
+Asserts existentes actualizados por el contenido nuevo (A: merge 18 -> 24 y principal
+17 -> 23; I: principal 17 -> 23, cargadas 18 -> 24).
+
+Guardián EN ROJO por inyección de runtime sobre el bloque M (asignación tipada
+`Variant` -> `Dictionary` sobre `cadenas_count()`): EXIT 1 con «el bloque M NO se
+ejecuto» y «solo 170 checks (mínimo 227)», 2 fallos. Sonda borrada; sha256 del
+original verificado; 0 sondas residuales.
 
 ## 2. Guardián anti-falso-verde probado EN ROJO
 
@@ -175,13 +199,25 @@ Iter. 6 (Log 2117, mismo binario, corridas del 2026-10-22):
 | `scripts/saving/test_backup_rotations.gd` (M59) | 7 checks / 0 fallos / EXIT 0 |
 | `scripts/diario/test_diario.gd` (M55) | 0 fallos / EXIT 0 |
 
+Iter. 8 (Log 2127, mismo binario, corridas del 2026-10-22):
+
+| Suite | Resultado |
+|---|---|
+| `scripts/historia/test_historia.gd` (M22) | 41 checks / 0 fallos / EXIT 0 |
+| `scripts/progresion/test_progresion.gd` (M71) | 83 checks / 0 fallos / EXIT 0 |
+| `scripts/saving/test_rotate_m59.gd` (M59) | 43 checks / 0 fallos / 9 bloques cerrados / EXIT 0 |
+| `scripts/saving/test_backup_rotate_return.gd` (M59) | 4 checks / 0 fallos / EXIT 0 |
+| `scripts/saving/test_backup_rotations.gd` (M59) | 7 checks / 0 fallos / EXIT 0 |
+| `scripts/diario/test_diario.gd` (M55) | 0 fallos / EXIT 0 |
+
 ## 5. Estado del catálogo (medido, no estimado)
 
-- `data/historias/secundarias.json`: **17 cadenas** (faro, invernadero, epilogo-plaza,
+- `data/historias/secundarias.json`: **23 cadenas** (faro, invernadero, epilogo-plaza,
   secretta-luciernagas, panadera, carpintero, tejedora, pescador, guarda, alquimista,
-  jardines, cofradia, molino, biblioteca-quemada, observatorio, estacion, puente) de
-  las ~89 slots del catálogo de 03-Diseno. Creció 4 -> 10 (iter. 5, vecinos) -> 13
-  (iter. 6, lugares) -> 17 (iter. 7, ruinas). `cadena-biblioteca` vive en el
+  jardines, cofradia, molino, biblioteca-quemada, observatorio, estacion, puente,
+  relicto, gema, carta, llave, farol, brujula) de las ~89 slots del catálogo de
+  03-Diseno. Creció 4 -> 10 (iter. 5, vecinos) -> 13 (iter. 6, lugares) -> 17
+  (iter. 7, ruinas) -> 23 (iter. 8, objetos). `cadena-biblioteca` vive en el
   fichero de ejemplos (merge por id).
 - `data/historias/cadenas_ejemplo.json` (3 cadenas: faro, biblioteca, postgame-plaza):
   **INTEGRADO** en la iter. 3 (Log 2083) vía `RUTA_CATALOGO_EJEMPLOS` con merge por id
@@ -189,7 +225,8 @@ Iter. 6 (Log 2117, mismo binario, corridas del 2026-10-22):
   1 conflicto (`cadena-faro`, gana la variante del principal), 1 rechazada
   (`cadena-postgame-plaza`, tipo de paso `"construir"` desconocido). Catálogo vivo: 5
   en iter. 3 -> **14** en iter. 6 (13 del principal + 1 de ejemplos) -> **18** en
-  iter. 7 (17 del principal + 1 de ejemplos).
+  iter. 7 (17 del principal + 1 de ejemplos) -> **24** en iter. 8 (23 del principal
+  + 1 de ejemplos).
 - Capítulos `capitulo-*` en el catálogo M55 (`data/diario/diario_catalog.json`): **0**
   → las recompensas `diario` de las cadenas apuntan a entradas inexistentes (el
   registro efectivo es `mision_{cadena_id}`). MEDIDO iter. 3: existen
@@ -204,13 +241,19 @@ Iter. 6 (Log 2117, mismo binario, corridas del 2026-10-22):
   observatorio / estacion), y las recompensas apuntan a `capitulo-biblioteca-quemada` /
   `capitulo-observatorio` / `capitulo-estacion` / `capitulo-puente`, también ausentes
   del catálogo M55. Reportado; dueño M55.
-- Consecuencias aplicadas por cadenas del principal (17 únicas sobre 17 cadenas):
+  **Iter. 8**: degrada IGUAL para las 6 de objetos —
+  `not diary.esta_registrada("mision_cadena-brujula")` (idem relicto / gema /
+  carta / llave / farol), y las recompensas apuntan a `capitulo-relicto` /
+  `capitulo-gema` / `capitulo-carta` / `capitulo-llave` / `capitulo-farol` /
+  `capitulo-brujula`, también ausentes del catálogo M55. Reportado; dueño M55.
+- Consecuencias aplicadas por cadenas del principal (23 únicas sobre 23 cadenas):
   `faro_encendido`, `invernadero_abierto`, `plaza_decorada`, `luciernagas_vueltas`,
   `pan_fiesta_horneado`, `banco_plaza_reparado`, `manto_niebla_terminado`,
   `red_pescador_reparada`, `sendero_bosque_senalado`, `jarabe_lunar_listo`,
   `jardin_florecido`, `cofradia_activa`, `molino_funcionando`,
   `biblioteca_quemada_rescatada`, `observatorio_alineado`, `estacion_reparada`,
-  `puente_cruzable`. (Corrección de decreto: el flag real en datos es
+  `puente_cruzable`, `relicto_devuelto`, `gema_devuelta`, `receta_heredada`,
+  `llave_encontrada`, `patrulla_nocturna`, `brujula_calibrada`. (Corrección de decreto: el flag real en datos es
   `sendero_bosque_senalado`, sin z; la lista previa de este documento y del bloque K
   de la suite decía `senalizado`.)
   **`molino_funcionando` RE RESPALDADA en iter. 6**: tenía 0 cadenas que la aplicaran
@@ -229,12 +272,13 @@ Iter. 6 (Log 2117, mismo binario, corridas del 2026-10-22):
 ## 6. Veredicto
 
 Núcleo de M23 **verificado** con binario real y guarda anti-falso-verde demostrada en
-rojo SIETE veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
+rojo OCHO veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
 I y regresión de datos con prefijo re-inyectado; iter. 5 en el bloque J; iter. 6 en el
-bloque K; iter. 7 en el bloque L; todas EXIT 1 nombrando el bloque o la clave). Estado
-actual: suite en **169 checks / 0 fallos / EXIT 0 x3**, catálogo vivo 18 cadenas, y
-regresiones M22 (41/0) · M71 (83/0) · M59 (43/0 con 9 bloques y 4/0 en
-backup-rotate-return) · M55 (0 fallos) medidas el 2026-10-22 en la iter. 7.
+bloque K; iter. 7 en el bloque L; iter. 8 en el bloque M; todas EXIT 1 nombrando el
+bloque o la clave). Estado actual: suite en **227 checks / 0 fallos / EXIT 0 x3**,
+catálogo vivo 24 cadenas, y regresiones M22 (41/0) · M71 (83/0) · M59 (43/0 con 9
+bloques, 4/0 en backup-rotate-return y 7/0 en backup-rotations) · M55 (0 fallos)
+medidas el 2026-10-22 en la iter. 8.
 Pendientes = contenido narrativo y dueños externos (M22/M17/M24/M28/M32/M36/M37/M68),
 documentados como `[ ]` honestos en `05-Checklist.md`. Decisiones abiertas para el
 director: tipo de paso `"construir"` (rechazo PERSISTENTE por msg 153; dueños M22/M17),

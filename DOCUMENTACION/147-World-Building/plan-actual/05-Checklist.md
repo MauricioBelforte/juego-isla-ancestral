@@ -176,10 +176,14 @@
 ## P. Tecnología Antigua (RF20)
 
 - [x] Definir tecnologías de los Arquitectos (rigidez, precisión) [M]
-- [ ] Definir tecnologías de los Jardineros (orgánicas) [M]
-- [ ] Definir drones/máquinas residuales operativas (M26) [C]
-- [ ] Definir pérdida de tecnología (por qué no se repara todo) [M]
-- [ ] Definir límite: nada anacrónico en manos del jugador [M]
+- [x] Definir tecnologías de los Jardineros (orgánicas) [M]
+  · evidencia: 03-Diseno.md secc. Tecnologias y drones (cola total, Reflection-Beam-1.0, T100, 2026-10-22)
+- [x] Definir drones/máquinas residuales operativas (M26) [C]
+  · evidencia: 03-Diseno.md secc. Tecnologias y drones (cola total, Reflection-Beam-1.0, T100, 2026-10-22)
+- [x] Definir pérdida de tecnología (por qué no se repara todo) [M]
+  · evidencia: 03-Diseno.md secc. Tecnologias y drones (cola total, Reflection-Beam-1.0, T100, 2026-10-22)
+- [x] Definir límite: nada anacrónico en manos del jugador [M]
+  · evidencia: 03-Diseno.md secc. Tecnologias y drones (cola total, Reflection-Beam-1.0, T100, 2026-10-22)
 
 ## Q. Economía Antigua (RF21)
 

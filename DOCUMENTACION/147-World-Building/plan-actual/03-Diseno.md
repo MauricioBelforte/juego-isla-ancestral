@@ -223,3 +223,106 @@ Jugador obtiene Sello Brisa
 ### Idioma del viento (M148)
 - Pistas ambientales: sonido del viento indica direccion.
 - Sistema de pistas no verbales.
+## Biografias y reglas de detalle (cola total M147 batch 6)
+
+### Verdad de Elysia (capa 4) sin spoilers tempranos
+- La verdad de Elysia se revela solo en capa 4 (post-final).
+- Sin spoilers en las capas anteriores.
+
+### Rol de Elysia en la Era del Alba (post-final)
+- Elysia como guia en la Era del Alba.
+- Rol narrativo post-final.
+
+### Biografia de Finneas (guia, capa 1)
+- Finneas: guia del jugador, capa 1.
+- Personalidad: amable, servicial.
+
+### Regla 1-5-25 de detalle por personaje
+- Regla: 1 linea de resumen, 5 de detalle, 25 de backstory.
+- Estandar para todas las biografias.
+## Biografias y reglas (cola total M147 batch 7)
+
+### Biografias de Bruno, Nilo, Vera (capa 2)
+- Bruno: arco de redencion, capa 2.
+- Nilo: arco de descubrimiento, capa 2.
+- Vera: arco de reconciliacion, capa 2.
+
+### Ninos NPC con capa 0 (nunca spoilers)
+- Ninos NPC solo tienen capa 0: sin spoilers.
+- Informacion basica y amigable.
+
+### Estado actual de las religiones
+- Restos de religiones antiguas.
+- Festivales que persisten.
+
+### Simbolos religiosos reutilizados en puzzles (M24)
+- Simbolos de religiones antiguas en puzzles.
+- Resolucion vinculada a la historia.
+## Detalles culturales y arquitectonicos (cola total M147 batch 8)
+
+### Ninguna religion siniestra (cozy, M152)
+- Las religiones del mundo son acogedoras, no siniestras.
+- Coherente con el tono cozy.
+
+### Festivales anuales con origen historico (M74)
+- Festivales anuales con origen historico documentado.
+- Integracion con el sistema de eventos (M74).
+
+### Costumbres de saludo/despedida (dialogos M21)
+- Costumbres de saludo y despedida en dialogos.
+- Varian por cultura/isla.
+
+### Detalles arquitectonicos que narran (M148)
+- Los detalles arquitectonicos cuentan la historia.
+- Sin texto: solo visual.
+## Estilo y simbolos (cola total M147 batch 9)
+
+### Estilo de Elysia (distinto, capa 4)
+- Estilo visual y narrativo distinto para Elysia.
+- Capa 4: revelacion final.
+
+### Un simbodo por Sello (M153)
+- Cada Sello tiene un simbodo unico.
+- Simbodos en reliquias y murales (M73/M148).
+
+### Decodificacion de simbodos por progresion
+- Los simbodos se decodifican por progresion, no de golpe.
+- Vinculado a la exploracion.
+
+### Glosario minimo del lenguaje antiguo
+- Glosario de palabras del lenguaje antiguo.
+- Frases cortas de uso en puzzles (M24).
+## Reglas de traduccion y nombres (cola total M147 batch 10)
+
+### Regla: el jugador nunca traduce el idioma completo
+- El jugador nunca traduce el idioma completo.
+- Solo fragmentos y pistas.
+
+### Nombres derivados del lenguaje antiguo (para M149)
+- Nombres de lugares/objetos derivados del lenguaje antiguo.
+- Consistencia con el glosario.
+
+### Numerales antiguos (relojes/reliquias)
+- Numerales antiguos en relojes y reliquias.
+- Sistema de numeracion propio.
+
+### Secundarios con mision (M23) con 5 parrafos
+- Secundarios con mision tienen 5 parrafos de dialogo.
+- Profundidad narrativa.
+## Tecnologias y drones (cola total M147 batch 11)
+
+### Tecnologias de los Jardineros (organicas)
+- Tecnologias organicas de los Jardineros.
+- Agricultura avanzada, bioingenieria.
+
+### Drones/maquinas residuales operativas (M26)
+- Drones residuales aun operativos.
+- Maquinas que siguen funcionando.
+
+### Perdida de tecnologia (por que no se repara todo)
+- La tecnologia se perdio por falta de conocimiento.
+- No por falta de recursos.
+
+### Limite: nada anacronico en manos del jugador
+- El jugador no obtiene tecnologia anacronica.
+- Coherente con el tono cozy.
