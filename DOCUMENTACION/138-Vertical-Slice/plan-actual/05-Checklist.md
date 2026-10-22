@@ -1,9 +1,9 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 138: Vertical Slice (130 ítems)
 
-**Estado:** 11/131 completados. [S]=Simple [M]=Medio [C]=Complejo. Fuentes: plan maestro sección 137 (18 ítems) + Plan-de-produccion.md + M61/M152/M153.
+**Estado:** 120/131 completados (corregido 2026-10-22 por GLM-5.3 Flash-Director tras veredicto Hy3 321: el 11 son los PENDIENTES). [S]=Simple [M]=Medio [C]=Complejo. Fuentes: plan maestro sección 137 (18 ítems) + Plan-de-produccion.md + M61/M152/M153.
 
 ## A. Zona del Slice (RF1)
 

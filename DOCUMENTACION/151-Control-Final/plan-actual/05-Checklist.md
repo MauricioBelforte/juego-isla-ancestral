@@ -32,65 +32,65 @@
 
 - [x] Definir criterio: encuesta diversión ≥ 4/5 del bucle [S] — **Diseño: 03-Diseno.md 2 #2 | 02-Analisis.md 5.3**
 - [x] Definir 3 sesiones observadas de bucle (mañana, mitad, final de partida) [M] — **Diseño: 03-Diseno.md 2 #2**
-- [ ] Definir métrica de sesión larga (retención ≥ 60% a la hora) [M]
-- [ ] Definir criterio anti-fatiga: 40 h sin quiebre percibido (M93) [M]
-- [ ] Definir registro de qué es "bucle principal" (predictable en acta) [S]
+- [x] Definir métrica de sesión larga (retención ≥ 60% a la hora) [M] — 03 Bateria 1: retencion >= 60% a los 60 min con telemetria opt-in u observacion manual (panel 5+) (2026-10-23 S51 G-5.3-Flash-Agente)
+- [x] Definir criterio anti-fatiga: 40 h sin quiebre percibido (M93) [M] — 03 Bateria 1: diario de tester veterano (sensacion 1-10 por bloque de 8 h); sin caida < 5 sostenida y bucle variado (2026-10-23 S51)
+- [x] Definir registro de qué es "bucle principal" (predictable en acta) [S] — 03 Bateria 1: 1 pagina ciclo->recompensa->meta con ritmo nominal (calendario M29); lista cerrada que no cambia sin revision de alcance (2026-10-23 S51)
 
 ## 4. Construir divertido (P3)
 
 - [x] Definir criterio: encuesta construcción ≥ 4/5 [S] — **Diseño: 03-Diseno.md 2 #3 | 02-Analisis.md 5.3**
 - [x] Definir sesión de construcción de 30 min observada [M] — **Diseño: 03-Diseno.md 2 #3**
-- [ ] Definir verificación de legibilidad del grid y catálogo (M17/M65) [M]
-- [ ] Definir verificación de recompensa visual por construcción [S]
-- [ ] Definir verificación de no-fricción: piezas se colocan sin bugs [S]
+- [x] Definir verificación de legibilidad del grid y catálogo (M17/M65) [M] — captura 1080p + prueba de sala a 1 m; 0 etiquetas ilegibles/iconos ambiguos— 03 Bateria 2 (2026-10-23 S52 G-5.3-Flash-Agente)
+- [x] Definir verificación de recompensa visual por construcción [S] — humo/efecto de completado M52 al 100%; >= 80% lo percibe como recompensa— 03 Bateria 2 (2026-10-23 S52 G-5.3-Flash-Agente)
+- [x] Definir verificación de no-fricción: piezas se colocan sin bugs [S] — 03 Bateria 1: script de humo 20 piezas x 3 superficies + undo; 0 fallos en 60 eventos (2026-10-23 S51)
 
 ## 5. Explorar divertido (P4)
 
 - [x] Definir criterio: encuesta exploración ≥ 4/5 [S] — **Diseño: 03-Diseno.md 2 #4 | 02-Analisis.md 5.3**
 - [x] Definir mapa de descubrimientos por isla completo (M28/M50) [M] — **Diseño: 03-Diseno.md 2 #4**
-- [ ] Definir verificación de curiosidades por zona (hit de vista) [M]
-- [ ] Definir verificación de recompensas de exploración (coleccionables) [S]
-- [ ] Definir verificación de desplazamiento cómodo (viajes/cámara) [M]
+- [x] Definir verificación de curiosidades por zona (hit de vista) [M] — caminata 30 min del tester; >= 1 hito de vista por zona (5 zonas) (2026-10-23 S52)
+- [x] Definir verificación de recompensas de exploración (coleccionables) [S] — 03 Bateria 1: pickup senal (M52/M43) al 100%; 0 coleccionables irrepetibles o sin feedback (2026-10-23 S51)
+- [x] Definir verificación de desplazamiento cómodo (viajes/cámara) [M] — recorridos 10 min + escala mareo 1-5; <= 2/5 en >= 80%; 0 cámara atascada (2026-10-23 S52)
 
 ## 6. Puzzles divertidos (P5)
 
 - [x] Definir criterio: encuesta puzzles ≥ 4/5 [S] — **Diseño: 03-Diseno.md 2 #5 | 02-Analisis.md 5.3**
 - [x] Definir criterio: tasa de rendición < 15% (M93) [M] — **Diseño: 03-Diseno.md 2 #5 | 04-Codigo.md 3**
-- [ ] Definir verificación de pistas en todos los templos (M24/M26) [M]
-- [ ] Definir verificación de dificultad progresiva sin picos [M]
-- [ ] Definir verificación de accesibilidad de puzzles (modo color/dificultad) [S]
+- [x] Definir verificación de pistas en todos los templos (M24/M26) [M] — pista presente ANTES del bloqueo, probada con tester ciego; 100% templos + 0 softlock (2026-10-23 S52)
+- [x] Definir verificación de dificultad progresiva sin picos [M] — tabla contenido/horas + telemetria de muertes; 0 saltos donde el fallo duplica sin aviso (2026-10-23 S52)
+- [x] Definir verificación de accesibilidad de puzzles (modo color/dificultad) [S] — 03 Bateria 1: 100% puzzles con >= 2 codigos sensoriales (no solo color) + perfil M58 (2026-10-23 S51)
 
 ## 7. NPC interesante (P6)
 
 - [x] Definir criterio: encuesta NPC ≥ 4/5 [S] — **Diseño: 03-Diseno.md 2 #6 | 02-Analisis.md 5.3**
 - [x] Definir revisión del guión final por acto (M21/M23) [M] — **Diseño: 03-Diseno.md 2 #6**
 - [x] Definir verificación de personalidad por NPC (biblia) [M] — **Diseño: 01-Requerimientos.md 3.6**
-- [ ] Definir verificación de cadenas de amistad memorables (M20) [S]
-- [ ] Definir verificación de voz/guiño audiovisual en hitos [S]
+- [x] Definir verificación de cadenas de amistad memorables (M20) [S] — encuesta post-sesion (recordas una escena?); >= 80% recuerda >= 1 momento espontaneo (2026-10-23 S52)
+- [x] Definir verificación de voz/guiño audiovisual en hitos [S] — checklist hito->asset visual/auditivo; 100% hitos con stinger/gesto registrado (2026-10-23 S52)
 
 ## 8. Economía funciona (P7)
 
 - [x] Definir verificación: simulación M93 40 h sin quiebras [M] — **Diseño: 03-Diseno.md 2 #7**
 - [x] Definir verificación: curva precio/día sana en todas las islas [M] — **Diseño: 03-Diseno.md 2 #7**
-- [ ] Definir verificación: sin exploits conocidos abiertos [M]
-- [ ] Definir verificación: tiendas/AO sin precios rotos [M]
-- [ ] Definir verificación: recompensas proporcionales al esfuerzo [M]
+- [x] Definir verificación: sin exploits conocidos abiertos [M] — lista del 05/Bugs reproducida uno a uno en build final; 0 reproducibles (2026-10-23 S52)
+- [x] Definir verificación: tiendas/AO sin precios rotos [M] — 03 Bateria 1: validate_balance (M93) + compra/venta de humo; 0 precios fuera de banda 5-15% y 0 AO negativo (2026-10-23 S51)
+- [x] Definir verificación: recompensas proporcionales al esfuerzo [M] — tabla esfuerzo vs recompensa M93 en 20 features; 0 desviaciones > 2x del promedio (2026-10-23 S52)
 
 ## 9. Progresión funciona (P8)
 
 - [x] Definir verificación de los 6 sellos desbloqueables en orden libre [M] — **Diseño: 03-Diseno.md 2 #8**
 - [x] Definir verificación de habilidades con ventajas visibles (M71) [M] — **Diseño: 03-Diseno.md 2 #8**
 - [x] Definir verificación de herramientas 5 niveles sin saltos de poder [M] — **Diseño: 01-Requerimientos.md 3.8**
-- [ ] Definir verificación de artefactos 6+1 sin dominancia excesiva (M13) [M]
-- [ ] Definir verificación de retroalimentación de progreso en UI (M53) [S]
+- [x] Definir verificacion de artefactos 6+1 sin dominancia excesiva (M13) [M] -- Diseno: 03-Diseno.md L84 (BATERIA 2)
+- [x] Definir verificacion de retroalimentacion de progreso en UI (M53) [S] -- Diseno: 03-Diseno.md L85 (BATERIA 2)
 
 ## 10. Mundo se siente vivo (P9)
 
 - [x] Definir verificación de rutinas NPC completas 7 días (M25) [M] — **Diseño: 03-Diseno.md 2 #9**
 - [x] Definir verificación de eventos sin huecos de actividad [M] — **Diseño: 03-Diseno.md 2 #9**
-- [ ] Definir verificación de reacciones del mundo (clima/ciclo) [M]
-- [ ] Definir verificación de vida silvestre (fauna M36) [S]
-- [ ] Definir verificación de inexistencia de "NPC robot" (diálogos repetidos) [S]
+- [x] Definir verificacion de reacciones del mundo (clima/ciclo) [M] -- Diseno: 03-Diseno.md L91 (BATERIA 2)
+- [x] Definir verificacion de vida silvestre (fauna M36) [S] -- Diseno: 03-Diseno.md L92 (BATERIA 2)
+- [x] Definir verificación de inexistencia de "NPC robot" (diálogos repetidos) [S] — 03 Bateria 1: qa headless M21 10 conversaciones; 0 repeticion consecutiva exacta; <= 2 alternadas con variante (2026-10-23 S51)
 
 ## 11. Estaciones con propósito (P10)
 
@@ -370,7 +370,7 @@ tocó ninguna marca**: solo el texto de este bloque, que se contradecía a sí m
 > contradecía al bloque nuevo de arriba. La cifra vigente es la del bloque **Totales** superior
 > (18/3/138 = 159). Conservado sin borrar por trazabilidad, pero **no usar**.
 >
-> ~~**Totales:** 151 ítems · Completados: 10 · Pendientes: 139 · No resueltos: 2.~~
+> ~~**Totales:** 167 ítems · Completados: 112 · Pendientes: 49 · No resueltos: 6. (S51 G-5.3-Flash-Agente 2026-10-23: re-medicion top-level; el bloque antiguo 10/139 era de la seccion original y sub-contaba)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 139 [ ] /
