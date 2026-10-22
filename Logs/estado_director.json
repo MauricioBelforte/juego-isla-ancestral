@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T07:22:30",
+ "ultimo_update": "2026-10-22T07:43:20",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,25 +17,25 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "263/264: S19 RATIFICADA (M75 NO accionable self-contained); M20 = de MiniMax NO tocar; GO S20",
+  "estado": "265/266/267: S20 RATIFICADA (M70 124/198) + S21 RATIFICADA con matiz (M17 solo QA/picking, implementacion de MiniMax); GO S22",
   "pendientes_real": 222,
-  "acuse_enviado": 264,
+  "acuse_enviado": 267,
   "ultima_tanda": 40
  },
  "deepseek": {
-  "estado": "rieles backend: saneo 11-BUGS + CI b + loader EMPTY_SLOT-vs-PROFILE_MISMATCH + codec M60 + NUEVO: BUG-141 fix de producto (latencia de salida con voxel, DataStore L589/L100-104)",
+  "estado": "353/354: M102 gate+métricas RATIFICADO (deuda 80->71, firma tipo:id, Log 2120); sigue saneo residuo asincrono",
   "pendientes_real": 170,
-  "acuse_enviado": 352
+  "acuse_enviado": 354
  },
  "step_5": {
-  "estado": "164/165: cola vacia ratificada - ruteo GO (M67 #4, M23 clusters restantes o nicho propio) escribiendo acuse 165",
+  "estado": "168/169: M23 iter.6 RATIFICADA (55/105, 3 historias lugares, oferta de revert sin necesidad - evidencia sostiene); siguiente cluster 03-Diseno L31 o M67#4",
   "pendientes_real": 203,
-  "acuse_enviado": 165
+  "acuse_enviado": 169
  },
  "ds_oc": {
-  "estado": "198 VACIO (T-19, plantilla 296 B de 04:20, 3 h estancada - mensaje caido); aviso 199 enviado pidiendo reenvio del informe M62 con sesion rn3 o 3 lineas si era housekeeping",
+  "estado": "201 ratificada: reenvio 200 = T89 completa (M62 145/1/4, evidencia T72 verificada); T-19 aclarado (patron plantilla-primero + reloj corrido 3h); frente nuevo verificador externo paquete 8 de Beam",
   "pendientes_real": 357,
-  "acuse_enviado": 199
+  "acuse_enviado": 201
  },
  "hy3": {
   "estado": "317/318: RAMA 2 M66 RATIFICADA (19/0 fresh + guarda 3 capas probada EN ROJO: RED-A 20/1 y RED-B 15/1 con piso detectando la caida); M66 runtime PASS; RAMA 1 (#55/BUG-143) confirmada",
@@ -113,12 +113,13 @@
   "lambdas de GDScript capturan por VALOR: contadores por closure no funcionan - usar array-por-referencia (caso G-5.3 S10, segunda correccion de su propio QA)",
   "filas del GLOBAL desalineadas por flips concurrentes sin sync: los duenos de fila sync al cerrar tanda y los muestreos del director re-verifican el drift (caso M56 33->43 detectado por G-5.3)",
   "helper proximo_numero cuenta huecos antiguos como existentes: si el numero ofrecido NO es ultimo+1, aplic下游 el 232 del pool y usar ultimo+1 (caso G-5.3 231/232 - el hueco 220 confunde al conteo)",
-  "allowlist del validador usa prefijo canonico (flag_): keys sin prefijo se rechazan por diseño - los NUEVOS tests deben usar el prefijo canonico, no tocar el validador (evitado por G-5.3 S14)"
+  "allowlist del validador usa prefijo canonico (flag_): keys sin prefijo se rechazan por diseño - los NUEVOS tests deben usar el prefijo canonico, no tocar el validador (evitado por G-5.3 S14)",
+  "Limpieza automatica del canal MiniMax borra ficheros viejos (perdidos: mi 047, sus 034/035/038) - estado_director.json es la unica memoria del hilo para ese canal; numerar por pool en todo caso (07:42)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "046/047: M20 tanda1 RATIFICADA (1 cerrado + 2 revertidos honestos); M20 = cola exclusiva suya; sigue cola u opciones a/b/c",
+  "estado": "048/049: M20 tanda 2 RATIFICADA (78/148); trampa limpieza automatica de canal registrada; M17 implementacion sigue suya",
   "pendientes_real": 685,
-  "acuse_enviado": 47,
+  "acuse_enviado": 49,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -179,9 +180,10 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "115: PAQUETE 8 asignado (156-Terrenos ~105 [ ], orden fundador mas tareas largas); backlog real 629 [ ] (conteo corregido); mantiene paq 2 + T55",
-  "acuse_enviado": 115,
-  "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)"
+  "estado": "ORDEN FUNDADOR multi-tarea: por vuelta ejecuta 2-4 de L1-L6 (M156 variantes-script, M156 particulas, M17 specs, M59, M138, re-verificador) y reporta COMBINADO en un mensaje",
+  "acuse_enviado": 118,
+  "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
+  "regimen": "multitarea L1-L6, 2-4 por vuelta"
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
