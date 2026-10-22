@@ -97,7 +97,14 @@ func is_dialogue_active() -> bool:
 
 ## RF23 (M58 ítem [43]): memoria del último diálogo para reabrir sin perder contexto.
 var _rf23_ultimo_id: String = ""
-var _rf23_ultimo_contexto: Dictionary = {}
+var _rf23_ultimo_contexto
+
+## M21->M64 (G-5.3-Flash-Agente 2026-10-22): puente de rutina — cuando el
+## contexto trae "npc_id", ese agente (grupo "npcs", duck-typed pause_ai/
+## resume_ai) se pausa durante el dialogo y se reanuda al terminar.
+## Rutina y FSM se congela via pause_ai (el FSM deja de consultar la
+## rutina); stop_dialogue reanuda. Sin npc_id no hay puente (headless-safe).
+var _npc_pausado_id: String = ""
 
 
 func start_dialogue(dialogue_id: String, context: Dictionary = {}) -> bool:
@@ -142,10 +149,13 @@ func start_dialogue(dialogue_id: String, context: Dictionary = {}) -> bool:
 			if not _session_vars.has(clave):
 				_session_vars[clave] = flags[clave]
 	dialogue_started.emit(dialogue_id)
+	_pausar_npc_si_hay()
 	_entrar_nodo(grafo.get_start_node())
 	return true
 
 func stop_dialogue() -> void:
+	# M21->M64: reanudar el agente pausado por este dialogo (si hubo).
+	_reanudar_npc()
 	if not is_dialogue_active():
 		return
 	var ultimo := _nodo_actual.id
@@ -247,6 +257,36 @@ func resolve_text(texto: String, placeholders: Dictionary) -> String:
 ## Heurística de clave de localización: MAYÚSCULAS + sin espacios + al menos un punto.
 func _es_clave_localizacion(texto: String) -> bool:
 	return texto.to_upper() == texto and not texto.contains(" ") and texto.contains(".")
+
+## Pausa al agente del contexto (si trae npc_id y esta en el grupo npcs).
+func _pausar_npc_si_hay() -> void:
+	if not _session_vars.has("npc_id"):
+		return
+	var objetivo: String = str(_session_vars["npc_id"])
+	var tree_reader := get_tree()
+	if tree_reader == null:
+		return
+	for nodo in tree_reader.get_nodes_in_group("npcs"):
+		if is_instance_valid(nodo) and String(nodo.name) == objetivo:
+			if nodo.has_method("pause_ai"):
+				nodo.pause_ai()
+				_npc_pausado_id = objetivo
+			break
+
+## Reanuda el agente pausado (idempotente).
+func _reanudar_npc() -> void:
+	if _npc_pausado_id == "":
+		return
+	var objetivo: String = _npc_pausado_id
+	_npc_pausado_id = ""
+	var tree_reader := get_tree()
+	if tree_reader == null:
+		return
+	for nodo in tree_reader.get_nodes_in_group("npcs"):
+		if is_instance_valid(nodo) and String(nodo.name) == objetivo:
+			if nodo.has_method("resume_ai"):
+				nodo.resume_ai()
+			break
 
 func get_session_vars() -> Dictionary:
 	return _session_vars
