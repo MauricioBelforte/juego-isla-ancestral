@@ -96,7 +96,7 @@
 
 ## L. Categoría Muebles
 
-- [ ] Registrar muebles comprados (M39) y regalados (M20) [M]
+- [x] Registrar muebles comprados (M39) y regalados (M20) [M]
 - [ ] Muebles de evento (M74) [M]
 - [ ] Mueble exclusivo como recompensa (M18) [M]
 - [ ] Registrar al colocar en la casa (M18) [M]
@@ -104,10 +104,10 @@
 
 ## M. Categoría Ropa
 
-- [ ] Registrar ropa comprada (M39) y de evento (M74) [M]
+- [x] Registrar ropa comprada (M39) y de evento (M74) [M]
 - [ ] Atuendos de NPC (M20) [M]
 - [ ] Atuendo exclusivo como recompensa (M46) [M]
-- [ ] Registrar al usar (vestuario) [M]
+- [x] Registrar al usar (vestuario) [M]
 - [ ] Testear ropa de las 4 estaciones [M]
 
 ## N. Categoría Herramientas Especiales
@@ -139,12 +139,12 @@
 - [ ] Registrar símbolos de puzzles (M24) y templos (M26) [M]
 - [ ] Símbolos de runas [M]
 - [ ] Pista de puzzle como recompensa (M24) [M]
-- [ ] Registrar al resolver [M]
+- [x] Registrar al resolver [M]
 - [ ] Testear símbolos de los 7 anillos (M26) [M]
 
 ## R. Categoría Mensajes
 
-- [ ] Registrar mensajes en botellas y NPC (M21) [M]
+- [x] Registrar mensajes en botellas y NPC (M21) [M]
 - [ ] Mensajes de correo [M]
 - [ ] Historia de NPC como recompensa (M20) [M]
 - [ ] Registrar al leer [M]
@@ -152,7 +152,7 @@
 
 ## S. Categoría Secretos
 
-- [ ] Registrar secretos de acciones ocultas (M71) [M]
+- [x] Registrar secretos de acciones ocultas (M71) [M]
 - [ ] Secretos de exploración [M]
 - [ ] Contenido oculto como recompensa (M55) [M]
 - [x] Registro únicamente al cumplir la acción (anti-spoiler) [M]
@@ -160,10 +160,10 @@
 
 ## T. Categoría Objetos Ancestrales
 
-- [ ] Registrar objetos de la historia principal (M22) [M]
+- [x] Registrar objetos de la historia principal (M22) [M]
 - [ ] Objetos por capítulo [M]
 - [ ] Final alterno como recompensa (M22) [M]
-- [ ] Registrar con MISION_CAMBIADA [M]
+- [x] Registrar con MISION_CAMBIADA [M]
 - [ ] Testear objetos de los 7 capítulos [M]
 
 ## U. Colecciones Completas y Recompensas

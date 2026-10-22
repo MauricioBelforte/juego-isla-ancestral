@@ -3,7 +3,7 @@
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "932/933: M73 lote2 RATIFICADA (peces/plantas 10 coleccionese nuevas en catalog, test 8/0, 45/135 verificado en disco; nota M39 backtrace derivada); GO lote 3 con patron lote2",
+  "estado": "M73 en curso: lote 4 posible en vuelo (05 M marcado sin nuevo mensaje); proximo acuse pendiente de leer",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -178,8 +178,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "106/107: T50 SELLADA (player_proto CharacterBody3D verificado)",
-  "acuse_enviado": 107
+  "estado": "T51/T52 (backlog M137 200-213 sync + extraccion/colocacion) ratificadas por acuse combinado 110; isla.tscn/VoxelTerrain/generador [ ] honestos de editor",
+  "acuse_enviado": 110
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -277,5 +277,6 @@
  "bug_148": {
   "estado": "Abierto - generacion M10 bioma beach 0 muestras (test generacion_atria rc=1, espiral aurea deterministica) - hallado por MiniMax 044, derivado al dueno de world-gen"
  },
- "crons_vuelta_cd2": "CRON C/D 02:30-03:30: 4 acuses emitidos (G-5.3 257 S16 guardia; MiniMax 045 cierre optin con BUG-148 derivado; Beam 107 T50 player proto), todo preservado"
+ "crons_vuelta_cd2": "CRON C/D 02:30-03:30: 4 acuses emitidos (G-5.3 257 S16 guardia; MiniMax 045 cierre optin con BUG-148 derivado; Beam 107 T50 player proto), todo preservado",
+ "crons_vuelta_bd10": "CRON B/D 03:30: acuse combinado 110 a Beam (T51+T52), estado persistente sincronizado, lote nocturno preservado; agnes M73 05 en vuelo para proximo ciclo"
 }
