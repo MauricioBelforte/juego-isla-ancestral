@@ -113,3 +113,9 @@ Fuentes: hallazgo y analisis de Reflection Beam 1.0 (T28, msg 060); decision de 
 El coste_mejora por unidad de durabilidad crece con el tier (cobre 0.53 -> hierro 0.60, +13%) mientras la durabilidad duplica (150 -> 300). Es PREMIUM INTENCIONAL (mismo patron que el ROI de herramientas MR documentado en D-ROI de M16): el tier superior paga mas por unidad, la progresion cozy premia quedarse mas tiempo con la herramienta inferior. La herramienta basica (60/0) no tiene camino de upgrade: reemplazo directo por compra.
 
 Fuentes: analisis byte-exacto de Reflection Beam 1.0 (T30, msg 064) que detecto el +13%; decision de documentar (no normalizar) reservando la normalizacion a 0.5x al fundador.
+
+### D.15 — Peces raros con margen mayor: recompensa por rareza (Opcion A de Beam T33, aplicada por el director)
+
+Los 7 peces con probabilidad <= 5% (raros/legendarios) tienen margen de venta 70.6-76.9%, fuera de la regla general R1 (55-70%). Es EXCEPCION INTENCIONAL: la recompensa por rareza es el enganche de la pesca. validate_balance.gd no itera fishing.json (gap de cobertura documentado en I1): la regla R1 aplica al comercio estandar (prices.json), no a la pesca de rarezas.
+
+Fuentes: analisis de Reflection Beam 1.0 (T33, msg 074 y T2 msg 005 I1); decision data-free del director (dueno M93).
