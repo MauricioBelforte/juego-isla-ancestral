@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T20:00:50",
+ "ultimo_update": "2026-10-22T20:00:58",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -185,7 +185,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "19:40: riel documental AGOTANDOSE (48) - fase 2 tipo 190 vuelve a ser la cola real de Beam tras los 48. G-5.3 bateria 5 GO. agnes veredictora M99. Step-5 cola 116 vigente (sin senal 4h - vigilar).",
+ "nota_cron_d": "19:55 - sin repoblacion NUEVA: Beam en fase 2 + cierre de jornada (209); G-5.3 bateria 5 GO + regla consolidada (313); agnes con cola de veredictos (70/144/108) + sello M99 aplicado; Step-5 con cola de 116 vigente PERO sin senal desde 15:38 (4.5h) - candidato a recordatorio o relevo a discrecion del fundador; Hy3 muestra standby. Riel documental generico AGOTADO (48) - proximo frente de asignacion = decisiones de usuario del fundador + fase 2 de cada agente en curso.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
