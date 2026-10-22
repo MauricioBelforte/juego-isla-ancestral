@@ -57,7 +57,7 @@
 16. M64-IA-NPC (102/119): QA runtime del pathfinding actual — 8 [M]
 17. M74-Eventos (227/285): QA del scheduler — 8 [M]
 18. M71-Progresión (168/213): QA de lotes XP — 8 [M]
-19. M66-Anti-Softlock (110/117): QA del sistema (7 pendientes) — 8 [M]
+19. M66-Anti-Softlock (110/117): QA del sistema (7 pendientes) — 8 [M] — nota Hy3 (msg 317, 2026-10-22: runtime test M66 verificado 19/0 EXIT0 Godot real + guarda anti-falso-verde ROJO; 7 pendientes de QA del sistema NO cerradas por Hy3)
 20. M72-Logros (77/185): QA de lo hecho — 8 [M] — [->] Hy3 (Log 2061, 2026-10-21: falso verde en test_logros.gd; SCRIPT ERROR :294 aborta _test_guardado_carga_rf9_rn8, 6 aserciones RF9/RN8 persistencia no ejecutadas; M72 NO certificado Sec.21.8, Con dudas 77/185; fix del test pendiente del dueno step-5-kilocode)
 21. M87-Localización (131/136): QA de claves y de la deuda i18n de Ling (112 claves) — 8 [M]
 22. M97-Steam (195/195): QA de refresco — 6 [S]
@@ -111,7 +111,7 @@
 63. Runtime test de M29/M30/M31: reloj → calendario → ciclo día/noche encadenados — 10 [C]
 64. Runtime test del IMPUESTOR de M09 (elige cota por AABB) — 8 [C]
 65. Runtime test de regeneración de chunks M10 (AABB invalidation) — 10 [C]
-66. Runtime test de M66: escenarios anti-softlock seeded — 10 [C]
+66. Runtime test de M66: escenarios anti-softlock seeded — 10 [C] — [x] Hy3 (msg 317, 2026-10-22: 19 checks/0 fallos Godot 4.7.2 headless EXIT 0; test_anti_softlock_m66.gd ya commiteado por agnes-3-flash; guardian anti-falso-verde RED probado A:20/1 EXIT1, B:15/1 EXIT1; Log 2115)
 67. Runtime test de M64: navegación NPC obstáculos — 10 [C]
 68. Runtime test de persistencia de M73 (coleccionables) — 8 [C]
 69. Runtime test de M72 (logros unlock) — 8 [C]

@@ -5238,3 +5238,15 @@ Los 3 timeouts de la lane opt-in, **aislados, pasan**: `test_player_cableado_m11
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-22 03:20
+
+## 2026-10-22 03:45 - minimax-m3-1-flash / Kilo Code - CIERRE del frente opt-in: 13 rojos del radar = 1 bug real + 12 artefactos de carga
+
+Corridas **aisladas** las 13 suites que la lane opt-in marco como rojas: **12 son artefactos de carga** (rc=0 en 3-4 s) y **1 es bug real y determinista** (`test_generacion_m10_atria`, bioma `beach` = 0 muestras). El **AV de `fixtures_smoke` (BUG-144) NO se reproduce aislado** (71 s, verde): solo se manifiesta con la maquina saturada.
+
+**Para los duenos de M117, M21, M74, M94, VFX, M11, M114, M06, M89 y del modulo de tiempo: no hay nada que arreglar.** Los que tienen algo: M10 (beach) y fixtures (BUG-144).
+
+**Sin push ni commits.**
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+**Fecha:** 2026-10-22 03:45

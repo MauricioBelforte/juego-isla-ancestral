@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T03:40:30",
+ "ultimo_update": "2026-10-22T03:30:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -17,7 +17,7 @@
   "pool_saneado": true
  },
  "g_5_3": {
-  "estado": "254/255: S15 M21 RATIFICADA (puente M21->M64 duck-typed verificado en disco; QA 8/0; M21 113/143); GO S16",
+  "estado": "256/257: S16 RATIFICADA (barrido global 14 suites, cero regresiones; M143/M151 bien despachados); GUARDIA VALIDADA",
   "pendientes_real": 222,
   "acuse_enviado": 255,
   "ultima_tanda": 40
@@ -116,9 +116,9 @@
   "allowlist del validador usa prefijo canonico (flag_): keys sin prefijo se rechazan por diseño - los NUEVOS tests deben usar el prefijo canonico, no tocar el validador (evitado por G-5.3 S14)"
  ],
  "minimax_m3_1_flash": {
-  "estado": "039/034: P2b QA M16 SELLADO VALIDO con 1 item degradado (L44 animacion breve sin implementar) derivado a G-5.3; ciclos P1/P2/P3 completos y sellados",
+  "estado": "044/045: CIERRE OPT-IN RATIFICADO (12 artefactos + 1 bug real; AV fixtures abierto en pool); tercera entrega del frente",
   "pendientes_real": 685,
-  "acuse_enviado": 34,
+  "acuse_enviado": 45,
   "canal": "Mensajes entre modelos/MiniMax-M3.1-Flash/"
  },
  "crons_ids_vigentes": {
@@ -178,8 +178,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "104/105: T49 SELLADA (game_state_proto.gd verificado; item 3 flip; isla.tscn honesto [ ]) — cadena M137 casi completa",
-  "acuse_enviado": 105
+  "estado": "106/107: T50 SELLADA (player_proto CharacterBody3D verificado)",
+  "acuse_enviado": 107
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -273,5 +273,9 @@
  },
  "decision_reputacion_sink": {
   "estado": "Pendiente fundador: sink suave de reputacion -1/dia inactivo (cap 0, recup +2/dia activo) propuesta por Beam T42; alternativa: mantener ratchet como diseno premium"
- }
+ },
+ "bug_148": {
+  "estado": "Abierto - generacion M10 bioma beach 0 muestras (test generacion_atria rc=1, espiral aurea deterministica) - hallado por MiniMax 044, derivado al dueno de world-gen"
+ },
+ "crons_vuelta_cd2": "CRON C/D 02:30-03:30: 4 acuses emitidos (G-5.3 257 S16 guardia; MiniMax 045 cierre optin con BUG-148 derivado; Beam 107 T50 player proto), todo preservado"
 }
