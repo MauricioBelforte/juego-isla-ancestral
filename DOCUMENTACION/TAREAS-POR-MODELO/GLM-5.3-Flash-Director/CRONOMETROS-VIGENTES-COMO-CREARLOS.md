@@ -231,4 +231,9 @@ Cada cron hace su TAREA PRINCIPAL siempre. SI en la misma vuelta el director det
 **Modelo:** GLM-5.3 Flash-Director
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-22 19:40 (refuerzo directiva multitarea/mensajes-consolidados)
+### DETECTOR EN TODOS LOS CRONS (fundador 22oct 19:40: el 203 de Beam me cruzo entre ciclos)
 
+- CADO CRON (A/B/C/D) arranca SIEMPRE con `python scripts/verificar_mensajes_nuevos.py` como PASO 0-bis,
+  aunque no sea el cron de deteccion. El mensaje puede llegar 1 minuto despues de que CRON B corrio: se procesa
+  en el siguien cron que toque, no se espera al siguiente CRON B.
+- Sin esto hay huecos de hasta 20 min entre detection cycles con la flota en tanda rapida.

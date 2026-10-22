@@ -21,68 +21,68 @@
 ## A. Problema y objetivos
 
 - [x] Definir el problema: sin pipeline los assets entran sin formato, nombre, optimización ni legalidad verificables [S]
-- [ ] Vincular el problema con la optimización obligatoria del proyecto (AGENTS.md 21.4.8) [S]
+- [x] Vincular el problema con la optimización obligatoria del proyecto (AGENTS.md 21.4.8) [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] Establecer el objetivo: flujo único de entrada, validación, importación, review y aprobación de assets [S]
-- [ ] Definir el alcance: models 3D, texturas, materiales, audio, fuentes, UI y paletas voxel [S]
+- [x] Definir el alcance: models 3D, texturas, materiales, audio, fuentes, UI y paletas voxel [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Excluir del alcance: el terreno voxel generado en runtime por Voxel Tools (M08) [S]
+- [x] Excluir del alcance: el terreno voxel generado en runtime por Voxel Tools (M08) [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: depende de M8 (coordinar con su dueno)
-- [ ] Registrar dependencias: M45 (Arte 3D) y M78 (Legal PI), con relaciones a M04, M08, M47, M48, M61, M62, M63, M86, M107, M111, M112, M118 [M]
+- [x] Registrar dependencias: M45 (Arte 3D) y M78 (Legal PI), con relaciones a M04, M08, M47, M48, M61, M62, M63, M86, M107, M111, M112, M118 [M] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: depende de M4/M8/M45/M47/M48/M61/M62/M63/M78/M86/M107/M111/M112/M118 (coordinar con su dueno)
-- [ ] Establecer que M45 puede estar sin documentar y se referencia por su catálogo de entregables [S]
+- [x] Establecer que M45 puede estar sin documentar y se referencia por su catálogo de entregables [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: depende de M45 (coordinar con su dueno)
-- [ ] Fijar los criterios de aceptación del módulo (7 criterios del 01-Requerimientos) [S]
+- [x] Fijar los criterios de aceptación del módulo (7 criterios del 01-Requerimientos) [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
 ## B. RF — Formatos por tipo
 
 - [x] RF2: definir glTF 2.0 (glb binario) como formato estándar de modelos en runtime [S]
-- [ ] RF2: admitir gltf + bin en staging para edición y diffs legibles [S]
+- [x] RF2: admitir gltf + bin en staging para edición y diffs legibles [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RF2: aceptar OBJ solo para geometría simple y formato de edición [S]
-- [ ] RF2: definir PNG como textura lossless con canal alfa [S]
+- [x] RF2: definir PNG como textura lossless con canal alfa [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] RF2: definir WebP como textura lossy sin alfa dura [S]
+- [x] RF2: definir WebP como textura lossy sin alfa dura [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] RF2: definir OGG Vorbis como audio estándar (música, ambiente, SFX) [S]
+- [x] RF2: definir OGG Vorbis como audio estándar (música, ambiente, SFX) [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] RF2: admitir WAV solo para loops cortos de UI/feedback ≤ 5 s [S]
+- [x] RF2: admitir WAV solo para loops cortos de UI/feedback ≤ 5 s [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF3: prohibir FBX como entrada directa y documentar la ruta de conversión Blender → glTF [M]
+- [x] RF3: prohibir FBX como entrada directa y documentar la ruta de conversión Blender → glTF [M] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de documentacion (marcado [M])
-- [ ] RF3: prohibir TGA, BMP y GIF como texturas de entrada [S]
+- [x] RF3: prohibir TGA, BMP y GIF como texturas de entrada [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF3: prohibir MP3, M4A y MIDI como audio de entrada [S]
+- [x] RF3: prohibir MP3, M4A y MIDI como audio de entrada [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RF3: prohibir formatos propietarios no documentados y propietarios de video [S]
-- [ ] Definir TTF/OTF con licencia libre verificada como fuente (M88: Nunito, Fredoka One) [S]
+- [x] Definir TTF/OTF con licencia libre verificada como fuente (M88: Nunito, Fredoka One) [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: depende de M88 (coordinar con su dueno)
-- [ ] Exigir potencias de 2 en texturas para compresión VRAM eficiente [M]
+- [x] Exigir potencias de 2 en texturas para compresión VRAM eficiente [M] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Fijar límites de resolución por tipo: props ≤ 2048², atlas ≤ 4096², iconos ≤ 256² [M]
+- [x] Fijar límites de resolución por tipo: props ≤ 2048², atlas ≤ 4096², iconos ≤ 256² [M] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Definir paletas voxel como PNG atlas con mipmaps off y filtrado off (anti-bleeding M08) [M]
+- [x] Definir paletas voxel como PNG atlas con mipmaps off y filtrado off (anti-bleeding M08) [M] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: depende de M8 (coordinar con su dueno)
 - [x] Documentar los formatos prohibidos y sus rutas de conversión en ASSET-PIPELINE.md [S]
 
 ## C. RF — Convenciones de nombres
 
-- [ ] RF4: definir prefijos obligatorios por tipo: mdl_, tex_, mat_, aud_, anim_, fnt_, ui_, vox_ [S]
+- [x] RF4: definir prefijos obligatorios por tipo: mdl_, tex_, mat_, aud_, anim_, fnt_, ui_, vox_ [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] RF4: usar snake_case en minúsculas sin espacios, tildes, ñ ni caracteres especiales [S]
+- [x] RF4: usar snake_case en minúsculas sin espacios, tildes, ñ ni caracteres especiales [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF4: definir la secuencia {prefijo}_{entidad}_{variante}_{sufijo} [S]
+- [x] RF4: definir la secuencia {prefijo}_{entidad}_{variante}_{sufijo} [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] RF4: numerar variantes en dos dígitos (_01) [S]
+- [x] RF4: numerar variantes en dos dígitos (_01) [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] RF4: usar sufijos de mapa: _albedo, _normal, _roughness, _emission, _height [S]
+- [x] RF4: usar sufijos de mapa: _albedo, _normal, _roughness, _emission, _height [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] RF4: limitar nombres a 64 caracteres máximo [S]
 - [x] RF4: derivar el id estable del asset desde el nombre de archivo [M]
-- [ ] RF4: garantizar que el id nunca se reutiliza tras un retiro [S]
+- [x] RF4: garantizar que el id nunca se reutiliza tras un retiro [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] Definir la convención opcional de respaldo _lod0/_lod1/_lod2 para LODs manuales [S]
+- [x] Definir la convención opcional de respaldo _lod0/_lod1/_lod2 para LODs manuales [S] -- Diseno: 03-Diseno.md (pipeline RF2-RF9 definido)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
 - [x] Documentar ejemplos canónicos de nombres en la guía [S]
 - [x] Hacer que el validador cheque la regex de nombres sobre todo el árbol assets/ [M]

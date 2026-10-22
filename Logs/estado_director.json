@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T19:40:50",
+ "ultimo_update": "2026-10-22T19:45:50",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -130,7 +130,8 @@
   "Ranking inflado del repredicado (22oct 18:39): conteo 77-Online declarado 33 vs real 17 (archivo sin cambios desde 16:15, el error fue de mi scan original) => REGLA: el ranking de BACKLOGs SIEMPRE re-corrido al vuelo antes de citarse, jamas de memoria; corregidos mis 194/197",
   "Regla CONTEO-RIGIDO AL CIERRE (22oct 19:30, 3er caso): declaraciones de conteo desalineadas del disco en 3 tandas seguidas (agnes 951 holgado, G-5.3 S52 4-corta, Beam M99/M77 stale+desvio). REGLA: re-cuenta por patron rigido de Hy3 (321) al cierre de CADA tanda; de lo contrario el sello usa el conteo del disco y la declaracion queda descalificada como base",
   "FALSOS RESIDUALES (22oct 19:40, auto-capturada): medir el disco ANTES de procesar mensajes pendientes atribuye flips fantasma al agente (me paso con S54). REGLA: procesar pendientes PRIMERO, luego medir, luego juzgar desvios",
-  "LAG ARTIFICIAL post-restauracion (22oct 19:50): mi acuse 310-regenerado numerado DEBAJO del 311 suyo => detector cuenta lag=1 eternamente hasta mi proximo acuse. Contenido CUBIERTO (S54 ratificada + GO bateria 5 en el 310). NO doble-responder; proximo acuse natural (Bateria 5 o su S55) realinea la serie"
+  "LAG ARTIFICIAL post-restauracion (22oct 19:50): mi acuse 310-regenerado numerado DEBAJO del 311 suyo => detector cuenta lag=1 eternamente hasta mi proximo acuse. Contenido CUBIERTO (S54 ratificada + GO bateria 5 en el 310). NO doble-responder; proximo acuse natural (Bateria 5 o su S55) realinea la serie",
+  "CRUCE ENTRE CICLOS (22oct 19:38, fundador): el 203 de Beam llego 2 min despues del CRON B y el CRON D no corre detector => mensaje sin detectar 12+ min. FIX ESTRUCTURAL en cronometros: TODOS los crons corren el detector como PASO 0-bis"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
@@ -203,8 +204,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "BACKLOG-06 v3: cola documental CORTA (48 items reales) + FASE 2 oficial como reserva; 9 modulos day; 77 en 110/130; go 140 cancelado (gated)",
-  "acuse_enviado": 202,
+  "estado": "108 tanda 1 RATIFICADA (disco 152/50/3=205 vs declarado 210, 5 a reconciliar); ENCARGO LARGO CONSOLIDADO 205 (riel completo A-F + regla reportes consolidados del fundador); detecto cruza del 203 entre ciclos -> detector universal en todos los crons",
+  "acuse_enviado": 205,
   "backlog_real": "629 [ ] / 241 [x] (BACKLOG-MASTER con paquetes 1-8; mi conteo previo 16 era error de regex del CRON D)",
   "regimen": "produce-first + heredable",
   "encargo_activo": "RIEL SUELTO TOTAL"
