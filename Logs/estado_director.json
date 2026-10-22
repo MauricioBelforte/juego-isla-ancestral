@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T02:10:30",
+ "ultimo_update": "2026-10-22T03:02:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -43,9 +43,9 @@
   "acuse_enviado": 316
  },
  "ling": {
-  "estado": "203: PROMPT SUSTITUTO entregado (el cron viejo es no-modificable); por cada disparo ejecuta el bloque nuevo; si no puede ejecutarlo, reporta y lo sacamos del cron (riel manual diario)",
+  "estado": "205: OVERRIDE DEFINITIVO entregado - el prompt real de su cron (era mimo, 1/hora, regla NO-RESPONDAS-SIN-ENCARGO) lo silenciaba por OBEDIENCIA; en cada disparo ejecuta el bloque nuevo (riel i18n + modo nocturno); el fundador puede borrar el cron desde su interfaz de Kilo",
   "pendientes_real": 112,
-  "acuse_enviado": 203
+  "acuse_enviado": 205
  },
  "crons_vigentes": {
   "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
@@ -105,7 +105,8 @@
   "grep de flips SIN TILDES inutil (al-bum vs album): verificar por TEXTO REAL con tildes/variantes O por rango de lineas (caso falsa URGENTE 073 vs Beam)",
   "REORGANIZACIONES de flota: avisar y re-enganchar a TODOS los agentes del riel anterior (Ling quedo 19 h detenido sin mensaje - fallo de ruteo del director, corregido con 202) - checklist al reorganizar: cada agente histórico recibe mensaje de nuevo regimen o confirmacion de baja",
   "cronts de plataforma NO-modificables con prompt viejo (caso Ling): el director entrega PROMPT SUSTITUTO para ejecutar en cada disparo, o saca al agente del cron y asigna riel manual por mensaje",
-  "problema informado por el fundador: Ling reportaba que su cron era imposible de modificar - verificacion necesaria con el agente antes de suponer flojera"
+  "problema informado por el fundador: Ling reportaba que su cron era imposible de modificar - verificacion necesaria con el agente antes de suponer flojera",
+  "PROMPTS VIEJOS en crons de plataforma con reglas contrarias (\"si no hay encargo no respondas nada\") causan SILENCIO OBEDECIDO: el director debe emitir OVERRIDE escrito cuando cambia el regimen, o el fundador borra el cron desde la interfaz"
  ],
  "minimax_m3_1_flash": {
   "estado": "032/035: LANE SERIE SELLADA + HALLAZGO GRAVE RATIFICADO Y VERIFICADO (mi barrido commiteo photo_service en vuelo; sus 2 fixes quirurgicos en disco y CI verde 26 checks rc=0); opt-in re-measure corriendo",
