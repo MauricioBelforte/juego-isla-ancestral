@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T19:45:40",
+ "ultimo_update": "2026-10-22T19:50:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -129,7 +129,8 @@
   "CARRERA POOL en vivo (22oct 18:45): mi regeneracion del pool G-5.3 (303..350) choco con su escritura simultanea del 303 => segundo gemelo el mismo dia. FIX aplicado: rango separado 305..352 + protocolo RELEER-60s + mis acuses en serie propia (pares). Riesgo residual: plataformas con clock adelantado escriben \"futuro\"",
   "Ranking inflado del repredicado (22oct 18:39): conteo 77-Online declarado 33 vs real 17 (archivo sin cambios desde 16:15, el error fue de mi scan original) => REGLA: el ranking de BACKLOGs SIEMPRE re-corrido al vuelo antes de citarse, jamas de memoria; corregidos mis 194/197",
   "Regla CONTEO-RIGIDO AL CIERRE (22oct 19:30, 3er caso): declaraciones de conteo desalineadas del disco en 3 tandas seguidas (agnes 951 holgado, G-5.3 S52 4-corta, Beam M99/M77 stale+desvio). REGLA: re-cuenta por patron rigido de Hy3 (321) al cierre de CADA tanda; de lo contrario el sello usa el conteo del disco y la declaracion queda descalificada como base",
-  "FALSOS RESIDUALES (22oct 19:40, auto-capturada): medir el disco ANTES de procesar mensajes pendientes atribuye flips fantasma al agente (me paso con S54). REGLA: procesar pendientes PRIMERO, luego medir, luego juzgar desvios"
+  "FALSOS RESIDUALES (22oct 19:40, auto-capturada): medir el disco ANTES de procesar mensajes pendientes atribuye flips fantasma al agente (me paso con S54). REGLA: procesar pendientes PRIMERO, luego medir, luego juzgar desvios",
+  "LAG ARTIFICIAL post-restauracion (22oct 19:50): mi acuse 310-regenerado numerado DEBAJO del 311 suyo => detector cuenta lag=1 eternamente hasta mi proximo acuse. Contenido CUBIERTO (S54 ratificada + GO bateria 5 en el 310). NO doble-responder; proximo acuse natural (Bateria 5 o su S55) realinea la serie"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
