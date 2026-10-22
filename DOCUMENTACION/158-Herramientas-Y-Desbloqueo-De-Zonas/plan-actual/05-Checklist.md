@@ -200,7 +200,7 @@
 - [x] 05-Checklist.md creado y firmado (este archivo) [S]
 - [x] Tabla de tiers documentada [S]
 - [x] Tabla de costos por isla documentada [S]
-- [ ] DoD cumplida: 5 archivos + firma + log [M]
+- [x] DoD cumplida: 5 archivos + firma + log [M]
 
 **Totales:** 140 ítems · Completados: 53 · Pendientes: 87 · No resueltos: 0.
 

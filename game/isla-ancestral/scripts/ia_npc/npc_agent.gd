@@ -108,6 +108,8 @@ func _setup_navigation() -> void:
 
 
 func _process(delta: float) -> void:
+	if _posando_foto:
+		return
 	if _paused:
 		return
 	_update_blackboard(delta)
@@ -413,6 +415,22 @@ func pause_ai() -> void:
 
 func resume_ai() -> void:
 	_paused = false
+
+
+## M56 photo pose: pose fotográfica (0.5 s) al recibir PHOTO_POSE_REQUEST.
+## Congela la IA y las necesidades, luego restaura.
+var _posando_foto: bool = false
+
+func pose_foto() -> void:
+	if _posando_foto:
+		return
+	_posando_foto = true
+	pause_ai()
+	print("[NPCAgent] pose_foto iniciada")
+	await get_tree().create_timer(0.5).timeout
+	_posando_foto = false
+	resume_ai()
+	print("[NPCAgent] pose_foto terminada")
 
 
 func is_paused() -> bool:
