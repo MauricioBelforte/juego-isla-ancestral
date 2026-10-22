@@ -487,3 +487,40 @@ Total de items de modulos anexados: 0. Regla: item que al leerse resulte obsolet
 
 Total de items de modulos anexados: 425. Regla: item que al leerse resulte obsoleto se marca [?] con cita.
 
+
+## TAREAS LARGAS [C] (asignacion del director 2026-10-22 00:45 - ordem del fundador: rapido -> tareas muy largas)
+
+Regimen: UNA o DOS tareas [C] por ciclo (son tareas de DIAS). Formato de entrega: informe estructurado en tu canal con
+(1) analisis del estado actual del modulo citado, (2) diseno/plan detallado, (3) si toca codigo ajeno = PROPUESTA-ONLY para el dueno,
+(4) si tu modulo asignado: implementacion + test. El director muestrea. Las fuentes son los 05-Checklist reales de cada modulo.
+
+### PAQUETE 1 - 56-Fotografia (23 [C], diseno de camara/Navigator - matematica y geometria: TU nicho)
+- Fuente: DOCUMENTACION/56-Fotografia/plan-actual/05-Checklist.md
+- Ejemplos: Navigator como réplica logica de la camara real (render M61); traslacion WASD/gamepad con colision suave (raycast M57).
+
+### PAQUETE 2 - 17-Construccion (15 [C], specs matematicas de la rejilla - ya auditaste sus suites)
+- Fuente: DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md
+- Ejemplos: paso de rejilla fijo 1m derivado del voxel de M08; origen de rejilla identico al origen global del mundo.
+
+### PAQUETE 3 - 59-Guardado (14 [C], verificacion multi-plataforma y atomicidad - tu disciplina de testing)
+- Fuente: DOCUMENTACION/59-Guardado/plan-actual/05-Checklist.md
+- Ejemplos: 3 perfiles sin mezcla y cambio de slot en plena sesion; rename atomico por SO (Windows/macOS/Linux).
+
+### PAQUETE 4 - 138-Vertical-Slice (10 [C], presupuesto de render - auditoria + diseno)
+- Fuente: DOCUMENTACION/138-Vertical-Slice/plan-actual/05-Checklist.md
+- Ejemplos: vegetacion MultiMesh sin reventar draw calls (M50); iluminacion dentro del budget render (M49/M61).
+
+### PAQUETE 5 - 147-World-Building (8 [C], diseno de legado jugable - razonamiento creativo largo)
+- Fuente: DOCUMENTACION/147-World-Building/plan-actual/05-Checklist.md
+- Ejemplos: legado jugable (templos M24/M26, drones, herramientas unicas M13); el idioma del viento (pistas ambientales M148).
+
+### PAQUETE 6 - 58-Accesibilidad (8 [C], auditoria de accesibilidad - verificacion sistematica)
+- Fuente: DOCUMENTACION/58-Accesibilidad/plan-actual/05-Checklist.md
+- Ejemplos: legibilidad UI M53 con escala 200% sin cortes; RF12 auditar que ningun puzzle dependa de oir un sonido.
+
+### PAQUETE 7 - 28-Viajes (8 [C], diseno del Gran Vapor y flujo punta a punta)
+- Fuente: DOCUMENTACION/28-Viajes/plan-actual/05-Checklist.md
+- Ejemplos: diseno del barco Gran Vapor (cubierta navegable, chimenea); flujo embarque-travesia-llegada punta a punta.
+
+- Total del paquete: ~86 tareas [C] (dias de trabajo cada una). NOTA: 67-Vehiculos [C] EXCLUIDO (dueno activo Step-5).
+- Orden sugerido por el director: PAQUETE 1 (Fotografia, 23 items, tu nicho geometrico) PRIMERO.

@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-22T00:50:30",
+ "ultimo_update": "2026-10-22T00:48:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -151,8 +151,8 @@
   "fase": "LISTO PARA PRUEBA (esperando T1 del agente en su canal)",
   "guia": "N.1 promovido de vigilado a agente activo",
   "detalles_fuentes": "AA Intelligence 30 (Terminal-Bench 4.0 y AutomationBench-AA incluidos); SWE-bench Verified 81.6 (Benchgen/devhives); HN negativo era de la preview del 5-oct",
-  "estado": "T17 sellada 037: 69 [M] M144 cerrados con citacion por seccion; muestreo 1 degradado (retencion 90d sin fuente); 15 tandas consolidadas; M144 99/105 (4 [C] restan)",
-  "acuse_enviado": 37
+  "estado": "T18 ratificada (62 [M] 137, fila 119/131) + ORDEN FUNDADOR aplicada: TAREAS LARGAS 86 [C] en 7 paquetes (56-Fotografia primero) anotadas en su backlog; regimen de entrega estructurada con muestreo del director",
+  "acuse_enviado": 39
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -195,5 +195,8 @@
  },
  "decision_coste_ao_m16": {
   "estado": "M16 crafting coste_ao: alinear a 0 (recom. director, cozy) vs documentar talisman especial - dueno M16 G-5.3 + fundador deciden; propuesta Beam T16"
+ },
+ "tareas_largas_beam": {
+  "estado": "86 [C] en 7 paquetes asignados (56/17/59/138/147/58/28); 67 excluido (dueno activo); Fotografia primero"
  }
 }
