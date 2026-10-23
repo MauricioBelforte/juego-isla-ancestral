@@ -7,7 +7,7 @@
 | Criterio | Umbral |
 |----------|--------|
 | Comunidad activa (Discord activo / pedidos) | ≥ 50 pedidos de mods verificados en M100 |
-| Presupuesto V2 disponible | ≤ 10% del total — **default provisorio: USD 3.000** (fundador delega al director 23oct 20:46, revisable) |
+| Presupuesto V2 disponible | ≤ 10% del total — **default: USD 3.000** (RATIFICADO por el fundador 23oct 20:49; revisable cuando fije el total real) |
 | Diseño de este módulo revisado | 100% puntos 1-15 aprobados |
 | Riesgo de re-arquitectura | 0 (se usa M108/M109) |
 - Si el GATE falla → posponer a V3 sin coste ya comprometido.

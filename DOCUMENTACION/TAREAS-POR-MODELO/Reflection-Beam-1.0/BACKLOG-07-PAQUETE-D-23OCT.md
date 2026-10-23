@@ -46,7 +46,7 @@ PAQ-1 (H2 rareza 5%), PAQ-2 (H1 por sesión ~1200), PAQ-4 (H21 opción A), PAQ-6
 - EXCLUSIONES DURAS: M59 (dueño Step-5, GO 185 de 20:34 — NO pisar), M20/M16/M17 código (dueños MiniMax), items editor-locked, y cualquier item ya cerrado con criterio auditor.
 - REGLA: 2+ items por bloque consolidado.
 
-- PAQ-9 **RESUELTO sin cifra del fundador (23oct 20:48, delegacion al director):** el ancla default USD 3.000 ya esta aplicada en M123 03 §1 GATE con nota provisoria-revisable; NO requiere accion tuya (si queres, verificala al pasar en D-ciclos).
+- PAQ-9 **RESUELTO y RATIFICADO por el fundador (23oct 20:49: «perfecto lo hacemos como tu recomendacion»):** el ancla default USD 3.000 ya esta aplicada en M123 03 §1 GATE con nota provisoria-revisable; NO requiere accion tuya (si queres, verificala al pasar en D-ciclos).
 
 ## Reglas vigentes (todas)
 
