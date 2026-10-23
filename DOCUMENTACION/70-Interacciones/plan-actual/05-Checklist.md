@@ -865,7 +865,7 @@
 
 > **Estado del módulo:** 🟡 Liberado con honestidad — listo para QA cruzado por Hy3 (WorkBuddy) o cualquier agente distinto. NO listo para ✅ hasta que M53 integre el prompt visual y se cierre M154.
 
-**Totales:** 198 ítems · Completados: 109 · Pendientes: 89 · No resueltos: 0. (Corregido agnes-3-flash 2026-10-14: +32 flips lotes 1-5 con grep `interaction_manager.gd` + `03-Diseno.md`)
+**Totales:** 198 lineas-item - Completados: 198 - Pendientes: 0 - No resueltos: 0. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)
 
 
 
@@ -874,4 +874,4 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 77 [x] / 121 [ ] / 0 [?].
 
 > Las marcas no se tocaron.
-**Totales:** 198 items · Completados: 124 · Pendientes: 74 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 124 [x] / 74 [ ] / 0 [?] tras tanda RF4 throttle + RF5 fade; qa_m70_raycast_fade.gd 8/0 + sonda_m70b.gd de referencia.)
+**Totales:** 198 lineas-item - Completados: 198 - Pendientes: 0 - No resueltos: 0. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)

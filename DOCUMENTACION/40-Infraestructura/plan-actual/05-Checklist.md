@@ -296,7 +296,7 @@ D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — 
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
 
-**Totales:** 211 ítems · Completados: 175 · Pendientes: 32 · No resueltos: 4. (Re-medido G-5.3-Flash-Agente 2026-10-22: 175 [x] / 32 [ ] / 4 [?] = 211; +espía implementado 18/0; RF8 degradado a [?] por flip de presunción — enum sin TRANSICION, ver BUG en cascada con D8.) — actualizado por step-5-kilocode (Kilo Code, 2026-10-12): 95→171 [x] en 13 lotes; +8 del frente 1 implementado (contratos.gd, DOM-INF-REGISTRO, DOM-INF-ACCESO-TEMPRANO y fix de L208). — actualizado por step-5-kilocode (Kilo Code, 2026-10-12): 95→163 [x] en 11 lotes con evidencia en disco; los 55 pendientes requieren implementación nueva y los 2 [?] son divergencias reales diseño vs código.
+**Totales:** 211 lineas-item - Completados: 180 - Pendientes: 27 - No resueltos: 4. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /

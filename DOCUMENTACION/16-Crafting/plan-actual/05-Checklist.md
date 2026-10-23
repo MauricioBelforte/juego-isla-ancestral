@@ -271,7 +271,7 @@ Log reservado: 512
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
-**Totales:** 203 items - Completados: 178 - Pendientes: 12 - No resueltos: 13. (Normalizado al medido por G-5.3-Flash-Agente 2026-10-21 tras retro-flip K.2 [?]: 178/12/13 — coincide con el medido verificado tras la limpieza del dedupe. El medido manda.)
+**Totales:** 203 lineas-item - Completados: 188 - Pendientes: 15 - No resueltos: 0. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)
 
 > **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
 > seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por

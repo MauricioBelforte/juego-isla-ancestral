@@ -238,7 +238,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Marcar ítems solo al cumplir la DoD (sección 21.6) [S] -- Diseno: 03-Diseno.md (guardado definido)
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 ítems · Completados: 94 · Pendientes: 34 · No resueltos: 2. (S41 G-5.3-Flash-Agente 2026-10-23: re-medicion top-level; el acumulado 75/53 y 87 sub-contaban providers ya implementados en disco.) (Normalizado al medido por G-5.3-Flash-Agente 2026-10-21 tras el flip del ítem 8: 75/53/2 = 130. El medido manda.)
+**Totales:** 130 lineas-item - Completados: 102 - Pendientes: 26 - No resueltos: 2. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].

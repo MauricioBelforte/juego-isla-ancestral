@@ -249,7 +249,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 131 ítems · Completados: 99 · Pendientes: 18 · No resueltos: 14. (Corregido por director 2026-10-12 tras QA s2: drift 75/42 -> 99/18/14)
+**Totales:** 131 lineas-item - Completados: 103 - Pendientes: 14 - No resueltos: 14. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 70 [x] / 47 [ ] /
