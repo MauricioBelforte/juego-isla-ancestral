@@ -106,5 +106,5 @@ jobs:
           if [ "${{ steps.secrets_check.outputs.available }}" = "true" ]; then
             echo "- Subido a Google Drive: isla-ancestral-backups/diario/" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "- ⚠️ Subida a Drive **saltada** (secrets GDRIVE_* no configurados). Ver docs/backup_gdrive_setup.md" >> "$GITHUB_STEP_SUMMARY"
+            echo "- ⚠️ Subida a Drive **saltada** (secrets GDRIVE_* no configurados). Ver el modulo M107: DOCUMENTACION/107-Backups/plan-actual/03-Diseno.md seccion 5.1 (procedimiento GCP/OAuth)" >> "$GITHUB_STEP_SUMMARY"
           fi

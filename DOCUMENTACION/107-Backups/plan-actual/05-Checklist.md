@@ -33,7 +33,7 @@
 - [x] RF6: backup de saves (carpeta separada + semanal) [S] *(backup_categories.json + backup_saves())*
 - [x] RF7: backup de música (DAW projects + Git LFS) [S] *(backup_categories.json + backup_musica())*
 - [x] RF8: backup de archivos fuente (GitHub todos los branches) [S] *(backup_categories.json + backup_fuente())*
-- [?] RF9: backup externo (cloud + disco externo) → **usuario** (no hay disco externo) — **Medido 2026-10-23 (DS-WB, P5d):** las DOS mitades existen y estan probadas: `.github/workflows/backup.yml` (cloud/rclone) y `scripts/backup/backup_local.ps1` con su banco `scripts/test_backup_ps1.py` **49 checks / 0 fallos / EXIT 0** (8 bloques). El disco fisico es hardware del usuario, no deuda del modulo. **Propuesta: [x]** (la marca la aplica el director).
+- [x] RF9: backup externo (cloud + disco externo) → **usuario** (no hay disco externo) — **Medido 2026-10-23 (DS-WB, P5d):** las DOS mitades existen y estan probadas: `.github/workflows/backup.yml` (cloud/rclone) y `scripts/backup/backup_local.ps1` con su banco `scripts/test_backup_ps1.py` **49 checks / 0 fallos / EXIT 0** (8 bloques). El disco fisico es hardware del usuario, no deuda del modulo. **APLICADO: [x]** (autorizado por el director, msg 373; cita: DeepSeek 372 + Log 2156).
 - [x] RF10: backup automático (programado) [S] *(backup.yml cron + backup_categories.json)*
 - [x] RF11: pruebas de restauración (verificación periódica) [S] *(verificar_categoria() + listar_backups())*
 - [x] RF12: política de retención (tiempos definidos) [S] *(backup_policy.json: max_copias=5, dias_maximos=30)*
@@ -48,11 +48,11 @@
 - [x] Definir 1 copia offsite (cloud) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 Google Drive via rclone -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Copia 1: GitHub (repositorio principal) [S] — .git existe; GitHub = copia primaria (03-Diseno.md §1)
 - [x] Copia 2: Cloud Storage (Google Drive/Dropbox) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 structure and §5 GitHub Actions workflow -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [?] Copia 3: Disco Externo (backup local físico) [S] — Limitación de hardware: no verificable headless (03-Diseno.md L86 "verificar que disco externo esté conectado"; el script en L227) — **Medido 2026-10-23 (DS-WB, P5d):** la cita era `03-Diseno.md L52` (fila de retencion); el texto "verificar que disco externo este conectado" vive en **L86** y el script en **L227**. La justificacion "no verificable headless" NO se sostiene: el banco `scripts/test_backup_ps1.py` (**49/0, EXIT 0**) ejercita el destino FICTICIO (bloque A) y la unidad ausente `Q:\` (bloque D: exit 1, "disco desconectado", sin escribir nada). **Propuesta: [x]** (la marca la aplica el director).
+- [x] Copia 3: Disco Externo (backup local físico) [S] — Limitación de hardware: no verificable headless (03-Diseno.md L86 "verificar que disco externo esté conectado"; el script en L227) — **Medido 2026-10-23 (DS-WB, P5d):** la cita era `03-Diseno.md L52` (fila de retencion); el texto "verificar que disco externo este conectado" vive en **L86** y el script en **L227**. La justificacion "no verificable headless" NO se sostiene: el banco `scripts/test_backup_ps1.py` (**49/0, EXIT 0**) ejercita el destino FICTICIO (bloque A) y la unidad ausente `Q:\` (bloque D: exit 1, "disco desconectado", sin escribir nada). **APLICADO: [x]** (autorizado por el director, msg 373; cita: DeepSeek 372 + Log 2156).
 - [x] Medio 1: Almacenamiento en la nube [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 Google Drive/Dropbox -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Medio 2: Almacenamiento físico (disco externo) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §3 E:\Backups\ structure -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Offsite: Google Drive (cloud, accesible desde cualquier lugar) [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §2 + §5 rclone integration -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
-- [?] Local: Disco Externo (físico, misma ubicación) [S] — Limitación de hardware: no verificable headless (misma razón que Copia 3) — **Medido 2026-10-23 (DS-WB, P5d):** la cita era `03-Diseno.md L52` (fila de retencion); el texto "verificar que disco externo este conectado" vive en **L86** y el script en **L227**. La justificacion "no verificable headless" NO se sostiene: el banco `scripts/test_backup_ps1.py` (**49/0, EXIT 0**) ejercita el destino FICTICIO (bloque A) y la unidad ausente `Q:\` (bloque D: exit 1, "disco desconectado", sin escribir nada). **Propuesta: [x]** (la marca la aplica el director).
+- [x] Local: Disco Externo (físico, misma ubicación) [S] — Limitación de hardware: no verificable headless (misma razón que Copia 3) — **Medido 2026-10-23 (DS-WB, P5d):** la cita era `03-Diseno.md L52` (fila de retencion); el texto "verificar que disco externo este conectado" vive en **L86** y el script en **L227**. La justificacion "no verificable headless" NO se sostiene: el banco `scripts/test_backup_ps1.py` (**49/0, EXIT 0**) ejercita el destino FICTICIO (bloque A) y la unidad ausente `Q:\` (bloque D: exit 1, "disco desconectado", sin escribir nada). **APLICADO: [x]** (autorizado por el director, msg 373; cita: DeepSeek 372 + Log 2156).
 
 ## C. Matriz de backups por tipo (12)
 
@@ -201,11 +201,11 @@
 
 ## M. Configuración de Google Drive API (9)
 
-- [?] Definir creación de proyecto en Google Cloud Console [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "crear el proyecto en la consola" (grep de "crear.*proyecto" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **Propuesta: `[ ]`** (pendiente real del modulo) o `[x]` si se escribe §5.1.
-- [?] Definir habilitación de Google Drive API [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "habilitar la Drive API" (grep de "habilitar" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **Propuesta: `[ ]`** (pendiente real del modulo) o `[x]` si se escribe §5.1.
-- [?] Definir creación de credenciales OAuth [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "crear credenciales OAuth" (grep de "credenciales" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **Propuesta: `[ ]`** (pendiente real del modulo) o `[x]` si se escribe §5.1.
-- [?] Definir configuración de pantalla de consentimiento [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "configurar la pantalla de consentimiento" (grep de "consentimiento" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **Propuesta: `[ ]`** (pendiente real del modulo) o `[x]` si se escribe §5.1.
-- [?] Definir obtención de token de acceso OAuth [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "obtener el token OAuth" (grep de "token" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **Propuesta: `[ ]`** (pendiente real del modulo) o `[x]` si se escribe §5.1.
+- [ ] Definir creación de proyecto en Google Cloud Console [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "crear el proyecto en la consola" (grep de "crear.*proyecto" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **APLICADO: `[ ]`** -- procedimiento paso a paso en `03-Diseno.md` §5.1; EJECUCION pendiente del fundador (requiere SU cuenta Google).
+- [ ] Definir habilitación de Google Drive API [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "habilitar la Drive API" (grep de "habilitar" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **APLICADO: `[ ]`** -- procedimiento paso a paso en `03-Diseno.md` §5.1; EJECUCION pendiente del fundador (requiere SU cuenta Google).
+- [ ] Definir creación de credenciales OAuth [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "crear credenciales OAuth" (grep de "credenciales" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **APLICADO: `[ ]`** -- procedimiento paso a paso en `03-Diseno.md` §5.1; EJECUCION pendiente del fundador (requiere SU cuenta Google).
+- [ ] Definir configuración de pantalla de consentimiento [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "configurar la pantalla de consentimiento" (grep de "consentimiento" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **APLICADO: `[ ]`** -- procedimiento paso a paso en `03-Diseno.md` §5.1; EJECUCION pendiente del fundador (requiere SU cuenta Google).
+- [ ] Definir obtención de token de acceso OAuth [S] -- QA log 934: pendiente, integracion/secret/disco externo fuera de alcance de tooling (ver Notas del Agente agnes) — **Medido 2026-10-23 (DS-WB, P5d):** `03-Diseno.md` §5 documenta el workflow de GitHub Actions y los 3 secrets, pero NO el paso "obtener el token OAuth" (grep de "token" en 03-Diseno = **0**). La nota copiada ("fuera de alcance de tooling") no aplica: es hueco de DOCUMENTACION, no de hardware. **APLICADO: `[ ]`** -- procedimiento paso a paso en `03-Diseno.md` §5.1; EJECUCION pendiente del fundador (requiere SU cuenta Google).
 - [x] Documentar configuración de secrets en GitHub [S] — 03-Diseno.md §5 "Configuración de GitHub Actions"
 - [x] Documentar GDRIVE_CLIENT_ID [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §5 GitHub Actions secrets section -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
 - [x] Documentar GDRIVE_CLIENT_SECRET [S] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §5 GitHub Actions secrets section -- QA log 934: verificado en 03-Diseno.md (505 lineas, 11 secciones + 4 escenarios)
@@ -395,6 +395,7 @@ fue **honesta** (delegó lo que no hizo, documentó el sobre-cierre). El módulo
 
 **Totales:** 176 ítems · Completados: 168 · Pendientes: 0 · No resueltos: 8. (S56b G-5.3-Flash-Agente 2026-10-23: re-cuento top-level del 05; anteriores = historial tachado; sin tocar contenido de otros duenos)
 **Totales:** 182 ítems · Completados: 174 · Pendientes: 0 · No resueltos: 8. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)
+**Totales:** 182 ítems · Completados: 177 · Pendientes: 5 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 22:52: sync P5d de DeepSeek 374 — 3 flips [x] autorizados + 5 [?] -> [ ] con seccion 5.1 documentada, ejecucion pendiente del fundador; lineas previas historial.)
 
 ## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 2 definiciones
 - [x] Definir % de delta de backup incremental vs full (5-15%, proyeccion 5MB/dia 35MB/sem 150MB/mes) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #11
@@ -407,3 +408,38 @@ fue **honesta** (delegó lo que no hizo, documentó el sobre-cierre). El módulo
 - [x] Definir Presupuesto de retencion por capas — formula coherente con Policies del fundador si decide max_copias_por_categoria (cita de "Presupuestos numericos II" 03) — FORMULA CONCRETA (Beam 314): 03-Diseno.md "Presupuestos numericos II - formulas concretas" ### 7: retencion_total = 30+52+60+2 = 144 slots max; max_copias_por_categoria = 5 x 7 categorias = 35. Flipado tras verificacion de formula en disco. | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Definir Presupuesto de verificacion de integridad — formula de algoritmos duales si mantiene ambos (cita de "Presupuestos numericos II" 03) — FORMULA CONCRETA (Beam 314): 03-Diseno.md "Presupuestos numericos II - formulas concretas" ### 8: CRC32 (verificacion rapida diaria) + SHA-256 (integridad fuerte mensual). Flipado tras verificacion de formula en disco. | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 2 correcciones (H22: JSON no tiene campo "algoritmo" — CRC32 vive en BackupManager.verificar_integridad; §7: schedule GFS 30/52/60 no groundeado en backup_categories.json — retencion_dias por categoria 365/90/180/365/90/180/180); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]
+
+## Notas del Agente — Aplicación P5d (DeepSeek-V4.1-Flash, 2026-10-23, autorizado director msg 373)
+
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-23
+**Estado medido tras aplicar:** 177 `[x]` / 0 `[?]` / 5 `[ ]` = 182
+
+### Lo que se aplicó en esta vuelta
+- **3 flips `[?]` -> `[x]`** (RF9 backup externo, Copia 3 Disco Externo, Local Disco Externo). Autorizados
+  por el director (msg 373) sobre la evidencia medida en el mensaje 372 + Log 2156: el banco
+  `scripts/test_backup_ps1.py` (**49 checks / 0 fallos / EXIT 0**) ejercita el destino FICTICIO
+  (bloque A) y la unidad ausente `Q:\` (bloque D -> exit 1, "disco desconectado", sin escribir nada).
+  La justificación heredada "no verificable headless" queda refutada por medición, no por criterio.
+- **5 ítems `[?]` -> `[ ]`** (creación de proyecto GCP, habilitación de Drive API, credenciales OAuth,
+  pantalla de consentimiento, token OAuth). No eran bloqueos de hardware: eran **hueco documental**.
+  El procedimiento paso a paso quedó en `03-Diseno.md` **§5.1** (7 pasos + notas de operación) y los
+  ítems quedan como **ejecución pendiente del fundador**, que es quien tiene la cuenta de Google.
+- **`03-Diseno.md` §5.1 creada** (nueva, 116 líneas). Antes los pasos estaban *enumerados* en
+  `04-Codigo.md` §6 sin instrucciones, y `rclone authorize` aparecía **0 veces** en el repositorio.
+
+### Medición (antes / después)
+- Antes: `[x]=174` / `[?]=8` / `[ ]=0` = **182**.
+- Después: `[x]=177` / `[?]=0` / `[ ]=5` = **182**. El total no cambia: se reclasificó, no se agregó.
+- EOL: **LF puro**, sin BOM, 0 bytes NUL (verificado por bytes antes y después de escribir).
+
+### Pendiente (fuera de esta vuelta)
+- **Drift de `Totales`:** la línea vigente dice `182 · Completados: 174 · Pendientes: 0 · No resueltos: 8`
+  y ahora corresponde `177 · 5 · 0`. **No se tocó**: el director (msg 373, punto 3) se reservó la
+  sincronización de `Totales` y de `CHECKLIST-GLOBAL.md` por ser archivos protegidos.
+- **Las notas de Ling-3.1-Flash (2026-10-11)** hablan de "9 `[?]` user-dependent": son **históricas**,
+  se conservan tal como se escribieron y quedan superadas por este bloque.
+- **Referencia rota en el workflow:** `.github/workflows/backup.yml` cita `docs/backup_gdrive_setup.md`,
+  que **no existe** (`git ls-files -- "*gdrive*"` = 0). Reportado, **no editado** (fuera del encargo).
+- **`07-Resultados-Testings.md` L74** afirma "25 `[?]` user-dependent": drift preexistente, no tocado.
