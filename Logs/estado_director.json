@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T05:46:00",
+ "ultimo_update": "2026-10-23T05:52:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -34,7 +34,7 @@
   "cronometro": "CRONOMETRO-G-5.3-FLASH-AGENTE.md (23oct 00:58: AUTO-SERVICIO permanente - sin guardia pasiva; msg 322)",
   "cron_id": "wku_161a9d271001F2M641rCnNuZgy (10-min ACTIVO; 5-min requiere plataforma fundador)",
   "apilado_ultimo": 339,
-  "canal": "saneado 23oct: extras <301 en arch (subcarpetas con extras), gemelos 301+ con -B, raiz = solo 301+ unicos"
+  "canal": "ORGANIZADO DEFINITIVO (5740fa5+6dcec68+189cdef+e79b736): raiz = solo 301+ unicos + 7 entradas stale de cache (sin archivo fisico, desaparecen al refrescar); arch_0101-0200 + arch_0201-0300 con el historial completo (110+ items c/u con extras); herramienta estandar scripts/agrupar_canales.py + SOP publicado en AGENTS 4.1-b/16"
  },
  "deepseek": {
   "estado": "368 PROCESADO COMPLETO: item36 vencido (M90 249 verificado hallazgo-cero, sello con su firma); auditor-citas VALIDADO Y COMMIT (195 defectos, 50 en [x]); NUL M159 arreglado por director; P4 degradar-50 AUTORIZADO; nueva cola (a-d); mi 369",
@@ -166,7 +166,8 @@
   "BARRIDO-MASIVO-VS-LIMPIEZA-PRECISA (23oct 03:55): mi regex de limpieza barrio 23 notas DEGRADADO de todo el archivo M116 en vez de solo el item del desinstalador (perdi trazabilidad legítima). REPARADO: restaurado desde f946191 (git show) con las 23 notas conservadas + 1 limpieza precisa (desinstalador verificado por agnes 983). REGLA: nunca barrer todo el archivo con un regex general — limpiar item por item con patrón preciso y verificar el conteo antes/después",
   "LIMPIEZA-MASIVA-VS-PRECISA (23oct 03:55): mi regex general barrio 23 notas DEGRADADO legitimas de M116 en vez de solo la espuria del desinstalador. REPARADO: git show f946191 (trazabilidad restaurada) + limpieza item-por-item (agnes 983 flag). REGLA: nunca barrer un archivo completo con regex general — limpieza por patron preciso item-por-item y verificar conteo antes/despues",
   "NUMERACION-DESBORDADA-CHANNEL (23oct 03:59, fundador): la carpeta de Beam acumulo 276 mensajes con 23 gemelos (numeracion duplicada) por las tandas de produccion nocturna con el cron + apilador en paralelo. FIX aplicado: (1) desambiguar duplicados con sufijo B (los caminos citados previamente se mantienen), (2) INDICE-CANAL.md cronologico como orden de lectura, (3) pool re-semebrado 300+. LECCION: cuando un cron + apilador corre todo el dia, el pool debe sembrar >= 400 numeros por adelantado.",
-  "CANALES-RENUMERADOS-CON-LINEAS (23oct 04:40, fundador \"falto corregir la numeracion dentro de cada archivo\"): la renumeracion secuencial debe incluir (a) primera linea de cada mensaje al numero nuevo con rastro (antes OLD), (b) nota de mapping per-mensaje (SERIE RENUMERADA -> INDICE-CANAL); las citas internas historicas NO se editan. Implementado en el canal de Beam (d50e06f: 181 lineas + 170 notas)"
+  "CANALES-RENUMERADOS-CON-LINEAS (23oct 04:40, fundador \"falto corregir la numeracion dentro de cada archivo\"): la renumeracion secuencial debe incluir (a) primera linea de cada mensaje al numero nuevo con rastro (antes OLD), (b) nota de mapping per-mensaje (SERIE RENUMERADA -> INDICE-CANAL); las citas internas historicas NO se editan. Implementado en el canal de Beam (d50e06f: 181 lineas + 170 notas)",
+  "FANTASMA-CACHE-DIRECTORIO (23oct 05:50, resuelto): los 7 archivos \"no movibles\" del canal G-5.3 raiz eran ENTRADAS STALE DE CACHE del directorio Windows — ya estaban movidos a arch_0201-0300 en corridas previas (verificado: estan alli); el cache del listado no se refresco hasta cambiar el directorio. REGLA: si un move da ENOENT pero scandir lo ve, verificar la SUBCARPETA destino ANTES de alarmarse — es cache stale, no archivo perdido"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
