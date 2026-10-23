@@ -155,8 +155,8 @@ _Nota: los parámetros exactos dependen del framework elegido en implementación
 ## Presupuestos numericos II - detalle minucioso (2da capa)
 
 Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
-- **Presupuesto de distribucion de checks por modulo** [x] - formula de distribucion y los 51+ mods (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
-- **Presupuesto de flakes por semana semaforo** [x] - formula numerica de semaforo (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de distribucion de checks por modulo** [x] - formula de distribucion y los 51+ mods (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose vive en la seccion 'Presupuestos numericos II - formulas concretas' de este 03; los mensajes 252/257/260/265/267 son el origen de la asignacion (correccion de cita rota: Hy3 347, aplicada por director))
+- **Presupuesto de flakes por semana semaforo** [x] - formula numerica de semaforo (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose vive en la seccion 'Presupuestos numericos II - formulas concretas' de este 03; los mensajes 252/257/260/265/267 son el origen de la asignacion (correccion de cita rota: Hy3 347, aplicada por director))
 
 ## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
 
@@ -171,7 +171,7 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Unidad: porcentaje. Dependencia: M112 (checklist).
 
 ### 18. Distribucion de checks por suite
-- Formula: piso_minimo = 5 checks/archivo, maximo = 50 checks/archivo. Desbalance flaggeado si >50 o <10.
+- Formula: piso_minimo = 5 checks/archivo, maximo = 50 checks/archivo. Desbalance flaggeado si >50 o <5 (corregido por director, Hy3 347 bloque-2: el '<10' contradecia el piso de L152 y del PAQ-7).
 - Coherente con CHECKS_MINIMOS medidos del dia (57/42/29).
 - Unidad: checks. Dependencia: M111 (codigo de calidad).
 

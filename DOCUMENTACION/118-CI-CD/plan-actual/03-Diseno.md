@@ -104,8 +104,8 @@ ROLL-UP al fundador: el HALLAZGO de la cuota (factor x2 runners Windows en banda
 ## Presupuestos numericos II - detalle minucioso (2da capa)
 
 Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
-- **Presupuesto de runs free-tier 20 concurrentes y 2000 min/mes** [x] - formula de timeout x runs/mes <= 2000min (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
-- **Presupuesto de pesos de artefactos x retencion 7d/90d** [x] - formula de probabilidad de pipeline y budget (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de runs free-tier 20 concurrentes y 2000 min/mes** [x] - formula de timeout x runs/mes <= 2000min (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose vive en la seccion 'Presupuestos numericos II - formulas concretas' de este 03; los mensajes 252/257/260/265/267 son el origen de la asignacion (correccion de cita rota: Hy3 347, aplicada por director))
+- **Presupuesto de pesos de artefactos x retencion 7d/90d** [x] - formula de probabilidad de pipeline y budget (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose vive en la seccion 'Presupuestos numericos II - formulas concretas' de este 03; los mensajes 252/257/260/265/267 son el origen de la asignacion (correccion de cita rota: Hy3 347, aplicada por director))
 
 ## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
 
