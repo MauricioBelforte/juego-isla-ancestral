@@ -50,7 +50,7 @@
 9. M112-Testing (211/225): QA de los 211 [x] — 10 [M] — [x] cerrado Hy3 (Log 2002 / msg 268, 2026-10-18, §21.8 APROBADO)
 10. M118-CI/CD (106/106 medido): QA §21.8 re-verif — [x] Hy3 (Log 2008 / msg 270, 2026-10-19): 106/[ ]=0/[?]=0; quality.yml válido (EXIT=0, 6/6); drift Totales L144 105/0/1→106/0/0 pendiente del director (no lo edito)
 11. M117-Build (94/110): QA del sistema de builds — 8 [M] — [x] Hy3 (Log 2144, 2026-10-22: 14 checks/0 fallos Godot 4.7.2 headless EXIT 0; RED probe 14/1 EXIT1; verificador!=autor; §21.8 PASS)
-12. M110-Debug (150/225): QA del lote de paneles — 8 [M]
+12. M110-Debug (150/225): QA del lote de paneles — 8 [M] — [x] Hy3 (Log 2150 / msg 334, 2026-10-23: §21.8 cross-QA; 05-Checklist 150[x]/75[ ]/0[?]=225 == GLOBAL 150/225 sin drift; EOL CRLF limpio sin BOM/NUL; test headless Godot 4.7.2 22/0 EXIT0 + RED probe exit1 anti-falso-verde; verificador s3 != Hy3; modulo queda AMARILLO backend ok / 75 UI pendientes)
 13. M91-Config-Audio (212/239): QA de los avances de step-5-kilocode (232 archivos) — 10 [M]
 14. M90-Config-Grafica (149/249): QA del estado — 8 [M]
 15. M40-Infraestructura (175/211): QA del lote cerrado — 8 [M]
@@ -59,7 +59,7 @@
 18. M71-Progresión (168/213): QA de lotes XP — 8 [M]
 19. M66-Anti-Softlock (110/117): QA del sistema (7 pendientes) — 8 [M] — nota Hy3 (msg 317, 2026-10-22: runtime test M66 verificado 19/0 EXIT0 Godot real + guarda anti-falso-verde ROJO; 7 pendientes de QA del sistema NO cerradas por Hy3)
 20. M72-Logros (77/185): QA de lo hecho — 8 [M] — [->] Hy3 (Log 2061, 2026-10-21: falso verde en test_logros.gd; SCRIPT ERROR :294 aborta _test_guardado_carga_rf9_rn8, 6 aserciones RF9/RN8 persistencia no ejecutadas; M72 NO certificado Sec.21.8, Con dudas 77/185; fix del test pendiente del dueno step-5-kilocode)
-21. M87-Localización (131/136): QA de claves y de la deuda i18n de Ling (112 claves) — 8 [M]
+21. M87-Localización (131/136): QA de claves y de la deuda i18n de Ling (112 claves) — 8 [M] — [x] Hy3 (Log 2149, 2026-10-23: §21.8 cross-QA; 131[x]/0[ ]/5[?]=136 cuadra GLOBAL fila 87 y Totales L342; catalogos es/en/pt 170 claves paridad total; verificador!=autor Ling; Con dudas honesto, sin flip propio)
 22. M97-Steam (195/195): QA de refresco — 6 [S]
 23. M98-Trailer (102/102): QA de refresco — 4 [S]
 24. M100-Community (220/220): QA de faq.json/reglas — 6 [S]
