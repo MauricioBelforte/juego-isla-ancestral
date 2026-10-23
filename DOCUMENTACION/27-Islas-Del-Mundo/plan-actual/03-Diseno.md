@@ -191,6 +191,23 @@ func limpiar(id: StringName) -> void
 - El muelle se construye por M17/M40 (infraestructura) siguiendo la definición de M27.
 - Al desembarcar, el jugador aparece sobre el muelle mirando a tierra; suena música de la isla (M41)
 
+## Presupuestos de carga (Beam 343, produce-first, tranche 1)
+### ### Log WARN de ancla re-rollada
+- Spec: cuando una ancla se re-rolla (8 intentos fallidos), emitir WARN con: id_isla, intento (1-8), motivo (fuera de bounds / colisión / terreno inválido), fallback (anillo siguiente).
+- Formato: `WARN [M27] ancla re-rolleada: isla=%s intento=%d motivo=%s fallback=%s`.
+- Coherente con M10 (generación) y M63 (streaming).
+
+### ### Signals de carga de isla
+- `isla_cargando(id, progreso, etapa)`: emitido en cada etapa de carga (precarga, descarga, streaming). progreso: 0.0-1.0. etapa: "precarga" | "descarga" | "streaming".
+- `isla_cargada(id)`: emitido al 100% de carga. Contrato: M28 consulta `progreso()` antes de emitir.
+- `isla_descargada(id)`: emitido al liberar la isla (M63 streaming).
+- Coherente con M63 (IslandLoading) y M28 (viajes).
+
+### ### cacheado(id) -> bool
+- Función: `cacheado(id: StringName) -> bool` — retorna true si la isla está en caché (no necesita recarga).
+- Implementación: dictionary `_cache: Dictionary[StringName, bool]` en IslandRegistry.
+- Coherente con M63 (streaming) y M10 (generación).
+
 ## Presupuestos de render y carga (Beam 340, produce-first)
 ### ### IslandPref (enum de carga)
 - Enum: `enum IslandPref { PRELOAD, DESCARGA }` — la capacidad equivalente ya existe como `TIPO_CARGA/TIPO_DESCARGA/TIPO_` en el código (island_definition.gd). Este enum formaliza la intención de carga para el catálogo de islas.
