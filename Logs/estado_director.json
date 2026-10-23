@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:56:30",
+ "ultimo_update": "2026-10-23T07:46:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -578,6 +578,6 @@
   "regla_final_beam": "23oct 07:10: los mensajes 001-200 archivados en subcarpetas arch_0001-0100 + arch_0101-0200; los mensajes 201-300 EN RAIZ (90 files); al llegar al 300 se archiva la centena 0201-0300 y el siguiente batch apilador parte de 301",
   " estado_pre_renumeracion": "la carpeta del fundador queda linea: los 90 mensajes del bloque 201-300 visibles en raiz, listos para el barrido"
  },
- "apilador_beam_ultimo": "288 (apilado x30 #8: verificacion aritmetica de LOS TUYOS propios presupuestos definidos — la auto-auditoria de la capa 2, complementa a DS-OC cadena 3)",
+ "apilador_beam_ultimo": "296 (apilado x23: M48 x10 definiciones de G-5.3 no flipadas + M45 x6 + 128 x3 + picadas 40/50/53/59 — paper puro, sin gated)",
  "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)"
 }
