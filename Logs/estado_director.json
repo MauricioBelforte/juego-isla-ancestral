@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-23T04:20:00 (23oct)",
+ "ultimo_update": "2026-10-23T04:16:00 (23oct)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "983 procesado con accion (flag menor desinstalador ejecutado: espuria removida); M116 limpio; COLA B radar; mi 984 | 985/986 RATIFICADOS (x30 #7 + 9 decisiones: 6/9 disco); conteo canon M93 139 corregido (subcontada 134); mi 987 | cron */40 reencendido por el fundador (988/990 acuse) | 992 confirmado (993: re-list recursivo canon, x30-8 prox bloque veredictora) | LOTE A INTEGRAL asignado (994): 5 colas de verificación+corrección de TODA la produccion de Beam del dia | 992 confirmado (993: re-list recursivo canon; x30-8 prox bloque veredictora)",
+  "estado": "983 procesado con accion (flag menor desinstalador ejecutado: espuria removida); M116 limpio; COLA B radar; mi 984 | 985/986 RATIFICADOS (x30 #7 + 9 decisiones: 6/9 disco); conteo canon M93 139 corregido (subcontada 134); mi 987 | cron */40 reencendido por el fundador (988/990 acuse) | 992 confirmado (993: re-list recursivo canon, x30-8 prox bloque veredictora) | LOTE A INTEGRAL asignado (994): 5 colas de verificación+corrección de TODA la produccion de Beam del dia | 992 confirmado (993: re-list recursivo canon; x30-8 prox bloque veredictora) | LOTE A ratificado (1000: verificacion TRUE + correccion directa + spot-check disco)",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 998,
+  "acuse_enviado": 1000,
   "pool_saneado": true,
   "sellos_emitidos": [
    "M99 169/169 (955)",
@@ -173,7 +173,8 @@
   "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas",
   "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas",
   "CAPA-II-PLACEHOLDER (23oct 07:20, agnes 996 detecto, director ratifico y ejecuto): las 23 secciones \"Presupuestos numericos II\" que el director monto eran enunciados \"Presupuesto de X -> formula de Y\" sin formula concreta (0 verificables). DEGRADADAS [x]->[?] en los 05 de los 9 modulos con nota \"espera definicion de Beam\". REGLA: el director no define enunciados sin formula — monta items [ ] para que el auditor complete",
-  "ESCANEO-LITERAL-VS-NUMERADO (23oct 03:25, Ling 230 correccion): el escaneo de tareas por [ ] literal no detecta tareas numeradas sin marca (la lista de proyecto usa N. texto) — Ling lo corrigio con re-auditoria por numero de tarea. REGLA: el conteo de tareas con formato N. texto exige auditoria por NUMERO DE TAREA, no por marcador literal"
+  "ESCANEO-LITERAL-VS-NUMERADO (23oct 03:25, Ling 230 correccion): el escaneo de tareas por [ ] literal no detecta tareas numeradas sin marca (la lista de proyecto usa N. texto) — Ling lo corrigio con re-auditoria por numero de tarea. REGLA: el conteo de tareas con formato N. texto exige auditoria por NUMERO DE TAREA, no por marcador literal",
+  "997-INCOMPLETO (23oct 04:15, agnes 999 detecto): mi degradacion de la capa II piso solo M72 (3) - los otros 8 modulos (19 [x]) quedaron sin degradar por el fantasma NTFS del move. agnes completo con su LOTE A. REGLA: las degradaciones masivas cross-modulo se hacen con long-path + try/except por archivo (el patron de los apiladores)."
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
