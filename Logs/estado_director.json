@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T04:20:00",
+ "ultimo_update": "2026-10-23T03:57:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -222,7 +222,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "04:15 - sin asignaciones nuevas: ciclo presupuestario cerrado x9, apilado #5 matriz ratificado x2, H16 aclarado con precios X.99 estilo Steam (24.99/34.99/69.99; fix +45->+35, alinear JSONs 59.99->69.99 y 49.99->34.99): en espera de la linea de Decision del fundador. Step-5/DS-WB/agnes/DS-OC/Hy3/G-5.3/Ling con colas GO. El push-cron propio queda en 120 min.",
+ "nota_cron_d": "02:15 la flota con colas GO; los 23 placeholders de presupuestos II en espera de definicion post-precio del fundador; los 5 cronos del director operando; los agentes con jos cronos apagados o en pausa nocturna del fundador",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
