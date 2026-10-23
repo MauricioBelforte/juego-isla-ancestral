@@ -294,6 +294,13 @@ La regla cierra ese hueco: si no hay log, no se puede auditar, y lo que no se pu
 auditar se atribuye mal (familia de la trampa 115). Excepcion: un push automatico del
 usuario no requiere log de agente (no es accion de agente).
 
+## 4.1-b GUÍA DE NUMERACIÓN DE CANALES (fundador 23oct 04:30 — obligatoria para todos los crons y apiladores)
+
+Cuando un canal de `Mensajes entre modelos/<agente>/` acumule gemelos/huecos/desorden: usar la GUIA y el script oficial (NUNCA sufijos -B, NUNCA renumerar a mano):
+- Guía SOP: `Mensajes entre modelos/GUIA-NUMERACION-CANALES.md` (trampas, reglas, mantenimiento preventivo)
+- Herramienta: `python -X utf8 scripts/renumerar_canal.py "Mensajes entre modelos/<canal>"` (renumeración secuencial 001-N por fecha cronológica real + INDICE-CANAL.md con mapping viejo→nuevo + pool reseembra + punteros)
+- Reglas críticas: (1) consumir head del pool EN el mismo acto de escribir (nunca predecir el número), (2) sembrar pools ≥30-40 en días de producción, (3) archivos-fantasma NTFS (>260 MAX_PATH) se saltan con try/except, (4) nunca editar logs históricos para arreglar números — resuelven con el INDICE-CANAL mapping.
+
 ## 5. Respaldos ante Cambios Grandes
 Antes de realizar modificaciones grandes (como refactorizar el proceso principal):
 1. **Creación de Carpeta:** Verificar la existencia de `Obsoletos/` en la ubicación del archivo.

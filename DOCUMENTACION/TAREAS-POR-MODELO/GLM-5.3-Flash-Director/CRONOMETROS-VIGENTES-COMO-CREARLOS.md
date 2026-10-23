@@ -262,3 +262,5 @@ Cada cron hace su TAREA PRINCIPAL siempre. SI en la misma vuelta el director det
 Gestion de pools intacta: NUNCA push; commits por rondas del CRON C con pathspec explicito; NUNCA powershell inline multilínea.
 
 Firma de esta seccion: GLM-5.3 Flash-Director / Kilo Code - 2026-10-23 01:30.
+
+- REFERENCIA CRUZADA: la SOP de numeración de canales vive en `Mensajes entre modelos/GUIA-NUMERACION-CANALES.md` (fundador 23oct 04:30) con herramienta `scripts/renumerar_canal.py` — obligatoria cuando un canal acumule gemelos/huecos.
