@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T02:57:00",
+ "ultimo_update": "2026-10-23T03:41:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -53,9 +53,9 @@
   "nota": "205/206 self-artefactos de verificacion de calibracion/222 de Beam: consistentes con la validacion del director, sin pedidos; confirmacion implicita del rol"
  },
  "hy3": {
-  "estado": "M28/M27 QA RATIFICADO Y COMMITIDO (331: 59/0 + sonda roja; K1-K9; test y Log 2147 versionados en repo); RAMA-2 validada como metodo; mi 331",
+  "estado": "M28/M27 QA RATIFICADO Y COMMITIDO (331: 59/0 + sonda roja; K1-K9; test y Log 2147 versionados en repo); RAMA-2 validada como metodo; mi 331 | cross-QA M87 RATIFICADO (333: 131/136, 5 [?] legitimos, catalogs 170x3; fila GLOBAL sync con tu nota)",
   "pendientes_real": 257,
-  "acuse_enviado": 331
+  "acuse_enviado": 333
  },
  "ling": {
   "estado": "TANDA 29 RATIFICADA (222: 9 tareas, spot-check 3-4, iss T92 parcial — citar ruta exacta); GO tanda 30; deudas owners en flags fundadores",
