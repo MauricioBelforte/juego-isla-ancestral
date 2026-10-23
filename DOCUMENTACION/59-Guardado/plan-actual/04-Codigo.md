@@ -378,3 +378,36 @@ test_slots_m59 22/0 · qa_m59_profile_id OK · test_autosave_m59 0 fallos · qa_
 ### Flips al 05-Checklist (7, con cita de suite)
 
 L51, L166, L167 (suite A) y L95, L105, L115, L116 (suite B) → M59 = 109 [x] / 19 [ ] / 2 [?] = 130. Ofrecidos a revertir.
+
+## Notas del Agente — Tanda "carga con NPC y misiones" (Step-5-WorkBuddy, 2026-10-23, Log 2155)
+
+L128/L135/L136 del 05-Checklist (lote autorizado por el director, msg 187). Una suite NUEVA (no toca logica de produccion):
+
+### `scripts/saving/test_carga_npc_misiones_m59.gd` — 63 checks / 0 fallos / EXIT 0 x3
+
+Guarda anti-falso-verde de 3 capas (piso `CHECKS_MINIMOS = 63` MEDIDO en verde). 6 bloques:
+
+1. **L128 NPC (NPCManager, seccion "npc_ai")** — el payload lleva {npc_id, state, needs, sim_level}; restore idempotente (doble carga NO duplica el agente) y needs/sim_level se restauran sobre un agente nuevo (camino real de carga). BRECHA MEDIDA: el state guardado ("Movement") NO se restaura — NPCAgent.restore_save_data (npc_agent.gd L473-480) ignora el campo "state" y el NPC reaparece en "Idle". Un agente desconocido en el payload no se crea.
+2. **L128 regalos (Friendship, seccion "friendship")** — la memoria de regalos y el limite diario sobreviven la carga: tras recargar, regalar el mismo item puntua como DUPLICADO (2 pts) — sin exploit de recarga.
+3. **L135 mision a medias (contrato directo)** — cadena-faro con paso_actual=1: tras 2 cargas sigue activa con el paso preservado; el paso siguiente se puede reportar y el ya hecho no se re-ofrece ("tipo incorrecto") — objetivo coherente.
+4. **L135 e2e** — por el riel real (SaveManager.request_save -> load_slot): la mision sigue activa con paso_actual=1 y continua coherentemente tras la carga.
+5. **L136 mision completada** — cadena-invernadero 3/3: tras cargar sigue completada/inactiva, no se re-ofrece en cadenas_disponibles, no se puede reiniciar y la lista de completadas no se duplica; la consecuencia (flag WorldState invernadero_abierto) queda aplicada. Historia principal: completados y sellos sobreviven sin crecer.
+6. **L136 e2e** — igual por el riel real con la mision completada.
+
+Guardián probado **EN ROJO por inyeccion** 2 veces (aborto runtime dentro del bloque 5): EXIT 1 nombrando "[5] L136: mision completada..." + piso no cumplido (48 < 63).
+
+### Hallazgo colateral (M20, reportado al director)
+
+GiftEvaluator._clasificar (gift_evaluator.gd L42-45) llama item_meta.get("regalo_valido") / .get("id", "") esperando un Dictionary, pero ItemDatabase.get_item devuelve un Resource ItemData (item_database.gd L102) y Object.get toma 1 argumento -> SCRIPT ERROR en CADA regalo no duplicado; la evaluacion degrada a AMADO/20 (medido con sonda: evaluar({}, ItemData, false) = {clase 0, 20 pts} + SCRIPT ERROR; el camino duplicado si es exacto: 2 pts). La suite afirma solo puntos > 0 para no consagrar el defecto.
+
+### Trampa de arnes (bloque NPC)
+
+Con un await entre _add_agent y el uso del agente, poblacion_cambio (Bootstrap cargando la escena principal) borra al agente de prueba antes de usarlo (medido: "Agente removido: npc_s5_mov" y get_agent -> null). Fix: el registro es sincronico, sin awaits en el bloque.
+
+### Regresiones medidas (binario real)
+
+test_slots_m59 22/0 · qa_m59_profile_id OK · test_autosave_m59 0 fallos · qa_m59_bloqueo_manual OK · test_historias (M23) 456/0 · M55 diario 0 · M55 persistencia 0 · M71 flujo XP 37/0 — todos EXIT 0.
+
+### Flips al 05-Checklist (3, con cita de suite)
+
+L128, L135, L136 -> M59 = 112 [x] / 16 [ ] / 2 [?] = 130 (Totales sincronizados). Ofrecidos a revertir.

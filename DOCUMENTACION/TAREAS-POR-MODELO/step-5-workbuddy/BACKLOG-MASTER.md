@@ -1479,9 +1479,9 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - [ ] (59-Guardado) - [ ] Testear carga sin duplicados y límites de cantidad (M60) [C]
 - [ ] (59-Guardado) - [ ] Testear carga con casas parcialmente construidas [C]
 - [ ] (59-Guardado) - [ ] Testear carga con muebles inexistentes (fallback) [M]
-- [ ] (59-Guardado) - [ ] Testear carga con NPC en movimiento y regalos duplicados [C]
-- [ ] (59-Guardado) - [ ] Testear carga con misión a medias (objetivo coherente) [C]
-- [ ] (59-Guardado) - [ ] Testear carga tras completar misión y reabrir [C]
+- [x] (59-Guardado) - [ ] Testear carga con NPC en movimiento y regalos duplicados [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2155, canal 187):** suite NUEVA `test_carga_npc_misiones_m59.gd` (63 checks / 0 fallos / EXIT 0 x3). NPCManager (npc_ai): payload con {npc_id, state, needs, sim_level}, restore idempotente, needs/sim_level restaurados sobre agente nuevo — BRECHA MEDIDA: el state (Movement) NO se restaura (reaparece Idle). Friendship: memoria de regalos + limite diario sobreviven la carga (regalo repetido = DUPLICADO 2 pts, sin exploit).
+- [x] (59-Guardado) - [ ] Testear carga con misión a medias (objetivo coherente) [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2155, canal 187):** misma suite, bloques 3-4. cadena-faro con paso_actual=1: tras cargar (directa x2 y e2e por SaveManager) sigue activa con el paso preservado; el paso siguiente se puede reportar y el ya hecho no se re-ofrece — objetivo coherente sin reset.
+- [x] (59-Guardado) - [ ] Testear carga tras completar misión y reabrir [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2155, canal 187):** misma suite, bloques 5-6. cadena-invernadero 3/3: tras cargar sigue completada/inactiva, no se re-ofrece, no se puede reiniciar, completadas no se duplica; consecuencia (flag WorldState) aplicada. Historia principal: completados/sellos sobreviven sin crecer.
 - [ ] (59-Guardado) - [ ] Guardar eventos pasados y futuros programados (M74) [M]
 - [ ] (59-Guardado) - [ ] Guardar festivales celebrados y calendario [M]
 - [ ] (59-Guardado) - [ ] Testear carga en una fecha distinta a la del guardado [C]
@@ -1676,3 +1676,33 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
   (CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot intactos).
 - Pedidos (msg 185): ronda de commit de los paths de la tanda; sync fila 59 del
   GLOBAL a 109/130 (hoy dice 60/130, stale); visto bueno de los 7 flips.
+---
+
+### Registro de corrida — Step-5-WorkBuddy 2026-10-23 (tarde, Log 2155, canal 187/188)
+
+- Msj 187 del director (ratificacion 109/130 + fila GLOBAL reparada + pregunta del probe):
+  acuse 188. El probe `_probe_ro_m59.gd` ERA MIO y ya estaba borrado (medido contra disco:
+  no existe, git status limpio en scripts/saving/) — sonda de la tanda anterior, borrada
+  tras publicar las mediciones R1/R2 del Log 2154.
+- Tanda ejecutada: L128/L135/L136 de M59 (lote autorizado por el director, msg 187, sin GO nuevo).
+  Suite NUEVA `scripts/saving/test_carga_npc_misiones_m59.gd`: 63 checks / 0 fallos / EXIT 0 x3,
+  guarda de 3 capas con piso 63 MEDIDO en verde; guardian probado EN ROJO por inyeccion 2 veces
+  (aborto dentro del bloque 5: EXIT 1 nombrando [5] + piso 48 < 63).
+- Flips: L128/L135/L136 -> M59 = 112 [x] / 16 [ ] / 2 [?] = 130 (Totales sincronizados).
+- Regresiones (binario real, EXIT 0): test_slots_m59 22/0 · qa_m59_profile_id OK ·
+  test_autosave_m59 0 fallos · qa_m59_bloqueo_manual OK · test_historias (M23) 456/0 ·
+  M55 diario 0 · M55 persistencia 0 · M71 flujo XP 37/0.
+- TRAMPA NUEVA (arnes NPC): con un await entre _add_agent y el uso del agente,
+  poblacion_cambio (Bootstrap cargando la escena principal) borra al agente de prueba antes
+  de usarlo (medido: get_agent -> null). Fix: el registro es sincronico, sin awaits en el bloque.
+- HALLAZGO colateral (M20, reportado al director): GiftEvaluator._clasificar
+  (gift_evaluator.gd L42-45) espera Dictionary pero ItemDatabase.get_item devuelve un Resource
+  ItemData (item_database.gd L102) -> SCRIPT ERROR en cada regalo no duplicado; la evaluacion
+  degrada a AMADO/20 (medido con sonda). El camino duplicado si es exacto (2 pts).
+- Nota de contrato: `quest_chain_service.gd` NO esta cableado en runtime (solo lo tocan
+  validate_quest_chains.gd y _colector_sintaxis.gd); el proveedor vivo de misiones es
+  SecondaryStoriesService (autoload Historias) + StoryManager (autoload Historia). La fila L132
+  del checklist menciona quest_chain_service como provider registrado: imprecisa, reportada.
+- Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos tocados.
+- Pedidos al director (msg 189): ronda de commit de los paths de la tanda; sync fila 59 del
+  GLOBAL a 112/130; visto bueno de los 3 flips; decision sobre el defecto M20 del evaluador.

@@ -125,15 +125,15 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
   · evidencia: 03-Diseno.md secc. Guardado extendido (cola total, Reflection-Beam-1.0, T80, 2026-10-22)
 - [x] Guardar encargos activos (M23) [M]
   · evidencia: 03-Diseno.md secc. Guardado extendido (cola total, Reflection-Beam-1.0, T80, 2026-10-22)
-- [ ] Testear carga con NPC en movimiento y regalos duplicados [C]
+- [x] Testear carga con NPC en movimiento y regalos duplicados [C] — **Step-5-WorkBuddy (2026-10-23):** `test_carga_npc_misiones_m59.gd` bloques 1-2. NPC (NPCManager, seccion "npc_ai"): el payload lleva {npc_id, state, needs, sim_level}; restore idempotente (doble carga NO duplica el agente) y needs/sim_level se restauran sobre un agente nuevo — BRECHA MEDIDA: el state guardado ("Movement") NO se restaura (el NPC reaparece en "Idle"; NPCAgent.restore_save_data ignora el campo). Regalos (Friendship, seccion "friendship"): la memoria de regalos y el limite diario sobreviven la carga — tras recargar, regalar el mismo item puntua como DUPLICADO (2 pts), sin exploit de recarga. Defecto colateral medido y reportado al director: GiftEvaluator._clasificar (gift_evaluator.gd:44) llama .get("id","") de 2 args sobre el Resource ItemData -> SCRIPT ERROR en cada regalo no duplicado (degrada a AMADO/20).
 
 ## M. Guardado de Misiones (M22/M23)
 
 - [x] Guardar misiones activas con progreso y completadas [M] — ya cubierto por providers registrados: quest_chain_service (seccion "historias": estado_cadenas {paso_actual, completada, consecuencias_aplicadas}) + secondary_stories_service (seccion "secondary_stories": {activas, completadas}); ambos con get_save_data/restore_save_data y register_provider en SaveManager (2026-10-23 S41 G-5.3-Flash-Agente, verificado por lectura de scripts)
 - [x] Guardar historia principal (capítulo, final elegido) [M] — scripts/historia/story_manager.gd: seccion "historia" con get_save_data {completados (capitulos), sellos, final_elegido} + restore_save_data; register_provider presente (2026-10-23 S41)
 - [x] Guardar descubrimientos y hitos de progresión (M71) [M] — scripts/progresion/progression_manager.gd expone get_save_data/get_section_name/restore_save_data ( contrato M59; registro en SaveManager el mismo estandar de providers) (2026-10-23 S41)
-- [ ] Testear carga con misión a medias (objetivo coherente) [C]
-- [ ] Testear carga tras completar misión y reabrir [C]
+- [x] Testear carga con misión a medias (objetivo coherente) [C] — **Step-5-WorkBuddy (2026-10-23):** `test_carga_npc_misiones_m59.gd` bloques 3-4. SecondaryStoriesService (autoload "Historias", seccion "secondary_stories"): con cadena-faro a mitad de camino (paso_actual=1 tras reportar p1), la carga (directa x2 y e2e por SaveManager.request_save/load_slot) preserva activa + paso_actual; el paso siguiente (explorar faro) se puede reportar tras cargar y el paso ya hecho no se re-ofrece ("tipo incorrecto") — objetivo coherente, sin reset ni duplicacion.
+- [x] Testear carga tras completar misión y reabrir [C] — **Step-5-WorkBuddy (2026-10-23):** `test_carga_npc_misiones_m59.gd` bloques 5-6. cadena-invernadero completada (3/3 pasos): tras cargar (directa x2 y e2e) sigue completada=true/activa=false, NO se re-ofrece en cadenas_disponibles, no se puede reiniciar ("ya iniciada o completada") y la lista de completadas no se duplica; la consecuencia (flag WorldState invernadero_abierto) queda aplicada. Historia principal (seccion "historia"): completados y sellos sobreviven la carga sin crecer.
 
 ## N. Guardado de Tiempo y Eventos (M29/M31/M74)
 
@@ -238,7 +238,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Marcar ítems solo al cumplir la DoD (sección 21.6) [S] -- Diseno: 03-Diseno.md (guardado definido)
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 lineas-item - Completados: 109 - Pendientes: 19 - No resueltos: 2. (Step-5-WorkBuddy 2026-10-23: 7 flips con evidencia de suite real, Log 2154; conteo de disco por prefijo de linea)
+**Totales:** 130 lineas-item - Completados: 112 - Pendientes: 16 - No resueltos: 2. (Step-5-WorkBuddy 2026-10-23: 10 flips con evidencia de suite real, Logs 2154 + 2155; conteo de disco por prefijo de linea)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].
