@@ -403,6 +403,6 @@ fue **honesta** (delegó lo que no hizo, documentó el sobre-cierre). El módulo
 ## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador) — 1 aplicacion
 - [x] Aplicar H22: max_copias = POR CATEGORIA (renombrado a max_copias_por_categoria en backup_policy.json) + CRC32/SHA-256 documentados [S] — GO fundador 275
 
-- [x] Definir Presupuesto de retencion por capas — formula coherente con Policies del fundador si decide max_copias_por_categoria (cita de "Presupuestos numericos II" 03)
-- [x] Definir Presupuesto de verificacion de integridad — formula de algoritmos duales si mantiene ambos (cita de "Presupuestos numericos II" 03)
+- [?] Definir Presupuesto de retencion por capas — formula coherente con Policies del fundador si decide max_copias_por_categoria (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [?] Definir Presupuesto de verificacion de integridad — formula de algoritmos duales si mantiene ambos (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 2 correcciones (H22: JSON no tiene campo "algoritmo" — CRC32 vive en BackupManager.verificar_integridad; §7: schedule GFS 30/52/60 no groundeado en backup_categories.json — retencion_dias por categoria 365/90/180/365/90/180/180); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

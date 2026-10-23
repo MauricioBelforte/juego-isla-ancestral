@@ -3,11 +3,11 @@
 	"ediciones": {
 		"standard": {"nombre": "Isla Ancestral — Standard", "precio": 24.99, "contenido": ["juego_completo"], "p2w": false},
 		"deluxe": {"nombre": "Isla Ancestral — Deluxe", "precio": 34.99, "contenido": ["juego_completo", "banda_sonora", "arte_digital"], "p2w": false},
-		"coleccionista": {"nombre": "Isla Ancestral — Coleccionista", "precio": 49.99, "contenido": ["juego_completo", "banda_sonora", "arte_digital", "figura_fisica", "libro_arte"], "p2w": false}
+		"coleccionista": {"nombre": "Isla Ancestral — Coleccionista", "precio": 69.99, "contenido": ["juego_completo", "banda_sonora", "arte_digital", "figura_fisica", "libro_arte"], "p2w": false}
 	},
 	"dlc": {
-		"expansion_corales": {"nombre": "DLC: Islas Corales Profundas", "precio": 14.99, "tipo": "expansion", "p2w": false},
-		"cosmetico_primavera": {"nombre": "DLC: Pack Cosmético Primavera", "precio": 4.99, "tipo": "cosmetico", "p2w": false}
+		"isla_hielo": {"nombre": "Expansión: Isla de los Cielos", "precio": 14.99, "tipo": "expansion", "p2w": false},
+		"pack_aurora": {"nombre": "Pack Decoración Aurora", "precio": 4.99, "tipo": "cosmetico", "p2w": false}
 	},
 	"impuestos": {
 		"steam": 0.30,

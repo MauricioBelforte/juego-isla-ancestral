@@ -317,6 +317,6 @@ M116 auditado. Sustentado (0 degradaciones). Suites re-corridas POR AGNES: test_
 - [x] Definir umbrales de version minima de OS/DirectX (Win10 19041+, DX11, 8GB, 5GB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
 - [x] Definir cobertura del desinstalador (100% archivos creados, brecha 0) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6
 
-- [x] Definir Presupuesto de saveset de fotos — formula del storage del user al 100% (cita de "Presupuestos numericos II" 03)
-- [x] Definir Presupuesto de matriz de shortcuts por plataforma — tabla x win lin mac (cita de "Presupuestos numericos II" 03)
+- [?] Definir Presupuesto de saveset de fotos — formula del storage del user al 100% (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [?] Definir Presupuesto de matriz de shortcuts por plataforma — tabla x win lin mac (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 0 correcciones (5/3.3=1.515~1.5GB; 50x1MB=50MB, 50/5000=1%); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

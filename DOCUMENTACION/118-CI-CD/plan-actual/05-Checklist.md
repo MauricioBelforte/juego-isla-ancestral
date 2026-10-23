@@ -220,6 +220,6 @@
 - [x] Definir presupuesto de runs simultaneos (max 20 concurrent, free tier) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
 - [x] Definir piso de checks minimos por workflow (lint 0 errors, test 100% pass, build success) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6
 
-- [x] Definir Presupuesto de runs free-tier 20 concurrentes y 2000 min/mes — formula de timeout x runs/mes <= 2000min (cita de "Presupuestos numericos II" 03)
-- [x] Definir Presupuesto de pesos de artefactos x retencion 7d/90d — formula de probabilidad de pipeline y budget (cita de "Presupuestos numericos II" 03)
+- [?] Definir Presupuesto de runs free-tier 20 concurrentes y 2000 min/mes — formula de timeout x runs/mes <= 2000min (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [?] Definir Presupuesto de pesos de artefactos x retencion 7d/90d — formula de probabilidad de pipeline y budget (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 0 correcciones (triggers, retencion 7/90 dias = GitHub default, 20 concurrent); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

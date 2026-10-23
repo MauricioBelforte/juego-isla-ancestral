@@ -207,6 +207,6 @@
 - [x] Definir % de cobertura del simulador de update (80% de flujos) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #14
 - [x] Definir timeline de anuncios pre-patch/patch-day/post-patch (T-30/T-14/T-7/dia0/D+1-D+7) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #15
 
-- [x] Definir Presupuesto de cadencia hotfix < 72h numerico — formula que extendiera su apilado #4 (cita de "Presupuestos numericos II" 03)
-- [x] Definir Presupuesto de etapas de rollout canary 5%/25%/100% — formula de phases numeric con circuit-breaker <2% fail (cita de "Presupuestos numericos II" 03)
+- [?] Definir Presupuesto de cadencia hotfix < 72h numerico — formula que extendiera su apilado #4 (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [?] Definir Presupuesto de etapas de rollout canary 5%/25%/100% — formula de phases numeric con circuit-breaker <2% fail (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 0 correcciones (aritmetica y citas correctas: 5%/15% de 5GB=250/750MB; T-30/T-14/T-7/dia-0 = M99 §7 exacto); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

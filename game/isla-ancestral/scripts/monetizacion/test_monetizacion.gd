@@ -35,9 +35,9 @@ func _run() -> void:
 	var r3: Dictionary = m95.comprar_edicion("inexistente")
 	_check(not bool(r3.get("ok", true)), "edición inexistente rechazada")
 	# DLC
-	var r4: Dictionary = m95.comprar_dlc("expansion_corales")
+	var r4: Dictionary = m95.comprar_dlc("isla_hielo")
 	_check(bool(r4.get("ok", false)), "comprar_dlc(expansion) OK")
-	_check(m95.esta_comprado("expansion_corales"), "esta_comprado(expansion) = true")
+	_check(m95.esta_comprado("isla_hielo"), "esta_comprado(expansion) = true")
 	# M94/M152: sin P2W
 	var offenders: Array = m95.auditar_p2w()
 	_check(offenders.size() == 0, "auditar_p2w sin offenders (M94/M152 OK)")
@@ -47,7 +47,7 @@ func _run() -> void:
 	# Persistencia
 	var compras: Dictionary = m95.get_compras()
 	_check(compras.has("standard"), "compra persistida")
-	_check(compras.has("expansion_corales"), "DLC persistido")
+	_check(compras.has("isla_hielo"), "DLC persistido")
 	print("=== TEST M95: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 

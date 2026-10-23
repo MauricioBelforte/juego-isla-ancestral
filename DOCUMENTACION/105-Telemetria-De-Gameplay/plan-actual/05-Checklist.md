@@ -382,7 +382,7 @@ cerrar la app perdía `session_ended`/`session_duration`.
 - [x] Definir porcentajes de muestreo anonimo (100% clave, 10% rutinario) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #9
 - [x] Definir frecuencia de flush del buffer (30s o 100 eventos) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #10
 
-- [x] Definir Presupuesto de peaks de eventos por frame en escritura — formula con margen para eventos de balancing online (cita de "Presupuestos numericos II" 03)
-- [x] Definir Presupuesto de esquema de versionado — formula de compat coherente con M107 (cita de "Presupuestos numericos II" 03)
-- [x] Definir Presupuesto de cross-referencing M105-M144 — la tabla de deudas del flag H21 en valores (cita de "Presupuestos numericos II" 03)
+- [?] Definir Presupuesto de peaks de eventos por frame en escritura — formula con margen para eventos de balancing online (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [?] Definir Presupuesto de esquema de versionado — formula de compat coherente con M107 (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [?] Definir Presupuesto de cross-referencing M105-M144 — la tabla de deudas del flag H21 en valores (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 2 correcciones (#6 M40 SIN-DATOS degradado; puntero 2da capa x3). Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]
