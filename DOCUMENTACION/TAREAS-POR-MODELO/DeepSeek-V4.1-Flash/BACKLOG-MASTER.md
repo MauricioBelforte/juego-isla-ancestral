@@ -31,6 +31,20 @@
 
 ## LAS 100+ TAREAS
 
+> **CICLO 2026-10-23 (Log 2153, msg 370) — RAMA 1, director 369 (P5 a/b/c/d):** P5a CERRADO (el
+> `CHECKS_MINIMOS` de M90 ya estaba en HEAD, commit `26f4542`; verificado 57/0 x3 y probado EN ROJO
+> con 2 sondas: aborto de runtime y piso subido -> EXIT 1 las dos). P5b CERRADO con resultado
+> INVERSO al pedido: de los 50 `[x]` con citas rotas, 19 ya estaban degradados (corrida mia previa,
+> commiteados, auditados y correctos) y los **29 restantes NO son degradables** (8 citas imprecisas
+> con el artefacto existente, 3 no-artefactos, 1 plantilla, 2 `user://`/scratch, 15 que ya
+> documentan la correccion en el propio item) -> 0 flips. P5c CERRADO: la cita `moon_curve.tres`
+> (L54) corregida en 3 sitios con las lineas MEDIDAS (carga en `day_night_cycle.gd:114`; L345/L354/
+> L377/L381) — la premisa "L54 es de day_night_cycle.gd" era imprecisa: L54 es un comentario.
+> **P5d (M107 8 [?], etc.) NO arrancado**: el hallazgo de P5b cambia el criterio (ver P4 del msg 370).
+> Drift abierto en CHECKLIST-GLOBAL por las 19 degradaciones previas, pendiente de que el director
+> aplique: 113 -> `131/132`, 137 -> `118/131`, 147 -> `130/134`, 164 -> `120/129`.
+
+
 ### Registro de delegaciones (mantenido por GLM-5.3 Flash-Director — ultima pasada 2026-10-16 05:05)
 
 > ⚠️ **División de frentes DeepSeek (directiva del fundador: aprovechar ambos):** este backlog lo usa `DeepSeek-V4.1-Flash` (WorkBuddy). El nuevo **`DS-V4.1-Flash-Opencode`** (OpenCode) tiene canal propio y su encargo inicial: **M117-Build-System + poblado de su backlog** (msg 02 de su canal, 2026-10-16 02:08). Al reclamar tareas de este banco, marcar cuál frente la lleva.

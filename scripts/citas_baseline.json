@@ -1,5 +1,5 @@
 {
-  "nota": "Deuda de citas congelada el 2026-10-22 (Log reservado). El gate --check solo falla con citas rotas NUEVAS.",
+  "nota": "Deuda de citas congelada el 2026-10-22 (Log 2142). Purga 2026-10-23: se quitaron 2 firmas ya resueltas (NUL de M159 arreglado por el director; cita moon_curve L54 corregida a L114). El gate --check solo falla con citas rotas NUEVAS.",
   "firmas": {
     "05-Lenguaje-Y-Programacion|archivo|ULTIMO_NUMERO.txt": "cita rota en prosa/diseno (artefacto planificado)",
     "05-Lenguaje-Y-Programacion|archivo|settings.gd": "cita rota en prosa/diseno (artefacto planificado)",
@@ -80,7 +80,6 @@
     "159-Catalogo-De-Objetos|archivo|cap_159_tandaN_contact_sheet.png": "cita rota en item [x] (falso verde declarado)",
     "159-Catalogo-De-Objetos|archivo|item_obj_her_0017.tres": "cita rota en prosa/diseno (artefacto planificado)",
     "159-Catalogo-De-Objetos|linea|scripts/data/validar_catalogo_m159.gd|L210": "referencia de linea fuera de rango",
-    "159-Catalogo-De-Objetos|nul|1": "checklist con byte NUL (grep la salta en silencio)",
     "16-Crafting|archivo|qa_m16_doble_craft.gd": "cita rota en item [x] (falso verde declarado)",
     "16-Crafting|archivo|stations.json": "cita rota en item [x] (falso verde declarado)",
     "160-Diseno-De-Ubicaciones-Del-Mundo|archivo|WorldLocations.gd": "cita rota en item [x] (falso verde declarado)",
@@ -100,7 +99,6 @@
     "30-Reloj-En-Tiempo-Real|archivo|ui_hud.tscn": "cita rota en prosa/diseno (artefacto planificado)",
     "31-Ciclo-Dia-Noche|archivo|caso_noche_dia_tests.gd": "cita rota en item [x] (falso verde declarado)",
     "31-Ciclo-Dia-Noche|archivo|fase_umbral.tres": "cita rota en item [x] (falso verde declarado)",
-    "31-Ciclo-Dia-Noche|linea|moon_curve.tres|L54": "referencia de linea fuera de rango",
     "32-Clima|archivo|caso_clima_tests.gd": "cita rota en item [x] (falso verde declarado)",
     "32-Clima|archivo|validate_vfx.gd": "cita rota en prosa/diseno (artefacto planificado)",
     "36-Fauna|archivo|behavior.gd": "cita rota en item [x] (falso verde declarado)",
