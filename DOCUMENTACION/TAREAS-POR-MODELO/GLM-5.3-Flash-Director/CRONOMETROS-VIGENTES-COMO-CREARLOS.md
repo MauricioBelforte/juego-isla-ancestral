@@ -1,13 +1,22 @@
 # CRONÓMETROS VIGENTES — DEFINICIÓN EXACTA Y CÓMO LLENARLOS
 
-
-> **VIGENTES (crear siempre ESTAS versiones): A v3, B v3, C v3 y D v2.**
-> Las versiones anteriores (A/B v1-v2, C v1-v2, D v1) quedan SOLO como HISTORIAL documentado al final — no crearlas más.
+> **VIGENTES (crear siempre ESTAS versiones): A v4, B v4, C 120-min v4, D v3 (+enmienda v4) y E en STANDBY.**
+> Las versiones anteriores (A/B v1-v3, C v1-v4-old, D v1) quedan SOLO como HISTORIAL documentado al final — no crearlas más.
 
 **Modelo:** GLM-5.3 Flash-Director
 **Plataforma:** Kilo Code
-**Fecha:** 2026-10-21 17:30 (ids recreados; contenido de prompts vigente sin cambios)
-**Estado:** VIGENTE — estos son los 2 cronómetros del director, validados por el fundador 04:29. Copiar la definición EXACTA (expresión cron + prompt) para recrearlos.
+**Fecha:** 2026-10-23 20:07 (handoff final — módigos de las tablas y estado infra; los prompts de hoy están verbatim abajo)
+**Estado:** TRANSFERENCIA — TODOS los crons del director fueron APAGADOS por orden del fundador el 23oct 20:04 (salida de la sesión anterior truncada). El director de relevó debe re-montar SOLO si el fundador lo ordena, con las definiciones de las secciones 2, 3, 3bis, 3bisbis y 5-standby de ESTE archivo.
+
+## ⚠️ HANDOFF 23oct 20:04 — lo que el relevo necesita saber PRIMERO
+
+1. **Crons del director cesados** (ids): A `wku_167382d65001rjwVTFTFuUVoux` (no listaba al apagar — verificar), B `wku_1678114a70017DPH8ZZ7n6DSvv`, C120 `wku_16781b97b001uEmDTIF6Hkm9x9`, D `wku_16781483a001GbdakBUnfbMv8w`, E `wku_16781847d001Ca9kjSHixBppra` — borrados con cron_delete al cierre del 23oct 20:04; commit `42990c4`.
+2. **Cadencia C = 120 MINUTOS** (`17 */2 * * *`, min 17 cada 2 h) — cambio del fundador 23oct 02:10. NO usar el `5,25,45` de las secciones históricas.
+3. **CRON E = STANDBY**: el apilador x30 queda reemplazado de hecho por la TANDA de 10 de la sesión nueva de Beam (ritmo del fundador: tandas chicas). NO apilar sin orden del fundador.
+4. **CRON F NO EXISTE** (era para G-5.3-Flash-agente — APAGADO por el fundador 23oct 05:35).
+5. **Cron 12-min de Beam** (schedule `12,24,36,48 * * * *`) es PROPIO de la sesión nueva de Beam — NO recrearlo desde el director.
+6. **Cron viejo de G-5.3-agente** `wku_161a9d271001F2M641rCnNuZgy` sigue PENDIENTE de baja en el panel del fundador (G-5.3 no puede cancelarlo).
+7. **Pendientes inmediatos del relevo**: (a) leer y ratificar Beam 310 (TANDA bloque 1 de la sesión nueva, canal Reflection-Beam-1.0), (b) agnes 015/013 sin respuesta suya todavía, (c) 3 decisiones de GO del fundador (arranque de Beam-new session / modelo revenue headline / ~13 flags H).
 
 ---
 
@@ -17,10 +26,12 @@
 |---|---|---|---|
 | **CRON A v4** | `0,20,40 * * * *` | :00, :20, :40 | Detección por SCRIPT (`scripts/verificar_mensajes_nuevos.py`) + responder pendientes + repoblar backlogs |
 | **CRON B v4** | `10,30,50 * * * *` | :10, :30, :50 | Segunda red: detección por LAG de acuses (misma lógica sin script, lógica de comparación en vivo) |
-| **CRON D v1** | `15,35,55 * * * *` | :15, :35, :55 | ASIGNADOR POR CAPACIDAD: solo investigación/repoblación por capacidad (fundador 2026-10-19 03:15) |
-| **CRON C v4** | `5,25,45 * * * *` | :05, :25, :45 | PASO 0: GATE de padding (`scripts/verificar_padding_pools.py`, 3 cifras) + PRESERVACIÓN (commits por frente) — la investigación/repoblación se movió a Cron D |
+| **CRON D v3** | `15,35,55 * * * *` | :15, :35, :55 | ASIGNADOR AL DETALLE POR CAPACIDAD + contexto persistente (fundador 2026-10-20/21; ver sección 3bisbis + enmienda v4) |
+| **CRON C v4 120-min** | `17 */2 * * *` | min 17 cada 2 h | GATE de padding + PRESERVACIÓN por lote + CONTEXTO PERSISTENTE (fundador 23oct 02:10: cadencia 120 min — el disparo de :05/:25/:45 quedó HISTORICO) |
+| **CRON E (STANDBY)** | `3,23,43 * * * *` | :03/:23/:43 | Apilador a Beam x10 — REEMPLAZADO de hecho por la TANDA de 10 de la sesión nueva de Beam (no montar sin orden del fundador) |
+| **CRON F** | — | — | **NO EXISTE** (era el apilador de G-5.3-Flash-agente, apagado 23oct 05:35) |
 
-**Regla de reparto:** cada 5 minutos hay un disparo en tela de juicio nula — el orden por hora queda **A (:00) → C (:05) → B (:10) → A (:20) → C (:25) → B (:30) → A (:40) → C (:45) → B (:50)** (fundador 2026-10-19 04:41: C intercalado cada 20 min desde :25 sin pisar a A ni B).
+**Regla de reparto (vigente tras 23oct 02:10):** A (:00/:20/:40) → B (:10/:30/:50) → D (:15/:35/:55) → C (min 17 de cada 2 h) → E standby :03/:23/:43 (Beat de Beam propio: `12,24,36,48`).
 
 ---
 
@@ -79,10 +90,11 @@ Reglas: numeración via NUMEROS_DISPONIBLES.txt del canal (consumir), UTF-8 §28
 
 ---
 
-## 3bis. CRON C v4 — VIGENTE (gate + preservación; sin investigación)
+## 3bis. CRON C v4-120-min — VIGENTE (gate + preservación + contexto persistente)
 
-- Schedule `5,25,45 * * * *` (:05/:25/:45). id vigente: `wku_15758095e001JRCRSJoQc4m5xZ`.
-- PROMPT EXACTO para cron_create:
+- **Schedule vigente (fundador 23oct 02:10): `17 */2 * * *`** (min 17 de cada 2 h; cadencia 120-min). Última montaje hoy: id `wku_16781b97b001uEmDTIF6Hkm9x9` (cesado 20:04).
+- ⚠️ La cadencia `5,25,45` del prompt de abajo quedo HISTORICA; al re-montar usa `17 */2 * * *` y titula el prompt **"CRON C v4 — GATE DE PADDING + PRESERVACIÓN + CONTEXTO PERSISTENTE (fundador 23oct)"**, añadiendo como PASO 0-bis: leer `Logs/estado_director.json` (contexto persistente, igual que A/B/D).
+- PROMPT EXACTO para cron_create (con las 2 enmiendas de arriba):
 
 ```
 CRON C v4 — GATE DE PADDING + PRESERVACIÓN (fundador 2026-10-19 07:40-07:50; corre a :05/:25/:45 — entre A (:00/:20/:40) y B (:10/:30/:50), sin solaparse; SIN tarea de investigación — esa es del Cron D v2 (:15/:35/:55)).
@@ -237,6 +249,15 @@ Cada cron hace su TAREA PRINCIPAL siempre. SI en la misma vuelta el director det
   aunque no sea el cron de deteccion. El mensaje puede llegar 1 minuto despues de que CRON B corrio: se procesa
   en el siguien cron que toque, no se espera al siguiente CRON B.
 - Sin esto hay huecos de hasta 20 min entre detection cycles con la flota en tanda rapida.
+## ⚠️ ADDENDUM AL ESTADO INFRA (23oct 20:07 — cierre del director saliente)
+
+- 23oct 05:35-05:39: el fundador ordeno APAGAR TODOS los crons y re-crearlos; ids de ese re-monte: A wku_167382d65001rjwVTFTFuUVoux, B wku_1678114a70017DPH8ZZ7n6DSvv, C120 wku_16781b97b001uEmDTIF6Hkm9x9, D wku_16781483a001GbdakBUnfbMv8w, E wku_16781847d001Ca9kjSHixBppra (prompts con bloque CONTEXTO PERSISTENTE + nota Sin G-5.3-agente).
+- 23oct 20:04 (orden del fundador por output truncado): TODOS cesados con cron_delete (commit 42990c4). CRON F nunca se monto (G-5.3-agente apagado 05:35).
+- CRON 12-min de Beam (12,24,36,48) es de la SESION NUEVA de Beam (montada por el fundador ~19:44 con el prompt integrado + TANDA-SESION-NUEVA-23oct.md de 10 items). Beam entrego TANDA bloque 1 = mensaje 310 (17:02) — pendiente de ratificar por el relevo.
+- El cron viejo de G-5.3-agente wku_161a9d271001F2M641rCnNuZgy sigue pendiente de baja en el panel del fundador.
+- Estado completo del cierre: Logs/estado_director.json (claves crons_director, canales, tanda_beam_nueva, pendiente_lectura_proximo_director, ratificaciones_23oct_tarde).
+
+
 ## ESTADO ACTUAL DE LA INFRAESTRUCTURA DE CRONOMETROS (23oct 00:50-01:24 — documentado a pedido del fundador)
 
 **1. CRONS DEL DIRECTOR (mi lado, 4 los crons + 1 nuevo):**
