@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-22T23:56:00",
+ "ultimo_update": "2026-10-23T00:13:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "964 ratificado por director (dos lectores del bloque re-verificacion); BACKLOG-AGNES creado (12 auditorias de sello >= 60% + lotes); mi 965",
+  "estado": "LOTE 1 RATIFICADO Y SELLADO x3 (M114/M116/M118, 0 fallas); sigue COLA A (M107 next); BACKLOG-AGNES funcionando; mi 967",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,11 +13,14 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 965,
+  "acuse_enviado": 967,
   "pool_saneado": true,
   "sellos_emitidos": [
    "M99 169/169 (955)",
-   "M70 198/198 con deuda perf (957)"
+   "M70 198/198 con deuda perf (957)",
+   "M114 (966)",
+   "M116 (966)",
+   "M118 (966)"
   ]
  },
  "g_5_3": {
@@ -28,9 +31,9 @@
   "backlog_pendientes": 54
  },
  "deepseek": {
-  "estado": "ITEM 35 RATIFICADO COMPLETO (detector 3 metodos + suite 29/0 + unificacion SUPERSEDED + baseline); P1 commit 48c022c; P2 quality.yml en cola; P3/P4 escalados a fundador/duenos; P5 ratificado; su head de pool encolado a saneo; mi 367",
+  "estado": "368 PROCESADO COMPLETO: item36 vencido (M90 249 verificado hallazgo-cero, sello con su firma); auditor-citas VALIDADO Y COMMIT (195 defectos, 50 en [x]); NUL M159 arreglado por director; P4 degradar-50 AUTORIZADO; nueva cola (a-d); mi 369",
   "pendientes_real": 170,
-  "acuse_enviado": 367
+  "acuse_enviado": 369
  },
  "step_5": {
   "estado": "iter12 Comerciantes RATIFICADA (65/38/2 exacto; 40 cadenas; suite 379/0 bloque Q; trampas auto-corregidas en vivo con conteo rigido); fila 23 en DOS celdas ajustada; GO bloque final Puzzles+Investigacion CONSOLIDADO; mi 183",
@@ -394,6 +397,14 @@
    ],
    "origen": "DS-WB 366",
    "fecha": "2026-10-22 23:56"
+  },
+  {
+   "modulo": "quality.yml (protegido)",
+   "flags": [
+    "cablear 3 suites ya entregadas y verificadas: M107-backups (49/0), duplicados (29/0), auditor-citas (42/0)"
+   ],
+   "origen": "DS-WB P2 acumulado (366/368)",
+   "fecha": "2026-10-23 00:13"
   }
  ]
 }
