@@ -17,10 +17,13 @@ RAIZ = 'Mensajes entre modelos'
 CANALES = ['agnes-3-flash', 'DS-V4.1-Flash-Opencode', 'Hy3', 'DeepSeek-V4.1-Flash',
            'Step-5-WorkBuddy', 'Ling-3.1-Flash', 'G-5.3-Flash-Agente', 'MiniMax-M3.1-Flash', 'Reflection-Beam-1.0']
 MIO = 'glm-5.3-flash-director-a-'
+# 23oct 20:31 (director): el helper reservar_mensaje.py escribe el emisor como
+# "glm-5-3-flash-director-a-" (guiones) mientras los acuses viejos usan puntos
+# ("glm-5.3-flash-director-a-"); se normaliza cualquier variante de separadores.
+_PAT_MIO = re.compile(re.escape('glm') + r'[-._ ]?5[-._ ]?3[-._ ]?flash[-._ ]?director[-._ ]?a[-._ ]', re.IGNORECASE)
 
 def es_mio(f):
-    nom = f.lower().replace('glm-53-flash-director-a-', MIO)
-    return MIO in nom
+    return bool(_PAT_MIO.search(f.lower()))
 
 pend_total = 0
 for c in CANALES:
