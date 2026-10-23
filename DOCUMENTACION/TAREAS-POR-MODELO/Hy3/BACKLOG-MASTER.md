@@ -49,7 +49,7 @@
 8. M107-Backups (167/176): QA de cierre — 8 [M]
 9. M112-Testing (211/225): QA de los 211 [x] — 10 [M] — [x] cerrado Hy3 (Log 2002 / msg 268, 2026-10-18, §21.8 APROBADO)
 10. M118-CI/CD (106/106 medido): QA §21.8 re-verif — [x] Hy3 (Log 2008 / msg 270, 2026-10-19): 106/[ ]=0/[?]=0; quality.yml válido (EXIT=0, 6/6); drift Totales L144 105/0/1→106/0/0 pendiente del director (no lo edito)
-11. M117-Build (92/110): QA del sistema de builds — 8 [M]
+11. M117-Build (94/110): QA del sistema de builds — 8 [M] — [x] Hy3 (Log 2144, 2026-10-22: 14 checks/0 fallos Godot 4.7.2 headless EXIT 0; RED probe 14/1 EXIT1; verificador!=autor; §21.8 PASS)
 12. M110-Debug (150/225): QA del lote de paneles — 8 [M]
 13. M91-Config-Audio (212/239): QA de los avances de step-5-kilocode (232 archivos) — 10 [M]
 14. M90-Config-Grafica (149/249): QA del estado — 8 [M]
