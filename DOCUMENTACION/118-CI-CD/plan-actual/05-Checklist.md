@@ -143,6 +143,7 @@
 
 **Totales:** 107 ítems · Completados: 107 · Pendientes: 0 · No resueltos: 0 (L199: validación CI real — deuda externa; CI rojo 3/3 medido por API 2026-10-15).
 **Totales:** 113 ítems · Completados: 113 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 20:41: re-cuento lstrip canon tras flips bloque-4 de Beam 317 (runs free-tier + pesos artefactos); PAQ-7 aplicado en 03; PAQ-6 (reducir nightly) pendiente de nota; ratificado en acuse 318.)
+**Totales:** 113 ítems · Completados: 113 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"106 items · Completados: 92 · Pendientes: 13 ·

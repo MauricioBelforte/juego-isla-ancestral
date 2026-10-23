@@ -292,6 +292,7 @@
 
 **Totales:** 193 items · Completados: 193 · Pendientes: 0 · No resueltos: 0. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13 tras la normalización de duplicados: conteo real por regex = 192 [x] / 0 [?] / 0 [ ]; corrección de dato autorizada por director msg 267.)
 **Totales:** 199 ítems · Completados: 198 · Pendientes: 0 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 20:41: re-cuento lstrip canon tras flip bloque-4 de Beam 317 (saveset fotos); queda 1 [?] honesto (matriz shortcuts sin formula — Beam la definira); ratificado en acuse 318.)
+**Totales:** 199 ítems · Completados: 199 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la única mención previa era narrativa, en la Reserva actual (L9:

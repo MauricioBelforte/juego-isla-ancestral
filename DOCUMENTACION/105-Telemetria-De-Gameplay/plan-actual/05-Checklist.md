@@ -344,6 +344,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 
 **Totales:** 163 ítems · Completados: 135 · Pendientes: 0 · No resueltos: 28. (flips del director 2026-10-21: 227/228/229/322/323 → [x] con evidencia Log 2075; 198 nota corregida sin flip.)
 **Totales:** 171 ítems · Completados: 143 · Pendientes: 0 · No resueltos: 28. (Director GLM-5.3 Flash-Director 2026-10-23 20:20: re-cuento lstrip canon tras flips bloque-2 de Beam 312 (L385-387 [x]); altas netas desde la marca 163/135/0/28; ratificado en acuse 313.)
+**Totales:** 171 ítems · Completados: 143 · Pendientes: 0 · No resueltos: 28. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 122 [x] / 0 [ ] /

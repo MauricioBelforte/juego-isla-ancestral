@@ -260,6 +260,7 @@
 - [x] Ajustar configuración de framework ante fallos de integración [M]
 - [x] Confirmar que ningún archivo fuera de DOCUMENTACION/112-Testing-Automatico/ fue modificado [S]
 **Totales:** 226 ítems · Completados: 222 · Pendientes: 0 · No resueltos: 4. (Recontado el 2026-10-21 por minimax-m3-1-flash, Log 2093: 219 [x] + 2 [?] de tiempo cerrados con la medicion del pool paralelo (897.0 s -> 545.3 s, presupuesto 600 s) = 221 [x]; quedan 4 [?]: 3 de cobertura (no hay runner de cobertura headless en GdUnit4 6.2.1 — deuda de tooling) y 1 de maquina limpia (CI real, dueno M118). El rojo preexistente de `integration/test_crafting_inventory.gd` resulto ser un artefacto del `user://` compartido entre suites (con aislamiento por worker pasa) y el unico rojo que queda es `tests/test_iconos_m159.gd` (TIMEOUT, riel M159, ya derivado a agnes).)
+**Totales:** 232 ítems · Completados: 228 · Pendientes: 0 · No resueltos: 4. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 208 [x] / 0 [ ] / 0 [?].
