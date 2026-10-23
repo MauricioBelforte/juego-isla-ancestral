@@ -180,3 +180,6 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Coherente con M108 (CI/CD) y M118 (pipeline).
 - Unidad: flakes/semana. Dependencia: M108, M118.
 
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-7 (H24/H27)**: piso de checks "5, max 50" vs contados 57/42/29: el texto del piso/techo se actualiza para reflejar el conteo real medido (57/42/29). El piso minimo sigue siendo 5 checks/archivo, el maximo sigue siendo 50; los conteos reales (57 en el maximo) se documentan como "fuera de techo, flaggeado para revision" (no se cambia el umbral). Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
+

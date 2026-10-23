@@ -282,3 +282,6 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Coherente con M73 (colecciones) y H2 (rareza 5% con pity).
 - Unidad: porcentaje. Dependencia: M73, M93 (H2).
 
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-3 (H23)**: "max 100 cosechas" del catalogo cozy = **ACUMULADO** (no por sesion). El catalogo de logros de M72 cuenta cosechas acumuladas a lo largo de toda la partida, no por sesion. Coherente con M93 (economia) y M34 (pesca). Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
+

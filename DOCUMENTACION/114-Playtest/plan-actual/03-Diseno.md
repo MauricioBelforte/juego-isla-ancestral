@@ -233,3 +233,6 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Coherente con "maximo 5 fixes comprometidos por ronda".
 - Unidad: horas. Dependencia: M144 (post-lanzamiento).
 
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-5 (H25)**: M114 muestra minima = **30 sesiones por tester** (supersede el 8/8-12 del bloque 3). Coherente con muestra 30 de M105/06 (telemetria). Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
+

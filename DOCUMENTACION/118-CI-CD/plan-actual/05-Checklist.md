@@ -142,6 +142,7 @@
 - [x] Exportación CSV para graficar [S]
 
 **Totales:** 107 ítems · Completados: 107 · Pendientes: 0 · No resueltos: 0 (L199: validación CI real — deuda externa; CI rojo 3/3 medido por API 2026-10-15).
+**Totales:** 113 ítems · Completados: 113 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 20:41: re-cuento lstrip canon tras flips bloque-4 de Beam 317 (runs free-tier + pesos artefactos); PAQ-7 aplicado en 03; PAQ-6 (reducir nightly) pendiente de nota; ratificado en acuse 318.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"106 items · Completados: 92 · Pendientes: 13 ·
@@ -220,6 +221,6 @@
 - [x] Definir presupuesto de runs simultaneos (max 20 concurrent, free tier) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
 - [x] Definir piso de checks minimos por workflow (lint 0 errors, test 100% pass, build success) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6
 
-- [?] Definir Presupuesto de runs free-tier 20 concurrentes y 2000 min/mes — formula de timeout x runs/mes <= 2000min (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
-- [?] Definir Presupuesto de pesos de artefactos x retencion 7d/90d — formula de probabilidad de pipeline y budget (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [x] Definir Presupuesto de runs free-tier 20 concurrentes y 2000 min/mes — formula de timeout x runs/mes <= 2000min (cita de "Presupuestos numericos II" 03) — FORMULA CONCRETA (Beam 316): 03-Diseno.md "Presupuestos numericos II - formulas concretas" ### 32: max 20 concurrent jobs (GitHub Actions free tier). Flipado tras verificacion de formula en disco. | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [x] Definir Presupuesto de pesos de artefactos x retencion 7d/90d — formula de probabilidad de pipeline y budget (cita de "Presupuestos numericos II" 03) — FORMULA CONCRETA (Beam 316): 03-Diseno.md "Presupuestos numericos II - formulas concretas" ### 31: dev build 7 dias, release build 90 dias. Flipado tras verificacion de formula en disco. | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 0 correcciones (triggers, retencion 7/90 dias = GitHub default, 20 concurrent); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

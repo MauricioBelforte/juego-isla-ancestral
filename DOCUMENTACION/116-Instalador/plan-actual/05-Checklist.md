@@ -291,6 +291,7 @@
 - RF6-RF13 (asociacion, permisos, antivirus, actualizaciones, reparacion, desinstalacion real, install custom UI) → agnes-2.5-flash 2026-09-14: specs completas en 03-Diseno.md §RF6-RF13; implementacion requiere build Windows real. Spec complete.
 
 **Totales:** 193 items · Completados: 193 · Pendientes: 0 · No resueltos: 0. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13 tras la normalización de duplicados: conteo real por regex = 192 [x] / 0 [?] / 0 [ ]; corrección de dato autorizada por director msg 267.)
+**Totales:** 199 ítems · Completados: 198 · Pendientes: 0 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 20:41: re-cuento lstrip canon tras flip bloque-4 de Beam 317 (saveset fotos); queda 1 [?] honesto (matriz shortcuts sin formula — Beam la definira); ratificado en acuse 318.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la única mención previa era narrativa, en la Reserva actual (L9:
@@ -317,6 +318,6 @@ M116 auditado. Sustentado (0 degradaciones). Suites re-corridas POR AGNES: test_
 - [x] Definir umbrales de version minima de OS/DirectX (Win10 19041+, DX11, 8GB, 5GB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
 - [x] Definir cobertura del desinstalador (100% archivos creados, brecha 0) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6
 
-- [?] Definir Presupuesto de saveset de fotos — formula del storage del user al 100% (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
-- [?] Definir Presupuesto de matriz de shortcuts por plataforma — tabla x win lin mac (cita de "Presupuestos numericos II" 03) | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [x] Definir Presupuesto de saveset de fotos — formula del storage del user al 100% (cita de "Presupuestos numericos II" 03) — FORMULA CONCRETA (Beam 316): 03-Diseno.md "Presupuestos numericos II - formulas concretas" ### 27: saveset_max = 50 * 1 MB = 50 MB. Flipado tras verificacion de formula en disco. | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
+- [?] Definir Presupuesto de matriz de shortcuts por plataforma — tabla x win lin mac (cita de "Presupuestos numericos II" 03) — [?] SIN FORMULA ### en 03-Diseno.md para "matriz de shortcuts por plataforma" (win/lin/mac): los ### 26-29 cubren peso instalador, saveset, OS/DirectX, desinstalador. No se flipa sin artefacto. Motivo: espera definicion de tabla de shortcuts por plataforma (Beam 316, paquete-H). | [?] capa-II placeholder (sin formula concreta) — veredictora agnes 2026-10-23, completa el degradado 997
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 0 correcciones (5/3.3=1.515~1.5GB; 50x1MB=50MB, 50/5000=1%); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

@@ -580,3 +580,6 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Coherente con H22 (documentado en 03-Diseno.md).
 - Unidad: algoritmo. Dependencia: H22.
 
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-8 (H22)**: max_copias = **POR-CATEGORIA (5x7=35)** y se MANTIENEN ambos algoritmos (CRC32 rapido diario / SHA-256 fuerte mensual). Tu flip de bloque 3 ya lo citó (5x7=35; CRC32 diario + SHA-256 mensual); solo se agrega la nota de GO del fundador. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
+
