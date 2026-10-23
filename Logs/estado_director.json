@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T05:36:20",
+ "ultimo_update": "2026-10-23T05:40",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -570,7 +570,8 @@
    "C120": "wku_1673957bd001n5oSBm0lEy0iTu",
    "D": "wku_16738aef6001LzJyTxklCDu87U",
    "E": "wku_167391343001SFXJenRNwK9SAa"
-  }
+  },
+  "agrupado": "REGRA FINAL del fundador 23oct 05:36: centena COMPLETA se archiva (arch_0001-0100); en raiz queda la centena EN CURSO; herramienta scripts/agrupar_canal.py (idempotente) + agrupar_todos.py; verificacion 23oct 05:40: todas las centenas en curso correctamente en raiz, 0 re-movimientos (idempotente)"
  },
  "apilador_beam_ultimo": "258 (apilado x5 FINAL honesto: nicho flipable agotado — M03 inventario-raiz + propuesta pricing-coherente 2.0 + M02 esquema/espejo + M03 doc-check; proximo real depende del fundador)",
  "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)"
