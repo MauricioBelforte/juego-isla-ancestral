@@ -398,3 +398,7 @@ fue **honesta** (delegó lo que no hizo, documentó el sobre-cierre). El módulo
 ## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 2 definiciones
 - [x] Definir % de delta de backup incremental vs full (5-15%, proyeccion 5MB/dia 35MB/sem 150MB/mes) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #11
 - [x] Definir tiempo estimado de restauracion full+incremental (3-6h, <48h SLA) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #12
+
+
+## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador) — 1 aplicacion
+- [x] Aplicar H22: max_copias = POR CATEGORIA (renombrado a max_copias_por_categoria en backup_policy.json) + CRC32/SHA-256 documentados [S] — GO fundador 275

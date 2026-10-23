@@ -319,3 +319,7 @@
 > Las marcas no se tocaron.
 
 **Totales:** 113 ítems · Completados: 113 · Pendientes: 0 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, monetizacion: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)
+
+## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador) — 2 aplicaciones
+- [x] Aplicar H16: Coleccionista = 69.99 en ediciones.json + monetizacion.json; +45 -> +35 en 03 L33 [S] — GO fundador 275: 3 fuentes alineadas a 69.99
+- [x] Aplicar H17: IDs canonicos = dlc.json (isla_hielo, pack_aurora); monetizacion.json alineado [S] — GO fundador 275: nombres unificados

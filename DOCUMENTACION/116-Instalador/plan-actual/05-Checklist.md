@@ -312,7 +312,7 @@ M116 auditado. Sustentado (0 degradaciones). Suites re-corridas POR AGNES: test_
 
 
 ## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 4 definiciones
-- [x] Definir peso objetivo del instalador (<1.5 GB, base 5 GB comprimido) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #1
-- [x] Definir tamano maximo del saveset de fotos (max 50 MB, 50 fotos x 1 MB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #3
+- [x] Definir peso objetivo del instalador (<1.5 GB, base 5 GB comprimido) — AUDIT S63 G-5.3 2026-10-23: la aritmetica 5/3.3=1.5 GB es correcta PERO el ratio 3.3x NO es realista si el base 5 GB ya es el export comprimido (PCK/assets OGG/texturas: LZMA rinde ~1.1-1.3x sobre ellos) -> instalador real seria ~3.5-4.5 GB; el 1.5 GB solo cuadra si el base 5 GB son FUENTES sin comprimir (WAV/BMP/texto). HALLAZGO escalado al fundador: recalcular RequiredSpace o cambiar de medio (split/web) — Diseno: 03-Diseno.md "Presupuestos numericos" #1
+- [x] Definir tamano maximo del saveset de fotos (max 50 MB, 50 fotos x 1 MB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #3 — AUDIT S63 G-5.3 2026-10-23: 50 x 1 MB = 50 MB = 1% de 5000 MB PASS; HALLAZGO en los checks Inno del 03: IsWindows10Or11 valida solo Major >= 10 (NO el build 19041 requerido) y IsDirectX11Available es placeholder (Result := True) — fix al script .iss y escalado al fundador
 - [x] Definir umbrales de version minima de OS/DirectX (Win10 19041+, DX11, 8GB, 5GB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
 - [x] Definir cobertura del desinstalador (100% archivos creados, brecha 0) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6

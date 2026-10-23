@@ -75,3 +75,21 @@ CI: parches pasan gates de M117 (mismo pipeline release)
 - No abrir early-access post-lanzamiento.
 - No parches con features sin gates (M117/M142).
 - No ignorar reviews negativas: respuesta < 48 h (M100).
+
+## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador)
+
+### H21 — Mapeo de las 9 metricas de M144 a sus fuentes (Opcion A para V1)
+
+| # | Metrica M144 | Fuente actual | Capturada por M105? | Accion V1 |
+|---|-------------|---------------|---------------------|-----------|
+| 1 | Reviews (positivas/negativas + temas) | Plataformas (Steam) + M100 | NO | M97 (Steam API) o M100 (comunidad). No requiere M105. |
+| 2 | Bugs abiertos por severidad | M102/M122 | NO | M102 (Bug Tracking) + M122 (Crash Reporting). No requiere M105. |
+| 3 | Rendimiento (FPS p50/p95, crashes) | M105/M122 | PARCIAL | M105 emite session_duration (proxy de FPS). M122 captura crashes. Gap: FPS p50/p95 no se captura. Instrumentar en M105 o M122 (V2). |
+| 4 | Economia (precios/inflacion/exploits) | M105 | PARCIAL | M105 emite eventos de transaccion (si se instrumenta). Actualmente NO se emiten. Gap: agregar track_economia() en M105 (V2). |
+| 5 | Dificultad (abandono en X) | M105 | SI | M105 emite puzzle abandon (abandono >300s). Capturada. |
+| 6 | Tutorial (completado) | M105 | SI | M105 emite track_tutorial_first_completed(). Capturada. |
+| 7 | Onboarding (tiempo a primera accion) | M101 | NO | M101 (QA General) o M105 (instrumentar session_started + primera accion). Gap: agregar track_onboarding() en M105 (V2). |
+| 8 | Retencion (D1/D7/D30) | M105 | PARCIAL | M105 emite session_started/session_ended. Retencion se calcula post-hoc (no en tiempo real). Gap: definir formula de retencion (sesiones por dia). |
+| 9 | Contenido (engagement por isla) | M105 | PARCIAL | M105 emite enter_zone/exit_zone. Engagement por isla se deriva. Gap: agregar track_isla_visitada() en M105 (V2). |
+
+Decision: Opcion A (minima) para V1. M105 captura 4 de 9 directamente (dificultad, tutorial, retencion parcial, contenido parcial). Las otras 5 se capturan por M97/M102/M122/M93/M101 (no requieren M105). Opcion B (completa) para V2: agregar 3 hooks en M105 (track_economia, track_onboarding, track_isla_visitada). Costo: ~2h.

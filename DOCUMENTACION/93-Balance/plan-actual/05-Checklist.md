@@ -72,7 +72,7 @@
 ## G. Amistad (M20)
 
 - [x] Definir `friendship.json`: puntos por regalo, favorito, diálogo [M] — glm-5.3-flash 2026-09-01: tabla v2 con generosidad_favorito x3
-- [x] Definir umbrales de nivel de amistad (ej. 0/30/70/130) [M] — umbrales 30/70/120/150/260 ascendentes (verificados contra M20 real: 30 pts = +1 nivel)
+- [x] Definir umbrales de nivel de amistad (0/30/70/120/150/260) [M] — umbrales friendship.json: nivel_2=30, nivel_3=70, nivel_4=120, nivel_5=150, nivel_8=260 (corregido 130->120 por GO fundador)entes (verificados contra M20 real: 30 pts = +1 nivel)
 - [x] Definir beneficios por nivel (recetas, descuentos, eventos) [M] — beneficios_por_nivel (recetas/descuento/trueque especial/eventos/diálogo secreto)
 - [x] Definir que no haya decaimiento por ausencia (M94) [M] — sin_decaimiento_por_ausencia: true (M94)
 - [x] Definir generosidad: regalos favoritos +x3 puntos [S] — multiplicador x3 sobre regalo_gustado (testeado)
@@ -198,7 +198,7 @@
 - [x] Probar jugador que vende todo (economía estable) [M] — KnownIssue no bloqueante DoD: requiere simulacion dinámica (O) o playtest; el tope de ventas diarias existe (M38). Scenarioprogramado.
 - [x] Probar jugador que no vende nada (almacenamiento M14 sin penalización) [M] — KnownIssue no bloqueante DoD: ídem; M14 inventario no penaliza por almacenar (cozy). Scenarioprogramado.
 - [x] Probar ausencia de 30 días (nada empeora, M94) [M] — CERRADO iter. 4 como REGLAS VERIFICABLES: cultivos_sin_muerte (K.4, timing.json) + sin_decaimiento_por_ausencia (friendship.json, M94) + bonus_retorno (M.5: la ausencia SUMA +5 AO/día tope 150, nunca resta). M94 tiene el sistema anti-FOMO data-driven (iter 1 minimax-m3). Test iter4 verifica las 3 reglas.
-- [x] Probar rareza mínima 0.5% con pity [M] — CERRADO iter. 4: rareza.probabilidad_raro_max 0.05 (tope 5%; la tabla no define <0.5% para no crear frustación cozy) + pity incremento 0.1/fallo cap 2.0 + M34 lo IMPLEMENTA de facto (pez_luna prob 0.03 + pity 80 fallos → peso ×10, captura casi garantizada; testeado test_fishing "pity aumenta chance del pez raro" 0 fallos). Regla global + caso real verificado.
+- [x] Probar rareza mínima 5% con pity [M] — CERRADO iter. 4: rareza.probabilidad_raro_max 0.05 (5%). Checklist corregido 0.5%->5% por GO fundador (meta.json manda).ope 5%; la tabla no define <0.5% para no crear frustación cozy) + pity incremento 0.1/fallo cap 2.0 + M34 lo IMPLEMENTA de facto (pez_luna prob 0.03 + pity 80 fallos → peso ×10, captura casi garantizada; testeado test_fishing "pity aumenta chance del pez raro" 0 fallos). Regla global + caso real verificado.
 - [x] Probar balance con solo rutina mínima (jugador casual) [M]
 
 ## W. Rendimiento y Persistencia
@@ -249,3 +249,11 @@
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, paquete opción 1 M93)
 M93 auditado: SUSTENTADO, 0 degradaciones. 131 [x] / 0 [?] / 3 [ ]. Los 18 archivos de balance citados en los [x] (construction/crafting/farming/fishing/friendship/meta/mining/prices/progression/puzzles/quests/resources/rewards/seals/timing/tools/travel/unlocks .json) TODOS existen en data/balance/. Suite re-corrida POR AGNES: test_balance_m93_iter4 0/0 (EXIT 0). 3 [ ] pendientes. No tocar GLOBAL (flip = director).
+
+
+## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador) — 5 aplicaciones
+- [x] Aplicar H1: sello_1_umbral_ao=1200 valido si dinero_diario es por SESION (anotado en progression.json) [S] — GO fundador 275
+- [x] Aplicar H2: rareza = 5% en checklist (0.5% -> 5%, meta.json manda) [S] — GO fundador 275 (item 201 corregido)
+- [x] Aplicar H3: umbral de amistad = 120 (130 -> 120, friendship.json manda) [S] — GO fundador 275 (item 75 corregido)
+- [x] Aplicar H4: documentar en 03 que fishing rare >70% margen es INTENCIONAL [S] — GO fundador 275
+- [x] Aplicar H5: documentar en 03 que sum >1 son PESOS RELATIVOS, no probabilidades [S] — GO fundador 275

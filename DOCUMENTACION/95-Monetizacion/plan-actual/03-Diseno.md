@@ -109,3 +109,17 @@
 
 ### 10.3 Nota
 Esta definicion es orientativa; la validacion final la hace el asesor fiscal contratado.
+
+
+## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador)
+
+### H16 — Coleccionista = 69.99 (alineado en 3 fuentes)
+- ediciones.json: coleccionista precio_usd = 69.99 (era 59.99).
+- monetizacion.json: coleccionista precio = 69.99 (era 49.99).
+- 03-Diseno.md L11: "Edicion Coleccionista USD 69.99" (ya era 69.99).
+- 03-Diseno.md L33: "+45 USD sobre Deluxe" -> "+35 USD sobre Deluxe" (69.99 = 24.99 + 10 + 35). Aritmetica corregida.
+
+### H17 — IDs canonicos = dlc.json (isla_hielo, pack_aurora)
+- dlc.json: IDs canonicos = isla_hielo (DLC-1 "Mareas del Olvido", 14.99) y pack_aurora (DLC-2 "Decoracion del Faro", 4.99).
+- monetizacion.json: DLC IDs alineados a isla_hielo/pack_aurora (eran expansion_corales/cosmetico_primavera).
+- 03-Diseno.md: DLC-1 = isla_hielo ("Mareas del Olvido"), DLC-2 = pack_aurora ("Decoracion del Faro"). IDs canonicos documentados.

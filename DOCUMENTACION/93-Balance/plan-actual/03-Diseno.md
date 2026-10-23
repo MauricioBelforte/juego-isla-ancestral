@@ -152,3 +152,14 @@ Jugador interactúa con tienda
 | `BALANCE_DESVIO` | Porcentaje desvío por categoría | M105 |
 | `BALANCE_VERSION` | Versión activa | M104 |
 | `PLAYER_ECON` | AO por sesión real, tiempo por actividad | M105 |
+
+## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador)
+
+### H4 — Margen de pesca rare >70% es INTENCIONAL
+Los peces rare (ancestral_laguna 76.0%, ancestral_raiz 76.9%, koi_dorado 73.3%, pez_espada 73.1%, napoleon 72.9%) tienen margen superior al 70% por diseño: los items rare tienen mayor margen para compensar su baja probabilidad de captura. La regla "55-70%" aplica a items comunes/uncommon; los rare tienen excepcion documentada.
+
+### H5 — Probabilidades de pesca son PESOS RELATIVOS, no probabilidades mutuamente exclusivas
+Los valores prob en fishing.json (0.6/0.25/0.1/0.04/0.01) son pesos relativos para seleccion ponderada, NO probabilidades que sumen a 1.0. La suma (7.83) es intencional. Documentado para evitar confusion en auditorias futuras.
+
+### H1 — sello_1_umbral_ao = 1200 es alcanzable si dinero_diario es POR SESION
+dinero_diario_promedio_ao = 80 es por sesion (no por dia). 12 sesiones x 80 = 960 AO + misiones one-time (750 AO) = 1710 AO > 1200 threshold. sello_1_tiempo_horas = 8h = 12 sesiones de ~40 min. Coherente.

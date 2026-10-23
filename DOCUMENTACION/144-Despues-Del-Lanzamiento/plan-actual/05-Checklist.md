@@ -173,3 +173,7 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 101 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+
+## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador) — 1 aplicacion
+- [x] Aplicar H21: tabla de mapeo 9 metricas M144 -> fuentes (Opcion A para V1, 4/9 en M105, 5 en otros modulos) [S] — GO fundador 275

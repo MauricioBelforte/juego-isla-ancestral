@@ -1,11 +1,11 @@
 {
-  "retencion": {
-    "max_copias": 5,
-    "dias_maximos": 30,
-    "comprimir": true
-  },
-  "verificacion": {
-    "checksum_habilitado": true,
-    "integrity_check_al_restaurar": true
-  }
+ "retencion": {
+  "dias_maximos": 30,
+  "comprimir": true,
+  "max_copias_por_categoria": 5
+ },
+ "verificacion": {
+  "checksum_habilitado": true,
+  "integrity_check_al_restaurar": true
+ }
 }

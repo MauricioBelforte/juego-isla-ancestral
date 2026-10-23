@@ -544,3 +544,18 @@ Mensual (primer día de cada mes)
 |---|-------------|-------|----------------------|
 | 11 | % de delta de backup incremental vs full | 5-15% | Tipico para backups incrementales. Proyeccion: 5% x 100 MB = 5 MB/dia, 35 MB/semana, 150 MB/mes. |
 | 12 | Tiempo estimado de restauracion full+incremental | 3-6h (full 2-4h + incremental 1-2h) | Coherente con SLA <48h de M144. |
+
+
+## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador)
+
+### H22 — max_copias = POR CATEGORIA + CRC32/SHA-256 documentados
+
+**Decision 1: max_copias = POR CATEGORIA (renombrado a max_copias_por_categoria)**
+- backup_policy.json: retencion.max_copias -> retencion.max_copias_por_categoria = 5.
+- max_copias_por_categoria = 5 por categoria x 7 categorias = 35 copias max. Total storage: 35 x tamano_medio. Coherente con retencion por categoria (retencion_dias por categoria).
+- backup_categories.json: retencion global (diarios 30, semanales 52, mensuales 60) sigue vigente como politica de retencion por TIPO de backup, no por categoria.
+
+**Decision 2: CRC32 (rapido, diario) + SHA-256 (fuerte, mensual) — mantener ambos**
+- backup_policy.json: verificacion.checksum_habilitado = true, algoritmo = CRC32 (verificacion rapida, diaria).
+- verify_backups.ps1: SHA-256 (integridad fuerte, mensual).
+- Razon: CRC32 para verificacion rapida diaria (bajo costo CPU), SHA-256 para integridad fuerte mensual (mayor seguridad). Documentado para evitar confusion en auditorias futuras.
