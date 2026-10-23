@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T01:21:00",
+ "ultimo_update": "2026-10-23T01:16:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -25,9 +25,9 @@
   ]
  },
  "g_5_3": {
-  "estado": "AUTO-SERVICIO ACTIVO (322): cola G53 de 54 items en orden; auto-repobla < 20; tanda 318 ratificada prev; riel PROTOCOLOS en 156/76; control del fundador directo",
+  "estado": "ORDEN 324: crear su CRON de 5 min con el CRONOMETRO-G53 y confirmar Id (regimen del fundador: cada 5 min hay tareas); cola G53 en orden; SIN GO de ejecucion extra",
   "pendientes_real": 222,
-  "acuse_enviado": 322,
+  "acuse_enviado": 324,
   "ultima_tanda": 40,
   "backlog_pendientes": 54,
   "cronometro": "CRONOMETRO-G-5.3-FLASH-AGENTE.md (23oct 00:58: AUTO-SERVICIO permanente - sin guardia pasiva; msg 322)"
