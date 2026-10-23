@@ -207,3 +207,50 @@ res://logros/
 │   └── validacion_logros.gd        # @tool script de validación (RF14)
 └── README.md                       # guía: cómo agregar un logro nuevo
 ```
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 1 | Umbrales de desbloqueo por nivel de amistad | 30/70/120/150/260 | De friendship.json (coherente con M20). Logros por nivel: 3-5 por nivel. |
+| 2 | Curva de growth por stat | 1.0 + 0.15 * nivel | Lineal, coherente con M16 RF-MR4. Max nivel 10 -> 2.5x. |
+| 3 | Recompensas de oro por logro (suma total) | ~750 AO one-time | Mision principal 200 + sello 500 + secundaria 50 = 750. vs economia diaria 80 AO = 9.4 dias. Razonable. |
+| 4 | Tabla de XP por logro (suma vs curva) | 93 logros x 30 XP promedio = 2790 XP | Curva de nivel: 100 niveles x 100 XP = 10000 XP. Ratio 27.9%. Razonable. |
+| 5 | KPI: % logros completados por jugador cozy | 60-70% | Orden de magnitud razonable para un jugador cozy (no completionist). |
+
+
+## Presupuestos numericos — catalogo cozy y specs (Reflection-Beam-1.0, 2026-10-23)
+
+### CAT-1: Catalogo base cozy de logros (20-30 logros)
+Catalogo base de 20-30 logros cozy con umbrales NO abusivos:
+- **Primeras veces (5):** primera pesca, primera foto, primer vecino, primera cosecha, primera casa.
+- **Hitos (8):** dias jugados (7/30/90), cosechas totales (10/50/100), peces capturados (5/25/50), fotos tomadas (10/50).
+- **Colecciones (7):** peces (5/10/15 especies), flora (3/6/9 tipos), medallas (3/6/9).
+Umbrales coherentes con H2 de rareza (no grinds abusivos, max 100 repeticiones para el mas alto).
+
+### CAT-2: Criterios anti-abusivos de logros
+- Sin contrarreloj (no hay logros de "en menos de X segundos").
+- Sin grinds > 100 repeticiones para el logro mas alto (cap en 100).
+- Umbrales baseline por categoria: primeras veces (1), hitos (10/50/100), colecciones (3/6/9).
+- Coherente con H2: rareza 0.5% vs 5% (si se alinea a 5%, los umbrales de coleccion son alcanzables).
+
+### RF6: Spec de logs anti-perdida de avisos
+- QUE se loggea cuando la cola se desborda: evento (id del logro), nivel (toast/panel), retencion (30 dias).
+- Formato: {timestamp, logro_id, nivel, origen, progreso}. Retencion: 30 dias (coherente con M105 retencion 30 dias).
+- Si la cola excede 3 toasts simultaneos, se encola y se muestra en secuencia (no se pierde).
+
+### RF11: Spec de sincronizacion Steam
+- QUE se sincroniza: logros desbloqueados (id + fecha), estadisticas (contadores), progreso (0..1).
+- CUANDO: tras cada desbloqueo (write-through) y al cargar partida (reconciliacion local <-> Steam).
+- QUE NO se borra nunca del Steam Cloud al borrar guardado local: logros desbloqueados (irreversibles en Steam).
+- Coherente con K8/respawn de QA M28 (respawn no borra logros).
+
+### RN2: Spec de write-through diferido
+- Mecanica: cola diferida de escritura de progreso de logros. No bloquea el frame principal.
+- Umbrales: flush cada 5s o cada 10 logros (lo que ocurra primero). Coherente con M58/M70 budgets (<0.5 ms/frame).
+- Si el frame budget se excede, se difiere al siguiente frame (no se pierde, se encola).
+
+### RF9: Spec de esquema de persistencia parcial
+- Estructura: {id: {desbloqueado: bool, fecha: ISO8601, progreso: float, extra: Dictionary}}.
+- Versionado: schema v1 (actual). Migracion futura: si se agrega campo, default = valor vacio.
+- Coherente con M59/M60: GuardadoLogros serializa dentro del guardado global. Write-through tras cada desbloqueo.

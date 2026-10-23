@@ -361,3 +361,19 @@
 > antes de cualquier cierre.
 
 **Totales:** 185 ítems · Completados: 93 · Pendientes: 89 · No resueltos: 3. (S56b G-5.3-Flash-Agente 2026-10-23, agnes cola N650: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 5 definiciones
+- [x] Definir umbrales numericos de desbloqueo por logro (30/70/120/150/260) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #1
+- [x] Definir curva de growth por stat (1.0 + 0.15 * nivel, max 2.5x) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #2
+- [x] Definir recompensas de oro por logro (~750 AO one-time, 9.4 dias de ingreso) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #3
+- [x] Definir tabla de XP por logro (93 x 30 XP = 2790 XP, 27.9% de 10000) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #4
+- [x] Definir KPI: % logros completados por jugador cozy (60-70%) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
+
+
+## Presupuestos numericos — catalogo cozy y specs (Reflection-Beam-1.0, 2026-10-23) — 6 definiciones
+- [x] Definir catalogo base cozy de logros (20-30 logros: primeras veces, hitos, colecciones) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" CAT-1
+- [x] Definir criterios anti-abusivos de logros (sin contrarreloj, cap 100 repeticiones, umbrales baseline) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" CAT-2
+- [x] Definir spec de logs anti-perdida de avisos (evento, nivel, retencion 30 dias, cola max 3 toasts) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RF6
+- [x] Definir spec de sincronizacion Steam (que se sincroniza, cuando, que NO se borra del Cloud) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RF11
+- [x] Definir spec de write-through diferido (cola diferida, flush 5s/10 logros, no bloquea frame) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RN2
+- [x] Definir spec de esquema de persistencia parcial (estructura {id: {desbloqueado, fecha, progreso, extra}}, versionado) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RF9
