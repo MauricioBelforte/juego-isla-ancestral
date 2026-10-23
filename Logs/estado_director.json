@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:41:00",
+ "ultimo_update": "2026-10-23T04:36:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -519,7 +519,8 @@
    "funcion": "apila 30 tareas de su BACKLOG-MASTER-G53 con puntero apilador_g53_ultimo; su guardia se rompe con trabajo concreto (segunda vez que cae en guardia pasiva)",
    "proximo_disparo": "02:27"
   },
-  "beam_pool": "canal RENUMERADO secuencial 001-276 (estrategia DS-OC); INDICE-CANAL.md cronologico; pool 277-316. Citas viejas resuelven por fecha/titulo o git history"
+  "beam_pool": "canal RENUMERADO secuencial 001-276 (estrategia DS-OC); INDICE-CANAL.md cronologico; pool 277-316. Citas viejas resuelven por fecha/titulo o git history",
+  "guia_numeracion": "publicada en Mensajes entre modelos/GUIA-NUMERACION-CANALES.md + referenciada en AGENTS.md 4.1-b y CRONOMETROS canon (23oct 04:34, orden del fundador: \"que sepan todos de su existencia\")"
  },
  "apilador_beam_ultimo": "258 (apilado x5 FINAL honesto: nicho flipable agotado — M03 inventario-raiz + propuesta pricing-coherente 2.0 + M02 esquema/espejo + M03 doc-check; proximo real depende del fundador)",
  "apilador_g53_ultimo": "336 (CRON F #2 x10: 151-Control-Final, 48-Animacion)"
