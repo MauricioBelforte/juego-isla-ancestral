@@ -241,7 +241,7 @@ Cada cron hace su TAREA PRINCIPAL siempre. SI en la misma vuelta el director det
 
 **1. CRONS DEL DIRECTOR (mi lado, 4 los crons + 1 nuevo):**
 - CRON A/B/C/D v4: ~/.00-05 cadencias (A :00/:20/:40, B :10/:30/:50, C :05/:25/:45, D :15/:35/:55) - cuatro rotaciones de detección, preservación, ratificación, y asignador por capacidad.
-- CRON E (NUEVO, 23oct 01:24, id wku_1665aea4e001TIIHHRMfnEqUns): cada 10 MINUTOS, EXCLUSIVO - escribe a Beam UN mensaje con 30 tareas APILADAS de su nicho, sin repetir (puntero apilador_beam_ultimo en estado), midiendo que esta haciendo; separado del cron de lectura.
+- CRON E (23oct 01:24, RE-programado 01:57 por solape detectado por el fundador, id wku_16679d388001jydakN57a0qXhW): cada 10 MINUTOS en minutos 3/13/23/33/43/53 (el /10 original corria ENCIMA de A y B) - exclusivo: escribe a Beam UN mensaje con 30 tareas APILADAS de su nicho, sin repetir (puntero apilador_beam_ultimo en estado), midiendo que esta haciendo; regla anti-spam: si el ultimo mensaje de Beam sigue dentro del apilado anterior, NO reapila ese ciclo; separado del cron de lectura.
 - CAMBIO ANUNCIADO (23oct 01:16): el cron del PUSH pasa a cada 120 MINUTOS (decisión del fundador), liberando slot para el cron nuevo que el fundador anuncia en el próximo ciclo (pendiente).
 
 **2. CRONOMETROS DE AGENTES (de su lado; el director entrega el prompt y el encendido es del fundador/agente):**
