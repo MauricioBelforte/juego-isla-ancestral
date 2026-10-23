@@ -153,7 +153,8 @@
 ## M. Índice y Miniaturas
 
 - [x] Mantener índice JSON versionado (M59/M60) [M]
-- [x] Generar miniatura de 320 px por foto [M] — FLIP RATIFICADO director 2026-10-22 01:50 (LazyLoad galeria: visibles+descarga, presupuesto 24 - photo_gallery.gd por Beam T26).
+- [x] LazyLoad de galeria (visibles+descarga, presupuesto 24; photo_gallery.gd, Beam T26, flip ratificado 2026-10-22 01:50) — RE-ACOTADO por el director 23oct 21:52: este item cubre SOLO elLazyLoad de la galeria; la GENERACION de la miniatura 320px NO existe en el codigo (photo_service.gd no la genera: Beam 329 D-3.2 + agnes 022) y se separo como item propio pendiente.
+- [ ] Generar miniatura de 320 px por foto (la galeria CONSUME miniaturas pero nadie las genera todavia; Beam 329 D-3.2 + agnes 022; separada del [x] por el director 23oct 21:52).
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] LazyLoad de miniaturas en la galería (solo visibles, M61) [C]
   · implementado: photo_gallery.gd (Control con ScrollContainer+GridContainer, LazyLoad de miniaturas solo visibles, presupuesto MAX 24, recargar()). (Reflection-Beam-1.0, T26, 2026-10-22)
@@ -416,3 +417,4 @@
   M110, WIP sin commitear de otro agente) que revienta toda la suite GdUnit4 (rc=105).
   No se tocó ese archivo (perteneciente a otro módulo en vuelo).
 **Totales:** 137 items · Completados: 60 · Pendientes: 75 · No resueltos: 2. (S62b G-5.3-Flash-Agente 2026-10-23: +4 schema XMP/indicador/orden-galeria; delta 1 con el conteo del peer 59 documentado para revision; re-cuentro top-level del disco)
+**Totales:** 138 ítems · Completados: 60 · Pendientes: 76 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 21:52: re-acotacion del flag miniatura-320px de agnes 022 [x]->[x LazyLoad]+[ ] generacion, con verificacion de codigo de Beam 329 D-3.2; lineas previas quedan como historial.)
