@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T04:01:00",
+ "ultimo_update": "2026-10-23T04:20:00 (23oct)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -579,7 +579,8 @@
   "referencias_canon": "AGENTS.md 4.1-b + CRONOMETROS canon 23oct 06:20",
   "regla_final_beam": "23oct 07:10: los mensajes 001-200 archivados en subcarpetas arch_0001-0100 + arch_0101-0200; los mensajes 201-300 EN RAIZ (90 files); al llegar al 300 se archiva la centena 0201-0300 y el siguiente batch apilador parte de 301",
   " estado_pre_renumeracion": "la carpeta del fundador queda linea: los 90 mensajes del bloque 201-300 visibles en raiz, listos para el barrido",
-  "presupuestos_ii": "23 definiciones de 2da capa montadas por el director en los 03/05 de 9 modulos (23oct 05:55) — Beam las audita"
+  "presupuestos_ii": "23 definiciones de 2da capa montadas por el director en los 03/05 de 9 modulos (23oct 05:55) — Beam las audita",
+  "apilados_pendientes_beam": "estrategia 5-tablas (260) + self-auditoria #8 (288): BEAM pide terminarlo todo y un reporte consolidado por mensajes (307) — la aplicacion de la策略 ya la hizo en parte (279/281 M116/M118/ediciones/etc) y H16 precio queda del fundador (60/70/otro)"
  },
  "apilador_beam_ultimo": "298 (ORDEN TOTAL del fundador: hacer TODAS las colas pendientes de su backlog — 331 x10, 296 x13, 254 presupuestos restantes x27, 260 estrategia x5 tablas, COLA v3 leftover — emision-detalles en el mensaje; reporte por bloque consolidado)",
  "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)",
