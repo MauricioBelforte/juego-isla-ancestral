@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T04:56:30",
+ "ultimo_update": "2026-10-23T04:00:00 (23oct)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -591,5 +591,6 @@
  },
  "agua": {
   "org": "listo"
- }
+ },
+ "nota_cron_c": "CRON C 120-min: preservacion por AUTOR/FRENTE ejecutada; G-5.3 canal excluido (agente apagado por el fundador); los 3 pendientes del dia ratificados (Beam 306/agnes 995/Ling 236)"
 }
