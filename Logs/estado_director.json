@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T04:16:30",
+ "ultimo_update": "2026-10-23T04:25:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -518,6 +518,6 @@
    "proximo_disparo": "02:27"
   }
  },
- "apilador_beam_ultimo": "266 (apilado x30 #7: verificacion de espejo 03-presupuestos <-> 05-items en los 9 modulos — 30 checks de aplicacion, captura gaps tipo H22 antes de que cuesten)",
+ "apilador_beam_ultimo": "260 (GO del fundador: analisis de ESTRATEGIA DE VENTA — 5 tablas: benchmark industria, escenarios ediciones, DLC/bundles, descuentos anio-1, regional pricing; entrega estrategia final para max revenue)",
  "apilador_g53_ultimo": "336 (CRON F #2 x10: 151-Control-Final, 48-Animacion)"
 }
