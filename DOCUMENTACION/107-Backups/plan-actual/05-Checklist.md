@@ -240,7 +240,7 @@
 - [x] Pendientes asignados a dueños [S] — 21 de 25 [?] con dueño (L/M/H secciones); L113/L25-27/L234 pendientes de dueño
 - [x] DoD cumplida: 5 archivos + firma + log [M] — 01-05 plan-actual/ + firma SWE-1.6 + log 1068 (+779 para docs; 778 y 780 no son de M107)
 
-**Totales:** 176 ítems · Completados: 167 · Pendientes: 0 · No resueltos: 9.
+~~**Totales:** 176 ítems · Completados: 167 · Pendientes: 0 · No resueltos: 9.~~
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 5):** la línea decía *"176 items — Completados: 93 — No resueltos: 17 —
@@ -392,3 +392,5 @@ fue **honesta** (delegó lo que no hizo, documentó el sobre-cierre). El módulo
 - Módulo no sellable (§21.6) hasta validación en hardware real — los 9 `[?]` son honestos y con dueño.
 - 06-Plan-Testings.md sigue ausente (recomendable, §14).
 
+
+**Totales:** 176 ítems · Completados: 168 · Pendientes: 0 · No resueltos: 8. (S56b G-5.3-Flash-Agente 2026-10-23: re-cuento top-level del 05; anteriores = historial tachado; sin tocar contenido de otros duenos)

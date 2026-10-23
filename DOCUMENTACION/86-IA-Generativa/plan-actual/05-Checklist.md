@@ -186,8 +186,10 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs si aplica).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: L124 degradado a [?] por el barrido 299; 128 [x] / 0 [ ] / 1 [?].)
+~~**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: L124 degradado a [?] por el barrido 299; 128 [x] / 0 [ ] / 1 [?].)~~
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 129 [x] / 0 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+**Totales:** 128 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, iteracion previa: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)

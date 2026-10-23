@@ -343,7 +343,7 @@
 - `test_logros_m72_statids.gd` → **9 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`**.
 - `test_logros.gd` → **0 fallos, exit 0** (1 `SCRIPT ERROR` ajeno de M39 al boot).
 
-**Totales:** 185 ítems · Completados: 77 · Pendientes: 105 · No resueltos: 3. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la línea decía 31/151/3; conteo real por regex = 77 [x] / 3 [?] / 105 [ ]. Drift de 46 arrastrado desde el Log 1730, donde se flippearon +20 sin actualizar Totales.)
+~~**Totales:** 185 ítems · Completados: 77 · Pendientes: 105 · No resueltos: 3. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la línea decía 31/151/3; conteo real por regex = 77 [x] / 3 [?] / 105 [ ]. Drift de 46 arrastrado desde el Log 1730, donde se flippearon +20 sin actualizar Totales.)~~
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1730):** +20 [ ] -> [x] en el lote B+E de M72 (msg 175).
 > **Catálogo RF1:** `data/logros/logros.json` pasó de 11 a **17 logros** con los campos que faltaban (`nombre_i18n`, `descripcion_i18n`, `icono`, `categoria`, `orden`, `logro_steam_id`) y las **7 categorías** del vocabulario. También se corrigió mojibake heredado (`Guardiá­a` -> `Guardián`).
@@ -351,7 +351,7 @@
 > **RF14:** `validar_catalogo()` suma 3 validaciones nuevas (icono obligatorio, categoría del vocabulario, `logro_steam_id` duplicado).
 > **Dato real detectado por la suite de integridad:** mis primeros 4 `stat_id` (`cultivos_cosechados`, `minerales_extraidos`, `islas_visitadas`, `dias_jugados_total`) **no existen en M71**. Reemplazados por stats reales (`regalos_dados`, `viajes_realizados`, etc.).
 > **Suite nueva** `test_logros_rf1_e.gd` (35 checks, 0 fallos). Las 3 suites de M72 en verde.
-> **Totales:** 31 [x] / 3 [?] / 151 [ ] = 185 items.
+> ~~**Totales:** 31 [x] / 3 [?] / 151 [ ] = 185 items.~~
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 1 [x] / 184 [ ] /
@@ -359,3 +359,5 @@
 > auditoría el 2026-09-14 (sobre-cierre detectado); el 1/185 actual refleja solo
 > RF14/L53 re-verificados. El módulo necesita un pasaje completo de re-verificación
 > antes de cualquier cierre.
+
+**Totales:** 185 ítems · Completados: 93 · Pendientes: 89 · No resueltos: 3. (S56b G-5.3-Flash-Agente 2026-10-23, agnes cola N650: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)

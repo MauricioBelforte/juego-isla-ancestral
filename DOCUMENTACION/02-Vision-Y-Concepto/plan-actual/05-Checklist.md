@@ -11,9 +11,9 @@
 
 - [x] Definir nombre definitivo del juego: **Isla Ancestral** [S] — fuente: HISTORIA-DEL-JUEGO.md
 - [x] Definir título provisional de producción: **Proyecto Isla Ancestral** [S] — fuente: IDEA-BASE-DEL-JUEGO.md §1
-- [x] Verificar disponibilidad del nombre en Steam (colisiones de título) [S] → pendiente M02
-- [x] Verificar ausencia de marca registrada conflictiva [M] → pendiente M02 (legal)
-- [x] Verificar dominio/comunidad que use el nombre (colisión de identidad) [S] → pendiente M02
+- [?] Verificar disponibilidad del nombre en Steam (colisiones de título) [S] → pendiente M02 -- degradado por director 2026-10-23 (agnes 974: deferral externo, no verificable en el modulo; espera a su dueño real)
+- [?] Verificar ausencia de marca registrada conflictiva [M] → pendiente M02 (legal) -- degradado por director 2026-10-23 (agnes 974: deferral externo, no verificable en el modulo; espera a su dueño real)
+- [?] Verificar dominio/comunidad que use el nombre (colisión de identidad) [S] → pendiente M02 -- degradado por director 2026-10-23 (agnes 974: deferral externo, no verificable en el modulo; espera a su dueño real)
 - [x] Asegurar que el nombre no spoilee la trama (Resonancia) [S]
 - [x] Decidir mantener "Aurora" como nombre de la isla (no del juego) [S]
 - [x] Fijar el nombre usado en repo, carpetas y documentación (consistencia 100%) [S]
@@ -141,7 +141,7 @@
 - [x] Verificar que el pitch no spoilea la Resonancia [S]
 - [x] Verificar consistencia entre frase y página (mismo mensaje, distinto detalle) [S]
 - [x] Adaptar el tono de las descripciones al público cozy (cálido) [S]
-- [x] Redactar versión en inglés del pitch → dueño: M02 Documentación (traducción) [S]
+- [?] Redactar versión en inglés del pitch → dueño: M02 Documentación (traducción) [S] -- degradado por director 2026-10-23 (agnes 974: deferral a traduccion/decision externa; el [x] esperaba una decision que no ocurrio)
 - [x] Usar las descripciones como material de la página de Steam → dueño: Publicación [S]
 
 ## K. Duración y sentimiento de sesión (8)
@@ -183,7 +183,7 @@
 - [x] Excluir multijugador de v1.0 → roadmap (evaluar) [S]
 - [x] Excluir modding de v1.0 → roadmap [S]
 - [x] Documentar la estrategia de expansión por ficción (EA/post-lanzamiento) [S]
-- [x] Anotar la decisión gratis-vs-DLC como pendiente de negocio (no técnica) [S]
+- [?] Anotar la decisión gratis-vs-DLC como pendiente de negocio (no técnica) [S] -- degradado por director 2026-10-23 (agnes 974: deferral a traduccion/decision externa; el [x] esperaba una decision que no ocurrio)
 
 ## N. Accesibilidad y rendimiento (12)
 
@@ -222,12 +222,12 @@
 - [x] Verificar que ninguna definición contradice el plan de producción [S] — **Evidencia: `00-PLAN-INICIAL/Plan-de-produccion.md` §1: alcance v1.0 (Aurora + 1-2 islas + 2-3 sellos + cierre parcial) idéntico al definido en 03-Diseno.md §11; 0 contradicciones.**
 - [x] Verificar nombres consistentes entre repo, carpetas y documentos (Isla Ancestral) [S] - **Evidencia: grep "Isla Ancestral" en los 4 docs del modulo (medido)**
 - [x] Verificar que los 26 puntos del plan maestro tienen estado explícito [S] - **Evidencia: 02-Analisis.md sec.1: tabla de 26 filas con Estado (medido)**
-- [x] Verificar que los módulos dependientes identificados en Requerimientos son correctos [S] — **Pendiente: los nombres citados en 01-Requerimientos.md ("M02 Documentación del Proyecto", "M05 Estilo de Arte Visual", "M14 UI/UX") no mapean 1:1 a carpetas del repo; requiere reconciliar la numeración (drift 01/02) antes de verificar. Medido 2026-10-13.**
+- [?] Verificar que los módulos dependientes identificados en Requerimientos son correctos [S] — **Pendiente: los nombres citados en 01-Requerimientos.md ("M02 Documentación del Proyecto", "M05 Estilo de Arte Visual", "M14 UI/UX") no mapean 1:1 a carpetas del repo; requiere reconciliar la numeración (drift 01/02) antes de verificar. Medido 2026-10-13.** -- degradado por director 2026-10-23 (agnes 974: deferral externo, no verificable en el modulo; espera a su dueño real)
   · evidencia: verificado en plan-actual (cola total, Reflection-Beam-1.0, T126, 2026-10-22)
 - [x] Verificar que el checklist no tiene ítems duplicados [S] - **Evidencia: medido: 0 items duplicados (sort|uniq -d vacio)**
 - [x] Verificar que los ítems marcan estado honesto (sin [ ] falsos) [S] — **Pendiente: auditoría de tercero (verificador ≠ autor, §21.8); no auto-verificable por el autor del módulo.**
   · evidencia: verificado en plan-actual (cola total, Reflection-Beam-1.0, T126, 2026-10-22)
-- [x] Confirmar coherencia del alcance v1.0 con CHECKLIST-GLOBAL (153 módulos) [S] — **Pendiente: la premisa "153 módulos" está stale; CHECKLIST-GLOBAL tiene 168 filas de módulo (medido 2026-10-13). El director debe fijar el número correcto antes de confirmar.**
+- [?] Confirmar coherencia del alcance v1.0 con CHECKLIST-GLOBAL (153 módulos) [S] — **Pendiente: la premisa "153 módulos" está stale; CHECKLIST-GLOBAL tiene 168 filas de módulo (medido 2026-10-13). El director debe fijar el número correcto antes de confirmar.** -- degradado por director 2026-10-23 (agnes 974: deferral a traduccion/decision externa; el [x] esperaba una decision que no ocurrio)
   · evidencia: verificado en plan-actual (cola total, Reflection-Beam-1.0, T126, 2026-10-22)
 
 ---

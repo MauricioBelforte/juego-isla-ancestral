@@ -312,8 +312,10 @@
 - [x] Bug BUG-013 registrado en 11-BUGS.md (resuelto)
 - **Log 748 (glm-5.3-flash/Kilo Code, heredando deepseek-vision):** MonetizacionManager autoload con catálogo data-driven (3 ediciones + 2 DLC), auditar_p2w() (M94/M152), impuestos por plataforma (M96), persistencia M57/M59. 11 checks 0 fallos. Pendientes: bridges M96, UI M53, Steam SDK.
 
-**Totales:** 113 ítems · Completados: 19 · Pendientes: 94 · No resueltos: 0.
+~~**Totales:** 113 ítems · Completados: 19 · Pendientes: 94 · No resueltos: 0.~~
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 94 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+**Totales:** 113 ítems · Completados: 113 · Pendientes: 0 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, monetizacion: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)

@@ -341,7 +341,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 items · Completados: 217 · Pendientes: 20 · No resueltos: 2. **Actualizado 2026-10-16 (GLM-5.3-Flash, cierre heredado de step-5-kilocode — encargo del director): +5 flips con UI real e implementación verificada (L201-L204 sliders Ambient/Voice/UI/Cinematic + L210 dropdown dispositivo; test roundtrip extendido 79/0, regresiones audio_config 136/0 + audio_effects 82/0, todo EXIT 0). Los 20 [ ] restantes son dependencias externas (assets de audio M41-M43, hardware real del usuario, i18n pt/subtítulos M87, accesibilidad M58, HRTF bloqueo de motor), los 2 [?] lo son por HRTF/canales (motor).**
+~~**Totales:** 239 items · Completados: 217 · Pendientes: 20 · No resueltos: 2. **Actualizado 2026-10-16 (GLM-5.3-Flash, cierre heredado de step-5-kilocode — encargo del director): +5 flips con UI real e implementación verificada (L201-L204 sliders Ambient/Voice/UI/Cinematic + L210 dropdown dispositivo; test roundtrip extendido 79/0, regresiones audio_config 136/0 + audio_effects 82/0, todo EXIT 0). Los 20 [ ] restantes son dependencias externas (assets de audio M41-M43, hardware real del usuario, i18n pt/subtítulos M87, accesibilidad M58, HRTF bloqueo de motor), los 2 [?] lo son por HRTF/canales (motor).**~~
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].
@@ -416,3 +416,5 @@ código y 0 hits en el diseño. Mismo patrón que L26/L52 de M10.
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, paquete opción 1)
 M91 auditado. Sustentado (0 degradaciones). Suite re-corrida POR AGNES: test_audio_effects_m91 82/0 + test_audio_config 136 checks (0/0 con M41 MusicDirector listo). 207 [x] en disco (scripts/audio/ + data/audio/). HALLAZGO menor: test_audio_config es FLAKY por orden de init M41/M91 — si M41 MusicDirector no está listo, 'default Music 0.7' da 2 FALLOS; con M41 listo = 0/0. No es falso-cierre, es race de init. [?] (1) = M154. No tocar GLOBAL (flip = director).
+
+**Totales:** 239 ítems · Completados: 237 · Pendientes: 0 · No resueltos: 2. (S56b G-5.3-Flash-Agente 2026-10-23, audio: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)

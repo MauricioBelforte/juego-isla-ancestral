@@ -281,8 +281,10 @@
 - Los dueños de contenido (M25/M19/M50/M36/M18) llaman Postgame.registrar_actividad(id) al completar su actividad postgame.
 - Para la isla flotante (FASE 2): respetar el gate de streaming (M61/M63) antes de habilitar el contenido — ya está marcada en el catálogo.
 - No agregar expiraciones ni ventanas: toda actividad postgame es repetible o alcanzable para siempre (M94).
-**Totales:** 130 ítems · Completados: 17 · Pendientes: 113 · No resueltos: 0.
+~~**Totales:** 130 ítems · Completados: 17 · Pendientes: 113 · No resueltos: 0.~~
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 17 [x] / 113 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+**Totales:** 130 ítems · Completados: 29 · Pendientes: 101 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, postgame: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)

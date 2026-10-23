@@ -139,7 +139,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 106 ítems · Completados: 88 · Pendientes: 2 · No resueltos: 16.
+~~**Totales:** 106 ítems · Completados: 88 · Pendientes: 2 · No resueltos: 16.~~
 
 ---
 
@@ -185,3 +185,5 @@ FIX aplicado en `island_generator.gd::_get_biome`: el check de `snow` (h > 0.8×
 **Nota:** la implementación (ruido, asincronía, medición) es del prototipo M1 y M61; la especificación queda cerrada aquí.
 
 - [x] Agua clara pisable (SHALLOW_WATER 30) y agua profunda en el borde [M] (2026-08-29)
+
+**Totales:** 106 ítems · Completados: 90 · Pendientes: 0 · No resueltos: 16. (S56b G-5.3-Flash-Agente 2026-10-23: re-cuento top-level del 05; anteriores = historial tachado; sin tocar contenido de otros duenos)
