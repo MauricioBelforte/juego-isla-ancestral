@@ -79,3 +79,13 @@
 - Todo POI narrativo tiene ≥ 2 rutas accesibles (subir/margen/puente alternativo).
 - La grieta se abre con progresión, pero la isla nunca queda dividida sin alternativa.
 - Ninguna formación se genera sobre el puerto/granja/sitios de base.
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 16 | Presupuesto de poligonos por chunk + total | 50k-100k por chunk, 500k-1M por escena | Coherente con Godot 4.x y presupuesto <0.5 ms/frame de M70. |
+| 17 | Ratios de reduccion de LODs por nivel | LOD0 100%, LOD1 50%, LOD2 25%, LOD3 12.5% | Reduccion progresiva (factor 0.5 por nivel). |
+| 18 | Pesos de texturas del terreno (MB por material) | 2-4 MB por material, 8-12 materiales por bioma | Total 16-48 MB por bioma. Coherente con presupuesto de VRAM. |
+| 19 | Posicion de spawn del jugador | (0, get_height(0,0)+1, 0) en centro de la isla | Coherente con biomas (costa 0-15, spawn en costa). |
+| 20 | Tiempos de creacion/regeneracion del terreno | Creacion 2-5s, regeneracion 1-3s | Presupuesto de carga de escena: <10s total. |

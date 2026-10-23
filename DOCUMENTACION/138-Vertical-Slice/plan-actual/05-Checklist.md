@@ -10,8 +10,8 @@
 - [x] Definir esquina de Aurora como zona del slice [M] — 03-Diseno "Zona del slice": cuadrante costero sudeste del mapa raiz (no requiere isla nueva), ancla en escalera del muelle (2026-10-22)
 - [x] Definir geografía: playa, bosque, prado, costa [M] — 03-Diseno: 4 sub-zonas + muelle roto (Playa de Finneas, prado con 3-4 talables, bosque franja oeste, costa/muelle; 2026-10-22)
 - [x] Definir 3-5 puntos de interés (casa, ruina, muelle roto, arboleda, altar) [M] — 03-Diseno "Zona del slice": 5 POI canon (casa de Finneas, prado talable, muelle roto, ruina del atalaya, altar menor) (2026-10-22 S26: los definidos en S24 cubren el item literal)
-- [ ] Definir vegetación con MultiMesh (M50, sin rebalsar draw calls) [C]
-- [ ] Definir iluminación de la zona dentro del budget render (M49/M61) [C]
+- [x] Definir vegetación con MultiMesh (M50, sin rebalsar draw calls) [C] — 80-200-400 instancias por zona determinista M29; <= 3 draws por zona (<= 18 total, dentro del L5 de Beam) — 03 sec S60 (2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
+- [x] Definir iluminación de la zona dentro del budget render (M49/M61) [C] — <= 4 dinamicas + 1 directional (sombra 2048) + 1 Environment; 0 sombras extra; pings emissive en vez de luces — 03 sec S60 (2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
 
 ## B. Recurso y Herramienta (RF3)
 
@@ -100,15 +100,15 @@
 - [x] Definir resaltado del faro y del NPC al inicio [S] — 03-Diseno Guiado: faro ambiente 2 s + Finneas outline de mision al spawn (2026-10-22 S34)
 - [x] Definir ocultamiento del guiado tras la primera acción [S] — 03-Diseno Guiado: off al cerrar paso 1; vuelve a los 60 s de inactividad (solo outline) (2026-10-22 S34)
 - [x] Definir opción de desactivar el guiado (accesibilidad M58) [S] — 03-Diseno Guiado: toggle en AJUSTES MINIMOS; outline de interactivo L76 se conserva (2026-10-22 S34)
-- [ ] Definir test: tester nuevo completa el slice sin instrucciones [C]
+- [x] Definir test: tester nuevo completa el slice sin instrucciones [C] — protocolo 4 pasos/metricas (a-foto <=3 min, b-Finneas <=6 min, c-mision <=25 min, d-0 softlocks); umbrales >= 80%; fallbacks L99/L100 (2026-10-23 S60) — 03 sec S60 (2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
 
 ## M. Guardado Full (RF9)
 
-- [ ] Definir serialización completa de la zona (chunks modificados) [C]
+- [x] Definir serialización completa de la zona (chunks modificados) [C] — JSON por chunk (edits/semillas/actores) sobre el binario IAVX1 de M60; provider nuevo vslice_zone_provider con el contrato M59-M60 — 03 sec "Serializacion, assets-pipeline y cierre" (S64 2026-10-23 G-5.3-Flash-Agente, apilado CRON F #1)
 - [x] Definir serialización de NPC (posición + estado de misión) [M] — 03-Diseno: npc_manager YA es provider registrado (verificado disco S46); usa su seccion; flags M21 van por save v2 S28 (2026-10-23 S46)
 - [x] Definir serialización de puzzle (flags) [S] — 03-Diseno: estado_discos (2 ints) + puzzle_resuelto (bool) en save v2; al cargar resuelto = reja abierta + discos en solucion canonica (idempotente) (2026-10-22 S32)
 - [x] Definir validación de schema_version con migración futura [M] — 03-Diseno: version 2 explicita; <2 migracion v1 (M60), >2 rechazo legible sin crash, ==2 directa; migracion futura solo aditiva; validacion en el loader unico M60 (2026-10-22 S32; base S28)
-- [ ] Definir test de 10 ciclos guardar→cargar con 0 pérdidas [C]
+- [x] Definir test de 10 ciclos guardar→cargar con 0 pérdidas [C] — qa headless: 10 ciclos (save -> mutate 3 campos -> load -> comparar 3 + hash resto); MUTACIONES jugador/arbol/preset; 10/10 con 0 perdidas; output PASS/FAIL por ciclo  — 03 sec "Serializacion, assets-pipeline y cierre" (S64 2026-10-23 G-5.3-Flash-Agente, apilado CRON F #1)
 
 ## N. Rendimiento (RF15)
 
@@ -174,9 +174,9 @@
 ## U. Pipeline de Assets (M108/M46/M47)
 
 - [x] Definir que los modelos del slice pasen el pipeline estándar [M] — 03-Diseno: mismos presets/tamanos del pipeline M47, sin formato especial del slice (referencia al plan-actual de M47) (2026-10-23 S46)
-- [ ] Definir texturas con los tamaños del preset (M47) [M]
-- [ ] Definir animaciones importadas con el formato del proyecto [M]
-- [ ] Definir audio importado con compresión del proyecto [M]
+- [x] Definir texturas con los tamaños del preset (M47) [M] — 1024 ilustraciones/capturas, 256 iconos, 512 decals huellas, 128 particulas; sin tamanos custom — 03 sec "Serializacion, assets-pipeline y cierre" (S64 2026-10-23 G-5.3-Flash-Agente, apilado CRON F #1)
+- [x] Definir animaciones importadas con el formato del proyecto [M] — convenciones M48 sec 5 (S47): FBX por actor, T-pose unica, 30 fps, anim_ naming, lib por actor; validador de keyframes — 03 sec "Serializacion, assets-pipeline y cierre" (S64 2026-10-23 G-5.3-Flash-Agente, apilado CRON F #1)
+- [x] Definir audio importado con compresión del proyecto [M] — OGG Vorbis q6 musica, WAV 16-bit SFX < 1 s, OGG loops ambiente; registro de licencia por archivo (audit M91 Bateria 5) — 03 sec "Serializacion, assets-pipeline y cierre" (S64 2026-10-23 G-5.3-Flash-Agente, apilado CRON F #1)
 - [x] Definir que los VFX usen el pool de materiales (M47) [S] — ya definido S30 (pool 3 emitters reciclabes); flip de consistencia con cita (2026-10-23 S46)
 
 ## V. Feedback de la Dema (feedback externo)
@@ -214,15 +214,16 @@
 ## Z. Cierre y Transición a Pre-Alpha (M139)
 
 - [x] Definir tag git `vslice-v1` [S] — 03-Diseno Cierre: tag anotado SOLO tras GONOGO del usuario (L148); el agente deja el comando en el log, NUNCA push/tag propio (2026-10-23 S38)
-- [ ] Definir empaquetado de la demo (M116/M117) [M]
-- [ ] Definir actualización del presupuesto con datos reales (M134) [M]
+- [x] Definir empaquetado de la demo (M116/M117) [M] — export preset vslice_demo_windows x64 (M116); excluye .blend/qa_*/validate_* (dev-only); diff del export log auditado — 03 sec "Serializacion, assets-pipeline y cierre" (S64 2026-10-23 G-5.3-Flash-Agente, apilado CRON F #1)
+- [x] Definir actualización del presupuesto con datos reales (M134) [M] — REPORTE-FPS (TC13) alimenta render; zip/build alimenta tamano; p95 de carga alimenta UX; template M134 se rellena post-integracion (NO antes: seria invencion) — 03 sec "Serializacion, assets-pipeline y cierre" (S64 2026-10-23 G-5.3-Flash-Agente, apilado CRON F #1)
 - [x] Definir lista de sistemas a escalar en Pre-Alpha (M139) [M]
-- [ ] Definir comunicar al usuario la decisión y próximo hito [S]
+- [x] Definir comunicar al usuario la decisión y próximo hito [S] — canal del USUARIO directo (PLAYTEST.md + 05 leidos por el fundador); contenido: GO/NO-GO + hito M139 + fecha + 5 flags resueltos; el consolidado agente es APOYO no sustituto (L148) — 03 sec "Serializacion, assets-pipeline y cierre" (S64 2026-10-23 G-5.3-Flash-Agente, apilado CRON F #1)
 
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 120 · Pendientes: 11 · No resueltos: 0.
+~~**Totales:** 131 ítems · Completados: 123 · Pendientes: 8 · No resueltos: 0.~~
+**Totales:** 131 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 3. (S64 apilado CRON F #1: +8 definiciones serializacion/assets/cierre; los 3 [?] auditoria Beam L122/L138/L152 quedan por EJECUCION del artefacto en fase playtest S35+) (S60 G-5.3 2026-10-23: 120/8/0 mi conteo; auditoria Beam puso [?] a L122/L138/L152 por EJECUCION pendiente — la definicion S38 existe en 03; disputa preservada por commit e084b95) (2026-10-23)
 > **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 3 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 117 [x] / 11 [ ] / 3 [?] = 131.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**

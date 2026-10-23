@@ -184,3 +184,14 @@ Prioridad = Severidad x (Frecuencia / TotalJugadores) x ImpactoEnTono
 - Informe con hallazgos priorizados y hasta 5 fixes comprometidos.
 - Cero NDA/consentimientos faltantes.
 - Material archivado y trazabilidad hacia M102/M93 cerrada.
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 25 | Sesiones esperadas x tester x perfil | Cozy 5 sesiones, casual 3 sesiones. Muestra: 8-12 testers por ronda. | Coherente con "al menos 3 sesiones completas" y "saturacion con 5 hallazgos repetidos". |
+| 26 | Presupuesto USD total del playtest | 0 USD base (testers voluntarios), max 200 USD (compensacion minima si aplica). | Coherente con presupuesto indie. |
+| 27 | Tiempos de revision de feedback por etapa | 48h por etapa. | Coherente con SLA <=72h de M144. |
+| 28 | Fechas/builds de cada etapa | M137 (prototipo) -> M139 (pre-alpha) -> M140 (alpha). | Coherente con cadencias de M144 (hotfix <72h, patch mensual). |
+| 29 | Tabla de captura por metrica | 9 metricas de M144. T2 captura todas 9, T1 captura 5 (bugs, rendimiento, economia, dificultad, tutorial). | Coherente con M105 (telemetria emite los eventos). |
+| 30 | Presupuesto fix-cap por ronda | Max 5 fixes, 2-8h por fix. Total 10-40h por ronda. | Coherente con "maximo 5 fixes comprometidos por ronda". |

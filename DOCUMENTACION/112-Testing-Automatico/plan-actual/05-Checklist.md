@@ -363,3 +363,10 @@ L99/L100/L256 (cobertura NO MEDIBLE — tooling GdUnit4), L125/L259 (620.1s), L1
 - Ver Log 1903 para detalle completo.
 
 **Firma:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) / OpenCode — 2026-10-16.
+
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 4 definiciones
+- [x] Definir conteo objetivo de tests totales (500 tests, 10 por modulo x 50 modulos) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #21
+- [x] Definir cobertura numerica objetivo (80% de modulos, 40 de 50) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #22
+- [x] Definir distribucion de checks por suite (piso 5, max 50, desbalance flaggeado) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #23
+- [x] Definir presupuesto de flakes aceptables (max 2/semana, alerta 3+) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #24

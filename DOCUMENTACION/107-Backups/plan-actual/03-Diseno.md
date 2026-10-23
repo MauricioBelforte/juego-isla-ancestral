@@ -536,3 +536,11 @@ Mensual (primer día de cada mes)
 - Procedimientos claros y accesibles
 - Plan de recuperación actualizado
 - Logs de restauración para auditoría
+
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 11 | % de delta de backup incremental vs full | 5-15% | Tipico para backups incrementales. Proyeccion: 5% x 100 MB = 5 MB/dia, 35 MB/semana, 150 MB/mes. |
+| 12 | Tiempo estimado de restauracion full+incremental | 3-6h (full 2-4h + incremental 1-2h) | Coherente con SLA <48h de M144. |

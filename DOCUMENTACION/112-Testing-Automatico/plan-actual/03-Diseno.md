@@ -142,3 +142,12 @@ coverage_extra="res://tests/unit,res://tests/integration"
 ```
 
 _Nota: los parámetros exactos dependen del framework elegido en implementación; este archivo es la plantilla base para GUT v9+._
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 21 | Conteo objetivo de tests totales | 500 tests (10 por modulo x 50 modulos) | Coherente con 475 declarados en el design doc. |
+| 22 | Cobertura numerica objetivo | 80% de modulos cubiertos (40 de 50) | Gaps: modulos sin tests identificados. |
+| 23 | Distribucion de checks por suite | Piso minimo 5 checks por archivo, maximo 50 | Desbalance flaggeado si >50 o <10. |
+| 24 | Presupuesto de flakes aceptables | Max 2 flakes por semana (rc no-deterministico) | Umbral de alerta: 3+ flakes. |

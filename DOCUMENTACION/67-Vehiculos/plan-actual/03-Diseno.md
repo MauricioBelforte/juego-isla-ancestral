@@ -112,3 +112,62 @@ jugador cerca de un muelle (M28)
 | M50 | Colisiones con vegetación |
 | M45 | Materiales de pintura |
 | M108/M118 | Importación y validación en CI |
+
+## Protocolo de gating hidraulico y colisiones (S61 — G-5.3-Flash-Agente, 2026-10-23; apilado CRON F, definiciones en papel)
+
+**Aguas poco profundas (L45) — umbral de aviso y escape:**
+- El vehiculo acuatico sondea profundidad bajo la quilla (raycast a la
+  malla M50, cada 6 frames — mismo ciclo del throttle RF4 de M70).
+- UMBRAL de AVISO: profundidad < 2.0 m (60% del draft): toast M53
+  "Aguas poco profundas" + SFX de roce M43 cada 3 s (anti-spam).
+- MECANICA de ESCAPE: a < 1.2 m el motor baja el empuje al 40% (evita
+  encallar con velocidad); al encallar (profundidad < 0.8 m y velocidad
+  ~0 el vehiculo queda en reposo): reversa automatica a 25% durante 2 s
+  y luego control devuelto al jugador. 0 softlocks por encallamiento
+  (el nudge de M70 P6 aplica tambien).
+
+**Colisiones con islas/rocas/vegetacion (L44/L90) — tipos de respuesta:**
+- CAPAS fisicas: isla/roca = collision_layer terreno ( sólido);
+  vegetacion alta = area segura (no colisiona con el casco, auto-normal
+  del L53); vegetacion baja = colision suave.
+- RESPUESTA por tipo/velocidad: (a) roca/isla: rebote elastico 0.4 +
+  dano estructural proporcional (v > 8 m/s => dano x 2, v > 12 => dano x 3
+  y detencion total); (b) vegetacion baja: rozamiento (reduce 20%
+  velocidad, sin rebote, sfx de rama M43); (c) otro vehiculo: rebote
+  simetrico 0.5 semillas por velocidad relativa.
+- MARGEN por velocidad: el casco tiene CollisionShape inflado 0.3 m
+  (margen); a > 10 m/s el margen sube a 0.5 m (el contacto detecta antes
+  para que la respuesta no atraviese en el mismo tick — tunneling
+  prevention con continuous collision en el casco del vehiculo).
+- UMBRAL: 0 atravesamientos de isla/roca en 100 colisiones de test
+  (script deagnostico con semilla M29 por caso); 0 tunneling a > 10 m/s.
+
+## Protocolo de gating hidraulico y colisiones (S61 — G-5.3-Flash-Agente, 2026-10-23; apilado CRON F, definiciones en papel)
+
+**Aguas poco profundas (L45) — umbral de aviso y escape:**
+- El vehiculo acuatico sondea profundidad bajo la quilla (raycast a la
+  malla M50, cada 6 frames — mismo ciclo del throttle RF4 de M70).
+- UMBRAL de AVISO: profundidad < 2.0 m (60% del draft): toast M53
+  "Aguas poco profundas" + SFX de roce M43 cada 3 s (anti-spam).
+- MECANICA de ESCAPE: a < 1.2 m el motor baja el empuje al 40% (evita
+  encallar con velocidad); al encallar (profundidad < 0.8 m y velocidad
+  ~0 el vehiculo queda en reposo): reversa automatica a 25% durante 2 s
+  y luego control devuelto al jugador. 0 softlocks por encallamiento
+  (el nudge de M70 P6 aplica tambien).
+
+**Colisiones con islas/rocas/vegetacion (L44/L90) — tipos de respuesta:**
+- CAPAS fisicas: isla/roca = collision_layer terreno ( solido- sólido);
+  vegetacion alta = area segura (no colisiona con el casco, auto-normal
+  del L53); vegetacion baja = colision suave.
+- RESPUESTA por tipo/velocidad: (a) roca/isla: rebote elastico 0.4 +
+  dano estructural proporcional (v > 8 m/s => dano x 2, v > 12 => dano x 3
+  y detencion total); (b) vegetacion baja: rozamiento (reduce 20%
+  velocidad, sin rebote, sfx de rama M43); (c) otro vehiculo: rebote
+  simetrico 0.5 semillas por velocidad relativa.
+- MARGEN por velocidad: el casco tiene CollisionShape inflado 0.3 m
+  (margen); a > 10 m/s el margen sube a 0.5 m (el contacto detecta antes
+  para que la respuesta no atraviese en el mismo tick — tunneling
+  prevention con continuous collision en el casco del vehiculo).
+- UMBRAL: 0 atravesamientos de isla/roca en 100 colisiones de test
+  (script deagnostico con semilla M29 por caso); 0 tunneling a > 10 m/s.
+

@@ -364,3 +364,11 @@ user://saves/
 ### RollbackManager
 - RollbackManager con restore_previous_version().
 - Restaurar version anterior.
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 13 | % de peso del parche promedio sobre tamano base | 5-15% | Coherente con 5GB de M116. Parche = 250-750 MB. |
+| 14 | % de cobertura del simulador de update | 80% de los flujos de update | Coherente con lanes de M112. |
+| 15 | Timeline de anuncios pre-patch/patch-day/post-patch | T-30 freeze, T-14 envio, T-7 avisos, dia 0 anuncio, D+1-D+7 monitorizacion | Coherente con M99 runbook. |

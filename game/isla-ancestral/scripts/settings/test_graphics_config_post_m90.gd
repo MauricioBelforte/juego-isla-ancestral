@@ -11,12 +11,21 @@ extends SceneTree
 
 const _GC := preload("res://scripts/settings/graphics_config.gd")
 
+# Piso de checks MEDIDO en verde el 2026-10-22 (57 checks, EXIT 0, 0 SCRIPT ERROR).
+# Un SCRIPT ERROR de runtime aborta la funcion donde ocurre y los _check() que no
+# corren NO fallan: sin piso, la corrida publica "0 fallos" con menos checks.
+const CHECKS_MINIMOS: int = 57
+
 var _checks: int = 0
 var _fallos: int = 0
+var _terminado: bool = false
 
 
 func _init() -> void:
+	# Dos diferidas SEPARADAS: si _run() aborta por un SCRIPT ERROR, _summary()
+	# corre igual y el proceso termina con exit != 0 en vez de colgarse.
 	call_deferred("_run")
+	call_deferred("_summary")
 
 
 func _check(m: String, c: bool) -> void:
@@ -173,6 +182,16 @@ func _run() -> void:
 
 
 func _fin() -> void:
+	_terminado = true
+
+
+func _summary() -> void:
+	if not _terminado:
+		_fallos += 1
+		print("FAIL el cuerpo del test NO termino (posible SCRIPT ERROR que aborto _run())")
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("FAIL solo %d checks ejecutados (minimo %d medido en verde)" % [_checks, CHECKS_MINIMOS])
 	print("=== [M90] Resultado: %d checks, %d fallos ===" % [_checks, _fallos])
 	if _fallos == 0:
 		print("[M90 post] OK")

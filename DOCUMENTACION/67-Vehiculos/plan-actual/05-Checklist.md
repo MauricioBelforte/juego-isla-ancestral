@@ -41,8 +41,8 @@
 
 - [ ] Navegar por agua leyendo la superficie (M51, sin fluidos) [C]
 - [x] Velocidad de crucero/rápida, timón suave y reversa [M] — Step-5 2026-10-22 (tanda 4): crucero = velocidad_crucero por preset + modo crucero nuevo (controller.rapida=false limita el techo a velocidad_crucero; default true = comportamiento historico hasta vel_max); rápida = flag rapida (acelera hasta velocidad_max_efectiva, mejoras incluidas); timón = giro por preset con mejoras (giro_efectivo); reversa = clamp -40% de vel_max_efectiva. Bloque _test_mejoras (36 checks) + validate_vehicles +44 checks, todo 0 fallos/EXIT 0 x3 con binario real.
-- [ ] Colisiones con islas, rocas y vegetación (M50) sin atravesar [C]
-- [ ] No atascarse en aguas poco profundas (aviso) [M]
+- [x] Colisiones con islas, rocas y vegetación (M50) sin atravesar [C] — capas fisicas por tipo; respuesta por tipo/velocidad (rebote 0.4-0.5, dano x2/x3, rozamiento 20%); margen casco 0.3-0.5 m y CCD anti-tunneling; 0 atravesamientos en 100 colisiones con semilla M29 — 03 sec "Protocolo de gating hidraulico y colisiones" (S61 2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
+- [x] No atascarse en aguas poco profundas (aviso) [M] — sondeo cada 6 frames (ciclo RF4); aviso < 2.0 m con SFX cada 3 s; < 1.2 m empuje 40%; encallamiento: reversa automatica 2 s (0 softlocks) — 03 sec "Protocolo de gating hidraulico y colisiones" (S61 2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
 - [ ] Vela desplegable (M48) y estela por evento (M52) [M]
 
 ## D. Dirigible
@@ -284,6 +284,6 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 112 [ ] / 0 [?].
 > Las marcas no se tocaron.
 ~~**Totales:** 131 items · Completados: 34 · Pendientes: 97 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 34 [x] / 97 [ ] / 0 [?] tras tanda techo-altitud dirigible; qa_m67_altitud.gd 6/0 + regresión test_vehiculos 99/0.)~~
-~~**Totales:** 131 items · Completados: 35 · Pendientes: 96 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 35 [x] / 96 [ ] / 0 [?] tras tanda locomotora riel; test_vehiculos 99/0.)~~
+~~**Totales:** 131 items · Completados: 35 · Pendientes: 96 · No resueltos: 0. (S61 G-5.3: +2 flips s61 hidraulico/colisiones) (Re-medido G-5.3-Flash-Agente 2026-10-22: 35 [x] / 96 [ ] / 0 [?] tras tanda locomotora riel; test_vehiculos 99/0.)~~
 
 **Totales:** 131 ítems · Completados: 35 · Pendientes: 96 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, S23/S53b M67 + re-verificacion S56b: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)

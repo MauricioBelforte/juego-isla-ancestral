@@ -216,3 +216,11 @@ Re-verificación empírica 2026-09-19 (grep global en `game/`): **0 referencias*
 - **Pendiente (no bloquea):** evaluar `fog_density` de `Env_1` (main_island.tscn) — a 0.001
   la promesa de diseño "el horizonte SIEMPRE tiene la isla" queda tapada a 1.3-3 km (M09/M49,
   decisión de diseño).
+
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 5 definiciones
+- [x] Definir presupuesto de poligonos por chunk + total (50k-100k/chunk, 500k-1M/escena) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #16
+- [x] Definir ratios de reduccion de LODs por nivel (100/50/25/12.5%) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #17
+- [x] Definir pesos de texturas del terreno (2-4 MB/material, 8-12 materiales/bioma, 16-48 MB/bioma) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #18
+- [x] Definir posicion de spawn del jugador ((0, get_height(0,0)+1, 0) en centro) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #19
+- [x] Definir tiempos de creacion/regeneracion del terreno (2-5s creacion, 1-3s regen, <10s total) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #20

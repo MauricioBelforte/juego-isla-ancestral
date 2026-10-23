@@ -244,3 +244,12 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 186 [x] / 0 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 5 definiciones
+- [x] Definir sesiones esperadas x tester x perfil (cozy 5, casual 3, muestra 8-12) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #25
+- [x] Definir presupuesto USD total del playtest (0 base, max 200 USD) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #26
+- [x] Definir tiempos de revision de feedback por etapa (48h, SLA <=72h) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #27
+- [x] Definir fechas/builds de cada etapa (M137 -> M139 -> M140, cadencias M144) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #28
+- [x] Definir tabla de captura por metrica (9 metricas M144, T2 todas, T1 cinco) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #29
+- [x] Definir presupuesto fix-cap por ronda (max 5 fixes, 2-8h/fix, 10-40h/ronda) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #30

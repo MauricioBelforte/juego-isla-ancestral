@@ -373,3 +373,11 @@ cerrar la app perdía `session_ended`/`session_duration`.
 (guardián de bloques + piso MEDIDO 17, probado en rojo). Hermanas iter. 5/6/7
 (10/11/27) + base (16) sin regresión. **Higiene:** `Total de ítems` 165 -> 162
 (medido; era una cifra escrita a mano, no medida).
+
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 5 definiciones
+- [x] Definir eventos/segundo maximos por sesion (10 eventos/s) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6
+- [x] Definir payload promedio bytes/evento (256 bytes, 20.48 kbps) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #7
+- [x] Definir ventana de retencion de datos (30 dias x 100 eventos = 3000, 768 KB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #8
+- [x] Definir porcentajes de muestreo anonimo (100% clave, 10% rutinario) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #9
+- [x] Definir frecuencia de flush del buffer (30s o 100 eventos) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #10

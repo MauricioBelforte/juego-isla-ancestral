@@ -107,7 +107,7 @@
 59. Runtime test de M33-Agricultura: plantar/crecer/cosechar (ciclo de días) — 10 [C]
 60. Runtime test de M34-Pesca: fase de captura sintética — 10 [C]
 61. Runtime test de M35-Minería: nodo/corazón/drops — 10 [C]
-62. Runtime test de M28-Viajes: ruta/fast-travel gating — 10 [C]
+62. Runtime test de M28-Viajes: ruta/fast-travel gating — [x] Hy3 (msg 330, 2026-10-22: 59 checks/0 fallos Godot 4.7.2 headless EXIT 0; test_island_travel_guard_hy3.gd sin commitear; guardian anti-falso-verde RED probado 60/1 EXIT1; Log 2147) — 10 [C]
 63. Runtime test de M29/M30/M31: reloj → calendario → ciclo día/noche encadenados — 10 [C]
 64. Runtime test del IMPUESTOR de M09 (elige cota por AABB) — 8 [C]
 65. Runtime test de regeneración de chunks M10 (AABB invalidation) — 10 [C]

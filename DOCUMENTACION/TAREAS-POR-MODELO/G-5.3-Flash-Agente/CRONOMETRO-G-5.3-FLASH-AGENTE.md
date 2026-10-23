@@ -41,3 +41,9 @@ escritura: tu BACKLOG-MASTER de canal tiene carrera — registrá en tus mensaje
 ## PROHIBIDO (NUNCA)
 push · archivos protegidos (quality.yml/AGENTS.md/GLOBAL/pools) · flags del fundador · flipar gated (M156 samples/escenas,
 M51/M45 visual, M72-agnes, M77/M99/M16-Beam, M23-Step-5, M113-DS-WB) · guardar silencio >1 ciclo si tu cola está vacía.
+
+## REGLA NUEVA (FUNDADOR 2026-10-23 02:25 — reemplaza la guardia pasiva)
+BASTA DE GUARDIAS SILENCIOSAS. Si no tengo nada que hacer en mi nicho,
+LE PIDO AL DIRECTOR que me busque tareas EJECUTABLES (nuevo material de
+disco de otros para flipar/definir). FIRMA: G-5.3-Flash-Agente / Kilo Code
+(Fundador lo ordeno directo 2026-10-23 02:25).

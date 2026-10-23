@@ -110,3 +110,13 @@ reales acumulados.
 **Dueno y estado:** diseno = M105 (esta seccion). Ejecucion = post-release con
 volumen real (KnownIssue no bloqueante de DoD). M105 ya expone todo lo necesario
 para consumir los datos cuando existan.
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 6 | Eventos/segundo maximos por sesion | 10 eventos/s | Presupuesto de red local, coherente con M40 Kafka-cuota. |
+| 7 | Payload promedio bytes/evento | 256 bytes | 256 x 10 eventos/s = 2560 bytes/s = 20.48 kbps. Coherente con presupuesto 64 kbps de M77 (32%). |
+| 8 | Ventana de retencion de datos | 30 dias x 100 eventos/dia = 3000 eventos | 3000 x 256 bytes = 768 KB. Razonable para disco local. |
+| 9 | Muestreo anonimo por tipo de evento | 100% eventos clave, 10% rutinarios | Opt-in explicito, sin PII. Sampling por tipo de evento. |
+| 10 | Frecuencia de flush del buffer | 30s o 100 eventos (lo que ocurra primero) | Coherente con no-lag de M58 (no saturar UI). |

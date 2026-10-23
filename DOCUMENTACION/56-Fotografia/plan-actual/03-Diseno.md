@@ -160,3 +160,61 @@ Sin funciones de red/social (M97 las definira si el juego las quiere; el
 slice solo cumple "compartir" local). Sin accesos a carpetas del sistema fue
 del user:// del proyecto.
 
+## S61 — apilado CRON F (G-5.3-Flash-Agente, 2026-10-23): camara-agua, escenas-test, zoom/FOV, fauna snapshot, guard gated
+
+**Colision camara-agua (M51) — criterio:** la camara del modo foto NUNCA
+baja del plano de agua: clamp de Y >= nivel_agua + 0.3 m (margen de
+transicion 0.3 m para no romper la superficie visual); al acercarse al
+tope de buceo (M51 -40 m) la camara asciende con lerp de 0.5 s; transition
+agua->aire con splash de particulas M52 al cruzar el plano (uno por cruce,
+anti-spam 0.5 s). Sondeo raycast hacia abajo para detectar el plano real
+(no el nominal) por ola.
+
+**Protocolo de pruebas en escenas (interiores M18/M25, playa, densas):**
+- ESCENAS: interior casa M18 (poca luz, espacio reducido), interior templo
+  M25 (piedra, contraluz), PLAYA (sol alto + reflejo agua), ZONA Densa
+  (bosque M50, oclusiones multiples) — las 4 agregadas al plan de test
+  automatico P8 (consola) + frame-time (P7).
+- CHECKS de legibilidad por escena: (a) HUD legible (contraste >= 4.5:1
+  con fondo), (b) encuadre de tercios visible en fondo claro/oscuro,
+  (c) zoom 0.5x-8x fluio sin clip de camara en el WS de la escena,
+  (d) 0 z-fighting con la geometria en planos cercanos.
+- UMBRALES: 4/4 checks por escena; si una escena falla (c) el FOV minimo
+  de esa escena se sube 0.1 hasta pasar (limita por geometria, ajustado
+  por test no por teoria).
+
+**Zoom 0.5x-8x con FOV dinamico (M49) — tabla zoom->FOV:**
+| Nivel zoom | FOV (grados) | Nota |
+|---|---|---|
+| 0.5x (wide) | 75 | default encuadre abierto |
+| 1x (neutro) | 55 | FOV reference del juego |
+| 2x | 30 | retrato mediano |
+| 4x | 16 | acercamiento |
+| 8x (tele) | 8 | plano detalle; el FOV interpolado LINEAL en la tabla
+(interpolacion lineal entre puntos, NO exponencial: el gameplay es mas
+predecible); el zoom de rueda incrementa 0.1 por notch (S43); 8x maximo
+para no romper el near-clip.
+
+**Captura de fauna en snapshot (M86-IA) — criterios de encuadre/deteccion:****
+- DETECCION: la fauna entra en el encuadre cuando su AABB interseca el
+  frustum camara y esta a <= 40 m (LOD fauna M48 sec 6); la semilla M29
+  hace la posicion determinista para el test de encuadre.
+- ENCUADRE valido para "foto de fauna": el centro del AABB de la fauna
+  dentro del 60% central del viewport + mirando hacia la camara (dot
+  producto frente-fauna > 0.3) — el snapshot lo marca como "foto de
+  fauna" (para el diario M55/media M15) EXCLUSIVAMENTE si ambos criterios
+  pasan al disparo.
+- UMBRAL: 100% de fotos con fauna-en-encuadre marcadas como fauna (0
+  clasificacion errada) y las de paisaje sin fauna NO marcadas como fauna.
+
+**Guard: foto no disponible en zonas gated (M151) — regla de negocio:**
+- Las zonas gated por la historia (M151: el templo M25 interior ANTES del
+  sello; el postgame M148 ANTES del final) NO permiten activar el modo
+  foto: el intento (P) muestra el toast "Todavia no" (M53) y NO entra;
+  si el jugador ESTA en el modo foto y una puerta gated se cierra sobre
+  el: la camara SE DESCONECTA (sale del modo con el mismo toast) y el
+  estado de la camara previa se restaura (S43 iter 3).
+- UMBRAL: 100% de zonas gated sin modo foto activo; 0 fotos tomadas en
+  zonas gated (el snapshot se rechaza ANTES de capturar por el mismo
+  gate-check que la entrada).
+

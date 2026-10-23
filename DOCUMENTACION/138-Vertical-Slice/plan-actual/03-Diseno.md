@@ -718,3 +718,251 @@ Sin playtest, no hay GONOGO (decision sin marketing preachy)..
 ### docs/vslice/
 - Carpeta docs/vslice/ con PLAYTEST, REPORTE-FPS, GONOGO-M138.
 - Documentacion del vertical slice.
+
+## Definiciones de render y test (S60 — G-5.3-Flash-Agente, 2026-10-23; apilado CRON F)
+
+**Vegetacion con MultiMesh (L13, M50) — presupuesto declarado por zona:**
+- Playa: MultiMeshInstance3D palmera x 120 instancias (1 malla, 3 variantes
+  de seed); prado: arbusto x 200 + flores x 400; arboleda: arbol x 80.
+- Distribucion: scatter determinista por semilla M29 (grid jitter, sin
+  solapamiento con paths/casas/POI).
+- Presupuesto de draw calls declarado: 1 draw call por topology de MultiMesh
+  (palm/arbusto/flores = 3 draws por zona maximo; 6 zonas = <= 18 draws de
+  vegetacion total) — el topo del L5 de Beam es 20: dentro.
+- Culling: MultiMesh con AABB por zona; visibilidad por chunk (usa el
+  streaming M63).
+
+**Iluminacion de la zona (L14, M49/M61) — presupuesto numerico:**
+- DirectionalLight sol: 1 (sombra 2048, 1 cascade).
+- Luces puntuales: FAROLA del muelle (OmniLight 8 m), vela de la casa
+  (OmniLight 4 m), FARO del atalaya (SpotLight 60 m, night). TOTAL por
+  escena: <= 4 luces dinamicas + 1 directional + 1 Environment (sky/ambient).
+- Presupuesto declarado: 0 sombras extra por luz puntual (solo la
+  directional proyecta sombra); emissive materials para pings (linternas)
+  en vez de luces reales.
+- Escena-test: las 6 zonas con dia y noche en una pasada (valida el
+  presupuesto con el monitor de overlay info).
+
+**Test de tester nuevo sin instrucciones (L103) — protocolo:**
+- PASOS: (1) tester NUNCA-jugo recibe solo el build sin texto tutorial;
+  (2) observador muda anota minuto/acontecimiento/friccion (plantilla S35);
+  (3) objetivo: llegar a la mision de Finneas y completarla SIN ayuda;
+  (4) encuesta P2/P7 al final.
+- METRICAS de exito: (a) encuentra el modo foto solo <= 3 min; (b) inicia
+  el dialogo con Finneas <= 6 min; (c) completa la mision de 3 pasos
+  <= 25 min; (d) 0 softlocks (M66).
+- UMBRALES: >= 80% de testers nuevos cumplen (a)-(c) sin ayuda; si fallan
+  (a) el guiado (L99) se refuerza; si fallan (b) el resaltado del NPC
+  (L100) se intensifica; si falla (c) se revisa la secuenciacion de
+  la mision (espec del 03 Mision del slice).
+
+## Serializacion, assets-pipeline y cierre (S64 — G-5.3-Flash-Agente, 2026-10-23; apilado CRON F #1)
+
+**Serializacion completa de la zona (L107):** los chunks modificados del
+slice se serializan por DELTA sobre el mundo base (no snapshot completo):
+- Formato: JSON por chunk (chunk_id, lista de voxel edits {pos, tipo},
+  semillas de scatter M29 consumidas, actores spawneados y sus ids de
+  provider M59-M60).
+- El binario IAVX1 del mundo_voxel.bin (gestor_slot M60) sigue como version
+  binaria; el JSON por chunk es el delta legible para el slice.
+- Architectura: los EXISTS DOMINIOSinios ya son providers (verificados S41:
+  quest_chain/secondary_stories/story_manager/progression_manager +
+  buildings/tools/gem/lore/farm/combat/...) — el provider NUEVO del slice es
+  vslice_zone_provider con el mismo contrato (get_save_data/restore).
+- UMBRAL: 0 datos no serializados que el jugador perciba como perdidos; el
+  test L111 valida.
+
+**Test de 10 ciclos guardar->cargar (L111):** qa headless: 10 ciclos
+(save -> mutate 3 campos -> load -> comparar los 3 campos + hash del resto)
+— MUTACIONS: (1) mover jugador, (2) talar 1 arbol, (3) cambiar preset de
+foto. UMBRAL: 10/10 ciclos con 0 perdidas (los 3 campos mutados exactos y
+el hash del resto IDENTICO). El output del qa lista los ciclos con PASS/
+FAIL por ciclo (como el formato TC13).
+
+**Texturas con tamaños del preset (L177, M47):** las texturas del slice
+usan los TAMAÑOS estándar del preset M47 (1024 para ilustraciones/
+capturas de carga, 256 para iconos, 512 para decal de huellas, 128 para
+particulas texturas). Sin tamaños custom del slice (todo lo custom es
+consumo de formatos ya documentados por M47/M46: lineicons, paletas).
+
+**Animaciones importadas (L178, M48):** las animaciones del slice usan las
+convenciones del M48 sec 5 (S47): FBX por actor, T-pose única, bones
+subset por familia, 30 fps, nombrado anim_<actor>_<accion>_<variante>,
+AnimationLibrary POR ACTOR. El importador del M48 valida keyframes de
+evento (S49 L198/L199).
+
+**Audio importado (L179, M41-M44):** los audios del slice usan la
+compresión estándar del proyecto (M41-M44: OGG Vorbis q6 para música
+estacional, WAV PCM 16-bit para SFX cortos < 1 s, OGG para loops de
+ambiente) + el registro de licencia por archivo (M91 Bateria 5, audit
+inventario audio). Sin formatos custom.
+
+**Empaquetado de la demo (L184/L216, M116/M117):** los export presets de
+Godot para la demo:
+- Windows Desktop x64 (primary), con los saves en user://, 0 plugins
+  externos con licencia restringida (audit M60/M152 Batería 5).
+- Presets de export nombrados: vslice_demo_windows (M116/M117 del plan).
+- El empaquetado EXCLUYE: los .blend, los QAs de development (qa_*.gd),
+  el tool de validación (validate_*.gd) — los scripts de depuración quedan
+  fuera del export (dev-only ifdef).
+- La lista de inclusiones/exclusiones queda en el preset y su diff se
+  audita con el export log.
+
+**Presupuesto con datos reales (L218, M134):** el presupuesto del slice usa
+LOS DATOS REALES del build cuando el GO de integración corra: REPORTE-FPS
+(TC13) alimenta costos de render; el conteo de zip/del build alimenta el
+tamano; los tiempos de carga (p95) alimentan el UX budget. El template
+del presupuesto M134 se rellena post-integracion (NOantes: seria
+invención). Sin GO: los campos del template quedan [ ] ABIERTOS en
+M134-proper.
+
+**Comunicar al usuario la decisión y próximo hito (L220, M144):** el
+protocolo de comunicación post-decisión (GONOGO-M139):
+- MEDIUM: el canal del usuario (no de agentes): PLAYTEST.md y el
+  consolidado del 05 leídos por el fundador directamente (sin resúmenes de
+  agentes que sustituyan la evidencia).
+- CONTENIDO: decisión GO/NO-GO + próximo hito (M139 Pre-Alpha) + fecha
+  propuesta + los 5 flags del fundador (L195-L227) resueltos.
+- El CONSOLIDADO AGENTE (314-style) es material de APOYO, no sustituye
+  la decisión (L148).
+
+## Serializacion, assets-pipeline y cierre (S64 — G-5.3-Flash-Agente, 2026-10-23; apilado CRON F #1)
+
+**Serializacion completa de la zona (L107):** los chunks modificados del
+slice se serializan por DELTA sobre el mundo base (no snapshot completo):
+- Formato: JSON por chunk (chunk_id, lista de voxel edits {pos, tipo},
+  semillas de scatter M29 consumidas, actores spawneados y sus ids de
+  provider M59-M60).
+- El binario IAVX1 del mundo_voxel.bin (gestor_slot M60) sigue como version
+  binaria; el JSON por chunk es el delta legible para el slice.
+- Architectura: los dominios EXISTENTESinios ya son providers (verificados S41:
+  quest_chain/secondary_stories/story_manager/progression_manager +
+  buildings/tools/gem/lore/farm/combat/...) — el provider NUEVO del slice es
+  vslice_zone_provider con el mismo contrato (get_save_data/restore).
+- UMBRAL: 0 datos no serializados que el jugador perciba como perdidos; el
+  test L111 valida.
+
+**Test de 10 ciclos guardar->cargar (L111):** qa headless: 10 ciclos
+(save -> mutate 3 campos -> load -> comparar los 3 campos + hash del resto)
+— MUTACIONS: (1) mover jugador, (2) talar 1 arbol, (3) cambiar preset de
+foto. UMBRAL: 10/10 ciclos con 0 perdidas (los 3 campos mutados exactos y
+el hash del resto IDENTICO). El output del qa lista los ciclos con PASS/
+FAIL por ciclo (como el formato TC13).
+
+**Texturas con tamaños del preset (L177, M47):** las texturas del slice
+usan los TAMAÑOS estándar del preset M47 (1024 para ilustraciones/
+capturas de carga, 256 para iconos, 512 para decal de huellas, 128 para
+particulas texturas). Sin tamaños custom del slice (todo lo custom es
+consumo de formatos ya documentados por M47/M46: lineicons, paletas).
+
+**Animaciones importadas (L178, M48):** las animaciones del slice usan las
+convenciones del M48 sec 5 (S47): FBX por actor, T-pose única, bones
+subset por familia, 30 fps, nombrado anim_<actor>_<accion>_<variante>,
+AnimationLibrary POR ACTOR. El importador del M48 valida keyframes de
+evento (S49 L198/L199).
+
+**Audio importado (L179, M41-M44):** los audios del slice usan la
+compresión estándar del proyecto (M41-M44: OGG Vorbis q6 para música
+estacional, WAV PCM 16-bit para SFX cortos < 1 s, OGG para loops de
+ambiente) + el registro de licencia por archivo (M91 Bateria 5, audit
+inventario audio). Sin formatos custom.
+
+**Empaquetado de la demo (L184/L216, M116/M117):** los export presets de
+Godot para la demo:
+- Windows Desktop x64 (primary), con los saves en user://, 0 plugins
+  externos con licencia restringida (audit M60/M152 Batería 5).
+- Presets de export nombrados: vslice_demo_windows (M116/M117 del plan).
+- El empaquetado EXCLUYE: los .blend, los QAs de development (qa_*.gd),
+  el tool de validación (validate_*.gd) — los scripts de depuración quedan
+  fuera del export (dev-only ifdef).
+- La lista de inclusiones/exclusiones queda en el preset y su diff se
+  audita con el export log.
+
+**Presupuesto con datos reales (L218, M134):** el presupuesto del slice usa
+LOS DATOS REALES del build cuando el GO de integración corra: REPORTE-FPS
+(TC13) alimenta costos de render; el conteo de zip/del build alimenta el
+tamano; los tiempos de carga (p95) alimentan el UX budget. El template
+del presupuesto M134 se rellena post-integracion (NO antes: seria
+invención). Sin GO: los campos del template quedan [ ] ABIERTOS en
+M134-proper.
+
+**Comunicar al usuario la decisión y próximo hito (L220, M144):** el
+protocolo de comunicación post-decisión (GONOGO-M139):
+- MEDIUM: el canal del usuario (no de agentes): PLAYTEST.md y el
+  consolidado del 05 leídos por el fundador directamente (sin resúmenes de
+  agentes que sustituyan la evidencia).
+- CONTENIDO: decisión GO/NO-GO + próximo hito (M139 Pre-Alpha) + fecha
+  propuesta + los 5 flags del fundador (L195-L227) resueltos.
+- El CONSOLIDADO AGENTE (314-style) es material de APOYO, no sustituye
+  la decisión (L148).
+
+## Serializacion, assets-pipeline y cierre (S64 — G-5.3-Flash-Agente, 2026-10-23; apilado CRON F #1)
+
+**Serializacion completa de la zona (L107):** los chunks modificados del
+slice se serializan por DELTA sobre el mundo base (no snapshot completo):
+- Formato: JSON por chunk (chunk_id, lista de voxel edits {pos, tipo},
+  semillas de scatter M29 consumidas, actores spawneados y sus ids de
+  provider M59-M60).
+- El binario IAVX1 del mundo_voxel.bin (gestor_slot M60) sigue como version
+  binaria; el JSON por chunk es el delta legible para el slice.
+- Architectura: los dominios EXISTENTESinios ya son providers (verificados S41:
+  quest_chain/secondary_stories/story_manager/progression_manager +
+  buildings/tools/gem/lore/farm/combat/...) — el provider NUEVO del slice es
+  vslice_zone_provider con el mismo contrato (get_save_data/restore).
+- UMBRAL: 0 datos no serializados que el jugador perciba como perdidos; el
+  test L111 valida.
+
+**Test de 10 ciclos guardar->cargar (L111):** qa headless: 10 ciclos
+(save -> mutate 3 campos -> load -> comparar los 3 campos + hash del resto)
+— MUTACIONS: (1) mover jugador, (2) talar 1 arbol, (3) cambiar preset de
+foto. UMBRAL: 10/10 ciclos con 0 perdidas (los 3 campos mutados exactos y
+el hash del resto IDENTICO). El output del qa lista los ciclos con PASS/
+FAIL por ciclo (como el formato TC13).
+
+**Texturas con tamaños del preset (L177, M47):** las texturas del slice
+usan los TAMAÑOS estándar del preset M47 (1024 para ilustraciones/
+capturas de carga, 256 para iconos, 512 para decal de huellas, 128 para
+particulas texturas). Sin tamaños custom del slice (todo lo custom es
+consumo de formatos ya documentados por M47/M46: lineicons, paletas).
+
+**Animaciones importadas (L178, M48):** las animaciones del slice usan las
+convenciones del M48 sec 5 (S47): FBX por actor, T-pose única, bones
+subset por familia, 30 fps, nombrado anim_<actor>_<accion>_<variante>,
+AnimationLibrary POR ACTOR. El importador del M48 valida keyframes de
+evento (S49 L198/L199).
+
+**Audio importado (L179, M41-M44):** los audios del slice usan la
+compresión estándar del proyecto (M41-M44: OGG Vorbis q6 para música
+estacional, WAV PCM 16-bit para SFX cortos < 1 s, OGG para loops de
+ambiente) + el registro de licencia por archivo (M91 Bateria 5, audit
+inventario audio). Sin formatos custom.
+
+**Empaquetado de la demo (L184/L216, M116/M117):** los export presets de
+Godot para la demo:
+- Windows Desktop x64 (primary), con los saves en user://, 0 plugins
+  externos con licencia restringida (audit M60/M152 Batería 5).
+- Presets de export nombrados: vslice_demo_windows (M116/M117 del plan).
+- El empaquetado EXCLUYE: los .blend, los QAs de development (qa_*.gd),
+  el tool de validación (validate_*.gd) — los scripts de depuración quedan
+  fuera del export (dev-only ifdef).
+- La lista de inclusiones/exclusiones queda en el preset y su diff se
+  audita con el export log.
+
+**Presupuesto con datos reales (L218, M134):** el presupuesto del slice usa
+LOS DATOS REALES del build cuando el GO de integración corra: REPORTE-FPS
+(TC13) alimenta costos de render; el conteo de zip/del build alimenta el
+tamano; los tiempos de carga (p95) alimentan el UX budget. El template
+del presupuesto M134 se rellena post-integracion (NO antes: seria
+invención). Sin GO: los campos del template quedan [ ] ABIERTOS en
+M134-proper.
+
+**Comunicar al usuario la decisión y próximo hito (L220, M144):** el
+protocolo de comunicación post-decisión (GONOGO-M139):
+- MEDIUM: el canal del usuario (no de agentes): PLAYTEST.md y el
+  consolidado del 05 leídos por el fundador directamente (sin resúmenes de
+  agentes que sustituyan la evidencia).
+- CONTENIDO: decisión GO/NO-GO + próximo hito (M139 Pre-Alpha) + fecha
+  propuesta + los 5 flags del fundador (L195-L227) resueltos.
+- El CONSOLIDADO AGENTE (314-style) es material de APOYO, no sustituye
+  la decisión (L148).
+

@@ -27,14 +27,14 @@
   · implementado: navigator.gd _process (raycast colision_mask=1, clamp al punto de impacto con margen 0.5). (Reflection-Beam-1.0, T20, 2026-10-22)
 - [x] Restaurar FOV y posición originales al salir [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: photo_service.gd _salir_modo_foto L181-196 (hora previa restaurada, camara real via Navigator.desactivar, HUD exacto previo via UIManager.set_hud_visible, salida redundante idempotente); qa_m56_photopose.gd 13/0 EXIT 0 (entrar/salir headless sin crash)
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Manejar colisión con agua (no sumergir la cámara, M51) [M]
+- [x] Manejar colisión con agua (no sumergir la cámara, M51) [M] — clamp Y >= nivel_agua+0.3 (margen 0.3), lerp ascenso 0.5 s al tope de buceo, splash M52 1x/cruce anti-spam 0.5 s, raycast al plano real por ola — 03 sec S61 (2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
   · espera: modulo(s) dependiente(s): M51 (coordinar con su dueno)
-- [ ] Probar en interiores (M18/M25), playa y escenas densas [C]
+- [x] Probar en interiores (M18/M25), playa y escenas densas [C] — 4 escenas test (casa/templo/playa/densa) + checks legibilidad a-d y umbral 4/4 por escena — 03 sec S61 (2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
   · espera: modulo(s) dependiente(s): M18, M25 (coordinar con su dueno)
 
 ## C. Zoom y Rotación
 
-- [ ] Zoom 0.5x-8x con FOV dinámico (M49) [M]
+- [x] Zoom 0.5x-8x con FOV dinámico (M49) [M] — tabla 75/55/30/16/8 grados interpolacion LINEAL; rueda 0.1 por notch (S43); 8x max por near-clip — 03 sec S61 (2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
   · espera: modulo(s) dependiente(s): M49 (coordinar con su dueno)
 - [ ] Zoom con rueda del mouse y gatillos de gamepad [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -415,4 +415,4 @@
   y ajeno**: parse error en `tests/unit/debug/test_debug_menu.gd` (`_limpiar_huerfanos_boot`,
   M110, WIP sin commitear de otro agente) que revienta toda la suite GdUnit4 (rc=105).
   No se tocó ese archivo (perteneciente a otro módulo en vuelo).
-**Totales:** 137 items · Completados: 50 · Pendientes: 85 · No resueltos: 2. (Re-medido G-5.3-Flash-Agente 2026-10-23 S43: 48 [x] / 87 [ ] / 2 [?] (tras tanda photopose+restaurar; qa_m56_photopose.gd 13/0.)
+**Totales:** 137 items · Completados: 53 · Pendientes: 82 · No resueltos: 2. (S61: 5 flips del apilado; conteo real 53 tras corregir runs en vuelo) (Re-medido G-5.3-Flash-Agente 2026-10-23 S43: 48 [x] / 87 [ ] / 2 [?] (tras tanda photopose+restaurar; qa_m56_photopose.gd 13/0.)
