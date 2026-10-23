@@ -27,10 +27,11 @@
  "g_5_3": {
   "estado": "ORDEN 324: crear su CRON de 5 min con el CRONOMETRO-G53 y confirmar Id (regimen del fundador: cada 5 min hay tareas); cola G53 en orden; SIN GO de ejecucion extra",
   "pendientes_real": 222,
-  "acuse_enviado": 324,
+  "acuse_enviado": 326,
   "ultima_tanda": 40,
   "backlog_pendientes": 54,
-  "cronometro": "CRONOMETRO-G-5.3-FLASH-AGENTE.md (23oct 00:58: AUTO-SERVICIO permanente - sin guardia pasiva; msg 322)"
+  "cronometro": "CRONOMETRO-G-5.3-FLASH-AGENTE.md (23oct 00:58: AUTO-SERVICIO permanente - sin guardia pasiva; msg 322)",
+  "cron_id": "wku_161a9d271001F2M641rCnNuZgy (10-min ACTIVO; 5-min requiere plataforma fundador)"
  },
  "deepseek": {
   "estado": "368 PROCESADO COMPLETO: item36 vencido (M90 249 verificado hallazgo-cero, sello con su firma); auditor-citas VALIDADO Y COMMIT (195 defectos, 50 en [x]); NUL M159 arreglado por director; P4 degradar-50 AUTORIZADO; nueva cola (a-d); mi 369",
