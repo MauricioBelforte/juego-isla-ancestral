@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T05:20:00",
+ "ultimo_update": "2026-10-23T05:35:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -25,7 +25,7 @@
   ]
  },
  "g_5_3": {
-  "estado": "S62b RATIFICADO (335: M56 137 y 53 165 exactos; schema XMP y umbral re-render con sustancia); riel G-5.3 cerrado a lo definible — 12 modulos en espera de GO/decisiones del fundador | CRON F #2 x10: audit de los presupuestos numericos de Beam (formulas en los 03) — su nicho aritmetico; sin guardia pasiva (regimen apilador dual) | CRON F #1 regimen incondicional: apilado 339 (items 11-20 G53) pendiente de entrega | baja cron 10-min registrada para accion del fundador; riel cerrado a lo definible",
+  "estado": "S62b RATIFICADO (335: M56 137 y 53 165 exactos; schema XMP y umbral re-render con sustancia); riel G-5.3 cerrado a lo definible — 12 modulos en espera de GO/decisiones del fundador | CRON F #2 x10: audit de los presupuestos numericos de Beam (formulas en los 03) — su nicho aritmetico; sin guardia pasiva (regimen apilador dual) | CRON F #1 regimen incondicional: apilado 339 (items 11-20 G53) pendiente de entrega | baja cron 10-min registrada para accion del fundador; riel cerrado a lo definible | AGENTE APAGADO por el fundador (23oct 05:35: sin agente GLM hasta manana; su cron 10-min pendiente de baja desde su panel)",
   "pendientes_real": 222,
   "acuse_enviado": 342,
   "ultima_tanda": 40,
@@ -545,7 +545,7 @@
    "id_anterior_anulado": "wku_16679d388001jydakN57a0qXhW",
    "id_anterior": "wku_16685207a001HvsHS4bGf75J6W (10-min/30-tareas, borrado)"
   },
-  "mapa_horario": "A=:00/:20/:40, B=:10/:30/:50, C(120min)=minuto-17 cada 2h, D=:15/:35/:55, E(apilador Beam x10)=:03/:23/:43, F(apilador G-5.3 x30)=:07/:17/:27/:37/:47/:57",
+  "mapa_horario": "A=:00/:20/:40 (0,20,40), B=:10/:30/:50 (10,30,50), C=preservacion 120min (17 cada 2h), D=:15/:35/:55 (15,35,55), E(apilador Beam x10)=:03/:23/:43 (3,23,43) — SIN G-5.3-Flash-Agente: agente APAGADO por el fundador hasta 24oct (su cron 10-min pendiente de baja desde su panel, wku_161a9d...; CRON F apilador G-5.3 NO montado)",
   "cron_F": {
    "nombre": "APILADOR A G-5.3",
    "id": "wku_166915d28001UANY7PqwGWT7F6",
@@ -561,6 +561,13 @@
    "orden": "FUNDADOR direct (23oct: apagando cronometros de todos los agentes cuando terminen)",
    "estado": "LOS 6 CRONS DEL DIRECTOR APAGADOS: A/B/D (detectores, ids 15f8.../15f8.../15f8...), E (apilador Beam 16694eda), F (apilador G-5.3 1671d5), C (preservacion 120min 166880e) — la flota queda en el estado sellado del dia 22/23oct; re-activacion con los mismos prompts del canon CRONOMETROS-VIGENTES cuando el fundador lo ordene",
    "pendientes_flota": "sin mensajes sin responder (verificado); agentes con tandas vigentes sin entrega: ninguno bloqueante (Beam jornada lacrada, G-5.3 riel cerrado, resto standby con colas GO)"
+  },
+  "ids_recreados_23oct_0535": {
+   "A": "wku_167382d65001rjwVTFTFuUVoux",
+   "B": "wku_167386cea001M23Gz3hkkS48M5",
+   "C120": "wku_1673957bd001n5oSBm0lEy0iTu",
+   "D": "wku_16738aef6001LzJyTxklCDu87U",
+   "E": "wku_167391343001SFXJenRNwK9SAa"
   }
  },
  "apilador_beam_ultimo": "258 (apilado x5 FINAL honesto: nicho flipable agotado — M03 inventario-raiz + propuesta pricing-coherente 2.0 + M02 esquema/espejo + M03 doc-check; proximo real depende del fundador)",
