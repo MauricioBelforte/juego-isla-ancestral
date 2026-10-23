@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:07:00",
+ "ultimo_update": "2026-10-23T02:58:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -495,6 +495,6 @@
    "proximo_disparo": "02:27"
   }
  },
- "apilador_beam_ultimo": "250 (apilado x6 honesto M72: catalogo cozy + criterios anti-abusivos + specs RF6/RF11/RN2/RF9 — el resto de M72 es implementation-gated)",
+ "apilador_beam_ultimo": "254 (apilado #6: 30 presupuestos restantes de 8 modulos — cierra el ciclo numerico del apilado #4)",
  "apilador_g53_ultimo": "329 (CRON F #1 x10: 138-Vertical-Slice, 151-Control-Final)"
 }
