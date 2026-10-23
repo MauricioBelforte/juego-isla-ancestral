@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T07:00:00",
+ "ultimo_update": "2026-10-23T07:10:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -571,7 +571,9 @@
   },
   "agrupado": "REGRA FINAL del fundador 23oct 05:36: centena COMPLETA se archiva (arch_0001-0100); en raiz queda la centena EN CURSO; herramienta scripts/agrupar_canal.py (idempotente) + agrupar_todos.py; verificacion 23oct 05:40: todas las centenas en curso correctamente en raiz, 0 re-movimientos (idempotente)",
   "guia_definitiva": "REESCRITA COMPLETA (23oct 06:20, orden del fundador x3): Mensajes entre modelos/GUIA-NUMERACION-CANALES.md con el metodo DEFINITIVO paso a paso (estandar unico, como enumerar, como agrupar por centena completa, como renumerar con INDICE mapping, como mover con long-path, como escribir scripts sin -c inline, las 5 trampas, los comandos listos — cualquier agente lo copia y ejecuta)",
-  "referencias_canon": "AGENTS.md 4.1-b + CRONOMETROS canon 23oct 06:20"
+  "referencias_canon": "AGENTS.md 4.1-b + CRONOMETROS canon 23oct 06:20",
+  "regla_final_beam": "23oct 07:10: los mensajes 001-200 archivados en subcarpetas arch_0001-0100 + arch_0101-0200; los mensajes 201-300 EN RAIZ (90 files); al llegar al 300 se archiva la centena 0201-0300 y el siguiente batch apilador parte de 301",
+  " estado_pre_renumeracion": "la carpeta del fundador queda linea: los 90 mensajes del bloque 201-300 visibles en raiz, listos para el barrido"
  },
  "apilador_beam_ultimo": "288 (apilado x30 #8: verificacion aritmetica de LOS TUYOS propios presupuestos definidos — la auto-auditoria de la capa 2, complementa a DS-OC cadena 3)",
  "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)"
