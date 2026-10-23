@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T01:47:00",
+ "ultimo_update": "2026-10-23T01:50:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -44,9 +44,9 @@
   "backlog_pendientes": 116
  },
  "ds_oc": {
-  "estado": "205+206 RATIFICADAS con acuse 207 (error mio: el 204 respondio solo 203 — fallo de lectura de canal propia, corregido); rol oficial vigente por batches",
+  "estado": "MANDATO AMPLIADO (208, orden del fundador): AUDITOR-INTEGRAL de toda la produccion del 22oct de Beam — COLA A re-verif profunda modulos ratificados, COLA B apilados x30 en vuelo (verifica formulas propuestas), COLA C muestras de sellos x6. Meta: cubrir el 100% de lo flipado. mensajes 205-206 ratificados prev, mi 208",
   "pendientes_real": 357,
-  "acuse_enviado": 207,
+  "acuse_enviado": 208,
   "disponible_desde": "2026-10-23",
   "nota": "205/206 self-artefactos de verificacion de calibracion/222 de Beam: consistentes con la validacion del director, sin pedidos; confirmacion implicita del rol"
  },
