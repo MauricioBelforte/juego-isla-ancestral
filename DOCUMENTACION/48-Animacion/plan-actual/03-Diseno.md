@@ -237,3 +237,99 @@ validador (L199), al exceder el presupuesto 3.2 EMITIRA un warning en el
 editor con la lista de actores que pisa el tope (sin bloquear; el de
 revision L154 decide). Mientras tanto, el conteo es manual en el 3.2.
 
+## 6-bis. Integraciones del kit de animacion (S58 — G-5.3-Flash-Agente, 2026-10-23; contratos ya vigentes citados)
+
+**Restricciones base (L9):** Godot 4.x; FPS 30 base para clips (UI 60);
+deterministico por pose (sin timing dependiente del frame-rate); TODA señal
+de fimite via AnimationPlayer nativo (started/finished) + animation_missing
+del validador futuro (L198/L199).
+
+**Sockets de herramientas (L50, M45):** el grip del personaje es un BoneAttachment3D
+en el hueso de la mano dominante (humanoide) o boca/cola (cuadrupedo/ave/pez);
+la herramienta (M13) se acopla por socket y NO por padre-escena (evita
+duplicar el arbol de animacion). El swing L92 sale del mismo socket.
+
+**Naming (S47):** anim_<actor>_<accion>_<variante> con librerias POR ACTOR;
+el FSM espejo M11 resuelve el nombre por estado (mismos estados, clips por
+actor).
+
+**Integracion con M64/M65 (burbuja de actores, S49 L189/L191):** el LOD de
+fauna (<=25/25-50/>50 m) pide/pagar el AnimationPlayer por actor; la alerta
+de excedente del editor cuenta actores con player activo.
+
+**Integracion con M45 (rigs/sockets):** T-pose unica + bones subset por
+familia (sec 5); los sockets del L50 viven en el rig del M45 (sin rig
+especial del slice).
+
+**Integracion con M13 (herramientas):** el swing del hacha de S30: el ciclo de tala (3 golpes) se lanzan desde el Socket; el evento de impacto del frame
+8/3er golpe emite a la madera (M33/M35).
+
+**Integracion con M43/M44/M52 (eventos):** los keyframes de evento (impacto,
+paso, salto) emiten senal -> M43 sfx, M44 voces, M52 particulas (pool 3
+emitters S30). Sin llamar desde la animacion directa (senales desacopladas).
+
+**Integracion con M50/M51 (procedural):** viento/agua del mundo procedural
+Son GPU-shader y NO consumen AnimationPlayer: la coherencia visual es por
+paleta/estilo, no por clips.
+
+**Integracion con M21/M53/M58 (UI):** subtitulos (M58) acompanan la voz
+(M44); el Reduce Motion M58 apaga shake/flashes en TODOS los clips (perfil
+global activo); la UI dialogo no pide clips nuevos (solo estados del FSM
+espejo).
+
+**Integracion con M61/M62 (presupuesto):** <= 60 actores animando por escena
+(burbuja; L189); alerta del editor al exceder (L191); el registro 3.2 lleva
+la suma por escena.
+
+**Integracion con M74 (festivales):** los festivales (M74) pueden pedir
+poses/loops especiales: se agregan como variantes del gesto canonico (a1/a2/
+a3 de L63), NO como clips de production nuevos (sin exceder presupuesto).
+
+## 6-bis. Integraciones del kit de animacion (S58 — G-5.3-Flash-Agente, 2026-10-23; contratos ya vigentes citados)
+
+**Restricciones base (L9):** Godot 4.x; FPS 30 base para clips (UI 60);
+deterministico por pose (sin timing dependiente del frame-rate); TODA señal
+de fimite via AnimationPlayer nativo (started/finished) + animation_missing
+del validador futuro (L198/L199).
+
+**Sockets de herramientas (L50, M45):** el grip del personaje es un BoneAttachment3D
+en el hueso de la mano dominante (humanoide) o boca/cola (cuadrupedo/ave/pez);
+la herramienta (M13) se acopla por socket y NO por padre-escena (evita
+duplicar el arbol de animacion). El swing L92 sale del mismo socket.
+
+**Naming (S47):** anim_<actor>_<accion>_<variante> con librerias POR ACTOR;
+el FSM espejo M11 resuelve el nombre por estado (mismos estados, clips por
+actor).
+
+**Integracion con M64/M65 (burbuja de actores, S49 L189/L191):** el LOD de
+fauna (<=25/25-50/>50 m) pide/pagar el AnimationPlayer por actor; la alerta
+de excedente del editor cuenta actores con player activo.
+
+**Integracion con M45 (rigs/sockets):** T-pose unica + bones subset por
+familia (sec 5); los sockets del L50 viven en el rig del M45 (sin rig
+especial del slice).
+
+**Integracion con M13 (herramientas):** el ciclo de tala de S30 (3 golpes) se lanzan desde el Socket; el evento de impacto del frame
+8/3er golpe emite a la madera (M33/M35).
+
+**Integracion con M43/M44/M52 (eventos):** los keyframes de evento (impacto,
+paso, salto) emiten senal -> M43 sfx, M44 voces, M52 particulas (pool 3
+emitters S30). Sin llamar desde la animacion directa (senales desacopladas).
+
+**Integracion con M50/M51 (procedural):** viento/agua del mundo procedural
+Son GPU-shader y NO consumen AnimationPlayer: la coherencia visual es por
+paleta/estilo, no por clips.
+
+**Integracion con M21/M53/M58 (UI):** subtitulos (M58) acompanan la voz
+(M44); el Reduce Motion M58 apaga shake/flashes en TODOS los clips (perfil
+global activo); la UI dialogo no pide clips nuevos (solo estados del FSM
+espejo).
+
+**Integracion con M61/M62 (presupuesto):** <= 60 actores animando por escena
+(burbuja; L189); alerta del editor al exceder (L191); el registro 3.2 lleva
+la suma por escena.
+
+**Integracion con M74 (festivales):** los festivales (M74) pueden pedir
+poses/loops especiales: se agregan como variantes del gesto canonico (a1/a2/
+a3 de L63), NO como clips de production nuevos (sin exceder presupuesto).
+

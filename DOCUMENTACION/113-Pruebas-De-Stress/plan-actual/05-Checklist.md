@@ -233,7 +233,7 @@ Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1
 - [x] Gráficos de rendimiento generados (visualización): duración por escenario (barras) y operaciones por segundo por flujo (barras)
 - [x] Interpretación QA del reporte (nota de lectura): BlockEdit 595k ops/s es una simulación RAM (no comparable con la API real); Inventory ADD ~50k ops/s (7x más lento que remove 360k — coste de señales/stacking) y Equipment equip ~50k ops/s — números realistas y sanos para el estado actual
 - [x] Memoria estable: +104 KB estáticos entre inicio/fin de la corrida de referencia (sin acarreo)
-- [x] Comparar con objetivo de referencia (umbral definido por escenario) — **mecanismo cerrado por agnes-3-flash (iter. agnes, Log 919):** `StressComparator.comparar()` con umbral ±5% configurable + baseline `perf_base.json`. Los VALORES objetivo por escenario quedan con M61/M19/M50/M65 cuando estén en producción.
+- [?] Comparar con objetivo de referencia (umbral definido por escenario) — **mecanismo cerrado por agnes-3-flash (iter. agnes, Log 919):** `StressComparator.comparar()` con umbral ±5% configurable + baseline `perf_base.json`. Los VALORES objetivo por escenario quedan con M61/M19/M50/M65 cuando estén en producción. — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `perf_base.json` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 
 ## Notas del Agente (iter. agnes)
 
@@ -257,6 +257,7 @@ Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1
 - Los 17 escenarios restantes (NPC/fauna/vegetación/mundo grande/…) siguen esperando a M19/M65/M08/M50.
 
 **Totales:** 132 ítems · Completados: 132 · Pendientes: 0 · No resueltos: 0.
+> **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 1 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 131 [x] / 0 [ ] / 1 [?] = 132.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 102 [x] / 30 [ ] /

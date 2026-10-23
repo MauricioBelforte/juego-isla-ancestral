@@ -272,6 +272,7 @@ Log reservado: 512
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
 **Totales:** 203 lineas-item - Completados: 188 - Pendientes: 15 - No resueltos: 0. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)
+> **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 1 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 187 [x] / 0 [ ] / 16 [?] = 203.
 
 > **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
 > seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por
@@ -320,7 +321,7 @@ Log reservado: 512
 
 - [x] RF-MR8: decision de estacion documentada en `03-Diseno.md` — estacion nueva
   (`yunque_de_mejora`) o reutilizacion de la fogata existente, con la justificacion [S] → **G-5.3-Flash-Agente (2026-10-20):** sección 'Mejora y reparación de herramientas (bloque MR)' agregada a `16-Crafting/03-Diseno.md` — **decisión: reutilizar la MESA_TRABAJO existente** (coherencia cozy: las herramientas ya se fabrican ahí; sin mesh/objeto de mundo nuevo; una puerta única 'trabajo fino'). Descartes documentados (fogata = cocina; yunque = futuro contenido). Consecuencias: MR12/MR13 viven en crafting_ui de la estación; MR10 service-side ya implementado; MR9 (stations.json) queda [ ] — el archivo NO existe (dueño M93 define estructura).
-- [x] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR9 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip) -- Diseno: 03-Diseno.md (RF-MR definido en Contrato del bloque MR, Reflection-Beam-1.0 2026-10-22)
+- [?] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR9 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip) -- Diseno: 03-Diseno.md (RF-MR definido en Contrato del bloque MR, Reflection-Beam-1.0 2026-10-22) — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `stations.json` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
   mejora y reparacion por tipo de herramienta [M]
 - [x] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con -- Diseno: 03-Diseno.md (RF-MR definido) -- DEGRADADO por director 2026-10-22 (cross-check: la definicion RF-MR10 NO existe en 03-Diseno de M16; cita hueca; re-escribir el requerimiento para re-flip) -- Diseno: 03-Diseno.md (RF-MR definido en Contrato del bloque MR, Reflection-Beam-1.0 2026-10-22)
   motivo `no_es_herramienta` [S]

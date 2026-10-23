@@ -51,7 +51,7 @@
 
 ## F. Inventario Mínimo (M14, RF5)
 
-- [x] Definir `inventario_proto.gd` con slot único [S]
+- [?] Definir `inventario_proto.gd` con slot único [S] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `inventario_proto.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 - [x] Definir contador de madera [S]
 - [x] Definir bool de herramienta [S]
 - [x] Definir UI placeholder de contador (M53 esbozo) [S]
@@ -123,12 +123,12 @@
 
 ## O. Playtest (M114, RF13)
 
-- [x] Definir `playtest_runner.gd` que loguea eventos y FPS [C] — **degradado 2026-10-16 (barrido agnes 610/643 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (`scripts/` + `tools/` = 0 hits; `scenes/prototipo/` inexistente — restante del futures).**
+- [?] Definir `playtest_runner.gd` que loguea eventos y FPS [C] — **degradado 2026-10-16 (barrido agnes 610/643 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (`scripts/` + `tools/` = 0 hits; `scenes/prototipo/` inexistente — restante del futures).** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `playtest_runner.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
   · evidencia: documentado en plan-actual (P-100, Reflection-Beam-1.0, T77, 2026-10-22)
 - [x] Definir sesión de 15 min por tester [S]
 - [x] Definir mínimo 3 testers [S]
 - [x] Definir encuesta de 5 preguntas (RF14) [S]
-- [x] Definir plantilla `PLAYTEST.md` con resultados [M]
+- [?] Definir plantilla `PLAYTEST.md` con resultados [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `PLAYTEST.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 
 ## P. Medición de Diversión (RF14)
 
@@ -144,7 +144,7 @@
 - [x] Definir checklist M152: combate ausente/opcional [M]
 - [x] Definir checklist M153: la sesión se siente dentro de la visión [M]
 - [x] Definir checklist M153: ritmo accesible sin metagaming forzado [M]
-- [x] Definir plantilla `FILOSOFIA-CHECK.md` firmada por tester/equipo [M]
+- [?] Definir plantilla `FILOSOFIA-CHECK.md` firmada por tester/equipo [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `FILOSOFIA-CHECK.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 
 ## R. Rendimiento (M61, RF16)
 
@@ -152,7 +152,7 @@
 - [x] Definir criterio ≥ 60 FPS en config media [M]
 - [x] Definir escena densa de prueba (zona de 64³ llena) [M]
 - [x] Definir profiling con CPU/GPU (M61) si FPS < 60 [M]
-- [x] Definir reporte de rendimiento en `PLAYTEST.md` [M]
+- [?] Definir reporte de rendimiento en `PLAYTEST.md` [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `PLAYTEST.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 
 ## S. Input (M57 esbozo)
 
@@ -175,13 +175,13 @@
 - [x] Definir consecuencias de GO: pasar a M138 (Vertical Slice) [S]
 - [x] Definir consecuencias de NO-GO: ajuste 7 días o replanificar [M]
 - [x] Definir tag git `prototipo-v1` en el commit de cierre [S]
-- [x] Definir `GONOGO.md` firmado con fecha [S]
+- [?] Definir `GONOGO.md` firmado con fecha [S] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `GONOGO.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 - [x] Definir push del estado del prototipo al cierre [S]
 
 ## V. Retrospectiva (lecciones → M138)
 
 - [x] Definir sesión de retrospectiva post-hito [M]
-- [x] Definir doc `RETROSPECTIVA.md` con lecciones técnicas [M]
+- [?] Definir doc `RETROSPECTIVA.md` con lecciones técnicas [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `RETROSPECTIVA.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 - [x] Definir doc con lecciones de diseño (qué gustó/oró) [M]
 - [x] Definir lista de deudas técnicas diferidas a M138 [M]
 - [x] Definir checklist de entrada a M138 con estos hallazgos [M]
@@ -223,6 +223,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 **Totales:** 131 ítems · Completados: 7 · Pendientes: 124 · No resueltos: 0. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 7 [x] / 124 [ ] / 0 [?] = 131.) (Actualizado 2026-10-14 por step-5-kilocode: 2 `[x]` inflados degradados con evidencia — `scenes/prototipo/` inexistente y docstrings no universales. **M137 queda como DISEÑO DE REFERENCIA del prototipo por decisión del director mimo, msg 356**: las 26 secciones de implementación no se trabajan.)
+> **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 7 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 118 [x] / 6 [ ] / 7 [?] = 131.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 121 [ ] / 0 [?].

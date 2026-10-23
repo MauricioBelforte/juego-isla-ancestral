@@ -20,8 +20,8 @@
 
 ## A. Estructura de la Biblia
 
-- [x] Definir índice de la biblia (`00-indice.md`) con reglas editoriales [S]
-- [x] Definir línea de tiempo canónica (`01-linea-de-tiempo.md`) [M]
+- [?] Definir índice de la biblia (`00-indice.md`) con reglas editoriales [S] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `00-indice.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
+- [?] Definir línea de tiempo canónica (`01-linea-de-tiempo.md`) [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `01-linea-de-tiempo.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 - [x] Definir reglas de formato de datos `## DATA { }` [M]
   · evidencia: 03-Diseno.md secc. Reglas de formato y origen de Aurora (cola total, Reflection-Beam-1.0, T82, 2026-10-22)
 - [x] Definir `world_data.json` generado desde los MD [M]
@@ -301,6 +301,7 @@
 - [?] Aplicación del canon en gameplay (M22 historia/sellos — dueño: Hy3/WorkBuddy)
 
 **Totales:** 134 ítems · Completados: 65 · Pendientes: 68 · No resueltos: 1.
+> **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 2 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 130 [x] / 0 [ ] / 4 [?] = 134.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 65 [x] / 68 [ ] /

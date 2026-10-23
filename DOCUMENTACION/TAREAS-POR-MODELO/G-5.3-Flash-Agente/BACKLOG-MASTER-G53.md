@@ -48,21 +48,21 @@ Fuera de asignacion: gated M156 (wav/escenas), M51/M45 visual, M72 (agnes), M77/
 
 ## SECCION E - M48: definiciones de animacion
 
-- [ ] (48-Animacion) - [ ] Documentar restricciones: Godot 4.x, FPS 30 base (UI 60), determinismo de mundo, sin RNG, sincronía en timelines [M]
-- [ ] (48-Animacion) - [ ] Definir sockets de herramientas (grip) con M45 [M]
-- [ ] (48-Animacion) - [ ] Verificar naming anim_[actor]_[estado] [S]
-- [ ] (48-Animacion) - [ ] Verificar fps 30 base / UI 60 [S]
-- [ ] (48-Animacion) - [ ] Verificar duración dentro de máximos por categoría [S]
-- [ ] (48-Animacion) - [ ] Verificar T-pose única y bones subset [M]
-- [ ] (48-Animacion) - [ ] Verificar keyframes de evento requeridos [M]
-- [ ] (48-Animacion) - [ ] Documentar integración con M64/M65 (burbuja) [S]
-- [ ] (48-Animacion) - [ ] Documentar integración con M45 (rigs/sockets) [S]
-- [ ] (48-Animacion) - [ ] Documentar integración con M13 (herramientas) [S]
-- [ ] (48-Animacion) - [ ] Documentar integración con M43/M44/M52 (eventos) [S]
-- [ ] (48-Animacion) - [ ] Documentar integración con M50/M51 (procedural) [S]
-- [ ] (48-Animacion) - [ ] Documentar integración con M21/M53/M58 (UI) [S]
-- [ ] (48-Animacion) - [ ] Documentar integración con M61/M62 (presupuesto) [S]
-- [ ] (48-Animacion) - [ ] Documentar integración con M74 (festivales) [S]
+- [x] Documentar restricciones — 03 sec 6-bis (S58): Godot 4.x, FPS 30 base (UI 60), determinismo por pose; senales nativas + animation_missing L198: Godot 4.x, FPS 30 base (UI 60), determinismo de mundo, sin RNG, sincronía en timelines [M]
+- [x] Definir sockets de herramientas (grip) con M45 — 03 sec 6-bis: BoneAttachment3D en mano dominante (o boca/cola fauna); herramienta por socket, no por padre-escena [M]
+- [x] Verificar naming anim_[actor]_[estado] — 03 sec 5/6: convenciones S47 anim_<actor>_<accion>_<variante> + FSM espejo M11 [S]
+- [x] Verificar fps 30 base / UI 60 — 03 tabla 3.1 promocionada a topes (S47): 30 fps clips / 60 UI [S]
+- [x] Verificar duración dentro de máximos por categoría — 03 sec 5: tabla 3.1 como TOPES (exceder exige justificacion o dividir) [S]
+- [x] Verificar T-pose única y bones subset — 03 sec 5: T-pose unica + subset por familia (hum 40/cuad 28/ave 22/pez 14) [M]
+- [x] Verificar keyframes de evento requeridos — 03 sec 6-bis: keyframes emiten senal -> M43/M44/M52 desacoplados (swing frame 8, pasos, salto) [M]
+- [x] Documentar integración con M64/M65 (burbuja) — 03 sec 6-bis: LOD fauna + <=60 actores (burbuja M61) + alerta editor (S49) [S]
+- [x] Documentar integración con M45 (rigs/sockets) — 03 sec 6-bis: T-pose/bones subset + sockets del L50 en el rig M45 [S]
+- [x] Documentar integración con M13 (herramientas) — 03 sec 6-bis: ciclo de tala de S30 (3 golpes, frame 8 del 3er golpe) emite a madera M33/M35 desde el socket [S]
+- [x] Documentar integración con M43/M44/M52 (eventos) — 03 sec 6-bis: keyframes -> senal -> M43 sfx / M44 voces / M52 particulas (pool 3 emitters S30) [S]
+- [x] Documentar integración con M50/M51 (procedural) — 03 sec 6-bis: viento/agua procedural son GPU-shaders (no AnimationPlayer); coherencia por paleta/estilo [S]
+- [x] Documentar integración con M21/M53/M58 (UI) — 03 sec 6-bis: subtitulos M58 acompanan voz M44; Reduce Motion apaga shake/flashes global; dialogo no pide clips nuevos [S]
+- [x] Documentar integración con M61/M62 (presupuesto) — 03 sec 6-bis: <=60 actores (burbuja M61); alerta editor L191; registro 3.2 por escena [S]
+- [x] Documentar integración con M74 (festivales) — 03 sec 6-bis: festivales usan variantes del gesto canonico (a1/a2/a3 L63), no clips nuevos de produccion [S]
 
 ## SECCION F - M56: definiciones de foto
 

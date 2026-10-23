@@ -119,7 +119,7 @@
 - [x] Definir muestreo con VSYNC off [S]
   · evidencia: 03-Diseno.md secc. Mediciones de render (P-100, Reflection-Beam-1.0, T67, 2026-10-22)
 - [x] Definir punto denso de prueba (bosque + lluvia + Finneas) [M] — 03-Diseno Cierre: escena de estres (bosque oeste + lluvia M50 + rutina M64 en el mismo cuadro), observacion con monitor, no shipping (2026-10-23 S38)
-- [x] Definir reporte `REPORTE-FPS.md` generado por `bench_slice.gd` [C] — 03-Diseno Cierre: tool 60 s sobre la escena de estres; FPS prom/min, draw calls, particulas, VRAM; veredicto de Beam con presupuesto L5 (2026-10-23 S38)
+- [?] Definir reporte `REPORTE-FPS.md` generado por `bench_slice.gd` [C] — 03-Diseno Cierre: tool 60 s sobre la escena de estres; FPS prom/min, draw calls, particulas, VRAM; veredicto de Beam con presupuesto L5 (2026-10-23 S38) — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `REPORTE-FPS.md`, `bench_slice.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 
 ## O. Experiencia Completa (RF14)
 
@@ -135,7 +135,7 @@
 - [x] Definir sesión de 40 min máx por tester [S] — 03-Diseno Protocolo: timer visible para el observador; feedback inmediato post-sesion (2026-10-22 S35)
 - [x] Definir observación de momentos de aburrimiento/frustración [M] — 03-Diseno Protocolo: plantilla minuto/que/severidad sin intervenir; severidad alta bloquea sello (2026-10-22 S35)
 - [x] Definir registro de bugs por tester [S] — 03-Diseno Protocolo: plantilla min/pasos/expectativa/resultado -> 11-BUGS.md con firma (2026-10-22 S35)
-- [x] Definir análisis de encuesta en `PLAYTEST.md` [M] — 03-Diseno Protocolo: tabla por tester + veredicto de umbrales L129/L130 (2026-10-22 S35; archivo en docs/vslice/ L208)
+- [?] Definir análisis de encuesta en `PLAYTEST.md` [M] — 03-Diseno Protocolo: tabla por tester + veredicto de umbrales L129/L130 (2026-10-22 S35; archivo en docs/vslice/ L208) — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `PLAYTEST.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 
 ## Q. Decisión de Escala a Pre-Alpha (RFCierre)
 
@@ -149,7 +149,7 @@
 
 ## R. Congelación de Alcance
 
-- [x] Definir `IDEAS-DESCARTADAS.md` para lo que no entra [S] — 03-Diseno: 1 linea por idea (fecha/proponente/idea/motivo enlazado a regla); alimenta 5-FUTURAS-MEJORAS si es buena (2026-10-23 S46)
+- [?] Definir `IDEAS-DESCARTADAS.md` para lo que no entra [S] — 03-Diseno: 1 linea por idea (fecha/proponente/idea/motivo enlazado a regla); alimenta 5-FUTURAS-MEJORAS si es buena (2026-10-23 S46) — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `IDEAS-DESCARTADAS.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
 - [x] Definir regla: nada nuevo sin pasar por el documento [S] — 03-Diseno Reglas de alcance: pedidos nuevos -> IDEAS-DESCARTADAS, decide el director (2026-10-22 S34)
 - [x] Definir revisión semanal de alcance contra RF1-RF17 [M] — 03-Diseno: ritual semanal re-lee el 05 item por item; nota de revision con fecha/firma al final del 05 (2026-10-23 S46)
 - [x] Definir que el creep de scope bloquee el GONOGO [M] — 03-Diseno: cambio sin pasar por el 03 (regla L153) BLOQUEA GONOGO hasta revertir o documentar con impacto (2026-10-23 S46)
@@ -223,6 +223,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 **Totales:** 131 ítems · Completados: 120 · Pendientes: 11 · No resueltos: 0.
+> **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 3 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 117 [x] / 11 [ ] / 3 [?] = 131.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > Sincronizado 2026-10-22 (G-5.3-Flash-Agente, S24): conteo real de marcas 29 [x] / 102 [ ] / 0 [?] — el acumulado arrastraba el corte del 2026-08 (11/120).
