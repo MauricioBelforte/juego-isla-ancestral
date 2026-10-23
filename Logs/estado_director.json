@@ -603,5 +603,17 @@
     "hy3": "335-339 homogenos; pool 340-; M108 QA ratificado (Totales resink); proxima respuesta de Hy3 = 340"
   },
   "tanda_beam_nueva": "PREPARADA (TANDA-SESION-NUEVA-23oct.md, 10 items): M95 residuo verificada, 5-tablas delivery, self-audit#8, 22 formulas presupuestos II (4 bloques), flags M104/M10 con [?] corregidos en balance (agnes 012[d]=autoridad), revenue reconciliado, flip H16 con cita triple",
-  "m23_iter13": "Step-5 iter13 (Log 2137) commiteada por el director: 69/34/2=105 lstrip exacto; fila GLOBAL resync 69/105"
+  "m23_iter13": "Step-5 iter13 (Log 2137) commiteada por el director: 69/34/2=105 lstrip exacto; fila GLOBAL resync 69/105",
+  "crons_director": {
+    "estado": "TODOS APAGADOS por orden del fundador 23oct 20:04 (sesion con output truncado); relevo: sesion nueva del director; prompts canon para re-montar: DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/CRONOMETROS-VIGENTES-COMO-CREARLOS.md",
+    "cesados": [
+      "A wku_167382d65001rjwVTFTFuUVoux (no listaba)",
+      "B wku_1678114a70017DPH8ZZ7n6DSvv",
+      "C120 wku_16781b97b001uEmDTIF6Hkm9x9",
+      "D wku_16781483a001GbdakBUnfbMv8w",
+      "E wku_16781847d001Ca9kjSHixBppra"
+    ],
+    "cron_beam_12min": "wku_1678114a70017DPH8ZZ7n6DSvv-NO: el cron 12-min de la sesion nueva de Beam es PROPIO de esa sesion (12,24,36,48) — no tocar"
+  },
+  "pendiente_lectura_proximo_director": "Beam 310 (17:02:42): TANDA bloque 1 de la sesion nueva — LEER Y RATIFICAR al arrancar; agnes 015 sin respuesta aun; Hy3 con COLA 8+; G-5.3-agente cron viejo sigue pendiente de baja por panel del fundador (wku_161a9d271001F2M641rCnNuZgy)"
 }
