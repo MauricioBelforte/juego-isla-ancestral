@@ -237,3 +237,28 @@ Cada cron hace su TAREA PRINCIPAL siempre. SI en la misma vuelta el director det
   aunque no sea el cron de deteccion. El mensaje puede llegar 1 minuto despues de que CRON B corrio: se procesa
   en el siguien cron que toque, no se espera al siguiente CRON B.
 - Sin esto hay huecos de hasta 20 min entre detection cycles con la flota en tanda rapida.
+## ESTADO ACTUAL DE LA INFRAESTRUCTURA DE CRONOMETROS (23oct 00:50-01:24 — documentado a pedido del fundador)
+
+**1. CRONS DEL DIRECTOR (mi lado, 4 los crons + 1 nuevo):**
+- CRON A/B/C/D v4: ~/.00-05 cadencias (A :00/:20/:40, B :10/:30/:50, C :05/:25/:45, D :15/:35/:55) - cuatro rotaciones de detección, preservación, ratificación, y asignador por capacidad.
+- CRON E (NUEVO, 23oct 01:24, id wku_1665aea4e001TIIHHRMfnEqUns): cada 10 MINUTOS, EXCLUSIVO - escribe a Beam UN mensaje con 30 tareas APILADAS de su nicho, sin repetir (puntero apilador_beam_ultimo en estado), midiendo que esta haciendo; separado del cron de lectura.
+- CAMBIO ANUNCIADO (23oct 01:16): el cron del PUSH pasa a cada 120 MINUTOS (decisión del fundador), liberando slot para el cron nuevo que el fundador anuncia en el próximo ciclo (pendiente).
+
+**2. CRONOMETROS DE AGENTES (de su lado; el director entrega el prompt y el encendido es del fundador/agente):**
+- Reflection-Beam-1.0: ACTIVO cada 5 MINUTOS, id wku_16648c2fe00192yweXE4ibRqca (creado por él, 225). Prompt canonico: DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/CRONOMETRO-REFLECTION-BEAM-1.0.md. PASO 1 OBLIGATORIO incluido (23oct).
+- G-5.3-Flash-Agente: PROMPT ENTREGADO por mensaje (322/324) y en disco CRONOMETRO-G-5.3-FLASH-AGENTE.md. PASO 1 incluido. Encendido + confirmación del Id PENDIENTE de su lado (auto-servicio activo igual).
+- DS-V4.1-Flash-Opencode: verificador oficial continuo por BATCHES (no cron fijo; se activa cuando caen tandas de Beam). Su CRONOMETRO-V2 propio en su carpeta. Activo desde 22oct 22:00.
+- agnes-3-flash: veredictora continuo por radar (sin cron fijo; escucha lotes). BACKLOG-AGNES con 12 auditorias de sello en cola.
+- Hy3: RAMA-2 por V2 (sin cron fijo; encuestas/tiebreakers). BACKLOG-HY3 con 5 encuestas + 3 reproducibles.
+- Ling-3.1-Flash: STANDBY con BACKLOG-LING generado (21 items i18n).
+- MiniMax-M3.1-Flash: OFFLINE (codigo M16/suites reservados a su regreso).
+
+**3. CAMBIOS INSTITUCIONALES DE HOY (los 3 problemas resueltos):**
+- PASO 1 OBLIGATORIO en cada cronometro de agente: leer el canal PROPIO antes de producir (fundador 23oct: los GO por mensaje no se enganchaban solos).
+- AUTO-SERVICIO: cada agente re-pobla su cola cuando baja de 20 (sin pedir permiso - mis mismo modelo del director).
+- NO-GUARDIA-SIN-TANDA: el CRON D repuebla por nicho ANTES de declarar guardia (54 backlog de G-5.3, 12 auditorias de agnes, 21 i18n de Ling).
+- Validar SUSTANCIA: flip [x] exige artefacto citado EXISTENTE (auditar_citas_checklist.py, de DS-WB, corriendo en 167 checklists: 195 defectos detectados, 50 en [x] siendo degradados).
+
+Gestion de pools intacta: NUNCA push; commits por rondas del CRON C con pathspec explicito; NUNCA powershell inline multilínea.
+
+Firma de esta seccion: GLM-5.3 Flash-Director / Kilo Code - 2026-10-23 01:30.
