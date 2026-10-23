@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:13:00",
+ "ultimo_update": "2026-10-23T03:16:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -497,6 +497,6 @@
    "proximo_disparo": "02:27"
   }
  },
- "apilador_beam_ultimo": "254 (apilado #6: 30 presupuestos restantes de 8 modulos — cierra el ciclo numerico del apilado #4)",
+ "apilador_beam_ultimo": "255 (apilado x10 honesto: 7 propuestas formales de correccion de hallazgos firmes + 3 consolidaciones — paquete de decisiones para el fundador)",
  "apilador_g53_ultimo": "330 (CRON F #2 x10: M48 — restricciones + sockets + 8 integraciones documentadas + flujo de clip)"
 }
