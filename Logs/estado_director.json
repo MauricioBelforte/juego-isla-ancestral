@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:01:00",
+ "ultimo_update": "2026-10-23T05:00:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -25,14 +25,14 @@
   ]
  },
  "g_5_3": {
-  "estado": "S62b RATIFICADO (335: M56 137 y 53 165 exactos; schema XMP y umbral re-render con sustancia); riel G-5.3 cerrado a lo definible — 12 modulos en espera de GO/decisiones del fundador | CRON F #2 x10: audit de los presupuestos numericos de Beam (formulas en los 03) — su nicho aritmetico; sin guardia pasiva (regimen apilador dual)",
+  "estado": "S62b RATIFICADO (335: M56 137 y 53 165 exactos; schema XMP y umbral re-render con sustancia); riel G-5.3 cerrado a lo definible — 12 modulos en espera de GO/decisiones del fundador | CRON F #2 x10: audit de los presupuestos numericos de Beam (formulas en los 03) — su nicho aritmetico; sin guardia pasiva (regimen apilador dual) | CRON F #1 regimen incondicional: apilado 339 (items 11-20 G53) pendiente de entrega",
   "pendientes_real": 222,
   "acuse_enviado": 335,
   "ultima_tanda": 40,
   "backlog_pendientes": 54,
   "cronometro": "CRONOMETRO-G-5.3-FLASH-AGENTE.md (23oct 00:58: AUTO-SERVICIO permanente - sin guardia pasiva; msg 322)",
   "cron_id": "wku_161a9d271001F2M641rCnNuZgy (10-min ACTIVO; 5-min requiere plataforma fundador)",
-  "apilado_ultimo": 337
+  "apilado_ultimo": 339
  },
  "deepseek": {
   "estado": "368 PROCESADO COMPLETO: item36 vencido (M90 249 verificado hallazgo-cero, sello con su firma); auditor-citas VALIDADO Y COMMIT (195 defectos, 50 en [x]); NUL M159 arreglado por director; P4 degradar-50 AUTORIZADO; nueva cola (a-d); mi 369",
@@ -555,5 +555,5 @@
   "guia_numeracion": "publicada en Mensajes entre modelos/GUIA-NUMERACION-CANALES.md + referenciada en AGENTS.md 4.1-b y CRONOMETROS canon (23oct 04:34, orden del fundador: \"que sepan todos de su existencia\")"
  },
  "apilador_beam_ultimo": "258 (apilado x5 FINAL honesto: nicho flipable agotado — M03 inventario-raiz + propuesta pricing-coherente 2.0 + M02 esquema/espejo + M03 doc-check; proximo real depende del fundador)",
- "apilador_g53_ultimo": "336 (CRON F #2 x10: 151-Control-Final, 48-Animacion)"
+ "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)"
 }
