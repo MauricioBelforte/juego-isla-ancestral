@@ -561,3 +561,4 @@ Regimen: UNA o DOS tareas [C] por ciclo (son tareas de DIAS). Formato de entrega
 - Sin limite superior: cuando agote un modulo, sigue con el siguiente. El fundador decide cuando frena.
 - INDEPENDENCIA: nada de contenido M138 (G-5.3), nada de codigo M17 (MiniMax), editor-locked [ ] honesto siempre.
 - CRONOMETRO-REFLECTION-BEAM-1.0.md - PROMPT del cronometro del fundador (23oct 00:46): ProduccioPrimer por nicho, fuentes, reglas, formato
+- **BACKLOG-PRESUPUESTOS-II.md** (23oct 05:55): 23 definiciones de 2da capa de presupuestos montadas por el director en los 9 design docs — Beam las audita y flipa
