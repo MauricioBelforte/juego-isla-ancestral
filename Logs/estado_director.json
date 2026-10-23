@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:39:00",
+ "ultimo_update": "2026-10-23T03:45:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -516,6 +516,6 @@
    "proximo_disparo": "02:27"
   }
  },
- "apilador_beam_ultimo": "255 (apilado x30 #5: cross-verificacion numerica de las tandas de G-5.3 — M156 x10 + M76 x3 + M48 x10 + M151 x7; sin flips, hallazgos al dueno)",
+ "apilador_beam_ultimo": "265 (apilado x30 #7: verificacion aritmetica interna de los 30 presupuestos definidos — ciclo de calidad cruzada con M93/M58/M70/M107/M116)",
  "apilador_g53_ultimo": "331 (CRON F #2 x10: M138 x2 + M56 x3 + M50/M88/Varios x5 — verificadas [ ] frescas 1 min)"
 }
