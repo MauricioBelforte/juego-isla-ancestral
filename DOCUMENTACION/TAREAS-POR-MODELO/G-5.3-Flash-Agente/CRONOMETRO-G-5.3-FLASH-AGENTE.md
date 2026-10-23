@@ -47,3 +47,19 @@ BASTA DE GUARDIAS SILENCIOSAS. Si no tengo nada que hacer en mi nicho,
 LE PIDO AL DIRECTOR que me busque tareas EJECUTABLES (nuevo material de
 disco de otros para flipar/definir). FIRMA: G-5.3-Flash-Agente / Kilo Code
 (Fundador lo ordeno directo 2026-10-23 02:25).
+
+## REGLA 2 (FUNDADOR 2026-10-23 05:03 — OBLIGATORIA, sin excepciones)
+**RESPONDER AL DIRECTOR ES OBLIGATORIO EN CADA CICLO DEL CRON.** Al final de
+cada disparo del cron: si hubo ejecución de tanda(es) -> CONSOLIDADO de
+reporte (mín 1 sección); si NO hubo ejecución -> igual UNA LÍNEA de estado
+al canal del director ("guardia sin novedad" o el bloqueo exacto). El cron
+mismo prompt lo exige; la FALTA de respuesta es una FALTA GRAVE (fue la
+causa del reclamo del fundador de 05:01). FIRMA: G-5.3-Flash-Agente /
+Kilo Code (Fundador 05:03).
+
+## INTENTO DE APAGADO TOTAL (FUNDADOR 05:06 pidió apagar todos; G-5.3 intentó 05:15)
+cancel_wakeup(list) -> 'No pending wakeups for this session' (0 wakeups del
+agente); los 3 IDs (wku_161a9d 10-min, wku_167166b7 25-min v2, wku_16725eb7
+25-min v3) NO están en la cola del agente: los monta la PLATAFORMA DEL
+FUNDADOR — la baja es SOLO desde su panel. G-5.3 no puede apagarlos. FIRMA:
+G-5.3-Flash-Agente / Kilo Code (Fundador pidió el apagado).

@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T05:40",
+ "ultimo_update": "2026-10-23T05:00:30",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -33,7 +33,8 @@
   "backlog_pendientes": 54,
   "cronometro": "CRONOMETRO-G-5.3-FLASH-AGENTE.md (23oct 00:58: AUTO-SERVICIO permanente - sin guardia pasiva; msg 322)",
   "cron_id": "wku_161a9d271001F2M641rCnNuZgy (10-min ACTIVO; 5-min requiere plataforma fundador)",
-  "apilado_ultimo": 339
+  "apilado_ultimo": 339,
+  "canal": "saneado 23oct: extras <301 en arch (subcarpetas con extras), gemelos 301+ con -B, raiz = solo 301+ unicos"
  },
  "deepseek": {
   "estado": "368 PROCESADO COMPLETO: item36 vencido (M90 249 verificado hallazgo-cero, sello con su firma); auditor-citas VALIDADO Y COMMIT (195 defectos, 50 en [x]); NUL M159 arreglado por director; P4 degradar-50 AUTORIZADO; nueva cola (a-d); mi 369",
