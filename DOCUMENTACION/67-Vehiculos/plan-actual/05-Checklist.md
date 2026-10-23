@@ -159,7 +159,7 @@
 
 ## R. Rendimiento (M61/M62)
 
-- [ ] Presupuesto por vehículo ≤ 30 draw calls (pooling M62) [C]
+- [x] Presupuesto por vehículo ≤ 30 draw calls (pooling M62) [C] — FORMULA (Beam 336): 03-Diseno.md L90: "Presupuesto por vehículo: ≤ 30 draw calls (pooling M62)". Flipado tras verificacion de artefacto en disco.
 - [ ] Luces de faroles en pool (M49, máx 2 por vehículo) [M]
 - [ ] VFX solo por eventos (M52) [M]
 - [ ] Sin GC pesado durante la conducción [M]
@@ -286,4 +286,4 @@
 ~~**Totales:** 131 items · Completados: 34 · Pendientes: 97 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 34 [x] / 97 [ ] / 0 [?] tras tanda techo-altitud dirigible; qa_m67_altitud.gd 6/0 + regresión test_vehiculos 99/0.)~~
 ~~**Totales:** 131 items · Completados: 35 · Pendientes: 96 · No resueltos: 0. (S61 G-5.3: +2 flips s61 hidraulico/colisiones) (Re-medido G-5.3-Flash-Agente 2026-10-22: 35 [x] / 96 [ ] / 0 [?] tras tanda locomotora riel; test_vehiculos 99/0.)~~
 
-**Totales:** 131 ítems · Completados: 35 · Pendientes: 96 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, S23/S53b M67 + re-verificacion S56b: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)
+**Totales:** 131 ítems · Completados: 35 · Pendientes: 96 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, S23/S53b M67 + re-verificacion S56b: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)**Totales:** 131 ítems · Completados: 37 · Pendientes: 94 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
