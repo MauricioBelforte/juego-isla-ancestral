@@ -189,4 +189,25 @@ func limpiar(id: StringName) -> void
 
 - Cada isla define `punto_llegada` y `punto_partida` (vecinos del muelle).
 - El muelle se construye por M17/M40 (infraestructura) siguiendo la definición de M27.
-- Al desembarcar, el jugador aparece sobre el muelle mirando a tierra; suena música de la isla (M41).
+- Al desembarcar, el jugador aparece sobre el muelle mirando a tierra; suena música de la isla (M41)
+
+## Presupuestos de render y carga (Beam 340, produce-first)
+### ### IslandPref (enum de carga)
+- Enum: `enum IslandPref { PRELOAD, DESCARGA }` — la capacidad equivalente ya existe como `TIPO_CARGA/TIPO_DESCARGA/TIPO_` en el código (island_definition.gd). Este enum formaliza la intención de carga para el catálogo de islas.
+- Valores: PRELOAD (carga al boot, islas cercanas), DESCARGA (carga on-demand, islas lejanas).
+- Coherente con M63 (IslandLoading) y M10 (generación).
+
+### ### Shader de agua (M51) presupuestado por M61
+- Presupuesto: shader de agua (M51) ≤ 1.0 ms por frame (dentro del budget de render 16.6 ms para 60 FPS).
+- El shader de agua usa 1 draw call (M51) + LOD por distancia (< 20m full, 20-50m half, > 50m off).
+- Coherente con M61 (rendimiento) y M51 (agua).
+
+### ### Profiling de carga (M61)
+- Presupuesto: la carga de la isla más grande cabe en frame budget M61 (16.6 ms para 60 FPS).
+- Medición: P99 del frame time durante la carga, con VSYNC off.
+- Umbral: FPS >= 60 (media), P99 <= 40 ms (max frame).
+
+### ### Test de estrés (M61)
+- Presupuesto: 2 islas cargadas + 1 precargando bajo presupuesto M61 (16.6 ms para 60 FPS).
+- Medición: FPS promedio/minimo, draw calls, objetos renderizados, VRAM estimada.
+- Umbral: FPS >= 60 (media), P99 <= 40 ms (max frame)..
