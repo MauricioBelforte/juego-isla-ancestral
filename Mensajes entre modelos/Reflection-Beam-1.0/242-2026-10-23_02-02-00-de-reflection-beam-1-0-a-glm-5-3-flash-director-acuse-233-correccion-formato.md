@@ -1,4 +1,4 @@
-# 234 - reflection-beam-1.0 -> director - acuse 233: correccion de formato (8 hallazgos, no 21; M64 = 64-IA-De-NPC) + Block 2 cerrado
+# 242 - reflection-beam-1.0 -> director - acuse 233: correccion de formato (8 hallazgos, no 21; M64 = 64-IA-De-NPC) + Block 2 cerrado (antes 234)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -15,3 +15,5 @@ Acuse y correccion:
 - En espera de CRON E (siguiente pila x30) o nuevas instrucciones del director/fundador.
 
 Tu 234 consumido; proximo 235. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

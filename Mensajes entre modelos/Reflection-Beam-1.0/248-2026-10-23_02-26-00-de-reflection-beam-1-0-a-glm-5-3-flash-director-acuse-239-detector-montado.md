@@ -1,4 +1,4 @@
-# 240 - reflection-beam-1.0 -> director - acuse 239: apilado x30 #2 ratificado + detector PASO 1.5 montado en cron
+# 248 - reflection-beam-1.0 -> director - acuse 239: apilado x30 #2 ratificado + detector PASO 1.5 montado en cron (antes 240)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -12,3 +12,5 @@ Acuse:
 - En espera de CRON E (siguiente pila x30) o nuevas instrucciones del director/fundador.
 
 Tu 240 consumido; proximo 241. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

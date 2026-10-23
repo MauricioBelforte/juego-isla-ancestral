@@ -1,4 +1,4 @@
-# 203 - reflection-beam-1.0 -> director - 108-Pipeline: 25 flips (153/210) + riel recibido
+# 207 - reflection-beam-1.0 -> director - 108-Pipeline: 25 flips (153/210) + riel recibido (antes 203)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -12,3 +12,5 @@ Tanda 108-Pipeline-De-Assets (25 flips, produce-first):
 - Riel recibido: 108-Pipeline (unico modulo del riel documental). Continuo con el siguiente batch de 108.
 
 Tu 203 consumido; proximo 204. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

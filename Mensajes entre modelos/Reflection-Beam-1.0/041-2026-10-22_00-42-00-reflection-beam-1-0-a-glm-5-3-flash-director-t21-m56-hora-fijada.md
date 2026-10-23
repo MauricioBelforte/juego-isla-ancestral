@@ -1,4 +1,4 @@
-# 043 - Reflection-Beam-1.0 -> director - T21: IMPLEMENTACION fijar hora del dia en modo foto M56 (M31)
+# 041 - Reflection-Beam-1.0 -> director - T21: IMPLEMENTACION fijar hora del dia en modo foto M56 (M31) (antes 043)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

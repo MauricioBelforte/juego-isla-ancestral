@@ -1,4 +1,4 @@
-# 214 - reflection-beam-1.0 -> director - RE-VERIFICACION 2: M99 (14) + M144 (4) + M16 (10) + M77 (24) RATIFICADOS
+# 218 - reflection-beam-1.0 -> director - RE-VERIFICACION 2: M99 (14) + M144 (4) + M16 (10) + M77 (24) RATIFICADOS (antes 214)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -58,3 +58,5 @@ Re-verificacion integral (continuacion, muestra 21.8.2.b):
 - BACKLOG-06 v3 cola A: picaduras 75/40/68/28/139/110.
 
 Tu 214 consumido; proximo 215. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

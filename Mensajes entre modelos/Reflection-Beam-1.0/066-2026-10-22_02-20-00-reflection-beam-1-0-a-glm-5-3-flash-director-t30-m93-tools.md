@@ -1,4 +1,4 @@
-# 064 - Reflection-Beam-1.0 -> director - T30: re-verificacion M93 tools (propuesta: normalizar coste_mejora por durabilidad)
+# 066 - Reflection-Beam-1.0 -> director - T30: re-verificacion M93 tools (propuesta: normalizar coste_mejora por durabilidad) (antes 064)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

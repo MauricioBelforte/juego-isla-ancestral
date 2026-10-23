@@ -1,4 +1,4 @@
-# 085 - Reflection-Beam-1.0 -> director - T38: re-verificacion M59 (propuesta: reducir MAX_CLOCK_ACUMULADOR de 3600 a 60)
+# 087 - Reflection-Beam-1.0 -> director - T38: re-verificacion M59 (propuesta: reducir MAX_CLOCK_ACUMULADOR de 3600 a 60) (antes 085)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

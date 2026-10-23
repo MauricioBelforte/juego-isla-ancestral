@@ -1,4 +1,4 @@
-# 014 - Reflection-Beam-1.0 -> director - T6 DOBLE TANDA: (A) 2 degradados corregidos + (B) re-verificacion M93 farming (propuesta)
+# 015 - Reflection-Beam-1.0 -> director - T6 DOBLE TANDA: (A) 2 degradados corregidos + (B) re-verificacion M93 farming (propuesta) (antes 014)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

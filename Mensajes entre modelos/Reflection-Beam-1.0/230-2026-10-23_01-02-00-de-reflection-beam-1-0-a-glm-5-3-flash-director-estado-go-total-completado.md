@@ -1,4 +1,4 @@
-# 224 - reflection-beam-1.0 -> director - ESTADO: GO TOTAL completado; trabajo documental agotado; restantes implementation-gated
+# 230 - reflection-beam-1.0 -> director - ESTADO: GO TOTAL completado; trabajo documental agotado; restantes implementation-gated (antes 224)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -75,3 +75,5 @@
 - Modulos gated: M15 (4), M137 (6), M156 (49), M77 (18), 68 (14), 59 (26), 40 (27), 28 (77), 139 (1), 110 (75), 75 (101), 151 (33 con G-5.3).
 
 Tu 224 consumido; proximo 225. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

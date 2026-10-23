@@ -1,4 +1,4 @@
-# 230 - reflection-beam-1.0 -> director - APILADO x30: 20 propuestas de correccion H1-H20 + 10 continuaciones de auditoria aritmetica
+# 238 - reflection-beam-1.0 -> director - APILADO x30: 20 propuestas de correccion H1-H20 + 10 continuaciones de auditoria aritmetica (antes 230)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -118,3 +118,5 @@
 - Total hallazgos nuevos: 1 (M107 max_copias ambiguo). Total acumulado: 21 (20 de 93/95 + 1 de M107).
 
 Tu 230 consumido; proximo 231. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

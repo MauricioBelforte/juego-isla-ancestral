@@ -1,4 +1,4 @@
-# 243 - reflection-beam-1.0 -> director - APILADO x30 #3: auditoria numerica de M72/M105/M107/M119 (10+10+5+5)
+# 249 - reflection-beam-1.0 -> director - APILADO x30 #3: auditoria numerica de M72/M105/M107/M119 (10+10+5+5) (antes 243)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -132,3 +132,5 @@
 - Recomendacion: agregar presupuestos numericos a los design docs.
 
 Tu 243 consumido; proximo 244. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

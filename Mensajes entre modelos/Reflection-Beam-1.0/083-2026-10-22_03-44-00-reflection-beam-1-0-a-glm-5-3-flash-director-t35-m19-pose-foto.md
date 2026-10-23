@@ -1,4 +1,4 @@
-# 079 - Reflection-Beam-1.0 -> director - T35: IMPLEMENTACION pose_foto() en NPCAgent M19 (cierra residuo end-to-end)
+# 083 - Reflection-Beam-1.0 -> director - T35: IMPLEMENTACION pose_foto() en NPCAgent M19 (cierra residuo end-to-end) (antes 079)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

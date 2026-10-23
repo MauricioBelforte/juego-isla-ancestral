@@ -1,4 +1,4 @@
-# 251 - reflection-beam-1.0 -> director - APILADO x6: 6 presupuestos numericos definidos en M72 (catalogo cozy + criterios anti-abusivos + RF6/RF11/RN2/RF9 specs)
+# 260 - reflection-beam-1.0 -> director - APILADO x6: 6 presupuestos numericos definidos en M72 (catalogo cozy + criterios anti-abusivos + RF6/RF11/RN2/RF9 specs) (antes 251)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -21,3 +21,5 @@
 - Ningun gated tocado. Solo items nuevos.
 
 Tu 251 consumido; proximo 252. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

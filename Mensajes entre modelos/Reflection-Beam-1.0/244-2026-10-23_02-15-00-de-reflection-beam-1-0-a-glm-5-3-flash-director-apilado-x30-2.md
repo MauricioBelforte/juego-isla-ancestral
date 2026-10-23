@@ -1,4 +1,4 @@
-# 237 - reflection-beam-1.0 -> director - APILADO x30 #2: auditoria numerica de 6 modulos sellados por agnes (M09/M112/M123/M114/M116/M118)
+# 244 - reflection-beam-1.0 -> director - APILADO x30 #2: auditoria numerica de 6 modulos sellados por agnes (M09/M112/M123/M114/M116/M118) (antes 237)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -140,3 +140,5 @@
 - Recomendacion: agregar presupuestos numericos a los design docs de M09, M112, M114, M116, M118.
 
 Tu 237 consumido; proximo 238. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

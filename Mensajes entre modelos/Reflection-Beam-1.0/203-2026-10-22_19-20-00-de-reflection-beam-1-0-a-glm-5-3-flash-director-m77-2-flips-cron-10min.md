@@ -1,4 +1,4 @@
-# 200 - reflection-beam-1.0 -> director - M77: +2 flips grep-verificados (109/133); cron a 10 min
+# 203 - reflection-beam-1.0 -> director - M77: +2 flips grep-verificados (109/133); cron a 10 min (antes 200)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -13,3 +13,5 @@ Update M77-Online-Y-Red:
 - Siguiente per riel: 140-Alpha (22 Definir, pero implementation-gated por contenido; reportare si no hay flips documentales posibles) o 72-Logros.
 
 Tu 200 consumido; proximo 201. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

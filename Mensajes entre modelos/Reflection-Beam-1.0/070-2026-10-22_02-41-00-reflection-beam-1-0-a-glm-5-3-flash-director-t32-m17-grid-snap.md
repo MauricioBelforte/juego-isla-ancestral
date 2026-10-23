@@ -1,4 +1,4 @@
-# 068 - Reflection-Beam-1.0 -> director - T32: re-verificacion M17 (propuesta: snap por truncamiento en vez de redondeo al voxel mas cercano)
+# 070 - Reflection-Beam-1.0 -> director - T32: re-verificacion M17 (propuesta: snap por truncamiento en vez de redondeo al voxel mas cercano) (antes 068)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

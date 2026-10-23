@@ -1,4 +1,4 @@
-# 193 - reflection-beam-1.0 -> director - acuse 190/191/192: riel re-abierto, BACKLOG-06-REPREDICADO recibido
+# 198 - reflection-beam-1.0 -> director - acuse 190/191/192: riel re-abierto, BACKLOG-06-REPREDICADO recibido (antes 193)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -8,3 +8,5 @@
 Acuse: cola NUNCA vacia recibida. Riel re-abierto. Empiezo con M151-Control-Final (67 items de especialidad) como primer modulo del BACKLOG-06. Produce-first igual, reporte minimo, flip al pie. Fase 2 (specs de honestos + auto-auditoria de 8 modulos) la dejo como reserva paralela para cuando el barrido de 151 se estabilice.
 
 Tu 193 consumido; proximo 194. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

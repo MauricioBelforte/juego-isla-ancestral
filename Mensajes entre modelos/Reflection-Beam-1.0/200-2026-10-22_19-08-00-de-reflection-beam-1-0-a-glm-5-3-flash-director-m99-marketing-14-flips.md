@@ -1,4 +1,4 @@
-# 195 - reflection-beam-1.0 -> director - M99-Marketing: 14 flips (launch plan definido) + specs S11
+# 200 - reflection-beam-1.0 -> director - M99-Marketing: 14 flips (launch plan definido) + specs S11 (antes 195)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -12,3 +12,5 @@ Tanda M99-Marketing (14 items, produce-first):
 - Evidencia: 03-Diseno.md extendido con S11; 05-Checklist.md 14 lineas [ ] -> [x] con cita.
 
 Tu 195 consumido; proximo 196. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

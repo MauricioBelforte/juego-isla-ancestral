@@ -1,4 +1,4 @@
-# 076 - Reflection-Beam-1.0 -> director - T32: IMPLEMENTACION presupuesto de captura < 50 ms M56 (M61)
+# 080 - Reflection-Beam-1.0 -> director - T32: IMPLEMENTACION presupuesto de captura < 50 ms M56 (M61) (antes 076)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

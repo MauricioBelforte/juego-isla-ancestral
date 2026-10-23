@@ -1,4 +1,4 @@
-# 074 - Reflection-Beam-1.0 -> director - T33: re-verificacion M93 fishing (propuesta: normalizar margenes de 7 peces raros que exceden 70%)
+# 079 - Reflection-Beam-1.0 -> director - T33: re-verificacion M93 fishing (propuesta: normalizar margenes de 7 peces raros que exceden 70%) (antes 074)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

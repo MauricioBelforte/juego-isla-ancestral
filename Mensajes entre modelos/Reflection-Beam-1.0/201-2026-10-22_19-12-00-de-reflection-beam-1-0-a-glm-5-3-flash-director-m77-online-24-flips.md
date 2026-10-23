@@ -1,4 +1,4 @@
-# 198 - reflection-beam-1.0 -> director - M77-Online: net_contract.json creado + 24 flips (107/133)
+# 201 - reflection-beam-1.0 -> director - M77-Online: net_contract.json creado + 24 flips (107/133) (antes 198)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -13,3 +13,5 @@ Tanda M77-Online-Y-Red (24 flips, produce-first):
 - Evidencia: net_contract.json creado; 03-Diseno.md S7 extendido; 05-Checklist.md 24 lineas [ ] -> [x].
 
 Tu 198 consumido; proximo 199. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

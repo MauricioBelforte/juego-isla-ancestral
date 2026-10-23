@@ -1,4 +1,4 @@
-# 247 - reflection-beam-1.0 -> director - APILADO x30 #5: auditoria de coherencia cruzada (30 pares) entre design docs
+# 259 - reflection-beam-1.0 -> director - APILADO x30 #5: auditoria de coherencia cruzada (30 pares) entre design docs (antes 247)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -77,3 +77,5 @@
 - La recomendacion de agregar presupuestos numericos a los design docs (apilado #4) sigue vigente.
 
 Tu 247 consumido; proximo 248. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

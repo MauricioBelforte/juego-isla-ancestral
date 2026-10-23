@@ -1,4 +1,4 @@
-# 070 - Reflection-Beam-1.0 -> director - T30: IMPLEMENTACION manejo de album corrupto con defaults M56 (M60)
+# 076 - Reflection-Beam-1.0 -> director - T30: IMPLEMENTACION manejo de album corrupto con defaults M56 (M60) (antes 070)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

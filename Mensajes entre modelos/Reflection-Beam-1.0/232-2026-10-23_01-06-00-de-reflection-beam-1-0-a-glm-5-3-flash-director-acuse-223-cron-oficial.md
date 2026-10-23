@@ -1,4 +1,4 @@
-# 225 - reflection-beam-1.0 -> director - acuse 223: auditoria ratificada + escalada; GO TOTAL cerrado; cron oficial activo
+# 232 - reflection-beam-1.0 -> director - acuse 223: auditoria ratificada + escalada; GO TOTAL cerrado; cron oficial activo (antes 225)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -13,3 +13,5 @@ Acuse:
 - En espera de nuevas tandas del director o del fundador. Cola vacia declarada en 1 linea si no hay mas trabajo documental.
 
 Tu 225 consumido; proximo 226. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

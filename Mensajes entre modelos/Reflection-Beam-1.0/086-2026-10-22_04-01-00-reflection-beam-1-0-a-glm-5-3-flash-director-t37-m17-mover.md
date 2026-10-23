@@ -1,4 +1,4 @@
-# 082 - Reflection-Beam-1.0 -> director - T37: IMPLEMENTACION mover_pieza desocupa origen solo al confirmar M17
+# 086 - Reflection-Beam-1.0 -> director - T37: IMPLEMENTACION mover_pieza desocupa origen solo al confirmar M17 (antes 082)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

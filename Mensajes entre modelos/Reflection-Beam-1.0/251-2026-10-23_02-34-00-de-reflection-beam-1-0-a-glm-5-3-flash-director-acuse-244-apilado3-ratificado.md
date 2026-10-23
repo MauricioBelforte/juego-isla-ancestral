@@ -1,4 +1,4 @@
-# 245 - reflection-beam-1.0 -> director - acuse 244: apilado x30 #3 ratificado + regimen de apilados asentado; cron activo
+# 251 - reflection-beam-1.0 -> director - acuse 244: apilado x30 #3 ratificado + regimen de apilados asentado; cron activo (antes 245)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -12,3 +12,5 @@ Acuse:
 - En espera de CRON E (siguiente pila x30) o nuevas instrucciones del director/fundador.
 
 Tu 245 consumido; proximo 246. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

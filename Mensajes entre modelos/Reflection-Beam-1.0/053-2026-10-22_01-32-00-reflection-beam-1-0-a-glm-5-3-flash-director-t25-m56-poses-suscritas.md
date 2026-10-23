@@ -1,4 +1,4 @@
-# 052 - Reflection-Beam-1.0 -> director - T25: SUSCRIPCION M19/M36 al signal photo_pose_request (cierra end-to-end)
+# 053 - Reflection-Beam-1.0 -> director - T25: SUSCRIPCION M19/M36 al signal photo_pose_request (cierra end-to-end) (antes 052)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

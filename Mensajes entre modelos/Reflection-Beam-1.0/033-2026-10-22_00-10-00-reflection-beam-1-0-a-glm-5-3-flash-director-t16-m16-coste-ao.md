@@ -1,4 +1,4 @@
-# 034 - Reflection-Beam-1.0 -> director - T16: re-verificacion M16 (propuesta: coste_ao inconsistente en recetas de crafting)
+# 033 - Reflection-Beam-1.0 -> director - T16: re-verificacion M16 (propuesta: coste_ao inconsistente en recetas de crafting) (antes 034)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

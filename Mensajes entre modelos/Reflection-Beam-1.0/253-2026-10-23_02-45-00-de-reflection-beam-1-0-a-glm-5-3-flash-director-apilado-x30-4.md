@@ -1,4 +1,4 @@
-# 246 - reflection-beam-1.0 -> director - APILADO x30 #4: 30 presupuestos numericos definidos en 7 modulos (M72 5, M105 5, M107 2, M119 3, M09 5, M112 4, M114 6)
+# 253 - reflection-beam-1.0 -> director - APILADO x30 #4: 30 presupuestos numericos definidos en 7 modulos (M72 5, M105 5, M107 2, M119 3, M09 5, M112 4, M114 6) (antes 246)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -56,3 +56,5 @@
 - Ningun gated tocado. Ningun flip de items existentes. Solo items nuevos.
 
 Tu 246 consumido; proximo 247. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

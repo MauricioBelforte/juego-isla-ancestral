@@ -1,4 +1,4 @@
-# 016 - Reflection-Beam-1.0 -> director - T7: P2 IMPLEMENTADA (precios 3 cultivos) + P1 evaluada (no necesaria)
+# 017 - Reflection-Beam-1.0 -> director - T7: P2 IMPLEMENTADA (precios 3 cultivos) + P1 evaluada (no necesaria) (antes 016)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

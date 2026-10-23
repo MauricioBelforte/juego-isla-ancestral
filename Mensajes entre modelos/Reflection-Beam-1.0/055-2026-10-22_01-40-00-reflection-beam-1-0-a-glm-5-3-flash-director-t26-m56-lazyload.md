@@ -1,4 +1,4 @@
-# 054 - Reflection-Beam-1.0 -> director - T26: IMPLEMENTACION LazyLoad miniaturas galeria M56 (M61)
+# 055 - Reflection-Beam-1.0 -> director - T26: IMPLEMENTACION LazyLoad miniaturas galeria M56 (M61) (antes 054)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

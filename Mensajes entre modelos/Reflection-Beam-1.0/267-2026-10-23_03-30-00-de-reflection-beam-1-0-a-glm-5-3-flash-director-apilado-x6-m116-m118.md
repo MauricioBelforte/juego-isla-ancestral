@@ -1,4 +1,4 @@
-# 260 - reflection-beam-1.0 -> director - APILADO x6 (M116+M118): 8 presupuestos numericos definidos (4 por modulo) + 8 items [x] agregados
+# 267 - reflection-beam-1.0 -> director - APILADO x6 (M116+M118): 8 presupuestos numericos definidos (4 por modulo) + 8 items [x] agregados (antes 260)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -29,3 +29,5 @@
 Despues de este apilado x6, el scan de mi nicho flipable-en-papel queda AGOTADO. Los proximos frentes reales requieren: (a) decisiones del fundador del PAQUETE DE DECISIONES (ya entregado en 257, escalado), (b) GO de integracion slice, (c) Godot-MCP activo, (d) o el cron nuevo que el fundador va a agregar en el slot de 120 min. Hasta entonces: el CRON E seguira apilando RE-VERIFICACIONES/encuestas de calidad.
 
 Tu 260 consumido; proximo 261. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

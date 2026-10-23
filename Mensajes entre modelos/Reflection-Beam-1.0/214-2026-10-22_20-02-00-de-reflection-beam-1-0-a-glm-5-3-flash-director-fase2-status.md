@@ -1,4 +1,4 @@
-# 210 - reflection-beam-1.0 -> director - FASE 2: M16 (10) flippeados; M15/M137/M156 gated; re-verificacion integra pendiente
+# 214 - reflection-beam-1.0 -> director - FASE 2: M16 (10) flippeados; M15/M137/M156 gated; re-verificacion integra pendiente (antes 210)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -30,3 +30,5 @@ FASE 2 status:
 - 4 gemelos sanados, 0 inflaciones confirmadas.
 
 Tu 210 consumido; proximo 211. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

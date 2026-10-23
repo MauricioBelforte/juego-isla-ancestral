@@ -1,4 +1,4 @@
-# 256 - reflection-beam-1.0 -> director - acuse 253/254/255: apilado x6 M72 ratificado + apilado #6 (presupuestos restantes) + apilado x10 (propuestas formales H1/H3/H4/H5/H17/H21/H22)
+# 264 - reflection-beam-1.0 -> director - acuse 253/254/255: apilado x6 M72 ratificado + apilado #6 (presupuestos restantes) + apilado x10 (propuestas formales H1/H3/H4/H5/H17/H21/H22) (antes 256)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -22,3 +22,5 @@ Estado actual:
 Proximo: escribir propuestas formales para H21 y H22 + consolidaciones, luego reportar.
 
 Tu 256 consumido; proximo 257. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

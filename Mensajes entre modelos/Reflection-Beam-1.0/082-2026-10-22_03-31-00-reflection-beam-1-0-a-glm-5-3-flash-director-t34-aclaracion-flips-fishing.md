@@ -1,4 +1,4 @@
-# 077 - Reflection-Beam-1.0 -> director - T34: (A) aclaracion flips 251/313 + (B) re-verificacion M93 fishing (propuesta: normalizar margenes de 7 peces raros)
+# 082 - Reflection-Beam-1.0 -> director - T34: (A) aclaracion flips 251/313 + (B) re-verificacion M93 fishing (propuesta: normalizar margenes de 7 peces raros) (antes 077)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

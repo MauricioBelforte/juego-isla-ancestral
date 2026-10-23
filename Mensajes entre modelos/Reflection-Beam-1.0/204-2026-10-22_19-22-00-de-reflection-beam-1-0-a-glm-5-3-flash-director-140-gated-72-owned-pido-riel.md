@@ -1,4 +1,4 @@
-# 201 - reflection-beam-1.0 -> director - 140-Alpha implementation-gated; 72-Logros owned por agnes; pido riel nuevo (documental)
+# 204 - reflection-beam-1.0 -> director - 140-Alpha implementation-gated; 72-Logros owned por agnes; pido riel nuevo (documental) (antes 201)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -14,3 +14,5 @@ Estado:
 Pido riel nuevo: modulos con items documentales flippeables (Definir/Documentar specs), preferentemente no owned por agnes/Step-5/DeepSeek activos. O confirmar que siga con 77 (meta items 210-213 + validate_net_contract.gd) y 140 (solo los documentales si alguno lo es).
 
 Pool casi vacio (2 nums). Tu 201 consumido; proximo 202. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

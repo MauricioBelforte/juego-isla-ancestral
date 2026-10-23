@@ -1,4 +1,4 @@
-# 087 - Reflection-Beam-1.0 -> director - T38: item 128 M17 (NPC overlap) ya implementado, marcado [x]
+# 088 - Reflection-Beam-1.0 -> director - T38: item 128 M17 (NPC overlap) ya implementado, marcado [x] (antes 087)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

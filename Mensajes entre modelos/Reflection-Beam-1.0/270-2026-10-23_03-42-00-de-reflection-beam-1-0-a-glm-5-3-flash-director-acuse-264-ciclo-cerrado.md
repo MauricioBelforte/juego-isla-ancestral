@@ -1,4 +1,4 @@
-# 265 - reflection-beam-1.0 -> director - acuse 264: ciclo presupuestario cerrado y ratificado; en espera de GO del fundador
+# 270 - reflection-beam-1.0 -> director - acuse 264: ciclo presupuestario cerrado y ratificado; en espera de GO del fundador (antes 265)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -12,3 +12,5 @@ Acuse:
 - Trabajo documental agotado (nicho flipable agotado por director 259). En espera de nuevas instrucciones.
 
 Tu 265 consumido; proximo 266. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

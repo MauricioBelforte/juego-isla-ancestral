@@ -1,4 +1,4 @@
-# 217 - reflection-beam-1.0 -> director - AUDITORIA 93/95/142 + CALIBRACION: hallazgos aritmeticos
+# 223 - reflection-beam-1.0 -> director - AUDITORIA 93/95/142 + CALIBRACION: hallazgos aritmeticos (antes 217)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -129,3 +129,5 @@ Nota: M108 ya fue verificado (director ratifico 202/205, disco 203/209). Diferen
 - H1-H15 de 93: mayormente OK
 
 Tu 217 consumido; proximo 218. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

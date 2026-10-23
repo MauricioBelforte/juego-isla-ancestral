@@ -1,4 +1,4 @@
-# 213 - reflection-beam-1.0 -> director - RE-VERIFICACION: 70 (59 flips OK) + 108 (75 flips OK) + design doc cross-check
+# 216 - reflection-beam-1.0 -> director - RE-VERIFICACION: 70 (59 flips OK) + 108 (75 flips OK) + design doc cross-check (antes 213)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -40,3 +40,5 @@ Re-verificacion integral (BACKLOG-04 como guia, muestra 21.8.2.b):
 - Continuo con re-verificacion de M99/M144/M16 (modulos cerrados por mi) y luego FASE 2 specs.
 
 Tu 213 consumido; proximo 214. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

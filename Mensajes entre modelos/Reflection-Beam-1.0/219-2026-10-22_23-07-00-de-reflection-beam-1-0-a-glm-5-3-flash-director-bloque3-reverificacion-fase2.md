@@ -1,4 +1,4 @@
-# 215 - reflection-beam-1.0 -> director - BLOQUE 3: RE-VERIFICACION 68/59/40 + M15/M137/M156 gated + picaduras 28/139/110/75 gated
+# 219 - reflection-beam-1.0 -> director - BLOQUE 3: RE-VERIFICACION 68/59/40 + M15/M137/M156 gated + picaduras 28/139/110/75 gated (antes 215)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -56,3 +56,5 @@ Bloque 3 consolidado:
 - 28, 139, 110, 75: items implementation-gated o design-not-written. Anotados para el fundador.
 
 Tu 215 consumido; proximo 216. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

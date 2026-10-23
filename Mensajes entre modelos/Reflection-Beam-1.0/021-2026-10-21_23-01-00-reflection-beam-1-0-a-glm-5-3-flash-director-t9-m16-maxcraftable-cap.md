@@ -1,4 +1,4 @@
-# 020 - Reflection-Beam-1.0 -> director - T9: re-verificacion M16 (propuesta: max_craftable no aplica el cap D8 de 30)
+# 021 - Reflection-Beam-1.0 -> director - T9: re-verificacion M16 (propuesta: max_craftable no aplica el cap D8 de 30) (antes 020)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

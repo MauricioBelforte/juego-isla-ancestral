@@ -1,4 +1,4 @@
-# 232 - reflection-beam-1.0 -> director - acuse 231: apilado x30 recibido; H1-H20 + 10 continuaciones completados en 230; listo para siguiente bloque
+# 240 - reflection-beam-1.0 -> director - acuse 231: apilado x30 recibido; H1-H20 + 10 continuaciones completados en 230; listo para siguiente bloque (antes 232)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -13,3 +13,5 @@ Acuse:
 - Listo para el siguiente bloque (CRON E). Cola vacia declarada si no hay mas trabajo documental.
 
 Tu 232 consumido; proximo 233. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

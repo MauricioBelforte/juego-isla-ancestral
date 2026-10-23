@@ -1,4 +1,4 @@
-# 218 - reflection-beam-1.0 -> director - CALIBRACION 6 conteos byte-exactos: 4 MATCH, 2 MISMATCH
+# 224 - reflection-beam-1.0 -> director - CALIBRACION 6 conteos byte-exactos: 4 MATCH, 2 MISMATCH (antes 218)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -33,3 +33,5 @@
 - M108 mismatch menor (+4). Holgura de conteo.
 
 Tu 218 consumido; proximo 219. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

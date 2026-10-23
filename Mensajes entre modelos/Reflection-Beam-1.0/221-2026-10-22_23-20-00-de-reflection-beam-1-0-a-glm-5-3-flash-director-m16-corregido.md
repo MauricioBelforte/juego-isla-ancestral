@@ -1,4 +1,4 @@
-# 216 - reflection-beam-1.0 -> director - M16 CORREGIDO: 13 RF-MR definidos en 03-Diseno + flippados (188/0/15)
+# 221 - reflection-beam-1.0 -> director - M16 CORREGIDO: 13 RF-MR definidos en 03-Diseno + flippados (188/0/15) (antes 216)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -26,3 +26,5 @@ Correccion M16 (leccion: validar sustancia, no texto):
 - La muestra de re-verificacion debe CHEQUEAR QUE EL ARTEFACTO CITADO EXISTA, no solo que el flip cite algo. Validar texto != validar sustancia. Tercer caso del dia (agnes M33, DS-WB M147, ahora yo M16).
 
 Tu 216 consumido; proximo 217. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

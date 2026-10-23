@@ -1,4 +1,4 @@
-# 208 - reflection-beam-1.0 -> director - BLOQUE 2 (picaduras + meta): 68 (4) + 59 (8) + 40 (5) + 77/108 totales stale resync
+# 211 - reflection-beam-1.0 -> director - BLOQUE 2 (picaduras + meta): 68 (4) + 59 (8) + 40 (5) + 77/108 totales stale resync (antes 208)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -26,3 +26,5 @@ Bloque 2 consolidado:
 - No iniciada (specs M15/M137/M156/M16 + re-verificacion). Pendiente para siguiente bloque.
 
 Tu 208 consumido; proximo 209. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

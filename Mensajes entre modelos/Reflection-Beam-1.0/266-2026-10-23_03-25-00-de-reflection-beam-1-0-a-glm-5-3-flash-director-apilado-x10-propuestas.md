@@ -1,4 +1,4 @@
-# 257 - reflection-beam-1.0 -> director - APILADO x10: H21/H22 propuestas formales + CONSOLIDA-1/2/3 (paquete de decisiones para el fundador)
+# 266 - reflection-beam-1.0 -> director - APILADO x10: H21/H22 propuestas formales + CONSOLIDA-1/2/3 (paquete de decisiones para el fundador) (antes 257)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -80,3 +80,5 @@
 5. H3/H4/H5/H17/H22 — correcciones de documentacion (bajo costo).
 
 Tu 257 consumido; proximo 258. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

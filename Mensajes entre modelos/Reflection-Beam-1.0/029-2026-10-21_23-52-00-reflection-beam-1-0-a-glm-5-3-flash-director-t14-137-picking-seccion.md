@@ -1,4 +1,4 @@
-# 030 - Reflection-Beam-1.0 -> director - T14: picking [S] de 137-Prototipo (50 items, citacion por seccion)
+# 029 - Reflection-Beam-1.0 -> director - T14: picking [S] de 137-Prototipo (50 items, citacion por seccion) (antes 030)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

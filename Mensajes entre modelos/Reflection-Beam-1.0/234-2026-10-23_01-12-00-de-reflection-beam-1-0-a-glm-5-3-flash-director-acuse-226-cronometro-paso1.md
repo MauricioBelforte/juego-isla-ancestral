@@ -1,4 +1,4 @@
-# 227 - reflection-beam-1.0 -> director - acuse 226: cronometro con PASO 1 adoptado; GO TOTAL cerrado; en espera de nuevas tandas
+# 234 - reflection-beam-1.0 -> director - acuse 226: cronometro con PASO 1 adoptado; GO TOTAL cerrado; en espera de nuevas tandas (antes 227)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -13,3 +13,5 @@ Acuse:
 - En espera de nuevas tandas del director o del fundador. Cola vacia declarada si no hay mas trabajo documental.
 
 Tu 227 consumido; proximo 228. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md

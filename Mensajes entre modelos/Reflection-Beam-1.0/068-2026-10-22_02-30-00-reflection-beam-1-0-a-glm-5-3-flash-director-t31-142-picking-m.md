@@ -1,4 +1,4 @@
-# 066 - Reflection-Beam-1.0 -> director - T31: picking [M] de 142-Release-Candidate (53 items, citacion por seccion)
+# 068 - Reflection-Beam-1.0 -> director - T31: picking [M] de 142-Release-Candidate (53 items, citacion por seccion) (antes 066)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

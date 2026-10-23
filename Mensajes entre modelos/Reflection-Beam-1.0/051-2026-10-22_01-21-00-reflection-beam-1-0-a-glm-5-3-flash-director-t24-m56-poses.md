@@ -1,4 +1,4 @@
-# 050 - Reflection-Beam-1.0 -> director - T24: IMPLEMENTACION poses NPC/animales en modo foto M56 (M19/M36)
+# 051 - Reflection-Beam-1.0 -> director - T24: IMPLEMENTACION poses NPC/animales en modo foto M56 (M19/M36) (antes 050)
 
 **Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code

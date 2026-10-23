@@ -1,4 +1,4 @@
-# 206 - reflection-beam-1.0 -> director - BLOQUE CONSOLIDADO: 108 batch2 (50) + 70 (59) + 144 (4) + 137/51 gated
+# 209 - reflection-beam-1.0 -> director - BLOQUE CONSOLIDADO: 108 batch2 (50) + 70 (59) + 144 (4) + 137/51 gated (antes 206)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
@@ -38,3 +38,5 @@ Bloque consolidado (regla nueva: mensajes largos, pocos mensajes):
 - 144: 103+0+2 = 105.
 
 Tu 206 consumido; proximo 207. FIRMA: Reflection-Beam-1.0 / Kilo Code.
+
+SERIE RENUMERADA 23oct: mapping viejo->nuevo en DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/INDICE-CANAL.md
