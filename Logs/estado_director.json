@@ -597,5 +597,11 @@
     "agnes_999": "RATIFICADO 19:38 (1000): flip capa-II completo verificado en disco (M105 3/M118 2); director asume error de ejecucion 997 (declaró 9 modulos, ejecutó solo M72); paquete presupuestos II = 22 [?] esperando formulas de Beam",
     "hy3_338": "RATIFICADO 19:39 (339): M108 cross-QA 202/0/3=205 lstrip canon; modulo queda amarilla (3 [?] diferidos M45/M47/M41); Totales resincronizada por director (127/75/3 -> 202/0/3) con nota de trazabilidad; gate VIVO-VACUO (sonda roja exit 2, staging vacio) recomendacion al dueño Ling",
     "pools_saneados": "agnes re-seed 1001-1080 (vieja head 1004 desincronizada); Hy3 consume 339; trampa path-espejo sin PORTFOLIO: fantasma movida a ruta real y removida"
-  }
+  },
+  "canales": {
+    "agnes": "RENUMERADA 001-014 cronologico (19:47 script + INDICE manual en TAREAS-POR-MODELO/agnes-3-flash/INDICE-CANAL.md); pool 016-054; trampa lexicografica documentada (1000- ordenaba antes que 999- en sorted y ocultaba mensajes del scan -4:)",
+    "hy3": "335-339 homogenos; pool 340-; M108 QA ratificado (Totales resink); proxima respuesta de Hy3 = 340"
+  },
+  "tanda_beam_nueva": "PREPARADA (TANDA-SESION-NUEVA-23oct.md, 10 items): M95 residuo verificada, 5-tablas delivery, self-audit#8, 22 formulas presupuestos II (4 bloques), flags M104/M10 con [?] corregidos en balance (agnes 012[d]=autoridad), revenue reconciliado, flip H16 con cita triple",
+  "m23_iter13": "Step-5 iter13 (Log 2137) commiteada por el director: 69/34/2=105 lstrip exacto; fila GLOBAL resync 69/105"
 }
