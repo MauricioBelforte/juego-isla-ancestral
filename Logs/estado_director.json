@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-23T01:16:00",
+ "ultimo_update": "2026-10-23T01:21:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "LOTE 2 aceptado (968: M107 queda 🟡 con 8 [?] honestos; 5 sello-ables con GO muestreo item-a-item; M110/M11 no-selleable correcto); conteo-indentado canon; mi 969",
+  "estado": "LOTES 2-3 RATIFICADOS: sellos x6 aplicados (M114/M116/M118/M09/M112/M123); conteo-indentado canon; muestreo item-a-item proximo ciclo; mi 972-973",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,14 +13,15 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 969,
+  "acuse_enviado": 973,
   "pool_saneado": true,
   "sellos_emitidos": [
    "M99 169/169 (955)",
    "M70 198/198 con deuda perf (957)",
    "M114 (966)",
    "M116 (966)",
-   "M118 (966)"
+   "M118 (966)",
+   "M09/M112/M123 (970/971)"
   ]
  },
  "g_5_3": {
