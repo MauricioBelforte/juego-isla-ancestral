@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T04:00:00 (23oct)",
+ "ultimo_update": "2026-10-23T04:20:00 (23oct)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -364,6 +364,14 @@
  "record_dia": "DIA RECORD DE PRODUCCION (22oct): 7 modulos COMPLETOS por Beam (M91, M147, M143, M104, M163, M162, M153) + M139/M161/M15 casi - todo produce-first con verificacion en vivo (agnes por lote + director conteos + Step-5 muestras); sellos DoD en retrospectiva",
  "flags_fundador_pendientes": [
   {
+   "modulo": "H16 (RESUELTO por el fundador 23oct 06:35/07:52)",
+   "flags": [
+    "DECISION FINAL: Coleccionista = 69.99 con +35 corregido (34.99+35=69.99 x) - fundador: \"si el mas barato\". Beam aplica las 3 fuentes (ediciones.json + monetizacion.json + M95 03 L11/L33) con citas y flip espejo [x]. Las 49.99/59.99/79.99 rutas viejas ya limpias"
+   ],
+   "origen": "DECISION FINAL del fundador via director 23oct 06:35/07:52",
+   "fecha": "2026-10-23 04:20"
+  },
+  {
    "modulo": "PAQUETE DE DECISIONES UNIFICADO (Beam 257 CONSOLIDA-1/2/3, tabulado)",
    "flags": [
     "H16 precio coleccionista: 69.99 (design doc manda) y cambiar +45 a +35 [prioridad 1 - revenue/marketing]",
@@ -424,14 +432,6 @@
    ],
    "origen": "hallazgo cross-verificador DS-WB",
    "fecha": "2026-10-22 22:50"
-  },
-  {
-   "modulo": "95-Monetizacion (hallazgo H16 de Beam, confirmado por director)",
-   "flags": [
-    "PRECIO COLECCIONISTA TRIPLE-INCONSISTENTE (Beam 222, lineas exactas): monetizacion.json=49.99 / ediciones.json=59.99 / 03-Diseno L11=69.99 y aritmetica interna rota (24.99+10+45=79.99 != 69.99) - DECIDIR precio unificado y alinear las 3 fuentes"
-   ],
-   "origen": "auditoria aritmetica de Beam (218) + verificacion director en disco",
-   "fecha": "2026-10-23 01:11"
   },
   {
    "modulo": "M18-BIS/CASA assets",
