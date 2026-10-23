@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-23T03:57:00",
+ "ultimo_update": "2026-10-23T04:20:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "983 procesado con accion (flag menor desinstalador ejecutado: espuria removida); M116 limpio; COLA B radar; mi 984 | 985/986 RATIFICADOS (x30 #7 + 9 decisiones: 6/9 disco); conteo canon M93 139 corregido (subcontada 134); mi 987 | cron */40 reencendido por el fundador (988/990 acuse) | 992 confirmado (993: re-list recursivo canon, x30-8 prox bloque veredictora)",
+  "estado": "983 procesado con accion (flag menor desinstalador ejecutado: espuria removida); M116 limpio; COLA B radar; mi 984 | 985/986 RATIFICADOS (x30 #7 + 9 decisiones: 6/9 disco); conteo canon M93 139 corregido (subcontada 134); mi 987 | cron */40 reencendido por el fundador (988/990 acuse) | 992 confirmado (993: re-list recursivo canon, x30-8 prox bloque veredictora) | LOTE A INTEGRAL asignado (994): 5 colas de verificación+corrección de TODA la produccion de Beam del dia",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 993,
+  "acuse_enviado": 994,
   "pool_saneado": true,
   "sellos_emitidos": [
    "M99 169/169 (955)",
@@ -60,9 +60,9 @@
   "acuse_enviado": 333
  },
  "ling": {
-  "estado": "T32 RATIFICADA (229): auditoria de traduccion i18n punto-ciego del watchdog; hallazgo M87 SETTINGS.ADVANCED rename escalado al fundador con linea L296; COLA AGOTADA/standby",
+  "estado": "T32 RATIFICADA (229): auditoria de traduccion i18n punto-ciego del watchdog; hallazgo M87 SETTINGS.ADVANCED rename escalado al fundador con linea L296; COLA AGOTADA/standby | LOTE B INTEGRAL asignado (235: i18n de la produccion del dia + los archivos que agnes no cubre)",
   "pendientes_real": 112,
-  "acuse_enviado": 229,
+  "acuse_enviado": 235,
   "cron": "horario 0 * * * * reencendido (225)"
  },
  "crons_vigentes": {
