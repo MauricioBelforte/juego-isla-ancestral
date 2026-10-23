@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T00:59:30",
+ "ultimo_update": "2026-10-23T01:02:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -149,7 +149,8 @@
   "CARRERA BACKLOG-CANAL (22oct 23:45, causa director): escribi la ref del G53 en el BACKLOG-MASTER de G-5.3 mientras el anexaba T64-T67 concurrentemente -> sus anexos se perdieron (los recupera de sus mensajes 305/314/319). REGLA: el director NO escribe en el backlog de canal de un agente activo; genera archivos aparte y avisa por mensaje",
   "RESYNC INVISIBILIZADO POR FORMATO (23oct 00:20, hallazgo DS-OC): 6 lineas Totales seguian stale porque mis resync por regex exigia un formato exacto que cambiaba por modulo (Corregido agnes- / items vs lineas-item / ## header). REGLA: al resync de Totales, buscar por presencia de palabras (Totales+Completados) y reescribir canonico; confiar el VEREDICTO de staleness al verificador (DS-OC), no a mi regex",
   "CONTEO-INDENTADO (23oct 00:25, agnes 968): los 05 VIEJOS usan checklist indentado (espacios antes del dash) - el regex top-only da 0 y genera sub-cuentas. CANON: contar con lstrip().startswith(); la trampa esta en mezclar los dos criterios al comparar",
-  "GUARDIA PASIVA DUAL (22oct: G-5.3 dos veces seguidas) - la causa no fue falta de tarea sino que el director no genero cola re-poblandolo cuando el riel se agoto. FIX estructural para todos: CRON D REPOBLA >= 20 acumulables; CRONOMETRO por agente depositado en su carpeta TAREAS-POR-MODELO y por mensaje; el agente AUTO-SUMINISTRA (escanea y re-puebla) porque tiene el mismo nicho del director (mismo modelo)."
+  "GUARDIA PASIVA DUAL (22oct: G-5.3 dos veces seguidas) - la causa no fue falta de tarea sino que el director no genero cola re-poblandolo cuando el riel se agoto. FIX estructural para todos: CRON D REPOBLA >= 20 acumulables; CRONOMETRO por agente depositado en su carpeta TAREAS-POR-MODELO y por mensaje; el agente AUTO-SUMINISTRA (escanea y re-puebla) porque tiene el mismo nicho del director (mismo modelo).",
+  "RUIDO-DE-MTIME (23oct 00:45): forty 05-Checklists parecido-modificados en 2 min era reescritura idempotente (io.open sin cambios reales) - NO inflacion ni raid. Verificar SIEMPRE git diff --stat ANTES de alarmarse por mtimes: mtime cambia, contenido no."
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
@@ -200,7 +201,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "23:35 - ronda sin nuevas asignaciones: Beam en auditoria de los modulos del dia (70/144/99/M16) + H16 re-verificacion; DS-WB con M113-auditoria + lote 91/147/24 GO; Step-5 bloque final en vuelo (preservado 22:10); agnes con BACKLOG de 12 auditorias de sello; G-5.3 con tanda 318 en vuelo (fijar bateria 6 + protocolos 156/76). Todos con GO.",
+ "nota_cron_d": "01:02 - flota estable: Beam (212/213/217/218/220/222: auditoria aritmetica + re-verificacion), G-5.3 (riel cerrado + auto-servicio cron 322), Step-5 (bloque final en vuelo), DS-WB (P4 + item 36), DS-OC (verificador oficial), agnes (lote 3 de COLA A en vuelo), Hy3 (RAMA-2 QA M117). Con los crons detección/ratificación en ciclo y sin acciones nuevas que asignar por el momento.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
