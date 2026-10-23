@@ -52,7 +52,7 @@
 - [x] Definir preset default "Natural" y aplicar preview en vivo [C] — iter. 1: preset natural en foto_presets.json + aplicar_preset() con fallback (testeado); preview visual en vivo dueño M49/cámara
 - [ ] No modificar la paleta global del juego (M49) [M]
   · espera: modulo(s) dependiente(s): M49 (coordinar con su dueno)
-- [ ] Guardar preset elegido en los metadatos de la foto [S]
+- [x] Guardar preset elegido en los metadatos de la foto [S] — schema XMP S62-bis: preset_id (string obligatorio, uno de los 6 canon) + preset_config opcional; schema_version manda la migracion M60; sidecar XMP al lado del png — 03 sec S62-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #3)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Validar que los filtros no destruyan la estética cozy [M] — iter. 1: presets data-driven validados por FotoSchema (test 10 checks 0 fallos); validación estética visual con dueño V2/M154
 
@@ -74,7 +74,7 @@
   · espera: feature de sistema de clima (definir contrato/dueno por asignar)
 - [ ] No permitir fijar hora durante eventos cinemáticos (M74) [M]
   · espera: modulo(s) dependiente(s): M74 (coordinar con su dueno)
-- [ ] Guardar hora en los metadatos de la foto [S]
+- [x] Guardar hora en los metadatos de la foto [S] — schema XMP S62-bis: fecha_iso (UTC M29) + hora_local (calendario M29) obligatorios; res_w/res_h y hash_sha256 de integridad (patron M60) — 03 sec S62-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #3)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## G. Ocultar Interfaz
@@ -82,7 +82,7 @@
 - [x] Ocultar HUD completo (M53) con una tecla [S] — tecla H (acción ocultar_hud, Log 1515/1516, BUG-126/128); en el flujo de foto vía UIManager.set_hud_visible (iter. 3, suite T2)
 - [ ] Ocultar jugador (cuerpo invisible) y prompts de interacción (M70) [M]
   · espera: modulo(s) dependiente(s): M70 (coordinar con su dueno)
-- [ ] Mostrar indicador mínimo de "HUD oculto" [S]
+- [x] Mostrar indicador mínimo de "HUD oculto" [S] — 03 sec S62-bis: punto 4 px esquina sup-derecha, color sello brisa alpha 40%, fade 0.15 s (seco con Reduce Motion M58), fijo; 0 apariciones en la foto capturada — 03 sec S62-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #3)
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
 - [x] Restaurar HUD al salir del modo foto [S] — iter. 3: _entrar_modo_foto() oculta guardando el estado previo (_hud_visible_antes_modo); _salir_modo_foto() restaura el exacto
 - [ ] Testear ocultamiento con Reduce Motion activo (M58) [M]
@@ -159,7 +159,7 @@
   · implementado: photo_gallery.gd (Control con ScrollContainer+GridContainer, LazyLoad de miniaturas solo visibles, presupuesto MAX 24, recargar()). (Reflection-Beam-1.0, T26, 2026-10-22)
 - [ ] No duplicar texturas en memoria al abrir la galería [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Listar fotos ordenadas por fecha [S]
+- [x] Listar fotos ordenadas por fecha [S] — 03 sec S62-bis: 3 modos (fecha-desc default, fecha-asc, favoritos-primero) con toggle persistente M58; tarjetas fecha locale M29 + icono fauna (criterio S61) + favorito; paginado 12/pagina — 03 sec S62-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #3)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## N. Galería y Diario (M55)
@@ -278,7 +278,7 @@
 
 ## W. Arte y Sonido
 
-- [ ] Definir iconos de controles del modo foto (M46) [M]
+- [x] Definir iconos de controles del modo foto (M46) [M] — lineicons M46 (silueta, tooltip con tecla canon; remaps M57 mandan): P camara, ESPACIO obturador, RUEDA zoom, F1-F6 presets, Q/E filtro, G rejilla, galeria M14 — 03 sec S61-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #2)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M46
 - [x] Definir marcadores de encuadre (rejilla de tercios) con toggle [M] — 03-Diseno sec 5: 2+2 lineas al tercio blanco 40% + cruz centro; toggle G, defecto OFF por preset, solo UI (2026-10-23 S43)
   · espera: definicion de alcance/contrato del item (ver 03-Diseno.md; dueno por asignar)
@@ -312,7 +312,7 @@
   · espera: modulo(s) dependiente(s): M72 (coordinar con su dueno)
 - [x] Probar compatibilidad con guardados antiguos (M60) [C]
   · implementado: photo_service.gd _cargar_album_index() migra formato v0 (Array) y clave photos->fotos. (Reflection-Beam-1.0, T31, 2026-10-22)
-- [ ] Documentar plan de testings automáticos del modo foto [M]
+- [x] Documentar plan de testings automáticos del modo foto [M] — 3 QAs vigentes citados (qa_m56_presets 11/0, qa_m56_diary_provider 10/0, qa_m56_photopose 13/0) + escena-test pendiente de GO y corrida verificar_checklist S56b documentada (38 alertas, 10 saneadas, opciones A/B/C escaladas) — 03 sec S61-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #2)
   · espera: documentacion tecnica del item (redactor por asignar)
 
 ## Z. Cierre del Módulo
@@ -323,7 +323,7 @@
   · espera: documentacion tecnica del item (redactor por asignar)
 - [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
+- [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S] — corrida S56b --todos documentada en 314-addendum: 122 alertas totales detectadas; 10 saneadas (67,72,73,75,86,91,95 + 138 re-cuento); opciones A/B/C al fundador (2026-10-23) — 03 sec S61-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #2)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Push del módulo y reporte al usuario [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -415,4 +415,4 @@
   y ajeno**: parse error en `tests/unit/debug/test_debug_menu.gd` (`_limpiar_huerfanos_boot`,
   M110, WIP sin commitear de otro agente) que revienta toda la suite GdUnit4 (rc=105).
   No se tocó ese archivo (perteneciente a otro módulo en vuelo).
-**Totales:** 137 items · Completados: 53 · Pendientes: 82 · No resueltos: 2. (S61: 5 flips del apilado; conteo real 53 tras corregir runs en vuelo) (Re-medido G-5.3-Flash-Agente 2026-10-23 S43: 48 [x] / 87 [ ] / 2 [?] (tras tanda photopose+restaurar; qa_m56_photopose.gd 13/0.)
+**Totales:** 137 items · Completados: 60 · Pendientes: 75 · No resueltos: 2. (S62b G-5.3-Flash-Agente 2026-10-23: +4 schema XMP/indicador/orden-galeria; delta 1 con el conteo del peer 59 documentado para revision; re-cuentro top-level del disco)

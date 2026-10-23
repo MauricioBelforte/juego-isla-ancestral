@@ -218,3 +218,27 @@ para no romper el near-clip.
   zonas gated (el snapshot se rechaza ANTES de capturar por el mismo
   gate-check que la entrada).
 
+## S61-bis — apilado CRON F #2 (G-5.3-Flash-Agente, 2026-10-23): iconos M46, plan de testings automaticos y corrida del verificar_checklist
+
+**Iconos de controles del modo foto (L281, M46):** los atajos S43/S61 tienen
+su lineicon M46 en el HUD del modo foto: P (camara, "Modo foto (P)"),
+ESPACIO (obturador), RUEDA (zoom +/- en el 0.5x-8x), F1-F6 (presets 1-6,
+tooltip del preset canon), Q/E (ciclo filtro), G (rejilla tercios), M14
+(galeria). Iconos de lineicons M46 (silueta, sin fondo), tooltip con la
+tecla canon; los remaps M57 mandan (el tooltip lee la tecla remapeada).
+
+**Plan de testings automaticos del modo foto (L315):** el protocolo
+automatico headless queda definido con 3 QAs vigentes + 1 pendiente:
+- qa_m56_presets (11/0): los 6 presets FotoSchema-validados (0 errores) y
+  ids canonicos presentes.
+- qa_m56_diary_provider (10/0): la interfaz IDiaryPhotoProvider con
+  duck-typing seguro (default, dummy implementador, senal foto_tomada).
+- qa_m56_photopose (13/0): pose NPC integrada al modo foto (contrato M19).
+- PENDIENTE (GO de integracion): qa del export tipos segun escena-test
+  (interiores/playa/densa) con P7 frame-time (REPORTE-FPS) — ejecucion
+  requiere el modo foto montado en el IDE/editor (V2/V4 o GO).
+- Verificar_checklist.py corrida S56b: el checker --todos corrio y detecto
+  38 Totales-incoherentes (flips de terceros no reflejados en el bloque
+  Totales) + 84 otras; saneados 10 ya (7 modulos aritmeticos + M138
+  re-continued); las opciones A/B/C escaladas al fundador (314-addendum).
+

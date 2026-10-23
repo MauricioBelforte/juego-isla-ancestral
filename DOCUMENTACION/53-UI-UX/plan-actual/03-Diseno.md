@@ -270,3 +270,19 @@ usan **`set_value_no_signal` / `set_pressed_no_signal` / `select()`**. Emitir
 - Sin tocar `scripts/interacciones/`, `mapa/`, `construccion/`, `saving/` (lectura) ni widgets DeepSeek.
 - i18n: 14 claves `SETTINGS.*` nuevas agregadas a `locales/es.po` y `en.po` (LF).
 - Deprecación de los volúmenes de `game_settings.gd` (dueño M07) documentada en su `plan-actual/04-Codigo.md`.
+
+## Umbral de re-render del UI (S62b — G-5.3-Flash-Agente, 2026-10-23; apilado CRON F #3)
+
+**Criterio numerico de CUANDO el UI re-renderiza (anti-lag M58/M61):**
+- RE-RENDER DISPARADO SOLO POR: cambio de chunk/POI del jugador (evento del
+  streaming M63), cambio de ratio de recurso (inventario M14), cambio de
+  perfil M58 (aplicar_perfil), o cambio de seleccion herramienta M13.
+- PROHIBIDO re-render por frame: sin polling de estado en _process de UI
+  (solo senal/evento); el binding que pregunta cada frame es deuda
+  documentada.
+- UMBRAL numerico: el re-render de un panel completo debe completar
+  <= 8 ms (medible con el QA NFR overhead M58 S45/S48); el delta entre
+  cambio de perfil y el frame pintado <= 2 frames.
+- COMO se mide: profiler Godot pestaña UI raiz (la duración del callback de
+  la señal) + el QA NFR overhead como patrón de instrumentacion.
+
