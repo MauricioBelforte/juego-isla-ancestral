@@ -14,7 +14,7 @@ name: Backup Externo
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Diario a las 2 AM UTC
+    - cron: '0 2 * * 1'  # Semanal, lunes 2 AM UTC (reducido por GO del fundador 23oct 21:48, PAQ-6/H26: cuidar cuota compartida de artifacts)
   workflow_dispatch:      # Ejecución manual
 
 permissions:
@@ -66,7 +66,7 @@ jobs:
           path: |
             backup_${{ env.STAMP }}.tar.gz
             backup_${{ env.STAMP }}.tar.gz.sha256
-          retention-days: 30
+          retention-days: 7
           if-no-files-found: error
 
       - name: Setup rclone

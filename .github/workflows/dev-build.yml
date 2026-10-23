@@ -18,6 +18,10 @@ on:
         type: boolean
         default: false
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Tests + Lint
@@ -115,7 +119,7 @@ jobs:
         with:
           name: coverage
           path: out/coverage.json
-          retention-days: 30
+          retention-days: 7
 
   notify:
     name: Notify Slack/Discord on failure

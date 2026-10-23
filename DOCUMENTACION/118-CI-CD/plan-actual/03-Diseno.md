@@ -96,7 +96,7 @@ jobs:
 |---|---|---|
 | Suma de triggers | push 7-14/sem + tag 1-2/mes (~0.25-0.5/sem) + nightly 7/sem | Total 14.25-21.5 runs/semana. PASS (sin total declarado que contradiga; la suma queda documentada aqui) |
 | Retention artifacts | dev 7 d (retention-days custom) / release 90 d (default GitHub) | Coherente con defaults de GitHub Actions. PASS |
-| Cuota free tier | 15 min/job x 14-21.5 runs/sem x 4.3 sem = 903-1,387 min/mes Linux; el limite free es 2,000 min/mes | Linux: DENTRO (banda alta 69%). HALLAZGO: si el runner es WINDOWS (factor x2 de minutos en la cuota) -> 1,806-2,774 min-equivalentes: EXCEDE 2,000 en la banda alta. Mitigacion: runner ubuntu-latest, o reducir nightly a 3/semana, o tier Team. |
+| Cuota free tier | 15 min/job x 14-21.5 runs/sem x 4.3 sem = 903-1,387 min/mes Linux; el limite free es 2,000 min/mes | Linux: DENTRO (banda alta 69%). HALLAZGO: si el runner es WINDOWS (factor x2 de minutos en la cuota) -> 1,806-2,774 min-equivalentes: EXCEDE 2,000 en la banda alta. Mitigacion: runner ubuntu-latest, o reducir nightly a 3/semana, o tier Team. | [IMPLEMENTADO el 23oct 21:50, GO fundador: backup.yml de diario->semanal con retencion 7d; dev/quality/testing con concurrency cancel-in-progress; coverage retention 7d — commits de la ronda 23oct]
 
 ROLL-UP al fundador: el HALLAZGO de la cuota (factor x2 runners Windows en banda alta) entra al paquete de decisiones de infra junto a los 38-Totales (A/B/C) y los 5 flags M151.
 
