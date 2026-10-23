@@ -7,10 +7,18 @@
 | Criterio | Umbral |
 |----------|--------|
 | Comunidad activa (Discord activo / pedidos) | ≥ 50 pedidos de mods verificados en M100 |
-| Presupuesto V2 disponible | ≤ 10% del presupuesto |
+| Presupuesto V2 disponible | ≤ 10% del total — **default provisorio: USD 3.000** (fundador delega al director 23oct 20:46, revisable) |
 | Diseño de este módulo revisado | 100% puntos 1-15 aprobados |
 | Riesgo de re-arquitectura | 0 (se usa M108/M109) |
 - Si el GATE falla → posponer a V3 sin coste ya comprometido.
+
+> **Ancla por defecto del presupuesto (PROVISORIA, revisable):** USD 3.000 fijados por el DIRECTOR el 23oct 20:48 apelando
+> a la delegación del fundador («dejá un presupuesto por defecto que analices vos; cualquier cosa después lo modificamos»). Base:
+> 10% de la proyección conservadora V1 base-pura (ARPU 28.49 x 10.000 copias = USD 28.49k -> 10% = USD 2.85k ≈ 3k) y
+> coherente con el estimado 240-360 h de este módulo (costo efectivo indie/agents ~8.5/h). REGLA ESTRUCTURAL PERMANENTE: el
+> presupuesto NUNCA es criterio único del GATE — solo habilitado si TODOS los demás criterios están verdes (comunidad ≥50 pedidos,
+> diseño 100% revisado, riesgo de re-arquitectura 0). Cuando el fundador fije el presupuesto total real, esta celda se actualiza y
+> el default pasa a historial (criterio auditor-citas: la decisión queda citada aquí).
 
 ## 2. Formato de mod (RF3)
 ```
