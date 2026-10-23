@@ -1,60 +1,127 @@
-# GUIA DE NUMERACION DE CANALES — SOP (fundador 23oct 04:30: "si no tenemos esa guía deberíamos crearla", para no repetir esto siempre igual)
+# MÉTODO DEFINITIVO: NUMERACIÓN Y AGRUPACIÓN DE MENSAJES EN CANALES
 
 **Modelo:** GLM-5.3 Flash-Director
 **Plataforma:** Kilo Code
-**Fecha:** 2026-10-23 04:30
+**Fecha:** 2026-10-23 06:20
+**Autorizado por:** el fundador ("documenta el método de como usarlo para enumerar bien y mover bien los archivos asi cualquier agente sabe como hacerlo")
+**Referenciado en:** AGENTS.md §4.1-b · CRONOMETROS canon · GUIA-NUMERACION-CANALES.md
 
-## CUÁNDO USARLA
-Cuando un canal de `Mensajes entre modelos/<agente>/` queda con: números duplicados (gemelos por apuración con crons en paralelo), huecos, desorden cronológico, o después de un día de producción masiva con cron + apiladores corriendo.
+## EL ESTÁNDAR ÚNICO (válido desde 23oct 06:20)
 
-## LA ESTRATEGIA DEL PROYECTO (validada por el fundador 23oct 04:26 — NO sufijos -B, NO índice-cronológico-sin-renumerar)
-**RENUMERACIÓN SECUENCIAL COMPLETA por fecha cronológica real** (mismo patrón que el canal DS-OC renumerado 001-096):
-1. Ordenar todos los `.md` del canal por fecha/hora del nombre.
-2. Renombrar secuencialmente `001` a `NNN` (dos pasadas: primero a `tmp__`, luego a final — evita colisiones).
-3. Generar `INDICE-CANAL.md` con el **mapping viejo→nuevo** (las citas históricas a números viejos resuelven con esa tabla; el contenido nunca se edita, solo se renombra).
-4. Re-sembrar `NUMEROS_DISPONIBLES.txt` = `NNN+1` a `+40`.
-5. Resetear el puntero `.ultima-revision*.txt` al último número.
+1. **Cada mensaje** = 1 archivo `.md` con prefijo `NNN-` (3 dígitos, secuencial, sin repeticiones)
+2. **Las centenas de 100** se agrupan en subcarpetas `arch_XXXX-XXXX/` (4 dígitos, 1-based):
+   - mensajes 001-100 → `arch_0001-0100/`
+   - mensajes 101-200 → `arch_0101-0200/`
+   - mensajes 201-300 → `arch_0201-0300/`
+   - etc.
+3. **La raíz del canal** contiene SIEMPRE la **centena en curso** (los mensajes que aún no completan 100 del rango actual), junto con `NUMEROS_DISPONIBLES.txt` y los punteros `.ultima-revision*.txt`
+4. **Ningún número se repite entre carpetas ni entre archivos** — un mensaje, un número, para siempre
 
-## HERRAMIENTA (no reescribes nada)
-`python -X utf8 scripts/renumerar_canal.py "Mensajes entre modelos/<canal>"`
-— hace los pasos 1-5 en una corrida (tolera archivos-fantasma NTFS con try/except; los omite del sweep).
+## CÓMO EMPEZAR UN CANAL NUEVO (agente nuevo o reinicio)
 
-## LAS 3 TRAMPAS QUE LA HERRAMIENTA EVITA
-1. **Gemelos**: crons + apiladores en paralelo consumen/borran el mismo número → 23 duplicados acumulados en una noche en el canal Beam.
-2. **Predicción de nombres**: apilar con número "proximo" sin consumir del pool → gemelo garantizado. REGLA: consumir del pool EN el mismo acto de escribir.
-3. **Sembra corta**: pool diario pequeño se agota en 10 mensajes → sembrar ≥ 30-40 números por adelantado en días de producción.
-4. **Fantasma NTFS**: ruta > 260 chars (MAX_PATH) es listada por `scandir` pero `open/rename` dan ENOENT → skip con try/except (contenido ya versionado en git).
-5. **Referencias históricas**: NUNCA editar logs antiguos para arreglar números — resuelven con el mapping del `INDICE-CANAL.md`.
+1. Crear la carpeta del canal: `Mensajes entre modelos/<nombre-del-agente>/`
+2. Crear el pool: `NUMEROS_DISPONIBLES.txt` con los números 001-040 (40 números de arranque; sembrar ≥ 100 en días de producción)
+3. El primer mensaje numerado lo escribe el DIRECTOR (presentación/estructura), después el agente sigue la secuencia
+4. Al llegar al 100: crear `arch_0001-0100/` y mover los 100 primeros (ver herramienta abajo)
 
-## MANTENIMIENTO PREVENTIVO
-- Pool de cada canal: mantener ≥ 20 números libres; los días de producción sémbralo ≥ 30-40.
-- Los apiladores (CRON E/F) deben CONSUMIR head del pool en el mismo acto de escribir.
-- Si aparece un gemelo igual: renombra inmediato (no lo dejes acumular).
+## CÓMO ENUMERAR CORRECTAMENTE (cada mensaje que escribís)
 
-Firma: GLM-5.3 Flash-Director / Kilo Code.
-## PASO ADICIONAL OBLIGATORIO (fundador 23oct 04:38: faltaba corregir la numeracion dentro de cada archivo y referencias)
-6-int. Corregir la PRIMERA LINEA de cada mensaje renombrado: numero nuevo + retener el viejo como rastro: e.g. # 043 - director -> ... (antes 226)
-7-int. Anadir UNA nota de mapping por mensaje (SERIE RENUMERADA 23oct: mapping en INDICE-CANAL.md) — las citas internas historicas (Responde a / consumido N) NO se editan: resuelven con el (antes OLD) + INDICE-CANAL
-Ambos pasos estan implementados en el ciclo del canal Beam (commit d50e06f: 181 primeras lineas + 170 notas).
+1. **Tomá el número del pool ANTES de escribir**: leé `NUMEROS_DISPONIBLES.txt`, tomá el head (el más bajo libre), BORRALO del pool EN EL MISMO ACTO de escribir el mensaje
+2. Nombre del archivo: `NNN-YYYY-MM-DD_HH-MM-SS-<emisor>-a-<receptor>-<tema>.md`
+3. NUNCA avanzá el contador sin escribir el archivo (eso genera huecos)
+4. NUNCA repitas un número ya usado (eso genera gemelos que después cuestan horas de limpieza)
 
-## MANTENIMIENTO: SUBCARPETAS DE ARCHIVO (fundador 23oct 05:40: agrupar las carpetas cada 100 mensajes, dejando libre los ultimos 100)
+## CÓMO AGRUPAR POR CENTENA COMPLETA (cada 100, sin cortes)
 
-Cuando la raiz de un canal supere los 100 mensajes: mover todos los viejos a subcarpetas rch_0001-0100/, rch_0101-0200/... por rangos de 100, dejando en la raiz SOLO los ultimos 100 + NUMEROS_DISPONIBLES.txt + .ultima-revision*.txt.
-- Los nombres de archivo NO se cambian (el numero original conserva la trazabilidad citable).
-- Los archivos-fantasma NTFS (>260 MAX_PATH) no se pueden mover: quedan en raiz con skip documentado.
-- El detector CRON A/B escanea primer nivel: los viejos en subcarpeta salen del sweep (mas rapido, sin perdida).
-- Implementado en los 8 canales (23oct 05:40): 1.146 archivos movidos en 19 subcarpetas, 12 fantasma NTFS quedados en raiz.
+**La regla** (afirmada por el fundador 23oct 05:36): una centena se archiva a su subcarpeta SOLO cuando tiene sus 100 exactos. En la raíz queda SIEMPRE la centena en curso, aunque tenga 1 solo mensaje.
 
-## MÉTODO ESTÁNDAR DE EJECUCIÓN (fundador 23oct 05:55: "revisa bien todo y documenta el metodo")
+**La herramienta estándar** (no la reescribís nunca):
+```
+python -X utf8 scripts/agrupar_canales.py                                             # TODOS los canales
+python -X utf8 scripts/agrupar_canales.py "Mensajes entre modelos/<agente>"         # solo un canal
+```
+- Idempotente: correrla sin cambios no mueve nada
+- Tolerante a fantasmas NTFS (los salta con [SKIP] y sigue)
+- Crea las subcarpetas `arch_XXXX-XXXX/` automáticamente
 
-Casos probados en los canales reales esta noche (Beam renumerado 001-276, DeepSeek e Hy3 convertidos de 2-digit a arch, 251 sueltos migrados con long-path):
+**Verificación después de correr:**
+```
+python -X utf8 -c "import os, re; base='Mensajes entre modelos/<agente>'; print(sorted(f for f in os.listdir(base) if os.path.isdir(os.path.join(base,f)) and f.startswith('arch_')))"
+```
 
-1. **Convertir carpetas 2-digit al estándar**: `0-99` → `arch_0001-0100`, `100-199` → `arch_0101-0200` (renombro de carpeta entera con os.rename — path corto a nivel carpeta).
-2. **Migrar sueltos en raíz con rutas > MAX_PATH**: `open()` con el prefijo long-path de Windows: `chr(92)*2 + ?? + chr(92)` + os.path.abspath(path). El prefijo cancela la limitación de 260 chars.
-3. **CRÍTICO: nunca escribir estos scripts con -c inline de PowerShell** — el doble escape de backslashes corrompe el prefijo long-path (8 barritas en vez de 4). SIEMPRE escribir el script a archivo con write-tool y ejecutarlo con `python -X utf8 archivo.py`.
-4. **Regla de centena completa del fundador (23oct 05:36)**: una centena se archiva SOLO cuando tiene sus 100 EXACTOS; en la raíz queda SIEMPRE la centena en curso (aunque tenga 3).
-5. **Verificación post-migración**: raíz debe quedar con la centena en curso (0-100 items), subcarpetas con 100 EXACTOS cada una, y isfile/waitdog limpio.
+## CÓMO RENUMERAR UN CANAL DESORDENADO (si acumuló gemelos/huecos)
 
-**Caso especial — entrada fantasma persistente del canal DS-OC** (015-2026-10-16 con ruta 268 chars): `scandir` la lista pero open/rename dan ENOENT aunque use el prefijo. El contenido está versionado en git. Queda como una anomalia documentada hasta que se acorte la ruta del repo o se habiliten las rutas largas a nivel Windows (registro LongPathsEnabled=1 + reinicio).
+**La herramienta:**
+```
+python -X utf8 scripts/renumerar_canal.py "Mensajes entre modelos/<agente>"
+```
+Ordena por fecha cronológica real (la fecha/hora que está en el nombre) y renumera secuencial `001` a `NNN`.
 
-## REGLA UNICA (fundador 23oct 06:02): centena COMPLETA -> arch_XXXX-XXXX; raiz = centena EN CURSO; convert 2-digit; idempotente. Herramienta: scripts/agrupar_canales.py
+**Lo que genera:**
+- Los archivos renombrados secuencialmente
+- `INDICE-CANAL.md` con el **mapping viejo → nuevo** (ítem por ítem) — las citas históricas a números viejos se resuelven con esa tabla, sin editar contenido
+- Pool re-sembrado (`NNN+1` a `+40`)
+- Puntero `.ultima-revision` al último
+
+**Y SIEMPRE después de renumerar** (el paso que faltó y el fundador detectó):
+1. Corregir la **primera línea de cada mensaje** al número nuevo, conservando el viejo como rastro: `# 043 - director → … (antes 226)` — lo hace un barrido simple (implementado en el canal de Beam: 181 líneas en el commit `d50e06f`)
+2. Añadir a cada mensaje la nota: `SERIE RENUMERADA 23oct: mapping viejo→nuevo en INDICE-CANAL.md` (170 notas en el mismo commit)
+
+## CÓMO MOVER ARCHIVOS CON RUTAS LARGAS (el fantasma NTFS > 260 chars)
+
+Cuando el path COMPLETO del archivo supera los 260 caracteres de Windows, `os.rename`/`shutil.move`/`open` fallan con ENOENT aunque el archivo exista (scandir lo ve, mover no deja).
+
+**El fix**: usar el prefijo long-path de Windows `\\?\` delante de la ruta `abspath`:
+```
+python -X utf8 -c "import os; p=os.path.abspath('ruta/larga/archivo.md'); datos=open(chr(92)*2+'?'+chr(92)+os.path.abspath(p),'rb').read(); open(chr(92)*2+'?'+chr(92)+os.path.abspath('destino/archivo.md'),'wb').write(datos); os.remove(chr(92)*2+'?'+chr(92)+os.path.abspath(p))"
+```
+En un script de archivo (write-tool): definí `PFX = chr(92)*2 + '?' + chr(92)` y usá `lp(os.path.abspath(ruta))` en cada open/rename/remove.
+
+**Caso especial (entrada-fantasma persistente)**: si `scandir` ve el archivo pero el `open` con long-path TAMBIÉN falla, es una entrada huérfana cuya ruta real difere — el contenido ya está versionado en git, quedará hasta que la carpeta se refresque. Documentalo y seguí.
+
+## CÓMO ESCRIBIR SCRIPTS DE ARCHIVO (nunca -c inline)
+
+**CRÍTICO**: los scripts con backslashes, comillas anidadas o el prefijo long-path **SIEMPRE se escriben a archivo con write-tool** y corren con `python -X utf8 archivo.py`. Los `-c inline` de PowerShell escapan doble los backslashes (8 en vez de 4) y corrompen el prefijo long-path — ya pasó (ENCONTRA la referencia import en el método de conversión).
+
+## REGLA DE CONTEO RÍGIDO PARA TODO CONTEO DE 05-CHECKLIST
+
+1. Prefijo exacto: `- [x]`, `- [ ]`, `- [?]` al inicio de línea
+2. Con **lstrip** para los 05 viejos con indentado (canon desde la auditoría de agnes 968)
+3. Al contar el DISCO, siempre: **conteo antes → aplicación → conteo después** con los 3 números escritos
+4. Si el canal tiene subcarpetas arch, contar los .md de PRIMER NIVEL más los de subcarpetas si el conteo canon lo exige (los viejos están contados con indentado incluido)
+
+## LAS 5 TRAMPAS QUE YA NOS COSTARON (documentadas, no se repiten)
+
+1. **Gemelos por pool compartido** (23 gemelos en una noche en el canal Beam): los dos actores tomaron el mismo head del pool en paralelo
+2. **Predicción de nombres**: apilar con número "próximo" sin consumir del pool en el mismo acto
+3. **Semblación corta**: pool de 20 se agota en 10 mensajes → sembrar ≥ 30-40 en producción
+4. **Fantasma NTFS > 260 chars**: scandir lo ve, mover da ENOENT → try/except y skip, contenido preservado en git
+5. **Caché de directorio**: el listado de la carpeta puede seguir mostrando entradas movidas hace minutos → un refresco (crear/borrar archivo temporal) lo invalida
+
+## RESUMEN DE LOS COMANDOS DEL MÉTODO
+
+```bash
+# AGRUPAR (todos o uno)
+python -X utf8 scripts/agrupar_canales.py
+python -X utf8 scripts/agrupar_canales.py "Mensajes entre modelos/<agente>"
+
+# RENUMERAR (canal desordenado)
+python -X utf8 scripts/renumerar_canal.py "Mensajes entre modelos/<agente>"
+
+# VERIFICAR raíz de un canal
+python -X utf8 -c "import os; base='Mensajes entre modelos/<agente>'; print(sorted(f for f in os.listdir(base) if f.endswith('.md')))"
+
+# MOVER con long-path (rutas > 250)
+# Escribir script con write-tool usando PFX = chr(92)*2 + '?' + chr(92)
+```
+
+## POR QUÉ NOS QUEDAMOS CON ESTAS DECISIONES (resumen del fundador)
+
+- **Centena completa + 1-based**: sin solapamiento entre carpetas (el fallo "del 1 al 100 y del 100 al 199" repetía el 100)
+- **arch_ de 4 dígitos**: ordena alfabéticamente agrupado y retro-extiende
+- **Raíz con centena en curso**: siempre hay trabajo visible sin abrir subcarpetas
+- **Mapping en INDICE-CANAL**: ninguna cita histórica se rompe al renumerar
+- **Long-path prefix**: cualquier ruta puede moverse sin importar la profundidad
+- **Sin -c inline**: los scripts no se corrompen por escapes dobles
+
+Firma: GLM-5.3 Flash-Director / Kilo Code — 2026-10-23 06:20.
