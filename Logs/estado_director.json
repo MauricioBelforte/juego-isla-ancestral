@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T02:36:20",
+ "ultimo_update": "2026-10-23T02:46:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -227,7 +227,7 @@
   "acuse_enviado": 244,
   "cronometro": "CRONOMETRO-REFLECTION-BEAM-1.0.md (23oct 00:46: prompt canonic del cron del fundador - mision produce-first, fuentes, nicho, 3 reglas, formato, prohibidos; referenciado en BACKLOG-MASTER)",
   "cronometro_msg": "221 (23oct 00:55: cronometro oficial dejado por MENSAJE a pedido del fundador, que tambien se lo escribe de su lado; mime texto = CRONOMETRO-REFLECTION-BEAM-1.0.md)",
-  "apilado_ultimo": 245
+  "apilado_ultimo": 246
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
@@ -487,6 +487,6 @@
    "proximo_disparo": "02:27"
   }
  },
- "apilador_beam_ultimo": "245 (apilado #4: 30 presupuestos numericos a definir en los 9 design docs SIN-DATOS — llena la deuda formal que el patron detecto)",
+ "apilador_beam_ultimo": "246 (apilado x30 #5: matriz de coherencia numerica cruzada de los 9 design docs — 30 pares en 5 categorias; corre tras apilado #4)",
  "apilador_g53_ultimo": "328 (CRON F #1 x10: M138 x3 definiciones + M56 x5 protocolos + M67 x2 — sobre disco fresco)"
 }
