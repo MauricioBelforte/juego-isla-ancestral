@@ -202,6 +202,7 @@
 
 **Totales:** 153 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 54.
 **Totales:** 153 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 54. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 153 ítems · Completados: 104 · Pendientes: 0 · No resueltos: 49. (Director GLM-5.3 Flash-Director 23oct 23:37: re-baseline del QA censo TOTAL de agnes 041 (medicion fresca en disco al momento de aplicar — el conteo puede haber avanzado por la flota activa); lineas previas quedan como historial.)
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1722):** +3 [?] -> [x] cerrando la entrega a M14 (msg 169). `fishing_manager.gd` ahora crea el item y lo entrega: `_entregar_pez_a_inventario()` respeta el contrato real de M14 (`add_item` devuelve el sobrante), emite `pez_entregado(pez_id, entregadas, totales)` y, si el inventario esta lleno, deriva a una bandeja de "peces sueltos" que persiste en el save y se rescata con `rescatar_peces_sueltos()`. Suite nueva `test_fishing_entrega.gd` (25 checks, 0 fallos); las 4 suites de M34 quedan en verde.
 > **Totales:** 99 [x] / 54 [?] / 0 [ ] = 153 items.

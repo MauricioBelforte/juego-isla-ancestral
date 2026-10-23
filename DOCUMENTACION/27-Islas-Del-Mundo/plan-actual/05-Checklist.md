@@ -321,6 +321,7 @@ Los `93 [?]` quedan intactos: son de M63/M61, M10, M54, M50/M36/M15/M23/M19 y M2
 
 **Totales:** 192 ítems · Completados: 127 · Pendientes: 0 · No resueltos: 65. (Corregido por director 2026-10-12: conteo real disco 126/66; agnes reportó 99, Totales decía 121/71)
 **Totales:** 192 ítems · Completados: 127 · Pendientes: 0 · No resueltos: 65. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 192 ítems · Completados: 135 · Pendientes: 0 · No resueltos: 57. (Director GLM-5.3 Flash-Director 23oct 23:37: re-baseline del QA censo TOTAL de agnes 041 (medicion fresca en disco al momento de aplicar — el conteo puede haber avanzado por la flota activa); lineas previas quedan como historial.)
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1710):** +10 [?] -> [x] en el barrido autorizado (msg 158). Evidencia: 3 suites verdes (`test_islas_headless.gd` 5 + `test_islas_m27.gd` 171 + `test_islas_m27_iter2.gd` 238 = **414 checks, 0 fallos**) + APIs confirmadas en `scripts/islas/`.
 > **Quedan [?] a propósito:** las señales `isla_cargando/cargada/descargada` (E92-E94) no existen como signals (el progreso se consulta con `progreso()`/`info()`, no se emite); `IslandPref` (E90) son constantes `StringName`, no un enum; y los items atribuidos a otros módulos en sus propias notas (M10, M15, M19, M25, M26, M28, M36, M51, M62, M64).

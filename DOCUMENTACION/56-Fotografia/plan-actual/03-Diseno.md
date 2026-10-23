@@ -12,7 +12,7 @@ Assets/_Project/Photography/
 │   └── photo_shot.gd               (modelo: ruta, metadata, miniatura, timestamp)
 ├── service/
 │   ├── photo_mode.gd               (Fotostate: entrada/salida, congelado M31, atajos M57)
-│   ├── photo_camera.gd             (Navigator: cámara réplica, zoom 0.5x-8x, rotación)
+│   ├── photo_camera.gd (Navigator: cámara réplica, zoom 0.5x-8x, rotación) -> navigator.gd (corregido D-3.9, hallazgo Beam 329 + remedio Hy3 348, aplicado por Beam 354)
 │   ├── photo_capture.gd            (captura dedicada 1920x1080, WebP, índice JSON M60)
 │   └── photo_album.gd              (álbum: listar, borrar, presupuesto 150 MB)
 ├── ui/
@@ -242,3 +242,7 @@ automatico headless queda definido con 3 QAs vigentes + 1 pendiente:
   Totales) + 84 otras; saneados 10 ya (7 modulos aritmeticos + M138
   re-continued); las opciones A/B/C escaladas al fundador (314-addendum).
 
+## Notas D-3 (hallazgo Beam 329 + remedio Hy3 348, aplicado por Beam 354)
+- **D-3.10**: doc menciona congelar fauna/NPCs (congelar_foto()/descongelar_foto(), código L287-296). El código implementa congelación de fauna y NPCs que el doc no prometía originalmente. Agregado por produce-first.
+- **D-3.11**: doc menciona modo nocturno (_nocturna, código L56). El código implementa modo nocturno para captura que el doc no mencionaba. Agregado por produce-first.
+- **D-3.12**: doc aclara mecanismo SubViewport 1920x1080 (código L43). El código usa SubViewport 1920x1080 dedicado para captura. Agregado por produce-first.

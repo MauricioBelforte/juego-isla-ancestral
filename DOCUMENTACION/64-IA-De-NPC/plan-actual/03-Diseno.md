@@ -175,3 +175,6 @@ NPCAgent expone `get_save_data()` / `restore_save_data()`:
 - NPCBlackboard: `to_dict()` / `from_dict()` (static)
 - NPCPlanStack: `to_dict()` / `from_dict()` con key `"stack"`
 - NPCNeeds: `to_dict()` / `from_dict()` con keys hunger/energy/social/mood
+
+## Nota D-3 (hallazgo Beam 331 + decision fundador 23oct, aplicado por Beam 354)
+- **M64 rates (0.5/0.3/0.1 vs doc 1.0/0.5/0.3)**: NO tocar codigo ni doc — es decision de BALANCE para el playtest del fundador. El doc manda como meta y el codigo implementa el ritmo calibrado actual. (fundador 23oct 23:13)

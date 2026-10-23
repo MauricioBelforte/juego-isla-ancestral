@@ -257,6 +257,7 @@ Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1
 - Los 17 escenarios restantes (NPC/fauna/vegetación/mundo grande/…) siguen esperando a M19/M65/M08/M50.
 
 **Totales:** 132 ítems · Completados: 132 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 132 ítems · Completados: 131 · Pendientes: 0 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 23:38: re-baseline del QA censo TOTAL de agnes 041 (medicion fresca al aplicar); lineas previas quedan como historial.)
 > **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 1 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 131 [x] / 0 [ ] / 1 [?] = 132.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**

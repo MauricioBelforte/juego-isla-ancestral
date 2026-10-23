@@ -166,3 +166,6 @@ dinero_diario_promedio_ao = 80 es por sesion (no por dia). 12 sesiones x 80 = 96
 
 ## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-2 (H1)**: sello_1 / dinero_diario = interpretacion **POR SESION ~1200 AO** (opcion C del consolidado 257; coherente con sesiones cozy de ~40 min). GO fundador 275 ya lo aplico (item 255); ratificado por director 315 con cita canonica "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones»".
+
+## Nota D-3 (decision fundador 23oct 23:13, aplicado por Beam 354)
+- **RAREZA**: son DOS SISTEMAS INDEPENDIENTES. Rareza de pesca (spawn M93), canon 5%; INDEPENDIENTE de la rareza del catalogo de items (M159, canon 12%). Sin tocar data.
