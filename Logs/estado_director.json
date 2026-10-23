@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T07:10:00",
+ "ultimo_update": "2026-10-23T07:21:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -171,7 +171,8 @@
   "CONVERSION-LONG-PATH (23oct 05:15): la conversion de carpetas 2-digit + migracion de sueltos requiere prefijo \\?\\ con ABSOLUTE path (chr(92)x2 + ? + chr(92)x1) — mi primer intento con 8 backslashes (PowerShell escape doble en -c inline) fallo. REGLA: estos scripts SIEMPRE via write-tool file + python -X utf8 file, nunca -c inline",
   "METODO-DOCUMENTADO-DEFINITIVO (23oct 06:20): el fundador pidio x3 \"documenta el metodo\" — la causa: yo documentaba fragmentos (GUIA + AGENTS ref + canon) pero NO la guia completa autocontenida con los comandos listos. REGLA: una metodologia se documenta COMPLETA y AUTOCONTENIDA una sola vez, con un mensaje de referencia al fundador por cada cambio — no en fragmentos por ciclo",
   "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas",
-  "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas"
+  "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas",
+  "CAPA-II-PLACEHOLDER (23oct 07:20, agnes 996 detecto, director ratifico y ejecuto): las 23 secciones \"Presupuestos numericos II\" que el director monto eran enunciados \"Presupuesto de X -> formula de Y\" sin formula concreta (0 verificables). DEGRADADAS [x]->[?] en los 05 de los 9 modulos con nota \"espera definicion de Beam\". REGLA: el director no define enunciados sin formula — monta items [ ] para que el auditor complete"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
