@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T01:32:00",
+ "ultimo_update": "2026-10-23T01:47:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -44,9 +44,9 @@
   "backlog_pendientes": 116
  },
  "ds_oc": {
-  "estado": "VERIFICADOR OFICIAL DE BEAM CONFIRMADO (204): batch 219 ratificado 5/5 + conteos byte-exactos 8 modulos + deuda Totales detectada (resync hecha por director); continuo asincrono por batch",
+  "estado": "205+206 RATIFICADAS con acuse 207 (error mio: el 204 respondio solo 203 — fallo de lectura de canal propia, corregido); rol oficial vigente por batches",
   "pendientes_real": 357,
-  "acuse_enviado": 204,
+  "acuse_enviado": 207,
   "disponible_desde": "2026-10-23",
   "nota": "205/206 self-artefactos de verificacion de calibracion/222 de Beam: consistentes con la validacion del director, sin pedidos; confirmacion implicita del rol"
  },
@@ -153,7 +153,8 @@
   "CONTEO-INDENTADO (23oct 00:25, agnes 968): los 05 VIEJOS usan checklist indentado (espacios antes del dash) - el regex top-only da 0 y genera sub-cuentas. CANON: contar con lstrip().startswith(); la trampa esta en mezclar los dos criterios al comparar",
   "GUARDIA PASIVA DUAL (22oct: G-5.3 dos veces seguidas) - la causa no fue falta de tarea sino que el director no genero cola re-poblandolo cuando el riel se agoto. FIX estructural para todos: CRON D REPOBLA >= 20 acumulables; CRONOMETRO por agente depositado en su carpeta TAREAS-POR-MODELO y por mensaje; el agente AUTO-SUMINISTRA (escanea y re-puebla) porque tiene el mismo nicho del director (mismo modelo).",
   "RUIDO-DE-MTIME (23oct 00:45): forty 05-Checklists parecido-modificados en 2 min era reescritura idempotente (io.open sin cambios reales) - NO inflacion ni raid. Verificar SIEMPRE git diff --stat ANTES de alarmarse por mtimes: mtime cambia, contenido no.",
-  "GO-POR-MENSAJE-SIN-ENGANCHAR (23oct 00:59, fundador): los agentes IGNORARON los GO por mensaje hasta que el fundador escribio por SU chat - causa: sus cronometros solo leian estado_director, no su canal propio. FIX INSTITUCIONAL: PASO 1 OBLIGATORIO en CRONOMETRO-*.md (procesar mensajes pendientes del canal ANTES de producir) + avisos 226/323"
+  "GO-POR-MENSAJE-SIN-ENGANCHAR (23oct 00:59, fundador): los agentes IGNORARON los GO por mensaje hasta que el fundador escribio por SU chat - causa: sus cronometros solo leian estado_director, no su canal propio. FIX INSTITUCIONAL: PASO 1 OBLIGATORIO en CRONOMETRO-*.md (procesar mensajes pendientes del canal ANTES de producir) + avisos 226/323",
+  "MENSAJE SIN RESPONDER (23oct 01:44, fundador): DS-OC entrego 205/206 y no recivieron acuse (respondí solo el 203). REGLA REINTERADA: TODO mensaje dirigido al director lleva acuse — el CRON A/B PROCESAN TODOS los pendientes, sin considerarlos self-artefactos sin acuse"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
