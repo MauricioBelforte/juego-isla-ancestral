@@ -1,9 +1,9 @@
 {
- "ultimo_update": "2026-10-23T03:52:00",
+ "ultimo_update": "2026-10-23T03:53:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
-  "estado": "979 RATIFICADO: matriz Beam->agnes confirmada (H21/H22 con lineas exactas: backup_categories L68-76, M144 L9-17); H16 reservado precios; radar COLA B + apilado x6 M72 de Beam",
+  "estado": "982: M72 apilado x6 RATIFICADO con aritmetica fina; M116/M118 cubiertos en mi 262; H16 en espera del cierre de Beam; COLA B en radar",
   "pendientes_real": 474,
   "nuevo_frente_asignado": true,
   "modulos_asignados": [
@@ -13,7 +13,7 @@
    "158-Herramientas",
    "70-Interacciones"
   ],
-  "acuse_enviado": 980,
+  "acuse_enviado": 982,
   "pool_saneado": true,
   "sellos_emitidos": [
    "M99 169/169 (955)",
