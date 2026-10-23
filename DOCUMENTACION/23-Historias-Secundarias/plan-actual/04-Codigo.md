@@ -600,3 +600,81 @@ bytes).
   flip dio 66/37/2 (3 cadenas contadas como 3 flips); la verificación por
   prefijo integrada al script lo detectó ANTES de escribir — son 2 flips
   (L47 + L48) -> 65/38/2. El archivo nunca se escribió con la cifra falsa.
+
+## Iter. 13 — Puzzles e Investigación (Step-5-WorkBuddy, 2026-10-22, Log 2137)
+
+Clusters Puzzles (03-Diseno L46: «6 misiones de puzzles — templos 24/25/26,
+ruinas ocultas») e Investigación (03-Diseno L45: «5 misiones de investigación
+— faro, biblioteca, geodesia, mapas»), consolidados en UNA sola tanda por
+orden del director (msg 183, 2026-10-22). 11 cadenas nuevas en
+`data/historias/secundarias.json` (40 -> 51; 52 con la de ejemplo que suma la
+carga).
+
+Investigación (5): registro del faro (vera_ardilla farera + OBJ-LUZ-012
+«Linterna», puzzle alturas-de-la-luz, lugar faro), catálogo perdido
+(sofia_buho bibliotecaria + OBJ-EST-006 «Vitrina», signos-en-los-margenes,
+biblioteca), medidas de la isla (pablo_pato ceramista + OBJ-REL-002 «Reloj de
+péndulo», sombras-del-mediodia, observatorio), mapa de las plantas
+(teo_conejo herbolario + OBJ-HER-015 «Lupa», tinta-de-hojas, jardines) y
+cartas estelares (sofia_buho + OBJ-LUZ-008 «Lámpara de cristal»,
+reloj-de-estrellas, observatorio — extensión declarada del núcleo de
+investigación: el 03-Diseno L45 nombra 4 temas y el ítem pide 5).
+
+Puzzles (6): templo de las 24 marcas (pablo_pato + OBJ-TAL-004 «Rueda de
+alfarero», sellos-de-arcilla, templo_24), templo de los 25 engranajes
+(bruno_sapo carpintero + OBJ-HER-018 «Sierra», mecanismo-escondido,
+templo_25), templo de las 26 mareas (luna_zorra artesana + OBJ-PLA-004
+«Orquídea», tintes-del-templo, templo_26), ruinas del barrizal (catalina_oso
+cocinera + OBJ-ITE-021 «Pan», ofrenda-de-la-ruina, barrizal), ruinas del
+manantial (teo_conejo + OBJ-NAT-024 «seta», raices-en-la-piedra, manantial) y
+ruinas del acantilado (vera_ardilla + OBJ-LUZ-004 «Veladora»,
+eco-de-las-ruinas, acantilado).
+
+NPC REALES de data/villagers/ (7, cada uno con su rol en disco: vera_ardilla
+farera, sofia_buho bibliotecaria, pablo_pato ceramista, teo_conejo herbolario,
+bruno_sapo carpintero, luna_zorra artesana, catalina_oso cocinera) y objetos
+REALES de data/items/ verificados por campo id dentro del .tres (11 objetos,
+ninguno reutilizado de cadenas previas). Contextos >= 10 (medidos: 111-138
+caracteres), 4 pasos cada una (hablar/explorar/entregar/puzzle) y las 11
+nacen visibles (`oculta:false`): se descubren hablando, como las comerciantes
+de iter. 12. Verificación de colisiones ANTES de escribir: ids,
+consecuencias, capítulos de diario y refs de puzzle = 0 colisiones con las 40
+previas; lugares = 4 nuevos (templo_24, templo_25, templo_26, biblioteca) y 6
+reutilizados por diseño (faro, jardines, observatorio, barrizal, manantial,
+acantilado — los que nombra el 03-Diseno L45/L46). Consecuencias peladas
+únicas: 51/51 sobre el catálogo en disco (52/52 sobre la carga con el
+ejemplo) y 11 capítulos de diario únicos (50 cadenas con diario sobre 52
+cargadas: 2 preexistentes no declaran). Edición puramente aditiva sobre el
+JSON (+396 líneas, 0 borradas; formato Godot preservado, LF puro sin BOM
+verificado por bytes).
+
+- Suite `scripts/historias/test_historias.gd`: bloque R
+  `_test_puzzles_investigacion()` (77 checks: 33 carga/fuente/no-oculta + 1
+  visibilidad en disponibles + 2 unicidad GLOBAL de flags medida sobre la
+  carga real — reemplaza la lista transcrita a mano, que podía omitir un flag
+  y dar un falso verde de unicidad — + 7 NPC REALES por efecto + 11 objetos
+  REALES por campo id + 1 diarios + 3x7 end-to-end + 1 puente diario) al
+  FINAL de `_run()`; BLOQUES A-R y conteos de A/I actualizados (41 -> 52
+  cargadas, principal 40 -> 51). Piso 379 -> **456 checks / 0 fallos /
+  EXIT 0 x3** (binario real, 0 SCRIPT ERROR).
+- Guardián EN ROJO por inyección de runtime (`Node` null -> `free()`) al
+  inicio del bloque R: EXIT 1, «el bloque R NO se ejecuto (posible SCRIPT
+  ERROR que aborto la funcion)» + «solo 380 checks ejecutados (minimo 456)»;
+  sonda borrada en la misma operación, sha256 del archivo restaurado
+  byte-exacto y `git status` de scripts/historias/ vacío.
+- Regresiones medidas tras la tanda: M55 `test_diario.gd` y
+  `test_diario_persist.gd` 0 fallos, M59 `test_autosave_m59.gd` 0 fallos,
+  M71 `test_bug_reevaluar_m71_hy3.gd` 8/2 (los 2 fallos son la reproducción
+  del BUG-143 conocido, previa a la tanda). El validador
+  `validate_quest_chains.gd` no se pudo medir: cuelga en modo `--script`
+  headless (SceneTree sin `quit()`, condición previa ajena a la tanda).
+- Hallazgo (dueno M55, no tocado): el puente M23->M55 degrada en silencio
+  también para cadena-registro-del-faro (`mision_cadena-registro-del-faro`
+  ausente del catálogo de M55; mismo patrón que los bloques H/K/L/M/N/O/P/Q).
+  No se inventa contenido de M55.
+- Flips del 05-Checklist con cita: «Crear 5 misiones de investigación» [ ]
+  -> [x] (L85), «Documentar misiones de amistad e investigación» [ ] -> [x]
+  (L87, compuesta: §Iter. 10 + §Iter. 13), «Crear 6 misiones de puzzles» [ ]
+  -> [x] (L91) y «Documentar misiones de puzzles» [ ] -> [x] (L93). M23 =
+  69 [x] / 34 [ ] / 2 [?] = 105 (verificado por prefijo de línea). Las DOS
+  líneas de totales sincronizadas a 69/34/2.

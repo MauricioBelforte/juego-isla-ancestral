@@ -45,7 +45,7 @@
 4. M105-Telemetría (129/162): QA del estado 🟡 tras corrección del director (33 [?]) — 10 [M] — [x] Hy3 (Log 2065, 2026-10-21: 81 checks/0 fallos en 5 suites bajo Godot real; 0 SCRIPT ERROR; guarda anti-falso-verde verificada por inyeccion roja; 21.8 PASS, estado Con dudas honesto)
 5. M104-Analytics (107/119): QA §21.8 cruzado (integridad PASS: 107[x]/4[ ]/8[?]=119 sin drift vs GLOBAL; test_analytics.gd 24/0/EXIT0 real, red 1/0→EXIT1; verificador≠autor; modulo queda Con dudas por deuda M90/M91) — 8 [M] — [x] Hy3 (Log 2074 / msg 303, 2026-10-21)
 6. M62-Memoria (113/150): QA de delta iter.6 (L98, pureza_save 58/0) — 8 [M] — [x] Hy3 (Log 2076, 2026-10-21): QA §21.8 cruzado; 143[x]/3[ ]/4[?]=150 cuadra Totales; GLOBAL 127/150 obsoleto (no editado); test_m62_pureza_save.gd 60/0/EXIT0 real Godot 4.7.2, RED ciego 60/2->EXIT1; verificador!=autor (DeepSeek-V4.1-Flash); modulo Con dudas por 4[?] no medibles
-7. M108-Pipeline (127/205): QA de los lotes cerrados — 10 [M]
+7. [x] M108-Pipeline (202/0/3=205 real; 127/205 era milestone lote-1): QA cruzado §21.8 — Hy3 (Log 2152, 2026-10-23: 05-Checklist 202[x]/0[ ]/3[?]=205 por prefijo; linea **Totales:** modulo miente 127/75/3; GLOBAL 202/0/3 OK; headless Godot 4.7.2 test_m108.tscn vacuo 0 err/0 validados EXIT0, RED probe 2 err EXIT2; 3[?] RF1/RF5/RF6 diferidos dueno ajeno; sin flip sello)
 8. M107-Backups (167/176): QA de cierre — 8 [M]
 9. M112-Testing (211/225): QA de los 211 [x] — 10 [M] — [x] cerrado Hy3 (Log 2002 / msg 268, 2026-10-18, §21.8 APROBADO)
 10. M118-CI/CD (106/106 medido): QA §21.8 re-verif — [x] Hy3 (Log 2008 / msg 270, 2026-10-19): 106/[ ]=0/[?]=0; quality.yml válido (EXIT=0, 6/6); drift Totales L144 105/0/1→106/0/0 pendiente del director (no lo edito)

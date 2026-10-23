@@ -30,7 +30,7 @@
 | Consola A (si M149 la define) | USD 24.99 | idem con política de la tienda |
 | Consola B (idem) | USD 24.99 | idem |
 | Deluxe | +10 USD sobre base | +10 USD |
-| Coleccionista | +45 USD sobre Deluxe | región física |
+| Coleccionista | +35 USD sobre Deluxe (34.99+35=69.99, H16) | región física |
 
 **Impuestos:** se detallan por tienda (IVA UE, GST/región, impuesto local) en la tabla `95-Monetizacion/plan-actual/tabla-impuestos.md`; el neto por venta documentado para decisiones de M144.
 

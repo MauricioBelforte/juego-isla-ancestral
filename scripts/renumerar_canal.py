@@ -14,7 +14,7 @@ if not os.path.isdir(base):
 # 1) colectar (nombre real via scandir — tolera fantasmas con skip)
 filas = []
 for e in os.scandir(base):
-    m = re.match(r'(\d{3}[B]?)-(\d{4}-\d{2}-\d{2})_(\d{2}-\d{2}-\d{2})-(.*)$', e.name)
+    m = re.match(r'(\d{3,4}[B]?)-(\d{4}-\d{2}-\d{2})_(\d{2}-\d{2}-\d{2})-(.*)$', e.name)
     if e.name.endswith('.md') and m:
         try:
             size = e.stat().st_size
@@ -26,13 +26,16 @@ filas.sort(key=lambda x: (x[0], x[3]))
 N = len(filas)
 
 # 2) calcular nuevos nombres
+def _viejo_num(nombre):
+    return int(re.match(r'(\d+)', nombre).group(1))
+
 plan = []
 for i, (ts, resto, viejo, size) in enumerate(filas, 1):
     nuevo = '%03d-%s_%s-%s' % (i, ts[0:10], ts[11:19], resto)
     if nuevo != viejo:
-        plan.append((viejo, nuevo, int(viejo[0:3]), i))
+        plan.append((viejo, nuevo, _viejo_num(viejo), i))
     else:
-        plan.append((viejo, nuevo, int(viejo[0:3]), i))
+        plan.append((viejo, nuevo, _viejo_num(viejo), i))
 
 # 3) renombrado en 2 pasadas (tmp evita colisiones)
 for viejo, nuevo, o, nn in plan:

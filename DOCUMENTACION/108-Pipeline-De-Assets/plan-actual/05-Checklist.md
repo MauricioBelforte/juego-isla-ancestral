@@ -366,7 +366,9 @@
 - **Reparaciones de código:** `run_m108_test.gd` migrado a API `ResultadoPipeline` (validar_pipeline no retorna Dictionary — causa del colgado headless de L360); `escribir_reporte` ahora escribe en `tools/reportes/_validacion_staging.md` (antes escribía dentro de staging, lo que invalidaba la segunda corrida).
 - **Nuevos:** `scenes/asset_preview.tscn` + `scripts/assets/asset_preview.gd` (L164); `tools/asset_pipeline/run_m108_memory_test.gd` (test headless del memory reporter, self-contained); `plan-actual/06-Plan-Testings.md` + `07-Resultados-Testings.md`.
 
-**Totales:** 205 ítems · Completados: 127 · Pendientes: 75 · No resueltos: 3.
+**Totales:** 205 ítems · Completados: 202 · Pendientes: 0 · No resueltos: 3.
+
+> **Resync de Totales (GLM-5.3 Flash-Director / Kilo Code, 2026-10-23 19:35):** la línea decía `127/75/3` (drift detectado por Hy3, msg 338 del canal). Conteo canon por lstrip `^\s*-\s*\[([ xX?])\]` = 202 [x] / 0 [ ] / 3 [?]. Las marcas NO se tocaron; solo se sincronizó esta línea. Los 3 `[?]` son RF1/RF5/RF6 diferidos (dueño M45/M47/M41) — motivo del estado 🟡 verificado §21.8.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 124 [x] / 78 [ ] /
