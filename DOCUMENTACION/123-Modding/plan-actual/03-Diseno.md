@@ -14,7 +14,7 @@
 
 > **Ancla por defecto del presupuesto (PROVISORIA, revisable):** USD 3.000 fijados por el DIRECTOR el 23oct 20:48 apelando
 > a la delegación del fundador («dejá un presupuesto por defecto que analices vos; cualquier cosa después lo modificamos»). Base:
-> 10% de la proyección conservadora V1 base-pura (ARPU 28.49 x 10.000 copias = USD 28.49k -> 10% = USD 2.85k ≈ 3k) y
+> 10% de la proyección V1 base-pura CORREGIDA (ARPU 34.24 — hallazgo aritmetico agnes 020: 0.60*24.99+0.25*34.99+0.15*69.99 = 34.24, no 28.49 que era residuo del mix viejo 60/30/5 con Coll 59.99; = USD 34,24k -> 10% ≈ 3,4k); techo ratificado por el FUNDADOR se MANTIENE en USD 3.000 por conservadorismo (3k < 3,4k, sigue dentro de la regla <=10%), y
 > coherente con el estimado 240-360 h de este módulo (costo efectivo indie/agents ~8.5/h). REGLA ESTRUCTURAL PERMANENTE: el
 > presupuesto NUNCA es criterio único del GATE — solo habilitado si TODOS los demás criterios están verdes (comunidad ≥50 pedidos,
 > diseño 100% revisado, riesgo de re-arquitectura 0). Cuando el fundador fije el presupuesto total real, esta celda se actualiza y
