@@ -246,6 +246,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 **Totales:** 165 ítems — Completados: 144 — Pendientes: 19 — No resueltos: 2. (Director 2026-10-12: L208 degradada + L138/L140 flips por QA Step 5 msg 242)
+**Totales:** 165 ítems · Completados: 145 · Pendientes: 18 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 27 [ ] / 0 [?].

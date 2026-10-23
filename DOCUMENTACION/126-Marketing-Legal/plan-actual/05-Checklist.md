@@ -22,6 +22,7 @@
   data-layer + gate CI + V0): verificar el scaffold de validación (`marketing_legal.json` +
   `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` 9/0) + cablear el test al gate duro
 **Totales:** 101 items · Completados: 100 · Pendientes: 0 · No resueltos: 1. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: conteo real por regex = 100 [x] / 1 [?] / 0 [ ]; correccion de dato autorizada por director msg 257.)
+**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
    **agnes-3-flash (Kilo Code, 2026-10-12):** CERRADO ✅ — se crearon `comunicado_creadores_embargo.md` + `confirmacion_sorteo.md` (2 [?] → [x]).
 
 # 05-Checklist.md — Módulo 126: Marketing Legal

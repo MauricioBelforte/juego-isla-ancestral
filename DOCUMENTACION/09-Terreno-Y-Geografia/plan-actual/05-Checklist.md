@@ -148,6 +148,7 @@
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 **Totales:** 106 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 5.
+**Totales:** 115 ítems · Completados: 106 · Pendientes: 0 · No resueltos: 9. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 **Nota:** la calibración visual de recetas queda para el prototipo (M1); el diseño geográfico está cerrado aquí.
 
 ---

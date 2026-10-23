@@ -274,6 +274,7 @@ Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
 - El patrón del autoload temporal de verificación (teleport + viewport PNG) es el mejor método para verificar escala con visión; reutilizarlo para NPCs/props.
 
 **Totales:** 142 ítems · Completados: 129 · Pendientes: 10 · No resueltos: 3.
+**Totales:** 142 ítems · Completados: 131 · Pendientes: 8 · No resueltos: 3. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 29 [x] / 110 [ ] /

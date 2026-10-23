@@ -203,6 +203,7 @@
 - [x] DoD cumplida: 5 archivos + firma + log [M]
 
 **Totales:** 140 ítems · Completados: 53 · Pendientes: 87 · No resueltos: 0.
+**Totales:** 140 ítems · Completados: 83 · Pendientes: 57 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1C):** la línea decía *"140 items · Completados: 42 · Pendientes: 98"*

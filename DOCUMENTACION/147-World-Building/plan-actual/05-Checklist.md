@@ -301,6 +301,7 @@
 - [?] Aplicación del canon en gameplay (M22 historia/sellos — dueño: Hy3/WorkBuddy)
 
 **Totales:** 134 ítems · Completados: 65 · Pendientes: 68 · No resueltos: 1.
+**Totales:** 134 ítems · Completados: 130 · Pendientes: 0 · No resueltos: 4. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 > **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 2 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 130 [x] / 0 [ ] / 4 [?] = 134.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**

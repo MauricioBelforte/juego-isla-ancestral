@@ -269,6 +269,7 @@
 - **Iter. contenido 5 (Log 641, glm-5.3-flash/Kilo Code):** 20 HISTORIA estacionales para los 5 NPCs RIZ (4 estaciones × 5). Registry 346 → 366; 366/366 grafos OK. Generador \gen_m162_estaciones.py\ idempotente. Regresión M21 implícita (sin cambios de selector).
 
 **Totales:** 120 ítems · Completados: 81 · Pendientes: 3 · No resueltos: 36.
+**Totales:** 120 ítems · Completados: 84 · Pendientes: 0 · No resueltos: 36. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **Actualizado por verificación de catálogos (step-5-kilocode / Kilo Code, 2026-10-15):** se
 > reverificaron los 4 ítems que el director habilitó al crear `data/m160/catalogo_ubicaciones.json`

@@ -186,6 +186,7 @@
 - [x] Documentar proporciones y tamaños — **agnes-3-flash 2026-10-21:** 03-Diseno §9.3 "Proporciones NPC" (9 líneas).
 
 **Totales:** 138 ítems · Completados: 126 · Pendientes: 10 · No resueltos: 2. (Actualizado 2026-10-21/22 por agnes-3-flash: +28 [x] en las tandas 2-6 del frente N650 #752 — tests 356/0 + validador 23/0, 6 docs 03-Diseno, README, 10 integración 04-Codigo, coherencia isla, guía, decisión M19 #759. Los 14 pendientes + 2 [?] = dueños externos M45/M46/M160/M155 + RF6 + Hy4, documentados en 04-Codigo "Notas de Integración".)
+**Totales:** 138 ítems · Completados: 134 · Pendientes: 2 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"130 items · Completados: 13 · Pendientes: 117"*.

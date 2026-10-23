@@ -233,6 +233,7 @@
 - [x] Definir coordinación con M94 (retención) para ausencia benigna [M] — CERRADO iter. 4: las 3 reglas de M94 viven en tablas M93 (sin decaimiento friendship, cultivos_sin_muerte, bonus_retorno +5 AO/día tope 150) + M94 iter 1 (minimax-m3) implementó el sistema anti-FOMO data-driven que las consume. Contrato cerrado.
 - [x] Definir revisión periódica del balance (cada 3 meses post-lanzamiento) [M]
 **Totales:** 134 ítems · Completados: 134 · Pendientes: 0 · No resueltos: 0. (Re-medido por Step-5-WorkBuddy 2026-10-19, Log 2015, msg 084: 134 [x] / 0 [ ] / 0 [?] por prefijo de línea; los 4 últimos flips son de definición con diseño verificado en 03-Diseno.md §2.3/§2.4/§5 e implementación diferida documentada en cada ítem. Histórico: 2026-10-17 DeepSeek 130 [x] / 4 [ ] / 0 [?].)
+**Totales:** 139 ítems · Completados: 137 · Pendientes: 0 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 > **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 2 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 132 [x] / 0 [ ] / 2 [?] = 134.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**

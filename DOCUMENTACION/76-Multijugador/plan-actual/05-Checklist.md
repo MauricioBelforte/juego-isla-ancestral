@@ -212,6 +212,7 @@
 - [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S] — PR3: script --json con diff contra baseline firmado de alertas en Logs; 0 alertas nuevas no documentadas — protocolo definido en 03 sec "Protocolos de determinismo y privacidad" (S56b 2026-10-23 G-5.3-Flash-Agente; EJECUCION para fase MP implementada) — **Pendiente: fila GLOBAL a aplicar por el director**
 - [x] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S] — **Evidencia: 130 exactos; enunciados base plan-inicial == plan-actual 130/130**
 **Totales:** 130 ítems · Completados: 126 · Pendientes: 4 · No resueltos: 0.
+**Totales:** 130 ítems · Completados: 129 · Pendientes: 1 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 126 [ ] / 0 [?].

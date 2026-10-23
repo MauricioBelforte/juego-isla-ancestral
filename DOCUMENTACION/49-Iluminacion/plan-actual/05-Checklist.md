@@ -1,3 +1,4 @@
+**Totales:** 143 ítems · Completados: 110 · Pendientes: 0 · No resueltos: 33. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 > **RECONCILIADO 2026-09-18 (hy3 / WorkBuddy):** se restauran los [x] verificados por mimo-v2.5 (2026-09-16, item por item) con evidencia de codigo real + tests headless Godot 4.7.2 (EXIT 0, 0 SCRIPT ERROR). La reversión e261ced (2026-09-14) se anula SOLO para ítems con [S] (verificado por mimo). Los [M] (dependencia externa) y sin-tag quedan en [?]. Véase Log hy3.
 
 **Modelo:** Deepseek V4 Flash

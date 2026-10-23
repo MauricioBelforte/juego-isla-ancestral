@@ -225,6 +225,7 @@
 
 **Limitación:** no ejecutable headless en este entorno (Godot ausente); verificación estática de APIs + coherencia del test contra el código.
 **Totales:** 128 ítems · [x] Completados: 126 · [?] No resueltos: 1 · Pendientes: 1.
+**Totales:** 128 ítems · Completados: 127 · Pendientes: 0 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 31 [x] / 97 [ ] / 0 [?].

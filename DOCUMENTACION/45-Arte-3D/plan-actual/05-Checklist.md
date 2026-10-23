@@ -289,6 +289,7 @@
 - [x] GLB regenerado + reimport con pipeline de cache (.scn + .import borrados → --import) [S] — Log 736
 - [x] Verificación: render CYCLES + captura en juego tercera persona — cara limpia [S] — capturas/45/
 **Totales:** 171 ítems · Completados: 155 · Pendientes: 14 · No resueltos: 2.
+**Totales:** 171 ítems · Completados: 157 · Pendientes: 12 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 22 [x] / 149 [ ] / 0 [?].

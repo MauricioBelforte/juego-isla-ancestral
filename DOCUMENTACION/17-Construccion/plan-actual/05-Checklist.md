@@ -308,3 +308,4 @@
 **Totales:** 175 items · Completados: 101 · Pendientes: 73 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 101 [x] / 73 [ ] / 1 [?] tras tanda cooldown+undo/demolición; rieles verdes hoy: iter2 99/0 + iter3 138/0 + iter5 39/0 + iter7 24/0.)
 **Totales:** 175 items · Completados: 103 · Pendientes: 71 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 103 [x] / 71 [ ] / 1 [?] tras tanda RF1 modo toggle; qa_m17_modo.gd 9/0.)
 **Totales:** 175 items · Completados: 109 · Pendientes: 65 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 109 [x] / 65 [ ] / 1 [?] tras tanda P10 devolución; BASE 134/0 + iter5 39/0.)
+**Totales:** 175 ítems · Completados: 126 · Pendientes: 48 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)

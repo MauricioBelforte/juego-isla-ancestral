@@ -202,6 +202,7 @@ M21/M20.
 | BUG-129 (causa raíz) | 2 | 2 | 100% |
 | **TOTAL** | **90** | **119** | **76%** |
 **Totales:** 119 items - Completados: 90 - Pendientes: 0 - No resueltos: 29. — (+12 degradados por muestreo §21.8.2.b, DeepSeek 262, 2026-10-15)
+**Totales:** 119 ítems · Completados: 90 · Pendientes: 0 · No resueltos: 29. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 
 ## Notas del Agente
