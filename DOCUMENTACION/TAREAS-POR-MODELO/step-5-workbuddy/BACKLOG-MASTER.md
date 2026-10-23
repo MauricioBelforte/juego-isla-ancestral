@@ -796,13 +796,13 @@ M104, M88, M160.
 153. - [ ] [23] Crear 6 misiones de colección (murales, glifos, sellos, minerales, peces, plantas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 154. - [x] [23] Definir la integración con M36 (museo) [M] — 03-Diseno L71 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 155. - [ ] [23] Documentar misiones de pesca y colección [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-156. - [ ] [23] Crear 6 misiones de amistad (regalo, pesca, paseos, ficción) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-157. - [ ] [23] Crear 5 misiones de investigación (faro, biblioteca, geodesia, mapas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+156. - [x] [23] Crear 6 misiones de amistad (regalo, pesca, paseos, ficción) [M] — 05-Checklist [x] desde iter. 10 (Log 2131); desync del espejo reparada en iter. 13 (Log 2137): las 6 cadenas están en disco <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+157. - [x] [23] Crear 5 misiones de investigación (faro, biblioteca, geodesia, mapas) [M] — Step-5 2026-10-22 (iter. 13, Log 2137): 5 cadenas en data/historias/secundarias.json (40 -> 51) + 04-Codigo.md §Iter. 13 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 158. - [x] [23] Definir la integración con M36 (mapas) [S] — 02-Analisis L26 + 03-Diseno L45 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-159. - [ ] [23] Documentar misiones de amistad e investigación [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-160. - [ ] [23] Crear 6 misiones de puzzles (templos 24/25/26, ruinas ocultas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+159. - [x] [23] Documentar misiones de amistad e investigación [S] — Step-5 2026-10-22 (iter. 13, Log 2137): documentado en 04-Codigo.md §Iter. 10 + §Iter. 13 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+160. - [x] [23] Crear 6 misiones de puzzles (templos 24/25/26, ruinas ocultas) [M] — Step-5 2026-10-22 (iter. 13, Log 2137): 6 cadenas en data/historias/secundarias.json (40 -> 51) + 04-Codigo.md §Iter. 13 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 161. - [ ] [23] Definir la integración con el framework M24 [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-162. - [ ] [23] Documentar misiones de puzzles [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+162. - [x] [23] Documentar misiones de puzzles [S] — Step-5 2026-10-22 (iter. 13, Log 2137): documentado en 04-Codigo.md §Iter. 13 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 163. - [ ] [23] Crear 20 capítulos de diario (recompensa narrativa) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 164. - [ ] [23] Crear recetas de conversación desbloqueables [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 165. - [ ] [23] Crear 10+ cosméticos (disfraces, sombreros, paletas de casa) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
@@ -1452,11 +1452,11 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - [ ] (23-Historias-Secundarias) - [ ] Crear 4 misiones de pesca (peces-trofeo, documentación y suelta) [M]
 - [ ] (23-Historias-Secundarias) - [ ] Crear 6 misiones de colección (murales, glifos, sellos, minerales, peces, plantas) [M]
 - [ ] (23-Historias-Secundarias) - [ ] Documentar misiones de pesca y colección [S]
-- [ ] (23-Historias-Secundarias) - [ ] Crear 5 misiones de investigación (faro, biblioteca, geodesia, mapas) [M]
-- [ ] (23-Historias-Secundarias) - [ ] Documentar misiones de amistad e investigación [S]
-- [ ] (23-Historias-Secundarias) - [ ] Crear 6 misiones de puzzles (templos 24/25/26, ruinas ocultas) [M]
+- [x] (23-Historias-Secundarias) - [x] Crear 5 misiones de investigación (faro, biblioteca, geodesia, mapas) [M] — Step-5-WorkBuddy 2026-10-22 (iter. 13, Log 2137): 5 cadenas en data/historias/secundarias.json (40 -> 51) con NPC REALES de data/villagers/ (vera_ardilla farera, sofia_buho bibliotecaria, pablo_pato ceramista, teo_conejo herbolario) y objetos REALES de data/items/ por campo id (OBJ-LUZ-012 «Linterna», OBJ-EST-006 «Vitrina», OBJ-REL-002 «Reloj de péndulo», OBJ-HER-015 «Lupa», OBJ-LUZ-008 «Lámpara de cristal»); la 5.a (cartas estelares) es extensión declarada del núcleo (el 03-Diseno L45 nombra 4 temas y el ítem pide 5). Suite test_historias.gd bloque R: 456 checks / 0 fallos / EXIT 0 x3 + guardián EN ROJO por inyección de runtime (solo 380 de mínimo 456). M23 = 69 [x] / 34 [ ] / 2 [?] = 105.
+- [x] (23-Historias-Secundarias) - [x] Documentar misiones de amistad e investigación [S] — Step-5-WorkBuddy 2026-10-22 (iter. 13, Log 2137): ítem compuesto, las dos mitades citadas — amistad en 04-Codigo.md §Iter. 10 (Log 2131) e investigación en §Iter. 13 (Log 2137).
+- [x] (23-Historias-Secundarias) - [x] Crear 6 misiones de puzzles (templos 24/25/26, ruinas ocultas) [M] — Step-5-WorkBuddy 2026-10-22 (iter. 13, Log 2137): 6 cadenas en data/historias/secundarias.json (40 -> 51) con NPC REALES de data/villagers/ (pablo_pato, bruno_sapo, luna_zorra, catalina_oso, teo_conejo, vera_ardilla) y objetos REALES de data/items/ por campo id (OBJ-TAL-004 «Rueda de alfarero», OBJ-HER-018 «Sierra», OBJ-PLA-004 «Orquídea», OBJ-ITE-021 «Pan», OBJ-NAT-024 «seta», OBJ-LUZ-004 «Veladora»). Suite test_historias.gd bloque R: 456 checks / 0 fallos / EXIT 0 x3 + guardián EN ROJO por inyección de runtime (solo 380 de mínimo 456). M23 = 69 [x] / 34 [ ] / 2 [?] = 105.
 - [ ] (23-Historias-Secundarias) - [ ] Definir la integración con el framework M24 [M] — **Sin cita en disco:** M24 no se menciona en 02-Analisis ni 03-Diseno (§Integración cubre M68/M22/M32/M36/M37/M66). Pendiente de definir.
-- [ ] (23-Historias-Secundarias) - [ ] Documentar misiones de puzzles [S]
+- [x] (23-Historias-Secundarias) - [x] Documentar misiones de puzzles [S] — Step-5-WorkBuddy 2026-10-22 (iter. 13, Log 2137): documentado en 04-Codigo.md §Iter. 13 (templos 24/25/26 + ruinas, NPC/objetos REALES, flags y cobertura de suite).
 - [ ] (23-Historias-Secundarias) - [ ] Crear 20 capítulos de diario (recompensa narrativa) [M]
 - [ ] (23-Historias-Secundarias) - [ ] Crear recetas de conversación desbloqueables [M]
 - [ ] (23-Historias-Secundarias) - [ ] Crear 10+ cosméticos (disfraces, sombreros, paletas de casa) [M]
@@ -1598,3 +1598,52 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - Pedidos (msg 180): visto bueno del flip L56; sync fila 23 GLOBAL a 63/105; incluir los 8
   paths + las 3 bajas del move en la ronda de commit del director. Proxima tanda declarada:
   Comerciantes-cadenas L36 (solo cadenas M23; integracion M37 afuera).
+- Cierre de tanda M23 iter. 13 (Log 2137, 2026-10-22): clusters Puzzles (6, 03-Diseno
+  L46: templos 24/25/26 + ruinas del barrizal/manantial/acantilado) e Investigacion (5,
+  L45: faro, biblioteca, geodesia, mapas + cartas estelares como extension declarada),
+  consolidados en UNA tanda por orden del director (msg 183). secundarias.json 40 -> 51
+  cadenas (52 con la de ejemplo en carga). NPC REALES de data/villagers/ (7: vera_ardilla,
+  sofia_buho, pablo_pato, teo_conejo, bruno_sapo, luna_zorra, catalina_oso) y objetos
+  REALES de data/items/ por campo id (11, ninguno reutilizado de cadenas previas). Las 11
+  nacen visibles (oculta:false): se descubren hablando, como las comerciantes de iter. 12.
+  Colisiones verificadas ANTES de escribir: ids, consecuencias, capitulos de diario y refs
+  de puzzle = 0 con las 40 previas; lugares = 4 nuevos (templo_24/25/26, biblioteca) + 6
+  reutilizados por diseno (faro, jardines, observatorio, barrizal, manantial, acantilado).
+  Consecuencias peladas unicas 51/51 en disco (52/52 sobre la carga); 11 capitulos de
+  diario unicos (50 con diario sobre 52 cargadas: 2 preexistentes no declaran). JSON:
+  +396/-0, puramente aditivo, formato Godot preservado, LF sin BOM verificado por bytes.
+- Suite: bloque R _test_puzzles_investigacion (77 checks: 33 carga/fuente/no-oculta + 1
+  disponibles + 2 unicidad GLOBAL de flags medida sobre la carga real + 7 NPC REALES por
+  efecto + 11 objetos REALES por campo id + 1 diarios + 3x7 end-to-end + 1 puente diario)
+  al FINAL de _run(); BLOQUES A-R; conteos de A/I actualizados (41 -> 52 cargadas,
+  principal 40 -> 51). Piso 379 -> 456 MEDIDO en verde. **456 checks / 0 fallos /
+  EXIT 0 x3** con el binario real, 0 SCRIPT ERROR. Guardian EN ROJO por inyeccion de
+  runtime (Node null -> free() al inicio del bloque R): EXIT 1, "el bloque R NO se
+  ejecuto (posible SCRIPT ERROR que aborto la funcion)" + "solo 380 checks ejecutados
+  (minimo 456)"; sonda borrada en la misma operacion, sha256 restaurado byte-exacto y
+  git status de scripts/historias/ vacio.
+- Regresiones medidas tras la tanda: M55 test_diario.gd 0 fallos + test_diario_persist.gd
+  0 fallos - M59 test_autosave_m59.gd 0 fallos - M71 test_bug_reevaluar_m71_hy3.gd 8/2
+  (los 2 fallos son la reproduccion del BUG-143 conocido, previa a la tanda). El validador
+  validate_quest_chains.gd no se pudo medir: cuelga en modo --script headless (SceneTree
+  sin quit(), condicion previa ajena a la tanda).
+- Flips con cita: L85 "Crear 5 misiones de investigacion", L87 "Documentar misiones de
+  amistad e investigacion" (compuesta: Iter. 10 + Iter. 13), L91 "Crear 6 misiones de
+  puzzles" y L93 "Documentar misiones de puzzles" [ ] -> [x]; M23 = 69 [x] / 34 [ ] /
+  2 [?] = 105 por prefijo de linea; las DOS lineas de totales sincronizadas. Ademas se
+  reparo una desync del espejo: el item 156 "Crear 6 misiones de amistad" estaba [ ] aca
+  pero [x] en el checklist desde iter. 10 (Log 2131) -> flip con la cita de iter. 10 (las
+  6 cadenas estan en disco). Ofrecido a revertir (msg 184).
+- Hallazgo (dueno M55, no tocado): el puente M23->M55 degrada en silencio para
+  cadena-registro-del-faro (mision_cadena-registro-del-faro ausente del catalogo M55).
+  Mismo patron que las iters 3/6/7/8/9/10/11/12. No se inventa contenido de M55.
+- Artefactos: Log 2137 (ASCII puro por bytes, CRLF, sin BOM; head del pool medido 2137
+  justo antes -> consumido), msg 184, 04-Codigo.md e 05-Checklist.md de M23, tracker 183.
+- Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos (CHECKLIST-GLOBAL.md,
+  quality.yml, AGENTS.md, project.godot intactos).
+- Pedidos (msg 184): ronda de commit de los paths de la tanda (secundarias.json y
+  test_historias.gd YA estan en HEAD por el commit de preservacion del CRON 4fef055;
+  quedan en el worktree 04-Codigo.md, 05-Checklist.md y este backlog); sync fila 23 del
+  GLOBAL a 69/105; visto bueno de los 4 flips + el de la desync del item 156. Nota de
+  pool: el head de NUMEROS_DISPONIBLES.txt de mi canal quedo en 183 (stale en 1) -> use
+  el ultimo+1 = 184.

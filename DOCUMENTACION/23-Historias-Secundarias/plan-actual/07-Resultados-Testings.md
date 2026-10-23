@@ -261,15 +261,21 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
 
 ## 5. Estado del catálogo (medido, no estimado)
 
-- `data/historias/secundarias.json`: **40 cadenas** (faro, invernadero, epilogo-plaza,
+- `data/historias/secundarias.json`: **51 cadenas** (faro, invernadero, epilogo-plaza,
   secretta-luciernagas, panadera, carpintero, tejedora, pescador, guarda, alquimista,
   jardines, cofradia, molino, biblioteca-quemada, observatorio, estacion, puente,
   relicto, gema, carta, llave, farol, brujula, molinera, pescadores, guardas,
   regalo-favorito, sentadilla-pesca, paseos, ficcion, ayuda-vecino,
-  cartas-amistad) de las ~89 slots del catálogo de 03-Diseno. Creció 4 -> 10
+  cartas-amistad, mapa-secreto, cristal-oculto, diario-antiguo, pergamino-mistico,
+  mascara-ceremonial, ruta-del-mercader, cargamento-de-telas, secreto-del-yunque,
+  registro-del-faro, catalogo-perdido, mediciones-de-la-isla, mapa-de-las-plantas,
+  cartas-estelares, templo-de-las-24-marcas, templo-de-los-25-engranajes,
+  templo-de-las-26-mareas, ruinas-del-barrizal, ruinas-del-manantial,
+  ruinas-del-acantilado) de las ~89 slots del catálogo de 03-Diseno. Creció 4 -> 10
   (iter. 5, vecinos) -> 13 (iter. 6, lugares) -> 17 (iter. 7, ruinas) -> 23
   (iter. 8, objetos) -> 26 (iter. 9, familias) -> 32 (iter. 10, amistad) -> 37
-  (iter. 11, secretas) -> 40 (iter. 12, comerciantes). `cadena-biblioteca` vive en el
+  (iter. 11, secretas) -> 40 (iter. 12, comerciantes) -> 51 (iter. 13, puzzles +
+  investigación). `cadena-biblioteca` vive en el
   fichero de ejemplos (merge por id).
 - `data/historias/cadenas_ejemplo.json` (3 cadenas: faro, biblioteca, postgame-plaza):
   **INTEGRADO** en la iter. 3 (Log 2083) vía `RUTA_CATALOGO_EJEMPLOS` con merge por id
@@ -279,7 +285,8 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
   en iter. 3 -> **14** en iter. 6 (13 del principal + 1 de ejemplos) -> **18** en
   iter. 7 (17 del principal + 1 de ejemplos) -> **24** en iter. 8 (23 del principal
   + 1 de ejemplos) -> **27** en iter. 9 (26 + 1) -> **33** en iter. 10 (32 + 1) ->
-  **38** en iter. 11 (37 + 1) -> **41** en iter. 12 (40 + 1).
+  **38** en iter. 11 (37 + 1) -> **41** en iter. 12 (40 + 1) -> **52** en iter. 13
+  (51 + 1).
 - Capítulos `capitulo-*` en el catálogo M55 (`data/diario/diario_catalog.json`): **0**
   → las recompensas `diario` de las cadenas apuntan a entradas inexistentes (el
   registro efectivo es `mision_{cadena_id}`). MEDIDO iter. 3: existen
@@ -320,7 +327,16 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
   cargamento-de-telas / secreto-del-yunque) y las recompensas apuntan a
   `capitulo-ruta-del-mercader` / `capitulo-cargamento-de-telas` /
   `capitulo-secreto-del-yunque`, ausentes del catálogo M55. Reportado; dueño M55.
-- Consecuencias aplicadas por cadenas del principal (40 únicas sobre 40 cadenas):
+  **Iter. 13**: degrada IGUAL para las 11 de puzzles + investigación —
+  `not diary.esta_registrada("mision_cadena-registro-del-faro")` (idem las otras 10)
+  y las recompensas apuntan a `capitulo-registro-del-faro` /
+  `capitulo-catalogo-perdido` / `capitulo-mediciones-de-la-isla` /
+  `capitulo-mapa-de-las-plantas` / `capitulo-cartas-estelares` /
+  `capitulo-templo-de-las-24-marcas` / `capitulo-templo-de-los-25-engranajes` /
+  `capitulo-templo-de-las-26-mareas` / `capitulo-ruinas-del-barrizal` /
+  `capitulo-ruinas-del-manantial` / `capitulo-ruinas-del-acantilado`, ausentes del
+  catálogo M55. Reportado; dueño M55 (mismo patrón desde cadena-biblioteca en H).
+- Consecuencias aplicadas por cadenas del principal (51 únicas sobre 51 cadenas):
   `faro_encendido`, `invernadero_abierto`, `plaza_decorada`, `luciernagas_vueltas`,
   `pan_fiesta_horneado`, `banco_plaza_reparado`, `manto_niebla_terminado`,
   `red_pescador_reparada`, `sendero_bosque_senalado`, `jarabe_lunar_listo`,
@@ -336,7 +352,13 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
   `cristal_oculto_recuperado`, `autor_del_diario_identificado`,
   `versos_antiguos_descifrados`, `mascara_ceremonial_restaurada`,
   `ruta_comercial_reabierta`, `telas_reunidas`,
-  `tecnica_del_yunque_recuperada`. (Corrección de decreto: el flag real en datos es
+  `tecnica_del_yunque_recuperada`, `registro_del_faro_recuperado`,
+  `catalogo_perdido_devuelto`, `mediciones_de_la_isla_recuperadas`,
+  `mapa_de_plantas_dibujado`, `cartas_estelares_descifradas`,
+  `templo_de_las_24_marcas_abierto`, `templo_de_los_25_engranajes_abierto`,
+  `templo_de_las_26_mareas_abierto`, `ruinas_del_barrizal_leidas`,
+  `ruinas_del_manantial_leidas`, `ruinas_del_acantilado_leidas`.
+  (Corrección de decreto: el flag real en datos es
   `sendero_bosque_senalado`, sin z; la lista previa de este documento y del bloque K
   de la suite decía `senalizado`.)
   **`molino_funcionando` RE RESPALDADA en iter. 6**: tenía 0 cadenas que la aplicaran
@@ -355,16 +377,17 @@ Iter. 10 (Log 2131, mismo binario, corridas del 2026-10-22):
 ## 6. Veredicto
 
 Núcleo de M23 **verificado** con binario real y guarda anti-falso-verde demostrada en
-rojo DOCE veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
+rojo TRECE veces (iter. 2; iter. 3; las dos de iter. 4 — aborto de runtime en el bloque
 I y regresión de datos con prefijo re-inyectado; iter. 5 en el bloque J; iter. 6 en el
 bloque K; iter. 7 en el bloque L; iter. 8 en el bloque M; iter. 9 en el bloque N;
-iter. 10 en el bloque O; iter. 11 en el bloque P; iter. 12 en el bloque Q; todas EXIT 1
-nombrando el bloque o la clave). Estado actual:
-suite en **379 checks / 0 fallos / EXIT 0 x3**, catálogo vivo 40 cadenas (41 con el
+iter. 10 en el bloque O; iter. 11 en el bloque P; iter. 12 en el bloque Q; iter. 13 en
+el bloque R; todas EXIT 1 nombrando el bloque o la clave). Estado actual:
+suite en **456 checks / 0 fallos / EXIT 0 x3**, catálogo vivo 51 cadenas (52 con el
 merge de ejemplos), y
-regresiones M22 (41/0) · M71 (83/0 y 37/0 en flujo-XP) · M59 (43/0 con 9 bloques,
-4/0 en backup-rotate-return y 7/0 en backup-rotations) · M55 (0 fallos) medidas el
-2026-10-22 en las iters. 8, 9 y 10.
+regresiones M22 (41/0) · M71 (83/0 y 37/0 en flujo-XP; 8/2 en la reproducción del
+BUG-143, previa) · M59 (43/0 con 9 bloques, 4/0 en backup-rotate-return, 7/0 en
+backup-rotations y 0 fallos en autosave) · M55 (0 fallos en diario y persistencia)
+medidas el 2026-10-22 en las iters. 8, 9, 10 y 13.
 Pendientes = contenido narrativo y dueños externos (M22/M17/M24/M28/M32/M36/M37/M68),
 documentados como `[ ]` honestos en `05-Checklist.md`. Decisiones abiertas para el
 director: tipo de paso `"construir"` (rechazo PERSISTENTE por msg 153; dueños M22/M17),
@@ -449,3 +472,64 @@ quiere extenderse el GO de normalización.
 - Reparación de deriva documental de la iter. 11: la sec. 5 de este documento y el
   veredicto seguían en 32 cadenas / 316 checks / DIEZ rojos; sincronizados a
   40 (41 vivo) / 379 / DOCE con las notas de puente de iters. 11 y 12.
+
+## 10. Iter. 13 — clusters Puzzles e Investigación (Log 2137, 2026-10-22)
+
+Tanda consolidada por orden del director (msg 183): clusters Puzzles (6, 03-Diseno
+L46: templos 24/25/26 + ruinas del barrizal/manantial/acantilado) e Investigación
+(5, L45: faro, biblioteca, geodesia, mapas + cartas estelares como extensión
+declarada del núcleo). 11 cadenas nuevas en `data/historias/secundarias.json`
+(40 -> 51; 52 con la de ejemplos en carga).
+
+- Investigación (5): `cadena-registro-del-faro` (vera_ardilla farera +
+  OBJ-LUZ-012 «Linterna», puzzle alturas-de-la-luz, lugar faro),
+  `cadena-catalogo-perdido` (sofia_buho bibliotecaria + OBJ-EST-006 «Vitrina»,
+  signos-en-los-margenes, biblioteca), `cadena-mediciones-de-la-isla`
+  (pablo_pato ceramista + OBJ-REL-002 «Reloj de péndulo», sombras-del-mediodia,
+  observatorio), `cadena-mapa-de-las-plantas` (teo_conejo herbolario +
+  OBJ-HER-015 «Lupa», tinta-de-hojas, jardines) y `cadena-cartas-estelares`
+  (sofia_buho + OBJ-LUZ-008 «Lámpara de cristal», reloj-de-estrellas,
+  observatorio).
+- Puzzles (6): `cadena-templo-de-las-24-marcas` (pablo_pato + OBJ-TAL-004 «Rueda
+  de alfarero», sellos-de-arcilla, templo_24), `cadena-templo-de-los-25-engranajes`
+  (bruno_sapo carpintero + OBJ-HER-018 «Sierra», mecanismo-escondido, templo_25),
+  `cadena-templo-de-las-26-mareas` (luna_zorra artesana + OBJ-PLA-004 «Orquídea»,
+  tintes-del-templo, templo_26), `cadena-ruinas-del-barrizal` (catalina_oso
+  cocinera + OBJ-ITE-021 «Pan», ofrenda-de-la-ruina, barrizal),
+  `cadena-ruinas-del-manantial` (teo_conejo + OBJ-NAT-024 «seta»,
+  raices-en-la-piedra, manantial) y `cadena-ruinas-del-acantilado`
+  (vera_ardilla + OBJ-LUZ-004 «Veladora», eco-de-las-ruinas, acantilado).
+- NPC REALES de `data/villagers/` (7, cada uno con su rol en disco) y objetos
+  REALES de `data/items/` por campo id dentro del .tres (11, ninguno reutilizado
+  de cadenas previas). Las 11 nacen visibles (`oculta:false`). Colisiones
+  verificadas ANTES de escribir: ids/consecuencias/diarios/refs de puzzle = 0
+  sobre las 40 previas; lugares = 4 nuevos (templo_24/25/26, biblioteca) + 6
+  reutilizados por diseño (faro, jardines, observatorio, barrizal, manantial,
+  acantilado). Consecuencias peladas únicas 51/51 en disco (52/52 sobre la carga);
+  11 capítulos de diario únicos. JSON: +396/-0, puramente aditivo.
+- Suite: bloque R `_test_puzzles_investigacion()` (77 checks) al FINAL de
+  `_run()`; BLOQUES A-R; conteos de A/I actualizados (41 -> 52 cargadas,
+  principal 40 -> 51). Piso 379 -> **456 checks / 0 fallos / EXIT 0 x3** con el
+  binario real, 0 SCRIPT ERROR. Endurecimiento: la unicidad de flags pasó a
+  medirse sobre la carga REAL (52 consecuencias sobre 52 cadenas) en lugar de una
+  lista transcrita a mano, que podía omitir un flag y dar un falso verde.
+- Guardián EN ROJO por inyección de runtime (`Node` null -> `free()`) al inicio
+  del bloque R: EXIT 1, «el bloque R NO se ejecuto (posible SCRIPT ERROR que
+  aborto la funcion)» + «solo 380 checks ejecutados (minimo 456)»; sonda borrada
+  en la misma operación, sha256 restaurado byte-exacto. Re-ejecutada en el cierre
+  de la tanda (corrida original interrumpida por el límite de frecuencia de la
+  API): mismo resultado.
+- Regresiones medidas tras la tanda: M55 `test_diario.gd` 0 fallos +
+  `test_diario_persist.gd` 0 fallos · M59 `test_autosave_m59.gd` 0 fallos · M71
+  `test_bug_reevaluar_m71_hy3.gd` 8/2 (los 2 fallos son la reproducción del
+  BUG-143 conocida, previa a la tanda). `validate_quest_chains.gd` no se pudo
+  medir: cuelga en modo `--script` headless (SceneTree sin `quit()`, condición
+  previa ajena a la tanda).
+- Flips con cita: L85 (crear 5 misiones de investigación), L87 (documentar
+  amistad e investigación, compuesta: §Iter. 10 + §Iter. 13), L91 (crear 6
+  misiones de puzzles) y L93 (documentar misiones de puzzles) [ ] -> [x]. M23 =
+  **69 [x] / 34 [ ] / 2 [?] = 105** por prefijo de línea; las DOS líneas de
+  totales sincronizadas.
+- Hallazgo (dueño M55): el puente M23->M55 degrada en silencio para las 11 nuevas
+  (`mision_cadena-*` y `capitulo-*` ausentes del catálogo M55). No se inventa
+  contenido de M55.
