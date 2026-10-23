@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:16:30",
+ "ultimo_update": "2026-10-23T04:00:00 (23oct)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -169,7 +169,9 @@
   "CANALES-RENUMERADOS-CON-LINEAS (23oct 04:40, fundador \"falto corregir la numeracion dentro de cada archivo\"): la renumeracion secuencial debe incluir (a) primera linea de cada mensaje al numero nuevo con rastro (antes OLD), (b) nota de mapping per-mensaje (SERIE RENUMERADA -> INDICE-CANAL); las citas internas historicas NO se editan. Implementado en el canal de Beam (d50e06f: 181 lineas + 170 notas)",
   "FANTASMA-CACHE-DIRECTORIO (23oct 05:50, resuelto): los 7 archivos \"no movibles\" del canal G-5.3 raiz eran ENTRADAS STALE DE CACHE del directorio Windows — ya estaban movidos a arch_0201-0300 en corridas previas (verificado: estan alli); el cache del listado no se refresco hasta cambiar el directorio. REGLA: si un move da ENOENT pero scandir lo ve, verificar la SUBCARPETA destino ANTES de alarmarse — es cache stale, no archivo perdido",
   "CONVERSION-LONG-PATH (23oct 05:15): la conversion de carpetas 2-digit + migracion de sueltos requiere prefijo \\?\\ con ABSOLUTE path (chr(92)x2 + ? + chr(92)x1) — mi primer intento con 8 backslashes (PowerShell escape doble en -c inline) fallo. REGLA: estos scripts SIEMPRE via write-tool file + python -X utf8 file, nunca -c inline",
-  "METODO-DOCUMENTADO-DEFINITIVO (23oct 06:20): el fundador pidio x3 \"documenta el metodo\" — la causa: yo documentaba fragmentos (GUIA + AGENTS ref + canon) pero NO la guia completa autocontenida con los comandos listos. REGLA: una metodologia se documenta COMPLETA y AUTOCONTENIDA una sola vez, con un mensaje de referencia al fundador por cada cambio — no en fragmentos por ciclo"
+  "METODO-DOCUMENTADO-DEFINITIVO (23oct 06:20): el fundador pidio x3 \"documenta el metodo\" — la causa: yo documentaba fragmentos (GUIA + AGENTS ref + canon) pero NO la guia completa autocontenida con los comandos listos. REGLA: una metodologia se documenta COMPLETA y AUTOCONTENIDA una sola vez, con un mensaje de referencia al fundador por cada cambio — no en fragmentos por ciclo",
+  "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas",
+  "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
@@ -240,7 +242,8 @@
   "cronometro": "CRONOMETRO-REFLECTION-BEAM-1.0.md (23oct 00:46: prompt canonic del cron del fundador - mision produce-first, fuentes, nicho, 3 reglas, formato, prohibidos; referenciado en BACKLOG-MASTER)",
   "cronometro_msg": "221 (23oct 00:55: cronometro oficial dejado por MENSAJE a pedido del fundador, que tambien se lo escribe de su lado; mime texto = CRONOMETRO-REFLECTION-BEAM-1.0.md)",
   "apilado_ultimo": 288,
-  "cron_status": "APAGADO por el fundador (wku_1668c63 eliminado por Beam 285); en espera de reactivacion"
+  "cron_status": "APAGADO por el fundador (wku_1668c63 eliminado por Beam 285); en espera de reactivacion",
+  "nota_preservacion": "CRON C preserva todos los asentados"
  },
  "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
  "calibracion_beam": {
