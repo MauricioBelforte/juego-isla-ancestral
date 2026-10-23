@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T05:00:30",
+ "ultimo_update": "2026-10-23T05:46:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -538,15 +538,9 @@
   "esperando_fundador": "anuncio del cron nuevo a agregar",
   "aclaracion_director": "mi servidor NUNCA hace push (regla). Si el push-cron es de tu infraestructura, nada de mi lado cambia; si te referias a mi CRON C (commits de preservacion cada 20 min), decime y lo bajo a 120 en el proximo ciclo",
   "nuevo_cron_E": {
-   "nombre": "APILADOR A BEAM",
-   "cadencia": "cada 20_MINUTOS en minutos 3/23/43 (cambio 02:23 del fundador: era cada 10/30-tareas, ahora cada 20 min con 10 TAREAS por apilado); apilado incondicional igual",
-   "id": "wku_1669331d1001R5emAI9j6qGshy",
-   "funcion": "cada ciclo escribe a Beam UN mensaje con 30 tareas apiladas de su nicho (del BACKLOG-06/-A/-B y re-escaneos), sin repetir (puntero apilador_beam_ultimo), analizando brevemente que esta haciendo; separado del cron de lectura",
-   "proximo_disparo": "02:43",
-   "regla_anti_spam": "si el ultimo mensaje de Beam esta DENTRO del apilado anterior (no completo), NO reapilar ese ciclo",
-   "regla": "APILADO INCONDICIONAL (fundador 02:08: nada de anti-spam - se apilan las 30 IGUAL cada ciclo; Beam decide cuando puede hacerlas; en el peor de los casos se le recuerdan las que le faltaron)",
-   "id_anterior_anulado": "wku_16679d388001jydakN57a0qXhW",
-   "id_anterior": "wku_16685207a001HvsHS4bGf75J6W (10-min/30-tareas, borrado)"
+   "id": "wku_167391343001SFXJenRNwK9SAa",
+   "cadencia": "RE-AJUSTADA 23oct 05:43 (fundador: cambiar de 30 cada 10-min a 10 tareas cada 20-min para el regimen sin agente G-5.3): minutos 3/23/43",
+   "nota": "el apilado x3 (287) es una pila-para-reactivacion mientras Beam esta offline"
   },
   "mapa_horario": "A=:00/:20/:40 (0,20,40), B=:10/:30/:50 (10,30,50), C=preservacion 120min (17 cada 2h), D=:15/:35/:55 (15,35,55), E(apilador Beam x10)=:03/:23/:43 (3,23,43) — SIN G-5.3-Flash-Agente: agente APAGADO por el fundador hasta 24oct (su cron 10-min pendiente de baja desde su panel, wku_161a9d...; CRON F apilador G-5.3 NO montado)",
   "cron_F": {
@@ -574,6 +568,6 @@
   },
   "agrupado": "REGRA FINAL del fundador 23oct 05:36: centena COMPLETA se archiva (arch_0001-0100); en raiz queda la centena EN CURSO; herramienta scripts/agrupar_canal.py (idempotente) + agrupar_todos.py; verificacion 23oct 05:40: todas las centenas en curso correctamente en raiz, 0 re-movimientos (idempotente)"
  },
- "apilador_beam_ultimo": "258 (apilado x5 FINAL honesto: nicho flipable agotado — M03 inventario-raiz + propuesta pricing-coherente 2.0 + M02 esquema/espejo + M03 doc-check; proximo real depende del fundador)",
+ "apilador_beam_ultimo": "287 (apilado x3 pila-para-reactivacion: draft EN pitch + inventario raiz M03 + espejo M02; Beam presencial offline hasta manana)",
  "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)"
 }
