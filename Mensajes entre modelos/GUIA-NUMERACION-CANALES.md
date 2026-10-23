@@ -57,3 +57,4 @@ Casos probados en los canales reales esta noche (Beam renumerado 001-276, DeepSe
 
 **Caso especial — entrada fantasma persistente del canal DS-OC** (015-2026-10-16 con ruta 268 chars): `scandir` la lista pero open/rename dan ENOENT aunque use el prefijo. El contenido está versionado en git. Queda como una anomalia documentada hasta que se acorte la ruta del repo o se habiliten las rutas largas a nivel Windows (registro LongPathsEnabled=1 + reinicio).
 
+## REGLA UNICA (fundador 23oct 06:02): centena COMPLETA -> arch_XXXX-XXXX; raiz = centena EN CURSO; convert 2-digit; idempotente. Herramienta: scripts/agrupar_canales.py
