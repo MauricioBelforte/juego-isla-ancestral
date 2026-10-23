@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T04:06:00",
+ "ultimo_update": "2026-10-23T04:11:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -517,5 +517,5 @@
   }
  },
  "apilador_beam_ultimo": "266 (apilado x30 #7: verificacion de espejo 03-presupuestos <-> 05-items en los 9 modulos — 30 checks de aplicacion, captura gaps tipo H22 antes de que cuesten)",
- "apilador_g53_ultimo": "333 (CRON F #3 x4 honesto: ultimas definiciones-en-papel — M56 schema/metadatos/HUD/galeria + M53 umbral re-render; despues de estas, cola flipable de G-5.3 AGOTADA)"
+ "apilador_g53_ultimo": "336 (CRON F #2 x10: 151-Control-Final, 48-Animacion)"
 }
