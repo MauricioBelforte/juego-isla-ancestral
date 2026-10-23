@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T02:32:00",
+ "ultimo_update": "2026-10-23T02:24:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -207,7 +207,7 @@
  ],
  "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
  "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
- "nota_cron_d": "02:15 - flota completa con colas por nicho y GO: Beam (auditoria + apilados por CRON E), G-5.3 (riel cerrado + bateria), Step-5 (bloque final M23), DS-WB (degradar-50 + M113), agnes (radar de lotes), DS-OC (verificador integral), Hy3 (encuestas), Ling (i18n standby). Sin asignaciones nuevas: los gated esperan decisiones del fundador (flags_fundador_pendientes con 12 entradas) o Godot-MCP.",
+ "nota_cron_d": "02:24 - regime dual de apiladores reforzado por el fundador: CRON E (Beam, minutos 3/13/...) y CRON F (G-5.3, minutos 7/17/...) — cada uno apila sus 30 cada 10 minutos SIN evaluar nada; los agentes deciden cuando hacerlas y el apilador les recuerda las pendientes al final de cada mensaje. Ningun agente queda sin cola.",
  "bug_139": {
   "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
  },
@@ -459,7 +459,14 @@
    "regla": "APILADO INCONDICIONAL (fundador 02:08: nada de anti-spam - se apilan las 30 IGUAL cada ciclo; Beam decide cuando puede hacerlas; en el peor de los casos se le recuerdan las que le faltaron)",
    "id_anterior_anulado": "wku_16679d388001jydakN57a0qXhW"
   },
-  "mapa_horario": "A=:00/:20/:40, B=:10/:30/:50, C(120min)=minuto-17 de cada 2h, D=:15/:35/:55, E(apilador Beam)=:03/:13/:23/:33/:43/:53"
+  "mapa_horario": "A=:00/:20/:40, B=:10/:30/:50, C(120min)=minuto-17 de cada 2h, D=:15/:35/:55, E(apilador Beam)=:03/:13/:23/:33/:43/:53",
+  "cron_F": {
+   "nombre": "APILADOR A G-5.3",
+   "id": "wku_166915d28001UANY7PqwGWT7F6",
+   "cadencia": "cada 10 min en minutos 7/17/27/37/47/57 (sin solape con A/B/C/D/E)",
+   "funcion": "apila 30 tareas de su BACKLOG-MASTER-G53 con puntero apilador_g53_ultimo; su guardia se rompe con trabajo concreto (segunda vez que cae en guardia pasiva)",
+   "proximo_disparo": "02:27"
+  }
  },
  "apilador_beam_ultimo": "236 (apilado x30 #2: auditoria numerica de los 6 modulos sellados por agnes - 5 audits x modulo; regla anti-spam REDEFINIDA: reapilar cuando Beam DECLARA bloque completado - su declaracion vale, no mi lectura)"
 }
