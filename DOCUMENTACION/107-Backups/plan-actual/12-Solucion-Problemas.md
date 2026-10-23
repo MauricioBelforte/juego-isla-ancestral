@@ -39,7 +39,7 @@
 
 ### 6. `.github/workflows/backup.yml` falla en rclone / Google Drive
 - **Causa:** secrets no configurados (`GDRIVE_CLIENT_ID`, `GDRIVE_CLIENT_SECRET`, `GDRIVE_TOKEN`).
-- **Solución:** configurar OAuth en Google Cloud Console y agregar los secrets al repositorio (04-Codigo.md §6). **Requiere cuenta de Google del usuario** — fuera de alcance de agentes.
+- **Solución:** seguir el procedimiento paso a paso de `03-Diseno.md` **§5.1** (proyecto GCP, Drive API, consentimiento, credenciales *Desktop app*, `rclone authorize`, secrets) y agregar los 3 secrets al repositorio. **Requiere la cuenta de Google del usuario** — la ejecución es del fundador; el procedimiento es del módulo.
 
 ### 7. `BackupManager` (in-engine): "categoría inexistente"
 - **Causa:** `verificar_categoria()` retorna Array vacío para categorías no registradas.
@@ -59,4 +59,4 @@
 
 ## Nota
 
-Los ítems de disco externo físico, Google Cloud Console, Drive API y OAuth permanecen `[?]` en el checklist: requieren hardware/cuenta de usuario y no son verificables headless (dueño: usuario).
+Desde el 2026-10-23 (director msg 373) **no queda ningún `[?]`** en el checklist de M107: los 3 ítems de disco externo físico pasaron a `[x]` porque la lógica **sí** es verificable headless (`scripts/test_backup_ps1.py`: destino ficticio en el bloque A y unidad ausente `Q:\` en el bloque D, que sale con exit 1 sin escribir nada). Los 5 ítems de Google Cloud Console / Drive API / OAuth / consentimiento / token pasaron a `[ ]`: el procedimiento está documentado en `03-Diseno.md` **§5.1** y la **ejecución** sigue pendiente del fundador, que es quien tiene la cuenta de Google.

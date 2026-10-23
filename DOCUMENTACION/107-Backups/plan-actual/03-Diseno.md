@@ -199,6 +199,123 @@ jobs:
 - `GDRIVE_CLIENT_ID`: Client ID de Google Drive API
 - `GDRIVE_TOKEN`: OAuth token de acceso
 
+### 5.1 Procedimiento GCP/OAuth paso a paso (copia 2 — Drive)
+
+> **Dueño de la ejecución: el fundador.** Los pasos de esta sección requieren **su cuenta de Google**;
+> ningún agente puede ejecutarlos. Lo que sí es de este módulo es el **procedimiento**: hasta el
+> 2026-10-23 los pasos estaban *enumerados* en `04-Codigo.md` §6 pero **sin instrucciones**, y
+> `rclone authorize` —el paso que produce el token— no aparecía **ni una vez** en el repositorio
+> (medido: `grep -rn "rclone authorize"` = 0).
+
+Los 3 secrets que consume `.github/workflows/backup.yml` son `GDRIVE_CLIENT_ID`,
+`GDRIVE_CLIENT_SECRET` y `GDRIVE_TOKEN`. El workflow tiene un **guard de secrets**: si falta
+cualquiera de los tres **no falla** — genera el artefacto `.tar.gz` y salta la subida dejando el
+aviso en el resumen. Consecuencia operativa: **un run verde NO prueba que Drive esté configurado**;
+hay que leer el `GITHUB_STEP_SUMMARY`.
+
+#### Paso 1 — Crear el proyecto en Google Cloud Console
+
+1. Entrar a <https://console.cloud.google.com> con la cuenta dueña del Drive destino.
+2. Selector de proyecto (arriba a la izquierda) → **New Project**.
+3. Nombre: `isla-ancestral-backups`. Ubicación: la organización que corresponda (o *No organization*).
+4. **Create** y esperar. Anotar el **Project ID** (no el nombre visible: es el que aparece en las URLs).
+
+#### Paso 2 — Habilitar la Google Drive API
+
+1. Ir a **APIs & Services → Library** (<https://console.cloud.google.com/apis/library>).
+2. Buscar `Google Drive API` → **Enable**.
+3. Verificar en **APIs & Services → Enabled APIs** que figura habilitada **en el proyecto del paso 1**.
+   Habilitarla en otro proyecto es el error más común: la API queda activa y la credencial no la ve.
+
+#### Paso 3 — Configurar la pantalla de consentimiento
+
+1. **APIs & Services → OAuth consent screen**
+   (<https://console.cloud.google.com/apis/credentials/consent>).
+2. **User Type:**
+   - `External` si la cuenta es `@gmail.com` (caso normal del fundador).
+   - `Internal` si es una cuenta de Google Workspace y el Drive es de la organización.
+3. Completar *App name* (`Isla Ancestral Backups`), *User support email* y *Developer contact email*.
+4. **Scopes** → *Add or remove scopes* → agregar `https://www.googleapis.com/auth/drive`.
+   Es el scope que rclone usa por defecto y el único que permite **listar y borrar** lo que ya existe
+   en la carpeta destino (la retención `--min-age 30d` lo necesita). `drive.file` no alcanza: solo ve
+   los archivos creados por la propia app.
+5. **Test users** (solo si la app queda en estado *Testing*): agregar la cuenta que va a autorizar.
+6. **Estado de publicación — decisión operativa, no un detalle:**
+   - En *Testing*, el **refresh token caduca a los 7 días** (política vigente de Google para apps
+     *External* no verificadas). Un cron **semanal** se rompe en el segundo ciclo, y el workflow
+     **igual reporta verde** (el guard solo mira que los secrets *existan*, no que el token sirva).
+     Si se elige *Testing*, hay que **renovar `GDRIVE_TOKEN` cada 7 días**.
+   - En *In production* el token no caduca por tiempo, pero el scope `auth/drive` es **restringido** y
+     Google puede exigir verificación de la app. Para uso propio (una sola cuenta) el flujo funciona
+     igual; la verificación es requisito de publicación pública.
+   - **Recomendado:** *In production* con la cuenta del fundador como único usuario, aceptando que la
+     app quede sin verificar. Aparece la pantalla "Google no ha verificado esta aplicación" →
+     *Advanced* → *Go to … (unsafe)*: es esperado y no es un error del módulo.
+
+#### Paso 4 — Crear las credenciales OAuth
+
+1. **APIs & Services → Credentials → Create credentials → OAuth client ID**.
+2. **Application type: `Desktop app`.** No `Web application`: rclone usa el flujo de *app instalada*
+   (loopback en `127.0.0.1`); una credencial *Web* exige un *Authorized redirect URI* que en este
+   flujo no existe y la autorización falla con `redirect_uri_mismatch`.
+3. Nombre: `rclone-isla-ancestral` → **Create**.
+4. Copiar **Client ID** y **Client secret**. El secret se puede volver a consultar; si se pierde, se
+   crea otra credencial.
+
+#### Paso 5 — Obtener el token OAuth (el paso que faltaba)
+
+Se hace **en una máquina con navegador** (la del fundador), no en CI:
+
+```bash
+rclone authorize "drive" "<CLIENT_ID>" "<CLIENT_SECRET>"
+```
+
+1. rclone levanta un servidor local y abre el navegador; iniciar sesión con la cuenta del paso 3.
+2. Aceptar el scope. Google redirige a `127.0.0.1` y rclone imprime un **JSON de una línea**:
+
+   ```json
+   {"access_token":"ya29...","token_type":"Bearer","refresh_token":"1//0g...","expiry":"2026-10-23T22:10:00.000000000-03:00"}
+   ```
+
+3. **Ese JSON completo es el valor de `GDRIVE_TOKEN`.** No el `access_token` suelto: sin
+   `refresh_token` el workflow funciona **una hora** y después falla con `invalid_grant`. El `expiry`
+   es informativo — rclone renueva solo con el refresh token.
+4. No pegar el JSON en ningún archivo del repo, ni en un log, ni en un mensaje de canal: va **solo** al
+   secret de GitHub (paso 6).
+
+#### Paso 6 — Cargar los 3 secrets en GitHub
+
+Repo → **Settings → Secrets and variables → Actions → New repository secret**:
+
+| Secret | Valor |
+|---|---|
+| `GDRIVE_CLIENT_ID` | Client ID del paso 4 |
+| `GDRIVE_CLIENT_SECRET` | Client secret del paso 4 |
+| `GDRIVE_TOKEN` | JSON completo del paso 5, en **una sola línea** |
+
+Los secrets de *repository* alcanzan: el workflow `Backup Externo` no declara `environment:`.
+
+#### Paso 7 — Verificar de punta a punta
+
+1. **Actions → Backup Externo → Run workflow** (el `workflow_dispatch` existe para esto).
+2. El step **"Detectar secrets de Google Drive"** debe imprimir `Secrets de Google Drive detectados.`
+   Si imprime el `::warning::`, falta al menos uno de los 3.
+3. El resumen del run debe decir `- Subido a Google Drive: isla-ancestral-backups/diario/`. Si dice
+   `⚠️ Subida a Drive **saltada**`, la copia 2 **no** se hizo aunque el run esté verde.
+4. Comprobar en Drive que existen `backup_<AAAAMMDD>.tar.gz` **y** su `.sha256` en
+   `isla-ancestral-backups/diario/`.
+
+#### Notas de operación
+
+- **Cadencia:** el cron es **semanal** (lunes 2 AM UTC) desde el GO del fundador del 2026-10-23
+  (PAQ-6/H26, cuidar la cuota compartida de artifacts). La retención en Drive sigue siendo de
+  **30 días** (`rclone delete --min-age 30d`), así que con cadencia semanal se conservan ~4 copias.
+- **Referencia rota conocida:** el comentario del workflow cita `docs/backup_gdrive_setup.md`, que
+  **no existe en el repositorio** (medido 2026-10-23: `git ls-files -- "*gdrive*"` = 0 archivos).
+  La fuente autoritativa del procedimiento es **esta §5.1**.
+- Esta sección documenta la **copia 2** (offsite). La **copia 3** (disco externo físico) es
+  `backup_local.ps1` vía Task Scheduler — ver §6 y §7.
+
 ## 6. Script de backup local
 
 **Archivo `scripts/backup/backup_local.ps1`:**

@@ -31,6 +31,42 @@
 
 ## LAS 100+ TAREAS
 
+> **CICLO 2026-10-23 (Log 2157, msg 374) — RAMA 1, director 373 (P5d APLICADO):** aplicados los
+> **3 flips** autorizados (L36 RF9, L51 Copia 3, L55 Local -> `[x]`, con cita "autorizado por el
+> director, msg 373; cita: DeepSeek 372 + Log 2156") y los **5 items** L204-208 pasados a `[ ]` con
+> la nota "procedimiento en `03-Diseno.md` §5.1; EJECUCION pendiente del fundador (requiere SU cuenta
+> Google)". **§5.1 escrita**: nueva, 116 lineas (+117/-0), 7 pasos (proyecto GCP, Drive API,
+> consentimiento con scope `auth/drive`, credencial OAuth **Desktop app**, `rclone authorize`, 3
+> secrets, verificacion por `GITHUB_STEP_SUMMARY`) + notas de operacion. Estado M107 medido:
+> **177 `[x]` / 0 `[?]` / 5 `[ ]` = 182** (antes 174/8/0; el total no cambia).
+> **Correccion al diagnostico del 372:** `04-Codigo.md` §6 **si** enumera los 8 pasos, pero como
+> TITULOS; lo que faltaba es el procedimiento (`grep -rn "rclone authorize"` = **0** en todo el repo).
+> Los pasos estaban **nombrados, no procedimentados**. **Drift de `Totales`/GLOBAL: NO tocado** (el
+> director se lo reservo, msg 373 punto 3): `verificar_checklist.py` sale 1 con 45 inconsistencias, 44
+> ajenas preexistentes y 1 mia (`GLOBAL 174/182` vs checklist `177/182`). Tambien corregido
+> `12-Solucion-Problemas.md` (+2/-2), que afirmaba que los items "permanecen `[?]`".
+> **Hallazgos reportados sin tocar:** `.github/workflows/backup.yml` cita `docs/backup_gdrive_setup.md`
+> (no existe, `git ls-files -- "*gdrive*"` = 0) y `07-Resultados-Testings.md` L74 dice "25 `[?]`"
+> (drift preexistente). **Pedidos del director ejecutados:** patron de entrada ampliado a
+> `*glm-5-3-flash*a-deepseek*` + trampa 129 ("cita EN rango pero MAL atribuida") agregada al skill.
+> Numeracion: log **2157**, mensaje **374**. 0 commits / 0 push / 0 flips fuera de los autorizados.
+
+> **CICLO 2026-10-23 (Log 2156, msg 372) — RAMA 1, director 371 (GO P5d M107):** P5d CERRADO con
+> **0 flips**. De los 8 `[?]` de M107, **3 estan REFUTADOS** (L36 RF9, L51 Copia 3, L55 Local: la
+> justificacion "no verificable headless" es falsa — `backup_local.ps1` implementa la verificacion de
+> unidad de destino y el banco `scripts/test_backup_ps1.py` da **49/0/EXIT 0**, con el bloque D
+> simulando "disco desconectado" con `Q://` inexistente -> exit 1) y **5 son hueco de DOCUMENTACION**
+> (L204-208: los 5 pasos de Google Cloud; `03-Diseno.md` §5 documenta el workflow y los 3 secrets
+> pero NO como obtenerlos, grep = 0). Propuestas: L36/L51/L55 -> `[x]`; L204-208 -> `[ ]` o `[x]` si
+> escribo `03-Diseno.md §5.1`. **Corregida 1 cita mal atribuida** (L51: `03-Diseno.md L52` -> L86,
+> script en L227). **Drift PREEXISTENTE reportado:** M107 en disco = 174/8/182 pero `Totales` y
+> GLOBAL dicen 168/176; los 6 `[x]` de diferencia estan apendidos DESPUES del Totales (L399-408) y ya
+> estaban en HEAD. Numeracion: log 2156, mensaje 372. 0 commits / 0 push.
+> **Trampa nueva:** el director firmo el 371 como `glm-5-3-flash` (guiones) y el patron documentado
+> (`glm-5.3-flash-director`) NO matchea -> el mensaje se detecto solo por el orden de NN. Pedido al
+> director de ampliar el patron.
+
+
 > **CICLO 2026-10-23 (Log 2153, msg 370) — RAMA 1, director 369 (P5 a/b/c/d):** P5a CERRADO (el
 > `CHECKS_MINIMOS` de M90 ya estaba en HEAD, commit `26f4542`; verificado 57/0 x3 y probado EN ROJO
 > con 2 sondas: aborto de runtime y piso subido -> EXIT 1 las dos). P5b CERRADO con resultado
