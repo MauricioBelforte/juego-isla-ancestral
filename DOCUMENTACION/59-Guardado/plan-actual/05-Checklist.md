@@ -48,7 +48,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Mostrar metadatos por slot (hora, día, progreso) [M] — *`slot_metadata()` CORREGIDO (iter. 1, Log 1197): parseaba el archivo entero —checksum hex incluido— como JSON, así que devolvía `{}` para cualquier slot. Ahora usa `SaveWriter.parse_document()` (valida checksum). Probado en `test_slots_m59.gd` bloques 1-2, con sonda roja. La UI de selección (M53) queda pendiente; el campo "progreso" requiere una definición de M71. **iter. 2 (Log 1202):** el `day` salia SIEMPRE 0 porque `slot_metadata()` leia `time.day` (clave del schema) mientras el proveedor de tiempo (M29) persiste `dia`; corregido para leer el dialecto real y caer a `day`. Ademas el manager ahora sella `meta.last_saved` (antes salia siempre vacio: ningun proveedor emite `meta`)*
 - [x] Borrar y sobrescribir slot con confirmación [S] — G-5.3-Flash-Agente 2026-10-19: IMPLEMENTADO+VERIFICADO — botón rojo + ConfirmPopup + DataStore.borrar_slot(1); i18n 4/4 (json+.po); QA headless: 4 verificaciones OK (borrado true, slot inexistente tras borrado, false en inexistente). Parcial: chequeo visual del botón pendiente en runtime.
 - [x] Id de perfil en el archivo, validado al cargar (sin cruzamiento) [M] — **G-5.3-Flash-Agente (2026-10-21): RESUELTO con evolución.** (1) sello `meta.profile_id` → VERIFICADO EN DISCO (lectura directa de `user://.../slot_1.save`: meta.profile_id = 'perfil_A'; el falso hallazgo anterior fue que `slot_metadata()` OMITÍA profile_id del dict devuelto — corregido hoy, save_manager L288); (2) validación al cargar: `LoadResult.PROFILE_MISMATCH` nuevo + pre-check en `load_slot` con `_perfil_de_slot` (lee el disco sin restaurar: `meta.profile_id` vs `DataStore.get_perfil_activo()`; legacy sin sello y sin perfil activo pasan sin restricción); (3) QA `scripts/saving/qa_m59_profile_id.gd` **11 checks, RESULTADO=OK EXIT 0** (boot sano post-BUG-139). **HALLAZGO DERIVADO CORREGIDO (DS-V4.1-Flash-Opencode, 2026-10-21):** el reporte previo de `EMPTY_SLOT(5)` era una lectura con el enum desactualizado. En el enum actual `PROFILE_MISMATCH=5` y `EMPTY_SLOT=6`; el QA ahora asserta `SaveLoader.LoadResult.PROFILE_MISMATCH == 5` y que el cruce devuelve ese código (`r1=5`), sin restaurar el snapshot. El pre-check y el enum están operativos; no hay bug de cadencia lector. — **G-5.3-Flash-Agente (2026-10-20): IMPLEMENTADO PARCIALMENTE con 2 HALLAZGOS para el dueño M59.** Hecho: (1) API en DataStore (`set/get_perfil_activo`; qa_perfil_id.gd ya prueba la API), (2) sello `meta.profile_id` en `_payload_para_slot` (verificado EN MEMORIA: 'perfil_A'), (3) `LoadResult.PROFILE_MISMATCH` nuevo (enum save_loader) + pre-validación en `load_slot` SIN restaurar nada (branch corta; marcador intacto). HALLAZGOS: (a) el sello llega al builder (probe en memoria OK) pero el ARCHIVO en disco lo pierde (meta={day,version,last_saved} sin profile_id — alguna capa de serialización lo filtra), (b) anomalía de cadencia lector: `loader.load(1)` devolvía el código 5, que con el enum actual es `PROFILE_MISMATCH` (no `EMPTY_SLOT`; el reporte original usaba un enum viejo) para un slot que `slot_metadata(1)` parsea OK con checksum. El rechazo cruzado se activa cuando el sello persista; fallbacks legacy/sin-perfil ya verificados. QA: `scripts/saving/qa_m59_profile_id.gd` (10 checks, EXIT 0).
-- [ ] Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C]
+- [x] Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C] — **Step-5-WorkBuddy (2026-10-23):** `test_slots_perfiles_m59.gd` bloques 1-2, 41 checks / 0 fallos / EXIT 0 x3 (binario real). 3 perfiles con slot propio (sello `meta.profile_id` por slot, verificado con `slot_metadata`), cada carga solo trae los contenidos de su perfil (0 mezcla) y el cambio de slot en sesión mueve `current_slot` + perfil activo + bolsillo sin reiniciar.
 
 ## E. Escritura Atómica
 
@@ -92,7 +92,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Guardar modificaciones del mundo (tala M50, minado M35) [M]
   · evidencia: 03-Diseno.md secc. Guardado de mundo extendido (P-30, Reflection-Beam-1.0, T63, 2026-10-22)
 - [x] Guardar posición del jugador, zona y punto de spawn [S] — *glm-5.3-flash: PlayerSaveProvider escribe los 4 campos. **iter. 2 (Log 1202) MEDIDO con un nodo Player inyectado:** `get_save_data()` devuelve `{name, position, spawn_position, zone}` con `spawn_position == position` (NO es un punto de spawn real: es una copia) y `restore_save_data()` restaura `position` CORRECTAMENTE pero NO restaura `spawn_position`, `zone` ni `name` (el nodo Player no expone esas propiedades; verificado con `"x" in p`). Se mantiene `[x]` porque el item pide GUARDAR y los 4 campos se escriben; **iter. 3 (Log 1205):** `restore_save_data()` ahora restaura `spawn_position` y `zone` SI el nodo las expone (duck-typing) y `get_save_data()` las LEE del nodo si existen; nunca asigna `name` (en un Node eso RENOMBRARIA el nodo y romperia `find_child("Player")`). El Player actual no las expone, asi que hoy `spawn_position` es un punto de REANUDACION; el contrato queda listo para cuando exista el sistema de zonas (M09/M54). Probado con un nodo inyectado (bloque 9)*
-- [ ] Testear carga del mundo sin duplicar objetos [C]
+- [x] Testear carga del mundo sin duplicar objetos [C] — **Step-5-WorkBuddy (2026-10-23):** `test_carga_idempotente_m59.gd` bloques 1 y 3, 28 checks / 0 fallos / EXIT 0 x3. Camino real (`SaveManager.load_slot` -> loader -> providers): cargar el mismo slot 2 y 3 veces NO duplica (ítems 5/7 estables); `Construccion.restaurar_estructuras` limpia antes de reconstruir —doble carga de la misma lista deja 2 estructuras, no 4.
 
 ## J. Guardado del Inventario (M14/M15/M16)
 
@@ -102,7 +102,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
   · evidencia: 03-Diseno.md secc. Guardado de mundo extendido (P-30, Reflection-Beam-1.0, T63, 2026-10-22)
 - [x] Guardar trampas y redes de pesca (M34) [M]
   · evidencia: 03-Diseno.md secc. Guardado de mundo extendido (P-30, Reflection-Beam-1.0, T63, 2026-10-22)
-- [ ] Testear carga sin duplicados y límites de cantidad (M60) [C]
+- [x] Testear carga sin duplicados y límites de cantidad (M60) [C] — **Step-5-WorkBuddy (2026-10-23):** `test_carga_idempotente_m59.gd` bloques 1-2 (misma suite, 28/0 x3). Sin duplicados medido por carga repetida; límites medidos con datos de save manipulados: `herramienta_basica` 5 -> 1 (stack_max=1), `baya_roja` 200 -> 99 (stack_max=99), `n=0` y `n=-3` ignorados (slot vacío).
 
 ## K. Guardado de Construcciones (M17/M18)
 
@@ -112,8 +112,8 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
   · evidencia: 03-Diseno.md secc. Guardado de construcciones y decoracion (P-30, Reflection-Beam-1.0, T64, 2026-10-22)
 - [x] Guardar estado de puertas y ventanas [S]
   · evidencia: 03-Diseno.md secc. Guardado de construcciones y decoracion (P-30, Reflection-Beam-1.0, T64, 2026-10-22)
-- [ ] Testear carga con casas parcialmente construidas [C]
-- [ ] Testear carga con muebles inexistentes (fallback) [M]
+- [x] Testear carga con casas parcialmente construidas [C] — **Step-5-WorkBuddy (2026-10-23):** `test_carga_idempotente_m59.gd` bloque 4 (misma suite). `HouseManager.restaurar_estructuras` conserva la etapa: casa en cimientos `planta=1` y completa `planta=3` sobreviven el round-trip; la doble carga de las mismas casas deja 2, no 4.
+- [x] Testear carga con muebles inexistentes (fallback) [M] — **Step-5-WorkBuddy (2026-10-23):** `test_carga_idempotente_m59.gd` bloques 2 y 5 (misma suite). Inventario: ítem inexistente ignorado con aviso (0 unidades, sin crash). Construcción: tipo desconocido NO crashea —fallback medido = la estructura se conserva con el tipo crudo (depurable), sin inventar uno válido.
 
 ## L. Guardado de NPC y Diálogos (M19/M21)
 
@@ -163,8 +163,8 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 
 - [x] Probar apagado a mitad de guardado y al iniciar la carga [C] — *iter. 2 (Log 1202): SIMULADO (estado en disco, no SIGKILL real). Corte a mitad de guardado -> `.save` anterior intacto o recuperable desde `.bak` (bloques 3 y 7 de `test_rotate_m59.gd`); al iniciar la carga, `SaveManager._process_init_cleanup()` limpia los `.tmp` huerfanos de los 3 slots (`cleanup_orphan_tmp`)*
 - [x] Probar falta de espacio: aviso claro y save anterior intacto [C]
-- [ ] Probar múltiples perfiles sin cruzamiento [C]
-- [ ] Probar archivos con permisos de solo lectura [M]
+- [x] Probar múltiples perfiles sin cruzamiento [C] — **Step-5-WorkBuddy (2026-10-23):** `test_slots_perfiles_m59.gd` bloque 3 (misma suite, 41/0 x3). Cruce perfil_A->slot de B y perfil_C->slot de A devuelven `PROFILE_MISMATCH` SIN restaurar nada (bolsillo intacto, `current_slot` sin cambios) y la señal `slot_loaded` avisa a la UI; el slot propio carga OK.
+- [x] Probar archivos con permisos de solo lectura [M] — **Step-5-WorkBuddy (2026-10-23):** `test_slots_perfiles_m59.gd` bloque 4 (misma suite). MEDIDO: (R1) con el `.save` marcado solo-lectura (`attrib +R`) el guardado COMPLETA —Windows permite rotar el archivo read-only a `.bak` y el `.save` nuevo (archivo fresco) verifica por checksum; (R2) con la escritura realmente bloqueada (directorio en la ruta del `.tmp`) el guardado FALLA con `save_failed` nombrando el slot, sin save a medias, y `load_slot` recupera desde el `.bak` (`RECOVERED`=3). El directorio bloqueante se elimina al cerrar el bloque.
 - [x] Testear paths con espacios/unicode (Windows) [M]
 
 ## R. Rendimiento (M61)
@@ -238,7 +238,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Marcar ítems solo al cumplir la DoD (sección 21.6) [S] -- Diseno: 03-Diseno.md (guardado definido)
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 lineas-item - Completados: 102 - Pendientes: 26 - No resueltos: 2. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)
+**Totales:** 130 lineas-item - Completados: 109 - Pendientes: 19 - No resueltos: 2. (Step-5-WorkBuddy 2026-10-23: 7 flips con evidencia de suite real, Log 2154; conteo de disco por prefijo de linea)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].

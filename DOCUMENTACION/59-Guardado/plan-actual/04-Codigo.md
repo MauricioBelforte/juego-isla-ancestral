@@ -344,3 +344,37 @@ Se recorrió la cola BUG-108..115 del módulo: 6 cerrados con sonda roja probada
 **Evidencia:** `test_checksum_hmac.gd` (8 bloques, guardia de 3 capas) — **38 checks, 0 fallos, EXIT 0 ×3**; guardián probado **EN ROJO por inyección** (2 inyecciones, revertidas y verificadas con `grep`): `verificar_checksum()` devolviendo siempre `true` → 3 fallos, EXIT 1; `_validar_entero_rango()` anulada → 4 fallos, EXIT 1. Regresión: **14 suites EXIT 0** (validate_save 16/0, test_rotate_m59 43/0, test_slots_m59 22/0, test_autosave_m59, test_save_collect_robust 10/0, test_save_size_cap 7/0, test_backup_rotations 7/0, test_backup_rotate_return 4/0, test_close_save 6/0, test_slot_range 10/0, test_fishing_save_block 11/0, test_inventario_restore_robusto 12/0, test_diario_persist). Gate nuevo en `quality.yml` (`|| FAIL=1`, junto a las otras 3 suites de M59).
 
 **LIMITACIÓN RESIDUAL (honesta — NO es un sello de "a prueba de trampas"):** el token legado se sigue aceptando (regla dura del proyecto: no inutilizar un save existente), así que un atacante con acceso al sistema de archivos puede reemplazar la línea 1 por `sha256(payload)` y el documento verifica; y la clave HMAC vive en `user://`, junto a los saves, y es legible. El HMAC **no** vuelve el save a prueba de manipulación local. Lo que SÍ queda verificado: (a) los saves NUEVOS ya no se pueden re-firmar sin la clave con el algoritmo público; (b) el caso legado queda expuesto vía el flag `legacy`; (c) la validación de esquema, que era vacua, ahora rechaza rangos/tipos inválidos sobre el dialecto real — la parte con valor real y medible de este fix. Por eso la fila de BUG-115 en `11-BUGS.md` queda en `[->] Parcial`, no en `[x] Resuelto`.
+
+
+---
+
+## Notas del Agente — Tanda "save slots + autoguardado" (Step-5-WorkBuddy, 2026-10-23, Log 2154)
+
+Item 35 de la cola activa del BACKLOG-MASTER. Dos suites NUEVAS (no tocan lógica de producción):
+
+### `scripts/saving/test_slots_perfiles_m59.gd` — 41 checks / 0 fallos / EXIT 0 x3
+
+Guarda anti-falso-verde de 3 capas (piso `CHECKS_MINIMOS = 41` MEDIDO en verde). 4 bloques:
+
+1. **3 perfiles sin mezcla** — sello `meta.profile_id` por slot (leído con `slot_metadata`), cada carga solo trae los contenidos de su perfil.
+2. **Cambio de slot en plena sesión** — `current_slot`, perfil activo y bolsillo siguen al slot cargado sin reiniciar.
+3. **Sin cruzamiento** — cruce de perfiles devuelve `PROFILE_MISMATCH` sin restaurar nada.
+4. **Solo lectura** — R1 medido: con el `.save` en solo-lectura (`attrib +R`) el guardado COMPLETA (Windows permite rotar el read-only a `.bak`; el `.save` nuevo verifica). R2 medido: escritura bloqueada (directorio en la ruta del `.tmp`) → `save_failed` + recuperación `RECOVERED` desde el `.bak`.
+
+Guardián probado **EN ROJO por inyección** 2 veces (aborto runtime en el bloque 2, antes y después del `_abrir`): EXIT 1 nombrando el bloque sin cerrar y el piso no cumplido (32 < 41).
+
+### `scripts/saving/test_carga_idempotente_m59.gd` — 28 checks / 0 fallos / EXIT 0 x3
+
+Guarda de 3 capas (piso 28 MEDIDO). 5 bloques: round-trip e2e sin duplicar (cargar 2 y 3 veces = mismas cantidades), límites de cantidad (`herramienta_basica` 5→1, `baya_roja` 200→99, `n=0`/negativos ignorados), construcciones idempotentes, casas parciales (`planta` preservada) y muebles inexistentes (fallback sin crash). Guardián probado EN ROJO por inyección (aborto en bloque 3): EXIT 1 con `[3]` nombrado y piso 23 < 28.
+
+### Trampa nueva documentada
+
+En una suite con `await`, el `_summary()` en `call_deferred` dispara en el PRIMER frame y su `quit()` mata el proceso a mitad de la corrida (medido: "1 check, suite incompleta" con la suite realmente verde). Fix: bandera `_run_terminado` que `_summary()` espera antes de reportar.
+
+### Regresiones medidas (binario real)
+
+test_slots_m59 22/0 · qa_m59_profile_id OK · test_autosave_m59 0 fallos · qa_m59_bloqueo_manual 5/0 · M55 diario perf 26/0 · M55 persistencia 0 · M71 progresión 83/0.
+
+### Flips al 05-Checklist (7, con cita de suite)
+
+L51, L166, L167 (suite A) y L95, L105, L115, L116 (suite B) → M59 = 109 [x] / 19 [ ] / 2 [?] = 130. Ofrecidos a revertir.

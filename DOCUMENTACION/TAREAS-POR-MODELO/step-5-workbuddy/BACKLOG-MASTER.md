@@ -75,7 +75,7 @@
 32. M112-Testing (211/225): cerrar 14 pendientes — 8 [C]
 33. M117-Build (92/110): cerrar 18 pendientes (preset de exportación) — 8 [C]
 34. M40-Infraestructura (175/211): lote de pipelines faltantes — 10 [C]
-35. M59-Guardado (60/130): lote de save slots + autoguardado — 10 [C]
+35. M59-Guardado (60/130): lote de save slots + autoguardado — 10 [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2154, canal 185):** el conteo del item estaba stale (disco real 102/130). Dos suites NUEVAS con guarda de 3 capas y guardián probado EN ROJO por inyección: `test_slots_perfiles_m59.gd` (41 checks / 0 fallos / EXIT 0 x3: 3 perfiles sin mezcla, cambio de slot en sesión, sin cruzamiento, solo-lectura medida) y `test_carga_idempotente_m59.gd` (28/0 x3: carga sin duplicar, límites stack_max, casas parciales, muebles inexistentes). 7 flips con cita -> M59 = 109 [x] / 19 [ ] / 2 [?] = 130. Regresiones: M55 26/0 + persist 0, M71 83/0, suites M59 previas verdes. Ofrecidos a revertir.
 36. M61-Rendimiento (53/148): lote 1 de profiling (frame budget/render distance) — 10 [C]
 37. M137-Prototipo (8/131): iteración de prototipo jugable 1 — 10 [C]
 38. M137 b2/b3: continuar por lotes — 20 [C]
@@ -1647,3 +1647,32 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
   GLOBAL a 69/105; visto bueno de los 4 flips + el de la desync del item 156. Nota de
   pool: el head de NUMEROS_DISPONIBLES.txt de mi canal quedo en 183 (stale en 1) -> use
   el ultimo+1 = 184.
+
+
+## Registro de vuelta — 2026-10-23 18:20 (Step-5-WorkBuddy, Log 2154, canal 185)
+
+- RAMA 1: SIN mensajes nuevos del director (tracker 183; mi 184 del turno anterior sigue
+  siendo el ultimo archivo). RAMA 2: item 35 de la seccion A (default declarado en el
+  turno anterior: M59 save slots + autoguardado).
+- Tanda: 2 suites nuevas (no tocan logica de produccion):
+  `scripts/saving/test_slots_perfiles_m59.gd` 41 checks / 0 fallos / EXIT 0 x3 y
+  `scripts/saving/test_carga_idempotente_m59.gd` 28 checks / 0 fallos / EXIT 0 x3
+  (binario real, 0 SCRIPT ERROR). Guardas de 3 capas con piso MEDIDO (41 y 28) y
+  guardian EN ROJO por inyeccion en ambas (EXIT 1 nombrando bloque y piso).
+- 7 flips con cita de suite: L51, L166, L167, L95, L105, L115, L116 -> M59 =
+  109 [x] / 19 [ ] / 2 [?] = 130 (linea Totales sincronizada). Ofrecidos a revertir.
+- Regresiones medidas: test_slots_m59 22/0, qa_m59_profile_id OK, test_autosave_m59
+  0 fallos, qa_m59_bloqueo_manual 5/0, M55 diario perf 26/0, M55 persistencia 0,
+  M71 progresion 83/0.
+- TRAMPA NUEVA (propia, corregida): en una suite con `await`, el `_summary()` en
+  `call_deferred` dispara en el primer frame y su quit() mataba el proceso a mitad
+  de corrida (falso "suite incompleta" con la suite realmente verde). Fix: bandera
+  `_run_terminado` que _summary() espera antes de reportar.
+- Nota de comportamiento MEDIDO (L167): el flag de solo-lectura sobre el .save
+  anterior NO impide el guardado en Windows (se permite rotar el read-only a .bak y
+  el .save nuevo verifica); el fallo real de escritura (destino bloqueado) si degrada
+  graceful con recuperacion desde .bak.
+- Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos tocados
+  (CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md, project.godot intactos).
+- Pedidos (msg 185): ronda de commit de los paths de la tanda; sync fila 59 del
+  GLOBAL a 109/130 (hoy dice 60/130, stale); visto bueno de los 7 flips.
