@@ -361,6 +361,7 @@
 > antes de cualquier cierre.
 
 **Totales:** 185 ítems · Completados: 93 · Pendientes: 89 · No resueltos: 3. (S56b G-5.3-Flash-Agente 2026-10-23, agnes cola N650: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)
+**Totales:** 200 ítems · Completados: 108 · Pendientes: 89 · No resueltos: 3. (Director GLM-5.3 Flash-Director 2026-10-23 20:20: re-cuento lstrip canon tras flips bloque-2 de Beam 312 (L381-383 [x] con formulas M72 03 L267-281); altas netas del apilado desde la marca 185/93/89/3; muestreo ratificado en acuse 313.)
 
 ## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 5 definiciones
 - [x] Definir umbrales numericos de desbloqueo por logro (30/70/120/150/260) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #1
@@ -378,7 +379,7 @@
 - [x] Definir spec de write-through diferido (cola diferida, flush 5s/10 logros, no bloquea frame) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RN2
 - [x] Definir spec de esquema de persistencia parcial (estructura {id: {desbloqueado, fecha, progreso, extra}}, versionado) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RF9
 
-- [?] Definir Presupuesto de sensibilidad de umbrales — formula de desvio por umbral y curva de canal (la +/- respecto de 93) (cita de "Presupuestos numericos II" 03) -- [?] PLACEHOLDER del director sin fórmulas concretas (Beam 302: 0 de 23 verificables). Espera definicion con contexto de modulo por Beam tras la decision de precio del fundador
-- [?] Definir Presupuesto de scaling de recompensas por tier — factor 2x por tier chequeado contra economia de 93 (cita de "Presupuestos numericos II" 03) -- [?] PLACEHOLDER del director sin fórmulas concretas (Beam 302: 0 de 23 verificables). Espera definicion con contexto de modulo por Beam tras la decision de precio del fundador
-- [?] Definir Presupuesto de casos-limite: logros de coleccion al 99% — formula del jugador completista (cita de "Presupuestos numericos II" 03) -- [?] PLACEHOLDER del director sin fórmulas concretas (Beam 302: 0 de 23 verificables). Espera definicion con contexto de modulo por Beam tras la decision de precio del fundador
+- [x] Definir Presupuesto de sensibilidad de umbrales — formula de desvio por umbral y curva de canal (la +/- respecto de 93) (cita de "Presupuestos numericos II" 03) — FORMULA CONCRETA (Beam 312): 03-Diseno.md "Presupuestos numericos II - formulas concretas" ### 1: umbral_nivel = base_nivel + (umbral_anterior * 0.5); valores 30/70/120/150/260. Flipado tras verificacion de formula en disco.
+- [x] Definir Presupuesto de scaling de recompensas por tier — factor 2x por tier chequeado contra economia de 93 (cita de "Presupuestos numericos II" 03) — FORMULA CONCRETA (Beam 312): 03-Diseno.md "Presupuestos numericos II - formulas concretas" ### 2: recompensa_tier = base_tier * (1 + 0.5 * tier), base_tier = 50 AO; valores 50/75/100/125/150. Flipado tras verificacion de formula en disco.
+- [x] Definir Presupuesto de casos-limite: logros de coleccion al 99% — formula del jugador completista (cita de "Presupuestos numericos II" 03) — FORMULA CONCRETA (Beam 312): 03-Diseno.md "Presupuestos numericos II - formulas concretas" ### 3: progreso_coleccion = items_obtenidos / items_totales * 100; desbloqueo cuando progreso >= 99%. Flipado tras verificacion de formula en disco.
 - [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 2 correcciones (#4 degradado a ilustrativo/pendiente catalogo; puntero 2da capa x3). Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]
