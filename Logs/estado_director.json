@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T04:11:00",
+ "ultimo_update": "2026-10-23T04:12:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -158,7 +158,8 @@
   "GO-POR-MENSAJE-SIN-ENGANCHAR (23oct 00:59, fundador): los agentes IGNORARON los GO por mensaje hasta que el fundador escribio por SU chat - causa: sus cronometros solo leian estado_director, no su canal propio. FIX INSTITUCIONAL: PASO 1 OBLIGATORIO en CRONOMETRO-*.md (procesar mensajes pendientes del canal ANTES de producir) + avisos 226/323",
   "MENSAJE SIN RESPONDER (23oct 01:44, fundador): DS-OC entrego 205/206 y no recivieron acuse (respondí solo el 203). REGLA REINTERADA: TODO mensaje dirigido al director lleva acuse — el CRON A/B PROCESAN TODOS los pendientes, sin considerarlos self-artefactos sin acuse",
   "MAL-JUICIO ANTI-SPAM (23oct 02:06, autocritica): el CRON E decidio no reapilar basandose en MI lectura equivocada del 231/235 (dije sigue-bloque-2-en-ejecucion cuando Beam ya habia COMPLETADO en 230 y pedia mas). REGLA NUEVA: la declaracion de completado del AGENTE manda; mi interpretacion posterior no bloquea reapilados",
-  "ARCHIVO-FANTASMA NTFS (23oct 03:10, detectado en canal DS-OC): file 015-2026-10-16_...-bom-verde-mojibake...md (268 chars > MAX_PATH 260) es listado por scandir y stat funciona via handle, pero open/rename/delete dan ENOENT (no resoluble desde la API normal; el contenido YA esta versionado en git commits previos). IMPACTO: rompia el sweep de los detectores con FileNotFoundError. FIX aplicado a los detectores: envolver getmtime/lectura por archivo en try/except y CONTINUAR (no abortar el sweep). El fantasma morira en el proximo limpieza de FS o refactor; ignorable."
+  "ARCHIVO-FANTASMA NTFS (23oct 03:10, detectado en canal DS-OC): file 015-2026-10-16_...-bom-verde-mojibake...md (268 chars > MAX_PATH 260) es listado por scandir y stat funciona via handle, pero open/rename/delete dan ENOENT (no resoluble desde la API normal; el contenido YA esta versionado en git commits previos). IMPACTO: rompia el sweep de los detectores con FileNotFoundError. FIX aplicado a los detectores: envolver getmtime/lectura por archivo en try/except y CONTINUAR (no abortar el sweep). El fantasma morira en el proximo limpieza de FS o refactor; ignorable.",
+  "FLAGS-APILADOS-POR-ERROR (23oct 04:11, autocritica CRON F #1): el scan de candidatos NO filtro los items marcados FLAG FUNDADOR/TECNICO en su texto — apile 6 flags de M151 a G-5.3 por error y re-escribi el 336 corregido. REGLA: el filtro de candidatos del apilador debe excluir por TEXTO (FLAG FUNDADOR/FLAG TECNICO), no solo por modulo"
  ],
  "minimax_m3_1_flash": {
   "estado": "NO DISPONIBLE desde 22/10 tarde (fundador 15:14). Frentes colgados SIN delegar todavia: (1) suites que faltan de M20 en res://tests/ + migracion de las 3 suites de scripts/friendship/ al CI, (2) M17-implementacion (P3, ya detectada su parte del conteo). Posible delegacion pendiente de decision",
