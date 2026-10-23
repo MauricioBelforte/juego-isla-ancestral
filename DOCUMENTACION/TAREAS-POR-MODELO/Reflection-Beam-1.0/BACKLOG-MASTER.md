@@ -560,3 +560,4 @@ Regimen: UNA o DOS tareas [C] por ciclo (son tareas de DIAS). Formato de entrega
 - M59 resto de [ ] (41 despues de P-30/P-100) | M156 resto por script (~35 tras P-100) | M70 picking documental resto (~55) | M17 resto de specs/docs (~53) | M91 config (20) | M138 solo mediciones tecnicas (el resto de las que piden Definir MEDIDA - contenido NO) | M75 papel (+20) | M62 items sin hardware (los que se puedan por doc) | M117-Build-System doc items solo documentacion (16 minus editor).
 - Sin limite superior: cuando agote un modulo, sigue con el siguiente. El fundador decide cuando frena.
 - INDEPENDENCIA: nada de contenido M138 (G-5.3), nada de codigo M17 (MiniMax), editor-locked [ ] honesto siempre.
+- CRONOMETRO-REFLECTION-BEAM-1.0.md - PROMPT del cronometro del fundador (23oct 00:46): ProduccioPrimer por nicho, fuentes, reglas, formato
