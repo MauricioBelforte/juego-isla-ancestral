@@ -431,6 +431,95 @@ Auditoría estática report-only de los bloques P (M59), Q (M74) y R (M73). Medi
 
 **Síntesis P/Q/R:** M59 correcto (flujo de guardado 100% por clave); M74 y M73 son deudas data-driven ES-only con el mismo patrón de M159 (T27) — contenido jugador-visible en Resources/JSON sin vía de locale. Nótese el patrón transversal: los 3 módulos de contenido dinámico auditados (M159 items, M74 eventos, M73 coleccionables) tienen los nombres en la data, no en el catálogo M87 — consolidar la vía (campos por locale vs claves) es decisión del director/owners antes de traducir.
 
+#### 2.4.14 Monetización, servicios y flujo de boot — bloques S/T/U/V (TANDA 29, 2026-10-23 — tareas 89-96/101)
+
+Auditoría estática report-only de los bloques S (M95/M129), T (M106/M116/M121/M123) y U (M09/M40), más el estándar del bloque V (tarea 101). Medida en disco 2026-10-23:
+
+**T89 — M95 ediciones/DLC: DEUDA i18n data-driven + INCONSISTENCIA de datos (previa a traducir).** `data/monetizacion/monetizacion.json`: **3 ediciones** (Standard $24.99 / Deluxe $34.99 / Coleccionista $49.99) + **2 DLC** («DLC: Islas Corales Profundas» $14.99 / «DLC: Pack Cosmético Primavera» $4.99) — nombres ES-only, 0 campos EN/PT, sin campo `descripcion` (solo `contenido` con claves técnicas canónicas — correcto). `data/store/store_page.json`: `descripcion_corta` SÍ tiene ES+EN (paridad correcta); `about_secciones` (6 títulos + bullets) ES-only; `keywords`/`tags` EN (SEO de tienda — correcto como meta-dato); `requisitos` = datos técnicos. **INCONSISTENCIA CRÍTICA de datos (no de i18n):** el DLC `isla_hielo` tiene **3 nombres distintos** en 3 archivos — «Isla de Hielo» (`dlc/dlc_manifest.json`) vs «Expansión: Isla de los Cielos» (`data/monetizacion/dlc.json`) vs ausente en `monetizacion.json` (que lista `expansion_corales`, id que no existe en los otros archivos); `dlc/bundles.json` lista `isla_volcan`/`isla_bosque` que no figuran en ningún otro archivo. Consumidores: `monetizacion_manager.gd` (solo precios — 0 hits de `nombre`), `dlc_manager.gd`/`dlc_catalogo.gd`/`sincronizar_dlc.gd` (ids/versiones/precios), `dlc_bundle_manager.gd` L107 SÍ expone `nombre`/`descripcion` del bundle al modelo de runtime (ES-only en bundles.json: 4 bundles — Coleccionista Digital / Season Pass 2024 / Bundle Completo / Bundle de Islas). `store_page.json` solo lo consume `test_store_m97.gd` (contenido para la página de tienda, no runtime). **DEUDA owner M95:** (1) unificar el catálogo de DLC (un id = un nombre, archivo canónico) ANTES de traducir; (2) migrar nombres de ediciones/DLC/bundles a i18n data-driven (campos por locale o claves `TIENDA.*`/`DLC.*`, crear+consumir mismo commit).
+
+**T90 — M129 merch: 10 productos ES-only, archivo legal/producción (NO es contenido del juego).** `data/legal/merchandising.json`: **10 productos** (camisetas, tazas, posters, artbook, soundtrack, peluches, figuras, mapa_tela «Mapa de tela de la isla», llavero «Llavero de sello», pack_stickers «Pack de stickers») — nombres ES (3 bilingües de facto: Artbook/Soundtrack/Pack de stickers), `materiales`/`calidad`/`politicas` ES-only, 0 campos EN/PT. Consumidores: `legal/merch_manager.gd` + `test_merch_m129.gd` (0 hits de `nombre` en UI — datos de producción/legal, no runtime jugador-visible). **Clasificación frontera §2.4.7:** el merch físico no es contenido del juego — la traducción ES/EN aplica solo si el merch store es bilingüe; decisión owner M129. Deuda registrada (no flipeable por Ling, frontera 2.4.7).
+
+**T91 — M106 security messages: CORRECTO (alertas internas, estándar §2.4.7).** `scripts/security/` existe (14 archivos + 8 tests). Los strings son **alertas de seguridad internas**: `security_manager.gd` `registrar_alerta()` — «Economía adulterada: plata negativa (%d)» (L80), «Patrón de bot: ráfaga de %d acciones a intervalos < %dms» (L118), «Límite de tasa excedido: %s (%d/%d en %ds)» (L191), «Acceso crítico: %s %s» (L136) → `_alertas[]` + `push_warning("[M106] Alerta: %s")` (L237). **Clasificación:** alertas anti-tamper/anti-bot = telemetría del equipo, NUNCA al jugador (mostrarlas informaría al cheater). Correcto: mensaje ES para humanos del equipo + etiqueta `[M106]` canónica (estándar §2.4.7). 0 strings jugador-visibles → sin deuda i18n.
+
+**T92 — M116 instalador: CORRECTO (wizard bilingüe ES/EN por defecto).** `installer/IslaAncestral.iss`: sección `[Languages]` define `espanol` (Spanish.isl) + `english` (Default.isl) — el wizard de instalación es **bilingüe** con los language files estándar de Inno Setup; sin `[Messages]` custom (usa los estándares del wizard). `AppName` = «Isla Ancestral» (nombre propio, no traducible, §2.4.7). Los `.ps1` (`setup_windows.ps1` 8 cadenas, `uninstall_windows.ps1` 9, `verificar_requisitos.ps1` 2) tienen strings de consola ES-only («MODO SIMULACION», «Simulacion completada», «El equipo cumple los requisitos») — herramienta de instalación interna, no UI del juego; aceptable ES-only (deuda menor owner M116 si se distribuye a usuarios EN).
+
+**Aclaración spot-check del director (TANDA 30, 2026-10-23 — resuelve el «T92 PARCIAL»):** los `.iss` **sin** `[Languages]` que el spot-check halló son **stubs de 20 bytes** (`[Setup]` + `AppName="X"`) en `game/isla-ancestral/Godot/app_userdata/isla-ancestral/m116_fixture_{B,C,D,E,F}/installer/` — fixtures **deliberados** del test headless `scripts/build/test_instalador_m116.gd` (su comentario L15-16: «los bloques B-F trabajan sobre un repo FALSO construido en memoria a partir de fixtures, no copiando el repo real»). Son test doubles del validador del instalador, **NO el instalador real**. **Ruta exacta del instalador real: `installer/IslaAncestral.iss`** (carpeta `installer/` de la raíz del repo, ~20 KB, compilado con ISCC.exe vía `scripts/build_installer.bat`) — su sección `[Languages]` es literal: `Name: "espanol"; MessagesFile: "compiler:Languages\Spanish.isl"` + `Name: "english"; MessagesFile: "compiler:Default.isl"`. T92 CORRECTO se mantiene para el artefacto real; el fixture no refleja (ni debe reflejar) el instalador real.
+
+**T93 — M121 FAQ: DEUDA DE CONTENIDO (0 FAQs escritas — no es deuda de traducción).** El `03-Diseno.md` de M121 define la estructura: FAQ con **5 categorías** (técnicas, gameplay, historia, DLC, soporte) + canales (email/Discord/Steam/X) + sistema de tickets. Pero **no hay contenido FAQ real** (0 FAQs ES, 0 EN); `docs/production/faq.md` referenciado por `production_handbook.md` **no existe** (gap dev-facing). **DEUDA owner M121:** escribir las 15 FAQ (ES primero, luego EN) — no hay nada que traducir hasta que exista el contenido.
+
+**T94 — M123 modding messages: CORRECTO (mensajes para devs de mods, no jugador).** `scripts/modding/` (`modding_manager.gd` 125 líneas, `mod_validator.gd` 117, `mod_sandbox.gd` 111): strings = logs dev («[M123] ModdingManager listo (%d mods)» L21, «[M123] mod_manifest.json no encontrado» L25) + reporte de validación **código canónico EN + mensaje ES** (`mod_validator.gd` L41 `{"codigo": "E06", "mensaje": "config no es un Dictionary"}`, L99-100 `_e(codigo, mensaje)`) — patrón coherente con §2.4.7. Consumidores fuera de `scripts/modding/`: solo `editor/_colector_sintaxis.gd` (dev) — **no hay UI de mods para el jugador todavía**. Sin deuda i18n hoy; si aparece UI de mods (futuro M123), los mensajes van al catálogo M87.
+
+**T95 — M09 mensajes de la isla: CORRECTO (0 strings jugador-visibles; nombres propios no traducibles).** `main_island.gd` L193 `print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")` = log dev (§2.4.5/§2.4.7). `islas/generar_islas.gd` L151 `{"id": "aurora", "nombre": "Isla Aurora"}` = **nombre propio** de isla (§2.4.7: nombres propios NO se traducen). `data/island_type.gd` AUR = descripción técnica de enum. 0 mensajes de «primer boot» jugador-visibles en M09.
+
+**T96 — M40 flujo del boot: CORRECTO + 1 pendiente de feature (no de i18n).** `core/scene_manager.gd` (enrutador raíz M40): logs con etiqueta `[M40]` + mensaje ES («Cambio ya en curso; se ignora (anti doble-click)», «Escena inexistente: », «Fallo cambio de escena (%d)», «Escena cargada: ») — dev console, estándar §2.4.7; las señales emiten **motivos canónicos EN** (`cambio_fallido.emit(ruta, "escena_inexistente")`, `"error_%d"`) — correcto para máquinas. Checklist M40 pendiente: «Reintento de arranque fallido repetido: máximo 3 intentos y **mensaje de intervención** [M]» `[ ]` — el mensaje de intervención de boot **no está implementado** (deuda de feature owner M40; al implementarse debe nacer por clave M87, no literal).
+
+**T101 — Bloque V: ESTÁNDAR de strings del código de enrutamiento (definido — cierra el encargo de llaves 274).** Auditoría: **0 literales de ruta inline** (`change_scene_to_file("res://...")` y `cambiar_escena("res://...")` directos: 0 hits en producción) — `bootstrap.gd` L168 usa la constante `MAIN_SCENE_PATH`; todo lo demás pasa por `SceneManager.cambiar_escena()`. **ESTÁNDAR (4 reglas):** (1) las rutas de escena y los nombres de escena son **constantes técnicas** — PROHIBIDO meterlas en el catálogo M87 (no son strings de jugador); (2) todo cambio de escena raíz pasa por `SceneManager.cambiar_escena()` (validación `ResourceLoader.exists`, anti-double-click, deferido §9.20/§9.25) — `change_scene_to_file` directo solo en bootstrap con constante; (3) los motivos de fallo de enrutamiento se emiten como **canónicos EN** (máquinas) y los logs como **`[Módulo]`+ES** (humanos del equipo); (4) los nombres propios de escenas/islas (`main_island`, «Isla Aurora») no se traducen (§2.4.7).
+
+**Síntesis S/T/U/V:** M106 (alertas internas), M116 (wizard bilingüe), M123 (mensajes dev de mods), M09/M40 (logs + nombres propios) = correctos bajo el estándar §2.4.7. Las deudas son data-driven (M95: ediciones/DLC/bundles ES-only + inconsistencia de nombres de DLC entre archivos — unificar ANTES de traducir; M129: merch ES-only, físico, no es contenido de juego) o de contenido (M121: 0 FAQs escritas). Nuevamente el patrón transversal: los nombres viven en la data, no en el catálogo M87 — la decisión de vía (campos por locale vs claves) sigue pendiente en el director.
+
+#### 2.4.15 Medición de módulos vecinos — bloques D/F (TANDA 30, 2026-10-23 — tareas 29/30/35/36/37)
+
+Auditoría report-only de medición de checklist (M88 Fuentes-Tipográficas, M91 Configuración-De-Audio) + condicional M118. Medida en disco 2026-10-23:
+
+**T29/T30 — M88 Fuentes-Tipográficas: 174/185 CONFIRMADO exacto (174 [x] / 0 [ ] / 11 [?]).** El backlog citaba «174/185» — verificado línea a línea. Los 11 `[?]` son KnownIssues documentados in situ con dueño externo (no flippeables por Ling, frontera 2.4.7 + §21.4): **M154 visión** ×5 (pruebas de legibilidad 720p/1080p/4K — individuales + combinado — y «diferentes dispositivos»; ejecución visual pendiente); **diseñador humano de fuentes** ×2 (Nunito-Light.ttf y FredokaOne-Regular.ttf **NO existen en disco** — solo Regular/Bold/Variable/FredokaOne; el checklist marca la causa en cada uno); **M58/M53** ×1 (escalado de UI en 1280x720/1366x768); **M90** ×1 (integración `FontSettings` con Configuración Gráfica NO existe en código); **optimización de archivos de fuente** ×1 (herramienta subsetter/compressor DISEÑADA en 03 §9 — acción real pendiente); nota `Nunito-Variable.ttf` ×1 (270 KB, existe en disco, lo usa M87).
+
+**T35 — M91 D102 contraste: LÍMITE HONESTO (convención T78/msg 215).** Requiere captura en Godot en ejecución (vía V2) — no disponible en sesión headless. **Evidencia parcial estática:** `scripts/ui/layers/settings_audio_layer.gd` L109-116 crea los 7 sliders de bus **por clave M87** (Master/`SETTINGS.MAESTRO`, Music/`SETTINGS.MUSICA`, SFX/`SETTINGS.EFECTOS`, Ambient/`SETTINGS.AMBIENTE`, Voice/`SETTINGS.VOCES`, UI/`SETTINGS.UI`, Cinematic/`SETTINGS.CINEMATICAS`) con nodo `Slider_`+bus (L170) — la UI real existe y está localizada; el contraste visual del tema (D102) queda pendiente para sesión con visión.
+
+**T36 — M91 Configuración-De-Audio: 237/239 (el «12 [?]» del backlog está STALE).** Hoy hay **2 `[?]`**, ambos técnicos y documentados honestamente: (L91) espacialización HRTF para auriculares — **Godot 4.7.2 NO expone HRTF** (sondeo de `AudioStreamPlayer3D`: 67 propiedades, ninguna HRTF); (L177) `AudioServer.set_bus_channel_count()` — **0 hits** en scripts/ ni en el diseño (API inexistente en Godot; degradado por el director 2026-10-15 §21.8.2.b). El resto del módulo (237 ítems) está cerrado con evidencia (test_audio_config 66 checks 0 fallos, test_subtitles_m91 80 checks, roundtrip 79/0).
+
+**T37 — M118 CI/CD L199: CONDICIÓN CUMPLIDA (flip ya aplicado).** «Validación en GitHub Actions real» está `[x]` desde 2026-10-18: **2 runs consecutivos verdes** (39103199489 + 39104318435, push 2ca43fd/6a5ad98). El flip «cuando CI verde» (por el frente DeepSeek) ya se materializó; mi nota QA de 2026-10-15 (L201-203: `[?] deuda externa` — la validación real existe y se ejecuta en cada push a main) quedó superseda por el cierre verde. Verificado en disco.
+
+**Síntesis D/F:** M88 y M91 son módulos maduros (174/185 y 237/239) cuyos pendientes son **todos deudas con dueño externo documentadas** (visión M154, diseñador humano de fuentes, M58/M53/M90, limitaciones técnicas de Godot 4.7.2) — no hay strings jugador-visibles sin traducir en el alcance de estos módulos; la UI de M91 está 100% por clave M87 (reconfirmado aquí: 7 sliders por `SETTINGS.*`).
+
+### 2.4.16 Bloque A (T31, 2026-10-23): medición completa del catálogo M87 (tareas 1-4)
+
+**Firma:** Ling-3.1-Flash / Kilo Code — 2026-10-23 06:20. Auditoría estática código↔catálogo sobre **980 scripts de producción** (excluidos tests/fixtures), insumo del informe 227.
+
+**Medición por fuente:**
+
+| Fuente | Total | Vivas (referenciadas en código) | Muertas (huérfanas) |
+|---|---|---|---|
+| JSON runtime (`data/localizacion/strings_{es,en,pt}.json`) | 170 × 3 locales | 136 | 34 |
+| .po traducción (`locales/{es,en}.po`; 273 claves + header) | 273 | 159 comunes + 53 solo-.po vivas | 62 |
+
+**Desglose de las 34 JSON muertas:** `ui` 6 (`ui.inventario/tienda/diario/mapa/guardar/opciones`), `eventos.historia_c1-c7` 14 (nombre+desc por capítulo — legacy M74; los eventos reales son datos dinámicos fuera del catálogo), `SETTINGS` 9 (`SAVE_CORRUPTO/RECUPERADO/DISCO_LLENO`, `HORAS_H/HORAS_1/MIN_M/MIN_1`, `ULTIMO_GUARDADO`, `SIN_GUARDADO_PREVIO` — legacy del sistema de save), `msg` 3 (`inventario_lleno/no_materiales/nuevo_dia`), `npc` 2 (`hola/adios`). Las 11 «solo-JSON» del watchdog son subconjunto de estas 34 (ui 6 + msg 3 + npc 2).
+
+**Desglose de las 115 solo-.po:** **53 vivas** (M68 49 — narrativas/letreros de transporte resueltos vía `TranslationServer` desde `scripts/transporte/transport_localizer.gd`, `transport_narrative_trips.gd`, `transport_special_trips.gd`, `transport_route_events.gd`; + CLOCK 1, SETTINGS 1, UI 1, npc 1) + **62 muertas** (M68 40, `DIARY` 14 categorías `CAT_*`, CLOCK 3, ITEMS 2, DIALOGOS/HUD/MAIN_MENU/SETTINGS/UI/npc 1 c/u). M68 total: 89 = 49 vivas / 40 muertas.
+
+**Paridad y calidad:** ES/EN/PT 170/170/170, paridad de claves 0/0/0 en las tres direcciones, placeholders 0 discrepancias; .po ES/EN 0 fuzzy y 0 `msgstr` vacíos (salvo header). **PT es JSON-only: no existe `pt.po`** → las 53 claves .po-vivas (M68/CLOCK/…) carecen de traducción PT en runtime (la conciliación .po↔JSON y el PT como locale de runtime quedan pendientes de decisión director/fundador, msg 153).
+
+**Avisos del watchdog (5, todos informativos):** 4 copia-ES (`SETTINGS.HORAS_1/HORAS_H/MIN_1/MIN_M`) → las 4 son claves **muertas** del save legacy, no deuda de traducción activa; 1 divergencia po/json 159/11/115.
+
+**Conciliación .po↔JSON (insumo msg 153):** 73 candidatas a limpieza (11 JSON huérfanas + 62 .po muertas); 53 .po-vivas sin JSON son una ruta de traducción paralela vía TranslationServer (mecanismo válido, documentado aquí por primera vez con medición).
+
+**Tareas 1-4 del bloque A:**
+1. **Medición completa del catálogo** ✓ (esta sección; informe 227 al canal).
+2. **Ítems `[ ]`/`[?]` del 05-Checklist, uno por uno con evidencia:** 0 `[ ]` (desde T6); 5 `[?]` analizados — L71/L112 (M58: `AnalizadorLayout` existe y mide; desborde 0/63/97 a escalas 12/16/24 px sigue abierto → dueño agnes/M53, cola N651), L74 (revisión humana: no automatizable → dueño usuario), L116 (M14-M39: enriquecida con la medición T31 → dueño M14-M39), L117 (M29/M30: API probada en `locale_utils.gd` L54/L65, expuesta en `localization_manager.gd` L226/L229; consumo en disco solo `transport_localizer.gd` L254-255/L284/L299 (M68) — reloj/calendario NO la consumen → dueño M29/M30). **0 cierres forzados: los 5 `[?]` son deudas con dueño documentadas, no `[x]` falsos.**
+3. **Sincronizar ES←EN ↔ PT (paridad estructural):** ✓ watchdog paridad 0/0/0.
+4. **Validador del estándar 142** (`scripts/validar_i18n_integridad.py`): ✓ **LIMPIO**, 5 avisos informativos (arriba).
+
+### 2.4.17 Bloque W (T32, 2026-10-23): auditoría de calidad de traducción (punto ciego del watchdog)
+
+**Firma:** Ling-3.1-Flash / Kilo Code — 2026-10-23 07:20. El watchdog (`scripts/validar_i18n_integridad.py`) solo detecta copias ES→PT; esta auditoría cubre su punto ciego — **copias ES→EN y vacíos, sobre las 136 claves vivas** (referenciadas en código de producción, T31).
+
+**Resultados (claves vivas, 136):**
+
+| Comparación | Distintas (traducidas) | Copias exactas ES | Vacíos |
+|---|---|---|---|
+| ES→EN | 133 | 3 (todas neutras) | 0 |
+| ES→PT | 106 | 30 (todas cognates legítimos) | 0 |
+| .po ES→EN (≈50 vivas fuera de JSON) | ≈46 | 4 (neutras) | 0 |
+
+**Las 3 copias ES→EN son legítimas:** `DIARY.BLOQUEADO`='???' (símbolo neutro), `EQUIP.EQUIPADO`='{tipo}: {item}' (plantilla de placeholders, sin léxico), `SETTINGS.SLOTS`='Slots' (anglicismo de uso en UI de gaming).
+
+**Las 30 copias ES→PT son cognates válidos** (misma grafía en español y portugués): Visto/Favorito/Filtro/Favoritos/Todos/Vistos, Aplicar/Buscar/Cancelar/Confirmar/Continuar/Créditos/Descartar/Música/Ordenar/Pausa/Suave/Ambiente/Cinemáticas/Silenciar, Catálogo/Saldo/Comprar/Vender, 'Enter para continuar'. Corrobora la clasificación «cognatos/neutrales (ok)» del watchdog.
+
+**.po vivas (fuera de JSON):** 4 copias ES=EN legítimas — `npc.catalina`='Catalina' (nombre propio), `M68.SIGN.GENERICO`='→ {destino} · {metros} m' y `M68.TRIP.HORAS_MINUTOS`='{h} h {m} min' (plantillas), `M68.TRIP.CURRENCY`='AO' (código de moneda).
+
+**Hallazgo documentado (deuda de nomenclatura, no de traducción):** `SETTINGS.ADVANCED`='Enter para continuar' (ES/PT) / 'Press Enter to continue' (EN) — el NOMBRE de la clave no corresponde a su valor; se usa como hint de diálogo (`dialog_layer.gd` L296). El valor es correcto para el uso; queda como **deuda de rename** (M87, frente i18n — rename seguro: 1 sola referencia en código).
+
+**Conclusión:** el catálogo vivo está **completo y correcto en ES/EN/PT** — 0 traducciones faltantes, 0 vacíos, 0 copias no traducidas activas. Las 4 «sospechosas» del watchdog (`SETTINGS.HORAS_1/HORAS_H/MIN_1/MIN_M`) son claves MUERTAS del save legacy (T31), no deuda activa.
+
 ### 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).
