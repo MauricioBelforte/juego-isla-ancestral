@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T01:22:00",
+ "ultimo_update": "2026-10-23T01:24:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -428,6 +428,13 @@
  "infraestructura_crons": {
   "cambio_anunciado": "EL CRON DEL PUSH pasa a cada 120 MINUTOS (fundador 23oct 01:16) para liberar slots; en el PROXIMO CICLO el fundador anuncia el cron nuevo que entra en el hueco",
   "esperando_fundador": "anuncio del cron nuevo a agregar",
-  "aclaracion_director": "mi servidor NUNCA hace push (regla). Si el push-cron es de tu infraestructura, nada de mi lado cambia; si te referias a mi CRON C (commits de preservacion cada 20 min), decime y lo bajo a 120 en el proximo ciclo"
+  "aclaracion_director": "mi servidor NUNCA hace push (regla). Si el push-cron es de tu infraestructura, nada de mi lado cambia; si te referias a mi CRON C (commits de preservacion cada 20 min), decime y lo bajo a 120 en el proximo ciclo",
+  "nuevo_cron_E": {
+   "nombre": "APILADOR A BEAM",
+   "cadencia": "cada 10 MINUTOS",
+   "id": "wku_1665aea4e001TIIHHRMfnEqUns",
+   "funcion": "cada ciclo escribe a Beam UN mensaje con 30 tareas apiladas de su nicho (del BACKLOG-06/-A/-B y re-escaneos), sin repetir (puntero apilador_beam_ultimo), analizando brevemente que esta haciendo; separado del cron de lectura",
+   "proximo_disparo": "01:30"
+  }
  }
 }
