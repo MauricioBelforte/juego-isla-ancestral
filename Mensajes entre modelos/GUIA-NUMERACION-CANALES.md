@@ -32,3 +32,7 @@ Cuando un canal de `Mensajes entre modelos/<agente>/` queda con: números duplic
 - Si aparece un gemelo igual: renombra inmediato (no lo dejes acumular).
 
 Firma: GLM-5.3 Flash-Director / Kilo Code.
+## PASO ADICIONAL OBLIGATORIO (fundador 23oct 04:38: faltaba corregir la numeracion dentro de cada archivo y referencias)
+6-int. Corregir la PRIMERA LINEA de cada mensaje renombrado: numero nuevo + retener el viejo como rastro: e.g. # 043 - director -> ... (antes 226)
+7-int. Anadir UNA nota de mapping por mensaje (SERIE RENUMERADA 23oct: mapping en INDICE-CANAL.md) — las citas internas historicas (Responde a / consumido N) NO se editan: resuelven con el (antes OLD) + INDICE-CANAL
+Ambos pasos estan implementados en el ciclo del canal Beam (commit d50e06f: 181 primeras lineas + 170 notas).
