@@ -207,7 +207,7 @@ func limpiar(id: StringName) -> void
 - Medición: P99 del frame time durante la carga, con VSYNC off.
 - Umbral: FPS >= 60 (media), P99 <= 40 ms (max frame).
 
-### ### Test de estrés (M61)
+### Test de estrés (M61)
 - Presupuesto: 2 islas cargadas + 1 precargando bajo presupuesto M61 (16.6 ms para 60 FPS).
 - Medición: FPS promedio/minimo, draw calls, objetos renderizados, VRAM estimada.
 - Umbral: FPS >= 60 (media), P99 <= 40 ms (max frame)..
