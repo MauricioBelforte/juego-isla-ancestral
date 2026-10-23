@@ -38,11 +38,18 @@ static func _clasificar(vecino_data, item_meta, ya_regalado: bool) -> int:
 		return Clase.DUPLICADO
 	if item_meta == null:
 		return Clase.NEUTRAL
-	# ítems no válidos para regalo devuelven neutral (nunca castigan)
-	if item_meta.get("regalo_valido") == false:
+	# ítems no válidos para regalo devuelven neutral (nunca castigan).
+	# FIX (mortem Step-5 189 + agnes #033): item_meta puede ser Dictionary
+	# (tests/legacy, {"id":...,"regalo_valido":...}) o ItemData Resource
+	# (produccion, via ItemDatabase.get_item). .get() de 2 args solo vale para
+	# Dictionary; en Resource/Object (Godot 4: 1 arg) lanzaba SCRIPT ERROR.
+	# _campo() maneja ambos (duck-typing). "regalo_valido" no existe en ItemData
+	# -> default null (no "" para no comparar String vs false): solo un
+	# Dictionary con "regalo_valido"==false devuelve NEUTRAL; Resource/null -> sigue.
+	if _campo(item_meta, "regalo_valido", null) == false:
 		return Clase.NEUTRAL
-	var item_id := str(item_meta.get("id", ""))
-	var categoria := str(item_meta.get("categoria", ""))
+	var item_id := str(_campo(item_meta, "id", ""))
+	var categoria := str(_campo(item_meta, "categoria", ""))
 	if vecino_data == null:
 		return Clase.NEUTRAL
 	# Gustos del vecino: amados > gusta > disgustos
@@ -69,3 +76,14 @@ static func _reaccion(clase: int) -> String:
 		Clase.DUPLICADO:
 			return "R_DUPLICADO"
 	return "R_NEUTRAL"
+
+## Duck-typing helper (FIX agnes #033): extrae `clave` de `obj` siendo
+## Dictionary (get 2 args) o Resource/ItemData/objeto (Object.get, 1 arg en
+## Godot 4; devuelve `default` si la propiedad no existe o es null).
+static func _campo(obj, clave: String, default: Variant = "") -> Variant:
+	if obj == null:
+		return default
+	if obj is Dictionary:
+		return obj.get(clave, default)
+	var v: Variant = obj.get(clave)
+	return default if v == null else v
