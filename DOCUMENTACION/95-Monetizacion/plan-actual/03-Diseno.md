@@ -134,9 +134,9 @@ Rango observado: USD 7.99 – 29.99. Extremos citados por director: Stardew 14.9
 ### Tabla 2 — Escenarios de ingreso (ARPU por edición)
 | Escenario | Mix edición (Std/Deluxe/Coll) | ARPU (USD) |
 |-----------|------------------------------|------------|
-| Conservador (70/20/10) | 70% Std / 20% Deluxe / 10% Coll | 21.49 |
+| Conservador (70/20/10) | 70% Std / 20% Deluxe / 10% Coll | 31.49 (0.70*24.99 + 0.20*34.99 + 0.10*69.99 = 17.493 + 6.998 + 6.999; corregido por director, Hy3 343: 21.49 era imposible, menor al precio Std 24.99) |
 | Base (60/25/15) | 60% Std / 25% Deluxe / 15% Coll | 0.60*24.99 + 0.25*34.99 + 0.15*69.99 = 14.994 + 8.7475 + 10.4985 = **34.24** |
-| Optimista (50/25/25) | 50% Std / 25% Deluxe / 25% Coll | 35.24 |
+| Optimista (50/25/25) | 50% Std / 25% Deluxe / 25% Coll | 38.74 (0.50*24.99 + 0.25*34.99 + 0.25*69.99 = 12.495 + 8.7475 + 17.4975; corregido por director, Hy3 343) |
 
 Cálculo Base: 0.60*24.99 + 0.25*34.99 + 0.15*69.99 = 14.994 + 8.7475 + 10.4985 = **34.24 ARPU** (corregido por agnes 020 + director 324: el "normalizado por edición efectiva = 28.49" era falso, no existe). Mix canonico 60/25/15 con Coll 69.99 (H16). Headline real: 34.24 x 10.000 = USD 342,4k.
 

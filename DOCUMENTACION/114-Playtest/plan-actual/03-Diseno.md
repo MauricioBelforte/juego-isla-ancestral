@@ -206,7 +206,7 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 ## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
 
 ### 20. Sesiones x tester x perfil
-- Formula: sesiones_cozy = 5, sesiones_casual = 3. Muestra: 8-12 testers por ronda.
+- Formula (SUPERSEDED por GO fundador 23oct 20:25, PAQ-5/H25 — ver L237): muestra minima = 30 sesiones por tester; los valores previos (cozy 5 / casual 3, 8-12 testers) quedan como historial. (correccion Hy3 343: el cuerpo no reflejaba el GO).
 - Coherente con "al menos 3 sesiones completas" y "saturacion con 5 hallazgos repetidos".
 - Unidad: sesiones. Dependencia: M114 (plan de playtest).
 

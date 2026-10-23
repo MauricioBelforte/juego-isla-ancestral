@@ -162,7 +162,7 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 
 ### 16. Conteo objetivo de tests por modulo
 - Formula: tests_totales = tests_por_modulo * modulos_cubiertos = 10 * 50 = 500 tests.
-- Coherente con 475 declarados en el design doc.
+- Cifra total: la base '475 declarados' es OBSOLETA (misma auditoria 2026-10-23 que la fila 21; el techo 500 x modulo-tambien-lo-era). El conteo real se sincroniza con el censo D-1 del director (Totales del 05). (correccion Hy3 343: 500 != 475, inconsistentes entre si).
 - Unidad: tests. Dependencia: M112 (checklist).
 
 ### 17. Cobertura % de modulos

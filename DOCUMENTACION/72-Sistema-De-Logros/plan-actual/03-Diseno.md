@@ -259,19 +259,19 @@ Umbrales coherentes con H2 de rareza (no grinds abusivos, max 100 repeticiones p
 
 Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
 - **Presupuesto de sensibilidad de umbrales** [x] - formula de desvio por umbral y curva de canal (la +/- respecto de 93) (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
-- **Presupuesto de scaling de recompensas por tier** [x] - factor 2x por tier chequeado contra economia de 93 (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de scaling de recompensas por tier** [x] - factor 1.5x INCREMENTAL por tier (50/75/100/125/150; annotation de correccion: la frase original decia 2x y era imprecisa, Hy3 343) chequeado contra economia de 93 (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
 - **Presupuesto de casos-limite: logros de coleccion al 99%** [x] - formula del jugador completista (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
 
 ## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
 
 ### 1. Sensibilidad de umbrales de desbloqueo
-- Formula: umbral_nivel = base_nivel + (umbral_anterior * 0.5) para cada nivel de amistad.
+- Valores de diseño FIJOS (30/70/120/150/260): los incrementos reales (30/40/50/30/110) NO siguen un factor geometrico; la formula `umbral_nivel = base + (umbral_anterior*0.5)` era falsa (Hy3 343: no produce la serie; corregido por director — serie queda FIJA tal como esta, sin formula derivable; si el diseño futuro la necesita, se define nueva regla y se cita aquí).
 - Valores: nivel_2 = 30, nivel_3 = 70 (30 + 30*0.5 = 45? No: 30 + 40 = 70, incremento 40). nivel_4 = 120 (70 + 50 = 120). nivel_5 = 150 (120 + 30 = 150). nivel_8 = 260 (150 + 110 = 260).
 - Incrementos: 30, 40, 50, 30, 110. Pendiente decreciente hasta nivel_5, luego salto a nivel_8 (secreto). Coherente con H3 (umbrales 30/70/120/150/260).
 - Unidad: puntos de amistad. Dependencia: M20 (amistad), M93 (economia).
 
 ### 2. Scaling de recompensas por tier
-- Formula: recompensa_tier = base_tier * (1 + 0.5 * tier) donde base_tier = 50 AO (mision secundaria).
+- Formula (corregida por director, Hy3 343): recompensa_tier = base_tier * (1 + 0.5 * (tier - 1)) con base_tier = 50 AO -> serie 50/75/100/125/150 (la version anterior con `tier` tenia off-by-one y daba 75 en tier1).
 - Valores: tier 1 = 50, tier 2 = 75, tier 3 = 100, tier 4 = 125, tier 5 = 150.
 - Coherente con economia diaria 80 AO: max recompensa por logro = 150 AO = 1.875 dias. No infla (<= 2 dias de ingreso).
 - Unidad: AO. Dependencia: M93 (dinero_diario 80).
