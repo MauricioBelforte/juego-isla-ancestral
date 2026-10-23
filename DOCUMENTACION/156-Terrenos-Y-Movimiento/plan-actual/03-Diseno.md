@@ -564,3 +564,8 @@ Godot (buses Ambiente/SFX/USO) + tabla de volumen por zona del M42.
 ESCENA: las 6 zonas del prototipo en las 2 franjas (dia/noche). UMBRAL:
 100% de zonas con staff ambiente propio y 0 SFX fuera de su zona canon.
 
+## Presupuestos de terreno (Beam 346, produce-first)
+### ### ProgressBar para velocidad efectiva
+- Spec: ProgressBar que muestra la velocidad efectiva del jugador sobre el terreno (0-100%).
+- Cap: TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5.
+- Coherente con M11 (movimiento) y M61 (rendimiento).

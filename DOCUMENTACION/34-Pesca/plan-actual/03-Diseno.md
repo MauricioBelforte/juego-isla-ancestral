@@ -196,3 +196,25 @@ extends Resource
 ## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-8 (H4)**: pesca con margen >70% es **intencional** (M93/M34). El margen alto de pesca es una decision de diseño, no un bug. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 - **PAQ-8 (H5)**: las probabilidades de fishing son **pesos relativos**, no probabilidades (suman >1 a proposito). No normalizar a 1.0. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
+
+## Presupuestos de pesca (Beam 346, produce-first)
+### ### Evento de festival con bono temporal de capturas
+- Spec: en festival (M29), las capturas de peces otorgan bono x2 (duplica el peso del pez para el ranking).
+- Duracion: durante el festival (1 dia de juego).
+- Coherente con M29 (calendario) y M72 (logros).
+
+### ### Feedback de escape cozy ("el pez se fue") sin culpa
+- Spec: al escapar el pez, mostrar mensaje "el pez se fue" (no punitivo). Sin penalizacion, sin pérdida de cebo.
+- Coherente con M53 (UI) y M42 (sonido).
+
+### ### Zoom de captura con nombre y tamaño del pez
+- Spec: al capturar, mostrar zoom con nombre del pez y tamaño (cm). Formato: "Sardina — 12 cm".
+- Coherente con M53 (UI) y M55 (diario).
+
+### ### Notificacion de nueva especie al catalogo
+- Spec: al capturar una especie nueva (entry.veces == 1), emitir notificacion "Nueva especie: [nombre]".
+- Coherente con M72 (logros) y M53 (UI).
+
+### ### Sonido de escape del pez (no punitivo)
+- Spec: sonido de escape suave (no punitivo). Volumen -6 dB sobre ambiente.
+- Coherente con M42 (sonido ambiental) y M43 (SFX).

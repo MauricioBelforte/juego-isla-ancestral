@@ -267,7 +267,7 @@
 - [ ] Crear escena terrain_indicator.tscn [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08)
 - [ ] Agregar TextureRect para icono de terreno [S]
 - [ ] Agregar Label para nombre de terreno [S]
-- [?] Agregar ProgressBar para velocidad efectiva [S] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado) - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/
+- [x] Agregar ProgressBar para velocidad efectiva [S] — FORMULA (Beam 346): 03-Diseno.md "Presupuestos de terreno" ### ProgressBar para velocidad efectiva. Flipado tras verificacion de artefacto en disco. — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado) - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/
 - [?] Conectar signal terrain_changed a UI [M] - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/
 - [ ] Actualizar icono segun terreno [S]
 - [ ] Actualizar texto segun terreno [S]
@@ -398,6 +398,7 @@
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 **Totales:** 307 items - Completados: 212 - Pendientes: 48 - No resueltos: 47. (S56b G-5.3-Flash-Agente 2026-10-23: +10 protocolos de medicion definidos en 03 sec Protocolos; EJECUCION para con editor V2/V4 o GO integracion —atria-dawn 2026-10-13 lote I conservado en historial) (atria-dawn 2026-10-13 lote I: 20 flips (11 `[ ]`→`[x]` + 9 `[?]`→`[x]`) por implementacion de los sistemas de huellas y particulas; 41/41 checks headless + suites existentes sin regresion. Previo: 182/69/56.) (atria-dawn 2026-10-13: 13 flips `[ ]`→`[x]` con cita real verificada en disco — ver "Notas del Agente" al final. Previo: 169/82/56.) (BUG-070 lote 8 + re-verificacion DeepSeek #112, atria-dawn 2026-10-09: 49 [x] degradados a [?] en total - inflacion confesa M114 L404 + Patron D + Familia A sin artefacto en disco. Conteo real en marcas: 153/91/63.)
+**Totales:** 307 ítems · Completados: 221 · Pendientes: 39 · No resueltos: 47. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"299 items - Completados: 299 - Pendientes: 0"* — un
