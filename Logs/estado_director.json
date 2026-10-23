@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:17:30",
+ "ultimo_update": "2026-10-23T02:15 (23oct): paquete unificado de decisiones escalado con la tabla de Beam 257",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -345,6 +345,24 @@
  "nota_despertar": "Gap de 6h (maquina dormida 09:20-15:10): sin produccion nueva durante el lapso salvo Step-5 172 (escrito 06:56 UTC real); Beam/otros quietos - el riel de Beam quedo pausado con su sesion",
  "record_dia": "DIA RECORD DE PRODUCCION (22oct): 7 modulos COMPLETOS por Beam (M91, M147, M143, M104, M163, M162, M153) + M139/M161/M15 casi - todo produce-first con verificacion en vivo (agnes por lote + director conteos + Step-5 muestras); sellos DoD en retrospectiva",
  "flags_fundador_pendientes": [
+  {
+   "modulo": "PAQUETE DE DECISIONES UNIFICADO (Beam 257 CONSOLIDA-1/2/3, tabulado)",
+   "flags": [
+    "H16 precio coleccionista: 69.99 (design doc manda) y cambiar +45 a +35 [prioridad 1 - revenue/marketing]",
+    "H1 sello_1 threshold (1200 vs 8h vs 80 AO): aclarar si dinero_diario es por dia o sesion -> C (si sesion: 960~1200) o B (si dia: 15 dias) [prioridad 2]",
+    "H2 rareza 0.5% vs 5%: alinear a 5% (el meta 0.05 es el typo inverso) [prioridad 3 - afecta H3/H4]",
+    "H21 metricas 9-vs-4: Opcion A minima para V1 (4/9 en M105, 5 en M97/M102/M122/M93/M101), Opcion B completa para V2 [prioridad 4]",
+    "H3 umbrales amistad 130 vs 120: usar 120 (data file manda) [doc-only]",
+    "H4 pesca margen 70%: documentar que rare >70% es intencional [doc-only]",
+    "H5 fishing prob sum >1: documentar que son pesos relativos, no probs [doc-only]",
+    "H17 DLC nombres divergentes: usar IDs de dlc.json como catalogo canonico [doc-only]",
+    "H22 max_copias por-categoria + mantener ambos algoritmos (CRC32 rapido/SHA256 fuerte) [doc-only]",
+    "ORDEN CRUZADO: H2 primero (rompe H3/H4), H16 luego H17, H1 luego H21, H22 independiente",
+    "COSTO NO-DECIDIR: H16/H1 alto; H2/H21 medio; H3/H4/H5/H17/H22 bajo (doc-only)"
+   ],
+   "origen": "Beam 257 CONSOLIDA-1/2/3 (mejor formato que las flags crudas; mismas sustancias con recomendaciones y prioridad)",
+   "fecha": "2026-10-23 02:20 (23oct)"
+  },
   {
    "modulo": "151-Control-Final",
    "flags": [
