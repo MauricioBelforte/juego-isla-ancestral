@@ -37,7 +37,7 @@
 - [ ] Progress visible: barra de progreso dentro del nivel actual [S]
 - [ ] Feedback de nivel subido con animacion y lista de desbloqueos [M]
 
-## D. Regalos y evaluador (11)
+## D. Regalos y evaluador (12)
 
 - [x] GiftEvaluator como clase estatica pura y determinista [S]
 - [x] Clasificacion amado / gusta / neutral / duplicado [S]
@@ -49,6 +49,7 @@
 - [x] Reaccion del vecino por clase de regalo (expresion + texto M21) [M]
 - [x] Soporte para regalos de cumpleanos sin consumir limite diario [M]
 - [x] Soporte para objetos sin metadatos de regalo (regalo_valido = false) [S]
+- [x] FIX GiftEvaluator._clasificar (mortem Step-5 189 + agnes #033): .get() de 2 args sobre ItemData (Resource) lanzaba SCRIPT ERROR + degradaba a AMADO/20. Extractor _campo() duck-typing (Dictionary + Resource) + default null para "regalo_valido". Suite de confirmacion probe 7/0 (dict+res: amado/gusta/neutral/duplicado/invalido/sin-id). [S]
 - [ ] Coste de evaluacion menor a 1 ms por regalo [S]
 
 ## E. Charlas (7)
@@ -210,7 +211,7 @@
 - [ ] 03-Diseno creado y firmado (arquitectura y contratos) [S]
 - [ ] 04-Codigo creado y firmado (rutas, firmas, Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
-**Totales:** 148 items · Completados: 80 · Pendientes: 68 · No resueltos: 0. (Recontado el 2026-10-22 por minimax-m3-1-flash, Log 2124: 74 [x] + 74 [x] de las 4 tandas = 80 [x]; pendientes 68; sin resueltos 0.. **Nota (Log 2126, iter. minimax-m3-1-flash, 2026-10-22):** las 3 suites de M20 (79 checks) **entran al CI central** con el wrapper nuevo `tests/test_m20_amistad_suites.gd` (8 checks, 0 fallos, rc=0) — antes vivian en `scripts/friendship/`, fuera de `res://tests/`, y no se ejecutaban en ningun gate.
+**Totales:** 149 items · Completados: 81 · Pendientes: 68 · No resueltos: 0. (Recontado agnes 2026-10-23 #033: +1 [x] FIX GiftEvaluator._clasificar (mortem Step-5 189) -> 81 [x]; pendio en 68; sin resueltos 0. Previo: minimax-m3-1-flash Log 2124 = 80 [x]/68. **Nota (Log 2126, iter. minimax-m3-1-flash, 2026-10-22):** las 3 suites de M20 (79 checks) **entran al CI central** con el wrapper nuevo `tests/test_m20_amistad_suites.gd` (8 checks, 0 fallos, rc=0) — antes vivian en `scripts/friendship/`, fuera de `res://tests/`, y no se ejecutaban en ningun gate.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 98 [ ] / 0 [?].
