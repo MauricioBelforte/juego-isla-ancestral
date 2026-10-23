@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T02:15 (23oct): paquete unificado de decisiones escalado con la tabla de Beam 257",
+ "ultimo_update": "2026-10-23T03:25:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -516,6 +516,6 @@
    "proximo_disparo": "02:27"
   }
  },
- "apilador_beam_ultimo": "255 (apilado x10 honesto: 7 propuestas formales de correccion de hallazgos firmes + 3 consolidaciones — paquete de decisiones para el fundador)",
+ "apilador_beam_ultimo": "259 (apilado x6 final: presupuestos M116/M118 en 03 — nicho flipable de Beam AGOTADO; proximos frentes = decisiones fundador / GO slice / Godot-MCP / cron nuevo)",
  "apilador_g53_ultimo": "330 (CRON F #2 x10: M48 — restricciones + sockets + 8 integraciones documentadas + flujo de clip)"
 }
