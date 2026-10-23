@@ -80,12 +80,21 @@ RE_COMANDO = re.compile(
     re.IGNORECASE,
 )
 # Lista de extensiones sueltas: `.ogg/.wav/.mp3` no es una cita de archivo.
-RE_LISTA_EXT = re.compile(r"^(?:\.[a-z0-9]{1,8}/)+$", re.IGNORECASE)
-# Nombre-plantilla: `NN-Nombre.md`, `{NN}-desc.md`, `YYYY-MM-DD.md`.  Cita una
-# CONVENCION de nombre, no un archivo; no es defecto que no exista.
+# Ojo: el patron tiene que aceptar tambien el ULTIMO tramo sin barra final.
+RE_LISTA_EXT = re.compile(r"^(?:\.[a-z0-9]{1,8}/)+\.[a-z0-9]{1,8}$", re.IGNORECASE)
+# Nombre-plantilla: `NN-Nombre.md`, `{NN}-desc.md`, `YYYY-MM-DD.md`,
+# `save_001_backup_v<X.Y.Z>.tres`.  Cita una CONVENCION de nombre, no un
+# archivo; no es defecto que no exista.
 RE_PLANTILLA = re.compile(r"^(NN|XX|X{2,}|YYYY|AAAA|M##|\{NN\})", re.IGNORECASE)
 # Referencia de linea pegada a la cita: `archivo` L42-44  /  `archivo` L210
 RE_REF_LINEA = re.compile(r"`([^`\n]{2,160})`\s*:?\s*(L\d+(?:\s*-\s*L?\d+)?)")
+# Item marcado como CERRADO.  Una cita rota dentro de un [x] es la que importa:
+# es un falso verde declarado, no un artefacto planificado en la prosa.
+RE_ITEM_X = re.compile(r"^\s*-\s*\[x\]", re.IGNORECASE)
+# `class_name ItemData` en item_data.gd: la checklist cita la CLASE con nombre de
+# archivo.  Eso es una cita IMPRECISA, no una cita fantasma, y no debe contarse
+# como defecto.  El indice de clases evita inflar el numero.
+RE_CLASS_NAME = re.compile(r"^\s*class_name\s+([A-Za-z_][A-Za-z0-9_]*)", re.MULTILINE)
 
 
 def _norm(ruta: str) -> str:
@@ -107,6 +116,22 @@ def indexar(raiz: str) -> tuple[set[str], set[str], dict[str, list[str]]]:
     for a in archivos:
         por_base[a.split("/")[-1]].append(a)
     return archivos, directorios, por_base
+
+
+def indexar_clases(raiz: str, archivos: set[str]) -> dict[str, str]:
+    """Mapa class_name -> ruta del .gd que la declara (solo bajo el proyecto Godot)."""
+    clases: dict[str, str] = {}
+    for rel in archivos:
+        if not rel.endswith(".gd") or not rel.startswith("game/isla-ancestral/"):
+            continue
+        try:
+            with open(os.path.join(raiz, rel), "r", encoding="utf-8", errors="replace") as fh:
+                m = RE_CLASS_NAME.search(fh.read())
+        except OSError:
+            continue
+        if m and m.group(1) not in clases:
+            clases[m.group(1)] = rel
+    return clases
 
 
 def clasificar(token: str) -> str:
@@ -135,7 +160,7 @@ def clasificar(token: str) -> str:
         return "directorio"
     if _tiene_extension(token):
         base = token.rstrip("/").split("/")[-1]
-        if RE_PLANTILLA.match(base):
+        if RE_PLANTILLA.match(base) or "<" in base or ">" in base or "..." in base:
             return "plantilla"
         return "archivo"
     if "/" in token:
@@ -171,8 +196,9 @@ def bases_para(checklist: str, raiz: str) -> list[str]:
 
 def resolver(token: str, bases: list[str], es_dir: bool,
              archivos: set[str], directorios: set[str],
-             por_base: dict[str, list[str]]) -> tuple[str, str]:
-    """Devuelve (estado, ruta).  estado en {exacto,basename,ambiguo,ausente,excluido,vacio}."""
+             por_base: dict[str, list[str]],
+             clases: dict[str, str] | None = None) -> tuple[str, str]:
+    """Devuelve (estado, ruta).  estado en {exacto,basename,clase,ambiguo,ausente,excluido,vacio}."""
     s = token.rstrip("/")
     if not s:
         return "vacio", ""
@@ -190,6 +216,9 @@ def resolver(token: str, bases: list[str], es_dir: bool,
             return "basename", lista[0]
         if len(lista) > 1:
             return "ambiguo", ""
+        # Cita de clase con nombre de archivo: `ItemData.gd` por item_data.gd.
+        if clases and bn.endswith(".gd") and bn[:-3] in clases:
+            return "clase", clases[bn[:-3]]
     return "ausente", ""
 
 
@@ -213,12 +242,22 @@ def contar_lineas(ruta: str) -> int:
 
 
 def auditar_checklist(checklist: str, raiz: str, archivos: set[str],
-                      directorios: set[str], por_base: dict[str, list[str]]) -> dict:
-    with open(checklist, "r", encoding="utf-8", errors="replace") as fh:
-        texto = fh.read()
+                      directorios: set[str], por_base: dict[str, list[str]],
+                      indice_clases: dict[str, str] | None = None) -> dict:
+    with open(checklist, "rb") as fh:
+        crudo = fh.read()
+    texto = crudo.decode("utf-8", errors="replace")
+    # Un byte NUL hace que grep trate el archivo como BINARIO y lo SALTE en
+    # silencio: cualquier auditoria posterior deja de ver esa checklist.  Es un
+    # defecto de infraestructura, no una curiosidad.
+    posiciones_nul = [i for i, b in enumerate(crudo) if b == 0]
     bases = bases_para(checklist, raiz)
     rel = _norm(os.path.relpath(checklist, raiz))
     modulo = os.path.basename(os.path.dirname(os.path.dirname(rel)))
+
+    def res(token: str, es_dir: bool) -> tuple[str, str]:
+        return resolver(token, bases, es_dir, archivos, directorios, por_base,
+                        indice_clases or {})
 
     clases: collections.Counter = collections.Counter()
     estados: collections.Counter = collections.Counter()
@@ -229,77 +268,96 @@ def auditar_checklist(checklist: str, raiz: str, archivos: set[str],
     lineas_fuera: list[dict] = []
     refs_linea = 0
 
-    # 1) Referencias de linea pegadas a una cita.
-    for m in RE_REF_LINEA.finditer(texto):
-        token = m.group(1).strip()
-        if clasificar(token) not in ("archivo", "esquema"):
-            continue
-        refs_linea += 1
-        estado, ruta = resolver(limpiar(token), bases, False, archivos, directorios, por_base)
-        if estado not in ("exacto", "basename"):
-            continue
-        total = contar_lineas(os.path.join(raiz, ruta))
-        if total < 0:
-            continue
-        ref = re.search(r"L(\d+)(?:\s*-\s*L?(\d+))?", m.group(2))
-        alto = int(ref.group(2) or ref.group(1))
-        if alto > total:
-            lineas_fuera.append({
-                "archivo_citado": token, "resuelto": ruta,
-                "referencia": m.group(2).strip(), "lineas_reales": total,
-                "firma": "%s|linea|%s|%s" % (modulo, token, m.group(2).strip()),
-            })
+    # Se recorre linea a linea para saber si la cita vive en un item [x]
+    # (falso verde declarado) o en prosa de diseno (artefacto planificado).
+    for n_linea, linea in enumerate(texto.splitlines(), 1):
+        en_item_x = bool(RE_ITEM_X.match(linea))
 
-    # 2) Citas sueltas.
-    for token in RE_SPAN.findall(texto):
-        token = token.strip()
-        if not token:
-            continue
-        clase = clasificar(token)
-        clases[clase] += 1
-        if clase == "directorio":
-            estado, _ = resolver(limpiar(token), bases, True, archivos, directorios, por_base)
-            estados["dir_" + estado] += 1
-            if estado == "ausente":
-                rotas_dir.append({
-                    "cita": token,
-                    "firma": "%s|directorio|%s" % (modulo, token),
+        # 1) Referencias de linea pegadas a una cita.
+        for m in RE_REF_LINEA.finditer(linea):
+            token = m.group(1).strip()
+            if clasificar(token) not in ("archivo", "esquema"):
+                continue
+            refs_linea += 1
+            estado, ruta = res(limpiar(token), False)
+            if estado not in ("exacto", "basename"):
+                continue
+            total = contar_lineas(os.path.join(raiz, ruta))
+            if total < 0:
+                continue
+            ref = re.search(r"L(\d+)(?:\s*-\s*L?(\d+))?", m.group(2))
+            alto = int(ref.group(2) or ref.group(1))
+            if alto > total:
+                lineas_fuera.append({
+                    "archivo_citado": token, "resuelto": ruta,
+                    "referencia": m.group(2).strip(), "lineas_reales": total,
+                    "linea": n_linea, "item_x": en_item_x,
+                    "firma": "%s|linea|%s|%s" % (modulo, token, m.group(2).strip()),
                 })
-        elif clase in ("archivo", "esquema"):
-            # `res://algo/` es un DIRECTORIO del proyecto Godot, no un archivo.
-            es_dir = token.rstrip().endswith("/")
-            estado, _ = resolver(limpiar(token), bases, es_dir, archivos, directorios, por_base)
-            estados[("dir_" if es_dir else "") + estado] += 1
-            if estado == "ausente":
-                destino = rotas_dir if es_dir else rotas_archivo
-                destino.append({
-                    "cita": token,
-                    "firma": "%s|%s|%s" % (modulo, "directorio" if es_dir else "archivo", token),
-                })
-        elif clase == "ruta_sin_extension":
-            # Informativo: se resuelve como dir o como archivo, pero no es defecto.
-            estado, _ = resolver(limpiar(token), bases, True, archivos, directorios, por_base)
-            if estado == "ausente":
-                estado, _ = resolver(limpiar(token), bases, False, archivos, directorios, por_base)
-            estados["sin_ext_" + estado] += 1
-            if estado == "ausente":
-                informativos.append({
-                    "cita": token,
-                    "firma": "%s|sin_extension|%s" % (modulo, token),
-                })
-        elif clase == "glob":
-            ok = False
-            for patron in expandir_globs(limpiar(token)):
-                if any(fnmatch.fnmatch(x, patron) or fnmatch.fnmatch(x, "*/" + patron)
-                       for x in itertools.chain(archivos, directorios)):
-                    ok = True
-                    break
-            estados["glob_ok" if ok else "glob_ausente"] += 1
-            if not ok:
-                globs_rotos.append({
-                    "cita": token,
-                    "firma": "%s|glob|%s" % (modulo, token),
-                })
+
+        # 2) Citas sueltas de la linea.
+        for token in RE_SPAN.findall(linea):
+            token = token.strip()
+            if not token:
+                continue
+            clase = clasificar(token)
+            clases[clase] += 1
+            if clase == "directorio":
+                estado, _ = res(limpiar(token), True)
+                estados["dir_" + estado] += 1
+                if estado == "ausente":
+                    rotas_dir.append({
+                        "cita": token, "linea": n_linea, "item_x": en_item_x,
+                        "firma": "%s|directorio|%s" % (modulo, token),
+                    })
+            elif clase in ("archivo", "esquema"):
+                # `res://algo/` es un DIRECTORIO del proyecto Godot, no un archivo.
+                es_dir = token.rstrip().endswith("/")
+                estado, _ = res(limpiar(token), es_dir)
+                estados[("dir_" if es_dir else "") + estado] += 1
+                if estado == "ausente":
+                    destino = rotas_dir if es_dir else rotas_archivo
+                    destino.append({
+                        "cita": token, "linea": n_linea, "item_x": en_item_x,
+                        "firma": "%s|%s|%s" % (modulo, "directorio" if es_dir else "archivo", token),
+                    })
+            elif clase == "ruta_sin_extension":
+                # Informativo: se resuelve como dir o como archivo, pero no es defecto.
+                estado, _ = res(limpiar(token), True)
+                if estado == "ausente":
+                    estado, _ = res(limpiar(token), False)
+                estados["sin_ext_" + estado] += 1
+                if estado == "ausente":
+                    informativos.append({
+                        "cita": token, "linea": n_linea, "item_x": en_item_x,
+                        "firma": "%s|sin_extension|%s" % (modulo, token),
+                    })
+            elif clase == "glob":
+                ok = False
+                for patron in expandir_globs(limpiar(token)):
+                    if any(fnmatch.fnmatch(x, patron) or fnmatch.fnmatch(x, "*/" + patron)
+                           for x in itertools.chain(archivos, directorios)):
+                        ok = True
+                        break
+                estados["glob_ok" if ok else "glob_ausente"] += 1
+                if not ok:
+                    globs_rotos.append({
+                        "cita": token, "linea": n_linea, "item_x": en_item_x,
+                        "firma": "%s|glob|%s" % (modulo, token),
+                    })
+
+    en_item_x_total = sum(1 for d in rotas_archivo if d["item_x"]) + \
+                      sum(1 for d in lineas_fuera if d["item_x"])
+
+    binarios: list[dict] = []
+    if posiciones_nul:
+        primera = posiciones_nul[0]
+        binarios.append({
+            "bytes_nul": len(posiciones_nul),
+            "primera_linea": crudo[:primera].count(b"\n") + 1,
+            "offset": primera,
+            "firma": "%s|nul|%d" % (modulo, len(posiciones_nul)),
+        })
 
     return {
         "checklist": rel,
@@ -313,7 +371,9 @@ def auditar_checklist(checklist: str, raiz: str, archivos: set[str],
         "globs_rotos": globs_rotos,
         "informativos": informativos,
         "lineas_fuera": lineas_fuera,
-        "defectos": len(rotas_archivo) + len(lineas_fuera),
+        "binarios": binarios,
+        "defectos": len(rotas_archivo) + len(lineas_fuera) + len(binarios),
+        "defectos_item_x": en_item_x_total,
     }
 
 
@@ -339,9 +399,15 @@ def leer_baseline(ruta: str) -> dict[str, str]:
 
 
 def firmas_de(informe: dict) -> list[str]:
+    """Firmas que el GATE controla: solo defectos.
+
+    Directorios ausentes y globs sin coincidencia son informativos (pueden ser
+    carpetas planificadas), asi que no entran al gate: si entraran, el gate
+    fallaria para siempre por deuda que no se quiere pagar.
+    """
     salida: list[str] = []
     for c in informe["checklists"]:
-        for grupo in ("rotas_archivo", "lineas_fuera", "globs_rotos", "rotas_dir"):
+        for grupo in ("rotas_archivo", "lineas_fuera", "binarios"):
             for d in c[grupo]:
                 salida.append(d["firma"])
     return salida
@@ -356,8 +422,13 @@ def ceguera(informes: list[dict]) -> list[str]:
     if sum(i["citas"] for i in informes) == 0:
         motivos.append("se leyeron %d checklists pero se extrajeron 0 citas" % len(informes))
     auditables = sum(1 for i in informes
-                     if (i["estados"].get("exacto", 0) + i["estados"].get("basename", 0)) > 0)
+                     if (i["estados"].get("exacto", 0)
+                         + i["estados"].get("basename", 0)
+                         + i["estados"].get("clase", 0)) > 0)
     if auditables == 0:
+        # Ni una sola cita resolvio: o el universo esta vacio o la resolucion esta
+        # rota.  No se puede distinguir, asi que se declara CIEGO en vez de
+        # publicar "todo roto", que seria un falso positivo masivo.
         motivos.append("ninguna cita resolvio a un archivo real: la resolucion esta rota")
     return motivos
 
@@ -380,25 +451,52 @@ def imprimir(informes: list[dict], max_lista: int, detalle: bool) -> None:
                 len(i["lineas_fuera"]), len(i["rotas_dir"]), len(i["globs_rotos"])))
     print("")
     print("checklists leidas: %d | citas: %d" % (len(informes), sum(i["citas"] for i in informes)))
-    print("DEFECTOS: %d citas de archivo rotas + %d refs de linea fuera de rango = %d" % (
-        total_arch, total_linea, total_arch + total_linea))
-    print("INFORMATIVO: %d citas de directorio ausentes, %d globs sin coincidencia" % (
-        total_dir, total_glob))
+    binarios = [b for i in informes for b in i["binarios"]]
+    if binarios:
+        print("CHECKLISTS BINARIAS (byte NUL: grep las SALTA en silencio): %d" % len(binarios))
+        for i in informes:
+            for b in i["binarios"]:
+                print("  %s: %d byte(s) NUL, primero en linea %d (offset %d)" % (
+                    i["modulo"], b["bytes_nul"], b["primera_linea"], b["offset"]))
+    print("DEFECTOS: %d citas de archivo rotas + %d refs de linea fuera de rango "
+          "+ %d checklists binarias = %d" % (
+              total_arch, total_linea, len(binarios),
+              total_arch + total_linea + len(binarios)))
+    print("  de esos, EN ITEM [x] (falso verde declarado): %d" % (
+        sum(i["defectos_item_x"] for i in informes)))
+    print("  en prosa/diseno (artefacto planificado): %d" % (
+        total_arch + total_linea - sum(i["defectos_item_x"] for i in informes)))
+    print("INFORMATIVO: %d citas de directorio ausentes, %d globs sin coincidencia, "
+          "%d citas de CLASE con nombre de archivo (la clase existe: cita imprecisa)" % (
+              total_dir, total_glob,
+              sum(i["estados"].get("clase", 0) for i in informes)))
     if detalle:
         print("")
-        print("--- citas de archivo rotas (defecto) ---")
+        print("--- citas de archivo rotas EN ITEM [x] (defecto grave) ---")
+        for i in informes:
+            for d in i["rotas_archivo"]:
+                if d["item_x"]:
+                    print("  %s:%d  %s" % (i["modulo"], d["linea"], d["cita"]))
+            for d in i["lineas_fuera"]:
+                if d["item_x"]:
+                    print("  %s:%d  %s %s -> %s tiene %d lineas" % (
+                        i["modulo"], d["linea"], d["archivo_citado"], d["referencia"],
+                        d["resuelto"], d["lineas_reales"]))
+        print("--- citas de archivo rotas en prosa (informativo) ---")
         vistos: collections.Counter = collections.Counter()
         for i in informes:
             for d in i["rotas_archivo"]:
-                vistos["%s  [%s]" % (d["cita"], i["modulo"])] += 1
+                if not d["item_x"]:
+                    vistos["%s  [%s]" % (d["cita"], i["modulo"])] += 1
         for k, v in vistos.most_common(max_lista):
             print("  %s" % k)
         if total_linea:
-            print("--- refs de linea fuera de rango (defecto) ---")
+            print("--- refs de linea fuera de rango ---")
             for i in informes:
                 for d in i["lineas_fuera"]:
-                    print("  %s %s -> %s tiene %d lineas" % (
-                        d["archivo_citado"], d["referencia"], d["resuelto"], d["lineas_reales"]))
+                    if not d["item_x"]:
+                        print("  %s %s -> %s tiene %d lineas" % (
+                            d["archivo_citado"], d["referencia"], d["resuelto"], d["lineas_reales"]))
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -425,7 +523,9 @@ def main(argv: list[str] | None = None) -> int:
 
     checklists = listar_checklists(raiz, args.modulo)
     archivos, directorios, por_base = indexar(raiz)
-    informes = [auditar_checklist(c, raiz, archivos, directorios, por_base) for c in checklists]
+    indice_clases = indexar_clases(raiz, archivos)
+    informes = [auditar_checklist(c, raiz, archivos, directorios, por_base, indice_clases)
+                for c in checklists]
 
     motivos = ceguera(informes)
     if motivos:
@@ -527,6 +627,12 @@ def _selftest(raiz: str) -> int:
        "resolver encuentra por basename unico")
     ok(resolver("nada.gd", [""], False, arch, dirs, pbase)[0] == "ausente",
        "resolver declara ausente lo que no existe")
+    ok(resolver("ItemData.gd", [""], False, arch, dirs, pbase,
+                {"ItemData": "game/isla-ancestral/scripts/data/item_data.gd"})[0] == "clase",
+       "resolver reconoce una clase citada con nombre de archivo")
+    ok(resolver("OtraCosa.gd", [""], False, arch, dirs, pbase,
+                {"ItemData": "x.gd"})[0] == "ausente",
+       "resolver no inventa clases que no existen")
     ok(resolver(".godot/x", [""], False, arch, dirs, pbase)[0] == "excluido",
        "resolver no audita carpetas excluidas")
     ok(resolver("scripts", ["game/isla-ancestral/"], True, arch, dirs, pbase)[0] == "exacto",
