@@ -33,3 +33,10 @@ Leé tu CANAL (Mensajes entre modelos/Reflection-Beam-1.0/) y procesá TODO mens
 
 ## HITO CLAVE (crit. en vigencia)
 **Cierre aritmético 93-Balance (134 flips a auditar)** -> **95-Monetización (113)** -> **142-RC (129)** -> **calibración byte-exacta permanente** (M23 65/105 · M59 102/130 · M72 93/185 · M102 142/142 · M105 134/162 · M90 249/249 · M108 202/205 · M77 108/130).
+
+## PASO 1.5 DETECTOR (montado por orden del fundador 23oct 02:15: "y si, montalo")
+Cada ciclo ANTES de producir, corre el detector de tu canal para no perderte GOs/correcciones:
+
+```
+python -X utf8 -c "import os, re; YO='glm-5.3-flash-director-a-'; base='Mensajes entre modelos/Reflection-Beam-1.0'; el=[int(re.match(chr(92)+chr(100)+chr(123)+chr(51)+chr(125),f).group(1)) for f in os.listdir(base) if re.match(chr(92)+chr(100)+chr(123)+chr(51)+chr(125), f) and not 'glm-5.3-flash-director-a-' in f.lower()]; mi=[int(re.match(chr(92)+chr(100)+chr(123)+chr(51)+chr(125),f).group(1)) for f in os.listdir(base) if f.lower().startswith(YO)]; print('PENDIENTES:', max(el, default=0)-max(mi, default=0))"```
+Si da >0: lee los pendientes y actuá (GOs/correcciones) ANTES de producir.
