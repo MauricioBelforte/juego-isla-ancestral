@@ -99,7 +99,7 @@ Se elige **simulación offline en editor** (`simulate_economy.gd`): escenarios d
 2. **Jugador que no vende nada** — el almacenamiento (M14) tiene límites; sin penalización.
 3. **Ausencia de 30 días** — nada empeora; contenido de estación espera el próximo ciclo (M29).
 4. **Multi-jugador de un save** — single-player; ausencia irrelevante.
-5. **Creación de ítems raros** — probabilidades nunca caen bajo 0.5% y se garantizan por "pity" (cada X intentos sin éxito, sube la chance).
+5. **Creación de ítems raros** — probabilidades nunca caen bajo 5% (0.05, canonico por GO fundador 23oct 20:25 / PAQ-1, meta.json manda) y se garantizan por "pity" (cada X intentos sin éxito, sube la chance).
 6. **Diferencia de habilidad** — puzzles con ayudas (M58/M24) que nivelan el tiempo de resolución sin dar la solución gratis.
 
 ### D.13 — Templos como contenido especial exento de la rutina diaria (aplicado por el director 2026-10-22)

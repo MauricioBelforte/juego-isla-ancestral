@@ -93,3 +93,6 @@ CI: parches pasan gates de M117 (mismo pipeline release)
 | 9 | Contenido (engagement por isla) | M105 | PARCIAL | M105 emite enter_zone/exit_zone. Engagement por isla se deriva. Gap: agregar track_isla_visitada() en M105 (V2). |
 
 Decision: Opcion A (minima) para V1. M105 captura 4 de 9 directamente (dificultad, tutorial, retencion parcial, contenido parcial). Las otras 5 se capturan por M97/M102/M122/M93/M101 (no requieren M105). Opcion B (completa) para V2: agregar 3 hooks en M105 (track_economia, track_onboarding, track_isla_visitada). Costo: ~2h.
+
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-4 (H21)**: **Opcion A** — V1 con las 4 metricas que M105 captura; las otras 5 anotadas con modulo dueno (Reviews->M100/M97, Bugs->M102/M122, Rendimiento->M105/M122, Economia->M93, Onboarding->M101) y marca "V2". Actualiza la tabla 9-metricas (lineas 83-93) — ya documentada arriba. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".

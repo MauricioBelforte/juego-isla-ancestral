@@ -14,7 +14,7 @@
 
 ## Revenue headline (agnes 012(d))
 - agnes 012(d) reportó que "$X.10k" NO cuadra con base "$X.42k x 10,000" (diferencia $0.68k = add-on/dlc sin modelo de penetración documentado).
-- Decisión (opción (a) — la más corta, RATIFICADA POR EL FUNDADOR 23oct ~20:17, ratificado por director en 313): el revenue headline se calcula sobre base pura de forma definitiva (ARPU 28.49 x copias, sin ingresos de DLC); el modelo de penetracion de add-on queda DESCARTADO. Reportado por director 313/agnes 017; hallazgo agnes 012(d) RESUELTO. No hay [?] asociado que flipar (verificado por grep: el flag no existe como item de checklist).
+- Decisión (opción (a) — la más corta, RATIFICADA POR EL FUNDADOR 23oct ~20:17, ratificado por director en 313): el revenue headline se calcula sobre base pura de forma definitiva (ARPU 34.24 x copias ≈ 342,4k, sin ingresos de DLC); el modelo de penetracion de add-on queda DESCARTADO. Reportado por director 313/agnes 017; hallazgo agnes 012(d) RESUELTO. No hay [?] asociado que flipar (verificado por grep: el flag no existe como item de checklist).
 - No se inventa fórmula de penetración sin datos.
 
 ## Items NO flipados (abiertos reales)

@@ -160,6 +160,9 @@ Los peces rare (ancestral_laguna 76.0%, ancestral_raiz 76.9%, koi_dorado 73.3%, 
 
 ### H5 — Probabilidades de pesca son PESOS RELATIVOS, no probabilidades mutuamente exclusivas
 Los valores prob en fishing.json (0.6/0.25/0.1/0.04/0.01) son pesos relativos para seleccion ponderada, NO probabilidades que sumen a 1.0. La suma (7.83) es intencional. Documentado para evitar confusion en auditorias futuras.
-
 ### H1 — sello_1_umbral_ao = 1200 es alcanzable si dinero_diario es POR SESION
+
 dinero_diario_promedio_ao = 80 es por sesion (no por dia). 12 sesiones x 80 = 960 AO + misiones one-time (750 AO) = 1710 AO > 1200 threshold. sello_1_tiempo_horas = 8h = 12 sesiones de ~40 min. Coherente.
+
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-2 (H1)**: sello_1 / dinero_diario = interpretacion **POR SESION ~1200 AO** (opcion C del consolidado 257; coherente con sesiones cozy de ~40 min). GO fundador 275 ya lo aplico (item 255); ratificado por director 315 con cita canonica "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones»".

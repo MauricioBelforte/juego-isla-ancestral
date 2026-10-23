@@ -57,7 +57,7 @@ reporte(violaciones) -> String
 ```
 
 ## 3. Datos (JSON data-driven)
-- **ediciones.json**: standard $24.99, deluxe $34.99, coleccionista $59.99 — todas con `historia_completa: true` (RF: la historia completa está en el juego base).
+- **ediciones.json**: standard $24.99, deluxe $34.99, coleccionista $69.99 — todas con `historia_completa: true` (RF: la historia completa está en el juego base). (corregido por agnes 020 + director 324: era $59.99 residuo pre-H16)
 - **dlc.json**: DLC-1 expansión (nueva isla, $14.99), DLC-2 cosmético ($4.99) — sin fragmentar historia.
 - **impuestos.json**: tasa por plataforma/región (Steam/Epic/GOG × latam/eu/us).
 

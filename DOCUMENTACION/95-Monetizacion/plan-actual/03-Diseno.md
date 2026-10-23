@@ -135,10 +135,10 @@ Rango observado: USD 7.99 – 29.99. Extremos citados por director: Stardew 14.9
 | Escenario | Mix edición (Std/Deluxe/Coll) | ARPU (USD) |
 |-----------|------------------------------|------------|
 | Conservador (70/20/10) | 70% Std / 20% Deluxe / 10% Coll | 21.49 |
-| Base (60/25/15) | 60% Std / 25% Deluxe / 15% Coll | 24.99 + 10*0.25 + 35*0.15 = 28.49 |
+| Base (60/25/15) | 60% Std / 25% Deluxe / 15% Coll | 0.60*24.99 + 0.25*34.99 + 0.15*69.99 = 14.994 + 8.7475 + 10.4985 = **34.24** |
 | Optimista (50/25/25) | 50% Std / 25% Deluxe / 25% Coll | 35.24 |
 
-Cálculo Base: 0.60*24.99 + 0.25*34.99 + 0.15*69.99 = 14.994 + 8.7475 + 10.4985 = 34.24 → normalizado por edición efectiva = 28.49 (recomendado por director, ratificado agnes 012(a)).
+Cálculo Base: 0.60*24.99 + 0.25*34.99 + 0.15*69.99 = 14.994 + 8.7475 + 10.4985 = **34.24 ARPU** (corregido por agnes 020 + director 324: el "normalizado por edición efectiva = 28.49" era falso, no existe). Mix canonico 60/25/15 con Coll 69.99 (H16). Headline real: 34.24 x 10.000 = USD 342,4k.
 
 ### Tabla 3 — Recomendación de precios y ARPU objetivo
 | Edición | Precio (USD) | ARPU aportado (mix base 60/25/15) |
@@ -146,9 +146,9 @@ Cálculo Base: 0.60*24.99 + 0.25*34.99 + 0.15*69.99 = 14.994 + 8.7475 + 10.4985 
 | Standard | 24.99 | 14.994 |
 | Deluxe | 34.99 | 8.7475 |
 | Coleccionista | 69.99 | 10.4985 |
-| **ARPU total** | — | **28.49** |
+| **ARPU total** | — | **34.24** |
 
-Recomendación: $24.99 + $34.99 + $59.99 → corregido a $69.99 Coleccionista = **$28.49 ARPU** (ratificado agnes 012(a)).
+Recomendación: $24.99 + $34.99 + $69.99 (Coleccionista, H16) = **$34.24 ARPU** con mix 60/25/15 (corregido por agnes 020 + director 324).
 
 ### Tabla 4 — Calendario de descuentos año 1
 | Evento | Descuento | Condición |
@@ -170,13 +170,13 @@ Regla: máx. 2 rebajas anuales, sin precio "original" inflado (R5). Primer descu
 
 ### Síntesis
 - Precio base $24.99 (justificado por 60-100 h de contenido y referencia de género $14.99-$29.99).
-- ARPU objetivo $28.49 con mix 60/25/15 (Std/Deluxe/Coleccionista).
+- ARPU objetivo $34.24 con mix 60/25/15 (Std/Deluxe/Coleccionista) (corregido por agnes 020 + director 324).
 - Coleccionista $69.99 (+35 sobre Deluxe) con físico real (mapa, póster, llavero, librillo).
 - Descuentos conservadores (máx. 2/año, primer descuento a los 6 meses).
 - Regional LATAM -30% para paridad de poder adquisitivo.
 - Sin F2P, sin P2W, sin lootbox (R1-R5).
 
-Fuente de ratificación: director 309 (spot-check de disco, 2026-10-23 09:00) + agnes 012(a) (ARPU 28.49 verificado).
+Fuente de ratificación: director 309 (spot-check de disco, 2026-10-23 09:00) + agnes 012(a) (ARPU verificado) + agnes 020 (fallo material detectado) + director 324 (correccion D-2). ARPU canonico = 34.24 (mix 60/25/15, Coll 69.99).
 
 ## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador)
 
@@ -190,3 +190,6 @@ Fuente de ratificación: director 309 (spot-check de disco, 2026-10-23 09:00) + 
 - dlc.json: IDs canonicos = isla_hielo (DLC-1 "Mareas del Olvido", 14.99) y pack_aurora (DLC-2 "Decoracion del Faro", 4.99).
 - monetizacion.json: DLC IDs alineados a isla_hielo/pack_aurora (eran expansion_corales/cosmetico_primavera).
 - 03-Diseno.md: DLC-1 = isla_hielo ("Mareas del Olvido"), DLC-2 = pack_aurora ("Decoracion del Faro"). IDs canonicos documentados.
+
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-8 (H17)**: los **IDs de dlc.json son el catalogo canonico** de los DLCs (M95). dlc.json manda sobre cualquier otra mencion. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".

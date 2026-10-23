@@ -569,7 +569,7 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 ## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
 
 ### 7. Retencion por capas
-- Formula: retencion_total = diarios (30) + semanales (52) + mensuales (60) + permanentes (2) = 144 slots max. NOTA 2026-10-23: el schedule GFS 30/52/60 es INTENTO DE DISENO — backup_categories.json (7 categorias: repositorio/assets/documentacion/builds/saves/musica/fuente) implementa retencion_dias por categoria (365/90/180/365/90/180/180), no el schedule 30/52/60. Conciliar o adoptar una sola politica.
+- Formula: retencion_total = diarios (30) + semanales (52) + mensuales (60) + permanentes (2) = 144 slots max. NOTA: son SLOTS POR CATEGORIA (diario/semanal/mensual/permanente), no duraciones en dias. NOTA 2026-10-23: el schedule GFS 30/52/60 es INTENTO DE DISENO — backup_categories.json (7 categorias: repositorio/assets/documentacion/builds/saves/musica/fuente) implementa retencion_dias por categoria (365/90/180/365/90/180/180), no el schedule 30/52/60. Conciliar o adoptar una sola politica.
 - max_copias_por_categoria = 5 por categoria x 7 categorias = 35 copias max por tipo.
 - Coherente con H22 (max_copias por categoria).
 - Unidad: slots de backup. Dependencia: H22, M144 (SLA <48h).

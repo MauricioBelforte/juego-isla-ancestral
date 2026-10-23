@@ -144,3 +144,6 @@ class_name FriendshipEvent extends Resource
 - Test M112-equivalente: regalo amado/neutral/duplicado devuelve puntos esperados; limite diario respetado; subida de nivel conserva excedente.
 - Test de persistencia: guardar y cargar con puntos a mitad de nivel restaura exacto.
 - Recorrido M114: 10 vecinos subidos a nivel 5+ en sesiones simuladas; sin FOMO verificado (ausencia de 30 dias no reduce nada).
+
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-8 (H3)**: umbrales de amistad = **120** (el data-file manda, M20). Los umbrales de nivel (30/70/120/150/260) se alinean con el data-file de M20; si hay discrepancia entre 03 y data-file, gana el data-file. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".

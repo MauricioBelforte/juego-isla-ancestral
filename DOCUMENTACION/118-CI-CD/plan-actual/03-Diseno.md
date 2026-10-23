@@ -128,5 +128,8 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Unidad: checks. Dependencia: M111, M112.
 
 ## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-6 (H26)**: M118 artefactos CI 21.5 GB/mes vs 10 GB free: decision = **REDUCIR el nightly** (menor frecuencia + runner ubuntu, sin tier pago). Calculo post-reduccion: nightly 3/semana (en vez de 7) -> total runs/semana = push 7-14 + tag 0.25-0.5 + nightly 3 = 10.25-17.5 runs/semana. Minutos/mes = 15 min/job x 10.25-17.5 x 4.3 = 646-1,136 min/mes Linux. DENTRO del free tier (2,000 min/mes). Con runner ubuntu-latest (sin factor x2 de minutos). Decision documentada: reducir nightly a 3/semana + runner ubuntu-latest, sin tier pago. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
+
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-7 (H24/H27)**: piso de checks "5, max 50" vs contados 57/42/29: el texto del piso/techo se actualiza para reflejar el conteo real medido (57/42/29). El piso minimo sigue siendo 5 checks/archivo, el maximo sigue siendo 50; los conteos reales (57 en el maximo) se documentan como "fuera de techo, flaggeado para revision" (no se cambia el umbral). Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 

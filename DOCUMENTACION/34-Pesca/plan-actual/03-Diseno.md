@@ -192,3 +192,7 @@ extends Resource
 7. Modo accesibilidad "captura automatica" salta las 2 fases (M57).
 8. Pausa (GameClock M29) congela timers del minijuego; nunca se pierde por pausa.
 9. Sin FOMO: las especies estacionales vuelven cada ano del calendario (M29, anos repetibles).
+
+## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+- **PAQ-8 (H4)**: pesca con margen >70% es **intencional** (M93/M34). El margen alto de pesca es una decision de diseño, no un bug. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
+- **PAQ-8 (H5)**: las probabilidades de fishing son **pesos relativos**, no probabilidades (suman >1 a proposito). No normalizar a 1.0. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".

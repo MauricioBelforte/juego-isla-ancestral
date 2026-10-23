@@ -447,3 +447,14 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Brecha 0: todo lo que se crea, se limpia.
 - Unidad: porcentaje. Dependencia: M116 (instalador).
 
+### 30. Matriz de shortcuts por plataforma (definida por Beam 320, produce-first)
+- Formula: shortcuts_por_plataforma = [win: Ctrl+1..14 (14 atajos), lin: Ctrl+1..14 (14 atajos), mac: Cmd+1..14 (14 atajos)].
+- Tabla:
+  | Plataforma | Atajo base | Cantidad | Nota |
+  |------------|-----------|----------|------|
+  | Windows | Ctrl+1..14 | 14 | estandar |
+  | Linux | Ctrl+1..14 | 14 | estandar |
+  | macOS | Cmd+1..14 | 14 | Cmd en lugar de Ctrl |
+- Coherente con M109 (shortcuts Ctrl+1..14 abre cada editor) y M116 (instalador).
+- Unidad: atajos/plataforma. Dependencia: M109 (framework de editor).
+
