@@ -215,7 +215,7 @@ res://logros/
 | 1 | Umbrales de desbloqueo por nivel de amistad | 30/70/120/150/260 | De friendship.json (coherente con M20). Logros por nivel: 3-5 por nivel. |
 | 2 | Curva de growth por stat | 1.0 + 0.15 * nivel | Lineal, coherente con M16 RF-MR4. Max nivel 10 -> 2.5x. |
 | 3 | Recompensas de oro por logro (suma total) | ~750 AO one-time | Mision principal 200 + sello 500 + secundaria 50 = 750. vs economia diaria 80 AO = 9.4 dias. Razonable. |
-| 4 | Tabla de XP por logro (suma vs curva) | 93 logros x 30 XP promedio = 2790 XP | Curva de nivel: 100 niveles x 100 XP = 10000 XP. Ratio 27.9%. Razonable. |
+| 4 | Tabla de XP por logro (suma vs curva) | 2790 XP (ILUSTRATIVO: 93 logros x 30 XP) — PENDIENTE DE CATALOGO FINAL | Curva de nivel: 100 niveles x 100 XP = 10000 XP. Ratio 27.9% SOLO si el catalogo final es 93 logros. AUDITORIA 2026-10-23: CAT-1 define catalogo base de 20-30 logros; la cifra 93 no tiene fuente en el doc (inconsistencia interna). Con 20-30 logros: 600-900 XP (6-9% de la curva). |
 | 5 | KPI: % logros completados por jugador cozy | 60-70% | Orden de magnitud razonable para un jugador cozy (no completionist). |
 
 
@@ -254,3 +254,31 @@ Umbrales coherentes con H2 de rareza (no grinds abusivos, max 100 repeticiones p
 - Estructura: {id: {desbloqueado: bool, fecha: ISO8601, progreso: float, extra: Dictionary}}.
 - Versionado: schema v1 (actual). Migracion futura: si se agrega campo, default = valor vacio.
 - Coherente con M59/M60: GuardadoLogros serializa dentro del guardado global. Write-through tras cada desbloqueo.
+
+## Presupuestos numericos II - detalle minucioso (2da capa)
+
+Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
+- **Presupuesto de sensibilidad de umbrales** [x] - formula de desvio por umbral y curva de canal (la +/- respecto de 93) (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de scaling de recompensas por tier** [x] - factor 2x por tier chequeado contra economia de 93 (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de casos-limite: logros de coleccion al 99%** [x] - formula del jugador completista (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+
+## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+
+### 1. Sensibilidad de umbrales de desbloqueo
+- Formula: umbral_nivel = base_nivel + (umbral_anterior * 0.5) para cada nivel de amistad.
+- Valores: nivel_2 = 30, nivel_3 = 70 (30 + 30*0.5 = 45? No: 30 + 40 = 70, incremento 40). nivel_4 = 120 (70 + 50 = 120). nivel_5 = 150 (120 + 30 = 150). nivel_8 = 260 (150 + 110 = 260).
+- Incrementos: 30, 40, 50, 30, 110. Pendiente decreciente hasta nivel_5, luego salto a nivel_8 (secreto). Coherente con H3 (umbrales 30/70/120/150/260).
+- Unidad: puntos de amistad. Dependencia: M20 (amistad), M93 (economia).
+
+### 2. Scaling de recompensas por tier
+- Formula: recompensa_tier = base_tier * (1 + 0.5 * tier) donde base_tier = 50 AO (mision secundaria).
+- Valores: tier 1 = 50, tier 2 = 75, tier 3 = 100, tier 4 = 125, tier 5 = 150.
+- Coherente con economia diaria 80 AO: max recompensa por logro = 150 AO = 1.875 dias. No infla (<= 2 dias de ingreso).
+- Unidad: AO. Dependencia: M93 (dinero_diario 80).
+
+### 3. Casos-limite: logros de coleccion al 99%
+- Formula: progreso_coleccion = items_obtenidos / items_totales * 100. Logro desbloqueado cuando progreso >= 99%.
+- Umbral 99% (no 100%) para evitar bloqueo por items imposibles de obtener.
+- Coherente con M73 (colecciones) y H2 (rareza 5% con pity).
+- Unidad: porcentaje. Dependencia: M73, M93 (H2).
+

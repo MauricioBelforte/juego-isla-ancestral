@@ -115,8 +115,36 @@ para consumir los datos cuando existan.
 
 | # | Presupuesto | Valor | Formula/Justificacion |
 |---|-------------|-------|----------------------|
-| 6 | Eventos/segundo maximos por sesion | 10 eventos/s | Presupuesto de red local, coherente con M40 Kafka-cuota. |
+| 6 | Eventos/segundo maximos por sesion | 10 eventos/s | Presupuesto de red local. AUDITORIA 2026-10-23: M40 NO declara budget de red (SIN-DATOS, apilado Beam 277 celda 6) — la cita "coherente con M40 Kafka-cuota" se degrada a juicio de diseno sin fuente. |
 | 7 | Payload promedio bytes/evento | 256 bytes | 256 x 10 eventos/s = 2560 bytes/s = 20.48 kbps. Coherente con presupuesto 64 kbps de M77 (32%). |
 | 8 | Ventana de retencion de datos | 30 dias x 100 eventos/dia = 3000 eventos | 3000 x 256 bytes = 768 KB. Razonable para disco local. |
 | 9 | Muestreo anonimo por tipo de evento | 100% eventos clave, 10% rutinarios | Opt-in explicito, sin PII. Sampling por tipo de evento. |
 | 10 | Frecuencia de flush del buffer | 30s o 100 eventos (lo que ocurra primero) | Coherente con no-lag de M58 (no saturar UI). |
+
+## Presupuestos numericos II - detalle minucioso (2da capa)
+
+Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
+- **Presupuesto de peaks de eventos por frame en escritura** [x] - formula con margen para eventos de balancing online (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de esquema de versionado** [x] - formula de compat coherente con M107 (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de cross-referencing M105-M144** [x] - la tabla de deudas del flag H21 en valores (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+
+## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+
+### 4. Peaks de eventos por frame en escritura
+- Formula: eventos_por_frame = eventos_por_segundo / fps = 10 / 60 = 0.167 eventos/frame.
+- Max eventos por frame: 1 (si 10 eventos/s y 60 fps, 1 de cada 6 frames tiene un evento).
+- Coherente con M70 (0.5 ms/frame budget). Un evento de telemetria no excede 0.5 ms.
+- Unidad: eventos/frame. Dependencia: M70 (0.5 ms/frame).
+
+### 5. Esquema de versionado
+- Formula: version = major.minor.patch (semver). Compatibilidad: major debe coincidir, minor puede incrementar, patch puede incrementar.
+- Migracion: si major cambia, migrar todos los eventos. Si minor cambia, agregar campos opcionales. Si patch cambia, sin migracion.
+- Coherente con M107 (versionado de esquema de backup).
+- Unidad: version semantica. Dependencia: M107.
+
+### 6. Cross-referencing M105-M144 (tabla de deudas H21)
+- Formula: metricas_capturadas = 4 (dificultad, tutorial, retencion parcial, contenido parcial) de 9 metricas M144.
+- Gap = 9 - 4 = 5 metricas no capturadas (reviews, bugs, rendimiento, economia, onboarding).
+- Coherente con H21 (Opcion A para V1: 4/9 en M105, 5 en otros modulos).
+- Unidad: metricas. Dependencia: M144 (9 metricas).
+

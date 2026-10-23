@@ -556,6 +556,27 @@ Mensual (primer día de cada mes)
 - backup_categories.json: retencion global (diarios 30, semanales 52, mensuales 60) sigue vigente como politica de retencion por TIPO de backup, no por categoria.
 
 **Decision 2: CRC32 (rapido, diario) + SHA-256 (fuerte, mensual) — mantener ambos**
-- backup_policy.json: verificacion.checksum_habilitado = true, algoritmo = CRC32 (verificacion rapida, diaria).
+- backup_policy.json: verificacion.checksum_habilitado = true, integrity_check_al_restaurar = true (AUDITORIA 2026-10-23: el JSON NO tiene campo "algoritmo" — CRC32 vive en el codigo, BackupManager.verificar_integridad, tabla #14 de este doc).
 - verify_backups.ps1: SHA-256 (integridad fuerte, mensual).
 - Razon: CRC32 para verificacion rapida diaria (bajo costo CPU), SHA-256 para integridad fuerte mensual (mayor seguridad). Documentado para evitar confusion en auditorias futuras.
+
+## Presupuestos numericos II - detalle minucioso (2da capa)
+
+Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
+- **Presupuesto de retencion por capas** [x] - formula coherente con Policies del fundador si decide max_copias_por_categoria (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de verificacion de integridad** [x] - formula de algoritmos duales si mantiene ambos (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+
+## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+
+### 7. Retencion por capas
+- Formula: retencion_total = diarios (30) + semanales (52) + mensuales (60) + permanentes (2) = 144 slots max. NOTA 2026-10-23: el schedule GFS 30/52/60 es INTENTO DE DISENO — backup_categories.json (7 categorias: repositorio/assets/documentacion/builds/saves/musica/fuente) implementa retencion_dias por categoria (365/90/180/365/90/180/180), no el schedule 30/52/60. Conciliar o adoptar una sola politica.
+- max_copias_por_categoria = 5 por categoria x 7 categorias = 35 copias max por tipo.
+- Coherente con H22 (max_copias por categoria).
+- Unidad: slots de backup. Dependencia: H22, M144 (SLA <48h).
+
+### 8. Verificacion de integridad (algoritmos duales)
+- Formula: CRC32 (verificacion rapida, diaria, O(n) con bajo costo CPU) + SHA-256 (integridad fuerte, mensual, O(n) con mayor costo CPU).
+- CRC32 para verificacion diaria (velocidad), SHA-256 para integridad mensual (seguridad).
+- Coherente con H22 (documentado en 03-Diseno.md).
+- Unidad: algoritmo. Dependencia: H22.
+

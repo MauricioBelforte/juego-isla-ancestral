@@ -240,7 +240,7 @@
 - [x] Pendientes asignados a dueños [S] — 21 de 25 [?] con dueño (L/M/H secciones); L113/L25-27/L234 pendientes de dueño
 - [x] DoD cumplida: 5 archivos + firma + log [M] — 01-05 plan-actual/ + firma SWE-1.6 + log 1068 (+779 para docs; 778 y 780 no son de M107)
 
-~~**Totales:** 176 ítems · Completados: 167 · Pendientes: 0 · No resueltos: 9.~~
+~~**Totales:** 177 ítems · Completados: 168 · Pendientes: 0 · No resueltos: 9.~~
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 5):** la línea decía *"176 items — Completados: 93 — No resueltos: 17 —
@@ -402,3 +402,7 @@ fue **honesta** (delegó lo que no hizo, documentó el sobre-cierre). El módulo
 
 ## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador) — 1 aplicacion
 - [x] Aplicar H22: max_copias = POR CATEGORIA (renombrado a max_copias_por_categoria en backup_policy.json) + CRC32/SHA-256 documentados [S] — GO fundador 275
+
+- [x] Definir Presupuesto de retencion por capas — formula coherente con Policies del fundador si decide max_copias_por_categoria (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de verificacion de integridad — formula de algoritmos duales si mantiene ambos (cita de "Presupuestos numericos II" 03)
+- [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 2 correcciones (H22: JSON no tiene campo "algoritmo" — CRC32 vive en BackupManager.verificar_integridad; §7: schedule GFS 30/52/60 no groundeado en backup_categories.json — retencion_dias por categoria 365/90/180/365/90/180/180); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

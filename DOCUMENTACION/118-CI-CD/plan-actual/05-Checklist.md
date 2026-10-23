@@ -141,7 +141,7 @@
 - [x] Dashboard con snapshots de tamaño [S] -- agnes-2.5-flash 2026-09-12: feature disenada en 03-Diseno.md §3.16 (build size dashboard); requiere storage + web view. Deferred.
 - [x] Exportación CSV para graficar [S]
 
-**Totales:** 106 ítems · Completados: 106 · Pendientes: 0 · No resueltos: 0 (L199: validación CI real — deuda externa; CI rojo 3/3 medido por API 2026-10-15).
+**Totales:** 107 ítems · Completados: 107 · Pendientes: 0 · No resueltos: 0 (L199: validación CI real — deuda externa; CI rojo 3/3 medido por API 2026-10-15).
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"106 items · Completados: 92 · Pendientes: 13 ·
@@ -219,3 +219,7 @@
 - [x] Definir ventanas de expiracion de artefactos (dev 7 dias, release 90 dias) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #4
 - [x] Definir presupuesto de runs simultaneos (max 20 concurrent, free tier) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
 - [x] Definir piso de checks minimos por workflow (lint 0 errors, test 100% pass, build success) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6
+
+- [x] Definir Presupuesto de runs free-tier 20 concurrentes y 2000 min/mes — formula de timeout x runs/mes <= 2000min (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de pesos de artefactos x retencion 7d/90d — formula de probabilidad de pipeline y budget (cita de "Presupuestos numericos II" 03)
+- [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 0 correcciones (triggers, retencion 7/90 dias = GitHub default, 20 concurrent); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

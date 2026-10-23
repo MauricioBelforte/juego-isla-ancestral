@@ -239,7 +239,7 @@
 - [x] Definir criterio de éxito del piloto: 3 sesiones completas, 80% de encuestas, informe en una semana [S]
 - [x] Definir que los errores del piloto se corrigen en las plantillas antes de la ronda oficial [S]
 - [x] Definir medición del tiempo real de análisis por sesión para ajustar el presupuesto de horas [S]
-**Totales:** 186 items · Completados: 186 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 187 items · Completados: 187 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 186 [x] / 0 [ ] / 0 [?].
@@ -253,3 +253,8 @@
 - [x] Definir fechas/builds de cada etapa (M137 -> M139 -> M140, cadencias M144) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #28
 - [x] Definir tabla de captura por metrica (9 metricas M144, T2 todas, T1 cinco) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #29
 - [x] Definir presupuesto fix-cap por ronda (max 5 fixes, 2-8h/fix, 10-40h/ronda) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #30
+
+- [x] Definir Presupuesto de sesiones x tester x perfil revisado cosechas — formula del upsize del H25 con la 4.1-b (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto USD por disciplina — formula del total consunter (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de fixes por ronda — formula de capacidad numera max 5 (cita de "Presupuestos numericos II" 03)
+- [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 0 correcciones (48h<=72h SLA M144; 9 metricas M144 confirmadas via H21; 5x2=10h, 5x8=40h); puntero 2da capa x3. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

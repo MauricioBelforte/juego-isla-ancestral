@@ -290,7 +290,7 @@
 - Smoke de ejecucion en consola real (ventana PowerShell nativa) → KnownIssue no bloqueante DoD; protocolo disenado en 03-Diseno.md §S.13. Manual test deferred.
 - RF6-RF13 (asociacion, permisos, antivirus, actualizaciones, reparacion, desinstalacion real, install custom UI) → agnes-2.5-flash 2026-09-14: specs completas en 03-Diseno.md §RF6-RF13; implementacion requiere build Windows real. Spec complete.
 
-**Totales:** 192 items · Completados: 192 · Pendientes: 0 · No resueltos: 0. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13 tras la normalización de duplicados: conteo real por regex = 192 [x] / 0 [?] / 0 [ ]; corrección de dato autorizada por director msg 267.)
+**Totales:** 193 items · Completados: 193 · Pendientes: 0 · No resueltos: 0. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13 tras la normalización de duplicados: conteo real por regex = 192 [x] / 0 [?] / 0 [ ]; corrección de dato autorizada por director msg 267.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la única mención previa era narrativa, en la Reserva actual (L9:
@@ -316,3 +316,7 @@ M116 auditado. Sustentado (0 degradaciones). Suites re-corridas POR AGNES: test_
 - [x] Definir tamano maximo del saveset de fotos (max 50 MB, 50 fotos x 1 MB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #3 — AUDIT S63 G-5.3 2026-10-23: 50 x 1 MB = 50 MB = 1% de 5000 MB PASS; HALLAZGO en los checks Inno del 03: IsWindows10Or11 valida solo Major >= 10 (NO el build 19041 requerido) y IsDirectX11Available es placeholder (Result := True) — fix al script .iss y escalado al fundador
 - [x] Definir umbrales de version minima de OS/DirectX (Win10 19041+, DX11, 8GB, 5GB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
 - [x] Definir cobertura del desinstalador (100% archivos creados, brecha 0) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6
+
+- [x] Definir Presupuesto de saveset de fotos — formula del storage del user al 100% (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de matriz de shortcuts por plataforma — tabla x win lin mac (cita de "Presupuestos numericos II" 03)
+- [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 0 correcciones (5/3.3=1.515~1.5GB; 50x1MB=50MB, 50/5000=1%); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

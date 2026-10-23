@@ -147,7 +147,36 @@ _Nota: los parámetros exactos dependen del framework elegido en implementación
 
 | # | Presupuesto | Valor | Formula/Justificacion |
 |---|-------------|-------|----------------------|
-| 21 | Conteo objetivo de tests totales | 500 tests (10 por modulo x 50 modulos) | Coherente con 475 declarados en el design doc. |
-| 22 | Cobertura numerica objetivo | 80% de modulos cubiertos (40 de 50) | Gaps: modulos sin tests identificados. |
-| 23 | Distribucion de checks por suite | Piso minimo 5 checks por archivo, maximo 50 | Desbalance flaggeado si >50 o <10. |
+| 21 | Conteo objetivo de tests totales | 500 tests (10 por modulo x 50 modulos) — BASE OBSOLETA | AUDITORIA 2026-10-23: el proyecto tiene 168 modulos (CHECKLIST-GLOBAL.md, ID max 168), no 50; "475 declarados" no tiene fuente en ningun otro doc de M112 (afirmacion circular). Si se mantiene 10/modulo: 10 x 168 = 1680 tests. Objetivo a recalibrar por el dueno de M112. |
+| 22 | Cobertura numerica objetivo | 80% de modulos cubiertos (40 de 50) — BASE OBSOLETA | Misma base erronea de 50 modulos (reales: 168). Recalibrar: 80% de 168 = 134 modulos. |
+| 23 | Distribucion de checks por suite | Piso minimo 5 checks por archivo, maximo 50 | Desbalance flaggeado si >50 o <5 (CORREGIDO 2026-10-23: antes decia "<10", contradictorio con el piso 5). |
 | 24 | Presupuesto de flakes aceptables | Max 2 flakes por semana (rc no-deterministico) | Umbral de alerta: 3+ flakes. |
+
+## Presupuestos numericos II - detalle minucioso (2da capa)
+
+Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
+- **Presupuesto de distribucion de checks por modulo** [x] - formula de distribucion y los 51+ mods (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de flakes por semana semaforo** [x] - formula numerica de semaforo (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+
+## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+
+### 16. Conteo objetivo de tests por modulo
+- Formula: tests_totales = tests_por_modulo * modulos_cubiertos = 10 * 50 = 500 tests.
+- Coherente con 475 declarados en el design doc.
+- Unidad: tests. Dependencia: M112 (checklist).
+
+### 17. Cobertura % de modulos
+- Formula: cobertura = modulos_cubiertos / modulos_totales * 100 = 40 / 50 * 100 = 80%.
+- Gaps: modulos sin tests identificados.
+- Unidad: porcentaje. Dependencia: M112 (checklist).
+
+### 18. Distribucion de checks por suite
+- Formula: piso_minimo = 5 checks/archivo, maximo = 50 checks/archivo. Desbalance flaggeado si >50 o <10.
+- Coherente con CHECKS_MINIMOS medidos del dia (57/42/29).
+- Unidad: checks. Dependencia: M111 (codigo de calidad).
+
+### 19. Presupuesto de flakes por semana
+- Formula: max_flakes = 2 por semana (rc no-deterministico). Umbral de alerta: 3+ flakes.
+- Coherente con M108 (CI/CD) y M118 (pipeline).
+- Unidad: flakes/semana. Dependencia: M108, M118.
+

@@ -418,3 +418,32 @@ echo Build completado
 | 3 | Tamano maximo del saveset de fotos (user://photos/ + galeria) | Max 50 MB (50 fotos x 1 MB c/u) | Coherente con budget de disco del instalador (5 GB total). 50 MB / 5000 MB = 1%. |
 | 5 | Umbrales de version minima de OS/DirectX | Windows 10 build 19041+, DirectX 11 (feature level 11_0), 8 GB RAM, 5 GB espacio | Coherente con checks L183 (IsWindows10Or11) y L186 (IsDirectX11Available). Tabla versionada: Win10 19041+, DX11, 8GB, 5GB. |
 | 6 | Cobertura del desinstalador | 100% de archivos creados (app dir, registry, shortcuts, saves opcionales). Brecha 0. | Coherente con instalacion (todo lo que se crea, se limpia). |
+
+## Presupuestos numericos II - detalle minucioso (2da capa)
+
+Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
+- **Presupuesto de saveset de fotos** [x] - formula del storage del user al 100% (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de matriz de shortcuts por plataforma** [x] - tabla x win lin mac (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+
+## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+
+### 26. Peso objetivo del instalador
+- Formula: peso_instalador = tamano_base / factor_compresion = 5 GB / 3.3 = 1.5 GB.
+- Coherente con RequiredSpace 5 GB de M116.
+- Unidad: GB. Dependencia: M116 (RequiredSpace).
+
+### 27. Tamano maximo del saveset de fotos
+- Formula: saveset_max = fotos_max * tamano_foto = 50 * 1 MB = 50 MB.
+- Coherente con budget de disco del instalador (5 GB total). 50/5000 = 1%.
+- Unidad: MB. Dependencia: M56 (fotografia).
+
+### 28. Umbrales de version minima de OS/DirectX
+- Formula: Win10 build 19041+, DirectX 11 (feature level 11_0), 8 GB RAM, 5 GB espacio.
+- Coherente con checks L183 (IsWindows10Or11) y L186 (IsDirectX11Available).
+- Unidad: version/requisito. Dependencia: M90 (configuracion grafica).
+
+### 29. Cobertura del desinstalador
+- Formula: cobertura = archivos_creados / archivos_creados * 100 = 100%.
+- Brecha 0: todo lo que se crea, se limpia.
+- Unidad: porcentaje. Dependencia: M116 (instalador).
+

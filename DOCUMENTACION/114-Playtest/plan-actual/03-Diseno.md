@@ -195,3 +195,41 @@ Prioridad = Severidad x (Frecuencia / TotalJugadores) x ImpactoEnTono
 | 28 | Fechas/builds de cada etapa | M137 (prototipo) -> M139 (pre-alpha) -> M140 (alpha). | Coherente con cadencias de M144 (hotfix <72h, patch mensual). |
 | 29 | Tabla de captura por metrica | 9 metricas de M144. T2 captura todas 9, T1 captura 5 (bugs, rendimiento, economia, dificultad, tutorial). | Coherente con M105 (telemetria emite los eventos). |
 | 30 | Presupuesto fix-cap por ronda | Max 5 fixes, 2-8h por fix. Total 10-40h por ronda. | Coherente con "maximo 5 fixes comprometidos por ronda". |
+
+## Presupuestos numericos II - detalle minucioso (2da capa)
+
+Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
+- **Presupuesto de sesiones x tester x perfil revisado cosechas** [x] - formula del upsize del H25 con la 4.1-b (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto USD por disciplina** [x] - formula del total consunter (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de fixes por ronda** [x] - formula de capacidad numera max 5 (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+
+## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+
+### 20. Sesiones x tester x perfil
+- Formula: sesiones_cozy = 5, sesiones_casual = 3. Muestra: 8-12 testers por ronda.
+- Coherente con "al menos 3 sesiones completas" y "saturacion con 5 hallazgos repetidos".
+- Unidad: sesiones. Dependencia: M114 (plan de playtest).
+
+### 21. Presupuesto USD por disciplina
+- Formula: 0 USD base (testers voluntarios), max 200 USD (compensacion minima si aplica).
+- Coherente con presupuesto indie.
+- Unidad: USD. Dependencia: M144 (post-lanzamiento).
+
+### 22. Tiempos de revision de feedback por etapa
+- Formula: 48h por etapa. Coherente con SLA <=72h de M144.
+- Unidad: horas. Dependencia: M144 (SLA).
+
+### 23. Fechas/builds de cada etapa
+- Formula: M137 (prototipo) -> M139 (pre-alpha) -> M140 (alpha). Coherente con cadencias de M144 (hotfix <72h, patch mensual).
+- Unidad: etapas. Dependencia: M137, M139, M140, M144.
+
+### 24. Tabla de captura por metrica
+- Formula: 9 metricas de M144. T2 captura todas 9, T1 captura 5 (bugs, rendimiento, economia, dificultad, tutorial).
+- Coherente con M105 (telemetria emite los eventos).
+- Unidad: metricas. Dependencia: M105, M144.
+
+### 25. Presupuesto fix-cap por ronda
+- Formula: max 5 fixes, 2-8h por fix. Total 10-40h por ronda.
+- Coherente con "maximo 5 fixes comprometidos por ronda".
+- Unidad: horas. Dependencia: M144 (post-lanzamiento).
+

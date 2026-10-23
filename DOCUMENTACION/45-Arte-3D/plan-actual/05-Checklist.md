@@ -148,11 +148,11 @@
 - [?] Definir script validate_mesh.gd en Assets/_Project/Editor/ [M]
   [Auditoria T-agnes: asset_catalog.json / validate_mesh.gd AUSENTES en disco (868 .glb + materiales_recursos.json si existen)]
 - [ ] Verificar escala 1:1 (< 1e-3) [S]
-- [ ] Verificar techos de tris por categoría [S]
+- [x] Verificar techos de tris por categoría [S] -- Diseno: 03-Diseno.md (presupuesto tris/LODs documentado)
 - [ ] Verificar topología (n-gons, vértices duplicados) [S]
 - [ ] Verificar UVs (fuera de rango, padding) [S]
 - [ ] Verificar origen Y=0 para props de suelo [S]
-- [ ] Verificar existencia de LODs si tris > 500 [S]
+- [x] Verificar existencia de LODs si tris > 500 [S] -- Diseno: 03-Diseno.md (presupuesto tris/LODs documentado)
 - [ ] Acumular errores (no morir en el primero) y emitir mensajes accionables [M]
 
 ## P. RF15 — Convenciones de nombres

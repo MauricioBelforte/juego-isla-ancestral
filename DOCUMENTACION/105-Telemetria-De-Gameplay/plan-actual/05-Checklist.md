@@ -342,7 +342,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 > El conteo lo define `scripts/verificar_checklist.py` (regex `^\s*- \[x\]`). El
 > "138" anterior era una cifra escrita a mano, no medida.
 
-**Totales:** 162 ítems · Completados: 134 · Pendientes: 0 · No resueltos: 28. (flips del director 2026-10-21: 227/228/229/322/323 → [x] con evidencia Log 2075; 198 nota corregida sin flip.)
+**Totales:** 163 ítems · Completados: 135 · Pendientes: 0 · No resueltos: 28. (flips del director 2026-10-21: 227/228/229/322/323 → [x] con evidencia Log 2075; 198 nota corregida sin flip.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 122 [x] / 0 [ ] /
@@ -381,3 +381,8 @@ cerrar la app perdía `session_ended`/`session_duration`.
 - [x] Definir ventana de retencion de datos (30 dias x 100 eventos = 3000, 768 KB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #8
 - [x] Definir porcentajes de muestreo anonimo (100% clave, 10% rutinario) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #9
 - [x] Definir frecuencia de flush del buffer (30s o 100 eventos) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #10
+
+- [x] Definir Presupuesto de peaks de eventos por frame en escritura — formula con margen para eventos de balancing online (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de esquema de versionado — formula de compat coherente con M107 (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de cross-referencing M105-M144 — la tabla de deudas del flag H21 en valores (cita de "Presupuestos numericos II" 03)
+- [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 2 correcciones (#6 M40 SIN-DATOS degradado; puntero 2da capa x3). Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

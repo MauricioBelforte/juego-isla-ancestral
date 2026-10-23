@@ -89,3 +89,41 @@ jobs:
 | 4 | Ventanas de expiracion de artefactos | Dev build: 7 dias. Release build: 90 dias. | Coherente con GitHub Actions retention (default 90 dias). |
 | 5 | Presupuesto de runs simultaneos | Max 20 concurrent jobs (GitHub Actions free tier). | Coherente con limite de GitHub Actions (20 concurrent para free tier). |
 | 6 | Piso de checks minimos por workflow | CHECKS_MINIMOS = [lint (0 errors), test (100% pass), build (success)]. | Coherente con M111 (codigo de calidad) y M112 (tests). |
+
+## Auditoria aritmetica de presupuestos CI/CD (S63 — G-5.3-Flash-Agente, 2026-10-23; encargo 337-director, celdas 5-7)
+
+| Celda | Formula verificada | Resultado |
+|---|---|---|
+| Suma de triggers | push 7-14/sem + tag 1-2/mes (~0.25-0.5/sem) + nightly 7/sem | Total 14.25-21.5 runs/semana. PASS (sin total declarado que contradiga; la suma queda documentada aqui) |
+| Retention artifacts | dev 7 d (retention-days custom) / release 90 d (default GitHub) | Coherente con defaults de GitHub Actions. PASS |
+| Cuota free tier | 15 min/job x 14-21.5 runs/sem x 4.3 sem = 903-1,387 min/mes Linux; el limite free es 2,000 min/mes | Linux: DENTRO (banda alta 69%). HALLAZGO: si el runner es WINDOWS (factor x2 de minutos en la cuota) -> 1,806-2,774 min-equivalentes: EXCEDE 2,000 en la banda alta. Mitigacion: runner ubuntu-latest, o reducir nightly a 3/semana, o tier Team. |
+
+ROLL-UP al fundador: el HALLAZGO de la cuota (factor x2 runners Windows en banda alta) entra al paquete de decisiones de infra junto a los 38-Totales (A/B/C) y los 5 flags M151.
+
+
+## Presupuestos numericos II - detalle minucioso (2da capa)
+
+Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
+- **Presupuesto de runs free-tier 20 concurrentes y 2000 min/mes** [x] - formula de timeout x runs/mes <= 2000min (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de pesos de artefactos x retencion 7d/90d** [x] - formula de probabilidad de pipeline y budget (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+
+## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+
+### 30. Triggers por workflow
+- Formula: push a main/develop (7-14/semana) + tag release (1-2/mes) + schedule nightly (7/semana). Total: 14-21.5 runs/semana.
+- Coherente con flujo de desarrollo (commits diarios, releases mensuales).
+- Unidad: runs/semana. Dependencia: M118 (CI/CD).
+
+### 31. Ventanas de expiracion de artefactos
+- Formula: dev build 7 dias, release build 90 dias. Coherente con GitHub Actions retention (default 90 dias).
+- Unidad: dias. Dependencia: M118 (CI/CD).
+
+### 32. Presupuesto de runs simultaneos
+- Formula: max 20 concurrent jobs (GitHub Actions free tier). Coherente con limite de la plataforma.
+- Unidad: jobs. Dependencia: M118 (CI/CD).
+
+### 33. Piso de checks minimos por workflow
+- Formula: CHECKS_MINIMOS = [lint (0 errors), test (100% pass), build (success)].
+- Coherente con M111 (codigo de calidad) y M112 (tests).
+- Unidad: checks. Dependencia: M111, M112.
+

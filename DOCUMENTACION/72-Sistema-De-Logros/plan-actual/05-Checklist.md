@@ -343,7 +343,7 @@
 - `test_logros_m72_statids.gd` → **9 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`**.
 - `test_logros.gd` → **0 fallos, exit 0** (1 `SCRIPT ERROR` ajeno de M39 al boot).
 
-~~**Totales:** 185 ítems · Completados: 77 · Pendientes: 105 · No resueltos: 3. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la línea decía 31/151/3; conteo real por regex = 77 [x] / 3 [?] / 105 [ ]. Drift de 46 arrastrado desde el Log 1730, donde se flippearon +20 sin actualizar Totales.)~~
+~~**Totales:** 186 ítems · Completados: 78 · Pendientes: 105 · No resueltos: 3. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: la línea decía 31/151/3; conteo real por regex = 77 [x] / 3 [?] / 105 [ ]. Drift de 46 arrastrado desde el Log 1730, donde se flippearon +20 sin actualizar Totales.)~~
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1730):** +20 [ ] -> [x] en el lote B+E de M72 (msg 175).
 > **Catálogo RF1:** `data/logros/logros.json` pasó de 11 a **17 logros** con los campos que faltaban (`nombre_i18n`, `descripcion_i18n`, `icono`, `categoria`, `orden`, `logro_steam_id`) y las **7 categorías** del vocabulario. También se corrigió mojibake heredado (`Guardiá­a` -> `Guardián`).
@@ -377,3 +377,8 @@
 - [x] Definir spec de sincronizacion Steam (que se sincroniza, cuando, que NO se borra del Cloud) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RF11
 - [x] Definir spec de write-through diferido (cola diferida, flush 5s/10 logros, no bloquea frame) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RN2
 - [x] Definir spec de esquema de persistencia parcial (estructura {id: {desbloqueado, fecha, progreso, extra}}, versionado) [S] — Diseno: 03-Diseno.md "Presupuestos numericos — catalogo cozy" RF9
+
+- [?] Definir Presupuesto de sensibilidad de umbrales — formula de desvio por umbral y curva de canal (la +/- respecto de 93) (cita de "Presupuestos numericos II" 03) -- [?] PLACEHOLDER del director sin fórmulas concretas (Beam 302: 0 de 23 verificables). Espera definicion con contexto de modulo por Beam tras la decision de precio del fundador
+- [?] Definir Presupuesto de scaling de recompensas por tier — factor 2x por tier chequeado contra economia de 93 (cita de "Presupuestos numericos II" 03) -- [?] PLACEHOLDER del director sin fórmulas concretas (Beam 302: 0 de 23 verificables). Espera definicion con contexto de modulo por Beam tras la decision de precio del fundador
+- [?] Definir Presupuesto de casos-limite: logros de coleccion al 99% — formula del jugador completista (cita de "Presupuestos numericos II" 03) -- [?] PLACEHOLDER del director sin fórmulas concretas (Beam 302: 0 de 23 verificables). Espera definicion con contexto de modulo por Beam tras la decision de precio del fundador
+- [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 2 correcciones (#4 degradado a ilustrativo/pendiente catalogo; puntero 2da capa x3). Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

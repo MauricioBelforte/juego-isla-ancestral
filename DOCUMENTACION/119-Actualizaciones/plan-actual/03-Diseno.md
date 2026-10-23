@@ -372,3 +372,24 @@ user://saves/
 | 13 | % de peso del parche promedio sobre tamano base | 5-15% | Coherente con 5GB de M116. Parche = 250-750 MB. |
 | 14 | % de cobertura del simulador de update | 80% de los flujos de update | Coherente con lanes de M112. |
 | 15 | Timeline de anuncios pre-patch/patch-day/post-patch | T-30 freeze, T-14 envio, T-7 avisos, dia 0 anuncio, D+1-D+7 monitorizacion | Coherente con M99 runbook. |
+
+## Presupuestos numericos II - detalle minucioso (2da capa)
+
+Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
+- **Presupuesto de cadencia hotfix < 72h numerico** [x] - formula que extendiera su apilado #4 (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+- **Presupuesto de etapas de rollout canary 5%/25%/100%** [x] - formula de phases numeric con circuit-breaker <2% fail (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose NO vive en 03/05, solo el pointer)
+
+## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+
+### 9. Cadencia hotfix < 72h numerico
+- Formula: hotfix_tiempo_max = 72h = 3 dias. Patch mensual = 30 dias. Respuesta < 48h. SLA primera respuesta <= 72h.
+- Cadencias: hotfix P0/P1 < 72h, patch mensual (30 dias), respuesta < 48h.
+- Coherente con M144 (SLA <=72h, hotfix <72h).
+- Unidad: horas. Dependencia: M144.
+
+### 10. Etapas de rollout canary 5%/25%/100%
+- Formula: rollout = [5%, 25%, 100%]. Circuit-breaker: si fail_rate > 2%, rollback automatico.
+- 5% de usuarios = test inicial. 25% = expansion. 100% = rollout completo.
+- Coherente con M107 (rollback automatico si apply_update() falla o juego cae 2 veces).
+- Unidad: porcentaje de usuarios. Dependencia: M107 (rollback).
+

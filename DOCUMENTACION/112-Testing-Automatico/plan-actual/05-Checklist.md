@@ -259,7 +259,7 @@
 - [x]Verificar que los unit tests cumplen ≤ 2 minutos [C] → MEDIDO por Ling-3.1-Flash (R3, 2026-10-13): 95.1s = 1.59min < 2min ✓ (verificación del ítem L126, misma corrida). EXIT=0, 21/21 test cases GdUnit4, 0 errors, 0 failures, 0 orphans. Salida: %TEMP%\m112_r3_unit.txt.
 - [x] Ajustar configuración de framework ante fallos de integración [M]
 - [x] Confirmar que ningún archivo fuera de DOCUMENTACION/112-Testing-Automatico/ fue modificado [S]
-**Totales:** 225 ítems · Completados: 221 · Pendientes: 0 · No resueltos: 4. (Recontado el 2026-10-21 por minimax-m3-1-flash, Log 2093: 219 [x] + 2 [?] de tiempo cerrados con la medicion del pool paralelo (897.0 s -> 545.3 s, presupuesto 600 s) = 221 [x]; quedan 4 [?]: 3 de cobertura (no hay runner de cobertura headless en GdUnit4 6.2.1 — deuda de tooling) y 1 de maquina limpia (CI real, dueno M118). El rojo preexistente de `integration/test_crafting_inventory.gd` resulto ser un artefacto del `user://` compartido entre suites (con aislamiento por worker pasa) y el unico rojo que queda es `tests/test_iconos_m159.gd` (TIMEOUT, riel M159, ya derivado a agnes).)
+**Totales:** 226 ítems · Completados: 222 · Pendientes: 0 · No resueltos: 4. (Recontado el 2026-10-21 por minimax-m3-1-flash, Log 2093: 219 [x] + 2 [?] de tiempo cerrados con la medicion del pool paralelo (897.0 s -> 545.3 s, presupuesto 600 s) = 221 [x]; quedan 4 [?]: 3 de cobertura (no hay runner de cobertura headless en GdUnit4 6.2.1 — deuda de tooling) y 1 de maquina limpia (CI real, dueno M118). El rojo preexistente de `integration/test_crafting_inventory.gd` resulto ser un artefacto del `user://` compartido entre suites (con aislamiento por worker pasa) y el unico rojo que queda es `tests/test_iconos_m159.gd` (TIMEOUT, riel M159, ya derivado a agnes).)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 208 [x] / 0 [ ] / 0 [?].
@@ -370,3 +370,7 @@ L99/L100/L256 (cobertura NO MEDIBLE — tooling GdUnit4), L125/L259 (620.1s), L1
 - [x] Definir cobertura numerica objetivo (80% de modulos, 40 de 50) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #22
 - [x] Definir distribucion de checks por suite (piso 5, max 50, desbalance flaggeado) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #23
 - [x] Definir presupuesto de flakes aceptables (max 2/semana, alerta 3+) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #24
+
+- [x] Definir Presupuesto de distribucion de checks por modulo — formula de distribucion y los 51+ mods (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de flakes por semana semaforo — formula numerica de semaforo (cita de "Presupuestos numericos II" 03)
+- [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 3 correcciones (#21: base "50 modulos" OBSOLETA — reales 168 (CHECKLIST-GLOBAL, ID max 168); "475 declarados" circular sin fuente; #22: misma base, 80% de 168 = 134; #23: flag <10 contradictorio con piso 5 — alineado a <5); puntero 2da capa x2. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]

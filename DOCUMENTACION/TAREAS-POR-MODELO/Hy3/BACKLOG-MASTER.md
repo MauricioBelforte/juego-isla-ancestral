@@ -40,7 +40,7 @@
 ### Bloque A — QA cruzado de módulos ✅ con sello viejo o pendiente (prioridad §21.8)
 
 1. M09-Terreno (100/105): QA cruzado completo (último sello atria 2026-09-18; muestreo 5+) — 10 [M]
-2. M10-Generación (88/106): QA de degradaciones 2026-10-15 (L26/L52) y del BUG-043 snow — 10 [M]
+2. M10-Generación (88/106): QA de degradaciones 2026-10-15 (L26/L52) y del BUG-043 snow — 10 [M] — [x] Hy3 (Log 2151 / msg 335, 2026-10-23: §21.8 cross-QA; 05-Checklist medido 90[x]/0[ ]/16[?]=106; drift GLOBAL 88/106 de 2; BUG-043 snow FIX verificado en código island_generator.gd:218-219; test headless Godot 4.7.2 1 fallo/exit1 (beach coverage=0, artefacto de muestreo no defecto); módulo queda 🟡 Con dudas, sin flip)
 3. M103-Logging (173/179): QA del estado 🟡 (6 [?], suites 131/0) — 8 [M] — [x] Hy3 (Log 2058, 2026-10-21: 131 checks/0 fallos ejecutados bajo Godot real; 4 suites + 5 .gd + config.tres en disco; §21.8 PASS, sello GLOBAL pendiente director)
 4. M105-Telemetría (129/162): QA del estado 🟡 tras corrección del director (33 [?]) — 10 [M] — [x] Hy3 (Log 2065, 2026-10-21: 81 checks/0 fallos en 5 suites bajo Godot real; 0 SCRIPT ERROR; guarda anti-falso-verde verificada por inyeccion roja; 21.8 PASS, estado Con dudas honesto)
 5. M104-Analytics (107/119): QA §21.8 cruzado (integridad PASS: 107[x]/4[ ]/8[?]=119 sin drift vs GLOBAL; test_analytics.gd 24/0/EXIT0 real, red 1/0→EXIT1; verificador≠autor; modulo queda Con dudas por deuda M90/M91) — 8 [M] — [x] Hy3 (Log 2074 / msg 303, 2026-10-21)

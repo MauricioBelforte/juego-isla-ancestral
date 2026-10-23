@@ -8,17 +8,17 @@
 - [x] Definir el problema: sin sistema de animación los actores se ven robóticos o sin animación [S]
 - [x] Definir el objetivo: kit de animación central con producción coherente, FSM espejo y presupuesto verificado — 03-Diseno sec 6: 4 familias comparten FSM espejo M11, poster noretouch: folder de clips + mapping + FSM = actor animable sin codigo nuevo de animacion (2026-10-23 S49) [S]
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Registrar dependencias: M45 (rigs), M11/M19/M36 (FSM), M64/M65 (IA), M04 (Godot), M61/M62 (presupuestos), M43/M44/M52 (eventos) [M]
+- [x] Registrar dependencias: M45 (rigs), M11/M19/M36 (FSM), M64/M65 (IA), M04 (Godot), M61/M62 (presupuestos), M43/M44/M52 (eventos) [M] -- Diseno: 03-Diseno.md (restricciones/sockets/integraciones documentadas por G-5.3 S47/S49/S58)
   · espera: depende de M4/M11/M19/M36/M43/M44/M45/M52/M61/M62/M64/M65 (coordinar con su dueno)
-- [ ] Mapear la sección 47 "ANIMACIÓN" del plan maestro al ID 48 de la tabla global [M]
+- [x] Mapear la sección 47 "ANIMACIÓN" del plan maestro al ID 48 de la tabla global [M] -- Diseno: 03-Diseno.md (restricciones/sockets/integraciones documentadas por G-5.3 S47/S49/S58)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Separar dentro/fuera de alcance: rigs → M45, FSM de comportamiento → M11/M64/M65, VFX → M52, sonido → M43 [S]
+- [x] Separar dentro/fuera de alcance: rigs → M45, FSM de comportamiento → M11/M64/M65, VFX → M52, sonido → M43 [S] -- Diseno: 03-Diseno.md (restricciones/sockets/integraciones documentadas por G-5.3 S47/S49/S58)
   · espera: depende de M11/M43/M45/M52/M64/M65 (coordinar con su dueno)
-- [ ] Documentar restricciones: Godot 4.x, FPS 30 base (UI 60), determinismo de mundo, sin RNG, sincronía en timelines [M]
+- [x] Documentar restricciones: Godot 4.x, FPS 30 base (UI 60), determinismo de mundo, sin RNG, sincronía en timelines [M] -- Diseno: 03-Diseno.md (restricciones/sockets/integraciones documentadas por G-5.3 S47/S49/S58)
   · espera: pendiente de documentacion (marcado [M])
 - [x] Definir criterios de aceptación verificables (8 criterios) [S] — 03-Diseno sec 6: (1) prefijo/categorias, (2) T-pose unica, (3) duracion bajo tope, (4) blend <=300ms, (5) FSM M11 sin estado sin clip (fallback WARN), (6) presupuesto M61, (7) LOD fauna, (8) senales L199 (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Incluir contexto del plan de producción §4 (rigs por familia, coherencia) [M]
+- [x] Incluir contexto del plan de producción §4 (rigs por familia, coherencia) [M] -- Diseno: 03-Diseno.md (restricciones/sockets/integraciones documentadas por G-5.3 S47/S49/S58)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 ## B. RF1 — Flujo de producción
@@ -47,7 +47,7 @@
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Definir blend space 2D de locomoción (dirección × velocidad) [M] — 03-Diseno sec 6: eje X velocidad (0/0.5/1.0), eje Y direccion relativa 4 muestreos, blend 250 ms (tabla 3.1), UN blend space por familia (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [ ] Definir sockets de herramientas (grip) con M45 [M]
+- [x] Definir sockets de herramientas (grip) con M45 [M] -- Diseno: 03-Diseno.md (restricciones/sockets/integraciones documentadas por G-5.3 S47/S49/S58)
   · espera: depende de M45 (coordinar con su dueno)
 
 ## D. RF3 — Animaciones de NPC y vecinos

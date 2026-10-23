@@ -147,7 +147,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 105 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 5.
+**Totales:** 106 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 5.
 **Nota:** la calibración visual de recetas queda para el prototipo (M1); el diseño geográfico está cerrado aquí.
 
 ---
@@ -224,3 +224,9 @@ Re-verificación empírica 2026-09-19 (grep global en `game/`): **0 referencias*
 - [x] Definir pesos de texturas del terreno (2-4 MB/material, 8-12 materiales/bioma, 16-48 MB/bioma) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #18
 - [x] Definir posicion de spawn del jugador ((0, get_height(0,0)+1, 0) en centro) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #19
 - [x] Definir tiempos de creacion/regeneracion del terreno (2-5s creacion, 1-3s regen, <10s total) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #20
+
+- [x] Definir Presupuesto de poligonos por bioma — tabla por bioma con rangos PCS y con formula de noise que divide como tu M129 (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de LOD levels por distancia — formula de distancia-vs-poligonos (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de texturas MB por bioma — formula de peso por material coordenada (cita de "Presupuestos numericos II" 03)
+- [x] Definir Presupuesto de tiempo de creacion/regeneracion < 30s — formula con M96/M112 numbers (cita de "Presupuestos numericos II" 03)
+- [x] Auditar presupuestos numericos del modulo (aritmetica + citas verificadas contra disco: data JSONs, mundo_raiz.gd, CHECKLIST-GLOBAL.md) — LOTE B integral del director (msg 235, 2026-10-23): 1 correccion FACTUAL (#19: spawn real = SPAWN_JUGADOR Vector3(3860,0,3860) a ~1838u del CENTRO (2560,2560) en la orilla (RADIO_ISLA 1800) — autoload mundo_raiz.gd, AGENTS.md §26; la formula "(0, get_height(0,0)+1, 0)" apuntaba a la esquina (0,0) del mundo 5120² = oceano); puntero 2da capa x4. Detalle: 03-Diseno.md secc "Presupuestos numericos". — Ling-3.1-Flash / Kilo Code [S]
