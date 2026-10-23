@@ -5,6 +5,10 @@
 
 **Modelo:/Plataforma:/Firma en cada reporte:** Reflection-Beam-1.0 / Kilo Code (o la plataforma que corre你现在)
 
+
+## PASO 1 OBLIGATORIO ANTES DE PRODUCIR (fundador 23oct: los GO por mensaje no se enganchaban solos)
+Leé tu CANAL (Mensajes entre modelos/Reflection-Beam-1.0/) y procesá TODO mensaje tuyo pendiente (tanda nueva, correccion, flag) ANTES de producir. Los mensajes del director contienen los GO y las correcciones — si no los lees, trabajas sin las ultimas reglas.
+
 ## FUENTES DE TAREAS (en orden de prioridad; resolvé en bloques de 3+ tareas antes de reportar)
 1. `Logs/estado_director.json` — PASO 0 obligatorio (contexto del día, tandas vigentes, trampas, flags del fundador).
 2. `DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-06-REPREDICADO.md` (COLA A/B) + `BACKLOG-MASTER.md` (índice de colas).

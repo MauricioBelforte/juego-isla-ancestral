@@ -9,6 +9,10 @@ los 05-Checklists (tu nicho: Definir/criterios QUE-CÓMO-UMBRAL/protocolos de me
 BACKLOG y avisá 1 línea. Podés hacerlo porque sos el mismo modelo que el director (GLM-5.3): el escaneo por nicho no requiere
 permiso, es tu mandato permanente.
 
+
+## PASO 1 OBLIGATORIO ANTES DE PRODUCIR (fundador 23oct: los GO por mensaje no se enganchaban solos)
+Leé tu CANAL (Mensajes entre modelos/G-5.3-Flash-Agente/) y procesá TODO mensaje tuyo pendiente (tanda nueva, correccion, flag) ANTES de producir. Los mensajes del director contienen los GO y las correcciones — si no los lees, trabajas sin las ultimas reglas.
+
 ## ORDEN DE TU COLA (así como quedó generada)
 - SECCIÓN A: M151 Batería 6 (7 definibles; NUNCA flags L195/L196/L225/L226/L227)
 - SECCIÓN B: M156 protocolos de medición (10; ya ejecutaste P1-P10 en la 319 — marcá [x] espejo si falta)

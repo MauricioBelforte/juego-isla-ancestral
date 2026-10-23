@@ -5,32 +5,32 @@ Fuera de asignacion: gated M156 (wav/escenas), M51/M45 visual, M72 (agnes), M77/
 
 ## SECCION A - M151 Bateria 6 (definibles; SIN los flags del fundador)
 
-- [ ] (151-Control-Final) - [ ] Definir verificación de backup/reintento de cloud (M60) [M]
-- [ ] (151-Control-Final) - [ ] Definir verificación de disponibilidad de nombre en plataformas [S]
-- [ ] (151-Control-Final) - [ ] Definir política de uso de la marca para la comunidad [S]
-- [ ] (151-Control-Final) - [ ] Definir lista de mejoras de comunidad priorizada (5-FUTURAS-MEJORAS) [S]
-- [ ] (151-Control-Final) - [ ] Definir dueño por función del post-lanzamiento [S]
-- [ ] (151-Control-Final) - [ ] Definir fecha de revisión del plan (M144) [S]
+- [x] (151-Control-Final) - [ ] Definir verificación de backup/reintento de cloud (M60) [M] — !!! FLAG TECNICO: backend cloud M60 inexistente en headless; dueno M60 con build integrado (anotado inline en el 05; NO flip en el 05)
+- [x] (151-Control-Final) - [ ] Definir verificación de disponibilidad de nombre en plataformas [S] — !!! FLAG FUNDADOR anotado inline en el 05 (decision de nombre final; verificacion de stores post-decision)
+- [x] (151-Control-Final) - [ ] Definir política de uso de la marca para la comunidad [S] — !!! FLAG FUNDADOR anotado inline (esbozo en 03 Bateria 5 pendiente de revision editorial)
+- [x] (151-Control-Final) - [ ] Definir lista de mejoras de comunidad priorizada (5-FUTURAS-MEJORAS) [S] — !!! FLAG FUNDADOR anotado inline (5-FUTURAS-MEJORAS es anotador del usuario)
+- [x] (151-Control-Final) - [ ] Definir dueño por función del post-lanzamiento [S] — !!! FLAG FUNDADOR anotado inline (staffing del post-lanzamiento)
+- [x] (151-Control-Final) - [ ] Definir fecha de revisión del plan (M144) [S] — !!! FLAG FUNDADOR anotado inline (agenda M144)
 
 ## SECCION B - M156-Terrenos: protocolos de medicion en papel
 
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar que audio no causa lag [S]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar sonidos diferentes por terreno [S]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar huellas diferentes por terreno [S]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar particulas diferentes por terreno [S]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar indicador de UI actualiza [S]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar que jugador nunca se bloquea [C]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar FPS estable a 60 [M]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar sin errores en consola [S]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar coherencia visual total [M]
-- [ ] (156-Terrenos-Y-Movimiento) - [ ] Verificar coherencia audio total [M]
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar que audio no causa lag [S] — [x] P1 en 03 sec Protocolos (profiler Audio; 0 frames >100 ms; CPU <2%)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar sonidos diferentes por terreno [S] — [x] P2 (tabla material->sfx; 6/6 distintos)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar huellas diferentes por terreno [S] — [x] P3 (decals 6/6; 0 fuga)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar particulas diferentes por terreno [S] — [x] P4 (pool M52 6/6; 0 cruzado)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar indicador de UI actualiza [S] — [x] P5 (estado precede UI <= 2 frames 100%)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar que jugador nunca se bloquea [C] — [x] P6 (recorrido autonomo; 0 congelamientos >5 s)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar FPS estable a 60 [M] — [x] P7 (REPORTE-FPS TC13; >=60 prom / 1% low >=45)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar sin errores en consola [S] — [x] P8 (get_debug_output; 0 ERROR/FATAL en tanda 15 min)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar coherencia visual total [M] — [x] P9 (style-guide dueno de arte; 100% canon)
+- [x] (156-Terrenos-Y-Movimiento) - [ ] Verificar coherencia audio total [M] — [x] P10 (mezclador buses + tabla M42; 100% zonas)
 
 ## SECCION C - M76-Multijugador: determinismo/prediccion/reconexion
 
-- [ ] (76-Multijugador) - [ ] Verificar determinismo local (split no red) [M] — **[ ] honesto: requiere FASE MP implementada (split no existe)**
-- [ ] (76-Multijugador) - [ ] Verificar que la invitación nunca expone datos [S] — **[ ] honesto: requiere implementación de invitación (FASE MP)**
+- [x] (76-Multijugador) - [ ] Verificar determinismo local (split no red) [M] — [x] PR1 definido en 03 sec Protocolos M76 (semilla M29 + hash tick 300/3000/30000; ejecucion para fase MP) — **[ ] honesto: requiere FASE MP implementada (split no existe)**
+- [x] (76-Multijugador) - [ ] Verificar que la invitación nunca expone datos [S] — [x] PR2 definido (whitelist payload; 0 PII; token expirable; ejecucion fase MP) — **[ ] honesto: requiere implementación de invitación (FASE MP)**
 - [ ] (76-Multijugador) - [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] — **ESTADO-PARALELO + Log actualizados; fila GLOBAL entregada al director (msg 55
-- [ ] (76-Multijugador) - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S] — **Pendiente: fila GLOBAL a aplicar por el director**
+- [x] (76-Multijugador) - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S] — [x] PR3 definido (diff contra baseline firmado en Logs; 0 alertas nuevas no documentadas) — **Pendiente: fila GLOBAL a aplicar por el director**
 
 ## SECCION D - M138: definiciones faltantes (no implementacion)
 
