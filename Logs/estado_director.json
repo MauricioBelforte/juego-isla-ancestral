@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-23T03:57:00",
+ "ultimo_update": "2026-10-23T07:10:00",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -580,5 +580,11 @@
   "presupuestos_ii": "23 definiciones de 2da capa montadas por el director en los 03/05 de 9 modulos (23oct 05:55) — Beam las audita"
  },
  "apilador_beam_ultimo": "298 (ORDEN TOTAL del fundador: hacer TODAS las colas pendientes de su backlog — 331 x10, 296 x13, 254 presupuestos restantes x27, 260 estrategia x5 tablas, COLA v3 leftover — emision-detalles en el mensaje; reporte por bloque consolidado)",
- "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)"
+ "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)",
+ "mimo": {
+  "canal": "NORMALIZADO al estandar 1-based (arch_0001-0100 + arch_0101-0200 fusionadas + sueltos en raiz movidos; la raiz queda SOLO con la centena en curso)"
+ },
+ "agua": {
+  "org": "listo"
+ }
 }
