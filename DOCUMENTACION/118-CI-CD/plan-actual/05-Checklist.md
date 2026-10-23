@@ -212,3 +212,10 @@
 **Por qué es deuda externa y no pendiente accionable desde M118-doc:** (a) quality.yml L286 → archivo prohibido + dueño M112/M83; (b) lint gate rojo en runner → requiere diagnóstico de CI (diferencia runner vs local) en testing.yml, fuera del rol QA documental; (c) timeout 15m de dev-build.yml → decisión de dueño. Ninguna de las 3 se cierra con documentación.
 
 **Recomendación para el director:** (1) autorizar a un agente con permiso a arreglar quality.yml L286-287 (error YAML puro, de bajo riesgo); (2) diagnosticar el lint gate en runner (el parse local con `--check-only` + colector pasa en Windows headless — ver Logs M41/M43 de hoy — pero falla en ubuntu-latest); (3) decidir el timeout de dev-build.yml (15m → mayor, o dividir Tests|Lint en jobs paralelos). Con los 3 verdes, L199 se flippea a `[x]` con el run verde como cita.
+
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 4 definiciones
+- [x] Definir triggers por workflow (push/tag/schedule, tabla de frecuencia semanal) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #2
+- [x] Definir ventanas de expiracion de artefactos (dev 7 dias, release 90 dias) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #4
+- [x] Definir presupuesto de runs simultaneos (max 20 concurrent, free tier) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
+- [x] Definir piso de checks minimos por workflow (lint 0 errors, test 100% pass, build success) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6

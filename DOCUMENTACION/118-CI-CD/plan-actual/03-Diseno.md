@@ -80,3 +80,12 @@ jobs:
 - Test de build release: generado en < 15 min, sin símbolos de debug
 - Test de calidad: verificación M111 passed antes de considerar exitoso
 - Test de despliegue: tag vX.Y.Z desencadena release a itch.io
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 2 | Triggers por workflow (push/tag/schedule) | Push a main/develop (diario, ~7-14/semana), tag (release, 1-2/mes), schedule (nightly, 7/semana) | Coherente con flujo de desarrollo (commits diarios, releases mensuales). |
+| 4 | Ventanas de expiracion de artefactos | Dev build: 7 dias. Release build: 90 dias. | Coherente con GitHub Actions retention (default 90 dias). |
+| 5 | Presupuesto de runs simultaneos | Max 20 concurrent jobs (GitHub Actions free tier). | Coherente con limite de GitHub Actions (20 concurrent para free tier). |
+| 6 | Piso de checks minimos por workflow | CHECKS_MINIMOS = [lint (0 errors), test (100% pass), build (success)]. | Coherente con M111 (codigo de calidad) y M112 (tests). |

@@ -408,3 +408,13 @@ echo Build completado
 - Tests de actualización incremental
 - Tests de reparación de instalación corrupta
 - Tests de desinstalación completa
+
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+
+| # | Presupuesto | Valor | Formula/Justificacion |
+|---|-------------|-------|----------------------|
+| 1 | Peso objetivo del instalador | <1.5 GB (base 5 GB comprimido con Inno Setup) | Media indie cozy: 500MB-2GB. 5 GB / 3.3 (compresion) = 1.5 GB. Coherente con M116 RequiredSpace 5 GB. |
+| 3 | Tamano maximo del saveset de fotos (user://photos/ + galeria) | Max 50 MB (50 fotos x 1 MB c/u) | Coherente con budget de disco del instalador (5 GB total). 50 MB / 5000 MB = 1%. |
+| 5 | Umbrales de version minima de OS/DirectX | Windows 10 build 19041+, DirectX 11 (feature level 11_0), 8 GB RAM, 5 GB espacio | Coherente con checks L183 (IsWindows10Or11) y L186 (IsDirectX11Available). Tabla versionada: Win10 19041+, DX11, 8GB, 5GB. |
+| 6 | Cobertura del desinstalador | 100% de archivos creados (app dir, registry, shortcuts, saves opcionales). Brecha 0. | Coherente con instalacion (todo lo que se crea, se limpia). |

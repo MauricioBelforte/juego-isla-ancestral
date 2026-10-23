@@ -309,3 +309,10 @@
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, paquete opción 1, bloque M152+M116)
 M116 auditado. Sustentado (0 degradaciones). Suites re-corridas POR AGNES: test_installer_m116 18/0 + test_instalador_m116 (build) 15/0, EXIT 0. 192 [x] en disco: scripts/installer/ (instalador_config) + scripts/build/ (build_config_manager, build_validator, validador_instalador) + data/installer + setup_windows.ps1 (fixtures m116). 0 [?]/0 [ ]. No tocar GLOBAL (flip = director).
+
+
+## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23) — 4 definiciones
+- [x] Definir peso objetivo del instalador (<1.5 GB, base 5 GB comprimido) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #1
+- [x] Definir tamano maximo del saveset de fotos (max 50 MB, 50 fotos x 1 MB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #3
+- [x] Definir umbrales de version minima de OS/DirectX (Win10 19041+, DX11, 8GB, 5GB) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #5
+- [x] Definir cobertura del desinstalador (100% archivos creados, brecha 0) [S] — Diseno: 03-Diseno.md "Presupuestos numericos" #6
