@@ -1434,8 +1434,8 @@ M104, M88, M160.
 ### SECCION A - COLA ACTIVA (repoblada por CRON D 2026-10-22 19:00 por orden fundador; fuentes en parentesis = literal del 05 del modulo)
 Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (Secretas L38 -> Comerciantes-cadenas L36 (solo cadenas, integracion M37 afuera) -> Puzzles L46 -> Investigacion L45; multi con lo en vuelo) 2) resto de M23 3) M59 4) M21 5) M69. Excluido a proposito: M56 y M93 (dueños activos/agotado). Produce-first, flip al pie, reporte minimo.
 - [ ] (23-Historias-Secundarias) - [ ] Crear la historia de la plaza [M] — la variante cadena-postgame-plaza de cadenas_ejemplo.json fue RECHAZADA por el validador en el merge (tipo de paso "construir" desconocido: 03-Diseno y TIPOS_PASO solo conocen hablar/explorar/puzzle/entregar; 0 usos del token en scripts/); cadena-epilogo-plaza del principal ya cubre la plaza post-final (L130). DECISION DEL DIRECTOR (msg 153, 2026-10-21): el rechazo es PERSISTENTE — no se agrega el tipo "construir" hoy (sin respaldo de diseño, mismo patrón que el rechazo de prereq_quest en M105) y el dato NO se migra sin orden. El flip de este ítem se otorga solo cuando el tipo exista o el dato se migre (ver ítem [?] siguiente). Log 2083 + Log 2085.
-- [ ] (23-Historias-Secundarias) - [ ] Crear las historias de 3 comerciantes (rutas y secretos) [M]
-- [ ] (23-Historias-Secundarias) - [ ] Documentar historias de familias y comerciantes [S]
+- [x] (23-Historias-Secundarias) - [x] Crear las historias de 3 comerciantes (rutas y secretos) [M] — Step-5-WorkBuddy 2026-10-23 (iter. 14, Log 2163): ya estaba [x] en el modulo desde la iter. 12 (Log 2135) y la cola quedo stale. En disco: cadena-ruta-del-mercader (mercedes_lince, mercader REAL), cadena-cargamento-de-telas (olivia_nutria) y cadena-secreto-del-yunque (ramon_tejon) en data/historias/secundarias.json, objetos REALES por campo id (OBJ-ITE-052, OBJ-ITE-010, OBJ-TAL-002). Se sincroniza la cola, no el modulo.
+- [x] (23-Historias-Secundarias) - [x] Documentar historias de familias y comerciantes [S] — Step-5-WorkBuddy 2026-10-23 (iter. 14, Log 2163): ya estaba [x] en el modulo desde la iter. 12 (Log 2135) — item COMPUESTO (familias + comerciantes), las dos mitades documentadas: 04-Codigo.md §Iter. 9 (familias) y §Iter. 12 (comerciantes). Cola sincronizada.
 - [ ] (23-Historias-Secundarias) - [ ] Crear el evento de siembra (M32) [M] — **Dueño M32:** evento estacional; 0 cadenas estacionales en data/historias/secundarias.json (4 cadenas del principal: faro, invernadero, epilogo-plaza, luciernagas; 5 tras el merge de ejemplos, Log 2083).
 - [ ] (23-Historias-Secundarias) - [ ] Crear el evento de vendimia [M] — **Dueño M32:** evento estacional; 0 en disco.
 - [ ] (23-Historias-Secundarias) - [ ] Crear el evento de marea [M] — **Dueño M32:** evento estacional; 0 en disco.
@@ -1731,3 +1731,65 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos tocados.
 - Pedidos al director (msg 192): ronda de commit de los paths de la tanda; sync fila 59 del
   GLOBAL a 115/130; visto bueno de los 3 flips; nota del defecto propio corregido.
+
+## Registro de la vuelta 2026-10-23 23:0x-23:5x (tracker 192 -> 194) - RAMA 1 acuse 194 + RAMA 2 M23 iter. 14 (Log 2163, canal 195/197)
+
+- RAMA 1: unico mensaje nuevo = **194** (acuse de mi 193: tanda 4 de M59 RATIFICADA,
+  115/13/2 = 130 exacto, fila 59 del GLOBAL sincronizada, mis 7 paths commiteados).
+  Verificado en disco antes de acusar: `git log -1 -- <path>` da **a30417b** para los
+  6 artefactos; fila 59 = 115/130 (L163). Tu 194 no trae trabajo nuevo ("segun tu
+  cola") -> RAMA 2. Consumido el **195** de mi pool (head medido 195 = ultimo+1);
+  pool queda 196..295 (100).
+- RAMA 2: **M23 iter. 14** desde la COLA ACTIVA. Hallazgo de entrada: la cola estaba
+  DESINCRONIZADA con el modulo — 2 items `[ ]` en la cola que ya eran `[x]` en
+  23-Historias-Secundarias/05-Checklist (L47/L48) desde la iter. 12 (Log 2135:
+  cadena-ruta-del-mercader, cadena-cargamento-de-telas, cadena-secreto-del-yunque).
+  Sincronizada la cola (mi archivo), NO el modulo.
+- Bloque NUEVO `_test_consecuencias` (bloque S, 21 checks) en
+  `scripts/historias/test_historias.gd`: cobertura de las 12 consecuencias de
+  03-Diseno L53 sobre los DOS catalogos (8 con respaldo / 4 sin), negativo acotado
+  del token `taller_abierto` sobre res://data y E2E de cadena-jardines y
+  cadena-cofradia con `ws_has(...)` de los dos flags. Piso 456 -> **477 checks /
+  0 fallos / EXIT 0 x2** (binario real). Guardian EN ROJO por inyeccion de runtime
+  Variant->Dictionary tipado: EXIT 1 nombrando el bloque S + "solo 457 checks
+  (minimo 477)"; sonda borrada, 0 archivos *sonda* en scripts/historias/.
+- **Corrida 1 en ROJO con 3 fallos y la causa fue mia, no del codigo:** (a) mi
+  medicion previa de cobertura usaba UN solo catalogo (secundarias.json) y daba
+  7/5; el universo correcto son los dos (el de ejemplos esta mergeado y vivo desde
+  iter. 3) y da 8/4 — `biblioteca_iluminada` la aplica cadena-biblioteca del
+  catalogo de ejemplos; (b) el negativo de `taller_abierto` se AUTO-PISO: buscaba
+  en res://data Y res://scripts y el propio archivo de test nombra el token en su
+  lista de las 12 (1 hit = test_historias.gd). Ademas una mencion en un script no
+  es "respaldo" de la consecuencia. Acotado a res://data con el alcance declarado.
+- **TRAMPA NUEVA de la sonda:** la primera inyeccion asignaba directo `Node` a una
+  variable tipada `Dictionary` -> error de PARSE: el archivo entero no compilaba y
+  la prueba no probaba nada (falso rojo). La inyeccion valida pasa por un
+  `Variant` intermedio (`var v: Variant = ...; var x: Dictionary = v`).
+- 2 flips con cita en M23 (mi modulo, GO vigente de tandas anteriores):
+  L108 "jardin florecido" y L111 "cofradia activa" `[ ]` -> `[x]` — respaldo =
+  flag aplicado por cadena-jardines / cadena-cofradia a WorldState (M21) via
+  secondary_stories_service.gd L232-236. L109 "taller abierto" queda `[ ]`
+  honesto con la medicion del vacio y la guarda del bloque. M23 = **71 [x] /
+  32 [ ] / 2 [?] = 105**; las DOS lineas de totales sincronizadas (L170 arrastraba
+  63/40/2 de la iter. 11 y ni la iter. 13 ni esta se habian volcado ahi).
+- Documentacion: 04-Codigo §Iter. 14, 06-Plan-Testings (bloque S + piso 477),
+  07-Resultados-Testings §10. Los 4 archivos LF puro sin BOM (invariante
+  verificada por bytes); BACKLOG-MASTER CRLF puro sin BOM.
+- Artefactos: Log 2163 (ASCII puro, CRLF, sin BOM), msjs 195/197 (UTF-8 sin BOM +
+  LF), tracker 192 -> 194, esta nota. Limites: 0 commits / 0 push / 0 auto-sellos
+  21.8 / 0 protegidos tocados (CHECKLIST-GLOBAL.md, quality.yml, AGENTS.md,
+  project.godot intactos).
+- Pedidos al director (msg 196): ronda de commit de los paths de la tanda; sync
+  fila 23 del GLOBAL a **71/105** (la fila sigue en el valor de la iter. 13);
+  visto bueno de los 2 flips (ofrecidos a revertir); reposicion de COLA ACTIVA si
+  se agota.
+- **COLISION DE NUMERACION (6.a familia, 092/097/103/106/114):** mi informe de
+  cierre iba a ser el 196 (ultimo+1 = 195 medido contra los archivos) y el
+  director tomo el 196 del pool a las 23:11:37
+  (`196-...-glm-5-3-flash-director-a-step-5-workbuddy-195-go-iter14-condicionado.md`,
+  GO con 4 condicionamientos, todos cumplidos). Reenumado a **197** =
+  max(archivos)+1 y consumido del pool. Regla: medir max(archivos) Y head real
+  del pool JUSTO antes de escribir.
+- Proxima: NN > 196; sin mensaje -> siguiente `[ ]` de la cola (cluster
+  Exploracion: "Crear 8 misiones de exploracion" + "Documentar cadenas y misiones
+  de exploracion").
