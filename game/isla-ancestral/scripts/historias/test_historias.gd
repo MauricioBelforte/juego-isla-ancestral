@@ -91,7 +91,7 @@
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -106,7 +106,7 @@ var _vistos: Dictionary = {}
 # end-to-end + 1 puente diario).
 # Medido: 456/0/EXIT 0. El guardian se probo EN ROJO por inyeccion de runtime
 # sobre el bloque R (ver Log 2137).
-const CHECKS_MINIMOS := 456
+const CHECKS_MINIMOS := 477
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -146,6 +146,7 @@ func _run() -> void:
 	_test_secretas()
 	_test_comerciantes()
 	_test_puzzles_investigacion()
+	_test_consecuencias()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -1507,3 +1508,114 @@ func _ids_items_reales() -> Dictionary:
 					out[partes[1]] = fn
 				break
 	return out
+
+## Iter. 14 (Log 2163): seccion "Consecuencias y dialogos posteriores" del
+## 05-Checklist. 03-Diseno L53 fija las 12 consecuencias persistentes; los items
+## L108 ("jardin florecido"), L109 ("taller abierto") y L111 ("cofradia activa")
+## piden 3 de ellas. Que el nombre figure en el diseno NO prueba que exista: se
+## mide cual tiene respaldo REAL en disco (flag aplicado por una cadena) y se
+## corre end-to-end las dos cuyos items se flippean. El negativo de
+## "taller_abierto" es una GUARDA: si algun dia el flag aparece, este check falla
+## y avisa que el item L109 dejo de ser honesto.
+func _test_consecuencias() -> void:
+	_h.restore_save_data({})
+	var ws := root.get_node_or_null("WorldState")
+	_check(ws != null, "WorldState presente (M21)")
+	# 1) Cobertura de las 12 consecuencias sobre los dos catalogos reales
+	var doce := ["faro_encendido", "jardin_florecido", "taller_abierto",
+		"plaza_decorada", "puente_cruzable", "cofradia_activa", "kiosko_abierto",
+		"molino_funcionando", "estacion_reparada", "biblioteca_iluminada",
+		"camino_al_faro_despejado", "puerto_ampliado"]
+	var principal := _leer_json("res://data/historias/secundarias.json")
+	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
+	var flags := {}
+	for c in principal + ejemplos:
+		var cons: Dictionary = (c as Dictionary).get("consecuencia", {})
+		for flag in cons:
+			flags[flag] = true
+	var con_respaldo := []
+	var sin_respaldo := []
+	for f in doce:
+		if flags.has(f):
+			con_respaldo.append(f)
+		else:
+			sin_respaldo.append(f)
+	_check(con_respaldo.size() == 8, "8 de las 12 consecuencias con respaldo en disco: %d (%s)" % [con_respaldo.size(), str(con_respaldo)])
+	_check(sin_respaldo.size() == 4, "4 de las 12 sin respaldo en disco: %d (%s)" % [sin_respaldo.size(), str(sin_respaldo)])
+	_check(flags.has("biblioteca_iluminada"),
+		"biblioteca_iluminada con respaldo: la aplica cadena-biblioteca del catalogo de ejemplos (mergeado y vivo, iter. 3)")
+	_check(con_respaldo.has("jardin_florecido") and con_respaldo.has("cofradia_activa"),
+		"jardin_florecido y cofradia_activa entre las CON respaldo (items L108/L111)")
+	_check(sin_respaldo.has("taller_abierto"),
+		"taller_abierto entre las SIN respaldo (item L109 queda [ ] honesto)")
+	# 2) Negativo acotado al arbol de DATOS (res://data): el token no existe en
+	# ningun catalogo .json ni recurso .tres. Alcance declarado: mide DATOS, no
+	# scripts. La primera version buscaba tambien en scripts/ y se AUTO-PISO: el
+	# propio archivo de test nombra el token en su lista de las 12, asi que el
+	# guardian se condenaba a fallar siempre (1 hit = res://scripts/historias/
+	# test_historias.gd). Ademas, una mencion en un script no es "respaldo" de la
+	# consecuencia: solo lo es el flag aplicado por una cadena.
+	var hits_taller := _token_en_arbol("taller_abierto", "res://data")
+	_check(hits_taller.is_empty(),
+		"token 'taller_abierto' ausente en res://data (%d hits: %s)" % [hits_taller.size(), str(hits_taller)])
+	# 3) End-to-end de las 2 cadenas cuyos items se flippean (estado limpio)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"baya_roja": 1})
+	var res: Dictionary = _h.iniciar_cadena("cadena-jardines")
+	_check(bool(res.ok), "iniciar cadena-jardines OK")
+	res = _h.reportar_paso("cadena-jardines", "hablar", "mateo_mapache")
+	_check(bool(res.ok), "jardines p1 hablar mateo_mapache OK")
+	res = _h.reportar_paso("cadena-jardines", "explorar", "jardines")
+	_check(bool(res.ok), "jardines p2 explorar jardines OK")
+	res = _h.reportar_entrega("cadena-jardines")
+	_check(bool(res.ok), "jardines p3 entregar baya_roja OK (inventario)")
+	res = _h.reportar_paso("cadena-jardines", "puzzle", "semillas-perdidas")
+	_check(bool(res.ok), "jardines p4 puzzle OK")
+	_check(_h.esta_completada("cadena-jardines"), "cadena-jardines completada end-to-end")
+	_check(ws_has("jardin_florecido"), "consecuencia jardin_florecido aplicada a WorldState (M21)")
+	if inv != null:
+		inv.agregar_items({"fragmento_ancestral": 1})
+	res = _h.iniciar_cadena("cadena-cofradia")
+	_check(bool(res.ok), "iniciar cadena-cofradia OK")
+	res = _h.reportar_paso("cadena-cofradia", "hablar", "mercedes_lince")
+	_check(bool(res.ok), "cofradia p1 hablar mercedes_lince OK")
+	res = _h.reportar_paso("cadena-cofradia", "explorar", "cofradia")
+	_check(bool(res.ok), "cofradia p2 explorar cofradia OK")
+	res = _h.reportar_entrega("cadena-cofradia")
+	_check(bool(res.ok), "cofradia p3 entregar fragmento_ancestral OK (inventario)")
+	res = _h.reportar_paso("cadena-cofradia", "puzzle", "sellos-antiguos")
+	_check(bool(res.ok), "cofradia p4 puzzle OK")
+	_check(_h.esta_completada("cadena-cofradia"), "cadena-cofradia completada end-to-end")
+	_check(ws_has("cofradia_activa"), "consecuencia cofradia_activa aplicada a WorldState (M21)")
+	# 4) Higiene: se apagan los flags para no contaminar un bloque posterior
+	if ws != null:
+		ws.set_flag("jardin_florecido", false)
+		ws.set_flag("cofradia_activa", false)
+	_fin("S")
+
+
+## Busca un token literal en un arbol (.json/.tres) y devuelve las rutas que lo
+## contienen. Alcance DECLARADO por quien llama: por defecto res://data (datos
+## del juego). No camina docs/, herramientas ni worktrees a proposito.
+func _token_en_arbol(token: String, raiz: String = "res://data") -> Array:
+	var hits := []
+	_scan_token(DirAccess.open(raiz), raiz, token, hits)
+	return hits
+
+
+func _scan_token(dir: DirAccess, ruta: String, token: String, hits: Array) -> void:
+	if dir == null:
+		return
+	for sub in dir.get_directories():
+		_scan_token(DirAccess.open(ruta + "/" + sub), ruta + "/" + sub, token, hits)
+	for fn in dir.get_files():
+		if not (fn.ends_with(".json") or fn.ends_with(".tres")):
+			continue
+		var f := FileAccess.open(ruta + "/" + fn, FileAccess.READ)
+		if f == null:
+			continue
+		var texto := f.get_as_text()
+		f.close()
+		if texto.find(token) != -1:
+			hits.append(ruta + "/" + fn)

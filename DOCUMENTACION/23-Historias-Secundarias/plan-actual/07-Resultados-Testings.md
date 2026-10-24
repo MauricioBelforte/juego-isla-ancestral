@@ -533,3 +533,40 @@ declarada del núcleo). 11 cadenas nuevas en `data/historias/secundarias.json`
 - Hallazgo (dueño M55): el puente M23->M55 degrada en silencio para las 11 nuevas
   (`mision_cadena-*` y `capitulo-*` ausentes del catálogo M55). No se inventa
   contenido de M55.
+
+## 10. Iter. 14 — consecuencias con respaldo + sincronización de cola (Log 2163, 2026-10-23)
+
+- Bloque S `_test_consecuencias()` nuevo (21 checks) al final de `_run()`.
+  Suite: **477 checks / 0 fallos / EXIT 0 x2** (binario real
+  `Godot_v4.7.2-stable_win64_console.exe --headless`, 0 SCRIPT ERROR).
+- **Corrida 1 EN ROJO (3 fallos, EXIT 1) y fue instructiva**, no un accidente:
+  - checks 1 y 2 fallaron con 8/4 en lugar de 7/5: la medición de cobertura
+    previa (hecha por herramienta externa sobre `secundarias.json` solamente)
+    ignoraba el catálogo de ejemplos, donde `cadena-biblioteca` aplica
+    `biblioteca_iluminada`. El universo correcto son los DOS catálogos.
+  - el negativo de `taller_abierto` falló con 1 hit:
+    `res://scripts/historias/test_historias.gd` — el guardián se auto-pisaba
+    porque su propio archivo nombra el token en la lista de las 12.
+  Corregido el universo y acotado el negativo a `res://data`; corrida 2 en
+  VERDE (477/0).
+- Guardián EN ROJO por inyección de runtime: `var _v: Variant =
+  get_node_or_null("WorldState")` -> `var _sonda: Dictionary = _v` al inicio del
+  bloque S. EXIT 1 con «el bloque S NO se ejecuto (posible SCRIPT ERROR que
+  aborto la funcion)» + «solo 457 checks ejecutados (minimo 477)» (2 fallos).
+  Primera versión de la sonda: asignación directa `Node` -> `Dictionary` =
+  error de PARSE (el archivo no compilaba: falso rojo que no prueba nada); la
+  inyección válida pasa por un `Variant` intermedio. Sonda borrada, 0 archivos
+  `*sonda*` en `scripts/historias/`.
+- Regresiones: la tanda no cambia código de producción (0 archivos .gd de
+  producción editados), solo el archivo de test y documentación. Suite propia
+  477/0 x2.
+- Flips con cita: L108 («jardín florecido») y L111 («cofradía activa») [ ] ->
+  [x], respaldo = flag aplicado por cadena-jardines / cadena-cofradia a
+  WorldState (M21) vía `secondary_stories_service.gd` L232-236, verificado
+  end-to-end en el bloque S. L109 («taller abierto») queda [ ] con la medición
+  del vacío (0 cadenas + 0 hits del token en res://data) y la guarda del bloque.
+  M23 = **71 [x] / 32 [ ] / 2 [?] = 105**; las dos líneas de totales
+  sincronizadas (L170 arrastraba 63/40/2 de la iter. 11).
+- Sincronización de la COLA ACTIVA del BACKLOG-MASTER: 2 ítems que ya estaban
+  [x] en el módulo desde la iter. 12 (comerciantes; documentar familias y
+  comerciantes) marcados [x] en la cola con cita.

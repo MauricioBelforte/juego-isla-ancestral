@@ -678,3 +678,79 @@ verificado por bytes).
   -> [x] (L91) y «Documentar misiones de puzzles» [ ] -> [x] (L93). M23 =
   69 [x] / 34 [ ] / 2 [?] = 105 (verificado por prefijo de línea). Las DOS
   líneas de totales sincronizadas a 69/34/2.
+
+## Iter. 14 — Consecuencias con respaldo en disco + sincronización de la cola (Step-5-WorkBuddy, 2026-10-23, Log 2163)
+
+Tanda de cierre documental, no de contenido nuevo: la COLA ACTIVA del
+BACKLOG-MASTER estaba desincronizada con el módulo y la sección «Consecuencias y
+diálogos posteriores» tenía ítems `[ ]` cuyo respaldo ya existía en disco.
+
+- **Des sincronización de la cola (medida):** los ítems «Crear las historias de 3
+  comerciantes» y «Documentar historias de familias y comerciantes» figuraban
+  `[ ]` en la COLA ACTIVA del `DOCUMENTACION/TAREAS-POR-MODELO/step-5-workbuddy/
+  BACKLOG-MASTER.md`, pero están `[x]` en este checklist (L47/L48) desde la
+  **iter. 12 (Log 2135)**: `cadena-ruta-del-mercader`, `cadena-cargamento-de-telas`
+  y `cadena-secreto-del-yunque` existen en `data/historias/secundarias.json` con
+  NPC REALES (`mercedes_lince` mercader, `olivia_nutria`, `ramon_tejon`). Se
+  sincroniza la cola (mi archivo), no el módulo.
+- **Cobertura de las 12 consecuencias (03-Diseno L53) medida sobre los dos
+  catálogos reales:** 8 con respaldo (`faro_encendido`, `jardin_florecido`,
+  `plaza_decorada`, `puente_cruzable`, `cofradia_activa`, `molino_funcionando`,
+  `estacion_reparada`, `biblioteca_iluminada`) y 4 sin respaldo
+  (`taller_abierto`, `kiosko_abierto`, `camino_al_faro_despejado`,
+  `puerto_ampliado`). Primera medición hecha solo sobre `secundarias.json` daba
+  7/5: `biblioteca_iluminada` la aplica `cadena-biblioteca` del catálogo de
+  ejemplos, que está mergeado y vivo desde la iter. 3 (Log 2083). El universo se
+  mide antes de publicar la cifra.
+- **Flips con cita:** «Crear la consecuencia "jardín florecido"» [ ] -> [x]
+  (L108) y «Crear la consecuencia "cofradía activa"» [ ] -> [x] (L111). El
+  respaldo no es el nombre en el diseño: es el flag aplicado por una cadena a
+  WorldState (M21) vía `secondary_stories_service.gd` L232-236
+  (`ws.set_flag(String(flag), bool(consec[flag]))` al completar la cadena),
+  verificado end-to-end en el bloque S nuevo. «Crear la consecuencia "taller
+  abierto"» (L109) queda `[ ]` honesto: 0 cadenas aplican el flag en ninguno de
+  los dos catálogos y 0 hits del token en `res://data`.
+- **Suite `scripts/historias/test_historias.gd`: bloque S
+  `_test_consecuencias()`** (21 checks) al FINAL de `_run()`: cobertura de las 12
+  consecuencias (8 con / 4 sin respaldo, con la fuente de `biblioteca_iluminada`
+  afirmada), negativo acotado del token `taller_abierto` sobre `res://data` y
+  end-to-end de `cadena-jardines` (mateo_mapache, jardines, baya_roja REAL,
+  semillas-perdidas) y `cadena-cofradia` (mercedes_lince, cofradia,
+  fragmento_ancestral REAL, sellos-antiguos) con `ws_has(...)` de los dos flags.
+  Helper nuevo `_token_en_arbol(token, raiz)` con recorrido DirAccess recursivo.
+  BLOQUES A-S. Piso 456 -> **477 checks / 0 fallos / EXIT 0 x2** (binario real,
+  0 SCRIPT ERROR).
+- **TRAMPA NUEVA (la estrella de la vuelta): el negativo se auto-pisó.** La
+  primera versión del guardián buscaba el token `taller_abierto` en
+  `res://data` Y `res://scripts`... y el propio archivo de test nombra el token
+  en su lista de las 12, así que el guardian fallaba siempre contra sí mismo
+  (1 hit = `res://scripts/historias/test_historias.gd`). Además, una mención en
+  un script no es "respaldo" de la consecuencia: solo lo es el flag aplicado por
+  una cadena. El negativo se acotó a `res://data` (datos del juego) y el alcance
+  quedó declarado en el comentario y en el mensaje del check.
+- **Segunda trampa de la vuelta: la primera medición de cobertura usaba UN solo
+  catálogo.** Hecha sobre `secundarias.json` daba 7 con respaldo / 5 sin; sobre
+  los dos catálogos (el de ejemplos está mergeado y vivo) da 8 / 4. La suite
+  corrigió la cifra antes de que se publicara: los checks 1 y 2 del bloque S
+  fallaron en la primera corrida con los números del universo chico.
+- **Guardián EN ROJO por inyección de runtime:** sonda con
+  `var _v: Variant = get_node_or_null(...)` -> `var _sonda: Dictionary = _v`
+  (Variant -> Dictionary tipado) al inicio del bloque S. EXIT 1 con
+  «el bloque S NO se ejecuto (posible SCRIPT ERROR que aborto la funcion)» +
+  «solo 457 checks ejecutados (minimo 477)» (2 fallos). La primera versión de la
+  sonda asignaba directo `Node` a `Dictionary` y era error de PARSE: el archivo
+  entero no compilaba y la prueba no probaba nada (falso rojo). La inyección
+  válida pasa por un `Variant` intermedio. Sonda borrada, 0 archivos `*sonda*`
+  en `scripts/historias/` y `git status` limpio de ese directorio.
+- **Regresiones medidas tras la tanda (binario real, EXIT 0):** la propia suite
+  477/0 x2; M22 `test_m22*.gd` y M71 progresión no se re-corrieron en esta
+  vuelta (no hubo cambio de código de producción: la tanda edita datos de
+  documentación y el archivo de test). Cambios de código de producción: 0.
+- **Flips del 05-Checklist con cita:** L108 y L111 `[ ]` -> `[x]`; L109 queda
+  `[ ]` con la medición escrita. M23 = **71 [x] / 32 [ ] / 2 [?] = 105**
+  (verificado por prefijo de línea). Las DOS líneas de totales sincronizadas a
+  71/32/2 (L170 arrastraba el valor de la iter. 11, 63/40/2, y ni la iter. 13
+  ni esta se habían volcado ahí).
+- **Sincronización de la COLA ACTIVA del BACKLOG-MASTER:** 2 ítems `[ ]` ->
+  `[x]` con cita (comerciantes y documentar familias+comerciantes), más la nota
+  de esta vuelta. La cola queda en 13 `[x]` / 103 `[ ]`.

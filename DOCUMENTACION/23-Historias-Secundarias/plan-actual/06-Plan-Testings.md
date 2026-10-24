@@ -118,3 +118,23 @@ corre con el binario real:
   M55), cosméticos y consecuencias visuales: dueños de contenido/M53/M45/M17/M18/M27.
 - Variaciones de postgame *por tipo de final* (variantes narrativas): el gate
   implementado es binario (final elegido sí/no); la variación es de M22/contenido.
+
+## Iter. 14 (Log 2163) — bloque S `_test_consecuencias`
+
+Cubre la sección «Consecuencias y diálogos posteriores» del checklist (L106-L115):
+
+1. **Cobertura de las 12 consecuencias** de 03-Diseno L53 sobre los dos catálogos
+   reales (`secundarias.json` + `cadenas_ejemplo.json`): 8 con respaldo / 4 sin
+   respaldo, con las dos listas afirmadas por contenido y la fuente de
+   `biblioteca_iluminada` (catálogo de ejemplos, mergeado y vivo) afirmada aparte.
+2. **Negativo acotado del token `taller_abierto`** sobre `res://data`
+   (`.json`/`.tres`, recorrido DirAccess recursivo). Alcance declarado: mide
+   DATOS, no scripts — una mención en un script no es respaldo de la consecuencia
+   y, además, el propio test nombra el token (auto-pis medido en la corrida 1).
+3. **End-to-end de las 2 cadenas cuyos ítems se flippean** (`cadena-jardines` y
+   `cadena-cofradia`) con `ws_has(...)` de `jardin_florecido` y
+   `cofradia_activa` sobre WorldState (M21).
+
+Piso: 456 -> **477** (`CHECKS_MINIMOS` MEDIDO en verde, no estimado). Bloques
+A-S. Guardián EN ROJO por inyección de runtime Variant -> Dictionary tipado
+(EXIT 1 nombrando el bloque S + piso no cumplido). Ver 07-Resultados-Testings.
