@@ -76,7 +76,7 @@ for cola in (st.get("orden") or QUEUES):
                       "### Tus %d tareas (en orden; reporte compacto al cerrar: `modulo | ok | skip | fail` por lote de linea)" % len(tareas),
                       ""]
         for mod, ln_n, cuerpo in tareas:
-            lineas.append("- **[%s L%d]** %s" % (mod, ln_n, cuerpo))
+            lineas_out.append("- **[%s L%d]** %s" % (mod, ln_n, cuerpo))
         lineas += ["", "### Notas",
                    "- Skip automático: %d items del rango ya estaban [x] (cerrados por vos u otro; no repetir)." % cerrados,
                    "- Cubo B/C/D (editor/pipeline/producto): NO ejecutar — reportalos como skip con motivo.",
