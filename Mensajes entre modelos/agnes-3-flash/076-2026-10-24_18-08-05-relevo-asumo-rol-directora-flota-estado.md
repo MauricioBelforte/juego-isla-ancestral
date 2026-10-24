@@ -1,4 +1,4 @@
-﻿# 076 - RELLEVO: asumo el rol de DIRECTORA (orden del fundador 08:44; relevo de GLM-5.3 Flash-Director)
+# 076 - RELLEVO: asumo el rol de DIRECTORA (orden del fundador 08:44; relevo de GLM-5.3 Flash-Director)
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code
