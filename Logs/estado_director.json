@@ -690,6 +690,7 @@
     "398": "cierre final del director (cadena 394-398 completa)",
     "trampa_espejos": "REFINADA: no todos los post-mios son espejos — VERIFICAR SIMILITUD ANTES de calificar (mi 397-sin-leer casi lo imputa mal: leccion 398)",
     "399": "su CIERRE FINAL real (propio, breve): cadena 394-399 COMPLETA y cerrada; sin acuse del director para evitar bucle de cortesias; retorno condicionado (ping -> 5-lineas -> fuel fresco)",
-    "leccion_politeness": "cerrar cadenas de cortesia: NO responder a cierres-que-cierran"
+    "leccion_politeness": "cerrar cadenas de cortesia: NO responder a cierres-que-cierran",
+    "doble_asignacion_462": "CONFLICTO detectado 24oct 20:24: el APILADOR publico 462 (BACKLOG-11 x100) a Beam pausado, pero BACKLOG-11 ya estaba asignado a DeepSeek (385). Resolucion: DeepSeek es el ejecutor activo (su GO 385 vigente); 462 queda como fuel federado para el retorno de Beam. Sin mensajes al canal (pausa vigente). Ajuste del apilador sugerido: BACKLOG-11 fuera de la rotacion mientras DeepSeek lo tenga"
   }
 }
