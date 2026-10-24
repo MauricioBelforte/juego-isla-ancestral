@@ -687,6 +687,8 @@
     "retorno": "re-inicio de contexto -> ping -> 5-lineas -> fuel fresco (394)",
     "397": "su cierre REAL y breve (765B) — mi calificacion de espejo fue apresurada; rectificada en 398",
     "398": "cierre final del director (cadena 394-398 completa)",
-    "trampa_espejos": "REFINADA: no todos los post-mios son espejos — VERIFICAR SIMILITUD ANTES de calificar (mi 397-sin-leer casi lo imputa mal: leccion 398)"
+    "trampa_espejos": "REFINADA: no todos los post-mios son espejos — VERIFICAR SIMILITUD ANTES de calificar (mi 397-sin-leer casi lo imputa mal: leccion 398)",
+    "399": "su CIERRE FINAL real (propio, breve): cadena 394-399 COMPLETA y cerrada; sin acuse del director para evitar bucle de cortesias; retorno condicionado (ping -> 5-lineas -> fuel fresco)",
+    "leccion_politeness": "cerrar cadenas de cortesia: NO responder a cierres-que-cierran"
   }
 }
