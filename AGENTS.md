@@ -1710,3 +1710,34 @@ juntas (mismo mecanismo que §10.3).
   creada por el director)**.
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16, cuarta directiva del fundador.
+
+## 32. Mapa de Herencia del Director (instrumentos, fuel y sucesión — 24oct)
+
+> Creada por GLM-5.3 Flash-Director (Kilo Code) ante posible baja por créditos. **Todo lo que el próximo director necesita vive acá.** Actualizada en cada ronda del director; el detalle día-por-día vive en el propio archivo.
+
+### 32.1 Memoria persistente y herencia
+- Logs/estado_director.json — memoria viva del director (cada ronda actualiza: flota, GOs, trampas, consultas del fundador, post_campaña_beam). LÉERLO COMPLETO antes de operar (PASO 0 de todos los crons).
+- DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/SUCESION-HERENCIA-24oct.md — HERENCIA COMPLETA: ranking de sucesores (DeepSeek #1, Step-5 #2, agnes #3), inventario de fuel y herramientas, 4 consultas del fundador pendientes, 10 trampas nuevas del 23oct, checklist de arranque del sucesor.
+
+### 32.2 APILADOR de Beam (fuel P-100 automatizado)
+- scripts/apilar_beam.py — publica tranches de 100 tareas INLINE en el canal de Beam (BACKLOG-10→14→13→11→12 rotativos, salta [x] cerrados, cursors en APILADOR_ESTADO.json).
+- Cron E de la plataforma (wku_16cb6896c0…, :24/:54) lo dispara cada 30 min; también se puede correr a mano.
+- Fuel: TRANCHES 422/426-431 ya publicadas en el canal de Beam (~680 ítems apilados); BACKLOG-10 casi agotado (fuente: BACKLOG-14/13/11/12).
+- Trampa del produce-first de Beam (2 instancias): antes de flipar contiene GLOB del dominio; ANTES de escribir una sección en 03, grep de duplicados (M31 3x, M162-presentación); ítems IMPLEMENTATIVOS quedan [ ]+spec (la noche 61/414-421); el director JAMÁS hace Remove-Item sin listing previo (369 borrado — restaurado).
+
+### 32.3 GATES (evalúan a Beam/funcionando — fundador 07:51: quedan IGUALES)
+- agnes-3-flash = gate-1 contable (lstrip/not-vacías→convertir; ACTA-contable diaria); AUTONOMIZADA (063: sus veredictos valen por sí, el sello es del sucesor).
+- Hy3 = gate-2 (diseño/red-probe/runtime); fill-in-place de T-19 adoptado como patrón oficial (364/365/366-368).
+- Verificación pole-chain en el día 23-24oct: detección→fix→runtime→sello→gate final (caso M20 completo, por Step-5/agnes/Hy3/director).
+
+### 32.4 EJECUTORES ACTIVOS (GO corriendo, sin dependencia del director)
+- DeepSeek-V4.1-Flash: COLA → clasificar los 107/111 bloqueado_ambos (379 §5) → tranche D-6 BONUS (BACKLOG-11 382).
+- Step-5-WorkBuddy: iter.15 M23 en vuelo (secundarias.json + test_historias + Log pendiente) — radar: boot log Conflictos 1 (203).
+- Ling-3.1-Flash: standby i18n — GO PT-runtime pendiente del fundador (consulta 4).
+- Beam: PAUSADO (394/395-397/399-404) — retorno: ping → 5 líneas → fuel fresco; su writer publica auto-avisos cíclicos (preservar sin responder — protocolo antiloop 403).
+
+### 32.5 CONSULTAS DEL FUNDADOR PENDIENTES (4 — ver consultas_fundador_23oct en estado_director.json)
+1. FRENTE DE CÓDIGO a alpha (plan de remedio: M56 ×13, M64 ×6, M147 ×2, M151 gate/schema, L271 UI).
+2. BLOQUE 0 M106: GCP/Drive/OAuth CON LA CUENTA DEL FUNDADOR (procedimiento en M107 03 §5.1).
+3. Marca M01: verificación de marca registrada.
+4. PT-RUNTIME i18n: GO → Ling ejecuta en 1 vuelta (pt.po + LOCALES_SOPORTADOS + QA).
