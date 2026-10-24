@@ -25,7 +25,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 AUDITOR = os.path.join(AQUI, "auditar_indice_m01.py")
 PY = sys.executable
 
-CHECKS_MINIMOS = 15  # medido en verde; se ajusta SOLO tras medir
+CHECKS_MINIMOS = 30  # medido en verde (30/0 x3) el 2026-10-23; se ajusta SOLO tras medir
 
 _checks = 0
 _fallos = 0
@@ -41,8 +41,12 @@ def chequear(cond, desc):
         print("[FALLO] %s" % desc)
 
 
-def construir(base, marcas, estado_global, carpetas=True, con_global=True, n_items=152):
-    """Arma un arbol sintetico. `marcas` = lista de marcas del indice (len n_items)."""
+def construir(base, marcas, estado_global, carpetas=True, con_global=True, n_items=152, estados=None):
+    """Arma un arbol sintetico. `marcas` = lista de marcas del indice (len n_items).
+
+    `estados` (opcional): dict {numero_de_fila: estado} para fijar filas concretas
+    del GLOBAL. Las no listadas caen al comportamiento por defecto.
+    """
     os.makedirs(os.path.join(base, "scripts"))
     shutil.copy2(AUDITOR, os.path.join(base, "scripts", "auditar_indice_m01.py"))
     doc = os.path.join(base, "DOCUMENTACION")
@@ -70,7 +74,9 @@ def construir(base, marcas, estado_global, carpetas=True, con_global=True, n_ite
                  "|---|---|---|---|---|---|---|---|---|---|---|"]
         for i in range(n_items):
             num = i + 2
-            estado = estado_global if i == 0 else "\U0001F7E1 Con dudas"
+            estado = (estados or {}).get(num)
+            if estado is None:
+                estado = estado_global if i == 0 else "\U0001F7E1 Con dudas"
             filas.append("| %d | mod-%d | %s | 1/1 | M | 1 | - | - | - | - | nota |" % (num, num, estado))
         with open(os.path.join(base, "CHECKLIST-GLOBAL.md"), "w", encoding="utf-8", newline="\n") as f:
             f.write("\n".join(filas) + "\n")
@@ -149,6 +155,63 @@ def main():
         datos = json.loads(out)
         chequear(datos["registros"][0]["carpeta_esperada"] == 2, "H: M01 -> carpeta 02 (desplazamiento +1)")
         chequear(datos["registros"][0]["carpeta"] == "02-Modulo-02", "H: resuelve la carpeta 02")
+
+        # --- Bloque I: clasificacion de los [ ] por la condicion que los bloquea
+        ib = os.path.join(base, "I")
+        # filas 2..5: M01 OK, M02 amarillo, M03 OK, M04 amarillo; el resto amarillo
+        construir(ib, [" "] * 152, OK, estados={2: OK, 3: AMARILLO, 4: OK, 5: AMARILLO})
+        # M03 -> carpeta 04: GLOBAL dice OK pero la checklist tiene un [?]
+        with open(os.path.join(ib, "DOCUMENTACION", "04-Modulo-04", "plan-actual", "05-Checklist.md"),
+                  "w", encoding="utf-8", newline="\n") as f:
+            f.write("- [x] cerrado\n- [?] con dudas\n")
+        # M04 -> carpeta 05: GLOBAL amarillo y la checklist tiene un [ ]
+        with open(os.path.join(ib, "DOCUMENTACION", "05-Modulo-05", "plan-actual", "05-Checklist.md"),
+                  "w", encoding="utf-8", newline="\n") as f:
+            f.write("- [x] cerrado\n- [ ] pendiente\n")
+
+        rc, out = correr(ib, "--pendientes")
+        chequear(rc == 0, "I: --pendientes exit 0")
+        chequear("items [ ] en el indice : 152" in out, "I: cuenta los 152 pendientes")
+        chequear("[1] resoluble_headless" in out, "I: 1 resoluble headless (M01)")
+        chequear("[149] bloqueado_global" in out, "I: 149 bloqueados por la FILA GLOBAL")
+        chequear("[1] bloqueado_checklist" in out, "I: 1 con el GLOBAL sobre-afirmado (M03)")
+        chequear("[1] bloqueado_ambos" in out, "I: 1 dependiente del modulo (M04)")
+        chequear("CASI CERRADAS (abiertos <= 5): 2" in out, "I: 2 casi cerradas (M03 y M04)")
+        chequear("[0] sin_checklist" in out, "I: 0 sin checklist")
+
+        rc, out = correr(ib, "--json")
+        datos_i = json.loads(out)
+        cats = [r["categoria_pendiente"] for r in datos_i["registros"][:4]]
+        chequear(cats == ["resoluble_headless", "bloqueado_global",
+                          "bloqueado_checklist", "bloqueado_ambos"],
+                 "I: una categoria por item, en orden")
+        chequear(datos_i["pendientes"]["por_categoria"]["bloqueado_ambos"] == 1,
+                 "I: el JSON agrega bien bloqueado_ambos")
+
+        # un [x] nunca entra en la clasificacion de pendientes (bloque A: M01 esta [x])
+        rc, out = correr(a, "--json")
+        chequear(json.loads(out)["registros"][0]["categoria_pendiente"] is None,
+                 "I: un item [x] no se clasifica como pendiente")
+
+        # --- Bloque J: prueba EN ROJO del clasificador, por inyeccion y con restauracion
+        import hashlib
+        copia = os.path.join(ib, "scripts", "auditar_indice_m01.py")
+        orig = open(copia, "rb").read()
+        sha_antes = hashlib.sha256(orig).hexdigest()
+        roto = orig.replace(b'    if r["candidato"]:\n        return "resoluble_headless"\n',
+                            b'    if False:\n        return "resoluble_headless"\n')
+        chequear(roto != orig, "J: la inyeccion encontro su ancla (el archivo cambio)")
+        with open(copia, "wb") as f:
+            f.write(roto)
+        rc, out = correr(ib, "--pendientes")
+        chequear("[0] resoluble_headless" in out,
+                 "J: con el clasificador ciego el resoluble DESAPARECE (sonda ROJA)")
+        with open(copia, "wb") as f:
+            f.write(orig)
+        chequear(hashlib.sha256(open(copia, "rb").read()).hexdigest() == sha_antes,
+                 "J: restauracion byte-exacta por sha256")
+        rc, out = correr(ib, "--pendientes")
+        chequear("[1] resoluble_headless" in out, "J: tras restaurar vuelve el verde")
 
     finally:
         shutil.rmtree(base, ignore_errors=True)

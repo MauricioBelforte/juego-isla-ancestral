@@ -1404,3 +1404,9 @@ NPC
 | `world.hour` | int | Hora del día (0-23) |
 | `player.location` | string | Ubicación actual |
 | `quest.completed[quest_id]` | bool | Misión completada |
+
+### Nota de alcance: presentacion de dialogo (referencia cruzada)
+
+La capa de PRESENTACION del dialogo NO es de este modulo: la provee DialogLayer (M53/M21, montada por UIRoot; main_island._crear_ui_dialogo() con fallback DialogueUI) y el input se bloquea en ModoCamara.DIALOG/CUTSCENE (follow_camera.gd). Este modulo cubre SOLO la LOGICA de seleccion contextual (ContextualDialogueManager + registry.json).
+
+Cita: D-3.1 (Beam 367), remedio CORREGIR-DOC del plan de remedio Hy3 348, aplicado por Beam bajo GO del fundador 23:13 (353-directiva) y ratificado por director 368.

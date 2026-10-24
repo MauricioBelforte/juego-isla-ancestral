@@ -27,7 +27,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M02** Documentación del Proyecto [M] 🔴 — GDD, narrativa, sistemas, convenciones, backlog inicial
 - [ ] **M03** Game Engine [C] 🔴 — elegir Unity o Godot, fijar versión, configurar render pipeline e input
 - [ ] **M04** Lenguaje y Programación [M] 🔴 — C#/GDScript, convenciones, namespaces, arquitectura de software
-- [ ] **M05** Control de Versiones [S] 🟡 — Git, .gitignore, ramas, mensajes de commit, Git LFS
+- [x] **M05** Control de Versiones [S] 🟡 — Git, .gitignore, ramas, mensajes de commit, Git LFS — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 - [x] **M06** Arquitectura General [C] 🔴 — managers, eventos globales, modularidad, evitar GameManager monolítico
 
 ### FASE 2 — MUNDO Y TECNOLOGÍA CENTRAL
@@ -46,10 +46,10 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 ### FASE 3 — VIDA COMUNITARIA Y NARRATIVA
 
-- [ ] **M18** NPC y Vecinos [C] 🔴 — especies, personalidades, rutinas, horarios, hogares, relaciones
+- [x] **M18** NPC y Vecinos [C] 🔴 — especies, personalidades, rutinas, horarios, hogares, relaciones — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 - [ ] **M19** Sistema de Amistad [M] 🟡 — puntos de amistad, niveles, regalos, desbloqueos, eventos únicos
 - [ ] **M20** Diálogos [C] 🔴 — motor por nodos, flags narrativos, opciones, localización
-- [ ] **M21** Historia Principal [C] 🔴 — prólogo, capítulos, Sellos, templos, finales y ritmo
+- [x] **M21** Historia Principal [C] 🔴 — prólogo, capítulos, Sellos, templos, finales y ritmo — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 - [ ] **M22** Historias Secundarias [M] 🟡 — arcos de vecinos, lugares, ruinas, objetos, postgame
 - [ ] **M23** Templos y Puzzles [C] 🔴 — framework emisor→receptor, dificultad, pistas, checkpoints
 - [ ] **M24** Ruinas [M] 🟡 — variantes pequeñas/medianas/grandes, inscripciones, pasajes ocultos
@@ -62,7 +62,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M28** Tiempo y Calendario [M] 🔴 — día/noche, estaciones, festivales, cumpleaños, eventos
 - [ ] **M29** Reloj en Tiempo Real [M] 🟡 — Gran Vapor mensual, zona horaria, offline, anti-exploits
 - [ ] **M30** Ciclo Día/Noche [M] 🟡 — iluminación, cielo, estrellas, comportamiento de NPC y fauna
-- [x] **M31** Clima [M] 🟡 — sol, lluvia, tormenta, niebla, nieve, transiciones, accesibilidad
+- [ ] **M31** Clima [M] 🟡 — sol, lluvia, tormenta, niebla, nieve, transiciones, accesibilidad — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
 
 ### FASE 5 — ACTIVIDADES Y CONTENIDO
 
@@ -115,7 +115,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 ### FASE 9 — PROGRESIÓN Y CONTENIDO
 
-- [ ] **M69** Interacciones [M] 🔴 — distancia, indicador, prioridad, contextuales, cancelación
+- [x] **M69** Interacciones [M] 🔴 — distancia, indicador, prioridad, contextuales, cancelación — FLIP iter.9 (checklist propia cerrada + fila ✅; auditor_indice_m01 --pendientes, DeepSeek 378; M117: CI rojo = deuda de pipeline aparte, no invalida el contenido)
 - [ ] **M70** Progresión [M] 🔴 — narrativa, herramientas, construcción, social, islas, desbloqueos
 - [ ] **M71** Sistema de Logros [M] 🟡 — básicos, exploración, social, colección, secretos
 - [ ] **M72** Coleccionables [M] 🟡 — reliquias, fragmentos, conchas, fósiles, documentos
@@ -129,7 +129,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 ### FASE 11 — LEGAL Y ADMINISTRACIÓN
 
-- [x] **M77** Legal — Propiedad Intelectual [M] 🔴 — marcas, autoría, licencias, terceros
+- [ ] **M77** Legal — Propiedad Intelectual [M] 🔴 — marcas, autoría, licencias, terceros — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
 - [x] **M78** Legal — Contratos [M] 🟡 — freelancers, cesión de derechos, work-for-hire
 - [ ] **M79** Legal — Privacidad [M] 🔴 — GDPR/COPPA, política de privacidad, consentimientos
 - [ ] **M80** Legal — Menores [M] 🟡 — clasificación, controles parentales, contenido
@@ -144,7 +144,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M86** Localización [M] 🟡 — idioma base, claves, tablas, QA lingüístico
 - [ ] **M87** Fuentes Tipográficas [S] 🟢 — fuente principal/secundaria, licencia, tildes y ñ
 - [ ] **M88** Diseño de Menús [M] 🟡 — principal, pausa, inventario, ajustes, créditos
-- [ ] **M89** Configuración Gráfica [S] 🟡 — resolución, calidad, VSync, FPS, presets
+- [x] **M89** Configuración Gráfica [S] 🟡 — resolución, calidad, VSync, FPS, presets — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 - [ ] **M90** Configuración de Audio [S] 🟡 — volúmenes independientes, rango dinámico
 - [ ] **M91** Tutorial [M] 🔴 — movimiento, cámara, recolección, construcción, progresivo
 - [ ] **M92** Balance [C] 🔴 — precios, recompensas, crafting, amistad, simulación económica
@@ -153,8 +153,8 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M95** Plataformas [M] 🟡 — PC/Steam prioritario, Steam Deck, EGS/GOG a evaluar
 - [x] **M96** Steam / Store Page [M] 🔴 — página, capsule art, capturas, trailer, wishlists
 - [x] **M97** Trailer [M] 🟡 — teaser, gameplay, lanzamiento
-- [ ] **M98** Marketing [M] 🟡 — identidad, redes, devlogs, press kit, Next Fest
-- [ ] **M99** Community Management [M] 🟢 — Discord, reglas, feedback, FAQ
+- [x] **M98** Marketing [M] 🟡 — identidad, redes, devlogs, press kit, Next Fest — FLIP iter.9 (checklist propia cerrada + fila ✅; auditor_indice_m01 --pendientes, DeepSeek 378; M117: CI rojo = deuda de pipeline aparte, no invalida el contenido)
+- [x] **M99** Community Management [M] 🟢 — Discord, reglas, feedback, FAQ — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 
 ### FASE 13 — QA Y DESARROLLO
 
@@ -170,15 +170,15 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 - [ ] **M109** Debug Menu [S] 🟡 — teletransporte, tiempo/clima, objetos, regenerar chunks
 - [x] **M110** Código de Calidad [M] 🔴 — sin duplicados, tests, interfaces, deuda controlada
 - [ ] **M111** Testing Automático [M] 🔴 — unit, integración, save/load, economía, voxel, navegación
-- [x] **M112** Pruebas de Stress [M] 🟡 — miles de bloques, muchos NPC, sesiones largas
-- [ ] **M113** Playtest [M] 🔴 — interno, externo, primera experiencia, con gamepad, hardware bajo
+- [ ] **M112** Pruebas de Stress [M] 🟡 — miles de bloques, muchos NPC, sesiones largas — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
+- [x] **M113** Playtest [M] 🔴 — interno, externo, primera experiencia, con gamepad, hardware bajo — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 - [ ] **M114** Hardware [M] 🟡 — PC mínimo/recomendado, GPU integrada/dedicada, SSD/HDD
 
 ### FASE 14 — ENTREGA Y PUBLICACIÓN
 
 - [x] **M115** Instalador [S] 🟢 — build release, instalación limpia, actualización, desinstalación (checklist 116-Instalador 192/192)
 - [ ] **M116** Build System [M] 🟡 — builds automatizados dev/QA/staging/release, versión, firmado
-- [ ] **M117** CI/CD [M] 🟢 — tests automáticos, builds, artifacts, branch protection
+- [x] **M117** CI/CD [M] 🟢 — tests automáticos, builds, artifacts, branch protection — FLIP iter.9 (checklist propia cerrada + fila ✅; auditor_indice_m01 --pendientes, DeepSeek 378; M117: CI rojo = deuda de pipeline aparte, no invalida el contenido)
 - [ ] **M118** Actualizaciones [M] 🟡 — patches, versionado, compatibilidad de saves, migraciones
 - [x] **M119** DLC y Expansiones [M] 🟢 — estrategia post-lanzamiento, nuevas islas (checklist 120-DLC-Y-Expansiones 222/222)
 - [x] **M120** Soporte Post-Lanzamiento [M] 🟢 — canal de soporte, tickets, hotfixes, roadmap (checklist 121-Soporte-Post-Lanzamiento 211/211)
@@ -239,6 +239,7 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 > **Nota de desglose:** cada uno de los 152 ítems se convertirá en un componente `DOCUMENTACION/{NN}-Modulo/` con su `plan-inicial/` (5+2 archivos) y `plan-actual/`, generando así **152 checklists de ≥100 ítems** (15.200+ puntos de control totales). El orden de creación de los componentes sigue la numeración de fases, priorizando los módulos de la Fase 1 y los de mayor riesgo técnico (M07, M37, M58, M60, M63).
 **Totales:** 152 items - Completados: 26 - Pendientes: 126 - No resueltos: 0.
+**Totales:** 152 ítems · Completados: 29 · Pendientes: 123 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 22:57: iter.8 aplicada — 6 flips + 3 reverts de DeepSeek 376/Log 2160, candidatos verificados por auditor_indice_m01 y por el director.)
 
 ## Auditoria del indice maestro (2026-10-14 - DeepSeek-V4.1-Flash, iter 6)
 

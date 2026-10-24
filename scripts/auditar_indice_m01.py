@@ -222,6 +222,85 @@ def clasificar(datos):
     return datos
 
 
+UMBRAL_CASI = 5
+
+CATEGORIAS = (
+    ("resoluble_headless", "checklist propia cerrada + fila GLOBAL en OK: se puede flipear hoy"),
+    ("bloqueado_global", "checklist propia cerrada, fila GLOBAL no OK: la palanca es la FILA"),
+    ("bloqueado_checklist", "fila GLOBAL en OK pero checklist propia abierta: el GLOBAL sobre-afirma"),
+    ("bloqueado_ambos", "checklist abierta y fila GLOBAL no OK: depende del cierre del modulo"),
+    ("sin_checklist", "no existe la checklist del modulo en disco"),
+)
+
+
+def categoria_de(r):
+    """Devuelve la condicion que bloquea un item [ ] del indice."""
+    if not r.get("checklist_existe"):
+        return "sin_checklist"
+    if r["candidato"]:
+        return "resoluble_headless"
+    if r["cerrada"] and not r["ok_global"]:
+        return "bloqueado_global"
+    if r["ok_global"] and not r["cerrada"]:
+        return "bloqueado_checklist"
+    return "bloqueado_ambos"
+
+
+def abiertos_de(r):
+    """Items no cerrados de la checklist propia ([ ] + [?]), o None si no hay."""
+    ch = r.get("checklist")
+    if not ch:
+        return None
+    return ch[" "] + ch["?"]
+
+
+def clasificar_pendientes(datos):
+    """Clasifica SOLO los items [ ] del indice por la condicion que los bloquea.
+
+    Requiere que `clasificar()` ya haya corrido (usa cerrada/ok_global/candidato).
+    """
+    grupos = dict((k, []) for k, _ in CATEGORIAS)
+    casi = []
+    for r in datos["registros"]:
+        if r["marca_indice"] != " ":
+            r["categoria_pendiente"] = None
+            r["abiertos"] = abiertos_de(r)
+            continue
+        cat = categoria_de(r)
+        r["categoria_pendiente"] = cat
+        grupos[cat].append(r["id"])
+        ab = abiertos_de(r)
+        r["abiertos"] = ab
+        if cat in ("bloqueado_ambos", "bloqueado_checklist") and ab is not None and 0 < ab <= UMBRAL_CASI:
+            casi.append((r["id"], ab))
+    casi.sort(key=lambda t: (t[1], t[0]))
+    datos["pendientes"] = {
+        "total": sum(len(v) for v in grupos.values()),
+        "por_categoria": dict((k, len(v)) for k, v in grupos.items()),
+        "ids": grupos,
+        "casi_cerradas": casi,
+        "umbral_casi": UMBRAL_CASI,
+    }
+    return datos
+
+
+def informe_pendientes(datos):
+    p = datos["pendientes"]
+    lineas = []
+    lineas.append("=== PENDIENTES DEL INDICE M01, POR BLOQUEO ===")
+    lineas.append("items [ ] en el indice : %d" % p["total"])
+    lineas.append("")
+    for k, desc in CATEGORIAS:
+        ids = p["ids"][k]
+        lineas.append("[%d] %-20s %s" % (len(ids), k, desc))
+        lineas.append("     " + (", ".join(ids) or "(ninguno)"))
+    lineas.append("")
+    lineas.append("-- CASI CERRADAS (abiertos <= %d): %d --" % (p["umbral_casi"], len(p["casi_cerradas"])))
+    for mid, ab in p["casi_cerradas"]:
+        lineas.append("   %-5s abiertos=%d" % (mid, ab))
+    return "\n".join(lineas)
+
+
 def informe(datos):
     lineas = []
     lineas.append("=== AUDITOR INDICE MAESTRO M01 ===")
@@ -270,6 +349,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(add_help=True)
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--pendientes", action="store_true",
+                    help="clasifica los items [ ] del indice por la condicion que los bloquea")
     args = ap.parse_args(argv)
 
     if not os.path.isfile(INDICE):
@@ -279,17 +360,21 @@ def main(argv=None):
         print("DETECTOR CIEGO (exit 3): falta CHECKLIST-GLOBAL.md")
         return 3
 
-    datos = clasificar(medir())
+    datos = clasificar_pendientes(clasificar(medir()))
 
     if datos["ciego"]:
         if args.json:
             print(json.dumps(datos, ensure_ascii=False, indent=1))
+        elif args.pendientes:
+            print(informe_pendientes(datos))
         else:
             print(informe(datos))
         return 3
 
     if args.json:
         print(json.dumps(datos, ensure_ascii=False, indent=1))
+    elif args.pendientes:
+        print(informe_pendientes(datos))
     else:
         print(informe(datos))
 

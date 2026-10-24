@@ -468,3 +468,6 @@
 | CAT-15 Items Evento | 12 | 2 | 8 | 2 | 0 |
 | CAT-16 Items Secretos | 12 | 0 | 0 | 3 | 9 |
 | **TOTAL** | **321** | **163** | **92** | **56** | **28** |
+
+## Nota D-3 (decision fundador 23oct 23:13, aplicado por Beam 354)
+- **RAREZA**: son DOS SISTEMAS INDEPENDIENTES. Rareza del catalogo de items, canon 12%; INDEPENDIENTE de la rareza de pesca (spawn M93, canon 5%). Sin tocar data.
