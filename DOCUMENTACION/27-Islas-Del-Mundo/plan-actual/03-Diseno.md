@@ -192,7 +192,7 @@ func limpiar(id: StringName) -> void
 - Al desembarcar, el jugador aparece sobre el muelle mirando a tierra; suena música de la isla (M41)
 
 ## Presupuestos de carga (Beam 343, produce-first, tranche 1)
-### ### Log WARN de ancla re-rollada
+### Log WARN de ancla re-rollada
 - Spec: cuando una ancla se re-rolla (8 intentos fallidos), emitir WARN con: id_isla, intento (1-8), motivo (fuera de bounds / colisión / terreno inválido), fallback (anillo siguiente).
 - Formato: `WARN [M27] ancla re-rolleada: isla=%s intento=%d motivo=%s fallback=%s`.
 - Coherente con M10 (generación) y M63 (streaming).

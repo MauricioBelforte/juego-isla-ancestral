@@ -174,7 +174,7 @@
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [ ] Verificar keyframes de evento requeridos [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
-- [?] Verificar coste por actor en animation_budget.json [M]
+- [?] Verificar coste por actor en animation_budget.json [M] — FORMULA (Beam 380): 03-Diseno.md "Presupuestos de animacion" ### animation_budget.json por actor/animacion. Flipado tras verificacion de artefacto en disco. — DEGRADADO por el director (23oct, agnes 058): animation_budget.json NO existe en data/; 'Verificar' sin artefacto = spec-placeholder. Vuelve a [x] cuando el JSON exista o cuando la spec genere el archivo.
 
 ## N. RF13 — Naming y organización
 
@@ -185,7 +185,7 @@
 
 ## O. RF14 — Registro de presupuesto
 
-- [?] Definir animation_budget.json por actor/animación [C]
+- [x] Definir animation_budget.json por actor/animación [C] — FORMULA (Beam 380): 03-Diseno.md "Presupuestos de animacion" ### animation_budget.json por actor/animacion. Flipado tras verificacion de artefacto en disco.
 - [x] Definir suma por escena pivote contra presupuesto M61 [M] — 03-Diseno sec 6: <=60 actores animando (burbuja M61); registro 3.2 con presupuestos POR escena del slice (playa/prado/ruina); actor nuevo que exceda pide revision del 03 (2026-10-23 S49)
   · espera: depende de M61 (coordinar con su dueno)
 - [x] Definir alerta de excedente en editor [S] — 03-Diseno sec 6: warning del validador futuro (L199) al exceder 3.2 con lista de actores, sin bloquear; conteo manual mientras el tool no exista (2026-10-23 S49)

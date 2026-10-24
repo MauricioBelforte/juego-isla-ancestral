@@ -333,3 +333,9 @@ la suma por escena.
 poses/loops especiales: se agregan como variantes del gesto canonico (a1/a2/
 a3 de L63), NO como clips de production nuevos (sin exceder presupuesto).
 
+## Presupuestos de animacion (Beam 380, produce-first)
+### animation_budget.json por actor/animacion
+- Spec: archivo nimation_budget.json con presupuesto por actor/animacion.
+- Formula: presupuesto_actor = huesos × duracion × complejidad_factor. Presupuesto escena = suma de actores <= 60 (M61).
+- Valores: max 60 actores animando por escena (M61), huesos por actor <= 50, duracion max 10s.
+- Coherente con M61 (rendimiento) y M62 (memoria). Sin exceder presupuesto M61.
