@@ -101,7 +101,7 @@
 53. Runtime test de M60-Datos: serialización round-trip completa — [x] Hy3 (msg 311, 2026-10-21: 47 checks/0 fallos Godot headless real, EXIT 0; test_serializacion_roundtrip_m60_hy3.gd sin commitear; guardian anti-falso-verde RED probado; Log 2087)
 54. Runtime test de M74: disparo de eventos programados — [x] Hy3 (msg 313, 2026-10-21: 119 checks/0 fallos reales en 3 suites Godot 4.7.2 headless; red probe 58/1 EXIT1 anti-falso-verde; Log 2095; hallazgos 21.8: suite NO hermética + piso CHECKS_MINIMOS=58 desalineado con 57 reales)
 55. Runtime test de M71: flujo XP/recompensa — [x] Hy3 (msg 315, 2026-10-22: 37 checks/0 fallos Godot 4.7.2 headless EXIT 0; test_flujo_xp_recompensa_m71_hy3.gd + test_bug_reevaluar_m71_hy3.gd sin commitear; FINDING F1 _reevaluar routeada a M71; Log 2105) — 10 [C]
-56. Runtime test de M20: ciclo completo de amistad (levels/regalos) — 10 [C]
+56. Runtime test de M20: ciclo completo de amistad (levels/regalos) — [x] Hy3 (Log 2159, 2026-10-23: 30 checks/0 fallos Godot 4.7.2 headless EXIT 0; RED probe 1 fallo EXIT1 anti-falso-verde; verificador!=autor; runtime del autoload Friendship real) — 10 [C]
 57. Runtime test de M21/M162: selección contextual por hora/clima — 10 [C]
 58. Runtime test de M16-Crafting: recetas end-to-end — 10 [C]
 59. Runtime test de M33-Agricultura: plantar/crecer/cosechar (ciclo de días) — 10 [C]
