@@ -113,3 +113,16 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 - Spec: fauna especial (lince de luna) que aparece el dia 15 en Claro del Bosque. Interaccion "observar".
 - Coherente con M36 (fauna) y M93 (balance). Data de fauna especial.
 
+# Spawn de recursos nocturnos (Beam 424)
+- Spec: spawn APAGADO por defecto de noche salvo recurso-opcional: frutas nocturnas + hongos luminicos (opcional que vale la pena de noche; NUNCA critico para progresar).
+- Coherente con M31 ciclo (día activo / noche recompensa opcional) y M159 (items).
+
+# Eventos nocturnos (Beam 424)
+- LLuvia de estrellas: dias 10 y 25 del calendario M29, windows 22:00-02:00 del juego.
+- Deseo-new: observador amministra la intensidad via WorldState (flagcooldown para no doble-cronear).
+
+# Secretos nocturnos (Beam 424)
+- Flora brillante (glow mushrooms cluster) + murales de lore que SOLO son visibles de noche (emisivo nocturno).
+- Coherente con M59 (secretos) y M162 (lore de dialogos contextuales nocturnos).
+
+— ADENDA de restauración (director 23oct 23:59): las 3 subsecciones fueron escritas por Beam (424, tranche 5) y perdidas por el dedup accidental del director (mi script las confundio con duplicados); restauradas desde mi registro, con la misma autoria. Los items 4-5 de esa tranche (Luna esferica / Nubes velo 2D) NO se duplican aqui: ya existen en Luna/Nubes arriba (mismo alcance).
