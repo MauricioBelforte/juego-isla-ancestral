@@ -569,3 +569,6 @@ ESCENA: las 6 zonas del prototipo en las 2 franjas (dia/noche). UMBRAL:
 - Spec: ProgressBar que muestra la velocidad efectiva del jugador sobre el terreno (0-100%).
 - Cap: TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5.
 - Coherente con M11 (movimiento) y M61 (rendimiento).
+
+### ### Nota de coherencia (Beam 410)
+os clasACES de item (M156 catalogo) usan el mismo budget generator (ref Beam 381/383). 1 edge de coherencia entre mis propios presupuestos.

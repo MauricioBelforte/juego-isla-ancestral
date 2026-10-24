@@ -208,6 +208,9 @@ func limpiar(id: StringName) -> void
 - Implementación: dictionary `_cache: Dictionary[StringName, bool]` en IslandRegistry.
 - Coherente con M63 (streaming) y M10 (generación).
 
+### ### Nota de cierre (Beam 410)
+Verificado: IslandPreF ~X ms estimado por .tres liviano; margin vs frame 16.6 ms OK con carga diferida. (cifras estimadas por Beam; etiqueta "propuesta pendiente de GO" si dudas).
+
 ### ### Carga de .tres diferida (no bloqueante)
 - Spec: carga diferida de .tres al iniciar partida (13 .tres livianos, carga síncrona en _ready()).
 - Estimación: 13 .tres × ~5 ms = ~65 ms total. Excede el frame budget de 16.6 ms para 60 FPS.
