@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Panorama
+# 1. Panorama
 
 ```
         ┌─────────────────────────────┐   ┌─────────────────────────────┐
@@ -50,9 +50,9 @@
 
 ---
 
-## 2. Nomenclatura
+# 2. Nomenclatura
 
-### 2.1 En Blender
+# 2.1 En Blender
 
 | Elemento | Convención | Ejemplo |
 |---|---|---|
@@ -67,7 +67,7 @@
 
 **Regla `_NOFUNDIR`:** cualquier pieza que vaya a animarse, rotar, abrirse o interaccionar por separado lleva ese sufijo y el generador la respeta como objeto individual. Hoy ninguna pieza lo necesita (todos los assets son estáticos), pero la convención se fija ahora para no tener que rehacer el pipeline después.
 
-#### Por qué en Blender NO se usa carpetas `alta/` `baja/` (decisión D8)
+## Por qué en Blender NO se usa carpetas `alta/` `baja/` (decisión D8)
 
 El usuario propuso separar las versiones en carpetas. Se adoptan las carpetas **solo del lado de Godot** (§2.2), no en Blender:
 
@@ -80,7 +80,7 @@ Además, en Blender los `_media` y `_baja` son **derivados regenerables** (no se
 
 **En resumen: carpetas donde se consume, sufijos donde se edita.**
 
-### 2.2 En Godot
+# 2.2 En Godot
 
 ```
 res://assets/props/{asset_id}/{perfil}/{asset_id}_{perfil}.gltf
@@ -99,9 +99,9 @@ res://assets/props/cofre_ancestral/baja/cofre_ancestral_baja.gltf
 
 ---
 
-## 3. Algoritmo de generación de variantes
+# 3. Algoritmo de generación de variantes
 
-### 3.1 ALTA → MEDIA (merge por material)
+# 3.1 ALTA → MEDIA (merge por material)
 
 **Entrada:** objetos `SM_*` de la escena, excluyendo los `_NOFUNDIR`.
 **Salida:** un objeto por material distinto.
@@ -129,7 +129,7 @@ res://assets/props/cofre_ancestral/baja/cofre_ancestral_baja.gltf
 
 **Punto crítico 2:** no usar `bpy.ops.object.join()` cuando hay objetos con padres, porque el join reescribe `matrix_parent_inverse` y puede desplazar piezas. El merge por `bmesh` evita el problema por completo.
 
-### 3.2 MEDIA → BAJA (decimate + poda)
+# 3.2 MEDIA → BAJA (decimate + poda)
 
 ```
 1. Partir de MEDIA.
@@ -151,13 +151,13 @@ res://assets/props/cofre_ancestral/baja/cofre_ancestral_baja.gltf
 
 ---
 
-### 3.3 ALTA — la pasada artística (trabajo nuevo planificado)
+# 3.3 ALTA — la pasada artística (trabajo nuevo planificado)
 
 **La ALTA no se deriva por script: se modela.** Es la mejora artística que el proyecto ya planea hacer sobre sus assets. El objetivo es que la diferencia con MEDIA sea **visible**, no solo medible.
 
 **Presupuesto:** ≤ 6.000 tris (≈7,6× el cofre actual), ≤ 16 objetos tras merge, ≤ 12 materiales.
 
-#### Qué se le agrega a un asset para promoverlo de MEDIA a ALTA
+## Qué se le agrega a un asset para promoverlo de MEDIA a ALTA
 
 Tomando el cofre ancestral (784 tris en MEDIA) como ejemplo:
 
@@ -172,7 +172,7 @@ Tomando el cofre ancestral (784 tris en MEDIA) como ejemplo:
 | Detalles nuevos | — | vetas de madera en relieve, mecanismo de cerradura, bisagras articuladas | +~500 |
 | **Total** | **784** | **~4.000** | **5×** |
 
-#### Técnicas ordenadas por rendimiento visual / coste
+## Técnicas ordenadas por rendimiento visual / coste
 
 1. **Biselar aristas (bevel)** — el cambio más evidente. Un cofre con filos vivos parece de juguete; con biselados parece un objeto real. Coste bajo en tris.
 2. **Subdividir superficies curvas** — tapas, toroides, esferas. De 10 a 20 segmentos duplica la suavidad.
@@ -180,7 +180,7 @@ Tomando el cofre ancestral (784 tris en MEDIA) como ejemplo:
 4. **Piezas individuales en lugar de mallas agrupadas** — los 22 remaches como esferas separadas en vez de una malla con cajas.
 5. **Materiales adicionales** — MEDIA usa 6; ALTA puede usar hasta 12 (madera clara, madera oscura, madera veteada, hierro, hierro oxidado, bronce, bronce pulido, oro, oro viejo, gema, cuero, tela).
 
-#### Reglas de la pasada (R7)
+## Reglas de la pasada (R7)
 
 - ✅ Añadir detalle, subdividir, biselar, enriquecer materiales.
 - ❌ **No cambiar la silueta.** Si el cofre mide 0.7 × 0.4 × 0.62 en MEDIA, mide lo mismo en ALTA.
@@ -188,7 +188,7 @@ Tomando el cofre ancestral (784 tris en MEDIA) como ejemplo:
 - ❌ **No mover el apoyo.** `z_min = 0.045` se mantiene (E-12).
 - ❌ **No animar lo que en MEDIA no se anima.** Si se añade una pieza animada, marcarla `_NOFUNDIR`.
 
-#### Verificación
+## Verificación
 
 ```bash
 python stats_asset.py SM_Cofre_ ../25-Ruinas-Templos/cofre_ancestral_lowpoly_alta
@@ -200,11 +200,11 @@ python stats_asset.py SM_Cofre_ ../25-Ruinas-Templos/cofre_ancestral_lowpoly_alt
 
 ---
 
-## 3.4 Cuándo se optimiza: la puerta de aprobación (R9)
+# 3.4 Cuándo se optimiza: la puerta de aprobación (R9)
 
 Directiva del usuario 2026-08-28: *"si lo optimizamos no vamos a dejar los objetos sin optimizar solo para que ocupen recursos"*.
 
-### La regla
+# La regla
 
 **El merge por material es obligatorio para todo asset aprobado. La versión sin mergear nunca se exporta.**
 
@@ -218,7 +218,7 @@ Esto no significa que existan dos versiones conviviendo en el juego. Significa q
 
 No se "dejan objetos sin optimizar ocupando recursos": el source no llega nunca al juego. Es el archivo de trabajo, como un `.psd` frente a un `.png`.
 
-### Por qué NO se mergea en el script de creación
+# Por qué NO se mergea en el script de creación
 
 Se evaluó meter el merge directamente en cada script de creación de asset. Se descartó por tres razones:
 
@@ -228,13 +228,13 @@ Se evaluó meter el merge directamente en cada script de creación de asset. Se 
 
 3. **El merge es idempotente y barato.** Se regenera con un comando. No hay coste en no tenerlo bakeado.
 
-### Cuándo se corre
+# Cuándo se corre
 
 **Al aprobar el asset**, no antes. El momento es: se termina de iterar el source → pasa el QA visual multi-ángulo (E-13) → se corre `generar_variante.py --media --baja` → se verifica con `stats_asset.py` → se exporta.
 
 Si después hay que editar el asset, se edita el **source** y se vuelve a correr el merge. El derivado nunca se edita a mano.
 
-### Verificación: `auditar_optimizacion.py`
+# Verificación: `auditar_optimizacion.py`
 
 Script de auditoría que escanea todos los módulos y reporta qué assets tienen su versión mergeada y cuáles no. No necesita Blender (trabaja sobre el filesystem).
 
@@ -247,13 +247,13 @@ Devuelve exit code 1 si hay assets sin mergear, así que puede entrar en CI. **U
 
 ---
 
-## 3.5 Qué assets reciben la pasada ALTA (decisión D9)
+# 3.5 Qué assets reciben la pasada ALTA (decisión D9)
 
 Directiva del usuario 2026-08-28: *"las de alta calidad que tienen mas detalles... vas a tener que mejorar las que ya tenemos. si se te ocurre otra idea me decis"*.
 
 **La otra idea: no hace falta que los 41 reciban la pasada ALTA.** Hacerla sobre todo el catálogo sería semanas de trabajo con retorno casi nulo en la mitad de los casos, y en la vegetación sería directamente contraproducente.
 
-### El argumento numérico
+# El argumento numérico
 
 La vegetación se instancia con **MultiMesh** (ítem A12). Eso significa que el coste de una variante ALTA no se paga una vez, se paga por instancia:
 
@@ -264,7 +264,7 @@ La vegetación se instancia con **MultiMesh** (ítem A12). Eso significa que el 
 
 Una sola especie de palmera en ALTA puede comerse por sí sola el frame budget entero. Y a la distancia de cámara a la que se ve una palmera en un juego cozy, **4.000 triángulos se ven exactamente igual que 700**. El detalle extra no se percibe; el coste sí.
 
-### Criterio de clasificación
+# Criterio de clasificación
 
 | # | Criterio | Veredicto |
 |---|---|---|
@@ -274,7 +274,7 @@ Una sola especie de palmera en ALTA puede comerse por sí sola el frame budget e
 | 4 | Se **instancia por cientos** (vegetación, rocas, hierba) | Solo MEDIA |
 | 5 | Es **decoración de fondo** o se pisa sin mirarla | Solo MEDIA |
 
-### Clasificación de los 41 assets
+# Clasificación de los 41 assets
 
 **ALTA — héroes (15).** Se interactúa, se sostiene o es un hito.
 
@@ -308,18 +308,18 @@ Una sola especie de palmera en ALTA puede comerse por sí sola el frame budget e
 | 45-Arte3D | `estrella_mar` |
 | 50-Vegetacion | los 12 (`arbusto_floral`, `arbusto_redondo`, `canas_bambu`, `flor_isla`, `helecho_chico`, `helecho_gigante`, `hierba_alta`, `hongo_luminoso`, `liana_colgante`, `palmera`, `palmera_inclinada`, `palmera_joven`) |
 
-### Consecuencias
+# Consecuencias
 
 1. **La carpeta `alta/` en Godot no tiene 41 entradas, tiene 15** (18 si se suma la frontera). Un asset sin ALTA no está "incompleto": está declarado como relleno y documentado.
 2. **El runtime nunca debe pedir una ALTA inexistente.** El selector de perfil tiene que caer a MEDIA cuando no hay ALTA (ver §4).
 3. **Ningún asset queda sin optimizar por esto.** Los 23 de relleno igual tienen su `_media` y su `_baja` mergeadas (R9). Lo que no tienen es detalle extra, porque no lo necesitan.
 4. **La pasada se hace de a una, por módulo, con el mismo circuito de siempre:** editar el source → `generar_variante.py` → `stats_asset.py` (tiene que dar **NO en MEDIA**) → `capturar_angulos.py` 6 orbitales → aprobar.
 
-### Regla de oro de la pasada
+# Regla de oro de la pasada
 
 > Si al terminar la ALTA de un asset el `stats_asset.py` la marca **OK en MEDIA**, la pasada no agregó suficiente detalle. Hay que seguir. El objetivo es que la ALTA se pase del presupuesto MEDIA (≤1.500 tris) y se acerque al suyo (≤6.000).
 
-### Estado de la pasada ALTA (2026-08-29)
+# Estado de la pasada ALTA (2026-08-29)
 
 **17/17 héroes procesados** (15 iniciales + 2 promovidos de la frontera en log 234: `muelle_madera`, `concha_mar`). Las 17 variantes `*_alta.blend` existen.
 
@@ -366,9 +366,9 @@ python generar_alta.py <modulo> <asset_lowpoly> --segmentos 3 --ancho 0.10 --sub
 
 ---
 
-## 4. Perfiles y selección en runtime
+# 4. Perfiles y selección en runtime
 
-### 4.1 Detección automática
+# 4.1 Detección automática
 
 `AssetProfile` se resuelve una sola vez al arrancar, en este orden de prioridad:
 
@@ -386,7 +386,7 @@ python generar_alta.py <modulo> <asset_lowpoly> --segmentos 3 --ancho 0.10 --sub
 
 3. **Fallback conservador:** `media` (nunca `alta` por defecto — es mejor que falte un remache a que el juego vaya a 20 fps).
 
-### 4.2 API
+# 4.2 API
 
 ```gdscript
 # Autoload AssetProfile
@@ -396,7 +396,7 @@ AssetProfile.cargar(asset_id)     # PackedScene listo para instanciar
 AssetProfile.cambiar_perfil(p)    # recarga en caliente (solo en menú de opciones)
 ```
 
-### 4.3 Regla de selección por distancia (complementaria)
+# 4.3 Regla de selección por distancia (complementaria)
 
 Además del perfil global, un asset puede declarar LOD por distancia dentro de su propia variante. En M166 **esto no se implementa** (los objetos fusionados ya son 1 draw call); queda documentado para cuando existan assets grandes (barco hundido, volcán):
 
@@ -407,7 +407,7 @@ GeometryInstance3D.visibility_range_begin / _end   # Godot 4.x
 
 ---
 
-## 5. Vegetación y props repetidos: MultiMesh
+# 5. Vegetación y props repetidos: MultiMesh
 
 Los assets de vegetación **NO siguen el pipeline de variantes**. Siguen el de `MultiMeshInstance3D`. Coincide con la decisión **D9 (§3.5)**: los 12 assets de `50-Vegetacion` son relleno y quedan en MEDIA de forma permanente, porque su coste se multiplica por la cantidad de instancias.
 
@@ -428,7 +428,7 @@ AssetProfile.debe_usar_multimesh(asset_id) -> bool
 
 ---
 
-## 6. Integración con el catálogo de objetos (M159)
+# 6. Integración con el catálogo de objetos (M159)
 
 Cada `ItemData` gana dos campos:
 
@@ -459,7 +459,7 @@ El campo ya existía en el diseño y resuelve D9 sin tocar una línea del runtim
 
 ---
 
-## 7. Qué NO se fusiona
+# 7. Qué NO se fusiona
 
 | Caso | Razón |
 |---|---|
@@ -470,7 +470,7 @@ El campo ya existía en el diseño y resuelve D9 sin tocar una línea del runtim
 
 ---
 
-## 8. Flujo de trabajo para el desarrollador
+# 8. Flujo de trabajo para el desarrollador
 
 ```bash
 # 1. Modelar (como hasta ahora)
@@ -494,7 +494,7 @@ python capturar_angulos.py SM_Cofre_ .../cofre_media.png 6
 
 ---
 
-## 9. Decisiones de diseño registradas
+# 9. Decisiones de diseño registradas
 
 | # | Decisión | Alternativa descartada | Motivo |
 |---|---|---|---|

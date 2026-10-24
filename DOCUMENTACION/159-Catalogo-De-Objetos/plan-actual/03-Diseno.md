@@ -4,11 +4,11 @@
 
 # 03-Diseno.md — Módulo 159: Catálogo de Objetos
 
-## 1. Catálogo Completo de Objetos
+# 1. Catálogo Completo de Objetos
 
-### CAT-01: Mobiliario Interior (80+ objetos)
+# CAT-01: Mobiliario Interior (80+ objetos)
 
-#### Mesas
+## Mesas
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -23,7 +23,7 @@
 | OBJ-MES-009 | Mesa de picnic | 2×2 | Sentarse | 200 | Poco común |
 | OBJ-MES-010 | Mesa ancestral | 2×2 | Colocar item + mirar | 500 | Raro |
 
-#### Sillas
+## Sillas
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -38,7 +38,7 @@
 | OBJ-SIL-009 | Silla ancestral | 1×1 | Sentarse + mirar | 300 | Raro |
 | OBJ-SIL-010 | Trono pequeño | 2×2 | Sentarse | 800 | Legendario |
 
-#### Camas
+## Camas
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -53,7 +53,7 @@
 | OBJ-CAM-009 | Cama de flores | 2×2 | Dormir + regen | 300 | Poco común |
 | OBJ-CAM-010 | Cama legendaria | 2×2 | Dormir + regen total | 1500 | Legendario |
 
-#### Estanterías
+## Estanterías
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -68,9 +68,9 @@
 | OBJ-EST-009 | Armario | 2×3 | Almacenar (30 slots) | 350 | Poco común |
 | OBJ-EST-010 | Estantería ancestral | 2×3 | Almacenar + mirar | 600 | Raro |
 
-### CAT-02: Decoración de Pared (40+ objetos)
+# CAT-02: Decoración de Pared (40+ objetos)
 
-#### Cuadros
+## Cuadros
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -85,7 +85,7 @@
 | OBJ-CUA-009 | Cuadro de naturaleza | Pared 1×1 | Mirar | 60 | Común |
 | OBJ-CUA-010 | Obra maestra | Pared 2×2 | Mirar + iluminar | 800 | Legendario |
 
-#### Espejos
+## Espejos
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -95,7 +95,7 @@
 | OBJ-ESP-004 | Espejo ancestral | Pared 1×1 | Mirarse + mystery | 400 | Raro |
 | OBJ-ESP-005 | Espejo mágico | Pared 1×1 | Mirarse + cambio | 1000 | Legendario |
 
-#### Relojes
+## Relojes
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -104,7 +104,7 @@
 | OBJ-REL-003 | Reloj de arena | Pared 1×1 | Ver tiempo | 80 | Común |
 | OBJ-REL-004 | Reloj ancestral | Pared 1×1 | Ver hora + lore | 350 | Raro |
 
-### CAT-03: Iluminación (30+ objetos)
+# CAT-03: Iluminación (30+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -124,7 +124,7 @@
 | OBJ-LUZ-014 | Farol de calle | Exterior | Encender/apagar | 150 | Poco común |
 | OBJ-LUZ-015 | Lámpara de lava | 1×1 | Encender/apagar + calor | 400 | Raro |
 
-### CAT-04: Plantas Interior (25+ objetos)
+# CAT-04: Plantas Interior (25+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -143,7 +143,7 @@
 | OBJ-PLA-013 | Flor luminiscente | 1×1 | Regar + brilla | 500 | Raro |
 | OBJ-PLA-014 | Árbol ancestral | 2×2 | Regar + lore | 800 | Legendario |
 
-### CAT-05: Alfombras (20+ objetos)
+# CAT-05: Alfombras (20+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -156,7 +156,7 @@
 | OBJ-ALF-007 | Alfombra mágica | 2×2 | Decoración + volar | 1000 | Legendario |
 | OBJ-ALF-008 | Tapiz de pared | Pared 2×2 | Decoración | 150 | Poco común |
 
-### CAT-06: Cocina (35+ objetos)
+# CAT-06: Cocina (35+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -181,7 +181,7 @@
 | OBJ-COC-019 | Vajilla | 1×1 | Servir comida | 40 | Común |
 | OBJ-COC-020 | Cubiertos | 1×1 | Comer | 20 | Común |
 
-### CAT-07: Taller (25+ objetos)
+# CAT-07: Taller (25+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -196,7 +196,7 @@
 | OBJ-TAL-009 | Mesa de encantamientos | 2×2 | Encantar | 600 | Raro |
 | OBJ-TAL-010 | Banco de afinación | 1×1 | Mejorar herramientas | 500 | Raro |
 
-### CAT-08: Exteriores (40+ objetos)
+# CAT-08: Exteriores (40+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -221,9 +221,9 @@
 | OBJ-EXT-019 | Pergamino exterior | Pared | Información | 60 | Común |
 | OBJ-EXT-020 | Bandera | Pared | Decoración | 30 | Común |
 
-### CAT-09: Naturaleza (60+ objetos)
+# CAT-09: Naturaleza (60+ objetos)
 
-#### Árboles
+## Árboles
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -238,7 +238,7 @@
 | OBJ-NAT-009 | Árbol seco | 2×2 | Leña | — | Común |
 | OBJ-NAT-010 | Árbol encantado | 2×2 | Magia + lore | — | Legendario |
 
-#### Rocas
+## Rocas
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -250,7 +250,7 @@
 | OBJ-NAT-016 | Roca ancestral | 2×2 | Lore + items | — | Raro |
 | OBJ-NAT-017 | Meteorito | 2×2 | Minar + lore | — | Legendario |
 
-#### Arbustos y Flores
+## Arbustos y Flores
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -266,7 +266,7 @@
 | OBJ-NAT-027 | Liana | 1×1 | Trepar | — | Común |
 | OBJ-NAT-028 | Raíz expuesta | 1×1 | Minar (leña) | — | Común |
 
-### CAT-10: Construcción (30+ objetos)
+# CAT-10: Construcción (30+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -286,7 +286,7 @@
 | OBJ-CON-014 | Techo de cristal | 2×2 | Luz natural | 200 | Poco común |
 | OBJ-CON-015 | Chimenea | 2×2 | Calor + decoración | 250 | Poco común |
 
-### CAT-11: Herramientas (25+ objetos)
+# CAT-11: Herramientas (25+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -311,9 +311,9 @@
 | OBJ-HER-019 | Destornillador | 1×1 | Desmontar | 30 | Común |
 | OBJ-HER-020 | Palanca | 1×1 | Mover objetos pesados | 50 | Común |
 
-### CAT-12: Items (100+ objetos)
+# CAT-12: Items (100+ objetos)
 
-#### Materiales
+## Materiales
 
 | ID | Nombre | Precio venta | Stack | Rareza |
 |----|--------|-------------|-------|--------|
@@ -333,7 +333,7 @@
 | OBJ-ITE-014 | Tornillos | 3 | 100 | Común |
 | OBJ-ITE-015 | Pegamento | 5 | 20 | Común |
 
-#### Comida
+## Comida
 
 | ID | Nombre | Precio venta | Efecto | Rareza |
 |----|--------|-------------|--------|--------|
@@ -358,7 +358,7 @@
 | OBJ-ITE-038 | Chocolate | 30 | Energía +50 | Poco común |
 | OBJ-ITE-039 | Helado | 20 | Energía +30 | Común |
 
-#### Gema y Monedas
+## Gema y Monedas
 
 | ID | Nombre | Precio venta | Uso | Rareza |
 |----|--------|-------------|-----|--------|
@@ -371,7 +371,7 @@
 | OBJ-ITE-056 | Gema púrpura | 100 | Craft / decoración | Raro |
 | OBJ-ITE-057 | Diamante | 500 | Craft / decoración | Legendario |
 
-### CAT-13: Ropa (40+ objetos)
+# CAT-13: Ropa (40+ objetos)
 
 | ID | Nombre | Slot | Bonificación | Precio | Rareza |
 |----|--------|------|-------------|--------|--------|
@@ -396,7 +396,7 @@
 | OBJ-ROP-019 | Guantes | Accesorio | Minería +5% | 60 | Común |
 | OBJ-ROP-020 | Anillo | Accesorio | Suerte +5% | 300 | Raro |
 
-### CAT-14: Arte Ancestral (20+ objetos)
+# CAT-14: Arte Ancestral (20+ objetos)
 
 | ID | Nombre | Tamaño | Interacción | Precio | Rareza |
 |----|--------|--------|-------------|--------|--------|
@@ -413,7 +413,7 @@
 | OBJ-ART-011 | Sello ancestral | 1×1 | Mirar + lore | — | Legendario |
 | OBJ-ART-012 | Fragmento de mural | Pared 1×1 | Mirar + lore | — | Raro |
 
-### CAT-15: Items de Evento (15+ objetos)
+# CAT-15: Items de Evento (15+ objetos)
 
 | ID | Nombre | Fuente | Interacción | Rareza |
 |----|--------|--------|-------------|--------|
@@ -430,7 +430,7 @@
 | OBJ-EVE-011 | Masquerade mask | Festival de máscaras | Usar (disfraz) | Raro |
 | OBJ-EVE-012 | Confeti | Cualquier festival | Decoración temporal | Común |
 
-### CAT-16: Items Secretos (15+ objetos)
+# CAT-16: Items Secretos (15+ objetos)
 
 | ID | Nombre | Fuente | Interacción | Rareza |
 |----|--------|--------|-------------|--------|
@@ -447,7 +447,7 @@
 | OBJ-SEC-011 | Flor eterna | Quest secreta | Nunca se marchita | Legendario |
 | OBJ-SEC-012 | Música ancestral | Quest secreta | Cambia ambiental | Legendario |
 
-## 2. Resumen por Categoría
+# 2. Resumen por Categoría
 
 | Categoría | Cantidad | Común | Poco común | Raro | Legendario |
 |-----------|----------|-------|------------|------|------------|
@@ -469,5 +469,5 @@
 | CAT-16 Items Secretos | 12 | 0 | 0 | 3 | 9 |
 | **TOTAL** | **321** | **163** | **92** | **56** | **28** |
 
-## Nota D-3 (decision fundador 23oct 23:13, aplicado por Beam 354)
+# Nota D-3 (decision fundador 23oct 23:13, aplicado por Beam 354)
 - **RAREZA**: son DOS SISTEMAS INDEPENDIENTES. Rareza del catalogo de items, canon 12%; INDEPENDIENTE de la rareza de pesca (spawn M93, canon 5%). Sin tocar data.

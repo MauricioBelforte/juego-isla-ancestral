@@ -3,7 +3,7 @@
 
 # 03-Diseno.md — Módulo 160: Diseño de Ubicaciones del Mundo
 
-## 1. Mapa Conceptual del Mundo
+# 1. Mapa Conceptual del Mundo
 
 ```
                     ┌─────────────────────┐
@@ -31,9 +31,9 @@
                     └─────────────────────┘
 ```
 
-## 2. Isla Raíz (RIZ) — Detalle Completo (18 ubicaciones)
+# 2. Isla Raíz (RIZ) — Detalle Completo (18 ubicaciones)
 
-### 2.1 Mapa Conceptual
+# 2.1 Mapa Conceptual
 
 ```
                         ┌──────────────────────┐
@@ -85,9 +85,9 @@
                                                     └────────────────┘
 ```
 
-### 2.2 Todas las Ubicaciones (18)
+# 2.2 Todas las Ubicaciones (18)
 
-#### LOC-RIZ-PUB-001 — Plaza del Pueblo
+## LOC-RIZ-PUB-001 — Plaza del Pueblo
 
 **Tipo:** Pueblo
 **Isla:** Raíz
@@ -121,7 +121,7 @@
 
 ---
 
-#### LOC-RIZ-CASA-001 — Casa del Jugador
+## LOC-RIZ-CASA-001 — Casa del Jugador
 
 **Tipo:** Casa
 **Isla:** Raíz
@@ -159,7 +159,7 @@
 
 ---
 
-#### LOC-RIZ-CASA-002 — Casa de Luna (Pintora)
+## LOC-RIZ-CASA-002 — Casa de Luna (Pintora)
 
 **Tipo:** Casa NPC
 **Isla:** Raíz
@@ -185,7 +185,7 @@
 
 ---
 
-#### LOC-RIZ-CASA-003 — Casa de Rocky (Herrero)
+## LOC-RIZ-CASA-003 — Casa de Rocky (Herrero)
 
 **Tipo:** Casa NPC
 **Isla:** Raíz
@@ -209,7 +209,7 @@
 
 ---
 
-#### LOC-RIZ-MON-001 — Monte de la Tribu (Chamán)
+## LOC-RIZ-MON-001 — Monte de la Tribu (Chamán)
 
 **Tipo:** Monte
 **Isla:** Raíz
@@ -238,7 +238,7 @@
 
 ---
 
-#### LOC-RIZ-TIE-001 — Tienda General
+## LOC-RIZ-TIE-001 — Tienda General
 
 **Tipo:** Tienda
 **Isla:** Raíz
@@ -268,7 +268,7 @@
 
 ---
 
-#### LOC-RIZ-TAL-001 — Carpintería
+## LOC-RIZ-TAL-001 — Carpintería
 
 **Tipo:** Taller
 **Isla:** Raíz
@@ -297,7 +297,7 @@
 
 ---
 
-#### LOC-RIZ-PUER-001 — Puerto
+## LOC-RIZ-PUER-001 — Puerto
 
 **Tipo:** Puerto
 **Isla:** Raíz
@@ -323,7 +323,7 @@
 
 ---
 
-#### LOC-RIZ-BOS-001 — Bosque Principal
+## LOC-RIZ-BOS-001 — Bosque Principal
 
 **Tipo:** Bosque
 **Isla:** Raíz
@@ -355,7 +355,7 @@
 
 ---
 
-#### LOC-RIZ-BOS-002 — Claros del Bosque
+## LOC-RIZ-BOS-002 — Claros del Bosque
 
 **Tipo:** Bosque
 **Isla:** Raíz
@@ -382,7 +382,7 @@
 
 ---
 
-#### LOC-RIZ-BOS-003 — Árbol Grande
+## LOC-RIZ-BOS-003 — Árbol Grande
 
 **Tipo:** Bosque
 **Isla:** Raíz
@@ -406,7 +406,7 @@
 
 ---
 
-#### LOC-RIZ-PLA-001 — Playa Principal
+## LOC-RIZ-PLA-001 — Playa Principal
 
 **Tipo:** Playa
 **Isla:** Raíz
@@ -432,7 +432,7 @@
 
 ---
 
-#### LOC-RIZ-PLA-002 — Cueva de la Playa
+## LOC-RIZ-PLA-002 — Cueva de la Playa
 
 **Tipo:** Cueva
 **Isla:** Raíz
@@ -456,7 +456,7 @@
 
 ---
 
-#### LOC-RIZ-CUE-001 — Cueva de Tutorial
+## LOC-RIZ-CUE-001 — Cueva de Tutorial
 
 **Tipo:** Cueva
 **Isla:** Raíz
@@ -482,7 +482,7 @@
 
 ---
 
-#### LOC-RIZ-RUI-001 — Ruinas Antiguas
+## LOC-RIZ-RUI-001 — Ruinas Antiguas
 
 **Tipo:** Ruinas
 **Isla:** Raíz
@@ -507,9 +507,9 @@
 
 ---
 
-## 3. Isla Coral (COR) — Detalle Completo (15 ubicaciones)
+# 3. Isla Coral (COR) — Detalle Completo (15 ubicaciones)
 
-### 3.1 Mapa Conceptual
+# 3.1 Mapa Conceptual
 
 ```
                         ┌──────────────────────┐
@@ -538,9 +538,9 @@
                                     └────────────────┘          └────────────────┘
 ```
 
-### 3.2 Ubicaciones (15)
+# 3.2 Ubicaciones (15)
 
-#### LOC-COR-PUB-001 — Plaza del Puerto
+## LOC-COR-PUB-001 — Plaza del Puerto
 
 **Tipo:** Pueblo
 **Isla:** Coral
@@ -564,7 +564,7 @@
 
 ---
 
-#### LOC-COR-TIE-001 — Ferretería Tropical
+## LOC-COR-TIE-001 — Ferretería Tropical
 
 **Tipo:** Tienda
 **Isla:** Coral
@@ -586,7 +586,7 @@
 
 ---
 
-#### LOC-COR-TIE-002 — Pescadería
+## LOC-COR-TIE-002 — Pescadería
 
 **Tipo:** Tienda
 **Isla:** Coral
@@ -607,7 +607,7 @@
 
 ---
 
-#### LOC-COR-CASA-001 — Casa de Perla (Joyera)
+## LOC-COR-CASA-001 — Casa de Perla (Joyera)
 
 **Tipo:** Casa NPC
 **Isla:** Coral
@@ -629,7 +629,7 @@
 
 ---
 
-#### LOC-COR-CASA-002 — Casa de Ola (Pescador Maestro)
+## LOC-COR-CASA-002 — Casa de Ola (Pescador Maestro)
 
 **Tipo:** Casa NPC
 **Isla:** Coral
@@ -651,7 +651,7 @@
 
 ---
 
-#### LOC-COR-PUER-001 — Puerto Tropical
+## LOC-COR-PUER-001 — Puerto Tropical
 
 **Tipo:** Puerto
 **Isla:** Coral
@@ -671,7 +671,7 @@
 
 ---
 
-#### LOC-COR-SEL-001 — Selva Tropical
+## LOC-COR-SEL-001 — Selva Tropical
 
 **Tipo:** Selva
 **Isla:** Coral
@@ -698,7 +698,7 @@
 
 ---
 
-#### LOC-COR-SEL-002 — Cataratas
+## LOC-COR-SEL-002 — Cataratas
 
 **Tipo:** Selva
 **Isla:** Coral
@@ -717,7 +717,7 @@
 
 ---
 
-#### LOC-COR-PLA-001 — Playa de Coral
+## LOC-COR-PLA-001 — Playa de Coral
 
 **Tipo:** Playa
 **Isla:** Coral
@@ -743,7 +743,7 @@
 
 ---
 
-#### LOC-COR-PLA-002 — Arrecife de Coral
+## LOC-COR-PLA-002 — Arrecife de Coral
 
 **Tipo:** Playa
 **Isla:** Coral
@@ -767,7 +767,7 @@
 
 ---
 
-#### LOC-COR-CUE-001 — Cueva del Coral
+## LOC-COR-CUE-001 — Cueva del Coral
 
 **Tipo:** Cueva
 **Isla:** Coral
@@ -790,7 +790,7 @@
 
 ---
 
-#### LOC-COR-MON-001 — Monte Vigía
+## LOC-COR-MON-001 — Monte Vigía
 
 **Tipo:** Montaña
 **Isla:** Coral
@@ -808,9 +808,9 @@
 
 ---
 
-## 4. Isla Ceniza (CEN) — Detalle Completo (14 ubicaciones)
+# 4. Isla Ceniza (CEN) — Detalle Completo (14 ubicaciones)
 
-### 4.1 Mapa Conceptual
+# 4.1 Mapa Conceptual
 
 ```
                         ┌──────────────────────┐
@@ -839,9 +839,9 @@
             └────────────────┘          └────────────────┘
 ```
 
-### 4.2 Ubicaciones (14)
+# 4.2 Ubicaciones (14)
 
-#### LOC-CEN-PUB-001 — Plaza de la Forja
+## LOC-CEN-PUB-001 — Plaza de la Forja
 
 **Tipo:** Pueblo
 **Isla:** Ceniza
@@ -865,7 +865,7 @@
 
 ---
 
-#### LOC-CEN-TIE-001 — Tienda de Minerales
+## LOC-CEN-TIE-001 — Tienda de Minerales
 
 **Tipo:** Tienda
 **Isla:** Ceniza
@@ -887,7 +887,7 @@
 
 ---
 
-#### LOC-CEN-TAL-001 — Herrería Avanzada
+## LOC-CEN-TAL-001 — Herrería Avanzada
 
 **Tipo:** Taller
 **Isla:** Ceniza
@@ -910,7 +910,7 @@
 
 ---
 
-#### LOC-CEN-CASA-001 — Casa del Herrero Avanzado
+## LOC-CEN-CASA-001 — Casa del Herrero Avanzado
 
 **Tipo:** Casa NPC
 **Isla:** Ceniza
@@ -931,7 +931,7 @@
 
 ---
 
-#### LOC-CEN-PUER-001 — Puerto Minero
+## LOC-CEN-PUER-001 — Puerto Minero
 
 **Tipo:** Puerto
 **Isla:** Ceniza
@@ -951,7 +951,7 @@
 
 ---
 
-#### LOC-CEN-MON-001 — Montaña Principal
+## LOC-CEN-MON-001 — Montaña Principal
 
 **Tipo:** Montaña
 **Isla:** Ceniza
@@ -969,7 +969,7 @@
 
 ---
 
-#### LOC-CEN-MON-002 — Mina Abandonada
+## LOC-CEN-MON-002 — Mina Abandonada
 
 **Tipo:** Montaña
 **Isla:** Ceniza
@@ -993,7 +993,7 @@
 
 ---
 
-#### LOC-CEN-BOS-001 — Bosque de Cenizas
+## LOC-CEN-BOS-001 — Bosque de Cenizas
 
 **Tipo:** Bosque
 **Isla:** Ceniza
@@ -1019,7 +1019,7 @@
 
 ---
 
-#### LOC-CEN-CUE-001 — Cueva de Minerales
+## LOC-CEN-CUE-001 — Cueva de Minerales
 
 **Tipo:** Cueva
 **Isla:** Ceniza
@@ -1043,7 +1043,7 @@
 
 ---
 
-#### LOC-CEN-CUE-002 — Cueva Profunda
+## LOC-CEN-CUE-002 — Cueva Profunda
 
 **Tipo:** Cueva
 **Isla:** Ceniza
@@ -1068,7 +1068,7 @@
 
 ---
 
-#### LOC-CEN-RUI-001 — Ruinas de la Forja
+## LOC-CEN-RUI-001 — Ruinas de la Forja
 
 **Tipo:** Ruinas
 **Isla:** Ceniza
@@ -1093,9 +1093,9 @@
 
 ---
 
-## 5. Isla Aurora (AUR) — Detalle Completo (13 ubicaciones)
+# 5. Isla Aurora (AUR) — Detalle Completo (13 ubicaciones)
 
-### 5.1 Mapa Conceptual
+# 5.1 Mapa Conceptual
 
 ```
                         ┌──────────────────────┐
@@ -1125,9 +1125,9 @@
                                     └────────────────┘          └────────────────┘
 ```
 
-### 5.2 Ubicaciones (13)
+# 5.2 Ubicaciones (13)
 
-#### LOC-AUR-PUB-001 — Plaza de Aurora
+## LOC-AUR-PUB-001 — Plaza de Aurora
 
 **Tipo:** Pueblo
 **Isla:** Aurora
@@ -1151,7 +1151,7 @@
 
 ---
 
-#### LOC-AUR-TIE-001 — Tienda Cristal
+## LOC-AUR-TIE-001 — Tienda Cristal
 
 **Tipo:** Tienda
 **Isla:** Aurora
@@ -1173,7 +1173,7 @@
 
 ---
 
-#### LOC-AUR-TAL-001 — Taller Cristal
+## LOC-AUR-TAL-001 — Taller Cristal
 
 **Tipo:** Taller
 **Isla:** Aurora
@@ -1195,7 +1195,7 @@
 
 ---
 
-#### LOC-AUR-CASA-001 — Casa de Elena (Joyera Ancestral)
+## LOC-AUR-CASA-001 — Casa de Elena (Joyera Ancestral)
 
 **Tipo:** Casa NPC
 **Isla:** Aurora
@@ -1217,7 +1217,7 @@
 
 ---
 
-#### LOC-AUR-CASA-002 — Casa de Pedro (Minero de Profundidad)
+## LOC-AUR-CASA-002 — Casa de Pedro (Minero de Profundidad)
 
 **Tipo:** Casa NPC
 **Isla:** Aurora
@@ -1238,7 +1238,7 @@
 
 ---
 
-#### LOC-AUR-CASA-003 — Casa de Carlos (Cristalero)
+## LOC-AUR-CASA-003 — Casa de Carlos (Cristalero)
 
 **Tipo:** Casa NPC
 **Isla:** Aurora
@@ -1259,7 +1259,7 @@
 
 ---
 
-#### LOC-AUR-PUER-001 — Puerto Ártico
+## LOC-AUR-PUER-001 — Puerto Ártico
 
 **Tipo:** Puerto
 **Isla:** Aurora
@@ -1279,7 +1279,7 @@
 
 ---
 
-#### LOC-AUR-NIE-001 — Nieve Alta
+## LOC-AUR-NIE-001 — Nieve Alta
 
 **Tipo:** Nieve
 **Isla:** Aurora
@@ -1304,7 +1304,7 @@
 
 ---
 
-#### LOC-AUR-NIE-002 — Bosque Nieve
+## LOC-AUR-NIE-002 — Bosque Nieve
 
 **Tipo:** Nieve
 **Isla:** Aurora
@@ -1330,7 +1330,7 @@
 
 ---
 
-#### LOC-AUR-LAG-001 — Lago Cristal
+## LOC-AUR-LAG-001 — Lago Cristal
 
 **Tipo:** Lago
 **Isla:** Aurora
@@ -1355,7 +1355,7 @@
 
 ---
 
-#### LOC-AUR-GLA-001 — Glaciar
+## LOC-AUR-GLA-001 — Glaciar
 
 **Tipo:** Nieve
 **Isla:** Aurora
@@ -1379,7 +1379,7 @@
 
 ---
 
-#### LOC-AUR-CUE-001 — Cueva de Hielo
+## LOC-AUR-CUE-001 — Cueva de Hielo
 
 **Tipo:** Cueva
 **Isla:** Aurora
@@ -1404,7 +1404,7 @@
 
 ---
 
-#### LOC-AUR-TEM-001 — Templo Ancestral
+## LOC-AUR-TEM-001 — Templo Ancestral
 
 **Tipo:** Ruinas
 **Isla:** Aurora
@@ -1430,7 +1430,7 @@
 
 ---
 
-## 6. Resumen de Ubicaciones por Isla
+# 6. Resumen de Ubicaciones por Isla
 
 | Isla | Total | PUB | CASA | TIE | TAL | CUE | BOS | PLA | RUI | PUER | MON | NIE | LAG | GLA | TEM |
 |------|-------|-----|------|-----|-----|-----|-----|-----|-----|------|-----|-----|-----|-----|-----|

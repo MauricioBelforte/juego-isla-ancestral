@@ -3,7 +3,7 @@
 
 # 03-Diseno.md — Módulo 27: Islas del Mundo
 
-## 1. Arquitectura
+# 1. Arquitectura
 
 Componentes (patrón Service Locator M07; sin acoplar gameplay en UI):
 
@@ -14,7 +14,7 @@ IslandLoading (servicio)             → carga/descarga/streaming de islas (M63)
 IslandProps (servicio)               → contenido exclusivo por isla (spawn declarativo)
 ```
 
-### 1.1 IslandDefinition (Resource `island_definition.gd`)
+# 1.1 IslandDefinition (Resource `island_definition.gd`)
 - `id` (StringName), `nombre_display` (String), `descripcion` (String, lore).
 - `bioma_base` (Bioma M09) y `biomas_mezcla` (Array, proporciones).
 - `radio` (int, metros voxel), `altura_min/max` (int), `playa_ancho` (int).
@@ -27,7 +27,7 @@ IslandProps (servicio)               → contenido exclusivo por isla (spawn dec
 - `desbloqueo` (condición: semilla de historia M22, sello M22/M26, expedición M28, viaje estacional).
 - `es_secreta` (bool: no aparece en mapa M54 hasta descubrirse), `es_flotante` (bool: islas del cielo sin océano debajo).
 
-### 1.2 IslandRegistry (autoload `island_registry.gd`)
+# 1.2 IslandRegistry (autoload `island_registry.gd`)
 - `get_isla(id) -> IslandDefinition`
 - `todas_las_islas() -> Array[IslandDefinition]` (orden determinista por id).
 - `isla_principal() -> IslandDefinition` (Aurora).
@@ -37,7 +37,7 @@ IslandProps (servicio)               → contenido exclusivo por isla (spawn dec
 - `coordenadas_por_isla(id) -> Rect2i` (bounds en voxels para streaming M63).
 - Señal: `archipielago_cargado`.
 
-### 1.3 IslandLoading (servicio `island_loading.gd`)
+# 1.3 IslandLoading (servicio `island_loading.gd`)
 - `cargar_isla(id, preferencia: PRELOAD/DESCARGA) -> Task` (async, progreso por pesos).
 - `descargar_isla(id)` (LRU de M63; nunca descarga Aurora ni la isla actual).
 - `isla_actual() -> StringName` (isla donde está el jugador).
@@ -46,37 +46,37 @@ IslandProps (servicio)               → contenido exclusivo por isla (spawn dec
 - `cacheado(id) -> bool`.
 - Señales: `isla_cargando(id, progreso_float, etapa)`, `isla_cargada(id)`, `isla_descargada(id)`.
 
-### 1.4 IslandProps (servicio `island_props.gd`)
+# 1.4 IslandProps (servicio `island_props.gd`)
 - `materializar(isla, zona: EnumWorld) -> void` (spawn de flora/fauna/POI contra generadores M50/M36/M19 mediante contratos).
 - `registrar_spawner(tipo, callable)` (permite que otros módulos registren sus spawner sin acoplarse).
 - `pois_isla(id) -> Array[POI]` (muelle, plaza, faro, templo, mirador — consumido por M64).
 - `limpiar(isla)` (descarga segura de props).
 
-## 2. Flujos en texto
+# 2. Flujos en texto
 
-### Flujo F1 — Inicio de partida / generación (M10)
+# Flujo F1 — Inicio de partida / generación (M10)
 1. M10 genera la losa del mundo con 8 capas; la **capa de anclas** sitúa Aurora (centro) y 12 satélites por PRNG de contexto 2.
 2. M27 lee las anclas generadas → `IslandRegistry.init(anclas)` → valida solapamientos (mínimo `radio_a + radio_b + 64 m` de mar) → `archipielago_cargado` emitido; errores → log y corrección de ancla (re-roll con misma semilla).
 3. `IslandLoading` marca Aurora como `isla_actual` y solicita su carga a M63 (siempre cargada).
 
-### Flujo F2 — Viaje por barco (M28 → M27 → M63)
+# Flujo F2 — Viaje por barco (M28 → M27 → M63)
 1. Jugador en muelle de Aurora → M28 inicia travesía (pantalla de viaje con progreso real).
 2. M28 consulta `IslandRegistry.posicion_ancla(destino)` para la ruta.
 3. `IslandLoading.cargar_isla(destino, PRELOAD)` con progreso (pesos: losa voxel 60%, props 25%, audio 10%, navmesh 5%) → `isla_cargada`.
 4. Al desembarcar: posición = `punto_de_llegada(destino)`, `isla_actual = destino`, marcado visitada en M59/M54.
 5. Aurora queda en LRU (no se descarga nunca de disco, sí de memoria si hay presión M62).
 
-### Flujo F3 — Navegación oceánica libre (M28 + M51)
+# Flujo F3 — Navegación oceánica libre (M28 + M51)
 1. El jugador zarpa sin destino fijo: el océano voxel (M51) es navegable continuamente.
 2. Al acercarse al radio de streaming de una isla vecina → `IslandLoading` precarga (borde + chunk de margen, M63).
 3. Al alejarse → LRU descarga; `IslandProps.limpiar`.
 4. Al entrar en aguas de isla → detección de llegada (M28) → `punto_de_llegada`.
 
-### Flujo F4 — Regreso a Aurora (anti-frustración)
+# Flujo F4 — Regreso a Aurora (anti-frustración)
 1. Cualquier muelle de satélite ofrece viaje de regreso (gratis, M28).
 2. Aurora siempre `isla_actual` carga → sin esperas; contenido asegurado.
 
-## 3. Contratos API GDScript
+# 3. Contratos API GDScript
 
 ```gdscript
 # island_definition.gd (Resource)
@@ -150,7 +150,7 @@ func pois_isla(id: StringName) -> Array
 func limpiar(id: StringName) -> void
 ```
 
-## 4. Integración con otros módulos
+# 4. Integración con otros módulos
 
 | Módulo | Relación |
 |---|---|
@@ -167,7 +167,7 @@ func limpiar(id: StringName) -> void
 | M63 (Cargas y Streaming) | Streaming de islas: progreso por pesos, precarga de vecina al cruzar borde, descarga LRU |
 | M64 (IA de NPC) | NPCs residentes se instancian solo si su isla está cargada; receta ligera fuera de isla |
 
-## 5. Catálogo inicial de islas (sección 26)
+# 5. Catálogo inicial de islas (sección 26)
 
 | Isla | Anillo | Bioma base M09 | Contenido exclusivo |
 |---|---|---|---|
@@ -185,65 +185,65 @@ func limpiar(id: StringName) -> void
 | Isla Pequeña | CERCANO | Costero | Miniescapada rápida |
 | Isla Secreta | LEJANO | Mixto | Se descubre por pistas (es_secreta) |
 
-## 6. Puerto y puntos de llegada (contrato con M28)
+# 6. Puerto y puntos de llegada (contrato con M28)
 
 - Cada isla define `punto_llegada` y `punto_partida` (vecinos del muelle).
 - El muelle se construye por M17/M40 (infraestructura) siguiendo la definición de M27.
 - Al desembarcar, el jugador aparece sobre el muelle mirando a tierra; suena música de la isla (M41)
 
-## Presupuestos de carga (Beam 343, produce-first, tranche 1)
-### ### Log WARN de ancla re-rollada
+# Presupuestos de carga (Beam 343, produce-first, tranche 1)
+### Log WARN de ancla re-rollada
 - Spec: cuando una ancla se re-rolla (8 intentos fallidos), emitir WARN con: id_isla, intento (1-8), motivo (fuera de bounds / colisión / terreno inválido), fallback (anillo siguiente).
 - Formato: `WARN [M27] ancla re-rolleada: isla=%s intento=%d motivo=%s fallback=%s`.
 - Coherente con M10 (generación) y M63 (streaming).
 
-### ### Signals de carga de isla
+### Signals de carga de isla
 - `isla_cargando(id, progreso, etapa)`: emitido en cada etapa de carga (precarga, descarga, streaming). progreso: 0.0-1.0. etapa: "precarga" | "descarga" | "streaming".
 - `isla_cargada(id)`: emitido al 100% de carga. Contrato: M28 consulta `progreso()` antes de emitir.
 - `isla_descargada(id)`: emitido al liberar la isla (M63 streaming).
 - Coherente con M63 (IslandLoading) y M28 (viajes).
 
-### ### cacheado(id) -> bool
+### cacheado(id) -> bool
 - Función: `cacheado(id: StringName) -> bool` — retorna true si la isla está en caché (no necesita recarga).
 - Implementación: dictionary `_cache: Dictionary[StringName, bool]` en IslandRegistry.
 - Coherente con M63 (streaming) y M10 (generación).
 
-### ### Carga de .tres diferida (no bloqueante)
+### Carga de .tres diferida (no bloqueante)
 - Spec: carga diferida de .tres al iniciar partida (13 .tres livianos, carga síncrona en _ready()).
 - Estimación: 13 .tres × ~5 ms = ~65 ms total. Excede el frame budget de 16.6 ms para 60 FPS.
 - Propuesta: carga diferida (no bloqueante) usando ResourceLoader.load_interactive() en background.
 - Coherente con M61 (rendimiento) y M63 (streaming). Etiquetado como "propuesta de director pendiente de GO" (fundador 23oct).
 
-### ### Nota de cierre (Beam 410)
+### Nota de cierre (Beam 410)
 Verificado: IslandPreF ~X ms estimado por .tres liviano; margin vs frame 16.6 ms OK con carga diferida. (cifras estimadas por Beam; etiqueta "propuesta pendiente de GO" si dudas).
 
-### ### Spawn de fauna y POI (Beam 448)
+### Spawn de fauna y POI (Beam 448)
 - Spawn de fauna endémica (contrato M36): dentro de los bounds de la isla. El campo fauna_endemica existe en island_definition.gd. Coherente con M36 (fauna) y M09 (biomas).
 - Spawn de POI (muelle, plaza, faro, templo, mirador): consumidos por M64. El catálogo de POI no existe aún (0 hits). Coherente con M64 (IA de NPC) y M09 (biomas). Pendiente de implementación.
 
-### ### Carga de .tres diferida (no bloqueante)
+### Carga de .tres diferida (no bloqueante)
 - Spec: carga diferida de .tres al iniciar partida (13 .tres livianos, carga síncrona en _ready()).
 - Estimación: 13 .tres × ~5 ms = ~65 ms total. Excede el frame budget de 16.6 ms para 60 FPS.
 - Propuesta: carga diferida (no bloqueante) usando ResourceLoader.load_interactive() en background.
 - Coherente con M61 (rendimiento) y M63 (streaming). Etiquetado como "propuesta de director pendiente de GO" (fundador 23oct).
 
-## Presupuestos de render y carga (Beam 340, produce-first)
-### ### IslandPref (enum de carga)
+# Presupuestos de render y carga (Beam 340, produce-first)
+### IslandPref (enum de carga)
 - Enum: `enum IslandPref { PRELOAD, DESCARGA }` — la capacidad equivalente ya existe como `TIPO_CARGA/TIPO_DESCARGA/TIPO_` en el código (island_definition.gd). Este enum formaliza la intención de carga para el catálogo de islas.
 - Valores: PRELOAD (carga al boot, islas cercanas), DESCARGA (carga on-demand, islas lejanas).
 - Coherente con M63 (IslandLoading) y M10 (generación).
 
-### ### Shader de agua (M51) presupuestado por M61
+### Shader de agua (M51) presupuestado por M61
 - Presupuesto: shader de agua (M51) ≤ 1.0 ms por frame (dentro del budget de render 16.6 ms para 60 FPS).
 - El shader de agua usa 1 draw call (M51) + LOD por distancia (< 20m full, 20-50m half, > 50m off).
 - Coherente con M61 (rendimiento) y M51 (agua).
 
-### ### Profiling de carga (M61)
+### Profiling de carga (M61)
 - Presupuesto: la carga de la isla más grande cabe en frame budget M61 (16.6 ms para 60 FPS).
 - Medición: P99 del frame time durante la carga, con VSYNC off.
 - Umbral: FPS >= 60 (media), P99 <= 40 ms (max frame).
 
-### Test de estrés (M61)
+# Test de estrés (M61)
 - Presupuesto: 2 islas cargadas + 1 precargando bajo presupuesto M61 (16.6 ms para 60 FPS).
 - Medición: FPS promedio/minimo, draw calls, objetos renderizados, VRAM estimada.
 - Umbral: FPS >= 60 (media), P99 <= 40 ms (max frame)..

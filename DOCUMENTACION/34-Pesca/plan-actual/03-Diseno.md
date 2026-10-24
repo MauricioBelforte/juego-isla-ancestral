@@ -3,7 +3,7 @@
 
 # 03-Diseno.md — Modulo 34: Pesca
 
-## 1. Arquitectura (por capas)
+# 1. Arquitectura (por capas)
 
 ```
 Vista (UI)              FishingMinigameUI.gd  /  FishingHud.gd   (puro: solo escucha senales)
@@ -22,40 +22,40 @@ Integracion             M51 Agua (voxels)  M29/M31/M32 (tiempo/clima)  M14 (inve
 
 Reglas de capas (AGENTS seccion 9): la UI nunca toca voxels ni M14; el manager expone API publica; los Resources son datos puros.
 
-## 2. Clases y Responsabilidades
+# 2. Clases y Responsabilidades
 
-### 2.1 FishingManager (autoload `Fishing`)
+# 2.1 FishingManager (autoload `Fishing`)
 - Registro de spots vivos (`FishingSpot` por chunk M51).
 - Resolucion de especie: filtra `FishDefinition` por bioma, estacion M29, franja M31, clima M32 y cebo; elige por PRNG ponderado M29.
 - Crea/destruye `FishingSession` y emite senales de estado hacia la UI.
 - Persiste `FishCollectionData` (coleccion, estadisticas, mejor tamano).
 
-### 2.2 FishingSpot (Node3D, por chunk de agua M51)
+# 2.2 FishingSpot (Node3D, por chunk de agua M51)
 - Se registra/desregistra con el chunk (streaming M51).
 - Valida si sigue siendo "agua pescable" bajo demanda (no cada frame): voxel AGUA + AIRE encima + orilla accesible a pie.
 - Marca visual opcional (ondulaciones/burbujas) y punto de impacto del anzuelo.
 
-### 2.3 FishingRod (Resource) — datos de la cana equipada
+# 2.3 FishingRod (Resource) — datos de la cana equipada
 - Rango de lanzamiento (m), ventana de exito (s), multiplicador de espera (x), multiplicador de rareza (x).
 - Variantes: cana vieja, cana de madera ancestral, cana de deidad.
 
-### 2.4 FishDefinition (Resource `.tres`)
+# 2.4 FishDefinition (Resource `.tres`)
 - id, nombre (localizable), bioma(s), estaciones (M29), franjas (M31), climas (M32), peso PRNG (rareza), tamano min/max (m), valor venta (M37), recetas que consume (M15), pieza museo (M37), señuelos preferidos.
 
-### 2.5 FishingSession — maquina de estados del minijuego
+# 2.5 FishingSession — maquina de estados del minijuego
 Estados: `IDLE -> LANZANDO -> ESPERA_PICADA -> PICADA -> MINIJUEGO -> CAPTURA | ESCAPE -> IDLE`
 - Timers pausables con GameClock (M29); PRNG propio derivado del M29 para determinismo.
 - 2 fases indulgentes: fase A (reaccion: pulsar al hundirse el flotador; ventana segun cana) y fase B (mantener 3 pulsaciones con ventana amplia).
 
-### 2.6 FishCollectionData (Resource de partida)
+# 2.6 FishCollectionData (Resource de partida)
 - Por especie: capturado (bool), veces, mejor tamano; totales de capturas; piezas entregadas a M37.
 
-### 2.7 UI (FishingMinigameUI, FishingHud)
+# 2.7 UI (FishingMinigameUI, FishingHud)
 - Indicador de espera (flotador, sonido de picada), boton de captura, feedback de exito/escape, zoom de captura, entrada al registro. Solo escucha senales; sin logica de gameplay.
 
-## 3. Flujos en Texto
+# 3. Flujos en Texto
 
-### Flujo 1 — Captura completa
+# Flujo 1 — Captura completa
 1. Jugador equipa cana (M14/barra) y pulsa "pescar" mirando al agua.
 2. FishingManager busca el spot mas cercano en el rayo del jugador (rango de la cana) y valida voxels M51.
 3. Se lanza el flotador (RigidBody3D parabolico); estado LANZANDO.
@@ -66,27 +66,27 @@ Estados: `IDLE -> LANZANDO -> ESPERA_PICADA -> PICADA -> MINIJUEGO -> CAPTURA | 
 8. Se notifica a FishCollectionData (registro/estadisticas) y, si aplica, se marca pieza disponible para M37.
 9. UI muestra resultado cozy; el jugador puede relanzar con 1 clic.
 
-### Flujo 2 — Huida indulgente (sin frustracion)
+# Flujo 2 — Huida indulgente (sin frustracion)
 1. En fase A: no se pulso a tiempo. En fase B: se fallo una pulsacion.
 2. Estado ESCAPE: el pez huye; el flotador vuelve; la UI muestra "el pez se fue".
 3. Sin perdidas: no se consume cebo (solo se consume al capturar), ni dinero ni items; relanzado inmediato con 1 clic.
 
-### Flujo 3 — Validacion de spot (M51)
+# Flujo 3 — Validacion de spot (M51)
 1. Al intentar lanzar, FishingManager consulta el voxel en el punto de impacto: tipo AGUA y voxel superior AIRE.
 2. Busca orilla accesible (BFS limitado sobre chunks segun navmesh de orilla/arena).
 3. Si falla cualquiera: no se lanza, UI sutil "aqui no se puede pescar" (sin bloqueo molesto).
 
-### Flujo 4 — Resolucion de especie
+# Flujo 4 — Resolucion de especie
 1. Candidatas = FishDefinition que coinciden con bioma del spot + estacion M29 + franja M31 + clima M32 actuales.
 2. Ajuste: cebo equipado aplica multiplicadores (probabilidad + espera).
 3. Seleccion por PRNG ponderado (peso rareza x bono clima x bono cebo); tamano por PRNG uniforme en [min, max].
 
-### Flujo 5 — Carga/descarga de chunks (streaming M51)
+# Flujo 5 — Carga/descarga de chunks (streaming M51)
 1. Al cargar chunk con agua: FishingSpot se crea y registra en FishingManager.
 2. Si hay sesion activa en un spot descargado: se cancela como ESCAPE (sin castigo, el pez "no tuvo ganas").
 3. Al descargar: el spot deja de recibir lanzamientos; se limpia de registros (pooling).
 
-## 4. Contratos API (GDScript, Godot 4.x)
+# 4. Contratos API (GDScript, Godot 4.x)
 
 ```gdscript
 # FishingManager.gd (autoload Fishing)
@@ -169,7 +169,7 @@ extends Resource
 @export var multiplicador_rareza: float = 1.0
 ```
 
-## 5. Integracion con Otros Modulos
+# 5. Integracion con Otros Modulos
 
 | Modulo | Integracion |
 |---|---|
@@ -181,7 +181,7 @@ extends Resource
 | M14 (Inventario) | Pez como item (stack, calidad); consumo para recetas M15; equipar cana y cebos |
 | M15 (Crafting) | Recetas de coccion consumen peces del inventario (complemento: no obligatorio) |
 
-## 6. Reglas Anti-Frustracion (Cozy, verificables)
+# 6. Reglas Anti-Frustracion (Cozy, verificables)
 
 1. Espera de picada en [2, 8] s segun cana y cebo.
 2. Ventana de exito minima 0.35 s (cana vieja) y 0.70 s (cana de deidad).
@@ -193,41 +193,41 @@ extends Resource
 8. Pausa (GameClock M29) congela timers del minijuego; nunca se pierde por pausa.
 9. Sin FOMO: las especies estacionales vuelven cada ano del calendario (M29, anos repetibles).
 
-## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+# Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-8 (H4)**: pesca con margen >70% es **intencional** (M93/M34). El margen alto de pesca es una decision de diseño, no un bug. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 - **PAQ-8 (H5)**: las probabilidades de fishing son **pesos relativos**, no probabilidades (suman >1 a proposito). No normalizar a 1.0. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 
-## Presupuestos de pesca (Beam 346, produce-first)
-### ### Evento de festival con bono temporal de capturas
+# Presupuestos de pesca (Beam 346, produce-first)
+### Evento de festival con bono temporal de capturas
 - Spec: en festival (M29), las capturas de peces otorgan bono x2 (duplica el peso del pez para el ranking).
 - Duracion: durante el festival (1 dia de juego).
 - Coherente con M29 (calendario) y M72 (logros).
 
-### ### Feedback de escape cozy ("el pez se fue") sin culpa
+### Feedback de escape cozy ("el pez se fue") sin culpa
 - Spec: al escapar el pez, mostrar mensaje "el pez se fue" (no punitivo). Sin penalizacion, sin pérdida de cebo.
 - Coherente con M53 (UI) y M42 (sonido).
 
-### ### Zoom de captura con nombre y tamaño del pez
+### Zoom de captura con nombre y tamaño del pez
 - Spec: al capturar, mostrar zoom con nombre del pez y tamaño (cm). Formato: "Sardina — 12 cm".
 - Coherente con M53 (UI) y M55 (diario).
 
-### ### Notificacion de nueva especie al catalogo
+### Notificacion de nueva especie al catalogo
 - Spec: al capturar una especie nueva (entry.veces == 1), emitir notificacion "Nueva especie: [nombre]".
 - Coherente con M72 (logros) y M53 (UI).
 
-### ### Sonido de escape del pez (no punitivo)
+### Sonido de escape del pez (no punitivo)
 - Spec: sonido de escape suave (no punitivo). Volumen -6 dB sobre ambiente.
 - Coherente con M42 (sonido ambiental) y M43 (SFX).
 
-## Presupuestos de desafios (Beam 439, produce-first)
-### ### Desafios (objetivos opcionales: catalogo completo, pez mas grande)
+# Presupuestos de desafios (Beam 439, produce-first)
+### Desafios (objetivos opcionales: catalogo completo, pez mas grande)
 - Spec: objetivos opcionales de pesca (catalogo completo = capturar las 25 especies; pez mas grande = capturar un pez con peso > umbral).
 - Catálogo completo: capturar las 25 especies de fishing.json.
 - Pez más grande: capturar un pez con peso > umbral (ej: pez_luna > 30 kg, pez_ancestral_raiz > 20 kg).
 - Coherente con M72 (logros) y M93 (balance). achievement_service ya consume captura_exitosa.
 
-## Presupuestos de brillo (Beam 448, produce-first)
-### ### Brillo sutil para peces raros/legendarios al caer
+# Presupuestos de brillo (Beam 448, produce-first)
+### Brillo sutil para peces raros/legendarios al caer
 - Spec: brillo sutil para peces raros/legendarios al caer (VFX). Dato de rareza disponible (peso_rareza/UMBRAL_RARO).
 - Coherente con M52 (particulas/VFX) y M93 (balance). El brillo se activa cuando peso_rareza >= UMBRAL_RARO.
 - UMBRAL_RARO: pez con probabilidad <= 0.1 (legendario) o <= 0.04 (ancestral) o <= 0.01 (ancestral especial).

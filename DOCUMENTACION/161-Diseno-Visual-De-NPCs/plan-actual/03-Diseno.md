@@ -4,7 +4,7 @@
 
 # 03-Diseno.md — Módulo 161: Diseño Visual de NPCs
 
-## 1. Paleta de Colores de Piel
+# 1. Paleta de Colores de Piel
 
 | Tone ID | Nombre | HEX | Uso |
 |---------|--------|-----|-----|
@@ -14,7 +14,7 @@
 | SK-04 | Moreno | #8B6914 | Piel morena |
 | SK-05 | Oscuro | #5C4033 | Piel oscura |
 
-## 2. Paleta de Colores de Cabello
+# 2. Paleta de Colores de Cabello
 
 | Hair ID | Nombre | HEX |
 |---------|--------|-----|
@@ -27,7 +27,7 @@
 | HR-07 | Blanco | #F5F5DC |
 | HR-08 | Pelirojo Claro | #CD853F |
 
-## 3. Paleta de Colores de Ojos
+# 3. Paleta de Colores de Ojos
 
 | Eye ID | Nombre | HEX |
 |--------|--------|-----|
@@ -39,9 +39,9 @@
 
 ---
 
-## 4. ISLA RAÍZ (RIZ) — 8 NPCs
+# 4. ISLA RAÍZ (RIZ) — 8 NPCs
 
-### 4.1 Mayor del Pueblo
+# 4.1 Mayor del Pueblo
 
 **Rol:** Líder del pueblo, da misiones principales
 **Piel:** SK-02 (Medio)
@@ -63,7 +63,7 @@
 
 ---
 
-### 4.2 Carpintero
+# 4.2 Carpintero
 
 **Rol:** Dueño de la carpintería, vende herramientas T1
 **Piel:** SK-03 (Bronceado)
@@ -85,7 +85,7 @@
 
 ---
 
-### 4.3 Vendedora de la Tienda General
+# 4.3 Vendedora de la Tienda General
 
 **Rol:** Dueña de la tienda, vende de todo
 **Piel:** SK-01 (Clara)
@@ -107,7 +107,7 @@
 
 ---
 
-### 4.4 Viejo Sabio (Ermitaño)
+# 4.4 Viejo Sabio (Ermitaño)
 
 **Rol:** NPC misterioso, da pistas sobre ruinas
 **Piel:** SK-04 (Moreno)
@@ -129,7 +129,7 @@
 
 ---
 
-### 4.5 Pescador del Puerto
+# 4.5 Pescador del Puerto
 
 **Rol:** Vende cebo y enseña a pescar
 **Piel:** SK-03 (Bronceado)
@@ -151,7 +151,7 @@
 
 ---
 
-### 4.6 Agricultora
+# 4.6 Agricultora
 
 **Rol:** Vende semillas, enseña cultivo
 **Piel:** SK-02 (Medio)
@@ -173,7 +173,7 @@
 
 ---
 
-### 4.7 Niña del Pueblo (NPC niño)
+# 4.7 Niña del Pueblo (NPC niño)
 
 **Rol:** NPC decorativo, da quests simples
 **Piel:** SK-01 (Clara)
@@ -195,7 +195,7 @@
 
 ---
 
-### 4.8 Animador de la Plaza
+# 4.8 Animador de la Plaza
 
 **Rol:** Organiza eventos, anima festivales
 **Piel:** SK-02 (Medio)
@@ -217,9 +217,9 @@
 
 ---
 
-## 5. ISLA CORAL (COR) — 5 NPCs
+# 5. ISLA CORAL (COR) — 5 NPCs
 
-### 5.1 Herrero de Coral
+# 5.1 Herrero de Coral
 
 **Rol:** Forja herramientas T2, enseña herrería básica
 **Piel:** SK-04 (Moreno)
@@ -241,7 +241,7 @@
 
 ---
 
-### 5.2 Pescadora de Coral
+# 5.2 Pescadora de Coral
 
 **Rol:** Vende pescado tropical, recetas de mar
 **Piel:** SK-03 (Bronceado)
@@ -263,7 +263,7 @@
 
 ---
 
-### 5.3 Comerciante Viajero
+# 5.3 Comerciante Viajero
 
 **Rol:** Mercader ambulante, aparece en ferias
 **Piel:** SK-02 (Medio)
@@ -285,7 +285,7 @@
 
 ---
 
-### 5.4 Guardia del Puerto
+# 5.4 Guardia del Puerto
 
 **Rol:** Vigila el puerto, tutorial de viajes
 **Piel:** SK-04 (Moreno)
@@ -307,7 +307,7 @@
 
 ---
 
-### 5.5 Niña de la Playa
+# 5.5 Niña de la Playa
 
 **Rol:** NPC decorativo, recolecta conchas
 **Piel:** SK-03 (Bronceado)
@@ -328,9 +328,9 @@
 
 ---
 
-## 6. ISLA CENIZA (CEN) — 5 NPCs
+# 6. ISLA CENIZA (CEN) — 5 NPCs
 
-### 6.1 Herrero Avanzado
+# 6.1 Herrero Avanzado
 
 **Rol:** Forja herramientas T3, experto en metales
 **Piel:** SK-05 (Oscura)
@@ -352,7 +352,7 @@
 
 ---
 
-### 6.2 Minero
+# 6.2 Minero
 
 **Rol:** Trabaja en la mina, vende minerales
 **Piel:** SK-04 (Moreno)
@@ -374,7 +374,7 @@
 
 ---
 
-### 6.3 Cocinera del Pueblo
+# 6.3 Cocinera del Pueblo
 
 **Rol:** Vende comida preparada, enseña recetas
 **Piel:** SK-02 (Medio)
@@ -396,7 +396,7 @@
 
 ---
 
-### 6.4 Bibliotecario
+# 6.4 Bibliotecario
 
 **Rol:** Guarda libros, da lore del juego
 **Piel:** SK-01 (Clara)
@@ -418,7 +418,7 @@
 
 ---
 
-### 6.5 Guardia de la Mina
+# 6.5 Guardia de la Mina
 
 **Rol:** Vigila la entrada a la mina
 **Piel:** SK-04 (Moreno)
@@ -440,9 +440,9 @@
 
 ---
 
-## 7. ISLA AURORA (AUR) — 5 NPCs
+# 7. ISLA AURORA (AUR) — 5 NPCs
 
-### 7.1 Encantador
+# 7.1 Encantador
 
 **Rol:** Encanta herramientas T4, experto en magia
 **Piel:** SK-01 (Clara)
@@ -464,7 +464,7 @@
 
 ---
 
-### 7.2 Sanadora del Pueblo
+# 7.2 Sanadora del Pueblo
 
 **Rol:** Cura enfermedades, vende pociones
 **Piel:** SK-02 (Medio)
@@ -486,7 +486,7 @@
 
 ---
 
-### 7.3 Guardia Ancestral
+# 7.3 Guardia Ancestral
 
 **Rol:** Vigila los templos, protege al pueblo
 **Piel:** SK-05 (Oscura)
@@ -508,7 +508,7 @@
 
 ---
 
-### 7.4 Artista del Pueblo
+# 7.4 Artista del Pueblo
 
 **Rol:** Crea arte, vende cuadros y esculturas
 **Piel:** SK-01 (Clara)
@@ -530,7 +530,7 @@
 
 ---
 
-### 7.5 Viajero Misterioso
+# 7.5 Viajero Misterioso
 
 **Rol:** NPC secreto, aparece solo de noche
 **Piel:** SK-04 (Moreno)
@@ -552,9 +552,9 @@
 
 ---
 
-## 8. Tabla Resumen Visual por Isla
+# 8. Tabla Resumen Visual por Isla
 
-### 8.1 Isla Raíz — Colores Predominantes
+# 8.1 Isla Raíz — Colores Predominantes
 
 | NPC | Sombrero | Camisa | Pantalón | Botas | Herramienta |
 |-----|----------|--------|----------|-------|-------------|
@@ -567,7 +567,7 @@
 | Niña | Cinta #FF69B4 | #87CEEB | #FFFDD0 | — Zapatillas #FF69B4 | Pelota |
 | Animador | #FFD700 | #FF4500 | #2C2C2C | #5C4033 | Cencerro |
 
-### 8.2 Isla Coral — Colores Predominantes
+# 8.2 Isla Coral — Colores Predominantes
 
 | NPC | Cabeza | Camisa | Pantalón | Botas | Herramienta |
 |-----|--------|--------|----------|-------|-------------|
@@ -577,7 +577,7 @@
 | Guardia | #71797E Casco | #191970 | #191970 | #2C2C2C | Lanza |
 | Niña Playa | Flores #FF69B4 | #87CEEB | #FFFDD0 | Descalza | Cubo |
 
-### 8.3 Isla Ceniza — Colores Predominantes
+# 8.3 Isla Ceniza — Colores Predominantes
 
 | NPC | Cabeza | Camisa | Pantalón | Botas | Herramienta |
 |-----|--------|--------|----------|-------|-------------|
@@ -587,7 +587,7 @@
 | Bibliotecario | Lentes | #FFFDD0 | #36454F | #2C2C2C | Libro |
 | Guardia Mina | #71797E Casco | #36454F | #36454F | #2C2C2C | Lanza |
 
-### 8.4 Isla Aurora — Colores Predominantes
+# 8.4 Isla Aurora — Colores Predominantes
 
 | NPC | Cabeza | Camisa | Pantalón | Botas | Herramienta |
 |-----|--------|--------|----------|-------|-------------|
@@ -599,9 +599,9 @@
 
 ---
 
-## 9. Reglas de Diseño Visual
+# 9. Reglas de Diseño Visual
 
-### 9.1 Identificación por Profesión
+# 9.1 Identificación por Profesión
 
 | Profesión | Elemento Clave | Color Asociado |
 |-----------|----------------|----------------|
@@ -616,7 +616,7 @@
 | Cocinero | Cofia + cuchara | #FFFDD0, #E2725B |
 | Artista | Beret + paleta | #2C2C2C, #B87333 |
 
-### 9.2 Colores por Isla
+# 9.2 Colores por Isla
 
 | Isla | Colores Predominantes | Atmósfera |
 |------|----------------------|-----------|
@@ -625,7 +625,7 @@
 | Ceniza | #36454F, #71797E, #A0522D | Oscura, industrial, minerales |
 | Aurora | #191970, #FFD700, #FF4500 | Mágica, etérea, ancestral |
 
-### 9.3 Proporciones NPC
+# 9.3 Proporciones NPC
 
 | Tipo | Altura | Ancho | Notas |
 |------|--------|-------|-------|
@@ -635,7 +635,7 @@
 | Guardia | 1.9 | 0.7 | Más ancho por armadura |
 | Encantador | 1.8 | 0.5 | Delgado, etéreo |
 
-### 9.4 Variantes Estacionales
+# 9.4 Variantes Estacionales
 
 Cada NPC puede tener variantes de ropa por estación:
 
@@ -646,7 +646,7 @@ Cada NPC puede tener variantes de ropa por estación:
 | Otoño | Colores cálidos, mangas largas, capas |
 | Invierno | Ropa gruesa, abrigos, bufandas, guantes |
 
-#### 9.4.1 Variantes estacionales por NPC (>= 10 documentados)
+## 9.4.1 Variantes estacionales por NPC (>= 10 documentados)
 
 Regla base: cada NPC define un **base = c1** (la paleta de `data/npc_visuals/<ISLA>/NPC-*.tres`, códigos SK/HR/EY + accesorios SubResource). Las variantes estacionales (`variantes_estacionales` en el `.tres`) re-usan MISMA malla y cambian **ropa/accesorios/tono** según la tabla de §9.4. Estas son las variantes documentadas (12 NPCs; el resto sigue el mismo patrón RF6). La MAQUINA `variantes_estacionales` queda poblada en iter 2 (RF6, dueño M45/M46/Hy4); aquí va el DISEÑO.
 
@@ -666,37 +666,37 @@ Regla base: cada NPC define un **base = c1** (la paleta de `data/npc_visuals/<IS
 | RIZ-008 | animador | SK-03/HR-07 | túnica + instrumento | túnica ligera | túnica + capa | túnica + abrigo | instrumento |
 
 **Reglas por rol:** puestos **fijos de trabajo** (herrero/cocinera/guardia/carpintero) usan **una sola variante** con ajuste térmico (delantal/guantes) en la estación extrema; roles **exteriores** (viajero/pescadora/agricultora/niña/animador) tienen **4 variantes** (ropa + calzado + sombrero/bufanda por estación). **Límite: máx 4 variantes por NPC** (RF5 máx 6, usamos 4 por costo); exceder = deuda `[?]`.
-## Variantes estacionales (cola total M161 batch)
+# Variantes estacionales (cola total M161 batch)
 
-### Variantes primavera
+# Variantes primavera
 - NPCs con ropa de primavera.
 - Colores claros y florales.
 
-### Variantes verano
+# Variantes verano
 - NPCs con ropa de verano.
 - Colores vibrantes.
 
-### Variantes otono
+# Variantes otono
 - NPCs con ropa de otono.
 - Colores calidos.
 
-### Variantes invierno
+# Variantes invierno
 - NPCs con ropa de invierno.
 - Colores frios y abrigos.
-## Verificacion de integracion (cola total M161 batch)
+# Verificacion de integracion (cola total M161 batch)
 
-### Verificar retratos 2D (M46) usan estos disenos
+# Verificar retratos 2D (M46) usan estos disenos
 - Los retratos 2D usan los disenos de NPCs.
 - Coherencia visual.
 
-### Verificar modelos 3D (M45) implementan estos disenos
+# Verificar modelos 3D (M45) implementan estos disenos
 - Los modelos 3D implementan los disenos.
 - Coherencia con el arte 3D.
 
-### Verificar NPCs aparecen en ubicaciones M160
+# Verificar NPCs aparecen en ubicaciones M160
 - Los NPCs aparecen en las ubicaciones de M160.
 - Coherencia con el diseno de ubicaciones.
 
-### Verificar ropa puede coincidir con M155
+# Verificar ropa puede coincidir con M155
 - La ropa de NPCs puede coincidir con M155.
 - Consistencia de equipamiento.

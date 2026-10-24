@@ -4,7 +4,7 @@
 
 # 03-Diseno.md — Módulo 87: Localización
 
-## 1. Arquitectura del módulo
+# 1. Arquitectura del módulo
 
 ```
 Localización (M87)
@@ -56,9 +56,9 @@ Localización (M87)
 
 La arquitectura sigue la regla de modularidad del proyecto: el `LocalizationManager` es la única capa que conoce el motor de traducción (TranslationServer) y los catálogos; la UI (M53) y los sistemas de texto (M21, M44) solo llaman a sus funciones expuestas, sin acoplarse a `.po` ni a detalles de gettext.
 
-## 2. Componentes
+# 2. Componentes
 
-### 2.1 LocalizationManager (autoload "Localization")
+# 2.1 LocalizationManager (autoload "Localization")
 
 Responsabilidades:
 
@@ -68,7 +68,7 @@ Responsabilidades:
 4. **Formatear:** delega números, fechas y hora en `LocaleUtils` según el idioma activo.
 5. **Validar:** `validar_catalogos()` y `obtener_estado_catalogos()` reportan faltantes/vacías en runtime; `claves_faltantes()` (iter. 5) lista lo que el juego pidió y no existía, con **un aviso por clave** (deduplicado). La validación profunda de archivos vive en `ValidadorPO` y el inventario código↔catálogo en `AuditorClaves`, ambos usables desde un script headless de CI.
 
-### 2.2 Catálogos .po (res://locales/)
+# 2.2 Catálogos .po (res://locales/)
 
 Formato por entrada:
 
@@ -102,7 +102,7 @@ Reglas:
 - En `en.po` cada clave traducida debe existir; mientras una no tenga traducción, su `msgstr` se deja con el texto español (fallback natural hasta traducir).
 - UTF-8 sin BOM, saltos LF, una entrada por bloque.
 
-### 2.3 Selector de idioma (configuración, M53/M90)
+# 2.3 Selector de idioma (configuración, M53/M90)
 
 - Lista horizontal de opciones o dropdown con los idiomas soportados, mostrados con su **nombre nativo** ("Español", "English").
 - Al seleccionar: `Localization.set_locale(locale)` -> cambio en vivo + persistencia (M60).
@@ -110,7 +110,7 @@ Reglas:
 - ⚠️ **Desviación real (verificada iter. 5):** el diseño decía "nunca se cambia el idioma sin consentimiento explícito", pero el código **sí lo hace**: `_restaurar_locale_guardado()` aplica la sugerencia del SO (`_aplicar_locale`) **y la persiste** (`_persistir_locale`) en el primer arranque, sin esperar confirmación; la UI de confirmación pertenece a M53 y está pendiente. Queda registrado como desviación consciente y dependiente de M53: cuando M53 agregue el diálogo, la sugerencia debería quedar **solo preseleccionada** hasta que el jugador confirme.
 - El selector está enlazado a las opciones de accesibilidad (M58): el tamaño de fuente ajustado se re-aplica en el idioma nuevo.
 
-### 2.4 Convenciones de claves
+# 2.4 Convenciones de claves
 
 ```
 MODULO.SECCION.CLAVE          (todo en mayúsculas, separadores "_" y ".")
@@ -132,7 +132,7 @@ SETTINGS.IDIOMA_DESC          -> "Idioma de los textos del juego"
 - Un término se declara una sola vez y se reutiliza (glosario); si el mismo texto necesita traducciones distintas según contexto, se desambigua con el campo `#... context` de gettext o con una sección distinta.
 - Prohibido repetir el texto visible en código: siempre por clave.
 
-#### 2.4.1 Inventario de prefijos vigentes (auditado TANDA 16, 2026-10-21 — msg 189)
+## 2.4.1 Inventario de prefijos vigentes (auditado TANDA 16, 2026-10-21 — msg 189)
 
 **Catálogos JSON** (`data/localizacion/strings_{es,en,pt}.json` — 170 claves, 14 prefijos):
 
@@ -162,7 +162,7 @@ SETTINGS.IDIOMA_DESC          -> "Idioma de los textos del juego"
 
 **Idioma del prefijo:** la flota mezcla ES (TIENDAS, DIALOGOS, eventos) y EN (SETTINGS, HUD, ITEMS...). El estándar no lo fija: para claves nuevas usar el nombre del sistema tal como figura en CHECKLIST-GLOBAL y mantener coherencia dentro del dominio.
 
-#### 2.4.2 Reglas de creación de claves (vigentes)
+## 2.4.2 Reglas de creación de claves (vigentes)
 
 1. **UPPER_SNAKE** con separadores `.` y `_` (salvo legado M60 minúscula — no nuevas).
 2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext.
@@ -172,7 +172,7 @@ SETTINGS.IDIOMA_DESC          -> "Idioma de los textos del juego"
 6. **Prohibido texto visible en código:** siempre por clave (verificado por `scripts/localization/auditor_claves.gd`).
 7. Menús data-driven (ej: `data/debug/debug_menu_config.json`) pueden llevar etiquetas literales si son **solo de desarrollo**; migrar a claves `DEBUG.*` si se exponen al jugador (hallazgo TANDA 15, tarea 100).
 
-#### 2.4.3 ID del grupo de localización — estándar de nombres (TANDA 18, 2026-10-21 — msg 194)
+## 2.4.3 ID del grupo de localización — estándar de nombres (TANDA 18, 2026-10-21 — msg 194)
 
 **Regla:** un **grupo** = un dominio funcional del juego. El ID del grupo es el prefijo de la clave (`GRUPO.seccion_clave`). Nuevo grupo solo si hay un dominio funcional nuevo; se registra en el inventario §2.4.1 y se crea con la regla ES+EN+PT (§2.4.2 regla 5).
 
@@ -186,7 +186,7 @@ SETTINGS.IDIOMA_DESC          -> "Idioma de los textos del juego"
 - Prefijo numérico (`M69.*`): excepción por módulo; preferir nombre semántico.
 - Un grupo por dominio; no agrupar dominios distintos bajo un mismo prefijo; no crear prefijos "de reserva" sin consumidor.
 
-#### 2.4.4 Texto de presets de control — "Controles:" del HUD (TANDA 19, 2026-10-21 — msg 196, tarea 72)
+## 2.4.4 Texto de presets de control — "Controles:" del HUD (TANDA 19, 2026-10-21 — msg 196, tarea 72)
 
 **Deuda auditada (hallazgo TANDA 17, §8b de 04-Codigo):**
 - `scripts/ui/layers/menus_layer.gd` L107/L124: `"Controles: " + String(acc.get_control_preset())` — literal ES + **ID técnico crudo** jugador-visible. Presets (`accesibilidad_manager.gd` `PERFILES_CONTROL` L152-175): `estandar`, `single_hand`, `low_mobility`. El jugador ve "Controles: single_hand" en cualquier idioma.
@@ -211,7 +211,7 @@ label.text = _t("SETTINGS.CONTROLES") % nombre
 - Las claves **no se crean sin consumidor** (evitar huérfanas del catálogo — el caso `SETTINGS.DESCARTAR*` del 04-Codigo L428): se aplican en el **mismo commit** que el consumo de `menus_layer.gd`, con la regla ES+EN+PT (§2.4.2 regla 5) y los tests M58 actualizados al nuevo formato.
 - El preset es un ID técnico: el mapeo a nombre amigable es por clave (no string-literal), coherente con el estándar "un término, una clave" (§2.4.2 regla 2).
 
-#### 2.4.5 Logs y errores del sistema — spans estándar (TANDA 20, 2026-10-21 — msg 198, tarea 73)
+## 2.4.5 Logs y errores del sistema — spans estándar (TANDA 20, 2026-10-21 — msg 198, tarea 73)
 
 **Estándar vigente (auditado):** los mensajes de sistema (`push_error`/`push_warning`) son **de consola (desarrollador), NO jugador-visible** → **no requieren i18n** (coherente con §2.4.3: texto de herramientas de dev). Sí aplican: (a) **idioma español** y (b) **formato `[MNN] mensaje`** con prefijo de módulo.
 
@@ -226,7 +226,7 @@ label.text = _t("SETTINGS.CONTROLES") % nombre
   - (nombres propios aceptables: `Bootstrap:` de `core/bootstrap.gd`, `asset_preview:` de M108).
 - **Deuda documentada (dueños M48/M60/M31/M21):** renombrar los 4 tags al formato `[MNN]` del estándar. No es bloqueante (consola de dev); no ejecutado por M87 (módulos ajenos).
 
-#### 2.4.6 Strings del jugador (logins, nombre, búsqueda) — evaluación de aplicabilidad (TANDA 21, 2026-10-21 — msg 200, tarea 71)
+## 2.4.6 Strings del jugador (logins, nombre, búsqueda) — evaluación de aplicabilidad (TANDA 21, 2026-10-21 — msg 200, tarea 71)
 
 **Pregunta de la tarea 71:** ¿aplica el language a los "strings del jugador (los logins)"? **Respuesta: al login NO (no existe en v1); al nombre del jugador NO (dato del usuario); al UI estático del jugador SÍ (y hay deuda en M06).**
 
@@ -276,7 +276,7 @@ Auditoría (L598-L1117): 11 traducibles + 2 no (`"X"` L644 y `"x%d"` L794 — s�
 
 **Seguimiento de la deuda M06 (cierre de tanda 22, 2026-10-22):** `scripts/player/player.gd` **sin cambios** desde su último commit `1e62132` (2026-10-16, «D102 ajuste fino: paneles aclarados...») — las 4 claves propuestas `ITEMS.USAR` / `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` / `ITEMS.SIN_HERRAMIENTA` **siguen ausentes de los catálogos** (grep: 0 hits en `data/localizacion/` y `locales/`; solo figuran en esta documentación). La deuda queda **pendiente de encargo al owner de M06** (clave + consumo en el mismo commit — política §2.4.4).
 
-#### 2.4.7 Estándar de lenguaje técnico del repositorio — comentarios, logs y la regla de frontera (TANDA 22, 2026-10-22 — tareas 97/98/99)
+## 2.4.7 Estándar de lenguaje técnico del repositorio — comentarios, logs y la regla de frontera (TANDA 22, 2026-10-22 — tareas 97/98/99)
 
 **Las tres preguntas de las tareas 97-99, respondidas con auditoría en disco:**
 
@@ -308,7 +308,7 @@ Auditoría (L598-L1117): 11 traducibles + 2 no (`"X"` L644 y `"x%d"` L794 — s�
 | Login/autenticación | NO aplica | no existe en v1 (§2.4.6) |
 | Nombre del hablante y etiqueta de expresión (M21/M53) | **SÍ** (jugador-visible; hoy muestra el ID crudo — deuda §2.4.8) | §2.4.8 |
 
-#### 2.4.8 Nombre del hablante y etiqueta de expresión (`speaker_key`) — aplicación de la regla de frontera (TANDA 23, 2026-10-22 — tarea 33, cierre de H3 de la Tanda 10)
+## 2.4.8 Nombre del hablante y etiqueta de expresión (`speaker_key`) — aplicación de la regla de frontera (TANDA 23, 2026-10-22 — tarea 33, cierre de H3 de la Tanda 10)
 
 **Medición (auditoría en disco):** `data/dialogues/` = **375 archivos JSON, 787 nodos con `speaker_key`, 27 claves únicas**: `npc` (x11), `npc.anciano` (x4), `npc.aur_001..005` (x35/27/29/27/37), `npc.catalina` (x6), `npc.cen_001..005` (x27/27/27/29/25), `npc.chaman` (x9), `npc.cor_001..005` (x31/27/27/27/25), `npc.riz_001..008` (x75/51/45/53/41/23/21/21).
 
@@ -327,7 +327,7 @@ El comentario del propio archivo (`npc_portrait_ui.gd` L58) ya dice «fija el ha
 
 **Propuesta llave-en-mano (para el owner; crear + consumir en el mismo commit — política anti-huérfana §2.4.4):** `NPC.CATALINA` / `NPC.CHAMAN` / `NPC.ANCIANO` / `NPC.AUR_001..005` / `NPC.CEN_001..005` / `NPC.COR_001..005` / `NPC.RIZ_001..008` (26 claves; nombres propios — iguales en es/en/pt por la frontera, salvo que el owner defina nombres traducidos), `EXPRESION.FELIZ_INTENSO` / `EXPRESION.FELIZ` / `EXPRESION.NEUTRAL` (3), y `REACCION.*` para los 4 `reaccion_id` de M20. Alternativa sin claves nuevas: tabla de `display_name` en `data/` (nombres de NPC y expresiones como datos), que mantiene los catálogos intactos y respeta la frontera sin crear huérfanas.
 
-#### 2.4.9 Auditoría de coherencia de strings por módulo — bloque G (TANDA 24, 2026-10-22 — tareas 41/42/43/44/45)
+## 2.4.9 Auditoría de coherencia de strings por módulo — bloque G (TANDA 24, 2026-10-22 — tareas 41/42/43/44/45)
 
 Auditoría estática report-only de los datos de string de M147/M160/M95/M100/M121 (el catálogo central no los cubre: son datos data-driven). Medida en disco 2026-10-22:
 
@@ -367,7 +367,7 @@ Auditoría estática report-only de los datos de string de M147/M160/M95/M100/M1
 
 **Síntesis bloque G:** los 5 módulos tienen strings jugador-visibles (o potencialmente visibles vía getters/consumidores) como literales ES en datos data-driven, fuera del catálogo central — la misma clase de deuda que los diálogos (H1 Tanda 10). La frontera §2.4.8 aplica: nombres propios/lugares NO se traducen (forma de origen), pero bios/descripciones/FAQs/ediciones SÍ son contenido jugador-visible → corresponde i18n data-driven (claves o campos por locale), decisión y ejecución de cada owner (módulos ajenos, no ejecutados por M87).
 
-#### 2.4.10 QA de strings con expresiones — bloque L (TANDA 25, 2026-10-22 — tareas 66/67/68/69/70)
+## 2.4.10 QA de strings con expresiones — bloque L (TANDA 25, 2026-10-22 — tareas 66/67/68/69/70)
 
 Auditoría estática report-only del bloque L (strings con expresiones/formato). Medida en disco 2026-10-22:
 
@@ -383,7 +383,7 @@ Auditoría estática report-only del bloque L (strings con expresiones/formato).
 
 **Síntesis bloque L:** sin defectos de traducción bloqueantes. Las deudas son de **adopción** (formateo numérico por idioma, T67) y **condicionales** (emotes MP futuro, T70); los contenidos de comunidad (T68) quedan fuera del runtime de M87 por la frontera; los wrap (T66/T69) pasan el proxy estático con verificación de píxeles pendiente Godot.
 
-#### 2.4.11 QA del spillover de la interfaz — bloque N (TANDA 26, 2026-10-22 — tareas 75/76/77/78)
+## 2.4.11 QA del spillover de la interfaz — bloque N (TANDA 26, 2026-10-22 — tareas 75/76/77/78)
 
 Auditoría estática report-only del bloque N (spillover de UI: tooltips, títulos, botones). Medida en disco 2026-10-22:
 
@@ -401,7 +401,7 @@ Auditoría estática report-only del bloque N (spillover de UI: tooltips, títul
 
 **HALLAZGO CROSS-BLOQUE (M159/M39/M53) — resolución de nombres de ítem inconsistente:** `inventory_layer.gd` `_nombre_item` L249-254 SÍ consume el `.tres nombre` canónico (ES, data-driven) con fallback ID maquillado; pero `shop_ui.gd` `_nombre_item` L342-345 y `hotbar_widget.gd` `_friendly_name` L164-165 muestran SOLO el item_id maquillado (`item_id.replace("_", " ")`). El jugador ve nombres DIFERENTES del mismo ítem según la superficie (inventario: «Pergamino: Rec. Tela de Lino»; tienda/hotbar: «Pergamino rec tela lino»). **DEUDA owners M39/M53/M159:** unificar la resolución de nombres (canónico en todas las superficies) como prerequisito del i18n data-driven de M159. Adicional: `CATEGORY_NAMES` (inventory_layer L16-22) = 16 categorías de inventario ES literales jugador-visibles (tabs) — data-driven pendiente de claves i18n (owner M06/M14).
 
-#### 2.4.12 QA del catálogo M159 de ítems — bloque O (TANDA 27, 2026-10-22 — tareas 79/80/81/82)
+## 2.4.12 QA del catálogo M159 de ítems — bloque O (TANDA 27, 2026-10-22 — tareas 79/80/81/82)
 
 Auditoría estática report-only del bloque O (catálogo de 300 `.tres` en `data/items/`). Medida en disco 2026-10-22:
 
@@ -419,7 +419,7 @@ Auditoría estática report-only del bloque O (catálogo de 300 `.tres` en `data
 
 **T82 — Iconos: CORRECTO (300/300 synced).** 300/300 `.tres` tienen `icono = ExtResource(CompressedTexture2D)` → `res://assets/2d/items_m159/ico_*.png`; **300 PNGs existen en disco, 0 referenciados sin archivo** (el «0/121» del backlog estaba stale — hoy 300/300). El arte es el frente de agnes/M45 (no es mío el asset); la verificación de consistencia referencia↔archivo es de este nicho.
 
-#### 2.4.13 QA de guardado, festivales y coleccionables — bloques P/Q/R (TANDA 28, 2026-10-22 — tareas 83/84/85/86/87/88)
+## 2.4.13 QA de guardado, festivales y coleccionables — bloques P/Q/R (TANDA 28, 2026-10-22 — tareas 83/84/85/86/87/88)
 
 Auditoría estática report-only de los bloques P (M59), Q (M74) y R (M73). Medida en disco 2026-10-22:
 
@@ -431,7 +431,7 @@ Auditoría estática report-only de los bloques P (M59), Q (M74) y R (M73). Medi
 
 **Síntesis P/Q/R:** M59 correcto (flujo de guardado 100% por clave); M74 y M73 son deudas data-driven ES-only con el mismo patrón de M159 (T27) — contenido jugador-visible en Resources/JSON sin vía de locale. Nótese el patrón transversal: los 3 módulos de contenido dinámico auditados (M159 items, M74 eventos, M73 coleccionables) tienen los nombres en la data, no en el catálogo M87 — consolidar la vía (campos por locale vs claves) es decisión del director/owners antes de traducir.
 
-#### 2.4.14 Monetización, servicios y flujo de boot — bloques S/T/U/V (TANDA 29, 2026-10-23 — tareas 89-96/101)
+## 2.4.14 Monetización, servicios y flujo de boot — bloques S/T/U/V (TANDA 29, 2026-10-23 — tareas 89-96/101)
 
 Auditoría estática report-only de los bloques S (M95/M129), T (M106/M116/M121/M123) y U (M09/M40), más el estándar del bloque V (tarea 101). Medida en disco 2026-10-23:
 
@@ -457,7 +457,7 @@ Auditoría estática report-only de los bloques S (M95/M129), T (M106/M116/M121/
 
 **Síntesis S/T/U/V:** M106 (alertas internas), M116 (wizard bilingüe), M123 (mensajes dev de mods), M09/M40 (logs + nombres propios) = correctos bajo el estándar §2.4.7. Las deudas son data-driven (M95: ediciones/DLC/bundles ES-only + inconsistencia de nombres de DLC entre archivos — unificar ANTES de traducir; M129: merch ES-only, físico, no es contenido de juego) o de contenido (M121: 0 FAQs escritas). Nuevamente el patrón transversal: los nombres viven en la data, no en el catálogo M87 — la decisión de vía (campos por locale vs claves) sigue pendiente en el director.
 
-#### 2.4.15 Medición de módulos vecinos — bloques D/F (TANDA 30, 2026-10-23 — tareas 29/30/35/36/37)
+## 2.4.15 Medición de módulos vecinos — bloques D/F (TANDA 30, 2026-10-23 — tareas 29/30/35/36/37)
 
 Auditoría report-only de medición de checklist (M88 Fuentes-Tipográficas, M91 Configuración-De-Audio) + condicional M118. Medida en disco 2026-10-23:
 
@@ -471,7 +471,7 @@ Auditoría report-only de medición de checklist (M88 Fuentes-Tipográficas, M91
 
 **Síntesis D/F:** M88 y M91 son módulos maduros (174/185 y 237/239) cuyos pendientes son **todos deudas con dueño externo documentadas** (visión M154, diseñador humano de fuentes, M58/M53/M90, limitaciones técnicas de Godot 4.7.2) — no hay strings jugador-visibles sin traducir en el alcance de estos módulos; la UI de M91 está 100% por clave M87 (reconfirmado aquí: 7 sliders por `SETTINGS.*`).
 
-### 2.4.16 Bloque A (T31, 2026-10-23): medición completa del catálogo M87 (tareas 1-4)
+# 2.4.16 Bloque A (T31, 2026-10-23): medición completa del catálogo M87 (tareas 1-4)
 
 **Firma:** Ling-3.1-Flash / Kilo Code — 2026-10-23 06:20. Auditoría estática código↔catálogo sobre **980 scripts de producción** (excluidos tests/fixtures), insumo del informe 227.
 
@@ -498,7 +498,7 @@ Auditoría report-only de medición de checklist (M88 Fuentes-Tipográficas, M91
 3. **Sincronizar ES←EN ↔ PT (paridad estructural):** ✓ watchdog paridad 0/0/0.
 4. **Validador del estándar 142** (`scripts/validar_i18n_integridad.py`): ✓ **LIMPIO**, 5 avisos informativos (arriba).
 
-### 2.4.17 Bloque W (T32, 2026-10-23): auditoría de calidad de traducción (punto ciego del watchdog)
+# 2.4.17 Bloque W (T32, 2026-10-23): auditoría de calidad de traducción (punto ciego del watchdog)
 
 **Firma:** Ling-3.1-Flash / Kilo Code — 2026-10-23 07:20. El watchdog (`scripts/validar_i18n_integridad.py`) solo detecta copias ES→PT; esta auditoría cubre su punto ciego — **copias ES→EN y vacíos, sobre las 136 claves vivas** (referenciadas en código de producción, T31).
 
@@ -520,7 +520,7 @@ Auditoría report-only de medición de checklist (M88 Fuentes-Tipográficas, M91
 
 **Conclusión:** el catálogo vivo está **completo y correcto en ES/EN/PT** — 0 traducciones faltantes, 0 vacíos, 0 copias no traducidas activas. Las 4 «sospechosas» del watchdog (`SETTINGS.HORAS_1/HORAS_H/MIN_1/MIN_M`) son claves MUERTAS del save legacy (T31), no deuda activa.
 
-### 2.5 Flujo de agregar un idioma nuevo
+# 2.5 Flujo de agregar un idioma nuevo
 
 1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma).
 2. Editar la cabecera (`Language: xx`, `Plural-Forms` si difiere del español).
@@ -531,9 +531,9 @@ Auditoría report-only de medición de checklist (M88 Fuentes-Tipográficas, M91
 6. Ejecutar `TranslationValidator` y QA de localización del idioma nuevo.
 7. Actualizar la documentación y el checklist del módulo.
 
-## 3. Flujos
+# 3. Flujos
 
-### 3.1 Arranque del juego
+# 3.1 Arranque del juego
 
 1. `Localization._ready()` lee el idioma guardado de la configuración (M60).
 2. Si no hay guardado: idioma por defecto español; si el SO sugiere otro idioma soportado, se marca la sugerencia en la pantalla de bienvenida.
@@ -580,7 +580,7 @@ Las 8 claves se crean en el **mismo commit** que el consumo (política anti-hué
 
 **Hallazgo de orden de arranque (riesgo de desync):** si la pantalla de carga se instanciara ANTES de que `Localization` cargue los .po, `_t()` devuelve la clave cruda (fallback L143-149). El autoload `Localization` corre antes que los nodos de escena (orden de autoload de Godot) — riesgo bajo — pero el tip literal **no depende del catálogo** (por eso el desync es invisible en runtime: siempre muestra ES). Al migrar a claves, verificar que el tip se muestre después de la carga de catálogos.
 
-### 3.2 Cambio de idioma en vivo
+# 3.2 Cambio de idioma en vivo
 
 1. El jugador selecciona otro idioma en configuración.
 2. `Localization.set_locale(nuevo)` valida, aplica `TranslationServer.set_locale`, limpia cache, persiste el cambio y emite `locale_changed`.
@@ -588,20 +588,20 @@ Las 8 claves se crean en el **mismo commit** que el consumo (política anti-hué
 4. Los diálogos activos (M21) finalizan la línea actual y continúan en el idioma nuevo; un diálogo pausado se reinicia desde su inicio (decisión para evitar textos mixtos).
 5. Los subtítulos (M44) en curso se re-traducen en la siguiente aparición.
 
-### 3.3 Texto con placeholders
+# 3.3 Texto con placeholders
 
 1. Catálogo: `msgid "DIALOGOS.ENTREGA"` / `msgstr "Recibí {cantidad} de {objeto}."`.
 2. Código: `Localization.tr_key("DIALOGOS", "ENTREGA", "", params)` con `params = {cantidad: 5, objeto: tr_key("ITEMS","MADERA")}`.
 3. `format_text()` reemplaza `{cantidad}` y `{objeto}` iterando `params` con `String.replace()` (**no** con el patrón `\{\w+\}`: corrección iter. 5). Antes cuenta llaves y, si no coinciden, deja el texto literal con un warning de desarrollo; las claves sin valor en `params` quedan literales y emiten warning.
 
-### 3.4 Plurales
+# 3.4 Plurales
 
 1. Catálogo declara `msgid_plural` y `msgstr[0]`/`msgstr[1]`.
 2. Código: `Localization.traducir_clave("ITEMS.SE_OFRECEN", {}, n)` obtiene la forma correcta según el idioma activo. *(El ejemplo anterior usaba `tr("ITEMS.SE_OFRECEN", "", n)`, que no es la API del módulo: corrección iter. 5. El módulo no traduce con `Object.tr()`.)*
    - ⚠️ La forma se elige con `_indice_plural()`, que **hardcodea** la regla es/en; **no** lee `Plural-Forms` de la cabecera del `.po`. Ver `02-Analisis.md` §1.5.
 3. `format_text()` inyecta `{n}` si el texto lo declara.
 
-### 3.5 Formatos de fecha y número
+# 3.5 Formatos de fecha y número
 
 1. `LocaleUtils` mantiene tablas por idioma: separador decimal, separador de miles, orden de fecha, reloj 12h/24h.
 2. `format_number(1234.56)` -> español "1.234,56" / inglés "1,234.56".

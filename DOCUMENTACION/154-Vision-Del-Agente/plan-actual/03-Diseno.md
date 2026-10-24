@@ -3,7 +3,7 @@
 
 # 03-Diseno.md — Módulo 154: Visión del Agente
 
-## 1. Arquitectura general
+# 1. Arquitectura general
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -22,9 +22,9 @@
 └────────────┘ └─────────────┘ └─────────────┘ └──────────────────┘
 ```
 
-## 2. Diseño por vía
+# 2. Diseño por vía
 
-### V1 — Capturas en el chat (validación artística)
+# V1 — Capturas en el chat (validación artística)
 
 ```
 Flujo: Agente genera/ajusta código → Usuario renderiza y captura 
@@ -34,7 +34,7 @@ Flujo: Agente genera/ajusta código → Usuario renderiza y captura
 - Sin componentes nuevos. Protocolo documentado en `04-Codigo.md`.
 - Resolución recomendada: la nativa del editor; 1 imagen por mensaje.
 
-### V2 — MCP custom de captura de pantalla (`screenshot-mcp`)
+# V2 — MCP custom de captura de pantalla (`screenshot-mcp`)
 
 ```
 scripts/mcp/screenshot_mcp.py   ← servidor MCP (stdio, Python)
@@ -58,7 +58,7 @@ scripts/mcp/screenshot_mcp.py   ← servidor MCP (stdio, Python)
 ```
 - Dependencias: `pillow`, `pygetwindow`, `mcp` (SDK oficial de Python).
 
-### V3 — Export web + Playwright (QA automatizado)
+# V3 — Export web + Playwright (QA automatizado)
 
 ```
 Pipeline:
@@ -73,7 +73,7 @@ Pipeline:
 ```
 - Integración con M118: job de CI puede ejecutar este pipeline y fallar si una captura difiere del baseline (regresión visual).
 
-### V4 — godot-mcp comunitario ⭐ ESTÁNDAR FUNDAMENTAL
+# V4 — godot-mcp comunitario ⭐ ESTÁNDAR FUNDAMENTAL
 
 ```
 Arquitectura de conexión:
@@ -101,9 +101,9 @@ Tools esperadas (según implementación comunitaria):
 
 **Regla de uso obligatoria:** toda sesión que involucre trabajo visual (personajes, escenas, UI) debe iniciar verificando que V4 está operativo; si no lo está, activar fallback V2 e informar al usuario.
 
-### V5 — Blender + blender-mcp: diseño detallado ⭐ (vía de diseño de assets)
+# V5 — Blender + blender-mcp: diseño detallado ⭐ (vía de diseño de assets)
 
-#### Arquitectura de conexión
+## Arquitectura de conexión
 
 ```
 ┌──────────────┐   stdio/MCP   ┌────────────────┐   Socket TCP   ┌───────────────────┐
@@ -115,7 +115,7 @@ Tools esperadas (según implementación comunitaria):
                                                               con el addon habilitado
 ```
 
-#### Guía de instalación (Windows)
+## Guía de instalación (Windows)
 
 1. **Instalar Blender 4.x LTS** desde blender.org (gratis, open source — cumple NFR2).
 2. **Descargar `blender-mcp`** (github.com/ahujasid/blender-mcp): contiene el servidor Python y el addon.
@@ -136,7 +136,7 @@ Tools esperadas (según implementación comunitaria):
    (alternativa sin uvx: `"command": "python", "args": ["-m", "blender_mcp"]` tras `pip install blender-mcp`)
 6. **Verificación:** pedir al agente `get_scene_info` con Blender abierto → debe devolver la estructura real de la escena.
 
-#### Tools disponibles vía blender-mcp
+## Tools disponibles vía blender-mcp
 
 | Tool | Qué hace | Uso en Isla Ancestral |
 |---|---|---|
@@ -145,7 +145,7 @@ Tools esperadas (según implementación comunitaria):
 | `get_viewport_screenshot` | Imagen base64 del viewport 3D | **LOS OJOS**: ver el modelo en cada iteración |
 | `execute_blender_code(code)` | Ejecuta Python `bpy` arbitrario | Modelar, iluminar, animar, exportar |
 
-#### Lo que el agente puede hacer con ojos (capacidades al detalle)
+## Lo que el agente puede hacer con ojos (capacidades al detalle)
 
 1. **Modelado procedural de personajes voxel:** crear cubos unitarios (`bpy.ops.mesh.primitive_cube_add`), duplicarlos en grilla, aplicar colores por cara/material — un personaje voxel es una lista de `(x,y,z,color)` ejecutable como script.
 2. **Materiales y paletas:** crear Principled BSDF por color de paleta, asignar por slot; ajustar roughness/metallic para look cozy.
@@ -160,7 +160,7 @@ Tools esperadas (según implementación comunitaria):
 11. **Importar MagicaVoxel `.vox`:** con importer addon, integrando el flujo voxel existente del proyecto.
 12. **Inspección reversa:** abrir un .glb/.blend existente, `get_scene_info`, y entender su estructura antes de modificarlo.
 
-#### Script de seguridad estándar (antes de cada captura)
+## Script de seguridad estándar (antes de cada captura)
 
 ```python
 # Forzar shading Material Preview + encuadre (ejecutar vía execute_blender_code)
@@ -174,7 +174,7 @@ for area in bpy.context.screen.areas:
 bpy.ops.wm.save_as_mainfile(filepath="//backups/pre_iteracion.blend", copy=True)
 ```
 
-#### Protocolo de iteración V5 (específico)
+## Protocolo de iteración V5 (específico)
 
 1. `get_scene_info` → entender estado actual.
 2. Respaldo automático (.blend copy).
@@ -183,7 +183,7 @@ bpy.ops.wm.save_as_mainfile(filepath="//backups/pre_iteracion.blend", copy=True)
 5. `get_viewport_screenshot` → analizar imagen ANTES de proponer el siguiente cambio.
 6. Repetir (máx. 5 iteraciones autónomas) → export `.glb` cuando el usuario apruebe.
 
-#### Integración con el pipeline del proyecto
+## Integración con el pipeline del proyecto
 
 ```
 Blender (V5: diseño iterativo con ojos)
@@ -198,7 +198,7 @@ V4 godot-mcp: capture_viewport del personaje DENTRO del juego
 V1: aprobación estética final del usuario
 ```
 
-## 3. Matriz de decisión: qué vía usar
+# 3. Matriz de decisión: qué vía usar
 
 | Escenario | Vía primaria | Fallback |
 |---|---|---|
@@ -211,7 +211,7 @@ V1: aprobación estética final del usuario
 | El agente necesita ver algo fuera del juego | V2 | V1 |
 | Generar variantes paramétricas de NPCs | V5 (batch bpy + screenshots muestrales) | — |
 
-## 4. Protocolo de iteración visual (aplica a todas las vías)
+# 4. Protocolo de iteración visual (aplica a todas las vías)
 
 1. **Generar:** el agente escribe/ajusta el código (escena, script, material).
 2. **Renderizar:** se ejecuta la escena (V4: `run_scene`; V3: recarga web; V2/V1: usuario).
@@ -220,7 +220,7 @@ V1: aprobación estética final del usuario
 5. **Ajustar:** cambios mínimos y medibles ("subir saturación paleta 10%", no "mejorar colores").
 6. **Repetir:** máximo 5 iteraciones autónomas antes de escalar al usuario (V1).
 
-## 5. QA
+# 5. QA
 
 - Test V1: pegar imagen de prueba en chat → el agente describe correctamente elementos conocidos.
 - Test V2: `capture_window("Godot Engine")` devuelve PNG legible con el viewport visible.
@@ -229,7 +229,7 @@ V1: aprobación estética final del usuario
 - Test de fallback: deshabilitar V4 → el flujo de personaje funciona igual vía V2.
 - Test de contexto: 5 iteraciones seguidas no exceden presupuesto razonable de tokens.
 
-## 6. Escena de preview de personaje
+# 6. Escena de preview de personaje
 
 ```
 # Estructura de preview_personaje.tscn
@@ -249,7 +249,7 @@ Node3D (PreviewRoot)
 - `scripts/preview/preview_personaje.gd` — gestiona Slot, cámara, iluminación
 - `scripts/preview/captura_preview.gd` — captura directa a Logs/screenshots/
 
-## 7. Plan de QA detallado
+# 7. Plan de QA detallado
 
 | Test | Vía | Criterio de éxito | Herramienta |
 |------|-----|-------------------|-------------|

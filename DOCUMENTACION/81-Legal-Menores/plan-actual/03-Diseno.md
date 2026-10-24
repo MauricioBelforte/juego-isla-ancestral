@@ -3,13 +3,13 @@
 
 # 03-Diseno.md — Módulo 81: Legal — Menores
 
-## Arquitectura de Cumplimiento Legal Menores
+# Arquitectura de Cumplimiento Legal Menores
 
-### 1. Patrón de Diseño: Privacy by Design Integrated
+# 1. Patrón de Diseño: Privacy by Design Integrated
 
 El patrón Privacy by Design Integrated (PbD-I) significa que la protección de menores no es un módulo opcional o añadir después, sino que está integrado en la arquitectura base desde el diseño inicial. Todos los nodos, recursos y sistemas deben consultar un servicio central antes de operar con datos de jugadores potencialmente menores.
 
-### 2. Service Locator: LegalConfigService
+# 2. Service Locator: LegalConfigService
 
 Un Resource central que contiene la configuración legal activa para el proyecto. Este servicio es el punto único de consulta para todos los sistemas que necesitan verificar edad/consentimiento.
 
@@ -20,13 +20,13 @@ Un Resource central que contiene la configuración legal activa para el proyecto
 class_name LegalConfig
 extends Resource
 
-## Configuración de edad y consentimiento
+# Configuración de edad y consentimiento
 @export var default_age_group: AgeGroup = AgeGroup.TEEN
 @export var require_parental_consent_for_online: bool = true
 @export var enable_age_gating_on_startup: bool = true
 @export var iarc_rating: IARCRating = IARCRating.EVERYONE
 
-## Datos por cuenta (serializados en save)
+# Datos por cuenta (serializados en save)
 var player_age_data: Dictionary = {}  # {player_id: PlayerAgeData}
 
 class PlayerAgeData:
@@ -36,7 +36,7 @@ class PlayerAgeData:
     var consent_date: String  # ISO 8601
     var consent_method: String  # "parental_email", "id_document", "verbal"
 
-## Configuración por plataforma
+# Configuración por plataforma
 @export var platform_configs: Array[PlatformConfig] = []
 
 enum AgeGroup {
@@ -57,9 +57,9 @@ enum IARCRating {
 }
 ```
 
-### 3. Flujos Principales
+# 3. Flujos Principales
 
-#### Flujo A: Age Gating en Arranque (Startup Age Gating)
+## Flujo A: Age Gating en Arranque (Startup Age Gating)
 
 ```
 INICIO → LegalConfig.cargar() → Detectar Plataforma →
@@ -83,7 +83,7 @@ INICIO → LegalConfig.cargar() → Detectar Plataforma →
 FIN
 ```
 
-#### Flujo B: Consentimiento Parental
+## Flujo B: Consentimiento Parental
 
 ```
 → AgeGateScreen → Solicitar Consentimiento Parental
@@ -107,7 +107,7 @@ FIN
            → AgeGateScreen.mostrar() → "Consentimiento otorgado" → Flujo Normal
 ```
 
-#### Flujo C: Minimización y Anonimización de Datos
+## Flujo C: Minimización y Anonimización de Datos
 
 ```
 Cada Sistema → Operación → LegalConfig.verificar_age_group(player_id)
@@ -125,7 +125,7 @@ Cada Sistema → Operación → LegalConfig.verificar_age_group(player_id)
       → Default a tratamiento más restrictivo: CHILDREN_UNDER_13
 ```
 
-#### Flujo D: Crash Reporting Sanitizado para Menores
+## Flujo D: Crash Reporting Sanitizado para Menores
 
 ```
 Crash del Juego → CrashReporter.registrar() →
@@ -141,7 +141,7 @@ Crash del Juego → CrashReporter.registrar() →
             → Default a tratamiento restrictivo (ruta children)
 ```
 
-#### Flujo E: Analytics y Telemetría Sanitizados
+## Flujo E: Analytics y Telemetría Sanitizados
 
 ```
 Cada Evento → TelemetryService.registrar(eventType, data) →
@@ -157,9 +157,9 @@ Cada Evento → TelemetryService.registrar(eventType, data) →
             → Telemetría normal
 ```
 
-### 4. Diagramas
+# 4. Diagramas
 
-#### Diagrama 1: Arquitectura Legal Flow
+## Diagrama 1: Arquitectura Legal Flow
 
 ```
 +----------------------+        +----------------------+        +----------------------+
@@ -180,7 +180,7 @@ Cada Evento → TelemetryService.registrar(eventType, data) →
 +----------------------+        +----------------------+        +----------------------+
 ```
 
-#### Diagrama 2: Age Gating Decision Tree
+## Diagrama 2: Age Gating Decision Tree
 
 ```
                    +----------------------+
@@ -224,7 +224,7 @@ Cada Evento → TelemetryService.registrar(eventType, data) →
           +----------------------+
 ```
 
-### 5. Dependencias de Implementación
+# 5. Dependencias de Implementación
 
 | Componente | Módulo Dependiente | Estado |
 |------------|-------------------|--------|
@@ -235,7 +235,7 @@ Cada Evento → TelemetryService.registrar(eventType, data) →
 | IARC Rating Integration | M96 Plataformas, M97 Steam Store Page, M117 Build System | Por crear |
 | Platform-Specific Config | M96 Plataformas, M117 Build System | Por crear |
 
-### 6. Interfaces Públicas (API Contract)
+# 6. Interfaces Públicas (API Contract)
 
 ```gdscript
 # Consultar edad actual del jugador
@@ -257,7 +257,7 @@ func get_applicable_iarc_rating() -> IARCRating
 func update_after_parental_consent(player_id: String, age_group: AgeGroup, consent_method: String) -> void
 ```
 
-### 7. Casos Edge y Manejo de Errores
+# 7. Casos Edge y Manejo de Errores
 
 | Escenario | Manejo |
 |-----------|--------|
@@ -269,7 +269,7 @@ func update_after_parental_consent(player_id: String, age_group: AgeGroup, conse
 | Juego modificado / save hackeado | Validación al arranque: si flags inconsistentes, default a modo restrictivo |
 | Adición futura de plataforma (mobile) | LegalConfig extensible, nuevo PlatformConfig agregado, lógica de age gating misma |
 
-### 8. Checklist de Diseño
+# 8. Checklist de Diseño
 
 Este checklist está integrado en el `05-Checklist.md` del módulo (secciones C, D, E, F). Los ítems de diseño específicos son:
 
