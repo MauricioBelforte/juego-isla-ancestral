@@ -25,7 +25,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 AUDITOR = os.path.join(AQUI, "auditar_indice_m01.py")
 PY = sys.executable
 
-CHECKS_MINIMOS = 54  # medido en verde (54/0 x3) el 2026-10-23; se ajusta SOLO tras medir
+CHECKS_MINIMOS = 62  # medido en verde (62/0 x3) el 2026-10-24; se ajusta SOLO tras medir
 
 _checks = 0
 _fallos = 0
@@ -226,7 +226,7 @@ def main():
             "- [ ] Anotar el alcance como pendiente de negocio\n",         # decision_proyecto
             "- [ ] Recetas consumibles por M10\n",                        # otro_modulo
             "- [ ] Highlight del objetivo NO implementado\n",             # trabajo_propio
-            "- [ ] Saltar, nadar y escalar del jugador\n",                # sin_senal
+            "- [ ] Saltar, nadar y escalar del jugador\n",                # sin dependencia declarada
         ]
         with open(CHECK_K, "w", encoding="utf-8", newline="\n") as f:
             f.write("".join(ITEMS_K))
@@ -236,7 +236,7 @@ def main():
         chequear("modulos bloqueado_ambos : 1" in out, "K: clasifica 1 modulo bloqueado_ambos")
         chequear("items abiertos leidos   : 7" in out, "K: lee los 7 items abiertos")
         for tipo in ("cuenta_externa_fundador", "hardware", "asset",
-                     "decision_proyecto", "otro_modulo", "trabajo_propio", "sin_senal"):
+                     "decision_proyecto", "otro_modulo", "trabajo_propio", "sin_dependencia_declarada"):
             chequear("  %-24s %5d  %5.1f%%" % (tipo, 1, 100.0 / 7) in out,
                      "K: 1 item en %s" % tipo)
 
@@ -245,7 +245,7 @@ def main():
         dep_k = datos_k["dependencias"]
         tipos_k = [it["tipo"] for it in dep_k["detalle"][0]["items"]]
         chequear(tipos_k == ["cuenta_externa_fundador", "hardware", "asset",
-                             "decision_proyecto", "otro_modulo", "trabajo_propio", "sin_senal"],
+                             "decision_proyecto", "otro_modulo", "trabajo_propio", "sin_dependencia_declarada"],
                  "K: un tipo por item, en el orden de las familias")
         chequear(sum(dep_k["por_tipo"].values()) == dep_k["items"],
                  "K: la suma por tipo cuadra con el total de items")
@@ -266,9 +266,9 @@ def main():
         rc, out = correr(l, "--dependencias", "--json")
         dep_l = json.loads(out)["dependencias"]
         tipos_l = [it["tipo"] for it in dep_l["detalle"][0]["items"]]
-        chequear(tipos_l[0] == "sin_senal",
+        chequear(tipos_l[0] == "sin_dependencia_declarada",
                  "L: la auto-referencia a M01 NO cuenta como otro_modulo")
-        chequear(tipos_l[1] == "sin_senal",
+        chequear(tipos_l[1] == "sin_dependencia_declarada",
                  "L: el tag de esfuerzo [M] NO se confunde con un modulo")
         chequear(tipos_l[2] == "asset",
                  "L: la precedencia pone asset antes que trabajo_propio")
@@ -302,6 +302,39 @@ def main():
                  "N: agrega bien asset entre modulos (audio + icono)")
         chequear(dep_n["modulos"] == dep_n["modulos_esperados"],
                  "N: modulos clasificados == modulos bloqueado_ambos (guarda de ceguera)")
+
+        # --- Bloque O: PRECISION de la familia `hardware` (iter. 10)
+        # El patron viejo cazaba "fps"/"rendimiento" por si solos: 16 de 56 items
+        # (28,6%) eran IMPLEMENTACION ("FPS overlay") o TARGETS de diseno ("Definir
+        # objetivo 30 fps"). Ahora `hardware` exige token DURO de dispositivo, o
+        # token BLANDO de performance + verbo de MEDICION en el mismo enunciado.
+        # Estos 6 casos son la prueba EN ROJO de la regla: sin ella, los 3 primeros
+        # pasarian a `hardware`.
+        o = os.path.join(base, "O")
+        construir(o, [" "] * 152, AMARILLO)
+        CHECK_O = os.path.join(o, "DOCUMENTACION", "02-Modulo-02", "plan-actual", "05-Checklist.md")
+        with open(CHECK_O, "w", encoding="utf-8", newline="\n") as f:
+            f.write(
+                "- [ ] FPS overlay cada 0.5s\n"                              # 0: implementacion, NO hardware
+                "- [ ] Definir objetivo 30 fps minimo / 60 deseado\n"        # 1: target de diseno, NO hardware
+                "- [ ] Implementar metricas de rendimiento (tiempo de tick)\n"  # 2: implementacion, NO hardware
+                "- [ ] Validar pueblo completo 60 FPS\n"                     # 3: mide en dispositivo -> hardware
+                "- [ ] Pruebas de legibilidad en diferentes dispositivos\n"   # 4: plural de token duro
+                "- [ ] Validar VRAM menor al presupuesto\n"                  # 5: token duro sin verbo
+            )
+        rc, out = correr(o, "--dependencias", "--json")
+        dep_o = json.loads(out)["dependencias"]
+        tipos_o = [it["tipo"] for it in dep_o["detalle"][0]["items"]]
+        for idx in (0, 1, 2):
+            chequear(tipos_o[idx] == "sin_dependencia_declarada",
+                     "O: el item %d NO es hardware (menciona fps/rendimiento sin pedir medir)" % idx)
+        for idx in (3, 4, 5):
+            chequear(tipos_o[idx] == "hardware",
+                     "O: el item %d SI es hardware (mide en dispositivo)" % idx)
+        chequear(dep_o["por_tipo"]["hardware"] == 3,
+                 "O: exactamente 3 de 6 items son hardware (no 6)")
+        chequear(dep_o["detalle"][0]["externos"] == 3,
+                 "O: el modulo tiene 3 items externos, no 6")
 
     finally:
         shutil.rmtree(base, ignore_errors=True)

@@ -345,19 +345,24 @@ FAMILIAS = (
         "hardware",
         "exige medir en un dispositivo real",
         (
-            r"\bFPS\b",
+            # --- Tokens DUROS: el dispositivo es el sujeto del item. Matchean solos.
+            # Plurales incluidos: `\bdispositivo\b` NO matcheaba "dispositivos" y
+            # dejaba 5 items fuera (medido 2026-10-24).
             r"steam\s*deck",
-            r"\bGPU\b",
+            r"\bGPUs?\b",
             r"\bVRAM\b",
             r"\bhardware\b",
-            r"\bdispositivo\b",
-            r"\bt[aá]ctil\b",
+            r"\bdispositivos?\b",
+            r"\bt[aá]ctiles?\b",
             r"\bhaptics?\b",
-            r"\bandroid\b",
-            r"\bperf\b",
-            r"\brendimiento\b",
-            r"\bbenchmark\b",
-            r"frame\s*budget",
+            r"\bandroids?\b",
+            # --- Tokens BLANDOS: "fps" / "rendimiento" por si solos NO son hardware.
+            # Medido: 16 de 56 items (28,6%) cazados asi eran IMPLEMENTACION
+            # ("FPS overlay cada 0.5s") o TARGETS de diseno ("Definir objetivo 30
+            # fps"). Precision de la familia: 71,4% -> 92,9% con la regla de abajo.
+            # Solo cuentan si el item pide MEDIR (dos lookaheads: verbo + token).
+            r"(?=.*\b(?:valid|medici|medir|verific|probad|probar|teste|test|benchmark|profiler)\w*)"
+            r"(?=.*\b(?:fps|rendimiento|perf|frame\s*budget)\b)",
         ),
     ),
     (
@@ -382,12 +387,13 @@ FAMILIAS = (
             r"\bdoblaje\b",
             r"animaci[oó]n",
             r"\bprefabs?\b",
-            r"\bmalla\b",
-            r"\bmesh\b",
-            r"\bvfx\b",
-            r"part[ií]culas?",
             r"tipograf",
-            r"\bmateriales?\b",
+            # FUERA a proposito (medido 2026-10-24, muestra de 21 items: la
+            # precision de `asset` era ~52% por estos tokens). "Pool de meshes
+            # reutilizado", "materiales regionales", "particulas de satisfaccion"
+            # y "VFX de X" son IMPLEMENTACION en GDScript/escena, no un archivo
+            # de arte que falte. Se sacaron `mesh`, `malla`, `material`,
+            # `particula` y `vfx`.
         ),
     ),
     (
@@ -440,7 +446,13 @@ FAMILIAS_COMPILADAS = tuple(
 # Tipos que exigen algo de FUERA del repositorio y de los demas modulos.
 TIPOS_EXTERNOS = ("cuenta_externa_fundador", "hardware", "asset", "decision_proyecto")
 
-TIPO_RESIDUAL = "sin_senal"
+# Residual: el enunciado NO declara ninguna dependencia externa. Ojo con el
+# nombre: no afirma "no hay dependencia", afirma "no la declara". Para el
+# director es la familia ACCIONABLE (trabajo que el proyecto puede hacer solo).
+# Se llamaba `sin_senal` y se leia como "el detector no vio nada"; el 56,5 % del
+# total hacia pensar en un detector ciego. Medido: solo 5 items del residual
+# tenian un token de familia en PLURAL que el patron no cubria.
+TIPO_RESIDUAL = "sin_dependencia_declarada"
 
 # Orden de presentacion (incluye el residual al final).
 TIPOS_ORDEN = tuple(n for n, _, _ in FAMILIAS) + (TIPO_RESIDUAL,)
