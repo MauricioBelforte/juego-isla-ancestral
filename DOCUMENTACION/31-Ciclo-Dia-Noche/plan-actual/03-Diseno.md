@@ -101,7 +101,8 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 - Coherente con M49 (iluminacion) y M29 (calendario). Sin implementar (escenico V2).
 
 # Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
-- Spec: FogVolume ligero (<=120 m) con densidad estacional: matinal otonio, bruma verano, densa invierno, nocturna 0.25.
+
+    **Peso de particulas de nieve** (Beam 419, restaurado por el director tras el dedup accidental): peso = densidad_nieve x area_cubierta x factor_viento — coherente con M52 (particulas) y M32 (clima).- Spec: FogVolume ligero (<=120 m) con densidad estacional: matinal otonio, bruma verano, densa invierno, nocturna 0.25.
 - Coherente con M49 (iluminacion) y M29 (calendario). fog_curve.tres data por hora EXISTE.
 
 # Flor luminica + cristales estelares nocturnos (M15)

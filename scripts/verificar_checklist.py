@@ -5,7 +5,9 @@ Script de Verificación de Consistencia del Protocolo Multiagente.
 Recorre DOCUMENTACION/{NN}-*/plan-actual/05-Checklist.md y valida:
 1. Que el Progreso declarado en CHECKLIST-GLOBAL.md coincida con el conteo real de [x].
 2. Que no existan módulos 🔵/🔴 colgados (sin actividad por más de 24h).
-3. Que no haya [x] en módulos cuyo estado global es 🟡/⬜ (inconsistencias).
+3. Que no haya [x] en módulos cuyo estado global es ⬜ (sin empezar). El eje de
+   RECLAMO (🟢 = «disponible para reclamar») es ortogonal al de AVANCE y NO se
+   compara contra el conteo (fix iter.12, orden del director msg 384).
 4. Que los [x] cumplan la Definición de Completado (DoD) de la sección 21.6.
 
 Uso:
@@ -242,6 +244,74 @@ def estado_emoji(estado: str) -> str:
         return ""
     m = _EMOJI_RE.match(estado.strip())
     return m.group(1) if m else ""
+
+
+# --- Verificacion 3 (reescrita, iter.12): AVANCE vs RECLAMO ----------------
+# Motivo (auditoria 11-Auditoria-Alertas-Verificador.md §5, ratificada por el
+# director en el msg 384): la regla vieja era
+#
+#     if x > 0 and emoji_estado in ("⬜", "🟢"):
+#
+# y trataba 🟢 como si fuera ⬜. Pero AGENTS.md define DOS EJES ORTOGONALES:
+#
+#     eje de AVANCE  -> ⬜ sin empezar · 🟡 con dudas · ✅ completado
+#     eje de RECLAMO -> 🟢 disponible (puede ser reclamado) · 🔵/🔴 en curso
+#
+# Un modulo con 78/104 hechos y sin dueno activo DEBE estar 🟢. Con la regla
+# vieja esas 7 filas (33, 56, 115, 127, 137, 142, 143) eran alertas IMPOSIBLES
+# de cerrar sin mentir: o se cambiaba el estado real del modulo, o se cambiaba
+# el gate. Se cambio el gate.
+#
+# La regla nueva separa los dos ejes:
+#   * AVANCE: solo ⬜ contradice tener [x]. 🟡/🟢/🔵/🔴/✅ no se comparan aca.
+#   * RECLAMO: 🟢 con [x] es LEGITIMO (trabajado y libre). 🟢 con [?] tambien
+#     (la duda es del item, no del reclamo). Lo unico sospechoso es un 🟢 sobre
+#     un checklist VACIO (0 [x] + 0 [ ] + 0 [?]): «disponible» sin nada que
+#     reclamar. Medido el 2026-10-24: hoy NO hay ninguna fila asi (0 alertas
+#     de este tipo) -> es una guarda LATENTE, declarada como tal, no un
+#     silenciador de alertas reales.
+#
+# La funcion es PURA a proposito: la suite la ejercita caso por caso sin correr
+# el gate entero (el gate lee el disco real y no se puede probar en rojo).
+def alertas_estado(x: int, pendientes: int, dudas: int, estado_declarado: str,
+                   nombre_modulo: str):
+    """Motivos por los que el estado declarado contradice el conteo real.
+
+    Devuelve una lista de strings (vacia = coherente). No imprime ni toca disco.
+    """
+    motivos = []
+    emoji = estado_emoji(estado_declarado)
+
+    # 1. Eje de AVANCE: ⬜ es «sin empezar»; con [x] es contradiccion.
+    if x > 0 and emoji == "⬜":
+        motivos.append(
+            f"❌ Inconsistencia en {nombre_modulo}: tiene {x} items [x] "
+            f"pero su estado global es '{estado_declarado}' (⬜ = sin empezar)."
+        )
+
+    # 2. Eje de RECLAMO: 🟢 disponible es legitimo con avance y con dudas.
+    #    Solo es sospechoso si el checklist esta vacio.
+    if emoji == "🟢" and x == 0 and pendientes == 0 and dudas == 0:
+        motivos.append(
+            f"❌ Inconsistencia en {nombre_modulo}: su estado global es "
+            f"'{estado_declarado}' (🟢 = disponible para reclamar) pero su "
+            f"05-Checklist.md no tiene NINGUN item (0 [x] / 0 [ ] / 0 [?])."
+        )
+
+    # 3. DoD 21.6: ✅ exige todo [x].
+    if dudas > 0 and emoji == "✅":
+        motivos.append(
+            f"❌ Inconsistencia en {nombre_modulo}: tiene {dudas} items [?] "
+            f"pero su estado global es '{estado_declarado}'."
+        )
+    if pendientes > 0 and emoji == "✅":
+        motivos.append(
+            f"❌ Inconsistencia en {nombre_modulo}: tiene {pendientes} items [ ] "
+            f"pendientes pero su estado global es '{estado_declarado}' "
+            f"(DoD 21.6: ✅ exige todo [x])."
+        )
+
+    return motivos
 
 
 # --- Verificacion 6: COBERTURA de la tabla (trampa 91 — hallazgo DeepSeek 301)
@@ -529,31 +599,13 @@ def analizar_proyecto(checklist_global: Path, horas_limite: int,
             # igualdad exacta. Antes: `estado_declarado == "✅"` no detectaba
             # "✅ Re-verificado (iter. 1)" (SB-02, Log 1279: 8 modulos con ✅ y
             # trabajo pendiente pasaban como "sin alertas").
-            emoji_estado = estado_emoji(estado_declarado)
-
-            # Verificar que un módulo con [x] no esté declarado ⬜/🟢 sin dudas
-            if x > 0 and emoji_estado in ("⬜", "🟢"):
-                alertas.append(
-                    f"❌ Inconsistencia en {nombre_modulo}: tiene {x} items [x] "
-                    f"pero su estado global es '{estado_declarado}'."
-                )
-
-            # Verificar que un módulo con [?] no esté declarado ✅ (DoD 21.6)
-            if dudas > 0 and emoji_estado == "✅":
-                alertas.append(
-                    f"❌ Inconsistencia en {nombre_modulo}: tiene {dudas} items [?] "
-                    f"pero su estado global es '{estado_declarado}'."
-                )
-
-            # E3 (SB-05): la misma trampa de comparacion, para el caso `[ ]`:
-            # un modulo ✅ con items pendientes viola la DoD 21.6 igual que con
-            # [?]. Antes no se checkeaba en absoluto.
-            if pendientes > 0 and emoji_estado == "✅":
-                alertas.append(
-                    f"❌ Inconsistencia en {nombre_modulo}: tiene {pendientes} items [ ] "
-                    f"pendientes pero su estado global es '{estado_declarado}' "
-                    f"(DoD 21.6: ✅ exige todo [x])."
-                )
+            #
+            # iter.12 (msg 384): la comparacion se delega a `alertas_estado()`,
+            # que separa el eje de AVANCE del de RECLAMO. La regla vieja
+            # (`in ("⬜", "🟢")`) generaba 7 falsos positivos categoricos.
+            alertas.extend(
+                alertas_estado(x, pendientes, dudas, estado_declarado, nombre_modulo)
+            )
 
         # 2. Verificar DoD: si hay [x], deben existir Logs/ y firmas en plan-actual
         if x > 0:

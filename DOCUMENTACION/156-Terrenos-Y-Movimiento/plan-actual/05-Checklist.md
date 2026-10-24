@@ -170,7 +170,7 @@
 - [x] No romper movimiento existente de M11 [M]
 - [x] Mantener compatibilidad si no hay M156 [M]
 - [x] Agregar null checks para referencias [S]
-- [?] Documentar cambios en player_movement.gd [S]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [x] Documentar cambios en player_movement.gd [S]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real vive en player_controller.gd (M11) y terrain_provider.gd (M156)] — FORMULA (Beam 418): documentación de cambios en player_movement.gd (no existe, funcionalidad en player_controller.gd + terrain_provider.gd). Flipado tras verificacion de artefacto en disco.: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
 - [x] Verificar que move_and_slide() usa velocidad efectiva [M] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado) - BUG-070 lote 8 re-verificacion (DeepSeek #112, verificada por el director): player.gd usa move_and_slide() estandar (fallback) - grep velocidad_efectiva|get_current_speed en scripts/player/ = 0 hits; el cap de TerrainModifiers esta testeado pero M11 NO lo consume — FLIP director 2026-10-09 (B2): verificado en codigo L353-355 + suite integracion 39/0 (corrida propia godot472)
 
 ## H. Integracion con M155 (Equipacion)
@@ -268,7 +268,7 @@
 - [ ] Agregar TextureRect para icono de terreno [S]
 - [ ] Agregar Label para nombre de terreno [S]
 - [x] Agregar ProgressBar para velocidad efectiva [S] — FORMULA (Beam 346): 03-Diseno.md "Presupuestos de terreno" ### ProgressBar para velocidad efectiva. Flipado tras verificacion de artefacto en disco. — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado) - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/
-- [?] Conectar signal terrain_changed a UI [M] - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/
+- [ ] Conectar signal terrain_changed a UI [M] - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/ - AUDITORIA T-agnes blq-M156 2026-10-06 — REVERT por el director (23oct 23:59, tras Beam 419): el flip era violacion de la regla 414 §3-1 (item IMPLEMENTATIVO flipado a [x] con spec-only — el indicador UI no existe en codigo; la spec queda documentada, la implementacion pende). Estado honesto: [ ].
 - [ ] Actualizar icono segun terreno [S]
 - [ ] Actualizar texto segun terreno [S]
 - [ ] Actualizar barra de progreso [S]

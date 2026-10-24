@@ -424,6 +424,47 @@ def test_ver_estado_emoji():
     assert ver.estado_emoji("✅ Completado") == "✅"
 
 
+def test_ver_alertas_estado_ejes():
+    """iter.12 (director msg 384): AVANCE y RECLAMO son ejes ortogonales.
+
+    Congela la regla nueva y hace FALLAR la vieja:
+      - vieja: `x > 0 and emoji in ("⬜", "🟢")` -> 7 falsos positivos reales
+        (33, 56, 115, 127, 137, 142, 143) que no se podian cerrar sin mentir.
+      - nueva: solo ⬜ contradice el avance; 🟢 con [x] y 🟢 con [?] son
+        legitimos; el unico 🟢 sospechoso es el de un checklist VACIO.
+    """
+    # (1) AVANCE: ⬜ con [x] sigue siendo contradiccion (la regla no se aflojo)
+    m = ver.alertas_estado(5, 3, 0, "⬜ Sin iniciar", "M-X")
+    assert len(m) == 1 and "sin empezar" in m[0], f"⬜ con [x] debe alertar: {m}"
+
+    # (2) RECLAMO: 🟢 con avance es LEGITIMO -> 0 motivos (eran 7 alertas falsas)
+    for x, pend, dudas in [(112, 0, 0), (78, 26, 0), (60, 44, 0), (76, 28, 0),
+                           (118, 0, 0), (129, 2, 0), (111, 20, 0)]:
+        m = ver.alertas_estado(x, pend, dudas, "🟢 Disponible", "M-Y")
+        assert m == [], f"🟢 con {x} [x] NO debe alertar (eje de reclamo): {m}"
+
+    # (3) RECLAMO: 🟢 con [?] tambien es legitimo (la duda es del item)
+    assert ver.alertas_estado(10, 5, 7, "🟢 Disponible", "M-Z") == []
+
+    # (4) RECLAMO: 🟢 sin nada que reclamar (checklist vacio) SI es sospechoso
+    m = ver.alertas_estado(0, 0, 0, "🟢 Disponible", "M-VACIO")
+    assert len(m) == 1 and "NINGUN item" in m[0], f"🟢 vacio debe alertar: {m}"
+    # ... pero 🟢 sin empezar y con items pendientes es el caso NORMAL
+    assert ver.alertas_estado(0, 104, 0, "🟢 Disponible", "M-NUEVO") == []
+
+    # (5) DoD 21.6 intacta: ✅ exige todo [x]
+    assert len(ver.alertas_estado(9, 2, 0, "✅ Completado", "M-C")) == 1
+    assert len(ver.alertas_estado(9, 0, 2, "✅ Completado", "M-C")) == 1
+    assert ver.alertas_estado(9, 0, 0, "✅ Completado", "M-C") == []
+
+    # (6) Control: 🟡 y 🔵 no disparan nada por si solos
+    for est in ("🟡 Con dudas", "🔵 En curso", "🔴 Bloqueado"):
+        assert ver.alertas_estado(3, 3, 3, est, "M-W") == [], est
+
+    # (7) El mensaje conserva el nombre del modulo (trazabilidad del gate)
+    assert "M-NOMBRE" in ver.alertas_estado(0, 0, 0, "🟢 Disponible", "M-NOMBRE")[0]
+
+
 def test_ver_analizar_estructura_tabla():
     """SB-05 verificacion 2: detecta filas mal formadas y EXCLUYE la tabla de
     leyenda (E2), ademas de las filas que no terminan en pipe."""
@@ -718,6 +759,8 @@ def main():
     test("normalizar no pierde letras (REGRESIÓN)", test_ver_normalizar)
     test("detectar_colgados identifica módulos inactivos", test_ver_detectar_colgados)
     test("estado_emoji usa el emoji inicial (REGRESIÓN E3)", test_ver_estado_emoji)
+    test("estado: AVANCE (⬜) vs RECLAMO (🟢) son ejes distintos (iter.12)",
+         test_ver_alertas_estado_ejes)
     test("estructura: filas mal formadas + excluye leyenda (E2)",
          test_ver_analizar_estructura_tabla)
     test("estructura: fail-fast BUG-075 heredado",
