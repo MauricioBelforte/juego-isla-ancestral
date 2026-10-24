@@ -570,3 +570,46 @@ declarada del núcleo). 11 cadenas nuevas en `data/historias/secundarias.json`
 - Sincronización de la COLA ACTIVA del BACKLOG-MASTER: 2 ítems que ya estaban
   [x] en el módulo desde la iter. 12 (comerciantes; documentar familias y
   comerciantes) marcados [x] en la cola con cita.
+
+## Iter. 15 (Log 2166) — cluster Exploración: 8 cadenas, bloque T, 543 checks
+
+**Contexto de cierre (2026-10-24):** la tanda fue ejecutada por una corrida
+previa que quedó cortada antes de cerrar (el CRON preservó el avance parcial en
+8225b5b: JSON 51 -> 59 cadenas, bloque T en la suite, 2 flips en el 05). Esta
+vuelta NO rehizo la tanda: la re-verificó íntegra (un verde no se hereda) y
+reparó los entregables (Log 2166 ocupando el número consumido por la corrida
+cortada; cita 2164 -> 2166 en 04-Codigo; esta sección; registro en 06 y
+BACKLOG).
+
+- Suite `res://scripts/historias/test_historias.gd` (binario real):
+  **543 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR en las 3 corridas.
+  Piso 477 -> 543 MEDIDO en verde. Bloque T `_test_exploracion()` (66 checks)
+  al FINAL de `_run()`.
+- Guardián EN ROJO por inyección de runtime sobre el bloque T (medido en el
+  cierre): `var _v: Variant = [1, 2, 3]` -> `var _boom: Dictionary = _v` al
+  inicio de `_test_exploracion()`. **EXIT 1, 478 checks, 2 fallos**: «[FAIL] el
+  bloque T NO se ejecuto (posible SCRIPT ERROR que aborto la funcion)» +
+  «[FAIL] solo 478 checks ejecutados (minimo 543)». Sonda borrada en la misma
+  invocación, `git status scripts/historias/` vacío, suite intacta por sha256
+  (bec8fcae...).
+- Verificación independiente de realidad: 8 NPC contra `data/villagers/` por
+  campo `id` (14 en disco) y 8 objetos contra `data/items/` por campo `id`
+  (300 en disco): **16/16 REALES** (finneas_zorro/OBJ-HER-016,
+  teo_conejo/OBJ-NAT-027, sofia_buho/OBJ-REL-004, aria_ciervo/OBJ-LUZ-015,
+  catalina_oso/OBJ-LUZ-013, olivia_nutria/OBJ-ITE-009, nico_gato/OBJ-HER-004,
+  ramon_tejon/OBJ-ITE-013). 0 consecuencias duplicadas sobre las 59 cadenas.
+- Regresiones (binario real): M59 rotate 43/0 (9 bloques) +
+  backup_rotate_return 4/0 + backup_rotations 7/0; M71 flujo XP 37/0; M55
+  diario perf 26/0 + persistencia 0 fallos. M71 `test_bug_reevaluar_m71_hy3`
+  8 checks / 2 fallos / EXIT 1 = **BUG-143 preexistente** ([ ] Abierto en
+  11-BUGS.md L265, dueño M71): no es regresión de esta tanda (no toca código
+  de producción de M71).
+- Flips con cita: L64 («Crear 8 misiones de exploración») y L65 («Documentar
+  cadenas y misiones de exploración») [ ] -> [x]. M23 = **73 [x] / 30 [ ] /
+  2 [?] = 105** (prefijo de línea); las dos líneas de totales sincronizadas.
+  DRIFT reportado al director: fila 23 del GLOBAL en 71/105 (sync de la
+  iter. 14) vs 73/105 en disco.
+- Hallazgo (dueño M55, no tocado): el puente M23 -> M55 degrada en silencio
+  para las 8 nuevas (0 entradas `mision_cadena-*` en el catálogo de M55);
+  mismo residual de las iteraciones 3/6-14, verificado por el check del puente
+  en el bloque T.

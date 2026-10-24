@@ -755,7 +755,7 @@ diálogos posteriores» tenía ítems `[ ]` cuyo respaldo ya existía en disco.
   `[x]` con cita (comerciantes y documentar familias+comerciantes), más la nota
   de esta vuelta. La cola queda en 13 `[x]` / 103 `[ ]`.
 
-## Iter. 15 — Misiones de exploración (Step-5-WorkBuddy, 2026-10-23, Log 2164)
+## Iter. 15 — Misiones de exploración (Step-5-WorkBuddy, 2026-10-23, Log 2166)
 
 Cluster Exploración del catálogo (03-Diseno L39: «| Exploración | 8 | brújula,
 fauna (M65), cronitado de ruinas |»). El diseño nombra 3 temas para 8 misiones;
@@ -823,5 +823,21 @@ Investigación (4+1).
   con el check del puente en el bloque T.
 - **Nota de numeración:** mi informe de cierre de la vuelta anterior iba a ser
   el 196 y el director tomó ese número del pool; reenumerado a 197 = max+1.
-  Esta vuelta: mensajes 199 (acuse) y el de cierre; Log 2164 (head medido 2164
-  justo antes de reservar).
+  Esta vuelta: mensajes 199 (acuse) y el de cierre. La corrida que ejecutó la
+  tanda reservó primero el 2164 (head medido 2164 justo antes), colisionó y
+  re-reservó el 2166 (número que quedó citado en la suite y en el 05) pero se
+  cortó antes de escribir el log: esta cita quedó en 2164. **Cierre del
+  2026-10-24 (Log 2166):** la tanda fue re-verificada íntegra (un verde no se
+  hereda) y los entregables reparados. Medidas propias del cierre: suite
+  **543 checks / 0 fallos / EXIT 0 x3, 0 SCRIPT ERROR**; guardián EN ROJO por
+  inyección de runtime `Variant` -> `Dictionary` sobre el bloque T:
+  **EXIT 1, 478 checks, 2 fallos** (nombra el bloque T + piso no cumplido),
+  sonda borrada y suite intacta por sha256 (bec8fcae...); 16/16 NPC y objetos
+  REALES verificados en disco por campo `id` (14 villgers, 300 ítems); 0
+  consecuencias duplicadas. Regresiones corridas en el cierre (la corrida
+  original no las había corrido): M59 rotate 43/0 (9 bloques) +
+  backup_rotate_return 4/0 + backup_rotations 7/0; M71 flujo XP 37/0; M55
+  diario perf 26/0 + persistencia 0 fallos; M71 `test_bug_reevaluar` 8/2
+  EXIT 1 = **BUG-143 preexistente** (abierto, dueño M71). El 2164 consumido
+  por la corrida cortada queda como hueco inocuo; el log de la iter. 15 es el
+  2166.

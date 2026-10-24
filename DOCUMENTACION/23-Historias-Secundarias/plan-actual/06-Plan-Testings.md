@@ -138,3 +138,35 @@ Cubre la sección «Consecuencias y diálogos posteriores» del checklist (L106-
 Piso: 456 -> **477** (`CHECKS_MINIMOS` MEDIDO en verde, no estimado). Bloques
 A-S. Guardián EN ROJO por inyección de runtime Variant -> Dictionary tipado
 (EXIT 1 nombrando el bloque S + piso no cumplido). Ver 07-Resultados-Testings.
+
+## Iter. 15 (Log 2166) — bloque T `_test_exploracion`
+
+Cubre la sección «Cadenas de misiones y exploración» del checklist (L64-L65):
+8 cadenas del cluster Exploración (03-Diseno L39: «| Exploración | 8 | brújula,
+fauna (M65), cronitado de ruinas |»; 02-Analisis L20). El diseño nombra 3 temas
+para 8 misiones; las 5 restantes son extensión declarada con el mismo patrón
+que Amistad (4+2) e Investigación (4+1). La integración con M65 (sistema de
+fauna) queda FUERA por orden del director (msg 200): se crean las cadenas M23,
+no la integración.
+
+1. **Carga/fuente/no-oculta de las 8** (`cadena-cartografia-de-la-isla`,
+   `cadena-fauna-de-la-isla`, `cadena-cronologia-de-las-ruinas`,
+   `cadena-mirador-del-acantilado`, `cadena-grutas-del-manantial`,
+   `cadena-playas-del-sur`, `cadena-sendero-del-bosque`, `cadena-muelle-viejo`):
+   cargadas, fuente «secundarias» y `oculta:false` (se descubren hablando).
+2. **Exposición en `cadenas_disponibles()`** desde el inicio (8 expuestas).
+3. **Unicidad local** de las 8 consecuencias y de los 8 diarios.
+4. **NPC REALES** (8) contra `data/villagers/` por campo `id` y **objetos
+   REALES** (8) contra `data/items/` por campo `id`.
+5. **End-to-end de 3** (cartografía, fauna, cronología) con `ws_has(...)` de
+   `isla_cartografiada`, `fauna_de_la_isla_registrada` y `ruinas_datadas` sobre
+   WorldState (M21).
+6. **Puente diario M23 -> M55:** negativo esperado (0 entradas
+   `mision_cadena-*` en el catálogo de M55 para las 8 nuevas; finding medido,
+   dueño M55, mismo residual de las iteraciones 3/6-14).
+
+Piso: 477 -> **543** (`CHECKS_MINIMOS` MEDIDO en verde, no estimado). Bloques
+A-T. Guardián EN ROJO por inyección de runtime Variant -> Dictionary sobre el
+bloque T: EXIT 1, 478 checks, 2 fallos (nombra el bloque T + «solo 478 checks
+ejecutados (minimo 543)»). Re-medido en el cierre del 2026-10-24. Ver
+07-Resultados-Testings.

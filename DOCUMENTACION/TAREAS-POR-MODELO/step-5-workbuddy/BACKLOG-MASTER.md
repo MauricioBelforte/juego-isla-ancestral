@@ -785,8 +785,8 @@ M104, M88, M160.
 142. - [ ] [23] Documentar historias estacionales y secretas [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 143. - [x] [23] Definir 40+ cadenas de 3-5 pasos con contexto [M] — 03-Diseno catalogo (60 cadenas / 89 slots) + schema contexto>=10 y pasos>=3 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 144. - [x] [23] Definir el schema de cadena (pasos, recompensa, consecuencia, oculta, postgame) [M] — 03-Diseno esquema + quest_chain.gd + validador <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-145. - [ ] [23] Crear 8 misiones de exploración (brújula, fauna, cronitado) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-146. - [ ] [23] Documentar cadenas y misiones de exploración [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+145. - [x] [23] Crear 8 misiones de exploración (brújula, fauna, cronitado) [M] — Step-5-WorkBuddy 2026-10-24 (iter. 15, Log 2166): 8 cadenas en data/historias/secundarias.json (51 -> 59) con NPC REALES de data/villagers/ (finneas_zorro, teo_conejo, sofia_buho, aria_ciervo, catalina_oso, olivia_nutria, nico_gato, ramon_tejon) y objetos REALES de data/items/ por campo id (OBJ-HER-016, OBJ-NAT-027, OBJ-REL-004, OBJ-LUZ-015, OBJ-LUZ-013, OBJ-ITE-009, OBJ-HER-004, OBJ-ITE-013); 03-Diseno L39 nombra 3 temas (brújula, fauna M65, cronitar ruinas) y los 5 restantes son extensión declarada (mirador del acantilado, grutas del manantial, playas del sur, sendero del bosque, muelle viejo); integración con M65 FUERA por orden del director (msg 200). Suite bloque T: 543 checks/0 fallos/EXIT 0 x3 + guardián EN ROJO por inyección de runtime (478/2/EXIT 1, medido en el cierre del 2026-10-24). <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+146. - [x] [23] Documentar cadenas y misiones de exploración [S] — Step-5-WorkBuddy 2026-10-24 (iter. 15, Log 2166): documentado en 04-Codigo.md §Iter. 15 (las 8 misiones con NPC/objetos REALES, flags de consecuencia, cobertura de suite y la interpretación declarada de «cronitar ruinas» = fechar las ruinas, 02-Analisis L20). <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 147. - [ ] [23] Crear 6 misiones de construcción (puentes, cofradía, plaza, senderos, kiosko, jardín) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 148. - [ ] [23] Definir la reconstrucción del puente (M28) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 149. - [ ] [23] Crear 5 misiones de agricultura (invernadero, cruces, variantes) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
@@ -1442,8 +1442,8 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - [ ] (23-Historias-Secundarias) - [ ] Crear el evento de eclipse [M] — **Dueño M32:** evento estacional; 0 en disco (el eclipse de cadena-faro es contexto narrativo, no el evento de M32).
 - [x] (23-Historias-Secundarias) - [x] Crear 5 cadenas secretas ocultas [M] — Step-5-WorkBuddy 2026-10-22 (iter. 11, Log 2134): 5 cadenas en data/historias/secundarias.json (32 -> 37) con NPC REALES de data/villagers/ (nico_gato, vera_ardilla, sofia_buho, teo_conejo, luna_zorra) y objetos REALES de data/items/ por campo id (OBJ-SEC-002 «Mapa secreto», OBJ-SEC-003 «Cristal oculto», OBJ-SEC-005 «Diario antiguo», OBJ-ART-002 «Pergamino mistico», OBJ-ART-004 «Mascara ceremonial»); las 5 nacen oculta:true (invisibles en cadenas_disponibles hasta iniciarse); consecuencias peladas unicas 37/37 y capitulos de diario unicos 37/37. Suite test_historias.gd bloque P: 351 checks/0 fallos/EXIT 0 x3 + guardian EN ROJO por inyeccion de runtime (317<351). Regresiones M22 41/0, M71 83/0, M59 43/0+4/0+7/0, M55 0 fallos. M23 = 63 [x] / 40 [ ] / 2 [?] = 105.
 - [ ] (23-Historias-Secundarias) - [ ] Documentar historias estacionales y secretas [S]
-- [ ] (23-Historias-Secundarias) - [ ] Crear 8 misiones de exploración (brújula, fauna, cronitado) [M]
-- [ ] (23-Historias-Secundarias) - [ ] Documentar cadenas y misiones de exploración [S]
+- [x] (23-Historias-Secundarias) - [x] Crear 8 misiones de exploración (brújula, fauna, cronitado) [M] — Step-5-WorkBuddy 2026-10-24 (iter. 15, Log 2166): 8 cadenas en data/historias/secundarias.json (51 -> 59) con NPC REALES de data/villagers/ y objetos REALES de data/items/ por campo id; integración con M65 (fauna) FUERA por orden del director (msg 200). Suite test_historias.gd bloque T: 543 checks/0 fallos/EXIT 0 x3 + guardián EN ROJO por inyección de runtime (478/2/EXIT 1, medido en el cierre). Regresiones: M59 43/0+4/0+7/0, M71 flujo XP 37/0, M55 26/0+0 fallos (M71 bug_reevaluar 8/2 = BUG-143 preexistente, dueño M71). M23 = 73 [x] / 30 [ ] / 2 [?] = 105.
+- [x] (23-Historias-Secundarias) - [x] Documentar cadenas y misiones de exploración [S] — Step-5-WorkBuddy 2026-10-24 (iter. 15, Log 2166): 04-Codigo.md §Iter. 15.
 - [ ] (23-Historias-Secundarias) - [ ] Crear 6 misiones de construcción (puentes, cofradía, plaza, senderos, kiosko, jardín) [M]
 - [ ] (23-Historias-Secundarias) - [ ] Definir la reconstrucción del puente (M28) [M] — **Dueño M28:** sólo alcanzable como consecuencia «puente cruzable» (03-Diseno L53); la misión concreta no está definida.
 - [ ] (23-Historias-Secundarias) - [ ] Crear 5 misiones de agricultura (invernadero, cruces, variantes) [M]
@@ -1793,3 +1793,55 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - Proxima: NN > 196; sin mensaje -> siguiente `[ ]` de la cola (cluster
   Exploracion: "Crear 8 misiones de exploracion" + "Documentar cadenas y misiones
   de exploracion").
+
+## Registro de la vuelta 2026-10-24 02:5x (tracker 194 -> 200) - RAMA 1 acuse 196/198/200 (GO iter.15) + RAMA 2 M23 iter. 15: cierre y reparacion de tanda ejecutada por corrida cortada (Log 2166, canal 201)
+
+- RAMA 1: el tracker llego en 194 (stale: la corrida anterior proceso 196/198 y
+  dejo su msg 199 sin actualizarlo). Mensajes nuevos: 196 (GO iter.14 con 4
+  condicionamientos, todos cumplidos), 198 (iter.14 RATIFICADA 71/32/2, fila 23
+  sync, colision 196/197 bien manejada), 200 (**GO iter.15**: cluster
+  Exploracion L64/L65, 8 misiones, bloque T nuevo con piso MEDIDO + guardian EN
+  ROJO, M65 fauna FUERA, flips con cita ofrecidos a revertir, 0 commit/push).
+  Acuse + cierre en mi msg 201.
+- HALLAZGO DE ESTADO (familia iter.10): la tanda iter.15 ya estaba EJECUTADA en
+  disco por una corrida previa cortada antes de cerrar (CRON: commit 8225b5b
+  "avance parcial ... cierre pendiente de su informe"): JSON 51 -> 59 cadenas
+  (mtime 00:15:42), bloque T en la suite, flips L64/L65 en el 05 (73/30/2),
+  sec. Iter. 15 en 04-Codigo. Faltaban: el log (citado 2166 por suite+05 y
+  2164 por 04-Codigo, NINGUNO existia), los registros de 06/07, el espejo y la
+  cola del BACKLOG. Regla aplicada: NO rehacer; RE-VERIFICAR integra +
+  REPARAR entregables.
+- Re-verificacion MEDIDA hoy (binario real): suite **543 checks / 0 fallos /
+  EXIT 0 x3**, 0 SCRIPT ERROR; guardian EN ROJO por inyeccion de runtime
+  Variant -> Dictionary sobre el bloque T: **EXIT 1, 478 checks, 2 fallos**
+  (nombra el bloque T + "solo 478 checks (minimo 543)"); sonda borrada en la
+  misma invocacion, git status de scripts/historias/ vacio, suite intacta por
+  sha256 (bec8fcae...). Verificacion independiente: 8 NPC REALES (data/villagers/,
+  14 en disco) + 8 objetos REALES (data/items/, 300 en disco) por campo id =
+  16/16; 0 consecuencias duplicadas.
+- Regresiones: M59 rotate 43/0 (9 bloques) + backup_rotate_return 4/0 +
+  backup_rotations 7/0; M71 flujo XP 37/0; M55 diario perf 26/0 + persistencia
+  0 fallos. M71 test_bug_reevaluar 8/2 EXIT 1 = BUG-143 PREEXISTENTE (abierto,
+  dueno M71; la tanda no toca codigo de produccion de M71).
+- Reparaciones: Log 2166 escrito ocupando el numero consumido por la corrida
+  cortada (ASCII puro por bytes, CRLF 127/127, sin BOM, 7.015 B); cita 04-Codigo
+  2164 -> 2166 + nota de cierre; 06-Plan-Testings sec. Iter. 15; 07-Resultados
+  sec. Iter. 15; cola 145/146 y espejo flippeados con cita. Invariantes de EOL
+  verificadas por bytes: 04/06/07 LF puro sin BOM; BACKLOG CRLF puro sin BOM.
+- 2 flips con cita ya aplicados por la corrida cortada, verificados hoy contra
+  disco: L64 y L65. M23 = **73 [x] / 30 [ ] / 2 [?] = 105**. DRIFT: fila 23 del
+  GLOBAL en 71/105 (sync iter.14 del director) vs 73/105 en disco -> reportado,
+  NO tocado (protegido).
+- Numeracion: 201 = max(archivos)+1 = cabeza del pool (medidos justo antes de
+  escribir); consumido solo ese. Hueco inocuo: 2164 (consumido por la corrida
+  cortada en su primera reserva, sin log; el log de la iter.15 es el 2166).
+- Artefactos: Log 2166, msg 201 (UTF-8 sin BOM + LF), tracker 194 -> 200, esta
+  nota, log diario y memoria de automatizacion. Limites: 0 commits / 0 push /
+  0 auto-sellos 21.8 / 0 protegidos tocados.
+- Pedidos al director (msg 201): ronda de commit de los paths de la tanda;
+  sync fila 23 del GLOBAL a 73/105; visto bueno de los 2 flips (ofrecidos a
+  revertir); reposicion de COLA ACTIVA si se agota (30 `[ ]` restantes; con
+  dueno externo: eventos M32, construccion M28, agricultura M32, pesca M36,
+  postgame M22, integraciones M24/M37/M65/M68).
+- Proxima: NN > 200; sin mensaje -> siguiente `[ ]` de la cola (construccion:
+  6 misiones, con dueno M28 en la reconstruccion del puente) u orden contraria.
