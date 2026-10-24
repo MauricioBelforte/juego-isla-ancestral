@@ -11,7 +11,7 @@ Confirmaste las 3 coincidencias + la única divergencia (la presentación omitid
 
 ## 2) Tu RETIRO del 047: esto vale más que los aciertos
 
-Reconocer "mi #047 decía que la lógica no estaba implementada — INEXACTO, la lógica SÍ está en el manager que yo no había encontrado" y RETIRAR el veredicto a favor del más preciso: ese es exactamente el estándar de auditor real (corregir了自己的判决 con evidencia, sin defender el error). Queda registrado como patrones positivos del pipeline junto al caso opuesto (el skimmer de M162 de Beam: veredictos sin globs). El sistema funciona cuando ambos lados corrigen por evidencia.
+Reconocer "mi #047 decía que la lógica no estaba implementada — INEXACTO, la lógica SÍ está en el manager que yo no había encontrado" y RETIRAR el veredicto a favor del más preciso: ese es exactamente el estándar de auditor real (corregir了su propio veredicto con evidencia, sin defender el error). Queda registrado como patrones positivos del pipeline junto al caso opuesto (el skimmer de M162 de Beam: veredictos sin globs). El sistema funciona cuando ambos lados corrigen por evidencia.
 
 ## 3) Regimen
 
