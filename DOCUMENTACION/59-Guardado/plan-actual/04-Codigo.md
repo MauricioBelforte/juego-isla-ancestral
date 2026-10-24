@@ -411,3 +411,33 @@ test_slots_m59 22/0 · qa_m59_profile_id OK · test_autosave_m59 0 fallos · qa_
 ### Flips al 05-Checklist (3, con cita de suite)
 
 L128, L135, L136 -> M59 = 112 [x] / 16 [ ] / 2 [?] = 130 (Totales sincronizados). Ofrecidos a revertir.
+
+## Notas del Agente — Tanda "fecha de carga, diario 500+ y cola sin GC" (Step-5-WorkBuddy, 2026-10-23, Log 2161)
+
+L143/L152/L175 del 05-Checklist + L199 medido (queda [ ]). Sin GO nuevo del director (msg 190): lote elegido de la cola activa del BACKLOG por cercania al riel de guardado. Una suite NUEVA (no toca logica de produccion):
+
+### scripts/saving/test_fecha_diario_cola_m59.gd - 45 checks / 0 fallos / EXIT 0 x3
+
+Guarda anti-falso-verde de 3 capas (piso CHECKS_MINIMOS = 45 MEDIDO en verde; _fin(bloque) por bloque; _summary() en call_deferred con bandera _run_terminado). 3 bloques:
+
+1. **L143 carga en fecha distinta** - payload real por snapshot.collect() con meta.last_saved = "2026-09-15 08:30:00" y time.dia/day = 42; SaveWriter.write_atomic + load_slot cargan OK con la cadena-faro activa (paso_actual=1) y el paso siguiente reportable; last_saved NO se reescribe al cargar y slot_metadata sigue mostrando la fecha vieja con day=42. La variante con fecha futura tambien carga OK. request_save sella la fecha del sistema.
+2. **L152 diario 500+ y fotos faltantes** - roundtrip real de las 44 entradas del catalogo (Diary.registrar() + favorito + set_ui_prefs e2e); payload sintetico con 44 validas + 456 huerfanas -> carga OK y quedan 44 (las huerfanas se IGNORAN con print, fallback medido); 300 ids de foto inexistentes -> carga OK y se preservan (ids = referencias, no bytes); documento en disco 24619 B < 120 KB.
+3. **L175 sin GC pesado ni hitching al encolar** - con sm._writing = true (white-box) y 1000 x sm.request_save(SLOT_A, "test_cola_s5"): cola +1000 exactos, 0 Objects creados, < 16670 us (1 frame a 60 FPS; medido 761 us), memoria estatica < 1 MB y 0 guardados disparados (medido con Performance.OBJECT_COUNT, Performance.MEMORY_STATIC, Time.get_ticks_usec()).
+
+Guardián probado **EN ROJO por inyeccion** 2 veces (aborto runtime dentro del bloque): EXIT 1 nombrando el bloque + piso no cumplido.
+
+### L199 (restauracion desde la nube) - MEDIDO, queda [ ]
+
+grep -rln "nube|cloud" sobre scripts/saving/*.gd = 0 y grep -rln "restaurar_desde_nube|cloud_restore|steam" = 0: no existe mecanismo de restauracion en la nube en el riel de guardado. Dueno: M97 (97-Steam-Store-Page / M97-Marketing). No se marca [x] por honestidad.
+
+### Defecto propio corregido (regresion de suite ajena a la tanda)
+
+test_slots_perfiles_m59.gd L129/L136: bool(_slot_previo.get(slot, false)) - el dict guarda el CONTENIDO String del save previo y bool(String) aborta _restore() en runtime ("Nonexistent 'bool' constructor") justo cuando habia save previo que restaurar; el cleanup moria en silencio y colgaba el SceneTree. Fix: _slot_previo.has(slot) y quitar el bool() de L136. Verificado: 41 checks / 0 fallos / EXIT 0 x2, 0 SCRIPT ERROR.
+
+### Regresiones medidas (binario real)
+
+test_slots_m59 22/0 · test_slots_perfiles_m59 41/0 x2 · test_autosave_m59 0 fallos · qa_m59_profile_id OK · qa_m59_bloqueo_manual OK - todos EXIT 0.
+
+### Flips al 05-Checklist (3, con cita de suite)
+
+L143, L152, L175 -> M59 = 115 [x] / 13 [ ] / 2 [?] = 130 (Totales sincronizados). Ofrecidos a revertir.

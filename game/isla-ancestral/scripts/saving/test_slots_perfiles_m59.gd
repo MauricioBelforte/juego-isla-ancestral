@@ -126,14 +126,14 @@ func _restore() -> void:
 		var path: String = SaveWriter.path_for(slot)
 		if FileAccess.file_exists(path):
 			DirAccess.remove_absolute(path)
-		if bool(_slot_previo.get(slot, false)):
+		if _slot_previo.has(slot):
 			var f := FileAccess.open(path, FileAccess.WRITE)
 			if f != null:
 				f.store_string(String(_slot_previo[slot]))
 				f.close()
 		SaveWriter.cleanup_orphan_tmp(slot)
 		var bak: String = SaveSchema.SAVE_DIR + "/slot_%d_r1.bak" % slot
-		if FileAccess.file_exists(bak) and not bool(_bak_previo.get(slot, false)):
+		if FileAccess.file_exists(bak) and not _bak_previo.get(slot, false):
 			DirAccess.remove_absolute(bak)
 	var ds := root.get_node_or_null("/root/DataStore")
 	if ds != null and ds.has_method("set_perfil_activo"):

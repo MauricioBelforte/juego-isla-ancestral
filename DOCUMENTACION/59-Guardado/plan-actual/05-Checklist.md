@@ -140,7 +140,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Guardar fecha, hora, estación (M29/M31) y clima (M32) [S] — *time: GameClock + TimeCalendar (ox-alpha); clima: WeatherService sección "clima" (glm-5.3-flash, M32 iter. 1)*
 - [ ] Guardar eventos pasados y futuros programados (M74) [M]
 - [ ] Guardar festivales celebrados y calendario [M]
-- [ ] Testear carga en una fecha distinta a la del guardado [C]
+- [x] Testear carga en una fecha distinta a la del guardado [C] — **Step-5-WorkBuddy (2026-10-23, Log 2161):** suite `scripts/saving/test_fecha_diario_cola_m59.gd` bloque 1 (45 checks / 0 fallos / EXIT 0 x3). Payload REAL por `snapshot.collect()` con `meta.last_saved = "2026-09-15 08:30:00"` (fecha vieja) y `time.dia/day = 42`; `SaveWriter.write_atomic` + `load_slot` cargan OK con la cadena-faro activa (`paso_actual=1`) y el paso siguiente reportable; `last_saved` NO se reescribe al cargar y `slot_metadata` sigue mostrando la fecha vieja con `day=42`. La variante con fecha futura tambien carga OK. `request_save` sella la fecha del sistema.
 - [ ] Testear eventos no duplicados al recargar [C]
 
 ## O. Guardado de Colecciones (M37/M55/M56)
@@ -149,7 +149,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Guardar diario del jugador (M55) [M] — **G-5.3-Flash-Agente (2026-10-21):** flip por evidencia: `diary_service.gd` ya es provider del riel M59 (`register_provider` L84-85, `get_section_name()='diary'` L335, `get_save_data/restore_save_data` L339/351) — confirmado por sweep en disco y por `qa_m59_payload_sections.gd` (payload real con ~50 secciones incl. diary; EXIT 0 repeatedly).
 - [ ] Guardar fotos por referencia (ids, no bytes — M56) [M]
 - [ ] Guardar Sellos y ruinas coleccionables [M]
-- [ ] Testear diario 500+ entradas y fotos faltantes (fallback) [C]
+- [x] Testear diario 500+ entradas y fotos faltantes (fallback) [C] — **Step-5-WorkBuddy (2026-10-23, Log 2161):** mismo suite, bloque 2 (45 checks / 0 fallos / EXIT 0 x3). Roundtrip real de las 44 entradas del catalogo (`Diary.registrar()` + favorito + `set_ui_prefs` e2e); payload sintetico con 44 validas + 456 huerfanas -> carga OK y quedan 44 (las huerfanas se IGNORAN con print, fallback medido); 300 ids de foto inexistentes -> carga OK y se preservan; documento en disco 24619 B < 120 KB.
 
 ## P. Configuración (M90/M91)
 
@@ -172,7 +172,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [?] Guardado en background thread (< 80 ms) [C] — *MEDIDO (iter. 1, Log 1197, rondas intercaladas): `write_atomic` de un save real de 4,2 KB = **22,66 ms** de mediana (19,52-46,12); `request_save()` end-to-end = **48,20 ms**. Cumple el criterio `< 80 ms` del ítem, pero **EXCEDE el presupuesto de frame** (16,67 ms a 60 FPS) → hitch de 1-3 frames. El coste NO depende del payload (`serialize` 0,27 ms): es I/O del SO al crear/renombrar/borrar en `user://` (AppData). Hilo **justificado**; dueño **M61** (no tocado, por regla). NO se marca `[x]`: el mecanismo no existe todavía*
 - [x] Carga < 500 ms para saves de sesión larga [C]
 - [x] Save típico < 120 KB (fotos por referencia) [M]
-- [ ] Sin GC pesado ni hitching al encolar [M]
+- [x] Sin GC pesado ni hitching al encolar [M] — **Step-5-WorkBuddy (2026-10-23, Log 2161):** mismo suite, bloque 3 (45 checks / 0 fallos / EXIT 0 x3). Con `sm._writing = true` (white-box) y 1000 x `sm.request_save(SLOT_A, "test_cola_s5")`: cola +1000 exactos, 0 Objects creados, < 16670 us (1 frame a 60 FPS), memoria estatica < 1 MB y 0 guardados disparados (medido con `Performance.OBJECT_COUNT`, `Performance.MEMORY_STATIC`, `Time.get_ticks_usec()`).
 - [ ] Reutilizar buffers de serialización (M62) y probar con profiler (M116) [C]
 
 ## S. Localización (M87)
@@ -196,7 +196,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Definir contrato con M107 (3-2-1 externo) [M] -- Diseno: 03-Diseno.md (guardado definido)
 - [x] Exportar saves a la nube de Steam (M97, opcional) [M]
 - [x] No duplicar backups locales y externos [M]
-- [ ] Verificar la restauración desde la nube [C]
+- [ ] Verificar la restauración desde la nube [C] — **Step-5-WorkBuddy (2026-10-23, Log 2161):** MEDIDO: `grep -rln "nube\|cloud"` sobre `scripts/saving/*.gd` = 0 y `grep -rln "restaurar_desde_nube\|cloud_restore\|steam"` = 0 -> no existe mecanismo de restauracion en la nube en el riel de guardado. Dueno del mecanismo: M97 (`97-Steam-Store-Page` / `M97-Marketing`). Queda `[ ]` honesto hasta que el dueno lo implemente.
 - [x] Documentar el flujo de recuperación completo [M] -- Diseno: 03-Diseno.md (guardado definido)
 
 ## V. Edge Cases
@@ -238,7 +238,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Marcar ítems solo al cumplir la DoD (sección 21.6) [S] -- Diseno: 03-Diseno.md (guardado definido)
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 lineas-item - Completados: 112 - Pendientes: 16 - No resueltos: 2. (Step-5-WorkBuddy 2026-10-23: 10 flips con evidencia de suite real, Logs 2154 + 2155; conteo de disco por prefijo de linea)
+**Totales:** 130 lineas-item - Completados: 115 - Pendientes: 13 - No resueltos: 2. (Step-5-WorkBuddy 2026-10-23: 3 flips nuevos con evidencia de suite real (L143/L152/L175), Log 2161; 10 flips previos, Logs 2154 + 2155; conteo de disco por prefijo de linea)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].

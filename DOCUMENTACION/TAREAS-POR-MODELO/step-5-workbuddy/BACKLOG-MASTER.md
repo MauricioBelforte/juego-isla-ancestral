@@ -75,7 +75,7 @@
 32. M112-Testing (211/225): cerrar 14 pendientes — 8 [C]
 33. M117-Build (92/110): cerrar 18 pendientes (preset de exportación) — 8 [C]
 34. M40-Infraestructura (175/211): lote de pipelines faltantes — 10 [C]
-35. M59-Guardado (60/130): lote de save slots + autoguardado — 10 [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2154, canal 185):** el conteo del item estaba stale (disco real 102/130). Dos suites NUEVAS con guarda de 3 capas y guardián probado EN ROJO por inyección: `test_slots_perfiles_m59.gd` (41 checks / 0 fallos / EXIT 0 x3: 3 perfiles sin mezcla, cambio de slot en sesión, sin cruzamiento, solo-lectura medida) y `test_carga_idempotente_m59.gd` (28/0 x3: carga sin duplicar, límites stack_max, casas parciales, muebles inexistentes). 7 flips con cita -> M59 = 109 [x] / 19 [ ] / 2 [?] = 130. Regresiones: M55 26/0 + persist 0, M71 83/0, suites M59 previas verdes. Ofrecidos a revertir.
+35. M59-Guardado (115/130): lote de save slots + autoguardado — 10 [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2154, canal 185):** el conteo del item estaba stale (disco real 102/130). Dos suites NUEVAS con guarda de 3 capas y guardián probado EN ROJO por inyección: `test_slots_perfiles_m59.gd` (41 checks / 0 fallos / EXIT 0 x3: 3 perfiles sin mezcla, cambio de slot en sesión, sin cruzamiento, solo-lectura medida) y `test_carga_idempotente_m59.gd` (28/0 x3: carga sin duplicar, límites stack_max, casas parciales, muebles inexistentes). 7 flips con cita -> M59 = 109 [x] / 19 [ ] / 2 [?] = 130. Regresiones: M55 26/0 + persist 0, M71 83/0, suites M59 previas verdes. Ofrecidos a revertir. Step-5-WorkBuddy 2026-10-23 (Log 2161, canal 191): 2da tanda sobre el mismo item - L143/L152/L175 -> disco medido 115/130.
 36. M61-Rendimiento (53/148): lote 1 de profiling (frame budget/render distance) — 10 [C]
 37. M137-Prototipo (8/131): iteración de prototipo jugable 1 — 10 [C]
 38. M137 b2/b3: continuar por lotes — 20 [C]
@@ -1484,15 +1484,15 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - [x] (59-Guardado) - [ ] Testear carga tras completar misión y reabrir [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2155, canal 187):** misma suite, bloques 5-6. cadena-invernadero 3/3: tras cargar sigue completada/inactiva, no se re-ofrece, no se puede reiniciar, completadas no se duplica; consecuencia (flag WorldState) aplicada. Historia principal: completados/sellos sobreviven sin crecer.
 - [ ] (59-Guardado) - [ ] Guardar eventos pasados y futuros programados (M74) [M]
 - [ ] (59-Guardado) - [ ] Guardar festivales celebrados y calendario [M]
-- [ ] (59-Guardado) - [ ] Testear carga en una fecha distinta a la del guardado [C]
+- [x] (59-Guardado) - [ ] Testear carga en una fecha distinta a la del guardado [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2161, canal 191):** suite NUEVA `test_fecha_diario_cola_m59.gd` bloque 1 (45 checks / 0 fallos / EXIT 0 x3). Payload real por `snapshot.collect()` con `meta.last_saved = "2026-09-15 08:30:00"` y `time.dia/day = 42`; `SaveWriter.write_atomic` + `load_slot` cargan OK con la cadena-faro activa (`paso_actual=1`) y el paso siguiente reportable; `last_saved` NO se reescribe al cargar y `slot_metadata` sigue mostrando la fecha vieja con `day=42`. Variante con fecha futura tambien carga OK. `request_save` sella la fecha del sistema.
 - [ ] (59-Guardado) - [ ] Testear eventos no duplicados al recargar [C]
 - [ ] (59-Guardado) - [ ] Guardar museo, bestiario y colecciones (M37/M36) [M]
 - [ ] (59-Guardado) - [ ] Guardar fotos por referencia (ids, no bytes — M56) [M]
 - [ ] (59-Guardado) - [ ] Guardar Sellos y ruinas coleccionables [M]
-- [ ] (59-Guardado) - [ ] Testear diario 500+ entradas y fotos faltantes (fallback) [C]
+- [x] (59-Guardado) - [ ] Testear diario 500+ entradas y fotos faltantes (fallback) [C] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2161, canal 191):** mismo suite, bloque 2 (45 checks / 0 fallos / EXIT 0 x3). Roundtrip real de las 44 entradas del catalogo (`Diary.registrar()` + favorito + `set_ui_prefs` e2e); payload sintetico con 44 validas + 456 huerfanas -> carga OK y quedan 44 (las huerfanas se IGNORAN con print, fallback medido); 300 ids de foto inexistentes -> carga OK y se preservan (ids = referencias, no bytes); documento en disco 24619 B < 120 KB.
 - [ ] (59-Guardado) - [ ] Probar múltiples perfiles sin cruzamiento [C]
 - [ ] (59-Guardado) - [ ] Probar archivos con permisos de solo lectura [M]
-- [ ] (59-Guardado) - [ ] Sin GC pesado ni hitching al encolar [M]
+- [x] (59-Guardado) - [ ] Sin GC pesado ni hitching al encolar [M] — **[x] HECHO 2026-10-23 (Step-5-WorkBuddy, Log 2161, canal 191):** mismo suite, bloque 3 (45 checks / 0 fallos / EXIT 0 x3). Con `sm._writing = true` (white-box) y 1000 x `sm.request_save(SLOT_A, "test_cola_s5")`: cola +1000 exactos, 0 Objects creados, < 16670 us (1 frame a 60 FPS; medido 761 us), memoria estatica < 1 MB y 0 guardados disparados (medido con `Performance.OBJECT_COUNT`, `Performance.MEMORY_STATIC`, `Time.get_ticks_usec()`).
 - [ ] (59-Guardado) - [ ] Reutilizar buffers de serialización (M62) y probar con profiler (M116) [C]
 - [ ] (59-Guardado) - [ ] Localizar textos del menú de guardado [S]
 - [ ] (59-Guardado) - [ ] Localizar mensajes de corrupción, recuperación y disco lleno [S]
@@ -1500,7 +1500,7 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - [ ] (59-Guardado) - [ ] Respetar plurales (horas, minutos) [S]
 - [ ] (59-Guardado) - [ ] Testear menú de guardado en 3 idiomas [M]
 - [ ] (59-Guardado) - [ ] Definir contrato con M107 (3-2-1 externo) [M]
-- [ ] (59-Guardado) - [ ] Verificar la restauración desde la nube [C]
+- [ ] (59-Guardado) - [ ] Verificar la restauración desde la nube [C] — **MEDIDO 2026-10-23 (Step-5-WorkBuddy, Log 2161, canal 191):** `grep -rln "nube|cloud"` sobre `scripts/saving/*.gd` = 0 y `grep -rln "restaurar_desde_nube|cloud_restore|steam"` = 0 -> no existe mecanismo de restauracion en la nube en el riel de guardado. Dueno: M97 (`97-Steam-Store-Page` / `M97-Marketing`). Queda `[ ]` honesto hasta que el dueno lo implemente.
 - [ ] (59-Guardado) - [ ] Documentar el flujo de recuperación completo [M]
 - [ ] (59-Guardado) - [ ] Guardar durante un festival con estado consistente (M74) [M]
 - [ ] (59-Guardado) - [ ] Confirmaciones accesibles por gamepad (M57) [M]
@@ -1706,3 +1706,28 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos tocados.
 - Pedidos al director (msg 189): ronda de commit de los paths de la tanda; sync fila 59 del
   GLOBAL a 112/130; visto bueno de los 3 flips; decision sobre el defecto M20 del evaluador.
+
+
+### Registro de corrida — Step-5-WorkBuddy 2026-10-23 (noche, Log 2161, canal 191)
+
+- RAMA 1: mensaje 190 del director (ratifica tanda M59 112/130, fila 59 GLOBAL sincronizada,
+  M20 ruteado a agnes, sin GO nuevo: el proximo lote es segun mi claustro). Acuse 191.
+  RAMA 2: siguientes [ ] de M59 en la cola -> L143/L152/L175 (flips) + L199 (solo medicion).
+- Tanda: 1 suite NUEVA (no toca logica de produccion):
+  `scripts/saving/test_fecha_diario_cola_m59.gd` 45 checks / 0 fallos / EXIT 0 x3, guarda de
+  3 capas con piso 45 MEDIDO en verde; guardian probado EN ROJO por inyeccion 2 veces
+  (EXIT 1 nombrando el bloque + piso no cumplido).
+- Flips: L143/L152/L175 -> M59 = 115 [x] / 13 [ ] / 2 [?] = 130 (Totales sincronizados).
+  L199 (restauracion desde la nube) MEDIDO y queda [ ]: 0 coincidencias de nube/cloud/steam
+  en scripts/saving/*.gd; dueno M97.
+- DEFECTO PROPIO corregido (hallado en la regresion de la tanda):
+  `test_slots_perfiles_m59.gd` L129/L136 - `bool(_slot_previo.get(slot, false))` sobre un dict
+  que guarda el CONTENIDO String del save previo: `bool(String)` aborta `_restore()` en runtime
+  ("Nonexistent bool constructor") justo cuando habia save previo que restaurar; el cleanup
+  moria en silencio y colgaba el SceneTree. Fix: `_slot_previo.has(slot)` + quitar el `bool()`
+  de L136. Verificado: 41 checks / 0 fallos / EXIT 0 x2, 0 SCRIPT ERROR.
+- Regresiones (binario real, EXIT 0): test_slots_m59 22/0 · test_slots_perfiles_m59 41/0 x2 ·
+  test_autosave_m59 0 fallos · qa_m59_profile_id OK · qa_m59_bloqueo_manual OK.
+- Limites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos tocados.
+- Pedidos al director (msg 192): ronda de commit de los paths de la tanda; sync fila 59 del
+  GLOBAL a 115/130; visto bueno de los 3 flips; nota del defecto propio corregido.
