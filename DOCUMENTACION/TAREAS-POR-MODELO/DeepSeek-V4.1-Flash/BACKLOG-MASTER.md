@@ -31,6 +31,31 @@
 
 ## LAS 100+ TAREAS
 
+> **CICLO 2026-10-23 (Log 2160, msg 376) — RAMA 1, director 375 -> COLA (tarea 1, M01):** la
+> tarea 1 ("diagnostico Patron D de los 126 restantes y mapa de lotes") tenia la **premisa VENCIDA**:
+> ese diagnostico ya existe DOS veces dentro del propio `05-Checklist.md` de M01 (iter. 6, 2026-10-14;
+> iter. 7, 2026-10-15, Log 1858) y las dos midieron **0 candidatos nuevos**. Lo que faltaba era un
+> **refresco medido** 8 dias despues. **Entregado:** `scripts/auditar_indice_m01.py` (NUEVO; criterio
+> "checklist propia cerrada Y fila GLOBAL OK", mapeo M## -> carpeta {##+1}, guarda de ceguera exit 3)
+> + `scripts/test_auditar_indice_m01.py` (NUEVO) **15 checks / 0 fallos / EXIT 0 x3**, piso 15
+> **MEDIDO**, sondas EN ROJO (piso 99 -> exit 1; auditor ciego a candidatos -> exit 1 con 3 fallos),
+> restauracion byte-exacta por sha256 + `plan-actual/08-Diagnostico-Indice-Maestro.md` (13,4 KB).
+> **Medido hoy:** indice **26 [x] / 126 [ ] / 0 [?] = 152** (coincide con `Totales` y con la fila 01
+> del GLOBAL); de los 26, **20 validos + 6 STALE**; **6 CANDIDATOS NUEVOS** (la iter. 7 habia medido
+> 0): M05->06-Control-De-Versiones, M18->19-NPC-Y-Vecinos, M21->22-Historia-Principal,
+> M89->90-Configuracion-Grafica, M99->100-Community-Management, M113->114-Playtest. **STALE:** M31
+> (32-Clima, 2 [?] por sello denegado), M77 (78-Legal, 1 [?]), M112 (113-Pruebas-De-Stress, 1 [?] por
+> MI degradacion de P5b), M101 (102-Bug-Tracking, cerrada pero Estado "En curso"), M115
+> (116-Instalador, fila corrupta), M124 (125-Terminos, cerrada pero celda en amarillo). **Hallazgo
+> estructural:** **8 filas** del GLOBAL (ids 09, 70, 99, 112, 116, 118, 123, 144) tienen la celda
+> Modulo ocupada por un check y todo corrido una celda a la izquierda, **conservando 11 celdas** (por
+> eso ni el verificador ni un conteo de celdas las ve); verificado que estan asi en **HEAD**
+> (`git status --porcelain CHECKLIST-GLOBAL.md` vacio). **Palanca real:** **15 modulos** estan
+> cerrados y solo esperan que su fila diga OK (5 se destraban corrigiendo la fila, 2 la celda Estado).
+> **Progreso:** suma de las 152 checklists = **19.476 [x] / 993 [?] / 1.586 [ ] = 22.055** vs iter. 7
+> (17.485 / 970 / 3.508) -> **+1.991 [x] / -1.922 [ ]** en 8 dias. **Lotes:** A 61 / B 9 / C 13 /
+> D 28 / E 0 / F 15 (+20 validos +6 candidatos = 152). **0 commits / 0 push / 0 flips.**
+
 > **CICLO 2026-10-23 (Log 2157, msg 374) — RAMA 1, director 373 (P5d APLICADO):** aplicados los
 > **3 flips** autorizados (L36 RF9, L51 Copia 3, L55 Local -> `[x]`, con cita "autorizado por el
 > director, msg 373; cita: DeepSeek 372 + Log 2156") y los **5 items** L204-208 pasados a `[ ]` con
@@ -91,7 +116,7 @@
 
 ### Bloque A — Su módulo ancla M01 y deuda fundacional
 
-1. M01-Fundamentos (26/152): diagnóstico Patrón D de los 126 restantes y mapa de lotes — 10 [M]
+1. [x] M01-Fundamentos (26/152): diagnóstico Patrón D de los 126 restantes y mapa de lotes — 10 [M] — **ENTREGADO 2026-10-23 (Log 2160, msg 376), código + suite + informe.** Premisa VENCIDA: el diagnóstico ya existía en las iters. 6 y 7 (esta última Log 1858), las dos con **0 candidatos**. Refresco medido 8 días después con `scripts/auditar_indice_m01.py` (NUEVO) + suite NUEVA **15/0/EXIT 0 x3** (piso 15 MEDIDO, 2 sondas en rojo, restauración sha256) + `plan-actual/08-Diagnostico-Indice-Maestro.md`. **Resultado: 6 candidatos nuevos** (M05, M18, M21, M89, M99, M113), **6 `[x]` stale** (M31, M77, M112 = regresión real; M101, M115, M124 = bloqueo de fila), **8 filas corruptas** en el GLOBAL y **15 módulos cerrados** bloqueados solo por su fila. **0 flips aplicados** (los aplica el director).
 2. M01 b1: resolver bloque dependencias/documentales factibles headless — 10 [M]
 3. M01 b2: continuar (docs del 05-Checklist con cita de archivo) — 10 [M]
 4. M01 b3: cierre de lo factible; [?] honestos para el resto — 8 [M]
