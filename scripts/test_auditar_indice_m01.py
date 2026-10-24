@@ -25,7 +25,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 AUDITOR = os.path.join(AQUI, "auditar_indice_m01.py")
 PY = sys.executable
 
-CHECKS_MINIMOS = 30  # medido en verde (30/0 x3) el 2026-10-23; se ajusta SOLO tras medir
+CHECKS_MINIMOS = 54  # medido en verde (54/0 x3) el 2026-10-23; se ajusta SOLO tras medir
 
 _checks = 0
 _fallos = 0
@@ -212,6 +212,96 @@ def main():
                  "J: restauracion byte-exacta por sha256")
         rc, out = correr(ib, "--pendientes")
         chequear("[1] resoluble_headless" in out, "J: tras restaurar vuelve el verde")
+
+        # --- Bloque K: clasificacion por TIPO de dependencia (7 familias, 1 item cada una)
+        # M01 -> carpeta 02 queda bloqueado_ambos (checklist abierta + GLOBAL amarillo);
+        # el resto de los modulos tiene la checklist cerrada -> bloqueado_global.
+        k = os.path.join(base, "K")
+        construir(k, [" "] * 152, AMARILLO)
+        CHECK_K = os.path.join(k, "DOCUMENTACION", "02-Modulo-02", "plan-actual", "05-Checklist.md")
+        ITEMS_K = [
+            "- [ ] Definir credenciales OAuth para el backup\n",          # cuenta_externa_fundador
+            "- [ ] Validar 60 FPS en Steam Deck\n",                       # hardware
+            "- [ ] Audio de recogida (campana suave)\n",                  # asset
+            "- [ ] Anotar el alcance como pendiente de negocio\n",         # decision_proyecto
+            "- [ ] Recetas consumibles por M10\n",                        # otro_modulo
+            "- [ ] Highlight del objetivo NO implementado\n",             # trabajo_propio
+            "- [ ] Saltar, nadar y escalar del jugador\n",                # sin_senal
+        ]
+        with open(CHECK_K, "w", encoding="utf-8", newline="\n") as f:
+            f.write("".join(ITEMS_K))
+
+        rc, out = correr(k, "--dependencias")
+        chequear(rc == 0, "K: --dependencias exit 0")
+        chequear("modulos bloqueado_ambos : 1" in out, "K: clasifica 1 modulo bloqueado_ambos")
+        chequear("items abiertos leidos   : 7" in out, "K: lee los 7 items abiertos")
+        for tipo in ("cuenta_externa_fundador", "hardware", "asset",
+                     "decision_proyecto", "otro_modulo", "trabajo_propio", "sin_senal"):
+            chequear("  %-24s %5d  %5.1f%%" % (tipo, 1, 100.0 / 7) in out,
+                     "K: 1 item en %s" % tipo)
+
+        rc, out = correr(k, "--dependencias", "--json")
+        datos_k = json.loads(out)
+        dep_k = datos_k["dependencias"]
+        tipos_k = [it["tipo"] for it in dep_k["detalle"][0]["items"]]
+        chequear(tipos_k == ["cuenta_externa_fundador", "hardware", "asset",
+                             "decision_proyecto", "otro_modulo", "trabajo_propio", "sin_senal"],
+                 "K: un tipo por item, en el orden de las familias")
+        chequear(sum(dep_k["por_tipo"].values()) == dep_k["items"],
+                 "K: la suma por tipo cuadra con el total de items")
+        chequear(dep_k["detalle"][0]["externos"] == 4,
+                 "K: 4 items externos en el modulo (cuenta+hardware+asset+decision)")
+
+        # --- Bloque L: controles negativos del clasificador
+        l = os.path.join(base, "L")
+        construir(l, [" "] * 152, AMARILLO)
+        CHECK_L = os.path.join(l, "DOCUMENTACION", "02-Modulo-02", "plan-actual", "05-Checklist.md")
+        with open(CHECK_L, "w", encoding="utf-8", newline="\n") as f:
+            f.write(
+                "- [ ] Sin contradicciones con M01 (recetas)\n"          # auto-referencia -> NO otro_modulo
+                "- [ ] Cuevas con 3 entradas por isla [M]\n"             # [M] = esfuerzo, no modulo
+                "- [ ] Audio de recogida | QA: NO implementado\n"        # precedencia: asset gana a propio
+                "- [?] -- pendiente de M10\n"                            # enunciado vacio -> usa el texto
+            )
+        rc, out = correr(l, "--dependencias", "--json")
+        dep_l = json.loads(out)["dependencias"]
+        tipos_l = [it["tipo"] for it in dep_l["detalle"][0]["items"]]
+        chequear(tipos_l[0] == "sin_senal",
+                 "L: la auto-referencia a M01 NO cuenta como otro_modulo")
+        chequear(tipos_l[1] == "sin_senal",
+                 "L: el tag de esfuerzo [M] NO se confunde con un modulo")
+        chequear(tipos_l[2] == "asset",
+                 "L: la precedencia pone asset antes que trabajo_propio")
+        chequear(tipos_l[3] == "otro_modulo",
+                 "L: un item que EMPIEZA por separador se clasifica con su texto completo")
+
+        # --- Bloque M: ceguera del clasificador de dependencias
+        m = os.path.join(base, "M")
+        construir(m, [" "] * 152, AMARILLO)   # todas las checklists cerradas -> 0 bloqueado_ambos
+        rc, out = correr(m, "--dependencias")
+        chequear(rc == 3, "M: sin ningun item abierto -> exit 3 (detector ciego)")
+        chequear("no se leyo ningun item abierto" in out,
+                 "M: el informe nombra la causa de la ceguera")
+
+        # el invariante aritmetico tambien vale con varios modulos bloqueados
+        n = os.path.join(base, "N")
+        construir(n, [" "] * 152, AMARILLO)
+        for num, texto in ((2, "- [ ] Audio de menu\n- [ ] Probar salto\n"),
+                           (3, "- [ ] Icono de fatiga\n")):
+            pa = os.path.join(n, "DOCUMENTACION", "%02d-Modulo-%02d" % (num, num),
+                              "plan-actual", "05-Checklist.md")
+            with open(pa, "w", encoding="utf-8", newline="\n") as f:
+                f.write(texto)
+        rc, out = correr(n, "--dependencias", "--json")
+        dep_n = json.loads(out)["dependencias"]
+        chequear(dep_n["modulos"] == 2, "N: clasifica los 2 modulos bloqueado_ambos")
+        chequear(dep_n["items"] == 3, "N: suma los 3 items abiertos de los 2 modulos")
+        cuadra = all(sum(x["por_tipo"].values()) == x["abiertos"] for x in dep_n["detalle"])
+        chequear(cuadra, "N: por modulo, la suma por tipo cuadra con sus abiertos")
+        chequear(dep_n["por_tipo"]["asset"] == 2,
+                 "N: agrega bien asset entre modulos (audio + icono)")
+        chequear(dep_n["modulos"] == dep_n["modulos_esperados"],
+                 "N: modulos clasificados == modulos bloqueado_ambos (guarda de ceguera)")
 
     finally:
         shutil.rmtree(base, ignore_errors=True)
