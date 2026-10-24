@@ -3,7 +3,7 @@
 
 # 03-Diseno.md — Módulo 31: Ciclo Día/Noche
 
-## 1. Arquitectura
+# 1. Arquitectura
 
 ```
 GameClock (M29) ── señal hora_cambio(min) ──► DayNightCycle.gd (M31)
@@ -20,7 +20,7 @@ GameClock (M29) ── señal hora_cambio(min) ──► DayNightCycle.gd (M31)
    Luces artificiales (faroles/refugio) — autoswitch por umbral de luz
 ```
 
-## 2. Cronograma de fases (compatible con M29)
+# 2. Cronograma de fases (compatible con M29)
 
 | Fase | Horario | Luz sol | Ambiente (piso) | Comportamiento |
 |---|---|---|---|---|
@@ -32,7 +32,7 @@ GameClock (M29) ── señal hora_cambio(min) ──► DayNightCycle.gd (M31)
 
 > Las **señales de fase** salen SOLO en el cambio de franja (no cada minuto): `EventBus.time.fase_cambio(FASE)`.
 
-## 3. Componentes de escena
+# 3. Componentes de escena
 
 | Nodo | Recursos | Detalle |
 |---|---|---|
@@ -45,7 +45,7 @@ GameClock (M29) ── señal hora_cambio(min) ──► DayNightCycle.gd (M31)
 | `Faroles[]` | prefab farol (omni 3200K, r 8 m) | autoswitch por `umbral_luz` |
 | `Estrellas` | canvas procedural (M45) | alpha 0→1 entre 20:00 y 22:00 |
 
-## 4. Curvas de iluminación (concepto de datos)
+# 4. Curvas de iluminación (concepto de datos)
 
 - `data/light/day_curve.tres`: 24 puntos (hora → energía sol + color)
 - `data/light/sky_curve.tres`: 24 puntos (hora → zenith/horizon color + energía cielo)
@@ -54,7 +54,7 @@ GameClock (M29) ── señal hora_cambio(min) ──► DayNightCycle.gd (M31)
 
 Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máximo paso por minuto de juego predefinido).
 
-## 5. Contrato con consumidores (API)
+# 5. Contrato con consumidores (API)
 
 | Consumidor | Señal/consulta | Uso |
 |---|---|---|
@@ -68,14 +68,14 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 | M13 Linterna | `get_fase()` | sugirir encendido automático opcional |
 | M12 Minimapa | — | no depende de luz (sin cambio) |
 
-## 6. Eventos y secretos nocturnos
+# 6. Eventos y secretos nocturnos
 
 - **Lluvia de estrellas:** días 10 y 25 del mes (M29) 22:00-23:30; partículas caída + TTS "podés pedir un deseo" (M55 diario); jamás con tormenta (M32 valida).
 - **Lince de luna:** 1 fijo por mes (día 15 tras luna llena), aparece en Claro del Bosque (M09); interacción "observar" (regala esporas) — siempre opcional.
 - **Flora brillante:** en Senda de las Luciérnagas (POI M09); visible 21:00-05:00; cosechable (M33/M15) con recompensa x2 vs día (único bono horario permitido).
 - **Murales luminosos (ruinas M25):** solo visibles de noche; lore (M148); sin puzzle obligatorio nocturno.
 
-## 7. Anti-oscuridad (regla de oro)
+# 7. Anti-oscuridad (regla de oro)
 
 1. Piso de ambiente nocturno **0.15 LDR** (post-tonemap).
 2. Linterna del jugador (M13): rango 12 m, suave, sin sombras parpadeantes.
@@ -83,73 +83,32 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 4. Prohibido: negro puro en ambiente, flash total oscuridad en transiciones.
 5. QA M114: checklist visual nocturno en todas las zonas (nunca "no veo nada").
 
-## Nota de deriva documentada (2026-10-16, Step-5-WorkBuddy - iter. 4 lote 2, Log 1884)
+# Nota de deriva documentada (2026-10-16, Step-5-WorkBuddy - iter. 4 lote 2, Log 1884)
 
 > Registro pedido por el director (msg 51): regla "manda el dato" - se documenta la deriva como deuda SIN reescribir el diseno ni fabricar contenido nuevo.
 
 - **Tabla de componentes de la sec. 3, fila Sky (item B-P3 del checklist)**: el diseno dice "gradiente por hora (24 puntos), energia 0.18-1.0"; el dato real (data-driven) es sky_curve.tres con piso 0.15 en hora profunda (anti-oscuridad sec. 7) y sky_color_ramp.tres (M49) con 9 paradas.
 - **Tabla de componentes de la sec. 3, fila Fog**: el rango "0.08-0.25 por estacion/hora" corresponde al nodo FogVolume volumetrico (K.2, dueno externo M45); el fog del Environment que consume M31 se ancla a la niebla marina autoreada del proyecto (0.00018) y fog_curve.tres gobierna la variacion relativa por hora.
 
-## Presupuestos de ciclo dia-noche (Beam 415, produce-first)
-### ### Luna (esfera + fases del calendario M29)
+# Presupuestos de ciclo dia-noche (Beam 415, produce-first)
+# Luna (esfera + fases del calendario M29)
 - Spec: esfera de luna con textura de fases del calendario M29. Luz lunar (DirectionalLight3D, energia 0.12-0.2, color 7500K).
 - Fases: nueva, creciente, llena, menguante (4 fases, sincronizadas con M29).
 - Coherente con M29 (calendario) y M45 (arte 3D). Sin mesh de luna (solo luz) - esfera visual pendiente de M45.
 
-### ### Nubes (velo 2D con drift, densidad estacional)
+# Nubes (velo 2D con drift, densidad estacional)
 - Spec: velo 2D de nubes con drift lento, densidad estacional (mas densas en invierno, menos en verano).
 - Coherente con M49 (iluminacion) y M29 (calendario). Sin implementar (escenico V2).
 
-### ### Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
+# Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
 - Spec: FogVolume ligero (<=120 m) con densidad estacional: matinal otonio, bruma verano, densa invierno, nocturna 0.25.
 - Coherente con M49 (iluminacion) y M29 (calendario). fog_curve.tres data por hora EXISTE.
 
-### ### Flor luminica + cristales estelares nocturnos (M15)
+# Flor luminica + cristales estelares nocturnos (M15)
 - Spec: flor luminica (respawn estacional) + cristales estelares nocturnos (respawn nocturno).
 - Coherente con M15 (recursos) y M29 (calendario).
 
-### ### Lince de luna (dia 15, Claro del Bosque)
+# Lince de luna (dia 15, Claro del Bosque)
 - Spec: fauna especial (lince de luna) que aparece el dia 15 en Claro del Bosque. Interaccion "observar".
 - Coherente con M36 (fauna) y M93 (balance). Data de fauna especial.
 
-## Presupuestos de ciclo dia-noche (Beam 415, produce-first)
-### ### Luna (esfera + fases del calendario M29)
-- Spec: esfera de luna con textura de fases del calendario M29. Luz lunar (DirectionalLight3D, energia 0.12-0.2, color 7500K).
-- Fases: nueva, creciente, llena, menguante (4 fases, sincronizadas con M29).
-- Coherente con M29 (calendario) y M45 (arte 3D). Sin mesh de luna (solo luz) - esfera visual pendiente de M45.
-
-### ### Nubes (velo 2D con drift, densidad estacional)
-- Spec: velo 2D de nubes con drift lento, densidad estacional (mas densas en invierno, menos en verano).
-- Coherente con M49 (iluminacion) y M29 (calendario). Sin implementar (escenico V2).
-
-### ### Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
-- Spec: FogVolume ligero (<=120 m) con densidad estacional: matinal otonio, bruma verano, densa invierno, nocturna 0.25.
-- Coherente con M49 (iluminacion) y M29 (calendario). fog_curve.tres data por hora EXISTE.
-
-### ### Flor luminica + cristales estelares nocturnos (M15)
-- Spec: flor luminica (respawn estacional) + cristales estelares nocturnos (respawn nocturno).
-- Coherente con M15 (recursos) y M29 (calendario).
-
-### ### Lince de luna (dia 15, Claro del Bosque)
-- Spec: fauna especial (lince de luna) que aparece el dia 15 en Claro del Bosque. Interaccion "observar".
-- Coherente con M36 (fauna) y M93 (balance). Data de fauna especial.
-## Presupuestos de ciclo dia-noche (Beam 415, produce-first)
-### ### Luna (esfera + fases del calendario M29)
-- Spec: esfera de luna con textura de fases del calendario M29.
-- Coherente con M29 (calendario) y M45 (arte 3D).
-
-### ### Nubes (velo 2D con drift, densidad estacional)
-- Spec: velo 2D de nubes con drift lento, densidad estacional.
-- Coherente con M49 (iluminacion) y M29 (calendario). Sin implementar (escenico V2).
-
-### ### Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
-- Spec: FogVolume ligero (<=120 m) con densidad estacional.
-- Coherente con M49 (iluminacion) y M29 (calendario). fog_curve.tres data por hora EXISTE.
-
-### ### Flor luminica + cristales estelares nocturnos (M15)
-- Spec: flor luminica (respawn estacional) + cristales estelares nocturnos (respawn nocturno).
-- Coherente con M15 (recursos) y M29 (calendario).
-
-### ### Lince de luna (dia 15, Claro del Bosque)
-- Spec: fauna especial (lince de luna) que aparece el dia 15 en Claro del Bosque.
-- Coherente con M36 (fauna) y M93 (balance). Data de fauna especial.

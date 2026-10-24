@@ -4,9 +4,9 @@
 
 # M156 - Diseno - Terrenos y Movimiento Diferenciado
 
-## 1. Arquitectura del Sistema
+# 1. Arquitectura del Sistema
 
-### 1.1 Diagrama de Componentes
+# 1.1 Diagrama de Componentes
 
 ```
 +------------------------------------------+
@@ -39,13 +39,13 @@
 +-------------+    +-------------+
 ```
 
-### 1.2 Script: TerrainDetector.gd
+# 1.2 Script: TerrainDetector.gd
 
 ```gdscript
 extends Node
 class_name TerrainDetector
 
-## Detecta el tipo de terreno bajo los pies del jugador usando raycast vertical
+# Detecta el tipo de terreno bajo los pies del jugador usando raycast vertical
 
 # Configuracion
 @export var detection_interval: float = 0.1  # Segundos entre detecciones
@@ -84,13 +84,13 @@ func get_current_terrain_id() -> int:
     return current_terrain_id
 ```
 
-### 1.3 Script: TerrainDataProvider.gd
+# 1.3 Script: TerrainDataProvider.gd
 
 ```gdscript
 extends Node
 class_name TerrainDataProvider
 
-## Provee datos de terrenos desde ScriptableObjects
+# Provee datos de terrenos desde ScriptableObjects
 
 @export var terrain_resources: Array[TerrainData] = []
 
@@ -119,15 +119,15 @@ func get_audio_config(terrain_id: int) -> Dictionary:
     return data.audio_config if data else {}
 ```
 
-### 1.4 Script: TerrainModifiers.gd
+# 1.4 Script: TerrainModifiers.gd
 
 ```gdscript
 extends RefCounted
 class_name TerrainModifiers
 
-## Calcula modificadores de velocidad finales
+# Calcula modificadores de velocidad finales
 
-## Calcula la velocidad efectiva basada en terreno y equipacion
+# Calcula la velocidad efectiva basada en terreno y equipacion
 static func calculate_effective_speed(
     base_speed: float,
     terrain_modifier: float,
@@ -135,17 +135,17 @@ static func calculate_effective_speed(
 ) -> float:
     return base_speed * terrain_modifier * (1.0 + equipment_bonus)
 
-## Obtiene el modificador de terreno desde el provider
+# Obtiene el modificador de terreno desde el provider
 static func get_terrain_modifier(provider: TerrainDataProvider, terrain_id: int) -> float:
     return provider.get_speed_modifier(terrain_id)
 
-## Obtiene la bonificacion de equipacion desde M155
+# Obtiene la bonificacion de equipacion desde M155
 static func get_equipment_bonus(equipment_system, terrain_id: int) -> float:
     if equipment_system and equipment_system.has_method("get_terrain_bonus"):
         return equipment_system.get_terrain_bonus(terrain_id)
     return 0.0
 
-## Calculo completo con todas las fuentes
+# Calculo completo con todas las fuentes
 static func calculate_full(
     base_speed: float,
     provider: TerrainDataProvider,
@@ -157,13 +157,13 @@ static func calculate_full(
     return calculate_effective_speed(base_speed, terrain_mod, equip_bonus)
 ```
 
-### 1.5 Resource: TerrainData.gd
+# 1.5 Resource: TerrainData.gd
 
 ```gdscript
 extends Resource
 class_name TerrainData
 
-## Datos configurables de un tipo de terreno
+# Datos configurables de un tipo de terreno
 
 @export var terrain_id: int = 0
 @export var terrain_name: String = ""
@@ -188,9 +188,9 @@ class_name TerrainData
 @export var debug_color: Color = Color.WHITE
 ```
 
-## 2. Integracion con M11 (Personaje Jugador)
+# 2. Integracion con M11 (Personaje Jugador)
 
-### 2.1 Modificacion en PlayerMovement.gd
+# 2.1 Modificacion en PlayerMovement.gd
 
 ```gdscript
 # En PlayerMovement.gd de M11
@@ -223,7 +223,7 @@ func get_current_speed() -> float:
     return _current_effective_speed
 ```
 
-### 2.2 Contrato de Integracion con M11
+# 2.2 Contrato de Integracion con M11
 
 El sistema M156 no modifica directamente el movimiento de M11. En su lugar:
 1. M11 consulta a TerrainDetector para obtener el terreno actual
@@ -234,9 +234,9 @@ El sistema M156 no modifica directamente el movimiento de M11. En su lugar:
 
 Esto mantiene el desacoplamiento y permite que M11 funcione sin M156 si es necesario.
 
-## 3. Integracion con M155 (Equipacion)
+# 3. Integracion con M155 (Equipacion)
 
-### 3.1 Contrato de Interfaz
+# 3.1 Contrato de Interfaz
 
 M155 debe exponer:
 ```
@@ -247,7 +247,7 @@ Esta funcion retorna la bonificacion total del equipo actual para el terreno dad
 - 0.0 si no hay bonificacion
 - Valor positivo entre 0.05 y 0.35 segun el equipo equipado
 
-### 3.2 Ejemplo de Implementacion en M155
+# 3.2 Ejemplo de Implementacion en M155
 
 ```gdscript
 # En EquipmentSystem.gd de M155
@@ -260,9 +260,9 @@ func get_terrain_bonus(terrain_id: int) -> float:
     return min(total_bonus, 0.5)  # Cap al 50% para evitar overpowered
 ```
 
-## 4. Tabla de Bonificaciones por Terreno
+# 4. Tabla de Bonificaciones por Terreno
 
-### 4.1 Bonificaciones Base por Equipacion
+# 4.1 Bonificaciones Base por Equipacion
 
 | Equipacion | Terreno 0 (Ceped) | Terreno 1 (Barro) | Terreno 2 (Pavimento) | Terreno 3 (Arena) | Terreno 4 (Agua) | Terreno 5 (Nieve) | Terreno 6 (Rocas) |
 |------------|-------------------|-------------------|----------------------|-------------------|------------------|-------------------|-------------------|
@@ -273,7 +273,7 @@ func get_terrain_bonus(terrain_id: int) -> float:
 | Botas todoterreno | +0.10 | +0.10 | +0.10 | +0.10 | +0.10 | +0.10 | +0.10 |
 | Botas urbanas | 0.0 | 0.0 | +0.15 | 0.0 | 0.0 | 0.0 | 0.0 |
 
-### 4.2 Velocidades Efectivas (Base = 5.0 m/s)
+# 4.2 Velocidades Efectivas (Base = 5.0 m/s)
 
 | Equipo \ Terreno | Ceped | Barro | Pavimento | Arena | Agua | Nieve | Rocas |
 |------------------|-------|-------|-----------|-------|------|-------|-------|
@@ -282,9 +282,9 @@ func get_terrain_bonus(terrain_id: int) -> float:
 | Botas de nieve | 5.0 | 3.0 | 5.0 | 3.75 | 3.5 | 5.2 | 4.25 |
 | Botas todoterreno | 5.5 | 3.3 | 5.5 | 4.125 | 3.85 | 4.4 | 4.675 |
 
-## 5. Feedback Visual
+# 5. Feedback Visual
 
-### 5.1 Sistema de Huellas
+# 5.1 Sistema de Huellas
 
 Cada terreno tiene un PackedScene de huella que se instancia al caminar:
 - Ceped: Huella ligera en hierba ( Sprite3D con alpha )
@@ -295,7 +295,7 @@ Cada terreno tiene un PackedScene de huella que se instancia al caminar:
 - Nieve: Huella profunda blanca (MeshInstance3D)
 - Rocas: Marcas de desgaste (Sprite3D)
 
-### 5.2 Sistema de Particulas
+# 5.2 Sistema de Particulas
 
 Cada terreno tiene un ParticleProcessMaterial configurado:
 - Ceped: Particulas verdes, baja intensidad
@@ -306,7 +306,7 @@ Cada terreno tiene un ParticleProcessMaterial configurado:
 - Nieve: Copos y polvo blanco, media intensidad
 - Rocas: Polvo gris y chispas, baja-media intensidad
 
-### 5.3 Trigger de Efectos
+# 5.3 Trigger de Efectos
 
 Los efectos se activan:
 1. Solo cuando el jugador se esta moviendo (velocity.length() > threshold)
@@ -314,9 +314,9 @@ Los efectos se activan:
 3. Con la intensidad configurada por terreno
 4. Se desactivan al detenerse
 
-## 6. Feedback Audio
+# 6. Feedback Audio
 
-### 6.1 Sistema de Pasos
+# 6.1 Sistema de Pasos
 
 Cada terreno tiene un array de AudioStream para pasos:
 - Se reproduce uno aleatorio en cada paso
@@ -324,34 +324,34 @@ Cada terreno tiene un array de AudioStream para pasos:
 - Con volumen configurable por terreno
 - Se silencian si el jugador esta detenido
 
-### 6.2 Timing de Pasos
+# 6.2 Timing de Pasos
 
 El sistema de audio sincroniza con la animacion de caminata:
 - Evento de animacion triggers paso de audio
 - No reproducir dos pasos seguidos demasiado rapido
 - Fade in/out al cambiar de terreno
 
-## 7. Indicador de UI
+# 7. Indicador de UI
 
-### 7.1 Elementos de UI
+# 7.1 Elementos de UI
 
 - Icono de terreno actual (TextureRect)
 - Texto con nombre del terreno (Label)
 - Barra de velocidad efectiva (ProgressBar)
 - Tooltip con detalies al hacer hover
 
-### 7.2 Actualizacion de UI
+# 7.2 Actualizacion de UI
 
 - Se actualiza cuando cambia el terreno (terrain_changed signal)
 - No actualiza cada frame para ahorrar rendimiento
 
-## 8. Script: TerrainFootstepAudio.gd
+# 8. Script: TerrainFootstepAudio.gd
 
 ```gdscript
 extends Node3D
 class_name TerrainFootstepAudio
 
-## Reproduce sonidos de pasos segun el terreno actual
+# Reproduce sonidos de pasos segun el terreno actual
 
 @export var audio_player: AudioStreamPlayer3D
 @export var terrain_provider: TerrainDataProvider
@@ -392,7 +392,7 @@ func play_footstep(terrain_id: int) -> void:
     audio_player.play()
 ```
 
-## 9. Diagrama de Secuencia
+# 9. Diagrama de Secuencia
 
 ```
 Jugador (M11)     TerrainDetector   TerrainDataProvider   M155
@@ -415,9 +415,9 @@ Jugador (M11)     TerrainDetector   TerrainDataProvider   M155
      |<-- visual/audio config             |                |
 ```
 
-## 10. Consideraciones de Implementacion
+# 10. Consideraciones de Implementacion
 
-### 10.1 Orden de Ejecucion
+# 10.1 Orden de Ejecucion
 1. TerrainDetector actualiza terrain_id
 2. Senal terrain_changed emite
 3. M11 recibe senal y consulta datos
@@ -425,18 +425,18 @@ Jugador (M11)     TerrainDetector   TerrainDataProvider   M155
 5. M11 aplica movimiento
 6. M11 activa efectos visuales/audio
 
-### 10.2 Manejo de Edge Cases
+# 10.2 Manejo de Edge Cases
 - Jugador en aire: mantener ultimo terreno detectado
 - Cambio rapido de terreno: usar debounce para evitar flickering
 - Terreno no encontrado: usar modificador 1.0 (default)
 - Sin equipacion: usar bonus 0.0 (sin cambio)
 
-### 10.3 Testing
+# 10.3 Testing
 - Unit tests para TerrainModifiers.calculate_effective_speed()
 - Unit tests para TerrainDataProvider.get_terrain_data()
 - Integration tests para flujo completo M11 + M156 + M155
 
-## Protocolos de medicion (S56b — G-5.3-Flash-Agente, 2026-10-23: definicion en papel; la EJECUCION queda para quien tenga el proyecto abierto en editor —Godot visual V2/V4— o el permiso de GO de integracion)
+# Protocolos de medicion (S56b — G-5.3-Flash-Agente, 2026-10-23: definicion en papel; la EJECUCION queda para quien tenga el proyecto abierto en editor —Godot visual V2/V4— o el permiso de GO de integracion)
 
 **P1 — audio no causa lag (L327):** QUE: frame-time con el mezclador activo
 y N sfx simultaneos. HERRAMIENTA: profiler interno de Godot (pestanña
@@ -500,7 +500,7 @@ Godot (buses Ambiente/SFX/USO) + tabla de volumen por zona del M42.
 ESCENA: las 6 zonas del prototipo en las 2 franjas (dia/noche). UMBRAL:
 100% de zonas con staff ambiente propio y 0 SFX fuera de su zona canon.
 
-## Protocolos de medicion (S56b — G-5.3-Flash-Agente, 2026-10-23: definicion en papel; la EJECUCION queda para quien tenga el proyecto abierto en editor —Godot visual V2/V4— o el permiso de GO de integracion)
+# Protocolos de medicion (S56b — G-5.3-Flash-Agente, 2026-10-23: definicion en papel; la EJECUCION queda para quien tenga el proyecto abierto en editor —Godot visual V2/V4— o el permiso de GO de integracion)
 
 **P1 — audio no causa lag (L327):** QUE: frame-time con el mezclador activo
 y N sfx simultaneos. HERRAMIENTA: profiler interno de Godot (pestanña
@@ -564,11 +564,20 @@ Godot (buses Ambiente/SFX/USO) + tabla de volumen por zona del M42.
 ESCENA: las 6 zonas del prototipo en las 2 franjas (dia/noche). UMBRAL:
 100% de zonas con staff ambiente propio y 0 SFX fuera de su zona canon.
 
-## Presupuestos de terreno (Beam 346, produce-first)
-### ### ProgressBar para velocidad efectiva
+# Presupuestos de terreno (Beam 346, produce-first)
+### ProgressBar para velocidad efectiva
 - Spec: ProgressBar que muestra la velocidad efectiva del jugador sobre el terreno (0-100%).
 - Cap: TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5.
 - Coherente con M11 (movimiento) y M61 (rendimiento).
 
-### ### Nota de coherencia (Beam 410)
+### Nota de coherencia (Beam 410)
 os clasACES de item (M156 catalogo) usan el mismo budget generator (ref Beam 381/383). 1 edge de coherencia entre mis propios presupuestos.
+
+# Notas de coherencia (Beam 418, produce-first)
+### Coherencia de generacion procedural
+- world_generator.gd usa world_seed=42 (semilla fija) + IslandGenerator. No menciona chunks explicitamente.
+- Coherente con M10 (generacion) y M27 (islas). La generacion procedural es determinista (semilla fija).
+
+### Budget de NPCs por isla
+- Nota: el budget de NPCs por isla se gestiona en M27 (islas) + M64 (IA de NPC). M156 no tiene un budget propio de NPCs.
+- Coherente con M27 (islas) y M64 (IA de NPC).
