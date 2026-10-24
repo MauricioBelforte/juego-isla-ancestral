@@ -40,6 +40,10 @@ RE_PROSA = re.compile(r"^(\d+/\d+)\s+(.+)$")
 RE_FECHA = re.compile(r"^\d{4}-\d{2}-\d{2}")
 RE_AGENTE = re.compile(r"^[\w.\-]*(?:flash|deepseek|agnes|minimax|glm|hy\d|ling|mimo|beam)[\w.\- ]*$",
                        re.IGNORECASE)
+# Dependencias validas: ids de modulo y separadores ("53,98,91", "07, 14", "—",
+# "M23,M55"). Todo lo que no encaje aca y parezca un agente es una celda
+# corrida de lugar (ver R7b).
+RE_DEPS = re.compile(r"^[M\d,\s—]+$")
 PRIORIDADES = {"Alta", "Media", "Baja", "—"}
 
 # M104 tiene DOS filas (L40 vacia + L41 con datos). Se conserva la rica (L41),
@@ -132,7 +136,15 @@ def reparar(celdas):
     # De esas, el gate solo veia 3 (41, 49, 59) porque el resto no es 🔵.
     if (len(c) == N_ESPERADAS and RE_FECHA.match(c[8])
             and not RE_FECHA.match(c[9])):
-        c.insert(8, "")
+        agente_huerfano = ""
+        # R7b: si *Dependencias* (6) no es una lista de ids sino un nombre de
+        # agente, ese nombre ES el Agente actual que se corrio de lugar. Se
+        # MUEVE (no se copia) y Dependencias queda en '—'.
+        if not RE_DEPS.match(c[6]) and RE_AGENTE.match(c[6]):
+            agente_huerfano = c[6]
+            c[6] = "—"
+            reglas.append("R7b")
+        c.insert(8, agente_huerfano)
         reglas.append("R7")
         if len(c) > N_ESPERADAS:
             c = c[:10] + [" · ".join(x for x in c[10:] if x)]
@@ -182,7 +194,13 @@ def main():
             borradas.append((i + 1, mid, linea.strip()[:120]))
             nuevas[i] = None
             continue
-        if len(celdas) == N_ESPERADAS:
+        # Una fila puede tener las 11 celdas y aun asi estar MAL UBICADA: la
+        # fecha en *Agente actual* (8) y prosa en *Ultima actividad* (9). Esas
+        # se procesan igual (R7/R7b); el resto de las de 11 celdas se saltea.
+        mal_ubicada = (len(celdas) == N_ESPERADAS
+                       and RE_FECHA.match(celdas[8])
+                       and not RE_FECHA.match(celdas[9]))
+        if len(celdas) == N_ESPERADAS and not mal_ubicada:
             continue
         res, reglas = reparar(celdas)
         if res is None:
