@@ -1154,6 +1154,51 @@
 			},
 			"oculta": false,
 			"postgame": false
+		},
+		{
+			"id": "cadena-construccion-plaza",
+			"titulo": "La Plaza del Pueblo",
+			"contexto": "Bruno quiere rehacer el empedrado de la plaza con la piedra que dejo la ultima barcaza",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "bruno_sapo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-002" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "nivelado-del-empedrado" }
+			],
+			"recompensa": { "diario": "capitulo-construccion-plaza", "cosmetico": "adoquin de recuerdo" },
+			"consecuencia": { "plaza_empedrada": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-construccion-senderos",
+			"titulo": "Los Senderos del Pueblo",
+			"contexto": "Nico quiere reparar los senderos que se borran con cada lluvia antes de la fiesta de la cofradia",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "nico_gato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "senderos_del_pueblo" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "gravel" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "nivelado-de-senderos" }
+			],
+			"recompensa": { "diario": "capitulo-senderos", "cosmetico": "senal de madera tallada" },
+			"consecuencia": { "senderos_del_pueblo_reparados": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-construccion-kiosko",
+			"titulo": "El Kiosko de la Plaza",
+			"contexto": "Pablo quiere levantar el kiosko de la plaza con madera del aserradero y tejas de su taller",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "pablo_pato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-001" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "armado-del-kiosko" }
+			],
+			"recompensa": { "diario": "capitulo-kiosko", "cosmetico": "teja decorativa" },
+			"consecuencia": { "kiosko_abierto": true },
+			"oculta": false,
+			"postgame": false
 		}
 	]
 }
