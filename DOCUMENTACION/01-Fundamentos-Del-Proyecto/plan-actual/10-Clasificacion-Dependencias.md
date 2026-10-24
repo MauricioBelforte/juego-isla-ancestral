@@ -22,12 +22,17 @@ director aplico despues del 378 (M69/M98/M117 al indice, mas las filas del GLOBA
 | items `[ ]` clasificados | 120 | `--pendientes` |
 | `bloqueado_ambos` | **111** | checklist propia abierta Y fila GLOBAL no OK |
 | `bloqueado_global` | 9 | checklist cerrada, la palanca es la FILA (M04, M35, M94, M118, M125, M141, M142, M149, M152) |
-| items abiertos leidos en esos 111 modulos | **2571** | suma de `[ ]` + `[?]` de cada `05-Checklist.md` |
+| items abiertos leidos en esos 111 modulos | **2569** | suma de `[ ]` + `[?]` de cada `05-Checklist.md` |
 
 > **Drift medido (no tocado):** la fila 01 de `CHECKLIST-GLOBAL.md` dice `29/152` y el disco dice
 > `32/152`. Los 3 de diferencia son exactamente los flips M69/M98/M117 que el director aplico al
 > indice sin actualizar la celda *Progreso* de la fila. El GLOBAL no es mio (regla dura): se
 > reporta.
+
+> **El conteo se mueve (medido, no supuesto):** a las 00:38 eran **2571** items abiertos; a las
+> 00:47, **2569**. Otro agente cerro 2 items en una checklist ajena del worktree compartido
+> mientras corria esta vuelta. Las cifras de este documento son de la ULTIMA medicion (2569).
+> Las familias no se movieron: 5 / 37 / 168 / 4 / 803 / 74 / 1478.
 
 ## 2. Metodo
 
@@ -53,7 +58,7 @@ un arbol sintetico.
 
 ## 3. Resultado global
 
-| Tipo | Items | % de 2571 |
+| Tipo | Items | % de 2569 |
 |---|---|---|
 | `cuenta_externa_fundador` | 5 | 0.2% |
 | `hardware` | 37 | 1.4% |
@@ -117,7 +122,7 @@ implementacion. La lista completa sale con `--json` para que se pueda triagear i
 
 ## 5. Hallazgo principal
 
-De **2571** items abiertos en 111 modulos, los que dependen de algo **fuera del repositorio**
+De **2569** items abiertos en 111 modulos, los que dependen de algo **fuera del repositorio**
 son, como orden de magnitud:
 
 - **5** de una cuenta externa del fundador (100 % de precision, listados abajo);

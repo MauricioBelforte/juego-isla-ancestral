@@ -74,15 +74,15 @@ ese cajon hacia pensar en un detector ciego; medido, es trabajo de implementacio
 
 ### 4.3 Resultado
 
-2571 items en 111 modulos:
+2569 items en 111 modulos:
 
 - cuenta_externa_fundador: 5 (0,2%)
 - hardware: 37 (1,4%)
 - asset: 168 (6,5%)
 - decision_proyecto: 4 (0,2%)
-- otro_modulo: 803 (31,2%)
+- otro_modulo: 803 (31,3%)
 - trabajo_propio: 74 (2,9%)
-- sin_dependencia_declarada: 1480 (57,6%)
+- sin_dependencia_declarada: 1478 (57,5%)
 
 Modulos SIN ninguna dependencia externa: **52**. Con al menos una: 59.
 
@@ -139,4 +139,7 @@ creacion de credenciales OAuth, obtencion de token OAuth.
 
 Pool de logs: 2165 consumido, cabeza 2166. Pool del canal: cabeza 380 al reservar el mensaje.
 No se commitea el pool (regla dura).
-
+**Nota de medicion:** el conteo se movio durante la vuelta (2571 items a las 00:38,
+2569 a las 00:47): otro agente cerro 2 items en una checklist ajena del worktree
+compartido. Las cifras de este log son de la ULTIMA medicion. Las familias no se movieron
+salvo el residual (1480 -> 1478).
