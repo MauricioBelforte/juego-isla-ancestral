@@ -692,5 +692,36 @@
     "399": "su CIERRE FINAL real (propio, breve): cadena 394-399 COMPLETA y cerrada; sin acuse del director para evitar bucle de cortesias; retorno condicionado (ping -> 5-lineas -> fuel fresco)",
     "leccion_politeness": "cerrar cadenas de cortesia: NO responder a cierres-que-cierran",
     "doble_asignacion_462": "CONFLICTO detectado 24oct 20:24: el APILADOR publico 462 (BACKLOG-11 x100) a Beam pausado, pero BACKLOG-11 ya estaba asignado a DeepSeek (385). Resolucion: DeepSeek es el ejecutor activo (su GO 385 vigente); 462 queda como fuel federado para el retorno de Beam. Sin mensajes al canal (pausa vigente). Ajuste del apilador sugerido: BACKLOG-11 fuera de la rotacion mientras DeepSeek lo tenga"
+  },
+  "crons_metadata": {
+    "estado_24oct_08_56": "Los 4 crons del director NO se pueden eliminar desde dentro de la sesion (cancel_wakeup devuelve No pending wakeup entre disparos porque la plataforma los re-registra en c a fire). Eliminacion: SOLO desde el panel del fundador.",
+    "crons": [
+      {
+        "id": "wku_16a716475001bB5241pQ9MiP9k",
+        "nombre": "CRON A (deteccion general)",
+        "schedule": ":20/:40",
+        "estado": "APAGAR (fundador 24oct 20:44) - duplicado de B"
+      },
+      {
+        "id": "wku_16a71648c0014AIiJGeDCpzVXW",
+        "nombre": "CRON B (deteccion LAG)",
+        "schedule": ":10/:30/:50",
+        "estado": "UNICO ACTIVO (fundador 24oct 20:44) - detector mas barato"
+      },
+      {
+        "id": "wku_16a7194a60017OlT693biC4ayI",
+        "nombre": "CRON D (asignador)",
+        "schedule": ":15/:35/:55",
+        "estado": "APAGAR (fundador 24oct 20:44) - flota self-drive, sin asignaciones nuevas"
+      },
+      {
+        "id": "wku_16cb6896c0012opIgfOeq5suwM",
+        "nombre": "CRON E-APILADOR (Beam)",
+        "schedule": ":24/:54",
+        "estado": "APAGAR (fundador 24oct 20:44) - Beam pausado no consume; superado por tareas/ folder + cron simple del fundador"
+      }
+    ],
+    "limitacion_tool": "cancel_wakeup solo ve wakeups pendientes EN LA SESION (no los recurrentes re-armados por plataforma). Entre disparos la cola aparece vacia aunque el cron siga vivo en el panel.",
+    "solucion_del_fundador": "Eliminar los 4 wku_ids desde el panel Kilo Code (la unica via efectiva)."
   }
 }
