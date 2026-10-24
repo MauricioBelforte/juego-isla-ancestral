@@ -66,7 +66,8 @@
     "estado": "4 consultas acumuladas al fundador (frente-código, M123-beta congelado, PT-runtime, y la ya resuelta rareza=2-sistemas)",
     "consultas": [
       "4. PT-RUNTIME i18n (Ling 244/245): habilitar PT en runtime = pt.po de 274 entradas (paridad total con es.po: 159 reutilizables de strings_pt + 115 nuevas huérfanas-wsjeras fuera), + LOCALES_SOPORTADOS += 'pt' + QA ValidadorPO.validar_par 0-errores + doc M87; 1 vuelta tras GO del fundador"
-    ]
+    ],
+    "clasificacion_24oct": "DEUDA DEL FUNDADOR (fundador 24oct 08:13: 'ahora no tengo decidido eso, como deuda técnica'): 4 decisiones pendientes — (1) frente-de-código a alpha, (2) bloque-0 M106 GCP/Drive/OAuth con SU cuenta, (3) marca M01, (4) PT-runtime (volumen medido 274/159/115). NO bloqueantes: la flota corre con lo asignado; el sucesor NO las implementa unilateralmente — solo las mantiene visibles en cada reporte de estado"
   },
   "metodo_vigente_beam_23_06": {
     "resolucion": "FUNDADOR 23oct 23:06: el metodo NATURAL de Beam (micro-lotes produce-first 4-6 items por vuelta, publicando cada bloque) es el VIGENTE y el mas productivo observado (racha: M27 x13, M34 x6, M156, M27 carga x4 + censo + D-3, todo con gates OK) — NO re-enforzar P-100 manualmente sin datos en contra",

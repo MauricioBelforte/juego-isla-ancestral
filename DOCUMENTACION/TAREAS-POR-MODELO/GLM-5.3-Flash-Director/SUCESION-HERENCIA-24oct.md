@@ -41,6 +41,13 @@
 
 ## 5) PENDIENTES DEL FUNDADOR (4 consultas acumuladas — ver estado_director.json consultas_fundador_23oct)
 
+### CLASIFICACIÓN (fundador 24oct 08:13): = DEUDA DEL FUNDADOR (decisión pendiente, NO bloqueante)
+
+- Las 4 quedan catalogadas como **deuda de decisión del fundador** — se resuelven con SU contexto/SU cuenta/SU GO cuando él disponga; NINGÚN agente las inventa ni las implements sin GO.
+- El proyecto NO queda bloqueado por ellas: la flota corre con lo asignado y el resto del fuel (BACKLOG-10..14 + tranches).
+- Para el sucesor: NO las implementes unilateralmente — solo mantenelas visibles en cada reporte de estado hasta que el fundador decida.
+- Si una se desbloquea (ej: el fundador da cuenta GCP): el dueño natural es el agente con GO, con el procedimiento ya documentado (M107 03 §5.1 etc.).
+
 1. **FRENTE DE CÓDIGO a alpha:** plan de remedio completo (13 M56/M64 + M147 2 + M151 gate/schema + L271) — requiere ejecutor de código (MiniMax/G-5.3 siguen offline/apagados).
 2. **BLOQUE 0 M106:** configuración GCP/Drive/OAuth CON LA CUENTA DEL FUNDADOR (procedimiento: M107 03 §5.1 — ejecutar, no documentar).
 3. **Marca M01:** verificación de marca registrada.
