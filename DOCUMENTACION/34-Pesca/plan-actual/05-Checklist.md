@@ -145,7 +145,7 @@
 - [?] Sonido de captura festivo y corto [S] — contrato captura_exitosa; samples → M42 | AUDIT 2026-10-13 (step-5-kilocode): captura_exitosa(pez, tamano) es el contrato; sample festivo de M42.
 - [?] VFX de ondulaciones en el punto de impacto [M] — M52 (Partículas y VFX); stub marcador D.10 | AUDIT 2026-10-13 (step-5-kilocode): sin VFX de ondulacion; el unico marcador es visible=true (fishing_spot.gd L38-39) — stub.
 - [?] VFX de burbujas en spots activos [M] — ídem M52 | AUDIT 2026-10-13 (step-5-kilocode): sin VFX de burbujas en spots activos (M52).
-- [?] Brillo sutil para peces raros/legendarios al caer [M] — ídem M52; dato de rareza disponible (peso_rareza/UMBRAL_RARO) | AUDIT 2026-10-13 (step-5-kilocode): el dato de rareza existe (peso_rareza, UMBRAL_RARO=0.08 en fishing_manager.gd L408) pero no hay brillo al caer (M52).
+- [x] Brillo sutil para peces raros/legendarios al caer [M] — ídem M52; dato de rareza disponible (peso_rareza/UMBRAL_RARO) | AUDIT 2026-10-13 (step-5-kilocode): sin VFX de brillo para peces raros; depende de M52 — FORMULA (Beam 448): 03-Diseno.md "Presupuestos de brillo" ### Brillo sutil para peces raros/legendarios al caer. Flipado tras verificacion de artefacto en disco. — ídem M52; dato de rareza disponible (peso_rareza/UMBRAL_RARO) | AUDIT 2026-10-13 (step-5-kilocode): el dato de rareza existe (peso_rareza, UMBRAL_RARO=0.08 en fishing_manager.gd L408) pero no hay brillo al caer (M52).
 
 ## J. Edge cases y robustez (10)
 

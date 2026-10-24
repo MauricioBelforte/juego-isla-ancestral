@@ -225,3 +225,9 @@ extends Resource
 - Catálogo completo: capturar las 25 especies de fishing.json.
 - Pez más grande: capturar un pez con peso > umbral (ej: pez_luna > 30 kg, pez_ancestral_raiz > 20 kg).
 - Coherente con M72 (logros) y M93 (balance). achievement_service ya consume captura_exitosa.
+
+## Presupuestos de brillo (Beam 448, produce-first)
+### ### Brillo sutil para peces raros/legendarios al caer
+- Spec: brillo sutil para peces raros/legendarios al caer (VFX). Dato de rareza disponible (peso_rareza/UMBRAL_RARO).
+- Coherente con M52 (particulas/VFX) y M93 (balance). El brillo se activa cuando peso_rareza >= UMBRAL_RARO.
+- UMBRAL_RARO: pez con probabilidad <= 0.1 (legendario) o <= 0.04 (ancestral) o <= 0.01 (ancestral especial).
