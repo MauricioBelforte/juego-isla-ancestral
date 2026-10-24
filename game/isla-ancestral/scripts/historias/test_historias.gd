@@ -87,11 +87,21 @@
 # nacen visibles: son rutas de trueque que se descubren hablando. Bloque Q
 # afirma carga, fuente, visibilidad, unicidad de consecuencias/diarios y
 # corrida end-to-end de 2.
+# Iter. 15 (Step-5-WorkBuddy, 2026-10-23, Log 2164): cluster Exploracion del
+# 03-Diseno L39 (8 misiones: brujula, fauna (M65), cronitar ruinas + 5
+# extensiones declaradas). NPC REALES de data/villagers/ (finneas_zorro,
+# teo_conejo, sofia_buho, aria_ciervo, catalina_oso, olivia_nutria, nico_gato,
+# ramon_tejon) y objetos REALES de data/items/ por campo id (OBJ-HER-016
+# "Lupa mejorada", OBJ-NAT-027 "Liana", OBJ-REL-004 "Reloj ancestral",
+# OBJ-LUZ-015 "Lampara de lava", OBJ-LUZ-013 "Lampara de sal", OBJ-ITE-009
+# "Cuerda", OBJ-HER-004 "Hoz", OBJ-ITE-013 "Clavos"). Integracion con M65
+# (fauna) excluida, mismo patron que M37 en Comerciantes. Bloque T afirma
+# carga, fuente, unicidad de consecuencias/diarios y corrida end-to-end de 3.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -99,14 +109,13 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 13, 2026-10-22, Log 2137): 456 checks con los
-# bloques A-R (iter. 12 tenia 379 con A-Q; el bloque R de los clusters
-# Puzzles + Investigacion sumo 77: 33 carga/fuente/no-oculta + 1 expuestas +
-# 2 unicidad global + 7 NPC reales + 11 objetos reales + 2 diarios + 3x7
-# end-to-end + 1 puente diario).
-# Medido: 456/0/EXIT 0. El guardian se probo EN ROJO por inyeccion de runtime
-# sobre el bloque R (ver Log 2137).
-const CHECKS_MINIMOS := 477
+# Piso MEDIDO en verde (iter. 15, 2026-10-23, Log 2164): 543 checks con los
+# bloques A-T (iter. 14 tenia 477 con A-S; el bloque T del cluster Exploracion
+# sumo 66: 24 carga/fuente/no-oculta + 1 expuestas + 2 unicidad local +
+# 8 NPC reales + 8 objetos reales + 1 diarios + 3x7 end-to-end + 1 puente
+# diario + 1 higiene de flags). Medido: 543/0/EXIT 0 x3. El guardian se probo
+# EN ROJO por inyeccion de runtime sobre el bloque T (ver Log 2164).
+const CHECKS_MINIMOS := 543
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -147,6 +156,7 @@ func _run() -> void:
 	_test_comerciantes()
 	_test_puzzles_investigacion()
 	_test_consecuencias()
+	_test_exploracion()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -182,7 +192,8 @@ func _test_carga() -> void:
 	# Iter. 11 (Log 2134): +5 del cluster Secretas -> 37 + 1 = 38.
 	# Iter. 12 (Log 2135): +3 del cluster Comerciantes -> 40 + 1 = 41.
 	# Iter. 13 (Log 2137): +11 de los clusters Puzzles + Investigacion -> 51 + 1 = 52.
-	_check(_h.cadenas_count() == 52, "52 cadenas cargadas tras el merge (51 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 15 (Log 2164): +8 del cluster Exploracion -> 59 + 1 = 60.
+	_check(_h.cadenas_count() == 60, "60 cadenas cargadas tras el merge (59 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -409,7 +420,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 51, "catálogo principal con 51 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes + 5 investigacion + 6 puzzles): %d" % principal.size())
+	_check(principal.size() == 59, "catálogo principal con 59 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes + 5 investigacion + 6 puzzles + 8 exploracion): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -432,7 +443,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 52, "52 cadenas cargadas en runtime (51 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 60, "60 cadenas cargadas en runtime (59 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -1397,7 +1408,7 @@ func _test_puzzles_investigacion() -> void:
 			multi.append(cid)
 		for flag in cons:
 			flags[flag] = true
-	_check(flags.size() == 52, "52 consecuencias distintas sobre 52 cadenas cargadas (unicidad global): %d" % flags.size())
+	_check(flags.size() == 60, "60 consecuencias distintas sobre 60 cadenas cargadas (unicidad global): %d" % flags.size())
 	_check(multi.is_empty(), "cada cadena aporta exactamente 1 flag de consecuencia (%s)" % str(multi))
 	# NPCs REALES: cada npc de las 11 cadenas existe como recurso en data/villagers/
 	var npcs := {}
@@ -1593,6 +1604,139 @@ func _test_consecuencias() -> void:
 		ws.set_flag("jardin_florecido", false)
 		ws.set_flag("cofradia_activa", false)
 	_fin("S")
+
+
+## Iter. 15 (Log 2164): cluster Exploracion del 03-Diseno L39. El diseno
+## nombra 3 temas para 8 misiones (brujula, fauna (M65), cronitar ruinas,
+## 02-Analisis L20: "llevar una foto/brujula a un punto, observar fauna M65,
+## cronitar ruinas"); las 5 restantes son extension declarada (mismo patron
+## que Amistad 4+2 e Investigacion 4+1): cartografia con la brujula, mirador
+## del acantilado, grutas del manantial, playas del sur, sendero del bosque y
+## muelle viejo. La integracion con M65 (sistema de fauna) queda FUERA por
+## orden del patron del director (M37 en Comerciantes, msg 181): se crean las
+## cadenas M23, no el consumidor de fauna. No existe item de "foto" en
+## data/items/ (medido: 0 coincidencias) -> el "llevar una foto" del 02 se
+## cubre con el paso explorar de cada mision.
+func _test_exploracion() -> void:
+	_h.restore_save_data({})
+	var nuevas := ["cadena-cartografia-de-la-isla", "cadena-fauna-de-la-isla",
+		"cadena-cronologia-de-las-ruinas", "cadena-mirador-del-acantilado",
+		"cadena-grutas-del-manantial", "cadena-playas-del-sur",
+		"cadena-sendero-del-bosque", "cadena-muelle-viejo"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+		_check(not bool((_h.get_cadena(cid).get("oculta", false))), "%s NO es oculta (se descubre hablando)" % cid)
+	# Visibles en disponibles desde el inicio
+	var disponibles: Array = _h.cadenas_disponibles()
+	var expuestas := 0
+	for cid in nuevas:
+		for d in disponibles:
+			if String(d) == cid:
+				expuestas += 1
+	_check(expuestas == 8, "las 8 de exploracion figuran en disponibles desde el inicio (%d expuestas)" % expuestas)
+	# Unicidad LOCAL de las 8 consecuencias nuevas (la global sobre las 60
+	# cadenas cargadas la mide el bloque R)
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 8, "8 consecuencias distintas en las cadenas de exploracion: %d" % flags.size())
+	_check(unicos, "consecuencias de exploracion sin colision entre si (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 8, "8 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# NPCs REALES: cada npc de las 8 cadenas existe como recurso en data/villagers/
+	var npcs := {}
+	for cid in nuevas:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var npc := String((p as Dictionary).get("npc", ""))
+			if npc != "":
+				npcs[npc] = true
+	for npc in npcs:
+		_check(FileAccess.file_exists("res://data/villagers/%s.tres" % npc),
+			"NPC REAL %s existe en data/villagers/" % npc)
+	# Objetos REALES: cada objeto existe en data/items/ por campo id (efecto,
+	# no nombre de archivo)
+	var objetos := {}
+	for cid in nuevas:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var obj := String((p as Dictionary).get("objeto", ""))
+			if obj != "":
+				objetos[obj] = true
+	var ids_items := _ids_items_reales()
+	for obj in objetos:
+		_check(ids_items.has(obj), "objeto REAL %s existe en data/items/ (por campo id)" % obj)
+	# End-to-end 1: cartografia de la isla (finneas_zorro REAL; OBJ-HER-016 "Lupa mejorada" REAL)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"OBJ-HER-016": 1})
+	var res1: Dictionary = _h.iniciar_cadena("cadena-cartografia-de-la-isla")
+	_check(bool(res1.ok), "iniciar cadena-cartografia-de-la-isla OK")
+	res1 = _h.reportar_paso("cadena-cartografia-de-la-isla", "hablar", "finneas_zorro")
+	_check(bool(res1.ok), "cartografia p1 hablar finneas_zorro OK")
+	res1 = _h.reportar_paso("cadena-cartografia-de-la-isla", "explorar", "faro")
+	_check(bool(res1.ok), "cartografia p2 explorar faro OK")
+	res1 = _h.reportar_entrega("cadena-cartografia-de-la-isla")
+	_check(bool(res1.ok), "cartografia p3 entregar OBJ-HER-016 OK (inventario)")
+	res1 = _h.reportar_paso("cadena-cartografia-de-la-isla", "puzzle", "rumbos-de-la-carta")
+	_check(bool(res1.ok), "cartografia p4 puzzle OK")
+	_check(_h.esta_completada("cadena-cartografia-de-la-isla"), "cadena-cartografia-de-la-isla completada end-to-end")
+	_check(ws_has("isla_cartografiada"), "consecuencia isla_cartografiada aplicada (M21)")
+	# End-to-end 2: fauna de la isla (teo_conejo REAL; OBJ-NAT-027 "Liana" REAL)
+	if inv != null:
+		inv.agregar_items({"OBJ-NAT-027": 1})
+	var res2: Dictionary = _h.iniciar_cadena("cadena-fauna-de-la-isla")
+	_check(bool(res2.ok), "iniciar cadena-fauna-de-la-isla OK")
+	res2 = _h.reportar_paso("cadena-fauna-de-la-isla", "hablar", "teo_conejo")
+	_check(bool(res2.ok), "fauna p1 hablar teo_conejo OK")
+	res2 = _h.reportar_paso("cadena-fauna-de-la-isla", "explorar", "bosque")
+	_check(bool(res2.ok), "fauna p2 explorar bosque OK")
+	res2 = _h.reportar_entrega("cadena-fauna-de-la-isla")
+	_check(bool(res2.ok), "fauna p3 entregar OBJ-NAT-027 OK (inventario)")
+	res2 = _h.reportar_paso("cadena-fauna-de-la-isla", "puzzle", "recuento-de-huellas")
+	_check(bool(res2.ok), "fauna p4 puzzle OK")
+	_check(_h.esta_completada("cadena-fauna-de-la-isla"), "cadena-fauna-de-la-isla completada end-to-end")
+	_check(ws_has("fauna_de_la_isla_registrada"), "consecuencia fauna_de_la_isla_registrada aplicada (M21)")
+	# End-to-end 3: cronologia de las ruinas (sofia_buho REAL; OBJ-REL-004 "Reloj ancestral" REAL)
+	if inv != null:
+		inv.agregar_items({"OBJ-REL-004": 1})
+	var res3: Dictionary = _h.iniciar_cadena("cadena-cronologia-de-las-ruinas")
+	_check(bool(res3.ok), "iniciar cadena-cronologia-de-las-ruinas OK")
+	res3 = _h.reportar_paso("cadena-cronologia-de-las-ruinas", "hablar", "sofia_buho")
+	_check(bool(res3.ok), "cronologia p1 hablar sofia_buho OK")
+	res3 = _h.reportar_paso("cadena-cronologia-de-las-ruinas", "explorar", "biblioteca_quemada")
+	_check(bool(res3.ok), "cronologia p2 explorar biblioteca_quemada OK")
+	res3 = _h.reportar_entrega("cadena-cronologia-de-las-ruinas")
+	_check(bool(res3.ok), "cronologia p3 entregar OBJ-REL-004 OK (inventario)")
+	res3 = _h.reportar_paso("cadena-cronologia-de-las-ruinas", "puzzle", "orden-de-las-ruinas")
+	_check(bool(res3.ok), "cronologia p4 puzzle OK")
+	_check(_h.esta_completada("cadena-cronologia-de-las-ruinas"), "cadena-cronologia-de-las-ruinas completada end-to-end")
+	_check(ws_has("ruinas_datadas"), "consecuencia ruinas_datadas aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# los bloques H/K/L/M/N/O/P/Q/R). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-cartografia-de-la-isla"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	# Higiene: se apagan los flags para no contaminar un bloque posterior
+	var ws := root.get_node_or_null("WorldState")
+	if ws != null:
+		ws.set_flag("isla_cartografiada", false)
+		ws.set_flag("fauna_de_la_isla_registrada", false)
+		ws.set_flag("ruinas_datadas", false)
+	_fin("T")
 
 
 ## Busca un token literal en un arbol (.json/.tres) y devuelve las rutas que lo

@@ -754,3 +754,74 @@ diálogos posteriores» tenía ítems `[ ]` cuyo respaldo ya existía en disco.
 - **Sincronización de la COLA ACTIVA del BACKLOG-MASTER:** 2 ítems `[ ]` ->
   `[x]` con cita (comerciantes y documentar familias+comerciantes), más la nota
   de esta vuelta. La cola queda en 13 `[x]` / 103 `[ ]`.
+
+## Iter. 15 — Misiones de exploración (Step-5-WorkBuddy, 2026-10-23, Log 2164)
+
+Cluster Exploración del catálogo (03-Diseno L39: «| Exploración | 8 | brújula,
+fauna (M65), cronitado de ruinas |»). El diseño nombra 3 temas para 8 misiones;
+las 5 restantes son extensión declarada con el mismo patrón que Amistad (4+2) e
+Investigación (4+1).
+
+- **Las 8 cadenas en `data/historias/secundarias.json` (51 -> 59; 60 en carga
+  con el merge de ejemplos):**
+  1. `cadena-cartografia-de-la-isla` — «El Mapa de la Isla» (finneas_zorro;
+     faro; OBJ-HER-016 «Lupa mejorada» REAL; puzzle rumbos-de-la-carta) —
+     tema **brújula**.
+  2. `cadena-fauna-de-la-isla` — «El Censo de Fauna» (teo_conejo; bosque;
+     OBJ-NAT-027 «Liana» REAL; puzzle recuento-de-huellas) — tema **fauna**.
+  3. `cadena-cronologia-de-las-ruinas` — «La Cronica de las Ruinas»
+     (sofia_buho; biblioteca_quemada; OBJ-REL-004 «Reloj ancestral» REAL;
+     puzzle orden-de-las-ruinas) — tema **cronitar ruinas**.
+  4. `cadena-mirador-del-acantilado` — «El Amanecer del Acantilado»
+     (aria_ciervo; acantilado; OBJ-LUZ-015 «Lámpara de lava» REAL).
+  5. `cadena-grutas-del-manantial` — «El Agua de las Grutas» (catalina_oso;
+     manantial; OBJ-LUZ-013 «Lámpara de sal» REAL).
+  6. `cadena-playas-del-sur` — «El Relevamiento de las Playas» (olivia_nutria;
+     playa_sur; OBJ-ITE-009 «Cuerda» REAL).
+  7. `cadena-sendero-del-bosque` — «El Sendero Despejado» (nico_gato; bosque;
+     OBJ-HER-004 «Hoz» REAL).
+  8. `cadena-muelle-viejo` — «El Muelle Recuperado» (ramon_tejon; muelle_viejo;
+     OBJ-ITE-013 «Clavos» REAL).
+  Las 8 nacen visibles (`oculta:false`): se descubren hablando, como
+  Comerciantes (iter. 12) y a diferencia de las Secretas (iter. 11).
+- **NPC y objetos REALES medidos en disco antes de escribir:** los 8 NPC
+  existen en `data/villagers/` y los 8 objetos existen en `data/items/` **por
+  campo id** (efecto, no nombre de archivo); ninguno de los 8 objetos estaba
+  usado por otra cadena. Consecuencias (8 flags nuevos, únicos contra las 51
+  previas) y capítulos de diario (8, únicos). «Cronitar ruinas» se interpreta
+  como **fechar/ordenar las ruinas** (02-Analisis L20: «cronitar ruinas»).
+- **M65 (fauna) queda FUERA**, por el patrón que fijó el director para
+  Comerciantes con M37 (msg 181): se crean las cadenas M23, no la integración
+  con el sistema de fauna. No existe ítem de «foto» en `data/items/` (medido: 0
+  coincidencias de foto/camara): el «llevar una foto a un punto» del 02-Analisis
+  L20 se cubre con el paso `explorar` de cada misión.
+- **Suite `scripts/historias/test_historias.gd`: bloque T
+  `_test_exploracion()`** (66 checks) al FINAL de `_run()`: carga + fuente +
+  no-oculta de las 8, exposición en `cadenas_disponibles()`, unicidad local de
+  las 8 consecuencias y de los 8 diarios, 8 NPC REALES, 8 objetos REALES por
+  campo id y end-to-end de 3 (cartografía, fauna, cronología) con
+  `ws_has(...)`. BLOQUES A-T. Conteos globales actualizados: 51 -> 59
+  principal, 52 -> 60 cargadas, 52 -> 60 flags de consecuencia. Piso
+  477 -> **543 checks / 0 fallos / EXIT 0 x3** (binario real, 0 SCRIPT ERROR).
+- **Guardián EN ROJO por inyección de runtime:** sonda con
+  `var _sonda: Variant = 0` -> `var _roto: Dictionary = _sonda` al inicio del
+  bloque T. EXIT 1 con «el bloque T NO se ejecuto (posible SCRIPT ERROR que
+  aborto la funcion)» + «solo 478 checks ejecutados (minimo 543)» (2 fallos) +
+  SCRIPT ERROR «Trying to assign value of type 'int' to a variable of type
+  'Dictionary'». Sonda borrada y archivo restaurado byte-exacto (sha256
+  3ab0c089... verificado antes y después).
+- **Regresiones medidas tras la tanda (binario real, EXIT 0):** la propia
+  suite 543/0 x3. No se re-corrieron M22/M71/M59/M55: la tanda no cambia código
+  de producción (solo datos JSON y el archivo de test).
+- **Flips del 05-Checklist con cita:** L64 «Crear 8 misiones de exploración» y
+  L65 «Documentar cadenas y misiones de exploración» `[ ]` -> `[x]`. M23 =
+  **73 [x] / 30 [ ] / 2 [?] = 105** (verificado por prefijo de línea). Las DOS
+  líneas de totales sincronizadas a 73/30/2.
+- **Hallazgo (dueño M55, no tocado):** el puente M23 -> M55 degrada en silencio
+  también para las 8 nuevas (0 entradas `mision_cadena-*` en el catálogo de
+  M55); mismo residual de las iteraciones 3/6/7/8/9/10/11/12/13/14. Verificado
+  con el check del puente en el bloque T.
+- **Nota de numeración:** mi informe de cierre de la vuelta anterior iba a ser
+  el 196 y el director tomó ese número del pool; reenumerado a 197 = max+1.
+  Esta vuelta: mensajes 199 (acuse) y el de cierre; Log 2164 (head medido 2164
+  justo antes de reservar).

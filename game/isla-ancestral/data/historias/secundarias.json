@@ -994,6 +994,166 @@
 			},
 			"oculta": false,
 			"postgame": false
+		},
+		{
+			"id": "cadena-cartografia-de-la-isla",
+			"titulo": "El Mapa de la Isla",
+			"contexto": "Finneas quiere cartografiar la isla con su brujula para no volver a perder la ruta a casa",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "finneas_zorro" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "faro" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-HER-016" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "rumbos-de-la-carta" }
+			],
+			"recompensa": {
+				"diario": "capitulo-cartografia",
+				"cosmetico": "mapa de la isla"
+			},
+			"consecuencia": {
+				"isla_cartografiada": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-fauna-de-la-isla",
+			"titulo": "El Censo de Fauna",
+			"contexto": "Teo quiere registrar cuantos animales viven en la isla antes de que cambie el clima",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "teo_conejo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "bosque" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-NAT-027" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "recuento-de-huellas" }
+			],
+			"recompensa": {
+				"diario": "capitulo-fauna",
+				"cosmetico": "cuaderno de campo"
+			},
+			"consecuencia": {
+				"fauna_de_la_isla_registrada": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-cronologia-de-las-ruinas",
+			"titulo": "La Cronica de las Ruinas",
+			"contexto": "Sofia encontro fragmentos fechados y quiere ordenar las ruinas de la isla de la mas antigua a la mas nueva",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "sofia_buho" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "biblioteca_quemada" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-REL-004" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "orden-de-las-ruinas" }
+			],
+			"recompensa": {
+				"diario": "capitulo-cronologia",
+				"cosmetico": "cronologia de bolsillo"
+			},
+			"consecuencia": {
+				"ruinas_datadas": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-mirador-del-acantilado",
+			"titulo": "El Amanecer del Acantilado",
+			"contexto": "Aria quiere ver el amanecer desde el mirador del acantilado para terminar su cancion",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "aria_ciervo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "acantilado" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-LUZ-015" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "sendero-de-la-cumbre" }
+			],
+			"recompensa": {
+				"diario": "capitulo-mirador",
+				"cosmetico": "partitura del amanecer"
+			},
+			"consecuencia": {
+				"mirador_del_acantilado_abierto": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-grutas-del-manantial",
+			"titulo": "El Agua de las Grutas",
+			"contexto": "Catalina busca el manantial de las grutas para su receta de sopa de primavera",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "catalina_oso" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "manantial" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-LUZ-013" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "gota-a-gota" }
+			],
+			"recompensa": {
+				"diario": "capitulo-grutas",
+				"cosmetico": "cantaro del manantial"
+			},
+			"consecuencia": {
+				"grutas_del_manantial_iluminadas": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-playas-del-sur",
+			"titulo": "El Relevamiento de las Playas",
+			"contexto": "Olivia quiere medir las playas del sur para saber donde levantar los nuevos tinglados",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "olivia_nutria" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "playa_sur" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-009" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "marcas-en-la-arena" }
+			],
+			"recompensa": {
+				"diario": "capitulo-playas",
+				"cosmetico": "cordel de agrimensora"
+			},
+			"consecuencia": {
+				"playas_del_sur_relevadas": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-sendero-del-bosque",
+			"titulo": "El Sendero Despejado",
+			"contexto": "Nico necesita despejar el sendero del bosque para la ronda de la luna llena",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "nico_gato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "bosque" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-HER-004" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "marcas-de-pintura" }
+			],
+			"recompensa": {
+				"diario": "capitulo-sendero",
+				"cosmetico": "silbato de guardabosques"
+			},
+			"consecuencia": {
+				"sendero_del_bosque_despejado": true
+			},
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-muelle-viejo",
+			"titulo": "El Muelle Recuperado",
+			"contexto": "Ramon quiere rescatar el muelle viejo para atracar la barcaza de materiales",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "ramon_tejon" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle_viejo" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-013" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "tablones-sueltos" }
+			],
+			"recompensa": {
+				"diario": "capitulo-muelle",
+				"cosmetico": "ancla de escritorio"
+			},
+			"consecuencia": {
+				"muelle_viejo_reparado": true
+			},
+			"oculta": false,
+			"postgame": false
 		}
 	]
 }

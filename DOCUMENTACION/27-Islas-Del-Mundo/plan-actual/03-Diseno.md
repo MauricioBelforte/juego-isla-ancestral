@@ -192,7 +192,7 @@ func limpiar(id: StringName) -> void
 - Al desembarcar, el jugador aparece sobre el muelle mirando a tierra; suena música de la isla (M41)
 
 ## Presupuestos de carga (Beam 343, produce-first, tranche 1)
-### Log WARN de ancla re-rollada
+### ### Log WARN de ancla re-rollada
 - Spec: cuando una ancla se re-rolla (8 intentos fallidos), emitir WARN con: id_isla, intento (1-8), motivo (fuera de bounds / colisión / terreno inválido), fallback (anillo siguiente).
 - Formato: `WARN [M27] ancla re-rolleada: isla=%s intento=%d motivo=%s fallback=%s`.
 - Coherente con M10 (generación) y M63 (streaming).
@@ -207,6 +207,12 @@ func limpiar(id: StringName) -> void
 - Función: `cacheado(id: StringName) -> bool` — retorna true si la isla está en caché (no necesita recarga).
 - Implementación: dictionary `_cache: Dictionary[StringName, bool]` en IslandRegistry.
 - Coherente con M63 (streaming) y M10 (generación).
+
+### ### Carga de .tres diferida (no bloqueante)
+- Spec: carga diferida de .tres al iniciar partida (13 .tres livianos, carga síncrona en _ready()).
+- Estimación: 13 .tres × ~5 ms = ~65 ms total. Excede el frame budget de 16.6 ms para 60 FPS.
+- Propuesta: carga diferida (no bloqueante) usando ResourceLoader.load_interactive() en background.
+- Coherente con M61 (rendimiento) y M63 (streaming). Etiquetado como "propuesta de director pendiente de GO" (fundador 23oct).
 
 ## Presupuestos de render y carga (Beam 340, produce-first)
 ### ### IslandPref (enum de carga)
