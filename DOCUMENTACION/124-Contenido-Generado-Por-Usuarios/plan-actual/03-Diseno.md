@@ -95,3 +95,15 @@ Publicación
 2. Nunca se comparte la semilla del mundo ni coords del save (M59 protege).
 3. Sin datos personales del usuario en los items (solo alias).
 4. Sin moderación humana visible para el usuario (anonimato del moderador).
+## Presupuestos de UGC (Beam 451, produce-first)
+### ### Coste mensual de almacenamiento <= presupuesto
+- Spec: coste mensual de almacenamiento (CDN + bucket de objetos) <= presupuesto mensual definido.
+- Formula: coste_mensual = (fotos x 3 MB + blueprints x 1 MB) x precio_CDN_por_GB + overhead.
+- Presupuesto mensual: X (ajustado en GATE) — propuesta: 50 USD/mes para 1000 usuarios.
+- Coherente con M107 (backups) y M118 (CI/CD).
+
+### ### Presupuesto mensual fijo
+- Spec: presupuesto mensual fijo para UGC (almacenamiento + CDN + moderacion).
+- Formula: presupuesto_mensual = coste_almacenamiento + coste_CDN + coste_moderacion.
+- Propuesta: 100 USD/mes total (50 almacenamiento + 30 CDN + 20 moderacion).
+- Coherente con M107 (backups) y M118 (CI/CD). Etiquetado como "propuesta pendiente de GO".

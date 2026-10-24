@@ -841,3 +841,58 @@ Investigación (4+1).
   EXIT 1 = **BUG-143 preexistente** (abierto, dueño M71). El 2164 consumido
   por la corrida cortada queda como hueco inocuo; el log de la iter. 15 es el
   2166.
+
+## Iter. 16 — Misiones de construcción (Step-5-WorkBuddy, 2026-10-24, Log 2169)
+
+Cluster Construcción del 05-Checklist (L69/L70/L71/L72/L73). Cierra L69; L70
+queda [ ] con dueño M28 y L73 (compuesta: construcción Y agricultura) no se
+flippa por la mitad.
+
+- **Hallazgo de estado (familia It. 10 / It. 15):** al abrir la tanda,
+  `data/historias/secundarias.json` tenía **62 cadenas**, no 59: 3 cadenas
+  nuevas de construcción (`cadena-construccion-plaza` -> `plaza_empedrada`,
+  `cadena-construccion-senderos` -> `senderos_del_pueblo_reparados`,
+  `cadena-construccion-kiosko` -> `kiosko_abierto`) con mtime 2026-10-24
+  04:04:54, posteriores al cierre de la iter. 15 (msg 201, 03:01), **sin log,
+  sin mensaje y sin bloque de suite**: corrida cortada de este automatismo.
+  El CRON las barrió en `f6a07c6` (04:13). Con el dato nuevo la suite quedó
+  **ROJA: 6 fallos / 543 checks / EXIT 1** (medido 05:13) — todos asserts de
+  conteo que esperaban 59/60.
+- **Regla aplicada: NO rehacer — RE-VERIFICAR íntegra y REPARAR** (regla de
+  recuperación ratificada por el director en su msg 202).
+- **Realidad verificada por campo `id` (no por nombre de archivo):** NPC REALES
+  `bruno_sapo` (carpintero), `nico_gato` (guardabosques), `pablo_pato`
+  (ceramista) en `data/villagers/`; objetos REALES `OBJ-ITE-002` "Piedra",
+  `gravel` "Grava" y `OBJ-ITE-001` "Madera" en `data/items/` (leídos del campo
+  `id` de cada `.tres`). Las 3 cadenas son válidas de schema (4 pasos, tipos
+  conocidos, contexto >= 10 chars, recompensa + consecuencia, títulos únicos).
+- **Suite `test_historias.gd` — bloque U `_test_construccion()` NUEVO** (+37
+  checks): carga/fuente/no-oculta de las 3 cadenas + los 3 temas con cadena
+  previa (cofradía, jardines, puente), expuestas en `cadenas_disponibles()`,
+  unicidad local de consecuencias y de capítulos de diario, NPC/objetos REALES
+  por campo id, 2 end-to-end con `ws_has` (`kiosko_abierto`,
+  `senderos_del_pueblo_reparados`), puente diario M23->M55 como finding medido
+  e higiene de flags. Reparados los 6 asserts de conteo (59/60 -> 62/63).
+- **Evidencia:** suite **580 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR
+  (binario real). Piso 543 -> **580 MEDIDO en verde**. Guardián EN ROJO por
+  inyección de runtime `Variant` -> `Dictionary` sobre el bloque U:
+  **EXIT 1, 544 checks, 2 fallos** («el bloque U NO se ejecuto» + «solo 544
+  checks (minimo 580)»); sonda borrada y suite restaurada byte-exacta (LF
+  puro, sin BOM).
+- **Corrección de la cobertura de las 12 consecuencias (03-Diseno L53):**
+  8 -> **9 con respaldo** y 4 -> **3 sin respaldo**; `kiosko_abierto` pasa a
+  tener respaldo real vía `cadena-construccion-kiosko`. Quedan sin respaldo
+  `taller_abierto` (guarda del ítem L109), `camino_al_faro_despejado` y
+  `puerto_ampliado`.
+- **Regresiones (binario real):** M59 rotate 7/0 + backup_rotate_return 4/0 +
+  slots/perfiles 41/0 + carga NPC/misiones 63/0; M71 flujo XP 37/0; M55 diario
+  perf 26/0 + persistencia 0 fallos.
+- **Flips del 05-Checklist con cita:** L69 «Crear 6 misiones de construcción
+  (puentes, cofradía, plaza, senderos, kiosko, jardín)`[ ]` -> `[x]` — los 6
+  temas con cadena en disco (cofradía/jardines iter. 6, puente iter. 7 con tema
+  de reparación, plaza/senderos/kiosko esta iterada). M23 = **74 [x] / 29 [ ] /
+  2 [?] = 105** (prefijo de línea). Las DOS líneas de totales sincronizadas.
+- **Hallazgo (dueño M55, no tocado):** el puente M23 -> M55 degrada en silencio
+  también para las 3 nuevas (0 entradas `mision_cadena-*` en el catálogo de
+  M55); mismo residual de las iteraciones 3/6/7/8/9/10/11/12/13/14/15.
+  Verificado con el check del puente en el bloque U.

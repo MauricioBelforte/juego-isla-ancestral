@@ -11,7 +11,7 @@
 
 - [x] Definir UGC como post-V2 con GATE [M]
 - [?] Definir criterio: demanda comunitaria ≥ 25% (M100) [S] — dueño: producto + M100
-- [?] Definir criterio: coste mensual de almacenamiento ≤ presupuesto [S] — dueño: infra/presupuesto
+- [x] Definir criterio: coste mensual de almacenamiento ≤ presupuesto [S] — dueño: infra/presupuesto — FORMULA (Beam 451): 03-Diseno.md "Presupuestos de UGC" ### Coste mensual de almacenamiento <= presupuesto. Flipado tras verificacion de artefacto en disco.
 - [x] Definir criterio: efectividad de moderación automática ≥ 75% [S]
 - [?] Definir criterio: diseño aprobado 100% [S] — dueño: diseño/producto
 - [x] Definir posposición a V3 si el GATE falla [S]
@@ -63,7 +63,7 @@
 
 - [?] Definir fotos en CDN [M] — dueño: infra/servicio
 - [?] Definir blueprints en bucket/objeto pequeño [M] — dueño: infra/servicio
-- [?] Definir presupuesto mensual fijo [M] — dueño: infra
+- [x] Definir presupuesto mensual fijo [M] — dueño: infra — FORMULA (Beam 451): 03-Diseno.md "Presupuestos de UGC" ### Presupuesto mensual fijo. Flipado tras verificacion de artefacto en disco.
 - [x] Definir retención: quarentena 30 días [M]
 - [x] Definir retención: público ilimitado salvo reporte/baja [S]
 - [x] Definir compresión de todos los ítems [M] — iter. 2 (Log 905): ZSTD vía `FileAccess.open_compressed` (CP D-18/D-19)

@@ -613,3 +613,39 @@ BACKLOG).
   para las 8 nuevas (0 entradas `mision_cadena-*` en el catálogo de M55);
   mismo residual de las iteraciones 3/6-14, verificado por el check del puente
   en el bloque T.
+
+## Iter. 16 (Log 2169) — cluster Construcción: 3 cadenas nuevas re-verificadas, bloque U, 580 checks
+
+- **Estado de entrada medido:** `secundarias.json` con 62 cadenas (3 de
+  construcción nuevas, mtime 04:04:54, sin log ni mensaje — corrida cortada;
+  barridas por el CRON en f6a07c6). Con el dato nuevo la suite quedó **ROJA:
+  6 fallos / 543 checks / EXIT 1** (medido 05:13 con el binario real): los 6
+  eran asserts de conteo que esperaban 59/60 (carga 60, principal crudo 59,
+  runtime 60, unicidad global 60, cobertura de las 12 consecuencias 8/4).
+- **Reparación + verificación:** los 6 asserts reparados (62/63, 9/3) y bloque
+  U `_test_construccion()` NUEVO. Suite **580 checks / 0 fallos / EXIT 0 x3**,
+  0 SCRIPT ERROR. Piso 543 -> **580 MEDIDO en verde**.
+- **Guardián EN ROJO:** inyección de runtime `Variant` -> `Dictionary` sobre un
+  entero al inicio del bloque U: **EXIT 1, 544 checks, 2 fallos** («el bloque U
+  NO se ejecuto (posible SCRIPT ERROR que aborto la funcion)» + «solo 544
+  checks ejecutados (minimo 580)»). Sonda borrada en la misma invocación y
+  suite restaurada byte-exacta (LF puro, sin BOM).
+- **Verificación independiente de realidad:** 3 NPC contra `data/villagers/`
+  (bruno_sapo, nico_gato, pablo_pato) y 3 objetos contra `data/items/` por
+  campo `id` (OBJ-ITE-002 "Piedra", gravel "Grava", OBJ-ITE-001 "Madera"):
+  **6/6 REALES**. 0 consecuencias duplicadas sobre las 63 cadenas cargadas.
+- **Corrección de cobertura (03-Diseno L53):** las 12 consecuencias pasan de
+  8 con respaldo / 4 sin respaldo a **9 / 3**: `kiosko_abierto` ahora lo aplica
+  `cadena-construccion-kiosko`. Sin respaldo quedan `taller_abierto` (guarda
+  del ítem L109), `camino_al_faro_despejado` y `puerto_ampliado`.
+- **Regresiones (binario real):** M59 backup_rotations 7/0 +
+  backup_rotate_return 4/0 + slots/perfiles 41/0 + carga NPC/misiones 63/0;
+  M71 flujo XP 37/0; M55 diario perf 26/0 + persistencia 0 fallos.
+- **Flips con cita:** L69 («Crear 6 misiones de construcción: puentes,
+  cofradía, plaza, senderos, kiosko, jardín») [ ] -> [x] con los 6 temas
+  respaldados por cadena en disco. M23 = **74 [x] / 29 [ ] / 2 [?] = 105**
+  (prefijo de línea); las dos líneas de totales sincronizadas. L70 sigue [ ]
+  con dueño M28 y L73 (compuesta con agricultura) no se flippa por la mitad.
+- **Hallazgo (dueño M55, no tocado):** el puente M23 -> M55 degrada en silencio
+  para las 3 nuevas (0 entradas `mision_cadena-*`); mismo residual de las
+  iteraciones 3/6-15, verificado por el check del puente en el bloque U.

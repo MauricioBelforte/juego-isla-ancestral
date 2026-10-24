@@ -24,7 +24,7 @@ corre con el binario real:
   --headless --path game/isla-ancestral --script res://scripts/historias/test_historias.gd
 ```
 
-### Bloques (18)
+### Bloques (21)
 
 | Bloque | Contenido | Integraciones ejercitadas |
 |---|---|---|
@@ -47,18 +47,22 @@ corre con el binario real:
 | Q | Las 3 historias de comerciantes (iter. 12): carga, fuente del principal, marca no-oculta y visibilidad en `cadenas_disponibles()` desde el inicio (regla opuesta a las secretas del bloque P), unicidad de las 3 consecuencias nuevas vs las 38 preexistentes, 3 capitulos de diario unicos y corrida end-to-end de 2 (npc REAL de `data/villagers/`; `OBJ-ITE-052` «Moneda de oro» y `OBJ-ITE-010` «Tela» REALES de `data/items/`; puzzle) con `ws_has()` de `ruta_comercial_reabierta` / `telas_reunidas` | M14, M21, M55 |
 | R | Los clusters Puzzles (6, 03-Diseno L46: templos 24/25/26 + ruinas del barrizal/manantial/acantilado) e Investigacion (5, L45: faro, biblioteca, geodesia, mapas + cartas estelares) consolidados en UN bloque (iter. 13, regla del fundador msg 183): carga, fuente del principal, marca no-oculta y visibilidad en `cadenas_disponibles()` desde el inicio, unicidad GLOBAL de flags medida sobre la carga real (52 consecuencias sobre 52 cadenas, reemplaza la lista transcrita a mano), NPC REALES por efecto (`FileAccess.file_exists` sobre `data/villagers/`), objetos REALES por campo id dentro del `.tres` (`_ids_items_reales()`), 11 capitulos de diario distintos y corrida end-to-end de 3 (`cadena-registro-del-faro` con vera_ardilla + `OBJ-LUZ-012` «Linterna»; `cadena-templo-de-las-24-marcas` con pablo_pato + `OBJ-TAL-004` «Rueda de alfarero»; `cadena-ruinas-del-barrizal` con catalina_oso + `OBJ-ITE-021` «Pan») con `ws_has()` de `registro_del_faro_recuperado` / `templo_de_las_24_marcas_abierto` / `ruinas_del_barrizal_leidas` | M14, M21, M55 |
 
+| S | Cobertura de las 12 consecuencias de 03-Diseno L53 sobre los dos catálogos reales (secundarias.json + cadenas_ejemplo.json), negativo acotado del token `taller_abierto` sobre `res://data` y end-to-end de `cadena-jardines` y `cadena-cofradia` con `ws_has(...)` (iter. 14) | M21 |
+| T | Las 8 misiones de exploración (iter. 15): carga/fuente/no-oculta, exposición en `cadenas_disponibles()`, unicidad local de consecuencias y diarios, NPC/objetos REALES por campo id y end-to-end de 3 con `ws_has(...)` | M14, M21, M55 |
+| U | Las 3 cadenas de construcción (iter. 16): carga/fuente/no-oculta + los 3 temas con cadena previa (cofradía/jardines/puente), exposición en `cadenas_disponibles()`, unicidad local, NPC/objetos REALES por campo id y end-to-end de 2 con `ws_has(...)` | M14, M21, M55 |
+
 ### Guarda anti-falso-verde (obligatoria, iter. 2)
 
 1. `_check()` cuenta cada verificación (`_checks`).
 2. `_fin("X")` por bloque + lista `BLOQUES`: el resumen nombra el bloque que no corrió.
-3. `CHECKS_MINIMOS` = **456** desde la iter. 13 (MEDIDO en verde el 2026-10-22 con 18
+3. `CHECKS_MINIMOS` = **580** desde la iter. 16 (MEDIDO en verde el 2026-10-24 con 21
    bloques; la cadena fue 40 con 7 -> 59 con 8 -> 70 con 9 -> 98 con 10 -> 129 con 11
    -> 169 con 12 -> 227 con 13 -> 258 con 14 -> 316 con 15 -> 351 con 16 -> 379 con 17
-   -> 456 con 18). No estimado.
+   -> 456 con 18 -> 477 con 19 -> 543 con 20 -> 580 con 21). No estimado.
 4. `_summary()` en un `call_deferred` **separado** del de `_run()`: si `_run()` aborta
    por un `SCRIPT ERROR` de runtime, el resumen corre igual, nombra los bloques
    faltantes, dispara el piso y sale con `quit(1)` — la suite **no cuelga**.
-5. Guardián probado EN ROJO por inyección de runtime, trece veces:
+5. Guardián probado EN ROJO por inyección de runtime, dieciséis veces:
    - iter. 2 (`var _n: Node = null; _n.free()` tras el bloque B): EXIT 1, nombra
      C/D/E/F/G, «solo 11 checks (mínimo 40)».
    - iter. 3 (abort a mitad del bloque H, el nuevo): EXIT 1, nombra H, «solo 47 checks
@@ -96,6 +100,18 @@ corre con el binario real:
      ERROR que aborto la funcion)» + «solo 380 checks ejecutados (mínimo 456)»,
      2 fallos. Re-ejecutada en el cierre de la tanda (la corrida original quedó
      interrumpida por el límite de frecuencia de la API): mismo resultado.
+   - iter. 14 (abort de runtime al inicio del bloque S, asignación tipada
+     `Variant` -> `Dictionary`): EXIT 1 nombrando el bloque S + «solo 457 checks
+     (mínimo 477)», 2 fallos.
+   - iter. 15 (abort de runtime al inicio del bloque T, asignación tipada
+     `Variant` -> `Dictionary`): EXIT 1, 478 checks, 2 fallos (nombra el bloque T +
+     piso 543). Re-ejecutado en el cierre del 2026-10-24 (Log 2166): mismo
+     resultado. (Regularizado en la iter. 16: estas dos entradas no se habían
+     volcado en esta lista.)
+   - iter. 16 (abort de runtime al inicio del bloque U, asignación tipada
+     `Variant` -> `Dictionary` sobre un entero): EXIT 1, «el bloque U NO se
+     ejecuto (posible SCRIPT ERROR que aborto la funcion)» + «solo 544 checks
+     ejecutados (minimo 580)», 2 fallos.
    Sonda borrada en la misma operación; sha256 del original verificado; 0 sondas en el
    repo.
 
@@ -170,3 +186,33 @@ A-T. Guardián EN ROJO por inyección de runtime Variant -> Dictionary sobre el
 bloque T: EXIT 1, 478 checks, 2 fallos (nombra el bloque T + «solo 478 checks
 ejecutados (minimo 543)»). Re-medido en el cierre del 2026-10-24. Ver
 07-Resultados-Testings.
+
+## Iter. 16 (Log 2169) — bloque U `_test_construccion`
+
+Cubre el cluster Construcción del checklist (L69). Las 3 cadenas nuevas
+(`cadena-construccion-plaza`, `cadena-construccion-senderos`,
+`cadena-construccion-kiosko`) habían aparecido en el worktree a las 04:04 por
+una corrida cortada y fueron RE-VERIFICADAS (regla de la familia It. 10/15);
+el bloque REVISA también que la suite seguía verde con el dato nuevo —
+no seguía: 6 asserts de conteo esperaban 59/60 cadenas y la suite quedó ROJA
+(6 fallos / 543 checks / EXIT 1, medido 05:13). Reparados en la misma iterada.
+
+1. **Carga/fuente/no-oculta de las 3** + existencia de los 3 temas con cadena
+   previa (`cadena-cofradia`, `cadena-jardines`, `cadena-puente`).
+2. **Exposición en `cadenas_disponibles()`** desde el inicio (3 expuestas).
+3. **Unicidad local** de las 3 consecuencias (`plaza_empedrada`,
+   `senderos_del_pueblo_reparados`, `kiosko_abierto`) y de los 3 diarios.
+4. **NPC REALES** (3: bruno_sapo, nico_gato, pablo_pato) contra
+   `data/villagers/` y **objetos REALES** (3: `OBJ-ITE-002` "Piedra",
+   `gravel` "Grava", `OBJ-ITE-001` "Madera") contra `data/items/` por campo
+   `id` (efecto, no nombre de archivo).
+5. **End-to-end de 2** (`cadena-construccion-kiosko` con pablo_pato +
+   `OBJ-ITE-001`; `cadena-construccion-senderos` con nico_gato + `gravel`) con
+   `ws_has(...)` de `kiosko_abierto` y `senderos_del_pueblo_reparados`.
+6. **Puente diario M23 -> M55:** negativo esperado (0 entradas
+   `mision_cadena-*` para las 3 nuevas; finding medido, dueño M55).
+
+Piso: 543 -> **580** (`CHECKS_MINIMOS` MEDIDO en verde, no estimado). Bloques
+A-U. Guardián EN ROJO por inyección de runtime Variant -> Dictionary sobre el
+bloque U: EXIT 1, 544 checks, 2 fallos (nombra el bloque U + «solo 544 checks
+ejecutados (minimo 580)»). Ver 07-Resultados-Testings.

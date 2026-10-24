@@ -3,7 +3,7 @@
 
 # 03-Diseno.md — Módulo 107: Backups
 
-## 1. Arquitectura del sistema de backups
+# 1. Arquitectura del sistema de backups
 
 ```
 Sistema de Backups (3-2-1 Strategy)
@@ -24,13 +24,13 @@ Sistema de Backups (3-2-1 Strategy)
     └── Snapshots mensuales
 ```
 
-### Dependencias (contratos de integración — detalle en `04-Codigo.md` §3)
+# Dependencias (contratos de integración — detalle en `04-Codigo.md` §3)
 
 - **Entrada:** M59 (Guardado) — los saves del juego se respaldan en carpeta separada (`scripts/saving/save_backup.gd` + `BackupManager` in-engine); M06 (Control de Versiones) — el repositorio Git es la fuente primaria de backup (Copia 1); M122 (Crash Reporting) — los saves de crash se incluyen en el backup semanal.
 - **Salida:** M133 (Gestión del Proyecto) — los logs de restauración (`10-Plantilla-Log-Restauracion.md`) y el plan de recuperación informan la gestión; M135 (Riesgos) — el plan de recuperación mitiga los riesgos de pérdida de datos.
 - **Consumidor:** M133 (Gestión del Proyecto).
 
-### Catálogo de los 15 puntos de la sección 106 del plan maestro (`DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md` L2913-2929)
+# Catálogo de los 15 puntos de la sección 106 del plan maestro (`DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md` L2913-2929)
 
 | # | Punto §106 | Cobertura en M107 |
 |---|---|---|
@@ -50,7 +50,7 @@ Sistema de Backups (3-2-1 Strategy)
 | 14 | Verificación de integridad | `BackupManager.verificar_integridad` (CRC32); `scripts/backup/verify_backups.ps1` (SHA-256 vs `checksums.txt`) |
 | 15 | Plan de recuperación | §10 (4 escenarios); `11-Plan-Recuperacion-Desastres.md` |
 
-### Criterios de aceptación verificables
+# Criterios de aceptación verificables
 
 1. `test_backup_m107.gd` (headless): 28 checks, 0 fallos, exit 0.
 2. `test_backup_rotate_return.gd` (headless): 4 checks, 0 fallos, exit 0.
@@ -58,7 +58,7 @@ Sistema de Backups (3-2-1 Strategy)
 4. `verify_backups.ps1` verifica SHA-256 contra `checksums.txt` (§8).
 5. Restauración de prueba mensual con log en la plantilla `10-Plantilla-Log-Restauracion.md` (§9, Criterio de Éxito).
 
-## 2. Flujo de backup automático
+# 2. Flujo de backup automático
 
 ```
 1. Commit en Git (desarrollador)
@@ -78,7 +78,7 @@ Sistema de Backups (3-2-1 Strategy)
 8. Genera reporte de éxito/fracaso
 ```
 
-## 3. Flujo de backup local
+# 3. Flujo de backup local
 
 ```
 1. Task Scheduler (Windows) ejecuta backup_local.ps1 diariamente a las 3 AM
@@ -96,9 +96,9 @@ Sistema de Backups (3-2-1 Strategy)
 7. Genera log de ejecución
 ```
 
-## 4. Estructura de almacenamiento
+# 4. Estructura de almacenamiento
 
-### Google Drive (Cloud)
+# Google Drive (Cloud)
 ```
 isla-ancestral-backups/
 ├── diario/
@@ -124,7 +124,7 @@ isla-ancestral-backups/
     └── stems/
 ```
 
-### Disco Exterivo (Local)
+# Disco Exterivo (Local)
 ```
 E:\Backups\juego-isla-ancestral\
 ├── backup_20260816-030000.zip
@@ -138,7 +138,7 @@ E:\Backups\juego-isla-ancestral\
 └── checksums.txt
 ```
 
-## 5. Configuración de GitHub Actions
+# 5. Configuración de GitHub Actions
 
 **Archivo `.github/workflows/backup.yml`:**
 ```yaml
@@ -199,7 +199,7 @@ jobs:
 - `GDRIVE_CLIENT_ID`: Client ID de Google Drive API
 - `GDRIVE_TOKEN`: OAuth token de acceso
 
-### 5.1 Procedimiento GCP/OAuth paso a paso (copia 2 — Drive)
+# 5.1 Procedimiento GCP/OAuth paso a paso (copia 2 — Drive)
 
 > **Dueño de la ejecución: el fundador.** Los pasos de esta sección requieren **su cuenta de Google**;
 > ningún agente puede ejecutarlos. Lo que sí es de este módulo es el **procedimiento**: hasta el
@@ -213,21 +213,21 @@ cualquiera de los tres **no falla** — genera el artefacto `.tar.gz` y salta la
 aviso en el resumen. Consecuencia operativa: **un run verde NO prueba que Drive esté configurado**;
 hay que leer el `GITHUB_STEP_SUMMARY`.
 
-#### Paso 1 — Crear el proyecto en Google Cloud Console
+## Paso 1 — Crear el proyecto en Google Cloud Console
 
 1. Entrar a <https://console.cloud.google.com> con la cuenta dueña del Drive destino.
 2. Selector de proyecto (arriba a la izquierda) → **New Project**.
 3. Nombre: `isla-ancestral-backups`. Ubicación: la organización que corresponda (o *No organization*).
 4. **Create** y esperar. Anotar el **Project ID** (no el nombre visible: es el que aparece en las URLs).
 
-#### Paso 2 — Habilitar la Google Drive API
+## Paso 2 — Habilitar la Google Drive API
 
 1. Ir a **APIs & Services → Library** (<https://console.cloud.google.com/apis/library>).
 2. Buscar `Google Drive API` → **Enable**.
 3. Verificar en **APIs & Services → Enabled APIs** que figura habilitada **en el proyecto del paso 1**.
    Habilitarla en otro proyecto es el error más común: la API queda activa y la credencial no la ve.
 
-#### Paso 3 — Configurar la pantalla de consentimiento
+## Paso 3 — Configurar la pantalla de consentimiento
 
 1. **APIs & Services → OAuth consent screen**
    (<https://console.cloud.google.com/apis/credentials/consent>).
@@ -252,7 +252,7 @@ hay que leer el `GITHUB_STEP_SUMMARY`.
      app quede sin verificar. Aparece la pantalla "Google no ha verificado esta aplicación" →
      *Advanced* → *Go to … (unsafe)*: es esperado y no es un error del módulo.
 
-#### Paso 4 — Crear las credenciales OAuth
+## Paso 4 — Crear las credenciales OAuth
 
 1. **APIs & Services → Credentials → Create credentials → OAuth client ID**.
 2. **Application type: `Desktop app`.** No `Web application`: rclone usa el flujo de *app instalada*
@@ -262,7 +262,7 @@ hay que leer el `GITHUB_STEP_SUMMARY`.
 4. Copiar **Client ID** y **Client secret**. El secret se puede volver a consultar; si se pierde, se
    crea otra credencial.
 
-#### Paso 5 — Obtener el token OAuth (el paso que faltaba)
+## Paso 5 — Obtener el token OAuth (el paso que faltaba)
 
 Se hace **en una máquina con navegador** (la del fundador), no en CI:
 
@@ -283,7 +283,7 @@ rclone authorize "drive" "<CLIENT_ID>" "<CLIENT_SECRET>"
 4. No pegar el JSON en ningún archivo del repo, ni en un log, ni en un mensaje de canal: va **solo** al
    secret de GitHub (paso 6).
 
-#### Paso 6 — Cargar los 3 secrets en GitHub
+## Paso 6 — Cargar los 3 secrets en GitHub
 
 Repo → **Settings → Secrets and variables → Actions → New repository secret**:
 
@@ -295,7 +295,7 @@ Repo → **Settings → Secrets and variables → Actions → New repository sec
 
 Los secrets de *repository* alcanzan: el workflow `Backup Externo` no declara `environment:`.
 
-#### Paso 7 — Verificar de punta a punta
+## Paso 7 — Verificar de punta a punta
 
 1. **Actions → Backup Externo → Run workflow** (el `workflow_dispatch` existe para esto).
 2. El step **"Detectar secrets de Google Drive"** debe imprimir `Secrets de Google Drive detectados.`
@@ -305,7 +305,7 @@ Los secrets de *repository* alcanzan: el workflow `Backup Externo` no declara `e
 4. Comprobar en Drive que existen `backup_<AAAAMMDD>.tar.gz` **y** su `.sha256` en
    `isla-ancestral-backups/diario/`.
 
-#### Notas de operación
+## Notas de operación
 
 - **Cadencia:** el cron es **semanal** (lunes 2 AM UTC) desde el GO del fundador del 2026-10-23
   (PAQ-6/H26, cuidar la cuota compartida de artifacts). La retención en Drive sigue siendo de
@@ -316,7 +316,7 @@ Los secrets de *repository* alcanzan: el workflow `Backup Externo` no declara `e
 - Esta sección documenta la **copia 2** (offsite). La **copia 3** (disco externo físico) es
   `backup_local.ps1` vía Task Scheduler — ver §6 y §7.
 
-## 6. Script de backup local
+# 6. Script de backup local
 
 **Archivo `scripts/backup/backup_local.ps1`:**
 ```powershell
@@ -384,7 +384,7 @@ try {
 }
 ```
 
-## 7. Programación en Windows Task Scheduler
+# 7. Programación en Windows Task Scheduler
 
 **Configuración:**
 - **Nombre:** Isla Ancestral Backup Local
@@ -396,7 +396,7 @@ try {
   - "Iniciar solo si está conectado a la alimentación de CA"
   - "Despertar el equipo para ejecutar esta tarea"
 
-## 8. Script de verificación de integridad
+# 8. Script de verificación de integridad
 
 **Archivo `scripts/backup/verify_backups.ps1`:**
 ```powershell
@@ -478,16 +478,16 @@ try {
 }
 ```
 
-## 9. Procedimiento de prueba de restauración
+# 9. Procedimiento de prueba de restauración
 
 **Documento `docs/procedimiento_restauracion.md`:**
 ```markdown
 # Procedimiento de Prueba de Restauración
 
-## Frecuencia
+# Frecuencia
 Mensual (primer día de cada mes)
 
-## Pasos
+# Pasos
 
 1. **Seleccionar backup aleatorio**
    - Elegir un backup de los últimos 30 días
@@ -526,25 +526,25 @@ Mensual (primer día de cada mes)
    - Registrar éxito/fracaso
    - Registrar cualquier anomalía
 
-## Criterio de Éxito
+# Criterio de Éxito
 - Restauración 100% exitosa
 - Todos los archivos verifican con checksums
 - Proyecto compila y ejecuta correctamente
 - Sin errores en Godot Console
 ```
 
-## 10. Plan de recuperación de desastres
+# 10. Plan de recuperación de desastres
 
 **Documento `docs/plan_recuperacion_desastres.md`:**
 ```markdown
 # Plan de Recuperación de Desastres
 
-## Escenario 1: Pérdida de Máquina Local
+# Escenario 1: Pérdida de Máquina Local
 
-### Severidad: Media
-### Tiempo Estimado: 2-4 horas
+# Severidad: Media
+# Tiempo Estimado: 2-4 horas
 
-### Pasos:
+# Pasos:
 1. Adquirir nueva máquina o reinstalar sistema
 2. Instalar Git, Godot 4.x, herramientas necesarias
 3. Clonar repositorio: `git clone https://github.com/MauricioBelforte/juego-isla-ancestral.git`
@@ -553,19 +553,19 @@ Mensual (primer día de cada mes)
 6. Recuperar saves de prueba desde Google Drive
 7. Verificar compilación y ejecución
 
-### Verificación:
+# Verificación:
 - [ ] Repositorio clonado exitosamente
 - [ ] Assets restaurados
 - [ ] Proyecto compila
 - [ ] Proyecto ejecuta
 - [ ] Saves recuperados
 
-## Escenario 2: Corrupción de Repositorio Git
+# Escenario 2: Corrupción de Repositorio Git
 
-### Severidad: Alta
-### Tiempo Estimado: 4-8 horas
+# Severidad: Alta
+# Tiempo Estimado: 4-8 horas
 
-### Pasos:
+# Pasos:
 1. Identificar punto de corrupción
 2. Recuperar desde backup de Google Drive más reciente
 3. Recuperar desde disco externo como respaldo
@@ -575,19 +575,19 @@ Mensual (primer día de cada mes)
 7. Verificar branches y tags
 8. Actualizar remoto si es necesario
 
-### Verificación:
+# Verificación:
 - [ ] Backup recuperado
 - [ ] Checksums verifican
 - [ ] Historial completo restaurado
 - [ ] Branches existen
 - [ ] Tags existen
 
-## Escenario 3: Pérdida de GitHub (Catastrófico)
+# Escenario 3: Pérdida de GitHub (Catastrófico)
 
-### Severidad: Crítica
-### Tiempo Estimado: 8-24 horas
+# Severidad: Crítica
+# Tiempo Estimado: 8-24 horas
 
-### Pasos:
+# Pasos:
 1. Evaluar situación (GitHub caído o cuenta comprometida)
 2. Recuperar desde Google Drive (backup más reciente)
 3. Recuperar desde disco externo (respaldo)
@@ -597,19 +597,19 @@ Mensual (primer día de cada mes)
 7. Actualizar URLs remotas en clones locales
 8. Verificar que todos los colaboradores pueden acceder
 
-### Verificación:
+# Verificación:
 - [ ] Código recuperado
 - [ ] Historial completo
 - [ ] Assets recuperados
 - [ ] Colaboradores pueden acceder
 - [ ] CI/CD reconfigurado
 
-## Escenario 4: Pérdida de Assets Originales
+# Escenario 4: Pérdida de Assets Originales
 
-### Severidad: Alta
-### Tiempo Estimado: 4-12 horas
+# Severidad: Alta
+# Tiempo Estimado: 4-12 horas
 
-### Pasos:
+# Pasos:
 1. Identificar assets perdidos
 2. Recuperar desde Git LFS
 3. Recuperar desde Google Drive
@@ -619,7 +619,7 @@ Mensual (primer día de cada mes)
 7. Verificar que no hay corrupción
 8. Reconstruir si es necesario
 
-### Verificación:
+# Verificación:
 - [ ] Assets recuperados
 - [ ] Godot importa correctamente
 - [ ] No hay faltantes
@@ -627,35 +627,35 @@ Mensual (primer día de cada mes)
 - [ ] Builds funcionan
 ```
 
-## 11. Reglas de calidad
+# 11. Reglas de calidad
 
-### Regla 1: 3-2-1 Rule Obligatoria
+# Regla 1: 3-2-1 Rule Obligatoria
 - Mínimo 3 copias de todo dato importante
 - Al menos 2 medios diferentes (cloud + físico)
 - Al menos 1 copia offsite (cloud)
 
-### Regla 2: Automatización
+# Regla 2: Automatización
 - Backups programados sin intervención manual
 - Notificaciones de éxito/fracaso
 - Logs de ejecución para auditoría
 
-### Regla 3: Verificación Periódica
+# Regla 3: Verificación Periódica
 - Verificación de integridad semanal
 - Prueba de restauración mensual
 - Revisión de política trimestral
 
-### Regla 4: Seguridad
+# Regla 4: Seguridad
 - Backups cloud encriptados si contienen datos sensibles
 - Discos externos almacenados en lugar seguro
 - Control de acceso a backups
 
-### Regla 5: Documentación
+# Regla 5: Documentación
 - Procedimientos claros y accesibles
 - Plan de recuperación actualizado
 - Logs de restauración para auditoría
 
 
-## Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
+# Presupuestos numericos (Reflection-Beam-1.0, 2026-10-23)
 
 | # | Presupuesto | Valor | Formula/Justificacion |
 |---|-------------|-------|----------------------|
@@ -663,9 +663,9 @@ Mensual (primer día de cada mes)
 | 12 | Tiempo estimado de restauracion full+incremental | 3-6h (full 2-4h + incremental 1-2h) | Coherente con SLA <48h de M144. |
 
 
-## Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador)
+# Decisiones de diseno aplicadas (Reflection-Beam-1.0, 2026-10-23, GO del fundador)
 
-### H22 — max_copias = POR CATEGORIA + CRC32/SHA-256 documentados
+# H22 — max_copias = POR CATEGORIA + CRC32/SHA-256 documentados
 
 **Decision 1: max_copias = POR CATEGORIA (renombrado a max_copias_por_categoria)**
 - backup_policy.json: retencion.max_copias -> retencion.max_copias_por_categoria = 5.
@@ -677,26 +677,26 @@ Mensual (primer día de cada mes)
 - verify_backups.ps1: SHA-256 (integridad fuerte, mensual).
 - Razon: CRC32 para verificacion rapida diaria (bajo costo CPU), SHA-256 para integridad fuerte mensual (mayor seguridad). Documentado para evitar confusion en auditorias futuras.
 
-## Presupuestos numericos II - detalle minucioso (2da capa)
+# Presupuestos numericos II - detalle minucioso (2da capa)
 
 Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y escalado al fundador. Formula y unidades con dependencias cruzadas (M93 80/dia, M58 0.5ms, M144 <48h SLA).
 - **Presupuesto de retencion por capas** [x] - formula coherente con Policies del fundador si decide max_copias_por_categoria (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose vive en la seccion 'Presupuestos numericos II - formulas concretas' de este 03; los mensajes 252/257/260/265/267 son el origen de la asignacion (correccion de cita rota: Hy3 347, aplicada por director))
 - **Presupuesto de verificacion de integridad** [x] - formula de algoritmos duales si mantiene ambos (cifras verbatim de los apilados #4 y #6 del canal de Beam (Mensajes entre modelos/Reflection-Beam-1.0/: mensajes 252, 257/260, 265/267); el desglose vive en la seccion 'Presupuestos numericos II - formulas concretas' de este 03; los mensajes 252/257/260/265/267 son el origen de la asignacion (correccion de cita rota: Hy3 347, aplicada por director))
 
-## Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
+# Presupuestos numericos II - formulas concretas (Reflection-Beam-1.0, 2026-10-23)
 
-### 7. Retencion por capas
+# 7. Retencion por capas
 - Formula: retencion_total = diarios (30) + semanales (52) + mensuales (60) + permanentes (2) = 144 slots max. CONCILIACION (Hy3 343, director 21:40): la politica VIGENTE de retencion la define backup_categories.json (por categoria, 365/90/...); esta suma 30/52/60/2 = 144 es la meta de capacidad V2 del diseño, no la politica vigente. NOTA: son SLOTS POR CATEGORIA (diario/semanal/mensual/permanente), no duraciones en dias. NOTA 2026-10-23: el schedule GFS 30/52/60 es INTENTO DE DISENO — backup_categories.json (7 categorias: repositorio/assets/documentacion/builds/saves/musica/fuente) implementa retencion_dias por categoria (365/90/180/365/90/180/180), no el schedule 30/52/60. Conciliar o adoptar una sola politica.
 - max_copias_por_categoria = 5 por categoria x 7 categorias = 35 copias max por tipo.
 - Coherente con H22 (max_copias por categoria).
 - Unidad: slots de backup. Dependencia: H22, M144 (SLA <48h).
 
-### 8. Verificacion de integridad (algoritmos duales)
+# 8. Verificacion de integridad (algoritmos duales)
 - Formula: CRC32 (verificacion rapida, diaria, O(n) con bajo costo CPU) + SHA-256 (integridad fuerte, mensual, O(n) con mayor costo CPU).
 - CRC32 para verificacion diaria (velocidad), SHA-256 para integridad mensual (seguridad).
 - Coherente con H22 (documentado en 03-Diseno.md).
 - Unidad: algoritmo. Dependencia: H22.
 
-## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
+# Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-8 (H22)**: max_copias = **POR-CATEGORIA (5x7=35)** y se MANTIENEN ambos algoritmos (CRC32 rapido diario / SHA-256 fuerte mensual). Tu flip de bloque 3 ya lo citó (5x7=35; CRC32 diario + SHA-256 mensual); solo se agrega la nota de GO del fundador. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 
