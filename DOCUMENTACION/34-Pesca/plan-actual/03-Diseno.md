@@ -218,3 +218,10 @@ extends Resource
 ### ### Sonido de escape del pez (no punitivo)
 - Spec: sonido de escape suave (no punitivo). Volumen -6 dB sobre ambiente.
 - Coherente con M42 (sonido ambiental) y M43 (SFX).
+
+## Presupuestos de desafios (Beam 439, produce-first)
+### ### Desafios (objetivos opcionales: catalogo completo, pez mas grande)
+- Spec: objetivos opcionales de pesca (catalogo completo = capturar las 25 especies; pez mas grande = capturar un pez con peso > umbral).
+- Catálogo completo: capturar las 25 especies de fishing.json.
+- Pez más grande: capturar un pez con peso > umbral (ej: pez_luna > 30 kg, pez_ancestral_raiz > 20 kg).
+- Coherente con M72 (logros) y M93 (balance). achievement_service ya consume captura_exitosa.
