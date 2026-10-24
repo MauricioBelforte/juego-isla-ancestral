@@ -89,3 +89,67 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 
 - **Tabla de componentes de la sec. 3, fila Sky (item B-P3 del checklist)**: el diseno dice "gradiente por hora (24 puntos), energia 0.18-1.0"; el dato real (data-driven) es sky_curve.tres con piso 0.15 en hora profunda (anti-oscuridad sec. 7) y sky_color_ramp.tres (M49) con 9 paradas.
 - **Tabla de componentes de la sec. 3, fila Fog**: el rango "0.08-0.25 por estacion/hora" corresponde al nodo FogVolume volumetrico (K.2, dueno externo M45); el fog del Environment que consume M31 se ancla a la niebla marina autoreada del proyecto (0.00018) y fog_curve.tres gobierna la variacion relativa por hora.
+
+## Presupuestos de ciclo dia-noche (Beam 415, produce-first)
+### ### Luna (esfera + fases del calendario M29)
+- Spec: esfera de luna con textura de fases del calendario M29. Luz lunar (DirectionalLight3D, energia 0.12-0.2, color 7500K).
+- Fases: nueva, creciente, llena, menguante (4 fases, sincronizadas con M29).
+- Coherente con M29 (calendario) y M45 (arte 3D). Sin mesh de luna (solo luz) - esfera visual pendiente de M45.
+
+### ### Nubes (velo 2D con drift, densidad estacional)
+- Spec: velo 2D de nubes con drift lento, densidad estacional (mas densas en invierno, menos en verano).
+- Coherente con M49 (iluminacion) y M29 (calendario). Sin implementar (escenico V2).
+
+### ### Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
+- Spec: FogVolume ligero (<=120 m) con densidad estacional: matinal otonio, bruma verano, densa invierno, nocturna 0.25.
+- Coherente con M49 (iluminacion) y M29 (calendario). fog_curve.tres data por hora EXISTE.
+
+### ### Flor luminica + cristales estelares nocturnos (M15)
+- Spec: flor luminica (respawn estacional) + cristales estelares nocturnos (respawn nocturno).
+- Coherente con M15 (recursos) y M29 (calendario).
+
+### ### Lince de luna (dia 15, Claro del Bosque)
+- Spec: fauna especial (lince de luna) que aparece el dia 15 en Claro del Bosque. Interaccion "observar".
+- Coherente con M36 (fauna) y M93 (balance). Data de fauna especial.
+
+## Presupuestos de ciclo dia-noche (Beam 415, produce-first)
+### ### Luna (esfera + fases del calendario M29)
+- Spec: esfera de luna con textura de fases del calendario M29. Luz lunar (DirectionalLight3D, energia 0.12-0.2, color 7500K).
+- Fases: nueva, creciente, llena, menguante (4 fases, sincronizadas con M29).
+- Coherente con M29 (calendario) y M45 (arte 3D). Sin mesh de luna (solo luz) - esfera visual pendiente de M45.
+
+### ### Nubes (velo 2D con drift, densidad estacional)
+- Spec: velo 2D de nubes con drift lento, densidad estacional (mas densas en invierno, menos en verano).
+- Coherente con M49 (iluminacion) y M29 (calendario). Sin implementar (escenico V2).
+
+### ### Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
+- Spec: FogVolume ligero (<=120 m) con densidad estacional: matinal otonio, bruma verano, densa invierno, nocturna 0.25.
+- Coherente con M49 (iluminacion) y M29 (calendario). fog_curve.tres data por hora EXISTE.
+
+### ### Flor luminica + cristales estelares nocturnos (M15)
+- Spec: flor luminica (respawn estacional) + cristales estelares nocturnos (respawn nocturno).
+- Coherente con M15 (recursos) y M29 (calendario).
+
+### ### Lince de luna (dia 15, Claro del Bosque)
+- Spec: fauna especial (lince de luna) que aparece el dia 15 en Claro del Bosque. Interaccion "observar".
+- Coherente con M36 (fauna) y M93 (balance). Data de fauna especial.
+## Presupuestos de ciclo dia-noche (Beam 415, produce-first)
+### ### Luna (esfera + fases del calendario M29)
+- Spec: esfera de luna con textura de fases del calendario M29.
+- Coherente con M29 (calendario) y M45 (arte 3D).
+
+### ### Nubes (velo 2D con drift, densidad estacional)
+- Spec: velo 2D de nubes con drift lento, densidad estacional.
+- Coherente con M49 (iluminacion) y M29 (calendario). Sin implementar (escenico V2).
+
+### ### Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
+- Spec: FogVolume ligero (<=120 m) con densidad estacional.
+- Coherente con M49 (iluminacion) y M29 (calendario). fog_curve.tres data por hora EXISTE.
+
+### ### Flor luminica + cristales estelares nocturnos (M15)
+- Spec: flor luminica (respawn estacional) + cristales estelares nocturnos (respawn nocturno).
+- Coherente con M15 (recursos) y M29 (calendario).
+
+### ### Lince de luna (dia 15, Claro del Bosque)
+- Spec: fauna especial (lince de luna) que aparece el dia 15 en Claro del Bosque.
+- Coherente con M36 (fauna) y M93 (balance). Data de fauna especial.
