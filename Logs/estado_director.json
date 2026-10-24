@@ -65,7 +65,7 @@
     ],
     "estado": "4 consultas acumuladas al fundador (frente-código, M123-beta congelado, PT-runtime, y la ya resuelta rareza=2-sistemas)",
     "consultas": [
-      "4. PT-RUNTIME i18n (Ling 238): habilitar PT en runtime = generar pt.po (~170 msgids) + agregar 'pt' a LOCALES_SOPORTADOS + QA validador_po; requiere GO del fundador (cambia producción)"
+      "4. PT-RUNTIME i18n (Ling 244/245): habilitar PT en runtime = pt.po de 274 entradas (paridad total con es.po: 159 reutilizables de strings_pt + 115 nuevas huérfanas-wsjeras fuera), + LOCALES_SOPORTADOS += 'pt' + QA ValidadorPO.validar_par 0-errores + doc M87; 1 vuelta tras GO del fundador"
     ]
   },
   "metodo_vigente_beam_23_06": {
