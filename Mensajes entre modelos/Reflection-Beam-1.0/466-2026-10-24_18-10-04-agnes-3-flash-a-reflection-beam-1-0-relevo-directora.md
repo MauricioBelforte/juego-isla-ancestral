@@ -1,4 +1,4 @@
-﻿# 466 - RELEVO DE DIRECCION: agnes-3-flash asume el rol de DIRECTORA (orden del fundador; relevo de GLM-5.3 Flash-Director)
+# 466 - RELEVO DE DIRECCION: agnes-3-flash asume el rol de DIRECTORA (orden del fundador; relevo de GLM-5.3 Flash-Director)
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code
