@@ -87,7 +87,7 @@
 # nacen visibles: son rutas de trueque que se descubren hablando. Bloque Q
 # afirma carga, fuente, visibilidad, unicidad de consecuencias/diarios y
 # corrida end-to-end de 2.
-# Iter. 15 (Step-5-WorkBuddy, 2026-10-23, Log 2164): cluster Exploracion del
+# Iter. 15 (Step-5-WorkBuddy, 2026-10-23, Log 2166): cluster Exploracion del
 # 03-Diseno L39 (8 misiones: brujula, fauna (M65), cronitar ruinas + 5
 # extensiones declaradas). NPC REALES de data/villagers/ (finneas_zorro,
 # teo_conejo, sofia_buho, aria_ciervo, catalina_oso, olivia_nutria, nico_gato,
@@ -109,12 +109,15 @@ var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
 
-# Piso MEDIDO en verde (iter. 15, 2026-10-23, Log 2164): 543 checks con los
+# Piso MEDIDO en verde (iter. 15, 2026-10-23, Log 2166): 543 checks con los
 # bloques A-T (iter. 14 tenia 477 con A-S; el bloque T del cluster Exploracion
 # sumo 66: 24 carga/fuente/no-oculta + 1 expuestas + 2 unicidad local +
 # 8 NPC reales + 8 objetos reales + 1 diarios + 3x7 end-to-end + 1 puente
 # diario + 1 higiene de flags). Medido: 543/0/EXIT 0 x3. El guardian se probo
-# EN ROJO por inyeccion de runtime sobre el bloque T (ver Log 2164).
+# EN ROJO por inyeccion de runtime sobre el bloque T (ver Log 2166).
+# Re-medido en el cierre del 2026-10-24 (Log 2166): 543/0/EXIT 0 x3 y
+# guardian EN ROJO 478 checks / 2 fallos / EXIT 1 (inyeccion de runtime
+# sobre el bloque T, sonda borrada y suite restaurada byte-exacta).
 const CHECKS_MINIMOS := 543
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
@@ -192,7 +195,7 @@ func _test_carga() -> void:
 	# Iter. 11 (Log 2134): +5 del cluster Secretas -> 37 + 1 = 38.
 	# Iter. 12 (Log 2135): +3 del cluster Comerciantes -> 40 + 1 = 41.
 	# Iter. 13 (Log 2137): +11 de los clusters Puzzles + Investigacion -> 51 + 1 = 52.
-	# Iter. 15 (Log 2164): +8 del cluster Exploracion -> 59 + 1 = 60.
+	# Iter. 15 (Log 2166): +8 del cluster Exploracion -> 59 + 1 = 60.
 	_check(_h.cadenas_count() == 60, "60 cadenas cargadas tras el merge (59 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
@@ -1606,7 +1609,7 @@ func _test_consecuencias() -> void:
 	_fin("S")
 
 
-## Iter. 15 (Log 2164): cluster Exploracion del 03-Diseno L39. El diseno
+## Iter. 15 (Log 2166): cluster Exploracion del 03-Diseno L39. El diseno
 ## nombra 3 temas para 8 misiones (brujula, fauna (M65), cronitar ruinas,
 ## 02-Analisis L20: "llevar una foto/brujula a un punto, observar fauna M65,
 ## cronitar ruinas"); las 5 restantes son extension declarada (mismo patron
