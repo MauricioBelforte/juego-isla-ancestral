@@ -24,7 +24,7 @@
 **Nicho:** i18n/localización/catálogos — ES/EN/PT + M87 + placeholders + UTF-8 + validador headless + reporte-only de referencia (metodología informe 142).
 **Reglas:** Standard informe 142 (medición por script, reporte-only)... salvo los encargos editor (144/146 — SÍ edita, con pathspec explícito y validación por script).
 
-**ESTADO 2026-10-24 01:20 (post tanda visual 56-62, informes 238/240):** tanda 56-62 CERRADA y RATIFICADA por el director (239): 56/57/58/60/61/62 [x] con evidencia runtime (boot ES+EN 0 errores, spawn (3860,3860) vivo, fixes D102 verificados en codigo); 59 [?] — PT NO es locale de runtime (LOCALES_SOPORTADOS=['es','en'], pt.po NO existe) — escalado al fundador via director 239 (GO de produccion). Cola: 93 [x] / 4 pendientes de 106 (38-40 M159 dueno externo; 59 escalada). **STANDBY i18n por orden del fundador 23oct 20:42** (sin creditos para verificar a Beam) — cron ACTIVO, sin nueva i18n hasta orden. Pool del canal saneado (colision 239 removida por proximo_numero.py). | **Sweep 07:00Z (informe 242):** estado_director sin cambios (ultimo_update 2026-10-23T04:20); escalada PT-runtime registrada en consultas_fundador_23oct #4 (mesa del fundador); deriva_m63_boot_tips registra propuesta T22 pendiente encargo dueno M63; config.cfg CRC f24e2df1 MATCH idioma='es'; capturas ES (230.274 B) + EN (80.244 B) verificadas en disco; backlog tarea 57 con ruta captura ES; pool 242 consumido (quedan 30). | **Ronda 08:00Z (informe 244):** director 243 RATIFICA 242 + APRUEBA plan PT tal cual (ejecucion en UNA vuelta ante GO); radar M23 derivado a Step-5 (no es mi riel). Preparacion medida: validador_po.gd leido completo (467 lineas, reglas R1-R15 + P1/P2/P3/P5) — checklist anexado a tarea 59; MEDICION CORREGIDA: es.po = 274 entradas + 4 plurales (ITEMS.SE_OFRECEN, M68.TRIP.HORAS/MINUTOS/SEGUNDOS) + 15 marcadores no-traducir; strings_pt.json 'cadenas' = 170 claves (159 solapadas + 11 huérfanas legado M60); traduccion nueva real = 115 claves (el '~170 msgids' del plan = claves del JSON maestro, no entradas del .po — correccion honesta con medicion textual). Pool 244 consumido (quedan 28).
+**ESTADO 2026-10-24 01:20 (post tanda visual 56-62, informes 238/240):** tanda 56-62 CERRADA y RATIFICADA por el director (239): 56/57/58/60/61/62 [x] con evidencia runtime (boot ES+EN 0 errores, spawn (3860,3860) vivo, fixes D102 verificados en codigo); 59 [?] — PT NO es locale de runtime (LOCALES_SOPORTADOS=['es','en'], pt.po NO existe) — escalado al fundador via director 239 (GO de produccion). Cola: 93 [x] / 4 pendientes de 106 (38-40 M159 dueno externo; 59 escalada). **STANDBY i18n por orden del fundador 23oct 20:42** (sin creditos para verificar a Beam) — cron ACTIVO, sin nueva i18n hasta orden. Pool del canal saneado (colision 239 removida por proximo_numero.py). | **Sweep 07:00Z (informe 242):** estado_director sin cambios (ultimo_update 2026-10-23T04:20); escalada PT-runtime registrada en consultas_fundador_23oct #4 (mesa del fundador); deriva_m63_boot_tips registra propuesta T22 pendiente encargo dueno M63; config.cfg CRC f24e2df1 MATCH idioma='es'; capturas ES (230.274 B) + EN (80.244 B) verificadas en disco; backlog tarea 57 con ruta captura ES; pool 242 consumido (quedan 30). | **Ronda 08:00Z (informe 244):** director 243 RATIFICA 242 + APRUEBA plan PT tal cual (ejecucion en UNA vuelta ante GO); radar M23 derivado a Step-5 (no es mi riel). Preparacion medida: validador_po.gd leido completo (467 lineas, reglas R1-R15 + P1/P2/P3/P5) — checklist anexado a tarea 59; MEDICION CORREGIDA: es.po = 274 entradas + 4 plurales (ITEMS.SE_OFRECEN, M68.TRIP.HORAS/MINUTOS/SEGUNDOS) + 15 marcadores no-traducir; strings_pt.json 'cadenas' = 170 claves (159 solapadas + 11 huérfanas legado M60); traduccion nueva real = 115 claves (el '~170 msgids' del plan = claves del JSON maestro, no entradas del .po — correccion honesta con medicion textual). Pool 244 consumido (quedan 28). | **Ronda 20:25Z (informe 246):** cron RE-ENCENDIDO por orden del fundador (wku_16f98b331001hOQSlGHaH9v86K, 0 * * * *, proximo 21:00Z; viejo wku_16739e40d001DRdRALlor3EsZY eliminado 08:47Z). Director 245 RATIFICA 244: correccion de volumen 274/159/115 ADOPTADA en consulta #4 del fundador; regimen confirmado (standby, sin pt.po, poll-minimal, sin encargo nuevo). Write real: CENSO de las 115 nuevas por dominio (M68 transporte 89, DIARY 14, CLOCK 4, ITEMS 2, 6 unitarias) + 4 plurales ES/EN + 15 no-traducir + plantilla cabecera pt.po -> ANEXO EJECUCION PT al final del backlog. Pool 246 consumido (quedan 27).
 
 ## LAS 106 TAREAS
 
@@ -1242,3 +1242,216 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 94. - [ ] [91] Diseñar método play_notification_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
 95. - [ ] [91] Diseñar método play_error_sound() <!-- fuente: 91-Configuracion-De-Audio/05-Checklist.md -->
 - **BACKLOG-LING.md** - cola investigada por capacidades (ver GUIA-BACKLOGS-POR-MODELO.md)
+
+---
+
+## ANEXO EJECUCION PT (censo medido 2026-10-24 17:30 local / 20:30Z — informe 246)
+
+Preparacion medida para ejecucion en UNA vuelta ante GO del fundador (consulta #4, volumenes adoptados por director 245). **NO crea pt.po ni toca runtime** (standby 23oct 20:42 + director 245 'regla 244'). Texto fuente = es.po (paridad P1); PT reutilizable = strings_pt.json 'cadenas' (159/274). Ninguna traduccion nueva generada aqui — el GO autoriza la generacion.
+
+### A. Volumen (medido en disco)
+- es.po: **274 entradas** + cabecera. pt.po objetivo: **274** (paridad P1 — 0 faltantes, 0 huérfanas).
+- Reutilizables desde strings_pt.json 'cadenas' (170 claves): **159**. Traduccion nueva: **115**.
+- Plurales: **4** (R14 exige msgstr[0] Y msgstr[1], nplurals=2).
+- Marcadores `#. no-traducir:` en es.po: **15** (replicar textual en pt.po).
+
+### B. Censo de las 115 claves nuevas por dominio
+**M68 (63):**
+```
+M68.EVENT.DIRIGIBLE_LUNA
+M68.EVENT.DIRIGIBLE_LUNA.SENAL
+M68.EVENT.FESTIVAL_CATALINA
+M68.EVENT.FESTIVAL_CATALINA.SENAL
+M68.EVENT.LLEGADA_FINNEAS
+M68.EVENT.LLEGADA_FINNEAS.SENAL
+M68.EVENT.MUELLE_MATEO
+M68.EVENT.MUELLE_MATEO.SENAL
+M68.EVENT.PUERTO_BRUNO
+M68.EVENT.PUERTO_BRUNO.SENAL
+M68.NARR.C4.01
+M68.NARR.C4.02
+M68.NARR.C4_BRIS
+M68.NARR.C7.01
+M68.NARR.C7.02
+M68.NARR.C7.03
+M68.NARR.C7_CAMARA
+M68.NARR.FINAL_SECRETO
+M68.NARR.SECRETO.01
+M68.ROUTE.r_aurora_brisa
+M68.ROUTE.r_aurora_espejo
+M68.ROUTE.r_aurora_estacion
+M68.ROUTE.r_aurora_este
+M68.ROUTE.r_aurora_muelle
+M68.ROUTE.r_aurora_plataforma
+M68.ROUTE.r_aurora_sur
+M68.ROUTE.r_estacion_aurora
+M68.ROUTE.r_este_aurora
+M68.ROUTE.r_este_muelle
+M68.ROUTE.r_festival_muelle
+M68.ROUTE.r_muelle_aurora
+M68.ROUTE.r_muelle_este
+M68.ROUTE.r_muelle_festival
+M68.ROUTE.r_muelle_sur
+M68.ROUTE.r_norte_plataforma
+M68.ROUTE.r_plataforma_aurora
+M68.ROUTE.r_plataforma_norte
+M68.ROUTE.r_sur_aurora
+M68.ROUTE.r_sur_muelle
+M68.SPECIAL.FESTIVAL_INVIERNO
+M68.SPECIAL.FESTIVAL_INVIERNO_DESC
+M68.SPECIAL.FESTIVAL_LUCES
+M68.SPECIAL.FESTIVAL_LUCES_DESC
+M68.SPECIAL.FESTIVAL_OTONO
+M68.SPECIAL.FESTIVAL_OTONO_DESC
+M68.SPECIAL.FESTIVAL_PRIMAVERA
+M68.SPECIAL.FESTIVAL_PRIMAVERA_DESC
+M68.SPECIAL.FESTIVAL_VERANO
+M68.SPECIAL.FESTIVAL_VERANO_DESC
+M68.SPECIAL.LUNA_LLENA
+M68.SPECIAL.LUNA_LLENA_DESC
+M68.SPECIAL.TOUR_DIRIGIBLE
+M68.SPECIAL.TOUR_DIRIGIBLE_DESC
+M68.STOP.estacion_central
+M68.STOP.muelle_raiz_sur
+M68.STOP.plataforma_norte
+M68.STOP.puerto_aurora
+M68.STOP.puerto_brisa
+M68.STOP.puerto_espejo
+M68.STOP.puerto_este
+M68.STOP.puerto_festival
+M68.STOP.puerto_norte
+M68.STOP.puerto_sur
+```
+**M68.TRIP (15):**
+```
+M68.TRIP.ARRIVED_AT
+M68.TRIP.CURRENCY
+M68.TRIP.DURATION
+M68.TRIP.HORAS_MINUTOS
+M68.TRIP.LOADING
+M68.TRIP.LOCKED
+M68.TRIP.NO_MONEY
+M68.TRIP.OUT_OF_SCHEDULE
+M68.TRIP.PRICE
+M68.TRIP.SCHEDULE
+M68.TRIP.SPECIAL_ONLY
+M68.TRIP.TRAVELING_TO
+M68.TRIP.HORAS
+M68.TRIP.MINUTOS
+M68.TRIP.SEGUNDOS
+```
+**DIARY (14):**
+```
+DIARY.ENTRADAS
+DIARY.CAT_PERSONAJES
+DIARY.CAT_CRIATURAS
+DIARY.CAT_PLANTAS
+DIARY.CAT_MINERALES
+DIARY.CAT_RECETAS
+DIARY.CAT_PISTAS
+DIARY.CAT_SELLOS
+DIARY.CAT_RUINAS
+DIARY.CAT_CARTAS
+DIARY.CAT_DESCUBRIMIENTOS
+DIARY.CAT_MISIONES
+DIARY.CAT_EVENTOS
+DIARY.CAT_FOTOGRAFIAS
+```
+**M68.SIGN (11):**
+```
+M68.SIGN.GENERICO
+M68.SIGN.estacion_central
+M68.SIGN.muelle_raiz_sur
+M68.SIGN.plataforma_norte
+M68.SIGN.puerto_aurora
+M68.SIGN.puerto_brisa
+M68.SIGN.puerto_espejo
+M68.SIGN.puerto_este
+M68.SIGN.puerto_festival
+M68.SIGN.puerto_norte
+M68.SIGN.puerto_sur
+```
+**CLOCK (4):**
+```
+CLOCK.ESTACIONES.0
+CLOCK.ESTACIONES.1
+CLOCK.ESTACIONES.2
+CLOCK.ESTACIONES.3
+```
+**ITEMS (2):**
+```
+ITEMS.MADERA
+ITEMS.MADERA_DESC
+```
+**MAIN_MENU (1):**
+```
+MAIN_MENU.OPTIONS
+```
+**HUD (1):**
+```
+HUD.VIDA
+```
+**SETTINGS (1):**
+```
+SETTINGS.IDIOMA
+```
+**DIALOGOS (1):**
+```
+DIALOGOS.VECINO_SALUDO
+```
+**npc (1):**
+```
+npc.catalina
+```
+**UI (1):**
+```
+UI.INTERACTUAR
+```
+Nota: `npc.catalina` es nombre propio — const NO_TRADUCIBLES del validador (P5 exento, msgstr PT = 'Catalina'). `UI.INTERACTUAR` existe en es.po L668 (interact_prompt.gd L91).
+
+### C. Plurales (base ES/EN para traducir — R14/R15)
+- **ITEMS.SE_OFRECEN** (msgid_plural: ITEMS.SE_OFRECEN)
+  - ES: [0] 'Se ofrece {n} objeto' / [1] 'Se ofrecen {n} objetos'
+  - EN: [0] 'Offering {n} item' / [1] 'Offering {n} items'
+- **M68.TRIP.HORAS** (msgid_plural: M68.TRIP.HORAS)
+  - ES: [0] '{n} hora' / [1] '{n} horas'
+  - EN: [0] '{n} hour' / [1] '{n} hours'
+- **M68.TRIP.MINUTOS** (msgid_plural: M68.TRIP.MINUTOS)
+  - ES: [0] '{n} minuto' / [1] '{n} minutos'
+  - EN: [0] '{n} minute' / [1] '{n} minutes'
+- **M68.TRIP.SEGUNDOS** (msgid_plural: M68.TRIP.SEGUNDOS)
+  - ES: [0] '{n} segundo' / [1] '{n} segundos'
+  - EN: [0] '{n} second' / [1] '{n} seconds'
+ITEMS.SE_OFRECEN tiene PT simple en JSON ('Oferecendo {n} item') — expandir a msgstr[0]/[1] ('Oferecendo {n} item' / 'Oferecendo {n} items'). M68.TRIP.HORAS/MINUTOS/SEGUNDOS: nuevas (PT: '{n} hora/horas', '{n} minuto/minutos', '{n} segundo/segundos' — misma forma ES).
+
+### D. Marcadores no-traducir (15) — replicar textual con su marker
+- `M68.SIGN.GENERICO` => '→ {destino} · {metros} m'
+- `M68.SIGN.estacion_central` => '→ {destino} · {metros} m'
+- `M68.SIGN.muelle_raiz_sur` => '→ {destino} · {metros} m'
+- `M68.SIGN.plataforma_norte` => '→ {destino} · {metros} m'
+- `M68.SIGN.puerto_aurora` => '→ {destino} · {metros} m'
+- `M68.SIGN.puerto_brisa` => '→ {destino} · {metros} m'
+- `M68.SIGN.puerto_espejo` => '→ {destino} · {metros} m'
+- `M68.SIGN.puerto_este` => '→ {destino} · {metros} m'
+- `M68.SIGN.puerto_festival` => '→ {destino} · {metros} m'
+- `M68.SIGN.puerto_norte` => '→ {destino} · {metros} m'
+- `M68.SIGN.puerto_sur` => '→ {destino} · {metros} m'
+- `M68.TRIP.CURRENCY` => 'AO'
+- `M68.TRIP.HORAS_MINUTOS` => '{h} h {m} min'
+- `EQUIP.EQUIPADO` => '{tipo}: {item}'
+- `DIARY.BLOQUEADO` => '???'
+
+### E. Plantilla cabecera pt.po (R4)
+```
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+```
+
+### F. Checklist de aceptacion (ValidadorPO — quien firma el QA al ejecutar)
+- Bytes: R1 sin BOM, R2 LF, R3 UTF-8 valido. Cabecera R4: Content-Type + Language: pt + Plural-Forms nplurals=2.
+- Estructura: R5 sin basura, R6 msgstr no vacios, R7 sin msgid duplicado, R8/R13 plurales con msgstr[0], R10 UPPER_SNAKE (excepcion npc.catalina), R11 sin espacios en clave, **R14 plurales completos 0..1 contiguos**, R15 mismos placeholders en todas las formas, R12 no mezclar {llave} con printf.
+- Par: **P1 paridad total 274/274**, P2 0 huérfanas, **P3 placeholders {x}/%s/%d identicos ES<->PT**, P5 15 no-traducir + const NO_TRADUCIBLES (npc.catalina, SETTINGS.SLOTS).
+- QA final: `ValidadorPO.validar_par(res://locales/es.po, res://locales/pt.po)` 0 errores + `test_validador_po_m87.gd` headless rc=0 + doc M87 04-Codigo sec 8b + LOCALES_SOPORTADOS += 'pt' (localization_manager.gd:15).
