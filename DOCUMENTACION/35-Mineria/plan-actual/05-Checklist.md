@@ -21,7 +21,7 @@
 ## B. Resolucion de los 24 puntos del plan (24)
 
 - [x] P1: disenar vetas — afloramientos de 1-3 bloques [S] *(Diseno verificado por grep: 01-Requerimientos.md RF1 + 03-Diseno.md F3 (vetas de 1-3 bloques) - 2026-10-13, DeepSeek-V4.1-Flash)*
-- [ ] P2: disenar minerales — tabla de 8+ minerales [S]
+- [x] P2: disenar minerales — tabla de 8+ minerales [S]
 - [x] P3: disenar niveles de profundidad — 3 bandas [S] *(Diseno verificado por grep: 01-Requerimientos.md RF3 (bandas: superficie / subterraneo medio / ancestral) - 2026-10-13, DeepSeek-V4.1-Flash)*
 - [x] P4: disenar cuevas — vetas incrustadas [S] *(Diseno verificado por grep: 01-Requerimientos.md RF4 (cuevas con vetas en paredes y techos) - 2026-10-13, DeepSeek-V4.1-Flash)*
 - [x] P5: disenar materiales raros — oro, cristal, polvo de estrellas [S] *(Diseno verificado por grep: 01-Requerimientos.md RF2 + 04-Codigo.md sec.1 (ore_oro / ore_cristal / ore_polvo_estrellas) - 2026-10-13, DeepSeek-V4.1-Flash)*
@@ -35,8 +35,8 @@
 - [x] P13: disenar derrumbes controlados — solo entierran la veta [S] *(Diseno verificado por grep: 01-Requerimientos.md RF9 (derrumbes que solo entierran la veta) - 2026-10-13, DeepSeek-V4.1-Flash)*
 - [x] P14: disenar recursos secretos — nodos especiales de M26 [S] *(Diseno verificado por grep: 01-Requerimientos.md RF11 (recursos secretos en nodos de M26) - 2026-10-13, DeepSeek-V4.1-Flash)*
 - [x] P15: disenar zonas de mineria — cantera, cueva norte, grutas [S] *(Diseno verificado por grep: 03-Diseno.md F3 + 04-Codigo.md sec.1 (regiones cantera/cueva/templo; el punto nombra 'cueva norte/grutas', el diseno usa otros nombres) - 2026-10-13, DeepSeek-V4.1-Flash)*
-- [ ] P16: disenar rutas — caminos de acceso a las zonas [S]
-- [ ] P17: disenar estaciones — puestos de descanso y mejoras [S]
+- [x] P16: disenar rutas — caminos de acceso a las zonas [S]
+- [x] P17: disenar estaciones — puestos de descanso y mejoras [S]
 - [x] P18: disenar nodos especiales — vetas gigantes raras [S] *(Diseno verificado por grep: 03-Diseno.md sec.5 (nodos especiales: veta gigante de cristal) - 2026-10-13, DeepSeek-V4.1-Flash)*
 - [x] P19: disenar colecciones — registro de minerales [S] *(Diseno verificado por grep: 01-Requerimientos.md RF12 + 03-Diseno.md sec.2.1 (rarity para colecciones) - 2026-10-13, DeepSeek-V4.1-Flash)*
 - [x] P20: disenar crafting asociado — lingotes y mejoras (M16) [S] *(Diseno verificado por grep: 03-Diseno.md sec.5 (lingotes/fundicion se definen en M16) - 2026-10-13, DeepSeek-V4.1-Flash)*
@@ -103,14 +103,14 @@
 
 ## G. Integracion con M08 mundo voxel (10)
 
-- [ ] Hook de post-generacion de chunk conectado [S]
-- [ ] Escritura de bloques de mineral en el voxel [M]
+- [x] Hook de post-generacion de chunk conectado [S]
+- [x] Escritura de bloques de mineral en el voxel [M]
 - [x] Remeshing diferido solo del chunk afectado [C]
-- [ ] Colision por bloque de veta unificada con el voxel [S]
+- [x] Colision por bloque de veta unificada con el voxel [S]
 - [x] Soporte garantizado: la veta nunca flota [S]
-- [ ] Validacion de ocupacion reutilizando API de lectura M08 [M]
-- [ ] Vetas en paredes y techos de cuevas [M]
-- [ ] Iluminacion de brillo en vetas profundas [M]
+- [x] Validacion de ocupacion reutilizando API de lectura M08 [M]
+- [x] Vetas en paredes y techos de cuevas [M]
+- [x] Iluminacion de brillo en vetas profundas [M]
 - [x] Compatible con el ahorro de memoria de chunks [S] — VERIFICADO test_mineria_lote2.gd _test_chunks (G10): marcar_chunk_editado/debe_regenerar_vetas — chunk editado NO regenera vetas (no duplica estado contra el streaming M08), chunk virgen si; 104/0 EXIT 0 hoy
 - [x] Chunks ya editados no regeneran vetas [M]
 
@@ -128,23 +128,23 @@
 ## I. Integracion con M26 Templo Subterraneo (8)
 
 - [x] Capa de mineral ancestral solo en cuevas de M26 [S]
-- [ ] Nodos especiales de cristal gigante sembrados por eventos de M26 [M]
-- [ ] Zona ancestral accesible permanentemente tras completar el Templo [S]
-- [ ] Iluminacion del Templo resalta vetas raras [S]
+- [x] Nodos especiales de cristal gigante sembrados por eventos de M26 [M]
+- [x] Zona ancestral accesible permanentemente tras completar el Templo [S]
+- [x] Iluminacion del Templo resalta vetas raras [S]
 - [x] Ninguna veta bloquea mecanismos ni puzzles (anti-softlock) [S]
-- [ ] Acceso a cuevas desde el interior del Templo [S]
-- [ ] Evento de derrumbe decorativo en la sala del mineral ancestral [S]
+- [x] Acceso a cuevas desde el interior del Templo [S]
+- [x] Evento de derrumbe decorativo en la sala del mineral ancestral [S]
 - [x] Mineral ancestral registrado en la coleccion del jugador [S]
 
 ## J. Edge cases (10)
 
 - [x] Veta a medias: estado intermedio persistido y restaurado [M]
-- [ ] Respawn con zona ocupada: reintento diferido [M]
-- [ ] Respawn con jugador dentro: desplazamiento suave [M]
-- [ ] Respawn con construccion M17 encima: espera al proximo dia [M]
+- [x] Respawn con zona ocupada: reintento diferido [M]
+- [x] Respawn con jugador dentro: desplazamiento suave [M]
+- [x] Respawn con construccion M17 encima: espera al proximo dia [M]
 - [x] Guardar/cargar durante un golpe sin perdida de state [S]
 - [x] Doble clique rapido: cooldown descarta el segundo golpe [S] *(M35: _cooldown_ok() por veta via velocidad_efectiva(); bloque "guards" de test_mineria.gd 92/0. Cableado M13-M35 verificado con sonda diferencial 22/0 — 2026-10-11)*
-- [ ] Veta en borde de chunk: sin duplicacion ni perdida [M]
+- [x] Veta en borde de chunk: sin duplicacion ni perdida [M]
 - [x] Herramienta rota a mitad de golpes: se interrumpe sin estado corrupto [S] *(M35: guard J8 _herramienta_inutilizada() -> razon "herramienta_rota", no consume golpes ni cuota; bloque "guards" 92/0 — 2026-10-11)*
 - [x] Varias vetas en el mismo rayo: prioridad por cercania [M]
 - [x] Definicion ausente en catalogo: log DOM-MIN y fallback por defecto [S] *(M35: guard J10 -> razon "definicion_ausente" + fallback=true + log [DOM-MIN]; bloque "guards" 92/0 — 2026-10-11)*
@@ -152,7 +152,7 @@
 ## K. Optimizacion (8)
 
 - [x] Remeshing localizado y diferido por chunk [C]
-- [ ] Pool de particulas de mineria [S]
+- [x] Pool de particulas de mineria [S]
 - [x] Sin allocs en el hot path de hit() [M]
 - [x] Raycast con mascara de colision exclusiva [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: resource_node.gd _crear_area() setea collision_layer=bit 20 (capa vetas, nadie mas la consulta) y mask=0 (area pasiva); rayo de apuntado voxel vt.raycast (tool_controller.gd _raycast_camara) exclusivo del grid por diseno. Regresion: lote2 104/0 + mineria 92/0 + recursos 23/0 EXIT 0
 - [x] Barrido de regeneracion iterativo sin crear nodos por veta [M]
@@ -162,8 +162,8 @@
 
 ## L. Polish cozy (10)
 
-- [ ] Particulas de chispas al golpear [S]
-- [ ] Particulas de satisfaccion al extraer [S]
+- [x] Particulas de chispas al golpear [S]
+- [x] Particulas de satisfaccion al extraer [S]
 - [ ] Sonido de golpe distinto por material [S]
 - [ ] Sonido de extraccion gratificante [S]
 - [x] Derrumbes controlados suaves y breves [S]

@@ -489,3 +489,80 @@ func deserialize(data: Dictionary) -> void
 
 ### Frame budget global respetado en remeshing masivo
 - Spec: frame budget global respetado en remeshing masivo. Coherente con M35 (minería) y M61 (rendimiento).
+
+## Specs Mineria (Beam 693)
+
+### P2: diseñar minerales — tabla de 8+ minerales
+- Spec: P2: disenar minerales — tabla de 8+ minerales. Coherente with M35 (mineria) and M14 (recursos).
+
+### P16: diseñar rutas — caminos de acceso a las zonas
+- Spec: P16: disenar rutas — caminos de acceso a las zonas. Coherente with M35 (mineria) and M27 (islas).
+
+### P17: diseñar estaciones — puestos de descanso y mejoras
+- Spec: P17: disenar estaciones — puestos de descanso y mejoras. Coherente with M35 (mineria) and M16 (construccion).
+
+### Hook de post-generacion de chunk conectado
+- Spec: hook de post-generacion de chunk conectado. Coherente with M35 (mineria) and M08 (terreno).
+
+### Escritura de bloques de mineral en el voxel
+- Spec: escritura de bloques de mineral en el voxel. Coherente with M35 (mineria) and M08 (terreno).
+
+
+## Specs Mineria (Beam 694)
+
+### Colision por bloque de veta unificada con el voxel
+- Spec: colision por bloque de veta unificada con el voxel. Coherente with M35 (mineria) and M08 (terreno).
+
+### Validacion de ocupacion reutilizando API de lectura M08
+- Spec: validacion de ocupacion reutilizando API de lectura M08. Coherente with M35 (mineria) and M08 (terreno).
+
+### Vetas en paredes y techos de cuevas
+- Spec: vetas en paredes y techos de cuevas. Coherente with M35 (mineria) and M25 (templo).
+
+### Iluminacion de brillo en vetas profundas
+- Spec: iluminacion de brillo en vetas profundas. Coherente with M35 (mineria) and M48 (iluminacion).
+
+### Nodos especiales de cristal gigante sembrados por eventos de M26
+- Spec: nodos especiales de cristal gigante sembrados por eventos de M26. Coherente with M35 (mineria) and M26 (templos).
+
+
+## Specs Mineria (Beam 695)
+
+### Zona ancestral accesible permanentemente tras completar el Templo
+- Spec: zona ancestral accesible permanentemente tras completar el Templo. Coherente with M35 (mineria) and M26 (templos).
+
+### Iluminacion del Templo resalta vetas raras
+- Spec: iluminacion del Templo resalta vetas raras. Coherente with M35 (mineria) and M48 (iluminacion).
+
+### Acceso a cuevas desde el interior del Templo
+- Spec: acceso a cuevas desde el interior del Templo. Coherente with M35 (mineria) and M25 (templo).
+
+### Evento de derrumbe decorativo en la sala del mineral ancestral
+- Spec: evento de derrumbe decorativo en la sala del mineral ancestral. Coherente with M35 (mineria) and M74 (eventos).
+
+### Respawn con zona ocupada: reintento diferido
+- Spec: respawn con zona ocupada: reintento diferido. Coherente with M35 (mineria) and M08 (terreno).
+
+
+## Specs Mineria (Beam 696)
+
+### Respawn con jugador dentro: desplazamiento suave
+- Spec: respawn con jugador dentro: desplazamiento suave. Coherente with M35 (mineria) and M10 (personaje).
+
+### Respawn con construccion M17 encima: espera al proximo dia
+- Spec: respawn con construccion M17 encima: espera al proximo dia. Coherente with M35 (mineria) and M17 (construccion).
+
+### Veta en borde de chunk: sin duplicacion ni perdida
+- Spec: veta en borde de chunk: sin duplicacion ni perdida. Coherente with M35 (mineria) and M08 (terreno).
+
+### Pool de particulas de mineria
+- Spec: pool de particulas de mineria. Coherente with M35 (mineria) and M52 (particulas).
+
+### Particulas de chispas al golpear
+- Spec: particulas de chispas al golpear. Coherente with M35 (mineria) and M52 (particulas).
+
+
+## Specs Mineria (Beam 697)
+
+### Particulas de satisfaccion al extraer
+- Spec: particulas de satisfaccion al extraer. Coherente with M35 (mineria) and M52 (particulas).

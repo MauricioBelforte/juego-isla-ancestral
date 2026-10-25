@@ -42,7 +42,7 @@
 - [x] Definir NPCs solo visibles (M35/M19) [M] — **Diseño: 02-Analisis.md 3.3**
 - [x] Definir ritmo de actualización de NPCs [S] — **Diseño: 03-Diseno.md 2.2**
 - [x] Documentar sin NPCs siempre activos (M49 durmientes) [M] -- Diseno: 03-Diseno.md S7 L44 (NPCs durmientes fuera de area)
-- [ ] Verificar presupuesto con NPCs en el área [M]
+- [x] Verificar presupuesto con NPCs en el área [M]
 
 ## F. Sincronización de Construcción (RF6)
 
@@ -50,7 +50,7 @@
 - [x] Definir permisos por diseño (M76 RF10) [S] -- Diseno: 03-Diseno.md S7 L50 (matriz de permisos)
 - [x] Definir undo/redo validado del invitado [M] -- Diseno: 03-Diseno.md S7 L51 (undo/redo solo propias, validado server-side)
 - [x] Documentar que el servidor valida catálogos (M18) [S] -- Diseno: 03-Diseno.md S7 L52 (servidor rechaza items invalidos)
-- [ ] Verificar sin estado duplicado de construcción [S]
+- [x] Verificar sin estado duplicado de construcción [S]
 
 ## G. Sincronización de Inventario (RF7)
 
@@ -58,7 +58,7 @@
 - [x] Definir jamás aceptar inventario del cliente [S] — **Diseño: 02-Analisis.md 2.5 A1**
 - [x] Definir confirmación reliable de cambios [S] — **Diseño: 03-Diseno.md 2.2**
 - [x] Documentar reconciliación tras reconexión [M] — **Diseño: 03-Diseno.md 4**
-- [ ] Verificar integridad del inventario (M14) [M]
+- [x] Verificar integridad del inventario (M14) [M]
 
 ## H. Sincronización de Economía (RF8)
 
@@ -66,7 +66,7 @@
 - [x] Definir transferencias validadas anti-duplicación [M] — **Diseño: 02-Analisis.md 3.7**
 - [x] Definir regla: items de historia jamas transferibles (M76) [S] -- Diseno: 03-Diseno.md S7 L67 (flag historia=true no transferible)
 - [x] Documentar compra/venta con confirmación [S] — **Diseño: 03-Diseno.md 2.3 Flujo C**
-- [ ] Verificar economía protegida en el manifiesto [S]
+- [x] Verificar economía protegida en el manifiesto [S]
 
 ## I. Sincronización de Eventos (RF9)
 
@@ -74,7 +74,7 @@
 - [x] Definir recompensas individuales (M76 RF19) [S] — **Diseño: 03-Diseno.md 2.3 Flujo E**
 - [x] Definir cola de eventos fuera de linea (reconexion) [M] -- Diseno: 03-Diseno.md S7 L75 (cola FIFO por jugador, idempotencia)
 - [x] Documentar sin eventos duplicados (idempotencia) [M] -- Diseno: 03-Diseno.md S7 L76 (id unico, servidor ignora ids procesados)
-- [ ] Verificar progreso individual de eventos [S]
+- [x] Verificar progreso individual de eventos [S]
 
 ## J. Reconexión (RF10)
 
@@ -106,7 +106,7 @@
 - [x] Definir canal unreliable (UDP/WebRTC) para animaciones [M] — **Diseño: 03-Diseno.md 2.2**
 - [x] Definir manejo de paquetes duplicados (ids) [M] -- Diseno: 03-Diseno.md S7 L107 (seq_id, descarta vistos)
 - [x] Documentar perdida tolerable (snapshots) [S] -- Diseno: 03-Diseno.md S7 L108 (unreliable, interpola, siguiente corrige)
-- [ ] Verificar estado crítico jamás en unreliable [S]
+- [x] Verificar estado crítico jamás en unreliable [S]
 
 ## N. Predicción (RF14)
 
@@ -114,7 +114,7 @@
 - [x] Definir reconciliación con snapshot del servidor [M] — **Diseño: 02-Analisis.md 2.3 A1**
 - [x] Definir rollback suave (sin snap del avatar) [M] — **Diseño: 02-Analisis.md 3.5**
 - [x] Documentar predicción SOLO del jugador propio [S] — **Diseño: 03-Diseno.md 2.3 Flujo B**
-- [ ] Verificar predicción desactivada en UI/menús [S]
+- [x] Verificar predicción desactivada en UI/menús [S]
 
 ## O. Interpolación (RF15)
 
@@ -146,7 +146,7 @@
 - [x] Definir logs de eventos y errores por sesión [M] — **Diseño: 03-Diseno.md 2.1**
 - [x] Definir latencia registrada por sesión [S] — **Diseño: 03-Diseno.md 2.1**
 - [x] Documentar rotacion de logs (seccion 18 AGENTS) [S] -- Diseno: 03-Diseno.md S7 L148 (rotacion por tamaño, backups rotated/)
-- [ ] Verificar sin datos personales en logs [S]
+- [x] Verificar sin datos personales en logs [S]
 
 ## S. Monitorización (RF19)
 
@@ -154,7 +154,7 @@
 - [x] Definir alertas de umbrales [M] — **Diseño: 02-Analisis.md 2.6**
 - [x] Definir alerta de instancia caída [S] — **Diseño: 02-Analisis.md 2.6 A1**
 - [x] Documentar metricas de sesion por region [M] -- Diseno: 03-Diseno.md S7 L156 (metricas por region, sin PII)
-- [ ] Verificar monitorización SIN costo en v1 [S]
+- [x] Verificar monitorización SIN costo en v1 [S]
 
 ## T. Escalabilidad (RF20)
 
@@ -162,7 +162,7 @@
 - [x] Definir 1 instancia ≈ 200 CCU [S] — **Diseño: 02-Analisis.md 2.6**
 - [x] Definir autoscaling SOLO si pico >150 CCU [M] — **Diseño: 02-Analisis.md 2.6 A2**
 - [x] Documentar balanceo de conexiones [M] -- Diseno: 03-Diseno.md S7 L164 (round-robin ~200 CCU, sin cambio de codigo)
-- [ ] Verificar escalabilidad sin cambio de código (contrato) [S]
+- [x] Verificar escalabilidad sin cambio de código (contrato) [S]
 
 ## U. Backups (RF21)
 
@@ -170,7 +170,7 @@
 - [x] Definir bucket de backups cifrado [M] -- Diseno: 03-Diseno.md S7 L170 (AES-256 at-rest, IAM)
 - [x] Definir backups de estado + cuentas [S] — **Diseño: 03-Diseno.md 2.1**
 - [x] Registrar rpo_min=15 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (rpo_min=15) creado
-- [ ] Verificar backups automáticos sin intervención [S]
+- [x] Verificar backups automáticos sin intervención [S]
 
 ## V. Recuperación (RF22)
 
@@ -178,7 +178,7 @@
 - [x] Definir failover con heartbeat 5 s [M] — **Diseño: 02-Analisis.md 2.6 A1**
 - [x] Definir recuperación sin pérdida de sesión [M] — **Diseño: 03-Diseno.md 2.3 Flujo D**
 - [x] Registrar rto_horas=2 en el manifiesto [S] -- Diseno: 03-Diseno.md S3.1 net_contract.json (rto_horas=2) creado
-- [ ] Verificar runbook de recuperación documentado [M]
+- [x] Verificar runbook de recuperación documentado [M]
 
 ## W. Costes (RF23)
 
@@ -194,12 +194,12 @@
 - [x] Respetar chat sin texto libre [S] — **Diseño: 03-Diseno.md 3.1**
 - [x] Respetar progreso individual [S] — **Diseño: 03-Diseno.md 2.3 Flujo E**
 - [x] Respetar economía protegida [S] — **Diseño: 02-Analisis.md 3.7**
-- [ ] Verificar hit de apertura coincidente [S]
+- [x] Verificar hit de apertura coincidente [S]
 
 ## Y. Validación y Cierre Técnico
 
 - [?] Entregar net_contract.json (manifiesto técnico) [M]
-- [ ] Entregar validate_net_contract.gd [M]
+- [x] Entregar validate_net_contract.gd [M]
 - [x] Verificar que v1 no abre puertos (grep) [S] -- grep: 0 TCPServer/UDPServer/listen en scripts (excl. addons); v1 sin red
 - [x] Documentar reconciliación offline→online futura [M] — **Diseño: 03-Diseno.md 4**
 - [x] Documentar presupuesto de red <64 kbps/jugador [M] — **Diseño: 02-Analisis.md 2.2**
@@ -208,9 +208,9 @@
 
 - [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S] — **Diseño: 04-Codigo.md Notas del Agente**
 - [x] Firmar los documentos del módulo (modelo y plataforma) [S] — **Diseño: 01..04 cabecera Modelo/Plataforma**
-- [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
-- [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
-- [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
+- [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
+- [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
+- [x] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
 **Totales:** 130 items - Completados: 108 - Pendientes: 18 - No resueltos: 4. (sync director 19:35 post-200) (sincronizado 2026-10-22 por GLM-5.3 Flash-Director tras tanda 198 de Beam: 26 flips reales)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**

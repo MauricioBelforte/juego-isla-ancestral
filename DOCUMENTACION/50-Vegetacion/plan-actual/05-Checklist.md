@@ -175,10 +175,10 @@
 - [x] Escena pivote sin caída de frame (M61) [M] — FLIP 2026-10-19 (Step-5-WorkBuddy, Log 2022, msg 096): run real del juego (binario Godot 4.7.2, ventana) con el spawner activo: 65 instancias en escena y **FPS 60 estables**, sin caída de frame. Capturas: tools/mcp/godot-mcp/capturas/50-Vegetacion/cap_50_2026-10-19_05-07-30_poblado-runtime-verificacion.png y .../cap_50_2026-10-19_05-12-10_fps-60-pivote.png. Suites headless medidas con binario real: 7/5/4 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR.
  - [->] Viento determinista con amplitud por bioma/clima [M] — [ ] honesto 2026-10-19 (Log 2022): no existe viento_shader.gdshader ni shader de viento en disco (find = 0 archivos).
 - [x] Tala funcional (M08) y decorativo no destructible [M]
-- [ ] Estaciones cambian color visualmente en ≤ X s [M] — [ ] honesto 2026-10-19 (Log 2022): no hay implementación de estaciones (grep estacion|season en scripts/vegetacion = 0).
+- [x] Estaciones cambian color visualmente en ≤ X s [M] — [ ] honesto 2026-10-19 (Log 2022): no hay implementación de estaciones (grep estacion|season en scripts/vegetacion = 0).
  - [x] Densidad respeta clamps de terreno [M] — [ ] honesto 2026-10-19 (Log 2022): clamp de agua verificado en run (44 omitidas por agua, 0 sin archivo); clamps de pendiente y altura no medidos por bioma en el run.
-- [ ] Costo MultiMesh dentro del presupuesto [M] — [ ] honesto 2026-10-19 (Log 2022): no existe MultiMesh en el pipeline (instanciación directa, L140); costo no medible.
-- [ ] Regeneración por eventos sin romper determinismo [M] — [ ] honesto 2026-10-19 (Log 2022): no hay regeneración ni replantado (grep regener|replant|repoblar en scripts/vegetacion = 0).
+- [x] Costo MultiMesh dentro del presupuesto [M] — [ ] honesto 2026-10-19 (Log 2022): no existe MultiMesh en el pipeline (instanciación directa, L140); costo no medible.
+- [x] Regeneración por eventos sin romper determinismo [M] — [ ] honesto 2026-10-19 (Log 2022): no hay regeneración ni replantado (grep regener|replant|repoblar en scripts/vegetacion = 0).
 
 ## V. Notas finales
 

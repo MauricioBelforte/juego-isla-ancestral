@@ -122,3 +122,26 @@ ui_ms = 1.5
 - Instrumentación OFF en builds de producción (solo dev/profiling) — overhead cero en release.
 - Bench scene corre solo en CI/dev — jamás en el juego del jugador.
 - La norma NO impone monitoreo en runtime para el jugador (cero coste).
+
+## Specs Rendimiento (Beam 709)
+
+### Aplicar a vegetacion (M50)
+- Spec: aplicar a vegetacion (M50). Coherente with M61 (rendimiento) and M50 (vegetacion).
+
+### Aplicar a rocas y fragmentos (M08)
+- Spec: aplicar a rocas y fragmentos (M08). Coherente with M61 (rendimiento) and M08 (terreno).
+
+### Aplicar a particulas de larga vida
+- Spec: aplicar a particulas de larga vida. Coherente with M61 (rendimiento) and M52 (particulas).
+
+### Pooling de particulas (M52)
+- Spec: pooling de particulas (M52). Coherente with M61 (rendimiento) and M52 (particulas).
+
+### Pooling de fauna y peces (M35/M34)
+- Spec: pooling de fauna y peces (M35/M34). Coherente with M61 (rendimiento) and M35/M34 (fauna/pesca).
+
+### Pooling de efectos de herramientas
+- Spec: pooling de efectos de herramientas. Coherente with M61 (rendimiento) and M13 (herramientas).
+
+### Pooling de buffers de remesh
+- Spec: pooling de buffers de remesh. Coherente with M61 (rendimiento) and M08 (terreno).

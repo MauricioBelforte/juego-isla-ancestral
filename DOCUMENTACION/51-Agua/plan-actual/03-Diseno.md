@@ -127,3 +127,56 @@ jugador activa palanca de compuerta (M24)
 
 ### Reflejo de escena real (SSR/planos reflejo)
 - Spec: reflejo de escena real (SSR/planos reflejo) — necesita presupuesto de rendering, próxima iteración. Coherente con M51 (agua) y M45/M47/M49 (shaders/iluminación).
+
+## Specs Agua (Beam 688)
+
+### Definir olas GPU con fase fija por cuerpo
+- Spec: definir olas GPU con fase fija por cuerpo. Coherente with M51 (agua) and M47 (shaders).
+
+### Definir espuma costera (altura de ola vs costa)
+- Spec: definir espuma costera (altura de ola vs costa). Coherente with M51 (agua) and M47 (shaders).
+
+### Definir transparencia con depth_prepass
+- Spec: definir transparencia con depth_prepass. Coherente with M51 (agua) and M47 (shaders).
+
+### Definir ReflectionProbe <= 2 por escena
+- Spec: definir ReflectionProbe <= 2 por escena. Coherente with M51 (agua) and M49 (iluminacion).
+
+### Definir partículas en base (M52)
+- Spec: definir particulas en base (M52). Coherente with M51 (agua) and M52 (particulas).
+
+
+## Specs Agua (Beam 689)
+
+### Definir olas por bioma/franja (M42)
+- Spec: definir olas por bioma/franja (M42). Coherente with M51 (agua) and M42 (sonido ambiental).
+
+### Definir cascada en loop
+- Spec: definir cascada en loop. Coherente with M51 (agua) and M42 (sonido ambiental).
+
+### Definir salpicaduras de pies
+- Spec: definir salpicaduras de pies. Coherente with M51 (agua) and M52 (particulas).
+
+### Definir rocio de cascada
+- Spec: definir rocio de cascada. Coherente with M51 (agua) and M52 (particulas).
+
+### Definir gotas al salir del agua
+- Spec: definir gotas al salir del agua. Coherente with M51 (agua) and M52 (particulas).
+
+
+## Specs Agua (Beam 690)
+
+### Nivel de mar consistente entre chunks
+- Spec: nivel de mar consistente entre chunks. Coherente with M51 (agua) and M08 (terreno).
+
+### Ocean con olas/espuma dentro del presupuesto
+- Spec: ocean con olas/espuma dentro del presupuesto. Coherente with M51 (agua) and M61 (rendimiento).
+
+### Hielo solo estacional y sin softlock
+- Spec: hielo solo estacional y sin softlock. Coherente with M51 (agua) and M32 (clima).
+
+
+## Specs Agua (Beam 691)
+
+### Interaccion de olas con la fauna (barcos/estaciones)
+- Spec: interaccion de olas con la fauna (barcos/estaciones). Coherente with M51 (agua) and M36 (fauna).

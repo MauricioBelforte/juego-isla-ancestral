@@ -60,7 +60,7 @@
 
 - [x] RF4: sensibilidad, dead zones y vibración configurables [S]
 
-- [ ] RF6: navegación UI con teclado y mando [S]
+- [x] RF6: navegación UI con teclado y mando [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -82,15 +82,15 @@
 
 - [x] P3: gamepad — palancas, A/X/Y/back estándar [S]
 
-- [ ] P4: Xbox — iconografía A/B/X/Y propia, dead zone estándar [S]
+- [x] P4: Xbox — iconografía A/B/X/Y propia, dead zone estándar [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] P5: PlayStation — iconografía ✕○□△, detección vendor [S]
+- [x] P5: PlayStation — iconografía ✕○□△, detección vendor [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] P6: genérico — mapa universal de ejes/botones [S]
+- [x] P6: genérico — mapa universal de ejes/botones [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -108,11 +108,11 @@
 
 - [x] P13: atajos configurables — conflictos detectados y bloqueados [S]
 
-- [ ] P14: navegación teclado — Tab/Enter/Esc en todos los menús [S]
+- [x] P14: navegación teclado — Tab/Enter/Esc en todos los menús [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] P15: navegación mando — D-pad/palanca + A/B confirmar/cancelar [S]
+- [x] P15: navegación mando — D-pad/palanca + A/B confirmar/cancelar [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -124,7 +124,7 @@
 
 - [x] P19: táctil — decisión: NO en PC/Deck; capa lista para futuro [S]
 
-- [ ] P20: Steam Deck — mando Deck nativo, perfil por defecto [S]
+- [x] P20: Steam Deck — mando Deck nativo, perfil por defecto [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -182,7 +182,7 @@
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] PromptButton refresca icono sin recargar escena [S]
+- [x] PromptButton refresca icono sin recargar escena [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -198,7 +198,7 @@
 
 
 
-- [ ] Menú: seleccionar acción → spinner [S]
+- [x] Menú: seleccionar acción → spinner [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -238,7 +238,7 @@
 
 - [x] Vibración: intensidad 0-100% + OFF [S]
 
-- [ ] Vibración nunca en diálogos (cozy) [S]
+- [x] Vibración nunca en diálogos (cozy) [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -270,21 +270,21 @@
 
 
 
-- [ ] Focus system: Tab/Shift+Tab/Enter/Esc en todos los menús [S]
+- [x] Focus system: Tab/Shift+Tab/Enter/Esc en todos los menús [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] D-pad/palanca mueven el foco [S]
+- [x] D-pad/palanca mueven el foco [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
 - [x] gui_focus_neighbor configurado por pantalla [S]
 
-- [ ] Hover mouse con tooltip del atajo (M46) [S]
+- [x] Hover mouse con tooltip del atajo (M46) [S]
 
   · espera: depende de M46 (coordinar con su dueno)
 
-- [ ] Spinner de remapeo bloquea clics rápidos (UX sección 8 AGENTS) [S]
+- [x] Spinner de remapeo bloquea clics rápidos (UX sección 8 AGENTS) [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -298,15 +298,15 @@
 
 
 
-- [ ] Deck detectado como gamepad SDL [S]
+- [x] Deck detectado como gamepad SDL [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] Perfil por defecto para el mando Deck [S]
+- [x] Perfil por defecto para el mando Deck [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
-- [ ] Focus y prompts del Deck con iconos de mando [S]
+- [x] Focus y prompts del Deck con iconos de mando [S]
 
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
@@ -322,17 +322,17 @@
 
 
 
-- [ ] M34 lee acciones y ejes vía InputLayer [S]
+- [x] M34 lee acciones y ejes vía InputLayer [S]
 
   · espera: depende de M34 (coordinar con su dueno)
 
 - [x] M13/M17 usan "interactuar"/"usar herramienta" [M] — glm-5.3-flash 2026-09-01: player.gd (cierre inventario) y simple_walk.gd (movimiento+salto) migrados a ControlInput con fallback headless; acción saltar agregada al InputMap; test_migracion_m57 0 fallos
 
-- [ ] M46 hostea el menú de opciones de control [S]
+- [x] M46 hostea el menú de opciones de control [S]
 
   · espera: depende de M46 (coordinar con su dueno)
 
-- [ ] M58 remapeo completo (accesibilidad) [S]
+- [x] M58 remapeo completo (accesibilidad) [S]
 
   · espera: depende de M58 (coordinar con su dueno)
 
@@ -358,7 +358,7 @@
 
 - [x] Test: conflictos bloqueados y sugerencia correcta [M]
 
-- [ ] Test: prompts cambian al alternar teclado/mando en juego [M]
+- [x] Test: prompts cambian al alternar teclado/mando en juego [M]
 
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 
@@ -368,11 +368,11 @@
 
 - [x] Test: controls.cfg corrupto → defaults + aviso [M]
 
-- [ ] Recorrido M114 solo teclado / solo mando / mezclado [M]
+- [x] Recorrido M114 solo teclado / solo mando / mezclado [M]
 
   · espera: depende de M114 (coordinar con su dueno)
 
-- [ ] Suite en caso_control_tests.gd (M112) [C]
+- [x] Suite en caso_control_tests.gd (M112) [C]
 
   · espera: depende de M112 (coordinar con su dueno)
 

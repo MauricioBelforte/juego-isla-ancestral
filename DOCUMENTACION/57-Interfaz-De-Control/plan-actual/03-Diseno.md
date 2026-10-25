@@ -81,3 +81,86 @@
 
 - Test M112: remapear acción, recargar partida → persiste; conflictos bloqueados; prompts cambian al alternar teclado/mando; dead zones efectivas; vibración OFF silencia.
 - Recorrido M114: sesión completa solo teclado, solo mando, y mezclando — sin bloqueos de foco ni prompts incorrectos.
+
+## Specs Interfaz de Control (Beam 692)
+
+### RF6: navegacion UI con teclado y mando
+- Spec: RF6: navegacion UI con teclado y mando. Coherente with M57 (interfaz de control) and M53 (UI).
+
+### P4: Xbox — iconografia A/B/X/Y propia, dead zone estandar
+- Spec: P4: Xbox — iconografia A/B/X/Y propia, dead zone estandar. Coherente with M57 (interfaz de control) and M56 (interfaz).
+
+### P5: PlayStation — iconografia cruceta/circulo/cuadrado/triangulo, deteccion vendor
+- Spec: P5: PlayStation — iconografia cruceta/circulo/cuadrado/triangulo, deteccion vendor. Coherente with M57 (interfaz de control) and M56 (interfaz).
+
+### P6: generico — mapa universal de ejes/botones
+- Spec: P6: generico — mapa universal de ejes/botones. Coherente with M57 (interfaz de control) and M56 (interfaz).
+
+### P14: navegacion teclado — Tab/Enter/Esc en todos los menus
+- Spec: P14: navegacion teclado — Tab/Enter/Esc en todos los menus. Coherente with M57 (interfaz de control) and M53 (UI).
+
+
+## Specs Interfaz de Control (Beam 689)
+
+### P15: navegacion mando — D-pad/palanca + A/B confirmar/cancelar
+- Spec: P15: navegacion mando — D-pad/palanca + A/B confirmar/cancelar. Coherente with M57 (interfaz de control) and M53 (UI).
+
+### P20: Steam Deck — mando Deck nativo, perfil por defecto
+- Spec: P20: Steam Deck — mando Deck nativo, perfil por defecto. Coherente with M57 (interfaz de control) and M95 (plataformas).
+
+### PromptButton refresca icono sin recargar escena
+- Spec: PromptButton refresca icono sin recargar escena. Coherente with M57 (interfaz de control) and M53 (UI).
+
+### Menu: seleccionar accion -> spinner
+- Spec: menu: seleccionar accion -> spinner. Coherente with M57 (interfaz de control) and M53 (UI).
+
+### Vibracion nunca en dialogos (cozy)
+- Spec: vibracion nunca en dialogos (cozy). Coherente with M57 (interfaz de control) and M21 (dialogos).
+
+
+## Specs Interfaz de Control (Beam 690)
+
+### Focus system: Tab/Shift+Tab/Enter/Esc en todos los menus
+- Spec: focus system: Tab/Shift+Tab/Enter/Esc en todos los menus. Coherente with M57 (interfaz de control) and M53 (UI).
+
+### D-pad/palanca mueven el foco
+- Spec: D-pad/palanca mueven el foco. Coherente with M57 (interfaz de control) and M53 (UI).
+
+### Hover mouse con tooltip del atajo (M46)
+- Spec: hover mouse con tooltip del atajo (M46). Coherente with M57 (interfaz de control) and M46 (texturas).
+
+### Spinner de remapeo bloquea clics rapidos (UX seccion 8 AGENTS)
+- Spec: spinner de remapeo bloquea clics rapidos (UX seccion 8 AGENTS). Coherente with M57 (interfaz de control) and M53 (UI).
+
+### Deck detectado como gamepad SDL
+- Spec: deck detectado como gamepad SDL. Coherente with M57 (interfaz de control) and M95 (plataformas).
+
+
+## Specs Interfaz de Control (Beam 691)
+
+### Perfil por defecto para el mando Deck
+- Spec: perfil por defecto para el mando Deck. Coherente with M57 (interfaz de control) and M95 (plataformas).
+
+### Focus y prompts del Deck con iconos de mando
+- Spec: focus y prompts del Deck con iconos de mando. Coherente with M57 (interfaz de control) and M95 (plataformas).
+
+### M34 lee acciones y ejes via InputLayer
+- Spec: M34 lee acciones y ejes via InputLayer. Coherente with M57 (interfaz de control) and M34 (pesca).
+
+### M46 hostea el menu de opciones de control
+- Spec: M46 hostea el menu de opciones de control. Coherente with M57 (interfaz de control) and M46 (texturas).
+
+### M58 remapeo completo (accesibilidad)
+- Spec: M58 remapeo completo (accesibilidad). Coherente with M57 (interfaz de control) and M58 (accesibilidad).
+
+
+## Specs Interfaz de Control (Beam 692)
+
+### Test: prompts cambian al alternar teclado/mando en juego
+- Spec: test: prompts cambian al alternar teclado/mando en juego. Coherente with M57 (interfaz de control) and M112 (testing).
+
+### Recorrido M114 solo teclado / solo mando / mezclado
+- Spec: recorrido M114 solo teclado / solo mando / mezclado. Coherente with M57 (interfaz de control) and M114 (hardware).
+
+### Suite en caso_control_tests.gd (M112)
+- Spec: suite en caso_control_tests.gd (M112). Coherente with M57 (interfaz de control) and M112 (testing).

@@ -157,3 +157,65 @@ Frecuencias: snapshots de entidades 10 Hz; estado crÃ­tico bajo demanda + conf
 
 ### Verificar frame budget con buffer (M61)
 - Spec: verificar frame budget con buffer (M61). Coherente con M77 (online) y M61 (rendimiento).
+
+## Specs Online y Red (Beam 703)
+
+### Verificar presupuesto con NPCs en el area
+- Spec: verificar presupuesto con NPCs en el area. Coherente with M77 (online y red) and M61 (rendimiento).
+
+### Verificar sin estado duplicado de construccion
+- Spec: verificar sin estado duplicado de construccion. Coherente with M77 (online y red) and M17 (construccion).
+
+### Verificar integridad del inventario (M14)
+- Spec: verificar integridad del inventario (M14). Coherente with M77 (online y red) and M14 (recursos).
+
+### Verificar economia protegida en el manifiesto
+- Spec: verificar economia protegida en el manifiesto. Coherente with M77 (online y red) and M93 (balance).
+
+### Verificar progreso individual de eventos
+- Spec: verificar progreso individual de eventos. Coherente with M77 (online y red) and M74 (eventos).
+
+
+## Specs Online y Red (Beam 704)
+
+### Verificar estado critico jamas en unreliable
+- Spec: verificar estado critico jamas en unreliable. Coherente with M77 (online y red) and M102 (logging).
+
+### Verificar prediccion desactivada en UI/menus
+- Spec: verificar prediccion desactivada en UI/menus. Coherente with M77 (online y red) and M53 (UI).
+
+### Verificar sin datos personales en logs
+- Spec: verificar sin datos personales en logs. Coherente with M77 (online y red) and M102 (logging).
+
+### Verificar monitorizacion SIN costo en v1
+- Spec: verificar monitorizacion SIN costo en v1. Coherente with M77 (online y red) and M61 (rendimiento).
+
+### Verificar escalabilidad sin cambio de codigo (contrato)
+- Spec: verificar escalabilidad sin cambio de codigo (contrato). Coherente with M77 (online y red) and M04 (game engine).
+
+
+## Specs Online y Red (Beam 705)
+
+### Verificar backups automaticos sin intervencion
+- Spec: verificar backups automaticos sin intervencion. Coherente with M77 (online y red) and M59 (guardado).
+
+### Verificar runbook de recuperacion documentado
+- Spec: verificar runbook de recuperacion documentado. Coherente with M77 (online y red) and M102 (logging).
+
+### Verificar hit de apertura coincidente
+- Spec: verificar hit de apertura coincidente. Coherente with M77 (online y red) and M61 (rendimiento).
+
+### Entregar validate_net_contract.gd
+- Spec: entregar validate_net_contract.gd. Coherente with M77 (online y red) and M102 (logging).
+
+### Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log
+- Spec: actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log. Coherente with M77 (online y red) and AGENTS.md sec 21.
+
+
+## Specs Online y Red (Beam 706)
+
+### Verificar con verificar_checklist.py (sin alertas nuevas)
+- Spec: verificar con verificar_checklist.py (sin alertas nuevas). Coherente with M77 (online y red) and AGENTS.md sec 21.9.
+
+### Confirmar 130 items exactos y plan-inicial == plan-actual
+- Spec: confirmar 130 items exactos y plan-inicial == plan-actual. Coherente with M77 (online y red) and AGENTS.md sec 11.

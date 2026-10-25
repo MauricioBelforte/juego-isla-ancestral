@@ -81,3 +81,17 @@ Barra = (Σ pesos completados) / (Σ pesos totales encolados) × 100. Piso 2% mi
 - Test M112: barra real (pesos correctos), precarga sin huecos, LRU libera memoria (Memory Profiler), delta < 50 ms.
 - Test movimiento: teleport + Gran Vapor + buceo (subterráneo) sin chunks vacíos.
 - Deck: presupuesto 2048 chunks, textures comprimidas (M47 alineado).
+
+## Specs Cargas y Streaming (Beam 719)
+
+### RF4+RF5: NPC, audio, texturas, shaders + precalentamiento
+- Spec: RF4+RF5: NPC, audio, texturas, shaders + precalentamiento. Precalentamiento hecho (H); los 4 tipos existen como tipos de cola pero su poblado real es de M08/M42/M47. Coherente with M63 (cargas y streaming) and M08/M42/M47.
+
+### P3: chunks cercanos — radio R=3, max 5 en movimiento rapido
+- Spec: P3: chunks cercanos — radio R=3, max 5 en movimiento rapido. El radio/limite reales son de M08. Coherente with M63 (cargas y streaming) and M08 (terreno).
+
+### P5: NPCs necesarios — instanciar al entrar, pausar al salir
+- Spec: P5: NPCs necesarios — instanciar al entrar, pausar al salir. Dueno M15/M16 (NPC). Coherente with M63 (cargas y streaming) and M18 (NPC).
+
+### P8: shaders — precalentamiento + cache de variantes
+- Spec: P8: shaders — precalentamiento + cache de variantes. Precarga de shaders hecha (H); cache de variantes es de M47/render. Coherente with M63 (cargas y streaming) and M47 (shaders).

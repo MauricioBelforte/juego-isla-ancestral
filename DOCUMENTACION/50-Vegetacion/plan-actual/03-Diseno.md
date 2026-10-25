@@ -269,3 +269,15 @@ y la fórmula, no reescribe el shader ajeno.
   inyección de error de runtime (nombró el bloque C, 32 < 35, EXIT 1, sin colgarse).
 - `scripts/vegetacion/auditar_presupuesto_m50.py` — suite `--selftest` **27 checks / 0 fallos
   / EXIT 0 ×3**, probada **en rojo** neutralizando el evaluador (7 fallos, EXIT 1).
+
+
+## Specs Vegetacion (Beam 718)
+
+### Estaciones cambian color visualmente en <= X s
+- Spec: estaciones cambian color visualmente en <= X s. [ ] honesto 2026-10-19 (Log 2022): no hay implementacion de estaciones (grep estacion\|season en scripts/vegetacion = 0). Coherente with M50 (vegetacion) and M31 (clima).
+
+### Costo MultiMesh dentro del presupuesto
+- Spec: costo MultiMesh dentro del presupuesto. [ ] honesto 2026-10-19: no existe MultiMesh en el pipeline (instanciacion directa, L140); costo no medible. Coherente with M50 (vegetacion) and M61 (rendimiento).
+
+### Regeneracion por eventos sin romper determinismo
+- Spec: regeneracion por eventos sin romper determinismo. [ ] honesto 2026-10-19: no hay regeneracion ni replantado (grep regener\|replant\|repoblar en scripts/vegetacion = 0). Coherente with M50 (vegetacion) and M61 (rendimiento).

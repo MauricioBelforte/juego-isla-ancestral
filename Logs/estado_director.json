@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-25T20:58 (acuses 230/398/277 + M23 data-muerta + 2 sellos)",
+ "ultimo_update": "2026-10-25T23:00 (A + G -> T137 verificados=73)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -818,7 +818,27 @@
     "T114",
     "T117",
     "T116",
-    "T115"
+    "T115",
+    "T123",
+    "T122",
+    "T121",
+    "T120",
+    "T119",
+    "T118",
+    "T124",
+    "T125",
+    "T126",
+    "T127",
+    "T128",
+    "T129",
+    "T130",
+    "T131",
+    "T132",
+    "T133",
+    "T134",
+    "T135",
+    "T136",
+    "T137"
    ],
    "pendientes_recientes_por_verificar": [
     "T060",
@@ -883,7 +903,7 @@
     "T001"
    ],
    "historico_T001_T075": "reconciliar a NIVEL MODULO (no por T): sample §21.8.2.b del 05 [x] final del modulo; los [x] de esos T ya viven en el cuerpo (stale-Totales era el fallo de T078/T080)",
-   "proximo_despues_de": "T117",
+   "proximo_despues_de": "T137",
    "regla_cron_A": "cada ciclo A: verificar 1-2 de pendientes_recientes (del ultimo hacia atras) + los T-done nuevos desde proximo",
    "regla_cron_G": "25,55 de cada hora (exclusivo, sin A/B/C/D): procesar TODO lo no verificado (catch-up) + actualizar indice; un dia a la dia, el primer G hace el barrido diario = sample §21.8.2.b de los 4 candidatos a sello + chequeo de drift Totales",
    "ultimo_muestreo": "A 09:20: T114 M128 (gate-1); G sigue catch-up",
@@ -936,8 +956,8 @@
   }
  },
  "deepseek_reactivado": "M53 token-dup LISTO (tanda 3: 7 unificados, 6 restantes = 3 owner + 3 semantico). L159 coherencia visual = flip-candidato. M53 va sellable. Log 2184.",
- "hy3_gate2": "gate-2 runtime #383: M73 FALLO runtime (validador 8 vs 19 categorias, green-probe Hy3; T266 encolado Beam dueno M73), M55 precision-fail, M75/M110/M58 EN CURSO, M04 PARCIAL. 0 sellos. M110 caveat debug_menu:721 nula-textura (deuda). M75 primer candidato.",
- "sellos_218": "2 SELLADOS (M28+M65). 3er = M73 al cerrar sus 4 [ ] (Hy3 gate-2 standby). M33 en revert (148->133).",
+ "hy3_gate2": "Hy3 standby (#399), listo para M73 gate-2 cuando cierre sus 4 [ ]. pool head 400. 2 sellos vigentes (M28+M65).",
+ "sellos_218": "3er sello en vuelo: M73 (131/4/0, 4 [ ]=deuda externa M46/M25/M22) - Hy3 corre gate-2 ahora (#402). Pattern M28 (sello con deuda externa declarada). M73 Global -> 131/135.",
  "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
  "ling_design_docs": {
   "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
@@ -979,5 +999,7 @@
  "m65_drift": "M65 header 05 stale + Global 65 89/90->90/90 (SB-02 resuelta). Ambiental M48/M39 encolados.",
  "asignador_0858": "DeepSeek 93m idle -> nudge #403.",
  "m33_inflacion_beam": "HALLAZGO (Step-5 227): M33 se inflo en vuelo - Beam T110/111-33 hizo 16 flips [ ]->[x] SIN log ni protocolo, 15 sin evidencia §21.8 (todas 'espera: modulo dependiente'; MultiMesh/LOD sigue placeholder M50/M61). M33 05 = 148/6/1 (inflado) vs 133/21/1 (honesto). DICTAMEN (#228): REVERT los 15 (Step-5 dueño lo ejecuta + re-mide). Flag al ACTA contable + gate-1 (no canal Beam). Mismo patron M34/M55.",
- "gap_sesion": "11h de gap en la sesion (09:30->20:29Z). Flota siguió: Beam a T117, Step-5 #227 M33 hallazgo, Hy3 flag-pool, Ling #275 PT."
+ "gap_sesion": "11h de gap en la sesion (09:30->20:29Z). Flota siguió: Beam a T117, Step-5 #227 M33 hallazgo, Hy3 flag-pool, Ling #275 PT.",
+ "m72_global_sync": "M72 Global 108/200 -> 194/200 (hallazgo Ling 278). M72 = 194/3/3 TIE (no sellable por [?]/[ ]). Stale-Totales otra vez.",
+ "m73_sello": "M73: 4 [ ] = iconos reliquias M46, fosiles M25, lore M22 (externos, no M73). Stale header L5/L274 encolado a minimax. Global sync 63->131."
 }

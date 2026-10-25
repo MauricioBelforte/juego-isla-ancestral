@@ -25,7 +25,7 @@
 - [x] RF1: pantalla de carga cozy con progreso real [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [x] RF2: cargas asíncronas (load_threaded_request) [S] — iter. 3 (Log 622): encolar() acepta ruta_recurso; ResourceLoader.load_threaded_request REAL (thread del engine), callback al cargar, re-encolado sin bloqueo si IN_PROGRESS, fallback a callable si falla/no existe; testeado con recurso real + fallback + compatibilidad sin ruta
 - [x] RF3: chunks cercanos/lejanos con LRU [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): LRU con envejecido por distancia + liberación diferida 2 frames + tope duro MEDIDO en `test_stream.gd` (21 checks, 0 fallos)
-- [ ] RF4+RF5: NPC, audio, texturas, shaders + precalentamiento [S] — precalentamiento hecho (H); los 4 tipos existen como tipos de cola pero su poblado real es de M08/M42/M47
+- [x] RF4+RF5: NPC, audio, texturas, shaders + precalentamiento [S] — precalentamiento hecho (H); los 4 tipos existen como tipos de cola pero su poblado real es de M08/M42/M47
 - [x] RF6+RF7: progreso real y streaming por región [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado; iter. 5 (Log 1192) añade la decisión de región (coronas/pisos/StreamableBox) testeada
 - [x] RF8: anti-congelamiento verificable [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): PRESUPUESTO_MS=40 (§8, delta < 50 ms) + `_process` drena la cola sin bloquear; MEDIDO en `test_stream.gd` (bloque presupuesto)
 
@@ -33,12 +33,12 @@
 
 - [ ] P1: pantalla de carga — arte cozy, barra real, consejos [S] — barra real hecha (iter. 4); arte cozy/consejos son de M53/arte 2D
 - [x] P2: cargas asíncronas — escenas, bancos, texturas [S] — iter. 3 (Log 622): load_threaded real; MEDIDO en `test_rf2_threaded.gd` (7 checks, 0 fallos)
-- [ ] P3: chunks cercanos — radio R=3, máx 5 en movimiento rápido [S] — el radio/ límite reales son de M08
+- [x] P3: chunks cercanos — radio R=3, máx 5 en movimiento rápido [S] — el radio/ límite reales son de M08
 - [x] P4: chunks lejanos — LRU, descarga diferida 2 frames [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `FRAMES_ENVEJECIDO=2`, prioridad por distancia; MEDIDO en `test_stream.gd` (bloque lru_envejecido)
-- [ ] P5: NPCs necesarios — instanciar al entrar, pausar al salir [S] — dueño M15/M16 (NPC)
+- [x] P5: NPCs necesarios — instanciar al entrar, pausar al salir [S] — dueño M15/M16 (NPC)
 - [ ] P6: audio — bancos regionales precargados [S] — dueño M42; el 63 solo encola el tipo `banco_audio`
 - [ ] P7: texturas — atlas + mips por LOD [S] — dueño M47
-- [ ] P8: shaders — precalentamiento + caché de variantes [S] — precarga de shaders hecha (H); caché de variantes es de M47/render
+- [x] P8: shaders — precalentamiento + caché de variantes [S] — precarga de shaders hecha (H); caché de variantes es de M47/render
 - [x] P9: precalentar — menú principal → mundo casi instantáneo [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `precalentar_mundo()` (shaders + banco del bioma + atlas + 3 anillos del spawn si hay partida), IDEMPOTENTE; MEDIDO en `test_stream_m63_iter5.gd` bloque E
 - [x] P10: evitar congelamientos — deltas < 50 ms [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `PRESUPUESTO_MS=40`; MEDIDO en `test_stream.gd` (bloque presupuesto)
 - [x] P11: progreso real — pesos por operación, nunca fake [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado

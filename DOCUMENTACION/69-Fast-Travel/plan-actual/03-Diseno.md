@@ -90,3 +90,57 @@ M157 (Transporte) ──► JourneyInstance (experiencia de viaje)
 - Test de viaje: JourneyInstance se inicia correctamente con M157
 - Test de eventos: al menos 1 evento ocurre durante viajes de 5+ minutos
 - Test de misterios: misterios no se repiten en viajes consecutivos
+
+
+## Specs Fast Travel (Beam 708)
+
+### Iconos de apoyo visual al nombre del destino
+- Spec: iconos de apoyo visual al nombre del destino. Coherente with M69 (fast travel) and M53 (UI).
+
+### Alt text para thumbnails de destino
+- Spec: alt text para thumbnails de destino. Coherente with M69 (fast travel) and M58 (accesibilidad).
+
+### Modo cronologico para historiales
+- Spec: modo cronologico para historiales. Coherente with M69 (fast travel) and M55 (diario).
+
+### Filtros por tipo de lugar (bioma, servicios)
+- Spec: filtros por tipo de lugar (bioma, servicios). Coherente with M69 (fast travel) and M54 (mapa).
+
+### Sin dependencia solo de color para estado
+- Spec: sin dependencia solo de color para estado. Coherente with M69 (fast travel) and M58 (accesibilidad).
+
+
+## Specs Fast Travel (Beam 709)
+
+### M110: debug menu con listado de anchors
+- Spec: M110: debug menu con listado de anchors. Coherente with M69 (fast travel) and M110 (debug menu).
+
+### M32: anulacion del portal en clima extremo
+- Spec: M32: anulacion del portal en clima extremo. Coherente with M69 (fast travel) and M32 (clima).
+
+### M91: respetar volumen de feedback de viaje
+- Spec: M91: respetar volumen de feedback de viaje. Coherente with M69 (fast travel) and M91 (audio).
+
+### Test de recuperacion: archivo corrupto -> resync
+- Spec: test de recuperacion: archivo corrupto -> resync. Coherente with M69 (fast travel) and M59 (guardado).
+
+### Test de bateria: consumo por viaje a larga distancia
+- Spec: test de bateria: consumo por viaje a larga distancia. Coherente with M69 (fast travel) and M61 (rendimiento).
+
+
+## Specs Fast Travel (Beam 710)
+
+### Test multidioma: busqueda en distintos alfabetos
+- Spec: test multidioma: busqueda en distintos alfabetos. Coherente with M69 (fast travel) and M86 (localizacion).
+
+### Test de acceso: atajos disponibles sin teclado
+- Spec: test de acceso: atajos disponibles sin teclado. Coherente with M69 (fast travel) and M58 (accesibilidad).
+
+### Test de localizacion: posicionamiento visual ajustado
+- Spec: test de localizacion: posicionamiento visual ajustado. Coherente with M69 (fast travel) and M53 (UI).
+
+### Test de fallback: 3 fallos seguidos -> modo seguro
+- Spec: test de fallback: 3 fallos seguidos -> modo seguro. Coherente with M69 (fast travel) and M66 (anti-softlock).
+
+### Test de perfilado: sin allocs en frame
+- Spec: test de perfilado: sin allocs en frame. Coherente with M69 (fast travel) and M61 (rendimiento).

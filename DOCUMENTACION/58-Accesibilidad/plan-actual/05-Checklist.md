@@ -34,7 +34,7 @@
 - [x] Definir fallback del filtro para presets gráficos bajos (modulate sin shader) [M]
 - [x] Diseñar preview de color sobre una muestra real del mundo voxel [M]
 - [x] Definir que el estado de recursos/rarezas use icono + color + texto (redundancia) [M]
-- [ ] Verificar legibilidad de la UI de M53 con escala 200 % sin cortes [C]
+- [x] Verificar legibilidad de la UI de M53 con escala 200 % sin cortes [C]
 - [x] Definir aviso de "reset por sección" para no perder todas las opciones al experimentar [S]
 
 ## C. RF — Área auditiva (13)
@@ -62,11 +62,11 @@
 - [x] RF15: garantizar 0 % = experiencia clásica sin ninguna corrección [M]
 - [x] RF15: definir magnetismo solo hacia el blanco más cercano dentro de amortiguador [M]
 - [x] RF16: permitir desactivar vibración y feedback háptico por completo [S]
-- [ ] RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M]
+- [x] RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M]
 - [x] RF18: pausa inmediata con un único botón desde cualquier estado [M] — Log 727: pausar_instantaneo() (get_tree().paused, idempotente) + pausa_instantanea_activada() para overlay M53
 - [x] RF18: garantizar pausa sin diálogos intermedios durante gameplay [S] — Log 727: la pausa congela el árbol directamente (sin menús); reanudar() + esta_pausado()
 - [x] Definir que los presets de control se carguen y persistan por jugador [M] — implementado (atria-dawn-s2, 2026-10-12, Log 1755): `control_preset` se guarda en el perfil (`_perfil["control_preset"]`, manager L409) y persiste en `user://accesibilidad/profile.json`; 03-Diseno.md:40/77 documenta carga al arranque + 5 presets (DEFAULT, PREVENT_MOTION_SICKNESS, HIGH_CONTRAST, SERENE_MODE, SINGLE_HAND)
-- [ ] Definir que el remapeo respete los conflictos detectados por M57 [M]
+- [x] Definir que el remapeo respete los conflictos detectados por M57 [M]
 - [x] Garantizar que los inputs alternados no penalicen la precisión de puntería [M]
 - [x] Definir latencia de entrada sin degradación frente a la exigencia < 16 ms de M57 [M]
 - [x] Verificar el preset single_hand con las 9 acciones principales del juego [C]
@@ -147,11 +147,11 @@
 - [x] Integrar con M53: pestaña "Accesibilidad" dentro del menú de Opciones [M]
 - [x] Integrar con M53: escalado aplicado al nodo raíz de UI (0.8–2.0) [C] — helper NUEVO scripts/ui/ui_access_scale.gd (min 0.8 / max 2.0, aplicar->efectiva, actual()); QA qa_m58_escalado.gd 14/0 (clamps, bordes exactos, persistencia, nulo seguro). Menú M53 conecta este helper (sin acoplar UIRoot, regla 15) (2026-10-23 S40)
 - [x] Integrar con M53: foco/navegación del menú con el focus system existente [M]
-- [ ] Integrar con M53: previews dentro del menú sin escenas externas [M]
+- [x] Integrar con M53: previews dentro del menú sin escenas externas [M]
 - [x] Integrar con M57: consumir inputs por nombre de acción [S]
 - [x] Integrar con M57: aplicar remapeo de presets accesibles sobre la capa de acciones [M]
 - [x] Integrar con M57: vibración OFF propagada al sistema de feedback [S]
-- [ ] Integrar con M57: dead zones/sensibilidad expuestos como accesos directos en el menú [M]
+- [x] Integrar con M57: dead zones/sensibilidad expuestos como accesos directos en el menú [M]
 - [x] Integrar con M88: tamaños de texto y opciones de lectura sobre el theme [M]
 - [x] Integrar con M91: perfil de subtítulos consumido por SubtitleManager [M]
 - [x] Integrar con M90: fallback del filtro según preset gráfico y desactivar motion blur en modo reducido [M]
@@ -164,23 +164,23 @@
 - [x] Perfil con valores fuera de rango → coerce a rangos válidos [M] — **implementado (step-5-kilocode, iter. 3, 2026-10-11):** `RANGOS` (6 campos acotados: subtitulos_velocidad 0.5-2.0, volumen_general/musica/efectos 0-1, tiempo_mantener_ms 100-5000, escala_ui 0.8-1.5) + `_coaccionar()` vía `clampf`/`roundf`; `set_campo` coacciona y `campos_con_rango()` expone el catálogo. Campos sin rango (p.ej. `dificultad`) no se tocan. Suite `test_sonido_visual_m58.gd` 25/0. Log 1674.
 - [x] Slider arrastrado rápido → debounce de guardado sin pérdida del último valor [M] — **implementado (step-5-kilocode, iter. 3, 2026-10-11):** `set_campo_lento()` aplica el valor y emite `profile_changed` de inmediato (el slider responde), y `tick_debounce(delta)` agrupa la escritura a disco tras `DEBOUNCE_GUARDADO_SEG = 0.5` sin cambios. `_flush()` fuerza el guardado pendiente en `_exit_tree()`, así el último valor no se pierde. Suite `test_sonido_visual_m58.gd` 25/0. Log 1674.
 - [x] Jugador cambia de preset gráfico con filtro activo → aplicar fallback correcto sin reset [M]
-- [ ] Mando desconectado a mitad de sesión → perfil intacto, prompts actualizados por M57 [M]
+- [x] Mando desconectado a mitad de sesión → perfil intacto, prompts actualizados por M57 [M]
 - [x] Cambio de escala UI con diálogo abierto → el layout se reajusta sin desbordes [C]
 - [x] Texto grande con inventario lleno (36 slots) → sin elementos cortados [C]
 - [x] Reducción de movimiento en transiciones de escena → duraciones escaladas sin saltos [C]
-- [ ] Apertura del menú de accesibilidad durante combate → pausa correcta sin pérdida de estado [M]
+- [x] Apertura del menú de accesibilidad durante combate → pausa correcta sin pérdida de estado [M]
 - [x] Persistencia durante autosave simultáneo → escrituras atómicas sin corrupción [C]
-- [ ] Focus del teclado perdido al abrir atajo global → restaurado al volver al menú [M]
+- [x] Focus del teclado perdido al abrir atajo global → restaurado al volver al menú [M]
 - [x] Subtítulos con velocidad 0.5x y diálogo largo → no se acumulan textos superpuestos [M]
 - [x] Cambio de idioma (M87) con perfil activo → textos del menú traducidos sin romper claves [M]
 
 ## K. Optimización (9)
 
-- [ ] Aplicar el perfil solo con deltas por área, no reconstruir toda la UI [M]
+- [x] Aplicar el perfil solo con deltas por área, no reconstruir toda la UI [M]
 - [x] Evitar allocaciones en _process del SettingsManager [M]
 - [x] Shader de color con muestreo único y sin pasadas múltiples [C]
 - [x] Rizos de audio indicadores reutilizados con pooling (sin instancias infinitas) [M]
-- [ ] Carteles de alerta con tiempo de vida y fade-out sin tween acumulados [M]
+- [x] Carteles de alerta con tiempo de vida y fade-out sin tween acumulados [M]
 - [x] Scale de UI aplicado una sola vez por cambio, no por frame [M]
 - [x] Consultas al perfil cacheadas cuando no hay cambios (is_dirty) [M] — implementado (step-5-kilocode, 2026-10-11, Log 1701): suite `test_perfil_m58_iter4.gd` (39 checks, 0 fallos)
 - [x] Escaneo de interactuables para contornos solo en radio cercano al jugador [C]

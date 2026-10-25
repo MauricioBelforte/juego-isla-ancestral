@@ -189,3 +189,38 @@ JSON ilegible / campos faltantes
 
 ### M58 no suma draw calls perceptibles (M61)
 - Spec: verificar que M58 no sume draw calls perceptibles en escenas pobladas (M61). Coherente con M58 (accesibilidad) y M61 (rendimiento).
+
+## Specs Accesibilidad (Beam 714)
+
+### Verificar legibilidad de la UI de M53 con escala 200% sin cortes
+- Spec: verificar legibilidad de la UI de M53 con escala 200% sin cortes. Coherente with M58 (accesibilidad) and M53 (UI).
+
+### RF17: exponer dead zones, sensibilidad por eje e inversion como accesos directos (M57)
+- Spec: RF17: exponer dead zones, sensibilidad por eje e inversion como accesos directos (M57). Coherente with M58 (accesibilidad) and M57 (interfaz).
+
+### Definir que el remapeo respete los conflictos detectados por M57
+- Spec: definir que el remapeo respete los conflictos detectados por M57. Coherente with M58 (accesibilidad) and M57 (interfaz).
+
+### Integrar con M53: previews dentro del menu sin escenas externas
+- Spec: integrar con M53: previews dentro del menu sin escenas externas. Coherente with M58 (accesibilidad) and M53 (UI).
+
+### Integrar con M57: dead zones/sensibilidad expuestos como accesos directos en el menu
+- Spec: integrar con M57: dead zones/sensibilidad expuestos como accesos directos en el menu. Coherente with M58 (accesibilidad) and M57 (interfaz).
+
+
+## Specs Accesibilidad (Beam 715)
+
+### Mando desconectado a mitad de sesion -> perfil intacto, prompts actualizados por M57
+- Spec: mando desconectado a mitad de sesion -> perfil intacto, prompts actualizados por M57. Coherente with M58 (accesibilidad) and M57 (interfaz).
+
+### Apertura del menu de accesibilidad durante combate -> pausa correcta sin perdida de estado
+- Spec: apertura del menu de accesibilidad durante combate -> pausa correcta sin perdida de estado. Coherente with M58 (accesibilidad) and M53 (UI).
+
+### Focus del teclado perdido al abrir atajo global -> restaurado al volver al menu
+- Spec: focus del teclado perdido al abrir atajo global -> restaurado al volver al menu. Coherente with M58 (accesibilidad) and M53 (UI).
+
+### Aplicar el perfil solo con deltas por area, no reconstruir toda la UI
+- Spec: aplicar el perfil solo con deltas por area, no reconstruir toda la UI. Coherente with M58 (accesibilidad) and M53 (UI).
+
+### Carteles de alerta con tiempo de vida y fade-out sin tween acumulados
+- Spec: carteles de alerta con tiempo de vida y fade-out sin tween acumulados. Coherente with M58 (accesibilidad) and M53 (UI).

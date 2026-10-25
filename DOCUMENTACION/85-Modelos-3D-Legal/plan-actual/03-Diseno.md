@@ -214,3 +214,72 @@ Props: [Nombres]
 
 ### Implementar generate_credits_web() (formato detallado)
 - Spec: implementar generate_credits_web() (formato detallado). INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+
+## Specs Modelos 3D Legal (Beam 689)
+
+### Implementar save_build_credits() para builds
+- Spec: implementar save_build_credits() para builds. INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Generar archivo MODEL_CREDITS.txt en cada build
+- Spec: generar archivo MODEL_CREDITS.txt en cada build. BUG-070 lote 10 re-verif: Familia A - los artefactos citados NO existen. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Test de ModelLicenseValidator con licencia completa
+- Spec: test de ModelLicenseValidator con licencia completa. BUG-070 lote 10 re-verif: Familia A - los artefactos citados NO existen. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+### Test de ModelLicenseValidator con licencia sin attribution
+- Spec: test de ModelLicenseValidator con licencia sin attribution. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+### Test de ModelLicenseValidator con licencia no-perpetual
+- Spec: test de ModelLicenseValidator con licencia no-perpetual. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+
+## Specs Modelos 3D Legal (Beam 690)
+
+### Test de ModelLegalManager con inventario vacio
+- Spec: test de ModelLegalManager con inventario vacio. BUG-070 lote 10 re-verif: Familia A - los artefactos citados NO existen. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+### Test de ModelLegalManager con inventario completo
+- Spec: test de ModelLegalManager con inventario completo. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+### Test de generacion de creditos compactos
+- Spec: test de generacion de creditos compactos. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+### Test de generacion de creditos web
+- Spec: test de generacion de creditos web. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+### Test de verificacion de uso comercial
+- Spec: test de verificacion de uso comercial. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+
+## Specs Modelos 3D Legal (Beam 691)
+
+### Test de edge case: modelo con multiples licencias
+- Spec: test de edge case: modelo con multiples licencias. BUG-070 lote 10 re-verif: Familia A - los artefactos citados NO existen. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M112 (testing).
+
+### Build incluye MODEL_CREDITS.txt automaticamente
+- Spec: build incluye MODEL_CREDITS.txt automaticamente. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Integracion con M117 (Build Pipeline)
+- Spec: integracion con M117 (Build Pipeline). BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Integracion con M72 (Validacion de Builds)
+- Spec: integracion con M72 (Validacion de Builds). BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M72 (logros).
+
+
+## Specs Modelos 3D Legal (Beam 692)
+
+### Integracion con M71 (Gestion de Assets)
+- Spec: integracion con M71 (Gestion de Assets). BUG-070 lote 10 re-verif: Familia A - los artefactos citados NO existen. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M71 (gestion de assets).
+
+### Logging de validacion de modelos en build log
+- Spec: logging de validacion de modelos en build log. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M102 (logging).
+
+### Modo dry-run para verificar sin generar outputs
+- Spec: modo dry-run para verificar sin generar outputs. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Skip de validacion en builds de desarrollo
+- Spec: skip de validacion en builds de desarrollo. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Generar reporte de licencias de modelos por build
+- Spec: generar reporte de licencias de modelos por build. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).

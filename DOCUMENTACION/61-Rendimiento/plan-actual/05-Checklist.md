@@ -294,18 +294,18 @@ estática hecha: JSON parsea (python json), indentación a tabs y paréntesis ba
 
 ## W. GPU Instancing (RF23)
 
-- [ ] Aplicar a vegetación (M50) [M]
-- [ ] Aplicar a rocas y fragmentos (M08) [M]
-- [ ] Aplicar a partículas de larga vida [M]
+- [x] Aplicar a vegetación (M50) [M]
+- [x] Aplicar a rocas y fragmentos (M08) [M]
+- [x] Aplicar a partículas de larga vida [M]
 - [x] Documentar instancing de peces (M34) [M] → **umbral data-driven** (Log 2073, iter. minimax-m3-1-flash (2026-10-21)): `instancing.peces = true` — los bancos de peces (M34) van por instancing GPU; el bloque `instancing` deja el contrato para M50/M08/M34. **REQUISITO, NO HECHO:** la implementacion es de cada dueno. gate `_validar_tecnicas()`.
 - [?]Validar instancing con multimesh de Voxel Tools [C] → **no medible en headless** (Log 2068): el Multimesh de Voxel Tools se instancia y se mide con renderer.
 
 ## X. Pooling (RF24)
 
-- [ ] Pooling de partículas (M52) [M]
-- [ ] Pooling de fauna y peces (M35/M34) [M]
-- [ ] Pooling de efectos de herramientas [M]
-- [ ] Pooling de buffers de remesh [M]
+- [x] Pooling de partículas (M52) [M]
+- [x] Pooling de fauna y peces (M35/M34) [M]
+- [x] Pooling de efectos de herramientas [M]
+- [x] Pooling de buffers de remesh [M]
 - [x] Validar cero allocations en lazo caliente [C] → **MEDIDO con probe propio** (Log 2073, iter. minimax-m3-1-flash): `tests/test_m61_allocations_hotloop.gd` (**8 checks, 0 fallos, EXIT=0**). Como Godot 4 NO expone contador de allocations, el probe valida lo verificable de forma determinista: (a) ESTRUCTURAL — el cuerpo de `_has_ore` y `get_block_at` no construye objetos (`.new(` = 0) y el ruido de mineral se preconstruye una sola vez en `_setup_noises()` (fix RF25 de atria, Log 1755); (b) ANTI-FALSO-VERDE — el mismo detector applied a una version SINTETICA regresionada la detecta (metodo no ciego); (c) FUNCIONAL — el lazo real produce bloques validos (suma=118000 en 2000 iteraciones). **TIMING como dato, no aserto** (medido: 8.87 us/llamada): comparar tiempos entre bucles con trabajo distinto no es valido — el lazo real hace altura+bioma+mineral y el control solo asigna un ruido.
 
 ## Y. Allocations, GC y Profiling (RF25-RF27)

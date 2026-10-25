@@ -114,3 +114,32 @@ al detectar archivos nuevos/cambiados (M108 trigger):
 | M108 (Assets) | Importación, compresión, convenciones de nombres |
 | M72/M22/M37 | Insignias, sellos, coleccionables con marco común |
 | M58 (Accesibilidad) | Variantes de alto contraste como recursos separados |
+
+## Specs Arte 2D (Beam 716)
+
+### Definir legibilidad minima 32 px (prueba obligatoria)
+- Spec: definir legibilidad minima 32 px (prueba obligatoria). Log 726 (§6): la REGLA está en §6 pero la PRUEBA 32px requiere assets = #esperando:assets-2d. Coherente with M46 (arte 2D) and M58 (accesibilidad).
+
+### Incluir verificacion de regiones de texto en el validador
+- Spec: incluir verificacion de regiones de texto en el validador. agnes-2.5-flash 2026-09-12: regla 0-texto documentada en 03-Diseno.md §7 + Log 726; validador naming (validar_nombres.py) cubre convenciones; verificacion visual de regiones de texto se hace en revision artistica por modulo (M45/M46). KnownIssue no bloqueante DoD. Coherente with M46 (arte 2D) and M108 (pipeline).
+
+### Legibilidad a 32 px con contraste AA (M58)
+- Spec: legibilidad a 32 px con contraste AA (M58). Log 726 (§6 prueba obligatoria definida): regla §6 documentada pero la PRUEBA 32px requiere assets = #esperando:assets-2d + M58. Coherente with M46 (arte 2D) and M58 (accesibilidad).
+
+### Icono de cada objeto legible a 32 px en inventario y tienda
+- Spec: icono de cada objeto legible a 32 px en inventario y tienda. agnes-2.5-flash 2026-09-12: criterio definido en 03-Diseno.md §6; prueba se ejecutara cuando existan assets (M45). KnownIssue no bloqueante DoD — regla documentada. Coherente with M46 (arte 2D) and M45 (arte 2D).
+
+### Simbolos ancestrales sin texto reutilizables
+- Spec: simbolos ancestrales sin texto reutilizables. agnes-2.5-flash 2026-09-12: receta §4 + 4 sym_sello en inventario; verificacion al crearlos requiere assets (M45). KnownIssue no bloqueante DoD. Coherente with M46 (arte 2D) and M45 (arte 2D).
+
+### Atlas con carga diferida sin duplicados en memoria
+- Spec: atlas con carga diferida sin duplicados en memoria. agnes-2.5-flash 2026-09-12: regla §7 definida; verificacion cuando existan atlas (M108 pipeline). KnownIssue no bloqueante DoD. Coherente with M46 (arte 2D) and M108 (pipeline).
+
+### Piezas cumplen M108 y Git LFS
+- Spec: piezas cumplen M108 y Git LFS. agnes-2.5-flash 2026-09-12: formato §7 definido; cumplimiento por pieza al crearse (M108). KnownIssue no bloqueante DoD. Coherente with M46 (arte 2D) and M108 (pipeline).
+
+
+## Specs Arte 2D (Beam 717)
+
+### Verificar que el M154 (Vision del Agente) esta implementado y operativo (al menos una via activa) antes de comenzar cualquier trabajo visual de este modulo
+- Spec: verificar que el M154 (Vision del Agente) esta implementado y operativo (al menos una via activa) antes de comenzar cualquier trabajo visual de este modulo — ver DOCUMENTACION/154-Vision-Del-Agente/ y seccion 25 de AGENTS.md. Coherente with M46 (arte 2D) and M154 (vision).

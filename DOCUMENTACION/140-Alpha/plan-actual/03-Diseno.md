@@ -544,3 +544,71 @@ colecciones se define como texto + ilustracion, nunca lista vacia.
 
 ### Recetario de 60+ con ítems de todas las islas
 - Spec: recetario de 60+ con ítems de todas las islas (M16). Coherente con M16 (crafting) y M14 (recursos).
+
+## Specs Alpha (Beam 698)
+
+### Modelar prerequisitos con ICondicionDeSello persistida en save v3
+- Spec: modelar prerequisitos con ICondicionDeSello persistida en save v3. PENDIENTE REAL 2026-10-14 (step-5-kilocode): la interfaz ICondicionDeSello NO existe en disco (verificado). Queda definido su contrato (persistida en save v3) para cuando se implemente el sistema de sellos en M22. No inflado. Coherente with M140 (alpha) and M22 (historia).
+
+### Verificar presencia de crafting y cocina completos (60+ recetas) (M16)
+- Spec: verificar presencia de crafting y cocina completos (60+ recetas) (M16). PENDIENTE REAL 2026-10-14: verificado contra disco - data/balance/crafting.json tiene solo 7 recetas de las 60+ que pide el item. Deuda real de M16. No inflado. Coherente with M140 (alpha) and M16 (crafting).
+
+### Verificar habilidades con XP y ventajas (M71)
+- Spec: verificar habilidades con XP y ventajas (M71). PENDIENTE REAL 2026-10-14: hay XP (4 hits) y niveles (80) pero 0 hits de 'habilidad' y 0 de 'ventaja' en scripts/progresion/. Sistema de habilidades ausente. No inflado. Coherente with M140 (alpha) and M71 (progresion).
+
+### Definir el menu de progresion con estados visibles (M53/M71)
+- Spec: definir el menu de progresion con estados visibles (M53/M71). PENDIENTE REAL 2026-10-14: no hay menu de progresion en scripts/ui/ (los hits de UI son de donation, museo y equipment). Pieza de UI ausente. No inflado. Coherente with M140 (alpha) and M53 (UI).
+
+### Definir integracion construccion->amistad (regalos fabricados +25%)
+- Spec: definir integracion construccion->amistad (regalos fabricados +25%). PENDIENTE REAL 2026-10-14: 0 hits de regalo fabricado en scripts/. La integracion no existe. No inflado. Coherente with M140 (alpha) and M19 (amistad).
+
+
+## Specs Alpha (Beam 699)
+
+### Definir el servicio Almanaque como única fuente de tiempo/clima/eventos
+- Spec: definir el servicio Almanaque como única fuente de tiempo/clima/eventos. PENDIENTE REAL 2026-10-14: 0 hits en scripts/. Hoy el tiempo pasa por TimeCalendar (autoload) y el clima por weather_service.gd; la fachada unica queda definida (2.7.1) pero sin implementar. No inflado. Coherente with M140 (alpha) and M29 (tiempo).
+
+### Asegurar que HistoriaMaster no acopla misiones individuales
+- Spec: asegurar que HistoriaMaster no acopla misiones individuales. PENDIENTE REAL 2026-10-14: 0 hits. Contrato definido en 2.7.1 (orquesta actos y sellos sin conocer misiones individuales) pero sin implementar. No inflado. Coherente with M140 (alpha) and M22 (historia).
+
+### Definir balance de recetas por isla (M16/M93)
+- Spec: definir balance de recetas por isla (M16/M93). PENDIENTE REAL 2026-10-14: verificado contra disco - data/balance/crafting.json tiene solo 7 recetas de las 60+ que pide M16. El balance por isla no se puede hacer sobre 7 recetas. No inflado. Coherente with M140 (alpha) and M16 (crafting).
+
+### Definir 80 coleccionables de 100 (M73)
+- Spec: definir 80 coleccionables de 100 (M73). PENDIENTE REAL 2026-10-14: verificado — data/coleccionables/catalog.json tiene solo 15 items de los 80 pedidos. Brecha de 65. No inflado. Coherente with M140 (alpha) and M73 (coleccion).
+
+
+## Specs Alpha (Beam 700)
+
+### Definir museo con las categorias completas (M37)
+- Spec: definir museo con las categorias completas (M37). PENDIENTE REAL 2026-10-14: el modulo 37-Museo existe y M139 definio 5 secciones (Naturaleza, Geologia, Botanica, Marina, Pesca), pero el catalogo completo no esta en disco. No inflado. Coherente with M140 (alpha) and M37 (museo).
+
+### Definir 4 eventos estacionales base (M74)
+- Spec: definir 4 eventos estacionales base (M74). PENDIENTE REAL 2026-10-14: hay 30 hits de fiesta/festival y catalogo_eventos.json (analytics), pero los 4 eventos base (1 por estacion) no estan definidos como datos. No inflado. Coherente with M140 (alpha) and M74 (eventos).
+
+### Definir la meta de partida completa 60-100 h
+- Spec: definir la meta de partida completa 60-100 h. PENDIENTE REAL 2026-10-14: no verificable por disco sin telemetria de sesion real. Queda anotado como verificacion de runtime. No inflado. Coherente with M140 (alpha) and M142 (lanzamiento).
+
+### Definir reutilizacion de assets via pipeline M108 para el contenido
+- Spec: definir reutilizacion de assets via pipeline M108 para el contenido. Coherente with M140 (alpha) and M108 (pipeline).
+
+### Definir migracion versionada v3->v3.1 (sellos, colecciones, almanaque)
+- Spec: definir migracion versionada v3->v3.1 (sellos, colecciones, almanaque). PENDIENTE REAL 2026-10-14: verificado — el save esta en v1 (SCHEMA_VERSION=1) y save_loader.gd documenta 'v1 es la primera version, sin migraciones por ahora'. No existe migracion v3->v3.1. No inflado. Coherente with M140 (alpha) and M59 (guardado).
+
+
+## Specs Alpha (Beam 701)
+
+### Definir modos de color para puzzles de espejos/sombras (M58)
+- Spec: definir modos de color para puzzles de espejos/sombras (M58). Los modos de color existen (8 hits: accesibilidad_schema, gestor_config, mapa_manager) pero hay 0 hits de 'espejo'/'sombra' en el manager: no estan aplicados a puzzles. Ver 4.2. No inflado. Coherente with M140 (alpha) and M58 (accesibilidad).
+
+### Definir navegacion del diario con gamepad (M57)
+- Spec: definir navegacion del diario con gamepad (M57). 0 hits de la combinacion diario+gamepad (si hay 29 hits de gamepad en general, incluido control_input.gd). Ver 4.2. No inflado. Coherente with M140 (alpha) and M57 (interfaz).
+
+### Definir estados vacios de colecciones con texto claro (M53)
+- Spec: definir estados vacios de colecciones con texto claro (M53). Los 5 hits son de otros sistemas; no hay un patron de estado vacio para colecciones. Definido en 4.2 como texto + ilustracion, nunca lista vacia. No inflado. Coherente with M140 (alpha) and M53 (UI).
+
+
+## Specs Alpha (Beam 702)
+
+### Definir flujo completo verificado en Play Mode en las 4 islas
+- Spec: definir flujo completo verificado en Play Mode en las 4 islas. PENDIENTE REAL 2026-10-14: no verificable por disco — requiere Play Mode real en las 4 islas de Alpha. Anotado como verificacion de runtime. No inflado. Coherente with M140 (alpha) and M112 (testing).

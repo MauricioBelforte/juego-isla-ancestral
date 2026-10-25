@@ -697,3 +697,39 @@ x3 = **118 checks, 0 fallos, 0 SCRIPT ERROR en 18 corridas**; `--selftest` del a
 Agricultura** (Step-5); el log de la tanda 2 es el **2183**. Corregido el numero, sin
 tocar el resto del contenido.
 
+
+
+## Specs UI/UX (Beam 699)
+
+### Probar navegacion completa de cada pantalla 30 minutos por metodo de input
+- Spec: probar navegacion completa de cada pantalla 30 minutos por metodo de input. Coherente with M53 (UI/UX) and M114 (hardware).
+
+### Mover objetos con gamepad (agarrar/soltar con confirm y direccion)
+- Spec: mover objetos con gamepad (agarrar/soltar con confirm y direccion). Coherente with M53 (UI/UX) and M56 (interfaz).
+
+### Test de rendimiento del minimapa con el mundo voxel cargado
+- Spec: test de rendimiento del minimapa con el mundo voxel cargado. Coherente with M53 (UI/UX) and M61 (rendimiento).
+
+### Integracion con el mapa completo M54 (acceso desde el minimapa)
+- Spec: integracion con el mapa completo M54 (acceso desde el minimapa). Coherente with M53 (UI/UX) and M54 (mapa).
+
+### Feedback visual de colocacion, cosecha y compra (Tween 120 ms)
+- Spec: feedback visual de colocacion, cosecha y compra (Tween 120 ms). Coherente with M53 (UI/UX) and M48 (animacion).
+
+
+## Specs UI/UX (Beam 707)
+
+### Vibracion haptica leve opcional en gamepad (M57, ajustable en M58)
+- Spec: vibracion haptica leve opcional en gamepad (M57, ajustable en M58). Coherente with M53 (UI/UX) and M57 (interfaz).
+
+### Verificar coherencia visual entre todas las capas (un solo lenguaje)
+- Spec: verificar coherencia visual entre todas las capas (un solo lenguaje). Coherente with M53 (UI/UX) and M128 (identidad).
+
+### Revisar textos con locales largos (aleman) sin cortes (M87)
+- Spec: revisar textos con locales largos (aleman) sin cortes (M87). Coherente with M53 (UI/UX) and M87 (fuentes).
+
+### Integrar tamano, opacidad y fondo de subtitulos
+- Spec: integrar tamano, opacidad y fondo de subtitulos. Coherente with M53 (UI/UX) and M58 (accesibilidad).
+
+### Remapeo de M57 re-lee las etiquetas de prompts automaticamente
+- Spec: remapeo de M57 re-lee las etiquetas de prompts automaticamente. Coherente with M53 (UI/UX) and M57 (interfaz).

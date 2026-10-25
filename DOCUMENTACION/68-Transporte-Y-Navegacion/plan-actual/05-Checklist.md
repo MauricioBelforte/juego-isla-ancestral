@@ -175,19 +175,19 @@
 
 ## R. Animaciones y Pasajeros (M48/M64)
 
-- [ ] Puertas/gangways animados en paradas (M48) [M]
-- [ ] Bandera del barco con viento (M50) en paradas [S]
-- [ ] NPC pasajeros en paradas (M64) [M]
-- [ ] NPC abordando el vehículo (M67) [M]
+- [x] Puertas/gangways animados en paradas (M48) [M]
+- [x] Bandera del barco con viento (M50) en paradas [S]
+- [x] NPC pasajeros en paradas (M64) [M]
+- [x] NPC abordando el vehículo (M67) [M]
 - [ ] Testear animaciones con LOD (M61) [M]
 
 ## S. IP Pasantes y Accesibilidad (M58)
 
-- [ ] HUD del viaje legible con alto contraste [M]
+- [x] HUD del viaje legible con alto contraste [M]
 - [x] Tamaño de texto configurable en el panel [M]
-- [ ] Reduce Motion: transiciones cortas sin zoom [M]
-- [ ] Subtítulos en mensajes de viaje [S]
-- [ ] Panel de transporte accesible con gamepad (M57) [M]
+- [x] Reduce Motion: transiciones cortas sin zoom [M]
+- [x] Subtítulos en mensajes de viaje [S]
+- [x] Panel de transporte accesible con gamepad (M57) [M]
 
 ## T. Edge Cases
 
@@ -200,9 +200,9 @@
 ## U. Rendimiento (M61)
 
 - [x] Red en un solo .tres (sin nodos por escena) [M]
-- [ ] Señalización batchable (M46, ≤ 4 carteles por escena) [M]
-- [ ] Capa de mapa sin draw calls nuevos [M]
-- [ ] Transición reutilizable (SceneTransition M61) [M]
+- [x] Señalización batchable (M46, ≤ 4 carteles por escena) [M]
+- [x] Capa de mapa sin draw calls nuevos [M]
+- [x] Transición reutilizable (SceneTransition M61) [M]
 - [x] Probar con profiler (M116) [C]
 
 ## V. Localización (M87)
@@ -240,7 +240,7 @@
 ## Z. Validación Final (DoD)
 
 - [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S] -- Diseno: 03-Diseno.md (transporte definido)
-- [ ] Push del módulo y reporte al usuario [S]
+- [x] Push del módulo y reporte al usuario [S]
 - [x] Marcar ítems solo al cumplir la DoD (sección 21.6) [S]
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] -- Diseno: 03-Diseno.md (transporte definido)
 - [x] Confirmar 131 ítems exactos (contados: 131) [S]

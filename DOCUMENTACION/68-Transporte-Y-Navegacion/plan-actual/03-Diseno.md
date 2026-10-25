@@ -115,3 +115,47 @@ evento de historia M22 activa una ruta narrativa
 
 ### Probar con profiler (M116)
 - Spec: probar con profiler (M116). Coherente con M68 (transporte) y M116 (profiling).
+
+## Specs Transporte y Navegacion (Beam 711)
+
+### Puertas/gangways animados en paradas (M48)
+- Spec: puertas/gangways animados en paradas (M48). Coherente with M68 (transporte) and M48 (animacion).
+
+### Bandera del barco con viento (M50) en paradas
+- Spec: bandera del barco con viento (M50) en paradas. Coherente with M68 (transporte) and M50 (vegetacion).
+
+### NPC pasajeros en paradas (M64)
+- Spec: NPC pasajeros en paradas (M64). Coherente with M68 (transporte) and M64 (IA).
+
+### NPC abordando el vehiculo (M67)
+- Spec: NPC abordando el vehiculo (M67). Coherente with M68 (transporte) and M67 (vehiculos).
+
+### HUD del viaje legible con alto contraste
+- Spec: HUD del viaje legible con alto contraste. Coherente with M68 (transporte) and M58 (accesibilidad).
+
+
+## Specs Transporte y Navegacion (Beam 712)
+
+### Reduce Motion: transiciones cortas sin zoom
+- Spec: Reduce Motion: transiciones cortas sin zoom. Coherente with M68 (transporte) and M58 (accesibilidad).
+
+### Subtitulos en mensajes de viaje
+- Spec: subtitulos en mensajes de viaje. Coherente with M68 (transporte) and M53 (UI).
+
+### Panel de transporte accesible con gamepad (M57)
+- Spec: panel de transporte accesible con gamepad (M57). Coherente with M68 (transporte) and M57 (interfaz).
+
+### Señalizacion batchable (M46, <= 4 carteles por escena)
+- Spec: señalizacion batchable (M46, <= 4 carteles por escena). Coherente with M68 (transporte) and M61 (rendimiento).
+
+### Capa de mapa sin draw calls nuevos
+- Spec: capa de mapa sin draw calls nuevos. Coherente with M68 (transporte) and M61 (rendimiento).
+
+
+## Specs Transporte y Navegacion (Beam 713)
+
+### Transicion reutilizable (SceneTransition M61)
+- Spec: transicion reutilizable (SceneTransition M61). Coherente with M68 (transporte) and M61 (rendimiento).
+
+### Push del modulo y reporte al usuario
+- Spec: push del modulo y reporte al usuario. Coherente with M68 (transporte) and AGENTS.md sec 4.

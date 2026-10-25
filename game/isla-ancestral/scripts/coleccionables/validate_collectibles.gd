@@ -17,6 +17,8 @@ const CATALOGO_PATH := "res://data/coleccionables/catalog.json"
 const CATEGORIAS_CONOCIDAS: Array = [
 	"minerales", "animales", "conchas", "reliquias", "fragmentos",
 	"peces", "plantas", "ancestrales",
+	"insectos", "fosiles", "cartas", "fotos", "mapas", "herramientas",
+	"ropa", "simbolos", "mensajes", "secretos", "muebles", "objetos_historia",
 ]
 const RANGOS_RAREZA := [0, 1, 2, 3]
 

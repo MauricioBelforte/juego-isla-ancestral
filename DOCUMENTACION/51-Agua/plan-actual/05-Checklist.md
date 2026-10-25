@@ -34,13 +34,13 @@
 ## D. RF3 — Render de océano
 
 - [ ] Definir mesh por chunk con LOD (lejano plano) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M45 mesh + M47 LOD/plano lejano
-- [ ] Definir olas GPU con fase fija por cuerpo [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M47 shader GPU waves + M49
-- [ ] Definir espuma costera (altura de ola vs costa) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M47 shore-foam shader + M52
-- [ ] Definir transparencia con depth_prepass [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M47 material transparency + M49
+- [x] Definir olas GPU con fase fija por cuerpo [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M47 shader GPU waves + M49
+- [x] Definir espuma costera (altura de ola vs costa) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M47 shore-foam shader + M52
+- [x] Definir transparencia con depth_prepass [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M47 material transparency + M49
 
 ## E. RF4 — Reflejos y transparencia
 
-- [ ] Definir ReflectionProbe ≤ 2 por escena [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M49 reflection probes (≤2)
+- [x] Definir ReflectionProbe ≤ 2 por escena [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M49 reflection probes (≤2)
 - [x] Definir sin refracción global [M] **Hy3 (2026-10-12): definido/registrado.**
 - [x] Definir refracción solo en pools de puzzles (M24) [M] **Hy3 (2026-10-12): definido/registrado.**
 - [x] Definir overdraw ≤ 1.5× [M] **Hy3 (2026-10-12): definido/registrado.**
@@ -55,7 +55,7 @@
 ## G. RF6 — Cascadas
 
 - [ ] Definir mesh de caída con VF [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M45 waterfall mesh
-- [ ] Definir partículas en base (M52) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M52 partículas de base
+- [x] Definir partículas en base (M52) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M52 partículas de base
 - [ ] Definir sonido de cascada (M42) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 SFX cascada
 
 ## H. RF7 — Agua subterránea
@@ -120,16 +120,16 @@
 
 ## R. RF17 — Sonidos
 
-- [ ] Definir olas por bioma/franja (M42) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 olas por bioma
+- [x] Definir olas por bioma/franja (M42) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 olas por bioma
 - [ ] Definir chapoteo y balde [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 SFX + M52 splash
-- [ ] Definir cascada en loop [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 + M52 loop
+- [x] Definir cascada en loop [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 + M52 loop
 - [ ] Definir crujido de hielo [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 SFX hielo
 
 ## S. RF18 — Partículas
 
-- [ ] Definir salpicaduras de pies [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M52 + M43 splash pies
-- [ ] Definir rocío de cascada [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M52 rocío
-- [ ] Definir gotas al salir del agua [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M52 + M43 gotas
+- [x] Definir salpicaduras de pies [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M52 + M43 splash pies
+- [x] Definir rocío de cascada [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M52 rocío
+- [x] Definir gotas al salir del agua [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M52 + M43 gotas
 
 ## T. RF19 — Colisiones
 
@@ -207,10 +207,10 @@
 
 ## AC. Criterios de aceptación verificados
 
-- [ ] Nivel de mar consistente entre chunks [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M45/M47 render de chunks
-- [ ] Océano con olas/espuma dentro del presupuesto [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M47/M49 + M61 presupuesto
+- [x] Nivel de mar consistente entre chunks [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M45/M47 render de chunks
+- [x] Océano con olas/espuma dentro del presupuesto [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M47/M49 + M61 presupuesto
 - [ ] Corrientes mueven objetos y barcos [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M45 mesh + M67 vehículos/barcos
-- [ ] Hielo solo estacional y sin softlock [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M32 clima + M45 + M66
+- [x] Hielo solo estacional y sin softlock [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M32 clima + M45 + M66
 - [ ] Cascadas con sonido + partículas sincronizados [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M42 + M52 sync
 - [x] Puzzles de compuertas/canales funcionan (M24) [M]
 - [ ] Natación suave sin clipping con chapoteo [M] (DEP-BLOQ M45/M47/M49/M42 · espera: M42/M43 chapoteo SFX + M45/M47 clip-free swim mesh)
@@ -245,7 +245,7 @@
 - [x] Regresión: M31 0 fallos, M47 17/0, M50 5/0; FPS 51-60 [S]
 - [x] Reflejo de escena real (SSR/planos reflejo) — necesita presupuesto de rendering, próxima iteración [C] (DEP-BLOQ M45/M47/M49/M42) · espera: M47/M49 SSR (próxima iter, presupuesto)
 - [ ] Sonido de olas (M42/M43) [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 SFX olas
-- [ ] Interacción de olas con la fauna (barcos/estaciones) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M36/M65 fauna + M42
+- [x] Interacción de olas con la fauna (barcos/estaciones) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M36/M65 fauna + M42
 - [x] Confirmación estética del usuario [S] **Hy3 (2026-10-12): definido/registrado.**
 
 ### Notas del Agente — iter. 2
