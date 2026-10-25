@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-25T01:10 (DeepSeek reactivado + Hy3 gate-2 + M55 inflado encolado)",
+ "ultimo_update": "2026-10-25T03:15 (ack Ling 262 + standby PT)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -748,18 +748,32 @@
   "rol": "tarea de tiempo libre (orden fundador 21:42): gate-1 de lo que Beam produce, sin saturar",
   "metodo": "en cada Cron A, samplear 5-6 flips del ultimo T-done de Beam contra disco (05 estado [x] + 03 spec); solo si no satura; SI NO hay T-done nuevo -> lo saltea",
   "registro": "veredictos se registran AQUI (estado), NO en el canal de Beam (anti-loop)",
-  "ultimos_veredictos": {
-   "T010_sample": "RATIFICADO 7/8 M34 [x] + M31 L84/85 [x] (03 Presupuestos de ciclo). Nota: M34 L181=[?] en disco (reporte de Beam lo pinta flipado = overstatement, disco honesto, no x falso).",
-   "T017_sample": "RATIFICADO: M156 L354 [x] + 03 spec x4 (TerrainFootstepAudio al jugador).",
-   "T053_sample": "RATIFICADO: M75 L24/L43/L60 [x] + L76 [ ] (skip M25 correcto). Nota: specs inline en M75 03 (0 section Presupuestos; epilogo 1 hit). M75 05 = 50/133 en curso.",
-   "T058_sample": "M73 T058: verificado en disco (ver arriba).",
-   "T059_sample": "RATIFICADO: M55 L57/L67 [x] + L20 [?](skip correcto) + L42 RECETA_DESBLOQUEADA [?] en disco (overstatement report: lo pinta flipado, disco honesto). 0 x falsos. Patron de overstatement repetido (M48/L271/M55 L42).",
-   "T020_sample": "M04 T020 (60 FPS PC/Steam Deck): 03 tiene specs ('60 FPS'/'Steam Deck' presentes); verificado.",
-   "T039_sample": "M58 T039 (accesibilidad): sampleado contra disco (ver output); veredicto en esta clave.",
-   "T045_sample": "M68 T045 (1 item, profiler M116): verificado contra disco (ver output). RATIFICADO si [x]+spec.",
-   "T050_sample": "M92 T050 (RF14/RF15/K2): sampleado; veredicto en clave.",
-   "T062_sample": "M01 T062 (15 CUBO-A + 5 skip): sampleado 3 L# contra M01 05; veredicto en clave."
-  }
+  "ultimos_veredictos": [
+   {
+    "T": "T076",
+    "m": "M55",
+    "hecho": 16,
+    "skip": 4,
+    "veredicto": "CAVEAT",
+    "nota": "16 [x] CUBO-A. 03+codigo respaldan ~13. 3 SIN seccion 03: secuencia-Sellos, validar-cat-M25, guardar-ubicacion -> posible overstatement (pattern M55 Hy3), ANOTADO no flippeado. M55 NO sellable."
+   },
+   {
+    "T010_sample": "RATIFICADO 7/8 M34 [x] + M31 L84/85 [x] (03 Presupuestos de ciclo). Nota: M34 L181=[?] en disco (reporte de Beam lo pinta flipado = overstatement, disco honesto, no x falso).",
+    "T017_sample": "RATIFICADO: M156 L354 [x] + 03 spec x4 (TerrainFootstepAudio al jugador).",
+    "T053_sample": "RATIFICADO: M75 L24/L43/L60 [x] + L76 [ ] (skip M25 correcto). Nota: specs inline en M75 03 (0 section Presupuestos; epilogo 1 hit). M75 05 = 50/133 en curso.",
+    "T058_sample": "M73 T058: verificado en disco (ver arriba).",
+    "T059_sample": "RATIFICADO: M55 L57/L67 [x] + L20 [?](skip correcto) + L42 RECETA_DESBLOQUEADA [?] en disco (overstatement report: lo pinta flipado, disco honesto). 0 x falsos. Patron de overstatement repetido (M48/L271/M55 L42).",
+    "T020_sample": "M04 T020 (60 FPS PC/Steam Deck): 03 tiene specs ('60 FPS'/'Steam Deck' presentes); verificado.",
+    "T039_sample": "M58 T039 (accesibilidad): sampleado contra disco (ver output); veredicto en esta clave.",
+    "T045_sample": "M68 T045 (1 item, profiler M116): verificado contra disco (ver output). RATIFICADO si [x]+spec.",
+    "T050_sample": "M92 T050 (RF14/RF15/K2): sampleado; veredicto en clave.",
+    "T062_sample": "M01 T062 (15 CUBO-A + 5 skip): sampleado 3 L# contra M01 05; veredicto en clave.",
+    "T065_sample": "M01 T065 (9 CUBO-A M139-152 + 6 skip M137/138/141/146/147/149): sampleado M01 05; veredicto en clave.",
+    "T066_sample": "M75 T066 (19 CUBO-A postgame + 1 skip): sampleado M75 05 M75 L96 [x] M75 L108 [x] M75 L123 [x]",
+    "T068_sample": "M75 T068 (19 CUBO-A epilogo/logros + 1 skip): M75 L180 [x]; M75 L191 [x]; M75 L206 [x]"
+   }
+  ],
+  "ultimo_muestreo": "T076 M55 (25oct 03:00)"
  },
  "correccion_apilado_2200": "Trampa: mi archivo 'completados/' movio 33 archivos PENDING (T018-T050, regex fallado que contaba 0 abiertos). CORREGIDO: T018-T050 restaurados a root. Estado actual: root=T018-T060 (284 items [ ]), completados/=T001-T017 (17, 0 abiertos). Regla: solo archivar un T-file si VERDADERAMENTE 0 filas '[ ]' (re-contar antes de mover).",
  "apilador_estado_2224": {
@@ -793,7 +807,26 @@
    "mi_apilador": "Cron E de agnes APAGADO (wku_16fd1d87 borrado); reasumir solo con confirmacion del fundador (fase 2) o fin de carga de GLM"
   }
  },
- "deepseek_reactivado": "25oct 01:10: DeepSeek #390 responde al nudge #389 (corrida cortada, no bug). Hizo M45 validar_malla_glb.py (27/0 x3, prueba rojo, 418 glb) + corrigio premisa vencida (0/23 GLB). Acusado en #391. Riel BACKLOG-11 sigue.",
- "hy3_gate2": "25oct 01:10: Hy3 #381 = PRIMER GATE-2 de Beam (M04/M75/M110/M73/M55/M58). Findings: M55 FALLO PRECISION ([x] inflados/decorativos -> colado a Beam/Step-5 para marcar [ ] honesto, NO sellar hasta que cuadre). M04 FPS produce-first sin medir hardware (no sellar). Resto EN CURSO. Runtime red-probe = proximo tranche de Hy3.",
- "sellos_218": "ninguno sellable todavia: M55 inflado, M04 runtime pendiente, M75/110/73/58 en curso. Pipeline gate-1(agnes)+gate-2(Hy3) funcionando."
+ "deepseek_reactivado": "BACKLOG-11: 45-Arte-3D (390) + 50-Vegetacion (392, M50 flips 134/5/3, viento determinista + CI --selftest ratificado + M90 derivacion). Log 2178. Riel sigue.",
+ "hy3_gate2": "gate-2 runtime #383: M73 FALLO runtime (validador 8 vs 19 categorias, green-probe Hy3; T266 encolado Beam dueno M73), M55 precision-fail, M75/M110/M58 EN CURSO, M04 PARCIAL. 0 sellos. M110 caveat debug_menu:721 nula-textura (deuda). M75 primer candidato.",
+ "sellos_218": "0. Ling standby-PT. 17 drifts encolados a duenos. M75 primer candidato.",
+ "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
+ "ling_design_docs": {
+  "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
+  "lote2_asignado": "M72/M105/M107/M119 (los otros 4 capa-II degradados), mismo metodo.",
+  "rift_docs_anotados": [
+   "M112 techo 50 violado (74/max 468)",
+   "M114 cita M105/06 ROTA",
+   "M116 base 5GB vs 125.98MB",
+   "M118 0 nightly + release 14/30 vs 90 dias",
+   "M09 vertex-colors 0 texturas"
+  ],
+  "lote2": "CERRADO. capa-II barrido 23/23 resueltos (riela agotada). Ling en STANDBY PT-runtime (GO fundador #4, plan 243 listo 1-vuelta). 17 drifts -> deuda de duenos (no riela Ling). Gemelo 260 saneo."
+ },
+ "step5_riel": "iter.19 postgame CERRADO (M23 83/105, 742/0x3, 4 flips L129/132/133/134 ratificados). M33-Agricultura LIBERADA a Step-5 (#218). Sync GLOBAL fila 23 -> 83/105. Commit iter.17/18/19 va por Cron C.",
+ "gemelos_pendientes_saneo": [
+  "256/256 (Ling)",
+  "209/210 (Step-5)",
+  "248/248 (Ling)"
+ ]
 }

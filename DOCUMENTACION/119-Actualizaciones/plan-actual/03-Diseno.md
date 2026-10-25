@@ -393,3 +393,24 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Coherente con M107 (rollback automatico si apply_update() falla o juego cae 2 veces).
 - Unidad: porcentaje de usuarios. Dependencia: M107 (rollback).
 
+
+
+## Presupuestos numericos III - mediciones en disco (Ling-3.1-Flash, 2026-10-25, riel design-docs agnes msg 258 lote 2)
+
+Metodo produce-first: grep + lectura directa, sin ejecutar Godot. Citas archivo:Línea.
+
+### 11. Cadencia hotfix < 72h (medida)
+- update_manager.gd (92 lineas; autoload UpdateManager, project.godot L112) es 100% PASIVO: 0 hits de Timer/_process/intervalo/cron (grep) — el chequeo de actualizaciones es BAJA DEMANDA (hay_actualizacion L64, version_remota L70), no hay cadencia automatica.
+- Carga data/updates/versions.json (RUTA_VERSIONS L13): 3 canales (estable 1.0.0 / beta 1.1.0-beta.1 / dev 1.1.0-dev.3, URLs example.com placeholders) + politica {min_versiones_atras: 2, aviso_previa: true, requiere_reinicio: true}. Persistencia user://version.tres (L14, _guardar_version L83).
+- comparar_versiones L45: semver X.Y.Z; _parsear hace split("-")[0] (L56) -> IGNORA sufijos pre-release ("1.1.0-beta" == "1.1.0"); test_updates_m119.gd L52 lo afirma como esperado. set_canal L74 valida canal existente.
+- hotfix P0/P1 < 72h, patch mensual 30d, respuesta < 48h = PROCESO OPERATIVO documentado en M144 (03-Diseno.md L19-25, flujo de parches RF3: D1-D7 hotfix, mensual patch), NO en runtime.
+- DRIFT CI: la suite scripts/updates/test_updates_m119.gd (73 lineas; 4 fases: config, versiones, canales, resumen) NO esta cableada en .github/workflows/quality.yml (grep "updates|update_manager|test_updates" = 0 hits). Las suites M72 (quality.yml L523-528), M105 (L487-490, 4 suites con pisos CHECKS_MINIMOS 16/10/11/27) y M107 (L358-362) SÍ estan cableadas.
+- Unidad: horas/dias (proceso). Dependencia: M144.
+
+### 12. Rollout canary 5%/25%/100% (medido)
+- 0 hits de canary/rollout/circuit-breaker/fail_rate/porcentaje_usuarios en game/ (grep; unicos falsos positivos = "circuito central" de suites de test). Los porcentajes Beam 316 ###10 y el circuit-breaker <2% NO estan implementados en runtime.
+- scripts/updates/ tiene SOLO 2 archivos (update_manager.gd + test_updates_m119.gd): el "RollbackManager con restore_previous_version()" citado en este 03 L365 es INEXISTENTE en disco. El rollback real hoy = reinstalar manualmente la version anterior del canal.
+- Mecanismo real en disco = PROMOCION ENTRE CANALES: versions.json 3 canales (dev -> beta -> estable) + politica.min_versiones_atras = 2 (ventana de compatibilidad hacia atras); UpdateManager.set_canal (L74) + hay_actualizacion por canal (L64).
+- La via análoga operativa al canary es el despliegue por canales con min_versiones_atras=2; la via del circuit-breaker no existe (no hay telemetria de fallos de update cableada a un rollback — M105 no emite eventos de actualizacion).
+- Fórmula Beam [5%, 25%, 100%] + fail_rate > 2% queda como DISENO NO MATERIALIZADO. Deuda (decision del fundador): para canary real hacen falta (a) versionado de payload M105 + eventos de update, (b) RollbackManager nuevo (flujo paralelo, regla §15), (c) cablear test_updates_m119 en CI.
+- Unidad: % de usuarios (diseño) / canales (disco). Dependencia: M107 (rollback), M105 (telemetria de fallos).

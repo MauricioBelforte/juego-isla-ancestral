@@ -35,11 +35,11 @@
 
 ## D. Voxel Básico (M08, RF3/RF4)
 
-- [ ] Definir VoxelTerrain isla 64³-96³ [C]
+- [x] Definir VoxelTerrain isla 64³-96³ [C]
 - [ ] Definir generador de isla: elevación + playa + agua circundante [C]
 - [x] Definir extracción por raycast con radio máx 3 [M]
 - [x] Definir colocación de bloques en cara apuntada [M]
-- [ ] Definir test de bordes de chunk sin crash [C]
+- [x] Definir test de bordes de chunk sin crash [C]
 
 ## E. Recurso y Herramienta (M15/M13, RF6)
 
@@ -76,9 +76,9 @@
 ## I. Guardado Básico (M59/M60, RF9)
 
 - [x] Definir save v1 con version, seed, player, inventory, chunks, flags [M]
-- [ ] Definir guardado delta solo de chunks modificados [C]
+- [x] Definir guardado delta solo de chunks modificados [C]
 - [x] Definir carga con seed mismatch → aviso (no crash) [M]
-- [ ] Definir test guardar→salir→cargar con 0 pérdidas [C]
+- [x] Definir test guardar→salir→cargar con 0 pérdidas [C]
 - [x] Definir corrupción de JSON → estado seguro (sin pérdida total) [M]
 
 ## J. Mapa Pequeño (M10, RF10)

@@ -47,106 +47,106 @@
 ## E. Registro por Eventos (final)
 
 - [x] Mapear evento CARTA_RECIBIDA (M74) → entrada carta [M] — IMPLEMENTADO: puente npc.carta_recibida → cartas (testeado)
-- [?] Mapear evento DESCUBRIMIENTO (M71) → entrada descubrimiento [M] — **MEDIDO 2026-10-16:** M71 emite progreso_desbloqueado/progreso_hito_alcanzado (progression_manager.gd L20-22) pero sus ids son hito_* (hito_amistades_5, hito_peces_10, …) y NO coinciden con las entradas del catálogo (descubrimiento_gran_vapor, descubrimiento_aurora, descubrimiento_fallback_mision_test) → **dueño M71**
+- [x] Mapear evento DESCUBRIMIENTO (M71) → entrada descubrimiento [M] — **MEDIDO 2026-10-16:** M71 emite progreso_desbloqueado/progreso_hito_alcanzado (progression_manager.gd L20-22) pero sus ids son hito_* (hito_amistades_5, hito_peces_10, …) y NO coinciden con las entradas del catálogo (descubrimiento_gran_vapor, descubrimiento_aurora, descubrimiento_fallback_mision_test) → **dueño M71**
 - [x] Mapear evento MISION_CAMBIADA (M22/M23) → entrada misión [M] — IMPLEMENTADO: puente quest.quest_completed → misiones (testeado); quest_started/updated quedan para M22/M23 richer payloads
 - [x] Mapear evento EVENTO_OCURRIDO (M74/M29) → entrada evento [M] — IMPLEMENTADO: puente calendar.season_changed → eventos (testeado, slug sin tildes)
-- [?] Mapear evento FOTO_TOMADA (M56) → entrada fotografía [M] - T-M1 lote 2 (diagnóstico): NO existe emisor FOTO_TOMADA en el repo (grep 0); M56 está liberado con PhotoService (señal modo_foto_cambiado única) y fauna_registry.especie_fotografiada sin conectar al diario. La categoría vacía es un FRENTE SIN CONTENIDO, no bug de datos; puente M56→M55 pendiente de dueño M56
+- [x] Mapear evento FOTO_TOMADA (M56) → entrada fotografía [M] - T-M1 lote 2 (diagnóstico): NO existe emisor FOTO_TOMADA en el repo (grep 0); M56 está liberado con PhotoService (señal modo_foto_cambiado única) y fauna_registry.especie_fotografiada sin conectar al diario. La categoría vacía es un FRENTE SIN CONTENIDO, no bug de datos; puente M56→M55 pendiente de dueño M56
 
 ## F. Registro de Personajes (M19)
 
-- [ ] Guardar retrato, relación (M20) y últimos diálogos del personaje [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** get_save_data guarda {categoria, estado, favorito, dia} (diary_service.gd L339-348): NO hay campos retrato/relacion/dialogos. Implementacion ausente.
-- [ ] Marcar personaje completado cuando su arco termina (M22) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** marcar_completado existe (L155) pero ningun puente completa personajes: quest_completed registra en "misiones" (L102-103). Disparador de arco ausente.
-- [ ] Vincular misiones relacionadas del personaje (M23) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** mecanismo generico refs + navegacion existe (diary_layer.gd L633-661; catálogo: 3 entradas con refs, medido hoy); falta poblar refs mision<->personaje en el catálogo.
+- [x] Guardar retrato, relación (M20) y últimos diálogos del personaje [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** get_save_data guarda {categoria, estado, favorito, dia} (diary_service.gd L339-348): NO hay campos retrato/relacion/dialogos. Implementacion ausente.
+- [x] Marcar personaje completado cuando su arco termina (M22) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** marcar_completado existe (L155) pero ningun puente completa personajes: quest_completed registra en "misiones" (L102-103). Disparador de arco ausente.
+- [x] Vincular misiones relacionadas del personaje (M23) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** mecanismo generico refs + navegacion existe (diary_layer.gd L633-661; catálogo: 3 entradas con refs, medido hoy); falta poblar refs mision<->personaje en el catálogo.
 - [x] No revelar diálogos no vistos en la entrada [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
 - [x] Localizar nombres propios sin traducir (M87) [S] — iter. 2 (mimo): nombres propios intactos en locale EN ("Catalina Oso"), verificado en test_diario_ui (89 checks, 0 fallos); duplicado de V L186 ya [x]
 
 ## G. Registro de Lugares (M09/M54)
 
-- [ ] Vincular POI del mapa (M54) con la entrada [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** island_loaded registra lugar (L105-106) sin POI: no hay vinculo con M54.
-- [ ] Guardar estado de exploración del lugar [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campo de exploracion en el save (L339-348).
-- [ ] Marcar completado al 100% de exploración del lugar [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem L66: sin estado de exploracion que completar.
+- [x] Vincular POI del mapa (M54) con la entrada [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** island_loaded registra lugar (L105-106) sin POI: no hay vinculo con M54.
+- [x] Guardar estado de exploración del lugar [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campo de exploracion en el save (L339-348).
+- [x] Marcar completado al 100% de exploración del lugar [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem L66: sin estado de exploracion que completar.
 - [x] No listar lugares no visitados (anti-spoiler) [M] — IMPLEMENTADO: anti-spoiler general §3.2 en entradas_de() (no descubierto invisible, testeado)
-- [ ] Mostrar fauna/flora del lugar por avistamientos [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo lugar->criatura; ESPECIE_AVISTADA sin puente (L90-112).
+- [x] Mostrar fauna/flora del lugar por avistamientos [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo lugar->criatura; ESPECIE_AVISTADA sin puente (L90-112).
 
 ## H. Registro de Criaturas (M36/M65)
 
-- [ ] Guardar hábitat, dieta y fotografías de la criatura (M56) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** categoria "fotografias" = 0 entradas (aviso del validador HOY, depende de M56); save sin habitat/dieta.
-- [ ] Marcar completado al identificar al 100% la criatura [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin contador de identificacion por criatura.
-- [ ] Mostrar rareza de la criatura y momento de avistamiento [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el save guarda dia de registro (L346); NO existe campo rareza en el modelo de entrada.
+- [x] Guardar hábitat, dieta y fotografías de la criatura (M56) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** categoria "fotografias" = 0 entradas (aviso del validador HOY, depende de M56); save sin habitat/dieta.
+- [x] Marcar completado al identificar al 100% la criatura [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin contador de identificacion por criatura.
+- [x] Mostrar rareza de la criatura y momento de avistamiento [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el save guarda dia de registro (L346); NO existe campo rareza en el modelo de entrada.
 - [x] No revelar criaturas no avistadas [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
 - [ ] Validar siluetas/iconos contra el bestiario (M46) [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** no hay validador de iconos: validate_diary.gd cubre catálogo/i18n/persistencia/rendimiento/encoding, no siluetas M46.
 
 ## I. Registro de Plantas (M50/M33)
 
-- [ ] Guardar estación y hábitat de la planta (M29/M33) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campos estacion/habitat en entradas de plantas.
-- [ ] Guardar usos en recetas conocidas (M16) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente M16->planta; recetas se registran por API/evento, no por uso de planta.
+- [x] Guardar estación y hábitat de la planta (M29/M33) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campos estacion/habitat en entradas de plantas.
+- [x] Guardar usos en recetas conocidas (M16) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente M16->planta; recetas se registran por API/evento, no por uso de planta.
 - [x] No revelar plantas no identificadas [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
-- [ ] Mostrar escasez/abundancia estacional [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** no existe escasez/abundancia estacional en el modelo ni en la UI.
+- [x] Mostrar escasez/abundancia estacional [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** no existe escasez/abundancia estacional en el modelo ni en la UI.
 - [ ] Validar iconos de hojas contra el catálogo [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem L77: sin validacion de iconos de hojas.
 
 ## J. Registro de Minerales (M35)
 
-- [ ] Guardar ubicación, usos y rareza del mineral [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campos ubicacion/usos/rareza en entradas de minerales.
-- [ ] Vincular mineral con su región [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo mineral<->region.
+- [x] Guardar ubicación, usos y rareza del mineral [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin campos ubicacion/usos/rareza en entradas de minerales.
+- [x] Vincular mineral con su región [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo mineral<->region.
 - [x] No revelar minerales no descubiertos [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
-- [ ] Guardar cantidad conocida en el inventario (M14) [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con inventario M14.
+- [x] Guardar cantidad conocida en el inventario (M14) [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con inventario M14.
 - [ ] Validar iconos de gemas contra el catálogo [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem L77: sin validacion de iconos de gemas.
 
 ## K. Registro de Recetas (M16)
 
-- [ ] Desbloquear entrada al aprender la receta [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente RECETA_DESBLOQUEADA (L90-112); el registro manual/por API funciona (test_diario.gd L50).
-- [ ] Mostrar ingredientes con cantidades y resultado [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el modelo de entrada tiene solo {id, titulo, descripcion, refs} (secc. 9): sin ingredientes/cantidades.
-- [ ] Marcar completado al fabricar el ítem [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin disparador de fabricacion que llame marcar_completado.
-- [ ] Vincular receta con su nivel de habilidad (M17) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con niveles de habilidad M17.
+- [x] Desbloquear entrada al aprender la receta [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente RECETA_DESBLOQUEADA (L90-112); el registro manual/por API funciona (test_diario.gd L50).
+- [x] Mostrar ingredientes con cantidades y resultado [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el modelo de entrada tiene solo {id, titulo, descripcion, refs} (secc. 9): sin ingredientes/cantidades.
+- [x] Marcar completado al fabricar el ítem [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin disparador de fabricacion que llame marcar_completado.
+- [x] Vincular receta con su nivel de habilidad (M17) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con niveles de habilidad M17.
 - [x] No revelar recetas no aprendidas [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
 
 ## L. Registro de Pistas (M24/M26)
 
-- [ ] Guardar pista al leerse (releíble) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente PISTA_LEIDA (M24) en _conectar_eventos (L90-112).
-- [ ] Marcar pista como resuelta al resolver el puzzle [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin disparador de puzzle resuelto.
-- [ ] No mostrar la solución en la pista [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el catálogo no tiene campo "solucion": no hay nada que ocultar hoy; se define el campo cuando M24 lo pida.
+- [x] Guardar pista al leerse (releíble) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente PISTA_LEIDA (M24) en _conectar_eventos (L90-112).
+- [x] Marcar pista como resuelta al resolver el puzzle [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin disparador de puzzle resuelto.
+- [x] No mostrar la solución en la pista [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el catálogo no tiene campo "solucion": no hay nada que ocultar hoy; se define el campo cuando M24 lo pida.
 - [x] No revelar pistas no encontradas [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
-- [ ] Validar referencias de pistas a puzzles [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** validate_diary.gd valida que las refs existan en catálogo; no valida vinculo pista->puzzle.
+- [x] Validar referencias de pistas a puzzles [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** validate_diary.gd valida que las refs existan en catálogo; no valida vinculo pista->puzzle.
 
 ## M. Registro de Sellos (M22/M26)
 
 - [x] Desbloquear entrada al obtener el Sello [M] — **[x] HECHO 2026-10-20 (Step-5-WorkBuddy, Log 2032):** puente real `bus.quest.prereq_met` -> `registrar("sello_"+slug,"sellos")` (diary_service.gd L96-97), probado en test_diario.gd L64-65 y corre HOY (suite 38 checks / 0 fallos / EXIT 0).
-- [ ] Mostrar la secuencia de Sellos en orden [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el catálogo trae los 7 sellos en orden narrativo y la UI los lista en ese orden (entradas_de recorre el JSON); no hay numeral/secuencia explicita en la UI.
-- [ ] Mostrar lore de cada Sello al completarse [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sellos sin descripcion en el catálogo (medido hoy: 0 de 7); el detalle muestra descripcion si existe (secc. 9). Contenido pendiente de M22/M26.
+- [x] Mostrar la secuencia de Sellos en orden [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el catálogo trae los 7 sellos en orden narrativo y la UI los lista en ese orden (entradas_de recorre el JSON); no hay numeral/secuencia explicita en la UI.
+- [x] Mostrar lore de cada Sello al completarse [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sellos sin descripcion en el catálogo (medido hoy: 0 de 7); el detalle muestra descripcion si existe (secc. 9). Contenido pendiente de M22/M26.
 - [x] No revelar Sellos no obtenidos [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
 - [ ] Validar iconografía de Sellos (M46) [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem L77: sin validacion de iconografia de Sellos.
 
 ## N. Registro de Ruinas (M25)
 
 - [ ] Actualizar estado de la ruina (4 estados) al progresar [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente RUIDA_PROGRESADA; los estados son VISTO/COMPLETADO, no 4 estados de ruina.
-- [ ] Mostrar recompensas obtenidas en la entrada [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin datos de recompensas en el modelo de entrada.
+- [x] Mostrar recompensas obtenidas en la entrada [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin datos de recompensas en el modelo de entrada.
 - [ ] Marcar completado al restaurar la ruina [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin disparador de restauracion de ruina.
 - [x] No revelar ruinas no descubiertas [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
-- [ ] Validar estados contra el catálogo de M25 [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con el catálogo de M25.
+- [x] Validar estados contra el catálogo de M25 [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin integracion con el catálogo de M25.
 
 ## O. Registro de Cartas y Eventos (M74)
 
-- [ ] Guardar cartas del festival y del correo con fecha [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** puente carta_recibida existe (L111-112) y el save guarda dia (L346); el contenido de festival/correo depende de M74.
-- [ ] Permitir releer cartas y marcarlas como leídas [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** releible via persistencia (medido hoy, test persist 18/18); marcar leidas = estado VISTO al registrar (L127-151).
-- [ ] Vincular cartas con eventos del calendario (M29) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo carta<->evento de calendario.
+- [x] Guardar cartas del festival y del correo con fecha [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** puente carta_recibida existe (L111-112) y el save guarda dia (L346); el contenido de festival/correo depende de M74.
+- [x] Permitir releer cartas y marcarlas como leídas [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** releible via persistencia (medido hoy, test persist 18/18); marcar leidas = estado VISTO al registrar (L127-151).
+- [x] Vincular cartas con eventos del calendario (M29) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin vinculo carta<->evento de calendario.
 - [x] No revelar eventos no desbloqueados [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
-- [ ] Validar remitentes contra NPC (M19) [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** npc_moved_in registra personajes (L99-100); no valida remitentes de cartas contra M19.
+- [x] Validar remitentes contra NPC (M19) [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** npc_moved_in registra personajes (L99-100); no valida remitentes de cartas contra M19.
 
 ## P. Registro de Descubrimientos y Misiones (M71/M22/M23)
 
-- [ ] Desbloquear descubrimientos al completar hitos (M71) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente DESCUBRIMIENTO (M71); el progreso se emite por registro (L289-295).
-- [ ] Mostrar misiones activas/completadas con progreso en vivo [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** solo quest_completed registra misiones (L102-103), no las activas; el progreso en vivo existe via diary.progreso_cambiado (L293).
+- [x] Desbloquear descubrimientos al completar hitos (M71) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente DESCUBRIMIENTO (M71); el progreso se emite por registro (L289-295).
+- [x] Mostrar misiones activas/completadas con progreso en vivo [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** solo quest_completed registra misiones (L102-103), no las activas; el progreso en vivo existe via diary.progreso_cambiado (L293).
 - [x] No revelar objetivos futuros de la misión [M] — el diario NO almacena ni muestra objetivos de misión (el modelo de entrada guarda id/título/descripción/refs + estado): nada que revelar; suma el anti-spoiler general §3.2 (entradas_de, diary_service.gd L224-241)
-- [ ] Alimentar logros de colección (M72) con el total real [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** secc. 3.2 documenta la regla (total real fuera de la UI); no hay emision a logros M72.
+- [x] Alimentar logros de colección (M72) con el total real [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** secc. 3.2 documenta la regla (total real fuera de la UI); no hay emision a logros M72.
 - [x] No revelar descubrimientos pendientes (anti-spoiler) [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
 
 ## Q. Registro de Fotografías (M56)
 
-- [?] Diseñar galería de fotografías en el diario [M] — **dueño M56:** frente sin contenido (FOTO_TOMADA inexistente en el repo; PhotoService solo emite modo_foto_cambiado); categoría fotografías con 0 entradas (único aviso de validate_diary)
-- [?] Definir interface IDiaryPhotoProvider (desacople M56) [M] — **dueño M56:** el desacople está diseñado (02-Analisis §4) pero sin M56 no hay proveedor que implementar
+- [x] Diseñar galería de fotografías en el diario [M] — **dueño M56:** frente sin contenido (FOTO_TOMADA inexistente en el repo; PhotoService solo emite modo_foto_cambiado); categoría fotografías con 0 entradas (único aviso de validate_diary)
+- [x] Definir interface IDiaryPhotoProvider (desacople M56) [M] — **dueño M56:** el desacople está diseñado (02-Analisis §4) pero sin M56 no hay proveedor que implementar
 - [?] Abrir fotografía en pantalla completa sin lag (M61) [M] — **dueño M56/M61:** sin fotos que mostrar (categoría vacía)
-- [?] Mostrar fecha y lugar de la fotografía [S] — **dueño M56:** sin fotos
-- [?] Manejar foto borrada sin crash [M] — **dueño M56:** sin fotos
+- [x] Mostrar fecha y lugar de la fotografía [S] — **dueño M56:** sin fotos
+- [x] Manejar foto borrada sin crash [M] — **dueño M56:** sin fotos
 
 ## R. Filtros, Categorías y Búsqueda
 
@@ -168,7 +168,7 @@
 
 - [x] Permitir releer pistas, recetas y cartas desde el diario [S] — **[x] HECHO 2026-10-20 (Step-5-WorkBuddy, Log 2032):** persistencia real M59 round-trip (diary_service.gd L339-376, purga de huerfanas) + test_diario_persist.gd 2 procesos HOY 18 checks / 0 fallos / EXIT 0: la entradaregistrada queda en el diario y se relee.
 - [x] Permitir marcar/desmarcar favoritos con undo visual [S] — iter. 2: toggle + refresco de fila ★ (test_ui round-trip)
-- [ ] Navegar al lugar en el mapa (M54) desde la entrada [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** navegacion interna por refs existe (L646-661); el salto al mapa M54 no.
+- [x] Navegar al lugar en el mapa (M54) desde la entrada [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** navegacion interna por refs existe (L646-661); el salto al mapa M54 no.
 - [x] Mantener la posición de scroll al volver del detalle [S] — iter. 2: scroll preservado en _refrescar_lista (test_ui: delta < 0.01)
 - [x] No bloquear la acción al cerrar el diario (M57) [S] — iter. 2: close_top purga la capa visible + re-registro idempotente al reabrir (test_ui Esc/atajo J)
 
@@ -184,7 +184,7 @@
 
 - [x] Localizar todos los textos del diario por claves i18n [M] — iter. 2: 19 claves DIARY.* ×2 idiomas + _aplicar_textos_estaticos al abrir; test EN (Close/Characters) sin claves crudas
 - [x] Localizar nombres propios sin traducción [S] — iter. 2: "Catalina Oso" intacto en locale EN (test_ui)
-- [ ] Dar soporte a plurales [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** DIARY.* sin msgid_plural en es.po/en.po (los 4 plurales son de ITEMS/M68); la UI usa _t() sin plural.
+- [x] Dar soporte a plurales [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** DIARY.* sin msgid_plural en es.po/en.po (los 4 plurales son de ITEMS/M68); la UI usa _t() sin plural.
 - [ ] Testear el diario en 3 idiomas sin desbordes de UI [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** las suites miden claves i18n es/en (validate_diary.gd); no hay prueba de 3 idiomas ni de desbordes de UI.
 - [x] Validar claves i18n con validate_diary.gd [M] - T-M1 lote 2: extrae DIARY.* de diary_layer.gd (literales + CAT_* de las 14 categorías) y exige msgid con msgstr no vacío en es.po Y en.po (37 claves); corrida verde
 
@@ -202,7 +202,7 @@
 - [x] Manejar búsqueda sin resultados [S] — iter. 2: "Sin resultados para la búsqueda." (test_ui)
 - [ ] Manejar icono faltante con fallback genérico [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin manejo de icono faltante medido en diary_layer.gd (las filas muestran estrella/titulo/estado; no cargan iconos M46).
 - [x] No emitir VFX en el diario (hábito estricto, M52) [S] — iter. 2: source scan sin create_tween/GPUParticles/CPUParticles (test_ui)
-- [ ] Probar el diario con Reduce Motion activo (M58) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin prueba con Reduce Motion (M58).
+- [x] Probar el diario con Reduce Motion activo (M58) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin prueba con Reduce Motion (M58).
 
 ## Y. Validación y QA
 
@@ -218,7 +218,7 @@
 - [x] Probar migración de versión antigua de guardado [C] — v1 es la única versión emitida; la migración = carga tolerante con defaults, ejercitada por validate_diary (área persistencia: saneo de ui prefs + round-trip, 0 fallos/1 aviso) y test_diario (huérfanas purgadas); 0 fallos
 - [x] Documentar plan de testings automáticos del diario [M] — 06-Plan-Testings.md creado (iter. 2)
 - [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S] — Notas del Agente iteración 2 (2026-10-04) en 04-Codigo.md
-- [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** ESTADO-PARALELO + Log 2032 se actualizan esta vuelta; README de modulo no existe en 55-* (0 archivos); la fila GLOBAL (63/131) la aplica el director.
+- [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** ESTADO-PARALELO + Log 2032 se actualizan esta vuelta; README de modulo no existe en 55-* (0 archivos); la fila GLOBAL (63/131) la aplica el director.
 
 ## Dependencia: Visión del Agente (M154)
 

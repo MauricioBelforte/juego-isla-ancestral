@@ -133,3 +133,31 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 ## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-7 (H24/H27)**: piso de checks "5, max 50" vs contados 57/42/29: el texto del piso/techo se actualiza para reflejar el conteo real medido (57/42/29). El piso minimo sigue siendo 5 checks/archivo, el maximo sigue siendo 50; los conteos reales (57 en el maximo) se documentan como "fuera de techo, flaggeado para revision" (no se cambia el umbral). Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 
+
+
+Riel design-docs SIN DATOS (encargo agnes-3-flash msg 255, 2026-10-24 21:08; GO directora). Produce-first line-based, sin vision: cada numero medido en disco con cita archivo:linea (recorrido python -X utf8 + Grep/Read; sin ejecutar Godot). Las capas I/II (Beam 1.0, 2026-10-23) quedan intactas; aqui se groundean con mediciones reales y se documentan los drift hallados. **Modelo:** Ling-3.1-Flash / **Plataforma:** Kilo Code / **Fecha:** 2026-10-25
+
+## Presupuestos numericos III - mediciones en disco (Ling-3.1-Flash, 2026-10-25)
+
+### 34. Workflows medidos (6 archivos, 29 jobs) — .github/workflows/
+| Workflow | Jobs | Cron | Concurrency | retention-days | timeout-minutes |
+|----------|------|------|-------------|----------------|-----------------|
+| backup.yml | 1 | '0 2 * * 1' (L17, comentario PAQ-6/H26) | no | 7 (L69) | — |
+| bug_metrics.yml | 1 | '0 9 * * 1' (L5) | no | — | — |
+| dev-build.yml | 4 | no | cancel-in-progress (L21-23) | 7/3/7 (L69/L100/L122) | 15/15/10 (L29/L74/L105) |
+| quality.yml | 13 | no | cancel-in-progress (L9-11) | — | 15/15/20/10/5/10/10/10/10/10 (L17/L117/L160/L661/L745/L783/L854/L885/L928/L990) |
+| release-build.yml | 7 | no | no | 14/30 (L140/L168) | 20/10 (L35/L56) |
+| testing.yml | 3 | no | cancel-in-progress (L9-11) | — | 15/10 (L17/L89) |
+- runs-on: ubuntu-latest en los 29 jobs (mitigacion PAQ-6 verificada en disco).
+
+### 35. Free tier — recalculo honesto
+- Artefactos: 21.5 GB/mes medidos (Beam H26, Logs/estado_director.json flags) vs 10 GB free tier de GitHub Actions.
+- Minutos: PAQ-6 (este 03, L131) calculo 646-1136 min/mes asumiendo nightly 3/semana. EN DISCO NO HAY NIGHTLY (0 crons diarios; solo 2 semanales) -> runs/semana reales = push 7-14 + tag 0.25-0.5 + semanales 2 = 9.25-16.5 -> ~600-1063 min/mes (techo free 2000). DENTRO del free tier en minutos; el riesgo real son los ARTÉFACTOS (21.5 GB > 10 GB), mitigados en disco por retention 3-7 d (dev), 14/30 (release), 7 (backup) + concurrency cancel-in-progress x3.
+
+### 36. Drift doc-vs-disco (hallazgos para la directora)
+- Capa I #4 dice "release 90 dias"; disco: release-build.yml retention-days 14/30 (L140/L168). Documentar o actualizar capa I.
+- PAQ-6 asume "nightly 3/semana"; en disco NO existe ningun schedule nocturno (solo backup lunes 2 AM UTC, L17, y bug_metrics lunes 9 AM, bug_metrics.yml L5).
+- Capa I #4 dice "dev build 7 dias"; disco: dev-build.yml tiene tres retenciones distintas por artefacto (7/3/7).
+
+### 37. Piso de checks minimos por workflow (verificacion)
+- testing.yml (3 jobs) y quality.yml (13 jobs) implementan el piso "lint 0 errors, test 100% pass, build success" (capa II ###33) como jobs de CI. Los RESULTADOS de CI viven en GitHub, no en disco local: este riel verifica la existencia y configuracion de los jobs, no sus veredictos.

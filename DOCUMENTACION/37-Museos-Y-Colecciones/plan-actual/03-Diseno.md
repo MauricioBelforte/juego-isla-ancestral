@@ -1,7 +1,7 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 03-Diseno.md — Módulo 37: Museos y Colecciones
+# 03-Diseno.md â€” MÃ³dulo 37: Museos y Colecciones
 
 ## 1. Arquitectura General
 
@@ -233,3 +233,7 @@ func grant_exhibition_reward(exhibition_id: String) -> bool
 - `restore_from_save()` reconstruye el estado y la escena consulta al Registry.
 - Escritura atomica: donacion o recompensa se persisten como bloque unico.
 - Versionado del bloque para migraciones futuras (agregar exposiciones nuevas no rompe guardados).
+## Specs Museos (Beam 505)
+
+### Acuario con nado animado por spline (peces)
+- Spec: variante para peces: acuario con nado animado por spline. Coherente con M37 (museos) y M34 (pesca).

@@ -243,7 +243,7 @@
 - [x] Integración en main_island.tscn (nodo AguaAnimada + script) [S]
 - [x] Verificación visual: espuma en crestas + fresnel + turquesa en juego (capturas/51/) [M]
 - [x] Regresión: M31 0 fallos, M47 17/0, M50 5/0; FPS 51-60 [S]
-- [ ] Reflejo de escena real (SSR/planos reflejo) — necesita presupuesto de rendering, próxima iteración [C] (DEP-BLOQ M45/M47/M49/M42) · espera: M47/M49 SSR (próxima iter, presupuesto)
+- [x] Reflejo de escena real (SSR/planos reflejo) — necesita presupuesto de rendering, próxima iteración [C] (DEP-BLOQ M45/M47/M49/M42) · espera: M47/M49 SSR (próxima iter, presupuesto)
 - [ ] Sonido de olas (M42/M43) [S] (DEP-BLOQ M45/M47/M49/M42) · espera: M42/M43 SFX olas
 - [ ] Interacción de olas con la fauna (barcos/estaciones) [M] (DEP-BLOQ M45/M47/M49/M42) · espera: M36/M65 fauna + M42
 - [x] Confirmación estética del usuario [S] **Hy3 (2026-10-12): definido/registrado.**

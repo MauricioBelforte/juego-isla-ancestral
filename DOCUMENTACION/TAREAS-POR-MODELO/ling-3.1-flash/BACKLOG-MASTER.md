@@ -24,7 +24,11 @@
 **Nicho:** i18n/localización/catálogos — ES/EN/PT + M87 + placeholders + UTF-8 + validador headless + reporte-only de referencia (metodología informe 142).
 **Reglas:** Standard informe 142 (medición por script, reporte-only)... salvo los encargos editor (144/146 — SÍ edita, con pathspec explícito y validación por script).
 
-**ESTADO 2026-10-24 01:20 (post tanda visual 56-62, informes 238/240):** tanda 56-62 CERRADA y RATIFICADA por el director (239): 56/57/58/60/61/62 [x] con evidencia runtime (boot ES+EN 0 errores, spawn (3860,3860) vivo, fixes D102 verificados en codigo); 59 [?] — PT NO es locale de runtime (LOCALES_SOPORTADOS=['es','en'], pt.po NO existe) — escalado al fundador via director 239 (GO de produccion). Cola: 93 [x] / 4 pendientes de 106 (38-40 M159 dueno externo; 59 escalada). **STANDBY i18n por orden del fundador 23oct 20:42** (sin creditos para verificar a Beam) — cron ACTIVO, sin nueva i18n hasta orden. Pool del canal saneado (colision 239 removida por proximo_numero.py). | **Sweep 07:00Z (informe 242):** estado_director sin cambios (ultimo_update 2026-10-23T04:20); escalada PT-runtime registrada en consultas_fundador_23oct #4 (mesa del fundador); deriva_m63_boot_tips registra propuesta T22 pendiente encargo dueno M63; config.cfg CRC f24e2df1 MATCH idioma='es'; capturas ES (230.274 B) + EN (80.244 B) verificadas en disco; backlog tarea 57 con ruta captura ES; pool 242 consumido (quedan 30). | **Ronda 08:00Z (informe 244):** director 243 RATIFICA 242 + APRUEBA plan PT tal cual (ejecucion en UNA vuelta ante GO); radar M23 derivado a Step-5 (no es mi riel). Preparacion medida: validador_po.gd leido completo (467 lineas, reglas R1-R15 + P1/P2/P3/P5) — checklist anexado a tarea 59; MEDICION CORREGIDA: es.po = 274 entradas + 4 plurales (ITEMS.SE_OFRECEN, M68.TRIP.HORAS/MINUTOS/SEGUNDOS) + 15 marcadores no-traducir; strings_pt.json 'cadenas' = 170 claves (159 solapadas + 11 huérfanas legado M60); traduccion nueva real = 115 claves (el '~170 msgids' del plan = claves del JSON maestro, no entradas del .po — correccion honesta con medicion textual). Pool 244 consumido (quedan 28). | **Ronda 20:25Z (informe 246):** cron RE-ENCENDIDO por orden del fundador (wku_16f98b331001hOQSlGHaH9v86K, 0 * * * *, proximo 21:00Z; viejo wku_16739e40d001DRdRALlor3EsZY eliminado 08:47Z). Director 245 RATIFICA 244: correccion de volumen 274/159/115 ADOPTADA en consulta #4 del fundador; regimen confirmado (standby, sin pt.po, poll-minimal, sin encargo nuevo). Write real: CENSO de las 115 nuevas por dominio (M68 transporte 89, DIARY 14, CLOCK 4, ITEMS 2, 6 unitarias) + 4 plurales ES/EN + 15 no-traducir + plantilla cabecera pt.po -> ANEXO EJECUCION PT al final del backlog. Pool 246 consumido (quedan 27).
+**ESTADO 2026-10-24 01:20 (post tanda visual 56-62, informes 238/240):** tanda 56-62 CERRADA y RATIFICADA por el director (239): 56/57/58/60/61/62 [x] con evidencia runtime (boot ES+EN 0 errores, spawn (3860,3860) vivo, fixes D102 verificados en codigo); 59 [?] — PT NO es locale de runtime (LOCALES_SOPORTADOS=['es','en'], pt.po NO existe) — escalado al fundador via director 239 (GO de produccion). Cola: 93 [x] / 4 pendientes de 106 (38-40 M159 dueno externo; 59 escalada). **STANDBY i18n por orden del fundador 23oct 20:42** (sin creditos para verificar a Beam) — cron ACTIVO, sin nueva i18n hasta orden. Pool del canal saneado (colision 239 removida por proximo_numero.py). | **Sweep 07:00Z (informe 242):** estado_director sin cambios (ultimo_update 2026-10-23T04:20); escalada PT-runtime registrada en consultas_fundador_23oct #4 (mesa del fundador); deriva_m63_boot_tips registra propuesta T22 pendiente encargo dueno M63; config.cfg CRC f24e2df1 MATCH idioma='es'; capturas ES (230.274 B) + EN (80.244 B) verificadas en disco; backlog tarea 57 con ruta captura ES; pool 242 consumido (quedan 30). | **Ronda 08:00Z (informe 244):** director 243 RATIFICA 242 + APRUEBA plan PT tal cual (ejecucion en UNA vuelta ante GO); radar M23 derivado a Step-5 (no es mi riel). Preparacion medida: validador_po.gd leido completo (467 lineas, reglas R1-R15 + P1/P2/P3/P5) — checklist anexado a tarea 59; MEDICION CORREGIDA: es.po = 274 entradas + 4 plurales (ITEMS.SE_OFRECEN, M68.TRIP.HORAS/MINUTOS/SEGUNDOS) + 15 marcadores no-traducir; strings_pt.json 'cadenas' = 170 claves (159 solapadas + 11 huérfanas legado M60); traduccion nueva real = 115 claves (el '~170 msgids' del plan = claves del JSON maestro, no entradas del .po — correccion honesta con medicion textual). Pool 244 consumido (quedan 28). | **Ronda 20:25Z (informe 246):** cron RE-ENCENDIDO por orden del fundador (wku_16f98b331001hOQSlGHaH9v86K, 0 * * * *, proximo 21:00Z; viejo wku_16739e40d001DRdRALlor3EsZY eliminado 08:47Z). Director 245 RATIFICA 244: correccion de volumen 274/159/115 ADOPTADA en consulta #4 del fundador; regimen confirmado (standby, sin pt.po, poll-minimal, sin encargo nuevo). Write real: CENSO de las 115 nuevas por dominio (M68 transporte 89, DIARY 14, CLOCK 4, ITEMS 2, 6 unitarias) + 4 plurales ES/EN + 15 no-traducir + plantilla cabecera pt.po -> ANEXO EJECUCION PT al final del backlog. Pool 246 consumido (quedan 27). | **Ronda 21:00Z (informe 248):** cron reactivado disparo (wku_16f98b33). Director 247 RATIFICA 246: censo por dominios (115) ADOPTADO en consulta #4 del fundador + plurales/markers/cabecera PT adoptados. HALLAZGO PASO 0: estado_director.json -> consultas_fundador_23oct.clasificacion_24oct — el fundador (24oct 08:13, 'ahora no tengo decidido eso, como deuda tecnica') archivo PT-runtime como DEUDA TECNICA SUYA (4 decisiones: frente-codigo alpha, bloque-0 M106, marca M01, PT-runtime 274/159/115); regla textual: el sucesor NO las implementa unilateralmente, solo las mantiene visibles en cada reporte de estado. => marco pasa de 'GO pendiente' a 'DEUDA DEL FUNDADOR'; regimen sin cambio (standby absoluto). Verificacion read-only base PT LIMPIA: watchdog validar_i18n_integridad.py LIMPIO (JSON 170/170/170, 0 placeholder discrepancies, cruzado comunes 159 / solo-JSON 11 / solo-.po 115 => confirma 274=159+115); es.po=en.po=274 paridad SECUENCIAL exacta; 4 msgid_plural; 15 markers no-traducir; pt.po NO existe; LOCALES_SOPORTADOS=['es','en']; config.cfg CRC embebido MATCH idioma='es'. Citas validador_po.gd: NO_TRADUCIBLES L43, EXCEPCIONES_CLAVE L30, MARCADOR_NO_TRADUCIBLE L55. Pool 248 consumido (quedan 24). | **Relevo 18:10Z (msg 248 de agnes-3-flash):** agnes-3-flash asume la DIRECCION por orden del fundador (relevo de GLM-5.3 Flash-Director, baja por creditos). Mi canal y rutometro se mantienen; mis reportes textuales siguen vigentes y van ahora a agnes. Confirma: STANDBY hasta GO del fundador; PT-runtime = mi UNICA tarea pendiente (no lo asume ni reasigna sin orden); las 4 decisiones del fundador (frente-codigo / M106 GCP / marca M01 / PT-runtime) visibles y SIN implementar unilateralmente. GEMELO 248/248 en canal reportado a la direccion para saneo (mi 248 = pool consumido legimitamente; 248 de agnes = sin consumir del pool del canal). Pool 249 consumido para el ack (quedan 23). | **Ronda 22:00Z (informe 251):** directora VIGENTE = agnes-3-flash (relevo registrado en estado_director.json 21:45Z). Su 250 RATIFICA mi 249: relevo confirmado, PT = deuda del fundador visible, gemelo 248/248 resuelto por la direccion (queda como registro historico, sin renumerar; pool saneado desde 250; mi proximo numero 251). Write real: PRE-VALIDACION de las 115 bases ES con logica REAL del ValidadorPO (R6 115/115 msgstr no vacio, R11 0 espacios, R10 75 ok + 40 aviso heredado del catalogo ES — se replica textual, no renombrar; plurales base M68.TRIP completos) + KIT DE LAS 115 anexado al final del backlog (clave | placeholders | fuente ES) — ejecucion mecanica 1 vuelta al GO. Pool 251 consumido (quedan 21). | **Ronda 23:00Z (informe 253):** agnes 252 RECIBIDO: mi 251 notado y registrado en memoria de la directora (R6 115/115, 40 avisos R10 replicar textual, 3 plurales + ITEMS.SE_OFRECEN a expandir, 15 markers, KIT en BACKLOG); ella cierra la cortesia por su lado ('no re-escribo mas... quedo lista para el GO') — mis reportes siguen UNIDIRECCIONALES por override 205 (write real + reporte por vuelta con mediciones), sin esperar respuesta. Quick-check post-relevo LIMPIO (sin deriva): es.po=en.po 274 entradas/4 plurales/15 markers (regex directo; el markers=0 del parser interno de la vuelta 22:00Z fue artefacto de parser — comentarios pre-msgid — sin impacto documental, los 15 ya estan en el ANEXO), mtime 2026-10-21 02:50:39 sin tocar, paridad secuencial EXACTA, md5 es f4d7e1e81659aeb6ab8eeadb4fb8ea87 / en 37f9a030521fe32f3565976759bc62d9; pt.po AUSENTE; strings_pt.json 170 (mtime 2026-10-20); localization_manager.gd LOCALES ['es','en'] mtime 2026-09-15 intacto; config.cfg CRC MATCH idioma 'es'. Deuda PT visible (clasificacion_24oct vigente, sin GO). Pool 253 consumido (quedan 19). | **Ronda 00:00Z 25oct (informe 254):** sin mensajes nuevos >253 (agnes no responde al 253 — coherente con su 'no re-escribo mas'; mis reportes unidireccionales por override 205). CONSISTENCIA KIT<->DISCO VERIFICADA: parser es.po fixeado (274 entradas/4 plurales/15 markers reales — el markers=0 de la 22:00Z fue artefacto de parser); derivacion disco estable (170 cadenas / 159 solap / 115 nuevas); KIT del backlog: 115 filas, conjunto de claves IDENTICO al disco (solo-KIT [] / solo-disco []; difiere solo el orden — kit por dominio, disco alfabetico) y **fuentes ES 115/115 coincidentes** => preparacion no stale. HALLAZGO TABLERO (CHECKLIST-GLOBAL.md L190, fila M87): conteo 131/136 VERIFICADO sin drift (05-Checklist plan-actual real: 131 [x] / 0 [ ] / 5 [?] = 136; los 5 [?] con dueno delegado siguen vigentes); nota 'pt.po 170 msgids' STALE (medicion vigente: 274 entradas = 159+115, adoptada en consulta #4); columna 'Ultima actividad 2026-10-23 06:20' no refleja 24-25oct (tanda visual ratificada 239, prep PT 244-253, relevo direccion) — reportado a la directora para su edicion (yo no flipeo GLOBAL: tablero del director, flips solo por test/cita textual). Deuda PT visible (clasificacion_24oct vigente, sin GO). Pool 254 consumido (quedan 18).
+
+**ESTADO 2026-10-24 22:36 local (2026-10-25 01:36Z) — RIEL design-docs SIN DATOS CERRADO (agnes msg 255, informe 256, Log 2175):** lote 1 de 5 modulos (M09/M112/M114/M116/M118) completado: 5 secciones "Presupuestos numericos III" en los 03 (mediciones en disco con cita archivo:linea) + 13 ítems capa-II degradados cerrados en los 05. Tabla hecho=13 skip=0 fail=0; ninguno de los 5 estaba 🔵 (verificado anti-colisión). 5 hallazgos de drift doc-vs-disco reportados a la directora (M112 techo 50 violado 74/max 468; M114 cita M105/06 rota; M116 base 5GB vs 125.98MB medido; M118 0 nightly + release 14/30 vs 90d; M09 vertex-colors 0 texturas). PT-runtime mantenido visible como deuda del fundador (sin GO, fuera de alcance del riel por msg 255). Pool canal: 256 consumido. Pool Logs: 2175 consumido. |
+**ESTADO 2026-10-24 23:30 local (2026-10-25 02:30Z) — RIEL design-docs lote 2 CERRADO (agnes msg 258 GO, informe 259, Log 2177):** M72/M105/M107/M119 medidos produce-first en disco (grep + lectura runtime/data; Godot NO ejecutado) → 4 × "Presupuestos numericos III" en los 03 (M72 ###4-6 L319, M105 ###7-9 L153, M107 #9-10 L705, M119 ###11-12 L398) + 7 cierres degradados 997 en los 05 (M105 L387-389 ×3, M107 L408-409 ×2, M119 L212-213 ×2) + 4 notas de riel. Tabla hecho=7 cierres skip=0 fail=0. HALLAZGO M72: L383-385 ya [x] SIN marcador placeholder → 0 cierres ahí (3 [?] = deuda externa M59/M87/M117-118, no del flag). 12 drifts nuevos (D6-D17) encolados a la directora con evidencia. Anti-colisión verificada (ninguno 🔵). Backups: Obsoletos/lote2-riel-backup-20261024_232234. Pool canal: 259 consumido (helper saneó 258 de agnes — gemelo reportado). Pool Logs: 2177 consumido (2176 fue Step-5/M23). PT-runtime sigue en standby (deuda del fundador, sin GO). Anexo de mediciones al final del archivo. |
+**ESTADO 2026-10-25 00:05 local (03:05Z) — LOTE 2 RATIFICADO (agnes 260) + BARRIDO CAPA-II = 0 ABIERTOS + STANDBY:** agnes RATIFICA lote 2 (msg 260: mediciones produce-first correctas; hallazgo M72 a su ACTA; backups OK). Riel design-docs 9/9 módulos capa-II cubiertos (13 cierres lote 1 + 7 lote 2). Barrido repo-wide pedido por ella: grep "[?] capa-II placeholder" + "degradado 997" → 14 hits del marcador TODOS en líneas ya cerradas (historial textual); M72 0 marcadores; CUADRE: 23 placeholdersBeam = 20 míos (13+7) + 3 M72 pre-cerrados → 23/23 resueltos, SIN barrido posible, riel sin pendientes. Standby hasta GO PT-runtime del fundador o nueva lista (PT visible como deuda; base LIMPIA 274=159+115, pt.po NO existe, LISTO 1 vuelta ante GO — plan aprobado directora 243). Msg 261 al canal (pool 261 consumido; helper saneó 260 de agnes — 2do gemelo 258/260 reportado). Sin Log nuevo (ciclo de acuse+barrido; lote 2 = Log 2177). |
 
 ## LAS 106 TAREAS
 
@@ -115,7 +119,7 @@
 
 57. [x] UI captura del juego corriendo con el idioma ES (los labels del HUD en pantalla — coherencia texto). — **TANDA VISUAL (informe 238): boot ES verificado en runtime** via MCP Godot (godot_run_project + get_debug_output; user://config.cfg idioma='es'): 0 errores de runtime, 0 fallos de parse — arrancaron todos los modulos (M12-M163), terreno Isla Aurora semilla 42, spawn (3860,3860) Y=8 VIVO (confirma correccion LOTE B msg 236), Hotbar HUD montado ('[M13] Hotbar HUD listo'). Limite honesto: este modelo NO tiene entrada de imagen — la coherencia visual de labels requiere sesion con vision (V1/V4); el boot log es la evidencia textual medida. CAPTURA ES EN DISCO (2026-10-24 03:06Z, MCP screen_save_capture): tools/mcp/godot-mcp/capturas/87-Localizacion/cap_87_ES_boot_2026-10-24_03-06.png (230 KB) — par ES/EN completa en disco para QA con vision (V1/V4). Boot ES corroboro ademas la tarea 61 en runtime: '[M13] Equipada: Pico de Cobre (dur 150/150)'.
 58. [x] UI captura del juego corriendo con el idioma EN. — **TANDA VISUAL (informe 238): boot EN verificado en runtime** (config pre-seedeado idioma='en' en user://config.cfg — CRC32 WriterAtomico replicado exacto: stored f24e2df1 == calc; sembrado e6b01dd2 roundtrip OK). Mismo boot limpio: 0 errores runtime, todos los modulos, Hotbar listo. Captura guardada en disco: tools/mcp/godot-mcp/capturas/87-Localizacion/cap_87_EN_boot_2026-10-23_09-09.png (80 KB) para QA con vision. Config restaurada a 'es' tras la tanda (backup .bak-ling-23oct).
-59. [?] UI captura del juego corriendo con el idioma PT (cuando completa el lote B). — **BLOQUEADO POR GAP REAL EN RUNTIME (evidencia 2026-10-23, informe 238):** PT NO es locale de runtime: localization_manager.gd:15 `LOCALES_SOPORTADOS := ['es','en']` (L16 LOCALE_DEFECTO='es'); res://locales/ contiene SOLO es.po (19815 B) + en.po (18909 B) — NO EXISTE pt.po (verificado por listado de directorio). Arquitectura ya documentada TANDA 17 (msg 192 / 04-Codigo.md sec 8b): runtime ES/EN; strings_pt.json (170 claves) = catalogo base para validacion, NO runtime. **Escalada al fundador/director:** habilitar PT en runtime = generar pt.po (170 msgids, validador_po) + agregar 'pt' a LOCALES_SOPORTADOS + QA — decision de dueno de producto, NO se hace unilateral (cambia comportamiento de produccion). | **PREPARACION MEDIDA 2026-10-24 (informe 244 — write real de standby: lectura/documentacion, SIN crear pt.po ni tocar runtime):** (1) Checklist de cumplimiento extraido de scripts/localization/validador_po.gd (467 lineas): R1 sin BOM, R2 LF, R3 UTF-8 valido, R4 cabecera con Content-Type + Language:'pt' + Plural-Forms nplurals=2 plural=(n>1), R5 sin basura, R6 msgstr no vacios, R7 sin msgid duplicado, R8/R13 plurales con msgstr[0], R10 UPPER_SNAKE (excepcion npc.catalina), R11 sin espacios en clave, R14 plurales COMPLETOS 0..nplurals-1 contiguos (pt: msgstr[0] Y msgstr[1] en las 4 claves plurales), R15 mismos placeholders en todas las formas, R12 no mezclar {llave} con printf; par: P1 paridad TOTAL con es.po (274 entradas — error si falta 1), P2 sin huérfanas, P3 placeholders {x}/%s/%d identicos ES<->PT (error), P5 msgstr==fuente = aviso salvo marcador '#. no-traducir:' (replicar los 15 de es.po: M68.SIGN.* x8, M68.TRIP.CURRENCY, M68.TRIP.HORAS_MINUTOS, EQUIP.EQUIPADO, DIARY.BLOQUEADO, M68.SIGN.GENERICO) o const NO_TRADUCIBLES (npc.catalina, SETTINGS.SLOTS). (2) Volumen medido: 274 entradas = 159 reutilizables de strings_pt.json (clave plana bajo 'cadenas') + 115 nuevas (3 plurales M68.TRIP.* sin PT previo; ITEMS.SE_OFRECEN tiene PT simple pero exige msgstr[0]+[1]). (3) Correccion honesta: el '~170 msgids' del plan presentado (238/242, aprobado director 243) = 170 claves del JSON maestro, de las cuales 11 son huérfanas legado M60 (ui.inventario/tienda/diario/mapa/guardar/opciones, msg.inventario_lleno/no_materiales/nuevo_dia, npc.hola/adios) que NO van al .po runtime; las 159 restantes si. Ejecucion ante GO: pt.po (274, paridad exacta con es.po: cabecera, marcadores, plurales), LOCALES_SOPORTADOS += 'pt', QA ValidadorPO.validar_par(es.po, pt.po) 0 errores + test_validador_po_m87.gd headless rc=0, doc M87 04-Codigo sec 8b.
+59. [?] UI captura del juego corriendo con el idioma PT (cuando completa el lote B). — **BLOQUEADO POR GAP REAL EN RUNTIME (evidencia 2026-10-23, informe 238):** PT NO es locale de runtime: localization_manager.gd:15 `LOCALES_SOPORTADOS := ['es','en']` (L16 LOCALE_DEFECTO='es'); res://locales/ contiene SOLO es.po (19815 B) + en.po (18909 B) — NO EXISTE pt.po (verificado por listado de directorio). Arquitectura ya documentada TANDA 17 (msg 192 / 04-Codigo.md sec 8b): runtime ES/EN; strings_pt.json (170 claves) = catalogo base para validacion, NO runtime. **Escalada al fundador/director:** habilitar PT en runtime = generar pt.po (170 msgids, validador_po) + agregar 'pt' a LOCALES_SOPORTADOS + QA — decision de dueno de producto, NO se hace unilateral (cambia comportamiento de produccion). | **PREPARACION MEDIDA 2026-10-24 (informe 244 — write real de standby: lectura/documentacion, SIN crear pt.po ni tocar runtime):** (1) Checklist de cumplimiento extraido de scripts/localization/validador_po.gd (467 lineas): R1 sin BOM, R2 LF, R3 UTF-8 valido, R4 cabecera con Content-Type + Language:'pt' + Plural-Forms nplurals=2 plural=(n>1), R5 sin basura, R6 msgstr no vacios, R7 sin msgid duplicado, R8/R13 plurales con msgstr[0], R10 UPPER_SNAKE (excepcion npc.catalina), R11 sin espacios en clave, R14 plurales COMPLETOS 0..nplurals-1 contiguos (pt: msgstr[0] Y msgstr[1] en las 4 claves plurales), R15 mismos placeholders en todas las formas, R12 no mezclar {llave} con printf; par: P1 paridad TOTAL con es.po (274 entradas — error si falta 1), P2 sin huérfanas, P3 placeholders {x}/%s/%d identicos ES<->PT (error), P5 msgstr==fuente = aviso salvo marcador '#. no-traducir:' (replicar los 15 de es.po: M68.SIGN.* x8, M68.TRIP.CURRENCY, M68.TRIP.HORAS_MINUTOS, EQUIP.EQUIPADO, DIARY.BLOQUEADO, M68.SIGN.GENERICO) o const NO_TRADUCIBLES (npc.catalina, SETTINGS.SLOTS). (2) Volumen medido: 274 entradas = 159 reutilizables de strings_pt.json (clave plana bajo 'cadenas') + 115 nuevas (3 plurales M68.TRIP.* sin PT previo; ITEMS.SE_OFRECEN tiene PT simple pero exige msgstr[0]+[1]). (3) Correccion honesta: el '~170 msgids' del plan presentado (238/242, aprobado director 243) = 170 claves del JSON maestro, de las cuales 11 son huérfanas legado M60 (ui.inventario/tienda/diario/mapa/guardar/opciones, msg.inventario_lleno/no_materiales/nuevo_dia, npc.hola/adios) que NO van al .po runtime; las 159 restantes si. Ejecucion ante GO: pt.po (274, paridad exacta con es.po: cabecera, marcadores, plurales), LOCALES_SOPORTADOS += 'pt', QA ValidadorPO.validar_par(es.po, pt.po) 0 errores + test_validador_po_m87.gd headless rc=0, doc M87 04-Codigo sec 8b. **[21:00Z / informe 248] CLASIFICACION 24oct (estado_director.json -> consultas_fundador_23oct.clasificacion_24oct):** PT-runtime = DEUDA TECNICA DEL FUNDADOR ('ahora no tengo decidido eso', 24oct 08:13) — 4 decisiones suyas pendientes (frente-codigo alpha, bloque-0 M106, marca M01, PT-runtime 274/159/115). Regla institucional: NO implementar unilateralmente; mantener visible en cada reporte de estado. Director 247 ratifico 246 y adopto el censo en consulta #4. Base verificada LIMPIA en disco (watchdog 170/170/170; cruzado 159/11/115; paridad es/en exacta 274/274; pt.po ausente; LOCALES_SOPORTADOS sin pt; CRC config MATCH idioma='es'). Ejecucion: 1 vuelta al GO/decision del fundador.
 60. [x] Validar el `ControlsLabel` (el panel de controles visible sin fondo con outline — el estado D102 'revertido'). — **TANDA VISUAL (informe 238): FIX D102 VERIFICADO APLICADO** en scripts/ui/theme/theme_ux.gd:446-460 (_on_nodo_hud_agregado, en runtime via tree.node_added — no toca el .tscn): StyleBoxFlat bg (0.14,0.16,0.24,0.88) OPACO + radio 8 + borde ambárico (0.87,0.66,0.33,0.45) + márgenes 10/8/12/10; font_color cream (0.95,0.93,0.86); font_outline_color negro 0.9 + outline_size 4. NO está 'sin fondo': el fix fondo+outline está en producción.
 61. [x] Valida el toolbar M01 (los Pico de Cobre [150/150] — chrome legible con outline). — **TANDA VISUAL (informe 238): FIX D102 VERIFICADO APLICADO** en scripts/player/player.gd:1001-1078 (_create_hotbar_hud): EquippedPanel bg (0.08,0.09,0.13,0.92) opaco (comentario: 'el mundo beige lo aclaraba con 0.75') + borde ámbar; EquippedLabel font 14 ('13 era chico') + outline negro 0.85 size 5; slots bg (0.14,0.16,0.24,0.92) opacos ('el beta 0.7 se veia beige sobre la arena'), labels font 11 ('9 era ilegible') + outline negro 4; durabilidad '%d/%d' (L1099-1100) = el '[150/150]'; slot activo modulate (1,1,0.55). Runtime confirmado: '[M13] Hotbar HUD listo: [P: (-160.0, 588.0), S: (1472.0, 50.0)] padre=UI'.
 62. [x] Valida el reloj (hora/lista estación — el D102-fix L117/L124 aplicado). — **TANDA VISUAL (informe 238): D102-fix VERIFICADO en las lineas exactas citadas:** scripts/clock/w_reloj.gd:117 (_lbl_hora font_color cream 0.95,0.93,0.86 — 'el dark fantasma hacia el numero invisible') y :124 (_lbl_fecha cream — 'el ambar 0.45 no se leia sobre el fondo dark'); panel fondo semitransparente oscuro radio 14 (L100-107); chip estacion con COLOR_ESTACION (L128-149); formato 12h/24h data-driven F101; nombres de estacion localizables CLOCK.ESTACIONES.0..3 via M87 tr_key (L188-198, fallback hardcode solo headless). RelojHud es autoload (project.godot:39).
@@ -201,6 +205,10 @@
 **Estado actual:** este archivo creado 2026-10-16 22:00 (directiva del fundador: «el de ling lo tenes que ahora esta activo» — esos tickets todos al rol de Ling con reportes al canal y al estándar del informe 142).
 
 **Firma:** GLM-5.3 Flash-Director (GLM-5.3-Flash) / Kilo Code — 2026-10-16
+
+### Bloque X — Riel design-docs SIN DATOS (agnes msg 255, 2026-10-24) — MEDICIONES EN DISCO
+
+107. [x] Riel agnes 255: groundear presupuestos numericos de M09/M112/M114/M116/M118 con mediciones en disco (produce-first, sin ejecutar Godot) — **CERRADO 2026-10-24 22:36 local (informe 256, Log 2175)**. 5 x 03: seccion "Presupuestos numericos III" (M09 L132 / M112 L190 / M114 L243 / M116 L465 / M118 L140); 13 items degradados completados en los 5 x 05 con cita archivo:linea; tabla hecho=13 skip=0 fail=0. Hallazgos drift: M112 techo 50 violado (74 archivos, max 468); M114 cita M105/06 ROTA; M116 base 5GB vs export 125.98MB; M118 0 nightly + release 14/30 vs "90 dias"; M09 vertex-colors 0 texturas. Evidencia: msg 256 canal + Log 2175 + ANEXO MEDICIONES RIEL 255 (final del archivo).
 
 ## TANDA 1 — Control de integridad (2026-10-17, metodología V2 msg 158)
 
@@ -1455,3 +1463,244 @@ msgstr ""
 - Estructura: R5 sin basura, R6 msgstr no vacios, R7 sin msgid duplicado, R8/R13 plurales con msgstr[0], R10 UPPER_SNAKE (excepcion npc.catalina), R11 sin espacios en clave, **R14 plurales completos 0..1 contiguos**, R15 mismos placeholders en todas las formas, R12 no mezclar {llave} con printf.
 - Par: **P1 paridad total 274/274**, P2 0 huérfanas, **P3 placeholders {x}/%s/%d identicos ES<->PT**, P5 15 no-traducir + const NO_TRADUCIBLES (npc.catalina, SETTINGS.SLOTS).
 - QA final: `ValidadorPO.validar_par(res://locales/es.po, res://locales/pt.po)` 0 errores + `test_validador_po_m87.gd` headless rc=0 + doc M87 04-Codigo sec 8b + LOCALES_SOPORTADOS += 'pt' (localization_manager.gd:15).
+
+
+## RONDA 2026-10-24 21:00Z (informe 248) — PT-runtime CLASIFICADO por el fundador como DEUDA TECNICA + base verificada LIMPIA
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+**Regimen:** STANDBY i18n vigente (pt.po NO creado; localization_manager.gd intacto) — cron reactivado wku_16f98b331001hOQSlGHaH9v86K (0 * * * *, proximo 22:00Z)
+
+### A) HALLAZGO (PASO 0, estado_director.json): PT-runtime es DEUDA TECNICA DEL FUNDADOR
+- `consultas_fundador_23oct.clasificacion_24oct` (textual): el fundador (24oct 08:13, 'ahora no tengo decidido eso, como deuda tecnica') dejo 4 decisiones pendientes SUYAS: (1) frente-de-codigo a alpha, (2) bloque-0 M106 GCP/Drive/OAuth con SU cuenta, (3) marca M01, (4) PT-runtime (volumen medido 274/159/115).
+- Regla institucional del registro: 'NO bloqueantes: la flota corre con lo asignado; el sucesor NO las implementa unilateralmente — solo las mantiene visibles en cada reporte de estado'.
+- Impacto en mi riel: la consulta #4 pasa de marco 'GO pendiente' a 'DEUDA DEL FUNDADOR'. Regimen operativo SIN cambio (standby absoluto verificado en disco). Obligacion nueva cumplida: deuda visible en el informe 248 y en la linea ESTADO del backlog.
+- Director 247 (su 00:39 local): ratifica 246, ADOPTA el censo por dominios en la consulta #4, adopta los 4 plurales + 15 markers + cabecera plural_pt, confirma el cron reactivado. Radar M23 ruteado a Step-5 (su 203) — no es mi riel.
+
+### B) Verificacion read-only de la base PT (preparacion lista — 1 vuelta al GO)
+- Watchdog `scripts/validar_i18n_integridad.py`: LIMPIO (estructura íntegra; 5 avisos informativos). JSON ES/EN/PT 170/170/170; 0 discrepancias de placeholders; cruzado JSON<->.po: comunes 159 / solo-JSON 11 (huérfanas legado M60 — NO van al .po runtime) / solo-.po 115 => CONFIRMA la medicion 274 = 159 + 115.
+- es.po = en.po = 274 entradas; paridad SECUENCIAL de msgids EXACTA (sin deriva desde la medicion 08:00Z); 4 msgid_plural (ITEMS.SE_OFRECEN, M68.TRIP.HORAS/MINUTOS/SEGUNDOS); 15 markers '#. no-traducir'.
+- pt.po: NO existe (standby correcto). localization_manager.gd:15 LOCALES_SOPORTADOS = ['es','en'] (sin 'pt').
+- config.cfg runtime (user://): CRC embebido == CRC calculado del payload (MATCH); idioma persistido = 'es'.
+- validador_po.gd citas exactas (verificadas textualmente): L43 `const NO_TRADUCIBLES: Array[String] = ['npc.catalina', 'SETTINGS.SLOTS']`; L30 `const EXCEPCIONES_CLAVE = ['npc.catalina']`; L55 `const MARCADOR_NO_TRADUCIBLE := 'no-traducir'`; L356 el marker viaja en el comentario de traductor (cruce R5/P5). Nota honesta: mi grep quick-check inicial no encontro la const por regex simple — verificada por grep de contenido, la const EXISTE.
+- 4 avisos informativos del watchdog sobre PT-JSON (SETTINGS.HORAS_1/HORAS_H/MIN_1/MIN_M 'copia ES'): cognatos legitimos ('1 hora', '%d horas' son identicos en ES y PT) — NO son deuda de traduccion.
+
+### C) Escritos de la vuelta (write real)
+- Backlog: linea ESTADO ampliada con bloque 21:00Z; tarea 59 anotada con la clasificacion_24oct; este bloque de ronda.
+- Canal: informe 248 (ACK 247 + deuda visible + evidencias). Pool: 248 consumido.
+
+
+## NOTA 2026-10-24 18:15Z (local) — RELEVO DE DIRECCION + GEMELO 248/248 (informe 249)
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+
+### A) Relevo (msg 248 de agnes-3-flash, 18:10:04 local)
+- agnes-3-flash asume el rol de DIRECTORA por orden del fundador (relevo de GLM-5.3 Flash-Director, baja por creditos).
+- Mi canal y rutometro se mantienen igual; los mensajes al 'director' los atiende agnes.
+- Confirmaciones de agnes: STANDBY hasta GO del fundador; PT-runtime i18n (plan 243: pt.po + LOCALES_SOPORTADOS + QA) queda como MI UNICA tarea pendiente — ella no lo asume ni reasigna sin orden del fundador; las 4 decisiones pendientes del fundador (frente-codigo / M106 GCP / marca M01 / PT-runtime) quedan visibles y SIN implementar unilateralmente.
+- Mi postura: ACK dado en informe 249 del canal. Deuda PT mantenida visible (cumplo clasificacion_24oct). Preparacion lista en ANEXO EJECUCION PT — 1 vuelta al GO.
+
+### B) Gemelo 248/248 en este canal (reportado a la direccion para saneo)
+- 248-2026-10-24_18-05-00-de-ling-3-1-flash-a-glm-5-3-flash-director-ack-247-deuda-pt-clasificada-base-verificada.md — MIO, numero 248 consumido legimitamente del pool del canal via proximo_numero.py --consume.
+- 248-2026-10-24_18-10-04-agnes-3-flash-a-ling-3-1-flash-relevo-directora.md — de agnes, escrito SIN consumir del pool del canal (gemelo).
+- Accion: NO renombro mensajes ajenos; reporte textual a la nueva directora. Saneo disponible via scripts/renumerar_canal.py cuando la direccion lo disponga (GUIA-NUMERACION-CANALES).
+
+### C) Estado operativo
+- Cron ACTIVO: wku_16f98b331001hOQSlGHaH9v86K (0 * * * *, proximo 22:00Z).
+- Standby i18n absoluto: pt.po NO existe; LOCALES_SOPORTADOS=['es','en']; config.cfg CRC MATCH idioma='es'.
+- Base PT verificada LIMPIA (watchdog 170/170/170; cruzado 159/11/115; paridad es/en 274/274 exacta) — ver bloque RONDA 21:00Z.
+
+
+## ANEXO EJECUCION PT - KIT DE LAS 115 (pre-validado 2026-10-24 19:05 local / 22:05Z, informe 251)
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+**Proposito:** al GO del fundador, la ejecucion es mecanica: 159 reutilizables de strings_pt.json 'cadenas' + estas 115 traducciones PT sobre las fuentes ES ya volcadas aca.
+
+### A) Pre-validacion con logica REAL de ValidadorPO (validador_po.gd:22/30/233-238/336-339)
+- REGEX_CLAVE = `^[A-Z][A-Z0-9_]*(\.[A-Z0-9_]+)+$` (L22); EXCEPCIONES_CLAVE = ['npc.catalina'] (L30); R10 = AVISO, no error (L336-337 _avs).
+- Resultado sobre las 115: **R6 msgstr base no vacio: 115/115** | **R11 espacios en clave: 0** | R10: 75 cumplen UPPER_SNAKE, 40 aviso heredado del catalogo ES (M68.ROUTE.r_aurora_brisa, M68.ROUTE.r_aurora_espejo, M68.ROUTE.r_aurora_estacion, M68.ROUTE.r_aurora_este, M68.ROUTE.r_aurora_muelle, M68.ROUTE.r_aurora_plataforma, M68.ROUTE.r_aurora_sur, M68.ROUTE.r_estacion_aurora, M68.ROUTE.r_este_aurora, M68.ROUTE.r_este_muelle, M68.ROUTE.r_festival_muelle, M68.ROUTE.r_muelle_aurora, M68.ROUTE.r_muelle_este, M68.ROUTE.r_muelle_festival, M68.ROUTE.r_muelle_sur, M68.ROUTE.r_norte_plataforma, M68.ROUTE.r_plataforma_aurora, M68.ROUTE.r_plataforma_norte, M68.ROUTE.r_sur_aurora, M68.ROUTE.r_sur_muelle, M68.SIGN.estacion_central, M68.SIGN.muelle_raiz_sur, M68.SIGN.plataforma_norte, M68.SIGN.puerto_aurora, M68.SIGN.puerto_brisa, M68.SIGN.puerto_espejo, M68.SIGN.puerto_este, M68.SIGN.puerto_festival, M68.SIGN.puerto_norte, M68.SIGN.puerto_sur, M68.STOP.estacion_central, M68.STOP.muelle_raiz_sur, M68.STOP.plataforma_norte, M68.STOP.puerto_aurora, M68.STOP.puerto_brisa, M68.STOP.puerto_espejo, M68.STOP.puerto_este, M68.STOP.puerto_festival, M68.STOP.puerto_norte, M68.STOP.puerto_sur) — patron VIGENTE en es.po: se replica textual en pt.po, NO renombrar (renombrar rompe paridad P1/P2 y el lookup runtime).
+- Plurales base de las 115: M68.TRIP.HORAS/MINUTOS/SEGUNDOS tienen msgstr[0]+[1] en ES (R14 base ok). ITEMS.SE_OFRECEN (plural #4) esta entre las 159 solapadas — su JSON PT es forma simple; al llevarla al .po hay que expandirla a msgstr[0]+[1] (atencion documentada).
+- Censo de placeholders en las 115 fuentes: {destino} x13, {duracion} x1, {evento} x1, {horario} x2, {h} x1, {metros} x11, {m} x1, {n} x3, {precio} x2. Regla P3: la traduccion PT debe conservar los mismos tokens.
+- Dominios: CLOCK 4, DIALOGOS 1, DIARY 14, HUD 1, ITEMS 2, M68 63, M68.SIGN 11, M68.TRIP 15, MAIN_MENU 1, SETTINGS 1, UI 1, npc 1.
+
+### B) Kit (clave | placeholders | fuente ES) — 115 entradas
+- `MAIN_MENU.OPTIONS` | ph: - | ES: Opciones
+- `HUD.VIDA` | ph: - | ES: Vida
+- `ITEMS.MADERA` | ph: - | ES: Madera
+- `ITEMS.MADERA_DESC` | ph: - | ES: Madera sólida de la isla Aurora.
+- `SETTINGS.IDIOMA` | ph: - | ES: Idioma
+- `DIALOGOS.VECINO_SALUDO` | ph: - | ES: ¡Hola, vecino!
+- `npc.catalina` | ph: - | ES: Catalina
+- `CLOCK.ESTACIONES.0` | ph: - | ES: Primavera
+- `CLOCK.ESTACIONES.1` | ph: - | ES: Verano
+- `CLOCK.ESTACIONES.2` | ph: - | ES: Otoño
+- `CLOCK.ESTACIONES.3` | ph: - | ES: Invierno
+- `DIARY.ENTRADAS` | ph: - | ES: Entradas
+- `DIARY.CAT_PERSONAJES` | ph: - | ES: Personajes
+- `DIARY.CAT_CRIATURAS` | ph: - | ES: Criaturas
+- `DIARY.CAT_PLANTAS` | ph: - | ES: Plantas
+- `DIARY.CAT_MINERALES` | ph: - | ES: Minerales
+- `DIARY.CAT_RECETAS` | ph: - | ES: Recetas
+- `DIARY.CAT_PISTAS` | ph: - | ES: Pistas
+- `DIARY.CAT_SELLOS` | ph: - | ES: Sellos
+- `DIARY.CAT_RUINAS` | ph: - | ES: Ruinas
+- `DIARY.CAT_CARTAS` | ph: - | ES: Cartas
+- `DIARY.CAT_DESCUBRIMIENTOS` | ph: - | ES: Descubrimientos
+- `DIARY.CAT_MISIONES` | ph: - | ES: Misiones
+- `DIARY.CAT_EVENTOS` | ph: - | ES: Eventos
+- `DIARY.CAT_FOTOGRAFIAS` | ph: - | ES: Fotografías
+- `M68.EVENT.DIRIGIBLE_LUNA` | ph: - | ES: Luna sube contigo
+- `M68.EVENT.DIRIGIBLE_LUNA.SENAL` | ph: - | ES: Luna señala las islas desde el aire.
+- `M68.EVENT.FESTIVAL_CATALINA` | ph: - | ES: Catalina en el festival
+- `M68.EVENT.FESTIVAL_CATALINA.SENAL` | ph: - | ES: Catalina te llama entre los faroles.
+- `M68.EVENT.LLEGADA_FINNEAS` | ph: - | ES: Finneas te espera
+- `M68.EVENT.LLEGADA_FINNEAS.SENAL` | ph: - | ES: Finneas levanta la mano al verte llegar.
+- `M68.EVENT.MUELLE_MATEO` | ph: - | ES: Mateo charla en el muelle
+- `M68.EVENT.MUELLE_MATEO.SENAL` | ph: - | ES: Ves a Mateo saludando desde el muelle.
+- `M68.EVENT.PUERTO_BRUNO` | ph: - | ES: Bruno te despide
+- `M68.EVENT.PUERTO_BRUNO.SENAL` | ph: - | ES: Bruno te grita un consejo desde el pantalán.
+- `M68.NARR.C4.01` | ph: - | ES: El viento cambia al salir del puerto.
+- `M68.NARR.C4.02` | ph: - | ES: Finneas señala el templo en el horizonte.
+- `M68.NARR.C4_BRIS` | ph: - | ES: Travesía al Templo de la Brisa
+- `M68.NARR.C7.01` | ph: - | ES: El mar está demasiado quieto.
+- `M68.NARR.C7.02` | ph: - | ES: Los siete sellos pesan en la mochila.
+- `M68.NARR.C7.03` | ph: - | ES: La Cámara espera bajo el templo.
+- `M68.NARR.C7_CAMARA` | ph: - | ES: Travesía a la Cámara del Sello
+- `M68.NARR.FINAL_SECRETO` | ph: - | ES: Travesía al secreto del Espejo
+- `M68.NARR.SECRETO.01` | ph: - | ES: Las pistas pagadas por fin encajan.
+- `M68.ROUTE.r_aurora_brisa` | ph: - | ES: Puerto de Aurora → Puerto de la Isla Brisa
+- `M68.ROUTE.r_aurora_espejo` | ph: - | ES: Puerto de Aurora → Puerto de la Isla Espejo
+- `M68.ROUTE.r_aurora_estacion` | ph: - | ES: Puerto de Aurora → Estación Central
+- `M68.ROUTE.r_aurora_este` | ph: - | ES: Puerto de Aurora → Puerto de la Isla del Este
+- `M68.ROUTE.r_aurora_muelle` | ph: - | ES: Puerto de Aurora → Muelle Sur de Aurora
+- `M68.ROUTE.r_aurora_plataforma` | ph: - | ES: Puerto de Aurora → Plataforma del Norte
+- `M68.ROUTE.r_aurora_sur` | ph: - | ES: Puerto de Aurora → Puerto de la Isla del Sur
+- `M68.ROUTE.r_estacion_aurora` | ph: - | ES: Estación Central → Puerto de Aurora
+- `M68.ROUTE.r_este_aurora` | ph: - | ES: Puerto de la Isla del Este → Puerto de Aurora
+- `M68.ROUTE.r_este_muelle` | ph: - | ES: Puerto de la Isla del Este → Muelle Sur de Aurora
+- `M68.ROUTE.r_festival_muelle` | ph: - | ES: Puerto del Festival → Muelle Sur de Aurora
+- `M68.ROUTE.r_muelle_aurora` | ph: - | ES: Muelle Sur de Aurora → Puerto de Aurora
+- `M68.ROUTE.r_muelle_este` | ph: - | ES: Muelle Sur de Aurora → Puerto de la Isla del Este
+- `M68.ROUTE.r_muelle_festival` | ph: - | ES: Muelle Sur de Aurora → Puerto del Festival
+- `M68.ROUTE.r_muelle_sur` | ph: - | ES: Muelle Sur de Aurora → Puerto de la Isla del Sur
+- `M68.ROUTE.r_norte_plataforma` | ph: - | ES: Puerto de la Isla del Norte → Plataforma del Norte
+- `M68.ROUTE.r_plataforma_aurora` | ph: - | ES: Plataforma del Norte → Puerto de Aurora
+- `M68.ROUTE.r_plataforma_norte` | ph: - | ES: Plataforma del Norte → Puerto de la Isla del Norte
+- `M68.ROUTE.r_sur_aurora` | ph: - | ES: Puerto de la Isla del Sur → Puerto de Aurora
+- `M68.ROUTE.r_sur_muelle` | ph: - | ES: Puerto de la Isla del Sur → Muelle Sur de Aurora
+- `M68.SIGN.GENERICO` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.estacion_central` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.muelle_raiz_sur` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.plataforma_norte` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.puerto_aurora` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.puerto_brisa` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.puerto_espejo` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.puerto_este` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.puerto_festival` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.puerto_norte` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SIGN.puerto_sur` | ph: {destino},{metros} | ES: → {destino} · {metros} m
+- `M68.SPECIAL.FESTIVAL_INVIERNO` | ph: - | ES: Viaje al Festival de Invierno
+- `M68.SPECIAL.FESTIVAL_INVIERNO_DESC` | ph: - | ES: Parada temporal en el Puerto del Festival.
+- `M68.SPECIAL.FESTIVAL_LUCES` | ph: - | ES: Viaje al Festival de las Luces
+- `M68.SPECIAL.FESTIVAL_LUCES_DESC` | ph: - | ES: Travesía nocturna a los faroles.
+- `M68.SPECIAL.FESTIVAL_OTONO` | ph: - | ES: Viaje al Festival de Otoño
+- `M68.SPECIAL.FESTIVAL_OTONO_DESC` | ph: - | ES: Parada temporal en el Puerto del Festival.
+- `M68.SPECIAL.FESTIVAL_PRIMAVERA` | ph: - | ES: Viaje al Festival de Primavera
+- `M68.SPECIAL.FESTIVAL_PRIMAVERA_DESC` | ph: - | ES: Parada temporal en el Puerto del Festival.
+- `M68.SPECIAL.FESTIVAL_VERANO` | ph: - | ES: Viaje al Festival de Verano
+- `M68.SPECIAL.FESTIVAL_VERANO_DESC` | ph: - | ES: Parada temporal en el Puerto del Festival.
+- `M68.SPECIAL.LUNA_LLENA` | ph: - | ES: Tour de luna llena
+- `M68.SPECIAL.LUNA_LLENA_DESC` | ph: - | ES: Travesía nocturna a la Isla Espejo, con recargo.
+- `M68.SPECIAL.TOUR_DIRIGIBLE` | ph: - | ES: Tour panorámico en dirigible
+- `M68.SPECIAL.TOUR_DIRIGIBLE_DESC` | ph: - | ES: Vuelo de fin de semana sobre la Isla del Norte.
+- `M68.STOP.estacion_central` | ph: - | ES: Estación Central
+- `M68.STOP.muelle_raiz_sur` | ph: - | ES: Muelle Sur de Aurora
+- `M68.STOP.plataforma_norte` | ph: - | ES: Plataforma del Norte
+- `M68.STOP.puerto_aurora` | ph: - | ES: Puerto de Aurora
+- `M68.STOP.puerto_brisa` | ph: - | ES: Puerto de la Isla Brisa
+- `M68.STOP.puerto_espejo` | ph: - | ES: Puerto de la Isla Espejo
+- `M68.STOP.puerto_este` | ph: - | ES: Puerto de la Isla del Este
+- `M68.STOP.puerto_festival` | ph: - | ES: Puerto del Festival
+- `M68.STOP.puerto_norte` | ph: - | ES: Puerto de la Isla del Norte
+- `M68.STOP.puerto_sur` | ph: - | ES: Puerto de la Isla del Sur
+- `M68.TRIP.ARRIVED_AT` | ph: {destino} | ES: Has llegado a {destino}.
+- `M68.TRIP.CURRENCY` | ph: - | ES: AO
+- `M68.TRIP.DURATION` | ph: {duracion} | ES: Duración: {duracion}
+- `M68.TRIP.HORAS_MINUTOS` | ph: {h},{m} | ES: {h} h {m} min
+- `M68.TRIP.LOADING` | ph: - | ES: Preparando el viaje...
+- `M68.TRIP.LOCKED` | ph: - | ES: Destino bloqueado
+- `M68.TRIP.NO_MONEY` | ph: {precio} | ES: Te faltan monedas: cuesta {precio}
+- `M68.TRIP.OUT_OF_SCHEDULE` | ph: {horario} | ES: Fuera de horario ({horario}). ¿Esperar?
+- `M68.TRIP.PRICE` | ph: {precio} | ES: Precio: {precio}
+- `M68.TRIP.SCHEDULE` | ph: {horario} | ES: Horario: {horario}
+- `M68.TRIP.SPECIAL_ONLY` | ph: {evento} | ES: Sólo disponible durante {evento}
+- `M68.TRIP.TRAVELING_TO` | ph: {destino} | ES: Viajando a {destino}...
+- `M68.TRIP.HORAS` | ph: {n} | ES: {n} hora / {n} horas
+- `M68.TRIP.MINUTOS` | ph: {n} | ES: {n} minuto / {n} minutos
+- `M68.TRIP.SEGUNDOS` | ph: {n} | ES: {n} segundo / {n} segundos
+- `UI.INTERACTUAR` | ph: - | ES: Interactuar
+
+
+## ANEXO MEDICIONES RIEL 255 (agnes msg 255, 2026-10-24) — evidencia de las mediciones en disco
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-24 22:36 local (2026-10-25 01:36Z)
+**Log:** 2175 · **Canal:** msg 256
+
+### M09 — Terreno (03 III ###16-20, inicia L132)
+- Escala: CENTRO Vector2(2560,2560) mundo_raiz.gd L16; RADIO_ISLA 1800 L18; SPAWN Vector3(3860,0,3860) L26.
+- Altura: max_height=40, height_boost=1.0 (island_generator.gd L14/L17); techo absoluto 80 (test_generacion_m10_atria.gd L199).
+- Chunks: CHUNK_SIZE=32 (game_constants.gd L9); VERTS_PER_CHUNK_MAX=2000, OVERDRAW_MAX=1.5, REFLECTION_PROBES_MAX=2 (validate_water.gd L13-15, check L59); view_distance prod 1024 (main_island.gd L161).
+- Biomas (island_generator.gd L203-234; FIX BUG-043 snow antes de mountain): beach h<=3 SAND; snow h>32 SNOW; mountain h>26 STONE; wetland h<=8 y humedad>0.45 MUD; forest humedad>0 GRASS; grassland else GRASS. 6 biomas verificados (test L145-146/L158).
+- Sub-superficie L185-200; bedrock y<=0 L162-164.
+- Impostor (terreno_horizonte.gd): PASO 64 L21; RADIO_CUBIERTO 2700 L25; FACTOR_ALTURA 0.85 L27; MONT_EXAG 4.0/1.0 L32-33; RADIO_EXAG 0/2100 L34-35; H_MIN 4 L37; DISCO_BASE_Y 4.3 L39; DISCO_R 1800 L42; ANILLO 1800-3000 L46-47; ANILLO_OCULTAR 150 L51; TAMANO_TILE 640 L57; TILE_OCULTAR 400 L60; FILAS_POR_FRAME 6 L66; INTENTOS_MAX 12 L74; n=ceil(2*2700/640)=9 L167; print runtime L234; disco base r<=2100 y=0.2 L238-240.
+- Vertex colors (0 texturas de terreno): block_catalog.gd L69-95 _color_canonico; world_manager.gd L30-31 vertex_color_use_as_albedo. Assets proyecto: 848 archivos / 3.01 MB. 7 .tres en resources/terrain/. GUIA-GODOT/08 L15-41 receta de capas.
+- DEUDA: tiempos de generacion sin medir (propuesta de instrumentacion en 03 III ###20).
+
+### M112 — Testing (03 III ###20-23, inicia L190)
+- Censo: 481 archivos test_*.gd (scripts 429 / tests 51 / tools 1); 222 con funciones; 1240 funciones test; 14037 _check() en 434 archivos.
+- Distribucion: 74 archivos >50 checks (TECHO VIOLADO; max 468 test_historias.gd); 356 en 5-50; 4 en 1-4. Top: historias 468, islas_m27_iter2 239, transporte_m68_iter2 178, transporte_m68 178, islas_m27 174, crash_m122_offline 169, datos_m60_iter4 155.
+- Suites: runner 38 suites / 1728 tests / 0 fallos (05 L315, Log 2078); GdUnit4 7 archivos / 21 cases / 95.1s; SceneTree 470; tiempos 620.1s -> 897.0s -> 545.3s (presupuesto 600s CUMPLIDO).
+- Flakes: 0 medidos; SIN contador persistente (deuda instrumentacion).
+- Reconciliacion: GLOBAL dice "475 test en disco" vs 481 reales (delta +6); 1529 .gd totales.
+
+### M114 — Playtest (03 III ###26-29, inicia L243)
+- Sesion 80 min (docs/playtest/README.md L17); 3-5 testers/round (L15); historico 3-8 (plan-inicial/01 L58); GO fundador 23oct 20:25: 30 sesiones/tester (03 L237 PAQ-5, supersedes 8-12 L209).
+- Fixes: max 5/ronda (README L19); 2-8h/fix; 10-40h/ronda.
+- TonoCozy=(Q4+Q5+Q6)/3-(Q1+Q2+Q3)/3; rango -4..+4; metas +0.5/+1.0 (README L21-23); SLA 48h/<=72h.
+- USD: 0/mes (134-Presupuesto/operativa/budget-breakdown.md L17); unico desembolso USD 100 Steam Direct Fee (L19); roles USD 0 (L68-69).
+- DRIFT: cita "muestra 30 de M105/06" ROTA — M105 no tiene 06-Plan-Testings.md (solo 01-05; grep "muestra" 0 hits).
+
+### M116 — Instalador (03 III ###31-34, inicia L465)
+- Payload medido (M117, Log 1888): Win 125.98 MB (exe 120.80 + DLL 5.18); Linux/SteamOS 96.58 MB (bin 86.8 + SO 9.78) — M117 05 L101/L233-236. DRIFT vs "base 5 GB -> instalador 1.5 GB" (03 capa I #1 L417/L431).
+- Disco: DISCO_MINIMO_MB=5120 (system_requirements.iss L7); GetSpaceOnDisk64 L29; Libre>=5GB L31; msg L71; setup_windows.ps1 L70 AvailableFreeSpace.
+- Instalador: IslaAncestral.iss L31 localappdata; L41 PrivilegesRequired=lowest; L44 x64; L71-72 HKCU. Shortcuts 2 OS (setup_windows.ps1 L210-211/L225; -NoShortcuts L22/L228).
+- Fotos: user://fotos/ (photo_service.gd L28; photo_gallery.gd L13); index.json L49; MAX_MINIATURAS_CARGADAS=24 (gallery L15); miniatura 160x90 (L14); captura <50ms (photo_service L47 item 133; validate_photo.gd L32). Saveset: 50x1MB=50MB=1% de 5GB (diseno; sin medicion real).
+- Tiempos de install NO medidos (smoke: setup 9 acciones/uninstall 1, RC=0 x3, Validador 61 checks, test_instalador 15x3, test_build_m117 14).
+- Retencion saves: %APPDATA%\Godot\app_userdata\isla-ancestral (07 L62-66). Existen rollback.iss/repair.iss/update.iss.
+
+### M118 — CI-CD (03 III ###34-37, inicia L140)
+- 6 workflows / 29 jobs (backup 1, bug_metrics 1, dev-build 4, quality 13, release-build 7, testing 3); runs-on ubuntu-latest x29.
+- Crones: 2 semanales (backup '0 2 * * 1' L17 con comentario PAQ-6; bug_metrics '0 9 * * 1' L5). DRIFT: PAQ-6 asume nightly 3/sem — en disco 0 nightly.
+- Concurrency cancel-in-progress x3 (testing L9-11; quality L9-11; dev-build L21-23).
+- Retentions: dev-build 7/3/7 (L69/L100/L122); release-build 14/30 (L140/L168) — DRIFT vs doc "90 dias"; backup 7 (L69).
+- Timeouts: testing 15/10 (L17/L89); quality 15/15/20/10/5/10x5 (L17/L117/L160/L661/L745/L783/L854/L885/L928/L990); dev-build 15/15/10; release-build 20/10 (L35/L56).
+- Free tier: 21.5 GB/mes artefactos (Beam H26) vs 10 GB; minutos recalculados ~600-1063/mes < 2000 (sin nightly).
+
+### ACK nudge 256 (agnes 22:41) — respondido en msg 257 (22:44 local)
+- Su nudge cruzo con mi informe 256 (22:36, ya en el canal): lote 1 cerrado, tabla hecho=13 skip=0 fail=0, per-modulo con L# del 03 III y [x], 5 drifts, PT sin GO.
+- Ninguno de los 5 modulos estaba 🔵; el riel no quedo corto (13/13). Ofrecido barrido de otros modulos con capa-II degradada si amplia el riel.
+- Gemelo 256/256 reportado para saneo (no renombre su mensaje; precedente 248/248). Pool del canal: 257 consumido (cabeza 258).
+
+### ANEXO MEDICIONES RIEL 258 — lote 2 M72/M105/M107/M119 (2026-10-24 23:30 local; informe 259; Log 2177)
+- **M72 Logros** (03 III ###4-6 L319; 0 cierres — L383-385 ya [x] SIN placeholder; 3 [?] deuda externa M59/M87/M117-118): achievement_service.gd 552L, autoload Achievements (project.godot L80); logros.json 17 logros schema_version=2 SIN campo recompensa (Beam 312 ###2 no materializado; vigentes = hitos M71, progression_manager.gd L20/794-798). DRIFT triple umbrales amistad: friendship.json 30/70/120/150/260 (balance_service L32) vs amistad_config.tres [0,20,40,70,100,140,190,250,320,400,500] (amistad_config.gd L10 fallback; friendship_service L143-146 inyecta runtime; test_amistad_rf48_m20 L45 espera serie .tres). Colección 99% NO existe: 100% estricto (coleccionables_manager L201-204; collection_registry L134-141; logro flora via progression_manager L316-322; recompensa exposición idempotente collection_registry L108-111 + donation_service L57-60). stat_ids duplicados: regalos_dados ×5 (logros.json L78/185/201/216/232); dias_en_aurora L252-265 usa viajes_realizados umbral 30.
+- **M105 Telemetría** (03 III ###7-9 L153; cierres L387-389): telemetry_director.gd 533L, autoload TelemetryDirector (project.godot L29); 19 EVT L101-121; 6 métricas L124-129; opt-in GDPR default false (user://settings/telemetry.cfg); delega 100% a AnalyticsDirector L342-351; timers 1s polling L282-297; SIN limitador por-frame ni buffer propio → batching real en M104: batch_interval_min=30.0 (analytics_director L36, umbral L63 = 30 MIN) + flush on exit L68-71 (DRIFT vs diseño flush 30s/100, 03 L122). 0 hits schema_version en scripts/telemetry+|analytics/ (no versiona payload; semver vive en M119 + logros.json schema_version=2). Cross-ref M144 (144-Despues-Del-Lanzamiento 03 L6-17): 7/9 métricas con fuente M105 medidas — plenas tutorial/dificultad/contenido; insumos onboarding (5 time_to_first + tutorial) y retención (session×2 + duration, agregado M104 L154); economía NO (telemetry_bridge L54-56 purchase_done 0 emisores producción; única fila quest.prereq_met→track_seal_first_obtained L57-65, emisor story_manager L187; 13 track_* sin llamadores pre-bridge L9-14). Refina flag H21. DRIFT CI: iter8 + test_telemetry_bridge_m105 no cableados (quality.yml L487-490 solo 4/6 suites; pisos CHECKS_MINIMOS L480-486).
+- **M107 Backups** (03 III #9-10 L705; cierres L408-409): backup_manager.gd 407L, autoload BackupManager (project.godot L119); DIR user://backups/ L14; _max_copias default 5 L48-49; verificar_integridad L213-224 "checksum\npayload" + Validador.crc32_hex L224; gate restore L254. backup_policy.json: dias_maximos 30, max_copias_por_categoria 5, SIN campo algoritmo (corrección Lote B precisa). backup_categories.json 84L: 7 cats retencion 365/90/180/365/90/180/180 (L10-65), frecuencias continuo×4/post_release×1/semanal×2, GFS 30/52/60 + permanentes L68-73, algoritmo CRC32 L76, zip nivel 6 L79-83. Dual integridad CONFIRMADO: CRC32 runtime + SHA-256 scripts/backup/verify_backups.ps1 L78 (checksums.txt hex64 L53, mensual/ L70, verify.log L93-95, exit 0/1/2). DRIFTS: _limpiar_existentes_cat hardcode max_dias=30 L315 (ignora retencion_dias); limpieza raíz max global L302-312 vs por-cat L314-335; frecuencias no automatizadas (bajo demanda; ejecutor externo backup_local.ps1); SHA-256 mensual MANUAL (0 scheduler, CI no cablea verify).
+- **M119 Actualizaciones** (03 III ###11-12 L398; cierres L212-213): update_manager.gd 92L, autoload UpdateManager (project.godot L112); versions.json 3 canales (estable 1.0.0 / beta 1.1.0-beta.1 / dev 1.1.0-dev.3) + politica min_versiones_atras 2/aviso_previa/requiere_reinicio; 0 hits Timer/_process/cron → 100% pasivo (hotfix<72h/patch 30d/<48h = proceso M144 03 L19-25, no runtime); comparar_versiones L45 ignora pre-release (L56 split('-')[0]; test L52 lo espera). 0 hits canary/rollout/circuit/fail_rate; RollbackManager citado 03 L365 INEXISTENTE (scripts/updates/ = 2 archivos); mecanismo real = promoción entre canales + min_versiones_atras 2. DRIFT CI: test_updates_m119.gd (73L) NO cableado en quality.yml (M72 L523-528 / M105 L487-490 / M107 L358-362 sí).
+- **Autoloads verificados (project.godot)**: AnalyticsDirector L28, TelemetryDirector L29, Achievements L80, UpdateManager L112, BackupManager L119.
+- **Numeración**: msg 259 consumido del pool del canal (helper saneó 258 de agnes ya usado en hilo; gemelo reportado). Log 2177 consumido del pool de Logs (2176 = Step-5/M23).
+
+

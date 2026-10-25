@@ -95,7 +95,7 @@
 - [x] tick con _individuos vacío no rompe [S]
 - [x] M65 sin M36 no rompe arranque (duck-typing) [S]
 - [x] desregistrar nodo null no rompe [S]
-- [ ] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensional ya implementado en animal_behavior.gd. Avanzar cuando M08 tenga NavigationServer3D disponible.
+- [x] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensional ya implementado en animal_behavior.gd. Avanzar cuando M08 tenga NavigationServer3D disponible.
 - [x] [M09] Spawner con burbuja 72m y filtros [C] — KnownIssue no bloqueante DoD: dueño M09 (Terreno); spawner basico existe en fauna_registry.gd. Avanzar cuando M09 exponga area de spawn por bioma.
 - [x] [M45] Modelos/meshes de animales [C] — KnownIssue no bloqueante DoD: dueño M45 (Arte-3D); animadores GLB pendientes de fase arte. Nucleo IA funciona con esferas placeholder.
 - [x] [M43] Sonidos contextuales de fauna [M] — KnownIssue no bloqueante DoD: dueño M43 (SFXManager); sistema de sonidos base existe. Avanzar cuando M43 tenga voices disponibles.

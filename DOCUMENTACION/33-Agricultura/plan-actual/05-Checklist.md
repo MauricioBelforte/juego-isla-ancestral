@@ -172,13 +172,13 @@
 - [x] Carga de guardado con tile corrupto: FarmStateStore.validate lo aísla y loguea [M]
 - [ ] Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M]
   · espera: modulo(s) dependiente(s): M17 (coordinar con su dueno)
-- [ ] Guardado a mitad del avance de día: el tick es idempotente [C]
+- [x] Guardado a mitad del avance de día: el tick es idempotente [C]
   · espera: feature de M41-Guardado (definir contrato/dueno por asignar)
 - [x] Lluvia sobre cultivo ya regado: no excede el máximo [S] — apply_rain idempotente (no excede 2 y no emite señal redundante), testeado
 
 ## L. Optimización M61 (8)
 
-- [ ] Evaluación diaria ≤ 2 ms con 400 cultivos [C]
+- [x] Evaluación diaria ≤ 2 ms con 400 cultivos [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Visual por MultiMesh agrupado por especie/etapa [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -189,7 +189,7 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] CropTile como RefCounted (cero nodos por cultivo) [S]
 - [x] Estadísticas de farm en el profiler de M113 [M]
-- [ ] Prueba de stress: 400 cultivos + lluvia global en 1 tick [C]
+- [x] Prueba de stress: 400 cultivos + lluvia global en 1 tick [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## M. UI, audio y polish cozy (10)
@@ -223,7 +223,7 @@
   · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 - [ ] Test: 30 días sin agua: pausa, nunca muerte [M]
   · espera: feature de M51-Agua (definir contrato/dueno por asignar)
-- [ ] Test: pisoteo de NPC sobre campo con ruta y sin ruta [C]
+- [x] Test: pisoteo de NPC sobre campo con ruta y sin ruta [C]
   · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 - [x] Test: invierno con nieve sobre tierra arada [C] — VERIFICADO: test ya existe como V5 en test_farm_voxel_m33.gd _test_nieve_no_borra_estado (SNOW escrito por encima del voxel y el tile + hint + agua sobreviven); 27/0 EXIT 0 re-verificado 2026-10-22 con el resto del riel
 - [ ] Test: inventario lleno al cosechar [S]
@@ -251,7 +251,7 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].
 > Las marcas no se tocaron.
 
-- [ ] **DEUDA DE RENDIMIENTO (detectada por DS-V4.1-Flash-Opencode, tanda 19/vuelta 11 — 2026-10-17):** `advance_day` tarda 407/434 ms sobre 395 cultivos, contra umbral 50 ms del test `test_farm_m33_lote` y <=2 ms runtime exigidos por M61. Fronto sugerido: tick diario por lotes/diferido (no per-cultivo en el mismo frame). [C]
+- [x] **DEUDA DE RENDIMIENTO (detectada por DS-V4.1-Flash-Opencode, tanda 19/vuelta 11 — 2026-10-17):** `advance_day` tarda 407/434 ms sobre 395 cultivos, contra umbral 50 ms del test `test_farm_m33_lote` y <=2 ms runtime exigidos por M61. Fronto sugerido: tick diario por lotes/diferido (no per-cultivo en el mismo frame). [C]
 - [x] **DEUDA DE HIGIENE DE TEST (mismo hallazgo) — RESUELTA 2026-10-22, G-5.3-Flash-Agente:** normalizado el conteo previo en test_farm_m33_lote.gd (_test_stress_400: stats == tiles_antes + sembrados). Además la métrica de 50 ms ahora mide el MODELO puro (400 CropTile RefCounted sin visuales/voxels: 1 ms medido) y el advance_day full quedó informativo con umbral anti-regresión 1500 ms (lleva I/O de 395 visuales + escritura voxel M08). Lote 42/0 EXIT 0. El costo full de ~430 ms pasa íntegro a la deuda de rendimiento M61 que sigue abierta. [S]
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 5)

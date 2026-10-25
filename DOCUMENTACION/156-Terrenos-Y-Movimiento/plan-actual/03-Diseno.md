@@ -1,4 +1,4 @@
-**Modelo:** MiMo V2.5
+﻿**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-22
 
@@ -436,129 +436,129 @@ Jugador (M11)     TerrainDetector   TerrainDataProvider   M155
 - Unit tests para TerrainDataProvider.get_terrain_data()
 - Integration tests para flujo completo M11 + M156 + M155
 
-# Protocolos de medicion (S56b — G-5.3-Flash-Agente, 2026-10-23: definicion en papel; la EJECUCION queda para quien tenga el proyecto abierto en editor —Godot visual V2/V4— o el permiso de GO de integracion)
+# Protocolos de medicion (S56b â€” G-5.3-Flash-Agente, 2026-10-23: definicion en papel; la EJECUCION queda para quien tenga el proyecto abierto en editor â€”Godot visual V2/V4â€” o el permiso de GO de integracion)
 
-**P1 — audio no causa lag (L327):** QUE: frame-time con el mezclador activo
-y N sfx simultaneos. HERRAMIENTA: profiler interno de Godot (pestanña
+**P1 â€” audio no causa lag (L327):** QUE: frame-time con el mezclador activo
+y N sfx simultaneos. HERRAMIENTA: profiler interno de Godot (pestanÃ±a
 Audio) + frame-time monitor. ESCENA: plaza del prototipo con 10 sfx
 simultaneos (pasos + ambiente + viento + ui). UMBRAL: 0 frames > 100 ms
 atribuibles al bus audio; pico de CPU del mezclador < 2% por frame.
 
-**P2 — sonidos diferentes por terreno (L375):** QUE: cada material de
+**P2 â€” sonidos diferentes por terreno (L375):** QUE: cada material de
 terreno dispara su sfx propio. HERRAMIENTA: tabla de mapping
 material->sfx (fuente: dataset M42/M43) + auditoria de la senal de paso
 del jugador. ESCENA: 6 materiales (pasto, arena, piedra, madera, metal,
 agua somera) x 5 pasos cada uno. UMBRAL: 6/6 materiales con sfx distinto y
-0 por defecto-genérico.
+0 por defecto-genÃ©rico.
 
-**P3 — huellas diferentes por terreno (L376):** QUE: cada material deja
+**P3 â€” huellas diferentes por terreno (L376):** QUE: cada material deja
 su decal/huella. HERRAMIENTA: inspector de decals en escena + captura por
 terreno. ESCENA: misma del P2. UMBRAL: 6/6 materiales con huella visible
 diferenciada y 0 fuga de decals (purge al cambiar chunk).
 
-**P4 — particulas diferentes por terreno (L377):** QUE: cada material
+**P4 â€” particulas diferentes por terreno (L377):** QUE: cada material
 produce su particula (polvo/salpicadura/hoja). HERRAMIENTA: contador de
 particulas del profiler + pool M52. ESCENA: misma del P2. UMBRAL: 6/6 con
 particles propio del material y 0 asignaciones cruzadas.
 
-**P5 — indicador de UI actualiza (L378):** QUE: el HUD refleja el estado
+**P5 â€” indicador de UI actualiza (L378):** QUE: el HUD refleja el estado
 (herramienta, recurso, estamina) al instante. HERRAMIENTA: captura en
 video + comparacion frame al frame con el estado logico (la senal del
 estado debe preceder al cambio de UI en <= 2 frames). ESCENA: cambio de
 herramienta x 10 + pickup x 10. UMBRAL: 100% de cambios de estado
 reflejados en <= 2 frames.
 
-**P6 — jugador nunca se bloquea (L379):** QUE: el jugador no queda atascado
+**P6 â€” jugador nunca se bloquea (L379):** QUE: el jugador no queda atascado
 en la geometria. COMO/HERRAMIENTA: script de recorrido autonomico (nav
 agent) cruzando las 12 estructuras del prototipo + registro de posiciones
 congeladas (> 5 s sin desplazamiento). ESCENA: plaza + 12 estructuras +
 laderas. UMBRAL: 0 congela mientos > 5 s; 1 recuperacion automatica si
 ocurre (nudge).
 
-**P7 — FPS estable a 60 (L380):** QUE: framerate medio >= 60 en gameplay
+**P7 â€” FPS estable a 60 (L380):** QUE: framerate medio >= 60 en gameplay
 estandar. HERRAMIENTA: REPORTE-FPS.md (bench_slice.gd, TC13 de M138) con
 captura del 1% low. ESCENA: plaza del prototipo con fauna del mundo +
 vegetacion M50. UMBRAL: >= 60 fps promedio, 1% low >= 45 fps, 0 picos
 > 250 ms.
 
-**P8 — sin errores en consola (L381):** QUE: la consola del editor no
+**P8 â€” sin errores en consola (L381):** QUE: la consola del editor no
 emite errores/fatals en sesion canonica. HERRAMIENTA: get_debug_output
 (godot-mcp) con filtro por severidad ERROR/FATAL. ESCENA: recorridoe de
-la Tanda canónica de 15 min (boot -> plaza -> prado -> construccion ->
-guardado). UMBRAL: 0 ERROR/FATAL de sesión (los warnings W permitidos
+la Tanda canÃ³nica de 15 min (boot -> plaza -> prado -> construccion ->
+guardado). UMBRAL: 0 ERROR/FATAL de sesiÃ³n (los warnings W permitidos
 documentados).
 
-**P9 — coherencia visual total (L393):** QUE: el material del terreno/props
+**P9 â€” coherencia visual total (L393):** QUE: el material del terreno/props
 cumple la paleta y estilo del canon. COMO/HERRAMIENTA: style-guide check
-visual del dueño de arte (V1/V2) con la lista de materiales canon M50. ESCENA:
+visual del dueÃ±o de arte (V1/V2) con la lista de materiales canon M50. ESCENA:
 los 6 materiales del prototipo en la misma escena de referencia. UMBRAL: 100% de
-materiales dentro del canon (aprobacion del dueño de arte, no del agente).
+materiales dentro del canon (aprobacion del dueÃ±o de arte, no del agente).
 
-**P10 — coherencia audio total (L394):** QUE: el mix de ambiente/SFX/USO del
+**P10 â€” coherencia audio total (L394):** QUE: el mix de ambiente/SFX/USO del
 jugador cumple el map de audio por zona. COMO/HERRAMIENTA: mezclador de
 Godot (buses Ambiente/SFX/USO) + tabla de volumen por zona del M42.
 ESCENA: las 6 zonas del prototipo en las 2 franjas (dia/noche). UMBRAL:
 100% de zonas con staff ambiente propio y 0 SFX fuera de su zona canon.
 
-# Protocolos de medicion (S56b — G-5.3-Flash-Agente, 2026-10-23: definicion en papel; la EJECUCION queda para quien tenga el proyecto abierto en editor —Godot visual V2/V4— o el permiso de GO de integracion)
+# Protocolos de medicion (S56b â€” G-5.3-Flash-Agente, 2026-10-23: definicion en papel; la EJECUCION queda para quien tenga el proyecto abierto en editor â€”Godot visual V2/V4â€” o el permiso de GO de integracion)
 
-**P1 — audio no causa lag (L327):** QUE: frame-time con el mezclador activo
-y N sfx simultaneos. HERRAMIENTA: profiler interno de Godot (pestanña
+**P1 â€” audio no causa lag (L327):** QUE: frame-time con el mezclador activo
+y N sfx simultaneos. HERRAMIENTA: profiler interno de Godot (pestanÃ±a
 Audio) + frame-time monitor. ESCENA: plaza del prototipo con 10 sfx
 simultaneos (pasos + ambiente + viento + ui). UMBRAL: 0 frames > 100 ms
 atribuibles al bus audio; pico de CPU del mezclador < 2% por frame.
 
-**P2 — sonidos diferentes por terreno (L375):** QUE: cada material de
+**P2 â€” sonidos diferentes por terreno (L375):** QUE: cada material de
 terreno dispara su sfx propio. HERRAMIENTA: tabla de mapping
 material->sfx (fuente: dataset M42/M43) + auditoria de la senal de paso
 del jugador. ESCENA: 6 materiales (pasto, arena, piedra, madera, metal,
 agua somera) x 5 pasos cada uno. UMBRAL: 6/6 materiales con sfx distinto y
-0 por defecto-genérico.
+0 por defecto-genÃ©rico.
 
-**P3 — huellas diferentes por terreno (L376):** QUE: cada material deja
+**P3 â€” huellas diferentes por terreno (L376):** QUE: cada material deja
 su decal/huella. HERRAMIENTA: inspector de decals en escena + captura por
 terreno. ESCENA: misma del P2. UMBRAL: 6/6 materiales con huella visible
 diferenciada y 0 fuga de decals (purge al cambiar chunk).
 
-**P4 — particulas diferentes por terreno (L377):** QUE: cada material
+**P4 â€” particulas diferentes por terreno (L377):** QUE: cada material
 produce su particula (polvo/salpicadura/hoja). HERRAMIENTA: contador de
 particulas del profiler + pool M52. ESCENA: misma del P2. UMBRAL: 6/6 con
 particles propio del material y 0 asignaciones cruzadas.
 
-**P5 — indicador de UI actualiza (L378):** QUE: el HUD refleja el estado
+**P5 â€” indicador de UI actualiza (L378):** QUE: el HUD refleja el estado
 (herramienta, recurso, estamina) al instante. HERRAMIENTA: captura en
 video + comparacion frame al frame con el estado logico (la senal del
 estado debe preceder al cambio de UI en <= 2 frames). ESCENA: cambio de
 herramienta x 10 + pickup x 10. UMBRAL: 100% de cambios de estado
 reflejados en <= 2 frames.
 
-**P6 — jugador nunca se bloquea (L379):** QUE: el jugador no queda atascado
+**P6 â€” jugador nunca se bloquea (L379):** QUE: el jugador no queda atascado
 en la geometria. COMO/HERRAMIENTA: script de recorrido autonomico (nav
 agent) cruzando las 12 estructuras del prototipo + registro de posiciones
 congeladas (> 5 s sin desplazamiento). ESCENA: plaza + 12 estructuras +
 laderas. UMBRAL: 0 congela mientos > 5 s; 1 recuperacion automatica si
 ocurre (nudge).
 
-**P7 — FPS estable a 60 (L380):** QUE: framerate medio >= 60 en gameplay
+**P7 â€” FPS estable a 60 (L380):** QUE: framerate medio >= 60 en gameplay
 estandar. HERRAMIENTA: REPORTE-FPS.md (bench_slice.gd, TC13 de M138) con
 captura del 1% low. ESCENA: plaza del prototipo con fauna del mundo +
 vegetacion M50. UMBRAL: >= 60 fps promedio, 1% low >= 45 fps, 0 picos
 > 250 ms.
 
-**P8 — sin errores en consola (L381):** QUE: la consola del editor no
+**P8 â€” sin errores en consola (L381):** QUE: la consola del editor no
 emite errores/fatals en sesion canonica. HERRAMIENTA: get_debug_output
 (godot-mcp) con filtro por severidad ERROR/FATAL. ESCENA: recorridoe de
-la Tanda canónica de 15 min (boot -> plaza -> prado -> construccion ->
-guardado). UMBRAL: 0 ERROR/FATAL de sesión (los warnings W permitidos
+la Tanda canÃ³nica de 15 min (boot -> plaza -> prado -> construccion ->
+guardado). UMBRAL: 0 ERROR/FATAL de sesiÃ³n (los warnings W permitidos
 documentados).
 
-**P9 — coherencia visual total (L393):** QUE: el material del terreno/props
+**P9 â€” coherencia visual total (L393):** QUE: el material del terreno/props
 cumple la paleta y estilo del canon. COMO/HERRAMIENTA: style-guide check
-visual del dueño de arte (V1/V2) con la lista de materiales canon M50. ESCENA:
+visual del dueÃ±o de arte (V1/V2) con la lista de materiales canon M50. ESCENA:
 los 6 materiales del prototipo en la misma escena de referencia. UMBRAL: 100% de
-materiales dentro del canon (aprobacion del dueño de arte, no del agente).
+materiales dentro del canon (aprobacion del dueÃ±o de arte, no del agente).
 
-**P10 — coherencia audio total (L394):** QUE: el mix de ambiente/SFX/USO del
+**P10 â€” coherencia audio total (L394):** QUE: el mix de ambiente/SFX/USO del
 jugador cumple el map de audio por zona. COMO/HERRAMIENTA: mezclador de
 Godot (buses Ambiente/SFX/USO) + tabla de volumen por zona del M42.
 ESCENA: las 6 zonas del prototipo en las 2 franjas (dia/noche). UMBRAL:
@@ -567,7 +567,7 @@ ESCENA: las 6 zonas del prototipo en las 2 franjas (dia/noche). UMBRAL:
 # Presupuestos de terreno (Beam 346, produce-first)
 ### ProgressBar para velocidad efectiva
 - Spec: ProgressBar que muestra la velocidad efectiva del jugador sobre el terreno (0-100%).
-- Cap: TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5.
+- Cap: TerrainModifiers static cap 50% (testeado Â§4.2) â€” cap clampf 0-0.5.
 - Coherente con M11 (movimiento) y M61 (rendimiento).
 
 ### Nota de coherencia (Beam 410)
@@ -581,3 +581,36 @@ os clasACES de item (M156 catalogo) usan el mismo budget generator (ref Beam 381
 ### Budget de NPCs por isla
 - Nota: el budget de NPCs por isla se gestiona en M27 (islas) + M64 (IA de NPC). M156 no tiene un budget propio de NPCs.
 - Coherente con M27 (islas) y M64 (IA de NPC).
+# Spec TerrainBlock (Beam 478)
+### Crear terrain_block.gd
+- Spec: script 	errain_block.gd (extends StaticBody3D) que encapsula un bloque de terreno: terrain_id, collider, y carga de datos desde data/terrenos/terrenos.json. Coherente con M156 (terrenos) y M08 (voxel).
+
+### Requerir CollisionShape3D hijo
+- Spec: cada TerrainBlock requiere un CollisionShape3D hijo con BoxShape3D para colisión. Validación en _ready().
+
+### Crear escena base terrain_block.tscn
+- Spec: escena base 	errain_block.tscn con TerrainBlock root + CollisionShape3D hijo. Instanciable por el generador de terreno.
+
+### Configurar CollisionShape3D con BoxShape3D
+- Spec: el CollisionShape3D usa BoxShape3D con tamaño derivado del bloque (1x1x1 voxel). Coherente con M08 (voxel).
+
+### Asignar terrain_id correcto
+- Spec: terrain_id se asigna desde data/terrenos/terrenos.json vía _load_from_data(). El id identifica el tipo de terreno para efectos (pasos, VFX).
+
+### play_footstep(terrain_id)
+- Spec: play_footstep(terrain_id) reproduce un sonido de paso según el terreno (M42). Aplica variación de pitch y volumen configurables. Coherente con M42 (sonido) y M156 (terrenos).
+
+### Volumen configurable
+- Spec: volumen del footstep configurable por terreno (volumen_db). Coherente con M42 (sonido).
+# Spec feedback de terreno (Beam 479)
+### Fade al cambiar terreno
+- Spec: al cambiar de terreno, se aplica un fade de audio/visual suave (crossfade) para evitar cortes bruscos. Coherente con M42 (sonido) y M156 (terrenos).
+
+### Collision layer por terrain_block
+- Spec: cada terrain_block asigna collision_layer según su tipo (7 tipos → 7 layers). Definido en _layer_for_type(). Coherente con M08 (voxel) y M156 (terrenos).
+
+### ProgressBar de velocidad efectiva
+- Spec: UI (M53) muestra un ProgressBar con la velocidad efectiva (cap 50% por TerrainModifiers). Coherente con M53 (UI) y M156 (terrenos).
+# Spec TerrainFootstepAudio (Beam 480)
+### Agregar TerrainFootstepAudio al jugador
+- Spec: 	errain_footstep_audio.gd (extends Node) se agrega como hijo del jugador (M11). Consume 	errain_changed del TerrainDetector y reproduce el footstep correspondiente vía play_footstep(terrain_id). Coherente con M11 (movimiento) y M156 (terrenos).

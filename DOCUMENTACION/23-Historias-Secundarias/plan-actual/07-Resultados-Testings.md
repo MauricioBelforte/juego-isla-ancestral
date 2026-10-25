@@ -649,3 +649,105 @@ BACKLOG).
 - **Hallazgo (dueño M55, no tocado):** el puente M23 -> M55 degrada en silencio
   para las 3 nuevas (0 entradas `mision_cadena-*`); mismo residual de las
   iteraciones 3/6-15, verificado por el check del puente en el bloque U.
+
+
+## Iter. 17 — Agricultura (Log 2172, 2026-10-24, Step-5-WorkBuddy)
+
+- **Suite `test_historias.gd` (bloque V `_test_agricultura()` NUEVO, +44
+  checks):** **624 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR (binario
+  real, 3 corridas headless). Piso 580 -> **624 MEDIDO en verde**.
+- **Guardián EN ROJO por inyección de runtime** al inicio del bloque V
+  (subscript dinamico `get_cadena(...)["titulo"]` -> `Dictionary`):
+  **EXIT 1, 581 checks, 2 fallos** («el bloque V NO se ejecuto (posible
+  SCRIPT ERROR que aborto la funcion)» + «solo 581 checks ejecutados
+  (minimo 624)»). Sonda borrada y suite restaurada byte-exacta
+  (sha256 e385a9646f2dce939d7895d2631a36de35a879fc81f05d9fb57dbbbafb140119).
+  NOTA de método: la 1a version de la sonda (literal String -> Dictionary)
+  fue **PARSE ERROR estatico** — el script no compila y muere entero, no
+  aborta una funcion: no prueba el guardian. Rehecha con valor dinamico.
+- **Dato verificado en disco:** `secundarias.json` 62 -> 67 cadenas (+75/-0
+  aditivo); 5/5 NPC REALES (`data/villagers/*.tres`) y 5/5 objetos REALES
+  (`data/items/*.tres` por campo id); 0 colisiones de id/consecuencia/
+  capitulo con las 62 previas; 68 consecuencias globales distintas.
+- **Regresiones (binario real):** M59 carga idempotente 28/0, autosave 0
+  fallos, fecha/diario/cola 45/0; M71 flujo XP 37/0; M55 diario perf 26/0.
+- **Flips con cita:** L71 (crear 5 misiones de agricultura) y L73
+  (documentar construccion + agricultura) [ ] -> [x]. M23 = **76 [x] /
+  27 [ ] / 2 [?] = 105** (prefijo de linea); linea de totales sincronizada.
+- **Hallazgo ajeno (reportado, no tocado):** el id de objeto
+  `semilla_antigua`, usado por cadenas previas de los clusters
+  Investigacion/Secretas, **no existe** en `data/items/` (0 coincidencias
+  por campo id): cita de item sin respaldo en disco (misma familia que
+  `molino_funcionado` de la iter. 8). Mis 5 objetos fueron verificados
+  reales antes de escribir las cadenas.
+
+## Iter. 18 — Pesca (4) + Colección (6) (Log 2173, 2026-10-24, Step-5-WorkBuddy)
+
+- **Cierre de tanda ejecutada por corrida cortada** (familia It. 10/15/17): el
+  dato y la suite ya estaban en disco (`secundarias.json` 67 -> 77 cadenas,
+  bloque W en la suite, flips L77/L78/L80 del 05). Esta corrida RE-VERIFICO
+  integra (un verde no se hereda) y reparo los entregables de cierre: esta
+  seccion, el espejo de la COLA ACTIVA del BACKLOG-MASTER (items 152/153/155),
+  la cabecera del 05 (iter. 17 y 18 faltaban) y el msg 213 a la directora.
+- **Suite `test_historias.gd` (bloque W `_test_pesca_coleccion()`):**
+  **691 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR (binario real,
+  re-corrida hoy, no heredada). Piso **691 MEDIDO en verde**.
+- **Guardián EN ROJO por inyeccion de RUNTIME sobre el bloque W**
+  (re-ejecutado HOY por este agente, no heredado): subscript dinamico
+  `get_cadena("cadena-pesca-trofeos")["oculta"]` -> Variant -> llamada a
+  metodo inexistente: EXIT 1, «el bloque W NO se ejecuto (posible SCRIPT
+  ERROR que aborto la funcion)» + «solo 625 checks ejecutados (minimo 691)»,
+  2 fallos. Sonda borrada y suite restaurada byte-exacta (sha256
+  baa223ed684c852126b98e5c9add9c55006d50a66389f4d5cf0c23f002924c7d,
+  verificado identico al previo).
+- **Dato verificado en disco (independiente):** 77 cadenas totales; las 10
+  nuevas con **10/10 NPC REALES** (`data/villagers/*.tres`, 14 medidos:
+  finneas_zorro, sofia_buho x2, teo_conejo x2, luna_zorra, olivia_nutria,
+  ramon_tejon) y **10/10 objetos REALES** (`data/items/*.tres` por campo id,
+  300 medidos: OBJ-HER-011, OBJ-ART-002, OBJ-HER-010, OBJ-LUZ-012, OBJ-CUA-010,
+  OBJ-ART-001, OBJ-ART-005, mineral_cobre, OBJ-ITE-023, OBJ-PLA-004);
+  77/77 consecuencias, 76/76 capitulos y 77/77 titulos unicos (la colision de
+  titulo de `cadena-coleccion-sellos` con `cadena-cofradia` de iter. 6 la
+  detecto y corrigio la corrida original: «Los Sellos de los Oficios»).
+- **Regresiones (binario real, medidas HOY):** M59 carga idempotente 28/0,
+  slots/perfiles 41/0, carga NPC/misiones 63/0, fecha/diario/cola 45/0;
+  M71 test_progresion 83/0; M55 diario perf 26/0 + persistencia 0 fallos.
+- **Flips con cita:** L77 «Crear 4 misiones de pesca», L78 «Crear 6 misiones
+  de coleccion` y L80 «Documentar misiones de pesca y coleccion` `[ ]` ->
+  `[x]`. M23 = **79 [x] / 24 [ ] / 2 [?] = 105** (prefijo de linea; Totales
+  sincronizado). Ofrecidos a revertir.
+- **Trampa propia de la re-verificacion:** mi 1er extractor de realidad leyo
+  campos inexistentes (`npc`/`objeto` en la raiz de la cadena) y publico 10
+  FALTA falsas; el schema real los lleva en `pasos` (misma familia que el
+  extractor de la iter. 15). Corregido antes de publicar.
+## Iter. 19 — Postgame (Log 2176, 2026-10-24, Step-5-WorkBuddy)
+
+- **Alcance:** L129/L132/L133/L134 del 05-Checklist; 3 cadenas nuevas
+  (`data/historias/secundarias.json` 77 -> 80; +45/-0 contra HEAD, aditivo,
+  formato preservado). Las 3 nacen `postgame:true`; `cadena-epilogo-guardian`
+  además `oculta:true` (final secreto). Con `cadena-epilogo-plaza` previa
+  quedan las 4 de postgame del 03-Diseno L47.
+- **Suite:** bloque X `_test_postgame_cluster()` (+50 checks).
+  **742 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR (binario real).
+  Piso **742 MEDIDO en verde** (691 -> 742).
+- **Guardián EN ROJO por inyección de RUNTIME sobre el bloque X**: subscript
+  dinámico `get_cadena("cadena-memorial-sello")["oculta"]` -> Variant bool ->
+  llamada a método inexistente: EXIT 1, «el bloque X NO se ejecuto (posible
+  SCRIPT ERROR que aborto la funcion)» + «solo 692 checks ejecutados (minimo
+  742)», 2 fallos. Sonda borrada y suite restaurada byte-exacta (sha256
+  441778340f742b9f3c16e42880c62c33aa9001efdff17fe8b5866cdb5fb391ec).
+- **Fallo propio de la 1a corrida (corregido):** el gate de disponibles se
+  midió con el estado que dejaba el bloque F (final «secreto» ya elegido) ->
+  2 de las 3 expuestas y 1 fallo. Reescrito con limpieza previa del estado.
+- **Dato verificado en disco (independiente):** 80 cadenas totales; las 3
+  nuevas con **NPC REALES** (`data/villagers/*.tres`, profesión medida:
+  ramon_tejon herrero, aria_ciervo trovadora, pablo_pato ceramista,
+  catalina_oso cocinera, nico_gato guardabosques) y **objetos REALES**
+  (`data/items/*.tres` por campo id, 300 medidos: piedra_caliza, clay,
+  fragmento_ancestral); 0 colisiones de id/flag/capitulo con las 77 previas.
+- **Regresiones (binario real):** M59 slots/perfiles 41/0, carga idempotente
+  28/0, carga NPC/misiones 63/0, fecha/diario/cola 45/0; M71 test_progresion
+  83/0; M55 diario perf 26/0 + persistencia 0 fallos.
+- **Flips con cita:** L129, L132, L133 y L134 `[ ]` -> `[x]`. M23 = **83 [x] /
+  20 [ ] / 2 [?] = 105** (prefijo de línea; Totales sincronizado). Ofrecidos
+  a revertir.

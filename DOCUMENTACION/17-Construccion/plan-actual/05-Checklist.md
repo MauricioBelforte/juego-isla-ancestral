@@ -137,7 +137,7 @@
 - [ ] Puerta exige pared contigua en la celda de instalación [M]
 - [ ] Ventana exige pared contigua de al menos 1 celda [M]
 - [ ] Escalera exige apoyo en piso o pared y no bloquea la circulación [M]
-- [ ] Puente solo sobre agua (laguna/mar interior) y dentro de alcance de zona [C]
+- [x] Puente solo sobre agua (laguna/mar interior) y dentro de alcance de zona [C]
 - [ ] Camino solo sobre césped/arena (nunca sobre roca o pendiente fuerte) [M]
 - [x] Techos exigen 2+ soportes (paredes o pilares) en las celdas de cobertura [C]
 - [x] Ninguna celda de la pieza puede solapar un NPC activo (consulta M64) [C]
@@ -153,7 +153,7 @@
 - [x] Permiso "agua" exclusivo para puentes (validado antes de la regla de pieza) [M]
 - [x] Aviso claro con motivo al intentar colocar fuera de zona (fantasma rojo + texto) [S]
   · evidencia: 03-Diseno.md secc. Aviso y stacks (P-100, Reflection-Beam-1.0, T76, 2026-10-22)
-- [ ] Las zonas se serializan en M58 y se restauran antes de las piezas [C]
+- [x] Las zonas se serializan en M58 y se restauran antes de las piezas [C]
 - [ ] Cambios de zona emiten señal a M64 (navmesh) y a M93 (proyectos) [M]
 
 ## I. Costo de recursos e inventario (M14) (8)
@@ -186,7 +186,7 @@
 ## K. Integración con el resto del sistema (12)
 
 - [x] M08: escrituras voxel por celdas con marca dirty en los chunks afectados [C]
-- [ ] M08: los datos de pieza viven en capa voxel separada del terreno generado [C]
+- [x] M08: los datos de pieza viven en capa voxel separada del terreno generado [C]
 - [x] M14: descuento, devolución y almacenamiento de piezas como ítems [M] — verificado (step-5-kilocode, 2026-10-12, Log 1745): `build_manager.gd` + suites `test_construccion.gd` (131 checks) e `iter6`/`iter7`, todas en verde. `conectar_inventario(inv)` + `_invertir()` cubren **descuento y devolución** (duck-typing con M14); los bloques 8-10 de `test_construccion.gd` prueban costo real, devolución del 50 % al demoler y re-cobro al deshacer. El **almacenamiento** de piezas como ítems del inventario es de M14 (límite documentado).
 - [ ] M18: las ampliaciones de la casa usan proyectos de piezas de este módulo [C]
 - [ ] M25: ruinas como contenido solo visual (deconstruible = false) [M]
@@ -222,7 +222,7 @@
 - [x] Ocupación consultada en mapa de celdas en memoria (diccionario) [M]
 - [ ] Materiales de pieza compartidos entre instancias (static batching de Godot) [M]
 - [x] Límite suave de piezas por zona (configurable) con aviso al jugador [M]
-- [ ] Presupuesto medido con profiler: preview <= 1 ms por frame (M113) [C]
+- [x] Presupuesto medido con profiler: preview <= 1 ms por frame (M113) [C]
 
 ## N. Documentación (6)
 

@@ -71,7 +71,7 @@
 
 - [x] P1: diseño del puerto — Harbor con docks, muelle y zona de embarque [C]
 
-- [ ] P2: diseño del barco — Gran Vapor con cubierta navegable y chimenea [C]
+- [x] P2: diseño del barco — Gran Vapor con cubierta navegable y chimenea [C]
 
 - [ ] P3: diseño del dirigible — vehículo opcional de contenido tardío, no bloqueante [M]
 
@@ -237,11 +237,11 @@
 
 
 
-- [ ] Flujo completo: embarque, travesía y llegada de punta a punta [C]
+- [x] Flujo completo: embarque, travesía y llegada de punta a punta [C]
 
 - [ ] Flujo de llegada con muelle libre y atraque directo [M]
 
-- [ ] Flujo de llegada con muelle ocupado: espera animada de hasta 10 s [C]
+- [x] Flujo de llegada con muelle ocupado: espera animada de hasta 10 s [C]
 
 - [ ] Flujo de cancelación antes del embarque con devolución del 100 % [M]
 
@@ -269,7 +269,7 @@
 
 - [ ] M69: viaje rápido con puntos desbloqueados, coste alto y visita previa [M]
 
-- [ ] M63: precarga de la isla destino al confirmar el boleto [C]
+- [x] M63: precarga de la isla destino al confirmar el boleto [C]
 
 - [ ] M63: liberación de la isla origen al zarpar [M]
 
@@ -289,7 +289,7 @@
 
 
 
-- [ ] Llegada con muelle ocupado: espera visible, nunca soft-lock [C]
+- [x] Llegada con muelle ocupado: espera visible, nunca soft-lock [C]
 
 - [ ] Cancelación con boleto consumido: devolución calculada correcta [M]
 
@@ -303,7 +303,7 @@
 
 - [ ] Insuficiencia de monedas: aviso sin cobro parcial [S]
 
-- [ ] Fallo de streaming del destino (M63): espera en cubierta con mensaje [C]
+- [x] Fallo de streaming del destino (M63): espera en cubierta con mensaje [C]
 
 - [ ] Guardado durante SAILING: restaura en el punto medio de la curva [M]
 
@@ -315,7 +315,7 @@
 
 
 
-- [ ] Precarga de la escena destino durante la travesía (M63) [C]
+- [x] Precarga de la escena destino durante la travesía (M63) [C]
 
 - [ ] Travesía con tope de 90 s para limitar tiempo de streaming [S]
 
@@ -325,7 +325,7 @@
 
 - [ ] Cache de nodos en _ready, sin get_node en bucles [S]
 
-- [ ] Budget de frame menor o igual a 16 ms durante la travesía [C]
+- [x] Budget de frame menor o igual a 16 ms durante la travesía [C]
 
 - [ ] Sin alocaciones en el bucle de progreso de la ruta [M]
 

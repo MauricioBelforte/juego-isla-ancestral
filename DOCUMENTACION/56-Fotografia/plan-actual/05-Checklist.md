@@ -117,7 +117,7 @@
 ## J. Captura de Paisajes
 
 - [x] Capturar escenas completas sin HUD [S] — iter. 3: tomar_foto() oculta HUD → 2 frames (lag de 1 frame documentado) → save_png; evidencia cap_56_2026-10-09 sin HUD (suite 31 checks 0 fallos con render, 26/0 headless)
-- [ ] Capturar vegetación densa (M50) y agua (M51) sin popping [C]
+- [x] Capturar vegetación densa (M50) y agua (M51) sin popping [C]
   · espera: modulo(s) dependiente(s): M50, M51 (coordinar con su dueno)
 - [ ] Capturar ruinas (M25), templos (M26) e interiores (M49) [M]
   · espera: modulo(s) dependiente(s): M25, M26, M49 (coordinar con su dueno)
@@ -173,7 +173,7 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Borrar foto desde el diario [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Testear galería con 200+ fotos en 3 idiomas (M61/M87) [C]
+- [x] Testear galería con 200+ fotos en 3 idiomas (M61/M87) [C]
   · espera: modulo(s) dependiente(s): M61, M87 (coordinar con su dueno)
 
 ## O. Compartir Imágenes
@@ -212,7 +212,7 @@
   · espera: modulo(s) dependiente(s): M14 (coordinar con su dueno)
 - [ ] Publicar atajos en el menú de ayuda (M92) [S]
   · espera: modulo(s) dependiente(s): M92 (coordinar con su dueno)
-- [ ] Testear todos los atajos con teclado y gamepad [C]
+- [x] Testear todos los atajos con teclado y gamepad [C]
   · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 
 ## R. Rendimiento y Memoria (M61/M62)
@@ -222,9 +222,9 @@
 - [ ] Presupuesto del álbum: ≤ 150 MB con aviso PHOTO-WARN [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Implementar utilidades de medición de memoria del álbum [M]
-- [ ] Probar con profiler (M116) y en baja calidad gráfica (M90) [C]
+- [x] Probar con profiler (M116) y en baja calidad gráfica (M90) [C]
   · espera: modulo(s) dependiente(s): M116, M90 (coordinar con su dueno)
-- [ ] Testear estabilidad en 30 min de sesión de fotos [C]
+- [x] Testear estabilidad en 30 min de sesión de fotos [C]
   · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 
 ## S. Edge Cases
@@ -294,11 +294,11 @@
 
 - [x] Crear validate_photo.gd (modo foto, presets, guardado, rendimiento) [C]
   · implementado: scripts/foto/validate_photo.gd (presets, servicio, navigator, subviewport 1920x1080). (Reflection-Beam-1.0, T23, 2026-10-22)
-- [ ] Probar ciclo completo: entrar → ajustar → posar → capturar → ver álbum [C]
+- [x] Probar ciclo completo: entrar → ajustar → posar → capturar → ver álbum [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Probar ciclo de compartición con confirmación [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Probar salida del modo foto restaurando TODO el estado [C]
+- [x] Probar salida del modo foto restaurando TODO el estado [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Revisar logs PHOTO-* en consola sin errores [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)

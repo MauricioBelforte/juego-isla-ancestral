@@ -82,7 +82,7 @@
 - [x] Vitrina ocupada muestra el modelo/iscon de la pieza registrada [M]
 - [x] Vitrina libre muestra silueta y etiqueta "Por donar" [S]
 - [ ] Inspeccion de pieza abre panel con nombre, procedencia y curiosidad [S]
-- [ ] Variante para peces: acuario con nado animado por spline [C]
+- [x] Variante para peces: acuario con nado animado por spline [C]
 - [ ] Variante para fosiles: montaje en pedestal con iluminacion suave [S]
 - [ ] Variante para fauna: diorama estatico con el modelo avistado [M]
 - [ ] Variante para arte: cuadro en marco sobre pared [S]

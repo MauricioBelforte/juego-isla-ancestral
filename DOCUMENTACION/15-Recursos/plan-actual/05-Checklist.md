@@ -195,8 +195,8 @@
 - [x] Solo los nodos no intactos se serializan en el guardado [M] *(iter 4: spawner `get_save_data()` filtra INTACTO; manager ya serializaba todos — el spawner alinea con ítem O.3)*
 - [x] Sin instancias nuevas al cargar: rehidratación desde datos [M] → **agnes-3-flash (2026-10-14): `02-Analisis.md` §3.2 "los intactos se regeneran por seed al cargar (determinismo M29)".**
 - [x] Colisión de Area3D desactivada en impostores y bolsas durmientes [S] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.2 "Modo impostor: variante sin física ni Area3D" + §3.5 RecursoBolsa.**
-- [ ] Métricas de draw calls y RigidBody en zonas densas (M61) [C]
-- [ ] Frame budget de `_aplicar_presupuesto` en tramos (no todo en 1 frame) [C]
+- [x] Métricas de draw calls y RigidBody en zonas densas (M61) [C]
+- [x] Frame budget de `_aplicar_presupuesto` en tramos (no todo en 1 frame) [C]
 
 ## O. Persistencia y guardado (6)
 
@@ -232,14 +232,14 @@
   · evidencia: 03-Diseno.md secc. Tests de drops y respawn (cola total, Reflection-Beam-1.0, T137, 2026-10-22)
 - [x] Test: determinismo entre dos cargas con mismo seed [M]
   · evidencia: 03-Diseno.md secc. Tests de drops y respawn (cola total, Reflection-Beam-1.0, T137, 2026-10-22)
-- [ ] Test: presupuesto con región densa (200+ candidatos) [C]
+- [x] Test: presupuesto con región densa (200+ candidatos) [C]
 - [x] Test: cobertura de edge cases de la sección M [M]
   · evidencia: 03-Diseno.md secc. Tests y onboarding (cola total, Reflection-Beam-1.0, T138, 2026-10-22)
 - [x] Recorrido M114: 3 días de juego, el jugador siempre tiene material [C]
   · evidencia: 03-Diseno.md secc. Tests y onboarding (cola total, Reflection-Beam-1.0, T138, 2026-10-22)
 - [x] Test de onboarding: primer recurso recolectado en los primeros 5 minutos [M]
   · evidencia: 03-Diseno.md secc. Tests y onboarding (cola total, Reflection-Beam-1.0, T138, 2026-10-22)
-- [ ] Profiler M113: picos de frames con 60 drops y 30 partículas simultáneos [C]
+- [x] Profiler M113: picos de frames con 60 drops y 30 partículas simultáneos [C]
 
 ## R. Documentación y cierre (8)
 

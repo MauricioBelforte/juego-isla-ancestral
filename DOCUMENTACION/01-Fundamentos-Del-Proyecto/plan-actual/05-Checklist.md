@@ -23,175 +23,184 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 ### FASE 1 — FUNDAMENTOS
 
-- [ ] **M01** Visión y Concepto [M] 🔴 — definir nombre definitivo, pilares, pitch, alcance v1.0
-- [ ] **M02** Documentación del Proyecto [M] 🔴 — GDD, narrativa, sistemas, convenciones, backlog inicial
+- [x] **M01** Visión y Concepto [M] 🔴 — definir nombre definitivo, pilares, pitch, alcance v1.0
+- [x] **M02** Documentación del Proyecto [M] 🔴 — GDD, narrativa, sistemas, convenciones, backlog inicial
 - [ ] **M03** Game Engine [C] 🔴 — elegir Unity o Godot, fijar versión, configurar render pipeline e input
 - [ ] **M04** Lenguaje y Programación [M] 🔴 — C#/GDScript, convenciones, namespaces, arquitectura de software
-- [x] **M05** Control de Versiones [S] 🟡 — Git, .gitignore, ramas, mensajes de commit, Git LFS — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
+- [x] **M05** Control de Versiones [S] 🟡 — Git, .gitignore, ramas, mensajes de commit, Git LFS
+ — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 - [x] **M06** Arquitectura General [C] 🔴 — managers, eventos globales, modularidad, evitar GameManager monolítico
 
 ### FASE 2 — MUNDO Y TECNOLOGÍA CENTRAL
 
 - [x] **M07** Mundo Voxel [C] 🔴 — chunking, face/greedy meshing, threading, LOD, colisiones por grilla
-- [ ] **M08** Terreno y Geografía [C] 🔴 — montañas, valles, ríos, playas, biomas de Aurora
-- [ ] **M09** Generación del Mundo [C] 🔴 — seed, generador de terreno/biomas/vegetación/minerales/cuevas
+- [x] **M08** Terreno y Geografía [C] 🔴 — montañas, valles, ríos, playas, biomas de Aurora
+- [x] **M09** Generación del Mundo [C] 🔴 — seed, generador de terreno/biomas/vegetación/minerales/cuevas
 - [ ] **M10** Personaje del Jugador [M] 🔴 — modelo 3D, animaciones, controlador, colisiones, interacción
-- [ ] **M11** Cámara [M] 🔴 — tercera persona cenital inclinada, zoom, clipping, sensibilidad configurable
-- [ ] **M12** Herramientas [C] 🔴 — pala, pico, hacha, gancho mecánico, lanza-semillas, vara de flujo (sin daño)
-- [ ] **M13** Inventario [M] 🔴 — slots, stacks, hotbar, cofres, transferencia rápida, peso
-- [ ] **M14** Recursos [M] 🔴 — madera, piedra, arena, minerales, frutas, peces, rareza, respawn
-- [ ] **M15** Crafting [M] 🔴 — banco de trabajo, recetas, desbloqueos, preview, feedback
-- [ ] **M16** Construcción [C] 🔴 — modo construcción/decoración, grid, snapping, rotación, demolición
-- [ ] **M17** Casas [M] 🟡 — parcelas, ampliaciones, habitaciones, muebles interactivos, almacenamiento
+- [x] **M11** Cámara [M] 🔴 — tercera persona cenital inclinada, zoom, clipping, sensibilidad configurable
+- [x] **M12** Herramientas [C] 🔴 — pala, pico, hacha, gancho mecánico, lanza-semillas, vara de flujo (sin daño)
+- [x] **M13** Inventario [M] 🔴 — slots, stacks, hotbar, cofres, transferencia rápida, peso
+- [x] **M14** Recursos [M] 🔴 — madera, piedra, arena, minerales, frutas, peces, rareza, respawn
+- [x] **M15** Crafting [M] 🔴 — banco de trabajo, recetas, desbloqueos, preview, feedback
+- [x] **M16** Construcción [C] 🔴 — modo construcción/decoración, grid, snapping, rotación, demolición
+- [x] **M17** Casas [M] 🟡 — parcelas, ampliaciones, habitaciones, muebles interactivos, almacenamiento
 
 ### FASE 3 — VIDA COMUNITARIA Y NARRATIVA
 
-- [x] **M18** NPC y Vecinos [C] 🔴 — especies, personalidades, rutinas, horarios, hogares, relaciones — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
-- [ ] **M19** Sistema de Amistad [M] 🟡 — puntos de amistad, niveles, regalos, desbloqueos, eventos únicos
-- [ ] **M20** Diálogos [C] 🔴 — motor por nodos, flags narrativos, opciones, localización
-- [x] **M21** Historia Principal [C] 🔴 — prólogo, capítulos, Sellos, templos, finales y ritmo — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
+- [x] **M18** NPC y Vecinos [C] 🔴 — especies, personalidades, rutinas, horarios, hogares, relaciones
+ — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
+- [x] **M19** Sistema de Amistad [M] 🟡 — puntos de amistad, niveles, regalos, desbloqueos, eventos únicos
+- [x] **M20** Diálogos [C] 🔴 — motor por nodos, flags narrativos, opciones, localización
+- [x] **M21** Historia Principal [C] 🔴 — prólogo, capítulos, Sellos, templos, finales y ritmo
+ — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 - [ ] **M22** Historias Secundarias [M] 🟡 — arcos de vecinos, lugares, ruinas, objetos, postgame
-- [ ] **M23** Templos y Puzzles [C] 🔴 — framework emisor→receptor, dificultad, pistas, checkpoints
+- [x] **M23** Templos y Puzzles [C] 🔴 — framework emisor→receptor, dificultad, pistas, checkpoints
 - [ ] **M24** Ruinas [M] 🟡 — variantes pequeñas/medianas/grandes, inscripciones, pasajes ocultos
-- [ ] **M25** Templo Subterráneo [C] 🔴 — Templo de la Brisa: entrada, tutorial, salas, cámara del Sello
+- [x] **M25** Templo Subterráneo [C] 🔴 — Templo de la Brisa: entrada, tutorial, salas, cámara del Sello
 
 ### FASE 4 — MUNDO EXPANDIDO
 
-- [ ] **M26** Islas del Mundo [C] 🟡 — Isla de Coral, Verde, Cenizas, Cielo (diseño completo por isla)
+- [x] **M26** Islas del Mundo [C] 🟡 — Isla de Coral, Verde, Cenizas, Cielo (diseño completo por isla)
 - [ ] **M27** Viajes [M] 🟡 — Gran Vapor, boletos, requisitos, pantalla de viaje diegética
 - [ ] **M28** Tiempo y Calendario [M] 🔴 — día/noche, estaciones, festivales, cumpleaños, eventos
 - [ ] **M29** Reloj en Tiempo Real [M] 🟡 — Gran Vapor mensual, zona horaria, offline, anti-exploits
 - [ ] **M30** Ciclo Día/Noche [M] 🟡 — iluminación, cielo, estrellas, comportamiento de NPC y fauna
-- [ ] **M31** Clima [M] 🟡 — sol, lluvia, tormenta, niebla, nieve, transiciones, accesibilidad — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
+- [x] **M31** Clima [M] 🟡 — sol, lluvia, tormenta, niebla, nieve, transiciones, accesibilidad
+ — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
 
 ### FASE 5 — ACTIVIDADES Y CONTENIDO
 
-- [ ] **M32** Agricultura [M] 🟡 — parcelas, semillas, riego, fertilizante, estaciones, plantas ancestrales
-- [ ] **M33** Pesca [M] 🟡 — especies, minijuego no frustrante, coleccionario, peces legendarios
-- [ ] **M34** Minería [M] 🟡 — vetas, profundidad, minerales ancestrales, derrumbes controlados
-- [ ] **M35** Fauna [M] 🟡 — especies no hostiles, hábitat, migraciones, observación, ecosistemas
-- [ ] **M36** Museos y Colecciones [M] 🟢 — salas, vitrinas, fósiles, porcentaje completado
+- [x] **M32** Agricultura [M] 🟡 — parcelas, semillas, riego, fertilizante, estaciones, plantas ancestrales
+- [x] **M33** Pesca [M] 🟡 — especies, minijuego no frustrante, coleccionario, peces legendarios
+- [x] **M34** Minería [M] 🟡 — vetas, profundidad, minerales ancestrales, derrumbes controlados
+- [x] **M35** Fauna [M] 🟡 — especies no hostiles, hábitat, migraciones, observación, ecosistemas
+- [x] **M36** Museos y Colecciones [M] 🟢 — salas, vitrinas, fósiles, porcentaje completado
 - [x] **M37** Economía [C] 🔴 — Gemas de Ámbar, Pases de Mérito, precios, sumideros, anti-exploits
 - [x] **M38** Tiendas [M] 🟡 — tienda general, muebles, ropa, vivero, rotación de stock
-- [ ] **M39** Infraestructura [M] 🟡 — puentes, rampas, faro, puerto, plaza, proyectos de Finneas
+- [x] **M39** Infraestructura [M] 🟡 — puentes, rampas, faro, puerto, plaza, proyectos de Finneas
 
 ### FASE 6 — ARTE, AUDIO Y PRESENTACIÓN
 
-- [ ] **M40** Música [C] 🟡 — acústica/lo-fi por bioma, leitmotifs, música adaptativa, loops
+- [x] **M40** Música [C] 🟡 — acústica/lo-fi por bioma, leitmotifs, música adaptativa, loops
 - [ ] **M41** Sonido Ambiental [M] 🟡 — viento, agua, océano, cuevas, ruinas, mecanismos
 - [x] **M42** Efectos de Sonido [M] 🟡 — pasos, herramientas, bloques, diálogo, menús, logros (checklist 43-Efectos-De-Sonido 97/97 (0 [ ] / 0 [?]))
 - [ ] **M43** ASMR y Feedback [M] 🟡 — sensaciones táctiles de picar/cosechar/construir, capas sonoras
-- [ ] **M44** Arte 3D [C] 🔴 — estilo cozy voxel redondeado, presupuesto de polígonos, LOD
+- [x] **M44** Arte 3D [C] 🔴 — estilo cozy voxel redondeado, presupuesto de polígonos, LOD
 - [ ] **M45** Arte 2D [M] 🟡 — logo, iconos, UI, mapas, símbolos ancestrales, guías de estilo
 - [ ] **M46** Texturas y Materiales [M] 🟡 — tierra, césped, piedra, agua, variantes por bioma
 - [ ] **M47** Animación [C] 🟡 — jugador, NPC, fauna, vegetación, mecanismos, UI
-- [ ] **M48** Iluminación [M] 🟡 — URP/Forward+, GI suave, horaria, faroles, cuevas, optimización
-- [ ] **M49** Vegetación [M] 🟡 — hierba, árboles ancestrales, plantas luminosas, viento, instancing
-- [ ] **M50** Agua [C] 🟡 — océano, ríos, cascadas, congelamiento, evaporación, puzzles hidráulicos
-- [ ] **M51** Partículas y VFX [M] 🟡 — polvo, hojas, Resonancia, activación de runas, obtención de Sello
+- [x] **M48** Iluminación [M] 🟡 — URP/Forward+, GI suave, horaria, faroles, cuevas, optimización
+- [x] **M49** Vegetación [M] 🟡 — hierba, árboles ancestrales, plantas luminosas, viento, instancing
+- [x] **M50** Agua [C] 🟡 — océano, ríos, cascadas, congelamiento, evaporación, puzzles hidráulicos
+- [x] **M51** Partículas y VFX [M] 🟡 — polvo, hojas, Resonancia, activación de runas, obtención de Sello
 
 ### FASE 7 — INTERFAZ Y EXPERIENCIA
 
 - [ ] **M52** UI/UX [C] 🔴 — HUD, menús, inventario, mapa, diario, calendario, tooltips
-- [ ] **M53** Mapa [M] 🟡 — mapa global, descubrimiento progresivo, marcadores, leyenda
+- [x] **M53** Mapa [M] 🟡 — mapa global, descubrimiento progresivo, marcadores, leyenda
 - [ ] **M54** Diario del Jugador [M] 🟢 — registro de personajes, pistas, Sellos, ruinas, fotografías
-- [ ] **M55** Fotografía [M] 🟢 — modo fotografía, filtros, álbum, galería
-- [ ] **M56** Interfaz de Control [M] 🔴 — teclado, ratón, gamepad, remapeo, Steam Deck
-- [ ] **M57** Accesibilidad [M] 🔴 — daltonismo, subtítulos, texto ajustable, reducción de movimiento
+- [x] **M55** Fotografía [M] 🟢 — modo fotografía, filtros, álbum, galería
+- [x] **M56** Interfaz de Control [M] 🔴 — teclado, ratón, gamepad, remapeo, Steam Deck
+- [x] **M57** Accesibilidad [M] 🔴 — daltonismo, subtítulos, texto ajustable, reducción de movimiento
 
 ### FASE 8 — PERSISTENCIA Y CALIDAD
 
-- [ ] **M58** Guardado [C] 🔴 — autosave, slots, GameState versionado, backups, recuperación
-- [ ] **M59** Datos y Serialización [M] 🔴 — formato, IDs persistentes, versionado de schema, migraciones
-- [ ] **M60** Rendimiento [C] 🔴 — 60 FPS, presupuestos, profiling, culling, batching, instancing
+- [x] **M58** Guardado [C] 🔴 — autosave, slots, GameState versionado, backups, recuperación
+- [x] **M59** Datos y Serialización [M] 🔴 — formato, IDs persistentes, versionado de schema, migraciones
+- [x] **M60** Rendimiento [C] 🔴 — 60 FPS, presupuestos, profiling, culling, batching, instancing
 - [ ] **M61** Memoria [M] 🔴 — texturas, meshes, audio, streaming, memory leaks, sesiones largas
-- [ ] **M62** Cargas y Streaming [M] 🔴 — carga asíncrona, chunks cercanos, progreso real
+- [x] **M62** Cargas y Streaming [M] 🔴 — carga asíncrona, chunks cercanos, progreso real
 - [ ] **M63** IA de NPC [C] 🔴 — máquina de estados, rutinas, pathfinding sobre terreno modificable
-- [ ] **M64** Animales IA [M] 🟡 — comportamiento no hostil, migraciones, spawn/despawn
-- [ ] **M65** Anti-Softlock [M] 🔴 — recuperación de objetos clave, reinicio de puzzles, fallbacks
-- [ ] **M66** Vehículos [M] 🟢 — barco (y post-v1.0 submarino), física, cámara, docking
-- [ ] **M67** Transporte y Navegación [M] 🟢 — puerto, rutas, señalización, fast travel narrativo
+- [x] **M64** Animales IA [M] 🟡 — comportamiento no hostil, migraciones, spawn/despawn
+- [x] **M65** Anti-Softlock [M] 🔴 — recuperación de objetos clave, reinicio de puzzles, fallbacks
+- [x] **M66** Vehículos [M] 🟢 — barco (y post-v1.0 submarino), física, cámara, docking
+- [x] **M67** Transporte y Navegación [M] 🟢 — puerto, rutas, señalización, fast travel narrativo
 - [ ] **M68** Fast Travel [S] 🟢 — puntos de viaje, requisitos, anti-bypass de eventos
 
 ### FASE 9 — PROGRESIÓN Y CONTENIDO
 
 - [x] **M69** Interacciones [M] 🔴 — distancia, indicador, prioridad, contextuales, cancelación — FLIP iter.9 (checklist propia cerrada + fila ✅; auditor_indice_m01 --pendientes, DeepSeek 378; M117: CI rojo = deuda de pipeline aparte, no invalida el contenido)
-- [ ] **M70** Progresión [M] 🔴 — narrativa, herramientas, construcción, social, islas, desbloqueos
-- [ ] **M71** Sistema de Logros [M] 🟡 — básicos, exploración, social, colección, secretos
+- [x] **M70** Progresión [M] 🔴 — narrativa, herramientas, construcción, social, islas, desbloqueos
+- [x] **M71** Sistema de Logros [M] 🟡 — básicos, exploración, social, colección, secretos
 - [ ] **M72** Coleccionables [M] 🟡 — reliquias, fragmentos, conchas, fósiles, documentos
-- [ ] **M73** Eventos [M] 🟡 — festivales estacionales, llegada del vapor, eventos raros
-- [ ] **M74** Postgame [M] 🟢 — Era del Alba, nuevas islas, objetivos 100%, contenido libre
+- [x] **M73** Eventos [M] 🟡 — festivales estacionales, llegada del vapor, eventos raros
+- [x] **M74** Postgame [M] 🟢 — Era del Alba, nuevas islas, objetivos 100%, contenido libre
 
 ### FASE 10 — MULTIJUGADOR (decisión)
 
-- [ ] **M75** Multijugador [C] 🟢 — decidir local/online, cantidad, voz de diseño (post-v1.0)
-- [ ] **M76** Online y Red [C] 🟢 — cliente-servidor, sincronización, latencia, seguridad (post-v1.0)
+- [x] **M75** Multijugador [C] 🟢 — decidir local/online, cantidad, voz de diseño (post-v1.0)
+- [x] **M76** Online y Red [C] 🟢 — cliente-servidor, sincronización, latencia, seguridad (post-v1.0)
 
 ### FASE 11 — LEGAL Y ADMINISTRACIÓN
 
-- [ ] **M77** Legal — Propiedad Intelectual [M] 🔴 — marcas, autoría, licencias, terceros — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
+- [x] **M77** Legal — Propiedad Intelectual [M] 🔴 — marcas, autoría, licencias, terceros
+ — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
 - [x] **M78** Legal — Contratos [M] 🟡 — freelancers, cesión de derechos, work-for-hire
-- [ ] **M79** Legal — Privacidad [M] 🔴 — GDPR/COPPA, política de privacidad, consentimientos
-- [ ] **M80** Legal — Menores [M] 🟡 — clasificación, controles parentales, contenido
-- [ ] **M81** Clasificación por Edades [S] 🟡 — IARC/ESRB/PEGI (cero violencia → permisiva)
-- [ ] **M82** Licencias de Software [M] 🟡 — engine, plugins, fuentes, librerías
+- [x] **M79** Legal — Privacidad [M] 🔴 — GDPR/COPPA, política de privacidad, consentimientos
+- [x] **M80** Legal — Menores [M] 🟡 — clasificación, controles parentales, contenido
+- [x] **M81** Clasificación por Edades [S] 🟡 — IARC/ESRB/PEGI (cero violencia → permisiva)
+- [x] **M82** Licencias de Software [M] 🟡 — engine, plugins, fuentes, librerías
 - [x] **M83** Música y Audio — Legal [M] 🟡 — derechos de reproducción, sincronización, ámbitos territoriales
-- [ ] **M84** Modelos 3D — Legal [M] 🟡 — licencias de cada modelo, atribución, registro
+- [x] **M84** Modelos 3D — Legal [M] 🟡 — licencias de cada modelo, atribución, registro
 - [x] **M85** IA Generativa [M] 🔴 — política de IA, declaración Steam, qué delegar y qué no
 
 ### FASE 12 — PLATAFORMA Y MARKETING
 
-- [ ] **M86** Localización [M] 🟡 — idioma base, claves, tablas, QA lingüístico
-- [ ] **M87** Fuentes Tipográficas [S] 🟢 — fuente principal/secundaria, licencia, tildes y ñ
-- [ ] **M88** Diseño de Menús [M] 🟡 — principal, pausa, inventario, ajustes, créditos
-- [x] **M89** Configuración Gráfica [S] 🟡 — resolución, calidad, VSync, FPS, presets — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
-- [ ] **M90** Configuración de Audio [S] 🟡 — volúmenes independientes, rango dinámico
-- [ ] **M91** Tutorial [M] 🔴 — movimiento, cámara, recolección, construcción, progresivo
-- [ ] **M92** Balance [C] 🔴 — precios, recompensas, crafting, amistad, simulación económica
-- [ ] **M93** Retención sin FOMO [M] 🟡 — objetivos diarios/semanales, sin castigos por ausencia
-- [ ] **M94** Monetización [M] 🟡 — premium, DLC de islas vs contenido gratis, precio
-- [ ] **M95** Plataformas [M] 🟡 — PC/Steam prioritario, Steam Deck, EGS/GOG a evaluar
+- [x] **M86** Localización [M] 🟡 — idioma base, claves, tablas, QA lingüístico
+- [x] **M87** Fuentes Tipográficas [S] 🟢 — fuente principal/secundaria, licencia, tildes y ñ
+- [x] **M88** Diseño de Menús [M] 🟡 — principal, pausa, inventario, ajustes, créditos
+- [x] **M89** Configuración Gráfica [S] 🟡 — resolución, calidad, VSync, FPS, presets
+ — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
+- [x] **M90** Configuración de Audio [S] 🟡 — volúmenes independientes, rango dinámico
+- [x] **M91** Tutorial [M] 🔴 — movimiento, cámara, recolección, construcción, progresivo
+- [x] **M92** Balance [C] 🔴 — precios, recompensas, crafting, amistad, simulación económica
+- [x] **M93** Retención sin FOMO [M] 🟡 — objetivos diarios/semanales, sin castigos por ausencia
+- [x] **M94** Monetización [M] 🟡 — premium, DLC de islas vs contenido gratis, precio
+- [x] **M95** Plataformas [M] 🟡 — PC/Steam prioritario, Steam Deck, EGS/GOG a evaluar
 - [x] **M96** Steam / Store Page [M] 🔴 — página, capsule art, capturas, trailer, wishlists
 - [x] **M97** Trailer [M] 🟡 — teaser, gameplay, lanzamiento
 - [x] **M98** Marketing [M] 🟡 — identidad, redes, devlogs, press kit, Next Fest — FLIP iter.9 (checklist propia cerrada + fila ✅; auditor_indice_m01 --pendientes, DeepSeek 378; M117: CI rojo = deuda de pipeline aparte, no invalida el contenido)
-- [x] **M99** Community Management [M] 🟢 — Discord, reglas, feedback, FAQ — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
+- [x] **M99** Community Management [M] 🟢 — Discord, reglas, feedback, FAQ
+ — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
 
 ### FASE 13 — QA Y DESARROLLO
 
 - [x] **M100** QA General [M] 🔴 — funcional, regresión, rendimiento, guardado, UI, audio
 - [x] **M101** Bug Tracking [S] 🟡 — herramienta, categorías, severidades, reproducción
-- [ ] **M102** Logging [M] 🟡 — niveles, rotación, crash reporting, exportación
-- [ ] **M103** Analytics [M] 🟢 — eventos, sesiones, anonimización, dashboard
-- [ ] **M104** Telemetría de Gameplay [M] 🟢 — tutorías, abandono de puzzles, zonas ignoradas
-- [ ] **M105** Seguridad [M] 🟢 — APIs, claves, validación, anti-manipulación (si online)
+- [x] **M102** Logging [M] 🟡 — niveles, rotación, crash reporting, exportación
+- [x] **M103** Analytics [M] 🟢 — eventos, sesiones, anonimización, dashboard
+- [x] **M104** Telemetría de Gameplay [M] 🟢 — tutorías, abandono de puzzles, zonas ignoradas
+- [x] **M105** Seguridad [M] 🟢 — APIs, claves, validación, anti-manipulación (si online)
 - [ ] **M106** Backups [S] 🔴 — repositorio, assets, documentación, builds, restauración
-- [ ] **M107** Pipeline de Assets [M] 🔴 — naming, carpetas, formatos, import settings, validadores
-- [ ] **M108** Herramientas Internas [M] 🟡 — editores de bloques/NPC/diálogos/recetas, teleport
+- [x] **M107** Pipeline de Assets [M] 🔴 — naming, carpetas, formatos, import settings, validadores
+- [x] **M108** Herramientas Internas [M] 🟡 — editores de bloques/NPC/diálogos/recetas, teleport
 - [ ] **M109** Debug Menu [S] 🟡 — teletransporte, tiempo/clima, objetos, regenerar chunks
 - [x] **M110** Código de Calidad [M] 🔴 — sin duplicados, tests, interfaces, deuda controlada
-- [ ] **M111** Testing Automático [M] 🔴 — unit, integración, save/load, economía, voxel, navegación
-- [ ] **M112** Pruebas de Stress [M] 🟡 — miles de bloques, muchos NPC, sesiones largas — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
-- [x] **M113** Playtest [M] 🔴 — interno, externo, primera experiencia, con gamepad, hardware bajo — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
-- [ ] **M114** Hardware [M] 🟡 — PC mínimo/recomendado, GPU integrada/dedicada, SSD/HDD
+- [x] **M111** Testing Automático [M] 🔴 — unit, integración, save/load, economía, voxel, navegación
+- [x] **M112** Pruebas de Stress [M] 🟡 — miles de bloques, muchos NPC, sesiones largas
+ — REVERT iter.8 (sello denegado/degradado posterior; DeepSeek 376)
+- [x] **M113** Playtest [M] 🔴 — interno, externo, primera experiencia, con gamepad, hardware bajo
+ — FLIP iter.8 (candidato verificado por auditor_indice_m01 + director; DeepSeek 376/Log 2160)
+- [x] **M114** Hardware [M] 🟡 — PC mínimo/recomendado, GPU integrada/dedicada, SSD/HDD
 
 ### FASE 14 — ENTREGA Y PUBLICACIÓN
 
 - [x] **M115** Instalador [S] 🟢 — build release, instalación limpia, actualización, desinstalación (checklist 116-Instalador 192/192)
 - [ ] **M116** Build System [M] 🟡 — builds automatizados dev/QA/staging/release, versión, firmado
 - [x] **M117** CI/CD [M] 🟢 — tests automáticos, builds, artifacts, branch protection — FLIP iter.9 (checklist propia cerrada + fila ✅; auditor_indice_m01 --pendientes, DeepSeek 378; M117: CI rojo = deuda de pipeline aparte, no invalida el contenido)
-- [ ] **M118** Actualizaciones [M] 🟡 — patches, versionado, compatibilidad de saves, migraciones
+- [x] **M118** Actualizaciones [M] 🟡 — patches, versionado, compatibilidad de saves, migraciones
 - [x] **M119** DLC y Expansiones [M] 🟢 — estrategia post-lanzamiento, nuevas islas (checklist 120-DLC-Y-Expansiones 222/222)
 - [x] **M120** Soporte Post-Lanzamiento [M] 🟢 — canal de soporte, tickets, hotfixes, roadmap (checklist 121-Soporte-Post-Lanzamiento 211/211)
-- [ ] **M121** Crash Reporting [S] 🟢 — captura de stack, versión, agrupación, priorización
-- [ ] **M122** Modding [C] 🟢 — decidir si habrá, API, seguridad (opcional muy a futuro)
-- [ ] **M123** Contenido Generado por Usuarios [M] 🟢 — moderación, privacidad, términos
+- [x] **M121** Crash Reporting [S] 🟢 — captura de stack, versión, agrupación, priorización
+- [x] **M122** Modding [C] 🟢 — decidir si habrá, API, seguridad (opcional muy a futuro)
+- [x] **M123** Contenido Generado por Usuarios [M] 🟢 — moderación, privacidad, términos
 - [x] **M124** Términos de Servicio [S] 🟢 — EULA, licencia de uso, reembolsos
-- [ ] **M125** Marketing Legal [S] 🟢 — screenshots, música, influencers, claims
-- [ ] **M126** Copyright del Juego [S] 🟢 — registro, evidencias de autoría, titulares
-- [ ] **M127** Identidad de Marca [M] 🟡 — nombre (verificar colisión), logo, paleta, símbolo de Aurora
-- [ ] **M128** Merchandising [S] 🟢 — soundtrack, poster, artbook (post-lanzamiento)
+- [x] **M125** Marketing Legal [S] 🟢 — screenshots, música, influencers, claims
+- [x] **M126** Copyright del Juego [S] 🟢 — registro, evidencias de autoría, titulares
+- [x] **M127** Identidad de Marca [M] 🟡 — nombre (verificar colisión), logo, paleta, símbolo de Aurora
+- [x] **M128** Merchandising [S] 🟢 — soundtrack, poster, artbook (post-lanzamiento)
 - [x] **M129** Artbook [M] 🟢 — arte conceptual, evolución del mundo (post-lanzamiento) (checklist 130-Artbook 134/134)
-- [ ] **M130** Créditos [S] 🟡 — todos los roles, licencias, herramientas, agradecimientos
+- [x] **M130** Créditos [S] 🟡 — todos los roles, licencias, herramientas, agradecimientos
 
 ### FASE 15 — PRODUCCIÓN Y GESTIÓN
 
@@ -203,26 +212,26 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 
 ### FASE 16 — HITOS DE DESARROLLO
 
-- [ ] **M136** Prototipo [C] 🔴 — movimiento, cámara, voxel básico, extracción/colocación, mini puzzle, save
+- [x] **M136** Prototipo [C] 🔴 — movimiento, cámara, voxel básico, extracción/colocación, mini puzzle, save
 - [ ] **M137** Vertical Slice [C] 🔴 — Aurora + templo completo + NPC con arco, arte final, medición de rendimiento
 - [ ] **M138** Pre-Alpha [C] 🔴 — núcleo jugable, arquitectura estable, primer bioma, primeros sistemas
-- [ ] **M139** Alpha [C] 🔴 — mecánicas completas, historia jugable, primer balance, QA intensivo
-- [ ] **M140** Beta [C] 🔴 — contenido completo, rendimiento objetivo, cero bugs críticos, localización
+- [x] **M139** Alpha [C] 🔴 — mecánicas completas, historia jugable, primer balance, QA intensivo
+- [x] **M140** Beta [C] 🔴 — contenido completo, rendimiento objetivo, cero bugs críticos, localización
 - [ ] **M141** Release Candidate [C] 🔴 — freeze, builds limpias, saves compatibles, certificación
-- [ ] **M142** Lanzamiento [C] 🔴 — publicación en Steam, monitoreo, hotfix de emergencia
-- [ ] **M143** Después del Lanzamiento [M] 🟡 — reviews, bugs, rendimiento, retención, parches
+- [x] **M142** Lanzamiento [C] 🔴 — publicación en Steam, monitoreo, hotfix de emergencia
+- [x] **M143** Después del Lanzamiento [M] 🟡 — reviews, bugs, rendimiento, retención, parches
 
 ### FASE 17 — EXPERIENCIA Y FILOSOFÍA
 
-- [ ] **M144** Diseño de Experiencia [M] 🟡 — sensación de llegada, descubrimiento, hogar, comunidad, misterio
-- [ ] **M145** Diseño Emocional [M] 🟡 — calma, sorpresa, nostalgia, pertenencia, legado
+- [x] **M144** Diseño de Experiencia [M] 🟡 — sensación de llegada, descubrimiento, hogar, comunidad, misterio
+- [x] **M145** Diseño Emocional [M] 🟡 — calma, sorpresa, nostalgia, pertenencia, legado
 - [ ] **M146** World Building [C] 🔴 — historia de Aurora, Arquitectos, Resonancia, Primeros Jardineros, Elysia
 - [ ] **M147** Lore Ambiental [M] 🟡 — ruinas/objetos/vegetación que cuentan historias, pistas
-- [ ] **M148** Nombres y Nomenclatura [M] 🟡 — islas, personajes, Sellos, consistencia, marcas
+- [x] **M148** Nombres y Nomenclatura [M] 🟡 — islas, personajes, Sellos, consistencia, marcas
 - [ ] **M149** Diseño Sonoro Narrativo [M] 🟢 — sonido de Resonancia, de cada Sello, silencios narrativos
-- [ ] **M150** Control Final [M] 🔴 — verificación integral: diversión, economía, mundo vivo, rendimiento
+- [x] **M150** Control Final [M] 🔴 — verificación integral: diversión, economía, mundo vivo, rendimiento
 - [x] **M151** Principios que no deberían perderse [S] 🔴 — cero combate, cero FOMO, sin grind, sin espagueti
-- [ ] **M152** Objetivo Final del Proyecto [M] 🔴 — Aurora como hogar, curiosidad por explorar, mundo vivo post-créditos
+- [x] **M152** Objetivo Final del Proyecto [M] 🔴 — Aurora como hogar, curiosidad por explorar, mundo vivo post-créditos
 
 ---
 

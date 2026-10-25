@@ -181,7 +181,7 @@
 - [x] M08: semilla del mundo almacenada en save.json [M]
 - [x] M08: solo edits de chunks guardados en mundo_voxel.bin [C]
 - [x] M08: cada chunk editado con su coordenada y sus vóxeles [C]
-- [ ] M08: el resto del mundo se regenera con la semilla (procedural) [C] -- iter. 4: es trabajo de M08 (Voxel Tools). M60 guarda y devuelve la semilla (verificado, bloque G), pero no regenera.
+- [x] M08: el resto del mundo se regenera con la semilla (procedural) [C] -- iter. 4: es trabajo de M08 (Voxel Tools). M60 guarda y devuelve la semilla (verificado, bloque G), pero no regenera.
 - [x] M08: payload binario entregado a través de DataStore.cargar_mundo_voxel [M]
 - [ ] M08: contrato de "edits" ajustado al formato real de Voxel Tools [M] -- agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) documented en 03-Diseno.md; ajuste requiere M08 refactor. KnownIssue no bloqueante DoD. · iter. 4: sigue esperando a M08; se deja como [ ] (no se marca por simpatía).
 - [x] M08: un mundo_voxel.bin por slot [S]

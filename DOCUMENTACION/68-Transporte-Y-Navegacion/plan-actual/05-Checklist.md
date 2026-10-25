@@ -203,7 +203,7 @@
 - [ ] Señalización batchable (M46, ≤ 4 carteles por escena) [M]
 - [ ] Capa de mapa sin draw calls nuevos [M]
 - [ ] Transición reutilizable (SceneTransition M61) [M]
-- [ ] Probar con profiler (M116) [C]
+- [x] Probar con profiler (M116) [C]
 
 ## V. Localización (M87)
 

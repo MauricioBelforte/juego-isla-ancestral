@@ -1199,6 +1199,276 @@
 			"consecuencia": { "kiosko_abierto": true },
 			"oculta": false,
 			"postgame": false
+		},
+		{
+			"id": "cadena-agricultura-cruces",
+			"titulo": "Cruces de Semillas",
+			"contexto": "Vera guarda las semillas mas antiguas de la isla y quiere cruzarlas para recuperar variedades perdidas",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "vera_ardilla" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "jardin" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-EXT-011" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "cruz-de-semillas" }
+			],
+			"recompensa": { "diario": "capitulo-agricultura-cruces", "cosmetico": "semilla gemela" },
+			"consecuencia": { "cruces_de_semillas": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-agricultura-cultivos",
+			"titulo": "Los Cultivos del Invernadero",
+			"contexto": "Mateo quiere poner a cultivar el invernadero recuperado con las primeras semillas de la estacion",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "mateo_mapache" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "invernadero" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-HER-012" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "siembra-del-invernadero" }
+			],
+			"recompensa": { "diario": "capitulo-agricultura-cultivos", "cosmetico": "brote de recuerdo" },
+			"consecuencia": { "cultivos_del_invernadero": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-agricultura-cosecha",
+			"titulo": "La Primera Cosecha",
+			"contexto": "Mateo necesita manos extras para la primera cosecha de la huerta de verduras del pueblo",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "mateo_mapache" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "jardines" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-EXT-013" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "riego-de-la-cosecha" }
+			],
+			"recompensa": { "diario": "capitulo-agricultura-cosecha", "cosmetico": "canasto de fiesta" },
+			"consecuencia": { "primera_cosecha": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-agricultura-riego",
+			"titulo": "El Riego del Manantial",
+			"contexto": "Teo quiere llevar agua del manantial hasta la huerta antes de que llegue la sequia",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "teo_conejo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "manantial" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-HER-013" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "canal-del-manantial" }
+			],
+			"recompensa": { "diario": "capitulo-agricultura-riego", "cosmetico": "gotas de rocio" },
+			"consecuencia": { "riego_del_huerto": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-agricultura-macetas",
+			"titulo": "Las Macetas de la Plaza",
+			"contexto": "Luna quiere llenar la plaza de macetas con flores para la fiesta de fin de estacion",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "luna_zorra" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-PLA-001" },
+				{ "id": "p4", "tipo": "puzzle", "ref": "arreglo-floral-de-la-plaza" }
+			],
+			"recompensa": { "diario": "capitulo-agricultura-macetas", "cosmetico": "flor de plaza" },
+			"consecuencia": { "plaza_florida": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-pesca-trofeos",
+			"titulo": "El Trofeo de la Marea",
+			"contexto": "Finneas sueno con una dorada que esquiva todas las redes; dice que el museo guarda sitio para el primer ejemplar",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "finneas_zorro" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle_viejo" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "trofeo-de-la-marea" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-HER-011" }
+			],
+			"recompensa": { "diario": "capitulo-pesca-trofeos", "cosmetico": "caña de atardecer" },
+			"consecuencia": { "trofeo_de_la_marea_exhibido": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-pesca-documentacion",
+			"titulo": "El Bestiario de la Costa",
+			"contexto": "Sofia encontro descripciones de peces sin dibujo y quiere completar el bestiario antes de que el mar borre los nombres",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "sofia_buho" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "biblioteca" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "tinta-de-escamas" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-ART-002" }
+			],
+			"recompensa": { "diario": "capitulo-pesca-documentacion", "cosmetico": "pergamino enmarcado" },
+			"consecuencia": { "catalogo_de_peces_escrito": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-pesca-suelta",
+			"titulo": "Devolver al Agua",
+			"contexto": "Teo noto que cada vez hay menos peces pequenos en la playa; propone soltar lo que aun no crecio",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "teo_conejo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "playa_sur" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "escamas-al-agua" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-HER-010" }
+			],
+			"recompensa": { "diario": "capitulo-pesca-suelta", "cosmetico": "botella con mensaje" },
+			"consecuencia": { "peces_devueltos_al_agua": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-pesca-nocturna",
+			"titulo": "La Pesca de la Linterna",
+			"contexto": "Finneas habla de un cardumen que solo sube cuando el muelle queda a oscuras; la linterna del armario servira",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "finneas_zorro" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "luz-en-el-agua" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-LUZ-012" }
+			],
+			"recompensa": { "diario": "capitulo-pesca-nocturna", "cosmetico": "linterna de pescador" },
+			"consecuencia": { "pesca_nocturna_abierta": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-coleccion-murales",
+			"titulo": "El Mural del Puerto",
+			"contexto": "Luna encontro pinturas de barcos que nadie recuerda haber colgado; quiere devolverles el color",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "luna_zorra" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "pintura-de-la-marea" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-CUA-010" }
+			],
+			"recompensa": { "diario": "capitulo-coleccion-murales", "cosmetico": "pincel decorativo" },
+			"consecuencia": { "mural_del_puerto_restaurado": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-coleccion-glifos",
+			"titulo": "Los Glifos del Acantilado",
+			"contexto": "Sofia fotografia marcas antiguas del acantilado; la estatuilla del armario encaja con una de ellas",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "sofia_buho" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "acantilado" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "glifos-del-acantilado" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-ART-001" }
+			],
+			"recompensa": { "diario": "capitulo-coleccion-glifos", "cosmetico": "rubbing enmarcado" },
+			"consecuencia": { "glifos_del_acantilado_descifrados": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-coleccion-sellos",
+			"titulo": "Los Sellos de los Oficios",
+			"contexto": "Olivia guarda sellos decorativos de docenas de oficios; el sello del panadero es el unico que le falta para completar la coleccion",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "olivia_nutria" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "cofradia" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "sello-del-panadero" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-ART-005" }
+			],
+			"recompensa": { "diario": "capitulo-coleccion-sellos", "cosmetico": "sello de cera" },
+			"consecuencia": { "sellos_decorativos_reunidos": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-coleccion-minerales",
+			"titulo": "La Veta del Bosque",
+			"contexto": "Ramon busca una veta de cobre viejo para exponer en el museo; los arboles la esconden desde la tormenta",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "ramon_tejon" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "bosque" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "veta-escondida" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "mineral_cobre" }
+			],
+			"recompensa": { "diario": "capitulo-coleccion-minerales", "cosmetico": "geoda de repisa" },
+			"consecuencia": { "minerales_donados_al_museo": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-coleccion-peces",
+			"titulo": "Los Peces del Museo",
+			"contexto": "El museo abre la sala del mar y pide un pescado de cada familia; Finneas conoce todos los nombres",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "finneas_zorro" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "muelle_viejo" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "peces-uno-a-uno" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-ITE-023" }
+			],
+			"recompensa": { "diario": "capitulo-coleccion-peces", "cosmetico": "maqueta de pez" },
+			"consecuencia": { "peces_catalogados": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-coleccion-plantas",
+			"titulo": "Las Plantas Raras",
+			"contexto": "Teo encontro una orquidea que no figura en su herbario y quiere saber de que biome vino antes de clasificarla",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "teo_conejo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "jardines" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "orquidea-escondida" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-PLA-004" }
+			],
+			"recompensa": { "diario": "capitulo-coleccion-plantas", "cosmetico": "planta de cristal" },
+			"consecuencia": { "plantas_raras_clasificadas": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-memorial-sello",
+			"titulo": "El Memorial del Sello",
+			"contexto": "Tras el final, Ramón quiere fundir una placa con los siete sellos para que el pueblo no olvide quién los reunió",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "ramon_tejon" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "piedra_caliza" },
+				{ "id": "p4", "tipo": "hablar", "npc": "aria_ciervo" }
+			],
+			"recompensa": { "diario": "capitulo-memorial-sello" },
+			"consecuencia": { "memorial_del_sello_erguido": true },
+			"oculta": false,
+			"postgame": true
+		},
+		{
+			"id": "cadena-epilogo-aldea",
+			"titulo": "El Epílogo de la Aldea",
+			"contexto": "La temporada se despide y Pablo propone una vasija conmemorativa; Catalina prepara la fiesta de cierre",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "pablo_pato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "senderos_del_pueblo" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "clay" },
+				{ "id": "p4", "tipo": "hablar", "npc": "catalina_oso" }
+			],
+			"recompensa": { "diario": "capitulo-epilogo-aldea" },
+			"consecuencia": { "epilogo_de_la_aldea_contado": true },
+			"oculta": false,
+			"postgame": true
+		},
+		{
+			"id": "cadena-epilogo-guardian",
+			"titulo": "El Epílogo del Guardián",
+			"contexto": "Nico encontró la última guarda del guardián en el acantilado y quiere devolverle el fragmento antes del amanecer",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "nico_gato" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "acantilado" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "guardian-ultima-guarda" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "fragmento_ancestral" }
+			],
+			"recompensa": { "diario": "capitulo-epilogo-guardian" },
+			"consecuencia": { "epilogo_del_guardian_cantado": true },
+			"oculta": true,
+			"postgame": true
 		}
 	]
 }

@@ -458,3 +458,29 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Coherente con M109 (shortcuts Ctrl+1..14 abre cada editor) y M116 (instalador).
 - Unidad: atajos/plataforma. Dependencia: M109 (framework de editor).
 
+
+
+Riel design-docs SIN DATOS (encargo agnes-3-flash msg 255, 2026-10-24 21:08; GO directora). Produce-first line-based, sin vision: cada numero medido en disco con cita archivo:linea (recorrido python -X utf8 + Grep/Read; sin ejecutar Godot). Las capas I/II (Beam 1.0, 2026-10-23) quedan intactas; aqui se groundean con mediciones reales y se documentan los drift hallados. **Modelo:** Ling-3.1-Flash / **Plataforma:** Kilo Code / **Fecha:** 2026-10-25
+
+## Presupuestos numericos III - mediciones en disco (Ling-3.1-Flash, 2026-10-25)
+
+### 31. Payload medido (exports de M117, Log 1888)
+- Windows: 125.98 MB total (exe 120.80 MB + DLL 5.18 MB); Linux/SteamOS: 96.58 MB c/u (bin 86.8 MB + SO 9.78 MB) — DOCUMENTACION/117-Build-System/plan-actual/05-Checklist.md L101/L233-236.
+- DRIFT MATERIAL: la capa I #1 presupone "base 5 GB comprimido" -> instalador 1.5 GB (ratio 3.3x). El export medido es 125.98 MB (~40x menor que la base). La auditoria S63 (05-Checklist L317) ya cuestiono el ratio 3.3x; hoy la base misma (5 GB) no cuadra con el export medido. RequiredSpace 5 GB sigue valido como headroom de disco libre (ver ###32).
+
+### 32. Espacio en disco requerido (medido en el instalador)
+- DISCO_MINIMO_MB = 5120 (5 GB) — installer/system_requirements.iss L7; validacion GetSpaceOnDisk64 (L29): Libre >= 5120 x 1024 x 1024 (L31); mensaje "se requieren al menos 5 GB libres" (L71).
+- setup_windows.ps1 L70: AvailableFreeSpace; IslaAncestral.iss L31 DefaultDirName={localappdata}\IslaAncestral, L41 PrivilegesRequired=lowest (user-space, RF7), L44 ArchitecturesInstallIn64BitMode=x64compatible, L71-72 registro HKCU.
+- 03-Diseno L203-208 (esqueleto Inno): RequiredSpace := 5 * 1024 * 1024 * 1024 — COHERENTE con el .iss medido.
+
+### 33. Saveset de fotos (medido en codigo)
+- Carpeta: user://fotos/ (scripts/foto/photo_service.gd L28; scripts/foto/photo_gallery.gd L13); indice user://fotos/index.json (photo_service.gd L49); migracion de clave "photos" a "fotos" (L105-108).
+- Presupuesto de memoria: MAX_MINIATURAS_CARGADAS = 24 (photo_gallery.gd L15, "presupuesto M61: no cargar todas en memoria"); miniatura 160x90 (L14).
+- Presupuesto de captura: < 50 ms (photo_service.gd L47 comentario item 133; validado en scripts/foto/validate_photo.gd L32: _check(ms < 50)).
+- saveset_max = 50 fotos x 1 MB = 50 MB = 1% de 5 GB (capa I #3; auditoria S63 PASS en 05-Checklist L318). NOTA honesta: 1 MB/foto es una estimacion de diseño — en disco no hay fotos (user:// es runtime); sin medicion real de peso de saveset.
+
+### 34. Shortcuts, tiempos y retencion (medido)
+- Instalador crea 2 shortcuts OS por instalacion: escritorio + menu inicio (installer/setup_windows.ps1 L210-211, L225; flag -NoShortcuts L22/L228).
+- Matriz de atajos de gameplay: 14 por plataforma (win Ctrl+1..14, lin Ctrl+1..14, mac Cmd+1..14) — capa II ###30 (Beam 320); depende M109 (framework de editor).
+- Tiempos de instalacion/desinstalacion: NO medidos en disco. Evidencia de humo: setup 9 acciones / uninstall 1 accion, RC=0 x3 corridas; ValidadorInstalador 61 checks 0 errores; test_instalador_m116 15 checks x3 corridas; test_build_m117 14 checks (07-Resultados-Testings.md L10-15). Propuesta: medir con Measure-Command en la proxima ronda de smoke.
+- Retencion de saves: el desinstalador conserva %APPDATA%\Godot\app_userdata\isla-ancestral (07-Resultados-Testings.md L62-66); installer/ contiene rollback.iss, repair.iss, update.iss.

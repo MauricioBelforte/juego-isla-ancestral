@@ -183,3 +183,34 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 ## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-7 (H24/H27)**: piso de checks "5, max 50" vs contados 57/42/29: el texto del piso/techo se actualiza para reflejar el conteo real medido (57/42/29). El piso minimo sigue siendo 5 checks/archivo, el maximo sigue siendo 50; los conteos reales (57 en el maximo) se documentan como "fuera de techo, flaggeado para revision" (no se cambia el umbral). Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 
+
+
+Riel design-docs SIN DATOS (encargo agnes-3-flash msg 255, 2026-10-24 21:08; GO directora). Produce-first line-based, sin vision: cada numero medido en disco con cita archivo:linea (recorrido python -X utf8 + Grep/Read; sin ejecutar Godot). Las capas I/II (Beam 1.0, 2026-10-23) quedan intactas; aqui se groundean con mediciones reales y se documentan los drift hallados. **Modelo:** Ling-3.1-Flash / **Plataforma:** Kilo Code / **Fecha:** 2026-10-25
+
+## Presupuestos numericos III - mediciones en disco (Ling-3.1-Flash, 2026-10-25)
+
+### 20. Recuento de tests en disco (2026-10-25)
+| Medida | Valor medido | Cita |
+|--------|--------------|------|
+| Archivos test_*.gd en game/isla-ancestral | 481 (scripts/ 429, tests/ 51, tools/ 1) | recorrido de disco python -X utf8, 2026-10-25 |
+| Archivos con >=1 funcion test (func test_ / func _test_) | 222 | idem |
+| Funciones test totales | 1240 | idem |
+| Llamadas _check() | 14037 en 434 archivos | idem |
+| Suites ejecutadas por run_tests.gd | 38 suites / 1728 tests / 0 fallos | 05-Checklist L315; Log 2078 |
+| Suites GdUnit4 nativas | 7 archivos / 21 cases (95.1 s) | 05-Checklist L125 |
+| Suites SceneTree | 470 archivos | recorrido de disco |
+| Top por checks | historias 468; islas_m27_iter2 239; transporte_m68_iter2 178; transporte_m68 178; islas_m27 174; crash_m122_offline 169; datos_m60_iter4 155 | recorrido de disco |
+
+### 21. Distribucion de checks — techo 50 VIOLADO en disco (hallazgo material)
+- MEDIDO: 74 archivos superan 50 checks (17% de los 434 con _check), 356 estan en 5-50, 4 en 1-4. Maximo actual = 468 (scripts/historias/test_historias.gd).
+- PAQ-7 (este 03, L184) documento "57 en el maximo" el 2026-10-23; hoy el maximo es 468 y 74 archivos exceden el techo. El techo NO se cambia (decision PAQ-7: "no se cambia el umbral"); se flaggean los 74 archivos para revision del dueno de M112.
+- Reconciliacion "475": CHECKLIST-GLOBAL nota "475 test en disco" vs recuento real de 481 archivos (delta +6 = archivos nuevos post-censo o criterio de conteo distinto: archivos vs funciones vs suites). La base "500 tests / 50 modulos" de la capa I #21 ya estaba marcada BASE OBSOLETA (168 modulos reales).
+
+### 22. Flakes — techo sin instrumento de medicion (hallazgo)
+- Flakes medidos en corridas documentadas: 0 (05-Checklist L125/L315: "0 flaky", "0 fallos"; unico rojo historico = test_iconos_m159 TIMEOUT, riel M159, ya derivado a agnes).
+- NO existe un contador persistente de flakes en disco (ningun script ni log agrega flakes por semana). El presupuesto "max 2/semana, alerta 3+" (capa I #24, II ###19) queda como techo de diseño sin medicion.
+- Propuesta (no aplicada): tag [FLAKY] en run_tests.gd + contador semanal en el reporte del cron de M118.
+
+### 23. Tiempos de suite medidos (contexto del presupuesto de tiempo)
+- 620.1 s (R3, 2026-10-13) -> 897.0 s (crecimiento) -> 545.3 s (Log 2078, 2026-10-21: pool paralelo + aislamiento de user://). Presupuesto 600 s: CUMPLIDO hoy (545.3 s).
+- Unit GdUnit4: 95.1 s (21 cases). Boot+quit sin escena: 2.8 s; boot + main_island.tscn + quit: 67-102 s — el 100% del costo esta DESPUES de quit(): DataStore._hilo_guardado.wait_to_finish (DataStore L100-104) espera ~60 s por el mundo voxel en binario. Consecuencia de producto (no solo de tests): cerrar el juego con el mundo cargado tarda ~1 minuto (05-Checklist L124/L258).

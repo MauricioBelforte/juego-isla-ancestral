@@ -125,3 +125,46 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Coherente con M96 (carga de escena) y M112 (timeout 15 min).
 - Unidad: segundos. Dependencia: M96, M112.
 
+
+
+Riel design-docs SIN DATOS (encargo agnes-3-flash msg 255, 2026-10-24 21:08; GO directora). Produce-first line-based, sin vision: cada numero medido en disco con cita archivo:linea (recorrido python -X utf8 + Grep/Read; sin ejecutar Godot). Las capas I/II (Beam 1.0, 2026-10-23) quedan intactas; aqui se groundean con mediciones reales y se documentan los drift hallados. **Modelo:** Ling-3.1-Flash / **Plataforma:** Kilo Code / **Fecha:** 2026-10-25
+
+## Presupuestos numericos III - mediciones en disco (Ling-3.1-Flash, 2026-10-25)
+
+### 16. Constantes medidas en disco (terreno voxel)
+| Medida | Valor medido | Cita archivo:linea |
+|--------|--------------|--------------------|
+| Centro del mundo | Vector2(2560, 2560) | scripts/world/mundo_raiz.gd L16 (autoload, punto unico de verdad, AGENTS.md §26) |
+| Radio de la isla | RADIO_ISLA = 1800.0 (mundo 5120x5120) | scripts/world/mundo_raiz.gd L18 |
+| Spawn del jugador | Vector3(3860, 0, 3860) — a ~1838u del CENTRO, en la orilla | scripts/world/mundo_raiz.gd L26 |
+| Altura maxima del terreno | max_height = 40 (boost 1.0; techo absoluto 80 = 40x2.0) | scripts/world/island_generator.gd L14/L17; tests/test_generacion_m10_atria.gd L199 |
+| Chunk | CHUNK_SIZE = 32 (constante global, arista de chunk) | scripts/utils/game_constants.gd L9 |
+| Techo de malla agua por chunk | VERTS_PER_CHUNK_MAX = 2000; OVERDRAW_MAX = 1.5; REFLECTION_PROBES_MAX = 2 | scripts/world/validate_water.gd L13-15 (check L59) |
+| view_distance VoxelViewer (prod) | 1024.0 m (antes 256.0) | scripts/world/main_island.gd L161; scripts/rendimiento/bench_recorder.gd L142; tests usan 256 (test_terrain.gd L76) y 128 (test_terrenos_b3.gd L184) |
+
+### 17. Umbrales de bioma medidos (island_generator.gd L203-234)
+| Bioma | Condicion medida | Bloque de superficie | Cita |
+|-------|------------------|----------------------|------|
+| beach | height <= 3 | SAND | island_generator.gd L210-211, L173-174 |
+| snow | height > 0.8 x max_height = 32 | SNOW | island_generator.gd L218-219 (FIX BUG-043: snow ANTES que mountain) |
+| mountain | height > 0.65 x max_height = 26 | STONE | island_generator.gd L222-223 |
+| wetland | height <= 8 AND humedad > 0.45 | MUD | island_generator.gd L227-228 |
+| forest | humedad > 0 | GRASS | island_generator.gd L231-232 |
+| grassland | else | GRASS | island_generator.gd L234 |
+- Sub-superficie: 3 capas segun bioma (L185-195); profundidad STONE con minerales si ruido 3D > 0.6 y y < height-10 (L196-200, L241-243); BEDROCK en y <= 0 (L162-164).
+- Biomas alcanzables verificados por test: beach, snow, mountain, wetland, forest, grassland (6) — tests/test_generacion_m10_atria.gd L145-146 (umbral_mountain = int(40*0.65), umbral_snow = int(40*0.8)), L158.
+- Receta por capas y tabla de orilla (0-0.86 arena 3-6 m; 0.86-0.94 arena 3; 0.94-0.98 agua clara 2; >0.98 agua profunda 0; montañas 55-65% del radio): DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md L15-41.
+
+### 18. Impostor de horizonte medido (terreno_horizonte.gd)
+- PASO 64 m (L21); CENTRO_ISLA (2560, 2560) (L23); RADIO_CUBIERTO 2700 m (L25); FACTOR_ALTURA 0.85 (L27); exageracion de montañas x4.0 cerca / x1.0 lejos con transicion 0-2100 m (L32-35); H_MIN 4.0 (L37); DISCO_BASE_Y 4.3 (L39); DISCO_R 1800 (L42); ANILLO arena 1800-3000 m con ocultar <150 m (L46-47, L51); TAMANO_TILE 640 m (L57); TILE_OCULTAR_UMBRAL 400 m (L60); FILAS_POR_FRAME 6 (L66); INTENTOS_MAX 12 (L74); colores por altura L68-72; tiles n = ceil(2 x 2700 / 640) = 9 -> grilla 9x9 (L167); disco base opaco hasta r 2100 a y=0.2 (L238-240, Log 800); conteo de tiles activos reportado en runtime por print L234.
+
+### 19. Renderizado del terreno: vertex colors, NO texturas (hallazgo material)
+- MEDIDO: el terreno voxel renderiza por color de vertice — block_catalog.gd L69-95 (_color_canonico, 42 referencias a Color), world_manager.gd L30-31 (mat.vertex_color_use_as_albedo = true; terrain.material_override = mat), terreno_horizonte.gd L222/L287/L306 (mismo mecanismo en el impostor).
+- MEDIDO: assets totales del proyecto = 848 archivos (.tres/.material/.png/.jpg/.svg/.webp/.stex) = 3.01 MB (tools 1.31 MB, reports 0.95 MB, data 0.33 MB, assets 0.14 MB, addons 0.13 MB). resources/terrain/ = 7 .tres (arena, agua, barro, ceped, nieve, rocas, pavimento).
+- DRIFT: el presupuesto de capa I #18 ("2-4 MB/material, 8-12 materiales/bioma, 16-48 MB/bioma") NO tiene contraparte en disco: el terreno no usa texturas por bioma (vertex-color es la optimizacion M167/impostores). El rango 16-48 MB/bioma queda como presupuesto de diseño sin sustento medido. No se viola nada; se documenta para que el proximo agente no busque texturas de terreno inexistentes.
+
+### 20. Tiempos de creacion/regeneracion (deuda de medicion, honesta)
+- NO hay tiempos de generacion de terreno medidos en disco: ningun log ni test persiste segundos de generacion masiva de get_height.
+- Presupuesto de diseño (capa I #20): creacion 2-5 s, regeneracion 1-3 s, carga total <10 s.
+- Anclas medidas cercanas: boot headless + quit sin escena = 2.8 s (M112 05-Checklist L124, diagnostico 2026-10-21); carga de escena <10 s = presupuesto M96; suite completa de tests 545.3 s (M112, Log 2078).
+- Propuesta de medicion (no aplicada — este riel es sin datos/no ejecuta Godot): instrumentar tests/test_generacion_m10_atria.gd con OS.get_ticks_msec() alrededor de la generacion del mundo y volcar el numero al informe de la siguiente ronda.

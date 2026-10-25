@@ -700,3 +700,23 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 # Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-8 (H22)**: max_copias = **POR-CATEGORIA (5x7=35)** y se MANTIENEN ambos algoritmos (CRC32 rapido diario / SHA-256 fuerte mensual). Tu flip de bloque 3 ya lo citó (5x7=35; CRC32 diario + SHA-256 mensual); solo se agrega la nota de GO del fundador. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 
+
+
+# Presupuestos numericos III - mediciones en disco (Ling-3.1-Flash, 2026-10-25, riel design-docs agnes msg 258 lote 2)
+
+Metodo produce-first: grep + lectura directa, sin ejecutar Godot. Citas archivo:Línea.
+
+# 9. Retencion por capas (medida)
+- data/backup/backup_categories.json (84 lineas): 7 categorias con retencion_dias 365/90/180/365/90/180/180 (L10/19/29/38/47/56/65) y frecuencias continuo x4 (repositorio RF1, assets RF2, documentacion RF3, fuente RF8), post_release x1 (builds RF4), semanal x2 (saves RF6, musica RF7); LFS en assets (L20).
+- Politica GFS L68-73: diarios 30, semanales 52, mensuales 60, permanentes [repositorio, documentacion] — coincide con la suma Beam 314 ###7 (30+52+60+2 = 144 slots) como META DE CAPACIDAD; la politica vigente por categoria son los retencion_dias (doble politica ya documentada en este 03 L689).
+- max_copias_por_categoria = 5 (backup_policy.json L5) x 7 categorias = 35 — verificado en code: BackupManager._max_copias() lee config.retencion.max_copias con default 5 (backup_manager.gd L48-49; autoload BackupManager, project.godot L119).
+- DRIFTS medidos: (a) _limpiar_existentes_cat hardcodea max_dias = 30 (backup_manager.gd L315) en vez de leer retencion_dias por categoria (365/90/180) — la limpieza ignora la politica del JSON; (b) _limpiar_excedentes de raiz usa el maximo GLOBAL (L302-312) mientras _limpiar_existentes_cat usa el por-categoria (L314-335) — asimetria; (c) las frecuencias continuo/semanal/post_release NO estan automatizadas en runtime: BackupManager es bajo demanda (7 wrappers de categoria L65-84); el ejecutor externo es scripts/backup/backup_local.ps1 (raiz del repo, fuera de game/).
+- Unidad: slots/dias. Dependencia: H22, M144 (SLA <48h).
+
+# 10. Verificacion de integridad dual (medida)
+- CRC32 en runtime: backup_manager.gd verificar_integridad L213-224 — formato "checksum\npayload", Validador.crc32_hex (L224); invocada al restaurar (integrity_check_al_restaurar = true, backup_policy.json L10 + backup_manager.gd L254).
+- SHA-256 fuera de runtime: scripts/backup/verify_backups.ps1 L78 (Get-FileHash -Algorithm SHA256), checksums.txt con hashes hex-64 (regex L53), busca tambien en subcarpeta mensual/ (L70), log en <destino>/logs/verify.log (L93-95), exit codes 0 OK / 1 CORRUPTO-FALTANTE / 2 error (L97-103). Existe ademas restore_backup.ps1 (mismo directorio).
+- backup_categories.json L74-78 declara verificacion {checksum_habilitado: true, algoritmo: "CRC32", integrity_check_al_restaurar: true}; backup_policy.json (11 lineas) NO tiene campo "algoritmo" — la correccion del Lote B (director msg 235, H22) es PRECISE: el JSON sin campo es el policy; el categories SÍ lo tiene (CRC32).
+- Dual CONFIRMADO en disco (CRC32 rapido runtime + SHA-256 fuerte CLI) — coherente con Beam 314 ###8 y PAQ-8 (GO fundador 23oct 20:25).
+- Cadencia: la verificacion SHA-256 "mensual" es MANUAL — 0 hits de scheduler/cron/Task en el repo y quality.yml no cablea verify_backups.ps1 (solo test_backup_m107.gd L358-362). El "mensual" es proceso, no automatizacion.
+- Unidad: algoritmo. Dependencia: H22.

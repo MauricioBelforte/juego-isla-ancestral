@@ -1,31 +1,31 @@
-**Modelo:** SWE-1.6
+﻿**Modelo:** SWE-1.6
 **Plataforma:** Devin
 
-# 03-Diseno.md — Módulo 110: Debug Menu
+# 03-Diseno.md â€” MÃ³dulo 110: Debug Menu
 
 ## 1. Arquitectura del sistema
 
 ```
 DebugMenu (Node, autoload solo en debug builds)
-├── UI (Control basado en UI Toolkit)
-│   ├── Panel Jugador
-│   ├── Panel Mundo
-│   ├── Panel Entidades
-│   ├── Panel Visualización
-│   └── Panel Sistema
-├── Consola In-Game
-├── Debug Visualizer
-│   ├── Collider Visualizer
-│   ├── Chunk Visualizer
-│   ├── Navigation Visualizer
-│   └── Hitbox Visualizer
-├── Debug Commands
-│   ├── TeleportCommand
-│   ├── TimeCommand
-│   ├── WeatherCommand
-│   ├── InventoryCommand
-│   └── QuestCommand
-└── DiagnosticExporter
+â”œâ”€â”€ UI (Control basado en UI Toolkit)
+â”‚   â”œâ”€â”€ Panel Jugador
+â”‚   â”œâ”€â”€ Panel Mundo
+â”‚   â”œâ”€â”€ Panel Entidades
+â”‚   â”œâ”€â”€ Panel VisualizaciÃ³n
+â”‚   â””â”€â”€ Panel Sistema
+â”œâ”€â”€ Consola In-Game
+â”œâ”€â”€ Debug Visualizer
+â”‚   â”œâ”€â”€ Collider Visualizer
+â”‚   â”œâ”€â”€ Chunk Visualizer
+â”‚   â”œâ”€â”€ Navigation Visualizer
+â”‚   â””â”€â”€ Hitbox Visualizer
+â”œâ”€â”€ Debug Commands
+â”‚   â”œâ”€â”€ TeleportCommand
+â”‚   â”œâ”€â”€ TimeCommand
+â”‚   â”œâ”€â”€ WeatherCommand
+â”‚   â”œâ”€â”€ InventoryCommand
+â”‚   â””â”€â”€ QuestCommand
+â””â”€â”€ DiagnosticExporter
 ```
 
 ## 2. API del Debug Menu
@@ -80,11 +80,11 @@ func toggle_navigation(enabled: bool)
 func toggle_hitboxes(enabled: bool)
 func toggle_ai_states(enabled: bool)
 
-# Diagnóstico
+# DiagnÃ³stico
 func export_diagnostic() -> String
 func report_bug() -> void
 
-# Configuración
+# ConfiguraciÃ³n
 func save_config()
 func load_config()
 func reset_config()
@@ -95,109 +95,109 @@ func reset_config()
 **Main Window:**
 ```
 DebugWindow (Window)
-├── TitleBar (Label + Close Button)
-├── TabBar (Horizontal Button Group)
-│   ├── Jugador
-│   ├── Mundo
-│   ├── Entidades
-│   ├── Visualización
-│   └── Sistema
-└── ContentPanel (StackContainer)
-    ├── PanelJugador (visible when selected)
-    ├── PanelMundo (visible when selected)
-    ├── PanelEntidades (visible when selected)
-    ├── PanelVisualizacion (visible when selected)
-    └── PanelSistema (visible when selected)
+â”œâ”€â”€ TitleBar (Label + Close Button)
+â”œâ”€â”€ TabBar (Horizontal Button Group)
+â”‚   â”œâ”€â”€ Jugador
+â”‚   â”œâ”€â”€ Mundo
+â”‚   â”œâ”€â”€ Entidades
+â”‚   â”œâ”€â”€ VisualizaciÃ³n
+â”‚   â””â”€â”€ Sistema
+â””â”€â”€ ContentPanel (StackContainer)
+    â”œâ”€â”€ PanelJugador (visible when selected)
+    â”œâ”€â”€ PanelMundo (visible when selected)
+    â”œâ”€â”€ PanelEntidades (visible when selected)
+    â”œâ”€â”€ PanelVisualizacion (visible when selected)
+    â””â”€â”€ PanelSistema (visible when selected)
 ```
 
 **Panel Jugador:**
 ```
 PanelJugador (VBoxContainer)
-├── Label: "Teletransporte"
-├── HBoxContainer
-│   ├── LineEdit: X
-│   ├── LineEdit: Y
-│   ├── LineEdit: Z
-│   └── Button: "Ir"
-├── OptionButton: POI predefinidos
-├── Label: "Inventario"
-├── HBoxContainer
-│   ├── OptionButton: Item
-│   ├── SpinBox: Cantidad
-│   └── Button: "Dar"
-├── HBoxContainer
-│   ├── SpinBox: Dinero
-│   └── Button: "Dar"
-├── Label: "Progresión"
-├── OptionButton: Misión
-├── Button: "Completar"
-├── OptionButton: Herramienta
-├── Button: "Desbloquear"
-├── OptionButton: Isla
-├── Button: "Desbloquear"
-└── OptionButton: Sello
-    └── Button: "Desbloquear"
+â”œâ”€â”€ Label: "Teletransporte"
+â”œâ”€â”€ HBoxContainer
+â”‚   â”œâ”€â”€ LineEdit: X
+â”‚   â”œâ”€â”€ LineEdit: Y
+â”‚   â”œâ”€â”€ LineEdit: Z
+â”‚   â””â”€â”€ Button: "Ir"
+â”œâ”€â”€ OptionButton: POI predefinidos
+â”œâ”€â”€ Label: "Inventario"
+â”œâ”€â”€ HBoxContainer
+â”‚   â”œâ”€â”€ OptionButton: Item
+â”‚   â”œâ”€â”€ SpinBox: Cantidad
+â”‚   â””â”€â”€ Button: "Dar"
+â”œâ”€â”€ HBoxContainer
+â”‚   â”œâ”€â”€ SpinBox: Dinero
+â”‚   â””â”€â”€ Button: "Dar"
+â”œâ”€â”€ Label: "ProgresiÃ³n"
+â”œâ”€â”€ OptionButton: MisiÃ³n
+â”œâ”€â”€ Button: "Completar"
+â”œâ”€â”€ OptionButton: Herramienta
+â”œâ”€â”€ Button: "Desbloquear"
+â”œâ”€â”€ OptionButton: Isla
+â”œâ”€â”€ Button: "Desbloquear"
+â””â”€â”€ OptionButton: Sello
+    â””â”€â”€ Button: "Desbloquear"
 ```
 
 **Panel Mundo:**
 ```
 PanelMundo (VBoxContainer)
-├── Label: "Tiempo"
-├── HBoxContainer
-│   ├── Slider: Hora (0-23)
-│   └── Label: "XX:XX"
-├── OptionButton: Estación
-├── Label: "Clima"
-├── OptionButton: Clima
-├── Label: "Generación"
-├── HBoxContainer
-│   ├── LineEdit: Seed
-│   └── Button: "Aplicar"
-├── Label: "Chunks"
-├── HBoxContainer
-│   ├── LineEdit: Chunk X
-│   ├── LineEdit: Chunk Z
-│   └── Button: "Regenerar"
+â”œâ”€â”€ Label: "Tiempo"
+â”œâ”€â”€ HBoxContainer
+â”‚   â”œâ”€â”€ Slider: Hora (0-23)
+â”‚   â””â”€â”€ Label: "XX:XX"
+â”œâ”€â”€ OptionButton: EstaciÃ³n
+â”œâ”€â”€ Label: "Clima"
+â”œâ”€â”€ OptionButton: Clima
+â”œâ”€â”€ Label: "GeneraciÃ³n"
+â”œâ”€â”€ HBoxContainer
+â”‚   â”œâ”€â”€ LineEdit: Seed
+â”‚   â””â”€â”€ Button: "Aplicar"
+â”œâ”€â”€ Label: "Chunks"
+â”œâ”€â”€ HBoxContainer
+â”‚   â”œâ”€â”€ LineEdit: Chunk X
+â”‚   â”œâ”€â”€ LineEdit: Chunk Z
+â”‚   â””â”€â”€ Button: "Regenerar"
 ```
 
 **Panel Entidades:**
 ```
 PanelEntidades (VBoxContainer)
-├── Label: "NPC"
-├── OptionButton: NPC
-├── Button: "Resetear"
-├── Label: "Estado IA"
-├── Label: "IDLE" (dinámico)
-├── Label: "Puzzles"
-├── OptionButton: Puzzle
-└── Button: "Resetear"
+â”œâ”€â”€ Label: "NPC"
+â”œâ”€â”€ OptionButton: NPC
+â”œâ”€â”€ Button: "Resetear"
+â”œâ”€â”€ Label: "Estado IA"
+â”œâ”€â”€ Label: "IDLE" (dinÃ¡mico)
+â”œâ”€â”€ Label: "Puzzles"
+â”œâ”€â”€ OptionButton: Puzzle
+â””â”€â”€ Button: "Resetear"
 ```
 
-**Panel Visualización:**
+**Panel VisualizaciÃ³n:**
 ```
 PanelVisualizacion (VBoxContainer)
-├── CheckBox: "Mostrar Colliders"
-├── CheckBox: "Mostrar FPS"
-├── CheckBox: "Mostrar Chunks"
-├── CheckBox: "Mostrar Navegación"
-├── CheckBox: "Mostrar Hitboxes"
-└── CheckBox: "Mostrar Estados IA"
+â”œâ”€â”€ CheckBox: "Mostrar Colliders"
+â”œâ”€â”€ CheckBox: "Mostrar FPS"
+â”œâ”€â”€ CheckBox: "Mostrar Chunks"
+â”œâ”€â”€ CheckBox: "Mostrar NavegaciÃ³n"
+â”œâ”€â”€ CheckBox: "Mostrar Hitboxes"
+â””â”€â”€ CheckBox: "Mostrar Estados IA"
 ```
 
 **Panel Sistema:**
 ```
 PanelSistema (VBoxContainer)
-├── Label: "Consola"
-├── RichTextLabel (scrollable, 100 líneas)
-├── HBoxContainer
-│   ├── OptionButton: Filtro Nivel
-│   ├── OptionButton: Filtro Categoría
-│   ├── LineEdit: Búsqueda
-│   └── CheckBox: "Auto-scroll"
-├── Label: "Diagnóstico"
-├── Button: "Exportar Diagnóstico"
-├── Button: "Reportar Bug"
-└── Button: "Guardar Configuración"
+â”œâ”€â”€ Label: "Consola"
+â”œâ”€â”€ RichTextLabel (scrollable, 100 lÃ­neas)
+â”œâ”€â”€ HBoxContainer
+â”‚   â”œâ”€â”€ OptionButton: Filtro Nivel
+â”‚   â”œâ”€â”€ OptionButton: Filtro CategorÃ­a
+â”‚   â”œâ”€â”€ LineEdit: BÃºsqueda
+â”‚   â””â”€â”€ CheckBox: "Auto-scroll"
+â”œâ”€â”€ Label: "DiagnÃ³stico"
+â”œâ”€â”€ Button: "Exportar DiagnÃ³stico"
+â”œâ”€â”€ Button: "Reportar Bug"
+â””â”€â”€ Button: "Guardar ConfiguraciÃ³n"
 ```
 
 ## 4. Debug Visualizer
@@ -313,25 +313,25 @@ func report_bug():
     
     # Generar URL de GitHub con plantilla pre-llenada
     var metadata = _read_metadata()
-    var title = "[BUG] " + metadata.get("description", "Descripción breve")
+    var title = "[BUG] " + metadata.get("description", "DescripciÃ³n breve")
     var body = """
-## Descripción del bug
-[Descripción del problema]
+## DescripciÃ³n del bug
+[DescripciÃ³n del problema]
 
-## Contexto técnico
-- **Versión del juego:** {version}
+## Contexto tÃ©cnico
+- **VersiÃ³n del juego:** {version}
 - **Plataforma:** {platform}
 - **Specs:** {cpu}, {gpu}, {ram}
-- **Seed de generación:** {seed}
-- **Posición del jugador:** {player_position}
+- **Seed de generaciÃ³n:** {seed}
+- **PosiciÃ³n del jugador:** {player_position}
 - **FPS:** {fps}
 - **Memoria:** {memory}
 - **Hora del juego:** {game_time}
-- **Estación:** {season}
+- **EstaciÃ³n:** {season}
 - **Clima:** {weather}
 
 ## Evidencia
-Diagnóstico adjunto: {diagnostic}
+DiagnÃ³stico adjunto: {diagnostic}
 """
     
     var url = "https://github.com/MauricioBelforte/juego-isla-ancestral/issues/new?title=" + title.uri_encode() + "&body=" + body.uri_encode()
@@ -360,17 +360,17 @@ func _input(event):
 **Input Map (Project Settings):**
 - `debug_menu_toggle`: F1 (o Backtick)
 - `debug_menu_close`: Escape
-- `debug_menu_teleport`: T (cuando panel jugador está activo)
+- `debug_menu_teleport`: T (cuando panel jugador estÃ¡ activo)
 
 ## 7. Performance considerations
 
 **Optimizaciones:**
-- Debug visualizations solo cuando debug menu está visible
-- Límite de FPS overlay: actualizar cada 0.5s (no cada frame)
-- Límite de consola: máximo 100 líneas (rotativo)
-- Límite de chunks visualizados: solo chunks cercanos al jugador (radio 5 chunks)
-- Límite de navigation paths: solo NPC cercanos (radio 50m)
-- Límite de AI states: solo NPC cercanos (radio 50m)
+- Debug visualizations solo cuando debug menu estÃ¡ visible
+- LÃ­mite de FPS overlay: actualizar cada 0.5s (no cada frame)
+- LÃ­mite de consola: mÃ¡ximo 100 lÃ­neas (rotativo)
+- LÃ­mite de chunks visualizados: solo chunks cercanos al jugador (radio 5 chunks)
+- LÃ­mite de navigation paths: solo NPC cercanos (radio 50m)
+- LÃ­mite de AI states: solo NPC cercanos (radio 50m)
 
 **Budget de rendimiento:**
 - Debug menu cerrado: 0% overhead
@@ -379,7 +379,7 @@ func _input(event):
 
 ## 8. Seguridad en builds
 
-**Activación condicional:**
+**ActivaciÃ³n condicional:**
 ```gdscript
 # project.godot
 
@@ -390,7 +390,7 @@ DebugMenu="*res://scripts/debug/debug_menu.gd" # Solo en debug
 application/config/features=packed
 ```
 
-**En código:**
+**En cÃ³digo:**
 ```gdscript
 # main.gd
 
@@ -402,14 +402,14 @@ func _ready():
         DebugMenu = null
 ```
 
-**Verificación en runtime:**
+**VerificaciÃ³n en runtime:**
 ```gdscript
 func _input(event):
     if DebugMenu == null:
         return  # No hacer nada en release
 ```
 
-## 9. Integración con Service Locator
+## 9. IntegraciÃ³n con Service Locator
 
 ```gdscript
 # ServiceRegistry
@@ -425,25 +425,43 @@ func register_debug_services():
 
 ### Regla 1: Solo en debug builds
 - Debug menu nunca accesible en release
-- Verificación con `OS.is_debug_build()`
+- VerificaciÃ³n con `OS.is_debug_build()`
 - Input actions desactivadas en release
 
 ### Regla 2: Bajo overhead
 - Visualizaciones solo cuando visible
-- Límites de cantidad de elementos visualizados
-- Actualizaciones periódicas (no cada frame)
+- LÃ­mites de cantidad de elementos visualizados
+- Actualizaciones periÃ³dicas (no cada frame)
 
 ### Regla 3: UX intuitiva
-- Paneles organizados por categoría
+- Paneles organizados por categorÃ­a
 - Atajos de teclado documentados
 - Feedback visual inmediato
 
-### Regla 4: Integración completa
-- Todos los módulos relevantes integrados
-- Exportar diagnóstico funciona completamente
+### Regla 4: IntegraciÃ³n completa
+- Todos los mÃ³dulos relevantes integrados
+- Exportar diagnÃ³stico funciona completamente
 - Logs en tiempo real
 
-### Regla 5: Persistencia de configuración
-- Guardar posición y tamaño
+### Regla 5: Persistencia de configuraciÃ³n
+- Guardar posiciÃ³n y tamaÃ±o
 - Guardar estado de toggles
 - Restaurar al abrir
+
+## Specs Debug Menu (Beam 544)
+
+### Diagnóstico: botón "Reportar Bug"
+- Spec: botón "Reportar Bug" (report_bug()). Coherente con M110 (debug menu) y M102 (bug tracking).
+
+### Integración M102 (Bug Tracking)
+- Spec: integración M102 (Bug Tracking). Coherente with M110 (debug menu) and M102 (bug tracking).
+## Specs Debug Menu (Beam 545)
+
+### report_bug()
+- Spec: report_bug() — inexistente; dueño M102. Coherente con M110 (debug menu) y M102 (bug tracking).
+
+### Abrir navegador con URL
+- Spec: abrir navegador con URL — sin invocación cableada; dueño M102. Coherente with M110 (debug menu) and M102 (bug tracking).
+
+### Autoload solo en debug
+- Spec: autoload solo en debug — registrado fijo en project.godot; mitigado por guard runtime; dueño M117. Coherente with M110 (debug menu) and M117 (build system).

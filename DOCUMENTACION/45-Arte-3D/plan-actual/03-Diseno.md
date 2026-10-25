@@ -188,3 +188,124 @@ Cierra los 5 items documentables de M45 (COLA A V3). Los de validación de asset
 - **M10 NO crea assets: solo los COLOCA** (instancia los GLB de M45). M45 produce, M10 instancias.
 - Cada asset M45 lleva metadata de colocacion (footprint Y=0 + colision) para colocarse en grilla voxel sin flotar (regla M167: `get_height(x,z)+1`).
 - Los assets M45 NO contienen logica de spawn/placement (eso es M10/M15).
+
+## 8. Validación automática de malla (RF14) — implementación headless
+
+Cierra el diseño que el ítem L145 pedía como `[?]` y que el §7 daba por bloqueado.
+**Corrección de premisa medida (2026-10-24):** el §7 L171 decía «`validate_mesh.gd`
+(MISS) + 0/23 GLB en disco». En disco hay **418 `.glb` en `assets/3d/{alta,media,baja}`**
+(`git ls-files 'game/isla-ancestral/assets/3d/*/*.glb'` = 418, todos parseables), no 0/23.
+
+### 8.1 Decisión: por qué no es un `.gd` de editor
+
+RF14 nombra `validate_mesh.gd` en `Assets/_Project/Editor/`, ruta de la era **Unity**
+(este proyecto es Godot 4.7.2 y no existe `Assets/_Project/`). Tres razones para un
+validador headless sobre el `.glb` exportado:
+
+1. el `.glb` es la **fuente de verdad del runtime** (lo que carga Godot), no el `.blend`;
+2. corre en CI sin abrir editor (`quality.yml` no tiene paso de Godot-editor);
+3. es determinista y auditable: mide bytes, no estado de UI.
+
+Implementación: `scripts/validar_malla_glb.py` (solo lectura, stdlib pura).
+
+### 8.2 Eje UP: medido, no supuesto
+
+El §7.4 ya habla de «footprint **Y=0**». La medición lo confirma con tres señales
+independientes sobre los 418 assets:
+
+| Señal | Y | Z |
+|---|---|---|
+| ancla en 0 (`min == 0 ± 1e-3`) | 3 | 1 (414 no anclan en ningún eje) |
+| contacto en `0.045 ± 0.020` | **66** | **0** |
+| extensión mayor en ese eje | 227 | 191 |
+
+Corroboración morfológica: `18-Casas_alfombra.glb` mide `dim=[3.200, 0.038, 3.200]`
+(una alfombra es plana en **Y**) y `50-Vegetacion_canas_bambu.glb` mide
+`dim=[0.720, 3.145, 0.604]` (una caña es alta en **Y**).
+**Conclusión: eje UP = Y.** El valor `0.045` es el mismo que M166 documenta como
+`Z_APOYO`, pero sobre Y — ver §8.7 (hallazgo cruzado).
+
+### 8.3 Criterios y clases
+
+| Clase | Nivel | Regla | Medido hoy |
+|---|---|---|---|
+| `PARSE` | violación | contenedor GLB ilegible | 0 / 418 |
+| `SIN_GEOMETRIA` | violación | 0 vértices | 0 / 418 |
+| `ESCALA_NO_UNIFORME` | violación | `\|sx-sy\|, \|sy-sz\|, \|sx-sz\| > 1e-3` en la cadena de padres (deforma) | **95** |
+| `ESCALA_NO_APLICADA` | aviso | `\|s-1\| > 1e-3` (RF3: aplicar escala en Blender) | 98 |
+| `UV_FUERA_RANGO` | violación | `TEXCOORD_0` fuera de `[0,1] ± 1e-4` | **3** |
+| `SIN_UV` | aviso | LOD0 sin `TEXCOORD_0` (no texturizable) | 31 |
+| `TOPO_DEGENERADO` | violación | triángulo de área `< 1e-12` | **4** |
+| `ORIGEN_BAJO_SUELO` | violación | `min_Y < 0` en categoría de suelo (el prop se hunde) | **285** |
+| `ORIGEN_SIN_CONVENCION` | aviso | `\|min_Y - 0.045\| > 0.020` sin hundirse | 16 |
+| `RF4_EXCEDIDO` | **aviso** | tris > techo RF4 de la categoría **inferida** | 58 |
+| `LOD_FALTANTE` | violación | LOD0 con > 500 tris sin homónimo en `media/` o `baja/` (RF9) | **10** |
+
+**Por qué RF4 es aviso y no violación:** la categoría no está declarada por asset.
+El catálogo RF13 (`asset_catalog.json`) **no existe en disco** y **0 de 694** `.glb`
+cumple el prefijo RF15 (`chr_`, `prop_`, …): el nombre es `<Modulo>_<nombre>.glb`
+(`13-Herramientas_pico_hierro.glb`) y la carpeta es el **nivel de LOD**, no el módulo.
+La categoría se infiere del prefijo de módulo (§8.4) y esa inferencia falla: una
+alfombra (`18-Casas_alfombra.glb`) se inferiría `bld` (techo 15.000) cuando es `furn`
+(techo 1.200). Promoverlo a violación sería inventar una categoría que nadie declaró.
+
+**Topología — límite declarado:** glTF 2.0 solo admite `TRIANGLES`/`TRIFAN`/`TRISTRIP`,
+así que un **n-gon no puede sobrevivir a la exportación**; el validador mide el proxy
+medible (degenerados). La detección de n-gons exige leer el `.blend` fuente y queda
+**fuera de alcance** de este validador (declarado, no silenciado).
+
+**Vértices duplicados — no es criterio:** se cuentan (417 / 418 los tienen) pero NO se
+reportan como defecto: glTF 2.0 obliga a **partir vértices** por costura de normal y de
+UV, porque un vértice no puede tener dos normales. Un aviso aquí sería un falso positivo
+en el 100% del corpus.
+
+### 8.4 Categoría RF4 por prefijo de módulo
+
+| Prefijo | Categoría RF4 | Techo LOD0 |
+|---|---|---|
+| `13-Herramientas` | `tool` | 800 |
+| `15-Recursos`, `27-Islas-Ubicaciones`, `35-Mineria`, `45-Arte3D` | `prop` | 200 |
+| `16-Crafting` | `furn` | 1.200 |
+| `18-Casas`, `40-Infraestructura` | `bld` | 15.000 |
+| `19-NPCs` | `npc` | 8.000 |
+| `25-Ruinas-Templos` | `ruin` | 12.000 |
+| `33-Agricultura`, `50-Vegetacion` | `veg` | 3.000 |
+| `36-Fauna` | `ani` | 6.000 |
+| `70-Interacciones` | `int` | 1.500 |
+
+Sin coincidencia → `categoria = None` y **no se evalúa RF4** (nunca se adivina).
+
+### 8.5 Cómo se corre
+
+```
+python scripts/validar_malla_glb.py              # informe legible
+python scripts/validar_malla_glb.py --json       # + tools/legal/malla_glb.json
+python scripts/validar_malla_glb.py --check      # exit 1 si hay violaciones
+python scripts/validar_malla_glb.py --archivo R  # un solo asset
+python scripts/validar_malla_glb.py --selftest   # 27 checks, piso medido
+```
+
+Códigos: `0` = sin violaciones · `1` = violaciones · `3` = **validador ciego**
+(0 archivos, para que un glob roto no publique un verde).
+
+**No cableado a CI todavía:** `--check` sale **1 hoy** (368 de 418 con violaciones).
+Cablearlo sin baseline congelaría un rojo permanente; la decisión (baseline vs. sanear
+el corpus primero) es del director.
+
+### 8.6 Medición de la corrida (2026-10-24)
+
+- 418 archivos, **418 parseables**, 237.385 tris, 486.855 vértices.
+- **368 con al menos una violación**; 169 con avisos.
+- 131 con `TEXCOORD_0` / **287 sin UV**: alta 129/160, media 2/130, baja **0/128**.
+- **0 de 1.532 materiales usa `baseColorTexture`**: el corpus es color plano, sin texturas.
+  Consecuencia: RF6 (padding ≥ 4 px, texel density) es **vacuo hoy** — no hay nada que
+  texturizar — y los LOD1/LOD2 **perdieron las UV** que sí tiene el LOD0.
+
+### 8.7 Hallazgo cruzado (M166 / `scripts/auditar_flotacion_glb.py`)
+
+El auditor de flotación existente mide el componente **Z** (`m[2]`, `t[2]`) mientras el
+eje UP del corpus es **Y**. Resultado de su propia corrida: **`ASENTADO = 0` de 694**
+archivos — una clasificación imposible si el criterio estuviera bien aplicado. Con el eje
+correcto, **66** assets caen en `0.045 ± 0.020`. Las categorías `FLOTA` / `HUNDIDO` /
+`ORIGEN-CENTRADO` de ese informe (3 / 495 / 589) no describen altura.
+**No se modificó ese script** (pertenece al frente M166): se reporta al director.

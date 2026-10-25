@@ -122,7 +122,7 @@
 - [x] Definir buffer de 100-200 ms [M] — **Diseño: 02-Analisis.md 2.3 A1**
 - [x] Definir sin teleports visibles en NPCs [M] — **Diseño: 02-Analisis.md 3.5**
 - [x] Documentar interpolación de animaciones (M13) [M] — **Diseño: 03-Diseno.md 2.2**
-- [ ] Verificar frame budget con buffer (M61) [C]
+- [x] Verificar frame budget con buffer (M61) [C]
 
 ## P. Protección contra Trampas (RF16)
 

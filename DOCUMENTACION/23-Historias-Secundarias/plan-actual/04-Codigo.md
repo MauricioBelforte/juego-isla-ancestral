@@ -896,3 +896,177 @@ flippa por la mitad.
   también para las 3 nuevas (0 entradas `mision_cadena-*` en el catálogo de
   M55); mismo residual de las iteraciones 3/6/7/8/9/10/11/12/13/14/15.
   Verificado con el check del puente en el bloque U.
+
+
+## Iter. 17 — Agricultura (Log 2172, 2026-10-24, Step-5-WorkBuddy)
+
+- **Alcance:** item L71 del 05-Checklist («Crear 5 misiones de agricultura
+  (invernadero, cruces, variantes)`). 03-Diseno L41 nombra 3 temas
+  (invernadero, cruces de semillas, variantes M32): **invernadero YA tenia
+  cadena previa** (`cadena-invernadero` del principal, no se duplica) y las
+  **variantes estacionales son DUENO M32** (item L72, fuera — no se inventa
+  contenido ajeno). Las 5 creadas = **1 tema nombrado** (cruces de semillas)
+  + **4 de extension declarada** (cultivos del invernadero, primera cosecha,
+  riego del manantial, macetas de la plaza); mismo patron que Exploracion
+  (3 nombrados + 5 extension) e Investigacion (4 + 1).
+- **Dato:** `data/historias/secundarias.json` 62 -> **67 cadenas** (+75/-0,
+  puramente aditivo, formato tabs/pasos-inline preservado). Las 5 nacen
+  visibles (`oculta:false`), 4 pasos cada una (hablar -> explorar ->
+  entregar -> puzzle):
+  | cadena | NPC REAL (rol medido en el .tres) | objeto REAL (por campo id) | lugar | consecuencia |
+  |---|---|---|---|---|
+  | cadena-agricultura-cruces | vera_ardilla (farera) | OBJ-EXT-011 «Jardin de hierbas» | jardin | cruces_de_semillas |
+  | cadena-agricultura-cultivos | mateo_mapache (granjero) | OBJ-HER-012 «Regadera» | invernadero | cultivos_del_invernadero |
+  | cadena-agricultura-cosecha | mateo_mapache (granjero) | OBJ-EXT-013 «Jardin de verduras» | jardines | primera_cosecha |
+  | cadena-agricultura-riego | teo_conejo (herbolario) | OBJ-HER-013 «Regadera mejorada» | manantial | riego_del_huerto |
+  | cadena-agricultura-macetas | luna_zorra (artesana) | OBJ-PLA-001 «Maceta pequena» | plaza | plaza_florida |
+  Verificado por campo id contra `data/items/*.tres` (efecto, no nombre de
+  archivo) y `data/villagers/*.tres`; 0 colisiones de id/flag/capitulo con
+  las 62 previas.
+- **Suite `test_historias.gd` — bloque V `_test_agricultura()` NUEVO** (+44
+  checks): carga/fuente/no-oculta de las 5 + tema invernadero con cadena
+  previa, expuestas en `cadenas_disponibles()`, unicidad local de
+  consecuencias y de capitulos de diario, 4 NPC REALES + 5 objetos REALES,
+  2 end-to-end con `ws_has` (`cruces_de_semillas`, `riego_del_huerto`),
+  puente diario M23->M55 como finding medido e higiene de flags. Reparados
+  los 4 asserts de conteo (63 -> 68 x3 en carga/runtime/consecuencias
+  globales; 62 -> 67 en el crudo del principal) con sus mensajes.
+- **Evidencia:** suite **624 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR
+  (binario real). Piso 580 -> **624 MEDIDO en verde**. Guardián EN ROJO por
+  inyeccion de RUNTIME sobre el bloque V (subscript dinamico
+  `["titulo"]` -> `Dictionary`; la 1a sonda con literal string fue rechazada
+  por el parser ESTATICO de GDScript — no compila —, no servia para probar
+  el guardian de abortos en runtime): **EXIT 1, 581 checks, 2 fallos**
+  («el bloque V NO se ejecuto» + «solo 581 checks (minimo 624)»); sonda
+  borrada y suite restaurada byte-exacta (sha256 e385a964... identico).
+- **Regresiones (binario real):** M59 carga idempotente 28/0, autosave 0
+  fallos, fecha/diario/cola 45/0; M71 flujo XP 37/0; M55 diario perf 26/0.
+- **Flips del 05-Checklist con cita:** L71 «Crear 5 misiones de agricultura
+  (invernadero, cruces, variantes)`[ ]` -> `[x]` (5 cadenas en disco + suite
+  bloque V). L73 «Documentar misiones de construccion y agricultura`[ ]` ->
+  `[x]` (construccion documentada en sec. Iter. 16; agricultura en esta
+  sec. Iter. 17). M23 = **76 [x] / 27 [ ] / 2 [?] = 105** (prefijo de linea).
+  Ofrecidos a revertir.
+- **Hallazgo ajeno (reportado, no tocado):** el id de objeto
+  `semilla_antigua` se usa en cadenas previas (clusters Investigacion/
+  Secretas) pero **no existe** en `data/items/` (0 coincidencias por campo
+  id): cita de item sin respaldo en disco, misma familia que
+  `molino_funcionando` (iter. 8). No toca esta tanda (mis 5 objetos fueron
+  verificados reales).
+## Iter. 18 — Pesca (4) + Colección (6) (Log 2173, 2026-10-24, Step-5-WorkBuddy)
+
+- **Alcance:** items L77 («Crear 4 misiones de pesca») y L80 del
+  05-Checklist, acumulados en UN reporte (regla del fundador, confirmada por
+  la directora en su 210: «tu riel M23 sigue en curso»). 03-Diseno L42 nombra
+  3 temas de pesca (peces-trofeo M36, documentacion y suelta) y L43 nombra
+  los 6 de coleccion (murales, glifos, sellos decorativos, minerales, peces,
+  plantas M36): pesca = **3 nombrados + 1 de extension declarada** (nocturna,
+  mismo patron que Exploracion 3+5 e Investigacion 4+1); coleccion = los
+  **6 nombrados**. Integracion con M36 (museo) = item L79, implementacion
+  DUENO M36 (no se inventa).
+- **Dato:** `data/historias/secundarias.json` 67 -> **77 cadenas** (+6704 B,
+  puramente aditivo, formato tabs/pasos-inline preservado). Las 10 nacen
+  visibles (`oculta:false`), 4 pasos cada una (hablar -> explorar ->
+  puzzle -> entregar):
+  | cadena | NPC REAL (profesion medida en el .tres) | objeto REAL (por campo id) | lugar | consecuencia |
+  |---|---|---|---|---|
+  | cadena-pesca-trofeos | finneas_zorro (pescador) | OBJ-HER-011 «Cana de oro» | muelle_viejo | trofeo_de_la_marea_exhibido |
+  | cadena-pesca-documentacion | sofia_buho (bibliotecaria) | OBJ-ART-002 «Pergamino mistico» | biblioteca | catalogo_de_peces_escrito |
+  | cadena-pesca-suelta | teo_conejo (herbolario) | OBJ-HER-010 «Cana mejorada» | playa_sur | peces_devueltos_al_agua |
+  | cadena-pesca-nocturna (extension) | finneas_zorro (pescador) | OBJ-LUZ-012 «Linterna» | muelle | pesca_nocturna_abierta |
+  | cadena-coleccion-murales | luna_zorra (artesana) | OBJ-CUA-010 «Obra maestra» | plaza | mural_del_puerto_restaurado |
+  | cadena-coleccion-glifos | sofia_buho (bibliotecaria) | OBJ-ART-001 «Estatuilla antigua» | acantilado | glifos_del_acantilado_descifrados |
+  | cadena-coleccion-sellos | olivia_nutria (sastra) | OBJ-ART-005 «Joya de la isla» | cofradia | sellos_decorativos_reunidos |
+  | cadena-coleccion-minerales | ramon_tejon (herrero) | mineral_cobre «Mineral de Cobre» | bosque | minerales_donados_al_museo |
+  | cadena-coleccion-peces | finneas_zorro (pescador) | OBJ-ITE-023 «Pescado» | muelle_viejo | peces_catalogados |
+  | cadena-coleccion-plantas | teo_conejo (herbolario) | OBJ-PLA-004 «Orquidea» | jardines | plantas_raras_clasificadas |
+  Verificado por campo id contra `data/items/*.tres` (efecto, no nombre de
+  archivo) y `data/villagers/*.tres` (campo `profesion`); 0 colisiones de
+  id/flag/capitulo con las 67 previas.
+- **Colision de titulo medida y corregida:** la 1a corrida de la suite quedo
+  ROJA (691 checks / 1 fallo / EXIT 1): el validador detecto que
+  `cadena-coleccion-sellos` repetia el titulo «Los Sellos de la Cofradia» de
+  `cadena-cofradia` (iter. 6). Renombrada a **«Los Sellos de los Oficios»**,
+  contexto ajustado (sello del panadero, no el antiguo del gremio) y ref del
+  puzzle a `sello-del-panadero`. Verificado: 77/77 titulos unicos. No se
+  toco la cadena de iter. 6.
+- **Suite `test_historias.gd` — bloque W `_test_pesca_coleccion()` NUEVO**
+  (+67 checks): 30 carga/fuente/no-oculta de las 10 + expuestas en
+  `cadenas_disponibles()`, unicidad local de consecuencias y de capitulos,
+  6 NPC REALES + 10 objetos REALES (distintos y existentes), 2 end-to-end con
+  `ws_has` (`trofeo_de_la_marea_exhibido`, `plantas_raras_clasificadas`),
+  puente diario M23->M55 como finding medido e higiene de flags. Reparados
+  los 4 asserts de conteo (67 -> 77 x2, 68 -> 78 x2) con sus mensajes y
+  agregado "W" a `BLOQUES` (sin el, el guardian veia el piso pero no
+  nombraba el bloque abortado).
+- **Evidencia:** suite **691 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR
+  (binario real). Piso 624 -> **691 MEDIDO en verde**. Guardián EN ROJO por
+  inyeccion de RUNTIME sobre el bloque W (subscript dinamico `["titulo"]` ->
+  `Dictionary`): **EXIT 1, 2 fallos** («el bloque W NO se ejecuto» + «solo
+  625 checks (minimo 691)»); sonda borrada y suite restaurada byte-exacta
+  (sha256 baa223ed684c852126b98e5c9add9c55006d50a66389f4d5cf0c23f002924c7d).
+- **Regresiones (binario real):** M59 carga idempotente 28/0, autosave 0
+  fallos, fecha/diario/cola 45/0, slots/perfiles 41/0, carga NPC/misiones
+  63/0; M71 flujo XP 37/0; M55 diario 0 fallos + persistencia 0 fallos.
+- **Flips del 05-Checklist con cita:** L77 «Crear 4 misiones de pesca»,
+  L78 «Crear 6 misiones de coleccion` y L80 «Documentar misiones de pesca y
+  coleccion` `[ ]` -> `[x]` (10 cadenas en disco + suite bloque W;
+  documentacion en esta seccion). M23 = **79 [x] / 24 [ ] / 2 [?] = 105**
+  (prefijo de linea; Totales sincronizado). Ofrecidos a revertir.
+
+## Iter. 19 — Postgame (Log 2176, 2026-10-24, Step-5-WorkBuddy)
+
+- **Alcance:** items L129 («Crear 4 cadenas de postgame»), L132 (memorial del
+  Sello), L133 (epílogo de la aldea) y L134 (epílogo del guardián) del
+  05-Checklist — riel M23 confirmado por la directora en su 214 («riel M23
+  sigue en curso»). 03-Diseno L47 nombra las 4: reconstrucción de la plaza
+  (YA cubierta por `cadena-epilogo-plaza` del principal, L130), memorial del
+  Sello, epílogo de la aldea y epílogo del guardián (final secreto). L34
+  (historia de la plaza) sigue `[ ]` honesto: el rechazo del tipo
+  «construir» es PERSISTENTE (decisión del director, msg 153) — no se toca
+  sin orden.
+- **Dato:** `data/historias/secundarias.json` 77 -> **80 cadenas** (+1929 B
+  sobre el disco previo, puramente aditivo; +45/-0 contra HEAD, formato
+  tabs/pasos-inline preservado, LF sin BOM). Las 3 nacen `postgame:true`
+  (las filtra `cadenas_disponibles()`/`iniciar_cadena()` hasta que Historia
+  elige un final de M22, medido en el bloque X); el epílogo del guardián
+  además `oculta:true` (final secreto, patrón ocultas L38):
+  | cadena | NPC REAL (profesión medida en el .tres) | objeto REAL (por campo id) | lugar | consecuencia |
+  |---|---|---|---|---|
+  | cadena-memorial-sello | ramon_tejon (herrero) + aria_ciervo (trovadora) | piedra_caliza «Piedra Caliza» | plaza | memorial_del_sello_erguido |
+  | cadena-epilogo-aldea | pablo_pato (ceramista) + catalina_oso (cocinera) | clay «Arcilla» | senderos_del_pueblo | epilogo_de_la_aldea_contado |
+  | cadena-epilogo-guardian (oculta) | nico_gato (guardabosques) | fragmento_ancestral «Fragmento Ancestral» | acantilado | epilogo_del_guardian_cantado |
+  Verificado por campo id contra `data/items/*.tres` (efecto, no nombre de
+  archivo) y `data/villagers/*.tres` (campo `profesion`); 0 colisiones de
+  id/flag/capitulo con las 77 previas.
+- **Fallo propio medido y corregido en la 1a corrida:** el bloque X afirmaba
+  «ninguna de las 3 en disponibles sin final elegido», pero el bloque F (que
+  corre antes) deja un final elegido (su loop termina en «secreto») -> 2 de
+  las 3 SI estaban expuestas (742 checks / 1 fallo / EXIT 1). Reescrito: se
+  limpia el estado (mismo montaje que el bloque F), se mide el gate desde
+  cero y después se completa el grafo hasta `final_principal` para los
+  end-to-end. Regla: la premisa de un check de estado depende del ORDEN de
+  los bloques.
+- **Suite `test_historias.gd` — bloque X `_test_postgame_cluster()` NUEVO**
+  (+50 checks): carga/fuente/postgame de las 3, las 4 de postgame del diseño
+  en catálogo, gate de `oculta`/`postgame` medido con estado limpio,
+  unicidad local de consecuencias y de capítulos, 5 NPC REALES + 3 objetos
+  REALES, 3 end-to-end con `ws_has` (`memorial_del_sello_erguido`,
+  `epilogo_de_la_aldea_contado`, `epilogo_del_guardian_cantado`) y puente
+  diario M23->M55 como finding medido. Reparados los 4 asserts de conteo
+  (78 -> 81 x2, 77 -> 80 x1) con sus mensajes y agregado "X" a `BLOQUES`.
+- **Evidencia:** suite **742 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR
+  (binario real). Piso 691 -> **742 MEDIDO en verde**. Guardián EN ROJO por
+  inyección de RUNTIME sobre el bloque X (subscript dinámico
+  `get_cadena(...)["oculta"]` -> Variant bool): **EXIT 1, 2 fallos** («el
+  bloque X NO se ejecuto» + «solo 692 checks (minimo 742)»); sonda borrada y
+  suite restaurada byte-exacta (sha256
+  441778340f742b9f3c16e42880c62c33aa9001efdff17fe8b5866cdb5fb391ec).
+- **Regresiones (binario real):** M59 slots/perfiles 41/0, carga idempotente
+  28/0, carga NPC/misiones 63/0, fecha/diario/cola 45/0; M71 progresión
+  83/0; M55 diario perf 26/0 + persistencia 0 fallos.
+- **Flips del 05-Checklist con cita:** L129, L132, L133 y L134 `[ ]` ->
+  `[x]` (3 cadenas nuevas + la previa de la plaza = las 4 de postgame del
+  diseño; suite bloque X; documentación en esta sección). M23 = **83 [x] /
+  20 [ ] / 2 [?] = 105** (prefijo de línea; Totales sincronizado). Ofrecidos
+  a revertir.

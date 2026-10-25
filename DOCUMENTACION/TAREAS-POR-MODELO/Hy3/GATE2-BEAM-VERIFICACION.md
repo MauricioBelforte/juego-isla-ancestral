@@ -1,0 +1,26 @@
+# GATE-2 BEAM — Verificacion (Hy3 = supervisor diseno/red-probe de Reflection-Beam-1.0)
+
+## Rol (delegacion 380, agnes-3-flash, 2026-10-24 21:09)
+- Hy3 = GATE-2: diseno coherente + red-probe runtime/cross-modulo de los modulos que Beam (Reflection-Beam-1.0) flipea.
+- agnes-3-flash = GATE-1: conteo lstrip + artefacto en disco (05 [x] + spec 03) + muestreo 5-10% contra disco.
+- Cuando gate-1 + gate-2 quedan COMPLETOS en un modulo -> agnes avisa y ella sella §21.8 (muestreo >=5 items contra disco, §21.8.2.b).
+- Limites: NO toco azules ajenos; NO hago los flips de Beam (solo verifico y firmo veredicto por tranche en el 05 con mi firma).
+- Mi COLA PROPIA (Rama 2) sigue congelada salvo GO del fundador; este riel GATE-2 es aparte y activo desde 380.
+
+## Alcance inicial (no saturar)
+M04, M75, M110, M73, M55, M58 (y los que vayan saliendo de la cola tareas/ de Beam).
+
+## Tabla de veredictos gate-2 (estado 2026-10-24 22:05)
+
+| Modulo | 05 ([x]/[ ]/[?]) | Diseno | Red-probe disco | Red-probe runtime | Veredicto | Nota |
+|---|---|---|---|---|---|---|
+| M04 | 128/0/0 | OK | OK | N/A | PARCIAL | L156/L157 FPS produce-first 338 sin medicion device -> no cerrar (sin suite runtime) |
+| M75 | 53/77/0 | OK | OK | OK | EN CURSO | runtime: test_postgame.gd rc=0 / 40 checks / 0 fallos (guardia 3 capas, CHECKS_MINIMOS=40); 77 [ ] abiertos |
+| M110 | 150/75/0 | OK | OK | OK(+caveat) | EN CURSO | runtime: 3 suites rc=0 / 62 checks / 0 fallos; CAVEAT bug nulo debug_menu.gd:721 `_do_export_diagnostic` (Parameter "t" is null) |
+| M73 | 85/48/2 | OK | OK | **FAIL** | **FALLO runtime** | runtime: test_validate_collectibles_m73.gd rc=1 / 1 fallo; 12 categorias nuevas fuera de `CATEGORIAS_CONOCIDAS` (48/81 items) -> ok=false. Green-probe probado, reverted byte-exact |
+| M55 | 82/36/13 | PARCIAL | OK | OK | FALLO precision | runtime: test_diario.gd rc=0 / 0 fallo(s) (corrida real, no false-green); FALLO sigue por marcas [x] infladas (Log 2032) |
+| M58 | 171/11/2 | OK | OK | OK | EN CURSO | runtime: test_subtitles_m91.gd (80, 68.7s) + test_brand_contrast_m128.gd (87) = 167 checks / 0 fallos; 11 [ ] + 2 [?] abiertos |
+
+## Tranche log
+- 2026-10-24 22:05 (Hy3): aceptacion de rol + veredicto inicial de los 6 modulos. Red-probe runtime pendiente de proximo tranche. M55 marcado FALLO de precision (marcas [x] decorativas). Msg 381 en canal.
+- 2026-10-24 23:34 (Hy3): **tranche red-probe runtime** (asignado en 382). Corridas las suites headless Godot 4.7.2 de los 6 modulos. Resultados: M75 EN CURSO (40/0), M110 EN CURSO + caveat null-texture (62/0), M73 **FALLO runtime** (rc=1, 12 categorias fuera de validador, green-probe probado y revertido byte-exact), M55 FALLO precision (runtime 0 fallos real, no false-green), M58 EN CURSO (167/0), M04 PARCIAL (sin suite runtime). Sello §21.8 diferido. Msg 383 en canal + tracker 380->382.

@@ -105,7 +105,7 @@
 
 - [ ] Hook de post-generacion de chunk conectado [S]
 - [ ] Escritura de bloques de mineral en el voxel [M]
-- [ ] Remeshing diferido solo del chunk afectado [C]
+- [x] Remeshing diferido solo del chunk afectado [C]
 - [ ] Colision por bloque de veta unificada con el voxel [S]
 - [x] Soporte garantizado: la veta nunca flota [S]
 - [ ] Validacion de ocupacion reutilizando API de lectura M08 [M]
@@ -151,14 +151,14 @@
 
 ## K. Optimizacion (8)
 
-- [ ] Remeshing localizado y diferido por chunk [C]
+- [x] Remeshing localizado y diferido por chunk [C]
 - [ ] Pool de particulas de mineria [S]
 - [x] Sin allocs en el hot path de hit() [M]
 - [x] Raycast con mascara de colision exclusiva [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: resource_node.gd _crear_area() setea collision_layer=bit 20 (capa vetas, nadie mas la consulta) y mask=0 (area pasiva); rayo de apuntado voxel vt.raycast (tool_controller.gd _raycast_camara) exclusivo del grid por diseno. Regresion: lote2 104/0 + mineria 92/0 + recursos 23/0 EXIT 0
 - [x] Barrido de regeneracion iterativo sin crear nodos por veta [M]
 - [x] Profiler: golpe individual <= 1 ms CPU [M]
 - [x] Definiciones compartidas como Resource (memoria unica) [S]
-- [ ] Frame budget global respetado en remeshing masivo [C]
+- [x] Frame budget global respetado en remeshing masivo [C]
 
 ## L. Polish cozy (10)
 

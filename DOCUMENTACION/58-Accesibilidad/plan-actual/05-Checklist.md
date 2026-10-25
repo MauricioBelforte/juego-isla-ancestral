@@ -101,7 +101,7 @@
   · AUTOMATIZACIÓN de la guía (G-5.3-Flash-Agente 2026-10-19): scripts/qa_textos_rf26.py — scanner de strings_es.json (153 textos, 158 frases, 1 incumplimiento 0.6%: EQUIP.HINT 15 palabras — dueño de textos). Umbral OK ≥ 85%.Modo --detallado. La sección 6 (auditoría) de la guía queda automatizada.
 - [x] RF26: definir que las instrucciones clave no exijan lectura veloz [S]
 - [x] RF27: opción "Texto grande" global que escala todos los textos de UI [M]
-- [ ] RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C]
+- [x] RF27: verificar que el texto grande no desborde diálogos ni inventario (M53) [C]
 - [x] RF28: exponer interfaz/evento de lectura de texto para TTS futuro (sin implementar) [M]
 - [x] Definir que los textos del mundo (letreros) tengan alternativa en diálogo o marca visual [M] — definido (atria-dawn-s2, 2026-10-12, Log 1755): 02-Analisis.md:41 «letreros y placas deben ser opcionalmente sustituibles por diálogo redundante o marcas visuales»
 - [x] Verificar la legibilidad del texto grande con las fuentes de M88 en español (tildes, ñ) [M] — QA nuevo qa_m58_escalado.gd: cobertura de glifos ES (aeiou a-e-i-o-u con tilde, enie may/min, u con dierecis, abrir interrogacion/exclamacion) verificada en Nunito-Regular/Nunito-Bold/FredokaOne via get_supported_chars (2026-10-23 S40)
@@ -166,7 +166,7 @@
 - [x] Jugador cambia de preset gráfico con filtro activo → aplicar fallback correcto sin reset [M]
 - [ ] Mando desconectado a mitad de sesión → perfil intacto, prompts actualizados por M57 [M]
 - [x] Cambio de escala UI con diálogo abierto → el layout se reajusta sin desbordes [C]
-- [ ] Texto grande con inventario lleno (36 slots) → sin elementos cortados [C]
+- [x] Texto grande con inventario lleno (36 slots) → sin elementos cortados [C]
 - [x] Reducción de movimiento en transiciones de escena → duraciones escaladas sin saltos [C]
 - [ ] Apertura del menú de accesibilidad durante combate → pausa correcta sin pérdida de estado [M]
 - [x] Persistencia durante autosave simultáneo → escrituras atómicas sin corrupción [C]
@@ -183,8 +183,8 @@
 - [ ] Carteles de alerta con tiempo de vida y fade-out sin tween acumulados [M]
 - [x] Scale de UI aplicado una sola vez por cambio, no por frame [M]
 - [x] Consultas al perfil cacheadas cuando no hay cambios (is_dirty) [M] — implementado (step-5-kilocode, 2026-10-11, Log 1701): suite `test_perfil_m58_iter4.gd` (39 checks, 0 fallos)
-- [ ] Escaneo de interactuables para contornos solo en radio cercano al jugador [C]
-- [ ] Verificar que M58 no sume draw calls perceptibles en escenas pobladas (M61) [C]
+- [x] Escaneo de interactuables para contornos solo en radio cercano al jugador [C]
+- [x] Verificar que M58 no sume draw calls perceptibles en escenas pobladas (M61) [C]
 
 ## L. Documentación entregada (9)
 

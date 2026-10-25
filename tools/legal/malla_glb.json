@@ -1,0 +1,2282 @@
+{
+ "tolerancia": 0.001,
+ "area_min": 1e-12,
+ "eje_up": "y",
+ "y_apoyo": 0.045,
+ "tol_apoyo": 0.02,
+ "senales_eje": {
+  "y0": 3,
+  "z0": 1,
+  "ninguno": 414,
+  "y_apoyo": 66,
+  "z_apoyo": 0,
+  "mas_alto_en_y": 227,
+  "mas_alto_en_z": 191
+ },
+ "conteos": {
+  "archivos": 418,
+  "parseables": 418,
+  "con_violaciones": 368,
+  "con_avisos": 169,
+  "tris": 237385,
+  "verts": 486855,
+  "sin_categoria": 0,
+  "con_uv": 131,
+  "sin_uv": 287
+ },
+ "clases_violacion": {
+  "ESCALA_NO_UNIFORME": 95,
+  "TOPO_DEGENERADO": 4,
+  "ORIGEN_BAJO_SUELO": 285,
+  "LOD_FALTANTE": 10,
+  "UV_FUERA_RANGO": 3
+ },
+ "clases_aviso": {
+  "ESCALA_NO_APLICADA": 98,
+  "RF4_EXCEDIDO(cat inferida tool)": 6,
+  "RF4_EXCEDIDO(cat inferida prop)": 49,
+  "SIN_UV": 31,
+  "ORIGEN_SIN_CONVENCION": 16,
+  "RF4_EXCEDIDO(cat inferida furn)": 2,
+  "RF4_EXCEDIDO(cat inferida veg)": 1
+ },
+ "violaciones": [
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/13-Herramientas_antorcha_mano.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/13-Herramientas_pico_hierro.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/13-Herramientas_pico_piedra.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_cristal_ancestral.glb",
+   "detalle": [
+    "TOPO_DEGENERADO: 88 triangulo(s) de area ~0",
+    "ORIGEN_BAJO_SUELO: min_y = -0.575000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_nido_cocos.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 32 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_piedra_afilar.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_roca_comun.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.234403 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_roca_pedernal.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.649228 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_tronco_caido.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.003640 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_veta_cobre.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.092034 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_veta_hierro.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.729155 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/15-Recursos_veta_oro.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -1.415335 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_azada.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_bowl_barro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.049000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_frasco_agua.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.217000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_gema_tallada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.180000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_hacha_hierro.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_hacha_piedra.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 2 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.037412 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_lingote_metal.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.019000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_machete.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_martillo.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/16-Crafting_tablon_madera.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 6 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_cama_basica.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 15 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_cama_doble.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 14 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_casa_casona.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 27 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -3.315000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_casa_choza_ampliada.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 15 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -3.375000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_casa_completa_ejemplo.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 14 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_casa_mediana.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 51 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -5.245000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_comoda.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 10 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.110000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_cuadro_ancestral.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 5 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_alfombra_floral.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 4 nodo(s) con escala anisotropa > 0.001",
+    "LOD_FALTANTE: 1296 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_alfombra_tejida.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 4 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_banco_exterior.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_baul_madera.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_cofre_perlas.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_concha_decor.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 13 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_cuadro_floral.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 5 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_espejo_marco.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 2 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_estatuilla_ave.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 7 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_farol_coral.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_farol_mesa.glb",
+   "detalle": [
+    "LOD_FALTANTE: 1316 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_fuente_chica.glb",
+   "detalle": [
+    "LOD_FALTANTE: 1356 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_guirnalda.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001",
+    "LOD_FALTANTE: 1324 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_idol_piedra.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 6 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_jarron_agua.glb",
+   "detalle": [
+    "LOD_FALTANTE: 1268 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_lampara_pie.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_lampara_techo.glb",
+   "detalle": [
+    "LOD_FALTANTE: 5824 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_maceta_flor.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 10 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_maceta_helecho.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 32 nodo(s) con escala anisotropa > 0.001",
+    "LOD_FALTANTE: 1620 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_maceta_palmera.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 15 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_mascara_ancestral.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 8 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_mecedora.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 2 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.080000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_olla_barro.glb",
+   "detalle": [
+    "LOD_FALTANTE: 2508 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_plato_frutas.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_reloj_pared.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 2 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_repisa_pared.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 4 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_totem_chico.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 12 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_vasija_ritual.glb",
+   "detalle": [
+    "LOD_FALTANTE: 3556 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_decor_vela_plato.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 2 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_escalera_mano.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 7 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_estanteria.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 10 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_estufa_lena.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 9 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_maceta_interior.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.666867 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_mesa_madera.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 9 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_nevera_rustica.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 7 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_pared_madera.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 7 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_pared_puerta.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 11 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_pared_ventana.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 13 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_piso_madera.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 8 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_puerta_articulada.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 8 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_silla_madera.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 11 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_sillon.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 10 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_techo_dos_aguas.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 13 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_techo_paja.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 13 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_velador.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 8 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_ventana_marco.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 9 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/18-Casas_zocalo_piedra.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 8 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/19-NPCs_cabeza_alargada.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/19-NPCs_cabeza_cuadrada.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/19-NPCs_cabeza_redonda.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/19-NPCs_npc_base.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/25-Ruinas-Templos_altar_ritual.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.565000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/25-Ruinas-Templos_antorcha_pared.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.346000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/25-Ruinas-Templos_arco_entrada_templo.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 13 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/25-Ruinas-Templos_cofre_ancestral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.581561 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/25-Ruinas-Templos_estatua_ancestral_erosionada.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 11 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/25-Ruinas-Templos_losa_grabado.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.055000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/25-Ruinas-Templos_puente_cuerda.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.355000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/25-Ruinas-Templos_puerta_templo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.615000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/27-Islas-Ubicaciones_campamento_abandonado.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/27-Islas-Ubicaciones_cascada.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 2 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/27-Islas-Ubicaciones_cementerio_barcos.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 7 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/27-Islas-Ubicaciones_faro_viejo.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_bananero.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.272770 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_canaveral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.366809 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_compostera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.382122 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_cultivo_brote.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.109807 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_cultivo_creciendo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.338108 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_cultivo_lista.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.549305 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_cultivo_madura.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.480830 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_espantapajaros.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 9 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_regadera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.323000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_tierra_arada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.173758 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/33-Agricultura_tierra_regada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.163758 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/35-Mineria_carretilla_minero.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 11 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/36-Fauna_cangrejo_playa.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/36-Fauna_gaviota.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 5 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/36-Fauna_jabali.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 4 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/36-Fauna_nutria_ribera_v2.glb",
+   "detalle": [
+    "TOPO_DEGENERADO: 32 triangulo(s) de area ~0",
+    "LOD_FALTANTE: 3158 tris > 500 y no hay LOD1/LOD2"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/36-Fauna_tortuga_marina.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 7 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/40-Infraestructura_bote_pesca.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 2 nodo(s) con escala anisotropa > 0.001",
+    "UV_FUERA_RANGO: 12 coordenada(s) UV fuera de [0,1]",
+    "ORIGEN_BAJO_SUELO: min_y = -0.555000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/40-Infraestructura_cartel_indicador.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 5 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/40-Infraestructura_farola_fuego.glb",
+   "detalle": [
+    "UV_FUERA_RANGO: 12 coordenada(s) UV fuera de [0,1]",
+    "ORIGEN_BAJO_SUELO: min_y = -1.555000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/40-Infraestructura_muelle_madera.glb",
+   "detalle": [
+    "UV_FUERA_RANGO: 24 coordenada(s) UV fuera de [0,1]",
+    "ORIGEN_BAJO_SUELO: min_y = -1.380000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/40-Infraestructura_pozo_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.991000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/40-Infraestructura_puente_cuerda_colgante.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 7 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/40-Infraestructura_puente_troncos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.980000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/45-Arte3D_anillo_piedras_ritual.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.575000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/45-Arte3D_barco_hundido.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 4 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/45-Arte3D_caveira_criatura.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 2 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/45-Arte3D_coral_abanico.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/45-Arte3D_estrella_mar.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 6 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.175200 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/45-Arte3D_monolito_glifos.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 18 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -1.793000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/45-Arte3D_totem_isla.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 3 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -1.895000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/45-Arte3D_vieira_playa.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.161000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_arbol_frutal.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.871500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_arbusto_floral.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_canas_bambu.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.439999 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_flor_isla.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.149500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_helecho_chico.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.114457 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_helecho_gigante.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 80 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.428532 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_hierba_alta.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.371411 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_hongo_luminoso.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.032500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_liana_colgante.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.835000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_musgo_roca.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.376500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_palmera.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -4.015000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_palmera_inclinada.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -3.715000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/50-Vegetacion_palmera_joven.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -2.225000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/70-Interacciones_boton_piso.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.147000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/70-Interacciones_cofre_pequeno.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.455000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/70-Interacciones_palanca_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.525507 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/70-Interacciones_puerta_corrediza_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.225000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/alta/70-Interacciones_valvula_manivela.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.635000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_cristal_ancestral.glb",
+   "detalle": [
+    "TOPO_DEGENERADO: 18 triangulo(s) de area ~0",
+    "ORIGEN_BAJO_SUELO: min_y = -0.665000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_monton_ramas.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.178848 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_nido_cocos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.888323 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_piedra_afilar.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.085175 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_roca_comun.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.475682 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_roca_pedernal.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.664795 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_tronco_caido.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.957130 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_veta_cobre.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.148653 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_veta_hierro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.135298 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/15-Recursos_veta_oro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.797098 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_azada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.097000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_bowl_barro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.139000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_cuerda_enrollada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.155000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_frasco_agua.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.307448 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_gema_tallada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.270000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_hacha_hierro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.126429 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_hacha_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.167000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_lingote_metal.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.105000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_machete.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.082500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_martillo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.170000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/16-Crafting_tablon_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.250500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_alfombra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.083000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_cama_basica.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.900000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_cama_doble.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.945000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_casa_casona.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.570000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_casa_choza_ampliada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.205000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_casa_completa_ejemplo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.785000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_casa_mediana.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -5.315000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_comoda.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.838333 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_cuadro_ancestral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.230000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_escalera_mano.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.845000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_estanteria.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_estufa_lena.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.905000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_lampara_pie.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.595000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_maceta_interior.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.666732 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_mesa_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.825000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_nevera_rustica.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.185000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_pared_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_pared_puerta.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_pared_ventana.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_piso_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.105000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_puerta_articulada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.045000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_silla_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.965000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_sillon.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.925000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_techo_dos_aguas.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.485000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_techo_paja.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.485000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_velador.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.760000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_ventana_marco.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.145000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/18-Casas_zocalo_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.365000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/25-Ruinas-Templos_altar_ritual.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.735000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/25-Ruinas-Templos_antorcha_pared.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.467800 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/25-Ruinas-Templos_arco_entrada_templo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.772500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/25-Ruinas-Templos_cofre_ancestral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.673000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/25-Ruinas-Templos_estatua_ancestral_erosionada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.995000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/25-Ruinas-Templos_losa_grabado.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.190200 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/25-Ruinas-Templos_puente_cuerda.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.445000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/25-Ruinas-Templos_puerta_templo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.925000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/27-Islas-Ubicaciones_campamento_abandonado.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.445000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/27-Islas-Ubicaciones_cascada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.050385 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/27-Islas-Ubicaciones_cementerio_barcos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.786373 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/27-Islas-Ubicaciones_faro_viejo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -8.046544 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/27-Islas-Ubicaciones_volcan.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -5.745000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_bananero.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.498035 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_canaveral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.456810 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_compostera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.472122 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_cultivo_brote.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.197889 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_cultivo_creciendo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.426172 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_cultivo_lista.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.637336 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_cultivo_madura.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.568861 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_espantapajaros.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.345000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_regadera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.413000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_tierra_arada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.173758 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/33-Agricultura_tierra_regada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.163758 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/35-Mineria_carretilla_minero.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.725000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/40-Infraestructura_bote_pesca.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/40-Infraestructura_cartel_indicador.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.445000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/40-Infraestructura_farola_fuego.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/40-Infraestructura_muelle_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.465000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/40-Infraestructura_pozo_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.067000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/40-Infraestructura_puente_cuerda_colgante.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.975332 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/40-Infraestructura_puente_troncos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.980000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_ancla_naufragio.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.489238 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_anillo_piedras_ritual.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.664862 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_barco_hundido.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.887621 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_caveira_criatura.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.885000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_concha_mar.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.330389 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_coral_abanico.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.285000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_estrella_mar.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 1 nodo(s) con escala anisotropa > 0.001",
+    "ORIGEN_BAJO_SUELO: min_y = -0.345000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_jarrones_urnas.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.945000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_monolito_glifos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.907000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_totem_isla.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.245000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/45-Arte3D_vieira_playa.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.199000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_arbol_frutal.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.916917 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_arbusto_floral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.037501 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_arbusto_redondo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.717694 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_canas_bambu.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.649285 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_flor_isla.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.228137 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_helecho_chico.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.345000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_helecho_gigante.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.445000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_hierba_alta.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.461425 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_hongo_luminoso.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.435995 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_liana_colgante.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.925000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_musgo_roca.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.459418 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_palmera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.667068 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_palmera_inclinada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.300113 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_palmera_joven.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.580891 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/50-Vegetacion_raices_expuestas.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.285000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/70-Interacciones_boton_piso.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.237510 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/70-Interacciones_cofre_pequeno.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.545000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/70-Interacciones_palanca_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.615507 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/70-Interacciones_puerta_corrediza_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.315000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/baja/70-Interacciones_valvula_manivela.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.725000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_cristal_ancestral.glb",
+   "detalle": [
+    "TOPO_DEGENERADO: 72 triangulo(s) de area ~0",
+    "ORIGEN_BAJO_SUELO: min_y = -0.665000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_monton_ramas.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.178551 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_nido_cocos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.874448 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_piedra_afilar.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.085848 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_roca_comun.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.497267 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_roca_pedernal.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.664721 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_tronco_caido.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.958620 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_veta_cobre.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.144222 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_veta_hierro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.124345 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/15-Recursos_veta_oro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.786671 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_azada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.100000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_bowl_barro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.139000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_cuerda_enrollada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.155000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_frasco_agua.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.307000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_gema_tallada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.270000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_hacha_hierro.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.126429 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_hacha_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.167000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_lingote_metal.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.109000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_machete.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.087500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_martillo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.170000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/16-Crafting_tablon_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.250500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_alfombra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.083000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_cama_basica.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.900000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_cama_doble.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.945000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_casa_casona.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.570000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_casa_choza_ampliada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.205000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_casa_completa_ejemplo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.785000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_casa_mediana.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -5.315000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_comoda.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.855000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_cuadro_ancestral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.230000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_escalera_mano.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.845000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_estanteria.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_estufa_lena.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.905000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_lampara_pie.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.595000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_maceta_interior.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.666867 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_mesa_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.825000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_nevera_rustica.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.185000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_pared_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_pared_puerta.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_pared_ventana.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_piso_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.105000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_puerta_articulada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.045000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_silla_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.965000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_sillon.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.925000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_techo_dos_aguas.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.485000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_techo_paja.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.485000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_velador.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.760000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_ventana_marco.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.145000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/18-Casas_zocalo_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.365000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_altar_ritual.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.734830 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_antorcha_pared.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.467800 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_arco_entrada_templo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.772500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_cofre_ancestral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.672149 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_estatua_ancestral_erosionada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.995000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_losa_grabado.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.209400 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_puente_cuerda.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.445000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_puerta_templo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.925081 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_campamento_abandonado.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.445000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_cascada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.067711 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_cementerio_barcos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.787776 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_faro_viejo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -8.045000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_volcan.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -5.745000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_bananero.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.498804 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_canaveral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.456809 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_compostera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.472122 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_cultivo_brote.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.199807 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_cultivo_creciendo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.428108 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_cultivo_lista.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.639305 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_cultivo_madura.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.570830 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_espantapajaros.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.345000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_regadera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.413000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_tierra_arada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.173758 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/33-Agricultura_tierra_regada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.163758 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/35-Mineria_carretilla_minero.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.725000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/40-Infraestructura_bote_pesca.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.645000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/40-Infraestructura_cartel_indicador.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.445000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/40-Infraestructura_farola_fuego.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.644437 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/40-Infraestructura_muelle_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.470234 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/40-Infraestructura_pozo_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.081000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/40-Infraestructura_puente_cuerda_colgante.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.975332 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/40-Infraestructura_puente_troncos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.980000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_ancla_naufragio.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.505000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_anillo_piedras_ritual.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.665000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_barco_hundido.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.887621 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_caveira_criatura.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.885000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_concha_mar.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.328032 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_coral_abanico.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.285000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_estrella_mar.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.265200 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_jarrones_urnas.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.945000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_jugador_voxel.glb",
+   "detalle": [
+    "ESCALA_NO_UNIFORME: 13 nodo(s) con escala anisotropa > 0.001"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_monolito_glifos.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.906886 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_totem_isla.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.247777 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/45-Arte3D_vieira_playa.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.199000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_arbol_frutal.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -3.925000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_arbusto_floral.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.042505 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_arbusto_redondo.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.724296 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_canas_bambu.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.698882 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_flor_isla.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.239500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_helecho_chico.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.345000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_helecho_gigante.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.445000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_hierba_alta.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.461411 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_hongo_luminoso.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.397500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_liana_colgante.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -1.925000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_musgo_roca.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.466500 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_palmera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.663966 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_palmera_inclinada.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -4.296987 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_palmera_joven.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.578478 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/50-Vegetacion_raices_expuestas.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.285000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/70-Interacciones_boton_piso.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.237000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/70-Interacciones_cofre_pequeno.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.545000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/70-Interacciones_palanca_madera.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.615507 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/70-Interacciones_puerta_corrediza_piedra.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -2.315000 < 0 (el prop se hunde)"
+   ]
+  },
+  {
+   "archivo": "game/isla-ancestral/assets/3d/media/70-Interacciones_valvula_manivela.glb",
+   "detalle": [
+    "ORIGEN_BAJO_SUELO: min_y = -0.725000 < 0 (el prop se hunde)"
+   ]
+  }
+ ]
+}

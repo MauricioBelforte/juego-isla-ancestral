@@ -1,85 +1,85 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 03-Diseno.md — Módulo 31: Ciclo Día/Noche
+# 03-Diseno.md â€” MÃ³dulo 31: Ciclo DÃ­a/Noche
 
 # 1. Arquitectura
 
 ```
-GameClock (M29) ── señal hora_cambio(min) ──► DayNightCycle.gd (M31)
-                                                │  (serie, proceso por minuto de juego)
-            ┌───────────────────────────────────┼──────────────────────────────────────┐
-            ▼                                   ▼                                      ▼
+GameClock (M29) â”€â”€ seÃ±al hora_cambio(min) â”€â”€â–º DayNightCycle.gd (M31)
+                                                â”‚  (serie, proceso por minuto de juego)
+            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+            â–¼                                   â–¼                                      â–¼
    WorldEnvironment                    DirectionalLight3D                       Estrellas/Luna
    sky + ambiente + fog                Sol (rot + color + int)                  Nodos skybox
-            │                                   │                                      │
-            ▼                                   ▼                                      ▼
-   FASES (franjas discretas) ──► señales a consumidores (M19, M36, M41, M42, M15, M34, M39, M17)
-            │
-            ▼
-   Luces artificiales (faroles/refugio) — autoswitch por umbral de luz
+            â”‚                                   â”‚                                      â”‚
+            â–¼                                   â–¼                                      â–¼
+   FASES (franjas discretas) â”€â”€â–º seÃ±ales a consumidores (M19, M36, M41, M42, M15, M34, M39, M17)
+            â”‚
+            â–¼
+   Luces artificiales (faroles/refugio) â€” autoswitch por umbral de luz
 ```
 
 # 2. Cronograma de fases (compatible con M29)
 
 | Fase | Horario | Luz sol | Ambiente (piso) | Comportamiento |
 |---|---|---|---|---|
-| ALBA | 05:30-06:59 | 0.2→0.5 | 0.35 | Transición; pájaros |
-| DÍA | 07:00-18:59 | 0.5→1.0→0.6 | 1.0 | Actividades/tiendas abiertas |
-| ATARDECER | 19:00-19:59 | 0.6→0.2 | 0.5 | Luces se encienden (umbral 0.35) |
+| ALBA | 05:30-06:59 | 0.2â†’0.5 | 0.35 | TransiciÃ³n; pÃ¡jaros |
+| DÃA | 07:00-18:59 | 0.5â†’1.0â†’0.6 | 1.0 | Actividades/tiendas abiertas |
+| ATARDECER | 19:00-19:59 | 0.6â†’0.2 | 0.5 | Luces se encienden (umbral 0.35) |
 | NOCHE | 20:00-22:59 | luna 0.15 | 0.22 | CSIRO: fauna nocturna, retirada NPC |
-| NOCHE PROFUNDA | 23:00-05:29 | luna 0.12 | 0.15 (piso mínimo) | NPCs duermen; nocturnos activos |
+| NOCHE PROFUNDA | 23:00-05:29 | luna 0.12 | 0.15 (piso mÃ­nimo) | NPCs duermen; nocturnos activos |
 
-> Las **señales de fase** salen SOLO en el cambio de franja (no cada minuto): `EventBus.time.fase_cambio(FASE)`.
+> Las **seÃ±ales de fase** salen SOLO en el cambio de franja (no cada minuto): `EventBus.time.fase_cambio(FASE)`.
 
 # 3. Componentes de escena
 
 | Nodo | Recursos | Detalle |
 |---|---|---|
-| `DirLightSol` | DirectionalLight3D | shadow: cascades 2, plazo ~30 m, PCF suave; energía por curva |
-| `DirLightLuna` | DirectionalLight3D | sin sombras; energía 0.12-0.2; color 7500K |
-| `Sky` | ProceduralSkyMaterial | gradiente por hora (24 puntos), energía 0.18-1.0, estrellas alpha |
+| `DirLightSol` | DirectionalLight3D | shadow: cascades 2, plazo ~30 m, PCF suave; energÃ­a por curva |
+| `DirLightLuna` | DirectionalLight3D | sin sombras; energÃ­a 0.12-0.2; color 7500K |
+| `Sky` | ProceduralSkyMaterial | gradiente por hora (24 puntos), energÃ­a 0.18-1.0, estrellas alpha |
 | `Luna` | MeshInstance3D (esfera) + textura fases | sigue el arco opuesto al sol |
 | `Nubes_v2D` | Nodo velo 2D en far plane | drift lento (0.002/s), densidad estacional |
-| `Fog` | FogVolume ligero | densidad 0.08-0.25 por estación/hora |
+| `Fog` | FogVolume ligero | densidad 0.08-0.25 por estaciÃ³n/hora |
 | `Faroles[]` | prefab farol (omni 3200K, r 8 m) | autoswitch por `umbral_luz` |
-| `Estrellas` | canvas procedural (M45) | alpha 0→1 entre 20:00 y 22:00 |
+| `Estrellas` | canvas procedural (M45) | alpha 0â†’1 entre 20:00 y 22:00 |
 
-# 4. Curvas de iluminación (concepto de datos)
+# 4. Curvas de iluminaciÃ³n (concepto de datos)
 
-- `data/light/day_curve.tres`: 24 puntos (hora → energía sol + color)
-- `data/light/sky_curve.tres`: 24 puntos (hora → zenith/horizon color + energía cielo)
-- `data/light/season_mod.tres`: 4 multiplicadores por estación (M29) aplicados a ambas curvas
+- `data/light/day_curve.tres`: 24 puntos (hora â†’ energÃ­a sol + color)
+- `data/light/sky_curve.tres`: 24 puntos (hora â†’ zenith/horizon color + energÃ­a cielo)
+- `data/light/season_mod.tres`: 4 multiplicadores por estaciÃ³n (M29) aplicados a ambas curvas
 - `data/light/fase_umbral.tres`: umbrales de fase (consignados en el cronograma)
 
-Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máximo paso por minuto de juego predefinido).
+Todos los valores tweenables; ningÃºn punto de la curva cambia "de golpe" (mÃ¡ximo paso por minuto de juego predefinido).
 
 # 5. Contrato con consumidores (API)
 
-| Consumidor | Señal/consulta | Uso |
+| Consumidor | SeÃ±al/consulta | Uso |
 |---|---|---|
 | M19 NPC | `fase_cambio(FASE)` + `get_fase()` | rutina de la franja |
 | M36 Fauna | `fase_cambio(FASE)` | spawner diurno/nocturno |
-| M41 Música | `fase_cambio(FASE)` | variante + crossfade |
+| M41 MÃºsica | `fase_cambio(FASE)` | variante + crossfade |
 | M42 Sonido | `fase_cambio(FASE)` | banco diurno/nocturno |
 | M15 Recursos | `fase_cambio(FASE)` | spawn condicional (raro nocturno) |
 | M34/M39 | `fase_cambio(FASE)` | cierre de tiendas, pesca |
-| M17 Construcción | `fase_cambio(FASE)` | faroles requiren red eléctrica? NO en v1 (autoswitch tiempo) — nota M40 |
-| M13 Linterna | `get_fase()` | sugirir encendido automático opcional |
-| M12 Minimapa | — | no depende de luz (sin cambio) |
+| M17 ConstrucciÃ³n | `fase_cambio(FASE)` | faroles requiren red elÃ©ctrica? NO en v1 (autoswitch tiempo) â€” nota M40 |
+| M13 Linterna | `get_fase()` | sugirir encendido automÃ¡tico opcional |
+| M12 Minimapa | â€” | no depende de luz (sin cambio) |
 
 # 6. Eventos y secretos nocturnos
 
-- **Lluvia de estrellas:** días 10 y 25 del mes (M29) 22:00-23:30; partículas caída + TTS "podés pedir un deseo" (M55 diario); jamás con tormenta (M32 valida).
-- **Lince de luna:** 1 fijo por mes (día 15 tras luna llena), aparece en Claro del Bosque (M09); interacción "observar" (regala esporas) — siempre opcional.
-- **Flora brillante:** en Senda de las Luciérnagas (POI M09); visible 21:00-05:00; cosechable (M33/M15) con recompensa x2 vs día (único bono horario permitido).
+- **Lluvia de estrellas:** dÃ­as 10 y 25 del mes (M29) 22:00-23:30; partÃ­culas caÃ­da + TTS "podÃ©s pedir un deseo" (M55 diario); jamÃ¡s con tormenta (M32 valida).
+- **Lince de luna:** 1 fijo por mes (dÃ­a 15 tras luna llena), aparece en Claro del Bosque (M09); interacciÃ³n "observar" (regala esporas) â€” siempre opcional.
+- **Flora brillante:** en Senda de las LuciÃ©rnagas (POI M09); visible 21:00-05:00; cosechable (M33/M15) con recompensa x2 vs dÃ­a (Ãºnico bono horario permitido).
 - **Murales luminosos (ruinas M25):** solo visibles de noche; lore (M148); sin puzzle obligatorio nocturno.
 
 # 7. Anti-oscuridad (regla de oro)
 
 1. Piso de ambiente nocturno **0.15 LDR** (post-tonemap).
 2. Linterna del jugador (M13): rango 12 m, suave, sin sombras parpadeantes.
-3. Opción M58 "Noche clara": piso 0.35.
+3. OpciÃ³n M58 "Noche clara": piso 0.35.
 4. Prohibido: negro puro en ambiente, flash total oscuridad en transiciones.
 5. QA M114: checklist visual nocturno en todas las zonas (nunca "no veo nada").
 
@@ -102,7 +102,7 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 
 # Niebla (matinal otonio, bruma verano, densa invierno, nocturna 0.25)
 
-    **Peso de particulas de nieve** (Beam 419, restaurado por el director tras el dedup accidental): peso = densidad_nieve x area_cubierta x factor_viento — coherente con M52 (particulas) y M32 (clima).- Spec: FogVolume ligero (<=120 m) con densidad estacional: matinal otonio, bruma verano, densa invierno, nocturna 0.25.
+    **Peso de particulas de nieve** (Beam 419, restaurado por el director tras el dedup accidental): peso = densidad_nieve x area_cubierta x factor_viento â€” coherente con M52 (particulas) y M32 (clima).- Spec: FogVolume ligero (<=120 m) con densidad estacional: matinal otonio, bruma verano, densa invierno, nocturna 0.25.
 - Coherente con M49 (iluminacion) y M29 (calendario). fog_curve.tres data por hora EXISTE.
 
 # Flor luminica + cristales estelares nocturnos (M15)
@@ -115,7 +115,7 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 
 # Spawn de recursos nocturnos (Beam 424)
 - Spec: spawn APAGADO por defecto de noche salvo recurso-opcional: frutas nocturnas + hongos luminicos (opcional que vale la pena de noche; NUNCA critico para progresar).
-- Coherente con M31 ciclo (día activo / noche recompensa opcional) y M159 (items).
+- Coherente con M31 ciclo (dÃ­a activo / noche recompensa opcional) y M159 (items).
 
 # Eventos nocturnos (Beam 424)
 - LLuvia de estrellas: dias 10 y 25 del calendario M29, windows 22:00-02:00 del juego.
@@ -125,4 +125,45 @@ Todos los valores tweenables; ningún punto de la curva cambia "de golpe" (máxi
 - Flora brillante (glow mushrooms cluster) + murales de lore que SOLO son visibles de noche (emisivo nocturno).
 - Coherente con M59 (secretos) y M162 (lore de dialogos contextuales nocturnos).
 
-— ADENDA de restauración (director 23oct 23:59): las 3 subsecciones fueron escritas por Beam (424, tranche 5) y perdidas por el dedup accidental del director (mi script las confundio con duplicados); restauradas desde mi registro, con la misma autoria. Los items 4-5 de esa tranche (Luna esferica / Nubes velo 2D) NO se duplican aqui: ya existen en Luna/Nubes arriba (mismo alcance).
+â€” ADENDA de restauraciÃ³n (director 23oct 23:59): las 3 subsecciones fueron escritas por Beam (424, tranche 5) y perdidas por el dedup accidental del director (mi script las confundio con duplicados); restauradas desde mi registro, con la misma autoria. Los items 4-5 de esa tranche (Luna esferica / Nubes velo 2D) NO se duplican aqui: ya existen en Luna/Nubes arriba (mismo alcance).
+
+### Niebla (FogVolume ligero) (Beam 473)
+- Spec: data fog_curve.tres define curvas de niebla por hora. M31 consume la curva y configura un FogVolume ligero en la escena. M18/M45 proveen el nodo; M31 provee los valores (densidad por hora/estación). Coherente con M18 (iluminación) y M45 (shaders).
+
+### Prefab de farol con omni 3200K (Beam 473)
+- Spec: prefab de farol con luz omni a 3200K (temperatura cálida). M18/M45 proveen el asset; M31 define la temperatura y el rango. Coherente con M18 (iluminación) y M45 (shaders).
+### Lluvia de estrellas (días 10 y 25, 22:00-23:30) (Beam 476)
+- Spec: fase_umbral.json §estrellas documenta la ventana. El evento se dispara vía M74 (calendario) en los días 10 y 25, entre 22:00 y 23:30. M31 expone es_lluvia_de_estrellas() -> bool consultado por M74 y M52. Coherente con M74 (eventos) y M29 (tiempo).
+
+### Partículas de estrellas fugaces (Beam 476)
+- Spec: M52 consume el flag de lluvia de estrellas para instanciar partículas de estrellas fugaces. M31 provee el flag y la ventana horaria; la implementación VFX es de M52. Coherente con M52 (partículas).
+
+### Diario registra deseo de estrellas (Beam 476)
+- Spec: M55 (diario) registra un "deseo" cuando el jugador observa la lluvia de estrellas. M31 emite lluvia_de_estrellas_observada (señal) consumida por M55. Coherente con M55 (diario) y M148 (lore).
+
+### TTS/texto accesible en eventos (Beam 476)
+- Spec: los eventos nocturnos (lluvia de estrellas, murales) emiten texto accesible consumido por M58 (TTS/accesibilidad). M31 provee los textos localizables (M86); M58 los narra. Coherente con M58 (accesibilidad) y M86 (i18n).
+
+### Faroles cada 40 m en poblado (Beam 476)
+- Spec: regla de espaciado de faroles en el poblado: 1 cada 40 m. M18/M45 proveen el prefab; M31 define el espaciado y el umbral de autoswitch (0.35). Coherente con M18 (iluminación) y M45 (shaders).
+
+### Minimapa operable de noche (Beam 476)
+- Spec: el minimapa (M12) debe ser operable de noche (sin depender de luz). M31 expone es_de_dia() -> bool y 
+ivel_oscuro() -> float para que M12 adapte el contraste. Coherente con M12 (minimapa).
+
+### 1 draw call de nubes (Beam 476)
+- Spec: si se implementan nubes, deben renderizarse en 1 draw call (M61). M31 define la regla; la implementación es del dueño escénico (M18/M45). Coherente con M61 (rendimiento) y M18 (iluminación).
+
+### Test: umbral farol antes/después (Beam 476)
+- Spec: test que verifica el autoswitch del farol (encendido/apagado) según el umbral 0.35 de nivel de luz. Se escribirá junto con la feature (M18/M45). M31 provee el umbral y el test de referencia. Coherente con M18 (iluminación) y M112 (testing).
+### Prefab de farol (omni 3200K, r 8 m, autoswitch 0.35) (Beam 477)
+- Spec: prefab de farol con luz omni a 3200K, radio 8 m, autoswitch por umbral 0.35 de nivel de luz. M18/M45 proveen el asset y el autoswitch; M31 define el umbral y la temperatura. Coherente con M18 (iluminación) y M45 (shaders).
+
+### Faroles cada 40 m en poblado (M18) (Beam 477)
+- Spec: regla de espaciado de faroles en el poblado: 1 cada 40 m. M18 provee el prefab; M31 define el espaciado. Coherente con M18 (iluminación).
+
+### Sincronización lluvia de estrellas con M52 (Beam 477)
+- Spec: M52 sincroniza las partículas de estrellas fugaces con la ventana de lluvia (días 10/25, 22:00-23:30). M31 expone el flag es_lluvia_de_estrellas() y la ventana; M52 consume. Coherente con M52 (partículas) y M74 (eventos).
+
+### Flora brillante con bonus x2 (M15) (Beam 477)
+- Spec: flora brillante otorga bonus x2 de noche (único bonus horario). M15 consume el hook es_de_dia() (M31) para aplicar el bonus en la Senda de las Luciérnagas. Coherente con M15 (recursos) y M31 (ciclo).

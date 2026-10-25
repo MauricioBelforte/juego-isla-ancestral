@@ -789,13 +789,13 @@ M104, M88, M160.
 146. - [x] [23] Documentar cadenas y misiones de exploración [S] — Step-5-WorkBuddy 2026-10-24 (iter. 15, Log 2166): documentado en 04-Codigo.md §Iter. 15 (las 8 misiones con NPC/objetos REALES, flags de consecuencia, cobertura de suite y la interpretación declarada de «cronitar ruinas» = fechar las ruinas, 02-Analisis L20). <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 147. - [x] [23] Crear 6 misiones de construcción (puentes, cofradía, plaza, senderos, kiosko, jardín) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md --> **[x] HECHO 2026-10-24 (Step-5-WorkBuddy, iter. 16, Log 2169, msg 204):** los 6 temas con cadena en data/historias/secundarias.json — cofradía/jardines (iter. 6), puente (iter. 7, tema de reparación, consecuencia puente_cruzable) y plaza/senderos/kiosko (3 cadenas que habían aparecido a las 04:04 por corrida cortada, RE-VERIFICADAS: NPC REALES bruno_sapo/nico_gato/pablo_pato de data/villagers/ y objetos REALES OBJ-ITE-002 "Piedra"/gravel "Grava"/OBJ-ITE-001 "Madera" de data/items/ por campo id). Suite test_historias.gd: 6 asserts de conteo reparados (la suite estaba ROJA 6 fallos/543/EXIT 1 con el dato nuevo) + bloque U nuevo = 580 checks / 0 fallos / EXIT 0 x3 + guardián EN ROJO por inyección de runtime (EXIT 1, 544 checks, 2 fallos). L70 (puente, M28) y L73 (compuesta con agricultura) siguen [ ]. M23 = 74/29/2 = 105.
 148. - [ ] [23] Definir la reconstrucción del puente (M28) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-149. - [ ] [23] Crear 5 misiones de agricultura (invernadero, cruces, variantes) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+149. - [x] [23] Crear 5 misiones de agricultura (invernadero, cruces, variantes) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md --> (Step-5 2026-10-24, iter. 17, Log 2172: 5 cadenas en disco, 62 -> 67; suite bloque V 624/0 x3)
 150. - [ ] [23] Definir variantes estacionales de agricultura (M32) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-151. - [ ] [23] Documentar misiones de construcción y agricultura [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-152. - [ ] [23] Crear 4 misiones de pesca (peces-trofeo, documentación y suelta) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-153. - [ ] [23] Crear 6 misiones de colección (murales, glifos, sellos, minerales, peces, plantas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+151. - [x] [23] Documentar misiones de construcción y agricultura [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md --> (Step-5 2026-10-24, iter. 17, Log 2172: 04-Codigo sec. Iter. 16 + Iter. 17)
+152. - [x] [23] Crear 4 misiones de pesca (peces-trofeo, documentación y suelta) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md --> **[x] HECHO 2026-10-24 (Step-5-WorkBuddy, iter. 18, Log 2173, msg 213):** 4 cadenas en data/historias/secundarias.json — cadena-pesca-trofeos (finneas_zorro «pescador» + OBJ-HER-011 «Caña de oro»), cadena-pesca-documentacion (sofia_buho «bibliotecaria» + OBJ-ART-002 «Pergamino místico»), cadena-pesca-suelta (teo_conejo «herbolario» + OBJ-HER-010 «Caña mejorada»), cadena-pesca-nocturna (extensión declarada; finneas_zorro + OBJ-LUZ-012 «Linterna»). NPC REALES de data/villagers/ (profesiones medidas en los .tres) y objetos REALES de data/items/ por campo id. 03-Diseno L42 nombra 3 temas -> 3 nombrados + 1 de extensión declarada. Suite test_historias.gd bloque W: 691 checks / 0 fallos / EXIT 0 x3 (re-verificada hoy) + guardián EN ROJO por inyección de runtime.
+153. - [x] [23] Crear 6 misiones de colección (murales, glifos, sellos, minerales, peces, plantas) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md --> **[x] HECHO 2026-10-24 (Step-5-WorkBuddy, iter. 18, Log 2173, msg 213):** las 6 cadenas del cluster (misma tanda que pesca, 67 -> 77): cadena-coleccion-murales (luna_zorra «artesana» + OBJ-CUA-010 «Obra maestra»), cadena-coleccion-glifos (sofia_buho + OBJ-ART-001 «Estatuilla antigua»), cadena-coleccion-sellos (olivia_nutria «sastra» + OBJ-ART-005 «Joya de la isla»), cadena-coleccion-minerales (ramon_tejon «herrero» + mineral_cobre «Mineral de Cobre»), cadena-coleccion-peces (finneas_zorro + OBJ-ITE-023 «Pescado»), cadena-coleccion-plantas (teo_conejo + OBJ-PLA-004 «Orquídea»). Los 6 temas de 03-Diseno L43, 6/6 con cadena. Título de cadena-coleccion-sellos renombrado a «Los Sellos de los Oficios» por colisión medida con cadena-cofradia (iter. 6). Integración con M36 (museo) = ítem 154, implementación dueño M36.
 154. - [x] [23] Definir la integración con M36 (museo) [M] — 03-Diseno L71 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-155. - [ ] [23] Documentar misiones de pesca y colección [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+155. - [x] [23] Documentar misiones de pesca y colección [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md --> **[x] HECHO 2026-10-24 (Step-5-WorkBuddy, iter. 18, Log 2173, msg 213):** pesca y colección documentadas en 04-Codigo.md §Iter. 18 (tabla de las 10 cadenas con NPC/objeto REALES, lugares, consecuencias) y 07-Resultados-Testings.md §Iter. 18.
 156. - [x] [23] Crear 6 misiones de amistad (regalo, pesca, paseos, ficción) [M] — 05-Checklist [x] desde iter. 10 (Log 2131); desync del espejo reparada en iter. 13 (Log 2137): las 6 cadenas están en disco <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 157. - [x] [23] Crear 5 misiones de investigación (faro, biblioteca, geodesia, mapas) [M] — Step-5 2026-10-22 (iter. 13, Log 2137): 5 cadenas en data/historias/secundarias.json (40 -> 51) + 04-Codigo.md §Iter. 13 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 158. - [x] [23] Definir la integración con M36 (mapas) [S] — 02-Analisis L26 + 03-Diseno L45 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
@@ -817,11 +817,11 @@ M104, M88, M160.
 174. - [x] [23] Definir diálogos posteriores por estado de mundo [M] — 03-Diseno L54 + campo dialogo_posterior del schema <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 175. - [ ] [23] Documentar consecuencias y diálogos posteriores [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 176. - [x] [23] Definir la activación por pistas del mundo (M22) [S] — 03-Diseno L58 <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-177. - [ ] [23] Crear 4 cadenas de postgame [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+177. - [x] [23] Crear 4 cadenas de postgame [M] — iter. 19 (2026-10-24, Log 2176): las 4 del 03-Diseno L47 en secundarias.json (cadena-epilogo-plaza previa + memorial del Sello + epílogo de la aldea + epílogo del guardián oculta); suite bloque X 742/0/EXIT 0 x3 + guardián EN ROJO sobre el bloque X <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 178. - [x] [23] Definir la variación del postgame según el final de M22 [M] — 03-Diseno L59; gate final_elegido!="" (servicio L103-106) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-179. - [ ] [23] Crear el memorial del Sello post-final [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-180. - [ ] [23] Crear el epílogo de la aldea [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
-181. - [ ] [23] Crear el epílogo del guardián (final secreto) [S] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+179. - [x] [23] Crear el memorial del Sello post-final [S] — iter. 19 (Log 2176): cadena-memorial-sello (ramon_tejon + piedra_caliza REAL, aria_ciervo; consecuencia memorial_del_sello_erguido) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+180. - [x] [23] Crear el epílogo de la aldea [S] — iter. 19 (Log 2176): cadena-epilogo-aldea (pablo_pato + clay REAL, catalina_oso; consecuencia epilogo_de_la_aldea_contado) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
+181. - [x] [23] Crear el epílogo del guardián (final secreto) [S] — iter. 19 (Log 2176): cadena-epilogo-guardian, oculta:true (final secreto, patrón ocultas L38; nico_gato + fragmento_ancestral REAL; consecuencia epilogo_del_guardian_cantado) <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 182. - [ ] [23] Integrar con M68 (objetivos y evaluación) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 183. - [ ] [23] Integrar con M32 (estacionales) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
 184. - [ ] [23] Integrar con M36 (museo y colección) [M] <!-- fuente: 23-Historias-Secundarias/05-Checklist.md -->
@@ -1446,9 +1446,9 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - [x] (23-Historias-Secundarias) - [x] Documentar cadenas y misiones de exploración [S] — Step-5-WorkBuddy 2026-10-24 (iter. 15, Log 2166): 04-Codigo.md §Iter. 15.
 - [ ] (23-Historias-Secundarias) - [ ] Crear 6 misiones de construcción (puentes, cofradía, plaza, senderos, kiosko, jardín) [M]
 - [ ] (23-Historias-Secundarias) - [ ] Definir la reconstrucción del puente (M28) [M] — **Dueño M28:** sólo alcanzable como consecuencia «puente cruzable» (03-Diseno L53); la misión concreta no está definida.
-- [ ] (23-Historias-Secundarias) - [ ] Crear 5 misiones de agricultura (invernadero, cruces, variantes) [M]
+- [x] (23-Historias-Secundarias) - [x] Crear 5 misiones de agricultura (invernadero, cruces, variantes) [M] — Step-5-WorkBuddy 2026-10-24 (iter. 17, Log 2172): 5 cadenas en data/historias/secundarias.json (62 -> 67); 1 tema nombrado de 03-Diseno L41 (cruces de semillas) + 4 de extension declarada (cultivos del invernadero, primera cosecha, riego del manantial, macetas de la plaza); tema invernadero con cadena previa del principal y variantes estacionales con dueno M32 (fuera). NPC REALES (vera_ardilla farera, mateo_mapache granjero x2, teo_conejo herbolario, luna_zorra artesana) + objetos REALES por campo id (OBJ-EXT-011, OBJ-HER-012, OBJ-EXT-013, OBJ-HER-013, OBJ-PLA-001). Suite bloque V: 624/0/EXIT 0 x3, guard rojo 581<624. M23 = 76/27/2 = 105. Hallazgo ajeno: id semilla_antigua sin respaldo en data/items/.
 - [ ] (23-Historias-Secundarias) - [ ] Definir variantes estacionales de agricultura (M32) [S] — **Dueño M32:** 03-Diseno L70 define la variación estacional genérica; las variantes de agricultura en sí son de M32.
-- [ ] (23-Historias-Secundarias) - [ ] Documentar misiones de construcción y agricultura [S]
+- [x] (23-Historias-Secundarias) - [x] Documentar misiones de construcción y agricultura [S] — Step-5-WorkBuddy 2026-10-24 (iter. 17, Log 2172): agricultura en 04-Codigo.md sec. Iter. 17; construccion en sec. Iter. 16 (Log 2169).
 - [ ] (23-Historias-Secundarias) - [ ] Crear 4 misiones de pesca (peces-trofeo, documentación y suelta) [M]
 - [ ] (23-Historias-Secundarias) - [ ] Crear 6 misiones de colección (murales, glifos, sellos, minerales, peces, plantas) [M]
 - [ ] (23-Historias-Secundarias) - [ ] Documentar misiones de pesca y colección [S]
@@ -1857,3 +1857,57 @@ Orden de ejecucion: 1) tandas de M23 ya autorizadas por el director en su 179 (S
 - Flips: L69 [x] con cita (6/6 temas con cadena). M23 = **74 [x] / 29 [ ] / 2 [?] = 105**; las dos líneas de totales sincronizadas. 04-Codigo §Iter.16, 06 (bloques 18 -> 21, piso 580, guardián 13 -> 16 con las entradas S/T regularizadas), 07 §Iter.16.
 - Límites: 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos. Hallazgo dueño M55 (puente diario degrada para las 3 nuevas).
 - Pedidos al director (msg 204): commit de los paths de la tanda; sync fila 23 del GLOBAL a 74/105; visto bueno del flip L69 (ofrecido a revertir); próxima tanda = agricultura (L71) o pesca/colección (L77/L78) según ruteo.
+
+## Vuelta 2026-10-24 19:0x (tracker 204 -> 207, RAMA 1 + RAMA 2 / iter. 17 M23 Agricultura, Log 2172)
+
+- **RAMA 1:** procesados 206 (GLM: iter.16 RATIFICADA, fila 23 GLOBAL 74/105, Log 2169
+  confirmado como mi cierre) y 207 (RELEVO: agnes-3-flash es la nueva DIRECTORA por orden
+  del fundador; mi canal se mantiene). Acuse con msg 208 a la nueva directora. Verificado
+  en disco ANTES de acusar: M23 74/29/2 = 105, fila 23 GLOBAL 74/105, Log 2169 existe,
+  suite RE-CORRIDA hoy con binario real 580/0/EXIT 0. Mis paths M23 ya estaban en HEAD
+  (16b6d84).
+- **Numeracion:** head del pool 207 pero el 207 YA existia (msg de agnes) -> use ultimo+1
+  = 208; pool saneado (quite el 207 ocupado) -> head 209, quedan 209..268 (60).
+- **RAMA 2 (riel declarado en mi 205):** iter. 17 = cluster Agricultura (item L71, 5
+  misiones). 03-Diseno L41 nombra 3 temas: invernadero YA tenia cadena previa
+  (cadena-invernadero del principal) y variantes estacionales = DUENO M32 (fuera) ->
+  5 creadas = 1 nombrada (cruces de semillas) + 4 de extension declarada (cultivos del
+  invernadero, primera cosecha, riego del manantial, macetas de la plaza).
+- **Dato:** secundarias.json 62 -> 67 cadenas (+75/-0 aditivo). 5/5 NPC REALES
+  (vera_ardilla farera, mateo_mapache granjero x2, teo_conejo herbolario, luna_zorra
+  artesana - roles medidos en los .tres) y 5/5 objetos REALES por campo id (OBJ-EXT-011,
+  OBJ-HER-012, OBJ-EXT-013, OBJ-HER-013, OBJ-PLA-001). 0 colisiones.
+- **Evidencia:** suite test_historias.gd bloque V NUEVO (+44) -> **624 checks / 0 fallos /
+  EXIT 0 x3**, 0 SCRIPT ERROR (binario real). Piso 580 -> 624 MEDIDO. Guardian EN ROJO
+  por inyeccion de runtime: EXIT 1, 581 checks, 2 fallos nombrando el bloque V; sonda
+  borrada y restauracion byte-exacta (sha256 e385a964...). TRAMPA NUEVA: la 1a sonda
+  (literal String -> Dictionary) fue PARSE ERROR ESTATICO de GDScript - no compila y
+  mata el script entero, no aborta una funcion: NO probaba el guardian. Rehecha con
+  subscript dinamico. Reparados 4 asserts de conteo (63->68 x3, 62->67 x1).
+- **Regresiones:** M59 carga idempotente 28/0, autosave 0, fecha/diario/cola 45/0;
+  M71 flujo XP 37/0; M55 diario perf 26/0.
+- **Flips con cita:** L71 (crear 5 misiones) y L73 (documentar construccion +
+  agricultura) [ ] -> [x]. M23 = **76 [x] / 27 [ ] / 2 [?] = 105**.
+- **Hallazgo ajeno (reportado, no tocado):** el id de objeto `semilla_antigua` usado por
+  cadenas previas NO existe en data/items/ (0 coincidencias por campo id).
+- **Hueco de pool:** 2171 consumido por otro proceso sin archivo (familia 2164/2168);
+  use 2172 (head real medido) y corregi las citas en 04/05/06/07/BACKLOG.
+- **Limites:** 0 commits / 0 push / 0 auto-sellos / 0 protegidos. Pedidos (msg 209):
+  ronda de commit de paths; sync fila 23 GLOBAL a 76/105; visto bueno de los 2 flips
+  (ofrecidos a revertir); ruteo de la próxima (pesca L77 / coleccion L78).
+## Vuelta 2026-10-24 21:2x (tracker 210 -> 212) - Step-5-WorkBuddy
+- **RAMA 1:** unico mensaje nuevo = **212** de agnes-3-flash (directora, 20:46): fija L74->L73 CONFIRMADO, fila 23 GLOBAL sincronizada a 76/105 por ella, riel pesca (L77) + coleccion (L78) en UN reporte **APROBADO** (regla tandem del fundador), M33-Agricultura EN ESPERA del batch [C] del Cron D (no tocar). Acusado con mi **213**.
+- **HALLAZGO DE ESTADO (familia It. 10/15/17):** la tanda pesca+coleccion YA estaba ejecutada por corrida cortada (Log 2173 escrito 20:45, JSON 67 -> 77 cadenas, bloque W en la suite, flips L77/L78/L80 en el 05) pero sin msg de cierre, sin 07 §Iter. 18, sin registro aca, sin tracker ni memoria. Regla: NO rehacer - RE-VERIFICAR integra + REPARAR.
+- **RE-VERIFICADO HOY (binario real, no heredado):** suite test_historias.gd **691 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR; guardian EN ROJO por inyeccion de runtime sobre el bloque W (subscript dinamico, EXIT 1, «bloque W NO se ejecuto» + «solo 625 checks (minimo 691)», 2 fallos); sonda borrada y suite restaurada byte-exacta (sha256 baa223ed... identico al citado en Log 2173). Realidad independiente: 77 cadenas, 10/10 nuevas con NPC REALES (14 villagers) y objetos REALES (300 items por campo id); 77/77 consecuencias, 76/76 capitulos y 77/77 titulos unicos.
+- **Regresiones medidas HOY:** M59 28/0 + 41/0 + 63/0 + 45/0; M71 test_progresion 83/0; M55 diario perf 26/0 + persistencia 0 fallos.
+- **REPARADO:** 07-Resultados §Iter. 18 (faltaba); 05 cabecera (iter. 17 y 18 faltaban); COLA ACTIVA items 152/153/155 flippeados con cita. M23 = **79 [x] / 24 [ ] / 2 [?] = 105** (prefijo; Totales ya sincronizado por la corrida cortada).
+- **TRAMPA PROPIA:** mi 1er extractor de realidad leyo campos inexistentes (npc/objeto en la raiz de la cadena) y publico 10 FALTA falsas; el schema real los lleva en `pasos` (familia del extractor de la iter. 15). Corregido antes de publicar.
+- **Limites:** 0 commits / 0 push / 0 auto-sellos / 0 protegidos. Pedidos (msg 213): ronda de commit; sync fila 23 GLOBAL a 79/105; visto bueno de los 3 flips (ofrecidos a revertir); confirmacion de M33 tras el batch [C].
+- [x] **2026-10-24 22:5x-23:1x - vuelta V2 (tracker 212 -> 216): acuses 214 y 216 de agnes-3-flash (directora vigente) + tanda M23 iter. 19 Postgame (Log 2176, canales 215/217).** Msg 214: HALLAZGO familia It.10/15/17 confirmado canonico; suite 691/0 + guardian rojo + flips L77/L78/L80 de confianza; fila 23 GLOBAL sincronizada por ella a 79/105 (VERIFICADO en disco antes de acusar: fila 23 = 79/105, M23 = 79/24/2 = 105 por prefijo, 77 cadenas); riel M23 sigue en curso; M33 EN ESPERA del batch [C] del Cron D (no tocar).
+- [x] **Tanda iter. 19 (riel declarado en mi 215):** cluster Postgame del 03-Diseno L47 — 3 cadenas NUEVAS en data/historias/secundarias.json (77 -> 80; +45/-0 contra HEAD, aditivo, tabs/pasos-inline/LF preservados): cadena-memorial-sello (ramon_tejon herrero + piedra_caliza REAL, aria_ciervo trovadora; memorial_del_sello_erguido), cadena-epilogo-aldea (pablo_pato ceramista + clay "Arcilla" REAL, catalina_oso cocinera; epilogo_de_la_aldea_contado), cadena-epilogo-guardian (nico_gato guardabosques + fragmento_ancestral REAL; oculta:true por final secreto; epilogo_del_guardian_cantado). Con cadena-epilogo-plaza previa = las 4 de postgame. 5/5 NPC REALES y 3/3 objetos REALES por campo id; 0 colisiones id/flag/capitulo.
+- [x] **Suite:** bloque X _test_postgame_cluster() NUEVO (+50 checks) + 4 asserts de conteo reparados (78->81 x2, 77->80 x1) + "X" en BLOQUES. **742 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR (binario real). Piso 691 -> 742 MEDIDO. Guardián EN ROJO por inyeccion de RUNTIME sobre el bloque X (subscript dinamico get_cadena(...)["oculta"] -> bool): EXIT 1, 2 fallos («bloque X NO se ejecuto» + «solo 692 checks (minimo 742)»); sonda borrada y suite restaurada byte-exacta (sha256 441778340f74...).
+- [x] **Regresiones medidas HOY (binario real):** M59 slots/perfiles 41/0, carga idempotente 28/0, carga NPC/misiones 63/0, fecha/diario/cola 45/0; M71 test_progresion 83/0; M55 diario perf 26/0 + persistencia 0 fallos.
+- [x] **Fallo PROPIO de la 1a corrida (corregido):** el gate «ninguna en disponibles sin final» se midio con el estado que dejaba el bloque F (final «secreto» ya elegido) -> 2 de las 3 expuestas, 1 fallo. Reescrito con limpieza previa del estado. Regla: la premisa de un check de estado depende del ORDEN de los bloques.
+- [x] **Docs:** 04-Codigo §Iter. 19, 05 (flips L129/L132/L133/L134 + Totales + cabecera), 06 (bloque X), 07 §Iter. 19, COLA ACTIVA items 177/179/180/181 flippeados con cita. M23 = **83 [x] / 20 [ ] / 2 [?] = 105** (prefijo; Totales sincronizado). Invariantes por bytes: 04/05/06/07 LF puro sin BOM; BACKLOG CRLF puro sin BOM.
+- [x] **Numeracion:** pool desincronizado (head 214 pero 214 ya existia, msg de la directora) -> saneado; acuse = **215** = max(archivos)+1. **COLISION 14.a (familia 092/097/103/106/124):** el 216 de la directora (ack de mi 215, 22:56:16) aterrizo en vuelo y tome el 216 del pool sin re-medir max(archivos) -> cierre renumerrado a **217** = max+1. Regla: medir max(archivos) JUSTO antes de cada escritura. Tracker -> 216; pool cabeza 218 (96 numeros).
+- [x] **Limites:** 0 commits / 0 push / 0 auto-sellos 21.8 / 0 protegidos. Pedidos (msgs 215 y 217): ronda de commit de paths iter. 17/18/19; sync fila 23 GLOBAL a 83/105; visto bueno de los 4 flips (ofrecidos a revertir); REPOSICION DE COLA (0 [ ] en seccion A); confirmacion de M33 tras el batch [C].

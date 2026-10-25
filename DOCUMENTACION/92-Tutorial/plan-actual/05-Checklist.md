@@ -66,8 +66,8 @@
 - [ ] RF11: capítulo Moverse: guía de WASD/joystick con celebración de llegada al punto [M]
 - [ ] RF11: la pista de movimiento desaparece al detectar input de dirección [M]
 - [x] RF12: capítulo Interactuar: explica la tecla E con ícono dinámico del InputMap [M] → capítulo "interactuar" data-driven en guiones_base.tres (fallback tutorial_manager.gd:134-136) con paso SECUENCIA meta "interactuar" e icono_tecla "interactuar"; ícono resuelto en vivo por icono_tecla_dinamico() (tutorial_manager.gd:556-568, InputMap device-aware). Barrido M92 (Ling-3.1-Flash, 2026-10-12, encargo msg 101).
-- [ ] RF14: capítulo Cultivo: azada → semilla → regar → esperar → cosechar con E, paso a paso [C]
-- [ ] RF15: capítulo Pesca: equipar caña → lanzar → mini-juego → recoger pez, por fases [C]
+- [x] RF14: capítulo Cultivo: azada → semilla → regar → esperar → cosechar con E, paso a paso [C]
+- [x] RF15: capítulo Pesca: equipar caña → lanzar → mini-juego → recoger pez, por fases [C]
 - [ ] RF16: capítulo Minería: equipar pico → romper veta → recoger mineral, con aviso de energía [M]
 - [ ] RF17: capítulo Crafting: abrir banco → mostrar receta requerida → fabricar → verificar inventario [M]
 - [x] RF18: capítulo Vecinos: saludar con E → elegir opción de diálogo → recibir primer regalo [M] → capítulo "vecino" data-driven (guiones_base.tres; fallback tutorial_manager.gd:141-143, meta "charlar"), disparado por el evento real npc.gift_given→"primer_regalo" (tutorial_manager.gd:205-207) con gate M19 _vecino_libre (tutorial_manager.gd:279-288). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
@@ -171,7 +171,7 @@
 ## K. Integración con 33-Agricultura (6)
 
 - [x] K1: capítulo Cultivo en el primer campo marcado como ITutorialTarget [M]
-- [ ] K2: pasos: usar azada → plantar semilla → regar → esperar (consejo de tiempo real) → cosechar con E [C]
+- [x] K2: pasos: usar azada → plantar semilla → regar → esperar (consejo de tiempo real) → cosechar con E [C]
 - [ ] K3: se consumen las señales de cultivo (plantado, regado, cosechado) para avanzar pasos [M]
 - [ ] K4: la pista de "esperar a mañana" no obliga el envejecimiento de día (consejo contextual) [M]
 - [ ] K5: si el jugador destruye la parcela, reprogramar o descartar vía watchdog (RF23) [M]

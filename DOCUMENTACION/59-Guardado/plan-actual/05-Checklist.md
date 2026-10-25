@@ -141,7 +141,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [ ] Guardar eventos pasados y futuros programados (M74) [M]
 - [ ] Guardar festivales celebrados y calendario [M]
 - [x] Testear carga en una fecha distinta a la del guardado [C] — **Step-5-WorkBuddy (2026-10-23, Log 2161):** suite `scripts/saving/test_fecha_diario_cola_m59.gd` bloque 1 (45 checks / 0 fallos / EXIT 0 x3). Payload REAL por `snapshot.collect()` con `meta.last_saved = "2026-09-15 08:30:00"` (fecha vieja) y `time.dia/day = 42`; `SaveWriter.write_atomic` + `load_slot` cargan OK con la cadena-faro activa (`paso_actual=1`) y el paso siguiente reportable; `last_saved` NO se reescribe al cargar y `slot_metadata` sigue mostrando la fecha vieja con `day=42`. La variante con fecha futura tambien carga OK. `request_save` sella la fecha del sistema.
-- [ ] Testear eventos no duplicados al recargar [C]
+- [x] Testear eventos no duplicados al recargar [C]
 
 ## O. Guardado de Colecciones (M37/M55/M56)
 

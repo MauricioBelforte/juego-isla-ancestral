@@ -50,19 +50,22 @@ corre con el binario real:
 | S | Cobertura de las 12 consecuencias de 03-Diseno L53 sobre los dos catálogos reales (secundarias.json + cadenas_ejemplo.json), negativo acotado del token `taller_abierto` sobre `res://data` y end-to-end de `cadena-jardines` y `cadena-cofradia` con `ws_has(...)` (iter. 14) | M21 |
 | T | Las 8 misiones de exploración (iter. 15): carga/fuente/no-oculta, exposición en `cadenas_disponibles()`, unicidad local de consecuencias y diarios, NPC/objetos REALES por campo id y end-to-end de 3 con `ws_has(...)` | M14, M21, M55 |
 | U | Las 3 cadenas de construcción (iter. 16): carga/fuente/no-oculta + los 3 temas con cadena previa (cofradía/jardines/puente), exposición en `cadenas_disponibles()`, unicidad local, NPC/objetos REALES por campo id y end-to-end de 2 con `ws_has(...)` | M14, M21, M55 |
+| V | Las 5 misiones de agricultura (iter. 17, 03-Diseno L41: 1 tema nombrado «cruces de semillas» + 4 de extensión declarada; tema «invernadero» con cadena previa y variantes estacionales con dueño M32, ambos fuera del bloque): carga/fuente/no-oculta, exposición en `cadenas_disponibles()`, unicidad local, 4 NPC REALES + 5 objetos REALES por campo id y end-to-end de 2 (`cadena-agricultura-cruces` con vera_ardilla + `OBJ-EXT-011` «Jardín de hierbas»; `cadena-agricultura-riego` con teo_conejo + `OBJ-HER-013` «Regadera mejorada») con `ws_has()` de `cruces_de_semillas` / `riego_del_huerto` | M14, M21, M55 |
+| W | Las 10 misiones de pesca (4) + colección (6) (iter. 18, 03-Diseno L42: 3 temas nombrados + 1 de extensión declarada; L43: los 6 de colección nombrados; integración M36 dueño M36, fuera): carga/fuente/no-oculta, exposición en `cadenas_disponibles()`, unicidad local, 6 NPC REALES + 10 objetos REALES por campo id y end-to-end de 2 (`cadena-pesca-trofeos` con finneas_zorro + `OBJ-HER-011` «Caña de oro»; `cadena-coleccion-plantas` con teo_conejo + `OBJ-PLA-004` «Orquídea») con `ws_has()` de `trofeo_de_la_marea_exhibido` / `plantas_raras_clasificadas` | M14, M21, M36, M55 |
 
 ### Guarda anti-falso-verde (obligatoria, iter. 2)
 
 1. `_check()` cuenta cada verificación (`_checks`).
 2. `_fin("X")` por bloque + lista `BLOQUES`: el resumen nombra el bloque que no corrió.
-3. `CHECKS_MINIMOS` = **580** desde la iter. 16 (MEDIDO en verde el 2026-10-24 con 21
+3. `CHECKS_MINIMOS` = **691** desde la iter. 18 (MEDIDO en verde el 2026-10-24 con 23
    bloques; la cadena fue 40 con 7 -> 59 con 8 -> 70 con 9 -> 98 con 10 -> 129 con 11
    -> 169 con 12 -> 227 con 13 -> 258 con 14 -> 316 con 15 -> 351 con 16 -> 379 con 17
-   -> 456 con 18 -> 477 con 19 -> 543 con 20 -> 580 con 21). No estimado.
+   -> 456 con 18 -> 477 con 19 -> 543 con 20 -> 580 con 21 -> 624 con 22 -> 691 con
+   23). No estimado.
 4. `_summary()` en un `call_deferred` **separado** del de `_run()`: si `_run()` aborta
    por un `SCRIPT ERROR` de runtime, el resumen corre igual, nombra los bloques
    faltantes, dispara el piso y sale con `quit(1)` — la suite **no cuelga**.
-5. Guardián probado EN ROJO por inyección de runtime, dieciséis veces:
+5. Guardián probado EN ROJO por inyección de runtime, dieciocho veces:
    - iter. 2 (`var _n: Node = null; _n.free()` tras el bloque B): EXIT 1, nombra
      C/D/E/F/G, «solo 11 checks (mínimo 40)».
    - iter. 3 (abort a mitad del bloque H, el nuevo): EXIT 1, nombra H, «solo 47 checks
@@ -114,6 +117,21 @@ corre con el binario real:
      ejecutados (minimo 580)», 2 fallos.
    Sonda borrada en la misma operación; sha256 del original verificado; 0 sondas en el
    repo.
+   - iter. 18 (abort de runtime al inicio del bloque W, asignación tipada desde un
+     subscript dinamico `get_cadena(...)["titulo"]` -> `Dictionary`): EXIT 1,
+     «el bloque W NO se ejecuto (posible SCRIPT ERROR que aborto la funcion)» +
+     «solo 625 checks ejecutados (minimo 691)», 2 fallos. Sonda borrada y suite
+     restaurada byte-exacta (sha256 baa223ed684c852126b98e5c9add9c55006d50a66
+     389f4d5cf0c23f002924c7d).
+   - iter. 17 (abort de runtime al inicio del bloque V, asignación tipada desde un
+     subscript dinamico `get_cadena(...)["titulo"]` (String) -> `Dictionary`):
+     EXIT 1, «el bloque V NO se ejecuto (posible SCRIPT ERROR que aborto la
+     funcion)» + «solo 581 checks ejecutados (minimo 624)», 2 fallos. La PRIMERA
+     version de la sonda (literal `String` -> `Dictionary`) fue rechazada por el
+     parser ESTATICO de GDScript (no compila: no aborta la funcion, mata el
+     script entero) y no servia para probar el guardian de runtime: rehecha
+     como subscript dinamico, que compila y falla en ejecucion. Sonda borrada y
+     suite restaurada byte-exacta (sha256 e385a964... identico).
 
 ## Regresiones de integración (módulos que M23 toca)
 
@@ -216,3 +234,29 @@ Piso: 543 -> **580** (`CHECKS_MINIMOS` MEDIDO en verde, no estimado). Bloques
 A-U. Guardián EN ROJO por inyección de runtime Variant -> Dictionary sobre el
 bloque U: EXIT 1, 544 checks, 2 fallos (nombra el bloque U + «solo 544 checks
 ejecutados (minimo 580)»). Ver 07-Resultados-Testings.
+### Iter. 19 — Postgame (Log 2176, 2026-10-24, Step-5-WorkBuddy)
+
+Alcance: items L129/L132/L133/L134 del 05-Checklist (las 4 cadenas de postgame
+del 03-Diseno L47). 3 cadenas NUEVAS (`cadena-memorial-sello`,
+`cadena-epilogo-aldea`, `cadena-epilogo-guardian` — esta última `oculta:true`
+por ser el final secreto); la 4a (reconstrucción de la plaza) ya existía como
+`cadena-epilogo-plaza` del principal (L130). Bloque X `_test_postgame_cluster()`:
+
+1. **Carga/fuente/postgame de las 3** + las 4 de postgame del diseño en catálogo.
+2. **Gate medido con estado limpio** (mismo montaje que el bloque F): sin final
+   elegido, ninguna de las 3 figura en `cadenas_disponibles()`; con
+   `final_principal`, memorial y aldea sí (la oculta no).
+3. **Unicidad local** de las 3 consecuencias (`memorial_del_sello_erguido`,
+   `epilogo_de_la_aldea_contado`, `epilogo_del_guardian_cantado`) y de los 3 diarios.
+4. **NPC REALES** (5: ramon_tejon, aria_ciervo, pablo_pato, catalina_oso,
+   nico_gato) contra `data/villagers/` y **objetos REALES** (3:
+   `piedra_caliza` "Piedra Caliza", `clay` "Arcilla",
+   `fragmento_ancestral` "Fragmento Ancestral") contra `data/items/` por campo `id`.
+5. **End-to-end de las 3** con `ws_has(...)` de las 3 consecuencias.
+6. **Puente diario M23 -> M55:** negativo esperado (finding medido, dueño M55).
+
+Piso: 691 -> **742** (`CHECKS_MINIMOS` MEDIDO en verde). Bloques A-X. Guardián
+EN ROJO por inyección de runtime Variant (subscript dinámico
+`get_cadena(...)["oculta"]` -> bool) sobre el bloque X: EXIT 1, 692 checks,
+2 fallos (nombra el bloque X + «solo 692 checks ejecutados (minimo 742)»).
+Ver 07-Resultados-Testings.

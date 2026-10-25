@@ -148,3 +148,31 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 - Coherente con H21 (Opcion A para V1: 4/9 en M105, 5 en otros modulos).
 - Unidad: metricas. Dependencia: M144 (9 metricas).
 
+
+
+## Presupuestos numericos III - mediciones en disco (Ling-3.1-Flash, 2026-10-25, riel design-docs agnes msg 258 lote 2)
+
+Metodo produce-first: grep + lectura directa, sin ejecutar Godot. Citas archivo:Línea.
+
+### 7. Peaks de eventos por frame (medido)
+- TelemetryDirector (533 lineas; autoload TelemetryDirector, project.godot L29) NO tiene limitador por-frame ni buffer propio: registrar_evento delega 100% a AnalyticsDirector.registrar_evento (telemetry_director.gd L342-351). Unicos timers: polling de 1.0s para puzzle abandonado y zonas ignoradas (L282-297).
+- El batching real vive en M104: analytics_director.gd batch_interval_min = 30.0 (L36), umbral _acumulador_segundos >= intervalo*60 (L63) -> enviar_lote_datos() (L111) cada 30 MINUTOS, + flush al cerrar la app (L68-71); lote en user://analytics/lote_%s.json (L31); agregado historico aggregated.json (L154); filtrado opt-out M91 previo (L6-7).
+- DRIFT vs diseño (este 03 L122: "flush 30s o 100 eventos"): en disco = 30 min + exit. No hay contador de 100 eventos. Los peaks teoricos Beam 312 ###4 (0.167 ev/frame, max 1 cada 6 frames) NO estan instrumentados ni limitados en runtime.
+- Unidad: eventos/frame (teoria) / intervalo de batch 1800s (disco). Dependencia: M104, M70.
+
+### 8. Esquema de versionado (medido)
+- 0 hits de "schema_version" ni "const VERSION" en scripts/telemetry/ y scripts/analytics/ (grep repo-wide; los unicos VERSION/schema_version son de otros modulos: coleccionables_manager VERSION=1 L27, combate VERSION_SAVE=1, buzon VERSION=1, diario schema_version=1, balance schema_version 1->2). M105 NO versiona el payload de eventos.
+- El versionado semver del diseño Beam 312 ###5 vive hoy en M119 (data/updates/versions.json: estable 1.0.0 / beta 1.1.0-beta.1 / dev 1.1.0-dev.3) y en schema_version=2 de data/logros/logros.json (M72) — no en telemetria.
+- Consecuencia: la regla "compatibilidad: major debe coincidir" NO TIENE OBJETO hoy (no hay esquema de eventos versionado que migrar; el payload lo ensambla M104 sin version). Deuda: si M105 crece (nuevos eventos con campos), definir schema_version del payload ANTES de que haya 2 generaciones de datos.
+- Unidad: version semantica (ausente en M105/M104). Dependencia: M107 (versionado de esquema de backup — analogia del diseño).
+
+### 9. Cross-referencing M105-M144 (medido)
+- Tabla canonica: DOCUMENTACION/144-Despues-Del-Lanzamiento/plan-actual/03-Diseno.md L6-17 — 9 metricas; fuente M105 en 7/9 (rendimiento compartida M122; reviews=M100, bugs=M102/M122).
+- Cobertura medida de TelemetryDirector: 19 eventos EVT (telemetry_director.gd L101-121) + 6 metricas time_to_first_* + session_duration (L124-129) + bridge EventBus (telemetry_bridge.gd).
+  - Plenas: tutorial (tutorial_first_completion L102); dificultad (difficulty_perceived L116 + puzzle_abandoned L111 + PUZZLE_ABANDONO_SEGUNDOS=300 L136); contenido (zone_ignored/entered/exited L117-119 + chapter_completed L121 + island_first_discovered L110 + museum/festival/community_project L107-113).
+  - Con insumos: onboarding (5 metricas time_to_first_* L124-128 + tutorial; "conversion 30 min" derivable de tutorial_first_completion + session_duration); retencion (session_started/ended L119-120 + METRIC session_duration L129; D1/D7/D30 requiere agregacion longitudinal — M104 aggregated.json L154 la provee).
+  - Economia: NO capturada — telemetry_bridge.gd L54-56: "purchase_done ... 0 emisores en produccion -> cablearlas seria una arista MUERTA". La unica fila mapeada de la tabla ENTRADAS es quest.prereq_met -> track_seal_first_obtained (L57-65; emisor real story_manager.gd:187, M22). Las 13 track_* tenian 0 llamadores de produccion antes del bridge (L9-14); bridge_cobertura() L196-204 es auditable.
+  - Rendimiento: la tabla M144 lo comparte M105/M122; M105 no emite FPS/crash (0 hits) — queda en M122.
+- Refina el flag H21 (decia 4/9 con onboarding en el gap): onboarding SÍ tiene insumos directos (5 time_to_first + tutorial_first_completion); economia se mantiene en el gap MEDIDA (0 emisores de purchase_done en producción, no solo "no capturada"). Gap real medido: reviews (M100), bugs (M102/M122), rendimiento (M122), economia (0 emisores).
+- DRIFT CI (encolado): scripts/telemetry/ tiene 6 suites (test_telemetry, iter5, iter6, iter7, iter8, test_telemetry_bridge_m105) pero quality.yml L487-490 solo cablea 4 (test_telemetry + iter5/6/7, con pisos CHECKS_MINIMOS 16/10/11/27, L480-486). test_telemetria_iter8.gd y test_telemetry_bridge_m105.gd SIN cablear.
+- Unidad: metricas/cobertura de bridge. Dependencia: M144, M104, M22.

@@ -236,3 +236,26 @@ Definidos por Beam-1.0 via Audit-CRON E x8 (auto-auditoria de la 1ra capa) y esc
 ## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
 - **PAQ-5 (H25)**: M114 muestra minima = **30 sesiones por tester** (supersede el 8/8-12 del bloque 3). Coherente con muestra 30 de M105/06 (telemetria). Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
 
+
+
+Riel design-docs SIN DATOS (encargo agnes-3-flash msg 255, 2026-10-24 21:08; GO directora). Produce-first line-based, sin vision: cada numero medido en disco con cita archivo:linea (recorrido python -X utf8 + Grep/Read; sin ejecutar Godot). Las capas I/II (Beam 1.0, 2026-10-23) quedan intactas; aqui se groundean con mediciones reales y se documentan los drift hallados. **Modelo:** Ling-3.1-Flash / **Plataforma:** Kilo Code / **Fecha:** 2026-10-25
+
+## Presupuestos numericos III - mediciones en disco (Ling-3.1-Flash, 2026-10-25)
+
+### 26. Sesiones por tester (GO fundador + plantillas medidas)
+- CANONICA: muestra minima = 30 sesiones por tester — GO del fundador 2026-10-23 20:25 via director 315 (este 03, L237 PAQ-5; supersedes el 8/8-12 historico de L209).
+- Duracion de sesion medida en plantilla: 80 min = briefing 5' + libre 40' + tareas 15' + encuesta 10' + entrevista 10' (docs/playtest/README.md L17).
+- Testers por ronda: 3-5 cubriendo perfiles cozy/casual/no jugador (docs/playtest/README.md L15); historico (plan-inicial 01-Requerimientos L58): 3-8 jugadores por ronda.
+- DRIFT (cita rota): la referencia "muestra 30 de M105/06 (telemetria)" NO tiene sustento — M105 no tiene 06-Plan-Testings.md (plan-actual solo 01-05) y grep de "muestra" sobre todo el modulo M105 = 0 hits. La fuente canonica valida es el GO del fundador. Recomendacion al director: corregir la referencia cruzada (M114 03 L237) o agregar el dato a M105.
+
+### 27. Presupuesto USD (modo costo cero, medido)
+- 134-Presupuesto/operativa/budget-breakdown.md L17: presupuesto total actual = USD 0/mes (desarrollo autofinanciado, costo cero); L19: unico desembolso previsto confirmado = USD 100 (Steam Direct Fee, una vez); L68-69: colaborador/lead USD 0, agente de IA USD 0 (nunca autoriza ni realiza gastos).
+- Playtest = USD 0 (sin desembolso previsto en 134-Presupuesto). El techo de diseño "max 200 USD" (capa I #26) queda sin ejercer. Coherente con dashboard-metrics.md L17/L19 (burn rate 0, ~0% consumido de USD 100).
+
+### 28. Fixes por ronda (medido en plantilla)
+- Max 5 fixes por ronda (docs/playtest/README.md L19: "Priorizar maximo 5 fixes y derivar a M102/M93/M104/M101"); 2-8 h por fix, 10-40 h por ronda (capa II ###25).
+
+### 29. Metricas de tono cozy (formula medida en plantilla)
+- TonoCozy = (Q4 + Q5 + Q6)/3 - (Q1 + Q2 + Q3)/3; rango -4 a +4; metas: >= +0.5 prototipo (M137), >= +1.0 pre-alpha (M139) (docs/playtest/README.md L21-23).
+- SLA de revision de feedback: 48 h, SLA <= 72 h (05-Checklist L253; auditoria L261: 0 correcciones).
+- Integraciones medidas: M101 areas de riesgo, M102 issues RNDA-{n}-H-###, M93 balance con evidencia cuantitativa, M104 metricas instrumentadas, M152 definicion operativa del tono, M80 NDA/consentimiento (README L26-31).

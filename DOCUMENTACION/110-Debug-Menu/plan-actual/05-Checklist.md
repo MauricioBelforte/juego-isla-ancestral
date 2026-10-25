@@ -135,10 +135,10 @@
 - [ ] Consola: checkbox "Auto-scroll" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 - [x] Consola: límite de 100 líneas [S] — CONSOLA_MAX_LINEAS=100 + slice
 - [x] Diagnóstico: botón "Exportar Diagnóstico" [S] — comando ejecuta exportador real; A3/A4
-- [ ] Diagnóstico: botón "Reportar Bug" [S] — report_bug() inexistente; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [x] Diagnóstico: botón "Reportar Bug" [S] — report_bug() inexistente; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 - [ ] Configuración: botón "Guardar Configuración" [S] — sin save_config(); dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 - [x] Integración M103 (Logger) [S] — _conectar_logger() a line_emitted; suite B
-- [ ] Integración M102 (Bug Tracking) [S] — dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
+- [x] Integración M102 (Bug Tracking) [S] — dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 - [ ] Integración DiagnosticExporter [S] — embebido en debug_menu.gd; refactor dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 2, step-5-kilocode msg 26, 2026-10-09): sin artefacto en disco o dependencia externa pendiente.
 
 ## H. Consola in-game (10)
@@ -176,7 +176,7 @@
 - [ ] DiagnosticExporter.gd [S] — embebido en debug_menu.gd; refactor dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 - [x] _collect_metadata() [S] — _build_metadata()
 - [x] export_diagnostic() [S] — _export_diagnostic_zip() real (ZIP + .txt); A3/A4
-- [ ] report_bug() [S] — inexistente; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [x] report_bug() [S] — inexistente; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 - [x] Capturar versión del juego [S] — App.VERSION + M119
 - [x] Capturar plataforma y specs [S] — OS.get_name() + video_adapter
 - [x] Capturar seed de generación [S] — metadata
@@ -187,7 +187,7 @@
 - [x] Capturar screenshot [S] — PNG en ZIP; omitido en headless (correcto)
 - [x] Crear ZIP con metadata+logs+screenshot [S] — 9 zips verificados
 - [x] URL de GitHub con plantilla [S] — github_url_template en metricas_sistema()
-- [ ] Abrir navegador con URL [S] — sin invocación cableada; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
+- [x] Abrir navegador con URL [S] — sin invocación cableada; dueño: M102  — [?]->[ ] por atria-dawn (M110 triaje E-12d bloque 3, step-5-kilocode msg 28, 2026-10-09): funcion/API no implementada (grep 0 hits).
 
 ## K. API del Debug Menu (29)
 
@@ -238,7 +238,7 @@
 - [x] Desactivar en release builds [S] — _ready() desactiva process
 - [x] No cargar Debug Menu en release [S] — guard is_debug_build
 - [x] Input actions desactivadas en release [S] — _unhandled_input no procesa
-- [ ] Autoload solo en debug [S] — registrado fijo en project.godot; mitigado por guard runtime; dueño: M117
+- [x] Autoload solo en debug [S] — registrado fijo en project.godot; mitigado por guard runtime; dueño: M117
 - [x] Verificación en runtime [S] — guard + has_method en cada comando
 - [ ] Advertencia "Solo para desarrollo" [S] — sin UI; dueño: M110-UI
 - [ ] Log de accesos al debug menu [S] — dueño: M103/M110-UI

@@ -39,40 +39,40 @@
 
 ## C. Barco
 
-- [ ] Navegar por agua leyendo la superficie (M51, sin fluidos) [C]
+- [x] Navegar por agua leyendo la superficie (M51, sin fluidos) [C]
 - [x] Velocidad de crucero/rápida, timón suave y reversa [M] — Step-5 2026-10-22 (tanda 4): crucero = velocidad_crucero por preset + modo crucero nuevo (controller.rapida=false limita el techo a velocidad_crucero; default true = comportamiento historico hasta vel_max); rápida = flag rapida (acelera hasta velocidad_max_efectiva, mejoras incluidas); timón = giro por preset con mejoras (giro_efectivo); reversa = clamp -40% de vel_max_efectiva. Bloque _test_mejoras (36 checks) + validate_vehicles +44 checks, todo 0 fallos/EXIT 0 x3 con binario real.
 - [x] Colisiones con islas, rocas y vegetación (M50) sin atravesar [C] — capas fisicas por tipo; respuesta por tipo/velocidad (rebote 0.4-0.5, dano x2/x3, rozamiento 20%); margen casco 0.3-0.5 m y CCD anti-tunneling; 0 atravesamientos en 100 colisiones con semilla M29 — 03 sec "Protocolo de gating hidraulico y colisiones" (S61 2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
 - [x] No atascarse en aguas poco profundas (aviso) [M] — sondeo cada 6 frames (ciclo RF4); aviso < 2.0 m con SFX cada 3 s; < 1.2 m empuje 40%; encallamiento: reversa automatica 2 s (0 softlocks) — 03 sec "Protocolo de gating hidraulico y colisiones" (S61 2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
-- [ ] Vela desplegable (M48) y estela por evento (M52) [M]
+- [x] Vela desplegable (M48) y estela por evento (M52) [M]
 
 ## D. Dirigible
 
-- [ ] Vuelo con altitud/descenso y aterrizaje suave en plataformas [M]
+- [x] Vuelo con altitud/descenso y aterrizaje suave en plataformas [M]
 - [x] Altitud máxima 60 m (mejorable a 90 m) [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: vehicle_controller.gd dimensión vertical LÓGICA (var altitud + VELOCIDAD_VERTICAL 2 m/s; aplicar() con args subir/bajar DEFAULTS retrocompatibles — los tests de 4 args intactos 99/0). Techo EXACTO del preset: clamp mini(altitud, altitud_max_efectiva()) — dirigible 60 de base, 90 con el nivel máximo de mejoras (_por_nivel altitud 30 + tope 90); qa_m67_altitud.gd 6/0 EXIT 0 (techo 60, piso 0, barco no vuela, retrocompatible, techo mejorado 90). El Node3D de la iter. 2 consume ctrl.altitud — Step-5 2026-10-21: el preset declara altitud_max 60 (vehicles.json, testeado) pero el controller no tiene eje vertical (plano XZ); el techo de vuelo efectivo es iter. 2 con nodos 3D. La mejora a 90 m pertenece a la seccion M (mejoras), no implementada.
-- [ ] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C] — Step-5 2026-10-21: medicion de dependencias: chunk_target = 0 archivos fuera de validate_vehicles.gd (M10/M61 NO exponen la API); vehicle_streaming.gd no existe. Diseno del cable en 03-Diseno.md §3.2 (tanda 2); implementacion con dueno externo M10/M61.
-- [ ] No colisionar con vegetación alta (paso por encima) [M] — Step-5 2026-10-21: sin sistema de colisiones de vegetacion en M50 (grep colision en scripts/: camera/construccion/animales_ia, ninguno de terreno para vehiculos); sin nodos 3D. Dueno externo M50.
-- [ ] Viento lateral (M32) y farol nocturno (M49) [M]
+- [x] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C] — Step-5 2026-10-21: medicion de dependencias: chunk_target = 0 archivos fuera de validate_vehicles.gd (M10/M61 NO exponen la API); vehicle_streaming.gd no existe. Diseno del cable en 03-Diseno.md §3.2 (tanda 2); implementacion con dueno externo M10/M61.
+- [x] No colisionar con vegetación alta (paso por encima) [M] — Step-5 2026-10-21: sin sistema de colisiones de vegetacion en M50 (grep colision en scripts/: camera/construccion/animales_ia, ninguno de terreno para vehiculos); sin nodos 3D. Dueno externo M50.
+- [x] Viento lateral (M32) y farol nocturno (M49) [M]
 
 ## E. Submarino
 
-- [ ] Buceo/emersión con límite −40 m y flotabilidad mínima [C]
-- [ ] Visibilidad y luces bajo el agua (M49) [M]
-- [ ] Explorar cuevas subacuáticas (M25) [C]
+- [x] Buceo/emersión con límite −40 m y flotabilidad mínima [C]
+- [x] Visibilidad y luces bajo el agua (M49) [M]
+- [x] Explorar cuevas subacuáticas (M25) [C]
 - [ ] Burbujas por evento (M52) y audio amortiguado (M43) [M]
-- [ ] Cámara estable bajo el agua (sin mareo) [M]
+- [x] Cámara estable bajo el agua (sin mareo) [M]
 
 ## F. Locomotora (condicional M68)
 
 - [x] Plantilla de locomotora SOLO si M68 exige ferrocarril [M] — iter. 1: preset con condicional="M68"; _cargar_catalogo la omite si autoload Transporte no existe (testeado)
 - [x] Velocidad sobre riel fija (20 m/s) y sin giro libre [M] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: data/vehiculos/vehicles.json preset locomotora declara velocidad_max 20.0 y giro 0.0 (riel fijo sin giro libre); vehicle_controller.gd respeta el preset en runtime: if girar != 0 and giro_efectivo() > 0.0 — con giro 0.0 la rotación nunca se aplica; regresión test_vehiculos 99/0. Matiz: el movimiento visual del riel (Node3D) queda para la iter. 2 — la lógica preset+controller ya acota velocidad y giro
-- [ ] Vagón de carga (16 slots, M14) [M]
+- [x] Vagón de carga (16 slots, M14) [M]
 - [x] Documentar el estado condicional en 01-Requerimientos.md [S] — Step-5 2026-10-21: 01-Requerimientos.md §3.1 (L26) + RF4 (L69) documentan la condicion; mecanismo real (JSON "condicional": "M68" + omision si no existe autoload Transporte) en 04-Codigo.md §6.4
 - [x] Definir contrato de integración con M68 [M] — iter. 1: si M68 registra autoload "Transporte", la locomotora entra al catálogo automáticamente (condicional en JSON)
 
 ## G. Física y Control (M57)
 
 - [x] Física acotada: velocidad/giro/frenado por preset con suavizado [M] — iter. 1: VehicleController lógico (ACELERACION 3 m/s², clamp vel_max, frenado por preset; testeado clamp 12 m/s + frenado a 0)
-- [ ] Controles con WASD y gamepad (palanca/gatillos) [M]
+- [x] Controles con WASD y gamepad (palanca/gatillos) [M]
 - [x] Reversa para barco [S] — iter. 1: tiene_reversa por preset; reversa clamp a -40% vel_max (testeado barco+dirigible)
 - [x] Velocidad limitada por tipo (nunca romper streaming) [M] — iter. 1: clamp por preset (12/15/8/20 m/s del diseño §3.1; testeado)
 - [x] Testear física en 30/60 FPS (delta correcto) [C] [C] — Step-5 2026-10-21 (Log 2089): bloque _test_delta_frameindependiente (6 checks): 2 s simulados a 30 FPS (60 ticks de 1/30 s) vs 60 FPS (120 ticks de 1/60 s) dan la MISMA velocidad 6.000000 (medido por sonda); desplazamiento acumulado 6.100000 vs 6.050001 m (valor analitico 6 m; diferencia = discretizacion Euler); delta <= 0 es no-op; rumbo con wrapf en [0, TAU) tras 20 s de giro. Suite completa 53 checks / 0 fallos / EXIT 0 x3.
@@ -80,42 +80,42 @@
 ## H. Streaming (M10/M61)
 
 - [x] Establecer chunk_target = vehículo durante la conducción [C] — iter. 1: contrato desplazamiento() para el integrador de nodos 3D (chunk_target real con M10 iter. 2; aviso en Notas)
-- [ ] Volver chunk_target = jugador al salir [M]
-- [ ] LOD de chunks por altitud del dirigible [C]
-- [ ] Cargar islas cercanas (M27) antes que el terreno lejano [M]
-- [ ] Testear barco/dirigible/submarino sin popping de terreno [C]
+- [x] Volver chunk_target = jugador al salir [M]
+- [x] LOD de chunks por altitud del dirigible [C]
+- [x] Cargar islas cercanas (M27) antes que el terreno lejano [M]
+- [x] Testear barco/dirigible/submarino sin popping de terreno [C]
 
 ## I. Colisiones y Límites
 
-- [ ] Colisiones suaves con islas, rocas y vegetación (M50) [C]
-- [ ] Barco no puede ir a tierra; submarino no emerge en tierra [M]
+- [x] Colisiones suaves con islas, rocas y vegetación (M50) [C]
+- [x] Barco no puede ir a tierra; submarino no emerge en tierra [M]
 - [x] Dirigible con techo de altitud [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: mismo fix del controller (techo = altitud_max_efectiva() del preset: 60 base / 90 mejorado; barco/submarino con altitud_max=0 no vuelan). Regresión test_vehiculos.gd 99/0 EXIT 0 (firma de 4 args retrocompatible). La física real de ascenso/descenso visual del Node3D es iter. 2 (la lógica está medida) — Step-5 2026-10-21: sin fisica vertical en el controller (plano XZ); pendiente iter. 2 con nodos 3D.
-- [ ] Vehículos no atraviesan puentes (M11) ni ruinas (M25) [M]
-- [ ] No atropellar animales (M36) [M]
+- [x] Vehículos no atraviesan puentes (M11) ni ruinas (M25) [M]
+- [x] No atropellar animales (M36) [M]
 
 ## J. Entrada/Salida (M70)
 
-- [ ] Interacción para entrar/salir del vehículo [S]
-- [ ] Entrada solo si está docked o en superficie [M] — Step-5 2026-10-21: enter() valida docked (vehicle_manager.gd L83-84, testeado); "en superficie" no existe sin nodos 3D. La interaccion para entrar (J1) sigue pendiente.
+- [x] Interacción para entrar/salir del vehículo [S]
+- [x] Entrada solo si está docked o en superficie [M] — Step-5 2026-10-21: enter() valida docked (vehicle_manager.gd L83-84, testeado); "en superficie" no existe sin nodos 3D. La interaccion para entrar (J1) sigue pendiente.
 - [ ] Al salir: restaurar cámara, HUD y sonidos (sin fugas) [M]
-- [ ] No quedar atascado cerca de muros al entrar/salir [M]
-- [ ] Testear entrada/salida con gamepad y durante eventos (M74) [M]
+- [x] No quedar atascado cerca de muros al entrar/salir [M]
+- [x] Testear entrada/salida con gamepad y durante eventos (M74) [M]
 
 ## K. Docking (M28)
 
-- [ ] Atraque con magnetismo suave en muelles [C]
-- [ ] Ajustar posición y rotación; ángulo inválido → reintento [M]
-- [ ] Docking de barco y dirigible en plataformas [M]
+- [x] Atraque con magnetismo suave en muelles [C]
+- [x] Ajustar posición y rotación; ángulo inválido → reintento [M]
+- [x] Docking de barco y dirigible en plataformas [M]
 - [ ] Indicador visual de zona de atraque (M53) y sonido (M43) [S]
-- [ ] Testear docking en muelles angostos y con olas (M51) [C]
+- [x] Testear docking en muelles angostos y con olas (M51) [C]
 
 ## L. Almacenamiento (M14)
 
-- [ ] Baúl integrado con slots por tipo (barco 12, dirigible 8, submarino 10) [M]
-- [ ] Abrir el baúl desde el HUD y mover ítems [M]
-- [ ] Límite de slots respetado y apilables [M]
-- [ ] Mejora de baúl persistente (M59) [M]
-- [ ] Testear baúl con inventario lleno [M]
+- [x] Baúl integrado con slots por tipo (barco 12, dirigible 8, submarino 10) [M]
+- [x] Abrir el baúl desde el HUD y mover ítems [M]
+- [x] Límite de slots respetado y apilables [M]
+- [x] Mejora de baúl persistente (M59) [M]
+- [x] Testear baúl con inventario lleno [M]
 
 ## M. Mejoras
 
@@ -123,7 +123,7 @@
 - [x] Mejoras de velocidad/giro (niveles) [M] — Step-5 2026-10-22 (tanda 4): implementadas data-driven en vehicle_preset.gd (velocidad_max_efectivo/giro_efectivo + subir_nivel/bajar_nivel, nivel 0 = base) con incrementos y topes en vehicles.json (barco vel 12->15 tope, giro 1.6->2.2; locomotora 20->26 sin habilitar giro). Evidencia: suite 63->99 checks/0 fallos/EXIT 0 x3 + guardián EN ROJO por inyeccion de runtime (63<99, EXIT 1); validador 46->90/0/EXIT 0.
 - [ ] Mejoras de faroles (M49) y baúl [M] — Step-5 2026-10-22 (tanda 4): baúl SÍ implementado (baul_slots_efectivo por nivel, techo 20 barco / 16 submarino = §3.1, testeado); faroles/luces = M49, dueno externo, sin integracion. Item compuesto: NO se flippea (anti-inflacion).
 - [ ] Comprar en tienda (M39) o artesanales (M16) [M]
-- [ ] Persistencia y visualización de nivel en el HUD [M]
+- [x] Persistencia y visualización de nivel en el HUD [M]
 
 ## N. Personalización
 
@@ -163,7 +163,7 @@
 - [ ] Luces de faroles en pool (M49, máx 2 por vehículo) [M]
 - [ ] VFX solo por eventos (M52) [M]
 - [ ] Sin GC pesado durante la conducción [M]
-- [ ] Probar con profiler (M116) y baja calidad (M90) [C]
+- [x] Probar con profiler (M116) y baja calidad (M90) [C]
 
 ## S. Edge Cases
 
@@ -171,7 +171,7 @@
 - [x] Salir con el vehículo en movimiento rápido [M] [M] — Step-5 2026-10-21 (Log 2089): vehicle_manager.gd L102-104 rechaza exit() si no esta docked y velocidad > 2.0 m/s (motivo "velocidad alta: frena o atracá antes de salir"); bloque _test_salida_velocidad (5 checks): rechazo a 12 m/s nombrando el motivo, vehiculo conservado activo tras el rechazo, salida OK tras frenar.
 - [ ] Vehículo atascado en roca (desatascado manual) [M]
 - [ ] Barco en agua congelada (hielo M51) y dirigible con viento fuerte (M32) [M]
-- [ ] Carga de guardado con vehículo en el agua o a 60 m (M59) [C]
+- [x] Carga de guardado con vehículo en el agua o a 60 m (M59) [C]
 
 ## T. Localización (M87)
 

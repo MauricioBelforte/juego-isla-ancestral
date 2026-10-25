@@ -229,7 +229,7 @@
 - [x] Cambio de estado ilegal (MUNDO → BOOT directo): rechazo con warning [S] — verificado (step-5-kilocode, Kilo Code, 2026-10-12): `game_flow_manager.gd` L34 `cambiar_estado()` valida contra `TRANSICIONES`; MUNDO solo permite [PAUSA, CARGANDO, MENU, ERROR] (L22), así que MUNDO→BOOT es inválida: L39 `push_warning("[M40] Transición inválida %d -> %d")` + `return false`.
 - [x] Evento emitido sin suscriptores: no-error, reenvío no costoso [S]
 - [x] Nodo suscriptor liberado sin desuscribirse: limpiar_receptor poda sin error [M]
-- [ ] Carga de mundo interrumpida por error: vuelve a ESTADO_ERROR sin estado fantasma [C]
+- [x] Carga de mundo interrumpida por error: vuelve a ESTADO_ERROR sin estado fantasma [C]
 - [ ] Transición de escena con UI bloqueada y jugador escribe: entrada descartada, sin doble disparo [M]
 - [ ] Juego iniciado sin partida guardada: flujo nueva partida por defecto sin excepción [S]
 - [x] Dos cambios de estado simultáneos en un frame: solo el último válido se aplica, con warning si el primero es inválido — verificado (step-5-kilocode, Kilo Code, 2026-10-12): `game_flow_manager.gd` L34 `cambiar_estado()` es sincrónico y valida cada llamada contra el estado **ya actualizado** por la anterior: si dos llamadas caen en el mismo frame, la segunda se evalúa sobre el resultado de la primera, y una inválida devuelve `false` con `push_warning` sin cambiar el estado.

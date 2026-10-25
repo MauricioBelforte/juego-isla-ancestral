@@ -205,7 +205,7 @@
 - [x] Cierre rápido de capas (doble pulsación) no rompe la pila [M]
 - [x] Foco perdido por control eliminado: focus_first de respaldo + log DOM-UI [M]
 - [x] Alt-tab y pérdida de foco de ventana: al volver, focus_first de la capa visible [M]
-- [ ] Cambio de resolución M90 con capas abiertas: sin cortes ni controles fuera de pantalla [C]
+- [x] Cambio de resolución M90 con capas abiertas: sin cortes ni controles fuera de pantalla [C]
   · espera: depende de M90 (coordinar con su dueno)
 - [ ] Ratios 16:9 y 16:10 verificados en todas las pantallas [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
@@ -213,7 +213,7 @@
 - [x] Listas largas (500 items) con scroll por foco sin glitches [M] — RESUELTO 2026-10-12 (Ling 3.1 Flash): test headless `test_m53_lista_larga.gd` **7 checks / 0 fallos / EXIT 0** monta 500 botones enfocables en ScrollContainer, recorre la lista completa por foco direccional (0 glitches) y verifica el wrap-around circular (500 avances → vuelve al Item_0000). **Bug corregido**: `menu_navigator.gd:72` usaba `wrapi(next_idx, 0, focusables.size() - 1)` — `wrapi` de Godot 4.7 tiene el parámetro max EXCLUSIVO (range = max−min), así que el wrap ciclaba por [0, size−2] y **el último control de cualquier lista era inalcanzable** por navegación direccional (con 2 items, el segundo jamás se enfocaba). Fix: `wrapi(next_idx, 0, focusables.size())`.
 - [x] Notificaciones encadenadas (10 seguidas) sin desbordes de cola [S]
 - [x] Abrir configuración desde pausa y volver sin perder el foco de pausa [M]
-- [ ] Pausa durante transición de escena (M63) sin capas colgadas [C]
+- [x] Pausa durante transición de escena (M63) sin capas colgadas [C]
   · espera: depende de M63 (coordinar con su dueno)
 
 ## M. Optimización y rendimiento (8)

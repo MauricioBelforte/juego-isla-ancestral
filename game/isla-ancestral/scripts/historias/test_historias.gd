@@ -101,7 +101,7 @@
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -125,7 +125,37 @@ var _vistos: Dictionary = {}
 # 1 diarios + 3 NPC reales + 3 objetos reales + 2x7 end-to-end + 1 puente
 # diario). Piso MEDIDO en verde: 580/0/EXIT 0 x3. El guardian se probo
 # EN ROJO por inyeccion de runtime sobre el bloque U (ver Log 2169).
-const CHECKS_MINIMOS := 580
+# Iter. 17 (Log 2172, 2026-10-24): +5 cadenas del cluster Agricultura (item
+# L71 del 05; 03-Diseno L41 nombra invernadero/cruces/variantes M32 ->
+# invernadero con cadena previa del principal, variantes DUENO M32 fuera, 1
+# nombrada + 4 de extension declarada) -> 67 cadenas en el principal, 68
+# cargadas. 4 asserts de conteo REPARADOS (63->68 x3, 62->67 x1, mismos
+# valores en los mensajes) + bloque V del cluster Agricultura (+44 checks:
+# 15 carga/fuente/no-oculta + 1 tema previo + 1 expuestas + 2 unicidad local
+# + 1 diarios + 4 NPC reales + 5 objetos reales + 2x7 end-to-end + 1 puente
+# diario). Piso MEDIDO en verde: 624/0/EXIT 0 x3. El guardian se probo
+# EN ROJO por inyeccion de runtime sobre el bloque V (ver Log 2172).
+# Iter. 18 (Log 2173, 2026-10-24): +10 cadenas de los clusters Pesca (item
+# L77 del 05; 03-Diseno L42 nombra 3 temas -> 3 nombrados + 1 de extension
+# declarada) y Coleccion (item L78; 03-Diseno L43 nombra los 6 temas) ->
+# 77 cadenas en el principal, 78 cargadas. 4 asserts de conteo REPARADOS
+# (67->77 x2, 68->78 x2, mismos valores en los mensajes) + bloque W
+# _test_pesca_coleccion() (+67 checks: 30 carga/fuente/no-oculta + 1
+# expuestas + 2 unicidad local + 1 diarios + 1 NPC distintos + 6 NPC reales
+# + 1 objetos distintos + 10 objetos reales + 2x7 end-to-end + 1 puente
+# diario). Titulo de cadena-coleccion-sellos renombrado ("Los Sellos de
+# los Oficios") por colision con cadena-cofradia de iter. 6. Piso MEDIDO en
+# verde: 691/0/EXIT 0 x3. El guardian se probo EN ROJO por inyeccion de
+# runtime sobre el bloque W (ver Log 2173).
+# Iter. 19 (2026-10-24): +3 cadenas del cluster Postgame (items L129/L132/
+# L133/L134 del 05; 03-Diseno L47 nombra las 4: reconstruccion de la plaza
+# YA cubierta por cadena-epilogo-plaza del principal + memorial del Sello +
+# epilogo de la aldea + epilogo del guardian, final secreto -> oculta) ->
+# 80 cadenas en el principal, 81 cargadas. 4 asserts de conteo REPARADOS
+# (78->81 x2, 77->80 x1, mismos valores en los mensajes) + bloque X
+# _test_postgame_cluster(). El guardian se probara EN ROJO por inyeccion de
+# runtime sobre el bloque X.
+const CHECKS_MINIMOS := 742
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -168,6 +198,9 @@ func _run() -> void:
 	_test_consecuencias()
 	_test_exploracion()
 	_test_construccion()
+	_test_agricultura()
+	_test_pesca_coleccion()
+	_test_postgame_cluster()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -209,7 +242,7 @@ func _test_carga() -> void:
 	# en f6a07c6) -> 62 + 1 = 63. Los asserts de conteo de ABAJO se repararon en
 	# la misma iterada: con 62 cadenas en disco la suite habia quedado ROJA
 	# (6 fallos / EXIT 1, medido 05:13) por expects de 59/60 desactualizados.
-	_check(_h.cadenas_count() == 63, "63 cadenas cargadas tras el merge (62 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	_check(_h.cadenas_count() == 81, "81 cadenas cargadas tras el merge (80 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -436,7 +469,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 62, "catálogo principal con 62 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes + 5 investigacion + 6 puzzles + 8 exploracion + 3 construccion): %d" % principal.size())
+	_check(principal.size() == 80, "catálogo principal con 80 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes + 5 investigacion + 6 puzzles + 8 exploracion + 3 construccion + 5 agricultura + 4 pesca + 6 coleccion + 3 postgame): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -459,7 +492,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 63, "63 cadenas cargadas en runtime (62 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 81, "81 cadenas cargadas en runtime (80 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -1424,7 +1457,7 @@ func _test_puzzles_investigacion() -> void:
 			multi.append(cid)
 		for flag in cons:
 			flags[flag] = true
-	_check(flags.size() == 63, "63 consecuencias distintas sobre 63 cadenas cargadas (unicidad global): %d" % flags.size())
+	_check(flags.size() == 81, "81 consecuencias distintas sobre 81 cadenas cargadas (unicidad global): %d" % flags.size())
 	_check(multi.is_empty(), "cada cadena aporta exactamente 1 flag de consecuencia (%s)" % str(multi))
 	# NPCs REALES: cada npc de las 11 cadenas existe como recurso en data/villagers/
 	var npcs := {}
@@ -1874,6 +1907,425 @@ func _test_construccion() -> void:
 		ws.set_flag("kiosko_abierto", false)
 		ws.set_flag("senderos_del_pueblo_reparados", false)
 	_fin("U")
+
+
+func _test_agricultura() -> void:
+	# Iter. 17 (Log 2171, 2026-10-24): +5 cadenas del cluster Agricultura
+	# (item L71 del 05: "Crear 5 misiones de agricultura"). Los 3 temas que
+	# nombra 03-Diseno L41 son invernadero / cruces de semillas / variantes M32:
+	#   - invernadero YA tenia cadena previa (cadena-invernadero, principal)
+	#   - variantes estacionales = item L72, DUENO M32 (fuera, no se inventa)
+	#   -> las 5 de abajo son 1 tema nombrado (cruces de semillas) + 4 de
+	#      extension declarada (cultivos del invernadero, primera cosecha,
+	#      riego del manantial, macetas de la plaza), mismo patron que
+	#      Exploracion (3+5) e Investigacion (4+1).
+	_h.restore_save_data({})
+	var nuevas := ["cadena-agricultura-cruces", "cadena-agricultura-cultivos",
+		"cadena-agricultura-cosecha", "cadena-agricultura-riego",
+		"cadena-agricultura-macetas"]
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+		_check(not bool((_h.get_cadena(cid).get("oculta", false))), "%s NO es oculta (se descubre hablando)" % cid)
+	# Tema "invernadero" del diseno: cadena previa del principal (no se duplica)
+	_check(not _h.get_cadena("cadena-invernadero").is_empty(), "tema invernadero con cadena previa: cadena-invernadero")
+	# Visibles en disponibles desde el inicio
+	var disponibles: Array = _h.cadenas_disponibles()
+	var expuestas := 0
+	for cid in nuevas:
+		for d in disponibles:
+			if String(d) == cid:
+				expuestas += 1
+	_check(expuestas == 5, "las 5 de agricultura figuran en disponibles desde el inicio (%d expuestas)" % expuestas)
+	# Unicidad LOCAL de las 5 consecuencias nuevas (la global sobre las 68
+	# cadenas cargadas la mide el bloque R)
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 5, "5 consecuencias distintas en las cadenas de agricultura: %d" % flags.size())
+	_check(unicos, "consecuencias de agricultura sin colision entre si (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 5, "5 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# NPCs REALES: cada npc existe como recurso en data/villagers/
+	# (vera_ardilla = farera, guardiana de semillas; mateo_mapache = granjero;
+	#  teo_conejo = herbolario; luna_zorra = artesana - roles medidos en los .tres)
+	var npcs := {}
+	for cid in nuevas:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var npc := String((p as Dictionary).get("npc", ""))
+			if npc != "":
+				npcs[npc] = true
+	for npc in npcs:
+		_check(FileAccess.file_exists("res://data/villagers/%s.tres" % npc),
+			"NPC REAL %s existe en data/villagers/" % npc)
+	# Objetos REALES: cada objeto existe en data/items/ por campo id
+	var objetos := {}
+	for cid in nuevas:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var obj := String((p as Dictionary).get("objeto", ""))
+			if obj != "":
+				objetos[obj] = true
+	var ids_items := _ids_items_reales()
+	for obj in objetos:
+		_check(ids_items.has(obj), "objeto REAL %s existe en data/items/ (por campo id)" % obj)
+	# End-to-end 1: los cruces de semillas (vera_ardilla REAL;
+	# OBJ-EXT-011 "Jardin de hierbas" REAL)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"OBJ-EXT-011": 1})
+	var res1: Dictionary = _h.iniciar_cadena("cadena-agricultura-cruces")
+	_check(bool(res1.ok), "iniciar cadena-agricultura-cruces OK")
+	res1 = _h.reportar_paso("cadena-agricultura-cruces", "hablar", "vera_ardilla")
+	_check(bool(res1.ok), "cruces p1 hablar vera_ardilla OK")
+	res1 = _h.reportar_paso("cadena-agricultura-cruces", "explorar", "jardin")
+	_check(bool(res1.ok), "cruces p2 explorar jardin OK")
+	res1 = _h.reportar_entrega("cadena-agricultura-cruces")
+	_check(bool(res1.ok), "cruces p3 entregar OBJ-EXT-011 OK (inventario)")
+	res1 = _h.reportar_paso("cadena-agricultura-cruces", "puzzle", "cruz-de-semillas")
+	_check(bool(res1.ok), "cruces p4 puzzle OK")
+	_check(_h.esta_completada("cadena-agricultura-cruces"), "cadena-agricultura-cruces completada end-to-end")
+	_check(ws_has("cruces_de_semillas"), "consecuencia cruces_de_semillas aplicada (M21)")
+	# End-to-end 2: el riego del manantial (teo_conejo REAL;
+	# OBJ-HER-013 "Regadera mejorada" REAL)
+	if inv != null:
+		inv.agregar_items({"OBJ-HER-013": 1})
+	var res2: Dictionary = _h.iniciar_cadena("cadena-agricultura-riego")
+	_check(bool(res2.ok), "iniciar cadena-agricultura-riego OK")
+	res2 = _h.reportar_paso("cadena-agricultura-riego", "hablar", "teo_conejo")
+	_check(bool(res2.ok), "riego p1 hablar teo_conejo OK")
+	res2 = _h.reportar_paso("cadena-agricultura-riego", "explorar", "manantial")
+	_check(bool(res2.ok), "riego p2 explorar manantial OK")
+	res2 = _h.reportar_entrega("cadena-agricultura-riego")
+	_check(bool(res2.ok), "riego p3 entregar OBJ-HER-013 OK (inventario)")
+	res2 = _h.reportar_paso("cadena-agricultura-riego", "puzzle", "canal-del-manantial")
+	_check(bool(res2.ok), "riego p4 puzzle OK")
+	_check(_h.esta_completada("cadena-agricultura-riego"), "cadena-agricultura-riego completada end-to-end")
+	_check(ws_has("riego_del_huerto"), "consecuencia riego_del_huerto aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# los bloques H/K/L/M/N/O/P/Q/R/T/U). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-agricultura-cruces"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	# Higiene: se apenden los flags para no contaminar un bloque posterior
+	var ws := root.get_node_or_null("WorldState")
+	if ws != null:
+		ws.set_flag("cruces_de_semillas", false)
+		ws.set_flag("riego_del_huerto", false)
+	_fin("V")
+
+func _test_pesca_coleccion() -> void:
+	# Iter. 18 (Log 2173, 2026-10-24): +10 cadenas de los clusters Pesca
+	# (item L77 del 05: "Crear 4 misiones de pesca") y Coleccion (item L78:
+	# "Crear 6 misiones de coleccion"). 03-Diseno L42 nombra 3 temas de pesca
+	# (peces-trofeo M36, documentacion, suelta) y L43 nombra los 6 de coleccion
+	# (murales, glifos, sellos decorativos, minerales, peces, plantas M36):
+	#   -> pesca = 3 temas nombrados + 1 de extension declarada (nocturna),
+	#      mismo patron que Exploracion (3+5) e Investigacion (4+1).
+	#   -> coleccion = los 6 temas nombrados.
+	_h.restore_save_data({})
+	var pesca := ["cadena-pesca-trofeos", "cadena-pesca-documentacion",
+		"cadena-pesca-suelta", "cadena-pesca-nocturna"]
+	var coleccion := ["cadena-coleccion-murales", "cadena-coleccion-glifos",
+		"cadena-coleccion-sellos", "cadena-coleccion-minerales",
+		"cadena-coleccion-peces", "cadena-coleccion-plantas"]
+	var nuevas := pesca + coleccion
+	for cid in nuevas:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+		_check(not bool((_h.get_cadena(cid).get("oculta", false))), "%s NO es oculta (se descubre hablando)" % cid)
+	# Visibles en disponibles desde el inicio
+	var disponibles: Array = _h.cadenas_disponibles()
+	var expuestas := 0
+	for cid in nuevas:
+		for d in disponibles:
+			if String(d) == cid:
+				expuestas += 1
+	_check(expuestas == 10, "las 10 de pesca/coleccion figuran en disponibles desde el inicio (%d expuestas)" % expuestas)
+	# Unicidad LOCAL de las 10 consecuencias nuevas (la global sobre las 78
+	# cadenas cargadas la mide el bloque R)
+	var flags := {}
+	var unicos := true
+	for cid in nuevas:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 10, "10 consecuencias distintas en las cadenas de pesca/coleccion: %d" % flags.size())
+	_check(unicos, "consecuencias de pesca/coleccion sin colision entre si (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in nuevas:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 10, "10 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# NPCs REALES: cada npc existe como recurso en data/villagers/
+	# (finneas_zorro = pescador, sofia_buho = bibliotecaria, teo_conejo =
+	#  herbolario, luna_zorra = artesana, olivia_nutria = sastra,
+	#  ramon_tejon = herrero - profesiones medidas en los .tres)
+	var npcs := {}
+	for cid in nuevas:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var npc := String((p as Dictionary).get("npc", ""))
+			if npc != "":
+				npcs[npc] = true
+	_check(npcs.size() == 6, "6 NPC distintos en las 10 cadenas: %d" % npcs.size())
+	for npc in npcs:
+		_check(FileAccess.file_exists("res://data/villagers/%s.tres" % npc),
+			"NPC REAL %s existe en data/villagers/" % npc)
+	# Objetos REALES: cada objeto existe en data/items/ por campo id
+	var objetos := {}
+	for cid in nuevas:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var obj := String((p as Dictionary).get("objeto", ""))
+			if obj != "":
+				objetos[obj] = true
+	_check(objetos.size() == 10, "10 objetos distintos en las 10 cadenas: %d" % objetos.size())
+	var ids_items := _ids_items_reales()
+	for obj in objetos:
+		_check(ids_items.has(obj), "objeto REAL %s existe en data/items/ (por campo id)" % obj)
+	# End-to-end 1: los peces trofeo (finneas_zorro REAL;
+	# OBJ-HER-011 "Cana de oro" REAL)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"OBJ-HER-011": 1})
+	var res1: Dictionary = _h.iniciar_cadena("cadena-pesca-trofeos")
+	_check(bool(res1.ok), "iniciar cadena-pesca-trofeos OK")
+	res1 = _h.reportar_paso("cadena-pesca-trofeos", "hablar", "finneas_zorro")
+	_check(bool(res1.ok), "trofeos p1 hablar finneas_zorro OK")
+	res1 = _h.reportar_paso("cadena-pesca-trofeos", "explorar", "muelle_viejo")
+	_check(bool(res1.ok), "trofeos p2 explorar muelle_viejo OK")
+	res1 = _h.reportar_paso("cadena-pesca-trofeos", "puzzle", "trofeo-de-la-marea")
+	_check(bool(res1.ok), "trofeos p3 puzzle OK")
+	res1 = _h.reportar_entrega("cadena-pesca-trofeos")
+	_check(bool(res1.ok), "trofeos p4 entregar OBJ-HER-011 OK (inventario)")
+	_check(_h.esta_completada("cadena-pesca-trofeos"), "cadena-pesca-trofeos completada end-to-end")
+	_check(ws_has("trofeo_de_la_marea_exhibido"), "consecuencia trofeo_de_la_marea_exhibido aplicada (M21)")
+	# End-to-end 2: las plantas raras (teo_conejo REAL;
+	# OBJ-PLA-004 "Orquidea" REAL)
+	if inv != null:
+		inv.agregar_items({"OBJ-PLA-004": 1})
+	var res2: Dictionary = _h.iniciar_cadena("cadena-coleccion-plantas")
+	_check(bool(res2.ok), "iniciar cadena-coleccion-plantas OK")
+	res2 = _h.reportar_paso("cadena-coleccion-plantas", "hablar", "teo_conejo")
+	_check(bool(res2.ok), "plantas p1 hablar teo_conejo OK")
+	res2 = _h.reportar_paso("cadena-coleccion-plantas", "explorar", "jardines")
+	_check(bool(res2.ok), "plantas p2 explorar jardines OK")
+	res2 = _h.reportar_paso("cadena-coleccion-plantas", "puzzle", "orquidea-escondida")
+	_check(bool(res2.ok), "plantas p3 puzzle OK")
+	res2 = _h.reportar_entrega("cadena-coleccion-plantas")
+	_check(bool(res2.ok), "plantas p4 entregar OBJ-PLA-004 OK (inventario)")
+	_check(_h.esta_completada("cadena-coleccion-plantas"), "cadena-coleccion-plantas completada end-to-end")
+	_check(ws_has("plantas_raras_clasificadas"), "consecuencia plantas_raras_clasificadas aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# los bloques H/K/L/M/N/O/P/Q/R/T/U/V). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-pesca-trofeos"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	# Higiene: se apenden los flags para no contaminar un bloque posterior
+	var ws := root.get_node_or_null("WorldState")
+	if ws != null:
+		ws.set_flag("trofeo_de_la_marea_exhibido", false)
+		ws.set_flag("plantas_raras_clasificadas", false)
+	_fin("W")
+
+
+func _test_postgame_cluster() -> void:
+	# Iter. 19 (2026-10-24): cluster Postgame del 03-Diseno L47. Las 4 cadenas
+	# de postgame = reconstruccion de la plaza (cadena-epilogo-plaza del
+	# principal, L130) + memorial del Sello (item L132 del 05) + epilogo de la
+	# aldea (L133) + epilogo del guardian (L134, final secreto). Esta iteracion
+	# crea las 3 que faltaban; todas nacen con postgame:true (las filtra
+	# cadenas_disponibles/iniciar_cadena hasta que Historia elige un final,
+	# medido abajo). El epilogo del guardian es OCULTO (final secreto, patron
+	# ocultas L38): no figura en disponibles hasta iniciarse. L34 (historia de
+	# la plaza) sigue [ ] honesto: el rechazo del tipo "construir" es
+	# PERSISTENTE (decision del director, msg 153) - no se toca sin orden.
+	_h.restore_save_data({})
+	var memorial := ["cadena-memorial-sello", "cadena-epilogo-aldea",
+		"cadena-epilogo-guardian"]
+	var postgame_previas := ["cadena-epilogo-plaza"]
+	for cid in memorial:
+		_check(not _h.get_cadena(cid).is_empty(), "%s cargada" % cid)
+		_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal" % cid)
+		_check(bool(_h.get_cadena(cid).get("postgame", false)), "%s marcada postgame" % cid)
+	# Las 4 de postgame del diseno estan en el catalogo
+	var todas_postgame := memorial + postgame_previas
+	var en_catalogo := 0
+	for cid in todas_postgame:
+		if not _h.get_cadena(cid).is_empty():
+			en_catalogo += 1
+	_check(en_catalogo == 4, "las 4 cadenas de postgame del diseno estan en el catalogo (%d)" % en_catalogo)
+	# Oculta: el guardian (final secreto) NO figura en disponibles; memorial y
+	# aldea tampoco figuran por el gate de postgame (sin final elegido)
+	_check(bool(_h.get_cadena("cadena-epilogo-guardian").get("oculta", false)),
+		"cadena-epilogo-guardian es oculta (final secreto)")
+	_check(not bool(_h.get_cadena("cadena-memorial-sello").get("oculta", false)),
+		"cadena-memorial-sello NO es oculta")
+	_check(not bool(_h.get_cadena("cadena-epilogo-aldea").get("oculta", false)),
+		"cadena-epilogo-aldea NO es oculta")
+	# Estado limpio: el bloque F dejo un final elegido (su loop termina en
+	# "secreto"); se limpia para medir el gate de postgame desde cero (mismo
+	# montaje que el bloque F).
+	var h := root.get_node_or_null("Historia")
+	var ws := root.get_node_or_null("WorldState")
+	if h != null:
+		h.restore_save_data({"completados": [], "sellos": [], "final_elegido": ""})
+	if ws != null:
+		ws.set_flag("templo_brisa_abierto", false)
+		ws.set_flag("pistas_secreto_completas", false)
+	_h.restore_save_data({})
+	var disponibles: Array = _h.cadenas_disponibles()
+	var expuestas := 0
+	for cid in memorial:
+		for d in disponibles:
+			if String(d) == cid:
+				expuestas += 1
+	_check(expuestas == 0, "ninguna de las 3 en disponibles sin final elegido (gate postgame/oculta) (%d expuestas)" % expuestas)
+	# Unicidad LOCAL de las 3 consecuencias nuevas (la global sobre las 81
+	# cargadas la mide el bloque R)
+	var flags := {}
+	var unicos := true
+	for cid in memorial:
+		var cons: Dictionary = _h.get_cadena(cid).get("consecuencia", {})
+		for flag in cons:
+			if flags.has(flag):
+				unicos = false
+			flags[flag] = true
+	_check(flags.size() == 3, "3 consecuencias distintas en las cadenas de postgame: %d" % flags.size())
+	_check(unicos, "consecuencias de postgame sin colision entre si (%s)" % str(flags.keys()))
+	# Capitulos de diario distintos entre si
+	var diarios := {}
+	var dunicos := true
+	for cid in memorial:
+		var d := String((_h.get_cadena(cid).get("recompensa", {}) as Dictionary).get("diario", ""))
+		if diarios.has(d):
+			dunicos = false
+		diarios[d] = true
+	_check(dunicos and diarios.size() == 3, "3 capitulos de diario distintos (%s)" % str(diarios.keys()))
+	# NPCs REALES: cada npc existe como recurso en data/villagers/
+	# (ramon_tejon herrero, aria_ciervo trovadora, pablo_pato ceramista,
+	#  catalina_oso cocinera, nico_gato guardabosques - profesiones medidas
+	#  en los .tres)
+	var npcs := {}
+	for cid in memorial:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var npc := String((p as Dictionary).get("npc", ""))
+			if npc != "":
+				npcs[npc] = true
+	_check(npcs.size() == 5, "5 NPC distintos en las 3 cadenas: %d" % npcs.size())
+	for npc in npcs:
+		_check(FileAccess.file_exists("res://data/villagers/%s.tres" % npc),
+			"NPC REAL %s existe en data/villagers/" % npc)
+	# Objetos REALES: cada objeto existe en data/items/ por campo id
+	var objetos := {}
+	for cid in memorial:
+		for p in (_h.get_cadena(cid).get("pasos", []) as Array):
+			var obj := String((p as Dictionary).get("objeto", ""))
+			if obj != "":
+				objetos[obj] = true
+	_check(objetos.size() == 3, "3 objetos distintos en las 3 cadenas: %d" % objetos.size())
+	var ids_items := _ids_items_reales()
+	for obj in objetos:
+		_check(ids_items.has(obj), "objeto REAL %s existe en data/items/ (por campo id)" % obj)
+	# End-to-end: completar el grafo de M22 hasta final_principal (mismo
+	# montaje que el bloque F) y correr las 3 cadenas.
+	if h != null:
+		for s in SELLOS_C4:
+			h.marcar_sello(s)
+		if ws != null:
+			ws.set_flag("templo_brisa_abierto", true)
+		for paso in ["prologo", "c1", "c2", "c3", "c4", "c5", "c6", "c7"]:
+			h.completar_nodo(paso)
+		h.completar_nodo("final_principal")
+	_check(h != null and h.final_elegido() == "principal",
+		"final_elegido = 'principal' tras completar el grafo de M22")
+	# Con final elegido, las 2 visibles ya figuran en disponibles (la oculta no)
+	disponibles = _h.cadenas_disponibles()
+	expuestas = 0
+	for cid in ["cadena-memorial-sello", "cadena-epilogo-aldea"]:
+		for d in disponibles:
+			if String(d) == cid:
+				expuestas += 1
+	_check(expuestas == 2, "memorial y aldea en disponibles tras el final (%d expuestas)" % expuestas)
+	# E2E 1: memorial del sello (ramon_tejon REAL; piedra_caliza REAL)
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"piedra_caliza": 1})
+	var r1: Dictionary = _h.iniciar_cadena("cadena-memorial-sello")
+	_check(bool(r1.ok), "iniciar cadena-memorial-sello OK")
+	r1 = _h.reportar_paso("cadena-memorial-sello", "hablar", "ramon_tejon")
+	_check(bool(r1.ok), "memorial p1 hablar ramon_tejon OK")
+	r1 = _h.reportar_paso("cadena-memorial-sello", "explorar", "plaza")
+	_check(bool(r1.ok), "memorial p2 explorar plaza OK")
+	r1 = _h.reportar_entrega("cadena-memorial-sello")
+	_check(bool(r1.ok), "memorial p3 entregar piedra_caliza OK (inventario)")
+	r1 = _h.reportar_paso("cadena-memorial-sello", "hablar", "aria_ciervo")
+	_check(bool(r1.ok), "memorial p4 hablar aria_ciervo OK")
+	_check(_h.esta_completada("cadena-memorial-sello"), "cadena-memorial-sello completada end-to-end")
+	_check(ws_has("memorial_del_sello_erguido"), "consecuencia memorial_del_sello_erguido aplicada (M21)")
+	# E2E 2: epilogo de la aldea (pablo_pato REAL; clay "Arcilla" REAL)
+	if inv != null:
+		inv.agregar_items({"clay": 1})
+	var r2: Dictionary = _h.iniciar_cadena("cadena-epilogo-aldea")
+	_check(bool(r2.ok), "iniciar cadena-epilogo-aldea OK")
+	r2 = _h.reportar_paso("cadena-epilogo-aldea", "hablar", "pablo_pato")
+	_check(bool(r2.ok), "aldea p1 hablar pablo_pato OK")
+	r2 = _h.reportar_paso("cadena-epilogo-aldea", "explorar", "senderos_del_pueblo")
+	_check(bool(r2.ok), "aldea p2 explorar senderos_del_pueblo OK")
+	r2 = _h.reportar_entrega("cadena-epilogo-aldea")
+	_check(bool(r2.ok), "aldea p3 entregar clay OK (inventario)")
+	r2 = _h.reportar_paso("cadena-epilogo-aldea", "hablar", "catalina_oso")
+	_check(bool(r2.ok), "aldea p4 hablar catalina_oso OK")
+	_check(_h.esta_completada("cadena-epilogo-aldea"), "cadena-epilogo-aldea completada end-to-end")
+	_check(ws_has("epilogo_de_la_aldea_contado"), "consecuencia epilogo_de_la_aldea_contado aplicada (M21)")
+	# E2E 3: epilogo del guardian (nico_gato REAL; fragmento_ancestral REAL)
+	if inv != null:
+		inv.agregar_items({"fragmento_ancestral": 1})
+	var r3: Dictionary = _h.iniciar_cadena("cadena-epilogo-guardian")
+	_check(bool(r3.ok), "iniciar cadena-epilogo-guardian OK (oculta se inicia directo)")
+	r3 = _h.reportar_paso("cadena-epilogo-guardian", "hablar", "nico_gato")
+	_check(bool(r3.ok), "guardian p1 hablar nico_gato OK")
+	r3 = _h.reportar_paso("cadena-epilogo-guardian", "explorar", "acantilado")
+	_check(bool(r3.ok), "guardian p2 explorar acantilado OK")
+	r3 = _h.reportar_paso("cadena-epilogo-guardian", "puzzle", "guardian-ultima-guarda")
+	_check(bool(r3.ok), "guardian p3 puzzle OK")
+	r3 = _h.reportar_entrega("cadena-epilogo-guardian")
+	_check(bool(r3.ok), "guardian p4 entregar fragmento_ancestral OK (inventario)")
+	_check(_h.esta_completada("cadena-epilogo-guardian"), "cadena-epilogo-guardian completada end-to-end")
+	_check(ws_has("epilogo_del_guardian_cantado"), "consecuencia epilogo_del_guardian_cantado aplicada (M21)")
+	# Puente diario M23->M55: sin entrada mision_cadena-* en el catalogo de M55
+	# el puente degrada en silencio (finding medido, dueno M55; mismo patron que
+	# los bloques H/K/L/M/N/O/P/Q/R/T/U/V/W). No se inventa contenido de M55.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_cadena-memorial-sello"),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	# Higiene: se apagan los flags para no contaminar un bloque posterior
+	if ws != null:
+		ws.set_flag("memorial_del_sello_erguido", false)
+		ws.set_flag("epilogo_de_la_aldea_contado", false)
+		ws.set_flag("epilogo_del_guardian_cantado", false)
+	_fin("X")
 
 
 ## Busca un token literal en un arbol (.json/.tres) y devuelve las rutas que lo
