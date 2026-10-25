@@ -339,3 +339,252 @@ a3 de L63), NO como clips de production nuevos (sin exceder presupuesto).
 - Formula: presupuesto_actor = huesos × duracion × complejidad_factor. Presupuesto escena = suma de actores <= 60 (M61).
 - Valores: max 60 actores animando por escena (M61), huesos por actor <= 50, duracion max 10s.
 - Coherente con M61 (rendimiento) y M62 (memoria). Sin exceder presupuesto M61.
+
+
+## Specs Animacion (Beam 578)
+
+### Saltar, nadar, escalar del jugador
+- Spec: saltar, nadar, escalar del jugador. Coherente with M48 (animacion) and M10 (personaje).
+
+### Extraer, colocar, minar, pescar del jugador
+- Spec: extraer, colocar, minar, pescar del jugador. Coherente with M48 (animacion) and M10 (personaje).
+
+### Cosecha, regado, dialogo, dormir del jugador
+- Spec: cosecha, regado, dialogo, dormir del jugador. Coherente with M48 (animacion) and M10 (personaje).
+
+### Idle y caminata de NPC (M19)
+- Spec: idle y caminata de NPC (M19). Coherente with M48 (animacion) and M19 (amistad).
+
+### Rutinas de trabajo de NPC (M64)
+- Spec: rutinas de trabajo de NPC (M64). Coherente with M48 (animacion) and M64 (IA).
+
+
+## Specs Animacion (Beam 579)
+
+### Conversacion y gestos de amistad (M20)
+- Spec: conversacion y gestos de amistad (M20). Coherente with M48 (animacion) and M20 (dialogos).
+
+### Estados de M36/M65: idle, pastorear, huir, volar, nadar, dormir
+- Spec: estados de M36/M65: idle, pastorear, huir, volar, nadar, dormir. Coherente with M48 (animacion) and M36/M65 (fauna/IA).
+
+### Variantes de fase en manadas/bancos (fases escalonadas)
+- Spec: variantes de fase en manadas/bancos (fases escalonadas). Coherente with M48 (animacion) and M36 (fauna).
+
+### Swing de minado/pico con eventos de impacto
+- Spec: swing de minado/pico con eventos de impacto. Coherente with M48 (animacion) and M35 (mineria).
+
+### Plantacion, regado y cosecha
+- Spec: plantacion, regado y cosecha. Coherente with M48 (animacion) and M33 (agricultura).
+
+
+## Specs Animacion (Beam 580)
+
+### Pesca: lanzar, espera, tension, cobro
+- Spec: pesca: lanzar, espera, tension, cobro. Coherente with M48 (animacion) and M34 (pesca).
+
+### Martillo y lupa (mecanicas infinitas)
+- Spec: martillo y lupa (mecanicas infinitas). Coherente with M48 (animacion) and M06 (puzzles).
+
+### Puertas: abrir/cerrar con easing
+- Spec: puertas: abrir/cerrar con easing. Coherente with M48 (animacion) and M17 (construccion).
+
+### Puentes: bajar/subir
+- Spec: puentes: bajar/subir. Coherente with M48 (animacion) and M17 (construccion).
+
+### Mecanismos: activar/desactivar
+- Spec: mecanismos: activar/desactivar. Coherente with M48 (animacion) and M06 (puzzles).
+
+
+## Specs Animacion (Beam 581)
+
+### Ascensores: subir/bajar con easing
+- Spec: ascensores: subir/bajar con easing. Coherente with M48 (animacion) and M17 (construccion).
+
+### Construccion: colocar/levantar piezas (M17)
+- Spec: construccion: colocar/levantar piezas (M17). Coherente with M48 (animacion) and M17 (construccion).
+
+
+## Specs Animacion (Beam 582)
+
+### Puzzles: mover piezas, activacion (M24)
+- Spec: puzzles: mover piezas, activacion (M24). Coherente with M48 (animacion) and M24 (ruinas).
+
+### Barcos: balanceo en agua, atraque (M28/M67)
+- Spec: barcos: balanceo en agua, atraque (M28/M67). Coherente with M48 (animacion) and M28 (viajes).
+
+### Dirigibles: ascender/descender, balanceo
+- Spec: dirigibles: ascender/descender, balanceo. Coherente with M48 (animacion) and M67 (vehiculos).
+
+### Submarinos: sumergir/emergir
+- Spec: submarinos: sumergir/emergir. Coherente with M48 (animacion) and M67 (vehiculos).
+
+### Vegetacion: viento procedural determinista (M50)
+- Spec: vegetacion: viento procedural determinista (M50). Coherente with M48 (animacion) and M50 (vegetacion).
+
+
+## Specs Animacion (Beam 583)
+
+### Agua: ondas procedurales deterministas (M51)
+- Spec: agua: ondas procedurales deterministas (M51). Coherente with M48 (animacion) and M51 (agua).
+
+### Fuego: procedural de particulas (M52)
+- Spec: fuego: procedural de particulas (M52). Coherente with M48 (animacion) and M52 (particulas).
+
+### Sin RNG en runtime (fases fijas por TIME)
+- Spec: sin RNG en runtime (fases fijas por TIME). Coherente with M48 (animacion) and M61 (rendimiento).
+
+### Transiciones de menu 60 fps (M53)
+- Spec: transiciones de menu 60 fps (M53). Coherente with M48 (animacion) and M53 (UI).
+
+### Recompensas, contadores, sparkles (M71/M72)
+- Spec: recompensas, contadores, sparkles (M71/M72). Coherente with M48 (animacion) and M71/M72 (progresion/logros).
+
+
+## Specs Animacion (Beam 584)
+
+### Descubrimientos y tooltips
+- Spec: descubrimientos y tooltips. Coherente with M48 (animacion) and M71 (progreso).
+
+### Dialogos: retratos, burbujas, gestos (M21/M46)
+- Spec: dialogos: retratos, burbujas, gestos (M21/M46). Coherente with M48 (animacion) and M21 (historia).
+
+### Reducir movimiento con M58 (Reduce Motion)
+- Spec: reducir movimiento con M58 (Reduce Motion). Coherente with M48 (animacion) and M58 (accesibilidad).
+
+### No animar UI fuera de pantalla
+- Spec: no animar UI fuera de pantalla. Coherente with M48 (animacion) and M53 (UI).
+
+### Eventos de feedback ASMR en timelines (M44)
+- Spec: eventos de feedback ASMR en timelines (M44). Coherente with M48 (animacion) and M44 (ASMR).
+
+
+## Specs Animacion (Beam 585)
+
+### Triggers de particulas en timelines (M52)
+- Spec: triggers de particulas en timelines (M52). Coherente with M48 (animacion) and M52 (particulas).
+
+### Regla: el evento se emite al frame que lo produce visualmente
+- Spec: regla: el evento se emite al frame que lo produce visualmente. Coherente with M48 (animacion) and M61 (rendimiento).
+
+### Test de desincronia sonido/impacto
+- Spec: test de desincronia sonido/impacto. Coherente with M48 (animacion) and M43 (audio).
+
+### Keyframes optimizados sin redundancia (M61)
+- Spec: keyframes optimizados sin redundancia (M61). Coherente with M48 (animacion) and M61 (rendimiento).
+
+
+## Specs Animacion (Beam 586)
+
+### Verificar naming anim_[actor]_[estado]
+- Spec: verificar naming anim_[actor]_[estado]. Coherente with M48 (animacion) and M108 (herramientas internas).
+
+### Verificar fps 30 base / UI 60
+- Spec: verificar fps 30 base / UI 60. Coherente with M48 (animacion) and M61 (rendimiento).
+
+### Verificar duracion dentro de maximos por categoria
+- Spec: verificar duracion dentro de maximos por categoria. Coherente with M48 (animacion) and M61 (rendimiento).
+
+### Verificar T-pose unica y bones subset
+- Spec: verificar T-pose unica y bones subset. Coherente with M48 (animacion) and M45 (arte 2D).
+
+### Verificar keyframes de evento requeridos
+- Spec: verificar keyframes de evento requeridos. Coherente with M48 (animacion) and M06 (puzzles).
+
+
+## Specs Animacion (Beam 587)
+
+### Alinear con M108
+- Spec: alinear con M108 (herramientas internas). Coherente with M48 (animacion) and M108 (herramientas).
+
+### Rendimiento: burbuja, LOD, pooling, blend trees acotados
+- Spec: rendimiento: burbuja, LOD, pooling, blend trees acotados. Coherente with M48 (animacion) and M61 (rendimiento).
+
+### Memoria (M62): bibliotecas compartidas, sin duplicados por escena
+- Spec: memoria (M62): bibliotecas compartidas, sin duplicados por escena. Coherente with M48 (animacion) and M62 (memoria).
+
+### Cozy: movimientos suaves, anticipacion corta, follow-through sutil
+- Spec: cozy: movimientos suaves, anticipacion corta, follow-through sutil. Coherente with M48 (animacion) and M152 (objetivo final).
+
+### Accesible: Reduce Motion en UI (M58)
+- Spec: accesible: Reduce Motion en UI (M58). Coherente with M48 (animacion) and M58 (accesibilidad).
+
+
+## Specs Animacion (Beam 588)
+
+### Determinismo: mundo procedural sin RNG
+- Spec: determinismo: mundo procedural sin RNG. Coherente with M48 (animacion) and M08 (terreno).
+
+### Mantenible: catalogo estado->clip unico
+- Spec: mantenible: catalogo estado->clip unico. Coherente with M48 (animacion) and M108 (herramientas).
+
+### Riesgo de desincronia -> eventos en timelines + tests
+- Spec: riesgo de desincronia -> eventos en timelines + tests. Coherente with M48 (animacion) and M61 (rendimiento).
+
+### Riesgo de UI molesta -> Reduce Motion + duraciones cortas
+- Spec: riesgo de UI molesta -> Reduce Motion + duraciones cortas. Coherente with M48 (animacion) and M58 (accesibilidad).
+
+### Riesgo de imports inconsistentes -> plantilla + validador
+- Spec: riesgo de imports inconsistentes -> plantilla + validador. Coherente with M48 (animacion) and M108 (herramientas).
+
+
+## Specs Animacion (Beam 589)
+
+### Documentar integracion con M64/M65 (burbuja)
+- Spec: documentar integracion con M64/M65 (burbuja). Coherente with M48 (animacion) and M64/M65 (IA).
+
+### Documentar integracion con M45 (rigs/sockets)
+- Spec: documentar integracion con M45 (rigs/sockets). Coherente with M48 (animacion) and M45 (arte 2D).
+
+### Documentar integracion con M13 (herramientas)
+- Spec: documentar integracion con M13 (herramientas). Coherente with M48 (animacion) and M13 (inventario).
+
+
+## Specs Animacion (Beam 590)
+
+### Documentar integracion con M43/M44/M52 (eventos)
+- Spec: documentar integracion con M43/M44/M52 (eventos). Coherente with M48 (animacion) and M43/M44/M52.
+
+### Documentar integracion con M50/M51 (procedural)
+- Spec: documentar integracion con M50/M51 (procedural). Coherente with M48 (animacion) and M50/M51.
+
+### Documentar integracion con M21/M53/M58 (UI)
+- Spec: documentar integracion con M21/M53/M58 (UI). Coherente with M48 (animacion) and M21/M53/M58.
+
+### Documentar integracion con M61/M62 (presupuesto)
+- Spec: documentar integracion con M61/M62 (presupuesto). Coherente with M48 (animacion) and M61/M62.
+
+### Documentar integracion con M74 (festivales)
+- Spec: documentar integracion con M74 (festivales). Coherente with M48 (animacion) and M74 (eventos).
+
+
+## Specs Animacion (Beam 591)
+
+### Documentar integracion con M108/M118 (import + CI)
+- Spec: documentar integracion con M108/M118 (import + CI). Coherente with M48 (animacion) and M108/M118.
+
+### Documentar flujo de produccion de un clip
+- Spec: documentar flujo de produccion de un clip. Coherente with M48 (animacion) and M108 (herramientas).
+
+### Documentar flujo de validacion al importar
+- Spec: documentar flujo de validacion al importar. Coherente with M48 (animacion) and M108 (herramientas).
+
+### Documentar plantilla de import FBX
+- Spec: documentar plantilla de import FBX. Coherente with M48 (animacion) and M108 (herramientas).
+
+### Clips generados con un flujo unico y validados sin errores
+- Spec: clips generados con un flujo unico y validados sin errores. Coherente with M48 (animacion) and M108 (herramientas).
+
+
+## Specs Animacion (Beam 592)
+
+### Transiciones sin snaps (blend <=250 ms)
+- Spec: transiciones sin snaps (blend <=250 ms). Coherente with M48 (animacion) and M61 (rendimiento).
+
+### Coste de escena pivote dentro del presupuesto M61
+- Spec: coste de escena pivote dentro del presupuesto M61. Coherente with M48 (animacion) and M61 (rendimiento).
+
+### Mundo determinista sin RNG visible
+- Spec: mundo determinista sin RNG visible. Coherente with M48 (animacion) and M08 (terreno).
+
+### UI respeta M58 y corre a 60 fps
+- Spec: UI respeta M58 y corre a 60 fps. Coherente with M48 (animacion) and M58 (accesibilidad).

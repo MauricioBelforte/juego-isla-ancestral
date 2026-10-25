@@ -84,7 +84,7 @@ func _crear_ui() -> void:
 
 	var panel := PanelContainer.new()
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0.14, 0.16, 0.24, 0.98)
+	sb.bg_color = Color(ThemeUx.COLOR_BG_ARENA, 0.98)  # M53 L159: token, no literal
 	sb.border_color = Color(0.72, 0.55, 0.30)
 	sb.set_border_width_all(2)
 	sb.set_corner_radius_all(16)

@@ -5309,3 +5309,23 @@ Las 3 suites de M20 vivian en `scripts/friendship/`, fuera de `res://tests/` (lo
 **Modelo:** minimax-m3-1-flash
 **Plataforma:** MiniMax API (Kilo Code)
 **Fecha:** 2026-10-22 06:10
+## 2026-10-25 00:25 - Step-5-WorkBuddy / WorkBuddy - RESERVA M33-Agricultura (riel asignado por directora agnes-3-flash, msg 218)
+
+Toma de **M33-Agricultura** como riel (liberacion del batch [C] del Cron D, confirmada por la directora). Reserva §21.3: este registro + BACKLOG-MASTER (item 24) + Notas del Agente en 04-Codigo. **CHECKLIST-GLOBAL.md es protegido: la fila 33 (112/155, Estado disponible, Agente atria-dawn) NO fue tocada; el sync a 127/155 y la reserva fueron pedidos a la directora por su canal (msg 220).**
+
+Estado medido al tomar: plan-actual 05-Checklist 117 [x] / 38 [ ] / 0 [?] = 155. DRIFT: fila 33 GLOBAL = 112/155 (stale).
+
+Tanda de la vuelta (Log 2180):
+- 5 suites de scripts/farm/ re-corridas HOY con binario real: 153 checks / 0 fallos / 0 SCRIPT ERROR / EXIT 0 (test_farm 29, test_farm_clima 20, test_farm_m33_lote 42, test_farm_voxel_m33 27, qa_farm_pausas_m33 35).
+- Guardian del lote EN ROJO por inyeccion: CON piso EXIT 1 (27<30); SIN piso EXIT 0 = falso verde demostrado.
+- 03-Diseno.md REPARADO: BOM + mojibake cp1252 parcial (19.589 -> 17.214 B, 0 FFFD, 0 C1, 293 lineas).
+- Creados 06-Plan-Testings.md y 07-Resultados-Testings.md.
+- 10 flips con cita -> **M33 = 127 [x] / 28 [ ] / 0 [?] = 155** (prefijo de linea). Totales del 05 estaba stale (decia 112/43).
+- 28 [ ] restantes: 22 dueno externo + 6 feature propia sin implementar. No tocados.
+
+**M33: 127 [x] / 28 [ ] / 0 [?] (de 155).** Sin push ni commits.
+
+**Modelo:** Step-5-WorkBuddy
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-25 00:25
+

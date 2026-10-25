@@ -9,7 +9,7 @@ class_name ActionPromptOverlay
 
 ## ── Configuración ───────────────────────────────────────
 const COLOR_TEXT := Color(0.25, 0.18, 0.12)
-const COLOR_KEY_BG := Color(0.14, 0.16, 0.24, 0.85)
+const COLOR_KEY_BG := Color(ThemeUx.COLOR_BG_ARENA, 0.85)  # M53 L159: token, no literal
 
 ## ── Estado ──────────────────────────────────────────────
 var _current_device: String = "keyboard"

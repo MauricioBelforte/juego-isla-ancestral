@@ -1,4 +1,4 @@
-**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Modelo:** Step-5-WorkBuddy (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
 **Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 33: Agricultura
@@ -161,8 +161,8 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Sequía prolongada: pausa indefinida sin muerte [S] — VERIFICADO qa_farm_pausas_m33.gd _test_sequia_sin_muerte (28/0 EXIT 0: 45 días SIN_AGUA, días congelados, tile vivo, calidad A7, riego reanuda)
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Pisoteo de NPC: agitación visual sin pérdida de progreso [M]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
+- [x] Pisoteo de NPC: agitación visual sin pérdida de progreso [M]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): bloque _test_pisoteo_npc de test_farm_m33_lote.gd (verde HOY con binario real) + crop_tile_visual.gd L42 shake() existe: la agitación visual no toca el estado (días/etapa/tile intactos).
 - [ ] Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C]
   · espera: modulo(s) dependiente(s): M64 (coordinar con su dueno)
 - [x] Dos jugadores (futuro M76) no pueden plantar el mismo voxel [C]
@@ -217,35 +217,35 @@
 ## N. Pruebas y QA (8)
 
 - [x] Test: ciclo completo arar/plantar/regar/cosechar en una sesión [M]
-- [ ] Test: determinismo entre guardado y recarga (mismo día, mismo estado) [M]
-  · espera: feature de M41-Guardado (definir contrato/dueno por asignar)
-- [ ] Test: 4 estaciones con cultivo de ventana parcial [M]
-  · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
-- [ ] Test: 30 días sin agua: pausa, nunca muerte [M]
-  · espera: feature de M51-Agua (definir contrato/dueno por asignar)
+- [x] Test: determinismo entre guardado y recarga (mismo día, mismo estado) [M]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): bloque _test_determinismo de test_farm_m33_lote.gd (42/0 EXIT 0 HOY, binario real): serializar/deserializar + round-trip FarmStateStore + tile corrupto aislado. Alcance: estado del módulo M33; el archivo .save completo es de M59/M41.
+- [x] Test: 4 estaciones con cultivo de ventana parcial [M]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): bloque _test_4_estaciones (calabaza de otoño en las 4 estaciones: DORMANTE fuera de ventana, retoma sin pérdida). Suite lote 42/0 EXIT 0 HOY.
+- [x] Test: 30 días sin agua: pausa, nunca muerte [M]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): bloque _test_30_dias_sin_agua (SIN_AGUA 30 días, tile vivo, reanuda al regar, LISTA estable sin consumo). Suite lote 42/0 EXIT 0 HOY.
 - [x] Test: pisoteo de NPC sobre campo con ruta y sin ruta [C]
   · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 - [x] Test: invierno con nieve sobre tierra arada [C] — VERIFICADO: test ya existe como V5 en test_farm_voxel_m33.gd _test_nieve_no_borra_estado (SNOW escrito por encima del voxel y el tile + hint + agua sobreviven); 27/0 EXIT 0 re-verificado 2026-10-22 con el resto del riel
-- [ ] Test: inventario lleno al cosechar [S]
-  · espera: feature de M14-Inventario (definir contrato/dueno por asignar)
+- [x] Test: inventario lleno al cosechar [S]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): bloque _test_inventario_lleno (stub atómico que rechaza: emite crop_harvest_blocked, tile conservado, ítems devueltos). Suite lote 42/0 EXIT 0 HOY.
 - [x] Recorrido M114: 3 días de juego con granja funcional [C]
 
 ## O. Delegación y cierre (8)
 
 - [x] Módulo marcado delegable (requiere M08, M14, M29 implementados) [S]
-- [ ] 5 alternativas descartadas documentadas en 02-Analisis [S]
-  · espera: documentacion tecnica del item (redactor por asignar)
+- [x] 5 alternativas descartadas documentadas en 02-Analisis [S]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): 02-Analisis sec. 4 documenta 5 alternativas descartadas (A1c riego automático infinito, A2a muerte por sequía, A4a planta como voxel, A5a crecimiento en tiempo real, A6a hambre castigadora).
 - [x] API estable del FarmService definida en 03-Diseno [S]
 - [x] Implementación → AGENTE DELEGADO [S]
-- [ ] Prototipo sugerido: 3 cultivos + riego manual + avance diario [S]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] 01-Requerimientos creado y firmado [S]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] 02-Analisis, 03-Diseno y 04-Codigo creados y firmados [S]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] 05-Checklist creado y firmado (este archivo) [S]
-  · espera: feature/dependencia externa por definir (dueno por asignar)
-**Totales:** 155 ítems · Completados: 112 · Pendientes: 43 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22 tanda 2: 112 [x] / 43 [ ] / 0 [?] = 155. Tanda 1: pausas+P25+deuda higiene (110) — qa 28/0, lote 42/0. Tanda 2: arbol invierno+test nieve (112) — qa 35/0, riel farm 29/0/20/0/27/0. Todo EXIT 0.) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 106 [x] / 49 [ ] / 0 [?] = 155; el bloque declaraba 153 items y 47 pendientes.)
+- [x] Prototipo sugerido: 3 cultivos + riego manual + avance diario [S]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): 02-Analisis sec. 5 (3 cultivos de farming.json + riego manual + avance diario) y el bucle cubierto por test_farm.gd (29/0 EXIT 0 HOY, binario real).
+- [x] 01-Requerimientos creado y firmado [S]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): 01-Requerimientos.md existe (5.690 B, CRLF puro, firma Deepseek V4 Flash).
+- [x] 02-Analisis, 03-Diseno y 04-Codigo creados y firmados [S]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): 02-Analisis (8.347 B, LF), 03-Diseno (17.214 B, LF; BOM + mojibake REPARADOS hoy: 19.589 -> 17.214 B, 0 FFFD, 0 C1) y 04-Codigo (23.302 B, LF) existen con firma.
+- [x] 05-Checklist creado y firmado (este archivo) [S]
+  · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): este archivo existe (CRLF puro) con firma.
+**Totales:** 155 ítems · Completados: 127 · Pendientes: 28 · No resueltos: 0. (Re-medido Step-5-WorkBuddy 2026-10-25, Log 2180, por prefijo de línea tras 10 flips con cita: L164/L220/L222/L224/L229 tests verdes HOY con binario real, L236/L240 doc en 02-Analisis, L242/L244/L246 docs con firma + 03-Diseno reparado. La línea anterior decía 112/43: drift de Totales, el disco medía 117/38 antes de esta tanda.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].

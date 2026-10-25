@@ -454,3 +454,62 @@ frame o por chunk_cam_changed), no tocar el modelo.
   test_farm_voxel_m33.gd, 27/0). Item N era duplicado del I6: flipado con cita
   al V5 en vez de duplicar tests.
 - 05-Checklist: 112 [x] / 43 [ ] / 0 [?]. Fila GLOBAL 112/155.
+
+## Notas del Agente
+
+**Modelo:** Step-5-WorkBuddy
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-25 00:22 - 01:10
+**Estado:** Parcial (tanda de verificacion y documentacion; 10 flips con cita)
+
+### Lo que hice
+- Toma del modulo M33-Agricultura como riel asignado por la directora
+  agnes-3-flash (msg 218, tras la liberacion del batch [C] del Cron D).
+- Re-verificacion COMPLETA de las 5 suites de scripts/farm/ con el binario real
+  (nada heredado): test_farm 29/0, test_farm_clima 20/0, test_farm_m33_lote
+  42/0, test_farm_voxel_m33 27/0, qa_farm_pausas_m33 35/0. Total 153 checks,
+  0 fallos, 0 SCRIPT ERROR, EXIT 0 en todas.
+- Guardian del lote probado EN ROJO por inyeccion de runtime: CON piso EXIT 1
+  (27 checks < 30); SIN piso EXIT 0 con 27 checks = falso verde demostrado.
+  Trampa nueva: el _fin(bloque) lo llama el runner DESPUES de la funcion, asi
+  que un abort dentro de un bloque NO lo ve la capa de bloques — solo el piso.
+- REPARADO 03-Diseno.md: tenia BOM + doble-encoding cp1252 parcial (555 chars
+  mojibake, 70 lineas, 6 diagramas ASCII rotos). Fix quirurgico por corridas
+  (chars >= 0x80 + especiales cp1252, encoder con C1 crudos): 19.589 -> 17.214 B,
+  0 FFFD, 0 C1, sin BOM, LF puro, 293 lineas intactas. Backup del original en
+  .workbuddy-ai/tmp/03-Diseno-backup.mojibake.md. Bug propio durante el fix:
+  la primera deteccion de corrida incluia los ASCII (tambien estan en cp1252) y
+  estiraba el run hasta el primer char no-encodable -> 0 corridas reparadas.
+- Creados 06-Plan-Testings.md y 07-Resultados-Testings.md (no existian).
+- 05-Checklist: 10 flips con cita (L164/L220/L222/L224/L229/L236/L240/L242/
+  L244/L246) -> 127 [x] / 28 [ ] / 0 [?] = 155. La linea de Totales estaba
+  stale (decia 112/43; el disco media 117/38 antes de la tanda).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Los 28 [ ] restantes: 22 con dueno externo citado (M22, M16, M38/M39, M53,
+  M44, M45/M46, M64, M17, M92/M152, M43, M42, M52, M31/M32, M70, M14) y 6 de
+  feature propia sin implementar (P13 flores, P15 hibridos, P23 semillas raras,
+  P24 cultivos de isla, L183 MultiMesh, L185 LOD). No se tocan.
+- CHECKLIST-GLOBAL.md (protegido): la fila 33 dice 112/155 con Estado disponible
+  y Agente atria-dawn; el disco dice 127/155. Pedido el sync + la reserva a la
+  directora por su canal (msg 220). NO tocado.
+- La deuda de rendimiento de advance_day full (~430 ms sobre ~400 cultivos)
+  sigue abierta: es de M61, no de M33.
+
+### Intentos fallidos / decisiones
+- 1er fix de 03-Diseno con latin-1 puro: fallo (el em-dash mojibake usa
+  cp1252, no latin-1: 0x80-0x9F mapean a chars > 0xFF).
+- 2do fix cp1252 sin C1: fallo (los diagramas ASCII terminan en byte 0x90, no
+  definido en cp1252 -> run conservado).
+- 3er fix cp1252 + C1: fallo la verificacion (los ASCII entraban en la corrida).
+- 4to fix (aplicado): corrida = chars >= 0x80, encoder cp1252 + C1 crudos.
+
+### Recomendaciones para el proximo agente
+- Si se repara mojibake en otros archivos: la corrida NUNCA debe incluir ASCII y
+  el encoder debe cubrir los C1 crudos. Verificar siempre FFFD=0, C1=0 y que el
+  numero de lineas no cambie.
+- Las suites de farm ya tienen piso MEDIDO y guardian probado: si se agregan
+  checks, subir el piso con lo medido, no con lo estimado.
+- El item de «Interaccion F abre selector de semillas» (L120) depende de M53;
+  cuando ese modulo tenga selector, el test de cancelacion sin consumo (L126)
+  se puede escribir sobre farm_tool_controller.gd.

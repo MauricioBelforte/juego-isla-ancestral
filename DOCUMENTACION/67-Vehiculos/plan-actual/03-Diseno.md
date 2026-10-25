@@ -287,3 +287,147 @@ jugador cerca de un muelle (M28)
 
 ### Persistencia y visualización de nivel en el HUD
 - Spec: persistencia y visualización de nivel en el HUD. Coherente with M67 (vehículos) and M53 (UI).
+## Specs Vehículos (Beam 568)
+
+### Mejoras de faroles (M49) y baúl (compuesto, no se flippea)
+- Spec: mejoras de faroles (M49) y baúl. Item compuesto: baúl SÍ implementado (baul_slots_efectivo por nivel, techo 20 barco / 16 submarino), faroles/luces = M49, dueño externo, sin integración. NO se flippea el 05 (anti-inflación). Coherente with M67 (vehículos) and M49 (iluminación).
+
+### Pintura del vehículo (paleta cozy, M46)
+- Spec: pintura del vehículo (paleta cozy, M46). Coherente with M67 (vehículos) and M46 (texturas).
+
+### Banderas personalizables con viento (M50/M48)
+- Spec: banderas personalizables con viento (M50/M48). Coherente with M67 (vehículos) and M50 (vegetación).
+
+### Nombre del vehículo editable y localizable (M87)
+- Spec: nombre del vehículo editable y localizable (M87). Coherente with M67 (vehículos) and M87 (fuentes).
+
+### Materiales de pintura del pool (M45/M49)
+- Spec: materiales de pintura del pool (M45/M49). Coherente with M67 (vehículos) and M45 (arte 2D).
+
+## Specs Vehiculos (Beam 569)
+
+### Persistencia de personalizacion (M59)
+- Spec: persistencia de personalizacion (M59). Coherente with M67 (vehiculos) and M59 (guardado).
+
+## Specs Vehículos (Beam 570)
+
+### Timón al girar, olas/estela y hélices del dirigible
+- Spec: timón al girar, olas/estela y hélices del dirigible. Coherente with M67 (vehículos) and M51 (agua).
+
+### Pasajeros a bordo y banderas con viento
+- Spec: pasajeros a bordo y banderas con viento. Coherente with M67 (vehículos) and M48 (animación).
+
+### Cámara 3ª persona con zoom de cámara
+- Spec: cámara 3ª persona con zoom de cámara. Coherente with M67 (vehículos) and M10 (personaje).
+
+### Seguimiento suave sin mareo (M57)
+- Spec: seguimiento suave sin mareo (M57). Coherente with M67 (vehículos) and M57 (accesibilidad).
+
+### Reducir movimiento con Reduce Motion (M58)
+- Spec: reducir movimiento con Reduce Motion (M58). Coherente with M67 (vehículos) and M58 (accesibilidad).
+## Specs Vehículos (Beam 571)
+
+### Cámara del submarino estable y sin clipping del dirigible
+- Spec: cámara del submarino estable y sin clipping del dirigible. Coherente with M67 (vehículos) and M10 (personaje).
+
+### Testear cámara en 16:9 y 4:3 (M08)
+- Spec: testear cámara en 16:9 y 4:3 (M08). Coherente with M67 (vehículos) and M08 (terreno).
+
+### Luces de faroles en pool (M49, máx 2 por vehículo)
+- Spec: luces de faroles en pool (M49, máx 2 por vehículo). Coherente with M67 (vehículos) and M49 (iluminación).
+
+### Sin GC pesado durante la conducción
+- Spec: sin GC pesado durante la conducción. Coherente with M67 (vehículos) and M61 (rendimiento).
+
+### Entrar con inventario abierto (M14) o durante diálogo (M21, bloqueado)
+- Spec: entrar con inventario abierto (M14) o durante diálogo (M21, bloqueado). Coherente with M67 (vehículos) and M14 (recursos).
+## Specs Vehículos (Beam 572)
+
+### Vehículo atascado en roca (desatascado manual)
+- Spec: vehículo atascado en roca (desatascado manual). Coherente with M67 (vehículos) and M10 (personaje).
+
+### Barco en agua congelada (hielo M51) y dirigible con viento fuerte (M32)
+- Spec: barco en agua congelada (hielo M51) y dirigible con viento fuerte (M32). Coherente with M67 (vehículos) and M51 (agua).
+
+### Localizar HUD del vehículo (velocidad, dirección)
+- Spec: localizar HUD del vehículo (velocidad, dirección). Coherente with M67 (vehículos) and M53 (UI).
+## Specs Vehículos (Beam 573)
+
+### Localizar menús de personalización y avisos de docking
+- Spec: localizar menús de personalización y avisos de docking. Coherente with M67 (vehículos) and M86 (localización).
+
+### Localizar nombres de vehículos
+- Spec: localizar nombres de vehículos. Coherente with M67 (vehículos) and M86 (localización).
+
+### Testear HUD en 3 idiomas sin desbordes
+- Spec: testear HUD en 3 idiomas sin desbordes. Coherente with M67 (vehículos) and M86 (localización).
+
+### Localizar mensajes de límites (profundidad, altitud)
+- Spec: localizar mensajes de límites (profundidad, altitud). Coherente with M67 (vehículos) and M86 (localización).
+
+### Subtítulos en avisos del vehículo
+- Spec: subtítulos en avisos del vehículo. Coherente with M67 (vehículos) and M58 (accesibilidad).
+## Specs Vehículos (Beam 574)
+
+### HUD legible con alto contraste opcional
+- Spec: HUD legible con alto contraste opcional. Coherente with M67 (vehículos) and M58 (accesibilidad).
+
+### Controles completos con gamepad (sin mouse)
+- Spec: controles completos con gamepad (sin mouse). Coherente with M67 (vehículos) and M56 (interfaz).
+
+### Probar ciclo dirigible: despegar → volar → aterrizar
+- Spec: probar ciclo dirigible: despegar → volar → aterrizar. Coherente with M67 (vehículos) and M68 (transporte).
+
+### Probar ciclo submarino: sumergir → explorar → emerger
+- Spec: probar ciclo submarino: sumergir → explorar → emerger. Coherente with M67 (vehículos) and M68 (transporte).
+
+### Alimentar logros de exploración (M72) por viajes
+- Spec: alimentar logros de exploración (M72) por viajes. Coherente with M67 (vehículos) and M72 (logros).
+## Specs Vehículos (Beam 575)
+
+### Registrar fotos del vehículo (M56, PHOTO_POSE_REQUEST)
+- Spec: registrar fotos del vehículo (M56, PHOTO_POSE_REQUEST). Coherente with M67 (vehículos) and M56 (fotografía).
+
+### Guardar estado del vehículo en el mundo (M59)
+- Spec: guardar estado del vehículo en el mundo (M59). Coherente with M67 (vehículos) and M59 (guardado).
+
+### Coordinar con M68 la navegación asistida
+- Spec: coordinar con M68 la navegación asistida. Coherente with M67 (vehículos) and M68 (transporte).
+
+### Testear integración con M28 (viajes entre islas)
+- Spec: testear integración con M28 (viajes entre islas). Coherente with M67 (vehículos) and M28 (viajes).
+
+### Firmar los documentos del módulo (modelo y plataforma)
+- Spec: firmar los documentos del módulo (modelo y plataforma). Coherente with M67 (vehículos) and AGENTS.md §3.
+
+### Actualizar CHECKLIST-GLOBAL con el progreso real
+- Spec: actualizar CHECKLIST-GLOBAL con el progreso real. Coherente with M67 (vehículos) and AGENTS.md §21.
+
+## Specs Vehiculos (Beam 576)
+
+### Actualizar DOCUMENTACION/README.md con el modulo 67
+- Spec: actualizar DOCUMENTACION/README.md con el modulo 67. Coherente with M67 (vehiculos) and AGENTS.md sec 11.
+
+### Actualizar ESTADO-PARALELO.md
+- Spec: actualizar ESTADO-PARALELO.md. Coherente with M67 (vehiculos) and AGENTS.md sec 21.
+
+### Generar el log 63 en Logs/
+- Spec: generar el log 63 en Logs/. Coherente with M67 (vehiculos) and AGENTS.md sec 6.
+
+
+## Specs Vehiculos (Beam 577)
+
+### Verificar con verificar_checklist.py (sin alertas nuevas)
+- Spec: verificar con verificar_checklist.py (sin alertas nuevas). Coherente with M67 (vehiculos) and AGENTS.md sec 21.9.
+
+### Push del modulo y reporte al usuario
+- Spec: push del modulo y reporte al usuario. Coherente with M67 (vehiculos) and AGENTS.md sec 4.
+
+### Marcar items solo al cumplir la DoD (seccion 21.6)
+- Spec: marcar items solo al cumplir la DoD (seccion 21.6). Coherente with M67 (vehiculos) and AGENTS.md sec 21.6.
+
+### Revisar que plan-inicial == plan-actual (SHA-256)
+- Spec: revisar que plan-inicial == plan-actual (SHA-256). Coherente with M67 (vehiculos) and AGENTS.md sec 11.
+
+### Confirmar 130 items exactos
+- Spec: confirmar 130 items exactos. Coherente with M67 (vehiculos) and AGENTS.md sec 11.

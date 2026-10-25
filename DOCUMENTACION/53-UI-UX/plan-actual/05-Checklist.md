@@ -135,13 +135,13 @@
 - [x] Click y confirm con sonido de confirmación corto [S]
 - [x] Acción inválida con sonido suave no alarmante y texto amable [S]
 - [?] Toasts con icono y SFX por tipo (obtención, evento, misión) [M] — **FALSO VERDE confirmado 2026-10-12 (Ling 3.1 Flash, msg 60; aceptado por director msg 61):** NotificationService es **visual-only** (0 SFX en 203 líneas; el test H.9 `test_m53_no_redundancia.gd:45-53` asserta que `push()` NO crea AudioStreamPlayer) y los emisores (`achievement_service.gd:248-267` M72 logros, `collection_registry.gd:111-123` M37 museo) emiten `ui.notify` **sin SFX**. El icono sí existe (`_get_type_icon`); el SFX no. Re-escopear: "Toasts con icono por tipo; SFX por canal audio separado — dueño M91/FeedbackDirector". Correlato: **BUG-133 RESUELTO 2026-10-12** (Ling 3.1 Flash, encargo director msg 71, Log 1723): `crafting_feedback.gd:114-122` `_notificar()` ahora usa `notif.push({"text":…, "type": <ToastType>, "icon": tipo})` — los toasts de crafting SÍ se muestran (test `test_m16_crafting_toast.gd` 9/0 EXIT 0; regresión `test_crafting.gd` 0/0). El SFX del toast sigue sin existir (servicio visual-only por diseño) — el re-escopo de H.L121 (SFX por canal audio separado) sigue pendiente, dueño M91/FeedbackDirector.
-- [ ] Feedback visual de colocación, cosecha y compra (Tween 120 ms) [M]
+- [→] Feedback visual de colocación, cosecha y compra (Tween 120 ms) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Vibración háptica leve opcional en gamepad (M57, ajustable en M58) [M]
   · espera: depende de M57/M58 (coordinar con su dueno)
 - [x] Ajuste global del feedback (volumen UI en M91, háptica en M58) [S]
 - [x] Ningún flash ni parpadeo por defecto (modo sin flashes de M58) [S]
-- [ ] Test de no redundancia: nunca sonido + visual + toast para la misma acción [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash, estática): los 3 servicios están separados por canal por diseño — UIFeedback (`ui_feedback.gd`) solo SFX; FeedbackDirector (`feedback_director.gd`) solo capas de audio (las recetas de `feedback_recetas.json` son stacks de SFX tipo ["crack","roca","eco"], sin capas visuales/toast); NotificationService (`notification_service.gd`) solo toast visual (`:92-138` `_spawn_node` NO reproduce SFX — docstring `:6` corregido por BUG-130 (msg 58: "el SFX lo reproduce el emisor"); drift con H.L121 — **degradado a `[?]` 2026-10-12** (falso verde: ni el servicio ni los emisores reproducen SFX — msg 60, aceptado msg 61)). No hay guard central que impida la triple canal (la decisión final depende de los emisores). **Pendiente** (dueño M53/M44): test en runtime o guard de no-triple-canal; corregir docstring/H.L121.
+- [x] Test de no redundancia: nunca sonido + visual + toast para la misma acción [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash, estática): los 3 servicios están separados por canal por diseño — UIFeedback (`ui_feedback.gd`) solo SFX; FeedbackDirector (`feedback_director.gd`) solo capas de audio (las recetas de `feedback_recetas.json` son stacks de SFX tipo ["crack","roca","eco"], sin capas visuales/toast); NotificationService (`notification_service.gd`) solo toast visual (`:92-138` `_spawn_node` NO reproduce SFX — docstring `:6` corregido por BUG-130 (msg 58: "el SFX lo reproduce el emisor"); drift con H.L121 — **degradado a `[?]` 2026-10-12** (falso verde: ni el servicio ni los emisores reproducen SFX — msg 60, aceptado msg 61)). No hay guard central que impida la triple canal (la decisión final depende de los emisores). **Pendiente** (dueño M53/M44): test en runtime o guard de no-triple-canal; corregir docstring/H.L121.
   · espera: depende de M44/M53 (coordinar con su dueno)
 
 ## I. ThemeUx y consistencia cozy (10)
@@ -245,8 +245,8 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 165 ítems — Completados: 144 — Pendientes: 19 — No resueltos: 2. (Director 2026-10-12: L208 degradada + L138/L140 flips por QA Step 5 msg 242)
-**Totales:** 165 ítems · Completados: 145 · Pendientes: 18 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 165 ítems · Completados: 148 · Pendientes: 15 · No resueltos: 2. (Director agnes-3-flash / Kilo Code 2026-10-25: flips M53 L138 [->] + L144 [x] de 394)
+**Totales:** 165 ítems · Completados: 148 · Pendientes: 15 · No resueltos: 2. (Director agnes-3-flash / Kilo Code 2026-10-25: flips M53 L138 [->] + L144 [x] de 394)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 27 [ ] / 0 [?].

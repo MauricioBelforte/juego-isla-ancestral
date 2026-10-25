@@ -78,6 +78,14 @@ func _test_canal_sonido_ui_desconectado() -> void:
 	# hover/click de la sección H (H.2/H.3) quedan sin fuente hasta
 	# que UIFeedback se monte o se cable a SFXManager/FeedbackDirector.
 	var uf = root.get_node_or_null("/root/UIFeedback")
-	_check(uf == null, "UIFeedback no está montado (hallazgo: hover/click sounds son no-op; no hay redundancia posible)")
+	# CORREGIDO 2026-10-25 (M53 / DeepSeek-V4.1-Flash, Log 2179): aca habia
+	# `_check(uf == null, "... no hay redundancia posible")`, o sea un PASS que
+	# solo se cumplia mientras el canal de audio siguiera ROTO. Eso consagra el
+	# defecto: la ausencia de un canal no es evidencia de no-redundancia.
+	# La no-redundancia se verifica de verdad, sobre el codigo de producto, en
+	# `scripts/ui/auditar_ui_m53.py` (bloque C, con sonda en rojo).
+	# La deuda de que UIFeedback no este montado queda DECLARADA, sin assert.
+	if uf == null:
+		print("DEUDA (M91): UIFeedback no esta montado -> SFX de hover/click no-op")
 	var ui = root.get_node_or_null("/root/UIManager")
 	_check(ui != null and ui.has_method("_on_focus_hover_sound"), "UIManager expone el hook de hover sound (duck-typed a UIFeedback)")

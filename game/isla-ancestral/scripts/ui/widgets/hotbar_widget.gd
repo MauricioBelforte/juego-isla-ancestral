@@ -11,8 +11,8 @@ class_name HotbarWidget
 const SLOT_COUNT := 8
 const SLOT_SIZE := Vector2(40, 40)
 const SLOT_SPACING := 4
-const HIGHLIGHT_COLOR := Color(0.92, 0.76, 0.40, 0.9)  # D102: dorado vivo
-const SLOT_BG := Color(0.14, 0.16, 0.24, 0.92)  # D102: opaco dark (el 0.7 translucido se veia beige sobre la arena)
+const HIGHLIGHT_COLOR := Color(ThemeUx.COLOR_HIGHLIGHT_GOLD, 0.9)  # D102: dorado vivo (M53 L159: token)
+const SLOT_BG := Color(ThemeUx.COLOR_BG_ARENA, 0.92)  # D102: opaco dark (el 0.7 translucido se veia beige sobre la arena) | M53 L159: token
 
 ## ── Estado ──────────────────────────────────────────────
 var _selected_slot: int = 0
@@ -79,7 +79,7 @@ func _build_ui() -> void:
 		style.bg_color = SLOT_BG
 		style.set_corner_radius_all(6)
 		style.set_border_width_all(1)
-		style.border_color = Color(0.87, 0.66, 0.33, 0.55)  # D102: borde ambar
+		style.border_color = Color(ThemeUx.COLOR_ACCENT_OCRE, 0.55)  # D102: borde ambar | M53 L159: token
 		panel.add_theme_stylebox_override("panel", style)
 
 		# Label del ítem
@@ -120,7 +120,7 @@ func _update_highlights() -> void:
 				style.border_color = HIGHLIGHT_COLOR
 				style.set_border_width_all(2)
 			else:
-				style.border_color = Color(0.87, 0.66, 0.33, 0.55)  # D102: borde ambar
+				style.border_color = Color(ThemeUx.COLOR_ACCENT_OCRE, 0.55)  # D102: borde ambar | M53 L159: token
 				style.set_border_width_all(1)
 
 

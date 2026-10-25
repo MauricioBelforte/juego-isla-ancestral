@@ -8,7 +8,7 @@ class_name InteractPrompt
 
 ## ── Configuración ───────────────────────────────────────
 const COLOR_TEXT := Color(0.25, 0.18, 0.12)
-const COLOR_BG := Color(0.14, 0.16, 0.24, 0.88)
+const COLOR_BG := Color(ThemeUx.COLOR_BG_ARENA, 0.88)  # M53 L159: token, no literal
 const COLOR_KEY := Color(0.72, 0.55, 0.30)
 
 ## ── Nodos ──────────────────────────────────────────────

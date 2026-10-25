@@ -38,12 +38,25 @@ func _test_combinacion_extrema() -> void:
 	# 1. Escala extrema 1.5 (límite superior M58: ui_scale 0.8-1.5)
 	ts.set_ui_scale(1.5)
 	_check(absf(float(ts.get_ui_scale()) - 1.5) < 0.01, "escala UI 1.5 aplicada")
-	# 2. Alto contraste (M58): ensure_contrast oscurece el texto
+	# 2. Alto contraste (M58): ensure_contrast garantiza el RATIO, no un color fijo.
+	# CORREGIDO 2026-10-25 (M53 / DeepSeek-V4.1-Flash, Log 2179): la asercion
+	# anterior exigia font_color == (0.10, 0.05) — "oscurece el texto", que era
+	# correcto con la paleta CLARA anterior a D102. Desde el tema noche (D102,
+	# 2026-10-18) oscurecer el texto BAJA el contraste, asi que ensure_contrast
+	# pone casi blanco (0.97, 0.96, 0.93). La asercion vieja consagraba la premisa
+	# vencida: exigia el comportamiento que hoy seria el bug. Ahora se verifica el
+	# CONTRATO (ratio WCAG >= 4.5 contra el panel) y que el texto sea claro sobre
+	# panel noche, que es lo que el modo alto contraste debe garantizar.
 	var ux = _THEME_UX.new()
 	ux.build()
 	ux.ensure_contrast()
 	var fc: Color = ux.base.get_color("font_color", "Label")
-	_check(absf(fc.r - 0.10) < 0.01 and absf(fc.g - 0.05) < 0.01, "alto contraste: font_color Label oscurecido (0.10, 0.05, ...)")
+	var panel: Color = ux.COLOR_BG_ARENA
+	var ratio: float = ux._contrast_ratio(fc, panel)
+	_check(ratio >= 4.5, "alto contraste: ratio WCAG %.2f >= 4.5 sobre el panel (medido)" % ratio)
+	_check(fc.get_luminance() > panel.get_luminance(),
+		"alto contraste: el texto es MAS claro que el panel noche (texto %.2f > panel %.2f)"
+		% [fc.get_luminance(), panel.get_luminance()])
 	# 3. Sin movimiento (M58 reduce_motion): desactiva tweens
 	ux.set_reduce_motion(true)
 	_check(ux.reduce_motion_active(), "reduce_motion activo")

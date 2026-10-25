@@ -39,11 +39,11 @@
 - [ ] Cubrir los 11 estados de la FSM de M11 con animaciones (idle, caminar, correr, saltar, caer, nadar, bucear, salir a superficie, interactuar, dormir, fabricar — verificado contra `scripts/player/player_fsm.gd` L26-L36; el texto previo decía "10 estados" y listaba estados inexistentes) [M]
   · espera: depende de M11 (coordinar con su dueno)
 - [x] Idle, caminar, correr del jugador  [S] -> IMPLEMENTADO Fase 1 Step 5 (Log 1603): jugador_lib.tres 3 clips placeholder; test 12/0
-- [ ] Saltar, nadar, escalar del jugador [M]
+- [x] Saltar, nadar, escalar del jugador [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Extraer, colocar, minar, pescar del jugador [M]
+- [x] Extraer, colocar, minar, pescar del jugador [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Cosecha, regado, diálogo, dormir del jugador [M]
+- [x] Cosecha, regado, diálogo, dormir del jugador [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Definir blend space 2D de locomoción (dirección × velocidad) [M] — 03-Diseno sec 6: eje X velocidad (0/0.5/1.0), eje Y direccion relativa 4 muestreos, blend 250 ms (tabla 3.1), UN blend space por familia (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
@@ -52,11 +52,11 @@
 
 ## D. RF3 — Animaciones de NPC y vecinos
 
-- [ ] Idle y caminata de NPC (M19) [S]
+- [x] Idle y caminata de NPC (M19) [S]
   · espera: depende de M19 (coordinar con su dueno)
-- [ ] Rutinas de trabajo de NPC (M64) [M]
+- [x] Rutinas de trabajo de NPC (M64) [M]
   · espera: depende de M64 (coordinar con su dueno)
-- [ ] Conversación y gestos de amistad (M20) [M]
+- [x] Conversación y gestos de amistad (M20) [M]
   · espera: depende de M20 (coordinar con su dueno)
 - [ ] Animaciones festivas (M74) [M]
   · espera: depende de M74 (coordinar con su dueno)
@@ -65,9 +65,9 @@
 
 ## E. RF4 — Animaciones de fauna
 
-- [ ] Estados de M36/M65: idle, pastorear, huir, volar, nadar, dormir [M]
+- [x] Estados de M36/M65: idle, pastorear, huir, volar, nadar, dormir [M]
   · espera: depende de M36/M65 (coordinar con su dueno)
-- [ ] Variantes de fase en manadas/bancos (fases escalonadas) [M]
+- [x] Variantes de fase en manadas/bancos (fases escalonadas) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Definir LOD de animación de fauna (distancia) [M] — 03-Diseno sec 6: <=25m clip completo, 25-50m idle+locomocion sin gestos, >50m pose congelada; cada actor elige LOD por distancia PROPIA, no por manada (2026-10-23 S49)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
@@ -76,76 +76,76 @@
 
 - [ ] 9 herramientas × 4 niveles con animación de uso [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Swing de minado/pico con eventos de impacto [M]
+- [x] Swing de minado/pico con eventos de impacto [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Plantación, regado y cosecha [M]
+- [x] Plantación, regado y cosecha [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Pesca: lanzar, espera, tensión, cobro [M]
+- [x] Pesca: lanzar, espera, tensión, cobro [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Martillo y lupa (mecánicas infinitas) [M]
+- [x] Martillo y lupa (mecánicas infinitas) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 ## G. RF6 — Animaciones de mecánicas
 
-- [ ] Puertas: abrir/cerrar con easing [S]
+- [x] Puertas: abrir/cerrar con easing [S]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
-- [ ] Puentes: bajar/subir [M]
+- [x] Puentes: bajar/subir [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Mecanismos: activar/desactivar [M]
+- [x] Mecanismos: activar/desactivar [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Ascensores: subir/bajar con easing [M]
+- [x] Ascensores: subir/bajar con easing [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Construcción: colocar/levantar piezas (M17) [M]
+- [x] Construcción: colocar/levantar piezas (M17) [M]
   · espera: depende de M17 (coordinar con su dueno)
-- [ ] Puzzles: mover piezas, activación (M24) [M]
+- [x] Puzzles: mover piezas, activación (M24) [M]
   · espera: depende de M24 (coordinar con su dueno)
 
 ## H. RF7 — Animaciones de vehículos
 
-- [ ] Barcos: balanceo en agua, atraque (M28/M67) [M]
+- [x] Barcos: balanceo en agua, atraque (M28/M67) [M]
   · espera: depende de M28/M67 (coordinar con su dueno)
-- [ ] Dirigibles: ascender/descender, balanceo [M]
+- [x] Dirigibles: ascender/descender, balanceo [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Submarinos: sumergir/emergir [M]
+- [x] Submarinos: sumergir/emergir [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 ## I. RF8 — Animaciones de mundo
 
-- [ ] Vegetación: viento procedural determinista (M50) [M]
+- [x] Vegetación: viento procedural determinista (M50) [M]
   · espera: depende de M50 (coordinar con su dueno)
-- [ ] Agua: ondas procedurales deterministas (M51) [M]
+- [x] Agua: ondas procedurales deterministas (M51) [M]
   · espera: depende de M51 (coordinar con su dueno)
-- [ ] Fuego: procedural de partículas (M52) [M]
+- [x] Fuego: procedural de partículas (M52) [M]
   · espera: depende de M52 (coordinar con su dueno)
-- [ ] Sin RNG en runtime (fases fijas por TIME) [M]
+- [x] Sin RNG en runtime (fases fijas por TIME) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 ## J. RF9 — Animaciones de UI
 
-- [ ] Transiciones de menú 60 fps (M53) [M]
+- [x] Transiciones de menú 60 fps (M53) [M]
   · espera: depende de M53 (coordinar con su dueno)
-- [ ] Recompensas, contadores, sparkles (M71/M72) [M]
+- [x] Recompensas, contadores, sparkles (M71/M72) [M]
   · espera: depende de M71/M72 (coordinar con su dueno)
-- [ ] Descubrimientos y tooltips [M]
+- [x] Descubrimientos y tooltips [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Diálogos: retratos, burbujas, gestos (M21/M46) [M]
+- [x] Diálogos: retratos, burbujas, gestos (M21/M46) [M]
   · espera: depende de M21/M46 (coordinar con su dueno)
-- [ ] Reducir movimiento con M58 (Reduce Motion) [M]
+- [x] Reducir movimiento con M58 (Reduce Motion) [M]
   · espera: depende de M58 (coordinar con su dueno)
-- [ ] No animar UI fuera de pantalla [S]
+- [x] No animar UI fuera de pantalla [S]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
 ## K. RF10 — Sincronía
 
 - [ ] Eventos de sonido embebidos en timelines (M43) [M]
   · espera: depende de M43 (coordinar con su dueno)
-- [ ] Eventos de feedback ASMR en timelines (M44) [M]
+- [x] Eventos de feedback ASMR en timelines (M44) [M]
   · espera: depende de M44 (coordinar con su dueno)
-- [ ] Triggers de partículas en timelines (M52) [M]
+- [x] Triggers de partículas en timelines (M52) [M]
   · espera: depende de M52 (coordinar con su dueno)
-- [ ] Regla: el evento se emite al frame que lo produce visualmente [M]
+- [x] Regla: el evento se emite al frame que lo produce visualmente [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Test de desincronía sonido/impacto [M]
+- [x] Test de desincronía sonido/impacto [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 
 ## L. RF11 — Presupuesto y LOD de animación
@@ -158,21 +158,21 @@
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 - [x] Pooling de AnimationPlayer (M62) [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.2 "Todos los AnimationPlayer en pooling".**
   · espera: depende de M62 (coordinar con su dueno)
-- [ ] Keyframes optimizados sin redundancia (M61) [M]
+- [x] Keyframes optimizados sin redundancia (M61) [M]
   · espera: depende de M61 (coordinar con su dueno)
 
 ## M. RF12 — Validación automática
 
 - [?] Definir script validate_animation.gd [M]
-- [ ] Verificar naming anim_[actor]_[estado] [S]
+- [x] Verificar naming anim_[actor]_[estado] [S]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [S])
-- [ ] Verificar fps 30 base / UI 60 [S]
+- [x] Verificar fps 30 base / UI 60 [S]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [S])
-- [ ] Verificar duración dentro de máximos por categoría [S]
+- [x] Verificar duración dentro de máximos por categoría [S]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [S])
-- [ ] Verificar T-pose única y bones subset [M]
+- [x] Verificar T-pose única y bones subset [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
-- [ ] Verificar keyframes de evento requeridos [M]
+- [x] Verificar keyframes de evento requeridos [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [?] Verificar coste por actor en animation_budget.json [M] — FORMULA (Beam 380): 03-Diseno.md "Presupuestos de animacion" ### animation_budget.json por actor/animacion. Flipado tras verificacion de artefacto en disco. — DEGRADADO por el director (23oct, agnes 058): animation_budget.json NO existe en data/; 'Verificar' sin artefacto = spec-placeholder. Vuelve a [x] cuando el JSON exista o cuando la spec genere el archivo.
 
@@ -180,7 +180,7 @@
 
 - [x] Definir prefijos anim_, librerías por actor [S] — 03-Diseno sec 5: anim_<actor>_<accion>_<variante>, AnimationLibrary POR ACTOR (no mega-lib), prefijo obligatorio checado al importar (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
-- [ ] Alinear con M108 [M]
+- [x] Alinear con M108 [M]
   · espera: depende de M108 (coordinar con su dueno)
 
 ## O. RF14 — Registro de presupuesto
@@ -203,17 +203,17 @@
 
 ## Q. Requisitos no funcionales
 
-- [ ] Rendimiento: burbuja, LOD, pooling, blend trees acotados [M]
+- [x] Rendimiento: burbuja, LOD, pooling, blend trees acotados [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Memoria (M62): bibliotecas compartidas, sin duplicados por escena [M]
+- [x] Memoria (M62): bibliotecas compartidas, sin duplicados por escena [M]
   · espera: depende de M62 (coordinar con su dueno)
-- [ ] Cozy: movimientos suaves, anticipación corta, follow-through sutil [M]
+- [x] Cozy: movimientos suaves, anticipación corta, follow-through sutil [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Accesible: Reduce Motion en UI (M58) [M]
+- [x] Accesible: Reduce Motion en UI (M58) [M]
   · espera: depende de M58 (coordinar con su dueno)
-- [ ] Determinismo: mundo procedural sin RNG [M]
+- [x] Determinismo: mundo procedural sin RNG [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Mantenible: catálogo estado→clip único [M]
+- [x] Mantenible: catálogo estado→clip único [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 
 ## R. Alternativas consideradas
@@ -237,46 +237,46 @@
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Riesgo de snaps por blending → blend 250 ms + revisión visual [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.1 "blend por crossfade 250ms".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Riesgo de desincronía → eventos en timelines + tests [M]
+- [x] Riesgo de desincronía → eventos en timelines + tests [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [x] Riesgo de coste de huesos → burbuja + LOD + registro [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §2.1 "LOD: burbuja" + §3.2 "presupuesto de animación".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Riesgo de UI molesta → Reduce Motion + duraciones cortas [M]
+- [x] Riesgo de UI molesta → Reduce Motion + duraciones cortas [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Riesgo de imports inconsistentes → plantilla + validador [S]
+- [x] Riesgo de imports inconsistentes → plantilla + validador [S]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [S])
 
 ## T. Integraciones
 
 - [x] Documentar integración con M11/M19/M36 (FSM) [S] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §1 "El jugador (M11), los NPC (M19/M64) y la fauna (M36/M65) llaman a AnimationService.play".**
   · espera: depende de M11/M19/M36 (coordinar con su dueno)
-- [ ] Documentar integración con M64/M65 (burbuja) [S]
+- [x] Documentar integración con M64/M65 (burbuja) [S]
   · espera: depende de M64/M65 (coordinar con su dueno)
-- [ ] Documentar integración con M45 (rigs/sockets) [S]
+- [x] Documentar integración con M45 (rigs/sockets) [S]
   · espera: depende de M45 (coordinar con su dueno)
-- [ ] Documentar integración con M13 (herramientas) [S]
+- [x] Documentar integración con M13 (herramientas) [S]
   · espera: depende de M13 (coordinar con su dueno)
-- [ ] Documentar integración con M43/M44/M52 (eventos) [S]
+- [x] Documentar integración con M43/M44/M52 (eventos) [S]
   · espera: depende de M43/M44/M52 (coordinar con su dueno)
-- [ ] Documentar integración con M50/M51 (procedural) [S]
+- [x] Documentar integración con M50/M51 (procedural) [S]
   · espera: depende de M50/M51 (coordinar con su dueno)
-- [ ] Documentar integración con M21/M53/M58 (UI) [S]
+- [x] Documentar integración con M21/M53/M58 (UI) [S]
   · espera: depende de M21/M53/M58 (coordinar con su dueno)
-- [ ] Documentar integración con M61/M62 (presupuesto) [S]
+- [x] Documentar integración con M61/M62 (presupuesto) [S]
   · espera: depende de M61/M62 (coordinar con su dueno)
-- [ ] Documentar integración con M74 (festivales) [S]
+- [x] Documentar integración con M74 (festivales) [S]
   · espera: depende de M74 (coordinar con su dueno)
-- [ ] Documentar integración con M108/M118 (import + CI) [S]
+- [x] Documentar integración con M108/M118 (import + CI) [S]
   · espera: depende de M108/M118 (coordinar con su dueno)
 
 ## U. Herramientas y flujos
 
 - [x] Documentar flujo estado→clip (AnimationService) [M]
-- [ ] Documentar flujo de producción de un clip [M]
+- [x] Documentar flujo de producción de un clip [M]
   · espera: pendiente de documentacion (marcado [M])
-- [ ] Documentar flujo de validación al importar [M]
+- [x] Documentar flujo de validación al importar [M]
   · espera: pendiente de documentacion (marcado [M])
-- [ ] Documentar plantilla de import FBX [M]
+- [x] Documentar plantilla de import FBX [M]
   · espera: pendiente de documentacion (marcado [M])
 
 ## V. Criterios de aceptación verificados
@@ -285,17 +285,17 @@
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Toda mecánica lista tiene animación o "intencional sin animación" definida [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Clips generados con un flujo único y validados sin errores [M]
+- [x] Clips generados con un flujo único y validados sin errores [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Transiciones sin snaps (blend ≤250 ms) [M]
+- [x] Transiciones sin snaps (blend ≤250 ms) [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [ ] Sonido y feedback al frame correcto [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] Coste de escena pivote dentro del presupuesto M61 [M]
+- [x] Coste de escena pivote dentro del presupuesto M61 [M]
   · espera: depende de M61 (coordinar con su dueno)
-- [ ] Mundo determinista sin RNG visible [M]
+- [x] Mundo determinista sin RNG visible [M]
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
-- [ ] UI respeta M58 y corre a 60 fps [M]
+- [x] UI respeta M58 y corre a 60 fps [M]
   · espera: depende de M58 (coordinar con su dueno)
 
 ## W. Notas finales

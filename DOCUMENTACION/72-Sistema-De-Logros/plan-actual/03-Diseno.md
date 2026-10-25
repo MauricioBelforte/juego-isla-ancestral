@@ -345,3 +345,282 @@ Metodo produce-first: grep + lectura directa de runtime/data, sin ejecutar Godot
 
 ### Nota de riel (Ling-3.1-Flash, 2026-10-25)
 - Los ítems 05-Checklist L383-385 de M72 YA estan [x] con formula Beam 312 y SIN marcador "[?] capa-II placeholder" (a diferencia de M105/M107/M119): 0 cierres de degradado 997 pendientes en M72. Las mediciones de esta III valen como evidencia de groundeo; los drifts nuevos se encolaron a la directora (msg de informe del lote 2).
+
+
+## Specs Sistema de Logros (Beam 593)
+
+### CAT: garantizar que ningún logro del catálogo exija números abusivos o contrarreloj
+- Spec: CAT: garantizar que ningún logro del catálogo exija números abusivos o contrarreloj. Coherente with M72 (logros) and M93 (retención).
+
+### RF6: registrar en logs si la cola se desborda
+- Spec: RF6: registrar en logs si la cola se desborda (prevención de pérdida de avisos). Coherente with M72 (logros) and M102 (logging).
+
+### RF9: integrar el estado en el guardado global de M60/M59
+- Spec: RF9: integrar el estado en el guardado global de M60/M59. Coherente with M72 (logros) and M59 (guardado).
+
+### RF9: conservar el progreso parcial acumulado de logros en progreso
+- Spec: RF9: conservar el progreso parcial acumulado de logros en progreso. Coherente with M72 (logros) and M59 (guardado).
+
+### RF11: no borrar logros de Steam automáticamente al borrar partida local
+- Spec: RF11: no borrar logros de Steam automáticamente al borrar partida local. Coherente with M72 (logros) and M94 (monetización).
+
+
+## Specs Sistema de Logros (Beam 594)
+
+### RN2: verificar que el write-through no bloquee el frame principal
+- Spec: RN2: verificar que el write-through no bloquee el frame principal (escritura diferida segura). Coherente with M72 (logros) and M61 (rendimiento).
+
+### RF7: implementar PanelLogrosUI como vista de consulta de logros
+- Spec: RF7: implementar PanelLogrosUI como vista de consulta de logros. Coherente with M72 (logros) and M53 (UI).
+
+### RF7: agrupar logros por categoría en el panel
+- Spec: RF7: agrupar logros por categoría en el panel. Coherente with M72 (logros) and M53 (UI).
+
+### RF7: mostrar logros obtenidos con su fecha de desbloqueo
+- Spec: RF7: mostrar logros obtenidos con su fecha de desbloqueo. Coherente with M72 (logros) and M53 (UI).
+
+### RF7: mostrar logros en progreso con contador X de Y y barra de progreso
+- Spec: RF7: mostrar logros en progreso con contador "X de Y" y barra de progreso. Coherente with M72 (logros) and M53 (UI).
+
+
+## Specs Sistema de Logros (Beam 595)
+
+### RF7: mostrar logros ocultos no revelados como misterio '???'
+- Spec: RF7: mostrar logros ocultos no revelados como misterio '???'. Coherente with M72 (logros) and M53 (UI).
+
+### RF7: revelar texto e icono de un logro oculto solo cuando se desbloquea
+- Spec: RF7: revelar texto e icono de un logro oculto solo cuando se desbloquea. Coherente with M72 (logros) and M53 (UI).
+
+### RF7: permitir abrir el panel desde el toast y desde la UI de progreso de M53/M71
+- Spec: RF7: permitir abrir el panel desde el toast y desde la UI de progreso de M53/M71. Coherente with M72 (logros) and M53 (UI).
+
+### RN3: SteamSync se carga en runtime solo si la plataforma lo provee (M97)
+- Spec: RN3: SteamSync se carga en runtime solo si la plataforma lo provee (M97). Coherente with M72 (logros) and M97 (plataforma).
+
+### RN6: compatible con Godot 4.x >= 4.4.1 y GDScript tipado explicito
+- Spec: RN6: compatible con Godot 4.x >= 4.4.1 y GDScript tipado explicito. Coherente with M72 (logros) and M04 (game engine).
+
+
+## Specs Sistema de Logros (Beam 596)
+
+### RN7: notificaciones no modales, no bloqueantes y desactivables (M58)
+- Spec: RN7: notificaciones no modales, no bloqueantes y desactivables (M58). Coherente with M72 (logros) and M58 (accesibilidad).
+
+### RN8: estado en guardado de partida (M60), coherente con PRNG (M29) y M71
+- Spec: RN8: estado en guardado de partida (M60), coherente con PRNG (M29) y M71. Coherente with M72 (logros) and M59 (guardado).
+
+### RN9: agregar un logro nuevo = crear un .tres y registrarlo, sin tocar codigo
+- Spec: RN9: agregar un logro nuevo = crear un .tres y registrarlo, sin tocar codigo. Coherente with M72 (logros) and M108 (herramientas).
+
+### RN10: AchievementManager testeable con partidas sinteticas sin UI ni Steam
+- Spec: RN10: AchievementManager testeable con partidas sinteticas sin UI ni Steam. Coherente with M72 (logros) and M112 (testing).
+
+### RN11: cero logros por tiempo real (M30) y cero presion social con porcentajes de jugadores
+- Spec: RN11: cero logros por tiempo real (M30) y cero presion social con porcentajes de jugadores. Coherente with M72 (logros) and M93 (retencion).
+
+
+## Specs Sistema de Logros (Beam 597)
+
+### RN11: todo logro alcanzable jugando con calma, sin contrarreloj ni FOMO
+- Spec: RN11: todo logro alcanzable jugando con calma, sin contrarreloj ni FOMO. Coherente with M72 (logros) and M93 (retencion).
+
+### RN12: estado serializado compacto mediante diccionarios planos sin redundancia
+- Spec: RN12: estado serializado compacto mediante diccionarios planos sin redundancia. Coherente with M72 (logros) and M59 (guardado).
+
+### Diseñar arquitectura por capas: motor desacoplado + adaptadores UI/Steam
+- Spec: diseñar arquitectura por capas: motor desacoplado + adaptadores UI/Steam. Coherente with M72 (logros) and M04 (game engine).
+
+### Diseñar AchievementManager como autoload 'logros' registrado en project.godot
+- Spec: diseñar AchievementManager como autoload 'logros' registrado en project.godot. Coherente with M72 (logros) and M04 (game engine).
+
+### Diseñar índice de dirty flags: tipo_evento -> ids de logros dependientes
+- Spec: diseñar índice de dirty flags: tipo_evento -> ids de logros dependientes. Coherente with M72 (logros) and M61 (rendimiento).
+
+
+## Specs Sistema de Logros (Beam 598)
+
+### Diseñar diagrama de arquitectura con emisores, manager, UI y SteamSync
+- Spec: diseñar diagrama de arquitectura con emisores, manager, UI y SteamSync. Coherente with M72 (logros) and M04 (game engine).
+
+### Diseñar flujo de desbloqueo: evento -> evaluación -> marca -> señal -> persistencia -> notificación -> Steam
+- Spec: diseñar flujo de desbloqueo: evento -> evaluación -> marca -> señal -> persistencia -> notificación -> Steam. Coherente with M72 (logros) and M59 (guardado).
+
+### Diseñar flujo de carga con retroactividad y reconciliación Steam
+- Spec: diseñar flujo de carga con retroactividad y reconciliación Steam. Coherente with M72 (logros) and M59 (guardado).
+
+### Diseñar flujo de reset de partida con limpieza local y reconciliación posterior
+- Spec: diseñar flujo de reset de partida con limpieza local y reconciliación posterior. Coherente with M72 (logros) and M59 (guardado).
+
+### Diseñar contrato de señales públicas del autoload (5 señales)
+- Spec: diseñar contrato de señales públicas del autoload (5 señales). Coherente with M72 (logros) and M04 (game engine).
+
+
+## Specs Sistema de Logros (Beam 599)
+
+### Diseñar API de consulta pública completa (13 funciones)
+- Spec: diseñar API de consulta pública completa (13 funciones). Coherente with M72 (logros) and M04 (game engine).
+
+### Diseñar estructura de carpetas res://logros/ con subcarpetas
+- Spec: diseñar estructura de carpetas res://logros/ con subcarpetas condiciones, ui, steam, datos. Coherente with M72 (logros) and M107 (pipeline).
+
+### Diseñar fechas tomadas una única vez por desbloqueo y persistidas
+- Spec: diseñar fechas tomadas una única vez por desbloqueo y persistidas. Coherente with M72 (logros) and M59 (guardado).
+
+### Diseñar extensión futura: nuevos tipos de condición sin tocar el manager (polimorfismo)
+- Spec: diseñar extensión futura: nuevos tipos de condición sin tocar el manager (polimorfismo). Coherente with M72 (logros) and M108 (herramientas).
+
+### No duplicar el registro de hitos de M71
+- Spec: no duplicar el registro de hitos de M71: logros comparten ids de hitos sin re-implementarlos. Coherente with M72 (logros) and M71 (progresión).
+
+
+## Specs Sistema de Logros (Beam 600)
+
+### Consumir señales de donación de M37 para CondicionColeccion
+- Spec: consumir señales de donación de M37 para CondicionColeccion. Coherente with M72 (logros) and M37 (museo).
+
+### Usar ids de colecciones reales de M37 en las definiciones .tres
+- Spec: usar ids de colecciones reales de M37 en las definiciones .tres. Coherente with M72 (logros) and M37 (museo).
+
+### Crear logros de colección completada coherentes con los criterios de M37
+- Spec: crear logros de colección completada coherentes con los criterios de M37. Coherente with M72 (logros) and M37 (museo).
+
+### Reconciliar discrepancias en ambos sentidos ganando el estado desbloqueado
+- Spec: reconciliar discrepancias en ambos sentidos ganando el estado desbloqueado. Coherente with M72 (logros) and M97 (plataforma).
+
+### Mapear logro_steam_id 1:1 con el catálogo declarado en la página de Steam (M97)
+- Spec: mapear logro_steam_id 1:1 con el catálogo declarado en la página de Steam (M97). Coherente with M72 (logros) and M97 (plataforma).
+
+
+## Specs Sistema de Logros (Beam 601)
+
+### Validar en editor que el mapeo Steam sea consistente y sin duplicados
+- Spec: validar en editor que el mapeo Steam sea consistente y sin duplicados. Coherente with M72 (logros) and M97 (plataforma).
+
+### Garantizar que la capa Steam nunca bloquee ni retrase el gameplay local
+- Spec: garantizar que la capa Steam nunca bloquee ni retrase el gameplay local. Coherente with M72 (logros) and M97 (plataforma).
+
+### Logro instalado después de que el jugador ya cumplió la condición: otorgado retroactivamente al cargar
+- Spec: logro instalado después de que el jugador ya cumplió la condición: otorgado retroactivamente al cargar. Coherente with M72 (logros) and M59 (guardado).
+
+### Desbloqueo con Steam desactivado: funciona idéntico y la próxima sesión con Steam reconcilia
+- Spec: desbloqueo con Steam desactivado: funciona idéntico y la próxima sesión con Steam reconcilia. Coherente with M72 (logros) and M97 (plataforma).
+
+### Desbloqueo con Steam activado fallido por red: no reintentar indefinidamente, reintentar en carga
+- Spec: desbloqueo con Steam activado fallido por red: no reintentar indefinidamente, reintentar en carga. Coherente with M72 (logros) and M97 (plataforma).
+
+
+## Specs Sistema de Logros (Beam 602)
+
+### Cierre abrupto del juego justo después de desbloquear: logro persistido por write-through
+- Spec: cierre abrupto del juego justo después de desbloquear: logro persistido por write-through. Coherente with M72 (logros) and M59 (guardado).
+
+### Guardado corrupto con ids de logros desconocidos: descartar sin romper la partida
+- Spec: guardado corrupto con ids de logros desconocidos: descartar sin romper la partida. Coherente with M72 (logros) and M59 (guardado).
+
+### Partida vieja sin diccionario de logros (migración): crear estado vacío y evaluar retroactivo
+- Spec: partida vieja sin diccionario de logros (migración): crear estado vacío y evaluar retroactivo. Coherente with M72 (logros) and M59 (guardado).
+
+### Borrar la partida con logros en Steam: no borrar Steam; reconciliar en la próxima sesión
+- Spec: borrar la partida con logros en Steam: no borrar Steam; reconciliar en la próxima sesión. Coherente with M72 (logros) and M97 (plataforma).
+
+### 20 logros desbloqueados a la vez en una migración: cola con resumen N nuevos logros
+- Spec: 20 logros desbloqueados a la vez en una migración: cola con resumen "N nuevos logros". Coherente with M72 (logros) and M53 (UI).
+
+
+## Specs Sistema de Logros (Beam 603)
+
+### Logro oculto consultado antes de desbloquearse: mostrar misterio sin filtrar datos
+- Spec: logro oculto consultado antes de desbloquearse: mostrar misterio sin filtrar datos. Coherente with M72 (logros) and M53 (UI).
+
+### Condicion compuesta con subcondicion de estadistica inexistente: validacion en editor la detecta
+- Spec: condicion compuesta con subcondicion de estadistica inexistente: validacion en editor la detecta. Coherente with M72 (logros) and M108 (herramientas).
+
+### Notificacion durante pantalla de carga o cinematica: encolar y mostrar al recuperar control
+- Spec: notificacion durante pantalla de carga o cinematica: encolar y mostrar al recuperar control. Coherente with M72 (logros) and M63 (streaming).
+
+### Partidas con PRNG distinto (M29) evaluando condiciones: sin aleatoriedad en condiciones, determinismo completo
+- Spec: partidas con PRNG distinto (M29) evaluando condiciones: sin aleatoriedad en condiciones, determinismo completo. Coherente with M72 (logros) and M29 (tiempo).
+
+### Logro cuyo texto i18n falta: fallback al texto base espanol sin error en pantalla
+- Spec: logro cuyo texto i18n falta: fallback al texto base espanol sin error en pantalla. Coherente with M72 (logros) and M86 (localizacion).
+
+
+## Specs Sistema de Logros (Beam 604)
+
+### Evitar allocaciones pesadas en el hot path de notify_event
+- Spec: evitar allocaciones pesadas en el hot path de notify_event. Coherente with M72 (logros) and M61 (rendimiento).
+
+### Memorizar progreso de condiciones compuestas durante una misma evaluación
+- Spec: memorizar progreso de condiciones compuestas durante una misma evaluación. Coherente with M72 (logros) and M61 (rendimiento).
+
+### No evaluar logros ya desbloqueados (corte temprano por _desbloqueados)
+- Spec: no evaluar logros ya desbloqueados (corte temprano por _desbloqueados). Coherente with M72 (logros) and M61 (rendimiento).
+
+### No reconstruir diccionarios del estado en cada consulta (caché de lectura)
+- Spec: no reconstruir diccionarios del estado en cada consulta (caché de lectura). Coherente with M72 (logros) and M61 (rendimiento).
+
+### Persistencia diferida agrupada: write-through inmediato pero sin escrituras por frame
+- Spec: persistencia diferida agrupada: write-through inmediato pero sin escrituras por frame. Coherente with M72 (logros) and M61 (rendimiento).
+
+
+## Specs Sistema de Logros (Beam 605)
+
+### Cargar el catalogo .tres con ResourceLoader al inicio, sin cargas perezosas en runtime
+- Spec: cargar el catalogo .tres con ResourceLoader al inicio, sin cargas perezosas en runtime. Coherente with M72 (logros) and M62 (cargas).
+
+### Pooling de toasts UI (preinstanciar y reutilizar nodos)
+- Spec: pooling de toasts UI (preinstanciar y reutilizar nodos). Coherente with M72 (logros) and M53 (UI).
+
+### Panel de logros: construir los items solo al abrir y reciclarlos al filtrar
+- Spec: panel de logros: construir los items solo al abrir y reciclarlos al filtrar. Coherente with M72 (logros) and M53 (UI).
+
+### Crear 04-Codigo.md (archivos previstos, firmas GDScript, notas de implementacion)
+- Spec: crear 04-Codigo.md (archivos previstos, firmas GDScript, notas de implementacion). Coherente with M72 (logros) and AGENTS.md sec 11.
+
+### Redactar README interno res://logros/README.md con guia cómo agregar un logro
+- Spec: redactar README interno res://logros/README.md con guia "cómo agregar un logro". Coherente with M72 (logros) and AGENTS.md sec 11.
+
+
+## Specs Sistema de Logros (Beam 606)
+
+### Documentar la integracion con M97 en plan-actual cuando exista la capa Steam real
+- Spec: documentar la integracion con M97 en plan-actual cuando exista la capa Steam real. Coherente with M72 (logros) and M97 (plataforma).
+
+### Generar log en Logs/ al completar la implementacion
+- Spec: generar log en Logs/ al completar la implementacion, con el formato estandar NN-descripcion_fecha.md. Coherente with M72 (logros) and AGENTS.md sec 6.
+
+### Planear tests unitarios del AchievementManager con partidas sinteticas (M112)
+- Spec: planear tests unitarios del AchievementManager con partidas sinteticas (M112). Coherente with M72 (logros) and M112 (testing).
+
+### Test unidad: notify_event desbloquea logro cuando la condicion cumple
+- Spec: test unidad: notify_event desbloquea logro cuando la condicion cumple. Coherente with M72 (logros) and M112 (testing).
+
+### Test unidad: notify_event no desbloquea cuando la condicion no cumple
+- Spec: test unidad: notify_event no desbloquea cuando la condicion no cumple. Coherente with M72 (logros) and M112 (testing).
+
+
+## Specs Sistema de Logros (Beam 607)
+
+### Test unidad: doble notify_event no genera doble desbloqueo ni doble señal
+- Spec: test unidad: doble notify_event no genera doble desbloqueo ni doble señal. Coherente with M72 (logros) and M112 (testing).
+
+### Test unidad: deserialización de estado corrupto no rompe la carga
+- Spec: test unidad: deserialización de estado corrupto no rompe la carga. Coherente with M72 (logros) and M59 (guardado).
+
+### Test unidad: condiciones compuestas AND/OR/NOT con casos de borde
+- Spec: test unidad: condiciones compuestas AND/OR/NOT con casos de borde. Coherente with M72 (logros) and M112 (testing).
+
+### Test manual: 20 desbloqueos simultáneos muestran resumen encolado sin spam
+- Spec: test manual: 20 desbloqueos simultáneos muestran resumen encolado sin spam. Coherente with M72 (logros) and M53 (UI).
+
+### Test manual: notificaciones desactivadas por accesibilidad no se muestran pero sí se registran
+- Spec: test manual: notificaciones desactivadas por accesibilidad no se muestran pero sí se registran. Coherente with M72 (logros) and M58 (accesibilidad).
+
+
+## Specs Sistema de Logros (Beam 608)
+
+### Test manual: borrar partida limpia logros locales y la sesion Steam reconcilia
+- Spec: test manual: borrar partida limpia logros locales y la sesion Steam reconcilia. Coherente with M72 (logros) and M59 (guardado).
+
+### Test manual: ciclo cosechar-primera vez muestra el toast Primera cosecha
+- Spec: test manual: ciclo cosechar-primera vez muestra el toast "Primera cosecha". Coherente with M72 (logros) and M33 (agricultura).

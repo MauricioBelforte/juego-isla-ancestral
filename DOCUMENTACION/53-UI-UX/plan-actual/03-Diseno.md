@@ -1,4 +1,4 @@
-﻿**Modelo:** mimo-v2.6-flash-free
+**Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
 
 # 03-Diseno.md â€” MÃ³dulo 53: UI/UX
@@ -294,3 +294,133 @@ usan **`set_value_no_signal` / `set_pressed_no_signal` / `select()`**. Emitir
 
 ### Pausa durante transición de escena (M63) sin capas colgadas
 - Spec: pausa durante transición de escena (M63) sin capas colgadas. Coherente con M63 (streaming) y M53 (UI).
+
+## Coherencia de UI MEDIDA — auditor, feedback de 120 ms y canal unico (2026-10-25, DeepSeek-V4.1-Flash, Log 2179)
+
+Esta seccion reemplaza la discusion cualitativa de L138/L144/L159/L221 por un
+**modelo medido**: cada cifra de abajo sale de correr los artefactos contra el
+corpus real del proyecto (1215 `.gd`), no de leer a ojo.
+
+### 8.1 Artefactos
+
+| Artefacto | Ruta | Que hace |
+|---|---|---|
+| Auditor estatico | `scripts/ui/auditar_ui_m53.py` | Mide los 4 items. `--json`, `--check` (informe, exit 1 si hay violacion), `--selftest` (gate, exit 0/1), **exit 3 = auditor CIEGO** |
+| Suite del auditor | embebida (`--selftest`) | 14 checks herméticos sobre corpus sintético (limpio y sucio) |
+| Modelo de feedback | `game/isla-ancestral/scripts/ui/feedback_accion_m53.gd` | Tabla de amplitudes + pasos del Tween como datos + aplicador |
+| Suite del modelo | `game/isla-ancestral/scripts/ui/test_feedback_accion_m53.gd` | 6 bloques A-F, 64 checks, piso 64 MEDIDO |
+
+Protocolo de gate ratificado en M50 y reusado aca: **`--selftest` es el gate
+duro de CI**; `--check` es informe (hoy sale 1 a proposito, por la deuda que
+declara). Un gate que sale rojo por diseño no sirve como gate.
+
+### 8.2 L138 — Feedback visual de colocacion, cosecha y compra (120 ms)
+
+Formula (fuente unica: `feedback_accion_m53.gd`):
+
+- **Duracion por paso: 120 ms exactos** (`DURACION_S = 0.12`), dos fases en
+  paralelo por propiedad (ida y vuelta) => **240 ms de gesto total**.
+- Propiedades: `scale` (pico de amplitud) y `modulate` (flash de tinte), ambas
+  vuelven a neutro (`Vector2.ONE` / `Color.WHITE`).
+- Tinte desde la paleta del tema (`ThemeUx.COLOR_*`), nunca un literal: si la
+  paleta cambia, el feedback cambia con ella (esto es L159 aplicado a L138).
+
+| Accion | Escala pico | Alfa del flash | Tinte | Curva |
+|---|---|---|---|---|
+| colocacion | 1.10 | 0.55 | `COLOR_HIGHLIGHT_GOLD` | TRANS_QUAD / EASE_OUT |
+| cosecha | 1.14 | 0.50 | `COLOR_SPEAKER_NPC` | TRANS_BACK / EASE_OUT |
+| compra | 1.08 | 0.60 | `COLOR_ACCENT_OCRE` | TRANS_SINE / EASE_OUT |
+
+**Medido en disco (2026-10-25):** `colocacion` 18 archivos de superficie / **0
+tweens**; `cosecha` 6 archivos / **4 tweens, 3 de ellos de 0.12** (el cuarto es
+0.05 en `crop_tile_visual.gd`); `compra` 9 archivos / **0 tweens**. O sea: hoy
+solo cosecha tiene feedback animado, y ni siquiera completo.
+
+**Estado honesto del item:** el modelo + aplicador + suite existen y estan
+verificados; **NO estan cableados** (0 consumidores fuera de su test). El
+cableado corresponde a M17 (colocacion), M16/farm (cosecha) y M95/shops
+(compra). Por eso L138 se propone como `[→]`, no como `[x]`.
+
+### 8.3 L144 — No redundancia: nunca sonido + visual + toast
+
+**Regla medida:** una accion puede tener audio (M44/FeedbackDirector) o toast
+(NotificationService) o feedback visual, pero **no los tres a la vez** para el
+mismo evento. El auditor cuenta, por funcion del codigo de producto, cuantos
+canales distintos toca (`audio`, `toast`, `visual`, `haptico`).
+
+**Medido:** 0 funciones con triple canal y 0 con audio+toast. La regla se
+cumple hoy, pero **por vacuidad**: los servicios estan separados y el canal de
+SFX de hover/click esta desconectado.
+
+**Hallazgo (defecto de verificacion, corregido):** el unico test que cubria el
+item, `test_m53_no_redundancia.gd`, tenia esta asercion:
+
+    _check(uf == null, "UIFeedback no esta montado ... no hay redundancia posible")
+
+Era un **PASS que solo se cumplia mientras el canal de audio siguiera roto**:
+consagraba el defecto. Se reemplazo por una **deuda declarada** (`print`, sin
+assert) y la no-redundancia pasa a verificarse sobre el codigo de producto en
+el bloque C del auditor. La suite sigue verde: 7 checks / 0 fallos / EXIT 0.
+
+### 8.4 L159 — Coherencia visual entre capas (un solo lenguaje)
+
+Dos metricas distintas, porque son dos deudas distintas:
+
+1. **Duplicacion de token** (deuda estructural): un literal `Color(...)` con el
+   MISMO valor que un token del tema (distancia RGB <= 0.05). No se ve mal,
+   pero rompe la fuente unica: si el tema cambia, la copia no.
+   **Medido: 27 literales** en codigo de producto.
+2. **Fuera de paleta** (criterio de diseño): literal a distancia > 0.05 del
+   token mas cercano. **Medido: 271**. No es automaticamente un defecto: los
+   colores semanticos (marcadores de minimapa, rarezas, estados) viven fuera de
+   una paleta de 11 tokens a proposito. El auditor los publica, el diseño decide.
+
+Contexto: 95 archivos usan literales de color y solo 16 usan tokens del tema.
+Otros 146 literales caen en archivos no-producto (tests, diag, demo, snapshots
+con fecha), que se cuentan aparte y **no se descartan en silencio**.
+
+### 8.5 L221 — Canvas merge por capa
+
+**Medido:** 20 raices `CanvasLayer` (18 de producto), **14 sin `layer`
+explicito** (quedan en el default 1, compartiendo plano), y solo 3 indices en
+uso: -1, 15 y 100.
+
+**Hallazgo:** `pantalla_carga.gd:36` declara `layer = 100  # por encima de todo`
+y `ui_root.gd:36` declara `layer = 100` sin comentario. **Misma capa**, y el
+comentario afirma lo contrario. El orden de dibujado entre ambas queda librado
+al orden del arbol, no al diseño. Es la colision que detecta el bloque A.
+
+Consolidar capas (merge de canvas) sigue siendo una optimizacion que necesita
+medicion con Profiler (M61) antes/despues: el auditor mide la ESTRUCTURA
+(cuantas raices, cuantos indices, cuantas colisiones), no draw calls.
+
+### 8.6 Segundo falso verde encontrado (L182): asercion con premisa vencida
+
+`test_m53_extremos.gd` (que sostiene el `[x]` de L182 "test con combinaciones
+extremas") exigia:
+
+    _check(absf(fc.r - 0.10) < 0.01 and absf(fc.g - 0.05) < 0.01,
+           "alto contraste: font_color Label oscurecido (0.10, 0.05, ...)")
+
+Ese `0.10/0.05` era correcto con la paleta CLARA anterior a D102. Desde el tema
+noche (D102, 2026-10-18) **oscurecer el texto baja el contraste**, asi que
+`ensure_contrast()` pone casi blanco (0.97, 0.96, 0.93). Medido: la suite estaba
+en **8 checks / 1 fallo** (determinista, 2 corridas), o sea el `[x]` de L182 ya
+no se sostenia.
+
+Corregido: la asercion ahora verifica el **contrato** (ratio WCAG >= 4.5 contra
+el panel y texto mas claro que el panel), no un color hardcodeado. Medido tras el
+fix: **9 checks / 0 fallos / EXIT 0**. Nota: verifica el contrato, no el
+mecanismo — un `ensure_contrast()` no-op que ya cumpliera el ratio tambien
+pasaria, y eso es correcto: lo que se garantiza es el resultado.
+
+### 8.7 Reglas verificables (para que no se degrade)
+
+1. Toda accion con feedback visual usa `FeedbackAccionM53` y por lo tanto 120 ms.
+2. Un tinte nuevo se declara como token en `ThemeUx`, no como literal en el
+   llamador.
+3. Una raiz `CanvasLayer` nueva declara `layer` explicito y no reusa un indice
+   ya tomado.
+4. Un test NUNCA pasa afirmando que un canal/feature NO existe: la ausencia se
+   declara como deuda, no como logro.
+5. Un test no fija colores literales: verifica ratios y relaciones.
