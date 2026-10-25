@@ -84,7 +84,19 @@ func _cargar_definiciones() -> void:
 		def.seasons = [_estacion_numero(String(d.get("temporada", "todas")))]
 		def.yield_item_id = def.crop_id
 		def.yield_seed_id = def.crop_id
-		def.yield_seed_amount = 1
+		def.yield_seed_amount = int(d.get("reproduccion", 1))
+		# P11/P13/P15/P23/P24 (tanda 2026-10-25): bandas deterministas del catálogo
+		def.is_tree = bool(d.get("arbol", false))
+		def.is_flower = bool(d.get("flor", false))
+		def.decorative_only = bool(d.get("decorativa", false))
+		def.is_ancestral = bool(d.get("ancestral", false))
+		def.rare = bool(d.get("raro", false))
+		def.unlock_min_days = int(d.get("desbloqueo_dias", 0))
+		def.island_exclusive = bool(d.get("isla", false))
+		def.fertilizer_bonus = int(d.get("bono_fertilizante", 0))
+		def.hybrid_of = []
+		for h in d.get("hibrido_de", []):
+			def.hybrid_of.append(StringName(String(h)))
 		_definiciones[def.crop_id] = def
 
 func _estacion_numero(nombre: String) -> int:
@@ -211,6 +223,8 @@ func plant(crop: CropDefinition, voxel_pos: Vector3i) -> bool:
 		return false  # §flujo 1: primero arar, luego plantar
 	if _tiles.size() >= MAX_TILES_ACTIVOS:
 		return false
+	if not puede_desbloquear(crop):
+		return false  # P23/P11: cultivo con desbloqueo de progresión pendiente
 	var inv = get_node_or_null("/root/Inventario")
 	if inv == null:
 		return false
@@ -366,6 +380,61 @@ func fertilize(voxel_pos: Vector3i) -> bool:
 	tile.fertilized = true
 	_actualizar_visual(tile)
 	return true
+
+## ── P11/P15/P23/P24: especiales, híbridos, rareza, isleños ─────
+
+## Desbloqueo por progresión (P11 ancestral / P23 raro): legible y
+## determinista — se mide el día absoluto (M29) contra unlock_min_days.
+## unlock_min_days <= 0 → libre. Sin calendario (headless) los cultivos con
+## desbloqueo quedan bloqueados (nunca se asume progreso).
+func puede_desbloquear(crop: CropDefinition) -> bool:
+	if crop == null or crop.unlock_min_days <= 0:
+		return true
+	var cal := get_node_or_null("/root/TimeCalendar")
+	if cal == null or not cal.has_method("get_dia_absoluto"):
+		return false
+	return int(cal.get_dia_absoluto()) >= crop.unlock_min_days
+
+## P15: tabla de cruces EXPLÍCITA (reglas legibles, sin RNG oculto).
+## Clave = par de padres ordenado alfabéticamente → híbrido. Si el par no
+## está tabulado, no hay cruce (nunca azar).
+const TABLA_CRUCES: Dictionary = {
+	"flor_lavanda|flor_tulipan": &"lirio_estelar",
+}
+
+func _clave_par(a: StringName, b: StringName) -> String:
+	var partes := [String(a), String(b)]
+	partes.sort()
+	return "|".join(partes)
+
+## P15: cruce de dos flores LISTAS y distintas → semilla del híbrido.
+## Las flores padres se consumen (el híbrido se planta como semilla nueva).
+## Devuelve &"" si no hay cruce posible (mismo cultivo, no flores, no listas,
+## par no tabulado). Determinista: mismas entradas → mismo híbrido.
+func cruce_flores(pos_a: Vector3i, pos_b: Vector3i) -> StringName:
+	if pos_a == pos_b:
+		return &""
+	var ta: CropTile = _tiles.get(pos_a, null)
+	var tb: CropTile = _tiles.get(pos_b, null)
+	if ta == null or tb == null or ta.crop_def == null or tb.crop_def == null:
+		return &""
+	if not ta.is_ready() or not tb.is_ready():
+		return &""
+	if not ta.crop_def.is_flower or not tb.crop_def.is_flower:
+		return &""
+	if ta.crop_def.crop_id == tb.crop_def.crop_id:
+		return &""
+	var clave := _clave_par(ta.crop_def.crop_id, tb.crop_def.crop_id)
+	if not TABLA_CRUCES.has(clave):
+		return &""
+	var hibrido: StringName = TABLA_CRUCES[clave]
+	if not _definiciones.has(hibrido):
+		return &""
+	_tiles.erase(pos_a)
+	_tiles.erase(pos_b)
+	_eliminar_visual(pos_a)
+	_eliminar_visual(pos_b)
+	return hibrido
 
 ## Estadísticas para analytics M104 / profiler M61.
 func get_active_farm_stats() -> Dictionary:

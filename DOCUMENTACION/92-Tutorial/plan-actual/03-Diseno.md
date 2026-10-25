@@ -186,3 +186,146 @@ Contratos vivos para M53: seÃ±ales `paso_mostrado`, `capitulo_iniciado/complet
 
 ### K2: pasos cultivo con consejo de tiempo real
 - Spec: K2: pasos: usar azada → plantar semilla → regar → esperar (consejo de tiempo real) → cosechar con E. Coherente con M92 (tutorial) y M33 (agricultura).
+
+## Specs Tutorial (Beam 644)
+
+### RF11: capítulo Moverse: guía de WASD/joystick con celebración de llegada al punto
+- Spec: RF11: capítulo Moverse: guía de WASD/joystick con celebración de llegada al punto. Coherente with M92 (tutorial) and M10 (personaje).
+
+### RF11: la pista de movimiento desaparece al detectar input de dirección
+- Spec: RF11: la pista de movimiento desaparece al detectar input de dirección. Coherente with M92 (tutorial) and M10 (personaje).
+
+### RF16: capítulo Minería: equipar pico → romper veta → recoger mineral, con aviso de energía
+- Spec: RF16: capítulo Minería: equipar pico → romper veta → recoger mineral, con aviso de energía. Coherente with M92 (tutorial) and M35 (minería).
+
+### RF17: capítulo Crafting: abrir banco → mostrar receta requerida → fabricar → verificar inventario
+- Spec: RF17: capítulo Crafting: abrir banco → mostrar receta requerida → fabricar → verificar inventario. Coherente with M92 (tutorial) and M16 (crafting).
+
+### RF4: burbuja world-space anclada al objetivo de la lección con texto <= 2 líneas
+- Spec: RF4: burbuja world-space anclada al objetivo de la lección con texto <= 2 líneas. Coherente with M92 (tutorial) and M53 (UI).
+
+
+## Specs Tutorial (Beam 645)
+
+### RF4: flecha opcional apuntando al objetivo cuando esta fuera de pantalla
+- Spec: RF4: flecha opcional apuntando al objetivo cuando esta fuera de pantalla. Coherente with M92 (tutorial) and M53 (UI).
+
+### RF4: la burbuja se oculta con fade al expirar, al alejarse (> 6 m) o al cumplir la accion
+- Spec: RF4: la burbuja se oculta con fade al expirar, al alejarse (> 6 m) o al cumplir la accion. Coherente with M92 (tutorial) and M53 (UI).
+
+### RF8: confirmacion obligatoria antes de re-jugar (M53)
+- Spec: RF8: confirmacion obligatoria antes de re-jugar (M53). Coherente with M92 (tutorial) and M53 (UI).
+
+### RN1: tono amable sin urgencia ("cuando quieras"), sin castigo por ignorar pistas
+- Spec: RN1: tono amable sin urgencia ("cuando quieras"), sin castigo por ignorar pistas. Coherente with M92 (tutorial) and M152 (objetivo final).
+
+### RN2: el tiempo con pistas activas no supera el 10% de la sesion
+- Spec: RN2: el tiempo con pistas activas no supera el 10% de la sesion. Coherente with M92 (tutorial) and M61 (rendimiento).
+
+
+## Specs Tutorial (Beam 646)
+
+### RN7: 100% de textos con claves tr() (soporte inicial ES/EN)
+- Spec: RN7: 100% de textos con claves tr() (soporte inicial ES/EN). Coherente with M92 (tutorial) and M86 (localizacion).
+
+### RN8: determinismo: mismo input + mismo mundo = mismo disparo de lecciones
+- Spec: RN8: determinismo: mismo input + mismo mundo = mismo disparo de lecciones. Coherente with M92 (tutorial) and M08 (terreno).
+
+### RN12: duracion de pistas escalable x1/x2/x4 y tamano/contraste desde preferencias de M58
+- Spec: RN12: duracion de pistas escalable x1/x2/x4 y tamano/contraste desde preferencias de M58. Coherente with M92 (tutorial) and M58 (accesibilidad).
+
+### H1: el 92 entrega datos de pistas y M53 dibuja la burbuja final
+- Spec: H1: el 92 entrega datos de pistas y M53 dibuja la burbuja final. Coherente with M92 (tutorial) and M53 (UI).
+
+### H3: re-play desde el menu de opciones con confirmacion
+- Spec: H3: re-play desde el menu de opciones con confirmacion. Coherente with M92 (tutorial) and M53 (UI).
+
+
+## Specs Tutorial (Beam 647)
+
+### H4: localizacion: todas las claves tr() siguen el flujo de traduccion de M53
+- Spec: H4: localizacion: todas las claves tr() siguen el flujo de traduccion de M53. Coherente with M92 (tutorial) and M86 (localizacion).
+
+### H5: el mensaje "capitulo completado" respeta las normas de HUD de M53
+- Spec: H5: el mensaje "capitulo completado" respeta las normas de HUD de M53. Coherente with M92 (tutorial) and M53 (UI).
+
+### H7: el marcador de objetivo del prologo usa componentes de M53 sin duplicacion
+- Spec: H7: el marcador de objetivo del prologo usa componentes de M53 sin duplicacion. Coherente with M92 (tutorial) and M53 (UI).
+
+### I1: el capitulo Interactuar se dispara en el primer interactuable (totem de bienvenida)
+- Spec: I1: el capitulo Interactuar se dispara en el primer interactuable (totem de bienvenida). Coherente with M92 (tutorial) and M06 (puzzles).
+
+### I2: la pista de tecla E se alinea al prompt del 70 (sin iconos duplicados en pantalla)
+- Spec: I2: la pista de tecla E se alinea al prompt del 70 (sin iconos duplicados en pantalla). Coherente with M92 (tutorial) and M53 (UI).
+
+
+## Specs Tutorial (Beam 648)
+
+### I3: se consume la señal interaccion_terminada para validar el paso
+- Spec: I3: se consume la señal interaccion_terminada para validar el paso. Coherente with M92 (tutorial) and M06 (puzzles).
+
+### I5: la burbuja del 92 se oculta cuando el prompt del 70 está en INTERACTUANDO
+- Spec: I5: la burbuja del 92 se oculta cuando el prompt del 70 está en INTERACTUANDO. Coherente with M92 (tutorial) and M70 (progresión).
+
+### I6: capítulo Interactuar también enseña el prompt atenuado (no disponible con razón)
+- Spec: I6: capítulo Interactuar también enseña el prompt atenuado (no disponible con razón). Coherente with M92 (tutorial) and M70 (progresión).
+
+### I7: el 92 usa la localización de nombres del 70 (obtener_nombre_prompt) si aplica
+- Spec: I7: el 92 usa la localización de nombres del 70 (obtener_nombre_prompt) si aplica. Coherente with M92 (tutorial) and M86 (localización).
+
+### J2: la pista explica brevemente la acción de la herramienta y la energía consumida
+- Spec: J2: la pista explica brevemente la acción de la herramienta y la energía consumida. Coherente with M92 (tutorial) and M13 (herramientas).
+
+
+## Specs Tutorial (Beam 649)
+
+### J3: se consume la señal de herramienta equipada para validar el paso
+- Spec: J3: se consume la señal de herramienta equipada para validar el paso. Coherente with M92 (tutorial) and M13 (herramientas).
+
+### K3: se consumen las señales de cultivo (plantado, regado, cosechado) para avanzar pasos
+- Spec: K3: se consumen las señales de cultivo (plantado, regado, cosechado) para avanzar pasos. Coherente with M92 (tutorial) and M33 (agricultura).
+
+### K4: la pista de "esperar a mañana" no obliga el envejecimiento de día (consejo contextual)
+- Spec: K4: la pista de "esperar a mañana" no obliga el envejecimiento de día (consejo contextual). Coherente with M92 (tutorial) and M33 (agricultura).
+
+### K5: si el jugador destruye la parcela, reprogramar o descartar vía watchdog (RF23)
+- Spec: K5: si el jugador destruye la parcela, reprogramar o descartar vía watchdog (RF23). Coherente with M92 (tutorial) and M33 (agricultura).
+
+### L1: capítulo Pesca en el primer muelle con caña de madera
+- Spec: L1: capítulo Pesca en el primer muelle con caña de madera. Coherente with M92 (tutorial) and M34 (pesca).
+
+
+## Specs Tutorial (Beam 650)
+
+### L3: después de un fallo en el mini-juego, la pista se re-muestra amable (sin castigo)
+- Spec: L3: después de un fallo en el mini-juego, la pista se re-muestra amable (sin castigo). Coherente with M92 (tutorial) and M34 (pesca).
+
+### L4: se consume la señal pez_capturado para completar el paso final
+- Spec: L4: se consume la señal pez_capturado para completar el paso final. Coherente with M92 (tutorial) and M34 (pesca).
+
+### M1: capítulo Minería en la primera veta con pico de madera
+- Spec: M1: capítulo Minería en la primera veta con pico de madera. Coherente with M92 (tutorial) and M35 (minería).
+
+### M2: pistas: equipar pico, romper veta, recoger mineral, aviso de energía
+- Spec: M2: pistas: equipar pico, romper veta, recoger mineral, aviso de energía. Coherente with M92 (tutorial) and M35 (minería).
+
+### M3: se consume la señal veta_rota para validar el paso
+- Spec: M3: se consume la señal veta_rota para validar el paso. Coherente with M92 (tutorial) and M35 (minería).
+
+
+## Specs Tutorial (Beam 651)
+
+### M4: si la veta es inalcanzable (pico insuficiente), el capítulo espera la veta correcta o se re-programa
+- Spec: M4: si la veta es inalcanzable (pico insuficiente), el capítulo espera la veta correcta o se re-programa. Coherente with M92 (tutorial) and M35 (minería).
+
+### N1: capítulo Crafting en el primer banco de trabajo
+- Spec: N1: capítulo Crafting en el primer banco de trabajo. Coherente with M92 (tutorial) and M16 (crafting).
+
+### N2: la pista marca la receta requerida por la historia (ítem único)
+- Spec: N2: la pista marca la receta requerida por la historia (ítem único). Coherente with M92 (tutorial) and M16 (crafting).
+
+### N4: se consume la señal item_crafteado para completar el capítulo
+- Spec: N4: se consume la señal item_crafteado para completar el capítulo. Coherente with M92 (tutorial) and M16 (crafting).
+
+### N5: si el jugador no tiene los materiales, la pista indica dónde conseguirlos (sin misión)
+- Spec: N5: si el jugador no tiene los materiales, la pista indica dónde conseguirlos (sin misión). Coherente with M92 (tutorial) and M16 (crafting).

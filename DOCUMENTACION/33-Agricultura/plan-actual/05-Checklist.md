@@ -28,13 +28,13 @@
 - [x] P8: cosecha — event crop_harvested y entrega a M14 [S]
 - [x] P9: herramientas — pala y regadera integradas vía ToolService (M13) [S]
 - [x] P10: estaciones — ventana por cultivo; fuera de ventana DORMANTE [S]
-- [ ] P11: cultivos especiales — trigo invernal, higos, ancestrales de desbloqueo M22 [M]
+- [x] P11: cultivos especiales — trigo invernal, higos, ancestrales de desbloqueo M22 [M] — farming.json (trigo_invernal seasons=[3], higo is_tree, maiz_ancestral is_ancestral + unlock_min_days 20) + crop_definition.gd (is_ancestral/unlock_min_days) + farm_service.gd puede_desbloquear() + test_farm_features_m33.gd _test_catalogo_especiales/_test_desbloqueo_progresion (Step-5 2026-10-25)
   · espera: modulo(s) dependiente(s): M22 (coordinar con su dueno)
 - [x] P12: árboles frutales — perennes con cooldown frutal, sin replantar [M]
-- [ ] P13: flores — decorativas y sujetas a cruce [M]
+- [x] P13: flores — decorativas y sujetas a cruce [M] — farming.json (flor_tulipan/flor_lavanda: flor+decorativa) + crop_definition.gd is_flower/decorative_only + test_farm_features_m33.gd _test_flores_decorativas (rendimiento vacío para decorativas) (Step-5 2026-10-25)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P14: plantas ancestrales — lumina_ancestral con requisito narrativo [M]
-- [ ] P15: híbridos — cruce de flores con reglas legibles (sin RNG oculto) [M]
+- [x] P15: híbridos — cruce de flores con reglas legibles (sin RNG oculto) [M] — farm_service.gd TABLA_CRUCES + cruce_flores() (clave = par ordenado; padres se consumen) + test_farm_features_m33.gd _test_cruce_determinista (25 cruces idénticos + pares no elegibles -> &"") (Step-5 2026-10-25)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P16: calidad — 3 niveles (COMUN/BUENA/EXCELENTE) [M] — crop_tile.gd quality 0/1/2 + calcular_rendimiento() aplica bonificación
 - [x] P17: rendimiento — yields por cultivo con bonificación de calidad [S] — crop_tile.gd calcular_rendimiento() (min/max + quality)
@@ -45,9 +45,9 @@
   · espera: modulo(s) dependiente(s): M16 (coordinar con su dueno)
 - [ ] P22: venta — integración M38/M39 con precios por calidad [M]
   · espera: modulo(s) dependiente(s): M38, M39 (coordinar con su dueno)
-- [ ] P23: semillas raras — reproducibles y con desbloqueo de progresión [M]
+- [x] P23: semillas raras — reproducibles y con desbloqueo de progresión [M] — farming.json trigo_estelar (raro, desbloqueo_dias 30, reproduccion 2) + crop_definition.gd rare/unlock_min_days + farm_service.gd puede_desbloquear() + plant() sin consumir semilla si falla + test_farm_features_m33.gd _test_rareza_reproducible/_test_desbloqueo_progresion (Step-5 2026-10-25)
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] P24: cultivos de isla — palma de coco y flor de coral exclusivas [M]
+- [x] P24: cultivos de isla — palma de coco y flor de coral exclusivas [M] — farming.json (palma_coco arbol+isla, flor_coral flor+isla) + crop_definition.gd island_exclusive + test_farm_features_m33.gd _test_catalogo_especiales (Step-5 2026-10-25)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P25: agricultura decorativa — helecho ornamental sin rendimiento [S] — crop_definition.gd decorative_only; calcular_rendimiento() devuelve [] — VERIFICADO qa_farm_pausas_m33.gd _test_decorative_only (28/0 EXIT 0: rinde [] hasta en LISTA + control anti-falso-verde sin flag sí rinde)
   · espera: feature de M33-Agricultura (definir contrato/dueno por asignar)
@@ -185,7 +185,7 @@
 - [ ] LOD de 2 niveles para instancias [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Sway por shader de instancing sin nodos por planta [C]
-- [ ] Sin procesamiento por frame en estados pausados [S]
+- [x] Sin procesamiento por frame en estados pausados [S] — farm_service.gd no define _process/_physics_process ni set_process (verificado por lectura de fuente sin comentarios) + test_farm_features_m33.gd _test_sin_procesamiento_frame + qa_farm_pausas_m33.gd 35/0 (Step-5 2026-10-25)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] CropTile como RefCounted (cero nodos por cultivo) [S]
 - [x] Estadísticas de farm en el profiler de M113 [M]
@@ -245,7 +245,7 @@
   · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): 02-Analisis (8.347 B, LF), 03-Diseno (17.214 B, LF; BOM + mojibake REPARADOS hoy: 19.589 -> 17.214 B, 0 FFFD, 0 C1) y 04-Codigo (23.302 B, LF) existen con firma.
 - [x] 05-Checklist creado y firmado (este archivo) [S]
   · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): este archivo existe (CRLF puro) con firma.
-**Totales:** 155 ítems · Completados: 127 · Pendientes: 28 · No resueltos: 0. (Re-medido Step-5-WorkBuddy 2026-10-25, Log 2180, por prefijo de línea tras 10 flips con cita: L164/L220/L222/L224/L229 tests verdes HOY con binario real, L236/L240 doc en 02-Analisis, L242/L244/L246 docs con firma + 03-Diseno reparado. La línea anterior decía 112/43: drift de Totales, el disco medía 117/38 antes de esta tanda.)
+**Totales:** 155 ítems · Completados: 133 · Pendientes: 22 · No resueltos: 0. (Re-medido Step-5-WorkBuddy 2026-10-25, Log 2182, por prefijo de línea tras 6 flips con cita: P11/P13/P15/P23/P24 (catálogo farming.json schema 2 + crop_definition.gd + farm_service.gd TABLA_CRUCES/cruce_flores/puede_desbloquear) y L188 (sin _process, fuente) — todos verdes con test_farm_features_m33.gd 39/0 + guardián en rojo por inyección EXIT 1. La línea anterior decía 127/28 tras los 10 flips de la tanda previa, Log 2180.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].

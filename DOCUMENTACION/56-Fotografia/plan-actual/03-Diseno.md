@@ -269,3 +269,227 @@ automatico headless queda definido con 3 QAs vigentes + 1 pendiente:
 
 ### Probar salida del modo foto restaurando TODO el estado
 - Spec: probar salida del modo foto restaurando TODO el estado. Coherente con M56 (fotografía) y M53 (UI).
+
+## Specs Fotografia (Beam 622)
+
+### Zoom con rueda del mouse y gatillos de gamepad
+- Spec: zoom con rueda del mouse y gatillos de gamepad. Coherente with M56 (fotografia) and M57 (accesibilidad).
+
+### Rotacion orbital completa en 3 ejes
+- Spec: rotacion orbital completa en 3 ejes. Coherente with M56 (fotografia) and M10 (personaje).
+
+### Limites de inclinacion -60..+60
+- Spec: limites de inclinacion -60..+60. Coherente with M56 (fotografia) and M10 (personaje).
+
+### Probar zoom maximo en escenas con vegetacion densa (M50)
+- Spec: probar zoom maximo en escenas con vegetacion densa (M50). Coherente with M56 (fotografia) and M50 (vegetacion).
+
+### No modificar la paleta global del juego (M49)
+- Spec: no modificar la paleta global del juego (M49). Coherente with M56 (fotografia) and M49 (iluminacion).
+
+
+## Specs Fotografia (Beam 623)
+
+### Mostrar preview del sol/luna y del clima con la hora fijada
+- Spec: mostrar preview del sol/luna y del clima con la hora fijada. Coherente with M56 (fotografia) and M31 (ciclo).
+
+### Restaurar hora/clima reales al salir
+- Spec: restaurar hora/clima reales al salir. Coherente with M56 (fotografia) and M31 (ciclo).
+
+### No permitir fijar hora durante eventos cinematicos (M74)
+- Spec: no permitir fijar hora durante eventos cinematicos (M74). Coherente with M56 (fotografia) and M74 (eventos).
+
+### Ocultar jugador (cuerpo invisible) y prompts de interaccion (M70)
+- Spec: ocultar jugador (cuerpo invisible) y prompts de interaccion (M70). Coherente with M56 (fotografia) and M70 (progresion).
+
+### Testear ocultamiento con Reduce Motion activo (M58)
+- Spec: testear ocultamiento con Reduce Motion activo (M58). Coherente with M56 (fotografia) and M58 (accesibilidad).
+
+
+## Specs Fotografia (Beam 624)
+
+### No posar NPC en medio de dialogo (M21)
+- Spec: no posar NPC en medio de dialogo (M21). Coherente with M56 (fotografia) and M21 (historia).
+
+### Animales reanudan su IA (M64) al salir
+- Spec: animales reanudan su IA (M64) al salir. Coherente with M56 (fotografia) and M64 (IA).
+
+### Capturar ruinas (M25), templos (M26) e interiores (M49)
+- Spec: capturar ruinas (M25), templos (M26) e interiores (M49). Coherente with M56 (fotografia) and M25/M26 (templos).
+
+### Vincular la foto con el lugar del mapa (M54)
+- Spec: vincular la foto con el lugar del mapa (M54). Coherente with M56 (fotografia) and M54 (mapa).
+
+### Capturar festivales (M74) con NPC posando
+- Spec: capturar festivales (M74) con NPC posando. Coherente with M56 (fotografia) and M74 (eventos).
+
+
+## Specs Fotografia (Beam 625)
+
+### Esperar 0.8 s tras la pose con indicador visual
+- Spec: esperar 0.8 s tras la pose con indicador visual. Coherente with M56 (fotografia) and M53 (UI).
+
+
+## Specs Fotografia (Beam 626)
+
+### Guardar en user://photos/ en WebP con metadatos XMP
+- Spec: guardar en user://photos/ en WebP con metadatos XMP. Coherente with M56 (fotografia) and M59 (guardado).
+
+### Manejar disco lleno y permisos denegados (M59) con aviso amigable
+- Spec: manejar disco lleno y permisos denegados (M59) con aviso amigable. Coherente with M56 (fotografia) and M59 (guardado).
+
+### Manejar corrupcion de fotos (archivo invalido)
+- Spec: manejar corrupcion de fotos (archivo invalido). Coherente with M56 (fotografia) and M59 (guardado).
+
+### Exportar a carpeta visible del SO (M97)
+- Spec: exportar a carpeta visible del SO (M97). Coherente with M56 (fotografia) and M97 (plataforma).
+
+### Generar miniatura de 320 px por foto
+- Spec: generar miniatura de 320 px por foto (la galeria CONSUME miniaturas pero nadie las genera todavia). Coherente with M56 (fotografia) and M53 (UI).
+
+
+## Specs Fotografia (Beam 627)
+
+### Mostrar galeria del album en el diario
+- Spec: mostrar galeria del album en el diario. Coherente with M56 (fotografia) and M55 (diario).
+
+### Abrir foto en pantalla completa sin recargar la escena
+- Spec: abrir foto en pantalla completa sin recargar la escena. Coherente with M56 (fotografia) and M53 (UI).
+
+### Borrar foto desde el diario
+- Spec: borrar foto desde el diario. Coherente with M56 (fotografia) and M55 (diario).
+
+### Explicar en el dialogo que se exporta y adonde
+- Spec: explicar en el dialogo que se exporta y adonde. Coherente with M56 (fotografia) and M20 (dialogos).
+
+### Compartir desde el album y desde el diario
+- Spec: compartir desde el album y desde el diario. Coherente with M56 (fotografia) and M54 (mapa).
+
+
+## Specs Fotografia (Beam 628)
+
+### Indicar visualmente la ruta de exportacion
+- Spec: indicar visualmente la ruta de exportacion. Coherente with M56 (fotografia) and M53 (UI).
+
+### Testear comparticion en Steam y Windows
+- Spec: testear comparticion en Steam y Windows. Coherente with M56 (fotografia) and M97 (plataforma).
+
+### No incluir datos de perfil en el archivo exportado
+- Spec: no incluir datos de perfil en el archivo exportado. Coherente with M56 (fotografia) and M80 (privacidad).
+
+### No incluir coordenadas del mundo ni datos de red
+- Spec: no incluir coordenadas del mundo ni datos de red. Coherente with M56 (fotografia) and M80 (privacidad).
+
+### No incluir metadatos de sesion
+- Spec: no incluir metadatos de sesion. Coherente with M56 (fotografia) and M80 (privacidad).
+
+
+## Specs Fotografia (Beam 629)
+
+### Nunca compartir nada sin confirmacion
+- Spec: nunca compartir nada sin confirmacion. Coherente with M56 (fotografia) and M80 (privacidad).
+
+### Validar con politica de privacidad (M80)
+- Spec: validar con politica de privacidad (M80). Coherente with M56 (fotografia) and M80 (privacidad).
+
+### Bloquear atajos de juego durante el modo foto y viceversa
+- Spec: bloquear atajos de juego durante el modo foto y viceversa. Coherente with M56 (fotografia) and M53 (UI).
+
+### Permitir salida con ESC y entrada desde inventario (M14)
+- Spec: permitir salida con ESC y entrada desde inventario (M14). Coherente with M56 (fotografia) and M14 (recursos).
+
+
+## Specs Fotografia (Beam 630)
+
+### Publicar atajos en el menu de ayuda (M92)
+- Spec: publicar atajos en el menu de ayuda (M92). Coherente with M56 (fotografia) and M92 (tutorial).
+
+### Presupuesto del album: <= 150 MB con aviso PHOTO-WARN
+- Spec: presupuesto del album: <= 150 MB con aviso PHOTO-WARN. Coherente with M56 (fotografia) and M61 (rendimiento).
+
+### Entrar al modo foto con inventario abierto o en transicion de escena
+- Spec: entrar al modo foto con inventario abierto o en transicion de escena. Coherente with M56 (fotografia) and M63 (streaming).
+
+### Entrada durante dialogo (M21): bloqueada correctamente
+- Spec: entrada durante dialogo (M21): bloqueada correctamente. Coherente with M56 (fotografia) and M21 (historia).
+
+### Salida con camara dentro de un muro (colision)
+- Spec: salida con camara dentro de un muro (colision). Coherente with M56 (fotografia) and M10 (personaje).
+
+
+## Specs Fotografia (Beam 631)
+
+### Salida con camara muy lejos del jugador
+- Spec: salida con camara muy lejos del jugador. Coherente with M56 (fotografia) and M10 (personaje).
+
+### Foto borrada mientras esta abierta (referencia invalida)
+- Spec: foto borrada mientras esta abierta (referencia invalida). Coherente with M56 (fotografia) and M55 (diario).
+
+### Manejar album vacio con mensaje amistoso
+- Spec: manejar album vacio con mensaje amistoso. Coherente with M56 (fotografia) and M53 (UI).
+
+### Manejar preset faltante en metadatos
+- Spec: manejar preset faltante en metadatos. Coherente with M56 (fotografia) and M90 (configuracion).
+
+### Manejar camara en agua profunda (M51)
+- Spec: manejar camara en agua profunda (M51). Coherente with M56 (fotografia) and M51 (agua).
+
+
+## Specs Fotografia (Beam 632)
+
+### Localizar todos los textos del modo foto por claves i18n
+- Spec: localizar todos los textos del modo foto por claves i18n. Coherente with M56 (fotografia) and M86 (localizacion).
+
+### Localizar nombres de presets y mensajes de confirmacion
+- Spec: localizar nombres de presets y mensajes de confirmacion. Coherente with M56 (fotografia) and M86 (localizacion).
+
+### Localizar metadatos mostrados (fecha/hora/lugar)
+- Spec: localizar metadatos mostrados (fecha/hora/lugar). Coherente with M56 (fotografia) and M86 (localizacion).
+
+### Respetar plurales (fotos restantes)
+- Spec: respetar plurales (fotos restantes). Coherente with M56 (fotografia) and M86 (localizacion).
+
+### Testear el HUD en 3 idiomas sin desbordes y nombres de archivo invariantes
+- Spec: testear el HUD en 3 idiomas sin desbordes y nombres de archivo invariantes. Coherente with M56 (fotografia) and M86 (localizacion).
+
+
+## Specs Fotografia (Beam 633)
+
+### Asegurar lectura del HUD con alto contraste opcional
+- Spec: asegurar lectura del HUD con alto contraste opcional. Coherente with M56 (fotografia) and M58 (accesibilidad).
+
+### Reducir zoom automatico con Reduce Motion activo
+- Spec: reducir zoom automatico con Reduce Motion activo. Coherente with M56 (fotografia) and M58 (accesibilidad).
+
+### Evitar estroboscopios en la UI y testear colorblind mode
+- Spec: evitar estroboscopios en la UI y testear colorblind mode. Coherente with M56 (fotografia) and M58 (accesibilidad).
+
+
+## Specs Fotografia (Beam 634)
+
+### Probar ciclo de comparticion con confirmacion
+- Spec: probar ciclo de comparticion con confirmacion. Coherente with M56 (fotografia) and M53 (UI).
+
+### Revisar logs PHOTO-* en consola sin errores
+- Spec: revisar logs PHOTO-* en consola sin errores. Coherente with M56 (fotografia) and M102 (logging).
+
+### Registrar PHOTO_TAKEN en el diario (M55)
+- Spec: registrar PHOTO_TAKEN en el diario (M55). Coherente with M56 (fotografia) and M55 (diario).
+
+### Asociar foto a entrada del diario al tomarla
+- Spec: asociar foto a entrada del diario al tomarla. Coherente with M56 (fotografia) and M55 (diario).
+
+### Alimentar logros de coleccionista (M72)
+- Spec: alimentar logros de coleccionista (M72). Coherente with M56 (fotografia) and M72 (logros).
+
+### Agregar notas del agente al 04-Codigo.md (honestidad)
+- Spec: agregar notas del agente al 04-Codigo.md (honestidad). Coherente with M56 (fotografia) and AGENTS.md sec 21.3.
+
+### Firmar los documentos del modulo (modelo y plataforma)
+- Spec: firmar los documentos del modulo (modelo y plataforma). Coherente with M56 (fotografia) and AGENTS.md sec 3.
+
+### Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log
+- Spec: actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log. Coherente with M56 (fotografia) and AGENTS.md sec 21.
+
+### Push del modulo y reporte al usuario
+- Spec: push del modulo y reporte al usuario. Coherente with M56 (fotografia) and AGENTS.md sec 4.

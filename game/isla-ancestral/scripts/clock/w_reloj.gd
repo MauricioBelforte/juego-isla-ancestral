@@ -20,6 +20,10 @@ extends PanelContainer
 
 const RelojHudScript := preload("res://scripts/clock/reloj_hud.gd")
 const RUTA_CONFIG := "res://data/ui/w_reloj.tres"
+## M53 L159 (tanda 2): el literal cream duplicaba COLOR_TEXT_DARK. Se usa preload
+## explicito y no el class_name global porque este script se precarga desde suites
+## --script headless, donde los class_name globales no resuelven (E-30).
+const ThemeUxRef := preload("res://scripts/ui/theme/theme_ux.gd")
 
 ## Preview/demo: simula el cursor dentro del widget (D70) sin mouse real.
 @export var demo_cursor_dentro: bool = false
@@ -114,14 +118,14 @@ func _construir_ui() -> void:
 	_lbl_hora.name = "Hora"
 	_lbl_hora.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_lbl_hora.add_theme_font_size_override("font_size", 34)
-	_lbl_hora.add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))  # D102-fix: cream claro (el dark fantasma hacia el numero invisible)
+	_lbl_hora.add_theme_color_override("font_color", ThemeUxRef.COLOR_TEXT_DARK)  # D102-fix: cream claro (el dark fantasma hacia el numero invisible) | M53 L159: token
 	vbox.add_child(_lbl_hora)
 
 	_lbl_fecha = Label.new()
 	_lbl_fecha.name = "Fecha"
 	_lbl_fecha.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_lbl_fecha.add_theme_font_size_override("font_size", 14)
-	_lbl_fecha.add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))  # D102-fix: cream pleno (el ambar 0.45 no se leia sobre el fondo dark)
+	_lbl_fecha.add_theme_color_override("font_color", ThemeUxRef.COLOR_TEXT_DARK)  # D102-fix: cream pleno (el ambar 0.45 no se leia sobre el fondo dark) | M53 L159: token
 	vbox.add_child(_lbl_fecha)
 
 	# Chip de estación: mini panel coloreado + nombre
@@ -138,7 +142,7 @@ func _construir_ui() -> void:
 	var chip_center := CenterContainer.new()
 	_lbl_estacion = Label.new()
 	_lbl_estacion.add_theme_font_size_override("font_size", 13)
-	_lbl_estacion.add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))
+	_lbl_estacion.add_theme_color_override("font_color", ThemeUxRef.COLOR_TEXT_DARK)  # M53 L159: token
 	chip_center.add_child(_lbl_estacion)
 	_chip_estacion.add_child(chip_center)
 

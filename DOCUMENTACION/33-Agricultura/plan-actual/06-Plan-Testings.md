@@ -14,7 +14,7 @@ Registra el plan de testings del módulo y los resultados medidos en
 Binario de verificación (único aceptado):
 `D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe --headless --path game/isla-ancestral --script res://scripts/farm/<suite>.gd`
 
-## 2. Suites del módulo (5, todas en `scripts/farm/`)
+## 2. Suites del módulo (6, todas en `scripts/farm/`)
 
 | Suite | Bloques | Piso (`CHECKS_MINIMOS`) | Cubre |
 |---|---|---|---|
@@ -23,6 +23,7 @@ Binario de verificación (único aceptado):
 | `test_farm_m33_lote.gd` | determinismo, 4 estaciones, 30 días sin agua, inventario lleno, pisoteo NPC, stress 400 | 30 | Sección N + K + L: determinismo save/recarga, ventana estacional, pausa sin muerte, cosecha bloqueada, contrato de pisoteo, estrés |
 | `test_farm_voxel_m33.gd` | arar escribe voxel, variante húmeda/seca, lluvia húmeda, cosecha conserva arada, nieve no borra estado, headless sin terrain | 20 | Integración M08: TIERRA_ARADA (id 31) y variante húmeda |
 | `qa_farm_pausas_m33.gd` | dormante retoma, doble pausa, sequía sin muerte, decorativo, árbol en invierno | 17 | Reglas cozy: pausa nunca retrocede, cero pérdida de progreso |
+| `test_farm_features_m33.gd` (nueva, 2026-10-25) | catálogo especiales, flores decorativas, cruce determinista, rareza reproducible, desbloqueo por progresión, sin procesamiento por frame | 39 | P11/P13/P15/P23/P24 + L188: catálogo schema 2, flores decorativas, cruce por tabla explícita (sin RNG), rareza con desbloqueo M29, ausencia de _process por lectura de fuente |
 
 ## 3. Guarda anti-falso-verde (3 capas, obligatoria en toda suite)
 
@@ -46,8 +47,13 @@ función, así que un abort dentro de un bloque NO se ve en la capa de bloques
 
 ## 4. Pendientes de testing (honesto)
 
-- Los 28 `[ ]` restantes del checklist son de dueño externo (M22, M16, M38/M39,
-  M53, M44, M45/M46, M64, M17, M92/M152, M43, M42, M52, M31/M32, M70, M14) o de
-  feature propia aún no implementada (P13/P15/P23/P24, L183/L185/L188/L199/L201).
+- Los 22 `[ ]` restantes del checklist (medido 2026-10-25, corrida 2): 17 de dueño
+  externo (M53, M44, M43, M52, M31/M32, M64, M38/M39, M45/M46, M70, M92/M152, M16,
+  M17) y 5 propios no implementados aún: L169 (notificación UI de cosecha bloqueada
+  es de M53; el contrato M33 —señal `crop_harvest_blocked` con sobrante— ya está
+  verde en `_test_inventario_lleno`), L183 (MultiMesh por especie/etapa) y L185
+  (LOD 2 niveles) —`crop_tile_visual.gd` sigue siendo placeholder BoxMesh, el
+  MultiMesh queda para iteración con M50/M61—, L44 (recetas M16) y L46 (venta
+  M38/M39).
 - Deuda de rendimiento M61 abierta: `advance_day` full ~430 ms sobre ~400
   cultivos (I/O de visuales + voxels); el modelo puro mide 1 ms.

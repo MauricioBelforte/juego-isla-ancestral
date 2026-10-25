@@ -17,6 +17,9 @@ del checklist de M53:
               usar la constante) y literales fuera de la paleta.
   * L221 - Canvas merge por capa para minimizar draw calls
            -> raices CanvasLayer y colisiones de `layer` explicito.
+  * E    - Orden de la capa de CARGA (decision del director, msg 395)
+           -> `pantalla_carga` debe ser la capa MAXIMA de producto (120 vs
+              `ui_root` 100): una carga por debajo de un modal queda tapada.
 
 No escribe nada. Solo lee y mide.
 
@@ -222,7 +225,12 @@ def medir_paleta(archivos: list[pathlib.Path], tema: pathlib.Path) -> dict:
         if f == tema:
             continue
         txt = _leer(f)
-        if re.search(r"ThemeUx\.COLOR_[A-Z0-9_]+", txt):
+        # El token puede llegar por el class_name global (ThemeUx.COLOR_X) o por un
+        # preload explicito con alias (ThemeUxRef.COLOR_X), que es el patron que
+        # exige E-30 en scripts precargados por suites --script headless.
+        # Contar solo la primera forma dejaba fuera esos archivos (medido 2026-10-25:
+        # w_reloj.gd usaba el token y el conteo no lo veia).
+        if re.search(r"(?:ThemeUx|ThemeUxRef)\.COLOR_[A-Z0-9_]+", txt):
             archivos_con_token.add(str(f))
         colores = []
         for m in RE_COLOR.finditer(txt):
@@ -347,6 +355,49 @@ def medir_feedback(archivos: list[pathlib.Path]) -> dict:
     }
 
 
+# ── Bloque E: la capa de CARGA va por encima de todo (decision del director, msg 395) ──
+# Decision: `pantalla_carga` sube a 120 y `ui_root` queda en 100. Se codifica como
+# REGLA para que no se degrade: la capa de carga debe ser la MAXIMA de las capas de
+# producto. Un `layer` menor la deja debajo de un modal abierto durante la carga.
+NOMBRE_CAPA_CARGA = "pantalla_carga.gd"
+
+
+def medir_orden_carga(archivos: list[pathlib.Path]) -> dict:
+    carga = None
+    for f in archivos:
+        if f.name != NOMBRE_CAPA_CARGA:
+            continue
+        lay = [int(m) for m in RE_LAYER.findall(_leer(f))]
+        if lay:
+            carga = {"archivo": str(f), "layer": lay[0]}
+        break
+    if carga is None:
+        return {
+            "presente": False,
+            "motivo": "sin %s con layer explicito (regla E no aplicable)" % NOMBRE_CAPA_CARGA,
+            "encima": {},
+            "violaciones": [],
+        }
+    encima: dict[str, list[str]] = {}
+    for f in archivos:
+        if f.name == NOMBRE_CAPA_CARGA:
+            continue
+        if PATRON_NO_PRODUCTO.search(f.name):
+            continue
+        txt = _leer(f)
+        if not (RE_EXTIENDE_CANVAS.search(txt) or "CanvasLayer.new()" in txt):
+            continue
+        for v in RE_LAYER.findall(txt):
+            if int(v) > carga["layer"]:
+                encima.setdefault(str(int(v)), []).append(os.path.basename(str(f)))
+    viol = [
+        "E orden de capa: %s declara layer=%s y hay capas de producto por encima (%s=%s)"
+        % (NOMBRE_CAPA_CARGA, carga["layer"], k, ", ".join(sorted(v)))
+        for k, v in sorted(encima.items(), key=lambda kv: int(kv[0]))
+    ]
+    return {"presente": True, "layer": carga["layer"], "encima": encima, "violaciones": viol}
+
+
 # ── Evaluacion completa ──────────────────────────────────────────────────
 def evaluar(raiz: pathlib.Path, tema: pathlib.Path | None = None) -> dict:
     raiz = pathlib.Path(raiz)
@@ -362,15 +413,17 @@ def evaluar(raiz: pathlib.Path, tema: pathlib.Path | None = None) -> dict:
     if paleta.get("ciego"):
         return paleta
     canvas = medir_canvas(archivos)
+    orden = medir_orden_carga(archivos)
     redundancia = medir_redundancia(archivos)
     feedback = medir_feedback(archivos)
-    violaciones = canvas["violaciones"] + paleta["violaciones"] + \
+    violaciones = canvas["violaciones"] + orden["violaciones"] + paleta["violaciones"] + \
         redundancia["violaciones"] + feedback["violaciones"]
     return {
         "ciego": False,
         "raiz": str(raiz),
         "archivos_gd": len(archivos),
         "canvas": canvas,
+        "orden_carga": orden,
         "paleta": paleta,
         "redundancia": redundancia,
         "feedback": feedback,
@@ -393,6 +446,12 @@ def imprimir(r: dict) -> None:
           % (p["tokens"], p["archivos_con_literal"], p["archivos_con_token"],
              p["literales_duplican_token"], p["literales_fuera_paleta"],
              p["literales_no_producto"]))
+    o = r["orden_carga"]
+    if o["presente"]:
+        print("[E] orden de capa: %s layer=%d | capas de producto por encima=%d"
+              % (NOMBRE_CAPA_CARGA, o["layer"], len(o["encima"])))
+    else:
+        print("[E] orden de capa: %s" % o["motivo"])
     print("[C] L144 redundancia: triple canal=%d | audio+toast=%d | tests que consagran ausencia=%d"
           % (rd["funciones_triple_canal"], rd["funciones_doble_canal_audio_toast"],
              rd["tests_que_consagran_ausencia"]))
@@ -438,6 +497,21 @@ def _corpus_sintetico(base: pathlib.Path, limpio: bool) -> pathlib.Path:
         (base / "hud_ok.gd").write_text(
             "extends CanvasLayer\nfunc _ready() -> void:\n\tlayer = 100\n"
             "\tmodulate = ThemeUx.COLOR_BG\n", encoding="utf-8")
+        # Contraparte del patron E-30: el token llega por un preload con alias.
+        # Sin esto, el conteo de archivos_con_token no ve el archivo (medido
+        # 2026-10-25 en clock/w_reloj.gd).
+        (base / "reloj_alias.gd").write_text(
+            "extends Node\n"
+            "const ThemeUxRef := preload(\"res://ui/theme/theme_ux.gd\")\n"
+            "func _ready() -> void:\n"
+            "\tadd_theme_color_override(\"font_color\", ThemeUxRef.COLOR_BG)\n",
+            encoding="utf-8")
+        # E: la capa de carga por encima de todo (correcto)
+        (base / NOMBRE_CAPA_CARGA).write_text(
+            "extends CanvasLayer\nfunc _ready() -> void:\n\tlayer = 120\n", encoding="utf-8")
+        # E (control NEGATIVO): un archivo NO-producto con layer mas alto no cuenta
+        (base / "test_capa_alta.gd").write_text(
+            "extends CanvasLayer\nfunc _ready() -> void:\n\tlayer = 300\n", encoding="utf-8")
     else:
         # una sola accion con feedback (las otras dos sin el) -> L138
         (base / "farm" / "crop_visual.gd").write_text(
@@ -463,6 +537,9 @@ def _corpus_sintetico(base: pathlib.Path, limpio: bool) -> pathlib.Path:
         # colision de layer -> L221
         (base / "hud_bis.gd").write_text(
             "extends CanvasLayer\nfunc _ready() -> void:\n\tlayer = 100\n", encoding="utf-8")
+        # E: la capa de carga QUEDO DEBAJO de las capas de producto -> violacion
+        (base / NOMBRE_CAPA_CARGA).write_text(
+            "extends CanvasLayer\nfunc _ready() -> void:\n\tlayer = 50\n", encoding="utf-8")
     return base
 
 
@@ -486,6 +563,14 @@ def selftest() -> int:
               "corpus limpio sin violaciones duras (medido=%d)" % r["violaciones_duras"])
         check(r["feedback"]["por_accion"]["cosecha"]["tweens_120ms"] == 1,
               "corpus limpio: cosecha con 1 tween de 120 ms")
+        check(r["orden_carga"]["presente"] and r["orden_carga"]["layer"] == 120,
+              "corpus limpio: capa de carga medida en 120")
+        check(not r["orden_carga"]["encima"],
+              "corpus limpio: 0 capas de producto por encima de la carga "
+              "(el test_ de layer 300 no cuenta)")
+        check(r["paleta"]["archivos_con_token"] == 2,
+              "corpus limpio: cuenta el token por class_name Y por preload con alias "
+              "(medido=%d)" % r["paleta"]["archivos_con_token"])
 
         sucio = _corpus_sintetico(base / "sucio", False)
         r2 = evaluar(sucio, sucio / "ui" / "theme" / "theme_ux.gd")
@@ -501,6 +586,11 @@ def selftest() -> int:
               % r2["redundancia"]["tests_que_consagran_ausencia"])
         check(len(r2["canvas"]["colisiones"]) == 1,
               "detecta 1 colision de layer (medido=%d)" % len(r2["canvas"]["colisiones"]))
+        check(list(r2["orden_carga"]["encima"].keys()) == ["100"],
+              "detecta la capa de carga debajo de 100 (encima=%s)"
+              % list(r2["orden_carga"]["encima"].keys()))
+        check(any("E orden de capa" in v for v in r2["violaciones"]),
+              "la violacion E se reporta con nombre propio")
         acc = r2["feedback"]["por_accion"]
         check(acc["cosecha"]["tweens_120ms"] == 0 and acc["cosecha"]["tweens"] == 1,
               "cosecha con tween de 0.35 no cuenta como 120 ms")
@@ -534,7 +624,7 @@ def selftest() -> int:
     return 1 if fallos else 0
 
 
-CHECKS_MINIMOS = 14  # MEDIDO en verde 2026-10-25 (14 checks, 0 fallos)
+CHECKS_MINIMOS = 19  # MEDIDO en verde 2026-10-25 tras agregar el check del alias ThemeUxRef (19 checks, 0 fallos)
 
 
 def main(argv: list[str]) -> int:

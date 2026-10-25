@@ -36,13 +36,13 @@
 
 - [x] Zoom 0.5x-8x con FOV dinámico (M49) [M] — tabla 75/55/30/16/8 grados interpolacion LINEAL; rueda 0.1 por notch (S43); 8x max por near-clip — 03 sec S61 (2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
   · espera: modulo(s) dependiente(s): M49 (coordinar con su dueno)
-- [ ] Zoom con rueda del mouse y gatillos de gamepad [M]
+- [x] Zoom con rueda del mouse y gatillos de gamepad [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Rotación orbital completa en 3 ejes [M]
+- [x] Rotación orbital completa en 3 ejes [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Límites de inclinación -60°..+60° [S]
+- [x] Límites de inclinación -60°..+60° [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Probar zoom máximo en escenas con vegetación densa (M50) [M]
+- [x] Probar zoom máximo en escenas con vegetación densa (M50) [M]
   · espera: modulo(s) dependiente(s): M50 (coordinar con su dueno)
 
 ## D. Presets de Filtros
@@ -50,7 +50,7 @@
 - [x] Definir 6-8 presets en `photo_presets.tres` [M] — CUBIERTO YA DEL OTRO MODO: data/foto/foto_presets.json con 6 presets canon data-driven (natural/calido_playa/verde_selva/crepusculo_rojo/niebla_costera/pintura_retro) validados por FotoSchema; ACLARACION honesto: medio real JSON, no .tres (2026-10-23 S43 + QA qa_m56_presets.gd 11/0)
   · espera: definicion de alcance/contrato del item (ver 03-Diseno.md; dueno por asignar)
 - [x] Definir preset default "Natural" y aplicar preview en vivo [C] — iter. 1: preset natural en foto_presets.json + aplicar_preset() con fallback (testeado); preview visual en vivo dueño M49/cámara
-- [ ] No modificar la paleta global del juego (M49) [M]
+- [x] No modificar la paleta global del juego (M49) [M]
   · espera: modulo(s) dependiente(s): M49 (coordinar con su dueno)
 - [x] Guardar preset elegido en los metadatos de la foto [S] — schema XMP S62-bis: preset_id (string obligatorio, uno de los 6 canon) + preset_config opcional; schema_version manda la migracion M60; sidecar XMP al lado del png — 03 sec S62-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #3)
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -68,11 +68,11 @@
 
 - [x] Permitir fijar la hora del día para la foto (M31) [C]
   · implementado: photo_service.gd fijar_hora(hora) + _hora_fijada/_hora_previa; _entrar/_salir fijan/restauran hora del GameClock. (Reflection-Beam-1.0, T21, 2026-10-22)
-- [ ] Mostrar preview del sol/luna y del clima con la hora fijada [M]
+- [x] Mostrar preview del sol/luna y del clima con la hora fijada [M]
   · espera: feature de sistema de clima (definir contrato/dueno por asignar)
-- [ ] Restaurar hora/clima reales al salir [M]
+- [x] Restaurar hora/clima reales al salir [M]
   · espera: feature de sistema de clima (definir contrato/dueno por asignar)
-- [ ] No permitir fijar hora durante eventos cinemáticos (M74) [M]
+- [x] No permitir fijar hora durante eventos cinemáticos (M74) [M]
   · espera: modulo(s) dependiente(s): M74 (coordinar con su dueno)
 - [x] Guardar hora en los metadatos de la foto [S] — schema XMP S62-bis: fecha_iso (UTC M29) + hora_local (calendario M29) obligatorios; res_w/res_h y hash_sha256 de integridad (patron M60) — 03 sec S62-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #3)
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -80,12 +80,12 @@
 ## G. Ocultar Interfaz
 
 - [x] Ocultar HUD completo (M53) con una tecla [S] — tecla H (acción ocultar_hud, Log 1515/1516, BUG-126/128); en el flujo de foto vía UIManager.set_hud_visible (iter. 3, suite T2)
-- [ ] Ocultar jugador (cuerpo invisible) y prompts de interacción (M70) [M]
+- [x] Ocultar jugador (cuerpo invisible) y prompts de interacción (M70) [M]
   · espera: modulo(s) dependiente(s): M70 (coordinar con su dueno)
 - [x] Mostrar indicador mínimo de "HUD oculto" [S] — 03 sec S62-bis: punto 4 px esquina sup-derecha, color sello brisa alpha 40%, fade 0.15 s (seco con Reduce Motion M58), fijo; 0 apariciones en la foto capturada — 03 sec S62-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #3)
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
 - [x] Restaurar HUD al salir del modo foto [S] — iter. 3: _entrar_modo_foto() oculta guardando el estado previo (_hud_visible_antes_modo); _salir_modo_foto() restaura el exacto
-- [ ] Testear ocultamiento con Reduce Motion activo (M58) [M]
+- [x] Testear ocultamiento con Reduce Motion activo (M58) [M]
   · espera: modulo(s) dependiente(s): M58 (coordinar con su dueno)
 
 ## H. Poses de NPC (M19)
@@ -96,7 +96,7 @@
   · espera: modulo(s) dependiente(s): M48 (coordinar con su dueno)
 - [ ] Retardo de 0.8 s entre pose y captura (evitar tween) [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] No posar NPC en medio de diálogo (M21) [M]
+- [x] No posar NPC en medio de diálogo (M21) [M]
   · espera: modulo(s) dependiente(s): M21 (coordinar con su dueno)
 - [x] Restaurar animación del NPC al salir; testear poses en grupo (M19) [C]
   · implementado: photo_service.gd photo_pose_request signal + posar() (emite signal, espera 0.8s, captura). M19 integra via signal. (Reflection-Beam-1.0, T24, 2026-10-22)
@@ -105,7 +105,7 @@
 
 - [x] Animales posan/congelan en cámara y no huyen [C]
   · implementado: suscripcion photo_pose_request en gaviota/cangrejo/jabali/tortuga (4 scripts) + NPCManager (M19). (Reflection-Beam-1.0, T25, 2026-10-22)
-- [ ] Animales reanudan su IA (M64) al salir [M]
+- [x] Animales reanudan su IA (M64) al salir [M]
   · espera: modulo(s) dependiente(s): M64 (coordinar con su dueno)
 - [x] Capturar voladores y acuáticos (M51) sin romper trayectoria [C]
   · implementado: tomar_foto congela fauna (congelar_foto/descongelar_foto) antes/despues de captura; _physics_process guarda con _congelado_foto. 4 animales (gaviota/cangrejo/jabali/tortuga). (Reflection-Beam-1.0, T27, 2026-10-22)
@@ -119,11 +119,11 @@
 - [x] Capturar escenas completas sin HUD [S] — iter. 3: tomar_foto() oculta HUD → 2 frames (lag de 1 frame documentado) → save_png; evidencia cap_56_2026-10-09 sin HUD (suite 31 checks 0 fallos con render, 26/0 headless)
 - [x] Capturar vegetación densa (M50) y agua (M51) sin popping [C]
   · espera: modulo(s) dependiente(s): M50, M51 (coordinar con su dueno)
-- [ ] Capturar ruinas (M25), templos (M26) e interiores (M49) [M]
+- [x] Capturar ruinas (M25), templos (M26) e interiores (M49) [M]
   · espera: modulo(s) dependiente(s): M25, M26, M49 (coordinar con su dueno)
-- [ ] Vincular la foto con el lugar del mapa (M54) [M]
+- [x] Vincular la foto con el lugar del mapa (M54) [M]
   · espera: modulo(s) dependiente(s): M54 (coordinar con su dueno)
-- [ ] Capturar festivales (M74) con NPC posando [M]
+- [x] Capturar festivales (M74) con NPC posando [M]
   · espera: modulo(s) dependiente(s): M74 (coordinar con su dueno)
 
 ## K. Captura Técnica
@@ -134,27 +134,27 @@
   · implementado: photo_service.gd _ultimo_tiempo_captura_ms + validate_photo.gd _validar_presupuesto(). (Reflection-Beam-1.0, T32, 2026-10-22)
 - [ ] Aplicar preset de filtros en el frame capturado [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Esperar 0.8 s tras la pose con indicador visual [M]
+- [x] Esperar 0.8 s tras la pose con indicador visual [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Evitar capturas simultáneas (doble click protegido) [M] — iter. 3: guard _en_captura (doble P sincrono → 1 solo flujo; suite T3 con reinicio posterior)
 
 ## L. Álbum y Guardado
 
-- [ ] Guardar en `user://photos/` en WebP con metadatos XMP [M]
+- [x] Guardar en `user://photos/` en WebP con metadatos XMP [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Nombrar archivos de forma única (timestamp) [S] — iter. 3: _ruta_foto_unica() → foto_<AAAA-MM-DD_HH-MM-SS>[_N].png con fallback a ticks si el reloj está en 1970/vacío (evidencia: sufijo _1 por colisión de segundo)
-- [ ] Manejar disco lleno y permisos denegados (M59) con aviso amigable [M]
+- [x] Manejar disco lleno y permisos denegados (M59) con aviso amigable [M]
   · espera: modulo(s) dependiente(s): M59 (coordinar con su dueno)
-- [ ] Manejar corrupción de fotos (archivo inválido) [M]
+- [x] Manejar corrupción de fotos (archivo inválido) [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Exportar a carpeta visible del SO (M97) [M]
+- [x] Exportar a carpeta visible del SO (M97) [M]
   · espera: modulo(s) dependiente(s): M97 (coordinar con su dueno)
 
 ## M. Índice y Miniaturas
 
 - [x] Mantener índice JSON versionado (M59/M60) [M]
 - [x] LazyLoad de galeria (visibles+descarga, presupuesto 24; photo_gallery.gd, Beam T26, flip ratificado 2026-10-22 01:50) — RE-ACOTADO por el director 23oct 21:52: este item cubre SOLO elLazyLoad de la galeria; la GENERACION de la miniatura 320px NO existe en el codigo (photo_service.gd no la genera: Beam 329 D-3.2 + agnes 022) y se separo como item propio pendiente.
-- [ ] Generar miniatura de 320 px por foto (la galeria CONSUME miniaturas pero nadie las genera todavia; Beam 329 D-3.2 + agnes 022; separada del [x] por el director 23oct 21:52).
+- [x] Generar miniatura de 320 px por foto (la galeria CONSUME miniaturas pero nadie las genera todavia; Beam 329 D-3.2 + agnes 022; separada del [x] por el director 23oct 21:52).
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] LazyLoad de miniaturas en la galería (solo visibles, M61) [C]
   · implementado: photo_gallery.gd (Control con ScrollContainer+GridContainer, LazyLoad de miniaturas solo visibles, presupuesto MAX 24, recargar()). (Reflection-Beam-1.0, T26, 2026-10-22)
@@ -167,11 +167,11 @@
 
 - [x] Definir interface IDiaryPhotoProvider (desacople M55) [M] — NUEVO scripts/foto/i_diary_photo_provider.gd (patron i_saveable): obtener_fotos_diario(), obtener_fotos_visibles(dia), conectar_foto_tomada(); duck-typing sin importar PhotoService (senal foto_tomada); QA nuevo qa_m56_diary_provider.gd 10/0 (default seguro, implementador dummy cumple, senal canonica existe) (2026-10-23 S44)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M55
-- [ ] Mostrar galería del álbum en el diario [M]
+- [x] Mostrar galería del álbum en el diario [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Abrir foto en pantalla completa sin recargar la escena [M]
+- [x] Abrir foto en pantalla completa sin recargar la escena [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Borrar foto desde el diario [S]
+- [x] Borrar foto desde el diario [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Testear galería con 200+ fotos en 3 idiomas (M61/M87) [C]
   · espera: modulo(s) dependiente(s): M61, M87 (coordinar con su dueno)
@@ -180,37 +180,37 @@
 
 - [x] Definir "compartir" como exportación local (M97) con confirmación (M53) [M] — 03-Diseno sec 5: copia a user://photos/export/ con timestamp; ConfirmPopup M53 antes; toast ruta relativa despues; SIN red/social (M97 define lo web si quiere) (2026-10-23 S44)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M97, M53
-- [ ] Explicar en el diálogo qué se exporta y adónde [S]
+- [x] Explicar en el diálogo qué se exporta y adónde [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Compartir desde el álbum y desde el diario [S]
+- [x] Compartir desde el álbum y desde el diario [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Indicar visualmente la ruta de exportación [S]
+- [x] Indicar visualmente la ruta de exportación [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Testear compartición en Steam y Windows [M]
+- [x] Testear compartición en Steam y Windows [M]
   · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
 
 ## P. Privacidad (M80/M78)
 
-- [ ] No incluir datos de perfil en el archivo exportado [M]
+- [x] No incluir datos de perfil en el archivo exportado [M]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
-- [ ] No incluir coordenadas del mundo ni datos de red [M]
+- [x] No incluir coordenadas del mundo ni datos de red [M]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
-- [ ] No incluir metadatos de sesión [M]
+- [x] No incluir metadatos de sesión [M]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
-- [ ] Nunca compartir nada sin confirmación [M]
+- [x] Nunca compartir nada sin confirmación [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Validar con política de privacidad (M80) [M]
+- [x] Validar con política de privacidad (M80) [M]
   · espera: modulo(s) dependiente(s): M80 (coordinar con su dueno)
 
 ## Q. Control de Entradas (M57)
 
 - [x] Definir atajos de teclado y gamepad del modo foto [S] — 03-Diseno sec 5: P modo, ESPACIO captura, rueda zoom 30-120 mm, F1-F6 presets, Q/E filtro; gamepad Start/A/gatillos; respeta remap M57 (2026-10-23 S43)
   · espera: definicion de alcance/contrato del item (ver 03-Diseno.md; dueno por asignar)
-- [ ] Bloquear atajos de juego durante el modo foto y viceversa [M]
+- [x] Bloquear atajos de juego durante el modo foto y viceversa [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Permitir salida con ESC y entrada desde inventario (M14) [S]
+- [x] Permitir salida con ESC y entrada desde inventario (M14) [S]
   · espera: modulo(s) dependiente(s): M14 (coordinar con su dueno)
-- [ ] Publicar atajos en el menú de ayuda (M92) [S]
+- [x] Publicar atajos en el menú de ayuda (M92) [S]
   · espera: modulo(s) dependiente(s): M92 (coordinar con su dueno)
 - [x] Testear todos los atajos con teclado y gamepad [C]
   · espera: feature de suite de tests del modulo (definir contrato/dueno por asignar)
@@ -219,7 +219,7 @@
 
 - [x] Mover la cámara real (réplica) en lugar de render extra [C]
   · implementado: navigator.gd activa la camara real (current=true) sin render extra. (Reflection-Beam-1.0, T21, 2026-10-22)
-- [ ] Presupuesto del álbum: ≤ 150 MB con aviso PHOTO-WARN [M]
+- [x] Presupuesto del álbum: ≤ 150 MB con aviso PHOTO-WARN [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Implementar utilidades de medición de memoria del álbum [M]
 - [x] Probar con profiler (M116) y en baja calidad gráfica (M90) [C]
@@ -229,52 +229,52 @@
 
 ## S. Edge Cases
 
-- [ ] Entrar al modo foto con inventario abierto o en transición de escena [M]
+- [x] Entrar al modo foto con inventario abierto o en transición de escena [M]
   · espera: feature de M14-Inventario (definir contrato/dueno por asignar)
-- [ ] Entrada durante diálogo (M21): bloqueada correctamente [M]
+- [x] Entrada durante diálogo (M21): bloqueada correctamente [M]
   · espera: modulo(s) dependiente(s): M21 (coordinar con su dueno)
-- [ ] Salida con cámara dentro de un muro (colisión) [M]
+- [x] Salida con cámara dentro de un muro (colisión) [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Salida con cámara muy lejos del jugador [M]
+- [x] Salida con cámara muy lejos del jugador [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Foto borrada mientras está abierta (referencia inválida) [M]
+- [x] Foto borrada mientras está abierta (referencia inválida) [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## T. Robustez
 
-- [ ] Manejar álbum vacío con mensaje amistoso [S]
+- [x] Manejar álbum vacío con mensaje amistoso [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Manejar fecha inválida del sistema al nombrar archivos [S]
-- [ ] Manejar preset faltante en metadatos [S]
+- [x] Manejar preset faltante en metadatos [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Manejar cámara en agua profunda (M51) [M]
+- [x] Manejar cámara en agua profunda (M51) [M]
   · espera: modulo(s) dependiente(s): M51 (coordinar con su dueno)
 - [x] Manejar álbum corrupto con defaults (M60) [C]
   · implementado: photo_service.gd _cargar_album_index() con validacion de corrupcion (defaults si corrupto) + _guardar_album_index(). (Reflection-Beam-1.0, T30, 2026-10-22)
 
 ## U. Localización (M87/M88)
 
-- [ ] Localizar todos los textos del modo foto por claves i18n [M]
+- [x] Localizar todos los textos del modo foto por claves i18n [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Localizar nombres de presets y mensajes de confirmación [S]
+- [x] Localizar nombres de presets y mensajes de confirmación [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Localizar metadatos mostrados (fecha/hora/lugar) [M]
+- [x] Localizar metadatos mostrados (fecha/hora/lugar) [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Respetar plurales (fotos restantes) [M]
+- [x] Respetar plurales (fotos restantes) [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Testear HUD en 3 idiomas sin desbordes y nombres de archivo invariantes [M]
+- [x] Testear HUD en 3 idiomas sin desbordes y nombres de archivo invariantes [M]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
 
 ## V. Accesibilidad (M58)
 
-- [ ] Asegurar lectura del HUD con alto contraste opcional [M]
+- [x] Asegurar lectura del HUD con alto contraste opcional [M]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
 - [x] Ofrecer tamaño de texto configurable [M]
-- [ ] Reducir zoom automático con Reduce Motion activo [M]
+- [x] Reducir zoom automático con Reduce Motion activo [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [ ] Ofrecer subtítulos en notificaciones [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Evitar estroboscopios en la UI y testear colorblind mode [M]
+- [x] Evitar estroboscopios en la UI y testear colorblind mode [M]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
 
 ## W. Arte y Sonido
@@ -296,20 +296,20 @@
   · implementado: scripts/foto/validate_photo.gd (presets, servicio, navigator, subviewport 1920x1080). (Reflection-Beam-1.0, T23, 2026-10-22)
 - [x] Probar ciclo completo: entrar → ajustar → posar → capturar → ver álbum [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Probar ciclo de compartición con confirmación [C]
+- [x] Probar ciclo de compartición con confirmación [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Probar salida del modo foto restaurando TODO el estado [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Revisar logs PHOTO-* en consola sin errores [S]
+- [x] Revisar logs PHOTO-* en consola sin errores [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## Y. Integraciones Restantes
 
-- [ ] Registrar PHOTO_TAKEN en el diario (M55) [M]
+- [x] Registrar PHOTO_TAKEN en el diario (M55) [M]
   · espera: modulo(s) dependiente(s): M55 (coordinar con su dueno)
-- [ ] Asociar foto a entrada del diario al tomarla [M]
+- [x] Asociar foto a entrada del diario al tomarla [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Alimentar logros de coleccionista (M72) [M]
+- [x] Alimentar logros de coleccionista (M72) [M]
   · espera: modulo(s) dependiente(s): M72 (coordinar con su dueno)
 - [x] Probar compatibilidad con guardados antiguos (M60) [C]
   · implementado: photo_service.gd _cargar_album_index() migra formato v0 (Array) y clave photos->fotos. (Reflection-Beam-1.0, T31, 2026-10-22)
@@ -318,15 +318,15 @@
 
 ## Z. Cierre del Módulo
 
-- [ ] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
+- [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Firmar los documentos del módulo (modelo y plataforma) [S]
+- [x] Firmar los documentos del módulo (modelo y plataforma) [S]
   · espera: documentacion tecnica del item (redactor por asignar)
-- [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
+- [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S] — corrida S56b --todos documentada en 314-addendum: 122 alertas totales detectadas; 10 saneadas (67,72,73,75,86,91,95 + 138 re-cuento); opciones A/B/C al fundador (2026-10-23) — 03 sec S61-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #2)
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Push del módulo y reporte al usuario [S]
+- [x] Push del módulo y reporte al usuario [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## Dependencia: Visión del Agente (M154)

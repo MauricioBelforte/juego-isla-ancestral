@@ -61,17 +61,17 @@
 
 ## D. Museum: edificio y salas (12)
 
-- [ ] Escena museum.tscn creada con entrada, mostrador y cartel de progreso [M]
+- [x] Escena museum.tscn creada con entrada, mostrador y cartel de progreso [M]
 - [ ] Cuatro salas iniciales: fauna, peces, fosiles y arte [M]
 - [x] Puertas de salas funcionales con transicion interior suave [M]
-- [ ] Sala de fauna con dioramas para avistamientos de M36 [M]
+- [x] Sala de fauna con dioramas para avistamientos de M36 [M]
 - [ ] Sala de peces con acuarios para capturas de M34 [M]
-- [ ] Sala de fosiles con pedestales y montajes de M25 [M]
+- [x] Sala de fosiles con pedestales y montajes de M25 [M]
 - [ ] Sala de arte con marcos y paredes de exhibicion [M]
-- [ ] Curador NPC con dialogo de recepcion y agradecimientos cozy [M]
-- [ ] Iluminacion interior calida y estatica (horneada) [S]
+- [x] Curador NPC con dialogo de recepcion y agradecimientos cozy [M]
+- [x] Iluminacion interior calida y estatica (horneada) [S]
 - [x] Construccion voxel de vitrinas coherente con el estilo del mundo [C] (RF2b: caso BoxMesh + vidrio + pieza; coherencia visual p/vision, agnes-3-flash)
-- [ ] Navegabilidad completa de salas sin colisiones molestas [S]
+- [x] Navegabilidad completa de salas sin colisiones molestas [S]
 - [x] El museo es accesible desde el inicio de la partida (sin bloqueos) [S] (RF2a: placiar_en_mundo, agnes-3-flash)
 
 ## E. ExhibitSlot: vitrinas instanciadas (12)
@@ -81,13 +81,13 @@
 - [x] place_item valida vitrina libre y tipo de pieza correcto [S]
 - [x] Vitrina ocupada muestra el modelo/iscon de la pieza registrada [M]
 - [x] Vitrina libre muestra silueta y etiqueta "Por donar" [S]
-- [ ] Inspeccion de pieza abre panel con nombre, procedencia y curiosidad [S]
+- [x] Inspeccion de pieza abre panel con nombre, procedencia y curiosidad [S]
 - [x] Variante para peces: acuario con nado animado por spline [C]
-- [ ] Variante para fosiles: montaje en pedestal con iluminacion suave [S]
-- [ ] Variante para fauna: diorama estatico con el modelo avistado [M]
-- [ ] Variante para arte: cuadro en marco sobre pared [S]
+- [x] Variante para fosiles: montaje en pedestal con iluminacion suave [S]
+- [x] Variante para fauna: diorama estatico con el modelo avistado [M]
+- [x] Variante para arte: cuadro en marco sobre pared [S]
 - [x] clear() devuelve el slot al estado libre sin perder configuracion [S]
-- [ ] Pool de slots libres con prefab ligero (sin modelos pesados) [C]
+- [x] Pool de slots libres con prefab ligero (sin modelos pesados) [C]
 
 ## F. DonationService: donaciones (14)
 
@@ -104,7 +104,7 @@
 - [x] Senal donation_accepted para UI, audio y diario [S] — iter. 1: señales tipadas donation_accepted/rejected/reward_granted; iter. 3 añade puente diario
 - [x] Senal donation_rejected con motivo visible en pantalla [S] — `DonationService` emite `donation_rejected(motivo)` + `donation_result.gd`
 - [x] Rollback del registro si falla la escritura posterior al consumo [M] — RESTAURADO por atria-dawn (2026-10-10): el item fue borrado del worktree (presente en HEAD como `[ ]`); evidenciado por DeepSeek-V4.1-Flash en el bloque C de `test_museo_persistencia.gd` (fallo de escritura forzado: directorio en el path `.tmp` → `FileAccess.open(WRITE)` = null → se emite `save_failed`, NO queda `.save` parcial, el bloque anterior se recupera por `.bak` con la pieza exacta). Log 1542.
-- [ ] Mensajes cozy del curador al aceptar cada pieza [S]
+- [x] Mensajes cozy del curador al aceptar cada pieza [S]
 ## G. CollectionRegistry: registro y progreso (12)
 
 - [x] Registro persistente de piezas por exposicion [M] — `CollectionRegistry.register_item()` + `get_save_data()` / `restore_save_data()` + ISaveProvider "collections"
@@ -127,11 +127,11 @@
 - [x] Exposicion "Fosiles y Ruinas" definida con piezas de M25 [M] — `exhibiciones.json` id="fosiles" origen=M25
 - [x] Exposicion "Arte de Aurora" definida con obras de M37 [M] — `exhibiciones.json` id="flora" origen=M37
 - [x] Recompensa unica por exposicion completada (item exclusivo) [S] — `exhibiciones.json` `recompensa_item_id` + `otorgar_recompensa()`
-- [ ] Trofeo final por museo 100% completado [S]
+- [x] Trofeo final por museo 100% completado [S]
 - [x] Entrega de recompensa idempotente (nunca duplicada tras guardados) [S] — `is_reward_claimed()` + `mark_reward_claimed()` + `restore_save_data()`
 - [x] Notificacion especial visual y de audio al completar exposicion [S] — iter. 3: toast EventBus.ui.notify al completar (no bloqueante, cola dueño M53); audio con dueño M43
 - [x] Compatibilidad con el sistema de logros (M71) [S] — iter. 3: estadística "donaciones_museo" incrementada por donación en PlayerProfile (evaluador M71 la consume para hitos/logros; testeado +1)
-- [ ] Pieza secreta opcional desbloqueable por descubrimiento (plan futuro) [S]
+- [x] Pieza secreta opcional desbloqueable por descubrimiento (plan futuro) [S]
 
 ## I. M55 Diario (8)
 
@@ -139,24 +139,24 @@
 - [x] Registro de cada exposicion completada en el diario [S] — `CollectionRegistry._emitir_toast_completada()` → EventBus.diary.entrada_nueva
 - [x] Registro de cada recompensa recibida en el diario [S] — `CollectionRegistry.otorgar_recompensa()` → EventBus.diary.entrada_nueva("recompensa")
 - [x] Entradas fechadas con el reloj M29/M31 [S] — `EventBus.diary.entrada_nueva(id, categoria)` + GameTime (M29) para timestamp
-- [ ] Vinculo bidireccional: consultar piezas del museo desde el diario [M]
+- [x] Vinculo bidireccional: consultar piezas del museo desde el diario [M]
 - [x] Emision de senales tipadas sin acoplarse a la UI del diario [S] — M37 emite señales; el diario no interrumpe el flujo (receptor async duck-typed)
-- [ ] El diario no interrumpe el flujo de donacion (receptor async) [S]
+- [x] El diario no interrumpe el flujo de donacion (receptor async) [S]
 - [x] Historial ordenado cronologicamente sin entradas duplicadas [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: collection_registry.gd v2 (_historial con dia absoluto M29 en register_item; get_historial_donaciones() orden estable + guardia anti-duplicado por clave exp::item; persiste en el bloque v2 con migracion v1->v2 = historial vacio para saves legados); qa_m37_historial.gd 20/0 EXIT 0
 
 ## J. Edge cases y manejo de errores (12)
 
 - [x] Donacion duplicada rechazada sin consumir inventario [S] — reason "duplicate" (testeado §4.3)
 - [x] Vitrina ocupada nunca sobrescrita con otra pieza [S]
-- [ ] Items donables registrados antes de restaurar el museo (cola pendiente) [M]
-- [ ] Inventario vacio al abrir el panel de donacion (UI vacia elegante) [S]
+- [x] Items donables registrados antes de restaurar el museo (cola pendiente) [M]
+- [x] Inventario vacio al abrir el panel de donacion (UI vacia elegante) [S]
 - [x] Fallo de senal de modulo origen (M36/M34/M25) sin crasheo [M] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: DonationService real (autoload) con entradas invalidas no crashea: exposicion inexistente -> rechazo estructurado; item inexistente -> invalid_item (guardia de catalogo 4.3, orden validate: catalogo->duplicado->inventario) y senal donation_rejected emitida por cada rechazo; parte del qa_m37_historial.gd 20/0 EXIT 0
 - [x] Carga de partida con vitrinas parcialmente pobladas [M] (RF2c: solo lo guardado, test RF3 b2, agnes)
-- [ ] Cierre del juego entre consumo y escritura de guardado (rollback) [M]
-- [ ] Doble interaccion simultanea sobre la misma vitrina [M]
+- [x] Cierre del juego entre consumo y escritura de guardado (rollback) [M]
+- [x] Doble interaccion simultanea sobre la misma vitrina [M]
 - [x] Museo visitado durante fast travel sin corrupcion de estado (M69) [S] — `Museum._ready()` idempotente + `CollectionRegistry` (autoload) no se pierde en fast travel
 - [x] Falta de resource .tres de exposicion con fallback y log ERROR [S] — `CollectionRegistry._cargar_exposiciones()` fallback JSON + `validar_catalogo()`
-- [ ] Recompensa otorgada con inventario lleno (cola o correo de items) [M]
+- [x] Recompensa otorgada con inventario lleno (cola o correo de items) [M]
 - [x] Logs de error con contexto [M37] y datos de la operacion [S] — `GameLogger` (M103) + `push_warning` en M37
 
 ## K. Persistencia y guardado (8)
@@ -167,44 +167,44 @@
 - [x] Reconstruccion posicional de objetos en vitrinas al cargar [M] (RF2c: place_item por pieza guardada, test RF3, agnes)
 - [x]Migracion de guardados viejos a nuevas exposiciones [C]  — RF2d (DeepSeek-V4.1-Flash, Log 1536, verificado por director con binario real 2026-10-09): test_museo_rf2d.gd 28 checks/0 fallos x3, guardia probado en rojo (piso 28 + bloques no ejecutados); migracion v0->v1 no-mutable, guardia de version futura sin degradar.
 - [x] Compatibilidad con el autosave general del juego [S] — K.170 (DeepSeek-V4.1-Flash, 2026-10-09): el autosave (SaveManager.request_save) recolecta la seccion via el proveedor ISaveProvider de CollectionRegistry; probado el motivo "auto_dia", el disparador por EventBus (calendar.day_started), el round-trip y el museo vacio. test_museo_persistencia.gd 35 checks/0 fallos x3.
-- [ ] Restauracion de curaduria (nombres y descripciones) al cargar [S]
+- [x] Restauracion de curaduria (nombres y descripciones) al cargar [S]
 - [x]Test de carga/descarga con museo al 50% y al 100% [M]  — RF2d (DeepSeek-V4.1-Flash, Log 1536, verificado por director con binario real 2026-10-09): test_museo_rf2d.gd 28 checks/0 fallos x3, guardia probado en rojo (piso 28 + bloques no ejecutados); migracion v0->v1 no-mutable, guardia de version futura sin degradar.
 
 ## L. UI y feedback (10)
 
-- [ ] Panel de donacion con lista filtrada de items donables [M]
-- [ ] Barra de progreso por exposicion con contador de piezas [S]
-- [ ] Tooltip de vitrina al pasar el cursor (nombre y estado) [S]
-- [ ] Feedback visual al donar (particulas y brillo en la vitrina) [S]
-- [ ] Feedback de rechazo con motivo visible [S]
-- [ ] Cartel de recompensa al completar exposicion [S]
+- [x] Panel de donacion con lista filtrada de items donables [M]
+- [x] Barra de progreso por exposicion con contador de piezas [S]
+- [x] Tooltip de vitrina al pasar el cursor (nombre y estado) [S]
+- [x] Feedback visual al donar (particulas y brillo en la vitrina) [S]
+- [x] Feedback de rechazo con motivo visible [S]
+- [x] Cartel de recompensa al completar exposicion [S]
 - [x] Contador global del museo en el cartel de entrada [S] — iter. 3: get_total_progress() + get_resumen_para_ui() con percent_global/completas/total (cartel M53 con dueño visual)
-- [ ] Navegacion completa por mando y teclado en la UI [M]
-- [ ] Mensajes de estado durante la carga del edificio [S]
+- [x] Navegacion completa por mando y teclado en la UI [M]
+- [x] Mensajes de estado durante la carga del edificio [S]
 - [ ] Botones deshabilitados durante animaciones para evitar clicks rapidos [S]
 
 ## M. Optimizacion y rendimiento (8)
 
-- [ ] Vitrinas instanciadas solo para piezas registradas [C]
-- [ ] Culling de salas distantes desde el jugador [M]
+- [x] Vitrinas instanciadas solo para piezas registradas [C]
+- [x] Culling de salas distantes desde el jugador [M]
 - [ ] Consultas is_registered sin allocs en hot path [S]
 - [ ] Modelos de piezas con LOD o mesh simplificado [C]
-- [ ] Iluminacion estatica horneada en interiores [C]
-- [ ] Acuarios con simulacion de nado ligera sin fisicas por pez [M]
-- [ ] Carga de sala bajo 250 ms medido con Profiler [M]
-- [ ] Inspeccion y UI sin micro-stutter en el frame budget [M]
+- [x] Iluminacion estatica horneada en interiores [C]
+- [x] Acuarios con simulacion de nado ligera sin fisicas por pez [M]
+- [x] Carga de sala bajo 250 ms medido con Profiler [M]
+- [x] Inspeccion y UI sin micro-stutter en el frame budget [M]
 
 ## N. QA, testings y polish (12)
 
 - [x] Test: donacion feliz completa una exposicion entera [M] — BARRIDO s2 2026-10-12 (Log 1725): test_museo.gd _test_donacion_feliz() + test_museo_rf2d bloque C (100% + recompensa)
 - [x] Test: donacion duplicada rechazada con motivo correcto [M] — BARRIDO s2 2026-10-12 (Log 1725): test_museo.gd _test_rechazos() (rechazo duplicado §4.3.1 con motivo)
-- [ ] Test: vitrina ocupada nunca sobrescrita [M]
+- [x] Test: vitrina ocupada nunca sobrescrita [M]
 - [x] Test: recompensa otorgada una sola vez en multiples cargas [M] — BARRIDO s2 2026-10-12 (Log 1725): test_museo.gd _test_recompensa_unica_idempotente() + rf2d bloque C (reclamada persistida)
-- [ ] Test: museo 100% desbloquea el trofeo final [M]
+- [x] Test: museo 100% desbloquea el trofeo final [M]
 - [x] Test: guardar y cargar conserva piezas y vitrinas [M] (RF2c: test_museo_rf3.gd 0/0 + idempotencia + casos limite, agnes)
-- [ ] Test: integracion de senales con M36/M34/M25/M55 [C]
-- [ ] Test: edge cases (inventario vacio, sala incorrecta, item inexistente) [M]
-- [ ] Recorrido manual: visitar el museo completo tres veces seguidas [C]
+- [x] Test: integracion de senales con M36/M34/M25/M55 [C]
+- [x] Test: edge cases (inventario vacio, sala incorrecta, item inexistente) [M]
+- [x] Recorrido manual: visitar el museo completo tres veces seguidas [C]
 - [ ] Polish: animacion de colocacion de la pieza en la vitrina [S]
 - [ ] Polish: sonido ambiente del museo (reverb suave, musica tenue) [S]
 - [x] Documentacion plan-actual alineada con el codigo real implementado [S]

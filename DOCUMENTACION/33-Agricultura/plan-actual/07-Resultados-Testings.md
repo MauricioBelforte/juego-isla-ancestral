@@ -4,6 +4,33 @@
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-10-25
 
+## Segunda corrida medida el 2026-10-25 (Step-5-WorkBuddy, Log 2182) — features propias
+
+Binario real: `Godot_v4.7.2-stable_win64_console.exe --headless --path game/isla-ancestral`.
+Nada heredado: las 6 suites se corrieron HOY por este agente (5 previas reverificadas
+sin regresión tras tocar `farm_service.gd` + 1 nueva).
+
+| Suite | Checks | Fallos | EXIT | SCRIPT ERROR | Piso |
+|---|---|---|---|---|---|
+| `test_farm.gd` | 29 | 0 | 0 | 0 | 29 |
+| `test_farm_clima.gd` | 20 | 0 | 0 | 0 | 20 |
+| `test_farm_m33_lote.gd` | 42 | 0 | 0 | 0 | 30 |
+| `test_farm_voxel_m33.gd` | 27 | 0 | 0 | 0 | 20 |
+| `qa_farm_pausas_m33.gd` | 35 | 0 | 0 | 0 | 17 |
+| `test_farm_features_m33.gd` (nueva) | 39 | 0 | 0 | 0 | 39 |
+| **Total** | **192** | **0** | **0** | **0** | — |
+
+### Verificación del guardián de la suite nueva (sonda por inyección)
+
+Sobre `test_farm_features_m33.gd`:
+
+- Piso 40 (no medido) sobre 39 checks reales: EXIT 1 → el piso se ajustó a 39 MEDIDO.
+- Inyección de contenido: `TABLA_CRUCES` vaciada en `farm_service.gd` → EXIT 1,
+  3 fallos («tulipán + lavanda -> lirio_estelar ()», «las flores padres se consumen»,
+  «25 cruces idénticos»). Sonda borrada; servicio restaurado byte-exacto.
+- Trampa evitada: el test de fuente de L188 usa `_solo_codigo()` (elimina
+  comentarios respetando cadenas) para no acusarse a sí mismo.
+
 ## Resultados medidos el 2026-10-25 (Step-5-WorkBuddy, Log 2180)
 
 Binario real: `Godot_v4.7.2-stable_win64_console.exe --headless --path game/isla-ancestral`.
@@ -40,7 +67,10 @@ Con la evidencia de arriba se marcaron `[x]` (10 ítems, ofrecidos a revertir):
 - L240 prototipo 3 cultivos + riego + avance diario (02-Analisis §5 + test_farm.gd).
 - L242/L244/L246 docs creados y firmados (01/02/03/04/05 verificados; 03-Diseno reparado).
 
-M33 queda en **127 [x] / 28 [ ] / 0 [?] = 155** (prefijo de línea).
+M33 queda en **133 [x] / 22 [ ] / 0 [?] = 155** (prefijo de línea) tras los 6 flips
+de la corrida 2 (P11/P13/P15/P23/P24 + L188), todos con cita a la suite nueva
+`test_farm_features_m33.gd` (39/0) y al catálogo `data/balance/farming.json`
+(schema_version 2).
 
 ## Regresiones medidas en la misma corrida
 

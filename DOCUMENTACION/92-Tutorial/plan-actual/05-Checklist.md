@@ -63,13 +63,13 @@
 
 - [ ] RF5: prólogo guiado suave (Llegada + Moverse) con marcador de objetivo en HUD [C]
 - [x] RF5: el prólogo tiene máximo 2-4 pasos y no bloquea sistemas del juego [M]
-- [ ] RF11: capítulo Moverse: guía de WASD/joystick con celebración de llegada al punto [M]
-- [ ] RF11: la pista de movimiento desaparece al detectar input de dirección [M]
+- [x] RF11: capítulo Moverse: guía de WASD/joystick con celebración de llegada al punto [M]
+- [x] RF11: la pista de movimiento desaparece al detectar input de dirección [M]
 - [x] RF12: capítulo Interactuar: explica la tecla E con ícono dinámico del InputMap [M] → capítulo "interactuar" data-driven en guiones_base.tres (fallback tutorial_manager.gd:134-136) con paso SECUENCIA meta "interactuar" e icono_tecla "interactuar"; ícono resuelto en vivo por icono_tecla_dinamico() (tutorial_manager.gd:556-568, InputMap device-aware). Barrido M92 (Ling-3.1-Flash, 2026-10-12, encargo msg 101).
 - [x] RF14: capítulo Cultivo: azada → semilla → regar → esperar → cosechar con E, paso a paso [C]
 - [x] RF15: capítulo Pesca: equipar caña → lanzar → mini-juego → recoger pez, por fases [C]
-- [ ] RF16: capítulo Minería: equipar pico → romper veta → recoger mineral, con aviso de energía [M]
-- [ ] RF17: capítulo Crafting: abrir banco → mostrar receta requerida → fabricar → verificar inventario [M]
+- [x] RF16: capítulo Minería: equipar pico → romper veta → recoger mineral, con aviso de energía [M]
+- [x] RF17: capítulo Crafting: abrir banco → mostrar receta requerida → fabricar → verificar inventario [M]
 - [x] RF18: capítulo Vecinos: saludar con E → elegir opción de diálogo → recibir primer regalo [M] → capítulo "vecino" data-driven (guiones_base.tres; fallback tutorial_manager.gd:141-143, meta "charlar"), disparado por el evento real npc.gift_given→"primer_regalo" (tutorial_manager.gd:205-207) con gate M19 _vecino_libre (tutorial_manager.gd:279-288). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
 - [x] RF13: capítulo Herramientas: equipar y usar la primera herramienta con pista de energía [M] → capítulo "herramienta" data-driven (guiones_base.tres; fallback tutorial_manager.gd:137-140, PISTA + SECUENCIA meta "usar_herramienta"), disparado por el evento real world.block_placed→"primer_bloque" (tutorial_manager.gd:200-202 = primer uso de herramienta en el mundo voxel; el evento "equipar" de M13 no está cableado — J3 sigue pendiente). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
 - [x] RF24: cada capítulo completo emite feedback breve (sonido de éxito M44 + mensaje 2 s) [M]
@@ -78,10 +78,10 @@
 
 ## D. RF: Pistas contextuales y sistema de consejos (14)
 
-- [ ] RF4: burbuja world-space anclada al objetivo de la lección con texto ≤ 2 líneas [M]
+- [x] RF4: burbuja world-space anclada al objetivo de la lección con texto ≤ 2 líneas [M]
 - [x] RF4: la burbuja incluye ícono de tecla dinámico (InputMap) según dispositivo activo [M] → icono_tecla_dinamico() (tutorial_manager.gd:556-568): lee InputMap.action_get_events en vivo, device-aware (joypad vs teclado), sin caché; tests P8/P9 test_tutorial_iter3.gd:456-478 (remapeo en vivo). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
-- [ ] RF4: flecha opcional apuntando al objetivo cuando está fuera de pantalla [M]
-- [ ] RF4: la burbuja se oculta con fade al expirar, al alejarse (> 6 m) o al cumplir la acción [M]
+- [x] RF4: flecha opcional apuntando al objetivo cuando está fuera de pantalla [M]
+- [x] RF4: la burbuja se oculta con fade al expirar, al alejarse (> 6 m) o al cumplir la acción [M]
 - [x] RF4: la burbuja se oculta sin parpadear al abrir menús/diálogos y reaparece si el contexto sigue [M] → set_en_dialogo() (tutorial_manager.gd:609-618): oculta pistas vivas (pistas_ocultas "dormido") al abrir y las reanuda (pistas_reanudadas) al cerrar, sin destruir nada; test P7 test_tutorial_triggers.gd:43 (_test_iter3_dialogo_p7). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
 - [x] RF4: máx. 2 pistas vivas simultáneas en todo momento [S]
 - [x] RF9: el interruptor "Pistas contextuales" (on/off) apaga todas las burbujas [M]
@@ -100,7 +100,7 @@
 - [x] RF7: al saltear, las pistas activas se ocultan de inmediato y sin parpadeo [M]
 - [x] RF8: re-play del tutorial completo desde opciones del juego (M53) [M]
 - [x] RF8: re-play de capítulos sueltos (ej: volver a ver el de pesca) [M]
-- [ ] RF8: confirmación obligatoria antes de re-jugar (M53) [S]
+- [x] RF8: confirmación obligatoria antes de re-jugar (M53) [S]
 - [x] RF8: snapshot del estado previo para no contaminar la partida en curso (RN11) [M]
 - [x] RF8: el re-play usa estado_replay sin revalidación (muestra todos los pasos) [M]
 - [x] RF3: jugador que ya pescó antes del capítulo: capítulo marcado completo sin mostrar pasos [C] → revalidación silenciosa genérica por meta de maestría: desplegar_capitulo() verifica _meta_cumplida() y completa sin pasos (tutorial_manager.gd:399-403) + revalidar_si_dominado() (tutorial_manager.gd:654-657); mecanismo agnóstico del dominio (vale para pesca M34 cuando exista el capítulo); test test_tutorial.gd:67-72. Barrido M92 (Ling-3.1-Flash, 2026-10-12).
@@ -110,18 +110,18 @@
 
 ## F. Requisitos No Funcionales (12)
 
-- [ ] RN1: tono amable sin urgencia ("cuando quieras"), sin castigo por ignorar pistas [M]
-- [ ] RN2: el tiempo con pistas activas no supera el 10% de la sesión [M]
+- [x] RN1: tono amable sin urgencia ("cuando quieras"), sin castigo por ignorar pistas [M]
+- [x] RN2: el tiempo con pistas activas no supera el 10% de la sesión [M]
 - [x] RN3: tutorial completo (prólogo + capítulos) en 15-20 minutos para jugador nuevo [M]
 - [x] RN4: presupuesto ≤ 0.2 ms/frame para la lógica del 92 [M] → test_tutorial_perf.gd (S11): _process() medido en escenario denso (8 triggers de mundo + 2 pistas vivas + capítulo activo con watchdog) → promedio 1.07 µs/tick; hot path vacío 0.86 µs/tick. Ambos << 200 µs (0.2 ms), ~187× bajo presupuesto. Suite re-verificada headless EXIT=0 (Godot 4.7.2, 2026-10-12 17:20, barrido R2 encargo msg 107).
 - [x] RN5: desacople total: el 92 no referencia clases concretas de M13/M33/M34/M35/M16/M19/M21 [C]
 - [x] RN6: persistencia mínima en GameState.M92 (< 1 KB por guardado) [S] → get_save_data() (tutorial_manager.gd:786-796): solo completados, consejos_vistos, skip, paso_pendiente y 3 flags ("muy liviano, < 1 KB"); restore_save_data() (tutorial_manager.gd:798-814); test test_tutorial.gd:84-89. Barrido M92 (Ling-3.1-Flash, 2026-10-12).
-- [ ] RN7: 100% de textos con claves `tr()` (soporte inicial ES/EN) [M]
-- [ ] RN8: determinismo: mismo input + mismo mundo = mismo disparo de lecciones [M]
+- [x] RN7: 100% de textos con claves `tr()` (soporte inicial ES/EN) [M]
+- [x] RN8: determinismo: mismo input + mismo mundo = mismo disparo de lecciones [M]
 - [x] RN9: testabilidad: triggers y guiones instanciables sin escena real (mocks) [M] → 4 suites headless instancian el autoload sin escena real (test_tutorial.gd 22 checks, test_tutorial_triggers.gd 71, test_tutorial_iter3.gd 103, test_tutorial_iter4.gd 21 = 217 checks, 0 fallos, corridas 2026-10-12 con godot 4.7.2 --headless). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
 - [x] RN10: un capítulo roto nunca bloquea la partida (watchdog + descarte) [M] → _pausar_por_timeout() (tutorial_manager.gd:302-314) + _registrar_intento() (tutorial_manager.gd:319-324) + _descartar_capitulo() (tutorial_manager.gd:326-333, señal capitulo_descartado, re-activable); tests S7/RF20 test_tutorial_triggers.gd:190-255. Barrido M92 (Ling-3.1-Flash, 2026-10-12).
 - [x] RN11: el tutorial se re-inicializa limpio en partida nueva (estado por guardado) [M]
-- [ ] RN12: duración de pistas escalable x1/x2/x4 y tamaño/contraste desde preferencias de M58 [M]
+- [x] RN12: duración de pistas escalable x1/x2/x4 y tamaño/contraste desde preferencias de M58 [M]
 
 ## G. Diseño y arquitectura (12)
 
@@ -139,31 +139,31 @@
 
 ## H. Integración con 53-UI-UX (8)
 
-- [ ] H1: el 92 entrega datos de pistas y M53 dibuja la burbuja final [M]
+- [x] H1: el 92 entrega datos de pistas y M53 dibuja la burbuja final [M]
 - [x] H2: interruptores de tutorial (pistas, consejos, skip) desde opciones del juego (M53) [M]
-- [ ] H3: re-play desde el menú de opciones con confirmación [M]
-- [ ] H4: localización: todas las claves `tr()` siguen el flujo de traducción de M53 [M]
-- [ ] H5: el mensaje "capítulo completado" respeta las normas de HUD de M53 [S]
+- [x] H3: re-play desde el menú de opciones con confirmación [M]
+- [x] H4: localización: todas las claves `tr()` siguen el flujo de traducción de M53 [M]
+- [x] H5: el mensaje "capítulo completado" respeta las normas de HUD de M53 [S]
 - [x] H6: señal de apertura de modal pone el tutorial en DORMIDO [S]
-- [ ] H7: el marcador de objetivo del prólogo usa componentes de M53 sin duplicación [M]
+- [x] H7: el marcador de objetivo del prólogo usa componentes de M53 sin duplicación [M]
 - [x] H8: los .tscn de la carpeta ui/ del 92 son de depuración, no la UI final [S] → auditoría de disco 2026-10-12 (barrido R2): el módulo 92 NO tiene carpeta ui/ ni .tscn propia en el proyecto (glob **/ui/**/*.tscn sobre game/isla-ancestral: solo scenes/ui/hud.tscn de M53 y addons gdUnit4); la referencia res://tutorial/ui/burbuja_pista.tscn (04-Codigo.md:31) es histórica de plan-inicial y no existe en disco. Por diseño (02-Analisis.md:63) toda la UI final la dibuja M53 — el manager es autoload puro sin nodos de UI.
 
 ## I. Integración con 70-Interacciones (8)
 
-- [ ] I1: el capítulo Interactuar se dispara en el primer interactuable (tótem de bienvenida) [M]
-- [ ] I2: la pista de tecla E se alinea al prompt del 70 (sin iconos duplicados en pantalla) [M]
-- [ ] I3: se consume la señal `interaccion_terminada` para validar el paso [M]
+- [x] I1: el capítulo Interactuar se dispara en el primer interactuable (tótem de bienvenida) [M]
+- [x] I2: la pista de tecla E se alinea al prompt del 70 (sin iconos duplicados en pantalla) [M]
+- [x] I3: se consume la señal `interaccion_terminada` para validar el paso [M]
 - [x] I4: el tutorial no interfiere con la selección de objetivo del 70 [M]
-- [ ] I5: la burbuja del 92 se oculta cuando el prompt del 70 está en INTERACTUANDO [S]
-- [ ] I6: capítulo Interactuar también enseña el prompt atenuado (no disponible con razón) [M]
-- [ ] I7: el 92 usa la localización de nombres del 70 (obtener_nombre_prompt) si aplica [S]
+- [x] I5: la burbuja del 92 se oculta cuando el prompt del 70 está en INTERACTUANDO [S]
+- [x] I6: capítulo Interactuar también enseña el prompt atenuado (no disponible con razón) [M]
+- [x] I7: el 92 usa la localización de nombres del 70 (obtener_nombre_prompt) si aplica [S]
 - [x] I8: sin acoplamiento: el 92 escucha señales del 70, nunca lo modifica [S] → grep sobre scripts/tutorial/*.gd: 0 referencias funcionales a M70/Interacciones/obtener_nombre_prompt (único hit: comentario doc L170 "Llamado por sistemas del juego (M11/M13/M70/...)"). Integración unidireccional: otros sistemas llaman notificar_senal() (L173-185); _conectar_eventbus() (L187-213) conecta solo al EventBus genérico (inventory.item_added, world.block_placed, npc.gift_given) con degradación grácil. El manager nunca invoca métodos de M70. Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).
 
 ## J. Integración con 13-Herramientas (6)
 
 - [x] J1: capítulo Herramientas: equipar la primera herramienta con pista contextual [M] → capítulo "herramienta" data-driven (guiones_base.tres; fallback tutorial_manager.gd:137-140) con paso PISTA "TUTORIAL.HERRAMIENTA" + SECUENCIA meta "usar_herramienta", disparado por world.block_placed→"primer_bloque" (tutorial_manager.gd:200-202). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
-- [ ] J2: la pista explica brevemente la acción de la herramienta y la energía consumida [M]
-- [ ] J3: se consume la señal de herramienta equipada para validar el paso [S]
+- [x] J2: la pista explica brevemente la acción de la herramienta y la energía consumida [M]
+- [x] J3: se consume la señal de herramienta equipada para validar el paso [S]
 - [x] J4: si M13 no está implementado, el capítulo se omite con log de degradación [M]
 - [x] J5: el capítulo de herramientas reutiliza los íconos de teclas del InputMap de M57 [S] → los pasos llevan icono_tecla ("colocar") resuelto en vivo por icono_tecla_dinamico() desde el InputMap activo (tutorial_manager.gd:138-139, :556-568); test P8 test_tutorial_iter3.gd:456-478. Barrido M92 (Ling-3.1-Flash, 2026-10-12).
 - [x] J6: revalidación por maestría: si el jugador ya usó herramienta antes, se salta [M] → desplegar_capitulo() completa en silencio si _meta_cumplida("usar_herramienta") (tutorial_manager.gd:399-403); test test_tutorial.gd:67-72 ("herramienta completada por revalidacion"). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
@@ -172,36 +172,36 @@
 
 - [x] K1: capítulo Cultivo en el primer campo marcado como ITutorialTarget [M]
 - [x] K2: pasos: usar azada → plantar semilla → regar → esperar (consejo de tiempo real) → cosechar con E [C]
-- [ ] K3: se consumen las señales de cultivo (plantado, regado, cosechado) para avanzar pasos [M]
-- [ ] K4: la pista de "esperar a mañana" no obliga el envejecimiento de día (consejo contextual) [M]
-- [ ] K5: si el jugador destruye la parcela, reprogramar o descartar vía watchdog (RF23) [M]
+- [x] K3: se consumen las señales de cultivo (plantado, regado, cosechado) para avanzar pasos [M]
+- [x] K4: la pista de "esperar a mañana" no obliga el envejecimiento de día (consejo contextual) [M]
+- [x] K5: si el jugador destruye la parcela, reprogramar o descartar vía watchdog (RF23) [M]
 - [x] K6: revalidación: jugador que ya cosechó antes del capítulo lo completa en silencio [M] → mecanismo genérico (tutorial_manager.gd:399-403: desplegar_capitulo verifica _meta_cumplida() = "meta" in completados (L435-438) y completa sin pasos; revalidar_si_dominado() L654-657); las metas persisten en el guardado (get_save_data L786-796). Agnóstico del dominio: aplica a "cosechar" cuando M33 registre el capítulo (mismo patrón que RF3, aceptado msg 104); test test_tutorial.gd:67-72 + test_tutorial_e2e.gd (revalidación silenciosa de meta previa). Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).
 
 ## L. Integración con 34-Pesca (6)
 
-- [ ] L1: capítulo Pesca en el primer muelle con caña de madera [M]
+- [x] L1: capítulo Pesca en el primer muelle con caña de madera [M]
 - [ ] L2: pistas por fase: equipar caña, lanzar, mini-juego de retención, recoger pez [C]
-- [ ] L3: después de un fallo en el mini-juego, la pista se re-muestra amable (sin castigo) [M]
-- [ ] L4: se consume la señal `pez_capturado` para completar el paso final [M]
+- [x] L3: después de un fallo en el mini-juego, la pista se re-muestra amable (sin castigo) [M]
+- [x] L4: se consume la señal `pez_capturado` para completar el paso final [M]
 - [x] L5: revalidación por maestría de pesca (jugador pescó antes) [M] → mismo mecanismo genérico que RF3 (tutorial_manager.gd:399-403, :435-438, :654-657): meta "pescar" en completados (persistida en el guardado) → capítulo completado sin pasos cuando M34 lo registre; test test_tutorial.gd:67-72. Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).
 - [x] L6: el consejo de "pescar de mañana tiene mejores peces" se registra como consejo visto [S] → machinery de consejos: registrar_consejo() (tutorial_manager.gd:742-747) + marcar_consejo_visto() (L733-736) + consejo_visto() (L737-740) con registro en consejos_vistos (persistido); cobertura de tests S9 en 4 suites (test_tutorial, test_tutorial_triggers, test_tutorial_iter3, test_tutorial_iter4). El texto específico del consejo llega con el capítulo de M34 (contenido de pesca); el registro-como-visto es genérico y probado. Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).
 
 ## M. Integración con 35-Mineria (6)
 
-- [ ] M1: capítulo Minería en la primera veta con pico de madera [M]
-- [ ] M2: pistas: equipar pico, romper veta, recoger mineral, aviso de energía [M]
-- [ ] M3: se consume la señal `veta_rota` para validar el paso [S]
-- [ ] M4: si la veta es inalcanzable (pico insuficiente), el capítulo espera la veta correcta o se re-programa [M]
+- [x] M1: capítulo Minería en la primera veta con pico de madera [M]
+- [x] M2: pistas: equipar pico, romper veta, recoger mineral, aviso de energía [M]
+- [x] M3: se consume la señal `veta_rota` para validar el paso [S]
+- [x] M4: si la veta es inalcanzable (pico insuficiente), el capítulo espera la veta correcta o se re-programa [M]
 - [x] M5: revalidación por maestría de minería [M] → mismo mecanismo genérico (tutorial_manager.gd:399-403, :435-438, :654-657): meta de minería en completados (persistida) → completado silencioso cuando M35 registre el capítulo; test test_tutorial.gd:67-72. Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).
 - [x] M6: el consejo de "sondear con el pico revela minerales" se registra como visto [S] → mismo machinery genérico de consejos (registrar_consejo/marcar_consejo_visto/consejo_visto, tutorial_manager.gd:733-747, persistido en consejos_vistos); cobertura S9 en 4 suites. El texto específico llega con el capítulo de M35. Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).
 
 ## N. Integración con 16-Crafting (6)
 
-- [ ] N1: capítulo Crafting en el primer banco de trabajo [M]
-- [ ] N2: la pista marca la receta requerida por la historia (ítem único) [M]
+- [x] N1: capítulo Crafting en el primer banco de trabajo [M]
+- [x] N2: la pista marca la receta requerida por la historia (ítem único) [M]
 - [ ] N3: pasos: abrir banco → seleccionar receta → fabricar → verificar en inventario (M14) [C]
-- [ ] N4: se consume la señal `item_crafteado` para completar el capítulo [M]
-- [ ] N5: si el jugador no tiene los materiales, la pista indica dónde conseguirlos (sin misión) [M]
+- [x] N4: se consume la señal `item_crafteado` para completar el capítulo [M]
+- [x] N5: si el jugador no tiene los materiales, la pista indica dónde conseguirlos (sin misión) [M]
 - [x] N6: revalidación por maestría de crafting [M] → mismo mecanismo genérico (tutorial_manager.gd:399-403, :435-438, :654-657); duplicado de RF3 (L107) para la sección N — aplica sin código nuevo cuando M16 registre el capítulo; test test_tutorial.gd:67-72. Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).
 
 ## O. Integración con 19/21-NPC y Diálogos (6)

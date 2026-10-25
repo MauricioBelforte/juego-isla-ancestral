@@ -13,9 +13,9 @@ signal cubierto
 signal terminada
 
 ## Noche cozy (pleno) — SIN negro puro (J.6: nunca un hueco negro duro).
-const COLOR_VELO := Color(0.10, 0.12, 0.20, 1.0)
+const COLOR_VELO := Color(ThemeUx.COLOR_PRESSED, 1.0)
 ## Dorado ThemeUx (COLOR_HIGHLIGHT_GOLD) para el flash de llegada.
-const COLOR_FLASH := Color(0.92, 0.76, 0.40, 1.0)
+const COLOR_FLASH := Color(ThemeUx.COLOR_HIGHLIGHT_GOLD, 1.0)
 ## m69_spec §F: bruma 0.5s de salida + fade 0.3s de entrada.
 const DUR_FADE_OUT := 0.5
 const DUR_FADE_IN := 0.3

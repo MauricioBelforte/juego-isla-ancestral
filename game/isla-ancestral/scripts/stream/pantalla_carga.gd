@@ -33,7 +33,7 @@ var _fundido := FundidoCarga.new()
 
 
 func _ready() -> void:
-	layer = 100  # por encima de todo
+	layer = 120  # por encima de todo (M53, msg 395: UIRoot queda en 100; la carga va arriba)
 	_construir_ui()
 	_conectar_stream()
 	_tips = ConsejosCarga.cargar()

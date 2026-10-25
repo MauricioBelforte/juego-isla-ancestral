@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-25T05:13 (ack Ling 266: drift-check riel + leccion walks)",
+ "ultimo_update": "2026-10-25T07:13 (ack DeepSeek 402 M53 token-dup + Ling 270 corpus PT)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -750,45 +750,151 @@
   "registro": "veredictos se registran AQUI (estado), NO en el canal de Beam (anti-loop)",
   "ultimos_veredictos": [
    {
-    "T": "T086",
-    "m": "M48 (48-Animacion)",
-    "hecho": 14,
-    "skip": 4,
-    "veredicto": "OK (valido)",
-    "nota": "M48 05 crecio 65 -> 111 [x]/10 [ ]/2 [?] (T083+T086 flippados, SI aterrizan en 05 a diferencia de M68 stale-header). 14 CUBO-A doc-heavy validos. HALLAZGO: 'desfase numeracion 47=ANIMACION -> ID 48' (plan-maestro 47 vs folder 48) documentado en M48 05 L13/L303 - Mismo patron off-by-one que M67/M68 (Beam etiqueta T-files con #plan-maestro, no #folder). M48 casi sellable (10 [ ] + 2 [?]) - SEGUNDO candidato a sello junto M75."
-   },
-   {
-    "T": "T083",
-    "m": "M48 (48-Animacion)",
+    "T": "T100",
+    "m": "M37 (37-Museos-Y-Colecciones)",
     "hecho": 17,
-    "skip": 3,
-    "veredicto": "OK (valido)",
-    "nota": "17 CUBO-A [x] respaldados: M48 03 (20491ch) menciona TODOS los items (saltar/nadar/minar/pescar/cosecha/puerta/ascensor/construccion/swing/easing/plantacion). M48 05 = 65 [x]/56 [ ]/2 [?] = 123. Gate-1 LIMPIO (contraste con M68 falso-positivo). M48 NO sellable (56 [ ] + 2 [?]). Soft-flag animation_budget.json separado, no bloquea estos flips."
+    "veredicto": "OK",
+    "nota": "M37 05 = 140/8/0 (gate-1 limpio, 0 [?]; 17 [ ] abiertos -> no sellable full). CUBO-A respaldado."
    },
    {
-    "T": "T078/T080",
-    "m": "M68 (folder 68; Beam label M67 off-by-one)",
-    "veredicto": "FALSO POSITIVO corregido (Hy3 #386)",
-    "nota": "Mi gate-1 comparo contra el Totales STALE de M68 05 (L7 99/131, L9 36/131). Los [x] SI viven en el cuerpo L42/46/50/68/94 + spec 03 'Specs Vehiculos Beam 562-565'. Corrijo T078/T080 a FALSO POSITIVO. PERO M68 05 tiene 14 [?] REALES (L46 TRIP_FINISHED M07) -> M68 NO sellable. M68 05 stale-Totales encolado a sync."
+    "T": "T097/098/099 + catch-up",
+    "m": "M56/M37/M73/M110/M75/M01/M55/M67",
+    "veredicto": "catch-up-G",
+    "nota": "Verificados: M56=129/7/2 (spec 401/622) TIE; M37=131/17/0 (spec 299/588) SELLABLE-g1; M73=131/4/0 (spec 205/340) SELLABLE-g1; M110=155/70/0 (spec 164/347) SELLABLE-g1; M75=125/5/0 (spec 245/312) SELLABLE-g1; M01=122/30/0 (spec 555/669) SELLABLE-g1; M55=112/10/9 (spec 334/663) TIE; M67(67-folder)=116/15/0 (spec 340/586) SELLABLE-g1"
    },
    {
-    "T": "T080",
-    "m": "M67",
-    "hecho": 13,
-    "skip": 7,
-    "veredicto": "DISCREPANCIA (reafirmada, sistematica)",
-    "nota": "M67 05 ESTATICO en 104 [x] pese a T078(18)+T080(13)=31 flips claimados por Beam. Items nombrados (timon, submarino, farol, vehiculo atascado, camara 3ª) AUSENTES en M67 05. Solo 'pasajeros'/'inventario' aparecen (contexto distinto). -> MAL-MAPEO sistematico: los [x] no aterrizan en M67 05 (van a M67 04-Codigo 39720ch? u otro modulo 05?). M67 NO sellable. REFORZA el cross-check ya asignado a Hy3 en msg 385. No flippeo (anti-loop); M67 queda en deuda hasta que el cross-check diga donde viven esos items."
-   },
-   {
-    "T": "T078",
-    "m": "M67",
-    "hecho": 18,
-    "skip": 2,
-    "veredicto": "DISCREPANCIA",
-    "nota": "Beam afirma 18 CUBO-A [x] (vela desplegable, vagon 16 slots, no atropellar animales, estela, vuelo altitud, navegar por agua). PERO M67 05-Checklist NO contiene esos items (solo header), y M67 03-Diseno es corto (4987ch) sin esas specs. M67 04-Codigo (39720ch) solo menciona 'navega'. Posible MAL-MAPEO (features en M51-Agua / M156-Terrenos) u overstatement. ANOTADO no flippeado. Mandar a Hy3 gate-2 cross-check: confirmar en que modulo 05 viven esos items de transporte."
+    "T": "BARRIDO-DIARIO §21.8.2.b",
+    "m": "M28/M72/M48/M75 + M56",
+    "veredicto": "sweep-gate1",
+    "nota": "M28 129/1/0 sellable-g1 (0 [?], 1 [ ]=deuda M41). M72 194/3/3 TIE (3 [?]). M48 111/10/2 TIE. M75 125/5/0 TIE-nearest. M56 (T095/T096) verificado. Spec-cobertura 5/5 en candidatos. M28 = PRIMER SELLO pendiente gate-2 runtime de Hy3."
    }
   ],
-  "ultimo_muestreo": "T086 M48 (25oct 04:40) OK"
+  "ultimo_muestreo": "indice creado 25oct 06:05",
+  "indice": {
+   "creado": "2026-10-25T06:05 (orden fundador: indice + algunos por cron A + diario + cron exclusivo G)",
+   "verificados_en_vivo": [
+    "T076",
+    "T078",
+    "T080",
+    "T083",
+    "T086",
+    "T090",
+    "T094",
+    "T093",
+    "T092",
+    "T091",
+    "T096",
+    "T095",
+    "T089",
+    "T088",
+    "T087",
+    "T085",
+    "T084",
+    "T082",
+    "T081",
+    "T079",
+    "T077",
+    "T099",
+    "T098",
+    "T097",
+    "T075",
+    "T074",
+    "T073",
+    "T072",
+    "T071",
+    "T070",
+    "T069",
+    "T068",
+    "T067",
+    "T066",
+    "T065",
+    "T064",
+    "T063",
+    "T062",
+    "T061",
+    "T100"
+   ],
+   "pendientes_recientes_por_verificar": [
+    "T060",
+    "T059",
+    "T058",
+    "T057",
+    "T056",
+    "T055",
+    "T054",
+    "T053",
+    "T052",
+    "T051",
+    "T050",
+    "T049",
+    "T048",
+    "T047",
+    "T046",
+    "T045",
+    "T044",
+    "T043",
+    "T042",
+    "T041",
+    "T040",
+    "T039",
+    "T038",
+    "T037",
+    "T036",
+    "T035",
+    "T034",
+    "T033",
+    "T032",
+    "T031",
+    "T030",
+    "T029",
+    "T028",
+    "T027",
+    "T026",
+    "T025",
+    "T024",
+    "T023",
+    "T022",
+    "T021",
+    "T020",
+    "T019",
+    "T018",
+    "T017",
+    "T016",
+    "T015",
+    "T014",
+    "T013",
+    "T012",
+    "T011",
+    "T010",
+    "T009",
+    "T008",
+    "T007",
+    "T006",
+    "T005",
+    "T004",
+    "T003",
+    "T002",
+    "T001"
+   ],
+   "historico_T001_T075": "reconciliar a NIVEL MODULO (no por T): sample §21.8.2.b del 05 [x] final del modulo; los [x] de esos T ya viven en el cuerpo (stale-Totales era el fallo de T078/T080)",
+   "proximo_despues_de": "T100",
+   "regla_cron_A": "cada ciclo A: verificar 1-2 de pendientes_recientes (del ultimo hacia atras) + los T-done nuevos desde proximo",
+   "regla_cron_G": "25,55 de cada hora (exclusivo, sin A/B/C/D): procesar TODO lo no verificado (catch-up) + actualizar indice; un dia a la dia, el primer G hace el barrido diario = sample §21.8.2.b de los 4 candidatos a sello + chequeo de drift Totales",
+   "ultimo_muestreo": "catch-up G 06:55: T097-099 (M56/M37) + M73/M110/M75/M01/M55/M67"
+  },
+  "modulos_candidatos_sello": {
+   "M28 (28-Viajes)": "129/1/0 - EL MAS CERCA (1 [ ] + runtime)",
+   "M72 (72-Sistema-De-Logros)": "194/3/3",
+   "M48 (48-Animacion)": "111/10/2",
+   "M75 (75-Postgame)": "125/5/0 + runtime Hy3"
+  },
+  "barrido_diario_25oct": {
+   "M28": "129/1/0 sellable-g1 (primer sello)",
+   "M72": "194/3/3 TIE",
+   "M48": "111/10/2 TIE",
+   "M75": "125/5/0 TIE (5 [ ]+runtime)",
+   "M56": "T095/T096 verificados"
+  }
  },
  "correccion_apilado_2200": "Trampa: mi archivo 'completados/' movio 33 archivos PENDING (T018-T050, regex fallado que contaba 0 abiertos). CORREGIDO: T018-T050 restaurados a root. Estado actual: root=T018-T060 (284 items [ ]), completados/=T001-T017 (17, 0 abiertos). Regla: solo archivar un T-file si VERDADERAMENTE 0 filas '[ ]' (re-contar antes de mover).",
  "apilador_estado_2224": {
@@ -822,9 +928,9 @@
    "mi_apilador": "Cron E de agnes APAGADO (wku_16fd1d87 borrado); reasumir solo con confirmacion del fundador (fase 2) o fin de carga de GLM"
   }
  },
- "deepseek_reactivado": "M53 UI-UX bloque (#394): flips L138 [->]+L144 [x], CI --selftest, colision pantalla_carga->120, token-dup 27 GO scopeado, mojibake 122 encolado repair, M91 UIFEFeedback no-op. 4 defectos propios cazados = canon.",
+ "deepseek_reactivado": "M53 token-dup LISTO (tanda 3: 7 unificados, 6 restantes = 3 owner + 3 semantico). L159 coherencia visual = flip-candidato. M53 va sellable. Log 2184.",
  "hy3_gate2": "gate-2 runtime #383: M73 FALLO runtime (validador 8 vs 19 categorias, green-probe Hy3; T266 encolado Beam dueno M73), M55 precision-fail, M75/M110/M58 EN CURSO, M04 PARCIAL. 0 sellos. M110 caveat debug_menu:721 nula-textura (deuda). M75 primer candidato.",
- "sellos_218": "0. Candidatos: M75 (5 [ ]+runtime Hy3) y M48 (10 [ ]+2 [?]). M33 127/28/0. M68 NO (14 [?]), M67 NO (15 [ ]), M55 precision, M73 FALLO.",
+ "sellos_218": "0. M28 primer-sello (runtime Hy3). M53 (DeepSeek) va sellable (token-dup listo, L159 flip). M73(4)/M75(5) siguen.",
  "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
  "ling_design_docs": {
   "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
@@ -838,17 +944,25 @@
   ],
   "lote2": "CERRADO. capa-II barrido 23/23 resueltos (riela agotada). Ling en STANDBY PT-runtime (GO fundador #4, plan 243 listo 1-vuelta). 17 drifts -> deuda de duenos (no riela Ling). Gemelo 260 saneo.",
   "i18n": "Validador i18n LIMPIO (exit0, 170/170/170 ES/EN/PT, paridad 0). Sonda PT: pt.po ausente, base 274 (159+115+4) lista, plan 243 aprobado. Ling standby-productivo report-only. GO fundador #4 para ejecutar PT.",
-  "driftcheck": "265: drift-check riel 12/12 anclajes + 20/20 items intactos (estabilidad para gate-1/QA 21.8). Leccion canonizada: excluir .kilo/,.git/,Obsoletos/ de walks recursivos (enganchan .kilo/worktrees/phase-judge stale). Ling standby-PT productivo."
+  "driftcheck": "265: drift-check riel 12/12 anclajes + 20/20 items intactos (estabilidad para gate-1/QA 21.8). Leccion canonizada: excluir .kilo/,.git/,Obsoletos/ de walks recursivos (enganchan .kilo/worktrees/phase-judge stale). Ling standby-PT productivo.",
+  "hoja_pt": "267: drift-check i18n EXIT0 (base PT estable) + HOJA PT-runtime 5 pasos anexada a backlog Ling tarea 59 (pt.po 274 + LOCALES+=pt + QA ValidadorPO + doc M87 + reporte). LISTA 1-vuelta ante GO fundador #4. Pool Ling saneado (5 gemelos 258-266, helper auto). Confirmar verificar_pool_numeros.py en Ling.",
+  "corpus_pt": "269: corpus PT medido (es.po 274=159+115+11; 115 nuevas M68=89/77% prioritario; 15 no-traducir; 4 plurales; header). PT-runtime 1-vuelta ante GO #4. Pool Ling +40, gemelos auto-saneados (verificar_pool_numeros.py)."
  },
- "step5_riel": "M33 CIERRE (#220): 5 suites 153/0, 03 des-mojibake, 10 flips -> M33 127/28/0 (0 [?]). Global fila 33 -> 127/155. Gemelo 220 anotado.",
+ "step5_riel": "M33 CERRADA a 133/22/0 (#224, 6 suites 192/0, TABLA_CRUCES determinista + 9 cultivos). Global fila 33 -> 133/155. L169 degradar a [?] (M53). 22 [ ] resto = duenos externos.",
  "gemelos_pendientes_saneo": [
   "256/256 (Ling)",
   "209/210 (Step-5)",
   "248/248 (Ling)"
  ],
- "asignador_cron_d": "25oct 03:38: DeepSeek 68 [ ] bien (41m), Step-5 M33 fresca (2m), Ling standby PT (sin cola). Hy3 52m idle -> asignado gate-2: (1) cross-check T078 M67 DISCREPANCIA, (2) prep M75 gate-2 (primer sello). Flota alimentada.",
+ "asignador_cron_d": "25oct 05:38: DeepSeek 72m idle -> nudge riel BACKLOG-11 D8 (siguiente bloque tras 53). Step-5 M33 activa (1m), Hy3 verifier 33m (espera M75 runtime), Ling standby PT. Solo DeepSeek repoblado.",
  "m75_gate2": "Hy3 #386: M75 125/5/0=130 (Beam 53->125). 5 [ ] reales: L76 ruina M25, L116 sin grindeo raro, L168 FASE2 no prometa UI, L182 logro ruina, L216 UI sin spoilers. Runtime red-probe M75 cuando Beam cierre los 5. Primer sello.",
  "pool_saneo": "Hy3 saneado (head 389). Ling canal: 4 gemelos (258/260/262/264) - corer verificar_pool_numeros.py en Ling.",
  "m68_state": "M68 (68-Transporte) 05 = 104 [x]/13 [ ]/14 [?] (14 [?] reales -> NO sellable). Stale header L7(99)/L252(103) en cola de sync. M67 (SEPARADO) = 116/15/0 (0 [?] pero 15 [ ]). Los T-files '-67' de Beam mapan a contenido M68; M67 es otro modulo. Verificar mapeo contra FOLDER 05, no la etiqueta.",
- "gate1_walk_rule": "Toda operacion de conteo/scan: excluir .kilo/, .git/, Obsoletos/, DOCUMENTACION/ (excepto el 05-Checklist directo del modulo). Los walks recursivos enganchan copias stale de worktrees."
+ "gate1_walk_rule": "Toda operacion de conteo/scan: excluir .kilo/, .git/, Obsoletos/, DOCUMENTACION/ (excepto el 05-Checklist directo del modulo). Los walks recursivos enganchan copias stale de worktrees.",
+ "cron_G_gate1_exclusivo": "15,45->CORREGIDO a 25,55 * * * * (exclusivo: A :00/20/40, B :10/30/50, C :17 2h, D :35 2h; :25 y :55 limpios). Gate-1 exhaustivo Beam: catch-up de T-done no verificados + indice + barrido diario §21.8.2.b.",
+ "gate1_sistema_stale_totales": "HALLAZGO SISTEMATICO (barrido G 25oct): TODOS los candidatos a sello de Beam tienen header/Totales STALE masivo vs el cuerpo: M28 body 129/1/0 vs Totales 50/80 (drift 79), M48 body 111/10/2 vs Totales 36/84 (drift 75), M72 194/3/3 vs ~~78/105~~, M75 125/5/0 vs ~~17/113~~. BEAM flippea el CUERPO 05 pero no refresca el header/Totales (a veces ~~strikethrough~~). Regla gate-1: contar SIEMPRE el CUERPO. Deuda: encolar a Beam una tanda de sync-Totales.",
+ "barrido_diario_25oct": {
+  "sellos": "M28=PRIMERO (129/1/0, 0 [?], 1 [ ]=L340 olas deuda-M41): sellable-g1, falta runtime Hy3. M75 125/5/0 (5 [ ] reales). M72/M48 TIE con [?]."
+ },
+ "m23_drift": "Global fila 23 = 83/105 (mi sync) vs Hy3 recont 76/105 -> drift 7. M23 no es candidato a sello; sync pendiente."
 }

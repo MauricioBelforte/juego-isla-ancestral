@@ -424,3 +424,276 @@ pasaria, y eso es correcto: lo que se garantiza es el resultado.
 4. Un test NUNCA pasa afirmando que un canal/feature NO existe: la ausencia se
    declara como deuda, no como logro.
 5. Un test no fija colores literales: verifica ratios y relaciones.
+6. La capa de carga es la MAXIMA de las capas de producto (regla E del
+   auditor): una carga por debajo de un modal queda tapada.
+
+### 8.8 Tanda 1 de L159: 9 literales que duplicaban un token (2026-10-25, Log 2181)
+
+GO del director (msg 395, punto 4): reemplazo **mecanico** SOLO de los literales que
+duplican un token de `ThemeUx`, en orden de tanda por modulo. Los **271** literales
+fuera de paleta NO se tocan: cambiarlos es una decision de diseno, no un reemplazo.
+
+Alcance de esta tanda: los archivos de UI del propio modulo (`scripts/ui/layers/` y
+`scripts/ui/widgets/`). **9 sitios en 6 archivos**.
+
+| Archivo | Antes | Despues |
+|---|---|---|
+| `ui/layers/loading_layer.gd` L79 | `Color(0.14, 0.16, 0.24)` | `Color(ThemeUx.COLOR_BG_ARENA, 1.0)` |
+| `ui/layers/menus_layer.gd` L28 | `Color(0.14, 0.16, 0.24)` | `Color(ThemeUx.COLOR_BG_ARENA, 1.0)` |
+| `ui/layers/settings_audio_layer.gd` L87 | `Color(0.14, 0.16, 0.24, 0.98)` | `Color(ThemeUx.COLOR_BG_ARENA, 0.98)` |
+| `ui/widgets/action_prompt_overlay.gd` L12 | `Color(0.14, 0.16, 0.24, 0.85)` | `Color(ThemeUx.COLOR_BG_ARENA, 0.85)` |
+| `ui/widgets/hotbar_widget.gd` L14 | `Color(0.92, 0.76, 0.40, 0.9)` | `Color(ThemeUx.COLOR_HIGHLIGHT_GOLD, 0.9)` |
+| `ui/widgets/hotbar_widget.gd` L15 | `Color(0.14, 0.16, 0.24, 0.92)` | `Color(ThemeUx.COLOR_BG_ARENA, 0.92)` |
+| `ui/widgets/hotbar_widget.gd` L82 y L123 | `Color(0.87, 0.66, 0.33, 0.55)` | `Color(ThemeUx.COLOR_ACCENT_OCRE, 0.55)` |
+| `ui/widgets/interact_prompt.gd` L11 | `Color(0.14, 0.16, 0.24, 0.88)` | `Color(ThemeUx.COLOR_BG_ARENA, 0.88)` |
+
+**Tecnica: el alpha se pasa EXPLICITO.** `COLOR_BG_ARENA` vale
+`Color(0.14, 0.16, 0.24, 0.94)`, mientras los literales del llamador tenian alphas
+distintos (1.0, 0.92, 0.98, 0.88, 0.85). Escribir el token a secas habria cambiado
+la transparencia de todos esos paneles. Con `Color(token, a)` el RGB sale del token
+y el alpha queda igual: **los 9 sitios rinden el mismo color que antes**.
+
+Detalle verificado antes de usar la forma en `const`: `Color(ThemeUx.COLOR_X, a)` es
+**expresion constante valida** en GDScript (probado con `--check-only` sobre una
+sonda desechable antes de tocar los 3 archivos que la usan en `const`). Si no lo
+fuera, esos 3 habrian necesitado cambiar `const` por `var`, lo que rompe el
+contrato de solo-lectura del estilo.
+
+Medido con `scripts/ui/auditar_ui_m53.py` (antes -> despues):
+
+| Metrica | Antes | Despues |
+|---|---|---|
+| `literales_duplican_token` | 27 | **18** |
+| `archivos_con_token` | 16 | 21 |
+| `archivos_con_literal` | 95 | 92 |
+| `literales_fuera_paleta` | 271 | 271 (sin tocar, por alcance) |
+| `violaciones_duras` | 30 | **20** |
+
+Los **18 restantes** son de archivos de OTROS modulos y van en tandas aparte (el
+director pidio no hacerlo de corrido). Medido por archivo:
+
+| Archivo | Sitios | Modulo funcional |
+|---|---|---|
+| `player/player.gd` | 5 | M11 |
+| `clock/w_reloj.gd` | 3 | reloj (M29/M53) |
+| `fasttravel/fast_travel_effect.gd` | 2 | fast-travel |
+| `crafting/crafting_ui.gd` | 1 | crafting |
+| `dialogos/ui/dialogue_ui.gd` | 1 | M21 (NO TOCAR) |
+| `main_island.gd` | 1 | core |
+| `mapa/map_canvas.gd` | 1 | M54 |
+| `shops/shop_ui.gd` | 1 | shops |
+| `stream/pantalla_carga.gd` | 1 | M63 (NO TOCAR) |
+| `world/block_catalog.gd` | 1 | world |
+| `ui/widgets/minimap_widget.gd` | 1 | M54/M53 (dueno en disputa) |
+
+`minimap_widget.gd` queda fuera a proposito: su literal (`0.15, 0.18, 0.22`) NO es
+igual al token (`0.14, 0.16, 0.24`), esta a distancia 0.03. Reemplazarlo es una
+decision de diseno (unificar el fondo del minimapa), no un reemplazo mecanico, y el
+archivo lo reclama M54. Se pide GO explicito antes de tocarlo.
+
+### 8.9 Orden de capa: `pantalla_carga` 120 sobre `ui_root` 100 (decision del director, msg 395 punto 3)
+
+Antes de esta tanda habia **dos** raices `CanvasLayer` en `layer = 100`:
+`scripts/ui/ui_root.gd` (montada por `main_island.gd`) y `scripts/stream/pantalla_carga.gd`
+(autoload `PantallaCarga`). Dos capas en el mismo indice dejan el orden visual a cargo
+del orden del arbol de escena, que es exactamente lo que no se puede garantizar.
+
+Decision aplicada (director, msg 395): `pantalla_carga` sube a **120**, `ui_root` queda
+en **100**. La pantalla de carga va por encima de todo, incluido un modal abierto
+durante una transicion.
+
+Medido con el auditor: `layers=[-1, 15, 100, 120]`, `colisiones=0` (antes 1: `100` con
+dos archivos).
+
+**La decision quedo codificada como regla** (bloque E del auditor), para que no se
+degrade: si `pantalla_carga.gd` declara un `layer` que NO es el maximo de las capas de
+producto, es violacion dura. Se probo EN ROJO de forma **diferencial** (el repo tiene
+20 violaciones ajenas a E, asi que comparar contra `exit 0` seria un criterio
+equivocado): inyectando `layer = 50` las violaciones pasan de 20 a **21** (+1 exacta),
+la linea nombra `pantalla_carga.gd` y `ui_root.gd`, y al restaurar los bytes el
+`sha256` vuelve al original y la linea desaparece.
+
+⚠️ Primera sonda descartada: inyecte `layer = 100` esperando la regla E y lo que
+disparo fue la **colision de L221** (nada quedaba por encima). El `exit 1` era correcto
+por casualidad, no por la regla nueva. Para probar E hay que bajar la capa DEBAJO de
+otra, no igualarla.
+
+**Lo que esta decision NO hace:** el merge de canvas de L221 (consolidar capas para
+bajar draw calls) sigue pendiente. Ordenar dos capas no es fusionarlas.
+
+**Verificacion visual pendiente (M154):** el cambio de orden es estatico y medible,
+pero el efecto en pantalla (que la barra de carga tape el HUD y no al reves) es
+visual. Se declara como pendiente de M154, no como verificado.
+
+### 8.10 Tanda 2 de L159: 5 literales mas, y un punto ciego del propio auditor (2026-10-25, Log 2183)
+
+Segunda tanda del GO scopeado del director (msg 395, punto 4: reemplazo mecanico
+solo por `ThemeUx.COLOR_*`, tanda por modulo). Tanda 1 cerro 9 sitios en archivos
+propios de M53 (§8.8). Esta tanda toma los tres modulos libres propuestos en el
+reporte 397 y **deja afuera, a proposito**, todo archivo con dueno en la lista
+NO TOCAR (`dialogos/ui/dialogue_ui.gd` es M21) y `ui/widgets/minimap_widget.gd`
+(su literal no es igual al token: ver §8.8).
+
+| Archivo | Linea | Antes | Despues | Token | Dist. |
+|---|---|---|---|---|---|
+| `clock/w_reloj.gd` | 117 | `Color(0.95, 0.93, 0.86)` | `ThemeUxRef.COLOR_TEXT_DARK` | `COLOR_TEXT_DARK` | 0.017 |
+| `clock/w_reloj.gd` | 124 | `Color(0.95, 0.93, 0.86)` | `ThemeUxRef.COLOR_TEXT_DARK` | `COLOR_TEXT_DARK` | 0.017 |
+| `clock/w_reloj.gd` | 141 | `Color(0.95, 0.93, 0.86)` | `ThemeUxRef.COLOR_TEXT_DARK` | `COLOR_TEXT_DARK` | 0.017 |
+| `shops/shop_ui.gd` | 59 | `Color(0.96, 0.92, 0.86, 0.98)` | `Color(ThemeUx.COLOR_TEXT_DARK, 0.98)` | `COLOR_TEXT_DARK` | 0.022 |
+| `crafting/crafting_ui.gd` | 58 | `Color(0.96, 0.92, 0.86, 0.98)` | `Color(ThemeUx.COLOR_TEXT_DARK, 0.98)` | `COLOR_TEXT_DARK` | 0.022 |
+
+**El alpha se pasa explicito donde el literal lo tenia** (0.98 en los dos paneles),
+porque `COLOR_TEXT_DARK` vale alpha 1.0: el token pelado habria cambiado la
+transparencia de los dos paneles. En los tres sitios del reloj el literal era
+opaco y el token tambien, asi que ahi va el token directo.
+
+**Por que `ThemeUxRef` y no `ThemeUx` en el reloj.** `w_reloj.gd` no usaba ningun
+simbolo del tema y **es precargado por suites `--script` headless**
+(`caso_reloj_tests.gd` L18, `test_reloj_localizacion.gd` L54). En ese modo los
+`class_name` globales no resuelven (E-30, GUIA-GODOT/06), asi que se agrego
+`const ThemeUxRef := preload("res://scripts/ui/theme/theme_ux.gd")` — el mismo
+patron que ya usa `scripts/ui/feedback_accion_m53.gd`. Los otros dos archivos ya
+referenciaban `ThemeUx` de forma global y no se toco su estilo.
+
+**Punto ciego del auditor, encontrado al medir (no al revisar).** Despues de la
+tanda, `archivos_con_token` subio 21 -> 23 cuando habia **tres** archivos nuevos
+con token. Causa: el conteo usaba `ThemeUx\.COLOR_[A-Z0-9_]+`, que no matchea la
+forma con alias (`ThemeUxRef.COLOR_...`) porque en `ThemeUxRef.` el caracter que
+sigue a `ThemeUx` es `R`, no un punto. El efecto era un **subconteo preexistente**
+de 1 archivo (`feedback_accion_m53.gd`, que ya usaba el alias). Corregido a
+`(?:ThemeUx|ThemeUxRef)\.COLOR_[A-Z0-9_]+` y **cubierto con fixture**: el corpus
+sintetico limpio gano `reloj_alias.gd` (token por preload con alias) y un check
+que exige `archivos_con_token == 2` en ese corpus.
+
+**Prueba EN ROJO del check nuevo** (`sonda_alias.py`, descartable): se inyecta el
+regex viejo -> `19 checks, 1 fallo(s)`, la linea dice *«cuenta el token por
+class_name Y por preload con alias (medido=1)»* y el `EXIT` es **1**; al restaurar
+los bytes el `sha256` vuelve a `e4e659c3f2c865766412237acaea376870c40a892b4f03b80c1a679d85e59711`
+y el control final sale `19/0 EXIT 0`. Piso de checks **18 -> 19 MEDIDO** (no
+estimado), `--selftest` **19/0 x3**.
+
+**Medido antes -> despues** (auditor sobre 1216 `.gd`):
+
+| Metrica | Antes | Despues |
+|---|---|---|
+| `literales_duplican_token` | 18 | **13** |
+| `archivos_con_token` | 21 | **25** (+3 de la tanda, +1 que el subconteo ocultaba) |
+| `archivos_con_literal` | 92 | 92 |
+| `literales_fuera_paleta` | 280 | 280 (fuera de alcance a proposito) |
+| `violaciones_duras` | 20 | **15** |
+
+Las 15 duras = los 13 literales restantes (otros modulos) + las 2 de L138
+(`colocacion` y `compra` sin feedback). El delta es exactamente **-5**, que es el
+tamano de la tanda.
+
+**Los 13 que quedan, por archivo y modulo:**
+
+| Archivo | Sitios | Modulo / nota |
+|---|---|---|
+| `player/player.gd` | 5 | M11 — el bloque mas grande, sin tanda pedida |
+| `fasttravel/fast_travel_effect.gd` | 2 | M68 |
+| `dialogos/ui/dialogue_ui.gd` | 1 | M21 — **NO TOCAR** |
+| `main_island.gd` | 1 | escena raiz |
+| `mapa/map_canvas.gd` | 1 | M54 |
+| `stream/pantalla_carga.gd` | 1 | M63 — **NO TOCAR** |
+| `world/block_catalog.gd` | 1 | M08 |
+| `ui/widgets/minimap_widget.gd` | 1 | M54 — literal **no** igual al token (dist 0.03) |
+
+**Regresion ejecutada con binario real** (no leida): `--check-only` de los 3
+archivos tocados **EXIT 0 / 0 errores**; `test_reloj_localizacion` **6/0 EXIT 0**;
+`qa_m16_ui_cerrada` y `qa_m16_panel_mejora` **RESULTADO=OK EXIT 0**; las 6 suites
+de M53 verdes (capas 14/0, no_redundancia 7/0, extremos 9/0, lista_larga 7/0,
+feedback 64/0, wcag 17/0 = **118 checks, 0 fallos**), `SCRIPT ERROR` **0**.
+
+**Rojo ajeno que aparece en la regresion y NO es mio:** `caso_reloj_tests` sale
+**29 checks / 1 fallo EXIT 1**, y el fallo es el scan `C56/E89/E90`
+(«0 lecturas de reloj-SO en gameplay»). Los 6 archivos que lo disparan son
+`scripts/rendimiento/memoria/sesion_m62_*.gd` y `test_m62_chunks_presupuesto.gd`,
+que usan `Time.get_datetime_string_from_system` y **estan en HEAD desde
+`2dfed83` (2026-10-19)**, mientras que el scan se toco por ultima vez el
+2026-10-16. La whitelist tiene `res://scripts/performance/` pero los archivos
+viven en `res://scripts/rendimiento/`. No es efecto de esta tanda (los 3 archivos
+tocados tienen **0** ocurrencias de las APIs del scan) y **no se toco**: agregar
+la entrada a la whitelist es decision de M30, y cambiar los timestamps es de M62.
+Queda reportado al director.
+### 8.11 Tanda 3 de L159: 7 literales mas, y 3 que NO se unifican por semantica (2026-10-25, Log 2184)
+
+**Decision del director (msg 400):** se mantiene `DIST_TOKEN_IGUAL = 0.05`, **no**
+byte-exacta. El objetivo de tokenizar es consolidar literales sueltos a un token NAMED
+(consistencia de diseno), no preservar un literal que nadie definio intencionalmente.
+Los 5 sitios de la tanda 2 no se revierten (0.017/0.022, dentro de tolerancia). Regla
+para los 13 restantes: la misma 0.05, y se deja en NO TOCAR solo lo que difiera >0.05
+o sea decision de diseno / dueno.
+
+**Reparto de los 13 medidos:** 3 quedan afuera por **dueno** (no por distancia) y 10 se
+evaluaron por semantica. De esos 10, **7 se unifican** y **3 no**, con causa medida.
+
+| Archivo | Linea | Antes | Despues | Token | Dist. |
+|---|---|---|---|---|---|
+| `player/player.gd` | 1020 | `Color(0.85, 0.65, 0.30, 0.45)` | `Color(ThemeUx.COLOR_ACCENT_OCRE, 0.45)` | `COLOR_ACCENT_OCRE` | 0.037 |
+| `player/player.gd` | 1036 | `Color(0.95, 0.93, 0.86)` | `ThemeUx.COLOR_TEXT_DARK` | `COLOR_TEXT_DARK` | 0.017 |
+| `player/player.gd` | 1060 | `Color(0.14, 0.16, 0.24, 0.92)` | `Color(ThemeUx.COLOR_BG_ARENA, 0.92)` | `COLOR_BG_ARENA` | 0.000 |
+| `player/player.gd` | 1062 | `Color(0.85, 0.65, 0.30, 0.35)` | `Color(ThemeUx.COLOR_ACCENT_OCRE, 0.35)` | `COLOR_ACCENT_OCRE` | 0.037 |
+| `player/player.gd` | 1070 | `Color(0.95, 0.93, 0.86)` | `ThemeUx.COLOR_TEXT_DARK` | `COLOR_TEXT_DARK` | 0.017 |
+| `fasttravel/fast_travel_effect.gd` | 16 | `Color(0.10, 0.12, 0.20, 1.0)` | `Color(ThemeUx.COLOR_PRESSED, 1.0)` | `COLOR_PRESSED` | 0.041 |
+| `fasttravel/fast_travel_effect.gd` | 18 | `Color(0.92, 0.76, 0.40, 1.0)` | `Color(ThemeUx.COLOR_HIGHLIGHT_GOLD, 1.0)` | `COLOR_HIGHLIGHT_GOLD` | 0.000 |
+
+**El alpha se pasa explicito** donde el literal tenia alpha propio (0.45 / 0.92 / 0.35),
+porque `COLOR_ACCENT_OCRE` y `COLOR_BG_ARENA` traen el suyo (1.0 y 0.94). En los sitios
+opacos va el token pelado. Los dos `const` de `fast_travel_effect.gd` compilan con
+`ThemeUx.COLOR_*` dentro de un inicializador constante (`--check-only` EXIT 0).
+
+**Los 3 que NO se unifican, con causa medida (no por comodidad):**
+
+| Archivo | Linea | Literal | Token que sugiere la distancia | Por que no |
+|---|---|---|---|---|
+| `main_island.gd` | 245 | `Color(0.96, 0.94, 0.88)` | `COLOR_TEXT_DARK` (0.041) | Es `mat.albedo_color`: **albedo de material 3D** (arena blanca, paleta Maldivas). Atar la arena del terreno al color del **texto** de UI hace que un cambio tipografico repinte el mundo |
+| `world/block_catalog.gd` | 78 | `Color(0.96, 0.94, 0.88)` | `COLOR_TEXT_DARK` (0.041) | Es el color del **bloque de arena** (`BlockType.SAND`). Mismo razonamiento: dominio mundo, no UI |
+| `mapa/map_canvas.gd` | 45 | `Color(0.12, 0.15, 0.18, 1.0)` | `COLOR_PRESSED` (0.042) | Es un **fondo**; `COLOR_PRESSED` es el estado presionado de un boton. Ademas `COLOR_BG_ARENA` (la semantica correcta) queda **fuera** de tolerancia por canal (0.06 > 0.05), asi que la unica opcion dentro de la regla seria la semanticamente equivocada |
+
+**Hallazgo de la herramienta (limitacion declarada del auditor).** La sugerencia de
+`detalle_duplican` es **vecino mas cercano por distancia**, y la distancia no conoce el
+dominio: para los 3 casos de arriba propone un token de UI para un color de mundo o para
+un fondo. El auditor sirve para **encontrar candidatos**, no para decidir la unificacion;
+la decision es semantica y se mide leyendo el sitio. Es la familia de la trampa 92
+(detector laxo): un numero alto de candidatos no es senal de buena deteccion.
+
+**Propuesta al director (no aplicada):** un token propio de mundo
+`COLOR_ARENA_SAND = Color(0.96, 0.94, 0.88)` que cubra `main_island` L245 y
+`block_catalog` L78; y decidir aparte el fondo de `map_canvas` (es de M54, con HOLD
+vigente sobre el minimapa).
+
+**Medido antes -> despues** (auditor sobre 1216 `.gd`):
+
+| Metrica | Antes | Despues |
+|---|---|---|
+| `literales_duplican_token` | 13 | **6** |
+| `violaciones_duras` | 15 | **8** |
+| `archivos_con_token` | 25 | **26** |
+| `archivos_con_literal` | 92 | 92 |
+| `literales_fuera_paleta` | 280 | 280 (intactos) |
+
+Delta exacto **-7** = tamano de la tanda. Los 6 que quedan: 3 por dueno
+(`dialogue_ui` M21, `pantalla_carga` M63, `minimap_widget` HOLD M54) y los 3 de la tabla
+de excepciones semanticas.
+
+**E-30, esta vez medido en sentido contrario.** `player.gd` no usaba ningun simbolo del
+tema y se toco con `ThemeUx` **global**, sin alias por preload. No fue una suposicion:
+`test_player_m11.gd` hace `load("res://scripts/player/player.gd")` y asevera que el
+script carga (A1), y la suite sale **30/0 EXIT 0** con el token global; ademas
+`qa_fast_travel_fx.gd` ya cargaba `fast_travel_effect.gd` (que usa `ThemeUx` desde antes)
+y seguia verde. La precaucion del alias (§8.10) aplica al caso medido alli, no como regla
+general: se mide por archivo, con la suite que lo carga.
+
+**Regresion con binario real:** `--check-only` de los 2 archivos **EXIT 0 / 0 errores**.
+`test_player_m11` 30/0 (baseline 30/0), `test_player_cableado_m11` 71/0,
+`qa_fast_travel_fx` 45 OK con **diff normalizado sin cambios de comportamiento** (solo
+timestamp de sesion y conteo del spawner de M36, ambos volatiles; los 2 `ERROR` de
+singleton/subtitle son **preexistentes**, identicos en el baseline). Las 6 suites de M53
+x3 = **118 checks, 0 fallos, 0 SCRIPT ERROR en 18 corridas**; `--selftest` del auditor
+**19/0 x3** (piso 19).
+
+**Fe de erratas.** El titulo de §8.10 citaba *"Log 2182"*. El 2182 es de **M33
+Agricultura** (Step-5); el log de la tanda 2 es el **2183**. Corregido el numero, sin
+tocar el resto del contenido.
+

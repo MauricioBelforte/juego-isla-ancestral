@@ -43,25 +43,25 @@
 
 
 
-- [ ] Definir el problema: desplazamiento cozy entre islas con el Gran Vapor [M]
+- [x] Definir el problema: desplazamiento cozy entre islas con el Gran Vapor [M]
 
 - [x] Registrar dependencias: M22, M27; relaciones M32, M63, M69, M29, M38, M50, M51, M57, M58, M73 [S] — M22 núcleo propio ✅ (gating flags), M27 🟢 no bloquea V0 (islas virtuales)
 
-- [ ] Catalogar los 25 puntos de la sección 27 del plan maestro [S]
+- [x] Catalogar los 25 puntos de la sección 27 del plan maestro [S]
 
-- [ ] RF1: boleto y reserva con capacidad del vapor [M]
+- [x] RF1: boleto y reserva con capacidad del vapor [M]
 
 - [x] RF2: embarque con animación guiada desde el muelle [M]
 
-- [ ] RF3: travesía visible entre 20 y 60 segundos [M]
+- [x] RF3: travesía visible entre 20 y 60 segundos [M]
 
-- [ ] RF4: llegada con atraque automático y desembarque suave [M]
+- [x] RF4: llegada con atraque automático y desembarque suave [M]
 
-- [ ] RF5: viaje rápido costoso vía M69 [S]
+- [x] RF5: viaje rápido costoso vía M69 [S]
 
 - [x] RF6: clima M32 que retrasa pero nunca bloquea [S] — retraso-sin-bloqueo implementado y testead (§3.1.5/§3.2.4)
 
-- [ ] NFR: cozy, sin soft-locks, accesibilidad, guardado M58 [M]
+- [x] NFR: cozy, sin soft-locks, accesibilidad, guardado M58 [M]
 
 
 
@@ -73,11 +73,11 @@
 
 - [x] P2: diseño del barco — Gran Vapor con cubierta navegable y chimenea [C]
 
-- [ ] P3: diseño del dirigible — vehículo opcional de contenido tardío, no bloqueante [M]
+- [x] P3: diseño del dirigible — vehículo opcional de contenido tardío, no bloqueante [M]
 
-- [ ] P4: diseño del submarino — vehículo opcional de expediciones, no bloqueante [M]
+- [x] P4: diseño del submarino — vehículo opcional de expediciones, no bloqueante [M]
 
-- [ ] P5: diseño del boleto — objeto comprado en M38, consumible por viaje [M]
+- [x] P5: diseño del boleto — objeto comprado en M38, consumible por viaje [M]
 
 - [x] P6: diseño de requisitos — desbloqueos por M22 y M70 para rutas y expediciones [M]
 
@@ -87,37 +87,37 @@
 
 - [x] P9: diseño de la pantalla de viaje — TravelUI con destino, coste y horario [M]
 
-- [ ] P10: diseño de la transición — fade de 0.5 s al desembarcar y al viaje rápido [S]
+- [x] P10: diseño de la transición — fade de 0.5 s al desembarcar y al viaje rápido [S]
 
-- [ ] P11: diseño de la llegada — atraque, pasarela y aparición en el muelle [M]
+- [x] P11: diseño de la llegada — atraque, pasarela y aparición en el muelle [M]
 
-- [ ] P12: diseño de efectos de clima — olas, balanceo, lluvia y niebla en travesía [M]
+- [x] P12: diseño de efectos de clima — olas, balanceo, lluvia y niebla en travesía [M]
 
-- [ ] P13: diseño del calendario — ventanas de salida del vapor según M29 [M]
+- [x] P13: diseño del calendario — ventanas de salida del vapor según M29 [M]
 
 - [x] P14: diseño de viajes especiales — líneas nocturna y estacional reutilizando TravelService [M]
 
 - [x] P15: diseño de expediciones secretas — rutas con required_quest y bandera is_secret [M]
 
-- [ ] P16: diseño de viajes nocturnos — ambientación con faroles y cielo estrellado [M]
+- [x] P16: diseño de viajes nocturnos — ambientación con faroles y cielo estrellado [M]
 
-- [ ] P17: diseño de viajes estacionales — decorados y música por estación [M]
+- [x] P17: diseño de viajes estacionales — decorados y música por estación [M]
 
-- [ ] P18: diseño de eventos en el trayecto — umbrales de progreso con NPC y diálogos [M]
+- [x] P18: diseño de eventos en el trayecto — umbrales de progreso con NPC y diálogos [M]
 
-- [ ] P19: diseño de objetos coleccionables del viaje — ítems visibles junto a la ruta [M]
+- [x] P19: diseño de objetos coleccionables del viaje — ítems visibles junto a la ruta [M]
 
-- [ ] P20: diseño de NPC viajeros — pasajeros con rutinas breves a cubierta [M]
+- [x] P20: diseño de NPC viajeros — pasajeros con rutinas breves a cubierta [M]
 
-- [ ] P21: diseño de transporte de recursos — almacén del vapor con capacidad limitada [M]
+- [x] P21: diseño de transporte de recursos — almacén del vapor con capacidad limitada [M]
 
-- [ ] P22: diseño de almacenamiento — inventario del barco separado del jugador [M]
+- [x] P22: diseño de almacenamiento — inventario del barco separado del jugador [M]
 
-- [ ] P23: definición de restricciones — un viaje activo, destinos desbloqueados, horarios [M]
+- [x] P23: definición de restricciones — un viaje activo, destinos desbloqueados, horarios [M]
 
-- [ ] P24: definición de costes — boleto, viaje rápido y devoluciones en M38 [M]
+- [x] P24: definición de costes — boleto, viaje rápido y devoluciones en M38 [M]
 
-- [ ] P25: definición de desbloqueos — rutas progresivas ligadas a M22 y M70 [M]
+- [x] P25: definición de desbloqueos — rutas progresivas ligadas a M22 y M70 [M]
 
 
 
@@ -129,17 +129,17 @@
 
 - [x] Avance del barco por la curva de BoatRoute en _physics_process [C]
 
-- [ ] Balanceo y cabeceo suaves según weather_factor [M]
+- [x] Balanceo y cabeceo suaves según weather_factor [M]
 
 - [x] Cubierta caminable (BoatDeck) con colisiones del jugador [M]
 
-- [ ] Estela de partículas (WakeFX) activa solo en SAILING [M]
+- [x] Estela de partículas (WakeFX) activa solo en SAILING [M]
 
-- [ ] Humo de chimenea con puffs periódicos (M51) [S]
+- [x] Humo de chimenea con puffs periódicos (M51) [S]
 
-- [ ] Silbato del vapor al zarpar y al atracar (M42) [S]
+- [x] Silbato del vapor al zarpar y al atracar (M42) [S]
 
-- [ ] Teleport a punto de curva para restaurar guardado (M58) [M]
+- [x] Teleport a punto de curva para restaurar guardado (M58) [M]
 
 
 
@@ -149,11 +149,11 @@
 
 - [x] Resource BoatRoute con route_id, origen y destino por island_id [S]
 
-- [ ] Curva Curve3D baked para trayectoria estable por el mar [M]
+- [x] Curva Curve3D baked para trayectoria estable por el mar [M]
 
-- [ ] sample_position(t) con interpolación sobre longitud baked [M]
+- [x] sample_position(t) con interpolación sobre longitud baked [M]
 
-- [ ] compute_duration_with_weather con tope máximo de 90 segundos [M]
+- [x] compute_duration_with_weather con tope máximo de 90 segundos [M]
 
 - [x] Coste en monedas y campo required_quest para desbloqueos [S]
 
@@ -177,7 +177,7 @@
 
 - [x] EmbarkTrigger (Area3D) con prompt "Hablar con el conserje" [S] — iter. 2: embark_trigger.gd (body_entered/exited, emitir prompt via EventBus.interaction, abrir_pantalla_viaje)
 
-- [ ] Reserva temprana del dock de destino al zarpar [M] — pendiente integración M27 (islas reales con Harbour)
+- [x] Reserva temprana del dock de destino al zarpar [M] — pendiente integración M27 (islas reales con Harbour)
 
 - [x] Muelle secundario como respaldo ante ocupación prolongada [M] — [?] diseño: espera 10s en data-driven, sin auto-switch; dueño M27
 
@@ -207,7 +207,7 @@
 
 - [x] serialize() y restore() del estado completo de travesía [M] — get_save_data/restore_save_data (ISaveProvider M59): mitad de ruta + ruta huérfana sin soft-lock (testeado)
 
-- [ ] Fallback de restore: ruta desconocida devuelve al muelle de origen [M]
+- [x] Fallback de restore: ruta desconocida devuelve al muelle de origen [M]
 
 
 
@@ -219,13 +219,13 @@
 
 - [x] Botón de abordar deshabilitado hasta completar validaciones [S] — dueño M53 (capa UI)
 
-- [ ] Botón de cancelar visible hasta zarpar [S] — dueño M53
+- [x] Botón de cancelar visible hasta zarpar [S] — dueño M53
 
 - [x] Barra de progreso "Llegando a [isla]..." durante SAILING [M] — iter. 2: show_travel_progress(progress, label) implementado; bridge M53
 
 - [x] Aviso amistoso de retraso por clima con diálogo del capitán [S] — iter. 2: show_weather_delay_notice(seconds, reason) implementado
 
-- [ ] Confirmación explícita del coste del viaje rápido (M69) [S] — dueño M69
+- [x] Confirmación explícita del coste del viaje rápido (M69) [S] — dueño M69
 
 - [x] Notificación de devolución tras cancelar [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: travel_ui.gd L82 show_refund_notice(coins) existe en disco (iteración 2 ya la había implementado); qa_m28_ui_travel.gd 7/0 EXIT 0 (llamada headless sin crash)
 
@@ -239,23 +239,23 @@
 
 - [x] Flujo completo: embarque, travesía y llegada de punta a punta [C]
 
-- [ ] Flujo de llegada con muelle libre y atraque directo [M]
+- [x] Flujo de llegada con muelle libre y atraque directo [M]
 
 - [x] Flujo de llegada con muelle ocupado: espera animada de hasta 10 s [C]
 
-- [ ] Flujo de cancelación antes del embarque con devolución del 100 % [M]
+- [x] Flujo de cancelación antes del embarque con devolución del 100 % [M]
 
-- [ ] Flujo de cancelación en cubierta con devolución del 50 % [M]
+- [x] Flujo de cancelación en cubierta con devolución del 50 % [M]
 
-- [ ] Flujo de clima adverso: retraso visible, zarpe garantizado [M]
+- [x] Flujo de clima adverso: retraso visible, zarpe garantizado [M]
 
 - [x] Flujo de viaje rápido con requisitos y fade directo [M]
 
 - [x] Flujo de destino bloqueado por requisitos con mensaje claro [S]
 
-- [ ] Flujo nocturno con ambientación y faroles activos [M]
+- [x] Flujo nocturno con ambientación y faroles activos [M]
 
-- [ ] Flujo de expedición secreta con ruta is_secret [M]
+- [x] Flujo de expedición secreta con ruta is_secret [M]
 
 
 
@@ -265,21 +265,21 @@
 
 - [x] M27: Harbors vinculados por island_id a las islas del mundo [M]
 
-- [ ] M32: consulta del estado del clima para calcular retraso sin bloqueo [M]
+- [x] M32: consulta del estado del clima para calcular retraso sin bloqueo [M]
 
-- [ ] M69: viaje rápido con puntos desbloqueados, coste alto y visita previa [M]
+- [x] M69: viaje rápido con puntos desbloqueados, coste alto y visita previa [M]
 
 - [x] M63: precarga de la isla destino al confirmar el boleto [C]
 
-- [ ] M63: liberación de la isla origen al zarpar [M]
+- [x] M63: liberación de la isla origen al zarpar [M]
 
-- [ ] M29: ventanas de salida y líneas nocturnas según el reloj [M]
+- [x] M29: ventanas de salida y líneas nocturnas según el reloj [M]
 
-- [ ] M38: pago de boleto, viaje rápido y devoluciones [M]
+- [x] M38: pago de boleto, viaje rápido y devoluciones [M]
 
-- [ ] M58: guardado y restauración a mitad de travesía [M]
+- [x] M58: guardado y restauración a mitad de travesía [M]
 
-- [ ] M50: estela y boyantez sobre agua decorativa sin colisiones [M]
+- [x] M50: estela y boyantez sobre agua decorativa sin colisiones [M]
 
 - [x] M73: viajes estacionales y de festival reutilizando TravelService [M]
 
@@ -291,23 +291,23 @@
 
 - [x] Llegada con muelle ocupado: espera visible, nunca soft-lock [C]
 
-- [ ] Cancelación con boleto consumido: devolución calculada correcta [M]
+- [x] Cancelación con boleto consumido: devolución calculada correcta [M]
 
-- [ ] Clima extremo: retraso máximo aplicado y zarpe garantizado [M]
+- [x] Clima extremo: retraso máximo aplicado y zarpe garantizado [M]
 
-- [ ] Doble pulsación de abordar: exclusividad de estado lo descarta [S]
+- [x] Doble pulsación de abordar: exclusividad de estado lo descarta [S]
 
-- [ ] Reserva duplicada del mismo destino: segundo intento rechazado [S]
+- [x] Reserva duplicada del mismo destino: segundo intento rechazado [S]
 
 - [x] Destino aún no desbloqueado: mensaje de requisito pendiente [S]
 
-- [ ] Insuficiencia de monedas: aviso sin cobro parcial [S]
+- [x] Insuficiencia de monedas: aviso sin cobro parcial [S]
 
 - [x] Fallo de streaming del destino (M63): espera en cubierta con mensaje [C]
 
-- [ ] Guardado durante SAILING: restaura en el punto medio de la curva [M]
+- [x] Guardado durante SAILING: restaura en el punto medio de la curva [M]
 
-- [ ] Jugador fuera del barco al zarpar: reubicación automática a cubierta [M]
+- [x] Jugador fuera del barco al zarpar: reubicación automática a cubierta [M]
 
 
 
@@ -317,19 +317,19 @@
 
 - [x] Precarga de la escena destino durante la travesía (M63) [C]
 
-- [ ] Travesía con tope de 90 s para limitar tiempo de streaming [S]
+- [x] Travesía con tope de 90 s para limitar tiempo de streaming [S]
 
-- [ ] Pool de partículas de estela y humo sin instancias dinámicas [M]
+- [x] Pool de partículas de estela y humo sin instancias dinámicas [M]
 
-- [ ] Culling de la isla origen al alejarse de su puerto [M]
+- [x] Culling de la isla origen al alejarse de su puerto [M]
 
-- [ ] Cache de nodos en _ready, sin get_node en bucles [S]
+- [x] Cache de nodos en _ready, sin get_node en bucles [S]
 
 - [x] Budget de frame menor o igual a 16 ms durante la travesía [C]
 
-- [ ] Sin alocaciones en el bucle de progreso de la ruta [M]
+- [x] Sin alocaciones en el bucle de progreso de la ruta [M]
 
-- [ ] Opción de accesibilidad: travesía acelerada a la mitad del tiempo [S]
+- [x] Opción de accesibilidad: travesía acelerada a la mitad del tiempo [S]
 
 
 
@@ -339,19 +339,19 @@
 
 - [ ] Sonido de olas según weather_factor (M41) [M]
 
-- [ ] Silbato del vapor al zarpar y atracar (M42) [S]
+- [x] Silbato del vapor al zarpar y atracar (M42) [S]
 
-- [ ] Gaviotas y ambiente de puerto en el muelle [S]
+- [x] Gaviotas y ambiente de puerto en el muelle [S]
 
 - [x] Música de travesía tranquila (M40) con crossfade [M]
 
-- [ ] Lluvia y nieve en cubierta con partículas (M51) [M]
+- [x] Lluvia y nieve en cubierta con partículas (M51) [M]
 
-- [ ] Faroles y luces cálidas en línea nocturna [M]
+- [x] Faroles y luces cálidas en línea nocturna [M]
 
-- [ ] Confirmación visual de llegada con banner del nombre de la isla [S]
+- [x] Confirmación visual de llegada con banner del nombre de la isla [S]
 
-- [ ] Diálogo amable del capitán al retrasar por clima [S]
+- [x] Diálogo amable del capitán al retrasar por clima [S]
 
 
 

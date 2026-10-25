@@ -1,10 +1,19 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"cultivos": {
 		"tomate": {"crecimiento_dias": 4, "rendimiento_min": 2, "rendimiento_max": 4, "temporada": "verano"},
 		"zanahoria": {"crecimiento_dias": 3, "rendimiento_min": 2, "rendimiento_max": 3, "temporada": "primavera"},
 		"calabaza": {"crecimiento_dias": 6, "rendimiento_min": 1, "rendimiento_max": 2, "temporada": "otono"},
 		"fibra_algodon": {"crecimiento_dias": 3, "rendimiento_min": 2, "rendimiento_max": 4, "temporada": "verano"},
-		"baya_roja": {"crecimiento_dias": 2, "rendimiento_min": 1, "rendimiento_max": 3, "temporada": "otono"}
+		"baya_roja": {"crecimiento_dias": 2, "rendimiento_min": 1, "rendimiento_max": 3, "temporada": "otono"},
+		"trigo_invernal": {"crecimiento_dias": 5, "rendimiento_min": 2, "rendimiento_max": 3, "temporada": "invierno"},
+		"higo": {"crecimiento_dias": 8, "rendimiento_min": 2, "rendimiento_max": 3, "temporada": "verano", "arbol": true},
+		"maiz_ancestral": {"crecimiento_dias": 6, "rendimiento_min": 1, "rendimiento_max": 2, "temporada": "todas", "ancestral": true, "desbloqueo_dias": 20},
+		"flor_tulipan": {"crecimiento_dias": 3, "temporada": "primavera", "flor": true, "decorativa": true},
+		"flor_lavanda": {"crecimiento_dias": 3, "temporada": "verano", "flor": true, "decorativa": true},
+		"lirio_estelar": {"crecimiento_dias": 4, "rendimiento_min": 1, "rendimiento_max": 1, "temporada": "todas", "flor": true, "hibrido_de": ["flor_lavanda", "flor_tulipan"]},
+		"trigo_estelar": {"crecimiento_dias": 6, "rendimiento_min": 1, "rendimiento_max": 2, "temporada": "verano", "raro": true, "desbloqueo_dias": 30, "reproduccion": 2},
+		"palma_coco": {"crecimiento_dias": 7, "rendimiento_min": 2, "rendimiento_max": 4, "temporada": "todas", "arbol": true, "isla": true},
+		"flor_coral": {"crecimiento_dias": 4, "rendimiento_min": 1, "rendimiento_max": 2, "temporada": "verano", "flor": true, "isla": true}
 	}
 }

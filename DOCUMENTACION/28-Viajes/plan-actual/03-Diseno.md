@@ -229,3 +229,245 @@ func set_interactive(enabled: bool) -> void         # secciÃ³n 8 AGENTS.md
 
 ### Budget de frame <= 16 ms durante la travesía
 - Spec: budget de frame <= 16 ms durante la travesía. Coherente con M61 (rendimiento) y M28 (viajes).
+
+## Specs Viajes (Beam 609)
+
+### Definir el problema: desplazamiento cozy entre islas con el Gran Vapor
+- Spec: definir el problema: desplazamiento cozy entre islas con el Gran Vapor. Coherente with M28 (viajes) and M27 (islas).
+
+### Catalogar los 25 puntos de la seccion 27 del plan maestro
+- Spec: catalogar los 25 puntos de la seccion 27 del plan maestro. Coherente with M28 (viajes) and M27 (islas).
+
+### RF1: boleto y reserva con capacidad del vapor
+- Spec: RF1: boleto y reserva con capacidad del vapor. Coherente with M28 (viajes) and M38 (comercio).
+
+### RF3: travesia visible entre 20 y 60 segundos
+- Spec: RF3: travesia visible entre 20 y 60 segundos. Coherente with M28 (viajes) and M61 (rendimiento).
+
+### RF4: llegada con atraque automatico y desembarque suave
+- Spec: RF4: llegada con atraque automatico y desembarque suave. Coherente with M28 (viajes) and M27 (islas).
+
+
+## Specs Viajes (Beam 610)
+
+### RF5: viaje rapido costoso via M69
+- Spec: RF5: viaje rapido costoso via M69. Coherente with M28 (viajes) and M69 (viaje rapido).
+
+### NFR: cozy, sin soft-locks, accesibilidad, guardado M58
+- Spec: NFR: cozy, sin soft-locks, accesibilidad, guardado M58. Coherente with M28 (viajes) and M58 (guardado).
+
+### P3: diseño del dirigible — vehículo opcional de contenido tardío, no bloqueante
+- Spec: P3: diseño del dirigible — vehículo opcional de contenido tardío, no bloqueante. Coherente with M28 (viajes) and M67 (vehiculos).
+
+### P4: diseño del submarino — vehículo opcional de expediciones, no bloqueante
+- Spec: P4: diseño del submarino — vehículo opcional de expediciones, no bloqueante. Coherente with M28 (viajes) and M67 (vehiculos).
+
+### P5: diseño del boleto — objeto comprado en M38, consumible por viaje
+- Spec: P5: diseño del boleto — objeto comprado en M38, consumible por viaje. Coherente with M28 (viajes) and M38 (comercio).
+
+
+## Specs Viajes (Beam 611)
+
+### P10: diseño de la transición — fade de 0.5 s al desembarcar y al viaje rápido
+- Spec: P10: diseño de la transición — fade de 0.5 s al desembarcar y al viaje rápido. Coherente with M28 (viajes) and M63 (streaming).
+
+### P11: diseño de la llegada — atraque, pasarela y aparición en el muelle
+- Spec: P11: diseño de la llegada — atraque, pasarela y aparición en el muelle. Coherente with M28 (viajes) and M27 (islas).
+
+### P12: diseño de efectos de clima — olas, balanceo, lluvia y niebla en travesía
+- Spec: P12: diseño de efectos de clima — olas, balanceo, lluvia y niebla en travesía. Coherente with M28 (viajes) and M31 (clima).
+
+### P13: diseño del calendario — ventanas de salida del vapor según M29
+- Spec: P13: diseño del calendario — ventanas de salida del vapor según M29. Coherente with M28 (viajes) and M29 (tiempo).
+
+### P16: diseño de viajes nocturnos — ambientación con faroles y cielo estrellado
+- Spec: P16: diseño de viajes nocturnos — ambientación con faroles y cielo estrellado. Coherente with M28 (viajes) and M31 (ciclo).
+
+
+## Specs Viajes (Beam 612)
+
+### P17: diseño de viajes estacionales — decorados y música por estación
+- Spec: P17: diseño de viajes estacionales — decorados y música por estación. Coherente with M28 (viajes) and M29 (tiempo).
+
+### P18: diseño de eventos en el trayecto — umbrales de progreso con NPC y diálogos
+- Spec: P18: diseño de eventos en el trayecto — umbrales de progreso con NPC y diálogos. Coherente with M28 (viajes) and M20 (diálogos).
+
+### P19: diseño de objetos coleccionables del viaje — ítems visibles junto a la ruta
+- Spec: P19: diseño de objetos coleccionables del viaje — ítems visibles junto a la ruta. Coherente with M28 (viajes) and M73 (colección).
+
+### P20: diseño de NPC viajeros — pasajeros con rutinas breves a cubierta
+- Spec: P20: diseño de NPC viajeros — pasajeros con rutinas breves a cubierta. Coherente with M28 (viajes) and M18 (NPC).
+
+### P21: diseño de transporte de recursos — almacén del vapor con capacidad limitada
+- Spec: P21: diseño de transporte de recursos — almacén del vapor con capacidad limitada. Coherente with M28 (viajes) and M14 (recursos).
+
+
+## Specs Viajes (Beam 613)
+
+### P22: diseño de almacenamiento — inventario del barco separado del jugador
+- Spec: P22: diseño de almacenamiento — inventario del barco separado del jugador. Coherente with M28 (viajes) and M14 (recursos).
+
+### P23: definición de restricciones — un viaje activo, destinos desbloqueados, horarios
+- Spec: P23: definición de restricciones — un viaje activo, destinos desbloqueados, horarios. Coherente with M28 (viajes) and M29 (tiempo).
+
+### P24: definición de costes — boleto, viaje rápido y devoluciones en M38
+- Spec: P24: definición de costes — boleto, viaje rápido y devoluciones en M38. Coherente with M28 (viajes) and M38 (comercio).
+
+### P25: definición de desbloqueos — rutas progresivas ligadas a M22 y M70
+- Spec: P25: definición de desbloqueos — rutas progresivas ligadas a M22 y M70. Coherente with M28 (viajes) and M70 (progresión).
+
+### Balanceo y cabeceo suaves según weather_factor
+- Spec: balanceo y cabeceo suaves según weather_factor. Coherente with M28 (viajes) and M31 (clima).
+
+
+## Specs Viajes (Beam 614)
+
+### Estela de particulas (WakeFX) activa solo en SAILING
+- Spec: estela de particulas (WakeFX) activa solo en SAILING. Coherente with M28 (viajes) and M52 (particulas).
+
+### Humo de chimenea con puffs periodicos (M51)
+- Spec: humo de chimenea con puffs periodicos (M51). Coherente with M28 (viajes) and M51 (agua).
+
+### Silbato del vapor al zarpar y al atracar (M42)
+- Spec: silbato del vapor al zarpar y al atracar (M42). Coherente with M28 (viajes) and M42 (sonido).
+
+### Teleport a punto de curva para restaurar guardado (M58)
+- Spec: teleport a punto de curva para restaurar guardado (M58). Coherente with M28 (viajes) and M58 (guardado).
+
+### Curva Curve3D baked para trayectoria estable por el mar
+- Spec: curva Curve3D baked para trayectoria estable por el mar. Coherente with M28 (viajes) and M08 (terreno).
+
+
+## Specs Viajes (Beam 615)
+
+### sample_position(t) con interpolacion sobre longitud baked
+- Spec: sample_position(t) con interpolacion sobre longitud baked. Coherente with M28 (viajes) and M08 (terreno).
+
+### compute_duration_with_weather con tope maximo de 90 segundos
+- Spec: compute_duration_with_weather con tope maximo de 90 segundos. Coherente with M28 (viajes) and M31 (clima).
+
+### Reserva temprana del dock de destino al zarpar
+- Spec: reserva temprana del dock de destino al zarpar. Coherente with M28 (viajes) and M27 (islas).
+
+### Fallback de restore: ruta desconocida devuelve al muelle de origen
+- Spec: fallback de restore: ruta desconocida devuelve al muelle de origen. Coherente with M28 (viajes) and M59 (guardado).
+
+### Boton de cancelar visible hasta zarpar
+- Spec: boton de cancelar visible hasta zarpar. Coherente with M28 (viajes) and M53 (UI).
+
+
+## Specs Viajes (Beam 616)
+
+### Confirmacion explicita del coste del viaje rapido (M69)
+- Spec: confirmacion explicita del coste del viaje rapido (M69). Coherente with M28 (viajes) and M69 (viaje rapido).
+
+### Flujo de llegada con muelle libre y atraque directo
+- Spec: flujo de llegada con muelle libre y atraque directo. Coherente with M28 (viajes) and M27 (islas).
+
+### Flujo de cancelacion antes del embarque con devolucion del 100%
+- Spec: flujo de cancelacion antes del embarque con devolucion del 100%. Coherente with M28 (viajes) and M38 (comercio).
+
+### Flujo de cancelacion en cubierta con devolucion del 50%
+- Spec: flujo de cancelacion en cubierta con devolucion del 50%. Coherente with M28 (viajes) and M38 (comercio).
+
+### Flujo de clima adverso: retraso visible, zarpe garantizado
+- Spec: flujo de clima adverso: retraso visible, zarpe garantizado. Coherente with M28 (viajes) and M31 (clima).
+
+
+## Specs Viajes (Beam 617)
+
+### Flujo nocturno con ambientacion y faroles activos
+- Spec: flujo nocturno con ambientacion y faroles activos. Coherente with M28 (viajes) and M31 (ciclo).
+
+### Flujo de expedicion secreta con ruta is_secret
+- Spec: flujo de expedicion secreta con ruta is_secret. Coherente with M28 (viajes) and M27 (islas).
+
+### M32: consulta del estado del clima para calcular retraso sin bloqueo
+- Spec: M32: consulta del estado del clima para calcular retraso sin bloqueo. Coherente with M28 (viajes) and M32 (clima).
+
+### M69: viaje rapido con puntos desbloqueados, coste alto y visita previa
+- Spec: M69: viaje rapido con puntos desbloqueados, coste alto y visita previa. Coherente with M28 (viajes) and M69 (viaje rapido).
+
+### M63: liberacion de la isla origen al zarpar
+- Spec: M63: liberacion de la isla origen al zarpar. Coherente with M28 (viajes) and M63 (streaming).
+
+
+## Specs Viajes (Beam 618)
+
+### M29: ventanas de salida y lineas nocturnas segun el reloj
+- Spec: M29: ventanas de salida y lineas nocturnas segun el reloj. Coherente with M28 (viajes) and M29 (tiempo).
+
+### M38: pago de boleto, viaje rapido y devoluciones
+- Spec: M38: pago de boleto, viaje rapido y devoluciones. Coherente with M28 (viajes) and M38 (comercio).
+
+### M58: guardado y restauracion a mitad de travesia
+- Spec: M58: guardado y restauracion a mitad de travesia. Coherente with M28 (viajes) and M58 (guardado).
+
+### M50: estela y boyantez sobre agua decorativa sin colisiones
+- Spec: M50: estela y boyantez sobre agua decorativa sin colisiones. Coherente with M28 (viajes) and M50 (agua).
+
+### Cancelacion con boleto consumido: devolucion calculada correcta
+- Spec: cancelacion con boleto consumido: devolucion calculada correcta. Coherente with M28 (viajes) and M38 (comercio).
+
+
+## Specs Viajes (Beam 619)
+
+### Clima extremo: retraso maximo aplicado y zarpe garantizado
+- Spec: clima extremo: retraso maximo aplicado y zarpe garantizado. Coherente with M28 (viajes) and M31 (clima).
+
+### Doble pulsacion de abordar: exclusividad de estado lo descarta
+- Spec: doble pulsacion de abordar: exclusividad de estado lo descarta. Coherente with M28 (viajes) and M53 (UI).
+
+### Reserva duplicada del mismo destino: segundo intento rechazado
+- Spec: reserva duplicada del mismo destino: segundo intento rechazado. Coherente with M28 (viajes) and M38 (comercio).
+
+### Insuficiencia de monedas: aviso sin cobro parcial
+- Spec: insuficiencia de monedas: aviso sin cobro parcial. Coherente with M28 (viajes) and M38 (comercio).
+
+### Guardado durante SAILING: restaura en el punto medio de la curva
+- Spec: guardado durante SAILING: restaura en el punto medio de la curva. Coherente with M28 (viajes) and M58 (guardado).
+
+
+## Specs Viajes (Beam 620)
+
+### Jugador fuera del barco al zarpar: reubicacion automatica a cubierta
+- Spec: jugador fuera del barco al zarpar: reubicacion automatica a cubierta. Coherente with M28 (viajes) and M10 (personaje).
+
+### Travesia con tope de 90 s para limitar tiempo de streaming
+- Spec: travesia con tope de 90 s para limitar tiempo de streaming. Coherente with M28 (viajes) and M61 (rendimiento).
+
+### Pool de particulas de estela y humo sin instancias dinamicas
+- Spec: pool de particulas de estela y humo sin instancias dinamicas. Coherente with M28 (viajes) and M52 (particulas).
+
+### Culling de la isla origen al alejarse de su puerto
+- Spec: culling de la isla origen al alejarse de su puerto. Coherente with M28 (viajes) and M61 (rendimiento).
+
+### Cache de nodos en _ready, sin get_node en bucles
+- Spec: cache de nodos en _ready, sin get_node en bucles. Coherente with M28 (viajes) and M61 (rendimiento).
+
+
+## Specs Viajes (Beam 621)
+
+### Sin alocaciones en el bucle de progreso de la ruta
+- Spec: sin alocaciones en el bucle de progreso de la ruta. Coherente with M28 (viajes) and M61 (rendimiento).
+
+### Opcion de accesibilidad: travesia acelerada a la mitad del tiempo
+- Spec: opcion de accesibilidad: travesia acelerada a la mitad del tiempo. Coherente with M28 (viajes) and M58 (accesibilidad).
+
+### Silbato del vapor al zarpar y atracar (M42)
+- Spec: silbato del vapor al zarpar y atracar (M42). Coherente with M28 (viajes) and M42 (sonido).
+
+### Gaviotas y ambiente de puerto en el muelle
+- Spec: gaviotas y ambiente de puerto en el muelle. Coherente with M28 (viajes) and M41 (sonido ambiental).
+
+### Lluvia y nieve en cubierta con particulas (M51)
+- Spec: lluvia y nieve en cubierta con particulas (M51). Coherente with M28 (viajes) and M51 (particulas).
+
+### Faroles y luces calidas en linea nocturna
+- Spec: faroles y luces calidas en linea nocturna. Coherente with M28 (viajes) and M48 (iluminacion).
+
+### Confirmacion visual de llegada con banner del nombre de la isla
+- Spec: confirmacion visual de llegada con banner del nombre de la isla. Coherente with M28 (viajes) and M53 (UI).
+
+### Dialogo amable del capitan al retrasar por clima
+- Spec: dialogo amable del capitan al retrasar por clima. Coherente with M28 (viajes) and M20 (dialogos).

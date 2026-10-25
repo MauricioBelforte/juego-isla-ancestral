@@ -237,3 +237,161 @@ func grant_exhibition_reward(exhibition_id: String) -> bool
 
 ### Acuario con nado animado por spline (peces)
 - Spec: variante para peces: acuario con nado animado por spline. Coherente con M37 (museos) y M34 (pesca).
+
+## Specs Museos (Beam 635)
+
+### Escena museum.tscn creada con entrada, mostrador y cartel de progreso
+- Spec: escena museum.tscn creada con entrada, mostrador y cartel de progreso. Coherente with M37 (museos) and M08 (terreno).
+
+### Sala de fauna con dioramas para avistamientos de M36
+- Spec: sala de fauna con dioramas para avistamientos de M36. Coherente with M37 (museos) and M36 (fauna).
+
+### Sala de fosiles con pedestales y montajes de M25
+- Spec: sala de fosiles con pedestales y montajes de M25. Coherente with M37 (museos) and M25 (templo).
+
+### Curador NPC con dialogo de recepcion y agradecimientos cozy
+- Spec: curador NPC con dialogo de recepcion y agradecimientos cozy. Coherente with M37 (museos) and M18 (NPC).
+
+### Iluminacion interior calida y estatica (horneada)
+- Spec: iluminacion interior calida y estatica (horneada). Coherente with M37 (museos) and M48 (iluminacion).
+
+
+## Specs Museos (Beam 636)
+
+### Sala de fauna con dioramas para avistamientos de M36
+- Spec: sala de fauna con dioramas para avistamientos de M36. Coherente with M37 (museos) and M36 (fauna).
+
+### Sala de fosiles con pedestales y montajes de M25
+- Spec: sala de fosiles con pedestales y montajes de M25. Coherente with M37 (museos) and M25 (templo).
+
+### Curador NPC con dialogo de recepcion y agradecimientos cozy
+- Spec: curador NPC con dialogo de recepcion y agradecimientos cozy. Coherente with M37 (museos) and M18 (NPC).
+
+### Navegabilidad completa de salas sin colisiones molestas
+- Spec: navegabilidad completa de salas sin colisiones molestas. Coherente with M37 (museos) and M08 (terreno).
+
+### Inspeccion de pieza abre panel con nombre, procedencia y curiosidad
+- Spec: inspeccion de pieza abre panel con nombre, procedencia y curiosidad. Coherente with M37 (museos) and M53 (UI).
+
+
+## Specs Museos (Beam 637)
+
+### Variante para fosiles: montaje en pedestal con iluminacion suave
+- Spec: variante para fosiles: montaje en pedestal con iluminacion suave. Coherente with M37 (museos) and M25 (templo).
+
+### Variante para fauna: diorama estatico con el modelo avistado
+- Spec: variante para fauna: diorama estatico con el modelo avistado. Coherente with M37 (museos) and M36 (fauna).
+
+### Variante para arte: cuadro en marco sobre pared
+- Spec: variante para arte: cuadro en marco sobre pared. Coherente with M37 (museos) and M45 (arte 2D).
+
+### Pool de slots libres con prefab ligero (sin modelos pesados)
+- Spec: pool de slots libres con prefab ligero (sin modelos pesados). Coherente with M37 (museos) and M61 (rendimiento).
+
+### Mensajes cozy del curador al aceptar cada pieza
+- Spec: mensajes cozy del curador al aceptar cada pieza. Coherente with M37 (museos) and M18 (NPC).
+
+
+## Specs Museos (Beam 638)
+
+### Trofeo final por museo 100% completado
+- Spec: trofeo final por museo 100% completado. Coherente with M37 (museos) and M72 (logros).
+
+### Pieza secreta opcional desbloqueable por descubrimiento (plan futuro)
+- Spec: pieza secreta opcional desbloqueable por descubrimiento (plan futuro). Coherente with M37 (museos) and M71 (progresion).
+
+### Vinculo bidireccional: consultar piezas del museo desde el diario
+- Spec: vinculo bidireccional: consultar piezas del museo desde el diario. Coherente with M37 (museos) and M55 (diario).
+
+### El diario no interrumpe el flujo de donacion (receptor async)
+- Spec: el diario no interrumpe el flujo de donacion (receptor async). Coherente with M37 (museos) and M55 (diario).
+
+### Items donables registrados antes de restaurar el museo (cola pendiente)
+- Spec: items donables registrados antes de restaurar el museo (cola pendiente). Coherente with M37 (museos) and M59 (guardado).
+
+
+## Specs Museos (Beam 639)
+
+### Inventario vacio al abrir el panel de donacion (UI vacia elegante)
+- Spec: inventario vacio al abrir el panel de donacion (UI vacia elegante). Coherente with M37 (museos) and M53 (UI).
+
+### Cierre del juego entre consumo y escritura de guardado (rollback)
+- Spec: cierre del juego entre consumo y escritura de guardado (rollback). Coherente with M37 (museos) and M59 (guardado).
+
+### Doble interaccion simultanea sobre la misma vitrina
+- Spec: doble interaccion simultanea sobre la misma vitrina. Coherente with M37 (museos) and M53 (UI).
+
+### Recompensa otorgada con inventario lleno (cola o correo de items)
+- Spec: recompensa otorgada con inventario lleno (cola o correo de items). Coherente with M37 (museos) and M14 (recursos).
+
+### Restauracion de curaduria (nombres y descripciones) al cargar
+- Spec: restauracion de curaduria (nombres y descripciones) al cargar. Coherente with M37 (museos) and M59 (guardado).
+
+
+## Specs Museos (Beam 640)
+
+### Panel de donacion con lista filtrada de items donables
+- Spec: panel de donacion con lista filtrada de items donables. Coherente with M37 (museos) and M53 (UI).
+
+### Barra de progreso por exposicion con contador de piezas
+- Spec: barra de progreso por exposicion con contador de piezas. Coherente with M37 (museos) and M53 (UI).
+
+### Tooltip de vitrina al pasar el cursor (nombre y estado)
+- Spec: tooltip de vitrina al pasar el cursor (nombre y estado). Coherente with M37 (museos) and M53 (UI).
+
+### Feedback visual al donar (particulas y brillo en la vitrina)
+- Spec: feedback visual al donar (particulas y brillo en la vitrina). Coherente with M37 (museos) and M52 (particulas).
+
+### Feedback de rechazo con motivo visible
+- Spec: feedback de rechazo con motivo visible. Coherente with M37 (museos) and M53 (UI).
+
+
+## Specs Museos (Beam 641)
+
+### Cartel de recompensa al completar exposicion
+- Spec: cartel de recompensa al completar exposicion. Coherente with M37 (museos) and M53 (UI).
+
+### Navegacion completa por mando y teclado en la UI
+- Spec: navegacion completa por mando y teclado en la UI. Coherente with M37 (museos) and M56 (interfaz).
+
+### Mensajes de estado durante la carga del edificio
+- Spec: mensajes de estado durante la carga del edificio. Coherente with M37 (museos) and M63 (streaming).
+
+### Vitrinas instanciadas solo para piezas registradas
+- Spec: vitrinas instanciadas solo para piezas registradas. Coherente with M37 (museos) and M61 (rendimiento).
+
+### Culling de salas distantes desde el jugador
+- Spec: culling de salas distantes desde el jugador. Coherente with M37 (museos) and M61 (rendimiento).
+
+
+## Specs Museos (Beam 642)
+
+### Iluminacion estatica horneada en interiores
+- Spec: iluminacion estatica horneada en interiores. Coherente with M37 (museos) and M48 (iluminacion).
+
+### Acuarios con simulacion de nado ligera sin fisicas por pez
+- Spec: acuarios con simulacion de nado ligera sin fisicas por pez. Coherente with M37 (museos) and M34 (pesca).
+
+
+## Specs Museos (Beam 643)
+
+### Carga de sala bajo 250 ms medido con Profiler
+- Spec: carga de sala bajo 250 ms medido con Profiler. Coherente with M37 (museos) and M61 (rendimiento).
+
+### Inspeccion y UI sin micro-stutter en el frame budget
+- Spec: inspeccion y UI sin micro-stutter en el frame budget. Coherente with M37 (museos) and M61 (rendimiento).
+
+### Test: vitrina ocupada nunca sobrescrita
+- Spec: test: vitrina ocupada nunca sobrescrita. Coherente with M37 (museos) and M112 (testing).
+
+### Test: museo 100% desbloquea el trofeo final
+- Spec: test: museo 100% desbloquea el trofeo final. Coherente with M37 (museos) and M72 (logros).
+
+### Test: integracion de senales con M36/M34/M25/M55
+- Spec: test: integracion de senales con M36/M34/M25/M55. Coherente with M37 (museos) and M112 (testing).
+
+### Test: edge cases (inventario vacio, sala incorrecta, item inexistente)
+- Spec: test: edge cases (inventario vacio, sala incorrecta, item inexistente). Coherente with M37 (museos) and M112 (testing).
+
+### Recorrido manual: visitar el museo completo tres veces seguidas
+- Spec: recorrido manual: visitar el museo completo tres veces seguidas. Coherente with M37 (museos) and M114 (playtest).

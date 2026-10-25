@@ -1017,7 +1017,7 @@ func _create_hotbar_hud() -> void:
 	var eq_sb := StyleBoxFlat.new()
 	eq_sb.bg_color = Color(0.08, 0.09, 0.13, 0.92)  # D102: opaco (el mundo beige lo aclaraba con 0.75)
 	eq_sb.set_corner_radius_all(8)
-	eq_sb.border_color = Color(0.85, 0.65, 0.30, 0.45)  # D102: borde ambar sutil
+	eq_sb.border_color = Color(ThemeUx.COLOR_ACCENT_OCRE, 0.45)  # D102: borde ambar sutil
 	eq_sb.set_border_width_all(1)
 	eq_sb.content_margin_left = 10.0
 	eq_sb.content_margin_right = 10.0
@@ -1033,7 +1033,7 @@ func _create_hotbar_hud() -> void:
 	equipped.name = "EquippedLabel"
 	equipped.text = ""
 	equipped.add_theme_font_size_override("font_size", 14)  # D102: 13 era chico
-	equipped.add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))
+	equipped.add_theme_color_override("font_color", ThemeUx.COLOR_TEXT_DARK)
 	equipped.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
 	equipped.add_theme_constant_override("outline_size", 5)  # D102: outline para contraste
 	equipped.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -1057,9 +1057,9 @@ func _create_hotbar_hud() -> void:
 		slot.custom_minimum_size = Vector2(48, 48)
 		slot.name = "Slot_%d" % i
 		var slot_sb := StyleBoxFlat.new()
-		slot_sb.bg_color = Color(0.14, 0.16, 0.24, 0.92)  # D102: opaco (el beta 0.7 se veia beige sobre la arena)
+		slot_sb.bg_color = Color(ThemeUx.COLOR_BG_ARENA, 0.92)  # D102: opaco (el beta 0.7 se veia beige sobre la arena)
 		slot_sb.set_corner_radius_all(8)
-		slot_sb.border_color = Color(0.85, 0.65, 0.30, 0.35)  # D102: borde ambar
+		slot_sb.border_color = Color(ThemeUx.COLOR_ACCENT_OCRE, 0.35)  # D102: borde ambar
 		slot_sb.set_border_width_all(2)
 		slot.add_theme_stylebox_override("panel", slot_sb)
 		var lbl := Label.new()
@@ -1067,7 +1067,7 @@ func _create_hotbar_hud() -> void:
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		lbl.add_theme_font_size_override("font_size", 11)  # D102: 9 era ilegible
-		lbl.add_theme_color_override("font_color", Color(0.95, 0.93, 0.86))
+		lbl.add_theme_color_override("font_color", ThemeUx.COLOR_TEXT_DARK)
 		lbl.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
 		lbl.add_theme_constant_override("outline_size", 4)  # D102: outline para contraste
 		slot.add_child(lbl)
