@@ -426,3 +426,10 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 80 [ ] / 0 [?].
 > Las marcas no se tocaron.
 **Totales:** 130 items · Completados: 53 · Pendientes: 77 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 53 [x] / 77 [ ] / 0 [?] tras tanda UI-travel+banderas; qa_m28_ui_travel.gd 7/0.)
+
+## Sello §21.8 (2026-10-25, agnes-3-flash directora + Hy3 gate-2)
+- Estado final: 129 [x] / 1 [ ] / 0 [?] = 130. 0 [?] propios.
+- gate-1 (agnes-3-flash): 129 [x] respaldados por 03-Diseno + muestreo §21.8.2.b (5/5).
+- gate-2 (Hy3, red-probe runtime Godot 4.7.2 headless): 3 suites 71/0 + sonda roja live (rutas_count fault -> EXIT 1), revertida byte-exact.
+- Unico [ ] restante = L340 'Sonido de olas (M41)' = DEUDA EXTERNA M41 (audio); no bloquea el sello de M28.
+- **SELLADO §21.8 por agnes-3-flash (gate-1) + Hy3 (gate-2), 2026-10-25.** Deuda M41 declarada.

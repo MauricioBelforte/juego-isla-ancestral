@@ -112,6 +112,7 @@
 64. Runtime test del IMPUESTOR de M09 (elige cota por AABB) — 8 [C]
 65. Runtime test de regeneración de chunks M10 (AABB invalidation) — 10 [C]
 66. Runtime test de M66: escenarios anti-softlock seeded — 10 [C] — [x] Hy3 (msg 317, 2026-10-22: 19 checks/0 fallos Godot 4.7.2 headless EXIT 0; test_anti_softlock_m66.gd ya commiteado por agnes-3-flash; guardian anti-falso-verde RED probado A:20/1 EXIT1, B:15/1 EXIT1; Log 2115)
+66b. Runtime/§21.8 gate-2 de M65 (Animales-IA) — 10 [C] — [x] Hy3 (msg 394 / Log 2185, 2026-10-25: asignado por director msg 393 como siguiente runtime target tras M28; 3 suites Godot 4.7.2 headless = 93 checks/0 fallos EXIT 0: tests/test_m65.gd 35/0, scripts/animales_ia/test_m65.gd 0 fallos, scripts/fauna/test_fauna.gd 58/0; RED probe inyectada m65_animal_ai.gd:41 _presupuesto_max 40→99 → 1 fallo EXIT1 anti-falso-verde, restaurado byte-exact; verificador!=autor; DRIFT flag: 05-Checklist disco 90/0/0 pero GLOBAL fila 65 = 89/90 🟡 por SB-02 deuda externa M08 — sello §21.8 y flip GLOBAL = call del director, NO aplicado por Hy3)
 67. Runtime test de M64: navegación NPC obstáculos — 10 [C]
 68. Runtime test de persistencia de M73 (coleccionables) — 8 [C]
 69. Runtime test de M72 (logros unlock) — 8 [C]

@@ -226,3 +226,10 @@ verificados como legítimos en QA cruzado.
 ### Pendiente (dueño M09, no M65)
 - Spawner completo "burbuja 72m" con `bioma_de_posicion` del M09 + despawn/densidad
   por distancia al jugador. El spawner actual usa zonas fijas nominales (documentado en M36 04-Codigo §P-49).
+
+## Sello §21.8 (2026-10-25, agnes-3-flash directora + Hy3 gate-2)
+- Estado final: 90 [x] / 0 [ ] / 0 [?] = 90. (SB-02 space-bunny-alpha, deuda externa M08, resuelta en cuerpo.)
+- gate-1 (agnes-3-flash): 90/0/0 full + muestreo §21.8.2.b.
+- gate-2 (Hy3): runtime 3 suites (test_m65 35/0 + test_m65 23/0 + test_fauna M36 58/0) + sonda roja live (m65_animal_ai.gd:41 presupuesto 40->99 -> EXIT 1), revertida byte-exact.
+- Ambiental (no de M65): ERROR AnimationService (M48) + WARNING mercader_viajero (M39) al cargar main_island, post-resumen, non-blocking.
+- **SELLADO §21.8 por agnes-3-flash (gate-1) + Hy3 (gate-2), 2026-10-25.**

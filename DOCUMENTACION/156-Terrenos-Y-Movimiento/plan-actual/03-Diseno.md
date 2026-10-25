@@ -614,3 +614,164 @@ os clasACES de item (M156 catalogo) usan el mismo budget generator (ref Beam 381
 # Spec TerrainFootstepAudio (Beam 480)
 ### Agregar TerrainFootstepAudio al jugador
 - Spec: 	errain_footstep_audio.gd (extends Node) se agrega como hijo del jugador (M11). Consume 	errain_changed del TerrainDetector y reproduce el footstep correspondiente vía play_footstep(terrain_id). Coherente con M11 (movimiento) y M156 (terrenos).
+
+## Specs Terrenos y Movimiento (Beam 653)
+
+### Crear particulas_ceped.gd
+- Spec: crear particulas_ceped.gd. atria-dawn 2026-10-13 (lote I): NO se crea el .gd nombrado; la implementacion es scenes/terrenos/particulas_ceped.tscn (CPUParticles3D con props directas) + gestor unico terrain_particles.gd. CPUParticles3D no soporta script por terreno. Coherente with M156 (terrenos) and M52 (particulas).
+
+### Configurar ParticleProcessMaterial para ceped
+- Spec: configurar ParticleProcessMaterial para ceped. atria-dawn 2026-10-13 (lote I): NO aplica — CPUParticles3D NO soporta process_material (propiedad de GPUParticles3D, medido en runtime). Configuracion equivalente directa en el nodo particulas_ceped.tscn. Coherente with M156 (terrenos) and M52 (particulas).
+
+### Configurar ParticleProcessMaterial para barro
+- Spec: configurar ParticleProcessMaterial para barro. atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_barro.tscn. Coherente with M156 (terrenos) and M52 (particulas).
+
+### Configurar ParticleProcessMaterial para arena
+- Spec: configurar ParticleProcessMaterial para arena. atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_arena.tscn. Coherente with M156 (terrenos) and M52 (particulas).
+
+### Configurar ParticleProcessMaterial para agua
+- Spec: configurar ParticleProcessMaterial para agua. atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_agua.tscn. Coherente with M156 (terrenos) and M52 (particulas).
+
+
+## Specs Terrenos y Movimiento (Beam 654)
+
+### Configurar ParticleProcessMaterial para nieve
+- Spec: configurar ParticleProcessMaterial para nieve. atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_nieve.tscn. Coherente with M156 (terrenos) and M52 (particulas).
+
+### Configurar ParticleProcessMaterial para rocas
+- Spec: configurar ParticleProcessMaterial para rocas. atria-dawn 2026-10-13: no aplica (CPUParticles3D), config directa en particulas_rocas.tscn. Coherente with M156 (terrenos) and M52 (particulas).
+
+### Crear samples audio_ceped_step_1.wav
+- Spec: crear samples audio_ceped_step_1.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_ceped_step_2.wav
+- Spec: crear samples audio_ceped_step_2.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_barro_step_1.wav
+- Spec: crear samples audio_barro_step_1.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+
+## Specs Terrenos y Movimiento (Beam 655)
+
+### Crear samples audio_barro_step_2.wav
+- Spec: crear samples audio_barro_step_2.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_pavimento_step_1.wav
+- Spec: crear samples audio_pavimento_step_1.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_pavimento_step_2.wav
+- Spec: crear samples audio_pavimento_step_2.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_arena_step_1.wav
+- Spec: crear samples audio_arena_step_1.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_arena_step_2.wav
+- Spec: crear samples audio_arena_step_2.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+
+## Specs Terrenos y Movimiento (Beam 656)
+
+### Crear samples audio_agua_step_1.wav
+- Spec: crear samples audio_agua_step_1.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_agua_step_2.wav
+- Spec: crear samples audio_agua_step_2.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_nieve_step_1.wav
+- Spec: crear samples audio_nieve_step_1.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_nieve_step_2.wav
+- Spec: crear samples audio_nieve_step_2.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+
+## Specs Terrenos y Movimiento (Beam 657)
+
+### Crear samples audio_rocas_step_1.wav
+- Spec: crear samples audio_rocas_step_1.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear samples audio_rocas_step_2.wav
+- Spec: crear samples audio_rocas_step_2.wav. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Evitar reproduccion doble
+- Spec: evitar reproduccion doble. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Crear escena terrain_indicator.tscn
+- Spec: crear escena terrain_indicator.tscn (revertido: BUG-070 Familia A, artefacto inexistente). Estado honesto: spec documentada, implementacion pende. Coherente with M156 (terrenos) and M53 (UI).
+
+### Agregar TextureRect para icono de terreno
+- Spec: agregar TextureRect para icono de terreno. Coherente with M156 (terrenos) and M53 (UI).
+
+
+## Specs Terrenos y Movimiento (Beam 658)
+
+### Agregar Label para nombre de terreno
+- Spec: agregar Label para nombre de terreno. Coherente with M156 (terrenos) and M53 (UI).
+
+### Conectar signal terrain_changed a UI
+- Spec: conectar signal terrain_changed a UI. Coherente with M156 (terrenos) and M53 (UI).
+
+### Actualizar icono segun terreno
+- Spec: actualizar icono segun terreno. Coherente with M156 (terrenos) and M53 (UI).
+
+### Actualizar texto segun terreno
+- Spec: actualizar texto segun terreno. Coherente with M156 (terrenos) and M53 (UI).
+
+### Actualizar barra de progreso
+- Spec: actualizar barra de progreso. Coherente with M156 (terrenos) and M53 (UI).
+
+
+## Specs Terrenos y Movimiento (Beam 659)
+
+### Agregar TextureRect para icono de terreno
+- Spec: agregar TextureRect para icono de terreno. Coherente with M156 (terrenos) and M53 (UI).
+
+
+## Specs Terrenos y Movimiento (Beam 660)
+
+### Posicionar UI en esquina inferior
+- Spec: posicionar UI en esquina inferior. Coherente with M156 (terrenos) and M53 (UI).
+
+### Animar transiciones de UI
+- Spec: animar transiciones de UI. Coherente with M156 (terrenos) and M53 (UI).
+
+### Ajustar volumenes de audio por terreno
+- Spec: ajustar volumenes de audio por terreno. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Ajustar variacion de pitch por terreno
+- Spec: ajustar variacion de pitch por terreno. Coherente with M156 (terrenos) and M42 (sonido).
+
+### Ajustar intensidad de huellas por terreno
+- Spec: ajustar intensidad de huellas por terreno. Coherente with M156 (terrenos) and M52 (particulas).
+
+
+## Specs Terrenos y Movimiento (Beam 661)
+
+### Agregar Label para nombre de terreno
+- Spec: agregar Label para nombre de terreno. Coherente with M156 (terrenos) and M53 (UI).
+
+### Conectar signal terrain_changed a UI
+- Spec: conectar signal terrain_changed a UI. Coherente with M156 (terrenos) and M53 (UI).
+
+### Actualizar icono segun terreno
+- Spec: actualizar icono segun terreno. Coherente with M156 (terrenos) and M53 (UI).
+
+### Actualizar texto segun terreno
+- Spec: actualizar texto segun terreno. Coherente with M156 (terrenos) and M53 (UI).
+
+### Actualizar barra de progreso
+- Spec: actualizar barra de progreso. Coherente with M156 (terrenos) and M53 (UI).
+
+
+## Specs Terrenos y Movimiento (Beam 662)
+
+### Ajustar intensidad de particulas por terreno
+- Spec: ajustar intensidad de particulas por terreno. Coherente with M156 (terrenos) and M52 (particulas).
+
+### Ajustar colores de debug por terreno
+- Spec: ajustar colores de debug por terreno. Coherente with M156 (terrenos) and M108 (herramientas).
+
+### Agregar tooltips informativos
+- Spec: agregar tooltips informativos. Coherente with M156 (terrenos) and M53 (UI).
+
+### Animar transiciones de terreno
+- Spec: animar transiciones de terreno. Coherente with M156 (terrenos) and M53 (UI).

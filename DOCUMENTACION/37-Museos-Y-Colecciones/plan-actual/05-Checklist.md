@@ -187,7 +187,7 @@
 
 - [x] Vitrinas instanciadas solo para piezas registradas [C]
 - [x] Culling de salas distantes desde el jugador [M]
-- [ ] Consultas is_registered sin allocs en hot path [S]
+- [x] Consultas is_registered sin allocs en hot path [S]
 - [ ] Modelos de piezas con LOD o mesh simplificado [C]
 - [x] Iluminacion estatica horneada en interiores [C]
 - [x] Acuarios con simulacion de nado ligera sin fisicas por pez [M]

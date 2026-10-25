@@ -1070,3 +1070,97 @@ flippa por la mitad.
   diseño; suite bloque X; documentación en esta sección). M23 = **83 [x] /
   20 [ ] / 2 [?] = 105** (prefijo de línea; Totales sincronizado). Ofrecidos
   a revertir.
+
+## Iter. 20 — Documentación de contenido: estacionales/secretas, recompensas, consecuencias (Log 2186, 2026-10-25, Step-5-WorkBuddy)
+
+- **Alcance:** los 3 ítems de documentación propios que quedaban `[ ]` — L58
+  («Documentar historias estacionales y secretas»), L102 («Documentar
+  recompensas en el plan-actual») y L115 («Documentar consecuencias y
+  diálogos posteriores»)—, asignados por la directora en su nudge 226
+  («docs L58/L102/L115»). Tanda SOLO de documentación: 0 líneas de código
+  tocadas; toda la evidencia está medida sobre el disco de HOY
+  (2026-10-25 ~06:00).
+- **Suite de no-regresión (binario real):** `test_historias.gd`
+  **742 checks / 0 fallos / EXIT 0**, 0 SCRIPT ERROR (corrida 06:10).
+  Ruido de teardown medido y DESCARTADO como aborto: «ERROR: Failed to
+  retrieve non-existent singleton 'AnimationService'» cae en la línea 361 de
+  466 del log, DESPUÉS del resumen (línea 259) — es limpieza de NPCs
+  (VillagerManager), no aborta ninguna función de test.
+
+### L58 — Historias estacionales y secretas
+- **Secretas (propias, con respaldo):** 7 cadenas `oculta:true` medidas en
+  `data/historias/secundarias.json` — las 5 de la iter. 11
+  (cadena-mapa-secreto, cadena-cristal-oculto, cadena-diario-antiguo,
+  cadena-pergamino-mistico, cadena-mascara-ceremonial) +
+  cadena-secretta-luciernagas (del principal) + cadena-epilogo-guardian
+  (final secreto, iter. 19).
+- **Mecanismo de descubrimiento:** el campo `oculta` filtra la cadena de
+  `cadenas_disponibles()` hasta que se inicia (secondary_stories_service.gd
+  L138); 03-Diseno L58: se descubren por pistas del mundo (M22) o al leer un
+  objeto. Testeado end-to-end: bloque P (iter. 11) y bloque X (iter. 19).
+- **Estacionales (dueño M32):** 0 cadenas estacionales en disco (medido sobre
+  los 80 ids del catálogo: ninguna responde a siembra/vendimia/marea/
+  eclipse). Los ítems L52-L55 y L72 siguen `[ ]` con **dueño M32**; 03-Diseno
+  L70 define solo la variación estacional genérica. Alcance estacional
+  pendiente de su dueño: nada propio que documentar ni flippar.
+
+### L102 — Recompensas
+- **Schema:** `recompensa{diario?, cosmetico?}` (quest_chain.gd; cabecera del
+  servicio L9; ejemplo 03-Diseno L18: `{ diario: "capitulo-faro", cosmetico:
+  "farol de atardecer" }`).
+- **Validador:** recompensa presente obligatoria (secondary_stories_service.gd
+  L288-289, error «sin recompensa») + título único (validador de recompensas
+  únicas, testeado).
+- **Medido HOY sobre las 80 cadenas:** 80/80 con recompensa no vacía; **79**
+  con clave `diario`; **76** con clave `cosmetico`. La única sin `diario` es
+  cadena-secretta-luciernagas (`{cosmetico: "linterna de luciérnagas"}`):
+  pasa el validador porque la recompensa no está vacía.
+- **Contrato cozy:** 0 stats — el schema no tiene campo de stats (03-Diseno
+  L52: «10+ disfraces/sombreros/paletas de casa; nunca stats»); ítem
+  «Definir cero stats en recompensas» con respaldo en disco.
+- **Unicidad:** recompensa y consecuencia únicas, no duplicables (M66 cofre).
+  Medido: 80 flags de consecuencia distintos sobre 80 cadenas, 0 duplicados.
+- **Contenido pendiente (sigue `[ ]`, propio):** L97 (20 capítulos de diario),
+  L98 (recetas de conversación desbloqueables) y L99 (10+ cosméticos) — las
+  recompensas de contenido todavía no existen.
+
+### L115 — Consecuencias y diálogos posteriores
+- **Aplicación medida:** `completar_cadena()` escribe la consecuencia en
+  WorldState (M21) vía `get_node_or_null("/root/WorldState")`
+  (secondary_stories_service.gd L232-236).
+- **Las 12 del diseño (03-Diseno L53) vs disco, medidas HOY:**
+  | # | consecuencia (diseño) | flag medido | cadena | estado |
+  |---|---|---|---|---|
+  | 1 | faro encendido | faro_encendido | cadena-faro | [x] |
+  | 2 | jardín florecido | jardin_florecido | cadena-jardines | [x] |
+  | 3 | taller abierto | — | — | [ ] honesto (0 cadenas; guarda bloque S) |
+  | 4 | plaza decorada | plaza_decorada | cadena-epilogo-plaza | [x] |
+  | 5 | puente cruzable | puente_cruzable | cadena-puente | [x] |
+  | 6 | cofradía activa | cofradia_activa | cadena-cofradia | [x] |
+  | 7 | kiosko abierto | kiosko_abierto | cadena-construccion-kiosko | [x] |
+  | 8 | molino funcionando | molino_funcionando | cadena-molino | [x] |
+  | 9 | estación reparada | estacion_reparada | cadena-estacion | [x] |
+  | 10 | biblioteca iluminada | biblioteca_quemada_rescatada | cadena-biblioteca-quemada | DRIFT de nombre |
+  | 11 | camino al faro despejado | — | — | sin respaldo |
+  | 12 | puerto ampliado | — | — | sin respaldo |
+- **Hallazgos de la medición:** (a) DRIFT de nombre en la biblioteca — el
+  flag que se aplica es `biblioteca_quemada_rescatada`, no «iluminada»
+  (existe respaldo, con otro nombre/sentido); (b) «camino al faro despejado»
+  y «puerto ampliado» NO tienen flag en disco (los senderos y el muelle
+  medidos son de otro ámbito) y tampoco tienen ítem propio en el 05: el único
+  `[ ]` de consecuencia del 05 es «taller abierto» (guardado, 0 cadenas). Los
+  17 `[ ]` que quedan en el módulo = 11 de dueño externo (M32 x6: L52-L55/
+  L72/L150; M28 L70; M24 L92; M68 L148; M36 L151; M37 L152) + 6 propios: L34
+  (plaza, bloqueada por decisión del director), L97/L98/L99 (contenido de
+  recompensas), L109 (guardado) y L159 (test E2E).
+- **`dialogo_posterior`:** campo en el schema (quest_chain.gd L20) + cargado
+  por quest_chain_service.gd L68 — servicio NO cableado (el proveedor vivo es
+  SecondaryStoriesService). Medido: **0/80 cadenas lo usan**. El ítem
+  «Definir diálogos posteriores por estado de mundo» queda `[x] por la
+  existencia del campo; el CONTENIDO de los diálogos es del dueño M21.
+- **Cambio visual por consecuencia:** dueños M17/M18/M27 (03-Diseno L54).
+
+- **Flips del 05-Checklist con cita:** L58, L102 y L115 `[ ]` -> `[x]`
+  (documentación en esta sección + evidencia medida de disco de HOY; suite
+  742/0/EXIT 0 sin regresión). M23 = **86 [x] / 17 [ ] / 2 [?] = 105**
+  (prefijo de línea; Totales sincronizado). Ofrecidos a revertir.

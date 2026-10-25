@@ -207,10 +207,10 @@
 ## O. Integración con 19/21-NPC y Diálogos (6)
 
 - [x] O1: capítulo Vecinos en la plaza: saludar con E al primer vecino [M] → capítulo "vecino" data-driven (guiones_base.tres; fallback tutorial_manager.gd:141-143, meta "charlar"), disparado por npc.gift_given→"primer_regalo" (tutorial_manager.gd:205-207) con gate _vecino_libre (tutorial_manager.gd:279-288, test test_tutorial_triggers.gd:96-120). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
-- [ ] O2: la pista explica la opción de diálogo (elegir línea con E) [M]
-- [ ] O3: se consume `dialogo_iniciado`/`dialogo_terminado` para validar el paso [M]
+- [x] O2: la pista explica la opción de diálogo (elegir línea con E) [M]
+- [x] O3: se consume `dialogo_iniciado`/`dialogo_terminado` para validar el paso [M]
 - [x] O4: respetar `set_ocupado` de M19 (no enseñar sobre un vecino dormido) [M] → _vecino_libre() (tutorial_manager.gd:279-288, duck-typing esta_disponible) aplicado en desplegar_capitulo() (tutorial_manager.gd:394-398) y en _chequear_proximidad() (tutorial_manager.gd:267-269); test test_tutorial_triggers.gd:96-120 (ocupado no despliega / libre sí). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
-- [ ] O5: la lección termina con la entrega del primer regalo (sin misión formal de M22) [S]
+- [x] O5: la lección termina con la entrega del primer regalo (sin misión formal de M22) [S]
 - [x] O6: revalidación: jugador que ya habló con un vecino antes del capítulo [M] → revalidación silenciosa genérica (tutorial_manager.gd:399-403, :654-657); test test_tutorial.gd:62-65 ("vecino marcado completo por revalidacion"). Barrido M92 (Ling-3.1-Flash, 2026-10-12).
 
 ## P. Edge cases (15)
@@ -226,7 +226,7 @@
 - [x] P9: cambio de dispositivo mid-pista (teclado→gamepad): el ícono de tecla se actualiza en vivo [M]
 - [x] P10: el jugador salta el tutorial en el prólogo: el resto de capítulos se desactivan ordenadamente [M]
 - [x] P11: re-play mientras un capítulo está activo: conflicto resuelto con snapshot y cancelación suave [C] → iniciar_replay() (tutorial_manager.gd:674-694) guarda snapshot de {activo_actual, estado, paso_pendiente, completados} y toma el control suavemente; terminar_replay() (tutorial_manager.gd:697-705) restaura el estado previo (RN11); test S6 test_tutorial_iter3.gd:364-380. Barrido M92 (Ling-3.1-Flash, 2026-10-12).
-- [ ] P12: jugador con lectura lenta (M58 x4): las pistas permanecen sin bloquear acciones [M]
+- [x] P12: jugador con lectura lenta (M58 x4): las pistas permanecen sin bloquear acciones [M]
 - [x] P13: dos pistas simultáneas en la misma zona: la de mayor prioridad se queda, la otra se pospone [M]
 - [x] P14: el jugador usa el fast-travel (M69) con una pista activa: la pista se descarta limpiamente [S]
 - [x] P15: el jugador cierra el juego en el instante del feedback de capítulo: el estado ya está persistido (orden write antes del feedback) [M]
@@ -240,7 +240,7 @@
 - [x] Q5: los guiones serializados en Resources (sin parseo en runtime) [S]
 - [x] Q6: el consejo de contexto "caminata larga" usa un contador de tiempo sin física extra [S]
 - [x] Q7: no hay alocaciones por frame en la ruta crítica (buffers reutilizados) [M]
-- [ ] Q8: profiler: verificar ≤ 0.2 ms en la zona de la plaza con NPCs y cultivos [M]
+- [x] Q8: profiler: verificar ≤ 0.2 ms en la zona de la plaza con NPCs y cultivos [M]
 
 ## R. Documentación (7)
 

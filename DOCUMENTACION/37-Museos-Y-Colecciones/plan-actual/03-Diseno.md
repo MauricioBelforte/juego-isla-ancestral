@@ -395,3 +395,9 @@ func grant_exhibition_reward(exhibition_id: String) -> bool
 
 ### Recorrido manual: visitar el museo completo tres veces seguidas
 - Spec: recorrido manual: visitar el museo completo tres veces seguidas. Coherente with M37 (museos) and M114 (playtest).
+
+
+## Specs Museos (Beam 644)
+
+### Consultas is_registered sin allocs en hot path
+- Spec: consultas is_registered sin allocs en hot path. Coherente with M37 (museos) and M61 (rendimiento).

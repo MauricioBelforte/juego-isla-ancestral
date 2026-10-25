@@ -292,3 +292,86 @@ Notas: LISTA no requiere agua (espera al jugador sin penalización). Los árbole
 
 ### Deuda de rendimiento advance_day
 - Spec: deuda de rendimiento (advance_day tarda 407/434 ms sobre 395 cultivos, umbral 50 ms). Tick diario por lotes/diferido. Coherente con M33 (agricultura) y M61 (rendimiento).
+
+## Specs Agricultura (Beam 663)
+
+### P11: cultivos especiales — trigo invernal, higos, ancestrales de desbloqueo M22
+- Spec: P11: cultivos especiales — trigo invernal, higos, ancestrales de desbloqueo M22. Coherente with M33 (agricultura) and M22 (historia).
+
+### P13: flores — decorativas y sujetas a cruce
+- Spec: P13: flores — decorativas y sujetas a cruce. Coherente with M33 (agricultura) and M15 (recursos).
+
+### P15: hibridos — cruce de flores con reglas legibles (sin RNG oculto)
+- Spec: P15: hibridos — cruce de flores con reglas legibles (sin RNG oculto). Coherente with M33 (agricultura) and M15 (recursos).
+
+### P21: recetas con cultivos — catalogo M16 (ensaladas, pan, tintes, ofrendas)
+- Spec: P21: recetas con cultivos — catalogo M16 (ensaladas, pan, tintes, ofrendas). Coherente with M33 (agricultura) and M16 (crafting).
+
+### P22: venta — integracion M38/M39 con precios por calidad
+- Spec: P22: venta — integracion M38/M39 con precios por calidad. Coherente with M33 (agricultura) and M38 (comercio).
+
+
+## Specs Agricultura (Beam 664)
+
+### P23: semillas raras — reproducibles y con desbloqueo de progresion
+- Spec: P23: semillas raras — reproducibles y con desbloqueo de progresion. Coherente with M33 (agricultura) and M71 (progresion).
+
+### P24: cultivos de isla — palma de coco y flor de coral exclusivas
+- Spec: P24: cultivos de isla — palma de coco y flor de coral exclusivas. Coherente with M33 (agricultura) and M27 (islas).
+
+### Interaccion F sobre tierra arada abre selector de semillas (M70/M53)
+- Spec: interaccion F sobre tierra arada abre selector de semillas (M70/M53). Coherente with M33 (agricultura) and M53 (UI).
+
+### Cancelacion segura del selector sin consumir semillas
+- Spec: cancelacion segura del selector sin consumir semillas. Coherente with M33 (agricultura) and M53 (UI).
+
+### Notificacion de objetos obtenidos al cosechar (M53)
+- Spec: notificacion de objetos obtenidos al cosechar (M53). Coherente with M33 (agricultura) and M53 (UI).
+
+
+## Specs Agricultura (Beam 665)
+
+### Iconos de cultivos y semillas definidos en M45/M46
+- Spec: iconos de cultivos y semillas definidos en M45/M46. Coherente with M33 (agricultura) and M45 (arte 2D).
+
+### Venta de cosechas con precios por calidad (M38/M39)
+- Spec: venta de cosechas con precios por calidad (M38/M39). Coherente with M33 (agricultura) and M38 (comercio).
+
+### Navegacion M64 evita celdas cultivadas cuando hay ruta alternativa
+- Spec: navegacion M64 evita celdas cultivadas cuando hay ruta alternativa. Coherente with M33 (agricultura) and M64 (IA).
+
+### Cosecha con inventario lleno: sobrante devuelto con notificacion
+- Spec: cosecha con inventario lleno: sobrante devuelto con notificacion. Coherente with M33 (agricultura) and M14 (recursos).
+
+
+## Specs Agricultura (Beam 666)
+
+### Borrado de parcela (M17) con cultivos activos: aviso previo y devolucion de semillas
+- Spec: borrado de parcela (M17) con cultivos activos: aviso previo y devolucion de semillas. Coherente with M33 (agricultura) and M17 (construccion).
+
+### Visual por MultiMesh agrupado por especie/etapa
+- Spec: visual por MultiMesh agrupado por especie/etapa. Coherente with M33 (agricultura) and M61 (rendimiento).
+
+### LOD de 2 niveles para instancias
+- Spec: LOD de 2 niveles para instancias. Coherente with M33 (agricultura) and M61 (rendimiento).
+
+### Sin procesamiento por frame en estados pausados
+- Spec: sin procesamiento por frame en estados pausados. Coherente with M33 (agricultura) and M61 (rendimiento).
+
+
+## Specs Agricultura (Beam 667)
+
+### HUD agricola: indicador de estado por cultivo apuntado (M53)
+- Spec: HUD agricola: indicador de estado por cultivo apuntado (M53). Coherente with M33 (agricultura) and M53 (UI).
+
+### Notificacion cozy al madurar cultivos
+- Spec: notificacion cozy al madurar cultivos. Coherente with M33 (agricultura) and M53 (UI).
+
+### Tooltip con hints legibles y calidos
+- Spec: tooltip con hints legibles y calidos. Coherente with M33 (agricultura) and M53 (UI).
+
+### Tutorial amable: "La comida es opcional aqui" (M92, M152)
+- Spec: tutorial amable: "La comida es opcional aqui" (M92, M152). Coherente with M33 (agricultura) and M92 (tutorial).
+
+### Test: determinismo entre guardado y recarga (mismo dia, mismo estado)
+- Spec: test: determinismo entre guardado y recarga (mismo dia, mismo estado). Coherente with M33 (agricultura) and M59 (guardado).

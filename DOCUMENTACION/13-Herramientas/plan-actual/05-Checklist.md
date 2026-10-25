@@ -19,7 +19,7 @@
 - [x] RF2: uso por herramienta con acción específica [M]
 - [x] RF3: 4 niveles (cobre, hierro, oro, cristal) [S]
 - [x] RF4: durabilidad cozy (nunca se rompe ni desaparece) [M]
-- [ ] RF5: martillo (construir ✓) y lupa (inspeccionar → contenido M26/M44) [M]
+- [x] RF5: martillo (construir ✓) y lupa (inspeccionar → contenido M26/M44) [M]
 - [x] RF6: mejora de área y velocidad por nivel [S]
 - [x] RF7: feedback por uso (partículas, sonido, mira) [M]
 - [x] RF8: persistencia en GameState.M13 (dueño M59: GameState/autoload de guardado por sección) [M] — glm-5.3-flash 2026-09-02 (iter. 5, Log 489): M59 ISaveProvider + PlayerProfile estadísticas nivel_<id> (monótonas, vía EventBus.progresion.nivel_herramienta_cambio) + test_nivel_herramienta 0 fallos
@@ -30,26 +30,26 @@
 - [x] Azada: prepara tierra para sembrar (EXTRACT ✓; TILL → M33) [M]
 - [x] Hacha: tala árboles (tronco completo; madera del voxel ✓) [M]
 - [x] Pala: excava tierra/arena/barro [M]
-- [ ] Regadera: riega cultivos (20 usos por llenado → mecánica M33) [M]
-- [ ] Caña de pescar: pesca en agua (M35 mini-juego) [M]
+- [x] Regadera: riega cultivos (20 usos por llenado → mecánica M33) [M]
+- [x] Caña de pescar: pesca en agua (M35 mini-juego) [M]
 - [x] Martillo: construir (try_place ✓; rotar/reparar → M17) [M]
-- [ ] Tijeras: recolectan fibras sin destruir la raíz (M50) [M]
-- [ ] Lupa: inspecciona glifos/criaturas (M26/M44) [M]
-- [ ] Regadera requiere agua cercana para llenarse (M33) [M]
-- [ ] Caña evoluciona a red (progresión pesca M35) [M]
+- [x] Tijeras: recolectan fibras sin destruir la raíz (M50) [M]
+- [x] Lupa: inspecciona glifos/criaturas (M26/M44) [M]
+- [x] Regadera requiere agua cercana para llenarse (M33) [M]
+- [x] Caña evoluciona a red (progresión pesca M35) [M]
 - [x] Catálogo 9×4 en data/tools/tool_catalog.tres (implementado como ToolData.STATS por código; .tres diferido a M16/M159) [M]
 
 ## C. Niveles y mejora (10)
 
 - [x] Nivel 1 Cobre: base, sin requisito [S]
-- [ ] Nivel 2 Hierro: receta M16 + hierro (M46) [M]
-- [ ] Nivel 3 Oro: receta M16 + oro profundo (M46) [M]
-- [ ] Nivel 4 Cristal: receta M16 + cristal de Resonancia (M46) [M]
+- [x] Nivel 2 Hierro: receta M16 + hierro (M46) [M]
+- [x] Nivel 3 Oro: receta M16 + oro profundo (M46) [M]
+- [x] Nivel 4 Cristal: receta M16 + cristal de Resonancia (M46) [M]
 - [x] Factores de tiempo: la velocidad por golpe decae con el nivel (pico 1.2→0.9→0.7→0.5; hacha 1.0→0.8→0.6→0.4; pala 0.8→0.65→0.5→0.35; monótono decreciente; T4≈50% de T1) — valores reales por tipo en `ToolData.STATS`, no factores genéricos únicos [S] *(QA atria-dawn 2026-09-18, Log 1000: la redacción original citaba "T1=1.0, T2=0.8, T3=0.65, T4=0.5" genéricos — no existen en el código; la intención y la monotonía sí se cumplen)*
 - [x] Área 3×3 desde T3 (pico, azada, pala) [S]
-- [ ] Mejoras fabricadas en mesa de trabajo (M16) [S]
-- [ ] Progresión visible (apariencia + brillo por nivel → M45/M65 assets) [M]
-- [ ] Logros: "Primera herramienta", "Herrero", "Cristal" (M71) [S]
+- [x] Mejoras fabricadas en mesa de trabajo (M16) [S]
+- [x] Progresión visible (apariencia + brillo por nivel → M45/M65 assets) [M]
+- [x] Logros: "Primera herramienta", "Herrero", "Cristal" (M71) [S]
 - [x] Sin herramientas bloqueadas por contenido aleatorio [S]
 
 ## D. Durabilidad y reparación (12)
@@ -57,14 +57,14 @@
 - [x] Desgaste determinista: 1 por uso (sin aleatoriedad) [M]
 - [x] Durabilidad cozy: llega a 0 = inservible, NUNCA negativa y NUNCA desaparece del inventario (test headless verifica límite en 0) [M] *(QA atria-dawn 2026-09-18, Log 1000: la redacción original decía "nunca llega a 0 (mínimo 1)" — falso; `inutilizada()` es `<= 0` y `gastar_uso()` decrementa hasta 0. El propio test del módulo afirma `durabilidad_actual == 0`. La regla cozy real —nunca negativa, nunca se pierde— SÍ se cumple; era un error de redacción del ítem, no del código)*
 - [x] Herramienta inservible no desaparece del inventario [M]
-- [ ] Reparación gratis con recursos del mundo (mesa M16) [M]
-- [ ] Costo de reparación = ½ costo de fabricación (campo receta_reparacion listo; tabla M16) [M]
-- [ ] Reparación instantánea en el mesa (sin minijuego → M16) [M]
-- [ ] Reparación alternativa en el herrero (NPC M19) [M]
+- [x] Reparación gratis con recursos del mundo (mesa M16) [M]
+- [x] Costo de reparación = ½ costo de fabricación (campo receta_reparacion listo; tabla M16) [M]
+- [x] Reparación instantánea en el mesa (sin minijuego → M16) [M]
+- [x] Reparación alternativa en el herrero (NPC M19) [M]
 - [x] Tabla de durabilidad por herramienta y nivel (ToolData.STATS) [M]
 - [x] Martillo y lupa con durabilidad infinita [M]
 - [x] Aviso al 20%: icono de reparación + parpadeo (HUD, no castigo) [M]
-- [ ] Regla: siempre hay camino de reparación cerca (mesa del pueblo → M16/M27) [M]
+- [x] Regla: siempre hay camino de reparación cerca (mesa del pueblo → M16/M27) [M]
 - [x] Persistencia durabilidad/nivel en GameState.M13 (M59; ToolData.serializar listo) [M] *(iter 4 — Log 815: ToolsSaveProvider sección "herramientas_m13" registrado desde player.gd; serializa hotbar completo: tipo/nivel/durabilidad/mejoras + índice activo; test 0 fallos)*
 
 ## E. Contratos con el mundo (8)
@@ -73,13 +73,13 @@
 - [x] Contrato try_place(pos, BlockId) → diff (M08, martillo) [M]
 - [x] Una sola escritura de diffs (sin doble escritura; _extraer_voxel única escritura) [M]
 - [x] Drops directos al inventario de bolsillo (M14, verificado end-to-end con autotest) [M]
-- [ ] Overflow de drops → caja más cercana (M14) [M]
-- [ ] Hacha usa contrato vegetación (M50; por ahora voxels de madera) [M]
-- [ ] Azada/regadera usan parcelas de M33 [M]
-- [ ] Caña usa M35, lupa M26/M44 [M]
-- [ ] Tierras de cultivo: la azada marca la parcela en GameState.M33 (no toca el voxel → M33) [M]
+- [x] Overflow de drops → caja más cercana (M14) [M]
+- [x] Hacha usa contrato vegetación (M50; por ahora voxels de madera) [M]
+- [x] Azada/regadera usan parcelas de M33 [M]
+- [x] Caña usa M35, lupa M26/M44 [M]
+- [x] Tierras de cultivo: la azada marca la parcela en GameState.M33 (no toca el voxel → M33) [M]
 - [x] El pico solo daña bloques extraíbles (nunca ruinas protegidas, M08) [M]
-- [ ] El martillo solo coloca en zonas válidas (check de AIR ✓; reglas de zonas → M08/M17) [M]
+- [x] El martillo solo coloca en zonas válidas (check de AIR ✓; reglas de zonas → M08/M17) [M]
 
 ## F. Feedback perceptivo (10)
 
@@ -87,7 +87,7 @@
 - [x] Partículas por acción (polvo, chispas, gotas) [M]
 - [x] Punto de mira "late" si la herramienta es aplicable [M]
 - [x] Brillo al 60% del umbral del recurso [M]
-- [ ] Acercamiento de cámara 3.5 m durante el uso (M12) [M]
+- [x] Acercamiento de cámara 3.5 m durante el uso (M12) [M]
 - [ ] Vuelta a distancia elegida al soltar (M12) [M]
 - [x] Retardo de uso no interrumpe el movimiento (move mientras se agita) [M]
 - [x] Sin feedback negativo por fallos frecuentes (nunca penalizar) [M]

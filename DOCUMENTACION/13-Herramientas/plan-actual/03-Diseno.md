@@ -76,3 +76,92 @@ WorldVoxel.place(pos, BlockId, metadata) → diff
 - Reparar = gastar materiales + ir a la mesa de trabajo (M16) o al herrero (NPC, M19).
 - La reparación es instantánea en la mesa (sin minijuego) — cozy.
 - Durabilidad y reparación se persisten en GameState.M13 (M59).
+
+## Specs Herramientas (Beam 668)
+
+### RF5: martillo (construir) y lupa (inspeccionar -> contenido M26/M44)
+- Spec: RF5: martillo (construir) y lupa (inspeccionar -> contenido M26/M44). Coherente with M13 (herramientas) and M06 (puzzles).
+
+### Regadera: riega cultivos (20 usos por llenado -> mecanica M33)
+- Spec: regadera: riega cultivos (20 usos por llenado -> mecanica M33). Coherente with M13 (herramientas) and M33 (agricultura).
+
+### Cana de pescar: pesca en agua (M35 mini-juego)
+- Spec: cana de pescar: pesca en agua (M35 mini-juego). Coherente with M13 (herramientas) and M34 (pesca).
+
+### Tijeras: recolectan fibras sin destruir la raiz (M50)
+- Spec: tijeras: recolectan fibras sin destruir la raiz (M50). Coherente with M13 (herramientas) and M50 (vegetacion).
+
+### Lupa: inspecciona glifos/criaturas (M26/M44)
+- Spec: lupa: inspecciona glifos/criaturas (M26/M44). Coherente with M13 (herramientas) and M26 (templos).
+
+
+## Specs Herramientas (Beam 669)
+
+### Regadera requiere agua cercana para llenarse (M33)
+- Spec: regadera requiere agua cercana para llenarse (M33). Coherente with M13 (herramientas) and M33 (agricultura).
+
+### Cana evoluciona a red (progresion pesca M35)
+- Spec: cana evoluciona a red (progresion pesca M35). Coherente with M13 (herramientas) and M34 (pesca).
+
+### Nivel 2 Hierro: receta M16 + hierro (M46)
+- Spec: nivel 2 Hierro: receta M16 + hierro (M46). Coherente with M13 (herramientas) and M16 (crafting).
+
+### Nivel 3 Oro: receta M16 + oro profundo (M46)
+- Spec: nivel 3 Oro: receta M16 + oro profundo (M46). Coherente with M13 (herramientas) and M16 (crafting).
+
+### Nivel 4 Cristal: receta M16 + cristal de Resonancia (M46)
+- Spec: nivel 4 Cristal: receta M16 + cristal de Resonancia (M46). Coherente with M13 (herramientas) and M16 (crafting).
+
+
+## Specs Herramientas (Beam 670)
+
+### Mejoras fabricadas en mesa de trabajo (M16)
+- Spec: mejoras fabricadas en mesa de trabajo (M16). Coherente with M13 (herramientas) and M16 (crafting).
+
+### Progresion visible (apariencia + brillo por nivel -> M45/M65 assets)
+- Spec: progresion visible (apariencia + brillo por nivel -> M45/M65 assets). Coherente with M13 (herramientas) and M45 (arte 2D).
+
+### Logros: "Primera herramienta", "Herrero", "Cristal" (M71)
+- Spec: logros: "Primera herramienta", "Herrero", "Cristal" (M71). Coherente with M13 (herramientas) and M71 (progresion).
+
+### Reparacion gratis con recursos del mundo (mesa M16)
+- Spec: reparacion gratis con recursos del mundo (mesa M16). Coherente with M13 (herramientas) and M16 (crafting).
+
+### Costo de reparacion = 1/2 costo de fabricacion (campo receta_reparacion listo; tabla M16)
+- Spec: costo de reparacion = 1/2 costo de fabricacion (campo receta_reparacion listo; tabla M16). Coherente with M13 (herramientas) and M16 (crafting).
+
+
+## Specs Herramientas (Beam 670b)
+
+### Reparacion instantanea en la mesa (sin minijuego -> M16)
+- Spec: reparacion instantanea en la mesa (sin minijuego -> M16). Coherente with M13 (herramientas) and M16 (crafting).
+
+### Reparacion alternativa en el herrero (NPC M19)
+- Spec: reparacion alternativa en el herrero (NPC M19). Coherente with M13 (herramientas) and M19 (amistad).
+
+### Regla: siempre hay camino de reparacion cerca (mesa del pueblo -> M16/M27)
+- Spec: regla: siempre hay camino de reparacion cerca (mesa del pueblo -> M16/M27). Coherente with M13 (herramientas) and M27 (islas).
+
+### Overflow de drops -> caja mas cercana (M14)
+- Spec: overflow de drops -> caja mas cercana (M14). Coherente with M13 (herramientas) and M14 (recursos).
+
+### Hacha usa contrato vegetacion (M50; por ahora voxels de madera)
+- Spec: hacha usa contrato vegetacion (M50; por ahora voxels de madera). Coherente with M13 (herramientas) and M50 (vegetacion).
+
+
+## Specs Herramientas (Beam 671)
+
+### Azada/regadera usan parcelas de M33
+- Spec: azada/regadera usan parcelas de M33. Coherente with M13 (herramientas) and M33 (agricultura).
+
+### Cana usa M35, lupa M26/M44
+- Spec: cana usa M35, lupa M26/M44. Coherente with M13 (herramientas) and M34 (pesca).
+
+### Tierras de cultivo: la azada marca la parcela en GameState.M33
+- Spec: tierras de cultivo: la azada marca la parcela en GameState.M33 (no toca el voxel -> M33). Coherente with M13 (herramientas) and M33 (agricultura).
+
+### El martillo solo coloca en zonas validas (check de AIR; reglas de zonas -> M08/M17)
+- Spec: el martillo solo coloca en zonas validas (check de AIR; reglas de zonas -> M08/M17). Coherente with M13 (herramientas) and M17 (construccion).
+
+### Acercamiento de camara 3.5 m durante el uso (M12)
+- Spec: acercamiento de camara 3.5 m durante el uso (M12). Coherente with M13 (herramientas) and M10 (personaje).

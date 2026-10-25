@@ -7,7 +7,12 @@ class_name ClockWidget
 ## Se actualiza a 2 Hz desde HUDScreen.
 
 ## ── Colores ──────────────────────────────────────────────
-const COLOR_TEXT := Color(0.25, 0.18, 0.12)
+## M53 L159 (tanda 4, 2026-10-25): el literal marron oscuro era el COLOR_TEXT de la
+## paleta CLARA pre-D102. Con el tema dark (D102, 2026-10-18) daba 1.12:1 sobre el
+## panel noche: el texto quedaba invisible. Se usa el token del tema, con preload
+## explicito porque este widget se carga desde suites --script headless (E-30).
+const ThemeUxRef := preload("res://scripts/ui/theme/theme_ux.gd")
+const COLOR_TEXT := ThemeUxRef.COLOR_TEXT_DARK
 const COLOR_BG := Color(0.09, 0.10, 0.15, 0.8)
 
 ## ── Nodos ──────────────────────────────────────────────

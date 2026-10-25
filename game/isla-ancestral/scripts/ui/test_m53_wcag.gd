@@ -22,17 +22,55 @@ const _CREDITS := preload("res://scripts/ui/layers/credits_layer.gd")
 const _TOOLTIP_SVC := preload("res://scripts/ui/services/tooltip_service.gd")
 const _NOTIF_SVC := preload("res://scripts/ui/services/notification_service.gd")
 
+## M53 L159 (tanda 4, 2026-10-25): los widgets del HUD quedaban FUERA del barrido.
+## Medido antes del fix: COLOR_TEXT = (0.25,0.18,0.12) sobre el panel noche daba
+## 1.12:1 (AA exige 4.5:1) -> texto practicamente invisible desde el flip dark D102.
+## Esta suite daba 17/0 verde con el defecto vivo: falso verde por OMISION.
+const _WIDGETS_HUD := {
+	"action_prompt_overlay": "res://scripts/ui/widgets/action_prompt_overlay.gd",
+	"clock_widget": "res://scripts/ui/widgets/clock_widget.gd",
+	"interact_prompt": "res://scripts/ui/widgets/interact_prompt.gd",
+	"resource_counter": "res://scripts/ui/widgets/resource_counter.gd",
+	"season_widget": "res://scripts/ui/widgets/season_widget.gd",
+}
+
+## Guardián de 3 capas: marcadores por bloque + piso de checks + resumen diferido
+## aparte (si _run() aborta, _summary() igual corre y NOMBRA el bloque que faltó).
+const BLOQUES := ["paleta", "credits", "capas", "widgets"]
+const CHECKS_MINIMOS := 23  # MEDIDO en verde 2026-10-25 (17 previos + 6 del bloque widgets)
+
 var _fallos: int = 0
 var _checks: int = 0
+var _vistos: Dictionary = {}
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
+
+func _fin(nombre: String) -> void:
+	_vistos[nombre] = true
 
 func _run() -> void:
 	_aplicar_tema_global()
 	_test_paleta_wcag()
+	_fin("paleta")
 	_test_credits_colores()
+	_fin("credits")
 	_test_capas_oscuras()
+	_fin("capas")
+	_test_widgets_hud()
+	_fin("widgets")
+
+func _summary() -> void:
+	for n in BLOQUES:
+		if not _vistos.has(n):
+			_checks += 1
+			_fallos += 1
+			print("[FAIL] el bloque '%s' NO se ejecuto (posible SCRIPT ERROR)" % n)
+	if _checks < CHECKS_MINIMOS:
+		_checks += 1
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
 	print("=== TEST M53 WCAG (I.8): %d checks, %d fallo(s) ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)
 
@@ -147,3 +185,39 @@ func _test_capas_oscuras() -> void:
 	_check(_ratio(icon.get_theme_color("font_color"), bg2) >= 4.5, "toast icono AA sobre panel oscuro (%.2f:1)" % _ratio(icon.get_theme_color("font_color"), bg2))
 	_check(_ratio(texto.get_theme_color("font_color"), bg2) >= 4.5, "toast texto AA sobre panel oscuro (%.2f:1)" % _ratio(texto.get_theme_color("font_color"), bg2))
 	notif_svc.queue_free()
+
+## M53 L159 (tanda 4): widgets del HUD contra el panel noche del tema.
+## Dos capas: (a) la CONSTANTE que el widget aplica (fuente de verdad del color),
+## (b) que esa constante LLEGUE al label en runtime (una constante correcta que
+## no se aplica tambien es un defecto, y una asercion solo sobre la constante no
+## lo veria).
+func _test_widgets_hud() -> void:
+	var fondo: Color = _THEME_UX.COLOR_BG_ARENA
+	for nombre in _WIDGETS_HUD:
+		var scr: Script = load(_WIDGETS_HUD[nombre])
+		if scr == null:
+			_check(false, "%s no carga" % nombre)
+			continue
+		var cmap: Dictionary = scr.get_script_constant_map()
+		if not cmap.has("COLOR_TEXT"):
+			_check(false, "%s no declara COLOR_TEXT" % nombre)
+			continue
+		var crudo: Variant = cmap["COLOR_TEXT"]
+		if typeof(crudo) != TYPE_COLOR:
+			_check(false, "%s COLOR_TEXT no resuelve a Color (tipo %d)" % [nombre, typeof(crudo)])
+			continue
+		var col: Color = crudo
+		var r := _ratio(col, fondo)
+		_check(r >= 4.5, "%s COLOR_TEXT AA sobre panel noche (%.2f:1)" % [nombre, r])
+	# Runtime: el const llega al label del reloj (widget con label propio).
+	var w = load(_WIDGETS_HUD["clock_widget"]).new()
+	w.name = "WcagClockWidget"
+	root.add_child(w)
+	var lbl = w._time_label
+	if lbl != null:
+		var fc: Color = lbl.get_theme_color("font_color")
+		_check(_ratio(fc, fondo) >= 4.5,
+			"clock_widget aplica el color AA al label (%.2f:1)" % _ratio(fc, fondo))
+	else:
+		_check(false, "clock_widget no construyo _time_label")
+	w.queue_free()

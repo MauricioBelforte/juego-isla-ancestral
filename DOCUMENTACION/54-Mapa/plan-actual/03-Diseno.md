@@ -186,3 +186,131 @@ func mark_visited(region_id: int) -> void
 
 ### Test de rendimiento con mundo voxel completo (<= 5% frame)
 - Spec: test de rendimiento con mundo voxel completo (<= 5% frame). Coherente con M61 (rendimiento) y M54 (mapa).
+
+## Specs Mapa (Beam 645)
+
+### Norte arriba requiere rotacion del sprite/texture
+- Spec: norte arriba requiere rotacion del sprite/texture. Coherente with M54 (mapa) and M45 (arte 2D).
+
+### Estilo ilustrado cozy documentado (manchas bioma paleta pastel, bordes suaves)
+- Spec: estilo ilustrado cozy documentado (manchas bioma paleta pastel, bordes suaves). Coherente with M54 (mapa) and M45 (arte 2D).
+
+### Navegacion 100% con gamepad y teclado (foco nativo M53)
+- Spec: navegacion 100% con gamepad y teclado (foco nativo M53). Coherente with M54 (mapa) and M53 (UI).
+
+### Marcador del pueblo (M09/M27) registrado en MarkersCatalog
+- Spec: marcador del pueblo (M09/M27) registrado en MarkersCatalog. Coherente with M54 (mapa) and M27 (islas).
+
+### Marcadores de tiendas individuales (M39) registrados automaticamente por evento
+- Spec: marcadores de tiendas individuales (M39) registrados automaticamente por evento. Coherente with M54 (mapa) and M39 (infraestructura).
+
+
+## Specs Mapa (Beam 646)
+
+### Marcadores de casas de NPCs (M19) registrados por evento
+- Spec: marcadores de casas de NPCs (M19) registrados por evento. Coherente with M54 (mapa) and M19 (amistad).
+
+### Marcadores de islas/zones (M27) según islands exploradas
+- Spec: marcadores de islas/zones (M27) según islands exploradas. Coherente with M54 (mapa) and M27 (islas).
+
+### Iconos SVG por tipo (casa, tienda, NPC, templo, destino, pin) de M46/M53
+- Spec: iconos SVG por tipo (casa, tienda, NPC, templo, destino, pin) de M46/M53. Coherente with M54 (mapa) and M46 (texturas).
+
+### Tooltip del marcador al enfocar/hover (M53 TooltipService)
+- Spec: tooltip del marcador al enfocar/hover (M53 TooltipService). Coherente with M54 (mapa) and M53 (UI).
+
+### Confirmacion amable antes del viaje (confirm popup M53 con costo/duracion si M69)
+- Spec: confirmacion amable antes del viaje (confirm popup M53 con costo/duracion si M69). Coherente with M54 (mapa) and M69 (viaje rapido).
+
+
+## Specs Mapa (Beam 647)
+
+### Test end-to-end: bloqueado -> desbloqueo -> viaje -> cancelacion -> llegada
+- Spec: test end-to-end: bloqueado -> desbloqueo -> viaje -> cancelacion -> llegada. Coherente with M54 (mapa) and M28 (viajes).
+
+### Marcado de visited al cruzar el borde de una region (evento M09/M27)
+- Spec: marcado de visited al cruzar el borde de una region (evento M09/M27). Coherente with M54 (mapa) and M27 (islas).
+
+### Persistencia de exploracion con M60 (bits por region/celda, no texturas)
+- Spec: persistencia de exploracion con M60 (bits por region/celda, no texturas). Coherente with M54 (mapa) and M60 (rendimiento).
+
+### Transicion suave de revelado (Tween 300 ms) reducible por reduce_motion (M58)
+- Spec: transicion suave de revelado (Tween 300 ms) reducible por reduce_motion (M58). Coherente with M54 (mapa) and M58 (accesibilidad).
+
+### Limites de region delineados dentro de la niebla (bordes visibles)
+- Spec: limites de region delineados dentro de la niebla (bordes visibles). Coherente with M54 (mapa) and M58 (accesibilidad).
+
+
+## Specs Mapa (Beam 648)
+
+### Explorer (niebla) como nodo de dominio con logica pura de datos
+- Spec: explorer (niebla) como nodo de dominio con logica pura de datos. Coherente with M54 (mapa) and M09 (generacion).
+
+### RegionData alimentado por M09/M27
+- Spec: RegionData alimentado por M09/M27. Coherente with M54 (mapa) and M27 (islas).
+
+### Posicion jugador por evento baja frecuencia
+- Spec: posicion jugador por evento baja frecuencia. Coherente with M54 (mapa) and M11 (movimiento).
+
+### Registro casas NPCs como marcadores dinamicos
+- Spec: registro casas NPCs como marcadores dinamicos. Coherente with M54 (mapa) and M19 (amistad).
+
+### Ruta visual destino viaje
+- Spec: ruta visual destino viaje. Coherente with M54 (mapa) and M28 (viajes).
+
+
+## Specs Mapa (Beam 649)
+
+### Tiendas registradas automaticamente
+- Spec: tiendas registradas automaticamente. Coherente with M54 (mapa) and M39 (infraestructura).
+
+### Accesibilidad reduce_motion, daltonismo, contraste AA
+- Spec: accesibilidad reduce_motion, daltonismo, contraste AA. Coherente with M54 (mapa) and M58 (accesibilidad).
+
+### M63: bake en background con barra de progreso (AGENTS 8)
+- Spec: M63: bake en background con barra de progreso (AGENTS 8). Coherente with M54 (mapa) and M63 (streaming).
+
+### Destinos, desbloqueo, viaje por interfaz Callable
+- Spec: destinos, desbloqueo, viaje por interfaz Callable. Coherente with M54 (mapa) and M69 (viaje rapido).
+
+### Viaje rapido solicitado con dialogo abierto: peticion encolada por pila M53
+- Spec: viaje rapido solicitado con dialogo abierto: peticion encolada por pila M53. Coherente with M54 (mapa) and M69 (viaje rapido).
+
+
+## Specs Mapa (Beam 650)
+
+### Marcadores de islas/zones (M27) segun islands exploradas
+- Spec: marcadores de islas/zones (M27) segun islands exploradas. Coherente with M54 (mapa) and M27 (islas).
+
+### Cruce de region por barco (M28): revelado de golpe sin glitch (granos por mosaico)
+- Spec: cruce de region por barco (M28): revelado de golpe sin glitch (granos por mosaico). Coherente with M54 (mapa) and M28 (viajes).
+
+### Bake incremental por secciones del mundo para no bloquear (M63)
+- Spec: bake incremental por secciones del mundo para no bloquear (M63). Coherente with M54 (mapa) and M63 (streaming).
+
+### Test de navegacion completa con gamepad (30 minutos)
+- Spec: test de navegacion completa con gamepad (30 minutos). Coherente with M54 (mapa) and M56 (interfaz).
+
+### Test de viaje rapido end-to-end con M69
+- Spec: test de viaje rapido end-to-end con M69. Coherente with M54 (mapa) and M69 (viaje rapido).
+
+
+## Specs Mapa (Beam 651)
+
+### Pool unico de sprites de marcadores, clusters y pines en ambas vistas
+- Spec: pool unico de sprites de marcadores, clusters y pines en ambas vistas. Coherente with M54 (mapa) and M61 (rendimiento).
+
+### Texturas comprimidas y dimensionadas por M108
+- Spec: texturas comprimidas y dimensionadas por M108. Coherente with M54 (mapa) and M108 (pipeline).
+
+### Datos: data/map/map_data.json — 9 POIs reales de la Isla Raiz
+- Spec: datos: data/map/map_data.json — 9 POIs reales de la Isla Raiz (spawn/Chozavil/ruina/mesa/faro/templo_raiz/playa/plaza/ladera) con categorias y coordenadas dentro del mundo (radio 256). Coherente with M54 (mapa) and M09 (generacion).
+
+### scripts/map/map_schema.gd — valida POIs
+- Spec: scripts/map/map_schema.gd — valida POIs (id unico, nombre, categorias permitidas, coords 0-512 dentro del mundo). Coherente with M54 (mapa) and M108 (pipeline).
+
+
+## Specs Mapa (Beam 652)
+
+### Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría)
+- Spec: test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0. Coherente with M54 (mapa) and M112 (testing).

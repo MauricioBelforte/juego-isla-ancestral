@@ -8,7 +8,10 @@ class_name ActionPromptOverlay
 ## T-053-060: re-lee etiquetas de prompts automáticamente al remapear.
 
 ## ── Configuración ───────────────────────────────────────
-const COLOR_TEXT := Color(0.25, 0.18, 0.12)
+## M53 L159 (tanda 4, 2026-10-25): literal de la paleta CLARA pre-D102 (1.12:1 sobre
+## el panel noche, texto invisible). Token del tema via preload explicito (E-30).
+const ThemeUxRef := preload("res://scripts/ui/theme/theme_ux.gd")
+const COLOR_TEXT := ThemeUxRef.COLOR_TEXT_DARK
 const COLOR_KEY_BG := Color(ThemeUx.COLOR_BG_ARENA, 0.85)  # M53 L159: token, no literal
 
 ## ── Estado ──────────────────────────────────────────────

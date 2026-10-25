@@ -7,7 +7,13 @@ class_name ResourceCounter
 ## Se actualiza a 2 Hz desde HUDScreen.
 
 ## ── Colores ──────────────────────────────────────────────
-const COLOR_TEXT := Color(0.25, 0.18, 0.12)
+## M53 L159 (tanda 4, 2026-10-25): el literal era el COLOR_TEXT de la paleta CLARA
+## pre-D102 (1.12:1 sobre el panel noche). Se pasa al token del tema via preload
+## explicito (E-30). OJO: esta constante NO se usa en el archivo (medido: 0 usos
+## fuera de su declaracion); se conserva el nombre por si un consumidor la lee por
+## constant map, pero no pinta nada.
+const ThemeUxRef := preload("res://scripts/ui/theme/theme_ux.gd")
+const COLOR_TEXT := ThemeUxRef.COLOR_TEXT_DARK
 const COLOR_COIN := Color(0.72, 0.55, 0.30)
 
 ## ── Nodos ──────────────────────────────────────────────

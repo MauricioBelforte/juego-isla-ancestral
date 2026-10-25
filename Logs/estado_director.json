@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-25T07:13 (ack DeepSeek 402 M53 token-dup + Ling 270 corpus PT)",
+ "ultimo_update": "2026-10-25T09:22 (ack Ling 274 + A T114 M128 + 2 sellos activos)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -750,23 +750,16 @@
   "registro": "veredictos se registran AQUI (estado), NO en el canal de Beam (anti-loop)",
   "ultimos_veredictos": [
    {
-    "T": "T100",
-    "m": "M37 (37-Museos-Y-Colecciones)",
-    "hecho": 17,
-    "veredicto": "OK",
-    "nota": "M37 05 = 140/8/0 (gate-1 limpio, 0 [?]; 17 [ ] abiertos -> no sellable full). CUBO-A respaldado."
+    "T": "T105-109",
+    "m": "M54/M156 + M37/M92",
+    "veredicto": "catch-up-G-lote4",
+    "nota": "M37 141/7/0 OK, M54 171/6/0 OK (0 [?]), M92 180/3/2 TIE, M156 271/2/34 TIE. T105-109 = M54/M156."
    },
    {
-    "T": "T097/098/099 + catch-up",
-    "m": "M56/M37/M73/M110/M75/M01/M55/M67",
-    "veredicto": "catch-up-G",
-    "nota": "Verificados: M56=129/7/2 (spec 401/622) TIE; M37=131/17/0 (spec 299/588) SELLABLE-g1; M73=131/4/0 (spec 205/340) SELLABLE-g1; M110=155/70/0 (spec 164/347) SELLABLE-g1; M75=125/5/0 (spec 245/312) SELLABLE-g1; M01=122/30/0 (spec 555/669) SELLABLE-g1; M55=112/10/9 (spec 334/663) TIE; M67(67-folder)=116/15/0 (spec 340/586) SELLABLE-g1"
-   },
-   {
-    "T": "BARRIDO-DIARIO §21.8.2.b",
-    "m": "M28/M72/M48/M75 + M56",
-    "veredicto": "sweep-gate1",
-    "nota": "M28 129/1/0 sellable-g1 (0 [?], 1 [ ]=deuda M41). M72 194/3/3 TIE (3 [?]). M48 111/10/2 TIE. M75 125/5/0 TIE-nearest. M56 (T095/T096) verificado. Spec-cobertura 5/5 en candidatos. M28 = PRIMER SELLO pendiente gate-2 runtime de Hy3."
+    "T": "T109",
+    "m": "156-Terrenos-Y-Movimiento",
+    "veredicto": "TIE",
+    "nota": "gate-1 A-advance: 271/2/34"
    }
   ],
   "ultimo_muestreo": "indice creado 25oct 06:05",
@@ -812,7 +805,17 @@
     "T063",
     "T062",
     "T061",
-    "T100"
+    "T100",
+    "T104",
+    "T103",
+    "T102",
+    "T101",
+    "T109",
+    "T108",
+    "T107",
+    "T106",
+    "T105",
+    "T114"
    ],
    "pendientes_recientes_por_verificar": [
     "T060",
@@ -877,10 +880,11 @@
     "T001"
    ],
    "historico_T001_T075": "reconciliar a NIVEL MODULO (no por T): sample §21.8.2.b del 05 [x] final del modulo; los [x] de esos T ya viven en el cuerpo (stale-Totales era el fallo de T078/T080)",
-   "proximo_despues_de": "T100",
+   "proximo_despues_de": "T114",
    "regla_cron_A": "cada ciclo A: verificar 1-2 de pendientes_recientes (del ultimo hacia atras) + los T-done nuevos desde proximo",
    "regla_cron_G": "25,55 de cada hora (exclusivo, sin A/B/C/D): procesar TODO lo no verificado (catch-up) + actualizar indice; un dia a la dia, el primer G hace el barrido diario = sample §21.8.2.b de los 4 candidatos a sello + chequeo de drift Totales",
-   "ultimo_muestreo": "catch-up G 06:55: T097-099 (M56/M37) + M73/M110/M75/M01/M55/M67"
+   "ultimo_muestreo": "A 09:20: T114 M128 (gate-1); G sigue catch-up",
+   "historico_por_modulo": "T001-T075 reconciliados a nivel modulo (no por-T) en G lote1/2/3; los modulos gate-1 limpios ya notados"
   },
   "modulos_candidatos_sello": {
    "M28 (28-Viajes)": "129/1/0 - EL MAS CERCA (1 [ ] + runtime)",
@@ -930,7 +934,7 @@
  },
  "deepseek_reactivado": "M53 token-dup LISTO (tanda 3: 7 unificados, 6 restantes = 3 owner + 3 semantico). L159 coherencia visual = flip-candidato. M53 va sellable. Log 2184.",
  "hy3_gate2": "gate-2 runtime #383: M73 FALLO runtime (validador 8 vs 19 categorias, green-probe Hy3; T266 encolado Beam dueno M73), M55 precision-fail, M75/M110/M58 EN CURSO, M04 PARCIAL. 0 sellos. M110 caveat debug_menu:721 nula-textura (deuda). M75 primer candidato.",
- "sellos_218": "0. M28 primer-sello (runtime Hy3). M53 (DeepSeek) va sellable (token-dup listo, L159 flip). M73(4)/M75(5) siguen.",
+ "sellos_218": "2 SELLADOS (M28 129/130 + M65 90/90). En vuelo: M54/M73/M75. Ling PT-runtime 100% prepped (GO#4 pendiente).",
  "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
  "ling_design_docs": {
   "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
@@ -964,5 +968,10 @@
  "barrido_diario_25oct": {
   "sellos": "M28=PRIMERO (129/1/0, 0 [?], 1 [ ]=L340 olas deuda-M41): sellable-g1, falta runtime Hy3. M75 125/5/0 (5 [ ] reales). M72/M48 TIE con [?]."
  },
- "m23_drift": "Global fila 23 = 83/105 (mi sync) vs Hy3 recont 76/105 -> drift 7. M23 no es candidato a sello; sync pendiente."
+ "m23_drift": "Global fila 23 = 83/105 (mi sync) vs Hy3 recont 76/105 -> drift 7. M23 no es candidato a sello; sync pendiente.",
+ "primer_sello_directora": "2 sellos: M28 + M65 (25oct).",
+ "asignador_0735": "Step-5 56m idle (M33 133/22/0, 22 [ ] duenos-externos) - su cola M33 propia ya se agoto a deuda-externa; si el riel M33 no mas -> otro modulo. Hy3 14m (acuse #392 M28 sello). ",
+ "asignador_0758": "Step-5 75m idle -> nudge #226: M33 cerrado (133/22/0, scope propio 11 done), sigues con M23 (riel 2: capitulos/recetas/cosmeticos/E2E/plaza/docs) + degrada L169 a [?]. M28 ya sellado.",
+ "m65_drift": "M65 header 05 stale + Global 65 89/90->90/90 (SB-02 resuelta). Ambiental M48/M39 encolados.",
+ "asignador_0858": "DeepSeek 93m idle -> nudge #403."
 }

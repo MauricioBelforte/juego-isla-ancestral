@@ -14,10 +14,10 @@
 - [x] RF1: banco por bioma (13 + subterráneo) [S]
 - [x] RF2: capas por hora y clima [S]
 - [x] RF3: fuentes posicionales 3D [S]
-- [ ] RF4: fauna con horas de actividad [S]
+- [x] RF4: fauna con horas de actividad [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] RF5: sonidos de acción (madera, piedra, minería...) [S]
-- [ ] RF6: interiores con reverb [S]
+- [x] RF6: interiores con reverb [S]
   · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [x] RF7: crossfade suave de bancos [S]
 
@@ -25,85 +25,85 @@
 
 - [x] P1: viento — base 2D, 3 variaciones, modulado por clima y montaña [S]
 - [x] P2: hojas — susurro por bioma boscoso, pitch ±5% [S]
-- [ ] P3: hierba — rizoma suave en praderas [S]
+- [x] P3: hierba — rizoma suave en praderas [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] P4: agua — genérica en lagos/estanques [S]
+- [x] P4: agua — genérica en lagos/estanques [S]
   · espera: feature de M51-Agua (definir contrato/dueno por asignar)
 - [x] P5: río — 3D posicional, 4 variaciones, 60 m [S]
-- [ ] P6: cascada — 3D en 2 POIs fijos, hasta 120 m [S]
+- [x] P6: cascada — 3D en 2 POIs fijos, hasta 120 m [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] P7: océano — costa 3D + mar lejano 2D [S]
+- [x] P7: océano — costa 3D + mar lejano 2D [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] P8: lluvia — capa 2D fina + goteras en cobertizos [S]
+- [x] P8: lluvia — capa 2D fina + goteras en cobertizos [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] P9: tormenta — lluvia densa + truenos random 30-90 s [S]
+- [x] P9: tormenta — lluvia densa + truenos random 30-90 s [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P10: nieve — casi silencio + crujidos en pasos [S]
 - [x] P11: fuego — 3D en fogatas/casas, 3 variaciones [S]
 - [x] P12: madera — impactos de construcción y puentes [S]
 - [x] P13: piedra — 5 variaciones con eco ligero [S]
-- [ ] P14: minería — golpe + gravilla, oclusión de túnel [S]
+- [x] P14: minería — golpe + gravilla, oclusión de túnel [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P15: construcción — 3 capas (madera/piedra/metal) [S]
-- [ ] P16: árboles — crujido al tala/impacto [S]
+- [x] P16: árboles — crujido al tala/impacto [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] P17: animales — 2D lejanos + 3D cercanos [S]
+- [x] P17: animales — 2D lejanos + 3D cercanos [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P18: aves — diurnas (05:30-19:00), poisson 6+ variaciones [S]
-- [ ] P19: insectos — nocturnos (20:00-05:00), contenidos [S]
+- [x] P19: insectos — nocturnos (20:00-05:00), contenidos [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] P20: mar — lejano constante a baja ganancia [S]
-- [ ] P21: cuevas — reverb 1.5 s + goteras + eco [S]
+- [x] P21: cuevas — reverb 1.5 s + goteras + eco [S]
   · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
-- [ ] P22: ruinas — ecos + viento silbante + metalófono lejano [S]
+- [x] P22: ruinas — ecos + viento silbante + metalófono lejano [S]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
-- [ ] P23: templo — coro distante/drones, reverb 1.2 s, 30% tiempo [S]
+- [x] P23: templo — coro distante/drones, reverb 1.2 s, 30% tiempo [S]
   · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [x] P24: mecanismos — clics 3D con variaciones (puzzles) [S]
 - [x] P25: máquinas — Gran Vapor y molinos, 2 variaciones [S]
 
 ## C. Mapa banco → bioma (14)
 
-- [ ] Playa: océano + viento + aves costeras [S]
+- [x] Playa: océano + viento + aves costeras [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Pradera: hierba + viento + aves [S]
+- [x] Pradera: hierba + viento + aves [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Bosque templado: hojas + pájaros + hojarasca [S]
+- [x] Bosque templado: hojas + pájaros + hojarasca [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Pinos: viento en ramas + cuervos [S]
+- [x] Pinos: viento en ramas + cuervos [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Montaña: viento fuerte + piedra + eco [S]
+- [x] Montaña: viento fuerte + piedra + eco [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Desierto (Cenizas): viento seco + dunas [S]
+- [x] Desierto (Cenizas): viento seco + dunas [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Selva (Verde): fauna densa [S]
+- [x] Selva (Verde): fauna densa [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Manglar: agua + ranas [S]
+- [x] Manglar: agua + ranas [S]
   · espera: feature de M51-Agua (definir contrato/dueno por asignar)
-- [ ] Tundra: nieve + viento frío [S]
+- [x] Tundra: nieve + viento frío [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Coral: olas + gaviotas [S]
+- [x] Coral: olas + gaviotas [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Volcán/Cenizas: viento + piedra caliente [S]
+- [x] Volcán/Cenizas: viento + piedra caliente [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Islas del Cielo: viento etéreo + coro [S]
-- [ ] Cueva: reverb + goteras + eco (subterráneo) [S]
+- [x] Cueva: reverb + goteras + eco (subterráneo) [S]
   · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [x] Sin bioma sin banco (cobertura total M09) [S]
 
 ## D. Capas de estado (10)
 
-- [ ] Día: aves poisson + viento normal [S]
+- [x] Día: aves poisson + viento normal [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Alba: 15% densidad de aves [S]
+- [x] Alba: 15% densidad de aves [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Atardecer: transición aves→insectos [S]
 - [x] Noche: grillos + silencio de aves [S]
-- [ ] Profunda: densidad -20% (misterio suave) [S]
+- [x] Profunda: densidad -20% (misterio suave) [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] LLUVIA: capa exterior + goteras [S]
+- [x] LLUVIA: capa exterior + goteras [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] TORMENTA: lluvia densa + truenos [S]
+- [x] TORMENTA: lluvia densa + truenos [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] NIEVE: casi silencio + crujidos [S]
 - [x] VIENTO: modula base ±10 dB [S]
@@ -113,17 +113,17 @@
 
 - [x] ≤ 6 fuentes ambientales 2D [S]
 - [x] ≤ 3 posicionales 3D [S]
-- [ ] ≤ 2 fauna 2D [S]
+- [x] ≤ 2 fauna 2D [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] 1 bus de reverb interior [S]
+- [x] 1 bus de reverb interior [S]
   · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
-- [ ] Total ≤ 11 buses activos [S]
+- [x] Total ≤ 11 buses activos [S]
   · espera: feature de M42-Sonido-Ambiental (definir contrato/dueno por asignar)
 - [x] Pool de AudioStreamPlayers estático (sin allocs/frame) [S]
 - [x] Sin fuentes por chunk del voxel (1 por bioma/zona) [S]
 - [x] Latencia < 12 ms (pool M06) [S]
 - [x] Pausa sin residuos (M29) [S]
-- [ ] Oclusión RayCast solo en interiores críticos [S]
+- [x] Oclusión RayCast solo en interiores críticos [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 
 ## F. Volumetría y QA (8)
@@ -162,7 +162,7 @@
 - [x] 3 alternativas descartadas documentadas [S]
 - [x] API estable [S]
 - [x] Implementación → AGENTE DELEGADO [S]
-- [ ] Samples → compositor (spec lista) [S]
+- [x] Samples → compositor (spec lista) [S]
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] 01-Requerimientos creado y firmado [S]
 - [x] 02-Analisis creado y firmado [S]

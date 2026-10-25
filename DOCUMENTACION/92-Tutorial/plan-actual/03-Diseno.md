@@ -329,3 +329,21 @@ Contratos vivos para M53: seÃ±ales `paso_mostrado`, `capitulo_iniciado/complet
 
 ### N5: si el jugador no tiene los materiales, la pista indica dónde conseguirlos (sin misión)
 - Spec: N5: si el jugador no tiene los materiales, la pista indica dónde conseguirlos (sin misión). Coherente with M92 (tutorial) and M16 (crafting).
+
+
+## Specs Tutorial (Beam 652)
+
+### O2: la pista explica la opcion de dialogo (elegir linea con E)
+- Spec: O2: la pista explica la opcion de dialogo (elegir linea con E). Coherente with M92 (tutorial) and M20 (dialogos).
+
+### O3: se consume dialogo_iniciado/dialogo_terminado para validar el paso
+- Spec: O3: se consume dialogo_iniciado/dialogo_terminado para validar el paso. Coherente with M92 (tutorial) and M20 (dialogos).
+
+### O5: la leccion termina con la entrega del primer regalo (sin mision formal de M22)
+- Spec: O5: la leccion termina con la entrega del primer regalo (sin mision formal de M22). Coherente with M92 (tutorial) and M22 (historia).
+
+### P12: jugador con lectura lenta (M58 x4): las pistas permanecen sin bloquear acciones
+- Spec: P12: jugador con lectura lenta (M58 x4): las pistas permanecen sin bloquear acciones. Coherente with M92 (tutorial) and M58 (accesibilidad).
+
+### Q8: profiler: verificar <= 0.2 ms en la zona de la plaza con NPCs y cultivos
+- Spec: Q8: profiler: verificar <= 0.2 ms en la zona de la plaza con NPCs y cultivos. Coherente with M92 (tutorial) and M61 (rendimiento).

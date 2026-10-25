@@ -55,7 +55,7 @@
 - [ ] Crear el evento de eclipse [M] — **Dueño M32:** evento estacional; 0 en disco (el eclipse de cadena-faro es contexto narrativo, no el evento de M32).
 - [x] Crear 5 cadenas secretas ocultas [M] — Step-5-WorkBuddy 2026-10-22 (iter. 11, Log 2134): 5 cadenas en data/historias/secundarias.json (cadena-mapa-secreto con nico_gato + OBJ-SEC-002 «Mapa secreto», cadena-cristal-oculto con vera_ardilla + OBJ-SEC-003 «Cristal oculto», cadena-diario-antiguo con sofia_buho + OBJ-SEC-005 «Diario antiguo», cadena-pergamino-mistico con teo_conejo + OBJ-ART-002 «Pergamino mistico», cadena-mascara-ceremonial con luna_zorra + OBJ-ART-004 «Mascara ceremonial»; NPC REALES de data/villagers/ y objetos REALES de data/items/ verificados por campo id). Las 5 nacen oculta:true -> invisibles en cadenas_disponibles() hasta iniciarse (descubrimiento por mundo, 03-Diseno L38/L58). End-to-end x2 en test_historias.gd bloque P (Log 2134).
 - [x] Definir el descubrimiento de las ocultas por el mundo [M] — 03-Diseno L58 («se descubren por pistas del mundo (M22) o al leer un objeto») + implementado: ocultas invisibles en cadenas_disponibles() hasta iniciarse (secondary_stories_service.gd L71; test bloque E).
-- [ ] Documentar historias estacionales y secretas [S]
+- [x] Documentar historias estacionales y secretas [S] — 04-Codigo Notas iter. 20 (Log 2186): 7 cadenas oculta:true medidas en data/historias/secundarias.json (las 5 de la iter. 11 + cadena-secretta-luciernagas del principal + cadena-epilogo-guardian, final secreto); descubrimiento por secondary_stories_service.gd L138 + 03-Diseno L58 (pistas del mundo M22 o al leer un objeto), testeado end-to-end en bloques P (iter. 11) y X (iter. 19); estacionales = dueño M32 (0 cadenas estacionales en disco; L52-L55/L72 siguen [ ]). Ofrecido a revertir.
 
 ## Cadenas de misiones y exploración
 
@@ -99,7 +99,7 @@
 - [ ] Crear 10+ cosméticos (disfraces, sombreros, paletas de casa) [M]
 - [x] Definir cero stats en recompensas (cozy) [S] — 03-Diseno L52 («10+ disfraces/sombreros/paletas de casa; nunca stats (visión cozy)»); el schema no tiene campo de stats (quest_chain.gd).
 - [x] Definir recompensas únicas no duplicables (M66 cofre) [M] — 03-Diseno L25 («recompensa y consecuencia únicas») y L72 («recompensas en especie (nunca duplicadas — M66)»); validador exige recompensa presente + título único (secondary_stories_service.gd L212-221).
-- [ ] Documentar recompensas en el plan-actual [S]
+- [x] Documentar recompensas en el plan-actual [S] — 04-Codigo Notas iter. 20 (Log 2186): schema recompensa{diario?, cosmetico?} (quest_chain.gd; 03-Diseno L18) + validador de recompensa presente (secondary_stories_service.gd L288-289) medido HOY sobre las 80 cadenas: 80/80 no vacías, 79 con diario, 76 con cosmetico (la única sin diario es cadena-secretta-luciernagas, solo cosmetico); 0 stats (visión cozy, 03-Diseno L52); unicidad de recompensa/consecuencia (M66); contenido L97/L98/L99 sigue [ ] propio. Ofrecido a revertir.
 
 ## Consecuencias y diálogos posteriores
 
@@ -112,7 +112,7 @@
 - [x] Crear la consecuencia "molino funcionando" [S] — DEGRADADO por el director 2026-10-21 (medición Step-5, Log 2082: grep molino_funcionando sobre data/+scripts/ = 0 archivos; marca sin apoyo en disco). [x] — Step-5 2026-10-22 (iter. 6, Log 2117): el flag TIENE respaldo en disco: cadena-molino (data/historias/secundarias.json) lo aplica como consecuencia a WorldState (M21), verificado end-to-end en test_historias.gd bloque K (ws_has("molino_funcionando") verde). La degradacion a [?] del director (msg 151, 2026-10-21) se apoyo en el grep de Log 2082 (0 archivos): medicion de hoy = 1 archivo de datos + corrida end-to-end. Ofrecido a revertir si el director mantiene la degradacion.
 - [x] Definir el cambio visual del mundo por consecuencia [M] — 03-Diseno L54 («cada consecuencia cambia el mundo visualmente y desbloquea diálogos posteriores»). Aplicación visual: dueños M17/M18/M27.
 - [x] Definir diálogos posteriores por estado de mundo [M] — 03-Diseno L54 («guardado por NPC + estado de mundo») + campo dialogo_posterior del schema. Contenido de los diálogos: dueño M21.
-- [ ] Documentar consecuencias y diálogos posteriores [S]
+- [x] Documentar consecuencias y diálogos posteriores [S] — 04-Codigo Notas iter. 20 (Log 2186): tabla de las 12 del diseño (03-Diseno L53) vs flags medidos HOY — 9 con respaldo en disco, «taller abierto» [ ] honesto (0 cadenas, guarda bloque S), «camino al faro despejado» y «puerto ampliado» sin respaldo, DRIFT de nombre en la biblioteca (biblioteca_quemada_rescatada); aplicación vía secondary_stories_service.gd L232-236 (WorldState M21); dialogo_posterior existe en el schema (quest_chain.gd L20) con 0/80 usos — contenido dueño M21. Ofrecido a revertir.
 
 ## Anti-repetición y contexto
 
@@ -198,7 +198,7 @@ A diferencia de los clusters legales/store (que solo tenían JSON+Validator+Test
 - Estado: **🟡 Con dudas** (núcleo verificado; contenido pendiente).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 105 ítems · Completados: 83 · Pendientes: 20 · No resueltos: 2.
+**Totales:** 105 ítems · Completados: 86 · Pendientes: 17 · No resueltos: 2. (Re-medido Step-5-WorkBuddy 2026-10-25, Log 2186, por prefijo de línea tras 3 flips de documentación con cita: L58/L102/L115 — 04-Codigo Notas iter. 20, suite 742/0/EXIT 0 sin regresión. La línea anterior decía 83/20/2.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 24 [x] / 80 [ ] / 0 [?].
