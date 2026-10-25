@@ -101,7 +101,7 @@
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -155,7 +155,21 @@ var _vistos: Dictionary = {}
 # (78->81 x2, 77->80 x1, mismos valores en los mensajes) + bloque X
 # _test_postgame_cluster(). El guardian se probara EN ROJO por inyeccion de
 # runtime sobre el bloque X.
-const CHECKS_MINIMOS := 742
+# Iter. 21 (2026-10-25): L97 "20 capitulos de diario" — el puente M23->M55
+# consumia data muerta (derivaba "mision_"+id sin leer recompensa.diario; 79
+# valores capitulo-* con 0 usos en todo el codebase) y el catalogo de M55
+# (data/diario/diario_catalog.json) solo tiene 2 de las 79 entradas
+# (mision_cadena-faro, mision_cadena-invernadero) -> 77 recompensas degradan
+# en silencio (registrar() false, diary_service.gd L136-137; contenido de
+# M55, reportado a la directora). Fix: el puente CONSUME el capitulo declarado
+# + los 79 valores renombrados al esquema real mision_<cadena_id>
+# (comportamiento identico: las 2 con respaldo siguen registrando, las 77
+# siguen degradando = hallazgo de M55) + bloque Y _test_recompensa_diario()
+# (+8 checks: invariante diario == 'mision_'+id, 79 con / 1 sin, 77 sin
+# respaldo en catalogo M55, runtime faro registrado / biblioteca no). Piso
+# MEDIDO en verde: 750/0/EXIT 0 x3. El guardian se probo EN ROJO por
+# inyeccion de runtime sobre el bloque Y (743<750, EXIT 1).
+const CHECKS_MINIMOS := 750
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -201,6 +215,7 @@ func _run() -> void:
 	_test_agricultura()
 	_test_pesca_coleccion()
 	_test_postgame_cluster()
+	_test_recompensa_diario()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -2326,6 +2341,65 @@ func _test_postgame_cluster() -> void:
 		ws.set_flag("epilogo_de_la_aldea_contado", false)
 		ws.set_flag("epilogo_del_guardian_cantado", false)
 	_fin("X")
+
+
+func _test_recompensa_diario() -> void:
+	# Iter. 21 (Log 2187): L97 "Crear 20 capitulos de diario (recompensa
+	# narrativa)" medido sobre disco. El puente M23->M55 derivaba
+	# "mision_"+cadena_id SIN LEER el capitulo declarado en recompensa.diario
+	# (03-Diseno L18): el campo era data muerta (79 valores capitulo-*, 0 usos
+	# en todo el codebase; quest_chain.gd L43 solo miraba la clave). Ademas el
+	# catalogo de M55 (data/diario/diario_catalog.json) solo tiene 2 de las 79
+	# entradas (mision_cadena-faro, mision_cadena-invernadero — esquema
+	# mision_<id> del puente de M22, diary_service.gd L103) -> 77 recompensas
+	# degradan en silencio (registrar() devuelve false, diary_service.gd
+	# L136-137; finding de contenido de M55, reportado a la directora).
+	# TANDA: (1) el puente ahora CONSUME el capitulo declarado; (2) los 79
+	# valores renombrados al esquema real mision_<cadena_id> (comportamiento
+	# identico: las 2 con respaldo siguen registrando, las 77 siguen degradando
+	# — con el dataset actual declarado == derivado, el check de runtime pasa
+	# bajo ambas implementaciones; lo que cambia es el dataset futuro); (3) el
+	# invariante y el hueco quedan fijados en suite.
+	var principal := _leer_json("res://data/historias/secundarias.json")
+	var cat_raw: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/diario/diario_catalog.json"))
+	var ids_m55 := {}
+	if typeof(cat_raw) == TYPE_DICTIONARY:
+		for c in (cat_raw as Dictionary).get("categorias", []):
+			for e in (c as Dictionary).get("entradas", []):
+				ids_m55[String((e as Dictionary).get("id", ""))] = true
+	var con_diario := 0
+	var sin_diario := []
+	var sin_respaldo := 0
+	var viol := []
+	for c in principal:
+		var cid := String((c as Dictionary).get("id", ""))
+		var rec: Dictionary = (c as Dictionary).get("recompensa", {})
+		var d := String(rec.get("diario", ""))
+		if d == "":
+			sin_diario.append(cid)
+			continue
+		con_diario += 1
+		if d != "mision_" + cid:
+			viol.append("%s=%s" % [cid, d])
+		if not ids_m55.has(d):
+			sin_respaldo += 1
+	_check(principal.size() == 80, "catalogo principal con 80 cadenas (crudo): %d" % principal.size())
+	_check(con_diario == 79, "79 cadenas declaran capitulo de diario: %d" % con_diario)
+	_check(sin_diario.size() == 1 and sin_diario[0] == "cadena-secretta-luciernagas",
+		"1 cadena sin diario (solo cosmetico) = cadena-secretta-luciernagas: %s" % str(sin_diario))
+	_check(viol.is_empty(), "invariante recompensa.diario == 'mision_'+id en las 79 (violaciones: %s)" % str(viol))
+	_check(sin_respaldo == 77, "77 de 79 capitulos NO existen en el catalogo M55 (contenido de M55, hallazgo): %d" % sin_respaldo)
+	_check(ids_m55.has("mision_cadena-faro") and ids_m55.has("mision_cadena-invernadero"),
+		"las 2 entradas con respaldo en M55 son mision_cadena-faro y mision_cadena-invernadero")
+	# Runtime: el capitulo CON respaldo se registra al completar (el puente
+	# consume la declaracion; el bloque C completo cadena-faro antes de Y).
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(diary.esta_registrada("mision_cadena-faro"),
+			"mision_cadena-faro registrado tras completar cadena-faro (puente consume recompensa.diario)")
+		_check(not diary.esta_registrada("mision_cadena-biblioteca"),
+			"mision_cadena-biblioteca NO registrado (sin entrada en catalogo M55: el puente degrada en silencio)")
+	_fin("Y")
 
 
 ## Busca un token literal en un arbol (.json/.tres) y devuelve las rutas que lo

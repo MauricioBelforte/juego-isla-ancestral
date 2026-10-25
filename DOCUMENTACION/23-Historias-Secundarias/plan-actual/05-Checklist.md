@@ -94,7 +94,7 @@
 
 ## Recompensas
 
-- [ ] Crear 20 capítulos de diario (recompensa narrativa) [M]
+- [ ] Crear 20 capítulos de diario (recompensa narrativa) [M] — Step-5-WorkBuddy 2026-10-25 (iter. 21, Log 2187): MEDIDO el hueco — 79/80 cadenas declaran `recompensa.diario`, pero el catálogo de M55 (`data/diario/diario_catalog.json`, categoría `misiones`) solo tiene 2 de esas entradas (`mision_cadena-faro`, `mision_cadena-invernadero`); las otras 77 degradan en silencio (`registrar()` false, `diary_service.gd` L136-137). Lado M23 arreglado: el puente CONSUME el capítulo declarado (antes derivaba `mision_`+id y el valor declarado era data muerta, 0 usos en el codebase) y los 79 valores renombrados al esquema real `mision_<cadena_id>` (comportamiento idéntico: 2 siguen registrando, 77 siguen degradando). Suite bloque Y: 750/0/EXIT 0 x3, guardián EN ROJO 743<750. El contenido de los 77 capítulos es de M55 (dueño): pedido a la directora en msg 228. Flip solo cuando existan las entradas.
 - [ ] Crear recetas de conversación desbloqueables [M]
 - [ ] Crear 10+ cosméticos (disfraces, sombreros, paletas de casa) [M]
 - [x] Definir cero stats en recompensas (cozy) [S] — 03-Diseno L52 («10+ disfraces/sombreros/paletas de casa; nunca stats (visión cozy)»); el schema no tiene campo de stats (quest_chain.gd).

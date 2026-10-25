@@ -181,3 +181,105 @@ Versión del esquema incluida; migración en el cargador (M58).
 
 ### P12: exteriores — modelo exterior que cambia de aspecto por etapa
 - Spec: P12: exteriores — modelo exterior que cambia de aspecto por etapa. Coherente with M18 (casas) and M17 (construcción).
+
+
+## Specs Casas (Beam 679)
+
+### P15: camas — dormir avanza la hora segun M29 y restaura energia
+- Spec: P15: camas — dormir avanza la hora segun M29 y restaura energia. Coherente with M18 (casas) and M29 (tiempo).
+
+### P16: mesas — soporte para colocar objetos encima
+- Spec: P16: mesas — soporte para colocar objetos encima. Coherente with M18 (casas) and M16 (construccion).
+
+### P17: sillas — sentarse con animacion y salida (CUBO B-EDITOR)
+- Spec: P17: sillas — sentarse con animacion y salida. Coherente with M18 (casas) and M47 (animacion). Saltado (CUBO B).
+
+### P18: lamparas — encendido/apagado e iluminacion interior
+- Spec: P18: lamparas — encendido/apagado e iluminacion interior. Coherente with M18 (casas) and M48 (iluminacion).
+
+### P19: electrodomesticos — horno, fregadero con interaccion simple
+- Spec: P19: electrodomesticos — horno, fregadero con interaccion simple. Coherente with M18 (casas) and M16 (construccion).
+
+
+## Specs Casas (Beam 680)
+
+### P20: objetos decorativos — celdas del grid con preview y validacion
+- Spec: P20: objetos decorativos — celdas del grid con preview y validacion. Coherente with M18 (casas) and M16 (construccion).
+
+### P21: objetos de pared — cuadros y colgantes en celdas de pared
+- Spec: P21: objetos de pared — cuadros y colgantes en celdas de pared. Coherente with M18 (casas) and M16 (construccion).
+
+### P22: cuadros — decoracion de pared con rotacion y reubicacion
+- Spec: P22: cuadros — decoracion de pared con rotacion y reubicacion. Coherente with M18 (casas) and M16 (construccion).
+
+### P23: plantas — macetas interiores y plantas de jardin
+- Spec: P23: plantas — macetas interiores y plantas de jardin. Coherente with M18 (casas) and M33 (agricultura).
+
+### P24: colecciones — catalogo de muebles por estilo (set completo premia)
+- Spec: P24: colecciones — catalogo de muebles por estilo (set completo premia). Coherente with M18 (casas) and M73 (coleccion).
+
+
+## Specs Casas (Beam 681)
+
+### P25: estilos de decoracion — presets ancestral, floral, oceanico, cenit
+- Spec: P25: estilos de decoracion — presets ancestral, floral, oceanico, cenit. Coherente with M18 (casas) and M16 (construccion).
+
+### Cimientos visibles con la huella de la casa en el modo construccion
+- Spec: cimientos visibles con la huella de la casa en el modo construccion. Coherente with M18 (casas) and M16 (construccion).
+
+### Visual del exterior (choza, obra, etapa) coherente con el estado
+- Spec: visual del exterior (choza, obra, etapa) coherente con el estado. Coherente with M18 (casas) and M16 (construccion).
+
+### Plantas y macetas con requisitos de superficie
+- Spec: plantas y macetas con requisitos de superficie. Coherente with M18 (casas) and M33 (agricultura).
+
+### Sets de coleccion por estilo con bonus de visita
+- Spec: sets de coleccion por estilo con bonus de visita. Coherente with M18 (casas) and M73 (coleccion).
+
+
+## Specs Casas (Beam 682)
+
+### Catalogo de estilos con presets visuales
+- Spec: catalogo de estilos con presets visuales. Coherente with M18 (casas) and M16 (construccion).
+
+### Obra de casa iniciada mediante el patron de construccion M17
+- Spec: obra de casa iniciada mediante el patron de construccion M17. Coherente with M18 (casas) and M17 (construccion).
+
+### Iluminacion interior propia (independiente del ciclo M31)
+- Spec: iluminacion interior propia (independiente del ciclo M31). Coherente with M18 (casas) and M48 (iluminacion).
+
+### Eventos M29 (cumpleanos, festivales) generan visitas especiales
+- Spec: eventos M29 (cumpleanos, festivales) generan visitas especiales. Coherente with M18 (casas) and M29 (tiempo).
+
+### Culling de muebles dentro de la habitacion
+- Spec: culling de muebles dentro de la habitacion. Coherente with M18 (casas) and M61 (rendimiento).
+
+
+## Specs Casas (Beam 683)
+
+### Carga asincrona del interior sin congelar el frame
+- Spec: carga asincrona del interior sin congelar el frame. Coherente with M18 (casas) and M63 (streaming).
+
+### Iluminacion calida interior por habitacion
+- Spec: iluminacion calida interior por habitacion. Coherente with M18 (casas) and M48 (iluminacion).
+
+### Microfeedback del mueble colocado (chirrido/martillito)
+- Spec: microfeedback del mueble colocado (chirrido/martillito). Coherente with M18 (casas) and M42 (sonido).
+
+### API estable para consumo de M17, M14 y M19
+- Spec: API estable para consumo de M17, M14 y M19. Coherente with M18 (casas) and M16 (construccion).
+
+### Test: flujo completo construir, entrar, ampliar, decorar, almacenar
+- Spec: test: flujo completo construir, entrar, ampliar, decorar, almacenar. Coherente with M18 (casas) and M112 (testing).
+
+
+## Specs Casas (Beam 684)
+
+### Test: 3 dias simulados con visitas de vecinos sin fallos
+- Spec: test: 3 dias simulados con visitas de vecinos sin fallos. Coherente with M18 (casas) and M112 (testing).
+
+### Test: mudanza de muebles contenedores sin perdida de items
+- Spec: test: mudanza de muebles contenedores sin perdida de items. Coherente with M18 (casas) and M112 (testing).
+
+### Test: obra en curso sin softlocks (M66)
+- Spec: test: obra en curso sin softlocks (M66). Coherente with M18 (casas) and M66 (anti-softlock).

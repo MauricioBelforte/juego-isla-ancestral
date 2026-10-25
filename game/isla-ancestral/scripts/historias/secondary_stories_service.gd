@@ -234,12 +234,19 @@ func _completar_cadena(cadena_id: String) -> Dictionary:
 	if ws != null:
 		for flag in consec:
 			ws.set_flag(String(flag), bool(consec[flag]))
-	# Recompensa diaria → M55 (categoría descubrimientos, entrada mision_X)
+	# Recompensa de diario → M55 (categoría "misiones"; entrada = el capítulo
+	# DECLARADO en recompensa.diario, no un id derivado — iter. 21, Log 2187).
+	# Antes se derivaba "mision_"+cadena_id y el valor declarado quedaba como
+	# data muerta (0 usos en todo el codebase; el validador solo miraba la
+	# clave). El catálogo de M55 valida la entrada: si no existe, registrar()
+	# devuelve false EN SILENCIO (medido: 2 de 79 capítulos existen en disco;
+	# el resto es contenido de M55 — hallazgo reportado a la directora).
 	var rec: Dictionary = c.get("recompensa", {})
-	if String(rec.get("diario", "")) != "":
+	var capitulo := String(rec.get("diario", ""))
+	if capitulo != "":
 		var diary := get_node_or_null("/root/Diary")
 		if diary != null:
-			diary.registrar("mision_" + cadena_id, "misiones")
+			diary.registrar(capitulo, "misiones")
 	# Cosmético → señal de desbloqueo (M71 escucha)
 	var bus := get_node_or_null("/root/EventBus")
 	if String(rec.get("cosmetico", "")) != "" and bus != null:

@@ -1164,3 +1164,45 @@ flippa por la mitad.
   (documentación en esta sección + evidencia medida de disco de HOY; suite
   742/0/EXIT 0 sin regresión). M23 = **86 [x] / 17 [ ] / 2 [?] = 105**
   (prefijo de línea; Totales sincronizado). Ofrecidos a revertir.
+
+## Iter. 21 — Recompensa de diario: el puente consumía data muerta; 2 de 79 capítulos existen (Log 2187, 2026-10-25, Step-5-WorkBuddy)
+
+**Ítem del 05:** L97 "Crear 20 capítulos de diario (recompensa narrativa)"
+— QUEDA `[ ]` honesto: el contenido de los capítulos vive en el catálogo de
+M55 (dueño). Esta iterada arregla el lado M23 y mide el hueco exacto.
+
+- **Medición (disco, HOY):** 80 cadenas en el principal; 79 declaran
+  `recompensa.diario` (1 sin diario: `cadena-secretta-luciernagas`, solo
+  cosmético). El campo era DATA MUERTA: `secondary_stories_service.gd`
+  derivaba `"mision_" + cadena_id` sin leer el valor declarado, y los 79
+  valores `capitulo-*` tenían 0 usos en todo el codebase (el validador
+  `quest_chain.gd` L43 solo miraba la CLAVE). El catálogo de M55
+  (`data/diario/diario_catalog.json`, categoría `misiones`) tiene 4 entradas,
+  de las que SOLO 2 son de M23: `mision_cadena-faro` y
+  `mision_cadena-invernadero` (esquema `mision_<id>` del puente de M22,
+  `diary_service.gd` L103). Las otras 77 recompensas degradan EN SILENCIO
+  (`registrar()` devuelve false, `diary_service.gd` L136-137).
+- **Fix M23 (comportamiento idéntico, verificado):** (1) el puente ahora
+  CONSUME el capítulo declarado (`_completar_cadena`); (2) los 79 valores
+  renombrados de `capitulo-*` a `mision_<cadena_id>` (reemplazo exacto sobre
+  el texto crudo: LF puro, UTF-8 sin BOM, 54842 -> 55361 B). Con el dataset
+  actual declarado == derivado, las 2 con respaldo siguen registrando y las
+  77 siguen degradando: el cambio es de deuda, no de comportamiento — lo que
+  habilita es que una cadena futura declare cualquier id de capítulo sin
+  tocar código. El invariante de suite (declarado == derivado) garantiza además
+  que el puente de M22 (`mision_ + slug`) y el de M23 registren EL MISMO id.
+- **Suite:** bloque Y `_test_recompensa_diario()` (+8 checks): invariante
+  `recompensa.diario == "mision_" + id` en las 79, 79 con / 1 sin diario, 77
+  sin respaldo en el catálogo M55, runtime `mision_cadena-faro` registrado /
+  `mision_cadena-biblioteca` no. Piso 742 -> **750 MEDIDO en verde:
+  750/0/EXIT 0 x3** (binario real). Guardián probado EN ROJO por inyección de
+  runtime sobre el bloque Y (743 < 750, EXIT 1, "el bloque Y NO se ejecutó").
+- **Pedido a la directora (msg 228):** los 77 capítulos faltantes (de 79
+  declarados) son contenido de M55. Rutear a su dueño o autorizar escritura
+  directa; hasta eso L97 no se puede flipear. L98/L99 medidos en la misma
+  tanda: `dialogo_posterior` 0/80 usos (campo existe, sin contenido) y 74
+  cosméticos distintos, 0 con item homónimo en `data/items/` — también
+  desembocan en dueños externos.
+
+- **Flips del 05-Checklist con cita:** NINGUNO (L97 sigue `[ ]` con nota
+  medida). M23 = **86 [x] / 17 [ ] / 2 [?] = 105** (sin cambios).

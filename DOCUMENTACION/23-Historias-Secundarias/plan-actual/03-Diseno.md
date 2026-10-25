@@ -22,6 +22,16 @@ oculta: false
 postgame: false
 ```
 
+**Nota (iter. 21, Log 2187):** el valor de `recompensa.diario` es el id del
+capítulo en el catálogo del diario de M55 (`data/diario/diario_catalog.json`,
+categoría `misiones`). El esquema REAL de esos ids es `mision_<cadena_id>`
+(igual que el puente de M22 en `diary_service.gd` L103); el nombre
+`capitulo-faro` del ejemplo de arriba nunca se implementó — los 79 valores
+`capitulo-*` eran data muerta (el puente derivaba `mision_`+id sin leerlos) y
+se renombraron al esquema real. Las 2 entradas que existen hoy
+(`mision_cadena-faro`, `mision_cadena-invernadero`) registran al completar;
+las otras 77 son contenido de M55 (hallazgo reportado a la directora).
+
 - **Validador:** `contexto` no vacío (anti-repetición), `pasos >= 3`, referencias a NPC/lugares/objetos reales, requisitos alcanzables (M66), recompensa y consecuencia únicas.
 
 ## Catálogo (60 cadenas)

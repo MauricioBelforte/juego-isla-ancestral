@@ -190,3 +190,56 @@ func interact() -> void
 - Todo texto de runtime sale de `resolve_text()` (claves + placeholders); nunca strings literales en gameplay.
 - Condiciones y efectos usan exclusivamente `WorldStateService` (capa única) para no duplicar estado.
 - Un diálogo activo pausa la acción del jugador (M29 respeta pausa del reloj).
+
+## Specs Dialogos (Beam 676)
+
+### RF4: salto rapido de linea y salto completo con confirmacion doble
+- Spec: RF4: salto rapido de linea y salto completo con confirmacion doble. Coherente with M21 (dialogos) and M53 (UI).
+
+### Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego
+- Spec: recarga en caliente del grafo en el editor (tool) sin reiniciar el juego. Coherente with M21 (dialogos) and M108 (herramientas).
+
+### Crear escena dialogue_ui.tscn como CanvasLayer reutilizable
+- Spec: crear escena dialogue_ui.tscn como CanvasLayer reutilizable. Coherente with M21 (dialogos) and M53 (UI).
+
+### Usar las fuentes del modulo M87 en textos y retratos
+- Spec: usar las fuentes del modulo M87 en textos y retratos. Coherente with M21 (dialogos) and M87 (fuentes).
+
+### Navegar opciones con gamepad (dpad + boton A)
+- Spec: navegar opciones con gamepad (dpad + boton A). Coherente with M21 (dialogos) and M56 (interfaz).
+
+
+## Specs Dialogos (Beam 677)
+
+### Perder la rama elegida en el historial de sesion para retornos
+- Spec: perder la rama elegida en el historial de sesion para retornos. Coherente with M21 (dialogos) and M22 (historia).
+
+### Efectos de opcion informan al sistema de misiones M22
+- Spec: efectos de opcion informan al sistema de misiones M22. Coherente with M21 (dialogos) and M22 (historia).
+
+### Dialogos de pistas y revelaciones conectados a M23 (templos)
+- Spec: dialogos de pistas y revelaciones conectados a M23 (templos). Coherente with M21 (dialogos) and M23 (templos).
+
+### Dialogos especiales por festivales (M73) con ramas temporales
+- Spec: dialogos especiales por festivales (M73) con ramas temporales. Coherente with M21 (dialogos) and M73 (eventos).
+
+### Pausa del reloj M29 pausa el tipeo sin perder estado
+- Spec: pausa del reloj M29 pausa el tipeo sin perder estado. Coherente with M21 (dialogos) and M29 (tiempo).
+
+
+## Specs Dialogos (Beam 678)
+
+### Guerra de inputs: el dialogo activo bloquea acciones del jugador
+- Spec: guerra de inputs: el dialogo activo bloquea acciones del jugador. Coherente with M21 (dialogos) and M10 (personaje).
+
+### NPC desaparece o se aleja durante el dialogo: cierre limpio sin errores
+- Spec: NPC desaparece o se aleja durante el dialogo: cierre limpio sin errores. Coherente with M21 (dialogos) and M18 (NPC).
+
+### Opcion unica con condiciones falsas: rama colapsa a next_id alternativo
+- Spec: opcion unica con condiciones falsas: rama colapsa a next_id alternativo. Coherente with M21 (dialogos) and M22 (historia).
+
+### Nodo OPCIONES sin opciones visibles: salta a next_id sin pantalla vacia
+- Spec: nodo OPCIONES sin opciones visibles: salta a next_id sin pantalla vacia. Coherente with M21 (dialogos) and M53 (UI).
+
+### Dialogo interrumpido por teleport del jugador (M69): se cierra y se loguea
+- Spec: dialogo interrumpido por teleport del jugador (M69): se cierra y se loguea. Coherente with M21 (dialogos) and M69 (viaje rapido).

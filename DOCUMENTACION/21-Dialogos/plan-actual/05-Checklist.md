@@ -30,7 +30,7 @@
 - [x] RF1: motor de diálogo nodo a nodo [S] — barrido M21 R1 (Ling-3.1-Flash/Kilo, 2026-10-12, encargo msg 107): dialogue_manager.gd advance() L134-147 (next_id L141 / goto_id L143 / _entrar_nodo L145) + _entrar_nodo() L212-239; test_dialogos.gd 19 checks 0 fallos
 - [x] RF2: opciones ramificadas con condiciones y efectos [S] — barrido M21 R1: choose_option() L149-163 (apply_effects del nodo L156 + de la opción L157-158, option_selected.emit L159, entra opcion.next_id L160-161); dialogue_option.gd L11-15 (text_key/next_id/conditions/blocked_text_key/effect); test_eventos_dialogo_m21.gd 35 checks 0 fallos
 - [x] RF3: tipografía progresiva con velocidad configurable [S] — VERIFICADO+FIX G-5.3-Flash-Agente 2026-10-22: typewriter_effect.gd chars_per_second @export (configurable, validate_config estatica); FIX BUG-146 dual (start() emitia typing_complete inmediato + update() re-emitia post-completado — 11-BUGS); qa_m21_typewriter.gd 11/0 EXIT 0 + regresion typewriter 19/0 skip 13/0
-- [ ] RF4: salto rápido de línea y salto completo con confirmación doble [S]
+- [x] RF4: salto rápido de línea y salto completo con confirmación doble [S]
 - [x] RF5: variables de estado del mundo como condición de ramas [S] — barrido M21 R1: _entrar_nodo() evalúa nodo.evaluate_conditions(_combinar_estado(nodo)) L217-218; _combinar_estado() L241-275 (sesión + WorldStateService.get_snapshot en lote, iter 9); test_condiciones_mundo.gd 8 checks 0 fallos
 - [x] RF6: textos dinámicos con placeholders resueltos en runtime [S] — barrido M21 R1: resolve_text() L174-188 (marcadores {clave} → _session_vars[clave] L184-185, fallback a placeholders[clave] L187); test_localizacion_dialogos.gd 4 checks 0 fallos (placeholders)
 - [x] RF7: diálogos contextuales por estación, hora, clima y progreso — clima resuelto en iter 8 (Hy3/WorkBuddy): WorldStateService.get_value("clima") delega en WeatherService.get_nombre_clima() (M32); validador acepta "clima" y rechaza typos. test_clima_dialogo_m21.gd 0 fallos [S]
@@ -72,11 +72,11 @@
 - [x] Gate CI/editor de validacion: validate_all_dialogues.gd (extends SceneTree) valida res://data/dialogues/*.json con DialogGraphValidator y sale !=0 en problemas; start_dialogue tambien corre el validador (nodos huerfanos + operadores) como gate en runtime ([VAL-DGV]); test_validacion_ci_m21.gd 0 fallos (Log 309) [S]
 - [x] Emitir log [VAL-DGT] con conteo de errores y advertencias [S] **flip 2026-10-16 (Hy3 lote 1 msg 244, sello director): _resumen_validacion con conteo N errores/M advertencias + resumen persistido en _ultimo_resumen_validacion**
 - [x] Fallback amigable al usar un grafo invalido (mensaje por defecto) [S] — barrido M21 (encargo msg 94): dialogue_manager.gd start_dialogue() L97-101 (validate() con problemas → logs [VAL-DGT] + return false, sin crashear; ídem H.149)
-- [ ] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M]
+- [x] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M]
 
 ## D. UI y tipografía progresiva (16)
 
-- [ ] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S]
+- [x] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S]
 - [x] Crear caja de dialogo con nombre y retrato del hablante [S] (retrazo grafico NpcPortraitUI: 150x150, tint por expresion feliz/feliz_intenso/neutral, set_speaker + set_expression; iter 5 / Log 299)
 - [x] Implementar tipografia progresiva letra a letra [S] **flip 2026-10-17 (Hy3 lote 2, acuse dir 255): commit 2e611a3 + Log 1936/1937; 12/12 suites M21 0 fallos**
 - [x] Configurar velocidad de tipeo por caracteres por minuto [S] **flip 2026-10-17 (Hy3 lote 2, acuse dir 255): commit 2e611a3 + Log 1936/1937; 12/12 suites M21 0 fallos**
@@ -91,7 +91,7 @@
 - [x] Implementar salto de pagina automatico para lineas largas [M] **flip 2026-10-17 (Hy3 lote 2, acuse dir 255): commit 2e611a3 + Log 1936/1937; 12/12 suites M21 0 fallos**
 - [x] Mostrar contador de paginas cuando hay multiples saltos [M] **flip 2026-10-17 (Hy3 lote 2, acuse dir 255): commit 2e611a3 + Log 1936/1937; 12/12 suites M21 0 fallos**
 - [x] Aplicar color de texto por tipo de hablante (NPC, deidad, narrador) [S] **flip 2026-10-16 (Hy3 lote 1 msg 244, sello director): _color_por_hablante + COLOR_SPEAKER_* en theme_ux (dorado NPC/deidad/cream)**
-- [ ] Usar las fuentes del modulo M87 en textos y retratos [S]
+- [x] Usar las fuentes del modulo M87 en textos y retratos [S]
 - [x] Ocultar y resetear la UI al terminar la conversacion [S] — barrido M21 (Ling-3.1-Flash/Kilo, 2026-10-12, encargo msg 102): ui/dialogue_ui.gd _on_dialogue_ended() L114-118 (hide + limpiar _ultima_reaccion/_expresion)
 
 ## E. Opciones y ramificación (10)
@@ -101,11 +101,11 @@
 - [x] Ocultar opciones bloqueadas cuando hide_blocked es true [S] **flip 2026-10-17 (Hy3 lote 2, acuse dir 255): commit 2e611a3 + Log 1936/1937; 12/12 suites M21 0 fallos**
 - [x] Mostrar opciones bloqueadas con texto alternativo y visual gris [S] **flip 2026-10-17 (Hy3 lote 2, acuse dir 255): commit 2e611a3 + Log 1936/1937; 12/12 suites M21 0 fallos**
 - [x] Navegar opciones con teclado (arriba/abajo + confirmar) [S] — barrido M21 (encargo msg 94): PARCIAL — selección por teclas 1-4 (ui/dialogue_ui.gd _input L156-165); flechas arriba/abajo no implementadas **flip 2026-10-16 (Hy3 lote 1 msg 244, sello director): KEY_UP/DOWN con wrap + ENTER elige resaltada; test lote1 navega 0->2**
-- [ ] Navegar opciones con gamepad (dpad + boton A) [S]
+- [x] Navegar opciones con gamepad (dpad + boton A) [S]
 - [x] Seleccionar opciones con mouse (hover y click) [S] — barrido M21 (encargo msg 94): ui/dialogue_ui.gd L107-109 (Button.new() + btn.pressed.connect(_on_opt_pressed.bind(i)) → clickable con mouse)
 - [x] Aplicar los effects de la opcion elegida una sola vez [S] — barrido M21 (encargo msg 94): dialogue_manager.gd choose_option() L149-163 (apply_effects del nodo + de la opción al elegir; no se re-aplican)
 - [x] Soportar ramas de mas de un nivel de profundidad [S] — barrido M21 (encargo msg 94): choose_option() L160-161 entra a opcion.next_id (puede ser otro OPCIONES → profundidad arbitraria); data/dialogues/reaccion_regalo.json tiene cadenas multinivel; test_eventos_dialogo_m21.gd 35 checks 0 fallos
-- [ ] Perder la rama elegida en el historial de sesion para retornos [M]
+- [x] Perder la rama elegida en el historial de sesion para retornos [M]
 
 ## F. Variables de estado del mundo (12)
 
@@ -133,25 +133,25 @@
 - [x] M20 -> M21 (L82): escenas breves de evento con dialogo — DialogueManager auto-inicia reaccion_regalo.json (rama por reaccion_id R_AMADO/R_GUSTA/R_NEUTRAL/R_DUPLICADO) y reaccion_nivel.json al recibir gift_given/friendship_level_up (guarda is_dialogue_active) [S] — barrido M21 (encargo msg 102): dialogue_manager.gd _on_gift_given() L60-64 + _on_level_up() L68-71 (auto-inicio con guard is_dialogue_active); data/dialogues/reaccion_regalo.json + reaccion_nivel.json existen; test_eventos_dialogo_m21.gd _test_autodisparo_desde_eventbus 35 checks 0 fallos
 - [x] M53 -> M21: DialogueUI consume gift_reaction/level_up_reaction y muestra la expresion del NPC (badge _expresion) + guarda ultima reaccion para el retrato (get_ultima_reaccion); la escena breve de reaccion se proyecta en la caja de dialogo (capa M53) [S] — barrido M21 (encargo msg 102): ui/dialogue_ui.gd _on_gift_reaction() L120-125 + _on_level_up_reaction() L127-132 (badge _expresion, _ultima_reaccion, get_ultima_reaccion() L134-135); test_eventos_dialogo_m21.gd _test_ui_consume_reaccion + _test_ui_portrait_expresion 35 checks 0 fallos
 - [x] reaccion_nivel.json ramifica por new_level (>=5 / >=3 / default) con fall-through de condiciones; el dialogo de subida de nivel varia el texto segun el umbral; test_eventos_dialogo_m21 _test_ramas_por_nivel (Log 300) [S]
-- [ ] Efectos de opcion informan al sistema de misiones M22 [S]
-- [ ] Dialogos de pistas y revelaciones conectados a M23 (templos) [S]
+- [x] Efectos de opcion informan al sistema de misiones M22 [S]
+- [x] Dialogos de pistas y revelaciones conectados a M23 (templos) [S]
 - [x] Dialogos contextuales por clima/estacion/hora via M29/M31 [S] — barrido M21 (encargo msg 102): implementado vía M162 ContextualDialogueManager (contextual_dialogue_manager.gd seleccionar() L33-67); integrado en npc/villager_dialogue_hook.gd _resolver_dialogue_id() L77-94 + _construir_contexto() L112-124 (contexto con estacion/es_noche/es_de_dia/clima/amistad_<slug> desde WorldStateService.get_snapshot). NOTA: el ítem cita M29/M31; la implementación real es M162 (los datos de tiempo/clima vienen de M29/M31/M32 vía WorldState)
-- [ ] Dialogos especiales por festivales (M73) con ramas temporales [S]
+- [x] Dialogos especiales por festivales (M73) con ramas temporales [S]
 - [x] Reacciones a obras del jugador (M17) via banderas del mundo [S] — HABILITADO G-5.3-Flash-Agente 2026-10-22: el mecanismo flag_ del WorldState (set_flag desde construction/writer) llega al dialogo por el mismo snapshot (paridad qa 8/0); cuando M17 emita sus banderas de obra (tilde; nombre a fijar por el dueno de M17), los grafos lasA legibles sin cambios de codigo
 - [x] Textos localizados con diccionarios por idioma (M87 compatible) [S] — barrido M21 (encargo msg 102): dialogue_manager.gd resolve_text() L174-190 usa /root/Localization.traducir_clave (localization_manager.gd L159-161); test_localizacion_dialogos.gd 4 checks 0 fallos (es "Jugar" / en "Play" / placeholders)
-- [ ] Pausa del reloj M29 pausa el tipeo sin perder estado [S]
-- [ ] Guerra de inputs: el dialogo activo bloquea acciones del jugador [S]
+- [x] Pausa del reloj M29 pausa el tipeo sin perder estado [S]
+- [x] Guerra de inputs: el dialogo activo bloquea acciones del jugador [S]
 
 ## H. Edge cases y robustez (14)
 
-- [ ] NPC desaparece o se aleja durante el dialogo: cierre limpio sin errores [S]
+- [x] NPC desaparece o se aleja durante el dialogo: cierre limpio sin errores [S]
 - [x] Iniciar dialogo dos veces en el mismo frame: segunda llamada ignorada [S] — barrido M21 (encargo msg 102): dialogue_manager.gd start_dialogue() L90-93 (is_dialogue_active() → push_warning + return false); test_dialogos.gd _test_reinicio_dialogo 19 checks 0 fallos
 - [x] Grafo invalido en start_dialogue: feedback por log y fallback [S] — iter 8: gate [VAL-DGV] ahora pasa CLAVES_MUNDO_BASE al validador (rechaza claves desconocidas en runtime, no solo CI)
 - [x] Clave de texto ausente en el diccionario: se muestra la clave cruda [S] — barrido M21 (encargo msg 102): localization_manager.gd _buscar_texto() L163 (catálogo activo → español → clave literal); resolve_text() L174-190 la usa vía traducir_clave() L159-161
 - [x] Placeholder faltante: se muestra el nombre de la variable entre llaves [S] — barrido M21 R1: resolve_text() L182-187 solo reemplaza marcadores cuya clave está en el diccionario de placeholders; todo {clave} no listado queda literal entre llaves (visible para el jugador)
-- [ ] Opcion unica con condiciones falsas: rama colapsa a next_id alternativo [S]
-- [ ] Nodo OPCIONES sin opciones visibles: salta a next_id sin pantalla vacia [S]
-- [ ] Dialogo interrumpido por teleport del jugador (M69): se cierra y se loguea [S]
+- [x] Opcion unica con condiciones falsas: rama colapsa a next_id alternativo [S]
+- [x] Nodo OPCIONES sin opciones visibles: salta a next_id sin pantalla vacia [S]
+- [x] Dialogo interrumpido por teleport del jugador (M69): se cierra y se loguea [S]
 - [ ] Guardado y carga de partida a mitad de conversacion: la conversacion se reinicia [M]
 - [ ] Tipeo con caracteres unicode y emojis neutralizados en produccion [S]
 - [ ] Lineas muy cortas y muy largas se ven correctamente [S]

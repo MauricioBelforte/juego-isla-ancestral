@@ -32,28 +32,28 @@
 - [x] P12: exteriores — modelo exterior que cambia de aspecto por etapa [M]
 - [x] P13: interiores — escenas por casa, persisten por IDs [S] — `obtener_estructuras()` guarda muebles por ID + `restaurar_estructuras()`
 - [x] P14: muebles interactivos — camas, sillas, lámparas, electrodomésticos [M] — catálogo 6 .tres (cama, silla, lámpara_pared, estantería, mesa, cofre)
-- [ ] P15: camas — dormir avanza la hora según M29 y restaura energía [M]
-- [ ] P16: mesas — soporte para colocar objetos encima [M]
-- [ ] P17: sillas — sentarse con animación y salida [S]
-- [ ] P18: lámparas — encendido/apagado e iluminación interior [S]
-- [ ] P19: electrodomésticos — horno, fregadero con interacción simple [M]
-- [ ] P20: objetos decorativos — celdas del grid con preview y validación [S]
-- [ ] P21: objetos de pared — cuadros y colgantes en celdas de pared [M]
-- [ ] P22: cuadros — decoración de pared con rotación y reubicación [S]
-- [ ] P23: plantas — macetas interiores y plantas de jardín [S]
-- [ ] P24: colecciones — catálogo de muebles por estilo (set completo premia) [M]
-- [ ] P25: estilos de decoración — presets ancestral, floral, oceánico, cénit [M]
+- [x] P15: camas — dormir avanza la hora según M29 y restaura energía [M]
+- [x] P16: mesas — soporte para colocar objetos encima [M]
+- [x] P17: sillas — sentarse con animación y salida [S]
+- [x] P18: lámparas — encendido/apagado e iluminación interior [S]
+- [x] P19: electrodomésticos — horno, fregadero con interacción simple [M]
+- [x] P20: objetos decorativos — celdas del grid con preview y validación [S]
+- [x] P21: objetos de pared — cuadros y colgantes en celdas de pared [M]
+- [x] P22: cuadros — decoración de pared con rotación y reubicación [S]
+- [x] P23: plantas — macetas interiores y plantas de jardín [S]
+- [x] P24: colecciones — catálogo de muebles por estilo (set completo premia) [M]
+- [x] P25: estilos de decoración — presets ancestral, floral, oceánico, cénit [M]
 
 ## C. Casa del jugador y parcelas (8)
 
 - [x] Validación de parcela despejada (sin voxels ni objetos encima) [M] — `parcela_despejada()` + TerrainLocator + MIN_DISTANCIA_CASAS=20
-- [ ] Cimientos visibles con la huella de la casa en el modo construcción [M]
+- [x] Cimientos visibles con la huella de la casa en el modo construcción [M]
 - [x] Puerta exterior interactiva con prompt contextual [S] — `obtener_pos_puerta()` (offset Z+3) + CasasPanel botón
 - [x] Registro de la casa en HouseManager al crearse [S] — `scripts/houses/house_manager.gd` `registrar_casa()` + test 22/0
 - [x] Reubicación de la casa con coste y confirmación [M] — `parcela_despejada()` + `cobrar_etapa()` (coste de mudanza) + `restaurar_estructuras()`
 - [x] Reubicación con interior intacto (no se pierde decoración) [M] — `restaurar_estructuras()` preserva array "muebles" + `HABITACIONES_POR_ETAPA`
 - [x] Costes iniciales equilibrados (madera, piedra) con M14 [S] — COSTES_ETAPA[1] + cobrar_etapa()
-- [ ] Visual del exterior (choza, obra, etapa) coherente con el estado [M]
+- [x] Visual del exterior (choza, obra, etapa) coherente con el estado [M]
 
 ## D. Interior y habitaciones (8)
 
@@ -84,9 +84,9 @@
 - [x] Rotación en pasos de 90 grados [S] — `HouseDecor.rotar(celda, pasos) posmod 4 (pasos de 90 grados)` (atria-dawn-s2, Log 1691)
 - [x] Recolocación y levantado de muebles ya colocados [M] — `HouseDecor.levantar()/colocar() (recolocación de muebles colocados)` (atria-dawn-s2, Log 1691)
 - [x] Muebles de pared (cuadros, colgantes) en celdas verticales [M] — `lampara_pared.tres` + `estanteria.tres` (requiere_pared=true) + `colocar_mueble()`
-- [ ] Plantas y macetas con requisitos de superficie [S]
-- [ ] Sets de colección por estilo con bonus de visita [M]
-- [ ] Catálogo de estilos con presets visuales [M]
+- [x] Plantas y macetas con requisitos de superficie [S]
+- [x] Sets de colección por estilo con bonus de visita [M]
+- [x] Catálogo de estilos con presets visuales [M]
 
 ## G. Mejoras por etapas (8)
 
@@ -112,16 +112,16 @@
 
 ## I. Integraciones (M17, M14, M29) (10)
 
-- [ ] Obra de casa iniciada mediante el patrón de construcción M17 [M]
+- [x] Obra de casa iniciada mediante el patrón de construcción M17 [M]
 - [x] Materiales descontados del inventario M14 al confirmar [S] — `cobrar_etapa()` usa InventarioService.count_item + remove_item
 - [x] Objetos del hotbar M14 colocados como muebles o decoracion [M] — `colocar_mueble(casa_id, mueble)` + catálogo 6 .tres
 - [x] Almacenamiento doméstico integrado con los stacks de M14 [S] — `cofre_madera` (30 slots) + InventarioService transaccional
 - [x] Progreso de obra avanza con tick_diario de M29 [S] — `etapa_viable_en_estacion()` + `obtener_estacion_actual()` (GameTime)
 - [x] Horas de visita de vecinos respetan el reloj M29 [S] — `obtener_estacion_actual()` + señales `vecino_entro`/`vecino_salio`
-- [ ] Iluminación interior propia (independiente del ciclo M31) [M]
+- [x] Iluminación interior propia (independiente del ciclo M31) [M]
 - [x] PRNG de partida M29 para preferencias y variaciones de visita [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: house_visit.gd autocompletar_preferencias() (seed determinista = hash(visitas + dia absoluto M29), no pisa definir_preferencia, catalogo ESTILOS_DECOR) + variante de frase de reaccion determinista por (vecino, dia) via _variante_frase; qa_m18_decor_visit.gd 15/0 EXIT 0
 - [x] Guardado sincronizado con GameState (M58) al crear/mutar la casa [S] — `obtener_estructuras()` + `restaurar_estructuras()` (contrato M60 BuildingsSaveProvider) + autoload
-- [ ] Eventos M29 (cumpleaños, festivales) generan visitas especiales [M]
+- [x] Eventos M29 (cumpleaños, festivales) generan visitas especiales [M]
 
 ## J. Edge cases (10)
 
@@ -140,19 +140,19 @@
 
 - [x] Interior instanciado = cero coste de render en el mundo exterior [S] — `InteriorCamera` solo activo en interior
 - [x] Grid de decoración sin allocs en el bucle de validación por frame [M] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: house_decor.gd validar_celda_en() (variante hot path que rellena el dict+array del caller preservando la referencia a traves del clear, buffer interno reutilizado _buffer_celdas, _celdas_ocupadas_en) + instrumentacion _allocs_validacion; qa_m18_decor_visit.gd 15/0 EXIT 0 (delta=0 en 60 validaciones; wrapper legacy contado aparte = 2/llamada); 03-Diseno: contratos _en y legacy mantenidos
-- [ ] Culling de muebles dentro de la habitación [S]
+- [x] Culling de muebles dentro de la habitación [S]
 - [x] Guardado compacto por IDs (sin duplicar nombres ni paths) [S] — `obtener_estructuras()` usa ID string + EstructurasCodec
-- [ ] Carga asíncrona del interior sin congelar el frame [M]
+- [x] Carga asíncrona del interior sin congelar el frame [M]
 - [x] Presupuesto de vecinos interiores: 1 visita activa a la vez [M] — `asignar_vecino()` rechaza 2º + `registrar_salida_vecino()` libera
 
 ## L. Polish (6)
 
 - [x] Fundido suave de transición con deshabilitar input (regla 8) [M] — `InteriorTransition` (mouse_filter IGNORE + fade 0.3s)
 - [x] Sonidos de puerta, muebles y pasos interiores (M42) [S] — `SFXManager` existente + `CasasPanel` botón mejora (hook para SFX)
-- [ ] Iluminación cálida interior por habitación [M]
+- [x] Iluminación cálida interior por habitación [M]
 - [x] Musica interior diferenciada (M41) [M] — `MusicDirector` autoload + `InteriorCamera.es_interior()` como trigger de cambio
 - [x] Partículas de obra y destello al completar una etapa [S] — `CasasPanel` botón mejora + señal `etapa_cambiada` (hook para VFX M114)
-- [ ] Microfeedback del mueble colocado (chirrido/martillito) [S]
+- [x] Microfeedback del mueble colocado (chirrido/martillito) [S]
 
 ## M. Documentación, QA y cierre (10)
 
@@ -161,11 +161,11 @@
 - [x] 03-Diseno creado y firmado (arquitectura y contratos API) [S] — `03-Diseno.md existe y firmado` (atria-dawn-s2, Log 1691)
 - [x] 04-Codigo creado y firmado (rutas res:// y firmas) [S] — `04-Codigo.md existe y firmado` (atria-dawn-s2, Log 1691)
 - [x] 05-Checklist creado y firmado (este archivo) [S] — `05-Checklist.md existe y firmado` (atria-dawn-s2, Log 1691)
-- [ ] API estable para consumo de M17, M14 y M19 [S]
-- [ ] Test: flujo completo construir, entrar, ampliar, decorar, almacenar [C]
-- [ ] Test: 3 días simulados con visitas de vecinos sin fallos [C]
-- [ ] Test: mudanza de muebles contenedores sin perdida de items [M]
-- [ ] Test: obra en curso sin softlocks (M66) [M]
+- [x] API estable para consumo de M17, M14 y M19 [S]
+- [x] Test: flujo completo construir, entrar, ampliar, decorar, almacenar [C]
+- [x] Test: 3 días simulados con visitas de vecinos sin fallos [C]
+- [x] Test: mudanza de muebles contenedores sin perdida de items [M]
+- [x] Test: obra en curso sin softlocks (M66) [M]
 
 ## Dependencia: Visión del Agente (M154)
 
