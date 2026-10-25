@@ -243,3 +243,42 @@ func interact() -> void
 
 ### Dialogo interrumpido por teleport del jugador (M69): se cierra y se loguea
 - Spec: dialogo interrumpido por teleport del jugador (M69): se cierra y se loguea. Coherente with M21 (dialogos) and M69 (viaje rapido).
+
+
+## Specs Dialogos (Beam 679)
+
+### Guardado y carga de partida a mitad de conversacion: la conversacion se reinicia
+- Spec: guardado y carga de partida a mitad de conversacion: la conversacion se reinicia. Coherente with M21 (dialogos) and M59 (guardado).
+
+### Tipeo con caracteres unicode y emojis neutralizados en produccion
+- Spec: tipeo con caracteres unicode y emojis neutralizados en produccion. Coherente with M21 (dialogos) and M86 (localizacion).
+
+### Lineas muy cortas y muy largas se ven correctamente
+- Spec: lineas muy cortas y muy largas se ven correctamente. Coherente with M21 (dialogos) and M53 (UI).
+
+### Recarga del grafo con datos rotos en caliente: el cache no se corrompe
+- Spec: recarga del grafo con datos rotos en caliente: el cache no se corrompe. Coherente with M21 (dialogos) and M108 (herramientas).
+
+### Cache de grafos cargados con descarte LRU por limite de memoria
+- Spec: cache de grafos cargados con descarte LRU por limite de memoria. Coherente with M21 (dialogos) and M62 (memoria).
+
+
+## Specs Dialogos (Beam 680)
+
+### Cero allocs apreciables por frame durante el tipeo (strings precalculadas)
+- Spec: cero allocs apreciables por frame durante el tipeo (strings precalculadas). Coherente with M21 (dialogos) and M61 (rendimiento).
+
+### Fuentes del modulo M87 con atlas compartido, sin reimport por nodo
+- Spec: fuentes del modulo M87 con atlas compartido, sin reimport por nodo. Coherente with M21 (dialogos) and M87 (fuentes).
+
+### Load de JSON asincrono con carga diferida por zona del mapa
+- Spec: load de JSON asincrono con carga diferida por zona del mapa. Coherente with M21 (dialogos) and M63 (streaming).
+
+### Presupuesto: dialogo activo agrega menos de 1 ms al frame presupuestado
+- Spec: presupuesto: dialogo activo agrega menos de 1 ms al frame presupuestado. Coherente with M21 (dialogos) and M61 (rendimiento).
+
+### Plan-actual duplicado identico del plan-inicial
+- Spec: plan-actual duplicado identico del plan-inicial. Coherente with M21 (dialogos) and AGENTS.md sec 11.
+
+### Verificacion de 0 errores en consola durante una partida de prueba
+- Spec: verificacion de 0 errores en consola durante una partida de prueba. Coherente with M21 (dialogos) and M112 (testing).

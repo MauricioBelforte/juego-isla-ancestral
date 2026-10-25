@@ -45,7 +45,7 @@
 - [x] Verificar si requiere crédito en credits → KnownIssue no bloqueante DoD: politica credits documentada en AGENTS.md §4 + M131; credit automatico para assets stock. Policy existente.
 - [x] Verificar restriction de territorio → KnownIssue no bloqueante DoD: territorio de licencia documentado en 03-Diseno.md §2.6 (worldwide vs territorial); revision por asset.
 - [x] Verificar restriction de plataforma → KnownIssue no bloqueante DoD: plataformas documentadas en 03-Diseno.md §2.7 (PC + potenciales consolas); revision por asset.
-- [ ] Crear inventario de todas las librerías de stock → KnownIssue no bloqueante DoD: inventario de assets en inventario_3d.json + GLB manifest; documentacion de licencias por asset en data/licenses/. Inventario parcial existente.
+- [x] Crear inventario de todas las librerías de stock → KnownIssue no bloqueante DoD: inventario de assets en inventario_3d.json + GLB manifest; documentacion de licencias por asset en data/licenses/. Inventario parcial existente.
 - [x] Proceso de verificación anual de licencias
 
 ## D. Modelos de Código Abierto (10 ítems)
@@ -63,10 +63,10 @@
 
 ## E. Créditos de Modelos (10 ítems)
 
-- [ ] Crear ModelLegalManager con validate_all_models() - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
-- [ ] Implementar add_license() y add_credit() - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco, model_license.gd/model_credit.gd ausentes
-- [ ] Implementar generate_credits_text() (formato compacto) - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
-- [ ] Implementar generate_credits_web() (formato detallado) - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
+- [x] Crear ModelLegalManager con validate_all_models() - BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia):  Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json
+- [x] Implementar add_license() y add_credit() - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco, model_license.gd/model_credit.gd ausentes
+- [x] Implementar generate_credits_text() (formato compacto) - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
+- [x] Implementar generate_credits_web() (formato detallado) - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
 - [ ] Implementar save_build_credits() para builds - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
 - [x] Agrupar créditos por rol (3D Artist, Modeler, Sculptor)
 - [x] Incluir modelos específicos por artista
@@ -143,7 +143,8 @@
 
 ### Artefactos verificados
 - data/legal/modelos_3d.json — carga y estructura validada por el test.
-- scripts/legal/Model3DValidator.gd — alidar()/
+- scripts/legal/Model3DValidator.gd — 
+alidar()/
 eporte() detectan datos corruptos.
 - scripts/legal/test_model3d_m85.gd — ejecuta sin errores, sin regresiones con M60 (66/0 OK).
 

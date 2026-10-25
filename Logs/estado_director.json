@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-25T17:55 (dictamen M33 revert + acuses 228/396/276 + 2 sellos vigentes)",
+ "ultimo_update": "2026-10-25T20:58 (acuses 230/398/277 + M23 data-muerta + 2 sellos)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -750,16 +750,16 @@
   "registro": "veredictos se registran AQUI (estado), NO en el canal de Beam (anti-loop)",
   "ultimos_veredictos": [
    {
+    "T": "T115-117",
+    "m": "M128/M13",
+    "veredicto": "OK/TIE",
+    "nota": "M13 117/1/2 TIE, M128 verificado. M33 148/6/1 = INFLADO (dictamen revert -> 133/21/1)."
+   },
+   {
     "T": "T105-109",
     "m": "M54/M156 + M37/M92",
     "veredicto": "catch-up-G-lote4",
     "nota": "M37 141/7/0 OK, M54 171/6/0 OK (0 [?]), M92 180/3/2 TIE, M156 271/2/34 TIE. T105-109 = M54/M156."
-   },
-   {
-    "T": "T109",
-    "m": "156-Terrenos-Y-Movimiento",
-    "veredicto": "TIE",
-    "nota": "gate-1 A-advance: 271/2/34"
    }
   ],
   "ultimo_muestreo": "indice creado 25oct 06:05",
@@ -815,7 +815,10 @@
     "T107",
     "T106",
     "T105",
-    "T114"
+    "T114",
+    "T117",
+    "T116",
+    "T115"
    ],
    "pendientes_recientes_por_verificar": [
     "T060",
@@ -880,7 +883,7 @@
     "T001"
    ],
    "historico_T001_T075": "reconciliar a NIVEL MODULO (no por T): sample §21.8.2.b del 05 [x] final del modulo; los [x] de esos T ya viven en el cuerpo (stale-Totales era el fallo de T078/T080)",
-   "proximo_despues_de": "T114",
+   "proximo_despues_de": "T117",
    "regla_cron_A": "cada ciclo A: verificar 1-2 de pendientes_recientes (del ultimo hacia atras) + los T-done nuevos desde proximo",
    "regla_cron_G": "25,55 de cada hora (exclusivo, sin A/B/C/D): procesar TODO lo no verificado (catch-up) + actualizar indice; un dia a la dia, el primer G hace el barrido diario = sample §21.8.2.b de los 4 candidatos a sello + chequeo de drift Totales",
    "ultimo_muestreo": "A 09:20: T114 M128 (gate-1); G sigue catch-up",
@@ -934,7 +937,7 @@
  },
  "deepseek_reactivado": "M53 token-dup LISTO (tanda 3: 7 unificados, 6 restantes = 3 owner + 3 semantico). L159 coherencia visual = flip-candidato. M53 va sellable. Log 2184.",
  "hy3_gate2": "gate-2 runtime #383: M73 FALLO runtime (validador 8 vs 19 categorias, green-probe Hy3; T266 encolado Beam dueno M73), M55 precision-fail, M75/M110/M58 EN CURSO, M04 PARCIAL. 0 sellos. M110 caveat debug_menu:721 nula-textura (deuda). M75 primer candidato.",
- "sellos_218": "2 SELLADOS (M28 + M65). M73(4 [])/M75(5 [])/M54 no full-g1 (Hy3 396 re-medido honesto). 3er sello = M73 al cerrar sus 4 [ ]. M33 en revert (148->133 honesto).",
+ "sellos_218": "2 SELLADOS (M28+M65). 3er = M73 al cerrar sus 4 [ ] (Hy3 gate-2 standby). M33 en revert (148->133).",
  "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
  "ling_design_docs": {
   "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
@@ -950,9 +953,10 @@
   "i18n": "Validador i18n LIMPIO (exit0, 170/170/170 ES/EN/PT, paridad 0). Sonda PT: pt.po ausente, base 274 (159+115+4) lista, plan 243 aprobado. Ling standby-productivo report-only. GO fundador #4 para ejecutar PT.",
   "driftcheck": "265: drift-check riel 12/12 anclajes + 20/20 items intactos (estabilidad para gate-1/QA 21.8). Leccion canonizada: excluir .kilo/,.git/,Obsoletos/ de walks recursivos (enganchan .kilo/worktrees/phase-judge stale). Ling standby-PT productivo.",
   "hoja_pt": "267: drift-check i18n EXIT0 (base PT estable) + HOJA PT-runtime 5 pasos anexada a backlog Ling tarea 59 (pt.po 274 + LOCALES+=pt + QA ValidadorPO + doc M87 + reporte). LISTA 1-vuelta ante GO fundador #4. Pool Ling saneado (5 gemelos 258-266, helper auto). Confirmar verificar_pool_numeros.py en Ling.",
-  "corpus_pt": "269: corpus PT medido (es.po 274=159+115+11; 115 nuevas M68=89/77% prioritario; 15 no-traducir; 4 plurales; header). PT-runtime 1-vuelta ante GO #4. Pool Ling +40, gemelos auto-saneados (verificar_pool_numeros.py)."
+  "corpus_pt": "269: corpus PT medido (es.po 274=159+115+11; 115 nuevas M68=89/77% prioritario; 15 no-traducir; 4 plurales; header). PT-runtime 1-vuelta ante GO #4. Pool Ling +40, gemelos auto-saneados (verificar_pool_numeros.py).",
+  "validadorpo": "276: mapa ValidadorPO (bloqueantes+avisos) + R6 (115 traducidas, no vacias) + P5 (31 cognatos -> no-traducir). PT-runtime 100% prepped. Gemelo 276."
  },
- "step5_riel": "M33 CERRADA a 133/22/0 (#224, 6 suites 192/0, TABLA_CRUCES determinista + 9 cultivos). Global fila 33 -> 133/155. L169 degradar a [?] (M53). 22 [ ] resto = duenos externos.",
+ "step5_riel": "M23 L97 (capitulos) CERRADO con data-muerta M55 expuesta (puente fix + 79 renombrados + suite 750/0). M23 86/17/2. L97/L98/L99 [ ] = deuda M55. M33: revert de 15 flips Beam pendiente en Step-5.",
  "gemelos_pendientes_saneo": [
   "256/256 (Ling)",
   "209/210 (Step-5)",
@@ -960,7 +964,7 @@
  ],
  "asignador_cron_d": "25oct 05:38: DeepSeek 72m idle -> nudge riel BACKLOG-11 D8 (siguiente bloque tras 53). Step-5 M33 activa (1m), Hy3 verifier 33m (espera M75 runtime), Ling standby PT. Solo DeepSeek repoblado.",
  "m75_gate2": "Hy3 #386: M75 125/5/0=130 (Beam 53->125). 5 [ ] reales: L76 ruina M25, L116 sin grindeo raro, L168 FASE2 no prometa UI, L182 logro ruina, L216 UI sin spoilers. Runtime red-probe M75 cuando Beam cierre los 5. Primer sello.",
- "pool_saneo": "Hy3 desync (FLAG-POOL, sin numbered reply) - corer verificar_pool_numeros.py. Ling 9 gemelos (helper auto). ",
+ "pool_saneo": "Hy3 saneado (head 398). Ling 10 gemelos (258-276). M33 inflacion (15 flips Beam) en revert.",
  "m68_state": "M68 (68-Transporte) 05 = 104 [x]/13 [ ]/14 [?] (14 [?] reales -> NO sellable). Stale header L7(99)/L252(103) en cola de sync. M67 (SEPARADO) = 116/15/0 (0 [?] pero 15 [ ]). Los T-files '-67' de Beam mapan a contenido M68; M67 es otro modulo. Verificar mapeo contra FOLDER 05, no la etiqueta.",
  "gate1_walk_rule": "Toda operacion de conteo/scan: excluir .kilo/, .git/, Obsoletos/, DOCUMENTACION/ (excepto el 05-Checklist directo del modulo). Los walks recursivos enganchan copias stale de worktrees.",
  "cron_G_gate1_exclusivo": "15,45->CORREGIDO a 25,55 * * * * (exclusivo: A :00/20/40, B :10/30/50, C :17 2h, D :35 2h; :25 y :55 limpios). Gate-1 exhaustivo Beam: catch-up de T-done no verificados + indice + barrido diario §21.8.2.b.",

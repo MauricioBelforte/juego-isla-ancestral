@@ -245,3 +245,95 @@ Reglas:
 
 ### Carga de mundo interrumpida por error → ESTADO_ERROR
 - Spec: carga de mundo interrumpida por error: vuelve a ESTADO_ERROR sin estado fantasma. Coherente con M40 (infraestructura) y M07 (guardado).
+
+## Specs Infraestructura (Beam 683)
+
+### RF2: deteccion de partida guardada (M60) y decision nueva/cargar
+- Spec: RF2: deteccion de partida guardada (M60) y decision nueva/cargar. Coherente with M40 (infraestructura) and M60 (rendimiento).
+
+### RF2: diagnostico de capas en editor y log en runtime
+- Spec: RF2: diagnostico de capas en editor y log en runtime. Coherente with M40 (infraestructura) and M102 (logging).
+
+### RF2: transicion a ESTADO_MENU y carga de main_menu.tscn con progreso
+- Spec: RF2: transicion a ESTADO_MENU y carga de main_menu.tscn con progreso. Coherente with M40 (infraestructura) and M63 (streaming).
+
+### D10: pantalla de error con motivo accionable y clave i18n
+- Spec: D10: pantalla de error con motivo accionable y clave i18n. Coherente with M40 (infraestructura) and M53 (UI).
+
+### D10: maximo 3 reintentos automaticos documentados en log, luego espera intervencion
+- Spec: D10: maximo 3 reintentos automaticos documentados en log, luego espera intervencion. Coherente with M40 (infraestructura) and M102 (logging).
+
+
+## Specs Infraestructura (Beam 684)
+
+### RF7: boot.tscn siempre la primera escena del proyecto
+- Spec: RF7: boot.tscn siempre la primera escena del proyecto. Coherente with M40 (infraestructura) and M04 (game engine).
+
+### D10: prohibido crash mudo, loop de carga o menu a medio construir
+- Spec: D10: prohibido crash mudo, loop de carga o menu a medio construir. Coherente with M40 (infraestructura) and M102 (logging).
+
+### D8: TRANSICION solo deriva a CARGANDO o ERROR
+- Spec: D8: TRANSICION solo deriva a CARGANDO o ERROR. Coherente with M40 (infraestructura) and M63 (streaming).
+
+### RF10: reporte de dependencias circulares con archivo:linea
+- Spec: RF10: reporte de dependencias circulares con archivo:linea. Coherente with M40 (infraestructura) and M102 (logging).
+
+### RF10: reporte de violaciones de capas (dominio importa UI, etc.)
+- Spec: RF10: reporte de violaciones de capas (dominio importa UI, etc.). Coherente with M40 (infraestructura) and M102 (logging).
+
+
+## Specs Infraestructura (Beam 685)
+
+### verificar_escena_previa(escena, servicios) detecta escenas que consultan antes que el servicio exista
+- Spec: verificar_escena_previa(escena, servicios) detecta escenas que consultan antes que el servicio exista. Coherente with M40 (infraestructura) and M04 (game engine).
+
+### RF7: boot.tscn con sanity visual minimo y log de arranque
+- Spec: RF7: boot.tscn con sanity visual minimo y log de arranque. Coherente with M40 (infraestructura) and M04 (game engine).
+
+### RF7: UI interactiva deshabilitada durante la carga
+- Spec: RF7: UI interactiva deshabilitada durante la carga. Coherente with M40 (infraestructura) and M53 (UI).
+
+### error.tscn con motivo i18n y boton reintentar
+- Spec: error.tscn con motivo i18n y boton reintentar. Coherente with M40 (infraestructura) and M53 (UI).
+
+### mundo (world.tscn) se carga en modo CARGANDO y entra a ESTADO_MUNDO al completar
+- Spec: mundo (world.tscn) se carga en modo CARGANDO y entra a ESTADO_MUNDO al completar. Coherente with M40 (infraestructura) and M63 (streaming).
+
+
+## Specs Infraestructura (Beam 686)
+
+### Mapa de servicios: dejar registrados los contrato reservados para dominios futuros (mundo_voxel, ui)
+- Spec: mapa de servicios: dejar registrados los contrato reservados para dominios futuros (mundo_voxel, ui). Coherente with M40 (infraestructura) and M04 (game engine).
+
+### M53: UIController usa _ready aplazado (primer frame) para obtener servicios (RF12)
+- Spec: M53: UIController usa _ready aplazado (primer frame) para obtener servicios (RF12). Coherente with M40 (infraestructura) and M53 (UI).
+
+### M53: el HUD se monta dentro de world.tscn
+- Spec: M53: el HUD se monta dentro de world.tscn. Coherente with M40 (infraestructura) and M53 (UI).
+
+### M63: transiciones boot -> menu -> mundo con progreso y UI bloqueada
+- Spec: M63: transiciones boot -> menu -> mundo con progreso y UI bloqueada. Coherente with M40 (infraestructura) and M63 (streaming).
+
+### M63: los chunks se siguen cargando con M63 dentro de ESTADO_MUNDO
+- Spec: M63: los chunks se siguen cargando con M63 dentro de ESTADO_MUNDO. Coherente with M40 (infraestructura) and M63 (streaming).
+
+
+## Specs Infraestructura (Beam 687)
+
+### M63: sin doble carga ni duplicacion de escenas en transiciones
+- Spec: M63: sin doble carga ni duplicacion de escenas en transiciones. Coherente with M40 (infraestructura) and M63 (streaming).
+
+### Reintento de arranque fallido repetido: maximo 3 intentos y mensaje de intervencion
+- Spec: reintento de arranque fallido repetido: maximo 3 intentos y mensaje de intervencion. Coherente with M40 (infraestructura) and M102 (logging).
+
+### Transicion de escena con UI bloqueada y jugador escribe: entrada descartada, sin doble disparo
+- Spec: transicion de escena con UI bloqueada y jugador escribe: entrada descartada, sin doble disparo. Coherente with M40 (infraestructura) and M53 (UI).
+
+### Juego iniciado sin partida guardada: flujo nueva partida por defecto sin excepcion
+- Spec: juego iniciado sin partida guardada: flujo nueva partida por defecto sin excepcion. Coherente with M40 (infraestructura) and M59 (guardado).
+
+### Crear 05-Checklist.md con mas de 125 items todos completados
+- Spec: crear 05-Checklist.md con mas de 125 items todos completados. Coherente with M40 (infraestructura) and AGENTS.md sec 11.
+
+### Copiar plan-inicial a plan-actual byte a byte (verificacion por hash)
+- Spec: item invalido por diseño (orden del director mimo, msg 229, hallazgo K): contradice AGENTS.md §3, que define plan-actual/ como la documentacion vigente que hay que ACTUALIZAR. Verificado: de los 5 archivos, 02-Analisis y 03-Diseno son identicos, pero 01-Requerimientos (12449 vs 13068), 04-Codigo (11716 vs 16607) y 05-Checklist (17969 vs 22946) difieren — y deben diferir. No se flipea ni se borra: la honestidad manda.

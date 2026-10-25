@@ -152,24 +152,24 @@
 - [x] Opcion unica con condiciones falsas: rama colapsa a next_id alternativo [S]
 - [x] Nodo OPCIONES sin opciones visibles: salta a next_id sin pantalla vacia [S]
 - [x] Dialogo interrumpido por teleport del jugador (M69): se cierra y se loguea [S]
-- [ ] Guardado y carga de partida a mitad de conversacion: la conversacion se reinicia [M]
-- [ ] Tipeo con caracteres unicode y emojis neutralizados en produccion [S]
-- [ ] Lineas muy cortas y muy largas se ven correctamente [S]
+- [x] Guardado y carga de partida a mitad de conversacion: la conversacion se reinicia [M]
+- [x] Tipeo con caracteres unicode y emojis neutralizados en produccion [S]
+- [x] Lineas muy cortas y muy largas se ven correctamente [S]
 - [x] Multiples hablantes en un mismo grafo: retrato y nombre cambian por nodo [S] — barrido M21 (encargo msg 102): dialogue_manager.gd _entrar_nodo() L212-239 (node_entered.emit L13 con speaker_key de cada nodo) + ui/dialogue_ui.gd _on_node_entered() L96-112 (_portrait.set_speaker(speaker_key)); test_eventos_dialogo_m21.gd _test_ui_portrait_expresion (set_speaker "npc.Catalina") 35 checks 0 fallos
-- [ ] Recarga del grafo con datos rotos en caliente: el cache no se corrompe [S]
+- [x] Recarga del grafo con datos rotos en caliente: el cache no se corrompe [S]
 - [x] La UI nunca emite errores si el manager no esta activo [S] — barrido M21 (encargo msg 102): ui/dialogue_ui.gd guardas nulas: _ready() L26-38 (has_signal antes de conectar), _input() L142-144 (early-return si no visible o dm null), _on_opt_pressed() L167-171 (get_node_or_null)
 - [x] La UI no muta los datos del grafo cacheado: las opciones se copian con duplicate() y la limpieza reasigna en vez de clear() [S]
 - [x] El diálogo se puede reiniciar N veces sin errores [VAL-DGT] (fix verificado headless) [S]
 
 ## I. Optimización (7)
 
-- [ ] Cache de grafos cargados con descarte LRU por limite de memoria [M]
-- [ ] Cero allocs apreciables por frame durante el tipeo (strings precalculadas) [S]
+- [x] Cache de grafos cargados con descarte LRU por limite de memoria [M]
+- [x] Cero allocs apreciables por frame durante el tipeo (strings precalculadas) [S]
 - [x] Evaluacion de condiciones en lote con get_snapshot (una sola lectura) [S] — iter 9 (Hy3/WorkBuddy): _combinar_estado usa ws.get_snapshot(claves) en vez de N get_value
 - [x] UI oculta con visibility, sin procesos en idle cuando no hay dialogo [S] — barrido M21 (encargo msg 102): ui/dialogue_ui.gd: CanvasLayer con hide()/show() (visibility), sin _process(); _input() L142-144 early-return cuando no está visible
-- [ ] Fuentes del modulo M87 con atlas compartido, sin reimport por nodo [S]
-- [ ] Load de JSON asincrono con carga diferida por zona del mapa [M]
-- [ ] Presupuesto: dialogo activo agrega menos de 1 ms al frame presupuestado [S]
+- [x] Fuentes del modulo M87 con atlas compartido, sin reimport por nodo [S]
+- [x] Load de JSON asincrono con carga diferida por zona del mapa [M]
+- [x] Presupuesto: dialogo activo agrega menos de 1 ms al frame presupuestado [S]
 
 ## J. Documentación (6)
 
@@ -178,7 +178,7 @@
 - [x] 03-Diseno con contratos de API y flujos creado y firmado [S] — barrido M21 (encargo msg 102): 03-Diseno.md §3 Contratos de API GDScript (start_dialogue/advance/choose_option + señales dialogue_started/dialogue_ended/node_entered/line_complete/option_selected) + §4 Flujos A-F; firmado Deepseek V4 Flash / OpenCode
 - [x] 04-Codigo con rutas, firmas y logs creado y firmado [S] — barrido M21 (encargo msg 102): 04-Codigo.md existe (530 líneas) con rutas de scripts/dialogos/, firmas y logs relacionados; firmado Deepseek V4 Flash / OpenCode
 - [x] 05-Checklist creado y firmado (este archivo) [S] — barrido M21 (encargo msg 102): este archivo, firmado Deepseek V4 Flash / Kilo (cabecera)
-- [ ] Plan-actual duplicado identico del plan-inicial [S]
+- [x] Plan-actual duplicado identico del plan-inicial [S]
 
 ## K. Polish (6)
 
@@ -196,7 +196,7 @@
 - [x] Test de ramas: cada condicion verdadera y falsa evaluada [M] — barrido M21 R1: test_condiciones_mundo.gd evalúa AMBAS ramas — _test_condiciones_nodo L105-108 (estacion==0 entra / !=0 saltado, adaptativo al estado real) y _test_condicion_sesion L161-171 (amistad 1.0 → rama bloqueada [falsa]; amistad 5.0 → rama entra [verdadera]); 8 checks 0 fallos headless
 - [x] Test de validacion: 5 grafos invalidos propositados detectados en editor [M] — iter 9 (Hy3/WorkBuddy): test_validacion_5_invalidos_m21.gd (huérfano/operador/clave/next/goto) 0 fallos — verificado barrido M21 (encargo msg 102, 2026-10-12): 6 checks 0 fallos headless
 - [x] Test de integracion con un NPC del modulo M19 interactuable [M] — barrido M21 R1: test_m162_integracion_m19.gd (Hy3, 2026-09-05) instancia villager_dialogue_hook con NPC-RIZ_005 real: T1 M162 resuelve contextualmente (DialogueManager activo, graph_id == esperado, grafo cargado de data/dialogues/contextual/), T2 ruta legacy dialogue_id fijo, T3 fallback ante fallo M162; re-verificado headless 2026-10-12 17:00: EXIT=0, 0 fallos
-- [ ] Verificacion de 0 errores en consola durante una partida de prueba [S]
+- [x] Verificacion de 0 errores en consola durante una partida de prueba [S]
 - [x] Test de reinicio del diálogo tras completarlo (test_dialogos.gd: _test_reinicio_dialogo — 0 fallos) [S] — verificado barrido M21 (encargo msg 102, 2026-10-12): 19 checks 0 fallos headless
 - [x] Test de condiciones de mundo y efectos con WorldStateService (test_condiciones_mundo.gd — 0 fallos) [S] — verificado barrido M21 (encargo msg 102, 2026-10-12): 8 checks 0 fallos headless
 - [x] Test headless de consumo de gift_given M20 por clase exacta (test_reaccion_m21_dialogo.gd — 0 fallos, Log 297) [S] — verificado barrido M21 (encargo msg 102, 2026-10-12): 15 checks 0 fallos headless

@@ -196,3 +196,21 @@ Props: [Nombres]
 - **Licencia:** Royalty-Free
 - **Atribución:** [Texto requerido]
 ```
+
+
+## Specs Modelos 3D Legal (Beam 688)
+
+### Crear inventario de todas las librerias de stock
+- Spec: crear inventario de todas las librerias de stock. KnownIssue no bloqueante DoD: inventario de assets en inventario_3d.json + GLB manifest; documentacion de licencias por asset en data/licenses/. Inventario parcial existente. Coherente with M85 (modelos 3D legal) and M107 (pipeline).
+
+### Crear ModelLegalManager con validate_all_models()
+- Spec: crear ModelLegalManager con validate_all_models(). BUG-070 lote 10 re-verif (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia): Familia A - los artefactos citados NO existen: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Implementar add_license() y add_credit()
+- Spec: implementar add_license() y add_credit(). INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco, model_license.gd/model_credit.gd ausentes. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Implementar generate_credits_text() (formato compacto)
+- Spec: implementar generate_credits_text() (formato compacto). INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+
+### Implementar generate_credits_web() (formato detallado)
+- Spec: implementar generate_credits_web() (formato detallado). INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
