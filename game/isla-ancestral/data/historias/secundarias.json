@@ -11,7 +11,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "faro-linterna" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "farol_cargado" }
 			],
-			"recompensa": { "diario": "capitulo-faro", "cosmetico": "farol de atardecer" },
+			"recompensa": { "diario": "mision_cadena-faro", "cosmetico": "farol de atardecer" },
 			"consecuencia": { "faro_encendido": true },
 			"oculta": false,
 			"postgame": false
@@ -25,7 +25,7 @@
 				{ "id": "p2", "tipo": "explorar", "lugar": "invernadero" },
 				{ "id": "p3", "tipo": "entregar", "objeto": "semilla_antigua" }
 			],
-			"recompensa": { "diario": "capitulo-invernadero", "cosmetico": "semillero decorativo" },
+			"recompensa": { "diario": "mision_cadena-invernadero", "cosmetico": "semillero decorativo" },
 			"consecuencia": { "invernadero_abierto": true },
 			"oculta": false,
 			"postgame": false
@@ -40,7 +40,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "madera_roble" },
 				{ "id": "p4", "tipo": "hablar", "npc": "catalina_oso" }
 			],
-			"recompensa": { "diario": "capitulo-plaza" },
+			"recompensa": { "diario": "mision_cadena-epilogo-plaza" },
 			"consecuencia": { "plaza_decorada": true },
 			"oculta": false,
 			"postgame": true
@@ -69,7 +69,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "receta-pan-fiesta" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "pan_fiesta" }
 			],
-			"recompensa": { "diario": "capitulo-panadera", "cosmetico": "delantal de fiesta" },
+			"recompensa": { "diario": "mision_cadena-panadera", "cosmetico": "delantal de fiesta" },
 			"consecuencia": { "pan_fiesta_horneado": true },
 			"oculta": false,
 			"postgame": false
@@ -84,7 +84,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "madera_roble" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "ensamblado-banco" }
 			],
-			"recompensa": { "diario": "capitulo-carpintero", "cosmetico": "banco tallado" },
+			"recompensa": { "diario": "mision_cadena-carpintero", "cosmetico": "banco tallado" },
 			"consecuencia": { "banco_plaza_reparado": true },
 			"oculta": false,
 			"postgame": false
@@ -99,7 +99,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "fibra_algodon" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "tinte-niebla" }
 			],
-			"recompensa": { "diario": "capitulo-tejedora", "cosmetico": "manto de niebla" },
+			"recompensa": { "diario": "mision_cadena-tejedora", "cosmetico": "manto de niebla" },
 			"consecuencia": { "manto_niebla_terminado": true },
 			"oculta": false,
 			"postgame": false
@@ -114,7 +114,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "nudos-red" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "carrete_nuevo" }
 			],
-			"recompensa": { "diario": "capitulo-pescador", "cosmetico": "red decorativa" },
+			"recompensa": { "diario": "mision_cadena-pescador", "cosmetico": "red decorativa" },
 			"consecuencia": { "red_pescador_reparada": true },
 			"oculta": false,
 			"postgame": false
@@ -129,7 +129,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "madera_roble" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "sendero-marcas" }
 			],
-			"recompensa": { "diario": "capitulo-guarda", "cosmetico": "silbato de guarda" },
+			"recompensa": { "diario": "mision_cadena-guarda", "cosmetico": "silbato de guarda" },
 			"consecuencia": { "sendero_bosque_senalado": true },
 			"oculta": false,
 			"postgame": false
@@ -144,7 +144,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "destilacion-lunar" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "jarabe_lunar" }
 			],
-			"recompensa": { "diario": "capitulo-alquimista", "cosmetico": "frasco de luna" },
+			"recompensa": { "diario": "mision_cadena-alquimista", "cosmetico": "frasco de luna" },
 			"consecuencia": { "jarabe_lunar_listo": true },
 			"oculta": false,
 			"postgame": false
@@ -159,7 +159,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "baya_roja" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "semillas-perdidas" }
 			],
-			"recompensa": { "diario": "capitulo-jardines", "cosmetico": "sombrero de paja" },
+			"recompensa": { "diario": "mision_cadena-jardines", "cosmetico": "sombrero de paja" },
 			"consecuencia": { "jardin_florecido": true },
 			"oculta": false,
 			"postgame": false
@@ -174,7 +174,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "fragmento_ancestral" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "sellos-antiguos" }
 			],
-			"recompensa": { "diario": "capitulo-cofradia", "cosmetico": "capa del gremio" },
+			"recompensa": { "diario": "mision_cadena-cofradia", "cosmetico": "capa del gremio" },
 			"consecuencia": { "cofradia_activa": true },
 			"oculta": false,
 			"postgame": false
@@ -189,7 +189,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "fibra_algodon" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "melodia-del-molino" }
 			],
-			"recompensa": { "diario": "capitulo-molino", "cosmetico": "pandereta de madera" },
+			"recompensa": { "diario": "mision_cadena-molino", "cosmetico": "pandereta de madera" },
 			"consecuencia": { "molino_funcionando": true },
 			"oculta": false,
 			"postgame": false
@@ -204,7 +204,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "tomo_carbonizado" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "cenizas-legibles" }
 			],
-			"recompensa": { "diario": "capitulo-biblioteca-quemada", "cosmetico": "lampara de lectura" },
+			"recompensa": { "diario": "mision_cadena-biblioteca-quemada", "cosmetico": "lampara de lectura" },
 			"consecuencia": { "biblioteca_quemada_rescatada": true },
 			"oculta": false,
 			"postgame": false
@@ -219,7 +219,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "ancient_crystal" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "alineacion-estelar" }
 			],
-			"recompensa": { "diario": "capitulo-observatorio", "cosmetico": "catalejo de bolsillo" },
+			"recompensa": { "diario": "mision_cadena-observatorio", "cosmetico": "catalejo de bolsillo" },
 			"consecuencia": { "observatorio_alineado": true },
 			"oculta": false,
 			"postgame": false
@@ -234,7 +234,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "iron_ore" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "engranajes-oxidados" }
 			],
-			"recompensa": { "diario": "capitulo-estacion", "cosmetico": "gorra de maquinista" },
+			"recompensa": { "diario": "mision_cadena-estacion", "cosmetico": "gorra de maquinista" },
 			"consecuencia": { "estacion_reparada": true },
 			"oculta": false,
 			"postgame": false
@@ -249,7 +249,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "piedra_caliza" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "arco-de-piedra" }
 			],
-			"recompensa": { "diario": "capitulo-puente", "cosmetico": "bufanda de viaje" },
+			"recompensa": { "diario": "mision_cadena-puente", "cosmetico": "bufanda de viaje" },
 			"consecuencia": { "puente_cruzable": true },
 			"oculta": false,
 			"postgame": false
@@ -264,7 +264,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-004" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "sellos-del-relicto" }
 			],
-			"recompensa": { "diario": "capitulo-relicto", "cosmetico": "guardapelo de hilo" },
+			"recompensa": { "diario": "mision_cadena-relicto", "cosmetico": "guardapelo de hilo" },
 			"consecuencia": { "relicto_devuelto": true },
 			"oculta": false,
 			"postgame": false
@@ -279,7 +279,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "gemstone" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "gema-encastrada" }
 			],
-			"recompensa": { "diario": "capitulo-gema", "cosmetico": "anillo de arcilla" },
+			"recompensa": { "diario": "mision_cadena-gema", "cosmetico": "anillo de arcilla" },
 			"consecuencia": { "gema_devuelta": true },
 			"oculta": false,
 			"postgame": false
@@ -294,7 +294,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "carta_sellada" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "tinta-borrada" }
 			],
-			"recompensa": { "diario": "capitulo-carta", "cosmetico": "delantal de la abuela" },
+			"recompensa": { "diario": "mision_cadena-carta", "cosmetico": "delantal de la abuela" },
 			"consecuencia": { "receta_heredada": true },
 			"oculta": false,
 			"postgame": false
@@ -309,7 +309,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-001" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "cerradura-oxidada" }
 			],
-			"recompensa": { "diario": "capitulo-llave", "cosmetico": "llavero de madera" },
+			"recompensa": { "diario": "mision_cadena-llave", "cosmetico": "llavero de madera" },
 			"consecuencia": { "llave_encontrada": true },
 			"oculta": false,
 			"postgame": false
@@ -324,7 +324,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-LUZ-005" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "mecanismo-del-farol" }
 			],
-			"recompensa": { "diario": "capitulo-farol", "cosmetico": "farol de mano" },
+			"recompensa": { "diario": "mision_cadena-farol", "cosmetico": "farol de mano" },
 			"consecuencia": { "patrulla_nocturna": true },
 			"oculta": false,
 			"postgame": false
@@ -339,7 +339,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "brujula_desorientada" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "aguja-imantada" }
 			],
-			"recompensa": { "diario": "capitulo-brujula", "cosmetico": "rosa de los vientos de bolsillo" },
+			"recompensa": { "diario": "mision_cadena-brujula", "cosmetico": "rosa de los vientos de bolsillo" },
 			"consecuencia": { "brujula_calibrada": true },
 			"oculta": false,
 			"postgame": false
@@ -354,7 +354,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-REL-003" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "piedras-de-molienda" }
 			],
-			"recompensa": { "diario": "capitulo-molinera", "cosmetico": "delantal de la molinera" },
+			"recompensa": { "diario": "mision_cadena-molinera", "cosmetico": "delantal de la molinera" },
 			"consecuencia": { "molienda_familiar_restaurada": true },
 			"oculta": false,
 			"postgame": false
@@ -369,7 +369,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-HER-014" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "nudo-del-abuelo" }
 			],
-			"recompensa": { "diario": "capitulo-pescadores", "cosmetico": "flotador de corcho" },
+			"recompensa": { "diario": "mision_cadena-pescadores", "cosmetico": "flotador de corcho" },
 			"consecuencia": { "red_del_abuelo_reparada": true },
 			"oculta": false,
 			"postgame": false
@@ -384,7 +384,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-LUZ-011" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "ronda-de-los-guardas" }
 			],
-			"recompensa": { "diario": "capitulo-guardas", "cosmetico": "capa de guarda" },
+			"recompensa": { "diario": "mision_cadena-guardas", "cosmetico": "capa de guarda" },
 			"consecuencia": { "vigilia_de_los_guardas": true },
 			"oculta": false,
 			"postgame": false
@@ -399,7 +399,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ROP-005" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "envoltorio-sin-cinta" }
 			],
-			"recompensa": { "diario": "capitulo-regalo-favorito", "cosmetico": "bufanda de olivia" },
+			"recompensa": { "diario": "mision_cadena-regalo-favorito", "cosmetico": "bufanda de olivia" },
 			"consecuencia": { "regalo_favorito_entregado": true },
 			"oculta": false,
 			"postgame": false
@@ -414,7 +414,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-036" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "sedal-silencioso" }
 			],
-			"recompensa": { "diario": "capitulo-sentadilla-pesca", "cosmetico": "termo de la sentadilla" },
+			"recompensa": { "diario": "mision_cadena-sentadilla-pesca", "cosmetico": "termo de la sentadilla" },
 			"consecuencia": { "sentadilla_de_pesca_amistosa": true },
 			"oculta": false,
 			"postgame": false
@@ -429,7 +429,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-NAT-022" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "rutas-del-atardecer" }
 			],
-			"recompensa": { "diario": "capitulo-paseos", "cosmetico": "flor prensada" },
+			"recompensa": { "diario": "mision_cadena-paseos", "cosmetico": "flor prensada" },
 			"consecuencia": { "paseo_con_amiga": true },
 			"oculta": false,
 			"postgame": false
@@ -444,7 +444,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-NAT-023" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "final-inventado" }
 			],
-			"recompensa": { "diario": "capitulo-ficcion", "cosmetico": "libro de aria" },
+			"recompensa": { "diario": "mision_cadena-ficcion", "cosmetico": "libro de aria" },
 			"consecuencia": { "historia_de_ficcion_escrita": true },
 			"oculta": false,
 			"postgame": false
@@ -459,7 +459,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-035" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "recuento-de-la-pila" }
 			],
-			"recompensa": { "diario": "capitulo-ayuda-vecino", "cosmetico": "delantal de mercedes" },
+			"recompensa": { "diario": "mision_cadena-ayuda-vecino", "cosmetico": "delantal de mercedes" },
 			"consecuencia": { "puesto_de_mercedes_ordenado": true },
 			"oculta": false,
 			"postgame": false
@@ -474,7 +474,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-NAT-004" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "sello-de-cera" }
 			],
-			"recompensa": { "diario": "capitulo-cartas-amistad", "cosmetico": "sello de cera" },
+			"recompensa": { "diario": "mision_cadena-cartas-amistad", "cosmetico": "sello de cera" },
 			"consecuencia": { "correspondencia_retomada": true },
 			"oculta": false,
 			"postgame": false
@@ -489,7 +489,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-002" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "marcas-en-la-corteza" }
 			],
-			"recompensa": { "diario": "capitulo-mapa-secreto", "cosmetico": "mapa de bolsillo" },
+			"recompensa": { "diario": "mision_cadena-mapa-secreto", "cosmetico": "mapa de bolsillo" },
 			"consecuencia": { "sendero_secreto_revelado": true },
 			"oculta": true,
 			"postgame": false
@@ -504,7 +504,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-003" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "destello-verde" }
 			],
-			"recompensa": { "diario": "capitulo-cristal-oculto", "cosmetico": "cristal de destello" },
+			"recompensa": { "diario": "mision_cadena-cristal-oculto", "cosmetico": "cristal de destello" },
 			"consecuencia": { "cristal_oculto_recuperado": true },
 			"oculta": true,
 			"postgame": false
@@ -519,7 +519,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-SEC-005" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "tinta-de-marea" }
 			],
-			"recompensa": { "diario": "capitulo-diario-antiguo", "cosmetico": "marcador de pagina de algas" },
+			"recompensa": { "diario": "mision_cadena-diario-antiguo", "cosmetico": "marcador de pagina de algas" },
 			"consecuencia": { "autor_del_diario_identificado": true },
 			"oculta": true,
 			"postgame": false
@@ -534,7 +534,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ART-002" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "versos-del-pergamino" }
 			],
-			"recompensa": { "diario": "capitulo-pergamino-mistico", "cosmetico": "pergamino enmarcado" },
+			"recompensa": { "diario": "mision_cadena-pergamino-mistico", "cosmetico": "pergamino enmarcado" },
 			"consecuencia": { "versos_antiguos_descifrados": true },
 			"oculta": true,
 			"postgame": false
@@ -549,7 +549,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ART-004" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "rostro-de-corteza" }
 			],
-			"recompensa": { "diario": "capitulo-mascara-ceremonial", "cosmetico": "mascara de pared" },
+			"recompensa": { "diario": "mision_cadena-mascara-ceremonial", "cosmetico": "mascara de pared" },
 			"consecuencia": { "mascara_ceremonial_restaurada": true },
 			"oculta": true,
 			"postgame": false
@@ -564,7 +564,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-052" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "paradas-en-orden" }
 			],
-			"recompensa": { "diario": "capitulo-ruta-del-mercader", "cosmetico": "balanza de viaje" },
+			"recompensa": { "diario": "mision_cadena-ruta-del-mercader", "cosmetico": "balanza de viaje" },
 			"consecuencia": { "ruta_comercial_reabierta": true },
 			"oculta": false,
 			"postgame": false
@@ -579,7 +579,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-010" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "ovillo-enredado" }
 			],
-			"recompensa": { "diario": "capitulo-cargamento-de-telas", "cosmetico": "carrete de viaje" },
+			"recompensa": { "diario": "mision_cadena-cargamento-de-telas", "cosmetico": "carrete de viaje" },
 			"consecuencia": { "telas_reunidas": true },
 			"oculta": false,
 			"postgame": false
@@ -594,7 +594,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-TAL-002" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "marca-del-herrero" }
 			],
-			"recompensa": { "diario": "capitulo-secreto-del-yunque", "cosmetico": "martillo de bolsillo" },
+			"recompensa": { "diario": "mision_cadena-secreto-del-yunque", "cosmetico": "martillo de bolsillo" },
 			"consecuencia": { "tecnica_del_yunque_recuperada": true },
 			"oculta": false,
 			"postgame": false
@@ -626,7 +626,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-registro-del-faro",
+				"diario": "mision_cadena-registro-del-faro",
 				"cosmetico": "lente de farero"
 			},
 			"consecuencia": {
@@ -662,7 +662,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-catalogo-perdido",
+				"diario": "mision_cadena-catalogo-perdido",
 				"cosmetico": "exlibris de la isla"
 			},
 			"consecuencia": {
@@ -698,7 +698,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-mediciones-de-la-isla",
+				"diario": "mision_cadena-mediciones-de-la-isla",
 				"cosmetico": "cinta de medir de cuero"
 			},
 			"consecuencia": {
@@ -734,7 +734,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-mapa-de-las-plantas",
+				"diario": "mision_cadena-mapa-de-las-plantas",
 				"cosmetico": "lamina botanica"
 			},
 			"consecuencia": {
@@ -770,7 +770,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-cartas-estelares",
+				"diario": "mision_cadena-cartas-estelares",
 				"cosmetico": "planisferio de bolsillo"
 			},
 			"consecuencia": {
@@ -806,7 +806,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-templo-de-las-24-marcas",
+				"diario": "mision_cadena-templo-de-las-24-marcas",
 				"cosmetico": "sello de arcilla"
 			},
 			"consecuencia": {
@@ -842,7 +842,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-templo-de-los-25-engranajes",
+				"diario": "mision_cadena-templo-de-los-25-engranajes",
 				"cosmetico": "engranaje de bolsillo"
 			},
 			"consecuencia": {
@@ -878,7 +878,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-templo-de-las-26-mareas",
+				"diario": "mision_cadena-templo-de-las-26-mareas",
 				"cosmetico": "paleta de 26 tintes"
 			},
 			"consecuencia": {
@@ -914,7 +914,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-ruinas-del-barrizal",
+				"diario": "mision_cadena-ruinas-del-barrizal",
 				"cosmetico": "cuchara de ofrenda"
 			},
 			"consecuencia": {
@@ -950,7 +950,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-ruinas-del-manantial",
+				"diario": "mision_cadena-ruinas-del-manantial",
 				"cosmetico": "lampara de raiz"
 			},
 			"consecuencia": {
@@ -986,7 +986,7 @@
 				}
 			],
 			"recompensa": {
-				"diario": "capitulo-ruinas-del-acantilado",
+				"diario": "mision_cadena-ruinas-del-acantilado",
 				"cosmetico": "caracola del acantilado"
 			},
 			"consecuencia": {
@@ -1006,7 +1006,7 @@
 				{ "id": "p4", "tipo": "puzzle", "ref": "rumbos-de-la-carta" }
 			],
 			"recompensa": {
-				"diario": "capitulo-cartografia",
+				"diario": "mision_cadena-cartografia-de-la-isla",
 				"cosmetico": "mapa de la isla"
 			},
 			"consecuencia": {
@@ -1026,7 +1026,7 @@
 				{ "id": "p4", "tipo": "puzzle", "ref": "recuento-de-huellas" }
 			],
 			"recompensa": {
-				"diario": "capitulo-fauna",
+				"diario": "mision_cadena-fauna-de-la-isla",
 				"cosmetico": "cuaderno de campo"
 			},
 			"consecuencia": {
@@ -1046,7 +1046,7 @@
 				{ "id": "p4", "tipo": "puzzle", "ref": "orden-de-las-ruinas" }
 			],
 			"recompensa": {
-				"diario": "capitulo-cronologia",
+				"diario": "mision_cadena-cronologia-de-las-ruinas",
 				"cosmetico": "cronologia de bolsillo"
 			},
 			"consecuencia": {
@@ -1066,7 +1066,7 @@
 				{ "id": "p4", "tipo": "puzzle", "ref": "sendero-de-la-cumbre" }
 			],
 			"recompensa": {
-				"diario": "capitulo-mirador",
+				"diario": "mision_cadena-mirador-del-acantilado",
 				"cosmetico": "partitura del amanecer"
 			},
 			"consecuencia": {
@@ -1086,7 +1086,7 @@
 				{ "id": "p4", "tipo": "puzzle", "ref": "gota-a-gota" }
 			],
 			"recompensa": {
-				"diario": "capitulo-grutas",
+				"diario": "mision_cadena-grutas-del-manantial",
 				"cosmetico": "cantaro del manantial"
 			},
 			"consecuencia": {
@@ -1106,7 +1106,7 @@
 				{ "id": "p4", "tipo": "puzzle", "ref": "marcas-en-la-arena" }
 			],
 			"recompensa": {
-				"diario": "capitulo-playas",
+				"diario": "mision_cadena-playas-del-sur",
 				"cosmetico": "cordel de agrimensora"
 			},
 			"consecuencia": {
@@ -1126,7 +1126,7 @@
 				{ "id": "p4", "tipo": "puzzle", "ref": "marcas-de-pintura" }
 			],
 			"recompensa": {
-				"diario": "capitulo-sendero",
+				"diario": "mision_cadena-sendero-del-bosque",
 				"cosmetico": "silbato de guardabosques"
 			},
 			"consecuencia": {
@@ -1146,7 +1146,7 @@
 				{ "id": "p4", "tipo": "puzzle", "ref": "tablones-sueltos" }
 			],
 			"recompensa": {
-				"diario": "capitulo-muelle",
+				"diario": "mision_cadena-muelle-viejo",
 				"cosmetico": "ancla de escritorio"
 			},
 			"consecuencia": {
@@ -1165,7 +1165,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-002" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "nivelado-del-empedrado" }
 			],
-			"recompensa": { "diario": "capitulo-construccion-plaza", "cosmetico": "adoquin de recuerdo" },
+			"recompensa": { "diario": "mision_cadena-construccion-plaza", "cosmetico": "adoquin de recuerdo" },
 			"consecuencia": { "plaza_empedrada": true },
 			"oculta": false,
 			"postgame": false
@@ -1180,7 +1180,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "gravel" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "nivelado-de-senderos" }
 			],
-			"recompensa": { "diario": "capitulo-senderos", "cosmetico": "senal de madera tallada" },
+			"recompensa": { "diario": "mision_cadena-construccion-senderos", "cosmetico": "senal de madera tallada" },
 			"consecuencia": { "senderos_del_pueblo_reparados": true },
 			"oculta": false,
 			"postgame": false
@@ -1195,7 +1195,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-ITE-001" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "armado-del-kiosko" }
 			],
-			"recompensa": { "diario": "capitulo-kiosko", "cosmetico": "teja decorativa" },
+			"recompensa": { "diario": "mision_cadena-construccion-kiosko", "cosmetico": "teja decorativa" },
 			"consecuencia": { "kiosko_abierto": true },
 			"oculta": false,
 			"postgame": false
@@ -1210,7 +1210,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-EXT-011" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "cruz-de-semillas" }
 			],
-			"recompensa": { "diario": "capitulo-agricultura-cruces", "cosmetico": "semilla gemela" },
+			"recompensa": { "diario": "mision_cadena-agricultura-cruces", "cosmetico": "semilla gemela" },
 			"consecuencia": { "cruces_de_semillas": true },
 			"oculta": false,
 			"postgame": false
@@ -1225,7 +1225,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-HER-012" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "siembra-del-invernadero" }
 			],
-			"recompensa": { "diario": "capitulo-agricultura-cultivos", "cosmetico": "brote de recuerdo" },
+			"recompensa": { "diario": "mision_cadena-agricultura-cultivos", "cosmetico": "brote de recuerdo" },
 			"consecuencia": { "cultivos_del_invernadero": true },
 			"oculta": false,
 			"postgame": false
@@ -1240,7 +1240,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-EXT-013" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "riego-de-la-cosecha" }
 			],
-			"recompensa": { "diario": "capitulo-agricultura-cosecha", "cosmetico": "canasto de fiesta" },
+			"recompensa": { "diario": "mision_cadena-agricultura-cosecha", "cosmetico": "canasto de fiesta" },
 			"consecuencia": { "primera_cosecha": true },
 			"oculta": false,
 			"postgame": false
@@ -1255,7 +1255,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-HER-013" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "canal-del-manantial" }
 			],
-			"recompensa": { "diario": "capitulo-agricultura-riego", "cosmetico": "gotas de rocio" },
+			"recompensa": { "diario": "mision_cadena-agricultura-riego", "cosmetico": "gotas de rocio" },
 			"consecuencia": { "riego_del_huerto": true },
 			"oculta": false,
 			"postgame": false
@@ -1270,7 +1270,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "OBJ-PLA-001" },
 				{ "id": "p4", "tipo": "puzzle", "ref": "arreglo-floral-de-la-plaza" }
 			],
-			"recompensa": { "diario": "capitulo-agricultura-macetas", "cosmetico": "flor de plaza" },
+			"recompensa": { "diario": "mision_cadena-agricultura-macetas", "cosmetico": "flor de plaza" },
 			"consecuencia": { "plaza_florida": true },
 			"oculta": false,
 			"postgame": false
@@ -1285,7 +1285,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "trofeo-de-la-marea" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-HER-011" }
 			],
-			"recompensa": { "diario": "capitulo-pesca-trofeos", "cosmetico": "caña de atardecer" },
+			"recompensa": { "diario": "mision_cadena-pesca-trofeos", "cosmetico": "caña de atardecer" },
 			"consecuencia": { "trofeo_de_la_marea_exhibido": true },
 			"oculta": false,
 			"postgame": false
@@ -1300,7 +1300,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "tinta-de-escamas" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-ART-002" }
 			],
-			"recompensa": { "diario": "capitulo-pesca-documentacion", "cosmetico": "pergamino enmarcado" },
+			"recompensa": { "diario": "mision_cadena-pesca-documentacion", "cosmetico": "pergamino enmarcado" },
 			"consecuencia": { "catalogo_de_peces_escrito": true },
 			"oculta": false,
 			"postgame": false
@@ -1315,7 +1315,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "escamas-al-agua" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-HER-010" }
 			],
-			"recompensa": { "diario": "capitulo-pesca-suelta", "cosmetico": "botella con mensaje" },
+			"recompensa": { "diario": "mision_cadena-pesca-suelta", "cosmetico": "botella con mensaje" },
 			"consecuencia": { "peces_devueltos_al_agua": true },
 			"oculta": false,
 			"postgame": false
@@ -1330,7 +1330,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "luz-en-el-agua" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-LUZ-012" }
 			],
-			"recompensa": { "diario": "capitulo-pesca-nocturna", "cosmetico": "linterna de pescador" },
+			"recompensa": { "diario": "mision_cadena-pesca-nocturna", "cosmetico": "linterna de pescador" },
 			"consecuencia": { "pesca_nocturna_abierta": true },
 			"oculta": false,
 			"postgame": false
@@ -1345,7 +1345,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "pintura-de-la-marea" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-CUA-010" }
 			],
-			"recompensa": { "diario": "capitulo-coleccion-murales", "cosmetico": "pincel decorativo" },
+			"recompensa": { "diario": "mision_cadena-coleccion-murales", "cosmetico": "pincel decorativo" },
 			"consecuencia": { "mural_del_puerto_restaurado": true },
 			"oculta": false,
 			"postgame": false
@@ -1360,7 +1360,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "glifos-del-acantilado" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-ART-001" }
 			],
-			"recompensa": { "diario": "capitulo-coleccion-glifos", "cosmetico": "rubbing enmarcado" },
+			"recompensa": { "diario": "mision_cadena-coleccion-glifos", "cosmetico": "rubbing enmarcado" },
 			"consecuencia": { "glifos_del_acantilado_descifrados": true },
 			"oculta": false,
 			"postgame": false
@@ -1375,7 +1375,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "sello-del-panadero" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-ART-005" }
 			],
-			"recompensa": { "diario": "capitulo-coleccion-sellos", "cosmetico": "sello de cera" },
+			"recompensa": { "diario": "mision_cadena-coleccion-sellos", "cosmetico": "sello de cera" },
 			"consecuencia": { "sellos_decorativos_reunidos": true },
 			"oculta": false,
 			"postgame": false
@@ -1390,7 +1390,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "veta-escondida" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "mineral_cobre" }
 			],
-			"recompensa": { "diario": "capitulo-coleccion-minerales", "cosmetico": "geoda de repisa" },
+			"recompensa": { "diario": "mision_cadena-coleccion-minerales", "cosmetico": "geoda de repisa" },
 			"consecuencia": { "minerales_donados_al_museo": true },
 			"oculta": false,
 			"postgame": false
@@ -1405,7 +1405,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "peces-uno-a-uno" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-ITE-023" }
 			],
-			"recompensa": { "diario": "capitulo-coleccion-peces", "cosmetico": "maqueta de pez" },
+			"recompensa": { "diario": "mision_cadena-coleccion-peces", "cosmetico": "maqueta de pez" },
 			"consecuencia": { "peces_catalogados": true },
 			"oculta": false,
 			"postgame": false
@@ -1420,7 +1420,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "orquidea-escondida" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "OBJ-PLA-004" }
 			],
-			"recompensa": { "diario": "capitulo-coleccion-plantas", "cosmetico": "planta de cristal" },
+			"recompensa": { "diario": "mision_cadena-coleccion-plantas", "cosmetico": "planta de cristal" },
 			"consecuencia": { "plantas_raras_clasificadas": true },
 			"oculta": false,
 			"postgame": false
@@ -1435,7 +1435,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "piedra_caliza" },
 				{ "id": "p4", "tipo": "hablar", "npc": "aria_ciervo" }
 			],
-			"recompensa": { "diario": "capitulo-memorial-sello" },
+			"recompensa": { "diario": "mision_cadena-memorial-sello" },
 			"consecuencia": { "memorial_del_sello_erguido": true },
 			"oculta": false,
 			"postgame": true
@@ -1450,7 +1450,7 @@
 				{ "id": "p3", "tipo": "entregar", "objeto": "clay" },
 				{ "id": "p4", "tipo": "hablar", "npc": "catalina_oso" }
 			],
-			"recompensa": { "diario": "capitulo-epilogo-aldea" },
+			"recompensa": { "diario": "mision_cadena-epilogo-aldea" },
 			"consecuencia": { "epilogo_de_la_aldea_contado": true },
 			"oculta": false,
 			"postgame": true
@@ -1465,7 +1465,7 @@
 				{ "id": "p3", "tipo": "puzzle", "ref": "guardian-ultima-guarda" },
 				{ "id": "p4", "tipo": "entregar", "objeto": "fragmento_ancestral" }
 			],
-			"recompensa": { "diario": "capitulo-epilogo-guardian" },
+			"recompensa": { "diario": "mision_cadena-epilogo-guardian" },
 			"consecuencia": { "epilogo_del_guardian_cantado": true },
 			"oculta": true,
 			"postgame": true

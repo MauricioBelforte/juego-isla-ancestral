@@ -164,3 +164,20 @@ partida -> casas: [
 ]
 ```
 Versión del esquema incluida; migración en el cargador (M58).
+
+## Specs Casas (Beam 678)
+
+### RF2: casa del jugador construible desde el modo construcción
+- Spec: RF2: casa del jugador construible desde el modo construcción. Coherente with M18 (casas) and M16 (construcción).
+
+### P7: cocina — habitación funcional con interacción y recetas M16
+- Spec: P7: cocina — habitación funcional con interacción y recetas M16. Coherente with M18 (casas) and M16 (crafting).
+
+### P8: taller — habitación funcional con recetas de M16
+- Spec: P8: taller — habitación funcional con recetas de M16. Coherente with M18 (casas) and M16 (crafting).
+
+### P9: jardín — zona exterior de la casa con plantas (M33)
+- Spec: P9: jardín — zona exterior de la casa con plantas (M33). Coherente with M18 (casas) and M33 (agricultura).
+
+### P12: exteriores — modelo exterior que cambia de aspecto por etapa
+- Spec: P12: exteriores — modelo exterior que cambia de aspecto por etapa. Coherente with M18 (casas) and M17 (construcción).

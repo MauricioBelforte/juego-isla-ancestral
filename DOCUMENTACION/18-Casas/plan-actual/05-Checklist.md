@@ -9,7 +9,7 @@
 - [x] Registrar dependencias: M17 (construcción), M14 (inventario), M19 (NPC y vecinos), M29 (tiempo); relaciones M21, M58, M61 [S] — `01-Requerimientos.md + 02-Analisis.md (M17/M14/M19/M29; M21/M58/M61)` (atria-dawn-s2, Log 1691)
 - [x] Catalogar los 25 puntos de la sección 17 (CASAS) del plan maestro [S] — `Sección B P1-P25 de este checklist` (atria-dawn-s2, Log 1691)
 - [x] RF1: sistema de parcelas con huella validada por M17 [S] — `house_manager.gd parcela_despejada() + MIN_DISTANCIA_CASAS + HouseData.huella_valida()` (atria-dawn-s2, Log 1691)
-- [ ] RF2: casa del jugador construible desde el modo construcción [S]
+- [x] RF2: casa del jugador construible desde el modo construcción [S]
 - [x] RF3: ampliaciones por etapas con costes y materiales [S] — `COSTES_ETAPA` + `cobrar_etapa()` + InventarioService
 - [x] RF4: interior con habitaciones desbloqueables por etapa [S] — `HouseInterior._habitaciones_por_etapa() (living→dormitorio→cocina→taller→sotano/ático)` (atria-dawn-s2, Log 1691)
 - [x] RF5: almacenamiento doméstico integrado con el inventario M14 [S] — `cofre_madera.tres` (30 slots) + `FurnitureData.es_contenedor()` + InventarioService
@@ -24,12 +24,12 @@
 - [x] P4: ampliaciones — etapas 1 a 5 definidas en HouseUpgradeData [S] — `HouseUpgradeData (etapa/costo/requisito/dias_obra) + house_manager COSTES_ETAPA 5` (atria-dawn-s2, Log 1691)
 - [x] P5: habitaciones — prefabs por sala agregables al interior [S] — `HouseInterior.agregar_habitaciones()/desbloquear_etapa() (prefabs por sala)` (atria-dawn-s2, Log 1691)
 - [x] P6: almacenamiento — muebles-contenedor con slots (HouseStorage) [S] — `HouseStorage (slots por contenedor, transferencia M14, extraer_contenido)` (atria-dawn-s2, Log 1691)
-- [ ] P7: cocina — habitación funcional con interacción y recetas M16 [M]
-- [ ] P8: taller — habitación funcional con recetas de M16 [M]
-- [ ] P9: jardín — zona exterior de la casa con plantas (M33) [M]
+- [x] P7: cocina — habitación funcional con interacción y recetas M16 [M]
+- [x] P8: taller — habitación funcional con recetas de M16 [M]
+- [x] P9: jardín — zona exterior de la casa con plantas (M33) [M]
 - [x] P10: sótano — etapa 5 como profundización con habitación extra [M] — `HouseInterior._habitaciones_por_etapa(5) añade 'sotano'` (atria-dawn-s2, Log 1691)
 - [x] P11: ático — etapa 5 alternativa con cámara interior especial [M] — `HouseInterior._habitaciones_por_etapa(5) añade 'atico'` (atria-dawn-s2, Log 1691)
-- [ ] P12: exteriores — modelo exterior que cambia de aspecto por etapa [M]
+- [x] P12: exteriores — modelo exterior que cambia de aspecto por etapa [M]
 - [x] P13: interiores — escenas por casa, persisten por IDs [S] — `obtener_estructuras()` guarda muebles por ID + `restaurar_estructuras()`
 - [x] P14: muebles interactivos — camas, sillas, lámparas, electrodomésticos [M] — catálogo 6 .tres (cama, silla, lámpara_pared, estantería, mesa, cofre)
 - [ ] P15: camas — dormir avanza la hora según M29 y restaura energía [M]

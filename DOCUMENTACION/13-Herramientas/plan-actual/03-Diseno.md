@@ -165,3 +165,33 @@ WorldVoxel.place(pos, BlockId, metadata) → diff
 
 ### Acercamiento de camara 3.5 m durante el uso (M12)
 - Spec: acercamiento de camara 3.5 m durante el uso (M12). Coherente with M13 (herramientas) and M10 (personaje).
+
+
+## Specs Herramientas (Beam 672)
+
+### Vuelta a distancia elegida al soltar (M12)
+- Spec: vuelta a distancia elegida al soltar (M12). Coherente with M13 (herramientas) and M10 (personaje).
+
+### Vibracion al golpear (dispositivo con haptics -> fase plataformas)
+- Spec: vibracion al golpear (dispositivo con haptics -> fase plataformas). Coherente with M13 (herramientas) and M56 (interfaz).
+
+### Prompt [F] muestra la herramienta recomendada cuando aplica (M53/M19)
+- Spec: prompt [F] muestra la herramienta recomendada cuando aplica (M53/M19). Coherente with M13 (herramientas) and M53 (UI).
+
+### Stamina de M11 queda solo para sprint (M11)
+- Spec: stamina de M11 queda solo para sprint (M11). Coherente with M13 (herramientas) and M11 (movimiento).
+
+### Tutorial contextual: primera azada y cana en prologo (M22)
+- Spec: tutorial contextual: primera azada y cana en prologo (M22). Coherente with M13 (herramientas) and M22 (historia).
+
+
+## Specs Herramientas (Beam 673)
+
+### Compatible con cultivos (M33: azada/regadera)
+- Spec: compatible con cultivos (M33: azada/regadera). Coherente with M13 (herramientas) and M33 (agricultura).
+
+### Compatible con mineria (M46: tipos de mineral por profundidad)
+- Spec: compatible con mineria (M46: tipos de mineral por profundidad). Coherente with M13 (herramientas) and M35 (mineria).
+
+### Red de pesca como herramienta post-progresion (M35 la consume)
+- Spec: red de pesca como herramienta post-progresion (M35 la consume). Coherente with M13 (herramientas) and M34 (pesca).
