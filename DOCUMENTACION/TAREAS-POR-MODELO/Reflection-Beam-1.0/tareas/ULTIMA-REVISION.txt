@@ -41,3 +41,45 @@ REPOBLAMIENTO Cron E (2026-10-24 21:5x, agnes-3-flash directora)
 - Beam toma el menor numero de tareas/ root; completados/ queda como registro.
 ---
 REPOBLAMIENTO Cron E (22:24, agnes): BACKLOG-14 MICRO -> T061-T077 (307 items). Cola root ahora T018-T077 = 531 items. 4 tiers cargados; al drenar investigar +100 nuevo.
+
+--------------------------------------------------
+REPOBLAMIENTO DIRECTO (2026-10-24 21:1x, GLM-5.3-Flash / Kilo Code — encargo directo del fundador)
+--------------------------------------------------
+- Generados T078-T151 (74 archivos, 1.024 items) por escaneo fresco de los 05-Checklists
+  (exclusiones: bloqueados 🔵/🔴, D-5 M59/M20/M16/M17/M138, saturados-hoy M01/M55/M73/M75/M110
+  que ya tienen 327 items en T061-T077, items con FLAG FUNDADOR/TECNICO; anti-duplicado por
+  (modulo, L#) contra la cola root de agnes).
+- Cubos: 86 items B-EDITOR/ARTE marcados para skip honesto; resto A-DOC/FORMULA (nicho Beam).
+- Verificacion: muestreo 3/3 anclas exactas (T078-67 L42/L59/L100 vs 05 de M67); UTF-8 sin BOM.
+- Los 05 fueron LEIDOS, nunca modificados (Beam flipa al ejecutar).
+- Fuel AGOTADO antes del techo T500 que pidio el fundador: para el proximo tramo hace falta
+  reposicion por investigacion (informe completo en canal de agnes, msg 78).
+- Preserva la pausa del apilador de agnes hasta su regreso.
+
+--------------------------------------------------
+REPOBLAMIENTO DIRECTO — LOTE 2: DEGRADADOS [?] (2026-10-24 21:5x, GLM-5.3-Flash / Kilo Code — pedido del fundador)
+--------------------------------------------------
+- Generados T152-T265 (114 archivos, 990 items) desde los [?] DEGRADADOS de los 05-Checklists
+  (92 modulos habilitados; exclusiones: bloqueados, D-5, flags, y (mid,L#) vivos en root).
+- Este es el nicho MAXIMO de Beam (fórmulas/specs pendientes de definicion, barrido auditor-citas
+  + degradaciones CAPA-II/que esperan definicion): M74 58, M94 55, M11/M12/M71 45, M27 40,
+  M34 36, M162 36, M156 34, M64 29, M105 28...
+- Cubos de este lote: A-DEF/FORMULA (re-verificar y definir — instrucciones inline en cada archivo),
+  C-SKIP (dueno/dependencia externa) y B-EDITOR/ARTE: 69. Beam flipa [?]->[x] SOLO con seccion
+  citada; si no, deja [?] y skip honesto (criterio auditor-citas vigente).
+- Cola root actual: T057-T265 (~2.300 items) — Beam tiene fuel holgado por muchas tandas.
+- Verificacion: muestreo 2/2 anclas exactas (T152-74 L93/L94 vs 05 de M74); UTF-8 sin BOM.
+- fuel [?] AGOTADO para el proximo tramo: reposicion por investigacion (fuentes citadas en msg 79).
+
+--------------------------------------------------
+CRUZE DE FUENTES (2026-10-24 22:0x, GLM-5.3-Flash / Kilo Code — a pedido del fundador)
+--------------------------------------------------
+- Mapa de paquetes del director: BACKLOG-10 (D-6, 210 fórmulas) => agnes lo apiló en T001-T017;
+  BACKLOG-12 (D-5-C, 169 [C]) => T018-T050; BACKLOG-13 (125) => T051-T060; BACKLOG-14 (307 micro)
+  => T061-T077. BACKLOG-11 (562 D-8) = ASIGNADO A DEEPSEEK (no tocar). BACKLOG-08/09 son
+  descriptores de clusters (no fuel directo); PRESUPUESTOS-II consumido 23oct.
+- Los TASCHE T152+ (M27/M31/M34/M156) son los MISMOS [?] del BACKLOG-10 (L# identicos): Beam los
+  ejecuta UNA sola vez; el apilador NO debe re-publicar BACKLOG-10.
+- Parche aplicado a T167/168-27, T169/170-34, T173/174-156, T191-31: el cubo del director
+  (C-PIPELINE/B-EDITOR => skip/listar; A-FORMULA => definir) PREVALECE sobre el heurístico.
+- Fuente [?] de 05s AGOTADA. Próximo tramo = reposición por investigación (msg 78/79 al canal agnes).

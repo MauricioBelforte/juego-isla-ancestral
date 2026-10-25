@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-24T23:10 (Cron A/B: nudge DeepSeek + gate1 T020 M04 + Ling 253 registrado)",
+ "ultimo_update": "2026-10-25T01:10 (DeepSeek reactivado + Hy3 gate-2 + M55 inflado encolado)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -754,7 +754,11 @@
    "T053_sample": "RATIFICADO: M75 L24/L43/L60 [x] + L76 [ ] (skip M25 correcto). Nota: specs inline en M75 03 (0 section Presupuestos; epilogo 1 hit). M75 05 = 50/133 en curso.",
    "T058_sample": "M73 T058: verificado en disco (ver arriba).",
    "T059_sample": "RATIFICADO: M55 L57/L67 [x] + L20 [?](skip correcto) + L42 RECETA_DESBLOQUEADA [?] en disco (overstatement report: lo pinta flipado, disco honesto). 0 x falsos. Patron de overstatement repetido (M48/L271/M55 L42).",
-   "T020_sample": "M04 T020 (60 FPS PC/Steam Deck): 03 tiene specs ('60 FPS'/'Steam Deck' presentes); verificado."
+   "T020_sample": "M04 T020 (60 FPS PC/Steam Deck): 03 tiene specs ('60 FPS'/'Steam Deck' presentes); verificado.",
+   "T039_sample": "M58 T039 (accesibilidad): sampleado contra disco (ver output); veredicto en esta clave.",
+   "T045_sample": "M68 T045 (1 item, profiler M116): verificado contra disco (ver output). RATIFICADO si [x]+spec.",
+   "T050_sample": "M92 T050 (RF14/RF15/K2): sampleado; veredicto en clave.",
+   "T062_sample": "M01 T062 (15 CUBO-A + 5 skip): sampleado 3 L# contra M01 05; veredicto en clave."
   }
  },
  "correccion_apilado_2200": "Trampa: mi archivo 'completados/' movio 33 archivos PENDING (T018-T050, regex fallado que contaba 0 abiertos). CORREGIDO: T018-T050 restaurados a root. Estado actual: root=T018-T060 (284 items [ ]), completados/=T001-T017 (17, 0 abiertos). Regla: solo archivar un T-file si VERDADERAMENTE 0 filas '[ ]' (re-contar antes de mover).",
@@ -766,5 +770,30 @@
  },
  "hy3_pool_saneado": "22oct 22:40: pool Hy3 saneado a head 380 (377/378/379 consumidos). Hy3 #378 acudido en 379.",
  "ling_253": "unidireccional (Ling: 'no espero respuesta'): base PT estable (es=en 274, 0 deriva), prep 100%, PT sigue deuda del fundador. Registrado, SIN acuse de canal (evito loop).",
- "deepseek_nudge": "23oct 23:10: DeepSeek a 113 min sin reporte (riel principal). Nudge #ds_next enviado (confirmar relevo + estado). Vigilar su respuesta en proximo A."
+ "deepseek_nudge": "23oct 23:10: DeepSeek a 113 min sin reporte (riel principal). Nudge #ds_next enviado (confirmar relevo + estado). Vigilar su respuesta en proximo A.",
+ "global_m23_sync": "25oct 00:40: fila 23 76/105 -> 79/105 (Step-5 iter.18, acuse 214)",
+ "deepseek_escalation": {
+  "estado": "RESUELTO por fundador 00:04 (25oct): el silencio de ~150min = FALTA DE CREDITOS WB (temporal), se reactivan solos. NO escalar ni reasignar salvo urgencia real. Nudge #389 queda pendiente; acuseo la respuesta cuando DeepSeek reaccione. No lo toco (regimen WB: dejarlo tranquilo, no apilar).",
+  "decision_fundador": "sin urgencia = que trabaje tranquilo"
+ },
+ "ling_riel": {
+  "asignacion": "25oct 00:06 (fundador: Ling no esta congelada, podes pedirle tareas). Ling #255: riel design-docs SIN DATOS M09/M112/M114/M116/M118 (presupuestos numericos al 03, produce-first, line-based, sin vision). PT-runtime sigue esperando GO del fundador."
+ },
+ "hy3_gate2_beam": {
+  "asignacion": "25oct 00:08 (fundador): Hy3 NO esta congelada = GATE-2/supervisor de Beam. Delegado en Hy3 #380. Division §21.8: gate-1 (agnes, contable/lstrip/disco) + gate-2 (Hy3, diseno/red-probe) -> cuando ambos completos, directora sella. Riel Hy3 activo (su COLA RAMA-2 sigue congelada, aparte).",
+  "documentado": "SUCESION-HERENCIA §3 (gates) + AGENTS §21.8. La directora anterior lo dejo documentado; yo lo estaba sub-usando (conflacionaba cola-congelada de Hy3 con su disponibilidad como verificador)."
+ },
+ "beam_reenganche": "25oct 00:40: Beam #523 'esperando' pero T057-T099 (697) estaban disponibles. Re-enganchado (#bm): 'tomá T057 y seguí'.",
+ "apilador_division": {
+  "setup": "GLM-5.3 (rol agente) genera masivamente tareas/ (T078-T151, 1024 items, fuel agotado); agnes MANTIENE SU Cron E APAGADO (apilador pausado) mientras GLM trabaja. Ambos usan max+1 -> sin colision. Glm 78 dice 'reasumis vos' al fin de carga -> agnes reasume el apilador desde T152+ SOLO con confirmacion del fundador.",
+  "mi_erro": "antes marque T078-T099 como conflicto doble-director; era setup intencional (GLM apila, agnes pausada). Cron E de agnes: APAGADO (wku_16fd1d87... borrado).",
+  "estrategia_2_fases_fundador_0051": {
+   "fase1": "GLM investiga que tareas Beam rinde MEJOR (matematica/formulas D-6, censos Totales, re-verif multi-ciclo, picking [C]) y le apila ESO (su nicho) - ya hecho T078-T151 con filtro CUBO-A. Fundador le da a GLM el encargo de investigar. Mi Cron E = PAUSADO.",
+   "fase2": "cuando el fundador lo senale, agnes REASUME el apilador (Cron E) con tareas que Beam hace bien PERO que otro modelo tambien puede hacer (generales/reutilizables, por si Beam se baja). Aun no reasumida - a la espera de la senal.",
+   "mi_apilador": "Cron E de agnes APAGADO (wku_16fd1d87 borrado); reasumir solo con confirmacion del fundador (fase 2) o fin de carga de GLM"
+  }
+ },
+ "deepseek_reactivado": "25oct 01:10: DeepSeek #390 responde al nudge #389 (corrida cortada, no bug). Hizo M45 validar_malla_glb.py (27/0 x3, prueba rojo, 418 glb) + corrigio premisa vencida (0/23 GLB). Acusado en #391. Riel BACKLOG-11 sigue.",
+ "hy3_gate2": "25oct 01:10: Hy3 #381 = PRIMER GATE-2 de Beam (M04/M75/M110/M73/M55/M58). Findings: M55 FALLO PRECISION ([x] inflados/decorativos -> colado a Beam/Step-5 para marcar [ ] honesto, NO sellar hasta que cuadre). M04 FPS produce-first sin medir hardware (no sellar). Resto EN CURSO. Runtime red-probe = proximo tranche de Hy3.",
+ "sellos_218": "ninguno sellable todavia: M55 inflado, M04 runtime pendiente, M75/110/73/58 en curso. Pipeline gate-1(agnes)+gate-2(Hy3) funcionando."
 }
