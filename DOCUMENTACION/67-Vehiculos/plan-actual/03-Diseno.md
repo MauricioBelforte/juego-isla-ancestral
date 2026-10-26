@@ -431,3 +431,6 @@ jugador cerca de un muelle (M28)
 
 ### Confirmar 130 items exactos
 - Spec: confirmar 130 items exactos. Coherente with M67 (vehiculos) and AGENTS.md sec 11.
+
+### Specs items degradados T079 (2026-10-26, Reflection-Beam-1.0)
+- **LOD de audio: atenuar > 40 m, silenciar > 80 m:** spec definida — atenuación de volumen por distancia (40 m atenuado, 80 m silenciado) para audio de vehículos. Dueño M91 (audio). Implementación: AudioStreamPlayer3D con max_distance=80 y attenuation model.

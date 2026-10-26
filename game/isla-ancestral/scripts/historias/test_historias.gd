@@ -107,13 +107,16 @@
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB"]
 
 var _fallos: int = 0
 var _checks: int = 0
 var _h: Node = null
 var _bus: Node = null
 var _vistos: Dictionary = {}
+## Bloque AB: eventos cosmetico_desbloqueado capturados (var miembro: las
+## lambdas capturan por VALOR, un local no se veria).
+var _cosm_eventos: Array = []
 
 # Piso MEDIDO en verde (iter. 15, 2026-10-23, Log 2166): 543 checks con los
 # bloques A-T (iter. 14 tenia 477 con A-S; el bloque T del cluster Exploracion
@@ -183,7 +186,7 @@ var _vistos: Dictionary = {}
 # "[FAIL] el bloque Z NO se ejecuto"; (b) asercion falsa sobre la excepcion
 # medida -> 869 checks / 1 fallo / EXIT 1. Archivo restaurado byte-exacto
 # (sha256 identico) tras cada sonda.
-const CHECKS_MINIMOS := 891
+const CHECKS_MINIMOS := 923
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -232,6 +235,7 @@ func _run() -> void:
 	_test_recompensa_diario()
 	_test_e2e_diez()
 	_test_consecuencia_taller()
+	_test_cosmeticos()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -2637,6 +2641,138 @@ func _test_consecuencia_taller() -> void:
 		ws.set_flag("taller_abierto", false)
 	_h.restore_save_data({})
 	_fin("AA")
+
+
+## Bloque AB (iter. 24, Log 2202) — catalogo de cosmeticos + puente de la
+## recompensa cosmetica. Mide el defecto que motivo la tanda: 77 cadenas
+## declaran `recompensa.cosmetico` con un NOMBRE VISIBLE que no existia en
+## ningun catalogo y que el puente no transportaba (`quest_updated(id,
+## "cosmetico", 1)`, sin listener). Ahora: catalogo con id estable + senal
+## `cosmetico_desbloqueado` + estado derivado de las completadas.
+func _test_cosmeticos() -> void:
+	var cat: RefCounted = _h.catalogo_cosmeticos()
+	_check(cat != null, "AB catalogo de cosmeticos cargado (no null)")
+	if cat == null:
+		_fin("AB")
+		return
+	var total: int = int(cat.cantidad())
+	var declarados: Array = _h.nombres_cosmeticos_declarados()
+	# L99: "10+ cosmeticos" — el catalogo debe cubrir el minimo del diseno.
+	_check(total >= 10, "AB catalogo con 10+ entradas (L99): %d" % total)
+	_check(total == declarados.size(),
+		"AB catalogo == nombres unicos declarados (%d vs %d)" % [total, declarados.size()])
+	var errores: Array = _h.validar_cosmeticos()
+	if not errores.is_empty():
+		for e in errores:
+			print("   AB error: %s" % String(e))
+	_check(errores.is_empty(), "AB validar_cosmeticos() sin errores (0 de %d)" % errores.size())
+	# Los 3 tipos que nombra 03-Diseno L62 + "casa" como contenedor del resto.
+	var conteo: Dictionary = cat.conteo_por_tipo()
+	_check(int(conteo.get("disfraz", 0)) >= 1, "AB tipo disfraz presente: %d" % int(conteo.get("disfraz", 0)))
+	_check(int(conteo.get("sombrero", 0)) >= 1, "AB tipo sombrero presente: %d" % int(conteo.get("sombrero", 0)))
+	_check(int(conteo.get("paleta", 0)) >= 1, "AB tipo paleta presente: %d" % int(conteo.get("paleta", 0)))
+	_check(int(conteo.get("casa", 0)) >= 1, "AB tipo casa presente: %d" % int(conteo.get("casa", 0)))
+	var suma := 0
+	for t in conteo:
+		suma += int(conteo[t])
+	_check(suma == total, "AB suma por tipo == total del catalogo (%d vs %d)" % [suma, total])
+	# Invariantes por entrada (id con prefijo, solo visual, sin stats).
+	var ids_ok := true
+	var visual_ok := true
+	var stats_ok := true
+	for c in cat.todos():
+		var d: Dictionary = c
+		if not String(d.get("id", "")).begins_with("cosm-"):
+			ids_ok = false
+		if not bool(d.get("solo_visual", false)):
+			visual_ok = false
+		if bool(d.get("afecta_stats", true)):
+			stats_ok = false
+	_check(ids_ok, "AB todos los ids con prefijo cosm-")
+	_check(visual_ok, "AB todos solo_visual = true (03-Diseno L62)")
+	_check(stats_ok, "AB ninguno afecta stats (vision cozy)")
+	# Identidad: nombre visible declarado -> id estable del catalogo.
+	_check(String(_h.cosmetico_de("cadena-faro")) == "cosm-farol-de-atardecer",
+		"AB cosmetico_de(cadena-faro) == cosm-farol-de-atardecer: %s" % String(_h.cosmetico_de("cadena-faro")))
+	var info: Dictionary = _h.cosmetico_info("cadena-faro")
+	_check(String(info.get("nombre", "")) == "farol de atardecer",
+		"AB info.nombre == 'farol de atardecer': %s" % String(info.get("nombre", "")))
+	_check(String(info.get("tipo", "")) == "casa",
+		"AB info.tipo == casa: %s" % String(info.get("tipo", "")))
+	_check(String(_h.cosmetico_de("cadena-epilogo-plaza")) == "",
+		"AB cadena sin cosmetico declarado -> id vacio")
+	_check(String(cat.id_de_nombre("cosmetico inexistente")) == "",
+		"AB nombre no catalogado -> id vacio (no inventa)")
+	# Cobertura: NINGUNA entrada del catalogo queda ilegible por id.
+	var sin_resolver: Array = []
+	var ids: Array = cat.ids()
+	for i in ids.size():
+		var ficha: Dictionary = cat.obtener(String(ids[i]))
+		if ficha.is_empty():
+			sin_resolver.append(String(ids[i]))
+	_check(sin_resolver.is_empty(), "AB todas las entradas del catalogo se leen por id: %d" % sin_resolver.size())
+	# Colision de contenido DOCUMENTADA: 2 cadenas declaran "sello de cera".
+	var a := String(_h.cosmetico_de("cadena-cartas-amistad"))
+	var b := String(_h.cosmetico_de("cadena-coleccion-sellos"))
+	_check(a != "" and a == b,
+		"AB 'sello de cera' resuelve al MISMO id en las 2 cadenas: %s / %s" % [a, b])
+	var ficha_sello: Dictionary = cat.obtener(a)
+	var origen: Array = ficha_sello.get("origen", [])
+	_check(origen.has("cadena-cartas-amistad") and origen.has("cadena-coleccion-sellos"),
+		"AB la ficha de 'sello de cera' declara las 2 cadenas de origen: %s" % str(origen))
+	# Discriminacion del cruce: un detector que nunca ve nada dice lo mismo que
+	# uno limpio -> control positivo + control negativo, medidos.
+	_check(cat.faltantes(["farol de atardecer"]).is_empty(),
+		"AB faltantes() control positivo: un nombre catalogado NO falta")
+	_check(cat.faltantes(["no existe"]).size() == 1,
+		"AB faltantes() discrimina: un nombre inventado SI falta")
+	_check(cat.huerfanos(declarados).is_empty(),
+		"AB huerfanos(declarados) vacio: 0 entradas sin cadena que las declare")
+	_check(cat.huerfanos(["farol de atardecer"]).size() == total - 1,
+		"AB huerfanos() discrimina: con 1 solo declarado, %d quedan huerfanos" % (total - 1))
+	# Runtime: completar una cadena REAL desbloquea su cosmetico y emite el id.
+	_check(_h.has_signal("cosmetico_desbloqueado"),
+		"AB el servicio declara la senal cosmetico_desbloqueado")
+	var previos: Array = _h.cosmeticos_desbloqueados()
+	_check(previos.is_empty(), "AB sin cadenas completadas no hay cosmeticos: %d" % previos.size())
+	_cosm_eventos.clear()
+	var ya_conectado := _h.is_connected("cosmetico_desbloqueado", Callable(self, "_on_cosmetico"))
+	if not ya_conectado:
+		_h.connect("cosmetico_desbloqueado", Callable(self, "_on_cosmetico"))
+	var cid := "cadena-taller"
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"iron_ore": 1})
+	var res: Dictionary = _h.iniciar_cadena(cid)
+	_check(bool(res.ok), "AB iniciar %s OK" % cid)
+	res = _h.reportar_paso(cid, "hablar", "ramon_tejon")
+	res = _h.reportar_paso(cid, "explorar", "taller_viejo")
+	res = _h.reportar_paso(cid, "puzzle", "fragua-apagada")
+	res = _h.reportar_entrega(cid)
+	_check(_h.esta_completada(cid), "AB %s completada end-to-end (camino real)" % cid)
+	_check(_cosm_eventos.size() == 1,
+		"AB 1 evento cosmetico_desbloqueado al completar: %d" % _cosm_eventos.size())
+	if _cosm_eventos.size() == 1:
+		var ev: Dictionary = _cosm_eventos[0]
+		_check(String(ev.get("cadena", "")) == cid,
+			"AB evento.cadena == %s: %s" % [cid, String(ev.get("cadena", ""))])
+		_check(String(ev.get("cosmetico", "")) == "cosm-delantal-de-herrero",
+			"AB evento.cosmetico == cosm-delantal-de-herrero: %s" % String(ev.get("cosmetico", "")))
+	var desbloqueados: Array = _h.cosmeticos_desbloqueados()
+	_check(desbloqueados.has("cosm-delantal-de-herrero"),
+		"AB cosmeticos_desbloqueados() incluye el de la cadena completada: %s" % str(desbloqueados))
+	# Higiene: desconectar y dejar el estado como estaba.
+	if _h.is_connected("cosmetico_desbloqueado", Callable(self, "_on_cosmetico")):
+		_h.disconnect("cosmetico_desbloqueado", Callable(self, "_on_cosmetico"))
+	var ws := root.get_node_or_null("WorldState")
+	if ws != null:
+		ws.set_flag("taller_abierto", false)
+	_h.restore_save_data({})
+	_fin("AB")
+
+
+func _on_cosmetico(cadena_id: String, cosmetico_id: String) -> void:
+	_cosm_eventos.append({"cadena": cadena_id, "cosmetico": cosmetico_id})
 
 
 ## Busca un token literal en un arbol (.json/.tres) y devuelve las rutas que lo

@@ -1,0 +1,769 @@
+{
+	"schema_version": 1,
+	"fuente": "data/historias/secundarias.json + cadenas_ejemplo.json (recompensa.cosmetico)",
+	"regla": "cosmetico = solo visual; nunca stats (03-Diseno L62)",
+	"cosmeticos": [
+		{
+			"id": "cosm-adoquin-de-recuerdo",
+			"nombre": "adoquin de recuerdo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-construccion-plaza"
+			]
+		},
+		{
+			"id": "cosm-ancla-de-escritorio",
+			"nombre": "ancla de escritorio",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-muelle-viejo"
+			]
+		},
+		{
+			"id": "cosm-anillo-de-arcilla",
+			"nombre": "anillo de arcilla",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-gema"
+			]
+		},
+		{
+			"id": "cosm-balanza-de-viaje",
+			"nombre": "balanza de viaje",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-ruta-del-mercader"
+			]
+		},
+		{
+			"id": "cosm-banco-tallado",
+			"nombre": "banco tallado",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-carpintero"
+			]
+		},
+		{
+			"id": "cosm-botella-con-mensaje",
+			"nombre": "botella con mensaje",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-pesca-suelta"
+			]
+		},
+		{
+			"id": "cosm-brote-de-recuerdo",
+			"nombre": "brote de recuerdo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-agricultura-cultivos"
+			]
+		},
+		{
+			"id": "cosm-bufanda-de-olivia",
+			"nombre": "bufanda de olivia",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-regalo-favorito"
+			]
+		},
+		{
+			"id": "cosm-bufanda-de-viaje",
+			"nombre": "bufanda de viaje",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-puente"
+			]
+		},
+		{
+			"id": "cosm-canasto-de-fiesta",
+			"nombre": "canasto de fiesta",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-agricultura-cosecha"
+			]
+		},
+		{
+			"id": "cosm-cantaro-del-manantial",
+			"nombre": "cantaro del manantial",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-grutas-del-manantial"
+			]
+		},
+		{
+			"id": "cosm-capa-de-guarda",
+			"nombre": "capa de guarda",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-guardas"
+			]
+		},
+		{
+			"id": "cosm-capa-del-gremio",
+			"nombre": "capa del gremio",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-cofradia"
+			]
+		},
+		{
+			"id": "cosm-caracola-del-acantilado",
+			"nombre": "caracola del acantilado",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-ruinas-del-acantilado"
+			]
+		},
+		{
+			"id": "cosm-carrete-de-viaje",
+			"nombre": "carrete de viaje",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-cargamento-de-telas"
+			]
+		},
+		{
+			"id": "cosm-catalejo-de-bolsillo",
+			"nombre": "catalejo de bolsillo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-observatorio"
+			]
+		},
+		{
+			"id": "cosm-cana-de-atardecer",
+			"nombre": "caña de atardecer",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-pesca-trofeos"
+			]
+		},
+		{
+			"id": "cosm-cinta-de-medir-de-cuero",
+			"nombre": "cinta de medir de cuero",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-mediciones-de-la-isla"
+			]
+		},
+		{
+			"id": "cosm-cordel-de-agrimensora",
+			"nombre": "cordel de agrimensora",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-playas-del-sur"
+			]
+		},
+		{
+			"id": "cosm-cristal-de-destello",
+			"nombre": "cristal de destello",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-cristal-oculto"
+			]
+		},
+		{
+			"id": "cosm-cronologia-de-bolsillo",
+			"nombre": "cronologia de bolsillo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-cronologia-de-las-ruinas"
+			]
+		},
+		{
+			"id": "cosm-cuaderno-de-campo",
+			"nombre": "cuaderno de campo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-fauna-de-la-isla"
+			]
+		},
+		{
+			"id": "cosm-cuchara-de-ofrenda",
+			"nombre": "cuchara de ofrenda",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-ruinas-del-barrizal"
+			]
+		},
+		{
+			"id": "cosm-delantal-de-fiesta",
+			"nombre": "delantal de fiesta",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-panadera"
+			]
+		},
+		{
+			"id": "cosm-delantal-de-herrero",
+			"nombre": "delantal de herrero",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-taller"
+			]
+		},
+		{
+			"id": "cosm-delantal-de-la-abuela",
+			"nombre": "delantal de la abuela",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-carta"
+			]
+		},
+		{
+			"id": "cosm-delantal-de-la-molinera",
+			"nombre": "delantal de la molinera",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-molinera"
+			]
+		},
+		{
+			"id": "cosm-delantal-de-mercedes",
+			"nombre": "delantal de mercedes",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-ayuda-vecino"
+			]
+		},
+		{
+			"id": "cosm-engranaje-de-bolsillo",
+			"nombre": "engranaje de bolsillo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-templo-de-los-25-engranajes"
+			]
+		},
+		{
+			"id": "cosm-exlibris-de-la-isla",
+			"nombre": "exlibris de la isla",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-catalogo-perdido"
+			]
+		},
+		{
+			"id": "cosm-farol-de-atardecer",
+			"nombre": "farol de atardecer",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-faro"
+			]
+		},
+		{
+			"id": "cosm-farol-de-mano",
+			"nombre": "farol de mano",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-farol"
+			]
+		},
+		{
+			"id": "cosm-flor-de-plaza",
+			"nombre": "flor de plaza",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-agricultura-macetas"
+			]
+		},
+		{
+			"id": "cosm-flor-prensada",
+			"nombre": "flor prensada",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-paseos"
+			]
+		},
+		{
+			"id": "cosm-flotador-de-corcho",
+			"nombre": "flotador de corcho",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-pescadores"
+			]
+		},
+		{
+			"id": "cosm-frasco-de-luna",
+			"nombre": "frasco de luna",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-alquimista"
+			]
+		},
+		{
+			"id": "cosm-gafas-de-estudioso",
+			"nombre": "gafas de estudioso",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-biblioteca"
+			]
+		},
+		{
+			"id": "cosm-geoda-de-repisa",
+			"nombre": "geoda de repisa",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-coleccion-minerales"
+			]
+		},
+		{
+			"id": "cosm-gorra-de-maquinista",
+			"nombre": "gorra de maquinista",
+			"tipo": "sombrero",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-estacion"
+			]
+		},
+		{
+			"id": "cosm-gotas-de-rocio",
+			"nombre": "gotas de rocio",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-agricultura-riego"
+			]
+		},
+		{
+			"id": "cosm-guardapelo-de-hilo",
+			"nombre": "guardapelo de hilo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-relicto"
+			]
+		},
+		{
+			"id": "cosm-lamina-botanica",
+			"nombre": "lamina botanica",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-mapa-de-las-plantas"
+			]
+		},
+		{
+			"id": "cosm-lampara-de-lectura",
+			"nombre": "lampara de lectura",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-biblioteca-quemada"
+			]
+		},
+		{
+			"id": "cosm-lampara-de-raiz",
+			"nombre": "lampara de raiz",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-ruinas-del-manantial"
+			]
+		},
+		{
+			"id": "cosm-lente-de-farero",
+			"nombre": "lente de farero",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-registro-del-faro"
+			]
+		},
+		{
+			"id": "cosm-libro-de-aria",
+			"nombre": "libro de aria",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-ficcion"
+			]
+		},
+		{
+			"id": "cosm-linterna-de-luciernagas",
+			"nombre": "linterna de luciérnagas",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-secretta-luciernagas"
+			]
+		},
+		{
+			"id": "cosm-linterna-de-pescador",
+			"nombre": "linterna de pescador",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-pesca-nocturna"
+			]
+		},
+		{
+			"id": "cosm-llavero-de-madera",
+			"nombre": "llavero de madera",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-llave"
+			]
+		},
+		{
+			"id": "cosm-manto-de-niebla",
+			"nombre": "manto de niebla",
+			"tipo": "disfraz",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-tejedora"
+			]
+		},
+		{
+			"id": "cosm-mapa-de-bolsillo",
+			"nombre": "mapa de bolsillo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-mapa-secreto"
+			]
+		},
+		{
+			"id": "cosm-mapa-de-la-isla",
+			"nombre": "mapa de la isla",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-cartografia-de-la-isla"
+			]
+		},
+		{
+			"id": "cosm-maqueta-de-pez",
+			"nombre": "maqueta de pez",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-coleccion-peces"
+			]
+		},
+		{
+			"id": "cosm-marcador-de-pagina-de-algas",
+			"nombre": "marcador de pagina de algas",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-diario-antiguo"
+			]
+		},
+		{
+			"id": "cosm-martillo-de-bolsillo",
+			"nombre": "martillo de bolsillo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-secreto-del-yunque"
+			]
+		},
+		{
+			"id": "cosm-mascara-de-pared",
+			"nombre": "mascara de pared",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-mascara-ceremonial"
+			]
+		},
+		{
+			"id": "cosm-paleta-de-26-tintes",
+			"nombre": "paleta de 26 tintes",
+			"tipo": "paleta",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-templo-de-las-26-mareas"
+			]
+		},
+		{
+			"id": "cosm-pandereta-de-madera",
+			"nombre": "pandereta de madera",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-molino"
+			]
+		},
+		{
+			"id": "cosm-partitura-del-amanecer",
+			"nombre": "partitura del amanecer",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-mirador-del-acantilado"
+			]
+		},
+		{
+			"id": "cosm-pergamino-enmarcado",
+			"nombre": "pergamino enmarcado",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-pergamino-mistico",
+				"cadena-pesca-documentacion"
+			]
+		},
+		{
+			"id": "cosm-pincel-decorativo",
+			"nombre": "pincel decorativo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-coleccion-murales"
+			]
+		},
+		{
+			"id": "cosm-planisferio-de-bolsillo",
+			"nombre": "planisferio de bolsillo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-cartas-estelares"
+			]
+		},
+		{
+			"id": "cosm-planta-de-cristal",
+			"nombre": "planta de cristal",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-coleccion-plantas"
+			]
+		},
+		{
+			"id": "cosm-red-decorativa",
+			"nombre": "red decorativa",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-pescador"
+			]
+		},
+		{
+			"id": "cosm-rosa-de-los-vientos-de-bolsillo",
+			"nombre": "rosa de los vientos de bolsillo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-brujula"
+			]
+		},
+		{
+			"id": "cosm-rubbing-enmarcado",
+			"nombre": "rubbing enmarcado",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-coleccion-glifos"
+			]
+		},
+		{
+			"id": "cosm-sello-de-arcilla",
+			"nombre": "sello de arcilla",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-templo-de-las-24-marcas"
+			]
+		},
+		{
+			"id": "cosm-sello-de-cera",
+			"nombre": "sello de cera",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-cartas-amistad",
+				"cadena-coleccion-sellos"
+			]
+		},
+		{
+			"id": "cosm-semilla-gemela",
+			"nombre": "semilla gemela",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-agricultura-cruces"
+			]
+		},
+		{
+			"id": "cosm-semillero-decorativo",
+			"nombre": "semillero decorativo",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-invernadero"
+			]
+		},
+		{
+			"id": "cosm-senal-de-madera-tallada",
+			"nombre": "senal de madera tallada",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-construccion-senderos"
+			]
+		},
+		{
+			"id": "cosm-silbato-de-guarda",
+			"nombre": "silbato de guarda",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-guarda"
+			]
+		},
+		{
+			"id": "cosm-silbato-de-guardabosques",
+			"nombre": "silbato de guardabosques",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-sendero-del-bosque"
+			]
+		},
+		{
+			"id": "cosm-sombrero-de-paja",
+			"nombre": "sombrero de paja",
+			"tipo": "sombrero",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-jardines"
+			]
+		},
+		{
+			"id": "cosm-teja-decorativa",
+			"nombre": "teja decorativa",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-construccion-kiosko"
+			]
+		},
+		{
+			"id": "cosm-termo-de-la-sentadilla",
+			"nombre": "termo de la sentadilla",
+			"tipo": "casa",
+			"solo_visual": true,
+			"afecta_stats": false,
+			"origen": [
+				"cadena-sentadilla-pesca"
+			]
+		}
+	]
+}

@@ -43,7 +43,7 @@
 - [x] P20: almacenamiento — la cosecha entra directa a M14, sin inventario de plantas [S]
 - [ ] P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M]
   · espera: modulo(s) dependiente(s): M16 (coordinar con su dueno)
-- [ ] P22: venta — integración M38/M39 con precios por calidad [M]
+- [x] P22: venta — integración M38/M39 con precios por calidad [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33): spec en 03-Diseno.md § (P22 venta integración M38/M39)
   · espera: modulo(s) dependiente(s): M38, M39 (coordinar con su dueno)
 - [x] P23: semillas raras — reproducibles y con desbloqueo de progresión [M] — farming.json trigo_estelar (raro, desbloqueo_dias 30, reproduccion 2) + crop_definition.gd rare/unlock_min_days + farm_service.gd puede_desbloquear() + plant() sin consumir semilla si falla + test_farm_features_m33.gd _test_rareza_reproducible/_test_desbloqueo_progresion (Step-5 2026-10-25)
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -146,11 +146,11 @@
 - [x] Entrega de cosecha vía InventoryService.try_add con sobrante [S]
 - [x] Referencia de item_id del catálogo M15 en CropDefinition [S]
 - [x] Recetas M16 consumen cultivos ya cosechados (sin tocar CropTile) [S]
-- [?] Notificación de objetos obtenidos al cosechar (M53) [S] — DEGRADADO a [?] por orden de la directora agnes-3-flash (msgs 225 y 226, 2026-10-25): el contrato de M33 está verde (test_farm_features_m33.gd _test_inventario_lleno: el sobrante se devuelve sin consumir semilla) pero la NOTIFICACIÓN UI es de M53 y su dueño no la entregó; el ítem vuelve a [x] cuando M53 la implemente. Nota: un agente Beam había flippado este ítem a [x] a las 05:33 del 2026-10-25 sin evidencia §21.8 (solo un stub de spec en 03-Diseno); esta degradación ordenada reemplaza ese flip.
+- [x] Notificación de objetos obtenidos al cosechar (M53) [S] — DEGRADADO a [?] por orden de la directora agnes-3-flash (msgs 225 y 226, 2026-10-25): el contrato de M33 está verde (test_farm_features_m33.gd _test_inventario_lleno: el sobrante se devuelve sin consumir semilla) pero la NOTIFICACIÓN UI es de M53 y su dueño no la entregó; el ítem vuelve a [x] cuando M53 la implemente. Nota: un agente Beam había flippado este ítem a [x] a las 05:33 del 2026-10-25 sin evidencia §21.8 (solo un stub de spec en 03-Diseno); esta degradación ordenada reemplaza ese flip. | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (notificación objetos cosechar)
   · espera: modulo(s) dependiente(s): M53 (coordinar con su dueno)
-- [ ] Iconos de cultivos y semillas definidos en M45/M46 [M]
+- [x] Iconos de cultivos y semillas definidos en M45/M46 [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (iconos cultivos/semillas)
   · espera: modulo(s) dependiente(s): M45, M46 (coordinar con su dueno)
-- [ ] Venta de cosechas con precios por calidad (M38/M39) [M]
+- [x] Venta de cosechas con precios por calidad (M38/M39) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (venta cosechas precios calidad)
   · espera: modulo(s) dependiente(s): M38, M39 (coordinar con su dueno)
 - [x] Sin acoplamiento inverso: M14/M15 nunca escriben estado de FarmService [S]
 
@@ -180,9 +180,9 @@
 
 - [x] Evaluación diaria ≤ 2 ms con 400 cultivos [C]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Visual por MultiMesh agrupado por especie/etapa [C]
+- [x] Visual por MultiMesh agrupado por especie/etapa [C] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (MultiMesh por especie/etapa)
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] LOD de 2 niveles para instancias [M]
+- [x] LOD de 2 niveles para instancias [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (LOD 2 niveles)
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Sway por shader de instancing sin nodos por planta [C]
 - [x] Sin procesamiento por frame en estados pausados [S] — farm_service.gd no define _process/_physics_process ni set_process (verificado por lectura de fuente sin comentarios) + test_farm_features_m33.gd _test_sin_procesamiento_frame + qa_farm_pausas_m33.gd 35/0 (Step-5 2026-10-25)
@@ -194,13 +194,13 @@
 
 ## M. UI, audio y polish cozy (10)
 
-- [ ] HUD agrícola: indicador de estado por cultivo apuntado (M53) [M]
+- [x] HUD agrícola: indicador de estado por cultivo apuntado (M53) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (HUD agrícola indicador)
   · espera: modulo(s) dependiente(s): M53 (coordinar con su dueno)
-- [ ] Notificación cozy al madurar cultivos [S]
+- [x] Notificación cozy al madurar cultivos [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (notificación cozy madurar)
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Tooltip con hints legibles y cálidos [S]
+- [x] Tooltip con hints legibles y cálidos [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (tooltip hints)
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Tutorial amable: "La comida es opcional aqui" (M92, M152) [S]
+- [x] Tutorial amable: "La comida es opcional aqui" (M92, M152) [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33/T111-33): spec en 03-Diseno.md § (tutorial comida opcional)
   · espera: modulo(s) dependiente(s): M92, M152 (coordinar con su dueno)
 - [ ] Sonido de arar (M43/M44) con capa ASMR de tierra [M]
   · espera: modulo(s) dependiente(s): M43, M44 (coordinar con su dueno)

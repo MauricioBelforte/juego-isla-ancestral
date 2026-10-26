@@ -1270,3 +1270,109 @@ despejado» y «puerto ampliado», no tienen ítem propio en el 05).
 - **Flip propuesto, NO aplicado:** L109 `[ ]` -> `[x]` con la cita de esta
   sección (M23 pasaría a **87 [x] / 16 [ ] / 2 [?] = 105**). Lo aplica la
   directora: el `05-Checklist.md` no lo edita este agente.
+
+## Iter. 24 (2026-10-26, DeepSeek-V4.1-Flash, Log 2202) — catálogo de cosméticos y puente de la recompensa cosmética
+
+**Premisa medida antes de escribir una línea** (L99 `[ ]` del 05-Checklist):
+
+| Medición | Resultado |
+|---|---|
+| cadenas que declaran `recompensa.cosmetico` | **78** declaraciones en **82** cadenas cargadas (81 principal + `cadena-biblioteca` del merge) |
+| nombres visibles distintos | **76** |
+| archivos del repo que contienen esos nombres | **2**: `secundarias.json` y `cadenas_ejemplo.json` (0 en `data/` fuera de ahí, 0 en `scripts/`) |
+| catálogos de cosméticos en `data/` | **0** |
+| listeners de `quest_updated` en `scripts/` | **0** (1 sola ocurrencia: el emisor) |
+
+Conclusión: `recompensa.cosmetico` era **data muerta**. El puente emitía
+`quest_updated(cadena_id, "cosmetico", 1)` — una señal **sin listener** y que
+**no lleva el cosmético**: completar una cadena no desbloqueaba nada
+identificable. Es el mismo patrón que el puente de diario de la iter. 21.
+
+### Entregado
+
+1. **`data/historias/cosmeticos.json`** (15 287 B, LF, sin BOM): **76** fichas,
+   una por nombre visible declarado, con `id` estable (`cosm-<slug>`), `tipo`,
+   `solo_visual: true`, `afecta_stats: false` y `origen` (las cadenas que la
+   declaran). Distribución medida: **casa 62 · disfraz 11 · sombrero 2 ·
+   paleta 1**.
+2. **`scripts/historias/cosmeticos_catalog.gd`** (RefCounted, sin `class_name`):
+   `cargar()`, `obtener(id)`, `id_de_nombre()`, `todos()`, `ids()`, `validar()`,
+   `faltantes()`, `huerfanos()`, `conteo_por_tipo()`. `validar()` exige: ids con
+   prefijo `cosm-`, tipo en `{disfraz, sombrero, paleta, casa}`, `solo_visual`
+   verdadero, `afecta_stats` falso, `origen` no vacío, ≥10 entradas y ≥1 de cada
+   tipo. Los 4 tipos salen de 03-Diseno L62 (disfraces/sombreros/paletas) más
+   `casa` como contenedor de los objetos de repisa.
+3. **Puente en `secondary_stories_service.gd`**: señal nueva
+   `cosmetico_desbloqueado(cadena_id, cosmetico_id)` emitida en
+   `_completar_cadena` con el **id del catálogo** (no el nombre), y consultas
+   `cosmetico_de()`, `cosmetico_info()`, `cosmeticos_desbloqueados()`,
+   `nombres_cosmeticos_declarados()`, `validar_cosmeticos()`,
+   `catalogo_cosmeticos()`. El `quest_updated` anterior se conserva como
+   compatibilidad (0 listeners medidos) y así queda documentado en el código.
+4. **Estado derivado, no persistido:** `cosmeticos_desbloqueados()` se calcula
+   de las cadenas **completadas**. No se agregó un campo al save, así el
+   contrato de M59 (`{activas, completadas}`) no cambia y no hay riesgo de
+   regresión de persistencia (la trampa del Log 1205: completar el interior de
+   una sección puede borrar datos del proveedor).
+
+### Suite
+
+Bloque **AB** `_test_cosmeticos()` (+32 checks): estructura del catálogo
+(cantidad ≥ 10, catálogo == nombres declarados, `validar_cosmeticos()` sin
+errores, los 4 tipos presentes, suma por tipo == total, ids con prefijo, solo
+visual, sin stats), identidad nombre→id (`cadena-faro`), cadena sin cosmético →
+id vacío, nombre inexistente → id vacío, lectura por id de todas las entradas,
+colisión **documentada** de `sello de cera` (2 cadenas → mismo id, con las 2 en
+`origen`), **discriminación del cruce** (control positivo + control negativo en
+`faltantes()`/`huerfanos()`), y runtime: señal declarada, 0 cosméticos antes,
+`cadena-taller` completa por el camino real, **1** evento con el id
+`cosm-delantal-de-herrero`, y `cosmeticos_desbloqueados()` conteniéndolo.
+
+Piso **891 → 923 MEDIDO en verde**: **923 / 0 / EXIT 0 ×3**, `SCRIPT ERROR: 0`.
+
+**Guardián probado EN ROJO (2 modos, sonda borrada, `sha256` intacto
+`102ba568…`):**
+
+- (A) aborto de **runtime** al inicio del bloque AB
+  (`var _boom: Dictionary = _h.catalogo_cosmeticos()` sobre un `RefCounted`) →
+  `892 checks / 2 fallos / EXIT 1`, imprime
+  `[FAIL] el bloque AB NO se ejecuto` **y** dispara el piso
+  (`minimo 923`). Sin cuelgue: terminó y salió 1.
+- (B) **defecto de data real** (quitar la ficha `farol de atardecer` del JSON) →
+  `923 / 7 / EXIT 1` con
+  `AB error: declarado y NO catalogado: 'farol de atardecer'`.
+  Control sin mutar: `923 / 0 / EXIT 0`. La (B) es la que prueba que el cruce
+  catálogo↔contenido **no es un no-op**.
+
+### Hallazgos de la tanda
+
+- **El propio cruce cazó un defecto que mi primera versión no veía:** la cadena
+  mergeada `cadena-biblioteca` declara `gafas_estudioso` (nombre con forma de
+  **id**, no de nombre visible como los otros 75). La primera corrida dio
+  `75 vs 76` y `declarado y NO catalogado: 'gafas_estudioso'`. Se normalizó el
+  valor a `gafas de estudioso` (1 valor, `cadenas_ejemplo.json`, LF sin BOM,
+  sin ninguna otra referencia en el repo: medido con `grep`) y el generador
+  pasó a leer **los dos** catálogos con la semántica real del merge.
+- **`cadena-postgame-plaza` declara `medalla_ciudadano` pero el merge la
+  RECHAZA** (tipo de paso `construir` desconocido, decisión persistente del
+  director en L34). Por eso el catálogo tiene 76 y no 77: el generador descarta
+  lo mismo que el servicio (`descartadas_por_validador=1`). Si algún día se
+  aprueba el tipo `construir`, la suite lo detecta por el assert
+  `catálogo == nombres declarados`.
+- **2 nombres repetidos** (contenido, no defecto de código): `sello de cera`
+  (`cadena-cartas-amistad` + `cadena-coleccion-sellos`) y `pergamino enmarcado`
+  (`cadena-pergamino-mistico` + `cadena-pesca-documentacion`). Se catalogan
+  **una vez** con las 2 cadenas en `origen`; queda como decisión de contenido
+  si debían ser cosméticos distintos (no se inventan fichas).
+- **`validate_quest_chains.gd` es un `EditorScript`**: no corre con `--script`
+  (cuelga el árbol, medido 2m13s y matado a mano). No es una regresión de esta
+  tanda: el validador de cadenas se ejerce por `validar_cadenas()` en los
+  bloques B y Z de la suite, ambos verdes.
+- **`paleta` tiene 1 sola entrada** (`paleta de 26 tintes`): el mínimo del
+  diseño se cumple (≥1), pero la categoría es fina. Ampliarla es contenido
+  (no se inventa) — se reporta.
+
+### Flip propuesto, NO aplicado
+
+L99 `[ ]` → `[x]` con la cita de esta sección. Lo aplica la directora: el
+`05-Checklist.md` no lo edita este agente.

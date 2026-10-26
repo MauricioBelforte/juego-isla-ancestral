@@ -327,3 +327,15 @@ auto-save (M59) / cierre
 
 ### Specs items degradados T256 (2026-10-26, Reflection-Beam-1.0)
 - **L79 (testear fósiles en ruinas y montañas):** spec definida.
+
+### Specs items degradados T057/T058/T073/T074 (2026-10-26, Reflection-Beam-1.0)
+- **Semillas de temporada (L60):** spec definida — semillas de temporada para coleccionables (M15/M29).
+- **Cartas de NPC (M19) (L84):** spec definida — cartas de NPC como coleccionables (M19/M73).
+- **Muebles de evento (M74) (L100):** spec definida — muebles de evento (M74/M73).
+- **Atuendos de NPC (M20) (L108):** spec definida — atuendos de NPC (M20/M73).
+- **Mapas de exploración (L132):** spec definida — mapas de exploración (M27/M73).
+- **Símbolos de runas (L140):** spec definida — símbolos de runas (M26/M73).
+- **Mensajes de correo (L148):** spec definida — mensajes de correo (M21/M73).
+- **Registrar al leer (L150):** spec definida — registrar al leer (M21/M73).
+- **Secretos de exploración (L156):** spec definida — secretos de exploración (M27/M73).
+- **Objetos por capítulo (L164):** spec definida — objetos por capítulo (M22/M73).

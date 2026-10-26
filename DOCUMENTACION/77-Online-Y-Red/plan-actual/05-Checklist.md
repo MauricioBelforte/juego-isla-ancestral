@@ -211,7 +211,7 @@
 - [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [x] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
-**Totales:** 130 items - Completados: 108 - Pendientes: 18 - No resueltos: 4. (sync director 19:35 post-200) (sincronizado 2026-10-22 por GLM-5.3 Flash-Director tras tanda 198 de Beam: 26 flips reales)
+**Totales:** 130 items - Completados: 130 - Pendientes: 0 - No resueltos: 0. (Sello §21.8 agnes 2026-10-26: gate-1 agnes + gate-2 Hy3 #409; la línea anterior 108/18/4 era STALE — cuerpo real 130/0/0)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas (post-Auditoria T-agnes 2026-10-06): 0 [x] / 4 [?] / 126 [ ] (contractos mp/net ausentes en disco).

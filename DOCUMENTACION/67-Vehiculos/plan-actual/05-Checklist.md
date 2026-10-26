@@ -136,7 +136,7 @@
 ## O. Sonido (M43)
 
 - [ ] Sonidos de motor/agua/viento por vehículo [M]
-- [ ] LOD de audio: atenuar > 40 m, silenciar > 80 m [M]
+- [x] LOD de audio: atenuar > 40 m, silenciar > 80 m [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T079-67): spec en 03-Diseno.md § (LOD audio)
 - [ ] Sin fugas de audio al salir [M]
 - [ ] Sonidos de docking/salida y balance con M91 [M]
 - [ ] Testear audio 3D y bajo el agua (amortiguado) [M]

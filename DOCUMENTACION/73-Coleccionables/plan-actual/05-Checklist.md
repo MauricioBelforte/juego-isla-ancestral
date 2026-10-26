@@ -57,7 +57,7 @@
 ## G. Categoría Plantas
 
 - [x] Registrar plantas cosechadas (M33) y forrajeadas (M50) [M]
-- [x] Semillas de temporada [M]
+- [x] Semillas de temporada [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L60 semillas temporada)
 - [x] Recompensa de colección (semilla rara M33) [M]
 - [x] Registrar con CROP_HARVESTED [M]
 - [x] Testear plantas de las 4 estaciones (M29) [M]
@@ -81,7 +81,7 @@
 ## J. Categoría Cartas
 
 - [x] Registrar cartas de festival (M74) y correo [M]
-- [x] Cartas de NPC (M19) [M]
+- [x] Cartas de NPC (M19) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L84 cartas NPC)
 - [x] Sobre de regalo como recompensa (M20) [M]
 - [x] Registrar al recibir (CARTA_RECIBIDA) [M]
 - [x] Testear cartas de temporada [M]
@@ -97,7 +97,7 @@
 ## L. Categoría Muebles
 
 - [x] Registrar muebles comprados (M39) y regalados (M20) [M]
-- [x] Muebles de evento (M74) [M]
+- [x] Muebles de evento (M74) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L100 muebles evento)
 - [x] Mueble exclusivo como recompensa (M18) [M]
 - [x] Registrar al colocar en la casa (M18) [M]
 - [x] Testear muebles de tienda rotativa [M]
@@ -105,7 +105,7 @@
 ## M. Categoría Ropa
 
 - [x] Registrar ropa comprada (M39) y de evento (M74) [M]
-- [x] Atuendos de NPC (M20) [M]
+- [x] Atuendos de NPC (M20) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L108 atuendos NPC)
 - [x] Atuendo exclusivo como recompensa (M46) [M]
 - [x] Registrar al usar (vestuario) [M]
 - [x] Testear ropa de las 4 estaciones [M]
@@ -129,7 +129,7 @@
 ## P. Categoría Mapas
 
 - [x] Registrar mapas de tesoro (M54/M71) [M]
-- [x] Mapas de exploración [M]
+- [x] Mapas de exploración [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L132 mapas exploración)
 - [x] Tesoro oculto como recompensa (M71) [M]
 - [x] Registrar al encontrar [M]
 - [x] Testear mapas con coordenadas correctas [M]
@@ -137,7 +137,7 @@
 ## Q. Categoría Símbolos
 
 - [x] Registrar símbolos de puzzles (M24) y templos (M26) [M]
-- [x] Símbolos de runas [M]
+- [x] Símbolos de runas [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L140 símbolos runas)
 - [x] Pista de puzzle como recompensa (M24) [M]
 - [x] Registrar al resolver [M]
 - [x] Testear símbolos de los 7 anillos (M26) [M]
@@ -145,15 +145,15 @@
 ## R. Categoría Mensajes
 
 - [x] Registrar mensajes en botellas y NPC (M21) [M]
-- [x] Mensajes de correo [M]
+- [x] Mensajes de correo [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L148 mensajes correo)
 - [x] Historia de NPC como recompensa (M20) [M]
-- [x] Registrar al leer [M]
+- [x] Registrar al leer [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L150 registrar al leer)
 - [x] Testear mensajes repetidos (dedupe) [M]
 
 ## S. Categoría Secretos
 
 - [x] Registrar secretos de acciones ocultas (M71) [M]
-- [x] Secretos de exploración [M]
+- [x] Secretos de exploración [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L156 secretos exploración)
 - [x] Contenido oculto como recompensa (M55) [M]
 - [x] Registro únicamente al cumplir la acción (anti-spoiler) [M]
 - [x] Testear secretos no visibles antes de descubrir [M]
@@ -161,7 +161,7 @@
 ## T. Categoría Objetos Ancestrales
 
 - [x] Registrar objetos de la historia principal (M22) [M]
-- [x] Objetos por capítulo [M]
+- [x] Objetos por capítulo [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L164 objetos por capítulo)
 - [x] Final alterno como recompensa (M22) [M]
 - [x] Registrar con MISION_CAMBIADA [M]
 - [x] Testear objetos de los 7 capítulos [M]

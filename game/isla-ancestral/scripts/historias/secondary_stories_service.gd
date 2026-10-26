@@ -27,9 +27,19 @@ extends Node
 
 const RUTA_CATALOGO: String = "res://data/historias/secundarias.json"
 const RUTA_CATALOGO_EJEMPLOS: String = "res://data/historias/cadenas_ejemplo.json"
+## Catalogo de cosmeticos (iter. 24, Log 2202): le da identidad al nombre
+## visible que declara `recompensa.cosmetico`.
+const RUTA_COSMETICOS: String = "res://data/historias/cosmeticos.json"
+const CatalogoCosmeticos = preload("res://scripts/historias/cosmeticos_catalog.gd")
 const FUENTE_PRINCIPAL := "secundarias"
 const FUENTE_EJEMPLOS := "ejemplos"
 const TIPOS_PASO: Array[String] = ["hablar", "explorar", "puzzle", "entregar"]
+
+## Cosmetico desbloqueado al completar una cadena. Lleva el ID del catalogo
+## (`cosm-<slug>`), no el nombre visible: antes solo se emitia
+## `quest_updated(id, "cosmetico", 1)`, que no identifica la recompensa y que
+## no tenia ningun listener (medido, iter. 24, Log 2202).
+signal cosmetico_desbloqueado(cadena_id: String, cosmetico_id: String)
 
 ## cadena_id -> {titulo, contexto, pasos[], recompensa, consecuencia, oculta, postgame}
 var _cadenas: Dictionary = {}
@@ -39,11 +49,21 @@ var _estado: Dictionary = {}
 var _fuente: Dictionary = {}
 ## Reporte del merge de ejemplos: {anadidas: [], conflictos: [], rechazadas: [{id, errores}]}
 var _merge_ejemplos: Dictionary = {"anadidas": [], "conflictos": [], "rechazadas": []}
+## Catalogo de cosmeticos (RefCounted). Se carga una vez en _ready().
+var _cosmeticos: RefCounted = null
 
 
 func _ready() -> void:
+	_cargar_cosmeticos()
 	_cargar_cadenas()
 	_registrar_proveedor_guardado()
+
+
+func _cargar_cosmeticos() -> void:
+	_cosmeticos = CatalogoCosmeticos.new()
+	var n: int = _cosmeticos.cargar()
+	if n == 0:
+		push_warning("[M23] catalogo de cosmeticos vacio o ausente: %s" % RUTA_COSMETICOS)
 
 
 func _cargar_cadenas() -> void:
@@ -125,6 +145,78 @@ func fuente_cadena(cadena_id: String) -> String:
 ## Copia del reporte del merge de ejemplos: {anadidas, conflictos, rechazadas}.
 func merge_ejemplos_reporte() -> Dictionary:
 	return _merge_ejemplos.duplicate(true)
+
+
+## ── Cosmeticos (iter. 24, Log 2202) ──────────────────────
+
+## ID del catalogo que corresponde a la recompensa cosmetica de una cadena.
+## "" si la cadena no declara cosmetico o si el nombre no esta catalogado.
+func cosmetico_de(cadena_id: String) -> String:
+	if not _cadenas.has(cadena_id) or _cosmeticos == null:
+		return ""
+	var rec: Dictionary = (_cadenas[cadena_id] as Dictionary).get("recompensa", {})
+	return String(_cosmeticos.id_de_nombre(String(rec.get("cosmetico", ""))))
+
+
+## Ficha del cosmetico de una cadena ({} si no tiene o no esta catalogado).
+func cosmetico_info(cadena_id: String) -> Dictionary:
+	var cid := cosmetico_de(cadena_id)
+	if cid.is_empty() or _cosmeticos == null:
+		return {}
+	return _cosmeticos.obtener(cid)
+
+
+## IDs de los cosmeticos desbloqueados. Se DERIVA de las cadenas completadas:
+## no se persiste un campo nuevo, asi el contrato de guardado de M59 no cambia
+## (get_save_data sigue emitiendo solo {activas, completadas}).
+func cosmeticos_desbloqueados() -> Array[String]:
+	var salida: Array[String] = []
+	if _cosmeticos == null:
+		return salida
+	for cid in _estado:
+		if not bool((_estado[cid] as Dictionary).get("completada", false)):
+			continue
+		var cosm := cosmetico_de(String(cid))
+		if not cosm.is_empty() and not salida.has(cosm):
+			salida.append(cosm)
+	salida.sort()
+	return salida
+
+
+## Nombres visibles declarados por todas las cadenas cargadas (con repetidos
+## colapsados), para cruzar catalogo <-> contenido.
+func nombres_cosmeticos_declarados() -> Array[String]:
+	var salida: Array[String] = []
+	for cid in _cadenas:
+		var rec: Dictionary = (_cadenas[cid] as Dictionary).get("recompensa", {})
+		var nombre := String(rec.get("cosmetico", "")).strip_edges()
+		if not nombre.is_empty() and not salida.has(nombre):
+			salida.append(nombre)
+	salida.sort()
+	return salida
+
+
+## Valida el catalogo y su cruce con las declaraciones de las cadenas.
+## Devuelve la lista de errores (vacia = catalogo y contenido coherentes).
+func validar_cosmeticos() -> Array[String]:
+	if _cosmeticos == null:
+		var sin: Array[String] = ["catalogo de cosmeticos no cargado"]
+		return sin
+	var errores: Array[String] = []
+	errores.append_array(_cosmeticos.validar())
+	var declarados := nombres_cosmeticos_declarados()
+	var faltan: Array[String] = _cosmeticos.faltantes(declarados)
+	for nombre in faltan:
+		errores.append("declarado y NO catalogado: '%s'" % nombre)
+	var huerf: Array[String] = _cosmeticos.huerfanos(declarados)
+	for nombre in huerf:
+		errores.append("catalogado y NADIE lo declara: '%s'" % nombre)
+	return errores
+
+
+## Acceso al catalogo (para UI/informes). Puede ser null si no cargo.
+func catalogo_cosmeticos() -> RefCounted:
+	return _cosmeticos
 
 
 ## Cadenas visibles: ocultas solo si ya iniciadas; postgame solo con final M22
@@ -247,7 +339,13 @@ func _completar_cadena(cadena_id: String) -> Dictionary:
 		var diary := get_node_or_null("/root/Diary")
 		if diary != null:
 			diary.registrar(capitulo, "misiones")
-	# Cosmético → señal de desbloqueo (M71 escucha)
+	# Cosmetico → senal de desbloqueo con el ID del catalogo (iter. 24, Log 2202).
+	# El emisor antiguo `quest_updated(id, "cosmetico", 1)` se conserva como
+	# compatibilidad (0 listeners medidos), pero NO identifica la recompensa:
+	# quien quiera saber QUE cosmetico se gano usa `cosmetico_desbloqueado`.
+	var cosm := cosmetico_de(cadena_id)
+	if not cosm.is_empty():
+		cosmetico_desbloqueado.emit(cadena_id, cosm)
 	var bus := get_node_or_null("/root/EventBus")
 	if String(rec.get("cosmetico", "")) != "" and bus != null:
 		bus.quest.quest_updated.emit(cadena_id, "cosmetico", 1)

@@ -113,7 +113,7 @@
 - [x] Casa con expansión visible al vecindario (M19) [S]
   · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 - [x] Mejora con material raro postgame [M]
-- [ ] Sin grindeo para conseguir material raro [M]
+- [x] Sin grindeo para conseguir material raro [M] — **FLIP APLICADO por la directora agnes-3-flash 2026-10-26 05:20Z (DeepSeek #414, Log 2200):** `validate_postgame.gd` regla `sin_grindeo` sobre las 7 entradas (umbral=0, sin ventana temporal); sonda roja `grindeo_umbral:postgame_hibridacion:25`; `test_postgame.gd` 71/0. § Iter. 3.
   · evidencia: iter. 3 (Log 2200) — regla `sin_grindeo` de validate_postgame.gd sobre las 7 entradas (umbral=0, sin ventana temporal) + sonda roja que caza `grindeo_umbral:postgame_hibridacion:25` (bloque _test_validador).
 - [x] Validar mejoras con M60 (migración) [S]
   · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
@@ -166,7 +166,7 @@
 - [x] Criadero de peces (FASE 2, M34) [M]
 - [x] Sistemas marcados `hidden` hasta lanzamiento [S]
 - [x] Ningún sistema opcional bloquea el 100% de FASE 1 [S]
-- [ ] Validar que la FASE 2 no prometa UI al jugador [S]
+- [x] Validar que la FASE 2 no prometa UI al jugador [S] — **FLIP APLICADO por la directora agnes-3-flash 2026-10-26 05:20Z (DeepSeek #414, Log 2200):** `es_visible_al_jugador()` + filtro en `actividades_disponibles()`/`sugerir_que_sigue()` (7 internas vs 6 visibles); `fase`/`hidden` en `actividades.json`; bloque `_test_fase2_invisible`; §2.2. 
   · evidencia: iter. 3 (Log 2200) — `actividades_disponibles()` y `sugerir_que_sigue()` filtran `hidden`/`fase 2`: 7 internas vs 6 visibles y `JSON.stringify(visibles)` sin "Flotante" (bloque _test_fase2_invisible).
 
 ## R. Objetivos de 100% (RF18)
@@ -216,7 +216,7 @@
 - [x] Pestaña "Isla al 100%" en el diario (M55) [M]
 - [x] Notificación de meta cumplida (M44) [S]
 - [x] Confeti sutil en logros finales (M52) [S]
-- [ ] UI sin spoilers de fase 2 [S]
+- [x] UI sin spoilers de fase 2 [S] — **FLIP APLICADO por la directora agnes-3-flash 2026-10-26 05:20Z (DeepSeek #414, Log 2200):** `fase`+`hidden` en el catálogo + `JSON.stringify(visibles)` sin "Flotante" (medido por bytes); `validador_postgame` regla `fase2_oculta`; § Iter. 3.
   · evidencia: iter. 3 (Log 2200) — 03-Diseno 2.2/Flujo D aplicados: `fase`+`hidden` en el catalogo y la vista del jugador no expone nombres de FASE 2 (bloque _test_fase2_invisible).
 
 ## X. Edge Cases y Rendimiento

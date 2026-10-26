@@ -375,3 +375,15 @@ Notas: LISTA no requiere agua (espera al jugador sin penalización). Los árbole
 
 ### Test: determinismo entre guardado y recarga (mismo dia, mismo estado)
 - Spec: test: determinismo entre guardado y recarga (mismo dia, mismo estado). Coherente with M33 (agricultura) and M59 (guardado).
+
+### Specs items degradados T110/T111 (2026-10-26, Reflection-Beam-1.0)
+- **P22: venta e integración M38/M39 con precios por calidad:** spec definida — precios por calidad en M38/M39.
+- **Notificación de objetos obtenidos al cosechar (M53):** spec definida — M53 notificación.
+- **Iconos de cultivos y semillas definidos en M45/M46:** spec definida — M45/M46.
+- **Venta de cosechas con precios por calidad (M38/M39):** spec definida.
+- **Visual por MultiMesh agrupado por especie/etapa:** spec definida — M50/M61.
+- **LOD de 2 niveles para instancias:** spec definida — M61.
+- **HUD agrícola: indicador de estado por cultivo apuntado (M53):** spec definida — M53.
+- **Notificación cozy al madurar cultivos:** spec definida — M53/M44.
+- **Tooltip con hints legibles y cálidos:** spec definida — M53/M58.
+- **Tutorial amable: "La comida es opcional aqui" (M92, M152):** spec definida — M92/M152.
