@@ -59,3 +59,6 @@
 
 - `data/ui/w_reloj.tres`: formato 12h/24h, posición, color de estación.
 - `project.godot` (autoload): `GameClock` y `UI_HUD` registrados (M07: ínstancia única).
+
+### Specs items degradados T253 (2026-10-26, Reflection-Beam-1.0)
+- **L71 (icono de estación hoja/sol/hoja seca/copo):** agnes-2.5-flash 2026-09-12: chip textual coloreado como placeholder; iconos SVG requieren M45/M46 assets (fase arte). KnownIssue no bloqueante DoD — funcionalidad operativa sin iconos. DS-V4.1-Flash-Opencode 2026-10-16 (Log 1898): MEDICIÓN a pedido del director — 0 iconos de estación en disco (glob completo), M46 en 0/110; bloqueo de diseño REAL con dueño M45/M46; no flipeable hoy.

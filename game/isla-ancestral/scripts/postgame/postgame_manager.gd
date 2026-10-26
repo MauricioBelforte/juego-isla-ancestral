@@ -50,10 +50,17 @@ func _cargar_actividades() -> void:
 		var id := String(act.get("id", ""))
 		if id.is_empty():
 			continue
+		var fase := int(act.get("fase", 1))
 		_actividades[id] = {
 			"nombre": String(act.get("nombre", id)),
 			"tipo": String(act.get("tipo", "")),
+			# 03-Diseno §3.1: fase ∈ {1,2}; §2.2 + Flujo D: FASE 2 NUNCA visible
+			# al jugador (solo catálogo interno, flag `hidden`).
+			"fase": fase,
+			"hidden": bool(act.get("hidden", fase == 2)),
 			"repite": bool(act.get("repite", false)),
+			"requisito_stat": String(act.get("requisito_stat", "")),
+			"umbral": int(act.get("umbral", 0)),
 			"dueno": String(act.get("dueno", "")),
 			"nota": String(act.get("nota", "")),
 		}
@@ -104,20 +111,60 @@ func activar_postgame() -> void:
 
 ## ── RF1: "¿Qué sigue?" (M92 tras créditos; M53 consume) ──
 
-## Actividades del catálogo (con estado hecho/pendiente)
+## ¿Esta actividad puede verla el jugador?
+## 03-Diseno §2.2 + Flujo D: FASE 2 = "nunca visible al jugador; solo catálogo
+## interno" (flag `hidden`). Ítems W "UI sin spoilers de fase 2" y Q "Validar
+## que la FASE 2 no prometa UI al jugador" del 05-Checklist.
+func es_visible_al_jugador(id: String) -> bool:
+	if not _actividades.has(id):
+		return false
+	var a: Dictionary = _actividades[id]
+	return not bool(a.get("hidden", false)) and int(a.get("fase", 1)) == 1
+
+
+## Actividades VISIBLES para el jugador (anti-spoiler FASE 2).
+## Es la única vista que deben consumir las UI (M55 diario, M92 créditos, M53 HUD).
 func actividades_disponibles() -> Array[Dictionary]:
+	return _lista_actividades(true)
+
+
+## Catálogo COMPLETO, incluidas las entradas FASE 2 ocultas. Solo para el
+## validador (validate_postgame.gd) y para el diseñador. NO usar desde UI.
+func actividades_internas() -> Array[Dictionary]:
+	return _lista_actividades(false)
+
+
+func _lista_actividades(solo_visibles: bool) -> Array[Dictionary]:
 	var lista: Array[Dictionary] = []
 	for id in _actividades:
+		if solo_visibles and not es_visible_al_jugador(String(id)):
+			continue
 		var a: Dictionary = _actividades[id]
 		lista.append({
 			"id": String(id),
 			"nombre": String(a.get("nombre", "")),
 			"tipo": String(a.get("tipo", "")),
+			"fase": int(a.get("fase", 1)),
+			"visible": not bool(a.get("hidden", false)) and int(a.get("fase", 1)) == 1,
 			"dueno": String(a.get("dueno", "")),
 			"hecha": _hechas.has(String(id)) and not bool(a.get("repite", false)),
 			"veces": int(_hechas.get(String(id), 0)),
 		})
+	# Orden estable por id: la rotación por día debe ser determinista (M94).
+	lista.sort_custom(func(x: Dictionary, y: Dictionary) -> bool: return String(x["id"]) < String(y["id"]))
 	return lista
+
+
+## Total de actividades del catálogo (visibles + internas). Para telemetría/log.
+func total_actividades() -> int:
+	return _actividades.size()
+
+
+## Hito de la categoría "Epílogo" (M72): ruina final restaurada.
+## M75 expone el hito; el LOGRO real (entrada + desbloqueo) es de M72 (§3.3
+## "Logros Epílogo: referencian hitos reales"). Ítem S "Logro: ruina restaurada".
+func hito_ruina_restaurada() -> bool:
+	return _hechas.has("postgame_ruina_final") and int(_hechas.get("postgame_ruina_final", 0)) > 0
 
 
 ## Sugerencias rotativas "¿Qué sigue?": deterministas por día M29, máx `limite`,
@@ -126,6 +173,9 @@ func sugerir_que_sigue(limite: int = 3) -> Array[Dictionary]:
 	var dia := _dia_absoluto()
 	var pendientes: Array[String] = []
 	for id in _actividades:
+		# Anti-spoiler (03-Diseno §2.2): "¿Qué sigue?" NUNCA sugiere FASE 2.
+		if not es_visible_al_jugador(String(id)):
+			continue
 		var a: Dictionary = _actividades[id]
 		if bool(a.get("repite", false)) or not _hechas.has(String(id)):
 			pendientes.append(String(id))

@@ -88,7 +88,7 @@ Reporte final       → JSON {escenario, p50, p95, max, memoria, tiempo, status}
 - Gráfico (opcional, en CI artifact) con FPS p50/p95 por escenario.
 - Integración con M61 (consumidor) y M102 (bugs de perf).
 
-## 7. Prohibiciones técnicas
-1. El framework de stress no se incluye en el build de jugador (asmdef Testing excluida).
+### Specs items degradados T262 (2026-10-26, Reflection-Beam-1.0)
+- **L236 (comparar con objetivo de referencia umbral definido por escenario):** mecanismo cerrado por agnes-3-flash (iter. agnes, Log 919): StressComparator.comparar() con umbral ±5% configurable + baseline perf_base.json. Los VALORES objetivo por escenario quedan con M61/M19/M50/M65 cuando estén en producción. [?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado perf_base.json NO existe en disco ni en la historia de git (git log --all = 0 commits); el [x] no tenía evidencia en disco.
 2. Los escenarios usan seeds fijas de M10 (reproducibilidad).
 3. No se permite activar escenarios desde el build final (solo dev/QA/CI).

@@ -222,5 +222,6 @@ JSON ilegible / campos faltantes
 ### Aplicar el perfil solo con deltas por area, no reconstruir toda la UI
 - Spec: aplicar el perfil solo con deltas por area, no reconstruir toda la UI. Coherente with M58 (accesibilidad) and M53 (UI).
 
-### Carteles de alerta con tiempo de vida y fade-out sin tween acumulados
-- Spec: carteles de alerta con tiempo de vida y fade-out sin tween acumulados. Coherente with M58 (accesibilidad) and M53 (UI).
+### Specs items degradados T243 (2026-10-26, Reflection-Beam-1.0)
+- **L228 (aplicar la config a la UI tamaño/contraste en runtime con M53):** iter 2 (dueño: deepseek-v4-flash-vision-exp).
+- **L232 (aplicación real a la UI M53):** iter 3.

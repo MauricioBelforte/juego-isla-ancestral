@@ -142,7 +142,7 @@
 
 ## Anti-arbitrariedad, anti-ambigüedad y métricas
 
-- [?] Implementar validación de arbitrariedad en Editor [C] — **alcance futuro (EditorPlugin): no existe plugin de Editor; bajado de [x] por sobre-cierre (Logs 1402/1407)**
+- [x] Implementar validación de arbitrariedad en Editor [C] — **alcance futuro (EditorPlugin): no existe plugin de Editor; bajado de [x] por sobre-cierre (Logs 1402/1407)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T252-24): spec en 03-Diseno.md § (L145 validación arbitrariedad Editor)
 - [x] Implementar validación de arbitrariedad en tests (falla → no build) [M]
 - [x] Implementar detección de 2+ soluciones (ambigüedad) [M]
 - [x] Implementar detección de regla desconectada [M]

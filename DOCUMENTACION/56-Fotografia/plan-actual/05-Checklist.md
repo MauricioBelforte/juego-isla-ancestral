@@ -339,7 +339,7 @@
 - [x] Test headless: 10/10 checks OK (schema 4 + service 6; presets 6, señal, fallback) — exit 0
 - [x] **Verificación VISUAL de los 6 presets** (pipeline PIL aplicado a captura real del juego → comparativo analizado con visión): estética cozy/no invasiva cumplida (RF5); calido_playa/verde_selva/crepusculo_rojo/pintura_retro/natural excelentes; niebla_costera con dof global perceptible
 - [?] DoF selectivo (foco claro, RF6) y cámara libre/zoom/filtros en vivo (RF1-RF4) — iteración 2 con M49/M31 (dueño: deepseek-v4-flash-vision-exp)
-- [?] Integración del atajo con M57 — iter 2
+- [x] Integración del atajo con M57 — iter 2 | FLIP 2026-10-26 (Reflection-Beam-1.0, T242-56): spec en 03-Diseno.md § (L342 integración M57)
 
 ## Notas del Agente (iter. 2 — Log 585, glm-5.3-flash/Kilo Code)
 

@@ -41,6 +41,16 @@ const DEVICE_MAP := {
 		"map": "Select",
 		"pause": "Options",
 	},
+	## M53 L187 (DeepSeek-V4.1-Flash, 2026-10-26): ControlInput (M57) emite
+	## "generico" para Nintendo/Switch/Steam Deck y para cualquier pad no
+	## reconocido. Antes caia al `_` -> "keyboard" y el jugador veia teclas.
+	"gamepad_generic": {
+		"interact": "A",
+		"attack": "RT",
+		"inventory": "X",
+		"map": "Minus",
+		"pause": "Plus",
+	},
 }
 
 ## Mapeo de acciones de gameplay a acciones de prompt
@@ -111,21 +121,39 @@ func set_device(device: String) -> void:
 ## ── T-053-060: Métodos de actualización automática ─────
 
 ## Obtiene el texto de tecla para una acción, considerando remapeos de M57
+## M53 L187 (DeepSeek-V4.1-Flash, 2026-10-26): el prompt era de TECLADO en la
+## practica. El InputMap del proyecto declara UN solo evento por accion y es de
+## teclado, asi que `action_get_events(...)[0]` devolvia "E"/"B"/"Escape" aunque
+## hubiera gamepad conectado (el DEVICE_MAP por dispositivo era inalcanzable).
+## Ahora se elige el evento SEGUN EL DISPOSITIVO; si el InputMap no tiene un
+## evento del tipo pedido, se cae al DEVICE_MAP. Y el fallback usa la clave de
+## prompt (`interact`), no la accion cruda (`interactuar`): antes devolvia "?"
+## porque `DEVICE_MAP["keyboard"]` no tiene la clave "interactuar".
 func _get_key_text_for_action(action: String) -> String:
-	# Primero intentar obtener del InputMap (M57 remapea ahí)
-	var gameplay_action: String = ACTION_TO_PROMPT.get(action, action)
-	var eventos: Array = InputMap.action_get_events(gameplay_action)
-	if eventos.size() > 0:
-		return _event_to_display_text(eventos[0])
-	# Fallback al DEVICE_MAP estático
+	var prompt_key: String = ACTION_TO_PROMPT.get(action, action)
+	var es_gamepad := _current_device.begins_with("gamepad")
+	# El InputMap indexa por la ACCION REAL ("interactuar"), no por la clave de
+	# prompt ("interact"): consultar la clave daba [] siempre y el DEVICE_MAP
+	# quedaba de unico origen (por eso el prompt no seguia el remapeo de M57).
+	if InputMap.has_action(action):
+		for ev in InputMap.action_get_events(action):
+			if es_gamepad and (ev is InputEventJoypadButton or ev is InputEventJoypadMotion):
+				return _event_to_display_text(ev)
+			if not es_gamepad and (ev is InputEventKey or ev is InputEventMouseButton):
+				return _event_to_display_text(ev)
 	var device_map: Dictionary = DEVICE_MAP.get(_current_device, DEVICE_MAP.keyboard)
-	return device_map.get(action, "?")
+	return String(device_map.get(prompt_key, "?"))
 
 
 ## Convierte un InputEvent a texto legible para el prompt
 func _event_to_display_text(evento: InputEvent) -> String:
 	if evento is InputEventKey:
-		return OS.get_keycode_string(evento.keycode)
+		# El InputMap del proyecto declara las teclas por `physical_keycode`
+		# (keycode queda en 0): sin este fallback el prompt salia VACIO.
+		var code: int = int(evento.keycode)
+		if code == 0:
+			code = int(evento.physical_keycode)
+		return OS.get_keycode_string(code)
 	elif evento is InputEventJoypadButton:
 		var btn: int = int(evento.button_index)
 		return String(JOY_BUTTON_NAMES.get(btn, "Btn %d" % btn))
@@ -160,12 +188,16 @@ func _refresh_all_prompts() -> void:
 
 
 ## Callback de cambio de dispositivo desde UIManager
+## M53 L187: los modos REALES que emite ControlInput (M57) son "teclado",
+## "raton", "xbox", "playstation" y "generico" (ver control_input.gd L22-26).
+## "generico" y "raton" caian al `_` -> keyboard.
 func _on_device_changed(mode: String) -> void:
 	var device: String
 	match mode:
-		"teclado": device = "keyboard"
+		"teclado", "raton": device = "keyboard"
 		"xbox": device = "gamepad_xbox"
 		"playstation": device = "gamepad_ps"
+		"generico": device = "gamepad_generic"
 		_: device = "keyboard"
 	set_device(device)
 
@@ -181,7 +213,8 @@ func _detect_device() -> void:
 		elif "playstation" in joy_name or "ps" in joy_name or "dualshock" in joy_name or "dualsense" in joy_name:
 			_current_device = "gamepad_ps"
 		else:
-			_current_device = "gamepad_xbox"
+			## M53 L187: un pad no identificado es GENERICO, no "xbox".
+			_current_device = "gamepad_generic"
 	else:
 		_current_device = "keyboard"
 

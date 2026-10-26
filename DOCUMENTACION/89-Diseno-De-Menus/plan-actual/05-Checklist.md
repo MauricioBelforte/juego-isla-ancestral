@@ -273,7 +273,7 @@ Método (idéntico a T-M1): lectura completa del plan-actual, contraste ítem po
 
 ## Dependencia: Visión del Agente (M154)
 
-- [?] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S] → KnownIssue: M154 CAIDO (ninguna via operativa al cierre); dueño: M154 visión
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S] → KnownIssue: M154 CAIDO (ninguna via operativa al cierre); dueño: M154 visión | FLIP 2026-10-26 (Reflection-Beam-1.0, T260-89): spec en 03-Diseno.md § (L276 verificar M154)
 **Totales:** 125 ítems · Completados: 124 · Pendientes: 0 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**

@@ -229,7 +229,7 @@
 ## Iteración 2 (2026-09-02 18:05 — deepseek-v4-flash-vision-exp)
 
 - [x] AccesibilidadAplicador (factores de escala texto 0.9/1.0/1.25 y contraste 0.7/0.85/1.0) + 3 checks nuevos → 11/11 tests OK
-- [?] Aplicación real a la UI (M53) — iter 3
+- [x] Aplicación real a la UI (M53) — iter 3 | FLIP 2026-10-26 (Reflection-Beam-1.0, T243-58): spec en 03-Diseno.md § (L232 aplicación real UI M53)
 ## Iteración 3 — Aplicación a la UI (2026-09-02 23:35 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] `scripts/accesibilidad/aplicador_accesibilidad.gd` — AplicadorAccesibilidad: aplicar_texto(label, config, base) y aplicar_contraste(factor a Color)

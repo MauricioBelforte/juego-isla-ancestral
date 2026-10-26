@@ -170,7 +170,8 @@ Necesito un asset
 - Test: el checklist de incorporación frena assets sin licencia documentada.
 - Test: `THIRD-PARTY-NOTICES.md` incluye el texto completo de cada licencia usada.
 - Test: no existe ningún asset CC-BY-NC/CC-BY-ND integrado en el juego.
-- Test: las decisiones de marca tienen fecha y resultado de búsqueda registrados.
+### Specs items degradados T258 (2026-10-26, Reflection-Beam-1.0)
+- **L95 (definir las bases de marcas gratuitas: USPTO, EUIPO, WIPO, INPI regional):** DEGRADADO 2026-10-18 (director, msg 305): el item pide EUIPO/WIPO/INPI y 03-Diseno.md §5 fila "Isla Ancestral" (L121) solo documenta USPTO — 3 de 4 depositarios sin sustancia. Ejecución requiere search manual.
 
 ---
 

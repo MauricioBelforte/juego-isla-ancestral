@@ -142,3 +142,50 @@ No existe editor/binary Godot en el entorno de trabajo: los `.gd` de este docume
 - Al implementar M72, crear la categoría "Epílogo" y respetar el criterio "sin logros de grindeo".
 - Los eventos postgame (M74) deben programarse en el calendario (M29) con ciclo anual, sin fechas únicas.
 - Al lanzar una expansión FASE 2, cambiar `hidden=false` y agregar su data real en el módulo dueño (M27/M51/M10...).
+## Notas del agente — iter. 3 (DeepSeek-V4.1-Flash, 2026-10-26, Log 2200)
+
+Tanda sobre los 4 `[ ]` que quedaban del 05-Checklist (K "material raro", Q
+"FASE 2 sin UI", S "logro ruina", W "UI sin spoilers de fase 2").
+
+### Defecto real encontrado (no era solo validacion)
+`data/postgame/actividades.json` NO tenia `fase` ni `hidden`, y
+`PostgameManager.actividades_disponibles()` + `sugerir_que_sigue()` devolvian
+TODO el catalogo. Resultado: "La Isla Flotante" (FASE 2) se le ofrecia al
+jugador como "que sigue" antes de que exista su arquitectura de streaming,
+contra 03-Diseno 2.2 ("FASE 2: nunca visible al jugador; solo catalogo interno")
+y Flujo D. Las aserciones que exigian 7 actividades VISIBLES consagraban el bug.
+
+### Cambios
+- `data/postgame/actividades.json`: schema_version 2 + `fase` y `hidden` por
+  entrada (FASE 2 = `postgame_isla_flotante`, hidden=true).
+- `postgame_manager.gd`: `es_visible_al_jugador()`, `actividades_disponibles()`
+  filtrada, `actividades_internas()` (validador/disenador), `total_actividades()`,
+  orden estable por id, `hito_ruina_restaurada()` (hito para M72). `sugerir_que_sigue()`
+  filtra FASE 2.
+- `validate_postgame.gd` NUEVO (03-Diseno 3.3 lo pedia y no existia): reglas
+  `ids_unicos`, `fase_valida`, `fase2_oculta`, `dueno_declarado`, `dueno_existe`
+  (contra CHECKLIST-GLOBAL), `sin_grindeo`, `logro_hito_real`. Reglas sin datos
+  se declaran OMITIDAS, no se dan por buenas.
+- `test_postgame.gd`: bloques nuevos `_test_fase2_invisible`, `_test_validador`
+  (con 6 sondas rojas EN MEMORIA) y `_test_hito_ruina`; piso 40 -> 71 MEDIDO.
+  Ademas el `_fin()` de cada bloque se movio al FINAL DEL CUERPO del bloque
+  (estaba en el runner: un SCRIPT ERROR dentro del helper habria marcado el
+  bloque como "visto" y la capa de nombres quedaba ciega).
+
+### Evidencia medida
+- `test_postgame.gd`: **71 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR.
+- Guardian EN ROJO 2 modos: aborto de runtime -> 61 checks, 2 fallos, EXIT 1,
+  NOMBRA `_test_fase2_invisible` y dispara el piso; asercion falsa -> 71/1, EXIT 1.
+  Sonda borrada; sha256 del original identico (a70aeb6d4094ed80...).
+- Regresiones: `test_logros` EXIT 0 (su SCRIPT ERROR en L294 es PREEXISTENTE y
+  ajeno: `_desbloqueados` asignado como Array), `qa_m59_payload_sections` EXIT 0,
+  `test_diario` EXIT 0.
+
+### Lo que NO esta resuelto (dueño)
+- El LOGRO "ruina restaurada" (entrada + desbloqueo) es de **M72**: su catalogo
+  tiene 17 logros y `CATEGORIAS_VALIDAS` no incluye `epilogo`, asi que el item
+  S del checklist NO se puede cerrar desde M75. M75 deja el hito.
+- `validate_postgame.gd` NO esta cableado a `quality.yml` (limite duro: no lo
+  edito). Hoy corre dentro de `test_postgame.gd`.
+- El catalogo sigue siendo JSON y no `postgame_catalog.tres` como dice 3.1
+  (preexistente; el item U lo da por `[x]` como "Resource embebido").

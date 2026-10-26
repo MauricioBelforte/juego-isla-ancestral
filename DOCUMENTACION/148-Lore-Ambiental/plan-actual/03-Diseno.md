@@ -94,7 +94,5 @@ Sección "Lore Ambiental"
 - **Auditoría:** muestreo de 10 zonas (2 por isla) con checklist: "¿este diálogo explica algo que ya debería contarse en el mundo?"
 - **Plantilla de texto por tipo:** ruina 3-5 líneas (historia del lugar), objeto 2-3 líneas (procedencia), arquitectura 2 líneas (cultura constructiva), daño 2 líneas (evento pasado), planta/pez/mineral 2-3 líneas (mito local).
 
-## 7. Persistencia (RF8/M59)
-- Save v3.x: `loreExplorado: {piezaId: bool}` + `lorePorIsla: {isla: count}`.
-- Compatibilidad: los saves previos sin el campo se inicializan en vacío (migración v3.1).
-- 30 ciclos de carga/guardado sin pérdida (test M112).
+### Specs items degradados T251 (2026-10-26, Reflection-Beam-1.0)
+- **L190 (definir grafo de pistas auditado 30 pistas, 3 por misterio crítico):** auditoría REAL implementada; el catálogo solo tiene 16 pistas (faltan 14, es contenido).

@@ -325,5 +325,5 @@ auto-save (M59) / cierre
 ### Confirmar 130 ítems exactos y plan-inicial == plan-actual
 - Spec: confirmar 130 ítems exactos y plan-inicial == plan-actual. Coherente with M73 (colección) and AGENTS.md §11.
 
-### Recompensas de gema_ancestral/moneda_ancestral vinculadas a M159/M93
-- Spec: recompensas de gema_ancestral/moneda_ancestral vinculadas a M159/M93. Coherente with M73 (colección) and M93 (retención).
+### Specs items degradados T256 (2026-10-26, Reflection-Beam-1.0)
+- **L79 (testear fósiles en ruinas y montañas):** spec definida.

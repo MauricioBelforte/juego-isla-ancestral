@@ -573,6 +573,5 @@ exportan. Todo es MEDIBLE, no una intencion.
   tiempo, pistas usadas y abandonos por puzzle; la exportacion alimenta los playtests de
   `06-Plan-Testings.md` seccion 2. `07-Resultados-Testings.md` seccion 5 declara que aun NO hay datos
   de personas.
-- **Cobertura:** cada familia tiene su suite con piso MEDIDO y sonda roja; el gate
-  `test_regresion_templos.gd` corre las 19 suites como subprocesos (EXIT 0 + 0 SCRIPT ERROR + checks
-  >= piso por suite; total >= 910).
+### Specs items degradados T252 (2026-10-26, Reflection-Beam-1.0)
+- **L145 (implementar validación de arbitrariedad en Editor):** alcance futuro (EditorPlugin): no existe plugin de Editor; bajado de [x] por sobre-cierre (Logs 1402/1407).

@@ -173,8 +173,5 @@ deuda real de M87, no inflación.
 | W5 | Store page, tráiler 90s, material de prensa, requisitos |
 | W6 | Checklist certificación, build final, candidato RC, acta de cierre |
 
-## 6. Qué NO se hace en Beta
-- No features nuevas (freeze en G1).
-- No cambios de arquitectura (solo capas de cierre y fixes).
-- No rebalanceo estructural (solo tuning fino M93).
-- No expansión de contenido más allá del inventario aprobado.
+### Specs items degradados T264 (2026-10-26, Reflection-Beam-1.0)
+- **L95 (definir los 6 idiomas objetivo de M87):** DEUDA EXTERNA (Ling 3.1 Flash / Novita, 2026-10-15, encargo del director msg 130; confirma deuda adjudicada por step-5-kilocode 2026-10-12, orden del director msg 215): la definición de los 6 idiomas objetivo NO existe como objetivos comprometidos en disco. Evidencia: (1) DOCUMENTACION/87-Localizacion/plan-actual/02-Analisis.md L11-15 define solo es y en como idiomas de lanzamiento; pt, fr, de, it figuran como "Candidatos futuros" (L15), no como objetivos confirmados; (2) el diseño de M141 condiciona los +4 idiomas a M87: 03-Diseno.md L46 "ES, EN, + 4 (PT, FR, DE, IT si M87 lo define)" — condición no cumplida; (3) la spec §6 compromete ES/EN/PT 100% = 3 idiomas (03-Diseno.md L109); (4) implementación parcial: data/localizacion/strings_{es,en,pt}.json (3 de 6) + locales/{es,en}.po (2 de 6); fr/de/it sin archivos. Dueño: M87 (debe definir sus idiomas objetivo; M141 no puede cerrar este ítem desde su alcance de documentación). Precisión vs anotación previa: no son "2 por definir" — pt/fr/de/it están definidos solo como candidatos futuros, no como objetivos.

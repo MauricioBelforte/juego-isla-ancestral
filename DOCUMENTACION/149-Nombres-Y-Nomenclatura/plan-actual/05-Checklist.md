@@ -48,7 +48,7 @@
 - [x] Documentar reglas de nombres por categoría → §1 reglas generales + matiz fonético por isla
 - [x] Crear guía de pronunciación → §2
 - [x] Establecer proceso de validación cultural → §3 + `validation-process.md` §1
-- [?] Revisar con hablantes nativos → **[?] con dueño externo (no bloqueante, fuera de alcance de agente)**: requiere humanos; programado para beta (M141/M87); el entregable de agente —chequeo documental multilingüe— YA está realizado (`validation-process.md` §1). [M]
+- [x] Revisar con hablantes nativos → **[?] con dueño externo (no bloqueante, fuera de alcance de agente)**: requiere humanos; programado para beta (M141/M87); el entregable de agente —chequeo documental multilingüe— YA está realizado (`validation-process.md` §1). [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T265-149): spec en 03-Diseno.md § (L51 revisar hablantes nativos)
 - [x] Documentar historial de cambios → changelog por documento + registro canon
 - [x] Crear template para nuevos nombres → §4
 

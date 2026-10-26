@@ -73,7 +73,7 @@
 
 ## G. Nuevas Ruinas (RF7)
 
-- [ ] Ruina final restaurable postgame (M25) [M]
+- [x] Ruina final restaurable postgame (M25) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T257-75): spec en 03-Diseno.md § (L76 ruina final restaurable)
 - [x] Progreso de restauración visible en museo (M37) [M] — iter. 1: postgame_ruina_final en catálogo con dueño M25/M37; contador registrar_actividad() expuesto
 - [x] Recompensa única al restaurarla (M38) [M] — iter. 1: actividad no-repetible "hecha" al registrar (testeado); recompensa real M38 con dueño
 - [x] Logro al finalizar la restauración (M72) [S] — iter. 1: contador expuesto para que M72/M71 condicionen (el logro real con dueño M72)
@@ -114,6 +114,7 @@
   · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 - [x] Mejora con material raro postgame [M]
 - [ ] Sin grindeo para conseguir material raro [M]
+  · evidencia: iter. 3 (Log 2200) — regla `sin_grindeo` de validate_postgame.gd sobre las 7 entradas (umbral=0, sin ventana temporal) + sonda roja que caza `grindeo_umbral:postgame_hibridacion:25` (bloque _test_validador).
 - [x] Validar mejoras con M60 (migración) [S]
   · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 
@@ -166,6 +167,7 @@
 - [x] Sistemas marcados `hidden` hasta lanzamiento [S]
 - [x] Ningún sistema opcional bloquea el 100% de FASE 1 [S]
 - [ ] Validar que la FASE 2 no prometa UI al jugador [S]
+  · evidencia: iter. 3 (Log 2200) — `actividades_disponibles()` y `sugerir_que_sigue()` filtran `hidden`/`fase 2`: 7 internas vs 6 visibles y `JSON.stringify(visibles)` sin "Flotante" (bloque _test_fase2_invisible).
 
 ## R. Objetivos de 100% (RF18)
 
@@ -180,6 +182,7 @@
 - [x] Categoría "Epílogo" en M72 [M]
 - [x] Logro: colección completa [S]
 - [ ] Logro: ruina restaurada [S]
+  · evidencia: iter. 3 (Log 2200) — `hito_ruina_restaurada()` expuesto y testeado (bloque _test_hito_ruina). La ENTRADA de logro es de M72 y NO existe aun (medido: logros.json = 17 logros, CATEGORIAS_VALIDAS sin "epilogo").
 - [x] Logro: primer festival postgame [S]
 - [x] Logro: 100% de la hoja de ruta [M]
 
@@ -214,6 +217,7 @@
 - [x] Notificación de meta cumplida (M44) [S]
 - [x] Confeti sutil en logros finales (M52) [S]
 - [ ] UI sin spoilers de fase 2 [S]
+  · evidencia: iter. 3 (Log 2200) — 03-Diseno 2.2/Flujo D aplicados: `fase`+`hidden` en el catalogo y la vista del jugador no expone nombres de FASE 2 (bloque _test_fase2_invisible).
 
 ## X. Edge Cases y Rendimiento
 

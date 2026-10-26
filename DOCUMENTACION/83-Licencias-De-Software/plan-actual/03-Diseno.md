@@ -195,4 +195,5 @@ Build/
                                             [LicenseValidator]
 ```
 
-El módulo 55 gestiona QUÉ dependencias hay. El módulo 83 gestiona QUÉ LICENCIAS tienen esas dependencias.
+### Specs items degradados T259 (2026-10-26, Reflection-Beam-1.0)
+- **L147 (acción externa no ejecutable por agente):** agnes-3-flash (2026-10-12): DEGRADADO [x]→[?] — KnownIssue externo: requiere contacto humano con abogado (M83 no es auto-ejecutable). Documentación lista; revisión legal = acción del fundador.

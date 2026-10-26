@@ -315,3 +315,49 @@ Ejecución: `Godot --headless --path game/isla-ancestral --script res://scripts/
 - Si se pide retocar colores de paneles a futuro: **el punto único de verdad es `theme_ux.gd`** (constantes) — pero revisar Overrides hardcodeados por capa (grep `add_theme_stylebox_override` en `scripts/ui/layers/`).
 - La escena `preview_paneles_m53.tscn` es la herramienta de captura visual del panel sin tocar el juego: `run_project scene=res://scripts/ui/preview_paneles_m53.tscn` + captura de ventana. Borrable sin impacto (no está referenciada por el juego).
 - El warning `min_ratio never used` ya no existe en el boot (verificado). Si reaparece, es que alguien revirtió `ensure_contrast()`.
+
+
+## Iter. 24 — G1-002 (Esc abre pausa) + L187 (prompts por dispositivo) — 2026-10-26
+
+**Modelo:** DeepSeek-V4.1-Flash | **Log:** 2199 | **Alcance:** M53-core (UIManager, PauseLayer, ActionPromptOverlay) + 1 guard en M11 (player.gd).
+
+### G1-002 — Escape no abría la pausa (hallazgo Nemotron, riel G1)
+
+Diagnóstico medido, no inferido:
+
+1. `ui_manager.gd::_unhandled_input` atendía la acción `pausa` con UNA sola rama: `close_top()`. **Nunca abría nada.**
+2. En gameplay no hay capa visible, así que el "tope" calculado caía en la **última capa REGISTRADA y OCULTA** (típicamente `PauseLayer`): `close_top()` la **des-registraba** de `_stack`. Consecuencia doble: Esc no abría el menú **y**, si algo lo abría después, `_actualizar_pausa_mundo()` ya no la veía (itera `_stack`) y **el mundo no se congelaba**.
+3. `player.gd::_physics_process` (M11) togleaba `Input.mouse_mode` en **cada** Esc: es lo que el jugador veía como "Escape - Liberar mouse" (`scenes/main_island.tscn:116`). Aun abriendo la pausa, ese toggle invertía el modo de ratón justo después y dejaba el menú sin puntero.
+4. Guard adicional: `if _stack.is_empty(): return` cortaba el handler **antes** de la rama de pausa, así que sin capas montadas Esc no podía abrir nada.
+
+Fix:
+
+- `UIManager._capa_visible()` (privada) y `hay_capa_visible()` (pública, la usa M11).
+- `UIManager.abrir_pausa()`: resuelve `PauseLayer`, la **re-registra** si una vuelta anterior la sacó de la pila, la abre, fija `_current_modal_full` (`open()` no lo toca: solo `push_layer`) y llama `_actualizar_pausa_mundo()`.
+- `_unhandled_input`: la acción `pausa` se atiende **antes** del guard de pila vacía. Capa visible -> `close_top()` (histórico); sin capa visible -> `abrir_pausa()`.
+- `PauseLayer.on_layer_opened()` libera el ratón y guarda el modo previo en `_mouse_previo`; `on_layer_closed()` lo restaura (no captura a ciegas).
+- `player.gd`: el toggle de ratón por Esc se salta si `hay_capa_visible()` (el modo de ratón pasa a ser de la capa).
+- `main_island.tscn`: la etiqueta decía `Escape - Liberar mouse` y `F - Hablar con NPC`; el InputMap declara `interactuar` en **E** (physical_keycode 69). Corregido a `Escape - Pausa / Liberar mouse` y `E - Hablar con NPC`.
+
+### L187 — prompts dinámicos por dispositivo
+
+El `DEVICE_MAP` por dispositivo ya existía pero era **inalcanzable** (el diagnóstico de 2026-10-12 quedó stale). Tres defectos medidos:
+
+1. Se consultaba el InputMap con la **clave de prompt** (`interact`) en vez de la **acción real** (`interactuar`) -> `action_get_events()` devolvía `[]` siempre. El fallback tampoco salvaba: `device_map.get(action, "?")` usaba la acción cruda, que no es clave del mapa -> **"?"** siempre.
+2. Aun consultando bien, se tomaba `eventos[0]` sin mirar el dispositivo. El InputMap del proyecto declara **un solo evento por acción y es de teclado**, así que con gamepad se veía "E"/"B"/"Escape".
+3. `_on_device_changed` mapeaba solo `teclado`/`xbox`/`playstation`; `"generico"` —el modo que `ControlInput` (M57) emite para Switch/Steam Deck/pad no reconocido— caía a `_` -> teclado. Se agregó `gamepad_generic` al `DEVICE_MAP` y `"raton"` se mapea explícito a teclado.
+
+Además las teclas se leían con `evento.keycode`, que en este InputMap es **0** (las acciones usan `physical_keycode`): el prompt salía **vacío**. Ahora cae a `physical_keycode`.
+
+### Evidencia
+
+- `scripts/ui/test_m53_pausa_prompts.gd` (nueva): **35 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR. Bloques A-G: API, apertura, Esc cierra, **Esc reabre** (regresión exacta del bug), sin duplicar, prompts por dispositivo (F), fallback + modos (G).
+- Guardián de 3 capas probado **EN ROJO**: (1) aborto de runtime al inicio del bloque D -> `EXIT 1`, `[FAIL] el bloque D NO se ejecutó`, `solo 31 checks (mínimo 35)`; (2) aserción falsa -> `36 checks, 1 fallo`, `EXIT 1`. Sondas borradas, `sha256` del archivo idéntico (`f7856ff0afebac6e`).
+- Piso `CHECKS_MINIMOS = 35` **medido** en verde, no estimado.
+- Regresiones (8 suites de UI, todas EXIT 0, 0 SCRIPT ERROR): `test_m53_capas` 14/0, `test_ui_framework` 0 fallos, `test_layer_type_m53` 0 fallos, `test_m89_menus` 48/0, `test_m53_no_redundancia` 7/0, `test_m53_extremos` 9/0, `test_m53_lista_larga` 7/0, `test_m53_wcag` 23/0.
+
+### Hallazgos cruzados (no tocados)
+
+- **M57 / InputMap:** `interactuar` y `equipamiento` comparten `physical_keycode = 69` (**E**). El prompt de "interactuar" muestra E en una tecla que también abre equipamiento. Es de M57.
+- **M53 layout (L210):** con `stretch/aspect = "expand"` el lienzo es 1152x648 (16:9) y 1152x720 (16:10). Medidas las 10 capas de `scripts/ui/layers/`: **`inventory_layer` 1469x588**, **`diary_layer` 874x765** y **`settings_audio_layer` 508x689** desbordan el lienzo 16:9. Las otras 7 caben.
+- **`test_ui_i18n_m53.gd`** sigue colgando (EXIT 124) por `get_locale_actual()` inexistente: suite muerta, no cuenta como evidencia.

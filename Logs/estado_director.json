@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-26 02:55 (G: catchup T054-T057 -> M75 OK cand / M110 INFO deuda / M73 sealed. 100 verificados, frontier T001-T053)",
+ "ultimo_update": "2026-10-26 05:00 (A: nudge Hy3 #408 gate-2 lote M77+M60 [52min sin veredicto]; 4to/7to sello en ruta; M75 6to tras DeepSeek)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -772,6 +772,30 @@
     "m": "M75 (T054) / M110 (T055,T056) / M73 (T057)",
     "veredicto": "OK / INFO / OK",
     "nota": "T054 M75 = 125/5/0 (0 [?]) CANDIDATO SELLABLE limpio (doc-centric; 5 [ ] pendientes + gate-2 Hy3). T055/T056 M110 hecho=0 (sin flips; 172/53/0 = deuda real). T057 M73 SELLADO (131/4/0 confirmado)."
+   },
+   {
+    "T": "T050-T053",
+    "m": "M92 (T050) / M01 (T051,T052) / M75 (T053)",
+    "veredicto": "DISCREPANCIA / TIE / OK",
+    "nota": "T050 M92 (Tutorial) = 185/0/0 PERO INFLADO (FALLO precision, como M55): 04-Codigo cita //tutorial/*.gd (capitulo_guion, revalidacion, trigger_mundo, i_tutorial_target, etc.) 12/12 SAMPLED MISSING en disco; dir tutorial/ NO existe; revalidacion.gd/capitulo_guion/trigger_mundo ausentes en todo el repo. 05=185/0/0 = CLAIM de completion INFLADO -> NO sellable. T051/T052 M01 = 122/30/0 TIE (30 [ ]). T053 M75 = 125/5/0 OK cand. Hallazgo: M92 pasa a DEUDA INFLADA (flag a Hy3 + fundador)."
+   },
+   {
+    "T": "T046-T049",
+    "m": "M72 (T046) / M73 (T047) / M75 (T048) / M77 (T049)",
+    "veredicto": "TIE / OK / OK / OK",
+    "nota": "T046 M72 194/3/3 TIE (3 [?]). T047 M73 SELLADO (131/4/0). T048 M75 125/5/0 OK cand. T049 M77 = 130/0/0 NO inflado: modulo de DISENO/red, [x] = \"diseno definido\" respaldados en specs 02-Analisis (2.1-2.6) + 03-Diseno (2.1/2.2/2.3/3.1), secciones REALES en disco (verificado). -> M77 CANDIDATO SELLO valido (5to/6to; gate-2 Hy3 = verificacion de coherencia de spec, no runtime)."
+   },
+   {
+    "T": "T042-T045",
+    "m": "M62 (T042) / M65 (T043) / M67 (T044) / M68 (T045)",
+    "veredicto": "TIE / OK / TIE / TIE",
+    "nota": "T042 M62 147/0/3 (3 [?] -> deuda). T043 M65 SELLADO 90/90. T044 M67 116/15/0 TIE (15 [ ]). T045 M68 116/1/14 TIE. Ninguno nuevo cand de sello en el lote. sellos vigentes 3 (M28/M65/M73) + M77 en camino (Hy3 gate-2)."
+   },
+   {
+    "T": "T038-T041",
+    "m": "M57 (T038) / M58 (T039) / M59 (T040) / M60 (T041)",
+    "veredicto": "TIE / TIE / TIE / OK",
+    "nota": "T038 M57 118/1/0 (1 [ ] = colision E M57, ya encolado). T039 M58 182/1/1 TIE. T040 M59 116/12/2 TIE. T041 M60 = 196/0/0 NO inflado: DataStore/serializacion, codigo REAL en disco (data_store.gd + test_datos_m60*.gd + buildings_save_provider.gd + catalogos_estaticos.gd existen; solo falta el save runtime). -> M60 CANDIDATO SELLO valido (7to). Gate-2 Hy3."
    }
   ],
   "ultimo_muestreo": "indice creado 25oct 06:05",
@@ -877,25 +901,25 @@
     "T054",
     "T055",
     "T056",
-    "T057"
+    "T057",
+    "T050",
+    "T051",
+    "T052",
+    "T053",
+    "T046",
+    "T047",
+    "T048",
+    "T049",
+    "T042",
+    "T043",
+    "T044",
+    "T045",
+    "T038",
+    "T039",
+    "T040",
+    "T041"
    ],
    "pendientes_recientes_por_verificar": [
-    "T053",
-    "T052",
-    "T051",
-    "T050",
-    "T049",
-    "T048",
-    "T047",
-    "T046",
-    "T045",
-    "T044",
-    "T043",
-    "T042",
-    "T041",
-    "T040",
-    "T039",
-    "T038",
     "T037",
     "T036",
     "T035",
@@ -945,8 +969,9 @@
   },
   "modulos_candidatos_sello": {
    "SELLADOS (3)": "M28-Viajes 129/130, M65-Animales-IA 90/90, M73-Coleccionables 131/135 (Global filas 28/65/73 ✅)",
-   "Siguiente candidato": "M75-Postgame 125/5/0 (+ gate-2 Hy3 runtime) -> 4to sello. M53-UI-UX 157/5/2 (DeepSeek, casi sellable).",
-   "CAVEAT / no sellable": "M55-Diario 122/7/2 (FALLO precision: [x] inflados). M72 194/3/3 TIE (3 [?]). M48 111/10/2 TIE (2 [?]). M68 116/1/14 (14 [?])."
+   "Siguiente candidato": "M77 130/0/0 (diseño) y M60 196/0/0 (DataStore) -> Hy3 gate-2 (2 sellos). M75 126/4/0 (DeepSeek cerrando [ ] = 5to). M53 158/4/2 (dueños externos).",
+   "CAVEAT / no sellable": "M55-Diario 122/7/2 (FALLO precision: [x] inflados). M72 194/3/3 TIE (3 [?]). M48 111/10/2 TIE (2 [?]). M68 116/1/14 (14 [?]).",
+   "CAVEAT / inflados": "M55 122/7/2. M92 185/0/0 (inflado). M60 = OK (code real). M59/M67/M68/M72/M48 = TIE."
   },
   "barrido_diario_25oct": {
    "M28": "129/1/0 sellable-g1 (primer sello)",
@@ -1070,7 +1095,13 @@
   ],
   "solo_json_mortuarias": "11 claves solo-JSON = MORTUAS (0 consumidores vivos; unico hit test en Obsoletos bug104). Decision MENOR del fundador (deuda data-), NO bloquea el GO (capa JSON huerafna). No implementar ahora.",
   "go_estado": "GO #4 PT-runtime PENDIENTE del fundador. Ling standby; vuelta=7 pasos+firma+log.",
-  "acuse": "#287 agnes->Ling ratifica 7 pasos + K2/K3 en el GO. Fecha 2026-10-26 02:20Z."
+  "acuse": "#287 agnes->Ling ratifica 7 pasos + K2/K3 en el GO. Fecha 2026-10-26 02:20Z.",
+  "double_parser_blindage": "Ling #288: replicado _parse_po PRODUCCION (localization_manager.gd L276-328) en Python. es/en/pt paridad 274=274=274. K2 demo (n=2 -> [0] bug sin fix / [1] \"itens\" con fix). K3/K4 confirmado (Portugues + TABLAS + locales_soportados). Post-GO obtener_estado_catalogos() ok=true. GO blindado contra los 2 parsers (QA ValidadorPO + prod _parse_po). Evidencia Temp/simulador_runtime_pre_go.py 15 PASS.",
+  "acuse_288": "#289 agnes->Ling (03:20Z): ratifica blindaje doble-parser; GO #4 = 100% turnkey, solo falta el GO del fundador.",
+  "blindaje_4_capas": "Ling #290: GO #4 blindado en 4 ejes. (1) formato QA15/15 + paridad 274=274. (2) parser produccion _parse_po L276-328 -> 270+4, paridad 274=274=274. (3) CONTENIDO (3er eje, nuevo): QA terminologico 98/98 PASS (placeholders, topónimos uniformes, 0 residuos ES->PT, uniformidad 1:1, 11 cognatos, canon acentos, 0 ¿/¡) + fidelidad 159/159 JSON<->PO. (4) arquitectura K2/K3/K4 (#287).",
+  "log_go_plantilla": "Temp/plantilla_log_go_pt_runtime.md lista: al GO, reserva numero de Logs/NUMEROS_DISPONIBLES.txt + completa (7 pasos + evidencia).",
+  "contingencia": "Esqueleto Temp 100% reproducible desde el repo si Temp se limpia: build v2 (es.po 274 + header PT) + strings_pt.json 159 + tabla 98 + 13 plantillas + 4 plurales + Catalina exenta. Scripts: build_esqueleto_pt.py, aplicar_pre_traduccion_98.py, simulador_runtime_pre_go.py, qa_terminologico_98.py.",
+  "acuse_290": "#291 agnes->Ling (04:20Z): ratifica 4 capas + plantilla Log + contingencia. GO #4 solo falta el fundador."
  },
  "nemotron_g1_002": {
   "defecto": "G1-002 [?] = Escape no abre menu de pausa; solo \"Escape - Liberar mouse\". Confirmado ciclo 18 (Nemotron #021). Envolado al dueno M53/UI-pausa (DeepSeek, dueno M53). Recurrente desde riel B-1.",
@@ -1101,5 +1132,46 @@
   "mensaje": "DS-V4.1-Flash-Opencode #216 (COLA A item 3 M16) recien acuseado en #217 (LO HUBO LAG: no lo brio en el detector 02:40 por colision numerica).",
   "m151_proximo": "COLA A item 4 = M151 (155/167), 43 flips de criterios QUE/COMO/UMBRAL. Aprobado con §21.8.2.b: muestrear >=5 de los 43 contra disco ANTES de proponer flip.",
   "colision_216": "Dos archivos 216 en el canal DS-OC (COLA M16 @00:58 + nudge agnes @01:38). Pool desfasado (head 207-215 vs .md hasta 216). Sanear con helper en tanda de mantenimiento, no ahora. Mi acuse va en 217 (max+1)."
+ },
+ "m92_inflado": {
+  "hallazgo": "2026-10-26 03:25 gate-1 G: M92 (92-Tutorial) 05-Checklist = 185/0/0 (todo [x]) PERO 04-Codigo cita //tutorial/*.gd (12/12 sampled MISSING); dir tutorial/ no existe; revalidacion.gd/capitulo_guion.gd/trigger_mundo.gd ausentes en el repo. M92 = FALLO precision (inflado), NO sellable. Unico codigo tutorial real en disco = scripts/templos/puzzle_tutorial.gd (es de M-Tempos, no M92).",
+  "accion": "No sellar M92. Deuda a dueno M92 + aviso fundador (como M55). Si Hy3 gate-2 toma M92, debe flippear los [x] inflados a [ ] honestos.",
+  "gate1": "Muestreo §21.8.2.b M92 = evidence-negative (0 hits //tutorial/*.gd) -> 05-Checklist sobre-afirma."
+ },
+ "nemotron_periodico_anticiclo": {
+  "nota": "Los reportes de ciclo G1 de Nemotron (#016-#025) son INFO-rutina (riela B-1, anti-loop: NO acuse-uno-por-ciclo; riel ratificada en #013). Los confirmo periodicamente en estado sin escribir acuse de canal.",
+  "ultimo_confirmado": "#025 (ciclo 22, G1-023 Ruinas, hecho=1 skip=0 fail=0, G1-002 Escape defecto recurrente). G1-001..G1-023 cerrados salvo G1-002 [?] (-> M53/DeepSeek). Restante G1-024..036.",
+  "progreso": "Nemotron va por ciclo ~22/36 del riel G1 (~184 items, ~73 cerrados). Ritmo normal."
+ },
+ "asignador_0335": {
+  "accion": "Nudge DeepSeek #411: arrancar riel M53 (idle 75min, M53=157/5/2 sin moverse) + tomar M75 5 [ ] (L76/L116/L168/L182/L216).",
+  "m75_reasignado": "Los 5 [ ] de M75 iban en Beam (PAUSADO) -> reasignados a DeepSeek para desbloquear el 4to sello (Hy3 gate-2).",
+  "flota_estado": "DeepSeek: M53+M75-5-[] (secuencia, gate-2 Hy3). Hy3: standby gate-2 (tomará M75/M53 cuando DeepSeek los deje sellables). Ling: PT-runtime standby (GO #4 fundador, 100% turnkey). Step-5: RELEGADO. DS-Opencode: COLA A M151 (auto). Nemotron: riel G1 auto (~ciclo 22/36). Beam: PAUSADO."
+ },
+ "m75_owner": "M75 5 [ ] = DeepSeek (reasignado desde Beam pausado, 26oct 03:35). Seal-track: M75 -> 4to sello (Hy3 gate-2); M53 -> 5to sello (Hy3 gate-2).",
+ "m77_sello_candidato": {
+  "hallazgo": "2026-10-26 03:55 gate-1 G: M77 (Online-Y-Red) 05-Checklist = 130/0/0. Verificado: modulo de DISENO (red), [x] = decisiones de diseno respaldadas en specs reales (02-Analisis 2.1-2.6 + 03-Diseno 2.1/2.2/2.3/3.1 existen en disco). NO inflado (a diferencia de M92). CANDIDATO SELLO valido; gate-2 = coherencia de spec (Hy3), no runtime."
+ },
+ "m53_l187_flip": {
+  "fecha": "2026-10-26 04:00",
+  "accion": "Directora aplico L187 [ ]->[x] en M53/05-Checklist (prompts por dispositivo; 3 defectos DEVICE_MAP corregidos; test_m53_pausa_prompts.gd 35/0 + 8 regresiones UI + guardian ROJO). M53 = 158/4/2. Fila 53 GLOBAL 148->158/165 + agente G-5.3->DeepSeek.",
+  "g1_002_resuelto": "Defecto G1-002 (Escape no abre pausa) CERRADO por M53 (DeepSeek #412, 4 causas medidas + fix abrir_pausa/hay_capa_visible + HUD corregido). Nemotron hallazgo recurrente -> resuelto.",
+  "l210": "L210 (3 capas desbordan 16:9: inventory/diary/settings_audio) = deuda de LAYOUT, NO bloquea el sello M53. Envolado como tanda de layout (deuda productiva).",
+  "m57_collision": "M57: interactuar vs equipamiento comparten physical_keycode 69 (E) -> prompt choca. DERIVADO a dueno M57 (InputMap).",
+  "m53_sello": "M53 158/4/2 NO sellable hasta que cierren dueños externos M91(audio L178)/M61(Profiler L221)/M88(subsetter L229) + layout L210. Solo \"presentable\"."
+ },
+ "secuencia_sellos_26oct": {
+  "4to": "M77-Online-Y-Red 130/0/0 (diseño, no inflado) -> gate-2 Hy3 (spec-coherencia) YA ruteado en #407.",
+  "5to": "M75-Postgame 125/5/0 -> DeepSeek cierra 5 [ ] (#411) -> gate-2 Hy3 runtime.",
+  "6to": "M53-UI-UX 158/4/2 -> depende de dueños externos M91/M61/M88 + layout L210.",
+  "sellos_vigentes": "M28/M65/M73 (3). + M77 en camino = 4to."
+ },
+ "m60_sello_candidato": {
+  "hallazgo": "2026-10-26 04:55 gate-1 G: M60 (Datos-Y-Serializacion) 05 = 196/0/0. Verificado NO inflado: //scripts/datos/data_store.gd + test_datos_m60.gd + test_datos_m60_iter3.gd + buildings_save_provider.gd + catalogos_estaticos.gd existen en disco (verificado). Cand de sello valido (7to). gate-2 Hy3 = §21.8.2.b sample de los 196 [x] (data/serializacion real)."
+ },
+ "hy3_gate2_nudge_0500": {
+  "accion": "Nudge Hy3 #408 (05:00Z): #407 M77 gate-2 llevaba 52min sin veredicto. Retomar gate-2 lote de 2 sellos: M77 (130/0/0 diseño, coherencia spec) + M60 (196/0/0 DataStore, sample 21.8.2.b; code real en disco, no inflado). M75 detras cuando DeepSeek cierre 4 [ ].",
+  "orden": "M77 (mas chico) primero -> M60. Si OK, agnes aplica sello 21.8 (filas 77/60 GLOBAL). No self-QA.",
+  "sello_track": "sellos vigentes 3 (M28/M65/M73). + M77 + M60 en gate-2 Hy3 = 5 sellos. M75 = 6to (DeepSeek). M53 = bloqueado (dueños externos)."
  }
 }

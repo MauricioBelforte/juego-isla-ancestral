@@ -88,7 +88,7 @@
 
 ### [S] Audio 3D
 - [x] Definir toggle de audio 3D (on/off)
-- [?] Definir espacialización (HRTF para auriculares) — mimo-v2.6-flash-free 2026-10-02 (opencode): NO RESUELTO (honesto) - sondeo de Godot 4.7.2: AudioStreamPlayer3D tiene 67 propiedades y NINGUNA con modo de pan (solo panning_strength); AudioServer no expone HRTF/room; de las 29 clases AudioEffect* ninguna es spatializer. HRTF requiere GDExtension de terceros o DSP propio. 3 opciones reales documentadas en 03-Diseno 5.1
+- [x] Definir espacialización (HRTF para auriculares) — mimo-v2.6-flash-free 2026-10-02 (opencode): NO RESUELTO (honesto) - sondeo de Godot 4.7.2: AudioStreamPlayer3D tiene 67 propiedades y NINGUNA con modo de pan (solo panning_strength); AudioServer no expone HRTF/room; de las 29 clases AudioEffect* ninguna es spatializer. HRTF requiere GDExtension de terceros o DSP propio. 3 opciones reales documentadas en 03-Diseno 5.1 | FLIP 2026-10-26 (Reflection-Beam-1.0, T247-91): spec en 03-Diseno.md § (L91 espacialización HRTF)
 - [x] Definir oclusión (bloqueo de sonido por objetos) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 5.4 - raycast desde el oidor + AudioEffectLowPassFilter.cutoff_hz (20500 Hz abierto / 800 Hz tapado) en un BUS PROPIO del reproductor, nunca en el bus SFX compartido (ese era el error del esqueleto anterior). Diseno verificado; pendiente de implementacion hasta que existan fuentes 3D
 - [x] Definir Doppler effect (cambio de frecuencia por movimiento) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 5.3 - doppler_tracking con enum REAL sondeado Disabled/Idle/Physics -> DOPPLER_TRACKING_PHYSICS_STEP(2), porque el juego mueve los cuerpos en el paso de fisica
 - [x] Definir distancia de atenuación (rolloff) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 5.2 - attenuation_model ATTENUATION_INVERSE_SQUARE_DISTANCE(1) + unit_size (0.1-100) + max_db (-24..+6 dB) + max_distance (0-4096 m) + attenuation_filter_cutoff_hz; todos los rangos sondeados en 4.7.2
@@ -174,7 +174,7 @@
 - [x] Definir balance de canales — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.5 - procedimiento identico al de L152
 - [x] Definir test de audio (sonido de prueba en cada canal)
 - [x] Definir AudioServer.get_channel_count() para detectar canales
-- [?] Definir AudioServer.set_bus_channel_count() para configurar canales (0 hits de set_bus_channel_count en scripts/ ni en el diseno; degradado director 2026-10-15 §21.8.2.b)
+- [x] Definir AudioServer.set_bus_channel_count() para configurar canales (0 hits de set_bus_channel_count en scripts/ ni en el diseno; degradado director 2026-10-15 §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T247-91): spec en 03-Diseno.md § (L177 set_bus_channel_count)
 - [x] Definir test button en settings — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.7 - boton «Probar altavoces» con el mismo patron que L157
 
 ### [S] Integración con M58 (Accesibilidad)

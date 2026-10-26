@@ -76,7 +76,7 @@
 - [x] Esqueleto completo como recompensa (M37) [M]
 - [x] Excavación con huevos (2 bloques) [M]
 - [x] Registrar con FOSSIL_DUG [M]
-- [ ] Testear fósiles en ruinas y montañas [M]
+- [x] Testear fósiles en ruinas y montañas [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T256-73): spec en 03-Diseno.md § (L79 testear fósiles)
 
 ## J. Categoría Cartas
 

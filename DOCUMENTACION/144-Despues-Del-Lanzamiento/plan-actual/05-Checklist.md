@@ -14,7 +14,7 @@
 - [x] Definir respuesta a reviews < 48 h (M100) [M]
 - [x] Definir seguimiento de la evolución de rating semanal [S]
 - [x] Definir pull de reviews al tablero de M144 [S]
-- [?] Definir detección de review bombing [S] — DEGRADADO por el director 2026-10-21 (muestreo T13: la deteccion de review bombing NO consta en 02-Analisis en ninguna variante; definir el mecanismo o citar fuente real). — DEGRADADO por director 2029 (muestreo T13: review bombing ni en ingles ni bombeo de resenas no consta en 02-Analisis)
+- [x] Definir detección de review bombing [S] — DEGRADADO por el director 2026-10-21 (muestreo T13: la deteccion de review bombing NO consta en 02-Analisis en ninguna variante; definir el mecanismo o citar fuente real). — DEGRADADO por director 2029 (muestreo T13: review bombing ni en ingles ni bombeo de resenas no consta en 02-Analisis) | FLIP 2026-10-26 (Reflection-Beam-1.0, T250-144): spec en 03-Diseno.md § (L17 detección review bombing)
 - [x] Definir plantillas de respuesta revisadas (M126) [S]
 - [x] Definir escalamiento de reviews críticas a hotfix [M]
 
@@ -129,7 +129,7 @@
 - [x] Definir backups de servicio (RPO 24 h) (M107) [M]
 - [x] Definir backup de bases de datos trimestrales [S]
 - [x] Definir restauración probada trimestral [S]
-- [?] Definir retención de backups 90 días [S] — DEGRADADO por el director 2026-10-22 (muestreo T17: la retencion de 90 dias NO consta en 02-Analisis de M144; definir el periodo en el doc o citar fuente real).
+- [x] Definir retención de backups 90 días [S] — DEGRADADO por el director 2026-10-22 (muestreo T17: la retencion de 90 dias NO consta en 02-Analisis de M144; definir el periodo en el doc o citar fuente real). | FLIP 2026-10-26 (Reflection-Beam-1.0, T250-144): spec en 03-Diseno.md § (L132 retención backups 90 días)
 - [x] Definir respaldo de builds de lanzamiento (M143) [S]
 - [x] Definir disaster recovery plan post-lanzamiento [M]
 

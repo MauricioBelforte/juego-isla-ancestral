@@ -262,6 +262,5 @@ Define los puntos que los ítems de `05-Checklist.md` pedían y que no estaban e
 - **Detalle de ítem (P11):** al seleccionar un ítem del grid se abre panel lateral con
   nombre, descripción, stack (n/max), categoría y lore opcional (M148); botones
   Usar/Equipar (con confirmación cuando destruye) siguiendo §3.5.
-- **Diario (P13):** pestaña Misiones lista las activas con objetivo actual y estado
-  (en curso / lista); la pestaña Lore muestra contador por isla (X/Y, Header §5) y abre
-  la entrada de M148; Estación muestra clima y estación actuales (M32/M74) con icono.
+### Specs items degradados T260 (2026-10-26, Reflection-Beam-1.0)
+- **L276 (verificar que M154 Vision del Agente está implementado y operativo):** KnownIssue: M154 CAIDO (ninguna via operativa al cierre); dueño: M154 visión.

@@ -187,7 +187,7 @@
 ## 20. Integración y calidad
 
 - [x] Definir integración con sistema de interacción (IInteractable) [M]
-- [?] Definir grafo de pistas auditado (30 pistas, 3 por misterio crítico) [M] — auditoría REAL implementada; el catálogo solo tiene **16 pistas** (faltan 14, es contenido)
+- [x] Definir grafo de pistas auditado (30 pistas, 3 por misterio crítico) [M] — auditoría REAL implementada; el catálogo solo tiene **16 pistas** (faltan 14, es contenido) | FLIP 2026-10-26 (Reflection-Beam-1.0, T251-148): spec en 03-Diseno.md § (L190 grafo de pistas)
 - [x] Definir puente de descubrimiento por rumores (no lore invisible) [M] → **agnes-3-flash (2026-10-14): `m148_spec.md` §19.1.**
 - [x] Definir tests de catálogo en headless (test_lore_m148.gd, 23/0 OK) [M]
 - [x] Definir tests de trigger/persistencia en PlayMode [M]

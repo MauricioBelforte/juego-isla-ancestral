@@ -66,7 +66,7 @@
 
 - [x] RF7: prompts dinámicos por dispositivo [S]
 
-- [?] RF8+RF9: persistencia JSON y Steam Deck/táctil "si corresponde" [S]
+- [x] RF8+RF9: persistencia JSON y Steam Deck/táctil "si corresponde" [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T255-57): spec en 03-Diseno.md § (L69 RF8+RF9 persistencia JSON)
 
 - [x] NFR: cozy, < 16 ms latencia, sin conflicto entre acciones [S]
 

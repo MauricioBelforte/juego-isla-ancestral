@@ -290,14 +290,27 @@ func _generador_isla():
 func _on_bloque_colocado(_pos: Vector3i, block_id: int) -> void:
 	print("[Player] Colocado bloque %d" % block_id)
 
+
+## G1-002: ¿hay una capa de UI visible que gestione su propio raton?
+func _ui_capa_visible() -> bool:
+	var um := get_node_or_null("/root/UIManager")
+	if um == null or not um.has_method("hay_capa_visible"):
+		return false
+	return bool(um.hay_capa_visible())
+
 func _physics_process(delta: float) -> void:
 	# ESC toggle con debounce (solo detecta presión, no mantenida)
 	var esc_pressed := Input.is_key_pressed(KEY_ESCAPE)
 	if esc_pressed and not _esc_was_pressed:
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		# G1-002 (DeepSeek-V4.1-Flash, 2026-10-26): Esc ya NO es solo "liberar
+		# mouse". Si hay una capa de UI visible (p. ej. la pausa que abre
+		# UIManager), el mouse_mode es de la capa: togglarlo aca lo invertiria
+		# justo despues de abrirla y el menu quedaria sin raton.
+		if not _ui_capa_visible():
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			else:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_esc_was_pressed = esc_pressed
 
 	# M13: habilitación del controlador + fallback de mano (mutuamente excluyentes)

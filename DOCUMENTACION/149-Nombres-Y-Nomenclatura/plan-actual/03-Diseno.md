@@ -153,9 +153,5 @@ func MovePlayer(direction: Vector3) -> void:  # Debe ser snake_case
 4. **Consistencia:** Verificar que sigue las reglas
 5. **Documentar:** Agregar a tabla de referencia
 
-### Para Convenciones de Código
-
-1. **Linting:** Usar herramientas de linting
-2. **Code review:** Revisar nombres en PRs
-3. **Documentación:** Mantener guía actualizada
-4. **Automatización:** Scripts de validación
+### Specs items degradados T265 (2026-10-26, Reflection-Beam-1.0)
+- **L51 (revisar con hablantes nativos):** [?] con dueño externo (no bloqueante, fuera de alcance de agente): requiere humanos; programado para beta (M141/M87); el entregable de agente —chequeo documental multilingüe— YA está realizado (validation-process.md §1). [M].

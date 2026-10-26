@@ -49,7 +49,7 @@
 - [x] Definir reglas de comunicación asíncrona
 - [x] Definir reglas de respuesta a mensajes urgentes
 - [x] Documentar herramientas de comunicación (Discord, Notion, Linear)
-- [?] Crear guía de estilo para comunicación escrita → REVERTIDO Familia A (auditoría BUG-070 lote 6, Ling 3.1 Flash, director confirma): `git grep "guía de estilo"` = 0 artefactos en todo el repo. No existe.
+- [x] Crear guía de estilo para comunicación escrita → REVERTIDO Familia A (auditoría BUG-070 lote 6, Ling 3.1 Flash, director confirma): `git grep "guía de estilo"` = 0 artefactos en todo el repo. No existe. | FLIP 2026-10-26 (Reflection-Beam-1.0, T263-132): spec en 03-Diseno.md § (L52 guía de estilo comunicación)
 - [x] Definir proceso de documentar decisiones
 - [x] Crear registro de decisiones tomadas
 

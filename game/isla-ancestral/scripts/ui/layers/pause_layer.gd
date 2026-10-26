@@ -21,6 +21,8 @@ signal salir_pedido
 
 var _buttons: Array[Button] = []
 var _layer_stack_backup: Array[Node] = []
+## G1-002: modo de raton previo a abrir la pausa (se restaura al cerrar).
+var _mouse_previo: int = Input.MOUSE_MODE_CAPTURED
 
 func _ready() -> void:
 	layer_type = UILayerType.Type.MODAL_FULL
@@ -113,6 +115,12 @@ func restaurar_desde_ajustes() -> void:
 ## ── UILayer virtual ──────────────────────────────────────
 
 func on_layer_opened() -> void:
+	# G1-002 (DeepSeek-V4.1-Flash, 2026-10-26): el menu se navega tambien con
+	# raton, asi que al abrirlo hay que LIBERAR el mouse (antes lo hacia
+	# player.gd togglando a ciegas el mouse_mode en cada Esc). Se guarda el modo
+	# previo para devolverlo al cerrar, en vez de capturar siempre.
+	_mouse_previo = Input.mouse_mode
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if _boton_guardar != null:
 		_conectar_guardar_dirty()
 	if _buttons.size() > 0:
@@ -120,6 +128,7 @@ func on_layer_opened() -> void:
 
 func on_layer_closed() -> void:
 	visible = false
+	Input.mouse_mode = _mouse_previo
 
 func focus_first() -> Control:
 	if _buttons.size() > 0:

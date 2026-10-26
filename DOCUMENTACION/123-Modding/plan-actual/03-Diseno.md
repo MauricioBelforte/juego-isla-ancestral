@@ -95,7 +95,9 @@ mod.ejemplo.zip (o .mod)
 | Área | Horas (estimado) |
 |------|------------------|
 | ModLoader + manifiesto + conflictos | 80-120 h |
-| Validación de mods (M109 esq) | 30-50 h |
+### Specs items degradados T249 (2026-10-26, Reflection-Beam-1.0)
+- **L89 (definir vista de previsualización del paquete):** DEGRADADO por el director (2026-10-10, QA §21.8 de Ling 3.1 Flash, msg 4): la cita 03-Diseno.md §1.2 es CITACIÓN FANTASMA (Patrón C) — §1.2 no existe en el archivo (secciones 1-10 sin subsecciones); grep de preview/previsual/metadata/approve → 0 hits. 06-Plan-Testings.md CP-19 lo declara "❌ no implementado (M89)". La definición NO existe hoy (deferral disfrazado, M114).
+- **L155 (definir re-evaluación del GATE tras el tracking):** DEGRADADO por el director (2026-10-10, QA §21.8 de Ling 3.1 Flash, msg 4): la cita 03-Diseno.md §1.3 es CITACIÓN FANTASMA (Patrón C) — §1.3 no existe; grep de tracking/re-eval → 0 hits. Solo existe "Si el GATE falla → posponer a V3" (§1 L13), que NO es la política de re-evaluación post-tracking. La definición NO existe hoy (deferral disfrazado, M114).
 | Exportadores M109 | 40-60 h |
 | Saves con mods (M59) | 20-30 h |
 | Workshop + telemetría (M97/M104) | 40-60 h |

@@ -68,7 +68,7 @@
 
 - [x] Hora HH:MM con formato 12h/24h configurable [S] → `RelojHud.formatear_hora` (test 14/14 OK)
 - [x] Fecha completa: "Viernes, 12 de Primavera, Año 1" [S] → `_fecha_visual()` vía RelojHud
-- [?] Icono de estacion (hoja/sol/hoja seca/copo) [M] -- agnes-2.5-flash 2026-09-12: chip textual coloreado como placeholder; iconos SVG requieren M45/M46 assets (fase arte). KnownIssue no bloqueante DoD — funcionalidad operativa sin iconos. *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1898: MEDICIÓN a pedido del director — 0 iconos de estación en disco (glob completo), M46 en 0/110; bloqueo de diseño REAL con dueño M45/M46; no flipeable hoy.)*
+- [x] Icono de estacion (hoja/sol/hoja seca/copo) [M] -- agnes-2.5-flash 2026-09-12: chip textual coloreado como placeholder; iconos SVG requieren M45/M46 assets (fase arte). KnownIssue no bloqueante DoD — funcionalidad operativa sin iconos. *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1898: MEDICIÓN a pedido del director — 0 iconos de estación en disco (glob completo), M46 en 0/110; bloqueo de diseño REAL con dueño M45/M46; no flipeable hoy.)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T253-30): spec en 03-Diseno.md § (L71 icono de estación)
 - [x] Color de fondo por estación [S] → chip `StyleBoxFlat` tintado con `COLOR_ESTACION`
 - [x] Ubicación: superior derecha del HUD [S] → anclado TOP_RIGHT en captura iter1
 - [x] Desplegable al pasar el cursor (detalle) [S] → tooltip vía TooltipService (M53) por rect del cursor, SIN bloquear clicks (D78 intacto); captura oficial cap_30_2026-08-31_23-30-00_02_hover.png

@@ -112,4 +112,6 @@ Tabla canónica que cruza: fuente de datos → ¿se recoge? → ¿con qué fin? 
 | Petición de borrado | Flujo del punto 7; borrado local guiado + respuesta por email |
 | Cambio de política | Versionado con fecha; aviso único en menú si `privacy_config.version` > versión vista |
 | Opt-out a mitad de partida | Detención inmediata + borrado de buffer (M104); sin pérdida de partida |
-| Sin conexión | La política está embebida; se muestra offline sin problemas |
+### Specs items degradados T244 (2026-10-26, Reflection-Beam-1.0)
+- **L123 (M104 privacy_menu.gd consulta el estado sin modificarlo):** REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 04-Codigo.md. Ver msg s2 #150.
+- **L124 (M104 privacy_consent.gd solo actúa si AnalyticsDirector existe):** REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 04-Codigo.md. Ver msg s2 #150.

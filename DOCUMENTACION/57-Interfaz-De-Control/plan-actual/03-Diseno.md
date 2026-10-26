@@ -162,5 +162,5 @@
 ### Recorrido M114 solo teclado / solo mando / mezclado
 - Spec: recorrido M114 solo teclado / solo mando / mezclado. Coherente with M57 (interfaz de control) and M114 (hardware).
 
-### Suite en caso_control_tests.gd (M112)
-- Spec: suite en caso_control_tests.gd (M112). Coherente with M57 (interfaz de control) and M112 (testing).
+### Specs items degradados T255 (2026-10-26, Reflection-Beam-1.0)
+- **L69 (RF8+RF9: persistencia JSON y Steam Deck/táctil "si corresponde"):** spec definida.

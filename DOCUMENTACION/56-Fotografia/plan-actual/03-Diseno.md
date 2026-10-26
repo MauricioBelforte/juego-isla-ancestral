@@ -493,3 +493,7 @@ automatico headless queda definido con 3 QAs vigentes + 1 pendiente:
 
 ### Push del modulo y reporte al usuario
 - Spec: push del modulo y reporte al usuario. Coherente with M56 (fotografia) and AGENTS.md sec 4.
+
+### Specs items degradados T242 (2026-10-26, Reflection-Beam-1.0)
+- **L341 (DoF selectivo foco claro, RF6 y cámara libre/zoom/filtros en vivo RF1-RF4):** iteración 2 con M49/M31 (dueño: deepseek-v4-flash-vision-exp).
+- **L342 (integración del atajo con M57):** iter 2.

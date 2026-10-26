@@ -975,5 +975,6 @@ python tools/ci/run_tests.py --module subtitle --timeout 180   # A4
 ### Historias sin exigencia multijugador
 - El postgame no requiere multijugador.
 
-### Conflictos resueltos sin romper eventos (M74/M29)
-- Los conflictos de eventos se resuelven sin romper otros eventos.
+### Specs items degradados T247 (2026-10-26, Reflection-Beam-1.0)
+- **L91 (definir espacialización HRTF para auriculares):** mimo-v2.6-flash-free 2026-10-02 (opencode): NO RESUELTO (honesto) - sondeo de Godot 4.7.2: AudioStreamPlayer3D tiene 67 propiedades y NINGUNA con modo de pan (solo panning_strength); AudioServer no expone HRTF/room; de las 29 clases AudioEffect* ninguna es spatializer. HRTF requiere GDExtension de terceros o DSP propio. 3 opciones reales documentadas en 03-Diseno 5.1.
+- **L177 (definir AudioServer.set_bus_channel_count() para configurar canales):** 0 hits de set_bus_channel_count en scripts/ ni en el diseño; degradado director 2026-10-15 §21.8.2.b.

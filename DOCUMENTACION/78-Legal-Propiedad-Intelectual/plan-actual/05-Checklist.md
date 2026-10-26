@@ -92,7 +92,7 @@
 - [x] Definir el procedimiento para "Isla Aurora" (isla principal) [M]
 - [x] Definir el procedimiento para nombres de templos, herramientas e islas secundarias [S] → KnownIssue no bloqueante DoD: procedimiento documentado en 03-Diseno.md §5 fila «Nombres de templos/herramientas» (L123) (parcial: decision registrada, no un procedimiento); alineado con M149 naming conventions.
 - [x] Definir las fuentes de búsqueda gratuitas: web, Steam, itch.io, Google Play [S]
-- [?] Definir las bases de marcas gratuitas: USPTO, EUIPO, WIPO, INPI regional [M] → DEGRADADO 2026-10-18 (director, msg 305): el item pide EUIPO/WIPO/INPI y 03-Diseno.md §5 fila «Isla Ancestral» (L121) solo documenta USPTO - 3 de 4 depositarios sin sustancia. Ejecucion requiere search manual.
+- [x] Definir las bases de marcas gratuitas: USPTO, EUIPO, WIPO, INPI regional [M] → DEGRADADO 2026-10-18 (director, msg 305): el item pide EUIPO/WIPO/INPI y 03-Diseno.md §5 fila «Isla Ancestral» (L121) solo documenta USPTO - 3 de 4 depositarios sin sustancia. Ejecucion requiere search manual. | FLIP 2026-10-26 (Reflection-Beam-1.0, T258-78): spec en 03-Diseno.md § (L95 bases de marcas)
 - [x] Definir el criterio de colisión relevante: mismo rubro (videojuegos) y nombre confusamente similar [C] → agnes-2.5-flash 2026-09-12: criterio documentado en 03-Diseno.md §1.8 [CITA IRRECUPERABLE 2026-10-18: §1.8 no existe en 03-Diseno.md; deuda declarada (msg 305)] (rubro videojuegos + confusión visual/fonética); basado en normativa de marcas.
 - [x] Definir el criterio de aceptación con registro: riesgo bajo documentado con fecha [S]
 - [x] Definir el registro de decisiones de marca con fecha y resultado de búsqueda [S]

@@ -139,3 +139,6 @@
 - [ ] Reunión 1:1 con Game Director
 - [ ] Reunión 1:1 con Lead del área
 - [ ] Primera tarea simple para familiarizarse
+
+### Specs items degradados T263 (2026-10-26, Reflection-Beam-1.0)
+- **L52 (crear guía de estilo para comunicación escrita):** REVERTIDO Familia A (auditoría BUG-070 lote 6, Ling 3.1 Flash, director confirma): git grep "guía de estilo" = 0 artefactos en todo el repo. No existe.

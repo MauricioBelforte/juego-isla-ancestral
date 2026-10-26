@@ -94,5 +94,6 @@ CI: parches pasan gates de M117 (mismo pipeline release)
 
 Decision: Opcion A (minima) para V1. M105 captura 4 de 9 directamente (dificultad, tutorial, retencion parcial, contenido parcial). Las otras 5 se capturan por M97/M102/M122/M93/M101 (no requieren M105). Opcion B (completa) para V2: agregar 3 hooks en M105 (track_economia, track_onboarding, track_isla_visitada). Costo: ~2h.
 
-## Notas Paquete-H (GO fundador 23oct 20:25, ratificado director 315)
-- **PAQ-4 (H21)**: **Opcion A** — V1 con las 4 metricas que M105 captura; las otras 5 anotadas con modulo dueno (Reviews->M100/M97, Bugs->M102/M122, Rendimiento->M105/M122, Economia->M93, Onboarding->M101) y marca "V2". Actualiza la tabla 9-metricas (lineas 83-93) — ya documentada arriba. Cita canonica: "GO FUNDADOR 23oct 20:25: «sí, me gustan las recomendaciones» (via director 315)".
+### Specs items degradados T250 (2026-10-26, Reflection-Beam-1.0)
+- **L17 (definir detección de review bombing):** DEGRADADO por el director 2026-10-21 (muestreo T13: la detección de review bombing NO consta en 02-Analisis en ninguna variante; definir el mecanismo o citar fuente real). DEGRADADO por director 2029 (muestreo T13: review bombing ni en inglés ni bombeo de reseñas no consta en 02-Analisis).
+- **L132 (definir retención de backups 90 días):** DEGRADADO por el director 2026-10-22 (muestreo T17: la retención de 90 días NO consta en 02-Analisis de M144; definir el período en el doc o citar fuente real).

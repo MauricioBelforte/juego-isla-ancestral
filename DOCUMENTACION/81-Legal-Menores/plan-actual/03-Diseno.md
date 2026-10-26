@@ -277,7 +277,6 @@ Este checklist está integrado en el `05-Checklist.md` del módulo (secciones C,
 - **D.1-D.10**: Sistema de consentimiento parental
 - **E.1-E.13**: Minimización y anonimización de datos
 - **F.1-F.10**: Rating IARC y contenido
-- **G.1-G.13**: Políticas legales (ToS y Privacy Policy)
-- **H.1-H.13**: Integración con sistemas existentes
-
-Total de ítems de diseño: **74 ítems** (cubiertos en secciones C-H del 05-Checklist.md)
+### Specs items degradados T245 (2026-10-26, Reflection-Beam-1.0)
+- **L78 (implementar reducción de granularidad de timestamps para menores):** REVERTIDO por auditoría BUG-070 (Ling 3.1 Flash lote 4, s3 #79, 2026-10-09): verbo Implementar + artefacto inexistente (grep granularidad/timestamp en scripts/ solo encuentra logger.gd:26, exportación de logs de M103, no datos de menores).
+- **L81 (implementar eliminación automática después del período de retención):** REVERTIDO por auditoría BUG-070 (Ling 3.1 Flash lote 4, s3 #79, 2026-10-09): verbo Implementar + artefacto inexistente (grep eliminar_datos/borrar_datos/olvido/forgotten en scripts/ = 0 matches relevantes). El diseño de revocación SÍ existe (L69/L71, Familia B).

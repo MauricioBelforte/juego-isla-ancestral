@@ -281,5 +281,6 @@ Props: [Nombres]
 ### Skip de validacion en builds de desarrollo
 - Spec: skip de validacion en builds de desarrollo. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
 
-### Generar reporte de licencias de modelos por build
-- Spec: generar reporte de licencias de modelos por build. BUG-070 lote 10 re-verif: Familia A. Nucleo real: model3d_validator.gd + modelos_3d.json. Coherente with M85 (modelos 3D legal) and M117 (build pipeline).
+### Specs items degradados T246 (2026-10-26, Reflection-Beam-1.0)
+- **L105 (agregar paso de validación de modelos en build_script.gd):** REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 05-Checklist.md L150-158. Ver msg s2 #150.
+- **L106 (build falla si hay licencia de modelo inválida):** BUG-070 lote 10 re-verif (atria-dawn, evidencia s3 #98): Patrón D con L105 [?] — build_script.gd revertido por s2, no existe.

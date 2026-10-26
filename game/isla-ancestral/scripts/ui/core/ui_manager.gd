@@ -113,6 +113,23 @@ func _on_focus_moved_tooltip(node: Node) -> void:
 ## mover el foco entre controles de la capa visible, y abrir/cerrar capas.
 
 func _unhandled_input(event: InputEvent) -> void:
+	# G1-002 (DeepSeek-V4.1-Flash, 2026-10-26): `pausa` cumple DOS funciones, no una.
+	# Antes solo cerraba capas: en gameplay (sin capa visible) el "tope" calculado
+	# era la ultima capa REGISTRADA y OCULTA, asi que close_top() des-registraba
+	# una capa invisible (tipicamente PauseLayer) y ademas el mundo dejaba de
+	# pausarse al abrirla despues (fuera de la pila, _actualizar_pausa_mundo no
+	# la ve). Ahora: capa visible -> cerrar (historico); sin capa visible -> ABRIR
+	# PauseLayer (RF11/RF5).
+	# Se atiende ANTES del guard de pila vacia: sin ninguna capa montada, ese
+	# guard cortaba el handler y Esc no podia abrir la pausa.
+	if event.is_action_pressed("pausa"):
+		if _capa_visible() != null:
+			close_top()
+			get_viewport().set_input_as_handled()
+			return
+		if abrir_pausa():
+			get_viewport().set_input_as_handled()
+			return
 	if _stack.is_empty():
 		return
 	# T-M1 (M55): "tope" = la capa VISIBLE más reciente. La pila guarda todas
@@ -124,10 +141,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _stack[i].visible:
 			top_layer = _stack[i]
 			break
-	if event.is_action_pressed("pausa") and top_layer is UILayer:
-		close_top()
-		get_viewport().set_input_as_handled()
-		return
 	# M53 sección E: toggle del panel de inventario con acción `inventario` (I)
 	if event.is_action_pressed("inventario"):
 		var inv_layer = _buscar_capa("InventoryLayer")
@@ -289,6 +302,45 @@ func top() -> Node:
 ## Indica si hay alguna capa modal abierta
 func is_modal_open() -> bool:
 	return _current_modal_full != null
+
+
+## ── G1-002 (DeepSeek-V4.1-Flash, 2026-10-26): pausa accesible con Esc ───────
+
+## Capa UILayer VISIBLE mas reciente, o null si no hay ninguna.
+## Distinto de `top()`: la pila guarda TODAS las capas montadas (registradas al
+## entrar al arbol), no solo las abiertas.
+func _capa_visible() -> Node:
+	for i in range(_stack.size() - 1, -1, -1):
+		var capa = _stack[i]
+		if is_instance_valid(capa) and capa is UILayer and capa.visible:
+			return capa
+	return null
+
+
+## API publica (la usa M11/player para no pisar el mouse_mode de la pausa).
+func hay_capa_visible() -> bool:
+	return _capa_visible() != null
+
+
+## Abre el menu de pausa (RF11/RF5). Devuelve true solo si lo abrio ahora.
+## Re-registra la capa si una vuelta anterior la saco de la pila: sin estar en
+## `_stack`, `_actualizar_pausa_mundo()` no la ve y el mundo NO se congela.
+func abrir_pausa() -> bool:
+	var pausa := _buscar_capa("PauseLayer")
+	if pausa == null or not pausa.has_method("open"):
+		return false
+	if not (pausa in _stack):
+		register_layer(pausa)
+	if pausa.visible:
+		return false
+	pausa.open()
+	# `open()` no toca `_current_modal_full` (solo `push_layer` lo hace): sin
+	# esta linea `is_modal_open()` mentiria con la pausa abierta.
+	if _is_modal_full(pausa):
+		_current_modal_full = pausa
+	_actualizar_pausa_mundo()
+	_log("G1-002: menu de pausa abierto con la accion 'pausa' (Esc/Start)")
+	return true
 
 
 ## ── API pública: foco ───────────────────────────────────

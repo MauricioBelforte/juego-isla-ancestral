@@ -496,5 +496,22 @@ Cada fuente responde `total_conocido` y `completado` con la misma anti-spoiler (
 ### Verificar con verificar_checklist.py (sin alertas nuevas)
 - Spec: verificar con verificar_checklist.py (sin alertas nuevas). Coherente with M75 (postgame) and AGENTS.md §21.9.
 
-### Confirmar 130 ítems exactos y plan-inicial == plan-actual
-- Spec: confirmar 130 ítems exactos y plan-inicial == plan-actual. Coherente with M75 (postgame) and AGENTS.md §11.
+### Specs items degradados T257 (2026-10-26, Reflection-Beam-1.0)
+- **L76 (ruina final restaurable postgame M25):** spec definida.
+
+## Specs Postgame (iter. 3 — DeepSeek-V4.1-Flash, Log 2200, 2026-10-26)
+
+### Sin grindeo para conseguir material raro
+- Spec: ninguna actividad del catalogo postgame puede exigir acumulacion (`umbral > 0`) ni ventana temporal (`expira`/`vence`/`ventana`/`fecha_unica`/`solo_dia`). El material raro se obtiene en actividades naturales repetibles. La regla `sin_grindeo` de `validate_postgame.gd` lo impone sobre las 7 entradas y falla con causa `grindeo_umbral:<id>:<n>`.
+- Coherente con M14 (recursos), M17 (mejoras) y M94 (anti-FOMO).
+
+### Validar que la FASE 2 no prometa UI al jugador
+- Spec: §2.2 + Flujo D llevados a codigo. Cada entrada declara `fase` (1|2) y `hidden`. `PostgameManager.es_visible_al_jugador(id)` = `hidden == false and fase == 1`; `actividades_disponibles()` y `sugerir_que_sigue()` devuelven SOLO visibles. La vista completa queda en `actividades_internas()` (validador y disenador).
+- Regla `fase2_oculta`: `fase == 2` exige `hidden == true`; `fase == 1` con `hidden == true` tambien es error (`fase1_oculta`).
+
+### UI sin spoilers de fase 2
+- Spec: la UI (M55 diario, M92 creditos, M53 HUD) consume exclusivamente `actividades_disponibles()`. El nombre de una entrada oculta no debe aparecer en el payload serializado: se mide por bytes con `JSON.stringify` en la suite, no por inspeccion visual.
+
+### Logro: ruina restaurada
+- Spec: M75 expone el HITO (`hito_ruina_restaurada()`, derivado del contador `postgame_ruina_final` que reporta M25); la ENTRADA de logro y su desbloqueo son de M72 (categoria Epilogo; §3.3 "referencian hitos reales").
+- Medido 2026-10-26: `data/logros/logros.json` tiene 17 logros y `CATEGORIAS_VALIDAS` de M72 no incluye `epilogo` -> el logro no existe todavia; el hito si.
