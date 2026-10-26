@@ -193,5 +193,6 @@ WorldVoxel.place(pos, BlockId, metadata) → diff
 ### Compatible con mineria (M46: tipos de mineral por profundidad)
 - Spec: compatible con mineria (M46: tipos de mineral por profundidad). Coherente with M13 (herramientas) and M35 (mineria).
 
-### Red de pesca como herramienta post-progresion (M35 la consume)
-- Spec: red de pesca como herramienta post-progresion (M35 la consume). Coherente with M13 (herramientas) and M34 (pesca).
+### Specs items degradados T237 (2026-10-26, Reflection-Beam-1.0)
+- **L169 (verificación in-game del cableado por el usuario V1):** el test headless valida la cadena completa; falta la prueba de mano con E contra un árbol/recurso visible.
+- **L170 (_intentar_golpe_recurso_m15 usa el hit del voxel como punto de mira):** si el recurso M15 flota sin voxel detrás, el lookup usa la posición del controller — refinamiento fino de puntería para el próximo agente.

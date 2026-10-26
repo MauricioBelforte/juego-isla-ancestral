@@ -167,5 +167,8 @@ Cambio de opciÃ³n (M58/90/91): sistema escribe â†’ DataStore.guardar_conf
 ### M08: contrato de "edits" ajustado al formato real de Voxel Tools
 - Spec: M08: contrato de "edits" ajustado al formato real de Voxel Tools. agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) documented en 03-Diseno.md; ajuste requiere M08 refactor. KnownIssue no bloqueante DoD. Coherente with M60 (datos) and M08 (terreno).
 
-### M08: log con cantidad de chunks editados cargados
-- Spec: M08: log con cantidad de chunks editados cargados. iter. 4: no existe (solo hay print al GUARDAR). Se deja abierto. Coherente with M60 (datos) and M102 (logging).
+### Specs items degradados T224 (2026-10-26, Reflection-Beam-1.0)
+- **L200 (M62 UI interactiva deshabilitada durante guardado/carga):** iter. 4: capa de UI (dueño M53/M59). M60 expone guardado_en_curso() y progreso_guardado(). agnes-2.5-flash 2026-09-12: es capa de UI (M53/M59 blocking). KnownIssue no bloqueante DoD — guardado ya es atómico.
+- **L202 (M63 carga de escena mundo < 2 s desde el menú):** iter. 4: objetivo de build; dueño M63. M60 mide la carga del SAVE (< 1 s, iter. 3).
+- **L214 (M15/M16/M33 recetas y cultivos como Resources tipados):** agnes-2.5-flash 2026-09-12: clases tipadas YA existen en scripts/; agregar .tres es trabajo de M16/M33 dueños. KnownIssue no bloqueante DoD. iter. 4: confirmado; dueño M16/M33.
+- **L241 (optimización presupuestos RN verificados con Profiler de Godot):** iter. 4: el Profiler no corre en headless; requiere build con GUI. Los presupuestos SÍ están medidos con Time.get_ticks_msec() (iter. 3/4). agnes-2.5-flash 2026-09-12: requiere build con GUI (Profiler no disponible headless). KnownIssue no bloqueante DoD — diseño documented, verificación visual pendiente.

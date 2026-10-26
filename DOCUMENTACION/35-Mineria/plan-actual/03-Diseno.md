@@ -564,5 +564,16 @@ func deserialize(data: Dictionary) -> void
 
 ## Specs Mineria (Beam 697)
 
-### Particulas de satisfaccion al extraer
-- Spec: particulas de satisfaccion al extraer. Coherente with M35 (mineria) and M52 (particulas).
+### Specs items degradados T197 (2026-10-26, Reflection-Beam-1.0)
+- **L14 (cuevas con vetas en paredes y techos RF4):** M35 iter 1 cubre datos; escenas M26 pendientes (fuera de iter 1).
+- **L56 (color/emisivo brillo por mineral):** placeholder; assets M45 pendientes.
+- **L57 (partículas de extracción por mineral):** placeholder; M52.
+- **L73 (desplazamiento suave si jugador ocupa bloque):** M17 + M08; pendiente integración.
+- **L88 (actualización UI durabilidad M13):** pendiente M53 UI.
+- **L96 (distribución vetas por chunk al generar):** M15 ResourceSpawner lo cubre; M35 hereda.
+- **L97 (selección mineral por profundidad y bioma con PRNG M29):** M15 lo cubre.
+- **L124 (fundición de lingotes con minerales M16):** fuera de iter 1 — dueño M16.
+- **L125 (precios de venta coherentes con economía M36):** valor_venta en JSON; M38 economía pendiente.
+- **L180 (test veta a medias sobrevive guardado/carga):** M15 cubre por nodo; M35 cubre zone_quota — pendiente prueba end-to-end con GameTime real.
+- **L184 (profiler en cueva con 50 vetas activas):** pendiente M61 benchmarks; no bloquea iter 1.
+- **L185 (recorrido cozy completo cantera/cueva norte/Templo):** pendiente M138/M26.

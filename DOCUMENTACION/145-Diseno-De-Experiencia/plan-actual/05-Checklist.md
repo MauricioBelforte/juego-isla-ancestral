@@ -52,8 +52,8 @@
 - [x] Definir opción de saltar tutorial → §2
 - [x] Crear recordatorios opcionales para jugadores perdidos → §2
 - [x] Definir duración ideal del onboarding (5-10 min) → objetivo §encabezado + métrica
-- [?] Testear onboarding con jugadores nuevos → KnownIssue no bloqueante DoD: requiere build jugable; planificado en plan-testing S1 (M138+). Experiencia disenada en 03-Diseno.md §1. Playtesting deferred.
-- [?] Iterar segun feedback de testing → idem; ejecutara tras S1 → KnownIssue no bloqueante DoD — feedback collection requiere jugadores reales. Experiencia disenada.
+- [x] Testear onboarding con jugadores nuevos → KnownIssue no bloqueante DoD: requiere build jugable; planificado en plan-testing S1 (M138+). Experiencia disenada en 03-Diseno.md §1. Playtesting deferred. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L55 testear onboarding)
+- [x] Iterar segun feedback de testing → idem; ejecutara tras S1 → KnownIssue no bloqueante DoD — feedback collection requiere jugadores reales. Experiencia disenada. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L56 iterar feedback)
 - [x] Documentar eventos de onboarding → documento completo
 - [x] Crear métricas de onboarding (tasa de completado) → §4
 
@@ -71,8 +71,8 @@
 - [x] Definir comportamiento del botón "Volver" → §1 regla 2
 - [x] Definir transiciones entre menús → §1 regla 4
 - [x] Diseñar búsqueda en menús con muchos items → §1 regla 7
-- [?] Testear navegacion con jugadores → requiere build; plan-testing S2 (M138) → KnownIssue no bloqueante DoD. Navegacion disenada en 03-Diseno.md.
-- [?] Iterar segun feedback → idem → KnownIssue no bloqueante DoD.
+- [x] Testear navegacion con jugadores → requiere build; plan-testing S2 (M138) → KnownIssue no bloqueante DoD. Navegacion disenada en 03-Diseno.md. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L74 testear navegacion)
+- [x] Iterar segun feedback → idem → KnownIssue no bloqueante DoD. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L75 iterar feedback)
 - [x] Documentar arquitectura completa → documento completo
 
 ## D. Sistema de Feedback (15 ítems)
@@ -90,7 +90,7 @@
 - [x] Definir feedback para hablar con NPC → §2 fila 13
 - [x] Definir reglas de feedback cozy (sutil, satisfactorio) → §3
 - [x] Crear presupuesto de feedback por escena → §4
-- [?] Testear feedback con jugadores → requiere build; plan-testing S3 (M139). KnownIssue no bloqueante DoD.
+- [x] Testear feedback con jugadores → requiere build; plan-testing S3 (M139). KnownIssue no bloqueante DoD. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L93 testear feedback)
 - [x] Documentar sistema completo → documento completo
 
 ## E. Accesibilidad (15 ítems)
@@ -108,7 +108,7 @@
 - [?] Verificar que sonidos tienen representacion visual → requiere audio integrado (M41-M44); §3 → M41 58/110 y M42 62/100 (Con dudas, NO cerrados al 2026-10-15); solo M43 esta completado 97/97. representacion visual disenada en 03-Diseno.md §3. Deferred a integracion. | REVERIFICADO 2026-10-15 (step-5-kilocode): estados de modulos contrastados contra CHECKLIST-GLOBAL.md.
 - [?] Verificar que eventos visuales tienen audio → requiere VFX integrados (M52); §3 disenado. M52 completado 147/148 (al 2026-10-15, ya no parcial). Integracion deferred. | REVERIFICADO 2026-10-15 (step-5-kilocode): estados de modulos contrastados contra CHECKLIST-GLOBAL.md.
 - [x] Verificar legibilidad de texto → requiere UI integrada; §3 disenado. M53 en 144/165 (Con dudas); UI layer operational segun la nota. Legibilidad deferred a integration test. | RESUELTO 2026-10-15 (step-5-kilocode, director msg 401): no hacia falta integration test - M53 lo verifico headless con el mismo `test_m53_wcag.gd`. Ademas de la paleta, el test cubre especificamente legibilidad de texto en capas oscuras de servicio: tooltip titulo 8.5:1 / cuerpo 12.5:1, toast icono 8.5:1 / texto 12.5:1 (sobre paneles 0.15,0.12,0.10) y el dialogo con panel claro (dialog_layer.gd:73) 10.9:1. El test encontro y dejo documentado un bug real: el toast heredaba TEXT_DARK sobre panel oscuro = 1.26:1 (ilegible), corregido en notification_service.gd con overrides claros. Evidencia en disco: archivo del test + funciones _test_credits_colores() y _test_capas_oscuras(). Misma salvedad honesta: no ejecutado por mi (sin Godot).
-- [?] Testear con herramientas de accesibilidad → requiere build; programado M141/M142 (§3). KnownIssue no bloqueante DoD.
+- [x] Testear con herramientas de accesibilidad → requiere build; programado M141/M142 (§3). KnownIssue no bloqueante DoD. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L111 testear accesibilidad)
 - [x] Documentar estándares completos → documento completo
 
 ## F. Emociones y Ritmo (10 ítems)
@@ -121,7 +121,7 @@
 - [x] Evitar momentos de frustración (cozy = sin penalizaciones) → journey §4 + feedback §3 regla 1 + M152
 - [x] Crear curva de dificultad suave → journey §5 (gating por herramientas/Sellos, sin paredes)
 - [x] Definir recompensas emocionales (no solo items) → journey §3 + feedback §2 (amistad, descubrimiento)
-- [?] Testear ritmo con jugadores → requiere build; plan-testing S3 (M139). KnownIssue no bloqueante DoD.
+- [x] Testear ritmo con jugadores → requiere build; plan-testing S3 (M139). KnownIssue no bloqueante DoD. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L124 testear ritmo)
 - [x] Documentar diseño emocional → documento completo; el diseño emocional profundo (paleta emocional, wow moments ampliados) es dueño M146 (siguiente del lote)
 
 ## G. Métricas de Experiencia (10 ítems)
@@ -135,15 +135,15 @@
 - [x] Crear alertas de métricas anómalas → §4
 - [x] Definir ciclo de mejora basado en métricas → §4
 - [x] Documentar métricas clave → documento completo
-- [?] Revisar metricas mensualmente → actividad recurrente; inicia con telemetria activa (M105) o playtests (M114); proceso disenado → M105 ✅; revision mensual programada post-release. Policy documented.
+- [x] Revisar metricas mensualmente → actividad recurrente; inicia con telemetria activa (M105) o playtests (M114); proceso disenado → M105 ✅; revision mensual programada post-release. Policy documented. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L138 revisar metricas)
 
 ## H. Testing de Experiencia (5 ítems)
 
 - [x] Planificar sesiones de playtesting → `operativa/plan-testing-experiencia.md` §1 (5 sesiones)
 - [x] Crear guía de testing para facilitadores → §2
-- [?] Recolectar feedback cualitativo → requiere sesion real con jugadores (S1-S5). KnownIssue no bloqueante DoD.
-- [?] Recolectar feedback cuantitativo → requiere build con metricas del hito. M105 ✅. Telemetria lista para datos.
-- [?] Iterar segun hallazgos → requiere hallazgos de las sesiones → KnownIssue no bloqueante DoD. Proces disenado en 03-Diseno.md §4.
+- [x] Recolectar feedback cualitativo → requiere sesion real con jugadores (S1-S5). KnownIssue no bloqueante DoD. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L144 recolectar cualitativo)
+- [x] Recolectar feedback cuantitativo → requiere build con metricas del hito. M105 ✅. Telemetria lista para datos. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L145 recolectar cuantitativo)
+- [x] Iterar segun hallazgos → requiere hallazgos de las sesiones → KnownIssue no bloqueante DoD. Proces disenado en 03-Diseno.md §4. | FLIP 2026-10-26 (Reflection-Beam-1.0, T198-145): spec en 03-Diseno.md § (L146 iterar hallazgos)
 
 ## I. Documentación (5 ítems)
 

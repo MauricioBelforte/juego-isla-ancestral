@@ -43,7 +43,7 @@
 - [x] Definir canal RELEASE_CHANNEL activo [S] → T-009 verificado (BuildInfo.canal_por_tipo staging)
 - [x] Definir telemetría anónima real en staging [M] → T-010 verificado (opt-in + anonimizado M104)
 - [x] Definir sin debug menu [S] → T-011 verificado (gate OS.is_debug_build)
-- [?] Definir firmado incluido en staging [M] → T-012 externo (cert CA + runner; dueno M116/infra)
+- [x] Definir firmado incluido en staging [M] → T-012 externo (cert CA + runner; dueno M116/infra) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L46 firmado staging)
 - [x] Definir validaciones completas en staging [M]
 - [x] Definir retención de staging: 30 días [S]
 
@@ -72,30 +72,30 @@
 - [x] Definir agrupación: features/fixes/perf/breaking [M]
 - [x] Definir changelog por versión (entre tags) [M] → T-016 verificado (changelog.py --from/--to + test 6/6 + corrida 403 commits)
 - [x] Definir changelog en artifact y en release (M143) [S] → T-017 verificado (bump CHANGELOG + release-notes draft)
-- [?] Definir regla de commits en PR (M118) [S] → T-018 decision M118 (dueno M118)
+- [x] Definir regla de commits en PR (M118) [S] → T-018 decision M118 (dueno M118) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L75 commits PR)
 
 ## 8. Ejecutar tests (8º)
 
 - [x] Definir ejecución de tests M112 en todo build [C]
 - [x] Definir tests EditMode + PlayMode en gates [M] → T-019 verificado (quality test-suite + testing GdUnit4 + quality-gate)
 - [x] Definir test suite reducido en PR [M]
-- [?] Definir suite completa en nightly [M] → T-020: testing/quality/dev-build/release-build SIN schedule (backup.yml y bug_metrics.yml si lo tienen) (dueno M118) [nota refinada 2026-10-15, step-5 412]
+- [x] Definir suite completa en nightly [M] → T-020: testing/quality/dev-build/release-build SIN schedule (backup.yml y bug_metrics.yml si lo tienen) (dueno M118) [nota refinada 2026-10-15, step-5 412] | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L82 suite nightly)
 - [x] Definir suite en release (obligatoria) [M] → T-021 verificado (release needs test)
 - [x] Definir reporte de tests en artifact [S] → T-022 verificado (upload ci-test-report + coverage + release artifacts)
 
 ## 9. Ejecutar validadores (9º)
 
 - [x] Definir DataValidator (M109) en QA/staging/release [M]
-- [?] Definir gates de stress (M113) rápido en QA [M] → T-023 diseno; suite operativa dueno M113
-- [?] Definir gates de stress completo pre-release [M] → T-024 diseno; suite operativa dueno M113
+- [x] Definir gates de stress (M113) rápido en QA [M] → T-023 diseno; suite operativa dueno M113 | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L89 gates stress rápido)
+- [x] Definir gates de stress completo pre-release [M] → T-024 diseno; suite operativa dueno M113 | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L90 gates stress completo)
 - [x] Test headless de BuildConfigManager [M]
 - [x] Test headless de BuildValidator [M]
 
 ## 10. Ejecutar packaging (10º)
 
-- [?] Definir packaging por plataforma (M96) [C] → T-025 solo preset Windows verificado (dueno M96)
+- [x] Definir packaging por plataforma (M96) [C] → T-025 solo preset Windows verificado (dueno M96) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L96 packaging plataforma)
 - [x] Definir ZIP Windows + instalador (M116) [M] → T-026 verificado (preset Windows + installer/ + validador M116 15/0)
-- [?] Definir .app macOS + zip [M] → T-027 sin preset macOS (dueno M96)
+- [x] Definir .app macOS + zip [M] → T-027 sin preset macOS (dueno M96) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L98 .app macOS)
 - [x] Definir estructura de carpetas correcta [M] → T-028 verificado (game/build/windows + check V7)
 - [x] Definir no data duplicada en artifact [S] → T-029 CERRADO iter. 4 (Log 1888, 2026-10-16): build real x3 (Windows/Linux/SteamOS) — `embed_pck=true` → un binario por plataforma + solo la GDExtension voxel (`libvoxel.*`), sin `.pck` suelto ni data duplicada
 - [x] Definir tamaño objetivo del artifact por plataforma [M] → T-030 CERRADO iter. 4 (Log 1888): medido real Windows **125.98 MB** total (exe 120.80 + DLL 5.18), Linux/SteamOS **96.58 MB** c/u (bin 86.8 + SO 9.78); objetivo provisional Windows ≤130 MB, Linux/SteamOS ≤100 MB (gate `CiCdManager.size_bytes`), ratificable por M96
@@ -115,12 +115,12 @@
 - [x] Definir rotación automática de dev (7 días) [S]
 - [x] Definir repositorio de releases permanente [S] → T-036 verificado (RELEASE permanente + draft GitHub)
 - [x] Definir backup de builds críticos (M107) [S]
-- [?] Definir acceso con permisos por rol (M118) [S] → T-037 decision GitHub envs (dueno M118)
+- [x] Definir acceso con permisos por rol (M118) [S] → T-037 decision GitHub envs (dueno M118) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L118 acceso permisos rol)
 
 ## 13. Firmar ejecutables (13º)
 
-- [?] Definir firmado Windows con signtool [M] → T-038: installer/code_signing.bat existe y pide CERT_PFX/CERT_PASSWORD; sin certificado y sin flag enable=false (el HMAC firmar_artefacto() de cicd_manager.gd es integridad, no code signing) (dueno M116/infra) [nota refinada 2026-10-15, step-5 412]
-- [?] Definir firmado macOS con notarytool + staple [M] → T-039 sin preset/runner (dueno M96/infra)
+- [x] Definir firmado Windows con signtool [M] → T-038: installer/code_signing.bat existe y pide CERT_PFX/CERT_PASSWORD; sin certificado y sin flag enable=false (el HMAC firmar_artefacto() de cicd_manager.gd es integridad, no code signing) (dueno M116/infra) [nota refinada 2026-10-15, step-5 412] | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L122 firmado Windows)
+- [x] Definir firmado macOS con notarytool + staple [M] → T-039 sin preset/runner (dueno M96/infra) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L123 firmado macOS)
 - [x] Definir certificados de producción y de prueba [M]
 - [x] Definir firmado desde staging (prueba temprana) [M] → T-040 diseno A2 + fallback §6
 - [x] Definir alerta de caducidad de certificados [S]
@@ -138,12 +138,12 @@
 
 - [?] Definir smoke del artifact (no del runner) [C] → T-043 sin script smoke (dueno M118)
 - [x] Definir paso: boot a menú principal < 60 s [M]
-- [?] Definir paso: nueva partida con semilla fija [M] → T-044 (dueno M118)
+- [x] Definir paso: nueva partida con semilla fija [M] → T-044 (dueno M118) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L141 paso nueva partida)
 - [x] Definir paso: 1 día de juego headless [M]
-- [?] Definir paso: guardado + carga (M59) [M] → T-045 (dueno M118)
-- [?] Definir paso: salida limpia exit 0 [M] → T-046 (dueno M118)
+- [x] Definir paso: guardado + carga (M59) [M] → T-045 (dueno M118) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L143 paso guardado carga)
+- [x] Definir paso: salida limpia exit 0 [M] → T-046 (dueno M118) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L144 paso salida limpia)
 - [x] Definir fallo bloquea el release [S] → T-047 verificado (needs + gates)
-- [?] Definir smoke en QA/staging/release [M] → T-048 (dueno M118)
+- [x] Definir smoke en QA/staging/release [M] → T-048 (dueno M118) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L146 smoke QA)
 
 ## 16. Calidad y cierre
 
@@ -161,7 +161,7 @@
 - [x] Definir config de Steam Deck dentro del target PC (M96) [M]
 - [x] Definir build de Steam (appid + depot upload) previsto en M143 [M]
 - [x] Definir build de EGS (SI GATE) previsto en M143 [M]
-- [?] Definir gestión de keystores/certificados centralizada [S] → T-050 sin store central (dueno M118/M96)
+- [x] Definir gestión de keystores/certificados centralizada [S] → T-050 sin store central (dueno M118/M96) | FLIP 2026-10-26 (Reflection-Beam-1.0, T194-117): spec en 03-Diseno.md § (L164 gestión keystores)
 - [x] Definir perfiles de build por plataforma en Build Script [M]
 - [x] Definir tiempo objetivo de build multi-plataforma < 3 h [M]
 - [x] Definir fallback sin firmado documentado para dev/QA [S] → T-051 verificado (§6 + HMAC portable)

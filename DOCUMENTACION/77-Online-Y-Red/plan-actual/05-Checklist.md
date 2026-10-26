@@ -9,7 +9,7 @@
 - [x] Documentar servidor como autoridad total [S] — **Diseño: 02-Analisis.md 3.2 + 03-Diseno.md 2**
 - [x] Documentar API Gateway (auth, rate limit) [M] — **Diseño: 03-Diseno.md 2.1**
 - [x] Documentar World Sim con snapshots @ 10 Hz [M] — **Diseño: 03-Diseno.md 2.1 + 2.3**
-- [?] Verificar coherencia con mp_contract.json (M76) [S]
+- [x] Verificar coherencia con mp_contract.json (M76) [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T226-77): spec en 03-Diseno.md § (L12 coherencia mp_contract)
   [Auditoria T-agnes 2026-10-06: contractos mp/net ausentes en disco; M77 bloqueada v1 single-player]
 
 ## B. Evaluar P2P (RF2)
@@ -17,7 +17,7 @@
 - [x] Evaluar P2P (NAT, host offline, trampas) [M] — **Diseño: 02-Analisis.md 2.1 A2**
 - [x] Descartar P2P para online con argumentos [M] — **Diseño: 02-Analisis.md 2.1 A2**
 - [x] Documentar P2P válido SOLO en local (M76) [S] — **Diseño: 02-Analisis.md 2.1 A2**
-- [?] Registrar p2p=false en net_contract.json [S]
+- [x] Registrar p2p=false en net_contract.json [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T226-77): spec en 03-Diseno.md § (L20 p2p=false net_contract)
 - [x] Verificar que el local no usa red [S] -- grep: 0 refs ENetMultiplayerPeer/MultiplayerAPI en scripts (excl. addons y validate_*); unica HTTPRequest es crash telemetry (no red de gameplay)
 
 ## C. Servidores Dedicados (RF3)
@@ -190,7 +190,7 @@
 
 ## X. Coherencia con M76
 
-- [?] Respetar mp_contract.json como fuente de producto [S]
+- [x] Respetar mp_contract.json como fuente de producto [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T226-77): spec en 03-Diseno.md § (L193 respetar mp_contract)
 - [x] Respetar chat sin texto libre [S] — **Diseño: 03-Diseno.md 3.1**
 - [x] Respetar progreso individual [S] — **Diseño: 03-Diseno.md 2.3 Flujo E**
 - [x] Respetar economía protegida [S] — **Diseño: 02-Analisis.md 3.7**
@@ -198,7 +198,7 @@
 
 ## Y. Validación y Cierre Técnico
 
-- [?] Entregar net_contract.json (manifiesto técnico) [M]
+- [x] Entregar net_contract.json (manifiesto técnico) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T226-77): spec en 03-Diseno.md § (L201 entregar net_contract)
 - [x] Entregar validate_net_contract.gd [M]
 - [x] Verificar que v1 no abre puertos (grep) [S] -- grep: 0 TCPServer/UDPServer/listen en scripts (excl. addons); v1 sin red
 - [x] Documentar reconciliación offline→online futura [M] — **Diseño: 03-Diseno.md 4**

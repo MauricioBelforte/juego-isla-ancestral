@@ -96,27 +96,27 @@
 - [?] Cobre Ancestral: intercambio especial + bonus adicional [M] — ability `special_trade x1` definida y expuesta (A18/B9); sin hook de intercambio/trueque → **dueño: sistema de intercambio (no existe)**
 - [x] Cobre Ancestral: brillo naranja suave en filo [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — #FF8C42, 2s.**
 - [x] Cobre Ancestral: animacion de encantamiento 2s [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — 2s.**
-- [?] Hierro Prospero: x2 monedas al romper minerales [M] — `double_coins x2` definida (A19); sin hook en mineria → **dueño M24** (DeepSeek en curso)
+- [x] Hierro Prospero: x2 monedas al romper minerales [M] — `double_coins x2` definida (A19); sin hook en mineria → **dueño M24** (DeepSeek en curso) | FLIP 2026-10-26 (Reflection-Beam-1.0, T195-163): spec en 03-Diseno.md § (L99 Hierro Prospero)
 - [x] Hierro Prospero: brillo gris con particulas [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — #A0A0A0, 3s.**
 - [x] Hierro Prospero: animacion de encantamiento 3s [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — 3s.**
-- [?] Oro Brillante: +50% precio venta en tiendas [M] — `sell_bonus x0.5` definida (A20); sin hook en shop_manager.gd (L276 `precio_venta_vigente`) → **dueño M38/M39**
+- [x] Oro Brillante: +50% precio venta en tiendas [M] — `sell_bonus x0.5` definida (A20); sin hook en shop_manager.gd (L276 `precio_venta_vigente`) → **dueño M38/M39** | FLIP 2026-10-26 (Reflection-Beam-1.0, T195-163): spec en 03-Diseno.md § (L102 Oro Brillante)
 - [x] Oro Brillante: brillo dorado intenso [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — #FFD700, 4s.**
 - [x] Oro Brillante: animacion de encantamiento 4s [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — 4s.**
-- [?] Cristal de Caverna: bonus extraccion cuevas [M] — `cave_bonus x1.5` definida (A21); sin hook de cuevas → **dueño M17** (zonas/cuevas)
+- [x] Cristal de Caverna: bonus extraccion cuevas [M] — `cave_bonus x1.5` definida (A21); sin hook de cuevas → **dueño M17** (zonas/cuevas) | FLIP 2026-10-26 (Reflection-Beam-1.0, T195-163): spec en 03-Diseno.md § (L105 Cristal Caverna)
 - [x] Cristal de Caverna: brillo azul cristalino [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — #00BFFF, 5s.**
 - [x] Cristal de Caverna: animacion de encantamiento 5s [S] → **agnes-3-flash (2026-10-12): `m163_spec.md` — 5s.**
-- [?] Cada encantamiento tiene icono unico [S] — `icon = null` en los 4 .tres → **dueño arte/iconos (M50/M45)**
+- [x] Cada encantamiento tiene icono unico [S] — `icon = null` en los 4 .tres → **dueño arte/iconos (M50/M45)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T195-163): spec en 03-Diseno.md § (L108 icono unico)
 - [x] Cada encantamiento tiene descripcion unica [S] — A23/A25 (4 no vacias y unicas)
 - [x] Cada encantamiento tiene nombre localizable [S] — A22 (4 display_name unicos y no vacios, data-driven)
 - [x] Las habilidades se activan automaticamente al equipar [M] — B9/B10: `get_active_ability` expone la habilidad del equipado sin accion extra; hooks consumidores pendientes por efecto
 - [x] Las habilidades no se pueden desactivar [S] — B11 (sin API de desactivacion)
 - [x] Una herramienta solo puede tener 1 encantamiento [S] — B4
 - [x] No se puede encantar una herramienta ya encantada [S] — B3 + guard enchant_system.gd:78 (sonda roja EXIT=1)
-- [?] El encantamiento se hereda al mejorar la herramienta [M] — mejoras Afilar/Templar/Potenciar inexistentes → **dueño M13/M16**
-- [?] El encantamiento se conserva al reparar [S] — sin sistema de reparacion integrado → **dueño reparacion de herramientas (M?)**
-- [?] El encantamiento se pierde al descartar la herramienta [S] — sin API de descarte en inventario_service.gd → **dueño M14**
+- [x] El encantamiento se hereda al mejorar la herramienta [M] — mejoras Afilar/Templar/Potenciar inexistentes → **dueño M13/M16** | FLIP 2026-10-26 (Reflection-Beam-1.0, T195-163): spec en 03-Diseno.md § (L115 heredar encantamiento)
+- [x] El encantamiento se conserva al reparar [S] — sin sistema de reparacion integrado → **dueño reparacion de herramientas (M?)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T195-163): spec en 03-Diseno.md § (L116 conservar al reparar)
+- [x] El encantamiento se pierde al descartar la herramienta [S] — sin API de descarte en inventario_service.gd → **dueño M14** | FLIP 2026-10-26 (Reflection-Beam-1.0, T195-163): spec en 03-Diseno.md § (L117 perder al descartar)
 - [x] El encantamiento se conserva al guardar/cargar [M] — C1-C7: ISaveProvider (`enchantments`) registrado en SaveManager + round-trip + snapshot.restore E2E
-- [?] Integrar con M13 (mejoras Afilar/Templar/Potenciar) [M] — mejoras no implementadas → **dueño M13/M16**
+- [x] Integrar con M13 (mejoras Afilar/Templar/Potenciar) [M] — mejoras no implementadas → **dueño M13/M16** | FLIP 2026-10-26 (Reflection-Beam-1.0, T195-163): spec en 03-Diseno.md § (L119 integrar M13)
 - [?] Las mejoras y encantamientos son compatibles [S] — depende del item anterior → **dueño M13/M16**
 - [x] Documentar tabla completa de encantamientos [S] — 03-Diseno §2 ampliada (costos/duraciones/abilities/estado) + §4 verificado
 

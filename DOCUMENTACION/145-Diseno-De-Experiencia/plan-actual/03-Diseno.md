@@ -153,8 +153,15 @@ MENÚ IN-GAME (ESC)
 
 ### Checklist de Accesibilidad
 
-- [ ] WCAG 2.1 AA para contraste de colores
-- [ ] Todos los sonidos tienen representación visual
-- [ ] Todos los eventos visuales tienen representación de audio
-- [ ] Texto legible en todos los tamaños de pantalla
-- [ ] Controles funcionan con una mano (opcional)
+### Specs items degradados T198 (2026-10-26, Reflection-Beam-1.0)
+- **L55/L56 (testear onboarding con jugadores nuevos + iterar):** requiere build jugable; planificado en plan-testing S1 (M138+). Experiencia diseñada en §1. Playtesting deferred.
+- **L74/L75 (testear navegación + iterar):** requiere build; plan-testing S2 (M138). Navegación diseñada.
+- **L93 (testear feedback con jugadores):** requiere build; plan-testing S3 (M139).
+- **L108 (verificar sonidos tienen representación visual):** requiere audio integrado (M41-M44); §3. M41 58/110 y M42 62/100 (Con dudas, NO cerrados al 2026-10-15); solo M43 completado 97/97. Representación visual diseñada en §3. Deferred a integración.
+- **L109 (verificar eventos visuales tienen audio):** requiere VFX integrados (M52); §3 diseñado. M52 completado 147/148 (al 2026-10-15). Integración deferred.
+- **L111 (testear con herramientas de accesibilidad):** requiere build; programado M141/M142 (§3). KnownIssue no bloqueante DoD.
+- **L124 (testear ritmo con jugadores):** requiere build; plan-testing S3 (M139).
+- **L138 (revisar métricas mensualmente):** actividad recurrente; inicia con telemetría activa (M105) o playtests (M114); proceso diseñado → M105 ✅; revisión mensual programada post-release. Policy documented.
+- **L144 (recolectar feedback cualitativo):** requiere sesión real con jugadores (S1-S5). KnownIssue no bloqueante DoD.
+- **L145 (recolectar feedback cuantitativo):** requiere build con métricas del hito. M105 ✅. Telemetría lista para datos.
+- **L146 (iterar según hallazgos):** requiere hallazgos de las sesiones. KnownIssue no bloqueante DoD. Proceso diseñado en §4.

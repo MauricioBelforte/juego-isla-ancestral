@@ -123,4 +123,5 @@ CLIMA_CAMBIADO(lluvia) (M32) → vfx_atmospheric.activar("lluvia", bioma)
 | M47/M49 | Materiales emisivos; luz de fuego (M49) |
 | M53/M58 | VFX de UI con Reduce Motion |
 | M61/M62 | Presupuesto y pool |
-| M108/M118 | Importación y validación en CI |
+### Specs items degradados T232 (2026-10-26, Reflection-Beam-1.0)
+- **L144 (definir validate_vfx.gd):** archivo no existe — drift detectado 2026-10-15 (agnes 526); verificado por GLM-5.3-Flash con git ls-files "*validate_vfx*" (0 hits; solo menciones en docs). La validación real se cubre por turnos en vfx_pool.gd/schema (iter. 5-6).

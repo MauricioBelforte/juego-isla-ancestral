@@ -280,5 +280,8 @@ func interact() -> void
 ### Plan-actual duplicado identico del plan-inicial
 - Spec: plan-actual duplicado identico del plan-inicial. Coherente with M21 (dialogos) and AGENTS.md sec 11.
 
-### Verificacion de 0 errores en consola durante una partida de prueba
-- Spec: verificacion de 0 errores en consola durante una partida de prueba. Coherente with M21 (dialogos) and M112 (testing).
+### Specs items degradados T222 (2026-10-26, Reflection-Beam-1.0)
+- **L39 (RF10-RF12 traducción con claves, base de diálogos con IDs únicos y triggers):** spec definida.
+- **L62 (reportar JSON malformado con archivo, línea y columna):** límite: Godot JSON.parse_string no expone posición; DialogGraphValidator.validar_texto/archivo reporta error de JSON inválido sin línea/columna.
+- **L63 (detectar IDs duplicados dentro de un grafo):** no aplicable: DialogueGraph.load_from_json usa Dictionary, colapsa duplicados; no detectable post-carga.
+- **L194 (test pipeline end-to-end con dialogo_ejemplo.json en play mode):** archivo inexistente (medido 2026-10-15, DeepSeek 258); re-apuntar a shaman_intro.json al implementar; requiere test play-mode real (las 15 suites headless no lo cubren).

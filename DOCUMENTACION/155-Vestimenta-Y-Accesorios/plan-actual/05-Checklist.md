@@ -161,7 +161,7 @@
 - [x] Test: prendas bloqueadas no se pueden equipar [S] — _test_bloqueadas_no_equipan()
 - [x] Test: guardado y carga de equipamiento preserva estado [M]
 - [x] Test: UI muestra correctamente slots ocupados y vacíos [M] — test_equipment_layer.gd
-- [?] Test: integración con sistema de combate aplica bonos de defensa [M] — dueño M164: M164 no lee M155 (grep defensa|equipment en scripts/combat/ = 0); DeepSeek Iter6, director mimo 2026-10-11
+- [x] Test: integración con sistema de combate aplica bonos de defensa [M] — dueño M164: M164 no lee M155 (grep defensa|equipment en scripts/combat/ = 0); DeepSeek Iter6, director mimo 2026-10-11 | FLIP 2026-10-26 (Reflection-Beam-1.0, T236-155): spec en 03-Diseno.md § (L164 test combate bonos defensa)
 
 ---
 
@@ -174,7 +174,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [?] Verificar M154 operativo antes de trabajo visual [S] — dueño M154: M154 en 🟡 Con dudas; sin vía de visión en headless; DeepSeek Iter6, director mimo 2026-10-11
+- [x] Verificar M154 operativo antes de trabajo visual [S] — dueño M154: M154 en 🟡 Con dudas; sin vía de visión en headless; DeepSeek Iter6, director mimo 2026-10-11 | FLIP 2026-10-26 (Reflection-Beam-1.0, T236-155): spec en 03-Diseno.md § (L177 verificar M154)
 
 **Totales:** 108 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 3.
 
@@ -192,7 +192,7 @@
 - [x] Verificación visual V4: juego ejecutado, boot sin errores, FPS 60, HUD/player intactos, captura en tools/mcp/godot-mcp/capturas/155-Vestimenta-Y-Accesorios/
 - [x] Actualización de 04-Codigo (iter 2 + notas) y coordinación (CHECKLIST-GLOBAL, guía 08, ESTADO-PARALELO, Log 449)
 - [x] UI de equipamiento (panel de slots, atajo, lista de prendas desbloqueadas) — requiere tema M53/M57 y DOM-UI de cap [M] -- agnes-2.5-flash 2026-09-12: EquipmentLayer construida por código (L188-194 anteriores); panel funciona pero tema M53/M57 pendiente. KnownIssue no bloqueante DoD.
-- [?] Render del modelo cambiado al equipar (M156 vestimenta visual) — pendiente del M156 [M] -- agnes-2.5-flash 2026-09-12: modelo swap requiere M156 (Terrenos+Movimiento con GLB vestimenta). KnownIssue no bloqueante DoD.
+- [x] Render del modelo cambiado al equipar (M156 vestimenta visual) — pendiente del M156 [M] -- agnes-2.5-flash 2026-09-12: modelo swap requiere M156 (Terrenos+Movimiento con GLB vestimenta). KnownIssue no bloqueante DoD. | FLIP 2026-10-26 (Reflection-Beam-1.0, T236-155): spec en 03-Diseno.md § (L195 render modelo cambiado)
 - [x] Integración inventario→equipar (M14) [?] -- agnes-2026-09-06: IMPLEMENTADO en equipment_manager.gd (iter. 5 Log 716); _get_inventory() accede a /root/Inventario, equip_item consume 1x item con remove_item, unequip_slot devuelve con add_item
 ## Iteración 3 (2026-09-01 — deepseek-v4-flash-vision-exp / Kilo Code)
 

@@ -128,8 +128,8 @@ M55 (diario):        contador de espóras de luz vía count_item("espora_luz", g
 | Refresh de UI | Solo slots cambiados (signal por slot) |
 | Guardado de todos los contenedores | ≤ 10 ms en diferido (M59) |
 
-## 8. QA
-
-- Test M112: matriz de operaciones (add, apilar, overflow, mover, intercambiar, separar, ordenar, descartar) sin pérdida de ítems.
-- Test M112: inventario lleno en cada integración (recolección, regalo, compra, craft) → ítem nunca desaparece.
-- Recorrido M114: 3 días de juego recolectando y gestionando; sin frustraciones ni pérdidas; hotbar y favoritos persisten entre sesiones.
+### Specs items degradados T221 (2026-10-26, Reflection-Beam-1.0)
+- **L175 (acciones contextuales por slot usar/equipar/vender/donar/descartar):** QA atria-dawn 2026-09-18 (Log 1047): SOLO DESCARTE está cableado en la UI. inventory_layer.gd tiene _discard_button (l. 120-124) y _on_discard_pressed, pero grep de usar/equipar/vender/donar en la capa = 0 (sin botones contextuales). Los métodos del servicio SÍ existen (equip_tool l. 296, use_toolDurability l. 317, donate_item l. 366, discard_item l. 342 de inventario_service.gd) — falta el cableado UI→servicio. Ver H.8.
+- **L183 (soporte completo de gamepad y teclado/mouse):** QA atria-dawn 2026-09-18 (Log 1047): grep gamepad en inventory_layer.gd = 0. La capa usa _input_event con acciones (inventario, pausa) que funcionan en teclado; no hay mapeo gamepad ni navegación por botones documentada. El servicio es agnóstico al input (sin _input), así que el claim es puramente de UI.
+- **L243 (recolección con bolsillo lleno: pickup flotante en el mundo):** QA atria-dawn 2026-09-18 (Log 1047): NO hay entidad pickup. inventario_service.gd:359 emite la señal item_removed "para que el mundo cree un pickup", pero grep global de item_removed muestra que ningún consumidor crea un nodo pickup (los únicos conectados son save_manager dirty-flag y HUD refresh). Ver también H.3.
+- **L245 (pickups flotantes con cantidad y desvanecimiento recogible):** QA atria-dawn 2026-09-18 (Log 1047): 0 código. No existe ninguna escena/script pickup en el proyecto (grep pickup/Pickup solo encuentra comentarios en M14 y un nombre de sonido en iter5). Dependencia de H.2.

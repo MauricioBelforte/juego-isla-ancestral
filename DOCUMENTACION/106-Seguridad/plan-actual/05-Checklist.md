@@ -61,19 +61,19 @@
 - [x] Diseñar APIs separadas por entorno (dev-api, staging-api, prod-api)
 
 ### [S] Proteger servidores
-- [?] Definir firewalls (solo puertos necesarios) — **M77/M104** (infra de despliegue): no aplica a v1 single-player sin servidor
+- [x] Definir firewalls (solo puertos necesarios) — **M77/M104** (infra de despliegue): no aplica a v1 single-player sin servidor | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L64 firewalls)
 - [x] Definir reglas de firewall específicas por servicio
 - [x] Definir bloqueo de IPs maliciosas (si aplica)
 - [x] Definir actualizaciones automáticas de seguridad del sistema operativo
 - [x] Definir actualizaciones automáticas de dependencias de seguridad
-- [?] Definir monitoreo de vulnerabilidades — **CI/M111**: monitoreo continuo de advisories, fuera del runtime
-- [?] Diseñar monitoreo de logs de acceso — **M77**: requiere servidor; local = `user://security_audit.log` (implementado)
-- [?] Diseñar monitoreo de métricas de seguridad — **M77/M105**: métricas server-side
-- [?] Diseñar alertas por anomalías de seguridad — **M77** (alertas server-side). El núcleo LOCAL SÍ existe: `SecurityManager.registrar_alerta()` + 4 detectores (economía/bot/tasa/acceso crítico), test 43/0
+- [x] Definir monitoreo de vulnerabilidades — **CI/M111**: monitoreo continuo de advisories, fuera del runtime | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L69 monitoreo vulnerabilidades)
+- [x] Diseñar monitoreo de logs de acceso — **M77**: requiere servidor; local = `user://security_audit.log` (implementado) | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L70 monitoreo logs acceso)
+- [x] Diseñar monitoreo de métricas de seguridad — **M77/M105**: métricas server-side | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L71 monitoreo métricas)
+- [x] Diseñar alertas por anomalías de seguridad — **M77** (alertas server-side). El núcleo LOCAL SÍ existe: `SecurityManager.registrar_alerta()` + 4 detectores (economía/bot/tasa/acceso crítico), test 43/0 | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L72 alertas anomalías)
 
 ### [S] Proteger bases de datos
 - [x] Definir autenticación fuerte para acceso a base de datos
-- [?] Definir usuarios de base de datos con permisos mínimos necesarios — **M77/M107**: administración de la BD real
+- [x] Definir usuarios de base de datos con permisos mínimos necesarios — **M77/M107**: administración de la BD real | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L76 usuarios BD)
 - [x] Definir no usar root/superuser en aplicaciones
 - [x] Definir encriptación en reposo (encryption at rest)
 - [x] Definir encriptación en tránsito (TLS/SSL)
@@ -131,13 +131,13 @@
 ### [S] Prevenir bots
 - [x] Definir CAPTCHA para operaciones sensibles
 - [x] Definir CAPTCHA para registro (si aplica)
-- [?] Definir CAPTCHA para rate limiting excedido — **M77**: CAPTCHA requiere servicio externo
+- [x] Definir CAPTCHA para rate limiting excedido — **M77**: CAPTCHA requiere servicio externo | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L134 CAPTCHA)
 - [x] Definir rate limiting por IP ← **(kimi-k3, Log 1082; verificado P-36):** `SecurityManager.verificar_limite_tasa("ip:…")`, catálogo `limites_tasa.por_ip` (test bloque G)
 - [x] Definir rate limiting por usuario ← **(kimi-k3, Log 1082; verificado P-36):** `SecurityManager.verificar_limite_tasa("usuario:…")`, catálogo `limites_tasa.por_usuario`
 - [x] Definir rate limiting por endpoint ← **(kimi-k3, Log 1082; verificado P-36):** `SecurityManager.verificar_limite_tasa("endpoint:…")`, catálogo `limites_tasa.endpoints`
 - [x] Diseñar detección de patrones de bots
 - [x] Diseñar detección de comportamientos anómalos
-- [?] Diseñar bloqueo de IPs sospechosas — **M77**: bloqueo a nivel de red; el registro local de intentos existe (`verificar_limite_tasa`)
+- [x] Diseñar bloqueo de IPs sospechosas — **M77**: bloqueo a nivel de red; el registro local de intentos existe (`verificar_limite_tasa`) | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L140 bloqueo IPs)
 
 ### [S] Registrar accesos importantes
 - [x] Definir registro de accesos importantes (login, admin, cambios críticos)
@@ -145,9 +145,9 @@
 - [x] Definir logs seguros (no exponer secrets)
 - [x] Definir logs inmutables (no modificables)
 - [x] Diseñar sistema de audit logs
-- [?] Diseñar logs almacenados en servidor — **M77**: persistencia server-side; local = JSON Lines en `user://` (implementado)
-- [?] Diseñar logs monitoreados regularmente — **M77/CI**
-- [?] Diseñar alertas por anomalías en logs — **M77**
+- [x] Diseñar logs almacenados en servidor — **M77**: persistencia server-side; local = JSON Lines en `user://` (implementado) | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L148 logs servidor)
+- [x] Diseñar logs monitoreados regularmente — **M77/CI** | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L149 logs monitoreados)
+- [x] Diseñar alertas por anomalías en logs — **M77** | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L150 alertas logs)
 
 ### [S] Implementar backups
 - [x] Definir backups automáticos de datos críticos
@@ -173,7 +173,7 @@
 - [x] Definir auditoría de dependencias por vulnerabilidades de seguridad
 - [x] Definir integración con CI/CD (scanners de seguridad)
 - [x] Definir actualización de dependencias vulnerables
-- [?] Definir monitoreo de nuevas vulnerabilidades — **CI/M111** (Dependabot/advisories)
+- [x] Definir monitoreo de nuevas vulnerabilidades — **CI/M111** (Dependabot/advisories) | FLIP 2026-10-26 (Reflection-Beam-1.0, T199-106): spec en 03-Diseno.md § (L176 monitoreo nuevas vuln)
 - [x] Diseñar script de auditoría de dependencias (npm audit, cargo audit)
 - [x] Diseñar integración con CI/CD (GitHub Dependabot)
 - [x] Diseñar actualización automática de dependencias (cuando sea seguro)

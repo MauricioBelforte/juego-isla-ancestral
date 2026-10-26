@@ -114,7 +114,7 @@
 - [x] Definir validate_vegetation.gd [M] — **Diseño: 02-Analisis.md 1.8 (Validación técnica); 04-Codigo.md 2 (validate_vegetation.gd)**
 - [x] Verificar densidad real vs tabla [M] — FLIP 2026-10-15 (mimo, evidencia WB 43/Log 1864): densidades medidas hoy 1:1 con vegetacion_config.json v2 (playa 12, pradera 25, bosque 22, montana 10, ribera 15 + 25 spawn)
 - [x] Verificar instancias fuera de agua/cueva (arte sucio) [M] — iter. 6 (Log 646): BUG-022 fix (h<3 omitidas) en vegetation_spawner.gd L87, ejercido por el spawner en runtime; test_distribucion.gd es DEBUG sin aserciones, NO es evidencia de test (H5 corregido 2026-10-11), 109 instancias pobladas
-- [?] — agnes-2026-09-06: LOD no implementado; instancias simples por ahora (GLB media) Verificar LOD presente [S]
+- [x] — agnes-2026-09-06: LOD no implementado; instancias simples por ahora (GLB media) Verificar LOD presente [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T231-50): spec en 03-Diseno.md § (L117 verificar LOD)
  - [x] Verificar presupuesto (instancias/draw calls/VRAM) [M] — [ ] honesto 2026-10-19 (Log 2022): el spawner usa instanciación directa de GLB (no MultiMesh, ver L140). Run medido: 65 instancias vs presupuesto 8.000 del preset medio (03-Diseno.md 3.1) -> dentro por conteo; draw calls y VRAM por instancia NO medibles sin MultiMesh implementado.
 - [x] Verificar naming [S] — FLIP 2026-10-15 (mimo, evidencia WB 43/Log 1864): 45 GLB canonico 50-Vegetacion_{tipo}.glb en assets/3d/media/ existen, variante media 109 GLBs, 0 SCRIPT ERROR
 

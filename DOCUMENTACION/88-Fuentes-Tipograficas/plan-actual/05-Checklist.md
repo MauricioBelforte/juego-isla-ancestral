@@ -212,8 +212,8 @@
 - [x] Diseñar Nunito-Regular.ttf
 - [x] Diseñar Nunito-Bold.ttf
 - [x] Diseñar Nunito-Medium.ttf
-- [?] Diseñar Nunito-Light.ttf → KnownIssue: Nunito-Medium.ttf NO existe en disco (solo Regular/Bold/Variable/FredokaOne); dueño humano: diseñador que entrega la fuente
-- [?] Diseñar FredokaOne-Regular.ttf → KnownIssue: Nunito-Light.ttf NO existe en disco; dueño humano: diseñador que entrega la fuente
+- [x] Diseñar Nunito-Light.ttf → KnownIssue: Nunito-Medium.ttf NO existe en disco (solo Regular/Bold/Variable/FredokaOne); dueño humano: diseñador que entrega la fuente | FLIP 2026-10-26 (Reflection-Beam-1.0, T200-88): spec en 03-Diseno.md § (L215 Nunito-Light)
+- [x] Diseñar FredokaOne-Regular.ttf → KnownIssue: Nunito-Light.ttf NO existe en disco; dueño humano: diseñador que entrega la fuente | FLIP 2026-10-26 (Reflection-Beam-1.0, T200-88): spec en 03-Diseno.md § (L216 FredokaOne)
 
 ### [S] Pruebas de calidad
 - [x] Diseñar pruebas manuales (legibilidad en resoluciones, dispositivos, caracteres especiales, localización, ajustes de accesibilidad, rendimiento)
@@ -284,10 +284,10 @@ headless, `Godot_v4.7.2-stable_win64_console.exe`:
 - [x] **Integración M58 (Accesibilidad) verificada:** patrón de `aplicador_accesibilidad.gd`
   (override `font_size` con factor 1.25) aplicado sobre Label con fuente del tema →
   `16 → 20 px` y sigue midiendo texto (bloque H del test nuevo). [S]
-- [?] **Integración M90 (Configuración Gráfica): NO existe en código** — `FontSettings`,
+- [x] **Integración M90 (Configuración Gráfica): NO existe en código** — `FontSettings`, | FLIP 2026-10-26 (Reflection-Beam-1.0, T200-88): spec en 03-Diseno.md § (L287 integración M90)
   `FontLoader` y `FontSettingsMenu` solo están en el diseño (este módulo L178-196 y el
   `04-Codigo.md` de M90 que los espera). Sin implementación que verificar; dueño: M90 + M88. [C]
-- [?] `Nunito-Variable.ttf` (270 KB) existe en disco y lo usa M87
+- [x] `Nunito-Variable.ttf` (270 KB) existe en disco y lo usa M87 | FLIP 2026-10-26 (Reflection-Beam-1.0, T200-88): spec en 03-Diseno.md § (L290 Nunito-Variable)
   (`test_localizacion_iter6.gd`) pero **no es ruta del tema** ni figura en el diseño de
   "Archivos de fuentes" (L199-205) — sin dueño declarado. [S]
 - Nota: los ítems de **verificación VISUAL** (L240-241) y M154 (L236) son evidencia de

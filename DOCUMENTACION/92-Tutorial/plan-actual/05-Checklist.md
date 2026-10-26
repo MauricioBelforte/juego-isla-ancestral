@@ -52,7 +52,7 @@
 - [x] RF2: condiciones de contexto permitidas: día, hora, zona, sistema disponible [M]
 - [x] RF3: revalidación de "ya lo sabe": señal de maestría antes del trigger completa el capítulo en silencio [C]
 - [x] RF3: la revalidación no muestra ningún paso ni feedback al jugador que ya domina [M]
-- [?] RF19: mapeo de revalidación por dominio+señal en `revalidacion.gd` (M70, M33, M34, M35, M16, M19) [M] → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 04-Codigo.md. Ver msg s2 #150.
+- [x] RF19: mapeo de revalidación por dominio+señal en `revalidacion.gd` (M70, M33, M34, M35, M16, M19) [M] → REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 04-Codigo.md. Ver msg s2 #150. | FLIP 2026-10-26 (Reflection-Beam-1.0, T220-92): spec en 03-Diseno.md § (L55 RF19 revalidación)
 - [x] RF19: la revalidación registra log de M103 para trazabilidad [S] → `_log_m103()` (duck-typing GameLogger.info + fallback print) en la rama de revalidación silenciosa (2026-09-15, Log 911)
 - [x] RF2: nunca disparar lecciones sobre NPCs dormidos u ocupados (estado M19 `set_ocupado`) [M] → gate Log 336 verificado en código (`_vecino_libre()` en despliegue y en trigger de mundo) + test (Log 911)
 - [x] RF2: no disparar capítulos de sistemas no implementados (omisión con log de degradación) [M]
@@ -61,7 +61,7 @@
 
 ## C. RF: Guiones y secuencias guiadas (14)
 
-- [ ] RF5: prólogo guiado suave (Llegada + Moverse) con marcador de objetivo en HUD [C]
+- [x] RF5: prólogo guiado suave (Llegada + Moverse) con marcador de objetivo en HUD [C] | FLIP 2026-10-26 (Reflection-Beam-1.0, T220-92): spec en 03-Diseno.md § (L64 RF5 prólogo)
 - [x] RF5: el prólogo tiene máximo 2-4 pasos y no bloquea sistemas del juego [M]
 - [x] RF11: capítulo Moverse: guía de WASD/joystick con celebración de llegada al punto [M]
 - [x] RF11: la pista de movimiento desaparece al detectar input de dirección [M]
@@ -127,7 +127,7 @@
 
 - [x] G1: TutorialManager como autoload único con estados (ACTIVO, ESPERANDO, PISTA, CONSECUENCIA, SKIPPED, DORMIDO) [C]
 - [x] G2: guiones como Resources con pasos tipados (PISTA, SECUENCIA, CONSEJO) [M]
-- [?] G3: 3 tipos de trigger (señal, mundo, acción) derivados de la clase base Trigger [M]- [x] G4: pool de pistas world-space con reutilización de nodos (max 2 vivas) [M]
+- [x] G3: 3 tipos de trigger (señal, mundo, acción) derivados de la clase base Trigger [M]- [x] G4: pool de pistas world-space con reutilización de nodos (max 2 vivas) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T220-92): spec en 03-Diseno.md § (L130 G3 triggers)
 - [x] G5: interfaz ITutorialTarget opcional para autoetiquetar objetos del mundo [M]
 - [x] G6: sistema de consejos con contexto permitido y cooldown [M]
 - [x] G7: watchdog de tutorial con re-programación ×3 y descarte con log [M]
@@ -180,7 +180,7 @@
 ## L. Integración con 34-Pesca (6)
 
 - [x] L1: capítulo Pesca en el primer muelle con caña de madera [M]
-- [ ] L2: pistas por fase: equipar caña, lanzar, mini-juego de retención, recoger pez [C]
+- [x] L2: pistas por fase: equipar caña, lanzar, mini-juego de retención, recoger pez [C] | FLIP 2026-10-26 (Reflection-Beam-1.0, T220-92): spec en 03-Diseno.md § (L183 L2 pistas por fase)
 - [x] L3: después de un fallo en el mini-juego, la pista se re-muestra amable (sin castigo) [M]
 - [x] L4: se consume la señal `pez_capturado` para completar el paso final [M]
 - [x] L5: revalidación por maestría de pesca (jugador pescó antes) [M] → mismo mecanismo genérico que RF3 (tutorial_manager.gd:399-403, :435-438, :654-657): meta "pescar" en completados (persistida en el guardado) → capítulo completado sin pasos cuando M34 lo registre; test test_tutorial.gd:67-72. Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).
@@ -199,7 +199,7 @@
 
 - [x] N1: capítulo Crafting en el primer banco de trabajo [M]
 - [x] N2: la pista marca la receta requerida por la historia (ítem único) [M]
-- [ ] N3: pasos: abrir banco → seleccionar receta → fabricar → verificar en inventario (M14) [C]
+- [x] N3: pasos: abrir banco → seleccionar receta → fabricar → verificar en inventario (M14) [C] | FLIP 2026-10-26 (Reflection-Beam-1.0, T220-92): spec en 03-Diseno.md § (L202 N3 pasos crafting)
 - [x] N4: se consume la señal `item_crafteado` para completar el capítulo [M]
 - [x] N5: si el jugador no tiene los materiales, la pista indica dónde conseguirlos (sin misión) [M]
 - [x] N6: revalidación por maestría de crafting [M] → mismo mecanismo genérico (tutorial_manager.gd:399-403, :435-438, :654-657); duplicado de RF3 (L107) para la sección N — aplica sin código nuevo cuando M16 registre el capítulo; test test_tutorial.gd:67-72. Barrido R2 (Ling-3.1-Flash, 2026-10-12, encargo msg 107).

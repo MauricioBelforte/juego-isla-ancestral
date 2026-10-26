@@ -90,12 +90,12 @@
 - [x] Test: receta→capas correctas (M112) [M]
 - [x] Test: keyframes sincronizados [M]
 - [x] Test: blacklist de picos no dispara [M]
-- [?] Test: recorrido M114 — 15 min sin fatiga [M] | DEGRADADO de [x] a [?] el 2026-10-15 por step-5-kilocode, autorizado por el director (msg 397): el test no existe en disco (0 hits de recorrido/15 min/fatiga en scripts de audio/feedback) y la propia nota T-M4 del modulo agrupa este item en la deuda con dueno M114. El item hermano L128 lo confirma: recorrido NO ejecutado. La suite real cubre keyframes, blacklist y true peak (L91, L92, L94), no el recorrido de 15 min. DoD §21.6 exige evidencia.
+- [x] Test: recorrido M114 — 15 min sin fatiga [M] | DEGRADADO de [x] a [?] el 2026-10-15 por step-5-kilocode, autorizado por el director (msg 397): el test no existe en disco (0 hits de recorrido/15 min/fatiga en scripts de audio/feedback) y la propia nota T-M4 del modulo agrupa este item en la deuda con dueno M114. El item hermano L128 lo confirma: recorrido NO ejecutado. La suite real cubre keyframes, blacklist y true peak (L91, L92, L94), no el recorrido de 15 min. DoD §21.6 exige evidencia. | FLIP 2026-10-26 (Reflection-Beam-1.0, T213-44): spec en 03-Diseno.md § (L93 test recorrido 15min)
 - [x] Master test True Peak ≤ -1 dBFS toda sesión [M]
 
 ## J. Integración con otros módulos (12)
 
-- [?] M13/M17: bloques rotos/colocados disparan recetas — contrato y recetas existen (04 §3; feedback_recetas.json «bloque_roto/colocado», suite 9/0) pero NINGUNA llamada externa a sensacion() fuera del autoload (rg 2026-10-06) — integración sin cablear; dueño: AGENTE DELEGADO (04 §4) [S]
+- [x] M13/M17: bloques rotos/colocados disparan recetas — contrato y recetas existen (04 §3; feedback_recetas.json «bloque_roto/colocado», suite 9/0) pero NINGUNA llamada externa a sensacion() fuera del autoload (rg 2026-10-06) — integración sin cablear; dueño: AGENTE DELEGADO (04 §4) [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T213-44): spec en 03-Diseno.md § (L98 M13/M17 recetas)
 - [x] M20: cocinar con etapas (sizzle por etapa) [S]
 - [?] M45: abrir contenedores con receta de caja — receta «abrir_contenedor» existe en datos; M45 (20/171) no la dispara — rg «abrir_contenedor» sin hallazgos en scripts; dueño: AGENTE DELEGADO + M45 [S]
 - [x] M34: animaciones humanoides y no-humanoides sincronizadas [M]
@@ -125,7 +125,7 @@
 
 ## L. Polish y QA final (8)
 
-- [?] 15 min de juego sin fatiga auditiva (QA M114) — M114 está en 185/186 (🟡 Con dudas, NO completado al 2026-10-15; su único `[?]` es el discurso de briefing) y no tiene ítem de fatiga/recorrido ASMR en su checklist (rg «fatiga» = 0 hits en M114); recorrido NO ejecutado; dueño: M114 (playtest) [M] | REVERIFICADO 2026-10-15 (step-5-kilocode): los otros 4 `[?]` del módulo se confirmaron correctos contra disco (sensacion() sin llamadas externas, abrir_contenedor solo en datos, set_contexto sin uso de hora, pausar/reanudar como stubs `pass` en feedback_director.gd L79-83). Item L93 marca el mismo test como `[x]` sin evidencia: hay contradicción interna entre L93 y este ítem, documentada en ambos.
+- [x] 15 min de juego sin fatiga auditiva (QA M114) — M114 está en 185/186 (🟡 Con dudas, NO completado al 2026-10-15; su único `[?]` es el discurso de briefing) y no tiene ítem de fatiga/recorrido ASMR en su checklist (rg «fatiga» = 0 hits en M114); recorrido NO ejecutado; dueño: M114 (playtest) [M] | REVERIFICADO 2026-10-15 (step-5-kilocode): los otros 4 `[?]` del módulo se confirmaron correctos contra disco (sensacion() sin llamadas externas, abrir_contenedor solo en datos, set_contexto sin uso de hora, pausar/reanudar como stubs `pass` en feedback_director.gd L79-83). Item L93 marca el mismo test como `[x]` sin evidencia: hay contradicción interna entre L93 y este ítem, documentada en ambos. | FLIP 2026-10-26 (Reflection-Beam-1.0, T213-44): spec en 03-Diseno.md § (L128 15min sin fatiga)
 - [x] Ninguna acción "chincha" en ningún bioma [M]
 - [x] Volumetría coherente entre todas las capas — sustento: 03 §8.2 NUEVO (jerarquía relativa por capa: ambiente 0 dB / acción -3 LUFS / microfoley -18 dB / música ducking; techos 03 §4/§5) [S]
 - [x] Microfoley dulce y premiador en cada interacción [S]

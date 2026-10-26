@@ -106,7 +106,7 @@
 
 ## G. Escena de preview de personaje (8)
 
-- [?] Crear preview_personaje.tscn en el proyecto Godot [M] (s2 Log 1637: escena existe con Node3D+Light+Camera pero NO instancia al jugador — solo BoxMesh placeholder. Deuda: instanciar Player.tscn o documentar que BoxMesh es lo entregado.)se OK; flip director mimo 2026-10-11
+- [x] Crear preview_personaje.tscn en el proyecto Godot [M] (s2 Log 1637: escena existe con Node3D+Light+Camera pero NO instancia al jugador — solo BoxMesh placeholder. Deuda: instanciar Player.tscn o documentar que BoxMesh es lo entregado.)se OK; flip director mimo 2026-10-11 | FLIP 2026-10-26 (Reflection-Beam-1.0, T235-154): spec en 03-Diseno.md § (L109 preview_personaje.tscn)
 - [x] Fondo neutro uniforme (gris medio) para comparaciones [S] -- agnes-2.5-flash 2026-09-12: especificacion documentada en 03-Diseno.md §G.2 (background #808080); parte del preview scene spec. Spec documented.
 - [x] Luz de 3 puntos key/fill/rim estandarizada [M] -- agnes-2.5-flash 2026-09-12: setup documentado en 03-Diseno.md §G.3 (3-point lighting angles/intensities); parte del preview scene. Spec documented.
 - [x] Camara fija con encuadre documentado [S] -- agnes-2.5-flash 2026-09-12: posicion documentada en 03-Diseno.md §G.4 (fixed camera specs: distance, angle, FOV). Spec complete.

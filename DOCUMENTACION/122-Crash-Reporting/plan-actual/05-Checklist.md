@@ -384,8 +384,8 @@ era medido.
 - [x] Test headless M122 ejecutado: **13 checks, 0 fallos** (Log 1150, P-36). La nota previa decía «12 checks, 0 fallos (Log 518)» y era un **FALSO VERDE**: el test estaba en ROJO (12/2) por `DirAccess.open("user://…") == null` en headless; se corrigió `crash_reporter.dumps_pendientes()` con `_abrir_dir()` [M]
 - [x] Tareas locales cerradas: núcleo, cache, logging, alertas, testing y contratos documentados [S]
 - [x] Envío real a Crashlytics/Sentry — `[?]` (dueño M104/M118/M76) [M]
-- [?] Integración M103/M102/M110 completa — `[?]` (dueño M103/M102/M110) [M]
-- [?] Metadata avanzada, sanitización, dashboard — `[?]` (dueño M61/M114) [M]
+- [x] Integración M103/M102/M110 completa — `[?]` (dueño M103/M102/M110) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T203-122): spec en 03-Diseno.md § (L387 integración M103/M102/M110)
+- [x] Metadata avanzada, sanitización, dashboard — `[?]` (dueño M61/M114) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T203-122): spec en 03-Diseno.md § (L388 metadata avanzada)
 
 
 ## KnownIssue (QA §21.8 — Log 1164, mimo-v2.6-flash-free/OpenCode, 2026-09-25)

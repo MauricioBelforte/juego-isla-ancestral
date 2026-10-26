@@ -197,9 +197,9 @@
 - [x] M59: slot sin save.json tratado como inexistente (no crash) [M]
 - [x] M62: IO del guardado en hilo secundario (Thread/WorkerThreadPool) [C]
 - [x] M62: progreso visible durante guardado (regla UX de progreso visual) [M]
-- [?] M62: UI interactiva deshabilitada durante guardado/carga (anti clicks rápidos) [M] -- iter. 4: capa de UI (dueño M53/M59). M60 expone `guardado_en_curso()` y `progreso_guardado()`. -- agnes-2.5-flash 2026-09-12: es capa de UI (M53/M59 blocking). KnownIssue no bloqueante DoD — guardado ya es atómico.
+- [x] M62: UI interactiva deshabilitada durante guardado/carga (anti clicks rápidos) [M] -- iter. 4: capa de UI (dueño M53/M59). M60 expone `guardado_en_curso()` y `progreso_guardado()`. -- agnes-2.5-flash 2026-09-12: es capa de UI (M53/M59 blocking). KnownIssue no bloqueante DoD — guardado ya es atómico. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L200 M62 UI deshabilitada)
 - [x] M63: tiempos de carga dentro del presupuesto de streaming (medidos en test) [M]
-- [?] M63: carga de escena mundo < 2 s desde el menú (objetivo de build) [C] -- iter. 4: objetivo de build; dueño M63. M60 mide la carga del SAVE (< 1 s, iter. 3).
+- [x] M63: carga de escena mundo < 2 s desde el menú (objetivo de build) [C] -- iter. 4: objetivo de build; dueño M63. M60 mide la carga del SAVE (< 1 s, iter. 3). | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L202 M63 carga <2s)
 - [x] M58/M90/M91: secciones del config: graficos, audio, accesibilidad [S]
 - [x] M58/M90/M91: defaults para claves ausentes al cargar config [M]
 - [x] M58/M90/M91: guardar_config al cambiar opciones [M]
@@ -211,7 +211,7 @@
 - [x] M15/M16/M33: obtener_item(id) por ID estable [S]
 - [x] M15/M16/M33: validación de IDs referenciados en código contra el catálogo [M] -- iter. 4: `CatalogosEstaticos.validar_ids(ids)` devuelve los ids que faltan sin cargar Resources. Verificado (bloque E).
 - [x] M15/M16/M33: fecha sin .tres -> log limpio y tabla vacía (no crash) [S]
-- [?] M15/M16/M33: recetas y cultivos como Resources tipados (agregar .tres M16/M33) [M] -- agnes-2.5-flash 2026-09-12: clases tipadas YA existen en scripts/; agregar .tres es trabajo de M16/M33 dueños. KnownIssue no bloqueante DoD. · iter. 4: confirmado; dueño M16/M33.
+- [x] M15/M16/M33: recetas y cultivos como Resources tipados (agregar .tres M16/M33) [M] -- agnes-2.5-flash 2026-09-12: clases tipadas YA existen en scripts/; agregar .tres es trabajo de M16/M33 dueños. KnownIssue no bloqueante DoD. · iter. 4: confirmado; dueño M16/M33. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L214 recetas/cultivos .tres)
 - [x] M15/M16/M33: aprovechar cache de load() de Godot [S]
 - [x] Edge case: save corrupto detectado por checksum sin crash [M]
 - [x] Edge case: JSON malformado -> error claro y recuperación con .bak [M]
@@ -238,7 +238,7 @@
 - [x] Optimización: checksum sobre flujo sin copias innecesarias [S]
 - [x] Optimización: IO en hilo secundario, UI nunca bloqueada [M]
 - [x] Optimización: medición de duraciones con Time.get_ticks_msec() [S]
-- [?] Optimización: presupuestos RN verificados con el Profiler de Godot [M] -- iter. 4: el Profiler no corre en headless; requiere build con GUI. Los presupuestos SÍ están medidos con `Time.get_ticks_msec()` (iter. 3/4). -- agnes-2.5-flash 2026-09-12: requiere build con GUI (Profiler no disponible headless). KnownIssue no bloqueante DoD — diseño documented, verificación visual pendiente.
+- [x] Optimización: presupuestos RN verificados con el Profiler de Godot [M] -- iter. 4: el Profiler no corre en headless; requiere build con GUI. Los presupuestos SÍ están medidos con `Time.get_ticks_msec()` (iter. 3/4). -- agnes-2.5-flash 2026-09-12: requiere build con GUI (Profiler no disponible headless). KnownIssue no bloqueante DoD — diseño documented, verificación visual pendiente. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L241 presupuestos RN Profiler)
 - [x] Documentación: plan-inicial completo con los 5 archivos [S]
 - [x] Documentación: plan-actual al día con implementación real (04-Codigo actualizado) [S]
 - [x] Documentación: firmas del agente en todos los archivos [S]

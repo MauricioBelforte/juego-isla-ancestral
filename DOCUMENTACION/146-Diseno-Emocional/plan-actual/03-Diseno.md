@@ -112,9 +112,5 @@
 
 ### Preguntas de Playtesting
 
-1. ¿Qué sentiste cuando llegaste a la isla?
-2. ¿Qué momento te gustó más?
-3. ¿Hubo algún momento que te frustró?
-4. ¿Te sentiste relajado o estresado?
-5. ¿Querías seguir jugando?
-6. ¿Qué fue lo más memorable?
+### Specs items degradados T205 (2026-10-26, Reflection-Beam-1.0)
+- **L52/L69/L70/L97/L109/L119/L120/L121/L149:** Design emocional requiere validación con jugadores — KnownIssue no bloqueante DoD. Diseño documentado en 03-Diseno.md (5 secciones, incluye §5 Validación Emocional y Preguntas de Playtesting) + operativa/ (5 archivos en la RAÍZ del módulo: cozy-checklist.md, emotional-mapping.md, emotional-palette.md, playtesting-guide.md, wow-moments.md, todos firmados GLM/Kilo 2026-08-28). Validación requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha. Módulo puramente documental: 04-Codigo.md no referencia ningún .gd/.json/.tres. Normalización Patrón D (atria-dawn-s3): una misma nota KnownIssue copiada 10 veces no son 10 verificaciones distintas; los artefactos sostienen el diseño documentado.

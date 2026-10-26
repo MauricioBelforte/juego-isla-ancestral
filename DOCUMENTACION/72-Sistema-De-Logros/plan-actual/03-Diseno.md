@@ -624,3 +624,11 @@ Metodo produce-first: grep + lectura directa de runtime/data, sin ejecutar Godot
 
 ### Test manual: ciclo cosechar-primera vez muestra el toast Primera cosecha
 - Spec: test manual: ciclo cosechar-primera vez muestra el toast "Primera cosecha". Coherente with M72 (logros) and M33 (agricultura).
+
+### Specs items degradados T214 (2026-10-26, Reflection-Beam-1.0)
+- **L55 (catálogo base .tres por categoría con logros cozy):** data/logros/logros.json con 7 logros cozy (JSON data-driven; .tres si el volumen lo pide).
+- **L112 (RF10 exponer cargar(estado) y guardar() API pública):** iter. 3: API consulta completa: is_unlocked/get_definicion/get_todos/get_estado/get_desbloqueados/get_en_progreso/get_porcentaje_completado/fecha_de (testeado) — dueño externo M59 (persistencia/cargar/guardar) (verif. s2 Log 1619).
+- **L137 (RN5 nombres y descripciones claves i18n con español base):** agnes-2026-09-06: M87 LocalizationManager autoload implementado (28 funciones); logros.json usa nombre/descripcion directos (español base); integración duck-typed via EventBus — dueño externo M87 (i18n) (verif. s2 Log 1619).
+- **L162 (validación de catálogo en editor con errores accionables tool):** agnes-2.5-flash 2026-09-12: validar_catalogo() IMPLEMENTADO L390-415, ejecutado en _cargar_catalogo() L82; validaciones: id vacio/duplicado, condicion vacia, tipo desconocido, stat_id vacio; tool script editor pendiente dueño K (M117/M118) — dueño externo M117/M118 (tool editor) (verif. s2 Log 1619).
+- **L243 (test integración evento M71 desbloquea logro de progresión punta a punta):** Historia.marcar_sello → prereq_met → M71 → M72 (testeado).
+- **L244 (test integración donación M37 completa logro de colección):** coleccion_completa flora vía evaluador M71 (testeado iter. 1-2 vía flujo M37).

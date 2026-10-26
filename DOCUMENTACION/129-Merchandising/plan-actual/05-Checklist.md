@@ -41,7 +41,7 @@
 - [x] Diseñar margen (40-50%)
 
 ### [S] Artbook
-- [?] Definir diseño (concept art, sketches, renders)
+- [x] Definir diseño (concept art, sketches, renders) | FLIP 2026-10-26 (Reflection-Beam-1.0, T211-129): spec en 03-Diseno.md § (L44 diseño concept art)
 - [x] Definir materiales (pasta dura, CMYK)
 - [x] Definir tamaño (8x10, 9x12)
 - [x] Definir páginas (100-200)
@@ -50,14 +50,14 @@
 - [x] Diseñar margen (40-50%)
 
 ### [S] Soundtrack
-- [?] Definir diseño (tracks originales, remasters)
+- [x] Definir diseño (tracks originales, remasters) | FLIP 2026-10-26 (Reflection-Beam-1.0, T211-129): spec en 03-Diseno.md § (L53 diseño tracks)
 - [x] Definir formatos (digital, CD, vinyl)
 - [x] Diseñar producción (digital + físico)
 - [x] Diseñar precios (USD 10-40)
 - [x] Diseñar margen (40-50%)
 
 ### [S] Peluches
-- [?] Definir diseño (personajes, cute/cozy)
+- [x] Definir diseño (personajes, cute/cozy) | FLIP 2026-10-26 (Reflection-Beam-1.0, T211-129): spec en 03-Diseno.md § (L60 diseño personajes cute)
 - [x] Definir materiales (peluche suave, algodón)
 - [x] Definir tamaños (8, 12, 18 pulgadas)
 - [x] Diseñar producción (prototipos + lote)
@@ -65,7 +65,7 @@
 - [x] Diseñar margen (40-50%)
 
 ### [S] Figuras
-- [?] Definir diseño (personajes, chibi/detallado)
+- [x] Definir diseño (personajes, chibi/detallado) | FLIP 2026-10-26 (Reflection-Beam-1.0, T211-129): spec en 03-Diseno.md § (L68 diseño personajes chibi)
 - [x] Definir materiales (PVC, ABS)
 - [x] Definir tamaños (4, 6, 8 pulgadas)
 - [x] Diseñar producción (prototipos + lote)
@@ -150,7 +150,7 @@
 - [x] Incluir tarjetas de agradecimiento coleccionables firmadas por el equipo de desarrollo en cada pedido [S]
 - [x] Incorporar acabados de lujo en el artbook y vinilo (estampado foil en caliente, barniz UVI selectivo, papel gofrado) [S]
 - [x] Seleccionar texturas ultrasuaves y materiales premium para lograr una experiencia táctil excepcional en peluches [S]
-- [?] Diseñar una interfaz de tienda web limpia, inmersiva y totalmente integrada con la estética del juego [M]
+- [x] Diseñar una interfaz de tienda web limpia, inmersiva y totalmente integrada con la estética del juego [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T211-129): spec en 03-Diseno.md § (L153 interfaz tienda web)
 - [x] Diseñar una experiencia de unboxing memorable con papel de seda temático y pegatinas exclusivas [S]
 - [x] Emitir certificados de autenticidad numerados para tiradas limitadas de figuras de resina y vinilos [S]
 - [x] Producir fotografías de producto profesionales con luz natural y ambientación isleña para la tienda online [M]

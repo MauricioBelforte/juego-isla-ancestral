@@ -77,5 +77,9 @@ Escritura siempre atómica: `tmp` + rename + `.bak` (patrón ya establecido en p
 ### Implementar integracion con M22 (Historia Principal)
 - Spec: implementar integracion con M22 (Historia Principal). KnownIssue: cuando M22 exponga la API (dueno externo, Log 701/744) — (bloqueo caducado: M22 expone API, verificado Step 5 msg 218 2026-10-12). Coherente with M66 (anti-softlock) and M22 (historia).
 
-### Implementar integracion con M26 (Templo Subterraneo)
-- Spec: implementar integracion con M26 (Templo Subterraneo). KnownIssue: cuando M26 exista (dueno externo, Log 701/744) — (bloqueo caducado: M26 implementado, 43 scripts en scripts/templos/, Step 5 msg 218 2026-10-12). Coherente with M66 (anti-softlock) and M26 (templo subterraneo).
+### Specs items degradados T217 (2026-10-26, Reflection-Beam-1.0)
+- **L38 (validación con NavigationServer3D de 2 caminos):** dueño externo M27/M64/M22/M26 (Log 701/744).
+- **L50 (watchdog anti-atasco reusado de M64 2s/6s):** dueño externo M27/M64/M22/M26 (Log 701/744).
+- **L66 (sincronización con persistencia de misiones M22):** KnownIssue: integración real cuando M22 exponga la API (dueño externo, Log 701/744) — bloqueo caducado: M22 expone API, verificado Step 5 msg 218 2026-10-12.
+- **L67 (pruebas de misiones imposibles injerto):** dueño externo M27/M64/M22/M26 (Log 701/744).
+- **L146 (integración con M64 watchdog NPC):** KnownIssue: cuando M64 exponga el watchdog (dueño externo, Log 701/744).

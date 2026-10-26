@@ -751,3 +751,49 @@ BACKLOG).
 - **Flips con cita:** L129, L132, L133 y L134 `[ ]` -> `[x]`. M23 = **83 [x] /
   20 [ ] / 2 [?] = 105** (prefijo de línea; Totales sincronizado). Ofrecidos
   a revertir.
+
+## Iter. 22 — L159 «Diseñar test E2E de 10 cadenas completas» (2026-10-25, DeepSeek-V4.1-Flash, Log 2196)
+
+- **Alcance:** L159 del 05-Checklist. Hasta ahora los bloques H-Y corrían 2-3
+  cadenas end-to-end por cluster (J=2, K=3, L=4, M=6, N=2, O=6, P=2, Q=2,
+  T=3, U=2, V=2, W=2, X=2); ninguna corrida cubría DIEZ cadenas completas.
+- **Entregado:** bloque Z `_test_e2e_diez()` en `scripts/historias/test_historias.gd`
+  (+119 checks) con driver GENÉRICO: la evidencia de cada paso se lee del DATO
+  declarado (`npc`/`lugar`/`ref`/`objeto`), no de una lista paralela escrita a
+  mano. Por cadena: visibilidad previa → iniciar → pasos en el orden declarado
+  → completada → no activa → consecuencias en M21 → sale de `cadenas_disponibles`
+  → no se re-inicia → capítulo declarado → puente de diario contra el catálogo
+  M55 leído en disco.
+- **Muestra (10, una por cluster):** `cadena-faro` (principal),
+  `cadena-biblioteca` (merge de ejemplos), `cadena-panadera` (vecinos),
+  `cadena-jardines` (lugares), `cadena-molinera` (familias),
+  `cadena-regalo-favorito` (amistad), `cadena-mapa-secreto` (secretas, oculta),
+  `cadena-ruta-del-mercader` (comerciantes), `cadena-templo-de-las-24-marcas`
+  (puzzles), `cadena-pesca-nocturna` (pesca/colección).
+- **Suite:** **869 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR (binario
+  real 4.7.2). Piso **869 MEDIDO en verde** (750 → 869). Total de pasos
+  ejercitados: **39** (9 cadenas de 4 pasos + la mergeada de 3).
+- **Guardián EN ROJO, dos modos, sobre el bloque Z:** (a) aborto por error de
+  RUNTIME con subscript dinámico (`sonda_z[3]`) → `SCRIPT ERROR` +
+  «[FAIL] el bloque Z NO se ejecuto» + 751 checks / 1 fallo / EXIT 1;
+  (b) aserción falsa sobre la excepción medida → 869 checks / 1 fallo / EXIT 1.
+  Archivo restaurado **byte-exacto** tras cada sonda (sha256 `6637c114…`, estado previo al ajuste del piso; el archivo FINAL con el piso 869 es `d2fbb906…`).
+- **Anti-falso-verde aplicado:** los 10 flags de consecuencia se **apagan antes**
+  de correr, así el check prueba que la cadena los aplicó y no que ya venían
+  puestos de un bloque previo (varios sí venían: `jardin_florecido`,
+  `biblioteca_iluminada`, `banco_plaza_reparado`).
+- **Hallazgo medido (dato de M23, NO corregido sin orden):**
+  `data/historias/cadenas_ejemplo.json` → `cadena-biblioteca` declara
+  `recompensa.diario = "capitulo-biblioteca"`, **fuera** del esquema
+  `mision_<cadena_id>` que la iter. 21 normalizó en `secundarias.json`
+  (79 valores). No es regresión de esa tanda: el archivo de ejemplos quedó
+  fuera de su alcance. Consecuencia práctica: la entrada tampoco existe en el
+  catálogo de M55 (`data/diario/diario_catalog.json`), así que degrada en
+  silencio igual que las otras 77. Queda **fijado con guarda** en el bloque Z
+  (el check falla si el dato cambia en silencio). Renombrarlo es decisión del
+  director.
+- **Flips:** L159 `[ ]` → `[x]` **PROPUESTO con cita** (no aplicado: los aplica
+  el director). Conteo del checklist **sin cambios**: 86 [x] / 17 [ ] / 2 [?] = 105.
+- **Regresiones:** suite M23 869/0/EXIT 0 x3; M33 farm 6 suites
+  29/20/42/27/39/35 = **192 checks / 0 fallos / EXIT 0** (verificación del
+  revert, orden 1 del msg 406).

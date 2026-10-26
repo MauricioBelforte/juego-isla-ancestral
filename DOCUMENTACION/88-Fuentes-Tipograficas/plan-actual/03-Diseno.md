@@ -372,9 +372,8 @@ func _on_high_contrast_toggle_toggled(pressed: bool):
 - Probar soporte de caracteres especiales (tildes, ñ, símbolos)
 - Probar localización (español, portugués, francés, alemán, italiano, ruso)
 - Probar ajustes de accesibilidad (tamaño, contraste)
-- Probar rendimiento (tiempo de carga de fuentes)
-
-**Pruebas automáticas:**
-- Tests de carga de fuentes
-- Tests de renderizado de caracteres especiales
-- Tests de performance (tiempo de carga)
+### Specs items degradados T200 (2026-10-26, Reflection-Beam-1.0)
+- **L215 (Nunito-Light.ttf):** Nunito-Medium.ttf NO existe en disco (solo Regular/Bold/Variable/FredokaOne); dueño humano: diseñador que entrega la fuente.
+- **L216 (FredokaOne-Regular.ttf):** Nunito-Light.ttf NO existe en disco; dueño humano: diseñador que entrega la fuente.
+- **L287 (integración M90 configuración gráfica):** NO existe en código — FontSettings.
+- **L290 (Nunito-Variable.ttf 270 KB existe en disco y lo usa M87):** nota de estado.

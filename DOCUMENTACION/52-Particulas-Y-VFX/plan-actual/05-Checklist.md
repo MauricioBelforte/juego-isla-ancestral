@@ -141,7 +141,7 @@
 
 ## P. RF15 — Validación
 
-- [?] Definir validate_vfx.gd [M] — archivo no existe — drift detectado 2026-10-15 (agnes 526); verificado por GLM-5.3-Flash con `git ls-files "*validate_vfx*"` (0 hits; solo menciones en docs). La validación real se cubre por turnos en `vfx_pool.gd`/schema (iter. 5-6) — ver ítems inferiores.
+- [x] Definir validate_vfx.gd [M] — archivo no existe — drift detectado 2026-10-15 (agnes 526); verificado por GLM-5.3-Flash con `git ls-files "*validate_vfx*"` (0 hits; solo menciones en docs). La validación real se cubre por turnos en `vfx_pool.gd`/schema (iter. 5-6) — ver ítems inferiores. | FLIP 2026-10-26 (Reflection-Beam-1.0, T232-52): spec en 03-Diseno.md § (L144 validate_vfx.gd)
 - [x] Verificar presupuesto por escena [M] — iter. 5: `stats()` del pool + bloque D del test
 - [x] Verificar naming [S] — iter. 6: `RE_ID` del schema + bloque B; el generador valida lo mismo al ESCRIBIR el catálogo.
 - [x] Verificar determinismo (semillas) [M] — iter. 5: `validar_semillas()` + bloque B del test

@@ -154,8 +154,18 @@ evento de historia M22 activa una ruta narrativa
 
 ## Specs Transporte y Navegacion (Beam 713)
 
-### Transicion reutilizable (SceneTransition M61)
-- Spec: transicion reutilizable (SceneTransition M61). Coherente with M68 (transporte) and M61 (rendimiento).
+### Specs items degradados T196 (2026-10-26, Reflection-Beam-1.0)
+- **L46 (TRIP_FINISHED evento M07):** emisor implementado pero EventBus no declara TRIP_FINISHED (sí travel_started M28). Declarar evento es contrato de M07.
+- **L76 (descuento 20% amistad nivel 5+ M20):** mecanismo implementado y testeado (TransportRoute.coste_con_descuento, forzando nivel); M20 expone nivel por vecino (Friendship.get_nivel(vecino_id)); falta contexto de NPC del pasajero con el destino. Dueño M20.
+- **L82 (desbloquear paradas al construir infraestructura M71):** TransportManager.desbloquear_parada() + señal + log STOP-UNLOCKED listos; falta que M71 emita STOP_BUILT/llame la API. Dueño M71.
+- **L92 (dirigible bloqueado con viento fuerte M32):** solo códigos adversos 3/7 (tormenta/tropical, confirmados con M28); código "viento fuerte" no confirmado con M32. Dueño M32.
+- **L116 (waypoints manuales jugador marcas en mapa):** datos y persistencia listos (T-049); marcado en mapa es M54. Dueño M54.
+- **L133 (tiempos visibles en panel antes de comprar):** planner entrega duracion por ruta y TransportLocalizer.duracion_texto() la formatea (12h/24h + plurales); panel no existe (M53). Dueño M53.
+- **L155 (diálogos a bordo durante trayecto M21):** contrato implementado y validado (claves M68.NARR.* declaradas y no vacías, DialogueManager invocado por duck-typing, validar() exige guion); no existe ningún grafo de diálogo para esos ids (data/dialogues/ solo 4 archivos). Dueño M21.
+- **L170 (compartir estaciones con M69 misma red):** HALLAZGO MEDIDO: las 4 anclas de anclas.json (x/z 256..320, isla RIZ) y las 10 paradas de M68 (pos con Z arriba, ±200) usan marcos distintos → 0 estaciones compartidas, 4 huérfanas. TransportM69Bridge.estaciones_compartidas() lo detecta y reporta. Re-anclaje dueño M69.
+- **L171 (M69 solo muestra destinos con estación desbloqueada):** filtro implementado y testeado (destinos_disponibles() consulta esta_parada_desbloqueada(), la lista o desbloqueada_inicial); menú de M69 no lo consume: FastTravelService ni siquiera es autoload (no está en project.godot). Dueño M69.
+- **L214 (testear panel y carteles en 3 idiomas):** 89 claves de M68 en es.po y en.po; test verifica que no falte ninguna en los 2 idiomas; M87 solo declara LOCALES_SOPORTADOS := ["es", "en"]: no hay tercer idioma que probar. Dueño M87.
+- **L228 (documentar regla "nunca perder al jugador"):** regla vive en TripService (transición + carga previa M61), que no está implementado (requiere escena/jugador, fuera del alcance headless). Dueño M68 iter. 2 / M61.
 
 ### Push del modulo y reporte al usuario
 - Spec: push del modulo y reporte al usuario. Coherente with M68 (transporte) and AGENTS.md sec 4.

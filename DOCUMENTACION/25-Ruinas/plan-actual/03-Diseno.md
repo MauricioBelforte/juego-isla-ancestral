@@ -434,7 +434,22 @@ func _obtener_id() -> String:
 ## Presupuestos
 
 - **Piezas estáticas**: LOD 0-2 vía M63 (culling por región); sin simulación.
-- **Editor**: validación de kit (pivotes, snaps, traslapes) en consola; error ⇒ no build.
+- **Editor**: validación de kit (pivotes, snaps, traslapes) en consola; error → no build.
 - **Runtime**: solo transiciones de estado y eventos; cero Update por ruina (estática).
 - **Memoria**: cada ruina ≤ 50 piezas × 3 LODs = 150 meshes máximo. Con 10 ruinas visibles = 1500 meshes (dentro del budget de M61).
 - **Draw calls**: batching por material (M47); cada ruina = 1-3 draw calls máximo.
+
+### Specs items degradados T193 (2026-10-26, Reflection-Beam-1.0)
+- **L12-L15 (validación pivotes/snaps/traslapes/fallo build):** grep 0 hits → deuda implementación (validación de kit en Editor).
+- **L113 (detección descubrimiento 15m):** grep 0 hits → deuda.
+- **L114 (hint de horizonte al descubrir M63):** grep 0 hits → deuda.
+- **L115 (transición a Explorada al 50% puzzles):** grep 0 hits → deuda.
+- **L116 (transición a Completada con relicto guardado):** grep 0 hits → deuda.
+- **L117 (eventos de transición diario/mapa M58/museo M36):** grep 0 hits → deuda.
+- **L118 (guardado atómico en cada transición):** grep 0 hits → deuda.
+- **L119 (persistencia del estado por ruina):** grep 0 hits → deuda.
+- **L125 (variantes de paleta sin geometría nueva):** grep 0 hits → deuda.
+- **L127 (variante de puzzle por seed de partida):** grep 0 hits → deuda.
+- **L143 (LOD 0-2 vía M63 culling por región):** grep 0 hits → deuda.
+- **L144 (sin Update por ruina estática):** grep 0 hits → deuda.
+- **L145 (sin costos de simulación en ruinas):** grep 0 hits → deuda.

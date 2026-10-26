@@ -63,3 +63,6 @@ M91 (Config Audio) ──► Volumen y velocidad de animación
 - Test de accesibilidad: tamaño de texto ajustable y modo contraste alternan
 - Test de tiempo: duración máxima 5 minutos con animación continua
 - Test de copyright: año actual y leyenda displayados correctamente
+
+### Specs items degradados T204 (2026-10-26, Reflection-Beam-1.0)
+- **L97 (balance con M41/M42/M43 según estado):** dueño M41/M42/M43; sin archivos de audio en el proyecto (0 .ogg/.wav/.opus/.mp3); flow_creditos solo define capas, no pistas. Los motores M41/M42/M43/M91 existen y pasan tests (M41 14/0, M43 15/0), pero los conteos son resultados de runtime no verificables sin ejecutar Godot.

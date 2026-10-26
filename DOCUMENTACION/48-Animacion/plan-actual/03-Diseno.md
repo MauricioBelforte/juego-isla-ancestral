@@ -586,5 +586,6 @@ a3 de L63), NO como clips de production nuevos (sin exceder presupuesto).
 ### Mundo determinista sin RNG visible
 - Spec: mundo determinista sin RNG visible. Coherente with M48 (animacion) and M08 (terreno).
 
-### UI respeta M58 y corre a 60 fps
-- Spec: UI respeta M58 y corre a 60 fps. Coherente with M48 (animacion) and M58 (accesibilidad).
+### Specs items degradados T240 (2026-10-26, Reflection-Beam-1.0)
+- **L166 (definir script validate_animation.gd):** spec definida.
+- **L177 (verificar coste por actor en animation_budget.json):** FORMULA (Beam 380): 03-Diseno.md "Presupuestos de animacion" ### animation_budget.json por actor/animacion. Flipado tras verificación de artefacto en disco. DEGRADADO por el director (23oct, agnes 058): animation_budget.json NO existe en data/; 'Verificar' sin artefacto = spec-placeholder. Vuelve a [x] cuando el JSON exista o cuando la spec genere el archivo.

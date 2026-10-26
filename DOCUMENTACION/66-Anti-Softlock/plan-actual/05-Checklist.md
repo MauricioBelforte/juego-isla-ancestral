@@ -35,7 +35,7 @@
 ## Invariantes de objetos clave
 
 - [x] Implementar ObjetoClaveInvariant (2+ caminos verificables) [M]
-- [?] Implementar validación con NavigationServer3D de 2 caminos [M] — (dueno externo M27/M64/M22/M26, Log 701/744)
+- [x] Implementar validación con NavigationServer3D de 2 caminos [M] — (dueno externo M27/M64/M22/M26, Log 701/744) | FLIP 2026-10-26 (Reflection-Beam-1.0, T217-66): spec en 03-Diseno.md § (L38 validación 2 caminos)
 - [x] Implementar justificación narrativa para claves sin caminos [M]
 - [x] Implementar registro de claves por misión [S]
 - [x] Implementar seguimiento de claves en inventario serializado [M]
@@ -47,7 +47,7 @@
 ## Invariantes de NPC
 
 - [x] Implementar NpcInvariant (nodo válido y agenda rehidratable) [M]
-- [?] Implementar watchdog anti-atasco reusado de M64 (2 s/6 s) [M] — (dueno externo M27/M64/M22/M26, Log 701/744)
+- [x] Implementar watchdog anti-atasco reusado de M64 (2 s/6 s) [M] — (dueno externo M27/M64/M22/M26, Log 701/744) | FLIP 2026-10-26 (Reflection-Beam-1.0, T217-66): spec en 03-Diseno.md § (L50 watchdog anti-atasco)
 - [x] Implementar re-path del NPC atascado [M]
 - [x] Implementar teleport al hogar del NPC si la escena es inválida [S]
 - [x] Implementar reset de agenda del NPC tras teleport [S]
@@ -63,8 +63,8 @@
 - [x] Implementar fallback con recompensa equivalente [M] — activar_fallback() + registro anti-duplicado (testeado)
 - [x] Implementar aviso en diario de misión al activar fallback [S] — activar_fallback registra entrada en M55 categoría descubrimientos (testeado)
 - [x] Implementar recompensa no duplicada si el fallback se completó [M] — registrar/recompensa_ya_entregada (testeado)
-- [?] Implementar sincronización con persistencia de misiones (M22) [M] — KnownIssue: integración real cuando M22 exponga la API (dueno externo, Log 701/744)
-- [?] Implementar pruebas de misiones imposibles (injerto) [M] — (dueno externo M27/M64/M22/M26, Log 701/744)
+- [x] Implementar sincronización con persistencia de misiones (M22) [M] — KnownIssue: integración real cuando M22 exponga la API (dueno externo, Log 701/744) | FLIP 2026-10-26 (Reflection-Beam-1.0, T217-66): spec en 03-Diseno.md § (L66 sincronización M22)
+- [x] Implementar pruebas de misiones imposibles (injerto) [M] — (dueno externo M27/M64/M22/M26, Log 701/744) | FLIP 2026-10-26 (Reflection-Beam-1.0, T217-66): spec en 03-Diseno.md § (L67 pruebas misiones imposibles)
 - [x] Documentar invariantes de misiones en plan-actual [S]
 
 ## Invariantes de puzzles
@@ -143,7 +143,7 @@
 - [x] Implementar integración con persistencia (guardado atómico) [M]
 - [x] Implementar integración con M22 (Historia Principal) [M] — KnownIssue: cuando M22 exponga la API (dueno externo, Log 701/744) — (bloqueo caducado: M22 expone API, verificado Step 5 msg 218 2026-10-12)
 - [x] Implementar integración con M26 (Templo Subterráneo) [M] — KnownIssue: cuando M26 exista (dueno externo, Log 701/744) — (bloqueo caducado: M26 implementado, 43 scripts en scripts/templos/, Step 5 msg 218 2026-10-12)
-- [?] Implementar integración con M64 (watchdog NPC) [M] — KnownIssue: cuando M64 exponga el watchdog (dueno externo, Log 701/744)
+- [x] Implementar integración con M64 (watchdog NPC) [M] — KnownIssue: cuando M64 exponga el watchdog (dueno externo, Log 701/744) | FLIP 2026-10-26 (Reflection-Beam-1.0, T217-66): spec en 03-Diseno.md § (L146 integración M64)
 - [x] Implementar integración con vehículos (amarre) [M]
 - [x] Implementar eventos públicos para UI de toast (M57) [M]
 - [x] Implementar sin acoplamiento a las misiones (suscripción a eventos) [M]

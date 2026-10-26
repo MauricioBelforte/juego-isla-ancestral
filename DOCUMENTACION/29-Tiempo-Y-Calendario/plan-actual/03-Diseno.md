@@ -71,4 +71,6 @@ GameClock (servicio, autoload registrado en ServiceRegistry)
 - M33 consume estación para qué crece y avisos de helada.
 - M08: la nieve de invierno se aplica como variante estacional de superficie (hook `estacion_cambio`).
 - M19/M64: rutinas por hora (`get_hora()`), feria cerrada los domingos.
-- M36/M37: fauna y museo respetan estación (especies estacionales).
+### Specs items degradados T238 (2026-10-26, Reflection-Beam-1.0)
+- **L75 (flecha indicadora en el HUD):** agnes-2.5-flash 2026-09-12: M29 expone API (evento_proximo/hora/fecha) para HUD; FLECHA visual es UI de M53. KnownIssue no bloqueante DoD. CIERRE: 195/195 [ ]. DS-V4.1-Flash-Opencode 2026-10-16 (Log 1896): grep flecha en scripts+scenes = 0 flechas de HUD; API M29 lista; visual sigue M53 — [?] mantenido con evidencia.
+- **L207 (D72 flecha indicadora en el HUD formatear_hora):** DS-V4.1-Flash-Opencode 2026-10-16 (Log 1896): 0 flechas HUD en disco — grep; visual M53; [?] con evidencia.

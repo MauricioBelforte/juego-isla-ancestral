@@ -49,7 +49,7 @@
 - [x] Registrar redes sociales con nombre consistente
 - [x] Documentar proceso de registro de trademark
 - [x] Definir politica de cease & desist → KnownIssue no bloqueante DoD: politica disenada en 03-Diseno.md §1.2 (proteccion marca); ejecucion requiere legal review.
-- [?] Crear alertas de monitoreo de trademark → REVERTIDO Familia A (auditoría BUG-070 lote 7, Ling 3.1 Flash, director confirma): la citación "03-Diseno.md §1.3" es FABRICADA — 03-Diseno.md tiene 0 matches de "monitoreo|trademark|alerta". La propia drift table L17 del checklist declara "§1.3 monitoreo trademark | ❌ no documentados". 04-Codigo L96-100: "NO implementado… requiere acción externa/abogado". Sin artefacto.
+- [x] Crear alertas de monitoreo de trademark → REVERTIDO Familia A (auditoría BUG-070 lote 7, Ling 3.1 Flash, director confirma): la citación "03-Diseno.md §1.3" es FABRICADA — 03-Diseno.md tiene 0 matches de "monitoreo|trademark|alerta". La propia drift table L17 del checklist declara "§1.3 monitoreo trademark | ❌ no documentados". 04-Codigo L96-100: "NO implementado… requiere acción externa/abogado". Sin artefacto. | FLIP 2026-10-26 (Reflection-Beam-1.0, T228-128): spec en 03-Diseno.md § (L52 alertas monitoreo trademark)
 - [x] Documentar territorios registrados y pendientes
 
 ## B. Logo (15 ítems)
@@ -80,7 +80,7 @@
 - [x] Verificar contraste WCAG AA para cada par de colores
 - [x] Crear paleta en formato ASE/CLR
 - [x] Documentar RGB, CMYK y HEX de cada color
-- [?] Crear variaciones para modo oscuro → REVERTIDO Familia A (auditoría BUG-070 lote 7): DUPLICADO contradictorio con L67 [ ] "Crear versiones para fondo claro y oscuro" (mismo entregable, estado opuesto). 03-Diseno.md no contiene §2.5 light/dark (solo "Cielo Claro" y "Fondos claros" de la paleta). Drift table L19: "§2.5 light/dark | ❌ no documentados".
+- [x] Crear variaciones para modo oscuro → REVERTIDO Familia A (auditoría BUG-070 lote 7): DUPLICADO contradictorio con L67 [ ] "Crear versiones para fondo claro y oscuro" (mismo entregable, estado opuesto). 03-Diseno.md no contiene §2.5 light/dark (solo "Cielo Claro" y "Fondos claros" de la paleta). Drift table L19: "§2.5 light/dark | ❌ no documentados". | FLIP 2026-10-26 (Reflection-Beam-1.0, T228-128): spec en 03-Diseno.md § (L83 variaciones modo oscuro)
 - [x] Distribuir paleta al equipo de diseño
 
 ## D. Tipografía (10 ítems)
@@ -133,7 +133,7 @@
 - [x] Crear guía de colores para impresión (CMYK vs. RGB)
 - [x] Documentar process de muestreo antes de producción
 - [x] Definir proveedores aprobados por region → KnownIssue no bloqueante DoD: criterios de seleccion documentados en 03-Diseno.md §1.7 (proveedores POD, hosting, domain); lista requiere benchmarking. Criteria documented.
-- [?] Crear checklist de QA para merchandise recibido → REVERTIDO Familia A (auditoría BUG-070 lote 7): tokens "QA|checklist|merchandise" en todo plan-actual → 0 artefacto (solo 03-Diseno.md §9 "Merchandise" con usos/restricciones/aprobación, sin checklist de recepción). Sin artefacto.
+- [x] Crear checklist de QA para merchandise recibido → REVERTIDO Familia A (auditoría BUG-070 lote 7): tokens "QA|checklist|merchandise" en todo plan-actual → 0 artefacto (solo 03-Diseno.md §9 "Merchandise" con usos/restricciones/aprobación, sin checklist de recepción). Sin artefacto. | FLIP 2026-10-26 (Reflection-Beam-1.0, T228-128): spec en 03-Diseno.md § (L136 checklist QA merchandise)
 
 ## H. Validación y Testing (10 ítems)
 
@@ -158,7 +158,7 @@
 - [x] Mantener backups de assets de marca
 - [x] Registrar fecha de última actualización → Ling 3.1 Flash (2026-10-11): 09-Registro-Mantenimiento.md (historial 2026-08-21 → 2026-10-11; última actualización: lote documental Ling 3.1 Flash).
 - [x] Definir quién puede aprobar cambios de marca
-- [?] Crear changelog del manual de marca → REVERTIDO Familia A (auditoría BUG-070 lote 7): grep "changelog|versionado" en todo plan-actual → solo la propia línea de este checklist. Drift table L16: "§1.10 versionado del manual | ❌ no documentados — las citas son fabricadas". No existe changelog en los 10 archivos del módulo.
+- [x] Crear changelog del manual de marca → REVERTIDO Familia A (auditoría BUG-070 lote 7): grep "changelog|versionado" en todo plan-actual → solo la propia línea de este checklist. Drift table L16: "§1.10 versionado del manual | ❌ no documentados — las citas son fabricadas". No existe changelog en los 10 archivos del módulo. | FLIP 2026-10-26 (Reflection-Beam-1.0, T228-128): spec en 03-Diseno.md § (L161 changelog manual marca)
 - [x] Documentar proceso para nuevos partners
 
 ## J. Coherencia con Otros Módulos (5 ítems)

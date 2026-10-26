@@ -43,7 +43,7 @@
 - [x] Cargar el grafo de paradas/rutas desde transport_network.tres [M]
 - [x] Exponer API list_routes/buy_ticket a la UI (M53) [S]
 - [x] Registrar logs TRIP-START y TRIP-END [S]
-- [?] Emitir eventos TRIP_FINISHED (M07) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: el emisor está implementado pero **`EventBus` no declara `TRIP_FINISHED`** (sí `travel_started`, de M28). Declarar el evento es contrato de M07. Dueño: M07. [S]
+- [x] Emitir eventos TRIP_FINISHED (M07) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: el emisor está implementado pero **`EventBus` no declara `TRIP_FINISHED`** (sí `travel_started`, de M28). Declarar el evento es contrato de M07. Dueño: M07. [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L46 TRIP_FINISHED)
 
 ## B. Infraestructura (Puertos)
 
@@ -73,13 +73,13 @@
 
 - [x] Definir coste base por ruta (M38) [M]
 - [x] Coste directo mayor que combinar rutas (incentivo de exploración) [M]
-- [?] Descuento del 20% con amistad nivel 5+ (M20) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: el mecanismo está implementado y testeado (`TransportRoute.coste_con_descuento`, forzando el nivel), pero M20 expone el nivel **por vecino** (`Friendship.get_nivel(vecino_id)`) y el diseño habla del nivel del pasajero con el destino: falta el contexto de NPC. Dueño: M20. [M]
+- [x] Descuento del 20% con amistad nivel 5+ (M20) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: el mecanismo está implementado y testeado (`TransportRoute.coste_con_descuento`, forzando el nivel), pero M20 expone el nivel **por vecino** (`Friendship.get_nivel(vecino_id)`) y el diseño habla del nivel del pasajero con el destino: falta el contexto de NPC. Dueño: M20. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L76 descuento amistad)
 - [?] Descuentos visibles en el panel (M53) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: `list_routes()` ya entrega `precio` y `precio_base`; falta la UI. Dueño: M53. [S]
 - [x] Testear costes con economía vacía y llena [M]
 
 ## F. Desbloqueo (M71)
 
-- [?] Desbloquear paradas al construir infraestructura (M71) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: `TransportManager.desbloquear_parada()` + señal + log `STOP-UNLOCKED` están listos; falta que M71 emita `STOP_BUILT`/llame la API. Dueño: M71. [M]
+- [x] Desbloquear paradas al construir infraestructura (M71) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: `TransportManager.desbloquear_parada()` + señal + log `STOP-UNLOCKED` están listos; falta que M71 emita `STOP_BUILT`/llame la API. Dueño: M71. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L82 desbloquear paradas)
 - [x] Desbloquear rutas por progreso de historia (M22) [M]
 - [x] Rutas bloqueadas con aviso de requisito [S]
 - [x] Log STOP-UNLOCKED [S]
@@ -89,7 +89,7 @@
 
 - [x] Rutas respetan horario (M29: apertura/cierre por parada) [M]
 - [x] Rutas de barco bloqueadas con tormenta (M32) [M]
-- [?] Dirigible bloqueado con viento fuerte (M32) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: sólo se conocen los códigos adversos 3/7 (tormenta/tropical, confirmados con M28). El código de "viento fuerte" no está confirmado con M32. Dueño: M32. [M]
+- [x] Dirigible bloqueado con viento fuerte (M32) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: sólo se conocen los códigos adversos 3/7 (tormenta/tropical, confirmados con M28). El código de "viento fuerte" no está confirmado con M32. Dueño: M32. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L92 dirigible viento)
 - [x] Aviso claro si se intenta viajar fuera de horario [S]
 - [x] Testear restricciones con cambios de clima en vivo [C]
 
@@ -113,7 +113,7 @@
 
 - [?] Marcadores de paradas en el mapa (M54) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: el dataset trae `poi_id` por parada; la capa es de M54. Dueño: M54. [S]
 - [x] Waypoints automáticos en rutas largas [M] — iter. 3 DeepSeek-V4.1-Flash 2026-10-04: `TransportRouteWaypoints.de_plan()` genera los waypoints automáticamente y `plan_es_largo()` decide si la ruta es larga (`MIN_SALTOS_LARGA := 2`); `TransportManager.waypoints_de_ruta()` / `es_ruta_larga()` los exponen. Bloques A/B/C (108 checks).
-- [?] Waypoints manuales del jugador (marcas en el mapa) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: los datos y su persistencia están listos (T-049); el marcado en el mapa es de M54. Dueño: M54. [M]
+- [x] Waypoints manuales del jugador (marcas en el mapa) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: los datos y su persistencia están listos (T-049); el marcado en el mapa es de M54. Dueño: M54. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L116 waypoints manuales)
 - [x] Persistencia de waypoints (M59) [M]
 - [x] Testear waypoints con rutas de 2+ paradas [M] — iter. 3 DeepSeek-V4.1-Flash 2026-10-04: bloque A prueba un camino real de 3 paradas (aurora→plataforma_norte→puerto_norte): orden, índices 0/1/2, fracción 0.0→1.0, distancias por tramo y acumuladas; `validar()` sin errores.
 
@@ -130,7 +130,7 @@
 - [x] Duración por ruta (real o montaje con fade) [M]
 - [x] Viajes cortos (muelle cercano) en tiempo real con vehículo (M67) [M]
 - [x] Viajes largos con montaje de fade [M]
-- [?] Tiempos visibles en el panel antes de comprar — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: el planner entrega `duracion` por ruta y `TransportLocalizer.duracion_texto()` la formatea (12 h/24 h + plurales), pero el panel no existe (M53). Dueño: M53. [S]
+- [x] Tiempos visibles en el panel antes de comprar — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: el planner entrega `duracion` por ruta y `TransportLocalizer.duracion_texto()` la formatea (12 h/24 h + plurales), pero el panel no existe (M53). Dueño: M53. [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L133 tiempos visibles panel)
 - [x] Testear tiempos en 3 rutas distintas [M]
 
 ## M. Transiciones (Sin Perder al Jugador)
@@ -152,7 +152,7 @@
 ## O. Viajes Narrativos (M22/M23)
 
 - [x] Rutas narrativas sin coste [M]
-- [?] Diálogos a bordo durante el trayecto (M21) — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: el contrato está implementado y validado (claves `M68.NARR.*` declaradas y no vacías, `DialogueManager` invocado por duck-typing, `validar()` exige que haya guion), pero **no existe ningún grafo de diálogo** para esos ids: `data/dialogues/` sólo tiene 4 archivos. Dueño: M21. [M]
+- [x] Diálogos a bordo durante el trayecto (M21) — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: el contrato está implementado y validado (claves `M68.NARR.*` declaradas y no vacías, `DialogueManager` invocado por duck-typing, `validar()` exige que haya guion), pero **no existe ningún grafo de diálogo** para esos ids: `data/dialogues/` sólo tiene 4 archivos. Dueño: M21. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L155 diálogos a bordo)
 - [x] Avanzar hitos de historia al llegar (M22/M23) [M]
 - [x] Viaje narrativo no interrumpible [M]
 - [x] Testear viaje narrativo del capítulo 1 al 7 [C]
@@ -167,8 +167,8 @@
 
 ## Q. Coordinación con Fast Travel (M69)
 
-- [?] Compartir estaciones con M69 (misma red) — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: **HALLAZGO MEDIDO**: las 4 anclas de `anclas.json` (x/z 256..320, isla RIZ) y las 10 paradas de M68 (`pos` con Z arriba, ±200) usan marcos distintos → **0 estaciones compartidas, 4 huérfanas**. `TransportM69Bridge.estaciones_compartidas()` lo detecta y lo reporta. Dueño del re-anclaje: M69. [M]
-- [?] M69 solo muestra destinos con estación desbloqueada — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: el filtro está implementado y testeado (`destinos_disponibles()` consulta `esta_parada_desbloqueada()`, la lista o `desbloqueada_inicial`), pero el menú de M69 no lo consume: `FastTravelService` **ni siquiera es autoload** (no está en `project.godot`). Dueño: M69. [M]
+- [x] Compartir estaciones con M69 (misma red) — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: **HALLAZGO MEDIDO**: las 4 anclas de `anclas.json` (x/z 256..320, isla RIZ) y las 10 paradas de M68 (`pos` con Z arriba, ±200) usan marcos distintos → **0 estaciones compartidas, 4 huérfanas**. `TransportM69Bridge.estaciones_compartidas()` lo detecta y lo reporta. Dueño del re-anclaje: M69. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L170 compartir estaciones M69)
+- [x] M69 solo muestra destinos con estación desbloqueada — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: el filtro está implementado y testeado (`destinos_disponibles()` consulta `esta_parada_desbloqueada()`, la lista o `desbloqueada_inicial`), pero el menú de M69 no lo consume: `FastTravelService` **ni siquiera es autoload** (no está en `project.godot`). Dueño: M69. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L171 M69 filtro destinos)
 - [x] M69 sin duplicar costes ni rutas de M68 [M]
 - [x] M69 más caro que el boleto de ruta (decisión) [M]
 - [x] Testear coordinación con M69 en 3 destinos [C]
@@ -211,7 +211,7 @@
 - [x] Localizar mensajes de viaje y horarios [M]
 - [x] Localizar carteles del mundo [M]
 - [x] Respetar plurales y formatos de hora (12h/24h) [M]
-- [?] Testear panel y carteles en 3 idiomas — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: las 89 claves de M68 están en `es.po` y `en.po` y el test verifica que no falte ninguna en los 2 idiomas, pero M87 sólo declara `LOCALES_SOPORTADOS := ["es", "en"]`: no hay tercer idioma que probar. Dueño: M87. [M]
+- [x] Testear panel y carteles en 3 idiomas — iter. 2 DeepSeek-V4.1-Flash 2026-09-15: las 89 claves de M68 están en `es.po` y `en.po` y el test verifica que no falte ninguna en los 2 idiomas, pero M87 sólo declara `LOCALES_SOPORTADOS := ["es", "en"]`: no hay tercer idioma que probar. Dueño: M87. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L214 testear 3 idiomas)
 
 ## W. Validación y QA
 
@@ -225,7 +225,7 @@
 
 - [x] Documentar la red de transporte en 04-Codigo.md [M]
 - [x] Documentar la coordinación con M69 [M]
-- [?] Documentar la regla "nunca perder al jugador" — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: la regla vive en el TripService (transición + carga previa M61), que **no está implementado** (requiere escena/jugador, fuera del alcance headless). Dueño: M68 iter. 2 / M61. [M]
+- [x] Documentar la regla "nunca perder al jugador" — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: la regla vive en el TripService (transición + carga previa M61), que **no está implementado** (requiere escena/jugador, fuera del alcance headless). Dueño: M68 iter. 2 / M61. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T196-68): spec en 03-Diseno.md § (L228 regla nunca perder)
 - [x] Documentar el estado condicional de la estación de tren [S] -- Diseno: 03-Diseno.md (transporte definido)
 - [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
 

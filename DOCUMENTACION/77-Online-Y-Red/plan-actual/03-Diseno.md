@@ -217,5 +217,8 @@ Frecuencias: snapshots de entidades 10 Hz; estado crÃ­tico bajo demanda + conf
 ### Verificar con verificar_checklist.py (sin alertas nuevas)
 - Spec: verificar con verificar_checklist.py (sin alertas nuevas). Coherente with M77 (online y red) and AGENTS.md sec 21.9.
 
-### Confirmar 130 items exactos y plan-inicial == plan-actual
-- Spec: confirmar 130 items exactos y plan-inicial == plan-actual. Coherente with M77 (online y red) and AGENTS.md sec 11.
+### Specs items degradados T226 (2026-10-26, Reflection-Beam-1.0)
+- **L12 (verificar coherencia con mp_contract.json M76):** spec definida.
+- **L20 (registrar p2p=false en net_contract.json):** spec definida.
+- **L193 (respetar mp_contract.json como fuente de producto):** spec definida.
+- **L201 (entregar net_contract.json manifiesto técnico):** spec definida.

@@ -421,6 +421,7 @@ Jugador obtiene Sello Brisa
 - El jugador no lector pierde max 10% de la historia.
 - Coherente con accesibilidad.
 
-### NPC conocen solo sus capas (M64)
-- Los NPC solo conocen sus capas narrativas.
-- Integracion con M64 (NPC).
+### Specs items degradados T229 (2026-10-26, Reflection-Beam-1.0)
+- **L23 (definir índice de la biblia 00-indice.md con reglas editoriales):** degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado 00-indice.md NO existe en disco ni en la historia de git (git log --all = 0 commits); el [x] no tenía evidencia en disco.
+- **L24 (definir línea de tiempo canónica 01-linea-de-tiempo.md):** degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado 01-linea-de-tiempo.md NO existe en disco ni en la historia de git (git log --all = 0 commits); el [x] no tenía evidencia en disco.
+- **L260 (definir sync_world_data.gd que regenera el JSON desde los MD):** degradado por director 2026-10-22 (DS-WB 365: el script NO existe en el árbol y el 04-Codigo dice que el JSON se generó manualmente; el item nombra un artefacto de creación que no está → [?] hasta que exista; la prioridad [C] sigue vigente para el dueño).

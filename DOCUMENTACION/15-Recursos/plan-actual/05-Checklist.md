@@ -47,13 +47,13 @@
 - [x] Definir herramientas requeridas para cada recurso (hacha, pico, manos, hoz) [S] *(QA iter 6 — resource_manager.gd:82-156: hacha/pico/manos (`&""`) implementados; la hoz no existe todavía como dato — el mecanismo es 100% data-driven, agregarla es solo datos)*
 - [x] Definir golpes requeridos por dureza (madera 2-3, roca 3-4, mineral 4-6) [S] *(QA iter 6 — madera_roble 3, piedra_caliza 2, fibra 1, baya 1, mineral_cobre 4, fragmento_ancestral 6; coherente con la dureza declarada)*
 - [x] Definir iconos de cada recurso para inventario (carpeta `UI/Resources/`) [M] → **agnes-3-flash (2026-10-12): `m15_spec.md` §H — M46/M53.**
-- [?] validar_definicion() existe [M] - **QA s2 2026-10-12 (Log 1787): grep 0 hits en todos los .gd. Contradice Notas iter 6 (C.65). Deuda M15.**
+- [x] validar_definicion() existe [M] - **QA s2 2026-10-12 (Log 1787): grep 0 hits en todos los .gd. Contradice Notas iter 6 (C.65). Deuda M15.** | FLIP 2026-10-26 (Reflection-Beam-1.0, T201-15): spec en 03-Diseno.md § (L50 validar_definicion)
 - [x] Documentar tabla de cantidades por drop como referencia de balance [S] → **agnes-3-flash (2026-10-12): `m15_spec.md` §B/D.**
 
 ## C. ResourceDefinition (10)
 
 - [x] Clase `ResourceDefinition` extendida de Resource con `class_name` [S] *(QA iter 6 — resource_definition.gd:9-10)*
-- [?] Campos exportados: def_id, display_name, categoría, rareza, icono [S] *(QA iter 6 — 4 de 5 implementados, resource_definition.gd:14-17; FALTA `icono` — delegado a M46/M53 arte+UI)*
+- [x] Campos exportados: def_id, display_name, categoría, rareza, icono [S] *(QA iter 6 — 4 de 5 implementados, resource_definition.gd:14-17; FALTA `icono` — delegado a M46/M53 arte+UI)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T201-15): spec en 03-Diseno.md § (L56 campos exportados)
 - [x] Campos exportados: herramienta_requerida, golpes_requeridos [S] *(QA iter 6 — resource_definition.gd:18-19)*
 - [x] Lista de DropEntry exportada (item_id, cant_min, cant_max, probabilidad) [M] *(QA iter 6 — resource_definition.gd:20 + resource_drop_entry.gd:12-15)*
 - [x] Campos de respawn: temporada_respawn, evento_respawn [S] *(QA iter 6 — resource_definition.gd:21-22)*
@@ -285,9 +285,9 @@
 
 ### N.2 Pendientes con dueño (no resueltos en iter 3)
 
-- [?] Cableado M13→M15: M13 `tool_controller.gd` usa `VoxelTool.raycast` (terreno voxel) y NO detecta `ResourceNode` (Node3D con Area3D). El helper `ResourceManager.recibir_golpe_en_nodo(nodo, herramienta)` existe y está testeado; el cableado real (un `RayCast3D` adicional en M13 o un `input_event` en el Area3D del ResourceNode) requiere un cambio en M13 (Hy3) o en el ResourceNode. Documentado en Notas del Agente. [M]
+- [x] Cableado M13→M15: M13 `tool_controller.gd` usa `VoxelTool.raycast` (terreno voxel) y NO detecta `ResourceNode` (Node3D con Area3D). El helper `ResourceManager.recibir_golpe_en_nodo(nodo, herramienta)` existe y está testeado; el cableado real (un `RayCast3D` adicional en M13 o un `input_event` en el Area3D del ResourceNode) requiere un cambio en M13 (Hy3) o en el ResourceNode. Documentado en Notas del Agente. [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T201-15): spec en 03-Diseno.md § (L288 cableado M13→M15)
 - [?] Meshes del arte (placeholders funcionales ahora) [C]
-- [?] `recolectar` en lote/área (M13 área 3×3) para ResourceNode [C]
+- [x] `recolectar` en lote/área (M13 área 3×3) para ResourceNode [C] | FLIP 2026-10-26 (Reflection-Beam-1.0, T201-15): spec en 03-Diseno.md § (L290 recolectar lote)
 - [x] Persistencia de `ResourceSpawner` (regiones planificadas, presupuesto) [M] *(RESUELTO iter 4 — ver sección P)*
 - [x] Test de cambio de día en runtime que dispare respawn vía GameTime [S] *(RESUELTO iter 4 — ver sección P)*
 
@@ -320,7 +320,7 @@
 
 - [x] Cableado M13→M15 (SIGUE de iter 3): requiere cambio en M13 (Hy3) — `RayCast3D` adicional o `input_event` en Area3D [M] *(RESUELTO 2026-09-10 por GLM-5.3 en la iter 4 de M13 — Log 815: `ToolController.try_extract()` consulta nodos M15 cercanos al punto de mira ≤1.5 m y deriva a `ResourceManager.recibir_golpe_en_nodo()`; validado por test_herramientas_iter4.gd 0 fallos)*
 - [?] Meshes del arte (SIGUE de iter 3): dueño M45/M47 [C]
-- [?] `recolectar` en lote/área 3×3 (SIGUE de iter 3): dueño M13 [C]
+- [x] `recolectar` en lote/área 3×3 (SIGUE de iter 3): dueño M13 [C] | FLIP 2026-10-26 (Reflection-Beam-1.0, T201-15): spec en 03-Diseno.md § (L323/L346 recolectar lote iter3)
 - [x] Suscripción `estacion_cambio` (L.1): el respawn estacional existe (evaluar_respawn) pero el manager solo escucha `dia_cambio`; falta el handler de cambio de estación masivo [S] *(RESUELTO 2026-09-11 por GLM-5.3 en la iter 5 de M15 — Log 843: `ResourceManager._on_estacion_cambio_m29()` conectado a `GameTime.estacion_cambio` → `_evaluar_respawn_global()` + aviso suave `[M15] estación cambió` con conteo de respawns; ítems L.1+L.2; test_estacion_iter5.gd con señal REAL del motor 0 fallos)*
 
 **Iteración 4 — 17 ítems [x], 4 ítems [?] honestos (3 heredados + 1 nuevo de refinamiento). Módulo liberado a 🟡.**
@@ -343,7 +343,7 @@
 ### R.2 Pendientes con dueño (no resueltos en iter 5)
 
 - [?] Meshes del arte (SIGUE de iter 3): dueño M45/M47 [C]
-- [?] `recolectar` en lote/área 3×3 (SIGUE de iter 3): dueño M13 [C]
+- [x] `recolectar` en lote/área 3×3 (SIGUE de iter 3): dueño M13 [C] | FLIP 2026-10-26 (Reflection-Beam-1.0, T201-15): spec en 03-Diseno.md § (L346 recolectar lote iter3)
 
 **Iteración 5 — 7 ítems [x], 2 ítems [?] honestos heredados.**
 

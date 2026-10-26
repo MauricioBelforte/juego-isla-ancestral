@@ -129,8 +129,9 @@ Spawn en la playa (isla 64Â³)
 
 ## Specs Prototipo (Beam 723)
 
-### Definir escena `prototipo_isla.tscn` como escena principal
-- Spec: definir escena `prototipo_isla.tscn` como escena principal. PENDIENTE REAL 2026-10-14: verificado — no existe `prototipo_isla.tscn`; la escena principal en project.godot es `res://scenes/main_island.tscn`. Coherente with M137 (prototipo) and M08 (terreno).
+### Specs items degradados T212 (2026-10-26, Reflection-Beam-1.0)
+- **L126 (playtest_runner.gd que loguea eventos y FPS):** degradado 2026-10-16 (barrido agnes 610/643 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (scripts/ + tools/ = 0 hits; scenes/prototipo/ inexistente — restante del futures). Degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado playtest_runner.gd NO existe en disco ni en la historia de git (git log --all = 0 commits); el [x] no tenía evidencia en disco.
+- **L147 (FILOSOFIA-CHECK.md firmada por tester/equipo):** degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado FILOSOFIA-CHECK.md NO existe en disco ni en la historia de git (git log --all = 0 commits); el [x] no tenía evidencia en disco.
 
 ### Definir generador de isla: elevacion + playa + agua circundante
 - Spec: definir generador de isla: elevacion + playa + agua circundante. Coherente with M137 (prototipo) and M08 (terreno).

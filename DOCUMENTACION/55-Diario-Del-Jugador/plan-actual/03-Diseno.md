@@ -401,5 +401,14 @@ Reglas definidas:
 ### Probar el diario con Reduce Motion activo (M58)
 - Spec: probar el diario con Reduce Motion activo (M58). Coherente with M55 (diario) and M58 (accesibilidad).
 
-### Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log
-- Spec: actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log. Coherente with M55 (diario) and AGENTS.md §21.
+### Specs items degradados T202 (2026-10-26, Reflection-Beam-1.0)
+- **L20 (modelo de entrada id/categoría/título/descripción/icono):** id/título/descripción/refs implementados (JSON + DiaryService.detalle_entrada); ICONO pendiente (sin fuente de arte, L203 sigue abierto).
+- **L29 (estética cozy del diario):** UI implementada sigue §5.2/5.3 (composición verificable en diary_layer.gd, 834 líneas); verificación visual fina es del fundador (requiere run visual).
+- **L36 (mapear ESPECIE_AVISTADA M36/M65 → entrada criatura):** emisor EXISTE (fauna_registry.especie_avistada, scripts/fauna/fauna_registry.gd L19, emitido en registrar_avistamiento L91) pero sus ids (7 especies tierra/aire) NO coinciden con las entradas del catálogo del diario (4 peces de M34). Puente requiere reconciliar los ids — dueño M36/M34.
+- **L37 (mapear PLANTA_IDENTIFICADA M50 → entrada planta):** sin emisor en el repo (grep de señales en los scripts de M50 = 0; el catálogo tiene 2 entradas planta_* sin evento que las registre) — dueño M50.
+- **L41 (mapear MINERAL_DESCUBIERTO M35 → entrada mineral):** emisor más cercano es mina_extraccion_exitosa (mining_manager.gd L68) = EXTRACCIÓN, no descubrimiento; sus ids (def_id) no verificados contra el catálogo (mineral_madera_roble, mineral_piedra_caliza, mineral_mineral_cobre) — dueño M35.
+- **L42 (mapear RECETA_DESBLOQUEADA M16 → entrada receta):** emisor EXISTE y los ids SÍ coinciden (crafting_service.receta_aprendida, emitido en L158; data/balance/crafting.json tiene rec_mesa_robusta y rec_pico_cobre ↔ receta_rec_* del catálogo), PERO CraftingService no es autoload ni nodo persistente (0 .tscn lo instancian, 0 consumidores de la señal hoy) — puente requiere decisión del dueño M16 sobre dónde vive el servicio.
+- **L43 (mapear PISTA_LEIDA M24/M26 → entrada pista re-leíble):** sin emisor en el repo (grep de señales en scripts/puzzles, scripts/templo y scripts/ruinas = 0) — dueño M24/M26.
+- **L45 (mapear RUINA_PROGRESADA M25 → entrada ruina estado 1-4):** sin emisor en el repo (grep de señales en scripts/ruinas = 0) — dueño M25.
+- **L77 (validar siluetas/iconos contra bestiario M46):** no hay validador de iconos: validate_diary.gd cubre catálogo/i18n/persistencia/rendimiento/encoding, no siluetas M46.
+- **L85 (validar iconos de hojas contra catálogo):** idem L77: sin validación de iconos de hojas.

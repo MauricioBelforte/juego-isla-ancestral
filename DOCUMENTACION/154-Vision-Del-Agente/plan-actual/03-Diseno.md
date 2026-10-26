@@ -259,7 +259,8 @@ Node3D (PreviewRoot)
 | V3 interacción | Playwright | Click/key moves character | webapp-testing |
 | V4 run_scene | godot-mcp | Scene launches without errors | godot-mcp |
 | V4 get_errors | godot-mcp | Error reflected correctly | godot-mcp |
-| V4 capture_viewport | godot-mcp | Render image returned | godot-mcp |
+### Specs items degradados T235 (2026-10-26, Reflection-Beam-1.0)
+- **L109 (crear preview_personaje.tscn en el proyecto Godot):** s2 Log 1637: escena existe con Node3D+Light+Camera pero NO instancia al jugador — solo BoxMesh placeholder. Deuda: instanciar Player.tscn o documentar que BoxMesh es lo entregado. flip director mimo 2026-10-11.
 | Fallback | V2 | Flow works with V4 disabled | screen-mcp |
 | Contexto | All | 5 iterations within token budget | Manual |
 | Privacidad | All | No capture leaves local machine | Manual |

@@ -165,5 +165,22 @@ ivel_oscuro() -> float para que M12 adapte el contraste. Coherente con M12 (mini
 ### Sincronización lluvia de estrellas con M52 (Beam 477)
 - Spec: M52 sincroniza las partículas de estrellas fugaces con la ventana de lluvia (días 10/25, 22:00-23:30). M31 expone el flag es_lluvia_de_estrellas() y la ventana; M52 consume. Coherente con M52 (partículas) y M74 (eventos).
 
-### Flora brillante con bonus x2 (M15) (Beam 477)
-- Spec: flora brillante otorga bonus x2 de noche (único bonus horario). M15 consume el hook es_de_dia() (M31) para aplicar el bonus en la Senda de las Luciérnagas. Coherente con M15 (recursos) y M31 (ciclo).
+### Specs items degradados T191 (2026-10-26, Reflection-Beam-1.0)
+- **L108 (validación rangos curvas dev mode M110):** test_curvas_luz.gd existe (validación en CI); M110 dev tools sin implementar. Parcial, dueño M110.
+- **L121 (M17 faroles sin red eléctrica v1):** M17 sin faroles; puzzle farol_cargado en data/cadenas (M23). Dueño M17/M18.
+- **L122 (M13 linterna sugerencia opcional):** 'Linterna' existe en equipment_manager.gd L129 (data) pero sin lógica de mundo; puzzle faro-linterna en test_historias.gd L71-72. Dueño M13/M92.
+- **L124 (M37 museo horario):** scripts/museos inexistente; M37 28/148. Dueño M37.
+- **L125 (M32 lluvia de estrellas nunca con tormenta):** WeatherService enum sin 'lluvia de estrellas'; evento M74 + partículas M52. Confirmado.
+- **L136 (interacción observar del lince):** lince no existe en data/fauna/catalog.json (7 especies). Dueño M36.
+- **L137 (flora brillante Senda de las Luciérnagas):** 0 hits; M15 contenido + M45 assets sin crear.
+- **L138 (bono x2 de noche en flora):** hook es_de_dia() existe (game_clock L120, time_calendar L155, day_night_cycle L207); implementación bono es M15/M93.
+- **L139 (murales luminosos en ruinas M25/M148):** 0 hits; dueños M25/M148.
+- **L147 (linterna jugador rango 12m):** data 'Linterna' existe (equipment_manager L129) pero sin lógica de mundo; dueño M13/M45.
+- **L149 (opción M58 Noche clara piso 0.35):** M58 sin implementar; piso constante en curva; hook parametrizar sky_curve (K.2, dueño M58).
+- **L154 (QA M114 checklist visual nocturno):** M114 sin implementar; QA visual usuario/agente con visión. Dueño M114.
+- **L221 (nubes velo 2D drift lento):** sin implementar (0 hits); deuda M45 (K.2).
+- **L222 (niebla por estación/hora FogVolume):** fog_curve.tres existe (data) pero nodo FogVolume no en escenas; variación por estación/hora no implementada. Data parcial, nodo ausente. Consumo propio cerrado (day_night_cycle carga fog_curve.tres y aplica niebla_densidad(hora) al Environment).
+- **L227 (murales luminosos en ruinas M25/M148):** 0 hits; dueños M25/M148.
+- **L228 (opción M58 Noche clara piso 0.35):** M58 sin implementar; piso constante en curva.
+- **L229 (integración M49 iluminación global):** M49 sin implementar (0 hits).
+- **L230 (QA visual M114):** M114 sin implementar; QA visual.

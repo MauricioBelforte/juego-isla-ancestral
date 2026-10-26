@@ -182,3 +182,8 @@ si el bono es positivo, rojo si es negativo) cuando la prenda equipada tiene un 
 cero para la clave del terreno actual. El terreno se lee del `TerrainDetector` del Player
 (`get_current_terrain_id()` → `TerrainModifiers.clave_terreno_m155()`); sin detector, no hay
 resaltado. Suite: `scripts/ui/test_equipment_highlight_m155.gd`.
+
+### Specs items degradados T236 (2026-10-26, Reflection-Beam-1.0)
+- **L164 (test integración con sistema de combate aplica bonos de defensa):** dueño M164: M164 no lee M155 (grep defensa|equipment en scripts/combat/ = 0); DeepSeek Iter6, director mimo 2026-10-11.
+- **L177 (verificar M154 operativo antes de trabajo visual):** dueño M154: M154 en Con dudas; sin vía de visión en headless; DeepSeek Iter6, director mimo 2026-10-11.
+- **L195 (render del modelo cambiado al equipar M156 vestimenta visual):** pendiente del M156. agnes-2.5-flash 2026-09-12: modelo swap requiere M156 (Terrenos+Movimiento con GLB vestimenta). KnownIssue no bloqueante DoD.

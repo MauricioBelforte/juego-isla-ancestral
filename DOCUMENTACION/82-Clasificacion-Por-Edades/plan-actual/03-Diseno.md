@@ -122,6 +122,9 @@ func validate_content_against_rating(rating: int, content: Dictionary) -> Valida
 | Apple App Store | IARC | IARC auto-genera |
 | Microsoft Store | IARC | IARC auto-genera |
 
-### 5. Checklist de Diseño
-
-Ver `05-Checklist.md` para checklist completo de 100+ items (secciones A-G).
+### Specs items degradados T218 (2026-10-26, Reflection-Beam-1.0)
+- **L64 (timeline de submissions):** REVERTIDO Familia A (auditoría BUG-070 lote 6): grep "timeline|pre-submission|recertificación" sobre el módulo solo encuentra líneas del propio 05-Checklist. Sin artefacto.
+- **L71 (checklist de pre-submission para cada sistema):** REVERTIDO Familia A (auditoría BUG-070 lote 6): misma evidencia negativa que L64. Sin artefacto.
+- **L92 (gate en build pipeline: build falla si contenido inconsistente):** REVERTIDO Familia A (auditoría BUG-070 lote 6): rating_validator.gd valida el catálogo, no contenido-vs-rating; git grep "test_rating_m82|rating_validator" .github/ = 0 — ningún workflow CI lo cablea. El gate es diseño en 04-Codigo §6.
+- **L119 (resumen ejecutivo para stakeholders):** REVERTIDO (director, patrón M114 L48): un [x] con anotación "Deferred a post-release" es contradictorio — si está diferido, no está hecho. Además la citación "03-Diseno.md §5.4" es fantasma (no existen §5.2/§5.3/§5.4).
+- **L132 (recordatorio de recertificación anual):** REVERTIDO Familia A (auditoría BUG-070 lote 6): grep "recordatorio|recertificación" = 0 artefactos. Sin implementación.

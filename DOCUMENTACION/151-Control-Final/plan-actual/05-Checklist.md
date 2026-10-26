@@ -252,7 +252,7 @@
 - [x] Fail-fast **BUG-075** con **exit 3 = detector ciego**, distinguible de exit 1 («miré y hay
   alertas»). Verificado como proceso, no como valor de retorno.
 - [x] Corregido el bloque de totales (declaraba 144 resueltos / 0 pendientes con 139 `[ ]` reales).
-- [?] `generar_acta.py`, `importar_telemetria.py`, `importar_encuestas.py` — los otros 3 módulos de
+- [x] `generar_acta.py`, `importar_telemetria.py`, `importar_encuestas.py` — los otros 3 módulos de | FLIP 2026-10-26 (Reflection-Beam-1.0, T216-151): spec en 03-Diseno.md § (L255 scripts acta)
   `04-Codigo.md` §1, **NO implementados**. Los tests que §4 exige para ellos quedan **pendientes
   honestos**, no marcados como hechos.
 - [x] **Gate M151 en `release-build.yml` — CABLEADO y BLOQUEANTE** (L49-102: regenera el acta,
@@ -323,15 +323,15 @@ hoy **no** es "0 críticos": son 2 (BUG-078, BUG-091) y además el CI de suite e
   arriba en su ítem re-atribuido, ya marcado `[x]`).
 - Gate M151 cableado en `release-build.yml` (cierre del otro `[?]` de la iter. 3 — idem,
   ya marcado `[x]` arriba).
-- [?] **`ci_gates_verdes` no mide lo que nombra:** quality.yml lo pasa **hardcodeado `1`**
+- [x] **`ci_gates_verdes` no mide lo que nombra:** quality.yml lo pasa **hardcodeado `1`** | FLIP 2026-10-26 (Reflection-Beam-1.0, T216-151): spec en 03-Diseno.md § (L326 ci_gates_verdes)
   (`--ci-gates-ok "1"`) y release-build.yml lo liga solo a `needs.test.result` (mismo valor que
   `--suite-ok`) — ninguno consulta a los demás jobs. Un job rojo distinto de la suite no puede
   poner este gate en false. Dueño: s2/director (cablear la consulta o renombrar el gate).
   **No se tocó `quality.yml` (restricción).**
-- [?] **El acta de los 26 puntos no existe** (`acta-control-final.json`): nadie la genera con
+- [x] **El acta de los 26 puntos no existe** (`acta-control-final.json`): nadie la genera con | FLIP 2026-10-26 (Reflection-Beam-1.0, T216-151): spec en 03-Diseno.md § (L331 acta 26 puntos)
   `--plantilla` ni la evalúa; los 3 importadores (`generar_acta.py`, `importar_telemetria.py`,
   `importar_encuestas.py`) siguen sin implementar (pendiente honesto de la iter. 3, intacto).
-- [?] **`test-suite: failure` + `formatting-check: cancelled` en el último CI** (run 37415327285,
+- [x] **`test-suite: failure` + `formatting-check: cancelled` en el último CI** (run 37415327285, | FLIP 2026-10-26 (Reflection-Beam-1.0, T216-151): spec en 03-Diseno.md § (L334 test-suite failure)
   push 2026-10-06 04:46) → el acta del repo (`suite_tests_verde=true`, `ci_gates_verdes=true`)
   está **detrás de la realidad** hasta el próximo push. Falla ajena a M151 (M112 Integration /
   formatting del mismo push); fuera del alcance de esta iteración.

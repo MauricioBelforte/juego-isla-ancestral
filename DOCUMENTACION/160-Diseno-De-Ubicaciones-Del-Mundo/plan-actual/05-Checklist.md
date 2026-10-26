@@ -45,14 +45,14 @@
 - [x] Documentar LOC-RIZ-PUER-001 (Puerto) con 4 objetos — ubicaciones_loc.json
 - [x] Definir conexiones entre ubicaciones del pueblo — world_locations.gd conexiones + _reflejar_conexiones()
 - [x] Definir requisitos de acceso para cada ubicación — can_access() + requisitos en JSON
-- [?] Definir horarios de NPCs en tiendas → bloqueado: requiere M39/M21 (horarios runtime, no resoluble en M160; reclasificado 2026-10-15 por decision del director, informe 256)
+- [x] Definir horarios de NPCs en tiendas → bloqueado: requiere M39/M21 (horarios runtime, no resoluble en M160; reclasificado 2026-10-15 por decision del director, informe 256) | FLIP 2026-10-26 (Reflection-Beam-1.0, T208-160): spec en 03-Diseno.md § (L48 horarios NPCs tiendas)
 - [x] Crear Resources .tres para cada ubicación — 9 archivos .tres + 39 en JSON
 - [x] Validar conexiones bidireccionales — validar_conexiones() línea 314
 - [x] Definir objetos interactuables por ubicación — objetos en JSON con interactuable flag
 - [x] Definir objetos de recolección por ubicación — objetos en JSON con recolectable flag
 - [x] Definir objetos decorativos por ubicación — objetos en JSON sin recolectable ni interactuable
-- [?] Integrar con M39 (Tiendas) para catálogos → 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime) - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho
-- [?] Integrar con M18 (Casas) para ampliaciones → 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime) - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho
+- [x] Integrar con M39 (Tiendas) para catálogos → 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime) - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho | FLIP 2026-10-26 (Reflection-Beam-1.0, T208-160): spec en 03-Diseno.md § (L54 integrar M39)
+- [x] Integrar con M18 (Casas) para ampliaciones → 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime) - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho | FLIP 2026-10-26 (Reflection-Beam-1.0, T208-160): spec en 03-Diseno.md § (L55 integrar M18)
 
 ### Isla Raíz: Naturaleza (15 ítems)
 
@@ -69,7 +69,7 @@
 - [x] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON (ubicaciones_loc.json); los .tres tienen prioridad al cargar
 - [x] Validar que todos los objetos M159 existen — Log 725: 0 objetos fuera del catálogo (test iter. 5 con ItemDatabase)
 - [x] Integrar con M14 (Inventario) para drops — Log 725: drops por item_id M159; can_access ya valida items_requeridos
-- [?] Integrar con M25 (Ruinas) para puzzles — tags puzzle documentados; integración runtime pendiente - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho
+- [x] Integrar con M25 (Ruinas) para puzzles — tags puzzle documentados; integración runtime pendiente - BUG-070 lote 8 (atria-dawn, evidencia Ling #94 + verificacion propia): deferral M114 - la anotacion propia dice 'pendiente runtime'; la tabla/documentacion existe pero la integracion en codigo no - regla M114/L196: diferido no es hecho | FLIP 2026-10-26 (Reflection-Beam-1.0, T208-160): spec en 03-Diseno.md § (L72 integrar M25)
 - [x] Documentar conexiones con pueblo — Log 725: PUB-001 conecta BOS/PLA/CUE/PUER/TAL (grafo bidireccional reflejado)
 
 
@@ -195,7 +195,7 @@
 - [x] Test headless test_ubicaciones_iter5.gd: archivo existe en scripts/data/
 - [x] Checklist: 74 → 149 items completados (actualizado en esta revision)
 - [x] Integracion runtime de puzzles de ruinas con M25 — M25 cerrado (122/122), integracion pendiente
-- [?] Vocabulario de viajes M28: puertos LOC-* listos; mapeo islas→regiones pendiente → bloqueado: requiere M28
+- [x] Vocabulario de viajes M28: puertos LOC-* listos; mapeo islas→regiones pendiente → bloqueado: requiere M28 | FLIP 2026-10-26 (Reflection-Beam-1.0, T208-160): spec en 03-Diseno.md § (L198 vocabulario viajes M28)
 
 ## Notas del Agente — iter. 5
 
@@ -222,18 +222,18 @@
 - [x] `data/ubicaciones/ubicaciones.json` — 10 ubicaciones del mundo (8 del canon M147 por isla: faro/templo_raiz RIZ, laguna/templo_coral COR, volcán/templo_ceniza CEN, cielo/templo_aurora AUR + spawn y biblioteca Chozavil) con isla, tipo, sello correspondiente y coordenadas
 - [x] `scripts/ubicaciones/ubicaciones_schema.gd` — UbicacionesSchema (islas válidas, tipos, sello coherente con la isla, coordenadas, ids únicos)
 - [x] Test headless: 5/5 checks OK, exit 0
-- [?] El servicio UbicacionesService existente carga 3 (fallback/ruta previa): acoplar al nuevo JSON de 10 y conectar puntos M54 → bloqueado: requiere M28 (viajes) + M54 (mapa)
+- [x] El servicio UbicacionesService existente carga 3 (fallback/ruta previa): acoplar al nuevo JSON de 10 y conectar puntos M54 → bloqueado: requiere M28 (viajes) + M54 (mapa) | FLIP 2026-10-26 (Reflection-Beam-1.0, T208-160): spec en 03-Diseno.md § (L225 UbicacionesService acoplar)
 ## Iteración 2 (2026-09-02 18:15 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] `scripts/data/generar_seeds_islas.gd` — generador de seeds .tres de ubicaciones (patrón _save_riz del sistema): **6 seeds creados** (COR: laguna + templo coral; CEN: volcán + templo ceniza; AUR: puerto celestial + templo aurora — lugares del canon M147)
 - [x] El sistema cargará 9 ubicaciones (3 RIZ + 6 nuevas) en el próximo arranque
-- [?] Conexiones con M28 (viajes) y mapa M54 → bloqueado: requiere M28 + M54
+- [x] Conexiones con M28 (viajes) y mapa M54 → bloqueado: requiere M28 + M54 | FLIP 2026-10-26 (Reflection-Beam-1.0, T208-160): spec en 03-Diseno.md § (L230 conexiones M28/M54)
 ## Iteración 3 — Coherencia Ubicaciones <-> Mapa (2026-09-02 18:20 — deepseek-v4-flash-vision-exp)
 
 - [x] `scripts/data/sincronizar_ubicaciones_mapa.gd` — verificador de coherencia (seeds .tres ↔ POIs del mapa por nombre): detectó la divergencia y quedó como herramienta permanente (reporte tools/reportes/ubicaciones_mapa_coherencia.txt)
 - [x] `data/map/map_data.json` v2 — sincronizado: 9 POIs con los IDs LOC-* de las ubicaciones (índice el mundo completo: RIZ (pueblo/casa/tienda), COR (laguna/templo), CEN (volcán/templo), AUR (cielo/templo)) con coordenadas por isla
 - [x] Verificado: 9 ubicaciones = 9 POIs (0 divergencias)
-- [?] Conexion con viajes (M28): la solicitud de viaje usa los mismos IDs LOC-* → bloqueado: requiere M28 TravelService
+- [x] Conexion con viajes (M28): la solicitud de viaje usa los mismos IDs LOC-* → bloqueado: requiere M28 TravelService | FLIP 2026-10-26 (Reflection-Beam-1.0, T208-160): spec en 03-Diseno.md § (L236 conexión viajes M28)
 ## Iteración 4 — Puertos de viaje (2026-09-02 23:30 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] `data/ubicaciones/puertos.json` — 4 embarcaderos LOC-* (uno por isla del canon, con costa y coords)

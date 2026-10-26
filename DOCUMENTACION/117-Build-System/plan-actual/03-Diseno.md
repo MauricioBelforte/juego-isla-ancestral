@@ -71,8 +71,19 @@ Git commit/tag
 | STAGING | 30 días |
 | RELEASE | permanente (M143 requiere preservación) |
 
-## 9. Prohibiciones técnicas
-1. El build release NO incluye: editores (M109), debug menu (M110), stress framework (M113).
-2. No se escribe versión a mano: siempre del tag/CI.
-3. No se sube artifact sin smoke test verde.
-4. No se firma con certificado de prueba en release.
+### Specs items degradados T194 (2026-10-26, Reflection-Beam-1.0)
+- **L46 (firmado staging):** T-012 externo (cert CA + runner; dueño M116/infra).
+- **L75 (regla commits en PR M118):** T-018 decisión M118 (dueño M118).
+- **L82 (suite completa nightly):** T-020 testing/quality/dev-build/release-build SIN schedule (backup.yml y bug_metrics.yml sí lo tienen) (dueño M118).
+- **L89 (gates stress rápido QA M113):** T-023 diseño; suite operativa dueño M113.
+- **L90 (gates stress completo pre-release):** T-024 diseño; suite operativa dueño M113.
+- **L96 (packaging por plataforma M96):** T-025 solo preset Windows verificado (dueño M96).
+- **L98 (.app macOS + zip):** T-027 sin preset macOS (dueño M96).
+- **L118 (acceso permisos por rol M118):** T-037 decisión GitHub envs (dueño M118).
+- **L122 (firmado Windows signtool):** T-038: installer/code_signing.bat existe y pide CERT_PFX/CERT_PASSWORD; sin certificado y sin flag enable=false (HMAC firmar_artefacto() de cicd_manager.gd es integridad, no code signing) (dueño M116/infra).
+- **L123 (firmado macOS notarytool + staple):** T-039 sin preset/runner (dueño M96/infra).
+- **L141 (paso nueva partida semilla fija):** T-044 (dueño M118).
+- **L143 (paso guardado + carga M59):** T-045 (dueño M118).
+- **L144 (paso salida limpia exit 0):** T-046 (dueño M118).
+- **L146 (smoke QA/staging/release):** T-048 (dueño M118).
+- **L164 (gestión keystores/certificados centralizada):** T-050 sin store central (dueño M118/M96).

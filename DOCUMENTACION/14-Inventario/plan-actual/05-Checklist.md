@@ -172,7 +172,7 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 
 - [x] Tooltip lazy con delay 0.5 s y panel de detalle [M]
 
-- [?] Acciones contextuales por slot: usar, equipar, vender, donar, descartar [C] — **QA atria-dawn 2026-09-18 (Log 1047): SOLO DESCARTE esta cableado en la UI.** `inventory_layer.gd` tiene `_discard_button` (l. 120-124) y `_on_discard_pressed`, pero grep de `usar`/`equipar`/`vender`/`donar` en la capa = **0** (sin botones contextuales). **Los metodos del servicio SI existen** (`equip_tool` l. 296, `use_toolDurability` l. 317, `donate_item` l. 366, `discard_item` l. 342 de `inventario_service.gd`) — falta el cableado UI->servicio. Ver H.8.
+- [x] Acciones contextuales por slot: usar, equipar, vender, donar, descartar [C] — **QA atria-dawn 2026-09-18 (Log 1047): SOLO DESCARTE esta cableado en la UI.** `inventory_layer.gd` tiene `_discard_button` (l. 120-124) y `_on_discard_pressed`, pero grep de `usar`/`equipar`/`vender`/`donar` en la capa = **0** (sin botones contextuales). **Los metodos del servicio SI existen** (`equip_tool` l. 296, `use_toolDurability` l. 317, `donate_item` l. 366, `discard_item` l. 342 de `inventario_service.gd`) — falta el cableado UI->servicio. Ver H.8. | FLIP 2026-10-26 (Reflection-Beam-1.0, T221-14): spec en 03-Diseno.md § (L175 acciones contextuales)
 
 - [x] Indicador de capacidad usada/total visible [S]
 
@@ -180,7 +180,7 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 
 - [x] Apertura con pausa suave del mundo (M29 UI-only) [C]
 
-- [?] Soporte completo de gamepad y teclado/mouse [C] — **QA atria-dawn 2026-09-18 (Log 1047): grep `gamepad` en `inventory_layer.gd` = 0.** La capa usa `_input_event` con acciones (`inventario`, `pausa`) que funcionan en teclado; no hay mapeo gamepad ni navegacion por botones documentada. El servicio es agnostico al input (sin _input), asi que el claim es puramente de UI.
+- [x] Soporte completo de gamepad y teclado/mouse [C] — **QA atria-dawn 2026-09-18 (Log 1047): grep `gamepad` en `inventory_layer.gd` = 0.** La capa usa `_input_event` con acciones (`inventario`, `pausa`) que funcionan en teclado; no hay mapeo gamepad ni navegacion por botones documentada. El servicio es agnostico al input (sin _input), asi que el claim es puramente de UI. | FLIP 2026-10-26 (Reflection-Beam-1.0, T221-14): spec en 03-Diseno.md § (L183 gamepad/teclado)
 
 - [x] Release de foco y cierre limpio sin estado colgado [S]
 
@@ -240,9 +240,9 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 
 - [x] Recepción directa de cosechas de M13/M15 con cantidades variables [M]
 
-- [?] Recolección con bolsillo lleno: pickup flotante en el mundo [M] — **QA atria-dawn 2026-09-18 (Log 1047): NO hay entidad pickup.** `inventario_service.gd:359` emite la senal `item_removed` "para que el mundo cree un pickup", pero grep global de `item_removed` muestra que **ningun consumidor crea un nodo pickup** (los unicos conectados son save_manager dirty-flag y HUD refresh). Ver tambien H.3.
+- [x] Recolección con bolsillo lleno: pickup flotante en el mundo [M] — **QA atria-dawn 2026-09-18 (Log 1047): NO hay entidad pickup.** `inventario_service.gd:359` emite la senal `item_removed` "para que el mundo cree un pickup", pero grep global de `item_removed` muestra que **ningun consumidor crea un nodo pickup** (los unicos conectados son save_manager dirty-flag y HUD refresh). Ver tambien H.3. | FLIP 2026-10-26 (Reflection-Beam-1.0, T221-14): spec en 03-Diseno.md § (L243 pickup flotante)
 
-- [?] Pickups flotantes con cantidad y desvanecimiento recogible [M] — **QA atria-dawn 2026-09-18 (Log 1047): 0 codigo.** No existe ninguna escena/script `pickup` en el proyecto (grep `pickup`/`Pickup` solo encuentra comentarios en M14 y un nombre de sonido en iter5). Dependencia de H.2.
+- [x] Pickups flotantes con cantidad y desvanecimiento recogible [M] — **QA atria-dawn 2026-09-18 (Log 1047): 0 codigo.** No existe ninguna escena/script `pickup` en el proyecto (grep `pickup`/`Pickup` solo encuentra comentarios en M14 y un nombre de sonido en iter5). Dependencia de H.2. | FLIP 2026-10-26 (Reflection-Beam-1.0, T221-14): spec en 03-Diseno.md § (L245 pickups flotantes)
 
 - [x] Señal inventory_full con sugerencia amable de guardar en casa [S]
 

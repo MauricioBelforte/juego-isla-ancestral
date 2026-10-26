@@ -143,5 +143,24 @@ ui_ms = 1.5
 ### Pooling de efectos de herramientas
 - Spec: pooling de efectos de herramientas. Coherente with M61 (rendimiento) and M13 (herramientas).
 
-### Pooling de buffers de remesh
-- Spec: pooling de buffers de remesh. Coherente with M61 (rendimiento) and M08 (terreno).
+### Specs items degradados T190 (2026-10-26, Reflection-Beam-1.0)
+- **L301 (instancing multimesh Voxel Tools):** no medible en headless; Multimesh se instancia y se mide con renderer.
+- **L330 (cableado gate a GitHub Actions):** pertenece a M118 (CI-CD, 0/100, disponible); runner necesita GPU/Windows para bench; workflow actual usa Godot 4.3 (proyecto es 4.7.2) — actualizar es tarea de M118.
+- **L104 (metodología capturas profiler):** capturas existen en disco pero no versionadas (git ls-files capturas/61 = 0).
+- **L128 (alinear M114):** pendiente.
+- **L137 (alinear M114 y presets M91):** pendiente.
+- **L145 (documentar metodología Profiler):** pendiente.
+- **L169 (VRAM < presupuesto GPU mínima):** umbral definido y verificado (memoria.vram_presupuesto_mb/vram_por_escena_mb, gate _validar_memoria()); VRAM real solo con renderer (headless no crea renderer).
+- **L185 (pantalla de carga sin frames congelados):** no medible en headless; norma de carga (asincronía obligatoria, progreso real, bloqueo cero hilo principal) definida como umbrales data-driven en tanda 2.
+- **L193 (generación stream continuo M63):** no medible en headless; streaming continuo se mide sobre frames reales con chunks entrando.
+- **L201 (destrucción masiva sin picos):** no medible en headless; umbral remesh (<2ms por bloque) definido y verificado por gate (normas.remesh_bloque_ms_max).
+- **L209 (pueblo completo 60 FPS):** no medible en headless; límite NPC visibles (≤20) definido en norma y verificado por gate (normas.npcs_activos_max).
+- **L229 (noche con faroles M49 60 FPS):** exige renderer; presupuesto de sombras por preset derivado de M90 (sombras_cascadas 1/2/4/4) y verificado por suite.
+- **L237 (ciclo día/noche sin drop):** no medible en headless (drop es frame time real).
+- **L245 (mar visible sin overdraw):** umbral definido (gpu.overdraw_max = 1.5) y verificado por gate/suite contra validate_water.gd; medición real exige renderer (M51).
+- **L253 (bosque denso 60 FPS):** no medible en headless; norma de instancing obligatoria (RF23) es umbral del dueño M50.
+- **L261 (preset mínimo 30 FPS):** objetivo por preset declarado y verificado contra M90 (normas.objetivo_por_preset, 16 checks); FPS real exige renderer.
+- **L269 (culling eficaz en bench):** bench (bench_recorder.gd + bench_scene_a.tscn) mide draw calls/objetos con renderer y vuelca JSON a user://logs/bench/; sin ventana no hay corrida; JSON anterior no versionado (deuda QA E-12a).
+- **L277 (templo subterráneo M25 60 FPS):** occlusion culling por celdas se mide con GPU queries, inexistentes en headless.
+- **L285 (ausencia de pop en cámara principal):** juicio visual de transición de LOD; exige capturas y visión (M154 V2). Umbral normas.lod_transicion_sin_pop_m = 2 definido.
+- **L293 (draw calls dentro de presupuesto):** límite definido (gpu.draw_calls_escena_objetivo = 400 == limites.draw_calls_max) y verificado por gate/suite; medición real exige renderer (bench_recorder.gd).

@@ -123,7 +123,7 @@
 
 ## O. Playtest (M114, RF13)
 
-- [?] Definir `playtest_runner.gd` que loguea eventos y FPS [C] — **degradado 2026-10-16 (barrido agnes 610/643 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (`scripts/` + `tools/` = 0 hits; `scenes/prototipo/` inexistente — restante del futures).** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `playtest_runner.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
+- [x] Definir `playtest_runner.gd` que loguea eventos y FPS [C] — **degradado 2026-10-16 (barrido agnes 610/643 + flip GLM-5.3 Flash-Director): archivo NO existe en disco (`scripts/` + `tools/` = 0 hits; `scenes/prototipo/` inexistente — restante del futures).** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `playtest_runner.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.** | FLIP 2026-10-26 (Reflection-Beam-1.0, T212-137): spec en 03-Diseno.md § (L126 playtest_runner)
   · evidencia: documentado en plan-actual (P-100, Reflection-Beam-1.0, T77, 2026-10-22)
 - [x] Definir sesión de 15 min por tester [S]
 - [x] Definir mínimo 3 testers [S]
@@ -144,7 +144,7 @@
 - [x] Definir checklist M152: combate ausente/opcional [M]
 - [x] Definir checklist M153: la sesión se siente dentro de la visión [M]
 - [x] Definir checklist M153: ritmo accesible sin metagaming forzado [M]
-- [?] Definir plantilla `FILOSOFIA-CHECK.md` firmada por tester/equipo [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `FILOSOFIA-CHECK.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
+- [x] Definir plantilla `FILOSOFIA-CHECK.md` firmada por tester/equipo [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `FILOSOFIA-CHECK.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.** | FLIP 2026-10-26 (Reflection-Beam-1.0, T212-137): spec en 03-Diseno.md § (L147 FILOSOFIA-CHECK)
 
 ## R. Rendimiento (M61, RF16)
 

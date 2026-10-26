@@ -487,9 +487,16 @@ bandit -r .
 
 **Pruebas automáticas:**
 - Tests de validación de entradas
-- Tests de validación de datos online
-- Tests de prevención de manipulación
-- Tests de prevención de duplicación
-- Tests de prevención de economía adulterada
-- Tests de rate limiting
-- Tests de autenticación de APIs
+### Specs items degradados T199 (2026-10-26, Reflection-Beam-1.0)
+- **L64 (firewalls solo puertos necesarios):** M77/M104 (infra de despliegue); no aplica a v1 single-player sin servidor.
+- **L69 (monitoreo de vulnerabilidades):** CI/M111 (monitoreo continuo de advisories, fuera del runtime).
+- **L70 (monitoreo de logs de acceso):** M77 (requiere servidor; local = user://security_audit.log implementado).
+- **L71 (monitoreo de métricas de seguridad):** M77/M105 (métricas server-side).
+- **L72 (alertas por anomalías de seguridad):** M77 (alertas server-side). Núcleo LOCAL sí existe: SecurityManager.registrar_alerta() + 4 detectores (economía/bot/tasa/acceso crítico), test 43/0.
+- **L76 (usuarios de BD con permisos mínimos):** M77/M107 (administración de la BD real).
+- **L134 (CAPTCHA para rate limiting excedido):** M77 (CAPTCHA requiere servicio externo).
+- **L140 (bloqueo de IPs sospechosas):** M77 (bloqueo a nivel de red; registro local de intentos existe via verificar_limite_tasa).
+- **L148 (logs almacenados en servidor):** M77 (persistencia server-side; local = JSON Lines en user:// implementado).
+- **L149 (logs monitoreados regularmente):** M77/CI.
+- **L150 (alertas por anomalías en logs):** M77.
+- **L176 (monitoreo de nuevas vulnerabilidades):** CI/M111 (Dependabot/advisories).

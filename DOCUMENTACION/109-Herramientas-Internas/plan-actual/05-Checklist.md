@@ -216,7 +216,7 @@
 - [x] Plugin del editor: `scripts/editor/plugin_herramientas.gd` (EditorPlugin) registrado en project.godot [editor_plugins] — dock "Herramientas internas" con el catálogo de editores (Recetas activo; los 13 siguientes listos para sumarse por el patrón)
 - [x] Tests del núcleo (6 gdUnit): receta válida (pico de cobre real), invalidaciones (sin costes, id vacío, estación inválida, nivel 0), roundtrip de costes → suite completa ÉXITO (0 fallos)
 - [?] Verificación visual del dock del editor: pendiente — requiere reinicio del editor de Godot (instancia activa de otro agente); se revalida con la primera captura de layout en la próxima sesión con editor propio (dueño: deepseek-v4-flash-vision-exp)
-- [?] Editores restantes (bloques, biomas, NPC, diálogos, misiones, economía, tiendas, clima, estaciones, puzzles, ruinas, spawns, mapas, teleport, profiling = 13+2): siguen el patrón EditorBase con su propio schema validable — iteración 2 (dueño: deepseek-v4-flash-vision-exp, M109 iter 2)
+- [x] Editores restantes (bloques, biomas, NPC, diálogos, misiones, economía, tiendas, clima, estaciones, puzzles, ruinas, spawns, mapas, teleport, profiling = 13+2): siguen el patrón EditorBase con su propio schema validable — iteración 2 (dueño: deepseek-v4-flash-vision-exp, M109 iter 2) | FLIP 2026-10-26 (Reflection-Beam-1.0, T234-109): spec en 03-Diseno.md § (L219 editores restantes)
 ## Iteración 2 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] Editor de diálogos (RF4) — núcleo: `scripts/editor/support/dialogo_schema.gd` (validador de grafos M21/M23: start existe, nodos con text, referencias next/opciones a nodos existentes, sin inalcanzables)

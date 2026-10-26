@@ -142,5 +142,8 @@ M157 (Transporte) ──► JourneyInstance (experiencia de viaje)
 ### Test de fallback: 3 fallos seguidos -> modo seguro
 - Spec: test de fallback: 3 fallos seguidos -> modo seguro. Coherente with M69 (fast travel) and M66 (anti-softlock).
 
-### Test de perfilado: sin allocs en frame
-- Spec: test de perfilado: sin allocs en frame. Coherente with M69 (fast travel) and M61 (rendimiento).
+### Specs items degradados T210 (2026-10-26, Reflection-Beam-1.0)
+- **L104 (test fast travel bloqueado durante combate):** NO existe tal test. Grep combate.*bloque|bloque.*combate|en_combate en scripts/ y tests/ → 0 hits en M69 (el único "bloqueado" es en_dialogo en transport_manager.gd:131, que es M68). El diseño sí lo pide (03-Diseno §6 "Test de restricciones"), pero el artefacto no existe.
+- **L105 (test fast travel bloqueado durante diálogos críticos):** idem. bloqueado en_dialogo existe en transport_manager.gd:131 (M68), pero no hay test M69 que lo verifique sobre fast travel.
+- **L154 (lectura por screen reader de menú):** 0 hits de screen_reader|screen reader|verbal description en scripts/. Claim de accesibilidad (M53/M62) sin artefacto.
+- **L168 (M104 evento analytics fast_travel_used):** grep fast_travel_used en scripts/, tests/ y data/ → 0 hits. El evento genérico sí existe: analytics_director.gd define la constante EV_FEATURE_USADA y test_analytics.gd:82 la usa con {"feature": "fast_travel"}. Lo que no hay es emisión desde runtime (grep de EV_FEATURE_USADA fuera de tests: solo la definición en analytics_director.gd). El [?] se mantiene, pero la nota original inducía a error al decir "el evento no existe".

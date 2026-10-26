@@ -97,11 +97,17 @@
 # "Cuerda", OBJ-HER-004 "Hoz", OBJ-ITE-013 "Clavos"). Integracion con M65
 # (fauna) excluida, mismo patron que M37 en Comerciantes. Bloque T afirma
 # carga, fuente, unicidad de consecuencias/diarios y corrida end-to-end de 3.
+# Iter. 22 (2026-10-25, DeepSeek-V4.1-Flash): L159 del 05-Checklist — bloque Z
+# _test_e2e_diez(): 10 cadenas COMPLETAS (una por cluster) con driver generico
+# que lee la evidencia del dato + round-trip de persistencia de las 10. Hallazgo
+# medido: la cadena mergeada cadena-biblioteca declara capitulo-biblioteca, fuera
+# de la normalizacion mision_<id> de la iter. 21 (esa tanda toco solo
+# secundarias.json); queda fijado como excepcion con guarda.
 
 extends SceneTree
 
 const MODULO := "M23"
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA"]
 
 var _fallos: int = 0
 var _checks: int = 0
@@ -169,7 +175,15 @@ var _vistos: Dictionary = {}
 # respaldo en catalogo M55, runtime faro registrado / biblioteca no). Piso
 # MEDIDO en verde: 750/0/EXIT 0 x3. El guardian se probo EN ROJO por
 # inyeccion de runtime sobre el bloque Y (743<750, EXIT 1).
-const CHECKS_MINIMOS := 750
+# Iter. 22 (2026-10-25, DeepSeek-V4.1-Flash): +bloque Z _test_e2e_diez()
+# (10 cadenas completas, una por cluster, driver generico + round-trip de
+# persistencia) = +119 checks. Piso MEDIDO en verde: 869/0/EXIT 0 x3. El
+# guardian se probo EN ROJO en DOS modos sobre el bloque Z: (a) aborto por
+# error de runtime (subscript dinamico) -> 751 checks / 1 fallo / EXIT 1 con
+# "[FAIL] el bloque Z NO se ejecuto"; (b) asercion falsa sobre la excepcion
+# medida -> 869 checks / 1 fallo / EXIT 1. Archivo restaurado byte-exacto
+# (sha256 identico) tras cada sonda.
+const CHECKS_MINIMOS := 891
 
 # Los 4 finales de M22 (historia_principal.json, tipo "final").
 const FINALES_M22 := ["principal", "regresar", "guardian", "secreto"]
@@ -216,6 +230,8 @@ func _run() -> void:
 	_test_pesca_coleccion()
 	_test_postgame_cluster()
 	_test_recompensa_diario()
+	_test_e2e_diez()
+	_test_consecuencia_taller()
 
 
 func _check(cond: bool, msg: String) -> void:
@@ -257,7 +273,9 @@ func _test_carga() -> void:
 	# en f6a07c6) -> 62 + 1 = 63. Los asserts de conteo de ABAJO se repararon en
 	# la misma iterada: con 62 cadenas en disco la suite habia quedado ROJA
 	# (6 fallos / EXIT 1, medido 05:13) por expects de 59/60 desactualizados.
-	_check(_h.cadenas_count() == 81, "81 cadenas cargadas tras el merge (80 principal + 1 ejemplos): %d" % _h.cadenas_count())
+	# Iter. 23 (Log 2197): +1 cadena del item L109 (cadena-taller, consecuencia
+	# taller_abierto) -> 81 principal + 1 mergeada = 82 cargadas.
+	_check(_h.cadenas_count() == 82, "82 cadenas cargadas tras el merge (81 principal + 1 ejemplos): %d" % _h.cadenas_count())
 	_check(_h.get_section_name() == "secondary_stories", "sección 'secondary_stories'")
 	_check(not _h.get_cadena("cadena-faro").is_empty(), "cadena-faro accesible")
 	# Conflicto cadena-faro: gana la variante del principal (no se sobrescribe)
@@ -484,7 +502,7 @@ func _test_esquema_consistente() -> void:
 	var ejemplos := _leer_json("res://data/historias/cadenas_ejemplo.json")
 	var principal := _leer_json("res://data/historias/secundarias.json")
 	_check(ejemplos.size() == 3, "catálogo de ejemplos con 3 cadenas (crudo): %d" % ejemplos.size())
-	_check(principal.size() == 80, "catálogo principal con 80 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes + 5 investigacion + 6 puzzles + 8 exploracion + 3 construccion + 5 agricultura + 4 pesca + 6 coleccion + 3 postgame): %d" % principal.size())
+	_check(principal.size() == 81, "catálogo principal con 81 cadenas (crudo, 4 + 6 vecinos + 3 lugares + 4 ruinas + 6 objetos + 3 familias + 6 amistad + 5 secretas + 3 comerciantes + 5 investigacion + 6 puzzles + 8 exploracion + 3 construccion + 5 agricultura + 4 pesca + 6 coleccion + 3 postgame + 1 taller): %d" % principal.size())
 	# 1) Ejemplos: 0 claves con prefijo (condicion Y consecuencia)
 	var prefijos_ej := _prefijos_estado_mundo(ejemplos)
 	_check(prefijos_ej.is_empty(), "ejemplos sin claves estado_mundo.* tras normalizar (%s)" % str(prefijos_ej))
@@ -507,7 +525,7 @@ func _test_esquema_consistente() -> void:
 		for flag in (cad.get("consecuencia", {}) as Dictionary):
 			if String(flag).begins_with("estado_mundo."):
 				prefijos_rt.append("%s/%s" % [cid, String(flag)])
-	_check(cargadas == 81, "81 cadenas cargadas en runtime (80 principal + biblioteca): %d" % cargadas)
+	_check(cargadas == 82, "82 cadenas cargadas en runtime (81 principal + biblioteca): %d" % cargadas)
 	_check(prefijos_rt.is_empty(), "carga mergeada sin claves estado_mundo.* (%s)" % str(prefijos_rt))
 	# 4) Mismo flag, mismo deletreo en AMBOS catálogos donde los dos lo definen
 	_check(_tiene_consecuencia(principal, "cadena-faro", "faro_encendido"),
@@ -1472,7 +1490,7 @@ func _test_puzzles_investigacion() -> void:
 			multi.append(cid)
 		for flag in cons:
 			flags[flag] = true
-	_check(flags.size() == 81, "81 consecuencias distintas sobre 81 cadenas cargadas (unicidad global): %d" % flags.size())
+	_check(flags.size() == 82, "82 consecuencias distintas sobre 82 cadenas cargadas (unicidad global): %d" % flags.size())
 	_check(multi.is_empty(), "cada cadena aporta exactamente 1 flag de consecuencia (%s)" % str(multi))
 	# NPCs REALES: cada npc de las 11 cadenas existe como recurso en data/villagers/
 	var npcs := {}
@@ -1616,26 +1634,28 @@ func _test_consecuencias() -> void:
 		else:
 			sin_respaldo.append(f)
 	# Iter. 16 (Log 2169): cadena-construccion-kiosko aplica kiosko_abierto ->
-	# 9 de las 12 con respaldo (antes 8). El negativo de taller_abierto sigue
-	# siendo la GUARDA del item L109.
-	_check(con_respaldo.size() == 9, "9 de las 12 consecuencias con respaldo en disco: %d (%s)" % [con_respaldo.size(), str(con_respaldo)])
-	_check(sin_respaldo.size() == 3, "3 de las 12 sin respaldo en disco: %d (%s)" % [sin_respaldo.size(), str(sin_respaldo)])
+	# 9 de las 12 con respaldo (antes 8).
+	# Iter. 23 (Log 2197): cadena-taller aplica taller_abierto (item L109) ->
+	# 10 de las 12 con respaldo; el negativo de taller_abierto se INVIERTE en
+	# guarda POSITIVA (abajo), porque el item dejo de ser un [ ] honesto.
+	_check(con_respaldo.size() == 10, "10 de las 12 consecuencias con respaldo en disco: %d (%s)" % [con_respaldo.size(), str(con_respaldo)])
+	_check(sin_respaldo.size() == 2, "2 de las 12 sin respaldo en disco: %d (%s)" % [sin_respaldo.size(), str(sin_respaldo)])
 	_check(flags.has("biblioteca_iluminada"),
 		"biblioteca_iluminada con respaldo: la aplica cadena-biblioteca del catalogo de ejemplos (mergeado y vivo, iter. 3)")
 	_check(con_respaldo.has("jardin_florecido") and con_respaldo.has("cofradia_activa"),
 		"jardin_florecido y cofradia_activa entre las CON respaldo (items L108/L111)")
-	_check(sin_respaldo.has("taller_abierto"),
-		"taller_abierto entre las SIN respaldo (item L109 queda [ ] honesto)")
-	# 2) Negativo acotado al arbol de DATOS (res://data): el token no existe en
-	# ningun catalogo .json ni recurso .tres. Alcance declarado: mide DATOS, no
-	# scripts. La primera version buscaba tambien en scripts/ y se AUTO-PISO: el
-	# propio archivo de test nombra el token en su lista de las 12, asi que el
-	# guardian se condenaba a fallar siempre (1 hit = res://scripts/historias/
-	# test_historias.gd). Ademas, una mencion en un script no es "respaldo" de la
-	# consecuencia: solo lo es el flag aplicado por una cadena.
+	_check(con_respaldo.has("taller_abierto"),
+		"taller_abierto entre las CON respaldo: lo aplica cadena-taller (item L109, iter. 23)")
+	_check(sin_respaldo.has("camino_al_faro_despejado") and sin_respaldo.has("puerto_ampliado"),
+		"las 2 SIN respaldo son camino_al_faro_despejado y puerto_ampliado (sin item propio en el 05)")
+	# 2) Guarda POSITIVA sobre el arbol de DATOS (res://data): el token existe y
+	# en UN solo catalogo. Alcance declarado: mide DATOS, no scripts. La version
+	# anterior afirmaba lo contrario (token ausente) como guarda del item L109;
+	# al crearse la cadena la guarda se invierte: si el dato desaparece, este
+	# check falla y avisa que el item volvio a ser [ ] honesto.
 	var hits_taller := _token_en_arbol("taller_abierto", "res://data")
-	_check(hits_taller.is_empty(),
-		"token 'taller_abierto' ausente en res://data (%d hits: %s)" % [hits_taller.size(), str(hits_taller)])
+	_check(hits_taller.size() == 1 and String(hits_taller[0]).ends_with("secundarias.json"),
+		"token 'taller_abierto' en UN catalogo de res://data (%d hits: %s)" % [hits_taller.size(), str(hits_taller)])
 	# 3) End-to-end de las 2 cadenas cuyos items se flippean (estado limpio)
 	var inv := root.get_node_or_null("Inventario")
 	if inv != null:
@@ -2383,12 +2403,12 @@ func _test_recompensa_diario() -> void:
 			viol.append("%s=%s" % [cid, d])
 		if not ids_m55.has(d):
 			sin_respaldo += 1
-	_check(principal.size() == 80, "catalogo principal con 80 cadenas (crudo): %d" % principal.size())
-	_check(con_diario == 79, "79 cadenas declaran capitulo de diario: %d" % con_diario)
+	_check(principal.size() == 81, "catalogo principal con 81 cadenas (crudo): %d" % principal.size())
+	_check(con_diario == 80, "80 cadenas declaran capitulo de diario: %d" % con_diario)
 	_check(sin_diario.size() == 1 and sin_diario[0] == "cadena-secretta-luciernagas",
 		"1 cadena sin diario (solo cosmetico) = cadena-secretta-luciernagas: %s" % str(sin_diario))
-	_check(viol.is_empty(), "invariante recompensa.diario == 'mision_'+id en las 79 (violaciones: %s)" % str(viol))
-	_check(sin_respaldo == 77, "77 de 79 capitulos NO existen en el catalogo M55 (contenido de M55, hallazgo): %d" % sin_respaldo)
+	_check(viol.is_empty(), "invariante recompensa.diario == 'mision_'+id en las 80 (violaciones: %s)" % str(viol))
+	_check(sin_respaldo == 78, "78 de 80 capitulos NO existen en el catalogo M55 (contenido de M55, hallazgo): %d" % sin_respaldo)
 	_check(ids_m55.has("mision_cadena-faro") and ids_m55.has("mision_cadena-invernadero"),
 		"las 2 entradas con respaldo en M55 son mision_cadena-faro y mision_cadena-invernadero")
 	# Runtime: el capitulo CON respaldo se registra al completar (el puente
@@ -2400,6 +2420,223 @@ func _test_recompensa_diario() -> void:
 		_check(not diary.esta_registrada("mision_cadena-biblioteca"),
 			"mision_cadena-biblioteca NO registrado (sin entrada en catalogo M55: el puente degrada en silencio)")
 	_fin("Y")
+
+
+func _test_e2e_diez() -> void:
+	# Iter. 22 (2026-10-25, DeepSeek-V4.1-Flash): L159 del 05-Checklist —
+	# "Disenar test E2E de 10 cadenas completas". Los bloques H-Z corrian 2-3
+	# cadenas end-to-end por cluster; este corre DIEZ cadenas COMPLETAS (una
+	# por cluster) con un driver GENERICO: visibilidad -> iniciar -> los pasos
+	# en el orden DECLARADO -> completar -> consecuencias en M21 -> sale de
+	# disponibles -> no se re-inicia -> puente de diario contra el catalogo
+	# M55. Despues: save/restore round-trip de las 10.
+	# Anti-falso-verde: (a) los flags de consecuencia se APAGAN antes de
+	# correr, asi el check prueba que la cadena los aplico y no que ya estaban
+	# de un bloque previo; (b) la evidencia de cada paso se lee del DATO
+	# (npc/lugar/ref/objeto), no de una lista paralela escrita a mano; (c) el
+	# puente de diario se compara contra diario_catalog.json leido en disco,
+	# no contra un numero fijo.
+	_h.restore_save_data({})
+	var inv := root.get_node_or_null("Inventario")
+	var ws := root.get_node_or_null("WorldState")
+	# 10 cadenas, una por cluster: principal / merge de ejemplos / vecinos /
+	# lugares / familias / amistad / secretas / comerciantes / puzzles /
+	# pesca-coleccion.
+	var e2e := ["cadena-faro", "cadena-biblioteca", "cadena-panadera",
+		"cadena-jardines", "cadena-molinera", "cadena-regalo-favorito",
+		"cadena-mapa-secreto", "cadena-ruta-del-mercader",
+		"cadena-templo-de-las-24-marcas", "cadena-pesca-nocturna"]
+	var distintos := {}
+	for cid in e2e:
+		distintos[cid] = true
+	_check(e2e.size() == 10 and distintos.size() == 10,
+		"muestra E2E = 10 cadenas distintas (%d de %d)" % [distintos.size(), e2e.size()])
+	# Cobertura de las dos rutas especiales del motor
+	_check(_h.fuente_cadena("cadena-biblioteca") == "ejemplos",
+		"la muestra incluye 1 cadena MERGEADA de cadenas_ejemplo.json (cadena-biblioteca)")
+	_check(bool(_h.get_cadena("cadena-mapa-secreto").get("oculta", false)),
+		"la muestra incluye 1 cadena OCULTA (cadena-mapa-secreto)")
+	# Catalogo de M55 leido en disco: el puente de diario se mide contra el
+	# dato y no contra una cifra fija.
+	var ids_m55 := {}
+	var cat_raw: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/diario/diario_catalog.json"))
+	if typeof(cat_raw) == TYPE_DICTIONARY:
+		for cat in (cat_raw as Dictionary).get("categorias", []):
+			for entrada in (cat as Dictionary).get("entradas", []):
+				ids_m55[String((entrada as Dictionary).get("id", ""))] = true
+	# (a) apagar los flags ANTES: el check posterior prueba la aplicacion
+	for cid in e2e:
+		for flag in (_h.get_cadena(cid).get("consecuencia", {}) as Dictionary):
+			if ws != null:
+				ws.set_flag(String(flag), false)
+	var diary := root.get_node_or_null("Diary")
+	var pasos_totales := 0
+	var pasos_ok := 0
+	var fuera_esquema := []
+	for cid in e2e:
+		var c: Dictionary = _h.get_cadena(cid)
+		_check(not c.is_empty(), "%s cargada en el catalogo" % cid)
+		if c.is_empty():
+			continue
+		var oculta := bool(c.get("oculta", false))
+		_check(_h.cadenas_disponibles().has(cid) != oculta,
+			"%s visibilidad previa coherente (oculta=%s)" % [cid, str(oculta)])
+		var res: Dictionary = _h.iniciar_cadena(cid)
+		_check(bool(res.ok), "%s iniciar OK" % cid)
+		# Driver generico: la evidencia sale del propio paso declarado
+		var pasos: Array = c.get("pasos", [])
+		var ok_cadena := 0
+		for p in pasos:
+			var paso: Dictionary = p
+			var tipo := String(paso.get("tipo", ""))
+			if tipo == "entregar":
+				var objeto := String(paso.get("objeto", ""))
+				if inv != null:
+					var lote := {}
+					lote[objeto] = 1
+					inv.agregar_items(lote)
+				res = _h.reportar_entrega(cid)
+			else:
+				var evidencia := String(paso.get("npc", paso.get("lugar", paso.get("ref", ""))))
+				res = _h.reportar_paso(cid, tipo, evidencia)
+			if bool(res.ok):
+				ok_cadena += 1
+			else:
+				print("[E2E] %s paso %s (%s): %s" % [cid, String(paso.get("id", "?")), tipo, String(res.get("motivo", ""))])
+		pasos_totales += pasos.size()
+		pasos_ok += ok_cadena
+		_check(ok_cadena == pasos.size(), "%s: %d/%d pasos en el orden declarado" % [cid, ok_cadena, pasos.size()])
+		_check(_h.esta_completada(cid), "%s completada end-to-end" % cid)
+		_check(not _h.esta_activa(cid), "%s deja de estar activa al completar" % cid)
+		var cons: Dictionary = c.get("consecuencia", {})
+		var aplicadas := 0
+		for flag in cons:
+			if ws_has(String(flag)):
+				aplicadas += 1
+		_check(cons.size() > 0 and aplicadas == cons.size(),
+			"%s aplica sus %d consecuencias en M21 (%d)" % [cid, cons.size(), aplicadas])
+		_check(not _h.cadenas_disponibles().has(cid), "%s sale de cadenas_disponibles al completar" % cid)
+		var res2: Dictionary = _h.iniciar_cadena(cid)
+		_check(not bool(res2.ok), "%s no se re-inicia completada (recompensa unica)" % cid)
+		var capitulo := String((c.get("recompensa", {}) as Dictionary).get("diario", ""))
+		_check(capitulo != "", "%s declara capitulo de diario (%s)" % [cid, capitulo])
+		if capitulo != "" and capitulo != "mision_" + cid:
+			fuera_esquema.append("%s=%s" % [cid, capitulo])
+		if diary != null and capitulo != "":
+			_check(diary.esta_registrada(capitulo) == ids_m55.has(capitulo),
+				"%s puente de diario coherente con el catalogo M55 (registrada=%s, en_catalogo=%s)"
+					% [cid, str(diary.esta_registrada(capitulo)), str(ids_m55.has(capitulo))])
+	_check(pasos_ok == pasos_totales, "los %d pasos de las 10 cadenas avanzaron (%d)" % [pasos_totales, pasos_ok])
+	# Hallazgo medido: la cadena MERGEADA quedo fuera de la normalizacion
+	# mision_<id> de la iter. 21 (esa tanda toco solo secundarias.json). El
+	# check fija la excepcion para que un cambio silencioso del dato falle.
+	_check(fuera_esquema.size() == 1 and fuera_esquema[0] == "cadena-biblioteca=capitulo-biblioteca",
+		"9 de 10 capitulos siguen mision_<id>; la mergeada es la excepcion medida (%s)" % str(fuera_esquema))
+	# Persistencia E2E: save -> vacio -> restore
+	var data: Dictionary = _h.get_save_data()
+	var completadas: Array = data.get("completadas", [])
+	var en_save := 0
+	for cid in e2e:
+		if completadas.has(cid):
+			en_save += 1
+	_check(en_save == 10, "las 10 completadas figuran en get_save_data (%d)" % en_save)
+	_h.restore_save_data({})
+	var tras_vacio := 0
+	for cid in e2e:
+		if _h.esta_completada(cid):
+			tras_vacio += 1
+	_check(tras_vacio == 0, "restore vacio limpia las 10 (%d)" % tras_vacio)
+	_h.restore_save_data(data)
+	var tras_restore := 0
+	for cid in e2e:
+		if _h.esta_completada(cid):
+			tras_restore += 1
+	_check(tras_restore == 10, "round-trip restaura las 10 completadas (%d)" % tras_restore)
+	_check(_h.validar_cadenas().is_empty(), "el catalogo sigue valido tras las 10 corridas E2E")
+	# Higiene: dejar mundo y motor como estaban para cualquier bloque posterior
+	for cid in e2e:
+		for flag in (_h.get_cadena(cid).get("consecuencia", {}) as Dictionary):
+			if ws != null:
+				ws.set_flag(String(flag), false)
+	_h.restore_save_data({})
+	_fin("Z")
+
+
+## Iter. 23 (2026-10-25, DeepSeek-V4.1-Flash, Log 2197): item L109 del
+## 05-Checklist — "Crear la consecuencia 'taller abierto'", una de las 12 del
+## 03-Diseno L53. Hasta la iter. 22 el flag taller_abierto tenia 0 respaldo en
+## disco (0 cadenas lo aplicaban y 0 hits del token en res://data: el bloque S
+## lo fijaba como GUARDA negativa). Esta iteracion crea cadena-taller con
+## evidencia REAL: npc ramon_tejon (data/villagers/ramon_tejon.tres, herrero),
+## lugar taller_viejo (ya declarado por cadena-llave p2) y objeto iron_ore
+## (data/items/iron_ore.tres, "Hierro"), 4 pasos con los tipos del esquema.
+## El bloque S invierte su guarda a POSITIVA sobre el mismo token.
+func _test_consecuencia_taller() -> void:
+	_h.restore_save_data({})
+	var ws := root.get_node_or_null("WorldState")
+	_check(ws != null, "WorldState presente (M21) para medir taller_abierto")
+	var cid := "cadena-taller"
+	var cad: Dictionary = _h.get_cadena(cid)
+	_check(not cad.is_empty(), "%s cargada desde el catalogo" % cid)
+	_check(_h.fuente_cadena(cid) == "secundarias", "%s viene del principal (no del merge)" % cid)
+	_check(not bool(cad.get("oculta", false)), "%s NO es oculta (se descubre hablando)" % cid)
+	_check(not bool(cad.get("postgame", false)), "%s NO es postgame" % cid)
+	# Esquema: 4 pasos con tipos declarados y 1 sola consecuencia
+	var pasos: Array = cad.get("pasos", [])
+	_check(pasos.size() == 4, "%s declara 4 pasos: %d" % [cid, pasos.size()])
+	var tipos_validos := ["hablar", "explorar", "puzzle", "entregar"]
+	var tipos_ok := true
+	for p in pasos:
+		if not (String((p as Dictionary).get("tipo", "")) in tipos_validos):
+			tipos_ok = false
+	_check(tipos_ok, "los 4 pasos usan tipos del esquema (hablar/explorar/puzzle/entregar)")
+	var cons: Dictionary = cad.get("consecuencia", {})
+	_check(cons.size() == 1 and bool(cons.get("taller_abierto", false)),
+		"%s aplica exactamente el flag taller_abierto: %s" % [cid, str(cons)])
+	# NPC y objeto REALES por efecto (archivo en disco / campo id)
+	_check(FileAccess.file_exists("res://data/villagers/ramon_tejon.tres"),
+		"NPC REAL ramon_tejon existe en data/villagers/")
+	var ids_items := _ids_items_reales()
+	_check(ids_items.has("iron_ore"), "objeto REAL iron_ore existe en data/items/ (por campo id)")
+	# Recompensa: capitulo con el esquema del puente y cosmetico propio (cozy)
+	var rec: Dictionary = cad.get("recompensa", {})
+	_check(String(rec.get("diario", "")) == "mision_" + cid,
+		"recompensa.diario == mision_%s (esquema del puente): %s" % [cid, str(rec.get("diario", ""))])
+	_check(String(rec.get("cosmetico", "")) != "", "recompensa.cosmetico declarado (cozy, sin stats)")
+	# Visible en disponibles antes de iniciarse (no es oculta ni postgame)
+	var expuesta := false
+	for d in _h.cadenas_disponibles():
+		if String(d) == cid:
+			expuesta = true
+	_check(expuesta, "%s figura en cadenas_disponibles() sin final elegido" % cid)
+	# End-to-end por el camino real del servicio
+	var inv := root.get_node_or_null("Inventario")
+	if inv != null:
+		inv.agregar_items({"iron_ore": 1})
+	var res: Dictionary = _h.iniciar_cadena(cid)
+	_check(bool(res.ok), "iniciar %s OK" % cid)
+	res = _h.reportar_paso(cid, "hablar", "ramon_tejon")
+	_check(bool(res.ok), "taller p1 hablar ramon_tejon OK")
+	res = _h.reportar_paso(cid, "explorar", "taller_viejo")
+	_check(bool(res.ok), "taller p2 explorar taller_viejo OK")
+	res = _h.reportar_paso(cid, "puzzle", "fragua-apagada")
+	_check(bool(res.ok), "taller p3 puzzle fragua-apagada OK")
+	res = _h.reportar_entrega(cid)
+	_check(bool(res.ok), "taller p4 entregar iron_ore OK (inventario)")
+	_check(_h.esta_completada(cid), "%s completada end-to-end" % cid)
+	_check(ws_has("taller_abierto"), "consecuencia taller_abierto aplicada a WorldState (M21)")
+	# Puente diario M23->M55: el capitulo declarado NO existe en el catalogo de
+	# M55 (finding de contenido, dueno M55) -> degrada en silencio, igual que
+	# 78 de los 80. No se inventa contenido ajeno.
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		_check(not diary.esta_registrada("mision_" + cid),
+			"puente diario degrada sin entrada en catalogo M55 (finding medido, dueno M55)")
+	# Higiene: dejar el mundo como estaba para cualquier bloque posterior
+	if ws != null:
+		ws.set_flag("taller_abierto", false)
+	_h.restore_save_data({})
+	_fin("AA")
 
 
 ## Busca un token literal en un arbol (.json/.tres) y devuelve las rutas que lo

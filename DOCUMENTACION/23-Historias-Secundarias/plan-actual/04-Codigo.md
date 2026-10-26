@@ -1206,3 +1206,67 @@ M55 (dueño). Esta iterada arregla el lado M23 y mide el hueco exacto.
 
 - **Flips del 05-Checklist con cita:** NINGUNO (L97 sigue `[ ]` con nota
   medida). M23 = **86 [x] / 17 [ ] / 2 [?] = 105** (sin cambios).
+
+> **Nota de trazabilidad (iter. 23):** la iter. 22 (bloque Z `_test_e2e_diez()`,
+> 10 cadenas completas con driver genérico, Log 2196) **no dejó sección en este
+> archivo**: su evidencia vive en el Log 2196 y en el propio bloque Z. Se anota
+> acá para que el siguiente agente no lea el 04-Codigo como si el bloque Z no
+> existiera.
+
+## Iter. 23 — Consecuencia «taller abierto»: de 9/12 a 10/12 con respaldo en disco (Log 2197, 2026-10-25, DeepSeek-V4.1-Flash)
+
+**Ítem del 05:** L109 "Crear la consecuencia «taller abierto»" — una de las 12
+consecuencias persistentes del `03-Diseno` L53. Era el único `[ ]` de
+consecuencia PROPIO del módulo (los otros dos sin respaldo, «camino al faro
+despejado» y «puerto ampliado», no tienen ítem propio en el 05).
+
+- **Medición ANTES de escribir (iter. 22, bloque S):** `taller_abierto` tenía
+  **0 respaldo**: 0 de las 81 cadenas cargadas lo aplicaban y el token daba
+  **0 hits** en `res://data`. El bloque S lo fijaba como **guarda negativa**
+  («si algún día el flag aparece, este check falla»), precisamente para avisar
+  que el ítem dejaba de ser un `[ ]` honesto.
+- **Contenido creado — `cadena-taller`** en `data/historias/secundarias.json`
+  (80 -> **81** cadenas en el principal, +656 B, LF puro, UTF-8 sin BOM, 0 NUL,
+  0 U+FFFD):
+  | Campo | Valor | Respaldo medido |
+  |---|---|---|
+  | `id` / `titulo` | `cadena-taller` / «La Fragua del Taller Viejo» | únicos sobre 83 (81 + 3 de ejemplos, `cadena-faro` repetida) |
+  | `p1` hablar | `ramon_tejon` | **REAL**: `data/villagers/ramon_tejon.tres` (herrero) |
+  | `p2` explorar | `taller_viejo` | lugar **ya declarado** por `cadena-llave` p2 (no se inventa geografía) |
+  | `p3` puzzle | `fragua-apagada` | `ref` nuevo y único (77 previos) |
+  | `p4` entregar | `iron_ore` | **REAL**: `data/items/iron_ore.tres` («Hierro»), por campo `id` |
+  | `recompensa` | `mision_cadena-taller` + «delantal de herrero» | capítulo con el esquema del puente M22/M23; cosmético único (78 distintos) |
+  | `consecuencia` | `{ taller_abierto: true }` | 1 solo flag, sin colisión global |
+  Los 4 pasos usan **solo** los tipos del esquema (`hablar/explorar/puzzle/entregar`):
+  el rechazo del tipo `construir` (decisión del director, msg 153) no aplica acá.
+- **Efecto medido:** consecuencias con respaldo **9 -> 10 de 12**; sin respaldo
+  quedan **2** (`camino_al_faro_despejado`, `puerto_ampliado`). La guarda del
+  bloque S se **invierte a positiva** (el token debe existir y en UN solo
+  catálogo): si el dato desaparece, la suite falla y avisa que L109 volvió a ser
+  `[ ]` honesto. Una guarda que se borra en silencio al cumplirse su condición
+  no protege nada.
+- **Suite:** bloque **AA** `_test_consecuencia_taller()` (+22 checks): carga,
+  fuente, no-oculta/no-postgame, 4 pasos con tipos del esquema, 1 flag exacto,
+  NPC y objeto **REALES por efecto** (`FileAccess.file_exists` / campo `id`),
+  capítulo con esquema `mision_<id>`, visibilidad en `cadenas_disponibles()`,
+  end-to-end por el camino real del servicio (`iniciar_cadena` → 4 pasos →
+  `reportar_entrega` con `iron_ore` del inventario) y consecuencia aplicada a
+  WorldState (M21). Piso **869 -> 891 MEDIDO en verde**:
+  **891 / 0 / EXIT 0 ×3**, `SCRIPT ERROR: 0`.
+- **Guardián probado EN ROJO (2 modos, sonda borrada y `sha256` intacto):**
+  (A) aborto de **runtime** al inicio del bloque AA -> `871 checks / 2 fallos /
+  EXIT 1`, nombra `AA` **y** dispara el piso; (B) aserción falsa (esperar 5
+  pasos) -> `891 / 1 / EXIT 1`. Control sin mutar: `891 / 0 / EXIT 0`. Sin (A)
+  no se sabría si el bloque corre; sin (B), si sus aserciones pueden fallar.
+- **Conteos reparados en la suite** (efecto del dato nuevo, medidos y no
+  estimados): cargadas 81 -> **82**, principal 80 -> **81**, con diario 79 ->
+  **80**, sin respaldo en M55 77 -> **78**, flags únicos 81 -> **82**. Los 5
+  asserts estaban escritos con el conteo anterior: dejarlos habría dado un
+  falso rojo atribuido al dato nuevo.
+- **Puente diario M23→M55:** `mision_cadena-taller` **no** existe en el catálogo
+  de M55 → degrada en silencio, igual que 78 de los 80 (contenido de M55,
+  hallazgo ya reportado en el Log 2187). El bloque AA lo **afirma** en vez de
+  taparlo: no se inventa contenido ajeno.
+- **Flip propuesto, NO aplicado:** L109 `[ ]` -> `[x]` con la cita de esta
+  sección (M23 pasaría a **87 [x] / 16 [ ] / 2 [?] = 105**). Lo aplica la
+  directora: el `05-Checklist.md` no lo edita este agente.

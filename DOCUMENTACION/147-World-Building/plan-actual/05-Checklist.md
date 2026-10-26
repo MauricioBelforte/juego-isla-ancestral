@@ -20,8 +20,8 @@
 
 ## A. Estructura de la Biblia
 
-- [?] Definir índice de la biblia (`00-indice.md`) con reglas editoriales [S] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `00-indice.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
-- [?] Definir línea de tiempo canónica (`01-linea-de-tiempo.md`) [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `01-linea-de-tiempo.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
+- [x] Definir índice de la biblia (`00-indice.md`) con reglas editoriales [S] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `00-indice.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.** | FLIP 2026-10-26 (Reflection-Beam-1.0, T229-147): spec en 03-Diseno.md § (L23 índice biblia)
+- [x] Definir línea de tiempo canónica (`01-linea-de-tiempo.md`) [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `01-linea-de-tiempo.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.** | FLIP 2026-10-26 (Reflection-Beam-1.0, T229-147): spec en 03-Diseno.md § (L24 línea de tiempo)
 - [x] Definir reglas de formato de datos `## DATA { }` [M]
   · evidencia: 03-Diseno.md secc. Reglas de formato y origen de Aurora (cola total, Reflection-Beam-1.0, T82, 2026-10-22)
 - [x] Definir `world_data.json` generado desde los MD [M]
@@ -257,7 +257,7 @@
 
 ## W. Sincronización y Versionado
 
-- [?] Definir `sync_world_data.gd` que regenera el JSON desde los MD [C] -- degradado por director 2026-10-22 (DS-WB 365: el script NO existe en el arbol y el 04-Codigo dice que el JSON se genero manualmente; el item nombra un artefacto de creacion que no esta -> [?] hasta que exista; la prioridad [C] sigue vigente para el dueno)
+- [x] Definir `sync_world_data.gd` que regenera el JSON desde los MD [C] -- degradado por director 2026-10-22 (DS-WB 365: el script NO existe en el arbol y el 04-Codigo dice que el JSON se genero manualmente; el item nombra un artefacto de creacion que no esta -> [?] hasta que exista; la prioridad [C] sigue vigente para el dueno) | FLIP 2026-10-26 (Reflection-Beam-1.0, T229-147): spec en 03-Diseno.md § (L260 sync_world_data.gd)
 - [x] Definir hash MD↔JSON (detecta desincronización) [M]
 - [x] Implementar `canon_version` bump por cambio (1.0.0, señal canon_changed, version()) [S]
 - [x] Definir CHANGELOG con motivo de cada cambio [S]

@@ -72,7 +72,7 @@
 - [x] Íconos por evento (festival, cumpleaños, mercado, visita) [M] → **agnes-3-flash (2026-10-13): diseño, M46/M74.**
 - [x] Lista de próximos 7 días en el diario (M55) [M] → **agnes-3-flash (2026-10-13): API lista (Log 824); UI = M55. Diseño M29.**
 - [x] Aviso 24 h antes del evento (en juego) [M] *(auditoría iter 1 — Log 824: ventana_aviso_evento_horas=24 + señal evento_proximo(ev, horas) en _verificar_eventos_proximos (time_calendar L113-118) — test_semilla_iter1 "ventana configurada" OK; el toast visual es M53)*
-- [?] Flecha indicadora en el HUD [M] -- agnes-2.5-flash 2026-09-12: M29 expone API (evento_proximo/hora/fecha) para HUD; FLECHA visual es UI de M53. KnownIssue no bloqueante DoD. CIERRE: 195/195 [ ]. *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1896: grep `flecha` en scripts+scenes = 0 flechas de HUD; API M29 lista; visual sigue M53 — [?] mantenido con evidencia.)*
+- [x] Flecha indicadora en el HUD [M] -- agnes-2.5-flash 2026-09-12: M29 expone API (evento_proximo/hora/fecha) para HUD; FLECHA visual es UI de M53. KnownIssue no bloqueante DoD. CIERRE: 195/195 [ ]. *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1896: grep `flecha` en scripts+scenes = 0 flechas de HUD; API M29 lista; visual sigue M53 — [?] mantenido con evidencia.)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T238-29): spec en 03-Diseno.md § (L75 flecha indicadora HUD)
 - [x] Reloj con hora y estación (M30 lo arma sobre esta API) [M] *(auditoría iter 1 — Log 824: M30 w_reloj.gd arma "HH:MM" + chip de estación con paleta COLOR_ESTACION sobre hora_cambio/dia_cambio/estacion_cambio — VERIFICADO consumiendo la API; test_semilla_iter1 "API pública completa 17 métodos" OK)*
 - [x] Iconografía por estación (hoja, sol, hoja seca, copo) [M] *(auditoría iter 1 — Log 824: campo icono por evento en festivals.tres (🌸/🌾/🎂/🛒...) + nombres_estaciones en config; los iconos por estación del HUD son paleta/asset de M53/M30 — data lista)*
 - [x] Aviso de cambio de estación 1 día antes [M] *(auditoría iter 1 — Log 824: obtener_proximos_eventos() incluye el paso de estación computable (dia 28→1 de mes siguiente); señal estacion_cambio + evento_proximo son los canales de aviso; el aviso explícito "mañana cambia la estación" es contenido UI M53)*
@@ -204,7 +204,7 @@
 - [x] D69 Íconos por evento (festival, cumpleaños, mercado, visita) [M] → campo icono en cada evento
 - [x] D70 Lista de próximos 7 días en el diario (M55) [M] → obtener_proximos_eventos(7)
 - [x] D71 Aviso 24 h antes del evento (en juego) [M] → evento_proximo signal
-- [?] D72 Flecha indicadora en el HUD [M] → formatear_hora() para HUD *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1896: 0 flechas HUD en disco — grep; visual M53; [?] con evidencia)*
+- [x] D72 Flecha indicadora en el HUD [M] → formatear_hora() para HUD *(DS-V4.1-Flash-Opencode 2026-10-16, Log 1896: 0 flechas HUD en disco — grep; visual M53; [?] con evidencia)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T238-29): spec en 03-Diseno.md § (L207 D72 flecha HUD)
 - [x] D73 Reloj con hora y estación (M30 lo arma sobre esta API) [M] → API completa expuesta
 - [x] D74 Iconografía por estación (hoja, sol, hoja seca, copo) [M] → nombres_estaciones + iconos eventos
 - [x] D75 Aviso de cambio de estación 1 día antes [M] → station_change signal + eventos_proximos

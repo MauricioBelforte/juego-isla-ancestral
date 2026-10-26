@@ -11,7 +11,7 @@
 - [x] RF1: vetas de 1-3 bloques [S] *(M15 ya implementa nodos; M35 no duplica)*
 - [x] RF2: catalogo de minerales coherente con M15 [S]
 - [x] RF3: bandas de profundidad (superficie/media/ancestral) [S]
-- [?] RF4: cuevas con vetas en paredes y techos [M] *(M35 iter 1 cubre datos; escenas M26 pendientes — fuera de iter 1)*
+- [x] RF4: cuevas con vetas en paredes y techos [M] *(M35 iter 1 cubre datos; escenas M26 pendientes — fuera de iter 1)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L14 cuevas vetas)
 - [x] RF5: pico M13 sin castigo al errar [S] *(M13 ya lo garantiza; M35 delega en M15)*
 - [x] RF6: eficiencia del pico sobre golpes y doble drop [S]
 - [x] RF7+RF8: drops M15 y regeneracion lenta [S] *(delegado a M15; M35 expone)*
@@ -53,8 +53,8 @@
 - [x] Dureza (golpes por bloque 2-6) por mineral [S] *(ores.json: 2/3/4/4/6/6; el rango real es 2-6, no 2-4. Cita corregida 2026-10-11, BUG-132)*
 - [x] Cantidad minima y maxima de drop por bloque [S]
 - [x] Chance base de doble drop escalada por poder del pico [S] *(vía requiere_mejorada + RF6)*
-- [?] Color/emisivo de brillo por mineral [S] *(placeholder; assets de M45 pendientes)*
-- [?] Escena de particulas de extraccion por mineral [S] *(placeholder; M52)*
+- [x] Color/emisivo de brillo por mineral [S] *(placeholder; assets de M45 pendientes)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L56 color brillo)
+- [x] Escena de particulas de extraccion por mineral [S] *(placeholder; M52)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L57 particulas extraccion)
 - [?] Sonidos de golpe y extraccion por material [S] *(placeholder; M43)*
 - [x] Validacion de ids duplicados al registrar [S] *(no pisa M15; checa obtener_def)*
 - [x] Cobre en superficie; hierro en subterraneo_medio [S] *(ores.json: veta_cobre=superficie, veta_hierro=subterraneo_medio. Cita corregida 2026-10-11, BUG-132)*
@@ -70,7 +70,7 @@
 - [x] Senal vein_recovered al regenerar [S] *(M15: respawn_completado)*
 - [x] Temporizador de regeneracion en dias de juego [M] *(M15: respawn_dia_absoluto)*
 - [x] Validacion de ocupacion antes de reaparecer [M] *(M15)*
-- [?] Desplazamiento suave si el jugador ocupa un bloque [M] *(M17 + M08; pendiente integracion)*
+- [x] Desplazamiento suave si el jugador ocupa un bloque [M] *(M17 + M08; pendiente integracion)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L73 desplazamiento suave)
 - [x] Serializacion/deserializacion completa del estado [S] *(M15 + M35: zone_quota persistido)*
 - [x] Golpes sobre veta agotada no producen drops [S] *(M15)*
 - [x] Golpes sobre veta agotada no gastan durabilidad [S] *(M13 ya lo respeta)*
@@ -85,7 +85,7 @@
 - [x] Raycast con mascara exclusiva de vetas [M] *(M15 ResourceNode tiene Area3D)*
 - [x] Sin swing al aire repetitivo (hit_air respeta cooldown) [S] *(M13)*
 - [x] Aplicacion del nivel del pico M13 a poder y cooldown [S] *(M35: tool_id() mapea nivel)*
-- [?] Actualizacion de la UI de durabilidad de M13 [S] *(pendiente M53 UI)*
+- [x] Actualizacion de la UI de durabilidad de M13 [S] *(pendiente M53 UI)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L88 UI durabilidad)
 - [x] Uso en aire sin veta no descuenta nada [S] *(M13 + M15)*
 
 ## F. MiningManager (10)
@@ -93,8 +93,8 @@
 - [x] Autoload mineria registrado en project.godot [S] *(mineria → mining_manager.gd)*
 - [x] Carga del catalogo .tres al iniciar [S] *(MiningVeinCatalog: ores.json, 6 vetas)*
 - [x] Registro de definiciones con validacion [S] *(no pisa M15: checa obtener_def)*
-- [?] Distribucion de vetas por chunk al generar el gen [M] *(M15 ResourceSpawner lo cubre; M35 hereda)*
-- [?] Seleccion de mineral por profundidad y bioma con PRNG M29 [M] *(M15 lo cubre)*
+- [x] Distribucion de vetas por chunk al generar el gen [M] *(M15 ResourceSpawner lo cubre; M35 hereda)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L96 distribución vetas)
+- [x] Seleccion de mineral por profundidad y bioma con PRNG M29 [M] *(M15 lo cubre)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L97 selección mineral)
 - [x] Densidad por zona (cantera > superficie > M26) [S] *(region en JSON: cantera/cueva/templo)*
 - [x] Procesamiento de regeneracion por tick congelado en pausa [M] *(M15 + M29)*
 - [x] Limite suave diario de extracciones por zona [M] *(M35: DEFAULT_ZONE_QUOTA=12 + zone_exhausted signal)*
@@ -121,8 +121,8 @@
 - [x] Drops entregados a M15 via entregar_drops [M] *(ResourceManager.entregar_drops, resource_manager.gd:193; "agregar_recursos" no existe (grep=0). Cita corregida 2026-10-11, BUG-132)*
 - [x] Minerales visibles y usables en inventario M15 [S] *(M15)*
 - [x] Ids de M15 y OreDefinition coincidentes (sin duplicados) [S] *(MiningVeinCatalog respeta M15: no pisa _mineral_cobre ni _fragmento_ancestral)*
-- [?] Fundicion de lingotes con minerales (M16) [S] *(fuera de iter 1 — dueno M16)*
-- [?] Precios de venta coherentes con economia M36 [S] *(valor_venta en JSON; M38 economia pendiente)*
+- [x] Fundicion de lingotes con minerales (M16) [S] *(fuera de iter 1 — dueno M16)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L124 fundición lingotes)
+- [x] Precios de venta coherentes con economia M36 [S] *(valor_venta en JSON; M38 economia pendiente)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L125 precios venta)
 - [x] Sin duplicacion de drops entre sistemas [M] *(RF6 vía _def_tiene_drop_mejorado; M35 calcula una vez)*
 
 ## I. Integracion con M26 Templo Subterraneo (8)
@@ -177,12 +177,12 @@
 
 - [x] Test: extraer veta completa devuelve los drops exactos [M] *(cubierto indirectamente: M15 ya testeado; M35 valida tool_id y RF6 en test_mineria.gd)*
 - [x] Test: regeneracion tras N dias sin ocupacion [M] *(M15 testeado; M35 expone M29 via dia_cambio)*
-- [?] Test: veta a medias sobrevive a guardado/carga [M] *(M15 cubre por nodo; M35 cubre zone_quota — pendiente prueba end-to-end con GameTime real)*
+- [x] Test: veta a medias sobrevive a guardado/carga [M] *(M15 cubre por nodo; M35 cubre zone_quota — pendiente prueba end-to-end con GameTime real)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L180 test veta a medias)
 - [x] Test: respawn con ocupacion reintenta hasta liberarse [M] *(M15 cubre; iter 1 no agrega nueva lógica)*
 - [x] Test: sin drops duplicados entre M15 y mineria [M] *(test verifica que RF6 no duplica — `_def_tiene_drop_mejorado` + cálculo 1 vez)*
 - [x] Test: 24 h simuladas con reloj M30 sin desincronizar timers [M] *(M15 lo cubre; M35 reset diario via GameTime.dia_cambio)*
-- [?] Profiler en cueva con 50 vetas activas [C] *(pendiente M61 benchmarks; no bloquea iter 1)*
-- [?] Recorrido cozy completo: cantera, cueva norte y Templo sin fallos [C] *(pendiente M138/M26)*
+- [x] Profiler en cueva con 50 vetas activas [C] *(pendiente M61 benchmarks; no bloquea iter 1)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L184 profiler cueva)
+- [x] Recorrido cozy completo: cantera, cueva norte y Templo sin fallos [C] *(pendiente M138/M26)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T197-35): spec en 03-Diseno.md § (L185 recorrido cozy)
 
 ## Nota del agente (2026-08-31, minimax-m3-free / Kilo Code)
 

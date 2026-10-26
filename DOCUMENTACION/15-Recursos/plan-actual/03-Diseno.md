@@ -297,3 +297,11 @@ inition    (nodo 3D en el    (generaciÃ³n y      (instanciaciÃ³n,   (drop ag
 
 ### Profiler M113: picos de frames con 60 drops y 30 partículas simultáneos
 - Spec: profiler M113: picos de frames con 60 drops y 30 partículas simultáneos. Coherente con M113 (profiling) y M15 (recursos).
+
+### Specs items degradados T201 (2026-10-26, Reflection-Beam-1.0)
+- **L50 (validar_definicion):** QA s2 2026-10-12 (Log 1787): grep 0 hits en todos los .gd. Contradice Notas iter 6 (C.65). Deuda M15.
+- **L56 (campos exportados def_id, display_name, categoria, rareza, icono):** QA iter 6 — 4 de 5 implementados (resource_definition.gd:14-17); FALTA `icono` — delegado a M46/M53 arte+UI.
+- **L288 (cableado M13->M15):** M13 tool_controller.gd usa VoxelTool.raycast (terreno voxel) y NO detecta ResourceNode (Node3D con Area3D). Helper ResourceManager.recibir_golpe_en_nodo(nodo, herramienta) existe y esta testeado; cableado real (RayCast3D adicional en M13 o input_event en Area3D del ResourceNode) requiere cambio en M13 (Hy3) o en ResourceNode. Documentado en Notas del Agente.
+- **L290 (recolectar en lote/area 3x3 para ResourceNode):** pendiente.
+- **L323 (recolectar en lote/area 3x3 SIGUE iter 3):** dueno M13.
+- **L346 (recolectar en lote/area 3x3 SIGUE iter 3):** dueno M13.

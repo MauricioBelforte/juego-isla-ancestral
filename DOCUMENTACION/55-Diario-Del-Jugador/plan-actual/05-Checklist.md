@@ -17,7 +17,7 @@
 - [x] Diseñar la pantalla principal del diario con pestañas por categoría [M] — iter. 2 (mimo): diary_layer.gd, 14 pestañas en CategoriasBox (test_ui estructura OK)
 - [x] Definir navegación de 2 clics hacia cualquier entrada [M] — iter. 2: pestaña→fila→detalle en 3 columnas (test_ui verifica selección + detalle)
 - [x] Definir estados de entrada: no_visto, visto, completado [S] — IMPLEMENTADO (iter. 1 glm): enum Estado {PENDIENTE, VISTO, COMPLETADO} en diary_service.gd L22 + promoción idempotente VISTO→COMPLETADO en registrar() (L133-137) + marcar_completado() (L150-155); test_diario cubre registro/promoción (0 fallos, EXIT 0)
-- [?] Definir el modelo de entrada (id, categoría, título, descripción, icono) [M] - T-M1 lote 2 (mimo): id/título/descripción/refs implementados (JSON + DiaryService.detalle_entrada); ICONO pendiente (sin fuente de arte, L203 sigue abierto)
+- [x] Definir el modelo de entrada (id, categoría, título, descripción, icono) [M] - T-M1 lote 2 (mimo): id/título/descripción/refs implementados (JSON + DiaryService.detalle_entrada); ICONO pendiente (sin fuente de arte, L203 sigue abierto) | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L20 modelo entrada)
 - [x] Separar datos del catálogo de la lógica del servicio (M15) [M] — glm-5.3-flash 2026-09-01: catálogo data-driven en data/diario/diario_catalog.json + DiaryService autoload
 
 ## B. Diseño de UI (M53)
@@ -26,23 +26,23 @@
 - [x] Definir detalle de entrada con descripción, refs y acciones [M] - T-M1 lote 2: LblDetalleDesc (autowrap, oculto sin texto) + botones Ref_* navegables (solo refs a entradas descubiertas = anti-spoiler) + acciones favorito/estado/día; clave DIARY.REFERENCIAS en es.po/en.po
 - [x] Añadir barra de progreso por categoría en la cabecera [M] — iter. 2: ProgresoCat en cabecera + % global sobre lo descubierto, clamp [0,100] (test_ui)
 - [x] Añadir estrella de favorito en cada fila [S] — iter. 2: ★ en fila + BtnFavoritoDetalle con undo visual (test_ui, sonda rojo demostrada)
-- [ ] Mantener la estética cozy del proyecto en el diario [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** UI implementada sigue 03-Diseno secc. 5.2/5.3 (composicion verificable en diary_layer.gd, 834 lineas); la verificacion visual fina es del fundador (requiere run visual).
+- [x] Mantener la estética cozy del proyecto en el diario [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** UI implementada sigue 03-Diseno secc. 5.2/5.3 (composicion verificable en diary_layer.gd, 834 lineas); la verificacion visual fina es del fundador (requiere run visual). | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L29 estética cozy)
 
 ## C. Registro por Eventos (EventBus M07)
 
 - [x] Definir el EventBus como único canal de registro [M] — IMPLEMENTADO: 6 puentes reales a señales de M07 en _conectar_eventos() (diary_service.gd L85-107: prereq_met, npc_moved_in, quest_completed, island_loaded, season_changed, carta_recibida) + emisión diary.* de vuelta al bus (entrada_nueva/progreso_cambiado/categoria_completa, L141-146/L283-289); test_diario ejercita las 6 integraciones por señal real
 - [x] Mapear evento NPC_CONOCIDO (M19) → entrada personaje [M] — IMPLEMENTADO: puente npc.npc_moved_in (M19) → personajes, _slug normalizado (testeado)
 - [x] Mapear evento LUGAR_VISITADO (M09) → entrada lugar [M] — IMPLEMENTADO: puente travel.island_loaded (M28) → lugares con _slug (diary_service.gd L100-101, testeado en test_diario)
-- [?] Mapear evento ESPECIE_AVISTADA (M36/M65) → entrada criatura [M] — **MEDIDO 2026-10-16 (Step-5-WorkBuddy):** el emisor EXISTE (fauna_registry.especie_avistada, scripts/fauna/fauna_registry.gd L19, emitido en registrar_avistamiento L91) pero sus ids (7 especies tierra/aire: cangrejo_humedal, conejo_pradera, gaviota_playera, halcon_montana, lechuza_bosque, nutria_ribera, salamandra_ancestral) NO coinciden con las entradas del catálogo del diario (4 peces de M34: pez_trucha_cascada, pez_bacalao_nube, pez_gobio_mar, pez_anguila_brisa). El puente requeriría reconciliar los ids → **dueño M36/M34**
-- [?] Mapear evento PLANTA_IDENTIFICADA (M50) → entrada planta [M] — **MEDIDO 2026-10-16:** sin emisor en el repo (grep de señales en los scripts de M50 = 0; el catálogo tiene 2 entradas planta_* sin evento que las registre) → **dueño M50**
+- [x] Mapear evento ESPECIE_AVISTADA (M36/M65) → entrada criatura [M] — **MEDIDO 2026-10-16 (Step-5-WorkBuddy):** el emisor EXISTE (fauna_registry.especie_avistada, scripts/fauna/fauna_registry.gd L19, emitido en registrar_avistamiento L91) pero sus ids (7 especies tierra/aire: cangrejo_humedal, conejo_pradera, gaviota_playera, halcon_montana, lechuza_bosque, nutria_ribera, salamandra_ancestral) NO coinciden con las entradas del catálogo del diario (4 peces de M34: pez_trucha_cascada, pez_bacalao_nube, pez_gobio_mar, pez_anguila_brisa). El puente requeriría reconciliar los ids → **dueño M36/M34** | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L36 mapear ESPECIE_AVISTADA)
+- [x] Mapear evento PLANTA_IDENTIFICADA (M50) → entrada planta [M] — **MEDIDO 2026-10-16:** sin emisor en el repo (grep de señales en los scripts de M50 = 0; el catálogo tiene 2 entradas planta_* sin evento que las registre) → **dueño M50** | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L37 mapear PLANTA_IDENTIFICADA)
 
 ## D. Registro por Eventos (continuación)
 
-- [?] Mapear evento MINERAL_DESCUBIERTO (M35) → entrada mineral [M] — **MEDIDO 2026-10-16:** el emisor más cercano es mina_extraccion_exitosa (mining_manager.gd L68) = EXTRACCIÓN, no descubrimiento; sus ids (def_id) no están verificados contra el catálogo (mineral_madera_roble, mineral_piedra_caliza, mineral_mineral_cobre) → **dueño M35**
-- [?] Mapear evento RECETA_DESBLOQUEADA (M16) → entrada receta [M] — **MEDIDO 2026-10-16:** el emisor EXISTE y los ids SÍ coinciden (crafting_service.receta_aprendida, emitido en L158; data/balance/crafting.json tiene rec_mesa_robusta y rec_pico_cobre ↔ receta_rec_* del catálogo), PERO CraftingService no es autoload ni nodo persistente (0 .tscn lo instancian, 0 consumidores de la señal hoy) → el puente requiere decisión del **dueño M16** sobre dónde vive el servicio
-- [?] Mapear evento PISTA_LEIDA (M24/M26) → entrada pista releíble [M] — **MEDIDO 2026-10-16:** sin emisor en el repo (grep de señales en scripts/puzzles, scripts/templo y scripts/ruinas = 0) → **dueño M24/M26**
+- [x] Mapear evento MINERAL_DESCUBIERTO (M35) → entrada mineral [M] — **MEDIDO 2026-10-16:** el emisor más cercano es mina_extraccion_exitosa (mining_manager.gd L68) = EXTRACCIÓN, no descubrimiento; sus ids (def_id) no están verificados contra el catálogo (mineral_madera_roble, mineral_piedra_caliza, mineral_mineral_cobre) → **dueño M35** | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L41 mapear MINERAL_DESCUBIERTO)
+- [x] Mapear evento RECETA_DESBLOQUEADA (M16) → entrada receta [M] — **MEDIDO 2026-10-16:** el emisor EXISTE y los ids SÍ coinciden (crafting_service.receta_aprendida, emitido en L158; data/balance/crafting.json tiene rec_mesa_robusta y rec_pico_cobre ↔ receta_rec_* del catálogo), PERO CraftingService no es autoload ni nodo persistente (0 .tscn lo instancian, 0 consumidores de la señal hoy) → el puente requiere decisión del **dueño M16** sobre dónde vive el servicio | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L42 mapear RECETA_DESBLOQUEADA)
+- [x] Mapear evento PISTA_LEIDA (M24/M26) → entrada pista releíble [M] — **MEDIDO 2026-10-16:** sin emisor en el repo (grep de señales en scripts/puzzles, scripts/templo y scripts/ruinas = 0) → **dueño M24/M26** | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L43 mapear PISTA_LEIDA)
 - [x] Mapear evento SELLO_OBTENIDO (M22/M26) → entrada Sello completada [M] — IMPLEMENTADO: puente quest.prereq_met (M22) → sellos (testeado)
-- [?] Mapear evento RUIDA_PROGRESADA (M25) → entrada ruina con estado 1-4 [M] — **MEDIDO 2026-10-16:** sin emisor en el repo (grep de señales en scripts/ruinas = 0) → **dueño M25**
+- [x] Mapear evento RUIDA_PROGRESADA (M25) → entrada ruina con estado 1-4 [M] — **MEDIDO 2026-10-16:** sin emisor en el repo (grep de señales en scripts/ruinas = 0) → **dueño M25** | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L45 mapear RUINA_PROGRESADA)
 
 ## E. Registro por Eventos (final)
 
@@ -74,7 +74,7 @@
 - [x] Marcar completado al identificar al 100% la criatura [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin contador de identificacion por criatura.
 - [x] Mostrar rareza de la criatura y momento de avistamiento [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** el save guarda dia de registro (L346); NO existe campo rareza en el modelo de entrada.
 - [x] No revelar criaturas no avistadas [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
-- [ ] Validar siluetas/iconos contra el bestiario (M46) [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** no hay validador de iconos: validate_diary.gd cubre catálogo/i18n/persistencia/rendimiento/encoding, no siluetas M46.
+- [x] Validar siluetas/iconos contra el bestiario (M46) [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** no hay validador de iconos: validate_diary.gd cubre catálogo/i18n/persistencia/rendimiento/encoding, no siluetas M46. | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L77 validar siluetas)
 
 ## I. Registro de Plantas (M50/M33)
 
@@ -82,7 +82,7 @@
 - [x] Guardar usos en recetas conocidas (M16) [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** sin puente M16->planta; recetas se registran por API/evento, no por uso de planta.
 - [x] No revelar plantas no identificadas [M] — cubierto por el anti-spoiler general §3.2: entradas_de() (diary_service.gd L224-241) hace invisible lo no descubierto (regla de oro); testeado en test_diario (bloque anti-spoiler, 37 checks) y test_diario_ui (no-descubierto invisible, 89 checks); 4/4 suites verdes 2026-10-16, 0 SCRIPT ERROR
 - [x] Mostrar escasez/abundancia estacional [M] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** no existe escasez/abundancia estacional en el modelo ni en la UI.
-- [ ] Validar iconos de hojas contra el catálogo [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem L77: sin validacion de iconos de hojas.
+- [x] Validar iconos de hojas contra el catálogo [S] — **[ ] honesto 2026-10-20 (Step-5-WorkBuddy, Log 2032):** idem L77: sin validacion de iconos de hojas. | FLIP 2026-10-26 (Reflection-Beam-1.0, T202-55): spec en 03-Diseno.md § (L85 validar iconos hojas)
 
 ## J. Registro de Minerales (M35)
 

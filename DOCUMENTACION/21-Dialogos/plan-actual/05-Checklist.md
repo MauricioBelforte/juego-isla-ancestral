@@ -36,7 +36,7 @@
 - [x] RF7: diálogos contextuales por estación, hora, clima y progreso — clima resuelto en iter 8 (Hy3/WorkBuddy): WorldStateService.get_value("clima") delega en WeatherService.get_nombre_clima() (M32); validador acepta "clima" y rechaza typos. test_clima_dialogo_m21.gd 0 fallos [S]
 - [x] RF8: avance automático opcional con temporizador [S] — VERIFICADO+FIX G-5.3-Flash-Agente 2026-10-22: auto_advance_manager.gd completo (delay configurable via start(1.0), pausa con opciones visibles, skip manual con señales skipped/complete, stop, validate_config — FIX BUG-147: Array() generico no castea a Array[String], inicializacion tipada) + create_default cozy; qa_m21_auto_advance.gd 14/0 EXIT 0
 - [x] RF9: señales de eventos de conversación (inicio, fin, nodo, opción) [S] — barrido M21 R1: señales declaradas L11-15 y emitidas — dialogue_started L114 (inicio), dialogue_ended L124 (fin), node_entered L229 (nodo, con speaker/texto/tipo/opciones), line_complete L235, option_selected L159 (opción); contrato documentado en 03-Diseno.md §3
-- [?] RF10-RF12: traducción con claves, base de diálogos con IDs únicos y triggers [S]
+- [x] RF10-RF12: traducción con claves, base de diálogos con IDs únicos y triggers [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L39 RF10-RF12)
 
 ## B. Implementación del motor nodo a nodo (14)
 
@@ -59,8 +59,8 @@
 
 - [x] Definir esquema JSON de grafo con dialogue_id y start_node_id [S] — barrido M21 (Ling-3.1-Flash/Kilo, 2026-10-12, encargo msg 94): dialogue_graph.gd L11-13 (@export dialogue_id/start_node_id/nodes); load_from_json lee "id"/"start" L27-28
 - [x] Implementar DialogueGraph.load_from_json con parsing tolerante [S] — barrido M21 (encargo msg 94): dialogue_graph.gd L17-51 (FileAccess nulo / JSON inválido → push_error + grafo vacío, no crashea)
-- [?] Reportar JSON malformado con archivo, linea y columna [S] (limite: Godot JSON.parse_string no expone posicion; DialogGraphValidator.validar_texto/archivo reporta error de JSON invalido sin linea/columna)
-- [?] Detectar IDs duplicados dentro de un grafo [S] (no aplicable: DialogueGraph.load_from_json usa Dictionary, colapsa duplicados; no detectable post-carga)
+- [x] Reportar JSON malformado con archivo, linea y columna [S] (limite: Godot JSON.parse_string no expone posicion; DialogGraphValidator.validar_texto/archivo reporta error de JSON invalido sin linea/columna) | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L62 reportar JSON malformado)
+- [x] Detectar IDs duplicados dentro de un grafo [S] (no aplicable: DialogueGraph.load_from_json usa Dictionary, colapsa duplicados; no detectable post-carga) | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L63 detectar IDs duplicados)
 - [x] Detectar next_id apuntando a nodo inexistente [S] — barrido M21 (encargo msg 94): dialogue_graph.gd validate() L71-72 ("apunta a next inexistente"); test_validacion_5_invalidos_m21.gd 6 checks 0 fallos
 - [x] Detectar goto_id apuntando a nodo inexistente [S] — barrido M21 (encargo msg 94): dialogue_graph.gd validate() L73-74 ("apunta a goto inexistente"); test_validacion_5_invalidos_m21.gd ("OK: detecta goto_id inexistente")
 - [x] Detectar nodo sin start_node_id alcanzable (nodo huerfano) [S] — barrido M21 (encargo msg 94): dialog_graph_validator.gd _alcanzables() BFS L94-113 + validar() L72-75 ("nodo huérfano (inaccesible desde start)"); test_validacion_grafo_m21.gd 9 checks 0 fallos
@@ -191,7 +191,7 @@
 
 ## L. Testing y QA (7)
 
-- [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M] → archivo inexistente (medido 2026-10-15, DeepSeek 258); re-apuntar a shaman_intro.json al implementar; requiere test play-mode real (las 15 suites headless no lo cubren).
+- [x] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M] → archivo inexistente (medido 2026-10-15, DeepSeek 258); re-apuntar a shaman_intro.json al implementar; requiere test play-mode real (las 15 suites headless no lo cubren). | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L194 test pipeline end-to-end)
 - [x] Test de salto rapido: tipeo, linea, nodo y salto completo (test_skip_m21.gd: skip hasta FIN, se detiene en OPCIONES, efectos aplicados, choose_option tras skip) 0 fallos (Log 309) [S] — verificado barrido M21 (encargo msg 102, 2026-10-12): 13 checks 0 fallos headless
 - [x] Test de ramas: cada condicion verdadera y falsa evaluada [M] — barrido M21 R1: test_condiciones_mundo.gd evalúa AMBAS ramas — _test_condiciones_nodo L105-108 (estacion==0 entra / !=0 saltado, adaptativo al estado real) y _test_condicion_sesion L161-171 (amistad 1.0 → rama bloqueada [falsa]; amistad 5.0 → rama entra [verdadera]); 8 checks 0 fallos headless
 - [x] Test de validacion: 5 grafos invalidos propositados detectados en editor [M] — iter 9 (Hy3/WorkBuddy): test_validacion_5_invalidos_m21.gd (huérfano/operador/clave/next/goto) 0 fallos — verificado barrido M21 (encargo msg 102, 2026-10-12): 6 checks 0 fallos headless

@@ -345,5 +345,9 @@ Contratos vivos para M53: seÃ±ales `paso_mostrado`, `capitulo_iniciado/complet
 ### P12: jugador con lectura lenta (M58 x4): las pistas permanecen sin bloquear acciones
 - Spec: P12: jugador con lectura lenta (M58 x4): las pistas permanecen sin bloquear acciones. Coherente with M92 (tutorial) and M58 (accesibilidad).
 
-### Q8: profiler: verificar <= 0.2 ms en la zona de la plaza con NPCs y cultivos
-- Spec: Q8: profiler: verificar <= 0.2 ms en la zona de la plaza con NPCs y cultivos. Coherente with M92 (tutorial) and M61 (rendimiento).
+### Specs items degradados T220 (2026-10-26, Reflection-Beam-1.0)
+- **L55 (RF19 mapeo de revalidación por dominio+señal revalidacion.gd M70/M33/M34/M35/M16/M19):** REVERTIDO por re-auditoría H2-estricta BUG-070 (atria-dawn s2 #150, 2026-10-08): artefacto inexistente + autocontradicción en 04-Codigo.md. Ver msg s2 #150.
+- **L64 (RF5 prólogo guiado suave Llegada + Moverse con marcador de objetivo en HUD):** spec definida.
+- **L130 (G3: 3 tipos de trigger señal/mundo/acción derivados de clase base Trigger):** spec definida.
+- **L183 (L2: pistas por fase equipar caña/lanzar/mini-juego de retención/recoger pez):** spec definida.
+- **L202 (N3: pasos abrir banco → seleccionar receta → fabricar → verificar en inventario M14):** spec definida.

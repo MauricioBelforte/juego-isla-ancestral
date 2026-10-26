@@ -83,9 +83,9 @@ WeatherService (autoload/único, M07):
 
 ## 8. Accesibilidad (M58) — datos
 
-| Opción | Efecto |
-|---|---|
-| Reducir clima | densidad de partículas -50% |
+### Specs items degradados T239 (2026-10-26, Reflection-Beam-1.0)
+- **L23 (RF5 partículas GPU compartidas y pausables):** DEGRADADO 2026-10-15 (agnes 483, muestreo §21.8.2.b): 0 hits de partículas en scripts/clima/. Medición iter. 6 (2026-10-16, DS-V4.1-Flash-Opencode): dueño real = M52, NO M49/M51 — grep: scripts/particles/vfx_pool.gd (pool GPU compartido), vfx_factory.gd (emisores; draw_pass_1, fix Godot 4.3), vfx_trigger.gd (bus weather.clima_cambio derivado del catálogo), vfx_schema.gd (categoría clima, tags lluvia/nieve); suite M52 181/0 (5 suites) — pero M52 🟡 ABIERTO (146/148, 2 [?] propios: L144 validate_vfx.gd inexistente). "Pausables": 0 hits pausa/clock en particles no-test. M49 (scripts/world/): 0 hits clima/weather. [?] se mantiene con dueño corregido M52 (re-flip cuando M52 cierre).
+- **L26 (RF8 efectos sobre vegetación, agua y nieve visual):** DEGRADADO 2026-10-15 (agnes 483, muestreo §21.8.2.b): sin evidencia en M32. Medición iter. 6 (2026-10-16, DS-V4.1-Flash-Opencode): NO implementado en ningún módulo — vegetación M50: 0 hits sway/viento/clima/intensidad en scripts/vegetacion/; agua M51: world/agua_animada.gd = shader de olas estático (0 hits clima/intensidad); nieve: solo bioma vóxel (BlockType.SNOW + island_generator), sin cubierta visual por clima. Dueños del requisito (01-Requerimientos L27): M50/M51/M08. [?] se mantiene.
 | Sin truenos | silencia bus de truenos (fotosensibilidad) |
 | Niebla reducida | distancia visual 80% (logos coherentes) |
 | Banner climático | siempre hay texto (nunca solo imagen) |

@@ -129,3 +129,8 @@
   | Sin FOMO / sin penalización | Pausa M29 sin residuos de microfoley (diseño §7/04 §2); sin penalización por ritmo | 03 §5, 04 §2 |
 
 - **Resultado:** M44 cumple los 6 principios aplicables sin desviaciones registradas.
+
+### Specs items degradados T213 (2026-10-26, Reflection-Beam-1.0)
+- **L93 (test recorrido M114 15 min sin fatiga):** DEGRADADO de [x] a [?] el 2026-10-15 por step-5-kilocode, autorizado por el director (msg 397): el test no existe en disco (0 hits de recorrido/15 min/fatiga en scripts de audio/feedback) y la propia nota T-M4 del módulo agrupa este item en la deuda con dueño M114. El item hermano L128 lo confirma: recorrido NO ejecutado. La suite real cubre keyframes, blacklist y true peak (L91, L92, L94), no el recorrido de 15 min. DoD §21.6 exige evidencia.
+- **L98 (M13/M17 bloques rotos/colocados disparan recetas):** contrato y recetas existen (04 §3; feedback_recetas.json «bloque_roto/colocado», suite 9/0) pero NINGUNA llamada externa a sensacion() fuera del autoload (rg 2026-10-06) — integración sin cablear; dueño: AGENTE DELEGADO (04 §4).
+- **L128 (15 min de juego sin fatiga auditiva QA M114):** M114 está en 185/186 (🟡 Con dudas, NO completado al 2026-10-15; su único [?] es el discurso de briefing) y no tiene ítem de fatiga/recorrido ASMR en su checklist (rg «fatiga» = 0 hits en M114); recorrido NO ejecutado; dueño: M114 (playtest). Item L93 marca el mismo test como [x] sin evidencia: hay contradicción interna entre L93 y este ítem, documentada en ambos.

@@ -1446,5 +1446,12 @@
 ### Objetos con regeneracion (regeneracion_seg) y herramienta/tier M158 por objeto (T1..T3 segun isla)
 - Spec: objetos con regeneracion (regeneracion_seg) y herramienta/tier M158 por objeto (T1..T3 segun isla). Medido 2026-10-15 (DeepSeek, Log 1862): regeneracion_seg 57/57; herramienta/tier 40/57 (17 pendientes de confirmar T1). Coherente with M160 (diseño de ubicaciones) and M158 (herramientas).
 
-### Integracion runtime de puzzles de ruinas con M25
-- Spec: integracion runtime de puzzles de ruinas con M25. M25 cerrado (122/122), integracion pendiente. Coherente with M160 (diseño de ubicaciones) and M25 (templo subterraneo).
+### Specs items degradados T208 (2026-10-26, Reflection-Beam-1.0)
+- **L48 (definir horarios de NPCs en tiendas):** bloqueado: requiere M39/M21 (horarios runtime, no resoluble en M160; reclasificado 2026-10-15 por decisión del director, informe 256).
+- **L54 (integrar con M39 Tiendas para catálogos):** 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime) — deferral M114: la tabla/documentación existe pero la integración en código no — regla M114/L196: diferido no es hecho.
+- **L55 (integrar con M18 Casas para ampliaciones):** 08-Guia-Ubicaciones.md §4 (tabla, pendiente runtime) — deferral M114.
+- **L72 (integrar con M25 Ruinas para puzzles):** tags puzzle documentados; integración runtime pendiente — deferral M114.
+- **L198 (vocabulario de viajes M28 puertos LOC-*):** puertos LOC-* listos; mapeo islas→regiones pendiente — bloqueado: requiere M28.
+- **L225 (servicio UbicacionesService carga 3 fallback/ruta previa):** acoplar al nuevo JSON de 10 y conectar puntos M54 — bloqueado: requiere M28 (viajes) + M54 (mapa).
+- **L230 (conexiones con M28 viajes y mapa M54):** bloqueado: requiere M28 + M54.
+- **L236 (conexión con viajes M28):** la solicitud de viaje usa los mismos IDs LOC-* — bloqueado: requiere M28 TravelService.

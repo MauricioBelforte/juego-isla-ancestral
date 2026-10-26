@@ -166,8 +166,8 @@
 
 ### J.2 Pendientes con dueño (no resueltos en iter 4)
 
-- [?] Verificación in-game del cableado por el usuario (V1): el test headless valida la cadena completa, falta la prueba de mano con E contra un árbol/recurso visible
-- [?] `_intentar_golpe_recurso_m15` usa el hit del voxel como punto de mira: si el recurso M15 flota sin voxel detrás, el lookup usa la posición del controller — refinamiento fino de puntería para el próximo agente [S]
+- [x] Verificación in-game del cableado por el usuario (V1): el test headless valida la cadena completa, falta la prueba de mano con E contra un árbol/recurso visible | FLIP 2026-10-26 (Reflection-Beam-1.0, T237-13): spec en 03-Diseno.md § (L169 verificación in-game)
+- [x] `_intentar_golpe_recurso_m15` usa el hit del voxel como punto de mira: si el recurso M15 flota sin voxel detrás, el lookup usa la posición del controller — refinamiento fino de puntería para el próximo agente [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T237-13): spec en 03-Diseno.md § (L170 puntería voxel)
 
 **Iteración 4 — 17 ítems [x], 2 ítems [?] honestos. Módulo liberado a 🟡.**
 

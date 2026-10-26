@@ -561,4 +561,6 @@ Por eso `class_name` es **deuda opcional documentada**, no un pendiente activo.
 | `HTTPRequest.new()` dentro de cada helper | **transporte inyectado** (`Callable`) | Testeable offline; sin transporte → *fail-closed* (`false`), nunca un envío inventado |
 | `ServiceRegistry.get("logger")` dentro del helper | **logger inyectado** | Desacopla el helper del árbol; el cableado es del autoload |
 | `debug_menu.add_panel()` / `panel.add_button()` | **panel descripto como datos** (`describir_panel`) | M110 **no expone** esa API; el cableado real es de M110 |
-| Matriz de prioridad §13 con 6 filas | 8 combinaciones (interpola «Media+Algunos» y «Baja+Todos») | El diseño no cubría 2 casos reales |
+### Specs items degradados T203 (2026-10-26, Reflection-Beam-1.0)
+- **L387 (integración M103/M102/M110 completa):** dueño M103/M102/M110.
+- **L388 (metadata avanzada, sanitización, dashboard):** dueño M61/M114.

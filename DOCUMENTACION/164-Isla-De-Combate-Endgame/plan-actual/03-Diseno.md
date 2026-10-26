@@ -114,5 +114,10 @@ Jugador entra en rango de enemigo
 | **M013** — Herramientas | Combate |
 | **M039** — Tiendas | Tienda isla |
 | **M014** — Inventario | Guarda gemas |
-| **M071** — Progresion | Hitos |
-| **M072** — Logros | Logros |
+### Specs items degradados T206 (2026-10-26, Reflection-Beam-1.0)
+- **L31 (GemCurrency se guarda en GameState):** iter 1 (atria-dawn, Log 1016): provider gemas_m164 en SaveManager — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es código muerto (0 call sites). Deuda M164/M59.
+- **L32 (GemCurrency se persiste al guardar/cargar):** iter 1 (atria-dawn, Log 1016): get_save_data/restore_save_data versionado — provider gemas_m164 muerto (gem_save_provider.gd sin instanciar); reconectar al implementar (Hy3 219).
+- **L41 (comprar gemas con dinero real Steam):** iter 1 (atria-dawn): fuera de alcance. El juego no tiene monetización integrada; comprar gemas rompe el bucle cozy de progreso por juego. Marcar [?] con dueño: decisión de diseño del usuario (M126/Monetización).
+- **L80-L82 (IA básica perseguir/atacar/volver a posición):** agnes-3-flash (2026-10-12): m164_zonas_spec.md — aggro range 50m, attack range por enemigo, return_to_spawn = 3× aggro range. Implementación = enemy_ai.gd. Degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado enemy_ai.gd NO existe en disco ni en la historia de git (git log --all = 0 commits); el [x] no tenía evidencia en disco.
+- **L148 (gemas guardadas en GameState.M164):** iter 1 (atria-dawn, Log 1016): sección gemas_m164 — provider gemas_m164 muerto (gem_save_provider.gd sin instanciar); reconectar al implementar (Hy3 219).
+- **L154 (integrar con M59 Guardado):** iter 1 (atria-dawn, Log 1016): gem_save_provider + combat_island_save_provider — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es código muerto (0 call sites). Deuda M164/M59.

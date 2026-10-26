@@ -1469,6 +1469,21 @@
 			"consecuencia": { "epilogo_del_guardian_cantado": true },
 			"oculta": true,
 			"postgame": true
+		},
+		{
+			"id": "cadena-taller",
+			"titulo": "La Fragua del Taller Viejo",
+			"contexto": "Ramón cerró la fragua del taller viejo cuando se quedó sin hierro; quiere volver a encenderla para el pueblo",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "ramon_tejon" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "taller_viejo" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "fragua-apagada" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "iron_ore" }
+			],
+			"recompensa": { "diario": "mision_cadena-taller", "cosmetico": "delantal de herrero" },
+			"consecuencia": { "taller_abierto": true },
+			"oculta": false,
+			"postgame": false
 		}
 	]
 }

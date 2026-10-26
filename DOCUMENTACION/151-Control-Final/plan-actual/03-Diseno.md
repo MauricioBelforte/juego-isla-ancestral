@@ -489,5 +489,9 @@ protocolo).
   anotador del USUARIO: solo directivas del usuario, no propuestas de
   agentes.
 - L226 dueño por funcion del post-lanzamiento ( staffing).
-- L227 fecha de revision del plan (M144) — la agenda la fija el fundador.
+### Specs items degradados T216 (2026-10-26, Reflection-Beam-1.0)
+- **L255 (generar_acta.py, importar_telemetria.py, importar_encuestas.py):** los otros 3 módulos de — (scripts faltantes).
+- **L326 (ci_gates_verdes no mide lo que nombra):** quality.yml lo pasa hardcodeado `1`.
+- **L331 (el acta de los 26 puntos no existe):** acta-control-final.json: nadie la genera con.
+- **L334 (test-suite: failure + formatting-check: cancelled en el último CI run 37415327285):** pendiente.
 

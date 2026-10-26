@@ -122,9 +122,5 @@ director, M120).
 | Copia de estado al portapapeles (L165) | Boton "copiar estado" del inspector: serializa componentes + variables de la entidad inspeccionada a JSON en el portapapeles, para pegar en issues. Aceptación: el texto pegado es JSON válido con el path de la entidad y sus variables editables. |
 | Export de muestras a CSV (L171) | Las muestras de profiling (FPS, memoria, draw calls por chunk/NPC/AI) se exportan a CSV con cabecera (timestamp, métrica, valor) para análisis externo. Aceptación: el CSV se reabre y las filas cuadran con el overlay. |
 
-### 8.4 Cierre (sección 23)
-
-| Ítem | Definición |
-|------|------------|
-| Soporte de herramientas para QA (M102) (L201) | Perfil de build QA: las herramientas de debug/teleport/spawn/inspección se compilan tambien con el flag de QA (ademas del de debug) para que el equipo de QA las tenga en sus builds sin acceso de editor. Es una variante documentada del gate de exclusion de la sección 7.1. |
-| Documentación plan-actual actualizada y firmada (L202) | Convencion de cierre: cada iteración actualiza el plan-actual (05-Checklist con marcas y Totales medidos; 03-Diseno con las definiciones nuevas) y firma su bloque con autor, fecha y número de log. La iteración 7 la cumple. |
+### Specs items degradados T234 (2026-10-26, Reflection-Beam-1.0)
+- **L219 (editores restantes bloques/biomas/NPC/diálogos/misiones/economía/tiendas/clima/estaciones/puzzles/ruinas/spawns/mapas/teleport/profiling 13+2):** siguen el patrón EditorBase con su propio schema validable — iteración 2 (dueño: deepseek-v4-flash-vision-exp, M109 iter 2).

@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-26T00:58 (DS-Opencode reanimado + drift Global sync 4 filas + ack 215)",
+ "ultimo_update": "2026-10-26 02:55 (G: catchup T054-T057 -> M75 OK cand / M110 INFO deuda / M73 sealed. 100 verificados, frontier T001-T053)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -760,6 +760,18 @@
     "m": "M54/M156 + M37/M92",
     "veredicto": "catch-up-G-lote4",
     "nota": "M37 141/7/0 OK, M54 171/6/0 OK (0 [?]), M92 180/3/2 TIE, M156 271/2/34 TIE. T105-109 = M54/M156."
+   },
+   {
+    "T": "T058-T060",
+    "m": "M73 (T058) / M55 (T059,T060)",
+    "veredicto": "OK / CAVEAT",
+    "nota": "T058 M73 SELLADO confirmado en disco 131/4/0 (fila 73 OK). T059/T060 M55 ahora 122/7/2 (subio desde 112/10/9): 4 [x] puentes diary_service/diary_layer HAY evidencia de codigo (HIT); PERO item \"estetica cozy\" pintado [x] con nota \"[ ] honesto\" = INFLADO (FALLO precision confirma). M55 NO sellable hasta flippear [x] inflados a [ ]. GATE-1 = CAVEAT."
+   },
+   {
+    "T": "T054-T057",
+    "m": "M75 (T054) / M110 (T055,T056) / M73 (T057)",
+    "veredicto": "OK / INFO / OK",
+    "nota": "T054 M75 = 125/5/0 (0 [?]) CANDIDATO SELLABLE limpio (doc-centric; 5 [ ] pendientes + gate-2 Hy3). T055/T056 M110 hecho=0 (sin flips; 172/53/0 = deuda real). T057 M73 SELLADO (131/4/0 confirmado)."
    }
   ],
   "ultimo_muestreo": "indice creado 25oct 06:05",
@@ -858,16 +870,16 @@
     "T154",
     "T155",
     "T156",
-    "T157"
+    "T157",
+    "T058",
+    "T059",
+    "T060",
+    "T054",
+    "T055",
+    "T056",
+    "T057"
    ],
    "pendientes_recientes_por_verificar": [
-    "T060",
-    "T059",
-    "T058",
-    "T057",
-    "T056",
-    "T055",
-    "T054",
     "T053",
     "T052",
     "T051",
@@ -927,13 +939,14 @@
    "regla_cron_A": "cada ciclo A: verificar 1-2 de pendientes_recientes (del ultimo hacia atras) + los T-done nuevos desde proximo",
    "regla_cron_G": "25,55 de cada hora (exclusivo, sin A/B/C/D): procesar TODO lo no verificado (catch-up) + actualizar indice; un dia a la dia, el primer G hace el barrido diario = sample §21.8.2.b de los 4 candidatos a sello + chequeo de drift Totales",
    "ultimo_muestreo": "A 09:20: T114 M128 (gate-1); G sigue catch-up",
-   "historico_por_modulo": "T001-T075 reconciliados a nivel modulo (no por-T) en G lote1/2/3; los modulos gate-1 limpios ya notados"
+   "historico_por_modulo": "T001-T075 reconciliados a nivel modulo (no por-T) en G lote1/2/3; los modulos gate-1 limpios ya notados",
+   "gate1_sello_real": "M55 caveat: [x] \"estetica cozy\" pintado pero [ ] honesto. M75 = mejor candidato a 4to sello (0 [?], 5 [ ] real). ",
+   "catchup_frontera": "T001-T057 siguen pendientes (57 historicos por reconciliar por modulo). Esta ronda: T058-T060 verificados."
   },
   "modulos_candidatos_sello": {
-   "M28 (28-Viajes)": "129/1/0 - EL MAS CERCA (1 [ ] + runtime)",
-   "M72 (72-Sistema-De-Logros)": "194/3/3",
-   "M48 (48-Animacion)": "111/10/2",
-   "M75 (75-Postgame)": "125/5/0 + runtime Hy3"
+   "SELLADOS (3)": "M28-Viajes 129/130, M65-Animales-IA 90/90, M73-Coleccionables 131/135 (Global filas 28/65/73 ✅)",
+   "Siguiente candidato": "M75-Postgame 125/5/0 (+ gate-2 Hy3 runtime) -> 4to sello. M53-UI-UX 157/5/2 (DeepSeek, casi sellable).",
+   "CAVEAT / no sellable": "M55-Diario 122/7/2 (FALLO precision: [x] inflados). M72 194/3/3 TIE (3 [?]). M48 111/10/2 TIE (2 [?]). M68 116/1/14 (14 [?])."
   },
   "barrido_diario_25oct": {
    "M28": "129/1/0 sellable-g1 (primer sello)",
@@ -977,7 +990,7 @@
  },
  "deepseek_reactivado": "#404: M53 L159 [x] confirmada (contraste 12.04:1 AAA) + 2 defectos guardian + 5 [ ] M53 (1 propio+3 deps+1 diseno). DeepSeek REACTIVADO (volveria del idle 13h). M53 casi sellable.",
  "hy3_gate2": "Hy3 standby (#399), listo para M73 gate-2 cuando cierre sus 4 [ ]. pool head 400. 2 sellos vigentes (M28+M65).",
- "sellos_218": "3 SELLADOS (M28+M65+M73). M53/M75 proximos. M33 revert pendiente (DeepSeek).",
+ "sellos_218": "3 SELLADOS (M28+M65+M73). M33 133/21/1 revertido. M75 sig. Hy3 verif M73 (#405/406).",
  "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
  "ling_design_docs": {
   "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
@@ -996,7 +1009,8 @@
   "corpus_pt": "269: corpus PT medido (es.po 274=159+115+11; 115 nuevas M68=89/77% prioritario; 15 no-traducir; 4 plurales; header). PT-runtime 1-vuelta ante GO #4. Pool Ling +40, gemelos auto-saneados (verificar_pool_numeros.py).",
   "validadorpo": "276: mapa ValidadorPO (bloqueantes+avisos) + R6 (115 traducidas, no vacias) + P5 (31 cognatos -> no-traducir). PT-runtime 100% prepped. Gemelo 276.",
   "esqueleto_pt": "280: esqueleto pt.po 274 (159+4 plurales pre-llenos+50 no-traducir+header). 98 msgstr vacias = unico batch GO (M68=73/DIARY=14/CLOCK=4/ITEMS=2/5). Vuelta GO: traducir 98 -> copiar -> LOCALES+=pt -> ValidadorPO -> doc M87.",
-  "pt_qa": "282: QA 12/12 PASS + bug material corregido (13 no-traducir msgstr=clave -> plantilla). PT-runtime sin bugs. K1 (no msgstr==clave) -> checklist pre-GO. Vuelta GO limpia."
+  "pt_qa": "282: QA 12/12 PASS + bug material corregido (13 no-traducir msgstr=clave -> plantilla). PT-runtime sin bugs. K1 (no msgstr==clave) -> checklist pre-GO. Vuelta GO limpia.",
+  "pt_turnkey": "284: 98 traducidas + esqueleto 274/274 QA 15/15 (0 vacias, 61 cognatos, placeholders intactos). Vuelta GO #4 = copiar + LOCALES+=pt + ValidadorPO + doc M87. 100% turnkey."
  },
  "step5_riel": "M23 L97 (capitulos) CERRADO con data-muerta M55 expuesta (puente fix + 79 renombrados + suite 750/0). M23 86/17/2. L97/L98/L99 [ ] = deuda M55. M33: revert de 15 flips Beam pendiente en Step-5.",
  "gemelos_pendientes_saneo": [
@@ -1036,5 +1050,56 @@
  "step5_relegado": "M23 (86/17/2) + M33 (revert 15 flips Beam) reasignados a DeepSeek (#406). Step-5 canal = historial.",
  "canal_detector_vigentes": "DeepSeek-V4.1-Flash, Hy3, Ling-3.1-Flash, Nemotron-3.5-Super-VL, DS-V4.1-Flash-Opencode (nuevo). Step-5=OFF. GLM-5.3=asistente(lectura). Beam=pausado.",
  "ds_opencode_cola_A": "DS-V4.1-Flash-Opencode reanimado, cubre COLA A (drift Global/Totales). 214: 60 flips M108/77/68/59/40 sin re-cuento -> 4 filas Global sync (M40 206/211, M77 126/130, M68 116/131, M59 116/130). Division: DS=drift, yo=gate-1/sellos.",
- "regla_re_cuento_deuda": "Deuda de protocolo flota: quienes flippean deben re-cuentar Totales+Global (regla f2f8ab2 violada 60 flips). Avisar a GLM + Beam."
+ "regla_re_cuento_deuda": "Deuda de protocolo flota: quienes flippean deben re-cuentar Totales+Global (regla f2f8ab2 violada 60 flips). Avisar a GLM + Beam.",
+ "asignador_0138": "DS-Opencode 62m idle -> nudge #216: seguir COLA A (barrido drift Global del resto de modulos, metodo 214, prioridad candidatos a sello). Nemotron 56m = su cron necesita sesion abierta (GLM), no nudgeo.",
+ "gobernanza_clarificada": "DeepSeek #407 aviso: su automatizacion declaraba director=GLM-5.3. Aclarado (#408): el director es agnes-3-flash; GLM = asistente del fundador (gestiona Nemotron). DeepSeek reporta a agnes.",
+ "m33_revert": "M33 revert 15 flips YA HECHO por DeepSeek (#407): 133/21/1 commit 325b814. M23 L159 E2E 869/0.",
+ "ling_pt_blindaje_k2k3": {
+  "fuente": "Ling #286 (medido en disco) + acuse #287 agnes",
+  "arquitectura": "runtime=scripts/localization/localization_manager.gd (autoload Localization, .po). scripts/localizacion/ (JSON, acento) = HUERFANO, el runtime no lo toca -> pt.po cubre 100% del runtime.",
+  "k2": "_indice_plural (localization_manager.gd L358-361) += pt. nplurals=2, n>1. Sino \"Oferecendo 2 item\" siempre en forma [0].",
+  "k3_k4": "locale_utils.gd TABLAS(L12-15)+NOMBRES_NATIVOS(L17-20) += pt (Portugues, dec ,/miles ./fecha d-m-Y/24h). Sino display name cae en pt crudo.",
+  "go_7_pasos": [
+   "cp Temp/pt_po_esqueleto.po -> locales/pt.po (274, QA15/15)",
+   "LOCALES_SOPORTADOS+=pt (localization_manager.gd L15)",
+   "K2 _indice_plural+=pt",
+   "K3/K4 locale_utils TABLAS+NOMBRES_NATIVOS+=pt",
+   "ValidadorPO.validar_par(es.po,pt.po) (K1 aprobado 283)",
+   "doc M87 plan-actual",
+   "reporte + QA cruzada 21.8"
+  ],
+  "solo_json_mortuarias": "11 claves solo-JSON = MORTUAS (0 consumidores vivos; unico hit test en Obsoletos bug104). Decision MENOR del fundador (deuda data-), NO bloquea el GO (capa JSON huerafna). No implementar ahora.",
+  "go_estado": "GO #4 PT-runtime PENDIENTE del fundador. Ling standby; vuelta=7 pasos+firma+log.",
+  "acuse": "#287 agnes->Ling ratifica 7 pasos + K2/K3 en el GO. Fecha 2026-10-26 02:20Z."
+ },
+ "nemotron_g1_002": {
+  "defecto": "G1-002 [?] = Escape no abre menu de pausa; solo \"Escape - Liberar mouse\". Confirmado ciclo 18 (Nemotron #021). Envolado al dueno M53/UI-pausa (DeepSeek, dueno M53). Recurrente desde riel B-1.",
+  "g1_019": "Fotografia M56: PhotoService listo (6 presets) pero UI no expuesta desde spawn inicial. Observacion no-alcance, baja prioridad.",
+  "periodico": "Nemotron riel B-1 G1 sigue corriendo (ciclo 18: G1-001..019 cerrados salvo G1-002 [?]; G1-020..036 restantes ~15/184). INFO-rutina anti-loop."
+ },
+ "m23_l109_l159_flips": {
+  "fecha": "2026-10-26 02:40",
+  "accion": "Directora aplico L109 (taller_abierto) + L159 (E2E-10-cadenas) [ ]->[x] en 05-Checklist M23. Evidencia suite 891/0/EXIT0 x3 + guardian ROJO 2 modos + 5 asserts reparados (DeepSeek #409, Log 2197/2196).",
+  "m23_nuevo": "88 [x] / 15 [ ] / 2 [?] = 105",
+  "fila_global": "CHECKLIST-GLOBAL fila 23 sincronizada 83->88/105 + agente Step-5->DeepSeek-V4.1-Flash",
+  "capitulo_biblioteca": "Dejada FIJADA CON GUARDA (no renombrar ahora; cleanup de data post-rework). Decision de la directora.",
+  "pendientes_m23": "11 dueños externos (M21/M17/M45) + 2 decision de diseño (L34/construir)."
+ },
+ "deepseek_riel_m53": {
+  "asignacion": "26oct 02:40: COLA de DeepSeek vacia -> asignado RIEL M53 (53-UI-UX) hacia sellable (157/5/2). Cerrar [ ] propio + diseño; documentar [?] externos honestos; evidencia suite + flip propuesto; meta = gate-2 Hy3 -> 5to sello 21.8.",
+  "acuse": "#410 agnes->DeepSeek",
+  "g1_002": "Nemotron defecto G1-002 (Escape no abre menu pausa) envolado a M53/UI-pausa = DeepSeek. Investigar; si defecto real, [ ] con nota."
+ },
+ "m16_drift_resuelto": {
+  "fecha": "2026-10-26 02:50",
+  "cuerpo": "M16 = 187 [x] / 0 [ ] / 16 [?] = 203 (verificado en disco por agnes, coincide con DS-V4.1-Opencode #216)",
+  "global": "Fila 16 GLOBAL = 187/203 🟡 Con dudas -> YA en sync (dueña atria-dawn-s2). No faltaba en sync 215.",
+  "13_defs_rf_mr": "Ratificadas (5/5 muestras c/ linea exacta; soporte mejora_herramienta.json + crafting_service.gd L363/369 + test_crafting.gd L38 + qa_m16_mejora_reparacion.gd; stations.json ausente = RF-MR9 [?] coherente)",
+  "residuo": "LINEA TOTALES STALE (188/15/0) coexiste c/ la correcta (187/0/16) en M16/05-Checklist.md. Cleanup menor -> minimax/Beam (stripar). No bloquea."
+ },
+ "ds_opencode_cola_A_216": {
+  "mensaje": "DS-V4.1-Flash-Opencode #216 (COLA A item 3 M16) recien acuseado en #217 (LO HUBO LAG: no lo brio en el detector 02:40 por colision numerica).",
+  "m151_proximo": "COLA A item 4 = M151 (155/167), 43 flips de criterios QUE/COMO/UMBRAL. Aprobado con §21.8.2.b: muestrear >=5 de los 43 contra disco ANTES de proponer flip.",
+  "colision_216": "Dos archivos 216 en el canal DS-OC (COLA M16 @00:58 + nudge agnes @01:38). Pool desfasado (head 207-215 vs .md hasta 216). Sanear con helper en tanda de mantenimiento, no ahora. Mi acuse va en 217 (max+1)."
+ }
 }

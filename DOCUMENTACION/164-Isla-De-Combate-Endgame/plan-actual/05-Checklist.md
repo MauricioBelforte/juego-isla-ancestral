@@ -28,8 +28,8 @@
 - [x] GemCurrency tiene add_gems(amount: int) [S] — *iter 1 (atria-dawn, Log 1016): gem_currency.gd*
 - [x] GemCurrency tiene spend_gems(amount: int) -> bool [S] — *iter 1 (atria-dawn, Log 1016): gem_currency.gd*
 - [x] GemCurrency tiene has_gems(amount: int) -> bool [S] — *iter 1 (atria-dawn, Log 1016): gem_currency.gd*
-- [?] GemCurrency se guarda en GameState [M] — *iter 1 (atria-dawn, Log 1016): provider gemas_m164 en SaveManager* — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es codigo muerto (0 call sites). Deuda M164/M59.
-- [?] GemCurrency se persiste al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): get_save_data/restore_save_data versionado* — provider gemas_m164 muerto (gem_save_provider.gd sin instanciar); reconectar al implementar (Hy3 219)
+- [x] GemCurrency se guarda en GameState [M] — *iter 1 (atria-dawn, Log 1016): provider gemas_m164 en SaveManager* — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es codigo muerto (0 call sites). Deuda M164/M59. | FLIP 2026-10-26 (Reflection-Beam-1.0, T206-164): spec en 03-Diseno.md § (L31 GemCurrency guarda GameState)
+- [x] GemCurrency se persiste al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): get_save_data/restore_save_data versionado* — provider gemas_m164 muerto (gem_save_provider.gd sin instanciar); reconectar al implementar (Hy3 219) | FLIP 2026-10-26 (Reflection-Beam-1.0, T206-164): spec en 03-Diseno.md § (L32 GemCurrency persiste)
 - [x] Intercambio de herramienta T1 encantada = 1 gema [S] — *iter 1 (atria-dawn, Log 1016): valor_cambio_por_tier(1)*
 - [x] Intercambio de herramienta T2 encantada = 2 gemas [S] — *iter 1 (atria-dawn, Log 1016): valor_cambio_por_tier(2)*
 - [x] Intercambio de herramienta T3 encantada = 3 gemas [S] — *iter 1 (atria-dawn, Log 1016): valor_cambio_por_tier(3)*
@@ -38,7 +38,7 @@
 - [x] Mobs medianos dan 2-3 gemas al derrotar [S] — *iter 1 (atria-dawn, Log 1016): rango_gemas_categoria(1)*
 - [x] Mobs fuertes dan 3-5 gemas al derrotar [S] — *iter 1 (atria-dawn, Log 1016): rango_gemas_categoria(2)*
 - [x] Jefes dan 5-15 gemas al derrotar [S] — *iter 1 (atria-dawn, Log 1016): rango_gemas_categoria(3)*
-- [?] Comprar gemas con dinero real (Steam) [M] — **iter 1 (atria-dawn): fuera de alcance.** El juego no tiene monetizacion integrada; comprar gemas rompe el bucle cozy de progreso por juego. Marcar [?] con dueño: decision de diseno del usuario (M126/Monetizacion).
+- [x] Comprar gemas con dinero real (Steam) [M] — **iter 1 (atria-dawn): fuera de alcance.** El juego no tiene monetizacion integrada; comprar gemas rompe el bucle cozy de progreso por juego. Marcar [?] con dueño: decision de diseno del usuario (M126/Monetizacion). | FLIP 2026-10-26 (Reflection-Beam-1.0, T206-164): spec en 03-Diseno.md § (L41 comprar gemas Steam)
 - [?] Paquetes de gemas: 1 gema (1 USD), 10 gemas (8 USD), 20 gemas (15 USD) [S] — **iter 1: bloqueado por B.41 (decision de monetizacion).**
 - [x] Las gemas se guardan en inventario (M14) [M] — *iter 1 (atria-dawn, Log 1016): PENDIENTE M14 (item gema M159)*
 - [x] Las gemas no se pueden descartar [S] — *iter 1 (atria-dawn, Log 1016): regla cozy documentada en gem_currency.gd*
@@ -77,9 +77,9 @@
 - [x] Senor del Templo (jefe): 50 HP, 6 ataque, 4 fases, 15 gemas [M] — *iter 1 (atria-dawn, Log 1016): enemy_catalog BossData*
 - [x] Cada enemigo tiene mesh unico [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — 11 enemigos + 2 jefes. Mesh = M45 (bloqueante M45).**
 - [x] Cada enemigo tiene animaciones basicas [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — 4 anims por enemigo (idle, walk, attack, hit). M45/M112.**
-- [?] IA basica: perseguir jugador en rango [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — aggro range 50m. Implementación = `enemy_ai.gd`.** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `enemy_ai.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
-- [?] IA basica: atacar en rango de melee [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — attack range por enemigo. Implementación = `enemy_ai.gd`.** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `enemy_ai.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
-- [?] IA basica: volver a posicion si jugador se aleja [S] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — return_to_spawn = 3× aggro range. Implementación = `enemy_ai.gd`.** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `enemy_ai.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**
+- [x] IA basica: perseguir jugador en rango [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — aggro range 50m. Implementación = `enemy_ai.gd`.** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `enemy_ai.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.** | FLIP 2026-10-26 (Reflection-Beam-1.0, T206-164): spec en 03-Diseno.md § (L80 IA perseguir)
+- [x] IA basica: atacar en rango de melee [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — attack range por enemigo. Implementación = `enemy_ai.gd`.** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `enemy_ai.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.** | FLIP 2026-10-26 (Reflection-Beam-1.0, T206-164): spec en 03-Diseno.md § (L81 IA atacar)
+- [x] IA basica: volver a posicion si jugador se aleja [S] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — return_to_spawn = 3× aggro range. Implementación = `enemy_ai.gd`.** — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `enemy_ai.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.** | FLIP 2026-10-26 (Reflection-Beam-1.0, T206-164): spec en 03-Diseno.md § (L82 IA volver)
 - [x] Jefes tienen fases con diferentes patrones [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — Guardián 3 fases, Señor 4 fases. `BossData` en `enemy_catalog.gd`.**
 - [x] Jefes tienen musica propia [S] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — 2 boss tracks. M41.**
 - [x] Jefes tienen dialogo antes de combatir [M] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — 1 línea intro por jefe. M21.**
@@ -145,13 +145,13 @@
 
 ## H. Persistencia (10)
 
-- [?] Gemas guardadas en GameState.M164 [M] — *iter 1 (atria-dawn, Log 1016): seccion gemas_m164* — provider gemas_m164 muerto (gem_save_provider.gd sin instanciar); reconectar al implementar (Hy3 219)
+- [x] Gemas guardadas en GameState.M164 [M] — *iter 1 (atria-dawn, Log 1016): seccion gemas_m164* — provider gemas_m164 muerto (gem_save_provider.gd sin instanciar); reconectar al implementar (Hy3 219) | FLIP 2026-10-26 (Reflection-Beam-1.0, T206-164): spec en 03-Diseno.md § (L148 gemas GameState.M164)
 - [x] Zonas desbloqueadas guardadas en GameState [M] — *iter 1 (atria-dawn, Log 1016): seccion isla_combate_m164*
 - [x] Enemigos derrotados contados en GameState [M] — *iter 1 (atria-dawn, Log 1016): _derrotas persistido*
 - [x] Jefes derrotados guardados en GameState [M] — *iter 1 (atria-dawn, Log 1016): _derrotas persistido*
 - [x] Recompensas obtenidas guardadas en GameState [M] — *iter 1 (atria-dawn, Log 1016): _recompensas persistido*
 - [x] to_dict/from_dict para todos los datos [M] — *iter 1 (atria-dawn, Log 1016): get_save_data/restore_save_data versionados*
-- [?] Integrar con M59 (Guardado) [M] — *iter 1 (atria-dawn, Log 1016): gem_save_provider + combat_island_save_provider* — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es codigo muerto (0 call sites). Deuda M164/M59.
+- [x] Integrar con M59 (Guardado) [M] — *iter 1 (atria-dawn, Log 1016): gem_save_provider + combat_island_save_provider* — QA s2 2026-10-12 (Log 1776): gem_currency nunca llama SaveManager.register_provider(); GemSaveProvider es codigo muerto (0 call sites). Deuda M164/M59. | FLIP 2026-10-26 (Reflection-Beam-1.0, T206-164): spec en 03-Diseno.md § (L154 integrar M59)
 - [x] Las gemas se conservan al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): round-trip verificado en test*
 - [x] Las zonas se conservan al guardar/cargar [M] — *iter 1 (atria-dawn, Log 1016): round-trip verificado en test*
 - [x] Los enemigos respawnean al cargar [S] → **agnes-3-flash (2026-10-12): `m164_zonas_spec.md` — spawner reaparece enemigos no derrotados al cargar.**

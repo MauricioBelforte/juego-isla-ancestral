@@ -81,6 +81,20 @@ data/generation/decor.tres        → densidades de vegetación (M50)
 - Configurar 4-6 octavas de Perlin noise.
 - Amplitud 0-192 m para la isla Aurora.
 
-### Diffs del jugador se aplican DESPUES de regenerar
-- Los diffs del jugador se aplican despues de regenerar.
-- Preservar modificaciones del jugador.
+### Specs items degradados T192 (2026-10-26, Reflection-Beam-1.0)
+- **L18 (RF5 recetas M09 aplicadas):** QA atria-dawn: FALSO — recetas M09 no existen (ver M09 QA Log 944); island_generator no consume dato M09.
+- **L38 (test determinismo 3 órdenes regen byte a byte):** QA atria-dawn: no existía test de generación hasta test_generacion_m10_atria.gd (Log 945); cubre 2 órdenes de muestreo puntual (get_height/get_block_at), no 3 órdenes de regen de chunks completos byte a byte. Contrato §3 sin test completo.
+- **L44 (capa 2 biomas altura+humedad):** QA parcialmente falso — _get_biome usa altura + un solo ruido (sin eje humedad); umbrales hardcodeados (0.65/0.8×max_height, island_generator.gd:198-203), no de M09; 5 biomas (beach/forest/grassland/mountain/snow), no los 13 de M09. Actualizado Log 1753: fix BUG-043 (snow antes que mountain) + bioma wetland con eje de humedad → 6 biomas en pipeline Isla Raíz (los 7 restantes del catálogo M09 son de otras islas o colocación narrativa — ver 04-Codigo.md §7). Umbrales siguen hardcodeados (no de M09) y tests pendientes de CI/headless.
+- **L45 (capa 3 formaciones recetas M09):** QA FALSO — no existe capa de formaciones: island_generator no genera ríos, lagos, cascadas, cañones ni Gran Grieta (búsqueda cueva/tunel/grieta/canyon en scripts/world → 0).
+- **L46 (capa 4 roca y cuevas Simplex 3D):** QA FALSO — único ruido 3D es _has_ore (vetas mineral); no hay generación de cuevas ni aire en piedra.
+- **L50 (capa 8 estructuras prefabs POI):** QA FALSO — generador no coloca ninguna estructura; "faro" solo dato del canon M147 (WorldBible), no placement del generador. Estructuras reales en otros módulos (M26 templo, M33 granja).
+- **L56 (autoload WorldGenerator):** QA FALSO — world_generator.gd es VoxelGeneratorScript instanciado por main_island.gd:144 (load().new() → terrain.generator); NO está en autoloads de project.godot.
+- **L58 (knobs por capa en data/*.tres):** QA FALSO — data/generation/ no existe; no hay .tres de knobs. Parámetros son @export del script.
+- **L90 (chunk fallido → reintento ×2 → fallback basalto + log):** QA FALSO — _generate_block (world_generator.gd:35-47) sin manejo de errores, reintento ni fallback.
+- **L91 (LOG_GENERATION chunks/seg):** QA FALSO — no existe tal logging en world_generator.gd ni island_generator.gd.
+- **L95 (catálogo prefabs estructuras):** QA FALSO — no existe catálogo de prefabs ni archivos de prefabs en el proyecto.
+- **L105 (cuevas ≥3 entradas por isla):** QA FALSO, sin código de cuevas (ver C.4).
+- **L106 (galerías 3-8m):** QA FALSO, sin código de galerías/cuevas.
+- **L107 (minerales por profundidad hierro/carbón/cobre/oro/cristal):** QA parcial — _get_ore_type genera solo cobre (y<5), hierro (y<15) y cristal; carbón y oro no existen en BlockType (constantes ausentes) ni en el generador. Tampoco hay dependencia "por bioma (M46)".
+- **L108 (prefabs reutilizables entre islas biblia M09):** QA FALSO, no hay prefabs.
+- **L122 (sin contradicciones con M09):** QA FALSO — contradicción directa: M09 diseña 13 biomas con mezcla altura+humedad y formaciones (ríos, lagos, grieta, cuevas); el generador implementa 5 biomas por altura+ruido y ninguna formación. M27 ya documentó que M09 "no expone ids numéricos" y se vio obligado a crear el catálogo.

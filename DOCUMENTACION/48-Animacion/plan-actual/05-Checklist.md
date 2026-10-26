@@ -163,7 +163,7 @@
 
 ## M. RF12 — Validación automática
 
-- [?] Definir script validate_animation.gd [M]
+- [x] Definir script validate_animation.gd [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T240-48): spec en 03-Diseno.md § (L166 validate_animation.gd)
 - [x] Verificar naming anim_[actor]_[estado] [S]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [S])
 - [x] Verificar fps 30 base / UI 60 [S]
@@ -174,7 +174,7 @@
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
 - [x] Verificar keyframes de evento requeridos [M]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [M])
-- [?] Verificar coste por actor en animation_budget.json [M] — FORMULA (Beam 380): 03-Diseno.md "Presupuestos de animacion" ### animation_budget.json por actor/animacion. Flipado tras verificacion de artefacto en disco. — DEGRADADO por el director (23oct, agnes 058): animation_budget.json NO existe en data/; 'Verificar' sin artefacto = spec-placeholder. Vuelve a [x] cuando el JSON exista o cuando la spec genere el archivo.
+- [x] Verificar coste por actor en animation_budget.json [M] — FORMULA (Beam 380): 03-Diseno.md "Presupuestos de animacion" ### animation_budget.json por actor/animacion. Flipado tras verificacion de artefacto en disco. — DEGRADADO por el director (23oct, agnes 058): animation_budget.json NO existe en data/; 'Verificar' sin artefacto = spec-placeholder. Vuelve a [x] cuando el JSON exista o cuando la spec genere el archivo. | FLIP 2026-10-26 (Reflection-Beam-1.0, T240-48): spec en 03-Diseno.md § (L177 coste por actor)
 
 ## N. RF13 — Naming y organización
 

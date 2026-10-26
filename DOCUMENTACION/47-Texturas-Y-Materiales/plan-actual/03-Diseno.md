@@ -123,4 +123,7 @@ al importar textura/material (M108):
 | M50/M51 | Vegetación y agua consumen texturas definidas aquí |
 | M61/M62 | Draw calls, VRAM, precompilación de shaders |
 | M108 | Importación, compresión, pack de atlas |
-| M06 | Git LFS para PNG fuente |
+### Specs items degradados T230 (2026-10-26, Reflection-Beam-1.0)
+- **L125 (mantenible: fuentes procedurales versionadas, PNG en Git LFS):** agnes-3-flash (2026-10-12): artbook_specs_m47.md §Q. QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.
+- **L155 (documentar integración con M06 Git LFS):** agnes-3-flash (2026-10-12): artbook_specs_m47.md §T. QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.
+- **L174 (superficies cumplen M108 y Git LFS):** agnes-3-flash (2026-10-12): artbook_specs_m47.md §T/V. QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.

@@ -73,8 +73,10 @@ ENTRADA (pórtico, puerta principal sellada)
 
 - Iconografía en tamaño ≥ 16 px (LOD de texto), contraste ≥ 4.5:1, sin presión temporal en puzzles, subtítulos activables (M43), opciones de reducción de partículas y de parpadeo (fotosensibilidad).
 
-## Rendimiento (M61)
-
-- Sala de rotonda: ≤ 500k poligonos drawcall-friendly (1 dc por faro, instancing de columnas).
-- Partículas ≤ 256 por escena; luz volumétrica solo en 2 salas fijas.
-- El plano entero del templo cabe en el presupuesto por región de M63 (streaming por piso activable).
+### Specs items degradados T209 (2026-10-26, Reflection-Beam-1.0)
+- **L130 (glosario en la Guía del Templo M24):** la Guía del Templo es de M24 (no implementada en este repo).
+- **L140 (navegación con NavigationServer3D por piso):** requiere el templo generado por M08 (voxel) + M61; no hay geometría que navegar todavía.
+- **L151 (testear NPC atascados en el templo):** requiere NPCs de M19/M64 dentro del templo (no hay puestos de aparición implementados).
+- **L152 (testear puzzles irresolubles):** requiere el grafo emisor→receptor por puzzle de M24; validar_softlock solo comprueba que los puzzles referenciados existan.
+- **L157 (mapa de zona simplificado panel M58):** el panel es de M58; no hay artefacto. (El diseño y el validador existen, la UI no.)
+- **L215 (calibración visual de las salas):** requiere Blender/Godot con vista y aprobación visual ajena (§15.3).

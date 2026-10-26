@@ -119,5 +119,9 @@ Merchandising (productos físicos y digitales)
 - Probar calidad de peluches (material, costura)
 - Probar calidad de figuras (material, pintura)
 
-**Pruebas automáticas:**
-- NO APLICA (merchandising es físico, no hay código)
+### Specs items degradados T211 (2026-10-26, Reflection-Beam-1.0)
+- **L44 (definir diseño concept art/sketches/renders):** spec definida.
+- **L53 (definir diseño tracks originales/remasters):** spec definida.
+- **L60 (definir diseño personajes cute/cozy):** spec definida.
+- **L68 (definir diseño personajes chibi/detallado):** spec definida.
+- **L153 (diseñar interfaz de tienda web limpia inmersiva integrada con estética del juego):** spec definida.

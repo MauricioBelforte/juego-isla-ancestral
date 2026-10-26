@@ -9,10 +9,10 @@
 - [x] Definir el kit base de ≤ 40 piezas reutilizables [M] (40 piezas definidas en 03-Diseno.md)
 - [x] Definir pivote en esquina inferior izquierda por pieza [S] (regla documentada en 03-Diseno.md)
 - [x] Definir snaps por cara en cada pieza [M] (6 snaps por pieza, documentados en 03-Diseno.md)
-- [?] Implementar validación de pivotes en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar validación de snaps en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar validación de traslapes en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar fallo de build si la validación falla [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [x] Implementar validación de pivotes en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L12 validación pivotes)
+- [x] Implementar validación de snaps en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L13 validación snaps)
+- [x] Implementar validación de traslapes en Editor [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L14 validación traslapes)
+- [x] Implementar fallo de build si la validación falla [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L15 fallo build)
 - [x] Definir grupo de suelos (losa, rota, intermedia, umbral, escalon) [S] (5 piezas en 03-Diseno.md)
 - [x] Definir grupo de muros (recto, esquina, roto, vano, alto, ventana) [S] (6 piezas en 03-Diseno.md)
 - [x] Definir grupo de aperturas (arco, puerta, ventana, pasaje) [S] (4 piezas en 03-Diseno.md)
@@ -110,21 +110,21 @@
 ## Progresión de descubrimiento
 
 - [x] Definir estados: NoDescubierta → Descubierta → Explorada → Completada [M] (definido con transiciones en 03-Diseno.md)
-- [?] Implementar detección de descubrimiento a 15 m [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar hint de horizonte al descubrir (M63) [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar transición a Explorada al 50% de puzzles [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar transición a Completada con relicto guardado [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar eventos de transición (diario, mapa M58, museo M36) [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar guardado atómico en cada transición [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar persistencia del estado por ruina [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [x] Implementar detección de descubrimiento a 15 m [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L113 detección descubrimiento)
+- [x] Implementar hint de horizonte al descubrir (M63) [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L114 hint horizonte)
+- [x] Implementar transición a Explorada al 50% de puzzles [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L115 transición Explorada)
+- [x] Implementar transición a Completada con relicto guardado [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L116 transición Completada)
+- [x] Implementar eventos de transición (diario, mapa M58, museo M36) [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L117 eventos transición)
+- [x] Implementar guardado atómico en cada transición [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L118 guardado atómico)
+- [x] Implementar persistencia del estado por ruina [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L119 persistencia estado)
 - [x] Documentar la progresión de descubrimiento [S] (03-Diseno.md: tabla de transiciones + código GDScript)
 
 ## Variantes y conexiones entre ruinas
 
 - [x] Definir 3 paletas visuales (época temprana/media/tardía) [S] (definidas en 03-Diseno.md: colores, desgaste)
-- [?] Implementar variantes de paleta sin geometría nueva [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [x] Implementar variantes de paleta sin geometría nueva [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L125 variantes paleta)
 - [x] Definir 2-3 configuraciones de puzzle por ruina grande (seed) [M]
-- [?] Implementar variante de puzzle por seed de partida [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [x] Implementar variante de puzzle por seed de partida [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L127 variante puzzle seed)
 - [x] Diseñar caminos de 2-4 tramos entre ruinas [M]
 - [x] Definir nodos de conexión con M28 (caminos) [M] (definido: tramos como nodos M28 en 03-Diseno.md)
 - [x] Definir validación de caminos con NavigationServer3D [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §NavigationServer3D)
@@ -140,9 +140,9 @@
 - [x] Integrar con M32 (viento/lluvia en pasajes y jardines) [S] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M32)
 - [x] Integrar con M36 (museo: vitrinas para objetos) [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M36)
 - [x] Integrar con M45/M47 (kit de referencia para assets) [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M45/M47)
-- [?] Implementar LOD 0-2 vía M63 (culling por región) [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar sin Update por ruina (estática) [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
-- [?] Implementar sin costos de simulación en ruinas [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion)
+- [x] Implementar LOD 0-2 vía M63 (culling por región) [M] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L143 LOD 0-2 M63)
+- [x] Implementar sin Update por ruina (estática) [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L144 sin Update)
+- [x] Implementar sin costos de simulación en ruinas [S] (QA s2 2026-10-12 (Log 1763): grep 0 hits -> deuda implementacion) | FLIP 2026-10-26 (Reflection-Beam-1.0, T193-25): spec en 03-Diseno.md § (L145 sin costos simulación)
 - [x] Documentar integración y presupuestos [S] (03-Diseno.md: tabla de presupuestos con memory/draw calls)
 
 ## Testings y documentación

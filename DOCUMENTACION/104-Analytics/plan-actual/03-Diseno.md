@@ -72,6 +72,12 @@ M103 (Logging) ──► Logger Service (niveles, categorías, rotación)
 - Advertir si el overhead de analytics supera 1%.
 - Proteger el rendimiento del juego.
 
-### Sin memory leak en stress test 1h
-- Verificar sin memory leak en stress test de 1h.
-- Estabilidad a largo plazo.
+### Specs items degradados T207 (2026-10-26, Reflection-Beam-1.0)
+- **L40 (P6 toggle opt-out M91):** BUG-070 lote 11 (atria-dawn, evidencia DeepSeek #115): Patrón D con L56 [?] — M91 (gestor_config.gd) existe pero analytics no lo referencia (0 hits); el toggle UI no existe.
+- **L56 (toggle reporte analytics menú M91):** requiere UI en gestor_config.gd (M91); backend analytics_director.gd expone esta_opt_out()/establecer_opt_out(); falta widget M91.
+- **L57 (visualización estado "Analytics: Activo/Desactivado"):** requiere UI (RichTextLabel/Label en M91/M90); backend expone esta_opt_out().
+- **L148 (configuración primera ejecución opt-out por defecto):** diseño actual es opt-in (opt_out=false, analytics ON por defecto); cambiar a opt-out por defecto es decisión de diseño del usuario.
+- **L150 (toggle accesible desde M90):** requiere UI en M90/M91; backend expone API, falta widget.
+- **L152 (botón "borrar mis datos" en configuración):** analytics_director.gd clear_data() + test 24/0 — BUG-070 lote 11 (atria-dawn, evidencia DeepSeek #115): Patrón D con L58 [?] y L144 [?] — clear_data() funciona (verificado) pero no hay botón/UI: 0 consumidores fuera del módulo.
+- **L155 (solo envío en Wi-Fi configurable):** Godot 4.x no expone detección de tipo de red (Wi-Fi vs cable); requiere API de plataforma.
+- **L156 (indicador visual de envío en curso):** requiere UI (progress bar/label); backend es offline (sin red en v1).

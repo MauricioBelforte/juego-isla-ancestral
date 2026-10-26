@@ -276,8 +276,8 @@ y la fórmula, no reescribe el shader ajeno.
 ### Estaciones cambian color visualmente en <= X s
 - Spec: estaciones cambian color visualmente en <= X s. [ ] honesto 2026-10-19 (Log 2022): no hay implementacion de estaciones (grep estacion\|season en scripts/vegetacion = 0). Coherente with M50 (vegetacion) and M31 (clima).
 
-### Costo MultiMesh dentro del presupuesto
-- Spec: costo MultiMesh dentro del presupuesto. [ ] honesto 2026-10-19: no existe MultiMesh en el pipeline (instanciacion directa, L140); costo no medible. Coherente with M50 (vegetacion) and M61 (rendimiento).
+### Specs items degradados T231 (2026-10-26, Reflection-Beam-1.0)
+- **L117 (LOD):** agnes-2026-09-06: LOD no implementado; instancias simples por ahora (GLB media). Verificar LOD presente.
 
 ### Regeneracion por eventos sin romper determinismo
 - Spec: regeneracion por eventos sin romper determinismo. [ ] honesto 2026-10-19: no hay regeneracion ni replantado (grep regener\|replant\|repoblar en scripts/vegetacion = 0). Coherente with M50 (vegetacion) and M61 (rendimiento).
