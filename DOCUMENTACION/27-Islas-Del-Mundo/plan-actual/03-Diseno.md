@@ -271,3 +271,41 @@ Verificado: IslandPreF ~X ms estimado por .tres liviano; margin vs frame 16.6 ms
 
 ### Ids reales de contenido exclusivo (M50/M36/M15/M23-M24/M19) (Beam 471)
 - Spec: los campos recursos_exclusivos, flora_endemica, fauna_endemica, puzzles, npc_residentes son declarativos en M27. Los ids reales provienen de M50/M36/M15/M23-M24/M19. M27 pasa estos ids a los spawners registrados. Coherente con M15 (recursos), M36 (fauna), M50 (flora).
+
+### Specs items degradados T168 (2026-10-26, Reflection-Beam-1.0)
+- **L144:** profundidades por isla (arrecife Coral poco profundo, fosa Submarina) — SHALLOW_WATER existe (M08), sin profundidades por isla configuradas.
+- **L146:** corrientes (M51) no llevan el barco fuera de los bounds del archipiélago — CURRENT_DRIFT_MAX=0.3 validado (validate_water), sin evidencia de bounds del archipiélago.
+- **L147:** agua no se congela ni inunda dentro de las islas salvo eventos M32 — sin implementación (0 hits).
+- **L150:** agua interactúa con puzzles (M23/M24) solo isla cargada — sin evidencia.
+- **L158:** transiciones de biomas dentro de una isla suaves (falloff M09) — sin implementación.
+- **L159:** playas/acantilados por recetas de formaciones (M09) — sin implementación.
+- **L160:** clima por isla consultado por M32 (lluvia Verde, nieve Nieve) — clima_tendencia solo dato, 0 consumidores M32.
+- **L162:** fauna (M36) y vegetación (M50) respetan el bioma al spawnar — sin evidencia de spawn condicionado.
+- **L195:** Aurora siempre cargada con streaming fino de chunks lejanos — Aurora siempre carga por fallback, bounds para streaming, sin streaming fino.
+- **L201:** precalentamiento en menú (M63) cachea Aurora al boot — sin evidencia.
+- **L220:** mensaje al descubrir isla (toast M54) sin romper inmersión — descubrir() devuelve true primera vez, toast no cableado.
+- **L222:** transición de embarque suave (M28) con música de travesía — sin evidencia.
+- **L223:** ningún contenido exclusivo se pierde (accesible por otras vías M73/feria) — solo nota de diseño, sin implementación.
+- **L224:** regreso siempre disponible, sin estados bloqueados — sin evidencia de garantía.
+- **L238:** test integración viaje Aurora→Nieve y regreso sin pérdida de estado — no existe.
+- **L240:** test integración regen 80/0 conserva anclas válidas — no existe.
+- **L277:** migrar mapa de islas.json (4) al catálogo de 13 (M54) — pendiente.
+- **L78:** log ERROR tras 8 intentos sin ancla válida (fallback: echar isla al anillo siguiente) — no implementado (INTENTOS_MAX=12 es de terreno_horizonte, otro contexto).
+- **L79:** regeneración 80/0 produce anclas consistentes — test de consistencia de anclas pendiente (test_generacion_m10 cubre chunks/biomas/semilla).
+- **L80:** estructuras ancladas de M10 respetan las islas (no generan dentro del mar) — sin validación contra agua/mar.
+- **L82:** NPC (M19) y POI (M09) se generan sobre terreno de isla ya anclado — NPC usan TerrainLocator.get_height(); contrato isla-ya-anclada no verificado.
+- **L104:** progreso real por pesos reportado a pantalla de viaje (M28) — pesos viven en IslandOps, sin consumo desde M28.
+- **L114:** spawn de recursos exclusivos (M15) en zonas deterministas — sin evidencia; zonas son de CombatIslandSystem.
+- **L117:** props no se generan en el mar (M51) — island_props delega recorte al spawner/M51, sin implementación visible.
+- **L125:** contrato M28 consulta posicion_ancla(destino) — expuesta y testeada en M27, 0 llamadores fuera de M27.
+- **L126:** embarque: jugador en punto_partida → M28 inicia travesía — evidencia parcial en 2 módulos; cadena completa no verificada.
+- **L127:** pantalla de viaje muestra progreso real de IslandLoading (M63) — sin evidencia.
+- **L128:** desembarco posiciona al jugador en punto_de_llegada(destino) — 0 hits de punto_de_llegada en scripts/islas/.
+- **L130:** regreso a Aurora gratis desde cualquier muelle (anti-frustración) — ID_PRINCIPAL=aurora existe, sin lógica de regreso gratis.
+- **L131:** viajes estacionales/expedición consultan calendario M29 — 0 hits de estacional/temporada en islas/.
+- **L132:** viajes nocturnos/estacionales respetan clima (M32) y hora (M31) — clima_tendencia solo dato, sin consumo.
+- **L133:** boleto/requisitos (M28) no bloquean el regreso a Aurora — flag de requisito existe, sin lógica de boleto.
+- **L134:** NPC viajeros (M28) respetan la isla cargada — sin evidencia de spawn condicionado.
+- **L135:** barco no atraca en islas sin desbloqueo (anillo LEJANO) — esta_desbloqueada() existe y testeada, 0 llamadores en producción.
+- **L142:** nivel de mar global definido (OCEANO_ALTURA) — constante no existe; equivalentes NIVEL_MAR=0.0 y nivel de mar determinístico (validate_water RF2).
+- **L143:** agua entre islas navegable por barco — island_design_catalog declara oceanico navegable (RF4), delega navegación a otro módulo.

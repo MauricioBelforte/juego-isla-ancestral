@@ -720,3 +720,21 @@ Metodo produce-first: grep + lectura directa, sin ejecutar Godot. Citas archivo:
 - Dual CONFIRMADO en disco (CRC32 rapido runtime + SHA-256 fuerte CLI) — coherente con Beam 314 ###8 y PAQ-8 (GO fundador 23oct 20:25).
 - Cadencia: la verificacion SHA-256 "mensual" es MANUAL — 0 hits de scheduler/cron/Task en el repo y quality.yml no cablea verify_backups.ps1 (solo test_backup_m107.gd L358-362). El "mensual" es proceso, no automatizacion.
 - Unidad: algoritmo. Dependencia: H22.
+
+
+## Specs Backups (Beam 720)
+
+### Definir creacion de proyecto en Google Cloud Console
+- Spec: definir creacion de proyecto en Google Cloud Console. Procedimiento paso a paso en 03-Diseno.md §5.1; EJECUCION pendiente del fundador (requiere SU cuenta Google). Coherente with M107 (backups) and M97 (plataforma).
+
+### Definir habilitacion de Google Drive API
+- Spec: definir habilitacion de Google Drive API. Procedimiento paso a paso en 03-Diseno.md §5.1; EJECUCION pendiente del fundador. Coherente with M107 (backups) and M97 (plataforma).
+
+### Definir creacion de credenciales OAuth
+- Spec: definir creacion de credenciales OAuth. Procedimiento paso a paso en 03-Diseno.md §5.1; EJECUCION pendiente del fundador. Coherente with M107 (backups) and M97 (plataforma).
+
+### Definir configuracion de pantalla de consentimiento
+- Spec: definir configuracion de pantalla de consentimiento. Procedimiento paso a paso en 03-Diseno.md §5.1; EJECUCION pendiente del fundador. Coherente with M107 (backups) and M97 (plataforma).
+
+### Definir obtencion de token de acceso OAuth
+- Spec: definir obtencion de token de acceso OAuth. Procedimiento paso a paso en 03-Diseno.md §5.1; EJECUCION pendiente del fundador. Coherente with M107 (backups) and M97 (plataforma).

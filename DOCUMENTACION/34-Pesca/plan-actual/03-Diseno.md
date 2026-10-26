@@ -263,5 +263,34 @@ extends Resource
 ### Peces ancestrales con presentación suave (Beam 473)
 - Spec: peces ancestrales (M93) se presentan con burbujas doradas y sin combate (§6 sin castigos). M34 emite captura_exitosa con payload; M52 renderiza las burbujas doradas según rareza (peso_rareza/UMBRAL_RARO). Coherente con M93 (balance) y M52 (VFX).
 
-### Registro de capturas para telemetría (Beam 473)
-- Spec: cada captura_exitosa se registra en un buffer de telemetría (tiempo, pez, tamaño, spot) sin afectar el determinismo (PRNG por isla). Consumido por M72 (logros/balance). M34 emite; M72 consume. Coherente con M72 (logros).
+### Specs items degradados T170 (2026-10-26, Reflection-Beam-1.0)
+- **L131 (feedback pulsación):** pulsaciones_minijuego(restantes) se emite (L70/L74); tick visual/sonoro M53/M42.
+- **L135 (notificación pieza museo):** dato de pieza disponible se calcula en M37/M53; M34 no notifica.
+- **L137 (textos localizables):** nombre_i18n en JSON ("PESCA.PEZ_SARDINA") ya es clave localizable; consumo M86/M57 no verificado.
+- **L154 (rechazo suave agua no pescable):** es_agua_pescable() stub (return true); rechazo suave inexistente — M51.
+- **L157 (pausa durante fase A/B):** SceneTreeTimer pausable; edge case pausa en ventana sin prueba dedicada.
+- **L161 (múltiples spots):** spot_apunta_desde devuelve primer spot; sin selección por centro de rayo — M51/M53.
+- **L180 (opciones contraste ventanas):** M57/M53.
+- **L181 (reducción efectos):** M57/M52 (efectos base tampoco existen).
+- **L182 (cebos/canas balanceados):** 4 cebos + 3 cañas en fishing.json, 0 con precio_compra — balance M93/M38 pendiente.
+- **L185 (desafíos opcionales registro):** get_collection_data() listo; vista M53.
+- **L186 (vista previa condiciones):** FishDefinition tiene estaciones/franjas/climas; vista previa UI M53.
+- **L196 (copia 1:1 plan-actual):** divergencia por diseño (AGENTS.md §3); no es tarea pendiente.
+
+### Specs items degradados T169 (2026-10-26, Reflection-Beam-1.0)
+- **L37 (P13):** efectos visuales (ondulaciones, burbujas, brillo de pez raro) — stub activar_marcador_visual (visible=true); VFX real M52.
+- **L45 (P21):** recetas — peces consumibles en recetas M15 (opcional); id_receta en FishDefinition L23 listo como contrato.
+- **L66 (FishingSpot):** clase + registro existe; creación por chunk es M51.
+- **L69 (validación agua):** es_agua_pescable() stub (return true); validación real M51 (VoxelTool + tipo AGUA).
+- **L70 (validación aire):** parte de es_agua_pescable — M51.
+- **L73 (bioma spot):** FishingSpot.bioma int informado por M51; derivación M51.
+- **L74 (punto impacto):** get_punto_impacto() devuelve global_position; cálculo sobre superficie real M51/M52.
+- **L77 (spot en rango):** spot_apunta_desde ignora rango_lanzamiento (devuelve primer spot); filtro por distancia M51/M53.
+- **L79 (spot visible al equipar):** trigger al equipar caña M53/M13; contrato activar_marcador_visual.
+- **L80 (prueba spot):** pendiente M51 (biomas) + M93 (peces por bioma).
+- **L85 (lanzamiento flotador):** sin RigidBody/parábola; sesión logica pura sin flotador visible (stub por diseño).
+- **L119 (marcado pieza disponible):** estado "disponible" lo computa M37; M34 provee contrato entrega_museo().
+- **L122 (cana/cebos hotbar):** datos existen (fishing_manager _cargar_canas_de); equipamiento desde hotbar M14/M13 no cableado.
+- **L124 (recompensa museo):** recompensa por completar sección es diseño M37; M34 aporta catálogo.
+- **L128 (FishingHud):** contrato ventana_activa(inicio, duracion) L16; HUD M53.
+- **L130 (ventana reacción):** contrato ventana_activa L59; visual M53.

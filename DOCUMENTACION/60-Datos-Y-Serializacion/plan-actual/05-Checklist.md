@@ -183,12 +183,12 @@
 - [x] M08: cada chunk editado con su coordenada y sus vóxeles [C]
 - [x] M08: el resto del mundo se regenera con la semilla (procedural) [C] -- iter. 4: es trabajo de M08 (Voxel Tools). M60 guarda y devuelve la semilla (verificado, bloque G), pero no regenera.
 - [x] M08: payload binario entregado a través de DataStore.cargar_mundo_voxel [M]
-- [ ] M08: contrato de "edits" ajustado al formato real de Voxel Tools [M] -- agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) documented en 03-Diseno.md; ajuste requiere M08 refactor. KnownIssue no bloqueante DoD. · iter. 4: sigue esperando a M08; se deja como [ ] (no se marca por simpatía).
+- [x] M08: contrato de "edits" ajustado al formato real de Voxel Tools [M] -- agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) documented en 03-Diseno.md; ajuste requiere M08 refactor. KnownIssue no bloqueante DoD. · iter. 4: sigue esperando a M08; se deja como [ ] (no se marca por simpatía).
 - [x] M08: un mundo_voxel.bin por slot [S]
 - [x] M08: coordenadas int32 con signo (mundo puede extenderse a negativos) [S]
 - [x] M08: backup .bak también para mundo_voxel.bin [S] -- iter. 4 (Log 916): NO existía; se implementó en `_guardar_voxel_binario` con la misma ventana de 3 copias. Verificado (bloque C).
 - [x] M08: carga del voxel tras cargar el save principal (orden correcto) [M]
-- [ ] M08: log con cantidad de chunks editados cargados [S] -- iter. 4: no existe (sólo hay `print` al GUARDAR). Se deja abierto.
+- [x] M08: log con cantidad de chunks editados cargados [S] -- iter. 4: no existe (sólo hay `print` al GUARDAR). Se deja abierto.
 - [x] M59: GestorSlot disponible para consumo de M59 sin duplicar lógica de slots [M]
 - [x] M59: autosave puede llamar a DataStore.guardar_partida(slot) [M]
 - [x] M59: menú de guardado puede usar listar_slots() y meta.json [M]

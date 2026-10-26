@@ -125,3 +125,9 @@ continua hasta la planicie verificada: salto máximo 2 bloques por voxel en el r
 `npc_visual_database.gd:18` (M161) lanza `ERROR: Attempted to assign an object into a
 TypedArray` (carga de un script que no hereda GDScript en array tipado). Preexistente,
 documentado para el dueño de M161 (stepfun-3.7-flash).
+
+
+## Specs Isla Raiz (Beam 727)
+
+### Ajuste olas en arena: el shore-fade cubre demasiada arena (profundidad_min/max a calibrar)
+- Spec: ajuste olas en arena: el shore-fade cubre demasiada arena (profundidad_min/max a calibrar). KnownIssue no bloqueante DoD: shore-fade functiona con depth_texture; calibration visual requiere aprobacion usuario (M49/M51). Parametros ajustables en water_config.tres. Coherente with M167 (isla raiz) and M49/M51 (shaders/agua).

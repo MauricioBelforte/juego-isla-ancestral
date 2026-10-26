@@ -254,8 +254,22 @@ user://input_mapping.tres        ? Mapeo de dispositivos
 
 | Preset | Render Scale | Shadows | SSAO | SSR | LOD | FPS Target |
 |--------|-------------|---------|------|-----|-----|------------|
-| Very Low | 0.5 | Off | Off | Off | 0.5 | 30 |
-| Low | 0.7 | Low | Off | Off | 0.7 | 30 |
-| Medium | 0.85 | Medium | On | Off | 1.0 | 60 |
-| High | 1.0 | High | On | On | 1.5 | 60 |
-| Ultra | 1.0 | Ultra | On | On | 2.0 | 120 |
+### Specs items degradados T182 (2026-10-26, Reflection-Beam-1.0)
+- **L130 (hardware no soportado):** M97 editorial; spec definida.
+- **L135 (guía de uso jugador):** M88/M89 menú; spec definida.
+- **L138 (tabla requisitos Steam):** M97; tabla base en §2.6.
+- **L139 (FAQ hardware comunes):** M97; FAQ en §3.3.
+- **L142 (testing hardware diverso):** M113/M61 bench; proceso en §3.4.
+- **L153 (verificar M154 antes de trabajo visual):** M154 solo necesario si M90 pinta previews; iter 1 sin UI visual.
+- **L27 (DirectX/OpenGL):** KnownIssue M90/M04; policy defined.
+- **L28 (espacio en disco):** KnownIssue M98/M117 instalador; estimación ~2GB.
+- **L29 (tabla comparativa requisitos por plataforma):** KnownIssue M97 editorial.
+- **L66-L67 (SSAO/SSR on/off):** M90.
+- **L72 (Resource QualitySettings):** M90 — fuera de alcance M115.
+- **L74-L78 (presets Very Low..Ultra):** M90 (render_scale, shadows, FPS target por preset).
+- **L90 (señal preset cambia):** KnownIssue: no emitida; pendiente si M90 la requiere.
+- **L115 (test mapeo botones):** M57 (test_control_input.gd existe).
+- **L116 (test hot-plug gamepad):** requiere gamepad físico; fuera de headless.
+- **L118 (perfiles calidad en build):** KnownIssue M90, deferred.
+- **L122 (logging hardware en build log):** KnownIssue M103 Logging, deferred.
+- **L124 (soporte Steam Deck):** KnownIssue M95/M117, deferred.

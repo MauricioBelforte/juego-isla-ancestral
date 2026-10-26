@@ -773,5 +773,24 @@ os clasACES de item (M156 catalogo) usan el mismo budget generator (ref Beam 381
 ### Agregar tooltips informativos
 - Spec: agregar tooltips informativos. Coherente with M156 (terrenos) and M53 (UI).
 
-### Animar transiciones de terreno
-- Spec: animar transiciones de terreno. Coherente with M156 (terrenos) and M53 (UI).
+### Specs items degradados T174 (2026-10-26, Reflection-Beam-1.0)
+- **L296-L299 (tests detección):** archivo padre test_terrain_detector.gd ausente; test_terrenos.gd solo has_signal(); cobertura pendiente.
+- **L326 (raycast no impacta FPS):** TerrainDetector clase lista (RayCast3D + debounce §10.2) pero montaje en escena iter. 2 (diferido); TerrainDetector ausente de escenas/player.
+- **L346 (TerrainDetector hijo jugador):** TerrainDetector ausente de escenas/player (grep 0 hits) — diferido.
+- **L347 (TerrainDataProvider hijo jugador):** autoload no satisface 'hijo del jugador'; grep TerrainProvider/DataProvider en scripts/player/ y scenes/ = 0 hits.
+- **L348 (configurar RayCast3D):** diferido a iter. 2.
+- **L350 (conectar terrain_changed):** diferido a iter. 2.
+- **L351 (asignar referencia M11):** diferido a iter. 2.
+- **L356 (asignar terrain_provider a TerrainFootstepAudio):** TerrainFootstepAudio = 0 hits en scripts/scenes.
+- **L357 (TerrainIndicator escena UI):** TerrainIndicator = 0 hits en scripts/scenes.
+- **L358 (conectar TerrainIndicator terrain_changed):** TerrainIndicator = 0 hits.
+- **L423 (regresión event_bus.gd):** parse error en scripts/core/event_bus.gd (Unexpected Indent + class name EventBus_); modificación de otro agente; NO tocado (regla §21.4).
+
+### Specs items degradados T173 (2026-10-26, Reflection-Beam-1.0)
+- **L60 (debug visual raycast):** draw raycast debug visual — pendiente.
+- **L132 (get_terrain_id):** no existe get_terrain_id; existe get_current_terrain_id (terrain_detector.gd) — nombre distinto.
+- **L167 (get_current_speed):** integración M11 inexistente (0 hits _on_terrain_changed/_update_effective_speed/get_current_speed).
+- **L201-L205 (particulas_barro/arena/agua/nieve/rocas.gd):** archivos ausentes; funcionalidad data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o test_terrenos.gd.
+- **L223 (terrain_footstep_audio.gd):** archivo ausente; funcionalidad data-driven en terrenos.json.
+- **L275/L277 (tooltip/opacidad UI):** TerrainIndicator inexistente (0 hits en scripts/scenes).
+- **L290-L295 (test_terrain_provider/terrain_detector):** archivos ausentes; funcionalidad cubierta por test_terrenos.gd (data-driven).

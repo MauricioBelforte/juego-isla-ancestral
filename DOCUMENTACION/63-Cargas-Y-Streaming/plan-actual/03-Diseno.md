@@ -93,5 +93,25 @@ Barra = (Σ pesos completados) / (Σ pesos totales encolados) × 100. Piso 2% mi
 ### P5: NPCs necesarios — instanciar al entrar, pausar al salir
 - Spec: P5: NPCs necesarios — instanciar al entrar, pausar al salir. Dueno M15/M16 (NPC). Coherente with M63 (cargas y streaming) and M18 (NPC).
 
-### P8: shaders — precalentamiento + cache de variantes
-- Spec: P8: shaders — precalentamiento + cache de variantes. Precarga de shaders hecha (H); cache de variantes es de M47/render. Coherente with M63 (cargas y streaming) and M47 (shaders).
+### Specs items degradados T180 (2026-10-26, Reflection-Beam-1.0)
+- **L129 (M47 mips por LOD):** dueño externo (M47).
+- **L136 (test precarga sin huecos):** requiere chunks reales (M08/M28).
+- **L137 (test LRU libera memoria):** dueño externo (M113).
+- **L138 (test delta <50ms streaming):** requiere profiler (M113).
+- **L139 (test movimiento rápido):** dueño externo (M28/M112).
+- **L142 (recorrido M114 completo):** dueño externo (M114).
+- **L67 (pre-carga near-event):** dueño externo (M28/M69) — near-event y ruta real de esos módulos.
+- **L77 (cero allocs por frame):** requiere profiler (M113); no medible headless.
+- **L78 (Memory Profiler tope):** dueño externo (M113).
+- **L83 (anillo sigue a cámara M12):** dueño externo (M12).
+- **L84 (updates solo en borde del anillo):** dueño externo (M12/M08).
+- **L89 (vuelo aproximación sin chunks vacíos):** dueño externo (M28/M08).
+- **L100 (transición corta ≤2s Fast Travel/Gran Vapor):** dueño externo (M28/M69).
+- **L107 (atlas base comprimida M47):** slot de atlas existe; atlas real es de M47.
+- **L110 (carga casi instantánea tras precalentar):** requiere medición de tiempo real (profiler/M113).
+- **L111 (verificación en profiler del menú):** dueño externo (M113).
+- **L119 (teleport ×10 sin hitching):** dueño externo (M28/M112).
+- **L120 (monitoreo M113):** dueño externo (M113).
+- **L125 (M12 anillo cámara y eventos región):** dueño externo (M12).
+- **L126 (M28/M69 precarga destino):** 63 aporta `toca_precargar_destino()`; falta enganche real.
+- **L128 (M45/M46 LoadingScreen reutilizable):** dueño externo (M45/M46).

@@ -272,3 +272,11 @@ egistrar_por_fuente(fuente, id_local) para sistemas que solo saben donde lo obtu
 > 2 [?]. Las marcas no se tocaron.
 
 **Totales:** 135 ítems · Completados: 63 · Pendientes: 70 · No resueltos: 2. (S56b G-5.3-Flash-Agente 2026-10-23, agnes cola N650: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)
+
+## Sello §21.8 (2026-10-25, agnes-3-flash directora + Hy3 gate-2)
+- Estado final: 131 [x] / 4 [ ] / 0 [?] = 135. 0 [?] propios.
+- gate-1 (agnes-3-flash): 131 [x] + muestreo §21.8.2.b.
+- gate-2 (Hy3): 6 suites verde (Godot 4.7.2 headless) + 2 red-probes live (test_collectible_category + validate_collectibles), revertidas byte-exact.
+- Fix validador: CATEGORIAS_CONOCIDAS 8->20 (T266 + Hy3 #403) RATIFICADO + commiteado; el red-probe confirma que sigue detectando corrupcion (no sello de goma).
+- 4 [ ] restantes = DEUDA EXTERNA: L20/L37 iconos reliquias (M46), L79 fosiles (M25), L123 lore/ruinas (M22/M25).
+- **SELLADO §21.8 por agnes-3-flash (gate-1) + Hy3 (gate-2), 2026-10-25.** 3er sello de la jornada.

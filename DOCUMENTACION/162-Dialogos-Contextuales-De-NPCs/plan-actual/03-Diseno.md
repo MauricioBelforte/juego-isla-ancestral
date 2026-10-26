@@ -1410,3 +1410,41 @@ NPC
 La capa de PRESENTACION del dialogo NO es de este modulo: la provee DialogLayer (M53/M21, montada por UIRoot; main_island._crear_ui_dialogo() con fallback DialogueUI) y el input se bloquea en ModoCamara.DIALOG/CUTSCENE (follow_camera.gd). Este modulo cubre SOLO la LOGICA de seleccion contextual (ContextualDialogueManager + registry.json).
 
 Cita: D-3.1 (Beam 367), remedio CORREGIR-DOC del plan de remedio Hy3 348, aplicado por Beam bajo GO del fundador 23:13 (353-directiva) y ratificado por director 368.
+
+### Specs items degradados T171 (2026-10-26, Reflection-Beam-1.0)
+- **L68 (Carpintero herramientas T1):** selector no incluye progresión de herramientas (M13) como dimensión; reflejo parcial vía amistad/capítulo.
+- **L69 (Vendedora economía):** selector usa flag_capítulo (M22) como proxy; sin dimensión económica directa (M38).
+- **L70 (Pescador mar):** sin dimensión de mar/pesca; 367 grafos cubren SALUDO/HISTORIA/MISION/AMBIENTE/AMISTAD/ESTACIONAL/HORA.
+- **L71 (Agricultora cenizas):** cen_001-005 existen con grafos por capítulo; 'impacto de cenizas' no es dimensión del selector.
+- **L72 (Niña innocent-appropriate):** sin etiqueta de edad en datos/selector; adecuación es de contenido (M21/M148).
+- **L73 (Animador festivales):** 0 hits de feria/festival; eventos M74 no alimentan selector.
+- **L86 (Agricultora remedios por estación):** grafos ESTACIONALES existen (gen_m162_estaciones.py); contenido 'remedios' no verificado nodo por nodo.
+- **L87 (Animador festivales M29):** sin dimensión de festivales; M29 alimenta hora/estación/día/mes, no eventos.
+- **L88 (Vendedora stock coherente):** sin dimensión de stock/economía; coherencia M38/M16.
+- **L103 (Pescadora arrecifes M160):** 3/367 grafos mencionan 'arrecife'; M160 sin datos de arrecifes en disco.
+- **L104 (Comerciante precios M38):** 0/367 grafos mencionan 'precio'; dimensión económica no alimenta selector.
+- **L105 (Guardia rutas M160):** 3/367 grafos mencionan 'ruta'; rutas.json es de transporte (M69), no M160.
+- **L106 (Niña Playa innocent-appropriate):** idem L72.
+- **L112 (Herrero cobre Coral):** 4/367 grafos mencionan 'cobre'; vínculo con cobre de Coral (M15/M160) no explicitado.
+- **L113 (Comerciante items exclusivos Coral):** sin dimensión de items/stock.
+- **L114 (Guardia peligros arrecife):** 6/367 grafos mencionan 'peligro'; genérico, no específico del arrecife.
+- **L115 (Pescadora tips pesca):** grafos cor_003/004/005 existen por capítulo; contenido 'tips' no verificado.
+- **L116 (coherencia COR con M22):** flag_capítulo (M22, 0-7) alimenta selector; coherencia por capítulo respaldada; por evento (M74) no.
+- **L128 (Minero minerales M160):** 0 hits de 'mineral' en 367 grafos; M160 sin datos de minerales.
+
+### Specs items degradados T172 (2026-10-26, Reflection-Beam-1.0)
+- **L129 (Cocinera recetas):** grafos de cen_003 existen por capítulo; contenido 'recetas' no verificado nodo por nodo (parcial).
+- **L130 (Bibliotecario lore M22):** dimensión flag_capítulo (M22) permite revelado gradual; contenido lore no verificado nodo por nodo (parcial).
+- **L131 (Guardia mina M160):** 0 hits de 'mina' en 367 grafos; M160 sin datos de mina en disco.
+- **L137 (Bibliotecario cenizas biblioteca):** grafos de cen_004 existen por capítulo; contenido 'cenizas de biblioteca' no verificado.
+- **L138 (Herrero hierro Ceniza):** 4 grafos mencionan 'forja'; hierro de Ceniza (M158) sin datos en disco.
+- **L139 (Cocinera ingredientes CEN):** grafos de cen_003 existen; ingredientes CEN (M15/M160) sin datos en disco.
+- **L140 (Minero misiones exploración):** 19 grafos tipo MISION; misiones de exploración del Minero no verificadas contra cadenas M23.
+- **L141 (coherencia CEN M22):** flag_capítulo (M22) alimenta selector; por capítulo respaldada; por evento (M74) no.
+- **L154 (Sanadora pociones):** grafos de cen_005 existen por capítulo; contenido 'pociones' no verificado.
+- **L155 (Guardia Ancestral templo M160):** 0 hits de 'templo' en 367 grafos; M160 sin datos de templo.
+- **L164 (Encantador magia AUR):** grafos de aur_005 existen; 'magia de AUR' no verificado nodo por nodo.
+- **L165 (Sanadora remedios hierbas AUR):** grafos ESTACIONALES de aur_003 existen; contenido 'remedios de hierbas' no verificado.
+- **L166 (coherencia AUR M22):** flag_capítulo (M22) alimenta selector; por capítulo respaldada; por evento no.
+- **L167 (Guardia Ancestral protege templo):** sin dimensión de protección/templo en selector; no verificable por estructura.
+- **L176 (franjas horarias):** dimensión hora/es_de_noche alimenta selector; 23 grafos nocturnos (gen_m162_noche.py); franjas completas no definidas como dato verificable.

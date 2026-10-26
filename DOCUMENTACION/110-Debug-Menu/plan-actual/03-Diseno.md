@@ -463,5 +463,7 @@ func register_debug_services():
 ### Abrir navegador con URL
 - Spec: abrir navegador con URL — sin invocación cableada; dueño M102. Coherente with M110 (debug menu) and M102 (bug tracking).
 
-### Autoload solo en debug
-- Spec: autoload solo en debug — registrado fijo en project.godot; mitigado por guard runtime; dueño M117. Coherente with M110 (debug menu) and M117 (build system).
+### Specs items degradados T183 (2026-10-26, Reflection-Beam-1.0)
+- **L66 (layout panel):** widget UI no construido (M110-UI); sin artefacto en disco.
+- **L72-L88 (teletransporte/inventario/progresión widgets):** widgets UI no construidos (M110-UI); sin artefacto en disco.
+- **L92-L95 (slider hora/label/dropdown estación/clima):** widgets UI no construidos (M110-UI); L93-L95 B-EDITOR/ARTE.

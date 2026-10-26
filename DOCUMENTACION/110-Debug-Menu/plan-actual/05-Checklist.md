@@ -63,33 +63,33 @@
 - [x] TabBar [S] — `scenes/debug/debug_menu.tscn` TabBar (5 pestañas config JSON)
 - [x] ContentPanel [S] — `scenes/debug/debug_menu.tscn` ContentPanel + DebugConsole
 - [x] TitleBar con cierre [S] — `scenes/debug/debug_menu.tscn` TitleBar + CloseButton
-- [ ] Documentar layout de panel [M] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [x] Documentar layout de panel [M] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L66 layout panel)
 
 ## C. Panel Jugador (17)
 
 > Backend completo y testado (sección A). Widgets inexistentes.
 
-- [ ] Teletransporte: inputs X/Y/Z [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Teletransporte: botón "Ir" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [x] Teletransporte: inputs X/Y/Z [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L72 teleport inputs)
+- [x] Teletransporte: botón "Ir" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L73 teleport botón Ir)
 - [x] POI predefinidos (dropdown) [S] — dueño: M110-UI  — [?]->[x] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): backend verificado en disco; widget visual sigue siendo dueño M110-UI.
 - [x] Lista de POI [M] — `data/debug/poi_list.tres` + `scripts/debug/poi_list.gd` (3 POIs: Pueblo Raiz, Museo, Spawn)
-- [ ] Inventario: selector de item [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Inventario: input de cantidad [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Inventario: botón "Dar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Inventario: input de dinero [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Inventario: botón "Dar dinero" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: selector de misión [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: botón "Completar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: selector de herramienta [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: botón "Desbloquear herramienta" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: selector de isla [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: botón "Desbloquear isla" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: selector de Sello [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
-- [ ] Progresión: botón "Desbloquear Sello" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [x] Inventario: selector de item [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L76 inventario selector)
+- [x] Inventario: input de cantidad [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L77 inventario cantidad)
+- [x] Inventario: botón "Dar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L78 inventario botón Dar)
+- [x] Inventario: input de dinero [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L79 inventario dinero)
+- [x] Inventario: botón "Dar dinero" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L80 inventario botón Dar dinero)
+- [x] Progresión: selector de misión [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L81 progresión misión)
+- [x] Progresión: botón "Completar" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L82 progresión Completar)
+- [x] Progresión: selector de herramienta [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L83 progresión herramienta)
+- [x] Progresión: botón "Desbloquear herramienta" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L84 progresión Desbloquear herramienta)
+- [x] Progresión: selector de isla [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L85 progresión isla)
+- [x] Progresión: botón "Desbloquear isla" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L86 progresión Desbloquear isla)
+- [x] Progresión: selector de Sello [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L87 progresión Sello)
+- [x] Progresión: botón "Desbloquear Sello" [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L88 progresión Desbloquear Sello)
 
 ## D. Panel Mundo (12)
 
-- [ ] Slider de hora (0-23) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
+- [x] Slider de hora (0-23) [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido). | FLIP 2026-10-26 (Reflection-Beam-1.0, T183-110): spec en 03-Diseno.md § (L92 slider hora)
 - [ ] Label de hora actual [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
 - [ ] Dropdown de estación [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).
 - [ ] Dropdown de clima [S] — dueño: M110-UI  — [?]->[ ] por atria-dawn (M110 triaje E-12d, step-5-kilocode msg 24, 2026-10-09): sin artefacto en disco (widget UI no construido).

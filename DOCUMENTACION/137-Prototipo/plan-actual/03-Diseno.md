@@ -126,3 +126,11 @@ Spawn en la playa (isla 64Â³)
 
 ### Test guardar→salir→cargar con 0 pérdidas
 - Spec: test guardar→salir→cargar con 0 pérdidas. Coherente con M07 (guardado) y M137 (prototipo).
+
+## Specs Prototipo (Beam 723)
+
+### Definir escena `prototipo_isla.tscn` como escena principal
+- Spec: definir escena `prototipo_isla.tscn` como escena principal. PENDIENTE REAL 2026-10-14: verificado — no existe `prototipo_isla.tscn`; la escena principal en project.godot es `res://scenes/main_island.tscn`. Coherente with M137 (prototipo) and M08 (terreno).
+
+### Definir generador de isla: elevacion + playa + agua circundante
+- Spec: definir generador de isla: elevacion + playa + agua circundante. Coherente with M137 (prototipo) and M08 (terreno).

@@ -1439,3 +1439,12 @@
 | CEN | 14 | 1 | 1 | 1 | 1 | 2 | 1 | 0 | 1 | 1 | 2 | 0 | 0 | 0 | 0 |
 | AUR | 13 | 1 | 3 | 1 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 2 | 1 | 1 | 1 |
 | **Total** | **60** | **4** | **11** | **5** | **3** | **5** | **4** | **4** | **2** | **4** | **4** | **2** | **1** | **1** | **1** |
+
+
+## Specs Diseño de Ubicaciones del Mundo (Beam 724)
+
+### Objetos con regeneracion (regeneracion_seg) y herramienta/tier M158 por objeto (T1..T3 segun isla)
+- Spec: objetos con regeneracion (regeneracion_seg) y herramienta/tier M158 por objeto (T1..T3 segun isla). Medido 2026-10-15 (DeepSeek, Log 1862): regeneracion_seg 57/57; herramienta/tier 40/57 (17 pendientes de confirmar T1). Coherente with M160 (diseño de ubicaciones) and M158 (herramientas).
+
+### Integracion runtime de puzzles de ruinas con M25
+- Spec: integracion runtime de puzzles de ruinas con M25. M25 cerrado (122/122), integracion pendiente. Coherente with M160 (diseño de ubicaciones) and M25 (templo subterraneo).

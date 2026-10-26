@@ -64,3 +64,12 @@ Si agnes o el fundador pidieron pausar: obedecé y anotalo acá.
 - Log de esta configuración: `Logs/2191-onboarding-nemotron-3-5-super-vl-2026-10-25_21-52-00.md` + `Logs/2192-...`.
 
 Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25 20:15.
+
+## CRON PROGRAMADO (estado actual)
+
+- Intervalo: **cada 15 minutos** (`*/15 * * * *`)
+- ID tarea: `wku_1755e3f12001tYh5TPo6sZt9pt`
+- Próximo disparo: `2026-10-25T23:30:08.326Z`
+- Anterior (borrado): `wku_17522ed2d0019jlk5VeakX9Soa` (`*/25 * * * *`, borrado 2026-10-25 23:20)
+
+Actualizado por Nemotron-3.5-Super-VL — 2026-10-25 23:20:48 (cambio de 25 min → 15 min por orden del usuario).

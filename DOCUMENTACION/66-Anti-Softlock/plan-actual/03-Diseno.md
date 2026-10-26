@@ -71,3 +71,11 @@ Escritura siempre atómica: `tmp` + rename + `.bak` (patrón ya establecido en p
 
 - 06-Plan-Testings.md: unitarias (invariantes, cofre, checkpoints), integración (cierre a mitad de guardado, terreno extremo M08), edge cases (cofre lleno, doble recuperación, vehículo en amarre ocupado), perf (tick con isla completa).
 - 07-Resultados se actualiza tras la ejecución en Play Mode.
+
+## Specs Anti-Softlock (Beam 722)
+
+### Implementar integracion con M22 (Historia Principal)
+- Spec: implementar integracion con M22 (Historia Principal). KnownIssue: cuando M22 exponga la API (dueno externo, Log 701/744) — (bloqueo caducado: M22 expone API, verificado Step 5 msg 218 2026-10-12). Coherente with M66 (anti-softlock) and M22 (historia).
+
+### Implementar integracion con M26 (Templo Subterraneo)
+- Spec: implementar integracion con M26 (Templo Subterraneo). KnownIssue: cuando M26 exista (dueno externo, Log 701/744) — (bloqueo caducado: M26 implementado, 43 scripts en scripts/templos/, Step 5 msg 218 2026-10-12). Coherente with M66 (anti-softlock) and M26 (templo subterraneo).

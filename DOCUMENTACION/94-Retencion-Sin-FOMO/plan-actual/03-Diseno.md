@@ -67,3 +67,20 @@ Bloques tras el epílogo del faro (M22):
 - No streaks, no content exclusivo temporal, no pérdida por ausencia.
 - No UI de "¡Vuelve pronto!" con penalización; el tablero es motivador, no amenazante.
 - No recompensas que dupliquen el catálogo general (todo es del inventario/colección M16/M73).
+
+## Specs Retencion Sin FOMO (Beam 740)
+
+### Definir scan manual semestral de mecanicas nuevas
+- Spec: definir scan manual semestral de mecanicas nuevas. agnes-2.5-flash 2026-09-12: proceso diseñado en 03-Diseno.md §1.1; ejecucion requiere agente humano. Policy documentada. DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado identico de la linea 14. Coherente with M94 (retencion) and M93 (balance).
+
+### Definir progreso visible durante la semana (M55)
+- Spec: definir progreso visible durante la semana (M55). agnes-2.5-flash 2026-09-12: integracion con M55 Diario documentada en 03-Diseno.md §2.2; policy definida. M55 pendiente pero spec existe. DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado identico de la linea 19. Coherente with M94 (retencion) and M55 (diario).
+
+### Definir misterio final en postgame (5+ h)
+- Spec: definir misterio final en postgame (5+ h). agnes-2.5-flash 2026-09-12: diseño documentado in 03-Diseno.md §14.3 (final mystery 5h+ in postgame); content deferred to M22/M23. Policy defined. DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): M114 deferral disfrazado — el contenido/artefacto afirmado no existe hoy (deferred a M22/M27/M114). Coherente with M94 (retencion) and M114 (hardware).
+
+### Definir contenido de postgame >= 5 h verificado
+- Spec: definir contenido de postgame >= 5 h verificado. agnes-2.5-flash 2026-09-12: spec documented in 03-Diseno.md §15.2 (5h+ postgame content); content deferred to M22/M27. Policy defined. DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): M114 deferral disfrazado. Coherente with M94 (retencion) and M114 (hardware).
+
+### Definir que cultivos/plantas no mueren por ausentarse
+- Spec: definir que cultivos/plantas no mueren por ausentarse. agnes-2.5-flash 2026-09-12: regla cozy documentada en 03-Diseno.md §4.1 (cultivos pause durante ausencia); M152 principle applied. DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado identico de la linea 25. Coherente with M94 (retencion) and M33 (agricultura).

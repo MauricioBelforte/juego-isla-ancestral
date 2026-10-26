@@ -161,3 +161,11 @@ Cambio de opciÃ³n (M58/90/91): sistema escribe â†’ DataStore.guardar_conf
 
 ### Resto del mundo se regenera con la semilla (M08)
 - Spec: M08: el resto del mundo se regenera con la semilla (procedural). M60 guarda y devuelve la semilla. Coherente con M08 (terreno) y M60 (datos).
+
+## Specs Datos y Serializacion (Beam 721)
+
+### M08: contrato de "edits" ajustado al formato real de Voxel Tools
+- Spec: M08: contrato de "edits" ajustado al formato real de Voxel Tools. agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) documented en 03-Diseno.md; ajuste requiere M08 refactor. KnownIssue no bloqueante DoD. Coherente with M60 (datos) and M08 (terreno).
+
+### M08: log con cantidad de chunks editados cargados
+- Spec: M08: log con cantidad de chunks editados cargados. iter. 4: no existe (solo hay print al GUARDAR). Se deja abierto. Coherente with M60 (datos) and M102 (logging).

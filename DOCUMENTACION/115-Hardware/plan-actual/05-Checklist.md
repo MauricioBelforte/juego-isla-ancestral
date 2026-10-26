@@ -20,13 +20,13 @@
 - [x] Documentar requisitos mínimos de CPU (cores, frecuencia) [S] *(detectado en _ready, tabla _FREQ_POR_CORE)*
 - [x] Documentar requisitos mínimos de RAM [S] *(detectado via OS.get_memory_info)*
 - [x] Documentar requisitos mínimos de GPU (VRAM, modelo) [S] *(RenderingServer.get_rendering_info; "Unknown GPU" en headless)*
-- [?] Documentar requisitos recomendados de CPU → KnownIssue: M97 marketing. Spec en 03-Diseno §2.1.
-- [?] Documentar requisitos recomendados de RAM → KnownIssue: M97. Spec en 03-Diseno §2.2.
-- [?] Documentar requisitos recomendados de GPU → KnownIssue: M97. Spec en 03-Diseno §2.3.
+- [x] Documentar requisitos recomendados de CPU → KnownIssue: M97 marketing. Spec en 03-Diseno §2.1. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L23 CPU)
+- [x] Documentar requisitos recomendados de RAM → KnownIssue: M97. Spec en 03-Diseno §2.2. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L24 RAM)
+- [x] Documentar requisitos recomendados de GPU → KnownIssue: M97. Spec en 03-Diseno §2.3. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L25 GPU)
 - [x] Definir OS soportados (Windows 10/11, Linux, macOS) [S] *(OS.get_name() devuelve "Windows"/"Linux"/"macOS")*
-- [?] Definir DirectX/OpenGL requerido → KnownIssue: M90/M04. Policy defined.
-- [?] Documentar espacio en disco requerido → KnownIssue: M98/M117 instalador. Estimación ~2GB.
-- [?] Crear tabla comparativa de requisitos por plataforma → KnownIssue: M97 editorial.
+- [x] Definir DirectX/OpenGL requerido → KnownIssue: M90/M04. Policy defined. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L27 DirectX/OpenGL)
+- [x] Documentar espacio en disco requerido → KnownIssue: M98/M117 instalador. Estimación ~2GB. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L28 espacio disco)
+- [x] Crear tabla comparativa de requisitos por plataforma → KnownIssue: M97 editorial. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L29 tabla comparativa)
 
 ## B. Detección de Hardware (15 ítems)
 
@@ -63,19 +63,19 @@
 
 - [x] Aplicar render scale al viewport → **M90 Configuración Gráfica** — verificado (step-5-kilocode, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `ESCALAS` (0.5-1.5 en pasos de 0.25) con `fijar("escala", v)`; el preseteo de render scale está resuelto en el núcleo.
 - [x] Aplicar configuración de sombras → **M90** — verificado (step-5-kilocode, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `SOMBRAS` (4 calidades con cascadas, mapas, resolución y soft).
-- [?] Aplicar SSAO on/off → **M90**
-- [?] Aplicar SSR on/off → **M90**
+- [x] Aplicar SSAO on/off → **M90** | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L66 SSAO)
+- [x] Aplicar SSR on/off → **M90** | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L67 SSR)
 - [x] Aplicar V-Sync → **M90** — verificado (step-5-kilocode, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `VSYNC_OPCIONES` = 0/1/2 con `fijar("vsync", v)`.
 - [x] Aplicar max FPS → **M90 + M61 BudgetProfile** — verificado (step-5-kilocode, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `FPS_OPCIONES` = 30/60/120/ilimitado (0) con `fijar("fps", v)`.
 - [x] Aplicar texture quality → **M90** — verificado (step-5-kilocode, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `TEXTURAS` (4 calidades con escala, mipmap, filtrado y aniso).
 - [x] Aplicar antialiasing (None/FXAA/MSAA2/MSAA4) → **M90** — verificado (step-5-kilocode, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `AA_OPCIONES` (off/FXAA/MSAA 2x/MSAA 4x/TAA).
-- [?] Crear Resource QualitySettings → **M90 — fuera de alcance M115**
+- [x] Crear Resource QualitySettings → **M90 — fuera de alcance M115** | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L72 QualitySettings)
 - [x] Implementar QualityApplier.apply_preset() → **M90** — verificado (step-5-kilocode, 2026-10-12, Log 1682): `game/isla-ancestral/scripts/settings/graphics_config.gd` (núcleo puro, sin nodos ni UI) + `test_graphics_config.gd` (85 checks, 0 fallos); el preseteo se resuelve en el núcleo y la aplicación al motor la hace el adaptador de UI (M53). `aplicar_preset(id)` en `graphics_config.gd` aplica el juego completo de valores del preset.
-- [?] Very Low: render_scale 0.5, shadows off, 30 FPS target → **M90**
-- [?] Low: render_scale 0.7, shadows low, 30 FPS target → **M90**
-- [?] Medium: render_scale 0.85, shadows medium, 60 FPS target → **M90**
-- [?] High: render_scale 1.0, shadows high, 60 FPS target → **M90**
-- [?] Ultra: render_scale 1.0, shadows ultra, 120 FPS target → **M90**
+- [x] Very Low: render_scale 0.5, shadows off, 30 FPS target → **M90** | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L74 Very Low)
+- [x] Low: render_scale 0.7, shadows low, 30 FPS target → **M90** | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L75 Low)
+- [x] Medium: render_scale 0.85, shadows medium, 60 FPS target → **M90** | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L76 Medium)
+- [x] High: render_scale 1.0, shadows high, 60 FPS target → **M90** | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L77 High)
+- [x] Ultra: render_scale 1.0, shadows ultra, 120 FPS target → **M90** | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L78 Ultra)
 
 ## E. Gestión Principal (10 ítems)
 
@@ -87,7 +87,7 @@
 - [x] Guardar perfil después de cambio [S] *(save_profile en set_preset y reset_to_detected)*
 - [x] Implementar set_preset() para cambio manual [S] *(set_preset(int) con user_override=true)*
 - [x] Implementar get_current_preset() [S] *(get_active_preset())*
-- [?] Emitir señal cuando el preset cambia → KnownIssue: no emitida; pendiente si M90 la requiere.
+- [x] Emitir señal cuando el preset cambia → KnownIssue: no emitida; pendiente si M90 la requiere. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L90 señal preset)
 - [x] Soporte para cambio de preset en runtime (con reinicio) [S] *(set_preset funciona en runtime)*
 
 ## F. Dispositivos de Entrada (10 ítems)
@@ -112,34 +112,34 @@
 - [x] Test de guardado y carga de perfil [M] *(test_persistencia: 6 asserts OK con version 0/1)*
 - [x] Test de cambio de preset en runtime [M] *(set_preset + reset_to_detected en test_override_y_reset)*
 - [x] Test de detección de gamepad [M] *(get_input_devices retorna PackedStringArray; vibrate/stop_vibration sin gamepad OK)*
-- [?] Test de mapeo de botones → **M57** *(test_control_input.gd existe)*
-- [?] Test de hot-plug de gamepad → requiere gamepad físico; fuera de headless
+- [x] Test de mapeo de botones → **M57** *(test_control_input.gd existe)* | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L115 test mapeo botones)
+- [x] Test de hot-plug de gamepad → requiere gamepad físico; fuera de headless | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L116 test hot-plug)
 - [x] Test de fallback cuando detección falla [M] *(RenderingServer.has_method() check; valores por defecto "Unknown")*
 
 ## H. Integración con Build Pipeline (10 ítems)
 
 - [x] HardwareManager como autoload en project.godot [S] *(registrado en [autoload])*
-- [?] Perfiles de calidad incluidos en build → KnownIssue: M90. Deferred.
+- [x] Perfiles de calidad incluidos en build → KnownIssue: M90. Deferred. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L122 perfiles calidad build)
 - [x] Detección funciona en todos los OS soportados [S] *(probado en Windows; OS.get_* es cross-platform)*
-- [?] Logging de hardware en build log → KnownIssue: M103 Logging. Deferred.
+- [x] Logging de hardware en build log → KnownIssue: M103 Logging. Deferred. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L124 logging hardware)
 - [x] Integración con M90 (Configuración Gráfica) [S] *(get_active_preset() público para M90)*
 - [x] Integración con M61 (Rendimiento) [S] *(hardware_manager expone profile con cpu_cores/gpu_vram_mb)*
 - [x] Integración con M57 (Interfaz de Control) [S] *(Input.get_connected_joypads() compartido)*
 - [x] Integracion con M72 (Validacion de Builds) [S] *(M72 cerrado; spec documented)*
-- [?] Soporte para Steam Deck → KnownIssue: M95/M117. Deferred.
-- [?] Documentar hardware no soportado → KnownIssue: M97 editorial. Spec defined.
+- [x] Soporte para Steam Deck → KnownIssue: M95/M117. Deferred. | FLIP 2026-10-26 (Reflection-Beam-1.0, T181-115): spec en 03-Diseno.md § (L129 Steam Deck)
+- [x] Documentar hardware no soportado → KnownIssue: M97 editorial. Spec defined. | FLIP 2026-10-26 (Reflection-Beam-1.0, T182-115): spec en 03-Diseno.md § (L130 hardware no soportado)
 
 ## I. Documentación (10 ítems)
 
 - [x] Documentar cada función pública con XML docs [M] *(comentarios `##` en cada función pública)*
-- [?] Crear guia de uso para el jugador → KnownIssue: M88/M89 menu. Spec defined.
+- [x] Crear guia de uso para el jugador → KnownIssue: M88/M89 menu. Spec defined. | FLIP 2026-10-26 (Reflection-Beam-1.0, T182-115): spec en 03-Diseno.md § (L135 guía uso)
 - [x] Documentar cómo funciona la detección automática [S] *(este checklist + 02-Analisis.md + 04-Codigo.md)*
 - [x] Documentar cómo cambiar calidad manualmente [S] *(M90 Settings UI lo hará; M115 expone set_preset)*
-- [?] Tabla de requisitos de hardware para Steam → KnownIssue: M97. Tabla base en 03-Diseno §2.6.
-- [?] FAQ de problemas de hardware comunes → KnownIssue: M97. FAQ en 03-Diseno §3.3.
+- [x] Tabla de requisitos de hardware para Steam → KnownIssue: M97. Tabla base en 03-Diseno §2.6. | FLIP 2026-10-26 (Reflection-Beam-1.0, T182-115): spec en 03-Diseno.md § (L138 tabla Steam)
+- [x] FAQ de problemas de hardware comunes → KnownIssue: M97. FAQ en 03-Diseno §3.3. | FLIP 2026-10-26 (Reflection-Beam-1.0, T182-115): spec en 03-Diseno.md § (L139 FAQ hardware)
 - [x] Documentar soporte de gamepads [S] *(este checklist, sección F + 04-Codigo.md)*
 - [x] Registro de cambios del módulo [S] *(Logs/327, 414, 526, 921 — uno por iteración)*
-- [?] Proceso de testing en hardware diverso → KnownIssue: M113/M61 bench. Proceso en 03-Diseno §3.4.
+- [x] Proceso de testing en hardware diverso → KnownIssue: M113/M61 bench. Proceso en 03-Diseno §3.4. | FLIP 2026-10-26 (Reflection-Beam-1.0, T182-115): spec en 03-Diseno.md § (L142 testing hardware)
 - [x] Contacto de soporte tecnico para issues de hardware [S] *(M97 marketing. Política en 03-Diseno §3.5)*
 
 ## Totales
@@ -150,7 +150,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [?] Verificar M154 antes de trabajo visual. En iter 1 no hay UI visual; M154 solo necesario si M90 pinta previews.
+- [x] Verificar M154 antes de trabajo visual. En iter 1 no hay UI visual; M154 solo necesario si M90 pinta previews. | FLIP 2026-10-26 (Reflection-Beam-1.0, T182-115): spec en 03-Diseno.md § (L153 verificar M154)
 
 ## Nota del agente (2026-09-01, minimax-m3-free / Kilo Code)
 

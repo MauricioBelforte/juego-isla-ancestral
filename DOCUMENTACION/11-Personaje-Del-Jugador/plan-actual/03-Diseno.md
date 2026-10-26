@@ -72,6 +72,7 @@ RANGO_INTERAC  = 4 m
 - Contacto en radio 1.2 m → el destello "entra" al jugador (magnetismo animado 0.3 s) → `PlayerLightInventory` (M14).
 - Punto de luz total visible en el HUD (pantalla de 6 esferas — M14/M28).
 - Sin límite de recogida; cuenta como progresión del alma (sin monetización).
+- Evento `light_collected(count: int)` emitido en EventBus al recoger un destello; consumido por M14/M28 para actualizar el HUD de 6 esferas.
 
 ## 6. Integración con terrenos (M156)
 
@@ -117,3 +118,13 @@ RANGO_INTERAC  = 4 m
 - `SpawnPoint` = hogar del jugador (M31); si no existe, el muelle del puerto.
 - Guardado: posición, rotación, stamina, dirección de la cámara, personaje_elegido → GameState.M11 (M59).
 - Session id: la partida se reanuda en el último punto de guardado (M60 descansar en cama).
+
+## 10. Specs de items degradados (definidos 2026-10-26, Reflection-Beam-1.0 T159)
+
+- **Idempotencia de recogida (L81):** esporas recogidas se persisten en M59 por id de espora; al regenerar el mundo, las ya recogidas no reaparecen. M11 emite `light_collected(count)` y M59 guarda el set de ids.
+- **Sin daño por caída (L89):** sin daño por caída; amortiguación suave en caídas > 3 bloques (clamp de velocity.y al aterrizar, sin penalización cozy).
+- **Descanso y energía (L92/L93/L94):** al dormir/descansar (M31 cama) `recargar_dormir()` lleva stamina a 100%; alimentos otorgan bonos de bienestar (+stamina, +velocidad) consumibles; sin penalización por dormir poco (aviso suave). M11 expone `recargar_descanso(delta)` para que M29/M13 otorguen bonos.
+- **Settings de sprint (L95):** settings expone `sprint_mode: hold|toggle` (default hold), persistido en GameState (M59).
+- **Stamina informativa (L85/L86/L87/L88/L91/L96):** barra solo visible al drenar (fade); icono suave al 30%; vibración + tinte azul en bordes al 30%; sprint no acumula deuda permanente; sin castigos por jugar "mal" (cozy). Ver §8.
+
+- **Constantes consumibles (L122/L135):** externalizar las constantes físicas (move_speed, gravity, jump_force, etc.) a `data/player/player_motion.tres` (Resource) consumido por `player.gd`; mientras no exista el archivo, las constantes viven en `player.gd` L8-10 y `Player.tscn` L19-21. Documentar en §1.

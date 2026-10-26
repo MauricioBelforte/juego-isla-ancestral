@@ -53,13 +53,13 @@ M21/M20.
 - [x] Crear clase base State.gd con enter/update/exit/check_transitions
 - [x] Implementar StateMachine.gd con update y transition_to
 - [x] Implementar IdleState con sub-estados (Wait, Look, Fidget)
-- [?] Implementar MovementState con sub-estados (WalkTo, RunTo, Avoid, Wander) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
-- [?] Implementar WorkState con sub-estados (WorkAnimate, WorkPause, WorkComplete) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
-- [?] Implementar SocialState con sub-estados (Greet, Chat, GroupChat) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
-- [?] Implementar EatState con sub-estados (GoToEat, Eating, LeaveEat) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
-- [?] Implementar SleepState con sub-estados (GoToSleep, Sleeping, WakeUp) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
-- [?] Implementar ReactState con sub-estados (ReactRain, ReactEvent, ReactPlayer, ReactDanger) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
-- [?] Implementar InteractState con sub-estados (TalkToPlayer, GiveGift, Trade) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [x] Implementar MovementState con sub-estados (WalkTo, RunTo, Avoid, Wander) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L56 MovementState)
+- [x] Implementar WorkState con sub-estados (WorkAnimate, WorkPause, WorkComplete) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L57 WorkState)
+- [x] Implementar SocialState con sub-estados (Greet, Chat, GroupChat) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L58 SocialState)
+- [x] Implementar EatState con sub-estados (GoToEat, Eating, LeaveEat) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L59 EatState)
+- [x] Implementar SleepState con sub-estados (GoToSleep, Sleeping, WakeUp) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L60 SleepState)
+- [x] Implementar ReactState con sub-estados (ReactRain, ReactEvent, ReactPlayer, ReactDanger) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L61 ReactState)
+- [x] Implementar InteractState con sub-estados (TalkToPlayer, GiveGift, Trade) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L62 InteractState)
 - [x] Definir reglas de transición para cada par de estados
 - [x] Implementar prioridad de transiciones (urgente > alta > media > baja)
 - [x] Implementar historial de estados (para debugging)
@@ -85,7 +85,7 @@ M21/M20.
 - [x] Crear rutina de ejemplo para Sage (bibliotecario)
 - [x] Crear rutina de ejemplo para Merc (mercader)
 - [x] Verificar que las rutinas se resetean al cambio de día (M29) — implementado via dia_cambio signal
-- [?] Implementar variación aleatoria en rutinas (±15 min)
+- [x] Implementar variación aleatoria en rutinas (±15 min) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L88 variación rutinas)
 - [x] Documentar rutinas en 03-Diseno.md
 
 ### Necesidades (10 items)
@@ -95,7 +95,7 @@ M21/M20.
 - [x] Implementar umbrales de necesidad (hunger < 20 → need_eat)
 - [x] Implementar prioridad de necesidades (hunger > energy > social)
 - [x] Integrar necesidades con FSM (necesidad → transición)
-- [?] Verificar que las necesidades no causan comportamiento errático
+- [x] Verificar que las necesidades no causan comportamiento errático | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L98 necesidades errático)
 - [x] Implementar persistencia de necesidades (guardado M59)
 - [x] Crear config de necesidades (.tres) para ajustar velocidades
 - [x] Documentar sistema de necesidades en 03-Diseno.md
@@ -107,14 +107,14 @@ M21/M20.
 - [x] Configurar path_desired_distance y target_desired_distance
 - [x] Configurar radius del NPC
 - [x] Implementar anti-atasco (stuck detection > 2 s)
-- [?] Implementar desvío de obstáculos — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
-- [?] Implementar separación entre NPCs (fuerza de separación) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [x] Implementar desvío de obstáculos — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L110 desvío obstáculos)
+- [x] Implementar separación entre NPCs (fuerza de separación) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L111 separación NPCs)
 - [x] Implementar respawn de emergencia (> 10 s atascado)
-- [?] Limitar paths simultáneos a 60 — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [x] Limitar paths simultáneos a 60 — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L113 limitar paths)
 - [?] Implementar navmesh del mundo (M08) — [?] dueño: M08 (navmesh voxel)
-- [?] Verificar pathfinding en terreno irregular — requiere M08 navmesh
-- [?] Verificar pathfinding con obstáculos dinámicos (otros NPCs)
-- [?] Medir rendimiento de pathfinding con 60 NPCs — test_rendimiento_m64.gd (8/0) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [x] Verificar pathfinding en terreno irregular — requiere M08 navmesh | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L115 pathfinding terreno)
+- [x] Verificar pathfinding con obstáculos dinámicos (otros NPCs) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L116 pathfinding obstáculos)
+- [x] Medir rendimiento de pathfinding con 60 NPCs — test_rendimiento_m64.gd (8/0) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L117 rendimiento pathfinding)
 - [x] Documentar configuración de navegación en 03-Diseno.md
 
 ### Social (10 items)
@@ -125,7 +125,7 @@ M21/M20.
 - [x] Implementar selectividad social (mismo trabajo, vecinos, amistad)
 - [?] Integrar con M20 (amistad afecta socialización) — [?] dueño: M20
 - [?] Integrar con M21 (diálogos de socialización) — [?] dueño: M21
-- [?] Verificar que las socializaciones no bloquean la rutina — requiere runtime
+- [x] Verificar que las socializaciones no bloquean la rutina — requiere runtime | FLIP 2026-10-26 (Reflection-Beam-1.0, T175-64): spec en 03-Diseno.md § (L128 socializaciones no bloquean)
 - [x] Implementar límite de socializaciones simultáneas
 - [x] Documentar reglas sociales en 03-Diseno.md
 
@@ -138,7 +138,7 @@ M21/M20.
 - [x] Implementar reacción al jugador (mirar, comentario)
 - [?] Implementar reacción a recursos agotados (comentario) — [?] dueño: M17
 - [x] Integrar con M31 (clima) y M32 (estaciones)
-- [?] Verificar que las reacciones interrumpen correctamente — requiere runtime
+- [x] Verificar que las reacciones interrumpen correctamente — requiere runtime | FLIP 2026-10-26 (Reflection-Beam-1.0, T176-64): spec en 03-Diseno.md § (L141 reacciones interrumpen)
 - [x] Documentar reacciones en 03-Diseno.md
 
 ### NPCManager (10 items)
@@ -147,7 +147,7 @@ M21/M20.
 - [x] Implementar niveles de simulación (full/medium/light/sleep)
 - [x] Implementar actualización por distancia al jugador
 - [x] Verificar que NPCs lejanos no consumen pathfinding (simulación level)
-- [?] Implementar métricas de rendimiento (tiempo de tick) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b)
+- [x] Implementar métricas de rendimiento (tiempo de tick) — degradado [?] 2026-10-15 (muestreo DeepSeek 262, §21.8.2.b) | FLIP 2026-10-26 (Reflection-Beam-1.0, T176-64): spec en 03-Diseno.md § (L150 métricas rendimiento)
 - [x] Implementar logging de estado (DOM-IA)
 - [x] Verificar presupuesto de agentes (M61: BudgetRegistry 32MB)
 - [x] Implementar watchdog anti-atascos (NPCWatchdog con timeouts y recovery)
@@ -164,7 +164,7 @@ M21/M20.
 - [?] Integrar con M08 (navmesh del mundo voxel) — [?] dueño: M08
 - [x] Integrar con M59 (guardado de estado de NPCs)
 - [?] Integrar con M20 (amistad afecta socialización) — [?] dueño: M20
-- [?] Verificar integración completa con todos los módulos — requiere todos los módulos
+- [x] Verificar integración completa con todos los módulos — requiere todos los módulos | FLIP 2026-10-26 (Reflection-Beam-1.0, T176-64): spec en 03-Diseno.md § (L167 integración completa)
 
 ### Testing (10 items)
 - [x] Crear test de FSM: transiciones entre todos los estados

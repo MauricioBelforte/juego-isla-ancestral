@@ -81,4 +81,35 @@ Jugador nuevo: catálogo completo, estadísticas en cero, onboarding M92.
 - RF1 registry en .tres (JSON hoy — migración si el volumen lo exige)
 - RF8 registro base de logros (M72 lo cubre con su catálogo)
 - Contenido de 15 → ~40 hitos (curaduría con M93 balance)
+
+## 6. Specs de items degradados (definidos 2026-10-26, Reflection-Beam-1.0 T164)
+
+- **MilestoneDefinition (L58):** schema: `milestone_id`, `nombre_i18n`, `descripcion_i18n`, `condicion`, `recompensas`, `dominio`. Implementación actual: diccionarios en `data/progresion/hitos.json` (sin clase dedicada ni campos i18n dedicados).
+- **get_milestone(id) (L63):** contrato API pública O(1) lookup en `_hitost` (hoy solo acceso interno `_hitost[index]` + signals).
+- **get_unlock/get_logro/get_titulo (L64):** mismo patrón O(1) por id (hoy inexistentes; acceso por signals).
+- **AchievementDefinition (L85):** propiedad de M72; M71 expone evaluador (`evaluar_condicion`/`evaluar_pura`) y señales `progreso_hito_alcanzado`/`progreso_desbloqueado`.
+- **Estadísticas mínimas (L99):** items_recolectados, items_crafteados, monedas_ganadas_total, monedas_gastadas_total, trueques_realizados, objetos_vendidos, donaciones, amistades_maximas, sellos, capitulos, dias_jugados — persistidos vía PlayerProfile (`incrementar`/`set_stat`/`get_stat`).
+- **Curva temprana (L138):** desbloqueos frecuentes días 1-7 (cada 30-60 min); hoy los 10 hitos 'generales' de hitos.json no tienen frecuencia parametrizada — definir en catálogo.
+
+## 7. Specs de items degradados (definidos 2026-10-26, Reflection-Beam-1.0 T165)
+
+- **Curva media (L139):** desbloqueos espaciados semanas 2-4 (cada 2-4 días de juego).
+- **Curva tardía (L140):** desbloqueos selectos post-capítulo 4 orientados a completitud.
+- **Todo desbloqueable (L144):** sin elecciones excluyentes permanentes; progresión horizontal no bloquea contenido principal.
+- **Flujo condición imposible (L171):** detección estática (`detectar_condiciones_imposibles_estaticas` L422) + dinámica (`_es_condicion_imposible` L434); reporte a M66 con ruta alternativa.
+- **Hito reflejo por herramienta/nivel (L194/L195):** `nivel_herramienta_cambio` (L216) + `_evaluar_nivel_modulo_puro` (L351); condiciones `nivel_modulo(herramienta, ref, nivel)` en catálogo.
+- **Consumo señal casa (L202/L203/L204):** `EventBus.nivel_casa_cambio(nivel)` (L178); reflejo vía `casa_manager.obtener_nivel_casa()` (duck-typing L371-372, L768-769); condiciones `nivel_modulo(casa, ref, nivel)` en evaluador (genérico) — pendiente en datos.
+- **Amistad (L210/L211):** `integrar_amistad` refleja amistad por NPC; stat 'amigos en nivel N' y desbloqueos sociales (trueques únicos, eventos) sin bloquear contenido principal.
+- **Sellos/capítulos (L221-L225):** `sello_historia(sello_id)` y `capitulo_historia(capitulo_id)` como condiciones (hoy inexistente en evaluador; reflejo por sello existe en hitos.json: `hito_sello_ceniza_sala1/2`, `hito_sellos_4`).
+- **Desbloqueos por sello (L226):** condicionados a sellos con vigilancia M66; 5 finales de M22 como hitos de cierre (hoy 0 en hitos.json).
+- **Postgame (L227/L246):** coordinación con M75 para re-priorización de metas; condiciones no cumplibles reportadas a M66.
+- **Notificaciones (L250):** señales de hito (L20) sin cola priorizada en M53 — definir contrato.
+
+## 8. Specs de items degradados (definidos 2026-10-26, Reflection-Beam-1.0 T166)
+
+- **Condiciones RefCounted (L267):** condiciones evaluadas como diccionarios puros (`evaluar_pura` L260) sin pool de RefCounted; el patrón del item no está implementado (decisión de diseño: diccionarios puros).
+- **02-Analisis.md (L275):** existe en plan-actual con D1-D10 documentadas (verificado Log 623).
+- **05-Checklist.md (L279):** existe con 213 ítems (>130); 45 quedan [?] (en curso). Completitud parcial.
+- **Prueba condición imposible (L292):** detección estática en editor (`detectar_condiciones_imposibles_estaticas` L422) + ruta alternativa en runtime; prueba dedicada pendiente.
+- **Prueba determinismo (L295):** misma partida → mismos hitos en el mismo orden; test dedicado pendiente (test_progresion.gd cubre evaluación/condiciones).
 - Consumo UI de hitos_proximos() para sugeridor M53

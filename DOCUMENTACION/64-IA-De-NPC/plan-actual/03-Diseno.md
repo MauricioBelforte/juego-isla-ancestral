@@ -178,3 +178,17 @@ NPCAgent expone `get_save_data()` / `restore_save_data()`:
 
 ## Nota D-3 (hallazgo Beam 331 + decision fundador 23oct, aplicado por Beam 354)
 - **M64 rates (0.5/0.3/0.1 vs doc 1.0/0.5/0.3)**: NO tocar codigo ni doc — es decision de BALANCE para el playtest del fundador. El doc manda como meta y el codigo implementa el ritmo calibrado actual. (fundador 23oct 23:13)
+
+### Specs items degradados T176 (2026-10-26, Reflection-Beam-1.0)
+- **L141 (reacciones interrumpen correctamente):** requiere runtime — pendiente verificación.
+- **L150 (métricas de rendimiento tiempo de tick):** degradado (muestreo DeepSeek 262 §21.8.2.b).
+- **L167 (verificar integración completa):** requiere todos los módulos — pendiente.
+- **L88 (variación aleatoria rutinas ±15 min):** pendiente.
+- **L98 (necesidades no causan comportamiento errático):** pendiente verificación.
+- **L110 (desvío obstáculos):** pendiente.
+- **L111 (separación NPCs):** fuerza de separación pendiente.
+- **L113 (limitar paths simultáneos a 60):** pendiente.
+- **L115 (pathfinding terreno irregular):** requiere M08 navmesh.
+- **L116 (pathfinding obstáculos dinámicos):** pendiente.
+- **L117 (rendimiento pathfinding 60 NPCs):** test_rendimiento_m64.gd (8/0), degradado.
+- **L128 (socializaciones no bloquean rutina):** requiere runtime.

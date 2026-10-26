@@ -228,3 +228,9 @@ fix). PREPARACION: correr tras el cierre de cada lote (no en vivo).
 UMBRAL: 0 alertas NUEVAS no documentadas (las alertas conocidas quedan
 listadas como baseline con firma de quien las acepto).
 
+
+
+## Specs Multijugador (Beam 726)
+
+### Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log
+- Spec: actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log. ESTADO-PARALELO + Log actualizados; fila GLOBAL entregada al director (msg 55) — él aplica. Coherente with M76 (multijugador) and AGENTS.md sec 21.

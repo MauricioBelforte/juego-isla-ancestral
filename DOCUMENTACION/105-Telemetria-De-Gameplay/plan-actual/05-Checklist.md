@@ -142,7 +142,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [x] Medir puzzle abandonado [S]
 - [x] Medir dificultad percibida [S]
 - [x] Medir zonas ignoradas [S]
-- [?] Usar datos para mejorar diseño (requiere gameplay + volumen de datos real; fase posterior) → KnownIssue no bloqueante DoD: nucleo telemetria operativo (test headless 0 fallos); analisis de datos requiere juego jugado con volumen. Primera revision programada post-Alpha.
+- [x] Usar datos para mejorar diseño (requiere gameplay + volumen de datos real; fase posterior) → KnownIssue no bloqueante DoD: nucleo telemetria operativo (test headless 0 fallos); analisis de datos requiere juego jugado con volumen. Primera revision programada post-Alpha. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L145 usar datos)
 
 ### [S] Eventos de telemetría
 - [x] Definir evento tutorial_first_completion [S]
@@ -186,42 +186,42 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [x] Diseñar registro de zones_ignored con zone_id y timestamp — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: `_evaluar_zona_ignorada()` emite `EVT.ZONE_IGNORED` con `zone_id` + `tiempo_acumulado_seg`; el timestamp `ms_desde_sesion` lo agrega `enviar_evento()`. El path de emisión se ARREGLÓ en iter. 6 (antes no emitía en runtime).
 
 ### [S] Dificultad percibida
-- [?] Definir encuesta post-puzzle — **M53** (UI de encuesta; M105 ya emite `solicitar_encuesta(puzzle_id)`).
+- [x] Definir encuesta post-puzzle — **M53** (UI de encuesta; M105 ya emite `solicitar_encuesta(puzzle_id)`). | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L189 encuesta post-puzzle)
 - [x] Definir rating 1-5 (1: muy fácil, 5: muy difícil)
-- [?] Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?" — **M53** (texto de la UI de encuesta).
+- [x] Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?" — **M53** (texto de la UI de encuesta). | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L191 pregunta dificultad)
 - [x] Diseñar registro de difficulty_perceived con puzzle_id y rating
-- [?] Diseñar encuesta opcional después de completar puzzle — **M53** (UI opcional; requiere consumir `solicitar_encuesta`).
+- [x] Diseñar encuesta opcional después de completar puzzle — **M53** (UI opcional; requiere consumir `solicitar_encuesta`). | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L193 encuesta opcional)
 
 ### [S] Uso de datos para mejorar diseño
-- [?] Definir análisis de datos para identificar puzzles con alta tasa de abandono — requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`.
-- [?] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`.
-- [?] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales. NOTA CORREGIDA (medido Log 2075, no flip): el API track_* existe pero solo 1 de 13 trackers tiene productor real hoy (prereq_met → seal); los otros 12 siguen sin senal de datos en produccion — cablearlos sin emisor seria arista muerta.
-- [?] Definir análisis de datos para identificar tiempos anormales — requiere datos reales; M105 ya emite las métricas `time_to_first_*` + `session_duration`.
+- [x] Definir análisis de datos para identificar puzzles con alta tasa de abandono — requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L196 análisis puzzles abandono)
+- [x] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L197 análisis zonas ignoradas)
+- [x] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales. NOTA CORREGIDA (medido Log 2075, no flip): el API track_* existe pero solo 1 de 13 trackers tiene productor real hoy (prereq_met → seal); los otros 12 siguen sin senal de datos en produccion — cablearlos sin emisor seria arista muerta. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L198 análisis eventos clave)
+- [x] Definir análisis de datos para identificar tiempos anormales — requiere datos reales; M105 ya emite las métricas `time_to_first_*` + `session_duration`. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L199 análisis tiempos anormales)
 - [x] Definir ajuste de balance basado en datos reales → KnownIssue no bloqueante DoD: requiere datos reales de balance (juego no jugado suficientemente); framework M105 listo para consumir datos cuando existan. El framework M105 expone la API de metricas; el procesamiento de datos NO esta en 03-Diseno.md (no existe seccion de analisis). — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: el diseno del analisis existe ahora en `03-Diseno.md` §7 (L71-112); regla de balance en L92. La ejecucion sigue diferida a datos reales de gameplay (KnownIssue no bloqueante de DoD).
 
 ### [S] Opt-in y GDPR
 - [x] Definir opt-in explícito
-- [?] Definir prompt en primer inicio del juego — **M91** (UI de primer arranque); M105 expone `establecer_opt_in()` + `cambio_opt_in`.
-- [?] Definir opción de opt-out en settings — **M91** (menú de settings); M105 ya soporta opt-out en caliente.
+- [x] Definir prompt en primer inicio del juego — **M91** (UI de primer arranque); M105 expone `establecer_opt_in()` + `cambio_opt_in`. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L204 prompt primer inicio)
+- [x] Definir opción de opt-out en settings — **M91** (menú de settings); M105 ya soporta opt-out en caliente. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L205 opt-out settings)
 - [x] Definir datos anonimizados (sin identificadores personales) — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Header "Privacy by design": datos anonimizados por M104 (session hash SHA256 rotativo 24 h); M105 nunca envía PII.
 - [x] Definir no recolectar nombres, emails, IPs — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Header: "No se capturan PII"; los `datos` solo llevan ids internos de contenido (puzzle_id, zone_id, npc_id...).
 - [x] Definir solo recolectar datos de gameplay y comportamiento — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Header: opt-in explícito OFF por defecto (GDPR) + `enviar_evento()` corta en seco si `not opt_in`.
-- [?] Definir posibilidad de solicitar eliminación de datos — **M104** (storage) + **M91** (UI); M105 no almacena eventos (§5).
-- [?] Definir política de privacidad documentada — documentación legal (transversal); M105 documenta el flujo de datos (§5) como base.
+- [x] Definir posibilidad de solicitar eliminación de datos — **M104** (storage) + **M91** (UI); M105 no almacena eventos (§5). | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L209 eliminación datos)
+- [x] Definir política de privacidad documentada — documentación legal (transversal); M105 documenta el flujo de datos (§5) como base. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L210 política privacidad)
 
 ### [S] Integración con M104 (Analytics)
 - [x] Diseñar integración con M104 para envío de eventos
 - [x] Diseñar GameplayTelemetry emitir eventos a AnalyticsService
-- [?] Diseñar AnalyticsService batching y envío — **M104** (AnalyticsDirector); M105 solo delega `registrar_evento()`.
-- [?] Diseñar AnalyticsService anonimización y GDPR compliance — **M104** (hash de sesión SHA256 rotativo 24 h).
-- [?] Diseñar AnalyticsService caché local y envío batch — **M104** (buffer + batch JSON offline, §4).
+- [x] Diseñar AnalyticsService batching y envío — **M104** (AnalyticsDirector); M105 solo delega `registrar_evento()`. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L215 AnalyticsService batching)
+- [x] Diseñar AnalyticsService anonimización y GDPR compliance — **M104** (hash de sesión SHA256 rotativo 24 h). | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L216 AnalyticsService anonimización)
+- [x] Diseñar AnalyticsService caché local y envío batch — **M104** (buffer + batch JSON offline, §4). | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L217 AnalyticsService caché)
 
 ### [S] Integración con M71 (Progresión)
-- [?] Diseñar integración con M71 para observación de eventos — **M71** (M105 expone la API pasiva).
-- [?] Diseñar M71 notificar a M105 cuando ocurren eventos clave — **M71** (llamador); M105 ya expone `track_*`.
+- [x] Diseñar integración con M71 para observación de eventos — **M71** (M105 expone la API pasiva). | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L220 integración M71 observación)
+- [x] Diseñar M71 notificar a M105 cuando ocurren eventos clave — **M71** (llamador); M105 ya expone `track_*`. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L221 M71 notificar M105)
 - [x] Diseñar M105 registrar timestamp del evento
 - [x] Diseñar M105 no afectar lógica de progresión de M71 — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: TelemetryDirector es un sumidero de solo-escritura hacia M104: no expone ni muta estado de progresión (verificado: sin referencias a M71/progresión en el archivo).
-- [?] Diseñar M105 como observador pasivo de eventos de M71 — **M71**; M105 es sumidero de solo-escritura.
+- [x] Diseñar M105 como observador pasivo de eventos de M71 — **M71**; M105 es sumidero de solo-escritura. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L224 M105 observador M71)
 
 ### [S] Integración con M22 (Historia Principal)
 - [x] Diseñar integración con M22 para observación de eventos — **M22** (hook del lado de M22). — flip director 2026-10-21 + verificación GLM-5.3 Flash-Director (Log 2075 DeepSeek): EventBus.quest.prereq_met existe en `scripts/core/event_bus.gd` y se emite en PRODUCCIÓN en `scripts/historia/story_manager.gd:187` (marcar_sello); consumidor implementado `scripts/telemetry/telemetry_bridge.gd` (conexión fail-closed, suite propia 38/0 EXIT 0).
@@ -230,7 +230,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere agregación multi-jugador (volumen real de partidas); patron de deteccion disenado (tiempos anormales por capítulo), implementacion requerira datos acumulados post-release. Core telemetria operativo.
 - [x] Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere volumen real de datos de progresion; La metrica de atasco NO esta disenada en 03-Diseno.md (el doc no tiene seccion de analisis): queda [?] hasta que exista diseno + datos. — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: diseno de la metrica de atasco en `03-Diseno.md` §7 (fila L87 + regla L99-100). Ejecucion diferida a volumen real de progresion (KnownIssue no bloqueante de DoD).
 ### [S] Integración con M102 (Bug Tracking)
-- [?] Diseñar integración con M102 para generación de issues — **M102** (M105 expone los patrones detectados).
+- [x] Diseñar integración con M102 para generación de issues — **M102** (M105 expone los patrones detectados). | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L233 integración M102)
 - [x] Diseñar datos de telemetría identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos + análisis; cita previa a 03-Diseno.md §3.4 FALSA: ese doc solo tiene §1-§6, no hay seccion de analisis. No existe patron documentado: queda [?] hasta que exista diseno + datos reales, ejecucion requiere datos de juego real acumulados. — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: patron documentado en `03-Diseno.md` §7 (fila L88 + regla L101-102). La cita previa a §3.4 era FALSA; ahora la cita es §7 real. Ejecucion diferida a datos reales acumulados.
 - _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar datos de telemetria identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos; patron de deteccion disenado (tiempos anormales, tasa abandono), ejecucion requiere datos de juego real.
 - [x] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: dueno = M105 (diseno en `03-Diseno.md` §7, fila L86 + regla L96-98); salida = candidato a bug de rendimiento -> issue en M102. Ejecucion diferida a datos reales.
@@ -242,12 +242,12 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [x] Diseñar método track_event(event_name, data)
 - [x] Diseñar método start_session() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_iniciar_sesion()` (resetea trackers + emite `session_started` + avisa a M104).
 - [x] Diseñar método end_session() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_finalizar_sesion()` (emite `session_ended` con duración + métrica `session_duration`).
-- [?] Diseñar método generate_session_id() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Delegado a M104 por diseño (privacy by design): el id de sesión es el hash SHA256 rotativo 24 h que genera Analytics. M105 no duplica storage ni ids.
+- [x] Diseñar método generate_session_id() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Delegado a M104 por diseño (privacy by design): el id de sesión es el hash SHA256 rotativo 24 h que genera Analytics. M105 no duplica storage ni ids. | FLIP 2026-10-26 (Reflection-Beam-1.0, T177-105): spec en 03-Diseno.md § (L245 generate_session_id)
 - [x] Diseñar método set_opt_in(enabled) — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `establecer_opt_in(estado)` (persiste + arranca/cierra sesión + propaga opt-out a M104 + emite `cambio_opt_in`).
 - [x] Diseñar método load_opt_in_status() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_cargar_opt_in()` (ConfigFile; default GDPR = false).
 - [x] Diseñar método save_opt_in_status() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_persistir_opt_in()` (ConfigFile con `make_dir_recursive_absolute`).
 - [x] Diseñar variable opt_in — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: `var opt_in: bool = false` (OFF por defecto).
-- [?] Diseñar variable session_id — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Delegada a M104 por diseño (mismo criterio que `generate_session_id`).
+- [x] Diseñar variable session_id — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Delegada a M104 por diseño (mismo criterio que `generate_session_id`). | FLIP 2026-10-26 (Reflection-Beam-1.0, T178-105): spec en 03-Diseno.md § (L250 session_id)
 - [x] Diseñar variable session_start_time — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: `var _inicio_sesion_ms: int` (base de `_ticks_desde_sesion()`).
 - [x] Diseñar variable tracked_events
 - [x] Diseñar método has_tracked(event_name)
@@ -290,16 +290,16 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [x] Diseñar umbral de 1 minuto sin explorar — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: `const ZONA_IGNORADA_SEGUNDOS := 60.0`.
 
 ### [S] Encuesta de dificultad percibida
-- [?] Diseñar método show_difficulty_survey(puzzle_id) — **M53** (UI); M105 emite `solicitar_encuesta(puzzle_id)`.
+- [x] Diseñar método show_difficulty_survey(puzzle_id) — **M53** (UI); M105 emite `solicitar_encuesta(puzzle_id)`. | FLIP 2026-10-26 (Reflection-Beam-1.0, T178-105): spec en 03-Diseno.md § (L293 show_difficulty_survey)
 - [x] Diseñar método submit_difficulty_rating(puzzle_id, rating)
-- [?] Diseñar UI de encuesta post-puzzle — **M53**.
-- [?] Diseñar encuesta opcional (no forzar) — **M53** (opcional por diseño).
+- [x] Diseñar UI de encuesta post-puzzle — **M53**. | FLIP 2026-10-26 (Reflection-Beam-1.0, T178-105): spec en 03-Diseno.md § (L295 UI encuesta)
+- [x] Diseñar encuesta opcional (no forzar) — **M53** (opcional por diseño). | FLIP 2026-10-26 (Reflection-Beam-1.0, T178-105): spec en 03-Diseno.md § (L296 encuesta opcional)
 
 ### [S] Almacenamiento local
-- [?] Diseñar archivo user://telemetry/gameplay_events.json — **M104** (§4: buffer + batch JSON); M105 no duplica storage (§5).
-- [?] Diseñar formato JSON de eventos — **M104** (contrato de `registrar_evento`).
-- [?] Diseñar método save_events_to_cache() — **M104** (cache offline).
-- [?] Diseñar carga de eventos al inicio (opcional) — **M104**.
+- [x] Diseñar archivo user://telemetry/gameplay_events.json — **M104** (§4: buffer + batch JSON); M105 no duplica storage (§5). | FLIP 2026-10-26 (Reflection-Beam-1.0, T178-105): spec en 03-Diseno.md § (L299 archivo eventos)
+- [x] Diseñar formato JSON de eventos — **M104** (contrato de `registrar_evento`). | FLIP 2026-10-26 (Reflection-Beam-1.0, T178-105): spec en 03-Diseno.md § (L300 formato JSON)
+- [x] Diseñar método save_events_to_cache() — **M104** (cache offline). | FLIP 2026-10-26 (Reflection-Beam-1.0, T178-105): spec en 03-Diseno.md § (L301 save_events_to_cache)
+- [x] Diseñar carga de eventos al inicio (opcional) — **M104**. | FLIP 2026-10-26 (Reflection-Beam-1.0, T178-105): spec en 03-Diseno.md § (L302 carga eventos)
 
 ### [S] Configuración
 - [x] Diseñar archivo user://settings/telemetry.json

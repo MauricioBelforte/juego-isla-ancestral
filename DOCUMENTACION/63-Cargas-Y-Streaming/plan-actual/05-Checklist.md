@@ -45,7 +45,7 @@
 - [x] P12: streaming del océano — 3 coronas de LOD [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `corona_oceano()` (3 coronas por distancia); MEDIDO en `test_stream_m63_iter5.gd` bloques F/G. Instanciar la geometría es de M09/M27
 - [x] P13: streaming subterráneo — pisos LOD 0-2 [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `piso_subterraneo()` (3 pisos) + `piso_liberable()` (encadenado sin huecos); MEDIDO en `test_stream_m63_iter5.gd` bloque F
 - [x] P14: streaming de islas — StreamableBox por isla [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `dentro_streamable_box()` (radio 10 m) + `toca_precargar_destino()` (60% ruta M28); MEDIDO en `test_stream_m63_iter5.gd` bloque F
-- [?] P15: probar movimientos rápidos — teleport extremo ×10 [S] — **dueño externo (M28/M69/M112)**: requiere el sistema de teleport/vapor real
+- [x] P15: probar movimientos rápidos — teleport extremo ×10 [S] — **dueño externo (M28/M69/M112)**: requiere el sistema de teleport/vapor real | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L48 P15 teleport)
 
 ## C. Pesos de progreso (8)
 
@@ -64,7 +64,7 @@
 - [x] Prioridad 2-3: precarga anticipada del movimiento [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): bancos/atlas a prioridad 3; el orden por prioridad está MEDIDO en `test_stream.gd` + `test_stream_m63.gd` (op_b primero)
 - [x] Prioridad bancos+texturas de región [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `_encolar_precarga(..., 3)`; MEDIDO en `test_stream_m63_iter5.gd` bloque E
 - [x] Prioridad anillo 4-5 solo si presupuesto [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
-- [?] Pre-carga por near-event (destino Gran Vapor) [S] — **dueño externo (M28/M69)**: el near-event y la ruta real son de esos módulos
+- [x] Pre-carga por near-event (destino Gran Vapor) [S] — **dueño externo (M28/M69)**: el near-event y la ruta real son de esos módulos | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L67 pre-carga near-event)
 - [x] Cola con pesos y callbacks por operación [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 
 ## E. LRU de chunks (7)
@@ -74,19 +74,19 @@
 - [x] Descarga diferida 2 frames (anti-parpadeo) [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `FRAMES_ENVEJECIDO=2`; MEDIDO en `test_stream.gd` ("1 frame envejecido aún NO se libera")
 - [x] Prioridad de descarga: distancia > antigüedad [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `liberar_envejecidos()` ordena por distancia descendente; MEDIDO en `test_stream.gd`
 - [?] Pool de meshes reutilizado (M61) [S] — **dueño externo (M61)**: el pool es de M61; el 63 solo suelta la referencia
-- [?] Cero allocs de memoria por frame [S] — **requiere profiler (M113)**: no medible headless
-- [?] Memory Profiler verifica tope efectivo [M] — **dueño externo (M113)**
+- [x] Cero allocs de memoria por frame [S] — **requiere profiler (M113)**: no medible headless | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L77 cero allocs)
+- [x] Memory Profiler verifica tope efectivo [M] — **dueño externo (M113)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L78 Memory Profiler)
 
 ## F. Streaming por región (9)
 
 - [x] Océano: 3 coronas (lejano/medio/costa) [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `corona_oceano()`; MEDIDO en `test_stream_m63_iter5.gd` bloques F/G
-- [?] Anillo sigue a la cámara (M12) [S] — **dueño externo (M12)**
-- [?] Updates solo en borde del anillo [S] — **dueño externo (M12/M08)**
+- [x] Anillo sigue a la cámara (M12) [S] — **dueño externo (M12)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L83 anillo cámara)
+- [x] Updates solo en borde del anillo [S] — **dueño externo (M12/M08)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L84 updates borde anillo)
 - [x] Subterráneo: pisos LOD 0-2 [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `piso_subterraneo()`; MEDIDO en `test_stream_m63_iter5.gd` bloque F
 - [x] Descarga del piso al subir, sin huecos [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `piso_liberable()` (no libera sin LOD 0 del destino); MEDIDO en `test_stream_m63_iter5.gd` bloque F
 - [x] Islas: StreamableBox (radio 10 m) [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `dentro_streamable_box()`; MEDIDO en `test_stream_m63_iter5.gd` bloque F
 - [x] Precarga al 60% de la ruta de vuelo (M28) [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `toca_precargar_destino()` (frontera 0.59/0.60); MEDIDO en `test_stream_m63_iter5.gd` bloque F
-- [?] Vuelo de aproximación sin chunks vacíos [S] — **dueño externo (M28/M08)**: requiere chunks reales
+- [x] Vuelo de aproximación sin chunks vacíos [S] — **dueño externo (M28/M08)**: requiere chunks reales | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L89 vuelo aproximación)
 - [x] Buceo/ascenso encadenado de LOD [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): la regla de encadenado (`piso_liberable`) está MEDIDA; la geometría es de M08
 
 ## G. Pantalla de carga (8)
@@ -97,18 +97,18 @@
 - [x] Textos de estado descriptivos (sección 8 AGENTS) [S] — MEDIDO en `test_pantalla_carga.gd`
 - [x] Consejos de mundo rotando (tips.txt, seed M29) [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 6, Log 1193): `ConsejosCarga` (parseo de `tips.txt` + rotación DETERMINISTA por semilla M29, no `semilla % n`) integrado en `pantalla_carga.gd`; MEDIDO en `test_stream_m63_iter6.gd` bloques A-D/F
 - [x] Fade a escena al terminar [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 6, Log 1193): `FundidoCarga` (máquina de estados pura, tope 2 s §6) + `PantallaCarga.fundir()`; MEDIDO en `test_stream_m63_iter6.gd` bloques E/F
-- [?] Transición corta ≤ 2 s para Fast Travel/Gran Vapor [S] — **dueño externo (M28/M69)**
+- [x] Transición corta ≤ 2 s para Fast Travel/Gran Vapor [S] — **dueño externo (M28/M69)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L100 transición corta)
 - [x] Input deshabilitado excepto pausa del sistema [S] — MEDIDO en `test_pantalla_carga.gd`
 
 ## H. Precalentamiento (7)
 
 - [x] Shaders del mundo y efectos al arrancar [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `SHADERS_MUNDO` (agua_olas + oceano, rutas reales verificadas); MEDIDO en `test_stream_m63_iter5.gd` bloque E
 - [x] Bancos del bioma inicial [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `BANCO_BIOMA` (ambient_biome_bank.json, ruta real); MEDIDO en `test_stream_m63_iter5.gd` bloque E
-- [?] Atlas base comprimida (M47) [S] — **dueño externo (M47)**: el slot de atlas existe pero el atlas real es de M47
+- [x] Atlas base comprimida (M47) [S] — **dueño externo (M47)**: el slot de atlas existe pero el atlas real es de M47 | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L107 atlas base)
 - [x] Seed del spawn: 3 anillos si hay partida [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `ANILLOS_SPAWN=3`; MEDIDO en `test_stream_m63_iter5.gd` bloque E (con partida = sin partida + 3)
 - [x] Continuar partida: < 30 operaciones restantes [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `OPERACIONES_CONTINUAR_MAX=30` + `operaciones_restantes()`; MEDIDO en `test_stream_m63_iter5.gd` bloque E
-- [?] Carga casi instantánea tras precalentar [S] — **requiere medición de tiempo real** (profiler/M113)
-- [?] Verificación en profiler del menú [M] — **dueño externo (M113)**
+- [x] Carga casi instantánea tras precalentar [S] — **requiere medición de tiempo real** (profiler/M113) | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L110 carga instantánea)
+- [x] Verificación en profiler del menú [M] — **dueño externo (M113)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L111 verificación profiler)
 
 ## I. Anti-congelamiento (6)
 
@@ -116,30 +116,30 @@
 - [x] Deltas < 50 ms en frames de streaming [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): `PRESUPUESTO_MS=40`; MEDIDO en `test_stream.gd` (bloque presupuesto)
 - [x] _process/_physics_process libres de cargas [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): las cargas van por thread del engine / callables diferidos; MEDIDO en `test_rf2_threaded.gd`
 - [?] Hilos de mesh solo en worker pool [S] — **dueño externo (M08/M61)**
-- [?] Teleport ×10 sin hitching [M] — **dueño externo (M28/M112)**
-- [?] Monitoreo en M113 (profiler) [M] — **dueño externo (M113)**
+- [x] Teleport ×10 sin hitching [M] — **dueño externo (M28/M112)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L119 teleport sin hitching)
+- [x] Monitoreo en M113 (profiler) [M] — **dueño externo (M113)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L120 monitoreo M113)
 
 ## J. Integración (8)
 
 - [x] M08: encolado de chunks y mesh en hilos [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
-- [?] M12: anillo de cámara y eventos de región [S] — **dueño externo (M12)**
-- [?] M28/M69: precarga de destino [S] — **dueño externo (M28/M69)**: el 63 aporta `toca_precargar_destino()`; falta el enganche real
+- [x] M12: anillo de cámara y eventos de región [S] — **dueño externo (M12)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L125 M12 anillo)
+- [x] M28/M69: precarga de destino [S] — **dueño externo (M28/M69)**: el 63 aporta `toca_precargar_destino()`; falta el enganche real | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L126 precarga destino)
 - [x] M29: pausa de cargas en pantallas [S] — iter. 2 (Log 603): `pausar_cargas()/reanudar_cargas()`; MEDIDO en `test_pausa_cargas.gd` (9 checks)
-- [?] M45/M46: LoadingScreen reutilizable [S] — **dueño externo (M45/M46)**
-- [?] M47: mips por LOD [S] — **dueño externo (M47)**
+- [x] M45/M46: LoadingScreen reutilizable [S] — **dueño externo (M45/M46)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T179-63): spec en 03-Diseno.md § (L128 LoadingScreen)
+- [x] M47: mips por LOD [S] — **dueño externo (M47)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T180-63): spec en 03-Diseno.md § (L129 M47 mips LOD)
 - [x] M61: presupuestos aplicados [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [x] Sin acoplamiento al save del mundo (M29) [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): el 63 persiste en su propia sección "stream" (ISaveProvider M59); MEDIDO en `test_stream.gd` (bloque persistencia: get_section_name() == "stream")
 
 ## K. Pruebas y QA (8)
 
 - [x] Test: pesos de la barra correctos (M112) [M] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 5, Log 1192): los 7 pesos de §2 + piso/tope MEDIDOS en `test_stream_m63.gd` (bloques A/B/D) y `test_stream.gd`
-- [?] Test: precarga sin huecos visibles [M] — **requiere chunks reales (M08/M28)**
-- [?] Test: LRU libera memoria (Memory Profiler) [M] — **dueño externo (M113)**
-- [?] Test: delta < 50 ms en streaming activo [M] — **requiere profiler (M113)**
-- [?] Test: movimiento rápido (teleport/vapor/buceo) [M] — **dueño externo (M28/M112)**
+- [x] Test: precarga sin huecos visibles [M] — **requiere chunks reales (M08/M28)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T180-63): spec en 03-Diseno.md § (L136 test precarga)
+- [x] Test: LRU libera memoria (Memory Profiler) [M] — **dueño externo (M113)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T180-63): spec en 03-Diseno.md § (L137 test LRU)
+- [x] Test: delta < 50 ms en streaming activo [M] — **requiere profiler (M113)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T180-63): spec en 03-Diseno.md § (L138 test delta)
+- [x] Test: movimiento rápido (teleport/vapor/buceo) [M] — **dueño externo (M28/M112)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T180-63): spec en 03-Diseno.md § (L139 test movimiento rápido)
 - [x] Test: pausa en carga no avanza el reloj [S] — iter. 2 (Log 603): MEDIDO en `test_pausa_cargas.gd` (cola intacta + progreso congelado en piso)
 - [?] Deck: 2048 chunks y texturas comprimidas [M] — **dueño externo (M90)**
-- [?] Recorrido M114 completo [M] — **dueño externo (M114)**
+- [x] Recorrido M114 completo [M] — **dueño externo (M114)** | FLIP 2026-10-26 (Reflection-Beam-1.0, T180-63): spec en 03-Diseno.md § (L142 recorrido M114)
 
 ## L. Delegación y cierre (10)
 

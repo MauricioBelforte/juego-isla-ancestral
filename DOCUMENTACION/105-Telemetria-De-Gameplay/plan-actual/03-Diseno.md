@@ -175,4 +175,26 @@ Metodo produce-first: grep + lectura directa, sin ejecutar Godot. Citas archivo:
   - Rendimiento: la tabla M144 lo comparte M105/M122; M105 no emite FPS/crash (0 hits) — queda en M122.
 - Refina el flag H21 (decia 4/9 con onboarding en el gap): onboarding SÍ tiene insumos directos (5 time_to_first + tutorial_first_completion); economia se mantiene en el gap MEDIDA (0 emisores de purchase_done en producción, no solo "no capturada"). Gap real medido: reviews (M100), bugs (M102/M122), rendimiento (M122), economia (0 emisores).
 - DRIFT CI (encolado): scripts/telemetry/ tiene 6 suites (test_telemetry, iter5, iter6, iter7, iter8, test_telemetry_bridge_m105) pero quality.yml L487-490 solo cablea 4 (test_telemetry + iter5/6/7, con pisos CHECKS_MINIMOS 16/10/11/27, L480-486). test_telemetria_iter8.gd y test_telemetry_bridge_m105.gd SIN cablear.
-- Unidad: metricas/cobertura de bridge. Dependencia: M144, M104, M22.
+  - Unidad: metricas/cobertura de bridge. Dependencia: M144, M104, M22.
+
+### Specs items degradados T178 (2026-10-26, Reflection-Beam-1.0)
+- **L250 (session_id):** delegado a M104 por diseño (mismo criterio que generate_session_id): id de sesión es hash SHA256 rotativo 24h que genera Analytics. M105 no duplica storage ni ids.
+- **L293 (show_difficulty_survey):** M53 (UI); M105 emite `solicitar_encuesta(puzzle_id)`.
+- **L295 (UI encuesta post-puzzle):** M53.
+- **L296 (encuesta opcional):** M53 (opcional por diseño).
+- **L299 (archivo gameplay_events.json):** M104 (§4: buffer + batch JSON); M105 no duplica storage (§5).
+- **L300 (formato JSON eventos):** M104 (contrato de `registrar_evento`).
+- **L301 (save_events_to_cache):** M104 (cache offline).
+- **L302 (carga eventos al inicio):** M104.
+- **L189 (encuesta post-puzzle):** M53 (UI de encuesta); M105 ya emite `solicitar_encuesta(puzzle_id)`.
+- **L191 (pregunta dificultad):** M53 (texto UI de encuesta).
+- **L193 (encuesta opcional):** M53 (UI opcional; requiere consumir `solicitar_encuesta`).
+- **L196-L199 (análisis datos puzzles/zonas/eventos/tiempos):** requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`, `zone_ignored`, `time_to_first_*`, `session_duration`. Cablear trackers sin emisor sería arista muerta (12/13 sin señal de datos en producción).
+- **L204 (prompt primer inicio):** M91 (UI primer arranque); M105 expone `establecer_opt_in()` + `cambio_opt_in`.
+- **L205 (opt-out settings):** M91 (menú settings); M105 soporta opt-out en caliente.
+- **L209 (eliminación de datos):** M104 (storage) + M91 (UI); M105 no almacena eventos (§5).
+- **L210 (política privacidad):** documentación legal transversal; M105 documenta flujo de datos (§5) como base.
+- **L215-L217 (AnalyticsService batching/anonimización/caché):** M104 (AnalyticsDirector: hash SHA256 rotativo 24h, buffer + batch JSON offline).
+- **L220-L221/L224 (integración M71):** M71 es sumidero de solo-escritura; M105 expone API pasiva `track_*`.
+- **L233 (integración M102):** M102 (M105 expone patrones detectados).
+- **L245 (generate_session_id):** delegado a M104 por diseño (privacy by design): id de sesión es hash SHA256 rotativo 24h que genera Analytics. M105 no duplica storage ni ids.

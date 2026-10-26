@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-25T23:00 (A + G -> T137 verificados=73)",
+ "ultimo_update": "2026-10-26T00:58 (DS-Opencode reanimado + drift Global sync 4 filas + ack 215)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -838,7 +838,27 @@
     "T134",
     "T135",
     "T136",
-    "T137"
+    "T137",
+    "T138",
+    "T139",
+    "T140",
+    "T141",
+    "T142",
+    "T143",
+    "T144",
+    "T145",
+    "T146",
+    "T147",
+    "T148",
+    "T149",
+    "T150",
+    "T151",
+    "T152",
+    "T153",
+    "T154",
+    "T155",
+    "T156",
+    "T157"
    ],
    "pendientes_recientes_por_verificar": [
     "T060",
@@ -903,7 +923,7 @@
     "T001"
    ],
    "historico_T001_T075": "reconciliar a NIVEL MODULO (no por T): sample §21.8.2.b del 05 [x] final del modulo; los [x] de esos T ya viven en el cuerpo (stale-Totales era el fallo de T078/T080)",
-   "proximo_despues_de": "T137",
+   "proximo_despues_de": "T157",
    "regla_cron_A": "cada ciclo A: verificar 1-2 de pendientes_recientes (del ultimo hacia atras) + los T-done nuevos desde proximo",
    "regla_cron_G": "25,55 de cada hora (exclusivo, sin A/B/C/D): procesar TODO lo no verificado (catch-up) + actualizar indice; un dia a la dia, el primer G hace el barrido diario = sample §21.8.2.b de los 4 candidatos a sello + chequeo de drift Totales",
    "ultimo_muestreo": "A 09:20: T114 M128 (gate-1); G sigue catch-up",
@@ -955,9 +975,9 @@
    "mi_apilador": "Cron E de agnes APAGADO (wku_16fd1d87 borrado); reasumir solo con confirmacion del fundador (fase 2) o fin de carga de GLM"
   }
  },
- "deepseek_reactivado": "M53 token-dup LISTO (tanda 3: 7 unificados, 6 restantes = 3 owner + 3 semantico). L159 coherencia visual = flip-candidato. M53 va sellable. Log 2184.",
+ "deepseek_reactivado": "#404: M53 L159 [x] confirmada (contraste 12.04:1 AAA) + 2 defectos guardian + 5 [ ] M53 (1 propio+3 deps+1 diseno). DeepSeek REACTIVADO (volveria del idle 13h). M53 casi sellable.",
  "hy3_gate2": "Hy3 standby (#399), listo para M73 gate-2 cuando cierre sus 4 [ ]. pool head 400. 2 sellos vigentes (M28+M65).",
- "sellos_218": "3er sello en vuelo: M73 (131/4/0, 4 [ ]=deuda externa M46/M25/M22) - Hy3 corre gate-2 ahora (#402). Pattern M28 (sello con deuda externa declarada). M73 Global -> 131/135.",
+ "sellos_218": "3 SELLADOS (M28+M65+M73). M53/M75 proximos. M33 revert pendiente (DeepSeek).",
  "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
  "ling_design_docs": {
   "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
@@ -974,7 +994,9 @@
   "driftcheck": "265: drift-check riel 12/12 anclajes + 20/20 items intactos (estabilidad para gate-1/QA 21.8). Leccion canonizada: excluir .kilo/,.git/,Obsoletos/ de walks recursivos (enganchan .kilo/worktrees/phase-judge stale). Ling standby-PT productivo.",
   "hoja_pt": "267: drift-check i18n EXIT0 (base PT estable) + HOJA PT-runtime 5 pasos anexada a backlog Ling tarea 59 (pt.po 274 + LOCALES+=pt + QA ValidadorPO + doc M87 + reporte). LISTA 1-vuelta ante GO fundador #4. Pool Ling saneado (5 gemelos 258-266, helper auto). Confirmar verificar_pool_numeros.py en Ling.",
   "corpus_pt": "269: corpus PT medido (es.po 274=159+115+11; 115 nuevas M68=89/77% prioritario; 15 no-traducir; 4 plurales; header). PT-runtime 1-vuelta ante GO #4. Pool Ling +40, gemelos auto-saneados (verificar_pool_numeros.py).",
-  "validadorpo": "276: mapa ValidadorPO (bloqueantes+avisos) + R6 (115 traducidas, no vacias) + P5 (31 cognatos -> no-traducir). PT-runtime 100% prepped. Gemelo 276."
+  "validadorpo": "276: mapa ValidadorPO (bloqueantes+avisos) + R6 (115 traducidas, no vacias) + P5 (31 cognatos -> no-traducir). PT-runtime 100% prepped. Gemelo 276.",
+  "esqueleto_pt": "280: esqueleto pt.po 274 (159+4 plurales pre-llenos+50 no-traducir+header). 98 msgstr vacias = unico batch GO (M68=73/DIARY=14/CLOCK=4/ITEMS=2/5). Vuelta GO: traducir 98 -> copiar -> LOCALES+=pt -> ValidadorPO -> doc M87.",
+  "pt_qa": "282: QA 12/12 PASS + bug material corregido (13 no-traducir msgstr=clave -> plantilla). PT-runtime sin bugs. K1 (no msgstr==clave) -> checklist pre-GO. Vuelta GO limpia."
  },
  "step5_riel": "M23 L97 (capitulos) CERRADO con data-muerta M55 expuesta (puente fix + 79 renombrados + suite 750/0). M23 86/17/2. L97/L98/L99 [ ] = deuda M55. M33: revert de 15 flips Beam pendiente en Step-5.",
  "gemelos_pendientes_saneo": [
@@ -1001,5 +1023,18 @@
  "m33_inflacion_beam": "HALLAZGO (Step-5 227): M33 se inflo en vuelo - Beam T110/111-33 hizo 16 flips [ ]->[x] SIN log ni protocolo, 15 sin evidencia §21.8 (todas 'espera: modulo dependiente'; MultiMesh/LOD sigue placeholder M50/M61). M33 05 = 148/6/1 (inflado) vs 133/21/1 (honesto). DICTAMEN (#228): REVERT los 15 (Step-5 dueño lo ejecuta + re-mide). Flag al ACTA contable + gate-1 (no canal Beam). Mismo patron M34/M55.",
  "gap_sesion": "11h de gap en la sesion (09:30->20:29Z). Flota siguió: Beam a T117, Step-5 #227 M33 hallazgo, Hy3 flag-pool, Ling #275 PT.",
  "m72_global_sync": "M72 Global 108/200 -> 194/200 (hallazgo Ling 278). M72 = 194/3/3 TIE (no sellable por [?]/[ ]). Stale-Totales otra vez.",
- "m73_sello": "M73: 4 [ ] = iconos reliquias M46, fosiles M25, lore M22 (externos, no M73). Stale header L5/L274 encolado a minimax. Global sync 63->131."
+ "m73_sello": "M73: 4 [ ] = iconos reliquias M46, fosiles M25, lore M22 (externos, no M73). Stale header L5/L274 encolado a minimax. Global sync 63->131.",
+ "m73_validador_fix": "CATEGORIAS_CONOCIDAS 8->20 RATIFICADO + commiteado (mi C lo trajo a HEAD). T266 resuelto. Red-probe Hy3 punto 4 confirma sigue detectando corrupcion.",
+ "flota_26oct": {
+  "activo": "DeepSeek (M53 casi + nuevo riel M33-revert + M23), Nemotron-3.5-Super-VL (AGENTE VISION nuevo, riel B-1 G1 QA visual godot-mcp, 184 items, hallazgos M53 Escape + codigo), Hy3 (verificador, standby M75), Ling (PT standby)",
+  "asistente_fundador_NO_taskiar": "GLM-5.3-Flash (asistente del fundador, gestiona/verifica a Nemotron; escribe en mi canal, NO le doy tareas)",
+  "fuera_flota": "Step-5-WorkBuddy (relegado por creditos, M23/M33 -> DeepSeek #231/#406)",
+  "offline": "MiniMax, G-5.3-agente, DeepSeek (volvio del idle)",
+  "canal_deepseek_opencode": "DS-V4.1-Flash-Opencode reactivado por fundador 00:32 (estaba dias offline). VIGILAR su canal en el detector - reportara. Ultimo: mi acuse #212. Mismo modelo que DeepSeek-V4.1-Flash (independence 21.8/21.23 entre ambos)."
+ },
+ "nemotron_vision": "... (continua) reportes de ciclo G1 son INFO-rutina (ciclo 10 G1-011); riel ratificado en #013, NO uno-acuse-por-ciclo (anti-loop). Confirmo periodicamente el avance.",
+ "step5_relegado": "M23 (86/17/2) + M33 (revert 15 flips Beam) reasignados a DeepSeek (#406). Step-5 canal = historial.",
+ "canal_detector_vigentes": "DeepSeek-V4.1-Flash, Hy3, Ling-3.1-Flash, Nemotron-3.5-Super-VL, DS-V4.1-Flash-Opencode (nuevo). Step-5=OFF. GLM-5.3=asistente(lectura). Beam=pausado.",
+ "ds_opencode_cola_A": "DS-V4.1-Flash-Opencode reanimado, cubre COLA A (drift Global/Totales). 214: 60 flips M108/77/68/59/40 sin re-cuento -> 4 filas Global sync (M40 206/211, M77 126/130, M68 116/131, M59 116/130). Division: DS=drift, yo=gate-1/sellos.",
+ "regla_re_cuento_deuda": "Deuda de protocolo flota: quienes flippean deben re-cuentar Totales+Global (regla f2f8ab2 violada 60 flips). Avisar a GLM + Beam."
 }

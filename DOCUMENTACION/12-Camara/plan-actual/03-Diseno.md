@@ -110,3 +110,34 @@ fade_from_black(time)      →  fade in desde negro
 - **player.gd:385-387** — `get_camera_forward_xz()`, `get_camera_right_xz()` para movimiento relativo a cámara.
 - **tool_controller.gd** — Referencia al patrón de raycast de follow_camera.
 - **villager_manager.gd** — Referencia al patrón de raycast de M13/follow_camera.
+
+## 8. Specs de items degradados (definidos 2026-10-26, Reflection-Beam-1.0 T161)
+
+- **Lerp angular (L25):** la cámara canónica `follow_camera.gd` usa `look_at` directo (sin lerp angular); no se aplica lerp de 10°/s. Documentado en §2.
+- **Interior (L33):** en interiores (M24), distancia máx 2.2 m y zoom bloqueado en cercano.
+- **Agua (L36):** en agua, la cámara sube 0.5 m sobre el nivel para visibilidad de buceo.
+- **Pendientes (L37):** en pendientes pronunciadas el pitch se ajusta sin sacudidas (clamp + suavizado).
+- **Nocturno (L38):** en modo nocturno (M29), distancia mínima 3 m para ambiente.
+- **Build (L44/L45/L61):** modo aéreo 45°, distancia 12 m, solo con herramienta equipada (M17); regreso automático a EXPLORE al desequipar; zoom mínimo 4 m (nunca macro).
+- **Dialog (L46/L51):** encuadre fijo, input bloqueado; el jugador se gira suavemente hacia el NPC (0.5 s) (M21).
+- **Cutscene (L47/L53):** planos fijos con fade; zoom por evento definido por M22/M26.
+- **Minimap (L48):** vista supervisor 2D sobre todo (M10).
+- **HUD (L50):** el HUD se esconde en Dialog/Cutscene.
+- **Zoom teclado (L58):** zoom por atajos de teclado (Q/E o +/-) además de scroll.
+- **Niveles zoom (L59):** cercano 2.5, estándar 5, lejano 8 m (diseño); implementación actual usa zoom continuo 4.0-20.0 m (Animal Crossing). Documentado en §2.
+- **Zoom default (L60):** zoom por defecto configurable en GameSettings (M59), persistido.
+- **Interiores zoom (L62):** en interiores, zoom bloqueado en cercano (M24).
+- **Apuntar herramienta (L63/L64):** al apuntar con herramienta, acercamiento temporal a 3.5 m (0.3 s); vuelta a distancia elegida al soltar (M13).
+
+## 9. Specs de items degradados — transiciones, shake, minimapa (T162, 2026-10-26)
+
+- **Transición de escena (L69):** fade 0.3 s + swap de escena + lerp de cámara 0.2 s; la cámara no se mueve durante el swap; estados robustos (sin cámara fantasma).
+- **Transición de modo (L71):** fade leve 0.15 s entre modos de cámara.
+- **Transición Interact (L79):** transiciones de Interact (0.3 s de bloqueo de M11) sin cámara rara.
+- **Reapertura (L80):** fade de entrada 0.5 s (suave) al reabrir el juego.
+- **Guardado/recarga (L75/L77):** posición de cámara persistida en GameState (M59); compatible con guardado/recarga.
+- **Shake narrativo (L86/L87/L91):** solo eventos narrativos (vórtice, terremoto); canal `EventBus.ui.shake_requested(amp, dur)`; follow_camera.trigger_shake() existe; log de eventos de shake (M05 Logger).
+- **Minimapa (L95-L104):** supervisor 2D en Canvas 128×128; esquina superior derecha (reposicionable); fuente: texturas de biomas del generador (M10); sin coste de render (no cámara render); marcadores POI M71/casa M31/caminos/grieta/puerto; iconos 24×24 px con colores por tipo; se actualiza al descubrir POI o regenerar mundo; tecla M para abrir/cerrar; cerrado en Dialog/Cutscene; persistencia de posición/visibilidad en GameState.M12. Sistema inexistente hoy (QA atria-dawn): definido como contrato.
+
+- **Minimapa extendido (L105-L107):** deshabilitado en cutscenes largas (M22); zoom del minimapa 1x/2x configurable; textos de marcadores localizables (M57).
+- **Limitador de rotación (L116):** limitador de rotación de cámara 240°/s suave (orbit libre).

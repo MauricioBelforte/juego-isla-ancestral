@@ -113,3 +113,8 @@ El cambio de semáforo dispara `semaforo_cambiado(nivel)` por EventBus (M07) →
 | Subterráneo del templo (M26) | < 2.000 MB |
 | Tormenta con clima máximo (M32) + banco de audio completo | ≤ 2.500 MB (Alta) |
 | Drift en sesión de 30 min | ≤ 5% sobre baseline |
+
+## Specs Memoria (Beam 725)
+
+### Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares)
+- Spec: ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares). iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evidencia de por qué. El auditor nuevo mide 2 componentes fuertemente conexas (7 nodos: CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather; y 2 nodos: ThemeService, UIManager) más 9 referencias a un autoload declarado después. Escalado como BUG-069; el gate los tiene en lista de permitidos para que ningún ciclo NUEVO pase. Coherente with M62 (memoria) and M04 (game engine).

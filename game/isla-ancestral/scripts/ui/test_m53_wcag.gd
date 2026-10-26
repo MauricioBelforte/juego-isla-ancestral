@@ -50,16 +50,18 @@ func _init() -> void:
 func _fin(nombre: String) -> void:
 	_vistos[nombre] = true
 
+## OJO (medido 2026-10-25): en Godot 4 un SCRIPT ERROR aborta SOLO la funcion
+## donde ocurre; el llamador RETOMA. Por eso `_fin()` va al FINAL del cuerpo de
+## cada bloque y NO despues de la llamada: si el marcador viviera en _run(), un
+## aborto a mitad del bloque lo marcaria igual como "visto" y la capa de nombres
+## quedaria ciega (probado en rojo: sin este cambio el reporte decia "18 checks"
+## y NO nombraba 'widgets').
 func _run() -> void:
 	_aplicar_tema_global()
 	_test_paleta_wcag()
-	_fin("paleta")
 	_test_credits_colores()
-	_fin("credits")
 	_test_capas_oscuras()
-	_fin("capas")
 	_test_widgets_hud()
-	_fin("widgets")
 
 func _summary() -> void:
 	for n in BLOQUES:
@@ -68,9 +70,12 @@ func _summary() -> void:
 			_fallos += 1
 			print("[FAIL] el bloque '%s' NO se ejecuto (posible SCRIPT ERROR)" % n)
 	if _checks < CHECKS_MINIMOS:
+		# La cifra se informa ANTES de sumar el check del propio guardian:
+		# si no, el mensaje dice "18 checks" cuando en realidad corrieron 17.
+		var corridos := _checks
 		_checks += 1
 		_fallos += 1
-		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
+		print("[FAIL] solo %d checks ejecutados (minimo %d)" % [corridos, CHECKS_MINIMOS])
 	print("=== TEST M53 WCAG (I.8): %d checks, %d fallo(s) ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)
 
@@ -124,6 +129,7 @@ func _test_paleta_wcag() -> void:
 	var ocre: Color = _THEME_UX.COLOR_ACCENT_OCRE
 	_check(_ratio(ocre, fondo) >= 4.5, "ACCENT_OCRE como texto sobre panel noche AA tras D102 (%.2f:1)" % _ratio(ocre, fondo))
 	# El ocre como BORDE no tiene requisito WCAG (no es texto)
+	_fin("paleta")
 
 func _test_credits_colores() -> void:
 	var layer = _CREDITS.new()
@@ -153,6 +159,7 @@ func _test_credits_colores() -> void:
 			var fch2: Color = farewell.get_theme_color("font_color")
 			_check(_ratio(fch2, negro) >= 4.5, "Despedida alto contraste AA sobre negro (%.2f:1)" % _ratio(fch2, negro))
 	layer.queue_free()
+	_fin("credits")
 
 ## I.8 (barrido completo): paneles oscuros de servicio (tooltip/toast).
 ## Sin override de font_color, los Labels heredan el default del tema
@@ -185,6 +192,7 @@ func _test_capas_oscuras() -> void:
 	_check(_ratio(icon.get_theme_color("font_color"), bg2) >= 4.5, "toast icono AA sobre panel oscuro (%.2f:1)" % _ratio(icon.get_theme_color("font_color"), bg2))
 	_check(_ratio(texto.get_theme_color("font_color"), bg2) >= 4.5, "toast texto AA sobre panel oscuro (%.2f:1)" % _ratio(texto.get_theme_color("font_color"), bg2))
 	notif_svc.queue_free()
+	_fin("capas")
 
 ## M53 L159 (tanda 4): widgets del HUD contra el panel noche del tema.
 ## Dos capas: (a) la CONSTANTE que el widget aplica (fuente de verdad del color),
@@ -221,3 +229,4 @@ func _test_widgets_hud() -> void:
 	else:
 		_check(false, "clock_widget no construyo _time_label")
 	w.queue_free()
+	_fin("widgets")
