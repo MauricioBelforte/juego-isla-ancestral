@@ -263,6 +263,23 @@
         "stat_id": "viajes_realizados",
         "umbral": 30
       }
+    },
+    {
+      "id": "logro_ruina_restaurada",
+      "nombre_i18n": "LOGROS.RUINA_RESTAURADA.NOMBRE",
+      "descripcion_i18n": "LOGROS.RUINA_RESTAURADA.DESC",
+      "nombre": "La Ruina Restaurada",
+      "descripcion": "Restauraste la ruina final de Aurora: el epilogo esta completo.",
+      "icono": "res://assets/ui/logros/ruina_restaurada.png",
+      "categoria": "epilogo",
+      "orden": 180,
+      "condicion": {
+        "tipo": "hito_previo",
+        "milestone_id": "hito_ruina_restaurada"
+      },
+      "depende_de": [
+        "logro_siete_sellos"
+      ]
     }
   ]
 }

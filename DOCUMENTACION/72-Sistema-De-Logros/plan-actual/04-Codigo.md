@@ -460,3 +460,39 @@ test_logros_m72_statids.gd    1 test,  0 fallos
 ### 4.3 Alcance (dentro / fuera)
 - **DENTRO de M72:** reglas de desbloqueo + estado + persistencia + RF2 (depende_de) + RF6 (toast agrupa) + RF13 (trazabilidad M103/M104) + condicones por tipo_evento.
 - **FUERA de M72 (delegado):** UI core del panel de logros (M53/M58), reglas de coleccion (M73), integracion Steam (M97), la logica de coleccion/dedupe (M73).
+
+## Notas del Agente — categoria `epilogo` + logro de ruina (2026-10-26, DeepSeek-V4.1-Flash)
+
+Cierra el pendiente que M75 tenia anotado desde su iter. 3: el LOGRO de epilogo
+existia como hito en M71 y como item `[ ]` en M75, pero **no** como entrada de
+M72 (17 logros, sin categoria `epilogo` en el vocabulario).
+
+Cambios (2, ambos minimos):
+
+1. `CATEGORIAS_VALIDAS` suma `"epilogo"` (RF19 de M75 §3.3: los logros de
+   epilogo referencian **hitos reales**, no contadores inventados).
+2. `data/logros/logros.json` suma `logro_ruina_restaurada` (18 entradas):
+   - `categoria: "epilogo"`, `orden: 180` (despues de `logro_dias_en_aurora`).
+   - `condicion: {"tipo": "hito_previo", "milestone_id": "hito_ruina_restaurada"}`
+     — el tipo ya estaba en `TIPOS_CONDICION_VALIDOS` y lo evalua M71.
+   - `depende_de: ["logro_siete_sellos"]` (el postgame solo existe con la
+     historia terminada).
+   - El hito vive en M71: `data/progresion/hitos.json` (26 hitos), condicion
+     `{"tipo": "primera_vez", "actividad_id": "postgame_ruina_final"}`.
+
+Nada mas se toco del core: `evaluar_todos()` ya estaba conectado a
+`ProgressionManager.progreso_hito_alcanzado` (linea 128 de
+`achievement_service.gd`), asi que la senal del hito desbloquea el logro sin
+codigo nuevo.
+
+Evidencia: `scripts/postgame/test_postgame.gd` bloque `_test_logro_ruina_m72`
+(86/0/EXIT 0 x3, 0 SCRIPT ERROR) + `validar_catalogo()` (RF14) = 0 problemas
+medido en la misma corrida. Sonda A (quitar `epilogo` del vocabulario) pone RF14
+en 1 problema y el check en rojo.
+
+Deuda declarada de M72 (no de esta tanda, medida el 2026-10-26):
+- `test_logros.gd` aborta por `_desbloqueados` (Array) y publica `0 fallo(s)`.
+- `test_logros_rf10_m72.gd`: `get_definicion("primer_sello")` usa un id que no
+  existe (`{}` -> `d.id` lanza SCRIPT ERROR).
+- Los 18 `icono` apuntan a `res://assets/ui/logros/`, directorio inexistente.
+- Las claves `LOGROS.*` no estan en ningun `.po`.

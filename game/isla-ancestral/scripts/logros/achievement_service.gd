@@ -440,9 +440,12 @@ const TIPOS_CONDICION_VALIDOS := [
 ]
 
 ## RF1: vocabulario cerrado de categorías (RF14 valida contra esta lista).
+## "epilogo" (iter. M72/M75 2026-10-26): categoría RF19 de M75 §3.3 — los logros
+## de epílogo referencian hitos REALES (hito_previo), no contadores inventados.
 const CATEGORIAS_VALIDAS := [
 	"agricultura", "pesca", "mineria", "amistad",
 	"colecciones", "progresion", "exploracion",
+	"epilogo",
 ]
 
 

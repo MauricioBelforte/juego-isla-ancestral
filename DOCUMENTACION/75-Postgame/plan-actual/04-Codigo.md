@@ -189,3 +189,58 @@ y Flujo D. Las aserciones que exigian 7 actividades VISIBLES consagraban el bug.
   edito). Hoy corre dentro de `test_postgame.gd`.
 - El catalogo sigue siendo JSON y no `postgame_catalog.tres` como dice 3.1
   (preexistente; el item U lo da por `[x]` como "Resource embebido").
+
+### Iter. 4 (2026-10-26) — cadena hito (M71) -> logro (M72), item S de RF19
+
+Cierra el pendiente de la iter. 3: el LOGRO "ruina restaurada" ya existe y se
+desbloquea solo, sin que M75 escriba en el catalogo de M72.
+
+| Pieza | Dueño | Estado medido |
+|---|---|---|
+| `postgame_ruina_final` (actividad real) | M75 | 7 actividades, 1 con hito asociado |
+| `hito_ruina_restaurada` (`primera_vez`) | M71 `data/progresion/hitos.json` | 26 hitos (antes 25) |
+| `logro_ruina_restaurada` (`hito_previo`) | M72 `data/logros/logros.json` | 18 logros (antes 17) |
+| categoria `epilogo` | M72 `CATEGORIAS_VALIDAS` | RF14: 0 problemas |
+
+Cadena (event-driven, cero polling, cero duplicacion de estado):
+
+```
+M75 registrar_actividad("postgame_ruina_final")
+  -> _marcar_hito_derivado(): perfil M71 marcar_primera_vez + reevaluar_sucias()
+  -> M71 evalua la condicion del hito -> marcar_hito() -> senal progreso_hito_alcanzado
+  -> M72 (conectado desde _conectar_eventos) evaluar_todos()
+  -> condicion hito_previo -> desbloquear("logro_ruina_restaurada")
+```
+
+M75 NO llama a M72: la unica dependencia nueva es `HITOS_POR_ACTIVIDAD` (tabla
+declarativa actividad -> hito) y el guard `has_method`, asi que si M71 no esta
+cargado el registro de la actividad sigue funcionando igual.
+
+### Evidencia medida (iter. 4)
+- `test_postgame.gd`: **86 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR.
+  Piso `CHECKS_MINIMOS` re-medido: 71 -> **86** (15 checks nuevos del bloque
+  `_test_logro_ruina_m72`).
+- Guardian EN ROJO 3 sondas (restauracion byte-exacta sha256 `80c888ebc80e`):
+  (A) quitar `epilogo` del vocabulario -> 86/1 EXIT 1 + RF14 nombra la categoria
+  desconocida; (B) quitar `_marcar_hito_derivado` -> 86/3 EXIT 1 (hito, logro e
+  idempotencia); (C) aborto de runtime al inicio del bloque -> 71 checks, 2 fallos,
+  EXIT 1, NOMBRA `_test_logro_ruina_m72` y dispara el piso.
+- Regresiones: `test_logros_rf1_e` 39/0 EXIT 0 (se actualizaron 2 asserts de
+  conteo 17->18: son conteos, no comportamiento), `test_logros_m72_statids` 9/0,
+  `test_logros_depende_de_m72` EXIT 0, `test_m72_rf6_m72` EXIT 0,
+  `test_progresion` (M71) 83/0 EXIT 0.
+
+### Hallazgos de la iter. 4 (no corregidos)
+- `test_logros.gd` (M72) sigue MUERTO: `SCRIPT ERROR: Invalid assignment of
+  property or key '_desbloqueados' with value of type 'Array'` aborta la corrida
+  y publica `0 fallo(s)` con EXIT 0. Preexistente (ya reportado en iter. 3); sus 3
+  asserts de conteo se actualizaron igual para que no mientan si alguien lo revive.
+- `test_logros_rf10_m72.gd` tiene un check muerto por id inexistente:
+  `get_definicion("primer_sello")` devuelve `{}` (el id real es
+  `logro_primer_sello`) y `d.id` sobre `{}` lanza SCRIPT ERROR. Preexistente; el
+  test sale EXIT 0 igual.
+- Los 18 `icono` del catalogo de M72 apuntan a `res://assets/ui/logros/*.png` y el
+  directorio `assets/ui/` NO existe (0 de 18 archivos). RF14 solo exige el campo
+  no vacio, asi que el catalogo valida con los iconos muertos.
+- Las claves `LOGROS.*.NOMBRE/DESC` no estan en ningun `.po` (tampoco las 17
+  anteriores): deuda de i18n de M72, no de esta tanda.

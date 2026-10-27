@@ -21,8 +21,8 @@ const VALIDADOR = preload("res://scripts/postgame/validate_postgame.gd")
 #     + _summary() diferido. Instrumentacion LOTE 2 (mis suites propias), 2026-10-08,
 #     DeepSeek-V4.1-Flash (msg 100). Piso = checks reales MEDIDOS (Log 1490 / 2200).
 #     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
-const CHECKS_MINIMOS := 71
-const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_no_activo_al_inicio", "_test_activacion_por_sellos", "_test_actividades_disponibles", "_test_sugerencias_rotativas", "_test_epilogo", "_test_persistencia", "_test_fase2_invisible", "_test_validador", "_test_hito_ruina"]
+const CHECKS_MINIMOS := 86
+const _WB_BLOQUES: Array[String] = ["_test_catalogo", "_test_no_activo_al_inicio", "_test_activacion_por_sellos", "_test_actividades_disponibles", "_test_sugerencias_rotativas", "_test_epilogo", "_test_persistencia", "_test_fase2_invisible", "_test_validador", "_test_hito_ruina", "_test_logro_ruina_m72"]
 var _checks: int = 0
 var _wb_vistos: Dictionary = {}
 var _wb_cerrado: bool = false
@@ -49,6 +49,12 @@ func _summary() -> void:
 
 var _fallos: int = 0
 var _pg: Node = null
+## M72/M71 (ítem S de RF19): estado PREVIO a cualquier bloque, para probar que
+## la cadena hito->logro no es un leftover de una corrida anterior.
+var _ach: Node = null
+var _pm71: Node = null
+var _hito_m71_previo: bool = true
+var _logro_ruina_previo: bool = true
 
 
 func _init() -> void:
@@ -63,6 +69,12 @@ func _run() -> void:
 		print("=== TEST M75 POSTGAME: 1 fallo(s) ===")
 		_summary()
 		return
+	# Estado PREVIO (antes de que ningun bloque registre actividades): sin esto,
+	# el check de "logro desbloqueado" pasaria por leftovers y no probaria nada.
+	_ach = root.get_node_or_null("Achievements")
+	_pm71 = root.get_node_or_null("ProgressionManager")
+	_hito_m71_previo = bool(_pm71 != null and _pm71.hito_alcanzado("hito_ruina_restaurada"))
+	_logro_ruina_previo = bool(_ach != null and _ach.esta_desbloqueado("logro_ruina_restaurada"))
 	# ⚠️ El _fin() de cada bloque va al FINAL DEL CUERPO del bloque, NO acá.
 	# Si un SCRIPT ERROR aborta el helper, el runner RETOMA y un _fin() puesto
 	# en el runner marcaría "visto" un bloque que abortó → la capa de nombres
@@ -77,6 +89,7 @@ func _run() -> void:
 	_test_fase2_invisible()
 	_test_validador()
 	_test_hito_ruina()
+	_test_logro_ruina_m72()
 	_summary()
 
 
@@ -311,3 +324,53 @@ func _test_hito_ruina() -> void:
 	_check(bool(_pg.hito_ruina_restaurada()), "hito ruina sigue true (idempotente)")
 	_check(int(_pg._hechas.get("postgame_ruina_final", 0)) == 2, "contador de la ruina acumula 2")
 	_fin("_test_hito_ruina")
+
+## ── Iter. 4 (2026-10-26): cadena REAL hasta el LOGRO de M72 (ítem S, RF19) ──
+## Cierra el pendiente "Logro: ruina restaurada". El logro es de M72 y su
+## condición es `hito_previo` sobre el hito REAL de M71; se verifica la CADENA
+## completa (actividad M75 -> perfil M71 -> hito M71 -> señal -> logro M72),
+## no la mera existencia de la entrada en el JSON.
+func _test_logro_ruina_m72() -> void:
+	_check(_ach != null, "Achievements (M72) autoload presente")
+	_check(_pm71 != null, "ProgressionManager (M71) autoload presente")
+	if _ach == null or _pm71 == null:
+		_fin("_test_logro_ruina_m72")
+		return
+	# 1) La entrada del catálogo: categoría de epílogo + condición sobre el hito.
+	#    Se lee la DEFINICIÓN cruda (get_definicion): get_todos()/_estado_de()
+	#    es la vista de UI y NO propaga `condicion` — medir ahí da un falso rojo.
+	var def: Dictionary = _ach.get_definicion("logro_ruina_restaurada")
+	_check(not def.is_empty(), "logro_ruina_restaurada existe en el catálogo M72")
+	_check(String(def.get("categoria", "")) == "epilogo",
+		"categoría 'epilogo' (RF19): %s" % String(def.get("categoria", "")))
+	var cond: Dictionary = def.get("condicion", {})
+	_check(String(cond.get("tipo", "")) == "hito_previo", "condición hito_previo (no un contador)")
+	_check(String(cond.get("milestone_id", "")) == "hito_ruina_restaurada",
+		"el logro referencia el hito REAL de M71")
+	# La entrada también aparece en la vista de UI (RF1: id/orden/categoría).
+	var en_ui: bool = false
+	var todos: Array = _ach.get_todos()
+	for l in todos:
+		if String((l as Dictionary).get("id", "")) == "logro_ruina_restaurada":
+			en_ui = true
+	_check(en_ui, "aparece en el listado de UI (RF1)")
+	# 2) RF14 de M72 acepta el catálogo completo (caza una categoría fuera de
+	#    vocabulario: sin 'epilogo' en CATEGORIAS_VALIDAS esto da 1).
+	_check(int(_ach.validar_catalogo()) == 0, "validar_catalogo (RF14) = 0 problemas")
+	# 3) El hito existe de verdad en el catálogo de M71 (no basta el string).
+	_check(int(_pm71.hitos_count()) == 26, "catálogo M71 con el hito nuevo: %d" % int(_pm71.hitos_count()))
+	# 4) Estado PREVIO capturado al arrancar: sin esto el check 5 pasaria por
+	#    leftovers de otra corrida (falso verde).
+	_check(not _hito_m71_previo, "el hito M71 NO estaba alcanzado al arrancar (sin leftover)")
+	_check(not _logro_ruina_previo, "el logro NO estaba desbloqueado al arrancar (sin leftover)")
+	# 5) La cadena: registrar la actividad (bloque _test_hito_ruina) marcó hito
+	#    y logro sin que M75 toque el logro directamente.
+	_check(bool(_pm71.hito_alcanzado("hito_ruina_restaurada")),
+		"registrar la actividad marcó el hito en M71")
+	_check(bool(_ach.esta_desbloqueado("logro_ruina_restaurada")),
+		"el logro se desbloqueó desde la señal de M71")
+	# 6) Idempotencia: repetir la actividad no duplica hito ni logro.
+	_pg.registrar_actividad("postgame_ruina_final")
+	_check(bool(_ach.esta_desbloqueado("logro_ruina_restaurada")), "logro idempotente")
+	_check(int(_pm71.hitos_count()) == 26, "el catálogo M71 no se duplica al reevaluar")
+	_fin("_test_logro_ruina_m72")

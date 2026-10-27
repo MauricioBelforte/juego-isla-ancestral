@@ -203,10 +203,35 @@ func registrar_actividad(id: String) -> bool:
 		return false
 	_hechas[id] = int(_hechas.get(id, 0)) + 1
 	print("[M75] Actividad postgame: %s (%d)" % [id, int(_hechas[id])])
+	# RF19 (S del checklist): el hito de M71 y el LOGRO de M72 se DERIVAN de la
+	# actividad real — M75 no duplica estado ni desbloquea logros por su cuenta.
+	# Cadena: perfil (M71 §3.4) -> condición del hito -> reevaluar_sucias() de
+	# M71 -> señal progreso_hito_alcanzado -> M72 evaluar_todos() -> logro.
+	_marcar_hito_derivado(id)
 	var sm := get_node_or_null("/root/SaveManager")
 	if sm != null and sm.has_method("mark_dirty"):
 		sm.mark_dirty()  # U del checklist: guardado automático al desbloquear/registrar
 	return true
+
+
+## Actividades postgame con hito REAL en el catálogo de M71
+## (data/progresion/hitos.json). La condición del hito lee la primera vez de la
+## actividad en el perfil, así que marcar la primera vez + reevaluar alcanza.
+const HITOS_POR_ACTIVIDAD := {
+	"postgame_ruina_final": "hito_ruina_restaurada",
+}
+
+
+func _marcar_hito_derivado(id: String) -> void:
+	if not HITOS_POR_ACTIVIDAD.has(id):
+		return
+	var pm := get_node_or_null("/root/ProgressionManager")
+	if pm == null:
+		return
+	if pm.profile != null and pm.profile.has_method("marcar_primera_vez"):
+		pm.profile.marcar_primera_vez(id)
+	if pm.has_method("reevaluar_sucias"):
+		pm.reevaluar_sucias()
 
 
 ## RF1: epílogo visto tras créditos (M92 lo llama)

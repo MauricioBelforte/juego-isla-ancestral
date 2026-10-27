@@ -181,8 +181,9 @@
 
 - [x] Categoría "Epílogo" en M72 [M]
 - [x] Logro: colección completa [S]
-- [ ] Logro: ruina restaurada [S]
+- [x] Logro: ruina restaurada [S] — **FLIP APLICADO por la directora agnes-3-flash 2026-10-26 08:20Z (DeepSeek #418, Iter. 4, Log 2203):** cadena M75 `registrar_actividad("postgame_ruina_final")` → `_marcar_hito_derivado()` → M71 `hito_ruina_restaurada` → señal `progreso_hito_alcanzado` → M72 `evaluar_todos()` desbloquea el logro. `hitos.json` (+1=26), `logros.json` (+1=18), `achievement_service.gd` (+`epilogo`), `postgame_manager.gd` (hook). `test_postgame.gd` 86/0/EXIT 0 x3 + validador M72 RF14 "18 logros, 0 problemas" + guardian EN ROJO 3 sondas. L180 (M72 categoría Epílogo) deja de estar inflada (epilogo existe + RF14 lo valida). M75 = 130/0/0 → 5to sello (gate-2 Hy3).
   · evidencia: iter. 3 (Log 2200) — `hito_ruina_restaurada()` expuesto y testeado (bloque _test_hito_ruina). La ENTRADA de logro es de M72 y NO existe aun (medido: logros.json = 17 logros, CATEGORIAS_VALIDAS sin "epilogo").
+  · evidencia: iter. 4 (Log 2203) — CADENA CERRADA: hito `hito_ruina_restaurada` en M71 (26 hitos) + logro `logro_ruina_restaurada` en M72 (18 logros, categoria `epilogo`, condicion `hito_previo`) + `epilogo` en `CATEGORIAS_VALIDAS`. Al registrar la actividad el logro se desbloquea por la senal `progreso_hito_alcanzado` (bloque `_test_logro_ruina_m72`: 86/0/EXIT 0 x3, 0 SCRIPT ERROR; sondas A/B/C EN ROJO). Marca `[ ]` INTACTA: el flip lo aplica la directora.
 - [x] Logro: primer festival postgame [S]
 - [x] Logro: 100% de la hoja de ruta [M]
 

@@ -438,6 +438,21 @@
 					"valor": "Explorador, recolector y vecino: todo en uno."
 				}
 			]
+		},
+		{
+			"id": "hito_ruina_restaurada",
+			"nombre": "La Ruina Restaurada",
+			"dominio": "historia",
+			"condicion": {
+				"tipo": "primera_vez",
+				"actividad_id": "postgame_ruina_final"
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "La ruina final vuelve a alzarse: el epilogo de Aurora."
+				}
+			]
 		}
 	]
 }

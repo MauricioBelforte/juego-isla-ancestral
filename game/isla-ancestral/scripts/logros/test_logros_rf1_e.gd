@@ -69,7 +69,7 @@ func _quit() -> void:
 func _test_campos_rf1(ach) -> void:
 	_bloque("B. RF1: campos del catálogo")
 	var todos: Array = ach.get_todos()
-	_ok(todos.size() == 17, "17 logros en el catálogo (dio %d)" % todos.size())
+	_ok(todos.size() == 18, "18 logros en el catálogo (iter. 8: +epilogo ruina restaurada) (dio %d)" % todos.size())
 	var sin_i18n: int = 0
 	var sin_icono: int = 0
 	var sin_cat: int = 0
@@ -124,7 +124,7 @@ func _test_validacion_rf14(ach) -> void:
 func _test_orden_ui(ach) -> void:
 	_bloque("B. RF1: orden de presentación en el panel")
 	var ui: Array = ach.listado_para_ui()
-	_ok(ui.size() == 17, "listado_para_ui con 17 entradas (dio %d)" % ui.size())
+	_ok(ui.size() == 18, "listado_para_ui con 18 entradas (dio %d)" % ui.size())
 	var orden_ok: bool = true
 	var previo: int = -1
 	for e in ui:

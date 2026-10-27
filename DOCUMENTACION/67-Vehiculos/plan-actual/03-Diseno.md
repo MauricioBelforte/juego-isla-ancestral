@@ -434,3 +434,6 @@ jugador cerca de un muelle (M28)
 
 ### Specs items degradados T079 (2026-10-26, Reflection-Beam-1.0)
 - **LOD de audio: atenuar > 40 m, silenciar > 80 m:** spec definida — atenuación de volumen por distancia (40 m atenuado, 80 m silenciado) para audio de vehículos. Dueño M91 (audio). Implementación: AudioStreamPlayer3D con max_distance=80 y attenuation model.
+
+### Specs items degradados T079 (2026-10-26, Reflection-Beam-1.0)
+- **L124 (Mejoras de faroles M49 y baúl):** baúl SÍ implementado (baul_slots_efectivo por nivel, techo 20 barco / 16 submarino = §3.1, testeado); faroles/lucernas = M49 (dueño externo, sin integración). Spec parcial: el baúl cumple; faroles diferidos a M49.
