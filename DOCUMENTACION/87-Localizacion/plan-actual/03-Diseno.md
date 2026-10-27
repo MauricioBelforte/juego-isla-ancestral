@@ -486,7 +486,7 @@ Auditoría report-only de medición de checklist (M88 Fuentes-Tipográficas, M91
 
 **Desglose de las 115 solo-.po:** **53 vivas** (M68 49 — narrativas/letreros de transporte resueltos vía `TranslationServer` desde `scripts/transporte/transport_localizer.gd`, `transport_narrative_trips.gd`, `transport_special_trips.gd`, `transport_route_events.gd`; + CLOCK 1, SETTINGS 1, UI 1, npc 1) + **62 muertas** (M68 40, `DIARY` 14 categorías `CAT_*`, CLOCK 3, ITEMS 2, DIALOGOS/HUD/MAIN_MENU/SETTINGS/UI/npc 1 c/u). M68 total: 89 = 49 vivas / 40 muertas.
 
-**Paridad y calidad:** ES/EN/PT 170/170/170, paridad de claves 0/0/0 en las tres direcciones, placeholders 0 discrepancias; .po ES/EN 0 fuzzy y 0 `msgstr` vacíos (salvo header). **PT es JSON-only: no existe `pt.po`** → las 53 claves .po-vivas (M68/CLOCK/…) carecen de traducción PT en runtime (la conciliación .po↔JSON y el PT como locale de runtime quedan pendientes de decisión director/fundador, msg 153).
+**Paridad y calidad:** ES/EN/PT 170/170/170, paridad de claves 0/0/0 en las tres direcciones, placeholders 0 discrepancias; .po ES/EN 0 fuzzy y 0 `msgstr` vacíos (salvo header). **PT ES locale de runtime desde 2026-10-27 (GO #4 del fundador, Log 2217/msg 298):** `pt.po` existe (274 entradas: 159 migradas de JSON + 115 nuevas + 4 plurales canónicos PT) y `LOCALES_SOPORTADOS=["es","en","pt"]` — las 53 claves .po-vivas YA tienen traducción PT en runtime. La conciliación .po↔JSON (msg 153) sigue pendiente como deuda data- del fundador (11 claves solo-JSON mortuas), sin bloqueo para PT.
 
 **Avisos del watchdog (5, todos informativos):** 4 copia-ES (`SETTINGS.HORAS_1/HORAS_H/MIN_1/MIN_M`) → las 4 son claves **muertas** del save legacy, no deuda de traducción activa; 1 divergencia po/json 159/11/115.
 

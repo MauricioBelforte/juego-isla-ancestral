@@ -163,7 +163,7 @@ Las **23 claves sin uso literal ni dinámico** no se borraron: la inspección pu
 | **`Localization`** (línea 60) | `scripts/localization/localization_manager.gd` (14 KB) | `locales/*.po` + `TranslationServer` | **~20 archivos**: UI (M53), diálogos (M21), crafting, tiendas, reloj, créditos… |
 | **`LocalizationManager`** (línea 108) | `scripts/localizacion/localization_manager.gd` (2,7 KB) | `data/localizacion/strings_*.json` | **ninguno de producción**: su `get_texto()` solo aparece en su propio archivo y en su test. Registra `ServiceRegistry.register("localizacion", …)`, que nadie consume |
 
-El segundo arranca en cada boot, parsea 3 catálogos JSON y registra un servicio que nadie usa. `data/localizacion/strings_es.json` sí lo lee `test_capitulos_m74.gd` (directo del archivo, no vía el autoload), y `strings_pt.json` existe aunque el portugués no está en `LOCALES_SOPORTADOS` de ninguno de los dos sistemas.
+El segundo arranca en cada boot, parsea 3 catálogos JSON y registra un servicio que nadie usa. `data/localizacion/strings_es.json` sí lo lee `test_capitulos_m74.gd` (directo del archivo, no vía el autoload), y `strings_pt.json` existe; **desde 2026-10-27 (GO #4 del fundador, Log 2217) el portugués SÍ está en `LOCALES_SOPORTADOS` del autoload** (["es","en","pt"]) — el JSON PT sigue sin ser runtime (deuda histórica msg 183/H-1).
 
 **Recomendación:** eliminar el autoload `LocalizationManager` (o marcarlo como obsoleto) y dejar `Localization` como única capa. **No se ejecutó en esta iteración**: quitar un autoload es un cambio transversal que puede afectar a otro módulo, así que queda registrado como hallazgo para decisión del usuario/dueño del módulo.
 

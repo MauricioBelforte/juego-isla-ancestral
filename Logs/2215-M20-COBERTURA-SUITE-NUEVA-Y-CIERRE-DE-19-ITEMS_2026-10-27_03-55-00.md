@@ -112,7 +112,30 @@ reporta igual. Documentado en la cabecera del runner (punto 5).
 **Pendiente NO tocado (M112):** el tiempo total del CI quedó en ~872-878 s, por encima del
 presupuesto de 600 s (la lane voxel son 6 suites × ~72 s). No es de M20.
 
-### 6. Hallazgos cross-module reportados al director
+**Nota honesta sobre la verificación final:** se iniciou una TERCERA corrida completa del runner central
+(con la suite M20 nueva + el fix ya aplicado) y el operador la abortó antes del resumen (la corrida
+llegó a descubrir las 51 suites y a encolar la suite M20 nueva en el pool; no dejó procesos Godot
+huérfanos). Por eso la evidencia del fix es la del probe controlado (2 timeouts → 2 `[REINTENTO]` →
+2 `[OK]`), no una corrida completa post-fix. La verificación por suite sí está completa: las 4 suites
+M20 en verde (exit 0) y la suite nueva incluida en el pool del runner central.
+
+### 6. Cableo de las suites M20 en el CI (M118, `.github/workflows/quality.yml`)
+
+El job `test-suite` solo tenía cableada **1** de las 3 suites de `scripts/friendship/`. Agregué
+las 3 + la suite nueva de cobertura (el runner central M112 también la descubre):
+
+```yaml
+suite --script scripts/friendship/test_amistad.gd
+suite --script scripts/friendship/test_amistad_eventos.gd
+suite --script scripts/friendship/test_amistad_rf48_m20.gd
+suite --script tests/test_m20_amistad_cobertura.gd
+```
+
+Verificación local de las 4 (Godot 4.7.2 headless, exit code = gate del workflow):
+`test_amistad.gd` 14/0 · `test_amistad_eventos.gd` 53/0 · `test_amistad_rf48_m20.gd` exit 0 ·
+`test_m20_amistad_cobertura.gd` 15/0.
+
+### 7. Hallazgos cross-module reportados al director
 
 1. **Escala `amistad_<npc_id>` incompatible M20 ↔ M162.** `WorldStateService._get_amistad()`
    (`scripts/dialogos/world_state_service.gd` L102-106) devuelve `Friendship.get_nivel(npc_id)` →
@@ -131,6 +154,8 @@ presupuesto de 600 s (la lane voxel son 6 suites × ~72 s). No es de M20.
 - **Creado:** `game/isla-ancestral/tests/test_m20_amistad_cobertura.gd` (suite M20, 15 checks).
 - **Modificado:** `game/isla-ancestral/tests/run_tests.gd` (reintento en serie tras TIMEOUT del
   pool + cabecera punto 5).
+- **Modificado:** `.github/workflows/quality.yml` (cableo de las 3 suites de `scripts/friendship/`
+  + la suite nueva de cobertura en el job `test-suite` de M118).
 - **Modificado:** `DOCUMENTACION/20-Sistema-De-Amistad/plan-actual/01-Requerimientos.md`
   (firma + §6 catálogo de los 26 puntos).
 - **Modificado:** `DOCUMENTACION/20-Sistema-De-Amistad/plan-actual/04-Codigo.md`

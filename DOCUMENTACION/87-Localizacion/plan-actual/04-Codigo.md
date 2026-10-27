@@ -220,7 +220,7 @@ msgstr[1] "Se ofrecen {n} objetos"
 ## 8b. Mapa de claves del código (auditado TANDA 17, 2026-10-21 — msg 192)
 
 **Arquitectura de catálogos (dos catálogos, dos roles):**
-1. **Runtime M87** (autoload `Localization` = `scripts/localization/localization_manager.gd`, 377 líneas): carga **exclusivamente `.po`** de `res://locales/` (L15-17: `LOCALES_SOPORTADOS=["es","en"]`, `LOCALE_DEFECTO="es"`, `RUTA_CATALOGOS="res://locales/"`; `_cargar_catalogos` L35-39 → `_parse_po` L276+ → `_catalogs`). **PT no es locale de runtime** (no existe `pt.po`; el JSON PT es para paridad de catálogos, regla msg 186). `tr_key` **normaliza a MAYÚSCULAS** (L137-139): `tr_key("clock","estaciones","0")` → `CLOCK.ESTACIONES.0`. `_buscar_texto` (L163-188): activo → fallback ES → clave cruda + `_avisar_faltante`.
+1. **Runtime M87** (autoload `Localization` = `scripts/localization/localization_manager.gd`, 377 líneas): carga **exclusivamente `.po`** de `res://locales/` (L15-17: `LOCALES_SOPORTADOS=["es","en"]`, `LOCALE_DEFECTO="es"`, `RUTA_CATALOGOS="res://locales/"`; `_cargar_catalogos` L35-39 → `_parse_po` L276+ → `_catalogs`). **PT ES locale de runtime desde 2026-10-27 (GO #4 del fundador, Log 2217):** `pt.po` creado (21.156 B, sha1 95ee2ce0d1df, 274 entradas, ValidadorPO 0 errores) y `LOCALES_SOPORTADOS=["es","en","pt"]` (+ `_indice_plural` K2, `LocaleUtils` K3/K4). El JSON PT sigue siendo fuente histórica de build (159 claves migradas al .po), no runtime. `tr_key` **normaliza a MAYÚSCULAS** (L137-139): `tr_key("clock","estaciones","0")` → `CLOCK.ESTACIONES.0`. `_buscar_texto` (L163-188): activo → fallback ES → clave cruda + `_avisar_faltante`.
 2. **JSON `data/localizacion/strings_{es,en,pt}.json`** (170 claves): catálogo **base/maestro — NO cargado por el runtime M87**. Consumido por: `scripts/validar_i18n_integridad.py` (watchdog de paridad), `test_capitulos_m74.gd` (verifica 14 claves `eventos.*`), y el duplicado huérfano `scripts/localizacion/localization_manager.gd` (81 líneas, carga JSON — hallazgo msg 183; preloadeado solo por `_colector_sintaxis.gd` L541, herramienta de análisis).
 
 **Matriz de consumo en producción** (vía `_t()`/`tr_key`/`tr_ctx`/`UiI18n.meta_texto` → `.po`):
@@ -502,3 +502,21 @@ acompaña del endurecimiento del gate (patrón acumulativo) y del cierre del pun
 ### Recomendación para el próximo agente
 Si agregás una API que reciba **claves** en vez de texto ya traducido, agregala a `RE_CLAVE_ARG1/2`
 (o generalizá el patrón). Si no, el auditor no ve esas claves y el hueco vuelve a ser invisible.
+
+## 8c. EJECUCIÓN GO #4 — PT habilitado en runtime (2026-10-27, Log 2217)
+
+**GO #4 del fundador** (chat 2026-10-27) ejecutado en UNA vuelta (plan de 7 pasos aprobado msg 243; blindaje 7 capas; ensayo sandbox 23/23 msg 296; ejecutor `Temp/ejecutor_go_pt_runtime.py` 40/40 PASS):
+
+1. `locales/pt.po` creado (21.156 B, sha1 `95ee2ce0d1df`): 274 entradas (270 simples + 4 plurales con msgstr[0]+[1] canónicos PT — ITEMS.SE_OFRECEN "Oferecendo {n} item/itens"; M68.TRIP.HORAS/MINUTOS/SEGUNDOS "{n} hora/horas", "{n} minuto/minutos", "{n} segundo/segundos"), 61 marcadores `#. no-traducir`, header PT (Language: pt; Plural-Forms nplurals=2; plural=(n > 1)). Contenido: 159 migradas de strings_pt.json (QA 0 anomalias) + 115 nuevas con canon PT (salvar/item/peca/loja/diário/excluir/ilha/ânimo, você-imperativo formal; M68-heavy) + 13 plantillas no-traducir + npc.catalina exenta.
+2. `localization_manager.gd` L15: `LOCALES_SOPORTADOS := ["es", "en", "pt"]`.
+3. `localization_manager.gd` L357+L359 (K2): `_indice_plural` incluye "pt" — plurales PT n>1 usan forma [1] (sin esto: "Oferecendo 2 item").
+4. `locale_utils.gd` L15 (K3): `TABLAS["pt"]` = decimal ",", miles ".", fecha d/m/Y, reloj_24h true.
+5. `locale_utils.gd` L21 (K4): `NOMBRES_NATIVOS["pt"]` = "Português".
+
+**QA (paso 5):** réplica fiel de ValidadorPO `validar_par(es.po, pt.po)` sobre archivos REALES = OK, 0 errores, 0 avisos (P1=P2=P3=P5=0; exentas_p5=62; no_traducibles=61). Diff controlado difflib: LM exactamente 3 reemplazos (L15/L357/L359), LU exactamente 2 inserciones; tabs/BOM/CR verificados; git riel post = 3 archivos (M LM, M LU, ?? pt.po); es.po/en.po/strings_*.json INTACTOS (sha1 canónicos). Backups §5: `Obsoletos/2026-10-27_05-23-25_localization_manager.gd` + `_locale_utils.gd`.
+
+**Pendiente:** verificación runtime visual en Godot (sin MCP Godot en sesión) — QA cruzada §21.8 solicitada (msg 298) a Hy3/agnes: boot ES/EN/PT 0 errores; selector muestra "Português"; `obtener_estado_catalogos()` pt ok=true; plurales PT n=2 → "Oferecendo {n} itens".
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-27 05:27

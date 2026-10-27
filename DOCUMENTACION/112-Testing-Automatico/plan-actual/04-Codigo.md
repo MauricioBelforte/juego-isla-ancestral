@@ -1,5 +1,5 @@
-**Modelo:** DS-V4.1-Flash-Opencode (DeepSeek V4.1 Flash) — último modificador (iter. re-testing 2026-10-16) · histórico: mimo-v2.6-flash-free
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-1-flash — último modificador (fix del TIMEOUT flake del pool → reintento en serie, 2026-10-27) · histórico: DS-V4.1-Flash-Opencode, mimo-v2.6-flash-free
+**Plataforma:** MiniMax API (Kilo Code)
 
 # 04-Codigo.md — Módulo 112: Testing Automático
 
@@ -550,3 +550,34 @@ conserva su contrato: mismas lineas `RESULTADO:` / `[EVIDENCIA]`, mismos codigos
 artefacto del `user://` compartido** entre suites del runner (no un bug de crafting): con aislamiento por worker
 la suite **pasa**. El unico rojo que queda, `tests/test_iconos_m159.gd`, ya colgaba en la corrida serial
 (preexistente, riel M159, ya derivado a agnes).
+
+---
+
+## 9. Fix del TIMEOUT flake del pool → reintento en serie (2026-10-27, minimax-m3-1-flash)
+
+**Sintoma medido (dos corridas completas del runner central, 2026-10-27, Godot 4.7.2, misma maquina):**
+
+| Corrida | Suites | Resultado | Suite que colgó (TIMEOUT 300 s) |
+|---|---|---|---|
+| A (con la suite M20 nueva) | 51 (47 SceneTree + 4 GdUnit4) | 50 OK / 1 FAIL | res://tests/test_m166_h12_variantes.gd |
+| B (SIN la suite M20 nueva) | 50 (46 SceneTree + 4 GdUnit4) | 49 OK / 1 FAIL | res://tests/unit/data/test_item_data.gd |
+
+**Diagnóstico:** la suite que cuelga **cambia entre corridas** y **ambas pasan en < 10 s en serie**
+(verificadas aisladas). No es un fallo de ninguna suite: es **contención del pool** (6 workers) sobre la
+salida final del motor (deinit del GDExtension de Voxel Tools), que **todas** las suites pagan al arrancar
+los autoloads (Bootstrap carga `main_island.tscn`). Es el mismo *flapping* que ya documentaba esta sección
+(tabla de mediciones 2026-10-07/16: "1-2 TIMEOUT, flapping entre corridas").
+
+**Fix (`game/isla-ancestral/tests/run_tests.gd`, `_correr_scenetree`):** una suite que da TIMEOUT **dentro del
+pool** se **re-mide EN SERIE** (`TIMEOUT_MS`) antes de declararse fallida. El reintento **NO tolera fallos
+reales**: si la suite vuelve a fallar (rc != 0 o checks con fallos) el fallo se reporta igual; solo se
+re-mide el TIMEOUT, que es un artefacto de contención. Documentado en la cabecera del runner (punto 5).
+
+**Verificación del camino de código (probe temporal, ya borrado):** copia del runner con
+`POOL_TIMEOUT_MS = 3000` y 2 suites seleccionadas → ambas dan TIMEOUT en el pool, el runner reimprime
+`[REINTENTO] TIMEOUT en pool (>3s) -> se re-mide en serie` y ambas terminan `[OK]`:
+`suites OK: 2/2 ejecutables · 273 tests corridos · 0 con fallo(s)`.
+
+**Pendiente de M112 (NO tocado en esta tanda):** el tiempo total del CI quedó en ~872-878 s, por encima del
+presupuesto de 600 s; el costo dominante es la **lane voxel** (6 suites x ~72 s de deinit). Medir y decidir
+(¿más workers? ¿serializar parte de la lane voxel? ¿recortar el deinit?) le corresponde al dueño de M112.

@@ -689,6 +689,149 @@ func metricas_sistema() -> Dictionary:
 
 
 
+## ── J. Captura de ENTORNO del diagnostico (seccion J del 05-Checklist) ─────
+## Los items de la seccion J "Capturar seed / posicion del jugador /
+## hora-estacion-clima / specs de video" se apoyaban en `_build_metadata()`,
+## que NO capturaba ninguno de los cuatro: la marca `[x]` estaba inflada.
+## Estos helpers los capturan de verdad y son FAIL-CLOSED: si la fuente no
+## existe en este arbol (headless sin escena de mundo) devuelven
+## `ENTORNO_NO_DISPONIBLE` / `{}` en vez de romper. `entorno_disponible()`
+## deja AUDITABLE que se capturo y que no (una captura vacia no se distingue
+## de una fuente ausente sin eso).
+
+const ENTORNO_NO_DISPONIBLE: int = -1
+
+var _generador_inyectado: Node = null
+var _player_inyectado: Node = null
+
+
+func _fuente_generador() -> Node:
+	## Primer nodo del arbol con la propiedad `world_seed` (WorldGenerator,
+	## M09/M10). Inyectable: en `--script` no hay escena de mundo.
+	if _generador_inyectado != null and is_instance_valid(_generador_inyectado):
+		return _generador_inyectado
+	if not is_inside_tree():
+		return null
+	var raiz := get_tree().root
+	if raiz == null:
+		return null
+	for n in raiz.find_children("*", "", true, false):
+		if "world_seed" in n:
+			return n
+	return null
+
+
+func _fuente_jugador() -> Node:
+	if _player_inyectado != null and is_instance_valid(_player_inyectado):
+		return _player_inyectado
+	if not is_inside_tree():
+		return null
+	return _obtener_player()
+
+
+func _inyectar_generador(nodo: Node) -> void:
+	## Hook de test: fuerza la fuente del seed (null = descubrimiento real).
+	_generador_inyectado = nodo
+
+
+func _inyectar_player(nodo: Node) -> void:
+	## Hook de test: fuerza la fuente de la posicion (null = real).
+	_player_inyectado = nodo
+
+
+func seed_generacion() -> int:
+	## `world_seed` del generador de isla. -1 si no hay generador en el arbol.
+	var gen := _fuente_generador()
+	if gen == null:
+		return ENTORNO_NO_DISPONIBLE
+	if not ("world_seed" in gen):
+		return ENTORNO_NO_DISPONIBLE
+	var v: Variant = gen.get("world_seed")
+	if typeof(v) == TYPE_INT:
+		return int(v)
+	if typeof(v) == TYPE_FLOAT:
+		return int(v)
+	return ENTORNO_NO_DISPONIBLE
+
+
+func posicion_jugador() -> Dictionary:
+	## {"x","y","z"} del Player. `{}` si no hay jugador (no inventa ceros:
+	## un Vector3.ZERO real seria indistinguible de "sin jugador").
+	var p := _fuente_jugador()
+	if p == null:
+		return {}
+	if not ("global_position" in p):
+		return {}
+	var v: Variant = p.get("global_position")
+	if typeof(v) != TYPE_VECTOR3:
+		return {}
+	var pos: Vector3 = v
+	return {"x": pos.x, "y": pos.y, "z": pos.z}
+
+
+func hora_actual() -> int:
+	var gt := get_node_or_null("/root/GameTime")
+	if gt == null or not gt.has_method("get_hora"):
+		return ENTORNO_NO_DISPONIBLE
+	return int(gt.get_hora())
+
+
+func estacion_actual() -> int:
+	var gt := get_node_or_null("/root/GameTime")
+	if gt == null or not gt.has_method("get_estacion"):
+		return ENTORNO_NO_DISPONIBLE
+	return int(gt.get_estacion())
+
+
+func clima_actual() -> Dictionary:
+	## {"id","nombre"} del clima vigente. `{}` si Weather no esta.
+	var w := get_node_or_null("/root/Weather")
+	if w == null or not w.has_method("get_clima"):
+		return {}
+	var id := int(w.get_clima())
+	var nombre := ""
+	if w.has_method("get_nombre_clima"):
+		nombre = String(w.get_nombre_clima(id))
+	return {"id": id, "nombre": nombre}
+
+
+func specs_video() -> Dictionary:
+	## `OS.get_video_adapter_name()` fue REMOVIDO en Godot 4: el API vivo es
+	## RenderingServer (mismo criterio que crash_metadata.gd:33).
+	return {
+		"gpu": String(RenderingServer.get_video_adapter_name()),
+		"gpu_vendor": String(RenderingServer.get_video_adapter_vendor()),
+	}
+
+
+func entorno_disponible() -> Dictionary:
+	## Auditable: que fuente se encontro y cual no (familia trampa 91: una
+	## captura vacia y un detector ciego dicen lo mismo sin esto).
+	return {
+		"generador": _fuente_generador() != null,
+		"jugador": _fuente_jugador() != null,
+		"reloj": get_node_or_null("/root/GameTime") != null,
+		"clima": get_node_or_null("/root/Weather") != null,
+	}
+
+
+func _capturar_entorno() -> Dictionary:
+	## Bloque de entorno que se fusiona en la metadata del diagnostico.
+	var clima := clima_actual()
+	var specs := specs_video()
+	return {
+		"seed_generacion": seed_generacion(),
+		"posicion_jugador": posicion_jugador(),
+		"hora": hora_actual(),
+		"estacion": estacion_actual(),
+		"clima": int(clima.get("id", ENTORNO_NO_DISPONIBLE)),
+		"clima_nombre": String(clima.get("nombre", "")),
+		"gpu": String(specs.get("gpu", "")),
+		"gpu_vendor": String(specs.get("gpu_vendor", "")),
+		"entorno_disponible": entorno_disponible(),
+	}
+
+
 func _build_metadata() -> Dictionary:
 	## Construye diccionario de metadata del diagnostico.
 	var meta: Dictionary = {
@@ -709,6 +852,10 @@ func _build_metadata() -> Dictionary:
 		var ancho: int = proj.get_setting("display/window/size/viewport_width", 1152)
 		var alto: int = proj.get_setting("display/window/size/viewport_height", 648)
 		meta["resolucion"] = "%dx%d" % [ancho, alto]
+	# Seccion J: entorno (seed / jugador / reloj / clima / specs de video).
+	var entorno := _capturar_entorno()
+	for k in entorno:
+		meta[k] = entorno[k]
 	return meta
 
 
@@ -1088,6 +1235,11 @@ func _obtener_voxel_terrain() -> Node:
 ## /root/Player en tests headless. Búsqueda robusta: ruta directa → grupo
 ## "player" (player.gd se añade a ese grupo en _ready).
 func _obtener_player() -> Node:
+	# FAIL-CLOSED (seccion J): fuera del arbol `get_tree()` es null y
+	# `get_tree().get_nodes_in_group()` abortaba la funcion con SCRIPT ERROR
+	# (falso verde por aborto silencioso). Sin arbol no hay jugador.
+	if not is_inside_tree():
+		return null
 	var p: Node = get_node_or_null("/root/Player")
 	if p != null and is_instance_valid(p):
 		return p

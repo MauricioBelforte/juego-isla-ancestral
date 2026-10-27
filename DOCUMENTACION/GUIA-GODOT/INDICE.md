@@ -28,6 +28,7 @@
 | 10 | [`10-ui-hud.md`](10-ui-hud.md) | UI/HUD: CanvasLayer, show() override, widget verification, font loading | ✅ |
 | 11 | [`11-blender-godot.md`](11-blender-godot.md) | Blender → Godot: animaciones, BoneAttachment3D, naming, optimización | ✅ |
 | 12 | [`12-animales-bimodo.md`](12-animales-bimodo.md) | Animales bimodo: estado dual, Quaternion piernas, ground snapping | ✅ |
+| 13 | [`13-sondas-runtime-gate2.md`](13-sondas-runtime-gate2.md) | Sondas de runtime del GATE-2 (RED/GREEN byte-exact, correlacion de logs, anti-inflacion) | ✅ |
 
 ### Avanzados / Específicos del juego (16-19)
 
@@ -78,6 +79,7 @@
 | §9.10 — Camera3D transform | `02-voxel-tools.md` |
 | §9.11-9.15 — Migración Godot 4 | `09-godot4-migracion.md` |
 | §9.16 — CameraMode | `07-camera-input.md` |
+| §GATE-2 — Sondas de runtime (RED/GREEN/logs/anti-inflacion) | `13-sondas-runtime-gate2.md` |
 | §9.17 — class_name autoload | `09-godot4-migracion.md` |
 | §9.18 — Node.get() override | `09-godot4-migracion.md` |
 | §9.19 — type reservada | `09-godot4-migracion.md` |

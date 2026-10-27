@@ -12,7 +12,7 @@ extends Node
 
 signal locale_changed(locale: String)
 
-const LOCALES_SOPORTADOS := ["es", "en"]
+const LOCALES_SOPORTADOS := ["es", "en", "pt"]
 const LOCALE_DEFECTO := "es"
 const RUTA_CATALOGOS := "res://locales/"
 
@@ -354,9 +354,9 @@ func _quitar_comillas(s: String) -> String:
 		t = t.substr(1, t.length() - 2)
 	return t.replace("\\n", "\n")
 
-## Índice plural para es/en: 0 si n==1, 1 si no (nplurals=2).
+## Índice plural para es/en/pt: 0 si n==1, 1 si no (nplurals=2).
 func _indice_plural(locale: String, n: int, nformas: int) -> int:
-	if locale == "es" or locale == "en":
+	if locale == "es" or locale == "en" or locale == "pt":
 		return 0 if n == 1 else mini(1, nformas - 1)
 	return 0
 

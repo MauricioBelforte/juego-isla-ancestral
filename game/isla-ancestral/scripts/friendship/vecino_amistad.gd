@@ -85,6 +85,14 @@ func intentar_usar_limite(tipo: String, dia: int) -> bool:
 	_limites_hoy[tipo] = usado + 1
 	return true
 
+## Revierte (descuenta) un uso de un límite diario. Se usa cuando la acción que
+## consumió el límite falló después (p.ej. el regalo se rechazó por falta de
+## item), para que el límite no se quede quemado por un intento fallido.
+func devolver_limite(tipo: String) -> void:
+	var usado := int(_limites_hoy.get(tipo, 0))
+	if usado > 0:
+		_limites_hoy[tipo] = usado - 1
+
 ## Aplica puntos, resuelve subida de nivel (conserva excedente) y devuelve
 ## si subió de nivel. Emite via retorno; el servicio decide la señal.
 func aplicar_puntos(delta: int, recompensas_nivel: Dictionary) -> bool:

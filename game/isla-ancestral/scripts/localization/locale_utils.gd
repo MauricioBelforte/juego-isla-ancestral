@@ -12,11 +12,13 @@ extends RefCounted
 const TABLAS := {
 	"es": {"decimal": ",", "miles": ".", "fecha": "d/m/Y", "reloj_24h": true},
 	"en": {"decimal": ".", "miles": ",", "fecha": "m/d/Y", "reloj_24h": false},
+	"pt": {"decimal": ",", "miles": ".", "fecha": "d/m/Y", "reloj_24h": true},
 }
 
 const NOMBRES_NATIVOS := {
 	"es": "Español",
 	"en": "English",
+	"pt": "Português",
 }
 
 static func get_nombre_nativo(locale: String) -> String:
